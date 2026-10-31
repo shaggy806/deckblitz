@@ -1576,6 +1576,61 @@ function dividedDamageOf(s, ctx) {
   return { kind: "damage-divided", from: slot };
 }
 
+/**
+ * Counters distributed with a total that is an amount. Among targets (rule
+ * 601.2d): "distribute X +1/+1 counters among any number of target creatures
+ * you control, where X is the number of +1/+1 counters on ~" (Quirion
+ * Beastcaller, Undercity Upheaval) — a `counters-divided` over the
+ * `any-number` group it adds, its total read as the division is announced
+ * (`ctx.divided.value`). Among permanents chosen as it resolves (rule 608.2d):
+ * "distribute X +1/+1 counters among any number of creatures you control,
+ * where X is …" (Blessing of Frost), "distribute a number of +1/+1 counters
+ * equal to the number of +1/+1 counters on ~ among any number of creatures
+ * you control" (Vastwood Hydra) — a `counters-distributed`. `undefined` for
+ * any other sentence, `null` for one of these it can't read.
+ */
+function distributedCountersOf(s, ctx) {
+  const m =
+    /^(?:~ |[Ii]t )?[Dd]istribute (?:X ([+-]\d+\/[+-]\d+|[a-z]+) counters|a number of ([+-]\d+\/[+-]\d+|[a-z]+) counters equal to (.+?)) among any number of (other )?(target )?(.+?)(?:, where X is (.+?))?\.$/.exec(s);
+  if (m === null) return undefined;
+  const [, xKind, eqKind, eqPhrase, other, targeted, plural, where] = m;
+  const counter = (xKind ?? eqKind).toLowerCase();
+  const phrase = xKind !== undefined ? where : eqPhrase;
+  if (phrase === undefined || (xKind === undefined && where !== undefined)) return null;
+  const read = ctx.spell ? phrase.replace(/ as you cast (?:~|this spell)$/, "") : phrase;
+  let total = dividedTotalOf(read);
+  if (total === null) {
+    let g;
+    if ((g = /^the number of (.+?) cards in your graveyard$/.exec(read))) {
+      const filter = parseTypePhrase(g[1]);
+      if (filter === null || Object.keys(filter).length === 0) return null;
+      total = { countInGraveyard: { ...filter, ownedBy: "you" } };
+    } else if (ctx.spell && /^the amount of \{S\} spent to cast (?:~|this spell)$/.test(read)) {
+      total = { manaSpentOf: "source", from: { supertype: "snow" } };
+    } else return null;
+  }
+  if (targeted !== undefined) {
+    if (ctx.divided === undefined || xKind === undefined) return null;
+    const single = `target ${singularTarget(plural.replace(/ your opponents control$/, " an opponent controls"))}`;
+    const of = targetOf(single);
+    if (of === undefined) return null;
+    const slot = ctx.target({ kind: "any-number", of: other !== undefined ? { kind: "other", of } : of });
+    ctx.divided.value = { total, slot, of: `${counter} counters` };
+    return { kind: "counters-divided", from: slot, counter };
+  }
+  if (other !== undefined) return null;
+  const own = / (you control|an opponent controls|your opponents control)$/.exec(plural);
+  const filter = parseTypePhrase(own === null ? plural : plural.slice(0, own.index));
+  if (filter === null || Object.keys(filter).length === 0) return null;
+  return {
+    kind: "counters-distributed",
+    counter,
+    total,
+    filter: own === null ? filter : { ...filter, controlledBy: own[1] === "you control" ? "you" : "opponent" },
+    among: plural,
+  };
+}
+
 export function parseSentence(sentence, ctx) {
   const s = sentence.replace(/\s+/g, " ").trim();
   // "…, where X is the number of …" / "for each …" define an amount by a rule
@@ -1648,6 +1703,12 @@ export function parseSentence(sentence, ctx) {
   // "where X" guard below, since it reads its own X.
   if (ctx?.divided !== undefined) {
     const d = dividedDamageOf(s, ctx);
+    if (d !== undefined) return d;
+  }
+  // Counters distributed by an amount, among targets or among permanents
+  // chosen as it resolves (`distributedCountersOf`) — also ahead of the guard.
+  {
+    const d = distributedCountersOf(s, ctx ?? {});
     if (d !== undefined) return d;
   }
   if (/\bwhere X\b|\bfor each\b/i.test(s) && !/^add .*for each [\w+/-]+ counter removed this way\.$/i.test(s)) return null;

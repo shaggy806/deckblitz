@@ -4999,6 +4999,52 @@ describe("counters put or removed this way", () => {
     expect(amulet.activated[0].effect).toEqual({ kind: "damage", amount: "x", target: 0 });
   });
 
+  it("reads counters distributed by an amount among targets, the total read as it's announced", () => {
+    const caller = face(
+      "Quirion Beastcaller",
+      "Creature — Dryad Warrior",
+      "When this creature dies, distribute X +1/+1 counters among any number of target creatures you control, where X is the number of +1/+1 counters on this creature.",
+    );
+    expect(caller.triggered[0]).toMatchObject({
+      targets: [{ kind: "any-number", of: "creature-you-control" }],
+      divided: { total: { countersOn: "source", counter: "+1/+1" }, slot: 0, of: "+1/+1 counters" },
+      effect: { kind: "counters-divided", from: 0, counter: "+1/+1" },
+    });
+    const upheaval = face(
+      "Undercity Upheaval",
+      "Sorcery",
+      "Undergrowth — Distribute X +1/+1 counters among any number of target creatures you control, where X is the number of creature cards in your graveyard as you cast this spell. Creatures you control gain vigilance until end of turn.",
+    );
+    expect(upheaval.complete).toBe(true);
+    expect(upheaval.divided).toEqual({ total: { countInGraveyard: { type: "creature", ownedBy: "you" } }, slot: 0, of: "+1/+1 counters" });
+  });
+
+  it("reads counters distributed among permanents chosen as it resolves (untargeted)", () => {
+    const frost = face(
+      "Blessing of Frost",
+      "Snow Sorcery",
+      "Distribute X +1/+1 counters among any number of creatures you control, where X is the amount of {S} spent to cast this spell.",
+    );
+    expect(frost.effect).toEqual({
+      kind: "counters-distributed",
+      counter: "+1/+1",
+      total: { manaSpentOf: "source", from: { supertype: "snow" } },
+      filter: { type: "creature", controlledBy: "you" },
+      among: "creatures you control",
+    });
+    const hydra = face(
+      "Vastwood Hydra",
+      "Creature — Hydra",
+      "When this creature dies, you may distribute a number of +1/+1 counters equal to the number of +1/+1 counters on this creature among any number of creatures you control.",
+    );
+    expect(hydra.triggered[0].effect).toMatchObject({
+      kind: "may",
+      effect: { kind: "counters-distributed", total: { countersOn: "source", counter: "+1/+1" }, filter: { type: "creature", controlledBy: "you" } },
+    });
+    // A total it can't read leaves the line alone.
+    expect(face("Test", "Sorcery", "Distribute X +1/+1 counters among any number of creatures you control, where X is your luck.").complete).toBe(false);
+  });
+
   it("reads Thief of Blood's removal as it enters and the counters it enters with", () => {
     const thief = face(
       "Thief of Blood",

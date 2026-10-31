@@ -26457,7 +26457,7 @@ export class Game {
             source,
             min: spec.min ?? 0,
             ...(spec.max !== undefined ? { max: spec.max } : {}),
-            prompt: "Choose a number",
+            prompt: spec.prompt ?? "Choose a number",
             then: spec.then,
             resume,
           };
@@ -27241,6 +27241,27 @@ export class Game {
           min: upTo ? 0 : most,
           max: most,
           prompt: `Choose ${upTo ? "up to " : ""}${keep} to keep — the rest are sacrificed`,
+          then: { kind: "sequence", effects: [] },
+          source,
+          x,
+          keepChoice: true,
+        };
+        return true;
+      },
+      askChoosePermanentsKept: (filter, max, prompt, side) => {
+        if (this.state.players[controller]?.hasLost !== false) return false;
+        // Untargeted (rule 608.2d): whatever matches now, a hexproof one too.
+        const eligible = this.battlefieldMatching(side ?? controller, filter, x, source);
+        const available = eligible.reduce((n, id) => n + (this.state.objects[id]?.stackCount ?? 1), 0);
+        const most = Math.min(max, available);
+        if (most <= 0) return false;
+        this.state.awaiting = {
+          kind: "choose-permanents",
+          player: controller,
+          eligible,
+          min: 0,
+          max: most,
+          prompt,
           then: { kind: "sequence", effects: [] },
           source,
           x,

@@ -2758,6 +2758,9 @@ export type EffectSpec =
       readonly among?: CardFilter;
       readonly min?: number;
       readonly max?: number;
+      /** A number's question, when it isn't "Choose a number" — a
+       * `counters-distributed` share's "How many +1/+1 counters on …?". */
+      readonly prompt?: string;
     }
   | {
       /**
@@ -5296,6 +5299,40 @@ export type EffectSpec =
       readonly kind: "counters-divided";
       readonly from: number;
       readonly counter: string;
+    }
+  | {
+      /**
+       * "Distribute N +1/+1 counters among any number of creatures you
+       * control" with **no targets** (rule 608.2d — Vastwood Hydra, Feast of
+       * the Victorious Dead, Blessing of Frost): the division is chosen as
+       * this resolves, not as the spell is cast. `total` is read as it
+       * begins; then the effect's controller chooses which of the
+       * battlefield permanents matching `filter` (from their side, or from
+       * the side of the player in target slot `controlledByTarget` — Invoke
+       * Justice's "creatures and/or Vehicles target player controls") get
+       * any — none, or as many as the total, a token stack's tokens each one
+       * (the `choose-permanents` decision) — and then how many each chosen
+       * one gets, at least one each and all of the total among them (a
+       * `choose-number` per chosen one but the last, which takes the rest).
+       * Not targeted: a hexproof creature can get them (Blessing of Frost's
+       * ruling). The counters go on once every share is chosen.
+       */
+      readonly kind: "counters-distributed";
+      readonly counter: string;
+      readonly total: EffectAmount;
+      readonly filter: CardFilter;
+      readonly controlledByTarget?: number;
+      /** What they're distributed among, for the prompts ("creatures you
+       * control"). */
+      readonly among?: string;
+      /** Engine-built, never authored: the total read as it began, the
+       * permanents chosen (a token stack once per token), and the shares
+       * chosen so far, in that order. */
+      readonly progress?: {
+        readonly total: number;
+        readonly picked?: readonly ObjectId[];
+        readonly shares?: readonly number[];
+      };
     }
   | {
       /** "Shuffle your library" on its own (Ponder's "You may shuffle", inside
@@ -8603,6 +8640,12 @@ export interface EffectApi {
    * targets still legal), the answer waiting for `takeKept`. `false` when
    * they've left the game, and nothing was asked. */
   askChooseAmong(chooser: PlayerId, objects: readonly ObjectId[], count: number, prompt: string): boolean;
+  /** See the `"counters-distributed"` {@link EffectSpec}: ask the effect's
+   * controller to choose up to `max` of the battlefield permanents matching
+   * `filter` from `side`'s side (the controller's when absent) — a token
+   * stack up to once per token — the answer waiting for `takeKept`. `false`
+   * when nothing matches (or they've left the game), and nothing was asked. */
+  askChoosePermanentsKept(filter: CardFilter, max: number, prompt: string, side?: PlayerId): boolean;
   /** `players` in turn order from the active player (rule 101.4). */
   apnap(players: readonly PlayerId[]): readonly PlayerId[];
   /** See the `"encore"` {@link EffectSpec}. */
@@ -9910,6 +9953,69 @@ const MAX_REPEATS = 200;
  * its `progress`, judged once the pass is over. Once no pass is left, "this
  * way" goes back to the whole resolution's.
  */
+/**
+ * A `counters-distributed` (rule 608.2d), one step at a time: the total read
+ * and the permanents chosen (`askChoosePermanentsKept`, resumed here), then a
+ * share asked for each chosen one but the last — a `choose-value` number
+ * whose `then` is this effect again, the share arriving as its `"x"` — at
+ * least one each and leaving at least one for every one still to come, the
+ * last taking what's left; then the counters go on.
+ */
+function distributeCounters(spec: Extract<EffectSpec, { kind: "counters-distributed" }>, ctx: ResolutionContext): void {
+  const progress = spec.progress;
+  const kind = `${spec.counter} counter`;
+  if (progress === undefined) {
+    const total = Math.max(0, Math.floor(amountValue(spec.total, ctx)));
+    if (total <= 0) return;
+    let side: PlayerId | undefined;
+    if (spec.controlledByTarget !== undefined) {
+      const ref = ctx.targets[spec.controlledByTarget];
+      side = ref === undefined ? undefined : ref.kind === "player" ? ref.player : ctx.controllerOf(ref);
+      // That player gone or the target illegal: nobody to distribute among.
+      if (side === undefined) return;
+    }
+    const below = ctx.parkedCount();
+    const among = spec.among ?? "permanents";
+    const prompt = `Distribute ${total} ${kind}${total === 1 ? "" : "s"} among any number of ${among}: choose which get them`;
+    if (ctx.askChoosePermanentsKept(spec.filter, total, prompt, side)) {
+      ctx.resumeAfterDecisions({ ...spec, progress: { total } }, below);
+    }
+    return;
+  }
+  // Resumed: from the choice of permanents (nothing picked yet), or from a
+  // share's number, which arrives as X.
+  const picked = progress.picked ?? ctx.takeKept();
+  if (picked.length === 0) return;
+  const shares = [...(progress.shares ?? [])];
+  if (progress.picked !== undefined) shares.push(Math.max(1, Math.floor(ctx.x)));
+  let left = progress.total - shares.reduce((n, s) => n + s, 0);
+  while (shares.length < picked.length - 1) {
+    // At least one for each still to come after this one.
+    const most = left - (picked.length - shares.length - 1);
+    if (most <= 1) {
+      shares.push(1);
+      left -= 1;
+      continue;
+    }
+    const name = ctx.objectName(picked[shares.length]);
+    ctx.chooseValue({
+      kind: "choose-value",
+      value: "number",
+      min: 1,
+      max: most,
+      prompt: `How many ${kind}s on ${name}? (${left} left to distribute)`,
+      then: { ...spec, progress: { total: progress.total, picked, shares } },
+    });
+    return;
+  }
+  shares.push(left);
+  // Each pick is one permanent: a token stack's member singled out per pick.
+  picked.forEach((object, i) => {
+    const amount = shares[i] ?? 0;
+    if (amount > 0) ctx.addCounter(ctx.singleOut({ kind: "object", object }), spec.counter, amount);
+  });
+}
+
 function applyRepeat(spec: Extract<EffectSpec, { kind: "repeat" }>, ctx: ResolutionContext): void {
   let progress = spec.progress;
   const finish = (outer: number): void => {
@@ -13502,6 +13608,9 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         const target = ctx.targets[spec.from + i];
         if (target !== undefined && amount > 0) ctx.addCounter(target, spec.counter, amount);
       });
+      return;
+    case "counters-distributed":
+      distributeCounters(spec, ctx);
       return;
     case "untap-all":
       if (spec.who !== undefined) {

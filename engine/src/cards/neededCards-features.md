@@ -707,6 +707,33 @@ each-creature-deals-power-damage-to-target, each-permanent-deals-damage.
 Proving cards: Solar Blaze, Wave of Reckoning, Moonlight Hunt, Bartz and Boko,
 Signature Slam, Alpha Brawl.
 
+### Distributing counters: a total that is an amount, and among permanents chosen as it resolves — built 2026-10-31
+
+The need-keys Phase 2 family `effect:distribute-counters`, its top group,
+features only. **Among targets** (rule 601.2d) the total was already any
+`EffectAmount` read as the division is announced (the divide-among-targets
+family); proved here for counters — Undercity Upheaval's creature cards in the
+graveyard "as you cast this spell", Quirion Beastcaller's counters it died
+with, Broodlord's X. **Among permanents chosen on resolution** (rule 608.2d)
+is the new `counters-distributed` effect: the total read as it resolves, the
+recipients chosen untargeted (`choose-permanents`, a token stack once per
+token, none to the total), then a share each (`choose-number` per chosen one
+but the last, at least one each) — two existing decisions, no client change;
+`controlledByTarget` reads "target player controls". `choose-value` takes a
+`prompt`. The scaffolder reads "distribute X [kind] counters among any number
+of [other] target …, where X is …" (a `counters-divided` with `divided`) and
+the untargeted "distribute X … among any number of [permanents], where X is
+…" / "a number of … equal to …" (counts, counters on it, creature cards in
+your graveyard, {S} spent). Keys: effect:distribute-counters-among-chosen,
+effect:distribute-counters-variable-total. Proving cards: Undercity Upheaval,
+Quirion Beastcaller, Broodlord, Vastwood Hydra, Feast of the Victorious Dead,
+Blessing of Frost (`counters-distributed.test.ts`). Left: Stumpsquall Hydra
+(a required recipient, "among it and any number of commanders"), Numa (a
+reflexive "you may pay {X}{X}. When you do"), Spoils of War (X defined by an
+opponent's graveyard as cast), Yannik (check its exile-until-leaves reflexive),
+Crashing Wave (waterbend {X} as an additional cost), Invoke Justice
+(`controlledByTarget` is built; check its return), effect:saga-chapter-divided.
+
 ### Counters put or removed this way — built 2026-10-31
 
 The need-keys Phase 2 family `effect:this-way-results`, its top group, features

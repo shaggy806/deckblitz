@@ -796,7 +796,9 @@
   "trigger:crews-or-saddles",
   "static:cant-crew",
   "effect:counters-put-this-way",
-  "effect:counters-removed-this-way"
+  "effect:counters-removed-this-way",
+  "effect:distribute-counters-among-chosen",
+  "effect:distribute-counters-variable-total"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

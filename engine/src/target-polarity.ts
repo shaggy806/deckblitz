@@ -406,6 +406,10 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   // "On each creature target player controls" (Meadowboon): that player's.
   "add-counter-all": (n, v) =>
     v.touch(n.controlledByTarget, HARMFUL_COUNTERS.has(n.counter) ? "harm" : "help", MINOR),
+  // Untargeted shares among a player's permanents (Invoke Justice's "target
+  // player controls"): that player's, as a mass placement is.
+  "counters-distributed": (n, v) =>
+    v.touch(n.controlledByTarget, HARMFUL_COUNTERS.has(n.counter) ? "harm" : "help", MINOR),
   // The reverse of `add-counter`: losing a harmful counter helps.
   // Every kind at once (`"any"` — Vampire Hexmage) reads as the loyalty and
   // +1/+1 counters it nearly always takes: a harm, like a good kind's.
