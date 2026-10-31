@@ -321,6 +321,30 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Block minimums, "all must block" and one-blocker requirements — built 2026-10-30
+
+The need-keys Phase 2 family `static:combat-restriction-extensions`, its top
+two units, features only. **`blockedByAtLeast: N`** generalises menace's
+restriction (rule 702.111b) to "except by N or more creatures": the blockers
+offer's `minBlockers`, and `combat/blocking.ts`'s plans, violations and
+`obeyingLure` read each attacker's minimum (`leastBlockers`) instead of "two
+with menace". **`blockedOnlyByAll`** is Tromokratis' "unless all creatures
+defending player controls block it" (`whyCannotBlock` refuses all of them when
+one can't; a partial block is the `blocked-by-all` violation). The `controls`
+condition's **`sharingACreatureType`** (Graxiplon) and a plain `{ countOf }` in
+a block filter's amount (Kraken of the Straits). On one blocker:
+`restrict`'s **`cantBlockAttacker`** ("target creature can't block this
+creature this turn") and the **`"must-block"`** restriction ("blocks each
+combat if able"), joined to the offer's `blockRequirements`. Two keys were
+built already: "except by creatures with haste this turn" (Resilient
+Roadrunner's `notKeyword`) and "can't be blocked as long as defending player
+…" (Bouncing Beebles' `of-player` condition — the scaffolder now reads its
+counts, "untapped" and player counters). Keys: blockable-only-by-filter,
+cant-be-blocked-except-by-n, cant-be-blocked-unless-all-block,
+cant-be-blocked-unless-defender-controls-shared-type,
+unblockable-defending-player-condition, target-cant-block-source-this-turn,
+target-must-block-source-this-turn, must-block-each-combat.
+
 ### Distinct values and player-sided counts — built 2026-10-30
 
 The need-keys Phase 2 family `effect:amount-new-variants`, its top five

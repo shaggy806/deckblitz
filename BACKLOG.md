@@ -157,10 +157,16 @@ section keeps only what to do next.
   attached to it"; `countPlayers`' `where`; 70 freed, 13 proving cards — Lunar Insight, Golden
   Ratio, Aven Heartstabber, Sewer Crocodile, Awakened Amalgam, Corpse Augur, Roiling Terrain,
   Goblin Gaveleer, Kemba, Kha Regent, Oreskos Explorer, Priest of the Blessed Graf, Terra
-  Ravager, Treacherous Terrain).
-  **421 freed cards wait for `author-freed`** (`cards:needs -- --stale`). Next families:
-  `static:combat-restriction-extensions` (19), `effect:modal-repeat-modes` (18),
-  `static:assign-damage-as-though-unblocked` (18), `effect:shuffle-hand-and-graveyard-into-library` (18).
+  Ravager, Treacherous Terrain), combat-restriction-extensions' top two units (2026-10-30:
+  `blockedByAtLeast` — "except by N or more creatures" — `blockedOnlyByAll`, the `controls`
+  condition's `sharingACreatureType`, `restrict`'s `cantBlockAttacker`, the `"must-block"`
+  restriction; 32 freed, 14 proving cards — Troll of Khazad-dûm, Pathrazer of Ulamog, Sonorous
+  Howlbonder, Neurok Spy, Hazy Homunculus, Graxiplon, Tromokratis, Kraken of the Straits,
+  Gingerbrute, Kozilek's Pathfinder, Auriok Siege Sled, Razorgrass Screen, Iron Golem, Grand
+  Melee; the family's must-attack and attack-limit units still open).
+  **439 freed cards wait for `author-freed`** (`cards:needs -- --stale`). Next families:
+  `effect:modal-repeat-modes` (18), `static:assign-damage-as-though-unblocked` (18),
+  `effect:shuffle-hand-and-graveyard-into-library` (18), `cost:additional-cost-reveal` (17).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next

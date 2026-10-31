@@ -506,6 +506,13 @@ missing. Re-run `--greedy` for Phase 2's order.
   57 queued: 421). One family only: the session passed ~285K tokens. Next:
   `static:combat-restriction-extensions` (19), `effect:modal-repeat-modes` (18),
   `static:assign-damage-as-though-unblocked` (18).
+- **2026-10-30: `static:combat-restriction-extensions`' top two units, engine-only** — "can't
+  be blocked except by N or more" (menace generalised through `combat/blocking.ts`), "unless
+  all creatures defending player controls block it", Graxiplon's shared-type count, "target
+  creature can't block this creature this turn", "blocks each combat if able". 8 keys, three
+  already built and only marked; 14 proving cards. 32 freed (14 authored here, 18 queued:
+  439). Next: `effect:modal-repeat-modes` (18), `static:assign-damage-as-though-unblocked`
+  (18), `effect:shuffle-hand-and-graveyard-into-library` (18).
 
 ## Rough size
 

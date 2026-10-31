@@ -86,6 +86,22 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2: block minimums, "all must block" and one-blocker requirements**
+  (2026-10-30; `static:combat-restriction-extensions`' top two units, 8 keys —
+  `static:cant-be-blocked-except-by-n`, `static:cant-be-blocked-unless-all-block`,
+  `static:cant-be-blocked-unless-defender-controls-shared-type`,
+  `effect:target-cant-block-source-this-turn`, `static:must-block-each-combat`, and three
+  already built and only marked: `static:blockable-only-by-filter`,
+  `static:unblockable-defending-player-condition`, `effect:target-must-block-source-this-turn`).
+  `blockedByAtLeast` (menace's 702.111b generalised: the offer's `minBlockers`,
+  `leastBlockers` in every `combat/blocking.ts` plan), `blockedOnlyByAll` and the
+  `blocked-by-all` violation, the `controls` condition's `sharingACreatureType`, a `{ countOf }`
+  block-filter amount, `restrict`'s `cantBlockAttacker`, the `"must-block"` restriction; the
+  client's block bar names the new violations; the scaffolder taught. 32 freed (18 queued for
+  `author-freed`), 14 proving cards: Troll of Khazad-dûm, Pathrazer of Ulamog, Sonorous
+  Howlbonder, Neurok Spy, Hazy Homunculus, Graxiplon, Tromokratis, Kraken of the Straits,
+  Gingerbrute, Kozilek's Pathfinder, Auriok Siege Sled, Razorgrass Screen, Iron Golem, Grand
+  Melee.
 - **Need-keys Phase 2: distinct values and player-sided counts** (2026-10-30;
   `effect:amount-new-variants`' top five units, 20 keys — `effect:count-distinct-mana-values`,
   `effect:count-distinct-powers`, `effect:distinct-names-count`, `effect:count-subtypes-among`,
