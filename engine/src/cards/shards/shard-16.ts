@@ -673,6 +673,7 @@ import _poolSkarrganHellkite from "../pool/skarrgan-hellkite.js";
 import _poolSkeletalGrimace from "../pool/skeletal-grimace.js";
 import _poolSkeletalKathari from "../pool/skeletal-kathari.js";
 import _poolSkeletonShip from "../pool/skeleton-ship.js";
+import _poolSkillBorrower from "../pool/skill-borrower.js";
 import _poolSkybladeOfTheLegion from "../pool/skyblade-of-the-legion.js";
 import _poolSkyshroudFalcon from "../pool/skyshroud-falcon.js";
 import _poolSkyskipperDuo from "../pool/skyskipper-duo.js";
@@ -1599,6 +1600,7 @@ const shard: CardShard = {
     _poolSkeletalGrimace,
     _poolSkeletalKathari,
     _poolSkeletonShip,
+    _poolSkillBorrower,
     _poolSkybladeOfTheLegion,
     _poolSkyshroudFalcon,
     _poolSkyskipperDuo,

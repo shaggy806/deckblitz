@@ -3812,3 +3812,69 @@ describe("a spell's own conditional flash (flashIf)", () => {
     expect(wurm.complete).toBe(false);
   });
 });
+
+describe("has all activated abilities of … (grantsActivatedOf)", () => {
+  const face = (name: string, type_line: string, oracle_text: string) =>
+    parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });
+  it("reads graveyard cards, all or your own", () => {
+    const ooze = face(
+      "Necrotic Ooze",
+      "Creature — Ooze",
+      "As long as Necrotic Ooze is on the battlefield, it has all activated abilities of all creature cards in all graveyards.",
+    );
+    expect(ooze.static[0].grantsActivatedOf).toEqual({ zone: "graveyard", filter: { type: "creature" } });
+    expect(ooze.complete).toBe(true);
+    const thranduil = face(
+      "Thranduil, the Elvenking",
+      "Legendary Creature — Elf Noble",
+      "Thranduil has all activated abilities of all Elf cards in your graveyard.",
+    );
+    expect(thranduil.static[0].grantsActivatedOf).toEqual({ zone: "graveyard", filter: { subtype: "Elf", ownedBy: "you" } });
+  });
+
+  it("reads other permanents: counters, controller, a different name, mana and loyalty exceptions", () => {
+    expect(
+      face("Experiment Kraj", "Legendary Creature — Ooze Mutant", "Experiment Kraj has all activated abilities of each other creature with a +1/+1 counter on it.")
+        .static[0].grantsActivatedOf,
+    ).toEqual({ zone: "battlefield", filter: { type: "creature", counters: { kind: "+1/+1", compare: { op: "gte", n: 1 } } } });
+    expect(
+      face(
+        "Marvin, Murderous Mimic",
+        "Legendary Artifact Creature — Toy",
+        "Marvin has all activated abilities of creatures you control that don't have the same name as this creature.",
+      ).static[0].grantsActivatedOf,
+    ).toEqual({ zone: "battlefield", filter: { type: "creature", controlledBy: "you", sameNameAsSource: false } });
+    expect(
+      face(
+        "Sharkey, Tyrant of the Shire",
+        "Legendary Creature — Avatar Rogue",
+        "Sharkey has all activated abilities of lands your opponents control except mana abilities.\nMana of any type can be spent to activate Sharkey's abilities.",
+      ).static,
+    ).toMatchObject([
+      { grantsActivatedOf: { zone: "battlefield", filter: { type: "land", controlledBy: "opponent" }, except: "mana" } },
+      { spendManaAs: { as: "any-type", activating: "this" } },
+    ]);
+    expect(
+      face("Nicol Bolas, Dragon-God", "Legendary Planeswalker — Bolas", "Nicol Bolas has all loyalty abilities of all other planeswalkers on the battlefield.")
+        .static[0].grantsActivatedOf,
+    ).toEqual({ zone: "battlefield", filter: { type: "planeswalker" }, only: "loyalty" });
+  });
+
+  it("reads the top card of the library", () => {
+    const borrower = face(
+      "Skill Borrower",
+      "Artifact Creature — Human Wizard",
+      "As long as the top card of your library is an artifact or creature card, this creature has all activated abilities of that card. (If any of the abilities use that card's name, use this creature's name instead.)",
+    );
+    expect(borrower.static[0].grantsActivatedOf).toEqual({ zone: "library-top", filter: { typesAnyOf: ["artifact", "creature"] } });
+  });
+
+  it("leaves an exiled card's or a chosen permanent's abilities to a person", () => {
+    const fence = face(
+      "Scheming Fence",
+      "Creature — Human Citizen",
+      "This creature has all activated abilities of the chosen permanent except for loyalty abilities.",
+    );
+    expect(fence.static).toHaveLength(0);
+  });
+});

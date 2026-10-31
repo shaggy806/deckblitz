@@ -344,6 +344,26 @@ blocks. Key: assign-damage-as-though-unblocked. Proving cards: Thorn
 Elemental, Indomitable Might, Siege Behemoth, Outmaneuver, Predatory Focus.
 `static:attack-as-though-haste` (2 cards) is separate code and still open.
 
+### "Has all activated abilities of …" — built 2026-10-31
+
+The need-keys Phase 2 family `static:gain-abilities-from-graveyard`, its top
+group, features only. **`grantsActivatedOf`** on a static (rule 613.1f): the
+activated abilities of the graveyard cards matching a filter (Necrotic Ooze,
+Thranduil), of the top card of the library (Skill Borrower), or of every other
+matching permanent with all it has (Experiment Kraj, Marvin) — several applied
+in rule 613.8's dependency order, a loop by timestamp; abilities that work only
+from another zone left out (113.6), one naming its card meaning the object that
+has it (201.5b). `except` mana or loyalty abilities, `only` loyalty ones (606.3
+still per permanent); the filter's `sameNameAsSource`; `spendManaAs.activating`
+"this" (Sharkey) or "granted" (Drana and Linvala). Keys:
+gain-abilities-from-graveyard, gain-activated-abilities-of-others,
+gain-other-planeswalkers-loyalty-abilities, gain-top-card-activated-abilities.
+Proving cards: Necrotic Ooze, Thranduil, the Elvenking, Skill Borrower,
+Experiment Kraj, Marvin, Murderous Mimic, Sharkey, Tyrant of the Shire, Drana
+and Linvala. Still open: the exiled-card unit (a counter or a chosen exiled
+card, triggered abilities too), an until-end-of-turn effect form (Grell
+Philosopher), a chosen permanent as the filter (Scheming Fence).
+
 ### A spell's own conditional flash — built 2026-10-31
 
 The need-keys Phase 2 family `effect:cast-and-activate-restrictions`, its top

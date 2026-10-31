@@ -632,6 +632,18 @@ missing. Re-run `--greedy` for Phase 2's order.
   Rattlewurm) needs its battlefield keyword grant beside `flashIf`; the family's grantee,
   prohibition and cast-limit units. Next: `static:gain-abilities-from-graveyard` (15),
   `decision:choose-card-type-protection` (15), `effect:amount-aggregate` (15).
+- **2026-10-31: `static:gain-abilities-from-graveyard`' top group, features only** (an overnight
+  agent) — "has all activated abilities of …", `StaticAbility.grantsActivatedOf` over graveyard
+  cards, the library's top card or other permanents (with what they have), several applied in
+  rule 613.8's dependency order, a loop by timestamp; `except`/`only` for mana and loyalty
+  abilities, the filter's `sameNameAsSource`, and `spendManaAs.activating` ("this" / "granted").
+  4 keys; 7 proving cards; 8 freed (queued: 604). Adds no decision kind and no client change (the
+  client lists a permanent's abilities from its `activate-ability` offers). Not yet: the
+  exiled-card unit (Rex, Mairsil, Koh, Idris, Hazel's Brewmaster, Agatha's Soul Cauldron — a
+  zone of `exile` with a counter or link, triggered abilities too), Grell Philosopher's
+  until-end-of-turn effect form, Scheming Fence's chosen permanent as the filter. Next:
+  `decision:choose-card-type-protection` (15), `effect:amount-aggregate` (15),
+  `mechanic:face-down` (14).
 
 ## Rough size
 

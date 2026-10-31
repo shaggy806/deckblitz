@@ -713,6 +713,21 @@ interface GrantSource {
   readonly refs?: readonly GrantedAbilityRef[];
 }
 
+/** One battlefield `grantsActivatedOf` static ("has all activated abilities
+ * of …") — see `Game.copiedActivatedGrants`. */
+interface CopyGrant {
+  readonly source: GameObject;
+  readonly ability: StaticAbility;
+  readonly staticIndex: number;
+  readonly spec: NonNullable<StaticAbility["grantsActivatedOf"]>;
+}
+
+/** The abilities a {@link CopyGrant} reads, each with where it comes from. */
+interface CopiedEntries {
+  readonly abilities: readonly ActivatedAbility[];
+  readonly refs: readonly GrantedAbilityRef[];
+}
+
 /** The `grantsTriggered` counterpart of {@link GrantSource}. */
 interface TriggeredGrantSource {
   readonly source: GameObject;
@@ -13898,7 +13913,7 @@ export class Game {
         rest,
         avoid,
         except,
-        { kind: "ability", source: sourceId },
+        { kind: "ability", source: sourceId, ability },
         withheld.size > 0 ? { withheld } : undefined,
       ) !== null;
     const taps = this.waterbendTaps(player, sourceId, name, cost, this.abilityWaterbend(ability, x), pays, except, avoid);
@@ -13930,7 +13945,7 @@ export class Game {
           rest,
           avoid,
           except,
-          { kind: "ability", source: sourceId },
+          { kind: "ability", source: sourceId, ability },
           withheld.size > 0 ? { withheld } : undefined,
         ) !== null,
       parseManaCost(ability.cost.mana).x > 0 ? xCost?.maxX : undefined,
@@ -15751,7 +15766,7 @@ export class Game {
       this.activatedAbilityManaCost(player, sourceId, ability, x).cost,
       ability.cost.tap || ability.zone !== undefined ? undefined : sourceId,
       ability.cost.tap ? sourceId : undefined,
-      { kind: "ability", source: sourceId },
+      { kind: "ability", source: sourceId, ability },
       { last: candidates },
     );
     return plan === null ? null : this.costSacrificeLeftAfter(candidates, plan);
@@ -16070,8 +16085,15 @@ export class Game {
     return granted.length === 0 ? printed : [...printed, ...granted];
   }
 
-  private activatedGrantSources(): GrantSource[] {
+  private activatedGrantSources(): readonly GrantSource[] {
+    // Pure over the state, and asked for once per object in a loop: memoized
+    // per cache region.
+    return computedCacheMemo("activatedGrantSources", () => this.computeActivatedGrantSources());
+  }
+
+  private computeActivatedGrantSources(): GrantSource[] {
     const out: GrantSource[] = [];
+    const copies: CopyGrant[] = [];
     for (const id of this.state.zones.shared.battlefield) {
       const source = this.state.objects[id];
       if (source === undefined) continue;
@@ -16105,6 +16127,7 @@ export class Game {
           }
           if (abilities.length > 0) out.push({ source, ability, staticIndex, abilities, refs });
         }
+        if (ability.grantsActivatedOf !== undefined) copies.push({ source, ability, staticIndex, spec: ability.grantsActivatedOf });
       });
       // A static a `grant-static` gave it (Roar of the Fifth People's chapter
       // II: "This Saga gains 'Creatures you control have …'"): no printed
@@ -16115,7 +16138,143 @@ export class Game {
         out.push({ source, ability, staticIndex: -1, abilities, refs: abilities.map((a) => ({ kind: "modifier-activated", ability: a })) });
       }
     }
+    if (copies.length > 0) out.push(...this.copiedActivatedGrants(copies, out));
     return out;
+  }
+
+  /**
+   * The `grantsActivatedOf` statics' grants ("has all activated abilities of
+   * …"), each a {@link GrantSource} over the abilities it reads now, applied
+   * one at a time on top of `plain` — the other grants, none of which reads
+   * another object's abilities, so none depends on these (rule 613.8a).
+   * Rule 613.8b: one whose result another of these would change (it reads a
+   * permanent the other gives abilities to) waits for it, unless they form a
+   * dependency loop, which applies in timestamp order — Experiment Kraj and
+   * Marvin, Murderous Mimic each reading the other. The order is read again
+   * after each one applies (613.8c).
+   */
+  private copiedActivatedGrants(copies: readonly CopyGrant[], plain: readonly GrantSource[]): GrantSource[] {
+    const applied: GrantSource[] = [...plain];
+    const out: GrantSource[] = [];
+    const remaining = [...copies];
+    const asGrant = (copy: CopyGrant, entries: CopiedEntries): GrantSource => ({
+      source: copy.source,
+      ability: copy.ability,
+      staticIndex: copy.staticIndex,
+      abilities: entries.abilities,
+      refs: entries.refs,
+    });
+    const before = (a: CopyGrant, b: CopyGrant): boolean =>
+      a.source.timestamp !== b.source.timestamp ? a.source.timestamp < b.source.timestamp : a.staticIndex < b.staticIndex;
+    while (remaining.length > 0) {
+      const now = remaining.map((copy) => this.copiedActivatedEntries(copy, applied));
+      let next = 0;
+      if (remaining.length > 1) {
+        // depends[i][j]: applying j first would change what i grants.
+        const depends = remaining.map((copy, i) =>
+          remaining.map(
+            (other, j) =>
+              i !== j &&
+              now[j].abilities.length > 0 &&
+              this.copiedActivatedEntries(copy, [...applied, asGrant(other, now[j])]).abilities.length >
+                now[i].abilities.length,
+          ),
+        );
+        const reach = depends.map((row) => [...row]);
+        for (let k = 0; k < reach.length; k += 1) {
+          for (let i = 0; i < reach.length; i += 1) {
+            for (let j = 0; j < reach.length; j += 1) {
+              if (reach[i][k] && reach[k][j]) reach[i][j] = true;
+            }
+          }
+        }
+        // Ready: waiting on nothing outside a loop it's part of.
+        next = -1;
+        for (let i = 0; i < remaining.length; i += 1) {
+          const ready = remaining.every((_, j) => !reach[i][j] || reach[j][i]);
+          if (ready && (next === -1 || before(remaining[i], remaining[next]))) next = i;
+        }
+        if (next === -1) next = 0;
+      }
+      if (now[next].abilities.length > 0) {
+        const grant = asGrant(remaining[next], now[next]);
+        applied.push(grant);
+        out.push(grant);
+      }
+      remaining.splice(next, 1);
+    }
+    return out;
+  }
+
+  /** What one `grantsActivatedOf` static grants now, on top of the grants
+   * already `applied` (see {@link copiedActivatedGrants}). */
+  private copiedActivatedEntries(copy: CopyGrant, applied: readonly GrantSource[]): CopiedEntries {
+    const { source, spec } = copy;
+    const abilities: ActivatedAbility[] = [];
+    const refs: GrantedAbilityRef[] = [];
+    const seen = new Set<ActivatedAbility>();
+    const take = (ability: ActivatedAbility, ref: GrantedAbilityRef, instances = 1): void => {
+      // Abilities that work only from another zone do nothing here (rule
+      // 113.6), so they aren't granted.
+      if (ability.zone !== undefined) return;
+      if (spec.only === "loyalty" && ability.loyaltyCost === undefined) return;
+      if (spec.except === "loyalty" && ability.loyaltyCost !== undefined) return;
+      if (spec.except === "mana" && isManaAbility(ability)) return;
+      // Two instances of one ability are told apart only by a limit kept per
+      // instance ("activate only once each turn"); otherwise one stands for
+      // all — a token stack's or two namesakes' alike.
+      const limited =
+        ability.oncePerTurn === true || ability.exhaust === true || ability.powerUp === true || ability.boast === true;
+      if (!limited) {
+        if (seen.has(ability)) return;
+        seen.add(ability);
+        instances = 1;
+      }
+      for (let n = 0; n < instances; n += 1) {
+        abilities.push(ability);
+        refs.push(ref);
+      }
+    };
+    const ctx = { you: source.controller, source: source.id };
+    // A card's own printed abilities — all a card outside the battlefield has.
+    const ofCard = (cardId: ObjectId): void => {
+      const card = this.state.objects[cardId];
+      if (card === undefined || !matchesFilter(this.state, this.registry, cardId, spec.filter, ctx)) return;
+      const cardName = printedCardName(card);
+      if (!this.registry.has(cardName)) return;
+      this.registry.get(cardName).activated.forEach((ability, index) => take(ability, { kind: "card-activated", cardName, index }));
+    };
+    if (spec.zone === "graveyard") {
+      for (const zones of Object.values(this.state.zones.perPlayer)) {
+        for (const cardId of zones.graveyard) ofCard(cardId);
+      }
+    } else if (spec.zone === "library-top") {
+      const top = this.state.zones.perPlayer[source.controller]?.library[0];
+      if (top !== undefined) ofCard(top);
+    } else {
+      for (const id of this.state.zones.shared.battlefield) {
+        if (id === source.id) continue;
+        const object = this.state.objects[id];
+        if (object === undefined || !matchesFilter(this.state, this.registry, id, spec.filter, ctx)) continue;
+        const instances = object.stackCount ?? 1;
+        // Its printed abilities and its basic land types' (rule 305.6) — none
+        // once it lost them, or face down (rule 708.2) — then those granted
+        // to it, a grant applied before this one included.
+        if (object.faceDown === undefined && !hasLostAbilities(this.state, this.registry, object)) {
+          const textName = rulesTextName(object);
+          this.registry.get(textName).activated.forEach((ability, index) => {
+            if (inactiveStandIn(this.state, this.registry, object, index)) return;
+            if (ability.licid === true && object.licid !== undefined) return;
+            take(ability, { kind: "card-activated", cardName: textName, index }, instances);
+          });
+          for (const color of this.intrinsicExtras(object)) {
+            take(intrinsicManaAbility(color), { kind: "intrinsic", color }, instances);
+          }
+        }
+        for (const entry of this.grantedActivatedEntries(id, applied)) take(entry.ability, entry.ref, instances);
+      }
+    }
+    return { abilities, refs };
   }
 
   /**
@@ -16722,7 +16881,7 @@ export class Game {
         // Matches `activateAbility`'s own payment below: a source being tapped
         // to pay `{T}` isn't available to pay the mana half as well.
         ability.cost.tap ? sourceId : undefined,
-        { kind: "ability", source: sourceId },
+        { kind: "ability", source: sourceId, ability },
       ) === null
     ) {
       return `${player} cannot pay for ${def.name}'s ability`;
@@ -17008,7 +17167,7 @@ export class Game {
           manaCost,
           ability.cost.tap || ability.zone !== undefined ? undefined : sourceId,
           ability.cost.tap ? sourceId : undefined,
-          { kind: "ability", source: sourceId },
+          { kind: "ability", source: sourceId, ability },
           tapCostKeyword(ability),
         );
         if (offer === null) throw new Error(`${player} cannot pay for ${def.name}'s ability`);
@@ -17056,7 +17215,7 @@ export class Game {
         manaToPay,
         ability.cost.tap || ability.zone !== undefined ? undefined : sourceId,
         ability.cost.tap ? sourceId : undefined,
-        { kind: "ability", source: sourceId },
+        { kind: "ability", source: sourceId, ability },
         manaArrangement,
       );
       if (payment === null) {
@@ -18327,12 +18486,14 @@ export class Game {
     let out: SpendAs | undefined;
     // Every payment asks, so the board scan is memoized per cache region.
     const rules = computedCacheMemo(`spendManaAs:${player}`, () => {
-      const found: NonNullable<StaticAbility["spendManaAs"]>[] = [];
+      const found: (NonNullable<StaticAbility["spendManaAs"]> & { readonly from: ObjectId })[] = [];
       for (const id of this.state.zones.shared.battlefield) {
         const source = this.state.objects[id];
         if (source.controller !== player || hasLostAbilities(this.state, this.registry,source)) continue;
         for (const ability of this.registry.get(rulesTextName(source)).static) {
-          if (ability.spendManaAs !== undefined && this.staticActive(source, ability)) found.push(ability.spendManaAs);
+          if (ability.spendManaAs !== undefined && this.staticActive(source, ability)) {
+            found.push({ ...ability.spendManaAs, from: id });
+          }
         }
       }
       return found;
@@ -18351,6 +18512,23 @@ export class Game {
           matchesFilter(this.state, this.registry, spellCard, spell, { you: player }),
         );
         if (!fits) continue;
+      }
+      // Only to activate the permanent's own abilities, or only those its
+      // "has all activated abilities of …" gives it.
+      if (rule.activating !== undefined) {
+        if (purpose?.kind !== "ability" || purpose.source !== rule.from) continue;
+        if (rule.activating === "granted") {
+          const paying = purpose.ability;
+          const granted =
+            paying !== undefined &&
+            this.activatedGrantSources().some(
+              (grant) =>
+                grant.source.id === rule.from &&
+                grant.ability.grantsActivatedOf !== undefined &&
+                grant.abilities.includes(paying),
+            );
+          if (!granted) continue;
+        }
       }
       out = widerSpendAs(out, rule.as);
     }
@@ -29167,7 +29345,7 @@ export class Game {
       this.activatedAbilityManaCost(player, sourceId, ability).cost,
       ability.cost.tap || ability.zone !== undefined ? undefined : sourceId,
       ability.cost.tap ? sourceId : undefined,
-      { kind: "ability", source: sourceId },
+      { kind: "ability", source: sourceId, ability },
       tapCostKeyword(ability),
     );
   }

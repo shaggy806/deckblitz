@@ -4937,6 +4937,36 @@ function cardNameFilterOf(words) {
   return { ...(types.length > 0 ? { types } : {}), ...(notTypes.length > 0 ? { notTypes } : {}) };
 }
 
+/**
+ * What "~ has all activated abilities of [phrase]" reads, as a
+ * `grantsActivatedOf` without its `except`/`only`: "all creature cards in all
+ * graveyards", "all Elf cards in your graveyard", "each other creature with a
+ * +1/+1 counter on it", "creatures you control that don't have the same name
+ * as ~", "all lands your opponents control", "all other planeswalkers on the
+ * battlefield". `null` for anything else.
+ */
+function grantsActivatedOfPhrase(phrase) {
+  let m = /^all (.+?) cards in (all graveyards|your graveyard)$/.exec(phrase);
+  if (m !== null) {
+    const filter = parseTypePhrase(m[1], { cards: true });
+    if (filter === null || Object.keys(filter).length === 0) return null;
+    return { zone: "graveyard", filter: { ...filter, ...(m[2] === "your graveyard" ? { ownedBy: "you" } : {}) } };
+  }
+  m = /^(?:all |each )?(?:other )?(.+?)( with an? \+1\/\+1 counter on (?:it|them))?( you control| your opponents control| on the battlefield)?( that don't have the same name as ~)?$/.exec(phrase);
+  if (m === null) return null;
+  const filter = parseTypePhrase(m[1]);
+  if (filter === null || Object.keys(filter).length === 0) return null;
+  return {
+    zone: "battlefield",
+    filter: {
+      ...filter,
+      ...(m[2] !== undefined ? { counters: { kind: "+1/+1", compare: { op: "gte", n: 1 } } } : {}),
+      ...(m[3] === " you control" ? { controlledBy: "you" } : m[3] === " your opponents control" ? { controlledBy: "opponent" } : {}),
+      ...(m[4] !== undefined ? { sameNameAsSource: false } : {}),
+    },
+  };
+}
+
 function parseStatic(line, text) {
   let m;
   // "… as long as [condition]." on a static the rest reads whole and that
@@ -4988,6 +5018,39 @@ function parseStatic(line, text) {
       },
       text,
     };
+  }
+  // "~ has all activated abilities of …" (rule 613.1f) — `grantsActivatedOf`:
+  // graveyard cards (Necrotic Ooze, Thranduil), other permanents (Experiment
+  // Kraj, Marvin, Sharkey), loyalty abilities only (Nicol Bolas, Dragon-God),
+  // and the library's top card (Skill Borrower).
+  {
+    const w = /^(?:As long as ~ is on the battlefield, it|~) has all (activated|loyalty) abilities of (.+?)( except mana abilities| except for loyalty abilities)?\.$/.exec(line);
+    const spec = w === null ? null : grantsActivatedOfPhrase(w[2]);
+    if (spec !== null) {
+      return {
+        affects: { scope: "self" },
+        grantsActivatedOf: {
+          ...spec,
+          ...(w[1] === "loyalty" ? { only: "loyalty" } : {}),
+          ...(w[3] !== undefined ? { except: w[3].includes("mana") ? "mana" : "loyalty" } : {}),
+        },
+        text,
+      };
+    }
+    const t = /^As long as the top card of your library is (?:an? )?(.+?) card, ~ has all activated abilities of that card\.$/.exec(line);
+    const top = t === null ? null : parseTypePhrase(t[1], { cards: true });
+    if (top !== null && Object.keys(top).length > 0) {
+      return { affects: { scope: "self" }, grantsActivatedOf: { zone: "library-top", filter: top }, text };
+    }
+  }
+  // "Mana of any type can be spent to activate ~'s abilities" (Sharkey,
+  // Tyrant of the Shire) / "… as though it were mana of any color to pay the
+  // activation costs of ~'s abilities" (Manascape Refractor), rule 118.14.
+  if (line === "Mana of any type can be spent to activate ~'s abilities.") {
+    return { affects: { scope: "self" }, spendManaAs: { as: "any-type", activating: "this" }, text };
+  }
+  if (line === "You may spend mana as though it were mana of any color to pay the activation costs of ~'s abilities.") {
+    return { affects: { scope: "self" }, spendManaAs: { as: "any-color", activating: "this" }, text };
   }
   // Rule 722.3a — `entersPrepared()`.
   if (line === "~ enters prepared.") {

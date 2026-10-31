@@ -233,6 +233,7 @@ import _poolErebosBleakHearted from "../pool/erebos-bleak-hearted.js";
 import _poolEscapeRoutes from "../pool/escape-routes.js";
 import _poolEtherealUsher from "../pool/ethereal-usher.js";
 import _poolEverethViceroyOfPlunder from "../pool/evereth-viceroy-of-plunder.js";
+import _poolExperimentKraj from "../pool/experiment-kraj.js";
 import _poolExplorersScope from "../pool/explorers-scope.js";
 import _poolExplosion from "../pool/explosion.js";
 import _poolExposeToDaylight from "../pool/expose-to-daylight.js";
@@ -1103,6 +1104,7 @@ const shard: CardShard = {
     _poolEscapeRoutes,
     _poolEtherealUsher,
     _poolEverethViceroyOfPlunder,
+    _poolExperimentKraj,
     _poolExplorersScope,
     _poolExplosion,
     _poolExposeToDaylight,

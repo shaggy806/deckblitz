@@ -86,6 +86,24 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2: "has all activated abilities of …"** (2026-10-31;
+  `static:gain-abilities-from-graveyard`, `static:gain-activated-abilities-of-others`,
+  `static:gain-other-planeswalkers-loyalty-abilities`, `static:gain-top-card-activated-abilities`,
+  rules 613.1f, 613.8, 201.5b, 113.6, 606.3). A static's `grantsActivatedOf` — the activated
+  abilities of the cards in graveyards matching a filter, of the top card of its controller's
+  library, or of every other matching permanent with all it has (printed unless lost, its basic
+  land types', granted ones), each with its source ref so it resolves as that card's text and
+  names the object that has it. Several such statics apply one at a time in rule 613.8's order:
+  one whose result another would change waits for it, a loop goes by timestamp. Abilities that
+  work only from another zone aren't granted; identical ones fold into one unless a per-instance
+  limit tells them apart. `except: "mana" | "loyalty"`, `only: "loyalty"`; a filter's
+  `sameNameAsSource`; `spendManaAs.activating` — "this" (every ability of the permanent) or
+  "granted" (only those its grant gives), with the ability now on an ability's mana purpose.
+  `activatedGrantSources` is memoized per cache region. The scaffolder reads the graveyard,
+  battlefield, loyalty and library-top phrasings and the two spending lines. 8 freed (Nicol
+  Bolas, Dragon-God's +1, Scheming Fence's chosen permanent and Cairn Wanderer's keywords still
+  to check). Proving cards: Necrotic Ooze, Thranduil, the Elvenking, Skill Borrower, Experiment
+  Kraj, Marvin, Murderous Mimic, Sharkey, Tyrant of the Shire, Drana and Linvala.
 - **Need-keys Phase 2: a spell's own conditional flash** (2026-10-31;
   `effect:self-flash-if-condition`, `effect:conditional-flash-by-target`,
   `effect:flash-if-targets-commander`, rules 601.3b, 601.3d, 601.6, 601.6a). `flashIf` on a card:

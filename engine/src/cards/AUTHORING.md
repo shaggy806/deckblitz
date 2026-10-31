@@ -4108,6 +4108,20 @@ their declarations to it (`withinAttackTax`), and the client shows the running c
   abilities that work on the battlefield (none with a `zone`); a typed land's
   printed mana ability is its intrinsic one, so a Forest card gives "{T}: Add
   {G}"; `sacrifice: "self"` sacrifices the creature that has it (the ruling).
+- `grantsActivatedOf: { zone, filter, except?, only? }` — "has all activated
+  abilities of …" (rule 613.1f), read live: `zone: "graveyard"` (Necrotic
+  Ooze's "all creature cards in all graveyards"; Thranduil's "Elf cards in
+  your graveyard" is `ownedBy: "you"`), `"library-top"` (Skill Borrower: the
+  top card of your library while it matches) or `"battlefield"` (Experiment
+  Kraj's "each other creature with a +1/+1 counter on it"; Marvin's "creatures
+  you control that don't have the same name as this creature" uses the
+  filter's `sameNameAsSource: false`) — a permanent with everything it has,
+  granted abilities included; several such statics apply in dependency order
+  (rule 613.8). The source itself is never read, nor abilities with a `zone`.
+  `except: "mana"` (Sharkey), `except: "loyalty"`, `only: "loyalty"` (Nicol
+  Bolas, Dragon-God). Pair with `spendManaAs: { …, activating: "this" }` for
+  "mana of any type can be spent to activate ~'s abilities" or `activating:
+  "granted"` for Drana and Linvala's "to activate **those** abilities".
 - `grantsTriggered: [...]` — the same in layer 6 for *triggered* abilities
   (Tyrant's Familiar's Lieutenant clause). Appended after the permanent's
   printed `triggered`, so a printed ability's index — which the pending

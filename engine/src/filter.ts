@@ -376,6 +376,14 @@ export interface CardFilter {
    * face-down permanent, rule 708.2a — which nothing else shares, 201.2a). */
   readonly sameNameAs?: { readonly object: ObjectId; readonly name: string | null };
   /**
+   * Has (`true`) or doesn't have (`false`) the same name as the object
+   * applying the filter — `FilterContext.source`, as it is now (rule 201.2a)
+   * — Marvin, Murderous Mimic's "creatures you control **that don't have the
+   * same name as this creature**". A nameless object (face down, rule 708.2a)
+   * shares a name with nothing; without a source, nothing has its name.
+   */
+  readonly sameNameAsSource?: boolean;
+  /**
    * Has the same name as one of the cards the resolving spell or ability
    * did this to so far (rule 201.2a) — Haunting Echoes' "exile all cards from
    * target player's graveyard other than basic land cards. **For each card
@@ -1205,6 +1213,15 @@ export function matchesFilter(
     const nameless =
       live !== undefined ? live.faceDown !== undefined || name === LOCKED_ROOM : lki!.faceDown === true;
     if (filter.sameNameAs.name === null || nameless || named !== filter.sameNameAs.name) return false;
+  }
+  if (filter.sameNameAsSource !== undefined) {
+    const from = ctx.source === undefined ? undefined : state.objects[ctx.source];
+    const nameless =
+      live !== undefined ? live.faceDown !== undefined || name === LOCKED_ROOM : lki!.faceDown === true;
+    const fromNameless =
+      from === undefined || from.faceDown !== undefined || printedCardName(from) === LOCKED_ROOM;
+    const same = !nameless && !fromNameless && nameOf(from) === named;
+    if (same !== filter.sameNameAsSource) return false;
   }
   if (filter.notName !== undefined && named === filter.notName) return false;
   if (filter.hasName !== undefined || filter.chosenName === true) {

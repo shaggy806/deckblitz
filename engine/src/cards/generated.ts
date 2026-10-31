@@ -6148,6 +6148,7 @@ import _poolDramaticEntrance from "./pool/dramatic-entrance.js";
 import _poolDramaticFinale from "./pool/dramatic-finale.js";
 import _poolDramaticRescue from "./pool/dramatic-rescue.js";
 import _poolDramaticReversal from "./pool/dramatic-reversal.js";
+import _poolDranaAndLinvala from "./pool/drana-and-linvala.js";
 import _poolDranaKalastriaBloodchief from "./pool/drana-kalastria-bloodchief.js";
 import _poolDranaLiberatorOfMalakir from "./pool/drana-liberator-of-malakir.js";
 import _poolDranasChosen from "./pool/dranas-chosen.js";
@@ -7312,6 +7313,7 @@ import _poolExpel from "./pool/expel.js";
 import _poolExpendableLackey from "./pool/expendable-lackey.js";
 import _poolExpendableTroops from "./pool/expendable-troops.js";
 import _poolExpensiveTaste from "./pool/expensive-taste.js";
+import _poolExperimentKraj from "./pool/experiment-kraj.js";
 import _poolExperimentOne from "./pool/experiment-one.js";
 import _poolExperimentTwelve from "./pool/experiment-twelve.js";
 import _poolExperimentalArmor from "./pool/experimental-armor.js";
@@ -13940,6 +13942,7 @@ import _poolMartyrsSoul from "./pool/martyrs-soul.js";
 import _poolMartyrsTomb from "./pool/martyrs-tomb.js";
 import _poolMarut from "./pool/marut.js";
 import _poolMarvelousMelee from "./pool/marvelous-melee.js";
+import _poolMarvinMurderousMimic from "./pool/marvin-murderous-mimic.js";
 import _poolMarwynTheClearcutter from "./pool/marwyn-the-clearcutter.js";
 import _poolMarwynTheNurturer from "./pool/marwyn-the-nurturer.js";
 import _poolMarwynThePreserver from "./pool/marwyn-the-preserver.js";
@@ -15230,6 +15233,7 @@ import _poolNecroskitter from "./pool/necroskitter.js";
 import _poolNecrosquito from "./pool/necrosquito.js";
 import _poolNecrosynthesis from "./pool/necrosynthesis.js";
 import _poolNecroticHex from "./pool/necrotic-hex.js";
+import _poolNecroticOoze from "./pool/necrotic-ooze.js";
 import _poolNecroticSliver from "./pool/necrotic-sliver.js";
 import _poolNecroticWound from "./pool/necrotic-wound.js";
 import _poolNectarFaerie from "./pool/nectar-faerie.js";
@@ -20053,6 +20057,7 @@ import _poolShardmagesRescue from "./pool/shardmages-rescue.js";
 import _poolSharedRoots from "./pool/shared-roots.js";
 import _poolSharedTriumph from "./pool/shared-triumph.js";
 import _poolSharkShredderKillerClone from "./pool/shark-shredder-killer-clone.js";
+import _poolSharkeyTyrantOfTheShire from "./pool/sharkey-tyrant-of-the-shire.js";
 import _poolSharktocrab from "./pool/sharktocrab.js";
 import _poolSharlayanNationOfScholars from "./pool/sharlayan-nation-of-scholars.js";
 import _poolSharpEyedRookie from "./pool/sharp-eyed-rookie.js";
@@ -20592,6 +20597,7 @@ import _poolSkeletonize from "./pool/skeletonize.js";
 import _poolSkemfarAvenger from "./pool/skemfar-avenger.js";
 import _poolSkemfarElderhall from "./pool/skemfar-elderhall.js";
 import _poolSkewerTheCritics from "./pool/skewer-the-critics.js";
+import _poolSkillBorrower from "./pool/skill-borrower.js";
 import _poolSkilledAnimator from "./pool/skilled-animator.js";
 import _poolSkilledBattlecarver from "./pool/skilled-battlecarver.js";
 import _poolSkillfulLunge from "./pool/skillful-lunge.js";
@@ -23503,6 +23509,7 @@ import _poolThranVigil from "./pool/thran-vigil.js";
 import _poolThranWarMachine from "./pool/thran-war-machine.js";
 import _poolThranWeaponry from "./pool/thran-weaponry.js";
 import _poolThranduilSindarinLiege from "./pool/thranduil-sindarin-liege.js";
+import _poolThranduilTheElvenking from "./pool/thranduil-the-elvenking.js";
 import _poolThranduilsCompany from "./pool/thranduils-company.js";
 import _poolThrashOfRaptors from "./pool/thrash-of-raptors.js";
 import _poolThrashThreat from "./pool/thrash-threat.js";
@@ -33539,6 +33546,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDramaticFinale,
   _poolDramaticRescue,
   _poolDramaticReversal,
+  _poolDranaAndLinvala,
   _poolDranaKalastriaBloodchief,
   _poolDranaLiberatorOfMalakir,
   _poolDranasChosen,
@@ -34703,6 +34711,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolExpendableLackey,
   _poolExpendableTroops,
   _poolExpensiveTaste,
+  _poolExperimentKraj,
   _poolExperimentOne,
   _poolExperimentTwelve,
   _poolExperimentalArmor,
@@ -41331,6 +41340,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMartyrsTomb,
   _poolMarut,
   _poolMarvelousMelee,
+  _poolMarvinMurderousMimic,
   _poolMarwynTheClearcutter,
   _poolMarwynTheNurturer,
   _poolMarwynThePreserver,
@@ -42621,6 +42631,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolNecrosquito,
   _poolNecrosynthesis,
   _poolNecroticHex,
+  _poolNecroticOoze,
   _poolNecroticSliver,
   _poolNecroticWound,
   _poolNectarFaerie,
@@ -47444,6 +47455,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSharedRoots,
   _poolSharedTriumph,
   _poolSharkShredderKillerClone,
+  _poolSharkeyTyrantOfTheShire,
   _poolSharktocrab,
   _poolSharlayanNationOfScholars,
   _poolSharpEyedRookie,
@@ -47983,6 +47995,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSkemfarAvenger,
   _poolSkemfarElderhall,
   _poolSkewerTheCritics,
+  _poolSkillBorrower,
   _poolSkilledAnimator,
   _poolSkilledBattlecarver,
   _poolSkillfulLunge,
@@ -50894,6 +50907,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolThranWarMachine,
   _poolThranWeaponry,
   _poolThranduilSindarinLiege,
+  _poolThranduilTheElvenking,
   _poolThranduilsCompany,
   _poolThrashOfRaptors,
   _poolThrashThreat,
@@ -60943,6 +60957,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/dramatic-finale": _poolDramaticFinale,
   "pool/dramatic-rescue": _poolDramaticRescue,
   "pool/dramatic-reversal": _poolDramaticReversal,
+  "pool/drana-and-linvala": _poolDranaAndLinvala,
   "pool/drana-kalastria-bloodchief": _poolDranaKalastriaBloodchief,
   "pool/drana-liberator-of-malakir": _poolDranaLiberatorOfMalakir,
   "pool/dranas-chosen": _poolDranasChosen,
@@ -62107,6 +62122,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/expendable-lackey": _poolExpendableLackey,
   "pool/expendable-troops": _poolExpendableTroops,
   "pool/expensive-taste": _poolExpensiveTaste,
+  "pool/experiment-kraj": _poolExperimentKraj,
   "pool/experiment-one": _poolExperimentOne,
   "pool/experiment-twelve": _poolExperimentTwelve,
   "pool/experimental-armor": _poolExperimentalArmor,
@@ -68735,6 +68751,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/martyrs-tomb": _poolMartyrsTomb,
   "pool/marut": _poolMarut,
   "pool/marvelous-melee": _poolMarvelousMelee,
+  "pool/marvin-murderous-mimic": _poolMarvinMurderousMimic,
   "pool/marwyn-the-clearcutter": _poolMarwynTheClearcutter,
   "pool/marwyn-the-nurturer": _poolMarwynTheNurturer,
   "pool/marwyn-the-preserver": _poolMarwynThePreserver,
@@ -70025,6 +70042,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/necrosquito": _poolNecrosquito,
   "pool/necrosynthesis": _poolNecrosynthesis,
   "pool/necrotic-hex": _poolNecroticHex,
+  "pool/necrotic-ooze": _poolNecroticOoze,
   "pool/necrotic-sliver": _poolNecroticSliver,
   "pool/necrotic-wound": _poolNecroticWound,
   "pool/nectar-faerie": _poolNectarFaerie,
@@ -74848,6 +74866,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/shared-roots": _poolSharedRoots,
   "pool/shared-triumph": _poolSharedTriumph,
   "pool/shark-shredder-killer-clone": _poolSharkShredderKillerClone,
+  "pool/sharkey-tyrant-of-the-shire": _poolSharkeyTyrantOfTheShire,
   "pool/sharktocrab": _poolSharktocrab,
   "pool/sharlayan-nation-of-scholars": _poolSharlayanNationOfScholars,
   "pool/sharp-eyed-rookie": _poolSharpEyedRookie,
@@ -75387,6 +75406,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/skemfar-avenger": _poolSkemfarAvenger,
   "pool/skemfar-elderhall": _poolSkemfarElderhall,
   "pool/skewer-the-critics": _poolSkewerTheCritics,
+  "pool/skill-borrower": _poolSkillBorrower,
   "pool/skilled-animator": _poolSkilledAnimator,
   "pool/skilled-battlecarver": _poolSkilledBattlecarver,
   "pool/skillful-lunge": _poolSkillfulLunge,
@@ -78298,6 +78318,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/thran-war-machine": _poolThranWarMachine,
   "pool/thran-weaponry": _poolThranWeaponry,
   "pool/thranduil-sindarin-liege": _poolThranduilSindarinLiege,
+  "pool/thranduil-the-elvenking": _poolThranduilTheElvenking,
   "pool/thranduils-company": _poolThranduilsCompany,
   "pool/thrash-of-raptors": _poolThrashOfRaptors,
   "pool/thrash-threat": _poolThrashThreat,

@@ -446,6 +446,7 @@ import _poolManaLeak from "../pool/mana-leak.js";
 import _poolMaraudingMaulhorn from "../pool/marauding-maulhorn.js";
 import _poolMarduRunemark from "../pool/mardu-runemark.js";
 import _poolMartialLaw from "../pool/martial-law.js";
+import _poolMarvinMurderousMimic from "../pool/marvin-murderous-mimic.js";
 import _poolMaulfistDoorbuster from "../pool/maulfist-doorbuster.js";
 import _poolMausoleumHarpy from "../pool/mausoleum-harpy.js";
 import _poolMegatherium from "../pool/megatherium.js";
@@ -1334,6 +1335,7 @@ const shard: CardShard = {
     _poolMaraudingMaulhorn,
     _poolMarduRunemark,
     _poolMartialLaw,
+    _poolMarvinMurderousMimic,
     _poolMaulfistDoorbuster,
     _poolMausoleumHarpy,
     _poolMegatherium,

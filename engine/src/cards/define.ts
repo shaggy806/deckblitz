@@ -1977,6 +1977,42 @@ export interface StaticAbility {
    */
   readonly grantsActivatedOfLinkedExile?: true;
   /**
+   * "[This] has all activated abilities of [each matching object in a zone]"
+   * (rule 613.1f, layer 6), granted to every object it `affects` like
+   * `grantsActivated` — read live, so an object that stops matching takes
+   * its abilities with it:
+   *
+   * - `zone: "graveyard"` — the cards in every graveyard matching `filter`
+   *   (Necrotic Ooze's "all creature cards in all graveyards"; Thranduil, the
+   *   Elvenking's "Elf cards in **your** graveyard" adds `ownedBy: "you"`);
+   * - `zone: "library-top"` — the top card of this permanent's controller's
+   *   library, while it matches (Skill Borrower's "as long as the top card of
+   *   your library is an artifact or creature card");
+   * - `zone: "battlefield"` — every other permanent matching (Experiment
+   *   Kraj's "each other creature with a +1/+1 counter on it"; Marvin,
+   *   Murderous Mimic's "creatures you control that don't have the same name
+   *   as this creature" — `sameNameAsSource: false`), with all the abilities
+   *   each has: its printed ones (unless it lost them), its basic land types'
+   *   (rule 305.6) and those granted to it. Two such statics that read each
+   *   other apply in dependency order, a loop in timestamp order (rule 613.8).
+   *
+   * The permanent applying it is never one of the objects read. A card's
+   * abilities that work only from another zone (`zone` — unearth, channel)
+   * do nothing on the battlefield and aren't granted (rule 113.6). An ability
+   * naming its card means the object that has it (rule 201.5b): Necrotic
+   * Ooze's "Sacrifice Llanowar Elves" sacrifices the Ooze. `except` leaves
+   * out mana abilities (Sharkey, Tyrant of the Shire) or loyalty abilities
+   * (Scheming Fence); `only: "loyalty"` takes nothing else (Nicol Bolas,
+   * Dragon-God). A loyalty ability gained this way is still one per
+   * permanent per turn (rule 606.3), paid from this permanent's loyalty.
+   */
+  readonly grantsActivatedOf?: {
+    readonly zone: "battlefield" | "graveyard" | "library-top";
+    readonly filter: CardFilter;
+    readonly except?: "mana" | "loyalty";
+    readonly only?: "loyalty";
+  };
+  /**
    * Triggered abilities this static grants to every object it `affects` —
    * Tyrant's Familiar's Lieutenant clause, "… and has 'Whenever this creature
    * attacks, it deals 7 damage to target creature defending player
@@ -2450,8 +2486,19 @@ export interface StaticAbility {
    * 118.14, 609.4b) — every mana cost they pay, or with `spell` only to cast
    * a spell matching it. Changes how a cost may be paid, never the cost or
    * what mana was spent. `affects` is ignored.
+   *
+   * `activating` narrows it to activating this permanent's abilities:
+   * `"this"` every one of them (Sharkey, Tyrant of the Shire's "mana of any
+   * type can be spent to activate Sharkey's abilities"; Manascape
+   * Refractor's "to pay the activation costs of this artifact's
+   * abilities"), `"granted"` only those its own `grantsActivatedOf` gives it
+   * (Drana and Linvala's "to activate **those** abilities").
    */
-  readonly spendManaAs?: { readonly as: SpendAs; readonly spell?: CardFilter };
+  readonly spendManaAs?: {
+    readonly as: SpendAs;
+    readonly spell?: CardFilter;
+    readonly activating?: "this" | "granted";
+  };
   /** Protection (rule 702.16) — the affected object can't be targeted,
    * blocked, enchanted/equipped, or damaged by a source whose colour or type
    * matches (White Knight: `{ colors: ["B"] }`).

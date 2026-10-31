@@ -247,10 +247,20 @@ section keeps only what to do next.
   less" still needs an X cap, Colossal Rattlewurm also its battlefield flash, Fated Clash, Take
   for a Ride and Mutual Destruction conditions of their own to check; 5 proving cards — Hungering
   Yeti, Crashing Tide, Swift Reckoning, Flash Photography, Timely Ward; the family's grantee and
-  prohibition units still open).
-  **596 freed cards wait for `author-freed`** (`cards:needs -- --stale`). Next families:
-  `static:gain-abilities-from-graveyard` (15), `decision:choose-card-type-protection` (15),
-  `effect:amount-aggregate` (15), `mechanic:face-down` (14).
+  prohibition units still open),
+  gain-abilities-from-graveyard's top group (2026-10-31: "has all activated abilities of …",
+  `grantsActivatedOf` — graveyard cards, the library's top card, or other permanents with all
+  they have, two such statics reading each other applied in dependency order and a loop in
+  timestamp order (rule 613.8); `except` mana/loyalty, `only` loyalty (606.3 per permanent);
+  `sameNameAsSource`; `spendManaAs`' `activating` "this"/"granted"; 8 freed — Nicol Bolas,
+  Dragon-God's +1 still needs a hand-or-permanent exile choice, Scheming Fence a filter for its
+  chosen permanent, Cairn Wanderer's are keywords, not activated abilities; 7 proving cards —
+  Necrotic Ooze, Thranduil, the Elvenking, Skill Borrower, Experiment Kraj, Marvin, Murderous
+  Mimic, Sharkey, Tyrant of the Shire, Drana and Linvala; the family's exiled-card units and Grell
+  Philosopher's until-end-of-turn form still open).
+  **604 freed cards wait for `author-freed`** (`cards:needs -- --stale`). Next families:
+  `decision:choose-card-type-protection` (15), `effect:amount-aggregate` (15),
+  `mechanic:face-down` (14), `effect:aggregate-over-graveyard` (14).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next

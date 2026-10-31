@@ -232,7 +232,14 @@ export type ManaPurpose =
       readonly bestow?: true;
     }
   /** An activated ability of `source` being paid for. */
-  | { readonly kind: "ability"; readonly source: ObjectId }
+  | {
+      readonly kind: "ability";
+      readonly source: ObjectId;
+      /** Which of its abilities — what a `spendManaAs` static's `activating:
+       * "granted"` asks about (Drana and Linvala's "to activate those
+       * abilities"). */
+      readonly ability?: ActivatedAbility;
+    }
   | null;
 
 /**

@@ -694,7 +694,11 @@
   "cost:pay-variable-energy",
   "effect:self-flash-if-condition",
   "effect:conditional-flash-by-target",
-  "effect:flash-if-targets-commander"
+  "effect:flash-if-targets-commander",
+  "static:gain-abilities-from-graveyard",
+  "static:gain-activated-abilities-of-others",
+  "static:gain-other-planeswalkers-loyalty-abilities",
+  "static:gain-top-card-activated-abilities"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {
