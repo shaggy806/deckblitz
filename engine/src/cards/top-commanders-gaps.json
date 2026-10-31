@@ -738,7 +738,12 @@
   "effect:search-destination-choice",
   "effect:search-split-control",
   "effect:search-split-to-graveyard",
-  "effect:search-with-counters"
+  "effect:search-with-counters",
+  "filter:shares-creature-type-with-attached",
+  "filter:shares-creature-type-with-sacrificed",
+  "filter:shares-creature-type-with-target",
+  "filter:shares-card-type-with-target",
+  "filter:shares-land-type-with-controlled"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

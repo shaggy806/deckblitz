@@ -692,6 +692,33 @@ a rules question); Bone Shaman's granted "creatures dealt damage by this
 creature this turn can't be regenerated this turn", Whippoorwill's and
 Runesword's other halves.
 
+### Shares a type with a reference object — built 2026-10-31
+
+The need-keys Phase 2 family `condition:filter-dynamic-compare`, its
+shared-type group, features only. The `CardFilter` clauses
+**`sharesCardTypeWith`**, **`sharesPermanentTypeWith`**,
+**`sharesCreatureTypeWith`** and the new **`sharesLandTypeWith`** all take one
+**`ShareReference`**: `"sacrificed"`, `"trigger-object"`, `"source"`,
+`"attached"` (the host, or the one last attached to as the Aura was
+sacrificed), `"chosen"`, a target slot (as it last existed if it moved), or
+`{ controlled: filter }` (every permanent you control matching it). Bound as
+the effect applies to a `sharesTypeWith` entry: the reference objects always
+match ("target creature **and each other** creature that shares…"), anything
+else needs one of their types of that kind (rules 205.2a, 110.4, 205.3i,
+205.3m; changeling 702.73a through `hasSubtype`). The scaffolder reads
+radiance's "and each other X that shares a creature/card type with it", the
+Crowns' "enchanted creature and other creatures that share a creature type
+with it get / gain …", "destroy all creatures that share a creature type with
+the sacrificed creature" with "They can't be regenerated.", and Hiveheart
+Shaman's search. Keys: shares-creature-type-with-attached,
+shares-creature-type-with-sacrificed, shares-creature-type-with-target,
+shares-card-type-with-target, shares-land-type-with-controlled. Left on their
+cards: Raise the Draugr's two targets sharing a type with each other (a
+target-legality constraint between slots), Cemetery Gatekeeper's linked
+exiled card, Spirit-Sister's Call's granted replacement. Proving cards: Crown
+of Vigor, Crown of Ascension, Endemic Plague, Pyre of Heroes, Coward //
+Killer, Counterlash, Reality Scramble, Hiveheart Shaman.
+
 ### Counters of chosen kinds removed — built 2026-10-31
 
 The need-keys Phase 2 family `cost:remove-any-counter-cost`, features only.

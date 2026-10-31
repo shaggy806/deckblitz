@@ -19,11 +19,11 @@ import type {
   Supertype,
   TurnStat,
 } from "./cards.js";
-import type { AggregateSpec, CardFilter } from "./filter.js";
+import type { AggregateSpec, CardFilter, ShareReference, SharedTypes } from "./filter.js";
 import type { CardNameAim, CardNameFilter } from "./card-names.js";
 import { manaOriginMatches, type Color, type ManaFromSpec, type ManaOrigin, type ManaType, type SpendAs } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
-import { EVERY_CREATURE_TYPE, isCreatureType } from "./subtypes.js";
+import { EVERY_CREATURE_TYPE, EVERY_LAND_TYPE, isCreatureType, isLandType } from "./subtypes.js";
 import { sameVoteChoice } from "./events.js";
 import type { RandomPick, Vote, VoteChoice } from "./events.js";
 import type { ThisWayEntry } from "./this-way.js";
@@ -10597,6 +10597,7 @@ function containsDynamicCompare(value: unknown): boolean {
       "sharesCardTypeWith" in value ||
       "sharesPermanentTypeWith" in value ||
       "sharesCreatureTypeWith" in value ||
+      "sharesLandTypeWith" in value ||
       "saddledSource" in value ||
       "bandedWithSource" in value ||
       "sameNameAsTarget" in value ||
@@ -10632,11 +10633,9 @@ const PERMANENT_TYPES: ReadonlySet<CardType> = new Set<CardType>([
  * one greater" reads the sacrifice that has just happened. `{ own }` operands
  * are left alone: they're about each object matched, not about the effect.
  *
- * `CardFilter.sharesCardTypeWith` is bound the same way, to the card types the
- * sacrificed permanent had as it last existed on the battlefield, or the
- * trigger object's (an `anyOf` of one `typesAnyOf`, so an `anyOf` the filter
- * already had still applies). `sharesPermanentTypeWith` keeps only the
- * permanent types among the trigger object's (rule 110.4).
+ * The `CardFilter.shares…TypeWith` clauses are bound the same way, to a
+ * `sharesTypeWith` entry holding the reference objects and their types of
+ * that kind as the effect applies (as they last existed if they've left).
  */
 export function bindDynamicCompares(spec: EffectSpec, ctx: ResolutionContext): EffectSpec {
   if (!containsDynamicCompare(spec)) return spec;
@@ -10671,32 +10670,44 @@ export function bindDynamicCompares(spec: EffectSpec, ctx: ResolutionContext): E
         NESTED_EFFECT_KEYS.has(key) || (liveFilter && key === "filter") ? v : walk(v),
       ]),
     );
-    if ("sharesCreatureTypeWith" in walked) {
-      // "Shares a creature type with it" (Heirloom Blade): the trigger
-      // object's creature types as it last existed — the changeling marker
-      // included, which `hasSubtype` reads as "any creature type" — ANDed
-      // with whatever `anyOf` the filter already had. None: nothing shares.
-      // `"source"`: the resolving ability's source (kinship's "this creature").
-      const { sharesCreatureTypeWith: withWhat, anyOf, ...rest } = walked as CardFilter;
-      const other = withWhat === "source" ? ctx.source : ctx.triggerObject;
-      const subtypes =
-        other === undefined
-          ? []
-          : ctx
-              .subtypesOf({ kind: "object", object: other })
-              .filter((s) => s === EVERY_CREATURE_TYPE || isCreatureType(s));
-      const shares: CardFilter = { subtypes, ...(anyOf !== undefined ? { anyOf } : {}) };
-      return bindShares({ ...rest, anyOf: [shares] });
-    }
     return bindShares(walked);
   };
-  // "Shares a card type with it": the sacrificed permanent's types as it
-  // last existed, or the trigger object's — the spell whose casting fired
-  // the trigger — ANDed with whatever `anyOf` the filter already had.
-  const bindShares = (bound: Record<string, unknown>): unknown => {
+  // "Shares a card / permanent / creature / land type with it": the
+  // reference objects (`ShareReference`) and their types of that kind as
+  // they are now, or as they last existed if they've left (`cardTypesOf`,
+  // `subtypesOf`) — the changeling marker included, which `hasSubtype` reads
+  // as "any creature type".
+  const bindSharedTypes = (filter: Record<string, unknown>): Record<string, unknown> => {
+    let rest = filter;
+    const bound: SharedTypes[] = [];
+    for (const [key, kind] of SHARE_CLAUSES) {
+      if (!(key in rest)) continue;
+      const { [key]: reference, ...others } = rest;
+      rest = others;
+      const objects = shareReferenceObjects(reference as ShareReference, ctx);
+      const types = new Set<string>();
+      for (const object of objects) {
+        const ref: TargetRef = { kind: "object", object };
+        if (kind === "card" || kind === "permanent") {
+          for (const t of ctx.cardTypesOf(ref)) if (kind === "card" || PERMANENT_TYPES.has(t)) types.add(t);
+        } else {
+          for (const s of ctx.subtypesOf(ref)) {
+            const fits =
+              kind === "creature" ? s === EVERY_CREATURE_TYPE || isCreatureType(s) : s === EVERY_LAND_TYPE || isLandType(s);
+            if (fits) types.add(s);
+          }
+        }
+      }
+      bound.push({ kind, objects, types: [...types] });
+    }
+    if (bound.length === 0) return filter;
+    const already = (rest["sharesTypeWith"] as readonly SharedTypes[] | undefined) ?? [];
+    return { ...rest, sharesTypeWith: [...already, ...bound] };
+  };
+  const bindShares = (unbound: Record<string, unknown>): unknown => {
     // "A creature that saddled it this turn" (rule 702.171c): the resolving
     // ability's source, which the matching then reads by id.
-    let walked = bound;
+    let walked = bindSharedTypes(unbound);
     if (walked["saddledSource"] === true) {
       const { saddledSource: _saddled, ...rest } = walked;
       walked = { ...rest, saddledBy: ctx.source };
@@ -10748,24 +10759,35 @@ export function bindDynamicCompares(spec: EffectSpec, ctx: ResolutionContext): E
           ? { ...rest, sharesColorWith: { object: target.object, colors: ctx.colorsOf(target) } }
           : walked;
     }
-    if ("sharesPermanentTypeWith" in walked) {
-      // Rule 110.4: only the permanent types count — kindred doesn't.
-      const { sharesPermanentTypeWith: _with, anyOf, ...rest } = walked as CardFilter;
-      const other = ctx.triggerObject;
-      const types = (other === undefined ? [] : ctx.cardTypesOf({ kind: "object", object: other })).filter(
-        (t) => PERMANENT_TYPES.has(t),
-      );
-      const shares: CardFilter = { typesAnyOf: types, ...(anyOf !== undefined ? { anyOf } : {}) };
-      walked = { ...rest, anyOf: [shares] };
-    }
-    if (!("sharesCardTypeWith" in walked)) return walked;
-    const { sharesCardTypeWith: withWhat, anyOf, ...rest } = walked as CardFilter;
-    const other = withWhat === "trigger-object" ? ctx.triggerObject : ctx.sacrificed;
-    const types = other === undefined ? [] : ctx.cardTypesOf({ kind: "object", object: other });
-    const shares: CardFilter = { typesAnyOf: types, ...(anyOf !== undefined ? { anyOf } : {}) };
-    return { ...rest, anyOf: [shares] };
+    return walked;
   };
   return walk(spec) as EffectSpec;
+}
+
+/** The `shares…TypeWith` clauses and the kind of type each compares (rule
+ * 205.2a card types, 110.4 permanent types, 205.3m creature types, 205.3i
+ * land types). */
+const SHARE_CLAUSES = [
+  ["sharesCardTypeWith", "card"],
+  ["sharesPermanentTypeWith", "permanent"],
+  ["sharesCreatureTypeWith", "creature"],
+  ["sharesLandTypeWith", "land"],
+] as const satisfies readonly (readonly [keyof CardFilter, SharedTypes["kind"]])[];
+
+/** The objects a `ShareReference` names in this resolution — see its doc. */
+function shareReferenceObjects(reference: ShareReference, ctx: ResolutionContext): readonly ObjectId[] {
+  const one = (object: ObjectId | undefined): readonly ObjectId[] => (object === undefined ? [] : [object]);
+  if (reference === "source") return [ctx.source];
+  if (reference === "trigger-object") return one(ctx.triggerObject);
+  if (reference === "sacrificed") return one(ctx.sacrificed);
+  if (reference === "attached") return one(ctx.attachedHost());
+  if (reference === "chosen") return one(ctx.chosenPermanent());
+  if (typeof reference === "number") {
+    if (illegalSlot(reference, ctx)) return [];
+    const target = ctx.targets[reference];
+    return target?.kind === "object" ? [target.object] : [];
+  }
+  return ctx.permanentsMatching({ ...reference.controlled, controlledBy: "you" }).map((m) => m.object);
 }
 
 /** Does `amount` read a per-player value (`lifeTotal: "each"`, a `thisWay`

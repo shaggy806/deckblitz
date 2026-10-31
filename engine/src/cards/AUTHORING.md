@@ -2464,18 +2464,32 @@ discarded this turn that hasn't moved since — a madness card its owner didn't
 cast still is, in the graveyard it went on to (Shadow of the Grave's "all
 cards in your graveyard that you cycled or discarded this turn" is
 `return-from-graveyard` with `filter: { discardedThisTurn: true }`; cycling is
-discarding, rule 702.29a). `sharesCardTypeWith: "sacrificed"`
-is "a permanent that **shares a card type with it**" — the permanent the
-spell or ability sacrificed, as it last existed (Braids, Arisen Nightmare);
-`"trigger-object"` is the trigger object's instead — "a spell … that shares a
-card type with it", the spell whose casting fired the trigger (Baral and Kari
-Zev). An effect's filter is bound to its types as the effect applies, and
-anywhere there's nothing to share with it matches nothing.
-`sharesCreatureTypeWith: "trigger-object"` (or `"source"`, the resolving ability's source — kinship's "this creature") is the same for **creature types**
-— Heirloom Blade's "a creature card that shares a creature type with it",
-the dead creature as it last existed (its rulings): bound to a `subtypes` of
-its creature types, so a changeling on either side shares one with anything
-that has one, and a creature with none shares nothing. `enteredThisTurn` /
+discarding, rule 702.29a). **"Shares a type with it"** is one clause per
+kind of type — `sharesCardTypeWith`, `sharesPermanentTypeWith` (rule 110.4,
+kindred left out), `sharesCreatureTypeWith`, `sharesLandTypeWith` — each
+taking a **`ShareReference`**, the object compared with:
+`"sacrificed"` (the permanent the spell or ability sacrificed, as it last
+existed — Braids, Arisen Nightmare; Endemic Plague's `destroy-all` of
+`{ type: "creature", sharesCreatureTypeWith: "sacrificed" }`; Pyre of
+Heroes), `"trigger-object"` (Baral and Kari Zev's spell, Heirloom Blade's dead
+creature), `"source"` (kinship's "this creature"), `"attached"` (the Crowns'
+"enchanted creature and other creatures that share a creature type with it",
+the host read as the Aura was sacrificed), `"chosen"`, a **target slot**
+(Killer's "target creature and each other creature that shares a creature
+type with it" is one `damage-all` of `{ type: "creature",
+sharesCreatureTypeWith: 0 }`; Counterlash's `cast-now` `spell: {
+sharesCardTypeWith: 0 }`; Reality Scramble's `reveal-until` after the target
+went to the library, read as it last existed), or `{ controlled: <filter> }`
+— every permanent you control matching it (Hiveheart Shaman's "a basic land
+card that **doesn't** share a land type with a land you control" is `not: {
+sharesLandTypeWith: { controlled: { type: "land" } } }`). The reference
+objects themselves always match — "X **and each other** creature that
+shares…" needs no `anyOf`; write `exceptTarget`/`exceptSource` for a bare
+"each other". An effect's filter is bound as the effect applies; a changeling
+on either side shares a creature type with anything that has one, a creature
+with none shares nothing, and with no reference (gone, an illegal target)
+nothing shares. Unbound — a static's or a trigger's filter — it matches
+nothing. `enteredThisTurn` /
 `attackedThisTurn` are a permanent's history this turn — "creatures that
 entered this turn", Kratos, God of War's "creatures that player controls that
 **didn't attack** this turn" (`attackedThisTurn: false`). A permanent that

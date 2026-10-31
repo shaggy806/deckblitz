@@ -354,6 +354,53 @@ describe("costs and triggers", () => {
     });
   });
 
+  it("reads \"shares a creature / land type with\" a reference object", () => {
+    const killer = parseFace({
+      name: "Killer",
+      type_line: "Sorcery",
+      oracle_text: "Killer deals 3 damage to target creature and each other creature that shares a creature type with it.",
+    });
+    expect(killer.complete).toBe(true);
+    expect(killer.effect).toEqual({ kind: "damage-all", amount: 3, filter: { type: "creature", sharesCreatureTypeWith: 0 } });
+    const crown = parseFace({
+      name: "Crown of Vigor",
+      type_line: "Enchantment — Aura",
+      oracle_text:
+        "Enchant creature\nEnchanted creature gets +1/+1.\nSacrifice this Aura: Enchanted creature and other creatures that share a creature type with it get +1/+1 until end of turn.",
+    });
+    expect(crown.activated[0].effect).toEqual({
+      kind: "modify-pt-all",
+      filter: { type: "creature", sharesCreatureTypeWith: "attached" },
+      power: 1,
+      toughness: 1,
+      duration: "end-of-turn",
+    });
+    const plague = parseFace({
+      name: "Endemic Plague",
+      type_line: "Sorcery",
+      oracle_text:
+        "As an additional cost to cast this spell, sacrifice a creature.\nDestroy all creatures that share a creature type with the sacrificed creature. They can't be regenerated.",
+    });
+    expect(plague.complete).toBe(true);
+    expect(plague.effect).toEqual({
+      kind: "destroy-all",
+      filter: { type: "creature", sharesCreatureTypeWith: "sacrificed" },
+      cantBeRegenerated: true,
+    });
+    expect(
+      parseEffect(
+        "Search your library for a basic land card that doesn't share a land type with a land you control, put that card onto the battlefield, then shuffle.",
+        ctx(),
+      ).effect,
+    ).toEqual({
+      kind: "search-library",
+      filter: { type: "land", supertype: "basic", not: { sharesLandTypeWith: { controlled: { type: "land" } } } },
+      destination: "battlefield",
+      min: 0,
+      max: 1,
+    });
+  });
+
   it("reads a Scent's reveal from hand, the next sentence scaled by the cards revealed", () => {
     const jasmine = parseFace({
       name: "Scent of Jasmine",

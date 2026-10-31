@@ -1788,12 +1788,18 @@ export function parseSentence(sentence, ctx) {
   // Damage.
   // Radiance (Ravnica: City of Guilds): "target X and each other X that
   // shares a color with it" — one `-all` effect over the target and the
-  // others sharing a color with it (`sharesColorWithTarget`).
-  const KIN = `and each other (permanent|creature|artifact|enchantment|land) that shares a color with it`;
-  const kin = (type, target) =>
-    target === undefined ? undefined : { ...(type.toLowerCase() !== "permanent" ? { type: type.toLowerCase() } : {}), sharesColorWithTarget: target };
+  // others sharing a color with it (`sharesColorWithTarget`) — or a creature
+  // or card type (`sharesCreatureTypeWith` / `sharesCardTypeWith` of the
+  // slot: Killer's "target creature and each other creature that shares a
+  // creature type with it").
+  const KIN = `and each other (permanent|creature|artifact|enchantment|land) that shares a (color|creature type|card type) with it`;
+  const SHARES_KEY = { color: "sharesColorWithTarget", "creature type": "sharesCreatureTypeWith", "card type": "sharesCardTypeWith" };
+  const kin = (type, what, target) =>
+    target === undefined
+      ? undefined
+      : { ...(type.toLowerCase() !== "permanent" ? { type: type.toLowerCase() } : {}), [SHARES_KEY[what.toLowerCase()]]: target };
   if ((m = re(`~ deals ${N} damage to (${TARGET}) ${KIN}`).exec(s))) {
-    const filter = kin(m[3], slot(m[2]));
+    const filter = kin(m[3], m[4], slot(m[2]));
     return filter === undefined ? null : { kind: "damage-all", amount: amount(m[1]), filter };
   }
   if ((m = re(`~ deals ${N} damage to (${TARGET})`).exec(s))) {
@@ -2046,14 +2052,31 @@ export function parseSentence(sentence, ctx) {
       : { kind: "modify-pt-all", filter, power: Number(m[3]), toughness: Number(m[4]), duration: "end-of-turn" };
   }
   if ((m = re(`(destroy|untap|tap) (${TARGET}) ${KIN}`).exec(s))) {
-    const filter = kin(m[3], slot(m[2]));
+    const filter = kin(m[3], m[4], slot(m[2]));
     return filter === undefined ? null : { kind: `${m[1].toLowerCase()}-all`, filter };
   }
   if ((m = re(`(${TARGET}) ${KIN} gets? ([+-]\\d+)/([+-]\\d+) until end of turn`).exec(s))) {
-    const filter = kin(m[2], slot(m[1]));
+    const filter = kin(m[2], m[3], slot(m[1]));
     return filter === undefined
       ? null
-      : { kind: "modify-pt-all", filter, power: Number(m[3]), toughness: Number(m[4]), duration: "end-of-turn" };
+      : { kind: "modify-pt-all", filter, power: Number(m[4]), toughness: Number(m[5]), duration: "end-of-turn" };
+  }
+  // The Crowns: "enchanted creature and other creatures that share a
+  // creature type with it get +1/+1 / gain flying until end of turn" — one
+  // `-all` effect over the host and its kin (`sharesCreatureTypeWith:
+  // "attached"`, the host in whatever its types).
+  const CROWN = `enchanted creature and other creatures that share a creature type with it`;
+  const crowned = { type: "creature", sharesCreatureTypeWith: "attached" };
+  if ((m = re(`${CROWN} get ([+-]\\d+)/([+-]\\d+) until end of turn`).exec(s))) {
+    return { kind: "modify-pt-all", filter: crowned, power: Number(m[1]), toughness: Number(m[2]), duration: "end-of-turn" };
+  }
+  if ((m = re(`${CROWN} gain ${KW} until end of turn`).exec(s))) {
+    return { kind: "grant-keyword-all", filter: crowned, keyword: KEYWORDS[m[1].toLowerCase()], duration: "end-of-turn" };
+  }
+  // "Destroy all creatures that share a creature type with the sacrificed
+  // creature" (Endemic Plague).
+  if ((m = re(`destroy all creatures that share a creature type with the sacrificed creature`).exec(s))) {
+    return { kind: "destroy-all", filter: { type: "creature", sharesCreatureTypeWith: "sacrificed" } };
   }
   // "Destroy up to X target artifacts", "tap X target creatures" (rule
   // 601.2c): a group as big as X, each member acted on — destroyed or exiled
@@ -2225,6 +2248,13 @@ export function parseSentence(sentence, ctx) {
   }
 
   // Searching.
+  // "A basic land card that doesn't share a land type with a land you
+  // control" (Hiveheart Shaman): the land types of your lands, negated
+  // (`sharesLandTypeWith: { controlled }`).
+  if ((m = /^search your library for a basic land card that doesn't share a land type with a land you control, put (?:it|that card) onto the battlefield( tapped)?, then shuffle\.$/i.exec(s))) {
+    const filter = { type: "land", supertype: "basic", not: { sharesLandTypeWith: { controlled: { type: "land" } } } };
+    return { kind: "search-library", filter, destination: "battlefield", min: 0, max: 1, ...(m[1] ? { enterTapped: true } : {}) };
+  }
   if ((m = /^search your library for an? (.+?) card, put it onto the battlefield( tapped)?, then shuffle\.$/i.exec(s))) {
     const filter = parseTypePhrase(m[1], { cards: true });
     if (filter === null) return null;
@@ -3154,6 +3184,11 @@ export function parseEffect(text, outer) {
     }
     // "It can't be regenerated." (rule 701.19c) after the destroy it's about.
     if (/^it can't be regenerated\.$/i.test(sentence) && parsed.at(-1)?.kind === "destroy") {
+      parsed[parsed.length - 1] = { ...parsed.at(-1), cantBeRegenerated: true };
+      continue;
+    }
+    // "They can't be regenerated." after a sweep (Catastrophe, Endemic Plague).
+    if (/^they can't be regenerated\.$/i.test(sentence) && parsed.at(-1)?.kind === "destroy-all") {
       parsed[parsed.length - 1] = { ...parsed.at(-1), cantBeRegenerated: true };
       continue;
     }
