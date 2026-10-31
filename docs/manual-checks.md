@@ -307,6 +307,10 @@ engine terms. A second thing to check is a second test.
 - **Do:** Attack with Gonti and Grizzly Bears and let both connect. Then Switch to Bob and open Bob's exile pile.
 - **Expect:** Bob sees that there's a card, but not what it is.
 
+### Cyber Conversion: an opponent's creature turns face down as a 2/2
+- **Do:** Cast Cyber Conversion on Bob's Craw Wurm.
+- **Expect:** The Wurm becomes a face-down 2/2 artifact creature labelled "Face-down", still Bob's; you can't see that it's a Craw Wurm, and the log says it's turned face down.
+
 ### Gonti: cast the stolen card for {1} less with any mana
 - **Do:** Attack with Gonti and Grizzly Bears. In your second main phase, open Bob's exile pile and cast the Craw Wurm.
 - **Expect:** It's offered as "Cast (impulse)", costs {1} less, and your 5 Islands pay for it. It enters under your control.

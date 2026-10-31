@@ -579,6 +579,13 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'Cyber Conversion: an opponent\'s creature turns face down as a 2/2',
+    board({
+      you: { bf: ['Island*2'], hand: ['Cyber Conversion'] },
+      opp: { bf: ['Craw Wurm'] },
+    }),
+  ),
+  preset(
     'Gonti: cast the stolen card for {1} less with any mana',
     board({
       you: { bf: ['Gonti, Canny Acquisitor', 'Grizzly Bears', 'Island*5'] },
