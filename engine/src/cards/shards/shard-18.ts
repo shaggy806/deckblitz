@@ -618,6 +618,7 @@ import _poolShimmerOfPossibility from "../pool/shimmer-of-possibility.js";
 import _poolShrapnelBlast from "../pool/shrapnel-blast.js";
 import _poolSigardasAid from "../pool/sigardas-aid.js";
 import _poolSilentChantZubera from "../pool/silent-chant-zubera.js";
+import _poolSilentGravestone from "../pool/silent-gravestone.js";
 import _poolSilverbluffBridge from "../pool/silverbluff-bridge.js";
 import _poolSilvercladFerocidons from "../pool/silverclad-ferocidons.js";
 import _poolSilverquillCharm from "../pool/silverquill-charm.js";
@@ -1480,6 +1481,7 @@ const shard: CardShard = {
     _poolShrapnelBlast,
     _poolSigardasAid,
     _poolSilentChantZubera,
+    _poolSilentGravestone,
     _poolSilverbluffBridge,
     _poolSilvercladFerocidons,
     _poolSilverquillCharm,

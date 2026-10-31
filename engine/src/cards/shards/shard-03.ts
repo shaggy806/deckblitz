@@ -107,6 +107,7 @@ import _poolConcordantCrossroads from "../pool/concordant-crossroads.js";
 import _poolCondemn from "../pool/condemn.js";
 import _poolCondescend from "../pool/condescend.js";
 import _poolConfrontThePast from "../pool/confront-the-past.js";
+import _poolConservator from "../pool/conservator.js";
 import _poolConsulateTurret from "../pool/consulate-turret.js";
 import _poolCoriMountainStalwart from "../pool/cori-mountain-stalwart.js";
 import _poolCorruptedConscience from "../pool/corrupted-conscience.js";
@@ -145,6 +146,7 @@ import _poolDelightfulDiscovery from "../pool/delightful-discovery.js";
 import _poolDementiaBat from "../pool/dementia-bat.js";
 import _poolDemonPossessedWitch from "../pool/demon-possessed-witch.js";
 import _poolDemonsHorn from "../pool/demons-horn.js";
+import _poolDenseFoliage from "../pool/dense-foliage.js";
 import _poolDesmondMiles from "../pool/desmond-miles.js";
 import _poolDespair from "../pool/despair.js";
 import _poolDestinedLead from "../pool/destined-lead.js";
@@ -182,6 +184,7 @@ import _poolEloiseNephaliaSleuth from "../pool/eloise-nephalia-sleuth.js";
 import _poolElvishRejuvenator from "../pool/elvish-rejuvenator.js";
 import _poolEmbalmedAscendant from "../pool/embalmed-ascendant.js";
 import _poolEmberwildeCaptain from "../pool/emberwilde-captain.js";
+import _poolEmbolden from "../pool/embolden.js";
 import _poolEmergencyEject from "../pool/emergency-eject.js";
 import _poolEmeriaAngel from "../pool/emeria-angel.js";
 import _poolEmeritusOfIdeation from "../pool/emeritus-of-ideation.js";
@@ -406,6 +409,7 @@ import _poolMassOfMysteries from "../pool/mass-of-mysteries.js";
 import _poolMaximumOverdrive from "../pool/maximum-overdrive.js";
 import _poolMedicsKitesail from "../pool/medics-kitesail.js";
 import _poolMentalVapors from "../pool/mental-vapors.js";
+import _poolMercenaryInformer from "../pool/mercenary-informer.js";
 import _poolMercilessEternal from "../pool/merciless-eternal.js";
 import _poolMerfolkCaveDiver from "../pool/merfolk-cave-diver.js";
 import _poolMerfolkCoralsmith from "../pool/merfolk-coralsmith.js";
@@ -890,6 +894,7 @@ const shard: CardShard = {
     _poolCondemn,
     _poolCondescend,
     _poolConfrontThePast,
+    _poolConservator,
     _poolConsulateTurret,
     _poolCoriMountainStalwart,
     _poolCorruptedConscience,
@@ -928,6 +933,7 @@ const shard: CardShard = {
     _poolDementiaBat,
     _poolDemonPossessedWitch,
     _poolDemonsHorn,
+    _poolDenseFoliage,
     _poolDesmondMiles,
     _poolDespair,
     _poolDestinedLead,
@@ -965,6 +971,7 @@ const shard: CardShard = {
     _poolElvishRejuvenator,
     _poolEmbalmedAscendant,
     _poolEmberwildeCaptain,
+    _poolEmbolden,
     _poolEmergencyEject,
     _poolEmeriaAngel,
     _poolEmeritusOfIdeation,
@@ -1189,6 +1196,7 @@ const shard: CardShard = {
     _poolMaximumOverdrive,
     _poolMedicsKitesail,
     _poolMentalVapors,
+    _poolMercenaryInformer,
     _poolMercilessEternal,
     _poolMerfolkCaveDiver,
     _poolMerfolkCoralsmith,

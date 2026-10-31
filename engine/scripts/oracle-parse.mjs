@@ -1704,6 +1704,18 @@ export function parseSentence(sentence, ctx) {
   if (ctx?.divided !== undefined) {
     const d = dividedDamageOf(s, ctx);
     if (d !== undefined) return d;
+    // "Prevent the next 5 damage that would be dealt this turn to any number
+    // of targets, divided as you choose" (Remedy — rules 601.2d, 615.7): a
+    // shield per target of an `any-number` group, its share of the total.
+    const p = /^Prevent the next (a|an|one|two|three|four|five|six|seven|eight|nine|ten|\d+) damage that would be dealt this turn to any number of targets, divided as you choose\.$/.exec(s);
+    if (p !== null) {
+      const total = numberOf(p[1].toLowerCase());
+      if (typeof total === "number") {
+        const slot = ctx.target({ kind: "any-number", of: "any-target", max: total });
+        ctx.divided.value = { total, slot, of: "damage to prevent" };
+        return { kind: "prevent-damage-divided", from: slot };
+      }
+    }
   }
   // Counters distributed by an amount, among targets or among permanents
   // chosen as it resolves (`distributedCountersOf`) — also ahead of the guard.
@@ -2777,6 +2789,13 @@ export function parseSentence(sentence, ctx) {
       ...(thisAbility ? { exceptions: { thisAbility: THIS_ABILITY } } : {}),
     };
   }
+  // An untargeted shield on the controller (rule 615.7 — `damage-rule`'s
+  // amount): Conservator's "prevent the next 2 damage that would be dealt to
+  // you this turn", Decorated Griffin's "… combat damage …", Festival of the
+  // Guildpact's X.
+  if ((m = re(`prevent the next ${N} (combat )?damage that would be dealt to you this turn`).exec(s))) {
+    return { kind: "damage-rule", to: { players: "you" }, amount: amount(m[1]), ...(m[2] !== undefined ? { combat: true } : {}) };
+  }
   if ((m = re(`prevent the next ${N} damage that would be dealt to (${TARGET}) this turn`).exec(s))) {
     return { kind: "prevent-damage", target: slot(m[2]), amount: amount(m[1]) };
   }
@@ -2878,6 +2897,26 @@ export function parseSentence(sentence, ctx) {
     return { kind: "restrict", target: slot(m[1]), restrictions: [], cantBlockAttacker: "source" };
   }
   if ((m = re(`(${TARGET}) can't block this turn`).exec(s))) return { kind: "restrict", target: slot(m[1]), restrictions: ["cant-block"] };
+  // A turn-wide rule over a set of creatures (rule 611.2c — `restrict`'s
+  // `filter` form): "creatures target player controls can't attack this
+  // turn" (Oriss, read from that player's side — `controlledByTarget`),
+  // "creatures your opponents control can't block this turn", "creatures
+  // can't be blocked this turn" (Veiling Oddity).
+  {
+    const RESTRICTION = { attack: "cant-attack", block: "cant-block", "be blocked": "cant-be-blocked" };
+    if ((m = re(`creatures (${PLAYER_T}) controls can't (attack|block|be blocked) this turn`).exec(s))) {
+      return {
+        kind: "restrict",
+        filter: { type: "creature", controlledBy: "you" },
+        controlledByTarget: slot(m[1]),
+        restrictions: [RESTRICTION[m[2].toLowerCase()]],
+      };
+    }
+    if ((m = re(`creatures( you control| your opponents control)? can't (attack|block|be blocked) this turn`).exec(s))) {
+      const side = m[1] === undefined ? {} : { controlledBy: m[1] === " you control" ? "you" : "opponent" };
+      return { kind: "restrict", filter: { type: "creature", ...side }, restrictions: [RESTRICTION[m[2].toLowerCase()]] };
+    }
+  }
   // "Target creature can't be regenerated this turn" (Hurr Jackal — rule
   // 701.19c).
   if ((m = re(`(${TARGET}) can't be regenerated this turn`).exec(s))) return { kind: "prohibit", target: slot(m[1]), regeneration: true };
@@ -6213,6 +6252,42 @@ function grantsActivatedOfPhrase(phrase) {
   };
 }
 
+/** What a "can't be the target(s) of …" names, as a `hexproofFrom` with its
+ * qualifiers, or `null`: "spells", "[quality] spells", "abilities from
+ * [quality] sources", "[quality] spells or abilities from [quality]
+ * sources" (one quality, said twice), each with or without "your opponents
+ * control" (without it, `anyController`). A quality is colour words joined
+ * by "or" ("blue or black"), a card type, or "Aura". */
+function untargetablePhrase(phrase) {
+  let rest = phrase;
+  const opponents = / your opponents control$/.test(rest);
+  if (opponents) rest = rest.slice(0, -" your opponents control".length);
+  const quality = (words) => {
+    if (words === "Aura") return { filter: { subtype: "Aura" } };
+    const parts = words.split(/,? or |, /);
+    if (parts.every((w) => COLOR_WORDS[w] !== undefined)) return { colors: parts.map((w) => COLOR_WORDS[w]) };
+    if (parts.every((w) => /^(artifact|creature|enchantment|land|planeswalker|instant|sorcery)$/.test(w))) return { types: parts };
+    return null;
+  };
+  const owner = opponents ? {} : { anyController: true };
+  let m;
+  if (rest === "spells") return { spellsOnly: true, ...owner };
+  if (rest === "spells or abilities") return { ...owner };
+  if ((m = /^abilities from (.+) sources$/.exec(rest)) !== null) {
+    const q = quality(m[1]);
+    return q === null ? null : { ...q, abilitiesOnly: true, ...owner };
+  }
+  if ((m = /^(.+) spells or abilities from (.+) sources$/.exec(rest)) !== null) {
+    const q = m[1] === m[2] ? quality(m[1]) : null;
+    return q === null ? null : { ...q, ...owner };
+  }
+  if ((m = /^(.+) spells$/.exec(rest)) !== null) {
+    const q = quality(m[1]);
+    return q === null ? null : { ...q, spellsOnly: true, ...owner };
+  }
+  return null;
+}
+
 /** Whether a parsed static changes types (a layer-4 part), which a granted
  * static may not have (`StaticAbility.grantsStatic`). */
 function hasLayerFourPartOf(st) {
@@ -6316,6 +6391,32 @@ function parseStatic(line, text) {
         text,
       };
     }
+  }
+  // A printed "can't be the target of …" that isn't the keyword
+  // (`hexproofFrom` with its qualifiers — rules 601.2c, 602.2b): "~ can't be
+  // the target of black or red spells your opponents control" (Fiendslayer
+  // Paladin), "… of black spells or abilities from black sources"
+  // (Mercenary Informer, any player's), "Creatures can't be the targets of
+  // spells" (Dense Foliage), "… of abilities from artifact sources".
+  m = /^(~|Enchanted creature|Equipped creature|Creatures you control|Creatures) can't be the targets? of (.+?)\.$/.exec(line);
+  if (m !== null) {
+    const hexproof = untargetablePhrase(m[2]);
+    if (hexproof !== null) {
+      const affects =
+        m[1] === "~"
+          ? { scope: "self" }
+          : m[1] === "Creatures you control"
+            ? { scope: "creatures-you-control" }
+            : m[1] === "Creatures"
+              ? { scope: "all-creatures" }
+              : { scope: "attached" };
+      return { affects, hexproofFrom: hexproof, text };
+    }
+  }
+  // "Cards in graveyards can't be the targets of spells or abilities"
+  // (Ground Seal, Silent Gravestone — `graveyardCardsUntargetable`).
+  if (line === "Cards in graveyards can't be the targets of spells or abilities.") {
+    return { affects: { scope: "self" }, graveyardCardsUntargetable: {}, text };
   }
   // The Runes: "As long as enchanted permanent is a creature, it gets +1/+1
   // and has trample" / "… is an Equipment, it has 'Equipped creature gets

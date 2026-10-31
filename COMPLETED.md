@@ -86,6 +86,25 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2: prevention divided among targets, and the next N damage to you**
+  (2026-10-31; `effect:prevention-divided`, `effect:prevent-next-n-damage-to-you`) — the
+  `prevent-damage-divided` effect (601.2d, 615.7); the second was already `damage-rule`'s
+  `players: "you"` with an amount, only marked; 11 freed (5 authored here). Remedy, Embolden,
+  Conservator, Shield of the Ages, Decorated Griffin.
+- **Need-keys Phase 2: a restriction over a target player's creatures, or the ones there now**
+  (2026-10-31; `effect:cant-be-blocked-rule-this-turn`, `effect:restrict-controlled-by-target`,
+  `effect:restrict-each-matching-at-resolution`, `effect:restrict-rule-for-player`) — `restrict`'s
+  `controlledByTarget`, `exceptTarget` and `asItResolves` (611.2c); 12 freed (6 authored here).
+  Concussive Bolt, Mark for Death, Joraga Invocation, Suicidal Charge, Leitmotif Composer, Veiling
+  Oddity.
+- **Need-keys Phase 2: "can't be the target of …" statics** (2026-10-31;
+  `static:cant-be-targeted-by-filter`, `keyword:hexproof-from-multicolored`,
+  `static:hexproof-from-spells-only`, `static:untargetable-by-color-any-player`) — `hexproofFrom`'s
+  `spellsOnly`, `abilitiesOnly` and `anyController` qualifiers and a quality-less instance ("can't be
+  the targets of spells"), judged alone (`Characteristics.hexproofFrom.qualified`), and the
+  `graveyardCardsUntargetable` static ("cards in graveyards can't be the targets of spells or
+  abilities"); 12 freed. Fiendslayer Paladin, Mercenary Informer, Dense Foliage, Ground Seal,
+  Silent Gravestone.
 - **Need-keys Phase 2: attack requirements narrowed** (2026-10-31;
   `effect:must-attack-specific-player`, `effect:target-attacks-target-player-this-turn`,
   `effect:must-attack-target-players-creatures`, `effect:must-attack-controllers-next-combat`,

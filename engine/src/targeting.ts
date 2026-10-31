@@ -64,6 +64,10 @@ export interface TargetSource {
    * what a filter's `controlledBy: "chooser"` ("of an opponent's choice
    * **they control**") reads. */
   readonly chooser?: PlayerId;
+  /** The targeting is a **spell**'s (a card or copy being cast or on the
+   * stack — `cardSource`), not an ability's: what a printed "can't be the
+   * target of … spells" or "… of abilities" asks (`hexproofFromBlocks`). */
+  readonly spell?: true;
 }
 
 /** What a target filter is matched with on behalf of `source` — the
@@ -161,7 +165,14 @@ export function protectionBlocks(
 
 /** Hexproof from a quality (rule 702.11d-e): `target` has hexproof from
  * something `source` is, and `source` is controlled by an opponent of its
- * controller (`forPlayer`, the one targeting). Matched as protection is. */
+ * controller (`forPlayer`, the one targeting). Matched as protection is.
+ *
+ * Also each printed "can't be the target of …" that isn't the keyword
+ * (`hexproofFrom.qualified` — rules 601.2c, 602.2b: no illegal target may be
+ * chosen), judged alone: one of `spellsOnly` / `abilitiesOnly` stops only a
+ * spell's targeting (`source.spell`) or only an ability's, one with
+ * `anyController` stops its own controller too, and one naming no quality
+ * stops every spell or ability it covers. */
 export function hexproofFromBlocks(
   state: GameState,
   registry: CardRegistry,
@@ -170,8 +181,50 @@ export function hexproofFromBlocks(
   forPlayer: PlayerId,
 ): boolean {
   const object = state.objects[target];
-  if (object === undefined || object.zone !== "battlefield" || object.controller === forPlayer) return false;
-  return qualityMatches(state, registry, object.controller, computeCharacteristics(state, registry, target).hexproofFrom, source);
+  if (object === undefined || object.zone !== "battlefield") return false;
+  const hexproof = computeCharacteristics(state, registry, target).hexproofFrom;
+  if (object.controller !== forPlayer && qualityMatches(state, registry, object.controller, hexproof, source)) return true;
+  for (const q of hexproof.qualified) {
+    if (q.anyController !== true && object.controller === forPlayer) continue;
+    if (q.spellsOnly === true && source.spell !== true) continue;
+    if (q.abilitiesOnly === true && source.spell === true) continue;
+    const colors = new Set(q.colors ?? []);
+    const types = new Set(q.types ?? []);
+    const filters = q.filter === undefined ? [] : [q.filter];
+    if (colors.size === 0 && types.size === 0 && filters.length === 0) return true;
+    if (qualityMatches(state, registry, object.controller, { colors, types, filters }, source)) return true;
+  }
+  return false;
+}
+
+/** Whether a card in a graveyard can't be targeted by `forPlayer`'s spell or
+ * ability: a permanent on the battlefield has a `graveyardCardsUntargetable`
+ * static ("cards in graveyards can't be the targets of spells or abilities"
+ * — Ground Seal; rules 115.2, 601.2c) that covers it — its `filter` matched
+ * against the card, `byOpponents` only against its controller's opponents
+ * ("…your opponents control" — Tomik). */
+export function graveyardCardShielded(
+  state: GameState,
+  registry: CardRegistry,
+  card: ObjectId,
+  forPlayer: PlayerId,
+): boolean {
+  const object = state.objects[card];
+  if (object === undefined || object.zone !== "graveyard") return false;
+  for (const id of state.zones.shared.battlefield) {
+    const holder = state.objects[id];
+    if (holder === undefined) continue;
+    const own = hasLostAbilities(state, registry, holder) ? [] : registry.get(rulesTextName(holder)).static;
+    for (const ability of [...own, ...grantedStatics(state, registry, holder)]) {
+      const rule = ability.graveyardCardsUntargetable;
+      if (rule === undefined) continue;
+      if (rule.byOpponents === true && holder.controller === forPlayer) continue;
+      if (ability.condition !== undefined && !staticConditionMet(state, registry, holder, ability.condition)) continue;
+      if (rule.filter !== undefined && !matchesFilter(state, registry, card, rule.filter, { you: holder.controller, source: holder.id })) continue;
+      return true;
+    }
+  }
+  return false;
 }
 
 /** Does `player`'s protection from a quality (a `playerProtection` static of
@@ -403,6 +456,7 @@ function isLegalTargetUncached(
     if (source !== undefined && hexproofFromBlocks(state, registry, ref.object, source, forPlayer)) {
       return false;
     }
+    if (graveyardCardShielded(state, registry, ref.object, forPlayer)) return false;
   } else if (
     // A player with hexproof (Lazotep Plating's "you … gain hexproof",
     // Shalai's "you … have hexproof") can't be the target of spells or
@@ -923,6 +977,7 @@ export function cardSource(def: CardDefinition, object?: ObjectId): TargetSource
     // about the spell itself, and printed colours alone can't answer it once
     // something has changed them.
     ...(object !== undefined ? { object } : {}),
+    spell: true,
   };
 }
 

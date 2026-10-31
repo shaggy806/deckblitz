@@ -303,6 +303,7 @@ import _poolGrimStrider from "../pool/grim-strider.js";
 import _poolGrindingStation from "../pool/grinding-station.js";
 import _poolGrinningIgnus from "../pool/grinning-ignus.js";
 import _poolGrizzlyBears from "../pool/grizzly-bears.js";
+import _poolGroundSeal from "../pool/ground-seal.js";
 import _poolGryffRider from "../pool/gryff-rider.js";
 import _poolGuardianOfCloverdell from "../pool/guardian-of-cloverdell.js";
 import _poolGylwainCastingDirector from "../pool/gylwain-casting-director.js";
@@ -364,6 +365,7 @@ import _poolJeeringInstigator from "../pool/jeering-instigator.js";
 import _poolJeskaiCharm from "../pool/jeskai-charm.js";
 import _poolJetmirsGarden from "../pool/jetmirs-garden.js";
 import _poolJoragaAuxiliary from "../pool/joraga-auxiliary.js";
+import _poolJoragaInvocation from "../pool/joraga-invocation.js";
 import _poolJubilantMascot from "../pool/jubilant-mascot.js";
 import _poolJwariRuins from "../pool/jwari-ruins.js";
 import _poolKabiraPlateau from "../pool/kabira-plateau.js";
@@ -1191,6 +1193,7 @@ const shard: CardShard = {
     _poolGrindingStation,
     _poolGrinningIgnus,
     _poolGrizzlyBears,
+    _poolGroundSeal,
     _poolGryffRider,
     _poolGuardianOfCloverdell,
     _poolGylwainCastingDirector,
@@ -1252,6 +1255,7 @@ const shard: CardShard = {
     _poolJeskaiCharm,
     _poolJetmirsGarden,
     _poolJoragaAuxiliary,
+    _poolJoragaInvocation,
     _poolJubilantMascot,
     _poolJwariRuins,
     _poolKabiraPlateau,

@@ -4839,6 +4839,95 @@ describe("a library search's finds going card by card (search-library's instead)
   });
 });
 
+describe("can't be the target of … (hexproofFrom's qualifiers, graveyardCardsUntargetable)", () => {
+  const face = (name: string, type_line: string, oracle_text: string) =>
+    parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });
+
+  it("reads spells only, any player's, abilities only and no quality", () => {
+    const paladin = face(
+      "Fiendslayer Paladin",
+      "Creature — Human Knight",
+      "First strike\nLifelink\nThis creature can't be the target of black or red spells your opponents control.",
+    );
+    expect(paladin.static[0]).toMatchObject({ affects: { scope: "self" }, hexproofFrom: { colors: ["B", "R"], spellsOnly: true } });
+    const informer = face(
+      "Suq'Ata Firewalker",
+      "Creature — Human Wizard",
+      "This creature can't be the target of red spells or abilities from red sources.",
+    );
+    expect(informer.static[0].hexproofFrom).toEqual({ colors: ["R"], anyController: true });
+    const ward = face("Ward A", "Enchantment — Aura", "Enchant creature\nEnchanted creature can't be the target of abilities from artifact sources.").static[0];
+    expect(ward.hexproofFrom).toEqual({ types: ["artifact"], abilitiesOnly: true, anyController: true });
+    expect(face("Dense Foliage", "Enchantment", "Creatures can't be the targets of spells.").static[0]).toMatchObject({
+      affects: { scope: "all-creatures" },
+      hexproofFrom: { spellsOnly: true, anyController: true },
+    });
+    expect(face("Tetsuo B", "Creature — Human", "This creature can't be the target of Aura spells.").static[0].hexproofFrom).toEqual({
+      filter: { subtype: "Aura" },
+      spellsOnly: true,
+      anyController: true,
+    });
+    expect(face("Plax C", "Enchantment — Aura", "Enchant creature\nEnchanted creature can't be the target of spells or abilities your opponents control.").static[0].hexproofFrom).toEqual({});
+  });
+
+  it("reads the graveyard rule", () => {
+    expect(face("Ground Seal", "Enchantment", "Cards in graveyards can't be the targets of spells or abilities.").static[0]).toMatchObject({
+      graveyardCardsUntargetable: {},
+    });
+  });
+});
+
+describe("restrict over a set of creatures this turn (controlledByTarget, rule 611.2c)", () => {
+  it("reads a target player's creatures, a side's, and every creature", () => {
+    const targets: unknown[] = [];
+    const oriss = parseEffect("Creatures target player controls can't attack this turn.", { targets });
+    expect(oriss.effect).toEqual({
+      kind: "restrict",
+      filter: { type: "creature", controlledBy: "you" },
+      controlledByTarget: 0,
+      restrictions: ["cant-attack"],
+    });
+    expect(targets).toHaveLength(1);
+    expect(parseEffect("Creatures your opponents control can't block this turn.", { targets: [] }).effect).toEqual({
+      kind: "restrict",
+      filter: { type: "creature", controlledBy: "opponent" },
+      restrictions: ["cant-block"],
+    });
+    expect(parseEffect("Creatures can't be blocked this turn.", { targets: [] }).effect).toEqual({
+      kind: "restrict",
+      filter: { type: "creature" },
+      restrictions: ["cant-be-blocked"],
+    });
+  });
+});
+
+describe("prevention shields: to you, and divided among any number of targets (rules 601.2d, 615.7)", () => {
+  const face = (name: string, type_line: string, oracle_text: string) =>
+    parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });
+
+  it("reads the next N (combat) damage to you as a damage-rule with an amount", () => {
+    const conservator = face("Conservator", "Artifact", "{3}, {T}: Prevent the next 2 damage that would be dealt to you this turn.");
+    expect(conservator.activated[0].effect).toEqual({ kind: "damage-rule", to: { players: "you" }, amount: 2 });
+    const griffin = face(
+      "Decorated Griffin",
+      "Creature — Griffin",
+      "Flying\n{1}{W}: Prevent the next 1 combat damage that would be dealt to you this turn.",
+    );
+    expect(griffin.activated[0].effect).toEqual({ kind: "damage-rule", to: { players: "you" }, amount: 1, combat: true });
+  });
+
+  it("reads a divided prevention as shields over an any-number group", () => {
+    const remedy = face(
+      "Remedy",
+      "Instant",
+      "Prevent the next 5 damage that would be dealt this turn to any number of targets, divided as you choose.",
+    );
+    expect(remedy.complete).toBe(true);
+    expect(remedy.targets).toEqual([{ kind: "any-number", of: "any-target", max: 5 }]);
+    expect(remedy.divided).toEqual({ total: 5, slot: 0, of: "damage to prevent" });
+    expect(remedy.effect).toEqual({ kind: "prevent-damage-divided", from: 0 });
+  });
+});
 describe("attach hosts (attachedTo among / a player / put-this-way, ontoChosen, attachOnlyTo)", () => {
   const face = (name: string, type_line: string, oracle_text: string) =>
     parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });

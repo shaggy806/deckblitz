@@ -17,6 +17,17 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   duration ending with your next turn's end and the damaged player as `attacks`. Key:
   static:must-attack-specific-player (The Brothers' War, under it too, is two `attack-requirement`
   effects already).
+- **A targeting restriction can't last a turn, or require a target.** A printed "can't be the
+  target of …" is a static (`hexproofFrom`'s qualifiers, `graveyardCardsUntargetable` —
+  `targeting.ts`'s `hexproofFromBlocks`, `graveyardCardShielded`). Display of Dominance's mode
+  "permanents you control can't be the targets of blue or black spells your opponents control this
+  turn" is a one-shot rule for the turn over whatever you control then (rule 611.2c — it changes no
+  characteristic), so it needs a turn-long restriction like `restrict`'s `filter` form read by
+  `hexproofFromBlocks`. Lurker's "unless it attacked or blocked this turn" needs a per-turn
+  attacked-or-blocked condition. The Flagbearers (Standard Bearer, Coalition Honor Guard,
+  Coalition Flag) are the reverse: "while an opponent is choosing targets … must choose at least
+  one Flagbearer on the battlefield if able" is a requirement on the choice (601.2c), checked over
+  a whole target set, which `invalidTargetReason` has no hook for.
 - **"Creatures it blocked this turn" has no record.** `CardFilter.blockingRelation`
   (`filter.ts`, `inBlockingRelation`) reads the blocks as they stand — `blockedAttackersOf`, or a
   partner's `lastKnown.blockedAttackers` once it has left — which is exact for "creatures blocked

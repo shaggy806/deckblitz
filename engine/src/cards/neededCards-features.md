@@ -321,6 +321,69 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Prevention divided among targets, and the next N damage to you — built 2026-10-31
+
+The need-keys Phase 2 family `effect:prevent-next-n-damage-to-you` with
+`effect:prevention-divided`, features only. New effect
+**`prevent-damage-divided { from, combatOnly? }`**: "prevent the next N damage
+that would be dealt this turn to any number of targets, divided as you choose"
+— the division announced as it's cast or activated, at least 1 each (601.2d),
+each share a `prevent-damage` shield on its target (615.7), a target gone
+illegal getting none (608.2b); the client's division prompt reads "damage to
+prevent". "Prevent the next N damage that would be dealt to you this turn" was
+already B250's `damage-rule` with `to: { players: "you" }` and an amount
+(Festival of the Guildpact), only marked. The scaffolder reads both, and
+"… combat damage …" as `combat: true`. Keys: effect:prevent-next-n-damage-to-you,
+effect:prevention-divided. Proving cards: Remedy, Embolden, Conservator,
+Shield of the Ages, Decorated Griffin.
+
+### A restriction over a target player's creatures, or the ones there now — built 2026-10-31
+
+The need-keys Phase 2 family `static:combat-restriction-extensions`, its top
+group, features only. `restrict`'s `filter` form (a turn-wide rule, rule
+611.2c) takes **`controlledByTarget`** (read from the side of the player in a
+target slot, or the controller of the permanent there — "creatures target
+player controls can't attack this turn", "… controlled by that player or by
+that planeswalker's controller") and **`exceptTarget`** ("other creatures that
+player controls", the rule's `except` held by stint, 400.7 —
+`turnRuleCovers`), and **`asItResolves`**: the restrictions as modifiers on
+what matches now, where the same sentence's bonus fixes the set ("each creature
+you control gets +3/+3 … and must be blocked this turn if able"). "Can't be
+blocked this turn" as a rule over a name or every creature was already
+`restrictions: ["cant-be-blocked"]`, only marked. The scaffolder reads
+"creatures target player controls / you control / your opponents control /
+[every creature] can't attack / block / be blocked this turn". Keys:
+effect:cant-be-blocked-rule-this-turn, effect:restrict-controlled-by-target,
+effect:restrict-each-matching-at-resolution, effect:restrict-rule-for-player.
+Proving cards: Concussive Bolt, Mark for Death, Joraga Invocation, Suicidal
+Charge, Leitmotif Composer, Veiling Oddity.
+
+### "Can't be the target of …" statics — built 2026-10-31
+
+The need-keys Phase 2 family `keyword:hexproof-from-colors`, its one group,
+features only. The printed restrictions that aren't the keyword (rules 601.2c,
+602.2b) are `hexproofFrom` with qualifiers: **`spellsOnly`** ("… of black or red
+spells your opponents control"), **`abilitiesOnly`** ("… of abilities from
+artifact sources"), **`anyController`** (no "your opponents control": its own
+controller's too), and no colour, type or filter for every spell or ability
+("can't be the targets of spells"). A qualified instance is kept apart from the
+keyword's union (`Characteristics.hexproofFrom.qualified`) and judged alone in
+`hexproofFromBlocks`, which tells a spell's targeting from an ability's by
+`TargetSource.spell` (set by `cardSource`). New static
+**`graveyardCardsUntargetable: { filter?, byOpponents? }`** — "cards in
+graveyards can't be the targets of spells or abilities" — read by
+`isLegalTarget` (`graveyardCardShielded`). "Hexproof from multicolored" was
+already `hexproofFrom: { filter: { multicolored: true } }`. The scaffolder reads
+"~ / Enchanted creature / Creatures [you control] can't be the target(s) of …"
+and the graveyard line. Keys: static:cant-be-targeted-by-filter,
+keyword:hexproof-from-multicolored, static:hexproof-from-spells-only,
+static:untargetable-by-color-any-player. Proving cards: Fiendslayer Paladin,
+Mercenary Informer, Dense Foliage, Ground Seal, Silent Gravestone. Still open:
+a one-shot "… can't be the targets of blue or black spells your opponents
+control this turn" over permanents you control (Display of Dominance — a
+turn-wide rule, not a characteristic), "unless it attacked or blocked this
+turn" (Lurker), the Flagbearers' targeting requirement.
+
 ### Combat damage as though unblocked — built 2026-10-30
 
 The need-keys Phase 2 family `static:assign-damage-as-though-unblocked`,
