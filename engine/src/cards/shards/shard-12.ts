@@ -153,6 +153,7 @@ import _poolCrownOfEmpires from "../pool/crown-of-empires.js";
 import _poolCruelBargain from "../pool/cruel-bargain.js";
 import _poolCrystalSeer from "../pool/crystal-seer.js";
 import _poolCrystalSlipper from "../pool/crystal-slipper.js";
+import _poolCrystalSpray from "../pool/crystal-spray.js";
 import _poolCunningEvasion from "../pool/cunning-evasion.js";
 import _poolCutOfTheProfits from "../pool/cut-of-the-profits.js";
 import _poolCutthroatManeuver from "../pool/cutthroat-maneuver.js";
@@ -1001,6 +1002,7 @@ const shard: CardShard = {
     _poolCruelBargain,
     _poolCrystalSeer,
     _poolCrystalSlipper,
+    _poolCrystalSpray,
     _poolCunningEvasion,
     _poolCutOfTheProfits,
     _poolCutthroatManeuver,

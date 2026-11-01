@@ -790,6 +790,7 @@ import _poolUktabiEfreet from "../pool/uktabi-efreet.js";
 import _poolUktabiOrangutan from "../pool/uktabi-orangutan.js";
 import _poolUlashtTheHateSeed from "../pool/ulasht-the-hate-seed.js";
 import _poolUltimeciaTemporalThreat from "../pool/ultimecia-temporal-threat.js";
+import _poolUnctusGrandMetatect from "../pool/unctus-grand-metatect.js";
 import _poolUndercityEliminator from "../pool/undercity-eliminator.js";
 import _poolUnderworldConnections from "../pool/underworld-connections.js";
 import _poolUnforgivingAim from "../pool/unforgiving-aim.js";
@@ -1667,6 +1668,7 @@ const shard: CardShard = {
     _poolUktabiOrangutan,
     _poolUlashtTheHateSeed,
     _poolUltimeciaTemporalThreat,
+    _poolUnctusGrandMetatect,
     _poolUndercityEliminator,
     _poolUnderworldConnections,
     _poolUnforgivingAim,

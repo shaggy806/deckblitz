@@ -678,6 +678,7 @@ import _poolSkyshroudArcher from "../pool/skyshroud-archer.js";
 import _poolSkywinderDrake from "../pool/skywinder-drake.js";
 import _poolSlashTheRanks from "../pool/slash-the-ranks.js";
 import _poolSlaughterPact from "../pool/slaughter-pact.js";
+import _poolSleightOfMind from "../pool/sleight-of-mind.js";
 import _poolSmellFear from "../pool/smell-fear.js";
 import _poolSmellerbeeRebelFighter from "../pool/smellerbee-rebel-fighter.js";
 import _poolSmeltWardMinotaur from "../pool/smelt-ward-minotaur.js";
@@ -1558,6 +1559,7 @@ const shard: CardShard = {
     _poolSkywinderDrake,
     _poolSlashTheRanks,
     _poolSlaughterPact,
+    _poolSleightOfMind,
     _poolSmellFear,
     _poolSmellerbeeRebelFighter,
     _poolSmeltWardMinotaur,

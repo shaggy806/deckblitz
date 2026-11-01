@@ -4882,6 +4882,7 @@ import _poolCrystalSeer from "./pool/crystal-seer.js";
 import _poolCrystalShard from "./pool/crystal-shard.js";
 import _poolCrystalSkullIsuSpyglass from "./pool/crystal-skull-isu-spyglass.js";
 import _poolCrystalSlipper from "./pool/crystal-slipper.js";
+import _poolCrystalSpray from "./pool/crystal-spray.js";
 import _poolCrystalVein from "./pool/crystal-vein.js";
 import _poolCrystallineCrawler from "./pool/crystalline-crawler.js";
 import _poolCrystallineGiant from "./pool/crystalline-giant.js";
@@ -9085,6 +9086,7 @@ import _poolGhoulcallersAccomplice from "./pool/ghoulcallers-accomplice.js";
 import _poolGhoulcallersBell from "./pool/ghoulcallers-bell.js";
 import _poolGhoulcallersChant from "./pool/ghoulcallers-chant.js";
 import _poolGhoulcallersHarvest from "./pool/ghoulcallers-harvest.js";
+import _poolGhoulflesh from "./pool/ghoulflesh.js";
 import _poolGhoulishProcession from "./pool/ghoulish-procession.js";
 import _poolGhoulraiser from "./pool/ghoulraiser.js";
 import _poolGhoulsFeast from "./pool/ghouls-feast.js";
@@ -11432,6 +11434,7 @@ import _poolIndependentTroops from "./pool/independent-troops.js";
 import _poolIndestructibility from "./pool/indestructibility.js";
 import _poolIndestructibleAura from "./pool/indestructible-aura.js";
 import _poolIndex from "./pool/index.js";
+import _poolIndigoFaerie from "./pool/indigo-faerie.js";
 import _poolIndoctrinationAttendant from "./pool/indoctrination-attendant.js";
 import _poolIndomitableAncients from "./pool/indomitable-ancients.js";
 import _poolIndomitableArchangel from "./pool/indomitable-archangel.js";
@@ -13763,6 +13766,7 @@ import _poolMaggotTherapy from "./pool/maggot-therapy.js";
 import _poolMagicDamper from "./pool/magic-damper.js";
 import _poolMagicMissile from "./pool/magic-missile.js";
 import _poolMagicPot from "./pool/magic-pot.js";
+import _poolMagicalHack from "./pool/magical-hack.js";
 import _poolMagickedCard from "./pool/magicked-card.js";
 import _poolMagistratesScepter from "./pool/magistrates-scepter.js";
 import _poolMagistratesVeto from "./pool/magistrates-veto.js";
@@ -14490,6 +14494,7 @@ import _poolMinamoScrollkeeper from "./pool/minamo-scrollkeeper.js";
 import _poolMinamoSightbender from "./pool/minamo-sightbender.js";
 import _poolMinasMorgulDarkFortress from "./pool/minas-morgul-dark-fortress.js";
 import _poolMinasTirithGarrison from "./pool/minas-tirith-garrison.js";
+import _poolMindBend from "./pool/mind-bend.js";
 import _poolMindBurst from "./pool/mind-burst.js";
 import _poolMindCarver from "./pool/mind-carver.js";
 import _poolMindControl from "./pool/mind-control.js";
@@ -16721,6 +16726,7 @@ import _poolPhantasmalBear from "./pool/phantasmal-bear.js";
 import _poolPhantasmalDragon from "./pool/phantasmal-dragon.js";
 import _poolPhantasmalDreadmaw from "./pool/phantasmal-dreadmaw.js";
 import _poolPhantasmalForces from "./pool/phantasmal-forces.js";
+import _poolPhantasmalForm from "./pool/phantasmal-form.js";
 import _poolPhantasmalImage from "./pool/phantasmal-image.js";
 import _poolPhantasmalMount from "./pool/phantasmal-mount.js";
 import _poolPhantasmalShieldback from "./pool/phantasmal-shieldback.js";
@@ -21056,6 +21062,7 @@ import _poolSleepersGuile from "./pool/sleepers-guile.js";
 import _poolSleepersRobe from "./pool/sleepers-robe.js";
 import _poolSleepingPotion from "./pool/sleeping-potion.js";
 import _poolSleightOfHand from "./pool/sleight-of-hand.js";
+import _poolSleightOfMind from "./pool/sleight-of-mind.js";
 import _poolSliceAndDice from "./pool/slice-and-dice.js";
 import _poolSliceFromTheShadows from "./pool/slice-from-the-shadows.js";
 import _poolSliceInTwain from "./pool/slice-in-twain.js";
@@ -24768,6 +24775,7 @@ import _poolUncontrolledInfestation from "./pool/uncontrolled-infestation.js";
 import _poolUnconventionalTactics from "./pool/unconventional-tactics.js";
 import _poolUncoverTheMoonLetters from "./pool/uncover-the-moon-letters.js";
 import _poolUncoveredClues from "./pool/uncovered-clues.js";
+import _poolUnctusGrandMetatect from "./pool/unctus-grand-metatect.js";
 import _poolUnctussRetrofitter from "./pool/unctuss-retrofitter.js";
 import _poolUndeadAugur from "./pool/undead-augur.js";
 import _poolUndeadButler from "./pool/undead-butler.js";
@@ -32570,6 +32578,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCrystalShard,
   _poolCrystalSkullIsuSpyglass,
   _poolCrystalSlipper,
+  _poolCrystalSpray,
   _poolCrystalVein,
   _poolCrystallineCrawler,
   _poolCrystallineGiant,
@@ -36773,6 +36782,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGhoulcallersBell,
   _poolGhoulcallersChant,
   _poolGhoulcallersHarvest,
+  _poolGhoulflesh,
   _poolGhoulishProcession,
   _poolGhoulraiser,
   _poolGhoulsFeast,
@@ -39120,6 +39130,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolIndestructibility,
   _poolIndestructibleAura,
   _poolIndex,
+  _poolIndigoFaerie,
   _poolIndoctrinationAttendant,
   _poolIndomitableAncients,
   _poolIndomitableArchangel,
@@ -41451,6 +41462,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMagicDamper,
   _poolMagicMissile,
   _poolMagicPot,
+  _poolMagicalHack,
   _poolMagickedCard,
   _poolMagistratesScepter,
   _poolMagistratesVeto,
@@ -42178,6 +42190,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMinamoSightbender,
   _poolMinasMorgulDarkFortress,
   _poolMinasTirithGarrison,
+  _poolMindBend,
   _poolMindBurst,
   _poolMindCarver,
   _poolMindControl,
@@ -44409,6 +44422,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPhantasmalDragon,
   _poolPhantasmalDreadmaw,
   _poolPhantasmalForces,
+  _poolPhantasmalForm,
   _poolPhantasmalImage,
   _poolPhantasmalMount,
   _poolPhantasmalShieldback,
@@ -48744,6 +48758,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSleepersRobe,
   _poolSleepingPotion,
   _poolSleightOfHand,
+  _poolSleightOfMind,
   _poolSliceAndDice,
   _poolSliceFromTheShadows,
   _poolSliceInTwain,
@@ -52456,6 +52471,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolUnconventionalTactics,
   _poolUncoverTheMoonLetters,
   _poolUncoveredClues,
+  _poolUnctusGrandMetatect,
   _poolUnctussRetrofitter,
   _poolUndeadAugur,
   _poolUndeadButler,
@@ -60271,6 +60287,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/crystal-shard": _poolCrystalShard,
   "pool/crystal-skull-isu-spyglass": _poolCrystalSkullIsuSpyglass,
   "pool/crystal-slipper": _poolCrystalSlipper,
+  "pool/crystal-spray": _poolCrystalSpray,
   "pool/crystal-vein": _poolCrystalVein,
   "pool/crystalline-crawler": _poolCrystallineCrawler,
   "pool/crystalline-giant": _poolCrystallineGiant,
@@ -64474,6 +64491,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/ghoulcallers-bell": _poolGhoulcallersBell,
   "pool/ghoulcallers-chant": _poolGhoulcallersChant,
   "pool/ghoulcallers-harvest": _poolGhoulcallersHarvest,
+  "pool/ghoulflesh": _poolGhoulflesh,
   "pool/ghoulish-procession": _poolGhoulishProcession,
   "pool/ghoulraiser": _poolGhoulraiser,
   "pool/ghouls-feast": _poolGhoulsFeast,
@@ -66821,6 +66839,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/indestructibility": _poolIndestructibility,
   "pool/indestructible-aura": _poolIndestructibleAura,
   "pool/index": _poolIndex,
+  "pool/indigo-faerie": _poolIndigoFaerie,
   "pool/indoctrination-attendant": _poolIndoctrinationAttendant,
   "pool/indomitable-ancients": _poolIndomitableAncients,
   "pool/indomitable-archangel": _poolIndomitableArchangel,
@@ -69152,6 +69171,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/magic-damper": _poolMagicDamper,
   "pool/magic-missile": _poolMagicMissile,
   "pool/magic-pot": _poolMagicPot,
+  "pool/magical-hack": _poolMagicalHack,
   "pool/magicked-card": _poolMagickedCard,
   "pool/magistrates-scepter": _poolMagistratesScepter,
   "pool/magistrates-veto": _poolMagistratesVeto,
@@ -69879,6 +69899,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/minamo-sightbender": _poolMinamoSightbender,
   "pool/minas-morgul-dark-fortress": _poolMinasMorgulDarkFortress,
   "pool/minas-tirith-garrison": _poolMinasTirithGarrison,
+  "pool/mind-bend": _poolMindBend,
   "pool/mind-burst": _poolMindBurst,
   "pool/mind-carver": _poolMindCarver,
   "pool/mind-control": _poolMindControl,
@@ -72110,6 +72131,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/phantasmal-dragon": _poolPhantasmalDragon,
   "pool/phantasmal-dreadmaw": _poolPhantasmalDreadmaw,
   "pool/phantasmal-forces": _poolPhantasmalForces,
+  "pool/phantasmal-form": _poolPhantasmalForm,
   "pool/phantasmal-image": _poolPhantasmalImage,
   "pool/phantasmal-mount": _poolPhantasmalMount,
   "pool/phantasmal-shieldback": _poolPhantasmalShieldback,
@@ -76445,6 +76467,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/sleepers-robe": _poolSleepersRobe,
   "pool/sleeping-potion": _poolSleepingPotion,
   "pool/sleight-of-hand": _poolSleightOfHand,
+  "pool/sleight-of-mind": _poolSleightOfMind,
   "pool/slice-and-dice": _poolSliceAndDice,
   "pool/slice-from-the-shadows": _poolSliceFromTheShadows,
   "pool/slice-in-twain": _poolSliceInTwain,
@@ -80157,6 +80180,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/unconventional-tactics": _poolUnconventionalTactics,
   "pool/uncover-the-moon-letters": _poolUncoverTheMoonLetters,
   "pool/uncovered-clues": _poolUncoveredClues,
+  "pool/unctus-grand-metatect": _poolUnctusGrandMetatect,
   "pool/unctuss-retrofitter": _poolUnctussRetrofitter,
   "pool/undead-augur": _poolUndeadAugur,
   "pool/undead-butler": _poolUndeadButler,

@@ -405,6 +405,7 @@ import _poolLumengridAugur from "../pool/lumengrid-augur.js";
 import _poolLureboundScarecrow from "../pool/lurebound-scarecrow.js";
 import _poolMaestrosGift from "../pool/maestros-gift.js";
 import _poolMaggotCarrier from "../pool/maggot-carrier.js";
+import _poolMagicalHack from "../pool/magical-hack.js";
 import _poolMagusOfTheMind from "../pool/magus-of-the-mind.js";
 import _poolMagusOfTheVineyard from "../pool/magus-of-the-vineyard.js";
 import _poolMajesticAuricorn from "../pool/majestic-auricorn.js";
@@ -1280,6 +1281,7 @@ const shard: CardShard = {
     _poolLureboundScarecrow,
     _poolMaestrosGift,
     _poolMaggotCarrier,
+    _poolMagicalHack,
     _poolMagusOfTheMind,
     _poolMagusOfTheVineyard,
     _poolMajesticAuricorn,

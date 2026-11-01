@@ -436,6 +436,7 @@ import _poolMeteorSword from "../pool/meteor-sword.js";
 import _poolMidnightRecovery from "../pool/midnight-recovery.js";
 import _poolMijaeDjinn from "../pool/mijae-djinn.js";
 import _poolMillennialGargoyle from "../pool/millennial-gargoyle.js";
+import _poolMindBend from "../pool/mind-bend.js";
 import _poolMindFlayer from "../pool/mind-flayer.js";
 import _poolMindRot from "../pool/mind-rot.js";
 import _poolMindcrank from "../pool/mindcrank.js";
@@ -1298,6 +1299,7 @@ const shard: CardShard = {
     _poolMidnightRecovery,
     _poolMijaeDjinn,
     _poolMillennialGargoyle,
+    _poolMindBend,
     _poolMindFlayer,
     _poolMindRot,
     _poolMindcrank,
