@@ -86,6 +86,18 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2: text-changing effects** (2026-10-31, `5931f8328`;
+  `effect:text-change-color-or-land-words`) — the `change-text` effect (rule 612, layer 3): one
+  colour word or basic land type for another, chosen on resolution through `choose-value`'s
+  `"text-word"` on the creature-type menu; `PtModifier.textChange` read by `rulesTextName` and
+  `textNameOf` as a changed definition (`text-change.ts`), in every colour field, land type,
+  landwalk and the type line, a spell's targets re-checked by it, a permanent spell keeping it
+  (400.7a); a pool audit pins where colour words live; 7 freed. Sleight of Mind, Magical Hack, Mind
+  Bend, Crystal Spray.
+- **Need-keys Phase 2: colours in addition** (2026-10-31, `1c534a783`; `effect:add-color-until-eot`,
+  `effect:animate-add-colors`, `static:add-color-to-attached`) — `become-color`'s `inAddition`,
+  `add-types`' and `animate`'s `addColors` (105.3, a fresh timestamp); the static already existed
+  (Deep Freeze); 6 freed. Indigo Faerie, Unctus, Grand Metatect, Phantasmal Form, Ghoulflesh.
 - **Need-keys Phase 2: a graveyard card put there this turn, by where it came from** (2026-10-31,
   `ed1d5f9ef`; `filter:put-into-graveyard-from-battlefield-this-turn`,
   `condition:land-put-into-graveyard-from-battlefield-this-turn`,

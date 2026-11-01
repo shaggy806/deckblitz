@@ -47,6 +47,15 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   other "that card" reference (an impulse permission on an exiled permanent, Hostage Taker's) sees
   the object's own card alone. Fix: a `choose-pile`-style order decision for the first, and read
   `leftWith` wherever an effect follows a permanent into its new zone for the second.
+- **A text change misses a token's colours and a resolving spell's colour change.** The
+  `change-text` effect (`text-change.ts`, 2026-10-31) changes every colour word and basic land type
+  in an object's rules text, but a token created by the changed text ("create a white Soldier"
+  made "blue") keeps its token definition's colours, where the changed words define the token
+  (rules 612.1, and 612.4: a token's characteristics are defined by the ability that made it). Separately, `Game.becomeColor` on a permanent spell (Deathlace on a creature spell) is
+  dropped as the spell resolves, where 400.7a carries a change to a spell onto the permanent; the
+  text change already carries over as a `castRider`, the way to fix it. And no static changes
+  the text of every object (Swirl the Mists), though `cards:needs -- --stale` lists it freed.
+  Reported by the overnight agent that built text changes; not yet reproduced in a test.
 - **A spell's copy keeps none of its cost references.** Rule 707.10: a copy copies "all
   decisions made for it, including … additional or alternative costs", so a copy of Fling deals
   the sacrificed creature's power, and a copy of Volrath the Fallen's or Induce Despair's effect

@@ -348,12 +348,15 @@ section keeps only what to do next.
   cause (`putIntoGraveyardOn`, `putIntoGraveyardThisTurn`, `cards-discarded`'s `cause`,
   `this-discarded`, `firstTimeEachTurn`; 14 freed, 13 proving cards — Ravenous Trap on the stale
   list is wrong in multiplayer: `turn-history`'s `who: "opponent"` sums the opponents, where it
-  needs one opponent's three). **978 freed cards wait for the authoring sweep** (`cards:needs -- --stale`); the user
+  needs one opponent's three), and text-changing effects with colours in addition (`change-text`,
+  `PtModifier.textChange` through `rulesTextName`, `become-color.inAddition`, `addColors`; 13 freed,
+  9 proving cards — on the stale list Swirl the Mists' static, Possessed Goat's once-ever
+  activation and Hunting Wilds' `animate-all` colours are still open).
+  **991 freed cards wait for the authoring sweep** (`cards:needs -- --stale`); the user
   authors them in one sweep once the reasonable keys are built. Cloud sessions are building
   `keyword:hexproof-from-colors`, the combat-restriction second group,
   `effect:prevent-next-n-damage-to-you`, the cascade/sunburst grants to spells,
   `cost:kicker-nonmana-cost` and `cost:alt-cost-discard-cards`. Local agents are building
-  `effect:text-change-color-or-land-words` with `effect:add-subtype`, and
   `effect:cast-and-activate-restrictions` with `condition:ability-activated-count-this-turn`.
   Next unclaimed: `static:grant-to-cards-outside-battlefield` (11), `static:pt-per-amount` (10),
   `static:untap-step-limit` (10), `cost:target-controller-graveyard-reduction` (10).
@@ -425,6 +428,7 @@ One line each; the detail (rule numbers, code sites, the cards each blocks) is i
 **`docs/engine-gaps.md`**, under the same bold title. When a gap closes, delete its detail
 there and move this line to `COMPLETED.md`.
 
+- **A text change misses a token's colours and a resolving spell's colour change**: a token made by changed text keeps its definition's colours (612.1, 612.4); `becomeColor` on a permanent spell is dropped as it resolves (400.7a); no all-objects text-change static (Swirl the Mists) (`docs/engine-gaps.md`).
 - **A spell's copy keeps none of its cost references**: rule 707.10 copies additional-cost decisions, but a copy of Fling, Volrath the Fallen or Induce Despair reads no sacrificed, discarded or revealed card (`docs/engine-gaps.md`).
 - **Buyback always beats an "exile it instead" replacement**: rule 616.1 gives the owner the choice; and no turn-long graveyard-to-exile `player-effect` — Yawgmoth's Will (`docs/engine-gaps.md`).
 - **A static can't require attacking one player**: `attack-requirement` is an effect's rule of the game; Public Enemy's "all creatures attack enchanted creature's controller each combat if able" needs a static form, Galactus a most-life opponent, Silver Surfer "until the end of your next turn".
