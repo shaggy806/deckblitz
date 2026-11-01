@@ -5769,6 +5769,10 @@ export type EffectSpec =
       readonly setSubtypes?: readonly string[];
       /** Set the colours (Turn to Frog: "blue"). */
       readonly setColors?: readonly Color[];
+      /** Colours **in addition to its other colors** (layer 5, rule 105.3 —
+       * Phantasmal Form's "become blue Illusions in addition to their other
+       * colors and types", Halsin's "a green Bear creature … in addition"). */
+      readonly addColors?: readonly Color[];
       /** The permanent loses all of its own abilities (Turn to Frog). */
       readonly loseAbilities?: boolean;
       readonly keywords?: readonly Keyword[];
@@ -5803,6 +5807,10 @@ export type EffectSpec =
        * (205.1a — every creature type goes), applied before `addSubtypes`.
        */
       readonly setSubtypes?: readonly string[];
+      /** Colours in addition to its others (layer 5, rule 105.3) — Unctus,
+       * Grand Metatect's "becomes a blue artifact in addition to its other
+       * colors and types", Possessed Goat's "a black Demon in addition". */
+      readonly addColors?: readonly Color[];
       readonly duration: PtDuration;
     }
   | {
@@ -6679,6 +6687,10 @@ export type EffectSpec =
       readonly target: EffectTargetRef;
       readonly colors: readonly Color[];
       readonly duration: PtDuration;
+      /** "Becomes blue **in addition to its other colors**" (Indigo
+       * Faerie — rule 105.3): `colors` are added to its others instead of
+       * replacing them, in timestamp order with the rest of layer 5. */
+      readonly inAddition?: true;
     }
   | {
       /**
@@ -9433,6 +9445,7 @@ export interface EffectApi {
       readonly addSubtypes: readonly string[];
       readonly setSubtypes?: readonly string[];
       readonly setColors?: readonly Color[];
+      readonly addColors?: readonly Color[];
       readonly loseAbilities?: boolean;
       readonly keywords: readonly Keyword[];
       readonly duration: PtDuration;
@@ -9445,7 +9458,11 @@ export interface EffectApi {
     types: readonly CardType[],
     subtypes: readonly string[],
     duration: PtDuration,
-    set?: { readonly setTypes?: readonly CardType[]; readonly setSubtypes?: readonly string[] },
+    set?: {
+      readonly setTypes?: readonly CardType[];
+      readonly setSubtypes?: readonly string[];
+      readonly addColors?: readonly Color[];
+    },
   ): void;
   /** Every permanent matching `filter` becomes a creature (or just has its
    * base P/T set) — see the `"animate-all"` {@link EffectSpec}. */
@@ -9644,7 +9661,7 @@ export interface EffectApi {
     more?: { readonly then?: EffectSpec; readonly redirectToSource?: "itself" | "controller" },
   ): void;
   /** `target` becomes `colors` — see the `"become-color"` {@link EffectSpec}. */
-  becomeColor(target: TargetRef, colors: readonly Color[], duration: PtDuration): void;
+  becomeColor(target: TargetRef, colors: readonly Color[], duration: PtDuration, inAddition?: boolean): void;
   /** `target`'s text has every `change.from` replaced by `change.to` — see
    * the `"change-text"` {@link EffectSpec}. */
   changeText(target: TargetRef, change: TextChange, duration: PtDuration): void;
@@ -14223,6 +14240,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           addSubtypes: spec.addSubtypes,
           setSubtypes: spec.setSubtypes,
           setColors: spec.setColors,
+          ...(spec.addColors !== undefined ? { addColors: spec.addColors } : {}),
           loseAbilities: spec.loseAbilities,
           keywords: spec.keywords ?? [],
           duration: spec.duration,
@@ -14236,6 +14254,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         ctx.addTypes(target, spec.addTypes ?? [], spec.addSubtypes ?? [], spec.duration, {
           ...(spec.setTypes !== undefined ? { setTypes: spec.setTypes } : {}),
           ...(spec.setSubtypes !== undefined ? { setSubtypes: spec.setSubtypes } : {}),
+          ...(spec.addColors !== undefined ? { addColors: spec.addColors } : {}),
         });
       }
       return;
@@ -14773,7 +14792,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     }
     case "become-color": {
       const target = resolveEffectTarget(spec.target, ctx);
-      if (target !== undefined) ctx.becomeColor(target, spec.colors, spec.duration);
+      if (target !== undefined) ctx.becomeColor(target, spec.colors, spec.duration, spec.inAddition === true);
       return;
     }
     case "change-text": {

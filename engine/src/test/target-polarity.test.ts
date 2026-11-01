@@ -232,8 +232,12 @@ describe("slot polarity", () => {
     // — tapping your own fighter is a minor harm, the fight a minor help.
     // 0.9635 until 2026-10-31 (96.341%): Ransack's and Dimir Machinations'
     // "look at the top cards of target player's library" — your own draws
-    // set up or an opponent's disrupted, the board's call.
-    expect(decided / slots).toBeGreaterThan(0.963);
+    // set up or an opponent's disrupted, the board's call. 0.963 until
+    // 2026-10-31 (96.295%): the text changes' "change the text of target
+    // spell or permanent" (Sleight of Mind, Mind Bend — which side a changed
+    // word helps is the words') and Indigo Faerie's "becomes blue in addition"
+    // — honest either-ways.
+    expect(decided / slots).toBeGreaterThan(0.9625);
   });
 });
 

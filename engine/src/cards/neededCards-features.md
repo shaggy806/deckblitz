@@ -367,6 +367,23 @@ Wreck Hunter, Thrilling Encore, Night Nurse, Healer of Heroes, The Lady of
 Otaria. Left: the family's fought-this-turn, blocked-by-this-source-this-combat
 and lost-life-this-turn keys.
 
+### Colours in addition to an object's own — built 2026-10-31
+
+The need-keys Phase 2 group of `effect:add-subtype` (with
+`effect:animate-add-colors`'s), features only: a colour added "in addition
+to its other colors" (rule 105.3, layer 5, in timestamp order with the rest)
+by `become-color`'s new `inAddition` (Indigo Faerie), `add-types`'s new
+`addColors` (Unctus, Grand Metatect; a fresh timestamp so a later "becomes
+black" overrides it) and `animate`'s (Phantasmal Form). The static form on
+what it's attached to was there already (`StaticAbility.addColors`, Deep
+Freeze) — only marked, and proved on Ghoulflesh. The scaffolder reads
+Indigo Faerie's and Unctus's lines. Keys: effect:add-color-until-eot,
+effect:animate-add-colors, static:add-color-to-attached. Proving cards:
+Indigo Faerie, Unctus, Grand Metatect, Phantasmal Form, Ghoulflesh. Left:
+Possessed Goat's "Activate only once" (not exhaust — no once-ever flag of
+its own); Hunting Wilds needs `animate-all` colours over the lands put this
+way, not an addition.
+
 ### Text-changing effects: one colour word or land type for another — built 2026-10-31
 
 The need-keys Phase 2 family `effect:text-change-color-or-land-words`,

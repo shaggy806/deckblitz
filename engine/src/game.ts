@@ -29378,7 +29378,7 @@ export class Game {
           ...(redirectTo !== undefined ? { redirectTo } : {}),
         });
       },
-      becomeColor: (target, colors, duration) => {
+      becomeColor: (target, colors, duration, inAddition) => {
         if (target.kind !== "object") return;
         const id = this.splitOneFromStack(target.object);
         const object = this.state.objects[id];
@@ -29393,11 +29393,16 @@ export class Game {
           power: 0,
           toughness: 0,
           keywords: [],
-          setColors: [...colors],
+          // "In addition to its other colors" adds (rule 105.3).
+          ...(inAddition === true ? { addColors: [...colors] } : { setColors: [...colors] }),
           ...durationFields(lasting),
         });
         invalidateComputedCache();
-        this.emit({ type: "color-changed", object: id, colors: [...colors] });
+        this.emit({
+          type: "color-changed",
+          object: id,
+          colors: inAddition === true ? [...computeCharacteristics(this.state, this.registry, id).colors] : [...colors],
+        });
       },
       changeText: (target, change, duration) => {
         if (target.kind !== "object") return;
@@ -34122,6 +34127,7 @@ export class Game {
       readonly addSubtypes: readonly string[];
       readonly setSubtypes?: readonly string[];
       readonly setColors?: readonly Color[];
+      readonly addColors?: readonly Color[];
       readonly loseAbilities?: boolean;
       readonly keywords: readonly Keyword[];
       readonly duration: EffectDuration;
@@ -34145,6 +34151,7 @@ export class Game {
       addSubtypes: [...opts.addSubtypes],
       ...(opts.setSubtypes ? { setSubtypes: [...opts.setSubtypes] } : {}),
       ...(opts.setColors ? { setColors: [...opts.setColors] } : {}),
+      ...(opts.addColors ? { addColors: [...opts.addColors] } : {}),
       ...(opts.loseAbilities ? { loseAbilities: true } : {}),
       ...(opts.power !== undefined && opts.toughness !== undefined
         ? { setPt: [opts.power, opts.toughness] as [number, number] }
@@ -34176,10 +34183,15 @@ export class Game {
     types: readonly CardType[],
     subtypes: readonly string[],
     duration: EffectDuration,
-    set: { readonly setTypes?: readonly CardType[]; readonly setSubtypes?: readonly string[] } = {},
+    set: {
+      readonly setTypes?: readonly CardType[];
+      readonly setSubtypes?: readonly string[];
+      readonly addColors?: readonly Color[];
+    } = {},
   ): void {
     const replaces = set.setTypes !== undefined || set.setSubtypes !== undefined;
-    if (target.kind !== "object" || (types.length === 0 && subtypes.length === 0 && !replaces)) return;
+    const colors = set.addColors ?? [];
+    if (target.kind !== "object" || (types.length === 0 && subtypes.length === 0 && !replaces && colors.length === 0)) return;
     const id = this.splitOneFromStack(target.object);
     const object = this.state.objects[id];
     if (object === undefined || object.zone !== "battlefield" || !durationBegins(object, duration)) return;
@@ -34187,12 +34199,15 @@ export class Game {
       // Ordered against type-granting statics (rule 613.7); a replacement
       // ("becomes a Coward", "becomes an enchantment") gets a timestamp of
       // its own, so it outranks every earlier type change.
-      timestamp: replaces ? this.freshTimestamp() : this.state.timestampSeq,
+      // So does a colour added "in addition" (layer 5): after every earlier
+      // colour change, under every later one.
+      timestamp: replaces || colors.length > 0 ? this.freshTimestamp() : this.state.timestampSeq,
       power: 0,
       toughness: 0,
       keywords: [],
       ...(set.setTypes !== undefined ? { setTypes: [...set.setTypes] } : {}),
       ...(set.setSubtypes !== undefined ? { setSubtypes: [...set.setSubtypes] } : {}),
+      ...(colors.length > 0 ? { addColors: [...colors] } : {}),
       addTypes: [...types],
       addSubtypes: [...subtypes],
       ...durationFields(duration),

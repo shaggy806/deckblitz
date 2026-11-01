@@ -3286,6 +3286,35 @@ export function parseSentence(sentence, ctx) {
   if ((m = re(`target spell or permanent becomes (white|blue|black|red|green)(?: \(mana symbols on that permanent remain unchanged\.\))?`).exec(s))) {
     return { kind: "become-color", target: ctx.target({ kind: "spell-or-permanent" }), colors: [COLOR_WORDS[m[1].toLowerCase()]], duration: "permanent" };
   }
+  // Layer 5 "in addition" (rule 105.3 — Indigo Faerie): a colour added to
+  // its others, not replacing them.
+  if ((m = re(`(~|${TARGET}) becomes (white|blue|black|red|green) in addition to its other colors( until end of turn)?`).exec(s))) {
+    const target = m[1] === "~" ? "source" : slot(m[1]);
+    if (target === undefined) return null;
+    return { kind: "become-color", target, colors: [COLOR_WORDS[m[2].toLowerCase()]], inAddition: true, duration: m[3] ? "end-of-turn" : "permanent" };
+  }
+  // A colour and types in addition, nothing else (Unctus, Grand Metatect's
+  // "becomes a blue artifact in addition to its other colors and types"):
+  // `add-types` with `addColors`.
+  if ((m = re(`(until end of turn, )?(~|${TARGET}) becomes (.+?) in addition to its other colors and types( until end of turn)?`).exec(s))) {
+    const add = additionOf(m[3]);
+    const target =
+      add === null || add.addColors === undefined || add.basePt !== undefined || add.keywords !== undefined
+        ? undefined
+        : m[2] === "~"
+          ? "source"
+          : slot(m[2]);
+    if (add !== null && target !== undefined) {
+      return {
+        kind: "add-types",
+        target,
+        ...(add.addTypes !== undefined ? { addTypes: add.addTypes } : {}),
+        ...(add.addSubtypes !== undefined ? { addSubtypes: add.addSubtypes } : {}),
+        addColors: add.addColors,
+        duration: m[1] || m[4] ? "end-of-turn" : "permanent",
+      };
+    }
+  }
   // Layer 3 (rule 612 — Sleight of Mind, Magical Hack, Mind Bend, Crystal
   // Spray): a text change of one word for another, both chosen as it resolves.
   if ((m = re(`change the text of target (spell or permanent|permanent) by replacing all instances of one (color word with another|basic land type with another|color word with another or one basic land type with another)( until end of turn)?(?: \\(.*\\))?`).exec(s))) {

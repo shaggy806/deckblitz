@@ -2358,6 +2358,30 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(spray.complete).toBe(true);
   });
 
+  it("a colour in addition to its others (rule 105.3) — Indigo Faerie, Unctus, Grand Metatect", () => {
+    const faerie = face("{U}: Target permanent becomes blue in addition to its other colors until end of turn.", "Creature — Faerie Wizard");
+    expect(faerie.activated[0].targets).toEqual(["permanent"]);
+    expect(faerie.activated[0].effect).toEqual({
+      kind: "become-color",
+      target: 0,
+      colors: ["U"],
+      inAddition: true,
+      duration: "end-of-turn",
+    });
+    const unctus = face(
+      "{U/P}: Until end of turn, target creature you control becomes a blue artifact in addition to its other colors and types. Activate only as a sorcery.",
+      "Legendary Artifact Creature — Phyrexian Vedalken",
+    );
+    expect(unctus.activated[0].targets).toEqual(["creature-you-control"]);
+    expect(unctus.activated[0].effect).toEqual({
+      kind: "add-types",
+      target: 0,
+      addTypes: ["artifact"],
+      addColors: ["U"],
+      duration: "end-of-turn",
+    });
+  });
+
   it("rampage (rule 702.23): its becomes-blocked trigger, counted as it resolves", () => {
     const berserker = face("Rampage 3 (Whenever this creature becomes blocked, it gets +3/+3 until end of turn for each creature blocking it beyond the first.)", "Creature — Human Berserker");
     expect(berserker.triggered[0].trigger).toEqual({ on: "becomes-blocked", who: "self" });
