@@ -17,8 +17,18 @@
  */
 
 import type { Action, LegalAction } from "../actions.js";
-import { withinAttackTax, withRequiredAttackers } from "../combat/attacking.js";
-import type { AttackOffer } from "../combat/attacking.js";
+import { restrictionsOf } from "../characteristics.js";
+import {
+  attackCompanyViolations,
+  attackingViolations,
+  mostRequirementsObeyed,
+  withinAttackCompany,
+  withinAttackTax,
+  withRequiredAttackers,
+} from "../combat/attacking.js";
+import type { AttackOffer, AttackUnit } from "../combat/attacking.js";
+import { ableInCompany, attackCompanyOf } from "../combat/company.js";
+import type { CombatCompany } from "../combat/company.js";
 import {
   attackRequirementsForbid,
   attackRequirementsReason,
@@ -42,6 +52,24 @@ function attackersOffer(ctx: DecisionReadCtx, player: PlayerId): AttackOffer {
     const legal = defendersForAttacker(ctx.state, ctx.registry, player, id);
     if (legal.length > 0) defendersFor[id] = legal;
   }
+  // Restrictions keyed to the other attackers (rule 508.1c): one with no group
+  // it could attack in isn't eligible at all.
+  const limits: Record<ObjectId, CombatCompany> = {};
+  const tokensOf = (id: ObjectId): number => ctx.state.objects[id]?.stackCount ?? 1;
+  for (const id of Object.keys(defendersFor) as ObjectId[]) {
+    const limit = attackCompanyOf(restrictionsOf(ctx.state, ctx.registry, id));
+    if (limit !== null) limits[id] = limit;
+  }
+  const inCompany = Object.keys(limits).length > 0;
+  if (inCompany) {
+    const units = (Object.keys(defendersFor) as ObjectId[]).map((id) => ({
+      id,
+      tokens: tokensOf(id),
+      ...(limits[id] !== undefined ? { company: limits[id] } : {}),
+    }));
+    const able = ableInCompany(units);
+    for (const { id } of units) if (!able.includes(id)) delete defendersFor[id];
+  }
   const eligible = Object.keys(defendersFor) as ObjectId[];
   const perCreature: Record<PlayerId, number> = {};
   for (const d of defenders) {
@@ -60,6 +88,32 @@ function attackersOffer(ctx: DecisionReadCtx, player: PlayerId): AttackOffer {
     const n = ctx.state.objects[id]?.stackCount;
     if (n !== undefined && n > 1) tokens[id] = n;
   }
+  // Able to attack is being eligible: a legal defender to be sent at — and
+  // a creature that could only attack someone who taxes it
+  // isn't required to: paying a cost to attack is never obligatory (rule
+  // 508.1d).
+  const required = eligible.filter(
+    (id) =>
+      mustAttack(ctx.state, ctx.registry, id) &&
+      (defendersFor[id] ?? []).some((d) => ctx.attackTaxOf(d) === 0),
+  );
+  // Under a restriction keyed to the others, only those in every declaration
+  // obeying the most requirements are simply "must attack" (508.1d): one that
+  // would break a restriction beside the others isn't.
+  const units: AttackUnit[] = inCompany
+    ? eligible.map((id) => ({
+        id,
+        tokens: tokensOf(id),
+        ...(limits[id] !== undefined ? { company: limits[id] } : {}),
+        required: required.includes(id),
+        free: (defendersFor[id] ?? []).some((d) => ctx.attackTaxOf(d) === 0),
+      }))
+    : [];
+  const most = mostRequirementsObeyed(units);
+  const stacks: Record<ObjectId, number> = {};
+  for (const id of [...eligible, ...(Object.keys(limits) as ObjectId[])]) {
+    if (tokensOf(id) > 1) stacks[id] = tokensOf(id);
+  }
   return {
     kind: "declare-attackers",
     // The union across every attacker. NOT the list for any one of them —
@@ -68,15 +122,10 @@ function attackersOffer(ctx: DecisionReadCtx, player: PlayerId): AttackOffer {
     defenders,
     defendersFor,
     eligible,
-    // Able to attack is being eligible: a legal defender to be sent at — and
-    // a creature that could only attack someone who taxes it
-    // isn't required to: paying a cost to attack is never obligatory (rule
-    // 508.1d).
-    mustAttack: eligible.filter(
-      (id) =>
-        mustAttack(ctx.state, ctx.registry, id) &&
-        (defendersFor[id] ?? []).some((d) => ctx.attackTaxOf(d) === 0),
-    ),
+    mustAttack: inCompany
+      ? required.filter((id) => mostRequirementsObeyed(units.filter((u) => u.id !== id)) < most)
+      : required,
+    ...(inCompany ? { company: { limits, tokens: stacks, required } } : {}),
     ...(taxed
       ? {
           attackTax: {
@@ -131,12 +180,34 @@ export const attackers = defineDecision({
         return attackRequirementsReason(ctx.state, ctx.registry, attacker);
       }
     }
+    // A restriction keyed to the other attackers (rules 508.1c, 508.1d) needs
+    // the whole declaration against the whole offer. Not otherwise, as below.
+    const inCompany = ctx.state.zones.shared.battlefield.some(
+      (id) =>
+        ctx.state.objects[id]?.controller === player &&
+        attackCompanyOf(restrictionsOf(ctx.state, ctx.registry, id)) !== null,
+    );
+    if (inCompany) {
+      const offer = attackersOffer(ctx, player);
+      const left = attackingViolations(action.attackers, offer)[0];
+      if (left !== undefined) return `${nameOf(ctx, left.attacker)} must attack if able`;
+      const broken = attackCompanyViolations(action.attackers, offer)[0];
+      if (broken !== undefined) {
+        return broken.kind === "attacks-alone"
+          ? `${nameOf(ctx, broken.attacker)} can only attack alone`
+          : broken.kind === "fewer-requirements"
+            ? `Only ${broken.obeyed} of the ${broken.possible} attackers that must attack if able would`
+            : broken.others === 1
+              ? `${nameOf(ctx, broken.attacker)} can't attack alone`
+              : `${nameOf(ctx, broken.attacker)} can't attack unless at least ${broken.others} other creatures attack`;
+      }
+    }
     // Rule 508.1d: every creature that must attack and can is declared. The
     // offer's `mustAttack` asked only of the ones left out, rather than
     // building the whole offer again (`attackingViolations` is that check
     // against the offer, for the client). A token stack that must attack
     // attacks whole: a count holding some of it back leaves those out.
-    const missing = ctx.state.zones.shared.battlefield.filter(
+    const missing = inCompany ? [] : ctx.state.zones.shared.battlefield.filter(
       (id) =>
         (declared.get(id) ?? 0) < tokensIn(id) &&
         ctx.state.objects[id]?.controller === player &&
@@ -182,6 +253,9 @@ export const attackers = defineDecision({
   autoAnswer: (_awaiting, player, legal): Action | null => {
     const offer = legal.find((o): o is AttackOffer => o.kind === "declare-attackers");
     const required = offer?.mustAttack ?? [];
+    // With a restriction keyed to the others, who goes with a creature that
+    // must attack is the seat's to say.
+    if ((offer?.company?.required.length ?? 0) > 0) return null;
     if (offer === undefined || required.some((id) => (offer.defendersFor[id] ?? []).length !== 1)) {
       return required.length === 0 ? { type: "declare-attackers", player, attackers: [] } : null;
     }
@@ -203,18 +277,22 @@ export const attackers = defineDecision({
     // Fusing the two into one pass would interleave those draws and re-point
     // every seed, which is why this stays two passes. A creature that must
     // attack still draws its flip, and attacks whatever it came up.
-    // Then cut to what its attack tax surely pays (Ghostly Prison) — no
-    // draws, so a game without one replays exactly as before.
-    attackers: withinAttackTax(
-      legal.eligible
-        .filter((attacker) => rng.random() < 0.6 || legal.mustAttack.includes(attacker))
-        .flatMap((attacker) => {
-          // Per-attacker, not the union: a goaded creature may not be
-          // sent at its goader while anyone else is available.
-          const options = legal.defendersFor[attacker] ?? [];
-          if (options.length === 0) return [];
-          return [{ attacker, defender: options[rng.pickIndex(options.length)] }];
-        }),
+    // Then cut to what its attack tax surely pays (Ghostly Prison), then to
+    // what its restrictions on company allow (Mogg Flunkies) — no draws, so
+    // a game without either replays exactly as before.
+    attackers: withinAttackCompany(
+      withinAttackTax(
+        legal.eligible
+          .filter((attacker) => rng.random() < 0.6 || legal.mustAttack.includes(attacker))
+          .flatMap((attacker) => {
+            // Per-attacker, not the union: a goaded creature may not be
+            // sent at its goader while anyone else is available.
+            const options = legal.defendersFor[attacker] ?? [];
+            if (options.length === 0) return [];
+            return [{ attacker, defender: options[rng.pickIndex(options.length)] }];
+          }),
+        legal,
+      ),
       legal,
     ),
   }),

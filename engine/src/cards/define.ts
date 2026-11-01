@@ -456,6 +456,19 @@ export type CombatRestriction =
    * Xantcha's "can't attack its owner or planeswalkers its owner controls"
    * would be a restriction of its own. */
   | "cant-attack-owner"
+  /** "Can't attack alone" (Bonded Construct; with `cant-block-alone`, Mogg
+   * Flunkies's "can't attack or block alone"), and the rest of a restriction
+   * keyed to the other creatures declared with it (rules 508.1c, 509.1b — see
+   * `combat/company.ts`): those of its controller's creatures, whatever they
+   * attack or block (the rulings), one such creature counting for another. */
+  | "cant-attack-alone"
+  | "cant-block-alone"
+  /** "Can only attack alone" (Master of Cruelties, Errantry). */
+  | "can-only-attack-alone"
+  /** "Can't attack unless at least two other creatures attack", "can't block
+   * unless at least two other creatures block" (Orcish Conscripts). */
+  | "cant-attack-unless-two-others"
+  | "cant-block-unless-two-others"
   /** "Doesn't untap during its controller's untap step" (rule 502.3) — on
    * what the static reaches: Tractor Beam's "enchanted permanent", T-45 Power
    * Armor's "equipped creature". Only that untap step: something that untaps

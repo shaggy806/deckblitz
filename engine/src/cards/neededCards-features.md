@@ -321,6 +321,25 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Attacking and blocking alone, or not — built 2026-11-01
+
+The need-keys Phase 2 family `static:can-only-attack-alone` (its group's four
+keys, and `static:cant-attack-alone` riding along), features only, no new
+decision kind. Five `CombatRestriction`s, so an Aura or a `restrict` carries them
+as it does any other; `combat/company.ts` says what each asks of the others
+declared. The offers leave out a creature with no group it could be in, and carry
+`company` / `blockCompany`; `attackCompanyViolations` and
+`blockCompanyViolations` go beside the validators' other set-level checks. With
+company in play, attack requirements are counted as rule 508.1d says (the most
+obeyed, not all), so "another must attack, so this can't" holds, and
+`withinAttackCompany` / `withinBlockCompany` fix a bot's or the fuzzer's
+declaration without a draw. 5 proving cards: Mogg Flunkies, Craven Hulk, Orcish
+Conscripts, Errantry, Bonded Construct. Left open: Okk's and Scarred Puma's "a
+creature with greater power / a black or green creature also attacks" (their own
+keys), the "no more than N creatures can attack" side of
+`static:attack-limit`. The client's Confirm isn't told: an illegal declaration is
+refused with the engine's reason, as a toast.
+
 ### Limits on the untap step — built 2026-11-01
 
 The need-keys Phase 2 family `static:untap-step-limit`, features only, no new

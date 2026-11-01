@@ -4271,6 +4271,19 @@ their declarations to it (`withinAttackTax`), and the client shows the running c
   `{ type: "creature", enchantedBy: "you" }`. Checked in `whyCannotAttack`
   rather than as a `CombatRestriction`, because those are bare strings and
   can't say whose "you" is meant.
+- `restrictions: ["cant-attack-alone"]`, `"cant-block-alone"`,
+  `"can-only-attack-alone"`, `"cant-attack-unless-two-others"`,
+  `"cant-block-unless-two-others"` — a restriction keyed to the other creatures
+  declared with it (rules 508.1c, 509.1b, `combat/company.ts`): "This creature
+  can't attack or block alone" (Mogg Flunkies), "can only attack alone"
+  (Errantry's `affects: { scope: "attached" }`, Master of Cruelties), "unless at
+  least two other creatures attack" (Orcish Conscripts). The others may attack or
+  block anything, a stack's tokens count singly, and one that can't be in any
+  legal group isn't offered at all. The offers' `company` / `blockCompany`,
+  `attackCompanyViolations` / `blockCompanyViolations` in the validators (and
+  the requirements' maximum, 508.1d, 509.1c), `withinAttackCompany` /
+  `withinBlockCompany` for bots and the fuzzer. The scaffolder reads these.
+  `combat-company.test.ts`.
 - `cantAttackUnlessDefender: PlayerTest`, `cantAttackIfDefender: PlayerTest`,
   `cantBlockUnlessAttacker: PlayerTest` (`affects: { scope: "self" }`) — "This
   creature can't attack **unless defending player** controls an Island" (Sea

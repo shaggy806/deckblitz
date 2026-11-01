@@ -521,6 +521,81 @@ export function obeyingLure(
   );
 }
 
+/** `blocker` needs at least `others` other creatures declared blocking
+ * beside it (`combat/company.ts`). The client's Confirm doesn't ask yet: the
+ * engine's refusal says it. */
+export interface BlockCompanyViolation {
+  readonly blocker: ObjectId;
+  readonly others: number;
+}
+
+/**
+ * Every restriction keyed to the other blockers `blocks` breaks (rule 509.1b),
+ * against the offer's `blockCompany`. Creatures, whatever each blocks: a stack
+ * counts each token it sends, and a creature blocking two attackers once.
+ */
+export function blockCompanyViolations(
+  blocks: readonly BlockerDeclaration[],
+  offer: BlockOffer,
+): BlockCompanyViolation[] {
+  const company = offer.blockCompany;
+  if (company === undefined) return [];
+  const copies = new Map(offer.eligible.map((e) => [e.blocker, e.copies ?? 1]));
+  const sent = new Map<ObjectId, number>();
+  for (const b of blocks) {
+    const whole = copies.get(b.blocker) ?? 1;
+    sent.set(b.blocker, Math.min(whole, (sent.get(b.blocker) ?? 0) + (b.count ?? whole)));
+  }
+  let size = 0;
+  for (const n of sent.values()) size += n;
+  const out: BlockCompanyViolation[] = [];
+  for (const blocker of sent.keys()) {
+    const others = company[blocker];
+    if (others !== undefined && size - 1 < others) out.push({ blocker, others });
+  }
+  return out;
+}
+
+/**
+ * `blocks` made legal under the offer's `blockCompany`, for a driver that
+ * doesn't weigh it: a creature short of company stays out, unless a requirement
+ * has it blocking, when it's joined by whoever else can (the rulings: "you must
+ * block with Craven Hulk and at least one other creature"). Unchanged without
+ * one, and deterministic, so it moves no fuzzer seed.
+ */
+export function withinBlockCompany(
+  blocks: readonly BlockerDeclaration[],
+  offer: BlockOffer,
+): BlockerDeclaration[] {
+  if (offer.blockCompany === undefined) return [...blocks];
+  const required = new Set<ObjectId>([
+    ...lurePlan(offer).assignment.keys(),
+    ...ifAblePlan(offer).assignment.keys(),
+    ...(offer.blockRequirements ?? []).map((r) => r.blocker),
+  ]);
+  let out = [...blocks];
+  // Each pass settles one breach; requirements, menace and company can each
+  // undo the last's, so it's bounded rather than run until stable.
+  for (let pass = 0; pass <= offer.eligible.length * 2 + 2; pass += 1) {
+    const broken = blockCompanyViolations(out, offer);
+    if (broken.length === 0) {
+      if (blockingViolations(out, offer).length === 0) return out;
+      out = obeyingLure(out, offer);
+      continue;
+    }
+    if (broken.some((v) => required.has(v.blocker))) {
+      const spare = offer.eligible.find((e) => !out.some((b) => b.blocker === e.blocker));
+      if (spare !== undefined) {
+        const attacker = spare.canBlock.find((a) => !offer.menaceAttackers.includes(a)) ?? spare.canBlock[0];
+        out.push({ blocker: spare.blocker, attacker });
+        continue;
+      }
+    }
+    out = out.filter((b) => !broken.some((v) => v.blocker === b.blocker));
+  }
+  return [];
+}
+
 /**
  * `blocks` with at most one creature on each attacker that "can't be blocked
  * by more than one creature" (`offer.singleBlockerAttackers`): the first

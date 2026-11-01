@@ -8554,6 +8554,23 @@ function parseStatic(line, text) {
     return { affects: { scope: "self" }, [m[1] === "attack" ? "cantAttackUnlessDefender" : "cantBlockUnlessAttacker"]: test, text };
   }
   if (line === "~ can't attack or block.") return { affects: { scope: "self" }, restrictions: ["cant-attack", "cant-block"], text };
+  // Restrictions keyed to the other creatures in combat (rules 508.1c, 509.1b):
+  // "~ can't attack or block alone", "enchanted creature gets +3/+0 and can
+  // only attack alone".
+  if ((m = /^(~|Enchanted creature|Equipped creature)(?: gets ([+-]\d+)\/([+-]\d+) and)? (can.+)\.$/.exec(line))) {
+    const restrictions = {
+      "can't attack alone": ["cant-attack-alone"],
+      "can't block alone": ["cant-block-alone"],
+      "can't attack or block alone": ["cant-attack-alone", "cant-block-alone"],
+      "can only attack alone": ["can-only-attack-alone"],
+      "can't attack unless at least two other creatures attack": ["cant-attack-unless-two-others"],
+      "can't block unless at least two other creatures block": ["cant-block-unless-two-others"],
+    }[m[4]];
+    if (restrictions !== undefined) {
+      const bonus = m[2] === undefined ? {} : { grantPt: [Number(m[2]), Number(m[3])] };
+      return { affects: { scope: m[1] === "~" ? "self" : "attached" }, ...bonus, restrictions, text };
+    }
+  }
   // Hazoret, Godseeker: "unless you have max speed" (rule 702.179e).
   if (line === "~ can't attack or block unless you have max speed.") {
     return { affects: { scope: "self" }, condition: { kind: "speed", atMost: 3 }, restrictions: ["cant-attack", "cant-block"], text };

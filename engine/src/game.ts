@@ -57,6 +57,7 @@ import {
   needsDamageAssignmentChoice,
 } from "./combat/damage.js";
 import { bandMatesOf, blockedAttackersOf } from "./combat/banding.js";
+import { ableInCompany, attackCompanyOf } from "./combat/company.js";
 import {
   creatureDef,
   currentAttackers,
@@ -9189,10 +9190,18 @@ export class Game {
   private declareAttackersStep(): void {
     if (this.activeHasLeft()) return;
     const defenders = this.legalDefenders(this.activePlayer);
-    const hasEligibleAttacker = this.state.zones.shared.battlefield.some((id) =>
+    const eligible = this.state.zones.shared.battlefield.filter((id) =>
       defenders.some((defender) => this.whyCannotAttack(this.activePlayer, id, defender) === null),
     );
-    if (!hasEligibleAttacker) return;
+    // A lone Mogg Flunkies has nothing to declare (rule 508.1c, `combat/company.ts`).
+    const able = ableInCompany(
+      eligible.map((id) => ({
+        id,
+        tokens: this.state.objects[id].stackCount ?? 1,
+        company: attackCompanyOf(restrictionsOf(this.state, this.registry, id)) ?? undefined,
+      })),
+    );
+    if (able.length === 0) return;
     this.state.awaiting = { kind: "attackers", player: this.activePlayer };
   }
 

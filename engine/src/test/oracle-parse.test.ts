@@ -2869,6 +2869,28 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(face("When this enchantment enters, that player untaps a land they control.", "Enchantment").complete).toBe(false);
   });
 
+  it("restrictions keyed to the other creatures in combat (static:cant-attack-or-block-alone and its group)", () => {
+    const self = (line: string): unknown => face(line, "Creature").static?.[0];
+    expect(self("This creature can't attack or block alone.")).toMatchObject({
+      affects: { scope: "self" },
+      restrictions: ["cant-attack-alone", "cant-block-alone"],
+    });
+    expect(self("This creature can't attack alone.")).toMatchObject({ restrictions: ["cant-attack-alone"] });
+    expect(self("This creature can't block alone.")).toMatchObject({ restrictions: ["cant-block-alone"] });
+    expect(self("This creature can only attack alone.")).toMatchObject({ restrictions: ["can-only-attack-alone"] });
+    expect(self("This creature can't attack unless at least two other creatures attack.")).toMatchObject({
+      restrictions: ["cant-attack-unless-two-others"],
+    });
+    expect(self("This creature can't block unless at least two other creatures block.")).toMatchObject({
+      restrictions: ["cant-block-unless-two-others"],
+    });
+    expect(face("Enchant creature\nEnchanted creature gets +3/+0 and can only attack alone.", "Enchantment").static?.[0]).toMatchObject({
+      affects: { scope: "attached" },
+      grantPt: [3, 0],
+      restrictions: ["can-only-attack-alone"],
+    });
+  });
+
   it("limits on the untap step (static:untap-step-limit, rule 502.3)", () => {
     const orb = face(
       "As long as this artifact is untapped, players can't untap more than one land during their untap steps.",

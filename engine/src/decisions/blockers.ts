@@ -16,7 +16,14 @@
  */
 
 import type { Action, BlockerDeclaration, LegalAction } from "../actions.js";
-import { blockingViolations, obeyingLure, withinSingleBlockers } from "../combat/blocking.js";
+import {
+  blockCompanyViolations,
+  blockingViolations,
+  obeyingLure,
+  withinBlockCompany,
+  withinSingleBlockers,
+} from "../combat/blocking.js";
+import { ableInCompany, blockCompanyOf } from "../combat/company.js";
 import {
   blockedByAtMostOne,
   blockedOnlyByAll,
@@ -41,7 +48,7 @@ function blockersOffer(
     const target = ctx.state.objects[id].attacking;
     return target !== null && defendingPlayerOf(ctx.state, target) === player;
   });
-  const eligible = ctx.state.zones.shared.battlefield
+  const candidates = ctx.state.zones.shared.battlefield
     .filter((id) => ctx.state.objects[id].controller === player)
     .map((blocker) => {
       const copies = ctx.state.objects[blocker].stackCount ?? 1;
@@ -57,6 +64,19 @@ function blockersOffer(
       };
     })
     .filter((entry) => entry.canBlock.length > 0);
+  // Restrictions keyed to the other blockers (rule 509.1b): one with no group
+  // it could block in isn't eligible at all, and no requirement reaches it
+  // (509.1c).
+  const blockCompany: Record<ObjectId, number> = {};
+  const limited = candidates.map((entry) => ({
+    id: entry.blocker,
+    tokens: entry.copies ?? 1,
+    company: blockCompanyOf(restrictionsOf(ctx.state, ctx.registry, entry.blocker)) ?? undefined,
+  }));
+  const inCompany = limited.some((u) => u.company !== undefined);
+  const able = inCompany ? ableInCompany(limited) : [];
+  const eligible = inCompany ? candidates.filter((entry) => able.includes(entry.blocker)) : candidates;
+  for (const { id, company } of limited) if (company !== undefined) blockCompany[id] = company.least;
   // Menace, or "can't be blocked except by N or more creatures" (rule
   // 702.111b, 509.1b): 0 or N creatures on it.
   const leastOf = new Map(attacking.map((id) => [id, minimumBlockers(ctx.state, ctx.registry, id)]));
@@ -123,6 +143,7 @@ function blockersOffer(
     ...(mustBeBlockedIfAble.length > 0 ? { mustBeBlockedIfAble } : {}),
     ...(blockRequirements.length > 0 ? { blockRequirements } : {}),
     ...(Object.keys(attackerTokens).length > 0 ? { attackerTokens } : {}),
+    ...(Object.keys(blockCompany).length > 0 ? { blockCompany } : {}),
   };
 }
 
@@ -187,7 +208,13 @@ export const blockers = defineDecision({
     // `[0]` keeps the engine reporting one reason, in the order it always
     // has; the client shows the whole list.
     const violation = blockingViolations(action.blocks, offer)[0];
-    if (violation === undefined) return null;
+    if (violation === undefined) {
+      const short = blockCompanyViolations(action.blocks, offer)[0];
+      if (short === undefined) return null;
+      return short.others === 1
+        ? `${name(short.blocker)} can't block alone`
+        : `${name(short.blocker)} can't block unless at least ${short.others} other creatures block`;
+    }
     return violation.kind === "menace"
       ? violation.needs === 2
         ? `${name(violation.attacker)} has menace and must be blocked by two or more creatures`
@@ -208,11 +235,15 @@ export const blockers = defineDecision({
     host.applyBlockerDeclarations(action.player, action.blocks);
   },
 
-  ask: (controller, view, _awaiting, player): Action => ({
-    type: "declare-blockers",
-    player,
-    blocks: controller.declareBlockers(view),
-  }),
+  // A bot's or a test's blocks, cut to what restrictions on company allow (a
+  // person is refused instead: the client's Confirm goes through `apply`).
+  ask: (controller, view, _awaiting, player): Action => {
+    const blocks = controller.declareBlockers(view);
+    const offer = view
+      .legalActions()
+      .find((o): o is Extract<LegalAction, { kind: "declare-blockers" }> => o.kind === "declare-blockers");
+    return { type: "declare-blockers", player, blocks: offer === undefined ? blocks : withinBlockCompany(blocks, offer) };
+  },
 
   // candidates: deliberately absent — like `attackers`, combat is never
   // enumerated as a decision. `RandomController` and `HeuristicBotController`
@@ -252,6 +283,6 @@ export const blockers = defineDecision({
     );
     // And one that can't be blocked by more than one keeps its first.
     blocks = withinSingleBlockers(blocks, legal);
-    return { type: "declare-blockers", player, blocks: obeyingLure(blocks, legal) };
+    return { type: "declare-blockers", player, blocks: withinBlockCompany(obeyingLure(blocks, legal), legal) };
   },
 });

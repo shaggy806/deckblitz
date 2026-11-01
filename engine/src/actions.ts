@@ -7,6 +7,7 @@
  */
 
 import type { CardType } from "./cards/define.js";
+import type { CombatCompany } from "./combat/company.js";
 import type { PileFateWord } from "./effects.js";
 import type { CardFilter } from "./filter.js";
 import type { Color, ManaType } from "./mana.js";
@@ -1474,6 +1475,21 @@ export type LegalAction =
        * other attackers may join. Absent when none can.
        */
       readonly banding?: Readonly<Record<ObjectId, { readonly banding: boolean; readonly bandsWithOther: readonly CardFilter[] }>>;
+      /**
+       * Restrictions keyed to the other attackers (`combat/company.ts`):
+       * `limits` for each eligible creature with one, `tokens` the size of
+       * each stack among `eligible`, `required` every eligible creature with a
+       * requirement to attack. With these in play `mustAttack` holds only the
+       * ones in every declaration obeying the most requirements (rule 508.1d),
+       * and `attackCompanyViolations` checks the rest. `eligible` leaves out
+       * a creature with no group it could attack in. Absent when no creature
+       * has one.
+       */
+      readonly company?: {
+        readonly limits: Readonly<Record<ObjectId, CombatCompany>>;
+        readonly tokens: Readonly<Record<ObjectId, number>>;
+        readonly required: readonly ObjectId[];
+      };
     }
   | {
       readonly kind: "declare-blockers";
@@ -1517,6 +1533,11 @@ export type LegalAction =
        * blocks a token of its own unless a declaration's `attackerMember`
        * puts several on one. Absent when there are none. */
       readonly attackerTokens?: Readonly<Record<ObjectId, number>>;
+      /** Restrictions keyed to the other blockers (`combat/company.ts`): how
+       * many others each eligible creature with one needs beside it,
+       * `blockCompanyViolations` checking them. `eligible` leaves out a creature
+       * with no group it could block in. Absent when no creature has one. */
+      readonly blockCompany?: Readonly<Record<ObjectId, number>>;
       /** Attackers that must be blocked (Lure — rule 509.1c): as many of this
        * defender's creatures as can be must block one of these. With no menace
        * among them, that's every creature able to block one; one with menace
