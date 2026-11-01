@@ -862,7 +862,10 @@
   "effect:cost-discarded-card-ref",
   "cost:granted-ability-sacrifice-granter",
   "effect:granted-activated-refers-to-granter",
-  "effect:granted-trigger-refers-to-granter"
+  "effect:granted-trigger-refers-to-granter",
+  "filter:put-into-graveyard-from-battlefield-this-turn",
+  "condition:land-put-into-graveyard-from-battlefield-this-turn",
+  "condition:put-into-graveyard-this-turn-any-zone"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

@@ -6714,7 +6714,7 @@ export class Game {
     const object = this.state.objects[id];
     // The library is only a staging point here, not where the card came
     // from: a card spawned into a graveyard wasn't milled.
-    if (object !== undefined) object.putIntoGraveyardFromLibraryOnTurn = undefined;
+    if (object !== undefined) object.putIntoGraveyardOn = undefined;
     if (object !== undefined && object.zone === "battlefield") {
       if (opts.tapped) object.tapped = true;
       if (opts.summoningSick === false) object.summoningSick = false;
@@ -44027,12 +44027,13 @@ export class Game {
       object.manaSpentByColor = undefined;
     }
 
-    // Rule 400.7: wherever it goes, it arrives as a new object, and only a
-    // library-to-graveyard move is "put there from a library" (Captain
-    // N'ghathrod). Every other move — including graveyard to graveyard —
-    // clears it. See `GameObject.putIntoGraveyardFromLibraryOnTurn`.
-    object.putIntoGraveyardFromLibraryOnTurn =
-      object.zone === "library" && to === "graveyard" ? this.state.turn.number : undefined;
+    // Rule 400.7: wherever it goes, it arrives as a new object, so a move
+    // into a graveyard records this turn and where it came from ("put there
+    // from a library / the battlefield this turn" — Captain N'ghathrod, Grim
+    // Return), and every other move clears it. See
+    // `GameObject.putIntoGraveyardOn`.
+    object.putIntoGraveyardOn =
+      to === "graveyard" ? { turn: this.state.turn.number, from: object.zone } : undefined;
     // Skullbriar (`countersPersistAcrossZones`): its counters stay with it
     // through any move except to a hand or library. Read before the reset
     // below, off the object as it is now: a Clone copying Skullbriar has the

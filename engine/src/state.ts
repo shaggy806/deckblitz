@@ -306,15 +306,19 @@ export interface GameObject {
   /** Turn number this object last entered the battlefield; `null` otherwise. */
   enteredBattlefieldOnTurn: number | null;
   /**
-   * Turn number this card was put into a graveyard **from a library** — milled,
-   * surveilled, or any other library-to-graveyard move (Captain N'ghathrod's
-   * "a card … that was put there from a library this turn"). Compared against
-   * `turn.number` rather than cleared at end of turn, so a card milled on an
-   * earlier turn simply doesn't match. `moveObject` rewrites it on every zone
-   * change: a card that leaves the graveyard and comes back is a new object
-   * (rule 400.7) and wasn't put there from a library.
+   * The turn this card was put into the graveyard it's in, and the zone it
+   * came from — milled or surveilled (`"library"`), discarded (`"hand"`),
+   * died or otherwise put there from the battlefield (`"battlefield"`), a
+   * resolved or countered spell (`"stack"`). Read by the filter clauses
+   * "a card … that was put there from a library this turn" (Captain
+   * N'ghathrod), "… from the battlefield this turn" (Grim Return) and "… from
+   * anywhere this turn" (Night Nurse). Compared against `turn.number` rather
+   * than cleared at end of turn, so a card put there on an earlier turn
+   * simply doesn't match. `moveObject` rewrites it on every zone change: a
+   * card that leaves the graveyard and comes back is a new object (rule
+   * 400.7), put there from wherever it came from this time.
    */
-  putIntoGraveyardFromLibraryOnTurn?: number;
+  putIntoGraveyardOn?: { readonly turn: number; readonly from: ZoneType };
   /**
    * The turn this card was discarded on — set as the discard is announced
    * (`cards-discarded`), read by mayhem's "as long as you discarded this card

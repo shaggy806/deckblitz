@@ -321,6 +321,29 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### A graveyard card put there this turn, by where it came from — built 2026-10-31
+
+The need-keys Phase 2 family `condition:filter-this-turn-history`, features
+only. Every move into a graveyard now records the turn and the zone it came
+from (`GameObject.putIntoGraveyardOn`, replacing the library-only turn
+marker), read by the new `CardFilter.putIntoGraveyardThisTurn` (`{ from? }`):
+"a creature card in a graveyard that was put there from the battlefield this
+turn" (`from: ["battlefield"]`), "from anywhere this turn" (`{}`) — a card
+still in that graveyard as the same object (rule 400.7). The older
+`putIntoGraveyardFromLibraryThisTurn` reads the same record. "If a land you
+controlled was put into a graveyard from the battlefield this turn" was
+already the `turn-history` `to-graveyard` condition with `controlledBy:
+"you"` (the land as it last existed, 603.10a) — only marked. The scaffolder
+reads "Choose target … card in … graveyard that was put there from … this
+turn. Put that card onto the battlefield under your control / Return it to
+your hand." and the land intervening "if". Keys:
+filter:put-into-graveyard-from-battlefield-this-turn,
+condition:land-put-into-graveyard-from-battlefield-this-turn,
+condition:put-into-graveyard-this-turn-any-zone. Proving cards: Grim Return,
+Wreck Hunter, Thrilling Encore, Night Nurse, Healer of Heroes, The Lady of
+Otaria. Left: the family's fought-this-turn, blocked-by-this-source-this-combat
+and lost-life-this-turn keys.
+
 ### The card revealed for a cost, and cards revealed that share a colour — built 2026-10-31
 
 The need-keys Phase 2 family `cost:reveal-card-as-additional-cost`, features

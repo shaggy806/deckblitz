@@ -4084,6 +4084,16 @@ export function parseEffect(text, outer) {
       skip = removedThen.used - 1;
       continue;
     }
+    // "Choose target creature card in a graveyard that was put there from the
+    // battlefield this turn. Put that card onto the battlefield under your
+    // control." (Grim Return) — two sentences, one effect on the target.
+    const arrival = graveyardArrivalAt(sentences, i, ctx);
+    if (arrival !== null) {
+      parsed.push(arrival.effect);
+      hints.push({ sentence, effect: arrival.effect });
+      skip = arrival.used - 1;
+      continue;
+    }
     const among = amongTargetsAt(sentences, i, ctx) ?? chosenTargetsAt(sentences, i, ctx);
     if (among !== null) {
       parsed.push(among.effect);
@@ -4648,6 +4658,40 @@ function chosenTargetsAt(sentences, i, ctx) {
     },
     used: 2,
   };
+}
+
+/**
+ * A graveyard card chosen by when it was put there, then moved: "Choose
+ * target creature card in a graveyard that was put there from the
+ * battlefield this turn. Put that card onto the battlefield under your
+ * control." (Grim Return), "… in your graveyard that was put there from
+ * anywhere this turn. Return it to your hand." (Night Nurse), "… in an
+ * opponent's graveyard that was put there from their library this turn. Put
+ * it onto the battlefield under your control." (Captain N'ghathrod). The
+ * origin is `CardFilter.putIntoGraveyardThisTurn` (`from`), or the older
+ * `putIntoGraveyardFromLibraryThisTurn` for a library.
+ */
+function graveyardArrivalAt(sentences, i, ctx) {
+  const m = /^choose target (?:(.+?) )?card in (your|a|an opponent's) graveyard that was put there from (the battlefield|a library|their library|anywhere) this turn\.$/i.exec(sentences[i] ?? "");
+  if (m === null) return null;
+  const then = /^(?:(put) (?:it|that card) onto the battlefield under your control|(return) (?:it|that card) to (?:your|its owner's) hand)\.$/i.exec(sentences[i + 1] ?? "");
+  if (then === null) return null;
+  const types = m[1] === undefined ? {} : parseTypePhrase(m[1], { cards: true });
+  if (types === null) return null;
+  const origin = m[3].toLowerCase();
+  const arrival =
+    origin === "anywhere"
+      ? { putIntoGraveyardThisTurn: {} }
+      : origin === "the battlefield"
+        ? { putIntoGraveyardThisTurn: { from: ["battlefield"] } }
+        : { putIntoGraveyardFromLibraryThisTurn: true };
+  const whose = { your: "you", a: "any", "an opponent's": "opponent" }[m[2].toLowerCase()];
+  const target = ctx.target({ kind: "card-in-graveyard", whose, filter: { ...types, ...arrival } });
+  const effect =
+    then[1] !== undefined
+      ? { kind: "put-onto-battlefield", target, underYourControl: true }
+      : { kind: "return-to-hand", target, from: "graveyard" };
+  return { effect, used: 2 };
 }
 
 function amongTargetsAt(sentences, i, ctx) {
@@ -6779,6 +6823,15 @@ const TURN_TALLY_IFS = {
     what: "to-graveyard",
     who: "any-player",
     from: ["battlefield"],
+  },
+  // Controlled as it left (rule 603.10a) — any owner's graveyard (The Lady
+  // of Otaria).
+  "if a land you controlled was put into a graveyard from the battlefield this turn,": {
+    kind: "turn-history",
+    what: "to-graveyard",
+    who: "any-player",
+    from: ["battlefield"],
+    filter: { type: "land", controlledBy: "you" },
   },
   "if an enchantment was put into your graveyard from the battlefield this turn,": {
     kind: "turn-history",

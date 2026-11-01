@@ -791,9 +791,23 @@ export interface CardFilter {
    * opponent's graveyard that was put there from a library this turn". Milling
    * is the usual way; surveil and other library-to-graveyard moves count too,
    * and a discarded or destroyed card never does. See
-   * `GameObject.putIntoGraveyardFromLibraryOnTurn`.
+   * `GameObject.putIntoGraveyardOn`.
    */
   readonly putIntoGraveyardFromLibraryThisTurn?: boolean;
+  /**
+   * Is a card in a graveyard that was put there **this turn**, from one of
+   * `from`'s zones or (without `from`) from anywhere — "creature cards in
+   * your graveyard that were put there from the battlefield this turn"
+   * (Grim Return, Thrilling Encore, Wreck Hunter: `{ from: ["battlefield"]
+   * }`), "a permanent card in your graveyard that was put there from
+   * anywhere this turn" (Night Nurse: `{}`). A card that died this turn and
+   * was put back into the graveyard from somewhere else since is a new object
+   * (rule 400.7), put there from that zone. A permanent that left the
+   * battlefield is asked as a card in its graveyard; one read through a
+   * snapshot (it has left the graveyard too) never matches. See
+   * `GameObject.putIntoGraveyardOn`.
+   */
+  readonly putIntoGraveyardThisTurn?: { readonly from?: readonly ZoneType[] };
   /**
    * Is (or isn't) a card that was discarded this turn and hasn't changed
    * zones since — Shadow of the Grave's "all cards in your graveyard that you
@@ -1921,8 +1935,15 @@ export function matchesFilter(
     const milled =
       live !== undefined &&
       live.zone === "graveyard" &&
-      live.putIntoGraveyardFromLibraryOnTurn === state.turn.number;
+      live.putIntoGraveyardOn?.from === "library" &&
+      live.putIntoGraveyardOn.turn === state.turn.number;
     if (milled !== filter.putIntoGraveyardFromLibraryThisTurn) return false;
+  }
+  if (filter.putIntoGraveyardThisTurn !== undefined) {
+    const arrival = live !== undefined && live.zone === "graveyard" ? live.putIntoGraveyardOn : undefined;
+    if (arrival === undefined || arrival.turn !== state.turn.number) return false;
+    const from = filter.putIntoGraveyardThisTurn.from;
+    if (from !== undefined && !from.includes(arrival.from)) return false;
   }
   if (filter.discardedThisTurn !== undefined) {
     // A snapshot is of a permanent, which wasn't discarded.

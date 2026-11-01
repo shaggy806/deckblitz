@@ -5975,3 +5975,60 @@ describe("what's attached to a target or a player", () => {
     });
   });
 });
+
+describe("a graveyard card put there this turn", () => {
+  const face = (name: string, type_line: string, oracle_text: string) =>
+    parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });
+
+  it("reads 'Choose target … card in a graveyard that was put there from … this turn' and the move after it", () => {
+    const grim = face(
+      "Grim Return",
+      "Instant",
+      "Choose target creature card in a graveyard that was put there from the battlefield this turn. Put that card onto the battlefield under your control.",
+    );
+    expect(grim.complete).toBe(true);
+    expect(grim.targets).toEqual([
+      { kind: "card-in-graveyard", whose: "any", filter: { type: "creature", putIntoGraveyardThisTurn: { from: ["battlefield"] } } },
+    ]);
+    expect(grim.effect).toEqual({ kind: "put-onto-battlefield", target: 0, underYourControl: true });
+    const nurse = face(
+      "Night Nurse, Healer of Heroes",
+      "Legendary Creature — Human Doctor Hero",
+      "When Night Nurse enters, choose target permanent card in your graveyard that was put there from anywhere this turn. Return it to your hand.",
+    );
+    expect(nurse.triggered[0].targets).toEqual([
+      { kind: "card-in-graveyard", whose: "you", filter: { notTypes: ["instant", "sorcery"], putIntoGraveyardThisTurn: {} } },
+    ]);
+    expect(nurse.triggered[0].effect).toEqual({ kind: "return-to-hand", target: 0, from: "graveyard" });
+    // A library keeps the older milled-this-turn clause.
+    const captain = face(
+      "Test Captain",
+      "Creature — Horror",
+      "At the beginning of your end step, choose target creature card in an opponent's graveyard that was put there from their library this turn. Put it onto the battlefield under your control.",
+    );
+    expect(captain.triggered[0].targets[0].filter).toEqual({ type: "creature", putIntoGraveyardFromLibraryThisTurn: true });
+    // Another move after the choice isn't read as one.
+    const exile = face(
+      "Test Return",
+      "Instant",
+      "Choose target creature card in a graveyard that was put there from the battlefield this turn. Exile it.",
+    );
+    expect(exile.complete).toBe(false);
+  });
+
+  it("reads 'if a land you controlled was put into a graveyard from the battlefield this turn' as the turn's history", () => {
+    const lady = face(
+      "Test Lady",
+      "Creature — Avatar",
+      "At the beginning of each end step, if a land you controlled was put into a graveyard from the battlefield this turn, draw a card.",
+    );
+    expect(lady.complete).toBe(true);
+    expect(lady.triggered[0].condition).toEqual({
+      kind: "turn-history",
+      what: "to-graveyard",
+      who: "any-player",
+      from: ["battlefield"],
+      filter: { type: "land", controlledBy: "you" },
+    });
+  });
+});

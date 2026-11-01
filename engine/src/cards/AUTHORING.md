@@ -2429,7 +2429,7 @@ source, so it isn't a `CardFilter` clause.
 subtypes, supertype, notSupertype, name, notName, colors, notColors, colorless,
 manaValue, power, toughness, basePower, baseToughness, counters, controlledBy,
 ownedBy, keyword, notKeyword, tapped, token, isCommander, equipped, enchanted,
-modified, anyOf, manaSpent, manaFrom, putIntoGraveyardFromLibraryThisTurn,
+modified, anyOf, manaSpent, manaFrom, putIntoGraveyardFromLibraryThisTurn, putIntoGraveyardThisTurn,
 discardedThisTurn, enteredThisTurn, attackedThisTurn, damagedThisTurnBy, excessDamageThisTurn,
 dealtDamageToCreatureThisTurn, cast, castBy, castFrom, castVia, enteredFrom,
 putThereBySource, sharesCardTypeWith, sharesPermanentTypeWith, sharesCreatureTypeWith, sharesLandTypeWith, sameNameWith, thisWay, attacking, blocking, blockingRelation, goaded, suspected, saddled, saddledSource, crewedSource, crewedBySource, enlistedThisCombat, monstrous, renowned, hasManaAbility, hasAbilities,
@@ -2569,7 +2569,18 @@ or any other library-to-graveyard move, never discarded or destroyed (Captain
 N'ghathrod's end-step target is `{ kind: "card-in-graveyard", whose:
 "opponent", filter: { typesAnyOf: ["artifact", "creature"],
 putIntoGraveyardFromLibraryThisTurn: true } }`). A card that leaves the
-graveyard and returns loses it (rule 400.7). `discardedThisTurn` is a card
+graveyard and returns loses it (rule 400.7). `putIntoGraveyardThisTurn` is
+any graveyard card put there this turn from one of `from`'s zones, or from
+anywhere without it: "a creature card in a graveyard that was put there from
+the battlefield this turn" (Grim Return, Thrilling Encore, Wreck Hunter's
+count) is `{ type: "creature", putIntoGraveyardThisTurn: { from:
+["battlefield"] } }`, "put there from anywhere this turn" (Night Nurse)
+`putIntoGraveyardThisTurn: {}`; it reads a card still in that graveyard as
+the same object (400.7). "If a land you controlled was put into a graveyard
+from the battlefield this turn", once it may have left, is the `turn-history`
+condition instead (`what: "to-graveyard"`, `from: ["battlefield"]`, filter
+`controlledBy: "you"`, matched as it last existed — The Lady of Otaria).
+`discardedThisTurn` is a card
 discarded this turn that hasn't moved since — a madness card its owner didn't
 cast still is, in the graveyard it went on to (Shadow of the Grave's "all
 cards in your graveyard that you cycled or discarded this turn" is
