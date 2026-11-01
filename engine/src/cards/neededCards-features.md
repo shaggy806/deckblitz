@@ -829,6 +829,60 @@ each-creature-deals-power-damage-to-target, each-permanent-deals-damage.
 Proving cards: Solar Blaze, Wave of Reckoning, Moonlight Hunt, Bartz and Boko,
 Signature Slam, Alpha Brawl.
 
+### Distributing counters: a total that is an amount, and among permanents chosen as it resolves — built 2026-10-31
+
+The need-keys Phase 2 family `effect:distribute-counters`, its top group,
+features only. **Among targets** (rule 601.2d) the total was already any
+`EffectAmount` read as the division is announced (the divide-among-targets
+family); proved here for counters — Undercity Upheaval's creature cards in the
+graveyard "as you cast this spell", Quirion Beastcaller's counters it died
+with, Broodlord's X. **Among permanents chosen on resolution** (rule 608.2d)
+is the new `counters-distributed` effect: the total read as it resolves, the
+recipients chosen untargeted (`choose-permanents`, a token stack once per
+token, none to the total), then a share each (`choose-number` per chosen one
+but the last, at least one each) — two existing decisions, no client change;
+`controlledByTarget` reads "target player controls". `choose-value` takes a
+`prompt`. The scaffolder reads "distribute X [kind] counters among any number
+of [other] target …, where X is …" (a `counters-divided` with `divided`) and
+the untargeted "distribute X … among any number of [permanents], where X is
+…" / "a number of … equal to …" (counts, counters on it, creature cards in
+your graveyard, {S} spent). Keys: effect:distribute-counters-among-chosen,
+effect:distribute-counters-variable-total. Proving cards: Undercity Upheaval,
+Quirion Beastcaller, Broodlord, Vastwood Hydra, Feast of the Victorious Dead,
+Blessing of Frost (`counters-distributed.test.ts`). Left: Stumpsquall Hydra
+(a required recipient, "among it and any number of commanders"), Numa (a
+reflexive "you may pay {X}{X}. When you do"), Spoils of War (X defined by an
+opponent's graveyard as cast), Yannik (check its exile-until-leaves reflexive),
+Crashing Wave (waterbend {X} as an additional cost), Invoke Justice
+(`controlledByTarget` is built; check its return), effect:saga-chapter-divided.
+
+### Counters put or removed this way — built 2026-10-31
+
+The need-keys Phase 2 family `effect:this-way-results`, its top group, features
+only. Most of it was there already (`ThisWayKind`'s `"counters-put"` and
+`"counters-removed"`, the `thisWay` filter clause and amount); the records
+predate them. What was missing: **a player's counters** — the `thisWay:
+"counters-removed"` amount (no `filter`/`sumOf`) now adds the counters a
+`remove-player-counters` took off (rule 122.1 — Leeches' "loses all poison
+counters … that much damage"); **`removeCounter.count: "all"`** — the cost
+"Remove all +1/+1 counters from [this]", payable with none, the number removed
+the ability's X (rules 601.2h via 602.2b — Catti-brie of Mithral Hall, and
+Molten Hydra, Relic Amulet, Torture Chamber, Geometric Nexus, Vish Kal, Jar of
+Eyeballs, Essence Bottle, Sage of Hours, Hankyu untriaged); and **the
+enters-battlefield replacement's `removeAllCountersFrom`** with `counters`'
+`"removed-as-enters"` (rule 614.1c — Thief of Blood). The scaffolder reads
+"then double … / goad each creature that had a [kind] counter put on it this
+way", "that many / that much" after a removal (a player's too, "that player"
+its target), "[target player] loses all poison counters", the remove-all cost
+with its "where X is …", "damage … equal to the number of … removed this way"
+and "that much damage", and Thief of Blood's line. Keys:
+effect:counters-put-this-way, effect:counters-removed-this-way. Proving cards:
+Fangs of Kalonia, Spectacular Showdown, Give // Take, Leeches, Catti-brie of
+Mithral Hall, Thief of Blood (`counters-this-way.test.ts`). Not built:
+Magnanimous Magistrate's "you may remove that many … If you do" (whether
+fewer than that many may be removed is a rules question with no ruling);
+overload isn't scaffolded.
+
 ### Cards exiled with the source put onto the battlefield — built 2026-10-31
 
 The need-keys Phase 2 family `effect:put-onto-battlefield-options`, its top
@@ -877,6 +931,51 @@ look (Wand of Ith's "unless they pay life", Friendly Fire's damage to the
 creature and the player at once, Dementia Sliver's granted ability, River
 Song's Diary's imprint replacement); the family's other units (random target,
 random mode announced, random among chosen) are separate.
+
+### Enlist — built 2026-10-31
+
+The need-keys Phase 2 family `keyword:enlist`, features only (rule 702.154).
+**`StaticAbility.enlist`** (the `enlist()` helper) is an optional cost to
+attack (702.154b, 508.1g): the declaration taps its attackers and pays any
+attack tax, then — before any attacker is announced, so before anything
+triggers on the attack (508.1k) — each attacker with enlist is asked a
+`choose-permanents` of up to one untapped, nonattacking creature its
+controller controls with haste or no summoning sickness
+(`GameState.pendingEnlist`, `Game.promptNextEnlist`/`applyEnlist`), and the
+attack is announced once the last is answered (`Game.announceAttackers`).
+The creature chosen taps, and the linked "when you do, +X/+0" (607.2h) is a
+reflexive trigger the engine adds, X the tapped creature's power as it
+resolves (`powerOf: "tapped"`). A **`creature-tapped-for`** event (`as:
+"enlist"`) fires the new **`enlists`** trigger (702.154c — the trigger object
+the enlisted creature), and the attacker records the combat
+(`GameObject.enlistedIn`, kept in last-known information) for the new
+**`enlistedThisCombat`** filter clause. No new decision kind: the bots'
+`choose-permanents` "you may choose one" candidates answer it. Key:
+keyword:enlist. Proving cards: Coalition Warbrute, Guardian of New Benalia,
+Aradesh, the Founder (`enlist.test.ts`). Not built: 702.154d's several
+instances on one creature (none printed).
+
+### Who crewed what: crew tallies, crews-or-saddles triggers, can't crew — built 2026-10-31
+
+The need-keys Phase 2 family `keyword:crew`, its top group and a Tier B key,
+features only (rules 702.122b-d, 702.171c). Each creature tapped for a crew
+cost records the Vehicle and its stint (`GameObject.crewedThisTurn`, cleared
+at cleanup and by a zone change, as `saddledThisTurn` is): the new filter
+clauses **`crewedSource`** ("a creature that crewed it this turn", bound to
+`crewedBy` in an effect) and **`crewedBySource`** ("a Vehicle crewed by ~
+this turn"). Crew and saddle costs now announce each creature as a
+`creature-tapped-for` (`as: "crew" | "saddle"`), firing the new
+**`crews-or-saddles`** trigger (`as` the keywords, the trigger object the
+Vehicle or Mount). The **`cant-crew`** restriction keeps a creature out of a
+crew cost's offer and payment. The client's log reads the new event. Keys:
+crewed-it-this-turn, crews-or-saddles, cant-crew, and crewed-by-this-turn
+(partly). Proving cards: Speedway Fanatic, Veteran Motorist, Reckless
+Velocitaur, Subterranean Schooner, Getaway Car, Balthier and Fran, Revoke
+Privileges (`crew-tallies.test.ts`). Still open: Golden Argosy's "exile each
+creature that crewed it this turn, return them" (a `flicker` over a group),
+Luxurious Locomotive's count of crewers including departed ones (the
+ruling), Adrestia's "if an Assassin crewed it this turn", Mindlink Mech's
+becomes-crewed trigger.
 
 ### Cards a player owns, taken from exile — built 2026-10-31
 
@@ -1008,6 +1107,54 @@ permanent that can't phase out still phases out indirectly with its host is
 a rules question); Bone Shaman's granted "creatures dealt damage by this
 creature this turn can't be regenerated this turn", Whippoorwill's and
 Runesword's other halves.
+
+### Base power or base toughness alone — built 2026-10-31
+
+The need-keys Phase 2 family `effect:set-base-power-only`, features only.
+`animate`'s `power` and `toughness` are each optional: one alone sets base
+power or base toughness alone in layer 7b (rule 613.4b — a new
+`PtModifier.setPower` beside the existing `setToughness`, ordered with
+`setPt` by timestamp), fixed or a live amount read once as it resolves
+(608.2h), until end of turn or indefinitely, the other left as it is;
+counters and pumps still add on top. Only a full set emits
+`permanent-animated`. The bots read a small lone set without keywords as a
+shrink. The scaffolder reads "(~ | target …) has base (power | toughness) N
+until end of turn", "until end of turn, … has base … N (and gains K)", "until
+end of turn, … gains K and has base … N" and "~'s base (power | toughness)
+becomes equal to [N plus] (target creature's power | the number of … cards
+in your graveyard | a battlefield count)". Keys:
+effect:set-base-power-only, effect:set-base-toughness-only. Still open on
+their cards: Vhati il-Dal ("base power 1 **or** base toughness 1", a choice
+as it resolves — no effect-level "or" choice), Sentinel (a target "blocking
+or blocked by this creature", effect:target-creature-source-is-blocking),
+Belligerent Yearling ("you may", the entering Dinosaur's power — likely
+authorable), PuPu UFO (Towns), Crater Elemental (formidable's activation
+condition), Symmetry Sage, Singing Tree (likely authorable). Proving cards:
+Island of Wak-Wak, Turtle-Duck, Riptide Mangler, Chariot of the Sun, Wall of
+Tombstones.
+
+### P/T scaled by a hand size or a life total — built 2026-10-31
+
+The need-keys Phase 2 family `static:pt-per-amount`, its first group (a
+granted P/T amount read from a player's own state), features only.
+`grantPtPerCount.cardsInHand` (layer 7c) widens from the counting player's
+own hand (`true`) to `"opponents"` (every opponent's hand together — Enemy of
+Enlightenment) and `"affected-controller"` (each affected creature's
+controller's — Righteous Authority); a new `grantPtPerCount.lifeTotal` reads
+the controller's life total, unclamped (rule 107.1b — Death's Shadow at
+negative life gets a bonus); and a `CountSpec` `"your-life-total"` is the CDA
+(rule 604.3 — Serra Avatar, Soul of Eternity). The scaffolder reads "(~ |
+Enchanted creature | Equipped creature | All creatures | Creatures you
+control) get(s) ±N/±N for each card in (your hand | your opponents' hands |
+its controller's hand)", "… get(s) ±X/±X|0, where X is (your life total |
+the number of cards in your hand)" and "~'s power and toughness are each
+equal to your life total". Keys: static:pt-per-cards-in-hand,
+static:pt-per-life-total, static:cda-life-total. Still open on these keys'
+cards: Alrund (filter:foretold), Enduring Angel (effect:double-life-total and
+its transform-instead replacement), Roiling Horror (life minus an opponent's,
+suspend X), Ajani Goldmane's Avatar token (a token with the CDA, authorable).
+Proving cards: Grim Strider, Enemy of Enlightenment, Righteous Authority,
+Death's Shadow, Serra Avatar.
 
 ### The same name as a reference object — built 2026-10-31
 

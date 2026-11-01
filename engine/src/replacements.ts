@@ -120,11 +120,24 @@ export interface EntersBattlefieldReplacement {
    * creature returned to pay its web-slinging cost, as that creature last
    * existed on the battlefield (rule 702.188a — Scarlet Spider, Ben
    * Reilly's "X is the mana value of the returned creature"), 0 when it
-   * wasn't cast using web-slinging. */
+   * wasn't cast using web-slinging. `"removed-as-enters"` is the number of
+   * counters its `removeAllCountersFrom` took off as it entered (Thief of
+   * Blood's "a +1/+1 counter on it for each counter removed this way"). */
   readonly counters?: {
     readonly kind: string;
-    readonly amount: EffectAmount | "times-kicked" | "web-slinging-mana-value";
+    readonly amount: EffectAmount | "times-kicked" | "web-slinging-mana-value" | "removed-as-enters";
   };
+  /**
+   * "As this creature enters, remove all counters from all permanents"
+   * (Thief of Blood): as it enters (rule 614.1c — part of the replacement, so
+   * nothing can respond between), every counter of every kind comes off each
+   * permanent already on the battlefield matching this filter, read from its
+   * controller's side — never itself, nor anything entering with it (614.12).
+   * A token stack loses them token by token, all at once. A player's counters
+   * aren't a permanent's (its ruling: experience counters stay). How many came
+   * off is `counters`' `"removed-as-enters"`.
+   */
+  readonly removeAllCountersFrom?: CardFilter;
   /**
    * Sunburst (rule 702.44a): it enters with a counter for each colour of mana
    * spent to cast it — +1/+1 counters if it's entering as a creature, ignoring

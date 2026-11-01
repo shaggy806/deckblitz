@@ -319,15 +319,22 @@ section keeps only what to do next.
   the linked exile put onto the battlefield (`choose-random-card`'s `zone`, `look-and-choose`'s
   `"exiled-with-source"`; ~15 freed, 10 proving cards — Lagrella's counters left), and in the
   cloud the blocking-relation families (`blockingRelation`, attack requirements) and graveyard
-  casting with keyword grants to spells. **791 freed cards wait for the authoring sweep**
-  (`cards:needs -- --stale`); the user authors them in one sweep once the reasonable keys are
-  built. Building now: P/T per amount with base power alone, the counter families
-  (`effect:this-way-results`, `effect:distribute-counters`), enlist with crew. Next:
-  `decision:library-ordering` (12), `decision:choose-from-zone-extensions` (12),
-  `effect:put-onto-battlefield-options`' entry riders (12) — and, for cloud sessions,
+  casting with keyword grants to spells; then P/T scaled by a hand size or life total and base
+  power or toughness set alone (`grantPtPerCount.cardsInHand`/`lifeTotal`, a life-total CDA,
+  `animate`'s lone `power`/`toughness`; 17 freed, 10 proving cards — Vhati il-Dal's either/or
+  left), counters put or removed this way and distributing counters (a player's counters in
+  `"counters-removed"`, a remove-all cost as X, `removeAllCountersFrom` as it enters,
+  `counters-distributed` among permanents chosen on resolution (608.2d); 12 freed, 12 proving
+  cards), and enlist with who crewed what (`StaticAbility.enlist` asked after attackers tap,
+  `crewedThisTurn`, `crews-or-saddles`, `cant-crew`; 16 freed, 10 proving cards, four manual
+  checks). **837 freed cards wait for the authoring sweep** (`cards:needs -- --stale`); the user
+  authors them in one sweep once the reasonable keys are built. Cloud sessions are building
   `keyword:hexproof-from-colors`, the combat-restriction second group,
-  `effect:prevent-next-n-damage-to-you`, the cascade/sunburst grants, `cost:kicker-nonmana-cost`
-  and `cost:alt-cost-discard-cards`.
+  `effect:prevent-next-n-damage-to-you`, the cascade/sunburst grants to spells,
+  `cost:kicker-nonmana-cost` and `cost:alt-cost-discard-cards`. Next unclaimed:
+  `decision:library-ordering` (12), `decision:choose-from-zone-extensions` (12),
+  `effect:put-onto-battlefield-options`' entry riders (12), `effect:sacrificed-object-lki` (11),
+  `effect:text-change-color-or-land-words` (11), `condition:filter-this-turn-history` (11).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next
@@ -402,6 +409,9 @@ there and move this line to `COMPLETED.md`.
 - **"Creatures it blocked this turn" has no record**: `blockingRelation` reads the blocks as they are now, so an attacker removed from combat (506.4) drops out; Defiant Vanguard needs a per-turn record of what a creature blocked.
 - **A merged or melded permanent's cards go into a library or graveyard in an order nobody chose**: rule 730.3a and the meld ruling let the owner order them; and only a blink and the exile links find every card it became as "that card" (730.3c, `leftWith`, built 2026-10-31 with meld).
 - **Of several granted alternative costs, only the first is offered**: rule 118.9 lets the caster pick any one; with Jodah, Archmage Eternal and Nissa, Worldsoul Speaker both out, only Jodah's is offered (`alternativeCostOf`; found 2026-10-31 with the energy alternative cost).
+- **A resolve-time either/or between two effects**: Vhati il-Dal's "base power or base toughness becomes 1" (`docs/engine-gaps.md`).
+- **Simultaneous as-enters removals of every counter**: two Thieves of Blood at once — the player should choose which gets them (`docs/engine-gaps.md`).
+- **Enlist leftovers**: enlist ×N, and an attack tax auto-paid before enlist is asked (`docs/engine-gaps.md`).
 - **Granted statics don't reach cost changes or prevention**: Acolyte of Bahamut, Caduceus, Lymph Sliver and others (`docs/engine-gaps.md`).
 - **A split card's two names aren't both compared**: `sameNameAsAny` reads one name (201.2a; `docs/engine-gaps.md`).
 - **An optional non-mana cost paid as a permanent enters**: Ulamog's Despoiler's "as this enters, you may put two cards … from exile" (`docs/engine-gaps.md`).

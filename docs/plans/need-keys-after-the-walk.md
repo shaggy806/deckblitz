@@ -701,6 +701,13 @@ missing. Re-run `--greedy` for Phase 2's order.
   here three local agents run at once, each given two related families, and two cloud sessions
   build fixed lists of families of their own (combat blocking; graveyard casting), landing on
   `main` themselves. The freed cards wait for one authoring sweep at the end (the user's call).
+- **2026-10-31, the rest of the night** — twelve more families: locally the reference-object
+  filters (shared types, same name), attach hosts and statics granting statics, random picks from
+  a hand or a linked exile and the linked exile onto the battlefield, P/T per hand size or life
+  total and base power alone, counters this way and distributed, enlist and crew tallies; in the
+  cloud the blocking-relation families and graveyard casting with keyword grants to spells. 837
+  freed. Two more cloud sessions (targeting/combat, casting costs) were started from the user's
+  phone with prompts copied from the coordinator.
 - **2026-10-31: the blocking-relation families** (a cloud session, beside the local agents) —
   `effect:target-spec-additions`' top group and `filter:blocked-by-source`, as one
   `blockingRelation` filter (blocking, blocked by or either, the source's or its host's, a gone

@@ -620,6 +620,7 @@ import _poolReverentHunter from "../pool/reverent-hunter.js";
 import _poolRewardTheFaithful from "../pool/reward-the-faithful.js";
 import _poolReyhanLastOfTheAbzan from "../pool/reyhan-last-of-the-abzan.js";
 import _poolRidgescaleTusker from "../pool/ridgescale-tusker.js";
+import _poolRiptideMangler from "../pool/riptide-mangler.js";
 import _poolRiseToGlory from "../pool/rise-to-glory.js";
 import _poolRishkarPeemaRenegade from "../pool/rishkar-peema-renegade.js";
 import _poolRitualOfSoot from "../pool/ritual-of-soot.js";
@@ -1535,6 +1536,7 @@ const shard: CardShard = {
     _poolRewardTheFaithful,
     _poolReyhanLastOfTheAbzan,
     _poolRidgescaleTusker,
+    _poolRiptideMangler,
     _poolRiseToGlory,
     _poolRishkarPeemaRenegade,
     _poolRitualOfSoot,

@@ -406,6 +406,10 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   // "On each creature target player controls" (Meadowboon): that player's.
   "add-counter-all": (n, v) =>
     v.touch(n.controlledByTarget, HARMFUL_COUNTERS.has(n.counter) ? "harm" : "help", MINOR),
+  // Untargeted shares among a player's permanents (Invoke Justice's "target
+  // player controls"): that player's, as a mass placement is.
+  "counters-distributed": (n, v) =>
+    v.touch(n.controlledByTarget, HARMFUL_COUNTERS.has(n.counter) ? "harm" : "help", MINOR),
   // The reverse of `add-counter`: losing a harmful counter helps.
   // Every kind at once (`"any"` — Vampire Hexmage) reads as the loyalty and
   // +1/+1 counters it nearly always takes: a harm, like a good kind's.
@@ -865,6 +869,11 @@ function animatePolarity(n: Extract<EffectSpec, { kind: "animate" }>): Polarity 
   const toughness = fixed(n.toughness);
   const keywords = (n.keywords ?? []).filter((k) => k !== "defender");
   if (power !== null && toughness !== null && power + toughness <= 2 && keywords.length === 0) return "harm";
+  // Base power or toughness alone (Island of Wak-Wak's "base power 0",
+  // Chariot of the Sun's "base toughness 1"): a small one is a shrink, unless
+  // keywords come with it (Chariot's flying).
+  if (n.toughness === undefined && power !== null && power <= 1 && keywords.length === 0) return "harm";
+  if (n.power === undefined && toughness !== null && toughness <= 1 && keywords.length === 0) return "harm";
   if (keywords.length > 0) return "help";
   if (power !== null && power >= 4) return "help";
   if ((n.addTypes ?? []).includes("creature")) return "help";
@@ -933,7 +942,12 @@ export function auraPolarity(def: CardDefinition): Polarity {
       if (grantedTriggerHarms(granted)) harm = true;
       else help = true;
     }
-    if (ability.grantPtPerCount !== undefined) help = true;
+    // A count-scaled bonus helps or hurts by its sign: Kagemaro's Clutch's
+    // "-X/-X, where X is the number of cards in your hand" is a shrink.
+    if (ability.grantPtPerCount !== undefined) {
+      if (ability.grantPtPerCount.pt[0] + ability.grantPtPerCount.pt[1] < 0) harm = true;
+      else help = true;
+    }
     if (ability.protection !== undefined || ability.cantBeSacrificed === true) help = true;
     if (ability.doesntUntap === true || ability.cantAttackController === true) harm = true;
     if (ability.prohibits !== undefined) harm = true;

@@ -439,6 +439,7 @@ import _poolLammastideWeave from "../pool/lammastide-weave.js";
 import _poolLassoedByTheLaw from "../pool/lassoed-by-the-law.js";
 import _poolLavamancersSkill from "../pool/lavamancers-skill.js";
 import _poolLawbringer from "../pool/lawbringer.js";
+import _poolLeeches from "../pool/leeches.js";
 import _poolLeoninVanguard from "../pool/leonin-vanguard.js";
 import _poolLeveler from "../pool/leveler.js";
 import _poolLeylinePhantom from "../pool/leyline-phantom.js";
@@ -777,6 +778,7 @@ import _poolUmaraWizard from "../pool/umara-wizard.js";
 import _poolUmezawasCharm from "../pool/umezawas-charm.js";
 import _poolUnbreakableBond from "../pool/unbreakable-bond.js";
 import _poolUndercityNecrolisk from "../pool/undercity-necrolisk.js";
+import _poolUndercityUpheaval from "../pool/undercity-upheaval.js";
 import _poolUndermine from "../pool/undermine.js";
 import _poolUnexpectedAssistance from "../pool/unexpected-assistance.js";
 import _poolUnionOfTheThirdPath from "../pool/union-of-the-third-path.js";
@@ -1300,6 +1302,7 @@ const shard: CardShard = {
     _poolLassoedByTheLaw,
     _poolLavamancersSkill,
     _poolLawbringer,
+    _poolLeeches,
     _poolLeoninVanguard,
     _poolLeveler,
     _poolLeylinePhantom,
@@ -1638,6 +1641,7 @@ const shard: CardShard = {
     _poolUmezawasCharm,
     _poolUnbreakableBond,
     _poolUndercityNecrolisk,
+    _poolUndercityUpheaval,
     _poolUndermine,
     _poolUnexpectedAssistance,
     _poolUnionOfTheThirdPath,

@@ -8825,4 +8825,25 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       you: { bf: ['Swamp*2', 'Forest*2'], hand: ["Jarad's Orders"], lib: ['Grizzly Bears', 'Llanowar Elves'] },
     }),
   ),
+  // --- Enlist (2026-10-31, need-keys Phase 2) ---------------------------------------
+  preset(
+    'Coalition Warbrute: enlist a creature as it attacks',
+    board({ you: { bf: ['Coalition Warbrute', 'Hill Giant', { name: 'Grizzly Bears', sick: true }] } }),
+  ),
+  preset(
+    'Aradesh, the Founder: an attacker that enlisted gains double strike, four players',
+    board({ you: { bf: ['Aradesh, the Founder', 'Coalition Warbrute', 'Grizzly Bears'] }, opp: [{}, {}, {}] }),
+  ),
+  // --- Who crewed what (2026-10-31, need-keys Phase 2) ------------------------------
+  preset(
+    "Revoke Privileges: the enchanted creature can't crew",
+    board({
+      you: { bf: ["Smuggler's Copter", 'Grizzly Bears', 'Hill Giant'] },
+      opp: { bf: [{ name: 'Revoke Privileges', attach: 'Hill Giant' }] },
+    }),
+  ),
+  preset(
+    'Speedway Fanatic: the Vehicle it crews gains haste',
+    board({ you: { bf: ['Speedway Fanatic', { name: "Smuggler's Copter", sick: true }] } }),
+  ),
 ]

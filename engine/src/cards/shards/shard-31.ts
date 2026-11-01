@@ -147,6 +147,7 @@ import _poolCloudElemental from "../pool/cloud-elemental.js";
 import _poolCloudhoofKirin from "../pool/cloudhoof-kirin.js";
 import _poolCloudkinSeer from "../pool/cloudkin-seer.js";
 import _poolCloudreachCavalry from "../pool/cloudreach-cavalry.js";
+import _poolCoalitionWarbrute from "../pool/coalition-warbrute.js";
 import _poolCoercedConfession from "../pool/coerced-confession.js";
 import _poolCoercedToKill from "../pool/coerced-to-kill.js";
 import _poolColossodonYearling from "../pool/colossodon-yearling.js";
@@ -346,6 +347,7 @@ import _poolGrounded from "../pool/grounded.js";
 import _poolGroundswell from "../pool/groundswell.js";
 import _poolGrovetenderDruids from "../pool/grovetender-druids.js";
 import _poolGrowExtraArms from "../pool/grow-extra-arms.js";
+import _poolGuardianOfNewBenalia from "../pool/guardian-of-new-benalia.js";
 import _poolGuardianOfTheGreatConduit from "../pool/guardian-of-the-great-conduit.js";
 import _poolGuardiansMagemark from "../pool/guardians-magemark.js";
 import _poolGuidingBolt from "../pool/guiding-bolt.js";
@@ -820,6 +822,7 @@ import _poolTreeOfRedemption from "../pool/tree-of-redemption.js";
 import _poolTroublemakerOuphe from "../pool/troublemaker-ouphe.js";
 import _poolTrudgeGarden from "../pool/trudge-garden.js";
 import _poolTurncoatKunoichi from "../pool/turncoat-kunoichi.js";
+import _poolTurtleDuck from "../pool/turtle-duck.js";
 import _poolTuvasaTheSunlit from "../pool/tuvasa-the-sunlit.js";
 import _poolTweeze from "../pool/tweeze.js";
 import _poolUlvenwaldMystics from "../pool/ulvenwald-mystics.js";
@@ -1064,6 +1067,7 @@ const shard: CardShard = {
     _poolCloudhoofKirin,
     _poolCloudkinSeer,
     _poolCloudreachCavalry,
+    _poolCoalitionWarbrute,
     _poolCoercedConfession,
     _poolCoercedToKill,
     _poolColossodonYearling,
@@ -1263,6 +1267,7 @@ const shard: CardShard = {
     _poolGroundswell,
     _poolGrovetenderDruids,
     _poolGrowExtraArms,
+    _poolGuardianOfNewBenalia,
     _poolGuardianOfTheGreatConduit,
     _poolGuardiansMagemark,
     _poolGuidingBolt,
@@ -1737,6 +1742,7 @@ const shard: CardShard = {
     _poolTroublemakerOuphe,
     _poolTrudgeGarden,
     _poolTurncoatKunoichi,
+    _poolTurtleDuck,
     _poolTuvasaTheSunlit,
     _poolTweeze,
     _poolUlvenwaldMystics,

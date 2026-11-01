@@ -403,6 +403,17 @@ export type GameEvent =
       readonly asItAttacks: boolean;
     })
   | (Base & {
+      /** A creature was tapped to pay a cost of another permanent's keyword
+       * that taps creatures for it: `creature` enlisted by the attacking
+       * `for` (rule 702.154c), or `creature` crewed the Vehicle / saddled the
+       * Mount `for` (702.122b, 702.171c). Announced as the cost is paid,
+       * once per creature, after the creatures' own `permanent-tapped`. */
+      readonly type: "creature-tapped-for";
+      readonly creature: ObjectId;
+      readonly for: ObjectId;
+      readonly as: "enlist" | "crew" | "saddle";
+    })
+  | (Base & {
       /** Permanents phased out together (rule 702.26b) — those phased out
        * directly and, after them, what phased out indirectly with them
        * (702.26g). No zone changed (702.26d): nothing that watches a

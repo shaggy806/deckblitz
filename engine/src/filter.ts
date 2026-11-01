@@ -364,6 +364,31 @@ export interface CardFilter {
    * `saddledBy` first. Without a source, nothing saddled it.
    */
   readonly saddledSource?: boolean;
+  /**
+   * It **crewed** the permanent applying the filter this turn (rule
+   * 702.122b-c — `GameObject.crewedThisTurn`): Subterranean Schooner's
+   * "target creature that crewed it this turn", Getaway Car's. Read as
+   * `saddledSource` is: against `FilterContext.source` where the filter is
+   * matched with one, bound to `crewedBy` in an effect's filter. A creature
+   * that left the battlefield is a new object and crewed nothing.
+   */
+  readonly crewedSource?: boolean;
+  /** `crewedSource` bound to the permanent it means — written by
+   * `bindDynamicCompares`, never authored. */
+  readonly crewedBy?: ObjectId;
+  /** It was **crewed by** the permanent applying the filter this turn (rule
+   * 702.122c — that permanent's `GameObject.crewedThisTurn`): Balthier and
+   * Fran's "whenever a Vehicle crewed by Balthier and Fran this turn
+   * attacks" (a trigger filter, read while the source is on the
+   * battlefield). The Vehicle has to be the same object it was crewed as
+   * (rule 400.7). */
+  readonly crewedBySource?: boolean;
+  /** It **enlisted** a creature this combat (rule 702.154c —
+   * `GameObject.enlistedIn`): Aradesh, the Founder's "whenever a creature
+   * you control attacks, if it enlisted a creature this combat" (an
+   * intervening-if on the trigger object). One that has left the
+   * battlefield is a new object and enlisted nothing. */
+  readonly enlistedThisCombat?: boolean;
   /** `saddledSource` bound to the permanent it means — written by
    * `bindDynamicCompares`, never authored. */
   readonly saddledBy?: ObjectId;
@@ -1051,16 +1076,38 @@ export interface FilterContext {
  * still finds the creatures that saddled it (Fortune, Loyal Steed's ruling).
  */
 export function saddledMount(state: GameState, creature: GameObject, mount: ObjectId): boolean {
-  const records = creature.saddledThisTurn;
-  if (records === undefined || records.length === 0) return false;
-  const object = state.objects[mount];
+  return tappedForThisTurn(state, (creature.saddledThisTurn ?? []).map((r) => ({ permanent: r.mount, stint: r.stint })), mount);
+}
+
+/**
+ * Whether `creature` crewed `vehicle` this turn (rule 702.122b-c) — the
+ * Vehicle as it is on the battlefield now or, once it has left, as it last
+ * was there, as {@link saddledMount} reads a Mount.
+ */
+export function crewedVehicle(state: GameState, creature: GameObject, vehicle: ObjectId): boolean {
+  return tappedForThisTurn(
+    state,
+    (creature.crewedThisTurn ?? []).map((r) => ({ permanent: r.vehicle, stint: r.stint })),
+    vehicle,
+  );
+}
+
+/** Whether `records` (a creature's crew or saddle records) name `permanent`
+ * in its stint on the battlefield now, or its last one there. */
+function tappedForThisTurn(
+  state: GameState,
+  records: readonly { readonly permanent: ObjectId; readonly stint: number }[],
+  permanent: ObjectId,
+): boolean {
+  if (records.length === 0) return false;
+  const object = state.objects[permanent];
   const stint =
     object === undefined
-      ? state.ceasedTokens?.[mount]?.zoneChangeCount
+      ? state.ceasedTokens?.[permanent]?.zoneChangeCount
       : object.zone === "battlefield"
         ? (object.zoneChangeCount ?? 0)
         : object.lastKnown?.zoneChangeCount;
-  return stint !== undefined && records.some((r) => r.mount === mount && r.stint === stint);
+  return stint !== undefined && records.some((r) => r.permanent === permanent && r.stint === stint);
 }
 
 /** The partner of a `blockingRelation` clause: `source` itself, or the
@@ -1577,6 +1624,21 @@ export function matchesFilter(
     const monstrous = live !== undefined ? live.zone === "battlefield" && live.monstrous === true : lki!.monstrous === true;
     if (monstrous !== filter.monstrous) return false;
   }
+  if (filter.enlistedThisCombat !== undefined) {
+    // Rule 702.154c, in the combat under way: the mark is the combat's. A
+    // creature off the battlefield enlisted nothing (400.7), unless it's
+    // read as it last existed there (608.2h).
+    const mark = live !== undefined ? (live.zone === "battlefield" ? live.enlistedIn : undefined) : lki!.enlistedIn;
+    const enlisted =
+      mark !== undefined &&
+      mark.turn === state.turn.number &&
+      mark.phase === (state.turn.combatPhases ?? 1) &&
+      (state.turn.step === "declare-attackers" ||
+        state.turn.step === "declare-blockers" ||
+        state.turn.step === "combat-damage" ||
+        state.turn.step === "end-combat");
+    if (enlisted !== filter.enlistedThisCombat) return false;
+  }
   if (filter.bandedWithSource !== undefined || filter.bandedWith !== undefined) {
     const with_ = filter.bandedWith ?? ctx.source;
     const other = with_ === undefined ? undefined : state.objects[with_];
@@ -1616,6 +1678,22 @@ export function matchesFilter(
     const did = live !== undefined && mount !== undefined && saddledMount(state, live, mount);
     if (filter.saddledSource !== undefined && did !== filter.saddledSource) return false;
     if (filter.saddledBy !== undefined && !did) return false;
+  }
+  if (filter.crewedSource !== undefined || filter.crewedBy !== undefined) {
+    // Rule 702.122b-c, as saddle's: only a creature on the battlefield now.
+    const vehicle = filter.crewedBy ?? ctx.source;
+    const did = live?.zone === "battlefield" && vehicle !== undefined && crewedVehicle(state, live, vehicle);
+    if (filter.crewedSource !== undefined && did !== filter.crewedSource) return false;
+    if (filter.crewedBy !== undefined && !did) return false;
+  }
+  if (filter.crewedBySource !== undefined) {
+    // Rule 702.122c: the source crewed this very permanent this turn.
+    const by = ctx.source === undefined ? undefined : state.objects[ctx.source];
+    const crewed =
+      live?.zone === "battlefield" &&
+      by?.zone === "battlefield" &&
+      (by.crewedThisTurn ?? []).some((r) => r.vehicle === live.id && r.stint === (live.zoneChangeCount ?? 0));
+    if (crewed !== filter.crewedBySource) return false;
   }
   if (filter.goaded !== undefined) {
     // Goaded is a designation of a permanent (rule 701.15b): nothing off the

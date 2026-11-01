@@ -481,6 +481,17 @@ export interface GameObject {
    */
   saddledThisTurn?: { readonly mount: ObjectId; readonly stint: number }[];
   /**
+   * The Vehicles this creature **crewed** this turn (rule 702.122b: it did as
+   * it was tapped to pay one's crew cost), each with the `zoneChangeCount`
+   * that Vehicle had then — "a creature that crewed it this turn"
+   * (`CardFilter.crewedSource`, 702.122c) and "a Vehicle crewed by ~ this
+   * turn" (`CardFilter.crewedBySource`). Kept on the creature, as
+   * `saddledThisTurn` is, so the Vehicle leaving doesn't erase it; a zone
+   * change of the creature clears it (rule 400.7), and so does the cleanup
+   * step.
+   */
+  crewedThisTurn?: { readonly vehicle: ObjectId; readonly stint: number }[];
+  /**
    * Exerted (rule 701.43a): it won't untap during this player's next untap
    * step — the player who exerted it, whoever controls it then (a creature
    * borrowed until end of turn and exerted still untaps in its owner's untap
@@ -491,6 +502,10 @@ export interface GameObject {
   /** The turn it was last exerted — Combat Celebrant's "if this creature
    * hasn't been exerted this turn". Gone with any change of zone. */
   exertedOnTurn?: number;
+  /** The combat in which it last **enlisted** a creature (rule 702.154c —
+   * it tapped one to pay its enlist cost as it attacked): the
+   * `enlistedThisCombat` filter clause. Gone with any change of zone. */
+  enlistedIn?: CombatId;
   /**
    * "It doesn't untap during its controller's next untap step" (Junk
    * Winder; the `tap` effect's `doesntUntapNext`): the next untap step of
@@ -1601,8 +1616,15 @@ export interface PtModifier {
   /** Layer 7b — sets base toughness alone, ordered with `setPt` by
    * timestamp: an exchange of a life total with a toughness (rule 701.12g —
    * Tree of Redemption's "exchange your life total with this creature's
-   * toughness"), which leaves its power as it was. */
+   * toughness"), which leaves its power as it was, or an `animate` with only
+   * a `toughness` (Chariot of the Sun's "has base toughness 1"). */
   setToughness?: number;
+  /** Layer 7b — sets base power alone, ordered with `setPt` by timestamp:
+   * an `animate` with only a `power` ("target creature with flying has base
+   * power 0 until end of turn" — Island of Wak-Wak; Riptide Mangler's "base
+   * power becomes equal to target creature's power"). Its toughness stays as
+   * it was. An `animate` with only a `toughness` sets `setToughness`. */
+  setPower?: number;
   /** Layer 7d — "switch its power and toughness" (rule 613.4d, the
    * `switch-pt` effect): applied after every other P/T effect and counter,
    * its power becomes its toughness and its toughness its power. Two
@@ -1903,6 +1925,10 @@ export interface LastKnownInfo {
   /** It was saddled (rule 702.171b) — Caustic Bronco's "if this creature
    * isn't saddled", read as it last existed once it has left (its ruling). */
   readonly saddled?: boolean;
+  /** The combat it last enlisted a creature in (rule 702.154c —
+   * `GameObject.enlistedIn`): Aradesh, the Founder's "if it enlisted a
+   * creature this combat", asked again of an attacker that has left. */
+  readonly enlistedIn?: CombatId;
   /** It had lost all its abilities (layer 6 — Turn to Frog), so none of its
    * own leaves-the-battlefield abilities trigger. */
   readonly lostAbilities: boolean;
@@ -3465,6 +3491,10 @@ export type AwaitingDecision =
       /** Set when the choice is the two creatures tapped for a spell's
        * conspire cost (see {@link ConspireAsk}). `then` is unused. */
       readonly conspire?: ConspireAsk;
+      /** Set when the choice is the creature an attacker enlists as it
+       * attacks (rule 702.154a — see `GameState.pendingEnlist`): `source`
+       * is the attacker. `then` is unused. */
+      readonly enlist?: true;
       /** Set when the choice pays an activated ability's cost (its
        * `returnToHand`), not an effect resolving: the player who activated
        * it, who gets priority once it's made (rule 117.3c). */
@@ -3825,6 +3855,17 @@ export type DelayedTriggerTiming =
 export interface CombatId {
   readonly turn: number;
   readonly phase: number;
+}
+
+/** One attacker of a declaration (rule 508.1a) as it tapped: what it
+ * attacks, whether attacking tapped it (no vigilance — 508.1f), and whether
+ * it's its first attack this turn. Announced together once every cost to
+ * attack is paid (508.1k) — see `GameState.pendingEnlist`. */
+export interface DeclaredAttacker {
+  readonly id: ObjectId;
+  readonly defender: PlayerId | ObjectId;
+  readonly taps: boolean;
+  readonly first: boolean;
 }
 
 /** One object in a {@link TurnHistory} list; a token stack entering or
@@ -4908,6 +4949,21 @@ export interface GameState {
    */
   pendingExerts?: ObjectId[];
   /**
+   * An attack being declared whose attackers' enlist costs (rule 702.154a —
+   * optional costs to attack, 508.1g) are still being asked: the attackers
+   * have tapped and any attack tax is paid, but none is announced as
+   * attacking yet (508.1k), so nothing has triggered on the attack. `queue`
+   * is the attackers with enlist still to ask, one at a time
+   * (`Game.promptNextEnlist`); `declared` is the declaration, announced
+   * once the last is answered (`Game.announceAttackers`). Optional so a
+   * snapshot saved before it existed still loads.
+   */
+  pendingEnlist?: {
+    readonly player: PlayerId;
+    readonly queue: readonly ObjectId[];
+    readonly declared: readonly DeclaredAttacker[];
+  };
+  /**
    * Creatures put onto the battlefield attacking whose controller still owes
    * the choice of what each attacks (rule 508.4) — queued as they enter and
    * asked, one batch per player, by `promptNextEnterAttacking` in the
@@ -5687,6 +5743,8 @@ export function tokenFoldKey(o: GameObject): string {
     o.renowned ?? false,
     o.saddled ?? false,
     o.saddledThisTurn ?? null,
+    o.crewedThisTurn ?? null,
+    o.enlistedIn ?? null,
     o.exertedBy ?? null,
     o.exertedOnTurn ?? null,
     o.skipsNextUntap ?? false,

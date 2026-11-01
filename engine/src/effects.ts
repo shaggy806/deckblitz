@@ -1400,7 +1400,10 @@ export type ThisWayKind =
   | "tapped"
   /** Counters it removed, counted one by one — Garnet, Princess of
    * Alexandria's "for each lore counter removed this way", Mister Hyde's "If
-   * you do" (a `remove-counters` effect's, or a `remove-counter`'s). */
+   * you do" (a `remove-counters` effect's, or a `remove-counter`'s). As an
+   * amount with no `filter` or `sumOf`, the counters a player lost count too
+   * (a `remove-player-counters` — rule 122.1): Leeches' "loses all poison
+   * counters … deals that much damage". */
   | "counters-removed"
   /** Permanents it put a counter on — Ripples of Potential's "permanents you
    * control that had a counter put on them this way", after a proliferate.
@@ -2756,6 +2759,9 @@ export type EffectSpec =
       readonly among?: CardFilter;
       readonly min?: number;
       readonly max?: number;
+      /** A number's question, when it isn't "Choose a number" — a
+       * `counters-distributed` share's "How many +1/+1 counters on …?". */
+      readonly prompt?: string;
     }
   | {
       /**
@@ -5350,6 +5356,40 @@ export type EffectSpec =
       readonly counter: string;
     }
   | {
+      /**
+       * "Distribute N +1/+1 counters among any number of creatures you
+       * control" with **no targets** (rule 608.2d — Vastwood Hydra, Feast of
+       * the Victorious Dead, Blessing of Frost): the division is chosen as
+       * this resolves, not as the spell is cast. `total` is read as it
+       * begins; then the effect's controller chooses which of the
+       * battlefield permanents matching `filter` (from their side, or from
+       * the side of the player in target slot `controlledByTarget` — Invoke
+       * Justice's "creatures and/or Vehicles target player controls") get
+       * any — none, or as many as the total, a token stack's tokens each one
+       * (the `choose-permanents` decision) — and then how many each chosen
+       * one gets, at least one each and all of the total among them (a
+       * `choose-number` per chosen one but the last, which takes the rest).
+       * Not targeted: a hexproof creature can get them (Blessing of Frost's
+       * ruling). The counters go on once every share is chosen.
+       */
+      readonly kind: "counters-distributed";
+      readonly counter: string;
+      readonly total: EffectAmount;
+      readonly filter: CardFilter;
+      readonly controlledByTarget?: number;
+      /** What they're distributed among, for the prompts ("creatures you
+       * control"). */
+      readonly among?: string;
+      /** Engine-built, never authored: the total read as it began, the
+       * permanents chosen (a token stack once per token), and the shares
+       * chosen so far, in that order. */
+      readonly progress?: {
+        readonly total: number;
+        readonly picked?: readonly ObjectId[];
+        readonly shares?: readonly number[];
+      };
+    }
+  | {
       /** "Prevent the next N damage that would be dealt this turn to any
        * number of targets, divided as you choose" (Remedy, Embolden — rules
        * 601.2d, 615.7): each target of the group starting at slot `from`
@@ -5514,9 +5554,19 @@ export type EffectSpec =
       readonly target: EffectTargetRef;
       /** Its base P/T. A live amount is read once, as the effect applies
        * (rule 608.2h — Zur, Eternal Schemer's "base power and base
-       * toughness each equal to its mana value"), and stays that. */
-      readonly power: EffectAmount;
-      readonly toughness: EffectAmount;
+       * toughness each equal to its mana value"), and stays that.
+       *
+       * Either alone sets **base power or base toughness alone** in layer
+       * 7b (rule 613.4b), the other left as it is: Island of Wak-Wak's
+       * "target creature with flying has base power 0 until end of turn" is
+       * `{ power: 0, addTypes: [], addSubtypes: [] }`, Riptide Mangler's
+       * "this creature's base power becomes equal to target creature's
+       * power" `power: { powerOf: 0 }` with `duration: "permanent"`, Chariot
+       * of the Sun's "has base toughness 1" `toughness: 1`. With no
+       * `addTypes` nothing becomes a creature; it only sets the value. At
+       * least one of the two is given. */
+      readonly power?: EffectAmount;
+      readonly toughness?: EffectAmount;
       readonly addTypes: readonly CardType[];
       /** "Becomes a [type]" with no "in addition" and no "it's still a …":
        * these card types *replace* its others (rule 205.1a), and a subtype
@@ -7884,6 +7934,10 @@ export interface EffectApi {
   /** How much life `players` (everyone when absent) have lost so far in
    * this resolution — see the `lifeLostThisWay` {@link EffectAmount}. */
   lifeLostThisWay(players?: readonly PlayerId[]): number;
+  /** How many counters `players` (everyone when absent) have had removed
+   * from themselves so far in this resolution — part of the `thisWay:
+   * "counters-removed"` amount (rule 122.1). */
+  playerCountersRemovedThisWay(players?: readonly PlayerId[]): number;
   /** See the `excessDamageThisWay` {@link EffectAmount}: dealt to `to`'s
    * object only, when given. */
   excessDamageThisWay(to?: ObjectId): number;
@@ -8653,6 +8707,12 @@ export interface EffectApi {
    * targets still legal), the answer waiting for `takeKept`. `false` when
    * they've left the game, and nothing was asked. */
   askChooseAmong(chooser: PlayerId, objects: readonly ObjectId[], count: number, prompt: string): boolean;
+  /** See the `"counters-distributed"` {@link EffectSpec}: ask the effect's
+   * controller to choose up to `max` of the battlefield permanents matching
+   * `filter` from `side`'s side (the controller's when absent) — a token
+   * stack up to once per token — the answer waiting for `takeKept`. `false`
+   * when nothing matches (or they've left the game), and nothing was asked. */
+  askChoosePermanentsKept(filter: CardFilter, max: number, prompt: string, side?: PlayerId): boolean;
   /** `players` in turn order from the active player (rule 101.4). */
   apnap(players: readonly PlayerId[]): readonly PlayerId[];
   /** See the `"encore"` {@link EffectSpec}. */
@@ -9031,12 +9091,13 @@ export interface EffectApi {
     readonly untilSourceLeaves?: boolean;
     readonly tappedOnReturn?: boolean;
   }): void;
-  /** `target` becomes a creature — see the `"animate"` {@link EffectSpec}. */
+  /** `target` becomes a creature — see the `"animate"` {@link EffectSpec}.
+   * A `power` or `toughness` left out is left as it is. */
   animate(
     target: TargetRef,
     opts: {
-      readonly power: number;
-      readonly toughness: number;
+      readonly power?: number;
+      readonly toughness?: number;
       readonly addTypes: readonly CardType[];
       readonly setTypes?: readonly CardType[];
       readonly addSubtypes: readonly string[];
@@ -9962,6 +10023,69 @@ const MAX_REPEATS = 200;
  * its `progress`, judged once the pass is over. Once no pass is left, "this
  * way" goes back to the whole resolution's.
  */
+/**
+ * A `counters-distributed` (rule 608.2d), one step at a time: the total read
+ * and the permanents chosen (`askChoosePermanentsKept`, resumed here), then a
+ * share asked for each chosen one but the last — a `choose-value` number
+ * whose `then` is this effect again, the share arriving as its `"x"` — at
+ * least one each and leaving at least one for every one still to come, the
+ * last taking what's left; then the counters go on.
+ */
+function distributeCounters(spec: Extract<EffectSpec, { kind: "counters-distributed" }>, ctx: ResolutionContext): void {
+  const progress = spec.progress;
+  const kind = `${spec.counter} counter`;
+  if (progress === undefined) {
+    const total = Math.max(0, Math.floor(amountValue(spec.total, ctx)));
+    if (total <= 0) return;
+    let side: PlayerId | undefined;
+    if (spec.controlledByTarget !== undefined) {
+      const ref = ctx.targets[spec.controlledByTarget];
+      side = ref === undefined ? undefined : ref.kind === "player" ? ref.player : ctx.controllerOf(ref);
+      // That player gone or the target illegal: nobody to distribute among.
+      if (side === undefined) return;
+    }
+    const below = ctx.parkedCount();
+    const among = spec.among ?? "permanents";
+    const prompt = `Distribute ${total} ${kind}${total === 1 ? "" : "s"} among any number of ${among}: choose which get them`;
+    if (ctx.askChoosePermanentsKept(spec.filter, total, prompt, side)) {
+      ctx.resumeAfterDecisions({ ...spec, progress: { total } }, below);
+    }
+    return;
+  }
+  // Resumed: from the choice of permanents (nothing picked yet), or from a
+  // share's number, which arrives as X.
+  const picked = progress.picked ?? ctx.takeKept();
+  if (picked.length === 0) return;
+  const shares = [...(progress.shares ?? [])];
+  if (progress.picked !== undefined) shares.push(Math.max(1, Math.floor(ctx.x)));
+  let left = progress.total - shares.reduce((n, s) => n + s, 0);
+  while (shares.length < picked.length - 1) {
+    // At least one for each still to come after this one.
+    const most = left - (picked.length - shares.length - 1);
+    if (most <= 1) {
+      shares.push(1);
+      left -= 1;
+      continue;
+    }
+    const name = ctx.objectName(picked[shares.length]);
+    ctx.chooseValue({
+      kind: "choose-value",
+      value: "number",
+      min: 1,
+      max: most,
+      prompt: `How many ${kind}s on ${name}? (${left} left to distribute)`,
+      then: { ...spec, progress: { total: progress.total, picked, shares } },
+    });
+    return;
+  }
+  shares.push(left);
+  // Each pick is one permanent: a token stack's member singled out per pick.
+  picked.forEach((object, i) => {
+    const amount = shares[i] ?? 0;
+    if (amount > 0) ctx.addCounter(ctx.singleOut({ kind: "object", object }), spec.counter, amount);
+  });
+}
+
 function applyRepeat(spec: Extract<EffectSpec, { kind: "repeat" }>, ctx: ResolutionContext): void {
   let progress = spec.progress;
   const finish = (outer: number): void => {
@@ -10554,7 +10678,14 @@ function signedAmountValue(
       for (const entry of done) byPlayer.set(entry.player, (byPlayer.get(entry.player) ?? 0) + valueOf(entry));
       return Math.max(0, ...byPlayer.values());
     }
-    return done.reduce((n, entry) => n + valueOf(entry), 0);
+    // "The number of counters removed this way" counts a player's too (rule
+    // 122.1 — Leeches' "loses all poison counters … that much damage"),
+    // unless the amount asks about objects only (a filter or a sum of them).
+    const fromPlayers =
+      amount.thisWay === "counters-removed" && amount.filter === undefined && amount.sumOf === undefined
+        ? ctx.playerCountersRemovedThisWay(players)
+        : 0;
+    return done.reduce((n, entry) => n + valueOf(entry), fromPlayers);
   }
   if ("countPlayers" in amount) {
     const players = ctx.playersInScope(amount.countPlayers);
@@ -10950,6 +11081,7 @@ function containsDynamicCompare(value: unknown): boolean {
       "sharesLandTypeWith" in value ||
       "sameNameWith" in value ||
       "saddledSource" in value ||
+      "crewedSource" in value ||
       "bandedWithSource" in value ||
       "blockingRelation" in value ||
       "sameNameAsTarget" in value ||
@@ -11063,6 +11195,11 @@ export function bindDynamicCompares(spec: EffectSpec, ctx: ResolutionContext): E
     if (walked["saddledSource"] === true) {
       const { saddledSource: _saddled, ...rest } = walked;
       walked = { ...rest, saddledBy: ctx.source };
+    }
+    // "Each creature that crewed it this turn" (rule 702.122c), likewise.
+    if (walked["crewedSource"] === true) {
+      const { crewedSource: _crewed, ...rest } = walked;
+      walked = { ...rest, crewedBy: ctx.source };
     }
     // "Creatures banded with it" (rule 702.22): the resolving ability's
     // source's band.
@@ -13557,6 +13694,9 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         if (target !== undefined && amount > 0) ctx.addCounter(target, spec.counter, amount);
       });
       return;
+    case "counters-distributed":
+      distributeCounters(spec, ctx);
+      return;
     case "untap-all":
       if (spec.who !== undefined) {
         for (const player of ctx.playersInScope(spec.who)) ctx.untapAll(spec.filter, player, spec.exceptSource === true);
@@ -13606,8 +13746,8 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       const target = resolveEffectTarget(spec.target, ctx);
       if (target !== undefined) {
         ctx.animate(target, {
-          power: amountValue(spec.power, ctx),
-          toughness: amountValue(spec.toughness, ctx),
+          ...(spec.power !== undefined ? { power: amountValue(spec.power, ctx) } : {}),
+          ...(spec.toughness !== undefined ? { toughness: amountValue(spec.toughness, ctx) } : {}),
           addTypes: spec.addTypes,
           setTypes: spec.setTypes,
           addSubtypes: spec.addSubtypes,

@@ -60,6 +60,28 @@ export function lifeLostSince(
   return lost;
 }
 
+/**
+ * How many counters `players` (everyone when absent) have had removed from
+ * themselves since event `since` — a player's counters are counters too (rule
+ * 122.1), so the `thisWay: "counters-removed"` amount adds these to the
+ * permanents': Leeches' "target player loses all poison counters. Leeches
+ * deals **that much** damage to that player". Read off the changes
+ * themselves, so it is what actually came off.
+ */
+export function playerCountersRemovedSince(
+  state: GameState,
+  since: number,
+  players?: readonly PlayerId[],
+): number {
+  const whose = players === undefined ? undefined : new Set(players);
+  let removed = 0;
+  for (const event of eventsSince(state, since)) {
+    if (event.type !== "player-counters-changed" || event.delta >= 0) continue;
+    if (whose === undefined || whose.has(event.player)) removed -= event.delta;
+  }
+  return removed;
+}
+
 /** The excess damage (rule 120.4a) dealt to permanents in the resolution that
  * began at event `since` — see the `excessDamageThisWay` amount. */
 export function excessDamageSince(state: GameState, since: number, to?: ObjectId): number {

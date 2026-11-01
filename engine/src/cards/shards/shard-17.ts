@@ -167,6 +167,7 @@ import _poolDeadeyeNavigator from "../pool/deadeye-navigator.js";
 import _poolDeadlyEmbrace from "../pool/deadly-embrace.js";
 import _poolDeathBaron from "../pool/death-baron.js";
 import _poolDeathCharmer from "../pool/death-charmer.js";
+import _poolDeathsShadow from "../pool/deaths-shadow.js";
 import _poolDeceptiveLandscape from "../pool/deceptive-landscape.js";
 import _poolDeclarationOfNaught from "../pool/declaration-of-naught.js";
 import _poolDeclareDominance from "../pool/declare-dominance.js";
@@ -1040,6 +1041,7 @@ const shard: CardShard = {
     _poolDeadlyEmbrace,
     _poolDeathBaron,
     _poolDeathCharmer,
+    _poolDeathsShadow,
     _poolDeceptiveLandscape,
     _poolDeclarationOfNaught,
     _poolDeclareDominance,

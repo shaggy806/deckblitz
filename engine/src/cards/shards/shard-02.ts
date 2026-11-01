@@ -101,6 +101,7 @@ import _poolCastDown from "../pool/cast-down.js";
 import _poolCastawaysDespair from "../pool/castaways-despair.js";
 import _poolCatBurglar from "../pool/cat-burglar.js";
 import _poolCatacombSlug from "../pool/catacomb-slug.js";
+import _poolCattiBrieOfMithralHall from "../pool/catti-brie-of-mithral-hall.js";
 import _poolCausticBronco from "../pool/caustic-bronco.js";
 import _poolCautiousSurvivor from "../pool/cautious-survivor.js";
 import _poolCavernousMaw from "../pool/cavernous-maw.js";
@@ -940,6 +941,7 @@ const shard: CardShard = {
     _poolCastawaysDespair,
     _poolCatBurglar,
     _poolCatacombSlug,
+    _poolCattiBrieOfMithralHall,
     _poolCausticBronco,
     _poolCautiousSurvivor,
     _poolCavernousMaw,

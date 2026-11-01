@@ -468,7 +468,11 @@ export type CombatRestriction =
    * (only a face-down permanent can be turned face up, so "enchanted
    * creature can't be"), Karlov Watchdog's "permanents your opponents
    * control can't be turned face up during your turn". */
-  | "cant-turn-face-up";
+  | "cant-turn-face-up"
+  /** "Can't crew Vehicles" (rule 702.122d — Revoke Privileges,
+   * Intercessor's Arrest): it can't be tapped to pay a crew cost. A saddle
+   * cost, or any other "tap an untapped creature" cost, still can. */
+  | "cant-crew";
 
 /**
  * A dynamic quantity a characteristic-defining ability can read (rule 604.3).
@@ -480,6 +484,12 @@ export type CountSpec =
   /** How many cards are in its controller's hand (Psychosis Crawler) — its
    * owner's, off the battlefield. */
   | "cards-in-your-hand"
+  /** Its controller's life total (its owner's off the battlefield) — Serra
+   * Avatar's "power and toughness are each equal to your life total". A
+   * negative life total sets a negative P/T: an effect that sets a
+   * creature's power or toughness uses a negative result as it is (rule
+   * 107.1b). */
+  | "your-life-total"
   /** How many cards are in all players' hands together (Werewolf of
    * Ancient Hunger). */
   | "cards-in-all-hands"
@@ -1753,10 +1763,22 @@ export interface StaticAbility {
      * creature in your party" is `{ partySize: true, pt: [1, 0] }`. Reads only
      * types and controllers (layers 2 and 4), so the P/T fold doesn't recurse. */
     readonly partySize?: true;
-    /** The number of cards in the hand of the player whose side it counts
-     * from — Nyxathid's "-1/-1 for each card in **the chosen player's**
-     * hand" (with `forChosenPlayer`). */
-    readonly cardsInHand?: true;
+    /** The number of cards in a hand. `true` is the hand of the player whose
+     * side it counts from: Grim Strider's "this creature gets -1/-1 for each
+     * card in your hand" (`pt: [-1, -1]`), Empyrial Armor's "enchanted
+     * creature gets +1/+1 for each card in your hand", Nyxathid's "… in **the
+     * chosen player's** hand" (with `forChosenPlayer`). `"opponents"` is
+     * every card in that player's opponents' hands together (Enemy of
+     * Enlightenment); `"affected-controller"` is the hand of **the affected
+     * creature's** controller, each creature by its own (Righteous
+     * Authority's "+1/+1 for each card in its controller's hand"). */
+    readonly cardsInHand?: true | "opponents" | "affected-controller";
+    /** That player's life total — Death's Shadow's "this creature gets
+     * -X/-X, where X is your life total" is `{ lifeTotal: true, pt: [-1, -1]
+     * }`. Not clamped: a negative life total is used as it is (rule 107.1b —
+     * "if a calculation … needs to use a negative value, it does so"), so at
+     * -2 life Death's Shadow gets +2/+2. */
+    readonly lifeTotal?: true;
     /** Count from **the chosen player**'s side rather than this permanent's
      * controller's (`GameObject.chosenPlayer`): every "you" in the count is
      * them. No bonus with nobody chosen or once they've left the game. */
@@ -2547,6 +2569,24 @@ export interface StaticAbility {
    * `affects` is ignored — it is always the permanent carrying it.
    */
   readonly exertAsItAttacks?: { readonly unlessExertedThisTurn?: true };
+  /**
+   * Enlist (rule 702.154a — the `enlist()` helper): "as this creature
+   * attacks, you may tap up to one untapped creature you control that you
+   * didn't choose to attack with and that either has haste or has been under
+   * your control continuously since this turn began. When you do, this
+   * creature gets +X/+0 until end of turn, where X is the tapped creature's
+   * power." An optional cost to attack (702.154b, 508.1g), asked of its
+   * controller as the attack is declared — after the attackers tap and
+   * before any of them becomes attacking or anything triggers on the attack
+   * (`Game.promptNextEnlist`, a `choose-permanents` of up to one) — and its
+   * linked "when you do" (607.2h), which the engine adds itself as a
+   * reflexive trigger reading the enlisted creature's power as it resolves.
+   * One instance per creature is asked (702.154d's several aren't). A
+   * creature that enlists another "enlists" it (702.154c): the `enlists`
+   * trigger, and the `enlistedThisCombat` filter clause. `affects` is
+   * ignored — it is always the permanent carrying it.
+   */
+  readonly enlist?: true;
   /**
    * "Spells your opponents cast that target this creature cost an additional
    * 3 life to cast" (Terror of the Peaks): an additional cost of the spell,

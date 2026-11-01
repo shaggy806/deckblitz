@@ -215,6 +215,7 @@ import _poolEmeraldMedallion from "../pool/emerald-medallion.js";
 import _poolEmergentHaunting from "../pool/emergent-haunting.js";
 import _poolEmeriaCaptain from "../pool/emeria-captain.js";
 import _poolEndemicPlague from "../pool/endemic-plague.js";
+import _poolEnemyOfEnlightenment from "../pool/enemy-of-enlightenment.js";
 import _poolEnergizer from "../pool/energizer.js";
 import _poolEngineeredMight from "../pool/engineered-might.js";
 import _poolEngulfTheShore from "../pool/engulf-the-shore.js";
@@ -787,6 +788,7 @@ import _poolVampireLacerator from "../pool/vampire-lacerator.js";
 import _poolVampiricFury from "../pool/vampiric-fury.js";
 import _poolVaporSnag from "../pool/vapor-snag.js";
 import _poolVarchildBetrayerOfKjeldor from "../pool/varchild-betrayer-of-kjeldor.js";
+import _poolVastwoodHydra from "../pool/vastwood-hydra.js";
 import _poolVault75MiddleSchool from "../pool/vault-75-middle-school.js";
 import _poolVault87ForcedEvolution from "../pool/vault-87-forced-evolution.js";
 import _poolVedalkenEngineer from "../pool/vedalken-engineer.js";
@@ -1078,6 +1080,7 @@ const shard: CardShard = {
     _poolEmergentHaunting,
     _poolEmeriaCaptain,
     _poolEndemicPlague,
+    _poolEnemyOfEnlightenment,
     _poolEnergizer,
     _poolEngineeredMight,
     _poolEngulfTheShore,
@@ -1650,6 +1653,7 @@ const shard: CardShard = {
     _poolVampiricFury,
     _poolVaporSnag,
     _poolVarchildBetrayerOfKjeldor,
+    _poolVastwoodHydra,
     _poolVault75MiddleSchool,
     _poolVault87ForcedEvolution,
     _poolVedalkenEngineer,

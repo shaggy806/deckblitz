@@ -1632,6 +1632,46 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(face("Ward—Waterbend {4}.").complete).toBe(false);
   });
 
+  it("enlist (rule 702.154): the keyword and 'whenever this creature enlists a creature'", () => {
+    const guardian = face(
+      "Enlist (As this creature attacks, you may tap a nonattacking creature you control without summoning sickness. When you do, add its power to this creature's until end of turn.)\nWhenever this creature enlists a creature, scry 2.",
+      "Creature — Human Soldier",
+    );
+    expect(guardian.static[0]).toMatchObject({ affects: { scope: "self" }, enlist: true });
+    expect(guardian.triggered[0].trigger).toEqual({ on: "enlists", who: "self" });
+    expect(guardian.triggered[0].effect).toEqual({ kind: "scry", amount: 2 });
+    expect(guardian.complete).toBe(true);
+    // The bare keyword (Keldon Flamesage prints it without reminder text).
+    expect(face("Enlist").static[0]).toMatchObject({ enlist: true });
+  });
+
+  it("crewing and saddling (rules 702.122b-d, 702.171c): 'crews a Vehicle' triggers, 'that crewed it this turn', 'can't crew Vehicles'", () => {
+    const fanatic = face("Haste\nWhenever this creature crews a Vehicle, that Vehicle gains haste until end of turn.", "Creature — Human Pilot");
+    expect(fanatic.triggered[0].trigger).toEqual({ on: "crews-or-saddles", who: "self", as: ["crew"] });
+    expect(fanatic.triggered[0].effect).toEqual({ kind: "grant-keyword", target: "trigger-object", keyword: "haste", duration: "end-of-turn" });
+    expect(fanatic.complete).toBe(true);
+    const vaulter = face(
+      "Whenever this creature saddles a Mount or crews a Vehicle during your main phase, that Mount or Vehicle gains flying until end of turn.",
+      "Creature — Kor Pilot",
+    );
+    expect(vaulter.triggered[0].trigger).toEqual({ on: "crews-or-saddles", who: "self", as: ["crew", "saddle"] });
+    expect(vaulter.triggered[0].condition).toEqual({
+      kind: "all",
+      of: [{ kind: "your-turn" }, { kind: "turn-structure", steps: ["precombat-main", "postcombat-main"] }],
+    });
+    expect(vaulter.complete).toBe(true);
+    // "During your main phase" on any other trigger is a person's.
+    expect(face("Whenever this creature attacks during your main phase, draw a card.").complete).toBe(false);
+    const schooner = face("Whenever this Vehicle attacks, target creature that crewed it this turn explores.\nCrew 1", "Artifact — Vehicle");
+    expect(schooner.triggered[0].targets).toEqual([{ kind: "permanent", filter: { type: "creature", crewedSource: true } }]);
+    expect(schooner.complete).toBe(true);
+    expect(face("Enchant creature\nEnchanted creature can't attack, block, or crew Vehicles.", "Enchantment — Aura").static[0]).toEqual({
+      affects: { scope: "attached" },
+      restrictions: ["cant-attack", "cant-block", "cant-crew"],
+      text: "Enchanted creature can't attack, block, or crew Vehicles.",
+    });
+  });
+
   it("saddle (rule 702.171): the keyword, 'attacks while saddled', 'becomes saddled' and the effect", () => {
     const lagac = face(
       "Deathtouch\nWhenever this creature attacks while saddled, it gets +0/+3 until end of turn.\nSaddle 2 (Tap any number of other creatures you control with total power 2 or more: This Mount becomes saddled until end of turn. Saddle only as a sorcery.)",
@@ -2838,6 +2878,71 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     );
     expect(nyx.static[0].grantPtPerCount).toEqual({ cardsInHand: true, forChosenPlayer: true, pt: [-1, -1] });
     expect(nyx.complete).toBe(true);
+  });
+
+  it("a bonus scaled by a hand size or a life total, and a life-total CDA (static:pt-per-amount)", () => {
+    const strider = face("This creature gets -1/-1 for each card in your hand.", "Creature — Horror");
+    expect(strider.static[0]).toMatchObject({ affects: { scope: "self" }, grantPtPerCount: { cardsInHand: true, pt: [-1, -1] } });
+    expect(strider.complete).toBe(true);
+    const enemy = face("This creature gets -1/-1 for each card in your opponents' hands.", "Creature — Demon");
+    expect(enemy.static[0].grantPtPerCount).toEqual({ cardsInHand: "opponents", pt: [-1, -1] });
+    const authority = face("Enchant creature\nEnchanted creature gets +1/+1 for each card in its controller's hand.", "Enchantment — Aura");
+    expect(authority.static[0]).toMatchObject({
+      affects: { scope: "attached" },
+      grantPtPerCount: { cardsInHand: "affected-controller", pt: [1, 1] },
+    });
+    const meishin = face("All creatures get -X/-0, where X is the number of cards in your hand.", "Legendary Enchantment");
+    expect(meishin.static[0]).toMatchObject({ affects: { scope: "all-creatures" }, grantPtPerCount: { cardsInHand: true, pt: [-1, 0] } });
+    const shadow = face("This creature gets -X/-X, where X is your life total.", "Creature — Avatar");
+    expect(shadow.static[0].grantPtPerCount).toEqual({ lifeTotal: true, pt: [-1, -1] });
+    expect(shadow.complete).toBe(true);
+    const avatar = face("Test Card's power and toughness are each equal to your life total.", "Creature — Avatar");
+    expect(avatar.static[0].setBasePtFromCount).toEqual({ countOf: "your-life-total", plusPower: 0, plusToughness: 0 });
+    expect(avatar.complete).toBe(true);
+  });
+
+  it("base power or base toughness alone (effect:set-base-power-only)", () => {
+    const wak = face("{T}: Target creature with flying has base power 0 until end of turn.", "Land");
+    expect(wak.activated[0].effect).toEqual({
+      kind: "animate",
+      target: 0,
+      power: 0,
+      addTypes: [],
+      addSubtypes: [],
+      duration: "end-of-turn",
+    });
+    expect(wak.complete).toBe(true);
+    const duck = face("{3}: Until end of turn, this creature has base power 4 and gains trample.", "Creature — Turtle Bird");
+    expect(duck.activated[0].effect).toEqual({
+      kind: "animate",
+      target: "source",
+      power: 4,
+      addTypes: [],
+      addSubtypes: [],
+      keywords: ["trample"],
+      duration: "end-of-turn",
+    });
+    const chariot = face(
+      "{2}, {T}: Until end of turn, target creature you control gains flying and has base toughness 1.",
+      "Artifact",
+    );
+    expect(chariot.activated[0].effect).toMatchObject({ kind: "animate", target: 0, toughness: 1, keywords: ["flying"] });
+    expect(chariot.activated[0].effect.power).toBeUndefined();
+    const mangler = face(
+      "{1}{U}: This creature's base power becomes equal to target creature's power. (This effect lasts indefinitely.)",
+      "Creature — Beast",
+    );
+    expect(mangler.activated[0].effect).toMatchObject({ kind: "animate", target: "source", power: { powerOf: 0 }, duration: "permanent" });
+    const wall = face(
+      "At the beginning of your upkeep, this creature's base toughness becomes equal to 1 plus the number of creature cards in your graveyard. (This effect lasts indefinitely.)",
+      "Creature — Wall",
+    );
+    expect(wall.triggered[0].effect).toMatchObject({
+      kind: "animate",
+      target: "source",
+      toughness: { sum: [1, { countInGraveyard: { type: "creature", ownedBy: "you" } }] },
+      duration: "permanent",
+    });
   });
 
   it("its controller draws, discards or gets a poison counter (effect:player-scope-extensions)", () => {
@@ -5017,6 +5122,139 @@ describe("attach hosts (attachedTo among / a player / put-this-way, ontoChosen, 
       affects: { scope: "self" },
       attachOnlyTo: { type: "creature", toughness: { op: "gte", n: 4 } },
       text: "This Equipment can be attached only to a creature with toughness 4 or greater.",
+    });
+  });
+});
+
+describe("counters put or removed this way", () => {
+  const face = (name: string, type_line: string, oracle_text: string) =>
+    parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });
+
+  it("reads Fangs of Kalonia's doubling and Spectacular Showdown's goad on what had a counter put on it this way", () => {
+    const fangs = face(
+      "Fangs of Kalonia",
+      "Sorcery",
+      "Put a +1/+1 counter on target creature you control, then double the number of +1/+1 counters on each creature that had a +1/+1 counter put on it this way.",
+    );
+    expect(fangs.complete).toBe(true);
+    expect(fangs.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "add-counter", target: 0, counter: "+1/+1", amount: 1 },
+        { kind: "double-counters-all", filter: { type: "creature", thisWay: "counters-put" }, counterKind: "+1/+1" },
+      ],
+    });
+    const showdown = face(
+      "Spectacular Showdown",
+      "Sorcery",
+      "Put a double strike counter on target creature, then goad each creature that had a double strike counter put on it this way.",
+    );
+    expect(showdown.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "add-counter", target: 0, counter: "double-strike", amount: 1 },
+        { kind: "goad", filter: { type: "creature", thisWay: "counters-put" } },
+      ],
+    });
+    // A different kind put than the one asked about isn't read.
+    expect(
+      face("Test", "Sorcery", "Put a +1/+1 counter on target creature, then goad each creature that had a shield counter put on it this way.").complete,
+    ).toBe(false);
+  });
+
+  it("reads 'that many' / 'that much' after a removal as the counters removed this way — a player's too", () => {
+    const leeches = face("Leeches", "Sorcery", "Target player loses all poison counters. Leeches deals that much damage to that player.");
+    expect(leeches.complete).toBe(true);
+    expect(leeches.targets).toEqual(["player"]);
+    expect(leeches.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "remove-player-counters", counter: "poison", amount: "all", target: 0 },
+        { kind: "damage", amount: { thisWay: "counters-removed" }, target: 0 },
+      ],
+    });
+    const take = face("Take", "Sorcery", "Remove all +1/+1 counters from target creature you control. Draw that many cards.");
+    expect(take.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "remove-counter", target: 0, counter: "+1/+1", amount: "all" },
+        { kind: "draw", amount: { thisWay: "counters-removed" } },
+      ],
+    });
+  });
+
+  it("reads a 'remove all … counters' cost, its count the ability's X", () => {
+    expect(parseCost("{T}, Remove all +1/+1 counters from ~")?.cost.removeCounter).toEqual({ kind: "+1/+1", count: "all" });
+    const hydra = face(
+      "Molten Hydra",
+      "Creature — Hydra",
+      "{T}, Remove all +1/+1 counters from this creature: It deals damage to any target equal to the number of +1/+1 counters removed this way.",
+    );
+    expect(hydra.activated[0]).toMatchObject({
+      cost: { tap: true, removeCounter: { kind: "+1/+1", count: "all" } },
+      targets: ["any-target"],
+      effect: { kind: "damage", amount: "x", target: 0 },
+    });
+    const amulet = face("Relic Amulet", "Artifact", "{2}, {T}, Remove all charge counters from this artifact: It deals that much damage to target creature.");
+    expect(amulet.activated[0].effect).toEqual({ kind: "damage", amount: "x", target: 0 });
+  });
+
+  it("reads counters distributed by an amount among targets, the total read as it's announced", () => {
+    const caller = face(
+      "Quirion Beastcaller",
+      "Creature — Dryad Warrior",
+      "When this creature dies, distribute X +1/+1 counters among any number of target creatures you control, where X is the number of +1/+1 counters on this creature.",
+    );
+    expect(caller.triggered[0]).toMatchObject({
+      targets: [{ kind: "any-number", of: "creature-you-control" }],
+      divided: { total: { countersOn: "source", counter: "+1/+1" }, slot: 0, of: "+1/+1 counters" },
+      effect: { kind: "counters-divided", from: 0, counter: "+1/+1" },
+    });
+    const upheaval = face(
+      "Undercity Upheaval",
+      "Sorcery",
+      "Undergrowth — Distribute X +1/+1 counters among any number of target creatures you control, where X is the number of creature cards in your graveyard as you cast this spell. Creatures you control gain vigilance until end of turn.",
+    );
+    expect(upheaval.complete).toBe(true);
+    expect(upheaval.divided).toEqual({ total: { countInGraveyard: { type: "creature", ownedBy: "you" } }, slot: 0, of: "+1/+1 counters" });
+  });
+
+  it("reads counters distributed among permanents chosen as it resolves (untargeted)", () => {
+    const frost = face(
+      "Blessing of Frost",
+      "Snow Sorcery",
+      "Distribute X +1/+1 counters among any number of creatures you control, where X is the amount of {S} spent to cast this spell.",
+    );
+    expect(frost.effect).toEqual({
+      kind: "counters-distributed",
+      counter: "+1/+1",
+      total: { manaSpentOf: "source", from: { supertype: "snow" } },
+      filter: { type: "creature", controlledBy: "you" },
+      among: "creatures you control",
+    });
+    const hydra = face(
+      "Vastwood Hydra",
+      "Creature — Hydra",
+      "When this creature dies, you may distribute a number of +1/+1 counters equal to the number of +1/+1 counters on this creature among any number of creatures you control.",
+    );
+    expect(hydra.triggered[0].effect).toMatchObject({
+      kind: "may",
+      effect: { kind: "counters-distributed", total: { countersOn: "source", counter: "+1/+1" }, filter: { type: "creature", controlledBy: "you" } },
+    });
+    // A total it can't read leaves the line alone.
+    expect(face("Test", "Sorcery", "Distribute X +1/+1 counters among any number of creatures you control, where X is your luck.").complete).toBe(false);
+  });
+
+  it("reads Thief of Blood's removal as it enters and the counters it enters with", () => {
+    const thief = face(
+      "Thief of Blood",
+      "Creature — Vampire",
+      "As this creature enters, remove all counters from all permanents. This creature enters with a +1/+1 counter on it for each counter removed this way.",
+    );
+    expect(thief.static[0].replacement).toEqual({
+      event: "enters-battlefield",
+      removeAllCountersFrom: {},
+      counters: { kind: "+1/+1", amount: "removed-as-enters" },
     });
   });
 });

@@ -104,6 +104,7 @@ import _poolCeremonialKnife from "../pool/ceremonial-knife.js";
 import _poolChainStasis from "../pool/chain-stasis.js";
 import _poolChar from "../pool/char.js";
 import _poolChargingBadger from "../pool/charging-badger.js";
+import _poolChariotOfTheSun from "../pool/chariot-of-the-sun.js";
 import _poolCharredGraverobber from "../pool/charred-graverobber.js";
 import _poolChasmGuide from "../pool/chasm-guide.js";
 import _poolChooseYourWeapon from "../pool/choose-your-weapon.js";
@@ -964,6 +965,7 @@ const shard: CardShard = {
     _poolChainStasis,
     _poolChar,
     _poolChargingBadger,
+    _poolChariotOfTheSun,
     _poolCharredGraverobber,
     _poolChasmGuide,
     _poolChooseYourWeapon,

@@ -282,6 +282,7 @@ import _poolGibberingKami from "../pool/gibbering-kami.js";
 import _poolGideonChampionOfJustice from "../pool/gideon-champion-of-justice.js";
 import _poolGigantiform from "../pool/gigantiform.js";
 import _poolGildedPinions from "../pool/gilded-pinions.js";
+import _poolGive from "../pool/give.js";
 import _poolGlarecaster from "../pool/glarecaster.js";
 import _poolGlassblowersPuzzleknot from "../pool/glassblowers-puzzleknot.js";
 import _poolGlasspoolMimic from "../pool/glasspool-mimic.js";
@@ -710,6 +711,7 @@ import _poolStormclawRager from "../pool/stormclaw-rager.js";
 import _poolStormwildCapridor from "../pool/stormwild-capridor.js";
 import _poolStrixhavenStadium from "../pool/strixhaven-stadium.js";
 import _poolStruggleForSkemfar from "../pool/struggle-for-skemfar.js";
+import _poolSubterraneanSchooner from "../pool/subterranean-schooner.js";
 import _poolSuddenShock from "../pool/sudden-shock.js";
 import _poolSugarCoat from "../pool/sugar-coat.js";
 import _poolSunWarriors from "../pool/sun-warriors.js";
@@ -1162,6 +1164,7 @@ const shard: CardShard = {
     _poolGideonChampionOfJustice,
     _poolGigantiform,
     _poolGildedPinions,
+    _poolGive,
     _poolGlarecaster,
     _poolGlassblowersPuzzleknot,
     _poolGlasspoolMimic,
@@ -1590,6 +1593,7 @@ const shard: CardShard = {
     _poolStormwildCapridor,
     _poolStrixhavenStadium,
     _poolStruggleForSkemfar,
+    _poolSubterraneanSchooner,
     _poolSuddenShock,
     _poolSugarCoat,
     _poolSunWarriors,

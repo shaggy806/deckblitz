@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4078 already implemented / 922 missing (marks refreshed 2026-10-31)
+4075 already implemented / 925 missing (marks refreshed 2026-10-31)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -1479,7 +1479,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1486  Witty Roastmaster                        {2}{R}           Creature — Devil Citizen
 [x]  1487  Twitching Doll                           {1}{G}           Artifact Creature — Spider Toy
 [x]  1488  Apex Altisaur                            {7}{G}{G}        Creature — Dinosaur
-[x]  1489  Rain of Riches                           {3}{R}{R}        Enchantment
+[ ]  1489  Rain of Riches                           {3}{R}{R}        Enchantment
 [ ]  1490  Echoes of Eternity                       {3}{C}{C}{C}     Kindred Enchantment — Eldrazi
 [x]  1491  Planar Genesis                           {G}{U}           Instant
 [x]  1492  Crystal Vein                             {0}              Land
@@ -1634,7 +1634,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1641  Traverse the Outlands                    {4}{G}           Sorcery
 [x]  1642  Felidar Sovereign                        {4}{W}{W}        Creature — Cat Beast
 [x]  1643  Trumpeting Carnosaur                     {4}{R}{R}        Creature — Dinosaur
-[x]  1644  Wild-Magic Sorcerer                      {3}{R}           Creature — Orc Shaman Sorcerer
+[ ]  1644  Wild-Magic Sorcerer                      {3}{R}           Creature — Orc Shaman Sorcerer
 [x]  1645  Grenzo, Havoc Raiser                     {R}{R}           Legendary Creature — Goblin Rogue
 [x]  1646  Loyal Warhound                           {1}{W}           Creature — Dog
 [x]  1647  Galadriel's Dismissal                    {W}              Instant
@@ -2527,7 +2527,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2534  Armored Skyhunter                        {3}{W}           Creature — Cat Knight
 [x]  2535  Assault Formation                        {1}{G}           Enchantment
 [ ]  2536  Protean Hulk                             {5}{G}{G}        Creature — Beast
-[ ]  2537  Fangs of Kalonia                         {1}{G}           Sorcery
+[x]  2537  Fangs of Kalonia                         {1}{G}           Sorcery
 [x]  2538  Rip Apart                                {R}{W}           Sorcery
 [x]  2539  Bloodline Keeper // Lord of Lineage      {4}              Creature — Vampire // Creature — Vampire
 [x]  2540  Niv-Mizzet, the Firemind                 {2}{U}{U}{R}{R}  Legendary Creature — Dragon Wizard
@@ -2682,7 +2682,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2689  Essence Scatter                          {1}{U}           Instant
 [x]  2690  Pashalik Mons                            {2}{R}           Legendary Creature — Goblin Warrior
 [ ]  2691  Improvisation Capstone                   {5}{R}{R}        Sorcery — Lesson
-[ ]  2692  Spectacular Showdown                     {1}{R}           Sorcery
+[x]  2692  Spectacular Showdown                     {1}{R}           Sorcery
 [x]  2693  Pip-Boy 3000                             {1}              Artifact — Equipment
 [x]  2694  Skithiryx, the Blight Dragon             {3}{B}{B}        Legendary Creature — Phyrexian Dragon Skeleton
 [x]  2695  Primevals' Glorious Rebirth              {5}{W}{B}        Legendary Sorcery
@@ -3132,7 +3132,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3139  Naya Charm                               {R}{G}{W}        Instant
 [x]  3140  Mask of Griselbrand                      {1}{B}{B}        Legendary Artifact — Equipment
 [x]  3141  Mightform Harmonizer                     {2}{G}{G}        Creature — Insect Druid
-[x]  3142  Overmaster                               {R}              Sorcery
+[ ]  3142  Overmaster                               {R}              Sorcery
 [x]  3143  Herald of War                            {3}{W}{W}        Creature — Angel
 [x]  3144  Canopy Gargantuan                        {5}{G}{G}        Creature — Dragon
 [x]  3145  Karametra, God of Harvests               {3}{G}{W}        Legendary Enchantment Creature — God
@@ -4256,7 +4256,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4263  Jaws of Defeat                           {3}{B}           Enchantment
 [x]  4264  Heartbeat of Spring                      {2}{G}           Enchantment
 [x]  4265  Mysidian Elder                           {2}{R}           Creature — Human Wizard
-[x]  4266  Foil                                     {2}{U}{U}        Instant
+[ ]  4266  Foil                                     {2}{U}{U}        Instant
 [x]  4267  Throat Slitter                           {4}{B}           Creature — Rat Ninja
 [x]  4268  Polluted Mire                            {0}              Land
 [x]  4269  Gargos, Vicious Watcher                  {3}{G}{G}{G}     Legendary Creature — Hydra
@@ -4603,7 +4603,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4610  Skittering Invasion                      {7}              Kindred Sorcery — Eldrazi
 [x]  4611  Entrapment Maneuver                      {3}{W}           Instant
 [x]  4612  Xyris, the Writhing Storm                {2}{G}{U}{R}     Legendary Creature — Snake Leviathan
-[x]  4613  Solar Array                              {3}              Artifact
+[ ]  4613  Solar Array                              {3}              Artifact
 [x]  4614  Furnace of Rath                          {1}{R}{R}{R}     Enchantment
 [x]  4615  Witherbloom Apprentice                   {B}{G}           Creature — Human Druid
 [x]  4616  Summon: Fat Chocobo                      {4}{G}           Enchantment Creature — Saga Bird

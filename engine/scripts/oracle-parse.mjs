@@ -43,6 +43,7 @@ import {
   mentor,
   crew,
   dethrone,
+  enlist,
   evolve,
   extort,
   increment,
@@ -185,6 +186,8 @@ function keywordPart(part, faceName, typeLine = "") {
   if ((m = /^crew (\d+)$/i.exec(p))) return { activated: [crew(Number(m[1]))] };
   // Saddle N (rule 702.171a): crew's cost at sorcery speed, the Mount saddled.
   if ((m = /^saddle (\d+)$/i.exec(p))) return { activated: [saddle(Number(m[1]))] };
+  // Enlist (rule 702.154a): an optional cost to attack, its pump the engine's.
+  if (/^enlist$/i.test(p)) return { static: [enlist()] };
   if ((m = /^afflict (\d+)$/i.exec(p))) return { triggered: [afflict(Number(m[1]))] };
   // Bushido N (rule 702.45a): its blocks and becomes-blocked triggers.
   if ((m = /^bushido (\d+)$/i.exec(p))) return { triggered: bushido(Number(m[1])) };
@@ -892,7 +895,10 @@ const TARGET_PHRASES = [
 function modifiedTargetOf(phrase) {
   const m = new RegExp(
     "^target (.+?)(?: (you control|an opponent controls|you don't control))?" +
-      "(?: with (flying|reach|power (\\d+) or (greater|less)|toughness (\\d+) or (greater|less)|mana value (\\d+) or (greater|less)))?$",
+      "(?: with (flying|reach|power (\\d+) or (greater|less)|toughness (\\d+) or (greater|less)|mana value (\\d+) or (greater|less)))?" +
+      // "…that crewed it this turn" / "…that saddled it this turn" (rules
+      // 702.122c, 702.171c): tapped for the source's crew or saddle cost.
+      "(?: that (crewed|saddled) it this turn)?$",
     "i",
   ).exec(phrase);
   if (m === null) return undefined;
@@ -924,6 +930,7 @@ function modifiedTargetOf(phrase) {
     else if (m[6] !== undefined) filter.toughness = cmp(m[6], m[7]);
     else if (m[8] !== undefined) filter.manaValue = cmp(m[8], m[9]);
   }
+  if (m[10] !== undefined) filter[m[10].toLowerCase() === "crewed" ? "crewedSource" : "saddledSource"] = true;
   const whose = m[2] === undefined ? undefined : m[2].toLowerCase() === "you control" ? "you" : "opponent";
   return { kind: "permanent", ...(whose !== undefined ? { whose } : {}), filter };
 }
@@ -1140,7 +1147,11 @@ export function parseCost(text) {
     else if (part === "Discard your hand") cost.discardHand = true;
     // "Discard a card at random" (Mage il-Vec): nothing to choose.
     else if (part === "Discard a card at random") cost.discard = { count: 1, random: true };
-    else if ((m = /^Remove (?:X|any number of) ([+-]\d+\/[+-]\d+|\w+) counters from ~$/i.exec(part))) {
+    else if ((m = /^Remove all ([+-]\d+\/[+-]\d+|\w+) counters from ~$/i.exec(part))) {
+      // Every one there, none allowed; the number removed is the ability's X
+      // (Catti-brie of Mithral Hall).
+      cost.removeCounter = { kind: m[1], count: "all" };
+    } else if ((m = /^Remove (?:X|any number of) ([+-]\d+\/[+-]\d+|\w+) counters from ~$/i.exec(part))) {
       // X announced as it's activated (rules 601.2b, 602.2b), 0 allowed.
       cost.removeCounter = { kind: m[1], count: "x" };
     } else if ((m = new RegExp(`^Remove ${N} ([+-]\\d+/[+-]\\d+|\\w+) counters? from ~$`, "i").exec(part))) {
@@ -1283,6 +1294,15 @@ export function parseTrigger(clause) {
   // each turn" only when it wasn't saddled already.
   if ((m = /^Whenever ~ becomes saddled( for the first time each turn)?$/.exec(c))) {
     return [{ on: "becomes-saddled", who: "self", ...(m[1] ? { firstTimeEachTurn: true } : {}) }];
+  }
+  // Enlisting (rule 702.154c): it tapped a creature for its enlist cost.
+  if (/^Whenever ~ enlists a creature$/.test(c)) return self("enlists");
+  // Crewing and saddling (rules 702.122b, 702.171c): it was tapped for a
+  // Vehicle's crew cost or a Mount's saddle cost — that Vehicle or Mount the
+  // trigger object. "During your main phase" is read with the clause.
+  if ((m = /^Whenever ~ (crews a Vehicle|saddles a Mount|saddles a Mount or crews a Vehicle|crews a Vehicle or saddles a Mount)$/.exec(c))) {
+    const as = [...(/crews/.test(m[1]) ? ["crew"] : []), ...(/saddles/.test(m[1]) ? ["saddle"] : [])];
+    return [{ on: "crews-or-saddles", who: "self", as }];
   }
   if (/^Whenever ~ deals combat damage to a player$|^Whenever ~ deals combat damage to an opponent$/.test(c)) {
     return self("deals-combat-damage-to-player");
@@ -1591,6 +1611,61 @@ function dividedDamageOf(s, ctx) {
   return { kind: "damage-divided", from: slot };
 }
 
+/**
+ * Counters distributed with a total that is an amount. Among targets (rule
+ * 601.2d): "distribute X +1/+1 counters among any number of target creatures
+ * you control, where X is the number of +1/+1 counters on ~" (Quirion
+ * Beastcaller, Undercity Upheaval) — a `counters-divided` over the
+ * `any-number` group it adds, its total read as the division is announced
+ * (`ctx.divided.value`). Among permanents chosen as it resolves (rule 608.2d):
+ * "distribute X +1/+1 counters among any number of creatures you control,
+ * where X is …" (Blessing of Frost), "distribute a number of +1/+1 counters
+ * equal to the number of +1/+1 counters on ~ among any number of creatures
+ * you control" (Vastwood Hydra) — a `counters-distributed`. `undefined` for
+ * any other sentence, `null` for one of these it can't read.
+ */
+function distributedCountersOf(s, ctx) {
+  const m =
+    /^(?:~ |[Ii]t )?[Dd]istribute (?:X ([+-]\d+\/[+-]\d+|[a-z]+) counters|a number of ([+-]\d+\/[+-]\d+|[a-z]+) counters equal to (.+?)) among any number of (other )?(target )?(.+?)(?:, where X is (.+?))?\.$/.exec(s);
+  if (m === null) return undefined;
+  const [, xKind, eqKind, eqPhrase, other, targeted, plural, where] = m;
+  const counter = (xKind ?? eqKind).toLowerCase();
+  const phrase = xKind !== undefined ? where : eqPhrase;
+  if (phrase === undefined || (xKind === undefined && where !== undefined)) return null;
+  const read = ctx.spell ? phrase.replace(/ as you cast (?:~|this spell)$/, "") : phrase;
+  let total = dividedTotalOf(read);
+  if (total === null) {
+    let g;
+    if ((g = /^the number of (.+?) cards in your graveyard$/.exec(read))) {
+      const filter = parseTypePhrase(g[1]);
+      if (filter === null || Object.keys(filter).length === 0) return null;
+      total = { countInGraveyard: { ...filter, ownedBy: "you" } };
+    } else if (ctx.spell && /^the amount of \{S\} spent to cast (?:~|this spell)$/.test(read)) {
+      total = { manaSpentOf: "source", from: { supertype: "snow" } };
+    } else return null;
+  }
+  if (targeted !== undefined) {
+    if (ctx.divided === undefined || xKind === undefined) return null;
+    const single = `target ${singularTarget(plural.replace(/ your opponents control$/, " an opponent controls"))}`;
+    const of = targetOf(single);
+    if (of === undefined) return null;
+    const slot = ctx.target({ kind: "any-number", of: other !== undefined ? { kind: "other", of } : of });
+    ctx.divided.value = { total, slot, of: `${counter} counters` };
+    return { kind: "counters-divided", from: slot, counter };
+  }
+  if (other !== undefined) return null;
+  const own = / (you control|an opponent controls|your opponents control)$/.exec(plural);
+  const filter = parseTypePhrase(own === null ? plural : plural.slice(0, own.index));
+  if (filter === null || Object.keys(filter).length === 0) return null;
+  return {
+    kind: "counters-distributed",
+    counter,
+    total,
+    filter: own === null ? filter : { ...filter, controlledBy: own[1] === "you control" ? "you" : "opponent" },
+    among: plural,
+  };
+}
+
 export function parseSentence(sentence, ctx) {
   const s = sentence.replace(/\s+/g, " ").trim();
   // "…, where X is the number of …" / "for each …" define an amount by a rule
@@ -1676,6 +1751,12 @@ export function parseSentence(sentence, ctx) {
         return { kind: "prevent-damage-divided", from: slot };
       }
     }
+  }
+  // Counters distributed by an amount, among targets or among permanents
+  // chosen as it resolves (`distributedCountersOf`) — also ahead of the guard.
+  {
+    const d = distributedCountersOf(s, ctx ?? {});
+    if (d !== undefined) return d;
   }
   if (/\bwhere X\b|\bfor each\b/i.test(s) && !/^add .*for each [\w+/-]+ counter removed this way\.$/i.test(s)) return null;
   // "Until end of turn, whenever …, …", "whenever … this turn, …" and "until
@@ -1892,6 +1973,13 @@ export function parseSentence(sentence, ctx) {
     const who = { "you get": undefined, "each player gets": "each-player", "each opponent gets": "each-opponent" }[m[1].toLowerCase()];
     return { kind: "add-player-counters", counter: "rad", amount: amount(m[2]), ...(who !== undefined ? { who } : {}) };
   }
+  // A player losing every counter of a kind (rule 122.8): "target player
+  // loses all poison counters" (Leeches), "… all rad counters" (Survivor's
+  // Med Kit's RadAway).
+  if ((m = re(`(target player|target opponent|you) loses? all (poison|rad|experience) counters`).exec(s))) {
+    const who = m[1].toLowerCase() === "you" ? {} : { target: slot(m[1]) };
+    return { kind: "remove-player-counters", counter: m[2].toLowerCase(), amount: "all", ...who };
+  }
 
   // Life.
   if ((m = re(`(?:you )?gain ${N} life`).exec(s))) return { kind: "gain-life", amount: amount(m[1]) };
@@ -2049,6 +2137,25 @@ export function parseSentence(sentence, ctx) {
     return { kind: "amass", amount: Number(m[2]), creatureType };
   }
 
+  // A counter put on a target, then something done to "each creature that
+  // had a [kind] counter put on it this way" (`thisWay: "counters-put"` — only
+  // that kind was put): Fangs of Kalonia's "then double the number of +1/+1
+  // counters on each …", Spectacular Showdown's "then goad each …".
+  if (
+    (m = /^put (a|an|one|two|three) ([+-]\d+\/[+-]\d+|[a-z]+(?: strike)?) counters? on (target [^,]+), then (double the number of ([+-]\d+\/[+-]\d+|[a-z]+) counters on|goad) each creature that had an? ([+-]\d+\/[+-]\d+|[a-z]+(?: strike)?) counter put on it this way\.$/i.exec(s)) &&
+    m[2].toLowerCase() === m[6].toLowerCase() &&
+    (m[5] === undefined || m[5].toLowerCase() === m[2].toLowerCase())
+  ) {
+    const counter = m[2].toLowerCase().replace(" ", "-");
+    // Read with a one-word stand-in for the kind ("double strike" is two).
+    const one = m[1] === "a" || m[1] === "an" || m[1] === "one";
+    const placed = parseSentence(`Put ${m[1]} plain counter${one ? "" : "s"} on ${m[3]}.`, ctx);
+    if (placed === null || placed.kind !== "add-counter") return null;
+    const put = { ...placed, counter };
+    const those = { type: "creature", thisWay: "counters-put" };
+    const then = m[5] !== undefined ? { kind: "double-counters-all", filter: those, counterKind: counter } : { kind: "goad", filter: those };
+    return { kind: "sequence", effects: [put, then] };
+  }
   // Counters.
   // Any named kind: +1/+1, oil (Phyrexia: All Will Be One), stun, shield.
   if ((m = re(`put ${N} ([+-]\\d+/[+-]\\d+|[a-z]+) counters? on (~|${TARGET}|each creature you control|each other creature you control)`).exec(s))) {
@@ -2927,6 +3034,57 @@ export function parseSentence(sentence, ctx) {
     };
   }
 
+  // Base power or base toughness alone (layer 7b, rule 613.4b — `animate`
+  // with only a `power` or a `toughness`): Island of Wak-Wak's "target
+  // creature with flying has base power 0 until end of turn", Turtle-Duck's
+  // "until end of turn, ~ has base power 4 and gains trample", Chariot of the
+  // Sun's "until end of turn, target creature you control gains flying and
+  // has base toughness 1", Riptide Mangler's "~'s base power becomes equal to
+  // target creature's power" and Wall of Tombstones' "~'s base toughness
+  // becomes equal to 1 plus the number of creature cards in your graveyard"
+  // (both indefinitely).
+  {
+    const baseOne = (who, which, value, keywords, duration) => {
+      const target = who === "~" ? "source" : slot(who);
+      if (target === undefined || value === null) return null;
+      const kws = keywords.filter(Boolean).map((k) => KEYWORDS[k.toLowerCase()]);
+      return {
+        kind: "animate",
+        target,
+        [which.toLowerCase()]: value,
+        addTypes: [],
+        addSubtypes: [],
+        ...(kws.length > 0 ? { keywords: kws } : {}),
+        duration,
+      };
+    };
+    // The keyword form first: a lazy target phrase would otherwise swallow
+    // "target creature gains flying and" as the target.
+    let b;
+    let r = null;
+    if ((b = re(`until end of turn, (~|${TARGET}) gains ${KW} and has base (power|toughness) (\\d+)`).exec(s))) {
+      r = baseOne(b[1], b[3], Number(b[4]), [b[2]], "end-of-turn");
+    } else if ((b = re(`(~|${TARGET}) has base (power|toughness) (\\d+) until end of turn`).exec(s))) {
+      r = baseOne(b[1], b[2], Number(b[3]), [], "end-of-turn");
+    } else if ((b = re(`until end of turn, (~|${TARGET}) has base (power|toughness) (\\d+)(?: and gains ${KW})?`).exec(s))) {
+      r = baseOne(b[1], b[2], Number(b[3]), [b[4]], "end-of-turn");
+    }
+    if (r !== null) return r;
+    if ((b = re(`~'s base (power|toughness) becomes equal to (?:(\\w+) plus )?(.+?)(?: \\(This effect lasts indefinitely\\.\\))?`).exec(s))) {
+      const plus = b[2] === undefined ? 0 : numberOf(b[2]);
+      let value = null;
+      const of = /^(target creature)'s power$/i.exec(b[3]);
+      const grave = /^the number of (.+?) cards in your graveyard$/i.exec(b[3]);
+      if (of !== null) value = { powerOf: slot(of[1]) };
+      else if (grave !== null) {
+        const filter = parseTypePhrase(grave[1]);
+        value = filter === null ? null : { countInGraveyard: { ...filter, ownedBy: "you" } };
+      } else value = dividedTotalOf(b[3]);
+      if (value !== null && typeof plus === "number") {
+        return baseOne("~", b[1], plus === 0 ? value : { sum: [plus, value] }, [], "permanent");
+      }
+    }
+  }
   // Rule 613.4d: a switch, applied in layer 7d.
   if ((m = re(`switch (~|${TARGET})'s power and toughness until end of turn`).exec(s))) {
     return { kind: "switch-pt", target: m[1] === "~" ? "source" : slot(m[1]), duration: "end-of-turn" };
@@ -3363,6 +3521,16 @@ export function parseEffect(text, outer) {
     }
     // A choice among the spell's own targets as it resolves (Incriminate,
     // Barrin's Spite): two or three sentences, one `choose-among-targets`.
+    // A removal of counters and "that many" after it (`countersRemovedAt`).
+    const removedThen = countersRemovedAt(sentences, i, ctx);
+    if (removedThen !== null) {
+      for (const effect of removedThen.effects) {
+        parsed.push(effect);
+        hints.push({ sentence, effect });
+      }
+      skip = removedThen.used - 1;
+      continue;
+    }
     const among = amongTargetsAt(sentences, i, ctx);
     if (among !== null) {
       parsed.push(among.effect);
@@ -3778,6 +3946,49 @@ function energyAmountAt(sentences, i, ctx) {
     effect,
   };
   return { effects: [{ kind: "get-energy", amount: got[1].length / 3 }, may], used: j + 1 - i };
+}
+
+/**
+ * A removal of counters, then "that many" / "that much" in the next
+ * sentence: "Remove all +1/+1 counters from target creature you control.
+ * Draw that many cards." (Take), "Target player loses all poison counters.
+ * ~ deals that much damage to that player." (Leeches) — the count is the
+ * resolution's `thisWay: "counters-removed"` (a player's counters included,
+ * rule 122.1). `{ effects, used }`, or null.
+ */
+function countersRemovedAt(sentences, i, ctx) {
+  const next = sentences[i + 1];
+  if (next === undefined || /\bX\b/.test(next) || !/\bthat (?:many|much)\b/i.test(next)) return null;
+  if (!/^(?:remove|target (?:player|opponent) loses all|you lose all)\b/i.test(sentences[i])) return null;
+  const before = ctx.targets.length;
+  const fail = () => {
+    ctx.targets.length = before;
+    return null;
+  };
+  const removal = parseSentence(sentences[i], ctx);
+  if (removal === null || containsUndefined(removal)) return fail();
+  if (!["remove-counter", "remove-counter-all", "remove-player-counters"].includes(removal.kind)) return fail();
+  // "…to that player": the player the removal targeted, read as a target of
+  // its own and folded back onto that slot.
+  const thatPlayer = typeof removal.target === "number" && /\bthat player\b/i.test(next);
+  const text = next.replace(/\bthat (?:many|much)\b/gi, "X").replace(/\bthat player\b/i, "target player");
+  const own = ctx.targets.length;
+  const inner = parseSentence(text, ctx);
+  if (inner === null || containsUndefined(inner) || !JSON.stringify(inner).includes('"x"')) return fail();
+  if (thatPlayer && ctx.targets.length !== own + 1) return fail();
+  if (thatPlayer) ctx.targets.length = own;
+  const removed = { thisWay: "counters-removed" };
+  const swap = (v, key) =>
+    v === "x"
+      ? removed
+      : thatPlayer && key === "target" && v === own
+        ? removal.target
+        : Array.isArray(v)
+          ? v.map((w) => swap(w))
+          : v !== null && typeof v === "object"
+            ? Object.fromEntries(Object.entries(v).map(([k, w]) => [k, swap(w, k)]))
+            : v;
+  return { effects: [removal, swap(inner)], used: 2 };
 }
 
 function amongTargetsAt(sentences, i, ctx) {
@@ -5150,6 +5361,16 @@ export function parseFace(face, ctx = {}) {
         ability.__todo = [`a restriction: "${rest.slice(rest.indexOf("Activate only "))}"`];
         rest = rest.slice(0, rest.indexOf(" Activate only "));
       }
+      // A "remove all … counters" cost's count is the ability's X: "…, where
+      // X is the number of counters removed this way" reads it as X.
+      // So do "damage … equal to the number of … counters removed this way"
+      // (Molten Hydra, Torture Chamber) and "that much damage" (Relic Amulet).
+      if (ability.cost.removeCounter?.count === "all" && !/\bX\b/.test(rest.replace(/, where X is the number of (?:[\w+/-]+ )?counters removed this way\./, ""))) {
+        rest = rest
+          .replace(/, where X is the number of (?:[\w+/-]+ )?counters removed this way\./, ".")
+          .replace(/ deals damage to (.+?) equal to the number of (?:[\w+/-]+ )?counters removed this way\./, " deals X damage to $1.")
+          .replace(/ deals that much damage to /, " deals X damage to ");
+      }
       // "{R}, Sacrifice this creature: It deals 2 damage to …" (Tinder Wall,
       // Barbarian Lunatic): a permanent's own ability, so "it" is its source.
       i = fillEffect(ability, rest, { tokenFor, ...(/^It deals /.test(rest) ? { it: "source" } : {}) }, lines, i);
@@ -5167,12 +5388,25 @@ export function parseFace(face, ctx = {}) {
       // intervening "if" (the rulings).
       const whileSaddled = / while saddled$/.test(clause);
       if (whileSaddled) clause = clause.replace(/ while saddled$/, "");
+      // "Whenever ~ crews a Vehicle during your main phase" (Canyon Vaulter):
+      // part of when it triggers — the turn can't move on with it on the
+      // stack, so the ability's condition, asked again, agrees.
+      const duringMain = / during your main phase$/.test(clause);
+      if (duringMain) clause = clause.replace(/ during your main phase$/, "");
       const parsedTriggers = parseTrigger(clause);
-      if (parsedTriggers === null || (whileSaddled && !parsedTriggers.every((t) => t.on === "attacks" && t.who === "self"))) {
+      if (
+        parsedTriggers === null ||
+        (whileSaddled && !parsedTriggers.every((t) => t.on === "attacks" && t.who === "self")) ||
+        (duringMain && !parsedTriggers.every((t) => t.on === "crews-or-saddles"))
+      ) {
         out.todo.push(printed(raw));
         continue;
       }
       let rest = comma > 0 ? line.slice(comma + 2) : "";
+      // "That Vehicle" / "that Mount or Vehicle": the trigger object, as "it".
+      if (parsedTriggers.every((t) => t.on === "crews-or-saddles")) {
+        rest = rest.replace(/^that (?:Mount or Vehicle|Vehicle or Mount|Vehicle|Mount) /, "it ");
+      }
       let oncePerTurn = false;
       rest = rest.replace(/ This ability triggers only once each turn\.$/, () => {
         oncePerTurn = true;
@@ -5185,6 +5419,14 @@ export function parseFace(face, ctx = {}) {
         text: printed(raw),
         ...(oncePerTurn ? { oncePerTurn: true } : {}),
         ...(whileSaddled ? { whileCondition: { kind: "source", filter: { saddled: true } } } : {}),
+        ...(duringMain
+          ? {
+              condition: {
+                kind: "all",
+                of: [{ kind: "your-turn" }, { kind: "turn-structure", steps: ["precombat-main", "postcombat-main"] }],
+              },
+            }
+          : {}),
       };
       let triggers = parsedTriggers;
       const meldWhole = MELD_SENTENCE.exec(rest);
@@ -5888,6 +6130,9 @@ function faceDownAsAt(sentences, i, ctx) {
 }
 
 function itOf(triggers) {
+  // "That Vehicle" / "that Mount" (read as "it"): the permanent crewed or
+  // saddled, the trigger object.
+  if (triggers.every((t) => t.on === "crews-or-saddles")) return "trigger-object";
   const objectEvents = ["enters-battlefield", "dies", "attacks", "blocks", "becomes-blocked", "deals-combat-damage-to-player"];
   if (triggers.every((t) => t.who === "self" && objectEvents.includes(t.on))) return "source";
   // The permanent a spell or ability targeted ("that creature" — Monk Gyatso).
@@ -6403,6 +6648,20 @@ function parseStatic(line, text) {
       };
     }
   }
+  // Thief of Blood's "As ~ enters, remove all counters from all permanents.
+  // ~ enters with a +1/+1 counter on it for each counter removed this way."
+  // (rule 614.1c): one replacement, `removeAllCountersFrom` and the count.
+  {
+    const w = /^As ~ enters, remove all counters from all ([a-z ]+)\. ~ enters with an? ([+-]\d+\/[+-]\d+|[a-z]+) counter on it for each counter removed this way\.$/.exec(line);
+    const filter = w === null ? null : w[1] === "permanents" ? {} : parseTypePhrase(w[1]);
+    if (filter !== null && w !== null) {
+      return {
+        affects: { scope: "self" },
+        replacement: { event: "enters-battlefield", removeAllCountersFrom: filter, counters: { kind: w[2], amount: "removed-as-enters" } },
+        text,
+      };
+    }
+  }
   // "~ enters with two oil counters on it" (rule 614.1c), any named kind —
   // "on him" / "on her" for a character (Captain America's shield counter).
   {
@@ -6702,6 +6961,45 @@ function parseStatic(line, text) {
       text,
     };
   }
+  // A bonus scaled by a hand size or a life total (`grantPtPerCount`'s
+  // `cardsInHand` and `lifeTotal`): Grim Strider's "~ gets -1/-1 for each
+  // card in your hand", Righteous Authority's "enchanted creature gets
+  // +1/+1 for each card in its controller's hand", Enemy of Enlightenment's
+  // "… in your opponents' hands", Death's Shadow's "~ gets -X/-X, where X is
+  // your life total", Meishin's "all creatures get -X/-0, where X is the
+  // number of cards in your hand".
+  {
+    const subject = "(~|Enchanted creature|Equipped creature|All creatures|Creatures you control)";
+    const hands = { "your hand": true, "your opponents' hands": "opponents", "its controller's hand": "affected-controller" };
+    const affectsOf = (s) =>
+      s === "~"
+        ? { scope: "self" }
+        : s === "All creatures"
+          ? { scope: "all-creatures" }
+          : s === "Creatures you control"
+            ? { scope: "creatures-you-control" }
+            : { scope: "attached" };
+    const per = new RegExp(`^${subject} gets? ([+-]\\d+)/([+-]\\d+) for each card in (your hand|your opponents' hands|its controller's hand)\\.$`).exec(line);
+    if (per !== null) {
+      return { affects: affectsOf(per[1]), grantPtPerCount: { cardsInHand: hands[per[4]], pt: [Number(per[2]), Number(per[3])] }, text };
+    }
+    const x = new RegExp(`^${subject} gets? ([+-])X/([+-])(X|0), where X is (your life total|the number of cards in your hand)\\.$`).exec(line);
+    if (x !== null) {
+      const sign = (s) => (s === "-" ? -1 : 1);
+      const pt = [sign(x[2]), x[4] === "0" ? 0 : sign(x[3])];
+      const count = x[5] === "your life total" ? { lifeTotal: true } : { cardsInHand: true };
+      return { affects: affectsOf(x[1]), grantPtPerCount: { ...count, pt }, text };
+    }
+  }
+  // Serra Avatar's "~'s power and toughness are each equal to your life
+  // total" — a CDA (rule 604.3).
+  if (line === "~'s power and toughness are each equal to your life total.") {
+    return {
+      affects: { scope: "self" },
+      setBasePtFromCount: { countOf: "your-life-total", plusPower: 0, plusToughness: 0 },
+      text,
+    };
+  }
   // Party (rule 700.8): Archpriest of Iona's CDA.
   if (line === "~'s power is equal to the number of creatures in your party.") {
     return {
@@ -6831,6 +7129,10 @@ function parseStatic(line, text) {
   }
   if ((m = /^(?:Enchanted|Equipped) creature can't attack or block\.$/.exec(line))) {
     return { affects: { scope: "attached" }, restrictions: ["cant-attack", "cant-block"], text };
+  }
+  // "…, or crew Vehicles" (rule 702.122d — Revoke Privileges).
+  if (/^Enchanted (?:creature|permanent) can't attack, block, or crew Vehicles\.$/.test(line)) {
+    return { affects: { scope: "attached" }, restrictions: ["cant-attack", "cant-block", "cant-crew"], text };
   }
   // Arrest's "…, and its activated abilities can't be activated" — the
   // host's abilities, for every player (`hostOfSource`); "unless they're

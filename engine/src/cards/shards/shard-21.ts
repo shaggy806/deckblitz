@@ -284,6 +284,7 @@ import _poolGhostlyKeybearer from "../pool/ghostly-keybearer.js";
 import _poolGiantCaterpillar from "../pool/giant-caterpillar.js";
 import _poolGiganticBigBear from "../pool/gigantic-big-bear.js";
 import _poolGimlisAxe from "../pool/gimlis-axe.js";
+import _poolGiveTake from "../pool/give-take.js";
 import _poolGlarbCalamitysAugur from "../pool/glarb-calamitys-augur.js";
 import _poolGleefulSabotage from "../pool/gleeful-sabotage.js";
 import _poolGliderKids from "../pool/glider-kids.js";
@@ -552,6 +553,7 @@ import _poolRavensCrime from "../pool/ravens-crime.js";
 import _poolRaze from "../pool/raze.js";
 import _poolRazortoothRats from "../pool/razortooth-rats.js";
 import _poolReaveSoul from "../pool/reave-soul.js";
+import _poolRecklessVelocitaur from "../pool/reckless-velocitaur.js";
 import _poolRedHerring from "../pool/red-herring.js";
 import _poolRedeem from "../pool/redeem.js";
 import _poolRefuse from "../pool/refuse.js";
@@ -1115,6 +1117,7 @@ const shard: CardShard = {
     _poolGiantCaterpillar,
     _poolGiganticBigBear,
     _poolGimlisAxe,
+    _poolGiveTake,
     _poolGlarbCalamitysAugur,
     _poolGleefulSabotage,
     _poolGliderKids,
@@ -1383,6 +1386,7 @@ const shard: CardShard = {
     _poolRaze,
     _poolRazortoothRats,
     _poolReaveSoul,
+    _poolRecklessVelocitaur,
     _poolRedHerring,
     _poolRedeem,
     _poolRefuse,

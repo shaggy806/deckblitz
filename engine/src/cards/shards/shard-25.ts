@@ -241,6 +241,7 @@ import _poolFanaticOfMogis from "../pool/fanatic-of-mogis.js";
 import _poolFarTraveler from "../pool/far-traveler.js";
 import _poolFarm from "../pool/farm.js";
 import _poolFeastOfSanity from "../pool/feast-of-sanity.js";
+import _poolFeastOfTheVictoriousDead from "../pool/feast-of-the-victorious-dead.js";
 import _poolFeiyiSnake from "../pool/feiyi-snake.js";
 import _poolFeldonRonomExcavator from "../pool/feldon-ronom-excavator.js";
 import _poolFellThePheasant from "../pool/fell-the-pheasant.js";
@@ -571,6 +572,7 @@ import _poolReturnedPastcaller from "../pool/returned-pastcaller.js";
 import _poolRevelOfTheFallenGod from "../pool/revel-of-the-fallen-god.js";
 import _poolReverberatingSummons from "../pool/reverberating-summons.js";
 import _poolReverentHoplite from "../pool/reverent-hoplite.js";
+import _poolRevokePrivileges from "../pool/revoke-privileges.js";
 import _poolReyavMasterSmith from "../pool/reyav-master-smith.js";
 import _poolRhonasTheIndomitable from "../pool/rhonas-the-indomitable.js";
 import _poolRibbonSnake from "../pool/ribbon-snake.js";
@@ -1079,6 +1081,7 @@ const shard: CardShard = {
     _poolFarTraveler,
     _poolFarm,
     _poolFeastOfSanity,
+    _poolFeastOfTheVictoriousDead,
     _poolFeiyiSnake,
     _poolFeldonRonomExcavator,
     _poolFellThePheasant,
@@ -1409,6 +1412,7 @@ const shard: CardShard = {
     _poolRevelOfTheFallenGod,
     _poolReverberatingSummons,
     _poolReverentHoplite,
+    _poolRevokePrivileges,
     _poolReyavMasterSmith,
     _poolRhonasTheIndomitable,
     _poolRibbonSnake,

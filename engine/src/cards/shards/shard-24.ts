@@ -50,6 +50,7 @@ import _poolAvenSquire from "../pool/aven-squire.js";
 import _poolAwakenTheSkyTyrant from "../pool/awaken-the-sky-tyrant.js";
 import _poolAxgardBraggart from "../pool/axgard-braggart.js";
 import _poolBalefulStrix from "../pool/baleful-strix.js";
+import _poolBalthierAndFran from "../pool/balthier-and-fran.js";
 import _poolBandTogether from "../pool/band-together.js";
 import _poolBaneAlleyBlackguard from "../pool/bane-alley-blackguard.js";
 import _poolBanisherPriest from "../pool/banisher-priest.js";
@@ -551,6 +552,7 @@ import _poolRethink from "../pool/rethink.js";
 import _poolRhetCropSpearmaster from "../pool/rhet-crop-spearmaster.js";
 import _poolRhoxBrute from "../pool/rhox-brute.js";
 import _poolRickJonesDestinedSidekick from "../pool/rick-jones-destined-sidekick.js";
+import _poolRighteousAuthority from "../pool/righteous-authority.js";
 import _poolRikuOfManyPaths from "../pool/riku-of-many-paths.js";
 import _poolRingsight from "../pool/ringsight.js";
 import _poolRiptideDirector from "../pool/riptide-director.js";
@@ -910,6 +912,7 @@ const shard: CardShard = {
     _poolAwakenTheSkyTyrant,
     _poolAxgardBraggart,
     _poolBalefulStrix,
+    _poolBalthierAndFran,
     _poolBandTogether,
     _poolBaneAlleyBlackguard,
     _poolBanisherPriest,
@@ -1411,6 +1414,7 @@ const shard: CardShard = {
     _poolRhetCropSpearmaster,
     _poolRhoxBrute,
     _poolRickJonesDestinedSidekick,
+    _poolRighteousAuthority,
     _poolRikuOfManyPaths,
     _poolRingsight,
     _poolRiptideDirector,

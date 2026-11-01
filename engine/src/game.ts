@@ -343,6 +343,7 @@ import type {
   AwaitingDecision,
   CasualtyAsk,
   ConspireAsk,
+  DeclaredAttacker,
   EnterAttachHost,
   FaceDownAs,
   FaceDownKind,
@@ -424,6 +425,7 @@ import {
   eventsSince as eventLogSince,
   excessDamageSince,
   lifeLostSince,
+  playerCountersRemovedSince,
   thisWayEntries,
 } from "./this-way.js";
 import type { ThisWayEntry } from "./this-way.js";
@@ -8614,10 +8616,12 @@ export class Game {
     for (const id of permanents) {
       const object = this.state.objects[id];
       // Regeneration shields last only this turn (rule 514.2), as does being
-      // saddled (702.171b) and what a creature saddled this turn (702.171c).
+      // saddled (702.171b) and what a creature saddled this turn (702.171c)
+      // or crewed (702.122b).
       delete object.regenerationShields;
       delete object.saddled;
       delete object.saddledThisTurn;
+      delete object.crewedThisTurn;
       if (object.damageMarked !== 0 || object.markedByDeathtouch) {
         object.damageMarked = 0;
         object.markedByDeathtouch = false;
@@ -8975,12 +8979,7 @@ export class Game {
     // complete (508.3), so an attack trigger's "if no other creatures are
     // attacking that player" sees every attacker, not just the ones declared
     // before its own.
-    const declaredNow: {
-      readonly id: ObjectId;
-      readonly defender: PlayerId | ObjectId;
-      readonly taps: boolean;
-      readonly first: boolean;
-    }[] = [];
+    const declaredNow: DeclaredAttacker[] = [];
     // Each band's members as they attack (rule 702.22c) — a stack's entry
     // woken into one creature per token, each a member.
     const bands = new Map<number, ObjectId[]>();
@@ -9034,6 +9033,135 @@ export class Game {
       if (payment === null) throw new Error(`${player} can't pay the {${tax}} it costs to attack`);
       this.executePayment(player, payment);
     }
+    // Enlist (rule 702.154b): an optional cost to attack, chosen and paid
+    // (508.1g-j) before any attacker becomes attacking (508.1k) — so the
+    // declaration is announced, and its attack triggers trigger, only once
+    // every enlist has been asked. Aradesh's "if it enlisted a creature
+    // this combat" sees it as its attack trigger triggers.
+    const enlisting = declaredNow.map((d) => d.id).filter((id) => this.hasEnlist(id));
+    if (enlisting.length > 0) {
+      this.state.pendingEnlist = { player, queue: enlisting, declared: declaredNow };
+      this.state.awaiting = null;
+      if (this.promptNextEnlist()) return;
+    }
+    this.announceAttackers(declaredNow);
+  }
+
+  /** Has `id`, a permanent, enlist (rule 702.154a — `StaticAbility.enlist`)? */
+  private hasEnlist(id: ObjectId): boolean {
+    const object = this.state.objects[id];
+    return object !== undefined && object.zone === "battlefield" && this.hasOwnStatic(object, (a) => a.enlist === true);
+  }
+
+  /** What `attacker` may enlist (rule 702.154a): an untapped creature its
+   * controller controls that wasn't chosen to attack, other than itself,
+   * with haste or under that player's control continuously since the turn
+   * began (as for a {T} ability — rule 302.6). */
+  private enlistCandidates(attacker: ObjectId): ObjectId[] {
+    const by = this.state.objects[attacker];
+    if (by === undefined || by.zone !== "battlefield") return [];
+    return this.state.zones.shared.battlefield.filter((id) => {
+      if (id === attacker) return false;
+      const object = this.state.objects[id];
+      return (
+        object !== undefined &&
+        object.controller === by.controller &&
+        !object.tapped &&
+        object.attacking === null &&
+        effectiveTypes(this.state, this.registry, object).includes("creature") &&
+        !this.tapAbilityBlockedBySickness(object)
+      );
+    });
+  }
+
+  /** Ask the next attacker's enlist (see `GameState.pendingEnlist`) as a
+   * `choose-permanents` of up to one creature, skipping any with nothing to
+   * enlist. False once none is left to ask — the caller then announces the
+   * attack. */
+  private promptNextEnlist(): boolean {
+    const pending = this.state.pendingEnlist;
+    if (pending === undefined) return false;
+    let queue = pending.queue;
+    while (queue.length > 0) {
+      const [attacker, ...rest] = queue;
+      queue = rest;
+      const eligible = this.enlistCandidates(attacker);
+      if (eligible.length === 0) continue;
+      this.state.pendingEnlist = { ...pending, queue };
+      this.state.awaiting = {
+        kind: "choose-permanents",
+        player: pending.player,
+        eligible,
+        min: 0,
+        max: 1,
+        prompt: `Enlist — you may tap a nonattacking creature to add its power to ${nameOf(this.state.objects[attacker])}'s until end of turn`,
+        then: { kind: "sequence", effects: [] },
+        source: attacker,
+        x: 0,
+        enlist: true,
+      };
+      return true;
+    }
+    this.state.pendingEnlist = { ...pending, queue };
+    return false;
+  }
+
+  /**
+   * Answers an attacker's enlist (`promptNextEnlist`): the creature chosen,
+   * if any, is tapped as the cost (rule 702.154a) — the attacker enlists it
+   * (702.154c) — and the linked "when you do, this creature gets +X/+0 until
+   * end of turn, where X is the tapped creature's power" triggers (607.2h),
+   * a reflexive ability reading that power as it resolves, as it last
+   * existed if it has left. Then the next attacker is asked, and once none
+   * is left the attack is announced.
+   */
+  private applyEnlist(player: PlayerId, chosen: readonly ObjectId[], attacker: ObjectId): void {
+    this.state.awaiting = null;
+    const picked = chosen[0];
+    const by = this.state.objects[attacker];
+    if (picked !== undefined && by !== undefined && this.enlistCandidates(attacker).includes(picked)) {
+      const id = this.splitOneFromStack(picked);
+      const enlisted = this.state.objects[id];
+      enlisted.tapped = true;
+      invalidateComputedCache();
+      this.emit({ type: "permanent-tapped", object: id });
+      by.enlistedIn = { turn: this.state.turn.number, phase: this.state.turn.combatPhases ?? 1 };
+      this.emit({ type: "creature-tapped-for", creature: id, for: attacker, as: "enlist" });
+      this.state.pendingTriggers.push({
+        sourceObjectId: attacker,
+        cardName: printedCardName(by),
+        abilityIndex: 0,
+        controller: player,
+        lastKnownRefs: {
+          source: by.zoneChangeCount ?? 0,
+          tapped: { object: id, zoneChangeCount: enlisted.zoneChangeCount ?? 0 },
+        },
+        reflexive: {
+          targets: [],
+          effect: {
+            kind: "modify-pt",
+            target: "source",
+            power: { powerOf: "tapped" },
+            toughness: 0,
+            duration: "end-of-turn",
+          },
+          text: "Enlist — this creature gets +X/+0 until end of turn, where X is the tapped creature's power.",
+        },
+      });
+    }
+    if (this.promptNextEnlist()) return;
+    const pending = this.state.pendingEnlist;
+    delete this.state.pendingEnlist;
+    if (pending !== undefined) this.announceAttackers(pending.declared);
+  }
+
+  /**
+   * The attack just declared becomes one (rule 508.1k), every cost to attack
+   * paid: each attacker's `attacker-declared` (after its `permanent-tapped`,
+   * 508.1f), the declaration's `attackers-declared` and each player's
+   * `player-attacked` (508.3d), then the exerts asked of its attackers.
+   */
+  private announceAttackers(declaredNow: readonly DeclaredAttacker[]): void {
     const allAttackers = declaredNow.map((d) => d.id);
     for (const { id, defender, taps, first } of declaredNow) {
       // Attacking *taps* the creature, so a "becomes tapped" trigger (rule
@@ -17608,13 +17736,16 @@ export class Game {
         return `${def.name}'s ability can't remove chosen counters beside that cost`;
       }
       const removal = ability.cost.removeCounter;
+      // "Remove all" is off the source alone, of one kind.
+      if (removal.count === "all") return `${def.name}'s ability can't remove all of chosen counters`;
       const count = removal.count === "x" ? Math.max(0, Math.floor(x ?? ability.minX ?? 0)) : removal.count;
       // Rule 118.3: not enough counters to remove, no paying it.
       const can = this.costCounterSources(player, sourceId, ability);
       if ((removal.among === true ? can.total : can.most) < count) {
         return `${player} has too few counters to remove for ${def.name}'s cost`;
       }
-    } else if (ability.cost.removeCounter !== undefined) {
+    } else if (ability.cost.removeCounter !== undefined && ability.cost.removeCounter.count !== "all") {
+      // "Remove all …" is payable with none to remove (Catti-brie's ruling).
       const { kind } = ability.cost.removeCounter;
       const count =
         ability.cost.removeCounter.count === "x" ? Math.max(0, Math.floor(x ?? 0)) : ability.cost.removeCounter.count;
@@ -17889,8 +18020,11 @@ export class Game {
     });
     const {
       source, def, ability, grantedAbility, sourceStint,
-      sacrificeVictim, sacrificeParts, chosenX, tapPicked, payment, shares, waterbent, modeOffer,
+      sacrificeVictim, sacrificeParts, tapPicked, payment, shares, waterbent, modeOffer,
     } = planned;
+    // The X announced — or, for a "remove all" cost, the counters it removed
+    // (set as the cost is paid, below).
+    let chosenX = planned.chosenX;
     let sacrificedRef: LastKnownRefs["sacrificed"];
 
     // Pay the cost.
@@ -17909,6 +18043,14 @@ export class Game {
     // Saddle (rule 702.171c): each creature tapped for the cost saddles the
     // source as it's tapped — whether or not the ability goes on to resolve.
     if (ability.saddle === true) this.recordSaddlers(sourceId, tapped);
+    // Crew (rule 702.122b): each creature tapped for the cost crews the
+    // Vehicle, likewise. Each one's crewing or saddling is announced for
+    // "whenever this creature crews a Vehicle / saddles a Mount".
+    if (ability.crew === true) this.recordCrewers(sourceId, tapped);
+    const tappedAs = tapCostKeyword(ability);
+    if (tappedAs !== undefined) {
+      for (const id of tapped) this.emit({ type: "creature-tapped-for", creature: id, for: sourceId, as: tappedAs });
+    }
     const tappedRef: LastKnownRefs["tapped"] =
       tapped.length === 1
         ? { object: tapped[0], zoneChangeCount: this.state.objects[tapped[0]].zoneChangeCount ?? 0 }
@@ -17918,7 +18060,11 @@ export class Game {
     if (lifeCost > 0) this.changeLife(player, -lifeCost);
     if (ability.cost.removeCounter !== undefined && !chosenCounterCost(ability.cost)) {
       const { kind } = ability.cost.removeCounter;
-      const count = ability.cost.removeCounter.count === "x" ? chosenX : ability.cost.removeCounter.count;
+      const asked = ability.cost.removeCounter.count;
+      const count = asked === "x" ? chosenX : asked === "all" ? (source.counters[kind] ?? 0) : asked;
+      // "Where X is the number of counters removed this way": the X the
+      // ability carries from here (rule 601.2h, via 602.2b).
+      if (asked === "all") chosenX = count;
       // Removing none (X = 0) removes nothing, and announces nothing.
       if (count > 0) {
         source.counters[kind] = (source.counters[kind] ?? 0) - count;
@@ -18245,7 +18391,7 @@ export class Game {
     // "Remove a +1/+1 counter from a creature you control": which, chosen
     // now too (rules 602.2b, 601.2h).
     const removal = ability.cost.removeCounter;
-    if (removal !== undefined && chosenCounterCost(ability.cost)) {
+    if (removal !== undefined && removal.count !== "all" && chosenCounterCost(ability.cost)) {
       const count = removal.count === "x" ? chosenX : removal.count;
       const can = this.costCounterSources(player, sourceId, ability);
       this.withDecisionSource(sourceId, () =>
@@ -23396,6 +23542,19 @@ export class Game {
           (spec.asItAttacks !== true || event.asItAttacks) &&
           this.matchesWho(spec.who, event.object, self)
         );
+      case "enlists":
+        return (
+          event.type === "creature-tapped-for" &&
+          event.as === "enlist" &&
+          this.matchesWho(spec.who, event.for, self)
+        );
+      case "crews-or-saddles":
+        return (
+          event.type === "creature-tapped-for" &&
+          event.as !== "enlist" &&
+          spec.as.includes(event.as) &&
+          this.matchesWho(spec.who, event.creature, self)
+        );
       case "becomes-monstrous":
         return (
           event.type === "became-monstrous" &&
@@ -23867,6 +24026,12 @@ export class Game {
         ? event.object
         : event.type === "chapter-resolved"
           ? event.saga
+        : // The creature enlisted, of an `enlists` trigger; the Vehicle
+          // crewed or Mount saddled, of a `crews-or-saddles` ("that Vehicle").
+          event.type === "creature-tapped-for"
+          ? trigger.on === "crews-or-saddles"
+            ? event.for
+            : event.creature
         : event.type === "ring-tempted"
           ? (event.chosen ?? undefined)
         : event.type === "attacker-declared" ||
@@ -25793,6 +25958,7 @@ export class Game {
         cardTypesInGraveyards(this.state, this.registry, controller, filter),
       thisWay: thisWayDone,
       lifeLostThisWay: (players) => lifeLostSince(this.state, since, players),
+      playerCountersRemovedThisWay: (players) => playerCountersRemovedSince(this.state, since, players),
       excessDamageThisWay: (to) => excessDamageSince(this.state, since, to),
       damageDealtThisWay: (to) => damageDealtSince(this.state, since, to),
       exileDamagedThisWayIfTheyDie: (creaturesOnly) => {
@@ -26392,7 +26558,7 @@ export class Game {
             source,
             min: spec.min ?? 0,
             ...(spec.max !== undefined ? { max: spec.max } : {}),
-            prompt: "Choose a number",
+            prompt: spec.prompt ?? "Choose a number",
             then: spec.then,
             resume,
           };
@@ -27183,6 +27349,27 @@ export class Game {
           min: upTo ? 0 : most,
           max: most,
           prompt: `Choose ${upTo ? "up to " : ""}${keep} to keep — the rest are sacrificed`,
+          then: { kind: "sequence", effects: [] },
+          source,
+          x,
+          keepChoice: true,
+        };
+        return true;
+      },
+      askChoosePermanentsKept: (filter, max, prompt, side) => {
+        if (this.state.players[controller]?.hasLost !== false) return false;
+        // Untargeted (rule 608.2d): whatever matches now, a hexproof one too.
+        const eligible = this.battlefieldMatching(side ?? controller, filter, x, source);
+        const available = eligible.reduce((n, id) => n + (this.state.objects[id]?.stackCount ?? 1), 0);
+        const most = Math.min(max, available);
+        if (most <= 0) return false;
+        this.state.awaiting = {
+          kind: "choose-permanents",
+          player: controller,
+          eligible,
+          min: 0,
+          max: most,
+          prompt,
           then: { kind: "sequence", effects: [] },
           source,
           x,
@@ -30533,7 +30720,10 @@ export class Game {
     purpose: ManaPurpose,
     keyword?: "crew" | "saddle",
   ): TapCostOffer | null {
-    const candidates = this.tapOthersCandidates(player, sourceId, spec);
+    // "Can't crew Vehicles" (rule 702.122d): never tapped for a crew cost.
+    const candidates = this.tapOthersCandidates(player, sourceId, spec).filter(
+      (id) => keyword !== "crew" || !computeCharacteristics(this.state, this.registry, id).restrictions.has("cant-crew"),
+    );
     const plan = this.payMana(player, manaCost, avoid, exclude, purpose, {
       last: new Set(candidates),
     });
@@ -33139,6 +33329,19 @@ export class Game {
     }
   }
 
+  /** The creatures tapped to pay `vehicle`'s crew cost crew it (rule
+   * 702.122b): each remembers it, in the stint it's in, for the turn. */
+  private recordCrewers(vehicle: ObjectId, creatures: readonly ObjectId[]): void {
+    const stint = this.state.objects[vehicle]?.zoneChangeCount ?? 0;
+    for (const id of creatures) {
+      const creature = this.state.objects[id];
+      if (creature === undefined) continue;
+      const had = creature.crewedThisTurn ?? [];
+      if (had.some((r) => r.vehicle === vehicle && r.stint === stint)) continue;
+      creature.crewedThisTurn = [...had, { vehicle, stint }];
+    }
+  }
+
   /** `id` is no longer suspected (rule 701.60a). */
   private unsuspect(id: ObjectId): void {
     const object = this.state.objects[id];
@@ -33318,12 +33521,15 @@ export class Game {
   /** A permanent becomes a creature via a single modifier spanning layers 4
    * (types/subtypes), 5 (`setColors`), 6 (`keywords` / `loseAbilities`) and
    * 7b (set P/T). A man-land adds a type and keeps its printed types; Turn to
-   * Frog replaces the subtypes, sets the colour, and strips abilities. */
+   * Frog replaces the subtypes, sets the colour, and strips abilities. With
+   * only a `power` or only a `toughness` it sets that alone (7b, rule
+   * 613.4b — Island of Wak-Wak's "has base power 0"), the other left as it
+   * is. */
   private animate(
     target: TargetRef,
     opts: {
-      readonly power: number;
-      readonly toughness: number;
+      readonly power?: number;
+      readonly toughness?: number;
       readonly addTypes: readonly CardType[];
       readonly setTypes?: readonly CardType[];
       readonly addSubtypes: readonly string[];
@@ -33353,16 +33559,28 @@ export class Game {
       ...(opts.setSubtypes ? { setSubtypes: [...opts.setSubtypes] } : {}),
       ...(opts.setColors ? { setColors: [...opts.setColors] } : {}),
       ...(opts.loseAbilities ? { loseAbilities: true } : {}),
-      setPt: [opts.power, opts.toughness],
+      ...(opts.power !== undefined && opts.toughness !== undefined
+        ? { setPt: [opts.power, opts.toughness] as [number, number] }
+        : opts.power !== undefined
+          ? { setPower: opts.power }
+          : opts.toughness !== undefined
+            ? { setToughness: opts.toughness }
+            : {}),
       ...durationFields(opts.duration),
     });
-    this.emit({
-      type: "permanent-animated",
-      object: id,
-      power: opts.power,
-      toughness: opts.toughness,
-      duration: opts.duration,
-    });
+    if (opts.power !== undefined && opts.toughness !== undefined) {
+      this.emit({
+        type: "permanent-animated",
+        object: id,
+        power: opts.power,
+        toughness: opts.toughness,
+        duration: opts.duration,
+      });
+    } else {
+      // Base power or toughness alone: nothing "became an N/N", but the
+      // computed P/T changed, so drop what's been read.
+      invalidateComputedCache();
+    }
   }
 
   /** See the `"add-types"` {@link EffectSpec}: layer 4 alone. */
@@ -34104,15 +34322,17 @@ export class Game {
    * effect's). Only a permanent still on the battlefield loses any (counters
    * on a card that left ceased to exist, rule 122.2). Each kind is one
    * `counter-removed`. `split`: one token of a stack loses them (a targeted
-   * removal); otherwise the whole stack does, together (`tokens`).
+   * removal); otherwise the whole stack does, together (`tokens`). Returns
+   * how many counters came off in all (a stack's, token by token).
    */
-  private removeCountersFrom(id: ObjectId, counter: string, amount: number | "all", split: boolean): void {
-    if (amount !== "all" && amount <= 0) return;
-    if (counter === "any" && amount !== "all") return;
+  private removeCountersFrom(id: ObjectId, counter: string, amount: number | "all", split: boolean): number {
+    if (amount !== "all" && amount <= 0) return 0;
+    if (counter === "any" && amount !== "all") return 0;
     const before = this.state.objects[id];
-    if (before === undefined || before.zone !== "battlefield") return;
+    if (before === undefined || before.zone !== "battlefield") return 0;
     const kinds = (counter === "any" ? Object.keys(before.counters) : [counter]).filter((k) => (before.counters[k] ?? 0) > 0);
-    if (kinds.length === 0) return;
+    if (kinds.length === 0) return 0;
+    let removed = 0;
     const at = split ? this.splitOneFromStack(id) : id;
     const object = this.state.objects[at];
     const tokens = split ? 1 : (object.stackCount ?? 1);
@@ -34122,6 +34342,7 @@ export class Game {
       if (n <= 0) continue;
       if (have - n <= 0) delete object.counters[kind];
       else object.counters[kind] = have - n;
+      removed += n * tokens;
       this.emit({
         type: "counter-removed",
         object: at,
@@ -34132,6 +34353,7 @@ export class Game {
       });
     }
     invalidateComputedCache();
+    return removed;
   }
 
   /**
@@ -34813,6 +35035,10 @@ export class Game {
     }
     if (awaiting.conspire !== undefined) {
       this.applyConspire(player, chosen, awaiting.conspire);
+      return;
+    }
+    if (awaiting.enlist === true) {
+      this.applyEnlist(player, chosen, awaiting.source);
       return;
     }
     // The untap step's "you may choose not to untap" (rule 502.3): what's
@@ -42004,6 +42230,17 @@ export class Game {
       if (r.mayPayLife !== undefined) mayPayLife = r.mayPayLife;
       if (r.transformed) transformed = true;
       if (r.prepared === true) prepared = true;
+      // Thief of Blood's "as this creature enters, remove all counters from
+      // all permanents" (rule 614.1c): off what's already there, never itself
+      // or anything entering with it (614.12).
+      let removedAsEnters = 0;
+      if (r.removeAllCountersFrom !== undefined) {
+        const entering = this.enterBatch ?? new Set<ObjectId>();
+        for (const other of this.battlefieldMatching(object.controller, r.removeAllCountersFrom, undefined, id)) {
+          if (other === id || entering.has(other)) continue;
+          removedAsEnters += this.removeCountersFrom(other, "any", "all", false);
+        }
+      }
       if (r.counters) {
         // "x" is the X it was cast with (rule 107.3m). A live amount is read
         // as it enters, never counting itself or what enters with it (Aeve,
@@ -42020,7 +42257,9 @@ export class Game {
                 ? object.castVia === "web-slinging"
                   ? (object.webSlingingManaValue ?? 0)
                   : 0
-                : this.enteringCounterAmount(id, object.controller, id, r.counters.amount),
+                : r.counters.amount === "removed-as-enters"
+                  ? removedAsEnters
+                  : this.enteringCounterAmount(id, object.controller, id, r.counters.amount),
         );
       }
       // Sunburst (rule 702.44a): +1/+1 counters if it's entering as a
@@ -42543,6 +42782,7 @@ export class Game {
       ...(goaders.length > 0 ? { goaders: [...goaders] } : {}),
       ...(object.suspectedAt !== undefined ? { suspected: true } : {}),
       ...(object.saddled === true ? { saddled: true } : {}),
+      ...(object.enlistedIn !== undefined ? { enlistedIn: object.enlistedIn } : {}),
       ...(object.monstrous === true ? { monstrous: true } : {}),
       lostAbilities,
       ...(renamed !== name ? { renamed } : {}),
@@ -43270,6 +43510,9 @@ export class Game {
     // So does saddled (702.171b); what it saddled was the old object's (400.7).
     delete object.saddled;
     delete object.saddledThisTurn;
+    delete object.crewedThisTurn;
+    // And what it enlisted (702.154c).
+    delete object.enlistedIn;
     // And solved (719.3b).
     delete object.solved;
     delete object.exertedBy;
