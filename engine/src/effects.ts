@@ -27,6 +27,7 @@ import { EVERY_CREATURE_TYPE, EVERY_LAND_TYPE, isCreatureType, isLandType } from
 import { sameVoteChoice } from "./events.js";
 import type { RandomPick, Vote, VoteChoice } from "./events.js";
 import type { ThisWayEntry } from "./this-way.js";
+import { textWordKind, type TextChange } from "./text-change.js";
 import type {
   DelayedTriggerTiming,
   EnterAttachHost,
@@ -1199,6 +1200,8 @@ export function substituteChosenCreatureType(spec: EffectSpec, creatureType: str
 export const CHOSEN_COLOR = "$chosenColor" as Color;
 export const CHOSEN_CARD_TYPE = "$chosenCardType" as CardType;
 export const CHOSEN_COUNTER = "$chosenCounter";
+/** A `change-text`'s word, as each of its two choices is answered. */
+export const CHOSEN_TEXT_WORD = "$chosenTextWord";
 
 /** The card types a "choose a card type" offers (rule 205.2a), in the
  * rule's order. */
@@ -2815,8 +2818,13 @@ export type EffectSpec =
        * ability's targets and X carry across.
        */
       readonly kind: "choose-value";
-      readonly value: "color" | "card-type" | "counter-kind" | "number";
+      readonly value: "color" | "card-type" | "counter-kind" | "number" | "text-word";
       readonly then: EffectSpec;
+      /** With `"text-word"` (a `change-text`'s words, `CHOSEN_TEXT_WORD` in
+       * `then`): the colour words, the basic land types, or both
+       * (`text-change.ts`'s `textWords`), less `except`. */
+      readonly words?: "color" | "land-type" | "color-or-land-type";
+      readonly except?: string;
       readonly on?: number;
       readonly among?: CardFilter;
       readonly min?: number;
@@ -6673,6 +6681,29 @@ export type EffectSpec =
       readonly duration: PtDuration;
     }
   | {
+      /**
+       * "Change the text of target spell or permanent by replacing all
+       * instances of one color word with another" (Sleight of Mind), "one
+       * basic land type with another" (Magical Hack), or either (Mind Bend's
+       * "one color word with another or one basic land type with another") —
+       * a text-changing effect (rule 612, layer 3), for `duration`: for good
+       * (`"permanent"`, "this effect lasts indefinitely") or `"end-of-turn"`.
+       * As it resolves its controller chooses the word to replace out of
+       * `words` (a `choose-value` of `"text-word"`), then a different word
+       * of the same kind to put in its place — any word, there or not.
+       * `from` and `to` are filled in by those answers; a card leaves them
+       * out. What changes is every instance in the object's own text
+       * (`text-change.ts`), its type line's land types included; a spell
+       * keeps the change as the permanent it becomes (400.7a).
+       */
+      readonly kind: "change-text";
+      readonly target: EffectTargetRef;
+      readonly words: "color" | "land-type" | "color-or-land-type";
+      readonly duration: PtDuration;
+      readonly from?: string;
+      readonly to?: string;
+    }
+  | {
       /** A modal spell/ability (rule 700.2): as it resolves, its controller
        * chooses between `minModes` and `maxModes` of `modes` (usually 1 and 1
        * — "choose one"; 1 and 2 for "choose one or both") and the chosen
@@ -9614,6 +9645,9 @@ export interface EffectApi {
   ): void;
   /** `target` becomes `colors` — see the `"become-color"` {@link EffectSpec}. */
   becomeColor(target: TargetRef, colors: readonly Color[], duration: PtDuration): void;
+  /** `target`'s text has every `change.from` replaced by `change.to` — see
+   * the `"change-text"` {@link EffectSpec}. */
+  changeText(target: TargetRef, change: TextChange, duration: PtDuration): void;
   /** Raise a `choose-modes` decision — see the `modal` / `may` {@link EffectSpec}.
    * The chosen modes' effects are applied after the controller answers.
    * `onDecline` (a `may` effect's `else` only) applies when zero modes end up
@@ -14740,6 +14774,38 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "become-color": {
       const target = resolveEffectTarget(spec.target, ctx);
       if (target !== undefined) ctx.becomeColor(target, spec.colors, spec.duration);
+      return;
+    }
+    case "change-text": {
+      // The word to replace, then its replacement — of the same kind and
+      // not the same word — each asked as it resolves, each answer filled
+      // into the spec for the next step.
+      if (spec.from === undefined) {
+        ctx.chooseValue({
+          kind: "choose-value",
+          value: "text-word",
+          words: spec.words,
+          prompt: "Replace which word?",
+          then: { ...spec, from: CHOSEN_TEXT_WORD },
+        });
+        return;
+      }
+      const kind = textWordKind(spec.from);
+      if (kind === undefined) return;
+      if (spec.to === undefined) {
+        ctx.chooseValue({
+          kind: "choose-value",
+          value: "text-word",
+          words: kind,
+          except: spec.from,
+          prompt: `Replace "${spec.from}" with which word?`,
+          then: { ...spec, to: CHOSEN_TEXT_WORD },
+        });
+        return;
+      }
+      if (textWordKind(spec.to) !== kind || spec.to === spec.from) return;
+      const target = resolveEffectTarget(spec.target, ctx);
+      if (target !== undefined) ctx.changeText(target, { from: spec.from, to: spec.to }, spec.duration);
       return;
     }
     case "modal":

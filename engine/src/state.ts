@@ -35,6 +35,7 @@ import type { GameEvent, Vote, WhileSource } from "./events.js";
 import type { ResolvedTargets, TargetRef, TargetSpec } from "./target.js";
 import type { Step } from "./turn.js";
 import { MERGED_PREFIX, MERGED_SEPARATOR } from "./cards/card-registry.js";
+import { textChangedKey, type TextChange } from "./text-change.js";
 import type { ZoneChoiceTogether } from "./zone-choice-together.js";
 
 export type PrivateZone = "library" | "hand" | "graveyard";
@@ -1741,6 +1742,12 @@ export interface PtModifier {
    * spell copy's "the copy gains haste", `copy-spell`'s `gains`). Kept from
    * the stack onto the battlefield like `prototype`. */
   castRider?: true;
+  /** Layer 3 — a text-changing effect (rule 612.1): every instance of one
+   * colour word or basic land type in its text becomes another (the
+   * `change-text` effect — Sleight of Mind, Magical Hack). Read through
+   * `rulesTextName`, which names its changed definition, and
+   * `characteristics.ts`'s `printedSubtypes` for its type line. */
+  textChange?: TextChange;
   untilEndOfTurn: boolean;
   /**
    * `GameState.timestampSeq` when the modifier was applied, for ordering its
@@ -5675,15 +5682,36 @@ export const mergedTextName = (object: GameObject): string | undefined => {
  * keywords, statics, triggered and activated abilities, anything else its
  * text says — goes through this; its name, mana cost, colors, types and P/T
  * still come from `printedCardName`. */
-export const rulesTextName = (object: GameObject): string =>
-  object.textFrom ?? mergedTextName(object) ?? printedCardName(object);
+export const rulesTextName = (object: GameObject): string => {
+  const base = object.textFrom ?? mergedTextName(object) ?? printedCardName(object);
+  const changes = textChangesOf(object);
+  return changes === undefined ? base : textChangedKey(base, changes);
+};
+
+/** The text changes that apply to `object` (rule 612, layer 3), in
+ * timestamp order (613.7) — `PtModifier.textChange` — or `undefined` for
+ * none. Its rules text is its base definition's with these applied
+ * ({@link rulesTextName}). */
+export const textChangesOf = (object: GameObject): readonly TextChange[] | undefined => {
+  let changes: { readonly change: TextChange; readonly at: number }[] | undefined;
+  for (const m of object.modifiers) {
+    if (m.textChange !== undefined) (changes ??= []).push({ change: m.textChange, at: m.timestamp ?? 0 });
+  }
+  if (changes === undefined) return undefined;
+  return changes.sort((a, b) => a.at - b.at).map((c) => c.change);
+};
 
 /** The card name its abilities come from when that isn't its own
- * {@link printedCardName}: another card's text box (rule 612.5), or a merged
- * permanent's combined definition (702.140e). A triggered or activated
- * ability is found by this name and its index. `undefined` otherwise. */
-export const textNameOf = (object: GameObject): string | undefined =>
-  object.textFrom ?? mergedTextName(object);
+ * {@link printedCardName}: another card's text box (rule 612.5), a merged
+ * permanent's combined definition (702.140e), or either changed by a
+ * text-changing effect (612.1). A triggered or activated ability is found by
+ * this name and its index. `undefined` otherwise. */
+export const textNameOf = (object: GameObject): string | undefined => {
+  const base = object.textFrom ?? mergedTextName(object);
+  const changes = textChangesOf(object);
+  if (changes === undefined) return base;
+  return textChangedKey(base ?? printedCardName(object), changes);
+};
 
 /** The name `object` has (rule 201.2): one a copy exception gave it
  * ("except its name is Mishra's Warform" — a copiable `setName`, the latest

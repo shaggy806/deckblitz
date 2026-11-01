@@ -6,7 +6,9 @@
  * `printedCardName`, so a Clone has the copied card's P/T / types / abilities),
  * **layer 3** (text-change — an exchange of text boxes, rule 612.5: its
  * abilities, keywords, statics and CDAs are read off `rulesTextName`, another
- * card's once `GameObject.textFrom` is set), **layer
+ * card's once `GameObject.textFrom` is set; a colour word or basic land
+ * type changed for another, `PtModifier.textChange`, rule 612.1 — see
+ * `text-change.ts`), **layer
  * 4** (type-change — `PtModifier.addTypes`/`setSubtypes`/`addSubtypes` from a
  * man-land or Turn to Frog, and statics' `addTypes`/`addSubtypes` granted to
  * other permanents; see `layerFour`), **layer 5** (colour-change —
@@ -16,7 +18,7 @@
  * "becomes a N/N" and a static's `setBasePt`), **layer 7c** (counters, then
  * P/T bonuses + modifiers — rule 613.4c), **layer 7d** (`PtModifier.switchPt`
  * — 613.4d), timestamp-ordered within a layer.
- * NOT yet: full text-change beyond a creature-type word, and dependency
+ * NOT yet: a creature-type word's text change, and dependency
  * ordering (rule 613.8) outside layer 4's additive type grants. Layer 2
  * (control-change) is modeled in `game.ts` by reassigning
  * `GameObject.controller`, not here.
@@ -62,7 +64,9 @@ import {
   printedCardName,
   rulesTextName,
   speedOf,
+  textChangesOf,
 } from "./state.js";
+import { changeSubtypes } from "./text-change.js";
 import type {
   GameObject,
   GameState,
@@ -2419,7 +2423,11 @@ export function suspectedGrantsApply(state: GameState, registry: CardRegistry, o
  * subtypes layer 4 starts from. */
 function printedSubtypes(registry: CardRegistry, object: GameObject): readonly string[] {
   const def = printedDefinition(registry, object);
-  return withChangeling(def, def.subtypes, registry.get(rulesTextName(object)));
+  // A text change's land types reach its type line (rule 612.1), in layer 3
+  // — before every layer-4 effect.
+  const changes = textChangesOf(object);
+  const subtypes = changes === undefined ? def.subtypes : changeSubtypes(def.subtypes, changes);
+  return withChangeling(def, subtypes, registry.get(rulesTextName(object)));
 }
 
 /** The definition layer 4 starts from: its printed one, or — cast bestowed
@@ -3561,7 +3569,8 @@ function printedLandTypesHold(state: GameState, registry: CardRegistry, object: 
       (m.addTypes?.length ?? 0) > 0 ||
       (m.addSubtypes?.length ?? 0) > 0 ||
       m.loseLandTypes === true ||
-      m.loseAbilities === true,
+      m.loseAbilities === true ||
+      m.textChange !== undefined,
   );
 }
 

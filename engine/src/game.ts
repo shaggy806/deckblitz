@@ -209,6 +209,7 @@ import {
   CHOSEN_CARD_TYPE,
   CHOSEN_COLOR,
   CHOSEN_COUNTER,
+  CHOSEN_TEXT_WORD,
 } from "./effects.js";
 import type {
   BeholdSpec,
@@ -433,6 +434,7 @@ import {
   thisWayEntries,
 } from "./this-way.js";
 import type { ThisWayEntry } from "./this-way.js";
+import { textWords } from "./text-change.js";
 import type { TargetCopies, TargetCountRange } from "./target-count.js";
 import type { ResolvedTargets, TargetRef, TargetSpec } from "./target.js";
 import {
@@ -21094,7 +21096,7 @@ export class Game {
    * kicked ones (Tear Asunder), a modal spell's chosen modes', in order
    * (rule 700.2). */
   private spellTargetSpecs(object: GameObject): readonly TargetSpec[] {
-    return this.castTargetSpecs(printedCardName(object), object);
+    return this.castTargetSpecs(rulesTextName(object), object);
   }
 
   /** The target specs a spell named `cardName` was cast with, given the
@@ -21212,7 +21214,9 @@ export class Game {
       return;
     }
 
-    const def = this.registry.get(printedCardName(object));
+    // Its text as it is now: a text-changing effect may have changed it on
+    // the stack (rule 612 — Sleight of Mind on a "counter target blue spell").
+    const def = this.registry.get(rulesTextName(object));
 
     // A mutating creature spell (rule 702.140) never fizzles: with its target
     // legal it merges with it (702.140c), and with the target gone it stops
@@ -26928,6 +26932,12 @@ export class Game {
           options = CARD_TYPE_CHOICES;
           sentinel = CHOSEN_CARD_TYPE;
           prompt = "Choose a card type";
+        } else if (spec.value === "text-word") {
+          // A text change's word (rule 612): any of the kind, there in the
+          // text or not, but never the word it replaces.
+          options = textWords(spec.words ?? "color").filter((w) => w !== spec.except);
+          sentinel = CHOSEN_TEXT_WORD;
+          prompt = spec.prompt ?? "Choose a word";
         } else {
           // A kind of counter on the target, or on a permanent matching
           // `among`: only kinds actually there can be chosen, and with none
@@ -29388,6 +29398,28 @@ export class Game {
         });
         invalidateComputedCache();
         this.emit({ type: "color-changed", object: id, colors: [...colors] });
+      },
+      changeText: (target, change, duration) => {
+        if (target.kind !== "object") return;
+        const id = this.splitOneFromStack(target.object);
+        const object = this.state.objects[id];
+        if (object === undefined) return;
+        const onStack = object.zone === "stack" && object.kind === "card";
+        if (object.zone !== "battlefield" && !onStack) return;
+        const lasting = lastingHere(duration);
+        if (!durationBegins(object, lasting)) return;
+        object.modifiers.push({
+          timestamp: this.freshTimestamp(),
+          power: 0,
+          toughness: 0,
+          keywords: [],
+          textChange: { ...change },
+          // A permanent spell's change goes on applying to the permanent it
+          // becomes (rule 400.7a).
+          ...(onStack ? { castRider: true as const } : {}),
+          ...durationFields(lasting),
+        });
+        invalidateComputedCache();
       },
       chooseModes: (minModes, maxModes, modes, onDecline, cost, notChosenThisTurn, otherCost, about, xColor) =>
         this.beginModesChoice(

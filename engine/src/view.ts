@@ -553,7 +553,12 @@ function visible(
   const lostAbilities = onBattlefield && hasLostAbilities(state, registry, object);
   // Its text box, which an exchange (rule 612.5 — Deadpool) may have made
   // another card's.
-  let text = lostAbilities ? "" : onBattlefield ? registry.get(rulesTextName(object)).text : def.text;
+  // A spell's text too, once a text-changing effect has changed it (rule 612).
+  let text = lostAbilities
+    ? ""
+    : onBattlefield || (zone === "stack" && object.kind === "card")
+      ? registry.get(rulesTextName(object)).text
+      : def.text;
   // An emblem's triggered ability on the stack (rule 114.4): its source, the
   // emblem object, is in no zone a player sees, so the entry carries the
   // ability's own text and no source to look up — it reads "Emblem's

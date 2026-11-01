@@ -2325,6 +2325,39 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(lace.complete).toBe(true);
   });
 
+  it("a text change of one word for another (rule 612) — Sleight of Mind, Magical Hack, Mind Bend, Crystal Spray", () => {
+    const sleight = face(
+      'Change the text of target spell or permanent by replacing all instances of one color word with another. (For example, you may change "target black spell" to "target blue spell." This effect lasts indefinitely.)',
+      "Instant",
+    );
+    expect(sleight.targets).toEqual([{ kind: "spell-or-permanent" }]);
+    expect(sleight.effect).toEqual({ kind: "change-text", target: 0, words: "color", duration: "permanent" });
+    expect(sleight.complete).toBe(true);
+    const hack = face(
+      'Change the text of target spell or permanent by replacing all instances of one basic land type with another. (For example, you may change "swampwalk" to "plainswalk." This effect lasts indefinitely.)',
+      "Instant",
+    );
+    expect(hack.effect).toEqual({ kind: "change-text", target: 0, words: "land-type", duration: "permanent" });
+    const bend = face(
+      'Change the text of target permanent by replacing all instances of one color word with another or one basic land type with another. (For example, you may change "nonblack creature" to "nongreen creature" or "forestwalk" to "islandwalk." This effect lasts indefinitely.)',
+      "Instant",
+    );
+    expect(bend.targets).toEqual(["permanent"]);
+    expect(bend.effect).toEqual({ kind: "change-text", target: 0, words: "color-or-land-type", duration: "permanent" });
+    const spray = face(
+      "Change the text of target spell or permanent by replacing all instances of one color word with another or one basic land type with another until end of turn.\nDraw a card.",
+      "Instant",
+    );
+    expect(spray.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "change-text", target: 0, words: "color-or-land-type", duration: "end-of-turn" },
+        { kind: "draw", amount: 1 },
+      ],
+    });
+    expect(spray.complete).toBe(true);
+  });
+
   it("rampage (rule 702.23): its becomes-blocked trigger, counted as it resolves", () => {
     const berserker = face("Rampage 3 (Whenever this creature becomes blocked, it gets +3/+3 until end of turn for each creature blocking it beyond the first.)", "Creature — Human Berserker");
     expect(berserker.triggered[0].trigger).toEqual({ on: "becomes-blocked", who: "self" });

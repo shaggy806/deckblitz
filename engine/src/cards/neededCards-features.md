@@ -367,6 +367,26 @@ Wreck Hunter, Thrilling Encore, Night Nurse, Healer of Heroes, The Lady of
 Otaria. Left: the family's fought-this-turn, blocked-by-this-source-this-combat
 and lost-life-this-turn keys.
 
+### Text-changing effects: one colour word or land type for another — built 2026-10-31
+
+The need-keys Phase 2 family `effect:text-change-color-or-land-words`,
+features only. Rule 612's text change (layer 3, 613.1c) is a
+`PtModifier.textChange`, written by the new `change-text` effect: both words
+asked as it resolves (`choose-value`'s `"text-word"`, the existing
+`choose-creature-type` menu the client already reads), for good or until end
+of turn. `rulesTextName` names a changed definition the registry builds
+(`text-change.ts`): every colour word in a filter, protection, a static's
+scope, devotion or unspent mana, every basic land type and landwalk keyword,
+Doom Blade's `"nonblack-creature"` shorthand, and the client text; its type
+line's land types too, so a Forest made an Island taps for {U}. A spell
+resolves by its changed text, re-checking its targets, and a permanent
+spell keeps the change (400.7a). A pool audit pins where colours can sit.
+The scaffolder reads the four shapes. Key:
+effect:text-change-color-or-land-words. Proving cards: Sleight of Mind,
+Magical Hack, Mind Bend, Crystal Spray. Left: a token the changed text
+creates keeps its definition's colours (612.4); Swirl the Mists' static
+changing every object's colour words; Sarpadian Empires' option words.
+
 ### The card revealed for a cost, and cards revealed that share a colour — built 2026-10-31
 
 The need-keys Phase 2 family `cost:reveal-card-as-additional-cost`, features

@@ -7,6 +7,7 @@
  * the pool (see `client.ts`).
  */
 
+import { changeDefinitionText, parseTextChangedKey, TEXT_CHANGED_PREFIX } from "../text-change.js";
 import type { CardDefinition } from "./define.js";
 
 /** The prefix of a merged permanent's combined definition's key (rule 730 —
@@ -20,6 +21,8 @@ export class CardRegistry {
   private readonly byName = new Map<string, CardDefinition>();
   /** Combined definitions already built, by key. */
   private readonly merged = new Map<string, CardDefinition>();
+  /** Text-changed definitions already built, by key. */
+  private readonly textChanged = new Map<string, CardDefinition>();
 
   register(def: CardDefinition): this {
     if (this.byName.has(def.name)) {
@@ -30,11 +33,13 @@ export class CardRegistry {
   }
 
   has(name: string): boolean {
+    if (name.startsWith(TEXT_CHANGED_PREFIX)) return this.has(parseTextChangedKey(name).base);
     if (name.startsWith(MERGED_PREFIX)) return this.mergedParts(name).every((part) => this.byName.has(part));
     return this.byName.has(name);
   }
 
   get(name: string): CardDefinition {
+    if (name.startsWith(TEXT_CHANGED_PREFIX)) return this.textChangedDefinition(name);
     if (name.startsWith(MERGED_PREFIX)) return this.mergedDefinition(name);
     const def = this.byName.get(name);
     if (def === undefined) throw new Error(`unknown card: ${name}`);
@@ -48,6 +53,19 @@ export class CardRegistry {
 
   get size(): number {
     return this.byName.size;
+  }
+
+  /** A text-changed object's rules text (rule 612, layer 3): its base
+   * definition — its own, another's after an exchange, or a merged one —
+   * with the key's changes applied in order (`text-change.ts`). Read only
+   * through `rulesTextName`, so only its text fields differ. */
+  private textChangedDefinition(key: string): CardDefinition {
+    const known = this.textChanged.get(key);
+    if (known !== undefined) return known;
+    const { base, changes } = parseTextChangedKey(key);
+    const def = changeDefinitionText(this.get(base), changes);
+    this.textChanged.set(key, def);
+    return def;
   }
 
   private mergedParts(key: string): readonly string[] {

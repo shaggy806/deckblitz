@@ -664,6 +664,9 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   // A colour isn't good or bad by itself: what it's for (dodging a Circle of
   // Protection, or walking into one) decides.
   "become-color": none,
+  // Which side a changed word helps depends on the words — it's the search
+  // that tells (the choices are a resolving menu).
+  "change-text": none,
   // An announced modal ability's modes bring targets of their own, known
   // only once chosen — see `pendingTargetPolarities`.
   modal: (n, v) => {
