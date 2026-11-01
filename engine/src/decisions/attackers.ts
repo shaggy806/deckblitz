@@ -45,6 +45,13 @@ import type { ObjectId, PlayerId } from "../primitives.js";
 import { defineDecision } from "./define.js";
 import type { DecisionReadCtx } from "./contract.js";
 
+/** Whether attacking `defender` costs nothing at all (rule 508.1d: a creature
+ * that must attack isn't obliged to pay to). */
+function attackIsFree(ctx: DecisionReadCtx, defender: PlayerId | ObjectId): boolean {
+  const { generic, life } = ctx.attackTaxOf(defender);
+  return generic === 0 && life === 0;
+}
+
 function attackersOffer(ctx: DecisionReadCtx, player: PlayerId): AttackOffer {
   const defenders = legalDefenders(ctx.state, ctx.registry, player);
   const defendersFor: Record<ObjectId, readonly (PlayerId | ObjectId)[]> = {};
@@ -71,12 +78,15 @@ function attackersOffer(ctx: DecisionReadCtx, player: PlayerId): AttackOffer {
     for (const { id } of units) if (!able.includes(id)) delete defendersFor[id];
   }
   const eligible = Object.keys(defendersFor) as ObjectId[];
-  const perCreature: Record<PlayerId, number> = {};
+  const perCreature: Record<string, number> = {};
+  const lifePerCreature: Record<string, number> = {};
   for (const d of defenders) {
-    const tax = ctx.attackTaxOf(d);
-    if (tax > 0) perCreature[d as PlayerId] = tax;
+    const { generic, life } = ctx.attackTaxOf(d);
+    if (generic > 0) perCreature[d] = generic;
+    if (life > 0) lifePerCreature[d] = life;
   }
-  const taxed = Object.keys(perCreature).length > 0;
+  const lifeTaxed = Object.keys(lifePerCreature).length > 0;
+  const taxed = lifeTaxed || Object.keys(perCreature).length > 0;
   // Who can lead a band (rule 702.22c): banding, or a "bands with other".
   const banding: Record<ObjectId, BandingAbilities> = {};
   for (const id of eligible) {
@@ -95,7 +105,7 @@ function attackersOffer(ctx: DecisionReadCtx, player: PlayerId): AttackOffer {
   const required = eligible.filter(
     (id) =>
       mustAttack(ctx.state, ctx.registry, id) &&
-      (defendersFor[id] ?? []).some((d) => ctx.attackTaxOf(d) === 0),
+      (defendersFor[id] ?? []).some((d) => attackIsFree(ctx, d)),
   );
   // Under a restriction keyed to the others, only those in every declaration
   // obeying the most requirements are simply "must attack" (508.1d): one that
@@ -106,7 +116,7 @@ function attackersOffer(ctx: DecisionReadCtx, player: PlayerId): AttackOffer {
         tokens: tokensOf(id),
         ...(limits[id] !== undefined ? { company: limits[id] } : {}),
         required: required.includes(id),
-        free: (defendersFor[id] ?? []).some((d) => ctx.attackTaxOf(d) === 0),
+        free: (defendersFor[id] ?? []).some((d) => attackIsFree(ctx, d)),
       }))
     : [];
   const most = mostRequirementsObeyed(units);
@@ -131,6 +141,7 @@ function attackersOffer(ctx: DecisionReadCtx, player: PlayerId): AttackOffer {
           attackTax: {
             perCreature,
             budget: ctx.attackTaxBudget(player, eligible),
+            ...(lifeTaxed ? { lifePerCreature, lifeBudget: ctx.attackTaxLifeBudget(player) } : {}),
             ...(Object.keys(tokens).length > 0 ? { tokens } : {}),
           },
         }
@@ -213,7 +224,7 @@ export const attackers = defineDecision({
         ctx.state.objects[id]?.controller === player &&
         mustAttack(ctx.state, ctx.registry, id) &&
         // Not one it could attack only by paying for it (rule 508.1d).
-        defendersForAttacker(ctx.state, ctx.registry, player, id).some((d) => ctx.attackTaxOf(d) === 0),
+        defendersForAttacker(ctx.state, ctx.registry, player, id).some((d) => attackIsFree(ctx, d)),
     );
     if (missing.length > 0) {
       return `${missing.map((id) => nameOf(ctx, id)).join(", ")} must attack if able`;

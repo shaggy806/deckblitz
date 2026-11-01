@@ -4748,6 +4748,17 @@ export interface PlayerEffect {
    * (a Curse on one goes, 704.5m), and all damage that would be dealt to them
    * is prevented. See `playerHasProtectionFromEverything`. */
   readonly protectionFromEverything?: readonly PlayerId[];
+  /** "Until your next turn, creatures can't attack you or planeswalkers you
+   * control unless their controller pays {2} for each of those creatures"
+   * (Forbidding Spirit): the `attackTax` static's cost to attack (rule
+   * 508.1h) for a while, its amounts read as the effect was created (rule
+   * 611.2b). `covers` as there, "you" being `owner`, or `"all"`: every attack
+   * by anyone on anything (War Tax). See `Game.attackTaxOn`. */
+  readonly attackTax?: {
+    readonly generic: number;
+    readonly life: number;
+    readonly covers: "you" | "you-and-planeswalkers" | "planeswalkers" | "all";
+  };
 }
 
 /**

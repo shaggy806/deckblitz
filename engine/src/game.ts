@@ -1701,14 +1701,18 @@ export class Game {
       },
       whyCannotCastNow: (cast) => this.canDispatch(cast),
       whyCannotPlayLandNow: (land) => this.whyCannotPlayLandNow(land.player, land.card, land.face ?? 0),
-      attackTaxOf: (defender) => this.attackTaxPerCreature(defender),
+      attackTaxOf: (defender) => this.attackTaxOn(defender),
       attackTaxBudget: (player, attackers) => this.attackTaxBudget(player, attackers),
+      attackTaxLifeBudget: (player) => (this.canPayLife(player, 1) ? this.state.players[player].life : 0),
       whyCannotPayAttackTax: (player, declarations) => {
-        const total = this.attackTaxTotal(declarations);
-        if (total === 0) return null;
-        return this.attackTaxPayment(player, declarations, total) === null
-          ? `${player} can't pay the {${total}} it costs to attack`
-          : null;
+        const { generic, life } = this.attackTaxTotal(declarations);
+        if (generic === 0 && life === 0) return null;
+        const payment = generic === 0 ? null : this.attackTaxPayment(player, declarations, generic);
+        if (generic > 0 && payment === null) return `${player} can't pay the {${generic}} it costs to attack`;
+        // A mana source paying in life draws on the same total (rule 119.4).
+        return this.canPayLife(player, life + (payment?.life ?? 0))
+          ? null
+          : `${player} can't pay the ${life} life it costs to attack`;
       },
     };
     this.decisionHost = {
@@ -6618,25 +6622,55 @@ export class Game {
     if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
   }
 
-  /** The generic mana one creature attacking `defender` costs: every
-   * `attackTax` static of the permanents that player controls, added up — two
-   * Ghostly Prisons are {4} a creature. A planeswalker isn't "you" (the
-   * ruling), so attacking one is free. */
-  private attackTaxPerCreature(defender: PlayerId | ObjectId): number {
-    if (this.state.players[defender as PlayerId] === undefined) return 0;
-    return this.activeStaticsOf(defender as PlayerId, (a) => a.attackTax !== undefined).reduce(
-      (n, { ability }) => n + (ability.attackTax?.generic ?? 0),
-      0,
-    );
+  /** What one creature attacking `defender` costs (rule 508.1h), in generic
+   * mana and in life: every `attackTax` static of the permanents the player
+   * being protected controls, and every `attackTax` player effect, that covers
+   * this defender, added up — two Ghostly Prisons are {4} a creature. A
+   * planeswalker isn't "you" (Ghostly Prison's ruling), so what covers it is
+   * only what says so; a battle is neither. */
+  private attackTaxOn(defender: PlayerId | ObjectId): { generic: number; life: number } {
+    const isPlayer = this.state.players[defender as PlayerId] !== undefined;
+    const object = isPlayer ? undefined : this.state.objects[defender as ObjectId];
+    const guarded = isPlayer ? (defender as PlayerId) : object?.controller;
+    const isWalker =
+      object !== undefined && computeCharacteristics(this.state, this.registry, object.id).types.includes("planeswalker");
+    const covered = (covers: "you" | "you-and-planeswalkers" | "planeswalkers" | "all", owner: PlayerId): boolean => {
+      if (covers === "all") return true;
+      if (owner !== guarded) return false;
+      if (covers === "you") return isPlayer;
+      return covers === "planeswalkers" ? isWalker : isPlayer || isWalker;
+    };
+    let generic = 0;
+    let life = 0;
+    if (guarded !== undefined) {
+      for (const { source, ability } of this.activeStaticsOf(guarded, (a) => a.attackTax !== undefined)) {
+        const tax = ability.attackTax!;
+        if (!covered(tax.covers ?? "you", guarded)) continue;
+        const amount = tax.generic ?? 0;
+        generic += typeof amount === "number" ? amount : countValue(amount, this.state, this.registry, source.controller);
+        life += tax.life ?? 0;
+      }
+    }
+    for (const { owner, attackTax } of this.state.playerEffects ?? []) {
+      if (attackTax === undefined || !covered(attackTax.covers, owner)) continue;
+      generic += attackTax.generic;
+      life += attackTax.life;
+    }
+    return { generic, life };
   }
 
   /** What `declarations` cost to attack in all (rule 508.1h): each creature's
-   * tax for the player it attacks, a token stack's per token. */
-  private attackTaxTotal(declarations: readonly AttackerDeclaration[]): number {
-    return declarations.reduce((n, { attacker, defender, count }) => {
-      const per = this.attackTaxPerCreature(defender);
-      return per === 0 ? n : n + per * (count ?? this.state.objects[attacker]?.stackCount ?? 1);
-    }, 0);
+   * tax for the defender it attacks, a token stack's per token. */
+  private attackTaxTotal(declarations: readonly AttackerDeclaration[]): { generic: number; life: number } {
+    const total = { generic: 0, life: 0 };
+    for (const { attacker, defender, count } of declarations) {
+      const { generic, life } = this.attackTaxOn(defender);
+      if (generic === 0 && life === 0) continue;
+      const creatures = count ?? this.state.objects[attacker]?.stackCount ?? 1;
+      total.generic += generic * creatures;
+      total.life += life * creatures;
+    }
+    return total;
   }
 
   /** How `player` would pay `total` to attack with `declarations` — with
@@ -9416,11 +9450,12 @@ export class Game {
       if (members.length < 2) continue;
       for (const id of members) this.state.objects[id].band = members[0];
     }
-    if (tax > 0) {
-      const payment = this.payMana(player, parseManaCost(`{${tax}}`));
-      if (payment === null) throw new Error(`${player} can't pay the {${tax}} it costs to attack`);
+    if (tax.generic > 0) {
+      const payment = this.payMana(player, parseManaCost(`{${tax.generic}}`));
+      if (payment === null) throw new Error(`${player} can't pay the {${tax.generic}} it costs to attack`);
       this.executePayment(player, payment);
     }
+    if (tax.life > 0) this.changeLife(player, -tax.life);
     // Enlist (rule 702.154b): an optional cost to attack, chosen and paid
     // (508.1g-j) before any attacker becomes attacking (508.1k) — so the
     // declaration is announced, and its attack triggers trigger, only once

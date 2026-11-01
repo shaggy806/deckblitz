@@ -18,6 +18,32 @@ export type Defender = PlayerId | ObjectId
 /** Attacker id → the defender it attacks. */
 export type AttackAssign = Readonly<Record<string, Defender>>
 
+/** The rates and budgets of a `declare-attackers` offer's `attackTax`. */
+export interface AttackTaxRates {
+  readonly perCreature: Readonly<Record<string, number>>
+  readonly budget: number
+  readonly lifePerCreature?: Readonly<Record<string, number>>
+  readonly lifeBudget?: number
+}
+
+/** What the attack as assigned so far costs (rule 508.1h): each creature sent
+ * at a taxed defender, a player or a planeswalker (Baird), at that defender's
+ * rate, in mana and in life (Sivitri). `overBudget`: more than the attacker
+ * can surely pay. Past the mana budget the engine checks exactly, so this
+ * warns rather than blocks. */
+export function attackTaxCost(
+  assign: AttackAssign,
+  tax: AttackTaxRates | undefined,
+): { readonly mana: number; readonly life: number; readonly overBudget: boolean } {
+  let mana = 0
+  let life = 0
+  for (const defender of Object.values(assign)) {
+    mana += tax?.perCreature[defender] ?? 0
+    life += tax?.lifePerCreature?.[defender] ?? 0
+  }
+  return { mana, life, overBudget: mana > (tax?.budget ?? 0) || life > (tax?.lifeBudget ?? 0) }
+}
+
 /** Of a tile's members, the one a click should take: eligible, not
  * attacking yet and not already waiting in the group. `null` once every
  * member is spoken for. */

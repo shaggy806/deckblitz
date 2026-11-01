@@ -1454,18 +1454,25 @@ export type LegalAction =
       readonly mustAttack: readonly ObjectId[];
       /**
        * What attacking costs (rule 508.1h — Ghostly Prison, Propaganda):
-       * `perCreature` is the generic mana each creature attacking that player
-       * costs, for every taxed defending player; `budget` is how much of it
+       * `perCreature` is the generic mana each creature attacking that defender
+       * costs, for every taxed defender, a player or a planeswalker (Baird);
+       * `budget` is how much of it
        * the attacker can surely pay — the generic mana their sources make
        * without any creature that would tap to attack. Within the budget a
        * declaration is always payable; past it the engine checks exactly.
+       * `lifePerCreature` is the same in life (Sivitri), for a defender that
+       * costs any, and `lifeBudget` the life the attacker can pay: their life
+       * total, or 0 when they can't pay life at all (rule 119.4b). Paying all
+       * of it is legal (119.4); `withinAttackTax` stops one short.
        * `tokens` is each compacted token stack's size among `eligible`, since
        * an entry without a `count` sends all of it. Absent when no defender
        * is taxed.
        */
       readonly attackTax?: {
-        readonly perCreature: Readonly<Record<PlayerId, number>>;
+        readonly perCreature: Readonly<Record<string, number>>;
         readonly budget: number;
+        readonly lifePerCreature?: Readonly<Record<string, number>>;
+        readonly lifeBudget?: number;
         readonly tokens?: Readonly<Record<ObjectId, number>>;
       };
       /**

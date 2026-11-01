@@ -53,7 +53,7 @@ export function withRequiredAttackers(
     // A defender that costs nothing to attack first: the requirement never
     // obliges paying a cost (rule 508.1d).
     const options = offer.defendersFor[attacker] ?? [];
-    const defender = options.find((d) => taxOn(offer, d) === 0) ?? options[0];
+    const defender = options.find((d) => attackIsFree(offer, d)) ?? options[0];
     if (defender !== undefined) out.push({ attacker, defender });
   }
   return withinAttackCompany(withinAttackTax(out, offer), offer);
@@ -199,15 +199,27 @@ export function withinAttackCompany(
   return out;
 }
 
-/** What one creature attacking `defender` costs under `offer`'s attack tax. */
+/** The generic mana one creature attacking `defender` costs under `offer`'s attack tax. */
 function taxOn(offer: AttackOffer, defender: string): number {
-  return (offer.attackTax?.perCreature as Readonly<Record<string, number>> | undefined)?.[defender] ?? 0;
+  return offer.attackTax?.perCreature[defender] ?? 0;
+}
+
+/** The life one creature attacking `defender` costs under `offer`'s attack tax. */
+function lifeTaxOn(offer: AttackOffer, defender: string): number {
+  return offer.attackTax?.lifePerCreature?.[defender] ?? 0;
+}
+
+/** Whether attacking `defender` costs nothing at all under `offer`. */
+function attackIsFree(offer: AttackOffer, defender: string): boolean {
+  return taxOn(offer, defender) === 0 && lifeTaxOn(offer, defender) === 0;
 }
 
 /**
  * `declared`, cut down to what its attack tax budget surely pays (Ghostly
  * Prison — see `AttackOffer.attackTax`): taxed entries are dropped from the
- * end until the rest fits. A creature that must attack is kept if it can be
+ * end until the rest fits, in mana and in life, the life stopping short of
+ * the attacker's last point (paying it is legal, and never what such a driver
+ * should do by accident). A creature that must attack is kept if it can be
  * sent somewhere untaxed instead, and otherwise dropped — the requirement
  * never obliges paying (rule 508.1d). For a driver that doesn't weigh the
  * cost itself: a bot, the fuzzer's random player, a skipped window.
@@ -220,16 +232,23 @@ export function withinAttackTax(
   if (tax === undefined) return [...declared];
   const tokensOf = (d: AttackerDeclaration): number => d.count ?? tax.tokens?.[d.attacker] ?? 1;
   const costOf = (d: AttackerDeclaration): number => taxOn(offer, d.defender) * tokensOf(d);
+  const lifeOf = (d: AttackerDeclaration): number => lifeTaxOn(offer, d.defender) * tokensOf(d);
+  const lifeLimit = Math.max(0, (tax.lifeBudget ?? 0) - 1);
   const out = [...declared];
   let total = out.reduce((n, d) => n + costOf(d), 0);
+  let life = out.reduce((n, d) => n + lifeOf(d), 0);
   // The optional attackers first, latest declared first.
   for (const required of [false, true]) {
-    for (let i = out.length - 1; i >= 0 && total > tax.budget; i -= 1) {
+    for (let i = out.length - 1; i >= 0 && (total > tax.budget || life > lifeLimit); i -= 1) {
       const d = out[i];
-      if (costOf(d) === 0 || offer.mustAttack.includes(d.attacker) !== required) continue;
+      // Only one paying for what's over: a creature costing life stays when
+      // only the mana is short.
+      const helps = (total > tax.budget && costOf(d) > 0) || (life > lifeLimit && lifeOf(d) > 0);
+      if (!helps || offer.mustAttack.includes(d.attacker) !== required) continue;
       total -= costOf(d);
+      life -= lifeOf(d);
       const free = required
-        ? (offer.defendersFor[d.attacker] ?? []).find((x) => taxOn(offer, x) === 0)
+        ? (offer.defendersFor[d.attacker] ?? []).find((x) => attackIsFree(offer, x))
         : undefined;
       if (free !== undefined) out[i] = { ...d, defender: free };
       else out.splice(i, 1);

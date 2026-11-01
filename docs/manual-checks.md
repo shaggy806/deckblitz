@@ -5950,3 +5950,11 @@ engine terms. A second thing to check is a second test.
 ### Dredge the Mire: nothing enters until the last opponent has chosen
 - **Do:** In this 4-player game, cast Dredge the Mire. As Bob, Carol and Dave in turn, pick a creature from your own graveyard and Confirm.
 - **Expect:** Each popup reads "Choose a card to put onto the battlefield under Alice's control". Each chosen card stays in its graveyard until Dave has chosen, then all three enter on your side at once.
+
+### Baird, Steward of Argive: a planeswalker costs mana to attack, another player's doesn't
+- **Do:** In this 4-player game, go to combat and send your Grizzly Bears at Bob's Ajani, then send it at Carol's Ajani instead.
+- **Expect:** At Bob's Ajani the prompt adds "costs {1} to attack". At Carol's it doesn't.
+
+### Sivitri, Dragon Master: attacking costs life
+- **Do:** Use Sivitri's +1 and pass the turn. As Bob, go to combat and attack Alice with the Bears.
+- **Expect:** The prompt adds "costs 2 life to attack". Declaring costs Bob 2 life.

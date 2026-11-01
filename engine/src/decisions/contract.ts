@@ -226,10 +226,13 @@ export interface DecisionReadCtx {
   /** Why playing `land` (one of the pending `cast-now` decision's `lands`)
    * isn't legal right now (rules 305.2b, 305.3). */
   readonly whyCannotPlayLandNow: (land: Extract<Action, { type: "play-land" }>) => string | null;
-  /** The generic mana one creature attacking `defender` costs (Ghostly
-   * Prison) — 0 for an untaxed player or a planeswalker. Statics only `Game`
-   * can read. */
-  readonly attackTaxOf: (defender: PlayerId | ObjectId) => number;
+  /** What one creature attacking `defender` costs (Ghostly Prison) in
+   * generic mana and in life: 0 of each for a defender nothing taxes. Statics
+   * and player effects only `Game` can read. */
+  readonly attackTaxOf: (defender: PlayerId | ObjectId) => { readonly generic: number; readonly life: number };
+  /** The life `player` can pay (rule 119.4): their life total, or 0 when they
+   * can't pay life at all (119.4b). See `AttackOffer.attackTax.lifeBudget`. */
+  readonly attackTaxLifeBudget: (player: PlayerId) => number;
   /** How much attack tax `player` can surely pay without tapping any of
    * `attackers` — see `AttackOffer.attackTax.budget`. Runs the mana solver. */
   readonly attackTaxBudget: (player: PlayerId, attackers: readonly ObjectId[]) => number;

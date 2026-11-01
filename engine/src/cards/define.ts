@@ -2672,11 +2672,28 @@ export interface StaticAbility {
    * "Creatures can't attack you unless their controller pays {N} for each
    * creature they control that's attacking you" (Ghostly Prison,
    * Propaganda): a cost to attack this permanent's controller (rule
-   * 508.1h), `generic` mana per attacking creature. Only the player — a
-   * creature attacking their planeswalker pays nothing (the ruling). `affects`
-   * is ignored.
+   * 508.1h), per attacking creature. `affects` is ignored; a `condition`
+   * turns it on and off (Archangel of Tithes' "as long as this creature is
+   * untapped").
+   *
+   * - `generic`: that much mana a creature — a number, or a count read live
+   *   from this permanent's controller's side (Sphere of Safety's "where X is
+   *   the number of enchantments you control", Collective Restraint's domain).
+   * - `life`: that much life a creature instead, or as well (rule 119.4).
+   * - `covers`: which attacks it taxes. Absent, `"you"`: only the player, so
+   *   a creature attacking their planeswalker pays nothing (Ghostly Prison's
+   *   ruling). `"you-and-planeswalkers"` is "you or planeswalkers you control"
+   *   (Baird, Steward of Argive); `"planeswalkers"` is "planeswalkers you
+   *   control" alone (Onakke Oathkeeper). A battle is none of them.
+   *
+   * For a while rather than as long as it's on the battlefield: the
+   * `player-effect` effect's `attackTax` (Forbidding Spirit, Sivitri, War Tax).
    */
-  readonly attackTax?: { readonly generic: number };
+  readonly attackTax?: {
+    readonly generic?: number | CountSpec;
+    readonly life?: number;
+    readonly covers?: "you" | "you-and-planeswalkers" | "planeswalkers";
+  };
   /**
    * A maximum hand size, read at cleanup like `noMaxHandSize`: `who`'s
    * becomes `set` less the live count `minus` (a `CountSpec`, from this

@@ -4853,6 +4853,19 @@ export type EffectSpec =
        * of spells or abilities, not enchanted by Auras, all damage to them
        * prevented. */
       readonly protectionFromEverything?: PlayerScope;
+      /** "Until your next turn, creatures can't attack you or planeswalkers
+       * you control unless their controller pays {2} for each of those
+       * creatures" (Forbidding Spirit): the `attackTax` static's cost to
+       * attack (rule 508.1h) for a while. `generic` and `life` are read as this
+       * resolves (rule 611.2b), a creature; `covers` as on the static, or
+       * `"all"`: "this turn, creatures can't attack unless their controller
+       * pays {X} for each attacking creature they control" (War Tax), every
+       * attack by anyone on anything, its controller's included. */
+      readonly attackTax?: {
+        readonly generic?: EffectAmount;
+        readonly life?: EffectAmount;
+        readonly covers?: "you" | "you-and-planeswalkers" | "planeswalkers" | "all";
+      };
     }
   | {
       /**
@@ -14234,6 +14247,15 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         ...(spec.lifeCantChange !== undefined ? { lifeCantChange: ctx.playersInScope(spec.lifeCantChange) } : {}),
         ...(spec.protectionFromEverything !== undefined
           ? { protectionFromEverything: ctx.playersInScope(spec.protectionFromEverything) }
+          : {}),
+        ...(spec.attackTax !== undefined
+          ? {
+              attackTax: {
+                generic: spec.attackTax.generic === undefined ? 0 : amountValue(spec.attackTax.generic, ctx),
+                life: spec.attackTax.life === undefined ? 0 : amountValue(spec.attackTax.life, ctx),
+                covers: spec.attackTax.covers ?? "you",
+              },
+            }
           : {}),
       });
       return;

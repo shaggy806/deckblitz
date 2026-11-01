@@ -3933,7 +3933,17 @@ Muse): a cost to attack this permanent's controller (rule 508.1h), not their pla
 ruling). Several add up. It's paid after the attackers tap (508.1f), so an attacker can't tap
 for its own tax, and a creature that must attack isn't obliged to pay it (508.1d). The
 `declare-attackers` offer carries the rates and a sure-to-pay `budget`; bots and the fuzzer cut
-their declarations to it (`withinAttackTax`), and the client shows the running cost.
+their declarations to it (`withinAttackTax`), and the client shows the running cost. `generic`
+may be a live `CountSpec` from the controller's side (Sphere of Safety's `{ countOf: … }`,
+Collective Restraint's `{ basicLandTypes: "you" }`); `life: N` is N life a creature, as well or
+instead (rule 119.4; Sivitri). `covers: "you-and-planeswalkers"` is "you or planeswalkers you
+control" (Baird), `"planeswalkers"` the planeswalkers alone (Onakke Oathkeeper); a `condition`
+turns it on and off. For a while: the `player-effect` effect's `attackTax` (`generic` and `life`
+as `EffectAmount`s, fixed as it resolves), with `covers: "all"` for "creatures can't attack
+unless …" with no "you" (War Tax: every attack by anyone, its controller's too). Not here yet:
+a Phyrexian tax (Norn's Annex's {W/P}, paying which needs a choice the declaration doesn't
+carry), a rate by attacker (Elephant Grass's nonblack, Nils's counters) and the same creature's
+own "can't attack unless you pay" (Qal Sisma Behemoth, `cost:attack-block-cost-self`).
 
 - `grantPt: [p, t]` — layer 7d P/T bonus.
 - `grantPtPerCount`, each affected permanent by its own: `relativeToAffected`

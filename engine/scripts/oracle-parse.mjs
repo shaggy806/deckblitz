@@ -1886,6 +1886,25 @@ export function parseSentence(sentence, ctx) {
   // The one exception: "for each … counter removed this way", which is the
   // cost's X (`removeCounter.count: "x"`), read by the mana templates below.
   let m;
+  // A cost to attack for a while (the `attackTax` player effect, rule 508.1h),
+  // whose "for each" is per creature, not an amount: "Until your next turn,
+  // creatures can't attack you or planeswalkers you control unless their
+  // controller pays {2} / 2 life for each of those creatures" (Forbidding
+  // Spirit, Sivitri), and "This turn, creatures can't attack unless their
+  // controller pays {X} for each attacking creature they control" (War Tax).
+  if ((m = /^until your next turn, creatures can't attack (you|you or planeswalkers you control) unless their controller pays (?:\{(\d+)\}|(\d+) life) for each of those creatures\.$/i.exec(s))) {
+    return {
+      kind: "player-effect",
+      duration: "until-your-next-turn",
+      attackTax: {
+        ...(m[2] !== undefined ? { generic: Number(m[2]) } : { life: Number(m[3]) }),
+        ...(m[1] === "you" ? {} : { covers: "you-and-planeswalkers" }),
+      },
+    };
+  }
+  if (/^this turn, creatures can't attack unless their controller pays \{X\} for each attacking creature they control\.$/i.test(s)) {
+    return { kind: "player-effect", duration: "end-of-turn", attackTax: { generic: "x", covers: "all" } };
+  }
   // A meld card's "If you both own and control ~ and a creature named
   // Hanweir Garrison, exile them, then meld them into Hanweir, the Writhing
   // Township." (rule 701.42 — the `meld` effect, which makes the test).
@@ -8504,6 +8523,31 @@ function perAmountStaticOf(line, text) {
   return null;
 }
 
+/** An attack tax's sentence: who it guards, the {N} or {X}, what "each" says,
+ * and {X}'s count. */
+const ATTACK_TAX_LINE =
+  /^(?:Domain — )?Creatures can't attack (you|you or planeswalkers you control|planeswalkers you control) unless their controller pays \{(\d+|X)\} for each (of those creatures|creature they control that's attacking (?:you|a planeswalker you control))(?:, where X is the number of (.+?))?\.$/;
+
+/** The `covers` of an attack tax guarding `guards`, when what the sentence
+ * charges for says the same; `null` otherwise. */
+function attackTaxCovers(guards, each) {
+  const covers = { you: "you", "you or planeswalkers you control": "you-and-planeswalkers", "planeswalkers you control": "planeswalkers" }[guards];
+  if (each === "of those creatures") return covers;
+  const named = each.endsWith("attacking you") ? "you" : "planeswalkers";
+  return named === covers ? covers : null;
+}
+
+/** The live count "the number of …" names, for an attack tax's {X}: permanents
+ * you control, or basic land types among lands you control; `null` for any
+ * other (or for an {N} with no such clause). */
+function attackTaxCount(phrase) {
+  if (phrase === undefined) return null;
+  if (phrase === "basic land types among lands you control") return { basicLandTypes: "you" };
+  const m = /^(.+?) you control$/.exec(phrase);
+  const filter = m === null ? null : parseTypePhrase(m[1]);
+  return filter === null || Object.keys(filter).length === 0 ? null : { countOf: { ...filter, controlledBy: "you" } };
+}
+
 function parseStatic(line, text) {
   let m;
   // A cost keyed to a spell's target (`targetedBySpellsCost`, rule 601.2f):
@@ -8843,6 +8887,18 @@ function parseStatic(line, text) {
       },
       text,
     };
+  }
+  // A cost to attack (rule 508.1h, `attackTax`): "Creatures can't attack you
+  // unless their controller pays {2} for each creature they control that's
+  // attacking you" (Ghostly Prison), "you or planeswalkers you control …
+  // for each of those creatures" (Baird), "planeswalkers you control" (Onakke
+  // Oathkeeper), and {X} by a count (Sphere of Safety, Collective Restraint).
+  if ((m = ATTACK_TAX_LINE.exec(line))) {
+    const covers = attackTaxCovers(m[1], m[3]);
+    const generic = m[2] === "X" ? attackTaxCount(m[4]) : m[4] === undefined ? Number(m[2]) : null;
+    if (covers !== null && generic !== null) {
+      return { affects: { scope: "self" }, attackTax: { generic, ...(covers === "you" ? {} : { covers }) }, text };
+    }
   }
   // Restrictions asked of the defending (or attacking) player — rules 508.1c
   // and 509.1b: "~ can't attack unless defending player controls an Island".

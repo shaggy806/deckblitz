@@ -63,7 +63,7 @@ import type { ResolveAims } from './game/resolveAims.ts'
 import { Symbols } from './ui/Symbols.tsx'
 import type { BoardEntry } from './game/board.ts'
 import { blockPairs, freeBlocker, leastBlocked, setPairCount } from './game/blockGroups.ts'
-import { attackPairs, freeAttacker, setAttackPairCount } from './game/attackGroups.ts'
+import { attackPairs, attackTaxCost, freeAttacker, setAttackPairCount } from './game/attackGroups.ts'
 import {
   collapseAttacks,
   blockEntries,
@@ -5678,12 +5678,8 @@ function Table({
     // A tile of several with some attacking: a count per defender, rather
     // than a click per creature (game/attackGroups.ts).
     const pairs = attackPairs(attackAssignments, attackPicks, defendersFor, tileOf)
-    // What attacking costs (Ghostly Prison, Propaganda): each creature sent
-    // at a taxing player, at that player's rate. Past the budget the engine
-    // checks the payment exactly, so this warns rather than blocks.
-    const taxRates = attackAction.attackTax?.perCreature as Readonly<Record<string, number>> | undefined
-    const attackTax = Object.values(attackAssignments).reduce((n, d) => n + (taxRates?.[d] ?? 0), 0)
-    const overBudget = attackTax > (attackAction.attackTax?.budget ?? 0)
+    // What attacking costs (Ghostly Prison, Propaganda, Sivitri's life).
+    const attackTax = attackTaxCost(attackAssignments, attackAction.attackTax)
     // Picking attackers to aim says so ("2 selected · click who they
     // attack"). With more than one defender to aim at, that has a line of its
     // own from the start, so picking doesn't wrap the prompt and grow the
@@ -5707,11 +5703,13 @@ function Table({
           {unmetMusts.length > 0 && enterAttackingAction === undefined
             ? ` · ${unmetMusts.map((id) => game.nameOf(id)).join(', ')} must attack`
             : ''}
-          {attackTax > 0 ? (
+          {attackTax.mana > 0 || attackTax.life > 0 ? (
             <>
               {' '}
-              · costs <Symbols text={`{${attackTax}}`} /> to attack
-              {overBudget ? ' — more than you can surely pay' : ''}
+              · costs {attackTax.mana > 0 ? <Symbols text={`{${attackTax.mana}}`} /> : null}
+              {attackTax.mana > 0 && attackTax.life > 0 ? ' and ' : ''}
+              {attackTax.life > 0 ? `${attackTax.life} life` : ''} to attack
+              {attackTax.overBudget ? ' — more than you can surely pay' : ''}
             </>
           ) : null}
           {hintLine ? <span className="decision-hint">{pickHint || ' '}</span> : null}

@@ -2503,6 +2503,20 @@ keywords, the `bandsWithOther` static, the `bandedWithSource` filter. Key:
 `keyword:banding`. Still open beside it: 702.22i ("would become blocked due
 to an effect" — no effect makes an attacker blocked yet).
 
+### Attack taxes past a fixed {N} on a player — built 2026-11-01
+
+The need-keys Phase 2 family `cost:attack-tax`: `attackTax`'s `covers` (you,
+your planeswalkers, or both), `generic` as a live `CountSpec`, `life`, and the
+`player-effect` effect's `attackTax` for a while (`covers: "all"` is War Tax's
+every attack). The offer's rates are per defender, a planeswalker's included,
+with `lifePerCreature` and `lifeBudget` beside the mana. Keys: `cost:attack-tax`,
+`cost:attack-tax-amount`, `cost:attack-tax-life`, `cost:attack-tax-planeswalkers`.
+Still open beside it: a Phyrexian tax (Norn's Annex), a rate by attacker
+(Elephant Grass, Nils, `cost:attack-tax-per-counters`), a creature's own "can't
+attack or block unless you pay" (`cost:attack-block-cost-self`,
+`static:attack-cost-for-creature`) and the block tax Archangel of Tithes also
+needs (`static:block-tax`).
+
 ### Choosing a card name — built 2026-10-28
 
 The need-keys Phase 2 family `decision:choose-card-name` (B246): rule 201.4's

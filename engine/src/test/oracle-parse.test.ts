@@ -6833,6 +6833,51 @@ describe("token copies of a linked source", () => {
       notLegendary: true,
       exceptions: { addSubtypes: ["Mutant"] },
     });
+describe("attack taxes", () => {
+  const face = (type_line: string, oracle_text: string) =>
+    parseFace({ name: "Test Tax", type_line, oracle_text }, { tokenFor: () => null });
+  const tax = (rest: string) => {
+    const card = face("Enchantment", `Creatures can't attack ${rest}`);
+    return card.complete ? card.static[0].attackTax : null;
+  };
+
+  it("reads what a tax covers", () => {
+    expect(tax("you unless their controller pays {2} for each creature they control that's attacking you.")).toEqual({ generic: 2 });
+    expect(tax("you or planeswalkers you control unless their controller pays {1} for each of those creatures.")).toEqual({
+      generic: 1,
+      covers: "you-and-planeswalkers",
+    });
+    expect(
+      tax("planeswalkers you control unless their controller pays {1} for each creature they control that's attacking a planeswalker you control."),
+    ).toEqual({ generic: 1, covers: "planeswalkers" });
+  });
+
+  it("reads {X} by a count, and nothing else as {X}", () => {
+    expect(
+      tax("you or planeswalkers you control unless their controller pays {X} for each of those creatures, where X is the number of enchantments you control."),
+    ).toEqual({ generic: { countOf: { type: "enchantment", controlledBy: "you" } }, covers: "you-and-planeswalkers" });
+    expect(
+      tax("you unless their controller pays {X} for each creature they control that's attacking you, where X is the number of basic land types among lands you control."),
+    ).toEqual({ generic: { basicLandTypes: "you" } });
+    expect(tax("you unless their controller pays {X} for each of those creatures.")).toBeNull();
+    // What it charges for has to be what it guards.
+    expect(tax("you unless their controller pays {2} for each creature they control that's attacking a planeswalker you control.")).toBeNull();
+  });
+
+  it("reads a tax for a while, in mana or in life", () => {
+    const plus = parseEffect(
+      "Until your next turn, creatures can't attack you or planeswalkers you control unless their controller pays 2 life for each of those creatures.",
+      ctx(),
+    );
+    expect(plus.effect).toEqual({
+      kind: "player-effect",
+      duration: "until-your-next-turn",
+      attackTax: { life: 2, covers: "you-and-planeswalkers" },
+    });
+    const chapter = parseEffect("Until your next turn, creatures can't attack you unless their controller pays {2} for each of those creatures.", ctx());
+    expect(chapter.effect).toEqual({ kind: "player-effect", duration: "until-your-next-turn", attackTax: { generic: 2 } });
+    const war = parseEffect("This turn, creatures can't attack unless their controller pays {X} for each attacking creature they control.", ctx());
+    expect(war.effect).toEqual({ kind: "player-effect", duration: "end-of-turn", attackTax: { generic: "x", covers: "all" } });
   });
 });
 

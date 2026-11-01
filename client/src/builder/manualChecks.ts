@@ -8918,4 +8918,18 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       ],
     }),
   ),
+  preset(
+    "Baird, Steward of Argive: a planeswalker costs mana to attack, another player's doesn't",
+    board({
+      you: { bf: ['Grizzly Bears', 'Forest'] },
+      opp: [{ bf: ['Baird, Steward of Argive', 'Ajani, Caller of the Pride'] }, { bf: ['Ajani, Caller of the Pride'] }, {}],
+    }),
+  ),
+  preset(
+    'Sivitri, Dragon Master: attacking costs life',
+    board({
+      you: { bf: ['Sivitri, Dragon Master'] },
+      opp: { human: true, bf: ['Grizzly Bears'] },
+    }),
+  ),
 ]
