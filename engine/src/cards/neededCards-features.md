@@ -2626,6 +2626,25 @@ attack or block unless you pay" (`cost:attack-block-cost-self`,
 `static:attack-cost-for-creature`) and the block tax Archangel of Tithes also
 needs (`static:block-tax`).
 
+### Copying on the way in, past a permanent — built 2026-11-01
+
+The need-keys Phase 2 family `replacement:copy-on-enter-options`. `CopyOnEnter`
+now reads a card in a graveyard or exile (`from`, asked as a `choose-from-zone`
+with `copyOnEnterOf`, so a client shows those cards in its popup — Body Double,
+Echoing Deeps, Activated Sleeper, The Master, Formed Anew), a `condition` (raid —
+Protean Raider), the linked `whenYouDo` (rules 603.11, 707.9g — Superior
+Spider-Man, Wall of Stolen Identity), a counter's `ifYouControlCopied` (Undercover
+Operative) and `ownPt` (Hulking Metamorph, printed or prototype); Imposter Mech and
+Copy Land needed only cards. `BecomesOnEnter` is "it becomes your choice of …" and
+Molten Sentry's coin, a copiable value (rule 707.2 — Primal Clay, Corrupted
+Shapeshifter). Keys: `replacement:copy-on-enter-options`,
+`as-enters-choose-characteristics`, `clone-as-vehicle`, `copy-on-enter-own-pt`,
+`enter-as-copy-of-exiled-card`, `enter-as-copy-of-graveyard-card`. Still open:
+`clone-exception-if-embalmed` (a token copy isn't asked, `docs/engine-gaps.md`),
+`others-enter-as-copy` and the one-shot `next-enter-as-copy`,
+`next-enter-with-counters`; Aquamorph Entity's "or is turned face up" and The
+Mimeoplasm's two exiled cards aren't covered by what's marked.
+
 ### Choosing a card name — built 2026-10-28
 
 The need-keys Phase 2 family `decision:choose-card-name` (B246): rule 201.4's

@@ -85,6 +85,32 @@ export interface PermanentOnEnter {
   readonly counter?: string;
 }
 
+/** One form of a {@link BecomesOnEnter}: what its controller's choice is
+ * called, and what it makes the permanent — base P/T, abilities and types, as
+ * a copy's exceptions say them, since these are copiable values too (rule
+ * 707.2's "as … enters" abilities that set power and toughness). */
+export interface BecomesOnEnterForm {
+  readonly label: string;
+  readonly as: CopyExceptions;
+}
+
+/**
+ * "As this creature enters, it becomes your choice of a 3/3 creature with
+ * flying, a 2/5 creature with vigilance, or a 0/12 creature with defender"
+ * (Corrupted Shapeshifter, Primal Clay, Primal Plasma — rule 614.1c), asked
+ * like every "as this enters" choice, before it moves (rule 614.12), or
+ * "flip a coin. If the coin comes up heads, …" with `flip` (Molten Sentry:
+ * `forms` heads first). Anywhere but the battlefield it's the 0/0 its `*`s
+ * make it (the rulings). What was chosen is part of its copiable values
+ * (rule 707.2): a copy of it copies that, and then — being a copy entering —
+ * makes this choice of its own over it (the rulings: "a 1/6 creature with
+ * flying and defender").
+ */
+export interface BecomesOnEnter {
+  readonly forms: readonly BecomesOnEnterForm[];
+  readonly flip?: true;
+}
+
 export interface CopyOnEnter {
   /**
    * What it may copy: a permanent already on the battlefield matching this,
@@ -99,9 +125,41 @@ export interface CopyOnEnter {
    * "source" } } }`.
    */
   readonly filter: CardFilter;
+  /**
+   * Where what it copies is, when it isn't a permanent: `"graveyards"` is
+   * Body Double's "any creature card in a graveyard" (every player's, with
+   * `filter` read for the card there — Activated Sleeper's "that was put
+   * there from the battlefield this turn" is its `putIntoGraveyardThisTurn`);
+   * `"exile"` is The Master, Formed Anew's "a creature card in exile with a
+   * takeover counter on it" (a face-down one can't be looked at, so it isn't
+   * offered). A card has only its printed values to copy (rule 707.2). Asked
+   * as a `choose-from-zone`, since a client shows those cards in a popup.
+   */
+  readonly from?: "graveyards" | "exile";
+  /** "**Raid — If you attacked this turn**, you may have this creature enter
+   * as a copy" (Protean Raider): read as it's about to enter, for the player
+   * it's entering under. Unmet, it isn't asked and it enters as itself. */
+  readonly condition?: StaticCondition;
+  /**
+   * "…**When you do**, exile that card" (Superior Spider-Man), "tap the
+   * copied creature and it doesn't untap …" (Wall of Stolen Identity): the
+   * triggered ability written in the same paragraph (rule 603.11). It triggers
+   * once it has entered having copied something — declining, it never does
+   * (rule 707.9g) — and `effect` reads what it copied as `"trigger-object"`,
+   * the same object still or nothing (rule 400.7). Not an enters trigger, so
+   * no entering-trigger doubler sees it. No targets: "that card" isn't one.
+   */
+  readonly whenYouDo?: { readonly effect: EffectSpec; readonly text: string };
   /** The copy effect's exceptions (rule 707.9a–b) — part of its copiable
    * values, so anything that copies it later copies them too. */
   readonly except?: CopyExceptions;
+  /**
+   * "…and its power and toughness are equal to **this creature's** power and
+   * toughness" (Hulking Metamorph): the exception's base P/T is the entering
+   * permanent's own, as printed or as a prototype's (the 7/7 or the 3/3 — its
+   * ruling), rather than a number written in `except.basePt`.
+   */
+  readonly ownPt?: true;
   /** "Enter **tapped** as a copy" (Vesuva): an additional effect of copying
    * (rule 707.9e), so it enters tapped only if it copies something. */
   readonly tapped?: true;
@@ -118,6 +176,10 @@ export interface CopyOnEnter {
     readonly kind: string;
     readonly amount: number | "x";
     readonly ifType?: CardType;
+    /** "…with a shield counter on it **if you control that creature**"
+     * (Undercover Operative): only when the permanent copied is one the
+     * player it's entering under controls as they choose it. */
+    readonly ifYouControlCopied?: true;
   }[];
   /** "…become a copy of any creature on the battlefield **until end of
    * turn**" (Cursed Mirror): the copy effect, exceptions and all, ends in the
@@ -4058,6 +4120,9 @@ export interface CardDefinition {
    * chooses (Clone — rule 707.9) — see {@link CopyOnEnter}. `null` for a
    * normal card. */
   readonly copyOnEnter: CopyOnEnter | null;
+  /** "As this enters, it becomes your choice of …" — see
+   * {@link BecomesOnEnter}. `null` for a normal card. */
+  readonly becomesOnEnter: BecomesOnEnter | null;
   /** "As this enters, you may exchange its text box and another creature's"
    * (Deadpool, Trading Card — rule 612.5, a layer-3 text-changing effect):
    * what it may exchange with, a permanent already on the battlefield
@@ -4737,6 +4802,7 @@ const PRINTED_ABILITY: {
   castOnlyIf: (def) => def.castOnlyIf !== null,
   splitSecond: (def) => def.splitSecond,
   copyOnEnter: (def) => def.copyOnEnter !== null,
+  becomesOnEnter: (def) => def.becomesOnEnter !== null,
   exchangeTextOnEnter: (def) => def.exchangeTextOnEnter !== null,
   shufflesIntoLibraryInstead: (def) => def.shufflesIntoLibraryInstead,
   devour: (def) => def.devour !== null,
@@ -4973,6 +5039,7 @@ interface CardDraft {
   castOnlyIf?: StaticCondition;
   splitSecond?: boolean;
   copyOnEnter?: CopyOnEnter;
+  becomesOnEnter?: BecomesOnEnter;
   exchangeTextOnEnter?: CardFilter;
   shufflesIntoLibraryInstead?: boolean;
   devour?: { readonly multiplier: number; readonly filter: CardFilter };
@@ -5214,6 +5281,7 @@ export function defineCard(draft: CardDraft): CardDefinition {
     castOnlyIf: draft.castOnlyIf ?? null,
     splitSecond: draft.splitSecond ?? false,
     copyOnEnter: draft.copyOnEnter ?? null,
+    becomesOnEnter: draft.becomesOnEnter ?? null,
     exchangeTextOnEnter: draft.exchangeTextOnEnter ?? null,
     shufflesIntoLibraryInstead: draft.shufflesIntoLibraryInstead ?? false,
     devour: draft.devour ?? null,

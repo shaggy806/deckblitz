@@ -244,6 +244,8 @@ function faceSource(face, ctx) {
     selfCostReduction: parsed.selfCostReduction,
     alsoSubtypes: parsed.alsoSubtypes,
     additionalCost: parsed.additionalCost,
+    copyOnEnter: parsed.copyOnEnter,
+    becomesOnEnter: parsed.becomesOnEnter,
     chooseCreatureTypeOnEnter: parsed.chooseCreatureTypeOnEnter,
     chooseCardNameOnEnter: parsed.chooseCardNameOnEnter,
     chooseOnEnter: parsed.chooseOnEnter,

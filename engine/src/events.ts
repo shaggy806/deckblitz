@@ -1287,6 +1287,10 @@ export type GameEvent =
       readonly type: "coin-flipped";
       readonly player: PlayerId;
       readonly won: boolean;
+      /** A flip that cares only about heads or tails (Molten Sentry): no
+       * player wins or loses it (rule 705.2), so `won` is false, and no
+       * `wins-coin-flip` trigger fires on it. */
+      readonly came?: "heads" | "tails";
     })
   | (Base & {
       /** A player clashed (rule 701.30) — one event per clashing player,

@@ -5801,9 +5801,29 @@ export class Game {
     // copies is the *copiable* values (rule 707.2) — for our model, the
     // copied card's printed name, which every characteristic read resolves
     // through; `moveObject` makes it the copy as it enters.
-    const clone = this.state.objects[awaiting.source];
+    this.recordCopyChoice(awaiting.source, player, copy);
+    this.state.awaiting = null;
+    this.prepareForPriority(this.activePlayer);
+  }
+
+  /** What `chooser` chose for the Clone `cloneId` to enter as a copy of — a
+   * permanent, or a card in a graveyard or exile (`CopyOnEnter.from`), or
+   * nothing: it waits on the Clone (`enterChoice`) until it moves. */
+  private recordCopyChoice(cloneId: ObjectId, chooser: PlayerId, copy: ObjectId | null): void {
+    const clone = this.state.objects[cloneId];
     const copied = copy === null ? undefined : this.state.objects[copy];
     const spec = this.registry.get(rulesTextName(clone)).copyOnEnter;
+    // "Equal to this creature's power and toughness" (Hulking Metamorph): as
+    // printed, or the prototype's it was cast with (rule 718.3c, its ruling).
+    const ownDef = this.registry.get(printedCardName(clone));
+    const ownPrototype = clone.modifiers.findLast((m) => m.copiable === true && m.setPt !== undefined)?.setPt;
+    const ownPt = ownPrototype ?? ([ownDef.power ?? 0, ownDef.toughness ?? 0] as const);
+    const except =
+      spec?.ownPt === true
+        ? { ...spec.except, basePt: [ownPt[0], ownPt[1]] as const }
+        : spec?.except;
+    // "…if you control that creature" (Undercover Operative), as it's chosen.
+    const copiedIsYours = copied !== undefined && copied.controller === chooser;
     clone.enterChoice = {
       ...clone.enterChoice,
       copyOf: copied === undefined ? null : this.unflippedName(printedCardName(copied)),
@@ -5816,26 +5836,40 @@ export class Game {
           : [
               // A duration isn't copiable (Cursed Mirror's ruling): what
               // copies a copy that lasts until end of turn keeps it.
-              ...copied.modifiers.filter((m) => m.copiable === true).map((m) => ({ ...m, untilEndOfTurn: false })),
+              // A card in a graveyard or exile has only what's printed on it.
+              ...(copied.zone === "battlefield"
+                ? copied.modifiers.filter((m) => m.copiable === true).map((m) => ({ ...m, untilEndOfTurn: false }))
+                : []),
               ...(copied.notLegendary === true ? [copyExceptionModifier({ notLegendary: true })] : []),
-              ...(spec?.except !== undefined ? [copyExceptionModifier(spec.except, this.registry)] : []),
+              ...(except !== undefined ? [copyExceptionModifier(except, this.registry)] : []),
             ],
       // What copying adds to how it enters (rule 707.9e) — only if it copies.
       ...(copied !== undefined &&
       spec !== null &&
-      (spec.tapped === true || spec.counters !== undefined || spec.untilEndOfTurn === true)
+      (spec.tapped === true || spec.counters !== undefined || spec.untilEndOfTurn === true || spec.whenYouDo !== undefined)
         ? {
             copyEnter: {
               ...(spec.tapped === true ? { tapped: true as const } : {}),
               ...(spec.untilEndOfTurn === true ? { untilEndOfTurn: true as const } : {}),
               ...(spec.counters !== undefined
                 ? {
-                    counters: spec.counters.map((c) => ({
-                      kind: c.kind,
-                      // "X additional counters": the X it was cast with.
-                      amount: c.amount === "x" ? (clone.xValue ?? 0) : c.amount,
-                      ...(c.ifType !== undefined ? { ifType: c.ifType } : {}),
-                    })),
+                    counters: spec.counters
+                      .filter((c) => c.ifYouControlCopied !== true || copiedIsYours)
+                      .map((c) => ({
+                        kind: c.kind,
+                        // "X additional counters": the X it was cast with.
+                        amount: c.amount === "x" ? (clone.xValue ?? 0) : c.amount,
+                        ...(c.ifType !== undefined ? { ifType: c.ifType } : {}),
+                      })),
+                  }
+                : {}),
+              ...(spec.whenYouDo !== undefined
+                ? {
+                    whenYouDo: {
+                      ...spec.whenYouDo,
+                      copied: copied.id,
+                      copiedStint: copied.zoneChangeCount ?? 0,
+                    },
                   }
                 : {}),
             },
@@ -5843,9 +5877,7 @@ export class Game {
         : {}),
     };
     // A copy is announced as it enters; declining, now.
-    if (copy === null) this.emit({ type: "permanent-copied", object: awaiting.source, copyOf: null });
-    this.state.awaiting = null;
-    this.prepareForPriority(this.activePlayer);
+    if (copy === null) this.emit({ type: "permanent-copied", object: cloneId, copyOf: null });
   }
 
   /** Answers a pending `choose-enchant` decision (rule 303.4f) — raised by
@@ -8226,6 +8258,14 @@ export class Game {
       if (chosen.length > 0) this.revealCards(player, chosen, "hand");
       const entering = this.state.objects[awaiting.amplifyOf];
       if (entering !== undefined) entering.enterChoice = { ...entering.enterChoice, amplified: chosen.length };
+      this.state.awaiting = null;
+      this.prepareForPriority(this.activePlayer);
+      return;
+    }
+    // A Clone copying a card in a graveyard or exile (`CopyOnEnter.from`):
+    // nothing moves, and its entry carries on as a `choose-copy`'s does.
+    if (awaiting.copyOnEnterOf !== undefined) {
+      this.recordCopyChoice(awaiting.copyOnEnterOf, player, chosen[0] ?? null);
       this.state.awaiting = null;
       this.prepareForPriority(this.activePlayer);
       return;
@@ -10838,7 +10878,8 @@ export class Game {
     id: ObjectId,
   ):
     | { readonly kind: "copy" }
-    | { readonly kind: "choose"; readonly options?: readonly string[] }
+    | { readonly kind: "choose"; readonly options?: readonly string[]; readonly prompt?: string }
+    | { readonly kind: "flip-form"; readonly heads: string; readonly tails: string }
     | { readonly kind: "enchant"; readonly as: CardDefinition }
     | { readonly kind: "reveal"; readonly subtypes: readonly string[] }
     | { readonly kind: "behold"; readonly spec: BeholdSpec }
@@ -10878,6 +10919,20 @@ export class Game {
     if (answered?.chosen === undefined) {
       if (becoming.chooseCreatureTypeOnEnter) return { kind: "choose" };
       if (becoming.chooseOnEnter !== null) return { kind: "choose", options: becoming.chooseOnEnter };
+      // "It becomes your choice of …" (Primal Clay) — printed, or a copy's,
+      // which chooses again over what it copied (the rulings) — or the flip
+      // of a coin (Molten Sentry).
+      const becomes = becoming.becomesOnEnter;
+      if (becomes !== null && becomes.flip === true) {
+        return { kind: "flip-form", heads: becomes.forms[0].label, tails: becomes.forms[1].label };
+      }
+      if (becomes !== null) {
+        return {
+          kind: "choose",
+          options: becomes.forms.map((f) => f.label),
+          prompt: `${becoming.name} becomes your choice of:`,
+        };
+      }
     }
     // "As this enters, choose a card name" (rule 201.4) — printed, or a copy's.
     if (answered?.chosenName === undefined && becoming.chooseCardNameOnEnter !== null) {
@@ -11033,7 +11088,21 @@ export class Game {
     for (let next = this.nextEnterChoice(id); next !== null; next = this.nextEnterChoice(id)) {
       if (next.kind === "choose") {
         this.beginCreatureTypeChoice(id, chooser, next.options);
+        const asked = this.state.awaiting as AwaitingDecision | null;
+        if (next.prompt !== undefined && asked?.kind === "choose-creature-type") {
+          this.state.awaiting = { ...asked, prompt: next.prompt };
+        }
         return true;
+      }
+      if (next.kind === "flip-form") {
+        // "As this creature enters, flip a coin" (Molten Sentry): nothing to
+        // ask, and nobody wins or loses it (rule 705.2); it moves on as
+        // whatever the coin said.
+        const heads = this.rng.next() < 0.5;
+        this.state.rngState = this.rng.seed;
+        this.emit({ type: "coin-flipped", player: chooser, won: false, came: heads ? "heads" : "tails" });
+        object.enterChoice = { ...object.enterChoice, chosen: heads ? next.heads : next.tails };
+        continue;
       }
       if (next.kind === "name") {
         if (this.askCardNameOnEnter(id, chooser, next.spec)) return true;
@@ -11352,7 +11421,24 @@ export class Game {
       }
       const options = this.copyOptions(id, chooser);
       if (options.length > 0) {
-        this.state.awaiting = { kind: "choose-copy", player: chooser, source: id, options };
+        const from = this.registry.get(rulesTextName(object)).copyOnEnter?.from;
+        // Cards aren't on the board to click: they're shown, as any choice
+        // out of a zone is, and choosing none is "copy nothing".
+        this.state.awaiting =
+          from !== undefined
+            ? {
+                kind: "choose-from-zone",
+                player: chooser,
+                ids: options,
+                eligible: options,
+                min: 0,
+                max: 1,
+                destination: "stay",
+                leftover: "stay",
+                copyOnEnterOf: id,
+                prompt: `You may have ${nameOf(object)} enter as a copy of a card`,
+              }
+            : { kind: "choose-copy", player: chooser, source: id, options };
         return true;
       }
       object.enterChoice = { ...object.enterChoice, copyOf: null };
@@ -11494,8 +11580,25 @@ export class Game {
     const clone = this.state.objects[cloneId];
     const spec = this.registry.get(rulesTextName(clone)).copyOnEnter;
     if (spec === null) return [];
+    // "Raid — If you attacked this turn" (Protean Raider), from the side of
+    // the player it's entering under.
+    if (
+      spec.condition !== undefined &&
+      !staticConditionMet(this.state, this.registry, { ...clone, controller: chooser }, spec.condition)
+    ) {
+      return [];
+    }
     const ctx = this.makeResolutionContext(cloneId, chooser, [], clone.xValue ?? 0, 0);
-    return this.state.zones.shared.battlefield.filter((id) => {
+    // Permanents, or cards in every graveyard or in exile (`CopyOnEnter.from`)
+    // — a face-down exiled card only its owner may have looked at isn't one
+    // anybody can choose by what it is.
+    const among =
+      spec.from === "graveyards"
+        ? this.state.turnOrder.flatMap((p) => this.state.zones.perPlayer[p]?.graveyard ?? [])
+        : spec.from === "exile"
+          ? this.state.zones.shared.exile.filter((id) => this.state.objects[id]?.faceDown === undefined)
+          : this.state.zones.shared.battlefield;
+    return among.filter((id) => {
       if (id === cloneId || this.enterBatch?.has(id) === true) return false;
       const object = this.state.objects[id];
       return (
@@ -45675,6 +45778,14 @@ export class Game {
       if (enterChoice.chosen !== undefined) {
         object.chosenCreatureType = enterChoice.chosen;
         object.chosenOnEnter = enterChoice.chosen;
+        // "It becomes your choice of …" (Primal Clay): what was chosen is a
+        // copiable value (rule 707.2), over anything it copied just now.
+        const form = this.registry
+          .get(printedCardName(object))
+          .becomesOnEnter?.forms.find((f) => f.label === enterChoice.chosen);
+        if (form !== undefined) {
+          object.modifiers.push({ ...copyExceptionModifier(form.as, this.registry), timestamp: -2 });
+        }
       }
       if (enterChoice.chosenName != null) object.chosenNames = [enterChoice.chosenName];
       if (enterChoice.chosenPlayer != null) object.chosenPlayer = enterChoice.chosenPlayer;
@@ -45914,6 +46025,26 @@ export class Game {
       // the counters Giada puts on an Angel reanimated under your control.
       const enteringController = enter.under ?? object.controller;
       object.controller = enteringController;
+      // "…When you do, …" (rules 603.11, 707.9g): it copied something, so the
+      // linked ability triggers, and goes on the stack as a player would next
+      // get priority. What it copied is its trigger object, the same object
+      // still or nothing (rule 400.7).
+      const whenYouDo =
+        enterChoice?.copyOf !== undefined && enterChoice.copyOf !== null ? enterChoice.copyEnter?.whenYouDo : undefined;
+      if (whenYouDo !== undefined) {
+        this.state.pendingTriggers.push({
+          sourceObjectId: id,
+          cardName: printedCardName(object),
+          abilityIndex: 0,
+          controller: enteringController,
+          triggerObject: whenYouDo.copied,
+          lastKnownRefs: {
+            source: object.zoneChangeCount ?? 0,
+            triggerObjectAfterLeaving: whenYouDo.copiedStint,
+          },
+          reflexive: { targets: [], effect: whenYouDo.effect, text: whenYouDo.text },
+        });
+      }
       // A transforming double-faced card entering transformed — put there
       // transformed, its own "enters transformed", or a daybound card while
       // it's night (702.145f) — has its back face up from the start, so the

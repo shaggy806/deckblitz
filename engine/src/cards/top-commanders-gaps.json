@@ -982,7 +982,13 @@
   "effect:cast-limit",
   "effect:per-player-cast-limit",
   "effect:next-spell-cost-reduction",
-  "effect:until-next-turn-spell-cost-reduction"
+  "effect:until-next-turn-spell-cost-reduction",
+  "replacement:copy-on-enter-options",
+  "replacement:as-enters-choose-characteristics",
+  "replacement:clone-as-vehicle",
+  "replacement:copy-on-enter-own-pt",
+  "replacement:enter-as-copy-of-exiled-card",
+  "replacement:enter-as-copy-of-graveyard-card"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

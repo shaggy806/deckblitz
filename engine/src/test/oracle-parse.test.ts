@@ -7089,6 +7089,74 @@ describe("turning a face-down permanent face up by an effect", () => {
   });
 });
 
+describe("entering as a copy, or as a choice of forms", () => {
+  const creature = (oracle_text: string) => parseFace({ name: "Test Copy", type_line: "Creature — Shapeshifter", oracle_text }, { tokenFor: () => null });
+
+  it("reads a copy of a card in a graveyard or exile", () => {
+    expect(creature("You may have this creature enter as a copy of any creature card in a graveyard.").copyOnEnter).toEqual({
+      filter: { type: "creature" },
+      from: "graveyards",
+    });
+    expect(
+      creature(
+        "You may have this creature enter as a copy of any creature card in a graveyard that was put there from the battlefield this turn, except it's a Phyrexian in addition to its other types.",
+      ).copyOnEnter,
+    ).toEqual({
+      filter: { type: "creature", putIntoGraveyardThisTurn: { from: ["battlefield"] } },
+      from: "graveyards",
+      except: { addSubtypes: ["Phyrexian"] },
+    });
+    expect(creature("You may have this creature enter as a copy of a creature card in exile with a takeover counter on it.").copyOnEnter).toEqual({
+      filter: { type: "creature", counters: { kind: "takeover", compare: { op: "gte", n: 1 } } },
+      from: "exile",
+    });
+    const land = parseFace(
+      { name: "Test Deeps", type_line: "Land — Cave", oracle_text: "You may have this land enter tapped as a copy of any land card in a graveyard, except it's a Cave in addition to its other types." },
+      { tokenFor: () => null },
+    );
+    expect(land.copyOnEnter).toEqual({ filter: { type: "land" }, from: "graveyards", tapped: true, except: { addSubtypes: ["Cave"] } });
+  });
+
+  it("reads raid, 'when you do', and an exception on what it copied", () => {
+    expect(creature("Raid — If you attacked this turn, you may have this creature enter as a copy of any creature on the battlefield.").copyOnEnter).toEqual({
+      filter: { type: "creature" },
+      condition: { kind: "turn-stat", stat: "attacked", who: "you", atLeast: 1 },
+    });
+    const wall = creature(
+      "You may have this creature enter as a copy of any creature on the battlefield, except it's a Wall in addition to its other types and has defender. When you do, tap the copied creature and it doesn't untap during its controller's untap step for as long as you control this creature.",
+    ).copyOnEnter;
+    expect(wall.except).toEqual({ addSubtypes: ["Wall"], keywords: ["defender"] });
+    expect(wall.whenYouDo.effect.effects[0]).toEqual({ kind: "tap", target: "trigger-object" });
+    expect(
+      creature("You may have this creature enter as a copy of any creature on the battlefield, except it enters with a shield counter on it if you control that creature.").copyOnEnter.counters,
+    ).toEqual([{ kind: "shield", amount: 1, ifYouControlCopied: true }]);
+    expect(
+      creature("You may have this creature enter as a copy of an artifact or creature you control, except it's an artifact creature in addition to its other types, and its power and toughness are equal to this creature's power and toughness.").copyOnEnter,
+    ).toEqual({
+      filter: { typesAnyOf: ["artifact", "creature"], controlledBy: "you" },
+      except: { addTypes: ["artifact", "creature"] },
+      ownPt: true,
+    });
+    // An exception it can't say stays a person's.
+    const odd = creature("You may have this creature enter as a copy of any creature on the battlefield, except it has this ability.");
+    expect(odd.copyOnEnter).toBeUndefined();
+    expect(odd.complete).toBe(false);
+  });
+
+  it("reads 'it becomes your choice of', and the coin", () => {
+    const clay = creature(
+      "As this creature enters, it becomes your choice of a 3/3 artifact creature, a 2/2 artifact creature with flying, or a 1/6 Wall artifact creature with defender in addition to its other types.",
+    ).becomesOnEnter;
+    expect(clay.forms.map((f: { label: string }) => f.label)).toEqual(["3/3 artifact creature", "2/2 artifact creature with flying", "1/6 Wall artifact creature with defender"]);
+    expect(clay.forms[2].as).toEqual({ basePt: [1, 6], addTypes: ["artifact", "creature"], addSubtypes: ["Wall"], keywords: ["defender"] });
+    const sentry = creature(
+      "As this creature enters, flip a coin. If the coin comes up heads, this creature enters as a 5/2 creature with haste. If it comes up tails, this creature enters as a 2/5 creature with defender.",
+    ).becomesOnEnter;
+    expect(sentry.flip).toBe(true);
+    expect(sentry.forms[0]).toEqual({ label: "5/2 creature with haste", as: { basePt: [5, 2], keywords: ["haste"] } });
+  });
+});
+
 describe("the turn's blocks", () => {
   const face = (type_line: string, oracle_text: string) => parseFace({ name: "Test Block", type_line, oracle_text }, { tokenFor: () => null });
   const either = (partner: object) => ({ type: "creature", blockedThisTurn: { relation: "either", partner } });

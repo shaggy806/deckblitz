@@ -864,6 +864,15 @@ export interface GameObject {
       readonly counters?: readonly { readonly kind: string; readonly amount: number; readonly ifType?: CardType }[];
       /** The copy lasts until end of turn (`CopyOnEnter.untilEndOfTurn`). */
       readonly untilEndOfTurn?: true;
+      /** "When you do, …" (`CopyOnEnter.whenYouDo`, rules 603.11, 707.9g): the
+       * ability, with what it copied as it was chosen — its trigger object,
+       * by stint (rule 400.7). */
+      readonly whenYouDo?: {
+        readonly effect: EffectSpec;
+        readonly text: string;
+        readonly copied: ObjectId;
+        readonly copiedStint: number;
+      };
     };
     readonly chosen?: string;
     /** The card name chosen as it was about to enter
@@ -3213,6 +3222,12 @@ export type AwaitingDecision =
        * revealed (`destination: "reveal"`), recorded on it
        * (`enterChoice.amplified`) for its counters as it enters. */
       readonly amplifyOf?: ObjectId;
+      /** The permanent about to enter as a copy of a card in a graveyard or
+       * exile (`CopyOnEnter.from`, rule 707.9): `ids` are the cards it may
+       * copy, nothing moves, and the answer — up to one, none being "copy
+       * nothing" — is recorded on it (`enterChoice.copyOf`) as a `choose-copy`
+       * would be, for a client to pick from a popup rather than the board. */
+      readonly copyOnEnterOf?: ObjectId;
       /** A `discard-chosen`'s `reveals` — "target player reveals three cards
        * from their hand and you choose one of them" (Blackmail): `player`
        * picks which cards of their hand to show (`destination: "reveal"`,

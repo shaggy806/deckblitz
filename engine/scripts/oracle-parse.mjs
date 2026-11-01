@@ -6150,6 +6150,83 @@ const printed = (line) => stripReminder(line);
  * `static`, `cycling`, `flashback`, `cantBeCountered` — plus `todo` (whole
  * lines no tier understood) and `complete` (nothing left to author).
  */
+/** What "enter as a copy of [these words]" may copy (`CopyOnEnter`'s `filter`
+ * and `from`), or null for a phrase this doesn't know. */
+function copySourceOf(words) {
+  let m;
+  if ((m = /^any (creature|land) card in a graveyard( that was put there from the battlefield this turn)?$/.exec(words))) {
+    const filter = { type: m[1], ...(m[2] !== undefined ? { putIntoGraveyardThisTurn: { from: ["battlefield"] } } : {}) };
+    return { filter, from: "graveyards" };
+  }
+  if ((m = /^a (creature) card in exile with an? ([a-z]+) counter on it$/.exec(words))) {
+    return { filter: { type: m[1], counters: { kind: m[2], compare: { op: "gte", n: 1 } } }, from: "exile" };
+  }
+  m = /^(?:any|an?) (artifact|creature|enchantment|land|planeswalker)(?: or (artifact|creature|enchantment|land|planeswalker))?( on the battlefield| you control| an opponent controls)$/.exec(words);
+  if (m === null) return null;
+  const controlled = m[3] === " you control" ? { controlledBy: "you" } : m[3] === " an opponent controls" ? { controlledBy: "opponent" } : {};
+  return { filter: { ...(m[2] !== undefined ? { typesAnyOf: [m[1], m[2]] } : { type: m[1] }), ...controlled } };
+}
+
+/** The rest of a `CopyOnEnter` from its "except …" and "When you do, …"
+ * words, or null when they say something this doesn't know. */
+function copyOnEnterOf(what, exception, whenYouDo) {
+  const source = copySourceOf(what);
+  if (source === null) return null;
+  const out = { ...source };
+  if (exception !== undefined) {
+    let m;
+    if (exception === "it enters with a shield counter on it if you control that creature") {
+      out.counters = [{ kind: "shield", amount: 1, ifYouControlCopied: true }];
+    } else if (exception === "it's an artifact creature in addition to its other types, and its power and toughness are equal to ~'s power and toughness") {
+      out.except = { addTypes: ["artifact", "creature"] };
+      out.ownPt = true;
+    } else if ((m = /^it's an? (\S+) in addition to its other types( and has ([a-z]+))?$/.exec(exception))) {
+      const isSubtype = /^[A-Z]/.test(m[1]);
+      out.except = {
+        ...(isSubtype ? { addSubtypes: [m[1]] } : { addTypes: [m[1]] }),
+        ...(m[3] !== undefined ? { keywords: [m[3]] } : {}),
+      };
+    } else {
+      return null;
+    }
+  }
+  if (whenYouDo !== undefined) {
+    if (whenYouDo === "exile that card.") {
+      out.whenYouDo = { effect: { kind: "exile", target: "trigger-object" }, text: `When you do, ${whenYouDo}` };
+    } else if (whenYouDo === "tap the copied creature and it doesn't untap during its controller's untap step for as long as you control ~.") {
+      out.whenYouDo = {
+        effect: {
+          kind: "sequence",
+          effects: [
+            { kind: "tap", target: "trigger-object" },
+            { kind: "restrict", target: "trigger-object", restrictions: ["doesnt-untap"], duration: "while-you-control-source" },
+          ],
+        },
+        text: `When you do, ${whenYouDo}`,
+      };
+    } else {
+      return null;
+    }
+  }
+  return out;
+}
+
+/** One form of a `BecomesOnEnter` — "a 2/2 artifact creature with flying", "a
+ * 1/6 Wall artifact creature with defender" — or null. */
+function enteringFormOf(words) {
+  const m = /^an? (\d+)\/(\d+) (?:([A-Z][a-z]+) )?(artifact )?creature(?: with ([a-z]+))?$/.exec(words);
+  if (m === null) return null;
+  return {
+    label: words.replace(/^an? /, ""),
+    as: {
+      basePt: [Number(m[1]), Number(m[2])],
+      ...(m[4] !== undefined ? { addTypes: ["artifact", "creature"] } : {}),
+      ...(m[3] !== undefined ? { addSubtypes: [m[3]] } : {}),
+      ...(m[5] !== undefined ? { keywords: [m[5]] } : {}),
+    },
+  };
+}
+
 export function parseFace(face, ctx = {}) {
   const out = { keywords: [], activated: [], triggered: [], static: [], todo: [] };
   const lines = (face.oracle_text ?? "").split("\n").filter(Boolean);
@@ -6817,6 +6894,38 @@ export function parseFace(face, ctx = {}) {
     if (line === "As ~ enters, choose a creature type.") {
       out.chooseCreatureTypeOnEnter = true;
       continue;
+    }
+    // "You may have ~ enter as a copy of …" (rule 707.9): what it may copy, in
+    // play or a card in a graveyard or exile, its exceptions and any "when you
+    // do". An exception it can't say leaves the line to a person.
+    if ((m = /^(If you attacked this turn, y|Y)ou may have ~ enter (tapped )?as a copy of (.+?)(?:, except (.+?))?\.(?: When you do, (.+\.))?$/.exec(line))) {
+      const copy = copyOnEnterOf(m[3], m[4], m[5]);
+      if (copy !== null) {
+        out.copyOnEnter = {
+          ...copy,
+          // As printed: `line` writes the card's own name "~".
+          ...(copy.whenYouDo !== undefined ? { whenYouDo: { ...copy.whenYouDo, text: raw.slice(raw.indexOf("When you do, ")) } } : {}),
+          ...(m[1].startsWith("If") ? { condition: { kind: "turn-stat", stat: "attacked", who: "you", atLeast: 1 } } : {}),
+          ...(m[2] !== undefined ? { tapped: true } : {}),
+        };
+        continue;
+      }
+    }
+    // "As ~ enters, it becomes your choice of a 3/3 creature with flying, …"
+    // (rule 614.1c; copiable, rule 707.2), or a coin's (Molten Sentry).
+    if ((m = /^As ~ enters, it becomes your choice of (.+?),? or (.+?)(?: in addition to its other types)?\.$/.exec(line))) {
+      const forms = [...m[1].split(", "), m[2]].map(enteringFormOf);
+      if (forms.every((f) => f !== null)) {
+        out.becomesOnEnter = { forms };
+        continue;
+      }
+    }
+    if ((m = /^As ~ enters, flip a coin\. If the coin comes up heads, ~ enters as (.+?)\. If it comes up tails, ~ enters as (.+?)\.$/.exec(line))) {
+      const forms = [m[1], m[2]].map(enteringFormOf);
+      if (forms.every((f) => f !== null)) {
+        out.becomesOnEnter = { flip: true, forms };
+        continue;
+      }
     }
     // "As ~ enters, choose an opponent and a card name other than a basic
     // land card name." (Booby Trap): both choices, the name to guess a card
