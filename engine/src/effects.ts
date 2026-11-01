@@ -4825,6 +4825,14 @@ export type EffectSpec =
         readonly from?: readonly ZoneType[];
       };
       readonly castFromHandFree?: { readonly filter?: CardFilter };
+      /** "You can cast **only one more spell** this turn" (Irencrag Feat):
+       * the players `who` names (default you) may cast `count` more spells
+       * while this lasts, whatever they've cast so far — counted from this
+       * resolving, so the spell doing it isn't one of them. A prohibition
+       * (rules 101.2, 601.3): it stops a cast another effect allows or
+       * instructs, it permits nothing, and it leaves lands and abilities
+       * alone (the rulings). */
+      readonly castsLeft?: { readonly who?: PlayerScope; readonly count: number };
       /** "You may cast spells this turn as though they had flash" (Borne
        * Upon a Wind, Emergence Zone; Winding Canyons' `filter` "creature
        * spells") — rule 601.3b; with `next`, "**the next** sorcery spell you
@@ -9509,6 +9517,8 @@ export interface EffectApi {
   ward(cost: WardCost): void;
   /** See the `"player-effect"` {@link EffectSpec}. */
   addPlayerEffect(effect: PlayerEffect): void;
+  /** How many spells `player` has cast this turn so far (`castsLeft`). */
+  spellsCastThisTurn(player: PlayerId): number;
   /** Flip a coin for this effect's controller (see the `"flip-coin"`
    * {@link EffectSpec}): `true` if they won the flip. */
   flipCoin(): boolean;
@@ -14319,6 +14329,14 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
             }
           : {}),
         ...(spec.castFromHandFree !== undefined ? { castFromHandFree: spec.castFromHandFree } : {}),
+        ...(spec.castsLeft !== undefined
+          ? {
+              castCaps: ctx.playersInScope(spec.castsLeft.who ?? "you").map((player) => ({
+                player,
+                total: ctx.spellsCastThisTurn(player) + (spec.castsLeft?.count ?? 0),
+              })),
+            }
+          : {}),
         ...(spec.castAsThoughFlash !== undefined ? { castAsThoughFlash: spec.castAsThoughFlash } : {}),
         ...(spec.castFromGraveyard !== undefined
           ? (() => {

@@ -29192,6 +29192,7 @@ export class Game {
         // No log line: the client's prohibition line names only spells and
         // abilities, so a lands-only one would read "can't  this turn".
       },
+      spellsCastThisTurn: (player) => this.state.players[player]?.spellsCastThisTurnAs?.length ?? 0,
       addPlayerEffect: (effect) => {
         const flash = effect.castAsThoughFlash;
         if (flash?.filter?.ofChosenType === true) {
@@ -34561,7 +34562,11 @@ export class Game {
         if (prohibits === undefined) continue;
         const binds =
           prohibits.who === "each-player" ||
-          (prohibits.who === "you" ? player === source.controller : player !== source.controller);
+          (prohibits.who === "enchanted-player"
+            ? player === source.attachedToPlayer
+            : prohibits.who === "you"
+              ? player === source.controller
+              : player !== source.controller);
         if (!binds) continue;
         if (ability.condition !== undefined && !this.staticActive(source, ability)) continue;
         out.push({ source, prohibits });
@@ -34620,6 +34625,12 @@ export class Game {
         return `${player} can't cast ${cant.label}`;
       }
     }
+    // "You can cast only one more spell this turn" (Irencrag Feat).
+    const castSoFar = this.state.players[player]?.spellsCastThisTurnAs ?? [];
+    for (const effect of this.state.playerEffects ?? []) {
+      const cap = effect.castCaps?.find((c) => c.player === player);
+      if (cap !== undefined && castSoFar.length >= cap.total) return `${player} can't cast any more spells this turn`;
+    }
     // "Until your next turn, your opponents can't cast spells from anywhere
     // other than their hands" (Avatar's Wrath): the command zone, a
     // graveyard, exile and a library top all barred.
@@ -34633,8 +34644,20 @@ export class Game {
       const spells = prohibits.spells;
       if (spells === undefined || !this.prohibitionReachesZone(prohibits, cardId)) continue;
       if (
-        spells === true ||
-        matchesFilter(this.state, this.registry, cardId, spells, { you: source.controller, source: source.id })
+        (spells === true ||
+          matchesFilter(this.state, this.registry, cardId, spells, { you: source.controller, source: source.id })) &&
+        // "Can't cast more than one spell each turn" (Rule of Law): only once
+        // they've cast that many, each read as it was cast.
+        (prohibits.castLimit === undefined ||
+          castSoFar.filter(
+            ({ id, spell }) =>
+              spells === true ||
+              matchesFilter(this.state, this.registry, id, spells, {
+                you: source.controller,
+                source: source.id,
+                snapshot: spell,
+              }),
+          ).length >= prohibits.castLimit)
       ) {
         return `${player} can't cast ${def.name} (${printedCardName(source)})`;
       }

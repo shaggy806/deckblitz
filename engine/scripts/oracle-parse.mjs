@@ -2967,6 +2967,11 @@ export function parseSentence(sentence, ctx) {
   if (re("until your next turn, your opponents can't cast spells from anywhere other than their hands").test(s)) {
     return { kind: "player-effect", duration: "until-your-next-turn", castOnlyFromHand: "each-opponent" };
   }
+  // "You can cast only one more spell this turn" (Irencrag Feat).
+  if ((m = re(`you can cast only ${N} more spells? this turn`).exec(s))) {
+    const count = amount(m[1]);
+    if (typeof count === "number") return { kind: "player-effect", duration: "end-of-turn", castsLeft: { count } };
+  }
   // A flash permission for this turn (rule 601.3b): "You may cast [creature]
   // spells this turn as though they had flash" (Borne Upon a Wind, Winding
   // Canyons), and for the next matching spell, "the next sorcery spell / the
@@ -3397,6 +3402,11 @@ export function parseSentence(sentence, ctx) {
     return even
       ? { kind: "add-mana", mana: { all: types }, amount: each }
       : { kind: "add-mana", mana: { all: units }, amount: 1 };
+  }
+  // "Add seven {R}" (Irencrag Feat), "Add ten {W}" (Apex of Power).
+  if ((m = new RegExp(`^add ${N} \\{([WUBRGC])\\}\\.$`, "i").exec(s))) {
+    const n = amount(m[1]);
+    if (typeof n === "number") return { kind: "add-mana", mana: m[2], amount: n };
   }
   // A choice of colour. In a mana ability the payment picks it; in an ability
   // that uses the stack (a trigger, a spell, a loyalty ability) nothing does,
@@ -6863,6 +6873,23 @@ export function parseFace(face, ctx = {}) {
       const who = m[1] === "Players" ? "each-player" : "opponents";
       out.static.push({ affects: { scope: "self" }, prohibits: { who, spells: true, notFrom: ["hand"] }, text: printed(raw) });
       continue;
+    }
+    // A limit on the spells a player casts each turn (`prohibits.castLimit`):
+    // "Each player can't cast more than one spell each turn" (Rule of Law),
+    // "… one noncreature spell" (Deafening Silence), "… one non-Phyrexian
+    // spell" (Phyrexian Censor), "You can't …" (Moderation), "Enchanted player
+    // can't …" (Curse of Exhaustion), and Ethersworn Canonist's wording of it.
+    if (
+      (m = /^(Each player|You|Enchanted player) can't cast more than one (?:(.+?) )?spell each turn\.$/.exec(line)) ||
+      (m = /^(Each player) who has cast an? (\S+) spell this turn can't cast additional \2 spells\.$/.exec(line))
+    ) {
+      const who = m[1] === "You" ? "you" : m[1] === "Each player" ? "each-player" : "enchanted-player";
+      const phyrexian = /^non-([A-Z][a-z]+)$/.exec(m[2] ?? "");
+      const spells = phyrexian !== null ? { notSubtypes: [phyrexian[1]] } : flashSpellsFilter(m[2]);
+      if (spells !== null) {
+        out.static.push({ affects: { scope: "self" }, prohibits: { who, spells, castLimit: 1 }, text: printed(raw) });
+        continue;
+      }
     }
     if (line === "You can't play lands or cast spells from your hand.") {
       out.static.push({

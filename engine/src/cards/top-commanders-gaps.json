@@ -978,7 +978,9 @@
   "filter:blocked-or-blocked-by-filter-this-turn",
   "filter:blocked-this-turn",
   "filter:blocked-source-this-turn",
-  "filter:blocked-by-source-this-combat"
+  "filter:blocked-by-source-this-combat",
+  "effect:cast-limit",
+  "effect:per-player-cast-limit"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

@@ -9,8 +9,8 @@ import { defineCard } from "../define.js";
 //   [2004-10-04] You count spells that were cast this turn before this card enters. (The Invasion
 //     FAQ is not correct on this point.)
 //
-// Moderation's one-spell lock (its cast-this-turn count includes spells cast
-// before this entered, the third ruling); Crucible of Worlds's land permission
+// Moderation's one-spell lock (`castLimit` counts spells cast before this
+// entered, the third ruling); Crucible of Worlds's land permission
 // beside an unfiltered graveyard-cast permission; Festival of Embers's
 // graveyard replacement narrowed to cards (Leyline of the Void's `token:
 // false`), which also exiles this card itself as it would go to the graveyard.
@@ -27,8 +27,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      condition: { kind: "cast-this-turn", atLeast: 1 },
-      prohibits: { who: "you", spells: true },
+      prohibits: { who: "you", spells: true, castLimit: 1 },
       text: ONE_TEXT,
     },
     { affects: { scope: "self" }, playFromGraveyard: { type: "land" }, text: GRAVEYARD_TEXT },

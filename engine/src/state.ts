@@ -4697,6 +4697,10 @@ export interface PlayerEffect {
   /** `owner` may cast matching spells from their hand without paying their
    * mana costs. */
   readonly castFromHandFree?: { readonly filter?: CardFilter };
+  /** Each `player` can't cast a spell once they've cast `total` this turn —
+   * "you can cast only one more spell this turn" (Irencrag Feat), the count
+   * so far plus how many more, fixed as the effect began. */
+  readonly castCaps?: readonly { readonly player: PlayerId; readonly total: number }[];
   /** `owner` may cast spells matching `filter` (every spell without one) as
    * though they had flash (rule 601.3b) — "you may cast spells this turn as
    * though they had flash" (Borne Upon a Wind). With `next`, only the next

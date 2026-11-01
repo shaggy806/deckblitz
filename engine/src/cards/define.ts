@@ -1956,11 +1956,24 @@ export interface StaticAbility {
    * can't pay for anything either. Time it with `condition`: Myrel's
    * "during your turn" is `your-turn`, Marisi, Breaker of the Coil's "during
    * combat" a `turn-structure` condition with `duringCombat`. `affects` is
-   * irrelevant.
+   * irrelevant. `who: "enchanted-player"` is the player this Aura enchants
+   * (Curse of Exhaustion).
    */
   readonly prohibits?: {
-    readonly who: "opponents" | "you" | "each-player";
+    readonly who: "opponents" | "you" | "each-player" | "enchanted-player";
     readonly spells?: true | CardFilter;
+    /** `spells` binds a player only once they've cast this many spells
+     * matching it this turn: "each player can't cast more than one spell each
+     * turn" (Rule of Law — `spells: true`, `castLimit: 1`), "… more than one
+     * noncreature spell" (Deafening Silence — the filter), "each player who
+     * has cast a nonartifact spell this turn can't cast additional nonartifact
+     * spells" (Ethersworn Canonist — the same thing). The whole turn counts,
+     * spells cast before this permanent arrived and spells countered among
+     * them (the rulings), each read as it was cast
+     * (`PlayerState.spellsCastThisTurnAs`); a spell the filter doesn't match
+     * neither counts nor is barred. A copy of a spell isn't cast (rule 707.10),
+     * and a land isn't a spell. */
+    readonly castLimit?: number;
     readonly abilitiesOf?: CardFilter;
     /** "…can't be activated **unless they're mana abilities**" (Pithing
      * Needle): `abilitiesOf` leaves mana abilities alone. */

@@ -529,6 +529,26 @@ turn, players may play cards they exiled this way" (an impulse permission
 ending as your next turn begins), Moonhold's mana-spent halves (built — a
 `conditional` each), Rock Jockey's `condition:played-land-this-turn`.
 
+### A limit on the spells a player casts each turn — built 2026-11-01
+
+The need-keys Phase 2 family `effect:cast-and-activate-restrictions`'s top
+group, features only. A static `prohibits` takes `castLimit: N`: its `spells`
+bind a player only once they've cast N spells matching them this turn, counted
+per player from `spellsCastThisTurnAs`, each as it was cast — so the whole
+turn counts, spells from before the permanent arrived and countered ones among
+them, and a spell the filter doesn't match neither counts nor is barred (rules
+101.2, 601.3). "Each player can't cast more than one spell each turn", its
+"noncreature" and "non-Phyrexian" forms and Ethersworn Canonist's "who has cast
+a nonartifact spell this turn" are the one shape. `who` takes
+`"enchanted-player"`. A `player-effect`'s `castsLeft: { who?, count }` is the
+one-shot, "you can cast only one more spell this turn" (the count so far plus
+`count`, fixed as it resolves). Moderation and Yawgmoth's Agenda moved from a
+`cast-this-turn` condition to `castLimit`. The scaffolder reads the lines and
+"Add seven {R}". Keys: effect:cast-limit, effect:per-player-cast-limit. Proving
+cards: Rule of Law, Deafening Silence, Ethersworn Canonist, Irencrag Feat,
+Curse of Exhaustion. Left: Hedonist's Trove's "this way", Fires of Invention's
+"no more than two" beside its "only during your turn" (one line, two statics).
+
 ### "When you discard this card", its cause, and the turn's first discard — built 2026-10-31
 
 The need-keys Phase 2 family `trigger:discards-extensions`, features only.

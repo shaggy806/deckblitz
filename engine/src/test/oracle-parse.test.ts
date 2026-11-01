@@ -7138,4 +7138,33 @@ describe("the turn's blocks", () => {
       duration: "end-of-turn",
     });
   });
+
+  it("reads a limit on the spells a player casts each turn, and 'only one more spell this turn'", () => {
+    const limit = (who: string, spells: unknown, line: string) => {
+      const card = face("Enchantment", line);
+      expect(card.complete).toBe(true);
+      expect(card.static).toEqual([
+        { affects: { scope: "self" }, prohibits: { who, spells, castLimit: 1 }, text: line },
+      ]);
+    };
+    limit("each-player", true, "Each player can't cast more than one spell each turn.");
+    limit("each-player", { notTypes: ["creature"] }, "Each player can't cast more than one noncreature spell each turn.");
+    limit("each-player", { notSubtypes: ["Phyrexian"] }, "Each player can't cast more than one non-Phyrexian spell each turn.");
+    limit("you", true, "You can't cast more than one spell each turn.");
+    limit("enchanted-player", true, "Enchanted player can't cast more than one spell each turn.");
+    limit(
+      "each-player",
+      { notTypes: ["artifact"] },
+      "Each player who has cast a nonartifact spell this turn can't cast additional nonartifact spells.",
+    );
+    const feat = face("Sorcery", "Add seven {R}. You can cast only one more spell this turn.");
+    expect(feat.complete).toBe(true);
+    expect(feat.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "add-mana", mana: "R", amount: 7 },
+        { kind: "player-effect", duration: "end-of-turn", castsLeft: { count: 1 } },
+      ],
+    });
+  });
 });

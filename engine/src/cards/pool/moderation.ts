@@ -1,9 +1,8 @@
 import { defineCard } from "../define.js";
 
-// "Can't cast more than one spell each turn" is "can't cast spells once
-// you've cast one this turn": every spell you cast this turn counts, the ones
-// before Moderation was yours and Moderation itself included (the rulings),
-// and a spell an effect tells you to cast is barred too.
+// `prohibits.castLimit`: every spell you cast this turn counts, the ones before
+// Moderation was yours and Moderation itself included (the rulings), and a
+// spell an effect tells you to cast is barred too.
 export default defineCard({
   name: "Moderation",
   manaCost: "{1}{W}{U}",
@@ -13,8 +12,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      condition: { kind: "cast-this-turn", atLeast: 1 },
-      prohibits: { who: "you", spells: true },
+      prohibits: { who: "you", spells: true, castLimit: 1 },
       text: "You can't cast more than one spell each turn.",
     },
   ],
