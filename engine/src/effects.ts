@@ -3011,9 +3011,14 @@ export type EffectSpec =
        * owner's zone: `"hand"` is Worlds Within Worlds' "then put all cards
        * exiled this way into their owners' hands". `filter` narrows them
        * (read from the effect's controller's side). A card cast from among
-       * them has left exile, so isn't one. */
+       * them has left exile, so isn't one — Muse Vortex's "the exiled
+       * instant and sorcery cards that weren't cast this way". */
       readonly kind: "move-exiled-this-way";
-      readonly to: "hand";
+      /** `"library-bottom"` is "put the rest on the bottom of your library
+       * in a random order" after exiling them (Herald of Amity, Muse
+       * Vortex): each owner's on the bottom of their library, in a random
+       * order. */
+      readonly to: "hand" | "library-bottom";
       readonly filter?: CardFilter;
     }
   | {
@@ -7672,7 +7677,11 @@ export type EffectSpec =
        * over every one of them, whose picks are the order (see
        * `"library-bottom"` above), asked only when there are two or more
        * cards that aren't all the same card. `"bottom-random"` is "in a
-       * random order". */
+       * random order".
+       *
+       * `"exile"` is "…and exiles the rest" (Clear the Land: "puts all land
+       * cards revealed this way onto the battlefield tapped, and exiles the
+       * rest"), face up, linked to nothing, with the chosen ones' move. */
       readonly leftover:
         | "bottom-random"
         | "bottom-any-order"
@@ -7680,7 +7689,18 @@ export type EffectSpec =
         | "stay"
         | "hand"
         | "graveyard"
+        | "exile"
         | "exile-playable";
+      /** With `destination: "exile"` or `"exile-face-down"`: the effect's
+       * controller may play the chosen cards — a land as their land play, a
+       * spell at its normal timing — `"end-of-turn"` this turn only
+       * (Florian, Voldaren Scion's "exile one of those cards … You may play
+       * the exiled card this turn"), `"while-exiled"` for as long as they
+       * remain exiled (Black Cat, Cunning Thief). `spendAs` is "mana of any
+       * type can be spent to cast spells this way" (rule 118.14). The
+       * permission rides on the card (`GameObject.impulse`) and ends with any
+       * move. */
+      readonly playable?: { readonly duration: "end-of-turn" | "while-exiled"; readonly spendAs?: SpendAs };
       /**
        * A leftover destination that depends on how things stand once the
        * chosen cards are where they're going — Nine-Fingers Keene's "you may
@@ -9662,7 +9682,7 @@ export interface EffectApi {
     min: number,
     max: number,
     destination: "battlefield" | "hand" | "library-top" | "library-bottom" | "graveyard" | "exile-face-down" | "exile" | "manifest" | "reveal",
-    leftover: "bottom-random" | "bottom-any-order" | "top-any-order" | "stay" | "hand" | "graveyard" | "exile-playable",
+    leftover: "bottom-random" | "bottom-any-order" | "top-any-order" | "stay" | "hand" | "graveyard" | "exile" | "exile-playable",
     filter: ZoneChoiceFilter | undefined,
     enterTapped?: boolean,
     then?: EffectSpec,
@@ -9686,6 +9706,8 @@ export interface EffectApi {
     /** What battlefield-bound picks enter attached to — see
      * `look-and-choose`'s `attachedTo`. */
     attachTo?: EnterAttachHost,
+    /** See `look-and-choose`'s `playable`. */
+    playable?: Extract<EffectSpec, { kind: "look-and-choose" }>["playable"],
   ): void;
 }
 
@@ -15103,6 +15125,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         spec.unlinked === true,
         spec.needsMin === true,
         attachHost(spec.attachedTo, ctx),
+        spec.playable,
       );
       return;
     }

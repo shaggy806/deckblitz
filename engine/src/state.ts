@@ -3010,6 +3010,9 @@ export type AwaitingDecision =
         | "shuffle"
         | "hand"
         | "graveyard"
+        /** Exiled face up, linked to nothing (Clear the Land's "and exiles
+         * the rest"). */
+        | "exile"
         | "exile-playable";
       /** Where the rest go instead when a condition holds once the chosen
        * cards have moved — the `look-and-choose` effect's `leftoverIf`, asked

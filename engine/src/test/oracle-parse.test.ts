@@ -5546,3 +5546,79 @@ describe("put into a hand this way, and the cards exiled this way to their owner
     expect(parseSentence("Then put all cards exiled this way into your hand.", ctx())).toBeNull();
   });
 });
+
+describe("exiled this way, then a pick or the rest moved on", () => {
+  const face = (name: string, type_line: string, oracle_text: string) =>
+    parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });
+
+  it("reads Herald of Amity's exile, free cast from among them and the rest to the bottom", () => {
+    const herald = face(
+      "Herald of Amity",
+      "Creature — Griffin",
+      "When this creature enters, exile the top eight cards of your library. You may cast an Aura spell from among them without paying its mana cost. Then put the rest on the bottom of your library in a random order.",
+    );
+    expect(herald.triggered[0].effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "exile-from-library", amount: 8 },
+        { kind: "cast-now", from: "exiled-this-way", free: true, spell: { subtype: "Aura" } },
+        { kind: "move-exiled-this-way", to: "library-bottom" },
+      ],
+    });
+    // "The rest" with nothing exiled before it isn't this.
+    expect(face("Test Card", "Sorcery", "Draw a card. Then put the rest on the bottom of your library in a random order.").complete).toBe(false);
+  });
+
+  it("reads Muse Vortex's instants and sorceries to the hand and the rest under", () => {
+    const vortex = face(
+      "Muse Vortex",
+      "Sorcery",
+      "Exile the top X cards of your library. You may cast an instant or sorcery spell with mana value X or less from among them without paying its mana cost. Then put the exiled instant and sorcery cards that weren't cast this way into your hand and the rest on the bottom of your library in a random order.",
+    );
+    expect(vortex.complete).toBe(true);
+    expect(vortex.effect.effects.slice(1)).toEqual([
+      { kind: "cast-now", from: "exiled-this-way", free: true, spell: { typesAnyOf: ["instant", "sorcery"], manaValue: { op: "lte", n: { amount: "x" } } } },
+      { kind: "move-exiled-this-way", to: "hand", filter: { typesAnyOf: ["instant", "sorcery"] } },
+      { kind: "move-exiled-this-way", to: "library-bottom" },
+    ]);
+  });
+
+  it("reads Lord of the Void's and Tezzeret's puts from among the cards exiled", () => {
+    const lord = face(
+      "Lord of the Void",
+      "Creature — Demon",
+      "Whenever this creature deals combat damage to a player, exile the top seven cards of that player's library, then put a creature card from among them onto the battlefield under your control.",
+    );
+    expect(lord.triggered[0].effect.effects).toEqual([
+      { kind: "exile-from-library", whose: "trigger-player", amount: 7 },
+      { kind: "look-and-choose", zone: "exile", min: 1, max: 1, filter: { thisWay: "exiled", type: "creature" }, destination: "battlefield", leftover: "stay" },
+    ]);
+    const all = face("Test Card", "Sorcery", "Exile the top ten cards of your library. Put all artifact cards from among them onto the battlefield.");
+    expect(all.effect.effects[1]).toMatchObject({ zone: "exile", min: 10, max: 10, filter: { thisWay: "exiled", type: "artifact" } });
+    const any = face("Test Card", "Sorcery", "Exile the top seven cards of your library. You may put any number of creature and/or land cards from among them onto the battlefield.");
+    expect(any.effect.effects[1]).toMatchObject({ min: 0, max: 7, filter: { thisWay: "exiled", typesAnyOf: ["creature", "land"] } });
+  });
+
+  it("reads a look whose pick is exiled to be played this turn, or cast free", () => {
+    expect(
+      face("Test Card", "Sorcery", "Look at the top three cards of your library. Exile one of those cards and put the rest on the bottom of your library in a random order. You may play the exiled card this turn.").effect,
+    ).toEqual({
+      kind: "look-and-choose",
+      zone: "library",
+      count: 3,
+      min: 1,
+      max: 1,
+      destination: "exile",
+      unlinked: true,
+      playable: { duration: "end-of-turn" },
+      leftover: "bottom-random",
+    });
+    expect(
+      face("Test Card", "Sorcery", "Look at the top four cards of your library. You may exile a nonland card from among them. Put the rest on the bottom of your library in a random order. You may cast the exiled card without paying its mana cost.").effect,
+    ).toMatchObject({ min: 0, filter: { notTypes: ["land"] }, destination: "exile", then: { kind: "cast-now", target: 0, free: true } });
+    // Exiled with no permission after it isn't read.
+    expect(
+      face("Test Card", "Sorcery", "Look at the top three cards of your library. Exile one of those cards and put the rest on the bottom of your library in a random order.").complete,
+    ).toBe(false);
+  });
+});

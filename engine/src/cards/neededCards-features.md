@@ -669,6 +669,40 @@ pay-variable-energy. Proving cards: Harnessed Lightning, Die Young, Wrath of
 the Skies, Territorial Aetherkite, Nissa, Worldsoul Speaker, Primal Prayers,
 Amped Raptor, Jolted Awake.
 
+### Exiled this way, then one of them played or the rest moved on — built 2026-10-31
+
+The need-keys Phase 2 group of `effect:look-and-choose-leftover` and
+`effect:look-and-choose-second-pick`, features only: exile cards, then one
+chosen goes on. **`look-and-choose`'s `playable`** (`{ duration:
+"end-of-turn" | "while-exiled", spendAs? }`) gives the picks exiled
+(`"exile"` or `"exile-face-down"`) an impulse permission for the effect's
+controller, through the `choose-from-zone` decision's `impulseGrant`.
+**`leftover: "exile"`** exiles the rest. **`move-exiled-this-way`** gains `to:
+"library-bottom"`, each owner's library in a random order. Exiling the top
+cards and then putting matching ones onto the battlefield was already an
+`exile-from-library` and a `look-and-choose` over `zone: "exile"` with
+`thisWay: "exiled"`; a pick exiled and then cast free, a `look-and-choose`
+whose `then` is a `cast-now` of target 0. The scaffolder reads "exile the top
+N cards of your library" and what follows it ("You may cast an X spell from
+among them without paying its mana cost.", "Then put the rest on the bottom
+…", Muse Vortex's split, "Put all / You may put any number of X cards from
+among them onto the battlefield."), Lord of the Void's "exile the top N cards
+of that player's library, then put a … card from among them onto the
+battlefield under your control", and a look whose pick is exiled to be played
+this turn or cast free. Keys: effect:look-and-choose-exile-chosen-playable,
+effect:exile-top-put-matching (partial), effect:exiled-this-way-to-library-bottom,
+effect:exile-cast-free-from-look, effect:look-and-choose-leftover-exile.
+Proving cards: Florian, Voldaren Scion, Nahiri's Warcrafting, Black Cat,
+Cunning Thief, Lord of the Void, Herald of Amity, Muse Vortex, The Key to the
+Vault, Desperate Research (`exiled-this-way-next.test.ts`). For `author-freed`
+to check in the rest: Clear the Land (each player's lands put and the rest
+exiled — a `for-each-player` look-and-choose asks each player in turn, so the
+players' lands don't enter as one event; "one or more lands enter" triggers
+would see two), Journey to the Lost City (a d20 over cards "exiled with this
+enchantment"), Tezzeret, Master of the Bridge (affinity for artifacts given to
+creature and planeswalker spells), Xenagos, the Reveler (+1's mana in any
+combination of {R} and {G}).
+
 ### Put into a hand this way, and the cards exiled this way to their owners' hands — built 2026-10-31
 
 The need-keys Phase 2 family `effect:this-way-results`' first group,

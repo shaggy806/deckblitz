@@ -1963,6 +1963,33 @@ export function parseSentence(sentence, ctx) {
     return { kind: "discard", target: "each-opponent", amount: amount(m[1]) };
   }
   if ((m = re(`mill ${N} cards?`).exec(s))) return { kind: "mill", target: "you", amount: amount(m[1]) };
+  // "Exile the top eight cards of your library" (Herald of Amity): face up,
+  // with no permission to play them — what a following sentence says of
+  // them reads `thisWay: "exiled"`.
+  if ((m = re(`exile the top ${N} cards of your library`).exec(s))) return { kind: "exile-from-library", amount: amount(m[1]) };
+  // "Exile the top seven cards of that player's library, then put a creature
+  // card from among them onto the battlefield under your control" (Lord of
+  // the Void): the player a combat damage trigger names; the put isn't
+  // optional (its ruling).
+  if ((m = re(`exile the top ${N} cards of that player's library, then put an? (\\w+) card from among them onto the battlefield under your control`).exec(s))) {
+    const filter = parseTypePhrase(m[2]);
+    if (filter === null || Object.keys(filter).length === 0) return null;
+    return {
+      kind: "sequence",
+      effects: [
+        { kind: "exile-from-library", whose: "trigger-player", amount: amount(m[1]) },
+        {
+          kind: "look-and-choose",
+          zone: "exile",
+          min: 1,
+          max: 1,
+          filter: { thisWay: "exiled", ...filter },
+          destination: "battlefield",
+          leftover: "stay",
+        },
+      ],
+    };
+  }
   if ((m = re(`(target player|target opponent) mills ${N} cards?`).exec(s))) {
     return { kind: "mill", target: slot(m[1]), amount: amount(m[2]) };
   }
@@ -3594,6 +3621,113 @@ export function parseEffect(text, outer) {
         parsed.push(look);
         hints.push({ sentence, effect: look });
         skip = 2;
+        continue;
+      }
+    }
+    // "Look at the top three cards of your library. Exile one of those cards
+    // and put the rest on the bottom of your library in a random order. You
+    // may play the exiled card this turn." (Florian's shape), "… You may
+    // exile a nonland card from among them. Put the rest on the bottom … You
+    // may cast the exiled card without paying its mana cost." (The Key to the
+    // Vault): one look-and-choose exiling the pick, which may then be played
+    // this turn (`playable`) or cast free as this resolves (`then`).
+    if (lookTopM !== null) {
+      const count = numberOf(lookTopM[1]);
+      const one = /^exile one of (?:those cards|them) and put the rest on the bottom of your library in a random order\.$/i.test(sentences[i + 1] ?? "");
+      const mayM = one ? null : /^you may exile (?:one of those cards|one of them|an? (.+?) card from among them)\.$/i.exec(sentences[i + 1] ?? "");
+      const restAt = one ? i + 2 : i + 3;
+      const rest = one || (mayM !== null && /^put the rest on the bottom of your library in a random order\.$/i.test(sentences[i + 2] ?? ""));
+      const after = sentences[restAt] ?? "";
+      const play = /^you may play the exiled card this turn\.$/i.test(after);
+      const free = /^you may cast the exiled card without paying its mana cost\.$/i.test(after);
+      const filter = mayM?.[1] === undefined ? {} : parseTypePhrase(mayM[1]);
+      if (typeof count === "number" && rest && (play || free) && filter !== null) {
+        const look = {
+          kind: "look-and-choose",
+          zone: "library",
+          count,
+          min: one ? 1 : 0,
+          max: 1,
+          ...(Object.keys(filter).length > 0 ? { filter } : {}),
+          destination: "exile",
+          unlinked: true,
+          ...(play ? { playable: { duration: "end-of-turn" } } : {}),
+          leftover: "bottom-random",
+          ...(free ? { then: { kind: "cast-now", target: 0, free: true } } : {}),
+        };
+        parsed.push(look);
+        hints.push({ sentence, effect: look });
+        skip = restAt - i;
+        continue;
+      }
+    }
+    // "Exile the top ten cards of your library. Put all artifact cards from
+    // among them onto the battlefield." (Tezzeret, Master of the Bridge), "…
+    // You may put any number of creature and/or land cards from among them
+    // onto the battlefield." (Xenagos, the Reveler): exiled first, then a
+    // choice over the cards exiled this way — all of them that match, or any
+    // number — the rest staying exiled.
+    const exileTopM = /^exile the top (\w+) cards of your library\.$/i.exec(sentence);
+    const putAmongM =
+      exileTopM === null
+        ? null
+        : /^(put all|you may put any number of) (.+?) cards from among them onto the battlefield\.$/i.exec(sentences[i + 1] ?? "");
+    if (putAmongM !== null) {
+      const count = numberOf(exileTopM[1]);
+      const filter = parseTypePhrase(putAmongM[2]);
+      if (typeof count === "number" && filter !== null && Object.keys(filter).length > 0) {
+        const all = putAmongM[1].toLowerCase() === "put all";
+        const effects = [
+          { kind: "exile-from-library", amount: count },
+          {
+            kind: "look-and-choose",
+            zone: "exile",
+            min: all ? count : 0,
+            max: count,
+            filter: { thisWay: "exiled", ...filter },
+            destination: "battlefield",
+            leftover: "stay",
+          },
+        ];
+        for (const effect of effects) {
+          parsed.push(effect);
+          hints.push({ sentence, effect });
+        }
+        skip = 1;
+        continue;
+      }
+    }
+    // After "exile the top N cards of your library": "You may cast an Aura
+    // spell from among them without paying its mana cost." (Herald of Amity)
+    // — a free cast from the cards exiled this way, as this resolves — and
+    // then "Then put the rest on the bottom of your library in a random
+    // order.", the cards still exiled (Muse Vortex's instants and sorceries
+    // not cast go to the hand first).
+    if (parsed.at(-1)?.kind === "exile-from-library") {
+      const castM = /^you may cast an? (.+?) spell (with mana value x or less )?from among them without paying its mana cost\.$/i.exec(sentence);
+      const filter = castM === null ? null : parseTypePhrase(castM[1]);
+      if (castM !== null && filter !== null && Object.keys(filter).length > 0) {
+        const spell = castM[2] === undefined ? filter : { ...filter, manaValue: { op: "lte", n: { amount: "x" } } };
+        const castNow = { kind: "cast-now", from: "exiled-this-way", free: true, spell };
+        parsed.push(castNow);
+        hints.push({ sentence, effect: castNow });
+        continue;
+      }
+    }
+    if (parsed.at(-1)?.kind === "cast-now" && parsed.at(-1).from === "exiled-this-way" && parsed.at(-2)?.kind === "exile-from-library") {
+      const moves = /^then put the rest on the bottom of your library in a random order\.$/i.test(sentence)
+        ? [{ kind: "move-exiled-this-way", to: "library-bottom" }]
+        : /^then put the exiled instant and sorcery cards that weren't cast this way into your hand and the rest on the bottom of your library in a random order\.$/i.test(sentence)
+          ? [
+              { kind: "move-exiled-this-way", to: "hand", filter: { typesAnyOf: ["instant", "sorcery"] } },
+              { kind: "move-exiled-this-way", to: "library-bottom" },
+            ]
+          : [];
+      if (moves.length > 0) {
+        for (const effect of moves) {
+          parsed.push(effect);
+          hints.push({ sentence, effect });
+        }
         continue;
       }
     }

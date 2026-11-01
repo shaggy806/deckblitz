@@ -8467,6 +8467,10 @@ export class Game {
       // "…and the rest into your graveyard" — with the chosen cards, one
       // move (this runs inside the choice's batch).
       for (const id of leftover) this.moveObject(id, "graveyard");
+    } else if (leftoverTo === "exile") {
+      // "Exile the rest" (Desperate Research): face up, linked to nothing,
+      // with the chosen ones' move.
+      for (const id of leftover) this.moveObject(id, "exile");
     } else if (leftoverTo === "exile-playable") {
       // Expressive Iteration's "exile one of them. You may play the exiled
       // card this turn": exiled face up, then given the permission (a
@@ -27002,7 +27006,16 @@ export class Game {
             if (object === undefined || object.zone !== "exile" || object.isToken || object.kind !== "card") return false;
             return filter === undefined || matchesFilter(this.state, this.registry, id, filter, { you: controller });
           });
-        if (to === "hand") for (const id of moving) this.moveObject(id, "hand");
+        if (to === "hand") {
+          for (const id of moving) this.moveObject(id, "hand");
+          return;
+        }
+        // "Then put the rest on the bottom of your library in a random
+        // order" (Herald of Amity): `moveObject` appends to a library's
+        // array, whose index 0 is the top — each lands on its owner's
+        // bottom, in shuffle order.
+        for (const id of shuffle(moving, this.rng)) this.moveObject(id, "library");
+        this.state.rngState = this.rng.seed;
       },
       // Damage too: Chandra's Ignition's creature deals it to each other
       // creature and each opponent as one event, so its lifelink is one life
@@ -29292,7 +29305,7 @@ export class Game {
           ),
         );
       },
-      lookAndChoose: (zone, count, min, max, destination, leftover, filter, enterTapped, then, reveal, leftoverIf, secondPick, attacking, enterAs, chooser, picker, withCounters, unlinked, needsMin, attachTo) => {
+      lookAndChoose: (zone, count, min, max, destination, leftover, filter, enterTapped, then, reveal, leftoverIf, secondPick, attacking, enterAs, chooser, picker, withCounters, unlinked, needsMin, attachTo, playable) => {
         // "Exile one of them face down" (hideaway): linked to the source, in
         // the stint this ability refers to (rule 607.2a) — unless `unlinked`.
         const sourceObject = this.state.objects[source];
@@ -29334,6 +29347,18 @@ export class Game {
           chooser !== undefined && chooser !== controller && picker === controller ? controller : undefined,
           needsMin === true,
           attachTo,
+          // The effect's controller may play the picks, whoever's library
+          // they came from (Black Cat's "target opponent's library").
+          playable === undefined
+            ? undefined
+            : {
+                player: controller,
+                expiry:
+                  playable.duration === "end-of-turn"
+                    ? { kind: "end-of-turn", turn: this.state.turn.number }
+                    : { kind: "while-exiled" },
+                ...(playable.spendAs !== undefined ? { spendAs: playable.spendAs } : {}),
+              },
         );
       },
     };
@@ -29365,7 +29390,7 @@ export class Game {
     min: number,
     max: number,
     destination: "battlefield" | "hand" | "library-top" | "library-bottom" | "graveyard" | "exile-face-down" | "exile" | "manifest" | "reveal",
-    leftover: "bottom-random" | "bottom-any-order" | "top-any-order" | "stay" | "hand" | "graveyard" | "exile-playable",
+    leftover: "bottom-random" | "bottom-any-order" | "top-any-order" | "stay" | "hand" | "graveyard" | "exile" | "exile-playable",
     filter: ZoneChoiceFilter | undefined,
     enterTapped = false,
     then?: { effect: EffectSpec | undefined; source: ObjectId; x: number; sourceStint?: number },
@@ -29389,6 +29414,9 @@ export class Game {
     /** What battlefield-bound picks enter attached to — see
      * `look-and-choose`'s `attachedTo`. */
     enterAttachedTo?: EnterAttachHost,
+    /** The play permission an exiled pick gets — see `look-and-choose`'s
+     * `playable`. */
+    impulseGrant?: GameObject["impulse"],
   ): void {
     // The exile zone (a processor, Oblivion Sower): only what may be
     // chosen is shown — the cards `player` owns when someone else is
@@ -29511,6 +29539,10 @@ export class Game {
       ...(leftoverIf !== undefined ? { leftoverIf } : {}),
       ...(secondPick !== undefined ? { secondPick } : {}),
       ...(exileLink !== undefined ? { exileLink } : {}),
+      // "You may play the exiled card this turn" (Florian, Voldaren Scion).
+      ...(impulseGrant !== undefined && (destination === "exile" || destination === "exile-face-down")
+        ? { impulseGrant }
+        : {}),
       // "You may reveal a historic card from among them and put it into your
       // hand": only what's taken is shown, as it's taken.
       ...(reveal === "chosen" && zone === "library" ? { reveal: true } : {}),
