@@ -2089,6 +2089,13 @@ export interface LastKnownRefs {
    * or ability's cost (Dina, Soul Steeper), or by a `sacrifice-source` step
    * before the effect reading it. */
   readonly sacrificed?: { readonly object: ObjectId; readonly zoneChangeCount: number };
+  /** "The discarded card": the cards discarded to pay the spell's or
+   * ability's cost (Volrath the Fallen's "where X is the discarded card's
+   * mana value", Grab the Prize's "if the discarded card wasn't a land
+   * card"), each with its stint where the discard put it — a graveyard, or
+   * exile for a madness card. Recorded as the discard happens, which for a
+   * chosen discard is once its decision is answered (rule 602.2b). */
+  readonly discarded?: readonly { readonly object: ObjectId; readonly zoneChangeCount: number }[];
   /** "The tapped creature": the one permanent tapped to pay the ability's
    * cost (`AbilityCost.tapOthers` — station's, rule 702.184a). */
   readonly tapped?: { readonly object: ObjectId; readonly zoneChangeCount: number };
@@ -2819,6 +2826,10 @@ export type AwaitingDecision =
        * activated (rule 117.3c), whoever's turn it is. Absent: the active
        * player, as after a resolution's discard. */
       readonly priorityTo?: PlayerId;
+      /** A cost's discard: the spell or ability on the stack it pays for,
+       * which remembers the cards discarded (`LastKnownRefs.discarded` —
+       * "the discarded card's mana value"). */
+      readonly forCost?: ObjectId;
     }
   | {
       /**
@@ -4940,6 +4951,8 @@ export interface GameState {
     readonly unlessOne?: CardFilter;
     /** See the `discard` effect's `anyNumber`. */
     readonly upTo?: true;
+    /** See the `discard` decision's `forCost`. */
+    readonly forCost?: ObjectId;
   }[];
   /**
    * Attackers just declared whose "you may exert this creature as it

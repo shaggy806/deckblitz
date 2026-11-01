@@ -199,15 +199,17 @@ export type SearchTogether =
  * to pay the spell's or ability's cost, or by a `sacrifice-source` step
  * before this one ("where X is the sacrificed creature's power" — Dina, Soul
  * Steeper) — and `"tapped"`, the one permanent tapped to pay the ability's
- * cost ("equal to the tapped creature's power" — station). Nothing
- * sacrificed or tapped reads 0.
+ * cost ("equal to the tapped creature's power" — station) — and
+ * `"discarded"`, the one card discarded to pay the cost ("where X is the
+ * discarded card's mana value" — Volrath the Fallen), read where the discard
+ * put it. Nothing sacrificed, tapped or discarded reads 0.
  *
  * An object that was a permanent when the spell or ability referred to it
  * and has left the battlefield since is read as it last existed there (rule
  * 608.2h — see `LastKnownRefs`): "When Juri dies, it deals damage equal to
  * its power" counts the counters Juri died with.
  */
-export type AmountRef = EffectTargetRef | "sacrificed" | "tapped";
+export type AmountRef = EffectTargetRef | "sacrificed" | "tapped" | "discarded";
 /** Where a `return-to-hand` effect takes its object from. */
 export type ReturnToHandZone = "battlefield" | "graveyard" | "exile" | "stack";
 /**
@@ -9617,6 +9619,10 @@ export interface ResolutionContext extends EffectApi {
    * `sacrifice-source` step before this one — what an {@link AmountRef}
    * `"sacrificed"` reads. Absent when nothing was. */
   readonly sacrificed?: ObjectId;
+  /** The cards discarded to pay this spell's or ability's cost
+   * (`LastKnownRefs.discarded`) — an {@link AmountRef} `"discarded"` reads
+   * the one card when there is exactly one. Absent when none were. */
+  readonly discarded?: readonly ObjectId[];
   /** The one permanent tapped to pay this ability's cost — what an
    * {@link AmountRef} `"tapped"` reads. Absent when nothing was. */
   readonly tapped?: ObjectId;
@@ -10962,6 +10968,10 @@ function resolveAmountRef(ref: AmountRef, ctx: ResolutionContext): TargetRef | u
   }
   if (ref === "tapped") {
     return ctx.tapped === undefined ? undefined : { kind: "object", object: ctx.tapped };
+  }
+  // "The discarded card": the cost's one discarded card, where it went.
+  if (ref === "discarded") {
+    return ctx.discarded?.length === 1 ? { kind: "object", object: ctx.discarded[0] } : undefined;
   }
   // A read: a trigger object — or the source — that has moved on since is
   // read as it last existed, which the context's lookups do (rule 608.2h).

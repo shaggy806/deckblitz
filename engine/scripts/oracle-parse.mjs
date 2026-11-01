@@ -1147,7 +1147,13 @@ export function parseCost(text) {
     else if (part === "Discard your hand") cost.discardHand = true;
     // "Discard a card at random" (Mage il-Vec): nothing to choose.
     else if (part === "Discard a card at random") cost.discard = { count: 1, random: true };
-    else if ((m = /^Remove all ([+-]\d+\/[+-]\d+|\w+) counters from ~$/i.exec(part))) {
+    // "Discard a card" (Mesmeric Trance), "Discard a creature card" (Volrath
+    // the Fallen): which, chosen as it's paid (rule 602.2b).
+    else if ((m = /^Discard an? (?:(\w+) )?card$/.exec(part))) {
+      const filter = m[1] === undefined ? undefined : parseTypePhrase(m[1], { cards: true });
+      if (filter === null || (filter !== undefined && Object.keys(filter).length === 0)) return null;
+      cost.discard = { count: 1, ...(filter !== undefined ? { filter } : {}) };
+    } else if ((m = /^Remove all ([+-]\d+\/[+-]\d+|\w+) counters from ~$/i.exec(part))) {
       // Every one there, none allowed; the number removed is the ability's X
       // (Catti-brie of Mithral Hall).
       cost.removeCounter = { kind: m[1], count: "all" };
@@ -1758,6 +1764,13 @@ export function parseSentence(sentence, ctx) {
     const d = distributedCountersOf(s, ctx ?? {});
     if (d !== undefined) return d;
   }
+  // "Where X is the discarded card's mana value" where a "discard a card"
+  // cost discarded it: the `"discarded"` amount ref (Volrath the Fallen) —
+  // ahead of the guard too.
+  if (ctx?.costDiscarded === true && /^~ gets \+X\/\+X until end of turn, where X is the discarded card's mana value\.$/.test(s)) {
+    const ofDiscarded = { manaValueOf: "discarded" };
+    return { kind: "modify-pt", target: "source", power: ofDiscarded, toughness: ofDiscarded, duration: "end-of-turn" };
+  }
   if (/\bwhere X\b|\bfor each\b/i.test(s) && !/^add .*for each [\w+/-]+ counter removed this way\.$/i.test(s)) return null;
   // "Until end of turn, whenever …, …", "whenever … this turn, …" and "until
   // your next turn, whenever …, …" (rule 603.7c): a delayed triggered
@@ -1809,6 +1822,15 @@ export function parseSentence(sentence, ctx) {
     const spec = targetOf(phrase) ?? graveyardTargetOf(phrase);
     return spec === undefined ? undefined : ctx.target(spec);
   };
+
+  // "Damage … equal to the discarded card's mana value" where a "discard a
+  // card" cost discarded it (Mercurial Chemister, Pyromancy).
+  if (ctx?.costDiscarded === true) {
+    const MV = "(?:the discarded card's mana value|the mana value of the discarded card)";
+    if ((m = re(`~ deals damage to (${TARGET}) equal to ${MV}`).exec(s))) {
+      return { kind: "damage", amount: { manaValueOf: "discarded" }, target: slot(m[1]) };
+    }
+  }
 
   // Cards.
   if ((m = re(`(?:you )?draw ${N} cards?`).exec(s))) return { kind: "draw", amount: amount(m[1]) };
@@ -3710,6 +3732,24 @@ export function parseEffect(text, outer) {
         continue;
       }
     }
+    // "If the discarded card was a creature card, amass Orcs 1." (Moria
+    // Scavenger), "… wasn't a land card, …" (Grab the Prize): the one card
+    // a "discard a card" cost discarded (the `discarded` condition) — only
+    // where the cost discards it, never a discard the effect makes.
+    const discardedIf = ctx.costDiscarded === true ? /^if the discarded card (was|wasn't) (?:an? )?(.+?)(?: card)?, (.+)$/i.exec(sentence) : null;
+    if (discardedIf !== null) {
+      const negated = discardedIf[1].toLowerCase() === "wasn't";
+      const filter = negated
+        ? /^[a-z]+$/.test(discardedIf[2]) ? discardFilterOf(`non${discardedIf[2]}`) : null
+        : discardFilterOf(discardedIf[2]);
+      const then = filter === null ? null : parseSentence(`${discardedIf[3][0].toUpperCase()}${discardedIf[3].slice(1)}`, ctx);
+      if (then !== null && !containsUndefined(then)) {
+        const conditional = { kind: "conditional", condition: { kind: "discarded", filter }, then };
+        parsed.push(conditional);
+        hints.push({ sentence, effect: conditional });
+        continue;
+      }
+    }
     const ifDid = /^if you do, (.+)$/i.exec(sentence);
     const mayKind = parsed.at(-1)?.kind === "may" ? parsed.at(-1).effect.kind : undefined;
     if (ifDid !== null && (mayKind === "blight" || mayKind === "behold") && parsed.at(-1).then === undefined && !/\b(blighted|beheld|that)\b/i.test(sentence)) {
@@ -5555,7 +5595,16 @@ export function parseFace(face, ctx = {}) {
         if (out.kicker?.keyword === "entwine") out.castModal = { ...out.castModal, kickedModes: out.castModal.modes.length };
       }
     } else {
-      const ctx2 = { targets: spellTargets, tokenFor, onStack: true, spell: true, opponentChoosesTargets: [], divided: {} };
+      const ctx2 = {
+        targets: spellTargets,
+        tokenFor,
+        onStack: true,
+        spell: true,
+        opponentChoosesTargets: [],
+        divided: {},
+        // "As an additional cost …, discard a card": "the discarded card".
+        ...(out.additionalCost?.discard === 1 ? { costDiscarded: true } : {}),
+      };
       let text = out.spellLines.map((l) => l.line).join(" ");
       // "…. Exile Burning Wish." closing the spell: it's exiled as it
       // resolves instead of going to the graveyard (`exileOnResolve`).
@@ -6430,6 +6479,8 @@ function fillEffect(ability, text, ctx, lines, i) {
     departed: ctx.departed,
     ...(ctx.castSpell === true ? { castSpell: true } : {}),
     divided,
+    // A cost that discards one card: "the discarded card" is that card.
+    ...(ability.cost?.discard?.count === 1 ? { costDiscarded: true } : {}),
     ...(ctx.thatPlayer !== undefined ? { thatPlayer: ctx.thatPlayer } : {}),
     ...(theirSlots !== undefined ? { opponentChoosesTargets: theirSlots } : {}),
   });

@@ -1232,6 +1232,7 @@ function evalStaticCondition(
     case "target":
     case "target-chosen":
     case "sacrificed":
+    case "discarded":
     case "resolved-this-turn":
     case "this-way":
     case "excess-damage-this-way":

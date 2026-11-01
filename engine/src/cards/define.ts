@@ -1255,6 +1255,15 @@ export type StaticCondition =
    */
   | { readonly kind: "sacrificed"; readonly filter: CardFilter }
   /**
+   * The one card discarded to pay the spell's or ability's cost matched
+   * `filter` where the discard put it — "if the discarded card was a
+   * creature card" (Moria Scavenger), "wasn't a land card" (Grab the Prize,
+   * as `notTypes`). False when no card, or more than one, was discarded for
+   * the cost. Like `sacrificed`, only meaningful inside a `conditional`
+   * effect; always false on a static ability.
+   */
+  | { readonly kind: "discarded"; readonly filter: CardFilter }
+  /**
    * "If this is the **Nth time this ability has resolved this turn**" (Omnath,
    * Locus of Creation; Ms. Bumbleflower; Tannuk). `n` counts the resolution
    * in progress, so a first resolution is `1`. The count belongs to one

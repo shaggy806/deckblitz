@@ -754,6 +754,27 @@ kickers' other cards (Final Flourish, Stomped by the Foot, Vayne's Treachery,
 Primal Growth) and Chocobo Kick; Dralnu's Pet still needs the discarded
 card's mana value (`effect:cost-discarded-card-ref`).
 
+### The card discarded to pay a cost — built 2026-11-01
+
+The need-keys Phase 2 family `effect:sacrificed-object-lki`'s open key
+`effect:cost-discarded-card-ref`, features only. A discard that pays a
+spell's or an ability's cost (an activated ability's `cost.discard`, a
+spell's additional, optional, kicker, alternative, jump-start, retrace or
+permission discard) is remembered on that spell or ability as it's paid
+(rules 602.2b, 601.2h — once a chosen discard is answered, at once for a
+forced or random one; `LastKnownRefs.discarded`, through the `discard`
+decision's `forCost`), each card with its stint where the discard put it (a
+madness card's exile too). Its effect reads it as the `"discarded"`
+`AmountRef` ("the discarded card's mana value") and the `discarded`
+condition ("if the discarded card was a creature card"). The scaffolder now
+reads "Discard a card" / "Discard a [type] card" as an ability cost, and the
+"discarded card" amount and condition lines. Proving cards: Volrath the
+Fallen, Moria Scavenger, Grab the Prize, Stormscale Anarch. Left to
+`author-freed`: Hisoka, Minamo Sensei, Land's Edge, Mercurial Chemister,
+Necromancer's Stockpile, Pyromancy, Slumbering Tora; Dralnu's Pet's kicked
+counters are an enters replacement, which doesn't read the spell's cost;
+Malcolm, Alluring Scoundrel's discard is the effect's own, not a cost.
+
 ### One-shot grants to the next or first matching spell — built 2026-10-31
 
 The rest of the need-keys Phase 2 family `static:grant-abilities-to-spells`,

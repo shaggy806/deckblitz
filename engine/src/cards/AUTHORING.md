@@ -791,8 +791,10 @@ every kind when `counter` is omitted, "the number of counters on it" —
 Black Market's charge counters; from a dies trigger, the counters it died
 with, Chasm Skulker), `{ countInGraveyard }`, `{ manaValueOf }`, `{ powerOf }`, `{ toughnessOf }`
 (Condemn; each takes a target slot, `"source"`, `"trigger-object"`,
-`"sacrificed"` or `"tapped"` — the one permanent tapped to pay the ability's
-cost, station's — see "Last-known information" below), `{ lifeTotal: "you" }`
+`"sacrificed"`, `"tapped"` — the one permanent tapped to pay the ability's
+cost, station's — or `"discarded"`, the one card discarded to pay the
+cost, read where the discard put it: Volrath the Fallen's "where X is the
+discarded card's mana value" — see "Last-known information" below), `{ lifeTotal: "you" }`
 (Storm Herd), `{ devotionTo: Color }` (rule 700.5 — Gray Merchant of
 Asphodel; a hybrid pip counts for each colour it contains, `{X}` and generic
 for nothing; `"that-color"` is the colour an `"any-color"` `add-mana` is
@@ -5055,6 +5057,12 @@ clause (section 9):
   creature was a commander" (`{ isCommander: true }`), "if it was a Hamster".
   False when nothing was sacrificed. Only meaningful inside a `conditional`
   effect.
+- `{ kind: "discarded", filter }` — the one card the spell's or ability's
+  cost discarded matched `filter` where the discard put it: "if the
+  discarded card was a creature card" (Moria Scavenger), "wasn't a land
+  card" (`{ notTypes: ["land"] }` — Grab the Prize), "was multicolored"
+  (Stormscale Anarch). Never a discard the effect itself makes — that's
+  `this-way`. Only meaningful inside a `conditional` effect.
 - `{ kind: "trigger-object", filter }` — the object whose event fired the
   *triggered ability* currently resolving matches `filter` (Akoum Hellkite:
   "If that land is a Mountain, it deals 2 damage instead"). Only meaningful

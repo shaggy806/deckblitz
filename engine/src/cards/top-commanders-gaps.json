@@ -827,7 +827,8 @@
   "effect:counters-put-this-way",
   "effect:counters-removed-this-way",
   "effect:distribute-counters-among-chosen",
-  "effect:distribute-counters-variable-total"
+  "effect:distribute-counters-variable-total",
+  "effect:cost-discarded-card-ref"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

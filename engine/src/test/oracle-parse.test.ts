@@ -156,8 +156,13 @@ describe("costs and triggers", () => {
       filter: { subtype: "Elf", controlledBy: "you" },
       includeSelf: true,
     });
-    // Discard as a cost isn't modeled.
-    expect(parseCost("{1}, Discard a card")).toBeNull();
+    // "Discard a card", "Discard a creature card": chosen as it's paid.
+    expect(parseCost("{1}, Discard a card")?.cost).toEqual({ mana: "{1}", tap: false, discard: { count: 1 } });
+    expect(parseCost("{1}{B}, Discard a creature card")?.cost).toEqual({
+      mana: "{1}{B}",
+      tap: false,
+      discard: { count: 1, filter: { type: "creature" } },
+    });
     // Exert as a cost (rule 701.43 — Steward of Solidarity).
     expect(parseCost("{T}, Exert ~").cost).toEqual({ mana: null, tap: true, exertSelf: true });
     expect(parseCost("{2}, Exile the top card of your library").cost).toEqual({ mana: "{2}", tap: false, exileTop: 1 });
@@ -5330,5 +5335,62 @@ describe("counters put or removed this way", () => {
       removeAllCountersFrom: {},
       counters: { kind: "+1/+1", amount: "removed-as-enters" },
     });
+  });
+});
+
+describe("the card discarded to pay a cost", () => {
+  const face = (name: string, type_line: string, oracle_text: string) =>
+    parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });
+
+  it("reads its mana value and its type where a discard cost discarded it", () => {
+    // Volrath the Fallen's line, under a name the short-name reader knows
+    // ("Volrath" alone isn't read as ~).
+    const volrath = face(
+      "Test Volrath",
+      "Legendary Creature — Phyrexian Shapeshifter",
+      "{1}{B}, Discard a creature card: Test Volrath gets +X/+X until end of turn, where X is the discarded card's mana value.",
+    );
+    expect(volrath.complete).toBe(true);
+    expect(volrath.activated[0].effect).toEqual({
+      kind: "modify-pt",
+      target: "source",
+      power: { manaValueOf: "discarded" },
+      toughness: { manaValueOf: "discarded" },
+      duration: "end-of-turn",
+    });
+    const chemister = face(
+      "Mercurial Chemister",
+      "Creature — Human Wizard",
+      "{R}, {T}, Discard a card: This creature deals damage to target creature equal to the discarded card's mana value.",
+    );
+    expect(chemister.activated[0].effect).toEqual({ kind: "damage", amount: { manaValueOf: "discarded" }, target: 0 });
+    const moria = face(
+      "Moria Scavenger",
+      "Creature — Orc Rogue",
+      "Deathtouch, haste\n{T}, Discard a card: Draw a card. If the discarded card was a creature card, amass Orcs 1.",
+    );
+    expect(moria.activated[0].effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "draw", amount: 1 },
+        { kind: "conditional", condition: { kind: "discarded", filter: { type: "creature" } }, then: { kind: "amass", amount: 1, creatureType: "Orc" } },
+      ],
+    });
+    const grab = face(
+      "Grab the Prize",
+      "Sorcery",
+      "As an additional cost to cast this spell, discard a card.\nDraw two cards. If the discarded card wasn't a land card, Grab the Prize deals 2 damage to each opponent.",
+    );
+    expect(grab.complete).toBe(true);
+    expect(grab.effect.effects[1]).toEqual({
+      kind: "conditional",
+      condition: { kind: "discarded", filter: { notTypes: ["land"] } },
+      then: { kind: "damage", amount: 2, who: "each-opponent" },
+    });
+  });
+
+  it("leaves a discard the effect itself makes to a person", () => {
+    const rummage = face("Test Rummage", "Sorcery", "Draw a card, then discard a card. If the discarded card was a creature card, draw a card.");
+    expect(rummage.complete).toBe(false);
   });
 });

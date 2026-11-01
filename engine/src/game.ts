@@ -7834,9 +7834,19 @@ export class Game {
     // (rule 117.3c), whoever's turn it is.
     const priorityTo = this.state.awaiting?.kind === "discard" ? this.state.awaiting.priorityTo : undefined;
 
+    // A cost's discard: the spell or ability it pays for remembers the cards.
+    const forCost = this.state.awaiting?.kind === "discard" ? this.state.awaiting.forCost : undefined;
+
     if (fromEffect && priorityTo === undefined && this.state.heldChoices !== undefined) {
       // Chosen now, discarded once every player has chosen (rule 101.4).
       this.holdDiscard(player, cards);
+    } else if (forCost !== undefined) {
+      this.costDiscardFor = forCost;
+      try {
+        this.discardCards(player, cards);
+      } finally {
+        this.costDiscardFor = null;
+      }
     } else {
       this.discardCards(player, cards);
     }
@@ -14793,6 +14803,11 @@ export class Game {
    * activated ability's, chosen as it's activated (rules 602.2b, 700.2b);
    * unset otherwise, and while `legalActions` asks whether it could be. */
   private activationModes: readonly number[] | undefined = undefined;
+  /** The spell or ability on the stack whose cost the discard being begun
+   * pays for, while {@link payCostDiscard} runs; null otherwise. A discard
+   * asked or queued then carries it (`forCost`), and one made at once is
+   * recorded on it straight away. */
+  private costDiscardFor: ObjectId | null = null;
   /** The `webSlingingReturn` of the `cast-spell` being dispatched (rule
    * 702.188a), read as its cost is paid; unset otherwise. */
   private webSlingingReturnChoice: ObjectId | undefined = undefined;
@@ -15769,7 +15784,7 @@ export class Game {
     // cost paid the same way, one member peeled off a token stack rather than
     // the whole stack, and the victim the driver named.
     if (chosenOption?.discard !== undefined) {
-      this.withDecisionSource(cardId, () => {
+      this.payCostDiscard(cardId, cardId, () => {
         this.discardByEffect({ kind: "player", player }, chosenOption.discard as number);
       });
       this.costDiscardPriorityTo(via === "effect" ? this.activePlayer : player);
@@ -15779,7 +15794,7 @@ export class Game {
     const kickerAlso = kicked !== false && kicked !== 0 ? def.kicker?.also : undefined;
     if (kickerAlso?.payLife !== undefined) this.changeLife(player, -kickerAlso.payLife);
     if (kickerAlso?.discard !== undefined) {
-      this.withDecisionSource(cardId, () => {
+      this.payCostDiscard(cardId, cardId, () => {
         this.discardByEffect({ kind: "player", player }, kickerAlso.discard as number, kickerAlso.discardAtRandom === true);
       });
       this.costDiscardPriorityTo(via === "effect" ? this.activePlayer : player);
@@ -15787,7 +15802,7 @@ export class Game {
     // Jump-start's "by discarding a card" (rule 702.133a), paid the same way.
     const flashbackDiscard = via === "flashback" ? this.flashbackOf(cardId, graveyardGrant)?.discard : undefined;
     if (flashbackDiscard !== undefined) {
-      this.withDecisionSource(cardId, () => {
+      this.payCostDiscard(cardId, cardId, () => {
         this.discardByEffect({ kind: "player", player }, flashbackDiscard);
       });
       this.costDiscardPriorityTo(via === "effect" ? this.activePlayer : player);
@@ -15797,7 +15812,7 @@ export class Game {
     // filtered card first, then the others from what's left.
     const altDiscard = altCost ? def.alternativeCost?.discard : undefined;
     if (altDiscard !== undefined) {
-      this.withDecisionSource(cardId, () => {
+      this.payCostDiscard(cardId, cardId, () => {
         this.discardByEffect({ kind: "player", player }, 1, false, altDiscard.filter);
         if ((altDiscard.others ?? 0) > 0) this.discardByEffect({ kind: "player", player }, altDiscard.others ?? 0);
       });
@@ -15810,7 +15825,7 @@ export class Game {
     }
     // Retrace's land card (rule 702.81a), chosen as the cost is paid.
     if (via === "retrace") {
-      this.withDecisionSource(cardId, () => {
+      this.payCostDiscard(cardId, cardId, () => {
         this.discardByEffect({ kind: "player", player }, 1, false, Game.RETRACE_DISCARD);
       });
       this.costDiscardPriorityTo(player);
@@ -15822,7 +15837,7 @@ export class Game {
       // `source` of its own, so it reads `state.decisionSource` — which only
       // `withDecisionSource` sets, and only around a *resolution*. Without
       // this wrap the prompt named whatever resolved last.
-      this.withDecisionSource(cardId, () => {
+      this.payCostDiscard(cardId, cardId, () => {
         this.discardByEffect({ kind: "player", player }, costDiscard, def.additionalCost?.discardAtRandom === true);
       });
       this.costDiscardPriorityTo(via === "effect" ? this.activePlayer : player);
@@ -15831,7 +15846,7 @@ export class Game {
     // its other costs" (Alien Symbiosis), chosen as it's paid, as retrace's.
     const permissionDiscard = graveyardPermission?.discard;
     if (permissionDiscard !== undefined && permissionDiscard > 0) {
-      this.withDecisionSource(cardId, () => {
+      this.payCostDiscard(cardId, cardId, () => {
         this.discardByEffect({ kind: "player", player }, permissionDiscard);
       });
       this.costDiscardPriorityTo(player);
@@ -15839,7 +15854,7 @@ export class Game {
     // Cast by discarding a card rather than paying its mana cost (the
     // `cast-now` effect's `byDiscarding`): that card, chosen as it's paid.
     if (via === "effect" && this.castNowOffer(player, cardId)?.byDiscarding === true) {
-      this.withDecisionSource(cardId, () => {
+      this.payCostDiscard(cardId, cardId, () => {
         this.discardByEffect({ kind: "player", player }, 1);
       });
       this.costDiscardPriorityTo(this.activePlayer);
@@ -18383,7 +18398,7 @@ export class Game {
     const costDiscard = ability.cost.discard;
     if (costDiscard !== undefined) {
       const n = costDiscard.count === "x" ? chosenX : costDiscard.count;
-      this.withDecisionSource(sourceId, () => {
+      this.payCostDiscard(abilityId, sourceId, () => {
         this.discardByEffect({ kind: "player", player }, n, costDiscard.random === true, costDiscard.filter);
       });
       this.costDiscardPriorityTo(player);
@@ -18481,6 +18496,36 @@ export class Game {
     if (awaiting?.kind === "discard" && awaiting.fromEffect === true) {
       this.state.awaiting = { ...awaiting, priorityTo: player };
     }
+  }
+
+  /**
+   * Begin a discard that pays `stackObject`'s cost — a spell's additional or
+   * alternative cost, an activated ability's — with `decisionSource` named
+   * as what asks. The cards discarded, now or once the decision is answered
+   * (rule 602.2b, 601.2h), are remembered on `stackObject`
+   * (`LastKnownRefs.discarded`), so its effect can read "the discarded card"
+   * as it resolves.
+   */
+  private payCostDiscard(stackObject: ObjectId, decisionSource: ObjectId, pay: () => void): void {
+    const outer = this.costDiscardFor;
+    this.costDiscardFor = stackObject;
+    try {
+      this.withDecisionSource(decisionSource, pay);
+    } finally {
+      this.costDiscardFor = outer;
+    }
+  }
+
+  /** Remember `cards`, just discarded for `stackObject`'s cost, on it — each
+   * with its stint where the discard put it. */
+  private recordCostDiscard(stackObject: ObjectId, cards: readonly ObjectId[]): void {
+    const object = this.state.objects[stackObject];
+    if (object === undefined || object.zone !== "stack" || cards.length === 0) return;
+    const entries = cards.map((card) => ({ object: card, zoneChangeCount: this.state.objects[card]?.zoneChangeCount ?? 0 }));
+    object.lastKnownRefs = {
+      ...object.lastKnownRefs,
+      discarded: [...(object.lastKnownRefs?.discarded ?? []), ...entries],
+    };
   }
 
   /** The cards in `player`'s graveyard an "exile N cards from your
@@ -25501,6 +25546,12 @@ export class Game {
         const sacrificed = refs.sacrificed;
         return sacrificed !== undefined && matchesKnown(sacrificed.object, condition.filter);
       }
+      // "If the discarded card was a creature card": the cost's one card,
+      // where the discard put it.
+      if (condition.kind === "discarded") {
+        const discarded = refs.discarded;
+        return discarded?.length === 1 && matchesKnown(discarded[0].object, condition.filter);
+      }
       if (condition.kind === "resolved-this-turn") return resolutionCount === condition.n;
       // "Each player who doesn't have max speed" (Outpace Oblivion): that
       // player's speed, 0 for none (rule 702.179f).
@@ -25635,6 +25686,7 @@ export class Game {
       ...(opts.abilityKey !== undefined ? { abilityKey: opts.abilityKey } : {}),
       ...(opts.announcedModes !== undefined ? { announcedModes: opts.announcedModes } : {}),
       ...(refs.sacrificed !== undefined ? { sacrificed: refs.sacrificed.object } : {}),
+      ...(refs.discarded !== undefined ? { discarded: refs.discarded.map((d) => d.object) } : {}),
       ...(refs.tapped !== undefined ? { tapped: refs.tapped.object } : {}),
       ...(refs.enteredTogether !== undefined
         ? { enteredTogether: refs.enteredTogether.map(({ object, count }) => ({ object, count })) }
@@ -39106,6 +39158,7 @@ export class Game {
           upTo: true,
           ...(from !== null ? { source: from } : {}),
           ...(filter !== undefined ? { filter } : {}),
+          ...(this.costDiscardFor !== null ? { forCost: this.costDiscardFor } : {}),
         });
         return;
       }
@@ -39135,6 +39188,7 @@ export class Game {
         ...(from !== null ? { source: from } : {}),
         ...(filter !== undefined ? { filter } : {}),
         ...(unlessOne !== undefined ? { unlessOne } : {}),
+        ...(this.costDiscardFor !== null ? { forCost: this.costDiscardFor } : {}),
       });
       return;
     }
@@ -39152,6 +39206,7 @@ export class Game {
     this.withGraveyardEnterBatch(() => {
       for (const id of ids) if (this.moveDiscarded(id)) mad.push(id);
     });
+    if (this.costDiscardFor !== null) this.recordCostDiscard(this.costDiscardFor, ids);
     this.emit({ type: "cards-discarded", player, objects: [...ids] });
     this.queueMadness(mad);
   }
@@ -39277,7 +39332,14 @@ export class Game {
   private promptNextDiscard(): void {
     const next = this.state.pendingDiscards.shift();
     if (next === undefined || this.state.players[next.player]?.hasLost === true) return;
-    this.discardNow(next.player, next.count, next.filter, next.unlessOne, next.upTo === true);
+    // A cost's discard queued behind another question still pays that cost.
+    const outer = this.costDiscardFor;
+    this.costDiscardFor = next.forCost ?? null;
+    try {
+      this.discardNow(next.player, next.count, next.filter, next.unlessOne, next.upTo === true);
+    } finally {
+      this.costDiscardFor = outer;
+    }
     if (this.state.awaiting !== null && next.source !== undefined) {
       this.state.decisionSource = next.source;
     }
@@ -39303,6 +39365,7 @@ export class Game {
         upTo: true,
         fromEffect: true,
         ...(filter !== undefined ? { eligible: hand } : {}),
+        ...(this.costDiscardFor !== null ? { forCost: this.costDiscardFor } : {}),
       };
       return;
     }
@@ -39323,6 +39386,7 @@ export class Game {
       count: amount,
       fromEffect: true,
       ...(filter !== undefined ? { eligible: hand } : {}),
+      ...(this.costDiscardFor !== null ? { forCost: this.costDiscardFor } : {}),
       ...(unlessOne !== undefined
         ? { orOneOf: hand.filter((id) => this.discardCandidates(player, unlessOne).includes(id)) }
         : {}),
