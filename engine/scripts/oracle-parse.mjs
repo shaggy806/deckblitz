@@ -1356,7 +1356,12 @@ export function parseCost(text) {
     else if (part === "Exile ~") cost.exileSelf = true;
     // "Exile the top card of your library" (Royal Herbalist), "the top two
     // cards" (Whirling Catapult).
-    else if (part === "Exile the top card of your library") cost.exileTop = 1;
+    // "Exile a creature card from your graveyard": one, chosen as it's paid.
+    else if ((m = /^Exile an? (?:(.+?) )?card from your graveyard$/.exec(part))) {
+      const filter = m[1] === undefined ? undefined : parseTypePhrase(m[1]);
+      if (filter === null || (filter !== undefined && Object.keys(filter).length === 0)) return null;
+      cost.exileFromGraveyard = { count: 1, ...(filter !== undefined ? { filter } : {}) };
+    } else if (part === "Exile the top card of your library") cost.exileTop = 1;
     else if ((m = new RegExp(`^Exile the top ${N} cards of your library$`, "i").exec(part))) {
       const count = numberOf(m[1]);
       if (typeof count !== "number") return null;
@@ -2390,6 +2395,22 @@ export function parseSentence(sentence, ctx) {
       count: amount(m[1]),
       ...(m[2] ? { tapped: true } : {}),
       ...(xx ? { basePt: { power: "x", toughness: "x" } } : {}),
+    };
+  }
+  // A token copy of a linked source: the creature enchanted, a card exiled
+  // with this (rule 607.2a), or "the exiled card" — of the cost when the cost
+  // exiled one, otherwise of the linked ability. Exceptions only as far as
+  // they're read here.
+  if ((m = re("create a token that's a copy of (enchanted creature|a card exiled with ~|the exiled card)(?:, except (.+))?").exec(s))) {
+    const except = m[2] === undefined ? {} : tokenCopyExceptOf(m[2]);
+    if (except === null) return null;
+    return {
+      kind: "create-token-copy",
+      of: /enchanted/i.test(m[1]) ? "enchanted" : ctx.costExiled === true ? "exiled-as-cost" : "exiled-with-source",
+      ...(/^a card/i.test(m[1]) ? { chooseOne: true } : {}),
+      count: 1,
+      ...(/enchanted/i.test(m[1]) ? { who: "you" } : {}),
+      ...except,
     };
   }
   if (re("investigate").test(s)) return { kind: "create-token", token: "Clue Token", count: 1 };
@@ -7532,6 +7553,21 @@ function additionOf(phrase) {
  * artifact in addition to its other types", "the copy is a 1/1 Spirit in
  * addition to its other types". `null` for anything else.
  */
+/** What follows "a token that's a copy of …, except": the token's fixed base
+ * P/T, "isn't legendary", and what it is in addition, as `create-token-copy`'s
+ * fields. `null` unless every word is read. */
+function tokenCopyExceptOf(phrase) {
+  const pt = /^(?:the token|it)(?: is|'s) (\d+)\/(\d+)$/i.exec(phrase);
+  if (pt !== null) return { basePt: [Number(pt[1]), Number(pt[2])] };
+  if (/^it isn't legendary$/i.test(phrase)) return { notLegendary: true };
+  const both = /^it isn't legendary and is (.+) in addition to its other types$/i.exec(phrase);
+  const also = both?.[1] ?? /^it's (.+) in addition to its other types$/i.exec(phrase)?.[1];
+  if (also === undefined) return null;
+  const added = additionOf(also);
+  if (added === null || added.addColors !== undefined) return null;
+  return { ...(both !== null ? { notLegendary: true } : {}), exceptions: added };
+}
+
 export function copyExceptOf(phrase) {
   if (/^(?:the copy|it) isn't legendary(?: if the spell is legendary)?$/i.test(phrase)) return { notLegendary: true };
   const m = /^the copy is (.+?) in addition to its other types$/i.exec(phrase);
@@ -7768,6 +7804,8 @@ function fillEffect(ability, text, ctx, lines, i) {
     divided,
     // A cost that discards one card: "the discarded card" is that card.
     ...(ability.cost?.discard?.count === 1 ? { costDiscarded: true } : {}),
+    // A cost that exiles one card: "the exiled card" is that card.
+    ...(ability.cost?.exileFromGraveyard?.count === 1 ? { costExiled: true } : {}),
     // A cost that reveals one card: "the revealed card" is that card.
     ...(ability.cost?.reveal?.count === 1 ? { costRevealed: true } : {}),
     ...(ctx.thatPlayer !== undefined ? { thatPlayer: ctx.thatPlayer } : {}),

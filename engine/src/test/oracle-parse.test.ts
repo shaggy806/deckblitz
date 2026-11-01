@@ -6580,6 +6580,52 @@ describe("cards outside the battlefield", () => {
   });
 });
 
+describe("token copies of a linked source", () => {
+  const read = (type_line: string, oracle_text: string) => {
+    const card = parseFace({ name: "Test Copy", type_line, oracle_text }, { tokenFor: () => null });
+    expect(card.complete).toBe(true);
+    return card;
+  };
+
+  it("reads enchanted creature, its fixed P/T too", () => {
+    expect(
+      read(
+        "Enchantment — Aura",
+        "Enchant creature\nAt the beginning of your upkeep, create a token that's a copy of enchanted creature.",
+      ).triggered[0].effect,
+    ).toEqual({ kind: "create-token-copy", of: "enchanted", count: 1, who: "you" });
+    expect(
+      read(
+        "Enchantment — Aura",
+        "Enchant creature\nAt the beginning of your upkeep, create a token that's a copy of enchanted creature, except the token is 1/1.",
+      ).triggered[0].effect,
+    ).toEqual({ kind: "create-token-copy", of: "enchanted", count: 1, who: "you", basePt: [1, 1] });
+  });
+
+  it("reads the card exiled with this: one chosen, or the exiled card", () => {
+    expect(
+      read("Artifact", "{3}, {T}: Create a token that's a copy of a card exiled with this artifact.").activated[0].effect,
+    ).toEqual({ kind: "create-token-copy", of: "exiled-with-source", chooseOne: true, count: 1 });
+    expect(
+      read("Artifact", "{4}, {T}: Create a token that's a copy of the exiled card.").activated[0].effect,
+    ).toEqual({ kind: "create-token-copy", of: "exiled-with-source", count: 1 });
+  });
+
+  it("reads the card its cost exiled, with its types in addition", () => {
+    const card = read(
+      "Creature — Human",
+      "{1}, {T}, Exile a creature card from your graveyard: Create a token that's a copy of the exiled card, except it isn't legendary and is a Mutant in addition to its other types.",
+    );
+    expect(card.activated[0].effect).toEqual({
+      kind: "create-token-copy",
+      of: "exiled-as-cost",
+      count: 1,
+      notLegendary: true,
+      exceptions: { addSubtypes: ["Mutant"] },
+    });
+  });
+});
+
 describe("P/T bonuses per amount", () => {
   const per = (type_line: string, oracle_text: string) => {
     const card = parseFace({ name: "Test Per", type_line, oracle_text }, { tokenFor: () => null });

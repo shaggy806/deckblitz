@@ -349,7 +349,17 @@ function untargetedWorth(effect: EffectSpec, ctx: WorthContext): number {
       // opponent included, which v1 declined while this read as 0, so the
       // copies never swung at the rest of the table. A copy that enters under
       // the copied permanent's controller isn't read.
-      if (effect.who !== "you" && effect.of !== "source") return 0;
+      if (
+        effect.who !== "you" &&
+        effect.of !== "source" &&
+        // A copy of a card enters under the effect's controller.
+        effect.of !== "exiled-with-source" &&
+        effect.of !== "exiled-as-cost" &&
+        effect.of !== "exiled-this-way" &&
+        !(typeof effect.of === "object" && "eachExiled" in effect.of)
+      ) {
+        return 0;
+      }
       return onPlayers(you, 1.5 * sizeOf(effect.count), ctx);
     case "search-library":
       if (effect.who !== undefined) return 0;

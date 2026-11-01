@@ -1826,6 +1826,26 @@ remove-counters-any-kind. Still open on its cards: Cemetery Desecrator
 (`decision:choose-from-any-graveyard`), Gwen Stacy
 (`zone:impulse-while-you-control-source`).
 
+### Token copies of a linked source — built 2026-11-01
+
+`create-token-copy`'s `of` reaches cards now: `"exiled-with-source"` (rules
+607.2a, 610.3; `chooseOne` for "a card exiled with this"), `"exiled-as-cost"`
+(`LastKnownRefs.exiledCost`, recorded as `exileFromGraveyard` is paid),
+`"exiled-this-way"`, `{ eachExiled }`, each read as the printed card under the
+effect's controller, with no token for an instant or sorcery card (rule
+111.5); `"enchanted"` is the Aura's host. Also `count` as an amount,
+`sacrificeAtEndOfCombat`, `atYourNextEndStep`, `exceptions.static`, and
+`return-exiled-by-source`'s `linked: "graveyard"`. Proving cards: Mimic Vat,
+The Cloning of Shredder, Followed Footsteps, Mardu Siegebreaker, Altaïr
+Ibn-La'Ahad, Dollhouse of Horrors, Foggy Swamp Visions, Rionya, Fire Dancer
+(`token-copy-linked-sources.test.ts`). Keys: linked-exile-token-copy,
+token-copy-of-enchanted, token-copy-of-exiled-card, token-copy-count-amount,
+copy-exception-static-ability. Still open on their cards: Osgir (an exile
+cost's filter reading X), Tawnos (sacrifice and exile in one cost), Phantom
+Steed ("an Illusion" only if the token is a creature, rule 205.3d), Prototype
+Portal and Soul Foundry (`cost:x-equals-linked-exiled-mana-value`), Nahiri
+(`effect:attack-requirement-player-only`).
+
 ### Removing counters in bulk — built 2026-10-31
 
 The need-keys Phase 2 family `effect:remove-all-counters`, features only.

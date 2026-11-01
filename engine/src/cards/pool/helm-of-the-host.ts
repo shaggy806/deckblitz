@@ -22,7 +22,7 @@ export default defineCard({
     {
       trigger: { on: "step-begins", step: "begin-combat", who: "you" },
       targets: [],
-      effect: { kind: "create-token-copy", of: "equipped", count: 1, notLegendary: true, gains: { keywords: ["haste"] } },
+      effect: { kind: "create-token-copy", of: "equipped", count: 1, who: "you", notLegendary: true, gains: { keywords: ["haste"] } },
       resolve: null,
       text: TEXT,
     },

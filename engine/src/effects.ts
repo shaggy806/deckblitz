@@ -2930,8 +2930,10 @@ export type EffectSpec =
        * those linked cards onto the battlefield under their owners' control,
        * together — Colfenor's Urn's "return those cards to the battlefield",
        * the cards its `exile { linked }` put there, found though the Urn has
-       * just been sacrificed. */
-      readonly linked?: "hand" | "battlefield";
+       * just been sacrificed. `"graveyard"`: into their owners' graveyards —
+       * with `others`, Mimic Vat's "return each other card exiled with this
+       * artifact to its owner's graveyard". */
+      readonly linked?: "hand" | "battlefield" | "graveyard";
       /** With `linked: "battlefield"`: "**put** all cards exiled with it
        * onto the battlefield" (Underworld Sentinel) — under the control of
        * the player putting them there, the effect's controller (rule
@@ -6285,9 +6287,43 @@ export type EffectSpec =
        * Host's "a copy of equipped creature": as this resolves, or, if the
        * source has left, the one it was last attached to (its last-known
        * information if that's gone too); nothing if it equips nothing (the
-       * Helm's rulings). */
-      readonly of: "source" | "trigger-object" | "entered-together" | "equipped" | number | { readonly each: CardFilter };
-      readonly count: number;
+       * Helm's rulings). `"enchanted"` is the same for an Aura — Followed
+       * Footsteps's "a copy of enchanted creature".
+       *
+       * The rest are copies of **cards**, each read as the card it is rather
+       * than as what it last was on the battlefield (as `asCard`), and each
+       * entering under the effect's controller ("create a token"); a copy of
+       * an instant or sorcery card is no token at all (rule 111.5):
+       * `"exiled-with-source"` is "the exiled card" of a linked ability
+       * (rule 607.2a): a copy of each card in exile this source exiled, in
+       * the stint the resolving ability refers to, an "until this leaves the
+       * battlefield" exile's included (rule 610.3) — Mardu Siegebreaker, or
+       * with `chooseOne` Mimic Vat's "a card exiled with this artifact".
+       * `"exiled-as-cost"` is what was exiled to pay this spell's or
+       * ability's cost — Dollhouse of Horrors. `"exiled-this-way"` is each
+       * card this resolution has exiled so far — Foggy Swamp Visions.
+       * `{ eachExiled }` is each face-up card in exile matching the filter,
+       * from this effect's controller's side — Altaïr Ibn-La'Ahad. */
+      readonly of:
+        | "source"
+        | "trigger-object"
+        | "entered-together"
+        | "equipped"
+        | "enchanted"
+        | "exiled-with-source"
+        | "exiled-as-cost"
+        | "exiled-this-way"
+        | number
+        | { readonly each: CardFilter }
+        | { readonly eachExiled: CardFilter };
+      /** How many, read as this applies: Rionya, Fire Dancer's "create X
+       * tokens that are copies of …, where X is one plus the number of
+       * instant and sorcery spells you've cast this turn". */
+      readonly count: EffectAmount;
+      /** With `of: "exiled-with-source"`: "a card exiled with this" — one
+       * of them, chosen as this resolves if there's more than one (Mimic
+       * Vat's melded-pair ruling), rather than a copy of each. */
+      readonly chooseOne?: true;
       /** `count` copies **for each time its squad cost was paid** (rule
        * 702.157a — the `squadTrigger` helper): times the number of times
        * the source's spell paid its squad (a multikicker-style) cost, read
@@ -6310,6 +6346,15 @@ export type EffectSpec =
        * Wild Mage): a delayed triggered ability over the copies made, at the
        * beginning of the end of combat step — on the stack, like any. */
       readonly exileAtEndOfCombat?: boolean;
+      /** "Sacrifice that token at end of combat" (Phantom Steed): as
+       * `exileAtEndOfCombat`, but dies-triggers see it go. */
+      readonly sacrificeAtEndOfCombat?: boolean;
+      /** With `exileAtEndStep` or `sacrificeAtEndStep`: at the beginning of
+       * **your** next end step rather than the next one, whoever's turn that
+       * is — Foggy Swamp Visions's "at the beginning of your next end step,
+       * sacrifice those tokens" (a difference once it's cast with flash on
+       * another player's turn). */
+      readonly atYourNextEndStep?: true;
       /** The copies enter **tapped** — with `attacking`, "a token copy that's
        * tapped and attacking" (myriad). */
       readonly tapped?: boolean;
@@ -8073,6 +8118,10 @@ export interface CopyExceptions {
    * creature becomes the target of a spell or ability, sacrifice it.'" (rule
    * 707.9a: a copiable value, so a copy of the copy has it too). */
   readonly triggered?: readonly TriggeredAbility[];
+  /** Static abilities it has — Dollhouse of Horrors's "and it has 'This
+   * token gets +1/+1 for each Construct you control.'" (rule 707.9a, as
+   * `triggered`). */
+  readonly static?: readonly StaticAbility[];
   /** "…except it has **this ability**" (Thespian's Stage, Court of Vantress,
    * Irma, Part-Time Mutant): the ability of `card`'s definition at that
    * index of its `activated` or `triggered` list — the very ability making
@@ -8794,6 +8843,9 @@ export interface EffectApi {
    * the battlefield" too (`GameObject.exiledUntil` — rule 610.3), which an
    * ability of it also calls "the exiled card". */
   cardsExiledWithSource(orUntil?: boolean): readonly ObjectId[];
+  /** The face-up cards in exile matching `filter`, read from this effect's
+   * controller's side — a `create-token-copy`'s `{ eachExiled }`. */
+  exiledCardsMatching(filter: CardFilter): readonly ObjectId[];
   /** See the `"ninjutsu"` {@link EffectSpec}: whether it stopped to ask an
    * "as this enters" choice, after which it's applied again. */
   ninjutsu(): boolean;
@@ -9704,6 +9756,8 @@ export interface EffectApi {
       tapped?: boolean;
       attacking?: ResolvedEnterAttacking;
       exileAtEndOfCombat?: boolean;
+      sacrificeAtEndOfCombat?: boolean;
+      atYourNextEndStep?: boolean;
     },
   ): void;
   /** True if `condition` holds from the effect source's controller's
@@ -9949,7 +10003,7 @@ export interface EffectApi {
     count: number | undefined,
     min: number,
     max: number,
-    destination: "battlefield" | "hand" | "library-top" | "library-bottom" | "graveyard" | "exile-face-down" | "exile" | "manifest" | "reveal",
+    destination: "battlefield" | "hand" | "library-top" | "library-bottom" | "graveyard" | "exile-face-down" | "exile" | "manifest" | "reveal" | "stay",
     leftover: "bottom-random" | "bottom-any-order" | "top-any-order" | "stay" | "hand" | "graveyard" | "exile" | "exile-playable",
     filter: ZoneChoiceFilter | undefined,
     enterTapped?: boolean,
@@ -10066,6 +10120,10 @@ export interface ResolutionContext extends EffectApi {
    * (`LastKnownRefs.discarded`) — an {@link AmountRef} `"discarded"` reads
    * the one card when there is exactly one. Absent when none were. */
   readonly discarded?: readonly ObjectId[];
+  /** The cards exiled to pay this spell's or ability's cost
+   * (`LastKnownRefs.exiledCost`) — a `create-token-copy`'s
+   * `"exiled-as-cost"`. Absent when none were. */
+  readonly exiledAsCost?: readonly ObjectId[];
   /** The cards revealed from the hand to pay this spell's or ability's cost
    * (`LastKnownRefs.revealed`) — an {@link AmountRef} `"revealed"` reads the
    * one card when there is exactly one. Absent when none were. */
@@ -12900,6 +12958,13 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         for (const card of ctx.cardsExiledWithSource()) ctx.returnToHand({ kind: "object", object: card }, "exile");
         return;
       }
+      if (spec.linked === "graveyard") {
+        const justExiled = spec.others === true ? ctx.cardsExiledThisWay() : [];
+        for (const card of ctx.cardsExiledWithSource()) {
+          if (!justExiled.includes(card)) ctx.putExiledIntoGraveyard(card);
+        }
+        return;
+      }
       // Each case below that puts something onto the battlefield may stop
       // first to ask an "as this enters" choice (a Clone's copy — rule
       // 614.12); it moved nothing, and runs again once that's answered.
@@ -14655,13 +14720,21 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "create-token-copy": {
+      // Copies of cards are read as the cards they are, and "create a token"
+      // is the effect's controller's: nothing on the battlefield to read a
+      // controller from.
+      const ofCards =
+        spec.of === "exiled-with-source" ||
+        spec.of === "exiled-as-cost" ||
+        spec.of === "exiled-this-way" ||
+        (typeof spec.of === "object" && "eachExiled" in spec.of);
       const copy = (of: ObjectId, count: number): void =>
         ctx.createTokenCopy(of, count, {
           gainsHaste: spec.gainsHaste ?? false,
           sacrificeAtEndStep: spec.sacrificeAtEndStep ?? false,
           exileAtEndStep: spec.exileAtEndStep ?? false,
           notLegendary: spec.notLegendary ?? false,
-          under: spec.who === "you" ? ctx.controller : undefined,
+          under: spec.who === "you" || ofCards ? ctx.controller : undefined,
           ...(spec.basePt
             ? { basePt: [ptSetValue(spec.basePt[0], ctx), ptSetValue(spec.basePt[1], ctx)] as const }
             : {}),
@@ -14669,31 +14742,62 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           ...(spec.gains?.keywords !== undefined ? { gainKeywords: spec.gains.keywords } : {}),
           ...(spec.gains?.triggered !== undefined ? { gainTriggered: spec.gains.triggered } : {}),
           ...(spec.exceptions ? { exceptions: spec.exceptions } : {}),
-          ...(spec.asCard === true ? { asCard: true } : {}),
+          ...(spec.asCard === true || ofCards ? { asCard: true } : {}),
           ...(spec.tapped === true ? { tapped: true } : {}),
           ...(spec.attacking !== undefined ? { attacking: resolveEnterAttacking(spec.attacking, ctx) } : {}),
           ...(spec.exileAtEndOfCombat === true ? { exileAtEndOfCombat: true } : {}),
+          ...(spec.sacrificeAtEndOfCombat === true ? { sacrificeAtEndOfCombat: true } : {}),
+          ...(spec.atYourNextEndStep === true ? { atYourNextEndStep: true } : {}),
         });
+      const specCount = amountValue(spec.count, ctx);
       if (spec.of === "entered-together") {
-        for (const { object, count } of ctx.enteredTogether ?? []) copy(object, spec.count * count);
+        for (const { object, count } of ctx.enteredTogether ?? []) copy(object, specCount * count);
         return;
       }
       if (typeof spec.of === "object") {
-        // Which permanents, fixed before the first copy enters (rule 608.2h):
-        // a copy made here doesn't count itself.
-        for (const { object, count } of ctx.permanentsMatching(spec.of.each)) copy(object, spec.count * count);
+        // Which ones, fixed before the first copy enters (rule 608.2h): a
+        // copy made here doesn't count itself.
+        if ("eachExiled" in spec.of) {
+          for (const card of ctx.exiledCardsMatching(spec.of.eachExiled)) copy(card, specCount);
+          return;
+        }
+        for (const { object, count } of ctx.permanentsMatching(spec.of.each)) copy(object, specCount * count);
+        return;
+      }
+      if (ofCards) {
+        const cards =
+          spec.of === "exiled-with-source"
+            ? ctx.cardsExiledWithSource(true)
+            : spec.of === "exiled-as-cost"
+              ? (ctx.exiledAsCost ?? [])
+              : ctx.cardsExiledThisWay();
+        if (spec.chooseOne === true && cards.length > 1) {
+          // "A card exiled with this": which is chosen now, and the copy is
+          // of that one wherever `then` finds it (it doesn't move).
+          const { chooseOne: _chosen, ...rest } = spec;
+          ctx.lookAndChoose({ exiled: cards }, undefined, 1, 1, "stay", "stay", undefined, false, {
+            ...rest,
+            of: 0,
+            asCard: true,
+            who: "you",
+          });
+          return;
+        }
+        for (const card of spec.chooseOne === true ? cards.slice(0, 1) : cards) {
+          copy(card, specCount * ctx.stackMultiplier);
+        }
         return;
       }
       let of: ObjectId | undefined;
       if (spec.of === "source") of = ctx.source;
       else if (spec.of === "trigger-object") of = ctx.triggerObject;
-      else if (spec.of === "equipped") of = ctx.equippedCreature();
+      else if (spec.of === "equipped" || spec.of === "enchanted") of = ctx.equippedCreature();
       else {
         const ref = ctx.targets[spec.of];
         of = ref?.kind === "object" ? ref.object : undefined;
       }
       const times = spec.perTimeKicked === true ? ctx.sourceTimesKicked() : 1;
-      if (of !== undefined) copy(of, spec.count * times * ctx.stackMultiplier);
+      if (of !== undefined) copy(of, specCount * times * ctx.stackMultiplier);
       return;
     }
     case "conditional": {

@@ -2133,6 +2133,10 @@ export interface LastKnownRefs {
    * exile for a madness card. Recorded as the discard happens, which for a
    * chosen discard is once its decision is answered (rule 602.2b). */
   readonly discarded?: readonly { readonly object: ObjectId; readonly zoneChangeCount: number }[];
+  /** "The exiled card": the cards exiled from a graveyard to pay the spell's
+   * or ability's cost (Dollhouse of Horrors), recorded as the exile happens,
+   * which for a chosen one is once its decision is answered (rule 602.2b). */
+  readonly exiledCost?: readonly ObjectId[];
   /** "The revealed card": the cards revealed from the hand to pay the
    * spell's or ability's cost (Induce Despair's "where X is the revealed
    * card's mana value", Titan's Presence's "the revealed card's power"),
@@ -3030,6 +3034,9 @@ export type AwaitingDecision =
        * 117.3c), whoever's turn it is. Absent: the active player, as after a
        * resolution's choice. */
       readonly priorityTo?: PlayerId;
+      /** A cost's exile: the spell or ability on the stack this pays for,
+       * which remembers the cards (`LastKnownRefs.exiledCost`). */
+      readonly costExileFor?: ObjectId;
       /** For `destination: "exile-face-down"` (hideaway — rule 702.75a) and
        * `"exile"` (imprint, face up): the permanent, in the stint it's in,
        * the chosen cards are exiled with (rule 607.2a — `GameObject.exiledWith`). */

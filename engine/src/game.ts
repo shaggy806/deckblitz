@@ -827,6 +827,7 @@ function copyExceptionModifier(exceptions: CopyExceptions, registry?: CardRegist
     ...(exceptions.addTypes !== undefined ? { addTypes: [...exceptions.addTypes] } : {}),
     ...(activated.length > 0 ? { grantsActivated: activated } : {}),
     ...(triggered.length > 0 ? { grantsTriggered: triggered } : {}),
+    ...(exceptions.static !== undefined ? { grantsStatic: [...exceptions.static] } : {}),
     ...(exceptions.notLegendary === true ? { notLegendary: true as const } : {}),
     ...(exceptions.addSupertypes !== undefined ? { addSupertypes: [...exceptions.addSupertypes] } : {}),
     ...(exceptions.legendRuleOff !== undefined ? { legendRuleOff: exceptions.legendRuleOff } : {}),
@@ -8635,6 +8636,7 @@ export class Game {
           const object = this.state.objects[id];
           if (awaiting.exileLink !== undefined) object.exiledWith = awaiting.exileLink;
           if (awaiting.impulseGrant !== undefined) object.impulse = { ...awaiting.impulseGrant };
+          if (awaiting.costExileFor !== undefined) this.recordCostExile(awaiting.costExileFor, [id]);
         }
         return;
       }
@@ -16461,7 +16463,9 @@ export class Game {
       }
     }
     if (graveyardExile !== undefined) {
-      this.withDecisionSource(cardId, () => this.payGraveyardExileCost(player, cardId, graveyardExile, priorityTo));
+      this.withDecisionSource(cardId, () =>
+        this.payGraveyardExileCost(player, cardId, graveyardExile, priorityTo, cardId),
+      );
     }
     // "Put a card an opponent owns from exile into that player's graveyard"
     // (Processor Assault): which, chosen now too (601.2h).
@@ -19199,7 +19203,13 @@ export class Game {
     if (costExile !== undefined) {
       const count = costExile.count === "x" ? chosenX : costExile.count;
       this.withDecisionSource(sourceId, () =>
-        this.payGraveyardExileCost(player, sourceId, { count, ...(costExile.filter !== undefined ? { filter: costExile.filter } : {}) }),
+        this.payGraveyardExileCost(
+          player,
+          sourceId,
+          { count, ...(costExile.filter !== undefined ? { filter: costExile.filter } : {}) },
+          player,
+          abilityId,
+        ),
       );
     }
     // A processor's "Put a card an opponent owns from exile into that
@@ -19401,6 +19411,9 @@ export class Game {
     source: ObjectId,
     cost: { readonly count: number; readonly filter?: CardFilter },
     priorityTo: PlayerId = player,
+    /** The spell or ability on the stack this pays for, which remembers the
+     * cards — its effect's "the exiled card". */
+    forStackObject?: ObjectId,
   ): void {
     if (cost.count <= 0) return;
     const eligible = this.graveyardCostCandidates(player, cost.filter, source);
@@ -19408,6 +19421,7 @@ export class Game {
       this.withGraveyardLeaveBatch(() => {
         for (const id of eligible) this.moveObject(id, "exile");
       });
+      if (forStackObject !== undefined) this.recordCostExile(forStackObject, eligible);
       return;
     }
     this.state.awaiting = {
@@ -19422,6 +19436,18 @@ export class Game {
       destination: "exile",
       leftover: "stay",
       priorityTo,
+      ...(forStackObject !== undefined ? { costExileFor: forStackObject } : {}),
+    };
+  }
+
+  /** Remember `cards`, just exiled for `stackObject`'s cost, on it — what
+   * `create-token-copy`'s `"exiled-as-cost"` reads as it resolves. */
+  private recordCostExile(stackObject: ObjectId, cards: readonly ObjectId[]): void {
+    const object = this.state.objects[stackObject];
+    if (object === undefined || object.zone !== "stack" || cards.length === 0) return;
+    object.lastKnownRefs = {
+      ...object.lastKnownRefs,
+      exiledCost: [...(object.lastKnownRefs?.exiledCost ?? []), ...cards],
     };
   }
 
@@ -26715,6 +26741,7 @@ export class Game {
       ...(opts.announcedModes !== undefined ? { announcedModes: opts.announcedModes } : {}),
       ...(refs.sacrificed !== undefined ? { sacrificed: refs.sacrificed.object } : {}),
       ...(refs.discarded !== undefined ? { discarded: refs.discarded.map((d) => d.object) } : {}),
+      ...(refs.exiledCost !== undefined ? { exiledAsCost: refs.exiledCost } : {}),
       ...(refs.revealed !== undefined ? { revealed: refs.revealed.map((r) => r.object) } : {}),
       // The granter is acted on only while it's the same permanent (400.7).
       ...(refs.granter !== undefined
@@ -29341,6 +29368,13 @@ export class Game {
           return linked(card?.exiledWith) || (orUntil === true && linked(card?.exiledUntil));
         });
       },
+      exiledCardsMatching: (filter) =>
+        this.state.zones.shared.exile.filter(
+          (id) =>
+            this.state.objects[id]?.exiledFaceDown === undefined &&
+            this.state.objects[id]?.faceDown === undefined &&
+            matchesFilter(this.state, this.registry, id, filter, { you: controller }),
+        ),
       setClassLevel: (level) => {
         // Still the same permanent (rule 400.7): a Class that left and came
         // back is a new object, at no level.
@@ -30377,7 +30411,7 @@ export class Game {
     count: number | undefined,
     min: number,
     max: number,
-    destination: "battlefield" | "hand" | "library-top" | "library-bottom" | "graveyard" | "exile-face-down" | "exile" | "manifest" | "reveal",
+    destination: "battlefield" | "hand" | "library-top" | "library-bottom" | "graveyard" | "exile-face-down" | "exile" | "manifest" | "reveal" | "stay",
     leftover: "bottom-random" | "bottom-any-order" | "top-any-order" | "stay" | "hand" | "graveyard" | "exile" | "exile-playable",
     filter: ZoneChoiceFilter | undefined,
     enterTapped = false,
@@ -30440,7 +30474,9 @@ export class Game {
           ? `Choose ${cards} in exile to put into ${most === 1 ? "its owner's graveyard" : "their owners' graveyards"}`
           : destination === "battlefield" && !anOpponentPicks
             ? `Choose ${cards} in exile to put onto the battlefield under your control`
-            : undefined;
+            : destination === "stay"
+              ? `Choose ${cards} in exile`
+              : undefined;
       const decision: Extract<AwaitingDecision, { kind: "choose-from-zone" }> = {
         kind: "choose-from-zone",
         player: chooser,
@@ -32621,6 +32657,8 @@ export class Game {
       tapped?: boolean;
       attacking?: ResolvedEnterAttacking;
       exileAtEndOfCombat?: boolean;
+      sacrificeAtEndOfCombat?: boolean;
+      atYourNextEndStep?: boolean;
       /** The effect making them, for a delayed trigger it sets up. */
       source?: ObjectId;
       effectController?: PlayerId;
@@ -32688,6 +32726,10 @@ export class Game {
     // Angel instead, none of the copy's values kept; "they gain haste" and
     // the rest of what the effect does to them still apply (the ruling).
     let copiedTypes: readonly CardType[] = this.registry.get(copyName).types;
+    // "If an effect would create a token that is a copy of an instant or
+    // sorcery card, no token is created" (rule 111.5 — Mimic Vat's ruling
+    // about a manifested instant).
+    if (copiedTypes.includes("instant") || copiedTypes.includes("sorcery")) return;
     for (const m of modifiers) {
       if (m.copiable !== true) continue;
       if (m.setTypes !== undefined) copiedTypes = m.setTypes;
@@ -32754,6 +32796,7 @@ export class Game {
         opts.effectController ?? controller,
         made,
         opts.sacrificeAtEndStep === true ? "sacrifice" : "exile",
+        opts.atYourNextEndStep === true ? "your-next-end-step" : "next-end-step",
       );
     }
     // "…that's tapped and attacking" (rule 508.4).
@@ -32761,7 +32804,9 @@ export class Game {
     // "Exile the tokens at end of combat": one delayed triggered ability over
     // every copy made (rule 603.7), which leaves alone any that has left the
     // battlefield by then (rule 400.7).
-    if (opts.exileAtEndOfCombat === true && made.length > 0 && opts.source !== undefined) {
+    const atEndOfCombat =
+      opts.exileAtEndOfCombat === true ? "Exile" : opts.sacrificeAtEndOfCombat === true ? "Sacrifice" : undefined;
+    if (atEndOfCombat !== undefined && made.length > 0 && opts.source !== undefined) {
       this.createDelayedTrigger(
         opts.source,
         opts.effectController ?? controller,
@@ -32769,10 +32814,10 @@ export class Game {
         {
           kind: "for-each-target",
           from: 0,
-          effect: { kind: "exile", target: 0 },
+          effect: atEndOfCombat === "Exile" ? { kind: "exile", target: 0 } : { kind: "sacrifice-target", target: 0 },
           simultaneous: true,
         },
-        "Exile the tokens at end of combat.",
+        `${atEndOfCombat} the tokens at end of combat.`,
         made.map((id) => ({ kind: "object", object: id })),
       );
     }
@@ -38611,6 +38656,7 @@ export class Game {
     controller: PlayerId,
     made: readonly ObjectId[],
     how: "sacrifice" | "exile",
+    at: "next-end-step" | "your-next-end-step" = "next-end-step",
   ): void {
     if (made.length === 0) return;
     for (const id of made) {
@@ -38622,16 +38668,16 @@ export class Game {
     this.createDelayedTrigger(
       source,
       controller,
-      "next-end-step",
+      at,
       {
         kind: "for-each-target",
         from: 0,
         effect: how === "sacrifice" ? { kind: "sacrifice-target", target: 0 } : { kind: "exile", target: 0 },
         simultaneous: true,
       },
-      how === "sacrifice"
-        ? "Sacrifice the tokens at the beginning of the next end step."
-        : "Exile the tokens at the beginning of the next end step.",
+      `${how === "sacrifice" ? "Sacrifice" : "Exile"} the tokens at the beginning of ${
+        at === "next-end-step" ? "the" : "your"
+      } next end step.`,
       made.map((id) => ({ kind: "object", object: id })),
     );
   }

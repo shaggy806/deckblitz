@@ -927,7 +927,12 @@
   "effect:defending-player-chooses-from-your-graveyard",
   "effect:opponent-chooses-from-graveyard",
   "effect:opponent-returns-from-graveyard",
-  "effect:player-exiles-chosen-from-own-graveyard"
+  "effect:player-exiles-chosen-from-own-graveyard",
+  "effect:linked-exile-token-copy",
+  "effect:token-copy-of-enchanted",
+  "effect:token-copy-of-exiled-card",
+  "effect:token-copy-count-amount",
+  "effect:copy-exception-static-ability"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {
