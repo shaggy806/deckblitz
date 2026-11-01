@@ -5068,6 +5068,15 @@ clause (section 9):
   creature with the same value. On a static, the source's own value is read
   with that static switched off, so a static whose own P/T bonus changes the
   answer isn't modeled.
+- `{ kind: "most-common-color", color?, sharedBy?, among?, untied? }` — the most
+  common color among permanents (rule 105.2), each counted once per color, a
+  token stack once per token, read at layer 5 so a P/T static can ask: `color`
+  (`"W"` … or `"chosen"`) — Ruham Djinn's "as long as white is the most common
+  color among all permanents or is tied"; `sharedBy` — "shares a color with the
+  most common color or a color tied", `"attached"` (Heroic Defiance, under a
+  `not` for its "unless") or `{ target: n }` at resolution (Tsabo's Assassin,
+  Barrin's Unmaking); `among: { nontoken, chosenPlayer }` and `untied` — Call to
+  Arms, with its state trigger on the `not`.
 - `{ kind: "controls-greatest", of, filter }` — you control **the** permanent
   matching `filter` with the greatest power / toughness / mana value, or one
   tied for it, among every matching permanent whoever controls it (Thickest

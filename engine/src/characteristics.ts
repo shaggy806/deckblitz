@@ -558,6 +558,51 @@ export function staticConditionMet(
   }
 }
 
+/**
+ * A `most-common-color` condition (see its doc in `define.ts`). Colors are
+ * read at layer 5 (`effectiveColors`), so a static in layer 7 asks without
+ * folding anyone's power and toughness; the source counts itself.
+ */
+function mostCommonColorHolds(
+  state: GameState,
+  registry: CardRegistry,
+  source: GameObject,
+  condition: Extract<StaticCondition, { kind: "most-common-color" }>,
+  opts: ConditionOptions,
+): boolean {
+  const among = condition.among;
+  const counts = new Map<Color, number>();
+  for (const id of state.zones.shared.battlefield) {
+    const object = state.objects[id];
+    if (object === undefined || opts.notYetHere?.has(id) === true) continue;
+    if (among?.nontoken === true && object.isToken === true) continue;
+    if (among?.chosenPlayer === true && object.controller !== source.chosenPlayer) continue;
+    const weight = object.stackCount ?? 1;
+    for (const color of effectiveColors(state, registry, object)) {
+      counts.set(color, (counts.get(color) ?? 0) + weight);
+    }
+  }
+  const most = Math.max(0, ...counts.values());
+  if (most === 0) return false;
+  const tied = [...counts.values()].filter((n) => n === most).length > 1;
+  if (condition.untied === true && tied) return false;
+  const isMostCommon = (color: Color): boolean => counts.get(color) === most;
+  if (condition.sharedBy !== undefined) {
+    const ref = condition.sharedBy;
+    let id: ObjectId | undefined;
+    if (ref === "attached") {
+      id = source.attachedTo ?? undefined;
+    } else {
+      const target = opts.targets?.[ref.target];
+      if (target?.kind === "object") id = target.object;
+    }
+    const object = id === undefined ? undefined : state.objects[id];
+    return object !== undefined && [...effectiveColors(state, registry, object)].some(isMostCommon);
+  }
+  const color = condition.color === "chosen" ? source.chosenOnEnter : condition.color;
+  return typeof color === "string" && (COLORS as readonly string[]).includes(color) && isMostCommon(color as Color);
+}
+
 function evalStaticCondition(
   state: GameState,
   registry: CardRegistry,
@@ -609,6 +654,8 @@ function evalStaticCondition(
     return false;
   };
   switch (condition.kind) {
+    case "most-common-color":
+      return mostCommonColorHolds(state, registry, source, condition, opts);
     case "your-turn":
       return state.turnOrder[state.turn.activePlayerIndex] === you;
     case "enduring-story":

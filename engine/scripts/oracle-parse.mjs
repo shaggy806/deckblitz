@@ -1520,6 +1520,11 @@ export function parseTrigger(clause) {
   if ((m = /^When ~ has no (\w+) counters on it$/.exec(c))) {
     return [{ on: "state", state: { kind: "self-counters", counter: m[1], compare: { op: "eq", n: 0 } } }];
   }
+  // Call to Arms (rule 603.8): the same test as its static, the other way up.
+  if (c === "When the chosen color isn't the most common color among nontoken permanents the chosen player controls or is tied for most common") {
+    const leads = { kind: "most-common-color", color: "chosen", among: { nontoken: true, chosenPlayer: true }, untied: true };
+    return [{ on: "state", state: { kind: "not", of: leads } }];
+  }
   if ((m = /^When you control (no|an?) (.+)$/.exec(c))) {
     const filter = parseTypePhrase(m[2]);
     if (filter === null) return null;
@@ -1933,6 +1938,17 @@ function distributedCountersOf(s, ctx) {
 
 export function parseSentence(sentence, ctx) {
   const s = sentence.replace(/\s+/g, " ").trim();
+  // "Destroy target creature if it shares a color with the most common color
+  // among all permanents or a color tied for most common" (Tsabo's Assassin,
+  // Barrin's Unmaking): rule 105.2, read as the slot's target stands.
+  const sharesMostCommon =
+    /^(.+target .+?) if (?:it|that permanent|that creature) shares a color with the most common color among all permanents or a color tied for most common\.$/.exec(s);
+  if (sharesMostCommon !== null) {
+    const then = parseSentence(`${sharesMostCommon[1]}.`, ctx);
+    if (then !== null && then !== undefined) {
+      return { kind: "conditional", condition: { kind: "most-common-color", sharedBy: { target: 0 } }, then };
+    }
+  }
   // "…, where X is the number of …" / "for each …" define an amount by a rule
   // of their own; no template reads one, and matching the rest would take the
   // X for a cast-time X.
@@ -4978,6 +4994,17 @@ export function parseEffect(text, outer) {
       continue;
     }
     // "It can't be regenerated." (rule 701.19c) after the destroy it's about.
+    // "A creature destroyed this way can't be regenerated" after a destroy
+    // behind a condition (Tsabo's Assassin).
+    if (
+      /^a creature destroyed this way can't be regenerated\.$/i.test(sentence) &&
+      parsed.at(-1)?.kind === "conditional" &&
+      parsed.at(-1).then?.kind === "destroy"
+    ) {
+      const asked = parsed.at(-1);
+      parsed[parsed.length - 1] = { ...asked, then: { ...asked.then, cantBeRegenerated: true } };
+      continue;
+    }
     if (/^it can't be regenerated\.$/i.test(sentence) && parsed.at(-1)?.kind === "destroy") {
       parsed[parsed.length - 1] = { ...parsed.at(-1), cantBeRegenerated: true };
       continue;
@@ -7456,6 +7483,11 @@ export function parseFace(face, ctx = {}) {
       out.chooseOnEnter = ["W", "U", "B", "R", "G"];
       continue;
     }
+    if (line === "As ~ enters, choose a color and an opponent.") {
+      out.chooseOnEnter = ["W", "U", "B", "R", "G"];
+      out.choosePlayerOnEnter = "opponent";
+      continue;
+    }
     if (line === "As ~ enters, choose a card type.") {
       // Rule 205.2a's, as `CARD_TYPE_CHOICES` lists them.
       out.chooseOnEnter = ["artifact", "battle", "creature", "enchantment", "instant", "kindred", "land", "planeswalker", "sorcery"];
@@ -9304,6 +9336,31 @@ function parseStatic(line, text) {
     if (!line.endsWith(suffix)) continue;
     const inner = parseStatic(`${line.slice(0, -suffix.length)}.`, text);
     if (inner !== null && inner.condition === undefined) return { ...inner, condition };
+  }
+  // The most common color among permanents (rule 105.2): Ruham Djinn's "as
+  // long as white is the most common color among all permanents or is tied
+  // for most common", Heroic Defiance's "unless it shares a color with" one,
+  // Call to Arms' "the chosen color … among nontoken permanents the chosen
+  // player controls but isn't tied".
+  const mostCommon =
+    (m = /^(.+) as long as (white|blue|black|red|green) is the most common color among all permanents or is tied for most common\.$/.exec(line))
+      ? { kind: "most-common-color", color: COLOR_WORD[m[2]] }
+      : (m = /^(.+) as long as the chosen color is the most common color among nontoken permanents the chosen player controls but isn't tied for most common\.$/.exec(line))
+        ? { kind: "most-common-color", color: "chosen", among: { nontoken: true, chosenPlayer: true }, untied: true }
+        : (m = /^(Enchanted creature .+) unless it shares a color with the most common color among all permanents or a color tied for most common\.$/.exec(line))
+          ? { kind: "not", of: { kind: "most-common-color", sharedBy: "attached" } }
+          : null;
+  if (mostCommon !== null) {
+    const inner = parseStatic(`${m[1]}.`, text);
+    if (inner !== null && inner.condition === undefined) return { ...inner, condition: mostCommon };
+  }
+  // "White creatures get +1/+1" (Divine Sacrament's first line, Call to Arms').
+  if ((m = /^(White|Blue|Black|Red|Green) creatures get ([+-]\d+)\/([+-]\d+)\.$/.exec(line))) {
+    return {
+      affects: { scope: "filter", filter: { type: "creature", colors: [COLOR_WORD[m[1].toLowerCase()]] } },
+      grantPt: [Number(m[2]), Number(m[3])],
+      text,
+    };
   }
   // "… as long as defending player controls an artifact." — the player the
   // creature attacks (rule 802.2a), Bouncing Beebles; "three or more

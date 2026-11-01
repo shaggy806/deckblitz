@@ -788,6 +788,32 @@ export type StaticCondition =
       readonly compare: NumCompare;
     }
   /**
+   * A most-common-color test (rule 105.2) over permanents: each is counted
+   * once for each of its colors (a multicolored one for all of them, a
+   * colorless or face-down one for none, a token stack once per token), the
+   * source itself among them, read at layer 5 so a P/T static can ask without
+   * looping. A color no permanent has isn't the most common of anything: with
+   * no colored permanent at all, nothing passes.
+   *
+   * `color` asks about one color, or `"chosen"` the source's own choice as it
+   * entered (`chooseOnEnter`): Ruham Djinn's "as long as white is the most
+   * common color among all permanents or is tied for most common". `sharedBy`
+   * asks instead whether an object has a most common color, "shares a color
+   * with the most common color among all permanents or a color tied for most
+   * common": `"attached"` the permanent this Aura enchants (Heroic Defiance),
+   * `{ target: n }` a slot's target at resolution (Barrin's Unmaking). `among`
+   * narrows the count: `nontoken`, and `chosenPlayer` for the permanents the
+   * source's chosen player controls (`choosePlayerOnEnter` — Call to Arms).
+   * `untied` fails on a tie ("… but isn't tied for most common").
+   */
+  | {
+      readonly kind: "most-common-color";
+      readonly color?: Color | "chosen";
+      readonly sharedBy?: "attached" | { readonly target: number };
+      readonly among?: { readonly nontoken?: true; readonly chosenPlayer?: true };
+      readonly untied?: true;
+    }
+  /**
    * The source's own power / toughness / mana value is the greatest among
    * the permanents matching `filter` — "if ~'s power is **greater than each
    * other creature's power**" (`strict`, where a tie fails) or "~ has the

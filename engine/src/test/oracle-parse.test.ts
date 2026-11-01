@@ -7610,3 +7610,54 @@ describe("a tapped-for-mana trigger that uses the stack", () => {
     expect(orchard.triggered[0].effect).toEqual({ kind: "create-token", token: "Spirit Token (Colorless)", count: 1, who: "target-controller" });
   });
 });
+describe("the most common color among permanents", () => {
+  const face = (type_line: string, oracle_text: string, name = "Test Common") =>
+    parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });
+
+  it("reads a Djinn's color, an Aura's 'unless it shares a color', and a chosen color", () => {
+    const djinn = face("Creature — Djinn", "This creature gets -2/-2 as long as white is the most common color among all permanents or is tied for most common.");
+    expect(djinn.complete).toBe(true);
+    expect(djinn.static[0]).toMatchObject({
+      affects: { scope: "self" },
+      grantPt: [-2, -2],
+      condition: { kind: "most-common-color", color: "W" },
+    });
+    const aura = face("Enchantment — Aura", "Enchant creature\nEnchanted creature gets +3/+3 unless it shares a color with the most common color among all permanents or a color tied for most common.");
+    expect(aura.complete).toBe(true);
+    expect(aura.static[0]).toMatchObject({
+      affects: { scope: "attached" },
+      grantPt: [3, 3],
+      condition: { kind: "not", of: { kind: "most-common-color", sharedBy: "attached" } },
+    });
+    const call = face(
+      "Enchantment",
+      "As this enchantment enters, choose a color and an opponent.\nWhite creatures get +1/+1 as long as the chosen color is the most common color among nontoken permanents the chosen player controls but isn't tied for most common.\nWhen the chosen color isn't the most common color among nontoken permanents the chosen player controls or is tied for most common, sacrifice this enchantment.",
+    );
+    const leads = { kind: "most-common-color", color: "chosen", among: { nontoken: true, chosenPlayer: true }, untied: true };
+    expect(call.complete).toBe(true);
+    expect(call.chooseOnEnter).toEqual(["W", "U", "B", "R", "G"]);
+    expect(call.choosePlayerOnEnter).toBe("opponent");
+    expect(call.static[0].condition).toEqual(leads);
+    expect(call.triggered[0].trigger).toEqual({ on: "state", state: { kind: "not", of: leads } });
+  });
+
+  it("reads the same test on a target as an effect resolves", () => {
+    const assassin = face(
+      "Creature — Assassin",
+      "{T}: Destroy target creature if it shares a color with the most common color among all permanents or a color tied for most common. A creature destroyed this way can't be regenerated.",
+    );
+    expect(assassin.complete).toBe(true);
+    expect(assassin.activated[0].effect).toEqual({
+      kind: "conditional",
+      condition: { kind: "most-common-color", sharedBy: { target: 0 } },
+      then: { kind: "destroy", target: 0, cantBeRegenerated: true },
+    });
+    const unmaking = face("Instant", "Return target permanent to its owner's hand if that permanent shares a color with the most common color among all permanents or a color tied for most common.");
+    expect(unmaking.complete).toBe(true);
+    expect(unmaking.effect).toEqual({
+      kind: "conditional",
+      condition: { kind: "most-common-color", sharedBy: { target: 0 } },
+      then: { kind: "return-to-hand", target: 0 },
+    });
+  });
+});

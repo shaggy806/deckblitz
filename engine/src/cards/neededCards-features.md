@@ -2719,6 +2719,17 @@ attack or block unless you pay" (`cost:attack-block-cost-self`,
 `static:attack-cost-for-creature`) and the block tax Archangel of Tithes also
 needs (`static:block-tax`).
 
+### The most common color among permanents — built 2026-11-01
+
+The need-keys family `condition:most-common-color-among-chosen-player-permanents`
+(with `condition:most-common-color-among-all-permanents`): one `StaticCondition`,
+`most-common-color`, in `characteristics.ts`. Each permanent counts once per color
+at layer 5 (`effectiveColors`, so a P/T static asks without folding), a token stack
+once per token; a color no permanent has isn't the most common. `color` (a color or
+the source's chosen one), `sharedBy` (`"attached"`, or `{ target }` at resolution),
+`among` (`nontoken`, `chosenPlayer`) and `untied`. Proving: Ruham Djinn, Heroic
+Defiance, Tsabo's Assassin, Barrin's Unmaking, Call to Arms.
+
 ### Sacrificing or discarding instead of entering — built 2026-11-01
 
 The top group of the need-keys family `replacement:new-event-replacements`

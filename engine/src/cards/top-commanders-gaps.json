@@ -4,6 +4,8 @@
  "built": [
   "mechanic:companion",
   "mechanic:deck-any-number-copies",
+  "condition:most-common-color-among-all-permanents",
+  "condition:most-common-color-among-chosen-player-permanents",
   "cost:unless-pay-colored-per-amount",
   "cost:unless-pay-mana-and-life",
   "effect:unless-pay-energy",
