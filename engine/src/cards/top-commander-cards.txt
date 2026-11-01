@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4125 already implemented / 875 missing (marks refreshed 2026-11-01)
+4132 already implemented / 868 missing (marks refreshed 2026-11-01)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -242,7 +242,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   243  Rishkar's Expertise                      {4}{G}{G}        Sorcery
 [x]   244  Takenuma, Abandoned Mire                 {0}              Legendary Land
 [x]   245  Gray Merchant of Asphodel                {3}{B}{B}        Creature — Zombie
-[ ]   246  Mox Diamond                              {0}              Artifact
+[x]   246  Mox Diamond                              {0}              Artifact
 [x]   247  Unclaimed Territory                      {0}              Land
 [x]   248  Harrow                                   {2}{G}           Instant
 [x]   249  Boros Signet                             {2}              Artifact
@@ -1950,7 +1950,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1957  Seething Landscape                       {0}              Land
 [x]  1958  Angel's Grace                            {W}              Instant
 [x]  1959  Hulking Raptor                           {2}{G}{G}        Creature — Dinosaur
-[ ]  1960  Deafening Silence                        {W}              Enchantment
+[x]  1960  Deafening Silence                        {W}              Enchantment
 [x]  1961  Spectral Sailor                          {U}              Creature — Spirit Pirate
 [ ]  1962  Wound Reflection                         {5}{B}           Enchantment
 [x]  1963  Chart a Course                           {1}{U}           Sorcery
@@ -2214,7 +2214,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2221  Circuit Mender                           {3}              Artifact Creature — Insect
 [ ]  2222  Brainstealer Dragon                      {5}{B}{B}        Creature — Dragon Horror
 [ ]  2223  Ral, Crackling Wit                       {2}{U}{R}        Legendary Planeswalker — Ral
-[ ]  2224  Imposter Mech                            {1}{U}           Artifact — Vehicle
+[x]  2224  Imposter Mech                            {1}{U}           Artifact — Vehicle
 [x]  2225  Poison Dart Frog                         {1}{G}           Creature — Frog
 [x]  2226  Sword of Wealth and Power                {3}              Artifact — Equipment
 [x]  2227  Valgavoth, Harrower of Souls             {2}{B}{R}        Legendary Creature — Elder Demon
@@ -2494,7 +2494,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  2501  Animist's Awakening                      {X}{G}           Sorcery
 [x]  2502  Empty the Warrens                        {3}{R}           Sorcery
 [x]  2503  Otherworldly Gaze                        {U}              Instant
-[ ]  2504  Echoing Deeps                            {0}              Land — Cave
+[x]  2504  Echoing Deeps                            {0}              Land — Cave
 [ ]  2505  Y'shtola Rhul                            {4}{U}{U}        Legendary Creature — Cat Druid
 [x]  2506  Forced Fruition                          {4}{U}{U}        Enchantment
 [x]  2507  Regisaur Alpha                           {3}{R}{G}        Creature — Dinosaur
@@ -2781,7 +2781,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2788  Resurgent Belief                         {0}              Sorcery
 [ ]  2789  Sundial of the Infinite                  {2}              Artifact
 [x]  2790  Venerated Rotpriest                      {G}              Creature — Phyrexian Druid
-[ ]  2791  Ethersworn Canonist                      {1}{W}           Artifact Creature — Human Cleric
+[x]  2791  Ethersworn Canonist                      {1}{W}           Artifact Creature — Human Cleric
 [x]  2792  Repulsive Mutation                       {X}{G}{U}        Instant
 [x]  2793  Case of the Ransacked Lab                {2}{U}           Enchantment — Case
 [x]  2794  Reyav, Master Smith                      {R}{W}           Legendary Creature — Dwarf Artificer
@@ -3439,7 +3439,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3446  Restless Cottage                         {0}              Land
 [ ]  3447  Ardyn, the Usurper                       {5}{B}{B}{B}     Legendary Creature — Elder Human Noble
 [ ]  3448  Neyali, Suns' Vanguard                   {2}{R}{W}        Legendary Creature — Human Rebel
-[ ]  3449  Rule of Law                              {2}{W}           Enchantment
+[x]  3449  Rule of Law                              {2}{W}           Enchantment
 [ ]  3450  Thryx, the Sudden Storm                  {3}{U}{U}        Legendary Creature — Elemental Giant
 [x]  3451  Prowler's Helm                           {2}              Artifact — Equipment
 [x]  3452  Gods Willing                             {W}              Instant
@@ -4645,7 +4645,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4652  Goblin War Strike                        {R}              Sorcery
 [x]  4653  Brallin, Skyshark Rider                  {3}{R}           Legendary Creature — Human Shaman
 [x]  4654  Kellan, Inquisitive Prodigy // Tail the Suspect {2}{G}{U} // {G}{U} Legendary Creature — Human Faerie Detective // Sorcery — Adventure
-[ ]  4655  Rat Colony                               {1}{B}           Creature — Rat
+[x]  4655  Rat Colony                               {1}{B}           Creature — Rat
 [ ]  4656  Rose, Cutthroat Raider                   {2}{R}{R}        Legendary Artifact Creature — Robot
 [x]  4657  Sami, Wildcat Captain                    {4}{R}{W}        Legendary Creature — Human Artificer Rogue
 [x]  4658  Tyrant's Familiar                        {5}{R}{R}        Creature — Dragon

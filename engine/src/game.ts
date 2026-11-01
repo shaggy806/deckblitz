@@ -26352,6 +26352,21 @@ export class Game {
     // "Target creature of their choice" (rule 700.2e's way): another player
     // answers, the targets still its controller's.
     const chooser = this.triggerTargetChooser(ability as TriggeredAbility, trigger) ?? trigger.controller;
+    // Only the chooser's slots are asked, so an "other than slot n" relation
+    // is renumbered to them (Phantom Blade with nothing in its first slot),
+    // and one to a slot already filled just takes that target out.
+    const asked = new Map<number, number>();
+    slots.forEach((s, at) => {
+      if ("spec" in s) asked.set(at, asked.size);
+    });
+    const beyondFilled = (s: { readonly spec: TargetSpec; readonly options: readonly TargetRef[] }): TargetRef[] => {
+      const than = otherThan(s.spec);
+      const filled = (than === undefined ? [] : otherThanSlots(than)).flatMap((n) => {
+        const slot = slots[n];
+        return slot !== undefined && "auto" in slot && slot.auto !== undefined ? [slot.auto] : [];
+      });
+      return s.options.filter((o) => !filled.some((t) => sameTargetRef(t, o)));
+    };
     this.state.awaiting = {
       kind: "choose-targets",
       player: chooser,
@@ -26365,9 +26380,9 @@ export class Game {
       specs: chooserSlots.map((s, i) =>
         divided !== undefined && i === answerSlot && typeof s.spec === "object" && s.spec.kind === "any-number"
           ? { ...s.spec, max: Math.min(typeof s.spec.max === "number" ? s.spec.max : Infinity, divided.total) }
-          : s.spec,
+          : renumberOtherSlots(s.spec, asked),
       ),
-      options: chooserSlots.map((s) => [...s.options]),
+      options: chooserSlots.map(beyondFilled),
       ...(divided !== undefined && answerSlot >= 0
         ? {
             divide: {
