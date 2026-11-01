@@ -784,7 +784,7 @@ missing. Re-run `--greedy` for Phase 2's order.
   keys, 4 freed, 5 proving cards); a graveyard's order (3 keys, 10 freed, 7 proving cards); statics
   acting on a player (3 keys, 3 freed, 6 proving cards); a trigger's recipient as a reference (2
   keys, 2 freed, 7 proving cards); who may look at what (1 key, 5 freed, 10 proving cards). The run
-  stopped there at its coordinator's context limit: 36 families, 15 agents.
+  stopped there at its coordinator's context limit: 34 families, 15 agents.
 
 ## Rough size
 

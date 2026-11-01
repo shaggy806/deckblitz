@@ -373,7 +373,7 @@ in its own worktree (`isolation: "worktree"`), integrated by cherry-pick.
   declare a `const` twice: `node --check` the parser and run the engine's `tsc -p tsconfig.tests.json`
   after every pick. A later engine change can make a conflict real in code (`decisions/attackers.ts`):
   read any hunk outside the routine files. Let a verify finish before picking onto `main`: it reads
-  the working tree. Keep a coordinator's per-agent review small; 15 agents and 36 families took about
+  the working tree. Keep a coordinator's per-agent review small; 15 agents and 34 families took about
   460K of context.
 - **Clean up** each worktree: unlink every junction by absolute path
   (`[IO.Directory]::Delete("<path>", $false)`), sweep for any other
