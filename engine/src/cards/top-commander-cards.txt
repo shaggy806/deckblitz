@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4098 already implemented / 902 missing (marks refreshed 2026-11-01)
+4106 already implemented / 894 missing (marks refreshed 2026-11-01)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -486,7 +486,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   487  Ramunap Excavator                        {2}{G}           Creature — Snake Cleric
 [ ]   488  Field of the Dead                        {0}              Land
 [x]   489  Ancient Den                              {0}              Artifact Land
-[ ]   490  Maskwood Nexus                           {4}              Artifact
+[x]   490  Maskwood Nexus                           {4}              Artifact
 [x]   491  Adeline, Resplendent Cathar              {1}{W}{W}        Legendary Creature — Human Knight
 [x]   492  Vito, Thorn of the Dusk Rose             {2}{B}           Legendary Creature — Vampire Cleric
 [ ]   493  Birgi, God of Storytelling // Harnfel, Horn of Bounty {3}              Legendary Creature — God // Legendary Artifact
@@ -584,7 +584,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   585  Culling Ritual                           {2}{B}{G}        Sorcery
 [x]   586  Darksteel Mutation                       {1}{W}           Enchantment — Aura
 [x]   587  Return the Favor                         {R}{R}           Instant
-[ ]   588  Six                                      {2}{G}           Legendary Creature — Treefolk
+[x]   588  Six                                      {2}{G}           Legendary Creature — Treefolk
 [ ]   589  Teferi's Ageless Insight                 {2}{U}{U}        Legendary Enchantment
 [x]   590  Ghostly Flicker                          {2}{U}           Instant
 [x]   591  Talisman of Impulse                      {2}              Artifact
@@ -942,7 +942,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   946  Stormcatch Mentor                        {U}{R}           Creature — Otter Wizard
 [x]   947  The Wind Crystal                         {2}{W}{W}        Legendary Artifact
 [x]   948  Monument to Endurance                    {3}              Artifact
-[ ]   949  Coat of Arms                             {5}              Artifact
+[x]   949  Coat of Arms                             {5}              Artifact
 [x]   950  Omnath, Locus of Rage                    {3}{R}{R}{G}{G}  Legendary Creature — Elemental
 [x]   951  Tezzeret's Gambit                        {3}{U/P}         Sorcery
 [x]   952  Wastewood Verge                          {0}              Land
@@ -1599,7 +1599,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1606  Nurturing Peatland                       {0}              Land
 [x]  1607  Fomori Vault                             {0}              Land
 [x]  1608  End-Raze Forerunners                     {5}{G}{G}{G}     Creature — Boar
-[ ]  1609  Thran Power Suit                         {2}              Artifact — Equipment
+[x]  1609  Thran Power Suit                         {2}              Artifact — Equipment
 [x]  1610  Electrostatic Field                      {1}{R}           Creature — Wall
 [x]  1611  Avatar's Wrath                           {2}{W}{W}        Sorcery
 [x]  1612  Cryptic Command                          {1}{U}{U}{U}     Instant
@@ -3983,7 +3983,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3990  Swift Reconfiguration                    {W}              Enchantment — Aura
 [ ]  3991  Chaos Dragon                             {1}{R}{R}        Creature — Dragon
 [x]  3992  Virtue of Courage // Embereth Blaze      {3}{R}{R} // {1}{R} Enchantment // Instant — Adventure
-[ ]  3993  Arcane Adaptation                        {2}{U}           Enchantment
+[x]  3993  Arcane Adaptation                        {2}{U}           Enchantment
 [x]  3994  Scavenged Brawler                        {6}              Artifact Creature — Construct
 [x]  3995  Dragon Sniper                            {G}              Creature — Human Archer
 [x]  3996  Feasting Hobbit                          {1}{G}           Creature — Halfling Citizen
@@ -4158,7 +4158,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4165  Feral Ghoul                              {2}{B}           Creature — Zombie Mutant
 [x]  4166  Thrilling Discovery                      {R}{W}           Sorcery
 [x]  4167  Dauntless Dismantler                     {1}{W}           Creature — Human Artificer
-[ ]  4168  Kopala, Warden of Waves                  {1}{U}{U}        Legendary Creature — Merfolk Wizard
+[x]  4168  Kopala, Warden of Waves                  {1}{U}{U}        Legendary Creature — Merfolk Wizard
 [x]  4169  Séance Board                             {2}              Artifact
 [ ]  4170  Sorin Markov                             {3}{B}{B}{B}     Legendary Planeswalker — Sorin
 [x]  4171  Joraga Treespeaker                       {G}              Creature — Elf Druid
@@ -4649,7 +4649,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  4656  Rose, Cutthroat Raider                   {2}{R}{R}        Legendary Artifact Creature — Robot
 [x]  4657  Sami, Wildcat Captain                    {4}{R}{W}        Legendary Creature — Human Artificer Rogue
 [x]  4658  Tyrant's Familiar                        {5}{R}{R}        Creature — Dragon
-[ ]  4659  Sliver Legion                            {W}{U}{B}{R}{G}  Legendary Creature — Sliver
+[x]  4659  Sliver Legion                            {W}{U}{B}{R}{G}  Legendary Creature — Sliver
 [ ]  4660  Gilgamesh, Master-at-Arms                {4}{R}{R}        Legendary Creature — Human Samurai
 [ ]  4661  Absolute Virtue                          {6}{W}{U}        Legendary Creature — Avatar Warrior
 [x]  4662  Shanid, Sleepers' Scourge                {1}{R}{W}{B}     Legendary Creature — Human Knight
@@ -4756,7 +4756,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4763  Kruphix, God of Horizons                 {3}{G}{U}        Legendary Enchantment Creature — God
 [x]  4764  Vexing Radgull                           {1}{U}           Creature — Bird Mutant
 [x]  4765  Mandate of Abaddon                       {3}{B}           Sorcery
-[ ]  4766  Dream Devourer                           {1}{B}           Creature — Demon Cleric
+[x]  4766  Dream Devourer                           {1}{B}           Creature — Demon Cleric
 [x]  4767  Traveler's Amulet                        {1}              Artifact
 [x]  4768  Smoke Bomb                               {3}              Artifact
 [x]  4769  Deadly Brew                              {B}{G}           Sorcery
