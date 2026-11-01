@@ -610,6 +610,7 @@ import _poolSeizanPerverterOfTruth from "../pool/seizan-perverter-of-truth.js";
 import _poolSeizeTheDay from "../pool/seize-the-day.js";
 import _poolSelfDestruct from "../pool/self-destruct.js";
 import _poolSelkieHedgeMage from "../pool/selkie-hedge-mage.js";
+import _poolSereneRemembrance from "../pool/serene-remembrance.js";
 import _poolSerraAviary from "../pool/serra-aviary.js";
 import _poolShadowRift from "../pool/shadow-rift.js";
 import _poolShadowyBackstreet from "../pool/shadowy-backstreet.js";
@@ -754,6 +755,7 @@ import _poolTrostaniThreeWhispers from "../pool/trostani-three-whispers.js";
 import _poolTrueheartTwins from "../pool/trueheart-twins.js";
 import _poolTrufflesnout from "../pool/trufflesnout.js";
 import _poolTrumpetingCarnosaur from "../pool/trumpeting-carnosaur.js";
+import _poolTrustyBoomerang from "../pool/trusty-boomerang.js";
 import _poolTrustyPackbeast from "../pool/trusty-packbeast.js";
 import _poolTuktukGrunts from "../pool/tuktuk-grunts.js";
 import _poolTundraFumarole from "../pool/tundra-fumarole.js";
@@ -1459,6 +1461,7 @@ const shard: CardShard = {
     _poolSeizeTheDay,
     _poolSelfDestruct,
     _poolSelkieHedgeMage,
+    _poolSereneRemembrance,
     _poolSerraAviary,
     _poolShadowRift,
     _poolShadowyBackstreet,
@@ -1603,6 +1606,7 @@ const shard: CardShard = {
     _poolTrueheartTwins,
     _poolTrufflesnout,
     _poolTrumpetingCarnosaur,
+    _poolTrustyBoomerang,
     _poolTrustyPackbeast,
     _poolTuktukGrunts,
     _poolTundraFumarole,

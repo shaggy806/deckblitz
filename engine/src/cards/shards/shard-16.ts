@@ -269,6 +269,7 @@ import _poolFocusTheMind from "../pool/focus-the-mind.js";
 import _poolFodderLaunch from "../pool/fodder-launch.js";
 import _poolFolkOfThePines from "../pool/folk-of-the-pines.js";
 import _poolFomoriNomad from "../pool/fomori-nomad.js";
+import _poolForeverYoung from "../pool/forever-young.js";
 import _poolForiysianTotem from "../pool/foriysian-totem.js";
 import _poolForlornPseudamma from "../pool/forlorn-pseudamma.js";
 import _poolFormlessGenesis from "../pool/formless-genesis.js";
@@ -541,6 +542,7 @@ import _poolPatagiaViper from "../pool/patagia-viper.js";
 import _poolPawpatchFormation from "../pool/pawpatch-formation.js";
 import _poolPerceptionBobblehead from "../pool/perception-bobblehead.js";
 import _poolPerfectedTheory from "../pool/perfected-theory.js";
+import _poolPerpetualTimepiece from "../pool/perpetual-timepiece.js";
 import _poolPersistentConstrictor from "../pool/persistent-constrictor.js";
 import _poolPhantomBlade from "../pool/phantom-blade.js";
 import _poolPhantomWarrior from "../pool/phantom-warrior.js";
@@ -592,6 +594,7 @@ import _poolRamosianSkyMarshal from "../pool/ramosian-sky-marshal.js";
 import _poolRampartHunter from "../pool/rampart-hunter.js";
 import _poolRanklesPrank from "../pool/rankles-prank.js";
 import _poolRansackTheLab from "../pool/ransack-the-lab.js";
+import _poolRansack from "../pool/ransack.js";
 import _poolRazeToTheGround from "../pool/raze-to-the-ground.js";
 import _poolRaziaBorosArchangel from "../pool/razia-boros-archangel.js";
 import _poolRazorRings from "../pool/razor-rings.js";
@@ -1200,6 +1203,7 @@ const shard: CardShard = {
     _poolFodderLaunch,
     _poolFolkOfThePines,
     _poolFomoriNomad,
+    _poolForeverYoung,
     _poolForiysianTotem,
     _poolForlornPseudamma,
     _poolFormlessGenesis,
@@ -1472,6 +1476,7 @@ const shard: CardShard = {
     _poolPawpatchFormation,
     _poolPerceptionBobblehead,
     _poolPerfectedTheory,
+    _poolPerpetualTimepiece,
     _poolPersistentConstrictor,
     _poolPhantomBlade,
     _poolPhantomWarrior,
@@ -1523,6 +1528,7 @@ const shard: CardShard = {
     _poolRampartHunter,
     _poolRanklesPrank,
     _poolRansackTheLab,
+    _poolRansack,
     _poolRazeToTheGround,
     _poolRaziaBorosArchangel,
     _poolRazorRings,

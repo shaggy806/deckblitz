@@ -233,6 +233,7 @@ import _poolElectrostaticInfantry from "../pool/electrostatic-infantry.js";
 import _poolElegyAcolyte from "../pool/elegy-acolyte.js";
 import _poolElektraFemmeFatale from "../pool/elektra-femme-fatale.js";
 import _poolElementalistAdept from "../pool/elementalist-adept.js";
+import _poolElixir from "../pool/elixir.js";
 import _poolEllivereOfTheWildCourt from "../pool/ellivere-of-the-wild-court.js";
 import _poolElvenkingsHarper from "../pool/elvenkings-harper.js";
 import _poolEmberwildeDjinn from "../pool/emberwilde-djinn.js";
@@ -1107,6 +1108,7 @@ const shard: CardShard = {
     _poolElegyAcolyte,
     _poolElektraFemmeFatale,
     _poolElementalistAdept,
+    _poolElixir,
     _poolEllivereOfTheWildCourt,
     _poolElvenkingsHarper,
     _poolEmberwildeDjinn,

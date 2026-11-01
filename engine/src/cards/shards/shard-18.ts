@@ -794,6 +794,7 @@ import _poolViolentOutburst from "../pool/violent-outburst.js";
 import _poolViscidLemures from "../pool/viscid-lemures.js";
 import _poolVoidRend from "../pool/void-rend.js";
 import _poolVolcanicOffering from "../pool/volcanic-offering.js";
+import _poolVolrathTheFallen from "../pool/volrath-the-fallen.js";
 import _poolVolunteerReserves from "../pool/volunteer-reserves.js";
 import _poolVraskaGolgariQueen from "../pool/vraska-golgari-queen.js";
 import _poolVraskaTheUnseen from "../pool/vraska-the-unseen.js";
@@ -1660,6 +1661,7 @@ const shard: CardShard = {
     _poolViscidLemures,
     _poolVoidRend,
     _poolVolcanicOffering,
+    _poolVolrathTheFallen,
     _poolVolunteerReserves,
     _poolVraskaGolgariQueen,
     _poolVraskaTheUnseen,

@@ -187,6 +187,7 @@ import _poolDevourIntellect from "../pool/devour-intellect.js";
 import _poolDevouringLight from "../pool/devouring-light.js";
 import _poolDevouringSwarm from "../pool/devouring-swarm.js";
 import _poolDiabolicTutor from "../pool/diabolic-tutor.js";
+import _poolDimirMachinations from "../pool/dimir-machinations.js";
 import _poolDimirSignet from "../pool/dimir-signet.js";
 import _poolDiplomaticRelations from "../pool/diplomatic-relations.js";
 import _poolDireFleetNeckbreaker from "../pool/dire-fleet-neckbreaker.js";
@@ -1050,6 +1051,7 @@ const shard: CardShard = {
     _poolDevouringLight,
     _poolDevouringSwarm,
     _poolDiabolicTutor,
+    _poolDimirMachinations,
     _poolDimirSignet,
     _poolDiplomaticRelations,
     _poolDireFleetNeckbreaker,

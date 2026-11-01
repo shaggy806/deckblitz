@@ -317,6 +317,7 @@ import _poolGustSkimmer from "../pool/gust-skimmer.js";
 import _poolGuulDrazVampire from "../pool/guul-draz-vampire.js";
 import _poolHalanaAndAlenaPartners from "../pool/halana-and-alena-partners.js";
 import _poolHaloScarab from "../pool/halo-scarab.js";
+import _poolHarmonicConvergence from "../pool/harmonic-convergence.js";
 import _poolHarvestWurm from "../pool/harvest-wurm.js";
 import _poolHauntedAngel from "../pool/haunted-angel.js";
 import _poolHavocJester from "../pool/havoc-jester.js";
@@ -713,6 +714,7 @@ import _poolStoneworkPackbeast from "../pool/stonework-packbeast.js";
 import _poolStormHerd from "../pool/storm-herd.js";
 import _poolStormbloodBerserker from "../pool/stormblood-berserker.js";
 import _poolStormchaserChimera from "../pool/stormchaser-chimera.js";
+import _poolStormscaleAnarch from "../pool/stormscale-anarch.js";
 import _poolStrawSoldiers from "../pool/straw-soldiers.js";
 import _poolStreamOfThought from "../pool/stream-of-thought.js";
 import _poolStripedRiverwinder from "../pool/striped-riverwinder.js";
@@ -1194,6 +1196,7 @@ const shard: CardShard = {
     _poolGuulDrazVampire,
     _poolHalanaAndAlenaPartners,
     _poolHaloScarab,
+    _poolHarmonicConvergence,
     _poolHarvestWurm,
     _poolHauntedAngel,
     _poolHavocJester,
@@ -1590,6 +1593,7 @@ const shard: CardShard = {
     _poolStormHerd,
     _poolStormbloodBerserker,
     _poolStormchaserChimera,
+    _poolStormscaleAnarch,
     _poolStrawSoldiers,
     _poolStreamOfThought,
     _poolStripedRiverwinder,

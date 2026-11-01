@@ -43,6 +43,7 @@ import _poolAzureDrake from "../pool/azure-drake.js";
 import _poolBambooGroveArcher from "../pool/bamboo-grove-archer.js";
 import _poolBanesInvoker from "../pool/banes-invoker.js";
 import _poolBantCharm from "../pool/bant-charm.js";
+import _poolBarishi from "../pool/barishi.js";
 import _poolBarrageOfExpendables from "../pool/barrage-of-expendables.js";
 import _poolBattleHymn from "../pool/battle-hymn.js";
 import _poolBattleOfFrostAndFire from "../pool/battle-of-frost-and-fire.js";
@@ -879,6 +880,7 @@ const shard: CardShard = {
     _poolBambooGroveArcher,
     _poolBanesInvoker,
     _poolBantCharm,
+    _poolBarishi,
     _poolBarrageOfExpendables,
     _poolBattleHymn,
     _poolBattleOfFrostAndFire,

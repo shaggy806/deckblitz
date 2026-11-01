@@ -318,6 +318,7 @@ import _poolGoliathTruck from "../pool/goliath-truck.js";
 import _poolGoneFishing from "../pool/gone-fishing.js";
 import _poolGoobbueGardener from "../pool/goobbue-gardener.js";
 import _poolGorillaChieftain from "../pool/gorilla-chieftain.js";
+import _poolGrabThePrize from "../pool/grab-the-prize.js";
 import _poolGreaterAuramancy from "../pool/greater-auramancy.js";
 import _poolGremlinTamer from "../pool/gremlin-tamer.js";
 import _poolGrimRoustabout from "../pool/grim-roustabout.js";
@@ -1165,6 +1166,7 @@ const shard: CardShard = {
     _poolGoneFishing,
     _poolGoobbueGardener,
     _poolGorillaChieftain,
+    _poolGrabThePrize,
     _poolGreaterAuramancy,
     _poolGremlinTamer,
     _poolGrimRoustabout,

@@ -580,6 +580,7 @@ import _poolReclamationSage from "../pool/reclamation-sage.js";
 import _poolReconstructedThopter from "../pool/reconstructed-thopter.js";
 import _poolReluctantDounguard from "../pool/reluctant-dounguard.js";
 import _poolRenegadeFreighter from "../pool/renegade-freighter.js";
+import _poolRepopulate from "../pool/repopulate.js";
 import _poolReshapeTheEarth from "../pool/reshape-the-earth.js";
 import _poolRetrievalAgent from "../pool/retrieval-agent.js";
 import _poolRevenant from "../pool/revenant.js";
@@ -1454,6 +1455,7 @@ const shard: CardShard = {
     _poolReconstructedThopter,
     _poolReluctantDounguard,
     _poolRenegadeFreighter,
+    _poolRepopulate,
     _poolReshapeTheEarth,
     _poolRetrievalAgent,
     _poolRevenant,

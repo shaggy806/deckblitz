@@ -801,6 +801,7 @@ import _poolTreacherousPitDweller from "../pool/treacherous-pit-dweller.js";
 import _poolTrenchpost from "../pool/trenchpost.js";
 import _poolTrickeryCharm from "../pool/trickery-charm.js";
 import _poolTurnBurn from "../pool/turn-burn.js";
+import _poolTurnTheEarth from "../pool/turn-the-earth.js";
 import _poolTwinstrike from "../pool/twinstrike.js";
 import _poolTyvarsStand from "../pool/tyvars-stand.js";
 import _poolUltimateMagicHoly from "../pool/ultimate-magic-holy.js";
@@ -1696,6 +1697,7 @@ const shard: CardShard = {
     _poolTrenchpost,
     _poolTrickeryCharm,
     _poolTurnBurn,
+    _poolTurnTheEarth,
     _poolTwinstrike,
     _poolTyvarsStand,
     _poolUltimateMagicHoly,

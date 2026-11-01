@@ -476,6 +476,7 @@ import _poolNezumiFreewheeler from "../pool/nezumi-freewheeler.js";
 import _poolNiblisOfTheMist from "../pool/niblis-of-the-mist.js";
 import _poolNimbleMongoose from "../pool/nimble-mongoose.js";
 import _poolNimrodelWatcher from "../pool/nimrodel-watcher.js";
+import _poolNinjasKunai from "../pool/ninjas-kunai.js";
 import _poolNoggleRobber from "../pool/noggle-robber.js";
 import _poolNoriTellerOfTales from "../pool/nori-teller-of-tales.js";
 import _poolNorwoodArchers from "../pool/norwood-archers.js";
@@ -1316,6 +1317,7 @@ const shard: CardShard = {
     _poolNiblisOfTheMist,
     _poolNimbleMongoose,
     _poolNimrodelWatcher,
+    _poolNinjasKunai,
     _poolNoggleRobber,
     _poolNoriTellerOfTales,
     _poolNorwoodArchers,

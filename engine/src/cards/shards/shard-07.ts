@@ -726,6 +726,7 @@ import _poolSyphonSoul from "../pool/syphon-soul.js";
 import _poolSyrGingerTheMealEnder from "../pool/syr-ginger-the-meal-ender.js";
 import _poolTabaxiToucaneers from "../pool/tabaxi-toucaneers.js";
 import _poolTabletOfCompleation from "../pool/tablet-of-compleation.js";
+import _poolTahngarthsGlare from "../pool/tahngarths-glare.js";
 import _poolTalismanOfDominance from "../pool/talisman-of-dominance.js";
 import _poolTamiyosImmobilizer from "../pool/tamiyos-immobilizer.js";
 import _poolTaniwha from "../pool/taniwha.js";
@@ -1617,6 +1618,7 @@ const shard: CardShard = {
     _poolSyrGingerTheMealEnder,
     _poolTabaxiToucaneers,
     _poolTabletOfCompleation,
+    _poolTahngarthsGlare,
     _poolTalismanOfDominance,
     _poolTamiyosImmobilizer,
     _poolTaniwha,

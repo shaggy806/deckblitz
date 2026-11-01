@@ -37,6 +37,7 @@ import _poolAquaticIncursion from "../pool/aquatic-incursion.js";
 import _poolArcboundCrusher from "../pool/arcbound-crusher.js";
 import _poolArcboundTracker from "../pool/arcbound-tracker.js";
 import _poolArchangelOfThune from "../pool/archangel-of-thune.js";
+import _poolArcheryTraining from "../pool/archery-training.js";
 import _poolArchmageEmeritus from "../pool/archmage-emeritus.js";
 import _poolArchmagesNewt from "../pool/archmages-newt.js";
 import _poolArdentSoldier from "../pool/ardent-soldier.js";
@@ -550,6 +551,7 @@ import _poolPipersMelody from "../pool/pipers-melody.js";
 import _poolPixieIllusionist from "../pool/pixie-illusionist.js";
 import _poolPlaguemawBeast from "../pool/plaguemaw-beast.js";
 import _poolPlanarDespair from "../pool/planar-despair.js";
+import _poolPlowUnder from "../pool/plow-under.js";
 import _poolPracticalResearch from "../pool/practical-research.js";
 import _poolPracticedTactics from "../pool/practiced-tactics.js";
 import _poolPrimoTheUnbounded from "../pool/primo-the-unbounded.js";
@@ -884,6 +886,7 @@ const shard: CardShard = {
     _poolArcboundCrusher,
     _poolArcboundTracker,
     _poolArchangelOfThune,
+    _poolArcheryTraining,
     _poolArchmageEmeritus,
     _poolArchmagesNewt,
     _poolArdentSoldier,
@@ -1397,6 +1400,7 @@ const shard: CardShard = {
     _poolPixieIllusionist,
     _poolPlaguemawBeast,
     _poolPlanarDespair,
+    _poolPlowUnder,
     _poolPracticalResearch,
     _poolPracticedTactics,
     _poolPrimoTheUnbounded,

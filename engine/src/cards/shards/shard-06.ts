@@ -669,6 +669,7 @@ import _poolSoulReap from "../pool/soul-reap.js";
 import _poolSoulSummons from "../pool/soul-summons.js";
 import _poolSoulSwallower from "../pool/soul-swallower.js";
 import _poolSoulboundGuardians from "../pool/soulbound-guardians.js";
+import _poolSpareDagger from "../pool/spare-dagger.js";
 import _poolSpectralGateguards from "../pool/spectral-gateguards.js";
 import _poolSpectralProcession from "../pool/spectral-procession.js";
 import _poolSpellseeker from "../pool/spellseeker.js";
@@ -1516,6 +1517,7 @@ const shard: CardShard = {
     _poolSoulSummons,
     _poolSoulSwallower,
     _poolSoulboundGuardians,
+    _poolSpareDagger,
     _poolSpectralGateguards,
     _poolSpectralProcession,
     _poolSpellseeker,
