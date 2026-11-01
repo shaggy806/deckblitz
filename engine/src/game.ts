@@ -6360,6 +6360,21 @@ export class Game {
       if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
       return;
     }
+    // Storage Matrix's question (rule 502.3): only that type goes on untapping
+    // — a permanent with several, if any is it (the rulings) — and the step
+    // carries on with no priority (502.4).
+    if (awaiting.untapTypes !== undefined) {
+      const { untapping, types, asked } = awaiting.untapTypes;
+      const type = types[modeIndices[0] ?? 0];
+      this.state.awaiting = null;
+      this.continueUntapStep(
+        untapping.filter((id) => effectiveTypes(this.state, this.registry, this.state.objects[id]).includes(type)),
+        asked,
+      );
+      this.state.priority.active = false;
+      this.state.priority.holder = null;
+      return;
+    }
     // A modal trigger announcing its modes: they're the ability's, recorded
     // as it goes on the stack, not applied now.
     if (awaiting.announcing === true) {
@@ -7694,7 +7709,99 @@ export class Game {
       };
       return;
     }
+    this.continueUntapStep(untapping, 0);
+  }
+
+  /**
+   * What decides which of `untapping` untap, after "you may choose not to"
+   * (rule 502.3): each `untapOnlyChosenType` question not yet asked (`asked`
+   * of them are), then each `untapLimit` it breaks, then the untapping itself.
+   * Without priority (502.4) and with nothing untapped yet, so what's asked
+   * stands throughout. One limit at a time reaches every way of obeying them
+   * all: a permanent any one of them lets through is still there for the next.
+   */
+  private continueUntapStep(untapping: readonly ObjectId[], asked: number): void {
+    const active = this.activePlayer;
+    if (untapping.length > 0 && !this.activeHasLeft()) {
+      const rules = this.untapRulesOn(active);
+      const question = rules.types[asked];
+      if (question !== undefined) {
+        this.state.awaiting = {
+          kind: "choose-modes",
+          player: active,
+          source: question.source,
+          minModes: 1,
+          maxModes: 1,
+          modes: question.types.map((type) => ({
+            text: `Untap only ${type}s this step`,
+            effect: { kind: "sequence", effects: [] },
+          })),
+          x: 0,
+          targets: [],
+          untapTypes: { untapping, types: question.types, asked: asked + 1 },
+        };
+        return;
+      }
+      for (const limit of rules.limits) {
+        const { filter } = limit;
+        const eligible = untapping.filter(
+          (id) => filter === undefined || matchesFilter(this.state, this.registry, id, filter, { you: active }),
+        );
+        const units = eligible.reduce((n, id) => n + (this.state.objects[id]?.stackCount ?? 1), 0);
+        if (units <= limit.count) continue;
+        this.state.awaiting = {
+          kind: "choose-permanents",
+          player: active,
+          eligible,
+          min: limit.count,
+          max: limit.count,
+          prompt: `Choose ${limit.count} of these to untap`,
+          then: { kind: "sequence", effects: [] },
+          source: limit.source ?? eligible[0],
+          x: 0,
+          untapStep: untapping,
+          untapLimit: true,
+          untapTypesAsked: asked,
+        };
+        return;
+      }
+    }
     this.finishUntapStep(untapping, []);
+  }
+
+  /** `player`'s untap step's `untapLimit`s and `untapOnlyChosenType`s, as they
+   * stand now: from the battlefield, an emblem's too (rule 113.6p). */
+  private untapRulesOn(player: PlayerId): {
+    readonly limits: readonly { readonly count: number; readonly filter?: CardFilter; readonly source?: ObjectId }[];
+    readonly types: readonly { readonly types: readonly CardType[]; readonly source: ObjectId }[];
+  } {
+    const limits: { count: number; filter?: CardFilter; source?: ObjectId }[] = [];
+    const types: { types: readonly CardType[]; source: ObjectId }[] = [];
+    const reaches = (who: "you" | "opponents" | "each-player", owner: PlayerId): boolean =>
+      who === "each-player" || (who === "you") === (player === owner);
+    for (const id of this.state.zones.shared.battlefield) {
+      const source = this.state.objects[id];
+      if (source === undefined || hasLostAbilities(this.state, this.registry, source)) continue;
+      if (this.state.players[source.controller]?.hasLost === true) continue;
+      for (const ability of this.registry.get(rulesTextName(source)).static) {
+        const { untapLimit, untapOnlyChosenType } = ability;
+        if (untapLimit === undefined && untapOnlyChosenType === undefined) continue;
+        if (!this.staticActive(source, ability)) continue;
+        if (untapLimit !== undefined && reaches(untapLimit.who, source.controller)) {
+          limits.push({ count: untapLimit.count, filter: untapLimit.filter, source: id });
+        }
+        if (untapOnlyChosenType !== undefined && reaches(untapOnlyChosenType.who, source.controller)) {
+          types.push({ types: untapOnlyChosenType.types, source: id });
+        }
+      }
+    }
+    for (const emblem of this.state.emblems) {
+      const limit = emblem.static?.untapLimit;
+      if (limit !== undefined && reaches(limit.who, emblem.owner)) {
+        limits.push({ count: limit.count, filter: limit.filter, source: emblem.object });
+      }
+    }
+    return { limits, types };
   }
 
   /** The untap step's untapping (rule 502.3), once its controller has chosen
@@ -36453,7 +36560,22 @@ export class Game {
     // picked stays tapped, and the step carries on with no priority (502.4).
     if (awaiting.untapStep !== undefined) {
       this.state.awaiting = null;
-      this.finishUntapStep(awaiting.untapStep, chosen);
+      if (awaiting.untapLimit === true) {
+        // Under a limit: the picks go on, the rest of `eligible` stay tapped.
+        // A stack named for only some of its tokens untaps those alone.
+        const left = awaiting.untapStep.filter((id) => !awaiting.eligible.includes(id));
+        for (const id of awaiting.eligible) {
+          const named = chosen.filter((pick) => pick === id).length;
+          if (named >= (this.state.objects[id]?.stackCount ?? 1)) left.push(id);
+          else for (let i = 0; i < named; i += 1) left.push(this.splitOneFromStack(id));
+        }
+        this.continueUntapStep(left, awaiting.untapTypesAsked ?? 0);
+      } else {
+        this.continueUntapStep(
+          awaiting.untapStep.filter((id) => !chosen.includes(id)),
+          0,
+        );
+      }
       this.state.priority.active = false;
       this.state.priority.holder = null;
       return;

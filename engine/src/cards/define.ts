@@ -2707,6 +2707,36 @@ export interface StaticAbility {
     readonly who: "you" | "opponents" | "each-player";
     readonly steps: readonly ("untap" | "upkeep" | "draw")[];
   };
+  /** "Players can't untap more than one land during their untap steps"
+   * (Winter Orb, Mungha Wurm's "you", Dovin Baan's emblem's "your
+   * opponents"): in each of `who`'s (from this permanent's controller's
+   * side) untap steps, at most `count` of the permanents about to untap that
+   * match `filter` (any permanent without one) do — the player chooses which
+   * (rule 502.3), as a `choose-permanents`. It leaves the rest tapped and asks
+   * nothing else of them: a player untaps all this allows. Several limits are
+   * cumulative, and two alike are redundant (Winter Moon's ruling, Static
+   * Orb's). Read as the step's untapping is decided, before anything untaps,
+   * so a tapped Winter Orb (`condition: { kind: "source", filter: { tapped:
+   * false } }`) limits nothing even as it untaps itself (its ruling). Only
+   * the step's own untapping is limited: an effect untapping at any other
+   * time isn't (Damping Field's ruling), nor another player's Seedborn Muse.
+   * `affects` is ignored. */
+  readonly untapLimit?: {
+    readonly who: "you" | "opponents" | "each-player";
+    readonly count: number;
+    readonly filter?: CardFilter;
+  };
+  /** "Each player chooses artifact, creature, or land during their untap
+   * step. That player can untap only permanents of the chosen type this step"
+   * (Storage Matrix): each of `who`'s untap steps asks them for one of these
+   * types, as a `choose-modes`, and only permanents with it may untap — one
+   * with several types if any is chosen, and it overrides nothing that keeps
+   * a permanent tapped, while a limit (`untapLimit`) still counts among them
+   * (its rulings). Asked per permanent saying so. `affects` is ignored. */
+  readonly untapOnlyChosenType?: {
+    readonly who: "you" | "opponents" | "each-player";
+    readonly types: readonly CardType[];
+  };
   /** "Creatures with swampwalk can be blocked as though they didn't have
    * swampwalk" (Legends' Quagmire, Lord Magnus — rule 702.14): every
    * creature's landwalk of these kinds is ignored when a block is declared,

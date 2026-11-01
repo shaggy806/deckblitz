@@ -2869,6 +2869,39 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(face("When this enchantment enters, that player untaps a land they control.", "Enchantment").complete).toBe(false);
   });
 
+  it("limits on the untap step (static:untap-step-limit, rule 502.3)", () => {
+    const orb = face(
+      "As long as this artifact is untapped, players can't untap more than one land during their untap steps.",
+      "Artifact",
+    );
+    expect(orb.static?.[0]).toMatchObject({
+      condition: { kind: "source", filter: { tapped: false } },
+      untapLimit: { who: "each-player", count: 1, filter: { type: "land" } },
+    });
+    expect(face("As long as this artifact is untapped, players can't untap more than two permanents during their untap steps.", "Artifact").static?.[0]?.untapLimit).toEqual({
+      who: "each-player",
+      count: 2,
+    });
+    expect(face("Players can't untap more than one nonbasic land during their untap steps.", "Artifact").static?.[0]?.untapLimit).toEqual({
+      who: "each-player",
+      count: 1,
+      filter: { type: "land", notSupertype: "basic" },
+    });
+    expect(face("You can't untap more than one land during your untap step.", "Creature").static?.[0]?.untapLimit).toEqual({
+      who: "you",
+      count: 1,
+      filter: { type: "land" },
+    });
+    const matrix = face(
+      "As long as this artifact is untapped, each player chooses artifact, creature, or land during their untap step. That player can untap only permanents of the chosen type this step.",
+      "Artifact",
+    );
+    expect(matrix.static?.[0]).toMatchObject({
+      condition: { kind: "source", filter: { tapped: false } },
+      untapOnlyChosenType: { who: "each-player", types: ["artifact", "creature", "land"] },
+    });
+  });
+
   it("step skips as statics and as one-shots (static:skip-untap-step, skip-draw-step)", () => {
     expect(face("Skip your draw step.\nPay 1 life: Draw a card.", "Enchantment").static).toEqual([
       { affects: { scope: "self" }, skipsSteps: { who: "you", steps: ["draw"] }, text: "Skip your draw step." },

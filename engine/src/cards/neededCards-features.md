@@ -321,6 +321,21 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Limits on the untap step — built 2026-11-01
+
+The need-keys Phase 2 family `static:untap-step-limit`, features only, no new
+decision kind. **`untapLimit`** (a static: `who`, `count`, `filter?`) and
+**`untapOnlyChosenType`** (`who`, `types`) decide which permanents untap in
+rule 502.3's step, after "you may choose not to": `Game.continueUntapStep` asks
+each Storage Matrix's question as a `choose-modes` (`awaiting.untapTypes`), then
+each limit still broken as a `choose-permanents` of exactly `count`
+(`awaiting.untapLimit`), and only then untaps. A limit is a maximum on what
+would otherwise untap, so the player untaps all it allows (502.3: only an effect
+keeps a permanent tapped). A partial stack's tokens split off. Reused the
+decisions, so the client needs nothing. 6 proving cards: Winter Orb, Static Orb,
+Winter Moon, Smoke, Mungha Wurm, Storage Matrix. An emblem's limit is reached too
+(tested on a bare emblem, for Dovin Baan's).
+
 ### The owner, not the controller, of a target or trigger object — built 2026-11-01
 
 The need-keys Phase 2 group of `effect:owner-of-target-player-ref` in the

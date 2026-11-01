@@ -283,6 +283,7 @@
   "mechanic:mdfc-transform",
   "condition:player-state-thresholds",
   "static:skip-untap-step",
+  "static:untap-step-limit",
   "static:skip-draw-step",
   "static:skip-step",
   "effect:skip-next-draw-step",

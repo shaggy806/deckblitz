@@ -3565,6 +3565,13 @@ export type AwaitingDecision =
        * untap" (rule 502.3): every permanent about to untap, the picks among
        * them staying tapped. `then` is unused. */
       readonly untapStep?: readonly ObjectId[];
+      /** With `untapStep`: the choice is instead which of `eligible` untap
+       * under an `untapLimit` (rule 502.3), the ones not picked staying
+       * tapped — a token stack's tokens one by one. */
+      readonly untapLimit?: true;
+      /** With `untapStep`: how many `untapOnlyChosenType` questions this step
+       * has already asked (see the `choose-modes` kind's `untapTypes`). */
+      readonly untapTypesAsked?: number;
       /** Set when the choice is a spell's casualty cost being paid as it's
        * cast, rather than an effect resolving — see {@link CasualtyAsk}.
        * `then` is unused. */
@@ -3647,6 +3654,16 @@ export type AwaitingDecision =
        * instead. Answered by the engine itself; the modes' effects are
        * unused. */
       readonly dredgeFor?: { readonly cards: readonly ObjectId[] };
+      /** Storage Matrix's question in the untap step (rule 502.3 —
+       * `untapOnlyChosenType`): mode i keeps only `types[i]` among `untapping`,
+       * the permanents about to untap, and the step carries on with `asked`
+       * such questions asked. Answered by the engine itself; the modes'
+       * effects are unused. */
+      readonly untapTypes?: {
+        readonly untapping: readonly ObjectId[];
+        readonly types: readonly CardType[];
+        readonly asked: number;
+      };
       /** The permanent (for an ability) or spell object the effect belongs to
        * — used to build the resolution context for the chosen modes. */
       readonly source: ObjectId;

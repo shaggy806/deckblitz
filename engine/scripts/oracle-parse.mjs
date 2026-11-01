@@ -7192,6 +7192,8 @@ const STATIC_CONDITION_PREFIXES = [
   // Renowned (rule 702.112b): "As long as ~ is renowned, it has menace"
   // (Goblin Glory Chaser) — the "it" is ~.
   ["As long as ~ is renowned, ", { kind: "source", filter: { renowned: true } }],
+  // Winter Orb, Static Orb, Storage Matrix.
+  ["As long as ~ is untapped, ", { kind: "source", filter: { tapped: false } }],
   // Murders at Karlov Manor's "five or more mana values among cards in your
   // graveyard" (Aven Heartstabber): a `distinct` aggregate there.
   ["As long as there are five or more mana values among cards in your graveyard, ", FIVE_MANA_VALUES],
@@ -8673,6 +8675,22 @@ function parseStatic(line, text) {
   if ((m = /^(Skip your|Players skip their|Each player skips their|Your opponents skip their|Each opponent skips their) (untap|upkeep|draw) steps?\.$/.exec(line))) {
     const who = m[1] === "Skip your" ? "you" : /opponent/.test(m[1]) ? "opponents" : "each-player";
     return { affects: { scope: "self" }, skipsSteps: { who, steps: [m[2]] }, text };
+  }
+  // A limit on what a player untaps in their untap step (rule 502.3): "players
+  // can't untap more than one land during their untap steps".
+  if ((m = /^(Players|You|Your opponents) can't untap more than (one|two|three|four|five) (.+?) during (?:their|your) untap steps?\.$/.exec(line))) {
+    const who = m[1] === "You" ? "you" : m[1] === "Players" ? "each-player" : "opponents";
+    const noun = m[3].replace(/^nonbasic /, "");
+    const filter = /^permanents?$/.test(noun) ? {} : parseTypePhrase(noun);
+    if (filter !== null) {
+      const of = { ...filter, ...(noun !== m[3] ? { notSupertype: "basic" } : {}) };
+      const onWhat = Object.keys(of).length > 0 ? { filter: of } : {};
+      return { affects: { scope: "self" }, untapLimit: { who, count: NUMBERS[m[2]], ...onWhat }, text };
+    }
+  }
+  // Storage Matrix, whose "as long as" is a leading condition (above).
+  if (line === "Each player chooses artifact, creature, or land during their untap step. That player can untap only permanents of the chosen type this step.") {
+    return { affects: { scope: "self" }, untapOnlyChosenType: { who: "each-player", types: ["artifact", "creature", "land"] }, text };
   }
   // Booby Trap's "the chosen player reveals each card they draw".
   if (line === "The chosen player reveals each card they draw.") {
