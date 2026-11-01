@@ -13,9 +13,9 @@ describe("an other-slot relation to a slot not asked", () => {
     const { game } = table();
     const bears = spawn(game, "Grizzly Bears", B);
     lands(game, "Swamp", 5);
-    cast(game, toHand(game, "Phantom Blade"));
-    const awaiting = game.state.awaiting;
-    expect(awaiting?.kind).toBe("choose-targets");
+    cast(game, toHand(game, "Phantom Blade"), { settle: false });
+    game.advanceUntil((s) => s.awaiting?.kind === "choose-targets");
+    expect(game.state.awaiting?.kind).toBe("choose-targets");
     game.dispatch({ type: "choose-targets", player: A, targets: [ref(bears)] });
     settle(game);
     expect(zone(game, bears)).toBe("graveyard");

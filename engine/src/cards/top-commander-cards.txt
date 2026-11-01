@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4132 already implemented / 868 missing (marks refreshed 2026-11-01)
+4136 already implemented / 864 missing (marks refreshed 2026-11-01)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -727,7 +727,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   728  Enduring Innocence                       {1}{W}{W}        Enchantment Creature — Sheep Glimmer
 [x]   729  Hammer of Nazahn                         {4}              Legendary Artifact — Equipment
 [x]   730  Warstorm Surge                           {5}{R}           Enchantment
-[ ]   731  Forbidden Orchard                        {0}              Land
+[x]   731  Forbidden Orchard                        {0}              Land
 [x]   732  Thornspire Verge                         {0}              Land
 [x]   733  Mockingbird                              {X}{U}           Creature — Bird Bard
 [x]   734  Lush Portico                             {0}              Land — Forest Plains
@@ -2243,7 +2243,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2250  Explorer's Scope                         {1}              Artifact — Equipment
 [x]  2251  Broken Bond                              {1}{G}           Sorcery
 [x]  2252  Temur Battlecrier                        {G}{U}{R}        Creature — Orc Ranger
-[ ]  2253  Manabarbs                                {3}{R}           Enchantment
+[x]  2253  Manabarbs                                {3}{R}           Enchantment
 [x]  2254  Laughing Mad                             {2}{R}           Instant
 [x]  2255  Flickerwisp                              {1}{W}{W}        Creature — Elemental
 [x]  2256  Planar Incision                          {1}{U}           Instant
@@ -3263,7 +3263,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3270  Keeper of Secrets                        {5}{R}           Creature — Demon
 [x]  3271  Mistblade Shinobi                        {2}{U}           Creature — Human Ninja
 [x]  3272  Firdoch Core                             {3}              Kindred Artifact — Shapeshifter
-[ ]  3273  Grievous Wound                           {3}{B}{B}        Enchantment — Aura
+[x]  3273  Grievous Wound                           {3}{B}{B}        Enchantment — Aura
 [ ]  3274  Ezuri, Stalker of Spheres                {2}{G}{U}        Legendary Creature — Phyrexian Elf Warrior
 [x]  3275  Slagwoods Bridge                         {0}              Artifact Land
 [ ]  3276  Vorinclex // The Grand Evolution         {5}              Legendary Creature — Phyrexian Praetor // Enchantment — Saga
@@ -4222,7 +4222,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  4229  Wyll, Blade of Frontiers                 {1}{R}           Legendary Creature — Human Warlock
 [x]  4230  Decoction Module                         {2}              Artifact
 [ ]  4231  Locke, Treasure Hunter                   {1}{B}{R}        Legendary Creature — Human Rogue
-[ ]  4232  Zhur-Taa Druid                           {R}{G}           Creature — Human Druid
+[x]  4232  Zhur-Taa Druid                           {R}{G}           Creature — Human Druid
 [x]  4233  Count on Luck                            {R}{R}{R}        Enchantment
 [x]  4234  Rolling Hamsphere                        {7}              Artifact — Vehicle
 [x]  4235  Unwanted Remake                          {W}              Instant
