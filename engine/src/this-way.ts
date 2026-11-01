@@ -227,6 +227,10 @@ export function thisWayEntries(
           }
         }
         break;
+      case "shuffled-into-library":
+        // Counted by the library's owner (the cards' owner).
+        if (event.type === "cards-shuffled-into-library") for (const id of event.objects) add(id, event.player, false);
+        break;
       case "put-on-bottom":
         // From a hand, by a choice the resolution asked (`cards-put-on-bottom`
         // — the mulligan's bottoming never happens during a resolution).

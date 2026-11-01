@@ -3103,6 +3103,30 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     ).toEqual({ kind: "put-on-libraries", what: { all: { type: "creature", attacking: true } }, position: "owner-chooses" });
   });
 
+  it("a graveyard's matching cards, or target cards, shuffled into libraries (rule 701.24a)", () => {
+    expect(parseSentence("Shuffle all nonland cards from your graveyard into your library.", ctx())).toEqual({
+      kind: "shuffle-graveyard-into-library",
+      target: "you",
+      filter: { notTypes: ["land"] },
+    });
+    const repopulate = ctx();
+    expect(
+      parseSentence("Shuffle all creature cards from target player's graveyard into that player's library.", repopulate),
+    ).toEqual({ kind: "shuffle-graveyard-into-library", target: 0, filter: { type: "creature" } });
+    expect(repopulate.targets).toEqual(["player"]);
+    expect(parseSentence("You gain life equal to the number of cards shuffled into your library this way.", ctx())).toEqual({
+      kind: "gain-life",
+      amount: { thisWay: "shuffled-into-library" },
+    });
+    const serene = ctx();
+    expect(
+      parseSentence("Shuffle ~ and up to three target cards from a single graveyard into their owners' libraries.", serene),
+    ).toEqual({ kind: "put-on-libraries", what: { targetsFrom: 0 }, position: "shuffle", withSource: true });
+    expect(serene.targets).toEqual([
+      { kind: "any-number", of: { kind: "card-in-graveyard", whose: "any" }, max: 3, sameController: true },
+    ]);
+  });
+
   it("amplify N (rule 702.38a) and provoke (rule 702.39a)", () => {
     const throwback = face(
       "Amplify 2 (As this creature enters, put two +1/+1 counters on it for each Beast card you reveal in your hand.)\nProvoke (Whenever this creature attacks, you may have target creature defending player controls untap and block it if able.)",

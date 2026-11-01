@@ -1892,6 +1892,30 @@ export function parseSentence(sentence, ctx) {
     const draw = { kind: "draw", amount: amount(m[4]), ...(who === "you" ? {} : { who }) };
     return { kind: "sequence", effects: [shuffle, draw] };
   }
+  // "Shuffle all creature cards from your graveyard into your library"
+  // (Barishi), "… nonland cards …" (Elixir), "… from target player's
+  // graveyard into that player's library" (Repopulate): only the matching
+  // cards, the library shuffled either way.
+  if ((m = /^shuffle all (.+?) cards from (your|target player's|target opponent's) graveyard into (?:your|that player's) library\.$/i.exec(s))) {
+    const filter = parseTypePhrase(m[1], { cards: true });
+    const yours = m[2].toLowerCase() === "your";
+    if (filter !== null && Object.keys(filter).length > 0) {
+      const target = yours ? "you" : slot(m[2].replace(/'s$/, ""));
+      return { kind: "shuffle-graveyard-into-library", target, filter };
+    }
+  }
+  if (/^you gain life equal to the number of cards shuffled into your library this way\.$/i.test(s)) {
+    return { kind: "gain-life", amount: { thisWay: "shuffled-into-library" } };
+  }
+  // "Shuffle ~ and up to three target cards from a single graveyard into
+  // their owners' libraries" (Serene Remembrance): the spell goes too, and
+  // each library a card went into is shuffled.
+  if ((m = /^shuffle ~ and (.+? target .+?) into their owners' libraries\.$/i.exec(s))) {
+    const got = quantifiedSlots(m[1], ctx);
+    if (got !== undefined) {
+      return { kind: "put-on-libraries", what: { targetsFrom: got.slots[0] }, position: "shuffle", withSource: true };
+    }
+  }
   // "Skips their next untap step" (rule 614.10): the whole step.
   if (re(`you skip your next untap step`).test(s)) return { kind: "skip-untap-step", who: "you" };
   if (re(`each opponent skips their next untap step`).test(s)) return { kind: "skip-untap-step", who: "each-opponent" };

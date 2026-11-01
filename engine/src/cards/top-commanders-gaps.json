@@ -428,6 +428,8 @@
   "decision:owner-orders-library-placements",
   "effect:look-at-target-player-library-reorder",
   "effect:put-on-top-of-library-all",
+  "effect:shuffle-graveyard-filter-into-library",
+  "effect:shuffle-graveyard-targets-into-library",
   "mechanic:shield-counters",
   "keyword:reconfigure",
   "cost:alt-cost-exile-from-hand",

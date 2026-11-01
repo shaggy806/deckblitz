@@ -1425,6 +1425,11 @@ export type ThisWayKind =
    * Teferi's Puzzle Box's "then draws that many cards". Counted by the
    * player whose hand they left. */
   | "put-on-bottom"
+  /** Cards it shuffled into a library — Elixir's "you gain life equal to
+   * the number of cards shuffled into your library this way" (a
+   * `shuffle-graveyard-into-library`, or `put-on-libraries`' `"shuffle"`).
+   * Counted by the library's owner. */
+  | "shuffled-into-library"
   /** Permanents it tapped — Myr Battlesphere's "you may tap X untapped Myr
    * you control. If you do, this creature gets +X/+0": a `choose-permanents`
    * tapping them, then this. One already tapped isn't tapped again, and so
@@ -3770,6 +3775,19 @@ export type EffectSpec =
        * once and the orders are asked. Battlefield permanents only.
        * A single card "on their choice of …" is `put-on-library`'s
        * `ownerChooses`.
+       *
+       * `"shuffle"` is "**the owners of those cards shuffle them into their
+       * libraries**" (Turn the Earth, Serene Remembrance): the cards go in
+       * together and each library a card went into is shuffled (rule
+       * 701.24a) — nothing to order, and nobody shuffles with nothing put
+       * in. "Shuffle any number of target cards from your graveyard into
+       * your library", one library, is Piper's Melody's `for-each-target` of
+       * `put-on-library` then `shuffle-library` (Perpetual Timepiece);
+       * "target player shuffles up to four target cards from their
+       * graveyard into their library", where that player shuffles even with
+       * every card gone, is Witness the Future's `put-on-library` and
+       * `shuffle-library` with its `target`. The cards count as
+       * `"shuffled-into-library"` this way.
        */
       readonly kind: "put-on-libraries";
       /** `{ targetsFrom }`: the target cards in slot `from` on that are still
@@ -3777,7 +3795,12 @@ export type EffectSpec =
        * ("two target lands"). `{ all }`: every permanent matching the filter
        * as this resolves, read from the effect's controller's side. */
       readonly what: { readonly targetsFrom: number } | { readonly all: CardFilter };
-      readonly position: "top" | "bottom" | "owner-chooses";
+      readonly position: "top" | "bottom" | "owner-chooses" | "shuffle";
+      /** The resolving spell goes with them — "shuffle **Serene Remembrance
+       * and** up to three target cards from a single graveyard into their
+       * owners' libraries". A copy of a spell can't, and ceases to exist
+       * (rule 707.10a). Not with `"owner-chooses"`. */
+      readonly withSource?: true;
       /** Set by the engine on the copy it parks between questions. */
       readonly progress?: PutOnLibrariesProgress;
     }
@@ -7262,6 +7285,13 @@ export type EffectSpec =
        * exist in the library, rule 111.7; a phased-out one isn't there,
        * 702.26b). */
       readonly zones?: readonly ("hand" | "graveyard" | "permanents")[];
+      /** Only the graveyard's cards matching this — "shuffle all **creature
+       * cards** from your graveyard into your library" (Barishi, Rooting
+       * Kavu), "all **nonland** cards" (Elixir), Repopulate's "all creature
+       * cards from target player's graveyard into that player's library" —
+       * read from the effect's controller's side; the library is shuffled
+       * whether any matched or not. With `zones` of the graveyard only. */
+      readonly filter?: CardFilter;
       /** "…then draws that many cards" (Winds of Change, The Great
        * Aurora): once every library is shuffled, each player draws as many
        * cards as they put into their library this way — a token counting
@@ -8680,7 +8710,11 @@ export interface EffectApi {
   /** See the `"shuffle-graveyard-into-library"` {@link EffectSpec}: how
    * many objects the player put into their library (a token stack each
    * token in it). */
-  shuffleZonesIntoLibrary(target: TargetRef, zones: readonly ("hand" | "graveyard" | "permanents")[]): number;
+  shuffleZonesIntoLibrary(
+    target: TargetRef,
+    zones: readonly ("hand" | "graveyard" | "permanents")[],
+    filter?: CardFilter,
+  ): number;
   /** See the `"skip-next-untap"` {@link EffectSpec}. */
   skipNextUntap(target: TargetRef, filter: CardFilter): void;
   /** See the `"skip-untap-step"` {@link EffectSpec}: one more of `player`'s
@@ -8864,7 +8898,7 @@ export interface EffectApi {
    * owner's cards now on one end of their library, in turn order from the
    * active player, top before bottom, only where the order is a choice. */
   putOnLibrariesTogether(
-    placements: readonly { readonly object: ObjectId; readonly position: "top" | "bottom" }[],
+    placements: readonly { readonly object: ObjectId; readonly position: "top" | "bottom" | "shuffle" }[],
   ): readonly LibraryOrderStep[];
   /** Ask `step.player` the order of `step.cards` on that end of their
    * library — those still there. `false` when there was nothing to ask. */
@@ -12713,7 +12747,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       const moved = new Map<PlayerId, number>();
       ctx.simultaneously(() => {
         for (const target of players) {
-          const n = ctx.shuffleZonesIntoLibrary(target, spec.zones ?? ["graveyard"]);
+          const n = ctx.shuffleZonesIntoLibrary(target, spec.zones ?? ["graveyard"], spec.filter);
           if (target.kind === "player") moved.set(target.player, n);
         }
       });
@@ -12959,6 +12993,10 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
                 .slice(spec.what.targetsFrom)
                 .flatMap((t) => (t?.kind === "object" ? [t.object] : []))
             : ctx.permanentsMatching(spec.what.all).map((p) => p.object);
+        if (spec.withSource === true) {
+          const self = resolveEffectTarget("source", ctx);
+          if (self?.kind === "object") objects.push(self.object);
+        }
         const cards = [...new Set(objects)].flatMap((object) => {
           const zoneChangeCount = ctx.zoneChangeCountOf(object);
           return zoneChangeCount === undefined ? [] : [{ object, zoneChangeCount }];
@@ -12995,7 +13033,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           }
         }
         const bottom = new Set(progress.bottom);
-        const fixed = spec.position === "bottom" ? "bottom" : "top";
+        const fixed = spec.position === "bottom" || spec.position === "shuffle" ? spec.position : "top";
         orders = ctx.putOnLibrariesTogether(
           still().map((object) => ({
             object,

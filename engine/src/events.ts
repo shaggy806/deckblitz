@@ -1431,6 +1431,16 @@ export type GameEvent =
       readonly objects: readonly ObjectId[];
     })
   | (Base & {
+      /** Cards an effect shuffled into `player`'s library from a public zone
+       * (rule 701.24a — `shuffle-graveyard-into-library`'s graveyard cards,
+       * `put-on-libraries`' `"shuffle"`), logged once the library is
+       * shuffled: Elixir's "the number of cards shuffled into your library
+       * this way". A hand's cards aren't named here. */
+      readonly type: "cards-shuffled-into-library";
+      readonly player: PlayerId;
+      readonly objects: readonly ObjectId[];
+    })
+  | (Base & {
       /** A commander's owner chose whether to put it into the command zone
        * (rule 903.9). `from` is the graveyard or exile it was in (903.9a), or
        * the hand or library it was headed for (903.9b). */

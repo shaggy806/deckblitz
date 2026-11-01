@@ -541,6 +541,8 @@ export function describeEvent(event: GameEvent, nameOf: NameOf, seats: readonly 
         : `${who(event.player)} keeps their opening hand`
     case 'cards-put-on-bottom':
       return `${who(event.player)} puts ${event.objects.map(name).join(', ')} on the bottom of their library`
+    case 'cards-shuffled-into-library':
+      return `${who(event.player)} shuffles ${event.objects.map(name).join(', ')} into their library`
     case 'commander-zone-decision': {
       // A graveyard or exile it's already in (rule 903.9a); a hand or library
       // it hasn't reached (903.9b).

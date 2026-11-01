@@ -27203,7 +27203,12 @@ export class Game {
       grantBlockAdditional: (target, amount, duration) =>
         this.grantBlockAdditional(target, amount, lastingHere(duration)),
       mill: (target, amount) => this.millByEffect(target, amount),
-      shuffleZonesIntoLibrary: (target, zones) => this.shuffleZonesIntoLibraryByEffect(target, zones),
+      shuffleZonesIntoLibrary: (target, zones, filter) =>
+        this.shuffleZonesIntoLibraryByEffect(
+          target,
+          zones,
+          filter === undefined ? undefined : (id) => matchesFilter(this.state, this.registry, id, filter, { you: controller, source }),
+        ),
       skipNextUntap: (target, filter) => {
         const player = target.kind === "player" ? this.state.players[target.player] : undefined;
         if (player !== undefined) player.untapSkips = [...(player.untapSkips ?? []), filter];
@@ -27622,18 +27627,31 @@ export class Game {
         return true;
       },
       putOnLibrariesTogether: (placements) => {
-        const moved: { object: ObjectId; owner: PlayerId; position: "top" | "bottom" }[] = [];
+        const moved: { object: ObjectId; owner: PlayerId; position: "top" | "bottom" | "shuffle" }[] = [];
         this.withLeaveBatch(() =>
           this.withGraveyardLeaveBatch(() => {
             for (const { object, position } of placements) {
               const card = this.state.objects[object];
               if (card === undefined) continue;
               const owner = card.owner;
-              this.putOnLibrary(object, position);
+              this.putOnLibrary(object, position === "shuffle" ? "bottom" : position);
               moved.push({ object, owner, position });
             }
           }),
         );
+        // "The owners of those cards shuffle them into their libraries": each
+        // library a card went into (a commander its owner sent to the command
+        // zone instead — rule 903.9b — went into none) is shuffled (rule
+        // 701.24a).
+        for (const player of this.apnapOrder()) {
+          const shuffled = moved
+            .filter((m) => m.position === "shuffle" && m.owner === player)
+            .map((m) => m.object)
+            .filter((id) => this.state.objects[id]?.zone === "library");
+          if (shuffled.length === 0) continue;
+          this.shuffleLibraryOf(player);
+          this.emit({ type: "cards-shuffled-into-library", player, objects: shuffled });
+        }
         // Each owner's cards now on each end of their library: theirs to
         // arrange (rule 401.4), the active player's first (rule 101.4). A
         // token there is gone at the next state-based check (rule 704.5d),
@@ -39061,23 +39079,33 @@ export class Game {
   /** See the `"shuffle-graveyard-into-library"` {@link EffectSpec}: the
    * player's whole graveyard — and hand, and the permanents they own, as
    * `zones` says — into their library as one move, then the library
-   * shuffled (rule 701.24a), the zones empty or not. How many objects went
-   * in, a token stack each token in it. */
+   * shuffled (rule 701.24a), the zones empty or not. `graveyardFilter`: only
+   * the graveyard's cards it takes ("all creature cards from your
+   * graveyard"). How many objects went in, a token stack each token in it. */
   private shuffleZonesIntoLibraryByEffect(
     target: TargetRef,
     zones: readonly ("hand" | "graveyard" | "permanents")[],
+    graveyardFilter?: (id: ObjectId) => boolean,
   ): number {
     if (target.kind !== "player" || this.state.players[target.player] === undefined) return 0;
     const player = target.player;
     let moved = 0;
+    const went: ObjectId[] = [];
     const move = (id: ObjectId): void => {
       const count = this.state.objects[id]?.stackCount ?? 1;
-      if (this.moveObject(id, "library")) moved += count;
+      if (this.moveObject(id, "library")) {
+        moved += count;
+        went.push(id);
+      }
     };
+    // Which cards, read before any moves.
+    const fromGraveyard = zones.includes("graveyard")
+      ? this.state.zones.perPlayer[player].graveyard.filter((id) => graveyardFilter === undefined || graveyardFilter(id))
+      : [];
     this.withLeaveBatch(() => {
       this.withGraveyardLeaveBatch(() => {
         if (zones.includes("hand")) for (const id of [...this.state.zones.perPlayer[player].hand]) move(id);
-        if (zones.includes("graveyard")) for (const id of [...this.state.zones.perPlayer[player].graveyard]) move(id);
+        for (const id of fromGraveyard) move(id);
         if (zones.includes("permanents")) {
           for (const id of [...this.state.zones.shared.battlefield]) {
             if (this.state.objects[id]?.owner === player) move(id);
@@ -39086,6 +39114,11 @@ export class Game {
       });
     });
     this.shuffleLibraryOf(player);
+    // The graveyard's cards, public as they went (a hand's stay hidden):
+    // what "the cards shuffled into your library this way" counts (Elixir).
+    const fromGraveyardSet = new Set(fromGraveyard);
+    const inLibrary = went.filter((id) => fromGraveyardSet.has(id) && this.state.objects[id]?.zone === "library");
+    if (inLibrary.length > 0) this.emit({ type: "cards-shuffled-into-library", player, objects: inLibrary });
     return moved;
   }
 

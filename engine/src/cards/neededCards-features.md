@@ -321,6 +321,27 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### A graveyard's matching cards, or target cards, shuffled into libraries — built 2026-10-31
+
+The need-keys Phase 2 family `effect:shuffle-library`, features only, on the
+library-ordering family's code. `shuffle-graveyard-into-library` takes a
+**`filter`** (only the graveyard's matching cards, the library shuffled either
+way — Barishi, Elixir, Repopulate); **`put-on-libraries`' `position:
+"shuffle"`** puts target cards into their owners' libraries at once and
+shuffles each library a card went into (Turn the Earth), `withSource` sending
+the resolving spell too (Serene Remembrance). Both log a new
+`cards-shuffled-into-library` event, read by a new `"shuffled-into-library"`
+this-way kind (Elixir's life). "Target player shuffles up to N target cards
+from their graveyard into their library" was already Witness the Future's
+composition (Memory's Journey, Stream of Consciousness, Krosan Reclamation),
+and "shuffle any number of target cards from your graveyard into your library"
+Piper's Melody's (Perpetual Timepiece, The Bath Song) — only marked. The
+scaffolder reads "shuffle all … cards from your / target player's graveyard
+into …", Elixir's life line and Serene Remembrance's line. Keys:
+effect:shuffle-graveyard-filter-into-library,
+effect:shuffle-graveyard-targets-into-library. Proving cards: Elixir,
+Repopulate, Barishi, Turn the Earth, Serene Remembrance, Perpetual Timepiece.
+
 ### Several cards into libraries at once, their owners ordering them — built 2026-10-31
 
 The need-keys Phase 2 family `decision:library-ordering`, features only. New
