@@ -1806,6 +1806,9 @@ export interface StaticAbility {
    * and every card type stay.
    */
   readonly loseLandTypes?: true;
+  /** Layer 4 — the affected permanents lose all creature types, and keep
+   * their other subtypes (Curse of Conformity). */
+  readonly loseCreatureTypes?: true;
   /**
    * Layer 4 — the affected permanents' land types are the basic land type
    * this static's own permanent chose as it entered (`chooseOnEnter` over
@@ -2770,6 +2773,16 @@ export interface StaticAbility {
    * 104.2a). `affects` is ignored.
    */
   readonly opponentsCantWinGame?: boolean;
+  /**
+   * The inverse pair (Abyssal Persecutor): "**you can't win the game**" — an
+   * effect saying this permanent's controller wins does nothing, though being
+   * the last player left still wins (rule 104.2a) — "**and your opponents can't
+   * lose the game**", which holds off each opponent's loss as `cantLoseGame`
+   * does their own, with conceding still losing (rule 104.3a). `affects` is
+   * ignored.
+   */
+  readonly cantWinGame?: boolean;
+  readonly opponentsCantLoseGame?: boolean;
   /**
    * "Creatures can't attack you unless their controller pays {N} for each
    * creature they control that's attacking you" (Ghostly Prison,

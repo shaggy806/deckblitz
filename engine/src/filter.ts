@@ -697,8 +697,11 @@ export interface CardFilter {
    * choosing the target this filter is on, when that isn't the filtering
    * player (rule 601.2c) — "target creature of an opponent's choice **they
    * control**" (Evangelize, `CardDefinition.opponentChoosesTargets`); with
-   * no such chooser (`FilterContext.chooser`), nothing matches. */
-  readonly controlledBy?: "you" | "opponent" | "active-player" | "chooser";
+   * no such chooser (`FilterContext.chooser`), nothing matches.
+   * `"enchanted-player"`: the player the filter's source, an Aura, is attached
+   * to (a Curse's "creatures **enchanted player controls**" — Curse of Death's
+   * Hold); with no such source, nothing matches. */
+  readonly controlledBy?: "you" | "opponent" | "active-player" | "chooser" | "enchanted-player";
   /** Controlled by one of these players — set by the engine, never authored:
    * a protection grant's "creatures **your opponents** control" fixed to the
    * players they were as it resolved (`grant-protection`). */
@@ -1925,6 +1928,10 @@ export function matchesFilter(
   if (filter.controlledBy === "opponent" && controller === ctx.you) return false;
   if (filter.controlledBy === "active-player" && controller !== activePlayerOf(state)) return false;
   if (filter.controlledBy === "chooser" && (ctx.chooser === undefined || controller !== ctx.chooser)) return false;
+  if (filter.controlledBy === "enchanted-player") {
+    const aura = ctx.source === undefined ? undefined : state.objects[ctx.source];
+    if (aura?.attachedToPlayer === undefined || controller !== aura.attachedToPlayer) return false;
+  }
   if (filter.controllerIn !== undefined && !filter.controllerIn.includes(controller)) return false;
   if (
     filter.controllerGraveyardAtLeast !== undefined &&

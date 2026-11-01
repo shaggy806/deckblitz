@@ -932,6 +932,12 @@ export function auraPolarity(def: CardDefinition): Polarity {
   let harm = false;
   let help = false;
   for (const ability of def.static ?? []) {
+    // An Aura on a player that isn't a Curse by name (Grievous Wound's "can't
+    // gain life"): each of these is a penalty on the player it enchants.
+    const replacement = ability.replacement;
+    if (replacement?.event === "would-gain-life" && replacement.who === "enchanted-player" && replacement.prevent === true) {
+      return "harm";
+    }
     // The Magemarks' "creatures you control that are enchanted get …": the
     // Aura's own creature is one of them only while it's yours, so it reads
     // as an Aura on what it enchants.

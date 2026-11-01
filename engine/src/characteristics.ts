@@ -1932,7 +1932,14 @@ function playerStaticHolds(
  * that names them. Conceding isn't stopped by it (rule 104.3a). */
 export function playerCantLoseGame(state: GameState, registry: CardRegistry, player: PlayerId): boolean {
   if ((state.playerEffects ?? []).some((e) => e.cantLoseGame?.includes(player) === true)) return true;
-  return playerStaticHolds(state, registry, (ability, controller) => ability.cantLoseGame === true && controller === player);
+  return playerStaticHolds(
+    state,
+    registry,
+    (ability, controller) =>
+      (ability.cantLoseGame === true && controller === player) ||
+      // The other way round: "your opponents can't lose the game" (Abyssal Persecutor).
+      (ability.opponentsCantLoseGame === true && controller !== player),
+  );
 }
 
 /** Whether `player` can't win the game right now: an opponent of theirs
@@ -1944,7 +1951,10 @@ export function playerCantWinGame(state: GameState, registry: CardRegistry, play
   return playerStaticHolds(
     state,
     registry,
-    (ability, controller) => ability.opponentsCantWinGame === true && controller !== player,
+    (ability, controller) =>
+      (ability.opponentsCantWinGame === true && controller !== player) ||
+      // "You can't win the game" (Abyssal Persecutor).
+      (ability.cantWinGame === true && controller === player),
   );
 }
 
@@ -2895,6 +2905,8 @@ function foldLayerFourOnce(
       const kinds = new Set(set.map(subtypeKind));
       subtypes = [...subtypes.filter((s) => !kinds.has(subtypeKind(s))), ...set];
     }
+    // Curse of Conformity's "lose all creature types" (205.1a).
+    if (ability.loseCreatureTypes === true) subtypes = subtypes.filter((s) => subtypeKind(s) !== "creature");
     // Lithoform Blight's "loses all land types" (305.7).
     if (ability.loseLandTypes === true) subtypes = subtypes.filter((s) => s !== EVERY_LAND_TYPE && !isLandType(s));
     if (ability.setsChosenLandType === true) {
@@ -2982,6 +2994,7 @@ export function hasLayerFourPart(ability: StaticAbility): boolean {
     ability.setTypes !== undefined ||
     ability.removeTypes !== undefined ||
     ability.loseLandTypes === true ||
+    ability.loseCreatureTypes === true ||
     ability.addsChosenCreatureType === true ||
     ability.setsChosenCreatureType === true ||
     ability.setsChosenLandType === true

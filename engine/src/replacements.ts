@@ -402,7 +402,7 @@ export interface DrawRedirectReplacement {
  */
 export interface MillMultiplierReplacement {
   readonly event: "would-mill";
-  readonly who: "opponent" | "you" | "any-player";
+  readonly who: "opponent" | "you" | "any-player" | "enchanted-player";
   readonly multiplier?: number;
   readonly plus?: number;
 }
@@ -417,7 +417,7 @@ export interface MillMultiplierReplacement {
  */
 export interface LifeGainReplacement {
   readonly event: "would-gain-life";
-  readonly who: "opponent" | "you" | "any-player";
+  readonly who: "opponent" | "you" | "any-player" | "enchanted-player";
   readonly plus?: number;
   /** "…you gain twice that much life instead" (Rhox Faithmender, Boon
    * Reflection) — applied after every `plus`, the order that gains most. */
@@ -489,8 +489,9 @@ export interface DamageMultiplierReplacement {
   /** `"your-side"`: you, or a permanent you control (`toFilter` narrowing
    * just the permanents — Hyperion, Supreme Hero's "you or a Hero you
    * control"); `"attached"`: the permanent this Aura or Equipment is
-   * attached to (Inviolability, Shield of the Realm). */
-  readonly to?: "opponent" | "opponent-side" | "you" | "player" | "self" | "your-side" | "attached";
+   * attached to (Inviolability, Shield of the Realm); `"enchanted-player"`:
+   * the player this Aura is attached to (Curse of Bloodletting). */
+  readonly to?: "opponent" | "opponent-side" | "you" | "player" | "self" | "your-side" | "attached" | "enchanted-player";
   /** Not this permanent itself — "**other** permanents you control"
    * (Palisade Giant), "another creature you control" (Vigor). */
   readonly toOther?: true;

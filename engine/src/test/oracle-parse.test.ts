@@ -7610,6 +7610,50 @@ describe("a tapped-for-mana trigger that uses the stack", () => {
     expect(orchard.triggered[0].effect).toEqual({ kind: "create-token", token: "Spirit Token (Colorless)", count: 1, who: "target-controller" });
   });
 });
+describe("a static acting on a player", () => {
+  const face = (type_line: string, oracle_text: string) =>
+    parseFace({ name: "Test Curse", type_line, oracle_text }, { tokenFor: () => null });
+  const aura = (line: string) => face("Enchantment — Aura Curse", `Enchant player\n${line}`);
+  const creatures = { type: "creature", controlledBy: "enchanted-player" };
+
+  it("reads what the enchanted player controls", () => {
+    expect(aura("Creatures enchanted player controls get -1/-1.").static[0]).toMatchObject({
+      affects: { scope: "filter", filter: creatures },
+      grantPt: [-1, -1],
+    });
+    expect(aura("Creatures enchanted player controls attack each combat if able.").static[0]).toMatchObject({
+      affects: { scope: "filter", filter: creatures },
+      restrictions: ["must-attack"],
+    });
+    expect(
+      aura("Nonlegendary creatures enchanted player controls have base power and toughness 3/3 and lose all creature types.").static[0],
+    ).toMatchObject({
+      affects: { scope: "filter", filter: { ...creatures, notSupertype: "legendary" } },
+      setBasePt: { power: 3, toughness: 3 },
+      loseCreatureTypes: true,
+    });
+  });
+
+  it("reads damage to them, the life they gain, and the trigger on being dealt damage", () => {
+    expect(aura("If a source would deal damage to enchanted player, it deals double that damage to that player instead.").static[0].replacement).toEqual({
+      event: "would-deal-damage",
+      multiplier: 2,
+      to: "enchanted-player",
+    });
+    const wound = aura("Enchanted player can't gain life.\nWhenever enchanted player is dealt damage, they lose half their life, rounded up.");
+    expect(wound.complete).toBe(true);
+    expect(wound.static[0].replacement).toEqual({ event: "would-gain-life", who: "enchanted-player", prevent: true });
+    expect(wound.triggered[0].trigger).toEqual({ on: "deals-damage-batch", who: "any", to: "enchanted-player" });
+    expect(wound.triggered[0].effect).toEqual({ kind: "lose-life", who: "trigger-player", amount: { half: { lifeTotal: "each" }, round: "up" } });
+  });
+
+  it("reads Abyssal Persecutor's inverse pair", () => {
+    const demon = face("Creature — Demon", "You can't win the game and your opponents can't lose the game.");
+    expect(demon.complete).toBe(true);
+    expect(demon.static[0]).toMatchObject({ cantWinGame: true, opponentsCantLoseGame: true });
+  });
+});
+
 describe("a graveyard's order", () => {
   const face = (type_line: string, oracle_text: string) =>
     parseFace({ name: "Test Pile", type_line, oracle_text }, { tokenFor: () => null });

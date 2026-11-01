@@ -1528,8 +1528,9 @@ export type TriggerSpec =
       readonly filter?: CardFilter;
       /** `"you"`: only damage to the ability's controller — the initiative's
        * "whenever one or more creatures a player controls deal combat damage
-       * to you" (rule 726.2, `cards/initiative.ts`). */
-      readonly to?: "player" | "opponent" | "you";
+       * to you" (rule 726.2, `cards/initiative.ts`). `"enchanted-player"`: to
+       * the player this Aura is attached to (Grievous Wound). */
+      readonly to?: "player" | "opponent" | "you" | "enchanted-player";
       readonly combat?: boolean;
       readonly once?: "per-player" | "per-event";
     }

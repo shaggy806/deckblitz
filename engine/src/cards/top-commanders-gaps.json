@@ -4,6 +4,9 @@
  "built": [
   "mechanic:companion",
   "mechanic:deck-any-number-copies",
+  "static:static-over-enchanted-player",
+  "static:static-you-cant-win-opponents-cant-lose",
+  "trigger:enchanted-player-dealt-damage",
   "effect:top-card-of-graveyard",
   "effect:top-creature-card-of-graveyard",
   "effect:reorder-graveyard",

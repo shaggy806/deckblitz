@@ -2719,6 +2719,22 @@ attack or block unless you pay" (`cost:attack-block-cost-self`,
 `static:attack-cost-for-creature`) and the block tax Archangel of Tithes also
 needs (`static:block-tax`).
 
+### Statics acting on a player — built 2026-11-01
+
+The need-keys group `static:static-over-enchanted-player` and
+`static:static-you-cant-win-opponents-cant-lose`, with `who: "enchanted-player"`
+(Curse of Exhaustion's `prohibits`) generalised. The player a Curse enchants now
+also reaches `CardFilter.controlledBy` (so every static with a filter scope: Curse of
+Death's Hold's P/T, Curse of the Nightly Hunt's `must-attack`, Curse of Conformity's
+base P/T and new `loseCreatureTypes`), a `would-gain-life` or `would-mill` replacement's `who`,
+a `would-deal-damage` replacement's `to` (Curse of Bloodletting), and
+`deals-damage-batch`'s `to` (Grievous Wound, `trigger:enchanted-player-dealt-damage`).
+`cantWinGame` and `opponentsCantLoseGame` are Platinum Angel's pair the other way
+round (Abyssal Persecutor), read by `playerCantWinGame`/`playerCantLoseGame`. Still
+needing their own keys or checks: Curse of Hospitality's "creatures attacking enchanted
+player", and the double-faced Radiant Grace, Faithbound Judge and Accursed Witch, for
+`author-freed`; the two `amount:curses-attached-to-player` Curses wait on that key.
+
 ### A graveyard's order — built 2026-11-01
 
 The need-keys `effect:top-card-of-graveyard`, `effect:top-creature-card-of-graveyard`

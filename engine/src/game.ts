@@ -25139,7 +25139,8 @@ export class Game {
           event.target.kind !== "player" ||
           (spec.combat !== undefined && event.combat !== spec.combat) ||
           (spec.to === "opponent" && event.target.player === self.controller) ||
-          (spec.to === "you" && event.target.player !== self.controller)
+          (spec.to === "you" && event.target.player !== self.controller) ||
+          (spec.to === "enchanted-player" && event.target.player !== self.attachedToPlayer)
         ) {
           return false;
         }
@@ -42299,6 +42300,9 @@ export class Game {
       case "attached":
         if (target.kind !== "object" || by.attachedTo === null || target.object !== by.attachedTo) return false;
         break;
+      case "enchanted-player":
+        if (target.kind !== "player" || target.player !== by.attachedToPlayer) return false;
+        break;
       case "your-side":
         // You, or a permanent you control (narrowed by `toFilter`, below).
         if (target.kind === "player") {
@@ -44485,7 +44489,11 @@ export class Game {
         if (r === undefined || (r.event !== "would-mill" && r.event !== "would-gain-life")) continue;
         const reaches =
           r.who === "any-player" ||
-          (r.who === "you" ? player === source.controller : player !== source.controller);
+          (r.who === "enchanted-player"
+            ? player === source.attachedToPlayer
+            : r.who === "you"
+              ? player === source.controller
+              : player !== source.controller);
         if (!reaches || !this.staticActive(source, ability)) continue;
         out.push(r);
       }

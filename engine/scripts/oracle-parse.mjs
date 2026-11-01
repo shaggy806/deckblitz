@@ -1570,6 +1570,7 @@ export function parseTrigger(clause) {
     return [{ on: "deals-combat-damage-to-player", who: "self", orBattle: true }];
   }
   if (/^Whenever ~ is dealt damage$/.test(c)) return self("dealt-damage");
+  if (c === "Whenever enchanted player is dealt damage") return [{ on: "deals-damage-batch", who: "any", to: "enchanted-player" }];
   if (/^Whenever ~ becomes the target of a spell or ability an opponent controls$/.test(c)) {
     return [{ on: "becomes-target", who: "self", byOpponentOnly: true }];
   }
@@ -2461,6 +2462,10 @@ export function parseSentence(sentence, ctx) {
   // under the putting player's control (rule 110.2a).
   if (re(`put all cards exiled with (?:~|it) onto the battlefield`).test(s)) {
     return { kind: "return-exiled-by-source", linked: "battlefield", under: "you" };
+  }
+  // Grievous Wound's "they": the player it enchants, the player the damage hit.
+  if (/^they lose half their life, rounded up\.$/i.test(s)) {
+    return { kind: "lose-life", who: "trigger-player", amount: { half: { lifeTotal: "each" }, round: "up" } };
   }
   // Graveyard order (rule 404.2): Soldevi Digger, Phyrexian Furnace, Guiding
   // Spirit; Fossil Find's "then reorder".
@@ -6816,7 +6821,7 @@ export function parseFace(face, ctx = {}) {
     if ((m = /^Ward—Pay (\d+) life\.$/.exec(line))) { out.triggered.push(wardAbility({ payLife: Number(m[1]) })); continue; }
 
     // Card-level lines.
-    if ((m = /^Enchant (creature|land|artifact|enchantment|permanent|creature you control|creature or planeswalker)$/.exec(line))) {
+    if ((m = /^Enchant (creature|land|artifact|enchantment|permanent|player|creature you control|creature or planeswalker)$/.exec(line))) {
       out.enchant = targetOf(`target ${m[1]}`);
       continue;
     }
@@ -9408,6 +9413,32 @@ function parseStatic(line, text) {
   if (mostCommon !== null) {
     const inner = parseStatic(`${m[1]}.`, text);
     if (inner !== null && inner.condition === undefined) return { ...inner, condition: mostCommon };
+  }
+  // A static acting on a player. Abyssal Persecutor; the player a Curse
+  // enchants: what they control, the damage dealt to them, the life they gain.
+  if (line === "You can't win the game and your opponents can't lose the game.") {
+    return { affects: { scope: "self" }, cantWinGame: true, opponentsCantLoseGame: true, text };
+  }
+  if (line === "Enchanted player can't gain life.") {
+    return { affects: { scope: "self" }, replacement: { event: "would-gain-life", who: "enchanted-player", prevent: true }, text };
+  }
+  if (line === "If a source would deal damage to enchanted player, it deals double that damage to that player instead.") {
+    return { affects: { scope: "self" }, replacement: { event: "would-deal-damage", multiplier: 2, to: "enchanted-player" }, text };
+  }
+  const creaturesEnchanted = { affects: { scope: "filter", filter: { type: "creature", controlledBy: "enchanted-player" } } };
+  if ((m = /^Creatures enchanted player controls get ([+-]\d+)\/([+-]\d+)\.$/.exec(line))) {
+    return { ...creaturesEnchanted, grantPt: [Number(m[1]), Number(m[2])], text };
+  }
+  if (line === "Creatures enchanted player controls attack each combat if able.") {
+    return { ...creaturesEnchanted, restrictions: ["must-attack"], text };
+  }
+  if (line === "Nonlegendary creatures enchanted player controls have base power and toughness 3/3 and lose all creature types.") {
+    return {
+      affects: { scope: "filter", filter: { type: "creature", controlledBy: "enchanted-player", notSupertype: "legendary" } },
+      setBasePt: { power: 3, toughness: 3 },
+      loseCreatureTypes: true,
+      text,
+    };
   }
   // "White creatures get +1/+1" (Divine Sacrament's first line, Call to Arms').
   if ((m = /^(White|Blue|Black|Red|Green) creatures get ([+-]\d+)\/([+-]\d+)\.$/.exec(line))) {

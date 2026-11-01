@@ -3183,6 +3183,8 @@ graveyard). `describeTargetSpec(spec)` renders any spec as a UI label.
 Legality is checked at cast **and** again on resolution; a spell whose targets
 have all become illegal is countered by the game (fizzles).
 
+**A static over the player an Aura enchants** (Curses): `affects: { scope: "filter", filter: { type: "creature", controlledBy: "enchanted-player" } }` for what they control, with any grant (Curse of Death's Hold's `grantPt`, Curse of the Nightly Hunt's `restrictions`, Curse of Conformity's `setBasePt` and `loseCreatureTypes`); `replacement: { event: "would-gain-life", who: "enchanted-player", prevent: true }` (Grievous Wound); `{ event: "would-deal-damage", multiplier: 2, to: "enchanted-player" }` (Curse of Bloodletting); the trigger `{ on: "deals-damage-batch", who: "any", to: "enchanted-player" }` (Grievous Wound, its player `who: "trigger-player"`); `prohibits: { who: "enchanted-player" }` (Curse of Exhaustion). Platinum Angel's pair the other way round is `cantWinGame` and `opponentsCantLoseGame` (Abyssal Persecutor).
+
 An Aura uses `targets: ["creature"]` (or whatever it enchants) — it attaches to
 its target on resolution automatically because it has the `"Aura"` subtype.
 "Enchant player" / "Enchant opponent" (a Curse, rule 303.4) is `targets:
@@ -3194,8 +3196,7 @@ its controller picks a player (303.4f, the `choose-enchant` decision's
 (`attacks-player`'s `defender: "attached"` — `curseWhenAttacked` in `helpers.ts`
 builds the Curse of Opulence family's whole trigger), and "a creature
 enchanted player controls" is `"enchanted-player-controls"` (Trespasser's
-Curse). Not yet: a static ability over the enchanted player (Grievous Wound's
-"can't gain life"), or attaching an Aura to a player by an effect (Ardenn).
+Curse). Not yet: attaching an Aura to a player by an effect (Ardenn).
 
 ---
 
