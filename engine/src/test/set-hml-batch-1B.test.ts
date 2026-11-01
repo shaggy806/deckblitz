@@ -16,6 +16,7 @@ import {
   lands,
   named,
   nextTurn,
+  pickModes,
   pickPermanents,
   pickTargets,
   pt,
@@ -33,13 +34,14 @@ describe("Koskun Falls", () => {
     const { game, a } = table();
     const falls = spawn(game, "Koskun Falls");
     const bears = spawn(game, "Grizzly Bears");
+    pickModes(a, 0);
     pickPermanents(a, bears);
     toStep(game, "upkeep");
     settle(game);
     expect(zone(game, falls)).toBe("battlefield");
     expect(game.state.objects[bears].tapped).toBe(true);
     game.state.objects[bears].tapped = false;
-    pickPermanents(a);
+    pickModes(a);
     toStep(game, "upkeep");
     settle(game);
     expect(zone(game, falls)).toBe("graveyard");

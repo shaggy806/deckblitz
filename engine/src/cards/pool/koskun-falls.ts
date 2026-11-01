@@ -12,9 +12,7 @@ import { defineCard } from "../define.js";
 //   [2014-02-01] Unless some effect explicitly says otherwise, a creature that can't attack you
 //     can still attack a planeswalker you control.
 //
-// The upkeep tax is Public Thoroughfare's shape: choose up to one untapped
-// creature you control and tap it, or sacrifice this. The attack tax is
-// Propaganda's.
+// The upkeep tax is Public Thoroughfare's shape. The attack tax is Propaganda's.
 
 const UPKEEP = "At the beginning of your upkeep, sacrifice this enchantment unless you tap an untapped creature you control.";
 const TAX = "Creatures can't attack you unless their controller pays {2} for each creature they control that's attacking you.";
@@ -31,21 +29,12 @@ export default defineCard({
       trigger: { on: "step-begins", step: "upkeep", who: "you" },
       targets: [],
       effect: {
-        kind: "sequence",
-        effects: [
-          {
-            kind: "choose-permanents",
-            filter: { type: "creature", controlledBy: "you", tapped: false },
-            upTo: 1,
-            then: { kind: "tap", target: 0 },
-            prompt: "Tap an untapped creature you control, or sacrifice Koskun Falls",
-          },
-          {
-            kind: "conditional",
-            condition: { kind: "this-way", what: "tapped", atMost: 0 },
-            then: { kind: "sacrifice-source" },
-          },
+        kind: "unless",
+        chooser: "you",
+        options: [
+          { tapPermanent: { type: "creature", controlledBy: "you", tapped: false }, text: "Tap an untapped creature you control" },
         ],
+        otherwise: { kind: "sacrifice-source" },
       },
       resolve: null,
       text: UPKEEP,

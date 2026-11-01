@@ -5958,3 +5958,7 @@ engine terms. A second thing to check is a second test.
 ### Sivitri, Dragon Master: attacking costs life
 - **Do:** Use Sivitri's +1 and pass the turn. As Bob, go to combat and attack Alice with the Bears.
 - **Expect:** The prompt adds "costs 2 life to attack". Declaring costs Bob 2 life.
+
+### Karoo: return an untapped Plains or sacrifice it
+- **Do:** Play Karoo, answer Yes to "Return an untapped Plains you control to its owner's hand", click the untapped Plains and Confirm.
+- **Expect:** Only the untapped Plains can be picked. It goes to your hand, and Karoo stays, tapped.

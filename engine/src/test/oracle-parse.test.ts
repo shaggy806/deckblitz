@@ -6881,6 +6881,66 @@ describe("attack taxes", () => {
   });
 });
 
+describe("an unless's payments", () => {
+  const read = (sentence: string, context = ctx()) => parseEffect(sentence, context).effect;
+
+  it("reads mana and life together, and life by toughness", () => {
+    expect(read("Counter target spell unless its controller pays {1} and 1 life.")).toEqual({
+      kind: "unless",
+      chooser: 0,
+      options: [{ pay: "{1}", andLife: 1, text: "Pay {1} and 1 life" }],
+      otherwise: { kind: "counter", target: 0 },
+    });
+    expect(read("Destroy target creature unless its controller pays life equal to its toughness.")).toEqual({
+      kind: "unless",
+      chooser: 0,
+      options: [{ payLifeAmount: { toughnessOf: 0 }, text: "Pay {X} life" }],
+      otherwise: { kind: "destroy", target: 0 },
+    });
+  });
+
+  it("reads energy", () => {
+    expect(read("Then discard a card at random unless you pay {E}{E}.")).toEqual({
+      kind: "unless",
+      chooser: "you",
+      options: [{ payEnergy: 2, text: "Pay {E}{E}" }],
+      otherwise: { kind: "discard", target: "you", amount: 1, random: true },
+    });
+  });
+
+  it("reads returning and tapping a permanent", () => {
+    expect(read("Sacrifice it unless you return an untapped Plains you control to its owner's hand.")).toEqual({
+      kind: "unless",
+      chooser: "you",
+      options: [
+        {
+          returnToHand: { subtype: "Plains", controlledBy: "you", tapped: false },
+          text: "Return an untapped Plains you control to its owner's hand",
+        },
+      ],
+      otherwise: { kind: "sacrifice-source" },
+    });
+    expect(read("Sacrifice it unless you tap an untapped permanent you control.")).toEqual({
+      kind: "unless",
+      chooser: "you",
+      options: [{ tapPermanent: { controlledBy: "you", tapped: false }, text: "Tap an untapped permanent you control" }],
+      otherwise: { kind: "sacrifice-source" },
+    });
+    // Tapping doesn't go to a hand; returning has to say where.
+    expect(read("Sacrifice it unless you tap an untapped Plains you control to its owner's hand.")).toBeNull();
+    expect(read("Sacrifice it unless you return an untapped Plains you control.")).toBeNull();
+  });
+
+  it("reads sacrificing the target", () => {
+    expect(read("Target enchantment deals damage equal to its mana value to its controller unless that player sacrifices it.")).toEqual({
+      kind: "unless",
+      chooser: 0,
+      options: [{ sacrificeThat: 0, text: "Sacrifice it" }],
+      otherwise: { kind: "damage", amount: { manaValueOf: 0 }, toControllerOfTarget: 0, from: { target: 0 } },
+    });
+  });
+});
+
 describe("P/T bonuses per amount", () => {
   const per = (type_line: string, oracle_text: string) => {
     const card = parseFace({ name: "Test Per", type_line, oracle_text }, { tokenFor: () => null });

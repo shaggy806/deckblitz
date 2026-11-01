@@ -25,21 +25,10 @@ export default defineCard({
       trigger: { on: "enters-battlefield", who: "self" },
       targets: [],
       effect: {
-        kind: "sequence",
-        effects: [
-          {
-            kind: "choose-permanents",
-            filter: UNTAPPED,
-            upTo: 1,
-            then: { kind: "tap", target: 0 },
-            prompt: "Tap an untapped artifact or land you control, or sacrifice Public Thoroughfare",
-          },
-          {
-            kind: "conditional",
-            condition: { kind: "this-way", what: "tapped", atMost: 0 },
-            then: { kind: "sacrifice-source" },
-          },
-        ],
+        kind: "unless",
+        chooser: "you",
+        options: [{ tapPermanent: UNTAPPED, text: "Tap an untapped artifact or land you control" }],
+        otherwise: { kind: "sacrifice-source" },
       },
       resolve: null,
       text: ENTERS,

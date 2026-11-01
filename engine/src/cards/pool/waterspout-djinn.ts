@@ -7,11 +7,8 @@ import { defineCard } from "../define.js";
 //     triggered ability. This means if you have two Waterspout Djinns, they must each return
 //     different Islands.
 //
-// Living Tsunami's upkeep, narrowed to an untapped Island: with one you may
-// return it, and the Djinn is sacrificed if you don't — or can't.
 const UPKEEP_TEXT =
   "At the beginning of your upkeep, sacrifice this creature unless you return an untapped Island you control to its owner's hand.";
-const ISLAND = { type: "land", subtype: "Island", tapped: false } as const;
 
 export default defineCard({
   name: "Waterspout Djinn",
@@ -28,22 +25,15 @@ export default defineCard({
       trigger: { on: "step-begins", step: "upkeep", who: "you" },
       targets: [],
       effect: {
-        kind: "conditional",
-        condition: { kind: "controls", filter: ISLAND, atLeast: 1 },
-        then: {
-          kind: "may",
-          prompt: "Return an untapped Island you control to its owner's hand? If you don't, sacrifice Waterspout Djinn.",
-          effect: {
-            kind: "choose-permanents",
-            filter: { ...ISLAND, controlledBy: "you" },
-            min: 1,
-            upTo: 1,
-            then: { kind: "return-to-hand", target: 0 },
-            prompt: "Return an untapped Island you control to its owner's hand",
+        kind: "unless",
+        chooser: "you",
+        options: [
+          {
+            returnToHand: { subtype: "Island", controlledBy: "you", tapped: false },
+            text: "Return an untapped Island you control to its owner's hand",
           },
-          else: { kind: "sacrifice-source" },
-        },
-        else: { kind: "sacrifice-source" },
+        ],
+        otherwise: { kind: "sacrifice-source" },
       },
       resolve: null,
       text: UPKEEP_TEXT,

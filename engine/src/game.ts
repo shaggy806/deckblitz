@@ -31376,7 +31376,7 @@ export class Game {
     }
 
     // Only offer what they can actually take.
-    const offer = this.optionModes(decide, options, source);
+    const offer = this.optionModes(decide, options, source, targets);
     if (offer === null) {
       applyOtherwise();
       return;
@@ -31413,10 +31413,35 @@ export class Game {
     player: PlayerId,
     options: readonly BoundUnlessOption[],
     source: ObjectId,
+    targets: ResolvedTargets,
   ): { readonly modes: ModeOption[]; readonly cost?: string } | null {
+    const hasPermanent = (filter: CardFilter): boolean =>
+      this.state.zones.shared.battlefield.some((id) => matchesFilter(this.state, this.registry, id, filter, { you: player }));
     const available = options.filter((option) => {
-      if ("pay" in option) return this.payMana(player, parseManaCost(option.pay)) !== null;
+      if ("pay" in option) {
+        const payment = this.payMana(player, parseManaCost(option.pay));
+        return payment !== null && this.canPayLife(player, payment.life + (option.andLife ?? 0));
+      }
       if ("payLife" in option) return this.canPayLife(player, option.payLife);
+      if ("payEnergy" in option) return this.state.players[player].energy >= option.payEnergy;
+      if ("putCounter" in option) return hasPermanent(option.on);
+      if ("returnToHand" in option) return hasPermanent(option.returnToHand);
+      if ("tapPermanent" in option) return hasPermanent(option.tapPermanent);
+      if ("sacrificeThat" in option) {
+        const that = option.sacrificeThat;
+        const ref = typeof that === "number" ? targets[that] : null;
+        const id =
+          that === "source"
+            ? source
+            : that === "attached"
+              ? (this.state.objects[source]?.attachedTo ?? undefined)
+              : ref?.kind === "object"
+                ? ref.object
+                : undefined;
+        const object = id === undefined ? undefined : this.state.objects[id];
+        // Only a permanent they control can be sacrificed (rule 701.21a).
+        return object?.zone === "battlefield" && object.controller === player;
+      }
       if ("discard" in option) {
         return this.state.zones.perPlayer[player].hand.length >= option.discard;
       }
@@ -31442,6 +31467,14 @@ export class Game {
       "forage" in option && option.forage === true
         ? { kind: "sequence", effects: [effect, { kind: "foraged" }] }
         : effect;
+    const chosenPermanent = (filter: CardFilter, then: EffectSpec, prompt: string): EffectSpec => ({
+      kind: "choose-permanents",
+      filter,
+      min: 1,
+      upTo: 1,
+      then,
+      prompt,
+    });
     const modes = available.map(
       (option): ModeOption => ({
         text: option.text,
@@ -31460,6 +31493,16 @@ export class Game {
             ? { kind: "damage", amount: option.takeDamage, who: "you" }
             : "payLife" in option
             ? { kind: "lose-life", amount: option.payLife, who: "you" }
+            : "payEnergy" in option
+            ? { kind: "pay-energy", amount: option.payEnergy }
+            : "sacrificeThat" in option
+            ? { kind: "sacrifice-target", target: option.sacrificeThat }
+            : "putCounter" in option
+            ? chosenPermanent(option.on, { kind: "add-counter", target: 0, counter: option.putCounter, amount: 1 }, option.text)
+            : "returnToHand" in option
+            ? chosenPermanent(option.returnToHand, { kind: "return-to-hand", target: 0 }, option.text)
+            : "tapPermanent" in option
+            ? chosenPermanent(option.tapPermanent, { kind: "tap", target: 0 }, option.text)
             : "sacrifice" in option
               ? {
                   kind: "sacrifice",
@@ -31481,8 +31524,16 @@ export class Game {
                       filter: option.putFromHand,
                     }
                   // The mana option's payment rides on the decision's own
-                  // `cost`, so its mode has nothing left to do.
-                  : { kind: "sequence", effects: [] },
+                  // `cost`, so its mode has only what comes with it left to do.
+                  : {
+                      kind: "sequence",
+                      effects: [
+                        ...((option.andLife ?? 0) > 0
+                          ? [{ kind: "lose-life", amount: option.andLife ?? 0, who: "you" } as const]
+                          : []),
+                        ...(option.ifPaid !== undefined ? [option.ifPaid] : []),
+                      ],
+                    },
         ),
       }),
     );
@@ -31532,7 +31583,7 @@ export class Game {
     }
     const offer =
       spec.options !== undefined
-        ? this.optionModes(player, spec.options, source)
+        ? this.optionModes(player, spec.options, source, targets)
         : spec.effect !== undefined
           ? { modes: [{ text: spec.prompt ?? "Do it?", effect: spec.effect }] }
           : null;

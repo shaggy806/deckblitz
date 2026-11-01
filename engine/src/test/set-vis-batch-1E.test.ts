@@ -34,6 +34,7 @@ describe("Everglades", () => {
   it("stays if an untapped Swamp is returned", () => {
     const { game, a } = table();
     const swamp = spawn(game, "Swamp");
+    pickModes(a, 0);
     pickPermanents(a, swamp);
     const glades = enter(game, "Everglades");
     expect(zone(game, glades)).toBe("battlefield");

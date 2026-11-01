@@ -27,6 +27,7 @@ describe("Visions batch 1, group C", () => {
   it("Dormant Volcano stays when an untapped Mountain is returned", () => {
     const { game, a } = table();
     const mountain = spawn(game, "Mountain", A);
+    pickModes(a, 0);
     pickPermanents(a, mountain);
     const volcano = enter(game, "Dormant Volcano", A);
     expect(zone(game, volcano)).toBe("battlefield");

@@ -1905,6 +1905,17 @@ export function parseSentence(sentence, ctx) {
   if (/^this turn, creatures can't attack unless their controller pays \{X\} for each attacking creature they control\.$/i.test(s)) {
     return { kind: "player-effect", duration: "end-of-turn", attackTax: { generic: "x", covers: "all" } };
   }
+  // An `unless`'s life by the target's toughness (Essence Vortex): its "equal
+  // to" is the option's amount, which the amount guard below would refuse.
+  if (/^destroy target creature unless its controller pays life equal to its toughness\.$/i.test(s)) {
+    const i = ctx.target(targetOf("target creature"));
+    return {
+      kind: "unless",
+      chooser: i,
+      options: [{ payLifeAmount: { toughnessOf: i }, text: "Pay {X} life" }],
+      otherwise: { kind: "destroy", target: i },
+    };
+  }
   // A meld card's "If you both own and control ~ and a creature named
   // Hanweir Garrison, exile them, then meld them into Hanweir, the Writhing
   // Township." (rule 701.42 — the `meld` effect, which makes the test).
@@ -3823,6 +3834,49 @@ export function parseSentence(sentence, ctx) {
   if ((m = /^counter (target spell|target creature spell|target noncreature spell|target instant or sorcery spell) unless its controller pays ((?:\{\d+\})+)\.$/i.exec(s))) {
     const i = slot(m[1]);
     return { kind: "unless", chooser: i, options: [{ pay: m[2], text: `Pay ${m[2]}` }], otherwise: { kind: "counter", target: i } };
+  }
+  // An `unless` with a payment of its own kind (rule 118.12a): mana and life
+  // together (Mundungu), energy (Rush of Inspiration), returning or tapping a
+  // permanent (Karoo, Command Bridge), sacrificing the target (Enchanter's Bane).
+  if ((m = /^counter (target spell|target creature spell|target noncreature spell) unless its controller pays ((?:\{\d+\})+) and (\d+) life\.$/i.exec(s))) {
+    const i = slot(m[1]);
+    return {
+      kind: "unless",
+      chooser: i,
+      options: [{ pay: m[2], andLife: Number(m[3]), text: `Pay ${m[2]} and ${m[3]} life` }],
+      otherwise: { kind: "counter", target: i },
+    };
+  }
+  if ((m = /^(?:then )?discard a card at random unless you pay ((?:\{E\})+)\.$/i.exec(s))) {
+    return {
+      kind: "unless",
+      chooser: "you",
+      options: [{ payEnergy: m[1].length / "{E}".length, text: `Pay ${m[1]}` }],
+      otherwise: { kind: "discard", target: "you", amount: 1, random: true },
+    };
+  }
+  if ((m = /^sacrifice (?:~|it) unless you (return|tap) (an? untapped (.+?)) you control(?: to its owner's hand)?\.$/i.exec(s))) {
+    const toHand = /to its owner's hand\.$/i.test(s);
+    const filter = parseTypePhrase(m[3]);
+    if (filter !== null && (m[1].toLowerCase() === "return") === toHand) {
+      const permanents = { ...filter, controlledBy: "you", tapped: false };
+      const text = `${m[1][0].toUpperCase()}${m[1].slice(1)} ${m[2]} you control${toHand ? " to its owner's hand" : ""}`;
+      return {
+        kind: "unless",
+        chooser: "you",
+        options: [toHand ? { returnToHand: permanents, text } : { tapPermanent: permanents, text }],
+        otherwise: { kind: "sacrifice-source" },
+      };
+    }
+  }
+  if ((m = /^(target enchantment|target artifact|target creature) deals damage equal to its mana value to its controller unless that player sacrifices it\.$/i.exec(s))) {
+    const i = slot(m[1]);
+    return {
+      kind: "unless",
+      chooser: i,
+      options: [{ sacrificeThat: i, text: "Sacrifice it" }],
+      otherwise: { kind: "damage", amount: { manaValueOf: i }, toControllerOfTarget: i, from: { target: i } },
+    };
   }
 
   // Libraries and graveyards.

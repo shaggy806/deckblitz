@@ -1100,12 +1100,46 @@ export function wardCostText(cost: WardCost): string {
 export type UnlessTimes = { readonly times?: EffectAmount };
 
 export type UnlessOption =
-  | ({ readonly pay: string; readonly text: string } & UnlessTimes)
+  | ({
+      readonly pay: string;
+      readonly text: string;
+      /** "…unless its controller pays {1} **and 1 life**" (Mundungu): life as
+       * part of the same payment, all of it or none (rule 118.3). */
+      readonly andLife?: number;
+      /** "…unless you pay {G} for each wind counter on it. **If you pay**, …"
+       * (Cyclone): what taking this option also does, as the chooser's effect
+       * like the payment. */
+      readonly ifPaid?: EffectSpec;
+    } & UnlessTimes)
   /** "…unless that player pays {X}, where X is this creature's power"
    * (Esper Sentinel): that much generic mana, read as the effect applies —
    * `{X}` in `text` shows the amount. A mana option like `pay`. */
   | { readonly payGeneric: EffectAmount; readonly text: string }
   | ({ readonly payLife: number; readonly text: string } & UnlessTimes)
+  /** "…unless its controller pays life **equal to its toughness**" (Essence
+   * Vortex): that much life, read as the effect applies — `{X}` in `text` shows
+   * the amount. A life option like `payLife`. */
+  | { readonly payLifeAmount: EffectAmount; readonly text: string }
+  /** "…unless you pay {E}{E}" (Rush of Inspiration): that much energy (rule
+   * 107.14), offered only with that much. */
+  | { readonly payEnergy: number; readonly text: string }
+  /** "…unless the player puts a -1/-1 counter on a creature they control"
+   * (Thelon's Chant): one counter of the kind `putCounter` names, on a
+   * permanent of the chooser's matching `on`, their choice of which. "You" in
+   * `on` is the chooser. */
+  | { readonly putCounter: string; readonly on: CardFilter; readonly text: string }
+  /** "…unless you return an untapped Plains you control to its owner's hand"
+   * (Karoo): a permanent matching this, the chooser's choice of which. "You" is
+   * the chooser. */
+  | { readonly returnToHand: CardFilter; readonly text: string }
+  /** "…unless you tap an untapped permanent you control" (Command Bridge):
+   * a permanent matching this (so with `tapped: false`), the chooser's choice
+   * of which. "You" is the chooser. */
+  | { readonly tapPermanent: CardFilter; readonly text: string }
+  /** "…unless that player sacrifices **it**" (Enchanter's Bane), "**that
+   * artifact**" (Curse Artifact): a given permanent, offered only while the
+   * chooser controls it (rule 701.21a). No choice of which. */
+  | { readonly sacrificeThat: EffectTargetRef; readonly text: string }
   /** `exceptSource`: "sacrifice **another** creature" (Ziatora, the
    * Incinerator) — never the effect's own source. `count`: "sacrifice **two**
    * Blood tokens" (Strefan, Maurer Progenitor; Rakdos, Patron of Chaos) —
@@ -1133,9 +1167,12 @@ export type UnlessOption =
    * being dealt damage needs nothing (prevented, it was still chosen). */
   | { readonly takeDamage: number; readonly text: string };
 
-/** An {@link UnlessOption} with any generic amount fixed — what the engine
- * offers. `"each-player-may"`'s options are these already. */
-export type BoundUnlessOption = Exclude<UnlessOption, { readonly payGeneric: EffectAmount }>;
+/** An {@link UnlessOption} with any generic or life amount fixed — what the
+ * engine offers. `"each-player-may"`'s options are these already. */
+export type BoundUnlessOption = Exclude<
+  UnlessOption,
+  { readonly payGeneric: EffectAmount } | { readonly payLifeAmount: EffectAmount }
+>;
 
 /**
  * How far an `"each-player-may"` has got — set by the engine on the copy it
@@ -6788,6 +6825,13 @@ export type EffectSpec =
       readonly who?: PlayerScope;
     }
   | {
+      /** The effect's controller pays this much energy (rule 107.14): an
+       * `unless`'s `payEnergy` option, offered only with that much. Never
+       * authored. */
+      readonly kind: "pay-energy";
+      readonly amount: number;
+    }
+  | {
       /** The effect's controller gets an emblem (rule 114 — ROADMAP Phase 10).
        * `static` is a `"creatures-you-control"` anthem, folded in by the layer
        * system (the common planeswalker-ultimate emblem).
@@ -10564,7 +10608,12 @@ function bindUnlessTimes(option: BoundUnlessOption, ctx: ResolutionContext): Bou
   const n = Math.max(0, Math.floor(amountValue(option.times, ctx)));
   if ("pay" in option) {
     const pay = option.pay.repeat(n);
-    return { pay, text: `Pay ${pay}` };
+    return {
+      pay,
+      text: `Pay ${pay}`,
+      ...(option.andLife !== undefined ? { andLife: option.andLife * n } : {}),
+      ...(option.ifPaid !== undefined ? { ifPaid: option.ifPaid } : {}),
+    };
   }
   if ("payLife" in option) return { payLife: option.payLife * n, text: `Pay ${option.payLife * n} life` };
   if ("sacrifice" in option) {
@@ -15156,6 +15205,9 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "get-energy":
       ctx.getEnergy(Math.max(0, Math.floor(amountValue(spec.amount, ctx))), spec.who);
       return;
+    case "pay-energy":
+      ctx.getEnergy(-spec.amount, "you");
+      return;
     case "add-player-counters": {
       const players =
         spec.target !== undefined
@@ -15636,6 +15688,10 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           if ("payGeneric" in option) {
             const n = amountValue(option.payGeneric, ctx);
             return { pay: `{${n}}`, text: option.text.split("{X}").join(`{${n}}`) };
+          }
+          if ("payLifeAmount" in option) {
+            const n = Math.max(0, amountValue(option.payLifeAmount, ctx));
+            return { payLife: n, text: option.text.split("{X}").join(`${n}`) };
           }
           return bindUnlessTimes(option, ctx);
         }),

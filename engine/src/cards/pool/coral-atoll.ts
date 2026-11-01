@@ -23,22 +23,15 @@ export default defineCard({
       trigger: { on: "enters-battlefield", who: "self" },
       targets: [],
       effect: {
-        kind: "sequence",
-        effects: [
+        kind: "unless",
+        chooser: "you",
+        options: [
           {
-            kind: "choose-permanents",
-            filter: { subtype: "Island", controlledBy: "you", tapped: false },
-            min: 0,
-            upTo: 1,
-            then: { kind: "return-to-hand", target: 0 },
-            prompt: "Return an untapped Island you control to its owner's hand, or sacrifice Coral Atoll",
-          },
-          {
-            kind: "conditional",
-            condition: { kind: "not", of: { kind: "this-way", what: "returned-to-hand" } },
-            then: { kind: "sacrifice-source" },
+            returnToHand: { subtype: "Island", controlledBy: "you", tapped: false },
+            text: "Return an untapped Island you control to its owner's hand",
           },
         ],
+        otherwise: { kind: "sacrifice-source" },
       },
       resolve: null,
       text: ETB,

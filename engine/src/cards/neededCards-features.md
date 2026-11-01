@@ -2503,6 +2503,19 @@ keywords, the `bandsWithOther` static, the `bandedWithSource` filter. Key:
 `keyword:banding`. Still open beside it: 702.22i ("would become blocked due
 to an effect" — no effect makes an attacker blocked yet).
 
+### An unless's payments — built 2026-11-01
+
+The need-keys Phase 2 family `cost:unless-pay-colored-per-amount`: one
+`UnlessOption` per payment (rule 118.12a), each offered only to a player who can
+do all of it (118.3): `pay` with `andLife` (Mundungu) and `ifPaid` (Cyclone, its
+`times` being "{G} for each wind counter"), `payLifeAmount` (Essence Vortex),
+`payEnergy` (Rush of Inspiration), `putCounter`, `returnToHand` (Karoo),
+`tapPermanent` (Command Bridge), `sacrificeThat` (Enchanter's Bane, Curse
+Artifact). They go on an `each-player-may` too. Keys: the group's nine. Still
+open beside it: the Chants' trigger (`trigger:player-puts-onto-battlefield`), and
+Reservoir Kraken's "any opponent may … If they do", where the option is built
+but how several opponents answer isn't.
+
 ### Attack taxes past a fixed {N} on a player — built 2026-11-01
 
 The need-keys Phase 2 family `cost:attack-tax`: `attackTax`'s `covers` (you,

@@ -31,22 +31,15 @@ export default defineCard({
       trigger: { on: "enters-battlefield", who: "self" },
       targets: [],
       effect: {
-        kind: "sequence",
-        effects: [
+        kind: "unless",
+        chooser: "you",
+        options: [
           {
-            kind: "choose-permanents",
-            filter: { subtype: "Mountain", tapped: false, controlledBy: "you" },
-            min: 0,
-            upTo: 1,
-            then: { kind: "return-to-hand", target: 0 },
-            prompt: "Return an untapped Mountain you control to its owner's hand, or sacrifice Dormant Volcano",
-          },
-          {
-            kind: "conditional",
-            condition: { kind: "not", of: { kind: "this-way", what: "returned-to-hand" } },
-            then: { kind: "sacrifice-source" },
+            returnToHand: { subtype: "Mountain", tapped: false, controlledBy: "you" },
+            text: "Return an untapped Mountain you control to its owner's hand",
           },
         ],
+        otherwise: { kind: "sacrifice-source" },
       },
       resolve: null,
       text: TEXT,

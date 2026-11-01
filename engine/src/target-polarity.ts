@@ -643,6 +643,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "remove-player-counters": (n, v) =>
     n.counter === "experience" ? v.touch(n.target, "harm", MINOR) : v.touch(n.target, "help", MINOR),
   "get-energy": none,
+  "pay-energy": none,
   "create-emblem": none,
   epic: none,
   "prevent-all-combat-damage": none,

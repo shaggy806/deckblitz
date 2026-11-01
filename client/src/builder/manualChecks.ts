@@ -8926,6 +8926,12 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'Karoo: return an untapped Plains or sacrifice it',
+    board({
+      you: { bf: [{ name: 'Plains', n: 1 }, { name: 'Plains', tapped: true }], hand: ['Karoo'] },
+    }),
+  ),
+  preset(
     'Sivitri, Dragon Master: attacking costs life',
     board({
       you: { bf: ['Sivitri, Dragon Master'] },

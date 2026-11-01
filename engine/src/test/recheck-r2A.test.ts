@@ -206,6 +206,7 @@ describe("Coral Atoll", () => {
   it("returns an untapped Island or is sacrificed", () => {
     const { game, a } = table();
     const island = spawn(game, "Island");
+    pickModes(a, 0);
     pickPermanents(a, island);
     const atoll = enter(game, "Coral Atoll");
     expect(zone(game, island)).toBe("hand");

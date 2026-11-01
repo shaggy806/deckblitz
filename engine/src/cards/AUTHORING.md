@@ -1122,6 +1122,18 @@ player" is `"active-player"` (Curse of the Bloody Tome, Cruel Reality, Torment
 of Scarabs' `unless` with `chooser: "active-player"`); the scaffolder reads the
 trigger clause.
 
+**An `unless`'s options**, one kind per payment (rule 118.12a), each offered only to
+a player who can do all of it: `{ pay, times?, andLife?, ifPaid?, text }` ("{1} and 1
+life" — Mundungu; "{G} for each wind counter on it. If you pay, …" — Cyclone,
+`ifPaid` being the chooser's effect like the payment), `{ payGeneric }`, `{ payLife }`,
+`{ payLifeAmount, text: "Pay {X} life" }` ("life equal to its toughness" — Essence
+Vortex), `{ payEnergy }` (Rush of Inspiration), `{ sacrifice }`, `{ putCounter, on }`,
+`{ returnToHand }` (Karoo), `{ tapPermanent }` (Command Bridge; both filters say
+`tapped: false` and `controlledBy: "you"`, you being the chooser), `{ sacrificeThat }`
+("sacrifices it" — Enchanter's Bane with a slot, Curse Artifact with `"attached"`,
+only while the chooser controls it), `{ discard }`, `{ exileFromGraveyard }`,
+`{ putFromHand }`, `{ takeDamage }`.
+
 **"Unless any player pays {N}"** (Prophecy's rhystic cards — Rhystic Tutor,
 Wild Might, Icy Prison, Soul Strings' `payGeneric: "x"`) is `unless` with
 `chooser: "any-player"`: each player still in the game is asked in turn from

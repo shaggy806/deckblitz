@@ -309,6 +309,7 @@ describe("Public Thoroughfare", () => {
   it("enters tapped and stays when you tap an untapped land for it", () => {
     const { game, a } = table();
     const [wastes] = lands(game, "Wastes", 1);
+    pickModes(a, 0);
     const seen = pickPermanents(a, wastes);
     const thoroughfare = enter(game, "Public Thoroughfare");
     expect(seen.offered).toContain(wastes);
