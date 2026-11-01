@@ -7036,9 +7036,10 @@ export class Game {
     // "Until your next turn, whenever …" waits for whose turn this is (below).
     this.state.delayedTriggers = this.state.delayedTriggers.filter(
       (t) =>
-        typeof t.at !== "object" ||
-        ("leaves" in t.at && t.at.thisTurn !== true) ||
-        ("whenever" in t.at && t.at.untilYourNextTurn === true),
+        t.at !== "end-of-combat-this-turn" &&
+        (typeof t.at !== "object" ||
+          ("leaves" in t.at && t.at.thisTurn !== true) ||
+          ("whenever" in t.at && t.at.untilYourNextTurn === true)),
     );
     // Nothing has attacked this turn yet — whoever controls it. (The untap
     // step only reaches the active player's permanents.)
@@ -29862,6 +29863,13 @@ export class Game {
       },
       // "That creature's controller" — who controlled it as it left, if it
       // has (rule 608.2h); `moveObject` has handed it back to its owner.
+      battlefieldStintOf: (id) => {
+        const object = this.state.objects[id];
+        if (object === undefined) return this.state.ceasedTokens?.[id]?.zoneChangeCount ?? 0;
+        return object.zone === "battlefield"
+          ? (object.zoneChangeCount ?? 0)
+          : (object.lastKnown?.zoneChangeCount ?? object.zoneChangeCount ?? 0);
+      },
       controllerOf: (ref) => {
         if (ref.kind === "player") return ref.player;
         // A spell targeted on the stack that has left it since (countered):
@@ -39156,6 +39164,8 @@ export class Game {
       // one: this step began before it existed.
       case "end-of-combat":
         return step === "end-combat";
+      case "end-of-combat-this-turn":
+        return step === "end-combat" && !laterTurn;
       // Fired only once the cleanup step's turn-based actions are done (rule
       // 514.3a); one made in that step's priority window waits for the
       // cleanup step that follows it.
@@ -39419,6 +39429,21 @@ export class Game {
       return seat === undefined ? undefined : (seat.turnHistory ??= {});
     };
     switch (event.type) {
+      case "blocker-declared": {
+        // The two creatures as they are now, every block of this declaration
+        // made (`CardFilter.blockedThisTurn`).
+        const history = historyOf(this.state.objects[event.blocker]?.controller);
+        if (history !== undefined) {
+          (history.blocks ??= []).push({
+            blocker: event.blocker,
+            blockerWas: this.takeLastKnown(event.blocker),
+            attacker: event.attacker,
+            attackerWas: this.takeLastKnown(event.attacker),
+            combatPhase: this.state.turn.combatPhases ?? 1,
+          });
+        }
+        return;
+      }
       case "permanent-entered-battlefield": {
         const object = this.state.objects[event.object];
         const history = historyOf(object?.controller);

@@ -1224,9 +1224,12 @@ up with a `delayed-trigger` effect:
 ```
 
 `at` is one of `next-end-step`, `your-next-end-step`, `next-upkeep`,
-`your-next-upkeep`, `your-next-main-phase`. "Next" never means a step already
+`your-next-upkeep`, `your-next-main-phase`, `end-of-combat` or
+`end-of-combat-this-turn` ("at this turn's next end of combat": Venomous Breath,
+never firing if there's none left this turn). "Next" never means a step already
 in progress: an ability created *during* an end step waits for the following
-turn's.
+turn's. A `blockedThisTurn` clause's `of` in its effect is bound as it's set up
+and it keeps no targets, so it can't fizzle with "it" gone.
 
 The delayed ability chooses no new targets — its text doesn't say "target", so
 it has none of its own (rules 115.1d, 115.10a) — and it carries forward the
@@ -2458,7 +2461,7 @@ source, so it isn't a `CardFilter` clause.
 subtypes, supertype, notSupertype, name, notName, colors, notColors, colorless,
 manaValue, power, toughness, basePower, baseToughness, counters, controlledBy,
 ownedBy, keyword, notKeyword, tapped, token, isCommander, equipped, enchanted,
-modified, anyOf, manaSpent, manaFrom, putIntoGraveyardFromLibraryThisTurn, putIntoGraveyardThisTurn,
+modified, anyOf, manaSpent, manaFrom, putIntoGraveyardFromLibraryThisTurn, putIntoGraveyardThisTurn, blockedThisTurn,
 discardedThisTurn, enteredThisTurn, attackedThisTurn, damagedThisTurnBy, excessDamageThisTurn,
 dealtDamageToCreatureThisTurn, cast, castBy, castFrom, castVia, enteredFrom,
 putThereBySource, sharesCardTypeWith, sharesPermanentTypeWith, sharesCreatureTypeWith, sharesLandTypeWith, sameNameWith, thisWay, attacking, blocking, blockingRelation, goaded, suspected, saddled, saddledSource, crewedSource, crewedBySource, enlistedThisCombat, monstrous, renowned, hasManaAbility, hasAbilities,
@@ -2609,7 +2612,16 @@ the same object (400.7). The sweep is `return-from-graveyard` over it,
 `count: "all"`: "return to the battlefield all permanent cards in your
 graveyard that were put there from the battlefield this turn" (Faith's
 Reward), `destination: "hand"` (Gleancrawler), `from: "each-graveyard"` for
-"each player returns …" (Second Sunrise). "If a land you controlled was put into a graveyard
+"each player returns …" (Second Sunrise). `blockedThisTurn` looks back at the
+turn's declared blocks (`blockingRelation` is what's in combat now): `{ relation:
+"blocked" | "blocked-by" | "either", partner?, of?, thisCombat? }`. "That blocked
+or was blocked by a legendary creature this turn" (You Cannot Pass!, Sea Troll's
+`condition: { kind: "source", filter }`) has `partner`, read as the other creature
+was at the block; "all creatures that blocked or were blocked by it" (Venomous
+Breath) has `of: 0`, `"each-target"` (Triton Tactics) or `"source"` (Joven's
+Ferrets); "this combat" (Ride Down) `thisCombat: true`; "a creature that blocked
+this turn" (Sizzling Barrage) neither. Each side is the object it was then (rule
+400.7), and one put onto the battlefield blocking never "blocked" (509.4). "If a land you controlled was put into a graveyard
 from the battlefield this turn", once it may have left, is the `turn-history`
 condition instead (`what: "to-graveyard"`, `from: ["battlefield"]`, filter
 `controlledBy: "you"`, matched as it last existed — The Lady of Otaria).

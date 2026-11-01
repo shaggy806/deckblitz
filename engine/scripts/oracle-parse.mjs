@@ -895,7 +895,9 @@ const TARGET_PHRASES = [
       { kind: "permanent", filter: { type: "creature", blockingRelation: { relation: "blocking", of: "host" } } },
     ]),
   ),
-  ["target creature or planeswalker an opponent controls", { kind: "permanent", whose: "opponent", filter: { typesAnyOf: ["creature", "planeswalker"] } }],
+  // A look back at the turn's blocks (`blockedThisTurn`): Sizzling Barrage.
+  ["target creature that blocked this turn", { kind: "permanent", filter: { type: "creature", blockedThisTurn: { relation: "blocked" } } }],
+  ["target creature or planeswalker an opponent controls", { kind: "permanent", whose: "opponent", filter: { typesAnyOf: ["creature", "planeswalker"]} }],
   ["target creature or planeswalker", { kind: "permanent", whose: "any", filter: { typesAnyOf: ["creature", "planeswalker"] } }],
   ["target nonland permanent an opponent controls", "nonland-permanent-an-opponent-controls"],
   ["target nonland permanent you don't control", "nonland-permanent-an-opponent-controls"],
@@ -2695,6 +2697,29 @@ export function parseSentence(sentence, ctx) {
     const type = { permanents: undefined, creatures: "creature", artifacts: "artifact", enchantments: "enchantment", lands: "land" }[plural.toLowerCase()];
     return target === undefined ? undefined : { ...(type !== undefined ? { type } : {}), sameNameAsTarget: target };
   };
+  // "Destroy target creature that blocked or was blocked by a legendary
+  // creature this turn" (You Cannot Pass!), "exile … a Zombie …" (Time to
+  // Reflect): the turn's blocks (`blockedThisTurn`).
+  if ((m = /^(destroy|exile) target creature that blocked or was blocked by (.+?) this turn\.$/i.exec(s))) {
+    const partner = blockPartnerPhrase(m[2]);
+    if (partner !== null) {
+      const target = ctx.target({
+        kind: "permanent",
+        filter: { type: "creature", blockedThisTurn: { relation: "either", partner } },
+      });
+      return { kind: m[1].toLowerCase(), target };
+    }
+  }
+  // "Creatures that were blocked by that creature this combat gain trample
+  // until end of turn" (Ride Down), after a target has been named.
+  if (ctx.targets.length === 1 && (m = re(`creatures that were blocked by that creature this combat gain ${KW} until end of turn`).exec(s))) {
+    return {
+      kind: "grant-keyword-all",
+      filter: { type: "creature", blockedThisTurn: { relation: "blocked-by", of: 0, thisCombat: true } },
+      keyword: KEYWORDS[m[1].toLowerCase()],
+      duration: "end-of-turn",
+    };
+  }
   // "Destroy all creatures blocking or blocked by this creature" (Kjeldoran
   // Frostbeast), "… all non-Wall creatures blocking enchanted creature"
   // (Coils of the Medusa) — `blockingRelation`. Not exile: what the exile is
@@ -4534,6 +4559,13 @@ export function parseEffect(text, outer) {
     // "Choose target creature card in a graveyard that was put there from the
     // battlefield this turn. Put that card onto the battlefield under your
     // control." (Grim Return) — two sentences, one effect on the target.
+    const blocks = blocksAtEndOfCombatAt(sentences, i, ctx);
+    if (blocks !== null) {
+      parsed.push(blocks.effect);
+      hints.push({ sentence, effect: blocks.effect });
+      skip = blocks.used - 1;
+      continue;
+    }
     const arrival = graveyardArrivalAt(sentences, i, ctx);
     if (arrival !== null) {
       parsed.push(arrival.effect);
@@ -5181,6 +5213,44 @@ function graveyardReturnTypes(phrase) {
   if (list === null) return parseTypePhrase(phrase, { cards: true });
   const types = [...list[1].split(", "), list[2]];
   return types.every((t) => CARD_TYPES.includes(t)) ? { typesAnyOf: types } : null;
+}
+
+/** The other creature of a block, as `CardFilter.blockedThisTurn`'s `partner`
+ * reads it: "a legendary creature", "a blue creature", "a Zombie". */
+function blockPartnerPhrase(phrase) {
+  if (/^a legendary creature$/i.test(phrase)) return { supertype: "legendary" };
+  const m = /^an? (\w+)(?: creature)?$/.exec(phrase);
+  if (m === null) return null;
+  const color = COLOR_WORD[m[1].toLowerCase()];
+  if (color !== undefined) return /creature$/.test(phrase) ? { colors: [color] } : null;
+  return /^[A-Z][a-z]+$/.test(m[1]) && !/creature$/.test(phrase) ? { subtype: m[1] } : null;
+}
+
+/**
+ * "Choose target creature. At this turn's next end of combat, destroy all
+ * creatures that blocked or were blocked by it this turn." (Venomous Breath),
+ * "Choose target Wall creature. At this turn's next end of combat, destroy all
+ * creatures that were blocked by that creature this turn." (Glyph of Doom): the
+ * delayed ability reads the turn's blocks, "it" fixed as it's set up.
+ */
+function blocksAtEndOfCombatAt(sentences, i, ctx) {
+  const choose = /^[Cc]hoose target (?:([A-Z][a-z]+) )?creature\.$/.exec(sentences[i] ?? "");
+  if (choose === null) return null;
+  const then = /^at this turn's next end of combat, destroy all creatures that (blocked or were blocked by it|were blocked by that creature) this turn\.$/i.exec(sentences[i + 1] ?? "");
+  if (then === null) return null;
+  const target = ctx.target(
+    choose[1] === undefined ? "creature" : { kind: "permanent", filter: { type: "creature", subtype: choose[1] } },
+  );
+  const relation = then[1].startsWith("blocked or") ? "either" : "blocked-by";
+  return {
+    effect: {
+      kind: "delayed-trigger",
+      at: "end-of-combat-this-turn",
+      effect: { kind: "destroy-all", filter: { type: "creature", blockedThisTurn: { relation, of: target } } },
+      text: `Destroy all creatures that ${then[1]} this turn.`,
+    },
+    used: 2,
+  };
 }
 
 function graveyardArrivalAt(sentences, i, ctx) {
@@ -7055,6 +7125,14 @@ export function parseFace(face, ctx = {}) {
       // Prowler): the turn history's discards.
       rest = rest.replace(/ Activate only if you've discarded a card this turn\.$/, () => {
         ability.condition = DISCARDED_THIS_TURN;
+        return "";
+      });
+      // "Activate only if this creature blocked or was blocked by a blue
+      // creature this turn" (Sea Troll): the turn's blocks.
+      rest = rest.replace(/ Activate only if (?:this creature|~) blocked or was blocked by (.+?) this turn\.$/, (whole, phrase) => {
+        const partner = blockPartnerPhrase(phrase);
+        if (partner === null) return whole;
+        ability.condition = { kind: "source", filter: { blockedThisTurn: { relation: "either", partner } } };
         return "";
       });
       if (/Activate only /.test(rest)) {

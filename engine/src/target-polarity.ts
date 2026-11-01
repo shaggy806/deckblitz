@@ -217,6 +217,9 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     v.touch(n.filter.sameNameAsTarget, "harm", DECISIVE);
     v.touch(n.filter.sharesColorWithTarget, "harm", DECISIVE);
     v.touch(n.filter.sharesCreatureTypeWith, "harm", DECISIVE);
+    // "All creatures that blocked or were blocked by it" (Venomous Breath):
+    // the target's the creature whose opponents in combat die, so your own.
+    v.touch(n.filter.blockedThisTurn?.of, "help", MAJOR);
   },
   regenerate:(n, v) => v.touch(n.target, "help", MINOR),
   "regenerate-all": none,
@@ -570,6 +573,9 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "tap-all": (n, v) => {
     v.touch(n.controlledByTarget, "harm", MINOR);
     v.touch(n.filter.sharesColorWithTarget, "harm", MINOR);
+    // "Tap each creature that was blocked by one of those creatures"
+    // (Triton Tactics): a slot's are your own creature's opponents.
+    v.touch(n.filter.blockedThisTurn?.of, "help", MINOR);
   },
   // Phasing out is a blocker gone for a turn when it's theirs (rule
   // 702.26b) — read as that, a minor harm; one that can only be yours says

@@ -7088,3 +7088,54 @@ describe("turning a face-down permanent face up by an effect", () => {
     });
   });
 });
+
+describe("the turn's blocks", () => {
+  const face = (type_line: string, oracle_text: string) => parseFace({ name: "Test Block", type_line, oracle_text }, { tokenFor: () => null });
+  const either = (partner: object) => ({ type: "creature", blockedThisTurn: { relation: "either", partner } });
+
+  it("reads 'target creature that blocked or was blocked by …', the partner by type, supertype or color", () => {
+    const pass = face("Instant", "Destroy target creature that blocked or was blocked by a legendary creature this turn.");
+    expect(pass.complete).toBe(true);
+    expect(pass.targets).toEqual([{ kind: "permanent", filter: either({ supertype: "legendary" }) }]);
+    expect(pass.effect).toEqual({ kind: "destroy", target: 0 });
+    const reflect = face("Instant", "Exile target creature that blocked or was blocked by a Zombie this turn.");
+    expect(reflect.targets).toEqual([{ kind: "permanent", filter: either({ subtype: "Zombie" }) }]);
+    expect(reflect.effect).toEqual({ kind: "exile", target: 0 });
+    const barrage = face("Instant", "Test Block deals 4 damage to target creature that blocked this turn.");
+    expect(barrage.targets).toEqual([{ kind: "permanent", filter: { type: "creature", blockedThisTurn: { relation: "blocked" } } }]);
+    // A partner it can't say stays unread.
+    const odd = face("Instant", "Destroy target creature that blocked or was blocked by a creature with flying this turn.");
+    expect(odd.complete).toBe(false);
+  });
+
+  it("reads Sea Troll's activation condition", () => {
+    const troll = face("Creature — Troll", "{U}: Regenerate this creature. Activate only if this creature blocked or was blocked by a blue creature this turn.");
+    expect(troll.complete).toBe(true);
+    expect(troll.activated[0].condition).toEqual({
+      kind: "source",
+      filter: { blockedThisTurn: { relation: "either", partner: { colors: ["U"] } } },
+    });
+  });
+
+  it("reads 'at this turn's next end of combat, destroy all creatures that …', and Ride Down's rider", () => {
+    const breath = face("Instant", "Choose target creature. At this turn's next end of combat, destroy all creatures that blocked or were blocked by it this turn.");
+    expect(breath.complete).toBe(true);
+    expect(breath.targets).toEqual(["creature"]);
+    expect(breath.effect).toEqual({
+      kind: "delayed-trigger",
+      at: "end-of-combat-this-turn",
+      effect: { kind: "destroy-all", filter: { type: "creature", blockedThisTurn: { relation: "either", of: 0 } } },
+      text: "Destroy all creatures that blocked or were blocked by it this turn.",
+    });
+    const doom = face("Instant", "Choose target Wall creature. At this turn's next end of combat, destroy all creatures that were blocked by that creature this turn.");
+    expect(doom.targets).toEqual([{ kind: "permanent", filter: { type: "creature", subtype: "Wall" } }]);
+    expect(doom.effect.effect.filter.blockedThisTurn).toEqual({ relation: "blocked-by", of: 0 });
+    const ride = face("Instant", "Destroy target blocking creature. Creatures that were blocked by that creature this combat gain trample until end of turn.");
+    expect(ride.effect.effects[1]).toEqual({
+      kind: "grant-keyword-all",
+      filter: { type: "creature", blockedThisTurn: { relation: "blocked-by", of: 0, thisCombat: true } },
+      keyword: "trample",
+      duration: "end-of-turn",
+    });
+  });
+});

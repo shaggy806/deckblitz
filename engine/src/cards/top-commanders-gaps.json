@@ -974,7 +974,11 @@
   "effect:destroy-all-except-source",
   "condition:return-cards-put-in-graveyard-from-battlefield-this-turn",
   "condition:return-cards-put-in-graveyard-from-battlefield-this-turn",
-  "effect:turn-face-up"
+  "effect:turn-face-up",
+  "filter:blocked-or-blocked-by-filter-this-turn",
+  "filter:blocked-this-turn",
+  "filter:blocked-source-this-turn",
+  "filter:blocked-by-source-this-combat"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

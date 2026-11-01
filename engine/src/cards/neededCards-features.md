@@ -552,6 +552,31 @@ Rielle, the Everwise. Left: Toluz's "exile them" (the discarded cards,
 linked — `effect:linked-exile-from-discard`), Inti's batch key
 (`trigger:discards-batch-trigger`, likely only marking).
 
+### What blocked or was blocked this turn — built 2026-11-01
+
+The top unit of the need-keys Phase 2 family
+`static:combat-restriction-extensions`. Each declared block now goes into the
+blocker's controller's `TurnHistory.blocks` (`BlockRecord`), both creatures as
+they were then, so the new `CardFilter.blockedThisTurn` looks back past the end
+of combat, a removal from combat and the other creature's leaving, which
+`blockingRelation` can't: `relation` (`"blocked"`, `"blocked-by"`, `"either"`),
+`partner` (a filter on the other creature as it was at the block — the
+`asEntered` precedent, Mechan Shieldmate's ruling), `of` (a target slot,
+`"each-target"` or `"source"`, bound to those objects and their stints) and
+`thisCombat`. A `delayed-trigger` binds `of` as it's set up and keeps no targets,
+so "destroy all creatures that blocked or were blocked by it" doesn't fizzle with
+the target gone. New timing: `end-of-combat-this-turn` ("at this turn's next end
+of combat"), which lapses with the turn. The scaffolder reads all of it. Keys:
+filter:blocked-or-blocked-by-filter-this-turn, and rode along
+filter:blocked-this-turn, filter:blocked-source-this-turn,
+filter:blocked-by-source-this-combat. Proving cards: You Cannot Pass!, Sea Troll,
+Venomous Breath, Ride Down, Triton Tactics, Sizzling Barrage, Joven's Ferrets.
+Left for `author-freed` to narrow: Glyph of Reincarnation (returns a card per
+creature destroyed), Glyph of Delusion (counters by the blocked creature's power),
+Cathedral Membrane ("dies during combat"), and "attacked or blocked" cards
+(Gideon's Triumph, Vizier of Deferment, Inferno Hellion, Lurker), which need an
+`anyOf` with `attackedThisTurn` and their own shapes.
+
 ### Turning a face-down permanent face up by an effect — built 2026-11-01
 
 The top unit of the need-keys Phase 2 family `mechanic:face-down`. The new

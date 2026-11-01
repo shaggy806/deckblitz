@@ -435,6 +435,41 @@ export interface CardFilter {
     readonly with?: ObjectId;
   };
   /**
+   * It **blocked**, or **was blocked**, this turn (rules 509.1g-h) — the
+   * look-back `blockingRelation` can't give, kept in
+   * `TurnHistory.blocks`, so it holds after combat, after a creature is removed
+   * from combat (506.4) and after the other creature has gone:
+   * - `relation`: `"blocked"` (Sizzling Barrage's "creature that blocked this
+   *   turn"), `"blocked-by"` (Glyph of Doom's "creatures that were blocked by
+   *   that creature"), or `"either"`;
+   * - `partner`: the other creature matched this filter **as it was at the
+   *   block** — You Cannot Pass!'s "a legendary creature", Time to Reflect's "a
+   *   Zombie", Sea Troll's "a blue creature" — as `TurnHistoryEntry.asEntered`
+   *   reads what entered;
+   * - `of`: the other creature was this one — a target slot (Venomous Breath's
+   *   "that blocked or were blocked by it"), `"each-target"` (Triton Tactics'
+   *   "one of those creatures") or `"source"` (Joven's Ferrets' "that blocked
+   *   this creature"). `bindDynamicCompares` binds it to `with` as the effect
+   *   applies; a `delayed-trigger` binds it as it's set up, so "it" stays the
+   *   object meant though it has left since (rule 400.7), and the delayed
+   *   ability, having no target of its own, can't fizzle for that. Unbound it
+   *   matches nothing;
+   * - `thisCombat`: only this combat phase's blocks (Ride Down).
+   *
+   * Each side of a block is the object it was then: one that left the
+   * battlefield and came back never blocked (400.7). A creature put onto the
+   * battlefield blocking never "blocked" (509.4). A band blocked is blocked
+   * whole (702.22h).
+   */
+  readonly blockedThisTurn?: {
+    readonly relation: "blocked" | "blocked-by" | "either";
+    readonly partner?: CardFilter;
+    readonly of?: number | "each-target" | "source";
+    /** The objects `of` means, bound by `bindDynamicCompares` — never authored. */
+    readonly with?: readonly { readonly object: ObjectId; readonly stint: number }[];
+    readonly thisCombat?: boolean;
+  };
+  /**
    * It's (or isn't) the permanent the one applying the filter is **attached
    * to** — an Aura's "enchanted creature", an Equipment's "equipped
    * creature": Arrest's "its activated abilities can't be activated" is a
@@ -1204,6 +1239,47 @@ export function inBlockingRelation(
   return blocking() || blockedBy();
 }
 
+/** Whether object `id`, in its stint `stint`, blocked or was blocked this turn
+ * as `CardFilter.blockedThisTurn` asks, every player's `TurnHistory.blocks`
+ * read. */
+function blockedThisTurnMatches(
+  state: GameState,
+  registry: CardRegistry,
+  id: ObjectId,
+  stint: number,
+  clause: NonNullable<CardFilter["blockedThisTurn"]>,
+  ctx: FilterContext,
+): boolean {
+  // A partner that was to be bound and wasn't: nothing could answer it.
+  if (clause.of !== undefined && clause.with === undefined) return false;
+  const partnerMatches = (partner: ObjectId, was: LastKnownInfo): boolean =>
+    (clause.with === undefined ||
+      clause.with.some((w) => w.object === partner && w.stint === was.zoneChangeCount)) &&
+    (clause.partner === undefined || matchesFilter(state, registry, partner, clause.partner, { ...ctx, snapshot: was }));
+  for (const player of Object.values(state.players)) {
+    for (const block of player.turnHistory?.blocks ?? []) {
+      if (clause.thisCombat === true && block.combatPhase !== state.turn.combatPhases) continue;
+      if (
+        clause.relation !== "blocked-by" &&
+        block.blocker === id &&
+        block.blockerWas.zoneChangeCount === stint &&
+        partnerMatches(block.attacker, block.attackerWas)
+      ) {
+        return true;
+      }
+      if (
+        clause.relation !== "blocked" &&
+        block.attacker === id &&
+        block.attackerWas.zoneChangeCount === stint &&
+        partnerMatches(block.blocker, block.blockerWas)
+      ) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
 /** What is attached to `id` on the battlefield, for the attachment clauses.
  * Attachments leave with the permanent, so off the battlefield it's none —
  * which is why a leaving permanent's snapshot records them first
@@ -1710,6 +1786,10 @@ export function matchesFilter(
     const { relation, of, with: bound } = filter.blockingRelation;
     const partner = bound ?? blockingPartnerOf(state, of ?? "source", ctx.source);
     if (live === undefined || partner === undefined || !inBlockingRelation(state, live, partner, relation)) return false;
+  }
+  if (filter.blockedThisTurn !== undefined) {
+    const stint = live !== undefined ? (live.zoneChangeCount ?? 0) : lki!.zoneChangeCount;
+    if (!blockedThisTurnMatches(state, registry, id, stint, filter.blockedThisTurn, ctx)) return false;
   }
   if (filter.isSource !== undefined && (ctx.source !== undefined && ctx.source === id) !== filter.isSource) {
     return false;

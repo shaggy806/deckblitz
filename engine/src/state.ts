@@ -3993,6 +3993,9 @@ export type DelayedTriggerTiming =
   /** "At end of combat" — the beginning of the next end of combat step
    * (rule 511.2): myriad's "exile the tokens at end of combat". */
   | "end-of-combat"
+  /** "At this turn's next end of combat" (Venomous Breath): as `"end-of-combat"`,
+   * but with none left this turn it lapses with the turn, never firing. */
+  | "end-of-combat-this-turn"
   /** "At the beginning of the next cleanup step" — put on the stack once that
    * step's turn-based actions are done (rule 514.3a), the Mirage block's
    * flash-and-sacrifice (`CardDefinition.flashThenSacrifice`). */
@@ -4038,6 +4041,23 @@ export interface TurnHistoryEntry {
    * from — `"battlefield"` (with `stint`), `"library"`, `"hand"`, `"stack"`
    * and the rest. */
   readonly from?: ZoneType;
+}
+
+/**
+ * One creature's block of one attacker, as declared (rules 509.1g-h): a block
+ * of a band is one of these per member (702.22h), and a creature put onto the
+ * battlefield blocking has none, never having "blocked" (509.4). Each side as
+ * it was then, its `zoneChangeCount` saying which object it was (400.7): "was
+ * blocked by a Zombie" asks what blocked it, not what that creature has become
+ * or whether it's still here.
+ */
+export interface BlockRecord {
+  readonly blocker: ObjectId;
+  readonly blockerWas: LastKnownInfo;
+  readonly attacker: ObjectId;
+  readonly attackerWas: LastKnownInfo;
+  /** Which of the turn's combat phases (`TurnState.combatPhases`). */
+  readonly combatPhase: number;
 }
 
 /** The lists a {@link TurnHistory} keeps. */
@@ -4106,6 +4126,9 @@ export interface TurnHistory {
   /** The permanents this player put a lore counter on, each in the stint it
    * was in — an impulse permission's `sourceDid: "lore-counter"`. */
   loreCountersOn?: { readonly object: ObjectId; readonly stint: number }[];
+  /** Each block declared by a creature this player controlled, once per
+   * attacker it blocked — `CardFilter.blockedThisTurn`. */
+  blocks?: BlockRecord[];
   /** Everything put into this player's graveyard this turn, each with the
    * zone it came from (`from`): cards from anywhere — a library (milled,
    * surveilled), a hand (discarded), the stack (a resolved or countered

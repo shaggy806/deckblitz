@@ -8686,6 +8686,9 @@ export interface EffectApi {
    * has handed it back to its owner.
    */
   controllerOf(ref: TargetRef): PlayerId | undefined;
+  /** Which of `id`'s stints on the battlefield it's in, or last was: its
+   * `zoneChangeCount` then (`LastKnownInfo.zoneChangeCount`). */
+  battlefieldStintOf(id: ObjectId): number;
   /** See the `{ devotionTo }` {@link EffectAmount}. */
   devotionTo(colors: readonly Color[]): number;
   /** See the `{ greatestCommanderManaValue }` {@link EffectAmount}. */
@@ -11931,6 +11934,7 @@ function containsDynamicCompare(value: unknown): boolean {
       "crewedSource" in value ||
       "bandedWithSource" in value ||
       "blockingRelation" in value ||
+      "blockedThisTurn" in value ||
       "sameNameAsTarget" in value ||
       "sameNameAsTriggerObject" in value ||
       "sameNameAsThisWay" in value ||
@@ -11969,6 +11973,40 @@ const PERMANENT_TYPES: ReadonlySet<CardType> = new Set<CardType>([
  * `sharesTypeWith` entry holding the reference objects and their types of
  * that kind as the effect applies (as they last existed if they've left).
  */
+/** The objects a `CardFilter.blockedThisTurn`'s `of` names, each in the stint
+ * it's in or last was on the battlefield. */
+function blockPartners(
+  of: number | "each-target" | "source",
+  ctx: ResolutionContext,
+): readonly { readonly object: ObjectId; readonly stint: number }[] {
+  const ids =
+    of === "source"
+      ? [ctx.source]
+      : (of === "each-target" ? [...ctx.targets] : [ctx.targets[of]]).map((t) => (t?.kind === "object" ? t.object : undefined));
+  return ids.flatMap((id) => (id === undefined ? [] : [{ object: id, stint: ctx.battlefieldStintOf(id) }]));
+}
+
+/** `value` with every `blockedThisTurn` clause in it bound to the objects its
+ * `of` names now, nested effects included; `value` itself if there's none. For
+ * a delayed ability's effect, as it's set up: what it says "it" about is fixed
+ * then, and it's no target of its own (rule 603.7c). */
+function bindBlockPartners<T>(value: T, ctx: ResolutionContext): T {
+  if (value === null || typeof value !== "object") return value;
+  if (Array.isArray(value)) {
+    const items = value.map((item) => bindBlockPartners(item as unknown, ctx));
+    return items.some((item, i) => item !== value[i]) ? (items as T) : value;
+  }
+  const record = value as Record<string, unknown>;
+  const entries = Object.entries(record).map(([key, v]): [string, unknown] => {
+    if (key === "blockedThisTurn") {
+      const clause = v as NonNullable<CardFilter["blockedThisTurn"]>;
+      return [key, clause.of !== undefined && clause.with === undefined ? { ...clause, with: blockPartners(clause.of, ctx) } : v];
+    }
+    return [key, bindBlockPartners(v, ctx)];
+  });
+  return entries.some(([key, v]) => v !== record[key]) ? (Object.fromEntries(entries) as T) : value;
+}
+
 export function bindDynamicCompares(spec: EffectSpec, ctx: ResolutionContext): EffectSpec {
   if (!containsDynamicCompare(spec)) return spec;
   const walk = (value: unknown): unknown => {
@@ -12061,6 +12099,11 @@ export function bindDynamicCompares(spec: EffectSpec, ctx: ResolutionContext): E
     if (relation !== undefined && relation.with === undefined) {
       const partner = relation.of === "host" ? ctx.attachedHost() : ctx.source;
       if (partner !== undefined) walked = { ...walked, blockingRelation: { relation: relation.relation, with: partner } };
+    }
+    // "That blocked or were blocked by it this turn": the objects it names.
+    const blocked = walked["blockedThisTurn"] as CardFilter["blockedThisTurn"];
+    if (blocked?.of !== undefined && blocked.with === undefined) {
+      walked = { ...walked, blockedThisTurn: { ...blocked, with: blockPartners(blocked.of, ctx) } };
     }
     // "And all other permanents with the same name as that permanent": the
     // target itself and its name now (rule 201.2a). A target that's gone
@@ -13534,6 +13577,14 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           spec.text,
           controller,
         );
+        return;
+      }
+      // "At this turn's next end of combat, destroy all creatures that blocked
+      // or were blocked by it this turn" (Venomous Breath): "it" is fixed now,
+      // and the delayed ability has no target to lose if it has left by then.
+      const aboutBlocks = bindBlockPartners(spec.effect, ctx);
+      if (aboutBlocks !== spec.effect) {
+        ctx.delayTrigger(spec.at, aboutBlocks, spec.text, controller, []);
         return;
       }
       if (spec.about === "attached") {
