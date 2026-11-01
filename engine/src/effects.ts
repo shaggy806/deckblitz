@@ -976,6 +976,12 @@ export type EffectAmount =
        * Explosion's "the greatest mana value among cards discarded this
        * way". 0 with none. */
       readonly greatestOf?: "power" | "toughness" | "mana-value";
+      /** Only the objects sharing a mana value with **another** of them —
+       * Vault 21: House Gambit's "for each of those cards that has the same
+       * mana value as another card revealed this way". Each is read where it
+       * is (a card revealed stays in its hand, shown; rule 701.20a), one
+       * apiece, {X} as 0 (rule 202.3e). */
+      readonly sharingManaValue?: true;
     }
   /**
    * One amount or another, by a condition read as the amount is — Urza's
@@ -11480,6 +11486,10 @@ function signedAmountValue(
           : ctx.playersInScope(amount.who);
     const done = ctx.thisWay(amount.thisWay, players, amount.filter);
     if (amount.cardTypes === true) return ctx.cardTypesAmong(done);
+    if (amount.sharingManaValue === true) {
+      const values = done.map((entry) => ctx.manaValueOf({ kind: "object", object: entry.object }));
+      return values.filter((value) => values.filter((other) => other === value).length > 1).length;
+    }
     const greatestOf = amount.greatestOf;
     if (greatestOf !== undefined) {
       // Each object once, however many tokens a stack of it stood for.

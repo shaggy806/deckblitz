@@ -1056,7 +1056,10 @@ destroyed this way, its controller creates a 3/3 Beast" is `{ kind:
 thisWay: "destroyed", who: "each" } }`. `filter` narrows them — a permanent
 that left doing it as it last existed, a card as it is now (in the graveyard a
 discard put it in); `cardTypes: true` counts the card types among them
-instead (Kefka, Court Mage). `perPlayer: "greatest"` sums each player's
+instead (Kefka, Court Mage); `sharingManaValue: true` counts only those sharing
+a mana value with another of them, read where each is (Vault 21: House
+Gambit's "for each of those cards that has the same mana value as another card
+revealed this way"). `perPlayer: "greatest"` sums each player's
 own and takes the largest — Windfall's "draws cards equal to the greatest
 number of cards **a player** discarded this way". `sumOf: "power"` adds up
 their power instead of counting them, a permanent that left doing it as it

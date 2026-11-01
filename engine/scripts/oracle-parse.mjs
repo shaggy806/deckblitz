@@ -2325,6 +2325,27 @@ export function parseSentence(sentence, ctx) {
   if ((m = re(`(target player|target opponent) reveals a card at random from their hand`).exec(s))) {
     return { kind: "choose-random-card", zone: "hand", whose: slot(m[1]), show: "reveal" };
   }
+  // "That player reveals a card at random from their hand" (Merfolk Spy): the
+  // player the trigger is about.
+  if (ctx.thatPlayer !== undefined && re(`that player reveals a card at random from their hand`).test(s)) {
+    return { kind: "choose-random-card", zone: "hand", whose: "that-player", show: "reveal" };
+  }
+  // "Target player reveals their hand" (Search Warrant's first sentence), and
+  // "target player loses 1 life and reveals their hand" (Thoughtcutter
+  // Agent): shown to every player, and it stays there (rule 701.20a).
+  if ((m = re(`(target player|target opponent) reveals their hand`).exec(s))) {
+    return { kind: "reveal-hand", who: slot(m[1]) };
+  }
+  if ((m = re(`(target player|target opponent) loses ${N} life and reveals their hand`).exec(s))) {
+    const who = slot(m[1]);
+    return {
+      kind: "sequence",
+      effects: [
+        { kind: "lose-life", amount: amount(m[2]), target: who },
+        { kind: "reveal-hand", who },
+      ],
+    };
+  }
   // "Exile target player's graveyard" (Bojuka Bog, Nautiloid Ship): every card
   // in it at once.
   if ((m = re(`exile (target player|target opponent)'s graveyard`).exec(s))) {
@@ -4695,6 +4716,16 @@ export function parseEffect(text, outer) {
       skip = oneEach.used - 1;
       continue;
     }
+    // A hand shown, then a count of it (Search Warrant), a card at random
+    // from it and what follows on that card (Planeswalker's Fury), up to N
+    // cards chosen from your own (Vault 21: House Gambit, Armored Kincaller).
+    const handReveal = handRevealAt(sentences, i, ctx);
+    if (handReveal !== null) {
+      parsed.push(handReveal.effect);
+      hints.push({ sentence, effect: handReveal.effect });
+      skip = handReveal.used - 1;
+      continue;
+    }
     // The Urza's Destiny Scents: "Reveal any number of green cards in your
     // hand." — a `look-and-choose` over the hand that moves nothing — and
     // the next sentence's "… for each card revealed this way" scaled by
@@ -5564,6 +5595,112 @@ function searchOthersAt(sentences, i, ctx) {
 
 /** A one-unit effect done "for each" of `amount` instead — parley's create a
  * token, put a counter, +1/+1 to all, add a mana, gain a life — or null. */
+/**
+ * Two sentences that reveal from a hand and act on what was shown, as one
+ * effect (rule 701.20a: the cards stay where they are) — or `null`:
+ * - "Target player reveals their hand. You gain life equal to the number of
+ *   cards in that player's hand." (Search Warrant);
+ * - "Target opponent reveals a card at random from their hand. ~ deals damage
+ *   equal to that card's mana value to that player." (Planeswalker's Fury,
+ *   Ignite Memories), "You gain life equal to that card's mana value."
+ *   (Planeswalker's Mirth): the pick goes in the slot beside the player's;
+ * - "Reveal up to five nonland cards from your hand. For each of those cards
+ *   that has the same mana value as another card revealed this way, create a
+ *   Treasure token." (Vault 21: House Gambit);
+ * - "You may reveal a Dinosaur card from your hand. If you do or if you
+ *   control another Dinosaur, you gain 3 life." (Armored Kincaller).
+ */
+function handRevealAt(sentences, i, ctx) {
+  const first = sentences[i];
+  const next = sentences[i + 1] ?? "";
+  const targetOf = (phrase) => ctx.target(phrase.toLowerCase() === "target opponent" ? "opponent" : "player");
+  if (/^(target player|target opponent) reveals their hand\.$/i.test(first)) {
+    if (!/^you gain life equal to the number of cards in that player's hand\.$/i.test(next)) return null;
+    const who = targetOf(/^(target player|target opponent)/i.exec(first)[1]);
+    return {
+      effect: {
+        kind: "sequence",
+        effects: [
+          { kind: "reveal-hand", who },
+          { kind: "gain-life", amount: { cardsInHand: { target: who } } },
+        ],
+      },
+      used: 2,
+    };
+  }
+  const atRandom = /^(target player|target opponent) reveals a card at random from their hand\.$/i.exec(first);
+  if (atRandom !== null) {
+    const damage =
+      /^~ deals damage to that player equal to that card's mana value\.$/i.test(next) ||
+      /^~ deals damage equal to that card's mana value to that player\.$/i.test(next);
+    const gain = /^you gain life equal to that card's mana value\.$/i.test(next);
+    if (!damage && !gain) return null;
+    const who = targetOf(atRandom[1]);
+    const picked = who + 1;
+    return {
+      effect: {
+        kind: "choose-random-card",
+        zone: "hand",
+        whose: who,
+        show: "reveal",
+        slot: picked,
+        then: damage
+          ? { kind: "damage", target: who, amount: { manaValueOf: picked } }
+          : { kind: "gain-life", amount: { manaValueOf: picked } },
+      },
+      used: 2,
+    };
+  }
+  const upTo = /^reveal up to (two|three|four|five|six|seven) (.+?) cards from your hand\.$/i.exec(first);
+  const sharing = /^for each of those cards that has the same mana value as another card revealed this way, (.+)\.$/i.exec(next);
+  if (upTo !== null && sharing !== null) {
+    const filter = parseTypePhrase(upTo[2], { cards: true });
+    const each = parseSentence(`${sharing[1]}.`, ctx);
+    const scaled =
+      each === null || containsUndefined(each) ? null : scaledBy(each, { thisWay: "revealed", who: "you", sharingManaValue: true });
+    if (filter === null || scaled === null) return null;
+    const max = { two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7 }[upTo[1].toLowerCase()];
+    return {
+      effect: {
+        kind: "sequence",
+        effects: [
+          { kind: "look-and-choose", zone: "hand", min: 0, max, ...(Object.keys(filter).length > 0 ? { filter } : {}), destination: "reveal", leftover: "stay" },
+          scaled,
+        ],
+      },
+      used: 2,
+    };
+  }
+  const mayReveal = /^you may reveal an? (.+?) card from your hand\.$/i.exec(first);
+  const orControl = /^if you do or if you control another (.+?), (.+)\.$/i.exec(next);
+  if (mayReveal !== null && orControl !== null) {
+    const filter = parseTypePhrase(mayReveal[1], { cards: true });
+    const also = parseTypePhrase(orControl[1]);
+    const then = parseSentence(`${orControl[2]}.`, ctx);
+    if (filter === null || also === null || then === null || containsUndefined(then)) return null;
+    return {
+      effect: {
+        kind: "sequence",
+        effects: [
+          { kind: "look-and-choose", zone: "hand", min: 0, max: 1, filter, destination: "reveal", leftover: "stay" },
+          {
+            kind: "conditional",
+            condition: { kind: "this-way", what: "revealed", atLeast: 1 },
+            then,
+            else: {
+              kind: "conditional",
+              condition: { kind: "controls", filter: also, atLeast: 1, excludeSelf: true },
+              then,
+            },
+          },
+        ],
+      },
+      used: 2,
+    };
+  }
+  return null;
+}
+
 /** "Target opponent reveals their hand. You choose a nonland card from it
  * [and exile that card]. [That player discards that card. | Exile that
  * card.]" — Duress, Thought-Knot Seer: a `discard-chosen`, its card filter

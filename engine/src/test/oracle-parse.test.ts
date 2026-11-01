@@ -7399,3 +7399,93 @@ describe("the turn's blocks", () => {
     });
   });
 });
+
+describe("revealing from a hand", () => {
+  const face = (type_line: string, oracle_text: string) =>
+    parseFace({ name: "Test Reveal", type_line, oracle_text }, { tokenFor: () => "Treasure Token" });
+
+  it("reads a whole hand shown, alone, beside a life loss and with a count of it", () => {
+    const agent = face("Artifact Creature — Human Rogue", "{U}{B}, {T}: Target player loses 1 life and reveals their hand.");
+    expect(agent.complete).toBe(true);
+    expect(agent.activated[0].targets).toEqual(["player"]);
+    expect(agent.activated[0].effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "lose-life", amount: 1, target: 0 },
+        { kind: "reveal-hand", who: 0 },
+      ],
+    });
+    const warrant = face("Sorcery", "Target player reveals their hand. You gain life equal to the number of cards in that player's hand.");
+    expect(warrant.complete).toBe(true);
+    expect(warrant.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "reveal-hand", who: 0 },
+        { kind: "gain-life", amount: { cardsInHand: { target: 0 } } },
+      ],
+    });
+  });
+
+  it("reads a card at random, for the player a trigger is about and for what follows on it", () => {
+    const spy = face("Creature — Merfolk Rogue", "Whenever this creature deals combat damage to a player, that player reveals a card at random from their hand.");
+    expect(spy.complete).toBe(true);
+    expect(spy.triggered[0].effect).toEqual({ kind: "choose-random-card", zone: "hand", whose: "that-player", show: "reveal" });
+    const fury = face(
+      "Enchantment",
+      "{3}{R}: Target opponent reveals a card at random from their hand. This enchantment deals damage equal to that card's mana value to that player. Activate only as a sorcery.",
+    );
+    expect(fury.complete).toBe(true);
+    expect(fury.activated[0].targets).toEqual(["opponent"]);
+    expect(fury.activated[0].effect).toEqual({
+      kind: "choose-random-card",
+      zone: "hand",
+      whose: 0,
+      show: "reveal",
+      slot: 1,
+      then: { kind: "damage", target: 0, amount: { manaValueOf: 1 } },
+    });
+    const mirth = face("Enchantment", "{3}{W}: Target opponent reveals a card at random from their hand. You gain life equal to that card's mana value.");
+    expect(mirth.activated[0].effect.then).toEqual({ kind: "gain-life", amount: { manaValueOf: 1 } });
+    // What follows unread, none of it is claimed.
+    expect(face("Sorcery", "Target player reveals a card at random from their hand. Destroy that card's owner.").complete).toBe(false);
+  });
+
+  it("reads up to N cards chosen, and a count of those sharing a mana value", () => {
+    const targets: unknown[] = [];
+    const parsed = parseEffect(
+      "Reveal up to five nonland cards from your hand. For each of those cards that has the same mana value as another card revealed this way, create a Treasure token.",
+      { targets, tokenFor: () => "Treasure Token" },
+    );
+    expect(parsed.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "look-and-choose", zone: "hand", min: 0, max: 5, filter: { notTypes: ["land"] }, destination: "reveal", leftover: "stay" },
+        { kind: "create-token", token: "Treasure Token", count: { thisWay: "revealed", who: "you", sharingManaValue: true } },
+      ],
+    });
+  });
+
+  it("reads 'if you do or if you control another', the gain by either road", () => {
+    const kincaller = face(
+      "Creature — Dinosaur",
+      "When this creature enters, you may reveal a Dinosaur card from your hand. If you do or if you control another Dinosaur, you gain 3 life.",
+    );
+    expect(kincaller.complete).toBe(true);
+    expect(kincaller.triggered[0].effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "look-and-choose", zone: "hand", min: 0, max: 1, filter: { subtype: "Dinosaur" }, destination: "reveal", leftover: "stay" },
+        {
+          kind: "conditional",
+          condition: { kind: "this-way", what: "revealed", atLeast: 1 },
+          then: { kind: "gain-life", amount: 3 },
+          else: {
+            kind: "conditional",
+            condition: { kind: "controls", filter: { subtype: "Dinosaur" }, atLeast: 1, excludeSelf: true },
+            then: { kind: "gain-life", amount: 3 },
+          },
+        },
+      ],
+    });
+  });
+});

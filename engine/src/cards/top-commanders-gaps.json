@@ -992,7 +992,10 @@
   "replacement:enter-as-copy-of-exiled-card",
   "replacement:enter-as-copy-of-graveyard-card",
   "replacement:enter-replacement-discard",
-  "replacement:enter-replacement-sacrifice"
+  "replacement:enter-replacement-sacrifice",
+  "effect:reveal-cards-from-hand",
+  "effect:reveal-random-card-from-hand",
+  "effect:target-player-reveals-hand"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

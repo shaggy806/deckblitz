@@ -549,6 +549,27 @@ cards: Rule of Law, Deafening Silence, Ethersworn Canonist, Irencrag Feat,
 Curse of Exhaustion. Left: Hedonist's Trove's "this way", Fires of Invention's
 "no more than two" beside its "only during your turn" (one line, two statics).
 
+### Revealing from a hand: the whole hand, at random, or up to N chosen — built 2026-11-01
+
+The need-keys Phase 2 family `effect:target-spec-additions`' top group, features
+only. Nearly all of it was already there and the keys were stale: `reveal-hand`
+(a whole hand, rule 701.20a), `choose-random-card`'s `zone: "hand"` with `show:
+"reveal"` (`slot` beside the player, `then` on the card), and `look-and-choose`'s
+`destination: "reveal"` with `{ thisWay: "revealed" }`. New: the amount's
+`sharingManaValue` (Vault 21: House Gambit's count of the revealed cards sharing a
+mana value with another), and the scaffolder, which now reads all of them:
+"target player loses N life and reveals their hand", "… reveals their hand. You
+gain life equal to the number of cards in that player's hand", "that player
+reveals a card at random", "… at random … that card's mana value" as damage or a
+gain, "reveal up to five …" with its count, and "you may reveal … If you do or if
+you control another …" as a `conditional` with an `else`. Keys:
+effect:reveal-cards-from-hand, effect:reveal-random-card-from-hand,
+effect:target-player-reveals-hand. Proving cards: Thoughtcutter Agent, Search
+Warrant, Merfolk Spy, Planeswalker's Fury, Armored Kincaller, Vault 21: House
+Gambit. Left: Planeswalker's Favor's "+X/+X, the revealed card's mana value"
+(its own key, amount:revealed-card-mana-value-keep-targets, though a `slot: 2`
+may already say it).
+
 ### A cost reduction on the next spell — built 2026-11-01
 
 The need-keys Phase 2 family `effect:temporary-player-effect`'s top group,
