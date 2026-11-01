@@ -208,6 +208,7 @@ import _poolEpicStruggle from "../pool/epic-struggle.js";
 import _poolErinisGloomStalker from "../pool/erinis-gloom-stalker.js";
 import _poolEssenceCapture from "../pool/essence-capture.js";
 import _poolEssenceDrain from "../pool/essence-drain.js";
+import _poolEtherswornCanonist from "../pool/ethersworn-canonist.js";
 import _poolExaltedSunborn from "../pool/exalted-sunborn.js";
 import _poolExecutionersCapsule from "../pool/executioners-capsule.js";
 import _poolExpandTheSphere from "../pool/expand-the-sphere.js";
@@ -310,6 +311,7 @@ import _poolGuardianScalelord from "../pool/guardian-scalelord.js";
 import _poolGuruPathik from "../pool/guru-pathik.js";
 import _poolHamatoNinpo from "../pool/hamato-ninpo.js";
 import _poolHarborBandit from "../pool/harbor-bandit.js";
+import _poolHardenedBerserker from "../pool/hardened-berserker.js";
 import _poolHaruHiddenTalent from "../pool/haru-hidden-talent.js";
 import _poolHaunterOfNightveil from "../pool/haunter-of-nightveil.js";
 import _poolHavenOfTheSpiritDragon from "../pool/haven-of-the-spirit-dragon.js";
@@ -1036,6 +1038,7 @@ const shard: CardShard = {
     _poolErinisGloomStalker,
     _poolEssenceCapture,
     _poolEssenceDrain,
+    _poolEtherswornCanonist,
     _poolExaltedSunborn,
     _poolExecutionersCapsule,
     _poolExpandTheSphere,
@@ -1138,6 +1141,7 @@ const shard: CardShard = {
     _poolGuruPathik,
     _poolHamatoNinpo,
     _poolHarborBandit,
+    _poolHardenedBerserker,
     _poolHaruHiddenTalent,
     _poolHaunterOfNightveil,
     _poolHavenOfTheSpiritDragon,

@@ -159,6 +159,7 @@ import _poolCrystalInhumanPrincess from "../pool/crystal-inhuman-princess.js";
 import _poolCrystallizedSerah from "../pool/crystallized-serah.js";
 import _poolCullingRitual from "../pool/culling-ritual.js";
 import _poolCurseOfDisturbance from "../pool/curse-of-disturbance.js";
+import _poolCurseOfExhaustion from "../pool/curse-of-exhaustion.js";
 import _poolCursedMirror from "../pool/cursed-mirror.js";
 import _poolCynicalLoner from "../pool/cynical-loner.js";
 import _poolDarkSalvation from "../pool/dark-salvation.js";
@@ -363,6 +364,7 @@ import _poolJwarIsleAvenger from "../pool/jwar-isle-avenger.js";
 import _poolK9MarkI from "../pool/k-9-mark-i.js";
 import _poolKaervekTheMerciless from "../pool/kaervek-the-merciless.js";
 import _poolKarametraGodOfHarvests from "../pool/karametra-god-of-harvests.js";
+import _poolKazaRoilChaser from "../pool/kaza-roil-chaser.js";
 import _poolKelethSunmaneFamiliar from "../pool/keleth-sunmane-familiar.js";
 import _poolKessDissidentMage from "../pool/kess-dissident-mage.js";
 import _poolKessigNaturalist from "../pool/kessig-naturalist.js";
@@ -1039,6 +1041,7 @@ const shard: CardShard = {
     _poolCrystallizedSerah,
     _poolCullingRitual,
     _poolCurseOfDisturbance,
+    _poolCurseOfExhaustion,
     _poolCursedMirror,
     _poolCynicalLoner,
     _poolDarkSalvation,
@@ -1243,6 +1246,7 @@ const shard: CardShard = {
     _poolK9MarkI,
     _poolKaervekTheMerciless,
     _poolKarametraGodOfHarvests,
+    _poolKazaRoilChaser,
     _poolKelethSunmaneFamiliar,
     _poolKessDissidentMage,
     _poolKessigNaturalist,

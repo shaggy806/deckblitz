@@ -198,6 +198,7 @@ import _poolDissentersDeliverance from "../pool/dissenters-deliverance.js";
 import _poolDistractTheGuards from "../pool/distract-the-guards.js";
 import _poolDjinnOfWishes from "../pool/djinn-of-wishes.js";
 import _poolDominatorDrone from "../pool/dominator-drone.js";
+import _poolDonRaphHardScience from "../pool/don-raph-hard-science.js";
 import _poolDontMove from "../pool/dont-move.js";
 import _poolDouseInGloom from "../pool/douse-in-gloom.js";
 import _poolDownhillCharge from "../pool/downhill-charge.js";
@@ -1068,6 +1069,7 @@ const shard: CardShard = {
     _poolDistractTheGuards,
     _poolDjinnOfWishes,
     _poolDominatorDrone,
+    _poolDonRaphHardScience,
     _poolDontMove,
     _poolDouseInGloom,
     _poolDownhillCharge,

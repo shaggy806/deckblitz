@@ -632,6 +632,7 @@ import _poolRitualOfSoot from "../pool/ritual-of-soot.js";
 import _poolRottedHystrix from "../pool/rotted-hystrix.js";
 import _poolRouseTheMob from "../pool/rouse-the-mob.js";
 import _poolRubyMedallion from "../pool/ruby-medallion.js";
+import _poolRuleOfLaw from "../pool/rule-of-law.js";
 import _poolRustsporeRam from "../pool/rustspore-ram.js";
 import _poolRuthlessKnave from "../pool/ruthless-knave.js";
 import _poolRuthlessSniper from "../pool/ruthless-sniper.js";
@@ -1554,6 +1555,7 @@ const shard: CardShard = {
     _poolRottedHystrix,
     _poolRouseTheMob,
     _poolRubyMedallion,
+    _poolRuleOfLaw,
     _poolRustsporeRam,
     _poolRuthlessKnave,
     _poolRuthlessSniper,

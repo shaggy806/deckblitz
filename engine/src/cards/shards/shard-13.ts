@@ -173,6 +173,7 @@ import _poolDarkstarAugur from "../pool/darkstar-augur.js";
 import _poolDarkwaterEgg from "../pool/darkwater-egg.js";
 import _poolDauthiEmbrace from "../pool/dauthi-embrace.js";
 import _poolDawnhartDisciple from "../pool/dawnhart-disciple.js";
+import _poolDeafeningSilence from "../pool/deafening-silence.js";
 import _poolDeathSpeakers from "../pool/death-speakers.js";
 import _poolDeathbringerThoctar from "../pool/deathbringer-thoctar.js";
 import _poolDeathcapMarionette from "../pool/deathcap-marionette.js";
@@ -1023,6 +1024,7 @@ const shard: CardShard = {
     _poolDarkwaterEgg,
     _poolDauthiEmbrace,
     _poolDawnhartDisciple,
+    _poolDeafeningSilence,
     _poolDeathSpeakers,
     _poolDeathbringerThoctar,
     _poolDeathcapMarionette,
