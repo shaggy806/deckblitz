@@ -6845,12 +6845,20 @@ export type EffectSpec =
       readonly kind: "prevent-damage-from-chosen-source";
       readonly filter?: CardFilter;
       /** Also `"your-side"` — "you and/or permanents you control" (Harm's
-       * Way, one shield over them all) — and `"any"`, any recipient
-       * (Reflect Damage's "would deal damage this turn"). */
-      readonly to: "you" | number | "your-side" | "any";
+       * Way, one shield over them all) — `"your-side-creatures"`, "you and/or
+       * creatures you control" (Shadowbane), and `"any"`, any recipient
+       * (Reflect Damage's, Pilgrim of Virtue's "would deal damage this
+       * turn"). */
+      readonly to: "you" | number | "your-side" | "your-side-creatures" | "any";
       /** `"all"`: all the damage that source would deal it this turn, never
-       * used up (Kor Chant). */
+       * used up (Kor Chant; Prahv's and Burrenton Forge-Tender's are `to:
+       * "any"`, Auriok Replica's `to: "you"`). */
       readonly amount: "next-time" | number | "all";
+      /** Only the damage prevented from a source that matches this, as the
+       * damage would be dealt, gains life: "If damage from a black source is
+       * prevented this way, you gain that much life" (Shadowbane); needs
+       * `gainLifePrevented`. */
+      readonly gainLifeFrom?: CardFilter;
       readonly gainLifePrevented?: true;
       /** Prevention's additional effect (rule 615.5), with `"x"` what the
        * shield prevented — see `damage-rule`'s `then`. */
@@ -6867,7 +6875,7 @@ export type EffectSpec =
       readonly redirectTo?: EffectTargetRef | "you";
       /** Set by the engine on the copy the choice's answer applies: what the
        * shield protects, with target 0 the source chosen. */
-      readonly protect?: TargetRef | "your-side" | "any";
+      readonly protect?: TargetRef | "your-side" | "your-side-creatures" | "any";
       /** Set by the engine beside `protect`: where `redirectTo` sends it. */
       readonly redirect?: TargetRef;
     }
@@ -9908,12 +9916,16 @@ export interface EffectApi {
    * the `"prevent-damage-from-chosen-source"` {@link EffectSpec}. */
   preventDamageFrom(
     source: TargetRef,
-    protect: TargetRef | "your-side" | "any",
+    protect: TargetRef | "your-side" | "your-side-creatures" | "any",
     amount: number | "next-time" | "all",
     filter: CardFilter | undefined,
     gainLifePrevented: boolean,
     redirectTo?: TargetRef,
-    more?: { readonly then?: EffectSpec; readonly redirectToSource?: "itself" | "controller" },
+    more?: {
+      readonly then?: EffectSpec;
+      readonly redirectToSource?: "itself" | "controller";
+      readonly gainLifeFrom?: CardFilter;
+    },
   ): void;
   /** `target` becomes `colors` — see the `"become-color"` {@link EffectSpec}. */
   becomeColor(target: TargetRef, colors: readonly Color[], duration: PtDuration, inAddition?: boolean): void;
@@ -15143,15 +15155,16 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
             {
               ...(spec.then !== undefined ? { then: spec.then } : {}),
               ...(spec.redirectToSource !== undefined ? { redirectToSource: spec.redirectToSource } : {}),
+              ...(spec.gainLifeFrom !== undefined ? { gainLifeFrom: spec.gainLifeFrom } : {}),
             },
           );
         }
         return;
       }
-      const protect: TargetRef | "your-side" | "any" | undefined =
+      const protect: TargetRef | "your-side" | "your-side-creatures" | "any" | undefined =
         spec.to === "you"
           ? { kind: "player", player: ctx.controller }
-          : spec.to === "your-side" || spec.to === "any"
+          : spec.to === "your-side" || spec.to === "your-side-creatures" || spec.to === "any"
             ? spec.to
             : resolveEffectTarget(spec.to, ctx);
       if (protect === undefined) return;

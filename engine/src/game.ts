@@ -30171,6 +30171,9 @@ export class Game {
           // over them all; "any": whatever it would be dealt to.
           ...(typeof protect === "object" ? { target: protect } : {}),
           ...(protect === "your-side" ? { recipients: { players: "you" as const, permanents: { controlledBy: "you" as const }, you: controller } } : {}),
+          ...(protect === "your-side-creatures"
+            ? { recipients: { players: "you" as const, permanents: { type: "creature" as const, controlledBy: "you" as const }, you: controller } }
+            : {}),
           amount: typeof amount === "number" ? amount : 0,
           ...(amount === "all" ? { all: true as const } : {}),
           ...(more?.redirectToSource !== undefined ? { redirectToSource: more.redirectToSource } : {}),
@@ -30189,6 +30192,7 @@ export class Game {
           },
           ...(amount === "next-time" ? { nextTime: true as const } : {}),
           ...(gainLifePrevented ? { gainLife: controller } : {}),
+          ...(more?.gainLifeFrom !== undefined ? { gainLifeFrom: more.gainLifeFrom } : {}),
           ...(redirectTo !== undefined ? { redirect: this.redirectOf(redirectTo) } : {}),
         });
         this.emit({
@@ -41846,7 +41850,19 @@ export class Game {
       }
       for (const { shield, prevented } of outcome.shields) {
         // Reverse Damage: life equal to what its shield prevented.
-        if (shield.gainLife !== undefined && prevented > 0) this.changeLife(shield.gainLife, prevented);
+        // Shadowbane's "from a black source": as the source is now, or as it
+        // last existed.
+        if (
+          shield.gainLife !== undefined &&
+          prevented > 0 &&
+          (shield.gainLifeFrom === undefined ||
+            matchesFilter(this.state, this.registry, source, shield.gainLifeFrom, {
+              you: shield.gainLife,
+              ...(sourceLastKnown !== undefined ? { snapshot: sourceLastKnown } : {}),
+            }))
+        ) {
+          this.changeLife(shield.gainLife, prevented);
+        }
         // "If damage is prevented this way, …" (615.5): right after.
         if (shield.then !== undefined && shield.redirect === undefined && shield.redirectToSource === undefined) {
           const t = shield.then;

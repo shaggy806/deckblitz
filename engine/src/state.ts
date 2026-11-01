@@ -4517,6 +4517,10 @@ export interface PreventionShield {
   readonly nextTime?: true;
   /** Reverse Damage: this player gains life equal to the damage it prevents. */
   readonly gainLife?: PlayerId;
+  /** Only damage from a source matching this, from `gainLife`'s side, as the
+   * damage would be dealt, gains the life (Shadowbane's "from a black
+   * source"). */
+  readonly gainLifeFrom?: CardFilter;
   /** A redirection effect (rule 614.9 — the en-Kor creatures' "the next 1
    * damage that would be dealt to this creature this turn is dealt to target
    * creature you control instead"): what it takes is dealt to `to` instead

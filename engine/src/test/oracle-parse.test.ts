@@ -2319,6 +2319,28 @@ describe("templates for features built since the parser began (2026-10-11)", () 
       amount: "next-time",
     });
     expect(circle.complete).toBe(true);
+    // Other recipients and durations: all its damage, its next damage to
+    // anything, a redirection, and life from only some sources.
+    const chosen = { kind: "prevent-damage-from-chosen-source" };
+    expect(face("{4}{W}{U}, {T}: Prevent all damage a source of your choice would deal this turn.", "Land").activated[0].effect).toEqual({ ...chosen, to: "any", amount: "all" });
+    expect(face("Sacrifice this creature: Prevent all damage a red source of your choice would deal this turn.", "Creature").activated[0].effect).toEqual({ ...chosen, filter: { colors: ["R"] }, to: "any", amount: "all" });
+    expect(face("{W}, Sacrifice this creature: Prevent all damage a source of your choice would deal to you this turn.", "Creature").activated[0].effect).toEqual({ ...chosen, to: "you", amount: "all" });
+    expect(face("{W}, Sacrifice this creature: The next time a black source of your choice would deal damage this turn, prevent that damage.", "Creature").activated[0].effect).toEqual({ ...chosen, filter: { colors: ["B"] }, to: "any", amount: "next-time" });
+    expect(face("{T}: The next time a source of your choice would deal damage this turn, that damage is dealt to Opal-Eye instead.", "Legendary Creature — Fox Samurai", { name: "Opal-Eye, Konda's Yojimbo" }).activated[0].effect).toEqual({ ...chosen, to: "any", amount: "next-time", redirectTo: "source" });
+    expect(face("Prevent all damage that would be dealt to you this turn by a source of your choice. Whenever damage from a black or red source is prevented this way this turn, you gain that much life.", "Instant").effect).toEqual({
+      ...chosen,
+      to: "you",
+      amount: "all",
+      gainLifePrevented: true,
+      gainLifeFrom: { anyOf: [{ colors: ["B"] }, { colors: ["R"] }] },
+    });
+    expect(face("The next time a source of your choice would deal damage to you and/or creatures you control this turn, prevent that damage. If damage from a black source is prevented this way, you gain that much life.", "Instant").effect).toEqual({
+      ...chosen,
+      to: "your-side-creatures",
+      amount: "next-time",
+      gainLifePrevented: true,
+      gainLifeFrom: { colors: ["B"] },
+    });
     const lace = face("Target spell or permanent becomes black. (Mana symbols on that permanent remain unchanged.)", "Instant");
     expect(lace.targets).toEqual([{ kind: "spell-or-permanent" }]);
     expect(lace.effect).toEqual({ kind: "become-color", target: 0, colors: ["B"], duration: "permanent" });

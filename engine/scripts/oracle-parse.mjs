@@ -3319,6 +3319,44 @@ export function parseSentence(sentence, ctx) {
       amount: "next-time",
     };
   }
+  // "… would deal damage this turn, prevent that damage": any recipient
+  // (Pilgrim of Virtue); "to you and/or creatures you control" (Shadowbane).
+  if ((m = re(`the next time an? (?:(white|blue|black|red|green) )?source of your choice would deal damage (to you and\\/or creatures you control )?this turn, prevent that damage`).exec(s))) {
+    return {
+      kind: "prevent-damage-from-chosen-source",
+      ...(m[1] !== undefined ? { filter: { colors: [COLOR_WORDS[m[1].toLowerCase()]] } } : {}),
+      to: m[2] !== undefined ? "your-side-creatures" : "any",
+      amount: "next-time",
+    };
+  }
+  // "… that damage is dealt to ~ instead" (Opal-Eye, Konda's Yojimbo): the
+  // redirection, any recipient (rule 614.9).
+  if ((m = re(`the next time an? (?:(white|blue|black|red|green) )?source of your choice would deal damage this turn, that damage is dealt to ~ instead`).exec(s))) {
+    return {
+      kind: "prevent-damage-from-chosen-source",
+      ...(m[1] !== undefined ? { filter: { colors: [COLOR_WORDS[m[1].toLowerCase()]] } } : {}),
+      to: "any",
+      amount: "next-time",
+      redirectTo: "source",
+    };
+  }
+  // "Prevent all damage a [red] source of your choice would deal [to you]
+  // this turn" (Prahv, Burrenton Forge-Tender, Auriok Replica); "prevent all
+  // damage that would be dealt [to you | to any target] this turn by a source
+  // of your choice" (Consulate Surveillance, Shieldmage Advocate).
+  if ((m = re(`prevent all damage an? (?:(white|blue|black|red|green) )?source of your choice would deal (to you )?this turn`).exec(s))) {
+    return {
+      kind: "prevent-damage-from-chosen-source",
+      ...(m[1] !== undefined ? { filter: { colors: [COLOR_WORDS[m[1].toLowerCase()]] } } : {}),
+      to: m[2] !== undefined ? "you" : "any",
+      amount: "all",
+    };
+  }
+  if ((m = re(`prevent all damage that would be dealt (?:to (you|${TARGET}) )?this turn by a source of your choice`).exec(s))) {
+    const to = m[1] === undefined ? "any" : /^you$/i.test(m[1]) ? "you" : slot(m[1]);
+    if (to === undefined) return null;
+    return { kind: "prevent-damage-from-chosen-source", to, amount: "all" };
+  }
   // A damage rule (rule 615): "prevent all combat damage that would be dealt
   // by target attacking creature this turn" (Kor Haven), "… that would be
   // dealt to and dealt by ~ this turn" (Moonlight Geist).
@@ -4582,6 +4620,24 @@ export function parseEffect(text, outer) {
     if (/^you gain life equal to the damage prevented this way\.$/i.test(sentence) && parsed.at(-1)?.kind === "damage-rule") {
       parsed[parsed.length - 1] = { ...parsed.at(-1), gainLifePrevented: true };
       continue;
+    }
+    // … after a source of your choice (Reverse Damage), and only from a
+    // source of a colour (Shadowbane, Samite Ministration).
+    if (parsed.at(-1)?.kind === "prevent-damage-from-chosen-source") {
+      if (/^you gain life equal to the damage prevented this way\.$/i.test(sentence)) {
+        parsed[parsed.length - 1] = { ...parsed.at(-1), gainLifePrevented: true };
+        continue;
+      }
+      const fromM = /^(?:if|whenever) damage from an? (white|blue|black|red|green)(?: or (white|blue|black|red|green))? source is prevented this way(?: this turn)?, you gain that much life\.$/i.exec(sentence);
+      if (fromM !== null) {
+        const colorOf = (word) => ({ colors: [COLOR_WORDS[word.toLowerCase()]] });
+        parsed[parsed.length - 1] = {
+          ...parsed.at(-1),
+          gainLifePrevented: true,
+          gainLifeFrom: fromM[2] === undefined ? colorOf(fromM[1]) : { anyOf: [colorOf(fromM[1]), colorOf(fromM[2])] },
+        };
+        continue;
+      }
     }
     // "If that creature would die this turn, exile it instead." after the one
     // sentence that targeted (Lava Coil — rule 614.1a): that target — still

@@ -418,6 +418,23 @@ static:anthem-per-counter-on-source (Banner of Kinship's enters-with count),
 static:per-keyword-pump, static:pt-per-attachments-on-source,
 static:pt-per-defending-player-count.
 
+### A source of your choice, to anything, for the turn — built 2026-11-01
+
+The need-keys Phase 2 family `replacement:prevent-damage-from-chosen-source`,
+features only. Most of it was in `prevent-damage-from-chosen-source` already
+(`to: "any"`, `amount: "all"`, a redirection, rule 609.7), with no card, test or
+parser line reading it that way. New: `to: "your-side-creatures"` ("you and/or
+creatures you control") and `gainLifeFrom`, the filter on the source a
+`gainLifePrevented` reads as the damage would be dealt
+(`chosen-source-recipients.test.ts`); the scaffolder reads each wording, and "you
+gain life …" after one. Keys:
+replacement:prevent-all-damage-from-chosen-source-this-turn,
+replacement:prevent-next-damage-from-chosen-source-any-recipient,
+replacement:redirect-chosen-source-any-recipient,
+replacement:chosen-source-shield-you-and-your-creatures. Proving cards: Burrenton
+Forge-Tender, Prahv, Pilgrim of Virtue, Opal-Eye, Samite Ministration, Shadowbane.
+Left: Mourner's Shield needs "shares a color with the exiled card" as a filter.
+
 ### Keyword abilities and types for cards outside the battlefield — built 2026-11-01
 
 The need-keys Phase 2 family `static:grant-to-cards-outside-battlefield`,
