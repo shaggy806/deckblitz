@@ -395,6 +395,7 @@ import _poolIronhoofOx from "../pool/ironhoof-ox.js";
 import _poolIsochronScepter from "../pool/isochron-scepter.js";
 import _poolItOfTheHorridSwarm from "../pool/it-of-the-horrid-swarm.js";
 import _poolIxallisKeeper from "../pool/ixallis-keeper.js";
+import _poolIxidorRealitySculptor from "../pool/ixidor-reality-sculptor.js";
 import _poolIxidorsWill from "../pool/ixidors-will.js";
 import _poolJadeGuardian from "../pool/jade-guardian.js";
 import _poolJadziStewardOfFate from "../pool/jadzi-steward-of-fate.js";
@@ -1270,6 +1271,7 @@ const shard: CardShard = {
     _poolIsochronScepter,
     _poolItOfTheHorridSwarm,
     _poolIxallisKeeper,
+    _poolIxidorRealitySculptor,
     _poolIxidorsWill,
     _poolJadeGuardian,
     _poolJadziStewardOfFate,

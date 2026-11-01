@@ -548,6 +548,7 @@ import _poolRhinoTerribleTrampler from "../pool/rhino-terrible-trampler.js";
 import _poolRhoxWarMonk from "../pool/rhox-war-monk.js";
 import _poolRhysTheRedeemed from "../pool/rhys-the-redeemed.js";
 import _poolRibbonsOfNight from "../pool/ribbons-of-night.js";
+import _poolRideDown from "../pool/ride-down.js";
 import _poolRideTheRails from "../pool/ride-the-rails.js";
 import _poolRimewoodFalls from "../pool/rimewood-falls.js";
 import _poolRipscalePredator from "../pool/ripscale-predator.js";
@@ -1397,6 +1398,7 @@ const shard: CardShard = {
     _poolRhoxWarMonk,
     _poolRhysTheRedeemed,
     _poolRibbonsOfNight,
+    _poolRideDown,
     _poolRideTheRails,
     _poolRimewoodFalls,
     _poolRipscalePredator,

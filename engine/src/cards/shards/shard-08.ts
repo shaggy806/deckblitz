@@ -688,6 +688,7 @@ import _poolSkarrganPitSkulk from "../pool/skarrgan-pit-skulk.js";
 import _poolSkatewingSpy from "../pool/skatewing-spy.js";
 import _poolSkilledBattlecarver from "../pool/skilled-battlecarver.js";
 import _poolSkinbrandGoblin from "../pool/skinbrand-goblin.js";
+import _poolSkirkAlarmist from "../pool/skirk-alarmist.js";
 import _poolSkyHussar from "../pool/sky-hussar.js";
 import _poolSkyclaveInvader from "../pool/skyclave-invader.js";
 import _poolSkyfisherSpider from "../pool/skyfisher-spider.js";
@@ -1588,6 +1589,7 @@ const shard: CardShard = {
     _poolSkatewingSpy,
     _poolSkilledBattlecarver,
     _poolSkinbrandGoblin,
+    _poolSkirkAlarmist,
     _poolSkyHussar,
     _poolSkyclaveInvader,
     _poolSkyfisherSpider,

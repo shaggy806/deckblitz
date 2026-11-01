@@ -773,6 +773,7 @@ import _poolTreetopScout from "../pool/treetop-scout.js";
 import _poolTresserhornSinks from "../pool/tresserhorn-sinks.js";
 import _poolTrigonOfThought from "../pool/trigon-of-thought.js";
 import _poolTrinketMage from "../pool/trinket-mage.js";
+import _poolTritonTactics from "../pool/triton-tactics.js";
 import _poolTrugaCliffcharger from "../pool/truga-cliffcharger.js";
 import _poolTrumpetingArmodon from "../pool/trumpeting-armodon.js";
 import _poolTurbulentSprings from "../pool/turbulent-springs.js";
@@ -1652,6 +1653,7 @@ const shard: CardShard = {
     _poolTresserhornSinks,
     _poolTrigonOfThought,
     _poolTrinketMage,
+    _poolTritonTactics,
     _poolTrugaCliffcharger,
     _poolTrumpetingArmodon,
     _poolTurbulentSprings,

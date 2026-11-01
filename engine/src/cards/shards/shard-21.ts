@@ -627,6 +627,7 @@ import _poolSilentAttendant from "../pool/silent-attendant.js";
 import _poolSilkwingScout from "../pool/silkwing-scout.js";
 import _poolSimianSling from "../pool/simian-sling.js";
 import _poolSisterOfSilence from "../pool/sister-of-silence.js";
+import _poolSizzlingBarrage from "../pool/sizzling-barrage.js";
 import _poolSkullmeadCauldron from "../pool/skullmead-cauldron.js";
 import _poolSkyRuinDrake from "../pool/sky-ruin-drake.js";
 import _poolSkybind from "../pool/skybind.js";
@@ -1466,6 +1467,7 @@ const shard: CardShard = {
     _poolSilkwingScout,
     _poolSimianSling,
     _poolSisterOfSilence,
+    _poolSizzlingBarrage,
     _poolSkullmeadCauldron,
     _poolSkyRuinDrake,
     _poolSkybind,

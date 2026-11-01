@@ -655,6 +655,7 @@ import _poolShimatsuTheBloodcloaked from "../pool/shimatsu-the-bloodcloaked.js";
 import _poolShimmeringGrotto from "../pool/shimmering-grotto.js";
 import _poolShinyImpetus from "../pool/shiny-impetus.js";
 import _poolShivanWurm from "../pool/shivan-wurm.js";
+import _poolShowstoppingSurprise from "../pool/showstopping-surprise.js";
 import _poolShriekingSpecter from "../pool/shrieking-specter.js";
 import _poolShyft from "../pool/shyft.js";
 import _poolSibsigAppraiser from "../pool/sibsig-appraiser.js";
@@ -820,6 +821,7 @@ import _poolVedalkenShackles from "../pool/vedalken-shackles.js";
 import _poolVeinRipper from "../pool/vein-ripper.js";
 import _poolVeldraneOfSengir from "../pool/veldrane-of-sengir.js";
 import _poolVelvetwingButterflies from "../pool/velvetwing-butterflies.js";
+import _poolVenomousBreath from "../pool/venomous-breath.js";
 import _poolVentureForth from "../pool/venture-forth.js";
 import _poolVerdantKraken from "../pool/verdant-kraken.js";
 import _poolVerdurousGearhulk from "../pool/verdurous-gearhulk.js";
@@ -863,6 +865,7 @@ import _poolWoodbornBehemoth from "../pool/woodborn-behemoth.js";
 import _poolWoodwraithStrangler from "../pool/woodwraith-strangler.js";
 import _poolWrangle from "../pool/wrangle.js";
 import _poolYoshimaruBelovedCompanion from "../pool/yoshimaru-beloved-companion.js";
+import _poolYouCannotPass from "../pool/you-cannot-pass.js";
 import _poolZaskSkitteringSwarmlord from "../pool/zask-skittering-swarmlord.js";
 import _poolZeroPointBallad from "../pool/zero-point-ballad.js";
 import _poolZhangHeWeiGeneral from "../pool/zhang-he-wei-general.js";
@@ -1537,6 +1540,7 @@ const shard: CardShard = {
     _poolShimmeringGrotto,
     _poolShinyImpetus,
     _poolShivanWurm,
+    _poolShowstoppingSurprise,
     _poolShriekingSpecter,
     _poolShyft,
     _poolSibsigAppraiser,
@@ -1702,6 +1706,7 @@ const shard: CardShard = {
     _poolVeinRipper,
     _poolVeldraneOfSengir,
     _poolVelvetwingButterflies,
+    _poolVenomousBreath,
     _poolVentureForth,
     _poolVerdantKraken,
     _poolVerdurousGearhulk,
@@ -1745,6 +1750,7 @@ const shard: CardShard = {
     _poolWoodwraithStrangler,
     _poolWrangle,
     _poolYoshimaruBelovedCompanion,
+    _poolYouCannotPass,
     _poolZaskSkitteringSwarmlord,
     _poolZeroPointBallad,
     _poolZhangHeWeiGeneral,

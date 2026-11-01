@@ -645,6 +645,7 @@ import _poolSearchForAzcanta from "../pool/search-for-azcanta.js";
 import _poolSearingBlood from "../pool/searing-blood.js";
 import _poolSeasonedConsultant from "../pool/seasoned-consultant.js";
 import _poolSecludedGlen from "../pool/secluded-glen.js";
+import _poolSecondSunrise from "../pool/second-sunrise.js";
 import _poolSedrisTheTraitorKing from "../pool/sedris-the-traitor-king.js";
 import _poolSeeTheTruth from "../pool/see-the-truth.js";
 import _poolSeeker from "../pool/seeker.js";
@@ -1530,6 +1531,7 @@ const shard: CardShard = {
     _poolSearingBlood,
     _poolSeasonedConsultant,
     _poolSecludedGlen,
+    _poolSecondSunrise,
     _poolSedrisTheTraitorKing,
     _poolSeeTheTruth,
     _poolSeeker,
