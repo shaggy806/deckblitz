@@ -2855,6 +2855,33 @@ export interface StaticAbility {
     readonly who: "you" | "opponents" | "each-player";
     readonly steps: readonly ("untap" | "upkeep" | "draw")[];
   };
+  /** Who may see which hidden or face-down cards while this ability applies
+   * — read by `viewFor`, the per-seat view, so nothing in the rules changes
+   * but what a player knows. `who` is from this permanent's controller's side,
+   * as `skipsSteps`'s is. Time it with `condition`, or give it through
+   * `grantsStatic` or a `grant-static` ("until end of turn, you may look …").
+   * `affects` is ignored.
+   *
+   * - `handsRevealed`: "**Your opponents play with their hands revealed**"
+   *   (Telepathy, rules 701.18c, 701.20c), "players …" (Wandering Eye): those
+   *   hands, to every player.
+   * - `libraryTopRevealed`: "**Players play with the top card of their
+   *   libraries revealed**" (Wizened Snitches, rule 401.5), to every player.
+   *   The card's own `revealsOwnLibraryTop` is the common "you" form.
+   * - `looksAtFaceDownCreatures`: "**You may look at face-down creatures you
+   *   don't control any time**" (Keeper of the Lens, Found Footage, past rule
+   *   708.5): this permanent's controller alone, creatures on the battlefield
+   *   alone, never a face-down spell (the rulings).
+   * - `looksAtOwnLibraryTop`: "you may look at the top card of your library
+   *   any time" as a static, for a permanent that has it by a grant (Glowcap
+   *   Lantern) — the card's own `looksAtOwnLibraryTop` is the printed form.
+   */
+  readonly visibility?: {
+    readonly handsRevealed?: "you" | "opponents" | "each-player";
+    readonly libraryTopRevealed?: "you" | "opponents" | "each-player";
+    readonly looksAtFaceDownCreatures?: true;
+    readonly looksAtOwnLibraryTop?: true;
+  };
   /** "Players can't untap more than one land during their untap steps"
    * (Winter Orb, Mungha Wurm's "you", Dovin Baan's emblem's "your
    * opponents"): in each of `who`'s (from this permanent's controller's

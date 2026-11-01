@@ -395,6 +395,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "discard-chosen": (n, v) => v.touch(n.target, "harm", MAJOR),
   // Seeing a hidden hand: point it at an opponent.
   "look-at-hand": (n, v) => v.touch(n.target, "harm", MINOR),
+  "look-at-library-top": (n, v) => v.touch(n.target, "harm", MINOR),
   // Showing everyone a hidden hand, as `look-at-hand`.
   "reveal-hand": (n, v) => v.touch(n.who, "harm", MINOR),
   "modify-pt": (n, v) => {

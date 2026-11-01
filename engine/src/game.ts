@@ -27633,6 +27633,21 @@ export class Game {
           leftover: "stay",
         };
       },
+      lookAtLibraryTop: (owner) => {
+        const top = this.state.zones.perPlayer[owner]?.library[0];
+        if (top === undefined || this.state.players[owner]?.hasLost !== false) return;
+        this.state.awaiting = {
+          kind: "choose-from-zone",
+          player: controller,
+          ...(controller !== owner ? { forPlayer: owner } : {}),
+          ids: [top],
+          eligible: [],
+          min: 0,
+          max: 0,
+          destination: "discard",
+          leftover: "stay",
+        };
+      },
       graveyardMatching: (owner, filter) =>
         (this.state.zones.perPlayer[owner]?.graveyard ?? []).filter((id) =>
           matchesFilter(this.state, this.registry, id, filter, { you: controller }),

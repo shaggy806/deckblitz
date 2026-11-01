@@ -2692,6 +2692,19 @@ keywords, the `bandsWithOther` static, the `bandedWithSource` filter. Key:
 `keyword:banding`. Still open beside it: 702.22i ("would become blocked due
 to an effect" — no effect makes an attacker blocked yet).
 
+### Who may look at what — built 2026-11-01
+
+The need-keys family `zone:visibility-extensions`. `StaticAbility.visibility`,
+read by `viewFor` alone: hands played revealed (Telepathy, Wandering Eye),
+library tops played revealed by "players" (Wizened Snitches), looking at
+face-down creatures you don't control (Keeper of the Lens, Found Footage,
+until end of turn by a `grant-static` — Lumbering Laundry), and the own-library
+look as a grantable static (Glowcap Lantern). `look-at-library-top` is the
+one-shot look at another library's top card (Mishra's Bauble, Merfolk Observer);
+Peek shows `look-at-hand` had the rest of it. What it doesn't build: Sen
+Triplets' casting from another player's hand, and "this turn" hands revealed
+that only that card needs.
+
 ### A trigger's recipient as a reference — built 2026-11-01
 
 The need-keys group `trigger:trigger-recipient-ref` +

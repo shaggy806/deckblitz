@@ -7399,6 +7399,23 @@ describe("the turn's blocks", () => {
     });
   });
 
+  it("reads who may see what, and a look at a library's top card", () => {
+    const telepathy = face("Enchantment", "Your opponents play with their hands revealed.");
+    expect(telepathy.complete).toBe(true);
+    expect(telepathy.static[0].visibility).toEqual({ handsRevealed: "opponents" });
+    expect(face("Creature — Illusion", "Flying\nPlayers play with their hands revealed.").static[0].visibility).toEqual({ handsRevealed: "each-player" });
+    expect(face("Creature — Faerie Rogue", "Players play with the top card of their libraries revealed.").static[0].visibility).toEqual({ libraryTopRevealed: "each-player" });
+    for (const line of [
+      "You may look at face-down creatures you don't control any time.",
+      "You may look at face-down creatures your opponents control any time.",
+    ]) {
+      expect(face("Artifact Creature — Golem", line).static[0].visibility).toEqual({ looksAtFaceDownCreatures: true });
+    }
+    const observer = face("Creature — Merfolk Rogue", "When this creature enters, look at the top card of target player's library.");
+    expect(observer.complete).toBe(true);
+    expect(observer.triggered[0].effect).toEqual({ kind: "look-at-library-top", target: 0 });
+  });
+
   it("reads a trigger's recipient: that creature, and the player or planeswalker it's attacking", () => {
     const viper = face(
       "Creature — Snake",

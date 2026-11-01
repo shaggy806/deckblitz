@@ -2367,6 +2367,11 @@ export function parseSentence(sentence, ctx) {
   if ((m = re(`look at (target player|target opponent)'s hand`).exec(s))) {
     return { kind: "look-at-hand", target: slot(m[1]) };
   }
+  // "Look at the top card of target player's library" (Mishra's Bauble): a
+  // look alone.
+  if ((m = re(`look at the top card of (target player|target opponent)'s library`).exec(s))) {
+    return { kind: "look-at-library-top", target: slot(m[1]) };
+  }
   // "Look at a card at random in target player's hand" (Urza's Bauble): the
   // controller alone sees the one card picked.
   if ((m = re(`look at a card at random in (target player|target opponent)'s hand`).exec(s))) {
@@ -9982,6 +9987,22 @@ function parseStatic(line, text) {
     if (filter !== null) {
       return { affects: { scope: "self" }, castAsThoughFlash: filter, castAsThoughFlashFirstEachTurn: true, text };
     }
+  }
+  // Who sees what (`StaticAbility.visibility`): "your opponents play with
+  // their hands revealed" (Telepathy), "players play with the top card of
+  // their libraries revealed" (Wizened Snitches), "you may look at face-down
+  // creatures you don't control any time" (Keeper of the Lens).
+  if ((m = /^(Your opponents|Players) play with their hands revealed\.$/.exec(line))) {
+    return { affects: { scope: "self" }, visibility: { handsRevealed: m[1] === "Players" ? "each-player" : "opponents" }, text };
+  }
+  if (line === "Play with your hand revealed.") {
+    return { affects: { scope: "self" }, visibility: { handsRevealed: "you" }, text };
+  }
+  if ((m = /^(Your opponents|Players) play with the top card of their libraries revealed\.$/.exec(line))) {
+    return { affects: { scope: "self" }, visibility: { libraryTopRevealed: m[1] === "Players" ? "each-player" : "opponents" }, text };
+  }
+  if (/^You may look at face-down creatures (?:you don't control|your opponents control) any time\.$/.test(line)) {
+    return { affects: { scope: "self" }, visibility: { looksAtFaceDownCreatures: true }, text };
   }
   // A static step skip (rule 614.10): "skip your draw step", "players skip
   // their untap steps", "each player skips their untap step".

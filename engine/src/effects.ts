@@ -4179,6 +4179,15 @@ export type EffectSpec =
       readonly target: number;
     }
   | {
+      /** "**Look at the top card of target player's library**" (Mishra's
+       * Bauble, Merfolk Observer): the effect's controller sees it, and it
+       * stays where it is, hidden from everyone else (rule 401.2). Asked as
+       * `look-at-hand` is, a `choose-from-zone` with nothing to pick. An empty
+       * library shows nothing and asks nothing. */
+      readonly kind: "look-at-library-top";
+      readonly target: number;
+    }
+  | {
       /** Target player discards `amount` cards (their choice, unless it's the
        * effect's own controller). Discards their whole hand if it's smaller.
        * `target: "you"` = the effect's controller, with no target slot
@@ -8998,6 +9007,9 @@ export interface EffectApi {
    * `"reveal"` to every player (rule 701.20a), `"look"` to the effect's
    * controller alone — a look they close, as `look-at-hand`'s is. */
   showCardFromHand(owner: PlayerId, card: ObjectId, how: "reveal" | "look"): void;
+  /** The effect's controller looks at the top card of `owner`'s library — a
+   * look they close, as `look-at-hand`'s is. */
+  lookAtLibraryTop(owner: PlayerId): void;
   /** The cards in `owner`'s graveyard matching `filter`, read from the
    * effect's controller's side, in graveyard order. */
   graveyardMatching(owner: PlayerId, filter: CardFilter): readonly ObjectId[];
@@ -13965,6 +13977,11 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "look-at-hand": {
       const target = ctx.targets[spec.target];
       if (target !== undefined) ctx.discardChosen(target, undefined, true, true, 0);
+      return;
+    }
+    case "look-at-library-top": {
+      const target = ctx.targets[spec.target];
+      if (target?.kind === "player") ctx.lookAtLibraryTop(target.player);
       return;
     }
     case "discard": {

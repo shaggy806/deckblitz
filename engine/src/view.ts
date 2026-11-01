@@ -16,12 +16,14 @@ import {
   abilitiesLostAt,
   computeCharacteristics,
   extraIntrinsicManaColors,
+  grantedStatics,
   hasLostAbilities,
   inactiveStandIn,
   intrinsicManaColors,
   modifierGrantApplies,
   pairedPartner,
   restrictionsOf,
+  staticConditionMet,
   withComputedCache,
 } from "./characteristics.js";
 import { protectionLabel } from "./effects.js";
@@ -394,8 +396,8 @@ export interface PlayerView {
     readonly command: readonly ObjectId[];
     /** Every hand's ids are here regardless of whose it is (so an opponent's
      * hand can render as N face-down cards) — but `objects` below only
-     * carries the identity of your own hand's cards, and of any card that
-     * was revealed. */
+     * carries the identity of your own hand's cards, of any card that was
+     * revealed, and of a hand played revealed (`StaticAbility.visibility`). */
     readonly hands: Readonly<Record<PlayerId, readonly ObjectId[]>>;
     readonly graveyards: Readonly<Record<PlayerId, readonly ObjectId[]>>;
     /** The viewer's own cards outside the game — their sideboard (rule
@@ -404,7 +406,8 @@ export interface PlayerView {
     readonly sideboard: readonly ObjectId[];
   };
   /** Each player's top library card, if some permanent they control makes it
-   * public knowledge (e.g. Oracle of Mul Daya) — `null` otherwise. The
+   * public knowledge (e.g. Oracle of Mul Daya), or any permanent does (Wizened
+   * Snitches' "players play with …") — `null` otherwise. The
    * viewer's own also when a permanent of theirs lets them look at it any
    * time (Glarb, Calamity's Augur), which no one else's view shows. */
   readonly revealedLibraryTop: Readonly<Record<PlayerId, ObjectId | null>>;
@@ -504,6 +507,9 @@ function visible(
   registry: CardRegistry,
   id: ObjectId,
   viewer?: PlayerId,
+  /** `Sight.faceDownCreatures`: `viewer` may look at the face-down creatures
+   * they don't control. */
+  looksAtFaceDownCreatures = false,
 ): VisibleObject {
   const object = state.objects[id];
   // A phased-out permanent (rule 702.26) is still on the battlefield, and is
@@ -667,8 +673,14 @@ function visible(
       ? {
           faceDown: {
             kind: faceDown.kind,
-            // Revealed to everyone once the game is over (rule 708.9).
-            ...(viewer === object.controller || state.result.over ? { card: object.cardName } : {}),
+            // Revealed to everyone once the game is over (rule 708.9). A
+            // creature on the battlefield also to one who may look at it
+            // (Keeper of the Lens — not a spell, the rulings).
+            ...(viewer === object.controller ||
+            state.result.over ||
+            (looksAtFaceDownCreatures && object.zone === "battlefield" && computed.types.includes("creature"))
+              ? { card: object.cardName }
+              : {}),
           },
         }
       : {}),
@@ -863,6 +875,57 @@ function exileHoldings(state: GameState): Map<ObjectId, ObjectId[]> {
  * `viewFor(state, registry, SPECTATOR)`. */
 export const SPECTATOR = "spectator" as PlayerId;
 
+/** What the battlefield's `StaticAbility.visibility` statics show `viewer`,
+ * past what any player sees anyway. */
+interface Sight {
+  /** The players whose hands are revealed, to every player. */
+  readonly hands: ReadonlySet<PlayerId>;
+  /** The players whose libraries' top cards are revealed, to every player. */
+  readonly libraryTops: ReadonlySet<PlayerId>;
+  /** `viewer` may look at face-down creatures they don't control. */
+  readonly faceDownCreatures: boolean;
+  /** `viewer` may look at the top card of their own library. */
+  readonly ownLibraryTop: boolean;
+}
+
+function sightOf(state: GameState, registry: CardRegistry, viewer: PlayerId): Sight {
+  const hands = new Set<PlayerId>();
+  const libraryTops = new Set<PlayerId>();
+  let faceDownCreatures = false;
+  let ownLibraryTop = false;
+  const among = (who: "you" | "opponents" | "each-player", you: PlayerId): readonly PlayerId[] =>
+    who === "you"
+      ? [you]
+      : who === "opponents"
+        ? state.turnOrder.filter((player) => player !== you)
+        : state.turnOrder;
+  for (const id of state.zones.shared.battlefield) {
+    const object = state.objects[id];
+    if (state.players[object.controller]?.hasLost !== false) continue;
+    const own = registry.get(rulesTextName(object)).static.filter((a) => a.visibility !== undefined);
+    const abilities = [
+      ...grantedStatics(state, registry, object, (a) => a.visibility !== undefined).filter((a) => a.visibility !== undefined),
+      ...(own.length > 0 && !hasLostAbilities(state, registry, object) ? own : []),
+    ];
+    for (const ability of abilities) {
+      const sees = ability.visibility;
+      if (sees === undefined) continue;
+      if (ability.condition !== undefined && !staticConditionMet(state, registry, object, ability.condition)) continue;
+      if (sees.handsRevealed !== undefined) {
+        for (const player of among(sees.handsRevealed, object.controller)) hands.add(player);
+      }
+      if (sees.libraryTopRevealed !== undefined) {
+        for (const player of among(sees.libraryTopRevealed, object.controller)) libraryTops.add(player);
+      }
+      if (object.controller === viewer) {
+        if (sees.looksAtFaceDownCreatures === true) faceDownCreatures = true;
+        if (sees.looksAtOwnLibraryTop === true) ownLibraryTop = true;
+      }
+    }
+  }
+  return { hands, libraryTops, faceDownCreatures, ownLibraryTop };
+}
+
 export function viewFor(
   state: GameState,
   registry: CardRegistry,
@@ -884,6 +947,7 @@ function viewForUncached(
   const hands: Record<PlayerId, readonly ObjectId[]> = {};
   const graveyards: Record<PlayerId, readonly ObjectId[]> = {};
   const revealedLibraryTop: Record<PlayerId, ObjectId | null> = {};
+  const sight = sightOf(state, registry, viewer);
   const visibleIds: ObjectId[] = [
     ...state.zones.shared.battlefield,
     ...phasedOutIds(state),
@@ -1008,22 +1072,25 @@ function viewForUncached(
     graveyards[player] = [...zones.graveyard];
     visibleIds.push(...zones.graveyard);
 
-    const revealsTop = state.zones.shared.battlefield.some((id) => {
-      const object = state.objects[id];
-      return object.controller === player && registry.get(rulesTextName(object)).revealsOwnLibraryTop;
-    });
+    const revealsTop =
+      sight.libraryTops.has(player) ||
+      state.zones.shared.battlefield.some((id) => {
+        const object = state.objects[id];
+        return object.controller === player && registry.get(rulesTextName(object)).revealsOwnLibraryTop;
+      });
     // "You may look at the top card of your library any time" (Glarb,
     // Calamity's Augur — rule 401.5): shown in its owner's own view only.
     const looksAtTop =
       player === viewer &&
-      state.zones.shared.battlefield.some((id) => {
-        const object = state.objects[id];
-        return (
-          object.controller === player &&
-          !hasLostAbilities(state, registry, object) &&
-          registry.get(rulesTextName(object)).looksAtOwnLibraryTop
-        );
-      });
+      (sight.ownLibraryTop ||
+        state.zones.shared.battlefield.some((id) => {
+          const object = state.objects[id];
+          return (
+            object.controller === player &&
+            !hasLostAbilities(state, registry, object) &&
+            registry.get(rulesTextName(object)).looksAtOwnLibraryTop
+          );
+        }));
     const topCard = revealsTop || looksAtTop ? (zones.library[0] ?? null) : null;
     revealedLibraryTop[player] = topCard;
     if (topCard !== null) visibleIds.push(topCard);
@@ -1034,6 +1101,8 @@ function viewForUncached(
     // *identity* (the object's entry in `objects` below) stays hidden unless
     // it's your own hand or the card was actually revealed.
     hands[player] = [...zones.hand];
+    // "Your opponents play with their hands revealed" (Telepathy): to everyone.
+    if (player !== viewer && sight.hands.has(player)) visibleIds.push(...zones.hand);
     if (player === viewer) {
       visibleIds.push(...zones.hand);
       // Their own sideboard, which they may look at (rule 400.11a).
@@ -1061,7 +1130,7 @@ function viewForUncached(
   ]);
   for (const id of visibleIds) {
     if (state.objects[id] !== undefined) {
-      const base = visible(state, registry, id, viewer);
+      const base = visible(state, registry, id, viewer, sight.faceDownCreatures);
       const caster = casterOf.get(id);
       const cost =
         options.effectiveCost !== undefined && caster !== undefined
