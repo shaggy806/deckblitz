@@ -766,7 +766,9 @@ missing. Re-run `--greedy` for Phase 2's order.
   choice per card type or mana value (6 keys, 13 freed, 6 proving cards); another player choosing
   from finds, reveals, exile, graveyards and a revealed hand (7 keys, 18 freed, 11 proving cards);
   limits on the untap step (1 key, 4 freed, 6 proving cards); restrictions keyed to the other
-  creatures in combat (5 keys, 11 freed, 5 proving cards).
+  creatures in combat (5 keys, 11 freed, 5 proving cards); token copies of a linked source (5 keys,
+  16 freed, 8 proving cards); impulse permissions whose window is a predicate (9 keys, 10 freed, 10
+  proving cards).
 
 ## Rough size
 

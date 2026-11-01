@@ -372,17 +372,23 @@ section keeps only what to do next.
   Extract Brain, Forgotten Lore, Manifold Insights, Emergent Ultimatum, Plargg and Nassari,
   Elemental Teachings, Threats Undetected and Ecological Appreciation are only partly covered), and
   limits on the untap step and restrictions keyed to the other creatures in combat (`untapLimit`,
-  `untapOnlyChosenType`, `combat/company.ts`; 15 freed, 11 proving cards).
-  **1075 freed cards wait for the authoring sweep**
+  `untapOnlyChosenType`, `combat/company.ts`; 15 freed, 11 proving cards), and token copies of a
+  linked source and impulse windows as predicates (`create-token-copy`'s `of`, `ImpulseDuration`,
+  `sourceDid`; 26 freed, 18 proving cards — on the stale list Osgir needs an exile cost's filter
+  reading X, Tawnos a sacrifice and an exile in one cost, Phantom Steed its "Illusion" only if a
+  creature, Prototype Portal and Soul Foundry an X equal to the mana value, Nahiri an attack
+  requirement, Elkin Lair and Advanced Reconstruction a random exile, Gwen Stacy her back face's
+  trigger). **1094 freed cards wait for the authoring sweep**
   (`cards:needs -- --stale`); the user authors them in one sweep once the reasonable keys are built.
   Cloud sessions are building `keyword:hexproof-from-colors`, the combat-restriction second group,
   `effect:prevent-next-n-damage-to-you`, the cascade/sunburst grants to spells,
   `cost:kicker-nonmana-cost` and `cost:alt-cost-discard-cards`. Being built:
-  `effect:token-copy-options`, `zone:impulse-permission-options`,
   `replacement:prevent-damage-from-chosen-source`,
   `keyword:protection-from-spells-and-cast-permanents`, `cost:attack-tax`,
-  `cost:unless-pay-colored-per-amount`. Next unclaimed:
-  `effect:discard-chosen-from-revealed-hand` (10).
+  `cost:unless-pay-colored-per-amount`, `effect:discard-chosen-from-revealed-hand`,
+  `effect:life-total-becomes`, `effect:destroy-all-except-source`. Next unclaimed:
+  `condition:return-cards-put-in-graveyard-from-battlefield-this-turn` (9),
+  `mechanic:control-attack-block-choices` (10), `mechanic:face-down` (9).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next

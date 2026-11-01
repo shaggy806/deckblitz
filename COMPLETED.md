@@ -86,6 +86,21 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2: impulse permissions whose window is a predicate** (2026-11-01, `620d12027`;
+  nine keys of `zone:impulse-permission-options`) — one `ImpulseDuration` vocabulary for
+  `impulse-exile` and `exile`'s `mayCast`, which also gains `play` (during your next turn, until end
+  of combat next turn, until the source exiles another, while you control it); `sourceDid`, a live
+  gate off `TurnHistory.attackedWith` and `loreCountersOn`; losing control ends it for good (rule
+  611.2b); 10 freed. Galvanic Relay, Goblin Researcher, Brazen Cannonade, Furious Rise, Lightning,
+  Security Sergeant, Victor Mancha, Runaway, Scholar of Combustion, Containment Construct.
+- **Need-keys Phase 2: token copies of a linked source** (2026-11-01, `c4de1ae07`; five keys of
+  `effect:token-copy-options`) — `create-token-copy`'s `of` reaches `"enchanted"`,
+  `"exiled-with-source"` (with `chooseOne`), `"exiled-as-cost"`, `"exiled-this-way"` and
+  `{ eachExiled }`; `count` an amount; `sacrificeAtEndOfCombat`, `atYourNextEndStep`,
+  `exceptions.static`; no token of an instant or sorcery card (rule 111.5); Helm of the Host's
+  token now goes to its controller; 16 freed. Mimic Vat, The Cloning of Shredder, Followed
+  Footsteps, Mardu Siegebreaker, Altaïr Ibn-La'Ahad, Dollhouse of Horrors, Foggy Swamp Visions,
+  Rionya.
 - **Need-keys Phase 2: restrictions keyed to the other creatures in combat** (2026-11-01, `0329b0fd9`;
   `static:can-only-attack-alone`, `static:cant-attack-alone`, `static:cant-attack-or-block-alone`,
   `static:cant-attack-or-block-unless-two-others`, `static:cant-block-alone`) — five
