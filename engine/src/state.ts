@@ -362,7 +362,9 @@ export interface GameObject {
    * Indices of this permanent's activated abilities marked
    * `oncePerTurn` that have already been used this turn (rule 602.5g —
    * "Activate only once each turn", Steel Hellkite). Reset as every turn
-   * begins, whoever's it is (an untap step's first act).
+   * begins, whoever's it is (an untap step's first act). An ability with
+   * `timesEachTurn` ("no more than twice each turn") has one entry per
+   * activation, so the count of its index is how often it has been used.
    */
   abilitiesUsedThisTurn?: number[];
   /** Indices of this object's exhaust abilities already activated — once
@@ -4842,6 +4844,13 @@ export interface GameState {
    * begins. Optional so an older snapshot still loads.
    */
   abilityResolutionsThisTurn?: Record<string, number>;
+  /**
+   * How many times each activated ability whose effect asks (`StaticCondition`
+   * `activated-this-turn` — Dragon Whelp) has been activated this turn, keyed
+   * like `abilityResolutionsThisTurn`. Counted as it's activated, resolved or
+   * not. Turn-scoped, cleared as a turn begins.
+   */
+  abilityActivationsThisTurn?: Record<string, number>;
   /**
    * Which modes each ability has had chosen this turn, keyed like
    * `abilityResolutionsThisTurn` — for "choose one that hasn't been chosen

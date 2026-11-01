@@ -6295,6 +6295,21 @@ export function parseFace(face, ctx = {}) {
       if (restrictions.includes("as a sorcery")) ability.sorcerySpeed = true;
       if (restrictions.includes("once each turn")) ability.oncePerTurn = true;
       if (restrictions.includes("during your turn")) ability.condition = { kind: "your-turn" };
+      // "Activate no more than twice each turn" (Pit Imp — rule 602.5b), and
+      // "no more times each turn than the number of snow Swamps you control"
+      // (Withering Wisps): `timesEachTurn`, a number or a count.
+      rest = rest.replace(/ Activate no more than (twice|(\w+) times) each turn\.$/, (whole, _w, n) => {
+        const times = n === undefined ? 2 : numberOf(n);
+        if (typeof times !== "number") return whole;
+        ability.timesEachTurn = times;
+        return "";
+      });
+      rest = rest.replace(/ Activate no more times each turn than the number of (snow )?(.+?) you control\.$/, (whole, snow, phrase) => {
+        const filter = parseTypePhrase(phrase);
+        if (filter === null || Object.keys(filter).length === 0) return whole;
+        ability.timesEachTurn = { countOf: { ...filter, ...(snow !== undefined ? { supertype: "snow" } : {}), controlledBy: "you" } };
+        return "";
+      });
       // "Any player may activate this ability [but only as a sorcery]" (rule
       // 602.2 — Prophecy's Glittering Lion, Excavation).
       rest = rest.replace(/ Any player may activate this ability( but only as a sorcery)?\.$/, (_x, sorcery) => {
@@ -6890,6 +6905,9 @@ const DISCARDED_THIS_TURN = { kind: "turn-history", what: "discarded" };
  * intervening "if" of a trigger (Ichor Shade, Mysterio's Mirage), a spell's
  * "If …, draw a card." (Recalibrate). */
 const TURN_TALLY_IFS = {
+  // Dragon Whelp's: activations of this ability so far this turn, resolved
+  // or not.
+  "if this ability has been activated four or more times this turn,": { kind: "activated-this-turn", atLeast: 4 },
   "if you discarded a card this turn,": DISCARDED_THIS_TURN,
   "if you've discarded a card this turn,": DISCARDED_THIS_TURN,
   "if an artifact or creature was put into a graveyard from the battlefield this turn,": {

@@ -874,7 +874,10 @@
   "trigger:discards-extensions",
   "trigger:discards-first-time-each-turn",
   "effect:prohibit-land-plays",
-  "effect:prohibit-cast-by-zone"
+  "effect:prohibit-cast-by-zone",
+  "condition:ability-activated-count-this-turn",
+  "cost:activate-no-more-than-n-times-each-turn",
+  "cost:activation-limit-by-count"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

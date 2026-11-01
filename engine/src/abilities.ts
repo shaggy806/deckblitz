@@ -613,6 +613,15 @@ export interface ActivatedAbility {
    * per ability index on `GameObject.abilitiesUsedThisTurn`, so a permanent
    * with two such abilities limits each separately. */
   readonly oncePerTurn?: boolean;
+  /** "Activate no more than **twice** each turn" (Pit Imp — `2`; rule
+   * 602.5b), or a count read as it would be activated — Withering Wisps'
+   * "no more times each turn than the number of snow Swamps you control" (`{
+   * countOf: … }`, from the activating player's side). Kept per ability
+   * index on `GameObject.abilitiesUsedThisTurn` with `oncePerTurn`'s, one
+   * entry an activation, so the restriction stays with the object through a
+   * change of control (602.5b). A mana ability with it isn't offered to the
+   * auto-payer: activated by hand. */
+  readonly timesEachTurn?: CostReductionAmount;
   /** Exhaust — "Activate each exhaust ability only once": once for as long
    * as the object exists, rather than once each turn (Loot, the
    * Pathfinder). Tracked per ability index on

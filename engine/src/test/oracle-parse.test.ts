@@ -6156,3 +6156,46 @@ describe("land-play and cast-by-zone prohibitions", () => {
     expect(frenzy.static[0].prohibits).toEqual({ who: "you", spells: true, lands: {}, from: ["hand"] });
   });
 });
+
+describe("activation counts this turn", () => {
+  const face = (name: string, type_line: string, oracle_text: string) =>
+    parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });
+
+  it("reads 'activate no more than twice / three times each turn' as timesEachTurn", () => {
+    const imp = face("Pit Imp", "Creature — Imp", "Flying\n{B}: This creature gets +1/+0 until end of turn. Activate no more than twice each turn.");
+    expect(imp.complete).toBe(true);
+    expect(imp.activated[0].timesEachTurn).toBe(2);
+    const rats = face(
+      "Sewer Rats",
+      "Creature — Rat",
+      "{B}, Pay 1 life: This creature gets +1/+0 until end of turn. Activate no more than three times each turn.",
+    );
+    expect(rats.complete).toBe(true);
+    expect(rats.activated[0].timesEachTurn).toBe(3);
+  });
+
+  it("reads a limit counted from the permanents you control", () => {
+    const wisps = face(
+      "Withering Wisps",
+      "Enchantment",
+      "{B}: This enchantment deals 1 damage to each creature and each player. Activate no more times each turn than the number of snow Swamps you control.",
+    );
+    expect(wisps.complete).toBe(true);
+    expect(wisps.activated[0].timesEachTurn).toEqual({ countOf: { subtype: "Swamp", supertype: "snow", controlledBy: "you" } });
+  });
+
+  it("reads 'if this ability has been activated four or more times this turn' as a conditional", () => {
+    const card = face(
+      "Test Whelp",
+      "Creature — Dragon",
+      "{R}: This creature gets +1/+0 until end of turn. If this ability has been activated four or more times this turn, draw a card.",
+    );
+    expect(card.activated[0].effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "modify-pt", target: "source", power: 1, toughness: 0, duration: "end-of-turn" },
+        { kind: "conditional", condition: { kind: "activated-this-turn", atLeast: 4 }, then: { kind: "draw", amount: 1 } },
+      ],
+    });
+  });
+});

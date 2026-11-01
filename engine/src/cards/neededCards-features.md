@@ -321,6 +321,25 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Activations this turn: a limit of N, or of a count, and a condition on the count — built 2026-11-01
+
+The need-keys Phase 2 family `condition:ability-activated-count-this-turn`,
+features only. An activated ability's `timesEachTurn` is "activate no more
+than twice each turn" (a number) or "no more times each turn than the
+number of snow Swamps you control" (a `CostReductionAmount` count, read as
+it would be activated): rule 602.5b, kept with `oncePerTurn`'s record on
+`GameObject.abilitiesUsedThisTurn`, one entry an activation, so it stays
+with the object through a change of control. A mana ability with it is left
+out of the auto-payer (activated by hand). The new `StaticCondition`
+`activated-this-turn` (`atLeast`) is "if this ability has been activated
+four or more times this turn", read inside the ability's own `conditional`
+off `GameState.abilityActivationsThisTurn` (keyed like
+`abilityResolutionsThisTurn`, counted as each activation is made, only for
+an ability whose effect asks). The scaffolder reads both limit lines and the
+condition's "if". Keys: condition:ability-activated-count-this-turn,
+cost:activate-no-more-than-n-times-each-turn, cost:activation-limit-by-count.
+Proving cards: Pit Imp, Sewer Rats, Withering Wisps, Dragon Whelp.
+
 ### Can't play lands, and casting barred by zone — built 2026-10-31
 
 The need-keys Phase 2 family `effect:cast-and-activate-restrictions`'s

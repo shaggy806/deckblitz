@@ -3574,6 +3574,14 @@ carries; several compound. An "any colour" unit becomes `multiplier` of
   so a permanent with two such abilities limits each separately, and reset in
   the controller's untap step — and by any zone change, since the permanent
   that comes back is a new object (rule 400.7).
+- `timesEachTurn: n | CostReductionAmount` — "Activate no more than **twice**
+  each turn" (Pit Imp: `2`; Sewer Rats' "three times": `3`), or a count read
+  as it would be activated — Withering Wisps' "no more times each turn than
+  the number of snow Swamps you control" is `{ countOf: { subtype: "Swamp",
+  supertype: "snow", controlledBy: "you" } }`. Rule 602.5b: counted on the
+  object like `oncePerTurn`, activations still on the stack included, through
+  a change of control. A mana ability with it is activated by hand (the
+  auto-payer leaves it alone).
 - `exhaust: true` — **Exhaust**, "activate each exhaust ability only once":
   once for as long as the object exists, rather than once a turn (Loot, the
   Pathfinder). Recorded on `GameObject.exhaustedAbilities`; a zone change
@@ -5217,6 +5225,11 @@ clause (section 9):
   that leaves and returns is a new object with a fresh count, and an ability
   that fizzled never resolved, so it doesn't count. Only meaningful inside the
   ability's own `conditional` effect (a `not` around it works too).
+- `{ kind: "activated-this-turn", atLeast }` — "if this ability has been
+  **activated four or more times this turn**" (Dragon Whelp: `atLeast: 4`).
+  Every activation counts as it's made, resolved or not, the resolving one
+  included; per ability of one object, restarting each turn and with a zone
+  change. Only meaningful inside the activated ability's own `conditional`.
 - `{ kind: "source-on-battlefield" }` — "if ~ is still on the battlefield":
   the resolving ability's source is there as the same object it was (rule
   400.7). Shirei, Shizo's Caretaker's delayed return. Only a resolution can

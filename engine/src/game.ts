@@ -6841,6 +6841,7 @@ export class Game {
     this.state.revealedThisTurn = [];
     delete this.state.ceasedTokens;
     this.state.abilityResolutionsThisTurn = {};
+    delete this.state.abilityActivationsThisTurn;
     delete this.state.modesChosenThisTurn;
     // Those lasting "until your next turn" or while an object stays go on
     // (below); "this turn" ones lapse.
@@ -16999,7 +17000,11 @@ export class Game {
       // instance ("activate only once each turn"); otherwise one stands for
       // all — a token stack's or two namesakes' alike.
       const limited =
-        ability.oncePerTurn === true || ability.exhaust === true || ability.powerUp === true || ability.boast === true;
+        ability.oncePerTurn === true ||
+        ability.timesEachTurn !== undefined ||
+        ability.exhaust === true ||
+        ability.powerUp === true ||
+        ability.boast === true;
       if (!limited) {
         if (seen.has(ability)) return;
         seen.add(ability);
@@ -17671,6 +17676,14 @@ export class Game {
     ) {
       return `${def.name}'s ability has already been activated this turn`;
     }
+    // "Activate no more than twice each turn" (rule 602.5b): the limit read
+    // now, a count of the snow Swamps you control or a number.
+    if (ability.timesEachTurn !== undefined) {
+      const limit = this.costReductionAmount(ability.timesEachTurn, player, source.id);
+      if (this.activationsThisTurn(source, abilityIndex) >= limit) {
+        return `${def.name}'s ability has been activated as many times this turn as it can be`;
+      }
+    }
     // Exhaust and power-up: once for as long as this object exists.
     if (
       (ability.exhaust === true || ability.powerUp === true) &&
@@ -18247,9 +18260,10 @@ export class Game {
       // "Return Shigeki to its owner's hand" — the cost itself, paid now.
       this.returnToHandByEffect({ kind: "object", object: sourceId }, false);
     }
-    if (ability.oncePerTurn === true || ability.boast === true) {
+    if (ability.oncePerTurn === true || ability.boast === true || ability.timesEachTurn !== undefined) {
       // Rule 602.5g — recorded per ability index, so a permanent with two
-      // once-each-turn abilities limits each of them separately.
+      // once-each-turn abilities limits each of them separately; one entry
+      // an activation, which `timesEachTurn` counts.
       source.abilitiesUsedThisTurn = [
         ...(source.abilitiesUsedThisTurn ?? []),
         abilityIndex,
@@ -18452,6 +18466,15 @@ export class Game {
     if (this.otherChoice?.for === sourceId) this.state.objects[abilityId].otherChooser = this.otherChoice.chooser;
     if (shares !== undefined) this.state.objects[abilityId].division = shares;
     if (grantedAbility !== undefined) this.state.objects[abilityId].grantedAbility = grantedAbility;
+    // "If this ability has been activated four or more times this turn"
+    // (Dragon Whelp): counted as it's activated, resolved or not.
+    if (this.readsActivationCount(ability)) {
+      const key = this.abilityTurnKey(this.state.objects[abilityId]);
+      if (key !== undefined) {
+        const counts = (this.state.abilityActivationsThisTurn ??= {});
+        counts[key] = (counts[key] ?? 0) + 1;
+      }
+    }
     // A modal ability's modes, chosen as it was activated (rule 700.2b): what
     // it resolves, and for "that hasn't been chosen" what it has had.
     const modes = this.activationModes;
@@ -19147,6 +19170,10 @@ export class Game {
         ) {
           return;
         }
+        // "Activate no more than three times each turn" (Manaforge Cinder):
+        // the planner spends a source once a payment and can't keep the
+        // count, so such an ability is activated by hand.
+        if (ability.timesEachTurn !== undefined) return;
         // {Q} isn't paid by a mana payment (`AbilityCost.untap`).
         if (ability.cost.untap === true) return;
         if (ability.cost.tap) {
@@ -22189,6 +22216,30 @@ export class Game {
    * it was granted from, since its index among the source's abilities can
    * shift as grants come and go.
    */
+  /** How many times `source` has activated its ability `index` this turn —
+   * kept only for an ability with a per-turn limit (`oncePerTurn`, boast,
+   * `timesEachTurn`), one `abilitiesUsedThisTurn` entry an activation. */
+  private activationsThisTurn(source: GameObject, index: number): number {
+    let n = 0;
+    for (const used of source.abilitiesUsedThisTurn ?? []) if (used === index) n += 1;
+    return n;
+  }
+
+  /** Whether an activated ability's effect asks how many times it has been
+   * activated this turn (`activated-this-turn` — Dragon Whelp), so its
+   * activations are counted. Cached per definition object: a definition
+   * never changes. */
+  private readsActivationCount(ability: ActivatedAbility): boolean {
+    let known = this.activationCountReaders.get(ability);
+    if (known === undefined) {
+      known = ability.effect !== null && JSON.stringify(ability.effect).includes('"kind":"activated-this-turn"');
+      this.activationCountReaders.set(ability, known);
+    }
+    return known;
+  }
+
+  private readonly activationCountReaders = new WeakMap<ActivatedAbility, boolean>();
+
   private recordAbilityResolution(object: GameObject): number {
     const key = this.abilityTurnKey(object);
     if (key === undefined) return 0;
@@ -25814,6 +25865,10 @@ export class Game {
         return discarded?.length === 1 && matchesKnown(discarded[0].object, condition.filter);
       }
       if (condition.kind === "resolved-this-turn") return resolutionCount === condition.n;
+      if (condition.kind === "activated-this-turn") {
+        const key = opts.abilityKey;
+        return key !== undefined && (this.state.abilityActivationsThisTurn?.[key] ?? 0) >= condition.atLeast;
+      }
       // "Each player who doesn't have max speed" (Outpace Oblivion): that
       // player's speed, 0 for none (rule 702.179f).
       if (condition.kind === "speed" && condition.who === "that-player") {

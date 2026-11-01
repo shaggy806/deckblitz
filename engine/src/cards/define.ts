@@ -1276,6 +1276,17 @@ export type StaticCondition =
    */
   | { readonly kind: "resolved-this-turn"; readonly n: number }
   /**
+   * "If this ability has been activated **four or more times this turn**"
+   * (Dragon Whelp): every activation counts as it's activated, whether or
+   * not the earlier ones resolved, and the one resolving is among them. Kept
+   * per ability of one object, as `resolved-this-turn` is (a permanent that
+   * leaves and comes back starts again, rule 400.7), and only for an
+   * activated ability whose effect asks (`GameState.abilityActivationsThisTurn`).
+   * Only meaningful inside a `conditional` effect of the ability itself;
+   * always false on a static ability.
+   */
+  | { readonly kind: "activated-this-turn"; readonly atLeast: number }
+  /**
    * "If X is 10 or more" (Finale of Devastation): the X the resolving spell
    * or ability was cast or activated with. Only a resolution can answer it;
    * anywhere else it is false.
