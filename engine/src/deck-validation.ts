@@ -39,8 +39,7 @@ export interface DeckValidationResult {
   readonly identity: string;
 }
 
-/** Names exempt from the singleton rule — the deck builder uses this too, to
- * decide whether its "+1 copy" control should go past 1. */
+/** Names exempt from the singleton rule (903.5b) by being basic lands. */
 export const BASIC_LANDS: ReadonlySet<string> = new Set([
   "Plains",
   "Island",
@@ -54,6 +53,21 @@ export const BASIC_LANDS: ReadonlySet<string> = new Set([
   "Snow-Covered Mountain",
   "Snow-Covered Forest",
 ]);
+
+/**
+ * How many copies of a card a singleton deck may hold (rule 903.5b): one, any
+ * number of a basic land, and whatever a card says of itself — "A deck can have
+ * any number of cards named ~" (Rat Colony) or "up to seven" (Seven Dwarves),
+ * which the card's text sets over the rule (101.1). `Infinity` means no limit.
+ * A commander is one of those copies: this bounds the deck as a whole.
+ */
+export function copiesAllowed(name: string, registry: CardRegistry): number {
+  if (BASIC_LANDS.has(name)) return Infinity;
+  if (!registry.has(name)) return 1;
+  const copies = registry.get(name).deckCopies;
+  if (copies === null) return 1;
+  return copies === "any" ? Infinity : copies;
+}
 
 /** A deck's commanders: none for a deck that isn't a Commander deck. */
 export function commandersOf(deck: { readonly commanders?: readonly string[] }): readonly string[] {
@@ -260,8 +274,15 @@ export function validateCommanderDeck(
     if (!registry.has(name)) continue; // feasibility audit's job, not ours
     const notACard = notACardReason(name, registry.get(name));
     if (notACard !== null) violations.push(notACard);
-    if (n > 1 && !BASIC_LANDS.has(name)) {
-      violations.push(`${n}× "${name}" — singleton format allows only 1`);
+    // A commander is a copy too: the limit is the deck's, not the 99's.
+    const copies = n + deck.commanders.filter((c) => c === name).length;
+    const allowed = copiesAllowed(name, registry);
+    if (copies > allowed) {
+      violations.push(
+        allowed === 1
+          ? `${copies}× "${name}" — singleton format allows only 1`
+          : `${copies}× "${name}" — a deck can have up to ${allowed} cards with that name`,
+      );
     }
     if (!withinIdentity(colorIdentityOf(registry.get(name), registry), commanderIdentity)) {
       violations.push(

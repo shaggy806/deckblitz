@@ -7215,6 +7215,31 @@ describe("the turn's blocks", () => {
     });
   });
 
+  it("reads a card's own copy limit (100.2a, 903.5b): any number, and up to seven", () => {
+    const rats = parseFace({
+      name: "Rat Colony",
+      type_line: "Creature — Rat",
+      oracle_text: "This creature gets +1/+0 for each other Rat you control.\nA deck can have any number of cards named Rat Colony.",
+    });
+    expect(rats.deckCopies).toBe("any");
+    expect(rats.todo.join("\n")).not.toContain("A deck can have");
+    const dwarves = parseFace({
+      name: "Seven Dwarves",
+      type_line: "Creature — Dwarf",
+      oracle_text: "A deck can have up to seven cards named Seven Dwarves.",
+    });
+    expect(dwarves.deckCopies).toBe(7);
+    expect(dwarves.todo).toEqual([]);
+    // Someone else's name is no line about this card.
+    const other = parseFace({
+      name: "Not The Rats",
+      type_line: "Creature — Rat",
+      oracle_text: "A deck can have any number of cards named Rat Colony.",
+    });
+    expect(other.deckCopies).toBeUndefined();
+    expect(other.todo.length).toBe(1);
+  });
+
   it("reads 'at this turn's next end of combat, destroy all creatures that …', and Ride Down's rider", () => {
     const breath = face("Instant", "Choose target creature. At this turn's next end of combat, destroy all creatures that blocked or were blocked by it this turn.");
     expect(breath.complete).toBe(true);

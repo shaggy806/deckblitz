@@ -590,6 +590,18 @@ Rielle, the Everwise. Left: Toluz's "exile them" (the discarded cards,
 linked — `effect:linked-exile-from-discard`), Inti's batch key
 (`trigger:discards-batch-trigger`, likely only marking).
 
+### A card's own copy limit — built 2026-11-01
+
+"A deck can have any number of cards named ~" and "up to seven cards named ~":
+the need-keys Phase 2 family `mechanic:deck-any-number-copies`. A definition's
+`deckCopies` (`"any"` or a number) sets the card over the copy limit (rules
+100.2a, 903.5b; the card wins, 101.1), and `copiesAllowed` in `deck-validation.ts`
+is the one read of it, for the validator the server, the importer and the deck
+builder share; a commander counts as one of its own copies. Nothing in play reads
+it. The scaffolder reads both lines. Proving cards: Rat Colony, Relentless Rats,
+Seven Dwarves. Left for `author-freed`: the other nine, two of them on another
+need too (Slime Against Humanity, the Approaches).
+
 ### What blocked or was blocked this turn — built 2026-11-01
 
 The top unit of the need-keys Phase 2 family

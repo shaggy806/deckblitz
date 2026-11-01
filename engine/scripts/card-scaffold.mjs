@@ -199,6 +199,7 @@ function faceSource(face, ctx) {
     keywords: parsed.keywords.length ? [...new Set(parsed.keywords)] : undefined,
     pairing: parsed.pairing,
     canBeCommander: parsed.canBeCommander,
+    deckCopies: parsed.deckCopies,
     beginsOnBattlefield: parsed.beginsOnBattlefield,
     cantBeCountered: parsed.cantBeCountered,
     flashThenSacrifice: parsed.flashThenSacrifice,

@@ -4707,6 +4707,12 @@ export interface CardDefinition {
    * with power/toughness (a planeswalker, say) command a deck. A
    * deckbuilding rule, read by `deck-validation.ts`'s `canCommandAlone`. */
   readonly canBeCommander: boolean;
+  /** "A deck can have any number of cards named ~." (`"any"`) or "…up to seven
+   * cards named ~." (the number): the card's own exception to the copy limit
+   * (rules 100.2a and 903.5b; the card wins, rule 101.1), `null` for a card
+   * with none. A deckbuilding rule, read by `deck-validation.ts`'s
+   * {@link copiesAllowed} and nothing in play. */
+  readonly deckCopies: "any" | number | null;
   /** "If this card is in your opening hand, you may begin the game with it
    * on the battlefield" (rule 103.6a — the Leylines): once every hand is
    * kept, its owner is asked, starting player first, which such cards to put
@@ -4867,6 +4873,7 @@ const PRINTED_ABILITY: {
   divided: false,
   pairing: (def) => def.pairing !== null,
   canBeCommander: (def) => def.canBeCommander,
+  deckCopies: (def) => def.deckCopies !== null,
   beginsOnBattlefield: (def) => def.beginsOnBattlefield,
   openingHandReveal: (def) => def.openingHandReveal !== null,
 };
@@ -5114,6 +5121,7 @@ interface CardDraft {
   prepareSpellOnly?: boolean;
   pairing?: CommanderPairing;
   canBeCommander?: boolean;
+  deckCopies?: "any" | number;
   beginsOnBattlefield?: boolean;
   openingHandReveal?: OpeningHandReveal;
 }
@@ -5344,6 +5352,7 @@ export function defineCard(draft: CardDraft): CardDefinition {
     divided: draft.divided ?? null,
     pairing: draft.pairing ?? null,
     canBeCommander: draft.canBeCommander ?? false,
+    deckCopies: draft.deckCopies ?? null,
     beginsOnBattlefield: draft.beginsOnBattlefield ?? false,
     openingHandReveal: draft.openingHandReveal ?? null,
   };

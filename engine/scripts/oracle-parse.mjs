@@ -126,6 +126,9 @@ const KINSHIP =
 
 const MEANINGFUL_LABEL = /^(Power-up|Max speed|Solved|To solve|Companion|Visit|[IVX]+(?:, [IVX]+)*) — /;
 
+/** "A deck can have up to seven cards named ~" (Seven Dwarves, Nazgûl). */
+const DECK_COPY_WORDS = { two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9, ten: 10 };
+
 /** "Add {G}. Draw a card." → its sentences, each ending in its period. A
  * quoted ability ("…with \"Whenever …, draw a card.\"") is part of the
  * sentence around it, never a sentence of its own. */
@@ -6379,6 +6382,12 @@ export function parseFace(face, ctx = {}) {
       continue;
     }
     if (line === "~ can be your commander.") { out.canBeCommander = true; continue; }
+    // The card's own exception to the copy limit (100.2a, 903.5b; 101.1).
+    if (line === "A deck can have any number of cards named ~.") { out.deckCopies = "any"; continue; }
+    if ((m = /^A deck can have up to (\w+) cards named ~\.$/.exec(line)) && DECK_COPY_WORDS[m[1]] !== undefined) {
+      out.deckCopies = DECK_COPY_WORDS[m[1]];
+      continue;
+    }
     // Rule 103.6a, the Leylines ("…with him on the battlefield": Quicksilver).
     if (/^If (?:~|this card) is in your opening hand, you may begin the game with (?:it|him|her|them) on the battlefield\.$/.test(line)) {
       out.beginsOnBattlefield = true;
