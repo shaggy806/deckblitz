@@ -723,6 +723,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "sacrifice-all": none,
   "choose-exiled-to-play": none,
   "put-exiled-this-way-onto-battlefield": none,
+  "move-exiled-this-way": none,
   "put-arrived-onto-battlefield": none,
   "reveal-until-count": none,
   encore: none,

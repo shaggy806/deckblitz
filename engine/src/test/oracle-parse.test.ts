@@ -5483,3 +5483,66 @@ describe("the card discarded to pay a cost", () => {
     expect(rummage.complete).toBe(false);
   });
 });
+
+describe("put into a hand this way, and the cards exiled this way to their owners' hands", () => {
+  const face = (name: string, type_line: string, oracle_text: string) =>
+    parseFace({ name, type_line, oracle_text }, { tokenFor: (name: string) => `${name} Token` });
+
+  it("reads Adventure Awaits' look, its reveal-and-take and its 'if you didn't put a card into your hand this way'", () => {
+    const awaits = face(
+      "Adventure Awaits",
+      "Sorcery",
+      "Look at the top five cards of your library. You may reveal a creature card from among them and put it into your hand. Put the rest on the bottom of your library in a random order. If you didn't put a card into your hand this way, draw a card.",
+    );
+    expect(awaits.complete).toBe(true);
+    expect(awaits.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        {
+          kind: "look-and-choose",
+          zone: "library",
+          count: 5,
+          reveal: "chosen",
+          min: 0,
+          max: 1,
+          filter: { type: "creature" },
+          destination: "hand",
+          leftover: "bottom-random",
+        },
+        { kind: "conditional", condition: { kind: "this-way", what: "put-into-hand", atMost: 0 }, then: { kind: "draw", amount: 1 } },
+      ],
+    });
+    // A look that isn't taken whole leaves the lines alone.
+    expect(
+      face("Test Card", "Sorcery", "Look at the top five cards of your library. You may reveal a creature card from among them and put it into your hand. Put the rest into your graveyard.").complete,
+    ).toBe(false);
+  });
+
+  it("reads Courier of Comestibles' 'if you don't put a card into your hand this way' after its search", () => {
+    const courier = face(
+      "Courier of Comestibles",
+      "Creature — Human Citizen",
+      "When this creature enters, you may search your library for a Food card, reveal it, put it into your hand, then shuffle. If you don't put a card into your hand this way, create a Food token.",
+    );
+    expect(courier.complete).toBe(true);
+    expect(courier.triggered[0].effect).toMatchObject({
+      kind: "sequence",
+      effects: [
+        { kind: "may", effect: { kind: "search-library", filter: { subtype: "Food" }, destination: "hand" } },
+        {
+          kind: "conditional",
+          condition: { kind: "this-way", what: "put-into-hand", atMost: 0 },
+          then: { kind: "create-token", token: "Food Token", count: 1 },
+        },
+      ],
+    });
+  });
+
+  it("reads 'then put all cards exiled this way into their owners' hands'", () => {
+    expect(parseSentence("Then put all cards exiled this way into their owners' hands.", ctx())).toEqual({
+      kind: "move-exiled-this-way",
+      to: "hand",
+    });
+    expect(parseSentence("Then put all cards exiled this way into your hand.", ctx())).toBeNull();
+  });
+});

@@ -2023,6 +2023,11 @@ export function parseSentence(sentence, ctx) {
       leftover: "stay",
     };
   }
+  // "Then put all cards exiled this way into their owners' hands" (Worlds
+  // Within Worlds): every card the resolution exiled, still there.
+  if (re(`(?:then )?put all cards exiled this way into their owners' hands`).test(s)) {
+    return { kind: "move-exiled-this-way", to: "hand" };
+  }
   // "Put all cards exiled with ~ onto the battlefield" (Underworld Sentinel):
   // under the putting player's control (rule 110.2a).
   if (re(`put all cards exiled with (?:~|it) onto the battlefield`).test(s)) {
@@ -3564,6 +3569,34 @@ export function parseEffect(text, outer) {
         continue;
       }
     }
+    // "Look at the top five cards of your library. You may reveal a creature
+    // card from among them and put it into your hand. Put the rest on the
+    // bottom of your library in a random order." (Adventure Awaits, Basic
+    // Conjuration) — one look-and-choose, only the card taken shown.
+    const lookTopM = /^look at the top (\w+) cards of your library\.$/i.exec(sentence);
+    const revealTakeM =
+      lookTopM === null ? null : /^you may reveal an? (.+?) card from among them and put it into your hand\.$/i.exec(sentences[i + 1] ?? "");
+    if (revealTakeM !== null && /^put the rest on the bottom of your library in a random order\.$/i.test(sentences[i + 2] ?? "")) {
+      const count = numberOf(lookTopM[1]);
+      const filter = parseTypePhrase(revealTakeM[1]);
+      if (typeof count === "number" && filter !== null && Object.keys(filter).length > 0) {
+        const look = {
+          kind: "look-and-choose",
+          zone: "library",
+          count,
+          reveal: "chosen",
+          min: 0,
+          max: 1,
+          filter,
+          destination: "hand",
+          leftover: "bottom-random",
+        };
+        parsed.push(look);
+        hints.push({ sentence, effect: look });
+        skip = 2;
+        continue;
+      }
+    }
     // "Choose a card at random that was exiled with ~. Put that card into its
     // owner's hand." (Skyship Weatherlight) — two sentences, one pick among
     // the cards linked to the source (rule 607.2a).
@@ -3762,6 +3795,24 @@ export function parseEffect(text, outer) {
         parsed.push(may);
         hints.push({ sentence, effect: may });
         skip = 1;
+        continue;
+      }
+    }
+    // "If you didn't put a card into your hand this way, draw a card"
+    // (Adventure Awaits), "If you don't put a card into your hand this way,
+    // create a Food token" (Courier of Comestibles): after whatever could
+    // have put one there, the `"put-into-hand"` this-way kind with none.
+    const noneToHandM = /^if you (?:didn't|don't) put a card into your hand this way, (.+)$/i.exec(sentence);
+    if (noneToHandM !== null && parsed.length > 0) {
+      const then = parseSentence(`${noneToHandM[1][0].toUpperCase()}${noneToHandM[1].slice(1)}`, ctx);
+      if (then !== null && !containsUndefined(then)) {
+        const none = {
+          kind: "conditional",
+          condition: { kind: "this-way", what: "put-into-hand", atMost: 0 },
+          then,
+        };
+        parsed.push(none);
+        hints.push({ sentence, effect: none });
         continue;
       }
     }

@@ -26990,6 +26990,20 @@ export class Game {
         });
         return false;
       },
+      moveExiledThisWay: (to, filter) => {
+        // Every card this resolution exiled, from anywhere — a permanent too
+        // (Worlds Within Worlds' "exile all creatures … then put all cards
+        // exiled this way into their owners' hands") — still in exile as
+        // the same object: one cast from there, or a token, isn't.
+        const moving = thisWayEntries(this.state, "exiled", since)
+          .map((e) => e.object)
+          .filter((id) => {
+            const object = this.state.objects[id];
+            if (object === undefined || object.zone !== "exile" || object.isToken || object.kind !== "card") return false;
+            return filter === undefined || matchesFilter(this.state, this.registry, id, filter, { you: controller });
+          });
+        if (to === "hand") for (const id of moving) this.moveObject(id, "hand");
+      },
       // Damage too: Chandra's Ignition's creature deals it to each other
       // creature and each opponent as one event, so its lifelink is one life
       // gain (rule 702.15e).
@@ -42372,6 +42386,10 @@ export class Game {
     }
     const id = library[0];
     this.moveObject(id, "hand");
+    // Drawn, not "put into your hand" by an instruction that says so — the
+    // `"put-into-hand"` this-way kind leaves draws to `"drawn"`.
+    const drawn = this.state.objects[id];
+    if (drawn !== undefined) delete drawn.handArrivalSeq;
     // Counted on the *raw* draw, so every draw path counts it once and
     // nothing that merely puts a card in hand (a tutor) does.
     const seat = this.state.players[player];
@@ -44115,6 +44133,8 @@ export class Game {
     // So was having transformed (rule 701.28f) — and entering transformed
     // isn't transforming.
     object.transformedAtSeq = undefined;
+    // Its arrival in a hand was the card that just left it (set below).
+    object.handArrivalSeq = undefined;
     // A flipped permanent that leaves keeps no memory of it (rule 710.4).
     object.flipped = undefined;
     object.flippedName = undefined;
@@ -44376,6 +44396,11 @@ export class Game {
     // …or into exile.
     if (to === "exile" && previousZone !== "exile" && !object.isToken) {
       this.noteExileArrival(id, previousZone);
+    }
+    // …or into a hand: the `"put-into-hand"` this-way kind's record (a draw
+    // clears it again — `drawCardRaw`).
+    if (to === "hand" && previousZone !== "hand" && !object.isToken) {
+      object.handArrivalSeq = this.state.eventSeq;
     }
     return true;
   }

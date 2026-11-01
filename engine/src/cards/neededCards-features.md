@@ -669,6 +669,31 @@ pay-variable-energy. Proving cards: Harnessed Lightning, Die Young, Wrath of
 the Skies, Territorial Aetherkite, Nissa, Worldsoul Speaker, Primal Prayers,
 Amped Raptor, Jolted Awake.
 
+### Put into a hand this way, and the cards exiled this way to their owners' hands — built 2026-10-31
+
+The need-keys Phase 2 family `effect:this-way-results`' first group,
+features only. A this-way kind **`"put-into-hand"`**: the cards a resolution
+put into a hand from any other zone, never by a draw — a search's find, a
+look's pick, a milled card taken back, a return — still in that hand, by
+owner. No event announces a hand arrival, so `moveObject` stamps
+`GameObject.handArrivalSeq` and `this-way.ts` reads the hands. **`move-exiled-this-way`**
+`to: "hand"` puts every card the resolution exiled, a permanent too, still in
+exile, into its owner's hand. A mandatory pick from the cards milled this way
+was already a `look-and-choose` over the graveyard with `thisWay: "milled"`
+(`min: 1`). The scaffolder reads "If you didn't / don't put a card into your
+hand this way, …", "Look at the top N cards of your library. You may reveal
+a … card from among them and put it into your hand. Put the rest on the
+bottom of your library in a random order." and "Then put all cards exiled
+this way into their owners' hands." Keys: effect:put-into-hand-this-way,
+effect:exiled-this-way-to-hand, effect:return-milled-this-way. Proving cards:
+Adventure Awaits, Courier of Comestibles, Cache Grab, Worlds Within Worlds,
+Monster Manual // Zoological Study (`put-into-hand-this-way.test.ts`). For
+`author-freed` to check in the rest: Search for Blex (a modal double-faced
+card, "lose 3 life for each card you put into your hand this way" — a
+`product` over the kind), Inscribed Tablet's mandatory take, Contagious
+Vorrac's proliferate, Muse Vortex (also needs the cards exiled this way on
+the bottom of the library).
+
 ### A spell's copy that differs: exceptions and gains — built 2026-10-31
 
 The need-keys Phase 2 family `effect:copy-spell-extensions`' first group,

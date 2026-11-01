@@ -653,6 +653,12 @@ export interface GameObject {
   /** The `eventSeq` this permanent last transformed at (rule 701.28f).
    * Cleared as it changes zones — entering transformed isn't transforming. */
   transformedAtSeq?: number;
+  /** The `eventSeq` this card was put into its hand at, from another zone
+   * and not by being drawn — a search's find, a look's pick, a return. What
+   * the `"put-into-hand"` this-way kind reads: Adventure Awaits' "if you
+   * didn't put a card into your hand this way". Cleared as it changes zones
+   * again. */
+  handArrivalSeq?: number;
   /** This stack object is a reflexive triggered ability (rule 603.12) — the
    * whole record, for the same reason as `delayedTrigger`. Only ever set on
    * an `"ability"` object on the stack. */

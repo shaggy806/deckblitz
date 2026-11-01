@@ -146,6 +146,21 @@ export function thisWayEntries(
   const leftBy = (id: ObjectId): PlayerId | undefined =>
     state.objects[id]?.lastKnown?.controller ?? state.ceasedTokens?.[id]?.controller;
   const ownerOf = (id: ObjectId): PlayerId | undefined => state.objects[id]?.owner;
+  // Cards put into a hand: read off the cards in the hands, not the log —
+  // no event announces a card arriving in a hand. In the order they came.
+  if (what === "put-into-hand") {
+    const arrived: { id: ObjectId; seq: number; owner: PlayerId }[] = [];
+    for (const player of state.turnOrder) {
+      for (const id of state.zones.perPlayer[player]?.hand ?? []) {
+        const object = state.objects[id];
+        const seq = object?.handArrivalSeq;
+        if (seq !== undefined && seq >= since) arrived.push({ id, seq, owner: object.owner });
+      }
+    }
+    arrived.sort((a, b) => a.seq - b.seq);
+    for (const { id, owner } of arrived) add(id, owner, false);
+    return out;
+  }
   // What left the battlefield for a graveyard, for "died": a destroyed
   // permanent a replacement sent elsewhere (Rest in Peace) didn't die.
   const wentToGraveyard = new Set<ObjectId>();

@@ -1416,6 +1416,15 @@ export type ThisWayKind =
    * owner. */
   | "exiled-from-hand"
   | "returned-to-hand"
+  /** Cards it put into a hand from any other zone, not by drawing them — a
+   * library search's find (Courier of Comestibles' "if you don't put a card
+   * into your hand this way"), a look's pick (Adventure Awaits' "if you
+   * didn't put a card into your hand this way, draw a card"), a milled
+   * card taken back (Cache Grab's "returned a Squirrel card to your hand
+   * this way"), a return. Only a card still in that hand
+   * (`GameObject.handArrivalSeq`), counted by its owner, whose hand it is
+   * (rule 400.3). */
+  | "put-into-hand"
   | "put-into-graveyard"
   | "put-onto-battlefield"
   /** Tokens it created (a compacted stack as each of its tokens). */
@@ -2994,6 +3003,18 @@ export type EffectSpec =
        * among them (the ruling), nor a card that has left exile since. Each
        * one's "as this enters" choices are asked first (rule 614.12). */
       readonly kind: "put-exiled-this-way-onto-battlefield";
+    }
+  | {
+      /** Put the cards this resolution has exiled so far — each still in
+       * exile as the same object (rule 400.7), a permanent it exiled from the
+       * battlefield included; a token there has ceased to exist — `to` its
+       * owner's zone: `"hand"` is Worlds Within Worlds' "then put all cards
+       * exiled this way into their owners' hands". `filter` narrows them
+       * (read from the effect's controller's side). A card cast from among
+       * them has left exile, so isn't one. */
+      readonly kind: "move-exiled-this-way";
+      readonly to: "hand";
+      readonly filter?: CardFilter;
     }
   | {
       /** Exile a target permanent, then immediately return it to the
@@ -8563,6 +8584,8 @@ export interface EffectApi {
    * `true` when it stopped first to ask an "as this enters" choice (nothing
    * has moved; apply it again once that's answered). */
   putExiledThisWayOntoBattlefield(): boolean;
+  /** See the `"move-exiled-this-way"` {@link EffectSpec}. */
+  moveExiledThisWay(to: Extract<EffectSpec, { kind: "move-exiled-this-way" }>["to"], filter?: CardFilter): void;
   /** See the `"put-arrived-onto-battlefield"` {@link EffectSpec}. `true`
    * when it stopped first to ask an "as this enters" choice. */
   putArrivedOntoBattlefield(count: number): boolean;
@@ -12627,6 +12650,9 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       if (ctx.putExiledThisWayOntoBattlefield()) ctx.resumeAfterDecisions(spec, parked);
       return;
     }
+    case "move-exiled-this-way":
+      ctx.moveExiledThisWay(spec.to, spec.filter);
+      return;
     case "put-arrived-onto-battlefield": {
       const parked = ctx.parkedCount();
       if (ctx.putArrivedOntoBattlefield(spec.count)) ctx.resumeAfterDecisions(spec, parked);
