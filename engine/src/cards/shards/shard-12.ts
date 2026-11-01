@@ -314,6 +314,7 @@ import _poolGlidingLicid from "../pool/gliding-licid.js";
 import _poolGlimpseOfNature from "../pool/glimpse-of-nature.js";
 import _poolGlintSleeveSiphoner from "../pool/glint-sleeve-siphoner.js";
 import _poolGloryBearers from "../pool/glory-bearers.js";
+import _poolGlowcapLantern from "../pool/glowcap-lantern.js";
 import _poolGnarledMass from "../pool/gnarled-mass.js";
 import _poolGnarledSage from "../pool/gnarled-sage.js";
 import _poolGoNuts from "../pool/go-nuts.js";
@@ -1174,6 +1175,7 @@ const shard: CardShard = {
     _poolGlimpseOfNature,
     _poolGlintSleeveSiphoner,
     _poolGloryBearers,
+    _poolGlowcapLantern,
     _poolGnarledMass,
     _poolGnarledSage,
     _poolGoNuts,

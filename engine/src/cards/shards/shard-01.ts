@@ -360,6 +360,7 @@ import _poolKarrthusTyrantOfJund from "../pool/karrthus-tyrant-of-jund.js";
 import _poolKarstoderm from "../pool/karstoderm.js";
 import _poolKavuGlider from "../pool/kavu-glider.js";
 import _poolKazanduBlademaster from "../pool/kazandu-blademaster.js";
+import _poolKeeperOfTheLens from "../pool/keeper-of-the-lens.js";
 import _poolKeldonWarlord from "../pool/keldon-warlord.js";
 import _poolKenrithTheReturnedKing from "../pool/kenrith-the-returned-king.js";
 import _poolKillmongerScourgeOfWakanda from "../pool/killmonger-scourge-of-wakanda.js";
@@ -1207,6 +1208,7 @@ const shard: CardShard = {
     _poolKarstoderm,
     _poolKavuGlider,
     _poolKazanduBlademaster,
+    _poolKeeperOfTheLens,
     _poolKeldonWarlord,
     _poolKenrithTheReturnedKing,
     _poolKillmongerScourgeOfWakanda,

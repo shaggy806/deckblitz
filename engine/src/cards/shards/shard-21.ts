@@ -698,6 +698,7 @@ import _poolTarkirDuneshaper from "../pool/tarkir-duneshaper.js";
 import _poolTeamTactics from "../pool/team-tactics.js";
 import _poolTeferisWavecaster from "../pool/teferis-wavecaster.js";
 import _poolTelJiladChosen from "../pool/tel-jilad-chosen.js";
+import _poolTelepathy from "../pool/telepathy.js";
 import _poolTemporalCleansing from "../pool/temporal-cleansing.js";
 import _poolTemptedByTheOriq from "../pool/tempted-by-the-oriq.js";
 import _poolTendrilsOfAgony from "../pool/tendrils-of-agony.js";
@@ -1540,6 +1541,7 @@ const shard: CardShard = {
     _poolTeamTactics,
     _poolTeferisWavecaster,
     _poolTelJiladChosen,
+    _poolTelepathy,
     _poolTemporalCleansing,
     _poolTemptedByTheOriq,
     _poolTendrilsOfAgony,

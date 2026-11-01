@@ -504,6 +504,7 @@ import _poolNyleaGodOfTheHunt from "../pool/nylea-god-of-the-hunt.js";
 import _poolNyleasEmissary from "../pool/nyleas-emissary.js";
 import _poolNyxFleeceRam from "../pool/nyx-fleece-ram.js";
 import _poolNyxInfusion from "../pool/nyx-infusion.js";
+import _poolObeliskSpider from "../pool/obelisk-spider.js";
 import _poolObscuraInitiate from "../pool/obscura-initiate.js";
 import _poolOilGorgerTroll from "../pool/oil-gorger-troll.js";
 import _poolOlogHaiCrusher from "../pool/olog-hai-crusher.js";
@@ -1337,6 +1338,7 @@ const shard: CardShard = {
     _poolNyleasEmissary,
     _poolNyxFleeceRam,
     _poolNyxInfusion,
+    _poolObeliskSpider,
     _poolObscuraInitiate,
     _poolOilGorgerTroll,
     _poolOlogHaiCrusher,

@@ -515,6 +515,7 @@ import _poolOblivionRing from "../pool/oblivion-ring.js";
 import _poolObscuraCharm from "../pool/obscura-charm.js";
 import _poolOchranAssassin from "../pool/ochran-assassin.js";
 import _poolOhranFrostfang from "../pool/ohran-frostfang.js";
+import _poolOhranViper from "../pool/ohran-viper.js";
 import _poolOmenOfTheForge from "../pool/omen-of-the-forge.js";
 import _poolOminousSphinx from "../pool/ominous-sphinx.js";
 import _poolOrderOfTheGoldenCricket from "../pool/order-of-the-golden-cricket.js";
@@ -530,6 +531,7 @@ import _poolParkHeightsMaverick from "../pool/park-heights-maverick.js";
 import _poolPassengerFerry from "../pool/passenger-ferry.js";
 import _poolPatronOfTheWild from "../pool/patron-of-the-wild.js";
 import _poolPerigeeBeckoner from "../pool/perigee-beckoner.js";
+import _poolPermeatingMass from "../pool/permeating-mass.js";
 import _poolPestermite from "../pool/pestermite.js";
 import _poolPhlageTitanOfFiresFury from "../pool/phlage-titan-of-fires-fury.js";
 import _poolPhyrexianMonitor from "../pool/phyrexian-monitor.js";
@@ -1403,6 +1405,7 @@ const shard: CardShard = {
     _poolObscuraCharm,
     _poolOchranAssassin,
     _poolOhranFrostfang,
+    _poolOhranViper,
     _poolOmenOfTheForge,
     _poolOminousSphinx,
     _poolOrderOfTheGoldenCricket,
@@ -1418,6 +1421,7 @@ const shard: CardShard = {
     _poolPassengerFerry,
     _poolPatronOfTheWild,
     _poolPerigeeBeckoner,
+    _poolPermeatingMass,
     _poolPestermite,
     _poolPhlageTitanOfFiresFury,
     _poolPhyrexianMonitor,

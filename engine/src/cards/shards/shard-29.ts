@@ -558,6 +558,7 @@ import _poolRagavanNimblePilferer from "../pool/ragavan-nimble-pilferer.js";
 import _poolRagingGorilla from "../pool/raging-gorilla.js";
 import _poolRagingPoltergeist from "../pool/raging-poltergeist.js";
 import _poolRakdosFirewheeler from "../pool/rakdos-firewheeler.js";
+import _poolRakdosRoustabout from "../pool/rakdos-roustabout.js";
 import _poolRakishHeir from "../pool/rakish-heir.js";
 import _poolRakshasasSecret from "../pool/rakshasas-secret.js";
 import _poolRansomNote from "../pool/ransom-note.js";
@@ -1429,6 +1430,7 @@ const shard: CardShard = {
     _poolRagingGorilla,
     _poolRagingPoltergeist,
     _poolRakdosFirewheeler,
+    _poolRakdosRoustabout,
     _poolRakishHeir,
     _poolRakshasasSecret,
     _poolRansomNote,

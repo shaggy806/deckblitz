@@ -435,6 +435,7 @@ import _poolLongtuskCub from "../pool/longtusk-cub.js";
 import _poolLordXanderTheCollector from "../pool/lord-xander-the-collector.js";
 import _poolLoreSeeker from "../pool/lore-seeker.js";
 import _poolLosheelClockworkScholar from "../pool/losheel-clockwork-scholar.js";
+import _poolLowlandBasilisk from "../pool/lowland-basilisk.js";
 import _poolLoxodonLineBreaker from "../pool/loxodon-line-breaker.js";
 import _poolLunarRejection from "../pool/lunar-rejection.js";
 import _poolLynx from "../pool/lynx.js";
@@ -478,6 +479,7 @@ import _poolMirkwoodNurturer from "../pool/mirkwood-nurturer.js";
 import _poolMirranBardiche from "../pool/mirran-bardiche.js";
 import _poolMirrorpool from "../pool/mirrorpool.js";
 import _poolMiserysShadow from "../pool/miserys-shadow.js";
+import _poolMishrasBauble from "../pool/mishras-bauble.js";
 import _poolMisterHydeMonsterWithin from "../pool/mister-hyde-monster-within.js";
 import _poolMnemonicSliver from "../pool/mnemonic-sliver.js";
 import _poolMobileGarrison from "../pool/mobile-garrison.js";
@@ -1378,6 +1380,7 @@ const shard: CardShard = {
     _poolLordXanderTheCollector,
     _poolLoreSeeker,
     _poolLosheelClockworkScholar,
+    _poolLowlandBasilisk,
     _poolLoxodonLineBreaker,
     _poolLunarRejection,
     _poolLynx,
@@ -1421,6 +1424,7 @@ const shard: CardShard = {
     _poolMirranBardiche,
     _poolMirrorpool,
     _poolMiserysShadow,
+    _poolMishrasBauble,
     _poolMisterHydeMonsterWithin,
     _poolMnemonicSliver,
     _poolMobileGarrison,

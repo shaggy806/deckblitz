@@ -492,6 +492,7 @@ import _poolMaverickThopterist from "../pool/maverick-thopterist.js";
 import _poolMendingHands from "../pool/mending-hands.js";
 import _poolMerchantOfManyHats from "../pool/merchant-of-many-hats.js";
 import _poolMerchantRaiders from "../pool/merchant-raiders.js";
+import _poolMerfolkObserver from "../pool/merfolk-observer.js";
 import _poolMerfolkOfThePearlTrident from "../pool/merfolk-of-the-pearl-trident.js";
 import _poolMerryEsquireOfRohan from "../pool/merry-esquire-of-rohan.js";
 import _poolMightOfOaks from "../pool/might-of-oaks.js";
@@ -1355,6 +1356,7 @@ const shard: CardShard = {
     _poolMendingHands,
     _poolMerchantOfManyHats,
     _poolMerchantRaiders,
+    _poolMerfolkObserver,
     _poolMerfolkOfThePearlTrident,
     _poolMerryEsquireOfRohan,
     _poolMightOfOaks,

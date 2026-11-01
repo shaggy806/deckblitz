@@ -394,6 +394,7 @@ import _poolLoxodonMystic from "../pool/loxodon-mystic.js";
 import _poolLoyalDrake from "../pool/loyal-drake.js";
 import _poolLuBuMasterAtArms from "../pool/lu-bu-master-at-arms.js";
 import _poolLukeCagePowerMan from "../pool/luke-cage-power-man.js";
+import _poolLumberingLaundry from "../pool/lumbering-laundry.js";
 import _poolLurchingRotbeast from "../pool/lurching-rotbeast.js";
 import _poolLuxuriousLibation from "../pool/luxurious-libation.js";
 import _poolMachinesmithAutomaton from "../pool/machinesmith-automaton.js";
@@ -601,6 +602,7 @@ import _poolSolarArray from "../pool/solar-array.js";
 import _poolSolemnOffering from "../pool/solemn-offering.js";
 import _poolSoltariGuerrillas from "../pool/soltari-guerrillas.js";
 import _poolSomberwaldAlpha from "../pool/somberwald-alpha.js";
+import _poolSosukeSonOfSeshiro from "../pool/sosuke-son-of-seshiro.js";
 import _poolSoulOfTheRapids from "../pool/soul-of-the-rapids.js";
 import _poolSpareSupplies from "../pool/spare-supplies.js";
 import _poolSparkDouble from "../pool/spark-double.js";
@@ -1187,6 +1189,7 @@ const shard: CardShard = {
     _poolLoyalDrake,
     _poolLuBuMasterAtArms,
     _poolLukeCagePowerMan,
+    _poolLumberingLaundry,
     _poolLurchingRotbeast,
     _poolLuxuriousLibation,
     _poolMachinesmithAutomaton,
@@ -1394,6 +1397,7 @@ const shard: CardShard = {
     _poolSolemnOffering,
     _poolSoltariGuerrillas,
     _poolSomberwaldAlpha,
+    _poolSosukeSonOfSeshiro,
     _poolSoulOfTheRapids,
     _poolSpareSupplies,
     _poolSparkDouble,

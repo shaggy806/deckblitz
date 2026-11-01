@@ -266,6 +266,7 @@ import _poolForest from "../pool/forest.js";
 import _poolFormationBreaker from "../pool/formation-breaker.js";
 import _poolFormidableCommons from "../pool/formidable-commons.js";
 import _poolFoulPresence from "../pool/foul-presence.js";
+import _poolFoundFootage from "../pool/found-footage.js";
 import _poolFreyalisesRadiance from "../pool/freyalises-radiance.js";
 import _poolFrontlineRush from "../pool/frontline-rush.js";
 import _poolFrontlineStrategist from "../pool/frontline-strategist.js";
@@ -1152,6 +1153,7 @@ const shard: CardShard = {
     _poolFormationBreaker,
     _poolFormidableCommons,
     _poolFoulPresence,
+    _poolFoundFootage,
     _poolFreyalisesRadiance,
     _poolFrontlineRush,
     _poolFrontlineStrategist,

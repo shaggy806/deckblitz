@@ -457,6 +457,7 @@ import _poolNausea from "../pool/nausea.js";
 import _poolNavigationOrb from "../pool/navigation-orb.js";
 import _poolNecromanticSummons from "../pool/necromantic-summons.js";
 import _poolNeedlethornDrake from "../pool/needlethorn-drake.js";
+import _poolNekoTe from "../pool/neko-te.js";
 import _poolNekrataal from "../pool/nekrataal.js";
 import _poolNestedShambler from "../pool/nested-shambler.js";
 import _poolNettlingNuisance from "../pool/nettling-nuisance.js";
@@ -848,6 +849,7 @@ import _poolWingsOfTheGuard from "../pool/wings-of-the-guard.js";
 import _poolWirewoodLodge from "../pool/wirewood-lodge.js";
 import _poolWitheringWisps from "../pool/withering-wisps.js";
 import _poolWitnessOfTheAges from "../pool/witness-of-the-ages.js";
+import _poolWizenedSnitches from "../pool/wizened-snitches.js";
 import _poolWormfangTurtle from "../pool/wormfang-turtle.js";
 import _poolWrathfulJailbreaker from "../pool/wrathful-jailbreaker.js";
 import _poolWuInfantry from "../pool/wu-infantry.js";
@@ -1341,6 +1343,7 @@ const shard: CardShard = {
     _poolNavigationOrb,
     _poolNecromanticSummons,
     _poolNeedlethornDrake,
+    _poolNekoTe,
     _poolNekrataal,
     _poolNestedShambler,
     _poolNettlingNuisance,
@@ -1732,6 +1735,7 @@ const shard: CardShard = {
     _poolWirewoodLodge,
     _poolWitheringWisps,
     _poolWitnessOfTheAges,
+    _poolWizenedSnitches,
     _poolWormfangTurtle,
     _poolWrathfulJailbreaker,
     _poolWuInfantry,
