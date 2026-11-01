@@ -2604,7 +2604,11 @@ the battlefield this turn" (Grim Return, Thrilling Encore, Wreck Hunter's
 count) is `{ type: "creature", putIntoGraveyardThisTurn: { from:
 ["battlefield"] } }`, "put there from anywhere this turn" (Night Nurse)
 `putIntoGraveyardThisTurn: {}`; it reads a card still in that graveyard as
-the same object (400.7). "If a land you controlled was put into a graveyard
+the same object (400.7). The sweep is `return-from-graveyard` over it,
+`count: "all"`: "return to the battlefield all permanent cards in your
+graveyard that were put there from the battlefield this turn" (Faith's
+Reward), `destination: "hand"` (Gleancrawler), `from: "each-graveyard"` for
+"each player returns …" (Second Sunrise). "If a land you controlled was put into a graveyard
 from the battlefield this turn", once it may have left, is the `turn-history`
 condition instead (`what: "to-graveyard"`, `from: ["battlefield"]`, filter
 `controlledBy: "you"`, matched as it last existed — The Lady of Otaria).

@@ -7008,3 +7008,52 @@ describe("P/T bonuses per amount", () => {
     ).toEqual({ inGraveyard: { ownedBy: "you" }, fromAffectedController: true, pt: [-1, 0] });
   });
 });
+
+describe("a sweep of the cards put into a graveyard from the battlefield this turn", () => {
+  const spell = (text: string) => parseFace({ name: "Test Sweep", type_line: "Instant", oracle_text: text }, { tokenFor: () => null });
+  const FROM_BATTLEFIELD = { putIntoGraveyardThisTurn: { from: ["battlefield"] } };
+
+  it("reads 'return to the battlefield / to your hand all … in your graveyard'", () => {
+    const reward = spell("Return to the battlefield all permanent cards in your graveyard that were put there from the battlefield this turn.");
+    expect(reward.complete).toBe(true);
+    expect(reward.effect).toEqual({
+      kind: "return-from-graveyard",
+      filter: { notTypes: ["instant", "sorcery"], ...FROM_BATTLEFIELD },
+      destination: "battlefield",
+      count: "all",
+    });
+    const hand = spell("Return to your hand all cards in your graveyard that were put there from the battlefield this turn.");
+    expect(hand.effect).toEqual({ kind: "return-from-graveyard", filter: FROM_BATTLEFIELD, destination: "hand", count: "all" });
+  });
+
+  it("reads each player's own, and all graveyards under your control", () => {
+    const sunrise = spell(
+      "Each player returns to the battlefield all artifact, creature, enchantment, and land cards in their graveyard that were put there from the battlefield this turn.",
+    );
+    expect(sunrise.complete).toBe(true);
+    expect(sunrise.effect).toEqual({
+      kind: "return-from-graveyard",
+      from: "each-graveyard",
+      filter: { typesAnyOf: ["artifact", "creature", "enchantment", "land"], ...FROM_BATTLEFIELD },
+      destination: "battlefield",
+      count: "all",
+    });
+    const encore = spell("Put onto the battlefield under your control all creature cards in all graveyards that were put there from the battlefield this turn.");
+    expect(encore.effect).toEqual({
+      kind: "return-from-graveyard",
+      from: "all-graveyards",
+      filter: { type: "creature", ...FROM_BATTLEFIELD },
+      destination: "battlefield",
+      count: "all",
+    });
+  });
+
+  it("leaves a graveyard and a verb that don't go together unread", () => {
+    // Another player's card under its owner's control isn't "return".
+    const odd = spell("Return to the battlefield all creature cards in their graveyard that were put there from the battlefield this turn.");
+    expect(odd.complete).toBe(false);
+    // An "and" list of something other than card types.
+    const notTypes = spell("Return to your hand all red and blue cards in your graveyard that were put there from the battlefield this turn.");
+    expect(notTypes.complete).toBe(false);
+  });
+});

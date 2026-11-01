@@ -552,6 +552,21 @@ Rielle, the Everwise. Left: Toluz's "exile them" (the discarded cards,
 linked — `effect:linked-exile-from-discard`), Inti's batch key
 (`trigger:discards-batch-trigger`, likely only marking).
 
+### Return all the cards put into a graveyard from the battlefield this turn — built 2026-11-01
+
+The need-keys Phase 2 family
+`condition:return-cards-put-in-graveyard-from-battlefield-this-turn`, features
+only: nothing new in the engine. `return-from-graveyard` with `count: "all"`
+already read any filter, and the graveyard-history work below gave it
+`putIntoGraveyardThisTurn`. What's new is the tests, the proving cards and the
+scaffolder, which reads "return to the battlefield / to your hand all [types]
+cards in your graveyard that were put there from the battlefield this turn",
+"each player returns …" and "put onto the battlefield under your control all …
+in all graveyards …", an "and" list of card types included. Proving cards:
+Faith's Reward, Second Sunrise, Gleancrawler. Left for `author-freed` to narrow:
+Supper for Spiders ("They are Food artifacts"), Lobelia ("X is the exiled
+card's power"), Gerrard ("exile it and return …"), Brought Back (targets).
+
 ### A graveyard card put there this turn, by where it came from — built 2026-10-31
 
 The need-keys Phase 2 family `condition:filter-this-turn-history`, features

@@ -1949,6 +1949,35 @@ export function parseSentence(sentence, ctx) {
   if (/^return to your hand all cards in your graveyard that you (?:cycled or )?discarded this turn\.$/i.test(s)) {
     return { kind: "return-from-graveyard", filter: { discardedThisTurn: true }, destination: "hand", count: "all" };
   }
+  // "Return to the battlefield all permanent cards in your graveyard that
+  // were put there from the battlefield this turn" (Faith's Reward), "return
+  // to your hand all creature cards …" (Gleancrawler), "each player returns
+  // to the battlefield all artifact, creature, enchantment, and land cards in
+  // their graveyard …" (Second Sunrise), "return to your hand all cards …"
+  // (Twilight Shepherd), "put onto the battlefield under your control all
+  // creature cards in all graveyards …" (Thrilling Encore). "Under your
+  // control" over one graveyard of yours says nothing more.
+  if ((m = /^(return|each player returns|put) (to the battlefield|to your hand|onto the battlefield under your control) all (?:(.+?) )?cards in (your|their|all) graveyards? that were put there from the battlefield this turn\.$/i.exec(s))) {
+    const [verb, where, whose] = [m[1].toLowerCase(), m[2].toLowerCase(), m[4].toLowerCase()];
+    const from =
+      verb === "each player returns" && whose === "their" && where === "to the battlefield"
+        ? "each-graveyard"
+        : verb === "put" && whose === "all" && where === "onto the battlefield under your control"
+          ? "all-graveyards"
+          : verb === "return" && whose === "your" && where !== "onto the battlefield under your control"
+            ? undefined
+            : null;
+    const types = m[3] === undefined ? {} : graveyardReturnTypes(m[3]);
+    if (from !== null && types !== null) {
+      return {
+        kind: "return-from-graveyard",
+        ...(from !== undefined ? { from } : {}),
+        filter: { ...types, putIntoGraveyardThisTurn: { from: ["battlefield"] } },
+        destination: where === "to your hand" ? "hand" : "battlefield",
+        count: "all",
+      };
+    }
+  }
   // What a `remove-counters` just before took off, counted one by one:
   // "For each counter removed this way, ~ gets +1/+0 until end of turn" (Hex
   // Parasite), "You draw cards and lose life equal to the number of counters
@@ -5115,6 +5144,17 @@ function chosenTargetsAt(sentences, i, ctx) {
  * origin is `CardFilter.putIntoGraveyardThisTurn` (`from`), or the older
  * `putIntoGraveyardFromLibraryThisTurn` for a library.
  */
+/** What "all [these] cards" names, for a return from a graveyard: a type
+ * phrase ("creature", "permanent"), or an "and" list of card types ("artifact
+ * and creature", "artifact, creature, enchantment, and land"), each a card of
+ * any one of them. */
+function graveyardReturnTypes(phrase) {
+  const list = /^(\w+(?:, \w+)*),? and (\w+)$/.exec(phrase);
+  if (list === null) return parseTypePhrase(phrase, { cards: true });
+  const types = [...list[1].split(", "), list[2]];
+  return types.every((t) => CARD_TYPES.includes(t)) ? { typesAnyOf: types } : null;
+}
+
 function graveyardArrivalAt(sentences, i, ctx) {
   const m = /^choose target (?:(.+?) )?card in (your|a|an opponent's) graveyard that was put there from (the battlefield|a library|their library|anywhere) this turn\.$/i.exec(sentences[i] ?? "");
   if (m === null) return null;
