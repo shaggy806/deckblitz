@@ -168,6 +168,7 @@ import _poolDisintegrate from "../pool/disintegrate.js";
 import _poolDispersal from "../pool/dispersal.js";
 import _poolDistrictMascot from "../pool/district-mascot.js";
 import _poolDoesMachines from "../pool/does-machines.js";
+import _poolDonalHeraldOfWings from "../pool/donal-herald-of-wings.js";
 import _poolDoomedNecromancer from "../pool/doomed-necromancer.js";
 import _poolDorotheasRetribution from "../pool/dorotheas-retribution.js";
 import _poolDragonBlood from "../pool/dragon-blood.js";
@@ -476,6 +477,7 @@ import _poolNacatlHuntPride from "../pool/nacatl-hunt-pride.js";
 import _poolNacatlOutlander from "../pool/nacatl-outlander.js";
 import _poolNaelAvizoaAeronaut from "../pool/nael-avizoa-aeronaut.js";
 import _poolNahiriForgedInFury from "../pool/nahiri-forged-in-fury.js";
+import _poolNalfeshnee from "../pool/nalfeshnee.js";
 import _poolNantukoDisciple from "../pool/nantuko-disciple.js";
 import _poolNecravolver from "../pool/necravolver.js";
 import _poolNecromancersCovenant from "../pool/necromancers-covenant.js";
@@ -1032,6 +1034,7 @@ const shard: CardShard = {
     _poolDispersal,
     _poolDistrictMascot,
     _poolDoesMachines,
+    _poolDonalHeraldOfWings,
     _poolDoomedNecromancer,
     _poolDorotheasRetribution,
     _poolDragonBlood,
@@ -1340,6 +1343,7 @@ const shard: CardShard = {
     _poolNacatlOutlander,
     _poolNaelAvizoaAeronaut,
     _poolNahiriForgedInFury,
+    _poolNalfeshnee,
     _poolNantukoDisciple,
     _poolNecravolver,
     _poolNecromancersCovenant,

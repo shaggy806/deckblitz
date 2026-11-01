@@ -223,6 +223,7 @@ import _poolEssenceScatter from "../pool/essence-scatter.js";
 import _poolEssenceSymbiote from "../pool/essence-symbiote.js";
 import _poolEverbarkShaman from "../pool/everbark-shaman.js";
 import _poolEvolvedSpinoderm from "../pool/evolved-spinoderm.js";
+import _poolExcavaTheRisenPast from "../pool/excava-the-risen-past.js";
 import _poolExpansionExplosion from "../pool/expansion-explosion.js";
 import _poolExpedite from "../pool/expedite.js";
 import _poolExplosiveGrowth from "../pool/explosive-growth.js";
@@ -1065,6 +1066,7 @@ const shard: CardShard = {
     _poolEssenceSymbiote,
     _poolEverbarkShaman,
     _poolEvolvedSpinoderm,
+    _poolExcavaTheRisenPast,
     _poolExpansionExplosion,
     _poolExpedite,
     _poolExplosiveGrowth,

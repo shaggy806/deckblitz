@@ -593,6 +593,7 @@ import _poolRecumbentBliss from "../pool/recumbent-bliss.js";
 import _poolReflectDamage from "../pool/reflect-damage.js";
 import _poolRefuseToYield from "../pool/refuse-to-yield.js";
 import _poolReignOfChaos from "../pool/reign-of-chaos.js";
+import _poolReliveThePast from "../pool/relive-the-past.js";
 import _poolRendclawTrow from "../pool/rendclaw-trow.js";
 import _poolRepulsorBots from "../pool/repulsor-bots.js";
 import _poolRevelsongHorn from "../pool/revelsong-horn.js";
@@ -1463,6 +1464,7 @@ const shard: CardShard = {
     _poolReflectDamage,
     _poolRefuseToYield,
     _poolReignOfChaos,
+    _poolReliveThePast,
     _poolRendclawTrow,
     _poolRepulsorBots,
     _poolRevelsongHorn,

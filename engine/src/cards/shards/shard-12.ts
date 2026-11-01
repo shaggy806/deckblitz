@@ -716,6 +716,7 @@ import _poolTaigamsStrike from "../pool/taigams-strike.js";
 import _poolTallAsABeanstalk from "../pool/tall-as-a-beanstalk.js";
 import _poolTalonrend from "../pool/talonrend.js";
 import _poolTappingAtTheWindow from "../pool/tapping-at-the-window.js";
+import _poolTawnosTheToymaker from "../pool/tawnos-the-toymaker.js";
 import _poolTawnosUrzasApprentice from "../pool/tawnos-urzas-apprentice.js";
 import _poolTeemingDragonstorm from "../pool/teeming-dragonstorm.js";
 import _poolTempleOfAbandon from "../pool/temple-of-abandon.js";
@@ -1562,6 +1563,7 @@ const shard: CardShard = {
     _poolTallAsABeanstalk,
     _poolTalonrend,
     _poolTappingAtTheWindow,
+    _poolTawnosTheToymaker,
     _poolTawnosUrzasApprentice,
     _poolTeemingDragonstorm,
     _poolTempleOfAbandon,

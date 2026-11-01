@@ -603,6 +603,7 @@ import _poolReturnToBattle from "../pool/return-to-battle.js";
 import _poolRighteousValkyrie from "../pool/righteous-valkyrie.js";
 import _poolRilsaRaelKingpin from "../pool/rilsa-rael-kingpin.js";
 import _poolRiparianTiger from "../pool/riparian-tiger.js";
+import _poolRiseFromTheGrave from "../pool/rise-from-the-grave.js";
 import _poolRiteOfBelzenlok from "../pool/rite-of-belzenlok.js";
 import _poolRiteOfReplication from "../pool/rite-of-replication.js";
 import _poolRoaleskApexHybrid from "../pool/roalesk-apex-hybrid.js";
@@ -1468,6 +1469,7 @@ const shard: CardShard = {
     _poolRighteousValkyrie,
     _poolRilsaRaelKingpin,
     _poolRiparianTiger,
+    _poolRiseFromTheGrave,
     _poolRiteOfBelzenlok,
     _poolRiteOfReplication,
     _poolRoaleskApexHybrid,

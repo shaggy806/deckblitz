@@ -170,6 +170,7 @@ import _poolDestructorDragon from "../pool/destructor-dragon.js";
 import _poolDispellingExhale from "../pool/dispelling-exhale.js";
 import _poolDissensionInTheRanks from "../pool/dissension-in-the-ranks.js";
 import _poolDoctorOctopusMasterPlanner from "../pool/doctor-octopus-master-planner.js";
+import _poolDoubleMajor from "../pool/double-major.js";
 import _poolDouserOfLights from "../pool/douser-of-lights.js";
 import _poolDownDirty from "../pool/down-dirty.js";
 import _poolDrafnaFounderOfLatNam from "../pool/drafna-founder-of-lat-nam.js";
@@ -1031,6 +1032,7 @@ const shard: CardShard = {
     _poolDispellingExhale,
     _poolDissensionInTheRanks,
     _poolDoctorOctopusMasterPlanner,
+    _poolDoubleMajor,
     _poolDouserOfLights,
     _poolDownDirty,
     _poolDrafnaFounderOfLatNam,

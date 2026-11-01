@@ -403,6 +403,7 @@ import _poolLifeInsurance from "../pool/life-insurance.js";
 import _poolLightningDiadem from "../pool/lightning-diadem.js";
 import _poolLightningRigCrew from "../pool/lightning-rig-crew.js";
 import _poolLilianasScrounger from "../pool/lilianas-scrounger.js";
+import _poolLimDulTheNecromancer from "../pool/lim-dul-the-necromancer.js";
 import _poolLingeringPhantom from "../pool/lingering-phantom.js";
 import _poolLivelyDirge from "../pool/lively-dirge.js";
 import _poolLlanowarLoamspeaker from "../pool/llanowar-loamspeaker.js";
@@ -1223,6 +1224,7 @@ const shard: CardShard = {
     _poolLightningDiadem,
     _poolLightningRigCrew,
     _poolLilianasScrounger,
+    _poolLimDulTheNecromancer,
     _poolLingeringPhantom,
     _poolLivelyDirge,
     _poolLlanowarLoamspeaker,
