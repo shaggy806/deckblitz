@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4106 already implemented / 894 missing (marks refreshed 2026-11-01)
+4116 already implemented / 884 missing (marks refreshed 2026-11-01)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -1554,7 +1554,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1561  Monastery Mentor                         {2}{W}           Creature — Human Monk
 [x]  1562  The Grey Havens                          {0}              Legendary Land
 [x]  1563  Relentless Assault                       {2}{R}{R}        Sorcery
-[ ]  1564  Gifts Ungiven                            {3}{U}           Instant
+[x]  1564  Gifts Ungiven                            {3}{U}           Instant
 [x]  1565  Null Elemental Blast                     {C}              Instant
 [ ]  1566  Malcolm, Alluring Scoundrel              {1}{U}           Legendary Creature — Siren Pirate
 [ ]  1567  Kozilek, the Great Distortion            {8}{C}{C}        Legendary Creature — Eldrazi
@@ -1840,7 +1840,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  1847  Claim Jumper                             {2}{W}           Creature — Rabbit Mercenary
 [x]  1848  Doom Whisperer                           {3}{B}{B}        Creature — Nightmare Demon
 [ ]  1849  Contagion Engine                         {6}              Artifact
-[ ]  1850  Containment Construct                    {2}              Artifact Creature — Construct
+[x]  1850  Containment Construct                    {2}              Artifact Creature — Construct
 [x]  1851  Sunhome, Fortress of the Legion          {0}              Land
 [x]  1852  Threefold Thunderhulk                    {7}              Artifact Creature — Gnome
 [x]  1853  Sticky Fingers                           {R}              Enchantment — Aura
@@ -1995,7 +1995,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2002  Ravenform                                {2}{U}           Sorcery
 [x]  2003  Resplendent Angel                        {1}{W}{W}        Creature — Angel
 [x]  2004  Eureka Moment                            {2}{G}{U}        Instant
-[ ]  2005  Intuition                                {2}{U}           Instant
+[x]  2005  Intuition                                {2}{U}           Instant
 [x]  2006  Cryptbreaker                             {B}              Creature — Zombie
 [ ]  2007  Summon: Fenrir                           {2}{G}           Enchantment Creature — Saga Wolf
 [x]  2008  Crystal Barricade                        {1}{W}           Artifact Creature — Wall
@@ -2395,7 +2395,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2402  Airbender Ascension                      {1}{W}           Enchantment
 [x]  2403  Professor Onyx                           {4}{B}{B}        Legendary Planeswalker — Liliana
 [x]  2404  Endbringer                               {5}{C}           Creature — Eldrazi
-[ ]  2405  Mimic Vat                                {3}              Artifact
+[x]  2405  Mimic Vat                                {3}              Artifact
 [x]  2406  Outpost Siege                            {3}{R}           Enchantment
 [x]  2407  Naturalize                               {1}{G}           Instant
 [x]  2408  Darksteel Colossus                       {11}             Artifact Creature — Golem
@@ -2828,7 +2828,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2835  Vorpal Sword                             {B}              Artifact — Equipment
 [x]  2836  Ulvenwald Hydra                          {4}{G}{G}        Creature — Hydra
 [x]  2837  Chatterstorm                             {1}{G}           Sorcery
-[ ]  2838  Rionya, Fire Dancer                      {3}{R}{R}        Legendary Creature — Human Wizard
+[x]  2838  Rionya, Fire Dancer                      {3}{R}{R}        Legendary Creature — Human Wizard
 [x]  2839  Preposterous Proportions                 {5}{G}{G}        Sorcery
 [x]  2840  Weathered Sentinels                      {3}              Artifact Creature — Wall
 [ ]  2841  The Chain Veil                           {4}              Legendary Artifact
@@ -2867,7 +2867,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  2874  Nowhere to Run                           {1}{B}           Enchantment
 [x]  2875  Mocking Sprite                           {2}{U}           Creature — Faerie Rogue
 [x]  2876  Finale of Glory                          {X}{W}{W}        Sorcery
-[ ]  2877  Winter Moon                              {2}              Artifact
+[x]  2877  Winter Moon                              {2}              Artifact
 [ ]  2878  Archetype of Endurance                   {6}{G}{G}        Enchantment Creature — Boar
 [x]  2879  Celestine, the Living Saint              {4}{W}           Legendary Creature — Human Warrior
 [x]  2880  Basilisk Gate                            {0}              Land — Gate
@@ -3383,7 +3383,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3390  Rocky Tar Pit                            {0}              Land
 [x]  3391  Vizier of Tumbling Sands                 {2}{U}           Creature — Human Cleric
 [x]  3392  Lathiel, the Bounteous Dawn              {2}{G}{W}        Legendary Creature — Unicorn
-[ ]  3393  Winter Orb                               {2}              Artifact
+[x]  3393  Winter Orb                               {2}              Artifact
 [x]  3394  O'aka, Traveling Merchant                {1}{U}           Legendary Creature — Human Citizen
 [x]  3395  Hooded Hydra                             {X}{G}{G}        Creature — Snake Hydra
 [x]  3396  Sigil of Sleep                           {U}              Enchantment — Aura
@@ -3661,7 +3661,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  3668  Riptide Gearhulk                         {1}{W}{W}{U}{U}  Artifact Creature — Construct
 [x]  3669  Eclipsed Steppe                          {0}              Land — Plains Swamp
 [ ]  3670  Shadow of the Second Sun                 {4}{U}{U}        Enchantment — Aura
-[ ]  3671  Skullwinder                              {2}{G}           Creature — Snake
+[x]  3671  Skullwinder                              {2}{G}           Creature — Snake
 [x]  3672  Ral, Storm Conduit                       {2}{U}{R}        Legendary Planeswalker — Ral
 [ ]  3673  Charix, the Raging Isle                  {2}{U}{U}        Legendary Creature — Leviathan Crab
 [x]  3674  Satoru Umezawa                           {1}{U}{B}        Legendary Creature — Human Ninja
@@ -3757,7 +3757,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3764  Court of Embereth                        {2}{R}{R}        Enchantment
 [x]  3765  Argothian Enchantress                    {1}{G}           Creature — Human Druid
 [x]  3766  Court of Ardenvale                       {2}{W}{W}        Enchantment
-[ ]  3767  Mardu Siegebreaker                       {1}{R}{W}{B}     Creature — Human Warrior
+[x]  3767  Mardu Siegebreaker                       {1}{R}{W}{B}     Creature — Human Warrior
 [x]  3768  Brave the Elements                       {W}              Instant
 [x]  3769  Mnemonic Deluge                          {6}{U}{U}{U}     Sorcery
 [x]  3770  Sanctum of Eternity                      {0}              Land
@@ -4150,7 +4150,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  4157  Elesh Norn // The Argent Etchings        {4}              Legendary Creature — Phyrexian Praetor // Enchantment — Saga
 [ ]  4158  Benthic Anomaly                          {6}{U}           Creature — Eldrazi Serpent
 [x]  4159  The Legend of Roku // Avatar Roku        {4}              Enchantment — Saga // Legendary Creature — Avatar
-[ ]  4160  Realms Uncharted                         {2}{G}           Instant
+[x]  4160  Realms Uncharted                         {2}{G}           Instant
 [x]  4161  Retraction Helix                         {U}              Instant
 [x]  4162  Alphinaud Leveilleur                     {3}{U}           Legendary Creature — Elf Wizard
 [x]  4163  Oliphaunt                                {5}{R}           Creature — Elephant
