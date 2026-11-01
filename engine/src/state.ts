@@ -2208,12 +2208,15 @@ export interface LastKnownRefs {
    * What the triggering event was aimed at, for a trigger whose event has a
    * recipient — the permanent or player a `damage-dealt` event hit
    * (`deals-damage`, `dealt-damage`, `deals-combat-damage-to-player`), or
-   * the player or planeswalker an attacker was declared attacking (`attacks`
-   * — Mage Slayer's "the player or planeswalker it's attacking").
+   * the player or planeswalker an attacker is attacking (`attacks`,
+   * `becomes-blocked`, `attacks-alone`, `attacks-unblocked` — Mage Slayer's
+   * and Rakdos Roustabout's "the player or planeswalker it's attacking").
    * `zoneChangeCount` is a permanent recipient's battlefield stint: "that
    * permanent" is gone, rather than read as it last was, once it has left
    * (Ghyrson Starn's 2 damage to a creature that has since died hits
-   * nothing). What a `damage` effect's `toTriggerRecipient` hits.
+   * nothing). What a `damage` effect's `toTriggerRecipient` hits and an
+   * `EffectTargetRef` `"trigger-recipient"` names; a delayed trigger the
+   * ability makes keeps it (`DelayedTrigger.recipient`).
    */
   readonly recipient?: { readonly target: TargetRef; readonly zoneChangeCount?: number };
   /**
@@ -4328,6 +4331,11 @@ export interface DelayedTrigger {
   readonly triggerObject?: ObjectId;
   readonly triggerObjectStint?: number;
   readonly triggerObjectRefs?: LastKnownRefs;
+  /** The creating ability's recipient (`LastKnownRefs.recipient`) — "whenever
+   * this creature deals combat damage to a creature, destroy **that
+   * creature** at end of combat" (Ohran Viper). The delayed ability's too
+   * (603.7c), as long as it's still that permanent (rule 400.7). */
+  readonly recipient?: LastKnownRefs["recipient"];
   /** A trigger object that was a token and has ceased to exist (rule 111.7),
    * as it last existed on the battlefield — "create a token that's a copy
    * of that artifact" of a sacrificed Treasure (Esoteric Duplicator). Kept

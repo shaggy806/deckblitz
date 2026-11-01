@@ -636,7 +636,19 @@ keyword string — it's a static or triggered ability. See §9–10.
 `EffectSpec` (`effects.ts`) is the declarative vocabulary for what a spell or
 ability does on resolution. A `target:` field is an **index into `targets[]`**
 (0-based), or the literal `"source"` where allowed. Where it's an
-`EffectTargetRef`, `"attached"` is **"enchanted creature" / "equipped
+`EffectTargetRef`, `"trigger-recipient"` is **what the triggering event was
+aimed at**: the creature a `deals-damage` trigger's damage hit ("put a -1/-1
+counter on that creature" — Obelisk Spider; "that creature becomes a copy of
+this creature" — Permeating Mass, `become-copy`; "doesn't untap … for as long
+as this Equipment remains on the battlefield" — Neko-Te, `restrict`'s
+`while-source`), or the player or planeswalker an attacker is attacking
+(`attacks`, `becomes-blocked`, `attacks-alone`, `attacks-unblocked` — Rakdos
+Roustabout's `damage` with `toTriggerRecipient`). Not a target, acted on only
+while it's the same permanent (rule 400.7), read as it last existed once it
+has left (608.2h). A `delayed-trigger` the ability makes keeps it (603.7c):
+Ohran Viper's "destroy that creature at end of combat" is `{ kind:
+"delayed-trigger", at: "end-of-combat", effect: { kind: "destroy", target:
+"trigger-recipient" }, … }`. And `"attached"` is **"enchanted creature" / "equipped
 creature"** — the permanent the source (an Aura or Equipment) is attached to
 as the effect resolves, or, the source gone, the one it was last attached to
 while that's still the same object (rule 400.7): Starlit Mantle's "enchanted

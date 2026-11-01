@@ -7398,6 +7398,55 @@ describe("the turn's blocks", () => {
       affinityFor: { type: "artifact", controlledBy: "you" },
     });
   });
+
+  it("reads a trigger's recipient: that creature, and the player or planeswalker it's attacking", () => {
+    const viper = face(
+      "Creature — Snake",
+      "Whenever this creature deals combat damage to a creature, destroy that creature at end of combat.",
+    );
+    expect(viper.complete).toBe(true);
+    expect(viper.triggered[0].trigger).toEqual({ on: "deals-damage", who: "self", to: "creature", combat: true });
+    expect(viper.triggered[0].effect).toEqual({
+      kind: "delayed-trigger",
+      at: "end-of-combat",
+      effect: { kind: "destroy", target: "trigger-recipient" },
+      text: "Destroy that creature.",
+    });
+    const sosuke = face(
+      "Creature — Snake Warrior",
+      "Whenever a Warrior you control deals combat damage to a creature, destroy that creature at end of combat.",
+    );
+    expect(sosuke.triggered[0].trigger).toEqual({
+      on: "deals-damage",
+      who: "you-control",
+      filter: { subtype: "Warrior" },
+      to: "creature",
+      combat: true,
+    });
+    const mass = face("Creature — Spirit", "Whenever this creature deals combat damage to a creature, that creature becomes a copy of this creature.");
+    expect(mass.triggered[0].effect).toEqual({ kind: "become-copy", target: "trigger-recipient", of: "source" });
+    const spider = face("Creature — Spider", "Whenever this creature deals combat damage to a creature, put a -1/-1 counter on that creature.");
+    expect(spider.triggered[0].effect).toEqual({ kind: "add-counter", target: "trigger-recipient", counter: "-1/-1", amount: 1 });
+    const neko = face(
+      "Artifact — Equipment",
+      "Whenever equipped creature deals damage to a creature, tap that creature. That creature doesn't untap during its controller's untap step for as long as this Equipment remains on the battlefield.",
+    );
+    expect(neko.complete).toBe(true);
+    expect(neko.triggered[0].effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "tap", target: "trigger-recipient" },
+        { kind: "restrict", target: "trigger-recipient", restrictions: ["doesnt-untap"], duration: "while-source" },
+      ],
+    });
+    const ogre = face("Creature — Ogre Warrior", "Whenever this creature becomes blocked, it deals 1 damage to the player or planeswalker it's attacking.");
+    expect(ogre.complete).toBe(true);
+    expect(ogre.triggered[0].effect).toEqual({
+      kind: "conditional",
+      condition: { kind: "trigger-object", filter: { attacking: true } },
+      then: { kind: "damage", amount: 1, toTriggerRecipient: true },
+    });
+  });
 });
 
 describe("revealing from a hand", () => {

@@ -24460,19 +24460,7 @@ export class Game {
       }
     } else if (event.type === "attacker-declared") {
       player = this.defendingPlayerOf(event.defender);
-      // "The player or planeswalker it's attacking" (Mage Slayer).
-      const defender = event.defender;
-      if (this.state.players[defender as PlayerId] !== undefined) {
-        recipient = { target: { kind: "player", player: defender as PlayerId } };
-      } else {
-        const walker = this.state.objects[defender as ObjectId];
-        if (walker?.zone === "battlefield") {
-          recipient = {
-            target: { kind: "object", object: defender as ObjectId },
-            zoneChangeCount: walker.zoneChangeCount ?? 0,
-          };
-        }
-      }
+      recipient = this.attackedRecipient(event.defender);
     } else if (event.type === "player-attacked") {
       player = event.defender;
     } else if (event.type === "permanent-tapped-for-mana") {
@@ -24506,7 +24494,10 @@ export class Game {
       // one the lone or unblocked attacker attacks (Strategic Intervention,
       // Mindstab Thrull).
       const attacking = this.state.objects[event.attacker]?.attacking;
-      if (attacking !== null && attacking !== undefined) player = this.defendingPlayerOf(attacking);
+      if (attacking !== null && attacking !== undefined) {
+        player = this.defendingPlayerOf(attacking);
+        recipient = this.attackedRecipient(attacking);
+      }
     } else if (event.type === "object-targeted") {
       // Whoever controls the targeting spell or ability — "that player" of a
       // becomes-target trigger (Black Bolt, Inhuman King: "destroy target
@@ -24541,6 +24532,20 @@ export class Game {
       ...(player !== undefined ? { player } : {}),
       ...(attackers !== undefined ? { attackers } : {}),
     };
+  }
+
+  /** "The player or planeswalker it's attacking" (Mage Slayer, Rakdos
+   * Roustabout), as a trigger's recipient: `defender` is an attacker's
+   * `attacking`, a player or a permanent. A permanent that has left has no
+   * recipient to be. */
+  private attackedRecipient(defender: PlayerId | ObjectId): LastKnownRefs["recipient"] {
+    if (this.state.players[defender as PlayerId] !== undefined) {
+      return { target: { kind: "player", player: defender as PlayerId } };
+    }
+    const attacked = this.state.objects[defender as ObjectId];
+    return attacked?.zone === "battlefield"
+      ? { target: { kind: "object", object: defender as ObjectId }, zoneChangeCount: attacked.zoneChangeCount ?? 0 }
+      : undefined;
   }
 
   /**
@@ -26149,6 +26154,13 @@ export class Game {
       if (trigger.lastKnownRefs !== undefined) {
         this.state.objects[id].lastKnownRefs = trigger.lastKnownRefs;
       }
+      // Its creator's recipient, unless the event it watched has one of its own.
+      if (trigger.delayed.recipient !== undefined && this.state.objects[id].lastKnownRefs?.recipient === undefined) {
+        this.state.objects[id].lastKnownRefs = {
+          ...(this.state.objects[id].lastKnownRefs ?? {}),
+          recipient: trigger.delayed.recipient,
+        };
+      }
       // A mana rider's spell, on the stack by now: this stint of it is
       // "that spell".
       const spell = trigger.triggerObject === undefined ? undefined : this.state.objects[trigger.triggerObject];
@@ -27385,13 +27397,14 @@ export class Game {
           }
         });
       },
-      triggerRecipient: () => {
+      triggerRecipient: (read) => {
         const recipient = refs.recipient;
         if (recipient === undefined) return undefined;
         const target = recipient.target;
         if (target.kind === "player") {
           return this.state.players[target.player]?.hasLost === false ? target : undefined;
         }
+        if (read === true) return target;
         // "That permanent" is the one that was dealt the damage: once it has
         // left the battlefield it's a new object (rule 400.7).
         const object = this.state.objects[target.object];
@@ -39621,6 +39634,8 @@ export class Game {
               : {}),
           }
         : {}),
+      // "That creature": what the creating ability's event was aimed at.
+      ...(creator.refs?.recipient !== undefined ? { recipient: creator.refs.recipient } : {}),
       id: `delayed-${this.state.nextObjectSeq++}`,
       controller,
       at: when,
@@ -39754,6 +39769,12 @@ export class Game {
         this.state.objects[id].lastKnownRefs = {
           ...(trigger.triggerObjectRefs ?? {}),
           triggerObjectAfterLeaving: trigger.triggerObjectStint,
+        };
+      }
+      if (trigger.recipient !== undefined) {
+        this.state.objects[id].lastKnownRefs = {
+          ...(this.state.objects[id].lastKnownRefs ?? {}),
+          recipient: trigger.recipient,
         };
       }
       this.emit({

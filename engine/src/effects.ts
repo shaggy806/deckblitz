@@ -64,8 +64,16 @@ import type { ResolvedTargets, TargetRef, TargetSpec } from "./target.js";
  * (`LastKnownRefs.granter`). Acted on only while it's still that object on
  * the battlefield; read (its counters, its power) as it last existed there
  * once it has left (608.2h). Nothing on an ability no static granted. Not a
- * target. */
-export type EffectTargetRef = number | "source" | "trigger-object" | "attached" | "chosen" | "granter";
+ * target. `"trigger-recipient"` is what the triggering event was aimed at
+ * (`LastKnownRefs.recipient`): the permanent or player a `deals-damage`
+ * trigger's damage was dealt to ("whenever this creature deals combat damage
+ * to a creature, put a -1/-1 counter on **that creature**"), the player or
+ * planeswalker an attacker is attacking. A delayed trigger such an ability
+ * makes carries it ("destroy that creature at end of combat", 603.7c). Acted
+ * on only while it's still the same permanent (rule 400.7); read as it last
+ * existed once it has left (608.2h). Nothing on a trigger whose event has no
+ * recipient. Not a target. */
+export type EffectTargetRef = number | "source" | "trigger-object" | "attached" | "chosen" | "granter" | "trigger-recipient";
 /**
  * What a card put onto the battlefield "attached to" something enters
  * attached to — an effect's `attachedTo`:
@@ -2491,7 +2499,7 @@ export type EffectSpec =
       /** A target slot or a reference — `"trigger-recipient"` as `destroy`
        * reads it: "whenever this creature deals combat damage to a creature,
        * tap **that creature**" (Kashi-Tribe Warriors, Matsu-Tribe Sniper). */
-      readonly target: EffectTargetRef | "trigger-recipient";
+      readonly target: EffectTargetRef;
       /** "**It doesn't untap during its controller's next untap step**"
        * (Junk Winder) — whoever controls it then; tapped by this or already
        * (`GameObject.skipsNextUntap`). */
@@ -2522,7 +2530,7 @@ export type EffectSpec =
        * Imp's "whenever this creature deals combat damage to a creature,
        * destroy **that creature**" — untargeted, and only while it's still
        * the same permanent (rule 400.7; `damage`'s `toTriggerRecipient`). */
-      readonly target: EffectTargetRef | "trigger-recipient";
+      readonly target: EffectTargetRef;
       /** "It can't be regenerated" (rule 701.15c — Terminate): a
        * regeneration shield doesn't replace this destruction. */
       readonly cantBeRegenerated?: boolean;
@@ -2888,7 +2896,7 @@ export type EffectSpec =
       /** A target slot or a reference — `"trigger-recipient"` as `destroy`
        * reads it: "whenever this creature deals damage to a creature, exile
        * **that creature**" (Pit Spawn). */
-      readonly target: EffectTargetRef | "trigger-recipient";
+      readonly target: EffectTargetRef;
       /** "Exile it **with a croak counter on it**": counters the card gets
        * as it's exiled, there. */
       readonly withCounters?: { readonly kind: string; readonly amount: number };
@@ -8585,8 +8593,10 @@ export interface EffectApi {
   ): void;
   /** What the triggering event was aimed at, if it still is what it was —
    * see `LastKnownRefs.recipient`. `undefined` outside such a trigger, for a
-   * permanent that has left the battlefield since, or a player who has lost. */
-  triggerRecipient(): TargetRef | undefined;
+   * permanent that has left the battlefield since, or a player who has lost.
+   * `read`: for reading rather than acting on it, a permanent that has left
+   * still answers, to be read as it last existed there (rule 608.2h). */
+  triggerRecipient(read?: boolean): TargetRef | undefined;
   draw(player: PlayerId, count: number): void;
   /** The mana value of the card behind `target`, from its printed cost — see
    * the `{ manaValueOf }` {@link EffectAmount}. `0` for a player target or an
@@ -11786,6 +11796,7 @@ function resolveAmountRef(ref: AmountRef, ctx: ResolutionContext): TargetRef | u
   if (ref === "granter") {
     return ctx.granter === undefined ? undefined : { kind: "object", object: ctx.granter };
   }
+  if (ref === "trigger-recipient") return ctx.triggerRecipient(true);
   // A read: a trigger object — or the source — that has moved on since is
   // read as it last existed, which the context's lookups do (rule 608.2h).
   // Only acting on one needs it to be the same object still (`sourceLost`,
@@ -11917,6 +11928,7 @@ function resolveEffectTarget(
   if (ref === "granter") {
     return ctx.granter !== undefined && ctx.granterLost !== true ? { kind: "object", object: ctx.granter } : undefined;
   }
+  if (ref === "trigger-recipient") return ctx.triggerRecipient();
   return ctx.targets[ref];
 }
 
@@ -13026,8 +13038,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "tap": {
-      const target =
-        spec.target === "trigger-recipient" ? ctx.triggerRecipient() : resolveEffectTarget(spec.target, ctx);
+      const target = resolveEffectTarget(spec.target, ctx);
       if (target !== undefined) ctx.tapPermanent(target, spec.doesntUntapNext === true, spec.onlyDoesntUntap === true);
       return;
     }
@@ -13055,8 +13066,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "destroy": {
-      const target =
-        spec.target === "trigger-recipient" ? ctx.triggerRecipient() : resolveEffectTarget(spec.target, ctx);
+      const target = resolveEffectTarget(spec.target, ctx);
       if (target !== undefined) ctx.destroyPermanent(target, spec.cantBeRegenerated === true);
       return;
     }
@@ -13323,8 +13333,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "exile": {
-      const target =
-        spec.target === "trigger-recipient" ? ctx.triggerRecipient() : resolveEffectTarget(spec.target, ctx);
+      const target = resolveEffectTarget(spec.target, ctx);
       if (target !== undefined) {
         ctx.exileObject(target, spec.untilSourceLeaves === true, spec.withCounters, spec.mayCast, spec.linked === true,
           spec.airbend === true);
@@ -13794,7 +13803,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
             ? ctx.triggerObject === undefined
               ? undefined
               : ({ kind: "object", object: ctx.triggerObject } as const)
-            : spec.target === "attached" || spec.target === "chosen" || spec.target === "granter"
+            : spec.target === "attached" || spec.target === "chosen" || spec.target === "granter" || spec.target === "trigger-recipient"
               ? resolveEffectTarget(spec.target, ctx)
               : ctx.targets[spec.target];
       if (target !== undefined) ctx.sacrificeTarget(target, spec.byItsController);

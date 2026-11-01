@@ -2692,6 +2692,18 @@ keywords, the `bandsWithOther` static, the `bandedWithSource` filter. Key:
 `keyword:banding`. Still open beside it: 702.22i ("would become blocked due
 to an effect" — no effect makes an attacker blocked yet).
 
+### A trigger's recipient as a reference — built 2026-11-01
+
+The need-keys group `trigger:trigger-recipient-ref` +
+`trigger:becomes-blocked-attacked-recipient`. `"trigger-recipient"` joined
+`EffectTargetRef`, so every effect that takes a reference reaches what the
+triggering event was aimed at, not just `destroy`, `tap`, `exile` and `damage`
+(Permeating Mass's `become-copy`, Obelisk Spider's `add-counter`, Neko-Te's
+lasting `restrict`). `DelayedTrigger.recipient` carries it into a delayed
+trigger the ability makes (603.7c — Ohran Viper, Sosuke, Lowland Basilisk at
+the next combat's end), and `attacker-blocked`, `attacked-alone` and
+`attacker-unblocked` now set the recipient `attacks` did (Rakdos Roustabout).
+
 ### An unless's payments — built 2026-11-01
 
 The need-keys Phase 2 family `cost:unless-pay-colored-per-amount`: one

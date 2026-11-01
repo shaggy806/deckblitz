@@ -1569,6 +1569,25 @@ export function parseTrigger(clause) {
   if (/^Whenever ~ deals combat damage to a player or battle$/.test(c)) {
     return [{ on: "deals-combat-damage-to-player", who: "self", orBattle: true }];
   }
+  // "Whenever ~ deals [combat] damage to a creature" (Ohran Viper), whoever's
+  // weapon it is (Neko-Te's "equipped creature", Sosuke's "a Warrior you
+  // control"): `itOf` reads "that creature". A player, for the host alone.
+  if (
+    (m = /^Whenever (~|enchanted creature|equipped creature|a .+? you control) deals (combat )?damage to (a creature|a player)$/.exec(c)) &&
+    (m[3] === "a creature" || /^(?:enchanted|equipped) creature$/.test(m[1]))
+  ) {
+    const host = /^(?:enchanted|equipped) creature$/.test(m[1]);
+    if (m[3] === "a player" && m[2] !== undefined) return [{ on: "deals-combat-damage-to-player", who: "attached" }];
+    const filter = m[1].startsWith("a ") ? parseTypePhrase(m[1].slice(2, -" you control".length)) : undefined;
+    if (filter === null) return null;
+    return [{
+      on: "deals-damage",
+      who: m[1] === "~" ? "self" : host ? "attached" : "you-control",
+      ...(filter !== undefined ? { filter } : {}),
+      to: m[3] === "a player" ? "player" : "creature",
+      ...(m[2] !== undefined ? { combat: true } : {}),
+    }];
+  }
   if (/^Whenever ~ is dealt damage$/.test(c)) return self("dealt-damage");
   if (c === "Whenever enchanted player is dealt damage") return [{ on: "deals-damage-batch", who: "any", to: "enchanted-player" }];
   if (/^Whenever ~ becomes the target of a spell or ability an opponent controls$/.test(c)) {
@@ -4254,6 +4273,41 @@ export function parseSentence(sentence, ctx) {
   // could mean instead.
   const it = ctx.targets.length === 0 ? ctx.it : undefined;
   if (it !== undefined) {
+    // "That creature" of a `deals-damage` trigger: what the damage was dealt
+    // to (`"trigger-recipient"`, `itOf`) — "destroy that creature at end of
+    // combat" a delayed trigger that keeps it (603.7c, Ohran Viper).
+    if (it === "trigger-recipient") {
+      if ((m = re("(destroy|exile) that creature at end of combat").exec(s))) {
+        const word = m[1].toLowerCase();
+        return {
+          kind: "delayed-trigger",
+          at: "end-of-combat",
+          effect: { kind: word, target: it },
+          text: `${word.charAt(0).toUpperCase()}${word.slice(1)} that creature.`,
+        };
+      }
+      if ((m = re("(destroy|exile) that creature").exec(s))) return { kind: m[1].toLowerCase(), target: it };
+      if (re("tap that creature and it doesn't untap during its controller's next untap step").test(s)) {
+        return { kind: "tap", target: it, doesntUntapNext: true };
+      }
+      if (re("tap that creature").test(s)) return { kind: "tap", target: it };
+      if ((m = re(`put ${N} ([+-]\\d+/[+-]\\d+|[a-z]+) counters? on that creature`).exec(s))) {
+        return { kind: "add-counter", target: it, counter: m[2].toLowerCase(), amount: amount(m[1]) };
+      }
+      if (re("that creature becomes a copy of ~").test(s)) return { kind: "become-copy", target: it, of: "source" };
+      if (re("that creature doesn't untap during its controller's untap step for as long as ~ remains on the battlefield").test(s)) {
+        return { kind: "restrict", target: it, restrictions: ["doesnt-untap"], duration: "while-source" };
+      }
+    }
+    // "It deals 1 damage to the player or planeswalker it's attacking" (Rakdos
+    // Roustabout): the attack's recipient, nothing once it's out of combat.
+    if (it === "source" && (m = re(`it deals ${N} damage to the player or planeswalker it's attacking`).exec(s))) {
+      return {
+        kind: "conditional",
+        condition: { kind: "trigger-object", filter: { attacking: true } },
+        then: { kind: "damage", amount: amount(m[1]), toTriggerRecipient: true },
+      };
+    }
     // A damage source is only the ability's own or the trigger's object
     // (`DamageFrom`): "enchanted creature deals …" has no shape.
     // "It deals 1 damage to each creature blocking it" (Battle-Scarred
@@ -5256,8 +5310,10 @@ export function parseEffect(text, outer) {
           : null;
     // "It" names the ability's object only in its first sentence: after
     // another ("Create a 0/0 token. Put a +1/+1 counter on it.") it's
-    // whatever that sentence was about.
-    const sentenceCtx = i === 0 ? ctx : { ...ctx, it: undefined, departed: undefined };
+    // whatever that sentence was about. "That creature" of a damage trigger
+    // stays what the damage hit (Neko-Te's "tap that creature. That creature
+    // doesn't untap …").
+    const sentenceCtx = i === 0 || ctx.it === "trigger-recipient" ? ctx : { ...ctx, it: undefined, departed: undefined };
     const inner = rhystic === null ? null : parseSentence(`${rhystic[1]}.`, sentenceCtx);
     // "Target creature of an opponent's choice [they control]" (Evangelize,
     // Volcanic Offering): read without the choice, then that slot marked as
@@ -8556,6 +8612,7 @@ function thatPlayerOf(triggers) {
   // "Whenever a player taps a land for mana, ~ deals 1 damage to that player"
   // (Manabarbs): who activated the mana ability.
   if (triggers.every((t) => t.on === "tapped-for-mana")) return "trigger-player";
+  if (triggers.every((t) => t.on === "deals-damage" && t.to === "player")) return "trigger-player";
   // "When the chosen player draws a card with the chosen name, … that
   // player" (Booby Trap): who drew, the drawn card's controller.
   if (triggers.every((t) => t.on === "draws" && t.who === "chosen-player")) return "trigger-controller";
@@ -8780,6 +8837,9 @@ function itOf(triggers) {
   // saddled, the trigger object.
   if (triggers.every((t) => t.on === "crews-or-saddles")) return "trigger-object";
   const objectEvents = ["enters-battlefield", "dies", "attacks", "blocks", "becomes-blocked", "deals-combat-damage-to-player", "tapped-for-mana"];
+  // "That creature": what the damage was dealt to.
+  if (triggers.every((t) => t.on === "deals-damage" && t.to === "creature")) return "trigger-recipient";
+  const objectEvents = ["enters-battlefield", "dies", "attacks", "blocks", "becomes-blocked", "deals-combat-damage-to-player"];
   if (triggers.every((t) => t.who === "self" && objectEvents.includes(t.on))) return "source";
   // The permanent a spell or ability targeted ("that creature" — Monk Gyatso).
   const othersEvents = [...objectEvents, "becomes-target"];
