@@ -905,6 +905,10 @@ export interface GameObject {
      * 702.82a — `CardDefinition.devour`): sacrificed then, and counted for
      * its +1/+1 counters as it enters. */
     readonly devoured?: number;
+    /** Whether what an `EnterInstead` asks of it was done as it was about to
+     * enter: `false`, and it goes to its owner's graveyard instead
+     * (`moveObject`). */
+    readonly insteadDone?: boolean;
     /** How many cards its controller revealed for its amplify as it was
      * about to enter (rule 702.38a — `CardDefinition.amplify`), counted for
      * its +1/+1 counters as it enters. */
@@ -3228,6 +3232,11 @@ export type AwaitingDecision =
        * nothing" — is recorded on it (`enterChoice.copyOf`) as a `choose-copy`
        * would be, for a client to pick from a popup rather than the board. */
       readonly copyOnEnterOf?: ObjectId;
+      /** The permanent about to enter whose `EnterInstead` asks for a discard
+       * (Mox Diamond): `ids` are the cards in `player`'s hand that may be
+       * discarded, and choosing none is declining, recorded on it
+       * (`enterChoice.insteadDone`). */
+      readonly insteadOfEnteringOf?: ObjectId;
       /** A `discard-chosen`'s `reveals` — "target player reveals three cards
        * from their hand and you choose one of them" (Blackmail): `player`
        * picks which cards of their hand to show (`destination: "reveal"`,
@@ -3689,6 +3698,11 @@ export type AwaitingDecision =
        * to enter, and what's picked is sacrificed now, before it enters with
        * the counters. `then` is unused. */
       readonly devour?: true;
+      /** Set when the choice is which permanents an entering permanent's
+       * `EnterInstead` sacrifices: `source` is the permanent about to enter,
+       * and what's picked is sacrificed now, as one event, before it enters.
+       * `then` is unused. */
+      readonly insteadOfEntering?: true;
       /** Set when the choice pays an activated ability's `returnToHand`
        * cost: that ability on the stack, which records what the returned
        * creature was attacking (`LastKnownRefs.returnedAttacking`). */

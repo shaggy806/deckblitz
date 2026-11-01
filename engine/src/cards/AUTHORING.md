@@ -5409,7 +5409,7 @@ clause (section 9):
 
 - `{ event: "enters-battlefield", tapped?, tappedUnless?,
   tappedUnlessRevealFromHand?, tappedUnlessBehold?, painIfUntapped?, mayPayLife?,
-  counters?: { kind, amount }, transformed? }` — a self-replacement.
+  counters?: { kind, amount }, transformed?, instead? }` — a self-replacement.
   `counters.amount` is `"x"` for the X it was cast with (rule 107.3m) or any
   live amount, read as it enters and never counting itself or what enters
   with it (Aeve, Progenitor Ooze's "a +1/+1 counter on it for each other Ooze
@@ -5441,6 +5441,17 @@ clause (section 9):
   (rule 701.4a): a `choose-from-zone` over the Jace cards in hand and the
   Jaces you control (never the land), none chosen being "you don't" — asked
   only with one to behold, as it's about to enter (rule 614.12).
+  `instead: EnterInstead` is what's done rather than entering, asked before it
+  moves however it enters (rule 614.12): `sacrifice: { filter, count }` is
+  Kjeldoran Outpost's "sacrifice a Plains instead. If you do, put this land onto
+  the battlefield. If you don't, put it into its owner's graveyard", Scorched
+  Ruins's `{ type: "land", tapped: false }`, count 2 (its controller's own, as
+  many as there are — rule 609.3 — but only the whole number gets it in);
+  `count: "all"` has no "if you don't" and enters regardless (Sheltered Valley,
+  `{ name }`; Overlaid Terrain); `discard: { filter }` is Mox Diamond's "you may
+  discard a land card instead", a `choose-from-zone`. One that doesn't enter goes
+  to its owner's graveyard (it stays, if it was there) and no enters trigger sees
+  it. A copy does this as what it's becoming; a token copy isn't asked (§15).
   `mayPayLife: N` is a shock land (a `pay-life-for-untapped` decision, via the
   `shockLand` helper); `painIfUntapped: N` deals damage if it *did* end up
   entering untapped (Rockfall Vale).

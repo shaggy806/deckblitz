@@ -7089,6 +7089,36 @@ describe("turning a face-down permanent face up by an effect", () => {
   });
 });
 
+describe("what's done instead of entering (EnterInstead)", () => {
+  const land = (oracle_text: string) => parseFace({ name: "Test Vale", type_line: "Land", oracle_text }, { tokenFor: () => null });
+  const instead = (face: { static: readonly { replacement?: unknown }[] }) => (face.static[0].replacement as { instead: unknown }).instead;
+
+  it("reads a sacrifice with an 'if you don't'", () => {
+    expect(
+      instead(land("If this land would enter, sacrifice a Swamp instead. If you do, put this land onto the battlefield. If you don't, put it into its owner's graveyard.")),
+    ).toEqual({ sacrifice: { filter: { subtype: "Swamp" }, count: 1 } });
+    expect(
+      instead(land("If this land would enter, sacrifice an untapped Mountain instead. If you do, put this land onto the battlefield. If you don't, put it into its owner's graveyard.")),
+    ).toEqual({ sacrifice: { filter: { subtype: "Mountain", tapped: false }, count: 1 } });
+    expect(
+      instead(land("If this land would enter, sacrifice two untapped lands instead. If you do, put this land onto the battlefield. If you don't, put it into its owner's graveyard.")),
+    ).toEqual({ sacrifice: { filter: { type: "land", tapped: false }, count: 2 } });
+  });
+
+  it("reads a discard, and a sacrifice with no way to fail", () => {
+    const mox = parseFace(
+      { name: "Test Mox", type_line: "Artifact", oracle_text: "If this artifact would enter, you may discard a land card instead. If you do, put this artifact onto the battlefield. If you don't, put it into its owner's graveyard." },
+      { tokenFor: () => null },
+    );
+    expect(instead(mox)).toEqual({ discard: { filter: { type: "land" } } });
+    expect(
+      instead(land("If this land would enter, instead sacrifice each other permanent named Test Vale you control, then put this land onto the battlefield.")),
+    ).toEqual({ sacrifice: { filter: { name: "Test Vale" }, count: "all" } });
+    const terrain = parseFace({ name: "Test Terrain", type_line: "Enchantment", oracle_text: "As this enchantment enters, sacrifice all lands you control." }, { tokenFor: () => null });
+    expect(instead(terrain)).toEqual({ sacrifice: { filter: { type: "land" }, count: "all" } });
+  });
+});
+
 describe("entering as a copy, or as a choice of forms", () => {
   const creature = (oracle_text: string) => parseFace({ name: "Test Copy", type_line: "Creature — Shapeshifter", oracle_text }, { tokenFor: () => null });
 

@@ -154,6 +154,7 @@ import {
 import type { Characteristics } from "./characteristics.js";
 import type {
   DamageMultiplierReplacement,
+  EnterInstead,
   GraveyardExileReplacement,
   LifeGainReplacement,
   MillMultiplierReplacement,
@@ -8270,6 +8271,16 @@ export class Game {
       this.prepareForPriority(this.activePlayer);
       return;
     }
+    // "You may discard a land card instead" (Mox Diamond), as `EnterInstead`
+    // asks it: the discard happens now, and decides whether it enters.
+    if (awaiting.insteadOfEnteringOf !== undefined) {
+      const entering = this.state.objects[awaiting.insteadOfEnteringOf];
+      this.state.awaiting = null;
+      this.discardCards(player, chosen);
+      if (entering !== undefined) entering.enterChoice = { ...entering.enterChoice, insteadDone: chosen.length > 0 };
+      if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
+      return;
+    }
     // Before the game (rule 103.6a): no resolution to go on with.
     if (awaiting.openingHand !== undefined) {
       this.applyOpeningHand(player, chosen, awaiting.openingHand.next, awaiting.destination === "reveal");
@@ -10858,12 +10869,13 @@ export class Game {
     // don't own too (played off an opponent's exiled card).
     const owner = this.state.objects[cardId]?.owner;
     const under = owner !== undefined && owner !== player ? player : undefined;
-    this.moveObject(cardId, "battlefield", under !== undefined ? { under } : {});
+    const entered = this.moveObject(cardId, "battlefield", under !== undefined ? { under } : {});
     if (under !== undefined && this.state.objects[cardId]?.zone === "battlefield" && this.state.objects[cardId].controller !== under) {
       this.gainControlByEffect(under, { kind: "object", object: cardId }, false, true, { split: false });
     }
     this.emit({ type: "land-played", player, object: cardId, from });
-    this.emit({ type: "permanent-entered-battlefield", object: cardId });
+    // Lake of the Dead that wasn't paid for never entered (`EnterInstead`).
+    if (entered) this.emit({ type: "permanent-entered-battlefield", object: cardId });
   }
 
   /**
@@ -10880,6 +10892,7 @@ export class Game {
     | { readonly kind: "copy" }
     | { readonly kind: "choose"; readonly options?: readonly string[]; readonly prompt?: string }
     | { readonly kind: "flip-form"; readonly heads: string; readonly tails: string }
+    | { readonly kind: "instead"; readonly spec: EnterInstead }
     | { readonly kind: "enchant"; readonly as: CardDefinition }
     | { readonly kind: "reveal"; readonly subtypes: readonly string[] }
     | { readonly kind: "behold"; readonly spec: BeholdSpec }
@@ -10916,6 +10929,14 @@ export class Game {
     if (def.copyOnEnter !== null && answered?.copyOf === undefined) return { kind: "copy" };
     const becoming =
       answered?.copyOf !== undefined && answered.copyOf !== null ? this.registry.get(answered.copyOf) : def;
+    // "If this land would enter, sacrifice a Swamp instead" — printed, or a
+    // copy's: before anything else, since it may not enter at all.
+    if (answered?.insteadDone === undefined) {
+      for (const ability of becoming.static) {
+        const r = ability.replacement;
+        if (r?.event === "enters-battlefield" && r.instead !== undefined) return { kind: "instead", spec: r.instead };
+      }
+    }
     if (answered?.chosen === undefined) {
       if (becoming.chooseCreatureTypeOnEnter) return { kind: "choose" };
       if (becoming.chooseOnEnter !== null) return { kind: "choose", options: becoming.chooseOnEnter };
@@ -11070,6 +11091,99 @@ export class Game {
   }
 
   /**
+   * What an {@link EnterInstead} asks of `chooser` for the card `id`, about to
+   * enter: a discard or a sacrifice with something to choose raises a decision
+   * and returns `true`; anything else is done here (rule 609.3: as many as
+   * there are), recorded on it as `enterChoice.insteadDone`.
+   */
+  private askEnterInstead(id: ObjectId, chooser: PlayerId, spec: EnterInstead): boolean {
+    const object = this.state.objects[id];
+    const done = (insteadDone: boolean): void => {
+      object.enterChoice = { ...object.enterChoice, insteadDone };
+    };
+    if (spec.discard !== undefined) {
+      const eligible = this.state.zones.perPlayer[chooser].hand.filter(
+        (card) =>
+          card !== id &&
+          this.enterBatch?.has(card) !== true &&
+          matchesFilter(this.state, this.registry, card, spec.discard!.filter, { you: chooser, source: id }),
+      );
+      if (eligible.length === 0) {
+        done(false);
+        return false;
+      }
+      this.state.awaiting = {
+        kind: "choose-from-zone",
+        player: chooser,
+        ids: eligible,
+        eligible,
+        min: 0,
+        max: 1,
+        destination: "discard",
+        leftover: "stay",
+        prompt: `You may discard a card as ${nameOf(object)} would enter. If you don't, it goes to the graveyard instead`,
+        insteadOfEnteringOf: id,
+      };
+      return true;
+    }
+    const sacrifice = spec.sacrifice;
+    if (sacrifice === undefined) {
+      done(true);
+      return false;
+    }
+    const eligible = this.state.zones.shared.battlefield.filter(
+      (other) =>
+        other !== id &&
+        this.enterBatch?.has(other) !== true &&
+        this.state.objects[other]?.controller === chooser &&
+        this.inGame(this.state.objects[other]) &&
+        this.canBeSacrificed(other) &&
+        matchesFilter(this.state, this.registry, other, sacrifice.filter, { you: chooser, source: id }),
+    );
+    const available = eligible.reduce((n, other) => n + (this.state.objects[other]?.stackCount ?? 1), 0);
+    // A real choice only with more to choose from than it takes: otherwise
+    // they all go, as many as there are, and it needs the whole number.
+    if (sacrifice.count !== "all" && available > sacrifice.count) {
+      this.state.awaiting = {
+        kind: "choose-permanents",
+        player: chooser,
+        eligible,
+        min: sacrifice.count,
+        max: sacrifice.count,
+        prompt: `Sacrifice ${sacrifice.count === 1 ? "this" : `these ${sacrifice.count}`} as ${nameOf(object)} would enter`,
+        then: { kind: "sequence", effects: [] },
+        source: id,
+        x: 0,
+        insteadOfEntering: true,
+      };
+      return true;
+    }
+    const gone = this.sacrificeAsEntering(
+      eligible.flatMap((other) => Array<ObjectId>(this.state.objects[other]?.stackCount ?? 1).fill(other)),
+    );
+    done(sacrifice.count === "all" || gone >= sacrifice.count);
+    return false;
+  }
+
+  /** The permanents an `EnterInstead` sacrifices, as one event. A token stack
+   * named N times gives up N of its tokens. Returns how many went. */
+  private sacrificeAsEntering(picked: readonly ObjectId[]): number {
+    let gone = 0;
+    this.withLeaveBatch(() => {
+      for (const id of picked) {
+        if (this.state.objects[id]?.zone !== "battlefield") continue;
+        const one = this.splitOneFromStack(id);
+        if (!this.canBeSacrificed(one)) continue;
+        const sacrificer = this.state.objects[one].controller;
+        this.moveObject(one, "graveyard");
+        this.emit({ type: "permanent-sacrificed", object: one, player: sacrificer });
+        gone += 1;
+      }
+    });
+    return gone;
+  }
+
+  /**
    * Ask the next "as this enters" choice (rule 614.12) of the card `id`, about
    * to be put onto the battlefield under `chooser`'s control — before it moves,
    * so the replacements that apply as it enters (Giada's counters for a Clone
@@ -11093,6 +11207,10 @@ export class Game {
           this.state.awaiting = { ...asked, prompt: next.prompt };
         }
         return true;
+      }
+      if (next.kind === "instead") {
+        if (this.askEnterInstead(id, chooser, next.spec)) return true;
+        continue;
       }
       if (next.kind === "flip-form") {
         // "As this creature enters, flip a coin" (Molten Sentry): nothing to
@@ -37078,6 +37196,16 @@ export class Game {
       this.prepareForPriority(this.activePlayer);
       return;
     }
+    // An `EnterInstead`'s sacrifice: now, as it's about to enter, one event;
+    // its entry carries on once priority is next looked at.
+    if (awaiting.insteadOfEntering === true) {
+      const entering = this.state.objects[awaiting.source];
+      const gone = this.sacrificeAsEntering(chosen);
+      entering.enterChoice = { ...entering.enterChoice, insteadDone: gone >= awaiting.min };
+      this.state.awaiting = null;
+      this.prepareForPriority(this.activePlayer);
+      return;
+    }
     if (awaiting.attachOnEnter === true) {
       const entering = this.state.objects[awaiting.source];
       entering.enterChoice = {
@@ -45259,6 +45387,13 @@ export class Game {
     if (to === "battlefield" && object.enterChoice?.enchant === null) {
       object.enterChoice = undefined;
       if (object.zone === "stack") this.moveObjectUncached(id, "graveyard", {});
+      return false;
+    }
+    // "If you don't, put it into its owner's graveyard" (`EnterInstead`): it
+    // never enters. Already there (a reanimation), it just stays.
+    if (to === "battlefield" && object.enterChoice?.insteadDone === false) {
+      object.enterChoice = undefined;
+      if (object.zone !== "graveyard") this.moveObjectUncached(id, "graveyard", {});
       return false;
     }
     const leavingBattlefield = object.zone === "battlefield" && to !== "battlefield";

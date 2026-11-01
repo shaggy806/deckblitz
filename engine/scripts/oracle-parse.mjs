@@ -9165,6 +9165,33 @@ function parseStatic(line, text) {
       };
     }
   }
+  // "If ~ would enter, sacrifice a Swamp instead. If you do, put ~ onto the
+  // battlefield. If you don't, put it into its owner's graveyard." — and Mox
+  // Diamond's discard, Sheltered Valley's and Overlaid Terrain's sacrifices
+  // with no "if you don't" (`EnterInstead`, rule 614.12).
+  {
+    const orElse = "If you do, put ~ onto the battlefield\\. If you don't, put it into its owner's graveyard\\.";
+    const sac = new RegExp(`^If ~ would enter, sacrifice (an?|two|three) (untapped )?([A-Z][a-z]+|lands?) instead\\. ${orElse}$`).exec(line);
+    if (sac !== null) {
+      const count = sac[1] === "two" ? 2 : sac[1] === "three" ? 3 : 1;
+      const what = /^land/.test(sac[3]) ? { type: "land" } : { subtype: sac[3] };
+      const filter = { ...what, ...(sac[2] !== undefined ? { tapped: false } : {}) };
+      return { affects: { scope: "self" }, replacement: { event: "enters-battlefield", instead: { sacrifice: { filter, count } } }, text };
+    }
+    const disc = new RegExp(`^If ~ would enter, you may discard an? ([a-z]+) card instead\\. ${orElse}$`).exec(line);
+    if (disc !== null) {
+      return { affects: { scope: "self" }, replacement: { event: "enters-battlefield", instead: { discard: { filter: { type: disc[1] } } } }, text };
+    }
+    if (line === "If ~ would enter, instead sacrifice each other permanent named ~ you control, then put ~ onto the battlefield.") {
+      const name = /permanent named (.+?) you control/.exec(text)?.[1];
+      if (name !== undefined) {
+        return { affects: { scope: "self" }, replacement: { event: "enters-battlefield", instead: { sacrifice: { filter: { name }, count: "all" } } }, text };
+      }
+    }
+    if (line === "As ~ enters, sacrifice all lands you control.") {
+      return { affects: { scope: "self" }, replacement: { event: "enters-battlefield", instead: { sacrifice: { filter: { type: "land" }, count: "all" } } }, text };
+    }
+  }
   // Thief of Blood's "As ~ enters, remove all counters from all permanents.
   // ~ enters with a +1/+1 counter on it for each counter removed this way."
   // (rule 614.1c): one replacement, `removeAllCountersFrom` and the count.

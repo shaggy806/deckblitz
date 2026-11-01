@@ -63,10 +63,42 @@ export interface TapManaMultiplierReplacement {
   readonly multiplier: number;
 }
 
+/**
+ * "If this land would enter, sacrifice a Swamp instead. If you do, put this
+ * land onto the battlefield. If you don't, put it into its owner's graveyard"
+ * (Lake of the Dead), "… you may discard a land card instead" (Mox Diamond):
+ * what its controller does as it's about to enter, however it's entering
+ * (rule 614.12 — asked by `Game.askEnterChoice`, before it moves), which
+ * decides whether it enters at all. One that doesn't never entered: no enters
+ * trigger sees it, and it goes to its owner's graveyard from wherever it was.
+ * A copy of it does this too, as what it's becoming; a token copy, which is
+ * never asked an "as this enters" choice, doesn't (`docs/engine-gaps.md`).
+ */
+export interface EnterInstead {
+  /**
+   * The permanents the entering permanent's controller sacrifices, matching
+   * this from their side — never itself, nor one entering at the same time. A
+   * `count` of them, chosen, as much as possible (rule 609.3: all that are
+   * there, if fewer); "If you do" needs the whole number, so Lotus Vale with
+   * one untapped land still loses it and goes to the graveyard. `"all"` is
+   * every one, as one event, and it enters whatever there was: Sheltered
+   * Valley's "instead sacrifice each other permanent named Sheltered Valley
+   * you control, then put this land onto the battlefield", Overlaid Terrain's
+   * "As this enchantment enters, sacrifice all lands you control". Neither
+   * has an "if you don't".
+   */
+  readonly sacrifice?: { readonly filter: CardFilter; readonly count: number | "all" };
+  /** "You **may** discard a land card instead" (Mox Diamond): one card from
+   * its controller's hand matching this; choosing none is declining. */
+  readonly discard?: { readonly filter: CardFilter };
+}
+
 /** As the source permanent enters the battlefield (rule 614.1c). A self-
  * replacement — printed on the card, applies only to it. */
 export interface EntersBattlefieldReplacement {
   readonly event: "enters-battlefield";
+  /** See {@link EnterInstead}. */
+  readonly instead?: EnterInstead;
   /** It enters tapped (every "enters the battlefield tapped" land / creature). */
   readonly tapped?: boolean;
   /** It enters tapped *unless* this condition holds when it enters — the

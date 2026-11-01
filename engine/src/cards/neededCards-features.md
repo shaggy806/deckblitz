@@ -2626,6 +2626,21 @@ attack or block unless you pay" (`cost:attack-block-cost-self`,
 `static:attack-cost-for-creature`) and the block tax Archangel of Tithes also
 needs (`static:block-tax`).
 
+### Sacrificing or discarding instead of entering — built 2026-11-01
+
+The top group of the need-keys family `replacement:new-event-replacements`
+(`replacement:enter-replacement-discard`, `enter-replacement-sacrifice`).
+`EnterInstead` on an `enters-battlefield` replacement: asked before it moves
+however it enters (rule 614.12), with the existing `choose-permanents` and
+`choose-from-zone`. `sacrifice: { filter, count }` is the Ice Age lands' "sacrifice
+a Plains instead" and Scorched Ruins's "two untapped lands" (as many as there are,
+rule 609.3, but only the whole number gets it in), and `count: "all"` Sheltered
+Valley's and Overlaid Terrain's, which enter regardless; `discard` is Mox Diamond.
+One that doesn't enter goes to its owner's graveyard unannounced. Proving: Mox
+Diamond, Scorched Ruins, Kjeldoran Outpost, Sheltered Valley, Overlaid Terrain.
+Still waiting on `{T}, Sacrifice a Swamp` as a mana ability: Lake of the Dead. A
+token copy isn't asked (`docs/engine-gaps.md`), so one of these enters free.
+
 ### Copying on the way in, past a permanent — built 2026-11-01
 
 The need-keys Phase 2 family `replacement:copy-on-enter-options`. `CopyOnEnter`

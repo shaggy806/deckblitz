@@ -988,7 +988,9 @@
   "replacement:clone-as-vehicle",
   "replacement:copy-on-enter-own-pt",
   "replacement:enter-as-copy-of-exiled-card",
-  "replacement:enter-as-copy-of-graveyard-card"
+  "replacement:enter-as-copy-of-graveyard-card",
+  "replacement:enter-replacement-discard",
+  "replacement:enter-replacement-sacrifice"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {
