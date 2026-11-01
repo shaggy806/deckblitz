@@ -71,6 +71,7 @@ import _poolBlackMarketTycoon from "../pool/black-market-tycoon.js";
 import _poolBlackWidowNatashaRomanoff from "../pool/black-widow-natasha-romanoff.js";
 import _poolBladeOfSelves from "../pool/blade-of-selves.js";
 import _poolBladedAmbassador from "../pool/bladed-ambassador.js";
+import _poolBlastfireBolt from "../pool/blastfire-bolt.js";
 import _poolBlessedGhoul from "../pool/blessed-ghoul.js";
 import _poolBlessing from "../pool/blessing.js";
 import _poolBlindPhantasm from "../pool/blind-phantasm.js";
@@ -1007,6 +1008,7 @@ const shard: CardShard = {
     _poolBlackWidowNatashaRomanoff,
     _poolBladeOfSelves,
     _poolBladedAmbassador,
+    _poolBlastfireBolt,
     _poolBlessedGhoul,
     _poolBlessing,
     _poolBlindPhantasm,

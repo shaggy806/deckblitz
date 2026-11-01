@@ -381,6 +381,7 @@ import _poolHonoredHydra from "../pool/honored-hydra.js";
 import _poolHotheadedGiant from "../pool/hotheaded-giant.js";
 import _poolHowlOfTheNightPack from "../pool/howl-of-the-night-pack.js";
 import _poolHowlpackWolf from "../pool/howlpack-wolf.js";
+import _poolHubris from "../pool/hubris.js";
 import _poolHulldrifter from "../pool/hulldrifter.js";
 import _poolHumbleBudoka from "../pool/humble-budoka.js";
 import _poolHumble from "../pool/humble.js";
@@ -1246,6 +1247,7 @@ const shard: CardShard = {
     _poolHotheadedGiant,
     _poolHowlOfTheNightPack,
     _poolHowlpackWolf,
+    _poolHubris,
     _poolHulldrifter,
     _poolHumbleBudoka,
     _poolHumble,

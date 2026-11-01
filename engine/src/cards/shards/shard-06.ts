@@ -75,6 +75,7 @@ import _poolBatteringWurm from "../pool/battering-wurm.js";
 import _poolBattleRattleShaman from "../pool/battle-rattle-shaman.js";
 import _poolBeamtownBeatstick from "../pool/beamtown-beatstick.js";
 import _poolBecomeTheAvalanche from "../pool/become-the-avalanche.js";
+import _poolBeholdTheSinisterSix from "../pool/behold-the-sinister-six.js";
 import _poolBelligerentRegisaur from "../pool/belligerent-regisaur.js";
 import _poolBellowingBruiser from "../pool/bellowing-bruiser.js";
 import _poolBenalishInfantry from "../pool/benalish-infantry.js";
@@ -422,6 +423,7 @@ import _poolLaunch from "../pool/launch.js";
 import _poolLavaHounds from "../pool/lava-hounds.js";
 import _poolLayDownArms from "../pool/lay-down-arms.js";
 import _poolLeaveNoTrace from "../pool/leave-no-trace.js";
+import _poolLegerdemain from "../pool/legerdemain.js";
 import _poolLegionAngel from "../pool/legion-angel.js";
 import _poolLegionsLanding from "../pool/legions-landing.js";
 import _poolLeylineOfVitality from "../pool/leyline-of-vitality.js";
@@ -927,6 +929,7 @@ const shard: CardShard = {
     _poolBattleRattleShaman,
     _poolBeamtownBeatstick,
     _poolBecomeTheAvalanche,
+    _poolBeholdTheSinisterSix,
     _poolBelligerentRegisaur,
     _poolBellowingBruiser,
     _poolBenalishInfantry,
@@ -1274,6 +1277,7 @@ const shard: CardShard = {
     _poolLavaHounds,
     _poolLayDownArms,
     _poolLeaveNoTrace,
+    _poolLegerdemain,
     _poolLegionAngel,
     _poolLegionsLanding,
     _poolLeylineOfVitality,

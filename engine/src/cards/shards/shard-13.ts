@@ -550,6 +550,7 @@ import _poolRipscalePredator from "../pool/ripscale-predator.js";
 import _poolRiseFromTheWreck from "../pool/rise-from-the-wreck.js";
 import _poolRiseOfTheHobgoblins from "../pool/rise-of-the-hobgoblins.js";
 import _poolRitesOfFlourishing from "../pool/rites-of-flourishing.js";
+import _poolRivalsDuel from "../pool/rivals-duel.js";
 import _poolRivenTurnbull from "../pool/riven-turnbull.js";
 import _poolRixMaadiReveler from "../pool/rix-maadi-reveler.js";
 import _poolRobotDomination from "../pool/robot-domination.js";
@@ -1394,6 +1395,7 @@ const shard: CardShard = {
     _poolRiseFromTheWreck,
     _poolRiseOfTheHobgoblins,
     _poolRitesOfFlourishing,
+    _poolRivalsDuel,
     _poolRivenTurnbull,
     _poolRixMaadiReveler,
     _poolRobotDomination,

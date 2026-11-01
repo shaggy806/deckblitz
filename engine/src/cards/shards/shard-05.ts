@@ -631,6 +631,7 @@ import _poolScrollOfTheMasters from "../pool/scroll-of-the-masters.js";
 import _poolScythecatCub from "../pool/scythecat-cub.js";
 import _poolSearingTouch from "../pool/searing-touch.js";
 import _poolSeasonedWarrenguard from "../pool/seasoned-warrenguard.js";
+import _poolSecretTunnel from "../pool/secret-tunnel.js";
 import _poolSeekTheHorizon from "../pool/seek-the-horizon.js";
 import _poolSeekerOfSkybreak from "../pool/seeker-of-skybreak.js";
 import _poolSeismicMonstrosaur from "../pool/seismic-monstrosaur.js";
@@ -1482,6 +1483,7 @@ const shard: CardShard = {
     _poolScythecatCub,
     _poolSearingTouch,
     _poolSeasonedWarrenguard,
+    _poolSecretTunnel,
     _poolSeekTheHorizon,
     _poolSeekerOfSkybreak,
     _poolSeismicMonstrosaur,

@@ -827,6 +827,7 @@ import _poolWindreaperFalcon from "../pool/windreaper-falcon.js";
 import _poolWingsteedRider from "../pool/wingsteed-rider.js";
 import _poolWinterSoldierBuckyBarnes from "../pool/winter-soldier-bucky-barnes.js";
 import _poolWirewoodChanneler from "../pool/wirewood-channeler.js";
+import _poolWitchbaneOrb from "../pool/witchbane-orb.js";
 import _poolWitchsFamiliar from "../pool/witchs-familiar.js";
 import _poolWizenedCenn from "../pool/wizened-cenn.js";
 import _poolWolfsbaneHighlandHero from "../pool/wolfsbane-highland-hero.js";
@@ -1701,6 +1702,7 @@ const shard: CardShard = {
     _poolWingsteedRider,
     _poolWinterSoldierBuckyBarnes,
     _poolWirewoodChanneler,
+    _poolWitchbaneOrb,
     _poolWitchsFamiliar,
     _poolWizenedCenn,
     _poolWolfsbaneHighlandHero,
