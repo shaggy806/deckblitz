@@ -16,6 +16,8 @@
   "cost:sacrifice-enchanted-creature",
   "cost:sacrifice-self-and-another",
   "filter:not-source-clause",
+  "decision:name-a-card",
+  "trigger:chosen-player-draws-named-card",
   "decision:choose-from-zone-extensions",
   "decision:choose-from-hand-and-graveyard",
   "decision:choose-from-hand-and-library-top",

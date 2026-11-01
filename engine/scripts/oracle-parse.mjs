@@ -1591,6 +1591,11 @@ export function parseTrigger(clause) {
   if ((m = /^Whenever (you|an opponent|a player) draws? a card$/.exec(c))) {
     return [{ on: "draws", who: { you: "you", "an opponent": "opponent", "a player": "any" }[m[1]] }];
   }
+  // Booby Trap's "when the chosen player draws a card with the chosen name"
+  // (`choosePlayerOnEnter` and `chooseCardNameOnEnter`).
+  if (/^When the chosen player draws a card with the chosen name$/.test(c)) {
+    return [{ on: "draws", who: "chosen-player", filter: { chosenName: true } }];
+  }
   if (/^Whenever you gain life$/.test(c)) return [{ on: "gains-life", who: "you" }];
   // Expend N (rule 700.14) and "whenever you forage" (701.61a).
   if ((m = /^Whenever you expend (\d+)$/.exec(c))) return [{ on: "expend", who: "you", amount: Number(m[1]) }];
@@ -3978,6 +3983,26 @@ export function parseEffect(text, outer) {
       skip = fromHand.used - 1;
       continue;
     }
+    // "Sacrifice ~. If you do, ~ deals 10 damage to that player." (Booby
+    // Trap): the damage hangs on the sacrifice (`sacrifice-source`'s `then`),
+    // dealt by the permanent as it last existed.
+    const sacDamage = new RegExp(`^If you do, ~ deals ${N} damage to that player\\.$`).exec(sentence);
+    if (sacDamage !== null && ctx.thatPlayer !== undefined && parsed.at(-1)?.kind === "sacrifice-source" && parsed.at(-1).then === undefined) {
+      const n = numberOf(sacDamage[1]);
+      if (typeof n === "number") {
+        const sac = { kind: "sacrifice-source", then: { kind: "damage", amount: n, who: ctx.thatPlayer } };
+        parsed[parsed.length - 1] = sac;
+        hints.push({ sentence, effect: sac });
+        continue;
+      }
+    }
+    const nameChoice = nameChoiceAt(sentences, i, ctx);
+    if (nameChoice !== null) {
+      parsed.push(nameChoice.effect);
+      hints.push({ sentence, effect: nameChoice.effect });
+      skip = nameChoice.used - 1;
+      continue;
+    }
     const oneEach = oneEachLookAt(sentences, i);
     if (oneEach !== null) {
       parsed.push(oneEach.effect);
@@ -4734,6 +4759,64 @@ function revealedHandChoiceAt(sentences, i, ctx) {
       : {}),
   };
   return { effect, used };
+}
+
+/**
+ * A card name chosen as the spell resolves (rule 201.4), then used — a
+ * `choose-card-name` around what follows, `CHOSEN_CARD_NAME` in it:
+ *
+ * - "Choose a nonland card name. Target player reveals their hand and
+ *   discards all cards with that name." (Cabal Therapy)
+ * - "Choose a card name, then target player mills a card. If a card with the
+ *   chosen name was milled this way, you draw two cards. Otherwise, you draw
+ *   a card." (Predict)
+ *
+ * `null` when the sentences aren't one of those.
+ */
+function nameChoiceAt(sentences, i, ctx) {
+  const first = sentences[i] ?? "";
+  const named = /^choose (?:a|an) ((?:[\w-]+, )*[\w-]+ )?card name\.$/i.exec(first);
+  if (named !== null) {
+    const filter = cardNameFilterOf(named[1] ?? "");
+    const discard = /^(target player|target opponent) reveals their hand and discards all cards with that name\.$/i.exec(sentences[i + 1] ?? "");
+    if (filter === null || discard === null) return null;
+    const who = ctx.target(discard[1].toLowerCase() === "target opponent" ? "opponent" : "player");
+    return {
+      effect: {
+        kind: "choose-card-name",
+        ...(Object.keys(filter).length > 0 ? { filter } : {}),
+        then: { kind: "discard-hand", who, filter: { hasName: CHOSEN_CARD_NAME }, reveal: true },
+      },
+      used: 2,
+    };
+  }
+  const mills = /^choose a card name, then (target player|target opponent) mills a card\.$/i.exec(first);
+  if (mills === null) return null;
+  const hit = sentenceRe(`if a card with the chosen name was milled this way, you draw ${N} cards?`).exec(sentences[i + 1] ?? "");
+  const miss = sentenceRe(`otherwise, you draw ${N} cards?`).exec(sentences[i + 2] ?? "");
+  const hitN = hit === null ? null : numberOf(hit[1]);
+  const missN = miss === null ? null : numberOf(miss[1]);
+  if (typeof hitN !== "number" || typeof missN !== "number") return null;
+  const target = ctx.target(mills[1].toLowerCase() === "target opponent" ? "opponent" : "player");
+  return {
+    effect: {
+      kind: "choose-card-name",
+      aim: "opponent-library",
+      then: {
+        kind: "sequence",
+        effects: [
+          { kind: "mill", target, amount: 1 },
+          {
+            kind: "conditional",
+            condition: { kind: "this-way", what: "milled", filter: { hasName: CHOSEN_CARD_NAME } },
+            then: { kind: "draw", amount: hitN },
+            else: { kind: "draw", amount: missN },
+          },
+        ],
+      },
+    },
+    used: 3,
+  };
 }
 
 /** Each card type (rule 205.2a) a card in a library can have, in the order
@@ -5662,6 +5745,15 @@ export function parseFace(face, ctx = {}) {
       });
       continue;
     }
+    // "Flashback—Sacrifice a creature." (rule 702.34a: any cost — Cabal
+    // Therapy, Lava Dart, Dread Return): a sacrifice and no mana.
+    if (isSpell && (m = /^Flashback—(Sacrifice .+)\.$/.exec(line))) {
+      const also = kickerAlso(m[1]);
+      if (also?.sacrifice !== undefined) {
+        out.flashback = { cost: "", sacrifice: also.sacrifice };
+        continue;
+      }
+    }
     // "Flashback—{1}{R}, Behold three Elementals." (rule 702.34a with 701.4a).
     if (isSpell && (m = /^Flashback—((?:\{[^}]+\})+), Behold (.+)\.$/.exec(line)) && beholdOf(m[2]) !== null) {
       out.flashback = { cost: m[1], behold: beholdOf(m[2]) };
@@ -5671,6 +5763,15 @@ export function parseFace(face, ctx = {}) {
     // Littjara's "~ is the chosen type in addition to its other types."
     if (line === "As ~ enters, choose a creature type.") {
       out.chooseCreatureTypeOnEnter = true;
+      continue;
+    }
+    // "As ~ enters, choose an opponent and a card name other than a basic
+    // land card name." (Booby Trap): both choices, the name to guess a card
+    // in that opponent's library.
+    if ((m = /^As ~ enters, choose (a player|an opponent) and (?:a|an) (.*?)card name( other than a basic land card name)?\.$/.exec(line)) && cardNameFilterOf(m[2]) !== null) {
+      out.choosePlayerOnEnter = m[1] === "a player" ? "player" : "opponent";
+      const filter = { ...cardNameFilterOf(m[2]), ...(m[3] !== undefined ? { notBasicLand: true } : {}) };
+      out.chooseCardNameOnEnter = { ...(Object.keys(filter).length > 0 ? { filter } : {}), aim: "opponent-library" };
       continue;
     }
     // "As ~ enters, choose a player / an opponent." (rule 614.1c) — the
@@ -6740,6 +6841,9 @@ function thatPlayerOf(triggers) {
   if (triggers.every((t) => t.on === "step-begins" && t.who === "opponent")) return "active-player";
   if (triggers.every((t) => t.on === "deals-damage-batch" && t.combat === true)) return "trigger-player";
   if (triggers.every((t) => t.on === "deals-combat-damage-to-player")) return "trigger-player";
+  // "When the chosen player draws a card with the chosen name, … that
+  // player" (Booby Trap): who drew, the drawn card's controller.
+  if (triggers.every((t) => t.on === "draws" && t.who === "chosen-player")) return "trigger-controller";
   return undefined;
 }
 
@@ -7688,6 +7792,10 @@ function parseStatic(line, text) {
   if ((m = /^(Skip your|Players skip their|Each player skips their|Your opponents skip their|Each opponent skips their) (untap|upkeep|draw) steps?\.$/.exec(line))) {
     const who = m[1] === "Skip your" ? "you" : /opponent/.test(m[1]) ? "opponents" : "each-player";
     return { affects: { scope: "self" }, skipsSteps: { who, steps: [m[2]] }, text };
+  }
+  // Booby Trap's "the chosen player reveals each card they draw".
+  if (line === "The chosen player reveals each card they draw.") {
+    return { affects: { scope: "self" }, revealsDraws: "chosen-player", text };
   }
   // Cursed Rack's "the chosen player's maximum hand size is four".
   if ((m = new RegExp(`^The chosen player's maximum hand size is ${N}\\.$`).exec(line)) && typeof numberOf(m[1]) === "number") {

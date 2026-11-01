@@ -5776,3 +5776,50 @@ describe("a choice drawn from several zones, or one card a slot", () => {
     expect(rest.complete).toBe(false);
   });
 });
+
+describe("a card name chosen and used", () => {
+  const face = (name: string, type_line: string, oracle_text: string) =>
+    parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });
+
+  it("reads a name chosen as a spell resolves, and a sacrifice-only flashback", () => {
+    const therapy = face(
+      "Cabal Therapy",
+      "Sorcery",
+      "Choose a nonland card name. Target player reveals their hand and discards all cards with that name.\nFlashback—Sacrifice a creature. (You may cast this card from your graveyard for its flashback cost. Then exile it.)",
+    );
+    expect(therapy.complete).toBe(true);
+    expect(therapy.effect).toEqual({
+      kind: "choose-card-name",
+      filter: { notTypes: ["land"] },
+      then: { kind: "discard-hand", who: 0, filter: { hasName: "$chosenName" }, reveal: true },
+    });
+    expect(therapy.flashback).toEqual({ cost: "", sacrifice: { filter: { type: "creature" }, count: 1 } });
+    const predict = face(
+      "Predict",
+      "Instant",
+      "Choose a card name, then target player mills a card. If a card with the chosen name was milled this way, you draw two cards. Otherwise, you draw a card.",
+    );
+    expect(predict.complete).toBe(true);
+    expect(predict.effect.then.effects[1]).toMatchObject({
+      condition: { kind: "this-way", what: "milled", filter: { hasName: "$chosenName" } },
+      then: { kind: "draw", amount: 2 },
+      else: { kind: "draw", amount: 1 },
+    });
+  });
+
+  it("reads a player and a name chosen as it enters, the player's draws revealed and the named one sprung", () => {
+    const trap = face(
+      "Booby Trap",
+      "Artifact",
+      "As this artifact enters, choose an opponent and a card name other than a basic land card name.\nThe chosen player reveals each card they draw.\nWhen the chosen player draws a card with the chosen name, sacrifice this artifact. If you do, this artifact deals 10 damage to that player.",
+    );
+    expect(trap.complete).toBe(true);
+    expect(trap.choosePlayerOnEnter).toBe("opponent");
+    expect(trap.chooseCardNameOnEnter).toEqual({ filter: { notBasicLand: true }, aim: "opponent-library" });
+    expect(trap.static[0]).toMatchObject({ revealsDraws: "chosen-player" });
+    expect(trap.triggered[0]).toMatchObject({
+      trigger: { on: "draws", who: "chosen-player", filter: { chosenName: true } },
+      effect: { kind: "sacrifice-source", then: { kind: "damage", amount: 10, who: "trigger-controller" } },
+    });
+  });
+});

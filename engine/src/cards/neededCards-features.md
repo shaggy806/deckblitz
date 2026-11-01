@@ -367,6 +367,25 @@ Starnheim, Sandstone Deadfall. Left: Mount Doom (each player chooses, destroy
 the rest), Emrakul's Evangel ("any number of other"), Kyscu Drake's "a
 creature named Spitting Drake" in the scaffolder (the engine runs it).
 
+### A card name chosen with a player, the player's draws revealed — built 2026-10-31
+
+The need-keys Phase 2 family `decision:name-a-card`, features only. The
+decision itself was B246's `choose-card-name` (resolving) and
+`chooseCardNameOnEnter`: Cabal Therapy and Predict were already expressible
+and are only proved (the scaffolder now reads both, and a sacrifice-only
+"Flashback—Sacrifice …" line). New: the static **`revealsDraws:
+"chosen-player"`** ("the chosen player reveals each card they draw", rule
+701.20a), and a `draws` trigger's `filter` reading the permanent, so
+`{ chosenName: true }` is "a card with the chosen name"; the scaffolder reads
+Booby Trap whole (its "choose an opponent and a card name", the reveal, the
+trigger, "sacrifice ~. If you do, ~ deals N damage to that player"). Keys:
+decision:name-a-card, trigger:chosen-player-draws-named-card. The cards the
+key held each need something else as well (Liar's Pendulum's guess, Spy Kit's
+every name, Conundrum and Petra Sphinx's per-player reveal-and-sort, The
+Clone Saga's chosen-name delayed trigger, Demonic Consultation's and Spoils of
+the Vault's reveal-until a name): `author-freed` narrows them. Proving cards:
+Booby Trap, Cabal Therapy, Predict.
+
 ### One choice across zones, or one card a slot — built 2026-10-31
 
 The need-keys Phase 2 family `decision:choose-from-zone-extensions`, features

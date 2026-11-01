@@ -2457,6 +2457,13 @@ export interface StaticAbility {
    * `whileCondition` asks that it's your turn and what the card is. Read off
    * the battlefield like `keepsUnspentMana`. */
   readonly revealsFirstDrawEachTurn?: boolean;
+  /** "**The chosen player** reveals each card they draw" (Booby Trap — rule
+   * 701.20a): every card the player this permanent chose as it entered
+   * (`choosePlayerOnEnter`, `GameObject.chosenPlayer`) draws is shown to
+   * every player as it's drawn, so a `draws` trigger on what it is ("when
+   * the chosen player draws a card with the chosen name") reads a public
+   * card. Read off the battlefield, whoever controls it. */
+  readonly revealsDraws?: "chosen-player";
   /** "**You** have hexproof" (rule 702.11d — Shalai, Voice of Plenty): this
    * permanent's controller can't be the target of spells or abilities their
    * opponents control. Like `noMaxHandSize`, a property of the player, read

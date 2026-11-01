@@ -23623,9 +23623,11 @@ export class Game {
           this.matchesWhoPlayer(spec.who, event.player, self) &&
           (spec.nthEachTurn === undefined || event.nthThisTurn === spec.nthEachTurn) &&
           (spec.exceptFirstInDrawStep !== true || event.firstInDrawStep !== true) &&
+          // The source too, for "a card with **the chosen name**" (Booby
+          // Trap: `chosenName` reads this permanent's).
           (spec.filter === undefined ||
             (this.state.objects[event.object] !== undefined &&
-              matchesFilter(this.state, this.registry, event.object, spec.filter, { you: self.controller })))
+              matchesFilter(this.state, this.registry, event.object, spec.filter, { you: self.controller, source: self.id })))
         );
       case "plays-land":
         return (
@@ -42593,7 +42595,11 @@ export class Game {
       ...(firstInDrawStep ? { firstInDrawStep: true } : {}),
     });
     // Keranos's "reveal the first card you draw on each of your turns".
-    if (seat.cardsDrawnThisTurn === 1 && player === this.activePlayer && this.revealsFirstDraw(player)) {
+    // Booby Trap's "the chosen player reveals each card they draw".
+    if (
+      (seat.cardsDrawnThisTurn === 1 && player === this.activePlayer && this.revealsFirstDraw(player)) ||
+      this.revealsEachDraw(player)
+    ) {
       this.revealCards(player, [id], "hand");
     }
     if (seat.cardsDrawnThisTurn === 1) this.queueMiracle(player, id);
@@ -42626,6 +42632,19 @@ export class Game {
       if (source === undefined || source.controller !== player || hasLostAbilities(this.state, this.registry,source)) continue;
       for (const ability of this.registry.get(rulesTextName(source)).static) {
         if (ability.revealsFirstDrawEachTurn === true && this.staticActive(source, ability)) return true;
+      }
+    }
+    return false;
+  }
+
+  /** Whether a permanent — anyone's — has `player` as its chosen player and
+   * makes them reveal each card they draw (`revealsDraws` — Booby Trap). */
+  private revealsEachDraw(player: PlayerId): boolean {
+    for (const id of this.state.zones.shared.battlefield) {
+      const source = this.state.objects[id];
+      if (source?.chosenPlayer !== player || hasLostAbilities(this.state, this.registry, source)) continue;
+      for (const ability of this.registry.get(rulesTextName(source)).static) {
+        if (ability.revealsDraws === "chosen-player" && this.staticActive(source, ability)) return true;
       }
     }
     return false;
