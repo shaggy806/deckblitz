@@ -344,14 +344,18 @@ section keeps only what to do next.
   manual checks — Selective Adaptation on the stale list is still open: one card for two keywords?),
   and relations among the chosen targets with what's attached to a target or a player (`shares`,
   `equalToughness`, `differentNames`, `attachedToTarget`/`attachedToPlayer`/`attachedToThan`; 20
-  freed, 9 proving cards). **964 freed cards wait for the authoring sweep** (`cards:needs -- --stale`); the user
+  freed, 9 proving cards), and a graveyard card put there this turn by its origin with a discard's
+  cause (`putIntoGraveyardOn`, `putIntoGraveyardThisTurn`, `cards-discarded`'s `cause`,
+  `this-discarded`, `firstTimeEachTurn`; 14 freed, 13 proving cards — Ravenous Trap on the stale
+  list is wrong in multiplayer: `turn-history`'s `who: "opponent"` sums the opponents, where it
+  needs one opponent's three). **978 freed cards wait for the authoring sweep** (`cards:needs -- --stale`); the user
   authors them in one sweep once the reasonable keys are built. Cloud sessions are building
   `keyword:hexproof-from-colors`, the combat-restriction second group,
   `effect:prevent-next-n-damage-to-you`, the cascade/sunburst grants to spells,
   `cost:kicker-nonmana-cost` and `cost:alt-cost-discard-cards`. Local agents are building
-  `condition:filter-this-turn-history` with `trigger:discards-extensions`, and
-  `effect:text-change-color-or-land-words` with `effect:add-subtype`. Next unclaimed:
-  `static:grant-to-cards-outside-battlefield` (11), `static:pt-per-amount` (10),
+  `effect:text-change-color-or-land-words` with `effect:add-subtype`, and
+  `effect:cast-and-activate-restrictions` with `condition:ability-activated-count-this-turn`.
+  Next unclaimed: `static:grant-to-cards-outside-battlefield` (11), `static:pt-per-amount` (10),
   `static:untap-step-limit` (10), `cost:target-controller-graveyard-reduction` (10).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13

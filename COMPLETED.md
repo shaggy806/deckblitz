@@ -86,6 +86,21 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2: a graveyard card put there this turn, by where it came from** (2026-10-31,
+  `ed1d5f9ef`; `filter:put-into-graveyard-from-battlefield-this-turn`,
+  `condition:land-put-into-graveyard-from-battlefield-this-turn`,
+  `condition:put-into-graveyard-this-turn-any-zone`) — `GameObject.putIntoGraveyardOn` (turn and
+  origin zone, on every move into a graveyard, replacing the library-only marker) and
+  `CardFilter.putIntoGraveyardThisTurn { from? }`; the Lady of Otaria's condition was already
+  `turn-history`; 8 freed. Grim Return, Wreck Hunter, Thrilling Encore, Night Nurse, Healer of
+  Heroes, The Lady of Otaria.
+- **Need-keys Phase 2: a discard's cause, and "when you discard this card"** (2026-10-31,
+  `20fbf25cd`; `trigger:discard-this-card`, `trigger:discards-extensions` (partly — Toluz's linked
+  exile left), `trigger:discards-first-time-each-turn`) — `cards-discarded`'s `cause` (from
+  `DecisionSource.controller`, kept on queued and held discards, stripped from the seat view), the
+  `this-discarded { byOpponent? }` trigger from the card's new zone (113.6k), `discards`'
+  `firstTimeEachTurn`; 6 freed. Psychic Purge, Guerrilla Tactics, Metrognome, Bartered Cow,
+  Titanbones, Towering Heart, Rielle, the Everwise.
 - **Need-keys Phase 2: relations among the chosen targets** (2026-10-31, `b43bb96da`;
   `effect:targets-share-type`, `effect:targets-equal-toughness`,
   `effect:targets-with-different-names`) — an `other` slot's `shares` (a card type, a creature
