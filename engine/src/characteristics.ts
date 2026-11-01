@@ -46,6 +46,7 @@ import {
   aggregateOver,
   aggregateValueOf,
   compareNum,
+  manaValueOfObject,
   matchesFilter,
   printedManaCost,
   weightedMatches,
@@ -205,12 +206,13 @@ function othersInOwnStack(
   registry: CardRegistry,
   source: GameObject,
   filter: CardFilter,
+  you: PlayerId = source.controller,
 ): number {
   const others = (source.stackCount ?? 1) - 1;
   if (others <= 0 || ownStackInProgress.has(source.id)) return 0;
   ownStackInProgress.add(source.id);
   try {
-    return matchesFilter(state, registry, source.id, filter, { you: source.controller }) ? others : 0;
+    return matchesFilter(state, registry, source.id, filter, { you }) ? others : 0;
   } finally {
     ownStackInProgress.delete(source.id);
   }
@@ -3196,6 +3198,27 @@ function countSide(state: GameState, object: GameObject, forChosenPlayer: true |
   return chosen !== undefined && state.players[chosen]?.hasLost !== true ? chosen : undefined;
 }
 
+/** The creature types `object` has, the every-type marker among them for a
+ * changeling (rule 702.73a): what a filter's `subtypes` takes as "shares a
+ * creature type with it" (`hasSubtype`). */
+function creatureTypesOf(state: GameState, registry: CardRegistry, object: GameObject): readonly string[] {
+  return effectiveSubtypes(state, registry, object).filter((s) => subtypeKind(s) === "creature");
+}
+
+/** What `grantPtPerCount.ofAffected` reads of the affected permanent: nothing
+ * from layer 7, so the fold doesn't recurse. */
+function affectedCharacteristicCount(
+  state: GameState,
+  registry: CardRegistry,
+  object: GameObject,
+  what: "mana-value" | "colors" | "creature-types",
+): number {
+  if (what === "mana-value") return manaValueOfObject(registry, object);
+  if (what === "colors") return effectiveColors(state, registry, object).size;
+  const creatureTypes = creatureTypesOf(state, registry, object);
+  return creatureTypes.includes(EVERY_CREATURE_TYPE) ? CREATURE_TYPES.length : creatureTypes.length;
+}
+
 /** The hand size a count-scaled bonus reads (`grantPtPerCount.cardsInHand`):
  * the counting player's own (`true`), their opponents' together, or the
  * affected creature's controller's. A player who has left the game has no
@@ -4139,7 +4162,10 @@ function collectStaticEffects(
     let scaledPower = 0;
     let scaledToughness = 0;
     // Whose side "you" is: the source's controller, or its chosen player.
-    const side = countSide(state, source, ability.grantPtPerCount?.forChosenPlayer) ?? source.controller;
+    const side =
+      ability.grantPtPerCount?.fromAffectedController === true
+        ? target.controller
+        : (countSide(state, source, ability.grantPtPerCount?.forChosenPlayer) ?? source.controller);
     const nobody = ability.grantPtPerCount?.forChosenPlayer === true && countSide(state, source, true) === undefined;
     // Cards in exile, which is one shared zone: "cards your opponents own
     // in exile" is `ownedBy`, read from the source's controller's side.
@@ -4162,25 +4188,44 @@ function collectStaticEffects(
     };
     if (ability.grantPtPerCount !== undefined) {
       const per = ability.grantPtPerCount;
-      const filter = per.filter;
-      // The permanents on the battlefield matching `f` — see `countInProgress`.
+      // Whose "it" and "other" the filter means: this permanent's, or each
+      // affected one's (`relativeToAffected`).
+      const countedFrom = per.relativeToAffected === true ? target : source;
+      const filter =
+        per.filter !== undefined && per.sharesCreatureTypeWithAffected === true
+          ? { ...per.filter, subtypes: creatureTypesOf(state, registry, target) }
+          : per.filter;
+      // The permanents on the battlefield matching `f`, the guard held by the
+      // caller — see `countInProgress`.
+      const matchingIds = (f: CardFilter): readonly ObjectId[] =>
+        // Skipping the source before `matchesFilter` is what keeps Skycat
+        // Sovereign ("each *other* creature with flying") from folding its
+        // own characteristics to answer its own bonus.
+        state.zones.shared.battlefield.filter(
+          (id) =>
+            !(per.excludeSelf === true && id === countedFrom.id) &&
+            matchesFilter(state, registry, id, f, { you: side, source: countedFrom.id }),
+        );
       const battlefieldMatching = (f: CardFilter): number => {
         if (countInProgress.has(source.id)) return 0;
         countInProgress.add(source.id);
         try {
-          // Skipping the source before `matchesFilter` is what keeps Skycat
-          // Sovereign ("each *other* creature with flying") from folding its
-          // own characteristics to answer its own bonus.
           return (
-            permanentCount(
-              state,
-              state.zones.shared.battlefield.filter(
-                (id) =>
-                  !(per.excludeSelf === true && id === source.id) &&
-                  matchesFilter(state, registry, id, f, { you: side, source: source.id }),
-              ),
-            ) + (per.excludeSelf === true ? othersInOwnStack(state, registry, source, f) : 0)
+            permanentCount(state, matchingIds(f)) +
+            (per.excludeSelf === true ? othersInOwnStack(state, registry, countedFrom, f, side) : 0)
           );
+        } finally {
+          countInProgress.delete(source.id);
+        }
+      };
+      const countersAmong = (among: NonNullable<typeof per.countersAmong>): number => {
+        if (countInProgress.has(source.id)) return 0;
+        countInProgress.add(source.id);
+        try {
+          return matchingIds(among.filter).reduce((total, id) => {
+            const object = state.objects[id];
+            return total + (object.counters[among.counter] ?? 0) * (object.stackCount ?? 1);
+          }, 0);
         } finally {
           countInProgress.delete(source.id);
         }
@@ -4207,9 +4252,21 @@ function collectStaticEffects(
           countInProgress.delete(source.id);
         }
       };
-      const n = nobody
+      const counted = nobody
         ? 0
-        : per.aggregate !== undefined
+        : per.ofAffected !== undefined
+          ? affectedCharacteristicCount(state, registry, target, per.ofAffected)
+          : per.countersAmong !== undefined
+          ? countersAmong(per.countersAmong)
+          : per.anyCountersOnSource === true
+          ? Object.values(source.counters).reduce((total, count) => total + (count ?? 0), 0)
+          : per.turnStat !== undefined
+          ? turnStatOf(state, side, per.turnStat)
+          : per.basicLandTypes === true
+          ? basicLandTypesAmong(state, registry, side)
+          : per.opponents === true
+          ? state.turnOrder.filter((p) => p !== side && state.players[p]?.hasLost !== true).length
+          : per.aggregate !== undefined
           ? aggregateMatching(per.aggregate)
           : per.cardsInHand !== undefined
           ? cardsInHandFor(state, per.cardsInHand, side, target)
@@ -4221,7 +4278,12 @@ function collectStaticEffects(
               0,
             )
           : per.playerCounters !== undefined
-            ? (state.players[side]?.counters[per.playerCounters] ?? 0)
+            ? per.playerCountersOf === "opponents"
+              ? state.turnOrder.reduce(
+                  (total, p) => (p === side ? total : total + (state.players[p]?.counters[per.playerCounters!] ?? 0)),
+                  0,
+                )
+              : (state.players[side]?.counters[per.playerCounters] ?? 0)
             : per.speed === true
             ? speedOf(state, side)
             : per.partySize === true
@@ -4247,6 +4309,8 @@ function collectStaticEffects(
             : filter === undefined
             ? 0
             : battlefieldMatching(filter);
+      const stepped = per.step !== undefined ? Math.floor(counted / per.step) : counted;
+      const n = per.max !== undefined ? Math.min(stepped, per.max) : stepped;
       scaledPower = n * per.pt[0];
       scaledToughness = n * per.pt[1];
     }

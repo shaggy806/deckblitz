@@ -356,6 +356,34 @@ is now priced at each X's own targets. The scaffolder reads each line. Keys:
 cost:target-controller-graveyard-reduction, cost:targeted-by-spells-mana-tax.
 Proving cards: Boreal Elemental, Jubilant Skybonder, Kopala, Lullmage's
 Domination.
+### A P/T bonus by each affected creature's own count, and other amounts — built 2026-11-01
+
+The need-keys Phase 2 family `static:pt-per-amount`, features only. On
+`grantPtPerCount`: `relativeToAffected` asks `filter` of each affected permanent
+(`attachedTo: { isSource: true }` is "attached to it", `excludeSelf` "other than
+it"), `sharesCreatureTypeWithAffected` narrows the filter to its creature types,
+and `ofAffected` is its mana value, colors or creature types. Then `countersAmong`,
+`playerCountersOf: "opponents"`, `anyCountersOnSource`, `turnStat`, `basicLandTypes`
+(Kavu Scout, Wayfaring Giant, Strength of Unity and Exotic Curse moved to it from
+five statics each), `opponents`, `fromAffectedController`, `step` and `max`. The
+greatest mana value among a set was already `aggregate`. The scaffolder reads the
+lines. Keys: static:count-attached-to-affected,
+static:pt-per-count-excluding-affected, static:shares-creature-type-count,
+static:grant-pt-equal-attached-mana-value, static:grant-pt-per-own-colors,
+static:pt-per-affected-creature-types, static:pt-per-counters-among-permanents,
+static:pt-per-opponents-player-counters, static:pt-per-turn-stat,
+static:grant-pt-per-any-counter-on-source, static:grant-pt-per-domain,
+static:pt-bonus-greatest-mana-value,
+static:pt-per-count-affected-controller-graveyard, static:pt-per-count-step,
+static:pt-per-opponent. Proving cards: Thran Power Suit, Auramancer's Guise,
+Champion of the Flame, Sliver Legion, Coat of Arms, Alpha Status, Hedron Matrix,
+Civic Saber, Knight of New Alara, Mycosynth Fiend, Gleam of Authority, Knowledge Is
+Power, Kyler, Manaforce Mace, Dark Matter Manipulator, Disturbing Conversion. Left:
+mechanic:hone-counters, static:pt-per-turn-history (Kinbinding),
+static:anthem-per-counter-on-source (Banner of Kinship's enters-with count),
+static:per-keyword-pump, static:pt-per-attachments-on-source,
+static:pt-per-defending-player-count.
+
 ### Keyword abilities and types for cards outside the battlefield — built 2026-11-01
 
 The need-keys Phase 2 family `static:grant-to-cards-outside-battlefield`,

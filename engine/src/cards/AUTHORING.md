@@ -3923,6 +3923,18 @@ for its own tax, and a creature that must attack isn't obliged to pay it (508.1d
 their declarations to it (`withinAttackTax`), and the client shows the running cost.
 
 - `grantPt: [p, t]` — layer 7d P/T bonus.
+- `grantPtPerCount`, each affected permanent by its own: `relativeToAffected`
+  asks `filter` of it, so `attachedTo: { isSource: true }` is "attached to it"
+  (Thran Power Suit) and `excludeSelf` is "other than it" (Sliver Legion);
+  `sharesCreatureTypeWithAffected` is "that shares a creature type with it"
+  (Coat of Arms); `ofAffected: "mana-value" | "colors" | "creature-types"` is what
+  it has (Hedron Matrix, Civic Saber); `countersOnAffected`, below. Other amounts:
+  `countersAmong: { counter, filter }` (Gleam of Authority), `playerCounters` with
+  `playerCountersOf: "opponents"` (Mycosynth Fiend), `anyCountersOnSource` (Kyler),
+  `turnStat` (Knowledge Is Power), `basicLandTypes` (domain — Manaforce Mace),
+  `opponents`; `fromAffectedController` counts from the affected permanent's
+  controller's side (Disturbing Conversion); `step` divides the count, rounded
+  down (Dark Matter Manipulator's "for every seven"), and `max` caps it.
 - `grantPtPerCount: { filter?, commanderCasts?, playerCounters?, countersOnAffected?, countersOnSource?, exiled?, inGraveyard?, colorsAmong?, commanderManaValue?, cardsInHand?, lifeTotal?, pt, excludeSelf? }` — a layer 7d bonus that
   *scales* with a live count (Skycat Sovereign's "+1/+1 for each **other**
   creature you control with flying"). Distinct from `setBasePtFromCount`,

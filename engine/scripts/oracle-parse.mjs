@@ -7920,6 +7920,113 @@ function outsideBattlefieldStaticOf(line, text) {
   return null;
 }
 
+/**
+ * A P/T bonus scaled by what the affected permanent itself has or by an amount
+ * read off the board or the turn (`grantPtPerCount`'s `relativeToAffected`,
+ * `sharesCreatureTypeWithAffected`, `ofAffected`, `playerCountersOf`,
+ * `anyCountersOnSource`, `turnStat`, `basicLandTypes`, `step`,
+ * `fromAffectedController`). `null` for any other line.
+ */
+function perAmountStaticOf(line, text) {
+  let m;
+  const subjectOf = (subject) =>
+    subject === "~"
+      ? { scope: "self" }
+      : subject === "Equipped creature" || subject === "Enchanted creature"
+        ? { scope: "attached" }
+        : subject === "Creatures you control"
+          ? { scope: "creatures-you-control" }
+          : subject === "Each creature"
+            ? { scope: "all-creatures" }
+            : null;
+  const P = "(~|Equipped creature|Enchanted creature|Creatures you control|Each creature) gets? ";
+  const pair = (a, b) => [Number(a), Number(b)];
+  // "… for each Aura and Equipment attached to it": on the subject itself, or
+  // on the permanent an Aura or Equipment is attached to.
+  if ((m = new RegExp(`^${P}([+-]\\d+)/([+-]\\d+) for each (Aura and Equipment|Aura|Equipment) attached to (?:it|~)\\.$`).exec(line))) {
+    const kinds = m[4] === "Aura and Equipment" ? { subtypes: ["Aura", "Equipment"] } : { subtype: m[4] };
+    return {
+      affects: subjectOf(m[1]),
+      grantPtPerCount: {
+        filter: { ...kinds, attachedTo: { isSource: true } },
+        ...(m[1] === "~" ? {} : { relativeToAffected: true }),
+        pt: pair(m[2], m[3]),
+      },
+      text,
+    };
+  }
+  if ((m = new RegExp(`^${P}([+-]\\d+)/([+-]\\d+) for each other creature on the battlefield that shares (?:at least one|a) creature type with it\\.$`).exec(line))) {
+    return {
+      affects: subjectOf(m[1]),
+      grantPtPerCount: {
+        filter: { type: "creature" },
+        sharesCreatureTypeWithAffected: true,
+        relativeToAffected: true,
+        excludeSelf: true,
+        pt: pair(m[2], m[3]),
+      },
+      text,
+    };
+  }
+  if ((m = /^All (\w+) creatures get ([+-]\d+)\/([+-]\d+) for each other \1 on the battlefield\.$/.exec(line))) {
+    return {
+      affects: { scope: "filter", filter: { type: "creature", subtype: m[1] } },
+      grantPtPerCount: { filter: { subtype: m[1] }, relativeToAffected: true, excludeSelf: true, pt: pair(m[2], m[3]) },
+      text,
+    };
+  }
+  if ((m = new RegExp(`^${P}\\+X/\\+(X|0), where X is its mana value\\.$`).exec(line))) {
+    return { affects: subjectOf(m[1]), grantPtPerCount: { ofAffected: "mana-value", pt: [1, m[2] === "X" ? 1 : 0] }, text };
+  }
+  if ((m = new RegExp(`^${P}([+-]\\d+)/([+-]\\d+) for each of its colors\\.$`).exec(line))) {
+    return { affects: subjectOf(m[1]), grantPtPerCount: { ofAffected: "colors", pt: pair(m[2], m[3]) }, text };
+  }
+  if ((m = /^Each other multicolored creature you control gets ([+-]\d+)\/([+-]\d+) for each of its colors\.$/.exec(line))) {
+    return {
+      affects: { scope: "filter", filter: { type: "creature", controlledBy: "you", multicolored: true }, excludeSelf: true },
+      grantPtPerCount: { ofAffected: "colors", pt: pair(m[1], m[2]) },
+      text,
+    };
+  }
+  if ((m = new RegExp(`^${P}([+-]\\d+)/([+-]\\d+) for each (\\w+) counter your opponents have\\.$`).exec(line))) {
+    return {
+      affects: subjectOf(m[1]),
+      grantPtPerCount: { playerCounters: m[4], playerCountersOf: "opponents", pt: pair(m[2], m[3]) },
+      text,
+    };
+  }
+  if ((m = /^Other ([A-Z][a-z]+)s you control get ([+-]\d+)\/([+-]\d+) for each counter on ~\.$/.exec(line))) {
+    return {
+      affects: { scope: "creatures-you-control", subtype: m[1], excludeSelf: true },
+      grantPtPerCount: { anyCountersOnSource: true, pt: pair(m[2], m[3]) },
+      text,
+    };
+  }
+  if ((m = new RegExp(`^${P}\\+X/\\+(X|0), where X is the number of cards you've drawn this turn\\.$`).exec(line))) {
+    return { affects: subjectOf(m[1]), grantPtPerCount: { turnStat: "cards-drawn", pt: [1, m[2] === "X" ? 1 : 0] }, text };
+  }
+  if ((m = new RegExp(`^${P}([+-]\\d+)/([+-]\\d+) for each basic land type among lands you control\\.$`).exec(line))) {
+    return { affects: subjectOf(m[1]), grantPtPerCount: { basicLandTypes: true, pt: pair(m[2], m[3]) }, text };
+  }
+  if ((m = new RegExp(`^${P}([+-]\\d+)/([+-]\\d+) for every (\\w+) cards in your graveyard\\.$`).exec(line))) {
+    const step = numberOf(m[4]);
+    if (typeof step !== "number") return null;
+    return {
+      affects: subjectOf(m[1]),
+      grantPtPerCount: { inGraveyard: { ownedBy: "you" }, step, pt: pair(m[2], m[3]) },
+      text,
+    };
+  }
+  if ((m = new RegExp(`^${P}-X/-(X|0), where X is the number of cards in its controller's graveyard\\.$`).exec(line))) {
+    return {
+      affects: subjectOf(m[1]),
+      grantPtPerCount: { inGraveyard: { ownedBy: "you" }, fromAffectedController: true, pt: [-1, m[2] === "X" ? -1 : 0] },
+      text,
+    };
+  }
+  return null;
+}
+
 function parseStatic(line, text) {
   let m;
   // A cost keyed to a spell's target (`targetedBySpellsCost`, rule 601.2f):
@@ -7962,6 +8069,8 @@ function parseStatic(line, text) {
   }
   const outside = outsideBattlefieldStaticOf(line, text);
   if (outside !== null) return outside;
+  const perAmount = perAmountStaticOf(line, text);
+  if (perAmount !== null) return perAmount;
   // "… as long as [condition]." on a static the rest reads whole and that
   // has no condition of its own: celebration's "~ gets +1/+1 and has
   // trample as long as two or more nonland permanents entered the

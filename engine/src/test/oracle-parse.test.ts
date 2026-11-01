@@ -6428,3 +6428,68 @@ describe("cards outside the battlefield", () => {
     expect(devourer.triggered[0].trigger).toEqual({ on: "foretells", who: "you" });
   });
 });
+
+describe("P/T bonuses per amount", () => {
+  const per = (type_line: string, oracle_text: string) => {
+    const card = parseFace({ name: "Test Per", type_line, oracle_text }, { tokenFor: () => null });
+    expect(card.complete).toBe(true);
+    return card.static[0];
+  };
+  const AURA = "Enchantment — Aura";
+
+  it("reads a bonus relative to the affected permanent", () => {
+    const attached = per(AURA, "Enchant creature\nEnchanted creature gets +2/+2 for each Aura attached to it.");
+    expect(attached.affects).toEqual({ scope: "attached" });
+    expect(attached.grantPtPerCount).toEqual({
+      filter: { subtype: "Aura", attachedTo: { isSource: true } },
+      relativeToAffected: true,
+      pt: [2, 2],
+    });
+    expect(per("Creature — Human", "This creature gets +2/+2 for each Aura and Equipment attached to it.").grantPtPerCount).toEqual({
+      filter: { subtypes: ["Aura", "Equipment"], attachedTo: { isSource: true } },
+      pt: [2, 2],
+    });
+    const coat = per(
+      "Artifact",
+      "Each creature gets +1/+1 for each other creature on the battlefield that shares at least one creature type with it.",
+    );
+    expect(coat.affects).toEqual({ scope: "all-creatures" });
+    expect(coat.grantPtPerCount?.sharesCreatureTypeWithAffected).toBe(true);
+    expect(per("Creature — Sliver", "All Sliver creatures get +1/+1 for each other Sliver on the battlefield.").grantPtPerCount).toEqual({
+      filter: { subtype: "Sliver" },
+      relativeToAffected: true,
+      excludeSelf: true,
+      pt: [1, 1],
+    });
+    expect(per("Artifact — Equipment", "Equipped creature gets +X/+X, where X is its mana value.").grantPtPerCount).toEqual({
+      ofAffected: "mana-value",
+      pt: [1, 1],
+    });
+    expect(per("Artifact — Equipment", "Equipped creature gets +1/+0 for each of its colors.").grantPtPerCount).toEqual({
+      ofAffected: "colors",
+      pt: [1, 0],
+    });
+  });
+
+  it("reads the other amounts", () => {
+    expect(per("Creature — Horror", "This creature gets +1/+1 for each poison counter your opponents have.").grantPtPerCount).toEqual({
+      playerCounters: "poison",
+      playerCountersOf: "opponents",
+      pt: [1, 1],
+    });
+    expect(
+      per("Enchantment", "Creatures you control get +X/+X, where X is the number of cards you've drawn this turn.").grantPtPerCount,
+    ).toEqual({ turnStat: "cards-drawn", pt: [1, 1] });
+    expect(
+      per("Artifact — Equipment", "Equipped creature gets +1/+1 for each basic land type among lands you control.").grantPtPerCount,
+    ).toEqual({ basicLandTypes: true, pt: [1, 1] });
+    expect(per("Creature — Human", "This creature gets +2/+0 for every seven cards in your graveyard.").grantPtPerCount).toEqual({
+      inGraveyard: { ownedBy: "you" },
+      step: 7,
+      pt: [2, 0],
+    });
+    expect(
+      per(AURA, "Enchant creature\nEnchanted creature gets -X/-0, where X is the number of cards in its controller's graveyard.").grantPtPerCount,
+    ).toEqual({ inGraveyard: { ownedBy: "you" }, fromAffectedController: true, pt: [-1, 0] });
+  });
+});

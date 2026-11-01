@@ -893,7 +893,22 @@
   "static:static-types-outside-battlefield",
   "static:grant-cycling-to-cards-in-hand",
   "static:grant-foretell",
-  "static:retrace-grant"
+  "static:retrace-grant",
+  "static:count-attached-to-affected",
+  "static:pt-per-count-excluding-affected",
+  "static:shares-creature-type-count",
+  "static:grant-pt-equal-attached-mana-value",
+  "static:grant-pt-per-own-colors",
+  "static:pt-per-affected-creature-types",
+  "static:pt-per-counters-among-permanents",
+  "static:pt-per-opponents-player-counters",
+  "static:pt-per-turn-stat",
+  "static:grant-pt-per-any-counter-on-source",
+  "static:grant-pt-per-domain",
+  "static:pt-bonus-greatest-mana-value",
+  "static:pt-per-count-affected-controller-graveyard",
+  "static:pt-per-count-step",
+  "static:pt-per-opponent"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

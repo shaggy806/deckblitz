@@ -1808,6 +1808,55 @@ export interface StaticAbility {
      * controller's (`GameObject.chosenPlayer`): every "you" in the count is
      * them. No bonus with nobody chosen or once they've left the game. */
     readonly forChosenPlayer?: true;
+    /**
+     * `filter` asked of **each affected permanent** rather than of this one,
+     * each by its own count: `attachedTo: { isSource: true }` is then "attached
+     * to it" — Thran Power Suit's "equipped creature gets +1/+1 for each Aura
+     * and Equipment attached to it" — and `excludeSelf` is "other than it" —
+     * Sliver Legion's "all Sliver creatures get +1/+1 for each other Sliver on
+     * the battlefield".
+     */
+    readonly relativeToAffected?: true;
+    /** With `filter`, only those that share a creature type with the affected
+     * permanent (rule 205.3m's list, changelings all of it) — Coat of Arms'
+     * "each creature gets +1/+1 for each other creature on the battlefield
+     * that shares at least one creature type with it". */
+    readonly sharesCreatureTypeWithAffected?: true;
+    /** Something the affected permanent itself has, each by its own: its mana
+     * value (Hedron Matrix's "+X/+X, where X is its mana value"), its colors
+     * (Civic Saber's "+1/+0 for each of its colors"), or its creature types
+     * (Diligent Zookeeper's, with `max`). Those are read from layers 4 and 5
+     * and no layer-7 value, so the fold doesn't recurse. */
+    readonly ofAffected?: "mana-value" | "colors" | "creature-types";
+    /** Counters of a kind among the permanents matching `filter` — Gleam of
+     * Authority's "+1/+1 for each +1/+1 counter on other creatures you control"
+     * (with `relativeToAffected` and `excludeSelf`). */
+    readonly countersAmong?: { readonly counter: string; readonly filter: CardFilter };
+    /** With `playerCounters`: the counters this permanent's controller's
+     * opponents have, together — Vishgraz, the Doomhive's "+1/+1 for each
+     * poison counter your opponents have". */
+    readonly playerCountersOf?: "opponents";
+    /** Every counter on this permanent, of any kind — Kyler, Sigardian
+     * Emissary's "other Humans you control get +1/+1 for each counter on
+     * Kyler". */
+    readonly anyCountersOnSource?: true;
+    /** That player's running total for a turn stat — Knowledge Is Power's "+X/+X,
+     * where X is the number of cards you've drawn this turn". */
+    readonly turnStat?: TurnStat;
+    /** Domain: the basic land types among lands that player controls — Manaforce
+     * Mace's "+1/+1 for each basic land type among lands you control". */
+    readonly basicLandTypes?: true;
+    /** The opponents that player has still in the game. */
+    readonly opponents?: true;
+    /** Count from **the affected permanent's controller's** side: every "you"
+     * in the count is them — Disturbing Conversion's "-X/-0, where X is the
+     * number of cards in its controller's graveyard". */
+    readonly fromAffectedController?: true;
+    /** "For every seven cards": the count divided by this, rounded down (Dark
+     * Matter Manipulator). */
+    readonly step?: number;
+    /** "To a maximum of 10": the count capped at this. */
+    readonly max?: number;
     readonly pt: readonly [number, number];
     readonly excludeSelf?: boolean;
   };
