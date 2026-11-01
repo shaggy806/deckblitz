@@ -1118,6 +1118,24 @@ function sameGrantRef(a: GrantedAbilityRef | undefined, b: GrantedAbilityRef | u
   );
 }
 
+/** A granted ability's identity as a string — which static's which ability,
+ * not which permanent granted it (`granter`), so two Equipment of one name
+ * granting the same trigger stay copies of one ability, as before the
+ * granter was recorded. */
+function grantKey(ref: GrantedAbilityRef | undefined): string {
+  if (ref?.kind !== "static" || ref.granter === undefined) return JSON.stringify(ref ?? null);
+  const { granter: _granter, granterStint: _stint, ...rest } = ref;
+  return JSON.stringify(rest);
+}
+
+/** The permanent a static-granted ability's ref names as its granter, with
+ * its stint — what `LastKnownRefs.granter` keeps. */
+function granterOfRef(ref: GrantedAbilityRef | undefined): LastKnownRefs["granter"] {
+  return ref?.kind === "static" && ref.granter !== undefined
+    ? { object: ref.granter, zoneChangeCount: ref.granterStint ?? 0 }
+    : undefined;
+}
+
 function withoutTriggerPlayer(trigger: PendingTrigger): PendingTrigger {
   const refs = trigger.lastKnownRefs;
   if (refs?.player === undefined) return trigger;
@@ -2241,6 +2259,7 @@ export class Game {
         if (
           sacrifice !== undefined &&
           sacrifice !== "self" &&
+          sacrifice !== "granter" &&
           sacrificeCostParts(sacrifice, action.xValue ?? 0) === null &&
           (action.sacrifice === undefined ||
             !this.sacrificeCandidates(action.player, action.source, ability).includes(action.sacrifice))
@@ -2998,6 +3017,7 @@ export class Game {
           // as it's paid, with a `sacrifice` decision — nothing to offer here.
           ...(ability.cost.sacrifice !== undefined &&
           ability.cost.sacrifice !== "self" &&
+          ability.cost.sacrifice !== "granter" &&
           sacrificeCostParts(ability.cost.sacrifice, 0) === null
             ? { sacrifice: { choices: this.sacrificeCandidates(player, source, ability) } }
             : {}),
@@ -16299,7 +16319,7 @@ export class Game {
       return;
     }
     const instances = (t: PendingTrigger): number => t.multiplier ?? t.copies ?? 1;
-    const keyOf = (t: PendingTrigger): string => `${t.abilityIndex}|${JSON.stringify(t.grantedAbility ?? null)}`;
+    const keyOf = (t: PendingTrigger): string => `${t.abilityIndex}|${grantKey(t.grantedAbility)}`;
     const totals = new Map<string, number>();
     for (const t of this.state.pendingTriggers) {
       if (fromCast(t)) totals.set(keyOf(t), (totals.get(keyOf(t)) ?? 0) + instances(t));
@@ -16383,12 +16403,21 @@ export class Game {
       readonly cost: { readonly sacrifice?: SacrificeCost };
       readonly otherOnly?: boolean;
     },
+    /** The ability's granter, for a `"granter"` cost (see `granterNow`). */
+    granter?: ObjectId,
   ): ObjectId[] {
     const sac = ability.cost.sacrifice;
     if (sac === undefined) return [];
     // A cost naming a permanent that can't be sacrificed can't be paid (rule
     // 701.21a), and one letting the player choose never offers it.
     if (sac === "self") return this.canBeSacrificed(sourceId) ? [sourceId] : [];
+    // "Sacrifice Ninja's Kunai": the granting permanent, only while the
+    // activating player controls it (701.21a).
+    if (sac === "granter") {
+      return granter !== undefined && this.state.objects[granter]?.controller === player && this.canBeSacrificed(granter)
+        ? [granter]
+        : [];
+    }
     return this.state.zones.shared.battlefield.filter((id) => {
       const object = this.state.objects[id];
       if (object.controller !== player) return false;
@@ -16723,7 +16752,16 @@ export class Game {
             ability: grantedAbility,
             ref: viaGrant
               ? { kind: "modifier", ability: grantedAbility }
-              : { kind: "static", cardName, staticIndex, list: "triggered", index },
+              : {
+                  kind: "static",
+                  cardName,
+                  staticIndex,
+                  list: "triggered",
+                  index,
+                  // The granting permanent, which the granted text may name (rule 201.5a).
+                  granter: source.id,
+                  granterStint: source.zoneChangeCount ?? 0,
+                },
           })),
         });
       }
@@ -17021,7 +17059,16 @@ export class Game {
         ts: source.timestamp,
         entries: abilities.map((grantedAbility, index) => ({
           ability: grantedAbility,
-          ref: refs?.[index] ?? { kind: "static", cardName, staticIndex, list: "activated", index },
+          ref: refs?.[index] ?? {
+            kind: "static",
+            cardName,
+            staticIndex,
+            list: "activated",
+            index,
+            // The granting permanent, which the granted text may name (rule 201.5a).
+            granter: source.id,
+            granterStint: source.zoneChangeCount ?? 0,
+          },
         })),
       });
     }
@@ -17716,7 +17763,12 @@ export class Game {
       }
     } else if (
       ability.cost.sacrifice !== undefined &&
-      this.sacrificeCandidates(player, sourceId, ability).length === 0
+      this.sacrificeCandidates(
+        player,
+        sourceId,
+        ability,
+        ability.cost.sacrifice === "granter" ? this.granterNow(this.activatedRefFor(sourceId, abilityIndex)) : undefined,
+      ).length === 0
     ) {
       return `${player} has nothing to sacrifice for ${def.name}'s ability`;
     }
@@ -17972,9 +18024,13 @@ export class Game {
       const sacrificeParts = sacrificeCostParts(ability.cost.sacrifice, xValue);
       let sacrificeVictim: ObjectId | null = null;
       if (ability.cost.sacrifice !== undefined && sacrificeParts === null) {
-        const candidates = this.sacrificeCandidates(player, sourceId, ability);
+        const candidates = this.sacrificeCandidates(player, sourceId, ability, this.granterNow(grantedAbility));
         if (ability.cost.sacrifice === "self") {
           sacrificeVictim = sourceId;
+        } else if (ability.cost.sacrifice === "granter") {
+          // Checked payable above (`whyCannotActivateAbility`).
+          if (candidates.length === 0) throw new Error(`${def.name}'s ability can't sacrifice what granted it`);
+          sacrificeVictim = candidates[0];
         } else {
           if (sacrifice === undefined || !candidates.includes(sacrifice)) {
             throw new Error(
@@ -18225,9 +18281,11 @@ export class Game {
       // 605.3b) — handed what the cost sacrificed or tapped, read as it last
       // existed (608.2h): Priest of Yawgmoth's "the sacrificed artifact's
       // mana value".
+      const manaGranter = granterOfRef(grantedAbility);
       const base = this.makeResolutionContext(sourceId, player, [], chosenX, 0, undefined, 1, 0, [], {
         ...(sacrificedRef !== undefined ? { sacrificed: sacrificedRef } : {}),
         ...(tappedRef !== undefined ? { tapped: tappedRef } : {}),
+        ...(manaGranter !== undefined ? { granter: manaGranter } : {}),
       });
       // The colour(s) the activating player picked, one per unit whose type
       // was theirs to pick: an "any color" / "any combination of" ability's
@@ -18364,11 +18422,13 @@ export class Game {
       }
       this.emit({ type: "modes-chosen", source: sourceId, player, modes: [...modes] });
     }
-    if (sourceStint !== undefined || sacrificedRef !== undefined || tappedRef !== undefined) {
+    const granterRef = granterOfRef(grantedAbility);
+    if (sourceStint !== undefined || sacrificedRef !== undefined || tappedRef !== undefined || granterRef !== undefined) {
       this.state.objects[abilityId].lastKnownRefs = {
         ...(sourceStint !== undefined ? { source: sourceStint } : {}),
         ...(sacrificedRef !== undefined ? { sacrificed: sacrificedRef } : {}),
         ...(tappedRef !== undefined ? { tapped: tappedRef } : {}),
+        ...(granterRef !== undefined ? { granter: granterRef } : {}),
       };
     }
     if (ability.zone === "command" || ability.zone === "suspended" || ability.staysInZone === true) {
@@ -18491,6 +18551,18 @@ export class Game {
   /** A discard just asked for as a cost — a spell's or an activated
    * ability's — hands priority, once answered, to `player`: who cast or
    * activated (rule 117.3c), not whoever's turn it is. */
+  /** The permanent a static-granted ability's `ref` names as its granter,
+   * while it's still that permanent on the battlefield (rule 400.7) — what
+   * a `"granter"` sacrifice cost takes. */
+  private granterNow(ref: GrantedAbilityRef | undefined): ObjectId | undefined {
+    const granter = granterOfRef(ref);
+    if (granter === undefined) return undefined;
+    const object = this.state.objects[granter.object];
+    return object?.zone === "battlefield" && (object.zoneChangeCount ?? 0) === granter.zoneChangeCount
+      ? granter.object
+      : undefined;
+  }
+
   private costDiscardPriorityTo(player: PlayerId): void {
     const awaiting = this.state.awaiting;
     if (awaiting?.kind === "discard" && awaiting.fromEffect === true) {
@@ -24547,7 +24619,7 @@ export class Game {
         ? `delayed:${t.delayed.source}:${JSON.stringify(t.delayed.effect ?? null)}`
         : t.reflexive !== undefined
           ? `reflexive:${t.reflexive.text}`
-          : `${t.cardName}:${t.chapter === true ? "chapter" : "ability"}:${t.abilityIndex}:${JSON.stringify(t.grantedAbility ?? null)}`;
+          : `${t.cardName}:${t.chapter === true ? "chapter" : "ability"}:${t.abilityIndex}:${grantKey(t.grantedAbility)}`;
     return new Set(theirs.map(abilityOf)).size > 1;
   }
 
@@ -25187,7 +25259,10 @@ export class Game {
     );
     if (grantedAbility !== undefined) this.state.objects[abilityId].grantedAbility = grantedAbility;
     if (x !== undefined) this.state.objects[abilityId].xValue = x;
-    if (lastKnownRefs !== undefined) this.state.objects[abilityId].lastKnownRefs = lastKnownRefs;
+    // A static-granted trigger names its granter as it triggered (201.5a).
+    const granter = granterOfRef(grantedAbility);
+    const refs = granter === undefined ? lastKnownRefs : { ...lastKnownRefs, granter };
+    if (refs !== undefined) this.state.objects[abilityId].lastKnownRefs = refs;
     if (autoTargetSlots.length > 0) {
       this.state.objects[abilityId].autoTargetSlots = [...autoTargetSlots];
     }
@@ -25366,7 +25441,9 @@ export class Game {
             ? refs.sacrificed.zoneChangeCount
             : refs.tapped?.object === id
               ? refs.tapped.zoneChangeCount
-              : refs.enteredTogether?.find((e) => e.object === id)?.zoneChangeCount;
+              : refs.granter?.object === id
+                ? refs.granter.zoneChangeCount
+                : refs.enteredTogether?.find((e) => e.object === id)?.zoneChangeCount;
     const lastKnownOf = (target: TargetRef): LastKnownInfo | undefined => {
       if (target.kind !== "object") return undefined;
       const stint = stintOf(target.object);
@@ -25457,6 +25534,14 @@ export class Game {
     const damageSource = (
       from: DamageFrom | undefined,
     ): { readonly id: ObjectId; readonly lastKnown: LastKnownInfo | undefined } | undefined => {
+      // The permanent whose static granted this ability, as it last existed
+      // if it has gone — Ninja's Kunai sacrificed for its own cost (608.2h).
+      if (from === "granter") {
+        const granter = refs.granter;
+        return granter === undefined
+          ? undefined
+          : { id: granter.object, lastKnown: this.lastKnownOfStint(granter.object, granter.zoneChangeCount) };
+      }
       if (from !== undefined && from !== "trigger-object") {
         const ref = targets[from.target];
         return ref?.kind === "object" ? { id: ref.object, lastKnown: lastKnownOf(ref) } : undefined;
@@ -25687,6 +25772,16 @@ export class Game {
       ...(opts.announcedModes !== undefined ? { announcedModes: opts.announcedModes } : {}),
       ...(refs.sacrificed !== undefined ? { sacrificed: refs.sacrificed.object } : {}),
       ...(refs.discarded !== undefined ? { discarded: refs.discarded.map((d) => d.object) } : {}),
+      // The granter is acted on only while it's the same permanent (400.7).
+      ...(refs.granter !== undefined
+        ? {
+            granter: refs.granter.object,
+            ...(this.state.objects[refs.granter.object]?.zone !== "battlefield" ||
+            (this.state.objects[refs.granter.object]?.zoneChangeCount ?? 0) !== refs.granter.zoneChangeCount
+              ? { granterLost: true }
+              : {}),
+          }
+        : {}),
       ...(refs.tapped !== undefined ? { tapped: refs.tapped.object } : {}),
       ...(refs.enteredTogether !== undefined
         ? { enteredTogether: refs.enteredTogether.map(({ object, count }) => ({ object, count })) }

@@ -5389,6 +5389,38 @@ describe("the card discarded to pay a cost", () => {
     });
   });
 
+  it("reads a granted ability naming the permanent that grants it (rule 201.5a)", () => {
+    const kunai = face(
+      "Ninja's Kunai",
+      "Artifact — Equipment",
+      "Equipped creature has \"{1}, {T}, Sacrifice Ninja's Kunai: Ninja's Kunai deals 3 damage to any target.\"\nEquip {1}",
+    );
+    expect(kunai.complete).toBe(true);
+    expect(kunai.static[0].grantsActivated[0]).toMatchObject({
+      cost: { mana: "{1}", tap: true, sacrifice: "granter" },
+      effect: { kind: "damage", amount: 3, target: 0, from: "granter" },
+    });
+    const boomerang = face(
+      "Trusty Boomerang",
+      "Artifact — Equipment",
+      "Equipped creature has \"{1}, {T}: Tap target creature. Return Trusty Boomerang to its owner's hand.\"\nEquip {1}",
+    );
+    expect(boomerang.static[0].grantsActivated[0].effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "tap", target: 0 },
+        { kind: "return-to-hand", target: "granter" },
+      ],
+    });
+    // A granter named any other way is left to a person.
+    const pole = face(
+      "Fishing Pole",
+      "Artifact — Equipment",
+      "Equipped creature has \"{1}, {T}, Tap Fishing Pole: Put a bait counter on Fishing Pole.\"",
+    );
+    expect(pole.complete).toBe(false);
+  });
+
   it("leaves a discard the effect itself makes to a person", () => {
     const rummage = face("Test Rummage", "Sorcery", "Draw a card, then discard a card. If the discarded card was a creature card, draw a card.");
     expect(rummage.complete).toBe(false);

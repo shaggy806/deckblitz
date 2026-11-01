@@ -775,6 +775,27 @@ Necromancer's Stockpile, Pyromancy, Slumbering Tora; Dralnu's Pet's kicked
 counters are an enters replacement, which doesn't read the spell's cost;
 Malcolm, Alluring Scoundrel's discard is the effect's own, not a cost.
 
+### A granted ability naming the permanent that granted it — built 2026-11-01
+
+The need-keys Phase 2 family `effect:modifier-grants-activated`'s group
+cost:granted-ability-sacrifice-granter, effect:granted-activated-refers-to-granter
+and effect:granted-trigger-refers-to-granter, features only (rule 201.5a).
+A static's granted activated or triggered ability records the granting
+permanent and its stint in its `GrantedAbilityRef` as it's activated or
+triggered, kept on the stack object as `LastKnownRefs.granter`; the
+`"granter"` `EffectTargetRef` names it (acted on only while it's that
+permanent, 400.7; read as it last existed once gone, 608.2h), a `damage`'s
+`from: "granter"` has it deal the damage, and `sacrifice: "granter"` is a
+cost. The scaffolder reads "Equipped/Enchanted creature has '…'" lines
+whose ability sacrifices, returns or has the granter deal damage. Proving
+cards: Ninja's Kunai, Trusty Boomerang, Archery Training, Spare Dagger. Left
+to `author-freed`: Blazing Torch, Rakdos Riteknife, Trickster's Talisman
+(and Grothama, still waiting on its draw count). Still missing: Fishing
+Pole's "Tap Fishing Pole" cost (a tap of the granter), Hold for Ransom's
+"Hold for Ransom's controller" (the granter's controller as a player), and
+Hellish Rebuke's granter, a spell's caster (a one-shot modifier grant, not a
+static); Dire Flail's record has no Oracle text to check.
+
 ### One-shot grants to the next or first matching spell — built 2026-10-31
 
 The rest of the need-keys Phase 2 family `static:grant-abilities-to-spells`,

@@ -1766,6 +1766,12 @@ export type GrantedAbilityRef =
       /** `"spell-triggered"`: a `grantsToSpells` static's `triggered`. */
       readonly list: "activated" | "triggered" | "spell-triggered";
       readonly index: number;
+      /** The permanent whose static granted it, and its battlefield stint,
+       * as the ability was activated or triggered — what the granted text's
+       * "Ninja's Kunai" names (rule 201.5a), the `"granter"` reference.
+       * Absent on a ref read only to find the ability's definition. */
+      readonly granter?: ObjectId;
+      readonly granterStint?: number;
     }
   | { readonly kind: "modifier"; readonly ability: TriggeredAbility }
   /** An activated ability a modifier grants (`PtModifier.grantsActivated`). */
@@ -2096,6 +2102,12 @@ export interface LastKnownRefs {
    * exile for a madness card. Recorded as the discard happens, which for a
    * chosen discard is once its decision is answered (rule 602.2b). */
   readonly discarded?: readonly { readonly object: ObjectId; readonly zoneChangeCount: number }[];
+  /** For an ability a permanent's static granted another ("Equipped
+   * creature has '…, Sacrifice Ninja's Kunai: Ninja's Kunai deals 3
+   * damage …'"): the granting permanent and its battlefield stint as the
+   * ability was activated or triggered (rule 201.5a) — the `"granter"`
+   * reference. */
+  readonly granter?: { readonly object: ObjectId; readonly zoneChangeCount: number };
   /** "The tapped creature": the one permanent tapped to pay the ability's
    * cost (`AbilityCost.tapOthers` — station's, rule 702.184a). */
   readonly tapped?: { readonly object: ObjectId; readonly zoneChangeCount: number };

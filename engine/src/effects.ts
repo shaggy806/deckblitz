@@ -54,8 +54,16 @@ import type { ResolvedTargets, TargetRef, TargetSpec } from "./target.js";
  * creature": the permanent chosen as the source entered
  * (`CardDefinition.choosePermanentOnEnter` — rule 607.2d), read as the source
  * last existed if it has left; nothing once the chosen one has left the
- * battlefield (rule 400.7). Not a target. */
-export type EffectTargetRef = number | "source" | "trigger-object" | "attached" | "chosen";
+ * battlefield (rule 400.7). Not a target. `"granter"` is the permanent
+ * whose static granted this ability to its source — the Equipment or Aura
+ * named in "Equipped creature has '{1}, {T}: Tap target creature. Return
+ * Trusty Boomerang to its owner's hand'" (rule 201.5a: that name means only
+ * the granting object), fixed as the ability was activated or triggered
+ * (`LastKnownRefs.granter`). Acted on only while it's still that object on
+ * the battlefield; read (its counters, its power) as it last existed there
+ * once it has left (608.2h). Nothing on an ability no static granted. Not a
+ * target. */
+export type EffectTargetRef = number | "source" | "trigger-object" | "attached" | "chosen" | "granter";
 /**
  * What a card put onto the battlefield "attached to" something enters
  * attached to — an effect's `attachedTo`:
@@ -1288,9 +1296,12 @@ export type GiftKind = "food" | "card" | "tapped-fish" | "extra-turn" | "treasur
  * opponent" (that creature is the source, not the spell: its colours count
  * for protection, its lifelink and deathtouch apply — the rulings). Read as
  * it last existed on the battlefield if it has left (rule 608.2h); a blank
- * slot (an illegal target, rule 608.2b) deals nothing.
+ * slot (an illegal target, rule 608.2b) deals nothing. `"granter"`: the
+ * permanent whose static granted this ability (see {@link EffectTargetRef})
+ * — Ninja's Kunai's granted "Sacrifice Ninja's Kunai: Ninja's Kunai deals 3
+ * damage to any target", dealt by the Equipment as it last existed.
  */
-export type DamageFrom = "trigger-object" | { readonly target: number };
+export type DamageFrom = "trigger-object" | "granter" | { readonly target: number };
 
 /**
  * A one-shot prevention or redirection effect over a set of damage events
@@ -9623,6 +9634,13 @@ export interface ResolutionContext extends EffectApi {
    * (`LastKnownRefs.discarded`) — an {@link AmountRef} `"discarded"` reads
    * the one card when there is exactly one. Absent when none were. */
   readonly discarded?: readonly ObjectId[];
+  /** The permanent whose static granted this ability (`LastKnownRefs
+   * .granter`) — what an {@link EffectTargetRef} `"granter"` names. Absent
+   * on an ability nothing granted. */
+  readonly granter?: ObjectId;
+  /** That granter has left the battlefield, or left and come back, since
+   * (rule 400.7): it's read as it last existed but not acted on. */
+  readonly granterLost?: boolean;
   /** The one permanent tapped to pay this ability's cost — what an
    * {@link AmountRef} `"tapped"` reads. Absent when nothing was. */
   readonly tapped?: ObjectId;
@@ -10973,6 +10991,11 @@ function resolveAmountRef(ref: AmountRef, ctx: ResolutionContext): TargetRef | u
   if (ref === "discarded") {
     return ctx.discarded?.length === 1 ? { kind: "object", object: ctx.discarded[0] } : undefined;
   }
+  // A read of the granter: as it last existed once it has left (608.2h) —
+  // "the number of arrow counters on Archery Training".
+  if (ref === "granter") {
+    return ctx.granter === undefined ? undefined : { kind: "object", object: ctx.granter };
+  }
   // A read: a trigger object — or the source — that has moved on since is
   // read as it last existed, which the context's lookups do (rule 608.2h).
   // Only acting on one needs it to be the same object still (`sourceLost`,
@@ -11069,6 +11092,9 @@ function resolveEffectTarget(
   if (ref === "chosen") {
     const chosen = ctx.chosenPermanent();
     return chosen === undefined ? undefined : { kind: "object", object: chosen };
+  }
+  if (ref === "granter") {
+    return ctx.granter !== undefined && ctx.granterLost !== true ? { kind: "object", object: ctx.granter } : undefined;
   }
   return ctx.targets[ref];
 }
@@ -12808,7 +12834,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
             ? ctx.triggerObject === undefined
               ? undefined
               : ({ kind: "object", object: ctx.triggerObject } as const)
-            : spec.target === "attached" || spec.target === "chosen"
+            : spec.target === "attached" || spec.target === "chosen" || spec.target === "granter"
               ? resolveEffectTarget(spec.target, ctx)
               : ctx.targets[spec.target];
       if (target !== undefined) ctx.sacrificeTarget(target, spec.byItsController);

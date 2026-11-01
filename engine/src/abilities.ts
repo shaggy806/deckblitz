@@ -23,6 +23,12 @@ import type { Step } from "./turn.js";
 export type SacrificeCost =
   /** Sacrifice the permanent whose ability this is. */
   | "self"
+  /** Sacrifice the permanent whose static granted this ability — "Equipped
+   * creature has '{1}, {T}, Sacrifice Ninja's Kunai: …'" (rule 201.5a: the
+   * granting Equipment, not one of the same name). Payable only while the
+   * activating player controls it and it can be sacrificed (701.21a); on an
+   * ability nothing granted, never. */
+  | "granter"
   /** Sacrifice a creature the activating player controls (their choice; may be
    * the source itself). */
   | "creature-you-control"
@@ -147,7 +153,7 @@ export function sacrificePartsFillable(
 
 /** Every filter a sacrifice cost's choice can be made from — one for the
  * forms that have one, each of an `each`'s. */
-export function sacrificeCostFilters(sacrifice: Exclude<SacrificeCost, "self" | "creature-you-control">): readonly CardFilter[] {
+export function sacrificeCostFilters(sacrifice: Exclude<SacrificeCost, "self" | "granter" | "creature-you-control">): readonly CardFilter[] {
   return "each" in sacrifice ? sacrifice.each : [sacrifice.filter];
 }
 

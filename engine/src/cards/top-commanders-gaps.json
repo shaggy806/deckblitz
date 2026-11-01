@@ -828,7 +828,10 @@
   "effect:counters-removed-this-way",
   "effect:distribute-counters-among-chosen",
   "effect:distribute-counters-variable-total",
-  "effect:cost-discarded-card-ref"
+  "effect:cost-discarded-card-ref",
+  "cost:granted-ability-sacrifice-granter",
+  "effect:granted-activated-refers-to-granter",
+  "effect:granted-trigger-refers-to-granter"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

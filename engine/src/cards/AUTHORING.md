@@ -3135,6 +3135,19 @@ tapOthers?, untap? }`.
 
 - `mana`: a cost string (`"{2}"`) or `null`. May contain `{X}`.
 - `tap: true` adds `{T}`.
+- `sacrifice: "granter"` in an ability a static grants ("Equipped creature
+  has '{1}, {T}, Sacrifice Ninja's Kunai: …'"): the granting permanent — rule
+  201.5a, the name means only that object — payable only while the
+  activating player controls it. No choice to offer. The same ability names
+  the granter elsewhere as the `"granter"` `EffectTargetRef` ("Return Trusty
+  Boomerang to its owner's hand" is `return-to-hand` of `target: "granter"`;
+  "the number of arrow counters on Archery Training" is `{ countersOn:
+  "granter", counter: "arrow" }`, read as it last existed once it's gone),
+  and a `damage` it deals as `from: "granter"` (Ninja's Kunai, dealt as the
+  sacrificed Equipment last existed). A granted *trigger* names it the same
+  way: Spare Dagger's "you may sacrifice Spare Dagger" is `sacrifice-target`
+  of `"granter"`. The granter is fixed as the ability is activated or
+  triggered, and acted on only while it's still that permanent (400.7).
 - `sacrifice: "self"` ("Sacrifice this: …"), `"creature-you-control"`, or
   `{ filter: CardFilter }` (Zuran Orb — "Sacrifice a land"). The last two make
   the player pick (a `sacrifice` choice on the `activate-ability` LegalAction).

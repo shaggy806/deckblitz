@@ -4646,6 +4646,15 @@ export function parseFace(face, ctx = {}) {
       }
       continue;
     }
+    // "Equipped creature has '{1}, {T}, Sacrifice Ninja's Kunai: Ninja's
+    // Kunai deals 3 damage to any target.'": a granted ability naming the
+    // permanent that grants it (rule 201.5a — the `"granter"` reference).
+    const namingGrant = granterNamingGrant(face, raw, ctx);
+    if (namingGrant !== undefined) {
+      if (namingGrant === null) out.todo.push(printed(raw));
+      else out.static.push(namingGrant);
+      continue;
+    }
     // An ability word or flavor word ("Landfall —", "Crushing Teeth —") means
     // nothing, so it's dropped. A few labels written the same way do mean
     // something: Exhaust and Boast restrict an activated ability and become
@@ -5842,6 +5851,76 @@ const THIS_ABILITY = "this ability";
 /** "As long as you have max speed" (rules 702.178a, 702.179e) — the
  * `maxSpeed()` helper's condition. */
 const MAX_SPEED = { kind: "speed", atLeast: 4 };
+
+/**
+ * "Equipped creature has '…'" / "Enchanted creature has '…'" naming the
+ * granting permanent by name (rule 201.5a): a granted activated ability whose
+ * cost sacrifices the granter (`sacrifice: "granter"`), whose damage the
+ * granter deals (`from: "granter"`), or which returns the granter to its
+ * owner's hand. `undefined` for a line that isn't such a grant, `null` for
+ * one it can't read whole.
+ */
+function granterNamingGrant(face, raw, ctx) {
+  const m = /^(?:Equipped|Enchanted) creature has "([^"]+)"$/.exec(raw);
+  if (m === null) return undefined;
+  const inner = m[1];
+  const short = face.name.split(",")[0];
+  const G = "\u0002";
+  let s = inner.split(face.name).join(G);
+  if (short !== face.name && short.length >= 3) s = s.replace(new RegExp(`\\b${escapeRe(short)}\\b`, "g"), G);
+  // One that doesn't name its granter isn't this template's.
+  if (!s.includes(G)) return undefined;
+  // An activated ability only; its cost may sacrifice the granter.
+  const colon = s.indexOf(": ");
+  if (colon < 0 || /^(When|Whenever|At )/.test(s)) return null;
+  const parts = s.slice(0, colon).split(", ");
+  const sacrificeGranter = parts.includes(`Sacrifice ${G}`);
+  const cost = parts.filter((p) => p !== `Sacrifice ${G}`).join(", ");
+  // Each sentence naming the granter, read as the bearer's and then
+  // pointed at the granter: "[it] deals …" (the damage's source) and
+  // "Return [it] to its owner's hand".
+  const sentences = sentencesOf(s.slice(colon + 2));
+  const fromGranter = new Set();
+  const returnGranter = new Set();
+  const rewritten = sentences.map((sentence, i) => {
+    const deals = new RegExp(`^${G} deals (.+)$`).exec(sentence);
+    if (deals !== null) {
+      fromGranter.add(i);
+      return `This creature deals ${deals[1]}`;
+    }
+    if (sentence === `Return ${G} to its owner's hand.`) {
+      returnGranter.add(i);
+      return "Return this creature to its owner's hand.";
+    }
+    return sentence;
+  });
+  if (cost === "" || cost.includes(G) || rewritten.some((r) => r.includes(G))) return null;
+  const read = parseFace({ name: "Granted Bearer", type_line: "Creature", oracle_text: `${cost}: ${rewritten.join(" ")}` }, ctx);
+  if (!read.complete || read.activated.length !== 1 || read.static.length + read.triggered.length + read.keywords.length > 0) return null;
+  const known = new Set(["keywords", "activated", "triggered", "static", "todo", "complete"]);
+  if (Object.keys(read).some((k) => !known.has(k))) return null;
+  const ability = read.activated[0];
+  const patch = (effect, i) =>
+    fromGranter.has(i)
+      ? effect?.kind === "damage" && effect.from === undefined ? { ...effect, from: "granter" } : null
+      : returnGranter.has(i)
+        ? effect?.kind === "return-to-hand" && effect.target === "source" ? { ...effect, target: "granter" } : null
+        : effect;
+  let effect;
+  if (sentences.length === 1) effect = patch(ability.effect, 0);
+  else if (ability.effect?.kind === "sequence" && ability.effect.effects.length === sentences.length) {
+    const effects = ability.effect.effects.map(patch);
+    effect = effects.some((e) => e === null) ? null : { ...ability.effect, effects };
+  } else effect = null;
+  if (effect === null) return null;
+  return {
+    affects: { scope: "attached" },
+    grantsActivated: [
+      { ...ability, cost: sacrificeGranter ? { ...ability.cost, sacrifice: "granter" } : ability.cost, effect, text: inner },
+    ],
+    text: printed(raw),
+  };
+}
 
 /**
  * One "Max speed — [ability]" line's ability (rule 702.178a), `inner` the
