@@ -191,6 +191,7 @@ import _poolElvishFarmer from "../pool/elvish-farmer.js";
 import _poolEmbodimentOfSpring from "../pool/embodiment-of-spring.js";
 import _poolEndrekSahrMasterBreeder from "../pool/endrek-sahr-master-breeder.js";
 import _poolEnduringBondwarden from "../pool/enduring-bondwarden.js";
+import _poolEnslave from "../pool/enslave.js";
 import _poolEnslavedHorror from "../pool/enslaved-horror.js";
 import _poolEnvironmentalScientist from "../pool/environmental-scientist.js";
 import _poolErkenbrandLordOfWestfold from "../pool/erkenbrand-lord-of-westfold.js";
@@ -1030,6 +1031,7 @@ const shard: CardShard = {
     _poolEmbodimentOfSpring,
     _poolEndrekSahrMasterBreeder,
     _poolEnduringBondwarden,
+    _poolEnslave,
     _poolEnslavedHorror,
     _poolEnvironmentalScientist,
     _poolErkenbrandLordOfWestfold,

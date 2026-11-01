@@ -433,6 +433,7 @@ import _poolLivingArtifact from "../pool/living-artifact.js";
 import _poolLivingDeath from "../pool/living-death.js";
 import _poolLordOfExtinction from "../pool/lord-of-extinction.js";
 import _poolLull from "../pool/lull.js";
+import _poolLullmagesDomination from "../pool/lullmages-domination.js";
 import _poolLuminarchAspirant from "../pool/luminarch-aspirant.js";
 import _poolLuminescentRain from "../pool/luminescent-rain.js";
 import _poolLuminousGuardian from "../pool/luminous-guardian.js";
@@ -1314,6 +1315,7 @@ const shard: CardShard = {
     _poolLivingDeath,
     _poolLordOfExtinction,
     _poolLull,
+    _poolLullmagesDomination,
     _poolLuminarchAspirant,
     _poolLuminescentRain,
     _poolLuminousGuardian,

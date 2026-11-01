@@ -410,6 +410,7 @@ import _poolLeadersTalent from "../pool/leaders-talent.js";
 import _poolLeafcrownDryad from "../pool/leafcrown-dryad.js";
 import _poolLeavesFromTheVine from "../pool/leaves-from-the-vine.js";
 import _poolLesserMasticore from "../pool/lesser-masticore.js";
+import _poolLiability from "../pool/liability.js";
 import _poolLichsRelic from "../pool/lichs-relic.js";
 import _poolLifeMatrix from "../pool/life-matrix.js";
 import _poolLightningElemental from "../pool/lightning-elemental.js";
@@ -807,6 +808,7 @@ import _poolWardenOfTheWoods from "../pool/warden-of-the-woods.js";
 import _poolWarden from "../pool/warden.js";
 import _poolWarehouseThief from "../pool/warehouse-thief.js";
 import _poolWarmth from "../pool/warmth.js";
+import _poolWarpedDevotion from "../pool/warped-devotion.js";
 import _poolWasteManagement from "../pool/waste-management.js";
 import _poolWaxWaneWitness from "../pool/wax-wane-witness.js";
 import _poolWayspeakerBodyguard from "../pool/wayspeaker-bodyguard.js";
@@ -1264,6 +1266,7 @@ const shard: CardShard = {
     _poolLeafcrownDryad,
     _poolLeavesFromTheVine,
     _poolLesserMasticore,
+    _poolLiability,
     _poolLichsRelic,
     _poolLifeMatrix,
     _poolLightningElemental,
@@ -1661,6 +1664,7 @@ const shard: CardShard = {
     _poolWarden,
     _poolWarehouseThief,
     _poolWarmth,
+    _poolWarpedDevotion,
     _poolWasteManagement,
     _poolWaxWaneWitness,
     _poolWayspeakerBodyguard,

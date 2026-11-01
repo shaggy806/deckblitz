@@ -579,6 +579,7 @@ import _poolRazorfinAbolisher from "../pool/razorfin-abolisher.js";
 import _poolReachThroughMists from "../pool/reach-through-mists.js";
 import _poolRecklessAirStrike from "../pool/reckless-air-strike.js";
 import _poolReckonerBankbuster from "../pool/reckoner-bankbuster.js";
+import _poolRecoil from "../pool/recoil.js";
 import _poolRedTigerMechan from "../pool/red-tiger-mechan.js";
 import _poolRedXiiiProudWarrior from "../pool/red-xiii-proud-warrior.js";
 import _poolRedemptionChoir from "../pool/redemption-choir.js";
@@ -1458,6 +1459,7 @@ const shard: CardShard = {
     _poolReachThroughMists,
     _poolRecklessAirStrike,
     _poolReckonerBankbuster,
+    _poolRecoil,
     _poolRedTigerMechan,
     _poolRedXiiiProudWarrior,
     _poolRedemptionChoir,

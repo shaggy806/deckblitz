@@ -26007,7 +26007,7 @@ export class Game {
     // to now — or, the source gone (or back as a new object), the one it
     // was last attached to, if that's still here in the same stint
     // (Starlit Mantle's and Wings of Hubris's rulings; rule 400.7).
-    const attachedHostNow = (): ObjectId | undefined => {
+    const attachedWas = (): { readonly host: ObjectId; readonly stint: number | undefined } | undefined => {
       const object = this.state.objects[source];
       const here =
         opts.sourceLost !== true &&
@@ -26022,10 +26022,24 @@ export class Game {
         host = departed?.attachedTo;
         stint = departed?.attachedToStint;
       }
-      if (host === null || host === undefined) return undefined;
-      const on = this.state.objects[host];
-      if (on?.zone !== "battlefield" || (stint !== undefined && on.zoneChangeCount !== stint)) return undefined;
-      return host;
+      return host === null || host === undefined ? undefined : { host, stint };
+    };
+    const attachedHostNow = (): ObjectId | undefined => {
+      const was = attachedWas();
+      if (was === undefined) return undefined;
+      const on = this.state.objects[was.host];
+      if (on?.zone !== "battlefield" || (was.stint !== undefined && on.zoneChangeCount !== was.stint)) return undefined;
+      return was.host;
+    };
+    // The same, as it last existed if it has left: an effect that needs
+    // information from it uses that (rule 608.2h) — "enchanted creature deals
+    // 1 damage to its owner" with both gone at once still deals it (Enslave).
+    // An Aura left behind first last existed attached to nothing.
+    const attachedKnown = (): { readonly id: ObjectId; readonly lastKnown: LastKnownInfo | undefined } | undefined => {
+      const was = attachedWas();
+      if (was === undefined) return undefined;
+      const lastKnown = was.stint === undefined ? undefined : this.lastKnownOfStint(was.host, was.stint);
+      return lastKnown === undefined && attachedHostNow() === undefined ? undefined : { id: was.host, lastKnown };
     };
     // Who deals an effect's damage: its own source, or — "it deals damage"
     // — the object that fired the trigger, or a target ("target creature
@@ -26042,12 +26056,9 @@ export class Game {
           ? undefined
           : { id: granter.object, lastKnown: this.lastKnownOfStint(granter.object, granter.zoneChangeCount) };
       }
-      // What the source is attached to as this resolves: "enchanted creature
-      // deals 1 damage" (Enslave). With nothing attached to, nothing's dealt.
-      if (from === "attached") {
-        const host = attachedHostNow();
-        return host === undefined ? undefined : { id: host, lastKnown: undefined };
-      }
+      // What the source is or last was attached to: "enchanted creature deals
+      // 1 damage" (Enslave). Attached to nothing, nothing's dealt.
+      if (from === "attached") return attachedKnown();
       if (from !== undefined && from !== "trigger-object") {
         const ref = targets[from.target];
         return ref?.kind === "object" ? { id: ref.object, lastKnown: lastKnownOf(ref) } : undefined;
@@ -26341,6 +26352,10 @@ export class Game {
         return host !== null && host !== undefined && this.state.objects[host]?.zone === "battlefield" ? host : undefined;
       },
       attachedHost: attachedHostNow,
+      attachedOwner: () => {
+        const known = attachedKnown();
+        return known === undefined ? undefined : (known.lastKnown?.owner ?? this.state.objects[known.id]?.owner);
+      },
       chosenPermanent: () => {
         // "The chosen creature" (rule 607.2d): the source's choice — as the
         // source last existed, if it has left or come back as a new object

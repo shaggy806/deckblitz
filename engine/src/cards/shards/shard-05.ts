@@ -435,6 +435,7 @@ import _poolKioraSovereignOfTheDeep from "../pool/kiora-sovereign-of-the-deep.js
 import _poolKitesailCleric from "../pool/kitesail-cleric.js";
 import _poolKnightedMyr from "../pool/knighted-myr.js";
 import _poolKolaghanForerunners from "../pool/kolaghan-forerunners.js";
+import _poolKopalaWardenOfWaves from "../pool/kopala-warden-of-waves.js";
 import _poolKozileksShrieker from "../pool/kozileks-shrieker.js";
 import _poolKravenProudPredator from "../pool/kraven-proud-predator.js";
 import _poolLairDelve from "../pool/lair-delve.js";
@@ -523,6 +524,7 @@ import _poolNobleHierarch from "../pool/noble-hierarch.js";
 import _poolNorinTheWary from "../pool/norin-the-wary.js";
 import _poolNovaCleric from "../pool/nova-cleric.js";
 import _poolNoviceOccultist from "../pool/novice-occultist.js";
+import _poolNurglesConscription from "../pool/nurgles-conscription.js";
 import _poolOakhollowVillage from "../pool/oakhollow-village.js";
 import _poolObsidianGiant from "../pool/obsidian-giant.js";
 import _poolOcularHalo from "../pool/ocular-halo.js";
@@ -1287,6 +1289,7 @@ const shard: CardShard = {
     _poolKitesailCleric,
     _poolKnightedMyr,
     _poolKolaghanForerunners,
+    _poolKopalaWardenOfWaves,
     _poolKozileksShrieker,
     _poolKravenProudPredator,
     _poolLairDelve,
@@ -1375,6 +1378,7 @@ const shard: CardShard = {
     _poolNorinTheWary,
     _poolNovaCleric,
     _poolNoviceOccultist,
+    _poolNurglesConscription,
     _poolOakhollowVillage,
     _poolObsidianGiant,
     _poolOcularHalo,

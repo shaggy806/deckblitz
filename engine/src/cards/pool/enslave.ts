@@ -5,7 +5,9 @@ import { defineCard } from "../define.js";
 //     Auras or Equipment attached to it.
 //   A token's owner is the player who created it.
 // The creature deals the damage, so its lifelink is its controller's. "Your
-// upkeep" is the Aura's controller's.
+// upkeep" is the Aura's controller's. With the trigger on the stack: the creature
+// gone first, the Aura last existed attached to nothing and nothing's dealt; both
+// gone at once, the creature deals it as it last existed (rule 608.2h).
 
 const TRIGGER_TEXT = "At the beginning of your upkeep, enchanted creature deals 1 damage to its owner.";
 

@@ -276,6 +276,7 @@ import _poolGalvanicArc from "../pool/galvanic-arc.js";
 import _poolGelatinousGenesis from "../pool/gelatinous-genesis.js";
 import _poolGenesisStorm from "../pool/genesis-storm.js";
 import _poolGenjuOfTheFens from "../pool/genju-of-the-fens.js";
+import _poolGethLordOfTheVault from "../pool/geth-lord-of-the-vault.js";
 import _poolGhiredConclaveExile from "../pool/ghired-conclave-exile.js";
 import _poolGhostLitStalker from "../pool/ghost-lit-stalker.js";
 import _poolGibberingKami from "../pool/gibbering-kami.js";
@@ -1160,6 +1161,7 @@ const shard: CardShard = {
     _poolGelatinousGenesis,
     _poolGenesisStorm,
     _poolGenjuOfTheFens,
+    _poolGethLordOfTheVault,
     _poolGhiredConclaveExile,
     _poolGhostLitStalker,
     _poolGibberingKami,

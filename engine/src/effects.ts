@@ -8747,6 +8747,9 @@ export interface EffectApi {
    * source is attached to now, or — the source gone — what it was last
    * attached to, while that is still on the battlefield as the same object. */
   attachedHost(): ObjectId | undefined;
+  /** The owner of what the source is or was last attached to, as it last
+   * existed if it has left the battlefield (rule 608.2h). */
+  attachedOwner(): PlayerId | undefined;
   /** The permanent an {@link EffectTargetRef} `"chosen"` names: the source's
    * chosen permanent (`GameObject.chosenPermanent`) — as the source last
    * existed, if it has left (rule 608.2h) — while that one is still on the
@@ -12266,13 +12269,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       if (spec.who === "attached-owner" || typeof spec.who === "object") {
         // One player named: the owner of what the source is attached to
         // (Enslave), or of a target.
-        let player: PlayerId | undefined;
-        if (spec.who === "attached-owner") {
-          const host = ctx.attachedHost();
-          player = host === undefined ? undefined : ctx.ownerOf({ kind: "object", object: host });
-        } else {
-          player = effectPlayer(spec.who, ctx);
-        }
+        const player = spec.who === "attached-owner" ? ctx.attachedOwner() : effectPlayer(spec.who, ctx);
         if (player !== undefined && ctx.playersInScope("each-player").includes(player)) {
           ctx.dealDamage({ kind: "player", player }, amountValue(spec.amount, ctx, player), spec.from);
         }

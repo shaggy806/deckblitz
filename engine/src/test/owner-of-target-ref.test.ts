@@ -110,6 +110,35 @@ describe("Enslave: enchanted creature deals 1 damage to its owner", () => {
     expect(life(game, C)).toBe(20);
   });
 
+  it("the creature gone first, the trigger on the stack: the Aura last existed attached to nothing, so nothing's dealt", () => {
+    const { game } = table();
+    const giant = spawn(game, "Hill Giant", B);
+    lands(game, "Swamp", 6);
+    cast(game, toHand(game, "Enslave"), { targets: [ref(giant)] });
+    nextTurn(game, "upkeep");
+    settle(game);
+    nextTurn(game, "upkeep");
+    cast(game, toHand(game, "Doom Blade"), { targets: [ref(giant)] });
+    expect(zone(game, giant)).toBe("graveyard");
+    expect(life(game, B)).toBe(20);
+  });
+
+  it("both gone at once, the trigger on the stack: the Aura last existed on the creature, which deals it as it last existed (rule 608.2h)", () => {
+    const { game } = table();
+    const giant = spawn(game, "Hill Giant", B);
+    const disk = spawn(game, "Nevinyrral's Disk", A);
+    lands(game, "Swamp", 7);
+    cast(game, toHand(game, "Enslave"), { targets: [ref(giant)] });
+    nextTurn(game, "upkeep");
+    settle(game);
+    nextTurn(game, "upkeep");
+    activate(game, disk, 0);
+    expect(zone(game, giant)).toBe("graveyard");
+    expect(graveyard(game, A).length).toBe(2);
+    expect(life(game, B)).toBe(19);
+    expect(life(game, A)).toBe(20);
+  });
+
   it("the creature deals it: its lifelink is its controller's", () => {
     const { game } = table();
     const lifelinker = spawn(game, "Vampire Nighthawk", B);

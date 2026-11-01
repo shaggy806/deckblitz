@@ -218,6 +218,7 @@ describe("bindDynamicCompares binds the shares clauses", () => {
       triggerObject: undefined,
       sacrificed: undefined,
       attachedHost: () => undefined,
+      attachedOwner: () => undefined,
       chosenPermanent: () => undefined,
       cardTypesOf: () => [],
       subtypesOf: () => [],

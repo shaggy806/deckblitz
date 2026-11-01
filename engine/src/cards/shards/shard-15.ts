@@ -70,6 +70,7 @@ import _poolBolracClanCrusher from "../pool/bolrac-clan-crusher.js";
 import _poolBoltwave from "../pool/boltwave.js";
 import _poolBondBeetle from "../pool/bond-beetle.js";
 import _poolBoneMiser from "../pool/bone-miser.js";
+import _poolBorealElemental from "../pool/boreal-elemental.js";
 import _poolBorosReckoner from "../pool/boros-reckoner.js";
 import _poolBoshIronGolem from "../pool/bosh-iron-golem.js";
 import _poolBrainWeevil from "../pool/brain-weevil.js";
@@ -364,6 +365,7 @@ import _poolIzzetCluestone from "../pool/izzet-cluestone.js";
 import _poolJhovallQueen from "../pool/jhovall-queen.js";
 import _poolJillShivasDominant from "../pool/jill-shivas-dominant.js";
 import _poolJoinForces from "../pool/join-forces.js";
+import _poolJubilantSkybonder from "../pool/jubilant-skybonder.js";
 import _poolJungleHollow from "../pool/jungle-hollow.js";
 import _poolJungleWayfinder from "../pool/jungle-wayfinder.js";
 import _poolKaraisTechnique from "../pool/karais-technique.js";
@@ -892,6 +894,7 @@ const shard: CardShard = {
     _poolBoltwave,
     _poolBondBeetle,
     _poolBoneMiser,
+    _poolBorealElemental,
     _poolBorosReckoner,
     _poolBoshIronGolem,
     _poolBrainWeevil,
@@ -1186,6 +1189,7 @@ const shard: CardShard = {
     _poolJhovallQueen,
     _poolJillShivasDominant,
     _poolJoinForces,
+    _poolJubilantSkybonder,
     _poolJungleHollow,
     _poolJungleWayfinder,
     _poolKaraisTechnique,
