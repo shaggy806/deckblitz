@@ -501,15 +501,28 @@ const COLOR_WORD = { white: "W", blue: "U", black: "B", red: "R", green: "G" };
 /** "Protection from red", "protection from white and from blue",
  * "protection from multicolored" — a static, or `null` for any other part. */
 const protectionOf = (part) => {
+  const text = part.charAt(0).toUpperCase() + part.slice(1);
+  const self = (protection) => ({ affects: { scope: "self" }, protection, text });
+  // A quality that isn't a word (rules 702.16j, k): everything, players, spells.
+  if (/^protection from everything$/i.test(part)) return self({ filter: {} });
+  if (/^protection from each of your opponents$/i.test(part)) return self({ fromPlayers: "opponents" });
+  if (/^protection from spells that are one or more colors$/i.test(part)) return self({ filter: { isSpell: true, colorless: false } });
+  if (/^protection from spells and from permanents that were cast this turn$/i.test(part)) {
+    return self({ filter: { anyOf: [{ isSpell: true }, { isSpell: false, cast: true, enteredThisTurn: true }] } });
+  }
   const m = /^protection from (\w+)(?: and from (\w+))?$/i.exec(part);
   if (m === null) return null;
-  const words = [m[1], m[2]].filter(Boolean).map((w) => w.toLowerCase());
-  const text = part.charAt(0).toUpperCase() + part.slice(1);
-  if (words.length === 1 && words[0] === "multicolored") {
-    return { affects: { scope: "self" }, protection: { filter: { multicolored: true } }, text };
+  const printedWords = [m[1], m[2]].filter(Boolean);
+  const words = printedWords.map((w) => w.toLowerCase());
+  if (words.length === 1 && words[0] === "multicolored") return self({ filter: { multicolored: true } });
+  if (words.every((w) => COLOR_WORD[w] !== undefined)) return self({ colors: words.map((w) => COLOR_WORD[w]) });
+  // A subtype, always capitalised in Oracle text: "Protection from Demons and
+  // from Dragons" (rule 702.16a).
+  if (printedWords.every((w) => /^[A-Z]/.test(w) && singular(w) !== w.toLowerCase())) {
+    const each = printedWords.map((w) => ({ subtype: singular(w) }));
+    return self({ filter: each.length === 1 ? each[0] : { anyOf: each } });
   }
-  if (!words.every((w) => COLOR_WORD[w] !== undefined)) return null;
-  return { affects: { scope: "self" }, protection: { colors: words.map((w) => COLOR_WORD[w]) }, text };
+  return null;
 };
 const KW = `(${Object.keys(KEYWORDS).join("|")})`;
 
@@ -5908,6 +5921,17 @@ export function parseFace(face, ctx = {}) {
     // plain ward; one part of anything else leaves the whole line to a person.
     // Recover's half-life cost has a comma of its own (Garza's Assassin).
     if (/^Recover—Pay half your life, rounded up\.?$/i.test(line)) { out.triggered.push(recover("half-life")); continue; }
+    // Imprint's exile is linked to this permanent (rule 607.2a — Mirror Golem).
+    if (/^Imprint — When (?:~|this creature|this artifact) enters, you may exile target card from a graveyard\.$/i.test(whole)) {
+      out.triggered.push({
+        trigger: { on: "enters-battlefield", who: "self" },
+        targets: [{ kind: "card-in-graveyard", whose: "any" }],
+        effect: { kind: "may", prompt: "Exile target card from a graveyard?", effect: { kind: "exile", target: 0, linked: true } },
+        resolve: null,
+        text: printed(raw),
+      });
+      continue;
+    }
     const parts = line.split(/,\s*|;\s*/);
     const wardOf = (p) => {
       const w = /^ward ((?:\{[0-9WUBRGC]+\})+)$/i.exec(p) ?? /^ward—pay (\d+) life\.?$/i.exec(p);
@@ -6655,6 +6679,43 @@ export function parseFace(face, ctx = {}) {
         out.static.push({ affects: { scope: "creatures-you-control" }, protection: { chosenCardType: true }, text: printed(raw) });
       }
       out.static.push({ affects: { scope: "self" }, playerProtection: { chosenCardType: true }, text: printed(raw) });
+      continue;
+    }
+    // Protection from players (rule 702.16k): the player's own (Absolute
+    // Virtue), the chosen player (True-Name Nemesis).
+    if (/^You have protection from each of your opponents\.$/.test(line)) {
+      out.static.push({ affects: { scope: "self" }, playerProtection: { fromPlayers: "opponents" }, text: printed(raw) });
+      continue;
+    }
+    if (out.choosePlayerOnEnter !== undefined && line === "~ has protection from the chosen player.") {
+      out.static.push({ affects: { scope: "self" }, protection: { fromPlayers: "chosen" }, text: printed(raw) });
+      continue;
+    }
+    // "Commanders you control have protection from everything" (Vexilus
+    // Praetor, rule 702.16j).
+    if (/^(?:[^.—]+ — )?Commanders you control have protection from everything\.$/.test(line)) {
+      out.static.push({ affects: { scope: "filter", filter: { isCommander: true, controlledBy: "you" } }, protection: { filter: {} }, text: printed(raw) });
+      continue;
+    }
+    // "Human creatures you control have protection from creatures of the
+    // chosen type" (Riders of Gavony): read off this permanent.
+    if (out.chooseCreatureTypeOnEnter === true && (m = /^([A-Z]\w+) creatures you control have protection from creatures of the chosen type\.$/.exec(line))) {
+      out.static.push({ affects: { scope: "creatures-you-control", subtype: m[1] }, protection: { filter: { type: "creature", ofChosenType: true } }, text: printed(raw) });
+      continue;
+    }
+    // Imprint's "the exiled card's card types" (Mirror Golem).
+    if (line === "~ has protection from each of the exiled card's card types.") {
+      out.static.push({ affects: { scope: "self" }, protection: { exiledCardTypes: true }, text: printed(raw) });
+      continue;
+    }
+    // "This effect doesn't remove this Aura" (rule 702.16n): Tattoo Ward.
+    if ((m = /^Enchanted creature (?:gets ([+-]\d+)\/([+-]\d+) and )?has protection from (artifacts|enchantments|creatures)\. This effect doesn't remove (?:this Aura|~)\.$/.exec(line))) {
+      out.static.push({
+        affects: { scope: "attached" },
+        ...(m[1] !== undefined ? { grantPt: [Number(m[1]), Number(m[2])] } : {}),
+        protection: { types: [m[3].slice(0, -1)], doesntRemoveSource: true },
+        text: printed(raw),
+      });
       continue;
     }
     // "You have protection from the chosen card name" (Runed Halo).
@@ -7987,9 +8048,14 @@ const COLOR_WORDS = { white: "W", blue: "U", black: "B", red: "R", green: "G" };
 
 /** A protection grant's qualities, as `grant-protection` reads them. */
 const PROTECTION_FROM =
-  "(the color of your choice|the card type of your choice|colorless or from the color of your choice|artifacts or from the color of your choice|each color|artifacts|creatures|(?:white|blue|black|red|green)(?: and from (?:white|blue|black|red|green))?)";
+  "(the color of your choice|the card type of your choice|colorless or from the color of your choice|artifacts or from the color of your choice|each color|each of your opponents|everything|instant spells and from sorcery spells|artifacts|creatures|(?:white|blue|black|red|green)(?: and from (?:white|blue|black|red|green))?)";
 function protectionFrom(words) {
   const w = words.toLowerCase();
+  if (w === "each of your opponents") return { fromPlayers: "opponents" };
+  if (w === "everything") return { filter: {} };
+  if (w === "instant spells and from sorcery spells") {
+    return { filter: { anyOf: [{ isSpell: true, type: "instant" }, { isSpell: true, type: "sorcery" }] } };
+  }
   if (w === "the color of your choice") return { choose: "color" };
   if (w === "the card type of your choice") return { choose: "card-type" };
   if (w === "colorless or from the color of your choice") {

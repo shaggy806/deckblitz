@@ -2646,6 +2646,9 @@ export interface StaticAbility {
     readonly filter?: CardFilter;
     readonly chosenColor?: true;
     readonly chosenCardType?: true;
+    /** Protection from players, as `protection`'s (rule 702.16k — Absolute
+     * Virtue's "you have protection from each of your opponents"). */
+    readonly fromPlayers?: "opponents" | "chosen";
   };
   /**
    * "**You can't lose the game**" (Platinum Angel, Herald of Eternal Dawn):
@@ -2935,10 +2938,24 @@ export interface StaticAbility {
      * `CARD_TYPE_CHOICES` — Serra's Emissary). Nothing while none was
      * chosen. */
     readonly chosenCardType?: true;
+    /** "Protection from **each of the exiled card's card types**" (Mirror
+     * Golem): the card types of the cards in exile linked to the static's
+     * source (rule 607.2a, `exiled-with-source`), as long as they stay there.
+     * Nothing while none is. */
+    readonly exiledCardTypes?: true;
+    /** Protection from players (rule 702.16k): `"opponents"` is "each of your
+     * opponents", the static's controller's as it is now (Figure of Fable);
+     * `"chosen"` "the chosen player", `GameObject.chosenPlayer` of the
+     * static's source (True-Name Nemesis). The object they control — or, with
+     * no controller (a card in a graveyard), own — is what it's protected
+     * from, whatever its characteristics, and a spell or ability they control
+     * can't target it. */
+    readonly fromPlayers?: "opponents" | "chosen";
     /** "This effect doesn't remove this Aura" (rule 702.16n): this
      * instance doesn't make the static's own Aura fall off as a
      * state-based action; it still stops everything else, and any other
-     * instance of the same quality removes the Aura as normal. */
+     * instance of the same quality removes the Aura as normal. Reads its
+     * colours and card types (Tattoo Ward), not a filter. */
     readonly doesntRemoveSource?: true;
   };
   /** Hexproof from a quality (rule 702.11d-e) — the affected permanent can't

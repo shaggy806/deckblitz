@@ -729,6 +729,12 @@ export interface CardFilter {
    * has convoke" (Kasla, the Broken Halo; Joyful Stormsculptor). Read off its
    * rules text (`rulesTextName`). */
   readonly hasConvoke?: boolean;
+  /** Is (or isn't) a spell: on the stack as a card or a copy, or being cast
+   * (`FilterContext.asSpell`). A protection's "from instant spells" (rule
+   * 702.16a — Devoted Caretaker) is not "from instants": a permanent, even
+   * one that was cast, and an ability aren't spells (the Emrakul, the Aeons
+   * Torn ruling), nor is an Aura put onto the battlefield. */
+  readonly isSpell?: boolean;
   /** Has (or hasn't) a kicker or multikicker ability (rule 702.33) — "a card
    * with a kicker ability" (Murasa Sproutling, Coralhelm Chronicler). Read off
    * its rules text (`rulesTextName`), in any zone. */
@@ -1091,6 +1097,9 @@ export interface FilterContext {
   /** The permanent whose trigger or ability is applying the filter — what
    * `putThereBySource` compares against. */
   readonly source?: ObjectId;
+  /** The object is a spell being cast, still in the zone it's cast from (a
+   * targeting spell's `TargetSource.spell`): what `isSpell` reads then. */
+  readonly asSpell?: true;
   /**
    * The object is being matched from *inside* the layer fold that computes
    * its characteristics — a static ability's `filter` scope (see
@@ -1422,6 +1431,12 @@ export function matchesFilter(
     filter.sharesPermanentTypeWith !== undefined ||
     filter.sharesCreatureTypeWith !== undefined ||
     filter.sharesLandTypeWith !== undefined
+  ) {
+    return false;
+  }
+  if (
+    filter.isSpell !== undefined &&
+    (ctx.asSpell === true || (live !== undefined && live.zone === "stack" && live.kind === "card")) !== filter.isSpell
   ) {
     return false;
   }

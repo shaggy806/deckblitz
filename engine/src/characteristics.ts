@@ -46,6 +46,7 @@ import {
   aggregateOver,
   aggregateValueOf,
   compareNum,
+  liveReferenceObjects,
   manaValueOfObject,
   matchesFilter,
   printedManaCost,
@@ -1352,16 +1353,27 @@ export interface Characteristics {
     readonly colors: ReadonlySet<Color>;
     readonly types: ReadonlySet<CardType>;
     /** Qualities no colour or card type can name — a subtype, multicoloured,
-     * or (an empty filter) everything. Evaluated only against a source the
-     * engine can identify as an object; see `protectionBlocks`. */
+     * spells, or (an empty filter) everything. Evaluated only against a source
+     * the engine can identify as an object, but for everything (702.16j); see
+     * `protectionBlocks`. */
     readonly filters: readonly CardFilter[];
+    /** A static's filters, each read with its own source as the filter's
+     * ("creatures of the chosen type" — Riders of Gavony). */
+    readonly boundFilters: readonly { readonly filter: CardFilter; readonly source: ObjectId }[];
+    /** Protection from these players (rule 702.16k). */
+    readonly players: ReadonlySet<PlayerId>;
     /** Set only where some instance "doesn't remove" its Aura (rule
-     * 702.16n): the colours every other instance names, and each sparing
-     * instance's own — which `protectionBlocks` reads for an Aura's
-     * attachment alone. `colors` above holds them all. */
+     * 702.16n): the colours and card types every other instance names, and
+     * each sparing instance's own — which `protectionBlocks` reads for an
+     * Aura's attachment alone. `colors` and `types` above hold them all. */
     readonly sparing?: {
       readonly otherColors: ReadonlySet<Color>;
-      readonly instances: readonly { readonly aura: ObjectId; readonly colors: readonly Color[] }[];
+      readonly otherTypes: ReadonlySet<CardType>;
+      readonly instances: readonly {
+        readonly aura: ObjectId;
+        readonly colors: readonly Color[];
+        readonly types: readonly CardType[];
+      }[];
     };
   };
   /** Hexproof from a quality (rule 702.11d-e): the union of every "hexproof
@@ -1421,21 +1433,54 @@ export function chosenProtectionQualities(
   return { colors, types };
 }
 
+/** The players a protection from players names (rule 702.16k): "each of your
+ * opponents", `source`'s controller's as things are now, or the player chosen
+ * for `source` as it entered. Shared by a permanent's protection and a
+ * player's (`playerProtection`). */
+export function protectionPlayers(
+  state: GameState,
+  fromPlayers: "opponents" | "chosen" | undefined,
+  source: GameObject,
+): readonly PlayerId[] {
+  if (fromPlayers === "opponents") return state.turnOrder.filter((p) => p !== source.controller);
+  if (fromPlayers === "chosen") return source.chosenPlayer === undefined ? [] : [source.chosenPlayer];
+  return [];
+}
+
 /** A static's protection as it applies now: "the chosen color" read off the
- * source (its `chosenOnEnter`, if a colour), and the Aura a "doesn't remove
- * this Aura" instance spares (rule 702.16n). */
+ * source (its `chosenOnEnter`, if a colour), its filter read with the source
+ * as the filter's, the players it names, the exiled card's card types, and
+ * the Aura a "doesn't remove this Aura" instance spares (rule 702.16n). */
 function staticProtection(
+  state: GameState,
+  registry: CardRegistry,
   ability: StaticAbility,
   source: GameObject,
 ): AppliedEffect["protection"] {
   const p = ability.protection;
   if (p === undefined) return null;
-  if (p.chosenColor !== true && p.chosenCardType !== true && p.doesntRemoveSource !== true) return p;
+  if (
+    p.chosenColor !== true &&
+    p.chosenCardType !== true &&
+    p.doesntRemoveSource !== true &&
+    p.filter === undefined &&
+    p.fromPlayers === undefined &&
+    p.exiledCardTypes !== true
+  ) {
+    return p;
+  }
   const { colors, types } = chosenProtectionQualities(p, source);
+  const exiledTypes =
+    p.exiledCardTypes === true
+      ? (liveReferenceObjects(state, registry, "exiled-with-source", { you: source.controller, source: source.id }) ?? []).flatMap(
+          (card) => registry.get(printedCardName(state.objects[card]!)).types,
+        )
+      : [];
   return {
     colors,
-    ...(types !== undefined ? { types } : {}),
-    ...(p.filter !== undefined ? { filter: p.filter } : {}),
+    ...(types !== undefined || exiledTypes.length > 0 ? { types: [...(types ?? []), ...exiledTypes] } : {}),
+    ...(p.filter !== undefined ? { filter: p.filter, filterSource: source.id } : {}),
+    ...(p.fromPlayers !== undefined ? { players: protectionPlayers(state, p.fromPlayers, source) } : {}),
     ...(p.doesntRemoveSource === true ? { sparesAura: source.id } : {}),
   };
 }
@@ -3852,7 +3897,13 @@ export function hasAnyAbility(
   const c = computeCharacteristics(state, registry, object.id);
   if (c.keywords.size > 0) return true;
   const protection = c.protectionFrom;
-  if (protection.colors.size > 0 || protection.types.size > 0 || protection.filters.length > 0) {
+  if (
+    protection.colors.size > 0 ||
+    protection.types.size > 0 ||
+    protection.filters.length > 0 ||
+    protection.boundFilters.length > 0 ||
+    protection.players.size > 0
+  ) {
     return true;
   }
   if (
@@ -3955,6 +4006,10 @@ interface AppliedEffect {
     colors?: readonly Color[];
     types?: readonly CardType[];
     filter?: CardFilter;
+    /** The permanent whose static it is, for `filter`'s clauses about it. */
+    filterSource?: ObjectId;
+    /** Protection from these players (702.16k). */
+    players?: readonly PlayerId[];
     /** The Aura this instance doesn't remove (702.16n). */
     sparesAura?: ObjectId;
   } | null;
@@ -4347,7 +4402,7 @@ function collectStaticEffects(
       assignAsThoughUnblocked: ability.assignAsThoughUnblocked === true,
       cantBeSacrificed: ability.cantBeSacrificed === true,
       blockAdditional: ability.blockAdditional ?? 0,
-      protection: staticProtection(ability, source),
+      protection: staticProtection(state, registry, ability, source),
       hexproofFrom: ability.hexproofFrom ?? null,
       bandsWithOther: ability.bandsWithOther ?? null,
       setBase: ability.setBasePt ?? null,
@@ -4506,7 +4561,9 @@ function assertSameCharacteristics(
       // Serialised whole: a filter is a plain object, and two of them
       // differing is exactly the divergence this check exists to catch.
       protFilters: c.protectionFrom.filters.map((f) => JSON.stringify(f)).sort(),
-      protSparing: c.protectionFrom.sparing === undefined ? null : c.protectionFrom.sparing.instances.map((i) => `${i.aura}:${[...i.colors].sort().join("")}`).sort(),
+      protBoundFilters: c.protectionFrom.boundFilters.map((f) => JSON.stringify(f)).sort(),
+      protPlayers: [...c.protectionFrom.players].sort(),
+      protSparing: c.protectionFrom.sparing === undefined ? null : c.protectionFrom.sparing.instances.map((i) => `${i.aura}:${[...i.colors].sort().join("")}:${[...i.types].sort().join("")}`).sort(),
       hexColors: [...c.hexproofFrom.colors].sort(),
       hexTypes: [...c.hexproofFrom.types].sort(),
       hexFilters: c.hexproofFrom.filters.map((f) => JSON.stringify(f)).sort(),
@@ -4579,9 +4636,12 @@ function computeCharacteristicsUncached(
   const protColors = new Set<Color>();
   const protTypes = new Set<CardType>();
   const protFilters: CardFilter[] = [];
-  // 702.16n's instances, and every other instance's colours (`sparing`).
-  const protSparing: { aura: ObjectId; colors: readonly Color[] }[] = [];
+  const protBoundFilters: { filter: CardFilter; source: ObjectId }[] = [];
+  const protPlayers = new Set<PlayerId>();
+  // 702.16n's instances, and every other instance's qualities (`sparing`).
+  const protSparing: { aura: ObjectId; colors: readonly Color[]; types: readonly CardType[] }[] = [];
   const protOtherColors = new Set<Color>();
+  const protOtherTypes = new Set<CardType>();
   const hexColors = new Set<Color>();
   const hexTypes = new Set<CardType>();
   const hexFilters: CardFilter[] = [];
@@ -4629,13 +4689,21 @@ function computeCharacteristicsUncached(
     if (granted && effect.blockAdditional !== 0) addBlocks(effect.blockAdditional);
     if (effect.protection && granted) {
       if (effect.protection.sparesAura !== undefined) {
-        protSparing.push({ aura: effect.protection.sparesAura, colors: effect.protection.colors ?? [] });
+        protSparing.push({ aura: effect.protection.sparesAura, colors: effect.protection.colors ?? [], types: effect.protection.types ?? [] });
       } else {
         for (const c of effect.protection.colors ?? []) protOtherColors.add(c);
+        for (const t of effect.protection.types ?? []) protOtherTypes.add(t);
       }
       for (const c of effect.protection.colors ?? []) protColors.add(c);
       for (const t of effect.protection.types ?? []) protTypes.add(t);
-      if (effect.protection.filter !== undefined) protFilters.push(effect.protection.filter);
+      if (effect.protection.filter !== undefined) {
+        if (effect.protection.filterSource !== undefined) {
+          protBoundFilters.push({ filter: effect.protection.filter, source: effect.protection.filterSource });
+        } else {
+          protFilters.push(effect.protection.filter);
+        }
+      }
+      for (const p of effect.protection.players ?? []) protPlayers.add(p);
     }
     if (effect.hexproofFrom && granted && isQualifiedHexproof(effect.hexproofFrom)) {
       hexQualified.push(effect.hexproofFrom);
@@ -4677,8 +4745,14 @@ function computeCharacteristicsUncached(
         protColors.add(c);
         protOtherColors.add(c);
       }
-      for (const t of modifier.protection.types ?? []) protTypes.add(t);
+      for (const t of modifier.protection.types ?? []) {
+        protTypes.add(t);
+        protOtherTypes.add(t);
+      }
       if (modifier.protection.filter !== undefined) protFilters.push(modifier.protection.filter);
+      // Fixed as it resolved; a static's own "opponents" is `protectionPlayers`'.
+      const players = modifier.protection.fromPlayers;
+      if (players !== undefined && players !== "opponents") for (const p of players) protPlayers.add(p);
     }
     // Granted toxic adds an instance (rule 702.164b), lost the same way.
     if (granted && modifier.toxic !== undefined) toxic += modifier.toxic;
@@ -4858,7 +4932,9 @@ function computeCharacteristicsUncached(
       colors: protColors,
       types: protTypes,
       filters: protFilters,
-      ...(protSparing.length > 0 ? { sparing: { otherColors: protOtherColors, instances: protSparing } } : {}),
+      boundFilters: protBoundFilters,
+      players: protPlayers,
+      ...(protSparing.length > 0 ? { sparing: { otherColors: protOtherColors, otherTypes: protOtherTypes, instances: protSparing } } : {}),
     },
     hexproofFrom: { colors: hexColors, types: hexTypes, filters: hexFilters, qualified: hexQualified },
     bandsWithOther,

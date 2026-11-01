@@ -4028,7 +4028,7 @@ their declarations to it (`withinAttackTax`), and the client shows the running c
   opponent controls, read as a target is checked (`playerHasHexproof`, which
   also reads the one-shot `grant-player-hexproof`). `affects` is ignored; a
   "your creatures have hexproof" half is a separate static.
-- `playerProtection: { colors?, types?, filter?, chosenColor?, chosenCardType? }` —
+- `playerProtection: { colors?, types?, filter?, chosenColor?, chosenCardType?, fromPlayers? }` —
   "**You** have protection from …" (rule 702.16b, c, e): its controller can't
   be targeted by a spell with the quality or an ability from a source with it,
   can't be enchanted by an Aura with it (a Curse already on them falls off),
@@ -4734,17 +4734,32 @@ their declarations to it (`withinAttackTax`), and the client shows the running c
   battlefield — for the legend rule and for every "legendary" filter
   (`supertypesOf`). A storm copy is a token once it resolves (rule 707.10f).
   `affects` is irrelevant.
-- `protection: { colors?, types?, filter?, chosenColor?, chosenCardType?, doesntRemoveSource? }` — rule 702.16 (White Knight: `{ colors:
+- `protection: { colors?, types?, filter?, chosenColor?, chosenCardType?, exiledCardTypes?, fromPlayers?, doesntRemoveSource? }` — rule 702.16 (White Knight: `{ colors:
   ["B"] }`; a `filter` for what neither names — Basri's Lieutenant's
-  multicolored, `{}` for everything). `chosenColor` is "protection from **the
+  multicolored, Baneslayer Angel's `{ anyOf: [{ subtype: "Demon" }, { subtype:
+  "Dragon" }] }`, `{}` for everything, 702.16j — Vexilus Praetor over `scope:
+  "filter"`). A filter reads the static's source as its own: Riders of Gavony's
+  "creatures of the chosen type" is `{ type: "creature", ofChosenType: true }`.
+  **`isSpell`** is a spell, not a card: Emrakul, the Aeons Torn's "spells that
+  are one or more colors" is `{ isSpell: true, colorless: false }`, Emrakul, the
+  World Anew's `{ anyOf: [{ isSpell: true }, { isSpell: false, cast: true,
+  enteredThisTurn: true }] }`; a permanent and an ability aren't spells, nor is
+  an Aura put onto the battlefield. **`fromPlayers`** is a player as the quality
+  (702.16k): `"opponents"`, "each of your opponents" (Absolute Virtue on
+  `playerProtection`), or `"chosen"`, the player chosen as it entered (True-Name
+  Nemesis, `choosePlayerOnEnter`): what they control, or own with no controller
+  (a card in a graveyard), and a spell or ability they control. `exiledCardTypes`
+  is "each of the exiled card's card types" (Mirror Golem, `exile`'s `linked`).
+  `chosenColor` is "protection from **the
   chosen color**", the colour the source named as it entered (`chooseOnEnter`
   over the five — Flickering Ward), `chosenCardType` "from the chosen card
   type" (`chooseOnEnter: [...CARD_TYPE_CHOICES]` — Serra's Emissary);
   `doesntRemoveSource` is "This effect
   doesn't remove this Aura" (rule 702.16n): that instance doesn't make its own
   Aura fall off, though it stops everything else and another instance of the
-  same colour removes the Aura as normal. Granting protection for a while is
-  the `grant-protection` effect.
+  same colour or card type removes the Aura as normal (Tattoo Ward). Granting
+  protection for a while is the `grant-protection` effect, whose `from` takes
+  `fromPlayers: "opponents"` too, fixed as it resolves (Cliffside Rescuer).
 - `hexproofFrom: { colors?, types?, filter? }` — hexproof from a quality (rule
   702.11d): an opponent's matching spell, or an ability from a matching source
   they control, can't target it. Sporeweb Weaver's "hexproof from blue" is

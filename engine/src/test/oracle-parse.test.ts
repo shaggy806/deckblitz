@@ -2310,6 +2310,48 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(pain.complete).toBe(true);
   });
 
+  it("protection whose quality isn't a colour (rule 702.16): players, everything, spells, subtypes, exiled types", () => {
+    const self = { affects: { scope: "self" } };
+    const qualities = (text: string, type = "Creature — Human", extra: Record<string, unknown> = {}) => face(text, type, extra);
+    expect(qualities("Protection from everything").static[0]).toMatchObject({ ...self, protection: { filter: {} } });
+    expect(qualities("Protection from each of your opponents").static[0]).toMatchObject({ ...self, protection: { fromPlayers: "opponents" } });
+    expect(qualities("Flying, protection from spells that are one or more colors").static[0]).toMatchObject({ ...self, protection: { filter: { isSpell: true, colorless: false } } });
+    expect(qualities("Protection from spells and from permanents that were cast this turn").static[0]).toMatchObject({
+      ...self,
+      protection: { filter: { anyOf: [{ isSpell: true }, { isSpell: false, cast: true, enteredThisTurn: true }] } },
+    });
+    expect(qualities("Protection from Zombies").static[0]).toMatchObject({ ...self, protection: { filter: { subtype: "Zombie" } } });
+    expect(qualities("Flying, first strike, lifelink, protection from Demons and from Dragons").static[0]).toMatchObject({
+      ...self,
+      protection: { filter: { anyOf: [{ subtype: "Demon" }, { subtype: "Dragon" }] } },
+    });
+    // Words that aren't a subtype stay a person's.
+    expect(qualities("Protection from snow").complete).toBe(false);
+    expect(qualities("You have protection from each of your opponents.").static[0]).toMatchObject({ playerProtection: { fromPlayers: "opponents" } });
+    expect(qualities("As this creature enters, choose a player.\nThis creature has protection from the chosen player.").static[0]).toMatchObject({ protection: { fromPlayers: "chosen" } });
+    expect(qualities("Aegis of the Emperor — Commanders you control have protection from everything.").static[0]).toMatchObject({
+      affects: { scope: "filter", filter: { isCommander: true, controlledBy: "you" } },
+      protection: { filter: {} },
+    });
+    expect(qualities("As this creature enters, choose a creature type.\nHuman creatures you control have protection from creatures of the chosen type.").static[0]).toMatchObject({
+      affects: { scope: "creatures-you-control", subtype: "Human" },
+      protection: { filter: { type: "creature", ofChosenType: true } },
+    });
+    expect(qualities("This creature has protection from each of the exiled card's card types.").static[0]).toMatchObject({ protection: { exiledCardTypes: true } });
+    expect(qualities("Enchant creature\nEnchanted creature gets +1/+1 and has protection from enchantments. This effect doesn't remove this Aura.", "Enchantment — Aura").static[0]).toMatchObject({
+      affects: { scope: "attached" },
+      grantPt: [1, 1],
+      protection: { types: ["enchantment"], doesntRemoveSource: true },
+    });
+    const grant = (quality: string) =>
+      qualities(`{T}: Target permanent you control gains protection from ${quality} until end of turn.`).activated[0].effect;
+    expect(grant("each of your opponents")).toMatchObject({ kind: "grant-protection", from: { fromPlayers: "opponents" }, duration: "end-of-turn" });
+    expect(grant("instant spells and from sorcery spells")).toMatchObject({
+      from: { filter: { anyOf: [{ isSpell: true, type: "instant" }, { isSpell: true, type: "sorcery" }] } },
+    });
+    expect(grant("everything")).toMatchObject({ from: { filter: {} } });
+  });
+
   it("a source of your choice (rule 609.7) and a colour set (layer 5) — Alpha's Circles and Laces", () => {
     const circle = face("{1}: The next time a red source of your choice would deal damage to you this turn, prevent that damage.", "Enchantment");
     expect(circle.activated[0].effect).toEqual({

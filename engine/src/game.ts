@@ -11336,8 +11336,17 @@ export class Game {
     if (!isLegalTarget(this.state, this.registry, spec, ref, controller, undefined, { notTargeted: true })) {
       return false;
     }
-    const source = onBattlefield ? this.permanentSource(aura) : this.cardSource(def, aura);
-    return !protectionBlocks(this.state, this.registry, host, source, aura);
+    const source = onBattlefield ? this.permanentSource(aura) : this.enteringSource(def, aura);
+    return !protectionBlocks(this.state, this.registry, host, source, aura, controller);
+  }
+
+  /** `cardSource`, of a card put onto the battlefield rather than cast — an
+   * Aura or Equipment entering attached: not a spell (the Emrakul, the Aeons
+   * Torn ruling: "colored Auras can be put onto the battlefield enchanting
+   * it"). A spell resolving is still on the stack, and `isSpell` reads that. */
+  private enteringSource(def: CardDefinition, object?: ObjectId): TargetSource {
+    const { spell: _, ...source } = this.cardSource(def, object);
+    return source;
   }
 
   /**
@@ -11356,7 +11365,7 @@ export class Game {
     if (spec === undefined) return false;
     const ref: TargetRef = { kind: "object", object: host };
     if (!isLegalTarget(this.state, this.registry, spec, ref, controller, undefined, { notTargeted: true })) return false;
-    return !protectionBlocks(this.state, this.registry, host, this.cardSource(def));
+    return !protectionBlocks(this.state, this.registry, host, this.enteringSource(def), undefined, controller);
   }
 
   /**
@@ -11381,7 +11390,8 @@ export class Game {
         this.state,
         this.registry,
         player,
-        onBattlefield ? this.permanentSource(aura) : this.cardSource(def, aura),
+        onBattlefield ? this.permanentSource(aura) : this.enteringSource(def, aura),
+        controller,
       )
     ) {
       return false;
@@ -38031,7 +38041,7 @@ export class Game {
     const def = this.registry.get(printedCardName(card));
     if (def.types.includes("creature") && !def.activated.some((a) => a.reconfigure !== undefined)) return false;
     if (!this.attachOnlyToAllows(id, host)) return false;
-    return !protectionBlocks(this.state, this.registry, host, this.cardSource(def, id));
+    return !protectionBlocks(this.state, this.registry, host, this.enteringSource(def, id));
   }
 
   /**
@@ -41921,7 +41931,7 @@ export class Game {
           this.registry,
           target.player,
           sourceLastKnown !== undefined
-            ? { colors: sourceLastKnown.colors, types: sourceLastKnown.types }
+            ? { colors: sourceLastKnown.colors, types: sourceLastKnown.types, object: source, lastKnown: sourceLastKnown }
             : this.permanentSource(source),
         )
       ) {
@@ -41966,7 +41976,7 @@ export class Game {
         this.registry,
         target.object,
         sourceLastKnown !== undefined
-          ? { colors: sourceLastKnown.colors, types: sourceLastKnown.types }
+          ? { colors: sourceLastKnown.colors, types: sourceLastKnown.types, object: source, lastKnown: sourceLastKnown }
           : this.permanentSource(source),
       )
     ) {

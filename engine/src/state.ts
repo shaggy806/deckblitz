@@ -1594,6 +1594,9 @@ export interface PtModifier {
     readonly colors?: readonly Color[];
     readonly types?: readonly CardType[];
     readonly filter?: CardFilter;
+    /** Protection from these players (rule 702.16k), fixed as it resolved
+     * (`ProtectionQualities.fromPlayers`). */
+    readonly fromPlayers?: "opponents" | readonly PlayerId[];
   };
   /** Combat restrictions this modifier imposes, with it — "target creature
    * can't block this turn", "~ must be blocked each combat this turn if

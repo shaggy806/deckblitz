@@ -418,6 +418,31 @@ static:anthem-per-counter-on-source (Banner of Kinship's enters-with count),
 static:per-keyword-pump, static:pt-per-attachments-on-source,
 static:pt-per-defending-player-count.
 
+### Protection from players, everything, spells, subtypes and exiled card types — built 2026-11-01
+
+The need-keys Phase 2 group `keyword:protection-from-opponents` and its six
+others, features only: protection (rule 702.16) whose quality is any source
+quality, read by all four parts — target, enchant and equip, damage, block —
+through `qualityMatches`. New: `fromPlayers` on a static, a player's protection
+and `grant-protection` (702.16k: "opponents", fixed as a grant resolves, or
+"chosen"), `CardFilter.isSpell` ("spells that are one or more colors", "instant
+spells"), `exiledCardTypes`, a static's filter read with its own source (Riders
+of Gavony's "of the chosen type"), `doesntRemoveSource` by card type (702.16n),
+everything needing no object to ask about (702.16j), a source that left read as
+it last existed for a filter, and `protectionLabel` in words instead of "a
+quality" (`protection-qualities.test.ts`). Keys:
+keyword:protection-from-opponents, keyword:protection-from-everything,
+keyword:protection-from-colored-spells,
+keyword:protection-from-spells-and-cast-permanents,
+keyword:protection-from-subtype, static:protection-from-exiled-card-types,
+static:protection-except-this-aura; Tier B static:player-protection-from-opponents,
+filter:protection-from-spells-only. Proving cards: Cliffside Rescuer, Figure of
+Fable, Absolute Virtue, True-Name Nemesis, Vexilus Praetor, Emrakul the Aeons Torn,
+Emrakul the World Anew, Devoted Caretaker, Baneslayer Angel, Riders of Gavony,
+Mirror Golem, Tattoo Ward. Left: protection from mana values and from a target
+player (groups of their own), the bots' `combat-math` reading only colours and
+types.
+
 ### A source of your choice, to anything, for the turn — built 2026-11-01
 
 The need-keys Phase 2 family `replacement:prevent-damage-from-chosen-source`,

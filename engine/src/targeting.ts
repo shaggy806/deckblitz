@@ -11,6 +11,7 @@ import {
   hasLostAbilities,
   playerHasHexproof,
   playerHasProtectionFromEverything,
+  protectionPlayers,
   staticConditionMet,
   withComputedCache,
 } from "./characteristics.js";
@@ -19,7 +20,7 @@ import type { CardFilter } from "./filter.js";
 import type { Color } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import { nameOf, printedCardName, rulesTextName } from "./state.js";
-import type { GameObject, GameState } from "./state.js";
+import type { GameObject, GameState, LastKnownInfo } from "./state.js";
 import { EVERY_CREATURE_TYPE, hasSubtype, isCreatureType } from "./subtypes.js";
 import {
   anyNumberSlot,
@@ -71,6 +72,9 @@ export interface TargetSource {
    * stack — `cardSource`), not an ability's: what a printed "can't be the
    * target of … spells" or "… of abilities" asks (`hexproofFromBlocks`). */
   readonly spell?: true;
+  /** The source as it last existed, when it has left since (rule 608.2h):
+   * what protection's filter and its "from a player" read (`dealDamage`). */
+  readonly lastKnown?: LastKnownInfo;
 }
 
 /** What a target filter is matched with on behalf of `source` — the
@@ -144,13 +148,16 @@ export function abilitySourceTypes(
 
 /** Does `target`'s protection (rule 702.16) stop `source` from affecting it?
  * `enchanting` is the Aura whose attachment is the question (702.16c): an
- * instance that "doesn't remove" that Aura is left out for it (702.16n). */
+ * instance that "doesn't remove" that Aura is left out for it (702.16n). `by`
+ * is who controls the spell or ability doing it, when that's known and needn't
+ * be its source's controller (702.16k): the one targeting, the Aura's. */
 export function protectionBlocks(
   state: GameState,
   registry: CardRegistry,
   target: ObjectId,
   source: TargetSource,
   enchanting?: ObjectId,
+  by?: PlayerId,
 ): boolean {
   const object = state.objects[target];
   if (object === undefined || object.zone !== "battlefield") return false;
@@ -158,12 +165,16 @@ export function protectionBlocks(
   const sparing = protection.sparing;
   if (enchanting !== undefined && sparing !== undefined) {
     const colors = new Set(sparing.otherColors);
+    const types = new Set(sparing.otherTypes);
     for (const instance of sparing.instances) {
-      if (instance.aura !== enchanting) for (const c of instance.colors) colors.add(c);
+      if (instance.aura !== enchanting) {
+        for (const c of instance.colors) colors.add(c);
+        for (const t of instance.types) types.add(t);
+      }
     }
-    return qualityMatches(state, registry, object.controller, { ...protection, colors }, source);
+    return qualityMatches(state, registry, object.controller, { ...protection, colors, types }, source, undefined, by);
   }
-  return qualityMatches(state, registry, object.controller, protection, source);
+  return qualityMatches(state, registry, object.controller, protection, source, undefined, by);
 }
 
 /** Hexproof from a quality (rule 702.11d-e): `target` has hexproof from
@@ -235,12 +246,14 @@ export function graveyardCardShielded(
  * `source` from targeting, enchanting or damaging them (702.16b, c, e)?
  * Matched as a permanent's protection is, each static's `filter` read with
  * its own permanent as the source ("the chosen card name"). Protection from
- * everything is `playerHasProtectionFromEverything`'s. */
+ * everything is `playerHasProtectionFromEverything`'s. `by` as
+ * `protectionBlocks`'. */
 export function playerProtectionBlocks(
   state: GameState,
   registry: CardRegistry,
   player: PlayerId,
   source: TargetSource,
+  by?: PlayerId,
 ): boolean {
   if (state.players[player]?.hasLost !== false) return false;
   for (const id of state.zones.shared.battlefield) {
@@ -252,8 +265,13 @@ export function playerProtectionBlocks(
       if (p === undefined) continue;
       if (ability.condition !== undefined && !staticConditionMet(state, registry, holder, ability.condition)) continue;
       const { colors, types } = chosenProtectionQualities(p, holder);
-      const prot = { colors: new Set(colors), types: new Set(types ?? []), filters: p.filter === undefined ? [] : [p.filter] };
-      if (qualityMatches(state, registry, player, prot, source, holder.id)) return true;
+      const prot = {
+        colors: new Set(colors),
+        types: new Set(types ?? []),
+        filters: p.filter === undefined ? [] : [p.filter],
+        players: new Set(protectionPlayers(state, p.fromPlayers, holder)),
+      };
+      if (qualityMatches(state, registry, player, prot, source, holder.id, by)) return true;
     }
   }
   return false;
@@ -269,45 +287,91 @@ export function protectionQualitiesMatch(
   state: GameState,
   registry: CardRegistry,
   controller: PlayerId,
-  from: { readonly colors?: readonly Color[]; readonly types?: readonly CardType[]; readonly filter?: CardFilter },
+  from: {
+    readonly colors?: readonly Color[];
+    readonly types?: readonly CardType[];
+    readonly filter?: CardFilter;
+    readonly fromPlayers?: "opponents" | readonly PlayerId[];
+  },
   source: TargetSource,
 ): boolean {
+  const players = from.fromPlayers === "opponents" ? state.turnOrder.filter((p) => p !== controller) : from.fromPlayers;
   return qualityMatches(
     state,
     registry,
     controller,
-    { colors: new Set(from.colors ?? []), types: new Set(from.types ?? []), filters: from.filter === undefined ? [] : [from.filter] },
+    {
+      colors: new Set(from.colors ?? []),
+      types: new Set(from.types ?? []),
+      filters: from.filter === undefined ? [] : [from.filter],
+      ...(players !== undefined ? { players: new Set(players) } : {}),
+    },
     source,
   );
+}
+
+/** Who controls `source` for a protection from a player (rule 702.16k): `by`,
+ * the spell's or ability's controller where it's known; as it last existed;
+ * the object's controller, on the battlefield or the stack; otherwise its
+ * owner, an object with no controller being its owner's (the True-Name Nemesis
+ * ruling). */
+function sourceController(state: GameState, source: TargetSource, by: PlayerId | undefined): PlayerId | undefined {
+  if (by !== undefined) return by;
+  if (source.lastKnown !== undefined) return source.lastKnown.controller;
+  const object = source.object === undefined ? undefined : state.objects[source.object];
+  if (object === undefined) return undefined;
+  return object.zone === "battlefield" || object.zone === "stack" ? object.controller : object.owner;
 }
 
 function qualityMatches(
   state: GameState,
   registry: CardRegistry,
   controller: PlayerId,
-  prot: { readonly colors: ReadonlySet<Color>; readonly types: ReadonlySet<CardType>; readonly filters: readonly CardFilter[] },
+  prot: {
+    readonly colors: ReadonlySet<Color>;
+    readonly types: ReadonlySet<CardType>;
+    readonly filters: readonly CardFilter[];
+    readonly boundFilters?: readonly { readonly filter: CardFilter; readonly source: ObjectId }[];
+    readonly players?: ReadonlySet<PlayerId>;
+  },
   source: TargetSource,
   filterSource?: ObjectId,
+  by?: PlayerId,
 ): boolean {
-  if (prot.colors.size === 0 && prot.types.size === 0 && prot.filters.length === 0) return false;
+  const bound = prot.boundFilters ?? [];
+  const players = prot.players;
+  if (prot.colors.size === 0 && prot.types.size === 0 && prot.filters.length === 0 && bound.length === 0 && (players?.size ?? 0) === 0) {
+    return false;
+  }
   for (const c of source.colors) if (prot.colors.has(c)) return true;
   for (const t of source.types) if (prot.types.has(t)) return true;
+  if (players !== undefined && players.size > 0) {
+    const who = sourceController(state, source, by);
+    if (who !== undefined && players.has(who)) return true;
+  }
+  // Protection from everything (rule 702.16j, an empty filter) asks nothing
+  // about the source, so needs no object to ask it of.
+  const everything = (filter: CardFilter): boolean => Object.keys(filter).length === 0;
+  if (prot.filters.some(everything) || bound.some((b) => everything(b.filter))) return true;
   // A quality no colour or card type can name — a subtype, multicoloured, or
-  // (an empty filter) everything. `matchesFilter` needs a real object, which
-  // rules out a source the caller could only describe by its characteristics;
-  // `source.object` is set wherever one exists, which is every permanent and
-  // every spell on the stack. Without it the colour/type clauses above have
-  // already had their say and this conservatively doesn't block, rather than
-  // guessing from a summary that cannot answer "is it a Human?".
-  if (prot.filters.length > 0 && source.object !== undefined) {
+  // spells. `matchesFilter` needs a real object, which rules out a source the
+  // caller could only describe by its characteristics; `source.object` is set
+  // wherever one exists, which is every permanent and every spell on the stack.
+  // Without it the colour/type clauses above have already had their say and
+  // this conservatively doesn't block, rather than guessing from a summary
+  // that cannot answer "is it a Human?". A source that has left is read as it
+  // last existed (rule 608.2h), a spell being cast as a spell.
+  if ((prot.filters.length > 0 || bound.length > 0) && source.object !== undefined) {
     const from = source.object;
+    const read = {
+      you: controller,
+      ...(source.lastKnown !== undefined ? { snapshot: source.lastKnown } : {}),
+      ...(source.spell === true ? { asSpell: true as const } : {}),
+    };
+    const own = filterSource !== undefined ? { ...read, source: filterSource } : read;
     if (
-      prot.filters.some((filter) =>
-        matchesFilter(state, registry, from, filter, {
-          you: controller,
-          ...(filterSource !== undefined ? { source: filterSource } : {}),
-        }),
-      )
+      prot.filters.some((filter) => matchesFilter(state, registry, from, filter, own)) ||
+      bound.some((b) => matchesFilter(state, registry, from, b.filter, { ...read, source: b.source }))
     ) {
       return true;
     }
@@ -453,7 +517,7 @@ function isLegalTargetUncached(
       if (object.controller !== forPlayer && keywords.has("hexproof")) return false;
     }
     // Protection (rule 702.16) — can't be targeted by a matching source.
-    if (source !== undefined && protectionBlocks(state, registry, ref.object, source)) {
+    if (source !== undefined && protectionBlocks(state, registry, ref.object, source, undefined, forPlayer)) {
       return false;
     }
     if (source !== undefined && hexproofFromBlocks(state, registry, ref.object, source, forPlayer)) {
@@ -473,7 +537,7 @@ function isLegalTargetUncached(
     // Protection from everything: no spell or ability targets them, their
     // own included (rule 702.16j).
     return false;
-  } else if (source !== undefined && playerProtectionBlocks(state, registry, ref.player, source)) {
+  } else if (source !== undefined && playerProtectionBlocks(state, registry, ref.player, source, forPlayer)) {
     // Protection from a quality: no spell with it, nor ability from a
     // source with it, targets them (rule 702.16b).
     return false;

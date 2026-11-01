@@ -8320,6 +8320,10 @@ export interface ProtectionQualities {
   readonly colors?: readonly Color[];
   readonly types?: readonly CardType[];
   readonly filter?: CardFilter;
+  /** Protection from players (rule 702.16k): `"opponents"` is "each of your
+   * opponents", fixed to those players as the effect resolves (Cliffside
+   * Rescuer's ruling) — a new controller doesn't change them. */
+  readonly fromPlayers?: "opponents" | readonly PlayerId[];
 }
 
 /** A protection quality chosen as the effect resolves (a `grant-protection`'s
@@ -11614,11 +11618,41 @@ export function protectionLabel(from: ProtectionQualities): string {
   const words = [
     ...(from.colors ?? []).map((c) => PROTECTION_COLOR_WORDS[c]),
     ...(from.types ?? []).map((t) => `${t}s`),
-    ...(from.filter === undefined
-      ? []
-      : [from.filter.colorless === true ? "colorless" : Object.keys(from.filter).length === 0 ? "everything" : "a quality"]),
+    ...(from.filter === undefined ? [] : protectionFilterWords(from.filter)),
+    // Fixed to the players as it resolves, however few are left.
+    ...(from.fromPlayers === undefined ? [] : ["each of your opponents"]),
   ];
   return `protection from ${words.length === 0 ? "nothing" : words.join(" and from ")}`;
+}
+
+/** A protection filter in words, each `anyOf` its own ("instant spells",
+ * "sorcery spells"): "everything", "colorless", "Zombies", "creatures your
+ * opponents control". What the shape doesn't say reads as "a quality". */
+function protectionFilterWords(filter: CardFilter): readonly string[] {
+  if (filter.anyOf !== undefined && Object.keys(filter).length === 1) return filter.anyOf.flatMap(protectionFilterWords);
+  if (Object.keys(filter).length === 0) return ["everything"];
+  const { colorless, multicolored, not, subtype, type, isSpell, colors, controlledBy, controllerIn, ...rest } = filter;
+  if (Object.keys(rest).length > 0) return ["a quality"];
+  const adjectives = [
+    ...(colorless === true ? ["colorless"] : []),
+    ...(multicolored === true ? ["multicolored"] : []),
+    ...(colors ?? []).map((c) => PROTECTION_COLOR_WORDS[c]),
+    ...(colorless === false ? ["colored"] : []),
+    ...(type !== undefined && (isSpell === true || subtype !== undefined) ? [type] : []),
+  ];
+  if (not !== undefined) return ["a quality"];
+  const noun =
+    isSpell === true
+      ? "spells"
+      : subtype !== undefined
+        ? `${subtype}s`
+        : type !== undefined
+          ? `${type}s`
+          : adjectives.length === 0
+            ? "objects"
+            : "";
+  const side = controlledBy === "opponent" || controllerIn !== undefined ? " your opponents control" : controlledBy === "you" ? " you control" : "";
+  return [`${[...adjectives, noun].filter((w) => w !== "").join(" ")}${side}`];
 }
 
 /** A protection filter's "you" and "your opponents" are the effect's
@@ -11627,11 +11661,12 @@ export function protectionLabel(from: ProtectionQualities): string {
  * protected permanent's controller's side, which a later change of control
  * would move. Rewritten to the players themselves (`controllerIn`). */
 function fixProtectionSide(from: ProtectionQualities, ctx: ResolutionContext): ProtectionQualities {
-  const filter = from.filter;
-  if (filter?.controlledBy !== "you" && filter?.controlledBy !== "opponent") return from;
+  const fixed = from.fromPlayers === "opponents" ? { ...from, fromPlayers: ctx.playersInScope("each-opponent") } : from;
+  const filter = fixed.filter;
+  if (filter?.controlledBy !== "you" && filter?.controlledBy !== "opponent") return fixed;
   const { controlledBy, ...rest } = filter;
   const players = controlledBy === "you" ? [ctx.controller] : ctx.playersInScope("each-opponent");
-  return { ...from, filter: { ...rest, controllerIn: players } };
+  return { ...fixed, filter: { ...rest, controllerIn: players } };
 }
 
 function resolveEffectTarget(
