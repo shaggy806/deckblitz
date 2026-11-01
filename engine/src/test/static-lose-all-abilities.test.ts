@@ -10,7 +10,7 @@
  */
 import { describe, expect, it } from "vitest";
 
-import { effectiveColors } from "../characteristics.js";
+import { effectiveColors, setComputedCacheCheck } from "../characteristics.js";
 import { A, B, cast, destroy, enter, hand, keywords, lands, life, pt, ref, registryOf, settle, spawn, subtypes, table, toHand, types, zone, nextTurn } from "./harness.js";
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
@@ -243,5 +243,29 @@ describe("the colour parts beside it", () => {
     settle(game);
     expect(colorsOf(game, golem)).toEqual(["R"]);
     expect(types(game, golem)).toEqual(["artifact", "creature"]);
+  });
+});
+
+describe("the computed-value cache across a lose-all source's move", () => {
+  // `moveObject` moved the mutation epoch only as it returned, so the events
+  // the move emits read `anyLoseAllSource` from before it: with a state
+  // trigger on the board (Skeleton Ship's "when you control no Islands"),
+  // `checkStateTriggers` saw an Aura that had just left as still there (the
+  // situation fuzzer, 2026-10-31).
+  it("sees the source gone as it leaves", () => {
+    const { game } = table();
+    lands(game, "Island", 1, B);
+    spawn(game, "Skeleton Ship", B);
+    const bears = spawn(game, "Grizzly Bears", B);
+    const grasp = spawn(game, "Enchanted River's Grasp", A);
+    game.debugApplyEffect(A, { kind: "attach", target: 0 }, [ref(bears)], { source: grasp });
+    expect(game.state.objects[grasp].attachedTo).toBe(bears);
+    setComputedCacheCheck(true);
+    try {
+      destroy(game, grasp);
+    } finally {
+      setComputedCacheCheck(false);
+    }
+    expect(zone(game, grasp)).toBe("graveyard");
   });
 });

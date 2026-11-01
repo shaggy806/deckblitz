@@ -43463,6 +43463,13 @@ export class Game {
     object.zone = to;
     this.zoneList(to, object.owner).push(id);
     object.zoneChangeCount = (object.zoneChangeCount ?? 0) + 1;
+    // The board changed: move the epoch now, not only as `moveObject` returns.
+    // The cache is suspended here, but the epoch-kept memos
+    // (`anyLoseAllSource`, `anyStaticGrantSource`) aren't, and the events this
+    // move emits run `checkStateTriggers` — which read a lose-all source
+    // that had just left as still there (the situation fuzzer, 2026-10-31:
+    // Enchanted River's Grasp destroyed beside Skeleton Ship).
+    invalidateComputedCache();
     if (object.isToken && to !== "battlefield") (this.state.tokensLeftBattlefield ??= []).push(id);
     // Rule 903.9a: a commander put into a graveyard or exile — from anywhere —
     // may go to the command zone, which the next state-based check offers.
