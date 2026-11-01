@@ -549,6 +549,25 @@ cards: Rule of Law, Deafening Silence, Ethersworn Canonist, Irencrag Feat,
 Curse of Exhaustion. Left: Hedonist's Trove's "this way", Fires of Invention's
 "no more than two" beside its "only during your turn" (one line, two statics).
 
+### A tapped-for-mana trigger that uses the stack — built 2026-11-01
+
+The need-keys Phase 2 family `trigger:tapped-for-mana-nonmana-trigger`, features
+only. Rule 106.12a's moment is now an event, `permanent-tapped-for-mana` (the
+object, the player who activated it, the types its own ability made), emitted by
+a hand activation and by a payment's `useManaSource`, so the auto-payer sets it
+off too. A `tapped-for-mana` trigger that `isTriggeredManaAbility` (adds mana, no
+target; rule 605.1b) is still made with the mana by `tappedForManaExtras`; any
+other goes on the stack the next time a player would get priority (603.3), its
+trigger object the permanent, its `"trigger-player"` who tapped it. `pool.test`'s
+guard narrows to the mana abilities. The scaffolder reads the trigger's wordings,
+"~ deals N damage to that player", "it deals N damage to each opponent", "return
+it to its owner's hand" and "target opponent creates … token". Key:
+trigger:tapped-for-mana-nonmana-trigger. Proving cards: Manabarbs, Burning Earth,
+Zhur-Taa Druid, Forbidden Orchard, Storm Cauldron, Sanctimony. Left: Treasure
+Nabber (a gain-control "until the end of your next turn", and a sacrificed token
+read by `matchesWho`), C.A.M.P. (fortify, and the colour of the mana produced,
+which `produced` now carries).
+
 ### A card chosen from a set as an effect resolves — built 2026-11-01
 
 The need-keys Phase 2 family `effect:choose-card-exiled-with-source`'s group,

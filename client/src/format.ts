@@ -59,6 +59,8 @@ const NOISY_EVENTS: ReadonlySet<GameEvent['type']> = new Set([
   'priority-passed',
   'step-began',
   'mana-added',
+  // Bookkeeping for "whenever … is tapped for mana" — the mana's own line says it.
+  'permanent-tapped-for-mana',
   // Bookkeeping for expend's "whenever you expend N" — the spend's own lines say it.
   'mana-expended',
   'permanent-tapped',
@@ -234,6 +236,8 @@ export function describeEvent(event: GameEvent, nameOf: NameOf, seats: readonly 
       return `${name(event.object)} untaps`
     case 'permanent-tapped':
       return `${name(event.object)} taps`
+    case 'permanent-tapped-for-mana':
+      return `${who(event.player)} taps ${name(event.object)} for mana`
     case 'mana-added':
       return `${who(event.player)} adds ${event.amount}{${event.mana}}`
     case 'card-drawn':

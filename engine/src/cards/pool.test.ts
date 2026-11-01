@@ -18,6 +18,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { describe, expect, it } from "vitest";
+import { isTriggeredManaAbility } from "../abilities.js";
 import { CARD_SHARD_COUNT, cardShardOf, loadCardShard } from "./card-shards.js";
 import { isCardFront, isDeckableCard, isTokenCard } from "./classify.js";
 import type { CardDefinition } from "./define.js";
@@ -185,15 +186,16 @@ describe("modal spells", () => {
 });
 
 describe("triggered mana abilities", () => {
-  // Rule 605.1b: a `tapped-for-mana` trigger is never put on the stack —
-  // `Game.tappedForManaExtras` applies it as the mana is made, and reads
-  // only an `add-mana` there, so any other effect would silently do
-  // nothing. Its amount is read with no X and no trigger value (a mana
-  // ability has neither), so one that reads either would add nothing too.
+  // Rule 605.1b: a `tapped-for-mana` trigger that adds mana and has no target
+  // is never put on the stack — `Game.tappedForManaExtras` applies it as the
+  // mana is made, and reads only an `add-mana` there, so any other shape of
+  // adding would silently do nothing. Its amount is read with no X and no
+  // trigger value (a mana ability has neither), so one that reads either
+  // would add nothing too. Any other effect uses the stack, as any trigger.
   it("are each a single add-mana, with an amount the mana's making can read", () => {
     const unread = POOL_CARDS.flatMap((def) =>
       def.triggered
-        .filter((ability) => ability.trigger.on === "tapped-for-mana")
+        .filter((ability) => ability.trigger.on === "tapped-for-mana" && isTriggeredManaAbility(ability))
         .filter(
           (ability) =>
             ability.effect?.kind !== "add-mana" ||

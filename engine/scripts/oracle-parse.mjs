@@ -1493,6 +1493,17 @@ export function parseTrigger(clause) {
       },
     ];
   }
+  // "Whenever a player taps a nonbasic land for mana" (Burning Earth), "whenever
+  // an opponent taps a Mountain for mana" (Sanctimony), "whenever a land is
+  // tapped for mana" (Storm Cauldron), "whenever you tap ~ for mana" (Zhur-Taa
+  // Druid): rule 106.12a, as the mana ability resolves and produces mana.
+  if (/^Whenever you tap ~ for mana$/.test(c)) return [{ on: "tapped-for-mana", who: "self" }];
+  if ((m = /^Whenever (a player|an opponent|you) taps? (?:a|an) (.+) for mana$/.exec(c)) || (m = /^Whenever ()(?:a|an) (.+) is tapped for mana$/.exec(c))) {
+    const filter = m[2] === "nonbasic land" ? { type: "land", notSupertype: "basic" } : parseTypePhrase(m[2]);
+    if (filter === null) return null;
+    const who = m[1] === "an opponent" ? "opponent" : m[1] === "you" ? "you-control" : "any";
+    return [{ on: "tapped-for-mana", who, filter }];
+  }
   // "Whenever Don & Raph attack": a plural name.
   if (/^Whenever ~ attacks?$/.test(c)) return self("attacks");
   if (/^Whenever ~ blocks$/.test(c)) return self("blocks");
@@ -2327,7 +2338,7 @@ export function parseSentence(sentence, ctx) {
   }
   // "That player reveals a card at random from their hand" (Merfolk Spy): the
   // player the trigger is about.
-  if (ctx.thatPlayer !== undefined && re(`that player reveals a card at random from their hand`).test(s)) {
+  if (ctx?.thatPlayer !== undefined && re(`that player reveals a card at random from their hand`).test(s)) {
     return { kind: "choose-random-card", zone: "hand", whose: "that-player", show: "reveal" };
   }
   // "Target player reveals their hand" (Search Warrant's first sentence), and
@@ -2602,6 +2613,14 @@ export function parseSentence(sentence, ctx) {
       ...(m[2] ? { tapped: true } : {}),
       ...(xx ? { basePt: { power: "x", toughness: "x" } } : {}),
     };
+  }
+  // "Target opponent creates a 1/1 colorless Spirit creature token" (Forbidden
+  // Orchard, Hunted Lammasu): under that player's control.
+  if ((m = re(`(target player|target opponent) creates ${N} ([^"“]+?) tokens?`).exec(s)) && !/ or | and an? |\btokens? and /.test(m[3])) {
+    const name = ctx.tokenFor?.(m[3]) ?? null;
+    if (name === null) return null;
+    slot(m[1]);
+    return { kind: "create-token", token: name, count: amount(m[2]), who: "target-controller" };
   }
   // A token copy of a linked source: the creature enchanted, a card exiled
   // with this (rule 607.2a), or "the exiled card" — of the cost when the cost
@@ -3313,6 +3332,11 @@ export function parseSentence(sentence, ctx) {
   // "Enchanted creature deals 1 damage to its owner" (Enslave).
   if ((m = re(`enchanted creature deals ${N} damage to its owner`).exec(s))) {
     return { kind: "damage", amount: amount(m[1]), who: "attached-owner", from: "attached" };
+  }
+  // "Whenever a player taps a land for mana, ~ deals 1 damage to that player"
+  // (Manabarbs): the player the event names.
+  if (ctx.thatPlayer === "trigger-player" && (m = re(`~ deals ${N} damage to that player`).exec(s))) {
+    return { kind: "damage", amount: amount(m[1]), who: "trigger-player" };
   }
   // "That player" who owned what the trigger is about (Warped Devotion,
   // Liability — `thatPlayerOf`).
@@ -4183,6 +4207,15 @@ export function parseSentence(sentence, ctx) {
     if (it === "source" && (m = re(`it deals ${N} damage to each (${BLOCK_RELATION})`).exec(s))) {
       const filter = blockRelationFilterOf(m[2]);
       return filter === undefined ? null : { kind: "damage-all", amount: amount(m[1]), filter };
+    }
+    // "It deals 1 damage to each opponent" (Zhur-Taa Druid).
+    if (it === "source" && (m = re(`it deals ${N} damage to each opponent`).exec(s))) {
+      return { kind: "damage", amount: amount(m[1]), who: "each-opponent" };
+    }
+    // "Whenever a land is tapped for mana, return it to its owner's hand"
+    // (Storm Cauldron): a permanent still there, not one that has left.
+    if (it === "trigger-object" && ctx.departed === undefined && re("return it to its owner's hand").test(s)) {
+      return { kind: "return-to-hand", target: it };
     }
     if ((it === "source" || it === "trigger-object") && (m = re(`it deals ${N} damage to (${TARGET})`).exec(s))) {
       return { kind: "damage", amount: amount(m[1]), target: slot(m[2]), ...(it === "source" ? {} : { from: it }) };
@@ -8428,6 +8461,9 @@ function thatPlayerOf(triggers) {
   if (triggers.every((t) => t.on === "step-begins" && t.who === "opponent")) return "active-player";
   if (triggers.every((t) => t.on === "deals-damage-batch" && t.combat === true)) return "trigger-player";
   if (triggers.every((t) => t.on === "deals-combat-damage-to-player")) return "trigger-player";
+  // "Whenever a player taps a land for mana, ~ deals 1 damage to that player"
+  // (Manabarbs): who activated the mana ability.
+  if (triggers.every((t) => t.on === "tapped-for-mana")) return "trigger-player";
   // "When the chosen player draws a card with the chosen name, … that
   // player" (Booby Trap): who drew, the drawn card's controller.
   if (triggers.every((t) => t.on === "draws" && t.who === "chosen-player")) return "trigger-controller";
@@ -8651,7 +8687,7 @@ function itOf(triggers) {
   // "That Vehicle" / "that Mount" (read as "it"): the permanent crewed or
   // saddled, the trigger object.
   if (triggers.every((t) => t.on === "crews-or-saddles")) return "trigger-object";
-  const objectEvents = ["enters-battlefield", "dies", "attacks", "blocks", "becomes-blocked", "deals-combat-damage-to-player"];
+  const objectEvents = ["enters-battlefield", "dies", "attacks", "blocks", "becomes-blocked", "deals-combat-damage-to-player", "tapped-for-mana"];
   if (triggers.every((t) => t.who === "self" && objectEvents.includes(t.on))) return "source";
   // The permanent a spell or ability targeted ("that creature" — Monk Gyatso).
   const othersEvents = [...objectEvents, "becomes-target"];

@@ -14,6 +14,7 @@ import {
   costAnnouncesX,
   isEquipAbility,
   isManaAbility,
+  isTriggeredManaAbility,
   loyaltyDelta,
   sacrificeCostFilters,
   sacrificeCostParts,
@@ -19575,6 +19576,8 @@ export class Game {
           const type = pick !== undefined && out.choices.includes(pick) ? pick : out.choices[0];
           this.addMana(player, type, out.amount, undefined, origin);
         }
+        // What triggers on the tap and uses the stack (rule 106.12a).
+        if (produced.length > 0) this.emit({ type: "permanent-tapped-for-mana", object: sourceId, player, produced });
       }
       this.emit({
         type: "ability-activated",
@@ -21012,6 +21015,13 @@ export class Game {
     if (step.rider !== undefined) {
       applyEffectSpec(step.rider, this.makeResolutionContext(step.source, player, []));
     }
+    // What triggers on the tap and uses the stack, once this spell or ability
+    // is cast and someone would get priority (rules 106.12a, 603.3). An option
+    // with no {T} (`untapped`) isn't a tap, and one that made no mana of its
+    // own sets nothing off.
+    if (step.untapped === undefined && own > 0) {
+      this.emit({ type: "permanent-tapped-for-mana", object: step.source, player, produced: step.mana.slice(0, own) });
+    }
   }
 
   /**
@@ -21303,8 +21313,10 @@ export class Game {
         const trigger = ability.trigger;
         if (trigger.on !== "tapped-for-mana") continue;
         const effect = ability.effect;
-        // Only an `add-mana` (pool.test holds every card to that).
-        if (effect === null || effect.kind !== "add-mana") continue;
+        // Only an `add-mana` (pool.test holds every card to that); anything
+        // else uses the stack, or a target makes it no mana ability (rule
+        // 605.1b — `permanent-tapped-for-mana`).
+        if (effect === null || effect.kind !== "add-mana" || !isTriggeredManaAbility(ability)) continue;
         if (!this.matchesWho(trigger.who, tapped.id, holder)) continue;
         if (
           trigger.filter !== undefined &&
@@ -23899,6 +23911,9 @@ export class Game {
         if (discardedOnly.has(id) && ability.trigger.on !== "this-discarded") return;
         if (onlyThisPlotted && ability.trigger.on !== "this-plotted") return;
         if (onlyLookBack && !LOOK_BACK_TRIGGERS.has(ability.trigger.on)) return;
+        // A triggered mana ability (rule 605.1b) doesn't use the stack:
+        // `tappedForManaExtras` made its mana with the rest.
+        if (ability.trigger.on === "tapped-for-mana" && isTriggeredManaAbility(ability)) return;
         if (
           this.triggerMatches(ability.trigger, event, object) &&
           !this.enterBatchAlreadyFired(ability.trigger, `${id}#${index}`) &&
@@ -24440,6 +24455,9 @@ export class Game {
       }
     } else if (event.type === "player-attacked") {
       player = event.defender;
+    } else if (event.type === "permanent-tapped-for-mana") {
+      // "That player" of "whenever a player taps a land for mana" (Manabarbs).
+      player = event.player;
     } else if (event.type === "attackers-declared") {
       attackers = event.attackers.map((id) => ({
         object: id,
@@ -25000,9 +25018,16 @@ export class Game {
           this.triggerFilterOk(spec.filter, event.object, self, true)
         );
       case "tapped-for-mana":
-        // A triggered mana ability (rule 605.1b) resolves as the mana is
-        // made — see `tappedForManaExtras` — and is never put on the stack.
-        return false;
+        // Read as the permanent last existed: a land sacrificed for its mana
+        // was still a land (rule 608.2h). A triggered mana ability (rule
+        // 605.1b) resolves as the mana is made instead — see
+        // `tappedForManaExtras` — and `detectTriggersUncached` leaves it out.
+        return (
+          event.type === "permanent-tapped-for-mana" &&
+          this.matchesWho(spec.who, event.object, self, true) &&
+          this.triggerFilterOk(spec.filter, event.object, self, true) &&
+          (spec.producing === undefined || event.produced.includes(spec.producing))
+        );
       case "chapter-resolves":
         return (
           event.type === "chapter-resolved" &&
@@ -25505,6 +25530,8 @@ export class Game {
       event.type === "became-renowned" ||
       event.type === "became-saddled" ||
       event.type === "permanent-exerted" ||
+      // "Whenever a land is tapped for mana, return it" (Storm Cauldron).
+      event.type === "permanent-tapped-for-mana" ||
       // "Whenever a creature you control explores, … it" — the explorer.
       event.type === "explored" ||
       // "Whenever a permanent you control is turned face up … it"

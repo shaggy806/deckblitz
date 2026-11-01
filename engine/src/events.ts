@@ -537,6 +537,16 @@ export type GameEvent =
     })
   | (Base & { readonly type: "permanent-tapped"; readonly object: ObjectId })
   | (Base & {
+      /** A mana ability of `object` with {T} in its cost resolved and made
+       * mana (rule 106.12a): "whenever … is tapped for mana". `player`
+       * activated it, and `produced` is the types of mana it made. What a
+       * triggered mana ability adds isn't "produced" by the permanent. */
+      readonly type: "permanent-tapped-for-mana";
+      readonly object: ObjectId;
+      readonly player: PlayerId;
+      readonly produced: readonly ManaType[];
+    })
+  | (Base & {
       readonly type: "mana-added";
       readonly player: PlayerId;
       readonly mana: ManaType;

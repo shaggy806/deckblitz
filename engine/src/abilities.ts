@@ -1434,6 +1434,15 @@ export type TriggerSpec =
        * effect is an `add-mana`, whose `mana: "produced"` is "one mana of any
        * type that permanent produced". `who` is about the tapped permanent
        * (`"you-control"`: "whenever you tap …").
+       *
+       * **Any other effect, or a target, and it isn't a mana ability**: it
+       * triggers as the mana ability resolves and produces mana (rule 106.12a)
+       * and goes on the stack the next time a player would receive priority
+       * (rule 603.3), above a spell the mana is paying for (Burning Earth's
+       * "whenever a player taps a nonbasic land for mana, this enchantment
+       * deals 1 damage to that player", Zhur-Taa Druid, Forbidden Orchard).
+       * The tapped permanent is the trigger object, and the player who
+       * activated its ability the `"trigger-player"`.
        */
       readonly on: "tapped-for-mana";
       readonly who: TriggerWho;

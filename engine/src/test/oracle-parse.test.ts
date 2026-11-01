@@ -7575,3 +7575,38 @@ describe("a card chosen from a set as an effect resolves", () => {
     });
   });
 });
+
+describe("a tapped-for-mana trigger that uses the stack", () => {
+  const face = (type_line: string, oracle_text: string) =>
+    parseFace({ name: "Test Tap", type_line, oracle_text }, { tokenFor: () => "Spirit Token (Colorless)" });
+
+  it("reads who tapped what, and 'that player'", () => {
+    const earth = face("Enchantment", "Whenever a player taps a nonbasic land for mana, this enchantment deals 1 damage to that player.");
+    expect(earth.complete).toBe(true);
+    expect(earth.triggered[0].trigger).toEqual({ on: "tapped-for-mana", who: "any", filter: { type: "land", notSupertype: "basic" } });
+    expect(earth.triggered[0].effect).toEqual({ kind: "damage", amount: 1, who: "trigger-player" });
+    const sanctimony = face("Enchantment", "Whenever an opponent taps a Mountain for mana, you may gain 1 life.");
+    expect(sanctimony.complete).toBe(true);
+    expect(sanctimony.triggered[0].trigger).toEqual({ on: "tapped-for-mana", who: "opponent", filter: { subtype: "Mountain" } });
+    const you = face("Creature — Elemental Cat", "Whenever you tap a land for mana, remove a +1/+1 counter from this creature.");
+    expect(you.triggered[0].trigger).toEqual({ on: "tapped-for-mana", who: "you-control", filter: { type: "land" } });
+  });
+
+  it("reads itself tapped, 'it' as the source; a land tapped, 'it' as the trigger's object", () => {
+    const druid = face("Creature — Human Druid", "{T}: Add {G}.\nWhenever you tap this creature for mana, it deals 1 damage to each opponent.");
+    expect(druid.complete).toBe(true);
+    expect(druid.triggered[0].trigger).toEqual({ on: "tapped-for-mana", who: "self" });
+    expect(druid.triggered[0].effect).toEqual({ kind: "damage", amount: 1, who: "each-opponent" });
+    const cauldron = face("Artifact", "Whenever a land is tapped for mana, return it to its owner's hand.");
+    expect(cauldron.complete).toBe(true);
+    expect(cauldron.triggered[0].trigger).toEqual({ on: "tapped-for-mana", who: "any", filter: { type: "land" } });
+    expect(cauldron.triggered[0].effect).toEqual({ kind: "return-to-hand", target: "trigger-object" });
+  });
+
+  it("reads a target, the token that player's", () => {
+    const orchard = face("Land", "Whenever you tap this land for mana, target opponent creates a 1/1 colorless Spirit creature token.");
+    expect(orchard.complete).toBe(true);
+    expect(orchard.triggered[0].targets).toEqual(["opponent"]);
+    expect(orchard.triggered[0].effect).toEqual({ kind: "create-token", token: "Spirit Token (Colorless)", count: 1, who: "target-controller" });
+  });
+});
