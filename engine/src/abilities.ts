@@ -388,9 +388,17 @@ export interface AbilityCost {
    * `choose-from-zone` with the `"reveal"` destination — `Game.beginBehold`
    * over a `fromHand` spec — unasked when every matching card is needed.
    * They stay in the hand. Not on a mana ability, nor beside another cost
-   * that asks.
+   * that asks. `shareColor` (a fixed `count` only) is Illuminated Folio's
+   * "Reveal two cards from your hand that share a color" (see
+   * `BeholdSpec.shareColor`). The effect reads the cards as `"revealed"`
+   * ({@link AmountRef}) when there's one.
    */
-  readonly reveal?: { readonly count: number | "x"; readonly filter: CardFilter; readonly text: string };
+  readonly reveal?: {
+    readonly count: number | "x";
+    readonly filter: CardFilter;
+    readonly text: string;
+    readonly shareColor?: boolean;
+  };
   /**
    * Tap *other* permanents you control as part of the cost — Gravespawn
    * Sovereign's "Tap five untapped Zombies you control". Distinct from

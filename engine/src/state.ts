@@ -2108,6 +2108,21 @@ export interface LastKnownRefs {
    * exile for a madness card. Recorded as the discard happens, which for a
    * chosen discard is once its decision is answered (rule 602.2b). */
   readonly discarded?: readonly { readonly object: ObjectId; readonly zoneChangeCount: number }[];
+  /** "The revealed card": the cards revealed from the hand to pay the
+   * spell's or ability's cost (Induce Despair's "where X is the revealed
+   * card's mana value", Titan's Presence's "the revealed card's power"),
+   * each with its stint in the hand and what it was there as it was revealed
+   * — read instead once it has left the hand ("use its power as it last
+   * existed in your hand": the rulings). Recorded as the reveal is made
+   * (`Game.carryOutBehold`). */
+  readonly revealed?: readonly {
+    readonly object: ObjectId;
+    readonly zoneChangeCount: number;
+    readonly power: number;
+    readonly toughness: number;
+    readonly manaValue: number;
+    readonly creature: boolean;
+  }[];
   /** For an ability a permanent's static granted another ("Equipped
    * creature has '…, Sacrifice Ninja's Kunai: Ninja's Kunai deals 3
    * damage …'"): the granting permanent and its battlefield stint as the
@@ -2962,6 +2977,10 @@ export type AwaitingDecision =
         /** A pitch cost's "exile a blue card from your hand" (`BeholdSpec.fromHand`):
          * hand cards only, nothing revealed, and asked as a plain exile. */
         readonly fromHand?: true;
+        /** The spell or ability on the stack whose cost this is: it
+         * remembers the cards revealed from the hand
+         * (`LastKnownRefs.revealed` — "the revealed card's power"). */
+        readonly forCost?: ObjectId;
       };
       /** A collect evidence N (rule 701.59a — `Game.beginCollectEvidence`):
        * the chosen graveyard cards are exiled by `destination` and, if any

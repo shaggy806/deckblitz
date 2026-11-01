@@ -210,14 +210,18 @@ export type SearchTogether =
  * cost ("equal to the tapped creature's power" — station) — and
  * `"discarded"`, the one card discarded to pay the cost ("where X is the
  * discarded card's mana value" — Volrath the Fallen), read where the discard
- * put it. Nothing sacrificed, tapped or discarded reads 0.
+ * put it — and `"revealed"`, the one card revealed from the hand to pay the
+ * cost ("where X is the revealed card's mana value" — Induce Despair), read
+ * in the hand while it's still there and as it last existed there once it
+ * has left (the rulings). Nothing sacrificed, tapped, discarded or revealed
+ * reads 0.
  *
  * An object that was a permanent when the spell or ability referred to it
  * and has left the battlefield since is read as it last existed there (rule
  * 608.2h — see `LastKnownRefs`): "When Juri dies, it deals damage equal to
  * its power" counts the counters Juri died with.
  */
-export type AmountRef = EffectTargetRef | "sacrificed" | "tapped" | "discarded";
+export type AmountRef = EffectTargetRef | "sacrificed" | "tapped" | "discarded" | "revealed";
 /** Where a `return-to-hand` effect takes its object from. */
 export type ReturnToHandZone = "battlefield" | "graveyard" | "exile" | "stack";
 /**
@@ -994,6 +998,13 @@ export interface BeholdSpec {
    * 701.20a): the cards are revealed and stay in the hand, asked with the
    * `choose-from-zone` decision's `"reveal"` destination. */
   readonly fromHand?: boolean;
+  /** With `fromHand` and a `count`: the cards share a colour — Illuminated
+   * Folio's "Reveal two cards from your hand that share a color". Only a
+   * card with a colour that `count` of the matching cards have is offered
+   * (colourless shares none — its ruling), and the choice is the
+   * `choose-from-zone` decision's `together` rule `"share"` over each card's
+   * colours, which the client already reads. */
+  readonly shareColor?: boolean;
 }
 
 /** A ward cost as printed after "Ward" — "{2}" or "—{2}, Pay 2 life." — so a
@@ -9790,6 +9801,10 @@ export interface ResolutionContext extends EffectApi {
    * (`LastKnownRefs.discarded`) — an {@link AmountRef} `"discarded"` reads
    * the one card when there is exactly one. Absent when none were. */
   readonly discarded?: readonly ObjectId[];
+  /** The cards revealed from the hand to pay this spell's or ability's cost
+   * (`LastKnownRefs.revealed`) — an {@link AmountRef} `"revealed"` reads the
+   * one card when there is exactly one. Absent when none were. */
+  readonly revealed?: readonly ObjectId[];
   /** The permanent whose static granted this ability (`LastKnownRefs
    * .granter`) — what an {@link EffectTargetRef} `"granter"` names. Absent
    * on an ability nothing granted. */
@@ -11146,6 +11161,11 @@ function resolveAmountRef(ref: AmountRef, ctx: ResolutionContext): TargetRef | u
   // "The discarded card": the cost's one discarded card, where it went.
   if (ref === "discarded") {
     return ctx.discarded?.length === 1 ? { kind: "object", object: ctx.discarded[0] } : undefined;
+  }
+  // "The revealed card": the cost's one revealed card — the context's reads
+  // know to take it as it was in the hand once it has left.
+  if (ref === "revealed") {
+    return ctx.revealed?.length === 1 ? { kind: "object", object: ctx.revealed[0] } : undefined;
   }
   // A read of the granter: as it last existed once it has left (608.2h) —
   // "the number of arrow counters on Archery Training".

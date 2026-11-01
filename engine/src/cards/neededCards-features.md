@@ -321,6 +321,29 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### The card revealed for a cost, and cards revealed that share a colour — built 2026-10-31
+
+The need-keys Phase 2 family `cost:reveal-card-as-additional-cost`, features
+only, on the reveal-as-cost machinery (`BeholdSpec.fromHand`, 2026-10-30). A
+cost's reveal from the hand — a spell's additional cost, a cost option, a
+kicker reveal, an ability's `reveal` — is now remembered on the spell or
+ability it paid for (`LastKnownRefs.revealed`, with what the card was in the
+hand), read as the new `"revealed"` `AmountRef`: in the hand while it's
+there, as it last existed there once it has left (the rulings). An
+activated `reveal` takes `shareColor` (Illuminated Folio), offered only cards
+with a colour enough of them have and asked with the choose-from-zone
+decision's existing `together` rule "share", which the client reads already.
+"Reveal a Pirate card from your hand or pay {2}" (Daring Buccaneer, Sadistic
+Skymarcher, Surtland Elementalist) was already Lorwyn's cost option — only
+marked. The scaffolder reads the mandatory reveal line, "Reveal two cards
+from your hand that share a color" and the revealed card's -X/-X, damage,
+exile-all, conditional exile and life. Keys:
+cost:reveal-card-as-additional-cost, cost:reveal-cards-sharing-color.
+Proving cards: Induce Despair, Charge of the Forever-Beast, Calamity of the
+Titans, Titan's Presence, Living Destiny, Illuminated Folio. Left: a copy
+of such a spell reads no revealed card (as a copy's sacrificed and discarded
+don't — rule 707.10).
+
 ### Sacrifice costs matched against the source — built 2026-10-31
 
 The need-keys Phase 2 family `cost:sacrifice-multiple`'s first group, features

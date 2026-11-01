@@ -3241,7 +3241,28 @@ tapOthers?, untap? }`.
   `destination: "reveal"` once the ability is on the stack (unasked when every
   match is needed). The cards stay in hand; the effect reads X as `"x"`
   (Martyr of Sands' `{ product: [3, "x"] }`). Not on a mana ability, nor
-  beside another cost that asks. `reveal-as-cost.test.ts`.
+  beside another cost that asks. `reveal-as-cost.test.ts`. `shareColor: true`
+  (a fixed `count`) is "Reveal two cards from your hand **that share a
+  color**" (Illuminated Folio: `{ count: 2, filter: {}, text: "cards",
+  shareColor: true }`): only cards with a colour enough of them have are
+  offered (colourless shares none), the choice's `together` rule "share"
+  over their colours. `revealed-card-cost.test.ts`.
+- **"The revealed card"** — the one card a cost revealed from the hand (a
+  spell's `additionalCost.behold` with `fromHand`, a cost option's, a
+  kicker's `keyword: "reveal"`, an ability's `reveal` of one) is the
+  `"revealed"` `AmountRef`: Induce Despair's "-X/-X, where X is the revealed
+  card's mana value" is `{ product: [{ manaValueOf: "revealed" }, -1] }`,
+  Charge of the Forever-Beast's damage `{ powerOf: "revealed" }`, Titan's
+  Presence's "if its power is less than or equal to the revealed card's
+  power" a `conditional` on `{ power: { op: "lte", n: { amount: { powerOf:
+  "revealed" } } } }`. Read in the hand while it's still there, and as it
+  last existed there once it has left (the rulings —
+  `LastKnownRefs.revealed`). A mandatory "As an additional cost to cast this
+  spell, reveal a creature card from your hand" is `additionalCost: {
+  behold: { filter: { type: "creature" }, text: "a creature card",
+  fromHand: true } }`. A copy of the spell reads nothing (as a copy's
+  "sacrificed" and "discarded" don't: engine gap). The scaffolder reads the
+  mandatory line and these sentences. `revealed-card-cost.test.ts`.
 - `exileFromGraveyard: { count, filter? }` — "Exile two cards from your
   graveyard" (Varina, Lich Queen; Mines of Moria), "Exile a creature card
   from your graveyard" (Moorland Haunt: `filter: { type: "creature" }`). The

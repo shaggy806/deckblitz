@@ -15958,6 +15958,7 @@ export class Game {
         this.beginBehold(player, cardId, beholdCost, {
           x: chosenX,
           priorityTo,
+          forCost: cardId,
           ...(beholdCost.exile === true && beholdCost.fromHand !== true && onStack !== undefined
             ? { exileLink: { source: cardId, zoneChangeCount: (onStack.zoneChangeCount ?? 0) + 1 } }
             : {}),
@@ -18507,8 +18508,14 @@ export class Game {
           this.beginBehold(
             player,
             sourceId,
-            { filter: costReveal.filter, text: costReveal.text, count, fromHand: true },
-            { priorityTo: player, except: sourceId },
+            {
+              filter: costReveal.filter,
+              text: costReveal.text,
+              count,
+              fromHand: true,
+              ...(costReveal.shareColor === true ? { shareColor: true } : {}),
+            },
+            { priorityTo: player, except: sourceId, forCost: abilityId },
           ),
         );
       }
@@ -18619,6 +18626,30 @@ export class Game {
     };
   }
 
+  /** Remember `cards`, just revealed from the hand for `stackObject`'s cost,
+   * on it — each with its stint in the hand and its power, toughness and
+   * mana value there, what "the revealed card's power" reads once it has
+   * left the hand (the rulings: "as it last existed in your hand"). */
+  private recordCostReveal(stackObject: ObjectId, cards: readonly ObjectId[]): void {
+    const object = this.state.objects[stackObject];
+    if (object === undefined || object.zone !== "stack" || cards.length === 0) return;
+    const entries = cards.map((card) => {
+      const chars = computeCharacteristics(this.state, this.registry, card);
+      return {
+        object: card,
+        zoneChangeCount: this.state.objects[card]?.zoneChangeCount ?? 0,
+        power: chars.power,
+        toughness: chars.toughness,
+        manaValue: this.manaValueOfTarget({ kind: "object", object: card }),
+        creature: chars.types.includes("creature"),
+      };
+    });
+    object.lastKnownRefs = {
+      ...object.lastKnownRefs,
+      revealed: [...(object.lastKnownRefs?.revealed ?? []), ...entries],
+    };
+  }
+
   /** The cards in `player`'s graveyard an "exile N cards from your
    * graveyard" cost may take: those matching `filter`, never `except` (the
    * ability's own source, a card in the graveyard paying for itself). */
@@ -18626,7 +18657,17 @@ export class Game {
    * `reveal` cost (`AbilityCost.reveal`) — never the source, wherever it is
    * (a hand-activated ability can't reveal itself for its own cost). */
   private revealCostCandidates(player: PlayerId, cost: NonNullable<AbilityCost["reveal"]>, except: ObjectId): ObjectId[] {
-    return this.beholdCandidates(player, { filter: cost.filter, text: cost.text, fromHand: true }, except);
+    return this.beholdCandidates(
+      player,
+      {
+        filter: cost.filter,
+        text: cost.text,
+        fromHand: true,
+        // "Two cards that share a color": only the ones with a partner.
+        ...(cost.shareColor === true && typeof cost.count === "number" ? { shareColor: true, count: cost.count } : {}),
+      },
+      except,
+    );
   }
 
   private graveyardCostCandidates(player: PlayerId, filter: CardFilter | undefined, except: ObjectId): ObjectId[] {
@@ -25470,6 +25511,17 @@ export class Game {
         ? this.lastKnownOfStint(target.object, stint)
         : this.lastKnownOfTarget(target.object, expectedZoneOf(target));
     };
+    // A card revealed from the hand for the cost that has left the hand
+    // since: what it was there as it was revealed — "use its power as it
+    // last existed in your hand" (Titan's Presence's ruling). Still there,
+    // it's read as it is.
+    const revealedGone = (target: TargetRef): NonNullable<LastKnownRefs["revealed"]>[number] | undefined => {
+      if (target.kind !== "object" || refs.revealed === undefined) return undefined;
+      const entry = refs.revealed.find((r) => r.object === target.object);
+      if (entry === undefined) return undefined;
+      const now = this.state.objects[target.object];
+      return now?.zone === "hand" && (now.zoneChangeCount ?? 0) === entry.zoneChangeCount ? undefined : entry;
+    };
     const departedSource = (): LastKnownInfo | undefined =>
       refs.source === undefined ? undefined : this.lastKnownOfStint(source, refs.source);
     // What the source chose as it entered, in the stint this refers to: as it
@@ -25791,6 +25843,7 @@ export class Game {
       ...(opts.announcedModes !== undefined ? { announcedModes: opts.announcedModes } : {}),
       ...(refs.sacrificed !== undefined ? { sacrificed: refs.sacrificed.object } : {}),
       ...(refs.discarded !== undefined ? { discarded: refs.discarded.map((d) => d.object) } : {}),
+      ...(refs.revealed !== undefined ? { revealed: refs.revealed.map((r) => r.object) } : {}),
       // The granter is acted on only while it's the same permanent (400.7).
       ...(refs.granter !== undefined
         ? {
@@ -25971,6 +26024,8 @@ export class Game {
         ) {
           return spell.lastStackManaValue;
         }
+        const gone = revealedGone(target);
+        if (gone !== undefined) return gone.manaValue;
         return this.manaValueOfTarget(target, expectedZoneOf(target), lastKnownOf(target));
       },
       manaSpentOf: (target) => {
@@ -27905,6 +27960,8 @@ export class Game {
       // that isn't a creature as Phenax's granted ability resolves, or wasn't
       // as it left, mills nothing (its ruling).
       powerOf: (target) => {
+        const gone = revealedGone(target);
+        if (gone !== undefined) return gone.creature ? gone.power : 0;
         const lki = lastKnownOf(target);
         if (lki !== undefined) return lki.types.includes("creature") ? lki.power : 0;
         if (target.kind !== "object" || this.state.objects[target.object] === undefined) return 0;
@@ -27914,6 +27971,8 @@ export class Game {
           : chars.power;
       },
       toughnessOf: (target) => {
+        const gone = revealedGone(target);
+        if (gone !== undefined) return gone.creature ? gone.toughness : 0;
         const lki = lastKnownOf(target);
         if (lki !== undefined) return lki.types.includes("creature") ? lki.toughness : 0;
         if (target.kind !== "object" || this.state.objects[target.object] === undefined) return 0;
@@ -35069,6 +35128,14 @@ export class Game {
         this.state.objects[id] !== undefined &&
         matchesFilter(this.state, this.registry, id, spec.filter, ctx),
     );
+    // "Two cards from your hand that share a color" (Illuminated Folio):
+    // only a card with a colour enough of them have.
+    if (spec.fromHand === true && spec.shareColor === true) {
+      const need = spec.count ?? 1;
+      const colorsOf = new Map(cards.map((id) => [id, [...this.cardColors(id)]] as const));
+      const held = (color: Color): number => cards.filter((id) => colorsOf.get(id)?.includes(color)).length;
+      return cards.filter((id) => (colorsOf.get(id) ?? []).some((color) => held(color) >= need));
+    }
     if (spec.fromHand === true) return cards;
     const permanents = this.state.zones.shared.battlefield.filter(
       (id) =>
@@ -35078,6 +35145,11 @@ export class Game {
         matchesFilter(this.state, this.registry, id, spec.filter, ctx),
     );
     return [...cards, ...permanents];
+  }
+
+  /** An object's colours as it is now, through the layer fold. */
+  private cardColors(id: ObjectId): ReadonlySet<Color> {
+    return computeCharacteristics(this.state, this.registry, id).colors;
   }
 
   /** Whether `player` could behold `spec` now (rule 701.4a): as many
@@ -35116,6 +35188,9 @@ export class Game {
       readonly except?: ObjectId;
       readonly optional?: boolean;
       readonly enterOf?: ObjectId;
+      /** The spell or ability on the stack whose cost this pays: it
+       * remembers the cards revealed from the hand (`LastKnownRefs.revealed`). */
+      readonly forCost?: ObjectId;
     } = {},
   ): void {
     const count = spec.count ?? 1;
@@ -35139,11 +35214,23 @@ export class Game {
       ...(opts.then !== undefined ? { then: opts.then } : {}),
       ...(opts.enterOf !== undefined ? { enterOf: opts.enterOf } : {}),
       ...(spec.fromHand === true ? { fromHand: true as const } : {}),
+      ...(opts.forCost !== undefined ? { forCost: opts.forCost } : {}),
     };
+    // Exactly as many as it takes: those, which share a colour too when
+    // that's asked (each eligible one shares one with `count` of them).
     if (opts.optional !== true && eligible.length === count) {
       this.carryOutBehold(player, eligible, spec.exile === true, opts.exileLink, behold);
       return;
     }
+    // "That share a color": a rule over the set, each card's colours its tags.
+    const together: ZoneChoiceTogether | undefined =
+      spec.shareColor === true
+        ? {
+            rule: "share",
+            tags: Object.fromEntries(eligible.map((id) => [id, [...this.cardColors(id)]])),
+            text: "that share a color",
+          }
+        : undefined;
     this.state.awaiting = {
       kind: "choose-from-zone",
       player,
@@ -35156,6 +35243,7 @@ export class Game {
       destination: spec.exile === true ? "exile" : spec.fromHand === true ? "reveal" : "behold",
       leftover: "stay",
       behold,
+      ...(together !== undefined ? { together } : {}),
       ...(opts.exileLink !== undefined ? { exileLink: opts.exileLink } : {}),
       ...(opts.priorityTo !== undefined ? { priorityTo: opts.priorityTo } : {}),
     };
@@ -35201,12 +35289,23 @@ export class Game {
     chosen: readonly ObjectId[],
     exile: boolean,
     exileLink: { readonly source: ObjectId; readonly zoneChangeCount: number } | undefined,
-    behold: { readonly source: ObjectId; readonly x: number; readonly then?: EffectSpec; readonly fromHand?: true },
+    behold: {
+      readonly source: ObjectId;
+      readonly x: number;
+      readonly then?: EffectSpec;
+      readonly fromHand?: true;
+      readonly forCost?: ObjectId;
+    },
   ): void {
     const fromHand = chosen.filter((id) => this.state.objects[id]?.zone === "hand");
     // A pitch cost's exile reveals nothing first: it's no behold. A reveal
     // from the hand (`fromHand` without exiling) is all reveal.
-    if (fromHand.length > 0 && !(behold.fromHand === true && exile)) this.revealCards(player, fromHand, "hand");
+    if (fromHand.length > 0 && !(behold.fromHand === true && exile)) {
+      this.revealCards(player, fromHand, "hand");
+      // "The revealed card's power": the spell or ability the reveal paid
+      // for remembers each card, and what it was in the hand.
+      if (behold.forCost !== undefined && !exile) this.recordCostReveal(behold.forCost, fromHand);
+    }
     const beheld = chosen.map((id) =>
       this.state.objects[id]?.zone === "battlefield" ? this.splitOneFromStack(id) : id,
     );

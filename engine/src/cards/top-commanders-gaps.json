@@ -10,6 +10,8 @@
   "effect:put-into-hand-this-way",
   "effect:exiled-this-way-to-hand",
   "effect:return-milled-this-way",
+  "cost:reveal-card-as-additional-cost",
+  "cost:reveal-cards-sharing-color",
   "cost:chosen-type-sacrifice-cost",
   "cost:sacrifice-enchanted-creature",
   "cost:sacrifice-self-and-another",

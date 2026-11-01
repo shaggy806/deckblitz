@@ -802,16 +802,58 @@ export function beholdOf(phrase) {
  * cards"). `null` for a phrase the reader doesn't know.
  */
 export function handRevealOf(phrase) {
-  const m = /^(a|an|X|two|three|four|five) (?:(white|blue|black|red|green) )?(.*?)\s*cards?$/.exec(phrase);
+  const m = /^(a|an|X|two|three|four|five) (?:(white|blue|black|red|green|colorless) )?(.*?)\s*cards?$/.exec(phrase);
   if (m === null) return null;
   const count = m[1] === "X" ? "x" : numberOf(m[1]);
   if (count === undefined) return null;
   const filter = m[3] === "" ? {} : parseTypePhrase(m[3], { cards: true });
   if (filter === null) return null;
   if (Object.keys(filter).some((k) => k !== "type" && k !== "subtype")) return null;
-  if (m[2] !== undefined) filter.colors = [COLOR_WORDS[m[2]]];
+  if (m[2] === "colorless") filter.colorless = true;
+  else if (m[2] !== undefined) filter.colors = [COLOR_WORDS[m[2]]];
   if (Object.keys(filter).length === 0) return null;
   return { count, filter, noun: phrase.slice(m[1].length + 1) };
+}
+
+/**
+ * A sentence reading "the revealed card's mana value" or "… power", where
+ * the cost revealed one card from the hand (`ctx.costRevealed`): the
+ * `"revealed"` amount ref — Induce Despair's -X/-X, Charge of the
+ * Forever-Beast's damage, Calamity of the Titans' exile, Titan's Presence's
+ * conditional exile, Living Destiny's life. `undefined` for anything else.
+ */
+function revealedCardEffectOf(s, ctx) {
+  const mv = { manaValueOf: "revealed" };
+  const power = { powerOf: "revealed" };
+  const slot = (phrase) => {
+    const spec = targetOf(phrase);
+    return spec === undefined ? undefined : ctx.target(spec);
+  };
+  let m;
+  if (/^Target creature gets -X\/-X until end of turn, where X is the revealed card's mana value\.$/.test(s)) {
+    const negated = { product: [mv, -1] };
+    return { kind: "modify-pt", target: slot("target creature"), power: negated, toughness: negated, duration: "end-of-turn" };
+  }
+  if ((m = /^~ deals damage to (target [^.]+) equal to the revealed card's power\.$/.exec(s))) {
+    const target = slot(m[1]);
+    return target === undefined ? undefined : { kind: "damage", target, amount: power };
+  }
+  if (/^Exile each creature and planeswalker with mana value less than the revealed card's mana value\.$/.test(s)) {
+    return {
+      kind: "exile-all",
+      filter: { typesAnyOf: ["creature", "planeswalker"], manaValue: { op: "lt", n: { amount: mv } } },
+    };
+  }
+  if (/^Exile target creature if its power is less than or equal to the revealed card's power\.$/.test(s)) {
+    const target = slot("target creature");
+    return {
+      kind: "conditional",
+      condition: { kind: "target", index: target, filter: { power: { op: "lte", n: { amount: power } } } },
+      then: { kind: "exile", target },
+    };
+  }
+  if (/^You gain life equal to the revealed card's mana value\.$/.test(s)) return { kind: "gain-life", amount: mv };
+  return undefined;
 }
 
 // --------------------------------------------------------------- targets
@@ -1266,6 +1308,10 @@ export function parseCost(text) {
         ...(m[3].toLowerCase() === "another" ? { excludeSource: true } : {}),
         ...(m[3].toLowerCase() === "among" ? { among: true } : {}),
       };
+    } else if ((m = /^Reveal (two|three) cards from your hand that share a color$/.exec(part))) {
+      // Illuminated Folio: chosen as it's paid, among the cards that share a
+      // colour with enough others (colourless shares none).
+      cost.reveal = { count: numberOf(m[1]), filter: {}, text: "cards", shareColor: true };
     } else if ((m = /^Reveal (.+) from your hand$/.exec(part)) && handRevealOf(m[1]) !== null) {
       // "Reveal X white cards from your hand" (the Coldsnap Martyrs, rule
       // 701.20a): X announced as it's activated, the cards chosen as it's paid.
@@ -1857,6 +1903,13 @@ export function parseSentence(sentence, ctx) {
   if (ctx?.costDiscarded === true && /^~ gets \+X\/\+X until end of turn, where X is the discarded card's mana value\.$/.test(s)) {
     const ofDiscarded = { manaValueOf: "discarded" };
     return { kind: "modify-pt", target: "source", power: ofDiscarded, toughness: ofDiscarded, duration: "end-of-turn" };
+  }
+  // "The revealed card's mana value / power" where a "reveal a … card from
+  // your hand" cost revealed it: the `"revealed"` amount ref — ahead of the
+  // guard too.
+  if (ctx?.costRevealed === true) {
+    const r = revealedCardEffectOf(s, ctx);
+    if (r !== undefined) return r;
   }
   if (/\bwhere X\b|\bfor each\b/i.test(s) && !/^add .*for each [\w+/-]+ counter removed this way\.$/i.test(s)) return null;
   // "Until end of turn, whenever …, …", "whenever … this turn, …" and "until
@@ -5420,6 +5473,18 @@ export function parseFace(face, ctx = {}) {
       };
       continue;
     }
+    // A mandatory "reveal a creature card from your hand" (Induce Despair,
+    // Calamity of the Titans): the card chosen as the cost is paid, read by
+    // "the revealed card's …" below (`costRevealed`).
+    if (
+      castable &&
+      (m = /^As an additional cost to cast ~, reveal (.+) from your hand\.$/.exec(line)) &&
+      handRevealOf(m[1])?.count === 1
+    ) {
+      const { filter } = handRevealOf(m[1]);
+      out.additionalCost = { behold: { filter, text: m[1], fromHand: true } };
+      continue;
+    }
     if (
       castable &&
       (m = /^As an additional cost to cast ~, you may reveal (.+) from your hand\.$/.exec(line)) &&
@@ -5925,6 +5990,12 @@ export function parseFace(face, ctx = {}) {
         divided: {},
         // "As an additional cost …, discard a card": "the discarded card".
         ...(out.additionalCost?.discard === 1 ? { costDiscarded: true } : {}),
+        // "…, reveal a creature card from your hand": "the revealed card".
+        ...(out.additionalCost?.behold?.fromHand === true &&
+        out.additionalCost.behold.exile !== true &&
+        (out.additionalCost.behold.count ?? 1) === 1
+          ? { costRevealed: true }
+          : {}),
       };
       let text = out.spellLines.map((l) => l.line).join(" ");
       // "…. Exile Burning Wish." closing the spell: it's exiled as it
@@ -6872,6 +6943,8 @@ function fillEffect(ability, text, ctx, lines, i) {
     divided,
     // A cost that discards one card: "the discarded card" is that card.
     ...(ability.cost?.discard?.count === 1 ? { costDiscarded: true } : {}),
+    // A cost that reveals one card: "the revealed card" is that card.
+    ...(ability.cost?.reveal?.count === 1 ? { costRevealed: true } : {}),
     ...(ctx.thatPlayer !== undefined ? { thatPlayer: ctx.thatPlayer } : {}),
     ...(theirSlots !== undefined ? { opponentChoosesTargets: theirSlots } : {}),
   });

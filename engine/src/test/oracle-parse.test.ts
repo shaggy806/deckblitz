@@ -5648,3 +5648,43 @@ describe("exiled this way, then a pick or the rest moved on", () => {
     ).toBe(false);
   });
 });
+
+describe("the card revealed to pay a cost", () => {
+  const face = (name: string, type_line: string, oracle_text: string) =>
+    parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });
+
+  it("reads a mandatory reveal as the spell's additional cost, and the revealed card's numbers", () => {
+    const despair = face(
+      "Induce Despair",
+      "Instant",
+      "As an additional cost to cast this spell, reveal a creature card from your hand.\nTarget creature gets -X/-X until end of turn, where X is the revealed card's mana value.",
+    );
+    expect(despair.complete).toBe(true);
+    expect(despair.additionalCost).toEqual({ behold: { filter: { type: "creature" }, text: "a creature card", fromHand: true } });
+    expect(despair.effect).toEqual({
+      kind: "modify-pt",
+      target: 0,
+      power: { product: [{ manaValueOf: "revealed" }, -1] },
+      toughness: { product: [{ manaValueOf: "revealed" }, -1] },
+      duration: "end-of-turn",
+    });
+    const calamity = face(
+      "Calamity of the Titans",
+      "Sorcery",
+      "As an additional cost to cast this spell, reveal a colorless creature card from your hand.\nExile each creature and planeswalker with mana value less than the revealed card's mana value.",
+    );
+    expect(calamity.complete).toBe(true);
+    expect(calamity.additionalCost.behold.filter).toEqual({ type: "creature", colorless: true });
+    // Without the reveal, "the revealed card" is nothing to read.
+    const unrevealed = face("Test Despair", "Instant", "Target creature gets -X/-X until end of turn, where X is the revealed card's mana value.");
+    expect(unrevealed.complete).toBe(false);
+  });
+
+  it("reads 'Reveal two cards from your hand that share a color' as a cost", () => {
+    expect(parseCost("{1}, {T}, Reveal two cards from your hand that share a color").cost).toEqual({
+      mana: "{1}",
+      tap: true,
+      reveal: { count: 2, filter: {}, text: "cards", shareColor: true },
+    });
+  });
+});
