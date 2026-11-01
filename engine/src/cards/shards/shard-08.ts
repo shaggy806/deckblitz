@@ -125,6 +125,7 @@ import _poolCatharCommando from "../pool/cathar-commando.js";
 import _poolCease from "../pool/cease.js";
 import _poolCessation from "../pool/cessation.js";
 import _poolChaosCharm from "../pool/chaos-charm.js";
+import _poolChargeOfTheForeverBeast from "../pool/charge-of-the-forever-beast.js";
 import _poolCharmedStray from "../pool/charmed-stray.js";
 import _poolChelonianTackle from "../pool/chelonian-tackle.js";
 import _poolChillbringer from "../pool/chillbringer.js";
@@ -364,6 +365,7 @@ import _poolHyalopterousLemure from "../pool/hyalopterous-lemure.js";
 import _poolIceCage from "../pool/ice-cage.js";
 import _poolIceridgeSerpent from "../pool/iceridge-serpent.js";
 import _poolIlhargTheRazeBoar from "../pool/ilharg-the-raze-boar.js";
+import _poolIlluminatedFolio from "../pool/illuminated-folio.js";
 import _poolImmaculateMagistrate from "../pool/immaculate-magistrate.js";
 import _poolImmoralBargain from "../pool/immoral-bargain.js";
 import _poolImprisonedInTheMoon from "../pool/imprisoned-in-the-moon.js";
@@ -1018,6 +1020,7 @@ const shard: CardShard = {
     _poolCease,
     _poolCessation,
     _poolChaosCharm,
+    _poolChargeOfTheForeverBeast,
     _poolCharmedStray,
     _poolChelonianTackle,
     _poolChillbringer,
@@ -1257,6 +1260,7 @@ const shard: CardShard = {
     _poolIceCage,
     _poolIceridgeSerpent,
     _poolIlhargTheRazeBoar,
+    _poolIlluminatedFolio,
     _poolImmaculateMagistrate,
     _poolImmoralBargain,
     _poolImprisonedInTheMoon,

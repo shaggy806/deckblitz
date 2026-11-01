@@ -91,6 +91,7 @@ import _poolBlightRot from "../pool/blight-rot.js";
 import _poolBlindCreeper from "../pool/blind-creeper.js";
 import _poolBloodOnTheSnow from "../pool/blood-on-the-snow.js";
 import _poolBloodOperative from "../pool/blood-operative.js";
+import _poolBloodfireInfusion from "../pool/bloodfire-infusion.js";
 import _poolBloodlineBidding from "../pool/bloodline-bidding.js";
 import _poolBloodmistInfiltrator from "../pool/bloodmist-infiltrator.js";
 import _poolBloomingStinger from "../pool/blooming-stinger.js";
@@ -122,6 +123,7 @@ import _poolBurningFistMinotaur from "../pool/burning-fist-minotaur.js";
 import _poolBurrentonShieldBearers from "../pool/burrenton-shield-bearers.js";
 import _poolBurrowing from "../pool/burrowing.js";
 import _poolCactuar from "../pool/cactuar.js";
+import _poolCalamityOfTheTitans from "../pool/calamity-of-the-titans.js";
 import _poolCallToMind from "../pool/call-to-mind.js";
 import _poolCanopySpider from "../pool/canopy-spider.js";
 import _poolCaoCaoLordOfWei from "../pool/cao-cao-lord-of-wei.js";
@@ -940,6 +942,7 @@ const shard: CardShard = {
     _poolBlindCreeper,
     _poolBloodOnTheSnow,
     _poolBloodOperative,
+    _poolBloodfireInfusion,
     _poolBloodlineBidding,
     _poolBloodmistInfiltrator,
     _poolBloomingStinger,
@@ -971,6 +974,7 @@ const shard: CardShard = {
     _poolBurrentonShieldBearers,
     _poolBurrowing,
     _poolCactuar,
+    _poolCalamityOfTheTitans,
     _poolCallToMind,
     _poolCanopySpider,
     _poolCaoCaoLordOfWei,

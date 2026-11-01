@@ -332,6 +332,7 @@ import _poolImperialSeal from "../pool/imperial-seal.js";
 import _poolImperiousOligarch from "../pool/imperious-oligarch.js";
 import _poolImprovisedAct from "../pool/improvised-act.js";
 import _poolIncite from "../pool/incite.js";
+import _poolInduceDespair from "../pool/induce-despair.js";
 import _poolInfestedThrinax from "../pool/infested-thrinax.js";
 import _poolInfiltratorIlKor from "../pool/infiltrator-il-kor.js";
 import _poolInnocuousRat from "../pool/innocuous-rat.js";
@@ -1174,6 +1175,7 @@ const shard: CardShard = {
     _poolImperiousOligarch,
     _poolImprovisedAct,
     _poolIncite,
+    _poolInduceDespair,
     _poolInfestedThrinax,
     _poolInfiltratorIlKor,
     _poolInnocuousRat,

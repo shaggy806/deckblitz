@@ -436,6 +436,7 @@ import _poolLilianaTheLastHope from "../pool/liliana-the-last-hope.js";
 import _poolLimitsOfSolidarity from "../pool/limits-of-solidarity.js";
 import _poolLinSivviDefiantHero from "../pool/lin-sivvi-defiant-hero.js";
 import _poolLitaLittleOrphanAmphibian from "../pool/lita-little-orphan-amphibian.js";
+import _poolLivingDestiny from "../pool/living-destiny.js";
 import _poolLonelyArroyo from "../pool/lonely-arroyo.js";
 import _poolLongRiversPull from "../pool/long-rivers-pull.js";
 import _poolLootExuberantExplorer from "../pool/loot-exuberant-explorer.js";
@@ -450,6 +451,7 @@ import _poolMageTowerReferee from "../pool/mage-tower-referee.js";
 import _poolMagmaticHellkite from "../pool/magmatic-hellkite.js";
 import _poolMalanthrope from "../pool/malanthrope.js";
 import _poolMaleficScythe from "../pool/malefic-scythe.js";
+import _poolMalevolentNoble from "../pool/malevolent-noble.js";
 import _poolManaVortex from "../pool/mana-vortex.js";
 import _poolManyPartings from "../pool/many-partings.js";
 import _poolMarchingDuodrone from "../pool/marching-duodrone.js";
@@ -1302,6 +1304,7 @@ const shard: CardShard = {
     _poolLimitsOfSolidarity,
     _poolLinSivviDefiantHero,
     _poolLitaLittleOrphanAmphibian,
+    _poolLivingDestiny,
     _poolLonelyArroyo,
     _poolLongRiversPull,
     _poolLootExuberantExplorer,
@@ -1316,6 +1319,7 @@ const shard: CardShard = {
     _poolMagmaticHellkite,
     _poolMalanthrope,
     _poolMaleficScythe,
+    _poolMalevolentNoble,
     _poolManaVortex,
     _poolManyPartings,
     _poolMarchingDuodrone,

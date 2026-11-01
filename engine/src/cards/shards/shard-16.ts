@@ -787,6 +787,7 @@ import _poolTigerSharkAbyssalHunter from "../pool/tiger-shark-abyssal-hunter.js"
 import _poolTimetwister from "../pool/timetwister.js";
 import _poolTimidShieldbearer from "../pool/timid-shieldbearer.js";
 import _poolTinStreetHooligan from "../pool/tin-street-hooligan.js";
+import _poolTitansPresence from "../pool/titans-presence.js";
 import _poolTitheDrinker from "../pool/tithe-drinker.js";
 import _poolToadstoolAdmirer from "../pool/toadstool-admirer.js";
 import _poolTogetherForever from "../pool/together-forever.js";
@@ -1722,6 +1723,7 @@ const shard: CardShard = {
     _poolTimetwister,
     _poolTimidShieldbearer,
     _poolTinStreetHooligan,
+    _poolTitansPresence,
     _poolTitheDrinker,
     _poolToadstoolAdmirer,
     _poolTogetherForever,

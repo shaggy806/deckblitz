@@ -616,6 +616,7 @@ import _poolSacredFire from "../pool/sacred-fire.js";
 import _poolSageOfTheInwardEye from "../pool/sage-of-the-inward-eye.js";
 import _poolSamiteArcher from "../pool/samite-archer.js";
 import _poolSanctumOfFruitfulHarvest from "../pool/sanctum-of-fruitful-harvest.js";
+import _poolSandstoneDeadfall from "../pool/sandstone-deadfall.js";
 import _poolSaprazzanHeir from "../pool/saprazzan-heir.js";
 import _poolSardianCliffstomper from "../pool/sardian-cliffstomper.js";
 import _poolSarkhansResolve from "../pool/sarkhans-resolve.js";
@@ -1487,6 +1488,7 @@ const shard: CardShard = {
     _poolSageOfTheInwardEye,
     _poolSamiteArcher,
     _poolSanctumOfFruitfulHarvest,
+    _poolSandstoneDeadfall,
     _poolSaprazzanHeir,
     _poolSardianCliffstomper,
     _poolSarkhansResolve,

@@ -244,6 +244,7 @@ import _poolEntropicCloud from "../pool/entropic-cloud.js";
 import _poolEpharasEnlightenment from "../pool/epharas-enlightenment.js";
 import _poolEssenceDepleter from "../pool/essence-depleter.js";
 import _poolEssenceWarden from "../pool/essence-warden.js";
+import _poolEtchingsOfTheChosen from "../pool/etchings-of-the-chosen.js";
 import _poolEurekaMoment from "../pool/eureka-moment.js";
 import _poolEvacuation from "../pool/evacuation.js";
 import _poolEverflowingChalice from "../pool/everflowing-chalice.js";
@@ -1119,6 +1120,7 @@ const shard: CardShard = {
     _poolEpharasEnlightenment,
     _poolEssenceDepleter,
     _poolEssenceWarden,
+    _poolEtchingsOfTheChosen,
     _poolEurekaMoment,
     _poolEvacuation,
     _poolEverflowingChalice,

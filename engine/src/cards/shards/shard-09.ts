@@ -186,6 +186,7 @@ import _poolDismantlingBlow from "../pool/dismantling-blow.js";
 import _poolDisownedAncestor from "../pool/disowned-ancestor.js";
 import _poolDivideByZero from "../pool/divide-by-zero.js";
 import _poolDominariasJudgment from "../pool/dominarias-judgment.js";
+import _poolDoomCannon from "../pool/doom-cannon.js";
 import _poolDoomWhisperer from "../pool/doom-whisperer.js";
 import _poolDoomskar from "../pool/doomskar.js";
 import _poolDragDown from "../pool/drag-down.js";
@@ -466,6 +467,7 @@ import _poolMistralCharger from "../pool/mistral-charger.js";
 import _poolMizzixsMastery from "../pool/mizzixs-mastery.js";
 import _poolMoggConscripts from "../pool/mogg-conscripts.js";
 import _poolMogissMarauder from "../pool/mogiss-marauder.js";
+import _poolMoldFolk from "../pool/mold-folk.js";
 import _poolMonasteryRaid from "../pool/monastery-raid.js";
 import _poolMonasterySwiftspear from "../pool/monastery-swiftspear.js";
 import _poolMoonSprite from "../pool/moon-sprite.js";
@@ -1082,6 +1084,7 @@ const shard: CardShard = {
     _poolDisownedAncestor,
     _poolDivideByZero,
     _poolDominariasJudgment,
+    _poolDoomCannon,
     _poolDoomWhisperer,
     _poolDoomskar,
     _poolDragDown,
@@ -1362,6 +1365,7 @@ const shard: CardShard = {
     _poolMizzixsMastery,
     _poolMoggConscripts,
     _poolMogissMarauder,
+    _poolMoldFolk,
     _poolMonasteryRaid,
     _poolMonasterySwiftspear,
     _poolMoonSprite,

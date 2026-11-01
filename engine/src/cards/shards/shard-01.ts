@@ -56,6 +56,7 @@ import _poolBelenonWarAnthem from "../pool/belenon-war-anthem.js";
 import _poolBellowsLizard from "../pool/bellows-lizard.js";
 import _poolBespokeBo from "../pool/bespoke-bo.js";
 import _poolBestialFury from "../pool/bestial-fury.js";
+import _poolBetrothedOfFire from "../pool/betrothed-of-fire.js";
 import _poolBiolumeEgg from "../pool/biolume-egg.js";
 import _poolBlackKnight from "../pool/black-knight.js";
 import _poolBlackMagesRod from "../pool/black-mages-rod.js";
@@ -893,6 +894,7 @@ const shard: CardShard = {
     _poolBellowsLizard,
     _poolBespokeBo,
     _poolBestialFury,
+    _poolBetrothedOfFire,
     _poolBiolumeEgg,
     _poolBlackKnight,
     _poolBlackMagesRod,
