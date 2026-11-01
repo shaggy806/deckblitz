@@ -16437,10 +16437,14 @@ export class Game {
         );
       }
       // { filter } — Zuran Orb "a land", Orcish Lumberjack "a Forest" — and
-      // every filter of an `each` ("a Swamp and a Forest").
+      // every filter of an `each` ("a Swamp and a Forest"). Matched against
+      // the source, so a clause about it reads it: Doom Cannon's "a creature
+      // of the chosen type", Betrothed of Fire's "enchanted creature"
+      // (`hostOfSource`), Mold Folk's "another creature or an artifact"
+      // (`isSource: false` on one branch).
       return (
         sacrificeCostFilters(sac).some((filter) =>
-          matchesFilter(this.state, this.registry, id, filter, { you: player }),
+          matchesFilter(this.state, this.registry, id, filter, { you: player, source: sourceId }),
         ) && this.canBeSacrificed(id)
       );
     });
@@ -16449,11 +16453,15 @@ export class Game {
   /** The permanents `player` could sacrifice for one part of a cost of
    * several (see `sacrificeCostParts`): theirs, matching `filter`, not the
    * source when the cost says "another", and able to be sacrificed (rule
-   * 701.21a). */
+   * 701.21a). `source` is what the cost is part of: a clause about it reads
+   * it — Magus of the Order's "this creature and another green creature" is
+   * an `each` of `{ isSource: true }` and a green creature, Doom Cannon's
+   * "a creature of the chosen type" its `ofChosenType`. */
   private costSacrificeEligible(
     player: PlayerId,
     filter: CardFilter,
     except: ObjectId | undefined,
+    source?: ObjectId,
   ): ObjectId[] {
     return this.state.zones.shared.battlefield.filter((id) => {
       const object = this.state.objects[id];
@@ -16461,7 +16469,10 @@ export class Game {
         object !== undefined &&
         object.controller === player &&
         id !== except &&
-        matchesFilter(this.state, this.registry, id, filter, { you: player }) &&
+        matchesFilter(this.state, this.registry, id, filter, {
+          you: player,
+          ...(source !== undefined ? { source } : {}),
+        }) &&
         this.canBeSacrificed(id)
       );
     });
@@ -16490,6 +16501,7 @@ export class Game {
       player,
       sacrificeCostFilters(sacrifice).map((filter) => ({ filter })),
       except,
+      sourceId,
     );
     const plan = this.payMana(
       player,
@@ -16507,10 +16519,11 @@ export class Game {
     player: PlayerId,
     parts: readonly { readonly filter: CardFilter }[],
     except: ObjectId | undefined,
+    source?: ObjectId,
   ): Set<ObjectId> {
     const candidates = new Set<ObjectId>();
     for (const { filter } of parts) {
-      for (const id of this.costSacrificeEligible(player, filter, except)) candidates.add(id);
+      for (const id of this.costSacrificeEligible(player, filter, except, source)) candidates.add(id);
     }
     return candidates;
   }
@@ -16533,10 +16546,11 @@ export class Game {
     parts: readonly SacrificeCostPart[],
     except: ObjectId | undefined,
     remaining: ReadonlyMap<ObjectId, number>,
+    source?: ObjectId,
   ): boolean {
     return sacrificePartsFillable(
       parts.map((part) => ({
-        eligible: this.costSacrificeEligible(player, part.filter, except).filter((id) => remaining.has(id)),
+        eligible: this.costSacrificeEligible(player, part.filter, except, source).filter((id) => remaining.has(id)),
         count: part.count,
       })),
       remaining,
@@ -16556,7 +16570,7 @@ export class Game {
     const remaining = this.costSacrificeRemaining(player, sourceId, ability, x);
     if (remaining === null) return null;
     const except = ability.otherOnly === true ? sourceId : undefined;
-    return this.costSacrificeFillable(player, parts, except, remaining) ? remaining : null;
+    return this.costSacrificeFillable(player, parts, except, remaining, sourceId) ? remaining : null;
   }
 
   /**
@@ -18086,7 +18100,7 @@ export class Game {
         const except = ability.otherOnly === true ? sourceId : undefined;
         const last = new Set<ObjectId>();
         for (const filter of sacrificeCostFilters(ability.cost.sacrifice)) {
-          for (const id of this.costSacrificeEligible(player, filter, except)) last.add(id);
+          for (const id of this.costSacrificeEligible(player, filter, except, sourceId)) last.add(id);
         }
         manaArrangement = { last };
       } else if (sacrificeVictim !== null) {
@@ -36364,7 +36378,7 @@ export class Game {
       const picked = new Set(pending.picked);
       const capacity = new Map<ObjectId, number>();
       const eligibleFor = (filter: CardFilter): ObjectId[] =>
-        this.costSacrificeEligible(pending.player, filter, pending.except).filter((id) => !picked.has(id));
+        this.costSacrificeEligible(pending.player, filter, pending.except, pending.source).filter((id) => !picked.has(id));
       for (const filter of [part.filter, ...rest.map((p) => p.filter)]) {
         for (const id of eligibleFor(filter)) capacity.set(id, this.state.objects[id].stackCount ?? 1);
       }

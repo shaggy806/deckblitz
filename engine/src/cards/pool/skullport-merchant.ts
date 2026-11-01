@@ -27,9 +27,9 @@ export default defineCard({
       cost: {
         mana: "{1}{B}",
         tap: false,
-        sacrifice: { filter: { anyOf: [{ type: "creature" }, { subtype: "Treasure" }] } },
+        // "Another" is the creature branch's alone (`isSource: false`).
+        sacrifice: { filter: { anyOf: [{ type: "creature", isSource: false }, { subtype: "Treasure" }] } },
       },
-      otherOnly: true,
       targets: [],
       effect: { kind: "draw", amount: 1 },
       resolve: null,

@@ -3187,6 +3187,19 @@ tapOthers?, untap? }`.
   with nowhere to wait for the choice, so one with such a cost is never
   activatable. A spell's equivalents are `additionalCost.sacrificeCount` and
   `flashback.sacrifice` (§3).
+- **A sacrifice cost's filters are matched against the source** (the
+  `filter`, and each of an `each`'s), so a clause about the source reads it:
+  "Sacrifice this creature and another green creature" (Magus of the Order)
+  is `{ each: [{ isSource: true }, { type: "creature", colors: ["G"] }] }`,
+  "two lands and this artifact" (Sandstone Deadfall) `{ each: [land, land,
+  { isSource: true }] }`; "another creature or an artifact" (Mold Folk,
+  Malevolent Noble, Skophos Warleader) is an `anyOf` with `isSource: false`
+  on the creature branch alone — `otherOnly` would keep the source out of
+  the other branch too; "Sacrifice enchanted creature" (Betrothed of Fire,
+  Bloodfire Infusion) is `{ filter: { hostOfSource: true } }`, payable only
+  while you control that creature (701.21a); "a creature of the chosen type"
+  (Doom Cannon, Etchings of the Chosen) `ofChosenType`. The scaffolder reads
+  all four. `sacrifice-cost-source.test.ts`.
 - `payLife: "commander-identity-colors"` is War Room's "Pay life equal to the
   number of colors in your commanders' color identity" (`AbilityLifeCost`, read
   off `PlayerState.commanderIdentity` as it's activated): 0 for a colourless

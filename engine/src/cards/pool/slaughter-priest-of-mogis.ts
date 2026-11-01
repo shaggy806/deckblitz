@@ -20,8 +20,13 @@ export default defineCard({
   ],
   activated: [
     {
-      cost: { mana: "{2}", tap: false, sacrifice: { filter: { typesAnyOf: ["creature", "enchantment"] } } },
-      otherOnly: true,
+      // "Another" is the creature branch's alone: this creature, become an
+      // enchantment, could pay as one (`isSource: false` on that branch).
+      cost: {
+        mana: "{2}",
+        tap: false,
+        sacrifice: { filter: { anyOf: [{ type: "creature", isSource: false }, { type: "enchantment" }] } },
+      },
       targets: [],
       effect: { kind: "grant-keyword", target: "source", keyword: "first-strike", duration: "end-of-turn" },
       resolve: null,

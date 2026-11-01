@@ -49,7 +49,19 @@ export type SacrificeCost =
   /** One permanent for each filter, every one a different permanent —
    * Jarad, Golgari Lich Lord's "Sacrifice a Swamp and a Forest" (a land that
    * is both still pays only one of them: its ruling). Asked one filter at a
-   * time, each offering only what leaves the rest payable. */
+   * time, each offering only what leaves the rest payable. "Sacrifice this
+   * creature and another green creature" (Magus of the Order) is an `each`
+   * whose first filter is `{ isSource: true }`, which nothing but the source
+   * pays; Sandstone Deadfall's "two lands and this artifact" three filters.
+   *
+   * Every filter here — a `filter` and each of an `each`'s — is matched
+   * against the ability's source (`FilterContext.source`), so a clause about
+   * it reads it: `isSource` ("another creature or an artifact" is an `anyOf`
+   * with `isSource: false` on its creature branch — Mold Folk; `otherOnly`
+   * would keep the source out of both), `hostOfSource` ("Sacrifice enchanted
+   * creature" — Betrothed of Fire, payable only while you control it,
+   * 701.21a), `ofChosenType` ("a creature of the chosen type" — Doom
+   * Cannon). */
   | { readonly each: readonly CardFilter[] };
 
 /** One kind of permanent a sacrifice cost takes, and how many of it. */

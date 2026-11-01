@@ -1155,6 +1155,35 @@ function morphNonManaCost(text) {
   return null;
 }
 
+/**
+ * A sacrifice cost naming the source as one of its parts, or its host, as a
+ * `SacrificeCost` matched against the source: "Sacrifice ~ and another
+ * creature" / "… and a creature you control" (`each`, the source first),
+ * "Sacrifice two lands and ~" (`each`, the source last), "Sacrifice enchanted
+ * creature" (`{ filter: { hostOfSource: true } }`). `null` for anything else.
+ */
+export function sourceSacrificeOf(part) {
+  if (/^Sacrifice (?:enchanted|equipped) creature$/.test(part)) return { filter: { hostOfSource: true } };
+  const othersOf = (phrase) => {
+    const m = new RegExp(`^(another|${N.slice(1, -1)}) (.+?)(?: you control)?$`).exec(phrase);
+    if (m === null) return null;
+    const count = m[1] === "another" ? 1 : numberOf(m[1]);
+    const filter = parseTypePhrase(m[2]);
+    if (typeof count !== "number" || count < 1 || filter === null || Object.keys(filter).length === 0) return null;
+    return Array.from({ length: count }, () => filter);
+  };
+  let m;
+  if ((m = /^Sacrifice ~ and (.+)$/.exec(part))) {
+    const others = othersOf(m[1]);
+    return others === null ? null : { each: [{ isSource: true }, ...others] };
+  }
+  if ((m = /^Sacrifice (.+) and ~$/.exec(part))) {
+    const others = othersOf(m[1]);
+    return others === null ? null : { each: [...others, { isSource: true }] };
+  }
+  return null;
+}
+
 export function parseCost(text) {
   const cost = { mana: null, tap: false };
   const extra = {};
@@ -1165,7 +1194,32 @@ export function parseCost(text) {
     // {Q}, the untap symbol (rule 107.6).
     else if (part === "{Q}") cost.untap = true;
     else if (part === "Sacrifice ~") cost.sacrifice = "self";
-    else if ((m = /^Sacrifice (a|an|another) (.+)$/.exec(part))) {
+    else if (/^Sacrifice (?:~ and |.+ and ~$)/.test(part) || /^Sacrifice (?:enchanted|equipped) creature$/.test(part)) {
+      // A sacrifice cost matched against the source: "this creature and a
+      // creature you control" (Great Hall of Starnheim), "two lands and this
+      // artifact" (Sandstone Deadfall) — an `each` with an `isSource` part —
+      // and "enchanted creature" (Betrothed of Fire, `hostOfSource`).
+      const sacrifice = sourceSacrificeOf(part);
+      if (sacrifice === null) return null;
+      cost.sacrifice = sacrifice;
+    } else if ((m = /^Sacrifice (an?|another) (.+?) or (an?|another) (.+)$/.exec(part)) && /another/.test(`${m[1]} ${m[3]}`)) {
+      // "Sacrifice another creature or an artifact" (Mold Folk): the
+      // "another" is its own branch's, `isSource: false` there alone.
+      const first = parseTypePhrase(m[2]);
+      const second = parseTypePhrase(m[4]);
+      if (first === null || second === null || Object.keys(first).length === 0 || Object.keys(second).length === 0) {
+        return null;
+      }
+      const branch = (filter, article) => (article === "another" ? { ...filter, isSource: false } : filter);
+      cost.sacrifice = { filter: { anyOf: [branch(first, m[1]), branch(second, m[3])] } };
+    } else if ((m = /^Sacrifice (an?|another) (.+) of the chosen type$/.exec(part))) {
+      // "Sacrifice a creature of the chosen type" (Doom Cannon): the
+      // source's choice, read against it.
+      const filter = parseTypePhrase(m[2]);
+      if (filter === null || Object.keys(filter).length === 0) return null;
+      cost.sacrifice = { filter: { ...filter, ofChosenType: true } };
+      if (m[1] === "another") extra.otherOnly = true;
+    } else if ((m = /^Sacrifice (a|an|another) (.+)$/.exec(part))) {
       const filter = parseTypePhrase(m[2]);
       if (filter === null) return null;
       cost.sacrifice = Object.keys(filter).length === 1 && filter.type === "creature" ? "creature-you-control" : { filter };

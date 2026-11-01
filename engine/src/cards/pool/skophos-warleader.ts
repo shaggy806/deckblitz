@@ -11,8 +11,13 @@ export default defineCard({
   text: "{R}, Sacrifice another creature or an enchantment: This creature gets +1/+0 and gains menace until end of turn. (It can't be blocked except by two or more creatures.)",
   activated: [
     {
-      cost: { mana: "{R}", tap: false, sacrifice: { filter: { typesAnyOf: ["creature", "enchantment"] } } },
-      otherOnly: true,
+      // "Another" is the creature branch's alone: this creature, become an
+      // enchantment, could pay as one (`isSource: false` on that branch).
+      cost: {
+        mana: "{R}",
+        tap: false,
+        sacrifice: { filter: { anyOf: [{ type: "creature", isSource: false }, { type: "enchantment" }] } },
+      },
       targets: [],
       effect: {
         kind: "sequence",

@@ -169,6 +169,32 @@ describe("costs and triggers", () => {
     expect(parseCost("{3}, Exile the top four cards of your library").cost).toEqual({ mana: "{3}", tap: false, exileTop: 4 });
   });
 
+  it("sacrifice costs matched against the source", () => {
+    // "This creature and …": an `each` with the source first; "… and this
+    // artifact" with it last.
+    expect(parseCost("{W}{W}{B}, {T}, Sacrifice ~ and a creature you control").cost.sacrifice).toEqual({
+      each: [{ isSource: true }, { type: "creature" }],
+    });
+    expect(parseCost("{T}, Sacrifice two lands and ~").cost.sacrifice).toEqual({
+      each: [{ type: "land" }, { type: "land" }, { isSource: true }],
+    });
+    expect(parseCost("Sacrifice enchanted creature").cost.sacrifice).toEqual({ filter: { hostOfSource: true } });
+    // "Another" on one branch only.
+    expect(parseCost("{1}, Sacrifice another creature or an artifact")).toEqual({
+      cost: { mana: "{1}", tap: false, sacrifice: { filter: { anyOf: [{ type: "creature", isSource: false }, { type: "artifact" }] } } },
+      extra: {},
+    });
+    expect(parseCost("{2}, Sacrifice an artifact or another creature").cost.sacrifice).toEqual({
+      filter: { anyOf: [{ type: "artifact" }, { type: "creature", isSource: false }] },
+    });
+    expect(parseCost("{3}, {T}, Sacrifice a creature of the chosen type").cost.sacrifice).toEqual({
+      filter: { type: "creature", ofChosenType: true },
+    });
+    // What it can't read whole is left to a person.
+    expect(parseCost("Sacrifice ~ and a creature named Spitting Drake")).toBeNull();
+    expect(parseCost("{T}, Sacrifice ~ and any number of other non-Eldrazi creatures")).toBeNull();
+  });
+
   it("reads parley's three sentences as one reveal-top, the effect scaled by the cards revealed", () => {
     const rousing = parseFace(
       {

@@ -321,6 +321,29 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Sacrifice costs matched against the source — built 2026-10-31
+
+The need-keys Phase 2 family `cost:sacrifice-multiple`'s first group, features
+only. A sacrifice cost's filters — a `{ filter }`, a `{ filter, count }` and
+each of an `each`'s — were matched with no source, so every clause about it
+(`isSource`, `hostOfSource`, `ofChosenType`) matched nothing. They are now
+matched against the ability's source, in the legal-action offer, the
+activation check, the mana plan that keeps the victims for last and the
+`pendingCostSacrifice` parts as they're asked. "Sacrifice this creature and
+another green creature" is an `each` with an `{ isSource: true }` part;
+"another creature or an artifact" an `anyOf` with `isSource: false` on one
+branch (Skophos Warleader, Slaughter-Priest of Mogis and Skullport Merchant,
+authored with `otherOnly` across both branches, moved to it); "Sacrifice
+enchanted creature" `hostOfSource`; "a creature of the chosen type"
+`ofChosenType`. The scaffolder reads all four. Keys:
+cost:sacrifice-self-and-another, filter:not-source-clause,
+cost:sacrifice-enchanted-creature, cost:chosen-type-sacrifice-cost. Proving
+cards: Mold Folk, Malevolent Noble, Doom Cannon, Etchings of the Chosen,
+Betrothed of Fire, Bloodfire Infusion, Magus of the Order, Great Hall of
+Starnheim, Sandstone Deadfall. Left: Mount Doom (each player chooses, destroy
+the rest), Emrakul's Evangel ("any number of other"), Kyscu Drake's "a
+creature named Spitting Drake" in the scaffolder (the engine runs it).
+
 ### A graveyard's matching cards, or target cards, shuffled into libraries — built 2026-10-31
 
 The need-keys Phase 2 family `effect:shuffle-library`, features only, on the
