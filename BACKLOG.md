@@ -589,6 +589,17 @@ delete its detail there and move this line to `COMPLETED.md`.
 
 ## Code health
 
+- **Blank target slots don't survive JSON** (found 2026-10-31 by the situation fuzzer, ~1
+  scenario in 100): a blank target slot is `undefined` by design (`ResolvedTargets`, in
+  `GameObject.targets`, `SpellSnapshot.targets` — `lastOnStack` — and delayed and pending
+  triggers), and the engine tests for one with `=== undefined` in at least 16 places. JSON writes
+  `undefined` in an array as `null`, so a state restored from JSON — a bot capture, a saved local
+  game (`server/src/local-host.ts`) — reads a blank slot as chosen: `recheckTargets` (`game.ts`
+  ~25157) skips a slot only when `chosen[i] === undefined`, so a spell on the stack with a declined
+  "up to one" slot sends `null` to `isLegalTarget` as it resolves, and the `target-chosen`
+  condition (~25435) answers yes. Fix by making holes `null` throughout (and the reads `== null`),
+  or by reviving them in `Game.fromSnapshot`; then make a hole a failure again in
+  `engine/scripts/situation-scenario.mjs`'s `plainProblem`, which reports them apart for now.
 - **Solo games in the player's browser: bug reports** (the user, 2026-10-13;
   `docs/plans/local-rooms.md`, built steps in `COMPLETED.md`): bug-report uploads from a local
   game (only a `--capture` dev server has the panel).

@@ -47,7 +47,7 @@ function snapshot(state, events) {
 }
 
 // Each game's decks come with its seed: they're built per seed (fuzz-decks.mjs).
-parentPort.on("message", ({ seed, seats }) => {
+parentPort.on("message", ({ seed, seats, maxTurns = null }) => {
   const startedAt = Date.now();
   try {
     const rng = createRng(seed * 7919);
@@ -73,14 +73,17 @@ parentPort.on("message", ({ seed, seats }) => {
         beatAt = now;
         parentPort.postMessage({ seed, heartbeat: snapshot(state, game.events.length) });
       }
-      return false;
+      // `--max-turns`: stop as the turn after the cap begins.
+      return maxTurns !== null && state.turn.number > maxTurns;
     });
+    const capped = !game.state.result.over;
     parentPort.postMessage({
       seed,
       ok: true,
-      winner: game.winner ?? "draw",
-      reason: game.state.result.reason,
-      turns: game.state.turn.number,
+      winner: capped ? "draw" : (game.winner ?? "draw"),
+      reason: capped ? `turn cap (${maxTurns})` : game.state.result.reason,
+      capped,
+      turns: capped ? maxTurns : game.state.turn.number,
       events: game.events.length,
       ms: Date.now() - startedAt,
     });

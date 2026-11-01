@@ -6,10 +6,14 @@
 //   1. gen:cards (the card barrel and shards)
 //   2. build (every workspace) — and, from here on, in the background beside
 //      everything below (they need only the build): the fuzzer at 2 and 4
-//      players, the fuzzer with every card this change adds (or `--with`
-//      names) forced in (at most 10 a deck: `fuzzWithPlan`) — each 4-player
-//      run as two processes over halves of its seeds — and the bot gate (on 4 cores or fewer, after the test
-//      suites instead, each 4-player run one process)
+//      players; for every card this change adds (or `--with` names), the
+//      situation fuzzer (`situation-fuzz.mjs`: each card cast or activated
+//      in small random boards, `SITUATIONS`) and a few 4-player games with
+//      them forced in (at most 10 a deck: `fuzzWithPlan`), stopped at turn
+//      `MAX_TURNS` (and `UNCAPPED` more played out in a full run); each
+//      4-player run as two processes over halves of its seeds; and the bot
+//      gate (on 4 cores or fewer, after the test suites instead, each
+//      4-player run one process)
 //   3. the backlog lists re-marked against the build and any sample-deck
 //      stand-in for a card now in the pool dropped
 //   4. typecheck (the engine's tests included — vitest never type-checks a
@@ -42,8 +46,8 @@
 // newest batch record (`engine/data/sweep-3/B<N>.json`); three batches or
 // more since, it runs everything and, if everything passed, writes the newest
 // batch number back — commit the file with the batch. Otherwise it runs
-// quick: no plain fuzzer and no bot gate (the fuzzer with the new cards forced
-// in still runs, at half its games), and the server and client suites only
+// quick: no plain fuzzer and no bot gate (the new-card checks still run, at
+// fewer scenarios and games), and the server and client suites only
 // when the change touches `server/`, `client/` or `protocol/` — the bot gate
 // too when it touches the bots (`engine/src/bot/`, `controller.ts`,
 // `effect-worth.ts`, `target-polarity.ts`). `--full` or `--quick` forces one.
@@ -52,21 +56,23 @@
 // file): over batches 173-175 they found nothing a card batch broke — the
 // new-cards fuzzer found both bugs — and CI fuzzes every push to main anyway.
 //
-// **The new-cards fuzzer, early.** It is the step that finds bugs, and on a
-// small machine it runs last, alone, for 5-10 minutes. `--fuzz-new` runs just
-// it (gen:cards, build, then the fuzzer) as soon as a batch's cards are
-// written, while the lead writes the batch record; on a pass it leaves a stamp
-// in the OS temp dir naming the cards, their files and the engine source it
-// ran against, and a later verify skips the step while all three still match
-// (a merge that brings engine code in, or an edited card, runs it again).
+// **The new-card checks, early.** They are the steps that find bugs, and on a
+// small machine they run last, alone. `--fuzz-new` runs just them (gen:cards,
+// build, then the situation fuzzer and the new-cards fuzzer, at a full run's
+// size) as soon as a batch's cards are written, while the lead writes the
+// batch record; on a pass it leaves a stamp in the OS temp dir naming the
+// cards, their files and the engine source they ran against, and a later
+// verify skips each step the stamp covers while all three still match (a
+// merge that brings engine code in, or an edited card, runs them again).
 //
 // Usage: node scripts/verify.mjs [--full | --quick | --fuzz-new | --landing] [--with "Card Name"]...
 //                                [--skip step,step | --only step,step] [--games N]
 //   steps for --skip / --only: marks, lint, server, client, cardverify,
-//   fuzz, fuzzwith, gate (gen:cards, build, typecheck and the engine suite
-//   always run; `--only fuzzwith` re-checks a fix to what that step found)
+//   fuzz, situations, fuzzwith, gate (gen:cards, build, typecheck and the
+//   engine suite always run; `--only situations` re-checks a fix to what
+//   that step found)
 //   --games N   2-player fuzz games (default 60; 4-player gets half)
-//   --landing   the landing lock's check after a merge: --only marks,fuzzwith,
+//   --landing   the landing lock's check after a merge: --only marks,situations,fuzzwith,
 //               and the engine suite cut to its pool-wide tests and the
 //               merge's test files when the merge brought no engine code
 
@@ -88,7 +94,22 @@ const withFile = (names) => {
   return file;
 };
 
-/** The new-cards fuzzer's games for `cards` at `games` (40 full, 20 quick):
+/** The situation fuzzer's scenarios per new card (`situation-fuzz.mjs`): the
+ * main per-card check since 2026-10-31 — each card played in small random
+ * boards, cast or activated at once, ~0.4 s a scenario at 4-6 workers. */
+const SITUATIONS = { full: 100, quick: 60 };
+/** The new-cards fuzzer beside it, cut down once the situation fuzzer took
+ * over the per-card check: whole 4-player games, which average 80-130 turns
+ * because random players rarely finish anyone off — so quick and full runs
+ * stop each game at `MAX_TURNS` (a draw by turn cap), and a full run adds
+ * `UNCAPPED` games played to the end, for what only a whole game reaches
+ * (decking, a game's end, commander damage). Before (2026-10-31): 20 games
+ * quick, 40 full, all uncapped — 100-200 s a half. */
+const FUZZ_WITH = { full: 12, quick: 8 };
+const MAX_TURNS = 60;
+const UNCAPPED = 4;
+
+/** The new-cards fuzzer's games for `cards` at `games` (`FUZZ_WITH`):
  * at most PER_DECK new cards in a deck. Up to PER_DECK, every card is in every
  * seat's deck in all `games` games, as always. A longer list (several features
  * landed between pushes) is packed into groups of like colour identity, one
@@ -116,8 +137,8 @@ function fuzzWithPlan(cards, games) {
 
 const USAGE = `usage: node scripts/verify.mjs [--full | --quick | --fuzz-new | --landing] [--with "Card Name"]...
                                [--skip step,step | --only step,step] [--games N]
-  steps: ${"marks, lint, server, client, cardverify, fuzz, fuzzwith, gate"}`;
-const STEPS = new Set(["marks", "lint", "server", "client", "cardverify", "fuzz", "fuzzwith", "gate"]);
+  steps: ${"marks, lint, server, client, cardverify, fuzz, situations, fuzzwith, gate"}`;
+const STEPS = new Set(["marks", "lint", "server", "client", "cardverify", "fuzz", "situations", "fuzzwith", "gate"]);
 const args = process.argv.slice(2);
 const withNames = [];
 let skip = new Set();
@@ -139,7 +160,7 @@ for (let i = 0; i < args.length; i++) {
   if (a === "--with") withNames.push(args[++i]);
   else if (a === "--skip") skip = stepList(args[++i], "--skip");
   else if (a === "--only") only = stepList(args[++i], "--only");
-  else if (a === "--landing") only = new Set(["marks", "fuzzwith"]);
+  else if (a === "--landing") only = new Set(["marks", "situations", "fuzzwith"]);
   else if (a === "--games") games = Number(args[++i]);
   else if (a === "--help" || a === "-h") {
     console.log(USAGE);
@@ -293,7 +314,7 @@ function changedFiles() {
  * card lists, and tests — plus the fuzzer's own scripts. */
 const CARD_DATA = /^engine\/src\/(cards\/(pool|tokens|scaffold|shards)\/|cards\/generated[^/]*\.ts$|cards\/[^/]*\.(txt|json|md)$|test\/|sample-decks\.ts$)|\.test\.ts$/;
 const isEngineCode = (f) =>
-  (/^engine\/src\//.test(f) && !CARD_DATA.test(f)) || /^engine\/scripts\/(random-|fuzz-decks)/.test(f);
+  (/^engine\/src\//.test(f) && !CARD_DATA.test(f)) || /^engine\/scripts\/(random-|fuzz-decks|situation-|worker-)/.test(f);
 
 /** Files changed since `ref` (committed or not), or `null` if `ref` isn't a
  * commit this checkout has. */
@@ -340,9 +361,10 @@ const lastFull = state.lastFullBatch ?? 0;
 const EVERY = 3;
 const batch = newestBatch();
 const mode = fuzzNewOnly ? "fuzz-new" : (forced ?? (batch - lastFull >= EVERY ? "full" : "quick"));
-let fuzzWithGames = 40;
+let fuzzWithGames = FUZZ_WITH.full;
+let situationScenarios = SITUATIONS.full;
 if (mode === "fuzz-new") {
-  for (const step of STEPS) if (step !== "fuzzwith") skip.add(step);
+  for (const step of STEPS) if (step !== "fuzzwith" && step !== "situations") skip.add(step);
 } else if (mode === "full" && forced === null) {
   // Only cards since the last full run: the plain fuzzer and the bot gate
   // have nothing new to find (see the header).
@@ -356,7 +378,8 @@ if (mode === "fuzz-new") {
   const touched = changedFiles();
   const touches = (re) => touched === null || touched.some((f) => re.test(f));
   skip.add("fuzz");
-  fuzzWithGames = 20;
+  fuzzWithGames = FUZZ_WITH.quick;
+  situationScenarios = SITUATIONS.quick;
   if (!touches(/^engine\/src\/(bot\/|controller\.ts|effect-worth\.ts|target-polarity\.ts)/)) skip.add("gate");
   if (!touches(/^(server|protocol)\//)) skip.add("server");
   if (!touches(/^(client|protocol)\//)) skip.add("client");
@@ -370,61 +393,39 @@ if (fuzzNewOnly && cards.length === 0) {
   console.error("verify --fuzz-new: no new cards (commit or write the batch's card files first, or name them with --with)");
   process.exit(2);
 }
-// The new-cards fuzzer already passed on these cards and this engine code
-// (`--fuzz-new`, earlier in this session): not again.
+// The new-card checks already passed on these cards and this engine code
+// (`--fuzz-new`, earlier in this session): not again. Each step on its own:
+// a stamp from before the situation fuzzer has no `scenarios`.
 const key = cards.length > 0 ? fuzzKey(cards) : null;
-let stamped = false;
-if (!fuzzNewOnly && !skip.has("fuzzwith") && key !== null && existsSync(FUZZ_STAMP)) {
+const stamped = [];
+if (!fuzzNewOnly && key !== null && existsSync(FUZZ_STAMP)) {
   const stamp = JSON.parse(readFileSync(FUZZ_STAMP, "utf8"));
-  if (stamp.key === key && stamp.games >= fuzzWithGames) {
-    skip.add("fuzzwith");
-    stamped = true;
+  if (stamp.key === key) {
+    if (!skip.has("fuzzwith") && stamp.games >= fuzzWithGames && (mode !== "full" || (stamp.uncapped ?? 0) >= UNCAPPED)) stamped.push("fuzzwith");
+    if (!skip.has("situations") && (stamp.scenarios ?? 0) >= situationScenarios) stamped.push("situations");
+    for (const step of stamped) skip.add(step);
   }
 }
 console.log(`verify: ${cards.length ? `new/forced cards: ${cards.join(", ")}` : "no new cards"}${skip.size ? `; skipping ${[...skip].join(", ")}` : ""}`);
-if (stamped) console.log(`verify: the new-cards fuzzer passed on these cards and this engine code earlier (--fuzz-new): not run again`);
+if (stamped.length > 0) console.log(`verify: ${stamped.join(" and ")} passed on these cards and this engine code earlier (--fuzz-new): not run again`);
 console.log("");
 
 // The machine to itself (`machine-slots.mjs`): the engine suite alone is
 // ~18.5 GB, so a verify waits for any other on the machine and for the
 // typechecks and builds already running, and holds new ones off until it's
-// done. `--fuzz-new` is a build and two fuzzer processes: one slot.
+// done. `--fuzz-new` is a build, then the situation fuzzer's four workers
+// beside three fuzzer processes (~7 GB together): one slot.
 const held = fuzzNewOnly ? await takeSlot((m) => console.log(m)) : await takeMachine();
 process.on("exit", () => release(held));
 
 await stopOnFailure(await run("gen:cards", "npm", ["run", "-s", "gen:cards", "-w", "engine"]));
 await stopOnFailure(await run("build", "npm", ["run", "build"]));
 
-if (fuzzNewOnly) {
-  // Alone on the machine, so split in two even on a small one, at the games a
-  // full run plays (which covers a quick run's too).
-  const plan = fuzzWithPlan(cards, 40);
-  if (plan.total !== 40) console.log(`verify: ${cards.length} new cards, at most ${PER_DECK} a deck: ${plan.total} games, each card in ${plan.perCard}`);
-  const half = Math.ceil(plan.total / 2);
-  const runs = await Promise.all(
-    [
-      [1, half],
-      [half + 1, plan.total - half],
-    ].map(([start, n], i) =>
-      run(`fuzz with new cards (${i + 1} of 2)`, "node", ["scripts/random-demo.mjs", "--games", String(n), "--start", String(start), "--players", "4", "--timeout", "120", ...plan.args], ENGINE),
-    ),
-  );
-  for (const r of runs) report(r, grab(r.out, /games —|avg turns|FAILED seed/));
-  if (failures.length === 0) {
-    writeFileSync(FUZZ_STAMP, JSON.stringify({ key, games: 40, cards, date: new Date().toISOString() }) + "\n");
-    console.log(`\nThe new-cards fuzzer passed (${secs(started)}): verify skips it while these cards and the engine code stay as they are.`);
-  } else console.log(`\nFailed: ${failures.join(", ")} (${secs(started)}).`);
-  process.exit(failures.length === 0 ? 0 : 1);
-}
-
-// The fuzzers and the bot gate need only the build: they run in the
-// background beside everything from here on, and report at the end.
 // Four-player games get CI's 120 s each rather than the fuzzer's default 30:
 // one runs ~25 s alone (2026-10-14), and here they share the machine with
 // the test suites, the other fuzz runs and the bot gate, so 30 s timed out
 // games that finish.
 const FOUR_PLAYER_TIMEOUT = ["--timeout", "120"];
-const late = [];
 // A small machine (a 4-core cloud session) can't hold the engine suite's
 // workers beside five fuzz and gate processes: the suite was killed for memory
 // there (2026-10-25), and the server suite's timed tests timed out beside
@@ -432,6 +433,57 @@ const late = [];
 // 4-player run stays one process.
 const CORES = os.availableParallelism();
 const SMALL = CORES <= 4;
+const cardArgs = () => (cards.length > 40 ? ["--with-file", withFile(cards)] : cards.flatMap((c) => ["--with", c]));
+
+/** The situation fuzzer over the new cards: `scenarios` each, on `workers`
+ * threads. */
+const situationRun = (scenarios, workers) =>
+  run("situations", "node", ["scripts/situation-fuzz.mjs", ...cardArgs(), "--scenarios", String(scenarios), "--workers", String(workers)], ENGINE);
+
+/** The new-cards fuzzer's runs, each a thunk that starts it: `games` 4-player
+ * games stopped at turn MAX_TURNS — as two processes over halves of its seeds
+ * (`--start`) when `split`, the same games in about half the time — then
+ * `uncapped` games played to the end, on the seeds after. */
+function fuzzWithRuns(games, uncapped, split) {
+  const plan = fuzzWithPlan(cards, games);
+  if (plan.total !== games) console.log(`verify: ${cards.length} new cards, at most ${PER_DECK} a deck: ${plan.total} capped games, each card in ${plan.perCard}`);
+  const one = (name, start, n, extra) => () =>
+    run(name, "node", ["scripts/random-demo.mjs", "--games", String(n), "--start", String(start), "--players", "4", ...FOUR_PLAYER_TIMEOUT, ...plan.args, ...extra], ENGINE);
+  const half = split ? Math.ceil(plan.total / 2) : plan.total;
+  const parts = [
+    [1, half],
+    [half + 1, plan.total - half],
+  ].filter(([, n]) => n > 0);
+  const runs = parts.map(([start, n], i) =>
+    one(`fuzz with new cards${parts.length > 1 ? ` (${i + 1} of ${parts.length})` : ""}`, start, n, ["--max-turns", String(MAX_TURNS)]),
+  );
+  if (uncapped > 0) runs.push(one("fuzz with new cards, uncapped", plan.total + 1, uncapped, []));
+  return runs;
+}
+const FUZZ_SUMMARY = /games —|avg turns|FAILED seed/;
+const SITUATION_SUMMARY = /scenarios, \d+ failed|^FAILED /;
+
+if (fuzzNewOnly) {
+  // Alone on the machine: everything at once, at what a full run plays
+  // (which covers a quick run's too).
+  const runs = await Promise.all([
+    ...(cards.length > 0 ? [situationRun(SITUATIONS.full, Math.max(1, Math.min(4, CORES - 1)))] : []),
+    ...fuzzWithRuns(FUZZ_WITH.full, UNCAPPED, true).map((start) => start()),
+  ]);
+  for (const r of runs) report(r, grab(r.out, r.name === "situations" ? SITUATION_SUMMARY : FUZZ_SUMMARY));
+  if (failures.length === 0) {
+    writeFileSync(
+      FUZZ_STAMP,
+      JSON.stringify({ key, games: FUZZ_WITH.full, uncapped: UNCAPPED, scenarios: SITUATIONS.full, cards, date: new Date().toISOString() }) + "\n",
+    );
+    console.log(`\nThe new-card checks passed (${secs(started)}): verify skips them while these cards and the engine code stay as they are.`);
+  } else console.log(`\nFailed: ${failures.join(", ")} (${secs(started)}).`);
+  process.exit(failures.length === 0 ? 0 : 1);
+}
+
+// The fuzzers and the bot gate need only the build: they run in the
+// background beside everything from here on, and report at the end.
+const late = [];
 let startLate = () => {};
 const background = (start) => {
   if (SMALL) {
@@ -471,10 +523,14 @@ if (!skip.has("fuzz")) {
     late.push(...fourPlayer("fuzz 4p", Math.ceil(games / 2), []));
   });
 }
+// The situation fuzzer beside the suites at 4 workers (the engine suite takes
+// 8); on a small machine after them, on every core but one.
+if (!skip.has("situations") && cards.length > 0) {
+  background(() => late.push(situationRun(situationScenarios, SMALL ? Math.max(1, CORES - 1) : 4)));
+}
 if (!skip.has("fuzzwith") && cards.length > 0) {
-  const plan = fuzzWithPlan(cards, fuzzWithGames);
-  if (plan.total !== fuzzWithGames) console.log(`verify: ${cards.length} new cards, at most ${PER_DECK} a deck: ${plan.total} games, each card in ${plan.perCard}`);
-  background(() => late.push(...fourPlayer("fuzz with new cards", plan.total, plan.args)));
+  const runs = fuzzWithRuns(fuzzWithGames, mode === "full" ? UNCAPPED : 0, !SMALL);
+  background(() => late.push(...runs.map((start) => start())));
 }
 if (!skip.has("gate")) background(() => late.push(run("bot gate", "npm", ["run", "-s", "bot:scenarios", "-w", "engine"])));
 
@@ -605,7 +661,7 @@ if (!skip.has("cardverify")) {
   report(r, grab(r.out, /checked,/));
 }
 
-for (const r of await Promise.all(late)) report(r, grab(r.out, /games —|avg turns|\d+\/\d+ passed/));
+for (const r of await Promise.all(late)) report(r, grab(r.out, r.name === "situations" ? SITUATION_SUMMARY : /games —|avg turns|\d+\/\d+ passed/));
 
 console.log(failures.length === 0 ? `
 All green (${secs(started)}).` : `

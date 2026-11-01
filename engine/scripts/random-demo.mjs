@@ -9,6 +9,7 @@
 //   npm run play:random -w engine -- --seed 19    # replay exactly one seed
 //   npm run play:random -w engine -- --games 15 --start 16  # seeds 16-30 (a run split across processes)
 //   npm run play:random -w engine -- --timeout 60 # per-game limit, seconds (default 30)
+//   npm run play:random -w engine -- --max-turns 60  # a game reaching turn 61 ends as a draw
 //   npm run play:random -w engine -- --with "Card Name"  # in every seat's deck
 //   ... --with A --with B ... --per-deck 10  # at most 10 forced cards a deck, a group per seed
 //   npm run play:random -w engine -- --games 100 --coverage  # how much of the pool the decks reach
@@ -50,6 +51,12 @@ const onlySeed = flag("seed", null);
 // processes this way, the same seeds as one run of them all.
 const firstSeed = Number(flag("start", "1"));
 const timeoutMs = Number(flag("timeout", "30")) * 1000;
+// `--max-turns N`: a game still going after turn N stops there, reported as
+// a draw by turn cap. Random players rarely finish anyone off, so a game's
+// length is mostly its seed's luck (80-130 turns, the slow ones past 300);
+// `npm run verify`'s quick runs cap it, and the situation fuzzer
+// (`situation-fuzz.mjs`) is the per-card check.
+const maxTurns = flag("max-turns", null) === null ? null : Number(flag("max-turns", null));
 
 const A = asPlayerId("alice");
 const B = asPlayerId("bob");
@@ -120,7 +127,7 @@ const play = (seed) =>
       resolve(result);
     };
     worker.on("message", onMessage);
-    worker.postMessage({ seed, seats: seatsForSeed(seed) });
+    worker.postMessage({ seed, seats: seatsForSeed(seed), maxTurns });
   });
 
 const seedsToPlay =
@@ -182,7 +189,8 @@ if (showLog && results.length > 0) {
     ),
     decks: seats,
   });
-  last.advance();
+  if (maxTurns === null) last.advance();
+  else last.advanceUntil((state) => state.turn.number > maxTurns);
 }
 
 if (showLog && last !== null) {
@@ -202,9 +210,10 @@ for (const r of results) {
 
 const wins = (who) => results.filter((r) => r.winner === who).length;
 console.log("");
+const capped = results.filter((r) => r.capped).length;
 const tally = players
   .map((player) => `${player} ${wins(player)}`)
-  .concat(`draws ${wins("draw")}`)
+  .concat(`draws ${wins("draw") - capped}`, ...(maxTurns !== null ? [`turn cap ${capped}`] : []))
   .join(", ");
 console.log(`${results.length} games — ${tally}`);
 console.log(

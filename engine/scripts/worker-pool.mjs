@@ -7,7 +7,8 @@
 //
 // A job's worker posts any number of messages (`onMessage` sees each) and
 // says it's finished with one `isFinal` accepts; it's then sent the next job.
-// A job that runs past `timeoutMs`, or whose worker dies (an uncaught error,
+// A job that runs past `timeoutMs` (a number, or a job's own from a
+// function of it), or whose worker dies (an uncaught error,
 // running out of its capped heap), is reported to `onLost` and its worker
 // replaced, so one bad seed costs one worker, not the run.
 
@@ -27,6 +28,7 @@ export function runPool({
   onLost,
   onDone,
   label = scriptLabel(),
+  resourceLimits = WORKER_LIMITS,
 }) {
   const queue = [...jobs];
   // One bar per pool run, for the job-progress mod (progress.mjs).
@@ -46,7 +48,7 @@ export function runPool({
       return;
     }
     live += 1;
-    const worker = new Worker(url, { workerData, resourceLimits: WORKER_LIMITS });
+    const worker = new Worker(url, { workerData, resourceLimits });
     let job = null;
     let timer = null;
     let dead = false;
@@ -75,7 +77,8 @@ export function runPool({
         return;
       }
       job = queue.shift();
-      if (Number.isFinite(timeoutMs)) timer = setTimeout(() => lose("timeout"), timeoutMs);
+      const limit = typeof timeoutMs === "function" ? timeoutMs(job) : timeoutMs;
+      if (Number.isFinite(limit)) timer = setTimeout(() => lose("timeout"), limit);
       worker.postMessage(job);
     };
     worker.on("message", (message) => {
