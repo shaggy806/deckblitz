@@ -3092,6 +3092,21 @@ export class Game {
           ...(modes !== undefined ? { modes } : {}),
         });
       };
+      // A target that costs more (Kopala): only those it can be paid for.
+      const taxed = this.abilityTaxReaches(source, ability, player);
+      const affordable = (all: readonly (readonly TargetRef[])[], x: number | undefined): TargetRef[][] =>
+        all.map((slot) =>
+          slot.filter(
+            (ref) =>
+              this.payMana(
+                player,
+                this.activatedAbilityManaCost(player, source, ability, x, [ref]).cost,
+                undefined,
+                ability.cost.tap ? source : undefined,
+                { kind: "ability", source, ability },
+              ) !== null,
+          ),
+        );
       // "Choose one —" (rule 700.2b): offered once per choice of modes, each
       // with its modes' targets, as a mana ability is once per colour.
       const modeOffer = this.activationModeOffer(player, source, index, ability);
@@ -3101,15 +3116,15 @@ export class Game {
           const specs = this.withActivationModes(modes, () =>
             this.activatedSpecsAt(this.activationSpecs(ability), source, player, undefined),
           );
-          const options = this.targetOptionsFor(specs, player, this.permanentSource(source));
+          const all = this.targetOptionsFor(specs, player, this.permanentSource(source));
+          const options = taxed ? affordable(all, undefined) : all;
           if (!targetsFillable(specs, options, [], 0, stateTargetFacts(this.state, this.registry))) continue;
           push(options, xCost, specs, modes);
         }
         return;
       }
-      // A target that costs more (Kopala): how much X is left depends on the
-      // target, so an X ability is offered once per X too.
-      const taxed = this.abilityTaxReaches(source, ability, player);
+      // How much X is left depends on a taxed target, so an X ability is
+      // offered once per X too.
       if (maxX !== undefined && (taxed || ability.targets.some(targetSpecReadsX) || groupReadsX(ability.targets))) {
         // "Target Saga card with mana value X": what may be targeted depends
         // on X, so the ability is offered once per X that has a legal set of
@@ -3118,20 +3133,7 @@ export class Game {
         for (let x = minX; x <= maxX; x += 1) {
           const specs = this.activatedSpecsAt(ability.targets, source, player, x);
           const all = this.targetOptionsFor(specs, player, this.permanentSource(source, x));
-          const options = taxed
-            ? all.map((slot) =>
-                slot.filter(
-                  (ref) =>
-                    this.payMana(
-                      player,
-                      this.activatedAbilityManaCost(player, source, ability, x, [ref]).cost,
-                      undefined,
-                      ability.cost.tap ? source : undefined,
-                      { kind: "ability", source, ability },
-                    ) !== null,
-                ),
-              )
-            : all;
+          const options = taxed ? affordable(all, x) : all;
           if (targetsFillable(specs, options, [], 0, stateTargetFacts(this.state, this.registry))) {
             push(options, { minX: x, maxX: x }, specs);
           }
@@ -11573,6 +11575,27 @@ export class Game {
     return granted.length === 0 ? own : [...own, ...granted];
   }
 
+  /** Each permanent's active targeting costs, the ones it has only: read once
+   * per cache region, since an offer prices every target of every spell in
+   * hand and a grant (Jubilant Skybonder) makes each read cost a layer fold. */
+  private activeTargetedCosts(): ReadonlyMap<ObjectId, readonly NonNullable<StaticAbility["targetedBySpellsCost"]>[]> {
+    return computedCacheMemo("activeTargetedCosts", () => {
+      const costs = new Map<ObjectId, NonNullable<StaticAbility["targetedBySpellsCost"]>[]>();
+      for (const id of this.state.zones.shared.battlefield) {
+        const object = this.state.objects[id];
+        if (object === undefined) continue;
+        for (const ability of this.targetedCostStatics(object)) {
+          const cost = ability.targetedBySpellsCost;
+          if (cost === undefined || !this.staticActive(object, ability)) continue;
+          const held = costs.get(id);
+          if (held === undefined) costs.set(id, [cost]);
+          else held.push(cost);
+        }
+      }
+      return costs;
+    });
+  }
+
   /**
    * What a spell `caster` casts pays for aiming at `targets`
    * (`targetedBySpellsCost`, rule 601.2f): the life and the generic mana.
@@ -11598,22 +11621,21 @@ export class Game {
       life += (cost.payLife ?? 0) * times;
       generic += (cost.payGeneric ?? 0) * times;
     };
+    const active = this.activeTargetedCosts();
     for (const [id, slots] of named) {
       const object = this.state.objects[id];
       if (object === undefined || object.zone !== "battlefield" || object.controller === caster) continue;
       const times = Math.min(slots, Math.max(1, object.stackCount ?? 1));
-      for (const ability of this.targetedCostStatics(object)) {
-        const cost = ability.targetedBySpellsCost;
-        if (cost !== undefined && cost.targeting === undefined && this.staticActive(object, ability)) add(cost, times);
+      for (const cost of active.get(id) ?? []) {
+        if (cost.targeting === undefined) add(cost, times);
       }
     }
-    for (const sourceId of this.state.zones.shared.battlefield) {
+    for (const [sourceId, costs] of active) {
       const source = this.state.objects[sourceId];
       if (source === undefined || source.controller === caster) continue;
-      for (const ability of this.targetedCostStatics(source)) {
-        const cost = ability.targetedBySpellsCost;
-        const filter = cost?.targeting;
-        if (cost === undefined || filter === undefined || !this.staticActive(source, ability)) continue;
+      for (const cost of costs) {
+        const filter = cost.targeting;
+        if (filter === undefined) continue;
         const reached = [...named.keys()].some(
           (id) =>
             this.state.objects[id]?.zone === "battlefield" &&

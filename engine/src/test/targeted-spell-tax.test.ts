@@ -246,6 +246,23 @@ describe("Kopala, Warden of Waves", () => {
     expect(untappedLands(game)).toBe(0);
   });
 
+  it("a modal ability's mode leaves out the targets it can't pay for, and is offered with them once it can", () => {
+    const { game } = table();
+    const kopala = spawn(game, "Kopala, Warden of Waves", B);
+    const bears = spawn(game, "Grizzly Bears", B);
+    const ulasht = spawn(game, "Ulasht, the Hate Seed", A);
+    game.state.objects[ulasht].counters = { "+1/+1": 1 };
+    lands(game, "Island", 1);
+    const objects = (): ObjectId[] =>
+      activationOffers(game, ulasht).flatMap((o) =>
+        o.targetOptions.flat().flatMap((t) => (t.kind === "object" ? [t.object] : [])),
+      );
+    expect(objects()).toContain(bears);
+    expect(objects()).not.toContain(kopala);
+    lands(game, "Island", 2);
+    expect(objects()).toContain(kopala);
+  });
+
   it("an X ability is offered once per X, each X with the targets it leaves affordable", () => {
     const { game } = table();
     const kopala = spawn(game, "Kopala, Warden of Waves", B);

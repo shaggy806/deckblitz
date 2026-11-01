@@ -2312,8 +2312,13 @@ export function modifierGrantApplies(modifier: PtModifier, lostAt: number | null
 /** The static abilities modifiers grant `object` (`PtModifier.grantsStatic`
  * — the `grant-static` effect) that it still has: not taken away by a later
  * loss of all abilities (rule 613.7). Usually none, and then cheaply. */
-export function grantedStatics(state: GameState, registry: CardRegistry, object: GameObject): readonly StaticAbility[] {
-  const timed = grantedStaticsTimed(state, registry, object);
+export function grantedStatics(
+  state: GameState,
+  registry: CardRegistry,
+  object: GameObject,
+  wanted?: (granted: StaticAbility) => boolean,
+): readonly StaticAbility[] {
+  const timed = grantedStaticsTimed(state, registry, object, wanted);
   return timed.length === 0 ? [] : timed.map((g) => g.ability);
 }
 
@@ -2332,8 +2337,19 @@ interface GrantedStatic {
  * decides) and its condition holds, read for the granting permanent. Either
  * is taken away by a loss of all abilities later than the grant (rule
  * 613.7). Guarded by `staticGrantsInProgress`.
+ *
+ * `wanted`: a battlefield grant holding nothing the caller reads isn't asked
+ * about. The layer fold passes it, since a grant's scope can itself read the
+ * fold ("creatures you control with flying have …" — Jubilant Skybonder), and
+ * without it each object's fold asks about every other object's grants, nested
+ * with no cache, so a board of them takes minutes.
  */
-function grantedStaticsTimed(state: GameState, registry: CardRegistry, object: GameObject): readonly GrantedStatic[] {
+function grantedStaticsTimed(
+  state: GameState,
+  registry: CardRegistry,
+  object: GameObject,
+  wanted?: (granted: StaticAbility) => boolean,
+): readonly GrantedStatic[] {
   const fromModifiers = object.modifiers.some((m) => m.grantsStatic !== undefined);
   const granting = object.zone === "battlefield" ? staticGrantSources(state, registry) : NO_STATICS;
   if (!fromModifiers && granting.length === 0) return [];
@@ -2351,6 +2367,7 @@ function grantedStaticsTimed(state: GameState, registry: CardRegistry, object: G
     try {
       for (const { source, ability } of granting) {
         if (!grantOutlastsLoss(lostAt, source.timestamp)) continue;
+        if (wanted !== undefined && !(ability.grantsStatic ?? []).some(wanted)) continue;
         if (!staticReaches(state, registry, source, ability, object)) continue;
         if (ability.condition !== undefined && !staticConditionMet(state, registry, source, ability.condition)) continue;
         const timestamp = Math.max(object.timestamp, source.timestamp);
@@ -3513,10 +3530,10 @@ function abilityGrantSources(
     const grants = staticsOf(registry, rulesTextName(source)).grants;
     // Roar of the Fifth People's chapter II: "This Saga gains 'Creatures you
     // control have …'" (a `grant-static`).
-    for (const ability of grantedStatics(state, registry, source)) {
-      if (ability.grantsActivated !== undefined || ability.grantsTriggered !== undefined) {
-        (out ??= []).push({ source, ability });
-      }
+    const grantsAbilities = (ability: StaticAbility): boolean =>
+      ability.grantsActivated !== undefined || ability.grantsTriggered !== undefined;
+    for (const ability of grantedStatics(state, registry, source, grantsAbilities)) {
+      if (grantsAbilities(ability)) (out ??= []).push({ source, ability });
     }
     if (grants.length === 0) continue;
     // A static with a layer-4 part outlives its source's loss of abilities
@@ -4097,8 +4114,10 @@ function contributingStaticSources(
     // flying") or another permanent's static grants it (Inspiring Leader's
     // "commander creatures you own have 'Creature tokens you control get
     // +2/+2'"), timestamped by the later of it and the grant (613.7a).
-    for (const { ability, timestamp } of grantedStaticsTimed(state, registry, source)) {
-      if (contributesToCharacteristics(ability) && !hasLayerFourPart(ability)) out.push({ source, ability, timestamp });
+    const contributes = (ability: StaticAbility): boolean =>
+      contributesToCharacteristics(ability) && !hasLayerFourPart(ability);
+    for (const { ability, timestamp } of grantedStaticsTimed(state, registry, source, contributes)) {
+      if (contributes(ability)) out.push({ source, ability, timestamp });
     }
   }
   // A card's static that functions from its owner's graveyard (rule 113.6b
