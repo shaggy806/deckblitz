@@ -625,6 +625,32 @@ pay-variable-energy. Proving cards: Harnessed Lightning, Die Young, Wrath of
 the Skies, Territorial Aetherkite, Nissa, Worldsoul Speaker, Primal Prayers,
 Amped Raptor, Jolted Awake.
 
+### Entering with colours, types, base P/T and keywords in addition — built 2026-10-31
+
+The need-keys Phase 2 family `effect:put-onto-battlefield-options`' first
+group, features only. **`EnterTypes`** (`put-onto-battlefield`'s new
+`enterAs`, and `look-and-choose`'s and `return-from-graveyard`'s) grows
+`addTypes`, `setColors`, `basePt` (layer 7b), `keywords` (layer 6) and
+`ifCreature` beside its `setTypes`, `addSubtypes` and `addColors`: one
+lasting effect of the resolution on the permanent (rule 611.2c), in place as
+it enters (614.12) so the triggers that see it arrive judge it so; with
+`ifCreature`, only if it's a creature then, judged on the battlefield under
+every other effect. The scaffolder reads the second sentence ("That creature
+is a black Zombie in addition to its other colors and types", "It's a 1/1
+Spirit creature with flying in addition to its other types", "If it's a
+creature, …") and "put target … card from a graveyard onto the battlefield
+under your control". Keys: effect:return-with-added-color,
+effect:enter-as-additional-card-type, effect:reanimate-as-animated-creature,
+effect:add-subtypes-if-creature-on-entry. Proving cards: Rise from the Grave,
+Relive the Past, Excava, the Risen Past, Lim-Dûl the Necromancer
+(`enter-as-additional.test.ts`). For `author-freed` to check in the rest:
+Dance of the Manse's "up to X targets with mana value X or less" and its "if
+X is 6 or more" around two returns, Brilliance Unleashed's "if it's an
+artifact creature card. Otherwise, …" (a condition on the card, not on the
+permanent — `ifCreature` judges the permanent), Path of the Schemer's Will
+of the Planeswalkers, The War in Heaven's total-mana-value targets, The
+Master's milled-this-turn target (its own key).
+
 ### Face down by an effect — built 2026-10-31
 
 The need-keys Phase 2 family `mechanic:face-down`, features only (rule 708.2).

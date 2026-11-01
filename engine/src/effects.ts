@@ -2865,6 +2865,13 @@ export type EffectSpec =
        * as it enters, as `setTypes` is: "whenever a Phyrexian enters" sees
        * it arrive as one. */
       readonly addSubtypes?: readonly string[];
+      /** The rest of what it is as it enters, in addition to its own — see
+       * {@link EnterTypes}: Rise from the Grave's "That creature is a black
+       * Zombie in addition to its other colors and types" (`addColors`,
+       * `addSubtypes`), Excava's "It's a 1/1 Spirit creature with flying in
+       * addition to its other types", Lim-Dûl's "If it's a creature, …"
+       * (`ifCreature`). Joined with `setTypes` and `addSubtypes` above. */
+      readonly enterAs?: EnterTypes;
       /** "…onto the battlefield under your control **tapped and attacking**"
        * (Chorale of the Void, rule 508.4) — see {@link EnterAttacking}.
        * Pair it with `enterTapped`. */
@@ -7580,10 +7587,37 @@ export type EffectSpec =
 /** The types a `put-onto-battlefield` says the permanent has, in place as it
  * enters (rule 614.12): its card types instead of its own (`setTypes` — the
  * Enduring cycle), and subtypes in addition to its own (`addSubtypes` —
- * Portal to Phyrexia's Phyrexian). */
+ * Portal to Phyrexia's Phyrexian), with the rest below. Every part is one
+ * lasting effect of the resolution on the permanent it becomes (rule
+ * 611.2c), in its layer — types 4, colours 5, abilities 6, base P/T 7b
+ * (613.1d–f, 613.4b) — and in place from the moment it enters, so "whenever
+ * a Zombie / an artifact / a creature enters" sees it arrive as one. */
 export interface EnterTypes {
   readonly setTypes?: readonly CardType[];
+  /** Card types **in addition to its other types** — The War in Heaven's
+   * "They're artifacts in addition to their other types", Relive the Past's
+   * "They are 5/5 Elemental creatures in addition to their other types"
+   * (`addTypes: ["creature"]` with `basePt` and `addSubtypes`). */
+  readonly addTypes?: readonly CardType[];
   readonly addSubtypes?: readonly string[];
+  /** Its colours instead of its own (layer 5) — Chainer, Dementia Master's
+   * "That creature is black and is a Nightmare in addition to its other
+   * creature types": "is black", with no "in addition", sets them. */
+  readonly setColors?: readonly Color[];
+  /** Its base power and toughness (layer 7b — rule 613.4b): Relive the
+   * Past's "5/5", Excava's "It's a 1/1 Spirit creature". Counters and other
+   * P/T changes apply over it. */
+  readonly basePt?: readonly [number, number];
+  /** Keywords it has (layer 6) — Excava's "a 1/1 Spirit creature **with
+   * flying**". */
+  readonly keywords?: readonly Keyword[];
+  /** "**If it's a creature**, it's a Zombie in addition to its other
+   * creature types" (Lim-Dûl the Necromancer): every part applies only if
+   * the permanent is a creature as it enters — judged on the battlefield
+   * with every other effect applying (rule 614.12's "as it would exist on
+   * the battlefield"), its face down or transformed face included. Not with
+   * `faceDown`. */
+  readonly ifCreature?: true;
   /** Colours in addition to its own (Necromantic Selection's "It's a black
    * Zombie in addition to its other colors and types" — a colourless card
    * is then simply black, its ruling). */
@@ -12357,10 +12391,16 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           spec.withCounters,
           spec.exileIfItWouldLeave,
           spec.flipped === true ? "flipped" : spec.transformed === true,
-          spec.setTypes !== undefined || spec.addSubtypes !== undefined || spec.faceDown !== undefined
+          spec.setTypes !== undefined ||
+            spec.addSubtypes !== undefined ||
+            spec.faceDown !== undefined ||
+            spec.enterAs !== undefined
             ? {
+                ...spec.enterAs,
                 ...(spec.setTypes !== undefined ? { setTypes: spec.setTypes } : {}),
-                ...(spec.addSubtypes !== undefined ? { addSubtypes: spec.addSubtypes } : {}),
+                ...(spec.addSubtypes !== undefined || spec.enterAs?.addSubtypes !== undefined
+                  ? { addSubtypes: [...(spec.addSubtypes ?? []), ...(spec.enterAs?.addSubtypes ?? [])] }
+                  : {}),
                 ...(spec.faceDown !== undefined ? { faceDown: spec.faceDown } : {}),
               }
             : undefined,

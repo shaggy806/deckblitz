@@ -16,7 +16,7 @@ export default defineCard({
       cost: {
         mana: null,
         tap: false,
-        tapOthers: { count: 5, filter: { subtype: "Zombie" }, includeSelf: true },
+        tapOthers: { count: 5, filter: { controlledBy: "you", subtype: "Zombie" }, includeSelf: true },
       },
       targets: [{ kind: "card-in-graveyard", filter: { type: "creature" } }],
       effect: { kind: "put-onto-battlefield", target: 0, underYourControl: true },

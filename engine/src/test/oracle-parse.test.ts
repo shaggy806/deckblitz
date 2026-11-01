@@ -4417,6 +4417,53 @@ describe("face down by an effect (rule 708.2)", () => {
     });
   });
 
+  it("reads what a permanent put onto the battlefield is in addition to its own (enterAs)", () => {
+    const rise = face(
+      "Rise from the Grave",
+      "Sorcery",
+      "Put target creature card from a graveyard onto the battlefield under your control. That creature is a black Zombie in addition to its other colors and types.",
+    );
+    expect(rise.complete).toBe(true);
+    expect(rise.effect).toEqual({
+      kind: "put-onto-battlefield",
+      target: 0,
+      underYourControl: true,
+      enterAs: { addColors: ["B"], addSubtypes: ["Zombie"] },
+    });
+    // Subtypes alone stay the field Portal to Phyrexia is authored with.
+    expect(
+      parseEffect(
+        "Put target creature card from a graveyard onto the battlefield under your control. It's a Phyrexian in addition to its other types.",
+        ctx(),
+      ).effect,
+    ).toEqual({ kind: "put-onto-battlefield", target: 0, underYourControl: true, addSubtypes: ["Phyrexian"] });
+    expect(
+      parseEffect(
+        "Return target artifact card from your graveyard to the battlefield. It's a 4/4 Construct artifact creature with flying and haste in addition to its other types.",
+        ctx(),
+      ).effect,
+    ).toEqual({
+      kind: "put-onto-battlefield",
+      target: 0,
+      enterAs: { keywords: ["flying", "haste"], basePt: [4, 4], addSubtypes: ["Construct"], addTypes: ["artifact", "creature"] },
+    });
+    expect(
+      parseEffect(
+        "Return target creature card from your graveyard to the battlefield. If it's a creature, it's a Zombie in addition to its other creature types.",
+        ctx(),
+      ).effect,
+    ).toEqual({ kind: "put-onto-battlefield", target: 0, enterAs: { addSubtypes: ["Zombie"], ifCreature: true } });
+    // Half-read descriptions stay to author: a P/T on something not made a
+    // creature, a colour without "colors and", an unknown keyword.
+    for (const second of [
+      "It's a 3/3 Golem artifact in addition to its other types.",
+      "It's black in addition to its other types.",
+      "It's a 1/1 Spirit creature with shmoofing in addition to its other types.",
+    ]) {
+      expect(parseEffect(`Return target artifact card from your graveyard to the battlefield. ${second}`, ctx()).effect).toBeNull();
+    }
+  });
+
   it("reads manifest from another player's library, and can't be turned face up", () => {
     const amalgam = face(
       "Thieving Amalgam",

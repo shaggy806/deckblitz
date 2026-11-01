@@ -885,6 +885,20 @@ interface EnterOptions {
    * Necromantic Selection's "It's a black Zombie in addition to its other
    * colors and types." */
   readonly addColors?: readonly Color[];
+  /** Card types in addition to its own, its base P/T (layer 7b) and keywords
+   * it has (layer 6), the same way — Relive the Past's "They are 5/5
+   * Elemental creatures in addition to their other types" (see
+   * {@link EnterTypes}). */
+  readonly addTypes?: readonly CardType[];
+  readonly basePt?: readonly [number, number];
+  readonly keywords?: readonly Keyword[];
+  /** Its colours instead of its own (layer 5) — Chainer's "That creature is
+   * black". */
+  readonly setColors?: readonly Color[];
+  /** All of the above only if it's a creature as it enters (Lim-Dûl the
+   * Necromancer's "If it's a creature, it's a Zombie …") — judged on the
+   * battlefield, with every other effect applying (rule 614.12). */
+  readonly ifCreature?: true;
   /** It enters face down (rule 708.3: turned face down *before* it enters,
    * so its own enters abilities neither trigger nor apply) — manifested or
    * cloaked, or put there face down by an effect (`"effect"`). */
@@ -911,6 +925,28 @@ function faceDownEntry(types: EnterTypes | undefined): Pick<EnterOptions, "faceD
   const down = types?.faceDown;
   if (down === undefined) return {};
   return { faceDown: "effect", ...(down !== true ? { faceDownAs: down } : {}) };
+}
+
+/** The {@link EnterOptions} for what an effect says a permanent is as it
+ * enters (its {@link EnterTypes} less `faceDown` — see
+ * {@link faceDownEntry}). Nothing for none. */
+function enterTypesEntry(
+  types: EnterTypes | undefined,
+): Pick<
+  EnterOptions,
+  "setTypes" | "addTypes" | "addSubtypes" | "addColors" | "setColors" | "basePt" | "keywords" | "ifCreature"
+> {
+  if (types === undefined) return {};
+  return {
+    ...(types.setTypes !== undefined ? { setTypes: types.setTypes } : {}),
+    ...(types.addTypes !== undefined ? { addTypes: types.addTypes } : {}),
+    ...(types.addSubtypes !== undefined ? { addSubtypes: types.addSubtypes } : {}),
+    ...(types.addColors !== undefined ? { addColors: types.addColors } : {}),
+    ...(types.setColors !== undefined ? { setColors: types.setColors } : {}),
+    ...(types.basePt !== undefined ? { basePt: types.basePt } : {}),
+    ...(types.keywords !== undefined ? { keywords: types.keywords } : {}),
+    ...(types.ifCreature === true ? { ifCreature: true as const } : {}),
+  };
 }
 
 /** Everything the enters-battlefield replacements decided about one entry
@@ -8332,9 +8368,7 @@ export class Game {
       const moved = this.moveObject(id, to, {
         tapped: isRest ? rest.enterTapped === true : awaiting.enterTapped === true,
         ...(under !== undefined ? { under } : {}),
-        ...(enterAs?.setTypes !== undefined ? { setTypes: enterAs.setTypes } : {}),
-        ...(enterAs?.addSubtypes !== undefined ? { addSubtypes: enterAs.addSubtypes } : {}),
-        ...(enterAs?.addColors !== undefined ? { addColors: enterAs.addColors } : {}),
+        ...enterTypesEntry(enterAs),
         ...faceDownEntry(enterAs),
       });
       // Kept there by a control effect, as a reanimation "under your
@@ -36246,9 +36280,7 @@ export class Game {
       ...(under !== undefined ? { under } : {}),
       ...(transformed ? { transformed: true } : {}),
       ...(flipped ? { flipped: true } : {}),
-      ...(types?.setTypes !== undefined ? { setTypes: types.setTypes } : {}),
-      ...(types?.addSubtypes !== undefined ? { addSubtypes: types.addSubtypes } : {}),
-      ...(types?.addColors !== undefined ? { addColors: types.addColors } : {}),
+      ...enterTypesEntry(types),
       ...faceDownEntry(types),
     });
     const entered = this.state.objects[target.object];
@@ -38959,9 +38991,7 @@ export class Game {
             const moved = this.moveObject(id, destination, {
               tapped: enterTapped,
               ...(under !== undefined ? { under } : {}),
-              ...(enterAs?.setTypes !== undefined ? { setTypes: enterAs.setTypes } : {}),
-              ...(enterAs?.addSubtypes !== undefined ? { addSubtypes: enterAs.addSubtypes } : {}),
-              ...(enterAs?.addColors !== undefined ? { addColors: enterAs.addColors } : {}),
+              ...enterTypesEntry(enterAs),
             });
             const entered = this.state.objects[id];
             if (moved && under !== undefined && entered?.zone === "battlefield" && entered.controller !== under) {
@@ -43835,18 +43865,6 @@ export class Game {
       this.state.timestampSeq += 1;
       object.timestamp = this.state.timestampSeq;
       object.controlSinceSeq = this.state.timestampSeq;
-      if (enter.setTypes !== undefined || enter.addSubtypes !== undefined || enter.addColors !== undefined) {
-        object.modifiers.push({
-          timestamp: object.timestamp,
-          power: 0,
-          toughness: 0,
-          keywords: [],
-          ...(enter.setTypes !== undefined ? { setTypes: [...enter.setTypes] } : {}),
-          ...(enter.addSubtypes !== undefined ? { addSubtypes: [...enter.addSubtypes] } : {}),
-          ...(enter.addColors !== undefined ? { addColors: [...enter.addColors] } : {}),
-          untilEndOfTurn: false,
-        });
-      }
       // Who it enters under: its owner, unless the effect puts it onto the
       // battlefield under someone else's control. The control effect that
       // keeps it there is the caller's to create, after the move (layer 2
@@ -43865,6 +43883,36 @@ export class Game {
       // that sees it enter.
       if (this.isTransformingDfc(id) && this.entersTransformed(id, enter.transformed === true)) {
         object.face = 1;
+      }
+      // What the effect putting it here says it is, in addition to (or, for
+      // its card types, instead of) its own: one lasting effect on the
+      // permanent (rule 611.2c), in place before anything judges it — its
+      // replacements and the triggers that see it arrive (614.12). "If it's
+      // a creature" is judged now, on the face it has, under every other
+      // effect.
+      if (
+        (enter.setTypes !== undefined ||
+          enter.addTypes !== undefined ||
+          enter.addSubtypes !== undefined ||
+          enter.addColors !== undefined ||
+          enter.setColors !== undefined ||
+          enter.basePt !== undefined ||
+          enter.keywords !== undefined) &&
+        (enter.ifCreature !== true || effectiveTypes(this.state, this.registry, object).includes("creature"))
+      ) {
+        object.modifiers.push({
+          timestamp: object.timestamp,
+          power: 0,
+          toughness: 0,
+          keywords: [...(enter.keywords ?? [])],
+          ...(enter.setTypes !== undefined ? { setTypes: [...enter.setTypes] } : {}),
+          ...(enter.addTypes !== undefined ? { addTypes: [...enter.addTypes] } : {}),
+          ...(enter.addSubtypes !== undefined ? { addSubtypes: [...enter.addSubtypes] } : {}),
+          ...(enter.addColors !== undefined ? { addColors: [...enter.addColors] } : {}),
+          ...(enter.setColors !== undefined ? { setColors: [...enter.setColors] } : {}),
+          ...(enter.basePt !== undefined ? { setPt: [enter.basePt[0], enter.basePt[1]] as [number, number] } : {}),
+          untilEndOfTurn: false,
+        });
       }
       // Replacement effects that apply as it enters (rule 614.1c) — tapped /
       // enters-with-counters, its own and other permanents'. `object.counters`

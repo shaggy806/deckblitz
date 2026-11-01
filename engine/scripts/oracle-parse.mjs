@@ -2599,6 +2599,13 @@ export function parseSentence(sentence, ctx) {
     const i = slot(m[1]);
     return i === undefined ? null : { kind: "put-onto-battlefield", target: i, ...(m[2] ? { enterTapped: true } : {}) };
   }
+  // "Put target creature card from a graveyard onto the battlefield under
+  // your control" (Rise from the Grave, Portal to Phyrexia).
+  if ((m = /^put (target .+? card from a graveyard) onto the battlefield under your control\.$/i.exec(s))) {
+    if (/\bAura\b/.test(m[1])) return null;
+    const i = slot(m[1]);
+    return i === undefined ? null : { kind: "put-onto-battlefield", target: i, underYourControl: true };
+  }
   if (re("sacrifice ~").test(s)) return { kind: "sacrifice-source" };
   if ((m = re(`(each player|each opponent|target player|target opponent) sacrifices ${N} (.+?)(?: of their choice)?`).exec(s))) {
     const count = amount(m[2]);
@@ -3517,6 +3524,16 @@ export function parseEffect(text, outer) {
       parsed.push(faceDownAs.effect);
       hints.push({ sentence, effect: faceDownAs.effect });
       skip = faceDownAs.used - 1;
+      continue;
+    }
+    // Put onto the battlefield with what it is in addition to its own: "Put
+    // target creature card … under your control. That creature is a black
+    // Zombie in addition to its other colors and types." — one effect.
+    const enteredAs = enterAsAt(sentences, i, ctx);
+    if (enteredAs !== null) {
+      parsed.push(enteredAs.effect);
+      hints.push({ sentence, effect: enteredAs.effect });
+      skip = enteredAs.used - 1;
       continue;
     }
     // A choice among the spell's own targets as it resolves (Incriminate,
@@ -6097,6 +6114,97 @@ const FACE_DOWN_AS = {
  * battlefield`'s or look-and-choose's `faceDown`). `null` unless the second
  * sentence lists one the engine has.
  */
+/**
+ * What a permanent put onto the battlefield is in addition to its own, as
+ * the sentence after the move says it (an `EnterTypes`): "That creature is a
+ * black Zombie in addition to its other colors and types", "It's a 1/1
+ * Spirit creature with flying in addition to its other types", "They're
+ * artifacts in addition to their other types", "If it's a creature, it's a
+ * Zombie in addition to its other creature types" (`ifCreature`). `null`
+ * unless every word is read.
+ */
+export function enterAsOf(sentence) {
+  const m =
+    /^(if it's a creature, )?(?:that creature is|it's|it is|they're|they are|each of those creatures is) (.+?) in addition to (?:its|their) other (colors and types|types|creature types)\.$/i.exec(
+      sentence,
+    );
+  if (m === null) return null;
+  let desc = m[2];
+  const out = {};
+  const kw = / with (.+)$/i.exec(desc);
+  if (kw !== null) {
+    const words = kw[1].split(/, and |, | and /i);
+    const keywords = words.map((w) => KEYWORDS[w.toLowerCase()]);
+    if (keywords.some((k) => k === undefined)) return null;
+    out.keywords = keywords;
+    desc = desc.slice(0, kw.index);
+  }
+  desc = desc.replace(/^an? /i, "");
+  const pt = /^(\d+)\/(\d+) /.exec(desc);
+  if (pt !== null) {
+    out.basePt = [Number(pt[1]), Number(pt[2])];
+    desc = desc.slice(pt[0].length);
+  }
+  for (const word of desc.split(" ")) {
+    const lower = word.toLowerCase();
+    if (COLOR_WORDS[lower] !== undefined) {
+      if (out.addTypes !== undefined || out.addSubtypes !== undefined) return null;
+      (out.addColors ??= []).push(COLOR_WORDS[lower]);
+    } else if (CARD_TYPES.includes(singular(lower)) && singular(lower) !== "instant" && singular(lower) !== "sorcery") {
+      (out.addTypes ??= []).push(singular(lower));
+    } else if (/^[A-Z][a-z]+(?:-[A-Z]?[a-z]+)?$/.test(word)) {
+      if (out.addTypes !== undefined) return null;
+      (out.addSubtypes ??= []).push(singular(word));
+    } else {
+      return null;
+    }
+  }
+  // "Colors and types" only with a colour; a colour only with it. "Its
+  // other creature types" names creature types alone.
+  if ((m[3].toLowerCase() === "colors and types") !== (out.addColors !== undefined)) return null;
+  if (m[3].toLowerCase() === "creature types" && Object.keys(out).some((k) => k !== "addSubtypes")) return null;
+  // A P/T only for a creature it is or is made.
+  if (out.basePt !== undefined && !(out.addTypes ?? []).includes("creature")) return null;
+  if (Object.keys(out).length === 0) return null;
+  if (m[1]) out.ifCreature = true;
+  return out;
+}
+
+/**
+ * A move onto the battlefield and, in the next sentence, what the permanent
+ * is in addition to its own ({@link enterAsOf}) — one `put-onto-battlefield`
+ * with `enterAs` (`addSubtypes` alone, the field Portal to Phyrexia's "It's
+ * a Phyrexian" is authored with, when that's all it says), or a
+ * look-and-choose / return-from-graveyard to the battlefield with `enterAs`.
+ */
+function enterAsAt(sentences, i, ctx) {
+  const as = enterAsOf(sentences[i + 1] ?? "");
+  if (as === null) return null;
+  const before = ctx.targets.length;
+  const fail = () => {
+    ctx.targets.length = before;
+    return null;
+  };
+  const effect = parseSentence(sentences[i], ctx);
+  if (effect === null || containsUndefined(effect)) return fail();
+  const withAs = (e) => {
+    if (e.kind === "put-onto-battlefield" && e.faceDown === undefined && e.enterAs === undefined && e.addSubtypes === undefined && e.setTypes === undefined) {
+      const onlySubtypes = Object.keys(as).length === 1 && as.addSubtypes !== undefined;
+      return onlySubtypes ? { ...e, addSubtypes: as.addSubtypes } : { ...e, enterAs: as };
+    }
+    if ((e.kind === "look-and-choose" || e.kind === "return-from-graveyard") && e.destination === "battlefield" && e.enterAs === undefined) {
+      return { ...e, enterAs: as };
+    }
+    if (e.kind === "may") {
+      const inner = withAs(e.effect);
+      return inner === null ? null : { ...e, effect: inner };
+    }
+    return null;
+  };
+  const out = withAs(effect);
+  return out === null ? fail() : { effect: out, used: 2 };
+}
+
 function faceDownAsAt(sentences, i, ctx) {
   const listed = /^(?:it's|they're) (?:an? )?(.+?)\.$/i.exec(sentences[i + 1] ?? "");
   if (listed === null || !/face down/i.test(sentences[i])) return null;
