@@ -954,7 +954,8 @@
   "zone:impulse-while-you-control-source",
   "zone:exile-discarded-play-this-turn",
   "zone:exile-from-graveyard-play-this-turn",
-  "zone:exile-target-play-until-next-turn"
+  "zone:exile-target-play-until-next-turn",
+  "effect:reveal-n-from-hand-you-choose-discard"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

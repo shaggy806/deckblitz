@@ -2884,6 +2884,19 @@ export interface ResolutionResume {
   readonly refs: LastKnownRefs;
 }
 
+/** The choice over the cards a `discard-chosen`'s `reveals` shows: `chooser`
+ * picks `picks` of them (`filter` read from their side, `optional` allowing
+ * none), for the hand's owner to discard or to go to `destination`. */
+export interface RevealedHandChoice {
+  readonly chooser: PlayerId;
+  readonly source: ObjectId;
+  readonly picks: number;
+  readonly filter?: CardFilter;
+  readonly optional?: true;
+  readonly destination?: "exile" | "library-top" | "library-bottom" | "battlefield";
+  readonly exileLink?: { readonly source: ObjectId; readonly zoneChangeCount: number };
+}
+
 export type AwaitingDecision =
   | { readonly kind: "attackers"; readonly player: PlayerId }
   | { readonly kind: "blockers"; readonly player: PlayerId }
@@ -3194,6 +3207,12 @@ export type AwaitingDecision =
        * revealed (`destination: "reveal"`), recorded on it
        * (`enterChoice.amplified`) for its counters as it enters. */
       readonly amplifyOf?: ObjectId;
+      /** A `discard-chosen`'s `reveals` — "target player reveals three cards
+       * from their hand and you choose one of them" (Blackmail): `player`
+       * picks which cards of their hand to show (`destination: "reveal"`,
+       * exactly that many), and this is the choice that follows over the
+       * cards revealed (`Game.beginRevealedChoice`). */
+      readonly thenChooseFromRevealed?: RevealedHandChoice;
     }
   | {
       /**

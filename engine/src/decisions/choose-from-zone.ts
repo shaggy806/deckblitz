@@ -60,6 +60,8 @@ export const chooseFromZone = defineDecision({
       ...(awaiting.behold !== undefined && awaiting.behold.fromHand !== true ? { behold: true as const } : {}),
       // The Leylines' "begin the game with it on the battlefield" (rule 103.6a).
       ...(awaiting.openingHand !== undefined ? { openingHand: true as const } : {}),
+      // "Reveals three cards from their hand and you choose one of them".
+      ...(awaiting.thenChooseFromRevealed !== undefined ? { revealForChoice: true as const } : {}),
     },
   ],
 
@@ -101,6 +103,13 @@ export const chooseFromZone = defineDecision({
   },
 
   ask: (controller, view, awaiting, player): Action => {
+    // Showing cards for someone else to choose among (Blackmail): the best
+    // are the ones kept back, so a controller's ranking picks what to keep.
+    if (awaiting.thenChooseFromRevealed !== undefined) {
+      const keep = awaiting.eligible.length - awaiting.min;
+      const kept = controller.chooseFromZone(view, awaiting.eligible, keep, keep);
+      return { type: "choose-from-zone", player, chosen: awaiting.eligible.filter((id) => !kept.includes(id)) };
+    }
     const picked = controller.chooseFromZone(view, awaiting.eligible, awaiting.min, awaiting.max);
     // A controller ranks cards one at a time; a set rule ("that share a land
     // type") turns its pick into the nearest one that obeys it.
@@ -132,8 +141,12 @@ export const chooseFromZone = defineDecision({
     // Exiling our own cards gives up the least; another player's (a search
     // of their library — Extract) takes the best.
     const own = legal.forPlayer === undefined || legal.forPlayer === player;
+    // Cards shown for someone else to choose among (Blackmail): the least
+    // valuable go first too, the chooser taking one of them.
     const ranked =
-      legal.destination === "exile" && own ? [...helpers.order(legal.eligible)].reverse() : helpers.order(legal.eligible);
+      (legal.destination === "exile" && own) || legal.revealForChoice === true
+        ? [...helpers.order(legal.eligible)].reverse()
+        : helpers.order(legal.eligible);
     // A set rule drops the subsets that break it before the cap, so all the
     // cap keeps are legal.
     // Taking from another player's zones, as much as allowed comes first:

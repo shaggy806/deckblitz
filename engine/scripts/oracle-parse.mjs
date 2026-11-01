@@ -5247,6 +5247,8 @@ function searchOthersAt(sentences, i, ctx) {
  * top card too. Two or three sentences, one effect; `null` when they aren't
  * that. */
 function revealedHandChoiceAt(sentences, i, ctx) {
+  const some = revealedFromHandChoiceAt(sentences, i, ctx);
+  if (some !== null) return some;
   const who = /^(target opponent|target player) reveals their hand( and the top card of their library)?\.$/i.exec(sentences[i]);
   if (who === null) return null;
   const target = () => ctx.target(who[1].toLowerCase() === "target opponent" ? "opponent" : "player");
@@ -5290,6 +5292,45 @@ function revealedHandChoiceAt(sentences, i, ctx) {
       : {}),
   };
   return { effect, used };
+}
+
+/** "Target player reveals three cards from their hand and you choose one of
+ * them. That player discards that card." (Blackmail): a `discard-chosen` with
+ * `reveals`, and `picks` for "you choose two of them" (Noggin Whack). The
+ * number may be X, "X …, where X is the number of Faeries you control"
+ * (Thieving Sprite) or "a number of cards … equal to the number of Swamps you
+ * control" (Mire's Toll). `null` when the sentences aren't that. */
+function revealedFromHandChoiceAt(sentences, i, ctx) {
+  const m = new RegExp(
+    `^(target opponent|target player) reveals (?:${N} cards from their hand(?:, where X is (.+?))?|a number of cards from their hand equal to (.+?))(?: and you choose ${N} of them)?\\.$`,
+    "i",
+  ).exec(sentences[i]);
+  if (m === null) return null;
+  const phrase = m[3] ?? m[4];
+  const reveals = phrase !== undefined ? dividedTotalOf(phrase) : numberOf(m[2]);
+  if (reveals === null || reveals === undefined) return null;
+  let used = 1;
+  let picked = m[5];
+  if (picked === undefined) {
+    picked = new RegExp(`^you choose ${N} of (?:them|those cards)\\.$`, "i").exec(sentences[i + used] ?? "")?.[1];
+    if (picked === undefined) return null;
+    used += 1;
+  }
+  const picks = numberOf(picked);
+  if (typeof picks !== "number") return null;
+  if (!new RegExp(`^that player discards ${picks === 1 ? "that card" : "those cards"}\\.$`, "i").test(sentences[i + used] ?? "")) {
+    return null;
+  }
+  used += 1;
+  return {
+    effect: {
+      kind: "discard-chosen",
+      target: ctx.target(m[1].toLowerCase() === "target opponent" ? "opponent" : "player"),
+      reveals,
+      ...(picks !== 1 ? { picks } : {}),
+    },
+    used,
+  };
 }
 
 /**

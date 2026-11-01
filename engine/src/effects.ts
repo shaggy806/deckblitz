@@ -3996,6 +3996,22 @@ export type EffectSpec =
        * from none to this many, read as it resolves, instead of one. */
       readonly upTo?: EffectAmount;
       /**
+       * The player shows only this many cards, not their hand: "target player
+       * reveals **three cards from their hand** and you choose one of them"
+       * (Blackmail), "**a number of cards** from their hand equal to the
+       * number of Swamps you control" (Mire's Toll), read as it resolves.
+       * **The hand's owner picks which** (an existing `choose-from-zone`,
+       * exactly that many), and those are revealed (rule 701.20a); holding
+       * that many or fewer they reveal them all, nothing asked; 0 reveals
+       * nothing and nothing is chosen. The choice that follows is over the
+       * revealed cards alone. Not with `lookOnly`, `upTo` or `alsoFrom`.
+       */
+      readonly reveals?: EffectAmount;
+      /** How many of the `reveals` cards are chosen: "you choose **two** of
+       * them. That player discards those cards" (Noggin Whack). As many as
+       * there are, if fewer were revealed. One, when absent. */
+      readonly picks?: EffectAmount;
+      /**
        * Where the chosen card goes instead of being discarded: `"exile"` —
        * "you choose a nonland card from it and **exile that card**"
        * (Thought-Knot Seer), linked to this permanent's stint (rule 607.2a)
@@ -9188,6 +9204,8 @@ export interface EffectApi {
       readonly alsoFrom?:
         | { readonly zone: "graveyard"; readonly filter?: CardFilter }
         | { readonly zone: "library-top" };
+      /** See the effect's `reveals` and `picks`, read as it resolves. */
+      readonly reveals?: { readonly count: number; readonly picks: number };
     },
   ): void;
   modifyPt(
@@ -13627,6 +13645,14 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           ...(spec.destination !== undefined ? { destination: spec.destination } : {}),
           ...(spec.unlinked === true ? { unlinked: true } : {}),
           ...(spec.alsoFrom !== undefined ? { alsoFrom: spec.alsoFrom } : {}),
+          ...(spec.reveals !== undefined
+            ? {
+                reveals: {
+                  count: Math.max(0, Math.floor(amountValue(spec.reveals, ctx))),
+                  picks: spec.picks === undefined ? 1 : Math.max(0, Math.floor(amountValue(spec.picks, ctx))),
+                },
+              }
+            : {}),
         });
       }
       return;

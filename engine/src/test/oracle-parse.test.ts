@@ -3637,6 +3637,22 @@ describe("damage by this source, switches, defending-player restrictions, a targ
     expect(wrong.triggered?.[0]?.targetsChosenBy).toBeUndefined();
   });
 
+  it("reads a choice among cards revealed from a hand: reveals and picks", () => {
+    const blackmail = face("Sorcery", "Target player reveals three cards from their hand and you choose one of them. That player discards that card.");
+    expect(blackmail.effect).toEqual({ kind: "discard-chosen", target: 0, reveals: 3 });
+    const whack = face("Sorcery", "Target player reveals three cards from their hand. You choose two of them. That player discards those cards.");
+    expect(whack.effect).toEqual({ kind: "discard-chosen", target: 0, reveals: 3, picks: 2 });
+    const toll = face("Sorcery", "Target player reveals a number of cards from their hand equal to the number of Swamps you control. You choose one of them. That player discards that card.");
+    expect(toll.effect).toEqual({ kind: "discard-chosen", target: 0, reveals: { countOf: { subtype: "Swamp", controlledBy: "you" } } });
+    const sprite = face("Creature — Faerie Rogue", "When this creature enters, target player reveals X cards from their hand, where X is the number of Faeries you control. You choose one of those cards. That player discards that card.");
+    expect(sprite.triggered[0].effect).toEqual({ kind: "discard-chosen", target: 0, reveals: { countOf: { subtype: "Faerie", controlledBy: "you" } } });
+    const interrogator = face("Sorcery", "Target player reveals X cards from their hand and you choose one of them. That player discards that card.");
+    expect(interrogator.effect).toEqual({ kind: "discard-chosen", target: 0, reveals: "x" });
+    // An amount nothing reads stays unread.
+    const klaw = face("Sorcery", "Target player reveals a number of cards from their hand equal to one plus the number of creature cards in your graveyard. You choose one of them. That player discards that card.");
+    expect(klaw.effect).toBeNull();
+  });
+
   it("reads a choice from a revealed hand, discarded or exiled", () => {
     const seer = face(
       "Creature — Eldrazi",

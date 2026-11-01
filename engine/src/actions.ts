@@ -1666,6 +1666,9 @@ export type LegalAction =
        * `destination` `"reveal"`, that may be revealed from it (the
        * Chancellors, rule 103.6b). */
       readonly openingHand?: true;
+      /** The cards picked are shown for another player to choose among — a
+       * `discard-chosen`'s `reveals` (Blackmail) — so a bot shows its worst. */
+      readonly revealForChoice?: true;
       /** A split tutor (Cultivate): only the first chosen card goes to
        * `destination`, the rest elsewhere. */
       readonly split?: true;

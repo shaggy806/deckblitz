@@ -1868,6 +1868,23 @@ remove-counters-any-kind. Still open on its cards: Cemetery Desecrator
 (`decision:choose-from-any-graveyard`), Gwen Stacy
 (`zone:impulse-while-you-control-source`).
 
+### Choosing among cards revealed from a hand — built 2026-11-01
+
+`discard-chosen`'s `reveals` (an amount, read as it resolves) and `picks`:
+"target player reveals three cards from their hand and you choose one of them".
+The hand's owner picks which to show, by a `choose-from-zone` of destination
+`"reveal"`, unless the hand holds no more than that; the chooser's choice is
+over the revealed cards alone. No new decision kind, and the client's popup
+already words both. A controller is asked what to keep back
+(`thenChooseFromRevealed` in `decisions/choose-from-zone.ts`), a v2 bot's
+candidates show its worst first (`revealForChoice`). Proving cards: Blackmail,
+Mire's Toll, Noggin Whack, Cabal Interrogator
+(`discard-chosen-revealed.test.ts`). Key:
+effect:reveal-n-from-hand-you-choose-discard. Still open on its cards: Taster
+of Wares (a permission to cast the exiled card while you control it), Klaw
+(one plus a count, no parser line but the amount is there), Pulse of the Dross
+(`condition:target-player-more-cards-in-hand-than-you`).
+
 ### Impulse windows — built 2026-11-01
 
 `ImpulseDuration`, one vocabulary for `impulse-exile`'s `duration` and `exile`'s

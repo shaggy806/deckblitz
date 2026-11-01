@@ -350,6 +350,7 @@ import {
 import type {
   AssistAsk,
   AwaitingDecision,
+  RevealedHandChoice,
   CasualtyAsk,
   ConspireAsk,
   DeclaredAttacker,
@@ -8197,6 +8198,15 @@ export class Game {
     // Before the game (rule 103.6a): no resolution to go on with.
     if (awaiting.openingHand !== undefined) {
       this.applyOpeningHand(player, chosen, awaiting.openingHand.next, awaiting.destination === "reveal");
+      return;
+    }
+    // "Reveals three cards from their hand and you choose one of them"
+    // (Blackmail): those cards are shown, and the choice over them comes next;
+    // the resolution stays suspended until it's answered.
+    if (awaiting.thenChooseFromRevealed !== undefined) {
+      this.state.awaiting = null;
+      this.beginRevealedChoice(player, chosen, awaiting.thenChooseFromRevealed);
+      if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
       return;
     }
 
@@ -28270,6 +28280,18 @@ export class Game {
           to?.destination === "exile" && stint !== undefined && to.unlinked !== true
             ? { source, zoneChangeCount: stint }
             : undefined;
+        if (to?.reveals !== undefined) {
+          this.beginRevealFromHand(target, to.reveals.count, {
+            chooser: to.chooser ?? controller,
+            source,
+            picks: to.reveals.picks,
+            ...(filter !== undefined ? { filter } : {}),
+            ...(optional ? { optional: true as const } : {}),
+            ...(to.destination !== undefined ? { destination: to.destination } : {}),
+            ...(exileLink !== undefined ? { exileLink } : {}),
+          });
+          return;
+        }
         this.beginDiscardChosen(to?.chooser ?? controller, source, target, filter, lookOnly, optional, upTo, to?.destination, exileLink, to?.alsoFrom);
       },
       modifyPt: (target, power, toughness, duration) =>
@@ -30746,6 +30768,60 @@ export class Game {
       // "Onto the battlefield under your control" (Treacherous Urge).
       ...(destination === "battlefield" && chooser !== player ? { enterUnder: chooser } : {}),
       ...(exileLink !== undefined ? { exileLink } : {}),
+      leftover: "stay",
+    };
+  }
+
+  /** See `discard-chosen`'s `reveals`: "target player reveals three cards from
+   * their hand and you choose one of them". The hand's owner picks which to
+   * show, unless the hand holds no more than that; then the choice over what
+   * was revealed. */
+  private beginRevealFromHand(target: TargetRef, count: number, then: RevealedHandChoice): void {
+    if (target.kind !== "player") return;
+    const player = target.player;
+    if (this.state.players[player]?.hasLost !== false) return;
+    const hand = this.state.zones.perPlayer[player].hand;
+    const shown = Math.min(count, hand.length);
+    if (shown === 0) return;
+    if (shown === hand.length) {
+      this.beginRevealedChoice(player, [...hand], then);
+      return;
+    }
+    this.state.awaiting = {
+      kind: "choose-from-zone",
+      player,
+      ids: [...hand],
+      eligible: [...hand],
+      min: shown,
+      max: shown,
+      destination: "reveal",
+      leftover: "stay",
+      thenChooseFromRevealed: then,
+    };
+  }
+
+  /** `player` reveals `shown` from their hand (rule 701.20a), and `then.chooser`
+   * chooses among those cards alone, for `player` to discard (rule 701.9a) or
+   * for `then.destination`. Nothing it could be: nothing more is asked. */
+  private beginRevealedChoice(player: PlayerId, shown: readonly ObjectId[], then: RevealedHandChoice): void {
+    this.revealCards(player, shown, "hand");
+    const { chooser, source, filter } = then;
+    const eligible = shown.filter(
+      (id) => filter === undefined || matchesFilter(this.state, this.registry, id, filter, { you: chooser, source }),
+    );
+    const picks = Math.min(then.picks, eligible.length);
+    if (picks === 0) return;
+    this.state.awaiting = {
+      kind: "choose-from-zone",
+      player: chooser,
+      ...(chooser !== player ? { forPlayer: player } : {}),
+      ids: [...shown],
+      eligible,
+      min: then.optional === true ? 0 : picks,
+      max: picks,
+      destination: then.destination ?? "discard",
+      ...(then.destination === "battlefield" && chooser !== player ? { enterUnder: chooser } : {}),
+      ...(then.exileLink !== undefined ? { exileLink: then.exileLink } : {}),
       leftover: "stay",
     };
   }
