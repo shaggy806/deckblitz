@@ -1394,7 +1394,6 @@ export const SAMPLE_DECKS: readonly SampleDeck[] = [
       sub("Eumidian Wastewaker", "Icetill Explorer", "Four-mana green creature that plays lands from the graveyard."),
       sub("Loamcrafter Faun", "Ramunap Excavator", "Three-mana green creature: play lands from the graveyard."),
       sub("Moraug, Fury of Akoum", "Lumra, Bellow of the Woods", "Six-mana creature that pays off lands."),
-      sub("Worldsoul's Rage", "Fireball", "Red X damage spell."),
     ],
   }),
 ];

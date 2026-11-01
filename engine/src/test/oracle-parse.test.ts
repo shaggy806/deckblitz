@@ -5688,3 +5688,91 @@ describe("the card revealed to pay a cost", () => {
     });
   });
 });
+
+describe("a choice drawn from several zones, or one card a slot", () => {
+  const face = (name: string, type_line: string, oracle_text: string) =>
+    parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });
+
+  it("reads a revealed hand's choice that takes in the graveyard or the library's top card", () => {
+    const remorse = face(
+      "Agonizing Remorse",
+      "Sorcery",
+      "Target opponent reveals their hand. You choose a nonland card from it or a card from their graveyard. Exile that card. You lose 1 life.",
+    );
+    expect(remorse.complete).toBe(true);
+    expect(remorse.effect.effects[0]).toEqual({
+      kind: "discard-chosen",
+      target: 0,
+      filter: { notTypes: ["land"] },
+      destination: "exile",
+      alsoFrom: { zone: "graveyard" },
+    });
+    const episode = face(
+      "Psychotic Episode",
+      "Sorcery",
+      "Target player reveals their hand and the top card of their library. You choose a card revealed this way. That player puts the chosen card on the bottom of their library.",
+    );
+    expect(episode.effect).toEqual({ kind: "discard-chosen", target: 0, destination: "library-bottom", alsoFrom: { zone: "library-top" } });
+    // A graveyard's card can't be discarded.
+    const discard = face(
+      "Test Remorse",
+      "Sorcery",
+      "Target opponent reveals their hand. You choose a nonland card from it or a card from their graveyard. That player discards that card.",
+    );
+    expect(discard.complete).toBe(false);
+  });
+
+  it("reads up to X cards from the hand and/or graveyard", () => {
+    const rage = face(
+      "Worldsoul's Rage",
+      "Sorcery",
+      "Worldsoul's Rage deals X damage to any target. Put up to X land cards from your hand and/or graveyard onto the battlefield tapped.",
+    );
+    expect(rage.complete).toBe(true);
+    expect(rage.effect.effects[1]).toEqual({
+      kind: "return-from-graveyard",
+      from: "hand-or-graveyard",
+      filter: { type: "land" },
+      destination: "battlefield",
+      count: "x",
+      upTo: true,
+      enterTapped: true,
+    });
+  });
+
+  it("reads a look whose chosen cards fill one slot each", () => {
+    const atraxa = face(
+      "Atraxa, Grand Unifier",
+      "Legendary Creature — Phyrexian Angel",
+      "When Atraxa enters, reveal the top ten cards of your library. For each card type, you may put a card of that type from among the revealed cards into your hand. Put the rest on the bottom of your library in a random order.",
+    );
+    const look = atraxa.triggered[0].effect;
+    expect(look).toMatchObject({ kind: "look-and-choose", zone: "library", count: 10, reveal: true, min: 0, max: 9, destination: "hand", leftover: "bottom-random" });
+    expect(look.together.oneEach.map((slot: { filter: unknown }) => slot.filter)).toContainEqual({ type: "kindred" });
+    const harper = face(
+      "Harper Recruiter",
+      "Creature — Human Warrior",
+      "Whenever this creature attacks, look at the top four cards of your library. You may reveal a Cleric card, a Rogue card, a Warrior card, and/or a Wizard card from among them and put those cards into your hand. Put the rest on the bottom of your library in a random order.",
+    );
+    expect(harper.triggered[0].effect).toMatchObject({
+      count: 4,
+      reveal: "chosen",
+      max: 4,
+      together: {
+        oneEach: [
+          { filter: { subtype: "Cleric" } },
+          { filter: { subtype: "Rogue" } },
+          { filter: { subtype: "Warrior" } },
+          { filter: { subtype: "Wizard" } },
+        ],
+      },
+    });
+    // The rest anywhere but the bottom is another shape.
+    const rest = face(
+      "Test Recruiter",
+      "Creature — Human",
+      "Whenever this creature attacks, look at the top four cards of your library. You may reveal a Cleric card and/or a Rogue card from among them and put those cards into your hand. Put the rest into your graveyard.",
+    );
+    expect(rest.complete).toBe(false);
+  });
+});

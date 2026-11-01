@@ -357,7 +357,7 @@ function untargetedWorth(effect: EffectSpec, ctx: WorthContext): number {
     case "look-and-choose":
       return onPlayers(you, effect.destination === "library-top" ? 0.5 : 1.5, ctx);
     case "return-from-graveyard":
-      return onPlayers(you, CARD * (effect.count === "all" ? 2 : effect.count), ctx);
+      return onPlayers(you, CARD * (effect.count === "all" ? 2 : typeof effect.count === "number" ? effect.count : 2), ctx);
     case "put-onto-battlefield":
       return typeof effect.target === "number" ? 0 : onObjectRef(effect.target, CARD, ctx);
     case "add-mana":

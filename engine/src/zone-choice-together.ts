@@ -92,8 +92,9 @@ export function fitsTogether(together: ZoneChoiceTogether, chosen: readonly Obje
     if (chosen.length < 2) return true;
     return tagsOf(chosen[0]).some((tag) => chosen.every((id) => tagsOf(id).includes(tag)));
   }
-  // One card per slot: a matching that covers every chosen card. Two or
-  // three slots at most on a real card, so plain backtracking is enough.
+  // One card per slot: a matching that covers every chosen card. Nine slots
+  // at most on a real card (Atraxa, Grand Unifier's card types), each card
+  // fitting one or two, so plain backtracking is enough.
   const used = new Set<string>();
   const assign = (index: number): boolean => {
     if (index === chosen.length) return true;

@@ -367,6 +367,31 @@ Starnheim, Sandstone Deadfall. Left: Mount Doom (each player chooses, destroy
 the rest), Emrakul's Evangel ("any number of other"), Kyscu Drake's "a
 creature named Spitting Drake" in the scaffolder (the engine runs it).
 
+### One choice across zones, or one card a slot — built 2026-10-31
+
+The need-keys Phase 2 family `decision:choose-from-zone-extensions`, features
+only, on the `choose-from-zone` decision the client already reads (it captions
+each card's zone when they differ, and gates Confirm on a set rule).
+`look-and-choose` takes a search's **`together`** — `oneEach` slots, a card
+filling any slot it matches, one card a slot, with a `text` for the prompt
+(Atraxa, Grand Unifier's card types, Harper Recruiter's four creature types).
+`discard-chosen` takes **`alsoFrom`**: the graveyard beside the revealed hand,
+by its own filter (Agonizing Remorse), or the library's revealed top card
+(Psychotic Episode, with a new `destination: "library-bottom"`).
+`return-from-graveyard`'s **`count`** is an amount (Worldsoul's Rage's "up to
+X … from your hand and/or graveyard"). The scaffolder reads all five cards'
+lines whole. Keys: decision:choose-from-zone-extensions (its 2026-10-27
+description — a pick across hand and graveyard, a per-card-type pick),
+decision:choose-from-hand-and-graveyard,
+decision:choose-from-hand-and-library-top, effect:look-and-choose-one-each.
+Still open beside them: Selective Adaptation (a keyword slot each — whether
+one card may be chosen for two keywords has no ruling — and "put one of the
+chosen cards onto the battlefield"), Portent of Calamity's "four or more cards
+this way", Final Parting's split to hand and graveyard (a split search's
+prompt doesn't say which pick goes where), and the other keys of the family.
+Proving cards: Atraxa, Grand Unifier; Harper Recruiter; Agonizing Remorse;
+Psychotic Episode; Worldsoul's Rage.
+
 ### A graveyard's matching cards, or target cards, shuffled into libraries — built 2026-10-31
 
 The need-keys Phase 2 family `effect:shuffle-library`, features only, on the

@@ -8846,4 +8846,33 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     'Speedway Fanatic: the Vehicle it crews gains haste',
     board({ you: { bf: ['Speedway Fanatic', { name: "Smuggler's Copter", sick: true }] } }),
   ),
+  // --- Choices across zones, one card a slot (2026-10-31, need-keys Phase 2) ---------
+  preset(
+    'Agonizing Remorse: one choice over a hand and a graveyard',
+    board({
+      you: { bf: ['Swamp*2'], hand: ['Agonizing Remorse'] },
+      opp: { hand: ['Forest', 'Grizzly Bears'], gy: ['Hill Giant'] },
+    }),
+  ),
+  preset(
+    'Atraxa, Grand Unifier: a card of each card type',
+    board({
+      you: {
+        bf: ['Forest', 'Plains', 'Island', 'Swamp', 'Wastes*3'],
+        hand: ['Atraxa, Grand Unifier'],
+        lib: [
+          'Ornithopter',
+          'Grizzly Bears',
+          'Sol Ring',
+          'Lightning Bolt',
+          'Divination',
+          'Pacifism',
+          'Llanowar Elves',
+          'Hill Giant',
+          'Forest',
+          'Island',
+        ],
+      },
+    }),
+  ),
 ]

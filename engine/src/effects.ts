@@ -199,6 +199,11 @@ export type SearchTogether =
         readonly label: string;
         readonly filter: CardFilter;
       }[];
+      /** How the client names the whole set, instead of the slots' labels
+       * joined by "and" — "a card of each card type" (Atraxa, Grand
+       * Unifier's nine slots), "a Cleric card, a Rogue card, a Warrior card,
+       * and/or a Wizard card" (Harper Recruiter). */
+      readonly text?: string;
     };
 /**
  * What an amount that reads an object (`powerOf`, `toughnessOf`,
@@ -3313,7 +3318,9 @@ export type EffectSpec =
       readonly kind: "return-from-graveyard";
       readonly filter: CardFilter;
       readonly destination: "battlefield" | "hand";
-      readonly count: number | "all";
+      /** How many, read as it resolves — Worldsoul's Rage's "put **up to X**
+       * land cards from your hand and/or graveyard" is `"x"` with `upTo`. */
+      readonly count: EffectAmount | "all";
       /** "Return **up to** `count`": fewer may be chosen, so it's always
        * asked. */
       readonly upTo?: boolean;
@@ -3874,10 +3881,28 @@ export type EffectSpec =
        * library" (Painful Memories); `"battlefield"` — "you may put a
        * creature card from it onto the battlefield **under your control**"
        * (Treacherous Urge). Not a discard, so nothing that looks for one
-       * sees it.
+       * sees it. `"library-bottom"` — "that player puts the chosen card on
+       * the bottom of their library" (Psychotic Episode).
        */
-      readonly destination?: "exile" | "library-top" | "battlefield";
+      readonly destination?: "exile" | "library-top" | "library-bottom" | "battlefield";
       readonly unlinked?: true;
+      /**
+       * One choice over the hand **and** another of that player's zones at
+       * once: `{ zone: "graveyard", filter }` — "you choose a nonland card
+       * from it **or a card from their graveyard**. Exile that card"
+       * (Agonizing Remorse: the hand's cards by the effect's `filter`, the
+       * graveyard's by this one, any card when omitted); `{ zone:
+       * "library-top" }` — "reveals their hand **and the top card of their
+       * library**. You choose a card revealed this way" (Psychotic Episode:
+       * the top card revealed with the hand, and choosable whatever
+       * `filter` says of the hand). A card must be chosen if any may be,
+       * from either zone (Agonizing Remorse's ruling); with nothing in
+       * either, nothing is asked. Not with a discard: only `destination`
+       * moves a graveyard's or library's card.
+       */
+      readonly alsoFrom?:
+        | { readonly zone: "graveyard"; readonly filter?: CardFilter }
+        | { readonly zone: "library-top" };
     }
   | {
       /**
@@ -7747,6 +7772,19 @@ export type EffectSpec =
        * way — omit for "any of them". */
       readonly filter?: ZoneChoiceFilter;
       /**
+       * What the chosen cards must be *as a set*, as a `search-library`'s
+       * `together` is (`zone-choice-together.ts`) — "for each card type, you
+       * may put a card of that type from among the revealed cards into your
+       * hand" (Atraxa, Grand Unifier: one `oneEach` slot a card type), "you
+       * may reveal a Cleric card, a Rogue card, a Warrior card, and/or a
+       * Wizard card from among them" (Harper Recruiter). A `oneEach` card
+       * may fill any slot it matches, one card a slot — an artifact creature
+       * is the artifact card or the creature card (Atraxa's ruling) — and
+       * only a card that fits some slot may be chosen; at most one card a
+       * slot is taken.
+       */
+      readonly together?: SearchTogether;
+      /**
        * Applied once the choice is made, with the **chosen cards** as its
        * targets — `target: 0` is the first one taken. Sneak Attack's "that
        * creature gains haste. Sacrifice it at the beginning of the next end
@@ -8838,8 +8876,14 @@ export interface EffectApi {
     lookOnly: boolean,
     optional: boolean,
     upTo?: number,
-    /** See the effect's `destination` and `unlinked`. */
-    to?: { readonly destination?: "exile" | "library-top" | "battlefield"; readonly unlinked?: true },
+    /** See the effect's `destination`, `unlinked` and `alsoFrom`. */
+    to?: {
+      readonly destination?: "exile" | "library-top" | "library-bottom" | "battlefield";
+      readonly unlinked?: true;
+      readonly alsoFrom?:
+        | { readonly zone: "graveyard"; readonly filter?: CardFilter }
+        | { readonly zone: "library-top" };
+    },
   ): void;
   modifyPt(
     target: TargetRef,
@@ -9719,6 +9763,8 @@ export interface EffectApi {
     attachTo?: EnterAttachHost,
     /** See `look-and-choose`'s `playable`. */
     playable?: Extract<EffectSpec, { kind: "look-and-choose" }>["playable"],
+    /** See `look-and-choose`'s `together`. */
+    together?: SearchTogether,
   ): void;
 }
 
@@ -13121,10 +13167,13 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     }
     case "return-from-graveyard": {
       const parked = ctx.parkedCount();
+      const count = spec.count === "all" ? "all" : Math.max(0, Math.floor(amountValue(spec.count, ctx)));
+      // "Up to X" with X of 0: nothing to put anywhere.
+      if (count === 0) return;
       const asked = ctx.returnFromGraveyard(
         spec.filter,
         spec.destination,
-        spec.count,
+        count,
         spec.enterTapped ?? false,
         spec.withCounters,
         {
@@ -13152,6 +13201,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         ctx.discardChosen(target, spec.filter, spec.lookOnly === true, spec.optional === true, upTo, {
           ...(spec.destination !== undefined ? { destination: spec.destination } : {}),
           ...(spec.unlinked === true ? { unlinked: true } : {}),
+          ...(spec.alsoFrom !== undefined ? { alsoFrom: spec.alsoFrom } : {}),
         });
       }
       return;
@@ -15146,6 +15196,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         spec.needsMin === true,
         attachHost(spec.attachedTo, ctx),
         spec.playable,
+        spec.together,
       );
       return;
     }

@@ -8420,7 +8420,10 @@ export class Game {
       }
     }));
     if (bottomedFromHand.length > 0) {
-      this.emit({ type: "cards-put-on-bottom", player, objects: bottomedFromHand });
+      // Whose hand they left: the chooser's own (Valakut Awakening), or the
+      // player they chose for (Psychotic Episode's "that player puts the
+      // chosen card on the bottom of their library").
+      this.emit({ type: "cards-put-on-bottom", player: awaiting.forPlayer ?? player, objects: bottomedFromHand });
     }
     let toOrder: readonly ObjectId[] = [];
     let orderOnTop = false;
@@ -27346,7 +27349,7 @@ export class Game {
           to?.destination === "exile" && stint !== undefined && to.unlinked !== true
             ? { source, zoneChangeCount: stint }
             : undefined;
-        this.beginDiscardChosen(controller, source, target, filter, lookOnly, optional, upTo, to?.destination, exileLink);
+        this.beginDiscardChosen(controller, source, target, filter, lookOnly, optional, upTo, to?.destination, exileLink, to?.alsoFrom);
       },
       modifyPt: (target, power, toughness, duration) =>
         this.modifyPt(target, power, toughness, lastingHere(duration)),
@@ -29378,7 +29381,7 @@ export class Game {
           ),
         );
       },
-      lookAndChoose: (zone, count, min, max, destination, leftover, filter, enterTapped, then, reveal, leftoverIf, secondPick, attacking, enterAs, chooser, picker, withCounters, unlinked, needsMin, attachTo, playable) => {
+      lookAndChoose: (zone, count, min, max, destination, leftover, filter, enterTapped, then, reveal, leftoverIf, secondPick, attacking, enterAs, chooser, picker, withCounters, unlinked, needsMin, attachTo, playable, together) => {
         // "Exile one of them face down" (hideaway): linked to the source, in
         // the stint this ability refers to (rule 607.2a) — unless `unlinked`.
         const sourceObject = this.state.objects[source];
@@ -29432,6 +29435,7 @@ export class Game {
                     : { kind: "while-exiled" },
                 ...(playable.spendAs !== undefined ? { spendAs: playable.spendAs } : {}),
               },
+          together === undefined ? undefined : { together, x },
         );
       },
     };
@@ -29490,6 +29494,9 @@ export class Game {
     /** The play permission an exiled pick gets — see `look-and-choose`'s
      * `playable`. */
     impulseGrant?: GameObject["impulse"],
+    /** What the chosen cards must be as a set — see `look-and-choose`'s
+     * `together`; `x` for a slot's filter that reads it. */
+    setRule?: { readonly together: SearchTogether; readonly x: number },
   ): void {
     // The exile zone (a processor, Oblivion Sower): only what may be
     // chosen is shown — the cards `player` owns when someone else is
@@ -29583,7 +29590,17 @@ export class Game {
     // what's *revealed* — the player still looks at everything either way,
     // and naturally ends up unable to choose anything if nothing matches
     // (min/max clamp to 0 along with it), same as the real card whiffing.
-    const eligible = ids.filter((id) => this.matchesZoneChoiceFilter(id, filter, player, source));
+    const filtered = ids.filter((id) => this.matchesZoneChoiceFilter(id, filter, player, source));
+    // "For each card type, you may put a card of that type" (Atraxa): a rule
+    // over the chosen set, its tags read now (`zone-choice-together.ts`).
+    // A card that fits no slot can't be chosen, and no more cards than
+    // there are slots.
+    const together =
+      setRule === undefined ? undefined : this.searchTogether(setRule.together, filtered, picker ?? player, setRule.x);
+    const eligible =
+      together?.rule === "one-each" ? filtered.filter((id) => (together.tags[id] ?? []).length > 0) : filtered;
+    const most =
+      setRule !== undefined && "oneEach" in setRule.together ? Math.min(max, setRule.together.oneEach.length) : max;
     // Revealing from your own hand with nothing in it that matches: there's
     // nothing to reveal and no one else to show the choice to.
     if (destination === "reveal" && eligible.length === 0) return;
@@ -29594,7 +29611,8 @@ export class Game {
       ids,
       eligible,
       min: Math.min(min, eligible.length),
-      max: Math.min(max, eligible.length),
+      max: Math.min(most, eligible.length),
+      ...(together !== undefined ? { together } : {}),
       destination,
       leftover,
       ...(enterTapped && destination === "battlefield" ? { enterTapped: true } : {}),
@@ -29638,22 +29656,39 @@ export class Game {
     lookOnly: boolean,
     optional: boolean,
     upTo?: number,
-    destination?: "exile" | "library-top" | "battlefield",
+    destination?: "exile" | "library-top" | "library-bottom" | "battlefield",
     exileLink?: { readonly source: ObjectId; readonly zoneChangeCount: number },
+    /** One choice over the hand and another zone of that player's — see
+     * `discard-chosen`'s `alsoFrom`. */
+    alsoFrom?: { readonly zone: "graveyard"; readonly filter?: CardFilter } | { readonly zone: "library-top" },
   ): void {
     if (target.kind !== "player") return;
     const player = target.player;
     if (this.state.players[player]?.hasLost !== false) return;
     const hand = this.state.zones.perPlayer[player].hand;
-    if (hand.length === 0) return;
-    if (!lookOnly) this.revealCards(player, [...hand], "hand");
+    // "…or a card from their graveyard" (Agonizing Remorse), "…and the top
+    // card of their library" (Psychotic Episode): offered beside the hand,
+    // in the same choice.
+    const zones = this.state.zones.perPlayer[player];
+    const extra =
+      alsoFrom === undefined ? [] : alsoFrom.zone === "graveyard" ? [...zones.graveyard] : zones.library.slice(0, 1);
+    if (hand.length === 0 && extra.length === 0) return;
+    if (!lookOnly && hand.length > 0) this.revealCards(player, [...hand], "hand");
+    // "Reveals … the top card of their library" (rule 701.20a): to everyone.
+    if (alsoFrom?.zone === "library-top" && extra.length > 0) this.revealCards(player, extra, "library");
     const max = upTo ?? 1;
+    const fits = (id: ObjectId, by: CardFilter | undefined): boolean =>
+      by === undefined || matchesFilter(this.state, this.registry, id, by, { you: chooser, source });
     const eligible =
       max === 0
         ? []
-        : hand.filter(
-            (id) => filter === undefined || matchesFilter(this.state, this.registry, id, filter, { you: chooser, source }),
-          );
+        : [
+            ...hand.filter((id) => fits(id, filter)),
+            // The graveyard's own filter ("or a card from their graveyard":
+            // any card, a land too — the ruling); a revealed top card is
+            // "a card revealed this way", whatever the hand's filter says.
+            ...extra.filter((id) => (alsoFrom?.zone === "graveyard" ? fits(id, alsoFrom.filter) : true)),
+          ];
     // Nothing it could be: everyone has seen the hand, and nothing is asked.
     // A look still shows the hand to the one looking.
     if (eligible.length === 0 && !lookOnly) return;
@@ -29661,7 +29696,7 @@ export class Game {
       kind: "choose-from-zone",
       player: chooser,
       ...(chooser !== player ? { forPlayer: player } : {}),
-      ids: [...hand],
+      ids: [...hand, ...extra],
       eligible,
       min: optional || upTo !== undefined || eligible.length === 0 ? 0 : 1,
       max: Math.min(max, eligible.length),
@@ -29865,7 +29900,11 @@ export class Game {
         matchesFilter(this.state, this.registry, id, slot.filter, { you: player, x }) ? [String(index)] : [],
       );
     }
-    return { rule: "one-each", tags, text: together.oneEach.map((slot) => slot.label).join(" and ") };
+    return {
+      rule: "one-each",
+      tags,
+      text: together.text ?? together.oneEach.map((slot) => slot.label).join(" and "),
+    };
   }
 
   /** See the `"scry"` / `"surveil"` {@link EffectSpec}. Looks at the top N of

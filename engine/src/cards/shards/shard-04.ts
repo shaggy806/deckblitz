@@ -30,6 +30,7 @@ import _poolAshnodsHarvester from "../pool/ashnods-harvester.js";
 import _poolAssassinsBlade from "../pool/assassins-blade.js";
 import _poolAtarkaMonument from "../pool/atarka-monument.js";
 import _poolAthreosShroudVeiled from "../pool/athreos-shroud-veiled.js";
+import _poolAtraxaGrandUnifier from "../pool/atraxa-grand-unifier.js";
 import _poolAtraxasSkitterfang from "../pool/atraxas-skitterfang.js";
 import _poolAuntiesSnitch from "../pool/aunties-snitch.js";
 import _poolAuroralProcession from "../pool/auroral-procession.js";
@@ -881,6 +882,7 @@ const shard: CardShard = {
     _poolAssassinsBlade,
     _poolAtarkaMonument,
     _poolAthreosShroudVeiled,
+    _poolAtraxaGrandUnifier,
     _poolAtraxasSkitterfang,
     _poolAuntiesSnitch,
     _poolAuroralProcession,

@@ -346,6 +346,7 @@ import _poolAgitatorAnt from "./pool/agitator-ant.js";
 import _poolAgnaQela from "./pool/agna-qela.js";
 import _poolAgonasaurRex from "./pool/agonasaur-rex.js";
 import _poolAgonizingDemise from "./pool/agonizing-demise.js";
+import _poolAgonizingRemorse from "./pool/agonizing-remorse.js";
 import _poolAgonizingSyphon from "./pool/agonizing-syphon.js";
 import _poolAgonyWarp from "./pool/agony-warp.js";
 import _poolAgoraphobia from "./pool/agoraphobia.js";
@@ -1306,6 +1307,7 @@ import _poolAtog from "./pool/atog.js";
 import _poolAtogatog from "./pool/atogatog.js";
 import _poolAtomicMicrosizer from "./pool/atomic-microsizer.js";
 import _poolAtomize from "./pool/atomize.js";
+import _poolAtraxaGrandUnifier from "./pool/atraxa-grand-unifier.js";
 import _poolAtraxaPraetorsVoice from "./pool/atraxa-praetors-voice.js";
 import _poolAtraxasFall from "./pool/atraxas-fall.js";
 import _poolAtraxasSkitterfang from "./pool/atraxas-skitterfang.js";
@@ -10309,6 +10311,7 @@ import _poolHarnessByForce from "./pool/harness-by-force.js";
 import _poolHarnessedLightning from "./pool/harnessed-lightning.js";
 import _poolHarnessedSnubhorn from "./pool/harnessed-snubhorn.js";
 import _poolHarnesserOfStorms from "./pool/harnesser-of-storms.js";
+import _poolHarperRecruiter from "./pool/harper-recruiter.js";
 import _poolHarpoonSniper from "./pool/harpoon-sniper.js";
 import _poolHarriedArtisan from "./pool/harried-artisan.js";
 import _poolHarriedDronesmith from "./pool/harried-dronesmith.js";
@@ -17426,6 +17429,7 @@ import _poolPsychicVortex from "./pool/psychic-vortex.js";
 import _poolPsychicWhorl from "./pool/psychic-whorl.js";
 import _poolPsychomancer from "./pool/psychomancer.js";
 import _poolPsychosisCrawler from "./pool/psychosis-crawler.js";
+import _poolPsychoticEpisode from "./pool/psychotic-episode.js";
 import _poolPsychoticFury from "./pool/psychotic-fury.js";
 import _poolPsychoticHaze from "./pool/psychotic-haze.js";
 import _poolPsychotropeThallid from "./pool/psychotrope-thallid.js";
@@ -26638,6 +26642,7 @@ import _poolWorldlyCounsel from "./pool/worldly-counsel.js";
 import _poolWorldlyTutor from "./pool/worldly-tutor.js";
 import _poolWorldsWithinWorlds from "./pool/worlds-within-worlds.js";
 import _poolWorldsoulColossus from "./pool/worldsoul-colossus.js";
+import _poolWorldsoulsRage from "./pool/worldsouls-rage.js";
 import _poolWorldspineWurm from "./pool/worldspine-wurm.js";
 import _poolWormHarvest from "./pool/worm-harvest.js";
 import _poolWormfangDrake from "./pool/wormfang-drake.js";
@@ -28006,6 +28011,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAgnaQela,
   _poolAgonasaurRex,
   _poolAgonizingDemise,
+  _poolAgonizingRemorse,
   _poolAgonizingSyphon,
   _poolAgonyWarp,
   _poolAgoraphobia,
@@ -28966,6 +28972,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAtogatog,
   _poolAtomicMicrosizer,
   _poolAtomize,
+  _poolAtraxaGrandUnifier,
   _poolAtraxaPraetorsVoice,
   _poolAtraxasFall,
   _poolAtraxasSkitterfang,
@@ -37969,6 +37976,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolHarnessedLightning,
   _poolHarnessedSnubhorn,
   _poolHarnesserOfStorms,
+  _poolHarperRecruiter,
   _poolHarpoonSniper,
   _poolHarriedArtisan,
   _poolHarriedDronesmith,
@@ -45086,6 +45094,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPsychicWhorl,
   _poolPsychomancer,
   _poolPsychosisCrawler,
+  _poolPsychoticEpisode,
   _poolPsychoticFury,
   _poolPsychoticHaze,
   _poolPsychotropeThallid,
@@ -54298,6 +54307,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolWorldlyTutor,
   _poolWorldsWithinWorlds,
   _poolWorldsoulColossus,
+  _poolWorldsoulsRage,
   _poolWorldspineWurm,
   _poolWormHarvest,
   _poolWormfangDrake,
@@ -55679,6 +55689,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/agna-qela": _poolAgnaQela,
   "pool/agonasaur-rex": _poolAgonasaurRex,
   "pool/agonizing-demise": _poolAgonizingDemise,
+  "pool/agonizing-remorse": _poolAgonizingRemorse,
   "pool/agonizing-syphon": _poolAgonizingSyphon,
   "pool/agony-warp": _poolAgonyWarp,
   "pool/agoraphobia": _poolAgoraphobia,
@@ -56639,6 +56650,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/atogatog": _poolAtogatog,
   "pool/atomic-microsizer": _poolAtomicMicrosizer,
   "pool/atomize": _poolAtomize,
+  "pool/atraxa-grand-unifier": _poolAtraxaGrandUnifier,
   "pool/atraxa-praetors-voice": _poolAtraxaPraetorsVoice,
   "pool/atraxas-fall": _poolAtraxasFall,
   "pool/atraxas-skitterfang": _poolAtraxasSkitterfang,
@@ -65642,6 +65654,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/harnessed-lightning": _poolHarnessedLightning,
   "pool/harnessed-snubhorn": _poolHarnessedSnubhorn,
   "pool/harnesser-of-storms": _poolHarnesserOfStorms,
+  "pool/harper-recruiter": _poolHarperRecruiter,
   "pool/harpoon-sniper": _poolHarpoonSniper,
   "pool/harried-artisan": _poolHarriedArtisan,
   "pool/harried-dronesmith": _poolHarriedDronesmith,
@@ -72759,6 +72772,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/psychic-whorl": _poolPsychicWhorl,
   "pool/psychomancer": _poolPsychomancer,
   "pool/psychosis-crawler": _poolPsychosisCrawler,
+  "pool/psychotic-episode": _poolPsychoticEpisode,
   "pool/psychotic-fury": _poolPsychoticFury,
   "pool/psychotic-haze": _poolPsychoticHaze,
   "pool/psychotrope-thallid": _poolPsychotropeThallid,
@@ -81971,6 +81985,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/worldly-tutor": _poolWorldlyTutor,
   "pool/worlds-within-worlds": _poolWorldsWithinWorlds,
   "pool/worldsoul-colossus": _poolWorldsoulColossus,
+  "pool/worldsouls-rage": _poolWorldsoulsRage,
   "pool/worldspine-wurm": _poolWorldspineWurm,
   "pool/worm-harvest": _poolWormHarvest,
   "pool/wormfang-drake": _poolWormfangDrake,

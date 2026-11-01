@@ -545,6 +545,7 @@ import _poolProhibit from "../pool/prohibit.js";
 import _poolProsperTomeBound from "../pool/prosper-tome-bound.js";
 import _poolProwlerClawedThief from "../pool/prowler-clawed-thief.js";
 import _poolPsychicDrain from "../pool/psychic-drain.js";
+import _poolPsychoticEpisode from "../pool/psychotic-episode.js";
 import _poolPursueGlory from "../pool/pursue-glory.js";
 import _poolPutrefax from "../pool/putrefax.js";
 import _poolPyriteSpellbomb from "../pool/pyrite-spellbomb.js";
@@ -1396,6 +1397,7 @@ const shard: CardShard = {
     _poolProsperTomeBound,
     _poolProwlerClawedThief,
     _poolPsychicDrain,
+    _poolPsychoticEpisode,
     _poolPursueGlory,
     _poolPutrefax,
     _poolPyriteSpellbomb,

@@ -5917,3 +5917,14 @@ engine terms. A second thing to check is a second test.
 ### Speedway Fanatic: the Vehicle it crews gains haste
 - **Do:** Click Smuggler's Copter, then **Crew**, tapping Speedway Fanatic, and Confirm.
 - **Expect:** The log says "Speedway Fanatic crews Smuggler's Copter", then Speedway Fanatic's trigger resolves before the crew ability: "Smuggler's Copter gains haste until EOT". The Copter, new this turn, can attack.
+
+
+## Choices across zones, one card a slot (2026-10-31, need-keys Phase 2: build-family, features only)
+
+### Agonizing Remorse: one choice over a hand and a graveyard
+- **Do:** Cast Agonizing Remorse on Bob. In the popup, pick Hill Giant and Confirm.
+- **Expect:** One popup, "Choose a card from Bob's cards to exile", shows Forest and Grizzly Bears captioned "In a hand" and Hill Giant "In a graveyard"; Forest can't be picked. Hill Giant goes to exile and you lose 1 life.
+
+### Atraxa, Grand Unifier: a card of each card type
+- **Do:** Cast Atraxa. When it enters, pick Ornithopter, Grizzly Bears and Lightning Bolt, and Confirm.
+- **Expect:** The popup reads "Choose a card of each card type to put into your hand" over the top ten cards. With Ornithopter, Grizzly Bears and Sol Ring picked Confirm stays off (two artifacts and a creature need three slots, but only Ornithopter can be both). The three picked go to your hand, the other seven to the bottom.

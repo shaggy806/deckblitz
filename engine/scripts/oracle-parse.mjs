@@ -2162,6 +2162,23 @@ export function parseSentence(sentence, ctx) {
   if (re(`(?:then )?put all cards exiled this way into their owners' hands`).test(s)) {
     return { kind: "move-exiled-this-way", to: "hand" };
   }
+  // "Put up to X land cards from your hand and/or graveyard onto the
+  // battlefield tapped" (Worldsoul's Rage): one choice over both zones.
+  if ((m = re(`put up to ${N} (.+?) cards from your hand and/or graveyard onto the battlefield( tapped)?`).exec(s))) {
+    const count = amount(m[1]);
+    const filter = parseTypePhrase(m[2]);
+    if (count !== undefined && count !== null && filter !== null && Object.keys(filter).length > 0) {
+      return {
+        kind: "return-from-graveyard",
+        from: "hand-or-graveyard",
+        filter,
+        destination: "battlefield",
+        count,
+        upTo: true,
+        ...(m[3] !== undefined ? { enterTapped: true } : {}),
+      };
+    }
+  }
   // "Put all cards exiled with ~ onto the battlefield" (Underworld Sentinel):
   // under the putting player's control (rule 110.2a).
   if (re(`put all cards exiled with (?:~|it) onto the battlefield`).test(s)) {
@@ -3961,6 +3978,13 @@ export function parseEffect(text, outer) {
       skip = fromHand.used - 1;
       continue;
     }
+    const oneEach = oneEachLookAt(sentences, i);
+    if (oneEach !== null) {
+      parsed.push(oneEach.effect);
+      hints.push({ sentence, effect: oneEach.effect });
+      skip = oneEach.used - 1;
+      continue;
+    }
     // The Urza's Destiny Scents: "Reveal any number of green cards in your
     // hand." — a `look-and-choose` over the hand that moves nothing — and
     // the next sentence's "… for each card revealed this way" scaled by
@@ -4659,16 +4683,38 @@ function searchOthersAt(sentences, i, ctx) {
  * [and exile that card]. [That player discards that card. | Exile that
  * card.]" — Duress, Thought-Knot Seer: a `discard-chosen`, its card filter
  * read from the type phrase, and a `destination` when the card is exiled.
- * Two or three sentences, one effect; `null` when they aren't that. */
+ * "…a nonland card from it **or a card from their graveyard**. Exile that
+ * card." (Agonizing Remorse) is the same choice over the graveyard too
+ * (`alsoFrom`); "Target player reveals their hand **and the top card of
+ * their library**. You choose a card revealed this way. That player puts the
+ * chosen card on the bottom of their library." (Psychotic Episode) over the
+ * top card too. Two or three sentences, one effect; `null` when they aren't
+ * that. */
 function revealedHandChoiceAt(sentences, i, ctx) {
-  const who = /^(target opponent|target player) reveals their hand\.$/i.exec(sentences[i]);
-  const choose = /^you choose an? (?:(.+?) )?card from it( and exile that card)?\.$/i.exec(sentences[i + 1] ?? "");
+  const who = /^(target opponent|target player) reveals their hand( and the top card of their library)?\.$/i.exec(sentences[i]);
+  if (who === null) return null;
+  const target = () => ctx.target(who[1].toLowerCase() === "target opponent" ? "opponent" : "player");
+  if (who[2] !== undefined) {
+    if (!/^you choose a card revealed this way\.$/i.test(sentences[i + 1] ?? "")) return null;
+    if (!/^that player puts the chosen card on the bottom of their library\.$/i.test(sentences[i + 2] ?? "")) return null;
+    return {
+      effect: { kind: "discard-chosen", target: target(), destination: "library-bottom", alsoFrom: { zone: "library-top" } },
+      used: 3,
+    };
+  }
+  const choose =
+    /^you choose an? (?:(.+?) )?card from it(?: or an? (?:(.+?) )?card from their graveyard)?( and exile that card)?\.$/i.exec(
+      sentences[i + 1] ?? "",
+    );
   // "A nonland permanent card" names every permanent type, which the type
   // phrase reader would drop.
-  if (who === null || choose === null || /\bpermanent\b/i.test(choose[1] ?? "")) return null;
+  if (choose === null || /\bpermanent\b/i.test(choose[1] ?? "") || /\bpermanent\b/i.test(choose[2] ?? "")) return null;
   const filter = choose[1] === undefined ? {} : parseTypePhrase(choose[1]);
   if (filter === null) return null;
-  let exile = choose[2] !== undefined;
+  const orGraveyard = /or an? (?:.+? )?card from their graveyard/i.test(sentences[i + 1]);
+  const graveyardFilter = choose[2] === undefined ? {} : parseTypePhrase(choose[2]);
+  if (graveyardFilter === null) return null;
+  let exile = choose[3] !== undefined;
   let used = 2;
   if (!exile) {
     const then = /^(that player discards that card|exile that card|that player exiles that card)\.$/i.exec(sentences[i + 2] ?? "");
@@ -4676,14 +4722,73 @@ function revealedHandChoiceAt(sentences, i, ctx) {
     exile = !/discards/i.test(then[1]);
     used = 3;
   }
-  const target = ctx.target(who[1].toLowerCase() === "target opponent" ? "opponent" : "player");
+  // A graveyard's card can't be discarded: only an exile reads that way.
+  if (orGraveyard && !exile) return null;
   const effect = {
     kind: "discard-chosen",
-    target,
+    target: target(),
     ...(Object.keys(filter).length > 0 ? { filter } : {}),
     ...(exile ? { destination: "exile" } : {}),
+    ...(orGraveyard
+      ? { alsoFrom: { zone: "graveyard", ...(Object.keys(graveyardFilter).length > 0 ? { filter: graveyardFilter } : {}) } }
+      : {}),
   };
   return { effect, used };
+}
+
+/** Each card type (rule 205.2a) a card in a library can have, in the order
+ * the pool's "for each card type" cards list them (Vigean Intuition, Atraxa,
+ * Grand Unifier). */
+const EACH_CARD_TYPE = ["artifact", "battle", "creature", "enchantment", "instant", "kindred", "land", "planeswalker", "sorcery"];
+
+/** "[Look at | Reveal] the top N cards of your library. [For each card type,
+ * you may put a card of that type from among the revealed cards into your
+ * hand | You may reveal a Cleric card, a Rogue card, …, and/or a Wizard card
+ * from among them and put those cards into your hand]. Put the rest on the
+ * bottom of your library in a random order." (Atraxa, Grand Unifier; Harper
+ * Recruiter) — a `look-and-choose` whose chosen set fills one slot each
+ * (`together.oneEach`): a slot per card type, or per type the list names.
+ * Three sentences, one effect; `null` when they aren't that. */
+function oneEachLookAt(sentences, i) {
+  const look = sentenceRe(`(look at|reveal) the top ${N} cards of your library`).exec(sentences[i]);
+  if (look === null) return null;
+  const count = numberOf(look[2]);
+  if (typeof count !== "number" || !/^put the rest on the bottom of your library in a random order\.$/i.test(sentences[i + 2] ?? "")) return null;
+  const article = (word) => (/^[aeiou]/i.test(word) ? "an" : "a");
+  const choice = sentences[i + 1] ?? "";
+  let slots;
+  let text;
+  let revealed = look[1].toLowerCase() === "reveal";
+  if (/^for each card type, you may put a card of that type from among the (?:revealed cards|them) into your hand\.$/i.test(choice)) {
+    slots = EACH_CARD_TYPE.map((type) => ({ label: `${article(type)} ${type} card`, filter: { type } }));
+    text = "a card of each card type";
+  } else {
+    const m = /^you may reveal ((?:an? [\w-]+ card, )+and\/or an? [\w-]+ card) from among them and put those cards into your hand\.$/i.exec(choice);
+    if (m === null || revealed) return null;
+    slots = [];
+    for (const part of m[1].split(/, (?:and\/or )?/)) {
+      const word = /^an? ([\w-]+) card$/i.exec(part)?.[1];
+      const filter = word === undefined ? null : parseTypePhrase(word);
+      if (filter === null || Object.keys(filter).length !== 1) return null;
+      slots.push({ label: `${article(word)} ${word} card`, filter });
+    }
+    text = m[1];
+    revealed = "chosen";
+  }
+  return {
+    effect: {
+      kind: "look-and-choose",
+      zone: "library",
+      count,
+      reveal: revealed,
+      min: 0,
+      max: slots.length,
+      together: { oneEach: slots, text },
+      destination: "hand",
+      leftover: "bottom-random",
+    },
+    used: 3,
+  };
 }
 
 /**

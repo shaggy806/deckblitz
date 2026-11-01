@@ -16,6 +16,7 @@ import _poolAfflict from "../pool/afflict.js";
 import _poolAfiyaGrove from "../pool/afiya-grove.js";
 import _poolAgathasChampion from "../pool/agathas-champion.js";
 import _poolAgentOfTheIronThrone from "../pool/agent-of-the-iron-throne.js";
+import _poolAgonizingRemorse from "../pool/agonizing-remorse.js";
 import _poolAirliftChaplain from "../pool/airlift-chaplain.js";
 import _poolAkkiRaider from "../pool/akki-raider.js";
 import _poolAkoumFlameseeker from "../pool/akoum-flameseeker.js";
@@ -894,6 +895,7 @@ const shard: CardShard = {
     _poolAfiyaGrove,
     _poolAgathasChampion,
     _poolAgentOfTheIronThrone,
+    _poolAgonizingRemorse,
     _poolAirliftChaplain,
     _poolAkkiRaider,
     _poolAkoumFlameseeker,
