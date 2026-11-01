@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4085 already implemented / 915 missing (marks refreshed 2026-11-01)
+4094 already implemented / 906 missing (marks refreshed 2026-11-01)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -1881,7 +1881,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1888  Refute                                   {1}{U}{U}        Instant
 [ ]  1889  Gift of Immortality                      {2}{W}           Enchantment — Aura
 [x]  1890  Temple Bell                              {3}              Artifact
-[ ]  1891  Monster Manual // Zoological Study       {3}{G} // {2}{G} Artifact — Book // Sorcery — Adventure
+[x]  1891  Monster Manual // Zoological Study       {3}{G} // {2}{G} Artifact — Book // Sorcery — Adventure
 [x]  1892  Bronze Guardian                          {4}{W}           Artifact Creature — Golem
 [x]  1893  Hellkite Courser                         {4}{R}{R}        Creature — Dragon
 [ ]  1894  Halo Fountain                            {2}{W}           Artifact
@@ -2166,7 +2166,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2173  Klauth, Unrivaled Ancient                {5}{R}{G}        Legendary Creature — Dragon
 [x]  2174  Prosper, Tome-Bound                      {2}{B}{R}        Legendary Creature — Tiefling Warlock
 [x]  2175  Cemetery Reaper                          {1}{B}{B}        Creature — Zombie
-[ ]  2176  The Key to the Vault                     {1}{U}           Legendary Artifact — Equipment
+[x]  2176  The Key to the Vault                     {1}{U}           Legendary Artifact — Equipment
 [x]  2177  Monstrous Vortex                         {3}{G}           Enchantment
 [x]  2178  Contaminated Aquifer                     {0}              Land — Island Swamp
 [x]  2179  Verdant Sun's Avatar                     {5}{G}{G}        Creature — Dinosaur Avatar
@@ -2688,7 +2688,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2695  Primevals' Glorious Rebirth              {5}{W}{B}        Legendary Sorcery
 [x]  2696  Mind's Dilation                          {5}{U}{U}        Enchantment
 [x]  2697  Ultimate Magic: Holy                     {2}{W}           Instant
-[ ]  2698  Worldsoul's Rage                         {X}{R}{G}        Sorcery
+[x]  2698  Worldsoul's Rage                         {X}{R}{G}        Sorcery
 [x]  2699  Careful Study                            {U}              Sorcery
 [x]  2700  Anzrag, the Quake-Mole                   {2}{R}{G}        Legendary Creature — Mole God
 [ ]  2701  Camellia, the Seedmiser                  {1}{B}{G}        Legendary Creature — Squirrel Warlock
@@ -3152,7 +3152,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3159  Malcolm, Keen-Eyed Navigator             {2}{U}           Legendary Creature — Siren Pirate
 [x]  3160  Kilo, Apogee Mind                        {U}{R}{W}        Legendary Artifact Creature — Robot Artificer
 [x]  3161  Darkstar Augur                           {2}{B}           Creature — Bat Warlock
-[ ]  3162  Etchings of the Chosen                   {1}{W}{B}        Enchantment
+[x]  3162  Etchings of the Chosen                   {1}{W}{B}        Enchantment
 [x]  3163  Ingenious Infiltrator                    {2}{U}{B}        Creature — Vedalken Ninja
 [x]  3164  Spectacular Spider-Man                   {1}{W}           Legendary Creature — Spider Human Hero
 [x]  3165  Lurking Predators                        {4}{G}{G}        Enchantment
@@ -3370,7 +3370,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3377  Ensnared by the Mara                     {2}{R}{R}        Sorcery
 [ ]  3378  Stinging Study                           {4}{B}           Instant
 [ ]  3379  Court of Locthwain                       {2}{B}{B}        Enchantment
-[ ]  3380  Lord of the Void                         {4}{B}{B}{B}     Creature — Demon
+[x]  3380  Lord of the Void                         {4}{B}{B}{B}     Creature — Demon
 [x]  3381  Quest for Renewal                        {1}{G}           Enchantment
 [x]  3382  Norn's Choirmaster                       {3}{W}{W}        Creature — Phyrexian Angel
 [x]  3383  Immaculate Magistrate                    {3}{G}           Creature — Elf Shaman
@@ -3519,7 +3519,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3526  Curtains' Call                           {5}{B}           Instant
 [x]  3527  Good-Fortune Unicorn                     {1}{G}{W}        Creature — Unicorn
 [x]  3528  Shadow in the Warp                       {1}{R}{G}        Enchantment
-[ ]  3529  Titan's Presence                         {3}              Instant
+[x]  3529  Titan's Presence                         {3}              Instant
 [x]  3530  Storm the Vault // Vault of Catlacan     {4}              Legendary Enchantment // Legendary Land
 [ ]  3531  Frontline Medic                          {2}{W}           Creature — Human Cleric
 [x]  3532  Captivating Crew                         {3}{R}           Creature — Human Pirate
@@ -3533,7 +3533,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3540  Stroke of Genius                         {X}{2}{U}        Instant
 [x]  3541  Krark, the Thumbless                     {1}{R}           Legendary Creature — Goblin Wizard
 [x]  3542  Sidisi, Brood Tyrant                     {1}{B}{G}{U}     Legendary Creature — Snake Shaman
-[ ]  3543  Atraxa, Grand Unifier                    {3}{G}{W}{U}{B}  Legendary Creature — Phyrexian Angel
+[x]  3543  Atraxa, Grand Unifier                    {3}{G}{W}{U}{B}  Legendary Creature — Phyrexian Angel
 [x]  3544  Patron of the Vein                       {4}{B}{B}        Creature — Vampire Shaman
 [x]  3545  Overseer of the Damned                   {5}{B}{B}        Creature — Demon
 [x]  3546  Aetherworks Marvel                       {4}              Legendary Artifact
@@ -3541,7 +3541,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3548  Rakdos Joins Up                          {3}{B}{R}        Legendary Enchantment
 [ ]  3549  Jeweled Amulet                           {0}              Artifact
 [ ]  3550  Selective Obliteration                   {3}{C}{C}        Sorcery
-[ ]  3551  Florian, Voldaren Scion                  {1}{B}{R}        Legendary Creature — Vampire Noble
+[x]  3551  Florian, Voldaren Scion                  {1}{B}{R}        Legendary Creature — Vampire Noble
 [x]  3552  Come Back Wrong                          {2}{B}           Sorcery
 [x]  3553  Fiendish Duo                             {4}{R}{R}        Creature — Devil
 [x]  3554  Omnath, Locus of the Roil                {1}{G}{U}{R}     Legendary Creature — Elemental
@@ -4609,7 +4609,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4616  Summon: Fat Chocobo                      {4}{G}           Enchantment Creature — Saga Bird
 [x]  4617  Viridian Longbow                         {1}              Artifact — Equipment
 [x]  4618  Vivid Creek                              {0}              Land
-[ ]  4619  Calamity of the Titans                   {4}{C}{C}        Sorcery
+[x]  4619  Calamity of the Titans                   {4}{C}{C}        Sorcery
 [ ]  4620  Khârn the Betrayer                       {3}{R}           Legendary Creature — Astartes Berserker
 [x]  4621  Stolen Strategy                          {4}{R}           Enchantment
 [x]  4622  Pyre of Heroes                           {2}              Artifact
