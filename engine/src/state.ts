@@ -2055,6 +2055,12 @@ export interface SpellGrantThisTurn {
   readonly cantBeCountered?: true;
   readonly convoke?: true;
   readonly entersWithCounters?: { readonly counter: string; readonly amount: number };
+  /** The matching spell costs this much generic mana less to cast — fixed as
+   * the grant was made. See `Game.costModificationFor`. */
+  readonly reduceGeneric?: number;
+  /** The matching spell has affinity for these (rule 702.41a): {1} less for
+   * each its caster controls as it's cast. */
+  readonly affinityFor?: CardFilter;
   usedBy?: { readonly id: ObjectId; readonly zoneChangeCount: number };
 }
 

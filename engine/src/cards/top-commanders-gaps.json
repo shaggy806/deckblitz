@@ -980,7 +980,9 @@
   "filter:blocked-source-this-turn",
   "filter:blocked-by-source-this-combat",
   "effect:cast-limit",
-  "effect:per-player-cast-limit"
+  "effect:per-player-cast-limit",
+  "effect:next-spell-cost-reduction",
+  "effect:until-next-turn-spell-cost-reduction"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

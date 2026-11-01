@@ -1454,7 +1454,8 @@ export function parseTrigger(clause) {
       },
     ];
   }
-  if (/^Whenever ~ attacks$/.test(c)) return self("attacks");
+  // "Whenever Don & Raph attack": a plural name.
+  if (/^Whenever ~ attacks?$/.test(c)) return self("attacks");
   if (/^Whenever ~ blocks$/.test(c)) return self("blocks");
   if (/^Whenever ~ becomes blocked$/.test(c)) return self("becomes-blocked");
   // Rule 509.3g: as blockers are declared, with none declared for it.
@@ -2050,6 +2051,18 @@ export function parseSentence(sentence, ctx) {
   if (ctx?.costRevealed === true) {
     const r = revealedCardEffectOf(s, ctx);
     if (r !== undefined) return r;
+  }
+  // A cost reduction on the next matching spell (`grant-spells-this-turn`'s
+  // `reduceGeneric`), ahead of the guard for its X: "the next spell you cast
+  // this turn costs {1} less to cast" (Hardened Berserker), "… {X} less to
+  // cast, where X is the number of Wizards you control as this ability
+  // resolves" (Kaza) — read then, so a live amount is fine.
+  if ((m = /^the next (?:(.+?) )?spell you cast this turn costs \{(\d+|X)\} less to cast(?:, where X is (.+?) as this ability resolves)?\.$/i.exec(s))) {
+    const filter = flashSpellsFilter(m[1]);
+    const amt = m[2] === "X" ? (m[3] === undefined ? null : dividedTotalOf(m[3])) : m[3] === undefined ? Number(m[2]) : null;
+    if (filter !== null && amt !== null) {
+      return { kind: "grant-spells-this-turn", next: true, ...(filter === true ? {} : { filter }), reduceGeneric: amt };
+    }
   }
   if (/\bwhere X\b|\bfor each\b/i.test(s) && !/^add .*for each [\w+/-]+ counter removed this way\.$/i.test(s)) return null;
   // "Until end of turn, whenever …, …", "whenever … this turn, …" and "until
@@ -3008,6 +3021,20 @@ export function parseSentence(sentence, ctx) {
         next: true,
         ...(filter === true ? {} : { filter }),
         ...nextSpellGrant(m[2]),
+      };
+    }
+  }
+  // "The next noncreature spell you cast this turn has affinity for
+  // artifacts" (Don & Raph, Saheeli — rule 702.41a).
+  if ((m = re("the next (?:(.+?) )?spell you cast this turn has affinity for (\\w+)").exec(s))) {
+    const filter = flashSpellsFilter(m[1]);
+    const of = parseTypePhrase(m[2]);
+    if (filter !== null && of !== null && Object.keys(of).length > 0) {
+      return {
+        kind: "grant-spells-this-turn",
+        next: true,
+        ...(filter === true ? {} : { filter }),
+        affinityFor: { ...of, controlledBy: "you" },
       };
     }
   }

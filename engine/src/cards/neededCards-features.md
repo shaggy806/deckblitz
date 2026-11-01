@@ -549,6 +549,24 @@ cards: Rule of Law, Deafening Silence, Ethersworn Canonist, Irencrag Feat,
 Curse of Exhaustion. Left: Hedonist's Trove's "this way", Fires of Invention's
 "no more than two" beside its "only during your turn" (one line, two statics).
 
+### A cost reduction on the next spell — built 2026-11-01
+
+The need-keys Phase 2 family `effect:temporary-player-effect`'s top group,
+features only. `grant-spells-this-turn` with `next` takes `reduceGeneric` (an
+amount read as it resolves and fixed from then on) and `affinityFor` (a filter
+counted as the spell is cast, rule 702.41a), read in `costModificationFor` (rule 601.2f) from every unspent grant
+the spell would use up, so instances add up and all end on that one spell as it
+becomes cast (601.2i), whatever it paid. "Until your next turn, instant and
+sorcery spells you cast cost {1} less" was already a `player-effect`'s
+`reduceSpells` with that duration — only tested and marked. The scaffolder reads
+{N}, {X} "as this ability resolves" and affinity, and "whenever ~ attack" for a
+plural name. Keys: effect:next-spell-cost-reduction,
+effect:until-next-turn-spell-cost-reduction. Proving cards: Hardened Berserker,
+Kaza, Roil Chaser, Maelstrom Muse, Don & Raph, Hard Science. Not tried: Panoptic
+Projektor's "face-down creature spell" (a grant's filter on a spell cast face
+down), which needs its other key anyway. Left: Will Kenrith's "that player casts" (its own key,
+effect:player-effect-target-player).
+
 ### "When you discard this card", its cause, and the turn's first discard — built 2026-10-31
 
 The need-keys Phase 2 family `trigger:discards-extensions`, features only.

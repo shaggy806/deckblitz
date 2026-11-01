@@ -12763,6 +12763,18 @@ export class Game {
         reduceGeneric += mod.reduceGeneric;
       }
     }
+    // "The next spell you cast this turn costs {N} less" / "has affinity for
+    // artifacts": every unspent `next` grant it would use up, all at once, the
+    // rulings' cumulative instances.
+    const card = this.state.objects[cardId];
+    const castFrom = card?.zone === "stack" ? (card.castFrom ?? undefined) : card?.zone;
+    for (const grant of this.state.spellGrantsThisTurn ?? []) {
+      if (grant.reduceGeneric === undefined && grant.affinityFor === undefined) continue;
+      if (!turnCastGrantReaches(this.state, this.registry, grant, cardId, player, castFrom)) continue;
+      reduceGeneric += grant.reduceGeneric ?? 0;
+      // Rule 702.41a: {1} less for each one its caster controls now, as it's cast.
+      if (grant.affinityFor !== undefined) reduceGeneric += this.countBattlefieldMatching(player, grant.affinityFor);
+    }
     return { increaseGeneric, reduceGeneric, colored };
   }
 

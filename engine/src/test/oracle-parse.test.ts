@@ -7167,4 +7167,41 @@ describe("the turn's blocks", () => {
       ],
     });
   });
+
+  it("reads a cost reduction on the next spell, by {N}, by an {X} read as it resolves, and affinity", () => {
+    const berserker = face("Creature — Human Berserker", "Whenever this creature attacks, the next spell you cast this turn costs {1} less to cast.");
+    expect(berserker.complete).toBe(true);
+    expect(berserker.triggered[0].effect).toEqual({ kind: "grant-spells-this-turn", next: true, reduceGeneric: 1 });
+    const giants = face("Sorcery", "The next Giant spell you cast this turn costs {2} less to cast.");
+    expect(giants.effect).toEqual({ kind: "grant-spells-this-turn", next: true, filter: { subtype: "Giant" }, reduceGeneric: 2 });
+    const kaza = face(
+      "Creature — Human Wizard",
+      "{T}: The next instant or sorcery spell you cast this turn costs {X} less to cast, where X is the number of Wizards you control as this ability resolves.",
+    );
+    expect(kaza.complete).toBe(true);
+    expect(kaza.activated[0].effect).toEqual({
+      kind: "grant-spells-this-turn",
+      next: true,
+      filter: { typesAnyOf: ["instant", "sorcery"] },
+      reduceGeneric: { countOf: { subtype: "Wizard", controlledBy: "you" } },
+    });
+    const muse = face(
+      "Creature — Djinn Wizard",
+      "Whenever this creature attacks, the next instant or sorcery spell you cast this turn costs {X} less to cast, where X is this creature's power as this ability resolves.",
+    );
+    expect(muse.triggered[0].effect.reduceGeneric).toEqual({ powerOf: "source" });
+    const unread = face("Sorcery", "The next spell you cast this turn costs {X} less to cast.");
+    expect(unread.complete).toBe(false);
+    const turtles = face(
+      "Creature — Mutant Ninja Turtle",
+      "Whenever this creature attacks, the next noncreature spell you cast this turn has affinity for artifacts. (It costs {1} less to cast for each artifact you control.)",
+    );
+    expect(turtles.complete).toBe(true);
+    expect(turtles.triggered[0].effect).toEqual({
+      kind: "grant-spells-this-turn",
+      next: true,
+      filter: { notTypes: ["creature"] },
+      affinityFor: { type: "artifact", controlledBy: "you" },
+    });
+  });
 });

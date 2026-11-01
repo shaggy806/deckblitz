@@ -4612,6 +4612,19 @@ export type EffectSpec =
        * (Savage Summoning): the spell enters the battlefield with these
        * counters as it resolves, as `enters-with-counters` gives. */
       readonly entersWithCounters?: { readonly counter: string; readonly amount: number };
+      /** "The next spell you cast this turn **costs {1} less to cast**"
+       * (Hardened Berserker), "{X} less, where X is the number of Wizards you
+       * control as this ability resolves" (Kaza, Roil Chaser): generic mana
+       * off the spell's total cost (rule 601.2f), read as this resolves and
+       * fixed from then on, and never its colored requirements or its mana
+       * value (the rulings). Several grants all reach the one next spell. */
+      readonly reduceGeneric?: EffectAmount;
+      /** "The next noncreature spell you cast this turn **has affinity for
+       * artifacts**" (Don & Raph, Saheeli): {1} less for each permanent
+       * matching this that its caster controls as the spell is cast (rule
+       * 702.41a), so nothing's fixed as this resolves. Several are cumulative
+       * (the Don & Raph ruling). */
+      readonly affinityFor?: CardFilter;
     }
   | {
       /**
@@ -13954,6 +13967,8 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         ...(spec.cantBeCountered === true ? { cantBeCountered: true } : {}),
         ...(spec.convoke === true ? { convoke: true } : {}),
         ...(spec.entersWithCounters !== undefined ? { entersWithCounters: spec.entersWithCounters } : {}),
+        ...(spec.reduceGeneric !== undefined ? { reduceGeneric: amountValue(spec.reduceGeneric, ctx) } : {}),
+        ...(spec.affinityFor !== undefined ? { affinityFor: spec.affinityFor } : {}),
       });
       return;
     case "populate":
