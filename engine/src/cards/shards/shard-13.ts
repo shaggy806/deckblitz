@@ -793,6 +793,7 @@ import _poolVoraciousCobra from "../pool/voracious-cobra.js";
 import _poolVowToErebor from "../pool/vow-to-erebor.js";
 import _poolVulshokMorningstar from "../pool/vulshok-morningstar.js";
 import _poolVulshokReplica from "../pool/vulshok-replica.js";
+import _poolWallOfStolenIdentity from "../pool/wall-of-stolen-identity.js";
 import _poolWarMachineAvengingArsenal from "../pool/war-machine-avenging-arsenal.js";
 import _poolWarOracle from "../pool/war-oracle.js";
 import _poolWardenOfEvosIsle from "../pool/warden-of-evos-isle.js";
@@ -1644,6 +1645,7 @@ const shard: CardShard = {
     _poolVowToErebor,
     _poolVulshokMorningstar,
     _poolVulshokReplica,
+    _poolWallOfStolenIdentity,
     _poolWarMachineAvengingArsenal,
     _poolWarOracle,
     _poolWardenOfEvosIsle,

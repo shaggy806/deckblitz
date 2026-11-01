@@ -349,6 +349,7 @@ import _poolHornetHarasser from "../pool/hornet-harasser.js";
 import _poolHowlingGale from "../pool/howling-gale.js";
 import _poolHowlsquadHeavy from "../pool/howlsquad-heavy.js";
 import _poolHuatlisFinalStrike from "../pool/huatlis-final-strike.js";
+import _poolHulkingMetamorph from "../pool/hulking-metamorph.js";
 import _poolHunterOfEyeblights from "../pool/hunter-of-eyeblights.js";
 import _poolHydraAssaultRobot from "../pool/hydra-assault-robot.js";
 import _poolIAmIronMan from "../pool/i-am-iron-man.js";
@@ -1232,6 +1233,7 @@ const shard: CardShard = {
     _poolHowlingGale,
     _poolHowlsquadHeavy,
     _poolHuatlisFinalStrike,
+    _poolHulkingMetamorph,
     _poolHunterOfEyeblights,
     _poolHydraAssaultRobot,
     _poolIAmIronMan,

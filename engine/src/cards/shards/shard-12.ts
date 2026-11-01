@@ -9,6 +9,7 @@ import _poolAbbotOfKeralKeep from "../pool/abbot-of-keral-keep.js";
 import _poolAberrantResearcher from "../pool/aberrant-researcher.js";
 import _poolAcademyRaider from "../pool/academy-raider.js";
 import _poolAcquiredMutation from "../pool/acquired-mutation.js";
+import _poolActivatedSleeper from "../pool/activated-sleeper.js";
 import _poolAethershieldArtificer from "../pool/aethershield-artificer.js";
 import _poolAgent13SharonCarter from "../pool/agent-13-sharon-carter.js";
 import _poolAgentFrankHorrigan from "../pool/agent-frank-horrigan.js";
@@ -865,6 +866,7 @@ const shard: CardShard = {
     _poolAberrantResearcher,
     _poolAcademyRaider,
     _poolAcquiredMutation,
+    _poolActivatedSleeper,
     _poolAethershieldArtificer,
     _poolAgent13SharonCarter,
     _poolAgentFrankHorrigan,

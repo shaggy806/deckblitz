@@ -236,6 +236,7 @@ import _poolDyingWail from "../pool/dying-wail.js";
 import _poolDynacharge from "../pool/dynacharge.js";
 import _poolEarthcraft from "../pool/earthcraft.js";
 import _poolEarthenArms from "../pool/earthen-arms.js";
+import _poolEchoingDeeps from "../pool/echoing-deeps.js";
 import _poolEldraziSkyspawner from "../pool/eldrazi-skyspawner.js";
 import _poolElectrozoa from "../pool/electrozoa.js";
 import _poolElvenAmbush from "../pool/elven-ambush.js";
@@ -675,6 +676,7 @@ import _poolScavengerGrounds from "../pool/scavenger-grounds.js";
 import _poolScentOfIvy from "../pool/scent-of-ivy.js";
 import _poolScholarOfTheAges from "../pool/scholar-of-the-ages.js";
 import _poolScionOfOona from "../pool/scion-of-oona.js";
+import _poolScorchedRuins from "../pool/scorched-ruins.js";
 import _poolScorchedRusalka from "../pool/scorched-rusalka.js";
 import _poolScreamPuff from "../pool/scream-puff.js";
 import _poolScreechingDrake from "../pool/screeching-drake.js";
@@ -1143,6 +1145,7 @@ const shard: CardShard = {
     _poolDynacharge,
     _poolEarthcraft,
     _poolEarthenArms,
+    _poolEchoingDeeps,
     _poolEldraziSkyspawner,
     _poolElectrozoa,
     _poolElvenAmbush,
@@ -1582,6 +1585,7 @@ const shard: CardShard = {
     _poolScentOfIvy,
     _poolScholarOfTheAges,
     _poolScionOfOona,
+    _poolScorchedRuins,
     _poolScorchedRusalka,
     _poolScreamPuff,
     _poolScreechingDrake,

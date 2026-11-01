@@ -471,6 +471,7 @@ import _poolMizzixsMastery from "../pool/mizzixs-mastery.js";
 import _poolMoggConscripts from "../pool/mogg-conscripts.js";
 import _poolMogissMarauder from "../pool/mogiss-marauder.js";
 import _poolMoldFolk from "../pool/mold-folk.js";
+import _poolMoltenSentry from "../pool/molten-sentry.js";
 import _poolMonasteryRaid from "../pool/monastery-raid.js";
 import _poolMonasterySwiftspear from "../pool/monastery-swiftspear.js";
 import _poolMoonSprite from "../pool/moon-sprite.js";
@@ -557,6 +558,7 @@ import _poolPredatorDragon from "../pool/predator-dragon.js";
 import _poolPriceOfBeauty from "../pool/price-of-beauty.js";
 import _poolPriceOfFreedom from "../pool/price-of-freedom.js";
 import _poolPricklyBoggart from "../pool/prickly-boggart.js";
+import _poolPrimalClay from "../pool/primal-clay.js";
 import _poolPrimalCommand from "../pool/primal-command.js";
 import _poolPrimalRage from "../pool/primal-rage.js";
 import _poolPrimalWitchstalker from "../pool/primal-witchstalker.js";
@@ -1376,6 +1378,7 @@ const shard: CardShard = {
     _poolMoggConscripts,
     _poolMogissMarauder,
     _poolMoldFolk,
+    _poolMoltenSentry,
     _poolMonasteryRaid,
     _poolMonasterySwiftspear,
     _poolMoonSprite,
@@ -1462,6 +1465,7 @@ const shard: CardShard = {
     _poolPriceOfBeauty,
     _poolPriceOfFreedom,
     _poolPricklyBoggart,
+    _poolPrimalClay,
     _poolPrimalCommand,
     _poolPrimalRage,
     _poolPrimalWitchstalker,

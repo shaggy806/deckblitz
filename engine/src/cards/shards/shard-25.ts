@@ -149,6 +149,7 @@ import _poolContagion from "../pool/contagion.js";
 import _poolContaminatedLandscape from "../pool/contaminated-landscape.js";
 import _poolContestedCliffs from "../pool/contested-cliffs.js";
 import _poolConvalescentCare from "../pool/convalescent-care.js";
+import _poolCopyLand from "../pool/copy-land.js";
 import _poolCoralNet from "../pool/coral-net.js";
 import _poolCorpsehatch from "../pool/corpsehatch.js";
 import _poolCovetedPeacock from "../pool/coveted-peacock.js";
@@ -994,6 +995,7 @@ const shard: CardShard = {
     _poolContaminatedLandscape,
     _poolContestedCliffs,
     _poolConvalescentCare,
+    _poolCopyLand,
     _poolCoralNet,
     _poolCorpsehatch,
     _poolCovetedPeacock,

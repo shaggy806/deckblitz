@@ -74,6 +74,7 @@ import _poolBloodhunterBat from "../pool/bloodhunter-bat.js";
 import _poolBloodscent from "../pool/bloodscent.js";
 import _poolBloodyBetrayal from "../pool/bloody-betrayal.js";
 import _poolBoartuskLiege from "../pool/boartusk-liege.js";
+import _poolBodyDouble from "../pool/body-double.js";
 import _poolBogWraith from "../pool/bog-wraith.js";
 import _poolBoonOfTheWishGiver from "../pool/boon-of-the-wish-giver.js";
 import _poolBoostedSloop from "../pool/boosted-sloop.js";
@@ -918,6 +919,7 @@ const shard: CardShard = {
     _poolBloodscent,
     _poolBloodyBetrayal,
     _poolBoartuskLiege,
+    _poolBodyDouble,
     _poolBogWraith,
     _poolBoonOfTheWishGiver,
     _poolBoostedSloop,

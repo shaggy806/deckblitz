@@ -544,6 +544,7 @@ import _poolOrokuSakiShredderRising from "../pool/oroku-saki-shredder-rising.js"
 import _poolOtherworldAtlas from "../pool/otherworld-atlas.js";
 import _poolOtherworldlyJourney from "../pool/otherworldly-journey.js";
 import _poolOverflowingBasin from "../pool/overflowing-basin.js";
+import _poolOverlaidTerrain from "../pool/overlaid-terrain.js";
 import _poolOverrun from "../pool/overrun.js";
 import _poolOxiddaDaredevil from "../pool/oxidda-daredevil.js";
 import _poolPainSuffering from "../pool/pain-suffering.js";
@@ -768,6 +769,7 @@ import _poolTheChiefWarg from "../pool/the-chief-warg.js";
 import _poolTheCloningOfShredder from "../pool/the-cloning-of-shredder.js";
 import _poolTheHauntOfHightower from "../pool/the-haunt-of-hightower.js";
 import _poolTheInfamousCruelclaw from "../pool/the-infamous-cruelclaw.js";
+import _poolTheMasterFormedAnew from "../pool/the-master-formed-anew.js";
 import _poolTheModernAge from "../pool/the-modern-age.js";
 import _poolTheStasisCoffin from "../pool/the-stasis-coffin.js";
 import _poolThornfistStriker from "../pool/thornfist-striker.js";
@@ -1446,6 +1448,7 @@ const shard: CardShard = {
     _poolOtherworldAtlas,
     _poolOtherworldlyJourney,
     _poolOverflowingBasin,
+    _poolOverlaidTerrain,
     _poolOverrun,
     _poolOxiddaDaredevil,
     _poolPainSuffering,
@@ -1670,6 +1673,7 @@ const shard: CardShard = {
     _poolTheCloningOfShredder,
     _poolTheHauntOfHightower,
     _poolTheInfamousCruelclaw,
+    _poolTheMasterFormedAnew,
     _poolTheModernAge,
     _poolTheStasisCoffin,
     _poolThornfistStriker,

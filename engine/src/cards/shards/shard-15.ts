@@ -384,6 +384,7 @@ import _poolKirinTouchedOrochi from "../pool/kirin-touched-orochi.js";
 import _poolKitchen from "../pool/kitchen.js";
 import _poolKithkinHarbinger from "../pool/kithkin-harbinger.js";
 import _poolKjeldoranGargoyle from "../pool/kjeldoran-gargoyle.js";
+import _poolKjeldoranOutpost from "../pool/kjeldoran-outpost.js";
 import _poolKjeldoranWarrior from "../pool/kjeldoran-warrior.js";
 import _poolKrallenhordeHowler from "../pool/krallenhorde-howler.js";
 import _poolKrovikanRot from "../pool/krovikan-rot.js";
@@ -542,6 +543,7 @@ import _poolPrismaticWard from "../pool/prismatic-ward.js";
 import _poolPrizedAmalgam from "../pool/prized-amalgam.js";
 import _poolPrizefight from "../pool/prizefight.js";
 import _poolPropheticFlamespeaker from "../pool/prophetic-flamespeaker.js";
+import _poolProteanRaider from "../pool/protean-raider.js";
 import _poolProwlingPangolin from "../pool/prowling-pangolin.js";
 import _poolPsionicSnoop from "../pool/psionic-snoop.js";
 import _poolPsychatog from "../pool/psychatog.js";
@@ -1214,6 +1216,7 @@ const shard: CardShard = {
     _poolKitchen,
     _poolKithkinHarbinger,
     _poolKjeldoranGargoyle,
+    _poolKjeldoranOutpost,
     _poolKjeldoranWarrior,
     _poolKrallenhordeHowler,
     _poolKrovikanRot,
@@ -1372,6 +1375,7 @@ const shard: CardShard = {
     _poolPrizedAmalgam,
     _poolPrizefight,
     _poolPropheticFlamespeaker,
+    _poolProteanRaider,
     _poolProwlingPangolin,
     _poolPsionicSnoop,
     _poolPsychatog,

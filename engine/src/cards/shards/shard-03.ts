@@ -326,6 +326,7 @@ import _poolImminentDoom from "../pool/imminent-doom.js";
 import _poolImperialEdict from "../pool/imperial-edict.js";
 import _poolImperialLancer from "../pool/imperial-lancer.js";
 import _poolImperiousPerfect from "../pool/imperious-perfect.js";
+import _poolImposterMech from "../pool/imposter-mech.js";
 import _poolIndenturedOaf from "../pool/indentured-oaf.js";
 import _poolInfiniteGuidelineStation from "../pool/infinite-guideline-station.js";
 import _poolInsolence from "../pool/insolence.js";
@@ -1117,6 +1118,7 @@ const shard: CardShard = {
     _poolImperialEdict,
     _poolImperialLancer,
     _poolImperiousPerfect,
+    _poolImposterMech,
     _poolIndenturedOaf,
     _poolInfiniteGuidelineStation,
     _poolInsolence,

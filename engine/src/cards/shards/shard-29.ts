@@ -777,6 +777,7 @@ import _poolUlvenwaldPrimordials from "../pool/ulvenwald-primordials.js";
 import _poolUmbralMantle from "../pool/umbral-mantle.js";
 import _poolUnassumingSage from "../pool/unassuming-sage.js";
 import _poolUndercoverCrocodelf from "../pool/undercover-crocodelf.js";
+import _poolUndercoverOperative from "../pool/undercover-operative.js";
 import _poolUnderseaInvader from "../pool/undersea-invader.js";
 import _poolUnderworldCharger from "../pool/underworld-charger.js";
 import _poolUndulatingWitness from "../pool/undulating-witness.js";
@@ -1645,6 +1646,7 @@ const shard: CardShard = {
     _poolUmbralMantle,
     _poolUnassumingSage,
     _poolUndercoverCrocodelf,
+    _poolUndercoverOperative,
     _poolUnderseaInvader,
     _poolUnderworldCharger,
     _poolUndulatingWitness,

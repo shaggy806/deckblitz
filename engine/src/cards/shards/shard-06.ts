@@ -708,6 +708,7 @@ import _poolSunbirdsInvocation from "../pool/sunbirds-invocation.js";
 import _poolSunderShaman from "../pool/sunder-shaman.js";
 import _poolSundownPass from "../pool/sundown-pass.js";
 import _poolSunkenRuins from "../pool/sunken-ruins.js";
+import _poolSuperiorSpiderMan from "../pool/superior-spider-man.js";
 import _poolSwiftKick from "../pool/swift-kick.js";
 import _poolSwiftwaterCliffs from "../pool/swiftwater-cliffs.js";
 import _poolSwordOfLightAndShadow from "../pool/sword-of-light-and-shadow.js";
@@ -1569,6 +1570,7 @@ const shard: CardShard = {
     _poolSunderShaman,
     _poolSundownPass,
     _poolSunkenRuins,
+    _poolSuperiorSpiderMan,
     _poolSwiftKick,
     _poolSwiftwaterCliffs,
     _poolSwordOfLightAndShadow,
