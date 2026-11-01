@@ -710,6 +710,7 @@ import _poolTeysaOrzhovScion from "../pool/teysa-orzhov-scion.js";
 import _poolThalakosDrifters from "../pool/thalakos-drifters.js";
 import _poolThantisTheWarweaver from "../pool/thantis-the-warweaver.js";
 import _poolTheFlux from "../pool/the-flux.js";
+import _poolTheKeyToTheVault from "../pool/the-key-to-the-vault.js";
 import _poolTheLionTurtle from "../pool/the-lion-turtle.js";
 import _poolTheOddAcornGang from "../pool/the-odd-acorn-gang.js";
 import _poolTheUnderworldCookbook from "../pool/the-underworld-cookbook.js";
@@ -1553,6 +1554,7 @@ const shard: CardShard = {
     _poolThalakosDrifters,
     _poolThantisTheWarweaver,
     _poolTheFlux,
+    _poolTheKeyToTheVault,
     _poolTheLionTurtle,
     _poolTheOddAcornGang,
     _poolTheUnderworldCookbook,

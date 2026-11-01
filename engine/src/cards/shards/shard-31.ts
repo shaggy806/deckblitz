@@ -193,6 +193,7 @@ import _poolDerangedWhelp from "../pool/deranged-whelp.js";
 import _poolDesertOfTheGlorified from "../pool/desert-of-the-glorified.js";
 import _poolDesertSandstorm from "../pool/desert-sandstorm.js";
 import _poolDesolateMire from "../pool/desolate-mire.js";
+import _poolDesperateResearch from "../pool/desperate-research.js";
 import _poolDestroyTheEvidence from "../pool/destroy-the-evidence.js";
 import _poolDevastatingSummons from "../pool/devastating-summons.js";
 import _poolDevouringSugarmaw from "../pool/devouring-sugarmaw.js";
@@ -1113,6 +1114,7 @@ const shard: CardShard = {
     _poolDesertOfTheGlorified,
     _poolDesertSandstorm,
     _poolDesolateMire,
+    _poolDesperateResearch,
     _poolDestroyTheEvidence,
     _poolDevastatingSummons,
     _poolDevouringSugarmaw,

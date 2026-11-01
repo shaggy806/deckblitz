@@ -902,6 +902,7 @@ import _poolWolverineBestThereIs from "../pool/wolverine-best-there-is.js";
 import _poolWoodSage from "../pool/wood-sage.js";
 import _poolWoodlandAcolyte from "../pool/woodland-acolyte.js";
 import _poolWoodweaversPuzzleknot from "../pool/woodweavers-puzzleknot.js";
+import _poolWorldsWithinWorlds from "../pool/worlds-within-worlds.js";
 import _poolX23DeadlyWeapon from "../pool/x-23-deadly-weapon.js";
 import _poolXyrisTheWrithingStorm from "../pool/xyris-the-writhing-storm.js";
 import _poolYavimayaEnchantress from "../pool/yavimaya-enchantress.js";
@@ -1836,6 +1837,7 @@ const shard: CardShard = {
     _poolWoodSage,
     _poolWoodlandAcolyte,
     _poolWoodweaversPuzzleknot,
+    _poolWorldsWithinWorlds,
     _poolX23DeadlyWeapon,
     _poolXyrisTheWrithingStorm,
     _poolYavimayaEnchantress,

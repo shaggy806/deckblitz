@@ -80,6 +80,7 @@ import _poolBenedictionOfMoons from "../pool/benediction-of-moons.js";
 import _poolBillowingShriekmass from "../pool/billowing-shriekmass.js";
 import _poolBiomanticMastery from "../pool/biomantic-mastery.js";
 import _poolBitterDownfall from "../pool/bitter-downfall.js";
+import _poolBlackCatCunningThief from "../pool/black-cat-cunning-thief.js";
 import _poolBlanchwoodTreefolk from "../pool/blanchwood-treefolk.js";
 import _poolBlazingBomb from "../pool/blazing-bomb.js";
 import _poolBlazingFiresinger from "../pool/blazing-firesinger.js";
@@ -996,6 +997,7 @@ const shard: CardShard = {
     _poolBillowingShriekmass,
     _poolBiomanticMastery,
     _poolBitterDownfall,
+    _poolBlackCatCunningThief,
     _poolBlanchwoodTreefolk,
     _poolBlazingBomb,
     _poolBlazingFiresinger,

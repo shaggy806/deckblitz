@@ -99,6 +99,7 @@ import _poolBurningCuriosity from "../pool/burning-curiosity.js";
 import _poolBurnishedDunestomper from "../pool/burnished-dunestomper.js";
 import _poolBusterSword from "../pool/buster-sword.js";
 import _poolCabalArchon from "../pool/cabal-archon.js";
+import _poolCacheGrab from "../pool/cache-grab.js";
 import _poolCactusfolkSureshot from "../pool/cactusfolk-sureshot.js";
 import _poolCalciderm from "../pool/calciderm.js";
 import _poolCallOfTheRing from "../pool/call-of-the-ring.js";
@@ -250,6 +251,7 @@ import _poolFleshAllergy from "../pool/flesh-allergy.js";
 import _poolFlesh from "../pool/flesh.js";
 import _poolFlexibleWaterbender from "../pool/flexible-waterbender.js";
 import _poolFlightDeckCoordinator from "../pool/flight-deck-coordinator.js";
+import _poolFlorianVoldarenScion from "../pool/florian-voldaren-scion.js";
 import _poolFlowstoneHellion from "../pool/flowstone-hellion.js";
 import _poolFlyingCarpet from "../pool/flying-carpet.js";
 import _poolFogOfGnats from "../pool/fog-of-gnats.js";
@@ -939,6 +941,7 @@ const shard: CardShard = {
     _poolBurnishedDunestomper,
     _poolBusterSword,
     _poolCabalArchon,
+    _poolCacheGrab,
     _poolCactusfolkSureshot,
     _poolCalciderm,
     _poolCallOfTheRing,
@@ -1090,6 +1093,7 @@ const shard: CardShard = {
     _poolFlesh,
     _poolFlexibleWaterbender,
     _poolFlightDeckCoordinator,
+    _poolFlorianVoldarenScion,
     _poolFlowstoneHellion,
     _poolFlyingCarpet,
     _poolFogOfGnats,

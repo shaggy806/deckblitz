@@ -169,6 +169,7 @@ import _poolContentiousPlan from "../pool/contentious-plan.js";
 import _poolConversion from "../pool/conversion.js";
 import _poolCorpsejackMenace from "../pool/corpsejack-menace.js";
 import _poolCorsairsOfUmbar from "../pool/corsairs-of-umbar.js";
+import _poolCourierOfComestibles from "../pool/courier-of-comestibles.js";
 import _poolCourtHomunculus from "../pool/court-homunculus.js";
 import _poolCoward from "../pool/coward.js";
 import _poolCranialArchive from "../pool/cranial-archive.js";
@@ -496,6 +497,7 @@ import _poolMirriTheCursed from "../pool/mirri-the-cursed.js";
 import _poolMishraEminentOne from "../pool/mishra-eminent-one.js";
 import _poolMoltenFirebird from "../pool/molten-firebird.js";
 import _poolMoltenPrimordial from "../pool/molten-primordial.js";
+import _poolMonsterManual from "../pool/monster-manual.js";
 import _poolMoonwingMoth from "../pool/moonwing-moth.js";
 import _poolMoorlandHaunt from "../pool/moorland-haunt.js";
 import _poolMortiphobia from "../pool/mortiphobia.js";
@@ -1018,6 +1020,7 @@ const shard: CardShard = {
     _poolConversion,
     _poolCorpsejackMenace,
     _poolCorsairsOfUmbar,
+    _poolCourierOfComestibles,
     _poolCourtHomunculus,
     _poolCoward,
     _poolCranialArchive,
@@ -1345,6 +1348,7 @@ const shard: CardShard = {
     _poolMishraEminentOne,
     _poolMoltenFirebird,
     _poolMoltenPrimordial,
+    _poolMonsterManual,
     _poolMoonwingMoth,
     _poolMoorlandHaunt,
     _poolMortiphobia,

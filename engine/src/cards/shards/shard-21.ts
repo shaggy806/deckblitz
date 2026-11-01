@@ -457,6 +457,7 @@ import _poolMorphicPool from "../pool/morphic-pool.js";
 import _poolMsBumbleflower from "../pool/ms-bumbleflower.js";
 import _poolMurmuringPhantasm from "../pool/murmuring-phantasm.js";
 import _poolMuscleSliver from "../pool/muscle-sliver.js";
+import _poolMuseVortex from "../pool/muse-vortex.js";
 import _poolMyrEnforcer from "../pool/myr-enforcer.js";
 import _poolMyrRetriever from "../pool/myr-retriever.js";
 import _poolMysticRestraints from "../pool/mystic-restraints.js";
@@ -1290,6 +1291,7 @@ const shard: CardShard = {
     _poolMsBumbleflower,
     _poolMurmuringPhantasm,
     _poolMuscleSliver,
+    _poolMuseVortex,
     _poolMyrEnforcer,
     _poolMyrRetriever,
     _poolMysticRestraints,

@@ -11,6 +11,7 @@ import _poolAcidRain from "../pool/acid-rain.js";
 import _poolAcornCatapult from "../pool/acorn-catapult.js";
 import _poolAdelineResplendentCathar from "../pool/adeline-resplendent-cathar.js";
 import _poolAdmonitionAngel from "../pool/admonition-angel.js";
+import _poolAdventureAwaits from "../pool/adventure-awaits.js";
 import _poolAdventurousImpulse from "../pool/adventurous-impulse.js";
 import _poolAegisSculptor from "../pool/aegis-sculptor.js";
 import _poolAetherFigment from "../pool/aether-figment.js";
@@ -859,6 +860,7 @@ const shard: CardShard = {
     _poolAcornCatapult,
     _poolAdelineResplendentCathar,
     _poolAdmonitionAngel,
+    _poolAdventureAwaits,
     _poolAdventurousImpulse,
     _poolAegisSculptor,
     _poolAetherFigment,

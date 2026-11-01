@@ -1171,6 +1171,7 @@ export const PINNED_ART: Readonly<Partial<Record<string, string>>> = {
   "Yiazmat, Ultimate Mark": "https://cards.scryfall.io/art_crop/back/c/3/c3eb2ae5-10de-4c3d-91c8-8734befc80b2.jpg",
   "Ysgard's Call": "https://cards.scryfall.io/art_crop/back/b/2/b2419408-e907-4d62-b158-c97afc388c04.jpg",
   "Zof Bloodbog": "https://cards.scryfall.io/art_crop/back/9/8/98496d5b-1519-4f0c-8b46-0a43be643dfb.jpg",
+  "Zoological Study": "https://cards.scryfall.io/art_crop/back/2/7/27223ee4-970a-438a-beff-a1b13b14aff4.jpg",
 };
 
 /** The pool's cards banned in Commander (the Oracle snapshot's legality):

@@ -339,6 +339,7 @@ import _poolHeliumSquirter from "../pool/helium-squirter.js";
 import _poolHellfire from "../pool/hellfire.js";
 import _poolHellsThunder from "../pool/hells-thunder.js";
 import _poolHemlockVial from "../pool/hemlock-vial.js";
+import _poolHeraldOfAmity from "../pool/herald-of-amity.js";
 import _poolHerbalPoultice from "../pool/herbal-poultice.js";
 import _poolHitTheMotherLode from "../pool/hit-the-mother-lode.js";
 import _poolHollowhengeOverlord from "../pool/hollowhenge-overlord.js";
@@ -1214,6 +1215,7 @@ const shard: CardShard = {
     _poolHellfire,
     _poolHellsThunder,
     _poolHemlockVial,
+    _poolHeraldOfAmity,
     _poolHerbalPoultice,
     _poolHitTheMotherLode,
     _poolHollowhengeOverlord,
