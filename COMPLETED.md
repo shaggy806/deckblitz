@@ -86,6 +86,34 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2: a static P/T bonus by each affected permanent's own count** (2026-11-01,
+  `6c6f62277`; 15 keys of `static:pt-per-amount`, among them `static:count-attached-to-affected`,
+  `static:shares-creature-type-count`, `static:pt-per-opponent` and `static:grant-pt-per-domain`) —
+  all on `grantPtPerCount`, its `relativeToAffected` and other amounts; 17 freed. Thran Power Suit,
+  Auramancer's Guise, Champion of the Flame, Sliver Legion, Coat of Arms, Alpha Status, Hedron
+  Matrix, Civic Saber, Knight of New Alara, Mycosynth Fiend, Gleam of Authority, Knowledge Is Power,
+  Kyler, Manaforce Mace, Dark Matter Manipulator, Disturbing Conversion.
+- **Need-keys Phase 2: keyword abilities and types for cards outside the battlefield** (2026-11-01,
+  `2c9e54fae`; 11 keys of `static:grant-to-cards-outside-battlefield`) — `grantsToGraveyard.keywords`
+  with the one-shot `grant-graveyard-keyword` (unearth, encore, embalm, harmonize, sneak, retrace),
+  `typesOutsideBattlefield` with `setsChosenCreatureType`, `grantsCyclingInHand`,
+  `grantsForetellInHand` and the `foretells` trigger; about 11 freed. Sedris, Solemn Doomguide, Wire
+  Surgeons, Graywater's Fixer, Cursecloth Wrappings, Songcrafter Mage, Ninja Teen, Deeproot
+  Historian, Six, Wrenn and Six, Rhet-Tomb Mystic, Tectonic Reformation, Homing Sliver, Dream
+  Devourer, Ashes of the Fallen, Arcane Adaptation, Conspiracy, Maskwood Nexus.
+- **Need-keys Phase 2: a player named as the owner of a target or trigger object** (2026-11-01,
+  `8b1cfce79`; `effect:owner-of-target-player-ref`, `effect:exile-graveyard-of-target-card-owner`,
+  `effect:trigger-object-owner-player-ref`) — `{ ownerOfTarget }` on `gain-life`, `lose-life`,
+  `damage`, `mill` and `exile-graveyard`, the `"trigger-owner"` scope, and `damage`'s
+  `who: "attached-owner"` with `from: "attached"`, as last known when both left at once (608.2h,
+  `c324ef374`); 3 freed. Path of Peace, Recoil, Geth, Nurgle's Conscription, Enslave, Warped
+  Devotion, Liability.
+- **Need-keys Phase 2: a cost keyed to a spell's target, in mana** (2026-11-01, `df2ba7a13`;
+  `cost:targeted-by-spells-mana-tax`, `cost:target-controller-graveyard-reduction`) —
+  `targetedBySpellsCost`'s `payGeneric` and `targeting`, also granted; `abilityCostModification`'s
+  `byOpponents` and `targeting`; offers leaving out too-dear targets (`targetTaxOffer`,
+  `xCost.targetTaxes`, `targetsWithinTaxes`); the filter `controllerGraveyardAtLeast`, priced at each
+  X's own targets; 6 freed. Boreal Elemental, Jubilant Skybonder, Kopala, Lullmage's Domination.
 - **Need-keys Phase 2: no land plays this turn, and casts barred by zone** (2026-11-01,
   `ccd573c28`; `effect:prohibit-land-plays`, `effect:prohibit-cast-by-zone`) — `prohibit`'s
   `lands: true` (305.2), a static `prohibits`' `from`/`notFrom` and a `player-effect`'s `cantCast`

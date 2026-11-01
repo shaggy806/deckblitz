@@ -4242,7 +4242,7 @@ export interface CardDefinition {
    * exile, its owner casting it there as an `"impulse"` cast does.
    */
   readonly castSelfFromGraveyard?: { readonly if?: StaticCondition; readonly fromExile?: true } & GraveyardCastCosts;
-  /** Foretell (rule 702.144 — ROADMAP Phase 6b) — during your turn you may pay
+  /** Foretell (rule 702.143 — ROADMAP Phase 6b) — during your turn you may pay
    * `{2}` to exile this card from your hand face-down; on a later turn you may
    * cast it from exile for `cost`. `null` for a card without foretell. */
   readonly foretell: { readonly cost: string } | null;

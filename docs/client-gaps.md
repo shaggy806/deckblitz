@@ -5,6 +5,13 @@ and the cleanups found along the way. `BACKLOG.md` keeps one line per item under
 title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLETED.md`. The animation follow-ups are in
 `docs/plans/legibility-of-play.md`, "Follow-ups".
 
+- **The X prompt and shown cost ignore a target's tax** (found 2026-11-01). `client/src/App.tsx`
+  starts the X prompt at `maxX` and doesn't read `xCost.targetTaxes` or `maxXUnreduced`, so a taxed
+  target at too high an X is refused rather than never offered (no wrong cast), and the spell's
+  shown cost leaves out a `targetedBySpellsCost` tax (Boreal Elemental, Kopala).
+- **A hand card's types show as printed under a static outside the battlefield** (found
+  2026-11-01). `view.ts` shows printed types for a card in hand under `typesOutsideBattlefield`
+  (Conspiracy, Arcane Adaptation), though the filters read the new types.
 - **A lands-only prohibition writes no log line** (found 2026-11-01). `prohibit`'s `lands: true`
   (Turf Wound, Pardic Miner) emits no `prohibition-imposed` event, since `client/src/format.ts`'s
   text for it names only spells and abilities and would read "can't  this turn" (the comment is at

@@ -6,6 +6,12 @@ rule number, the code that does it today and the cards it blocks. `BACKLOG.md` k
 per gap under the same bold title; when a gap closes, delete it here and move its
 `BACKLOG.md` line to `COMPLETED.md`.
 
+- **A target tax's offers are approximate in three corners** (found 2026-11-01). Each only
+  mis-offers, never mis-charges: `target-count.ts`'s sum over-counts a `targeting` tax with several
+  targets, so a driver may pass on a legal cast; a modal activated ability's offers in `game.ts`
+  aren't filtered for Kopala's tax; and a taxed ability that also has a two-slot
+  `targetCostReduction` can over-filter its targets.
+
 - **A static can't require attacking one player.** `AttackRequirementRule` (`state.ts`, read by
   `combat/eligibility.ts`'s `attackRequirementRulesOf` and `aimedRequirements`) is created only by a
   resolving `attack-requirement` effect. Public Enemy's "all creatures attack enchanted creature's

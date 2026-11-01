@@ -757,6 +757,12 @@ missing. Re-run `--greedy` for Phase 2's order.
   land plays this turn with casts barred by zone, and activations counted this turn (5 keys, 11
   freed, 9 proving cards). The run stopped there at the user's 25% weekly-usage limit: 20
   families, 10 agents.
+- **2026-11-01: the next overnight round** (`/build-family overnight`, three local agents, two
+  families each) — a cost keyed to a spell's target, in mana, and a reduction on the target's
+  controller's graveyard (2 keys, 6 freed, 4 proving cards); a player named as the owner of a target
+  or trigger object (3 keys, 3 freed, 7 proving cards); keyword abilities and types for cards
+  outside the battlefield (11 keys, about 11 freed, 18 proving cards); a static P/T bonus by each
+  affected permanent's own count and other amounts (15 keys, 17 freed, 16 proving cards).
 
 ## Rough size
 

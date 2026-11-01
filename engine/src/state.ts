@@ -1114,7 +1114,7 @@ export interface GameObject {
    * `isToken` — never reset. */
   notLegendary?: boolean;
   /** True while this card is foretold — exiled face-down for `{2}`, castable
-   * later for its foretell cost (rule 702.144 — ROADMAP Phase 6b).
+   * later for its foretell cost (rule 702.143 — ROADMAP Phase 6b).
    * `foretoldOnTurn` is the turn it was foretold (can't be cast the same
    * turn). Both cleared on any zone change. */
   foretold?: boolean;

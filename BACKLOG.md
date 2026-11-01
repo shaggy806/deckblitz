@@ -355,12 +355,25 @@ section keeps only what to do next.
   with casts barred by zone and activations counted this turn (`prohibit`'s `lands`, `prohibits`'
   `from`/`notFrom`, `timesEachTurn` as a count, `activated-this-turn`; 11 freed, 9 proving cards —
   Memory Vessel on the stale list needs an impulse lasting until your next turn begins, Rock Jockey
-  `condition:played-land-this-turn`). **1002 freed cards wait for the authoring sweep** (`cards:needs -- --stale`); the user
-  authors them in one sweep once the reasonable keys are built. Cloud sessions are building
-  `keyword:hexproof-from-colors`, the combat-restriction second group,
+  `condition:played-land-this-turn`), and (2026-11-01) a cost keyed to a spell's target and a player
+  named as a target's owner (`targetedBySpellsCost`'s `payGeneric` and `targeting`, `targetTaxes`,
+  `controllerGraveyardAtLeast`, `{ ownerOfTarget }`, `"trigger-owner"`, `"attached-owner"`; 9 freed,
+  11 proving cards — Audacious Swap on the stale list may still need its owner's exile-and-cast), and
+  keyword abilities and types for cards outside the battlefield and a static P/T bonus by each
+  affected permanent's own count (`grantsToGraveyard.keywords`, `grant-graveyard-keyword`,
+  `typesOutsideBattlefield`, `grantsCyclingInHand`, `grantsForetellInHand`, `grantPtPerCount`'s
+  `relativeToAffected`; 28 freed, 34 proving cards — on the stale list Ghost Ark needs a "becomes
+  crewed" trigger, Ethereal Valkyrie a foretell from exile, Araumi its own cost; left open:
+  `static:graveyard-cast-filter-amount`, `static:pt-per-turn-history`,
+  `static:pt-per-attachments-on-source`). **1038 freed cards wait for the authoring sweep**
+  (`cards:needs -- --stale`); the user authors them in one sweep once the reasonable keys are built.
+  Cloud sessions are building `keyword:hexproof-from-colors`, the combat-restriction second group,
   `effect:prevent-next-n-damage-to-you`, the cascade/sunburst grants to spells,
-  `cost:kicker-nonmana-cost` and `cost:alt-cost-discard-cards`. Next unclaimed: `static:grant-to-cards-outside-battlefield` (11), `static:pt-per-amount` (10),
-  `static:untap-step-limit` (10), `cost:target-controller-graveyard-reduction` (10).
+  `cost:kicker-nonmana-cost` and `cost:alt-cost-discard-cards`. Being built:
+  `effect:look-and-choose-second-pick`, `effect:choices-by-other-players`,
+  `static:untap-step-limit`, `static:can-only-attack-alone`, `effect:token-copy-options`,
+  `zone:impulse-permission-options`. Next unclaimed:
+  `replacement:prevent-damage-from-chosen-source` (10), `cost:attack-tax` (10).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next
@@ -429,6 +442,7 @@ One line each; the detail (rule numbers, code sites, the cards each blocks) is i
 **`docs/engine-gaps.md`**, under the same bold title. When a gap closes, delete its detail
 there and move this line to `COMPLETED.md`.
 
+- **A target tax's offers are approximate in three corners** — `target-count.ts`'s sum over a `targeting` tax, a modal activated ability's offers under Kopala's tax and a two-slot `targetCostReduction` beside a tax mis-offer, never mis-charge.
 - **An activation count restarts on a control change**: `activated-this-turn` keys on the object's timestamp, so Dragon Whelp taken mid-turn counts from zero; `timesEachTurn` doesn't (`docs/engine-gaps.md`).
 - **A text change misses a token's colours and a resolving spell's colour change**: a token made by changed text keeps its definition's colours (612.1, 612.4); `becomeColor` on a permanent spell is dropped as it resolves (400.7a); no all-objects text-change static (Swirl the Mists) (`docs/engine-gaps.md`).
 - **A spell's copy keeps none of its cost references**: rule 707.10 copies additional-cost decisions, but a copy of Fling, Volrath the Fallen or Induce Despair reads no sacrificed, discarded or revealed card (`docs/engine-gaps.md`).
@@ -577,6 +591,8 @@ One line each; the detail is in **`docs/client-gaps.md`**, under the same bold t
 animation follow-ups in `docs/plans/legibility-of-play.md`, "Follow-ups". When an item lands,
 delete its detail there and move this line to `COMPLETED.md`.
 
+- **The X prompt and shown cost ignore a target's tax** — `App.tsx` doesn't read `xCost.targetTaxes`/`maxXUnreduced`, so a taxed target at too high an X is refused rather than never offered, and the shown cost omits the tax.
+- **A hand card's types show as printed under a static outside the battlefield** — `view.ts` under `typesOutsideBattlefield` (Conspiracy, Arcane Adaptation); the filters read the new types.
 - **A lands-only prohibition writes no log line** — `format.ts`'s `prohibition-imposed` names only spells and abilities, so Turf Wound's "can't play lands this turn" emits none (found 2026-11-01).
 - **A human's target picks aren't narrowed by the new target relations** — `viewTargetFacts` lacks `shareTypes`, `toughnessOf`, `nameOf` and `attachedTo`, so a broken pair is refused only when sent (found 2026-10-31).
 - **Cultivate's split prompt doesn't say which find goes where** — "Choose up to 2 cards"; `search-library.instead` with `pick: "one"` would ask properly (found 2026-10-31).

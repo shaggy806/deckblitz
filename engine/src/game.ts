@@ -2504,7 +2504,7 @@ export class Game {
       if (def.suspend !== null && this.whyCannotSuspend(player, card) === null) {
         out.push({ kind: "suspend", card, cardName, n: def.suspend.n, cost: def.suspend.cost });
       }
-      // Foretell (rule 702.144) — a special action.
+      // Foretell (rule 702.143) — a special action.
       if (this.whyCannotForetell(player, card) === null) {
         out.push({ kind: "foretell", card, cardName });
       }
@@ -2518,7 +2518,7 @@ export class Game {
       }
     }
 
-    // Foretell (rule 702.144) — a card foretold on an earlier turn may be cast
+    // Foretell (rule 702.143) — a card foretold on an earlier turn may be cast
     // from exile for its foretell cost.
     for (const card of this.state.zones.shared.exile) {
       const object = this.state.objects[card];
@@ -11714,10 +11714,10 @@ export class Game {
     this.emit({ type: "spell-fizzled", object: cardId, reason });
   }
 
-  /** The fixed cost to foretell any card (rule 702.144c). */
+  /** The fixed cost to foretell any card (rule 702.143c). */
   private static readonly FORETELL_COST = "{2}";
 
-  /** Why `player` cannot foretell `cardId` from hand right now (rule 702.144 —
+  /** Why `player` cannot foretell `cardId` from hand right now (rule 702.143 —
    * ROADMAP Phase 6b). A special action on your own turn whenever you have
    * priority; pay `{2}`. */
   private whyCannotForetell(player: PlayerId, cardId: ObjectId): string | null {
@@ -19234,7 +19234,7 @@ export class Game {
    * zone, a processor's `putFromExile` cost: the ones `owner` owns when given
    * (rule 108.3), else every player's, matching `filter` read from
    * `chooser`'s side. A token there has ceased to exist (rule 111.7). A
-   * face-down card — exiled face down, or foretold (rules 406.3, 702.144a)
+   * face-down card — exiled face down, or foretold (rules 406.3, 702.143a)
    * — has no characteristics (406.3a), so it's one only when `filter` asks
    * nothing but its owner; those also come back grouped by what exiled them
    * face down and when, since one is chosen by its group and taken from it
