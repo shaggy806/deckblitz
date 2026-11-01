@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4094 already implemented / 906 missing (marks refreshed 2026-11-01)
+4096 already implemented / 904 missing (marks refreshed 2026-11-01)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -1327,7 +1327,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1334  Conqueror's Flail                        {2}              Artifact — Equipment
 [x]  1335  Sword of Fire and Ice                    {3}              Artifact — Equipment
 [ ]  1336  Baral, Chief of Compliance               {1}{U}           Legendary Creature — Human Wizard
-[ ]  1337  Secret Tunnel                            {0}              Land — Cave
+[x]  1337  Secret Tunnel                            {0}              Land — Cave
 [x]  1338  Jadar, Ghoulcaller of Nephalia           {1}{B}           Legendary Creature — Human Wizard
 [x]  1339  Shimmer Myr                              {3}              Artifact Creature — Myr
 [x]  1340  Rootborn Defenses                        {2}{W}           Instant
@@ -4568,7 +4568,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4575  Annul                                    {U}              Instant
 [ ]  4576  Ugin's Mastery                           {4}              Enchantment
 [x]  4577  Anti-Venom, Horrifying Healer            {W}{W}{W}{W}{W}  Legendary Creature — Symbiote Hero
-[ ]  4578  V.A.T.S.                                 {2}{B}{B}        Instant
+[x]  4578  V.A.T.S.                                 {2}{B}{B}        Instant
 [x]  4579  Nemesis of Reason                        {3}{U}{B}        Creature — Leviathan Horror
 [x]  4580  Flow State                               {1}{U}           Sorcery
 [ ]  4581  Glowing One                              {2}{G}           Creature — Zombie Mutant
