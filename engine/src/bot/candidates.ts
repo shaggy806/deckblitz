@@ -17,7 +17,7 @@ import { convokeProofFor, delvePicks, fillModes, fitModeSet } from "../actions.j
 import type { ObjectId, PlayerId } from "../primitives.js";
 import { modeChoicesBetween } from "../decisions/shared/subsets.js";
 import { targetCombos } from "../decisions/shared/target-combos.js";
-import { fitModalXGroup, fitTargetCount, maxXForTargets } from "../target-count.js";
+import { fitModalXGroup, fitTargetCount, maxXForTargets, targetsWithinTaxes } from "../target-count.js";
 import { anyNumberSlot, concatModeSpecs } from "../target.js";
 import type { TargetRef, TargetSpec } from "../target.js";
 
@@ -230,8 +230,8 @@ function fitTargets(
   options: readonly (readonly TargetRef[])[],
   specs: readonly TargetSpec[],
 ): (TargetRef | null)[] | null {
-  if (legal.targetCount === undefined) return [...chosen];
-  return fitTargetCount(chosen, options, specs, legal.targetCount);
+  const fitted = legal.targetCount === undefined ? [...chosen] : fitTargetCount(chosen, options, specs, legal.targetCount);
+  return fitted === null || !targetsWithinTaxes(legal, fitted) ? null : fitted;
 }
 
 function abilityCandidates(legal: ActivateAbilityLegal, player: PlayerId): Action[] {

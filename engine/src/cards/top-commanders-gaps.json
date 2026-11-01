@@ -877,7 +877,9 @@
   "effect:prohibit-cast-by-zone",
   "condition:ability-activated-count-this-turn",
   "cost:activate-no-more-than-n-times-each-turn",
-  "cost:activation-limit-by-count"
+  "cost:activation-limit-by-count",
+  "cost:target-controller-graveyard-reduction",
+  "cost:targeted-by-spells-mana-tax"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

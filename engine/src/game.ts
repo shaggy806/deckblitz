@@ -3065,35 +3065,51 @@ export class Game {
         }
         return;
       }
-      if (maxX !== undefined && (ability.targets.some(targetSpecReadsX) || groupReadsX(ability.targets))) {
+      // A target that costs more (Kopala): how much X is left depends on the
+      // target, so an X ability is offered once per X too.
+      const taxed = this.abilityTaxReaches(source, ability, player);
+      if (maxX !== undefined && (taxed || ability.targets.some(targetSpecReadsX) || groupReadsX(ability.targets))) {
         // "Target Saga card with mana value X": what may be targeted depends
         // on X, so the ability is offered once per X that has a legal set of
         // targets, each with that X fixed and that X's options. So is "X
         // target cards" (Shigeki's channel): the group is X big at each.
         for (let x = minX; x <= maxX; x += 1) {
           const specs = this.activatedSpecsAt(ability.targets, source, player, x);
-          const options = this.targetOptionsFor(specs, player, this.permanentSource(source, x));
+          const all = this.targetOptionsFor(specs, player, this.permanentSource(source, x));
+          const options = taxed
+            ? all.map((slot) =>
+                slot.filter(
+                  (ref) =>
+                    this.payMana(
+                      player,
+                      this.activatedAbilityManaCost(player, source, ability, x, [ref]).cost,
+                      undefined,
+                      ability.cost.tap ? source : undefined,
+                      { kind: "ability", source, ability },
+                    ) !== null,
+                ),
+              )
+            : all;
           if (targetsFillable(specs, options, [], 0, stateTargetFacts(this.state, this.registry))) {
             push(options, { minX: x, maxX: x }, specs);
           }
         }
         return;
       }
-      push(
-        // "Costs {N} less if it targets …": only the targets that earn it
-        // when the full price isn't affordable.
-        this.abilityTargetReductionOptions(
-          ability,
-          player,
-          source,
-          this.targetOptionsFor(ability.targets, player, this.permanentSource(source)),
-          () => this.whyCannotActivateAbility(player, source, index) === null,
-          (targets) => this.whyCannotActivateAbility(player, source, index, undefined, undefined, targets) === null,
-        ),
-        maxX !== undefined ? { maxX, ...(minX > 0 ? { minX } : {}) } : undefined,
-        // "Up to X target …, where X is …": the count it has as activated.
-        this.activatedSpecsAt(ability.targets, source, player, undefined),
+      // "Up to X target …, where X is …": the count it has as activated.
+      const activatedSpecs = this.activatedSpecsAt(ability.targets, source, player, undefined);
+      // "Costs {N} less if it targets …": only the targets that earn it
+      // when the full price isn't affordable.
+      const offeredTargets = this.abilityTargetReductionOptions(
+        ability,
+        player,
+        source,
+        this.targetOptionsFor(ability.targets, player, this.permanentSource(source)),
+        () => this.whyCannotActivateAbility(player, source, index) === null,
+        (targets) => this.whyCannotActivateAbility(player, source, index, undefined, undefined, targets) === null,
       );
+      if (taxed && !targetsFillable(activatedSpecs, offeredTargets, [], 0, stateTargetFacts(this.state, this.registry))) return;
+      push(offeredTargets, maxX !== undefined ? { maxX, ...(minX > 0 ? { minX } : {}) } : undefined, activatedSpecs);
     };
 
     const abilityGrantors = this.activatedGrantSources();
@@ -3343,6 +3359,8 @@ export class Game {
     modeSets?: readonly (readonly number[])[],
     /** A kicked variant: teamwork's "choose both instead" (`kickedModes`). */
     kicked = false,
+    /** The targets too dear to offer (`targetTaxOffer`). */
+    targetTax?: { readonly within: (ref: TargetRef) => boolean } | null,
   ): Pick<Extract<LegalAction, { kind: "cast-spell" }>, "castModal"> {
     if (def.castModal === null) return {};
     const mostInASet = modeSets === undefined ? undefined : Math.max(0, ...modeSets.map((set) => set.length));
@@ -3359,6 +3377,7 @@ export class Game {
             this.affordableTargetOptions(
               player,
               this.targetOptionsFor(m.targets ?? [], player, this.cardSource(def, card)),
+              targetTax,
             ),
           ),
           ...(m.spreeCost !== undefined ? { cost: m.spreeCost } : {}),
@@ -3817,10 +3836,15 @@ export class Game {
         // be targeted depends on X, so the spell is offered once per X that
         // is payable and has a legal set of targets, each with that X fixed
         // and that X's options (as for Rydia's ability). Mana alone pays.
-        const most =
-          variantCost !== null && parseManaCost(variantCost).x > 0
-            ? this.xPlanFor(player, card, def, variantCost, face ?? 0, 0).maxX
-            : 0;
+        let most = 0;
+        if (variantCost !== null && parseManaCost(variantCost).x > 0) {
+          this.targetCostReductionAssumed = def.targetCostReduction !== null;
+          try {
+            most = this.xPlanFor(player, card, def, variantCost, face ?? 0, 0).maxX;
+          } finally {
+            this.targetCostReductionAssumed = false;
+          }
+        }
         const xs: number[] = [];
         for (let x = 0; x <= most; x += 1) if (castsWith(0, undefined, x)) xs.push(x);
         if (xs.length === 0) continue;
@@ -3876,6 +3900,13 @@ export class Game {
       );
       if (spreeSets !== null && spreeSets.length === 0) continue;
       const specs = this.effectiveTargetSpecs(def, undefined, kicked, overload);
+      // "Spells your opponents cast that target this cost {2} more": the
+      // targets its caster can't afford aren't offered. Once per X when what
+      // may be targeted depends on X.
+      const targetTax =
+        perX !== null
+          ? null
+          : this.targetTaxOffer(def, player, card, undefined, () => castableAt(pricedAt).castable, kicked === true, overload);
       // "Costs {N} less if it targets …": offered with only the targets that
       // earn it when the full price isn't affordable.
       // "As though it had flash if it targets …": offered with only the
@@ -3888,7 +3919,7 @@ export class Game {
           def,
           player,
           card,
-          this.affordableTargetOptions(player, this.targetOptionsFor(specs, player, this.cardSource(def, card))),
+          this.affordableTargetOptions(player, this.targetOptionsFor(specs, player, this.cardSource(def, card)), targetTax),
           () => castableAt(pricedAt).castable,
         ),
         () => castableAt(pricedAt).castable,
@@ -4008,7 +4039,8 @@ export class Game {
         ...(via !== undefined ? { via } : {}),
         ...(graveyardGrant !== undefined ? { graveyardGrant } : {}),
         ...(face !== undefined ? { face } : {}),
-        ...this.castModalDescriptor(def, player, card, escalatedMaxModes(), spreeSets ?? undefined, kicked === true),
+        ...this.castModalDescriptor(def, player, card, escalatedMaxModes(), spreeSets ?? undefined, kicked === true, targetTax),
+        ...(targetTax !== null ? { targetTaxes: { taxes: targetTax.taxes, afford: targetTax.afford } } : {}),
         ...(sacrifices.length > 0 ? { sacrifice: { choices: sacrifices } } : {}),
         ...(kicked && def.kicker !== null
           ? {
@@ -4312,16 +4344,43 @@ export class Game {
           : {}),
       };
       if (perX === null) {
-        out.push(offer);
+        // What a taxed target leaves for X (`XCostOffer.targetTaxes`).
+        const xSymbols = targetTax === null || cost === null ? 0 : parseManaCost(cost).x;
+        out.push(
+          targetTax !== null && xSymbols > 0 && offer.xCost !== undefined
+            ? {
+                ...offer,
+                xCost: {
+                  ...offer.xCost,
+                  targetTaxes: targetTax.taxes.map(({ object, generic }) => ({ object, x: Math.ceil(generic / xSymbols) })),
+                },
+              }
+            : offer,
+        );
       } else {
+        const facts = stateTargetFacts(this.state, this.registry);
         for (const x of perX) {
+          // This X's price decides which of this X's targets can be offered:
+          // the ones a tax leaves affordable, and the ones that earn a
+          // reduction the spell can't do without.
+          const castable = (): boolean => castsWith(0, undefined, x);
+          const xTax = this.targetTaxOffer(def, player, card, x, castable, kicked === true, overload);
+          const xOptions = this.targetReductionOptions(
+            def,
+            player,
+            card,
+            this.affordableTargetOptions(player, this.targetOptionsFor(specs, player, this.cardSource(def, card, x)), xTax),
+            castable,
+          );
+          if (!targetsFillable(specs, xOptions, [], 0, facts)) continue;
           out.push({
             ...offer,
-            targetOptions: this.affordableTargetOptions(
-              player,
-              this.targetOptionsFor(specs, player, this.cardSource(def, card, x)),
-            ),
+            targetOptions: xOptions,
             xCost: { maxX: x, minX: x },
+            ...(def.targetCostReduction !== null
+              ? { reducingTargets: this.reducingTargetsNeeded(def, player, card, xOptions, castable) }
+              : {}),
+            ...(xTax !== null ? { targetTaxes: { taxes: xTax.taxes, afford: xTax.afford } } : {}),
           });
         }
       }
@@ -11438,32 +11497,178 @@ export class Game {
    * opponents. Nothing from a permanent that has lost its abilities.
    */
   private targetingLifeCost(caster: PlayerId, targets: readonly (TargetRef | null | undefined)[]): number {
-    let total = 0;
-    const seen = new Set<ObjectId>();
-    for (const target of targets) {
-      if (target?.kind !== "object" || seen.has(target.object)) continue;
-      seen.add(target.object);
-      const object = this.state.objects[target.object];
-      if (object === undefined || object.zone !== "battlefield" || object.controller === caster) continue;
-      if (hasLostAbilities(this.state, this.registry,object)) continue;
-      for (const ability of this.registry.get(rulesTextName(object)).static) {
-        if (ability.targetedBySpellsCost !== undefined && this.staticActive(object, ability)) {
-          total += ability.targetedBySpellsCost.payLife;
+    return this.targetingCost(caster, targets).life;
+  }
+
+  /** While a cast is being offered and its targets aren't chosen, the generic
+   * mana they are priced as adding (`castingCostOf`) — what `targetTaxOffer`
+   * asks about. */
+  private targetTaxProbe = 0;
+
+  /** Whether any `targetedBySpellsCost` could reach a spell at all, printed
+   * or to be granted — the gate in front of `targetingCost`, since nearly
+   * every board has none. `mana`: one of them costs mana. */
+  private targetedCostsInPlay(): { readonly any: boolean; readonly mana: boolean } {
+    return computedCacheMemo("targetedCostsInPlay", () => {
+      let any = false;
+      let mana = false;
+      const see = (ability: StaticAbility): void => {
+        const cost = ability.targetedBySpellsCost;
+        if (cost !== undefined) {
+          any = true;
+          if ((cost.payGeneric ?? 0) > 0) mana = true;
         }
+        for (const granted of ability.grantsStatic ?? []) see(granted);
+      };
+      for (const id of this.state.zones.shared.battlefield) {
+        const object = this.state.objects[id];
+        if (object === undefined) continue;
+        for (const ability of this.registry.get(rulesTextName(object)).static) see(ability);
+        for (const modifier of object.modifiers) for (const ability of modifier.grantsStatic ?? []) see(ability);
+      }
+      return { any, mana };
+    });
+  }
+
+  /** The static abilities `object` has that a targeting cost can be on: its
+   * own, unless it has lost them, and those it's granted. */
+  private targetedCostStatics(object: GameObject): readonly StaticAbility[] {
+    const own = hasLostAbilities(this.state, this.registry, object)
+      ? []
+      : this.registry.get(rulesTextName(object)).static;
+    const granted = grantedStatics(this.state, this.registry, object);
+    return granted.length === 0 ? own : [...own, ...granted];
+  }
+
+  /**
+   * What a spell `caster` casts pays for aiming at `targets`
+   * (`targetedBySpellsCost`, rule 601.2f): the life and the generic mana.
+   * "That target this creature" counts each permanent named once however many
+   * slots name it, bar a token stack, whose slots are tokens of their own up
+   * to its size. "That target a Merfolk you control" counts each static once
+   * however many targets match it. Only one of the permanent's controller's
+   * opponents pays, and only a *cast* spell — a copy isn't cast.
+   */
+  private targetingCost(
+    caster: PlayerId,
+    targets: readonly (TargetRef | null | undefined)[],
+  ): { life: number; generic: number } {
+    if (!this.targetedCostsInPlay().any) return { life: 0, generic: 0 };
+    let life = 0;
+    let generic = 0;
+    const named = new Map<ObjectId, number>();
+    for (const target of targets) {
+      if (target?.kind === "object") named.set(target.object, (named.get(target.object) ?? 0) + 1);
+    }
+    if (named.size === 0) return { life, generic };
+    const add = (cost: NonNullable<StaticAbility["targetedBySpellsCost"]>, times: number): void => {
+      life += (cost.payLife ?? 0) * times;
+      generic += (cost.payGeneric ?? 0) * times;
+    };
+    for (const [id, slots] of named) {
+      const object = this.state.objects[id];
+      if (object === undefined || object.zone !== "battlefield" || object.controller === caster) continue;
+      const times = Math.min(slots, Math.max(1, object.stackCount ?? 1));
+      for (const ability of this.targetedCostStatics(object)) {
+        const cost = ability.targetedBySpellsCost;
+        if (cost !== undefined && cost.targeting === undefined && this.staticActive(object, ability)) add(cost, times);
       }
     }
-    return total;
+    for (const sourceId of this.state.zones.shared.battlefield) {
+      const source = this.state.objects[sourceId];
+      if (source === undefined || source.controller === caster) continue;
+      for (const ability of this.targetedCostStatics(source)) {
+        const cost = ability.targetedBySpellsCost;
+        const filter = cost?.targeting;
+        if (cost === undefined || filter === undefined || !this.staticActive(source, ability)) continue;
+        const reached = [...named.keys()].some(
+          (id) =>
+            this.state.objects[id]?.zone === "battlefield" &&
+            matchesFilter(this.state, this.registry, id, filter, { you: source.controller, source: sourceId }),
+        );
+        if (reached) add(cost, 1);
+      }
+    }
+    return { life, generic };
+  }
+
+  /** The targets a spell can be offered at that raise its cost in mana, and
+   * how much the caster can afford: `null` when none does, as on nearly every
+   * board. `castable` asks whether the spell can be cast at the price the
+   * cast is being judged at, `targetTaxProbe` included. Priced twice for a
+   * `targetCostReduction`, whose targets earn a dearer tax than the rest. */
+  private targetTaxOffer(
+    def: CardDefinition,
+    player: PlayerId,
+    card: ObjectId,
+    x: number | undefined,
+    castable: () => boolean,
+    kicked = false,
+    overload = false,
+  ): {
+    readonly taxes: readonly { readonly object: ObjectId; readonly generic: number }[];
+    readonly afford: number;
+    readonly within: (ref: TargetRef) => boolean;
+  } | null {
+    if (!this.targetedCostsInPlay().mana) return null;
+    const source = this.cardSource(def, card, x);
+    const taxOf = new Map<ObjectId, number>();
+    const look = (specs: readonly TargetSpec[]): void => {
+      for (const ref of this.targetOptionsFor(specs, player, source).flat()) {
+        if (ref.kind !== "object" || taxOf.has(ref.object)) continue;
+        taxOf.set(ref.object, this.targetingCost(player, [ref]).generic);
+      }
+    };
+    look(this.effectiveTargetSpecs(def, undefined, kicked, overload));
+    for (const mode of def.castModal?.modes ?? []) look(mode.targets ?? []);
+    const taxes = [...taxOf].flatMap(([object, generic]) => (generic > 0 ? [{ object, generic }] : []));
+    if (taxes.length === 0) return null;
+    const cap = taxes.reduce((sum, tax) => sum + tax.generic, 0);
+    // The most generic mana that can be added at this price: -1 for none,
+    // when the spell can't be cast at this price at all.
+    const most = (reductionOff: boolean): number => {
+      const wasOff = this.targetCostReductionOff;
+      this.targetCostReductionOff = reductionOff;
+      try {
+        let best = -1;
+        for (let tax = 0; tax <= cap; tax += 1) {
+          this.targetTaxProbe = tax;
+          if (!castable()) break;
+          best = tax;
+        }
+        return best;
+      } finally {
+        this.targetTaxProbe = 0;
+        this.targetCostReductionOff = wasOff;
+      }
+    };
+    const reduces = def.targetCostReduction !== null;
+    const atFullPrice = most(reduces);
+    const whenEarned = reduces ? most(false) : atFullPrice;
+    return {
+      taxes,
+      afford: Math.max(atFullPrice, whenEarned),
+      within: (ref) => {
+        const tax = ref.kind === "object" ? (taxOf.get(ref.object) ?? 0) : 0;
+        if (tax === 0) return true;
+        return tax <= (reduces && this.targetsEarnReduction(def, player, card, [ref]) ? whenEarned : atFullPrice);
+      },
+    };
   }
 
   /** `options` less the targets whose life cost (`targetingLifeCost`)
    * `caster` can't pay — more than they have, or any while they can't lose
-   * life (rule 119.8): a spell can't be cast with them. */
+   * life (rule 119.8): a spell can't be cast with them — and those whose cost
+   * in mana is more than `tax` says they can afford. */
   private affordableTargetOptions(
     caster: PlayerId,
     options: readonly (readonly TargetRef[])[],
+    tax?: { readonly within: (ref: TargetRef) => boolean } | null,
   ): TargetRef[][] {
     return options.map((slot) =>
-      slot.filter((ref) => this.canPayLife(caster, this.targetingLifeCost(caster, [ref]))),
+      slot.filter(
+        (ref) => this.canPayLife(caster, this.targetingLifeCost(caster, [ref])) && (tax == null || tax.within(ref)),
+      ),
     );
   }
 
@@ -11667,16 +11872,23 @@ export class Game {
       reduction += this.costReductionAmount({ opponents: true }, player, cardId);
     }
     // "This spell costs {N} less to cast if it targets …" (Price of Fame).
+    // Among the targets it has at this X: a filter can read X (Lullmage's
+    // Domination's "with mana value X").
     if (def.targetCostReduction !== null) {
       const earned =
         targets !== undefined
           ? this.targetsEarnReduction(def, player, cardId, targets)
           : !this.targetCostReductionOff &&
-            this.targetOptionsFor(this.effectiveTargetSpecs(def, undefined), player, this.cardSource(def, cardId)).some((slot) =>
-              this.targetsEarnReduction(def, player, cardId, slot),
-            );
+            (this.targetCostReductionAssumed ||
+              this.targetOptionsFor(this.effectiveTargetSpecs(def, undefined), player, this.cardSource(def, cardId, xValue)).some((slot) =>
+                this.targetsEarnReduction(def, player, cardId, slot),
+              ));
       if (earned) reduction += def.targetCostReduction.reduceGeneric;
     }
+    // "Spells your opponents cast that target this creature cost {2} more"
+    // (Boreal Elemental): a cost increase, so before any reduction (rule
+    // 601.2f). Fixed once the targets are (rule 601.2c).
+    const targetTax = targets !== undefined ? this.targetingCost(player, targets).generic : this.targetTaxProbe;
     // "{2} less for each creature sacrificed this way" (Dargo): X is how
     // many, announced as it's cast (rule 601.2b).
     const perSacrificed = def.additionalCost?.sacrificeReduces;
@@ -11686,7 +11898,7 @@ export class Game {
     return reduceManaCost(
       {
         ...base,
-        generic: base.generic + tax + base.x * Math.max(0, xValue) + mods.increaseGeneric,
+        generic: base.generic + tax + base.x * Math.max(0, xValue) + mods.increaseGeneric + targetTax,
         x: 0,
       },
       reduction,
@@ -11697,6 +11909,12 @@ export class Game {
   /** While set, a spell offered for casting is priced without its
    * `targetCostReduction` — whether the full price is affordable. */
   private targetCostReductionOff = false;
+
+  /** While set, a spell offered for casting is priced with its
+   * `targetCostReduction`, whatever its legal targets: the ceiling on an X
+   * its target filter reads (Lullmage's Domination), where which targets are
+   * legal changes with X and so the price isn't monotonic in it. */
+  private targetCostReductionAssumed = false;
 
   /** A `targetCostReduction` spell's X offer without the reduction (see
    * `XCostOffer.maxXUnreduced`): the largest X at full price, and the
@@ -11781,7 +11999,10 @@ export class Game {
     /** Whether the activation is affordable with these targets chosen. */
     affordableWith: (targets: readonly TargetRef[]) => boolean,
   ): TargetRef[][] {
-    const all = options.map((slot) => [...slot]);
+    // A target that costs more (Kopala) is judged at the price it would have.
+    const all = this.abilityTaxReaches(sourceId, ability, player)
+      ? options.map((slot) => slot.filter((ref) => affordableWith([ref])))
+      : options.map((slot) => [...slot]);
     const reduction = ability.targetCostReduction;
     if (reduction === undefined) return this.targetingSourceOptions(ability, player, sourceId, all, fullPriceOk, affordableWith);
     const earning = all.map((slot) =>
@@ -11802,6 +12023,16 @@ export class Game {
     }
     if (full) return all;
     return all.map((slot, i) => (slots.includes(i) ? earning[i] : slot));
+  }
+
+  /** Whether an `abilityCostModification` keyed to the targets (`targeting`
+   * — Kopala) reaches this ability as `player` activates it: its price then
+   * depends on which targets are chosen. */
+  private abilityTaxReaches(sourceId: ObjectId, ability: ActivatedAbility, player: PlayerId): boolean {
+    return this.abilityCostModifiers().some(
+      ({ controller, source, mod }) =>
+        mod.targeting !== undefined && this.abilityCostModificationReaches(sourceId, ability, player, controller, source, mod),
+    );
   }
 
   /** The target options of a one-target ability that a `targetingSource`
@@ -17423,6 +17654,23 @@ export class Game {
     const perTarget = new Map<ObjectId, { increase: number; reduce: number; leavingOne: number }>();
     for (const { controller, source, mod } of this.abilityCostModifiers()) {
       if (!this.abilityCostModificationReaches(sourceId, ability, player, controller, source, mod)) continue;
+      // "…that target a Merfolk you control" (Kopala): fixed once the targets
+      // are (rule 601.2c), and until then the offer leaves out what's too
+      // dear (`abilityTargetReductionOptions`).
+      if (mod.targeting !== undefined) {
+        const filter = mod.targeting;
+        if (
+          targets?.some(
+            (t) =>
+              t?.kind === "object" &&
+              this.state.objects[t.object]?.zone === "battlefield" &&
+              matchesFilter(this.state, this.registry, t.object, filter, { you: controller, source }),
+          ) === true
+        ) {
+          increaseGeneric += mod.increaseGeneric ?? 0;
+        }
+        continue;
+      }
       if (mod.targetingSource === true) {
         const sum = perTarget.get(source) ?? { increase: 0, reduce: 0, leavingOne: 0 };
         sum.increase += mod.increaseGeneric ?? 0;
@@ -17493,6 +17741,7 @@ export class Game {
     }
     // "…you activate" (rule 602.2b: the activating player pays the cost).
     if (mod.byYou === true && player !== controller) return false;
+    if (mod.byOpponents === true && player === controller) return false;
     // Only one kind of ability: equip (702.6), exhaust (702.177), cycling
     // (702.29), loyalty (606).
     switch (mod.abilityKind) {

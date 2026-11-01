@@ -6157,6 +6157,75 @@ describe("land-play and cast-by-zone prohibitions", () => {
   });
 });
 
+describe("costs keyed to a spell's target", () => {
+  const face = (name: string, type_line: string, oracle_text: string) =>
+    parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });
+
+  it("reads 'spells your opponents cast that target this creature cost {N} more' and its life form", () => {
+    const boreal = face("Boreal Elemental", "Creature — Elemental", "Flying\nSpells your opponents cast that target this creature cost {2} more to cast.");
+    expect(boreal.complete).toBe(true);
+    expect(boreal.static[0].targetedBySpellsCost).toEqual({ payGeneric: 2 });
+    const charix = face("Charix, the Raging Isle", "Legendary Creature — Leviathan Crab", "Spells your opponents cast that target Charix cost {2} more to cast.");
+    expect(charix.static[0].targetedBySpellsCost).toEqual({ payGeneric: 2 });
+    const terror = face("Test Terror", "Creature — Dragon", "Spells your opponents cast that target this creature cost an additional 3 life to cast.");
+    expect(terror.static[0].targetedBySpellsCost).toEqual({ payLife: 3 });
+  });
+
+  it("reads 'that target a Merfolk you control' and 'one or more commanders you control', and the abilities' half", () => {
+    const kopala = face(
+      "Kopala, Warden of Waves",
+      "Legendary Creature — Merfolk Wizard",
+      "Spells your opponents cast that target a Merfolk you control cost {2} more to cast.\nAbilities your opponents activate that target a Merfolk you control cost {2} more to activate.",
+    );
+    expect(kopala.complete).toBe(true);
+    expect(kopala.static[0].targetedBySpellsCost).toEqual({ payGeneric: 2, targeting: { subtype: "Merfolk", controlledBy: "you" } });
+    expect(kopala.static[1].abilityCostModification).toEqual({
+      applies: {},
+      anyZone: true,
+      byOpponents: true,
+      targeting: { subtype: "Merfolk", controlledBy: "you" },
+      increaseGeneric: 2,
+    });
+    const esior = face(
+      "Esior, Wardwing Familiar",
+      "Legendary Creature — Bird",
+      "Spells your opponents cast that target one or more commanders you control cost {3} more to cast.",
+    );
+    expect(esior.static[0].targetedBySpellsCost).toEqual({ payGeneric: 3, targeting: { isCommander: true, controlledBy: "you" } });
+  });
+
+  it("reads the same line quoted, granted to what it names", () => {
+    const skybonder = face(
+      "Jubilant Skybonder",
+      "Creature — Human Wizard",
+      'Creatures you control with flying have "Spells your opponents cast that target this creature cost {2} more to cast."',
+    );
+    expect(skybonder.static[0].affects).toEqual({ scope: "filter", filter: { type: "creature", keyword: "flying", controlledBy: "you" } });
+    expect(skybonder.static[0].grantsStatic[0].targetedBySpellsCost).toEqual({ payGeneric: 2 });
+    const callaphe = face(
+      "Test Demigod",
+      "Enchantment Creature — Demigod",
+      'Creatures and enchantments you control have "Spells your opponents cast that target this permanent cost {1} more to cast."',
+    );
+    expect(callaphe.static[0].affects).toEqual({
+      scope: "filter",
+      filter: { typesAnyOf: ["creature", "enchantment"], controlledBy: "you" },
+    });
+    expect(callaphe.static[0].grantsStatic[0].targetedBySpellsCost).toEqual({ payGeneric: 1 });
+  });
+
+  it("reads a reduction on the target's controller's graveyard, and not one of some other count", () => {
+    const line = (count: string) =>
+      `This spell costs {3} less to cast if it targets a creature whose controller has ${count} in their graveyard.\nGain control of target creature with mana value X.`;
+    const domination = face("Lullmage's Domination", "Sorcery", line("eight or more cards"));
+    expect(domination.targetCostReduction).toEqual({
+      filter: { type: "creature", controllerGraveyardAtLeast: 8 },
+      reduceGeneric: 3,
+    });
+    expect(face("Test Sorcery", "Sorcery", line("eight or fewer cards")).targetCostReduction).toBeUndefined();
+  });
+});
+
 describe("activation counts this turn", () => {
   const face = (name: string, type_line: string, oracle_text: string) =>
     parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });

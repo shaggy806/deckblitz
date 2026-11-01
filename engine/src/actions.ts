@@ -1121,6 +1121,8 @@ export type LegalAction =
         /** See `XCostOffer.maxXUnreduced`. */
         readonly maxXUnreduced?: number;
         readonly reducingTargets?: readonly ObjectId[];
+        /** See `XCostOffer.targetTaxes`. */
+        readonly targetTaxes?: readonly { readonly object: ObjectId; readonly x: number }[];
       };
       /** Set when what the spell costs depends on how many targets it has — a
        * "for each target" cost modification reaches it (Hinata,
@@ -1141,6 +1143,16 @@ export type LegalAction =
        * must be among these, or the cast is refused (`fitCastTargets` keeps
        * one). An X spell says it in `xCost.reducingTargets` instead. */
       readonly reducingTargets?: readonly ObjectId[];
+      /** Set when some offered target makes the spell cost more
+       * (`targetedBySpellsCost`'s mana — Boreal Elemental): what each adds,
+       * and the most generic mana the caster can add at the X this was
+       * judged at. A target past that isn't offered at all; several that
+       * pass alone can still be too dear together, and that cast is refused
+       * (`targetsWithinTaxes`, which `fitCastTargets` reads). */
+      readonly targetTaxes?: {
+        readonly taxes: readonly { readonly object: ObjectId; readonly generic: number }[];
+        readonly afford: number;
+      };
       /** Present when this is an alternative-permission cast (not from the hand
        * for the printed cost — `"flashback"` / `"escape"` from the graveyard,
        * `"foretell"` from face-down exile). The driver must echo `via` back in

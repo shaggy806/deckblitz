@@ -668,6 +668,9 @@ export interface CardFilter {
    * a protection grant's "creatures **your opponents** control" fixed to the
    * players they were as it resolved (`grant-protection`). */
   readonly controllerIn?: readonly PlayerId[];
+  /** "A creature **whose controller has eight or more cards in their
+   * graveyard**" (Lullmage's Domination's `targetCostReduction`). */
+  readonly controllerGraveyardAtLeast?: number;
   /** A battle protected by the filtering player / anyone else (rule 310.8) —
    * Portent Tracker's "if **an opponent protects** it". Nothing that has no
    * protector matches either. */
@@ -1828,6 +1831,12 @@ export function matchesFilter(
   if (filter.controlledBy === "active-player" && controller !== activePlayerOf(state)) return false;
   if (filter.controlledBy === "chooser" && (ctx.chooser === undefined || controller !== ctx.chooser)) return false;
   if (filter.controllerIn !== undefined && !filter.controllerIn.includes(controller)) return false;
+  if (
+    filter.controllerGraveyardAtLeast !== undefined &&
+    (state.zones.perPlayer[controller]?.graveyard.length ?? 0) < filter.controllerGraveyardAtLeast
+  ) {
+    return false;
+  }
   if (filter.ownedBy === "you" && owner !== ctx.you) return false;
   if (filter.ownedBy === "opponent" && owner === ctx.you) return false;
   if (filter.protectedBy !== undefined) {

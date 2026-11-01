@@ -321,6 +321,27 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### A cost keyed to a spell's target: a mana tax, and a reduction on the target's controller — built 2026-11-01
+
+The need-keys Phase 2 family `cost:target-controller-graveyard-reduction`
+with `cost:targeted-by-spells-mana-tax`, features only. Terror of the Peaks'
+`targetedBySpellsCost` takes `payGeneric` beside `payLife` ("cost {2} more to
+cast"), can be granted (`grantsStatic`: one instance per permanent named), and
+with `targeting` reads the spell's targets against a filter ("a Merfolk you
+control", "one or more commanders you control"), once per spell. Kopala's other
+half is `abilityCostModification`'s `byOpponents` and `targeting`. The total
+is fixed once the targets are (rules 601.2c, 601.2f): `Game.castingCostOf`
+prices the chosen targets, an increase before any reduction. An offer prices
+each target through a probe (`targetTaxOffer`) and leaves out what its caster
+can't afford, says the rest in `LegalAction.targetTaxes` and
+`xCost.targetTaxes`, and the drivers fit to them (`targetsWithinTaxes`,
+`maxXForTargets`). The new filter clause `controllerGraveyardAtLeast` is
+Lullmage's Domination's target; a `targetCostReduction` whose filter reads X
+is now priced at each X's own targets. The scaffolder reads each line. Keys:
+cost:target-controller-graveyard-reduction, cost:targeted-by-spells-mana-tax.
+Proving cards: Boreal Elemental, Jubilant Skybonder, Kopala, Lullmage's
+Domination.
+
 ### Activations this turn: a limit of N, or of a count, and a condition on the count — built 2026-11-01
 
 The need-keys Phase 2 family `condition:ability-activated-count-this-turn`,

@@ -221,6 +221,33 @@ export interface XCostOffer {
    * (rule 601.2f), so more would be refused. */
   readonly maxXUnreduced?: number;
   readonly reducingTargets?: readonly ObjectId[];
+  /** Targets that make the spell cost more (`targetedBySpellsCost`' mana —
+   * Boreal Elemental's "{2} more"), and how far each one lowers the most X
+   * can be: `maxX` is what's left with none of them chosen. */
+  readonly targetTaxes?: readonly { readonly object: ObjectId; readonly x: number }[];
+}
+
+/** Whether `targets` leave the spell affordable by what the offer says they
+ * add (`LegalAction` cast-spell's `targetTaxes`): false when a driver should
+ * pick something else, since the cast would be refused. The sum is an upper
+ * bound — a "that target a Merfolk you control" counts once however many are
+ * chosen — so it never lets through what would be refused. */
+export function targetsWithinTaxes(
+  legal: {
+    readonly targetTaxes?: {
+      readonly taxes: readonly { readonly object: ObjectId; readonly generic: number }[];
+      readonly afford: number;
+    };
+  },
+  targets: readonly (TargetRef | null)[],
+): boolean {
+  const offer = legal.targetTaxes;
+  if (offer === undefined) return true;
+  let total = 0;
+  for (const tax of offer.taxes) {
+    if (targets.some((t) => t?.kind === "object" && t.object === tax.object)) total += tax.generic;
+  }
+  return total <= offer.afford;
 }
 
 /** The largest X payable with `targets` chosen, when the cost depends on how
@@ -231,10 +258,15 @@ export function maxXForTargets(
   targets: readonly (TargetRef | null)[],
 ): number {
   const byCount = xCost.maxXByTargetCount;
-  const max =
+  const untaxed =
     byCount === undefined || range === undefined
       ? xCost.maxX
       : (byCount[rangeTargetCount(targets, range) - range.min] ?? 0);
+  let max = untaxed;
+  for (const tax of xCost.targetTaxes ?? []) {
+    if (targets.some((t) => t?.kind === "object" && t.object === tax.object)) max -= tax.x;
+  }
+  max = Math.max(0, max);
   const reducing = xCost.reducingTargets;
   if (xCost.maxXUnreduced === undefined || reducing === undefined) return max;
   const earns = targets.some((t) => t?.kind === "object" && reducing.includes(t.object));

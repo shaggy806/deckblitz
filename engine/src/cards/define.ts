@@ -2634,8 +2634,26 @@ export interface StaticAbility {
    * and not payable with less life than it asks (119.4), so an opponent that
    * low can't target it with a spell at all. `affects` is ignored: it is
    * always the permanent carrying it.
+   *
+   * `payGeneric` is the same in mana — "cost {2} more to cast" (Boreal
+   * Elemental, Sphinx of New Prahv): a cost increase, added before any
+   * reduction (rule 601.2f), and a target its caster can't afford this way
+   * isn't offered. Carried by a grant as well as printed (`grantsStatic` —
+   * Callaphe, Jubilant Skybonder): one instance per permanent named, so a
+   * spell aiming at two such creatures pays for each and one aiming at the
+   * same creature twice pays once (Callaphe's rulings).
+   *
+   * `targeting` is "that target **a Merfolk you control**" (Kopala), "one or
+   * more commanders you control" (Esior): what the spell's targets are read
+   * against, from this static's controller's side, in place of the permanent
+   * carrying it. Once per spell however many of its targets match (their
+   * rulings).
    */
-  readonly targetedBySpellsCost?: { readonly payLife: number };
+  readonly targetedBySpellsCost?: {
+    readonly payLife?: number;
+    readonly payGeneric?: number;
+    readonly targeting?: CardFilter;
+  };
   /**
    * Untap during each **other** player's untap step, as well as your own:
    * `"self"` is Bender's Waterskin ("untap this artifact"), a `CardFilter` is
@@ -2942,6 +2960,15 @@ export interface StaticAbility {
      * and an activation affordable only through it is offered only with the
      * targets that earn it. */
     readonly targetingSource?: true;
+    /** "Abilities your opponents activate" (Kopala): only abilities a player
+     * other than this static's controller activates. */
+    readonly byOpponents?: true;
+    /** "…**that target a Merfolk you control**" (Kopala): only an activation
+     * with a target matching this, from this static's controller's side; once
+     * however many match (its ruling). Triggered abilities are never reached
+     * (rule 602: this is an activation's cost). With `increaseGeneric`, an
+     * offer leaves out a target its activator can't afford this way. */
+    readonly targeting?: CardFilter;
     /** A loyalty cost change with `abilityKind: "loyalty"`: "cost an
      * additional [+1] to activate" (Carth the Lion) is `increaseLoyalty: 1`.
      * Combined with the ability's own loyalty cost into one (rule 606.5): a

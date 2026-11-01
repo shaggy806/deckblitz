@@ -72,7 +72,7 @@ import type { TargetFacts, TargetRef, TargetSpec } from "./target.js";
 import { legalTargets, stateTargetFacts } from "./targeting.js";
 import { DUNGEONS } from "./cards/dungeons.js";
 import type { DungeonDefinition, DungeonRoom } from "./cards/dungeons.js";
-import { fitModalXGroup, fitTargetCount, maxXForTargets, minXForTargets } from "./target-count.js";
+import { fitModalXGroup, fitTargetCount, maxXForTargets, minXForTargets, targetsWithinTaxes } from "./target-count.js";
 import {
   auraPolarity,
   damageLands,
@@ -1471,10 +1471,12 @@ export function fitCastTargets(
   options: readonly (readonly TargetRef[])[],
   specs: readonly TargetSpec[],
 ): (TargetRef | null)[] | null {
-  const fitted = legal.targetCount === undefined ? [...chosen] : fitTargetCount(chosen, options, specs, legal.targetCount);
-  return fitted === null || legal.reducingTargets === undefined
-    ? fitted
-    : withReducingTarget(fitted, options, legal.reducingTargets);
+  const counted = legal.targetCount === undefined ? [...chosen] : fitTargetCount(chosen, options, specs, legal.targetCount);
+  const fitted =
+    counted === null || legal.reducingTargets === undefined
+      ? counted
+      : withReducingTarget(counted, options, legal.reducingTargets);
+  return fitted === null || !targetsWithinTaxes(legal, fitted) ? null : fitted;
 }
 
 /**

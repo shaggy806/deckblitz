@@ -10,7 +10,7 @@ import type { Action, CastSpellOffer } from "../../actions.js";
 import { convokeProofFor, delvePicks } from "../../actions.js";
 import type { ObjectId, PlayerId } from "../../primitives.js";
 import type { TargetRef, TargetSpec } from "../../target.js";
-import { fitTargetCount, maxXForTargets, minXForTargets } from "../../target-count.js";
+import { fitTargetCount, maxXForTargets, minXForTargets, targetsWithinTaxes } from "../../target-count.js";
 import type { RandomSource } from "../contract.js";
 
 export function randomCast(
@@ -48,7 +48,7 @@ export function randomCast(
   }
   const picked = rng.pickTargets(options, specs);
   const targets = legal.targetCount === undefined ? picked : fitTargetCount(picked, options, specs, legal.targetCount);
-  if (targets === null) return null;
+  if (targets === null || !targetsWithinTaxes(legal, targets)) return null;
   // Anywhere from the least X these targets allow (a count tied to X) to
   // the most that's payable.
   const minX = legal.xCost === undefined ? 0 : minXForTargets(legal.xCost, legal.targetCount, targets);

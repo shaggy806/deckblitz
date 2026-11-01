@@ -5984,6 +5984,22 @@ export function parseFace(face, ctx = {}) {
       out.additionalCost = { payLifePerTarget: Number(m[1]) };
       continue;
     }
+    // "This spell costs {3} less to cast if it targets a creature whose
+    // controller has eight or more cards in their graveyard" (Lullmage's
+    // Domination — `targetCostReduction`).
+    if (
+      castable &&
+      (m = /^~ costs \{(\d+)\} less to cast if it targets an? (.+) whose controller has (\w+) or more cards in their graveyard\.$/.exec(line))
+    ) {
+      const filter = parseTypePhrase(m[2]);
+      if (filter !== null && NUMBERS[m[3]] !== undefined) {
+        out.targetCostReduction = {
+          filter: { ...filter, controllerGraveyardAtLeast: NUMBERS[m[3]] },
+          reduceGeneric: Number(m[1]),
+        };
+        continue;
+      }
+    }
     // A processor's additional cost (Processor Assault): which card, chosen
     // as the cost is paid (`additionalCost.putFromExile`).
     if (castable && /^As an additional cost to cast ~, put a card an opponent owns from exile into that player's graveyard\.$/.test(line)) {
@@ -7669,6 +7685,44 @@ function parseGrantedStatic(quoted) {
 
 function parseStatic(line, text) {
   let m;
+  // A cost keyed to a spell's target (`targetedBySpellsCost`, rule 601.2f):
+  // "Spells your opponents cast that target this creature cost {2} more to
+  // cast" (Boreal Elemental), "… an additional 3 life" (Terror of the Peaks),
+  // "… a Merfolk you control", "… one or more commanders you control".
+  if ((m = /^Spells your opponents cast that target (?:~|this creature|this permanent) cost (?:\{(\d+)\} more|an additional (\d+) life) to cast\.$/.exec(line))) {
+    return {
+      affects: { scope: "self" },
+      targetedBySpellsCost: m[1] !== undefined ? { payGeneric: Number(m[1]) } : { payLife: Number(m[2]) },
+      text,
+    };
+  }
+  if ((m = /^Spells your opponents cast that target (?:an? |one or more )(.+?) you control cost \{(\d+)\} more to cast\.$/.exec(line))) {
+    const targeting = /^commanders?$/.test(m[1]) ? { isCommander: true } : parseTypePhrase(m[1]);
+    if (targeting !== null && Object.keys(targeting).length > 0) {
+      return {
+        affects: { scope: "self" },
+        targetedBySpellsCost: { payGeneric: Number(m[2]), targeting: { ...targeting, controlledBy: "you" } },
+        text,
+      };
+    }
+  }
+  // Its abilities' half (Kopala).
+  if ((m = /^Abilities your opponents activate that target an? (.+?) you control cost \{(\d+)\} more to activate\.$/.exec(line))) {
+    const targeting = parseTypePhrase(m[1]);
+    if (targeting !== null && Object.keys(targeting).length > 0) {
+      return {
+        affects: { scope: "self" },
+        abilityCostModification: {
+          applies: {},
+          anyZone: true,
+          byOpponents: true,
+          targeting: { ...targeting, controlledBy: "you" },
+          increaseGeneric: Number(m[2]),
+        },
+        text,
+      };
+    }
+  }
   // "… as long as [condition]." on a static the rest reads whole and that
   // has no condition of its own: celebration's "~ gets +1/+1 and has
   // trample as long as two or more nonland permanents entered the
@@ -8338,13 +8392,15 @@ function parseStatic(line, text) {
   // get +2/+2'" (Inspiring Leader), "All Sliver creatures have 'This creature
   // gets +1/+1 as long as you control a Swamp'" (Sedge Sliver). The quoted
   // line is read as a static of the object that has it.
-  if ((m = new RegExp(`^(Equipped creature|Enchanted creature|Commander creatures you own|All Sliver creatures|Creatures you control) (?:has|have) (?:${KW} and )?"([^"]+\\.)"$`).exec(line))) {
+  if ((m = new RegExp(`^(Equipped creature|Enchanted creature|Commander creatures you own|All Sliver creatures|Creatures you control|Creatures you control with flying|Creatures and enchantments you control) (?:has|have) (?:${KW} and )?"([^"]+\\.)"$`).exec(line))) {
     const affects = {
       "Equipped creature": { scope: "attached" },
       "Enchanted creature": { scope: "attached" },
       "Commander creatures you own": { scope: "filter", filter: { type: "creature", isCommander: true, ownedBy: "you" } },
       "All Sliver creatures": { scope: "filter", filter: { type: "creature", subtype: "Sliver" } },
       "Creatures you control": { scope: "creatures-you-control" },
+      "Creatures you control with flying": { scope: "filter", filter: { type: "creature", keyword: "flying", controlledBy: "you" } },
+      "Creatures and enchantments you control": { scope: "filter", filter: { typesAnyOf: ["creature", "enchantment"], controlledBy: "you" } },
     }[m[1]];
     const quoted = m[3];
     const granted = parseGrantedStatic(quoted);
