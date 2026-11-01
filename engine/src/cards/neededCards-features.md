@@ -411,6 +411,35 @@ prompt doesn't say which pick goes where), and the other keys of the family.
 Proving cards: Atraxa, Grand Unifier; Harper Recruiter; Agonizing Remorse;
 Psychotic Episode; Worldsoul's Rage.
 
+### What's attached to a target or a player — built 2026-11-01
+
+The need-keys Phase 2 family `condition:filter-attachments`' first group
+(and `filter:attached-to-target` beside it, the same code), features only, on
+the target-relations family's. `CardFilter.attachedToTarget: n` (an effect's
+filter, bound by `bindDynamicCompares` to `attachedToRef`, the slot's object
+or player as the effect applies; an illegal slot matches nothing — rule
+608.2b) — Hubris, Blastfire Bolt, Strip Bare, Eaten by Spiders, Street
+Sweeper, Portal of Sanctuary, Word of Undoing, Orzhov Charm, Essence
+Reliquary, Scarab of the Unseen; `CardFilter.attachedToPlayer: "you" |
+"opponent"` (an Aura on a player, rule 303.4 — Witchbane Orb); and the
+`other` slot relation `attachedToThan` ("up to one target Equipment attached
+to that creature" — Fiery Annihilation), narrowed through
+`TargetFacts.attachedTo`, refused when broken (601.2c) and judged again in
+`targetLegality`: no longer attached, or the creature illegal, the Equipment
+slot is illegal (the rulings). The scaffolder reads "(destroy|exile|return)
+target … and all Auras/Equipment attached to it/that creature" as one
+simultaneous instruction (the attachments first), "destroy/exile all
+Auras/Equipment/Auras and Equipment/Curses attached to that creature / target
+… / you", "exile up to one target Equipment attached to that creature", and
+Lava Coil's "If that creature would die this turn, exile it instead" past
+such a slot. Keys: condition:attached-to-target, filter:attached-to-player,
+filter:attached-to-target. Proving cards: Hubris, Blastfire Bolt, Witchbane
+Orb, Fiery Annihilation. Left for `author-freed` to narrow: Light of
+Judgment ("destroy up to one Equipment attached to that creature" — a choice
+as it resolves), Awaken the Sleeper ("if it's equipped, you may …"), Glamer
+Spinners and Simic Guildmage (moving an Aura to another permanent), Fulgent
+Distraction (unattach).
+
 ### Relations among the chosen targets: shared types, equal toughness, different names — built 2026-10-31
 
 The need-keys Phase 2 family `effect:target-spec-additions`'s first group,

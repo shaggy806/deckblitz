@@ -2545,7 +2545,7 @@ them has to match as well (historic is `anyOf: [{ type: "artifact" },
 { supertype: "legendary" }, { subtype: "Saga" }]`; Dogmeat's "enchanted or
 equipped" is two). `attachedTo: CardFilter` is what an Aura or Equipment is attached
 to — Conqueror's Flail's "as long as this Equipment is attached to a creature" is a
-`source` condition of `{ attachedTo: { type: "creature" } }`; `isSource: true` is the source itself, so "**for each** Equipment attached to it" counts `{ subtype: "Equipment", attachedTo: { isSource: true } }` (Goblin Gaveleer's `grantPtPerCount`, Kemba, Kha Regent's `countOf`) and "attached to equipped creature" `attachedTo: { hostOfSource: true }`. `equipmentAttached: NumCompare` counts the Equipment on it, whoever controls them — Balan's "as long as two or more Equipment are attached to it" is a `source` condition of `{ equipmentAttached: { op: "gte", n: 2 } }` (on the battlefield only). `equipped` / `enchanted` ask whether an Equipment / Aura is
+`source` condition of `{ attachedTo: { type: "creature" } }`. **`attachedToTarget: n`** (an effect's filter only) is "attached to **that creature** / to **target** …": the object or player in slot `n` as the effect applies — Hubris's "return target creature and all Auras attached to it" is a simultaneous `sequence` of `return-to-hand-all` over `{ subtype: "Aura", attachedToTarget: 0 }` then `return-to-hand` of slot 0 (the attachments' step first, while they're still attached), Blastfire Bolt's "destroy all Equipment attached to that creature" a `destroy-all` after the damage; the slot illegal as it resolves, it matches nothing (608.2b). **`attachedToPlayer: "you" | "opponent"`** is an Aura on a player (rule 303.4) — Witchbane Orb's "destroy all Curses attached to you". "Up to one target Equipment **attached to that creature**" (Fiery Annihilation) is a target relation instead: `attachedToThan: true` on an `other` slot (§7). `isSource: true` is the source itself, so "**for each** Equipment attached to it" counts `{ subtype: "Equipment", attachedTo: { isSource: true } }` (Goblin Gaveleer's `grantPtPerCount`, Kemba, Kha Regent's `countOf`) and "attached to equipped creature" `attachedTo: { hostOfSource: true }`. `equipmentAttached: NumCompare` counts the Equipment on it, whoever controls them — Balan's "as long as two or more Equipment are attached to it" is a `source` condition of `{ equipmentAttached: { op: "gte", n: 2 } }` (on the battlefield only). `equipped` / `enchanted` ask whether an Equipment / Aura is
 attached, whoever controls it (`enchantedBy: "you"` — an Aura *you* control); `modified` is rule 700.9 — a counter, an
 Equipment, or an Aura controlled by the permanent's *own* controller.
 `manaSpent` compares the mana spent to cast it (The Emperor of Palamecia's
@@ -2935,6 +2935,14 @@ control `{ kind: "creature" }`. The engine's choosers narrow by it
 picks freely and the engine refuses a broken pair); as it resolves, a pair
 no longer keeping it are both illegal, one already illegal read as it last
 existed (Secret Tunnel's and Unbury's rulings).
+
+**"…target Equipment attached to that creature"** is `attachedToThan: true`
+on an `other` slot: the slot is attached to the permanent of the slots
+`than` names — Fiery Annihilation is `["creature", { kind: "optional", of: {
+kind: "other", of: { kind: "permanent", filter: { subtype: "Equipment" } },
+than: { slot: 0 }, attachedToThan: true } }]`. As it resolves, the slot is
+illegal if it's no longer attached to it or if that slot is illegal (its
+rulings); the creature stays legal either way.
 
 **"…controlled by different players"** is `differentController: true` on an
 `other` slot with a slot relation: Run Away Together is `["creature", { kind:

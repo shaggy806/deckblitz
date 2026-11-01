@@ -5900,3 +5900,78 @@ describe("target relations among the chosen targets: shared types, equal toughne
     ).toBe(false);
   });
 });
+
+describe("what's attached to a target or a player", () => {
+  const face = (name: string, type_line: string, oracle_text: string) =>
+    parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });
+
+  it("reads 'target creature and all Auras / Equipment attached to it' as one instruction, the attachments first", () => {
+    const hubris = face("Hubris", "Instant", "Return target creature and all Auras attached to it to their owners' hands.");
+    expect(hubris.targets).toEqual(["creature"]);
+    expect(hubris.effect).toEqual({
+      kind: "sequence",
+      simultaneous: true,
+      effects: [
+        { kind: "return-to-hand-all", filter: { subtype: "Aura", attachedToTarget: 0 } },
+        { kind: "return-to-hand", target: 0 },
+      ],
+    });
+    const spiders = face("Eaten by Spiders", "Instant", "Destroy target creature with flying and all Equipment attached to that creature.");
+    expect(spiders.effect).toEqual({
+      kind: "sequence",
+      simultaneous: true,
+      effects: [
+        { kind: "destroy-all", filter: { subtype: "Equipment", attachedToTarget: 0 } },
+        { kind: "destroy", target: 0 },
+      ],
+    });
+  });
+
+  it("reads 'all Equipment attached to that creature / target creature / you'", () => {
+    const bolt = face(
+      "Blastfire Bolt",
+      "Instant",
+      "Blastfire Bolt deals 5 damage to target creature. Destroy all Equipment attached to that creature.",
+    );
+    expect(bolt.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "damage", amount: 5, target: 0 },
+        { kind: "destroy-all", filter: { subtype: "Equipment", attachedToTarget: 0 } },
+      ],
+    });
+    expect(parseSentence("Destroy all Auras and Equipment attached to target creature.", ctx())).toEqual({
+      kind: "destroy-all",
+      filter: { subtypes: ["Aura", "Equipment"], attachedToTarget: 0 },
+    });
+    expect(parseSentence("Destroy all Curses attached to you.", ctx())).toEqual({
+      kind: "destroy-all",
+      filter: { subtype: "Curse", attachedToPlayer: "you" },
+    });
+    // "That creature" with no one target before it is a person's call.
+    expect(parseSentence("Destroy all Equipment attached to that creature.", ctx())).toBeNull();
+  });
+
+  it("reads 'up to one target Equipment attached to that creature' as a slot attached to the one before", () => {
+    const fiery = face(
+      "Fiery Annihilation",
+      "Instant",
+      "Fiery Annihilation deals 5 damage to target creature. Exile up to one target Equipment attached to that creature. If that creature would die this turn, exile it instead.",
+    );
+    expect(fiery.targets).toEqual([
+      "creature",
+      {
+        kind: "optional",
+        of: { kind: "other", of: { kind: "permanent", filter: { subtype: "Equipment" } }, than: { slot: 0 }, attachedToThan: true },
+      },
+    ]);
+    expect(fiery.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "damage", amount: 5, target: 0 },
+        { kind: "exile", target: 1 },
+        { kind: "exile-if-dies-this-turn", target: 0 },
+      ],
+    });
+  });
+});

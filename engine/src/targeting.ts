@@ -1082,6 +1082,10 @@ export function stateTargetFacts(state: GameState, registry: CardRegistry): Targ
       const other = typesOf(b);
       return one !== undefined && other !== undefined && typesShare(one, other, share);
     },
+    attachedTo: (ref) => {
+      const object = ref.kind === "object" ? state.objects[ref.object] : undefined;
+      return object?.zone === "battlefield" ? (object.attachedTo ?? undefined) : undefined;
+    },
   };
 }
 

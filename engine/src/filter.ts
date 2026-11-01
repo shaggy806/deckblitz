@@ -753,6 +753,27 @@ export interface CardFilter {
    * is attached to a creature" is `{ attachedTo: { type: "creature" } }`
    * (a `source` condition). The host is matched as it is now. */
   readonly attachedTo?: CardFilter;
+  /**
+   * Is attached to the object or player in this target slot — "return target
+   * creature and all Auras attached to it" (Hubris), "destroy all Equipment
+   * attached to that creature" (Blastfire Bolt), "all Auras attached to
+   * target land" (Street Sweeper). An effect's filter only: bound to
+   * `attachedToRef` as the effect applies (`bindDynamicCompares`), to the
+   * target as it is then — a slot illegal as it resolves (rule 608.2b) or
+   * left empty matches nothing. Write the attachments' step before the one
+   * that moves the target in a simultaneous `sequence` ("… and all Auras
+   * attached to it"), so they're read while still attached. Unbound,
+   * anywhere nothing could answer it, it matches nothing.
+   */
+  readonly attachedToTarget?: number;
+  /** `attachedToTarget` bound — written by `bindDynamicCompares`, never
+   * authored; `null` matches nothing. Matched on the battlefield, against
+   * `GameObject.attachedTo` / `attachedToPlayer`. */
+  readonly attachedToRef?: TargetRef | null;
+  /** Is an Aura attached to a **player** (rule 303.4) — `"you"` the
+   * filter's `you` (Witchbane Orb's "all Curses attached to you"),
+   * `"opponent"` one of their opponents. */
+  readonly attachedToPlayer?: "you" | "opponent";
   /** Has an Aura attached to it that **you** control — Eriette of the
    * Charmed Apple's "each creature that's enchanted by an Aura you
    * control". */
@@ -1991,6 +2012,23 @@ export function matchesFilter(
       !matchesFilter(state, registry, host, filter.attachedTo, hostCtx)
     ) {
       return false;
+    }
+  }
+  // "Attached to it / that creature" (an effect's bound target slot) and
+  // "attached to you" (rule 303.4): on the battlefield, as it is now.
+  if (filter.attachedToTarget !== undefined && filter.attachedToRef === undefined) return false;
+  if (filter.attachedToRef !== undefined || filter.attachedToPlayer !== undefined) {
+    if (live === undefined || live.zone !== "battlefield") return false;
+    const to = filter.attachedToRef;
+    if (to === null) return false;
+    if (to !== undefined) {
+      const attached = to.kind === "object" ? live.attachedTo === to.object : live.attachedToPlayer === to.player;
+      if (!attached) return false;
+    }
+    if (filter.attachedToPlayer !== undefined) {
+      const player = live.attachedToPlayer;
+      if (player === undefined) return false;
+      if (filter.attachedToPlayer === "you" ? player !== ctx.you : player === ctx.you) return false;
     }
   }
   if (

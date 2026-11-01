@@ -11423,6 +11423,7 @@ function containsDynamicCompare(value: unknown): boolean {
       "sameNameAsTriggerObject" in value ||
       "sameNameAsThisWay" in value ||
       "sharesColorWithTarget" in value ||
+      "attachedToTarget" in value ||
       Object.entries(value).some(
         ([key, v]) => !NESTED_EFFECT_KEYS.has(key) && containsDynamicCompare(v),
       );
@@ -11599,6 +11600,13 @@ export function bindDynamicCompares(spec: EffectSpec, ctx: ResolutionContext): E
         target?.kind === "object"
           ? { ...rest, sharesColorWith: { object: target.object, colors: ctx.colorsOf(target) } }
           : walked;
+    }
+    // "All Auras attached to it", "all Equipment attached to that creature":
+    // the target slot's object or player; illegal or empty, nothing (rule
+    // 608.2b — `ctx.targets` holds a hole there).
+    if (typeof walked["attachedToTarget"] === "number") {
+      const { attachedToTarget: slot, ...rest } = walked;
+      walked = { ...rest, attachedToRef: ctx.targets[slot as number] ?? null };
     }
     return walked;
   };

@@ -325,6 +325,13 @@ export type TargetSpec =
        * already illegal is read as it last existed (Secret Tunnel's and
        * Unbury's rulings). Needs {@link TargetFacts}' `shareTypes`. */
       readonly shares?: TargetShare;
+      /** "…target Equipment **attached to that creature**" (Fiery
+       * Annihilation): the slot is attached to the permanent of every slot
+       * `than` names. Only with a slot relation. As it resolves, the slot is
+       * illegal if it's no longer attached to it, or if that slot is
+       * illegal (the rulings; rule 608.2b) — the host stays legal either
+       * way. Needs {@link TargetFacts}' `attachedTo`. */
+      readonly attachedToThan?: true;
     }
   /**
    * "Any number of target …" (rule 601.2c: none, one, or as many distinct
@@ -427,6 +434,25 @@ export interface TargetFacts {
    * negates the answer. Without it an `other` slot's `shares` narrows
    * nothing. */
   readonly shareTypes?: (a: TargetRef, b: TargetRef, share: TargetShare) => boolean;
+  /** The permanent it's attached to, if any — for an `other` slot's
+   * `attachedToThan`. Without it that narrows nothing. */
+  readonly attachedTo?: (ref: TargetRef) => ObjectId | undefined;
+}
+
+/** Must slot `spec` be attached to the slots its relation names
+ * (`attachedToThan`)? Looked for through an `optional` wrapper. */
+export function attachedToThanOf(spec: TargetSpec): boolean {
+  if (typeof spec !== "object") return false;
+  if (spec.kind === "other") return spec.attachedToThan === true;
+  if (spec.kind === "optional") return attachedToThanOf(spec.of);
+  return false;
+}
+
+/** Is target `ref` attached to target `host` — `undefined` when the facts
+ * can't tell. */
+export function attachedHolds(ref: TargetRef, host: TargetRef, facts: TargetFacts): boolean | undefined {
+  if (facts.attachedTo === undefined) return undefined;
+  return host.kind === "object" && facts.attachedTo(ref) === host.object;
 }
 
 /**
@@ -948,6 +974,10 @@ export function slotOptions(
   if (share !== undefined) {
     distinct = distinct.filter((ref) => earlier.every((e) => sharesHold(ref, e, share, facts) !== false));
   }
+  // "…attached to that creature": only what's attached to it.
+  if (attachedToThanOf(specs[i])) {
+    distinct = distinct.filter((ref) => earlier.every((e) => attachedHolds(ref, e, facts) !== false));
+  }
   // "…that player controls": only those whose player is every earlier one's.
   if (sameControllerOf(specs[i])) {
     const players = new Set(earlier.map((e) => playerOfTarget(e, facts)));
@@ -1051,6 +1081,10 @@ export function otherSlotConflict(
       if (sameTarget(mine, theirs)) return { slot: i, than: slot };
       // "…that share a card type" (Shifting Loyalties, Rivals' Duel).
       if (share !== undefined && facts !== undefined && sharesHold(mine, theirs, share, facts) === false) {
+        return { slot: i, than: slot };
+      }
+      // "…attached to that creature" (Fiery Annihilation).
+      if (facts !== undefined && attachedToThanOf(specs[i]) && attachedHolds(mine, theirs, facts) === false) {
         return { slot: i, than: slot };
       }
       // "…controlled by different players" (Protector of the Wastes).

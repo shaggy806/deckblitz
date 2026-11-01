@@ -403,6 +403,7 @@ import {
   differentControllerOf,
   sameControllerOf,
   sharesOf,
+  attachedToThanOf,
   divisionOf as spellDivision,
   groupBounds,
   groupPowerExceeded,
@@ -25477,6 +25478,25 @@ export class Game {
         if (shared === (share.none === true)) {
           drop(i);
           drop(slot);
+        }
+      }
+    });
+    // "…target Equipment attached to that creature" (rule 608.2b — Fiery
+    // Annihilation's rulings): no longer attached to it, or that creature
+    // illegal, and this one is illegal; the creature stays as it is.
+    specs.forEach((spec, i) => {
+      if (!attachedToThanOf(spec) || chosen[i] === undefined) return;
+      const than = otherThan(spec);
+      for (const slot of than === undefined ? [] : otherThanSlots(than)) {
+        const host = targets[slot];
+        const mine = targets[i];
+        const object = mine?.kind === "object" ? this.state.objects[mine.object] : undefined;
+        if (
+          host?.kind !== "object" ||
+          object?.zone !== "battlefield" ||
+          object.attachedTo !== host.object
+        ) {
+          drop(i);
         }
       }
     });

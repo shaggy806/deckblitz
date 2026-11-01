@@ -2559,6 +2559,56 @@ export function parseSentence(sentence, ctx) {
     const filter = namesakes(m[3], slot(m[2]));
     return filter === undefined ? null : { kind: m[1].toLowerCase() === "destroy" ? "destroy-all" : "exile-all", filter };
   }
+  // What's attached to a target (`attachedToTarget`): "return target
+  // creature and all Auras attached to it to their owners' hands" (Hubris)
+  // and "destroy target creature with flying and all Equipment attached to
+  // that creature" (Eaten by Spiders) — one instruction, the attachments
+  // read first; "destroy all Auras attached to target land" (Street
+  // Sweeper), "destroy all Equipment attached to that creature" after a
+  // sentence about the one target (Blastfire Bolt); "destroy all Curses
+  // attached to you" (Witchbane Orb, `attachedToPlayer`).
+  const ATTACHMENTS = "(Auras|Equipment|Auras and Equipment|Curses)";
+  const attachmentsOf = (what) =>
+    ({
+      auras: { subtype: "Aura" },
+      equipment: { subtype: "Equipment" },
+      "auras and equipment": { subtypes: ["Aura", "Equipment"] },
+      curses: { subtype: "Curse" },
+    })[what.toLowerCase()];
+  {
+    const both = re(`(destroy|exile|return) (${TARGET}) and all ${ATTACHMENTS} attached to (?:it|that creature)( to their owners' hands)?`).exec(s);
+    if (both !== null && (both[1].toLowerCase() === "return") === (both[4] !== undefined)) {
+      const target = slot(both[2]);
+      if (target === undefined) return null;
+      const act = both[1].toLowerCase();
+      const all = { destroy: "destroy-all", exile: "exile-all", return: "return-to-hand-all" }[act];
+      const one = { destroy: "destroy", exile: "exile", return: "return-to-hand" }[act];
+      return {
+        kind: "sequence",
+        simultaneous: true,
+        effects: [
+          { kind: all, filter: { ...attachmentsOf(both[3]), attachedToTarget: target } },
+          { kind: one, target },
+        ],
+      };
+    }
+    const all = re(`(destroy|exile) all ${ATTACHMENTS} attached to (you|that creature|${TARGET})`).exec(s);
+    if (all !== null) {
+      const kind = all[1].toLowerCase() === "destroy" ? "destroy-all" : "exile-all";
+      if (/^you$/i.test(all[3])) return { kind, filter: { ...attachmentsOf(all[2]), attachedToPlayer: "you" } };
+      const target = /^that creature$/i.test(all[3]) ? (ctx.targets.length === 1 ? 0 : undefined) : slot(all[3]);
+      return target === undefined ? null : { kind, filter: { ...attachmentsOf(all[2]), attachedToTarget: target } };
+    }
+    // "Exile up to one target Equipment attached to that creature" (Fiery
+    // Annihilation): a slot attached to the one before it (`attachedToThan`).
+    const one = re(`(destroy|exile) up to one target (Aura|Equipment) attached to that creature`).exec(s);
+    if (one !== null) {
+      if (ctx.targets.length !== 1) return null;
+      const of = { kind: "permanent", filter: { subtype: one[2] } };
+      const target = ctx.target({ kind: "optional", of: { kind: "other", of, than: { slot: 0 }, attachedToThan: true } });
+      return { kind: one[1].toLowerCase(), target };
+    }
+  }
   if ((m = re(`return (${TARGET}) ${NAMESAKES} to their owners' hands`).exec(s))) {
     const filter = namesakes(m[2], slot(m[1]));
     return filter === undefined ? null : { kind: "return-to-hand-all", filter };
@@ -4295,8 +4345,13 @@ export function parseEffect(text, outer) {
       continue;
     }
     // "If that creature would die this turn, exile it instead." after the one
-    // sentence that targeted (Lava Coil — rule 614.1a): that target.
-    if (/^if that (?:creature|planeswalker|creature or planeswalker) would die this turn, exile it instead\.$/i.test(sentence) && i > 0 && ctx.targets.length === 1 && parsed.length > 0) {
+    // sentence that targeted (Lava Coil — rule 614.1a): that target — still
+    // the first one past "… target Equipment attached to that creature"
+    // (Fiery Annihilation's `attachedToThan` slots).
+    const onlyAttachedAfter = ctx.targets
+      .slice(1)
+      .every((spec) => spec?.kind === "optional" && spec.of?.kind === "other" && spec.of.attachedToThan === true);
+    if (/^if that (?:creature|planeswalker|creature or planeswalker) would die this turn, exile it instead\.$/i.test(sentence) && i > 0 && ctx.targets.length >= 1 && onlyAttachedAfter && parsed.length > 0) {
       const instead = { kind: "exile-if-dies-this-turn", target: 0 };
       parsed.push(instead);
       hints.push({ sentence, effect: instead });
