@@ -351,14 +351,15 @@ section keeps only what to do next.
   needs one opponent's three), and text-changing effects with colours in addition (`change-text`,
   `PtModifier.textChange` through `rulesTextName`, `become-color.inAddition`, `addColors`; 13 freed,
   9 proving cards — on the stale list Swirl the Mists' static, Possessed Goat's once-ever
-  activation and Hunting Wilds' `animate-all` colours are still open).
-  **991 freed cards wait for the authoring sweep** (`cards:needs -- --stale`); the user
+  activation and Hunting Wilds' `animate-all` colours are still open), and no land plays this turn
+  with casts barred by zone and activations counted this turn (`prohibit`'s `lands`, `prohibits`'
+  `from`/`notFrom`, `timesEachTurn` as a count, `activated-this-turn`; 11 freed, 9 proving cards —
+  Memory Vessel on the stale list needs an impulse lasting until your next turn begins, Rock Jockey
+  `condition:played-land-this-turn`). **1002 freed cards wait for the authoring sweep** (`cards:needs -- --stale`); the user
   authors them in one sweep once the reasonable keys are built. Cloud sessions are building
   `keyword:hexproof-from-colors`, the combat-restriction second group,
   `effect:prevent-next-n-damage-to-you`, the cascade/sunburst grants to spells,
-  `cost:kicker-nonmana-cost` and `cost:alt-cost-discard-cards`. Local agents are building
-  `effect:cast-and-activate-restrictions` with `condition:ability-activated-count-this-turn`.
-  Next unclaimed: `static:grant-to-cards-outside-battlefield` (11), `static:pt-per-amount` (10),
+  `cost:kicker-nonmana-cost` and `cost:alt-cost-discard-cards`. Next unclaimed: `static:grant-to-cards-outside-battlefield` (11), `static:pt-per-amount` (10),
   `static:untap-step-limit` (10), `cost:target-controller-graveyard-reduction` (10).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
@@ -428,6 +429,7 @@ One line each; the detail (rule numbers, code sites, the cards each blocks) is i
 **`docs/engine-gaps.md`**, under the same bold title. When a gap closes, delete its detail
 there and move this line to `COMPLETED.md`.
 
+- **An activation count restarts on a control change**: `activated-this-turn` keys on the object's timestamp, so Dragon Whelp taken mid-turn counts from zero; `timesEachTurn` doesn't (`docs/engine-gaps.md`).
 - **A text change misses a token's colours and a resolving spell's colour change**: a token made by changed text keeps its definition's colours (612.1, 612.4); `becomeColor` on a permanent spell is dropped as it resolves (400.7a); no all-objects text-change static (Swirl the Mists) (`docs/engine-gaps.md`).
 - **A spell's copy keeps none of its cost references**: rule 707.10 copies additional-cost decisions, but a copy of Fling, Volrath the Fallen or Induce Despair reads no sacrificed, discarded or revealed card (`docs/engine-gaps.md`).
 - **Buyback always beats an "exile it instead" replacement**: rule 616.1 gives the owner the choice; and no turn-long graveyard-to-exile `player-effect` — Yawgmoth's Will (`docs/engine-gaps.md`).
@@ -575,6 +577,7 @@ One line each; the detail is in **`docs/client-gaps.md`**, under the same bold t
 animation follow-ups in `docs/plans/legibility-of-play.md`, "Follow-ups". When an item lands,
 delete its detail there and move this line to `COMPLETED.md`.
 
+- **A lands-only prohibition writes no log line** — `format.ts`'s `prohibition-imposed` names only spells and abilities, so Turf Wound's "can't play lands this turn" emits none (found 2026-11-01).
 - **A human's target picks aren't narrowed by the new target relations** — `viewTargetFacts` lacks `shareTypes`, `toughnessOf`, `nameOf` and `attachedTo`, so a broken pair is refused only when sent (found 2026-10-31).
 - **Cultivate's split prompt doesn't say which find goes where** — "Choose up to 2 cards"; `search-library.instead` with `pick: "one"` would ask properly (found 2026-10-31).
 - **A processor's move from exile reads as "takes"** — the log says "Alice takes Hill Giant" when a processor puts an opponent's exiled card into its owner's graveyard (found 2026-10-31).

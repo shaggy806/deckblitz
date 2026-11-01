@@ -753,7 +753,10 @@ missing. Re-run `--greedy` for Phase 2's order.
   15 freed, 8 proving cards); relations among the chosen targets and what's attached to a target
   or a player (6 keys, 20 freed, 9 proving cards); a graveyard card put there this turn by its
   origin and a discard's cause with "when you discard this card" (6 keys, 14 freed, 13 proving
-  cards); text-changing effects and colours in addition (4 keys, 13 freed, 9 proving cards).
+  cards); text-changing effects and colours in addition (4 keys, 13 freed, 9 proving cards); no
+  land plays this turn with casts barred by zone, and activations counted this turn (5 keys, 11
+  freed, 9 proving cards). The run stopped there at the user's 25% weekly-usage limit: 20
+  families, 10 agents.
 
 ## Rough size
 

@@ -86,6 +86,17 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2: no land plays this turn, and casts barred by zone** (2026-11-01,
+  `ccd573c28`; `effect:prohibit-land-plays`, `effect:prohibit-cast-by-zone`) — `prohibit`'s
+  `lands: true` (305.2), a static `prohibits`' `from`/`notFrom` and a `player-effect`'s `cantCast`
+  `from`, judged where the card is as the cast begins (601.2a, `prohibitionReachesZone`); 5 freed.
+  Turf Wound, Pardic Miner, Territorial Dispute, Drannith Magistrate, Experimental Frenzy.
+- **Need-keys Phase 2: activations counted this turn** (2026-11-01, `9ca6fbe26`;
+  `condition:ability-activated-count-this-turn`, `cost:activate-no-more-than-n-times-each-turn`,
+  `cost:activation-limit-by-count`) — `ActivatedAbility.timesEachTurn` as a number or a count
+  (602.5b; a limited mana ability left out of the auto-payer), the `activated-this-turn
+  { atLeast }` condition on `GameState.abilityActivationsThisTurn`; 6 freed. Pit Imp, Sewer Rats,
+  Withering Wisps, Dragon Whelp.
 - **Need-keys Phase 2: text-changing effects** (2026-10-31, `5931f8328`;
   `effect:text-change-color-or-land-words`) — the `change-text` effect (rule 612, layer 3): one
   colour word or basic land type for another, chosen on resolution through `choose-value`'s

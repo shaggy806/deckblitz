@@ -47,6 +47,15 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   other "that card" reference (an impulse permission on an exiled permanent, Hostage Taker's) sees
   the object's own card alone. Fix: a `choose-pile`-style order decision for the first, and read
   `leftWith` wherever an effect follows a permanent into its new zone for the second.
+- **An activation count restarts on a control change.** The `activated-this-turn { atLeast }`
+  condition (2026-11-01) counts in `GameState.abilityActivationsThisTurn` keyed by
+  `abilityTurnKey`, the object's timestamp. The agent that built it reports the engine gives a
+  permanent a new timestamp when it changes control — no rule asks for one (613.7d–e), and the
+  permanent is still the same object (400.7 is about zone changes) — so Dragon Whelp's "if
+  this ability has been activated four or more times this turn" counts from zero under its new
+  controller. `timesEachTurn`'s own limit is per object and survives it (tested). Fix: key on the
+  object id and its zone stint. Also: several existing comments cite "rule 602.5g", which the
+  2026-09-25 rules don't have (602.5b is the activation-limit rule).
 - **A text change misses a token's colours and a resolving spell's colour change.** The
   `change-text` effect (`text-change.ts`, 2026-10-31) changes every colour word and basic land type
   in an object's rules text, but a token created by the changed text ("create a white Soldier"
