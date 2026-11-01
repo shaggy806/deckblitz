@@ -321,6 +321,21 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### The owner, not the controller, of a target or trigger object — built 2026-11-01
+
+The need-keys Phase 2 group of `effect:owner-of-target-player-ref` in the
+family `effect:target-spec-additions`, features only. `{ ownerOfTarget }`
+reaches `gain-life`, `lose-life`, `damage`'s `who`, `mill` and
+`exile-graveyard`, beside `draw` and `discard`, which took it already. The new
+`"trigger-owner"` scope is "that player" of "returned to a player's hand" and
+"put into a player's graveyard" (rule 108.3: an owner never changes, and a
+token's is read as it last existed). `damage`'s `who: "attached-owner"` with
+`from: "attached"` is "enchanted creature deals 1 damage to its owner". The
+scaffolder reads each line and both triggers. Keys:
+effect:owner-of-target-player-ref, effect:exile-graveyard-of-target-card-owner,
+effect:trigger-object-owner-player-ref. Proving cards: Path of Peace, Recoil,
+Geth, Nurgle's Conscription, Enslave, Warped Devotion, Liability.
+
 ### A cost keyed to a spell's target: a mana tax, and a reduction on the target's controller — built 2026-11-01
 
 The need-keys Phase 2 family `cost:target-controller-graveyard-reduction`

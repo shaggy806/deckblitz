@@ -120,6 +120,10 @@ function playersIn(scope: PlayerScope, ctx: WorthContext): readonly PlayerId[] |
       const object = ctx.triggerObject !== undefined ? state.objects[ctx.triggerObject] : undefined;
       return object !== undefined ? [object.controller] : null;
     }
+    case "trigger-owner": {
+      const object = ctx.triggerObject !== undefined ? state.objects[ctx.triggerObject] : undefined;
+      return object !== undefined ? [object.owner] : null;
+    }
   }
 }
 
@@ -285,13 +289,14 @@ function untargetedWorth(effect: EffectSpec, ctx: WorthContext): number {
       return decking ? -100 : onPlayers(players, CARD * n, ctx);
     }
     case "gain-life":
-      if (effect.toControllerOfTarget !== undefined) return 0;
+      if (effect.toControllerOfTarget !== undefined || typeof effect.who === "object") return 0;
       return onPlayers(playersIn(effect.who ?? "you", ctx), LIFE_POINT * sizeOf(effect.amount, 2), ctx);
     case "lose-life":
-      if (effect.target !== undefined || effect.toControllerOfTarget !== undefined) return 0;
+      if (effect.target !== undefined || effect.toControllerOfTarget !== undefined || typeof effect.who === "object") return 0;
       return lifeLossTo(playersIn(effect.who ?? "you", ctx), sizeOf(effect.amount, 2), ctx);
     case "damage":
-      if (effect.target !== undefined || effect.who === undefined) return 0;
+      if (effect.target !== undefined || effect.who === undefined || typeof effect.who === "object") return 0;
+      if (effect.who === "attached-owner") return 0;
       return lifeLossTo(playersIn(effect.who, ctx), sizeOf(effect.amount, 2), ctx);
     case "discard":
       if (typeof effect.target !== "string") return 0;

@@ -26003,6 +26003,30 @@ export class Game {
         (p) => p === controller || withYou.includes(p),
       );
     };
+    // "Enchanted creature" as this resolves: what the source is attached
+    // to now — or, the source gone (or back as a new object), the one it
+    // was last attached to, if that's still here in the same stint
+    // (Starlit Mantle's and Wings of Hubris's rulings; rule 400.7).
+    const attachedHostNow = (): ObjectId | undefined => {
+      const object = this.state.objects[source];
+      const here =
+        opts.sourceLost !== true &&
+        object?.zone === "battlefield" &&
+        (refs.source === undefined || object.zoneChangeCount === refs.source);
+      let host: ObjectId | null | undefined;
+      let stint: number | undefined;
+      if (here) {
+        host = object.attachedTo;
+      } else {
+        const departed = departedSource();
+        host = departed?.attachedTo;
+        stint = departed?.attachedToStint;
+      }
+      if (host === null || host === undefined) return undefined;
+      const on = this.state.objects[host];
+      if (on?.zone !== "battlefield" || (stint !== undefined && on.zoneChangeCount !== stint)) return undefined;
+      return host;
+    };
     // Who deals an effect's damage: its own source, or — "it deals damage"
     // — the object that fired the trigger, or a target ("target creature
     // you control deals damage"), each as it last existed on the battlefield
@@ -26017,6 +26041,12 @@ export class Game {
         return granter === undefined
           ? undefined
           : { id: granter.object, lastKnown: this.lastKnownOfStint(granter.object, granter.zoneChangeCount) };
+      }
+      // What the source is attached to as this resolves: "enchanted creature
+      // deals 1 damage" (Enslave). With nothing attached to, nothing's dealt.
+      if (from === "attached") {
+        const host = attachedHostNow();
+        return host === undefined ? undefined : { id: host, lastKnown: undefined };
       }
       if (from !== undefined && from !== "trigger-object") {
         const ref = targets[from.target];
@@ -26310,30 +26340,7 @@ export class Game {
         const host = this.state.objects[source]?.attachedTo;
         return host !== null && host !== undefined && this.state.objects[host]?.zone === "battlefield" ? host : undefined;
       },
-      attachedHost: () => {
-        // "Enchanted creature" as this resolves: what the source is attached
-        // to now — or, the source gone (or back as a new object), the one it
-        // was last attached to, if that's still here in the same stint
-        // (Starlit Mantle's and Wings of Hubris's rulings; rule 400.7).
-        const object = this.state.objects[source];
-        const here =
-          opts.sourceLost !== true &&
-          object?.zone === "battlefield" &&
-          (refs.source === undefined || object.zoneChangeCount === refs.source);
-        let host: ObjectId | null | undefined;
-        let stint: number | undefined;
-        if (here) {
-          host = object.attachedTo;
-        } else {
-          const departed = departedSource();
-          host = departed?.attachedTo;
-          stint = departed?.attachedToStint;
-        }
-        if (host === null || host === undefined) return undefined;
-        const on = this.state.objects[host];
-        if (on?.zone !== "battlefield" || (stint !== undefined && on.zoneChangeCount !== stint)) return undefined;
-        return host;
-      },
+      attachedHost: attachedHostNow,
       chosenPermanent: () => {
         // "The chosen creature" (rule 607.2d): the source's choice — as the
         // source last existed, if it has left or come back as a new object
@@ -41564,6 +41571,12 @@ export class Game {
         triggerSpellController ??
         triggerLastKnown?.controller ??
         (triggerObject === undefined ? undefined : this.state.objects[triggerObject]?.controller);
+      return p === undefined || this.state.players[p]?.hasLost === true ? [] : [p];
+    }
+    // "That player" who owns the object: an owner never changes (rule 108.3).
+    if (who === "trigger-owner") {
+      const p =
+        triggerLastKnown?.owner ?? (triggerObject === undefined ? undefined : this.state.objects[triggerObject]?.owner);
       return p === undefined || this.state.players[p]?.hasLost === true ? [] : [p];
     }
     // "That player", in a trigger that fires on someone else's step.

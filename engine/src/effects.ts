@@ -1339,7 +1339,7 @@ export type GiftKind = "food" | "card" | "tapped-fish" | "extra-turn" | "treasur
  * — Ninja's Kunai's granted "Sacrifice Ninja's Kunai: Ninja's Kunai deals 3
  * damage to any target", dealt by the Equipment as it last existed.
  */
-export type DamageFrom = "trigger-object" | "granter" | { readonly target: number };
+export type DamageFrom = "trigger-object" | "granter" | "attached" | { readonly target: number };
 
 /**
  * A one-shot prevention or redirection effect over a set of damage events
@@ -1501,6 +1501,13 @@ export type PlayerScope =
    * (Nekusar, the Mindrazer), the player who cast the spell. Not a target,
    * so a hexproof player is still reached. */
   | "trigger-controller"
+  /** The owner of the object behind the trigger — "that player" where the
+   * event is about a card's own zones: "whenever a permanent is returned to a
+   * player's hand, **that player** discards a card" (Warped Devotion), "put
+   * into a player's graveyard from the battlefield" (Liability). Not its last
+   * controller; an owner never changes (rule 108.3), and a token's is known
+   * as it last existed. Not a target. */
+  | "trigger-owner"
   /** The player the triggering event names — "that player" / "defending
    * player": the player dealt damage (or the controller of the permanent
    * dealt damage), the defending player of an attack. See
@@ -1555,6 +1562,7 @@ export type EffectPlayerRef =
   | "you"
   | "active-player"
   | "trigger-controller"
+  | "trigger-owner"
   | "trigger-player"
   | "that-player"
   /** The player chosen for the effect's source — see the `"chosen-player"`
@@ -2070,8 +2078,12 @@ export type EffectSpec =
       /** Untargeted damage to a whole scope of players (Sabotender / Tannuk:
        * "deals 1 damage to each opponent" — needed-cards P16), instead of a
        * chosen target. A per-player `amount` (`lifeTotal: "each"`) is read
-       * for each of them. */
-      readonly who?: PlayerScope;
+       * for each of them. Or one player named through a target (`{
+       * ownerOfTarget: 0 }`), or `"attached-owner"`: the owner of what the
+       * source is attached to — Enslave's "enchanted creature deals 1 damage
+       * to **its owner**", with `from: "attached"`. Nobody, with nothing
+       * attached to. */
+      readonly who?: PlayerScope | ChosenPlayerRef | "attached-owner";
       /** With `who`: only the players of it this holds for, asked about each
        * (`"that-player"` names them) — Outpace Oblivion's "2 damage to each
        * player **who doesn't have max speed**" is `{ kind: "speed", who:
@@ -2262,8 +2274,10 @@ export type EffectSpec =
        * Revelation's "4 life for each creature you control with power 4 or
        * greater" is a `{ countOf, times: 4 }`. */
       readonly amount: EffectAmount;
-      /** Who gains — the effect's controller (default), or a scope. */
-      readonly who?: PlayerScope;
+      /** Who gains — the effect's controller (default), a scope, or one player
+       * named through a target: Path of Peace's "**its owner** gains 4 life"
+       * (`{ ownerOfTarget: 0 }`). */
+      readonly who?: PlayerScope | ChosenPlayerRef;
       /** The *controller* of whatever a target slot points at — Swords to
        * Plowshares' "**its controller** gains life equal to its power". Same
        * shape as `damage`'s field of the same name; see that one for the
@@ -2276,7 +2290,9 @@ export type EffectSpec =
        * the destroyed permanent's mana value. */
       readonly kind: "lose-life";
       readonly amount: EffectAmount;
-      readonly who?: PlayerScope;
+      /** A scope, or one player named through a target ("**its owner** loses
+       * 2 life": `{ ownerOfTarget: 0 }`). */
+      readonly who?: PlayerScope | ChosenPlayerRef;
       /** A single *targeted* player instead of a scope (Ob Nixilis, the
        * Fallen: "target player loses 3 life") — a target-slot index holding
        * a player. Mutually exclusive with `who`. needed-cards P19. */
@@ -2970,8 +2986,11 @@ export type EffectSpec =
        * graveyard at once (Rest in Peace). needed-cards P8. */
       readonly kind: "exile-graveyard";
       /** `"each-opponent"`: Soul-Guide Lantern's "exile each opponent's
-       * graveyard", one move like `"each-player"`. */
-      readonly target: number | "you" | "each-player" | "each-opponent";
+       * graveyard", one move like `"each-player"`. A {@link ChosenPlayerRef}
+       * is one player named through a target: Nurgle's Conscription's "exile
+       * **that player's** graveyard", the owner of the card it put onto the
+       * battlefield (`{ ownerOfTarget: 0 }`). */
+      readonly target: number | "you" | "each-player" | "each-opponent" | ChosenPlayerRef;
       /** Only the cards matching this — Living Death's "each player exiles
        * all **creature cards** from their graveyard". */
       readonly filter?: CardFilter;
@@ -3298,8 +3317,11 @@ export type EffectSpec =
        * cards"), a per-player amount read for each. A slot holding an
        * object is "**its controller** mills …" (Broken Ambitions' "that
        * spell's controller mills four cards"): whoever controls it, or did
-       * as it last existed (rule 608.2h). */
-      readonly target: number | PlayerScope;
+       * as it last existed (rule 608.2h). A {@link ChosenPlayerRef} is one
+       * player named through a target whichever it is — Geth's "**that
+       * player** mills X cards", the owner of the card it took
+       * (`{ ownerOfTarget: 0 }`), whoever controls it now. */
+      readonly target: number | PlayerScope | ChosenPlayerRef;
       readonly amount: EffectAmount;
     }
   | {
@@ -12241,6 +12263,21 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         }
         return;
       }
+      if (spec.who === "attached-owner" || typeof spec.who === "object") {
+        // One player named: the owner of what the source is attached to
+        // (Enslave), or of a target.
+        let player: PlayerId | undefined;
+        if (spec.who === "attached-owner") {
+          const host = ctx.attachedHost();
+          player = host === undefined ? undefined : ctx.ownerOf({ kind: "object", object: host });
+        } else {
+          player = effectPlayer(spec.who, ctx);
+        }
+        if (player !== undefined && ctx.playersInScope("each-player").includes(player)) {
+          ctx.dealDamage({ kind: "player", player }, amountValue(spec.amount, ctx, player), spec.from);
+        }
+        return;
+      }
       if (spec.who !== undefined) {
         const whoseIf = spec.whoseIf;
         // A player the condition leaves out is dealt 0, which is dealing
@@ -12365,6 +12402,11 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         if (who !== undefined) ctx.gainLife(who, gained);
         return;
       }
+      if (typeof spec.who === "object") {
+        const who = effectPlayer(spec.who, ctx);
+        if (who !== undefined) ctx.gainLife(who, amountValue(spec.amount, ctx, who));
+        return;
+      }
       if (spec.who === undefined || spec.who === "you") ctx.gainLife(ctx.controller, gained);
       else if (!readsEachPlayer(spec.amount)) ctx.changeLifeScoped(spec.who, gained);
       else {
@@ -12385,6 +12427,11 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         const of = ctx.targets[spec.toControllerOfTarget];
         const who = of === undefined ? undefined : ctx.controllerOf(of);
         if (who !== undefined) ctx.loseLife(who, life);
+        return;
+      }
+      if (typeof spec.who === "object") {
+        const who = effectPlayer(spec.who, ctx);
+        if (who !== undefined) ctx.loseLife(who, amountValue(spec.amount, ctx, who));
         return;
       }
       if (spec.who === undefined || spec.who === "you") ctx.loseLife(ctx.controller, life);
@@ -12795,10 +12842,15 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         });
         return;
       }
-      const target =
-        spec.target === "you"
-          ? ({ kind: "player", player: ctx.controller } as const)
-          : ctx.targets[spec.target];
+      let target: TargetRef | undefined;
+      if (spec.target === "you") {
+        target = { kind: "player", player: ctx.controller };
+      } else if (typeof spec.target === "object") {
+        const player = effectPlayer(spec.target, ctx);
+        target = player === undefined ? undefined : { kind: "player", player };
+      } else {
+        target = ctx.targets[spec.target];
+      }
       if (target !== undefined) ctx.exileGraveyard(target, spec.filter, spec.linked === true);
       return;
     }

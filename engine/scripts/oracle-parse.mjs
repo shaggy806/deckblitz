@@ -1136,11 +1136,12 @@ function libraryPlacementSlot(phrase, ctx) {
 }
 
 function graveyardTargetOf(phrase) {
-  const m = /^target (?:(.+?) )?card from (your|a|an opponent's) graveyard$/i.exec(phrase);
+  const m = /^target (?:(.+?) )?card( with mana value X)? from (your|a|an opponent's) graveyard$/i.exec(phrase);
   if (!m) return undefined;
-  const filter = m[1] === undefined ? {} : parseTypePhrase(m[1], { cards: true });
-  if (filter === null) return undefined;
-  const whose = m[2] === "your" ? "you" : m[2] === "a" ? "any" : "opponent";
+  const parsed = m[1] === undefined ? {} : parseTypePhrase(m[1], { cards: true });
+  if (parsed === null) return undefined;
+  const filter = m[2] === undefined ? parsed : { ...parsed, manaValue: { op: "eq", n: "x" } };
+  const whose = m[3] === "your" ? "you" : m[3] === "a" ? "any" : "opponent";
   return { kind: "card-in-graveyard", whose, ...(Object.keys(filter).length > 0 ? { filter } : {}) };
 }
 
@@ -1418,6 +1419,21 @@ export function parseTrigger(clause) {
   if (/^When(?:ever)? ~ enters or attacks$/.test(c)) return [...self("enters-battlefield"), ...self("attacks")];
   if (/^When(?:ever)? ~ dies$/.test(c)) return self("dies");
   if (/^When(?:ever)? ~ leaves the battlefield$/.test(c)) return self("leaves-battlefield");
+  // "Whenever a permanent is returned to a player's hand" (Warped Devotion),
+  // "Whenever a nontoken permanent is put into a player's graveyard from the
+  // battlefield" (Liability).
+  if ((m = /^Whenever an? (.+?) is (returned to a player's hand|put into a player's graveyard from the battlefield)$/.exec(c))) {
+    const filter = parseTypePhrase(m[1]);
+    if (filter === null) return null;
+    return [
+      {
+        on: "leaves-battlefield",
+        who: "any",
+        ...(Object.keys(filter).length > 0 ? { filter } : {}),
+        to: [m[2].startsWith("returned") ? "hand" : "graveyard"],
+      },
+    ];
+  }
   if (/^Whenever ~ attacks$/.test(c)) return self("attacks");
   if (/^Whenever ~ blocks$/.test(c)) return self("blocks");
   if (/^Whenever ~ becomes blocked$/.test(c)) return self("becomes-blocked");
@@ -2957,6 +2973,43 @@ export function parseSentence(sentence, ctx) {
     const i = slot(m[1]);
     return i === undefined ? null : { kind: "put-onto-battlefield", target: i, underYourControl: true };
   }
+  // "… from an opponent's graveyard onto the battlefield tapped under your
+  // control" (Geth), "…, then exile that player's graveyard" (Nurgle's
+  // Conscription): the card's owner, whoever controls it by then.
+  if ((m = /^put (target .+? card (?:with mana value X )?from an opponent's graveyard) onto the battlefield tapped under your control(, then exile that player's graveyard)?\.$/i.exec(s))) {
+    const i = slot(m[1]);
+    if (i === undefined) return null;
+    const put = { kind: "put-onto-battlefield", target: i, underYourControl: true, enterTapped: true };
+    return m[2] === undefined ? put : { kind: "sequence", effects: [put, { kind: "exile-graveyard", target: { ownerOfTarget: i } }] };
+  }
+  // "The owner of target nonland permanent shuffles it into their library,
+  // then draws two cards" (Oblation).
+  if ((m = new RegExp(`^the owner of (target .+?) shuffles it into their library, then draws ${N} cards?\\.$`, "i").exec(s))) {
+    const i = slot(m[1]);
+    return i === undefined
+      ? null
+      : {
+          kind: "sequence",
+          effects: [
+            { kind: "shuffle-into-library", target: i },
+            { kind: "draw", amount: amount(m[2]), who: { ownerOfTarget: i } },
+          ],
+        };
+  }
+  // "Enchanted creature deals 1 damage to its owner" (Enslave).
+  if ((m = re(`enchanted creature deals ${N} damage to its owner`).exec(s))) {
+    return { kind: "damage", amount: amount(m[1]), who: "attached-owner", from: "attached" };
+  }
+  // "That player" who owned what the trigger is about (Warped Devotion,
+  // Liability — `thatPlayerOf`).
+  if (ctx.thatPlayer === "trigger-owner") {
+    if ((m = re(`that player discards ${N} cards?`).exec(s))) {
+      return { kind: "discard", target: "trigger-owner", amount: amount(m[1]) };
+    }
+    if ((m = re(`that player loses ${N} life`).exec(s))) {
+      return { kind: "lose-life", amount: amount(m[1]), who: "trigger-owner" };
+    }
+  }
   if (re("sacrifice ~").test(s)) return { kind: "sacrifice-source" };
   if ((m = re(`(each player|each opponent|target player|target opponent) sacrifices ${N} (.+?)(?: of their choice)?`).exec(s))) {
     const count = amount(m[2]);
@@ -4471,6 +4524,37 @@ export function parseEffect(text, outer) {
       parsed.push(damage);
       hints.push({ sentence, effect: damage });
       continue;
+    }
+    // "Its owner gains 4 life" (Path of Peace), and "then that player discards
+    // a card" / "mills X cards" after what moved the one target: its owner,
+    // whose hand or graveyard that was (Recoil, Geth).
+    const ownerLifeM = /^its owner (gains|loses) (\w+) life\.$/i.exec(sentence);
+    if (ownerLifeM !== null && ctx.targets.length === 1 && parsed.length > 0 && typeof numberOf(ownerLifeM[2]) === "number") {
+      const life = {
+        kind: ownerLifeM[1].toLowerCase() === "gains" ? "gain-life" : "lose-life",
+        amount: numberOf(ownerLifeM[2]),
+        who: { ownerOfTarget: 0 },
+      };
+      parsed.push(life);
+      hints.push({ sentence, effect: life });
+      continue;
+    }
+    const ownerThenM = /^then that player (discards|mills) (a|an|one|two|three|x) cards?\.$/i.exec(sentence);
+    if (ownerThenM !== null && ctx.targets.length === 1) {
+      const last = parsed.at(-1);
+      const discards = ownerThenM[1].toLowerCase() === "discards";
+      const follows = discards
+        ? last?.kind === "return-to-hand" && last.target === 0 && last.from === undefined
+        : last?.kind === "put-onto-battlefield" && last.target === 0 && ctx.targets[0]?.kind === "card-in-graveyard";
+      const n = ownerThenM[2].toLowerCase() === "x" ? "x" : numberOf(ownerThenM[2]);
+      if (follows && (n === "x" || typeof n === "number")) {
+        const effect = discards
+          ? { kind: "discard", target: { ownerOfTarget: 0 }, amount: n }
+          : { kind: "mill", target: { ownerOfTarget: 0 }, amount: n };
+        parsed.push(effect);
+        hints.push({ sentence, effect });
+        continue;
+      }
     }
     const lossM = /^its controller loses (\w+) life\.$/i.exec(sentence);
     if (lossM !== null && ctx.targets.length === 1 && parsed.length > 0 && typeof numberOf(lossM[1]) === "number") {
@@ -7160,6 +7244,12 @@ function playerStateIf(clause, triggers) {
  */
 function thatPlayerOf(triggers) {
   if (triggers.every((t) => t.on === "step-begins" && t.who === "any")) return "active-player";
+  // "Whenever a permanent is returned to a player's hand, that player …"
+  // (Warped Devotion), "put into a player's graveyard" (Liability): whose hand
+  // or graveyard it is, its owner's.
+  if (triggers.every((t) => t.on === "leaves-battlefield" && t.who === "any" && t.to?.length === 1 && t.filter?.ownedBy === undefined)) {
+    return "trigger-owner";
+  }
   if (triggers.every((t) => t.on === "attacks")) return "trigger-player";
   // "At the beginning of each opponent's upkeep, … that player's library"
   // (Thieving Amalgam); "deal combat damage to a player, … that player's

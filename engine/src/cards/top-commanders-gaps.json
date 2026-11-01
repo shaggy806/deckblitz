@@ -879,7 +879,10 @@
   "cost:activate-no-more-than-n-times-each-turn",
   "cost:activation-limit-by-count",
   "cost:target-controller-graveyard-reduction",
-  "cost:targeted-by-spells-mana-tax"
+  "cost:targeted-by-spells-mana-tax",
+  "effect:exile-graveyard-of-target-card-owner",
+  "effect:owner-of-target-player-ref",
+  "effect:trigger-object-owner-player-ref"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

@@ -6157,6 +6157,75 @@ describe("land-play and cast-by-zone prohibitions", () => {
   });
 });
 
+describe("a player named as the owner of a target or trigger object", () => {
+  const face = (name: string, type_line: string, oracle_text: string) =>
+    parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });
+
+  it("reads 'its owner gains N life' and 'then that player discards' after the target's moved", () => {
+    const path = face("Path of Peace", "Sorcery", "Destroy target creature. Its owner gains 4 life.");
+    expect(path.complete).toBe(true);
+    expect(path.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "destroy", target: 0 },
+        { kind: "gain-life", amount: 4, who: { ownerOfTarget: 0 } },
+      ],
+    });
+    const recoil = face("Recoil", "Instant", "Return target permanent to its owner's hand. Then that player discards a card.");
+    expect(recoil.complete).toBe(true);
+    expect(recoil.effect.effects[1]).toEqual({ kind: "discard", target: { ownerOfTarget: 0 }, amount: 1 });
+  });
+
+  it("doesn't read 'that player' after a move that names no owner", () => {
+    const card = face("Test Sorcery", "Sorcery", "Destroy target creature. Then that player discards a card.");
+    expect(card.complete).toBe(false);
+  });
+
+  it("reads Geth's mill and Nurgle's Conscription's graveyard as the card's owner", () => {
+    const geth = face(
+      "Geth, Lord of the Vault",
+      "Legendary Creature — Phyrexian Zombie",
+      "{X}{B}: Put target artifact or creature card with mana value X from an opponent's graveyard onto the battlefield tapped under your control. Then that player mills X cards.",
+    );
+    expect(geth.activated[0].effect.effects[1]).toEqual({ kind: "mill", target: { ownerOfTarget: 0 }, amount: "x" });
+    expect(geth.activated[0].targets[0].filter.manaValue).toEqual({ op: "eq", n: "x" });
+    const nurgle = face(
+      "Nurgle's Conscription",
+      "Instant",
+      "Put target creature card from an opponent's graveyard onto the battlefield tapped under your control, then exile that player's graveyard.",
+    );
+    expect(nurgle.complete).toBe(true);
+    expect(nurgle.effect.effects[1]).toEqual({ kind: "exile-graveyard", target: { ownerOfTarget: 0 } });
+  });
+
+  it("reads 'enchanted creature deals N damage to its owner' and Oblation's shuffle", () => {
+    const enslave = face(
+      "Test Aura",
+      "Enchantment — Aura",
+      "Enchant creature\nAt the beginning of your upkeep, enchanted creature deals 1 damage to its owner.",
+    );
+    expect(enslave.triggered[0].effect).toEqual({ kind: "damage", amount: 1, who: "attached-owner", from: "attached" });
+    const oblation = face("Oblation", "Instant", "The owner of target nonland permanent shuffles it into their library, then draws two cards.");
+    expect(oblation.complete).toBe(true);
+    expect(oblation.effect.effects[1]).toEqual({ kind: "draw", amount: 2, who: { ownerOfTarget: 0 } });
+  });
+
+  it("reads the triggers 'returned to a player's hand' and 'into a player's graveyard', with that player their owner", () => {
+    const devotion = face("Warped Devotion", "Enchantment", "Whenever a permanent is returned to a player's hand, that player discards a card.");
+    expect(devotion.complete).toBe(true);
+    expect(devotion.triggered[0].trigger).toEqual({ on: "leaves-battlefield", who: "any", to: ["hand"] });
+    expect(devotion.triggered[0].effect).toEqual({ kind: "discard", target: "trigger-owner", amount: 1 });
+    const liability = face(
+      "Liability",
+      "Enchantment",
+      "Whenever a nontoken permanent is put into a player's graveyard from the battlefield, that player loses 1 life.",
+    );
+    expect(liability.complete).toBe(true);
+    expect(liability.triggered[0].trigger).toEqual({ on: "leaves-battlefield", who: "any", filter: { token: false }, to: ["graveyard"] });
+    expect(liability.triggered[0].effect).toEqual({ kind: "lose-life", amount: 1, who: "trigger-owner" });
+  });
+});
+
 describe("costs keyed to a spell's target", () => {
   const face = (name: string, type_line: string, oracle_text: string) =>
     parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });

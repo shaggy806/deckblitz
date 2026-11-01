@@ -4059,6 +4059,14 @@ their declarations to it (`withinAttackTax`), and the client shows the running c
   controlledBy: "you" }`), "one or more commanders you control" (Esior:
   `{ isCommander: true, controlledBy: "you" }`) — once per spell however many
   match. Abilities have their own: `abilityCostModification`'s `targeting`.
+- A player named as an **owner**: `{ ownerOfTarget: n }` is "its owner" on
+  `gain-life`/`lose-life`/`damage`'s `who`, `draw`'s `who`, `discard`/`mill`'s
+  `target` and `exile-graveyard`'s `target` (Path of Peace, Recoil, Geth,
+  Nurgle's Conscription) — never the controller, so it survives a change of
+  control and a zone change. The `"trigger-owner"` scope is "that player" of a
+  `leaves-battlefield` trigger whose `to` is a player's hand or graveyard
+  (Warped Devotion, Liability). `damage`'s `who: "attached-owner"` with `from:
+  "attached"` is "enchanted creature deals 1 damage to its owner" (Enslave).
 - `untapsDuringOthersUntap: "self" | CardFilter` — untap during each **other**
   player's untap step too: `"self"` is Bender's Waterskin, a filter is every
   permanent you control matching it (Seedborn Muse `{}`, Unwinding Clock
