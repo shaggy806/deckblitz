@@ -18,6 +18,7 @@ import type {
   CopyExceptions,
   EffectAmount,
   EffectSpec,
+  GraveyardKeywordGrant,
   ModeOption,
   PlayerScope,
   SpellResolver,
@@ -1651,6 +1652,10 @@ export interface StaticAbility {
    * nothing while no type is chosen.
    */
   readonly addsChosenCreatureType?: true;
+  /** `addsChosenCreatureType` with no "in addition": Conspiracy's "creatures
+   * you control are the chosen type" — every other creature type goes (rule
+   * 205.1a), and their other subtypes stay. */
+  readonly setsChosenCreatureType?: true;
   /**
    * "Your devotion to each color and each combination of colors is
    * increased by one" (Altar of the Pantheon): this much more to every
@@ -2259,6 +2264,47 @@ export interface StaticAbility {
     /** Dredge N (rule 702.52) — The Necrobloom's "land cards in your
      * graveyard have dredge 2". A card with dredge of its own uses its own. */
     readonly dredge?: number;
+    /**
+     * Any other keyword ability, each with its cost (see
+     * {@link GraveyardKeywordGrant}): "each artifact card in your graveyard
+     * has unearth {1}{B}{R}" (Mishra, Tamer of Mak Fawa), "… has encore. Its
+     * encore cost is equal to its mana cost" (Wire Surgeons), "… has encore
+     * {X}, where X is its mana value" (Graywater's Fixer, `cost:
+     * "mana-value"`), "Merfolk and Druid cards in your graveyard have
+     * retrace" (Deeproot Historian). The ability goes with this permanent; a
+     * spell already cast or an ability already activated with it carries on.
+     */
+    readonly keywords?: readonly GraveyardKeywordGrant[];
+  };
+  /**
+   * "You may cast creature spells from your graveyard using their sneak
+   * abilities" (Ninja Teen): this permanent's controller may cast the
+   * matching cards in their graveyard with sneak (rule 702.190a) — a sneak of
+   * their own or one `grantsToGraveyard` gives them — in their declare
+   * blockers step, as from their hand.
+   */
+  readonly castWithSneakFromGraveyard?: { readonly filter: CardFilter };
+  /**
+   * Layer 4 off the battlefield (rule 604.1, the static reaching other zones
+   * as its text says): cards of the card type `ofType` this permanent's
+   * controller owns that aren't on the battlefield, and such spells they
+   * control, get these types — "the same is true for creature spells you
+   * control and creature cards you own that aren't on the battlefield"
+   * (Arcane Adaptation, Maskwood Nexus, Biotransference). `zones` narrows the
+   * reach — "each creature card in your graveyard has the chosen creature
+   * type" (Ashes of the Fallen). A face-down card has no types to add to
+   * (rule 708.2). Beside a battlefield half's own `addsChosenCreatureType` /
+   * `addSubtypes` / `addTypes`, or alone under `affects: { scope: "self" }`.
+   */
+  readonly typesOutsideBattlefield?: {
+    readonly ofType: CardType;
+    readonly zones?: readonly ("hand" | "library" | "graveyard" | "exile" | "command" | "stack")[];
+    readonly addTypes?: readonly CardType[];
+    readonly addSubtypes?: readonly string[];
+    readonly addsChosenCreatureType?: true;
+    /** "Are the chosen type" with no "in addition" (Conspiracy): every other
+     * creature type goes (rule 205.1a). */
+    readonly setsChosenCreatureType?: true;
   };
   /**
    * An alternative cost (rule 118.9) for the spells this permanent's
@@ -2301,6 +2347,31 @@ export interface StaticAbility {
    * has both), so a "ninjutsu abilities you activate" static or trigger sees it.
    */
   readonly grantsNinjutsuInHand?: { readonly cost: string; readonly filter: CardFilter };
+  /**
+   * Cards matching `filter` in this permanent's controller's hand have
+   * cycling for `cost` (rule 702.29a) — Rhet-Tomb Mystic's "each creature card
+   * in your hand has cycling {1}{U}", Jo Grant's for historic cards. `search`
+   * makes it typecycling (702.29e); `eachPlayer` reaches every player's hand,
+   * not just this permanent's controller's — Homing Sliver's "each Sliver
+   * card in each player's hand has slivercycling {3}". A card with cycling of
+   * its own has both.
+   */
+  readonly grantsCyclingInHand?: {
+    readonly cost: string;
+    readonly filter: CardFilter;
+    readonly search?: CardFilter;
+    readonly eachPlayer?: true;
+  };
+  /**
+   * Cards matching `filter` in this permanent's controller's hand that have
+   * no foretell of their own have foretell (rule 702.143a), with a foretell
+   * cost equal to their mana cost less `reducedBy` generic mana (rule 118.7a)
+   * — Dream Devourer's "each nonland card in your hand without foretell has
+   * foretell. Its foretell cost is equal to its mana cost reduced by {2}". A
+   * card with no mana cost gets nothing. Once foretold, the card keeps that
+   * cost, this permanent gone or not.
+   */
+  readonly grantsForetellInHand?: { readonly filter: CardFilter; readonly reducedBy: number };
   /**
    * The creature spells this permanent's controller casts that match
    * `filter` have blitz, its cost equal to their mana cost (rule 702.152a —

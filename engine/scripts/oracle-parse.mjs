@@ -1463,6 +1463,8 @@ export function parseTrigger(clause) {
   if ((m = /^Whenever you cycle (a|another) card$/.exec(c))) {
     return [{ on: "cycles", who: "you", ...(m[1] === "another" ? { otherOnly: true } : {}) }];
   }
+  // Foretell (rule 702.143a): "whenever you foretell a card".
+  if (c === "Whenever you foretell a card") return [{ on: "foretells", who: "you" }];
   // The renowned designation (rule 702.112b) becoming true.
   if (/^When(?:ever)? ~ becomes renowned$/.test(c)) return self("becomes-renowned");
   if (/^Whenever a creature you control becomes renowned$/.test(c)) return [{ on: "becomes-renowned", who: "you-control", filter: { type: "creature" } }];
@@ -3914,6 +3916,33 @@ export function parseEffect(text, outer) {
       }
       skip = energyPay.used - 1;
       continue;
+    }
+    // "Target creature card in your graveyard gains embalm until end of turn.
+    // The embalm cost is equal to its mana cost." (Cursecloth Wrappings), and
+    // "each artifact creature card in your graveyard gains unearth {3} until
+    // end of turn" (Ghost Ark): `grant-graveyard-keyword`.
+    const gainsM = new RegExp(
+      `^(target|each) ([a-z ]+?) card in your graveyard gains (${GRAVEYARD_KEYWORD})(?: ((?:\\{[^}]+\\})+))? until end of turn\\.$`,
+      "i",
+    ).exec(sentence);
+    if (gainsM !== null) {
+      const filter = parseTypePhrase(gainsM[2], { cards: true });
+      const sameAs = new RegExp(`^(?:the|its) ${gainsM[3]} cost is equal to its mana cost\\.$`, "i").test(sentences[i + 1] ?? "");
+      if (filter !== null && (gainsM[4] !== undefined || sameAs || gainsM[3] === "retrace")) {
+        const grant = { keyword: gainsM[3], ...(gainsM[4] !== undefined ? { cost: gainsM[4] } : {}) };
+        const effect =
+          gainsM[1].toLowerCase() === "target"
+            ? {
+                kind: "grant-graveyard-keyword",
+                target: ctx.target({ kind: "card-in-graveyard", whose: "you", filter }),
+                grant,
+              }
+            : { kind: "grant-graveyard-keyword", filter, grant };
+        parsed.push(effect);
+        hints.push({ sentence, effect });
+        if (sameAs) skip = 1;
+        continue;
+      }
     }
     // "Choose target creature you don't control. Each creature you control
     // that's a Wolf or a Werewolf deals damage equal to its power to that
@@ -7773,6 +7802,124 @@ function parseGrantedStatic(quoted) {
   return null;
 }
 
+/** The creature types an outlaw has (rule 700.12). */
+const OUTLAW_TYPES = ["Assassin", "Mercenary", "Pirate", "Rogue", "Warlock"];
+
+/** The keyword abilities a card in a graveyard can be given, with their cost
+ * (`GraveyardKeywordGrant`). */
+const GRAVEYARD_KEYWORD = "unearth|encore|embalm|harmonize|retrace|sneak";
+
+/**
+ * "artifact creature", "Sliver creature", "outlaw creature", "Merfolk and
+ * Druid", "Instant and sorcery", "nonland permanent": the cards a grant to a
+ * zone reaches, as a filter, with `thats`' "Cleric, Rogue, Warrior, and/or
+ * Wizard" read as subtypes. `null` for a phrase the type reader doesn't know.
+ */
+function grantedCardsFilter(phrase, thats) {
+  const lowered = CARD_TYPES.includes(phrase.split(" ")[0].toLowerCase())
+    ? phrase[0].toLowerCase() + phrase.slice(1)
+    : phrase;
+  const both = /^(\S+) and (\S+)$/.exec(lowered);
+  let filter;
+  if (both !== null && /^[A-Z]/.test(both[1]) && /^[A-Z]/.test(both[2])) filter = { subtypes: [both[1], both[2]] };
+  else if (both !== null) filter = parseTypePhrase(`${both[1]} or ${both[2]}`, { cards: true });
+  else if (lowered.startsWith("outlaw ")) {
+    const rest = parseTypePhrase(lowered.slice("outlaw ".length), { cards: true });
+    filter = rest === null ? null : { ...rest, subtypes: OUTLAW_TYPES };
+  } else filter = parseTypePhrase(lowered, { cards: true });
+  if (filter === null) return null;
+  if (thats !== undefined) {
+    const names = thats.split(/,? and\/or |, /);
+    if (!names.every((n) => /^[A-Z][a-z]+$/.test(n))) return null;
+    filter.subtypes = names;
+  }
+  return filter;
+}
+
+/**
+ * The statics that reach cards outside the battlefield (rule 604.1): keyword
+ * abilities with their cost for cards in your graveyard
+ * (`grantsToGraveyard.keywords`) or a hand (`grantsCyclingInHand`,
+ * `grantsForetellInHand`), sneak cast from the graveyard
+ * (`castWithSneakFromGraveyard`), and types off the battlefield
+ * (`typesOutsideBattlefield`). `null` for any other line.
+ */
+function outsideBattlefieldStaticOf(line, text) {
+  let m;
+  const self = { affects: { scope: "self" } };
+  m = new RegExp(
+    `^(During your turn, )?(?:Each (.+?) card|(.+?) cards) in your graveyard(?: that's an? (.+?))? (?:has|have) (${GRAVEYARD_KEYWORD})` +
+      "(?: ((?:\\{[^}]+\\})+)(, where X is its mana value)?)?(\\. (?:Its|The) \\w+ cost is equal to its mana cost)?\\.$",
+  ).exec(line);
+  if (m !== null) {
+    const [, duringYourTurn, each, plural, thats, keyword, cost, xIsManaValue, sameAsMana] = m;
+    const filter = grantedCardsFilter(each ?? plural, thats);
+    if (filter === null || (cost === undefined && sameAsMana === undefined && keyword !== "retrace")) return null;
+    const grant = { keyword, ...(cost === undefined ? {} : { cost: xIsManaValue !== undefined ? "mana-value" : cost }) };
+    if (xIsManaValue !== undefined && cost !== "{X}") return null;
+    return {
+      ...self,
+      ...(duringYourTurn !== undefined ? { condition: { kind: "your-turn" } } : {}),
+      grantsToGraveyard: { filter, keywords: [grant] },
+      text,
+    };
+  }
+  if ((m = /^You may cast (\w+) spells from your graveyard using their sneak abilities\.$/.exec(line))) {
+    const filter = parseTypePhrase(m[1]);
+    return filter === null ? null : { ...self, castWithSneakFromGraveyard: { filter }, text };
+  }
+  if ((m = /^Each (.+?) card in (your hand|each player's hand) has (\w*)cycling ((?:\{[^}]+\})+)\.$/.exec(line))) {
+    const filter = parseTypePhrase(m[1], { cards: true });
+    if (filter === null) return null;
+    const search = m[3] === "" ? undefined : { subtype: m[3][0].toUpperCase() + m[3].slice(1) };
+    return {
+      ...self,
+      grantsCyclingInHand: {
+        cost: m[4],
+        filter,
+        ...(search !== undefined ? { search } : {}),
+        ...(m[2] === "each player's hand" ? { eachPlayer: true } : {}),
+      },
+      text,
+    };
+  }
+  if ((m = /^Each nonland card in your hand without foretell has foretell\. Its foretell cost is equal to its mana cost reduced by \{(\d+)\}\.$/.exec(line))) {
+    return { ...self, grantsForetellInHand: { filter: { notTypes: ["land"] }, reducedBy: Number(m[1]) }, text };
+  }
+  if (line === "Each creature card in your graveyard has the chosen creature type in addition to its other types.") {
+    return {
+      ...self,
+      typesOutsideBattlefield: { ofType: "creature", zones: ["graveyard"], addsChosenCreatureType: true },
+      text,
+    };
+  }
+  if ((m = /^Creatures you control are (the chosen type|every creature type|artifacts|[A-Z][a-z]+s)( in addition to their other types)?\. The same is true for creature spells you control and creature cards you own that aren't on the battlefield\.$/.exec(line))) {
+    const addition = m[2] !== undefined;
+    let part;
+    if (m[1] === "the chosen type") part = addition ? { addsChosenCreatureType: true } : { setsChosenCreatureType: true };
+    else if (m[1] === "every creature type") part = { addSubtypes: ["(every creature type)"] };
+    else if (!addition) return null;
+    else if (m[1] === "artifacts") part = { addTypes: ["artifact"] };
+    else part = { addSubtypes: [singular(m[1])] };
+    return {
+      affects: { scope: "creatures-you-control" },
+      ...part,
+      typesOutsideBattlefield: { ofType: "creature", ...part },
+      text,
+    };
+  }
+  if ((m = /^Lands you control and land cards you own that aren't on the battlefield are ([A-Z][a-z]+s) in addition to their other types\.$/.exec(line))) {
+    const part = { addSubtypes: [singular(m[1])] };
+    return {
+      affects: { scope: "filter", filter: { type: "land", controlledBy: "you" } },
+      ...part,
+      typesOutsideBattlefield: { ofType: "land", ...part },
+      text,
+    };
+  }
+  return null;
+}
+
 function parseStatic(line, text) {
   let m;
   // A cost keyed to a spell's target (`targetedBySpellsCost`, rule 601.2f):
@@ -7813,6 +7960,8 @@ function parseStatic(line, text) {
       };
     }
   }
+  const outside = outsideBattlefieldStaticOf(line, text);
+  if (outside !== null) return outside;
   // "… as long as [condition]." on a static the rest reads whole and that
   // has no condition of its own: celebration's "~ gets +1/+1 and has
   // trample as long as two or more nonland permanents entered the

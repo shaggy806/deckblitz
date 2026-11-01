@@ -882,7 +882,18 @@
   "cost:targeted-by-spells-mana-tax",
   "effect:exile-graveyard-of-target-card-owner",
   "effect:owner-of-target-player-ref",
-  "effect:trigger-object-owner-player-ref"
+  "effect:trigger-object-owner-player-ref",
+  "effect:grant-embalm",
+  "effect:grant-harmonize",
+  "effect:grant-unearth-to-graveyard-until-eot",
+  "static:grant-encore-in-graveyard",
+  "static:grant-sneak-to-graveyard",
+  "static:grant-unearth-to-graveyard",
+  "static:graveyard-cards-gain-chosen-type",
+  "static:static-types-outside-battlefield",
+  "static:grant-cycling-to-cards-in-hand",
+  "static:grant-foretell",
+  "static:retrace-grant"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

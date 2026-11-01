@@ -286,6 +286,20 @@ export interface ColoredReduction {
   readonly coloredOnly: boolean;
 }
 
+/** A cost string less `by` generic mana (rule 118.7a: only its generic
+ * component): `"{4}{W}{U}"` less 2 is `"{2}{W}{U}"`, `"{1}{W}"` less 2 is
+ * `"{W}"`, `"{W}{W}"` stays, and one reduced to nothing is `"{0}"` (118.7). */
+export function withGenericReducedBy(cost: string, by: number): string {
+  let left = by;
+  const out = cost.replace(/\{(\d+)\}/g, (_token, digits: string) => {
+    const take = Math.min(left, Number(digits));
+    left -= take;
+    const rest = Number(digits) - take;
+    return rest === 0 ? "" : `{${rest}}`;
+  });
+  return out === "" ? "{0}" : out;
+}
+
 /** The coloured symbols of `text` as a per-colour count, for a
  * {@link ColoredReduction} (`"{W}{B}"` → one W, one B). */
 export function coloredReductionOf(text: string, coloredOnly: boolean, times = 1): ColoredReduction {

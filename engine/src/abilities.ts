@@ -2042,6 +2042,13 @@ export type TriggerSpec =
       readonly otherOnly?: boolean;
     }
   | {
+      /** "Whenever you foretell a card" (rule 702.143a — Dream Devourer): a
+       * player foretold a card, a special action, `who` relative to this
+       * permanent's controller. The foretold card is the trigger object. */
+      readonly on: "foretells";
+      readonly who: "you" | "opponent" | "any";
+    }
+  | {
       /** "Whenever you commit a crime" / "whenever an opponent commits a
        * crime" (rule 700.13): the ability's controller, or any opponent of
        * theirs, cast a spell, activated an ability or put a triggered ability

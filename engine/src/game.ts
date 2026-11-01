@@ -70,7 +70,7 @@ import {
 import { CardRegistry } from "./cards/card-registry.js";
 import { defaultRegistry } from "./cards/default-registry.js";
 import { EMBLEM_CARD } from "./cards/emblem.js";
-import { ninjutsu } from "./cards/helpers.js";
+import { embalmAbility, encoreAbility, ninjutsu, unearth } from "./cards/helpers.js";
 import { bestowedDefinition, licidDefinition } from "./cards/define.js";
 import { DUNGEONS } from "./cards/dungeons.js";
 import { MADNESS_EFFECT, MADNESS_TEXT } from "./cards/madness.js";
@@ -247,6 +247,8 @@ import type {
   SearchZones,
   ThisWayKind,
   ZoneChoiceFilter,
+  GraveyardKeyword,
+  GraveyardKeywordGrant,
 } from "./effects.js";
 import type { ZoneChoiceTogether } from "./zone-choice-together.js";
 import {
@@ -285,6 +287,7 @@ import {
   coloredReductionOf,
   manaValue,
   parseManaCost,
+  withGenericReducedBy,
   reduceManaCost,
 } from "./mana.js";
 import type {
@@ -1296,6 +1299,27 @@ function arrangeManaSources(
     first === undefined ? kept : [...kept.filter((s) => first.has(s.id)), ...kept.filter((s) => !first.has(s.id))];
   if (last === undefined) return ordered;
   return [...ordered.filter((s) => !last.has(s.id)), ...ordered.filter((s) => last.has(s.id))];
+}
+
+/** A cycling ability as it's built from a cost and what typecycling searches
+ * for (rule 702.29a, e): "Draw a card", or the search — reveal the card found
+ * and put it into your hand. */
+function cyclingAbilityFrom(
+  cycling: { readonly cost: string; readonly search?: CardFilter },
+  text: string,
+): ActivatedAbility {
+  return {
+    cost: { mana: cycling.cost, tap: false },
+    targets: [],
+    effect:
+      cycling.search === undefined
+        ? { kind: "draw", amount: 1 }
+        : { kind: "search-library", filter: cycling.search, destination: "hand", min: 0, max: 1, reveal: true },
+    resolve: null,
+    zone: "hand",
+    cycling: true,
+    text,
+  };
 }
 
 /** One permission a graveyard card could be played under, with the static
@@ -2481,7 +2505,7 @@ export class Game {
         out.push({ kind: "suspend", card, cardName, n: def.suspend.n, cost: def.suspend.cost });
       }
       // Foretell (rule 702.144) — a special action.
-      if (def.foretell !== null && this.whyCannotForetell(player, card) === null) {
+      if (this.whyCannotForetell(player, card) === null) {
         out.push({ kind: "foretell", card, cardName });
       }
       // Plot (rule 702.170a) — a special action (116.2k).
@@ -2501,7 +2525,7 @@ export class Game {
       if (object === undefined || !object.foretold || object.owner !== player) continue;
       const cardName = object.cardName;
       const def = this.registry.get(cardName);
-      const cost = def.foretell?.cost ?? null;
+      const cost = object.foretoldCost ?? def.foretell?.cost ?? null;
       if (cost === null) continue;
       out.push(
         ...this.castSpellActions(player, card, cardName, def, {
@@ -2575,8 +2599,16 @@ export class Game {
     for (const card of this.state.zones.perPlayer[player].graveyard) {
       const cardName = this.state.objects[card].cardName;
       const def = this.registry.get(cardName);
-      if (def.harmonize === null) continue;
-      out.push(...this.castSpellActions(player, card, cardName, def, { via: "harmonize", costString: def.harmonize.cost }));
+      const harmonizes = this.castKeywordCosts(card, "harmonize", def.harmonize?.cost ?? null);
+      for (const { cost, grantor } of harmonizes) {
+        out.push(
+          ...this.castSpellActions(player, card, cardName, def, {
+            via: "harmonize",
+            costString: cost,
+            ...(harmonizes.length > 1 ? { graveyardGrant: { source: grantor ?? card } } : {}),
+          }),
+        );
+      }
     }
 
     // Retrace (rule 702.81a) — a card with retrace in this player's
@@ -2584,7 +2616,7 @@ export class Game {
     for (const card of this.state.zones.perPlayer[player].graveyard) {
       const cardName = this.state.objects[card].cardName;
       const def = this.registry.get(cardName);
-      if (!def.retrace) continue;
+      if (!this.hasRetrace(card)) continue;
       out.push(...this.castSpellActions(player, card, cardName, def, { via: "retrace", costString: def.manaCost }));
     }
 
@@ -2745,14 +2777,24 @@ export class Game {
       const sneakCards = [
         ...this.state.zones.perPlayer[player].hand,
         ...this.state.zones.shared.command.filter((id) => this.isCastableCommander(player, id)),
+        // "You may cast creature spells from your graveyard using their sneak
+        // abilities" (Ninja Teen).
+        ...this.state.zones.perPlayer[player].graveyard.filter((id) => this.sneaksFromGraveyard(player, id)),
       ];
       for (const card of sneakCards) {
         const def = this.registry.get(this.state.objects[card].cardName);
-        if (def.sneak === null) continue;
-        for (const offer of this.castSpellActions(player, card, def.name, def, { via: "sneak", costString: def.sneak.cost })) {
-          if (offer.kind !== "cast-spell") continue;
-          for (const returned of sneakers) {
-            out.push({ ...offer, sneakReturn: { object: returned, cardName: this.state.objects[returned].cardName } });
+        const sneaks = this.castKeywordCosts(card, "sneak", def.sneak?.cost ?? null);
+        for (const { cost, grantor } of sneaks) {
+          const offers = this.castSpellActions(player, card, def.name, def, {
+            via: "sneak",
+            costString: cost,
+            ...(sneaks.length > 1 ? { graveyardGrant: { source: grantor ?? card } } : {}),
+          });
+          for (const offer of offers) {
+            if (offer.kind !== "cast-spell") continue;
+            for (const returned of sneakers) {
+              out.push({ ...offer, sneakReturn: { object: returned, cardName: this.state.objects[returned].cardName } });
+            }
           }
         }
       }
@@ -8729,6 +8771,8 @@ export class Game {
         object.grantedFlashback = null;
         this.emit({ type: "flashback-grant-expired", object: object.id });
       }
+      // So do the other keywords a one-shot effect gave a graveyard card.
+      if (object.grantedGraveyardKeywords !== undefined) delete object.grantedGraveyardKeywords;
     }
 
     const expired: ObjectId[] = [];
@@ -11288,18 +11332,7 @@ export class Game {
     if (!this.registry.has(cardName)) return undefined;
     const cycling = this.registry.get(cardName).cycling;
     if (cycling === null) return undefined;
-    return {
-      cost: { mana: cycling.cost, tap: false },
-      targets: [],
-      effect:
-        cycling.search === undefined
-          ? { kind: "draw", amount: 1 }
-          : { kind: "search-library", filter: cycling.search, destination: "hand", min: 0, max: 1, reveal: true },
-      resolve: null,
-      zone: "hand",
-      cycling: true,
-      text: `${cycling.search === undefined ? "Cycling" : "Landcycling"} ${cycling.cost}`,
-    };
+    return cyclingAbilityFrom(cycling, `${cycling.search === undefined ? "Cycling" : "Landcycling"} ${cycling.cost}`);
   }
 
   /** Cycling (rule 702.29a) — an activated ability from the hand: pay the
@@ -11695,9 +11728,26 @@ export class Game {
       return `${player} does not have that card in hand`;
     }
     const def = this.registry.get(this.state.objects[cardId].cardName);
-    if (def.foretell === null) return `${def.name} does not have foretell`;
+    if (def.foretell === null && this.grantedForetellCost(this.state.objects[cardId]) === null) {
+      return `${def.name} does not have foretell`;
+    }
     if (this.payMana(player, parseManaCost(Game.FORETELL_COST)) === null) {
       return `${player} cannot pay the foretell cost`;
+    }
+    return null;
+  }
+
+  /** The foretell cost a `grantsForetellInHand` static of a permanent its
+   * owner controls gives `card` in hand, or `null`: its mana cost less the
+   * reduction (rule 118.7a), and none for a card with no mana cost. */
+  private grantedForetellCost(card: GameObject): string | null {
+    const manaCost = this.registry.get(card.cardName).manaCost;
+    if (manaCost === null) return null;
+    for (const { ability } of this.activeStaticsOf(card.owner, (a) => a.grantsForetellInHand !== undefined)) {
+      const grant = ability.grantsForetellInHand!;
+      if (matchesFilter(this.state, this.registry, card.id, grant.filter, { you: card.owner })) {
+        return withGenericReducedBy(manaCost, grant.reducedBy);
+      }
     }
     return null;
   }
@@ -11710,11 +11760,16 @@ export class Game {
     const payment = this.payMana(player, parseManaCost(Game.FORETELL_COST));
     if (payment === null) throw new Error(`${player} cannot pay the foretell cost`);
 
+    // Foretold through a grant, it keeps the cost the grant gave it, whatever
+    // becomes of the grant (Dream Devourer). Read in the hand, where it's granted.
+    const grantedCost =
+      this.registry.get(object.cardName).foretell === null ? this.grantedForetellCost(object) : null;
     const since = this.state.eventSeq;
     this.moveObject(cardId, "exile");
     this.executePayment(player, payment);
     object.foretold = true;
     object.foretoldOnTurn = this.state.turn.number;
+    if (grantedCost !== null) object.foretoldCost = grantedCost;
     // Face down in exile: nobody else knows what it is any more.
     this.forgetStints([cardId], since);
     this.emit({ type: "card-foretold", player, object: cardId });
@@ -12986,7 +13041,7 @@ export class Game {
         : via === "flashback"
         ? (this.flashbackOf(cardId, graveyardGrant)?.cost ?? null)
         : via === "harmonize"
-        ? (def.harmonize?.cost ?? null)
+        ? this.castKeywordCostOf(cardId, "harmonize", def.harmonize?.cost ?? null, graveyardGrant)
         : via === "retrace"
         ? def.manaCost
         : via === "graveyard-permission"
@@ -12995,7 +13050,7 @@ export class Game {
           via === "mayhem"
           ? (this.mayhemCostOf(cardId) ?? def.manaCost)
         : via === "sneak"
-          ? (def.sneak?.cost ?? null)
+          ? this.castKeywordCostOf(cardId, "sneak", def.sneak?.cost ?? null, graveyardGrant)
         : via === "web-slinging"
           ? this.webSlingingCostOf(caster ?? this.state.objects[cardId]?.owner ?? "", cardId, def)
         : via === "emerge"
@@ -13006,7 +13061,7 @@ export class Game {
         : via === "escape"
           ? (this.escapeOf(cardId, face, graveyardGrant)?.cost ?? null)
           : via === "foretell"
-            ? (def.foretell?.cost ?? null)
+            ? (this.state.objects[cardId]?.foretoldCost ?? def.foretell?.cost ?? null)
             : via === "warp"
               ? this.warpCostOfCaster(cardId, def, caster)
               : via === "blitz"
@@ -13328,7 +13383,7 @@ export class Game {
     }
     if (via === "retrace") {
       // Rule 702.81a — from the caster's graveyard, discarding a land card.
-      if (!def.retrace) return `${def.name} does not have retrace`;
+      if (!this.hasRetrace(cardId)) return `${def.name} does not have retrace`;
       if (!this.state.zones.perPlayer[player].graveyard.includes(cardId)) {
         return `${def.name} is not in ${player}'s graveyard`;
       }
@@ -13336,7 +13391,9 @@ export class Game {
         return `${player} has no land card to discard for ${def.name}'s retrace`;
       }
     } else if (via === "harmonize") {
-      if (def.harmonize === null) return `${def.name} does not have harmonize`;
+      if (this.castKeywordCostOf(cardId, "harmonize", def.harmonize?.cost ?? null, graveyardGrant) === null) {
+        return `${def.name} does not have harmonize`;
+      }
       if (!this.state.zones.perPlayer[player].graveyard.includes(cardId)) {
         return `${def.name} is not in ${player}'s graveyard`;
       }
@@ -13394,7 +13451,9 @@ export class Game {
       }
     } else if (via === "foretell") {
       const object = this.state.objects[cardId];
-      if (def.foretell === null || !object.foretold) return `${def.name} is not foretold`;
+      if ((def.foretell === null && object.foretoldCost === undefined) || !object.foretold) {
+        return `${def.name} is not foretold`;
+      }
       if (object.owner !== player || object.zone !== "exile") {
         return `${def.name} is not ${player}'s foretold card`;
       }
@@ -13436,9 +13495,16 @@ export class Game {
     } else if (via === "sneak") {
       // Rule 702.190a — from the hand (or a commander from the command zone),
       // during the caster's declare blockers step, with an unblocked creature
-      // of theirs to return.
-      if (def.sneak === null) return `${def.name} doesn't have sneak`;
-      if (!this.state.zones.perPlayer[player].hand.includes(cardId) && !this.isCastableCommander(player, cardId)) {
+      // of theirs to return. Or from their graveyard, where a static says so
+      // (Ninja Teen).
+      if (this.castKeywordCostOf(cardId, "sneak", def.sneak?.cost ?? null, graveyardGrant) === null) {
+        return `${def.name} doesn't have sneak`;
+      }
+      if (
+        !this.state.zones.perPlayer[player].hand.includes(cardId) &&
+        !this.isCastableCommander(player, cardId) &&
+        !this.sneaksFromGraveyard(player, cardId)
+      ) {
         return `${player} does not have that card in hand`;
       }
       if (this.sneakReturns(player).length === 0) {
@@ -13628,14 +13694,16 @@ export class Game {
       }
     }
     // It names the permission a graveyard-permission cast spends, or which of
-    // several escapes or flashbacks an escape or flashback cast uses.
+    // several escapes, flashbacks, harmonizes or sneaks such a cast uses.
     if (
       graveyardGrant !== undefined &&
       via !== "graveyard-permission" &&
       via !== "escape" &&
-      via !== "flashback"
+      via !== "flashback" &&
+      via !== "harmonize" &&
+      via !== "sneak"
     ) {
-      return "a graveyard permission only names a graveyard-permission, escape or flashback cast";
+      return "a graveyard permission only names a graveyard-permission, escape, flashback, harmonize or sneak cast";
     }
     if (escapeExile !== undefined && via !== "escape" && via !== "graveyard-permission") {
       return "only an escape cast, or a graveyard permission's, exiles cards from the graveyard to pay for it";
@@ -17311,6 +17379,7 @@ export class Game {
   ): readonly { readonly ability: ActivatedAbility; readonly ref: GrantedAbilityRef }[] {
     const target = this.state.objects[objectId];
     if (target?.zone === "hand") return this.handGrantedActivated(target);
+    if (target?.zone === "graveyard") return this.graveyardGrantedActivated(target);
     if (target === undefined || target.zone !== "battlefield") return [];
     // Only what was granted after a loss of all its abilities (rule 613.7).
     const lostAt = abilitiesLostAt(this.state, this.registry,target);
@@ -17353,20 +17422,169 @@ export class Game {
     return [...own, ...grants.flatMap((g) => g.entries)];
   }
 
-  /** The activated abilities a card in a hand has from a permanent its owner
-   * controls: ninjutsu (`grantsNinjutsuInHand` — Satoru Umezawa), one per
-   * grant that reaches it, in the order the battlefield lists them. */
+  /** The activated abilities a card in a hand has from a permanent: ninjutsu
+   * (`grantsNinjutsuInHand` — Satoru Umezawa) from one its owner controls, and
+   * cycling (`grantsCyclingInHand` — Rhet-Tomb Mystic) from one its owner
+   * controls or that reaches each player's hand (Homing Sliver), one per grant
+   * that reaches it, in the order the battlefield lists them. */
   private handGrantedActivated(
     card: GameObject,
   ): readonly { readonly ability: ActivatedAbility; readonly ref: GrantedAbilityRef }[] {
     const out: { ability: ActivatedAbility; ref: GrantedAbilityRef }[] = [];
+    const add = (granted: ActivatedAbility): void => {
+      out.push({ ability: granted, ref: { kind: "modifier-activated", ability: granted } });
+    };
     for (const { ability } of this.activeStaticsOf(card.owner, (a) => a.grantsNinjutsuInHand !== undefined)) {
       const grant = ability.grantsNinjutsuInHand!;
       if (!matchesFilter(this.state, this.registry, card.id, grant.filter, { you: card.owner })) continue;
-      const granted = ninjutsu(grant.cost);
-      out.push({ ability: granted, ref: { kind: "modifier-activated", ability: granted } });
+      add(ninjutsu(grant.cost));
+    }
+    for (const id of this.state.zones.shared.battlefield) {
+      const source = this.state.objects[id];
+      if (source === undefined) continue;
+      for (const ability of this.registry.get(rulesTextName(source)).static) {
+        const grant = ability.grantsCyclingInHand;
+        if (grant === undefined || (source.controller !== card.owner && grant.eachPlayer !== true)) continue;
+        if (this.state.players[source.controller]?.hasLost !== false) continue;
+        if (hasLostAbilities(this.state, this.registry, source) || !this.staticActive(source, ability)) continue;
+        if (!matchesFilter(this.state, this.registry, card.id, grant.filter, { you: card.owner })) continue;
+        add(cyclingAbilityFrom(grant, `${grant.search === undefined ? "Cycling" : "Typecycling"} ${grant.cost}`));
+      }
     }
     return out;
+  }
+
+  /**
+   * The keyword abilities `card`, in a graveyard, has from something else
+   * (rule 604.1), each with its cost as a string and what gave it: until end
+   * of turn from a one-shot effect (`grant-graveyard-keyword`), and from each
+   * `grantsToGraveyard` static of a permanent its owner controls or an emblem
+   * they have (rule 113.6p) that reaches it. One keyword at one cost is listed
+   * once, since nothing tells two apart.
+   */
+  private graveyardKeywordsOf(
+    card: GameObject,
+  ): readonly { readonly keyword: GraveyardKeyword; readonly cost: string; readonly grantor?: ObjectId }[] {
+    if (card.zone !== "graveyard") return [];
+    const out: { keyword: GraveyardKeyword; cost: string; grantor?: ObjectId }[] = [];
+    const add = (keyword: GraveyardKeyword, cost: string | null, grantor?: ObjectId): void => {
+      if (cost === null || out.some((k) => k.keyword === keyword && k.cost === cost)) return;
+      out.push({ keyword, cost, ...(grantor !== undefined ? { grantor } : {}) });
+    };
+    for (const granted of card.grantedGraveyardKeywords ?? []) add(granted.keyword, granted.cost, granted.by);
+    const reach = (ability: StaticAbility, grantor?: ObjectId): void => {
+      const grant = ability.grantsToGraveyard;
+      if (grant?.keywords === undefined) return;
+      if (!matchesFilter(this.state, this.registry, card.id, grant.filter, { you: card.owner })) return;
+      for (const each of grant.keywords) add(each.keyword, this.graveyardKeywordCost(card, each), grantor);
+    };
+    for (const { source, ability } of this.activeStaticsOf(
+      card.owner,
+      (a) => a.grantsToGraveyard?.keywords !== undefined,
+    )) {
+      reach(ability, source.id);
+    }
+    for (const emblem of this.state.emblems) {
+      if (emblem.owner === card.owner && emblem.static !== null) reach(emblem.static, emblem.object);
+    }
+    return out;
+  }
+
+  /** What a {@link GraveyardKeywordGrant} costs on `card`: `null` when it asks
+   * for a mana cost `card` hasn't got, and `""` for retrace, which has no cost
+   * of its own. */
+  private graveyardKeywordCost(card: GameObject, grant: GraveyardKeywordGrant): string | null {
+    if (grant.keyword === "retrace") return "";
+    const cost = grant.cost ?? "mana-cost";
+    if (cost === "mana-cost") return this.registry.get(card.cardName).manaCost;
+    if (cost === "mana-value") return `{${manaValueOfObject(this.registry, card)}}`;
+    return cost;
+  }
+
+  /** The activated abilities a card in a graveyard has from a grant: unearth,
+   * encore and embalm, built as a printed one is (rules 702.84a, 702.141a,
+   * 702.128a), listed after its own. */
+  private graveyardGrantedActivated(
+    card: GameObject,
+  ): readonly { readonly ability: ActivatedAbility; readonly ref: GrantedAbilityRef }[] {
+    const out: { ability: ActivatedAbility; ref: GrantedAbilityRef }[] = [];
+    for (const { keyword, cost } of this.graveyardKeywordsOf(card)) {
+      const granted =
+        keyword === "unearth"
+          ? unearth(cost)
+          : keyword === "encore"
+            ? encoreAbility(cost)
+            : keyword === "embalm"
+              ? embalmAbility(cost, `Embalm ${cost}`)
+              : null;
+      if (granted !== null) out.push({ ability: granted, ref: { kind: "modifier-activated", ability: granted } });
+    }
+    return out;
+  }
+
+  /** The costs `cardId` may be cast for with a casting keyword: `printed`, its
+   * own, then each a grant gives it. Each is its own way to cast it, named by
+   * its `grantor` — the grant's source, or the card itself for its own. */
+  private castKeywordCosts(
+    cardId: ObjectId,
+    keyword: "harmonize" | "sneak",
+    printed: string | null,
+  ): readonly { readonly cost: string; readonly grantor?: ObjectId }[] {
+    const out: { cost: string; grantor?: ObjectId }[] = printed === null ? [] : [{ cost: printed }];
+    const object = this.state.objects[cardId];
+    if (object === undefined) return out;
+    for (const granted of this.graveyardKeywordsOf(object)) {
+      if (granted.keyword !== keyword || out.some((c) => c.cost === granted.cost)) continue;
+      out.push({ cost: granted.cost, ...(granted.grantor !== undefined ? { grantor: granted.grantor } : {}) });
+    }
+    return out;
+  }
+
+  /** The cost `cardId` is cast for with `keyword`: the one `grant` names, or,
+   * unnamed, the first of {@link castKeywordCosts}. `null` when it has none. */
+  private castKeywordCostOf(
+    cardId: ObjectId,
+    keyword: "harmonize" | "sneak",
+    printed: string | null,
+    grant?: GraveyardGrant,
+  ): string | null {
+    const costs = this.castKeywordCosts(cardId, keyword, printed);
+    if (grant === undefined) return costs[0]?.cost ?? null;
+    return costs.find((c) => (c.grantor ?? cardId) === grant.source)?.cost ?? null;
+  }
+
+  /** Whether `cardId` has retrace (rule 702.81a): its own, or in a graveyard
+   * from a grant. */
+  private hasRetrace(cardId: ObjectId): boolean {
+    const object = this.state.objects[cardId];
+    if (object === undefined) return false;
+    return (
+      this.registry.get(object.cardName).retrace ||
+      this.graveyardKeywordsOf(object).some((k) => k.keyword === "retrace")
+    );
+  }
+
+  /** Whether a `castWithSneakFromGraveyard` static of a permanent `player`
+   * controls lets them cast `cardId`, in their graveyard, with sneak. */
+  private sneaksFromGraveyard(player: PlayerId, cardId: ObjectId): boolean {
+    if (!this.state.zones.perPlayer[player].graveyard.includes(cardId)) return false;
+    return this.activeStaticsOf(player, (a) => a.castWithSneakFromGraveyard !== undefined).some(({ ability }) =>
+      matchesFilter(this.state, this.registry, cardId, ability.castWithSneakFromGraveyard!.filter, { you: player }),
+    );
+  }
+
+  /** {@link GraveyardKeywordGrant} by a one-shot effect: until end of turn, on
+   * the card as it is now (rule 400.7 ends it on any zone change). */
+  private grantGraveyardKeywordByEffect(id: ObjectId, by: ObjectId, grant: GraveyardKeywordGrant): void {
+    const object = this.state.objects[id];
+    if (object === undefined || object.zone !== "graveyard") return;
+    const cost = this.graveyardKeywordCost(object, grant);
+    if (cost === null) return;
+    object.grantedGraveyardKeywords = [
+      ...(object.grantedGraveyardKeywords ?? []),
+      { keyword: grant.keyword, cost, by },
+    ];
+    invalidateComputedCache();
   }
 
   /** Where `sourceId`'s activated ability at `abilityIndex` was granted from,
@@ -18567,6 +18785,9 @@ export class Game {
       // Channel (rule 702.51a): discarding the source card is an implicit,
       // unconditional part of the cost, paid alongside the mana above.
       this.discardCards(player, [sourceId]);
+      // Cycling a static gave the card (`grantsCyclingInHand`) is cycling to
+      // everything watching for it, as `cycleCard` has a printed one.
+      if (ability.cycling === true) this.emit({ type: "card-cycled", player, object: sourceId });
     } else if (ability.zone === "graveyard") {
       this.state.players[player].usedGraveyardThisTurn = true;
       // The graveyard equivalent — "Exile this card from your graveyard" is
@@ -24459,6 +24680,11 @@ export class Game {
           (spec.who === "any" || (spec.who === "you") === (event.player === self.controller)) &&
           !(spec.otherOnly === true && event.object === self.id)
         );
+      case "foretells":
+        return (
+          event.type === "card-foretold" &&
+          (spec.who === "any" || (spec.who === "you") === (event.player === self.controller))
+        );
       case "this-plotted":
         return event.type === "card-plotted" && event.object === self.id;
       case "haunted-dies": {
@@ -27546,6 +27772,18 @@ export class Game {
         for (const id of [...this.state.zones.perPlayer[controller].graveyard]) {
           if (matchesFilter(this.state, this.registry, id, filter, { you: controller })) {
             this.grantFlashbackByEffect({ kind: "object", object: id }, source);
+          }
+        }
+      },
+      grantGraveyardKeyword: (target, filter, grant) => {
+        if (target !== undefined) {
+          if (target.kind === "object") this.grantGraveyardKeywordByEffect(target.object, source, grant);
+          return;
+        }
+        // Fixed as it resolves (rule 611.2c).
+        for (const id of [...this.state.zones.perPlayer[controller].graveyard]) {
+          if (filter === undefined || matchesFilter(this.state, this.registry, id, filter, { you: controller })) {
+            this.grantGraveyardKeywordByEffect(id, source, grant);
           }
         }
       },
@@ -44744,6 +44982,8 @@ export class Game {
     // Alt-cast zone markers (ROADMAP Phase 6) end on any zone change: a
     // Snapcaster grant, a suspend / foretell exile state.
     object.grantedFlashback = null;
+    delete object.grantedGraveyardKeywords;
+    delete object.foretoldCost;
     object.suspended = false;
     object.exileAtEndStep = false;
     object.foretold = false;

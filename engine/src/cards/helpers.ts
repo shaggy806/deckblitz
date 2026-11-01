@@ -1706,6 +1706,23 @@ export const unearth = (cost: string): ActivatedAbility => ({
   text: `Unearth ${cost}`,
 });
 
+/**
+ * Encore (rule 702.141a): "[Cost], Exile this card from your graveyard: For
+ * each opponent, create a token that's a copy of this card that attacks that
+ * opponent this turn if able. The tokens gain haste. Sacrifice them at the
+ * beginning of the next end step. Activate only as a sorcery." `text` is the
+ * ability as printed.
+ */
+export const encoreAbility = (cost: string, text = `Encore ${cost}`): ActivatedAbility => ({
+  cost: { mana: cost, tap: false },
+  zone: "graveyard",
+  sorcerySpeed: true,
+  targets: [],
+  effect: { kind: "encore" },
+  resolve: null,
+  text,
+});
+
 export const manaTapAbility = (mana: Color): ActivatedAbility => ({
   cost: { mana: null, tap: true },
   targets: [],

@@ -2613,6 +2613,7 @@ export function layerFour(
   registry: CardRegistry,
   object: GameObject,
 ): LayerFour {
+  if (object.zone !== "battlefield") return outsideLayerFour(state, registry, object);
   const sources =
     object.zone === "battlefield" && !layer4InProgress.has(object.id)
       ? typeGrantSources(state, registry)
@@ -2629,6 +2630,59 @@ export function layerFour(
     return value;
   }
   return foldLayerFour(state, registry, object, sources);
+}
+
+/** Every battlefield static with a `typesOutsideBattlefield` part, in
+ * battlefield order — usually none. As {@link typeGrantSources} has it, one
+ * that has lost its abilities still applies here, layer 6 coming after layer 4. */
+function outsideTypeSources(state: GameState, registry: CardRegistry): readonly ContributingStatic[] {
+  const memo = activeCache?.misc.get(OUTSIDE_TYPE_SOURCES);
+  if (memo !== undefined) return memo as readonly ContributingStatic[];
+  let out: ContributingStatic[] | null = null;
+  for (const sourceId of state.zones.shared.battlefield) {
+    const source = state.objects[sourceId];
+    const statics = staticsOf(registry, rulesTextName(source)).outsideTypes;
+    if (statics.length === 0 || state.players[source.controller]?.hasLost === true) continue;
+    for (const ability of statics) (out ??= []).push({ source, ability });
+  }
+  const result = out ?? NO_STATICS;
+  activeCache?.misc.set(OUTSIDE_TYPE_SOURCES, result);
+  return result;
+}
+const OUTSIDE_TYPE_SOURCES = "outside-type-sources";
+
+/**
+ * Layer 4 for an object off the battlefield: its own, then each
+ * `typesOutsideBattlefield` static that reaches it, in timestamp order (rule
+ * 613.7) — a card its controller owns, a spell they control. The grants only
+ * read its card type as it stands without them, so nothing here can loop. A
+ * face-down card has no types to add to (rule 708.2), and an ability on the
+ * stack is no card or spell.
+ */
+function outsideLayerFour(state: GameState, registry: CardRegistry, object: GameObject): LayerFour {
+  const own = ownLayerFour(registry, object);
+  const sources = outsideTypeSources(state, registry);
+  if (sources.length === 0) return own;
+  if (object.kind !== "card" || object.faceDown !== undefined || object.foretold === true) return own;
+  if (object.exiledFaceDown !== undefined) return own;
+  let { types, subtypes } = own;
+  const ordered = sources.length === 1 ? sources : [...sources].sort((a, b) => a.source.timestamp - b.source.timestamp);
+  for (const { source, ability } of ordered) {
+    const grant = ability.typesOutsideBattlefield!;
+    const yours = object.zone === "stack" ? object.controller : object.owner;
+    if (yours !== source.controller || !own.types.includes(grant.ofType)) continue;
+    if (grant.zones !== undefined && !(grant.zones as readonly string[]).includes(object.zone)) continue;
+    if (ability.condition !== undefined && !staticConditionMet(state, registry, source, ability.condition)) continue;
+    if (grant.addTypes !== undefined) types = union(types, grant.addTypes);
+    if (grant.addSubtypes !== undefined) subtypes = union(subtypes, grant.addSubtypes);
+    const chosen = source.chosenCreatureType;
+    if (typeof chosen !== "string" || !isCreatureType(chosen)) continue;
+    if (grant.addsChosenCreatureType === true) subtypes = union(subtypes, [chosen]);
+    if (grant.setsChosenCreatureType === true) {
+      subtypes = [...subtypes.filter((s) => subtypeKind(s) !== "creature"), chosen];
+    }
+  }
+  return { types, subtypes, applied: NO_STATICS };
 }
 
 /** Layer 4 from the object's own modifiers alone — everything there was
@@ -2746,6 +2800,13 @@ function foldLayerFourOnce(
       const chosen = source.chosenCreatureType;
       if (typeof chosen === "string" && isCreatureType(chosen)) subtypes = union(subtypes, [chosen]);
     }
+    if (ability.setsChosenCreatureType === true) {
+      // Conspiracy's "are the chosen type": every other creature type goes (205.1a).
+      const chosen = source.chosenCreatureType;
+      if (typeof chosen === "string" && isCreatureType(chosen)) {
+        subtypes = [...subtypes.filter((s) => subtypeKind(s) !== "creature"), chosen];
+      }
+    }
     applied.push(grant);
   };
   const see = (): void => {
@@ -2811,6 +2872,7 @@ export function hasLayerFourPart(ability: StaticAbility): boolean {
     ability.removeTypes !== undefined ||
     ability.loseLandTypes === true ||
     ability.addsChosenCreatureType === true ||
+    ability.setsChosenCreatureType === true ||
     ability.setsChosenLandType === true
   );
 }
@@ -3727,8 +3789,9 @@ export function hasManaAbility(
  *   granted it since — rule 613.7 — as `Game` has it);
  * - on the stack, a triggered ability or split second a `grantsToSpells`
  *   static gives it;
- * - in a graveyard, flashback or escape a `grantsToGraveyard` static gives it
- *   (Iroh, Grand Lotus), or flashback a one-shot effect gave it;
+ * - in a graveyard, a keyword a `grantsToGraveyard` static gives it (Iroh,
+ *   Grand Lotus' flashback, Mishra, Tamer of Mak Fawa's unearth), or one a
+ *   one-shot effect gave it;
  * - suspend's haste (rule 702.62).
  *
  * Only asked outside the layer fold: a granted keyword can come from any
@@ -3786,6 +3849,7 @@ export function hasAnyAbility(
   }
   if (object.zone === "graveyard") {
     if (object.grantedFlashback != null) return true;
+    if ((object.grantedGraveyardKeywords?.length ?? 0) > 0) return true;
     return graveyardGrantReaches(state, registry, object, def);
   }
   return false;
@@ -3809,13 +3873,23 @@ function graveyardGrantReaches(
     for (const ability of registry.get(rulesTextName(source)).static) {
       const grant = ability.grantsToGraveyard;
       if (grant === undefined) continue;
-      const costs = [grant.flashback?.cost, grant.escape?.cost].filter((c) => c !== undefined);
+      const costs = [
+        grant.flashback?.cost,
+        grant.escape?.cost,
+        ...(grant.keywords ?? []).map((k) => (k.keyword === "retrace" ? "" : (k.cost ?? "mana-cost"))),
+      ].filter((c) => c !== undefined);
       if (!costs.some((cost) => cost !== "mana-cost" || def.manaCost !== null)) continue;
       if (ability.condition !== undefined && !staticConditionMet(state, registry, source, ability.condition)) {
         continue;
       }
       if (matchesFilter(state, registry, card.id, grant.filter, { you: owner })) return true;
     }
+  }
+  // An emblem's works from the command zone (rule 113.6p).
+  for (const emblem of state.emblems) {
+    const grant = emblem.static?.grantsToGraveyard;
+    if (emblem.owner !== owner || (grant?.keywords?.length ?? 0) === 0) continue;
+    if (matchesFilter(state, registry, card.id, grant!.filter, { you: owner })) return true;
   }
   return false;
 }
@@ -3869,6 +3943,8 @@ interface StaticsInfo {
   readonly fromGraveyard: readonly StaticAbility[];
   /** What {@link typeGrantSources} takes (`hasLayerFourPart`). */
   readonly layer4: readonly StaticAbility[];
+  /** What {@link outsideTypeSources} takes (`typesOutsideBattlefield`). */
+  readonly outsideTypes: readonly StaticAbility[];
   /** What {@link colorSetSources} takes (a `setColors`). */
   readonly layer5: readonly StaticAbility[];
   /** What {@link abilityGrantSources} takes. */
@@ -3897,6 +3973,7 @@ function staticsInfo(registry: CardRegistry, name: string): StaticsInfo | null {
     contributing: statics.filter((a) => a.fromGraveyard !== true && contributesToCharacteristics(a)),
     fromGraveyard: statics.filter((a) => a.fromGraveyard === true && contributesToCharacteristics(a)),
     layer4: statics.filter(hasLayerFourPart),
+    outsideTypes: statics.filter((a) => a.typesOutsideBattlefield !== undefined),
     layer5: statics.filter((a) => a.setColors !== undefined || a.addColors !== undefined || a.setsChosenColor === true),
     grants: statics.filter((a) => a.grantsActivated !== undefined || a.grantsTriggered !== undefined),
     loseAll: statics.filter((a) => a.loseAllAbilities === true),
@@ -4390,7 +4467,8 @@ function computeCharacteristicsUncached(
   // Layers 3 + 4 — text substitution, then every type-changing effect in
   // timestamp order: the object's own modifiers (a man-land's animation adds
   // `creature`) and type-granting statics.
-  const layer4 = onBattlefield ? layerFour(state, registry, object) : null;
+  const layer4 =
+    onBattlefield || outsideTypeSources(state, registry).length > 0 ? layerFour(state, registry, object) : null;
   const types: readonly CardType[] = layer4?.types ?? def.types;
   // Off the battlefield, changeling still applies (rule 604.3): a changeling
   // card in a library is a Goblin card to a tutor.

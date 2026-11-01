@@ -1354,6 +1354,7 @@ own object, so it reaches every one.
 | `put-in-command-zone` | `target` | "Return it to the command zone" (Hellkite Courser's delayed trigger): a commander still on the battlefield as the same object goes there (its ruling — gone elsewhere, it stays); anything else isn't moved. |
 | `exchange-life-toughness` | `target`, `player?: EffectPlayerRef` | "Exchange your life total with this creature's toughness" (Tree of Redemption; Tree of Perdition's "target opponent's life total" is `player: { target: 0 }`) — rule 701.12g: the toughness becomes the player's former life total, a layer-7b set with no end (`PtModifier.setToughness`; counters and bonuses still apply on top — the Lunarch Mantle ruling), and the player gains or loses the life to reach its former toughness, so life-gain replacements and triggers see it. Gone before it resolves, nothing happens (the ruling); a player who can't gain, or can't lose, that life, and neither half does (701.12a). |
 | `grant-flashback` / `grant-flashback-all` | `target` / `filter` | Snapcaster Mage's "target instant or sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost"; `grant-flashback-all` is Past in Flames' "each instant and sorcery card in your graveyard gains flashback …" over your graveyard as it resolves (a card put there later gains nothing; one with no mana cost gains nothing). A card with a flashback of its own may be cast with either (the Past in Flames ruling): each is offered, named by `graveyardGrant.source` — the card for its own, the granting object for the other. `grant-flashback`'s `cost` is a fixed flashback cost instead — Archmage's Newt's "flashback {0}" (a card with no mana cost gains that too). |
+| `grant-graveyard-keyword` | `target` or `filter`, `grant: { keyword, cost? }` | A card in your graveyard gains unearth, encore, embalm, harmonize, retrace or sneak until end of turn: Cursecloth Wrappings' "target creature card in your graveyard gains embalm until end of turn. The embalm cost is equal to its mana cost" (`cost` left out), Ghost Ark's "each artifact creature card in your graveyard gains unearth {3} until end of turn" (`filter`, fixed as it resolves). |
 | `grant-graveyard-cast` | `target` | "Choose target artifact card in your graveyard. You may cast that card this turn" (Silas Renn, Emry) — pair with a `card-in-graveyard` target. A one-shot permission on the *card* (`GameObject.graveyardCastPermission`) for the effect's controller, for its normal cost, until end of turn: it outlives whatever granted it and ends if the card leaves the graveyard. Casts only, never a land. Offered as `via: "graveyard-permission"` with `graveyardGrant.source` = the card itself. |
 | `grant-protection` | `target?`, `filter?` (+ `exceptSource?`), `from`, `duration` | "Gains protection from [quality]" for a while (rule 702.16): the target's — Gods Willing's "target creature you control gains protection from the color of your choice until end of turn" — and every other permanent matching `filter` as it resolves (611.2c), all with one timestamp: Brave the Elements' "white creatures you control" is `filter: { type: "creature", colors: ["W"], controlledBy: "you" }` alone, Bathe in Light's "target creature and each other creature that shares a color with it" `target: 0` with `filter: { type: "creature", sharesColorWithTarget: 0 }`. `from` is fixed — `{ colors: ["R"] }`, `{ types: ["artifact"] }`, all five for "each color", a `filter` for anything else (`{ colorless: true }`, `{ type: "creature", notSubtypes: ["Human"] }`; a filter's "you"/"your opponents" is the effect's controller's, fixed as it resolves — Crypsis's "creatures your opponents control") — or chosen as it resolves: `{ choose: "color" }`, `{ choose: "card-type" }` (Pippin: the nine card types), with `or` alternatives offered first (Giver of Runes' "colorless or the color of your choice": `or: [{ text: "colorless", from: { filter: { colorless: true } } }]`; Apostle's Blessing's artifacts, `{ types: ["artifact"] }`) and `optional: true` for "you **may** choose a color. If you do, …" (Kabira Evangel). Asked as a `choose-modes` decision, one mode per quality ("Protection from red"), before anything gains it; a "choose a color" the text makes before several clauses that all use it is one `modal` of whole modes instead. "Of its controller's choice" (Wishmonger) is an `each-player-may` with `who: { controllerOfTarget: 0 }` and `choices` of fixed grants. Layer 6 (613.1f): a later loss of all abilities takes it away. The bots weigh each colour by the opposing spell or ability aimed at the permanent it would stop. `grant-protection.test.ts`. |
 | `grant-triggered` | `target`, `ability`, `duration` | "gains 'Whenever this creature deals combat damage to a player, draw that many cards'" (Hunter's Prowess, Hunter's Insight). Rides on the target's own modifiers, so `"end-of-turn"` expires with every other until-end-of-turn modifier. The ongoing equivalent is `StaticAbility.grantsTriggered` (§10). |
@@ -3708,6 +3709,7 @@ triggered: [
 | `crime-committed` | `who: "you" \| "opponent"` | **Committing a crime** (rule 700.13): the ability's controller (`"you"`) or any opponent of theirs cast a spell, activated an ability or put a triggered ability on the stack that targets an opponent of *theirs*, a permanent, spell or ability that opponent controls, or a card in that opponent's graveyard — once per spell or ability, however many such targets. A copy (not cast) or targets changed later commit none; a slot the triggering event filled isn't a target. "This ability triggers only once each turn" is `oncePerTurn: true`; "during your turn" is `condition: { kind: "your-turn" }` (Overzealous Muscle). Blood Hustler, Patrolling Peacemaker (`"opponent"`: Bob targeting Carol is Bob's crime). |
 | `this-discarded` | `byOpponent?` | "When you discard this card" (Titanbones, Bartered Cow): triggers from wherever the discard put the card — its graveyard, or exile for madness (rule 113.6k) — for this card only. `byOpponent` is "when a spell or ability an opponent controls causes you to discard this card" (Psychic Purge, Metrognome, Guerrilla Tactics): the discard's cause (`cards-discarded` `cause`, the controller of the spell or ability whose effect or cost discarded it) is an opponent — never the cleanup step's discard (rule 514.1) or your own. `"trigger-player"` is that opponent ("that player loses 5 life"). |
 | `this-cycled` | — | "When you cycle this card" (rule 702.29c: "when you discard this card to pay an activation cost of a cycling ability") — Dismantling Wave's "destroy all artifacts and enchantments". Triggers from wherever the card ended up, for this card only, and goes on the stack above the cycling ability, so it resolves before the draw (the rulings). |
+| `foretells` | `who: "you" \| "opponent" \| "any"` | "Whenever you foretell a card" (rule 702.143a — Dream Devourer). |
 | `cycles` | `who: "you" \| "opponent" \| "any"`, `otherOnly?` | "Whenever you cycle a card" (rule 702.29 — Snare Tactician), "another card" with `otherOnly` (Drannith Healer). On the stack above the cycling ability, so it resolves before the draw. "A card with a cycling ability" is the filter `hasCycling: true` (typecycling included — Zenith Flare). Not built: "for the first time each turn" (Valiant Rescuer). |
 | `predicate` | `match: (event) => boolean` | escape hatch — match the raw `GameEvent` |
 
@@ -4128,6 +4130,22 @@ their declarations to it (`withinAttackTax`), and the client shows the running c
   cost" (`{ filter: { notTypes: ["land"] }, mayhem: { cost: "mana-cost" } }`), cast the turn it
   was discarded; `dredge: N` is The Necrobloom's "land cards in your graveyard have dredge 2". A card
   with its own mayhem or dredge uses its own.
+  `keywords: [{ keyword, cost? }]` is any of unearth, encore, embalm, harmonize, retrace or sneak,
+  each working as a printed one does: "each creature card in your graveyard has unearth {2}{B}"
+  (Sedris), "… has encore. Its encore cost is equal to its mana cost" (Wire Surgeons — `cost` left
+  out is the card's mana cost, a card with none getting nothing), "… encore {X}, where X is its mana
+  value" (Graywater's Fixer, `cost: "mana-value"`), "Merfolk and Druid cards in your graveyard have
+  retrace" (Deeproot Historian; retrace has no cost of its own). A card with its own has both. An
+  emblem's static holds one too (Wrenn and Six). The same in a one-shot is `grant-graveyard-keyword`.
+- `castWithSneakFromGraveyard: { filter }` — Ninja Teen's "you may cast creature spells from your
+  graveyard using their sneak abilities": a sneak of their own, or one `grantsToGraveyard` gives.
+- `typesOutsideBattlefield: { ofType, zones?, addTypes?, addSubtypes?, addsChosenCreatureType?,
+  setsChosenCreatureType? }` — layer 4 off the battlefield: cards of the type `ofType` you own that
+  aren't on the battlefield and such spells you control, every filter reading it. "The same is true
+  for creature spells you control and creature cards you own that aren't on the battlefield" is
+  `{ ofType: "creature", addsChosenCreatureType: true }` beside the battlefield half's own field
+  (Arcane Adaptation, Maskwood Nexus, Conspiracy); `zones: ["graveyard"]` under `affects: { scope:
+  "self" }` is Ashes of the Fallen's.
 - `grantsToSpells: { filter?, castFrom?, keywords?, triggered?, splitSecond?, cantBeCountered?,
   freerunning?, webSlinging?, convoke?, improvise?, prowl? }` — `convoke: true` / `improvise:
   true` give the spells that way of paying (rules 702.51, 702.126): Chief Engineer's "artifact
@@ -4200,6 +4218,14 @@ their declarations to it (`withinAttackTax`), and the client shows the running c
   card in your hand has ninjutsu {2}{U}{B}"): the `ninjutsu()` helper's
   ability, listed after the card's own, so "ninjutsu abilities you activate"
   (a cost reduction, an `activates-ability` trigger) sees it.
+- `grantsCyclingInHand: { cost, filter, search?, eachPlayer? }` — cards matching
+  `filter` in your hand have cycling for `cost` (rule 702.29a — Rhet-Tomb
+  Mystic); `search` makes it typecycling and `eachPlayer` reaches every hand
+  (Homing Sliver). It's a `cycles` trigger's cycling like a printed one.
+- `grantsForetellInHand: { filter, reducedBy }` — cards matching `filter` in your
+  hand with no foretell of their own have foretell (rule 702.143a), at their mana
+  cost less `reducedBy` generic (Dream Devourer). The foretold card keeps the
+  cost once the grant is gone; `foretells` is "whenever you foretell a card".
 - `grantsBlitzInHand: { filter }` — the creature spells you cast matching
   `filter` have blitz for their mana cost (rule 702.152a — Henzie "Toolbox"
   Torre's "each creature spell you cast with mana value 4 or greater has
@@ -4399,7 +4425,8 @@ their declarations to it (`withinAttackTax`), and the client shows the running c
 - `addsChosenCreatureType: true` — layer 4: the creature type this static's
   own permanent chose as it entered (`chooseCreatureTypeOnEnter`) is added —
   Titan of Littjara's "This creature is the chosen type in addition to its
-  other types", from the moment it's chosen.
+  other types", from the moment it's chosen. `setsChosenCreatureType: true` is
+  the same with no "in addition" (Conspiracy): other creature types go.
 - `setColors: [...]` — layer 5: the affected permanents' colours become
   exactly these (rule 105.3) — a Zendikon's "enchanted land is a 3/3 black
   Ooze creature" (Corrupted Zendikon) beside its `addTypes`, `addSubtypes` and

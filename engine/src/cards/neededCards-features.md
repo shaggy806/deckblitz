@@ -356,6 +356,34 @@ is now priced at each X's own targets. The scaffolder reads each line. Keys:
 cost:target-controller-graveyard-reduction, cost:targeted-by-spells-mana-tax.
 Proving cards: Boreal Elemental, Jubilant Skybonder, Kopala, Lullmage's
 Domination.
+### Keyword abilities and types for cards outside the battlefield — built 2026-11-01
+
+The need-keys Phase 2 family `static:grant-to-cards-outside-battlefield`,
+features only. `grantsToGraveyard.keywords` gives cards in your graveyard
+unearth, encore, embalm, harmonize, retrace or sneak, each with its cost
+(`GraveyardKeywordGrant`: fixed, `"mana-cost"`, or `"mana-value"` for "encore
+{X}, where X is its mana value"), read by `Game.graveyardKeywordsOf`; an emblem
+holds such a grant too (rule 113.6p). `grant-graveyard-keyword` is the one-shot,
+until end of turn, for one target or each card matching a filter
+(`GameObject.grantedGraveyardKeywords`). `castWithSneakFromGraveyard` is Ninja
+Teen's "using their sneak abilities". `grantsCyclingInHand` (`search`,
+`eachPlayer`) and `grantsForetellInHand` (`reducedBy`, the cost kept on the card
+as `foretoldCost`) are the hand's, with the `foretells` trigger.
+`typesOutsideBattlefield` (`ofType`, `zones`) is layer 4 off the battlefield,
+read through `layerFour` by every filter, and `setsChosenCreatureType` is
+"are the chosen type" with no "in addition". The scaffolder reads them all.
+Keys: effect:grant-embalm, effect:grant-harmonize,
+effect:grant-unearth-to-graveyard-until-eot, static:grant-encore-in-graveyard,
+static:grant-sneak-to-graveyard, static:grant-unearth-to-graveyard,
+static:graveyard-cards-gain-chosen-type, static:static-types-outside-battlefield,
+static:grant-cycling-to-cards-in-hand, static:grant-foretell,
+static:retrace-grant. Proving cards: Sedris, the Traitor King; Solemn Doomguide;
+Wire Surgeons; Graywater's Fixer; Cursecloth Wrappings; Songcrafter Mage; Ninja
+Teen; Deeproot Historian; Six; Wrenn and Six; Rhet-Tomb Mystic; Tectonic
+Reformation; Homing Sliver; Dream Devourer; Ashes of the Fallen; Arcane
+Adaptation; Conspiracy; Maskwood Nexus. Left: Ghost Ark's "becomes crewed"
+trigger, Ethereal Valkyrie's "exile a card from your hand face down. It becomes
+foretold", Araumi's cost, Arcade Gannon (static:graveyard-cast-filter-amount).
 
 ### Activations this turn: a limit of N, or of a count, and a condition on the count — built 2026-11-01
 

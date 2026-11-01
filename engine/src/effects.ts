@@ -5118,6 +5118,20 @@ export type EffectSpec =
       readonly filter: CardFilter;
     }
   | {
+      /** A card in a graveyard gains a keyword ability until end of turn,
+       * with its cost (rule 611.2c: the cards are fixed as it resolves, so
+       * one put there later this turn doesn't gain it): `target` for one
+       * card ("target creature card in your graveyard gains embalm until end
+       * of turn. The embalm cost is equal to its mana cost" — Cursecloth
+       * Wrappings), or `filter` for each card in your graveyard that matches
+       * ("each artifact creature card in your graveyard gains unearth {3}
+       * until end of turn" — Ghost Ark). See {@link GraveyardKeywordGrant}. */
+      readonly kind: "grant-graveyard-keyword";
+      readonly target?: number;
+      readonly filter?: CardFilter;
+      readonly grant: GraveyardKeywordGrant;
+    }
+  | {
       /** "Choose target artifact card in your graveyard. You may cast that
        * card this turn" (Silas Renn, Emry) — `target` (a card in a graveyard,
        * via a `card-in-graveyard` spec) gets a one-shot permission for the
@@ -8053,6 +8067,28 @@ export type PileFate =
  */
 export type PileFateWord = "hand" | "graveyard" | "exile" | "battlefield" | "lose" | "other";
 
+/**
+ * A keyword ability given to a card in a graveyard (rule 604.1 — a static's
+ * `grantsToGraveyard.keywords`; a one-shot's `grant-graveyard-keyword`), each
+ * working exactly as a printed one does: unearth (rule 702.84), encore
+ * (702.141) and embalm (702.128) as activated abilities of the card, harmonize
+ * (702.180), retrace (702.81) and sneak (702.190) as ways to cast it.
+ *
+ * `cost` is the keyword's own: a fixed one ("unearth {1}{B}{R}"), or
+ * `"mana-cost"`, the default — the card's own mana cost ("the embalm cost is
+ * equal to its mana cost"), so a card with none gets nothing — or
+ * `"mana-value"`, generic mana equal to its mana value ("encore {X}, where X
+ * is its mana value"). Retrace has no cost of its own: it pays the mana cost.
+ * A card with the keyword of its own has both, and either may be used.
+ */
+export interface GraveyardKeywordGrant {
+  readonly keyword: GraveyardKeyword;
+  readonly cost?: string;
+}
+
+/** See {@link GraveyardKeywordGrant}. */
+export type GraveyardKeyword = "unearth" | "encore" | "embalm" | "harmonize" | "retrace" | "sneak";
+
 /** See {@link PileFateWord}. */
 export function pileFateWord(fate: PileFate): PileFateWord {
   if (typeof fate === "string") return fate;
@@ -8834,6 +8870,9 @@ export interface EffectApi {
   grantFlashback(target: TargetRef, cost?: string): void;
   /** See the `"grant-flashback-all"` {@link EffectSpec}. */
   grantFlashbackAll(filter: CardFilter): void;
+  /** See the `"grant-graveyard-keyword"` {@link EffectSpec}: `target` when
+   * given, else each card in your graveyard matching `filter`. */
+  grantGraveyardKeyword(target: TargetRef | undefined, filter: CardFilter | undefined, grant: GraveyardKeywordGrant): void;
   /** Let this effect's controller cast `target` (a card in a graveyard)
    * from there this turn — see the `grant-graveyard-cast` effect. */
   grantGraveyardCast(target: TargetRef): void;
@@ -12945,6 +12984,15 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "grant-flashback-all":
       ctx.grantFlashbackAll(spec.filter);
       return;
+    case "grant-graveyard-keyword": {
+      if (spec.target !== undefined) {
+        const target = ctx.targets[spec.target];
+        if (target !== undefined) ctx.grantGraveyardKeyword(target, undefined, spec.grant);
+      } else {
+        ctx.grantGraveyardKeyword(undefined, spec.filter, spec.grant);
+      }
+      return;
+    }
     case "grant-graveyard-cast": {
       const target = ctx.targets[spec.target];
       if (target !== undefined) ctx.grantGraveyardCast(target);

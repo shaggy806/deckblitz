@@ -405,6 +405,7 @@ function waitsToReturn(state: GameState, registry: CardRegistry, player: PlayerI
 
 function castableFromGraveyard(registry: CardRegistry, object: GameObject): boolean {
   if (object.grantedFlashback) return true;
+  if ((object.grantedGraveyardKeywords?.length ?? 0) > 0) return true;
   if (!registry.has(object.cardName)) return false;
   const def = registry.get(object.cardName);
   return (

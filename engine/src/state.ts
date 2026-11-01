@@ -26,6 +26,7 @@ import type {
   ResolvedEnterAttacking,
   ResolvedSearchInstead,
   ZoneSecondPick,
+  GraveyardKeyword,
 } from "./effects.js";
 import type { CardFilter } from "./filter.js";
 import type { CardNameAim, CardNameFilter } from "./card-names.js";
@@ -1066,6 +1067,16 @@ export interface GameObject {
    * `untilEndOfTurn`) in cleanup. `by` is the source of the effect that gave
    * it (Past in Flames), which names this flashback beside the card's own. */
   grantedFlashback?: { cost: string; untilEndOfTurn: boolean; by?: ObjectId } | null;
+  /** Keyword abilities a one-shot effect gave this card in a graveyard until
+   * end of turn (`grant-graveyard-keyword` — Cursecloth Wrappings' embalm,
+   * Ghost Ark's unearth), each with its cost as a string (`""` for retrace,
+   * which has none) and the effect's source. Ends on any zone change and in
+   * cleanup, as `grantedFlashback` does. */
+  grantedGraveyardKeywords?: readonly { keyword: GraveyardKeyword; cost: string; by: ObjectId }[];
+  /** The foretell cost a card foretold through a grant keeps
+   * (`grantsForetellInHand` — Dream Devourer): read before the card's own,
+   * which it has none of. Ends on any zone change. */
+  foretoldCost?: string;
   /** True while this card is suspended — exiled with time counters (rule
    * 702.62 — ROADMAP Phase 6b). A turn-based action removes one time counter
    * at the owner's upkeep; at zero it's cast for free. Cleared on any zone

@@ -6336,4 +6336,95 @@ describe("activation counts this turn", () => {
       ],
     });
   });
+
+});
+
+describe("cards outside the battlefield", () => {
+  const face = (type_line: string, oracle_text: string) =>
+    parseFace({ name: "Test Outside", type_line, oracle_text }, { tokenFor: () => null });
+
+  it("reads keyword abilities and types given to cards outside the battlefield", () => {
+    const statics = (type_line: string, oracle_text: string) => {
+      const card = face(type_line, oracle_text);
+      expect(card.complete).toBe(true);
+      return card.static[0];
+    };
+    expect(statics("Artifact", "Each artifact card in your graveyard has unearth {1}{B}{R}.").grantsToGraveyard).toEqual({
+      filter: { type: "artifact" },
+      keywords: [{ keyword: "unearth", cost: "{1}{B}{R}" }],
+    });
+    expect(
+      statics("Artifact", "Each artifact creature card in your graveyard has encore. Its encore cost is equal to its mana cost.")
+        .grantsToGraveyard,
+    ).toEqual({ filter: { types: ["artifact", "creature"] }, keywords: [{ keyword: "encore" }] });
+    expect(
+      statics("Artifact", "Each outlaw creature card in your graveyard has encore {X}, where X is its mana value.").grantsToGraveyard,
+    ).toEqual({
+      filter: { type: "creature", subtypes: ["Assassin", "Mercenary", "Pirate", "Rogue", "Warlock"] },
+      keywords: [{ keyword: "encore", cost: "mana-value" }],
+    });
+    expect(
+      statics("Artifact", "Each creature card in your graveyard that's a Cleric, Rogue, Warrior, and/or Wizard has unearth {1}{B}.")
+        .grantsToGraveyard?.filter,
+    ).toEqual({ type: "creature", subtypes: ["Cleric", "Rogue", "Warrior", "Wizard"] });
+    expect(statics("Artifact", "Merfolk and Druid cards in your graveyard have retrace.").grantsToGraveyard).toEqual({
+      filter: { subtypes: ["Merfolk", "Druid"] },
+      keywords: [{ keyword: "retrace" }],
+    });
+    const six = statics("Artifact", "During your turn, nonland permanent cards in your graveyard have retrace.");
+    expect(six.condition).toEqual({ kind: "your-turn" });
+    expect(six.grantsToGraveyard?.filter).toEqual({ notTypes: ["land", "instant", "sorcery"] });
+    expect(statics("Artifact", "You may cast creature spells from your graveyard using their sneak abilities.").castWithSneakFromGraveyard).toEqual(
+      { filter: { type: "creature" } },
+    );
+    expect(statics("Artifact", "Each creature card in your hand has cycling {1}{U}.").grantsCyclingInHand).toEqual({
+      cost: "{1}{U}",
+      filter: { type: "creature" },
+    });
+    expect(statics("Artifact", "Each Sliver card in each player's hand has slivercycling {3}.").grantsCyclingInHand).toEqual({
+      cost: "{3}",
+      filter: { subtype: "Sliver" },
+      search: { subtype: "Sliver" },
+      eachPlayer: true,
+    });
+    expect(
+      statics("Artifact", "Each nonland card in your hand without foretell has foretell. Its foretell cost is equal to its mana cost reduced by {2}.")
+        .grantsForetellInHand,
+    ).toEqual({ filter: { notTypes: ["land"] }, reducedBy: 2 });
+    expect(
+      statics("Artifact", "Each creature card in your graveyard has the chosen creature type in addition to its other types.")
+        .typesOutsideBattlefield,
+    ).toEqual({ ofType: "creature", zones: ["graveyard"], addsChosenCreatureType: true });
+    const same =
+      "The same is true for creature spells you control and creature cards you own that aren't on the battlefield.";
+    const conspiracy = statics("Enchantment", `Creatures you control are the chosen type. ${same}`);
+    expect(conspiracy.setsChosenCreatureType).toBe(true);
+    expect(conspiracy.typesOutsideBattlefield).toEqual({ ofType: "creature", setsChosenCreatureType: true });
+    expect(statics("Enchantment", `Creatures you control are artifacts in addition to their other types. ${same}`).typesOutsideBattlefield).toEqual({
+      ofType: "creature",
+      addTypes: ["artifact"],
+    });
+    expect(
+      statics("Creature — Plant", "Lands you control and land cards you own that aren't on the battlefield are Deserts in addition to their other types.")
+        .typesOutsideBattlefield,
+    ).toEqual({ ofType: "land", addSubtypes: ["Desert"] });
+  });
+
+  it("reads 'gains [keyword] until end of turn' of a graveyard card, and 'whenever you foretell a card'", () => {
+    const wrappings = face(
+      "Artifact",
+      "{T}: Target creature card in your graveyard gains embalm until end of turn. The embalm cost is equal to its mana cost.",
+    );
+    expect(wrappings.complete).toBe(true);
+    expect(wrappings.activated[0].targets).toEqual([{ kind: "card-in-graveyard", whose: "you", filter: { type: "creature" } }]);
+    expect(wrappings.activated[0].effect).toEqual({ kind: "grant-graveyard-keyword", target: 0, grant: { keyword: "embalm" } });
+    const mass = face("Artifact", "{T}: Each artifact creature card in your graveyard gains unearth {3} until end of turn.");
+    expect(mass.activated[0].effect).toEqual({
+      kind: "grant-graveyard-keyword",
+      filter: { types: ["artifact", "creature"] },
+      grant: { keyword: "unearth", cost: "{3}" },
+    });
+    const devourer = face("Creature — Demon", "Whenever you foretell a card, this creature gets +2/+0 until end of turn.");
+    expect(devourer.triggered[0].trigger).toEqual({ on: "foretells", who: "you" });
+  });
 });
