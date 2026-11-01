@@ -86,6 +86,49 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2: creatures that blocked or were blocked this turn** (2026-11-01, `726451744`;
+  `filter:blocked-or-blocked-by-filter-this-turn` and three riding along) — `TurnHistory.blocks`,
+  `CardFilter.blockedThisTurn`, the `end-of-combat-this-turn` timing; 13 freed. You Cannot Pass!, Sea
+  Troll, Venomous Breath, Ride Down, Triton Tactics, Sizzling Barrage, Joven's Ferrets.
+- **Need-keys Phase 2: a face-down permanent turned face up by an effect** (2026-11-01, `207f5b0e3`;
+  `effect:turn-face-up`) — the `turn-face-up` effect through `Game.becomeFaceUp`, honouring
+  `cantTurnFaceUp`; 5 freed. Ixidor, Break Open, Skirk Alarmist, Showstopping Surprise, Karlov Watchdog.
+- **Need-keys Phase 2: return what was put into a graveyard this turn** (2026-11-01, `e9a589196`) —
+  tests and a scaffolder template over existing machinery; 6 freed. Faith's Reward, Second Sunrise,
+  Gleancrawler.
+- **Need-keys Phase 2: an unless's payments as one `UnlessOption` each** (2026-11-01, `c8d9d5b4b`;
+  nine keys of `cost:unless-pay-colored-per-amount`) — `andLife`, `ifPaid`, `payLifeAmount`,
+  `payEnergy`, `putCounter`, `returnToHand`, `tapPermanent`, `sacrificeThat`, and a `pay-energy`
+  effect; Coral Atoll, Dormant Volcano, Everglades, Koskun Falls, Public Thoroughfare and Waterspout
+  Djinn moved onto them; 2 freed. Mundungu, Essence Vortex, Rush of Inspiration // Crackling Falls,
+  Cyclone, Karoo, Command Bridge, Enchanter's Bane, Curse Artifact.
+- **Need-keys Phase 2: attack taxes** (2026-11-01, `6d04fe4fd`; `cost:attack-tax` and its `-amount`,
+  `-life`, `-planeswalkers`) — `attackTax`'s `generic` a number or a live count, `life`, `covers`,
+  also as a `player-effect` for a duration, with the client's "costs 2 life to attack"; 5 freed.
+  Baird, Sphere of Safety, Collective Restraint, Onakke Oathkeeper, Sivitri, Forbidding Spirit, War
+  Tax.
+- **Need-keys Phase 2: a sweep that leaves out its source** (2026-11-01, `22d1e3141`;
+  `effect:destroy-all-except-source`) — `destroy-all`'s `exceptSource`; 3 freed. Novablast Wurm,
+  Tranquil Grove, Mageta the Lion, Worldslayer, Elspeth Tirel, Desolation Giant.
+- **Need-keys Phase 2: a life total set** (2026-11-01, `cf3b8584c`; `effect:life-total-becomes`,
+  `amount:starting-life-total`) — `set-life-total` (rule 119.5: a real gain or loss of the
+  difference), the `startingLifeTotal` and `lowestLifeTotal` amounts, six cards that emulated it moved
+  over; 5 freed. Magister Sphinx, Biorhythm, Repay in Kind, Oketra's Last Mercy, The Endstone,
+  Resolute Archangel.
+- **Need-keys Phase 2: choosing among cards revealed from a hand** (2026-11-01, `79919384a`;
+  `effect:reveal-n-from-hand-you-choose-discard`) — `discard-chosen`'s `reveals` and `picks`; 6 freed.
+  Blackmail, Mire's Toll, Noggin Whack, Cabal Interrogator.
+- **Need-keys Phase 2: protection whose quality is any source quality** (2026-11-01, `4365a0501`;
+  nine keys of `keyword:protection-from-spells-and-cast-permanents`) — `qualityMatches` read by all
+  four parts of rule 702.16, `fromPlayers` (702.16k), everything (702.16j), `CardFilter.isSpell` with
+  `Game.enteringSource`, `exiledCardTypes`, `doesntRemoveSource` by card type (702.16n),
+  `protectionLabel`; 3 freed. Cliffside Rescuer, Figure of Fable, Absolute Virtue, True-Name Nemesis,
+  Vexilus Praetor, Emrakul the Aeons Torn, Emrakul the World Anew, Devoted Caretaker, Baneslayer
+  Angel, Riders of Gavony, Mirror Golem, Tattoo Ward.
+- **Need-keys Phase 2: a source of your choice over any recipient** (2026-11-01, `258359f30`; four
+  keys of `replacement:prevent-damage-from-chosen-source`) — `to: "your-side-creatures"`,
+  `gainLifeFrom`, tests and templates over what existed; 6 freed. Burrenton Forge-Tender, Prahv,
+  Pilgrim of Virtue, Opal-Eye, Samite Ministration, Shadowbane.
 - **Need-keys Phase 2: impulse permissions whose window is a predicate** (2026-11-01, `620d12027`;
   nine keys of `zone:impulse-permission-options`) — one `ImpulseDuration` vocabulary for
   `impulse-exile` and `exile`'s `mayCast`, which also gains `play` (during your next turn, until end

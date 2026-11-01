@@ -768,7 +768,13 @@ missing. Re-run `--greedy` for Phase 2's order.
   limits on the untap step (1 key, 4 freed, 6 proving cards); restrictions keyed to the other
   creatures in combat (5 keys, 11 freed, 5 proving cards); token copies of a linked source (5 keys,
   16 freed, 8 proving cards); impulse permissions whose window is a predicate (9 keys, 10 freed, 10
-  proving cards).
+  proving cards); a source of your choice over any recipient (4 keys, 6 freed, 6 proving cards);
+  protection by any source quality (9 keys, 3 freed, 12 proving cards); choosing among revealed cards
+  (1 key, 6 freed, 4 proving cards); a life total set (2 keys, 5 freed, 6 proving cards); a sweep
+  leaving out its source (1 key, 3 freed, 6 proving cards); attack taxes (4 keys, 5 freed, 7 proving
+  cards); an unless's payments (9 keys, 2 freed, 8 proving cards); return what entered a graveyard
+  this turn (1 key, 6 freed, 3 proving cards); turned face up by an effect (1 key, 5 freed, 5 proving
+  cards); blocked or was blocked this turn (4 keys, 13 freed, 7 proving cards).
 
 ## Rough size
 

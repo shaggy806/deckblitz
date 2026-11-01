@@ -6,6 +6,9 @@ rule number, the code that does it today and the cards it blocks. `BACKLOG.md` k
 per gap under the same bold title; when a gap closes, delete it here and move its
 `BACKLOG.md` line to `COMPLETED.md`.
 
+- **`exile-all` and `damage-all`'s `except` spare a whole token stack** (found 2026-11-01). They
+  compare the stack's id, so a token stack as the source is spared whole, where `destroy-all`'s
+  `exceptSource` spares one token and takes the rest. Representation must not change a result.
 - **A must-block creature's only companion can't legally join it** (found 2026-11-01).
   `withinBlockCompany` (`combat/blocking.ts`) can answer with an illegal `[]` when a creature that
   must block needs a companion (Craven Hulk's restriction) and its only companion can't join it, as

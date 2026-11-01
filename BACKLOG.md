@@ -378,17 +378,24 @@ section keeps only what to do next.
   reading X, Tawnos a sacrifice and an exile in one cost, Phantom Steed its "Illusion" only if a
   creature, Prototype Portal and Soul Foundry an X equal to the mana value, Nahiri an attack
   requirement, Elkin Lair and Advanced Reconstruction a random exile, Gwen Stacy her back face's
-  trigger). **1094 freed cards wait for the authoring sweep**
+  trigger), and ten more (2026-11-01; `COMPLETED.md` has each): a source of your choice over any
+  recipient, protection by any source quality, choosing among revealed cards, a life total set, a
+  sweep leaving out its source, attack taxes, an unless's payments, return what entered a graveyard
+  this turn, turned face up by an effect, blocked or was blocked this turn (54 freed, 64 proving
+  cards — on the stale list Mourner's Shield needs "shares a color with the exiled card" as a filter,
+  Norn's Annex a {W/P} attack tax, Archangel of Tithes `static:block-tax`, Reservoir Kraken several
+  opponents answering an unless, Shadow of Mortality a cost reduced by the difference from starting
+  life, Glyph of Reincarnation, Glyph of Delusion and Cathedral Membrane their blocked-creature
+  wording). **1145 freed cards wait for the authoring sweep**
   (`cards:needs -- --stale`); the user authors them in one sweep once the reasonable keys are built.
   Cloud sessions are building `keyword:hexproof-from-colors`, the combat-restriction second group,
   `effect:prevent-next-n-damage-to-you`, the cascade/sunburst grants to spells,
   `cost:kicker-nonmana-cost` and `cost:alt-cost-discard-cards`. Being built:
-  `replacement:prevent-damage-from-chosen-source`,
-  `keyword:protection-from-spells-and-cast-permanents`, `cost:attack-tax`,
-  `cost:unless-pay-colored-per-amount`, `effect:discard-chosen-from-revealed-hand`,
-  `effect:life-total-becomes`, `effect:destroy-all-except-source`. Next unclaimed:
-  `condition:return-cards-put-in-graveyard-from-battlefield-this-turn` (9),
-  `mechanic:control-attack-block-choices` (10), `mechanic:face-down` (9).
+  `mechanic:companion`, `mechanic:deck-any-number-copies`, `replacement:copy-on-enter-options`,
+  `replacement:new-event-replacements`, `effect:cast-and-activate-restrictions`,
+  `effect:temporary-player-effect`. Next unclaimed: `mechanic:control-attack-block-choices` (10, a
+  design of its own), `trigger:tapped-for-mana-nonmana-trigger` (9), `zone:visibility-extensions`
+  (9), `condition:most-common-color-among-chosen-player-permanents` (9).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next
@@ -457,6 +464,7 @@ One line each; the detail (rule numbers, code sites, the cards each blocks) is i
 **`docs/engine-gaps.md`**, under the same bold title. When a gap closes, delete its detail
 there and move this line to `COMPLETED.md`.
 
+- **`exile-all` and `damage-all`'s `except` spare a whole token stack** — they compare the stack's id, where `destroy-all`'s `exceptSource` spares one token and takes the rest.
 - **A must-block creature's only companion can't legally join it** — `withinBlockCompany` (`combat/blocking.ts`) can answer with an illegal `[]`, as with an attacker that can't be blocked by more than one; a person would have no legal declaration.
 - **A target tax's offers are approximate in two corners** — `target-count.ts`'s sum over a `targeting` tax and a two-slot `targetCostReduction` beside a tax mis-offer, never mis-charge.
 - **An activation count restarts on a control change**: `activated-this-turn` keys on the object's timestamp, so Dragon Whelp taken mid-turn counts from zero; `timesEachTurn` doesn't (`docs/engine-gaps.md`).
