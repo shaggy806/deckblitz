@@ -2520,6 +2520,11 @@ export type EffectSpec =
       readonly onlyControllersDamagedBySource?: boolean;
       /** "They can't be regenerated" (rule 701.15c — Wrath of God). */
       readonly cantBeRegenerated?: boolean;
+      /** "Destroy all **other** creatures" (Novablast Wurm), "all permanents
+       * **other than this Equipment**" (Worldslayer): the effect's source is
+       * left out, whatever `filter` says of it. One token of a stack is the
+       * source; the rest of the stack goes. */
+      readonly exceptSource?: boolean;
     }
   | {
       /** Deal `amount` damage to every battlefield permanent matching `filter`
@@ -8690,6 +8695,7 @@ export interface EffectApi {
     onlyControllersDamagedBySource?: boolean,
     cantBeRegenerated?: boolean,
     scopeTo?: PlayerId,
+    exceptSource?: boolean,
   ): void;
   /** Give a permanent a regeneration shield (rule 701.15a). */
   regenerate(target: TargetRef): void;
@@ -12826,7 +12832,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "destroy-all": {
       const scopeTo = scopedController(spec.controlledByTarget, ctx);
       if (spec.controlledByTarget !== undefined && scopeTo === undefined) return;
-      ctx.destroyAll(spec.filter, spec.onlyControllersDamagedBySource, spec.cantBeRegenerated === true, scopeTo);
+      ctx.destroyAll(spec.filter, spec.onlyControllersDamagedBySource, spec.cantBeRegenerated === true, scopeTo, spec.exceptSource === true);
       return;
     }
     case "regenerate": {

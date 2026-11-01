@@ -27299,13 +27299,14 @@ export class Game {
       },
       destroyPermanent: (target, cantBeRegenerated) =>
         this.destroyByEffect(target, true, cantBeRegenerated === true),
-      destroyAll: (filter, onlyDamaged, cantBeRegenerated, scopeTo) =>
+      destroyAll: (filter, onlyDamaged, cantBeRegenerated, scopeTo, exceptSource) =>
         this.destroyAllByEffect(
           scopeTo ?? controller,
           filter,
           onlyDamaged === true ? source : undefined,
           x,
           cantBeRegenerated === true,
+          exceptSource === true ? source : undefined,
         ),
       regenerate: (target) => this.regenerateByEffect(target),
       regenerateAll: (filter) => {
@@ -37299,6 +37300,7 @@ export class Game {
     damagedBy?: ObjectId,
     x = 0,
     cantBeRegenerated = false,
+    except?: ObjectId,
   ): void {
     // Steel Hellkite: only permanents controlled by a player this source hit
     // in combat this turn. Read off the source rather than a filter clause,
@@ -37307,7 +37309,11 @@ export class Game {
       damagedBy === undefined
         ? null
         : (this.state.objects[damagedBy]?.combatDamagedPlayersThisTurn ?? []);
+    // "All other": one token of a stack is the one left, its fellows are others.
+    const spared =
+      except !== undefined && this.state.objects[except]?.zone === "battlefield" ? this.splitOneFromStack(except) : undefined;
     for (const id of [...this.state.zones.shared.battlefield]) {
+      if (id === spared) continue;
       if (
         damagedPlayers !== null &&
         !damagedPlayers.includes(this.state.objects[id].controller)

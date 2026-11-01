@@ -1868,6 +1868,17 @@ remove-counters-any-kind. Still open on its cards: Cemetery Desecrator
 (`decision:choose-from-any-graveyard`), Gwen Stacy
 (`zone:impulse-while-you-control-source`).
 
+### A sweep that leaves out its source — built 2026-11-01
+
+`destroy-all`'s `exceptSource`, as `damage-all`'s and `exile-all`'s: "destroy all
+other creatures", "all permanents other than this Equipment", "except for
+Mageta". One token of a stack is the source and the rest of the stack goes.
+Proving cards: Novablast Wurm, Tranquil Grove, Mageta the Lion, Worldslayer,
+Elspeth Tirel, Desolation Giant (`destroy-all-except-source.test.ts`). Key:
+effect:destroy-all-except-source. Still on its cards, freed by this: Amalia
+Benavides Aguirre (explore, then a power check), Magister of Worth (a council
+vote), Myojin of Cleansing Fire (a counter if cast from hand).
+
 ### A life total set — built 2026-11-01
 
 `set-life-total` (`who`, `amount`) and two amounts, `startingLifeTotal` and

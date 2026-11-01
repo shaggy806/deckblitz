@@ -957,7 +957,8 @@
   "zone:exile-target-play-until-next-turn",
   "effect:reveal-n-from-hand-you-choose-discard",
   "effect:life-total-becomes",
-  "amount:starting-life-total"
+  "amount:starting-life-total",
+  "effect:destroy-all-except-source"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

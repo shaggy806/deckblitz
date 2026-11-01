@@ -3637,6 +3637,23 @@ describe("damage by this source, switches, defending-player restrictions, a targ
     expect(wrong.triggered?.[0]?.targetsChosenBy).toBeUndefined();
   });
 
+  it("reads a sweep that leaves out its source: other, other than, except for", () => {
+    const wurm = face("Creature — Wurm", "Whenever this creature attacks, destroy all other creatures.");
+    expect(wurm.triggered[0].effect).toEqual({ kind: "destroy-all", filter: { type: "creature" }, exceptSource: true });
+    const grove = face("Enchantment", "{1}{G}{G}: Destroy all other enchantments.");
+    expect(grove.activated[0].effect).toEqual({ kind: "destroy-all", filter: { type: "enchantment" }, exceptSource: true });
+    expect(parseSentence("Destroy all permanents other than ~.", ctx())).toEqual({ kind: "destroy-all", filter: {}, exceptSource: true });
+    const mageta = face("Creature — Human Spellshaper", "{2}{W}{W}, {T}: Destroy all creatures except for this creature. Those creatures can't be regenerated.");
+    expect(mageta.activated[0].effect).toEqual({ kind: "destroy-all", filter: { type: "creature" }, exceptSource: true, cantBeRegenerated: true });
+    expect(parseSentence("Destroy all other permanents except for lands and tokens.", ctx())).toEqual({
+      kind: "destroy-all",
+      filter: { notTypes: ["land"], token: false },
+      exceptSource: true,
+    });
+    const giant = face("Sorcery", "Destroy all other creatures you control.");
+    expect(giant.effect).toEqual({ kind: "destroy-all", filter: { type: "creature", controlledBy: "you" }, exceptSource: true });
+  });
+
   it("reads a life total set (rule 119.5): a number, the starting total, a count of each player's, the lowest", () => {
     const sphinx = face("Artifact Creature — Sphinx", "When this creature enters, target player's life total becomes 10.");
     expect(sphinx.triggered[0].effect).toEqual({ kind: "set-life-total", who: 0, amount: 10 });

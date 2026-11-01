@@ -2644,6 +2644,22 @@ export function parseSentence(sentence, ctx) {
     const filter = blockRelationFilterOf(m[1]);
     return filter === undefined ? null : { kind: "destroy-all", filter };
   }
+  // "Destroy all other creatures" (Novablast Wurm), "destroy all other
+  // enchantments" (Tranquil Grove), "destroy all creatures except for ~"
+  // (Mageta the Lion), "destroy all permanents other than ~" (Worldslayer),
+  // "destroy all other permanents except for lands and tokens" (Elspeth Tirel).
+  if (/^destroy all other permanents except for lands and tokens\.$/i.test(s)) {
+    return { kind: "destroy-all", filter: { notTypes: ["land"], token: false }, exceptSource: true };
+  }
+  if ((m = re(`destroy all (?:other (.+)|(.+) (?:other than|except for) ~)`).exec(s))) {
+    const yours = /^(.+) you control$/i.exec(m[1] ?? m[2]);
+    const phrase = yours?.[1] ?? m[1] ?? m[2];
+    const every = /^permanents$/i.test(phrase);
+    const filter = every ? {} : parseTypePhrase(phrase);
+    if (filter !== null && (every || Object.keys(filter).length > 0)) {
+      return { kind: "destroy-all", filter: { ...filter, ...(yours !== null ? { controlledBy: "you" } : {}) }, exceptSource: true };
+    }
+  }
   if ((m = re(`(destroy|exile) (${TARGET}) ${NAMESAKES}`).exec(s))) {
     const filter = namesakes(m[3], slot(m[2]));
     return filter === undefined ? null : { kind: m[1].toLowerCase() === "destroy" ? "destroy-all" : "exile-all", filter };
@@ -4623,7 +4639,7 @@ export function parseEffect(text, outer) {
       continue;
     }
     // "They can't be regenerated." after a sweep (Catastrophe, Endemic Plague).
-    if (/^they can't be regenerated\.$/i.test(sentence) && parsed.at(-1)?.kind === "destroy-all") {
+    if (/^(?:they|those creatures) can't be regenerated\.$/i.test(sentence) && parsed.at(-1)?.kind === "destroy-all") {
       parsed[parsed.length - 1] = { ...parsed.at(-1), cantBeRegenerated: true };
       continue;
     }
