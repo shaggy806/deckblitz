@@ -25,6 +25,7 @@ import type {
   PileFateWord,
   ResolvedEnterAttacking,
   ResolvedSearchInstead,
+  ZoneChoiceSplitCase,
   ZoneSecondPick,
   GraveyardKeyword,
 } from "./effects.js";
@@ -3146,6 +3147,9 @@ export type AwaitingDecision =
       /** A rule the chosen cards must obey as a set — a `search-library`'s
        * `together` (Myriad Landscape's "that share a land type"). */
       readonly together?: ZoneChoiceTogether;
+      /** Where each chosen card goes by what it is — a `look-and-choose`'s
+       * `split` (Zimone's Experiment), read as the cards move. */
+      readonly split?: readonly ZoneChoiceSplitCase[];
       /** Before turn 1 (rule 103.6a — `Game.beginOpeningHandActions`): which
        * of `player`'s opening-hand cards that may begin the game on the
        * battlefield do — or, with `destination` `"reveal"`, which to reveal

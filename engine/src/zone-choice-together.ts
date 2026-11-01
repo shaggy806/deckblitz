@@ -51,6 +51,41 @@ export interface ZoneChoiceTogether {
   readonly orNone?: boolean;
 }
 
+/** The card types a card outside the command zone can have (rule 205.2a):
+ * what "each card type" and "a card type among" range over. */
+export const EVERY_CARD_TYPE = [
+  "artifact",
+  "battle",
+  "creature",
+  "enchantment",
+  "instant",
+  "kindred",
+  "land",
+  "planeswalker",
+  "sorcery",
+] as const;
+
+/** `"one-each"`: the most of `eligible` that can be chosen at once, a card a
+ * slot — a bipartite matching, by augmenting paths. */
+export function largestOneEach(together: ZoneChoiceTogether, eligible: readonly ObjectId[]): number {
+  const holder = new Map<string, ObjectId>();
+  const place = (id: ObjectId, seen: Set<string>): boolean => {
+    for (const slot of together.tags[id] ?? []) {
+      if (seen.has(slot)) continue;
+      seen.add(slot);
+      const other = holder.get(slot);
+      if (other === undefined || place(other, seen)) {
+        holder.set(slot, id);
+        return true;
+      }
+    }
+    return false;
+  };
+  let matched = 0;
+  for (const id of eligible) if (place(id, new Set())) matched += 1;
+  return matched;
+}
+
 /** `"total"`: the chosen cards' tags, as numbers, summed. */
 const totalOf = (together: ZoneChoiceTogether, chosen: readonly ObjectId[]): number =>
   chosen.reduce((n, id) => n + Number(together.tags[id]?.[0] ?? 0), 0);

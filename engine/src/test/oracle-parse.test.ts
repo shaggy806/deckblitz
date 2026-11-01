@@ -5824,6 +5824,56 @@ describe("a choice drawn from several zones, or one card a slot", () => {
         ],
       },
     });
+    // "An Angel card, a Demon card, and/or a Dragon card … put them": Kaalia.
+    const kaalia = face(
+      "Kaalia, Zenith Seeker",
+      "Legendary Creature — Human Cleric",
+      "When Kaalia enters, look at the top six cards of your library. You may reveal an Angel card, a Demon card, and/or a Dragon card from among them and put them into your hand. Put the rest on the bottom of your library in a random order.",
+    );
+    expect(kaalia.triggered[0].effect).toMatchObject({ count: 6, reveal: "chosen", max: 3 });
+    // The slots read from the spells cast this turn: Hurkyl.
+    const hurkyl = face(
+      "Hurkyl, Master Wizard",
+      "Legendary Creature — Human Wizard Advisor",
+      "At the beginning of your end step, if you've cast a noncreature spell this turn, reveal the top five cards of your library. For each card type among noncreature spells you've cast this turn, you may put a card of that type from among the revealed cards into your hand. Put the rest on the bottom of your library in a random order.",
+    );
+    expect(hurkyl.triggered[0].effect).toMatchObject({
+      count: 5,
+      reveal: true,
+      together: { oneEachTypeAmong: { spellsYouCastThisTurn: { notTypes: ["creature"] } } },
+      leftover: "bottom-random",
+    });
+    // Each chosen card by what it is: Zimone's Experiment.
+    const zimone = face(
+      "Zimone's Experiment",
+      "Sorcery",
+      "Look at the top five cards of your library. You may reveal up to two creature and/or land cards from among them, then put the rest on the bottom of your library in a random order. Put all land cards revealed this way onto the battlefield tapped and put all creature cards revealed this way into your hand.",
+    );
+    expect(zimone.effect).toMatchObject({
+      kind: "look-and-choose",
+      count: 5,
+      reveal: "chosen",
+      max: 2,
+      filter: { typesAnyOf: ["creature", "land"] },
+      split: [
+        { filter: { type: "land" }, destination: "battlefield", enterTapped: true },
+        { filter: { type: "creature" }, destination: "hand" },
+      ],
+    });
+    // A total mana value cap: Michelangelo's Technique's look.
+    const technique = face(
+      "Test Technique",
+      "Sorcery",
+      "Look at the top eight cards of your library. Put up to two creature cards with total mana value 6 or less from among them onto the battlefield and the rest on the bottom of your library in a random order.",
+    );
+    expect(technique.effect).toMatchObject({
+      count: 8,
+      max: 2,
+      filter: { type: "creature" },
+      together: { totalManaValueAtMost: 6 },
+      destination: "battlefield",
+      leftover: "bottom-random",
+    });
     // The rest anywhere but the bottom is another shape.
     const rest = face(
       "Test Recruiter",

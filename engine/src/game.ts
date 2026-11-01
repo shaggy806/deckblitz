@@ -242,15 +242,16 @@ import type {
   ResolutionContext,
   ResolvedEnterAttacking,
   ReturnToHandZone,
-  SearchTogether,
+  ResolvedSearchTogether,
   SearchMore,
   SearchZones,
   ThisWayKind,
   ZoneChoiceFilter,
   GraveyardKeyword,
   GraveyardKeywordGrant,
+  ZoneChoiceSplitCase,
 } from "./effects.js";
-import type { ZoneChoiceTogether } from "./zone-choice-together.js";
+import { EVERY_CARD_TYPE, largestOneEach, type ZoneChoiceTogether } from "./zone-choice-together.js";
 import {
   aggregateMatches,
   aggregateOver,
@@ -689,6 +690,28 @@ const shieldLeft = (shield: PreventionShield): number =>
 
 /** Every order of `items` but the one given (few: the effects on one damage
  * event). */
+/** The cards a set rule lets be chosen at all: a card fitting no slot can't
+ * fill one, and a card over a mana value cap can't be under it. */
+function eligibleForTogether(together: ZoneChoiceTogether | undefined, cards: readonly ObjectId[]): readonly ObjectId[] {
+  if (together?.rule === "one-each") return cards.filter((id) => (together.tags[id] ?? []).length > 0);
+  if (together?.rule === "total" && together.atMost !== undefined) {
+    const cap = together.atMost;
+    return cards.filter((id) => Number(together.tags[id]?.[0] ?? 0) <= cap);
+  }
+  return cards;
+}
+
+/** What a client asks for a `look-and-choose`'s `split`. */
+function splitPrompt(split: readonly ZoneChoiceSplitCase[], most: number): string {
+  const where = (c: ZoneChoiceSplitCase): string =>
+    c.destination === "hand"
+      ? "into your hand"
+      : c.destination === "graveyard"
+        ? "into your graveyard"
+        : `onto the battlefield${c.enterTapped === true ? " tapped" : ""}`;
+  return `Choose up to ${most} card${most === 1 ? "" : "s"}: ${split.map((c) => `${c.label} ${where(c)}`).join(", ")}`;
+}
+
 function permutationsOf<T>(items: readonly T[]): T[][] {
   const out: T[][] = [];
   const walk = (prefix: T[], rest: readonly T[]): void => {
@@ -8136,7 +8159,7 @@ export class Game {
       }
     }
     for (const [index, id] of chosen.entries()) {
-      if (this.chosenFromZoneTo(awaiting, index) !== "battlefield") continue;
+      if (this.chosenFromZoneTo(awaiting, index, id) !== "battlefield") continue;
       // Face down, it has no "as this enters" choices (708.3).
       if (awaiting.enterAs?.faceDown !== undefined) continue;
       // What it enters attached to first: an Aura the effect names a host
@@ -8157,7 +8180,7 @@ export class Game {
     // move, a commander kept for the library going where it was picked to.
     const answers = entry.commanderAnswers ?? {};
     for (const [index, id] of chosen.entries()) {
-      const to = this.chosenFromZoneTo(awaiting, index);
+      const to = this.chosenFromZoneTo(awaiting, index, id);
       if (to !== "library-top" && to !== "library-bottom") continue;
       const object = this.state.objects[id];
       if (object?.zone !== "hand" || object.isCommander !== true || id in answers) continue;
@@ -8380,14 +8403,25 @@ export class Game {
 
   /** Where a `choose-from-zone` answer sends its `index`th chosen card: a
    * split tutor (Cultivate) sends the first to `destination` and the rest to
-   * `restDestination`. */
+   * `restDestination`; a `look-and-choose`'s `split` sends each by what it is. */
   private chosenFromZoneTo(
     awaiting: Extract<AwaitingDecision, { kind: "choose-from-zone" }>,
     index: number,
+    id: ObjectId,
   ): Extract<AwaitingDecision, { kind: "choose-from-zone" }>["destination"] {
+    const byKind = this.zoneChoiceSplitCase(awaiting, id);
+    if (byKind !== undefined) return byKind.destination;
     return index === 0 || awaiting.restDestination === undefined
       ? awaiting.destination
       : awaiting.restDestination;
+  }
+
+  /** The `split` case a chosen card falls under, the first it matches. */
+  private zoneChoiceSplitCase(
+    awaiting: Extract<AwaitingDecision, { kind: "choose-from-zone" }>,
+    id: ObjectId,
+  ): ZoneChoiceSplitCase | undefined {
+    return awaiting.split?.find((c) => matchesFilter(this.state, this.registry, id, c.filter, { you: awaiting.player }));
   }
 
   /** The moves half of {@link applyChooseFromZone}: the chosen cards to where
@@ -8444,7 +8478,8 @@ export class Game {
         this.moveObject(id, "command");
         return;
       }
-      const to = isRest ? rest.destination : this.chosenFromZoneTo(awaiting, index);
+      const byKind = isRest ? undefined : this.zoneChoiceSplitCase(awaiting, id);
+      const to = isRest ? rest.destination : this.chosenFromZoneTo(awaiting, index, id);
       // A tutor-to-top's find is put on top *after* the search's shuffle
       // (below) — moving it now would only have it shuffled back in.
       if (to === "library-top" || to === "exile-playable") return;
@@ -8507,7 +8542,11 @@ export class Game {
       const under = to === "battlefield" && !isRest ? awaiting.enterUnder : undefined;
       const enterAs = to === "battlefield" && !isRest ? awaiting.enterAs : undefined;
       const moved = this.moveObject(id, to, {
-        tapped: isRest ? rest.enterTapped === true : awaiting.enterTapped === true,
+        tapped: isRest
+          ? rest.enterTapped === true
+          : byKind !== undefined
+            ? byKind.enterTapped === true && to === "battlefield"
+            : awaiting.enterTapped === true,
         ...(under !== undefined ? { under } : {}),
         ...enterTypesEntry(enterAs),
         ...faceDownEntry(enterAs),
@@ -30110,7 +30149,7 @@ export class Game {
           ),
         );
       },
-      lookAndChoose: (zone, count, min, max, destination, leftover, filter, enterTapped, then, reveal, leftoverIf, secondPick, attacking, enterAs, chooser, picker, withCounters, unlinked, needsMin, attachTo, playable, together) => {
+      lookAndChoose: (zone, count, min, max, destination, leftover, filter, enterTapped, then, reveal, leftoverIf, secondPick, attacking, enterAs, chooser, picker, withCounters, unlinked, needsMin, attachTo, playable, together, split) => {
         // "Exile one of them face down" (hideaway): linked to the source, in
         // the stint this ability refers to (rule 607.2a) — unless `unlinked`.
         const sourceObject = this.state.objects[source];
@@ -30165,6 +30204,7 @@ export class Game {
                 ...(playable.spendAs !== undefined ? { spendAs: playable.spendAs } : {}),
               },
           together === undefined ? undefined : { together, x },
+          split,
         );
       },
     };
@@ -30225,7 +30265,10 @@ export class Game {
     impulseGrant?: GameObject["impulse"],
     /** What the chosen cards must be as a set — see `look-and-choose`'s
      * `together`; `x` for a slot's filter that reads it. */
-    setRule?: { readonly together: SearchTogether; readonly x: number },
+    setRule?: { readonly together: ResolvedSearchTogether; readonly x: number },
+    /** Where each chosen card goes by what it is — see `look-and-choose`'s
+     * `split`. */
+    split?: readonly ZoneChoiceSplitCase[],
   ): void {
     // The exile zone (a processor, Oblivion Sower): only what may be
     // chosen is shown — the cards `player` owns when someone else is
@@ -30296,10 +30339,12 @@ export class Game {
     // "From among the milled cards": a milled card is found in whatever
     // public zone it went to from the library (rule 701.17c), so one a
     // replacement exiled instead of putting it into the graveyard (Rest in
-    // Peace) is still among them.
+    // Peace) is still among them. So is a card discarded this way (Queen Kayla
+    // bin-Kroog's ruling).
+    const lookedFor = filter?.thisWay === "milled" || filter?.thisWay === "discarded" ? filter.thisWay : undefined;
     const milledElsewhere =
-      zone === "graveyard" && filter?.thisWay === "milled"
-        ? thisWayEntries(this.state, "milled").flatMap((entry) => {
+      zone === "graveyard" && lookedFor !== undefined
+        ? thisWayEntries(this.state, lookedFor).flatMap((entry) => {
             const card = this.state.objects[entry.object];
             return entry.player === player && card?.zone === "exile" && card.exiledFaceDown === undefined
               ? [entry.object]
@@ -30326,10 +30371,11 @@ export class Game {
     // there are slots.
     const together =
       setRule === undefined ? undefined : this.searchTogether(setRule.together, filtered, picker ?? player, setRule.x);
-    const eligible =
-      together?.rule === "one-each" ? filtered.filter((id) => (together.tags[id] ?? []).length > 0) : filtered;
-    const most =
-      setRule !== undefined && "oneEach" in setRule.together ? Math.min(max, setRule.together.oneEach.length) : max;
+    const eligible = eligibleForTogether(together, filtered);
+    // One card a slot, however many cards there are: a set that can fill only
+    // so many slots can be no bigger, a least included (Guided Passage's
+    // ruling: "ignore those types").
+    const possible = together?.rule === "one-each" ? largestOneEach(together, eligible) : eligible.length;
     // Revealing from your own hand with nothing in it that matches: there's
     // nothing to reveal and no one else to show the choice to.
     if (destination === "reveal" && eligible.length === 0) return;
@@ -30339,11 +30385,12 @@ export class Game {
       ...(picker !== undefined && picker !== player ? { forPlayer: player } : {}),
       ids,
       eligible,
-      min: Math.min(min, eligible.length),
-      max: Math.min(most, eligible.length),
+      min: Math.min(min, possible),
+      max: Math.min(max, possible),
       ...(together !== undefined ? { together } : {}),
       destination,
       leftover,
+      ...(split !== undefined ? { split, prompt: splitPrompt(split, Math.min(max, possible)) } : {}),
       ...(enterTapped && destination === "battlefield" ? { enterTapped: true } : {}),
       ...(withCounters !== undefined && destination === "battlefield" ? { enterWithCounters: withCounters } : {}),
       ...(attacking !== undefined && destination === "battlefield" ? { enterAttacking: attacking } : {}),
@@ -30452,7 +30499,7 @@ export class Game {
     reveal = false,
     x = 0,
     zones: SearchZones = "library",
-    together?: SearchTogether,
+    together?: ResolvedSearchTogether,
     enterAttachedTo?: EnterAttachHost,
     more?: SearchMore & { readonly source: ObjectId; readonly sourceStint?: number },
   ): void {
@@ -30510,8 +30557,8 @@ export class Game {
     // "A Forest card and a Plains card" finds one card per slot at most.
     const most = all
       ? eligible.length
-      : together !== undefined && "oneEach" in together
-        ? Math.min(max, together.oneEach.length)
+      : set?.rule === "one-each"
+        ? Math.min(max, largestOneEach(set, eligible))
         : max;
     const exiled = destination === "exile" || destination === "exile-face-down";
     // Finds that go card by card (`instead`): this choice only picks them,
@@ -30606,12 +30653,33 @@ export class Game {
    * tags worked out now — its land types (rule 205.3i), or the slots whose
    * filter it matches — so checking a chosen set needs no registry. */
   private searchTogether(
-    together: SearchTogether,
+    together: ResolvedSearchTogether,
     eligible: readonly ObjectId[],
     player: PlayerId,
     x: number,
   ): ZoneChoiceTogether {
     const tags: Record<string, readonly string[]> = {};
+    if ("totalManaValueAtMost" in together) {
+      const cap = together.totalManaValueAtMost;
+      for (const id of eligible) tags[id] = [String(manaValueOfObject(this.registry, this.state.objects[id]))];
+      return { rule: "total", tags, atMost: cap, orNone: true, text: `with total mana value ${cap} or less` };
+    }
+    if ("oneEachTypeAmong" in together) {
+      // Each type among them once (rule 205.2a), each spell as it was cast.
+      const filter = together.oneEachTypeAmong.spellsYouCastThisTurn;
+      const cast = this.state.players[player]?.spellsCastThisTurnAs ?? [];
+      const slots = EVERY_CARD_TYPE.filter((type) =>
+        cast.some(({ id, spell }) => matchesFilter(this.state, this.registry, id, { ...filter, type }, { you: player, snapshot: spell })),
+      );
+      for (const id of eligible) {
+        tags[id] = slots.filter((type) => matchesFilter(this.state, this.registry, id, { type }, { you: player, x }));
+      }
+      return {
+        rule: "one-each",
+        tags,
+        text: slots.map((type) => `${/^[aeiou]/.test(type) ? "an" : "a"} ${type} card`).join(" and "),
+      };
+    }
     if ("share" in together) {
       for (const id of eligible) {
         const subtypes = effectiveSubtypes(this.state, this.registry, this.state.objects[id]);

@@ -4268,7 +4268,7 @@ export function parseEffect(text, outer) {
       skip = nameChoice.used - 1;
       continue;
     }
-    const oneEach = oneEachLookAt(sentences, i);
+    const oneEach = oneEachLookAt(sentences, i) ?? splitLookAt(sentences, i) ?? totalManaValueLookAt(sentences, i);
     if (oneEach !== null) {
       parsed.push(oneEach.effect);
       hints.push({ sentence, effect: oneEach.effect });
@@ -5215,11 +5215,28 @@ function oneEachLookAt(sentences, i) {
   let slots;
   let text;
   let revealed = look[1].toLowerCase() === "reveal";
+  if (/^for each card type among noncreature spells you've cast this turn, you may put a card of that type from among the (?:revealed cards|them) into your hand\.$/i.test(choice)) {
+    // Hurkyl, Master Wizard: the slots are read as it resolves.
+    return {
+      effect: {
+        kind: "look-and-choose",
+        zone: "library",
+        count,
+        reveal: revealed,
+        min: 0,
+        max: 9,
+        together: { oneEachTypeAmong: { spellsYouCastThisTurn: { notTypes: ["creature"] } } },
+        destination: "hand",
+        leftover: "bottom-random",
+      },
+      used: 3,
+    };
+  }
   if (/^for each card type, you may put a card of that type from among the (?:revealed cards|them) into your hand\.$/i.test(choice)) {
     slots = EACH_CARD_TYPE.map((type) => ({ label: `${article(type)} ${type} card`, filter: { type } }));
     text = "a card of each card type";
   } else {
-    const m = /^you may reveal ((?:an? [\w-]+ card, )+and\/or an? [\w-]+ card) from among them and put those cards into your hand\.$/i.exec(choice);
+    const m = /^you may reveal ((?:an? [\w-]+ card, )+and\/or an? [\w-]+ card) from among them and put (?:those cards|them) into your hand\.$/i.exec(choice);
     if (m === null || revealed) return null;
     slots = [];
     for (const part of m[1].split(/, (?:and\/or )?/)) {
@@ -5244,6 +5261,74 @@ function oneEachLookAt(sentences, i) {
       leftover: "bottom-random",
     },
     used: 3,
+  };
+}
+
+/** "Look at the top five cards of your library. You may reveal up to two
+ * creature and/or land cards from among them, then put the rest on the bottom
+ * of your library in a random order. Put all land cards revealed this way onto
+ * the battlefield tapped and put all creature cards revealed this way into your
+ * hand." (Zimone's Experiment) — one `look-and-choose` with a `split`. */
+function splitLookAt(sentences, i) {
+  const look = sentenceRe(`look at the top ${N} cards of your library`).exec(sentences[i]);
+  if (look === null) return null;
+  const count = numberOf(look[1]);
+  const pick = sentenceRe(`you may reveal up to ${N} ([\\w-]+) and/or ([\\w-]+) cards from among them, then put the rest on the bottom of your library in a random order`).exec(sentences[i + 1] ?? "");
+  if (typeof count !== "number" || pick === null) return null;
+  const most = numberOf(pick[1]);
+  const puts = /^put all ([\w-]+) cards revealed this way onto the battlefield tapped and put all ([\w-]+) cards revealed this way into your hand\.$/i.exec(sentences[i + 2] ?? "");
+  if (typeof most !== "number" || puts === null) return null;
+  const type = (word) => parseTypePhrase(word)?.type;
+  const [first, second] = [type(pick[2]), type(pick[3])];
+  const [toField, toHand] = [type(puts[1]), type(puts[2])];
+  if (![first, second, toField, toHand].every((t) => typeof t === "string")) return null;
+  return {
+    effect: {
+      kind: "look-and-choose",
+      zone: "library",
+      count,
+      reveal: "chosen",
+      min: 0,
+      max: most,
+      filter: { typesAnyOf: [first, second] },
+      destination: "hand",
+      split: [
+        { label: `${toField} cards`, filter: { type: toField }, destination: "battlefield", enterTapped: true },
+        { label: `${toHand} cards`, filter: { type: toHand }, destination: "hand" },
+      ],
+      leftover: "bottom-random",
+    },
+    used: 3,
+  };
+}
+
+/** "Look at the top eight cards of your library. Put up to two creature cards
+ * with total mana value 6 or less from among them onto the battlefield and the
+ * rest on the bottom of your library in a random order." (Michelangelo's
+ * Technique) — a `look-and-choose` under a total mana value cap. */
+function totalManaValueLookAt(sentences, i) {
+  const look = sentenceRe(`(look at|reveal) the top ${N} cards of your library`).exec(sentences[i]);
+  if (look === null) return null;
+  const count = numberOf(look[2]);
+  const pick = sentenceRe(`put up to ${N} ([\\w-]+) cards with total mana value (\\d+) or less from among them onto the battlefield and the rest on the bottom of your library in a random order`).exec(sentences[i + 1] ?? "");
+  if (typeof count !== "number" || pick === null) return null;
+  const most = numberOf(pick[1]);
+  const filter = parseTypePhrase(pick[2]);
+  if (typeof most !== "number" || filter === null) return null;
+  return {
+    effect: {
+      kind: "look-and-choose",
+      zone: "library",
+      count,
+      ...(look[1].toLowerCase() === "reveal" ? { reveal: true } : {}),
+      min: 0,
+      max: most,
+      filter,
+      together: { totalManaValueAtMost: Number(pick[3]) },
+      destination: "battlefield",
+      leftover: "bottom-random",
+    },
+    used: 2,
   };
 }
 

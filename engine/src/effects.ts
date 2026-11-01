@@ -205,7 +205,42 @@ export type SearchTogether =
        * Unifier's nine slots), "a Cleric card, a Rogue card, a Warrior card,
        * and/or a Wizard card" (Harper Recruiter). */
       readonly text?: string;
-    };
+    }
+  /** One slot a card type, the types being only those among the spells the
+   * chooser's side has cast this turn that match the filter, read as the
+   * choice is raised — Hurkyl, Master Wizard's "for each card type among
+   * noncreature spells you've cast this turn, you may put a card of that
+   * type". Each type once however many spells had it (the slots of a
+   * `oneEach`, rule 205.2a). */
+  | { readonly oneEachTypeAmong: { readonly spellsYouCastThisTurn: CardFilter } }
+  /** The chosen cards' mana values add up to this or less, choosing none also
+   * allowed — Ao, the Dawn Sky's "any number of nonland permanent cards with
+   * total mana value 4 or less". An amount on a `look-and-choose`, read as it
+   * resolves (Smelting Vat's "the sacrificed artifact's mana value"). */
+  | { readonly totalManaValueAtMost: EffectAmount };
+
+/** A {@link SearchTogether} as `Game` raises it: its amount read. */
+export type ResolvedSearchTogether =
+  | Exclude<SearchTogether, { readonly totalManaValueAtMost: EffectAmount }>
+  | { readonly totalManaValueAtMost: number };
+
+/**
+ * Where each chosen card of a `look-and-choose` goes when that depends on the
+ * card: the first case whose `filter` it matches, in order — Zimone's
+ * Experiment's "Put all land cards revealed this way onto the battlefield
+ * tapped and put all creature cards revealed this way into your hand". Its
+ * instructions are followed in the order written (rule 608.2c), so a land
+ * creature (Dryad Arbor) is already on the battlefield when "all creature
+ * cards" is read. A card matching no case goes to the effect's `destination`.
+ * Each case is read as the cards move, in one move.
+ */
+export interface ZoneChoiceSplitCase {
+  /** How a client names these cards: "land cards". */
+  readonly label: string;
+  readonly filter: CardFilter;
+  readonly destination: "battlefield" | "hand" | "graveyard";
+  readonly enterTapped?: true;
+}
 /**
  * What an amount that reads an object (`powerOf`, `toughnessOf`,
  * `manaValueOf`, `manaSpentOf`) may point at: anything an
@@ -7647,8 +7682,10 @@ export type EffectSpec =
        * reveals the top two cards of their library. You choose one…"
        * (Balshan Beguiler: `"that-player"`). The chosen cards go to that
        * player's zones — "into their graveyard" is `"graveyard"`, "back on
-       * top" `"library-top"` — and `reveal` shows them as theirs. A library
-       * only; nothing at all with that player gone or the slot illegal. */
+       * top" `"library-top"` — and `reveal` shows them as theirs. Or that
+       * player's graveyard — Grime Gorger's "exile up to one card of each card
+       * type from **defending player's** graveyard" (`"trigger-player"`).
+       * Nothing at all with that player gone or the slot illegal. */
       readonly from?: EffectPlayerRef;
       /** `"hand"` is the "you may put a land card **from your hand** onto the
        * battlefield" family (Growth Spiral, Ghalta) — nothing is revealed
@@ -7873,6 +7910,9 @@ export type EffectSpec =
        * slot is taken.
        */
       readonly together?: SearchTogether;
+      /** Each chosen card sent where its own kind says, one choice over all
+       * of them — see {@link ZoneChoiceSplitCase}. */
+      readonly split?: readonly ZoneChoiceSplitCase[];
       /**
        * Applied once the choice is made, with the **chosen cards** as its
        * targets — `target: 0` is the first one taken. Sneak Attack's "that
@@ -9807,7 +9847,7 @@ export interface EffectApi {
     restDestination?: "hand" | "battlefield",
     reveal?: boolean,
     zones?: SearchZones,
-    together?: SearchTogether,
+    together?: ResolvedSearchTogether,
     /** A `search-library`'s `attachedToSource` (the source, or `null` once
      * it has left — nothing can be attached to it) or `attachedTo`. */
     attachTo?: EnterAttachHost,
@@ -9892,7 +9932,9 @@ export interface EffectApi {
     /** See `look-and-choose`'s `playable`. */
     playable?: Extract<EffectSpec, { kind: "look-and-choose" }>["playable"],
     /** See `look-and-choose`'s `together`. */
-    together?: SearchTogether,
+    together?: ResolvedSearchTogether,
+    /** See `look-and-choose`'s `split`. */
+    split?: readonly ZoneChoiceSplitCase[],
   ): void;
 }
 
@@ -11290,6 +11332,17 @@ function scopedController(
  * (rule 303.4), the filter its host is chosen from as it enters, `null` for
  * nothing there (it has left — rule 400.7 — or the slot was found illegal,
  * 608.2b), or `undefined` for no `attachedTo` at all. */
+/** A choice's `together` as it's raised: a mana value cap's amount read now. */
+function resolvedTogether(
+  together: SearchTogether | undefined,
+  ctx: ResolutionContext,
+): ResolvedSearchTogether | undefined {
+  if (together === undefined) return undefined;
+  return "totalManaValueAtMost" in together
+    ? { totalManaValueAtMost: amountValue(together.totalManaValueAtMost, ctx) }
+    : together;
+}
+
 function attachHost(ref: AttachHostRef | undefined, ctx: ResolutionContext): EnterAttachHost | undefined {
   if (ref === undefined) return undefined;
   if (typeof ref === "object") return { among: ref.among };
@@ -15313,7 +15366,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         spec.restDestination,
         spec.reveal === true,
         spec.zones,
-        spec.together,
+        resolvedTogether(spec.together, ctx),
         spec.attachedToSource === true ? attachHost("source", ctx) : attachHost(spec.attachedTo, ctx),
         {
           ...(owner !== undefined ? { owner } : {}),
@@ -15403,7 +15456,8 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         spec.needsMin === true,
         attachHost(spec.attachedTo, ctx),
         spec.playable,
-        spec.together,
+        resolvedTogether(spec.together, ctx),
+        spec.split,
       );
       return;
     }

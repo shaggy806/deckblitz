@@ -608,7 +608,12 @@ only, on the `choose-from-zone` decision the client already reads (it captions
 each card's zone when they differ, and gates Confirm on a set rule).
 `look-and-choose` takes a search's **`together`** — `oneEach` slots, a card
 filling any slot it matches, one card a slot, with a `text` for the prompt
-(Atraxa, Grand Unifier's card types, Harper Recruiter's four creature types).
+(Atraxa, Grand Unifier's card types, Harper Recruiter's four creature types);
+since 2026-11-01 also **`oneEachTypeAmong`** (the types among noncreature spells
+cast this turn, Hurkyl, Master Wizard), **`totalManaValueAtMost`** (Smelting
+Vat), **`split`** for a destination by what each chosen card is (Zimone's
+Experiment), **`from`** another player's graveyard (Grime Gorger), and the
+discarded cards a replacement exiled (Queen Kayla bin-Kroog).
 `discard-chosen` takes **`alsoFrom`**: the graveyard beside the revealed hand,
 by its own filter (Agonizing Remorse), or the library's revealed top card
 (Psychotic Episode, with a new `destination: "library-bottom"`).

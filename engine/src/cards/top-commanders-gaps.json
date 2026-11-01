@@ -908,7 +908,13 @@
   "static:pt-bonus-greatest-mana-value",
   "static:pt-per-count-affected-controller-graveyard",
   "static:pt-per-count-step",
-  "static:pt-per-opponent"
+  "static:pt-per-opponent",
+  "effect:look-and-choose-one-per-type",
+  "effect:look-and-choose-split-by-type",
+  "effect:choose-one-per-mana-value-from-discarded",
+  "effect:look-and-choose-library-total-mana-value",
+  "effect:look-and-choose-second-pick-together",
+  "effect:look-and-choose-enters-with-counters"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {
