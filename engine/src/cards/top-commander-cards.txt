@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4080 already implemented / 920 missing (marks refreshed 2026-11-01)
+4085 already implemented / 915 missing (marks refreshed 2026-11-01)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -1424,7 +1424,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1431  Silent Hallcreeper                       {1}{U}           Enchantment Creature — Horror
 [x]  1432  Muraganda Raceway                        {0}              Land
 [x]  1433  Rugged Highlands                         {0}              Land
-[ ]  1434  Grab the Prize                           {1}{R}           Sorcery
+[x]  1434  Grab the Prize                           {1}{R}           Sorcery
 [ ]  1435  Caduceus, Staff of Hermes                {2}{W}           Legendary Artifact — Equipment
 [x]  1436  Flare of Denial                          {1}{U}{U}        Instant
 [x]  1437  Corpse Knight                            {W}{B}           Creature — Zombie Knight
@@ -2023,7 +2023,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2030  Garruk's Packleader                      {4}{G}           Creature — Beast
 [x]  2031  Auton Soldier                            {4}{U}{U}        Artifact Creature — Alien Soldier
 [ ]  2032  Eladamri, Korvecdal                      {1}{G}{G}        Legendary Creature — Elf Warrior
-[ ]  2033  Perpetual Timepiece                      {2}              Artifact
+[x]  2033  Perpetual Timepiece                      {2}              Artifact
 [x]  2034  Warping Wail                             {1}{C}           Instant
 [x]  2035  Sakashima the Impostor                   {2}{U}{U}        Legendary Creature — Human Rogue
 [x]  2036  Glint-Horn Buccaneer                     {1}{R}{R}        Creature — Minotaur Pirate
@@ -2707,7 +2707,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2714  Vega, the Watcher                        {1}{W}{U}        Legendary Creature — Bird Spirit
 [x]  2715  Blade Historian                          {R/W}{R/W}{R/W}{R/W} Creature — Human Cleric
 [x]  2716  Sword of War and Peace                   {3}              Artifact — Equipment
-[ ]  2717  Nalfeshnee                               {5}{R}           Creature — Beast Demon
+[x]  2717  Nalfeshnee                               {5}{R}           Creature — Beast Demon
 [x]  2718  Step Through                             {3}{U}{U}        Sorcery
 [x]  2719  Persistent Constrictor                   {4}{B}           Creature — Zombie Snake
 [x]  2720  Reckless Handling                        {1}{R}           Sorcery
@@ -2771,7 +2771,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  2778  Aerial Extortionist                      {3}{W}{W}        Creature — Bird Soldier
 [ ]  2779  Tishana's Tidebinder                     {2}{U}           Creature — Merfolk Wizard
 [x]  2780  Nightshade Dryad                         {1}{G}           Creature — Dryad
-[ ]  2781  Aetherspouts                             {3}{U}{U}        Instant
+[x]  2781  Aetherspouts                             {3}{U}{U}        Instant
 [ ]  2782  Lurrus of the Dream-Den                  {1}{W/B}{W/B}    Legendary Creature — Cat Nightmare
 [x]  2783  Time Sieve                               {U}{B}           Artifact
 [ ]  2784  Aettir and Priwen                        {6}              Legendary Artifact — Equipment
@@ -3086,7 +3086,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3093  Spirit Link                              {W}              Enchantment — Aura
 [x]  3094  Mirrorworks                              {5}              Artifact
 [ ]  3095  Biomancer's Familiar                     {G}{U}           Creature — Mutant
-[ ]  3096  Double Major                             {G}{U}           Instant
+[x]  3096  Double Major                             {G}{U}           Instant
 [ ]  3097  Gluntch, the Bestower                    {1}{G}{W}        Legendary Creature — Jellyfish
 [x]  3098  Blighted Agent                           {1}{U}           Creature — Phyrexian Human Rogue
 [x]  3099  Eluge, the Shoreless Sea                 {1}{U}{U}{U}     Legendary Creature — Elemental Fish
