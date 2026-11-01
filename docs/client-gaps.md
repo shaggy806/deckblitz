@@ -5,6 +5,10 @@ and the cleanups found along the way. `BACKLOG.md` keeps one line per item under
 title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLETED.md`. The animation follow-ups are in
 `docs/plans/legibility-of-play.md`, "Follow-ups".
 
+- **The attack and block Confirm doesn't check company restrictions** (found 2026-11-01). An illegal
+  declaration (a lone Mogg Flunkies, Craven Hulk) is refused with a toast rather than Confirm being
+  disabled; `combat/company.ts` exports `attackCompanyViolations` and `blockCompanyViolations` for
+  the client to read.
 - **The X prompt and shown cost ignore a target's tax** (found 2026-11-01). `client/src/App.tsx`
   starts the X prompt at `maxX` and doesn't read `xCost.targetTaxes` or `maxXUnreduced`, so a taxed
   target at too high an X is refused rather than never offered (no wrong cast), and the spell's

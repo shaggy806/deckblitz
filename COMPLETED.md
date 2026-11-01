@@ -86,6 +86,17 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2: restrictions keyed to the other creatures in combat** (2026-11-01, `0329b0fd9`;
+  `static:can-only-attack-alone`, `static:cant-attack-alone`, `static:cant-attack-or-block-alone`,
+  `static:cant-attack-or-block-unless-two-others`, `static:cant-block-alone`) — five
+  `CombatRestriction`s and `combat/company.ts` (rules 508.1c-d, 509.1b-c): the offers leave out a
+  creature with no legal group, the validators refuse an illegal declaration and count the most
+  requirements obeyed, bots and the fuzzer declare within them; 11 freed. Mogg Flunkies, Craven
+  Hulk, Orcish Conscripts, Errantry, Bonded Construct.
+- **Need-keys Phase 2: limits on the untap step** (2026-11-01, `5319f50ca`;
+  `static:untap-step-limit`) — `untapLimit` (who, count, filter) and `untapOnlyChosenType`, rule
+  502.3, through `choose-permanents` and `choose-modes`; 4 freed. Winter Orb, Static Orb, Winter
+  Moon, Smoke, Mungha Wurm, Storage Matrix.
 - **Need-keys Phase 2: another player choosing** (2026-11-01; 7 keys of
   `effect:choices-by-other-players`) — `SearchInstead.chooser` and `pick: { exactly }`, a
   look-and-choose's `chooser: "an-opponent"` with the opponent picked after the reveal, `under:

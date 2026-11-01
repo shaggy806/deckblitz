@@ -370,16 +370,19 @@ section keeps only what to do next.
   `SearchInstead.chooser`, `chooser: "an-opponent"`, `choicesHeld`, `discard-chosen.chooser`; 31
   freed, 17 proving cards — on the stale list Green Sun's Twilight needs its destination choice, and
   Extract Brain, Forgotten Lore, Manifold Insights, Emergent Ultimatum, Plargg and Nassari,
-  Elemental Teachings, Threats Undetected and Ecological Appreciation are only partly covered).
-  **1024 freed cards wait for the authoring sweep**
+  Elemental Teachings, Threats Undetected and Ecological Appreciation are only partly covered), and
+  limits on the untap step and restrictions keyed to the other creatures in combat (`untapLimit`,
+  `untapOnlyChosenType`, `combat/company.ts`; 15 freed, 11 proving cards).
+  **1075 freed cards wait for the authoring sweep**
   (`cards:needs -- --stale`); the user authors them in one sweep once the reasonable keys are built.
   Cloud sessions are building `keyword:hexproof-from-colors`, the combat-restriction second group,
   `effect:prevent-next-n-damage-to-you`, the cascade/sunburst grants to spells,
   `cost:kicker-nonmana-cost` and `cost:alt-cost-discard-cards`. Being built:
-  `static:untap-step-limit`, `static:can-only-attack-alone`, `effect:token-copy-options`,
-  `zone:impulse-permission-options`, `replacement:prevent-damage-from-chosen-source`,
-  `keyword:protection-from-spells-and-cast-permanents`. Next unclaimed: `cost:attack-tax` (10),
-  `effect:discard-chosen-from-revealed-hand` (10), `cost:unless-pay-colored-per-amount` (10).
+  `effect:token-copy-options`, `zone:impulse-permission-options`,
+  `replacement:prevent-damage-from-chosen-source`,
+  `keyword:protection-from-spells-and-cast-permanents`, `cost:attack-tax`,
+  `cost:unless-pay-colored-per-amount`. Next unclaimed:
+  `effect:discard-chosen-from-revealed-hand` (10).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next
@@ -448,6 +451,7 @@ One line each; the detail (rule numbers, code sites, the cards each blocks) is i
 **`docs/engine-gaps.md`**, under the same bold title. When a gap closes, delete its detail
 there and move this line to `COMPLETED.md`.
 
+- **A must-block creature's only companion can't legally join it** — `withinBlockCompany` (`combat/blocking.ts`) can answer with an illegal `[]`, as with an attacker that can't be blocked by more than one; a person would have no legal declaration.
 - **A target tax's offers are approximate in two corners** — `target-count.ts`'s sum over a `targeting` tax and a two-slot `targetCostReduction` beside a tax mis-offer, never mis-charge.
 - **An activation count restarts on a control change**: `activated-this-turn` keys on the object's timestamp, so Dragon Whelp taken mid-turn counts from zero; `timesEachTurn` doesn't (`docs/engine-gaps.md`).
 - **A text change misses a token's colours and a resolving spell's colour change**: a token made by changed text keeps its definition's colours (612.1, 612.4); `becomeColor` on a permanent spell is dropped as it resolves (400.7a); no all-objects text-change static (Swirl the Mists) (`docs/engine-gaps.md`).
@@ -597,6 +601,7 @@ One line each; the detail is in **`docs/client-gaps.md`**, under the same bold t
 animation follow-ups in `docs/plans/legibility-of-play.md`, "Follow-ups". When an item lands,
 delete its detail there and move this line to `COMPLETED.md`.
 
+- **The attack and block Confirm doesn't check company restrictions** — a lone Mogg Flunkies is refused with a toast; `attackCompanyViolations`/`blockCompanyViolations` are exported for the client.
 - **The X prompt and shown cost ignore a target's tax** — `App.tsx` doesn't read `xCost.targetTaxes`/`maxXUnreduced`, so a taxed target at too high an X is refused rather than never offered, and the shown cost omits the tax.
 - **A hand card's types show as printed under a static outside the battlefield** — `view.ts` under `typesOutsideBattlefield` (Conspiracy, Arcane Adaptation); the filters read the new types.
 - **A lands-only prohibition writes no log line** — `format.ts`'s `prohibition-imposed` names only spells and abilities, so Turf Wound's "can't play lands this turn" emits none (found 2026-11-01).

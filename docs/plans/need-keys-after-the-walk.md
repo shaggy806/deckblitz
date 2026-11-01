@@ -764,7 +764,9 @@ missing. Re-run `--greedy` for Phase 2's order.
   outside the battlefield (11 keys, about 11 freed, 18 proving cards); a static P/T bonus by each
   affected permanent's own count and other amounts (15 keys, 17 freed, 16 proving cards); one
   choice per card type or mana value (6 keys, 13 freed, 6 proving cards); another player choosing
-  from finds, reveals, exile, graveyards and a revealed hand (7 keys, 18 freed, 11 proving cards).
+  from finds, reveals, exile, graveyards and a revealed hand (7 keys, 18 freed, 11 proving cards);
+  limits on the untap step (1 key, 4 freed, 6 proving cards); restrictions keyed to the other
+  creatures in combat (5 keys, 11 freed, 5 proving cards).
 
 ## Rough size
 

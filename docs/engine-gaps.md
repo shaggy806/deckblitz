@@ -6,6 +6,11 @@ rule number, the code that does it today and the cards it blocks. `BACKLOG.md` k
 per gap under the same bold title; when a gap closes, delete it here and move its
 `BACKLOG.md` line to `COMPLETED.md`.
 
+- **A must-block creature's only companion can't legally join it** (found 2026-11-01).
+  `withinBlockCompany` (`combat/blocking.ts`) can answer with an illegal `[]` when a creature that
+  must block needs a companion (Craven Hulk's restriction) and its only companion can't join it, as
+  with an attacker that can't be blocked by more than one. A person would have no legal declaration
+  (rule 509.1c). Untested.
 - **A target tax's offers are approximate in two corners** (found 2026-11-01). Each only
   mis-offers, never mis-charges: `target-count.ts`'s sum over-counts a `targeting` tax with several
   targets, so a driver may pass on a legal cast; and a taxed ability that also has a two-slot
