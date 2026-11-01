@@ -5,6 +5,7 @@ import type { CardShard } from "../card-shards.js";
 
 import _poolAIMScientists from "../pool/a-i-m-scientists.js";
 import _poolAbbeyGriffin from "../pool/abbey-griffin.js";
+import _poolAbsoluteVirtue from "../pool/absolute-virtue.js";
 import _poolAbzanKinGuard from "../pool/abzan-kin-guard.js";
 import _poolAccordersShield from "../pool/accorders-shield.js";
 import _poolAccursedHorde from "../pool/accursed-horde.js";
@@ -74,6 +75,7 @@ import _poolBequeathal from "../pool/bequeathal.js";
 import _poolBerserk from "../pool/berserk.js";
 import _poolBilboRetiredBurglar from "../pool/bilbo-retired-burglar.js";
 import _poolBiorganicCarapace from "../pool/biorganic-carapace.js";
+import _poolBiorhythm from "../pool/biorhythm.js";
 import _poolBiteDown from "../pool/bite-down.js";
 import _poolBladegriffPrototype from "../pool/bladegriff-prototype.js";
 import _poolBlazemireVerge from "../pool/blazemire-verge.js";
@@ -852,6 +854,7 @@ const shard: CardShard = {
   pool: [
     _poolAIMScientists,
     _poolAbbeyGriffin,
+    _poolAbsoluteVirtue,
     _poolAbzanKinGuard,
     _poolAccordersShield,
     _poolAccursedHorde,
@@ -921,6 +924,7 @@ const shard: CardShard = {
     _poolBerserk,
     _poolBilboRetiredBurglar,
     _poolBiorganicCarapace,
+    _poolBiorhythm,
     _poolBiteDown,
     _poolBladegriffPrototype,
     _poolBlazemireVerge,

@@ -109,6 +109,7 @@ import _poolBrushstrider from "../pool/brushstrider.js";
 import _poolBullCerodon from "../pool/bull-cerodon.js";
 import _poolBurningSunsFury from "../pool/burning-suns-fury.js";
 import _poolBurnout from "../pool/burnout.js";
+import _poolBurrentonForgeTender from "../pool/burrenton-forge-tender.js";
 import _poolCacklingCulprit from "../pool/cackling-culprit.js";
 import _poolCalamityBearer from "../pool/calamity-bearer.js";
 import _poolCalculatedDismissal from "../pool/calculated-dismissal.js";
@@ -997,6 +998,7 @@ const shard: CardShard = {
     _poolBullCerodon,
     _poolBurningSunsFury,
     _poolBurnout,
+    _poolBurrentonForgeTender,
     _poolCacklingCulprit,
     _poolCalamityBearer,
     _poolCalculatedDismissal,

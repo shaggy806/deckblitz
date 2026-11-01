@@ -66,6 +66,7 @@ import _poolBalambTRexaur from "../pool/balamb-t-rexaur.js";
 import _poolBallLightning from "../pool/ball-lightning.js";
 import _poolBalloonPeddler from "../pool/balloon-peddler.js";
 import _poolBalothPrime from "../pool/baloth-prime.js";
+import _poolBaneslayerAngel from "../pool/baneslayer-angel.js";
 import _poolBanishment from "../pool/banishment.js";
 import _poolBantBattlemage from "../pool/bant-battlemage.js";
 import _poolBaralsExpertise from "../pool/barals-expertise.js";
@@ -724,6 +725,7 @@ import _poolTenuredOilcaster from "../pool/tenured-oilcaster.js";
 import _poolTheBlackArrow from "../pool/the-black-arrow.js";
 import _poolTheBoulderReadyToRumble from "../pool/the-boulder-ready-to-rumble.js";
 import _poolTheDeathOfGwenStacy from "../pool/the-death-of-gwen-stacy.js";
+import _poolTheEndstone from "../pool/the-endstone.js";
 import _poolTheFallOfLordKonda from "../pool/the-fall-of-lord-konda.js";
 import _poolTheGooseMother from "../pool/the-goose-mother.js";
 import _poolTheWanderer from "../pool/the-wanderer.js";
@@ -922,6 +924,7 @@ const shard: CardShard = {
     _poolBallLightning,
     _poolBalloonPeddler,
     _poolBalothPrime,
+    _poolBaneslayerAngel,
     _poolBanishment,
     _poolBantBattlemage,
     _poolBaralsExpertise,
@@ -1580,6 +1583,7 @@ const shard: CardShard = {
     _poolTheBlackArrow,
     _poolTheBoulderReadyToRumble,
     _poolTheDeathOfGwenStacy,
+    _poolTheEndstone,
     _poolTheFallOfLordKonda,
     _poolTheGooseMother,
     _poolTheWanderer,

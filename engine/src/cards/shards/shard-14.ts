@@ -493,6 +493,7 @@ import _poolMindRake from "../pool/mind-rake.js";
 import _poolMindSpiral from "../pool/mind-spiral.js";
 import _poolMindwhipSliver from "../pool/mindwhip-sliver.js";
 import _poolMirranSpy from "../pool/mirran-spy.js";
+import _poolMirrorGolem from "../pool/mirror-golem.js";
 import _poolMirrorOfGaladriel from "../pool/mirror-of-galadriel.js";
 import _poolMischievousSneakling from "../pool/mischievous-sneakling.js";
 import _poolMistformMask from "../pool/mistform-mask.js";
@@ -736,6 +737,7 @@ import _poolTanaTheBloodsower from "../pool/tana-the-bloodsower.js";
 import _poolTangleGolem from "../pool/tangle-golem.js";
 import _poolTasigurTheGoldenFang from "../pool/tasigur-the-golden-fang.js";
 import _poolTatteredRatter from "../pool/tattered-ratter.js";
+import _poolTattooWard from "../pool/tattoo-ward.js";
 import _poolTelJiladDefiance from "../pool/tel-jilad-defiance.js";
 import _poolTemperedSteel from "../pool/tempered-steel.js";
 import _poolTempleOfSilence from "../pool/temple-of-silence.js";
@@ -1360,6 +1362,7 @@ const shard: CardShard = {
     _poolMindSpiral,
     _poolMindwhipSliver,
     _poolMirranSpy,
+    _poolMirrorGolem,
     _poolMirrorOfGaladriel,
     _poolMischievousSneakling,
     _poolMistformMask,
@@ -1603,6 +1606,7 @@ const shard: CardShard = {
     _poolTangleGolem,
     _poolTasigurTheGoldenFang,
     _poolTatteredRatter,
+    _poolTattooWard,
     _poolTelJiladDefiance,
     _poolTemperedSteel,
     _poolTempleOfSilence,

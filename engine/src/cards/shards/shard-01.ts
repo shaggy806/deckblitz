@@ -562,6 +562,7 @@ import _poolRestorativeTechnique from "../pool/restorative-technique.js";
 import _poolRetromancer from "../pool/retromancer.js";
 import _poolRhoxBodyguard from "../pool/rhox-bodyguard.js";
 import _poolRiddlemasterSphinx from "../pool/riddlemaster-sphinx.js";
+import _poolRidersOfGavony from "../pool/riders-of-gavony.js";
 import _poolRitesOfReaping from "../pool/rites-of-reaping.js";
 import _poolRitesOfRefusal from "../pool/rites-of-refusal.js";
 import _poolRithTheAwakener from "../pool/rith-the-awakener.js";
@@ -1406,6 +1407,7 @@ const shard: CardShard = {
     _poolRetromancer,
     _poolRhoxBodyguard,
     _poolRiddlemasterSphinx,
+    _poolRidersOfGavony,
     _poolRitesOfReaping,
     _poolRitesOfRefusal,
     _poolRithTheAwakener,

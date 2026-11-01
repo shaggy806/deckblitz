@@ -441,6 +441,7 @@ import _poolMindWhip from "../pool/mind-whip.js";
 import _poolMindswipe from "../pool/mindswipe.js";
 import _poolMinionsReturn from "../pool/minions-return.js";
 import _poolMinistrantOfObligation from "../pool/ministrant-of-obligation.js";
+import _poolMiresToll from "../pool/mires-toll.js";
 import _poolMirrorEntity from "../pool/mirror-entity.js";
 import _poolMisguidedRage from "../pool/misguided-rage.js";
 import _poolMishrasDomination from "../pool/mishras-domination.js";
@@ -562,6 +563,7 @@ import _poolRejoinTheFight from "../pool/rejoin-the-fight.js";
 import _poolRelicPutrescence from "../pool/relic-putrescence.js";
 import _poolRendmawCreakingNest from "../pool/rendmaw-creaking-nest.js";
 import _poolRenegadeRallier from "../pool/renegade-rallier.js";
+import _poolRepayInKind from "../pool/repay-in-kind.js";
 import _poolRepulsorBlast from "../pool/repulsor-blast.js";
 import _poolRetroMutation from "../pool/retro-mutation.js";
 import _poolReveilleSquad from "../pool/reveille-squad.js";
@@ -610,6 +612,7 @@ import _poolSerpentBladeAssailant from "../pool/serpent-blade-assailant.js";
 import _poolSerpentSkin from "../pool/serpent-skin.js";
 import _poolSerumVisionary from "../pool/serum-visionary.js";
 import _poolSetzerWanderingGambler from "../pool/setzer-wandering-gambler.js";
+import _poolShadowbane from "../pool/shadowbane.js";
 import _poolShamblingVent from "../pool/shambling-vent.js";
 import _poolShapeAnew from "../pool/shape-anew.js";
 import _poolShelindaYevonAcolyte from "../pool/shelinda-yevon-acolyte.js";
@@ -1277,6 +1280,7 @@ const shard: CardShard = {
     _poolMindswipe,
     _poolMinionsReturn,
     _poolMinistrantOfObligation,
+    _poolMiresToll,
     _poolMirrorEntity,
     _poolMisguidedRage,
     _poolMishrasDomination,
@@ -1398,6 +1402,7 @@ const shard: CardShard = {
     _poolRelicPutrescence,
     _poolRendmawCreakingNest,
     _poolRenegadeRallier,
+    _poolRepayInKind,
     _poolRepulsorBlast,
     _poolRetroMutation,
     _poolReveilleSquad,
@@ -1446,6 +1451,7 @@ const shard: CardShard = {
     _poolSerpentSkin,
     _poolSerumVisionary,
     _poolSetzerWanderingGambler,
+    _poolShadowbane,
     _poolShamblingVent,
     _poolShapeAnew,
     _poolShelindaYevonAcolyte,

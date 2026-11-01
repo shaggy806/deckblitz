@@ -478,6 +478,7 @@ import _poolNivMizzetVisionary from "../pool/niv-mizzet-visionary.js";
 import _poolNobilisOfWar from "../pool/nobilis-of-war.js";
 import _poolNotionThief from "../pool/notion-thief.js";
 import _poolNotoriousAssassin from "../pool/notorious-assassin.js";
+import _poolNovablastWurm from "../pool/novablast-wurm.js";
 import _poolNovijenHeartOfProgress from "../pool/novijen-heart-of-progress.js";
 import _poolNumotTheDevastator from "../pool/numot-the-devastator.js";
 import _poolNyxWeaver from "../pool/nyx-weaver.js";
@@ -1337,6 +1338,7 @@ const shard: CardShard = {
     _poolNobilisOfWar,
     _poolNotionThief,
     _poolNotoriousAssassin,
+    _poolNovablastWurm,
     _poolNovijenHeartOfProgress,
     _poolNumotTheDevastator,
     _poolNyxWeaver,

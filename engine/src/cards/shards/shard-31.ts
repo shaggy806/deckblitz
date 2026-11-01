@@ -495,6 +495,8 @@ import _poolLostJitte from "../pool/lost-jitte.js";
 import _poolLuckyOffering from "../pool/lucky-offering.js";
 import _poolLudevicNecroAlchemist from "../pool/ludevic-necro-alchemist.js";
 import _poolMageDuel from "../pool/mage-duel.js";
+import _poolMagetaTheLion from "../pool/mageta-the-lion.js";
+import _poolMagisterSphinx from "../pool/magister-sphinx.js";
 import _poolMagmaquake from "../pool/magmaquake.js";
 import _poolMagnivore from "../pool/magnivore.js";
 import _poolMagusOfTheTabernacle from "../pool/magus-of-the-tabernacle.js";
@@ -604,6 +606,7 @@ import _poolPetrifiedField from "../pool/petrified-field.js";
 import _poolPhyrexianLens from "../pool/phyrexian-lens.js";
 import _poolPhyrexianNegator from "../pool/phyrexian-negator.js";
 import _poolPiercingRays from "../pool/piercing-rays.js";
+import _poolPilgrimOfVirtue from "../pool/pilgrim-of-virtue.js";
 import _poolPinnacleOfRage from "../pool/pinnacle-of-rage.js";
 import _poolPonderingMage from "../pool/pondering-mage.js";
 import _poolPowerMatrix from "../pool/power-matrix.js";
@@ -1423,6 +1426,8 @@ const shard: CardShard = {
     _poolLuckyOffering,
     _poolLudevicNecroAlchemist,
     _poolMageDuel,
+    _poolMagetaTheLion,
+    _poolMagisterSphinx,
     _poolMagmaquake,
     _poolMagnivore,
     _poolMagusOfTheTabernacle,
@@ -1532,6 +1537,7 @@ const shard: CardShard = {
     _poolPhyrexianLens,
     _poolPhyrexianNegator,
     _poolPiercingRays,
+    _poolPilgrimOfVirtue,
     _poolPinnacleOfRage,
     _poolPonderingMage,
     _poolPowerMatrix,

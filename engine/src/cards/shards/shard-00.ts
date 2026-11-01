@@ -773,6 +773,7 @@ import _poolTorchDrake from "../pool/torch-drake.js";
 import _poolTorture from "../pool/torture.js";
 import _poolTrackDown from "../pool/track-down.js";
 import _poolTraitorsRoar from "../pool/traitors-roar.js";
+import _poolTranquilGrove from "../pool/tranquil-grove.js";
 import _poolTranspose from "../pool/transpose.js";
 import _poolTrappedInTheTower from "../pool/trapped-in-the-tower.js";
 import _poolTraprootKami from "../pool/traproot-kami.js";
@@ -1655,6 +1656,7 @@ const shard: CardShard = {
     _poolTorture,
     _poolTrackDown,
     _poolTraitorsRoar,
+    _poolTranquilGrove,
     _poolTranspose,
     _poolTrappedInTheTower,
     _poolTraprootKami,

@@ -67,6 +67,7 @@ import _poolBeyeenCoast from "../pool/beyeen-coast.js";
 import _poolBioshift from "../pool/bioshift.js";
 import _poolBitterbloomBearer from "../pool/bitterbloom-bearer.js";
 import _poolBlackPantherMostDangerous from "../pool/black-panther-most-dangerous.js";
+import _poolBlackmail from "../pool/blackmail.js";
 import _poolBladedPinions from "../pool/bladed-pinions.js";
 import _poolBladewingDeathlessTyrant from "../pool/bladewing-deathless-tyrant.js";
 import _poolBlazingBladeAskari from "../pool/blazing-blade-askari.js";
@@ -546,6 +547,7 @@ import _poolRegathanFirecat from "../pool/regathan-firecat.js";
 import _poolRejoinder from "../pool/rejoinder.js";
 import _poolRelicBind from "../pool/relic-bind.js";
 import _poolRelicSeeker from "../pool/relic-seeker.js";
+import _poolResoluteArchangel from "../pool/resolute-archangel.js";
 import _poolResoundingThunder from "../pool/resounding-thunder.js";
 import _poolRestlessCottage from "../pool/restless-cottage.js";
 import _poolRetaliatorGriffin from "../pool/retaliator-griffin.js";
@@ -745,6 +747,7 @@ import _poolTriskaidekaphile from "../pool/triskaidekaphile.js";
 import _poolTriumphOfCruelty from "../pool/triumph-of-cruelty.js";
 import _poolTrophyMage from "../pool/trophy-mage.js";
 import _poolTrueConviction from "../pool/true-conviction.js";
+import _poolTrueNameNemesis from "../pool/true-name-nemesis.js";
 import _poolTrustyMachete from "../pool/trusty-machete.js";
 import _poolTruthOrConsequences from "../pool/truth-or-consequences.js";
 import _poolTurtleBlimp from "../pool/turtle-blimp.js";
@@ -916,6 +919,7 @@ const shard: CardShard = {
     _poolBioshift,
     _poolBitterbloomBearer,
     _poolBlackPantherMostDangerous,
+    _poolBlackmail,
     _poolBladedPinions,
     _poolBladewingDeathlessTyrant,
     _poolBlazingBladeAskari,
@@ -1395,6 +1399,7 @@ const shard: CardShard = {
     _poolRejoinder,
     _poolRelicBind,
     _poolRelicSeeker,
+    _poolResoluteArchangel,
     _poolResoundingThunder,
     _poolRestlessCottage,
     _poolRetaliatorGriffin,
@@ -1594,6 +1599,7 @@ const shard: CardShard = {
     _poolTriumphOfCruelty,
     _poolTrophyMage,
     _poolTrueConviction,
+    _poolTrueNameNemesis,
     _poolTrustyMachete,
     _poolTruthOrConsequences,
     _poolTurtleBlimp,

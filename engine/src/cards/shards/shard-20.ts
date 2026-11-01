@@ -203,6 +203,7 @@ import _poolDenseCanopy from "../pool/dense-canopy.js";
 import _poolDepalaPilotExemplar from "../pool/depala-pilot-exemplar.js";
 import _poolDepravedHarvester from "../pool/depraved-harvester.js";
 import _poolDepressurize from "../pool/depressurize.js";
+import _poolDesolationGiant from "../pool/desolation-giant.js";
 import _poolDesperateCastaways from "../pool/desperate-castaways.js";
 import _poolDetentionSphere from "../pool/detention-sphere.js";
 import _poolDigUp from "../pool/dig-up.js";
@@ -244,6 +245,7 @@ import _poolElectrosBolt from "../pool/electros-bolt.js";
 import _poolEmancipationAngel from "../pool/emancipation-angel.js";
 import _poolEmberethShieldbreaker from "../pool/embereth-shieldbreaker.js";
 import _poolEmeriasCall from "../pool/emerias-call.js";
+import _poolEmrakulTheWorldAnew from "../pool/emrakul-the-world-anew.js";
 import _poolEnchantedRiversGrasp from "../pool/enchanted-rivers-grasp.js";
 import _poolEnduringTenacity from "../pool/enduring-tenacity.js";
 import _poolEnlistedWurm from "../pool/enlisted-wurm.js";
@@ -1122,6 +1124,7 @@ const shard: CardShard = {
     _poolDepalaPilotExemplar,
     _poolDepravedHarvester,
     _poolDepressurize,
+    _poolDesolationGiant,
     _poolDesperateCastaways,
     _poolDetentionSphere,
     _poolDigUp,
@@ -1163,6 +1166,7 @@ const shard: CardShard = {
     _poolEmancipationAngel,
     _poolEmberethShieldbreaker,
     _poolEmeriasCall,
+    _poolEmrakulTheWorldAnew,
     _poolEnchantedRiversGrasp,
     _poolEnduringTenacity,
     _poolEnlistedWurm,

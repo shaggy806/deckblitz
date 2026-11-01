@@ -142,6 +142,7 @@ import _poolCleansingWildfire from "../pool/cleansing-wildfire.js";
 import _poolClearTheStage from "../pool/clear-the-stage.js";
 import _poolClergyEnVec from "../pool/clergy-en-vec.js";
 import _poolCliffhavenKitesail from "../pool/cliffhaven-kitesail.js";
+import _poolCliffsideRescuer from "../pool/cliffside-rescuer.js";
 import _poolCloakedSiren from "../pool/cloaked-siren.js";
 import _poolClockworkDragon from "../pool/clockwork-dragon.js";
 import _poolCloudDjinn from "../pool/cloud-djinn.js";
@@ -1048,6 +1049,7 @@ const shard: CardShard = {
     _poolClearTheStage,
     _poolClergyEnVec,
     _poolCliffhavenKitesail,
+    _poolCliffsideRescuer,
     _poolCloakedSiren,
     _poolClockworkDragon,
     _poolCloudDjinn,

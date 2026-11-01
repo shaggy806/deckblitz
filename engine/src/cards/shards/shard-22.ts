@@ -101,6 +101,7 @@ import _poolBuriedRuin from "../pool/buried-ruin.js";
 import _poolBurningHands from "../pool/burning-hands.js";
 import _poolBurntOffering from "../pool/burnt-offering.js";
 import _poolBurrogBarrage from "../pool/burrog-barrage.js";
+import _poolCabalInterrogator from "../pool/cabal-interrogator.js";
 import _poolCaesarLegionsEmperor from "../pool/caesar-legions-emperor.js";
 import _poolCagemail from "../pool/cagemail.js";
 import _poolCalamityOfCinders from "../pool/calamity-of-cinders.js";
@@ -210,6 +211,7 @@ import _poolEmbargo from "../pool/embargo.js";
 import _poolEmeriaShatteredSkyclave from "../pool/emeria-shattered-skyclave.js";
 import _poolEmielTheBlessed from "../pool/emiel-the-blessed.js";
 import _poolEmptyTheCatacombs from "../pool/empty-the-catacombs.js";
+import _poolEmrakulTheAeonsTorn from "../pool/emrakul-the-aeons-torn.js";
 import _poolEndTheFestivities from "../pool/end-the-festivities.js";
 import _poolEnduringIdeal from "../pool/enduring-ideal.js";
 import _poolEnterTheAvatarState from "../pool/enter-the-avatar-state.js";
@@ -978,6 +980,7 @@ const shard: CardShard = {
     _poolBurningHands,
     _poolBurntOffering,
     _poolBurrogBarrage,
+    _poolCabalInterrogator,
     _poolCaesarLegionsEmperor,
     _poolCagemail,
     _poolCalamityOfCinders,
@@ -1087,6 +1090,7 @@ const shard: CardShard = {
     _poolEmeriaShatteredSkyclave,
     _poolEmielTheBlessed,
     _poolEmptyTheCatacombs,
+    _poolEmrakulTheAeonsTorn,
     _poolEndTheFestivities,
     _poolEnduringIdeal,
     _poolEnterTheAvatarState,

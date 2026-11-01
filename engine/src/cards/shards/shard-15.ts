@@ -492,6 +492,7 @@ import _poolNiblisOfTheUrn from "../pool/niblis-of-the-urn.js";
 import _poolNightRevelers from "../pool/night-revelers.js";
 import _poolNimbusOfTheIsles from "../pool/nimbus-of-the-isles.js";
 import _poolNoMore from "../pool/no-more.js";
+import _poolNogginWhack from "../pool/noggin-whack.js";
 import _poolNoggleHedgeMage from "../pool/noggle-hedge-mage.js";
 import _poolNourish from "../pool/nourish.js";
 import _poolNoxiousGhoul from "../pool/noxious-ghoul.js";
@@ -1319,6 +1320,7 @@ const shard: CardShard = {
     _poolNightRevelers,
     _poolNimbusOfTheIsles,
     _poolNoMore,
+    _poolNogginWhack,
     _poolNoggleHedgeMage,
     _poolNourish,
     _poolNoxiousGhoul,

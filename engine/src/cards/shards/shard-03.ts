@@ -455,6 +455,7 @@ import _poolNyxbloomAncient from "../pool/nyxbloom-ancient.js";
 import _poolNyxbornBrute from "../pool/nyxborn-brute.js";
 import _poolOfferingToAsha from "../pool/offering-to-asha.js";
 import _poolOgreResister from "../pool/ogre-resister.js";
+import _poolOketrasLastMercy from "../pool/oketras-last-mercy.js";
 import _poolOkoLorwynLiege from "../pool/oko-lorwyn-liege.js";
 import _poolOonasProwler from "../pool/oonas-prowler.js";
 import _poolOozeGarden from "../pool/ooze-garden.js";
@@ -1245,6 +1246,7 @@ const shard: CardShard = {
     _poolNyxbornBrute,
     _poolOfferingToAsha,
     _poolOgreResister,
+    _poolOketrasLastMercy,
     _poolOkoLorwynLiege,
     _poolOonasProwler,
     _poolOozeGarden,

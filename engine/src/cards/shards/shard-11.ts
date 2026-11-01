@@ -528,6 +528,7 @@ import _poolOkoyeDoraMilajeLeader from "../pool/okoye-dora-milaje-leader.js";
 import _poolOldGrowthDryads from "../pool/old-growth-dryads.js";
 import _poolOmoQueenOfVesuva from "../pool/omo-queen-of-vesuva.js";
 import _poolOneWithTheMachine from "../pool/one-with-the-machine.js";
+import _poolOpalEyeKondasYojimbo from "../pool/opal-eye-kondas-yojimbo.js";
 import _poolOpalineUnicorn from "../pool/opaline-unicorn.js";
 import _poolOrcishCaptain from "../pool/orcish-captain.js";
 import _poolOrganGrinder from "../pool/organ-grinder.js";
@@ -616,6 +617,7 @@ import _poolRushTheRoom from "../pool/rush-the-room.js";
 import _poolSacredFire from "../pool/sacred-fire.js";
 import _poolSageOfTheInwardEye from "../pool/sage-of-the-inward-eye.js";
 import _poolSamiteArcher from "../pool/samite-archer.js";
+import _poolSamiteMinistration from "../pool/samite-ministration.js";
 import _poolSanctumOfFruitfulHarvest from "../pool/sanctum-of-fruitful-harvest.js";
 import _poolSandstoneDeadfall from "../pool/sandstone-deadfall.js";
 import _poolSaprazzanHeir from "../pool/saprazzan-heir.js";
@@ -1403,6 +1405,7 @@ const shard: CardShard = {
     _poolOldGrowthDryads,
     _poolOmoQueenOfVesuva,
     _poolOneWithTheMachine,
+    _poolOpalEyeKondasYojimbo,
     _poolOpalineUnicorn,
     _poolOrcishCaptain,
     _poolOrganGrinder,
@@ -1491,6 +1494,7 @@ const shard: CardShard = {
     _poolSacredFire,
     _poolSageOfTheInwardEye,
     _poolSamiteArcher,
+    _poolSamiteMinistration,
     _poolSanctumOfFruitfulHarvest,
     _poolSandstoneDeadfall,
     _poolSaprazzanHeir,

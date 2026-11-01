@@ -220,6 +220,7 @@ import _poolEiganjoFreeRiders from "../pool/eiganjo-free-riders.js";
 import _poolEladamrisCall from "../pool/eladamris-call.js";
 import _poolElectrify from "../pool/electrify.js";
 import _poolElephantGuide from "../pool/elephant-guide.js";
+import _poolElspethTirel from "../pool/elspeth-tirel.js";
 import _poolElusiveOtter from "../pool/elusive-otter.js";
 import _poolElvishGuidance from "../pool/elvish-guidance.js";
 import _poolElvishHerder from "../pool/elvish-herder.js";
@@ -262,6 +263,7 @@ import _poolFieldResearch from "../pool/field-research.js";
 import _poolFieldsOfStrife from "../pool/fields-of-strife.js";
 import _poolFiftyFeetOfRope from "../pool/fifty-feet-of-rope.js";
 import _poolFightRigging from "../pool/fight-rigging.js";
+import _poolFigureOfFable from "../pool/figure-of-fable.js";
 import _poolFireNationPalace from "../pool/fire-nation-palace.js";
 import _poolFirefluxSquad from "../pool/fireflux-squad.js";
 import _poolFireglassMentor from "../pool/fireglass-mentor.js";
@@ -785,6 +787,7 @@ import _poolVenserTheSojourner from "../pool/venser-the-sojourner.js";
 import _poolVerdantCatacombs from "../pool/verdant-catacombs.js";
 import _poolVerdantTouch from "../pool/verdant-touch.js";
 import _poolVernadiShieldmate from "../pool/vernadi-shieldmate.js";
+import _poolVexilusPraetor from "../pool/vexilus-praetor.js";
 import _poolVictorValgavothsSeneschal from "../pool/victor-valgavoths-seneschal.js";
 import _poolVineTrellis from "../pool/vine-trellis.js";
 import _poolVitoThornOfTheDuskRose from "../pool/vito-thorn-of-the-dusk-rose.js";
@@ -1072,6 +1075,7 @@ const shard: CardShard = {
     _poolEladamrisCall,
     _poolElectrify,
     _poolElephantGuide,
+    _poolElspethTirel,
     _poolElusiveOtter,
     _poolElvishGuidance,
     _poolElvishHerder,
@@ -1114,6 +1118,7 @@ const shard: CardShard = {
     _poolFieldsOfStrife,
     _poolFiftyFeetOfRope,
     _poolFightRigging,
+    _poolFigureOfFable,
     _poolFireNationPalace,
     _poolFirefluxSquad,
     _poolFireglassMentor,
@@ -1637,6 +1642,7 @@ const shard: CardShard = {
     _poolVerdantCatacombs,
     _poolVerdantTouch,
     _poolVernadiShieldmate,
+    _poolVexilusPraetor,
     _poolVictorValgavothsSeneschal,
     _poolVineTrellis,
     _poolVitoThornOfTheDuskRose,

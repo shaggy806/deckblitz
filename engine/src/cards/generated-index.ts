@@ -1182,6 +1182,7 @@ export const COMMANDER_BANNED: readonly string[] = [
   "Ancestral Recall",
   "Black Lotus",
   "Dockside Extortionist",
+  "Emrakul, the Aeons Torn",
   "Golos, Tireless Pilgrim",
   "Griselbrand",
   "Jeweled Lotus",

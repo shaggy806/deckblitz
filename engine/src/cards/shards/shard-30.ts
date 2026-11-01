@@ -180,6 +180,7 @@ import _poolDemonicBargain from "../pool/demonic-bargain.js";
 import _poolDeploy from "../pool/deploy.js";
 import _poolDerangedOutcast from "../pool/deranged-outcast.js";
 import _poolDesolationProwler from "../pool/desolation-prowler.js";
+import _poolDevotedCaretaker from "../pool/devoted-caretaker.js";
 import _poolDevotedGrafkeeper from "../pool/devoted-grafkeeper.js";
 import _poolDiabolicVision from "../pool/diabolic-vision.js";
 import _poolDiminisherWitch from "../pool/diminisher-witch.js";
@@ -1053,6 +1054,7 @@ const shard: CardShard = {
     _poolDeploy,
     _poolDerangedOutcast,
     _poolDesolationProwler,
+    _poolDevotedCaretaker,
     _poolDevotedGrafkeeper,
     _poolDiabolicVision,
     _poolDiminisherWitch,
