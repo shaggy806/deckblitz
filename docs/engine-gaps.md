@@ -47,6 +47,13 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   other "that card" reference (an impulse permission on an exiled permanent, Hostage Taker's) sees
   the object's own card alone. Fix: a `choose-pile`-style order decision for the first, and read
   `leftWith` wherever an effect follows a permanent into its new zone for the second.
+- **A spell's copy keeps none of its cost references.** Rule 707.10: a copy copies "all
+  decisions made for it, including … additional or alternative costs", so a copy of Fling deals
+  the sacrificed creature's power, and a copy of Volrath the Fallen's or Induce Despair's effect
+  reads the discarded or revealed card. `copySpellFrom` (`game.ts`) copies the spell's
+  characteristics, targets and X but not its `LastKnownRefs` (`sacrificed`, `discarded`,
+  `revealed`), so the copy reads 0. Reported by the overnight agent that built the revealed-card
+  cost (2026-10-31); not yet reproduced in a test. Fix: carry the refs onto the copy.
 - **Buyback always beats an "exile it instead" replacement.** Rule 616.1 lets the affected
   object's owner (or controller) choose which of two replacement effects applies first; a
   resolving spell whose buyback was paid (rule 702.27a, itself "put into its owner's hand

@@ -334,17 +334,21 @@ section keeps only what to do next.
   granter (`LastKnownRefs.discarded`/`granter`; 15 freed, 8 proving cards — Fishing Pole and Hold
   for Ransom left), and several cards into their owners' libraries, owner-ordered, with graveyard
   cards shuffled in by filter or target (`put-on-libraries`; 9 freed, 13 proving cards — Riptide
-  Gearhulk on a narrow key). **913 freed cards wait for the authoring sweep** (`cards:needs -- --stale`); the user
+  Gearhulk on a narrow key), cards put into a hand this way and a look's pick exiled with a play
+  permission (the `"put-into-hand"` this-way kind, `move-exiled-this-way`, look-and-choose's
+  `playable` and `leftover: "exile"`; 10 freed, 13 proving cards), and sacrifice costs matched
+  against their source with the card revealed for a cost (`isSource`/`hostOfSource`/`ofChosenType`
+  in a cost, the `"revealed"` amount, `reveal.shareColor`; 6 freed, 15 proving cards).
+  **919 freed cards wait for the authoring sweep** (`cards:needs -- --stale`); the user
   authors them in one sweep once the reasonable keys are built. Cloud sessions are building
   `keyword:hexproof-from-colors`, the combat-restriction second group,
   `effect:prevent-next-n-damage-to-you`, the cascade/sunburst grants to spells,
   `cost:kicker-nonmana-cost` and `cost:alt-cost-discard-cards`. Local agents are building
-  `effect:this-way-results` with `effect:look-and-choose-second-pick`,
-  `decision:choose-from-zone-extensions` with `decision:name-a-card`, and `cost:sacrifice-multiple`
-  with `cost:reveal-card-as-additional-cost`. Next unclaimed:
-  `effect:text-change-color-or-land-words` (11), `condition:filter-this-turn-history` (11),
-  `trigger:discards-extensions` (11), `effect:target-spec-additions` (11),
-  `static:grant-to-cards-outside-battlefield` (11).
+  `decision:choose-from-zone-extensions` with `decision:name-a-card`,
+  `effect:target-spec-additions` with `condition:filter-attachments`, and
+  `condition:filter-this-turn-history` with `trigger:discards-extensions`. Next unclaimed:
+  `effect:text-change-color-or-land-words` (11), `static:grant-to-cards-outside-battlefield` (11),
+  `static:pt-per-amount` (10), `static:untap-step-limit` (10).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next
@@ -413,6 +417,7 @@ One line each; the detail (rule numbers, code sites, the cards each blocks) is i
 **`docs/engine-gaps.md`**, under the same bold title. When a gap closes, delete its detail
 there and move this line to `COMPLETED.md`.
 
+- **A spell's copy keeps none of its cost references**: rule 707.10 copies additional-cost decisions, but a copy of Fling, Volrath the Fallen or Induce Despair reads no sacrificed, discarded or revealed card (`docs/engine-gaps.md`).
 - **Buyback always beats an "exile it instead" replacement**: rule 616.1 gives the owner the choice; and no turn-long graveyard-to-exile `player-effect` — Yawgmoth's Will (`docs/engine-gaps.md`).
 - **A static can't require attacking one player**: `attack-requirement` is an effect's rule of the game; Public Enemy's "all creatures attack enchanted creature's controller each combat if able" needs a static form, Galactus a most-life opponent, Silver Surfer "until the end of your next turn".
 - **A targeting restriction can't last a turn, or require a target**: `hexproofFrom`'s qualifiers are statics only; Display of Dominance's "… this turn" over permanents you control, Lurker's "unless it attacked or blocked this turn" and the Flagbearers' "must choose at least one Flagbearer" (601.2c) need more (`docs/engine-gaps.md`).

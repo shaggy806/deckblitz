@@ -86,6 +86,34 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2: cards put into a hand this way** (2026-10-31, `cb777132b`;
+  `effect:put-into-hand-this-way`, `effect:exiled-this-way-to-hand`, `effect:return-milled-this-way`)
+  — the `"put-into-hand"` this-way kind (never a draw), read off `GameObject.handArrivalSeq`, and
+  the `move-exiled-this-way` effect's `to: "hand"`; a milled card taken back was already a
+  graveyard look-and-choose; 6 freed. Adventure Awaits, Courier of Comestibles, Cache Grab, Worlds
+  Within Worlds, Monster Manual // Zoological Study.
+- **Need-keys Phase 2: a look's pick exiled with a play permission** (2026-10-31, `b9c6d42d5`;
+  `effect:look-and-choose-exile-chosen-playable`, `effect:exile-top-put-matching` (partly),
+  `effect:exiled-this-way-to-library-bottom`, `effect:exile-cast-free-from-look`,
+  `effect:look-and-choose-leftover-exile`) — look-and-choose's `playable` (this turn, or while
+  exiled, optionally with mana of any type, on its `impulseGrant`) and `leftover: "exile"`,
+  `move-exiled-this-way`'s `to: "library-bottom"`; 4 freed. Florian, Voldaren Scion, Nahiri's
+  Warcrafting, Black Cat, Cunning Thief, Lord of the Void, Herald of Amity, Muse Vortex, The Key
+  to the Vault, Desperate Research.
+- **Need-keys Phase 2: sacrifice costs matched against their source** (2026-10-31, `14aeda7b3`;
+  `cost:sacrifice-self-and-another`, `filter:not-source-clause`, `cost:sacrifice-enchanted-creature`,
+  `cost:chosen-type-sacrifice-cost`) — a sacrifice cost's filter read with the ability's source
+  everywhere the cost is (offer, activation check, mana plan, the pending choice), so `isSource`,
+  `hostOfSource` and `ofChosenType` match; Skophos Warleader, Slaughter-Priest of Mogis and
+  Skullport Merchant re-authored to "another" on one half only; 2 freed. Mold Folk, Malevolent
+  Noble, Doom Cannon, Etchings of the Chosen, Betrothed of Fire, Bloodfire Infusion, Magus of the
+  Order, Great Hall of Starnheim, Sandstone Deadfall.
+- **Need-keys Phase 2: the card revealed for a cost** (2026-10-31, `ad8de250e`;
+  `cost:reveal-card-as-additional-cost`, `cost:reveal-cards-sharing-color`) — the revealed card
+  remembered on what it paid for, read by a `"revealed"` amount (from the hand, or as it was there
+  once gone), `reveal.shareColor` on choose-from-zone's `together: "share"`; 4 freed. Induce
+  Despair, Charge of the Forever-Beast, Calamity of the Titans, Titan's Presence, Living Destiny,
+  Illuminated Folio.
 - **Need-keys Phase 2: what a permanent is as it enters, beyond its own** (2026-10-31, `37782e895`;
   `effect:return-with-added-color`, `effect:enter-as-additional-card-type`,
   `effect:reanimate-as-animated-creature`, `effect:add-subtypes-if-creature-on-entry`) —

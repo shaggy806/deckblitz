@@ -746,7 +746,10 @@ missing. Re-run `--greedy` for Phase 2's order.
   enter-as characteristics and a spell copy's exceptions and gains (7 keys, 15 freed, 8 proving
   cards); the card discarded to pay a cost and a granted ability's granter (4 keys, 15 freed, 8
   proving cards); several cards into their owners' libraries, owner-ordered, and graveyard cards
-  shuffled in by filter or target (5 keys, 9 freed, 13 proving cards).
+  shuffled in by filter or target (5 keys, 9 freed, 13 proving cards); then cards put into a hand
+  this way and a look's pick exiled with a play permission (8 keys, 10 freed, 13 proving cards),
+  and sacrifice costs matched against their source and the card revealed for a cost (6 keys, 6
+  freed, 15 proving cards).
 
 ## Rough size
 
