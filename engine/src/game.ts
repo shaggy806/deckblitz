@@ -20636,7 +20636,9 @@ export class Game {
   private withDecisionSource(source: ObjectId, resolve: () => void): void {
     const object = this.state.objects[source];
     this.state.decisionSource =
-      object === undefined ? null : { object: source, cardName: printedCardName(object) };
+      object === undefined
+        ? null
+        : { object: source, cardName: printedCardName(object), controller: object.controller };
     try {
       resolve();
     } finally {
@@ -22552,6 +22554,13 @@ export class Game {
       candidates.add(subject);
       eminenceOnly.delete(subject);
     }
+    // The cards just discarded, wherever the discard put them (rule 113.6k):
+    // only their own "when you discard this card" abilities.
+    const discardedOnly = new Set<ObjectId>(event.type === "cards-discarded" ? event.objects : []);
+    for (const id of discardedOnly) {
+      candidates.add(id);
+      eminenceOnly.delete(id);
+    }
     // Rule 603.10a: a leaves-the-battlefield ability looks back to just
     // before the event, so the permanents that left *together* with this one
     // — earlier in the same wrath or state-based sweep — still see it go,
@@ -22571,7 +22580,7 @@ export class Game {
     const graveyardOnly = new Set<ObjectId>();
     for (const player of this.state.turnOrder) {
       for (const id of this.state.zones.perPlayer[player]?.graveyard ?? []) {
-        if (id === subject || lookBack.has(id) || !this.hasGraveyardTrigger(id)) continue;
+        if (id === subject || lookBack.has(id) || discardedOnly.has(id) || !this.hasGraveyardTrigger(id)) continue;
         candidates.add(id);
         graveyardOnly.add(id);
       }
@@ -22659,6 +22668,7 @@ export class Game {
         if (suspendedOnly.has(id) && ability.trigger.on !== "counters-removed" && !this.isSuspended(id)) return;
         if (onlyThisCast && ability.trigger.on !== "this-cast") return;
         if (onlyThisCycled && ability.trigger.on !== "this-cycled") return;
+        if (discardedOnly.has(id) && ability.trigger.on !== "this-discarded") return;
         if (onlyThisPlotted && ability.trigger.on !== "this-plotted") return;
         if (onlyLookBack && !LOOK_BACK_TRIGGERS.has(ability.trigger.on)) return;
         if (
@@ -23236,6 +23246,10 @@ export class Game {
       // becomes-target trigger (Black Bolt, Inhuman King: "destroy target
       // nonland permanent that player controls").
       player = event.by;
+    } else if (event.type === "cards-discarded" && event.cause !== undefined) {
+      // Whoever controls the spell or ability that caused the discard (Psychic
+      // Purge: "… causes you to discard this card, that player loses 5 life").
+      player = event.cause;
     }
     // A Curse's trigger whose event names nobody: "that player" is the
     // enchanted player as it triggered (Trespasser's Curse: "whenever a
@@ -23958,7 +23972,8 @@ export class Game {
           (spec.who === "any" ||
             (spec.who === "you" && event.player === self.controller) ||
             (spec.who === "opponent" && event.player !== self.controller)) &&
-          this.discardedMatching(spec, event.objects, self).length > 0
+          this.discardedMatching(spec, event.objects, self).length > 0 &&
+          (spec.firstTimeEachTurn !== true || this.firstMatchingDiscardThisTurn(spec, event.player, event.objects, self))
         );
       case "attack-with": {
         if (event.type !== "attackers-declared") return false;
@@ -24123,6 +24138,13 @@ export class Game {
         );
       case "this-cycled":
         return event.type === "card-cycled" && event.object === self.id;
+      case "this-discarded":
+        // The hand was its owner's (rule 400.3), so "you" is the discarder.
+        return (
+          event.type === "cards-discarded" &&
+          event.objects.includes(self.id) &&
+          (spec.byOpponent !== true || (event.cause !== undefined && event.cause !== event.player))
+        );
       case "cycles":
         return (
           event.type === "card-cycled" &&
@@ -39671,7 +39693,10 @@ export class Game {
       for (const id of ids) if (this.moveDiscarded(id)) mad.push(id);
     });
     if (this.costDiscardFor !== null) this.recordCostDiscard(this.costDiscardFor, ids);
-    this.emit({ type: "cards-discarded", player, objects: [...ids] });
+    // What's resolving (or paying a cost) caused it — its controller is the
+    // discard's cause (Psychic Purge). Nothing is at cleanup (rule 514.1).
+    const cause = this.state.decisionSource?.controller;
+    this.emit({ type: "cards-discarded", player, objects: [...ids], ...(cause !== undefined ? { cause } : {}) });
     this.queueMadness(mad);
   }
 
@@ -39722,7 +39747,10 @@ export class Game {
   private holdDiscard(player: PlayerId, cards: readonly ObjectId[]): void {
     const held = this.state.heldChoices;
     if (held === undefined || cards.length === 0) return;
-    this.state.heldChoices = { discards: [...held.discards, { player, objects: [...cards] }] };
+    const cause = this.state.decisionSource?.controller;
+    this.state.heldChoices = {
+      discards: [...held.discards, { player, objects: [...cards], ...(cause !== undefined ? { cause } : {}) }],
+    };
   }
 
   /**
@@ -39737,9 +39765,10 @@ export class Game {
     if (held === undefined) return;
     delete this.state.heldChoices;
     const discards = held.discards
-      .map(({ player, objects }) => ({
+      .map(({ player, objects, cause }) => ({
         player,
         objects: objects.filter((id) => this.state.zones.perPlayer[player]?.hand.includes(id) === true),
+        ...(cause !== undefined ? { cause } : {}),
       }))
       .filter((d) => d.objects.length > 0);
     if (discards.length > 0) {
@@ -39747,7 +39776,7 @@ export class Game {
       this.withGraveyardEnterBatch(() => {
         for (const { objects } of discards) for (const id of objects) if (this.moveDiscarded(id)) mad.push(id);
       });
-      for (const { player, objects } of discards) this.emit({ type: "cards-discarded", player, objects });
+      for (const discard of discards) this.emit({ type: "cards-discarded", ...discard });
       this.queueMadness(mad);
     }
     if (this.state.pendingSacrificeVictims.length > 0 && this.state.awaiting === null) {
@@ -39799,13 +39828,15 @@ export class Game {
     // A cost's discard queued behind another question still pays that cost.
     const outer = this.costDiscardFor;
     this.costDiscardFor = next.forCost ?? null;
+    // What ordered it is still the discard's cause, though it has finished
+    // resolving (a discard with no choice happens now).
+    const outerSource = this.state.decisionSource;
+    if (next.source !== undefined) this.state.decisionSource = next.source;
     try {
       this.discardNow(next.player, next.count, next.filter, next.unlessOne, next.upTo === true);
     } finally {
       this.costDiscardFor = outer;
-    }
-    if (this.state.awaiting !== null && next.source !== undefined) {
-      this.state.decisionSource = next.source;
+      if (this.state.awaiting === null) this.state.decisionSource = outerSource;
     }
   }
 
@@ -44759,6 +44790,22 @@ export class Game {
    */
   /** The cards of a `cards-discarded` that a `discards` trigger's `filter`
    * matches, as they are in the graveyard (from the watcher's side). */
+  /** Whether `objects`, just discarded by `player`, are the first cards
+   * matching `spec`'s filter they've discarded this turn — the turn's
+   * history (already holding this discard) has no earlier match. */
+  private firstMatchingDiscardThisTurn(
+    spec: Extract<TriggerSpec, { on: "discards" }>,
+    player: PlayerId,
+    objects: readonly ObjectId[],
+    self: GameObject,
+  ): boolean {
+    // This discard's entries are the last ones; a card discarded, returned
+    // and discarded again this turn is in the history twice.
+    const all = (this.state.players[player]?.turnHistory?.discarded ?? []).map((entry) => entry.object);
+    const earlier = all.slice(0, Math.max(0, all.length - objects.length));
+    return this.discardedMatching(spec, earlier, self).length === 0;
+  }
+
   private discardedMatching(
     spec: Extract<TriggerSpec, { on: "discards" }>,
     objects: readonly ObjectId[],

@@ -4233,6 +4233,9 @@ export type CommanderLibraryPlacement = "top" | "bottom" | "shuffle" | { readonl
 export interface DecisionSource {
   readonly object: ObjectId;
   readonly cardName: string;
+  /** Who controlled it as it began — the spell or ability that "causes"
+   * what its resolution or cost does (a discard's `cause`). */
+  readonly controller?: PlayerId;
 }
 
 /** One source that dealt a permanent damage, as that source was as it
@@ -5099,7 +5102,9 @@ export interface GameState {
    * Absent otherwise.
    */
   heldChoices?: {
-    readonly discards: readonly { readonly player: PlayerId; readonly objects: readonly ObjectId[] }[];
+    /** `cause`: who controlled the spell or ability that made them choose
+     * — the discard's cause once it happens (`cards-discarded`). */
+    readonly discards: readonly { readonly player: PlayerId; readonly objects: readonly ObjectId[]; readonly cause?: PlayerId }[];
     readonly entries?: readonly { readonly player: PlayerId; readonly objects: readonly ObjectId[] }[];
   };
   /**

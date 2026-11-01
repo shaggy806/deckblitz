@@ -458,7 +458,7 @@ function manaPerTurn(def: CardDefinition): number {
 /** A trigger that fires once in a permanent's life — its own entering, dying,
  * leaving, being cast — draws once, not every turn. */
 function isOneShot(trigger: TriggeredAbility["trigger"]): boolean {
-  if (trigger.on === "this-cast" || trigger.on === "this-cycled") return true;
+  if (trigger.on === "this-cast" || trigger.on === "this-cycled" || trigger.on === "this-discarded") return true;
   const who = (trigger as { readonly who?: unknown }).who;
   return (
     who === "self" &&

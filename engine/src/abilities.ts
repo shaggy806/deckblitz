@@ -1723,6 +1723,13 @@ export type TriggerSpec =
       readonly who: TriggerWho;
       readonly filter?: CardFilter;
       readonly perCard?: boolean;
+      /** "Whenever you discard one or more [nonland] cards **for the first
+       * time each turn**" (Rielle, the Everwise; Veronica, Dissident Scribe):
+       * only the discard event that brings the player's first matching
+       * cards of the turn, read off the turn's history — so a discard before
+       * this permanent arrived counts as the first, which a once-per-turn
+       * limit couldn't see. */
+      readonly firstTimeEachTurn?: true;
     }
   | {
       /**
@@ -1999,6 +2006,20 @@ export type TriggerSpec =
        * card, and goes on the stack above the cycling ability — so it
        * resolves before the draw (the rulings). */
       readonly on: "this-cycled";
+    }
+  | {
+      /** "When you discard this card" (Bartered Cow, Titanbones) — like
+       * cycling's, it can't trigger from the battlefield, so it triggers
+       * from whatever zone the discard put the card in (rule 113.6k): the
+       * graveyard, or exile for a madness card (702.35a). Only this card's,
+       * once per discard. `byOpponent` is "when a spell or ability an
+       * opponent controls causes you to discard this card" (Psychic Purge,
+       * Metrognome): the discard's `cause` was an opponent — an effect's, or
+       * a cost's — never the cleanup step's (rule 514.1) nor your own. The
+       * ability's "that player" (`"trigger-player"`) is the player whose
+       * spell or ability caused the discard. */
+      readonly on: "this-discarded";
+      readonly byOpponent?: true;
     }
   | {
       /** "Whenever you cycle a card" (rule 702.29 — Snare Tactician): a

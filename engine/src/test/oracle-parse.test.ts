@@ -6032,3 +6032,29 @@ describe("a graveyard card put there this turn", () => {
     });
   });
 });
+
+describe("discard triggers: this card, its cause, the turn's first", () => {
+  it("reads 'When you discard this card' and 'When a spell or ability an opponent controls causes you to discard ~'", () => {
+    expect(parseTrigger("When you discard this card")).toEqual([{ on: "this-discarded" }]);
+    expect(parseTrigger("When you discard ~")).toEqual([{ on: "this-discarded" }]);
+    expect(parseTrigger("When a spell or ability an opponent controls causes you to discard ~")).toEqual([
+      { on: "this-discarded", byOpponent: true },
+    ]);
+    expect(parseTrigger("Whenever you discard one or more cards for the first time each turn")).toEqual([
+      { on: "discards", who: "you", firstTimeEachTurn: true },
+    ]);
+    // Not another card's discard.
+    expect(parseTrigger("When you discard a card")).toBeNull();
+    const gnome = parseFace(
+      {
+        name: "Metrognome",
+        type_line: "Artifact",
+        oracle_text:
+          "When a spell or ability an opponent controls causes you to discard Metrognome, create four 1/1 colorless Gnome artifact creature tokens.\n{4}, {T}: Create a 1/1 colorless Gnome artifact creature token.",
+      },
+      { tokenFor: () => "Gnome Token" },
+    );
+    expect(gnome.complete).toBe(true);
+    expect(gnome.triggered[0].trigger).toEqual({ on: "this-discarded", byOpponent: true });
+  });
+});

@@ -321,6 +321,29 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### "When you discard this card", its cause, and the turn's first discard — built 2026-10-31
+
+The need-keys Phase 2 family `trigger:discards-extensions`, features only.
+A discard now records its cause: `cards-discarded` carries `cause`, the
+controller of the spell or ability whose effect or cost discarded the cards
+(`DecisionSource.controller`, kept on a queued discard's `source` and on an
+`each-player-may`'s held discards), absent for the cleanup step's (rule
+514.1). The new trigger `this-discarded` is "when you discard this card",
+firing from wherever the discard put the card (rule 113.6k — the graveyard,
+or exile for madness), this card's abilities alone; `byOpponent` is "when a
+spell or ability an opponent controls causes you to discard this card", its
+"that player" (`"trigger-player"`) the opponent. The `discards` trigger takes
+`firstTimeEachTurn`, read off the turn's discard history (so a discard
+before the permanent arrived was the first). "If an opponent discarded a
+card this turn" (Tinybones) was already the `turn-history` `discarded`
+condition — only marked. The scaffolder reads the three trigger lines. Keys:
+trigger:discard-this-card, trigger:discards-extensions,
+trigger:discards-first-time-each-turn. Proving cards: Psychic Purge,
+Guerrilla Tactics, Metrognome, Bartered Cow, Titanbones, Towering Heart,
+Rielle, the Everwise. Left: Toluz's "exile them" (the discarded cards,
+linked — `effect:linked-exile-from-discard`), Inti's batch key
+(`trigger:discards-batch-trigger`, likely only marking).
+
 ### A graveyard card put there this turn, by where it came from — built 2026-10-31
 
 The need-keys Phase 2 family `condition:filter-this-turn-history`, features

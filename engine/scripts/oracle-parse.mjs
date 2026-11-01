@@ -1648,6 +1648,17 @@ export function parseTrigger(clause) {
     ];
   }
   if (/^Whenever you discard one or more cards$/.test(c)) return [{ on: "discards", who: "you" }];
+  // The turn's first discard, read off its history (Rielle, the Everwise).
+  if (/^Whenever you discard one or more cards for the first time each turn$/.test(c)) {
+    return [{ on: "discards", who: "you", firstTimeEachTurn: true }];
+  }
+  // A trigger of the discarded card itself, from the zone the discard put
+  // it in (rule 113.6k) — Titanbones; with the discard's cause an
+  // opponent's spell or ability (Psychic Purge, Metrognome).
+  if (/^When you discard (?:~|this card)$/.test(c)) return [{ on: "this-discarded" }];
+  if (/^When a spell or ability an opponent controls causes you to discard (?:~|this card)$/.test(c)) {
+    return [{ on: "this-discarded", byOpponent: true }];
+  }
   if (/^Whenever you surveil$/.test(c)) return [{ on: "surveils", who: "you" }];
 
   // Steps.

@@ -457,7 +457,9 @@ function decisionSourceFor(state: GameState): DecisionSource | null {
       return { object: own, cardName: printedCardName(object) };
     }
   }
-  return state.decisionSource;
+  // The card alone: who controlled it is the engine's (a discard's cause).
+  const source = state.decisionSource;
+  return source === null ? null : { object: source.object, cardName: source.cardName };
 }
 
 /** See `VisibleObject.chosen`. Read off a permanent only: both fields are

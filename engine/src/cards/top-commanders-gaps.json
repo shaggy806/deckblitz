@@ -865,7 +865,10 @@
   "effect:granted-trigger-refers-to-granter",
   "filter:put-into-graveyard-from-battlefield-this-turn",
   "condition:land-put-into-graveyard-from-battlefield-this-turn",
-  "condition:put-into-graveyard-this-turn-any-zone"
+  "condition:put-into-graveyard-this-turn-any-zone",
+  "trigger:discard-this-card",
+  "trigger:discards-extensions",
+  "trigger:discards-first-time-each-turn"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

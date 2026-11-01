@@ -455,6 +455,14 @@ export type GameEvent =
       readonly type: "cards-discarded";
       readonly player: PlayerId;
       readonly objects: readonly ObjectId[];
+      /** Who controlled the spell or ability that caused the discard — its
+       * effect, or a cost paid for it (Psychic Purge's "when a spell or
+       * ability an opponent controls causes you to discard this card").
+       * Absent for a discard no spell or ability caused — the cleanup
+       * step's (rule 514.1). A cost's discard is the paying player's own
+       * (named, or absent for cycling's and channel's), never an
+       * opponent's. */
+      readonly cause?: PlayerId;
     })
   | (Base & {
       /**
