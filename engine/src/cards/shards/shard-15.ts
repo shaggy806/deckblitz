@@ -174,6 +174,7 @@ import _poolDragToTheUnderworld from "../pool/drag-to-the-underworld.js";
 import _poolDragonTrainer from "../pool/dragon-trainer.js";
 import _poolDragonmasterOutcast from "../pool/dragonmaster-outcast.js";
 import _poolDrakeUmbra from "../pool/drake-umbra.js";
+import _poolDranaTheLastBloodchief from "../pool/drana-the-last-bloodchief.js";
 import _poolDrannithStinger from "../pool/drannith-stinger.js";
 import _poolDrawnFromDreams from "../pool/drawn-from-dreams.js";
 import _poolDreadwaters from "../pool/dreadwaters.js";
@@ -550,6 +551,7 @@ import _poolQuakefootCyclops from "../pool/quakefoot-cyclops.js";
 import _poolQuench from "../pool/quench.js";
 import _poolQuicken from "../pool/quicken.js";
 import _poolRagingGoblinoids from "../pool/raging-goblinoids.js";
+import _poolRakdosAugermage from "../pool/rakdos-augermage.js";
 import _poolRakdosTrumpeter from "../pool/rakdos-trumpeter.js";
 import _poolRapaciousDragon from "../pool/rapacious-dragon.js";
 import _poolRathsEdge from "../pool/raths-edge.js";
@@ -625,6 +627,7 @@ import _poolSkarrgTheRagePits from "../pool/skarrg-the-rage-pits.js";
 import _poolSkateboard from "../pool/skateboard.js";
 import _poolSkirkDrillSergeant from "../pool/skirk-drill-sergeant.js";
 import _poolSkorpekhDestroyer from "../pool/skorpekh-destroyer.js";
+import _poolSkullwinder from "../pool/skullwinder.js";
 import _poolSkycoachWaypoint from "../pool/skycoach-waypoint.js";
 import _poolSleepingPotion from "../pool/sleeping-potion.js";
 import _poolSliceAndDice from "../pool/slice-and-dice.js";
@@ -998,6 +1001,7 @@ const shard: CardShard = {
     _poolDragonTrainer,
     _poolDragonmasterOutcast,
     _poolDrakeUmbra,
+    _poolDranaTheLastBloodchief,
     _poolDrannithStinger,
     _poolDrawnFromDreams,
     _poolDreadwaters,
@@ -1374,6 +1378,7 @@ const shard: CardShard = {
     _poolQuench,
     _poolQuicken,
     _poolRagingGoblinoids,
+    _poolRakdosAugermage,
     _poolRakdosTrumpeter,
     _poolRapaciousDragon,
     _poolRathsEdge,
@@ -1449,6 +1454,7 @@ const shard: CardShard = {
     _poolSkateboard,
     _poolSkirkDrillSergeant,
     _poolSkorpekhDestroyer,
+    _poolSkullwinder,
     _poolSkycoachWaypoint,
     _poolSleepingPotion,
     _poolSliceAndDice,

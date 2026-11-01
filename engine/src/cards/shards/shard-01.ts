@@ -171,6 +171,7 @@ import _poolDragonStyleTwins from "../pool/dragon-style-twins.js";
 import _poolDrakestownForgotten from "../pool/drakestown-forgotten.js";
 import _poolDreamEater from "../pool/dream-eater.js";
 import _poolDromokaMonument from "../pool/dromoka-monument.js";
+import _poolDubiousChallenge from "../pool/dubious-challenge.js";
 import _poolDukharaScavenger from "../pool/dukhara-scavenger.js";
 import _poolDurkwoodBoars from "../pool/durkwood-boars.js";
 import _poolDuskLegionDreadnought from "../pool/dusk-legion-dreadnought.js";
@@ -312,6 +313,7 @@ import _poolHowlOfTheHorde from "../pool/howl-of-the-horde.js";
 import _poolHuntTheWeak from "../pool/hunt-the-weak.js";
 import _poolHuntersAxe from "../pool/hunters-axe.js";
 import _poolHuntersTalent from "../pool/hunters-talent.js";
+import _poolHurkylMasterWizard from "../pool/hurkyl-master-wizard.js";
 import _poolHylderblade from "../pool/hylderblade.js";
 import _poolHypervoltGrasp from "../pool/hypervolt-grasp.js";
 import _poolHypnoticSpecter from "../pool/hypnotic-specter.js";
@@ -1011,6 +1013,7 @@ const shard: CardShard = {
     _poolDrakestownForgotten,
     _poolDreamEater,
     _poolDromokaMonument,
+    _poolDubiousChallenge,
     _poolDukharaScavenger,
     _poolDurkwoodBoars,
     _poolDuskLegionDreadnought,
@@ -1152,6 +1155,7 @@ const shard: CardShard = {
     _poolHuntTheWeak,
     _poolHuntersAxe,
     _poolHuntersTalent,
+    _poolHurkylMasterWizard,
     _poolHylderblade,
     _poolHypervoltGrasp,
     _poolHypnoticSpecter,

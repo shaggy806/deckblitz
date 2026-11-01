@@ -539,6 +539,7 @@ import _poolPurifyingDragon from "../pool/purifying-dragon.js";
 import _poolPymTechnologies from "../pool/pym-technologies.js";
 import _poolPyroclasm from "../pool/pyroclasm.js";
 import _poolQuakebringer from "../pool/quakebringer.js";
+import _poolQueenKaylaBinKroog from "../pool/queen-kayla-bin-kroog.js";
 import _poolQuilledWolf from "../pool/quilled-wolf.js";
 import _poolRadagastWizardOfWilds from "../pool/radagast-wizard-of-wilds.js";
 import _poolRadiantArchangel from "../pool/radiant-archangel.js";
@@ -1382,6 +1383,7 @@ const shard: CardShard = {
     _poolPymTechnologies,
     _poolPyroclasm,
     _poolQuakebringer,
+    _poolQueenKaylaBinKroog,
     _poolQuilledWolf,
     _poolRadagastWizardOfWilds,
     _poolRadiantArchangel,

@@ -677,6 +677,7 @@ import _poolSlitheringShade from "../pool/slithering-shade.js";
 import _poolSlobadGoblinTinkerer from "../pool/slobad-goblin-tinkerer.js";
 import _poolSlyInstigator from "../pool/sly-instigator.js";
 import _poolSmash from "../pool/smash.js";
+import _poolSmeltingVat from "../pool/smelting-vat.js";
 import _poolSnort from "../pool/snort.js";
 import _poolSnowmeltStag from "../pool/snowmelt-stag.js";
 import _poolSoddenVerdure from "../pool/sodden-verdure.js";
@@ -1557,6 +1558,7 @@ const shard: CardShard = {
     _poolSlobadGoblinTinkerer,
     _poolSlyInstigator,
     _poolSmash,
+    _poolSmeltingVat,
     _poolSnort,
     _poolSnowmeltStag,
     _poolSoddenVerdure,

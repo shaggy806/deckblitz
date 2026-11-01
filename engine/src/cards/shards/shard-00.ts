@@ -280,6 +280,7 @@ import _poolGempalmIncinerator from "../pool/gempalm-incinerator.js";
 import _poolGhaltaPrimalHunger from "../pool/ghalta-primal-hunger.js";
 import _poolGhituFirebreathing from "../pool/ghitu-firebreathing.js";
 import _poolGhituWarCry from "../pool/ghitu-war-cry.js";
+import _poolGiftsUngiven from "../pool/gifts-ungiven.js";
 import _poolGitaxianMindstinger from "../pool/gitaxian-mindstinger.js";
 import _poolGixsCaress from "../pool/gixs-caress.js";
 import _poolGixsCommand from "../pool/gixs-command.js";
@@ -1160,6 +1161,7 @@ const shard: CardShard = {
     _poolGhaltaPrimalHunger,
     _poolGhituFirebreathing,
     _poolGhituWarCry,
+    _poolGiftsUngiven,
     _poolGitaxianMindstinger,
     _poolGixsCaress,
     _poolGixsCommand,

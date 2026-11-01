@@ -456,6 +456,7 @@ import _poolMegatherium from "../pool/megatherium.js";
 import _poolMemoryWorm from "../pool/memory-worm.js";
 import _poolMercilessPredator from "../pool/merciless-predator.js";
 import _poolMerfolkPupil from "../pool/merfolk-pupil.js";
+import _poolMichelangeloImproviser from "../pool/michelangelo-improviser.js";
 import _poolMidvastProtector from "../pool/midvast-protector.js";
 import _poolMinaAndDennWildborn from "../pool/mina-and-denn-wildborn.js";
 import _poolMind from "../pool/mind.js";
@@ -1359,6 +1360,7 @@ const shard: CardShard = {
     _poolMemoryWorm,
     _poolMercilessPredator,
     _poolMerfolkPupil,
+    _poolMichelangeloImproviser,
     _poolMidvastProtector,
     _poolMinaAndDennWildborn,
     _poolMind,

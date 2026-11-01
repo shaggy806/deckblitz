@@ -351,6 +351,7 @@ import _poolGruulCharm from "../pool/gruul-charm.js";
 import _poolGruulKeyrune from "../pool/gruul-keyrune.js";
 import _poolGuardedHeir from "../pool/guarded-heir.js";
 import _poolGuardianLions from "../pool/guardian-lions.js";
+import _poolGuidedPassage from "../pool/guided-passage.js";
 import _poolHaazdaSnareSquad from "../pool/haazda-snare-squad.js";
 import _poolHailstormValkyrie from "../pool/hailstorm-valkyrie.js";
 import _poolHallwayHeckler from "../pool/hallway-heckler.js";
@@ -577,6 +578,7 @@ import _poolRapidAugmenter from "../pool/rapid-augmenter.js";
 import _poolRavenousIntruder from "../pool/ravenous-intruder.js";
 import _poolRazorHippogriff from "../pool/razor-hippogriff.js";
 import _poolRazorgrassScreen from "../pool/razorgrass-screen.js";
+import _poolRealmsUncharted from "../pool/realms-uncharted.js";
 import _poolRealmwright from "../pool/realmwright.js";
 import _poolRecklessPangolin from "../pool/reckless-pangolin.js";
 import _poolReclaimingVines from "../pool/reclaiming-vines.js";
@@ -1205,6 +1207,7 @@ const shard: CardShard = {
     _poolGruulKeyrune,
     _poolGuardedHeir,
     _poolGuardianLions,
+    _poolGuidedPassage,
     _poolHaazdaSnareSquad,
     _poolHailstormValkyrie,
     _poolHallwayHeckler,
@@ -1431,6 +1434,7 @@ const shard: CardShard = {
     _poolRavenousIntruder,
     _poolRazorHippogriff,
     _poolRazorgrassScreen,
+    _poolRealmsUncharted,
     _poolRealmwright,
     _poolRecklessPangolin,
     _poolReclaimingVines,

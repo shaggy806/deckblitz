@@ -826,6 +826,7 @@ import _poolYunasWhistle from "../pool/yunas-whistle.js";
 import _poolZendikarResurgent from "../pool/zendikar-resurgent.js";
 import _poolZhalfirinVoid from "../pool/zhalfirin-void.js";
 import _poolZhurTaaGoblin from "../pool/zhur-taa-goblin.js";
+import _poolZimonesExperiment from "../pool/zimones-experiment.js";
 import _poolZodiacMonkey from "../pool/zodiac-monkey.js";
 import _poolZulaportDuelist from "../pool/zulaport-duelist.js";
 import _tokens22SplittingOozeToken from "../tokens/2-2-splitting-ooze-token.js";
@@ -1680,6 +1681,7 @@ const shard: CardShard = {
     _poolZendikarResurgent,
     _poolZhalfirinVoid,
     _poolZhurTaaGoblin,
+    _poolZimonesExperiment,
     _poolZodiacMonkey,
     _poolZulaportDuelist,
   ],

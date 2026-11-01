@@ -225,6 +225,7 @@ import _poolDreadhordeArcanist from "../pool/dreadhorde-arcanist.js";
 import _poolDreamThiefsBandana from "../pool/dream-thiefs-bandana.js";
 import _poolDreamdewEntrancer from "../pool/dreamdew-entrancer.js";
 import _poolDreamstalkerManticore from "../pool/dreamstalker-manticore.js";
+import _poolDredgeTheMire from "../pool/dredge-the-mire.js";
 import _poolDriftOfTheDead from "../pool/drift-of-the-dead.js";
 import _poolDrippingDead from "../pool/dripping-dead.js";
 import _poolDrudgeSpell from "../pool/drudge-spell.js";
@@ -1143,6 +1144,7 @@ const shard: CardShard = {
     _poolDreamThiefsBandana,
     _poolDreamdewEntrancer,
     _poolDreamstalkerManticore,
+    _poolDredgeTheMire,
     _poolDriftOfTheDead,
     _poolDrippingDead,
     _poolDrudgeSpell,

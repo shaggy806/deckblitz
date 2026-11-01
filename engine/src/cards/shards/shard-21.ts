@@ -558,6 +558,7 @@ import _poolRecklessVelocitaur from "../pool/reckless-velocitaur.js";
 import _poolRedHerring from "../pool/red-herring.js";
 import _poolRedeem from "../pool/redeem.js";
 import _poolRefuse from "../pool/refuse.js";
+import _poolRejoinTheFight from "../pool/rejoin-the-fight.js";
 import _poolRelicPutrescence from "../pool/relic-putrescence.js";
 import _poolRendmawCreakingNest from "../pool/rendmaw-creaking-nest.js";
 import _poolRenegadeRallier from "../pool/renegade-rallier.js";
@@ -1392,6 +1393,7 @@ const shard: CardShard = {
     _poolRedHerring,
     _poolRedeem,
     _poolRefuse,
+    _poolRejoinTheFight,
     _poolRelicPutrescence,
     _poolRendmawCreakingNest,
     _poolRenegadeRallier,
