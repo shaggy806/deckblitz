@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4136 already implemented / 864 missing (marks refreshed 2026-11-01)
+4139 already implemented / 861 missing (marks refreshed 2026-11-01)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -1099,7 +1099,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1103  Ocelot Pride                             {W}              Creature — Cat
 [x]  1104  Cathartic Reunion                        {1}{R}           Sorcery
 [x]  1105  Wall of Omens                            {1}{W}           Creature — Wall
-[ ]  1106  Mishra's Bauble                          {0}              Artifact
+[x]  1106  Mishra's Bauble                          {0}              Artifact
 [x]  1107  Disenchant                               {1}{W}           Instant
 [x]  1108  Alchemist's Refuge                       {0}              Land
 [x]  1109  Prismari Command                         {1}{U}{R}        Instant
@@ -4483,7 +4483,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4490  Baron, Airship Kingdom                   {0}              Land — Town
 [x]  4491  Haze of Rage                             {1}{R}           Sorcery
 [x]  4492  Éowyn, Shieldmaiden                      {2}{U}{R}{W}     Legendary Creature — Human Knight
-[ ]  4493  Peek                                     {U}              Instant
+[x]  4493  Peek                                     {U}              Instant
 [x]  4494  Noxious Ghoul                            {3}{B}{B}        Creature — Zombie
 [x]  4495  Mauhúr, Uruk-hai Captain                 {B}{R}           Legendary Creature — Orc Soldier
 [x]  4496  Akroma, Angel of Wrath                   {5}{W}{W}{W}     Legendary Creature — Angel
@@ -4833,7 +4833,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4840  Coin of Mastery                          {4}              Artifact
 [x]  4841  Barbarian Ring                           {0}              Land
 [x]  4842  Wandertale Mentor                        {R}{G}           Creature — Raccoon Bard
-[ ]  4843  Obelisk Spider                           {1}{B}{G}        Creature — Spider
+[x]  4843  Obelisk Spider                           {1}{B}{G}        Creature — Spider
 [x]  4844  Deliberate                               {1}{U}           Instant
 [x]  4845  Thalia's Lieutenant                      {1}{W}           Creature — Human Soldier
 [ ]  4846  Relic of Progenitus                      {1}              Artifact

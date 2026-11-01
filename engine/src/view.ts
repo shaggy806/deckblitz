@@ -926,6 +926,12 @@ function sightOf(state: GameState, registry: CardRegistry, viewer: PlayerId): Si
   return { hands, libraryTops, faceDownCreatures, ownLibraryTop };
 }
 
+/** The players a battlefield static has playing with their hands revealed, to
+ * every player (`StaticAbility.visibility` — Telepathy, Wandering Eye). */
+export function handsPlayedRevealed(state: GameState, registry: CardRegistry, viewer: PlayerId): ReadonlySet<PlayerId> {
+  return sightOf(state, registry, viewer).hands;
+}
+
 export function viewFor(
   state: GameState,
   registry: CardRegistry,

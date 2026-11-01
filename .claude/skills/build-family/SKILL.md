@@ -367,6 +367,14 @@ in its own worktree (`isolation: "worktree"`), integrated by cherry-pick.
   helpers from `dist/`). The same-file conflicts are routine: the `built` array (keep both, fix
   the comma), parser templates and pins (keep both blocks, each closed), engine.md and AUTHORING
   (a word-level merge; check the length is base plus both sides).
+- **Found on 2026-11-01:** an engine-only agent must still run `npx tsc -b` from `client/` when it
+  extends a union the client maps in a total table (`format.ts`'s `RESTRICTION_TEXT` broke the build).
+  Keeping both sides of a parser or `oracle-parse.test.ts` conflict can drop a closing `});` or
+  declare a `const` twice: `node --check` the parser and run the engine's `tsc -p tsconfig.tests.json`
+  after every pick. A later engine change can make a conflict real in code (`decisions/attackers.ts`):
+  read any hunk outside the routine files. Let a verify finish before picking onto `main`: it reads
+  the working tree. Keep a coordinator's per-agent review small; 15 agents and 36 families took about
+  460K of context.
 - **Clean up** each worktree: unlink every junction by absolute path
   (`[IO.Directory]::Delete("<path>", $false)`), sweep for any other
   (`Get-ChildItem -Recurse -Attributes ReparsePoint`), confirm none is left,

@@ -35,6 +35,7 @@ import {
   colorIdentityOf,
   createDefaultRegistry,
   createRng,
+  handsPlayedRevealed,
   isDeckableCard,
   viewFor,
 } from "../dist/index.js";
@@ -348,14 +349,15 @@ export function checkInvariants(game, label, holes = []) {
   }
   // Each seat's view: no card in another player's hand, or in any library,
   // unless something shows it (a reveal this turn, a revealed library top, a
-  // decision that has its player look at it).
+  // hand played revealed, a decision that has its player look at it).
   const awaitingIds = new Set(JSON.stringify(s.awaiting ?? null).match(/obj-\d+/g) ?? []);
   for (const viewer of s.turnOrder) {
     const view = viewFor(s, registry, viewer);
     const shown = new Set([...s.revealedThisTurn, ...Object.values(view.revealedLibraryTop ?? {}).filter(Boolean)]);
+    const revealedHands = handsPlayedRevealed(s, registry, viewer);
     for (const p of s.turnOrder) {
       const zones = s.zones.perPlayer[p];
-      const hidden = [...zones.library, ...(p === viewer ? [] : zones.hand)];
+      const hidden = [...zones.library, ...(p === viewer || revealedHands.has(p) ? [] : zones.hand)];
       for (const id of hidden) {
         if (view.objects[id] === undefined || shown.has(id) || awaitingIds.has(id)) continue;
         const where = zones.library.includes(id) ? "library" : "hand";
