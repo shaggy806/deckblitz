@@ -229,6 +229,7 @@ import type {
   LookAndChooseLeftoverIf,
   LookAndChooseZone,
   CopyExceptions,
+  SpellCopyChange,
   ZoneSecondPick,
   BoundUnlessOption,
   WardCost,
@@ -28290,7 +28291,7 @@ export class Game {
           refs,
           opts,
         ),
-      copySpell: (target, newTargets, by) => this.copySpellByEffect(by ?? controller, target, newTargets),
+      copySpell: (target, newTargets, by, change) => this.copySpellByEffect(by ?? controller, target, newTargets, change),
       changeTargets: (target, how, toSource, optional) =>
         this.changeStackTargets(controller, source, target, how, toSource, optional),
       copyAbility: (target, newTargets) => this.copyAbilityByEffect(controller, target, triggerObject, newTargets),
@@ -28317,7 +28318,7 @@ export class Game {
           if (aimed === null) return false;
           copy = aimed;
         }
-        this.copySpellFrom(copy, original, copyOpts.controller ?? controller, copyOpts.newTargets);
+        this.copySpellFrom(copy, original, copyOpts.controller ?? controller, copyOpts.newTargets, copyOpts.change);
         return true;
       },
       copyTriggerSpellForEach: (spell, each) => {
@@ -31839,12 +31840,13 @@ export class Game {
     originalId: ObjectId,
     controller: PlayerId,
     newTargets = false,
+    change?: SpellCopyChange,
   ): ObjectId | null {
     const original = this.state.objects[originalId];
     if (original === undefined || original.zone !== "stack" || original.kind !== "card") {
       return null;
     }
-    return this.copySpellFrom(this.spellSnapshot(original), originalId, controller, newTargets);
+    return this.copySpellFrom(this.spellSnapshot(original), originalId, controller, newTargets, change);
   }
 
   /**
@@ -31860,12 +31862,18 @@ export class Game {
    * 707.10c), its controller is asked which targets to change, if there is
    * any other legal one to change to: the copy is on the stack meanwhile,
    * holding the original's, and nobody gets priority before it's answered.
+   *
+   * `change` is how the copy differs: its exceptions (rule 707.9 — a copiable
+   * modifier, part of its copiable values, 707.9b) and what it gains (an
+   * effect on it that goes on applying to the permanent it becomes, 400.7a —
+   * `castRider`, so `moveObject` keeps it onto the battlefield).
    */
   private copySpellFrom(
     spell: SpellSnapshot,
     originalId: ObjectId,
     controller: PlayerId,
     newTargets: boolean,
+    change?: SpellCopyChange,
   ): ObjectId {
     const id = this.mintObjectId();
     this.state.objects[id] = {
@@ -31917,8 +31925,11 @@ export class Game {
       abilityIndex: null,
       counters: {},
       // A prototyped spell's copy is prototyped too, as the permanent it
-      // becomes (718.3c).
-      modifiers: spell.modifiers.map((m) => ({ ...m })),
+      // becomes (718.3c). Then this copy's own exceptions.
+      modifiers: [
+        ...spell.modifiers.map((m) => ({ ...m })),
+        ...(change?.except !== undefined ? [copyExceptionModifier(change.except, this.registry)] : []),
+      ],
       timestamp: 0,
       isToken: false,
       isCopy: true,
@@ -31930,6 +31941,28 @@ export class Game {
       copyOf: null,
     };
     this.state.zones.shared.stack.push(id);
+    // What it gains, once it is there: "if the copy is a permanent spell"
+    // (rule 110.4b) reads the copy, its exceptions included.
+    const gains = change?.gains;
+    if (gains !== undefined) invalidateComputedCache();
+    if (
+      gains !== undefined &&
+      ((gains.keywords?.length ?? 0) > 0 || (gains.triggered?.length ?? 0) > 0) &&
+      (gains.ifPermanent !== true ||
+        !effectiveTypes(this.state, this.registry, this.state.objects[id]).some((t) => t === "instant" || t === "sorcery"))
+    ) {
+      this.state.timestampSeq += 1;
+      this.state.objects[id].modifiers.push({
+        power: 0,
+        toughness: 0,
+        keywords: [...(gains.keywords ?? [])],
+        ...(gains.triggered !== undefined && gains.triggered.length > 0 ? { grantsTriggered: [...gains.triggered] } : {}),
+        untilEndOfTurn: false,
+        castRider: true,
+        timestamp: this.state.timestampSeq,
+      });
+      invalidateComputedCache();
+    }
     this.emit({ type: "spell-copied", original: originalId, copy: id, controller });
     if (newTargets && this.askCopyTargets(id)) return id;
     // The copy is a new spell targeting what the original does, so each of
@@ -32463,7 +32496,12 @@ export class Game {
   }
 
   /** Twincast (rule 707.10): copy the spell `target`. */
-  private copySpellByEffect(controller: PlayerId, target: TargetRef, newTargets: boolean): void {
+  private copySpellByEffect(
+    controller: PlayerId,
+    target: TargetRef,
+    newTargets: boolean,
+    change?: SpellCopyChange,
+  ): void {
     if (target.kind !== "object") return;
     // A slot that may hold an ability copies the ability (Return the Favor's
     // "copy target instant spell, sorcery spell, activated ability, or
@@ -32473,7 +32511,7 @@ export class Game {
       this.copyStackAbility(live, controller, newTargets);
       return;
     }
-    this.copyStackSpell(target.object, controller, newTargets);
+    this.copyStackSpell(target.object, controller, newTargets, change);
   }
 
   /**
@@ -43403,10 +43441,16 @@ export class Game {
     const enteringGiftTo = object.zone === "stack" && to === "battlefield" ? object.giftTo : undefined;
     // A prototyped spell's characteristics stay with the permanent it
     // becomes; any other move drops them (rule 718.3b). So does what the
-    // spell got for how it was cast (`castRider` — rules 400.7b, 611.3d).
+    // spell got for how it was cast (`castRider` — rules 400.7b, 611.3d), or
+    // gained on the stack (400.7a — a copy's "the copy gains haste"). A
+    // spell's copy becoming a token (608.3f, by now `isToken`) keeps its
+    // copiable values too: "except the copy isn't legendary" (707.9b,
+    // 707.10f).
     const keptPrototype =
       object.zone === "stack" && to === "battlefield"
-        ? object.modifiers.filter((m) => m.prototype === true || m.castRider === true)
+        ? object.modifiers.filter(
+            (m) => m.prototype === true || m.castRider === true || (object.isToken && m.copiable === true),
+          )
         : [];
     // Last-known information for a spell leaving the stack: its mana value
     // with X, read by "that spell's mana value" after it's gone (Mana Drain).

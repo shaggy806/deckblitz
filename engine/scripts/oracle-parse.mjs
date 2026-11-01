@@ -2599,6 +2599,28 @@ export function parseSentence(sentence, ctx) {
     const i = slot(m[1]);
     return i === undefined ? null : { kind: "put-onto-battlefield", target: i, ...(m[2] ? { enterTapped: true } : {}) };
   }
+  // Copying a spell (rule 707.10), with the copy's exceptions (707.9b —
+  // `copyExceptOf`): "copy target creature spell you control, except it
+  // isn't legendary if the spell is legendary" (Double Major); in a cast
+  // trigger, "copy it / that spell, except the copy is an artifact in
+  // addition to its other types" — the spell cast (Tawnos, the Toymaker).
+  if ((m = /^copy (target (?:(creature|artifact|instant or sorcery|noncreature) )?spell)( you control)?(?:, except (.+?))?\.$/i.exec(s))) {
+    const except = m[4] === undefined ? undefined : copyExceptOf(m[4]);
+    if (except === null) return null;
+    let spec;
+    if (m[3] === undefined) spec = targetOf(m[1]);
+    else {
+      const filter = m[2] === undefined ? {} : m[2].toLowerCase() === "instant or sorcery" ? { typesAnyOf: ["instant", "sorcery"] } : m[2].toLowerCase() === "noncreature" ? { notTypes: ["creature"] } : { type: m[2].toLowerCase() };
+      spec = { kind: "spell", whose: "you", filter };
+    }
+    if (spec === undefined) return null;
+    return { kind: "copy-spell", target: ctx.target(spec), ...(except !== undefined ? { except } : {}) };
+  }
+  if (ctx.castSpell === true && (m = /^copy (?:it|that spell)(?:, except (.+?))?\.$/i.exec(s))) {
+    const except = m[1] === undefined ? undefined : copyExceptOf(m[1]);
+    if (except === null) return null;
+    return { kind: "copy-spell", target: "trigger-spell", ...(except !== undefined ? { except } : {}) };
+  }
   // "Put target creature card from a graveyard onto the battlefield under
   // your control" (Rise from the Grave, Portal to Phyrexia).
   if ((m = /^put (target .+? card from a graveyard) onto the battlefield under your control\.$/i.exec(s))) {
@@ -3534,6 +3556,14 @@ export function parseEffect(text, outer) {
       parsed.push(enteredAs.effect);
       hints.push({ sentence, effect: enteredAs.effect });
       skip = enteredAs.used - 1;
+      continue;
+    }
+    // "Copy …. You may choose new targets for the copy." (rule 707.10c)
+    const copied = copyNewTargetsAt(sentences, i, ctx);
+    if (copied !== null) {
+      parsed.push(copied.effect);
+      hints.push({ sentence, effect: copied.effect });
+      skip = copied.used - 1;
       continue;
     }
     // A choice among the spell's own targets as it resolves (Incriminate,
@@ -5492,6 +5522,8 @@ export function parseFace(face, ctx = {}) {
           onStack: true,
           it: itOf(triggers),
           departed: departedOf(triggers),
+          // "Copy it" in a cast trigger: the spell cast (`"trigger-spell"`).
+          ...(triggers.every((t) => t.on === "cast-spell") ? { castSpell: true } : {}),
           ...(thatPlayerOf(triggers) !== undefined ? { thatPlayer: thatPlayerOf(triggers) } : {}),
         },
         lines,
@@ -6115,21 +6147,15 @@ const FACE_DOWN_AS = {
  * sentence lists one the engine has.
  */
 /**
- * What a permanent put onto the battlefield is in addition to its own, as
- * the sentence after the move says it (an `EnterTypes`): "That creature is a
- * black Zombie in addition to its other colors and types", "It's a 1/1
- * Spirit creature with flying in addition to its other types", "They're
- * artifacts in addition to their other types", "If it's a creature, it's a
- * Zombie in addition to its other creature types" (`ifCreature`). `null`
+ * "A black Zombie", "a 1/1 Spirit creature with flying", "5/5 Elemental
+ * creatures", "an artifact" — what an object is said to be in addition to
+ * its own characteristics, before "in addition to its other …": a base P/T,
+ * colours, subtypes and card types in that order, then "with" keywords
+ * (`addColors`, `basePt`, `addSubtypes`, `addTypes`, `keywords`). `null`
  * unless every word is read.
  */
-export function enterAsOf(sentence) {
-  const m =
-    /^(if it's a creature, )?(?:that creature is|it's|it is|they're|they are|each of those creatures is) (.+?) in addition to (?:its|their) other (colors and types|types|creature types)\.$/i.exec(
-      sentence,
-    );
-  if (m === null) return null;
-  let desc = m[2];
+function additionOf(phrase) {
+  let desc = phrase;
   const out = {};
   const kw = / with (.+)$/i.exec(desc);
   if (kw !== null) {
@@ -6140,11 +6166,12 @@ export function enterAsOf(sentence) {
     desc = desc.slice(0, kw.index);
   }
   desc = desc.replace(/^an? /i, "");
-  const pt = /^(\d+)\/(\d+) /.exec(desc);
+  const pt = /^(\d+)\/(\d+) /.exec(`${desc} `);
   if (pt !== null) {
     out.basePt = [Number(pt[1]), Number(pt[2])];
     desc = desc.slice(pt[0].length);
   }
+  if (desc === "") return null;
   for (const word of desc.split(" ")) {
     const lower = word.toLowerCase();
     if (COLOR_WORDS[lower] !== undefined) {
@@ -6159,6 +6186,42 @@ export function enterAsOf(sentence) {
       return null;
     }
   }
+  return out;
+}
+
+/**
+ * A copy-spell's "except …" (a `CopyExceptions`): "the copy isn't
+ * legendary", "it isn't legendary if the spell is legendary" (the same — a
+ * nonlegendary spell's copy is nonlegendary anyway), "the copy is an
+ * artifact in addition to its other types", "the copy is a 1/1 Spirit in
+ * addition to its other types". `null` for anything else.
+ */
+export function copyExceptOf(phrase) {
+  if (/^(?:the copy|it) isn't legendary(?: if the spell is legendary)?$/i.test(phrase)) return { notLegendary: true };
+  const m = /^the copy is (.+?) in addition to its other types$/i.exec(phrase);
+  if (m === null) return null;
+  const out = additionOf(m[1]);
+  // Colours "in addition" would say "colors and types".
+  return out === null || out.addColors !== undefined ? null : out;
+}
+
+/**
+ * What a permanent put onto the battlefield is in addition to its own, as
+ * the sentence after the move says it (an `EnterTypes`): "That creature is a
+ * black Zombie in addition to its other colors and types", "It's a 1/1
+ * Spirit creature with flying in addition to its other types", "They're
+ * artifacts in addition to their other types", "If it's a creature, it's a
+ * Zombie in addition to its other creature types" (`ifCreature`). `null`
+ * unless every word is read.
+ */
+export function enterAsOf(sentence) {
+  const m =
+    /^(if it's a creature, )?(?:that creature is|it's|it is|they're|they are|each of those creatures is) (.+?) in addition to (?:its|their) other (colors and types|types|creature types)\.$/i.exec(
+      sentence,
+    );
+  if (m === null) return null;
+  const out = additionOf(m[2]);
+  if (out === null) return null;
   // "Colors and types" only with a colour; a colour only with it. "Its
   // other creature types" names creature types alone.
   if ((m[3].toLowerCase() === "colors and types") !== (out.addColors !== undefined)) return null;
@@ -6203,6 +6266,31 @@ function enterAsAt(sentences, i, ctx) {
   };
   const out = withAs(effect);
   return out === null ? fail() : { effect: out, used: 2 };
+}
+
+/**
+ * A spell copied and, in the next sentence, "You may choose new targets for
+ * the copy" (rule 707.10c) — one `copy-spell` with `newTargets`, or the
+ * `may` around it.
+ */
+function copyNewTargetsAt(sentences, i, ctx) {
+  if (!/^you may choose new targets for the copy\.$/i.test(sentences[i + 1] ?? "")) return null;
+  const before = ctx.targets.length;
+  const effect = parseSentence(sentences[i], ctx);
+  const withNew = (e) => {
+    if (e?.kind === "copy-spell" && e.newTargets === undefined) return { ...e, newTargets: true };
+    if (e?.kind === "may") {
+      const inner = withNew(e.effect);
+      return inner === null ? null : { ...e, effect: inner };
+    }
+    return null;
+  };
+  const out = effect === null || containsUndefined(effect) ? null : withNew(effect);
+  if (out === null) {
+    ctx.targets.length = before;
+    return null;
+  }
+  return { effect: out, used: 2 };
 }
 
 function faceDownAsAt(sentences, i, ctx) {
@@ -6340,6 +6428,7 @@ function fillEffect(ability, text, ctx, lines, i) {
     onStack: ctx.onStack,
     it: ctx.it,
     departed: ctx.departed,
+    ...(ctx.castSpell === true ? { castSpell: true } : {}),
     divided,
     ...(ctx.thatPlayer !== undefined ? { thatPlayer: ctx.thatPlayer } : {}),
     ...(theirSlots !== undefined ? { opponentChoosesTargets: theirSlots } : {}),

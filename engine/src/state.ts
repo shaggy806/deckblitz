@@ -1727,7 +1727,9 @@ export interface PtModifier {
   /** An effect the spell got for how it was cast, which goes on applying to
    * the permanent it becomes (rules 400.7b, 400.7h, 611.3d) — Thundermane Dragon's
    * "if you cast a creature spell this way, it gains haste until end of
-   * turn". Kept from the stack onto the battlefield like `prototype`. */
+   * turn" — or that a spell or ability gave it on the stack (400.7a — a
+   * spell copy's "the copy gains haste", `copy-spell`'s `gains`). Kept from
+   * the stack onto the battlefield like `prototype`. */
   castRider?: true;
   untilEndOfTurn: boolean;
   /**

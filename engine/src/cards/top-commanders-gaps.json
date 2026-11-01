@@ -2,6 +2,9 @@
  "generated": "2026-09-22",
  "source": "Per-commander triage of every unimplemented top-commanders.txt entry (AI agents reading Oracle text + rulings against the engine), normalized onto one feature vocabulary. See neededCards-features.md, 'The commander gap'.",
  "built": [
+  "effect:copy-spell-except-nonlegendary",
+  "effect:copy-spell-add-types",
+  "effect:copy-spell-grants",
   "effect:return-with-added-color",
   "effect:enter-as-additional-card-type",
   "effect:add-subtypes-if-creature-on-entry",

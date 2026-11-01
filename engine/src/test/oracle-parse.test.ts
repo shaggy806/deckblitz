@@ -4464,6 +4464,33 @@ describe("face down by an effect (rule 708.2)", () => {
     }
   });
 
+  it("reads copying a spell, with the copy's exceptions and new targets", () => {
+    const major = face(
+      "Double Major",
+      "Instant",
+      "Copy target creature spell you control, except it isn't legendary if the spell is legendary. (A copy of a creature spell becomes a token.)",
+    );
+    expect(major.complete).toBe(true);
+    expect(major.effect).toEqual({ kind: "copy-spell", target: 0, except: { notLegendary: true } });
+    expect(major.targets).toEqual([{ kind: "spell", whose: "you", filter: { type: "creature" } }]);
+    const twin = parseEffect("Copy target instant or sorcery spell. You may choose new targets for the copy.", ctx());
+    expect(twin.effect).toEqual({ kind: "copy-spell", target: 0, newTargets: true });
+    // In a cast trigger, "it" is the spell cast.
+    const toy = face(
+      "Test Toymaker",
+      "Legendary Creature — Human Artificer",
+      "Whenever you cast a creature spell, you may copy it, except the copy is a 1/1 Spirit artifact in addition to its other types.",
+    );
+    expect(toy.triggered[0].effect).toMatchObject({
+      kind: "may",
+      effect: { kind: "copy-spell", target: "trigger-spell", except: { basePt: [1, 1], addSubtypes: ["Spirit"], addTypes: ["artifact"] } },
+    });
+    // Outside a cast trigger "copy it" isn't the spell; an exception it
+    // doesn't read stays to author.
+    expect(parseEffect("Copy it.", ctx()).effect).toBeNull();
+    expect(parseEffect("Copy target creature spell you control, except it has haste.", ctx()).effect).toBeNull();
+  });
+
   it("reads manifest from another player's library, and can't be turned face up", () => {
     const amalgam = face(
       "Thieving Amalgam",

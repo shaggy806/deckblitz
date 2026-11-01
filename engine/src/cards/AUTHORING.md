@@ -1469,7 +1469,7 @@ play an additional land this turn"), `untap-all { filter, controlledByTarget?, e
 (`of: "trigger-object"` copies the trigger's spell rather than the source: a `nextSpell`
 delayed trigger's "the next instant or sorcery spell you cast this turn has storm" — Storm, Force
 of Nature),
-`cascade`, `copy-spell { target, newTargets?, ifTargets?, otherwise?, retargetTo?,
+`cascade`, `copy-spell { target, newTargets?, except?, gains?, ifTargets?, otherwise?, retargetTo?,
 forEachItCouldTarget?, count?, controller? }`, `copy-ability { target, newTargets? }`,
 `change-targets { target, how, to?, optional? }`,
 `exile-spell-as-it-resolves { returnAtNextEndStep? }`,
@@ -1485,7 +1485,19 @@ Unified; a `delayed-trigger` at `nextSpell` — Adaptive Training Post). `newTar
 storm always asks, one copy at a time. `ifTargets: "permanent-or-player"` copies only a spell
 that targets one, and `otherwise` is "if you don't copy a spell this way, …". `controller`
 (an `EffectPlayerRef`) puts the copy under another player, who chooses its new targets —
-demonstrate's "that player copies the spell" (`"that-player"` under a `choose-opponent`). With
+demonstrate's "that player copies the spell" (`"that-player"` under a `choose-opponent`).
+`except` (a `CopyExceptions`, as `create-token-copy`'s) is "copy it, **except** …" — rule
+707.9, the copy's copiable values (707.9b), kept by the token a permanent spell's copy becomes
+(707.10f) and copied by anything that copies it: Iron Man's "except the copy isn't legendary"
+(`{ notLegendary: true }`; Double Major's "except it isn't legendary if the spell is legendary"
+is the same), Tawnos's "except the copy is an artifact in addition to its other types"
+(`{ addTypes: ["artifact"] }`), Donal's "a 1/1 Spirit in addition to its other types"
+(`{ basePt: [1, 1], addSubtypes: ["Spirit"] }`). `gains: { keywords?, triggered?, ifPermanent? }`
+is "the copy **gains** haste and 'At the beginning of the end step, sacrifice this permanent'"
+(Nalfeshnee, Choreographed Sparks): an effect on the copy with no end, not a copy exception, so
+it goes on applying to the permanent it becomes (rule 400.7a) and a copy of that has none of it;
+`ifPermanent` is "if the copy is a permanent spell" (110.4b), read on the copy.
+`copy-spell-changes.test.ts`. Neither with `forEachItCouldTarget`. With
 `"trigger-spell"`, two more aim the copy themselves:
 
 - `retargetTo: "source" | slot` — "the copy targets Ivy" (rule 707.10e — Ivy, Gleeful

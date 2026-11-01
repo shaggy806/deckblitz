@@ -625,6 +625,30 @@ pay-variable-energy. Proving cards: Harnessed Lightning, Die Young, Wrath of
 the Skies, Territorial Aetherkite, Nissa, Worldsoul Speaker, Primal Prayers,
 Amped Raptor, Jolted Awake.
 
+### A spell's copy that differs: exceptions and gains — built 2026-10-31
+
+The need-keys Phase 2 family `effect:copy-spell-extensions`' first group,
+features only. **`copy-spell`'s `except`** (a `CopyExceptions`, the same as
+`create-token-copy`'s) is "copy it, except the copy isn't legendary / is an
+artifact in addition / is a 1/1 Spirit in addition": one copiable modifier on
+the copy (rule 707.9b), which the token a permanent spell's copy becomes now
+keeps (707.10f — `moveObject` keeps a token's copiable modifiers from the
+stack). **`gains`** (`SpellCopyGains`: `keywords`, `triggered`,
+`ifPermanent`) is "the copy gains haste and 'At the beginning of the end
+step, sacrifice this permanent'": a `castRider` modifier, so it goes on
+applying to that permanent (400.7a), only on a permanent spell's copy with
+`ifPermanent` (110.4b). The scaffolder now reads "copy target … spell (you
+control)(, except …)", "copy it / that spell(, except …)" in a cast trigger,
+and "You may choose new targets for the copy." after either. Keys:
+effect:copy-spell-except-nonlegendary, effect:copy-spell-add-types,
+effect:copy-spell-grants. Proving cards: Double Major, Tawnos, the
+Toymaker, Donal, Herald of Wings, Nalfeshnee (`copy-spell-changes.test.ts`).
+For `author-freed` to check in the rest: Spinerock Tyrant's "those spells
+gain wither" (both spells, and a single-target trigger filter), Choreographed
+Sparks' "This spell can't be copied", The Clone Saga's named card, Ob
+Nixilis's casualty X, Jackal's "mana value equal to Jackal's power", Storm of
+Saruman's second spell each turn.
+
 ### Entering with colours, types, base P/T and keywords in addition — built 2026-10-31
 
 The need-keys Phase 2 family `effect:put-onto-battlefield-options`' first

@@ -5191,6 +5191,28 @@ export type EffectSpec =
       readonly target: number | "trigger-spell" | "source";
       /** "You may choose new targets for the copy" (rule 707.10c). */
       readonly newTargets?: true;
+      /**
+       * "Copy it, **except** the copy isn't legendary" (Iron Man, Bleeding
+       * Edge; Double Major's "except it isn't legendary if the spell is
+       * legendary" is the same), "except the copy is an artifact in addition
+       * to its other types" (Tawnos, the Toymaker), "except the copy is a 1/1
+       * Spirit in addition to its other types" (Donal, Herald of Wings):
+       * exceptions to the copying (rule 707.9), part of the copy's copiable
+       * values (707.9b) — every other effect applies over them, they stay
+       * with the token a permanent spell's copy becomes (707.10f), and
+       * anything that copies the copy copies them. See {@link CopyExceptions}.
+       * Not with `forEachItCouldTarget` (nor `gains`).
+       */
+      readonly except?: CopyExceptions;
+      /**
+       * "The copy **gains** haste and 'At the beginning of the end step,
+       * sacrifice this token'" (Choreographed Sparks), "if the copy is a
+       * permanent spell, it gains haste and …" (Nalfeshnee, Mizzix — with
+       * `ifPermanent`): an effect of this resolution on the copy, not a copy
+       * exception, so it goes on applying to the permanent the copy becomes
+       * (rule 400.7a) and a copy of it has none of it. With no end.
+       */
+      readonly gains?: SpellCopyGains;
       /** Who controls the copy, when that isn't the effect's controller —
        * demonstrate's "choose an opponent. That player copies the spell and
        * may choose new targets for that copy" (rule 702.144a: `"that-player"`
@@ -7636,6 +7658,25 @@ export interface EnterTypes {
   readonly faceDown?: true | FaceDownAs;
 }
 
+/** What a spell's copy gains — see `copy-spell`'s `gains`. */
+export interface SpellCopyGains {
+  readonly keywords?: readonly Keyword[];
+  /** Triggered abilities it gains — "At the beginning of the end step,
+   * sacrifice this token" (a battlefield ability, so it does something only
+   * once the copy is a permanent). */
+  readonly triggered?: readonly TriggeredAbility[];
+  /** "If the copy is a permanent spell, it gains …" (rule 110.4b): a copy of
+   * an instant or sorcery gains nothing. */
+  readonly ifPermanent?: true;
+}
+
+/** How a spell's copy differs from the spell — `copy-spell`'s `except` and
+ * `gains`, as `Game` puts the copy on the stack. */
+export interface SpellCopyChange {
+  readonly except?: CopyExceptions;
+  readonly gains?: SpellCopyGains;
+}
+
 /**
  * What a copy effect makes different about its copy — "except it's a 3/3
  * black Zombie creature in addition to its other types" (Anikthea, Hand of
@@ -9040,7 +9081,7 @@ export interface EffectApi {
   finishDiscover(found: DiscoverFound): void;
   /** Copy the spell at `TargetRef` on the stack — see the `copy-spell`
    * {@link EffectSpec}. */
-  copySpell(target: TargetRef, newTargets: boolean, controller?: PlayerId): void;
+  copySpell(target: TargetRef, newTargets: boolean, controller?: PlayerId, change?: SpellCopyChange): void;
   /** Change the targets of the spell or ability at `TargetRef` on the stack,
    * this effect's controller choosing — see the `change-targets`
    * {@link EffectSpec}. */
@@ -9061,6 +9102,8 @@ export interface EffectApi {
       readonly original?: ObjectId;
       /** Who controls the copy — the effect's controller when omitted. */
       readonly controller?: PlayerId;
+      /** Its exceptions and what it gains (`copy-spell`'s `except`, `gains`). */
+      readonly change?: SpellCopyChange;
     },
   ): boolean;
   /** See the `copy-ability` {@link EffectSpec}: copy the ability object
@@ -13652,6 +13695,14 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       // "Copy it for each …": the count, read as this applies.
       const times =
         spec.count === undefined ? 1 : Math.min(Math.max(0, amountValue(spec.count, ctx)), MAX_COPY_COUNT);
+      // "Except …" and "the copy gains …".
+      const change: SpellCopyChange | undefined =
+        spec.except !== undefined || spec.gains !== undefined
+          ? {
+              ...(spec.except !== undefined ? { except: spec.except } : {}),
+              ...(spec.gains !== undefined ? { gains: spec.gains } : {}),
+            }
+          : undefined;
       let copied = false;
       if (spec.target === "trigger-spell" || spec.spell !== undefined) {
         const spell = spec.spell?.snapshot ?? ctx.triggerSpell();
@@ -13670,6 +13721,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
                   ...(copier !== undefined ? { controller: copier } : {}),
                   ...(retargetTo !== undefined ? { retargetTo } : {}),
                   ...(spec.spell !== undefined ? { original: spec.spell.original } : {}),
+                  ...(change !== undefined ? { change } : {}),
                 });
                 copied = copied || made;
               }
@@ -13681,7 +13733,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         const target =
           spec.target === "source" ? ({ kind: "object", object: ctx.source } as const) : ctx.targets[spec.target];
         if (target !== undefined) {
-          for (let i = 0; i < times; i += 1) ctx.copySpell(target, newTargets, copier);
+          for (let i = 0; i < times; i += 1) ctx.copySpell(target, newTargets, copier, change);
           copied = times > 0;
         }
       }
