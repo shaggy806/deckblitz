@@ -1826,6 +1826,26 @@ remove-counters-any-kind. Still open on its cards: Cemetery Desecrator
 (`decision:choose-from-any-graveyard`), Gwen Stacy
 (`zone:impulse-while-you-control-source`).
 
+### Impulse windows — built 2026-11-01
+
+`ImpulseDuration`, one vocabulary for `impulse-exile`'s `duration` and `exile`'s
+`mayCast` (now any duration, and `play` for a land too): `your-next-turn-only`,
+`until-end-of-combat-your-next-turn`, `until-next-exile`, `while-you-control`
+(over for good at the first moment you don't: rule 611.2b), and `sourceDid`, a
+live gate off the turn history (`attackedWith`, `loreCountersOn`). Proving
+cards: Galvanic Relay, Goblin Researcher, Brazen Cannonade, Furious Rise,
+Lightning, Security Sergeant, Victor Mancha, Runaway, Scholar of Combustion,
+Containment Construct (`impulse-windows.test.ts`). Keys:
+impulse-during-lore-counter-turns, impulse-during-your-next-turn-only,
+impulse-gated-source-attacked-this-turn, impulse-until-end-of-combat-next-turn,
+impulse-until-next-exile, impulse-while-you-control-source,
+exile-discarded-play-this-turn, exile-from-graveyard-play-this-turn,
+exile-target-play-until-next-turn. Still open on their cards: Summon:
+Brynhildr (its Gestalt Mode gives a spell haste), Elkin Lair (a random exile
+from the hand), Advanced Reconstruction (a random exile from the graveyard),
+Taster of Wares (`effect:reveal-n-from-hand-you-choose-discard`), Gwen Stacy
+(its back face's cast-from-exile trigger).
+
 ### Token copies of a linked source — built 2026-11-01
 
 `create-token-copy`'s `of` reaches cards now: `"exiled-with-source"` (rules

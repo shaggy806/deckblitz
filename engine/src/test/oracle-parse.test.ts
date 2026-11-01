@@ -6580,6 +6580,96 @@ describe("cards outside the battlefield", () => {
   });
 });
 
+describe("impulse permissions with a window", () => {
+  const trigger = (window: string) => {
+    const card = parseFace(
+      {
+        name: "Test Window",
+        type_line: "Enchantment",
+        oracle_text: `When this enchantment enters, exile the top card of your library. ${window}`,
+      },
+      { tokenFor: () => null },
+    );
+    expect(card.complete).toBe(true);
+    return card.triggered[0].effect;
+  };
+  const impulse = { kind: "impulse-exile", amount: 1 };
+
+  it("reads each window", () => {
+    expect(trigger("During your next turn, you may play that card.")).toEqual({ ...impulse, duration: "your-next-turn-only" });
+    expect(trigger("Until end of combat on your next turn, you may play that card.")).toEqual({
+      ...impulse,
+      duration: "until-end-of-combat-your-next-turn",
+    });
+    expect(trigger("You may play that card until you exile another card with this enchantment.")).toEqual({
+      ...impulse,
+      duration: "until-next-exile",
+    });
+    expect(trigger("You may play that card for as long as you control this enchantment.")).toEqual({
+      ...impulse,
+      duration: "while-you-control",
+    });
+    expect(trigger("During any turn you attacked with this enchantment, you may play that card.")).toEqual({
+      ...impulse,
+      duration: "while-exiled",
+      sourceDid: "attacked",
+    });
+    expect(trigger("During any turn you put a lore counter on this enchantment, you may play that card.")).toEqual({
+      ...impulse,
+      duration: "while-exiled",
+      sourceDid: "lore-counter",
+    });
+  });
+
+  it("reads casting only, and leaves a window it doesn't know", () => {
+    expect(trigger("You may cast that card until the end of your next turn.")).toEqual({
+      ...impulse,
+      duration: "your-next-turn",
+      castOnly: true,
+    });
+    const card = parseFace(
+      {
+        name: "Test Window",
+        type_line: "Enchantment",
+        oracle_text: "When this enchantment enters, exile the top card of your library. You may play that card next week.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(card.complete).toBe(false);
+  });
+
+  it("reads a target exiled from your graveyard with a permission", () => {
+    const parsed = parseFace(
+      {
+        name: "Test Window",
+        type_line: "Creature — Human",
+        oracle_text:
+          "When this creature enters, exile up to one target instant or sorcery card from your graveyard. You may cast that card until the end of your next turn.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(parsed.complete).toBe(true);
+    expect(parsed.triggered[0].targets).toEqual([
+      { kind: "optional", of: { kind: "card-in-graveyard", whose: "you", filter: { typesAnyOf: ["instant", "sorcery"] } } },
+    ]);
+    expect(parsed.triggered[0].effect).toEqual({ kind: "exile", target: 0, mayCast: { duration: "your-next-turn" } });
+
+    const victor = parseFace(
+      {
+        name: "Test Window",
+        type_line: "Creature — Human",
+        oracle_text: "When this creature enters, exile target card from your graveyard. You may play it for as long as you control this creature.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(victor.triggered[0].effect).toEqual({
+      kind: "exile",
+      target: 0,
+      mayCast: { duration: "while-you-control", play: true },
+    });
+  });
+});
+
 describe("token copies of a linked source", () => {
   const read = (type_line: string, oracle_text: string) => {
     const card = parseFace({ name: "Test Copy", type_line, oracle_text }, { tokenFor: () => null });

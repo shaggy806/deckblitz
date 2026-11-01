@@ -932,7 +932,16 @@
   "effect:token-copy-of-enchanted",
   "effect:token-copy-of-exiled-card",
   "effect:token-copy-count-amount",
-  "effect:copy-exception-static-ability"
+  "effect:copy-exception-static-ability",
+  "zone:impulse-during-lore-counter-turns",
+  "zone:impulse-during-your-next-turn-only",
+  "zone:impulse-gated-source-attacked-this-turn",
+  "zone:impulse-until-end-of-combat-next-turn",
+  "zone:impulse-until-next-exile",
+  "zone:impulse-while-you-control-source",
+  "zone:exile-discarded-play-this-turn",
+  "zone:exile-from-graveyard-play-this-turn",
+  "zone:exile-target-play-until-next-turn"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

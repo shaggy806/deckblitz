@@ -591,9 +591,24 @@ export interface GameObject {
       | { readonly kind: "end-step-of"; readonly player: PlayerId }
       /** `stint`: the source's `zoneChangeCount` as it granted this — one that
        * left and came back is a new object (rule 400.7), and the permission
-       * ended when it left. */
-      | { readonly kind: "while-source"; readonly source: ObjectId; readonly stint?: number }
-      | { readonly kind: "while-exiled" };
+       * ended when it left. `controlledBy`: "for as long as you control
+       * [it]" — it also ends for good the moment that player doesn't
+       * (rule 611.2b; Lightning, Security Sergeant's ruling). */
+      | {
+          readonly kind: "while-source";
+          readonly source: ObjectId;
+          readonly stint?: number;
+          readonly controlledBy?: PlayerId;
+        }
+      | { readonly kind: "while-exiled" }
+      /** "Until you exile another card with [this]" (Unstable Amulet): ends
+       * when that stint of the source next exiles a card this way, however
+       * long after it has left (the ruling: it can't, so it never ends). */
+      | { readonly kind: "until-next-exile"; readonly source: ObjectId; readonly stint: number }
+      /** "Until end of combat on your next turn" (Brazen Cannonade): at the
+       * end of `player`'s first combat after turn `afterTurn`, or as that
+       * turn ends if it had none. */
+      | { readonly kind: "your-next-combat"; readonly player: PlayerId; readonly afterTurn: number };
     readonly castOnly?: boolean;
     /** Which of the exiled cards the permission covers — Narset, Enlightened
      * Master's "noncreature, nonland cards". Matched from the permission
@@ -613,6 +628,12 @@ export interface GameObject {
      * has ended" (rule 702.185a). */
     readonly fromTurn?: number;
     readonly gate?: StaticCondition;
+    /** Only during a turn the permission's player did this with `source`, in
+     * the stint it was in then, whatever has become of it since: "during any
+     * turn you attacked with this creature" (Goblin Researcher, the
+     * ruling: even once it has left), "during any turn you put a lore counter
+     * on this Saga" (Summon: Brynhildr). */
+    readonly sourceDid?: "attacked" | "lore-counter";
     /** The permanent the card was exiled with, in the stint it was in then —
      * Maralen, Fae Ascendant's "cards exiled with Maralen". Set with
      * `whileSource` or `oncePerTurn`; it also answers `filter`'s `{ amount }`
@@ -4057,6 +4078,12 @@ export interface TurnHistory {
    * this turn" (Gilt-Blade Prowler). Cycling discards (702.29a). A card in
    * a hand is always its owner's (rule 400.3), so the discarder is the owner. */
   discarded?: TurnHistoryEntry[];
+  /** The creatures this player attacked with, each in the stint it attacked
+   * in — an impulse permission's `sourceDid: "attacked"`. */
+  attackedWith?: { readonly object: ObjectId; readonly stint: number }[];
+  /** The permanents this player put a lore counter on, each in the stint it
+   * was in — an impulse permission's `sourceDid: "lore-counter"`. */
+  loreCountersOn?: { readonly object: ObjectId; readonly stint: number }[];
   /** Everything put into this player's graveyard this turn, each with the
    * zone it came from (`from`): cards from anywhere — a library (milled,
    * surveilled), a hand (discarded), the stack (a resolved or countered

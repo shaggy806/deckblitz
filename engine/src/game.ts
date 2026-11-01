@@ -213,6 +213,7 @@ import {
   CHOSEN_TEXT_WORD,
 } from "./effects.js";
 import type {
+  ImpulseDuration,
   BeholdSpec,
   BoardManaList,
   CascadeFinish,
@@ -7343,6 +7344,7 @@ export class Game {
       // Before the SBAs, so a commander still waiting on the battlefield for
       // its 903.9b choice is asked about rather than swept up by them.
       this.raiseNextCommanderChoice();
+      this.lapseImpulsesOfLostControl();
       // Not partway through a resolution (rule 704.3): a spell that paused
       // to ask for a discard is still resolving until its last step is done.
       if (this.state.suspendedResolutions.length === 0) this.runStateBasedActions();
@@ -8881,6 +8883,22 @@ export class Game {
   /** End every modifier that lasts "until end of combat" (rule 500.5a) —
    * Legion Warboss's token's "attacks this combat if able". */
   private expireUntilEndOfCombat(): void {
+    // "Until end of combat on your next turn" (Brazen Cannonade): this is
+    // asked as every step outside combat begins, so only past a combat phase
+    // of that turn — the next begin-combat is its own combat's.
+    const combatsOver = (this.state.turn.combatPhases ?? 0) - (this.state.turn.step === "begin-combat" ? 1 : 0);
+    if (combatsOver > 0) {
+      for (const id of this.state.zones.shared.exile) {
+        const expiry = this.state.objects[id]?.impulse?.expiry;
+        if (
+          expiry?.kind === "your-next-combat" &&
+          expiry.player === this.activePlayer &&
+          this.state.turn.number > expiry.afterTurn
+        ) {
+          delete this.state.objects[id].impulse;
+        }
+      }
+    }
     // "Blocks it this combat if able" (Avalanche Tusker).
     if (this.state.blockRequirements?.some((r) => r.thisCombat === true) === true) {
       this.state.blockRequirements = this.state.blockRequirements.filter((r) => r.thisCombat !== true);
@@ -27603,13 +27621,11 @@ export class Game {
           exiled.zoneChangeCount !== before &&
           !exiled.isToken
         ) {
+          if (target.kind === "object") this.endUntilNextExile(mayCast.duration, source, [target.object]);
           exiled.impulse = {
             player: controller,
-            expiry:
-              mayCast.duration === "end-of-turn"
-                ? { kind: "end-of-turn", turn: this.state.turn.number }
-                : { kind: "while-exiled" },
-            castOnly: true,
+            ...this.impulseWindow(mayCast.duration, controller, source),
+            ...(mayCast.play === true ? {} : { castOnly: true }),
             ...(mayCast.spendAs !== undefined ? { spendAs: mayCast.spendAs } : {}),
           };
         }
@@ -31571,7 +31587,7 @@ export class Game {
     controller: PlayerId,
     source: ObjectId,
     amount: number,
-    duration: "end-of-turn" | "your-next-turn" | "your-next-end-step" | "while-source" | "while-exiled",
+    duration: ImpulseDuration,
     castOnly: boolean,
     opts: {
       readonly players?: readonly PlayerId[];
@@ -31585,13 +31601,15 @@ export class Game {
       readonly oncePerTurn?: boolean;
       readonly faceDown?: boolean;
       readonly spendAs?: SpendAs;
+      readonly sourceDid?: "attacked" | "lore-counter";
     } = {},
   ): void {
     if (amount <= 0) return;
     // "Exiled with [this]": the source as it is now, this stint of it.
     const sourceObject = this.state.objects[source];
     const linked =
-      (opts.whileSource === true || opts.oncePerTurn === true) && sourceObject !== undefined
+      (opts.whileSource === true || opts.oncePerTurn === true || opts.sourceDid !== undefined) &&
+      sourceObject !== undefined
         ? { id: source, zoneChangeCount: sourceObject.zoneChangeCount ?? 0 }
         : undefined;
     // Each library's top `amount`, exiled at once.
@@ -31612,22 +31630,11 @@ export class Game {
       this.forgetStints(exiled, since);
     }
 
+    this.endUntilNextExile(duration, source, taken);
     const grant: GameObject["impulse"] = {
       player: controller,
-      expiry:
-        duration === "end-of-turn"
-          ? { kind: "end-of-turn", turn: this.state.turn.number }
-          : duration === "your-next-turn"
-            // It lapses as the player's next turn ends. Granted during one of
-            // their own turns, that turn has to end first; granted on someone
-            // else's turn (Tectonic Giant targeted by an opponent's spell),
-            // the next of theirs is already the last one.
-            ? { kind: "your-turns", remaining: this.activePlayer === controller ? 1 : 0 }
-            : duration === "your-next-end-step"
-              ? { kind: "end-step-of", player: controller }
-              : duration === "while-exiled"
-                ? { kind: "while-exiled" }
-                : { kind: "while-source", source, stint: this.state.objects[source]?.zoneChangeCount ?? 0 },
+      ...this.impulseWindow(duration, controller, source),
+      ...(opts.sourceDid !== undefined ? { sourceDid: opts.sourceDid } : {}),
       ...(castOnly ? { castOnly: true } : {}),
       ...(opts.filter !== undefined ? { filter: opts.filter } : {}),
       ...(opts.free !== undefined ? { free: opts.free } : {}),
@@ -31662,6 +31669,80 @@ export class Game {
     }
   }
 
+  /** When a permission of `duration`, granted now by `source`'s effect to
+   * `controller`, lapses, and what else it says about using it. */
+  private impulseWindow(
+    duration: ImpulseDuration,
+    controller: PlayerId,
+    source: ObjectId,
+  ): Pick<NonNullable<GameObject["impulse"]>, "expiry" | "yourTurnOnly" | "fromTurn"> {
+    const stint = this.state.objects[source]?.zoneChangeCount ?? 0;
+    switch (duration) {
+      case "end-of-turn":
+        return { expiry: { kind: "end-of-turn", turn: this.state.turn.number } };
+      case "your-next-turn":
+        // It lapses as the player's next turn ends. Granted during one of
+        // their own turns, that turn has to end first; granted on someone
+        // else's turn (Tectonic Giant targeted by an opponent's spell),
+        // the next of theirs is already the last one.
+        return { expiry: { kind: "your-turns", remaining: this.activePlayer === controller ? 1 : 0 } };
+      case "your-next-turn-only":
+        // "During your next turn": that turn alone, so not this one even if
+        // it's yours (Galvanic Relay's ruling), nor anyone else's.
+        return {
+          expiry: { kind: "your-turns", remaining: this.activePlayer === controller ? 1 : 0 },
+          yourTurnOnly: true,
+          fromTurn: this.state.turn.number + 1,
+        };
+      case "your-next-end-step":
+        return { expiry: { kind: "end-step-of", player: controller } };
+      case "while-exiled":
+        return { expiry: { kind: "while-exiled" } };
+      case "until-next-exile":
+        return { expiry: { kind: "until-next-exile", source, stint } };
+      case "until-end-of-combat-your-next-turn":
+        return { expiry: { kind: "your-next-combat", player: controller, afterTurn: this.state.turn.number } };
+      case "while-you-control":
+        return { expiry: { kind: "while-source", source, stint, controlledBy: controller } };
+      case "while-source":
+        return { expiry: { kind: "while-source", source, stint } };
+    }
+  }
+
+  /** "Until you exile another card with [this]": `source`, in this stint,
+   * has just exiled `taken` — any card it gave that permission before now
+   * has lost it. Nothing exiled, nothing ends: `taken` is what actually
+   * moved (an empty library exiles nothing). */
+  private endUntilNextExile(duration: ImpulseDuration, source: ObjectId, taken: readonly ObjectId[]): void {
+    if (duration !== "until-next-exile" || taken.length === 0) return;
+    const stint = this.state.objects[source]?.zoneChangeCount ?? 0;
+    for (const id of this.state.zones.shared.exile) {
+      const expiry = this.state.objects[id]?.impulse?.expiry;
+      if (expiry?.kind === "until-next-exile" && expiry.source === source && expiry.stint === stint) {
+        delete this.state.objects[id].impulse;
+      }
+    }
+  }
+
+  /** "For as long as you control [it]" ends for good the moment you don't
+   * (rule 611.2b): taking the permanent back later doesn't restore it
+   * (Lightning, Security Sergeant's ruling). Asked before each priority, so
+   * no one gets a chance to act between the loss and the lapse. */
+  private lapseImpulsesOfLostControl(): void {
+    for (const id of this.state.zones.shared.exile) {
+      const expiry = this.state.objects[id]?.impulse?.expiry;
+      if (expiry?.kind !== "while-source" || expiry.controlledBy === undefined) continue;
+      const source = this.state.objects[expiry.source];
+      if (
+        source?.zone !== "battlefield" ||
+        (source.zoneChangeCount ?? 0) !== expiry.stint ||
+        source.controller !== expiry.controlledBy
+      ) {
+        delete this.state.objects[id].impulse;
+      }
+    }
+  }
+
   /**
    * Age every impulse permission as a turn ends — see `GameObject.impulse`.
    *
@@ -31678,6 +31759,9 @@ export class Game {
       if (object === undefined || impulse === undefined) continue;
       if (impulse.expiry.kind === "end-of-turn") {
         if (impulse.expiry.turn <= this.state.turn.number) delete object.impulse;
+      } else if (impulse.expiry.kind === "your-next-combat") {
+        // That turn had no combat phase (rule 500.11: it was skipped).
+        if (impulse.expiry.player === active && this.state.turn.number > impulse.expiry.afterTurn) delete object.impulse;
       } else if (impulse.expiry.kind === "your-turns" && impulse.player === active) {
         // A new record, never a write through the old one: the cards one
         // effect exiled together were granted one `expiry` object, so
@@ -32027,6 +32111,14 @@ export class Game {
     // go as the turn and the life-loss condition change.
     if (impulse.yourTurnOnly === true && this.activePlayer !== player) return false;
     if (impulse.fromTurn !== undefined && this.state.turn.number < impulse.fromTurn) return false;
+    if (impulse.sourceDid !== undefined) {
+      const history = this.state.players[player]?.turnHistory;
+      const did = impulse.sourceDid === "attacked" ? history?.attackedWith : history?.loreCountersOn;
+      const source = impulse.source;
+      if (source === undefined || did?.some((e) => e.object === source.id && e.stint === source.zoneChangeCount) !== true) {
+        return false;
+      }
+    }
     if (impulse.gate !== undefined) {
       const gateSource =
         impulse.expiry.kind === "while-source"
@@ -32047,7 +32139,8 @@ export class Game {
       return (
         src !== undefined &&
         src.zone === "battlefield" &&
-        (impulse.expiry.stint === undefined || (src.zoneChangeCount ?? 0) === impulse.expiry.stint)
+        (impulse.expiry.stint === undefined || (src.zoneChangeCount ?? 0) === impulse.expiry.stint) &&
+        (impulse.expiry.controlledBy === undefined || src.controller === impulse.expiry.controlledBy)
       );
     }
     return true;
@@ -39170,6 +39263,23 @@ export class Game {
       case "scried": {
         const history = historyOf(event.player);
         if (history !== undefined) history.scriedOrSurveilled = (history.scriedOrSurveilled ?? 0) + 1;
+        return;
+      }
+      case "attacker-declared": {
+        const attacker = this.state.objects[event.attacker];
+        const history = historyOf(attacker?.controller);
+        if (history !== undefined) {
+          (history.attackedWith ??= []).push({ object: event.attacker, stint: attacker.zoneChangeCount ?? 0 });
+        }
+        return;
+      }
+      case "counter-added": {
+        if (event.counter !== "lore") return;
+        const permanent = this.state.objects[event.object];
+        const history = historyOf(event.by ?? permanent?.controller);
+        if (history !== undefined) {
+          (history.loreCountersOn ??= []).push({ object: event.object, stint: permanent.zoneChangeCount ?? 0 });
+        }
         return;
       }
       case "cards-discarded": {

@@ -1665,6 +1665,37 @@ export type ResolvedEnterAttacking =
   | { readonly player: PlayerId | undefined; readonly orTheirPlaneswalker: boolean }
   | { readonly defender: PlayerId | ObjectId };
 
+/**
+ * How long a permission to play an exiled card lasts, whatever it's over — an
+ * `impulse-exile`'s cards or an `exile`'s `mayCast` — see `GameObject.impulse`:
+ *
+ * - `"end-of-turn"`: this turn.
+ * - `"your-next-turn"`: "until the end of your next turn" (Tectonic Giant).
+ * - `"your-next-turn-only"`: "during your next turn" (Galvanic Relay): not
+ *   before it either, this turn if it's yours included.
+ * - `"your-next-end-step"`: "until your next end step" (Rocco, Street Chef),
+ *   ending as that step begins.
+ * - `"until-end-of-combat-your-next-turn"`: Brazen Cannonade's.
+ * - `"until-next-exile"`: "until you exile another card with this" (Unstable
+ *   Amulet), ending when this stint of the source next does. Its leaving
+ *   doesn't end it (the ruling).
+ * - `"while-source"`: for as long as the permanent is on the battlefield
+ *   (Theater of Horrors).
+ * - `"while-you-control"`: "for as long as you control this" (Lightning,
+ *   Security Sergeant), over for good once you don't (the ruling).
+ * - `"while-exiled"`: "for as long as it remains exiled".
+ */
+export type ImpulseDuration =
+  | "end-of-turn"
+  | "your-next-turn"
+  | "your-next-turn-only"
+  | "your-next-end-step"
+  | "until-end-of-combat-your-next-turn"
+  | "until-next-exile"
+  | "while-source"
+  | "while-you-control"
+  | "while-exiled";
+
 /** One row of a die roll's results table (rule 706.3a): a result from `min`
  * to `max` (any result from `min` up, without one) gets `effect`. */
 export interface DieResultRow {
@@ -2788,11 +2819,14 @@ export type EffectSpec =
        * any type can be spent to cast that spell" (Hostage Taker): the
        * effect's controller gets an impulse permission to *cast* the card
        * this put into exile (a land stays put) — `"while-exiled"`, or
-       * `"end-of-turn"` for "this turn" — with `spendAs` for that cast
-       * alone (rule 118.14). A token exiled ceases to exist (rule 111.7),
-       * so there's nothing to cast.
+       * `"end-of-turn"` for "this turn", or any other
+       * {@link ImpulseDuration}: Scholar of Combustion's "until the end of
+       * your next turn" — with `spendAs` for that cast alone (rule 118.14).
+       * `play`: "you may **play** it" — a land too (rule 305.1), Victor
+       * Mancha's. A token exiled ceases to exist (rule 111.7), so there's
+       * nothing to cast.
        */
-      readonly mayCast?: { readonly duration: "end-of-turn" | "while-exiled"; readonly spendAs?: SpendAs };
+      readonly mayCast?: { readonly duration: ImpulseDuration; readonly spendAs?: SpendAs; readonly play?: true };
       /**
        * **Airbend** it (rule 701.65a): exile it, and for as long as the card
        * remains exiled its *owner* may cast it by paying {2} rather than its
@@ -7408,10 +7442,15 @@ export type EffectSpec =
        */
       readonly kind: "impulse-exile";
       readonly amount: EffectAmount;
-      /** `"while-exiled"` is "for as long as it remains exiled";
-       * `"your-next-end-step"` is "until your next end step" (Rocco, Street
-       * Chef), ending as the controller's next end step begins. */
-      readonly duration: "end-of-turn" | "your-next-turn" | "your-next-end-step" | "while-source" | "while-exiled";
+      /** See {@link ImpulseDuration}. */
+      readonly duration: ImpulseDuration;
+      /** Only during a turn the permission's player did this with this
+       * source, in this stint of it, whatever has become of it since: "During
+       * any turn you attacked with this creature, you may play that card"
+       * (`"attacked"` — Goblin Researcher, with `duration: "while-exiled"`);
+       * "during any turn you put a lore counter on this Saga"
+       * (`"lore-counter"` — Summon: Brynhildr). */
+      readonly sourceDid?: "attacked" | "lore-counter";
       /** Whose libraries: the controller's (the default), or each player's in
        * a scope, the top `amount` of each exiled at once — "each player
        * exiles the top card of their library" (Rocco) — or a target slot
@@ -8755,7 +8794,7 @@ export interface EffectApi {
     target: TargetRef,
     untilSourceLeaves?: boolean,
     withCounters?: { readonly kind: string; readonly amount: number },
-    mayCast?: { readonly duration: "end-of-turn" | "while-exiled"; readonly spendAs?: SpendAs },
+    mayCast?: { readonly duration: ImpulseDuration; readonly spendAs?: SpendAs; readonly play?: true },
     linked?: boolean,
     /** Airbend it (rule 701.65a) — see the `exile` effect's `airbend`. */
     airbend?: boolean,
@@ -9306,7 +9345,7 @@ export interface EffectApi {
   /** See the `"impulse-exile"` {@link EffectSpec}. */
   impulseExile(
     amount: number,
-    duration: "end-of-turn" | "your-next-turn" | "your-next-end-step" | "while-source" | "while-exiled",
+    duration: ImpulseDuration,
     castOnly: boolean,
     opts?: {
       /** Whose libraries (the controller's alone when absent). */
@@ -15438,6 +15477,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         ...(spec.filter !== undefined ? { filter: spec.filter } : {}),
         ...(spec.free !== undefined ? { free: spec.free } : {}),
         ...(spec.spendAs !== undefined ? { spendAs: spec.spendAs } : {}),
+        ...(spec.sourceDid !== undefined ? { sourceDid: spec.sourceDid } : {}),
       });
       return;
     }

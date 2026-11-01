@@ -3914,6 +3914,59 @@ export function parseSentence(sentence, ctx) {
  * that effect, or a `sequence`). Otherwise `effect: null`, with the sentences
  * left to author in `todo` and what the others became in `hints`.
  */
+/**
+ * A permission's window as Oracle text words it (`play`: "you may play"
+ * rather than "you may cast"), or `null` for one not read here.
+ */
+function impulseWindowOf(sentence) {
+  const verb = "(play|cast)";
+  const it = "(?:it|that card|them|those cards)";
+  const words = [
+    [`you may ${verb} ${it} this turn`, { duration: "end-of-turn" }],
+    [`until end of turn, you may ${verb} ${it}`, { duration: "end-of-turn" }],
+    [`you may ${verb} ${it} until the end of your next turn`, { duration: "your-next-turn" }],
+    [`until the end of your next turn, you may ${verb} ${it}`, { duration: "your-next-turn" }],
+    [`during your next turn, you may ${verb} ${it}`, { duration: "your-next-turn-only" }],
+    [`until end of combat on your next turn, you may ${verb} ${it}`, { duration: "until-end-of-combat-your-next-turn" }],
+    [`you may ${verb} ${it} until you exile another card with ~`, { duration: "until-next-exile" }],
+    [`you may ${verb} ${it} for as long as you control ~`, { duration: "while-you-control" }],
+    [`during any turn you attacked with ~, you may ${verb} ${it}`, { duration: "while-exiled", sourceDid: "attacked" }],
+    [`during any turn you put a lore counter on ~, you may ${verb} ${it}`, { duration: "while-exiled", sourceDid: "lore-counter" }],
+  ];
+  for (const [pattern, window] of words) {
+    const m = new RegExp(`^${pattern}\\.$`, "i").exec(sentence);
+    if (m !== null) return { ...window, play: m[1].toLowerCase() === "play" };
+  }
+  return null;
+}
+
+/** The impulse sentence pair at `i`, or `null`: the top card exiled with its
+ * permission (`impulse-exile`), or a targeted card exiled from your graveyard
+ * with one (`exile`'s `mayCast`; `sourceDid` isn't something that says). */
+function impulseWindowAt(sentences, i, ctx) {
+  const next = sentences[i + 1];
+  if (next === undefined) return null;
+  const window = impulseWindowOf(next);
+  if (window === null) return null;
+  const { play, ...when } = window;
+  if (/^exile the top card of your library\.$/i.test(sentences[i])) {
+    return { kind: "impulse-exile", amount: 1, ...when, ...(play ? {} : { castOnly: true }) };
+  }
+  // Only the windows new to `exile`: the plain "this turn" reads go on through
+  // whatever else those lines say.
+  if (window.sourceDid !== undefined) return null;
+  const graveyard = /^exile (up to one )?target (?:(.+?) )?card from your graveyard\.$/i.exec(sentences[i]);
+  if (graveyard === null) return null;
+  const filter = graveyard[2] === undefined ? {} : parseTypePhrase(graveyard[2], { cards: true });
+  if (filter === null) return null;
+  const spec = { kind: "card-in-graveyard", whose: "you", ...(Object.keys(filter).length > 0 ? { filter } : {}) };
+  return {
+    kind: "exile",
+    target: ctx.target(graveyard[1] !== undefined ? { kind: "optional", of: spec } : spec),
+    mayCast: { duration: when.duration, ...(play ? { play: true } : {}) },
+  };
+}
+
 export function parseEffect(text, outer) {
   // Each target a sentence names takes the next slot of the ability's list.
   const ctx = { ...outer, target: (spec) => outer.targets.push(spec) - 1 };
@@ -3925,6 +3978,16 @@ export function parseEffect(text, outer) {
   for (const [i, sentence] of sentences.entries()) {
     if (skip > 0) {
       skip -= 1;
+      continue;
+    }
+    // "Exile the top card of your library. You may play that card until you
+    // exile another card with ~." and the other windows, and "exile target
+    // card from your graveyard" with a permission for a duration.
+    const impulse = impulseWindowAt(sentences, i, ctx);
+    if (impulse !== null) {
+      parsed.push(impulse);
+      hints.push({ sentence, effect: impulse });
+      skip = 1;
       continue;
     }
     // "You get {E}{E}{E}, then you may pay any amount of {E}." and what it
