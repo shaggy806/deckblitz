@@ -99,6 +99,7 @@ import _poolBurningCuriosity from "../pool/burning-curiosity.js";
 import _poolBurnishedDunestomper from "../pool/burnished-dunestomper.js";
 import _poolBusterSword from "../pool/buster-sword.js";
 import _poolCabalArchon from "../pool/cabal-archon.js";
+import _poolCabalTherapy from "../pool/cabal-therapy.js";
 import _poolCacheGrab from "../pool/cache-grab.js";
 import _poolCactusfolkSureshot from "../pool/cactusfolk-sureshot.js";
 import _poolCalciderm from "../pool/calciderm.js";
@@ -942,6 +943,7 @@ const shard: CardShard = {
     _poolBurnishedDunestomper,
     _poolBusterSword,
     _poolCabalArchon,
+    _poolCabalTherapy,
     _poolCacheGrab,
     _poolCactusfolkSureshot,
     _poolCalciderm,

@@ -547,6 +547,7 @@ import _poolPowerbalance from "../pool/powerbalance.js";
 import _poolPravaOfTheSteelLegion from "../pool/prava-of-the-steel-legion.js";
 import _poolPredatorFlagship from "../pool/predator-flagship.js";
 import _poolPredatoryImpetus from "../pool/predatory-impetus.js";
+import _poolPredict from "../pool/predict.js";
 import _poolPreeningChampion from "../pool/preening-champion.js";
 import _poolPriestOfUrabrask from "../pool/priest-of-urabrask.js";
 import _poolPrismaticEnding from "../pool/prismatic-ending.js";
@@ -1424,6 +1425,7 @@ const shard: CardShard = {
     _poolPravaOfTheSteelLegion,
     _poolPredatorFlagship,
     _poolPredatoryImpetus,
+    _poolPredict,
     _poolPreeningChampion,
     _poolPriestOfUrabrask,
     _poolPrismaticEnding,

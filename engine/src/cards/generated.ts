@@ -2634,6 +2634,7 @@ import _poolBontuTheGlorified from "./pool/bontu-the-glorified.js";
 import _poolBontusLastReckoning from "./pool/bontus-last-reckoning.js";
 import _poolBontusMonument from "./pool/bontus-monument.js";
 import _poolBonusRound from "./pool/bonus-round.js";
+import _poolBoobyTrap from "./pool/booby-trap.js";
 import _poolBookBurning from "./pool/book-burning.js";
 import _poolBookDevourer from "./pool/book-devourer.js";
 import _poolBookOfMazarbul from "./pool/book-of-mazarbul.js";
@@ -3158,6 +3159,7 @@ import _poolCabalShrine from "./pool/cabal-shrine.js";
 import _poolCabalSlaver from "./pool/cabal-slaver.js";
 import _poolCabalStronghold from "./pool/cabal-stronghold.js";
 import _poolCabalSurgeon from "./pool/cabal-surgeon.js";
+import _poolCabalTherapy from "./pool/cabal-therapy.js";
 import _poolCabalTorturer from "./pool/cabal-torturer.js";
 import _poolCabalTrainee from "./pool/cabal-trainee.js";
 import _poolCabarettiAscendancy from "./pool/cabaretti-ascendancy.js";
@@ -17161,6 +17163,7 @@ import _poolPredatoryNightstalker from "./pool/predatory-nightstalker.js";
 import _poolPredatorySliver from "./pool/predatory-sliver.js";
 import _poolPredatoryUrge from "./pool/predatory-urge.js";
 import _poolPredatoryWurm from "./pool/predatory-wurm.js";
+import _poolPredict from "./pool/predict.js";
 import _poolPredictivePreparations from "./pool/predictive-preparations.js";
 import _poolPreeminentCaptain from "./pool/preeminent-captain.js";
 import _poolPreemptiveStrike from "./pool/preemptive-strike.js";
@@ -30299,6 +30302,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBontusLastReckoning,
   _poolBontusMonument,
   _poolBonusRound,
+  _poolBoobyTrap,
   _poolBookBurning,
   _poolBookDevourer,
   _poolBookOfMazarbul,
@@ -30823,6 +30827,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCabalSlaver,
   _poolCabalStronghold,
   _poolCabalSurgeon,
+  _poolCabalTherapy,
   _poolCabalTorturer,
   _poolCabalTrainee,
   _poolCabarettiAscendancy,
@@ -44826,6 +44831,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPredatorySliver,
   _poolPredatoryUrge,
   _poolPredatoryWurm,
+  _poolPredict,
   _poolPredictivePreparations,
   _poolPreeminentCaptain,
   _poolPreemptiveStrike,
@@ -57977,6 +57983,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/bontus-last-reckoning": _poolBontusLastReckoning,
   "pool/bontus-monument": _poolBontusMonument,
   "pool/bonus-round": _poolBonusRound,
+  "pool/booby-trap": _poolBoobyTrap,
   "pool/book-burning": _poolBookBurning,
   "pool/book-devourer": _poolBookDevourer,
   "pool/book-of-mazarbul": _poolBookOfMazarbul,
@@ -58501,6 +58508,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/cabal-slaver": _poolCabalSlaver,
   "pool/cabal-stronghold": _poolCabalStronghold,
   "pool/cabal-surgeon": _poolCabalSurgeon,
+  "pool/cabal-therapy": _poolCabalTherapy,
   "pool/cabal-torturer": _poolCabalTorturer,
   "pool/cabal-trainee": _poolCabalTrainee,
   "pool/cabaretti-ascendancy": _poolCabarettiAscendancy,
@@ -72504,6 +72512,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/predatory-sliver": _poolPredatorySliver,
   "pool/predatory-urge": _poolPredatoryUrge,
   "pool/predatory-wurm": _poolPredatoryWurm,
+  "pool/predict": _poolPredict,
   "pool/predictive-preparations": _poolPredictivePreparations,
   "pool/preeminent-captain": _poolPreeminentCaptain,
   "pool/preemptive-strike": _poolPreemptiveStrike,

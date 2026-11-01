@@ -70,6 +70,7 @@ import _poolBloomwielderDryads from "../pool/bloomwielder-dryads.js";
 import _poolBoilingEarth from "../pool/boiling-earth.js";
 import _poolBondOfAgony from "../pool/bond-of-agony.js";
 import _poolBontusLastReckoning from "../pool/bontus-last-reckoning.js";
+import _poolBoobyTrap from "../pool/booby-trap.js";
 import _poolBorealGriffin from "../pool/boreal-griffin.js";
 import _poolBorosStrikeCaptain from "../pool/boros-strike-captain.js";
 import _poolBosssChauffeur from "../pool/bosss-chauffeur.js";
@@ -908,6 +909,7 @@ const shard: CardShard = {
     _poolBoilingEarth,
     _poolBondOfAgony,
     _poolBontusLastReckoning,
+    _poolBoobyTrap,
     _poolBorealGriffin,
     _poolBorosStrikeCaptain,
     _poolBosssChauffeur,
