@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4116 already implemented / 884 missing (marks refreshed 2026-11-01)
+4125 already implemented / 875 missing (marks refreshed 2026-11-01)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -668,7 +668,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   669  Dualcaster Mage                          {1}{R}{R}        Creature — Human Wizard
 [x]   670  Bridgeworks Battle // Tanglespan Bridgeworks {3}              Sorcery // Land
 [x]   671  Wood Elves                               {2}{G}           Creature — Elf Scout
-[ ]   672  Sphere of Safety                         {4}{W}           Enchantment
+[x]   672  Sphere of Safety                         {4}{W}           Enchantment
 [x]   673  Wrath of God                             {2}{W}{W}        Sorcery
 [x]   674  Gravecrawler                             {B}              Creature — Zombie
 [x]   675  Changeling Outcast                       {B}              Creature — Shapeshifter
@@ -2457,7 +2457,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2464  Agitator Ant                             {2}{R}           Creature — Insect
 [x]  2465  Blade of the Bloodchief                  {1}              Artifact — Equipment
 [x]  2466  Crib Swap                                {2}{W}           Kindred Instant — Shapeshifter
-[ ]  2467  Emrakul, the World Anew                  {12}             Legendary Creature — Eldrazi
+[x]  2467  Emrakul, the World Anew                  {12}             Legendary Creature — Eldrazi
 [x]  2468  Ureni of the Unwritten                   {4}{G}{U}{R}     Legendary Creature — Spirit Dragon
 [ ]  2469  Wrenn and Seven                          {3}{G}{G}        Legendary Planeswalker — Wrenn
 [x]  2470  Myr Convert                              {2}              Artifact Creature — Phyrexian Myr
@@ -2563,7 +2563,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2570  Retreat to Kazandu                       {2}{G}           Enchantment
 [ ]  2571  Gisela, the Broken Blade                 {2}{W}{W}        Legendary Creature — Angel Horror
 [x]  2572  Angrath's Marauders                      {5}{R}{R}        Creature — Human Pirate
-[ ]  2573  Baird, Steward of Argive                 {2}{W}{W}        Legendary Creature — Human Soldier
+[x]  2573  Baird, Steward of Argive                 {2}{W}{W}        Legendary Creature — Human Soldier
 [x]  2574  Goblin Chieftain                         {1}{R}{R}        Creature — Goblin
 [x]  2575  Dread Presence                           {3}{B}           Creature — Nightmare
 [x]  2576  Imoti, Celebrant of Bounty               {3}{G}{U}        Legendary Creature — Snake Druid
@@ -3244,7 +3244,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  3251  Satoru, the Infiltrator                  {U}{B}           Legendary Creature — Human Ninja Rogue
 [x]  3252  Wakening Sun's Avatar                    {5}{W}{W}{W}     Creature — Dinosaur Avatar
 [x]  3253  Rain of Filth                            {B}              Instant
-[ ]  3254  The Endstone                             {7}              Legendary Artifact
+[x]  3254  The Endstone                             {7}              Legendary Artifact
 [x]  3255  Fandaniel, Telophoroi Ascian             {4}{B}           Legendary Creature — Elder Wizard
 [x]  3256  Angel of Indemnity                       {5}{W}           Creature — Angel Warrior
 [ ]  3257  Misleading Signpost                      {2}{U}           Artifact
@@ -3486,7 +3486,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3493  Shadowheart, Dark Justiciar              {3}{B}           Legendary Creature — Human Elf Cleric
 [x]  3494  Nest of Scarabs                          {2}{B}           Enchantment
 [ ]  3495  Blood for the Blood God!                 {8}{B}{B}{R}     Instant
-[ ]  3496  Command Bridge                           {0}              Land
+[x]  3496  Command Bridge                           {0}              Land
 [x]  3497  Highland Forest                          {0}              Snow Land — Mountain Forest
 [ ]  3498  Eidolon of Rhetoric                      {2}{W}           Enchantment Creature — Spirit
 [x]  3499  Pit of Offerings                         {0}              Land — Cave
@@ -4295,7 +4295,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4302  Diffusion Sliver                         {1}{U}           Creature — Sliver
 [x]  4303  Indulging Patrician                      {1}{W}{B}        Creature — Vampire Noble
 [x]  4304  Pippin, Warden of Isengard               {B}{G}           Legendary Creature — Halfling Advisor
-[ ]  4305  Vexilus Praetor                          {3}{W}           Creature — Custodes Warrior
+[x]  4305  Vexilus Praetor                          {3}{W}           Creature — Custodes Warrior
 [x]  4306  Yoshimaru, Ever Faithful                 {W}              Legendary Creature — Dog
 [ ]  4307  Lozhan, Dragons' Legacy                  {3}{U}{R}        Legendary Creature — Dragon Shaman
 [x]  4308  Squirrel Sovereign                       {1}{G}           Creature — Squirrel Noble
@@ -4651,7 +4651,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4658  Tyrant's Familiar                        {5}{R}{R}        Creature — Dragon
 [x]  4659  Sliver Legion                            {W}{U}{B}{R}{G}  Legendary Creature — Sliver
 [ ]  4660  Gilgamesh, Master-at-Arms                {4}{R}{R}        Legendary Creature — Human Samurai
-[ ]  4661  Absolute Virtue                          {6}{W}{U}        Legendary Creature — Avatar Warrior
+[x]  4661  Absolute Virtue                          {6}{W}{U}        Legendary Creature — Avatar Warrior
 [x]  4662  Shanid, Sleepers' Scourge                {1}{R}{W}{B}     Legendary Creature — Human Knight
 [x]  4663  Marisi, Breaker of the Coil              {1}{R}{G}{W}     Legendary Creature — Cat Warrior
 [x]  4664  Rally the Ranks                          {1}{W}           Enchantment
@@ -4925,7 +4925,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4932  Digsite Engineer                         {2}{W}           Creature — Dwarf Artificer
 [x]  4933  Nissa, Vital Force                       {3}{G}{G}        Legendary Planeswalker — Nissa
 [ ]  4934  Toby, Beastie Befriender                 {2}{W}           Legendary Creature — Human Wizard
-[ ]  4935  Baneslayer Angel                         {3}{W}{W}        Creature — Angel
+[x]  4935  Baneslayer Angel                         {3}{W}{W}        Creature — Angel
 [x]  4936  Gilt-Leaf Palace                         {0}              Land
 [x]  4937  Hedron Detonator                         {2}{R}           Creature — Goblin Artificer
 [x]  4938  Deadly Recluse                           {1}{G}           Creature — Spider
@@ -4998,7 +4998,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  5005  Filter Out                               {1}{U}{U}        Instant
 [ ]  5006  Long-Term Plans                          {2}{U}           Instant
 [x]  5007  Ravenous Tyrannosaurus                   {4}{R}{G}        Creature — Dinosaur
-[ ]  5008  Elspeth Tirel                            {3}{W}{W}        Legendary Planeswalker — Elspeth
+[x]  5008  Elspeth Tirel                            {3}{W}{W}        Legendary Planeswalker — Elspeth
 [x]  5009  Fleet Swallower                          {5}{U}{U}        Creature — Fish
 [x]  5010  Oboro, Palace in the Clouds              {0}              Legendary Land
 [x]  5011  Slip On the Ring                         {1}{W}           Instant
