@@ -972,7 +972,9 @@
   "effect:life-total-becomes",
   "amount:starting-life-total",
   "effect:destroy-all-except-source",
-  "condition:return-cards-put-in-graveyard-from-battlefield-this-turn"
+  "condition:return-cards-put-in-graveyard-from-battlefield-this-turn",
+  "condition:return-cards-put-in-graveyard-from-battlefield-this-turn",
+  "effect:turn-face-up"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

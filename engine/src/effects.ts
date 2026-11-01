@@ -6123,6 +6123,24 @@ export type EffectSpec =
       readonly as?: FaceDownAs;
     }
   | {
+      /**
+       * "Turn target face-down creature face up" (Ixidor, Reality Sculptor's
+       * ability, Break Open, Skirk Alarmist): by an effect, no cost paid, and
+       * however it came to be face down (rule 708.7). The same permanent, its
+       * counters and the effects on it staying (708.8); a "when this is
+       * turned face up" triggers, a megamorph gets no counter (its cost wasn't
+       * paid, 702.37b), and "as this is turned face up" still applies.
+       * Nothing happens to one that isn't face down — Showstopping Surprise's
+       * "turn it face up if it's face down" — or that can't be turned face up
+       * (`cant-turn-face-up`). An instant or sorcery card is revealed and
+       * stays face down, with nothing triggering (701.40g, 701.58g). "You may
+       * turn a face-down creature you control face up" (Ugin's Mastery) is a
+       * `choose-permanents` over `faceDown` with this as its `then`.
+       */
+      readonly kind: "turn-face-up";
+      readonly target: EffectTargetRef;
+    }
+  | {
       /** Manifest dread (rule 701.62a): the player looks at the top two cards
        * of their library, manifests one of them (their choice, seen by no one
        * else), then puts the rest into their graveyard — the
@@ -9858,6 +9876,9 @@ export interface EffectApi {
   /** Turn the permanent `target` face down — see the `"turn-face-down"`
    * {@link EffectSpec}. */
   turnFaceDown(target: TargetRef, as?: FaceDownAs): void;
+  /** Turn the face-down permanent `target` face up — see the `"turn-face-up"`
+   * {@link EffectSpec}. */
+  turnFaceUp(target: TargetRef): void;
   /** Create `count` copies of the named token, controlled by `ctx.controller`. */
   createToken(
     token: string,
@@ -13146,6 +13167,11 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "turn-face-down": {
       const target = resolveEffectTarget(spec.target, ctx);
       if (target !== undefined) ctx.turnFaceDown(target, spec.as);
+      return;
+    }
+    case "turn-face-up": {
+      const target = resolveEffectTarget(spec.target, ctx);
+      if (target !== undefined) ctx.turnFaceUp(target);
       return;
     }
     case "exile": {

@@ -2894,6 +2894,33 @@ export function parseSentence(sentence, ctx) {
     if (got.group) return { kind: "for-each-target", from: got.slots[0], simultaneous: true, effect: one(got.slots[0]) };
     return got.slots.length === 1 ? one(got.slots[0]) : { kind: "sequence", simultaneous: true, effects: got.slots.map(one) };
   }
+  // Turning face up by an effect (rule 708.7 — the `turn-face-up` effect):
+  // "turn target face-down creature face up" (Ixidor), "… an opponent
+  // controls" (Break Open), "… attacking creature you control" (Kaust).
+  if ((m = /^turn target face-down( attacking)? (creature|permanent)( you control| an opponent controls)? face up\.$/i.exec(s))) {
+    const whose = m[3] === undefined ? {} : { controlledBy: /you control/i.test(m[3]) ? "you" : "opponent" };
+    const filter = {
+      ...(m[2].toLowerCase() === "creature" ? { type: "creature" } : {}),
+      faceDown: true,
+      ...(m[1] !== undefined ? { attacking: true } : {}),
+      ...whose,
+    };
+    return { kind: "turn-face-up", target: ctx.target({ kind: "permanent", filter }) };
+  }
+  // "You may turn a face-down creature you control face up" (Ugin's Mastery),
+  // "you may turn a permanent you control face up" (Zimone): chosen as it
+  // resolves, and only a face-down one could be turned.
+  if ((m = /^you may turn (?:a face-down creature|a permanent) you control face up\.$/i.exec(s))) {
+    const creature = /face-down creature/i.test(s);
+    return {
+      kind: "choose-permanents",
+      filter: { ...(creature ? { type: "creature" } : {}), faceDown: true, controlledBy: "you" },
+      min: 0,
+      upTo: 1,
+      prompt: `You may turn ${creature ? "a face-down creature" : "a permanent"} you control face up`,
+      then: { kind: "turn-face-up", target: 0 },
+    };
+  }
   // Manifest (rule 701.40a): "manifest the top card of your library", and
   // "(you) manifest the top card of that player's library" — another
   // player's library (Thieving Amalgam, Orochi Soul-Reaver), when the
@@ -4053,6 +4080,7 @@ export function parseSentence(sentence, ctx) {
       };
     }
     if (re("turn it face down").test(s)) return { kind: "turn-face-down", target: it };
+    if (re("turn it face up(?: if it's face down)?").test(s)) return { kind: "turn-face-up", target: it };
   }
 
   // Everything else that's a whole instruction by itself.

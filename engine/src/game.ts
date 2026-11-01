@@ -29794,6 +29794,9 @@ export class Game {
         }
       },
       manifestTop: (player, kind, library) => this.manifestTop(player, kind, library ?? player),
+      turnFaceUp: (target) => {
+        if (target.kind === "object") this.turnFaceUpByEffect(target.object);
+      },
       turnFaceDown: (target, as) => {
         if (target.kind === "object") this.turnFaceDown(target.object, as);
       },
@@ -38454,14 +38457,42 @@ export class Game {
       this.costDiscardPriorityTo(player);
     }
     if (also?.returnToHand !== undefined) this.payReturnToHandCost(player, id, also.returnToHand);
+    this.becomeFaceUp(id, player, morph && card.morph?.keyword === "megamorph");
+    this.afterPlayerAction(player);
+  }
+
+  /** Face-down `id` has its own characteristics again, shown to everyone
+   * (rule 708.8): both ways of turning it, its special action's cost paid or
+   * by an effect. `megamorphCounter`: turned up for its megamorph cost
+   * (702.37b). */
+  private becomeFaceUp(id: ObjectId, player: PlayerId, megamorphCounter: boolean): void {
+    const object = this.state.objects[id];
+    const card = this.registry.get(object.cardName);
     delete object.faceDown;
     invalidateComputedCache();
     this.revealFaceDown(id);
     const ref = { kind: "object", object: id } as const;
-    if (morph && card.morph?.keyword === "megamorph") this.addCounter(ref, "+1/+1", 1, false, player);
+    if (megamorphCounter) this.addCounter(ref, "+1/+1", 1, false, player);
     if (card.asTurnedFaceUp !== undefined) this.addCounter(ref, "+1/+1", card.asTurnedFaceUp.counters, false, player);
     this.emit({ type: "permanent-turned-face-up", player, object: id });
-    this.afterPlayerAction(player);
+  }
+
+  /** "Turn target face-down creature face up": by an effect, nothing paid
+   * (the `turn-face-up` effect). Nothing happens to one that isn't face down
+   * now or can't be turned face up. An instant or sorcery card can't be a
+   * permanent (rule 110.4): it's revealed and left face down, and nothing
+   * triggers (701.40g, 701.58g). Its controller turns it, whoever's effect
+   * this is. */
+  private turnFaceUpByEffect(id: ObjectId): void {
+    const object = this.state.objects[id];
+    if (object === undefined || object.zone !== "battlefield" || object.faceDown === undefined) return;
+    if (restrictionsOf(this.state, this.registry, id).has("cant-turn-face-up")) return;
+    const card = this.registry.get(object.cardName);
+    if (card.types.includes("instant") || card.types.includes("sorcery")) {
+      this.revealFaceDown(id);
+      return;
+    }
+    this.becomeFaceUp(id, object.controller, false);
   }
 
   private exileByEffect(target: TargetRef, exiledBy?: ObjectId, split = true): void {

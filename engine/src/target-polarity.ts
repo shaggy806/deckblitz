@@ -597,6 +597,9 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   // (Cyber Conversion, Backslide); a morph's own "turn this face down" aims
   // at itself, to be turned up again (Wall of Deceit).
   "turn-face-down": (n, v) => v.touch(n.target, "harm", MAJOR),
+  // A free turn up, its cost saved and its card's abilities on (Ixidor);
+  // a card that makes it an opponent's says so in its target (Break Open).
+  "turn-face-up": (n, v) => v.touch(n.target, "help", MINOR),
   "create-token": (n, v) => v.touch(n.who === "target-controller" ? 0 : undefined, "help", MINOR),
   // A copy goes to the copied permanent's controller unless the card says
   // it's yours (Hate Mirage).

@@ -552,6 +552,24 @@ Rielle, the Everwise. Left: Toluz's "exile them" (the discarded cards,
 linked — `effect:linked-exile-from-discard`), Inti's batch key
 (`trigger:discards-batch-trigger`, likely only marking).
 
+### Turning a face-down permanent face up by an effect — built 2026-11-01
+
+The top unit of the need-keys Phase 2 family `mechanic:face-down`. The new
+`turn-face-up` effect turns a face-down permanent up with nothing paid, however
+it came to be face down (rule 708.7); it shares `Game.becomeFaceUp` with the
+special action, so "when this is turned face up" and `asTurnedFaceUp` apply and
+a megamorph's counter doesn't (702.37b). A permanent under `cant-turn-face-up`
+is left alone, and an instant or sorcery card is revealed and stays face down
+with nothing triggering (701.40g, 701.58g). "You may turn a face-down creature
+you control face up" is `choose-permanents` over `faceDown`, no new decision.
+The scaffolder reads each of those lines. Keys: effect:turn-face-up
+(static:cant-turn-face-up was already built, and the effect now honours it).
+Proving cards: Ixidor, Reality Sculptor, Break Open, Skirk Alarmist, Showstopping
+Surprise, Karlov Watchdog. Left for `author-freed` to narrow: Etrata ("If you
+can't, exile it, then you may cast"), Hauntwoods Shrieker (reveal target
+face-down permanent, "if it's a creature card"), Kaust (`stat:turned-face-up-this-turn`),
+Ugin's Mastery and Zimone (their triggers), Yarus, Expose the Culprit.
+
 ### Return all the cards put into a graveyard from the battlefield this turn — built 2026-11-01
 
 The need-keys Phase 2 family

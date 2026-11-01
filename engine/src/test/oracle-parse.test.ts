@@ -7057,3 +7057,34 @@ describe("a sweep of the cards put into a graveyard from the battlefield this tu
     expect(notTypes.complete).toBe(false);
   });
 });
+
+describe("turning a face-down permanent face up by an effect", () => {
+  const face = (type_line: string, oracle_text: string) => parseFace({ name: "Test Turn", type_line, oracle_text }, { tokenFor: () => null });
+
+  it("reads 'turn target face-down creature face up', whoever controls it", () => {
+    const open = face("Instant", "Turn target face-down creature an opponent controls face up.");
+    expect(open.complete).toBe(true);
+    expect(open.targets).toEqual([{ kind: "permanent", filter: { type: "creature", faceDown: true, controlledBy: "opponent" } }]);
+    expect(open.effect).toEqual({ kind: "turn-face-up", target: 0 });
+    const sculptor = face("Creature — Human Wizard", "{2}{U}: Turn target face-down creature face up.");
+    expect(sculptor.complete).toBe(true);
+    expect(sculptor.activated[0].targets).toEqual([{ kind: "permanent", filter: { type: "creature", faceDown: true } }]);
+    expect(sculptor.activated[0].effect).toEqual({ kind: "turn-face-up", target: 0 });
+    const kaust = face("Creature — Dryad", "{T}: Turn target face-down attacking creature you control face up.");
+    expect(kaust.activated[0].targets).toEqual([
+      { kind: "permanent", filter: { type: "creature", faceDown: true, attacking: true, controlledBy: "you" } },
+    ]);
+  });
+
+  it("reads 'you may turn a face-down creature you control face up' as a choice as it resolves", () => {
+    const mastery = face("Enchantment", "Whenever you attack, you may turn a face-down creature you control face up.");
+    expect(mastery.complete).toBe(true);
+    expect(mastery.triggered[0].effect).toMatchObject({
+      kind: "choose-permanents",
+      filter: { type: "creature", faceDown: true, controlledBy: "you" },
+      min: 0,
+      upTo: 1,
+      then: { kind: "turn-face-up", target: 0 },
+    });
+  });
+});
