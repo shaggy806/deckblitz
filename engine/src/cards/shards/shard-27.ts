@@ -291,6 +291,7 @@ import _poolGrimclawBats from "../pool/grimclaw-bats.js";
 import _poolGrixisBattlemage from "../pool/grixis-battlemage.js";
 import _poolGrondTheGatebreaker from "../pool/grond-the-gatebreaker.js";
 import _poolGuardianNaga from "../pool/guardian-naga.js";
+import _poolGuerrillaTactics from "../pool/guerrilla-tactics.js";
 import _poolGuidelightSynergist from "../pool/guidelight-synergist.js";
 import _poolGuiltfeeder from "../pool/guiltfeeder.js";
 import _poolGuiltyConscience from "../pool/guilty-conscience.js";
@@ -506,6 +507,7 @@ import _poolPrismaticBoon from "../pool/prismatic-boon.js";
 import _poolPrivilegedPosition from "../pool/privileged-position.js";
 import _poolProphetOfKruphix from "../pool/prophet-of-kruphix.js";
 import _poolProvoke from "../pool/provoke.js";
+import _poolPsychicPurge from "../pool/psychic-purge.js";
 import _poolPsychoticHaze from "../pool/psychotic-haze.js";
 import _poolPuppetMaster from "../pool/puppet-master.js";
 import _poolPurpleDragonPunks from "../pool/purple-dragon-punks.js";
@@ -1135,6 +1137,7 @@ const shard: CardShard = {
     _poolGrixisBattlemage,
     _poolGrondTheGatebreaker,
     _poolGuardianNaga,
+    _poolGuerrillaTactics,
     _poolGuidelightSynergist,
     _poolGuiltfeeder,
     _poolGuiltyConscience,
@@ -1350,6 +1353,7 @@ const shard: CardShard = {
     _poolPrivilegedPosition,
     _poolProphetOfKruphix,
     _poolProvoke,
+    _poolPsychicPurge,
     _poolPsychoticHaze,
     _poolPuppetMaster,
     _poolPurpleDragonPunks,

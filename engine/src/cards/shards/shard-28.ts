@@ -304,6 +304,7 @@ import _poolGodsire from "../pool/godsire.js";
 import _poolGreenSunsZenith from "../pool/green-suns-zenith.js";
 import _poolGreenbeltGuardian from "../pool/greenbelt-guardian.js";
 import _poolGrendelSpawnOfKnull from "../pool/grendel-spawn-of-knull.js";
+import _poolGrimReturn from "../pool/grim-return.js";
 import _poolGristleback from "../pool/gristleback.js";
 import _poolGrowthChamberGuardian from "../pool/growth-chamber-guardian.js";
 import _poolGurmagSwiftwing from "../pool/gurmag-swiftwing.js";
@@ -1187,6 +1188,7 @@ const shard: CardShard = {
     _poolGreenSunsZenith,
     _poolGreenbeltGuardian,
     _poolGrendelSpawnOfKnull,
+    _poolGrimReturn,
     _poolGristleback,
     _poolGrowthChamberGuardian,
     _poolGurmagSwiftwing,

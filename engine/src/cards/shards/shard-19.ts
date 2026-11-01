@@ -52,6 +52,7 @@ import _poolBalemurkLeech from "../pool/balemurk-leech.js";
 import _poolBallynockCohort from "../pool/ballynock-cohort.js";
 import _poolBanishingSlash from "../pool/banishing-slash.js";
 import _poolBarbarianHorde from "../pool/barbarian-horde.js";
+import _poolBarteredCow from "../pool/bartered-cow.js";
 import _poolBasalSliver from "../pool/basal-sliver.js";
 import _poolBedheadBeastie from "../pool/bedhead-beastie.js";
 import _poolBelbesPortal from "../pool/belbes-portal.js";
@@ -956,6 +957,7 @@ const shard: CardShard = {
     _poolBallynockCohort,
     _poolBanishingSlash,
     _poolBarbarianHorde,
+    _poolBarteredCow,
     _poolBasalSliver,
     _poolBedheadBeastie,
     _poolBelbesPortal,

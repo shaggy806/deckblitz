@@ -770,6 +770,7 @@ import _poolTheBirthOfMeletis from "../pool/the-birth-of-meletis.js";
 import _poolTheDalekEmperor from "../pool/the-dalek-emperor.js";
 import _poolTheElderDragonWar from "../pool/the-elder-dragon-war.js";
 import _poolTheEnd from "../pool/the-end.js";
+import _poolTheLadyOfOtaria from "../pool/the-lady-of-otaria.js";
 import _poolTheLunarWhale from "../pool/the-lunar-whale.js";
 import _poolThermalNavigator from "../pool/thermal-navigator.js";
 import _poolThirst from "../pool/thirst.js";
@@ -862,6 +863,7 @@ import _poolWitnessOfTomorrows from "../pool/witness-of-tomorrows.js";
 import _poolWolverineRiders from "../pool/wolverine-riders.js";
 import _poolWoodElves from "../pool/wood-elves.js";
 import _poolWoodedFoothills from "../pool/wooded-foothills.js";
+import _poolWreckHunter from "../pool/wreck-hunter.js";
 import _poolWrigglingGrub from "../pool/wriggling-grub.js";
 import _poolWriteIntoBeing from "../pool/write-into-being.js";
 import _poolXiahouDunTheOneEyed from "../pool/xiahou-dun-the-one-eyed.js";
@@ -1668,6 +1670,7 @@ const shard: CardShard = {
     _poolTheDalekEmperor,
     _poolTheElderDragonWar,
     _poolTheEnd,
+    _poolTheLadyOfOtaria,
     _poolTheLunarWhale,
     _poolThermalNavigator,
     _poolThirst,
@@ -1760,6 +1763,7 @@ const shard: CardShard = {
     _poolWolverineRiders,
     _poolWoodElves,
     _poolWoodedFoothills,
+    _poolWreckHunter,
     _poolWrigglingGrub,
     _poolWriteIntoBeing,
     _poolXiahouDunTheOneEyed,

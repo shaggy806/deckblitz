@@ -496,6 +496,7 @@ import _poolNecromanticThirst from "../pool/necromantic-thirst.js";
 import _poolNeedleshotGourna from "../pool/needleshot-gourna.js";
 import _poolNetterEnDal from "../pool/netter-en-dal.js";
 import _poolNightMarketLookout from "../pool/night-market-lookout.js";
+import _poolNightNurseHealerOfHeroes from "../pool/night-nurse-healer-of-heroes.js";
 import _poolNightmareLash from "../pool/nightmare-lash.js";
 import _poolNikkoOnna from "../pool/nikko-onna.js";
 import _poolNimAbomination from "../pool/nim-abomination.js";
@@ -1375,6 +1376,7 @@ const shard: CardShard = {
     _poolNeedleshotGourna,
     _poolNetterEnDal,
     _poolNightMarketLookout,
+    _poolNightNurseHealerOfHeroes,
     _poolNightmareLash,
     _poolNikkoOnna,
     _poolNimAbomination,
