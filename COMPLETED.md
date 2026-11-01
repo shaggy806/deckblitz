@@ -86,6 +86,19 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2: relations among the chosen targets** (2026-10-31, `b43bb96da`;
+  `effect:targets-share-type`, `effect:targets-equal-toughness`,
+  `effect:targets-with-different-names`) — an `other` slot's `shares` (a card type, a creature
+  type, or no creature type, `among` limiting the types) and a group's `equalToughness` and
+  `differentNames`, narrowed while choosing, refused at cast (601.2c) and checked again on
+  resolution (608.2b), a target gone read as it last existed; 7 freed. Legerdemain, Rivals' Duel,
+  Secret Tunnel, V.A.T.S., Behold the Sinister Six!. Mind Extraction and Dead Ringers were
+  mis-keyed.
+- **Need-keys Phase 2: what's attached to a target or a player** (2026-11-01, `97a750503`;
+  `condition:attached-to-target`, `filter:attached-to-player`, `filter:attached-to-target`) —
+  `CardFilter.attachedToTarget`, `attachedToPlayer` (303.4) and `attachedToThan` ("up to one
+  target Equipment attached to that creature", illegal on resolution once unattached); 13 freed.
+  Hubris, Blastfire Bolt, Witchbane Orb, Fiery Annihilation.
 - **Need-keys Phase 2: one choice across zones, or one card a slot** (2026-10-31, `7bac8a12a`;
   `decision:choose-from-zone-extensions`, `decision:choose-from-hand-and-graveyard`,
   `decision:choose-from-hand-and-library-top`, `effect:look-and-choose-one-each`) —
@@ -2173,6 +2186,12 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Bots
 
+- **A target group's min in a cast's target range and the bots' picks** (2026-10-31,
+  `416041552`): Reckless Spite's "two target nonblack creatures" under Hinata, Dawn-Crowned's
+  per-target tax was offered at zero targets — `targetCountBoundsFor` counted every group member
+  optional and let one creature fill two slots — and `firstOfEach` and the heuristic's ranked pick
+  took one member whatever the group's `min` (rule 601.2c). Found by the situation fuzzer
+  (Charge of the Forever-Beast, seed 42).
 - **A later opponent who could kill the bot alone counts in full** (2026-10-26, the
   `crackbackKillShot` weight, 1): the crackback check weighed every opponent but the next at
   `crackbackParanoia`'s half, so 166 full swings in 198 four-player games passed it into a board

@@ -5,6 +5,12 @@ and the cleanups found along the way. `BACKLOG.md` keeps one line per item under
 title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLETED.md`. The animation follow-ups are in
 `docs/plans/legibility-of-play.md`, "Follow-ups".
 
+- **A human's target picks aren't narrowed by the new target relations** (found 2026-10-31).
+  `viewTargetFacts` (`client/src/App.tsx`, ~line 640) doesn't supply the optional facts the
+  target relations built that night read — `shareTypes`, `toughnessOf`, `nameOf`, `attachedTo` —
+  so the client offers every legal-alone target (Legerdemain's second pick, V.A.T.S.'s equal
+  toughness, Fiery Annihilation's Equipment) and the engine refuses a broken choice with an error
+  when it's sent. The bots get the full facts. Fix: fill them in from the view.
 - **Cultivate's split prompt doesn't say which find goes where** (found 2026-10-31). The older
   `restDestination` split (Cultivate, Kodama's Reach) asks "Choose up to 2 cards" without saying
   that the one picked goes onto the battlefield and the other to the hand. Fix: move those cards

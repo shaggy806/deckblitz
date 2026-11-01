@@ -341,13 +341,14 @@ section keeps only what to do next.
   in a cost, the `"revealed"` amount, `reveal.shareColor`; 6 freed, 15 proving cards), and one
   choice across zones with a card name chosen with a player (look-and-choose's `together`,
   `discard-chosen`'s `alsoFrom`, `revealsDraws: "chosen-player"`; 15 freed, 8 proving cards, two
-  manual checks — Selective Adaptation on the stale list is still open: one card for two keywords?).
-  **944 freed cards wait for the authoring sweep** (`cards:needs -- --stale`); the user
+  manual checks — Selective Adaptation on the stale list is still open: one card for two keywords?),
+  and relations among the chosen targets with what's attached to a target or a player (`shares`,
+  `equalToughness`, `differentNames`, `attachedToTarget`/`attachedToPlayer`/`attachedToThan`; 20
+  freed, 9 proving cards). **964 freed cards wait for the authoring sweep** (`cards:needs -- --stale`); the user
   authors them in one sweep once the reasonable keys are built. Cloud sessions are building
   `keyword:hexproof-from-colors`, the combat-restriction second group,
   `effect:prevent-next-n-damage-to-you`, the cascade/sunburst grants to spells,
   `cost:kicker-nonmana-cost` and `cost:alt-cost-discard-cards`. Local agents are building
-  `effect:target-spec-additions` with `condition:filter-attachments`,
   `condition:filter-this-turn-history` with `trigger:discards-extensions`, and
   `effect:text-change-color-or-land-words` with `effect:add-subtype`. Next unclaimed:
   `static:grant-to-cards-outside-battlefield` (11), `static:pt-per-amount` (10),
@@ -566,6 +567,7 @@ One line each; the detail is in **`docs/client-gaps.md`**, under the same bold t
 animation follow-ups in `docs/plans/legibility-of-play.md`, "Follow-ups". When an item lands,
 delete its detail there and move this line to `COMPLETED.md`.
 
+- **A human's target picks aren't narrowed by the new target relations** — `viewTargetFacts` lacks `shareTypes`, `toughnessOf`, `nameOf` and `attachedTo`, so a broken pair is refused only when sent (found 2026-10-31).
 - **Cultivate's split prompt doesn't say which find goes where** — "Choose up to 2 cards"; `search-library.instead` with `pick: "one"` would ask properly (found 2026-10-31).
 - **A processor's move from exile reads as "takes"** — the log says "Alice takes Hill Giant" when a processor puts an opponent's exiled card into its owner's graveyard (found 2026-10-31).
 - **Playback stalls when your cast triggers your own targeted ability** — the cast showcase never ends and the target prompt never shows (found 2026-10-30 by `run-check`; Briarknit Kami, Ichormoon Gauntlet).
