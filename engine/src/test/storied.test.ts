@@ -10,6 +10,7 @@ import { describe, expect, it } from "vitest";
 import type { Game } from "../game.js";
 import type { PlayerId } from "../primitives.js";
 
+import { POOL_CARDS, TOKEN_CARDS } from "../cards/generated.js";
 import { A, B, destroy, enter, hand, keywords, lands, life, nextTurn, pickModes, pt, spawn, table, toHand, toStep, tokensNamed } from "./harness.js";
 
 const story = (game: Game, player: PlayerId = A): boolean => game.state.players[player].enduringStory === true;
@@ -17,6 +18,16 @@ const story = (game: Game, player: PlayerId = A): boolean => game.state.players[
 const check = (game: Game): void => toStep(game, "begin-combat");
 
 describe("storied", () => {
+  // `grantEnduringStories` skips a player with no permanent whose own text has
+  // storied, before any layer fold — sound only while nothing grants it. A
+  // card that does needs that gate changed with it.
+  it("is printed only: no card or token grants storied", () => {
+    const granting = [...POOL_CARDS, ...TOKEN_CARDS]
+      .filter((def) => JSON.stringify({ ...def, keywords: [], text: "" }).includes('"storied"'))
+      .map((def) => def.name);
+    expect(granting).toEqual([]);
+  });
+
   it("three artifacts, Sagas and/or legendaries with a storied permanent: an enduring story", () => {
     const { game } = table();
     const ori = spawn(game, "Ori, Keeper of Songs"); // legendary itself

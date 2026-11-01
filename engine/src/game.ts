@@ -44356,19 +44356,32 @@ export class Game {
    * the game. Run in each state-based check, so it's had before the game
    * looks for what triggered (702.195c) and before any player gets priority
    * again. Whether anyone got one.
+   *
+   * Cheap on the usual board, as it runs in every sweep: a player who has one
+   * is never looked at again, and one controlling no permanent whose own text
+   * has storied is skipped before any layer fold — no card grants storied
+   * (`storied.test.ts` checks the pool), so none has it. Only then is it read
+   * after layers (a storied permanent that lost its abilities tells nothing)
+   * and the story counted. It folded every permanent of every player before,
+   * every sweep, but the sweep's other checks need most of those folds
+   * anyway (its cache hands them on), so the gate saved only ~1-2% of the
+   * situation fuzzer's time (2026-10-31), not the ~15% a profile laid on it.
    */
   private grantEnduringStories(): boolean {
     let granted = false;
     for (const player of this.state.turnOrder) {
       const playerState = this.state.players[player];
       if (playerState === undefined || playerState.enduringStory === true || playerState.hasLost) continue;
-      let storied = false;
+      const controlled = this.state.zones.shared.battlefield.filter((id) => this.state.objects[id].controller === player);
+      const printed = controlled.filter((id) =>
+        (this.registry.get(rulesTextName(this.state.objects[id])).keywords ?? []).includes("storied"),
+      );
+      if (printed.length === 0) continue;
+      if (!printed.some((id) => computeCharacteristics(this.state, this.registry, id).keywords.has("storied"))) continue;
       let story = 0;
-      for (const id of this.state.zones.shared.battlefield) {
+      for (const id of controlled) {
         const object = this.state.objects[id];
-        if (object.controller !== player) continue;
         const c = computeCharacteristics(this.state, this.registry, id);
-        if (c.keywords.has("storied")) storied = true;
         if (
           c.types.includes("artifact") ||
           supertypesOf(this.registry, object).includes("legendary") ||
@@ -44377,7 +44390,7 @@ export class Game {
           story += object.stackCount ?? 1;
         }
       }
-      if (!storied || story < 3) continue;
+      if (story < 3) continue;
       playerState.enduringStory = true;
       invalidateComputedCache();
       this.emit({ type: "enduring-story", player });
