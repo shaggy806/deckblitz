@@ -1068,6 +1068,25 @@ export type BoundUnlessOption = Exclude<UnlessOption, { readonly payGeneric: Eff
  * How far an `"each-player-may"` has got — set by the engine on the copy it
  * parks between one player's answer and the next question. Never authored.
  */
+/** A `put-on-libraries` parked between its questions: the cards, fixed as
+ * it began, each as the object it was then (rule 400.7); the owners still to
+ * choose which of theirs go on the bottom, and what those before them chose;
+ * and, once everything has moved, the orders still to ask. */
+export interface PutOnLibrariesProgress {
+  readonly cards: readonly { readonly object: ObjectId; readonly zoneChangeCount: number }[];
+  readonly toAsk: readonly PlayerId[];
+  readonly bottom: readonly ObjectId[];
+  /** Whether an owner's choice is waiting for `takeKept`. */
+  readonly asked?: true;
+  readonly orders?: readonly LibraryOrderStep[];
+}
+/** One owner's cards to order on one end of their library (rule 401.4). */
+export interface LibraryOrderStep {
+  readonly player: PlayerId;
+  readonly cards: readonly ObjectId[];
+  readonly position: "top" | "bottom";
+}
+
 export interface EachPlayerMayProgress {
   /** The `eventSeq` it began at: a player's answer is the first
    * `modes-chosen` event by them for this source since. */
@@ -3727,6 +3746,40 @@ export type EffectSpec =
         | LibraryPosition
         | { readonly ownerChooses: readonly LibraryPosition[] }
         | { readonly beneathTop: EffectAmount };
+    }
+  | {
+      /**
+       * Several cards put into their owners' libraries **at once**, as one
+       * instruction — Plow Under's "put two target lands on top of their
+       * owners' libraries", Forever Young's "put any number of target
+       * creature cards from your graveyard on top of your library",
+       * Harmonic Convergence's "put all enchantments on top of their owners'
+       * libraries". They leave together (one leave event, one graveyard
+       * leave), and then each owner, the active player first (rule 101.4),
+       * arranges their own cards going to each end in any order (rule 401.4:
+       * "the owner of those cards may arrange them in any order") — a
+       * `choose-from-zone` order, asked only when the order is a choice
+       * (copies of one card aren't). A token goes too, and ceases to exist
+       * there (rule 111.8), never ordered.
+       *
+       * `"owner-chooses"` is "its owner puts it on **their choice of the top
+       * or bottom** of their library" (Aetherspouts, Tolarian Contempt):
+       * each owner, the active player first, knowing the choices before
+       * theirs (the Aetherspouts ruling), chooses which of their own cards
+       * go on the bottom — the rest go on top — then everything moves at
+       * once and the orders are asked. Battlefield permanents only.
+       * A single card "on their choice of …" is `put-on-library`'s
+       * `ownerChooses`.
+       */
+      readonly kind: "put-on-libraries";
+      /** `{ targetsFrom }`: the target cards in slot `from` on that are still
+       * legal (rule 608.2b) — an `any-number` group, or several slots
+       * ("two target lands"). `{ all }`: every permanent matching the filter
+       * as this resolves, read from the effect's controller's side. */
+      readonly what: { readonly targetsFrom: number } | { readonly all: CardFilter };
+      readonly position: "top" | "bottom" | "owner-chooses";
+      /** Set by the engine on the copy it parks between questions. */
+      readonly progress?: PutOnLibrariesProgress;
     }
   | {
       /**
@@ -7401,7 +7454,11 @@ export type EffectSpec =
       /** Someone else makes the choice from that zone: `"that-player"` is
        * the opponent a `choose-opponent` chose — Tasigur, the Golden Fang's
        * "return a nonland card **of an opponent's choice** from your
-       * graveyard to your hand". A public zone only (a graveyard). */
+       * graveyard to your hand" — or a library, which they look at:
+       * Tahngarth's Glare's "**that player** looks at the top three cards of
+       * **your** library, then puts them back in any order" (inside a
+       * `for-each-player` of the target), the cards seen only by them and
+       * staying yours. */
       readonly chooser?: "that-player";
       /** Another player's library, the effect's controller still looking
        * and choosing: "look at the top three cards of **target player's**
@@ -8795,6 +8852,26 @@ export interface EffectApi {
    * targets still legal), the answer waiting for `takeKept`. `false` when
    * they've left the game, and nothing was asked. */
   askChooseAmong(chooser: PlayerId, objects: readonly ObjectId[], count: number, prompt: string): boolean;
+  /** `put-on-libraries`' `"owner-chooses"`: ask `owner` which of the
+   * permanents among `objects` they own (tokens aside, which cease to exist
+   * in a library — rule 111.8) go on the bottom of their library, the rest
+   * on top; the answer waits for `takeKept`. `false` when they own none of
+   * them, and nothing was asked. */
+  askLibraryEnds(owner: PlayerId, objects: readonly ObjectId[]): boolean;
+  /** See the `"put-on-libraries"` {@link EffectSpec}: put each card on the
+   * top or bottom of its owner's library, all at once (one leave event),
+   * in the order given — then the orders still to ask (rule 401.4): each
+   * owner's cards now on one end of their library, in turn order from the
+   * active player, top before bottom, only where the order is a choice. */
+  putOnLibrariesTogether(
+    placements: readonly { readonly object: ObjectId; readonly position: "top" | "bottom" }[],
+  ): readonly LibraryOrderStep[];
+  /** Ask `step.player` the order of `step.cards` on that end of their
+   * library — those still there. `false` when there was nothing to ask. */
+  askLibraryOrder(step: LibraryOrderStep): boolean;
+  /** Where an object is now: its zone change count (rule 400.7), or
+   * `undefined` once it has ceased to exist. */
+  zoneChangeCountOf(object: ObjectId): number | undefined;
   /** See the `"counters-distributed"` {@link EffectSpec}: ask the effect's
    * controller to choose up to `max` of the battlefield permanents matching
    * `filter` from `side`'s side (the controller's when absent) — a token
@@ -12867,6 +12944,73 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           ? { fromTop: amountValue(position.beneathTop, ctx) + 1 }
           : position,
       );
+      return;
+    }
+    case "put-on-libraries": {
+      // The owners' choices of an end first, one owner at a time, each
+      // answered before the next is asked; then every card moves at once;
+      // then each owner's orders, one at a time (rules 101.4, 401.4).
+      const below = ctx.parkedCount();
+      let progress = spec.progress;
+      if (progress === undefined) {
+        const objects =
+          "targetsFrom" in spec.what
+            ? ctx.targets
+                .slice(spec.what.targetsFrom)
+                .flatMap((t) => (t?.kind === "object" ? [t.object] : []))
+            : ctx.permanentsMatching(spec.what.all).map((p) => p.object);
+        const cards = [...new Set(objects)].flatMap((object) => {
+          const zoneChangeCount = ctx.zoneChangeCountOf(object);
+          return zoneChangeCount === undefined ? [] : [{ object, zoneChangeCount }];
+        });
+        if (cards.length === 0) return;
+        const owners =
+          spec.position === "owner-chooses"
+            ? ctx.apnap([
+                ...new Set(
+                  cards.flatMap((c) => {
+                    const owner = ctx.ownerOf({ kind: "object", object: c.object });
+                    return owner === undefined ? [] : [owner];
+                  }),
+                ),
+              ])
+            : [];
+        progress = { cards, toAsk: owners, bottom: [] };
+      } else if (progress.asked === true) {
+        progress = { cards: progress.cards, toAsk: progress.toAsk, bottom: [...progress.bottom, ...ctx.takeKept()] };
+      }
+      const cards = progress.cards;
+      // The same objects they were as this began (rule 400.7).
+      const still = (): ObjectId[] =>
+        cards.filter((c) => ctx.zoneChangeCountOf(c.object) === c.zoneChangeCount).map((c) => c.object);
+      let orders = progress.orders;
+      if (orders === undefined) {
+        let toAsk = progress.toAsk;
+        while (toAsk.length > 0) {
+          const owner = toAsk[0];
+          toAsk = toAsk.slice(1);
+          if (ctx.askLibraryEnds(owner, still())) {
+            ctx.resumeAfterDecisions({ ...spec, progress: { ...progress, toAsk, asked: true } }, below);
+            return;
+          }
+        }
+        const bottom = new Set(progress.bottom);
+        const fixed = spec.position === "bottom" ? "bottom" : "top";
+        orders = ctx.putOnLibrariesTogether(
+          still().map((object) => ({
+            object,
+            position: spec.position === "owner-chooses" ? (bottom.has(object) ? "bottom" : "top") : fixed,
+          })),
+        );
+      }
+      while (orders.length > 0) {
+        const step = orders[0];
+        orders = orders.slice(1);
+        if (ctx.askLibraryOrder(step)) {
+          ctx.resumeAfterDecisions({ ...spec, progress: { cards, toAsk: [], bottom: [], orders } }, below);
+          return;
+        }
+      }
       return;
     }
     case "return-from-graveyard": {

@@ -1134,9 +1134,9 @@
     {
       "name": "Riptide Gearhulk",
       "needs": [
-        "new:owner-orders-library-placements"
+        "new:library-nth-from-top-together"
       ],
-      "why": "Two targets with one owner are ordered by the engine, not by their owner (rule 401.4)."
+      "why": "Two targets with one owner are ordered by the engine, not by their owner (rule 401.4). 2026-10-31: put-on-libraries orders several cards on the top or bottom; 'third from the top' for several at once still isn't ordered."
     },
     {
       "name": "Hobgoblin Bandit Lord",

@@ -18,7 +18,7 @@ export default defineCard({
   effect: {
     kind: "sequence",
     effects: [
-      { kind: "for-each-target", from: 0, effect: { kind: "put-on-library", target: 0, position: "top" } },
+      { kind: "put-on-libraries", what: { targetsFrom: 0 }, position: "top" },
       { kind: "draw", amount: 1 },
     ],
   },

@@ -321,6 +321,29 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Several cards into libraries at once, their owners ordering them — built 2026-10-31
+
+The need-keys Phase 2 family `decision:library-ordering`, features only. New
+effect **`put-on-libraries { what: { targetsFrom } | { all }, position:
+"top" | "bottom" | "owner-chooses" }`**: several cards put into their owners'
+libraries as one instruction (one leave event), then each owner, APNAP (rule
+101.4), arranging their own on each end (rule 401.4) through the existing
+`choose-from-zone` order (`Game.beginLibraryOrder`, scry's), asked only when
+the order is a choice; `"owner-chooses"` asks each owner first which of their
+permanents go on the bottom (an existing `choose-permanents`, `keepChoice`),
+then moves everything at once. No new decision kind. Bone Harvest, Footbottom
+Feast and Frantic Salvage moved onto it (they had been moving one at a time in
+target order). "Look at target player's library and reorder" was already
+`look-and-choose`'s `from` with `top-any-order` (Cruel Fate); `chooser:
+"that-player"` now also covers a library (Tahngarth's Glare's second look).
+The scaffolder reads "put two/any number of/up to N target … on top of their
+owners' libraries / your library", "put all … on top of their owners'
+libraries" and Aetherspouts' line. Keys: decision:owner-orders-library-placements,
+effect:look-at-target-player-library-reorder, effect:put-on-top-of-library-all.
+Proving cards: Plow Under, Forever Young, Harmonic Convergence, Aetherspouts,
+Ransack, Dimir Machinations, Tahngarth's Glare. Left: several cards "Nth from
+the top" at once (Riptide Gearhulk — `effect:put-into-library-nth-from-top-together`).
+
 ### Prevention divided among targets, and the next N damage to you — built 2026-10-31
 
 The need-keys Phase 2 family `effect:prevent-next-n-damage-to-you` with

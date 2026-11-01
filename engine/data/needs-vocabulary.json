@@ -797,6 +797,7 @@
   "new:overload-per-controller-search": "keyword:overload-per-controller-search",
   "new:owner-chooses-top-or-bottom": "decision:owner-chooses-top-or-bottom",
   "new:owner-orders-library-placements": "decision:owner-orders-library-placements",
+  "new:library-nth-from-top-together": "effect:put-into-library-nth-from-top-together",
   "new:pack-tactics": "keyword:pack-tactics",
   "new:pack-tactics-put-onto-battlefield-attacking": "keyword:pack-tactics",
   "new:paradigm": "keyword:paradigm",
@@ -2004,6 +2005,10 @@
    "example": "Riptide Gearhulk: Two targets with one owner are ordered by the engine, not by their owner (rule 401.4).",
    "checked": "2026-10-27: partial",
    "description": "Still missing (2026-10-27 check): the caster-ordered placement of several cards on top of the library (Forever Young, Gravepurge) isn't there; rest 'bottom-any-order' exists only on cast-now's rest Already there: src/effects.ts cast-now rest?: 'bottom-random' | 'bottom-any-order' (~line 2748); choose-from-zone library-bottom/library-top"
+  },
+  "effect:put-into-library-nth-from-top-together": {
+   "family": "decision:library-ordering",
+   "example": "Riptide Gearhulk: two of its targets with one owner both go 'third from the top' at once — put-on-libraries orders only the top and bottom ends (rule 401.4), not an Nth-from-the-top position."
   },
   "decision:pay-cost-up-to-n-times": {
    "example": "Tranquil Frillback: 'pay {G} up to three times… choose up to that many' modes",

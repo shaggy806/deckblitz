@@ -444,7 +444,7 @@ function zoneChoiceTitle(
       // on the very bottom.
       return action.order === true
         ? 'Put them on the bottom in the order you pick: the last you pick goes on the very bottom'
-        : `Choose ${cards} to put on the bottom of your library, in order: the last you pick goes on the very bottom`
+        : `Choose ${cards} to put on the bottom of ${whose} library, in order: the last you pick goes on the very bottom`
     case 'exile':
       // "Behold an Elf and exile it" (the Champions, rule 701.4a).
       return action.behold === true

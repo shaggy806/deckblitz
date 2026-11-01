@@ -1,7 +1,8 @@
 import { defineCard } from "../define.js";
 
-// The cards go on top one at a time in the order they were targeted, so the
-// caster orders them (the ruling); cast with no targets, it still draws.
+// The cards go on top together, in the order the caster (their owner)
+// chooses as it resolves (the ruling, rule 401.4 — `put-on-libraries`);
+// cast with no targets, it still draws.
 export default defineCard({
   name: "Footbottom Feast",
   manaCost: "{2}{B}",
@@ -12,7 +13,7 @@ export default defineCard({
   effect: {
     kind: "sequence",
     effects: [
-      { kind: "for-each-target", from: 0, effect: { kind: "put-on-library", target: 0, position: "top" } },
+      { kind: "put-on-libraries", what: { targetsFrom: 0 }, position: "top" },
       { kind: "draw", amount: 1 },
     ],
   },

@@ -3070,6 +3070,39 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     ).toEqual({ kind: "put-on-library", target: 0, position: { ownerChooses: ["top", "bottom"] } });
   });
 
+  it("several cards into their owners' libraries at once (put-on-libraries, rule 401.4)", () => {
+    const plow = ctx();
+    expect(parseSentence("Put two target lands on top of their owners' libraries.", plow)).toEqual({
+      kind: "put-on-libraries",
+      what: { targetsFrom: 0 },
+      position: "top",
+    });
+    expect(plow.targets).toEqual(["land", { kind: "other", of: "land", than: { slots: [0] } }]);
+    const young = ctx();
+    expect(
+      parseSentence("Put any number of target creature cards from your graveyard on top of your library.", young),
+    ).toEqual({ kind: "put-on-libraries", what: { targetsFrom: 0 }, position: "top" });
+    expect(young.targets).toEqual([
+      { kind: "any-number", of: { kind: "card-in-graveyard", whose: "you", filter: { type: "creature" } } },
+    ]);
+    const reinforcements = ctx();
+    parseSentence("Put up to three target creature cards from your graveyard on top of your library.", reinforcements);
+    expect(reinforcements.targets).toEqual([
+      { kind: "any-number", of: { kind: "card-in-graveyard", whose: "you", filter: { type: "creature" } }, max: 3 },
+    ]);
+    expect(parseSentence("Put all enchantments on top of their owners' libraries.", ctx())).toEqual({
+      kind: "put-on-libraries",
+      what: { all: { type: "enchantment" } },
+      position: "top",
+    });
+    expect(
+      parseSentence(
+        "For each attacking creature, its owner puts it on their choice of the top or bottom of their library.",
+        ctx(),
+      ),
+    ).toEqual({ kind: "put-on-libraries", what: { all: { type: "creature", attacking: true } }, position: "owner-chooses" });
+  });
+
   it("amplify N (rule 702.38a) and provoke (rule 702.39a)", () => {
     const throwback = face(
       "Amplify 2 (As this creature enters, put two +1/+1 counters on it for each Beast card you reveal in your hand.)\nProvoke (Whenever this creature attacks, you may have target creature defending player controls untap and block it if able.)",

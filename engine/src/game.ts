@@ -228,6 +228,7 @@ import type {
   FlickerOptions,
   LookAndChooseLeftoverIf,
   LookAndChooseZone,
+  LibraryOrderStep,
   CopyExceptions,
   SpellCopyChange,
   ZoneSecondPick,
@@ -27594,6 +27595,71 @@ export class Game {
         };
         return true;
       },
+      askLibraryEnds: (owner, objects) => {
+        if (this.state.players[owner]?.hasLost !== false) return false;
+        // A token ceases to exist in a library (rule 111.8): where it goes
+        // is no choice at all.
+        const eligible = objects.filter((id) => {
+          const object = this.state.objects[id];
+          return object?.zone === "battlefield" && object.owner === owner && object.isToken !== true;
+        });
+        if (eligible.length === 0) return false;
+        this.state.awaiting = {
+          kind: "choose-permanents",
+          player: owner,
+          eligible,
+          min: 0,
+          max: eligible.length,
+          prompt:
+            eligible.length === 1
+              ? "Choose it to put it on the bottom of your library, or nothing to put it on top"
+              : "Choose any of these to put on the bottom of your library — the rest go on top",
+          then: { kind: "sequence", effects: [] },
+          source,
+          x,
+          keepChoice: true,
+        };
+        return true;
+      },
+      putOnLibrariesTogether: (placements) => {
+        const moved: { object: ObjectId; owner: PlayerId; position: "top" | "bottom" }[] = [];
+        this.withLeaveBatch(() =>
+          this.withGraveyardLeaveBatch(() => {
+            for (const { object, position } of placements) {
+              const card = this.state.objects[object];
+              if (card === undefined) continue;
+              const owner = card.owner;
+              this.putOnLibrary(object, position);
+              moved.push({ object, owner, position });
+            }
+          }),
+        );
+        // Each owner's cards now on each end of their library: theirs to
+        // arrange (rule 401.4), the active player's first (rule 101.4). A
+        // token there is gone at the next state-based check (rule 704.5d),
+        // never ordered.
+        const steps: LibraryOrderStep[] = [];
+        for (const player of this.apnapOrder()) {
+          for (const position of ["top", "bottom"] as const) {
+            const cards = moved
+              .filter((m) => m.owner === player && m.position === position)
+              .map((m) => m.object)
+              .filter((id) => {
+                const object = this.state.objects[id];
+                return object?.zone === "library" && object.isToken !== true;
+              });
+            if (this.libraryOrderMatters(cards)) steps.push({ player, cards, position });
+          }
+        }
+        return steps;
+      },
+      askLibraryOrder: (step) => {
+        if (this.state.players[step.player]?.hasLost !== false) return false;
+        const library = this.state.zones.perPlayer[step.player].library;
+        const cards = step.cards.filter((id) => library.includes(id));
+        return this.beginLibraryOrder(step.player, cards, step.position);
+      },
+      zoneChangeCountOf: (object) => this.state.objects[object]?.zoneChangeCount,
       takeKept: () => {
         const kept = this.state.keptByChoice ?? [];
         delete this.state.keptByChoice;

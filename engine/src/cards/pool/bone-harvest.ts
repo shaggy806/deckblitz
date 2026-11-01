@@ -6,8 +6,8 @@ import { defineCard } from "../define.js";
 //   [2004-10-04] You have to show which creature cards you put on top of your library, but not the
 //     order you put them there.
 //
-// Each target goes on top in the order the caster chose them (`for-each-target`), so the
-// last one chosen ends on top — the order is the caster's.
+// The cards go on top together (one leave from the graveyard), in the order their owner —
+// the caster — chooses as it resolves (rule 401.4, `put-on-libraries`).
 
 export default defineCard({
   name: "Bone Harvest",
@@ -19,7 +19,7 @@ export default defineCard({
   effect: {
     kind: "sequence",
     effects: [
-      { kind: "for-each-target", from: 0, effect: { kind: "put-on-library", target: 0, position: "top" } },
+      { kind: "put-on-libraries", what: { targetsFrom: 0 }, position: "top" },
       { kind: "delayed-trigger", at: "next-upkeep", effect: { kind: "draw", amount: 1 }, text: "Draw a card." },
     ],
   },

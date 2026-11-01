@@ -1039,6 +1039,33 @@ function blockRelationFilterOf(phrase) {
 }
 
 /** "target creature card from your graveyard" and friends. */
+/**
+ * The first slot of a `put-on-libraries`' targets: "two target lands" (two
+ * slots, the second other than the first — one instance of "target", rule
+ * 601.2c), "any number of / up to three / two target creature cards from
+ * your graveyard" (one `any-number` group), or what `quantifiedSlots` reads
+ * ("up to two target artifacts"). `undefined` for anything else.
+ */
+function libraryPlacementSlot(phrase, ctx) {
+  let m;
+  if ((m = /^(any number of|up to (two|three|four|five)|(two|three|four|five)) target (?:(.+?) )?cards from (your|a|an opponent's) graveyard$/i.exec(phrase))) {
+    const of = graveyardTargetOf(`target ${m[4] !== undefined ? `${m[4]} ` : ""}card from ${m[5].toLowerCase()} graveyard`);
+    const word = m[2] ?? m[3];
+    const n = word === undefined ? undefined : numberOf(word);
+    if (of === undefined || (word !== undefined && typeof n !== "number")) return undefined;
+    return ctx.target({ kind: "any-number", of, ...(m[3] !== undefined ? { min: n } : {}), ...(n !== undefined ? { max: n } : {}) });
+  }
+  if ((m = /^(two|three) target (.+)$/i.exec(phrase))) {
+    const n = numberOf(m[1]);
+    const of = targetOf(`target ${singularTarget(m[2])}`);
+    if (of === undefined || typeof n !== "number") return undefined;
+    const slots = [];
+    for (let i = 0; i < n; i += 1) slots.push(ctx.target(i === 0 ? of : { kind: "other", of, than: { slots: [...slots] } }));
+    return slots[0];
+  }
+  return quantifiedSlots(phrase, ctx)?.slots[0];
+}
+
 function graveyardTargetOf(phrase) {
   const m = /^target (?:(.+?) )?card from (your|a|an opponent's) graveyard$/i.exec(phrase);
   if (!m) return undefined;
@@ -1726,6 +1753,12 @@ export function parseSentence(sentence, ctx) {
       toughness: m[1] === "1" ? removedThisWay : 0,
       duration: "end-of-turn",
     };
+  }
+  // "For each attacking creature, its owner puts it on their choice of the
+  // top or bottom of their library" (Aetherspouts): no amount — the owners'
+  // choices, then the moves together (`put-on-libraries`, rule 401.4).
+  if (/^for each attacking creature, its owner puts it on their choice of the top or bottom of their library\.$/i.test(s)) {
+    return { kind: "put-on-libraries", what: { all: { type: "creature", attacking: true } }, position: "owner-chooses" };
   }
   if (/^you draw cards and lose life equal to the number of counters removed this way\.$/i.test(s)) {
     return {
@@ -3254,6 +3287,22 @@ export function parseSentence(sentence, ctx) {
   }
 
   // Libraries and graveyards.
+  // Several cards into their owners' libraries at once, each owner
+  // arranging theirs (rule 401.4): "put two target lands on top of their
+  // owners' libraries" (Plow Under), "put any number of target creature
+  // cards from your graveyard on top of your library" (Forever Young), "put
+  // all enchantments on top of their owners' libraries" (Harmonic
+  // Convergence).
+  if ((m = /^put ((?:two|three|any number of|up to (?:two|three|four|five)) target .+?) on (top|the bottom) of (?:their owners'|your) librar(?:y|ies)\.$/i.exec(s))) {
+    const from = libraryPlacementSlot(m[1], ctx);
+    if (from === undefined) return null;
+    return { kind: "put-on-libraries", what: { targetsFrom: from }, position: m[2].toLowerCase() === "top" ? "top" : "bottom" };
+  }
+  if ((m = /^put all (.+?) on (top|the bottom) of their owners' libraries\.$/i.exec(s))) {
+    const filter = parseTypePhrase(m[1]);
+    if (filter === null || Object.keys(filter).length === 0) return null;
+    return { kind: "put-on-libraries", what: { all: filter }, position: m[2].toLowerCase() === "top" ? "top" : "bottom" };
+  }
   if ((m = re(`put (${TARGET}) on top of its owner's library`).exec(s))) {
     return { kind: "put-on-library", target: slot(m[1]), position: "top" };
   }

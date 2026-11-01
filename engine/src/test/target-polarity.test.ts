@@ -230,7 +230,10 @@ describe("slot polarity", () => {
     // lock, the board's call. 0.964 until 2026-10-31 (96.397%): Magus of the
     // Arena's "tap target creature you control and … Those creatures fight"
     // — tapping your own fighter is a minor harm, the fight a minor help.
-    expect(decided / slots).toBeGreaterThan(0.9635);
+    // 0.9635 until 2026-10-31 (96.341%): Ransack's and Dimir Machinations'
+    // "look at the top cards of target player's library" — your own draws
+    // set up or an opponent's disrupted, the board's call.
+    expect(decided / slots).toBeGreaterThan(0.963);
   });
 });
 

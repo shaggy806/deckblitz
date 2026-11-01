@@ -69,12 +69,14 @@ describe("Hoofprints of the Stag", () => {
 });
 
 describe("Footbottom Feast", () => {
-  it("puts the targeted creature cards on top, then draws the last one put there", () => {
-    const { game } = table();
+  it("puts the targeted creature cards on top in the order the caster chooses, then draws the top one", () => {
+    const { game, a } = table();
     const bears = toGraveyard(game, "Grizzly Bears");
     const giant = toGraveyard(game, "Hill Giant");
     lands(game, "Swamp", 3);
     const before = hand(game).length;
+    // The order (rule 401.4): Hill Giant on top.
+    a.chooseFromZoneFn = () => [giant, bears];
     cast(game, toHand(game, "Footbottom Feast"), { targets: [ref(bears), ref(giant)] });
     // The hand gained the Feast's draw (the Feast itself left it).
     expect(hand(game).length).toBe(before + 1);

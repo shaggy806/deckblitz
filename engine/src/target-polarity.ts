@@ -368,6 +368,13 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "set-door": none,
   "reflexive-trigger": none,
   "put-on-library": (n, v) => v.touch(n.target, "help", MINOR),
+  // Lands or artifacts off the battlefield onto their owners' libraries are
+  // removal (Plow Under, Rebuking Ceremony). "Target creature cards from your
+  // graveyard" back on top of yours (Forever Young) is recursion, but there
+  // the card has chosen the side itself (`whose: "you"`).
+  "put-on-libraries": (n, v) => {
+    if ("targetsFrom" in n.what) v.touch(EVERY_SLOT, "harm", MAJOR);
+  },
   discard: (n, v) => v.touch(n.target, "harm", MAJOR),
   "discard-chosen": (n, v) => v.touch(n.target, "harm", MAJOR),
   // Seeing a hidden hand: point it at an opponent.
