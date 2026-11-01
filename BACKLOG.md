@@ -365,15 +365,21 @@ section keeps only what to do next.
   `relativeToAffected`; 28 freed, 34 proving cards — on the stale list Ghost Ark needs a "becomes
   crewed" trigger, Ethereal Valkyrie a foretell from exile, Araumi its own cost; left open:
   `static:graveyard-cast-filter-amount`, `static:pt-per-turn-history`,
-  `static:pt-per-attachments-on-source`). **1038 freed cards wait for the authoring sweep**
+  `static:pt-per-attachments-on-source`), and one choice per card type or mana value and another
+  player choosing (`together.oneEachTypeAmong`, `totalManaValueAtMost`, `look-and-choose.split`,
+  `SearchInstead.chooser`, `chooser: "an-opponent"`, `choicesHeld`, `discard-chosen.chooser`; 31
+  freed, 17 proving cards — on the stale list Green Sun's Twilight needs its destination choice, and
+  Extract Brain, Forgotten Lore, Manifold Insights, Emergent Ultimatum, Plargg and Nassari,
+  Elemental Teachings, Threats Undetected and Ecological Appreciation are only partly covered).
+  **1024 freed cards wait for the authoring sweep**
   (`cards:needs -- --stale`); the user authors them in one sweep once the reasonable keys are built.
   Cloud sessions are building `keyword:hexproof-from-colors`, the combat-restriction second group,
   `effect:prevent-next-n-damage-to-you`, the cascade/sunburst grants to spells,
   `cost:kicker-nonmana-cost` and `cost:alt-cost-discard-cards`. Being built:
-  `effect:look-and-choose-second-pick`, `effect:choices-by-other-players`,
   `static:untap-step-limit`, `static:can-only-attack-alone`, `effect:token-copy-options`,
-  `zone:impulse-permission-options`. Next unclaimed:
-  `replacement:prevent-damage-from-chosen-source` (10), `cost:attack-tax` (10).
+  `zone:impulse-permission-options`, `replacement:prevent-damage-from-chosen-source`,
+  `keyword:protection-from-spells-and-cast-permanents`. Next unclaimed: `cost:attack-tax` (10),
+  `effect:discard-chosen-from-revealed-hand` (10), `cost:unless-pay-colored-per-amount` (10).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next

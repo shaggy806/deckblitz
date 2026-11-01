@@ -86,6 +86,18 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2: another player choosing** (2026-11-01; 7 keys of
+  `effect:choices-by-other-players`) — `SearchInstead.chooser` and `pick: { exactly }`, a
+  look-and-choose's `chooser: "an-opponent"` with the opponent picked after the reveal, `under:
+  "you"`, `for-each-player.choicesHeld` (picks enter together, none chosen twice) and
+  `discard-chosen.chooser`, through `choose-from-zone` and `choose-modes`; 18 freed. Intuition,
+  Gifts Ungiven, Realms Uncharted, Guided Passage, Dubious Challenge, Drana, Scrounge, Dredge the
+  Mire, Rejoin the Fight, Skullwinder, Rakdos Augermage.
+- **Need-keys Phase 2: one choice per card type or mana value** (2026-11-01; 6 keys of
+  `effect:look-and-choose-second-pick`) — `together.oneEachTypeAmong`, `together.totalManaValueAtMost`,
+  `look-and-choose.split` (a destination by card kind), `from` another player's graveyard,
+  `thisWay: "discarded"` finding cards a replacement exiled; 13 freed. Zimone's Experiment, Grime
+  Gorger, Hurkyl Master Wizard, Queen Kayla bin-Kroog, Smelting Vat, Michelangelo Improviser.
 - **Need-keys Phase 2: a static P/T bonus by each affected permanent's own count** (2026-11-01,
   `6c6f62277`; 15 keys of `static:pt-per-amount`, among them `static:count-attached-to-affected`,
   `static:shares-creature-type-count`, `static:pt-per-opponent` and `static:grant-pt-per-domain`) —

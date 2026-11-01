@@ -762,7 +762,9 @@ missing. Re-run `--greedy` for Phase 2's order.
   controller's graveyard (2 keys, 6 freed, 4 proving cards); a player named as the owner of a target
   or trigger object (3 keys, 3 freed, 7 proving cards); keyword abilities and types for cards
   outside the battlefield (11 keys, about 11 freed, 18 proving cards); a static P/T bonus by each
-  affected permanent's own count and other amounts (15 keys, 17 freed, 16 proving cards).
+  affected permanent's own count and other amounts (15 keys, 17 freed, 16 proving cards); one
+  choice per card type or mana value (6 keys, 13 freed, 6 proving cards); another player choosing
+  from finds, reveals, exile, graveyards and a revealed hand (7 keys, 18 freed, 11 proving cards).
 
 ## Rough size
 
