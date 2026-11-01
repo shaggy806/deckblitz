@@ -44,6 +44,11 @@ const RESTRICTION_TEXT: Record<CombatRestriction, string> = {
   'cant-be-blocked': "can't be blocked",
   'cant-turn-face-up': "can't be turned face up",
   'cant-crew': "can't crew Vehicles",
+  'can-only-attack-alone': 'can attack only alone',
+  'cant-attack-alone': "can't attack alone",
+  'cant-attack-unless-two-others': "can't attack unless two other creatures attack",
+  'cant-block-alone': "can't block alone",
+  'cant-block-unless-two-others': "can't block unless two other creatures block",
 }
 
 /** A colour as the log says it — "becomes black". */
