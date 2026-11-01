@@ -572,6 +572,7 @@ import _poolReverberate from "../pool/reverberate.js";
 import _poolRevolutionist from "../pool/revolutionist.js";
 import _poolRighteousCause from "../pool/righteous-cause.js";
 import _poolRigoStreetwiseMentor from "../pool/rigo-streetwise-mentor.js";
+import _poolRionyaFireDancer from "../pool/rionya-fire-dancer.js";
 import _poolRipplesOfUndeath from "../pool/ripples-of-undeath.js";
 import _poolRiptideTurtle from "../pool/riptide-turtle.js";
 import _poolRiseOfEagles from "../pool/rise-of-eagles.js";
@@ -1415,6 +1416,7 @@ const shard: CardShard = {
     _poolRevolutionist,
     _poolRighteousCause,
     _poolRigoStreetwiseMentor,
+    _poolRionyaFireDancer,
     _poolRipplesOfUndeath,
     _poolRiptideTurtle,
     _poolRiseOfEagles,

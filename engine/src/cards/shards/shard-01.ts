@@ -437,6 +437,7 @@ import _poolMeteorGolem from "../pool/meteor-golem.js";
 import _poolMeteoricMace from "../pool/meteoric-mace.js";
 import _poolMightBeyondReason from "../pool/might-beyond-reason.js";
 import _poolMightformHarmonizer from "../pool/mightform-harmonizer.js";
+import _poolMimicVat from "../pool/mimic-vat.js";
 import _poolMindKnives from "../pool/mind-knives.js";
 import _poolMindRavel from "../pool/mind-ravel.js";
 import _poolMindSludge from "../pool/mind-sludge.js";
@@ -1280,6 +1281,7 @@ const shard: CardShard = {
     _poolMeteoricMace,
     _poolMightBeyondReason,
     _poolMightformHarmonizer,
+    _poolMimicVat,
     _poolMindKnives,
     _poolMindRavel,
     _poolMindSludge,

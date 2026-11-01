@@ -267,6 +267,7 @@ import _poolFloodfarmVerge from "../pool/floodfarm-verge.js";
 import _poolFlourishingFox from "../pool/flourishing-fox.js";
 import _poolFlurryOfWings from "../pool/flurry-of-wings.js";
 import _poolFogwellsGym from "../pool/fogwells-gym.js";
+import _poolFollowedFootsteps from "../pool/followed-footsteps.js";
 import _poolFoolsTome from "../pool/fools-tome.js";
 import _poolForceAway from "../pool/force-away.js";
 import _poolForceOfVirtue from "../pool/force-of-virtue.js";
@@ -1139,6 +1140,7 @@ const shard: CardShard = {
     _poolFlourishingFox,
     _poolFlurryOfWings,
     _poolFogwellsGym,
+    _poolFollowedFootsteps,
     _poolFoolsTome,
     _poolForceAway,
     _poolForceOfVirtue,

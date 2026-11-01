@@ -11,6 +11,7 @@ import _poolAetherHelix from "../pool/aether-helix.js";
 import _poolAjanisChosen from "../pool/ajanis-chosen.js";
 import _poolAlacrianJaguar from "../pool/alacrian-jaguar.js";
 import _poolAlelaCunningConqueror from "../pool/alela-cunning-conqueror.js";
+import _poolAltairIbnLaAhad from "../pool/altair-ibn-la-ahad.js";
 import _poolAltarOfTheGoyf from "../pool/altar-of-the-goyf.js";
 import _poolAmazingSpiderMan from "../pool/amazing-spider-man.js";
 import _poolAnZerrinRuins from "../pool/an-zerrin-ruins.js";
@@ -869,6 +870,7 @@ const shard: CardShard = {
     _poolAjanisChosen,
     _poolAlacrianJaguar,
     _poolAlelaCunningConqueror,
+    _poolAltairIbnLaAhad,
     _poolAltarOfTheGoyf,
     _poolAmazingSpiderMan,
     _poolAnZerrinRuins,

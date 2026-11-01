@@ -296,6 +296,7 @@ import _poolGaeasBalance from "../pool/gaeas-balance.js";
 import _poolGaeasHerald from "../pool/gaeas-herald.js";
 import _poolGaleForce from "../pool/gale-force.js";
 import _poolGaleSwooper from "../pool/gale-swooper.js";
+import _poolGalvanicRelay from "../pool/galvanic-relay.js";
 import _poolGalvanoth from "../pool/galvanoth.js";
 import _poolGarruksHorde from "../pool/garruks-horde.js";
 import _poolGarruksPackleader from "../pool/garruks-packleader.js";
@@ -475,6 +476,7 @@ import _poolManalith from "../pool/manalith.js";
 import _poolMaraudingSphinx from "../pool/marauding-sphinx.js";
 import _poolMarbleChalice from "../pool/marble-chalice.js";
 import _poolMarduMonument from "../pool/mardu-monument.js";
+import _poolMarduSiegebreaker from "../pool/mardu-siegebreaker.js";
 import _poolMarkForDeath from "../pool/mark-for-death.js";
 import _poolMarkOfSakiko from "../pool/mark-of-sakiko.js";
 import _poolMarkovBlademaster from "../pool/markov-blademaster.js";
@@ -627,6 +629,7 @@ import _poolSauronTheDarkLord from "../pool/sauron-the-dark-lord.js";
 import _poolScabClanCharger from "../pool/scab-clan-charger.js";
 import _poolScarscaleRitual from "../pool/scarscale-ritual.js";
 import _poolScarwoodHag from "../pool/scarwood-hag.js";
+import _poolScholarOfCombustion from "../pool/scholar-of-combustion.js";
 import _poolScoriaElemental from "../pool/scoria-elemental.js";
 import _poolScourgeWolf from "../pool/scourge-wolf.js";
 import _poolScrapyardSalvo from "../pool/scrapyard-salvo.js";
@@ -1152,6 +1155,7 @@ const shard: CardShard = {
     _poolGaeasHerald,
     _poolGaleForce,
     _poolGaleSwooper,
+    _poolGalvanicRelay,
     _poolGalvanoth,
     _poolGarruksHorde,
     _poolGarruksPackleader,
@@ -1331,6 +1335,7 @@ const shard: CardShard = {
     _poolMaraudingSphinx,
     _poolMarbleChalice,
     _poolMarduMonument,
+    _poolMarduSiegebreaker,
     _poolMarkForDeath,
     _poolMarkOfSakiko,
     _poolMarkovBlademaster,
@@ -1483,6 +1488,7 @@ const shard: CardShard = {
     _poolScabClanCharger,
     _poolScarscaleRitual,
     _poolScarwoodHag,
+    _poolScholarOfCombustion,
     _poolScoriaElemental,
     _poolScourgeWolf,
     _poolScrapyardSalvo,

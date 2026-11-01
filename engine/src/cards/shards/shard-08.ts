@@ -762,6 +762,7 @@ import _poolThawbringer from "../pool/thawbringer.js";
 import _poolTheAntiquitiesWar from "../pool/the-antiquities-war.js";
 import _poolTheAutonomousFurnace from "../pool/the-autonomous-furnace.js";
 import _poolTheChiefWarg from "../pool/the-chief-warg.js";
+import _poolTheCloningOfShredder from "../pool/the-cloning-of-shredder.js";
 import _poolTheHauntOfHightower from "../pool/the-haunt-of-hightower.js";
 import _poolTheInfamousCruelclaw from "../pool/the-infamous-cruelclaw.js";
 import _poolTheModernAge from "../pool/the-modern-age.js";
@@ -1660,6 +1661,7 @@ const shard: CardShard = {
     _poolTheAntiquitiesWar,
     _poolTheAutonomousFurnace,
     _poolTheChiefWarg,
+    _poolTheCloningOfShredder,
     _poolTheHauntOfHightower,
     _poolTheInfamousCruelclaw,
     _poolTheModernAge,

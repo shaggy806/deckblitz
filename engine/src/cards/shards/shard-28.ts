@@ -298,6 +298,7 @@ import _poolGnarlwoodDryad from "../pool/gnarlwood-dryad.js";
 import _poolGoblinArtillery from "../pool/goblin-artillery.js";
 import _poolGoblinFirebug from "../pool/goblin-firebug.js";
 import _poolGoblinMarshal from "../pool/goblin-marshal.js";
+import _poolGoblinResearcher from "../pool/goblin-researcher.js";
 import _poolGoblinSkycutter from "../pool/goblin-skycutter.js";
 import _poolGoblinWarPaint from "../pool/goblin-war-paint.js";
 import _poolGoblinWarWagon from "../pool/goblin-war-wagon.js";
@@ -1185,6 +1186,7 @@ const shard: CardShard = {
     _poolGoblinArtillery,
     _poolGoblinFirebug,
     _poolGoblinMarshal,
+    _poolGoblinResearcher,
     _poolGoblinSkycutter,
     _poolGoblinWarPaint,
     _poolGoblinWarWagon,

@@ -264,6 +264,7 @@ import _poolFlowstoneMauler from "../pool/flowstone-mauler.js";
 import _poolFlutterfox from "../pool/flutterfox.js";
 import _poolFluxChanneler from "../pool/flux-channeler.js";
 import _poolFlyingMen from "../pool/flying-men.js";
+import _poolFoggySwampVisions from "../pool/foggy-swamp-visions.js";
 import _poolFollowHim from "../pool/follow-him.js";
 import _poolFootMystic from "../pool/foot-mystic.js";
 import _poolFoothillGuide from "../pool/foothill-guide.js";
@@ -414,6 +415,7 @@ import _poolLichenthrope from "../pool/lichenthrope.js";
 import _poolLiesaShroudOfDusk from "../pool/liesa-shroud-of-dusk.js";
 import _poolLifesmith from "../pool/lifesmith.js";
 import _poolLightOfDay from "../pool/light-of-day.js";
+import _poolLightningSecuritySergeant from "../pool/lightning-security-sergeant.js";
 import _poolLinvalaKeeperOfSilence from "../pool/linvala-keeper-of-silence.js";
 import _poolLionSash from "../pool/lion-sash.js";
 import _poolLiturgyOfBlood from "../pool/liturgy-of-blood.js";
@@ -1142,6 +1144,7 @@ const shard: CardShard = {
     _poolFlutterfox,
     _poolFluxChanneler,
     _poolFlyingMen,
+    _poolFoggySwampVisions,
     _poolFollowHim,
     _poolFootMystic,
     _poolFoothillGuide,
@@ -1292,6 +1295,7 @@ const shard: CardShard = {
     _poolLiesaShroudOfDusk,
     _poolLifesmith,
     _poolLightOfDay,
+    _poolLightningSecuritySergeant,
     _poolLinvalaKeeperOfSilence,
     _poolLionSash,
     _poolLiturgyOfBlood,

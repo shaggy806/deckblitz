@@ -281,6 +281,7 @@ import _poolFranticSalvage from "../pool/frantic-salvage.js";
 import _poolFranticStrength from "../pool/frantic-strength.js";
 import _poolFrenziedRage from "../pool/frenzied-rage.js";
 import _poolFrontlineDevastator from "../pool/frontline-devastator.js";
+import _poolFuriousRise from "../pool/furious-rise.js";
 import _poolFurnaceCelebration from "../pool/furnace-celebration.js";
 import _poolGaeasProtector from "../pool/gaeas-protector.js";
 import _poolGaiusVanBaelsar from "../pool/gaius-van-baelsar.js";
@@ -1155,6 +1156,7 @@ const shard: CardShard = {
     _poolFranticStrength,
     _poolFrenziedRage,
     _poolFrontlineDevastator,
+    _poolFuriousRise,
     _poolFurnaceCelebration,
     _poolGaeasProtector,
     _poolGaiusVanBaelsar,
