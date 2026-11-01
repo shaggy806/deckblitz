@@ -1,7 +1,7 @@
 import { defineCard } from "../define.js";
 
 // Rulings: "your life total becomes 15" is gaining or losing the difference
-// (rule 119.5), Angel of Grace's shape; the upkeep fight isn't optional, and
+// (rule 119.5); the upkeep fight isn't optional, and
 // if its target has left by the time it resolves, you aren't dealt damage
 // (the ability has no legal target, so it doesn't resolve). The creature is
 // still on the battlefield after the 15 damage — state-based actions wait for
@@ -20,16 +20,7 @@ export default defineCard({
     {
       trigger: { on: "enters-battlefield", who: "self" },
       targets: [],
-      effect: {
-        kind: "conditional",
-        condition: { kind: "life-total", atMost: 14 },
-        then: { kind: "gain-life", amount: { difference: [15, { lifeTotal: "you" }] } },
-        else: {
-          kind: "conditional",
-          condition: { kind: "life-total", atLeast: 16 },
-          then: { kind: "lose-life", amount: { difference: [{ lifeTotal: "you" }, 15] } },
-        },
-      },
+      effect: { kind: "set-life-total", who: "you", amount: 15 },
       resolve: null,
       text: ENTERS,
     },

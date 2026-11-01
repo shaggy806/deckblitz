@@ -3637,6 +3637,29 @@ describe("damage by this source, switches, defending-player restrictions, a targ
     expect(wrong.triggered?.[0]?.targetsChosenBy).toBeUndefined();
   });
 
+  it("reads a life total set (rule 119.5): a number, the starting total, a count of each player's, the lowest", () => {
+    const sphinx = face("Artifact Creature — Sphinx", "When this creature enters, target player's life total becomes 10.");
+    expect(sphinx.triggered[0].effect).toEqual({ kind: "set-life-total", who: 0, amount: 10 });
+    const wind = face("Sorcery", "Target player's life total becomes 20.");
+    expect(wind.effect).toEqual({ kind: "set-life-total", who: 0, amount: 20 });
+    const sorin = face("Sorcery", "Target opponent's life total becomes 10.");
+    expect(sorin.effect).toEqual({ kind: "set-life-total", who: 0, amount: 10 });
+    const biorhythm = face("Sorcery", "Each player's life total becomes the number of creatures they control.");
+    expect(biorhythm.effect).toEqual({
+      kind: "set-life-total",
+      who: "each-player",
+      amount: { countOf: { type: "creature", controlledBy: "you" }, forEachPlayer: true },
+    });
+    const repay = face("Sorcery", "Each player's life total becomes the lowest life total among all players.");
+    expect(repay.effect).toEqual({ kind: "set-life-total", who: "each-player", amount: { lowestLifeTotal: true } });
+    const stone = face("Sorcery", "Your life total becomes half your starting life total, rounded up.");
+    expect(stone.effect).toEqual({ kind: "set-life-total", who: "you", amount: { half: { startingLifeTotal: true }, round: "up" } });
+    const mercy = face("Sorcery", "Your life total becomes equal to your starting life total.");
+    expect(mercy.effect).toEqual({ kind: "set-life-total", who: "you", amount: { startingLifeTotal: true } });
+    // "Becomes X" with nothing reading X isn't read.
+    expect(face("Sorcery", "Your life total becomes the number of cards in your hand.").effect).toBeNull();
+  });
+
   it("reads a choice among cards revealed from a hand: reveals and picks", () => {
     const blackmail = face("Sorcery", "Target player reveals three cards from their hand and you choose one of them. That player discards that card.");
     expect(blackmail.effect).toEqual({ kind: "discard-chosen", target: 0, reveals: 3 });

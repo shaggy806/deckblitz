@@ -197,6 +197,10 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     v.touch(n.target, "harm", MINOR);
     v.touch(n.toControllerOfTarget, "harm", MINOR);
   },
+  // A total this low is a blow to whoever it's aimed at (Magister Sphinx's 10,
+  // Vraska's 1, half the starting total); a high one may lift a player instead
+  // (Blessed Wind's 20), which the board decides.
+  "set-life-total": (n, v) => v.touch(n.who, typeof n.amount === "number" && n.amount >= 20 ? "either" : "harm", MAJOR),
   tap: (n, v) => v.touch(n.target, "harm", MINOR),
   untap: (n, v) => v.touch(n.target, "help", MINOR),
   "become-prepared": (n, v) => v.touch(n.target, "help", MINOR),

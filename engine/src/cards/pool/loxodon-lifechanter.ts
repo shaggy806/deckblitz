@@ -36,16 +36,7 @@ export default defineCard({
       effect: {
         kind: "may",
         prompt: "Have your life total become the total toughness of creatures you control?",
-        effect: {
-          kind: "conditional",
-          condition: { kind: "aggregate", value: TOUGHNESS, compare: { op: "gt", n: { amount: LIFE } } },
-          then: { kind: "gain-life", amount: { difference: [TOUGHNESS, LIFE] } },
-          else: {
-            kind: "conditional",
-            condition: { kind: "aggregate", value: TOUGHNESS, compare: { op: "lt", n: { amount: LIFE } } },
-            then: { kind: "lose-life", amount: { difference: [LIFE, TOUGHNESS] } },
-          },
-        },
+        effect: { kind: "set-life-total", who: "you", amount: TOUGHNESS },
       },
       resolve: null,
       text: ENTER_TEXT,

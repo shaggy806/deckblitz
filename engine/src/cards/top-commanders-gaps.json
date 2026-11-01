@@ -955,7 +955,9 @@
   "zone:exile-discarded-play-this-turn",
   "zone:exile-from-graveyard-play-this-turn",
   "zone:exile-target-play-until-next-turn",
-  "effect:reveal-n-from-hand-you-choose-discard"
+  "effect:reveal-n-from-hand-you-choose-discard",
+  "effect:life-total-becomes",
+  "amount:starting-life-total"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

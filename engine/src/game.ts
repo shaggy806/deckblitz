@@ -27021,6 +27021,7 @@ export class Game {
           return n + value * count;
         }, 0),
       lifeTotalOf: (player) => this.state.players[player]?.life ?? 0,
+      startingLifeTotal: () => this.state.rules.startingLife,
       turnStatOf: (player, stat) => turnStatOf(this.state, player, stat),
       castThisTurnOf: (player, filter, greatest) => {
         const cast = (this.state.players[player]?.spellsCastThisTurnAs ?? []).filter(({ id, spell }) =>

@@ -614,6 +614,13 @@ export type EffectAmount =
    * scoped `lose-life` whose amount is read once per player. Outside a
    * scoped effect `"each"` reads the controller's. */
   | { readonly lifeTotal: "you" | "each" }
+  /** The game's starting life total (rule 119.1): 20, or 40 in Commander —
+   * "your life total becomes equal to your starting life total" (Oketra's
+   * Last Mercy), and half of it with `half` (The Endstone). */
+  | { readonly startingLifeTotal: true }
+  /** "The lowest life total among all players" still in the game (Repay in
+   * Kind). */
+  | { readonly lowestLifeTotal: true }
   /** Half of an amount, rounded up or down (rule 107.1a says which the card
    * must say) — "half their life, rounded up". `fraction` is another part
    * than a half: Legate Lanius's decimate, "a tenth of the creatures they
@@ -2371,6 +2378,23 @@ export type EffectSpec =
        * shape as `damage`'s field of the same name; see that one for the
        * last-known-information caveat. */
       readonly toControllerOfTarget?: number;
+    }
+  | {
+      /**
+       * "**Your life total becomes** 4" (Captive Audience), "**target player's
+       * life total becomes** 10" (Magister Sphinx), "**each player's life
+       * total becomes** the number of creatures they control" (Biorhythm).
+       * The player gains or loses the difference (rule 119.5), so it is a
+       * real gain or loss: "whenever you gain life" sees it, a doubling
+       * doubles it (the rulings on Alhammarret's Archive), "can't gain life"
+       * stops it, and no difference is no event. `amount` is read per player,
+       * all of them before any life moves (Repay in Kind's "the lowest life
+       * total among all players").
+       */
+      readonly kind: "set-life-total";
+      /** A player target slot, a scope, or one player named through a target. */
+      readonly who: number | PlayerScope | ChosenPlayerRef;
+      readonly amount: EffectAmount;
     }
   | {
       /** Life loss (Zulaport Cutthroat: "each opponent loses 1 life"). An
@@ -8427,6 +8451,9 @@ export interface EffectApi {
   commanderCastsBy(player: PlayerId): number;
   /** A player's current life total — see the `{ lifeTotal }` {@link EffectAmount}. */
   lifeTotalOf(player: PlayerId): number;
+  /** The game's starting life total (rule 119.1) — see the `{ startingLifeTotal }`
+   * {@link EffectAmount}. */
+  startingLifeTotal(): number;
   /** One player's running total for `stat` this turn — see the `turnStat`
    * {@link EffectAmount}. */
   turnStatOf(player: PlayerId, stat: TurnStat): number;
@@ -11235,6 +11262,10 @@ function signedAmountValue(
   if ("lifeTotal" in amount) {
     return ctx.lifeTotalOf(amount.lifeTotal === "each" ? (each ?? ctx.controller) : ctx.controller);
   }
+  if ("startingLifeTotal" in amount) return ctx.startingLifeTotal();
+  if ("lowestLifeTotal" in amount) {
+    return Math.min(...ctx.playersInScope("each-player").map((p) => ctx.lifeTotalOf(p)));
+  }
   if ("powerOfTwo" in amount) {
     return 2 ** Math.min(52, Math.max(0, Math.floor(signedAmountValue(amount.powerOfTwo, ctx, each))));
   }
@@ -12740,6 +12771,20 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         // "Each opponent loses half their life": each one's own amount,
         // read as their turn in APNAP order comes.
         for (const p of ctx.playersInScope(spec.who)) ctx.loseLife(p, amountValue(spec.amount, ctx, p));
+      }
+      return;
+    }
+    case "set-life-total": {
+      // Every new total is read before any life moves (Repay in Kind). An
+      // absent "up to one target player" (Torgaar) leaves nobody.
+      const totals = scopedOrTargetedPlayers(spec.who, ctx).flatMap((ref) =>
+        ref?.kind === "player" ? [{ player: ref.player, total: signedAmountValue(spec.amount, ctx, ref.player) }] : [],
+      );
+      // Rule 119.5: gains or loses the difference.
+      for (const { player, total } of totals) {
+        const delta = total - ctx.lifeTotalOf(player);
+        if (delta > 0) ctx.gainLife(player, delta);
+        else if (delta < 0) ctx.loseLife(player, -delta);
       }
       return;
     }

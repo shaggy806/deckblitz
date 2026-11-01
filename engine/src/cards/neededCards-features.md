@@ -1868,6 +1868,21 @@ remove-counters-any-kind. Still open on its cards: Cemetery Desecrator
 (`decision:choose-from-any-graveyard`), Gwen Stacy
 (`zone:impulse-while-you-control-source`).
 
+### A life total set — built 2026-11-01
+
+`set-life-total` (`who`, `amount`) and two amounts, `startingLifeTotal` and
+`lowestLifeTotal`. Rule 119.5 says the player gains or loses the difference, so
+it is a real gain or loss: the triage's fear of firing life triggers was the
+reverse of the rule, and the rulings on doublers agree. Every player's amount is
+read before any life moves (Repay in Kind). Proving cards: Magister Sphinx,
+Biorhythm, Repay in Kind, Oketra's Last Mercy, The Endstone, Resolute Archangel
+(`set-life-total.test.ts`). Keys: effect:life-total-becomes,
+amount:starting-life-total. Still open on their cards: Captive Audience
+(`effect:enters-under-opponent-control`), Sorin Markov (`mechanic:control-player`),
+Providence (`mechanic:leyline-opening-hand`), Worldfire
+(`effect:exile-all-hands`), Shadow of Mortality (its cost reduces by the
+difference from the starting total).
+
 ### Choosing among cards revealed from a hand — built 2026-11-01
 
 `discard-chosen`'s `reveals` (an amount, read as it resolves) and `picks`:

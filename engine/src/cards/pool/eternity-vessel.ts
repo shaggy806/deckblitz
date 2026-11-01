@@ -31,16 +31,7 @@ export default defineCard({
       effect: {
         kind: "may",
         prompt: "Have your life total become the number of charge counters on Eternity Vessel?",
-        effect: {
-          kind: "conditional",
-          condition: { kind: "self-counters", counter: "charge", compare: { op: "gt", n: { amount: LIFE } } },
-          then: { kind: "gain-life", amount: { difference: [CHARGE, LIFE] } },
-          else: {
-            kind: "conditional",
-            condition: { kind: "self-counters", counter: "charge", compare: { op: "lt", n: { amount: LIFE } } },
-            then: { kind: "lose-life", amount: { difference: [LIFE, CHARGE] } },
-          },
-        },
+        effect: { kind: "set-life-total", who: "you", amount: CHARGE },
       },
       resolve: null,
       text: LANDFALL_TEXT,

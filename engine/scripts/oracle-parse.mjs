@@ -2296,6 +2296,32 @@ export function parseSentence(sentence, ctx) {
   }
 
   // Life.
+  // "Your life total becomes 4", "target player's life total becomes half
+  // their starting life total, rounded down", "each player's life total
+  // becomes the number of creatures they control" (rule 119.5).
+  if ((m = re(`(your|target player's|target opponent's|up to one target player's|each player's) life total becomes (?:equal to )?(.+?)`).exec(s))) {
+    const whose = m[1].toLowerCase();
+    const each = whose === "each player's";
+    const what = m[2];
+    const half = /^half (?:your|their) starting life total, rounded (up|down)$/i.exec(what);
+    const counted = each ? /^the number of (.+) they control$/i.exec(what) : null;
+    const filter = counted === null ? null : parseTypePhrase(counted[1]);
+    let total;
+    if (new RegExp(`^${N}$`, "i").test(what) && !/^(?:a|an|x)$/i.test(what)) total = amount(what);
+    else if (/^(?:your|their) starting life total$/i.test(what)) total = { startingLifeTotal: true };
+    else if (half !== null) total = { half: { startingLifeTotal: true }, round: half[1].toLowerCase() };
+    else if (each && /^the lowest life total among all players$/i.test(what)) total = { lowestLifeTotal: true };
+    else if (filter !== null && Object.keys(filter).length > 0) total = { countOf: { ...filter, controlledBy: "you" }, forEachPlayer: true };
+    if (total !== undefined) {
+      if (whose === "your") return { kind: "set-life-total", who: "you", amount: total };
+      if (each) return { kind: "set-life-total", who: "each-player", amount: total };
+      // Torgaar's "up to one" is the target's own shape, so only the plain
+      // targets are read here.
+      if (whose !== "up to one target player's") {
+        return { kind: "set-life-total", who: slot(whose.replace(/'s$/, "")), amount: total };
+      }
+    }
+  }
   if ((m = re(`(?:you )?gain ${N} life`).exec(s))) return { kind: "gain-life", amount: amount(m[1]) };
   if ((m = re(`each opponent loses ${N} life`).exec(s))) {
     return { kind: "lose-life", amount: amount(m[1]), who: "each-opponent" };
