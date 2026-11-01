@@ -11923,15 +11923,19 @@ export class Game {
     const boundsOf = (modes: readonly number[] | undefined) => {
       const declared = this.effectiveTargetSpecs(def, modes, kicked, overload);
       const offered = this.targetOptionsFor(declared, player, source);
-      // An "any number of" group spans as many optional slots as it has
-      // candidates: none of them, or up to every one, may be chosen.
+      // An "any number of" group spans as many slots as it has candidates,
+      // up to its `max`: its first `min` required (Reckless Spite's "two
+      // target nonblack creatures" is exactly two — rule 601.2c), the rest
+      // optional. Fewer candidates than its `min`, and it can't be cast.
       const group = anyNumberSlot(declared);
-      const members = group >= 0 ? (offered[group]?.length ?? 0) : 0;
+      const bounds = group >= 0 ? groupBounds(declared[group]) : { min: 0, max: 0 };
+      const members = group >= 0 ? Math.min(offered[group]?.length ?? 0, bounds.max) : 0;
+      if (group >= 0 && members < bounds.min) return null;
       const specs =
         group < 0
           ? declared
           : concreteTargetSpecs(declared, group + members).map((spec, i) =>
-              i >= group ? ({ kind: "optional", of: spec } as const) : spec,
+              i >= group + bounds.min ? ({ kind: "optional", of: spec } as const) : spec,
             );
       const options =
         group < 0
@@ -11939,7 +11943,12 @@ export class Game {
           : [...offered.slice(0, group), ...Array.from({ length: members }, () => offered[group] ?? [])];
       const here = this.targetCopies(options.flat());
       Object.assign(copies, here);
-      return targetCountBounds(options, specs, here);
+      const range = targetCountBounds(options, specs, here);
+      // The group's members are distinct objects (rule 601.2c), which the
+      // cover above, letting one target fill several slots, doesn't know.
+      return range === null || range.min >= bounds.min
+        ? range
+        : { ...range, min: bounds.min, max: Math.max(range.max, bounds.min) };
     };
     const withCopies = (range: TargetCountRange): TargetCountRange =>
       Object.keys(copies).length > 0 ? { ...range, copies } : range;

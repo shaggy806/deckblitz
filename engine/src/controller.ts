@@ -480,6 +480,27 @@ const fillableOptions = (
     targetsFillable(specs, options, [...picked, ref], picked.length + 1, facts),
   );
 
+/**
+ * An "any number of" group (slot `group`, always last) topped up to its `min`
+ * from `candidates`, in their order, each still fitting what's been taken —
+ * Reckless Spite's "two target nonblack creatures" is a group of exactly two,
+ * so one member alone is no legal cast (rule 601.2c).
+ */
+const topUpGroup = (
+  specs: readonly TargetSpec[],
+  options: readonly (readonly TargetRef[])[],
+  picked: (TargetRef | null)[],
+  group: number,
+  candidates: readonly TargetRef[],
+  facts?: TargetFacts,
+): void => {
+  const { min } = groupBounds(specs[group] ?? "creature");
+  for (const ref of candidates) {
+    if (picked.length - group >= min) break;
+    if (!picked.includes(ref) && slotOptions(specs, options, picked.length, picked, facts).includes(ref)) picked.push(ref);
+  }
+};
+
 const firstOfEach = (
   legalOptions: readonly (readonly TargetRef[])[],
   specs: readonly TargetSpec[] = [],
@@ -490,11 +511,14 @@ const firstOfEach = (
   const picked: (TargetRef | null)[] = [];
   const group = anyNumberSlot(specs);
   for (let i = 0; i < legalOptions.length; i += 1) {
-    const first = fillableOptions(specs, legalOptions, i, picked, facts)[0];
+    const fillable = fillableOptions(specs, legalOptions, i, picked, facts);
+    const first = fillable[0];
     // An "any number of" group (always last) takes one member, or none —
-    // never a hole, which would be a member with no target.
+    // never a hole, which would be a member with no target — or as many as
+    // its `min` asks.
     if (i === group) {
       if (first !== undefined) picked.push(first);
+      topUpGroup(specs, legalOptions, picked, group, fillable, facts);
       break;
     }
     picked.push(first ?? null);
@@ -3617,11 +3641,13 @@ export class HeuristicBotController extends AutomaticController {
         const spared = fillable.filter((ref) => ref.kind !== "object" || !doomed.has(ref.object));
         if (spared.some((ref) => sideOf(state, ref, this.playerId) === "opponent")) fillable = spared;
       }
-      const best = rankTargets(state, this.registry, this.playerId, fillable, polarity, targetValue, damages[i])[0];
+      const ranked = rankTargets(state, this.registry, this.playerId, fillable, polarity, targetValue, damages[i]);
+      const best = ranked[0];
       // An "any number of" group (always last) takes one member, or none,
-      // as `firstOfEach` does.
+      // as `firstOfEach` does — or as many as its `min` asks, best first.
       if (i === group) {
         if (best !== undefined) picked.push(best);
+        topUpGroup(specs, legalOptions, picked, group, ranked, stateTargetFacts(state, this.registry));
         break;
       }
       // "Up to one target creature" with only the wrong side to point at is
