@@ -380,6 +380,7 @@ import _poolKarma from "../pool/karma.js";
 import _poolKarvanistaLoyalLupari from "../pool/karvanista-loyal-lupari.js";
 import _poolKeigaTheTideStar from "../pool/keiga-the-tide-star.js";
 import _poolKeldonVandals from "../pool/keldon-vandals.js";
+import _poolKerugaTheMacrosage from "../pool/keruga-the-macrosage.js";
 import _poolKindercatch from "../pool/kindercatch.js";
 import _poolKineticOoze from "../pool/kinetic-ooze.js";
 import _poolKingfisher from "../pool/kingfisher.js";
@@ -1274,6 +1275,7 @@ const shard: CardShard = {
     _poolKarvanistaLoyalLupari,
     _poolKeigaTheTideStar,
     _poolKeldonVandals,
+    _poolKerugaTheMacrosage,
     _poolKindercatch,
     _poolKineticOoze,
     _poolKingfisher,

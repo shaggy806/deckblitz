@@ -6,6 +6,10 @@ rule number, the code that does it today and the cards it blocks. `BACKLOG.md` k
 per gap under the same bold title; when a gap closes, delete it here and move its
 `BACKLOG.md` line to `COMPLETED.md`.
 
+- **A Commander companion's colour identity isn't enforced** (found 2026-11-01). `companion.ts` and
+  `deck-validation.ts` keep a Commander deck's companions from its sideboard without holding them to
+  the commander's identity. Rules 702.139 and 903 don't say; the Commander format's own rules are
+  recalled to require it, which wasn't confirmed. The user's call.
 - **`exile-all` and `damage-all`'s `except` spare a whole token stack** (found 2026-11-01). They
   compare the stack's id, so a token stack as the source is spared whole, where `destroy-all`'s
   `exceptSource` spares one token and takes the rest. Representation must not change a result.

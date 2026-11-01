@@ -376,6 +376,7 @@ import _poolJovensFerrets from "../pool/jovens-ferrets.js";
 import _poolJudithTheScourgeDiva from "../pool/judith-the-scourge-diva.js";
 import _poolJuneBountyHunter from "../pool/june-bounty-hunter.js";
 import _poolJusticeStrike from "../pool/justice-strike.js";
+import _poolKaheeraTheOrphanguard from "../pool/kaheera-the-orphanguard.js";
 import _poolKalonianTusker from "../pool/kalonian-tusker.js";
 import _poolKamiOfAncientLaw from "../pool/kami-of-ancient-law.js";
 import _poolKamiOfOldStone from "../pool/kami-of-old-stone.js";
@@ -1267,6 +1268,7 @@ const shard: CardShard = {
     _poolJudithTheScourgeDiva,
     _poolJuneBountyHunter,
     _poolJusticeStrike,
+    _poolKaheeraTheOrphanguard,
     _poolKalonianTusker,
     _poolKamiOfAncientLaw,
     _poolKamiOfOldStone,

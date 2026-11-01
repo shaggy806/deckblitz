@@ -86,6 +86,31 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2: companion** (2026-11-01, `9125a1ba9`; `mechanic:companion`) — rule 702.139:
+  `companion.ts`'s ten conditions as data, the reveal as a `choose-from-zone` flagged `companion`
+  (103.2b), `take-companion` the {3} special action (116.2g), Commander decks keeping only companions
+  from their sideboard; the client's panel offer, deck-builder mark, "Companion" import section and
+  seven manual checks; 7 freed. Kaheera, Keruga.
+- **Need-keys Phase 2: a card's own copy limit** (2026-11-01, `c1c4a285c`;
+  `mechanic:deck-any-number-copies`) — `CardDefinition.deckCopies` and `copiesAllowed`; a commander
+  counts as one of its own copies (903.5b); 6 freed. Rat Colony, Relentless Rats, Seven Dwarves.
+- **Need-keys Phase 2: sacrifice or discard instead of entering** (2026-11-01, `65817ea28`;
+  `replacement:enter-replacement-discard`, `replacement:enter-replacement-sacrifice`) — `EnterInstead`
+  on `enters-battlefield`, asked by `askEnterChoice`; 5 freed. Mox Diamond, Scorched Ruins, Kjeldoran
+  Outpost, Sheltered Valley, Overlaid Terrain.
+- **Need-keys Phase 2: a copy on the way in, from a graveyard or exile** (2026-11-01, `309e6ac38`; six
+  keys of `replacement:copy-on-enter-options`) — `CopyOnEnter.from`, `condition`, `whenYouDo`, `ownPt`,
+  `ifYouControlCopied`, and `BecomesOnEnter` as copiable values; a flip no one wins logged as what it
+  came (705.2); 4 freed. Body Double, Echoing Deeps, Superior Spider-Man, Activated Sleeper, The
+  Master Formed Anew, Protean Raider, Wall of Stolen Identity, Undercover Operative, Imposter Mech,
+  Copy Land, Hulking Metamorph, Primal Clay, Corrupted Shapeshifter, Molten Sentry.
+- **Need-keys Phase 2: a cost reduction on the next matching spell** (2026-11-01, `a7136f10d`;
+  `effect:next-spell-cost-reduction`, `effect:until-next-turn-spell-cost-reduction`) — a `next` grant's
+  `reduceGeneric` and `affinityFor`; 5 freed. Hardened Berserker, Kaza, Maelstrom Muse, Don & Raph.
+- **Need-keys Phase 2: a limit on the spells a player casts each turn** (2026-11-01, `7a8701b06`;
+  `effect:cast-limit`, `effect:per-player-cast-limit`) — `prohibits.castLimit`, counting the whole
+  turn, `who: "enchanted-player"`, `player-effect`'s `castsLeft`; 5 freed. Rule of Law, Deafening
+  Silence, Ethersworn Canonist, Irencrag Feat, Curse of Exhaustion.
 - **Need-keys Phase 2: creatures that blocked or were blocked this turn** (2026-11-01, `726451744`;
   `filter:blocked-or-blocked-by-filter-this-turn` and three riding along) — `TurnHistory.blocks`,
   `CardFilter.blockedThisTurn`, the `end-of-combat-this-turn` timing; 13 freed. You Cannot Pass!, Sea

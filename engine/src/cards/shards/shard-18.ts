@@ -614,6 +614,7 @@ import _poolSearingMeditation from "../pool/searing-meditation.js";
 import _poolSecurityBlockade from "../pool/security-blockade.js";
 import _poolSelesnyaKeyrune from "../pool/selesnya-keyrune.js";
 import _poolSentinelSpider from "../pool/sentinel-spider.js";
+import _poolSevenDwarves from "../pool/seven-dwarves.js";
 import _poolSeveredStrands from "../pool/severed-strands.js";
 import _poolShalaisAcolyte from "../pool/shalais-acolyte.js";
 import _poolShatterAssumptions from "../pool/shatter-assumptions.js";
@@ -1485,6 +1486,7 @@ const shard: CardShard = {
     _poolSecurityBlockade,
     _poolSelesnyaKeyrune,
     _poolSentinelSpider,
+    _poolSevenDwarves,
     _poolSeveredStrands,
     _poolShalaisAcolyte,
     _poolShatterAssumptions,

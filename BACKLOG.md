@@ -386,16 +386,21 @@ section keeps only what to do next.
   Norn's Annex a {W/P} attack tax, Archangel of Tithes `static:block-tax`, Reservoir Kraken several
   opponents answering an unless, Shadow of Mortality a cost reduced by the difference from starting
   life, Glyph of Reincarnation, Glyph of Delusion and Cathedral Membrane their blocked-creature
-  wording). **1145 freed cards wait for the authoring sweep**
+  wording), and six more: spell-cast limits, next-spell cost reductions, a copy on the way in from a
+  graveyard or exile, sacrifice or discard instead of entering, a card's own copy limit, companion
+  (32 freed, 33 proving cards — on the stale list Obosh needs `filter:odd-mana-value`, Lurrus its X
+  held to the mana-value cap, Lake of the Dead a chosen sacrifice as a mana ability, Aquamorph Entity
+  "or is turned face up", Invasion of Amonkhet a back face's copy). **1170 freed cards wait for the
+  authoring sweep**
   (`cards:needs -- --stale`); the user authors them in one sweep once the reasonable keys are built.
   Cloud sessions are building `keyword:hexproof-from-colors`, the combat-restriction second group,
   `effect:prevent-next-n-damage-to-you`, the cascade/sunburst grants to spells,
   `cost:kicker-nonmana-cost` and `cost:alt-cost-discard-cards`. Being built:
-  `mechanic:companion`, `mechanic:deck-any-number-copies`, `replacement:copy-on-enter-options`,
-  `replacement:new-event-replacements`, `effect:cast-and-activate-restrictions`,
-  `effect:temporary-player-effect`. Next unclaimed: `mechanic:control-attack-block-choices` (10, a
-  design of its own), `trigger:tapped-for-mana-nonmana-trigger` (9), `zone:visibility-extensions`
-  (9), `condition:most-common-color-among-chosen-player-permanents` (9).
+  `effect:target-spec-additions`' reveal group, `effect:choose-card-exiled-with-source`,
+  `trigger:tapped-for-mana-nonmana-trigger`,
+  `condition:most-common-color-among-chosen-player-permanents`, `effect:top-card-of-graveyard`,
+  `static:static-over-enchanted-player`. Next unclaimed: `mechanic:control-attack-block-choices`
+  (10, a design of its own), `zone:visibility-extensions` (9), `trigger:trigger-recipient-ref` (9).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next
@@ -464,6 +469,7 @@ One line each; the detail (rule numbers, code sites, the cards each blocks) is i
 **`docs/engine-gaps.md`**, under the same bold title. When a gap closes, delete its detail
 there and move this line to `COMPLETED.md`.
 
+- **A Commander companion's colour identity isn't enforced** — the Comprehensive Rules say nothing on it (702.139); the user's call whether to hold it to the commander's identity.
 - **`exile-all` and `damage-all`'s `except` spare a whole token stack** — they compare the stack's id, where `destroy-all`'s `exceptSource` spares one token and takes the rest.
 - **A must-block creature's only companion can't legally join it** — `withinBlockCompany` (`combat/blocking.ts`) can answer with an illegal `[]`, as with an attacker that can't be blocked by more than one; a person would have no legal declaration.
 - **A target tax's offers are approximate in two corners** — `target-count.ts`'s sum over a `targeting` tax and a two-slot `targetCostReduction` beside a tax mis-offer, never mis-charge.

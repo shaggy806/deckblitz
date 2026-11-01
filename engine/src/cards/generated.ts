@@ -12251,6 +12251,7 @@ import _poolKaervekTheSpiteful from "./pool/kaervek-the-spiteful.js";
 import _poolKaerveksHex from "./pool/kaerveks-hex.js";
 import _poolKaerveksPurge from "./pool/kaerveks-purge.js";
 import _poolKagemaroFirstToSuffer from "./pool/kagemaro-first-to-suffer.js";
+import _poolKaheeraTheOrphanguard from "./pool/kaheera-the-orphanguard.js";
 import _poolKaijinOfTheVanishingTouch from "./pool/kaijin-of-the-vanishing-touch.js";
 import _poolKaimaTheFracturedCalm from "./pool/kaima-the-fractured-calm.js";
 import _poolKairiTheSwirlingSky from "./pool/kairi-the-swirling-sky.js";
@@ -12499,6 +12500,7 @@ import _poolKenrithTheReturnedKing from "./pool/kenrith-the-returned-king.js";
 import _poolKenrithsTransformation from "./pool/kenriths-transformation.js";
 import _poolKeralKeepDisciples from "./pool/keral-keep-disciples.js";
 import _poolKeranosGodOfStorms from "./pool/keranos-god-of-storms.js";
+import _poolKerugaTheMacrosage from "./pool/keruga-the-macrosage.js";
 import _poolKeskitTheFleshSculptor from "./pool/keskit-the-flesh-sculptor.js";
 import _poolKessDissidentMage from "./pool/kess-dissident-mage.js";
 import _poolKessigCagebreakers from "./pool/kessig-cagebreakers.js";
@@ -18092,6 +18094,7 @@ import _poolRashmiAndRagavan from "./pool/rashmi-and-ragavan.js";
 import _poolRashmiEternitiesCrafter from "./pool/rashmi-eternities-crafter.js";
 import _poolRasputinTheOneiromancer from "./pool/rasputin-the-oneiromancer.js";
 import _poolRassilonTheWarPresident from "./pool/rassilon-the-war-president.js";
+import _poolRatColony from "./pool/rat-colony.js";
 import _poolRatOut from "./pool/rat-out.js";
 import _poolRatadrabikOfUrborg from "./pool/ratadrabik-of-urborg.js";
 import _poolRatcatcherTrainee from "./pool/ratcatcher-trainee.js";
@@ -18434,6 +18437,7 @@ import _poolRelentlessAdvance from "./pool/relentless-advance.js";
 import _poolRelentlessAssault from "./pool/relentless-assault.js";
 import _poolRelentlessHunter from "./pool/relentless-hunter.js";
 import _poolRelentlessPursuit from "./pool/relentless-pursuit.js";
+import _poolRelentlessRats from "./pool/relentless-rats.js";
 import _poolRelentlessRohirrim from "./pool/relentless-rohirrim.js";
 import _poolRelentlessSkaabs from "./pool/relentless-skaabs.js";
 import _poolRelicAxe from "./pool/relic-axe.js";
@@ -20317,6 +20321,7 @@ import _poolSettleTheScore from "./pool/settle-the-score.js";
 import _poolSettleTheWreckage from "./pool/settle-the-wreckage.js";
 import _poolSettlementBlacksmith from "./pool/settlement-blacksmith.js";
 import _poolSetzerWanderingGambler from "./pool/setzer-wandering-gambler.js";
+import _poolSevenDwarves from "./pool/seven-dwarves.js";
 import _poolSevenTailMentor from "./pool/seven-tail-mentor.js";
 import _poolSeverSoul from "./pool/sever-soul.js";
 import _poolSeverTheBloodline from "./pool/sever-the-bloodline.js";
@@ -40138,6 +40143,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolKaerveksHex,
   _poolKaerveksPurge,
   _poolKagemaroFirstToSuffer,
+  _poolKaheeraTheOrphanguard,
   _poolKaijinOfTheVanishingTouch,
   _poolKaimaTheFracturedCalm,
   _poolKairiTheSwirlingSky,
@@ -40386,6 +40392,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolKenrithsTransformation,
   _poolKeralKeepDisciples,
   _poolKeranosGodOfStorms,
+  _poolKerugaTheMacrosage,
   _poolKeskitTheFleshSculptor,
   _poolKessDissidentMage,
   _poolKessigCagebreakers,
@@ -45979,6 +45986,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRashmiEternitiesCrafter,
   _poolRasputinTheOneiromancer,
   _poolRassilonTheWarPresident,
+  _poolRatColony,
   _poolRatOut,
   _poolRatadrabikOfUrborg,
   _poolRatcatcherTrainee,
@@ -46321,6 +46329,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRelentlessAssault,
   _poolRelentlessHunter,
   _poolRelentlessPursuit,
+  _poolRelentlessRats,
   _poolRelentlessRohirrim,
   _poolRelentlessSkaabs,
   _poolRelicAxe,
@@ -48204,6 +48213,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSettleTheWreckage,
   _poolSettlementBlacksmith,
   _poolSetzerWanderingGambler,
+  _poolSevenDwarves,
   _poolSevenTailMentor,
   _poolSeverSoul,
   _poolSeverTheBloodline,
@@ -68038,6 +68048,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/kaerveks-hex": _poolKaerveksHex,
   "pool/kaerveks-purge": _poolKaerveksPurge,
   "pool/kagemaro-first-to-suffer": _poolKagemaroFirstToSuffer,
+  "pool/kaheera-the-orphanguard": _poolKaheeraTheOrphanguard,
   "pool/kaijin-of-the-vanishing-touch": _poolKaijinOfTheVanishingTouch,
   "pool/kaima-the-fractured-calm": _poolKaimaTheFracturedCalm,
   "pool/kairi-the-swirling-sky": _poolKairiTheSwirlingSky,
@@ -68286,6 +68297,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/kenriths-transformation": _poolKenrithsTransformation,
   "pool/keral-keep-disciples": _poolKeralKeepDisciples,
   "pool/keranos-god-of-storms": _poolKeranosGodOfStorms,
+  "pool/keruga-the-macrosage": _poolKerugaTheMacrosage,
   "pool/keskit-the-flesh-sculptor": _poolKeskitTheFleshSculptor,
   "pool/kess-dissident-mage": _poolKessDissidentMage,
   "pool/kessig-cagebreakers": _poolKessigCagebreakers,
@@ -73879,6 +73891,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/rashmi-eternities-crafter": _poolRashmiEternitiesCrafter,
   "pool/rasputin-the-oneiromancer": _poolRasputinTheOneiromancer,
   "pool/rassilon-the-war-president": _poolRassilonTheWarPresident,
+  "pool/rat-colony": _poolRatColony,
   "pool/rat-out": _poolRatOut,
   "pool/ratadrabik-of-urborg": _poolRatadrabikOfUrborg,
   "pool/ratcatcher-trainee": _poolRatcatcherTrainee,
@@ -74221,6 +74234,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/relentless-assault": _poolRelentlessAssault,
   "pool/relentless-hunter": _poolRelentlessHunter,
   "pool/relentless-pursuit": _poolRelentlessPursuit,
+  "pool/relentless-rats": _poolRelentlessRats,
   "pool/relentless-rohirrim": _poolRelentlessRohirrim,
   "pool/relentless-skaabs": _poolRelentlessSkaabs,
   "pool/relic-axe": _poolRelicAxe,
@@ -76104,6 +76118,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/settle-the-wreckage": _poolSettleTheWreckage,
   "pool/settlement-blacksmith": _poolSettlementBlacksmith,
   "pool/setzer-wandering-gambler": _poolSetzerWanderingGambler,
+  "pool/seven-dwarves": _poolSevenDwarves,
   "pool/seven-tail-mentor": _poolSevenTailMentor,
   "pool/sever-soul": _poolSeverSoul,
   "pool/sever-the-bloodline": _poolSeverTheBloodline,

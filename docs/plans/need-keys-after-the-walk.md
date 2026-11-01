@@ -774,7 +774,11 @@ missing. Re-run `--greedy` for Phase 2's order.
   leaving out its source (1 key, 3 freed, 6 proving cards); attack taxes (4 keys, 5 freed, 7 proving
   cards); an unless's payments (9 keys, 2 freed, 8 proving cards); return what entered a graveyard
   this turn (1 key, 6 freed, 3 proving cards); turned face up by an effect (1 key, 5 freed, 5 proving
-  cards); blocked or was blocked this turn (4 keys, 13 freed, 7 proving cards).
+  cards); blocked or was blocked this turn (4 keys, 13 freed, 7 proving cards); spell-cast limits (2
+  keys, 5 freed, 5 proving cards); next-spell cost reductions (2 keys, 5 freed, 4 proving cards); a
+  copy on the way in from a graveyard or exile (6 keys, 4 freed, 14 proving cards); sacrifice or
+  discard instead of entering (2 keys, 5 freed, 5 proving cards); a card's own copy limit (1 key, 6
+  freed, 3 proving cards); companion (1 key, 7 freed, 2 proving cards).
 
 ## Rough size
 

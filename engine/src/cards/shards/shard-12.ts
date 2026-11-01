@@ -583,6 +583,7 @@ import _poolRecklessHandling from "../pool/reckless-handling.js";
 import _poolRecklessWurm from "../pool/reckless-wurm.js";
 import _poolReclaim from "../pool/reclaim.js";
 import _poolReduceToDreams from "../pool/reduce-to-dreams.js";
+import _poolRelentlessRats from "../pool/relentless-rats.js";
 import _poolRelicRobber from "../pool/relic-robber.js";
 import _poolRemnantOfTheRisingStar from "../pool/remnant-of-the-rising-star.js";
 import _poolRescue from "../pool/rescue.js";
@@ -1440,6 +1441,7 @@ const shard: CardShard = {
     _poolRecklessWurm,
     _poolReclaim,
     _poolReduceToDreams,
+    _poolRelentlessRats,
     _poolRelicRobber,
     _poolRemnantOfTheRisingStar,
     _poolRescue,
