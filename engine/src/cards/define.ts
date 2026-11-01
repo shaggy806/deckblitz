@@ -5231,6 +5231,21 @@ export function licidDefinition(def: CardDefinition): CardDefinition {
   return licid;
 }
 
+const GRAVEYARD_ORDER_READERS = new WeakMap<CardDefinition, boolean>();
+
+/** Whether a card's text says "the top card of a graveyard" — the
+ * `top-of-graveyard` effect or a `fromTop` cost anywhere in it — so that
+ * cards reaching a graveyard together are arranged in a game with it (rule
+ * 404.3, `Game.graveyardOrderIsRead`). Read from the definition's data, once. */
+export function readsGraveyardOrder(def: CardDefinition): boolean {
+  let reads = GRAVEYARD_ORDER_READERS.get(def);
+  if (reads === undefined) {
+    reads = /"kind":"top-of-graveyard"|"fromTop":true/.test(JSON.stringify(def));
+    GRAVEYARD_ORDER_READERS.set(def, reads);
+  }
+  return reads;
+}
+
 export function defineCard(draft: CardDraft): CardDefinition {
   const loyalty = draft.loyalty ?? null;
   // A planeswalker enters with `loyalty` loyalty counters (rule 306.5b) —

@@ -363,8 +363,12 @@ export interface AbilityCost {
    * beside a `discard`, a `returnToHand` or a sacrifice of several, which ask
    * too. `count: "x"` is Necropolis Fiend's "{X}, {T}, Exile X cards from your
    * graveyard": the same X as the mana's, capped at the cards there.
+   *
+   * `fromTop` is "exile **the top** [creature] card of your graveyard" (Alms,
+   * Necratog — rule 404.2): no choice, the first `count` matching cards down
+   * from the top of the pile.
    */
-  readonly exileFromGraveyard?: { readonly count: number | "x"; readonly filter?: CardFilter };
+  readonly exileFromGraveyard?: { readonly count: number | "x"; readonly filter?: CardFilter; readonly fromTop?: true };
   /**
    * Put `count` cards an opponent owns from exile into their owners'
    * graveyards as part of the cost — a processor's "{2}{U}, Put a card an

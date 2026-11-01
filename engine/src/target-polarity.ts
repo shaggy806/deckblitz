@@ -172,6 +172,14 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   // Tariel, Reckoner of Souls.
   // A card shown or taken from a targeted player's hand costs them its
   // secrecy at least (Hired Torturer, Wand of Ith).
+  // A top card taken from a targeted player's graveyard costs them that card:
+  // onto your battlefield, or out of the game (Phyrexian Furnace). Guiding
+  // Spirit, putting it on their library, has no plain side.
+  "top-of-graveyard": (n, v) => {
+    if (typeof n.whose !== "number") return;
+    if (n.then.kind === "exile" || n.then.kind === "put-onto-battlefield") v.touch(n.whose, "harm", MINOR);
+  },
+  "reorder-graveyard": none,
   "choose-random-card": (n, v) => {
     if (typeof n.whose !== "number") return;
     if (n.zone === "hand" || (n.then?.kind === "put-onto-battlefield" && n.then.underYourControl === true)) {

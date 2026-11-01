@@ -1126,7 +1126,7 @@ Carrion Grub, Emissary Escort, Ambitious Dragonborn, Crackling Drake, Maester
 Seymour, Ferrafor, Young Yew, Shriekwood Devourer, Vulpine Harvester, Heretic's
 Punishment. Still open: a batch of cards that left a graveyard (Amzu), a static
 condition counting its own permanent (Backstreet Bruiser), the per-player
-greatest discard (Scythe Specter, Cait), the top card of a graveyard, the
+greatest discard (Scythe Specter, Cait), the
 power of creatures that died together or this turn.
 
 ### "Has all activated abilities of …" — built 2026-10-31
@@ -2718,6 +2718,22 @@ Still open beside it: a Phyrexian tax (Norn's Annex), a rate by attacker
 attack or block unless you pay" (`cost:attack-block-cost-self`,
 `static:attack-cost-for-creature`) and the block tax Archangel of Tithes also
 needs (`static:block-tax`).
+
+### A graveyard's order — built 2026-11-01
+
+The need-keys `effect:top-card-of-graveyard`, `effect:top-creature-card-of-graveyard`
+and `effect:reorder-graveyard`. A graveyard's list already ended at the top of the
+pile (rules 404.1, 404.2). The readers: the `top-of-graveyard` effect (`whose`,
+`filter`, `ifIt`, `bottom`, `then` as target 0) and `exileFromGraveyard`'s `fromTop`
+cost. Rule 404.3: cards put into one graveyard at once (`withGraveyardEnterBatch`) are
+arranged by their owner at arrival, before priority, with the existing
+`choose-from-zone` `order`, and only in a game where some card in any zone reads the
+order (`readsGraveyardOrder`, from the definition's data). `reorder-graveyard` is the
+same question over the whole pile. Proving: Soldevi Digger, Guiding Spirit, Phyrexian
+Furnace, Alms, Necratog, Corpse Dance, Fossil Find. Still needing their own code:
+Spinning Darkness's alternative cost, Bösium Strip's cast from the top, Phyrexian
+Grimoire's choice among the top two; Barrow Ghoul and Circling Vultures's "sacrifice
+unless you exile" and Bone Dancer's defending player are for `author-freed` to check.
 
 ### The most common color among permanents — built 2026-11-01
 

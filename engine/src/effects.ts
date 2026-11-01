@@ -2170,6 +2170,32 @@ export type EffectSpec =
       readonly then?: EffectSpec;
     }
   | {
+      /**
+       * The top card of a graveyard, by the pile's order (rules 404.1, 404.2 —
+       * the list's end is the top), going to `then` as target 0: nothing
+       * targets it and nobody chooses it. Soldevi Digger's "put the top card of
+       * your graveyard on the bottom of your library". `filter` is "the top
+       * **creature** card" (Corpse Dance), the first match down from the top;
+       * `ifIt` is "**if** the top card … is a creature card" (Guiding Spirit),
+       * read on the top card itself, with nothing done otherwise; `bottom` is
+       * the bottom card instead (Phyrexian Furnace). `whose` as
+       * `choose-random-card`'s, a slot holding a player included.
+       */
+      readonly kind: "top-of-graveyard";
+      readonly whose?: "you" | "that-player" | number | ChosenPlayerRef;
+      readonly filter?: CardFilter;
+      readonly ifIt?: CardFilter;
+      readonly bottom?: true;
+      readonly then: EffectSpec;
+    }
+  | {
+      /** "Then reorder your graveyard as you choose" (Fossil Find): the
+       * effect's controller arranges their whole pile. Asked only while
+       * something in the game reads a graveyard's order; otherwise it's a
+       * choice nothing could tell apart. */
+      readonly kind: "reorder-graveyard";
+    }
+  | {
       /** A `choose-from-zone` waiting for the question of who answers it —
        * the mode of "an opponent chooses" (`SearchInstead`'s and
        * `look-and-choose`'s `chooser: "an-opponent"`). Built by the engine —
@@ -9485,6 +9511,8 @@ export interface EffectApi {
   /** Ask `step.player` the order of `step.cards` on that end of their
    * library — those still there. `false` when there was nothing to ask. */
   askLibraryOrder(step: LibraryOrderStep): boolean;
+  /** Ask `player` to arrange their whole graveyard (`reorder-graveyard`). */
+  reorderGraveyard(player: PlayerId): void;
   /** Where an object is now: its zone change count (rule 400.7), or
    * `undefined` once it has ceased to exist. */
   zoneChangeCountOf(object: ObjectId): number | undefined;
@@ -12679,6 +12707,27 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       }
       return;
     }
+    case "top-of-graveyard": {
+      const whose = spec.whose ?? "you";
+      let owner: PlayerId | undefined;
+      if (whose === "you") owner = ctx.controller;
+      else if (whose === "that-player") owner = effectPlayer("that-player", ctx);
+      else if (typeof whose === "object") owner = effectPlayer(whose, ctx);
+      else {
+        const ref = ctx.targets[whose];
+        owner = ref?.kind === "player" ? ref.player : undefined;
+      }
+      if (owner === undefined) return;
+      const cards = ctx.graveyardMatching(owner, spec.filter ?? {});
+      const card = spec.bottom === true ? cards[0] : cards.at(-1);
+      if (card === undefined) return;
+      if (spec.ifIt !== undefined && !ctx.cardMatches(card, spec.ifIt)) return;
+      applyEffectSpec(spec.then, ctx.withTargets([{ kind: "object", object: card }]));
+      return;
+    }
+    case "reorder-graveyard":
+      ctx.reorderGraveyard(ctx.controller);
+      return;
     case "choose-random-card": {
       let cards: readonly ObjectId[];
       let owner: PlayerId | undefined;

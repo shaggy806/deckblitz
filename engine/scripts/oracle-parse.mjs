@@ -1415,6 +1415,11 @@ export function parseCost(text) {
       const filter = m[1] === undefined ? undefined : parseTypePhrase(m[1]);
       if (filter === null || (filter !== undefined && Object.keys(filter).length === 0)) return null;
       cost.exileFromGraveyard = { count: 1, ...(filter !== undefined ? { filter } : {}) };
+    } else if ((m = /^Exile the top (?:(.+?) )?card of your graveyard$/.exec(part))) {
+      // Graveyard order (rule 404.2): no choice (Alms, Necratog).
+      const filter = m[1] === undefined ? undefined : parseTypePhrase(m[1]);
+      if (filter === null || (filter !== undefined && Object.keys(filter).length === 0)) return null;
+      cost.exileFromGraveyard = { count: 1, ...(filter !== undefined ? { filter } : {}), fromTop: true };
     } else if (part === "Exile the top card of your library") cost.exileTop = 1;
     else if ((m = new RegExp(`^Exile the top ${N} cards of your library$`, "i").exec(part))) {
       const count = numberOf(m[1]);
@@ -2456,6 +2461,34 @@ export function parseSentence(sentence, ctx) {
   // under the putting player's control (rule 110.2a).
   if (re(`put all cards exiled with (?:~|it) onto the battlefield`).test(s)) {
     return { kind: "return-exiled-by-source", linked: "battlefield", under: "you" };
+  }
+  // Graveyard order (rule 404.2): Soldevi Digger, Phyrexian Furnace, Guiding
+  // Spirit; Fossil Find's "then reorder".
+  if ((m = re(`put the top card of your graveyard on the bottom of your library`).exec(s))) {
+    return { kind: "top-of-graveyard", then: { kind: "put-on-library", target: 0, position: "bottom" } };
+  }
+  if ((m = re(`exile the bottom card of target player's graveyard`).exec(s))) {
+    return { kind: "top-of-graveyard", whose: ctx.target("player"), bottom: true, then: { kind: "exile", target: 0 } };
+  }
+  if ((m = re(`if the top card of target player's graveyard is an? (.+?) card, put that card on top of that player's library`).exec(s))) {
+    const ifIt = parseTypePhrase(m[1]);
+    if (ifIt !== null && Object.keys(ifIt).length > 0) {
+      return {
+        kind: "top-of-graveyard",
+        whose: ctx.target("player"),
+        ifIt,
+        then: { kind: "put-on-library", target: 0, position: "top" },
+      };
+    }
+  }
+  if ((m = re(`return a card at random from your graveyard to your hand, then reorder your graveyard as you choose`).exec(s))) {
+    return {
+      kind: "sequence",
+      effects: [
+        { kind: "choose-random-card", zone: "graveyard", then: { kind: "return-to-hand", target: 0, from: "graveyard" } },
+        { kind: "reorder-graveyard" },
+      ],
+    };
   }
   // "Choose a card at random [that was] exiled with ~. Put that card into its
   // owner's hand" (Skyship Weatherlight, Gorex): rule 607.2a's linked cards.
@@ -4402,6 +4435,28 @@ export function parseEffect(text, outer) {
   const todo = [];
   const hints = [];
   let skip = 0;
+  // Shallow Grave's and Corpse Dance's whole text: the top creature card of
+  // your graveyard (rule 404.2), and what follows reads it as target 0.
+  if (
+    text === "Return the top creature card of your graveyard to the battlefield. That creature gains haste until end of turn. Exile it at the beginning of the next end step."
+  ) {
+    return {
+      effect: {
+        kind: "top-of-graveyard",
+        filter: { type: "creature" },
+        then: {
+          kind: "sequence",
+          effects: [
+            { kind: "put-onto-battlefield", target: 0 },
+            { kind: "grant-keyword", target: 0, keyword: "haste", duration: "end-of-turn" },
+            { kind: "delayed-trigger", at: "next-end-step", effect: { kind: "exile", target: 0 }, text: "Exile it." },
+          ],
+        },
+      },
+      todo: [],
+      hints: [],
+    };
+  }
   for (const [i, sentence] of sentences.entries()) {
     if (skip > 0) {
       skip -= 1;

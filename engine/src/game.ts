@@ -73,7 +73,7 @@ import { CardRegistry } from "./cards/card-registry.js";
 import { defaultRegistry } from "./cards/default-registry.js";
 import { EMBLEM_CARD } from "./cards/emblem.js";
 import { embalmAbility, encoreAbility, ninjutsu, unearth } from "./cards/helpers.js";
-import { bestowedDefinition, licidDefinition } from "./cards/define.js";
+import { bestowedDefinition, licidDefinition, readsGraveyardOrder } from "./cards/define.js";
 import { DUNGEONS } from "./cards/dungeons.js";
 import { MADNESS_EFFECT, MADNESS_TEXT } from "./cards/madness.js";
 import { MIRACLE_EFFECT, MIRACLE_TEXT } from "./cards/miracle.js";
@@ -7659,6 +7659,12 @@ export class Game {
         this.promptNextEnterAttacking();
         continue;
       }
+      // Cards that went to a graveyard together: their owner arranges them
+      // (rule 404.3), before anything could read that order.
+      if ((this.state.pendingGraveyardOrders?.length ?? 0) > 0) {
+        this.promptNextGraveyardOrder(player);
+        continue;
+      }
       // Everything a suspended resolution was waiting on has been answered:
       // carry on with the rest of it, before any trigger goes on the stack.
       if (this.state.suspendedResolutions.length > 0) {
@@ -8416,6 +8422,13 @@ export class Game {
       this.state.keptByChoice = [...(this.state.keptByChoice ?? []), ...chosen];
       this.emit({ type: "cards-chosen-from-zone", player, objects: [...chosen] });
       if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
+      return;
+    }
+    // Rule 404.3 or Fossil Find: nothing moves, the pile is arranged.
+    if (awaiting.arrangesGraveyard === true) {
+      this.arrangeGraveyard(player, chosen);
+      this.state.awaiting = null;
+      this.prepareForPriority(awaiting.priorityTo ?? this.activePlayer);
       return;
     }
     // Amplify (rule 702.38a): the cards are revealed where they are, and how
@@ -19686,7 +19699,11 @@ export class Game {
         this.payGraveyardExileCost(
           player,
           sourceId,
-          { count, ...(costExile.filter !== undefined ? { filter: costExile.filter } : {}) },
+          {
+            count,
+            ...(costExile.filter !== undefined ? { filter: costExile.filter } : {}),
+            ...(costExile.fromTop === true ? { fromTop: true as const } : {}),
+          },
           player,
           abilityId,
         ),
@@ -19889,14 +19906,17 @@ export class Game {
   private payGraveyardExileCost(
     player: PlayerId,
     source: ObjectId,
-    cost: { readonly count: number; readonly filter?: CardFilter },
+    cost: { readonly count: number; readonly filter?: CardFilter; readonly fromTop?: true },
     priorityTo: PlayerId = player,
     /** The spell or ability on the stack this pays for, which remembers the
      * cards — its effect's "the exiled card". */
     forStackObject?: ObjectId,
   ): void {
     if (cost.count <= 0) return;
-    const eligible = this.graveyardCostCandidates(player, cost.filter, source);
+    let eligible = this.graveyardCostCandidates(player, cost.filter, source);
+    // "The top creature card of your graveyard" (rule 404.2): which is no
+    // choice. The list's end is the top of the pile.
+    if (cost.fromTop === true) eligible = eligible.slice(-cost.count);
     if (eligible.length <= cost.count) {
       this.withGraveyardLeaveBatch(() => {
         for (const id of eligible) this.moveObject(id, "exile");
@@ -29214,6 +29234,10 @@ export class Game {
         const library = this.state.zones.perPlayer[step.player].library;
         const cards = step.cards.filter((id) => library.includes(id));
         return this.beginLibraryOrder(step.player, cards, step.position);
+      },
+      reorderGraveyard: (player) => {
+        if (this.state.players[player]?.hasLost !== false || !this.graveyardOrderIsRead()) return;
+        this.askGraveyardOrder(player, [...this.state.zones.perPlayer[player].graveyard]);
       },
       zoneChangeCountOf: (object) => this.state.objects[object]?.zoneChangeCount,
       takeKept: () => {
@@ -46655,8 +46679,87 @@ export class Game {
       this.graveyardEnterBatch = null;
       this.exileEnterBatch = null;
     }
+    if (batch.length > 1) this.queueGraveyardOrders(batch.map((arrival) => arrival.object));
     if (batch.length > 0) this.emit({ type: "cards-put-into-graveyard", arrivals: batch });
     if (exiled.length > 0) this.emit({ type: "cards-put-into-exile", arrivals: exiled });
+  }
+
+  /**
+   * Cards just put into graveyards at the same time: each owner of two or
+   * more may arrange theirs (rule 404.3), asked once nothing else is waiting
+   * and before priority (`promptNextGraveyardOrder`), so before anything could
+   * read the order. Nothing reads it in most games, so nobody's asked in those
+   * (`graveyardOrderIsRead`), and the list keeps the order they moved in.
+   */
+  private queueGraveyardOrders(cards: readonly ObjectId[]): void {
+    if (!this.graveyardOrderIsRead()) return;
+    for (const player of this.state.turnOrder) {
+      const mine = cards.filter((id) => this.state.objects[id]?.owner === player);
+      if (mine.length < 2) continue;
+      (this.state.pendingGraveyardOrders ??= []).push({
+        player,
+        cards: mine.map((id) => ({ object: id, stint: this.state.objects[id].zoneChangeCount ?? 0 })),
+      });
+    }
+  }
+
+  /** Whether the order of a graveyard can matter in this game: some card in
+   * it, in any zone, says "the top card of a graveyard". */
+  private graveyardOrderIsRead(): boolean {
+    for (const id in this.state.objects) {
+      const object = this.state.objects[id as ObjectId];
+      if (object.kind === "card" && readsGraveyardOrder(this.registry.get(object.cardName))) return true;
+    }
+    return false;
+  }
+
+  /** Ask the next player in `pendingGraveyardOrders` to arrange those of the
+   * cards still in their graveyard, when that's a choice at all: two or more,
+   * not all copies of one card. `priorityTo` gets priority after. */
+  private promptNextGraveyardOrder(priorityTo: PlayerId): void {
+    const [first, ...rest] = this.state.pendingGraveyardOrders ?? [];
+    this.state.pendingGraveyardOrders = rest;
+    if (first === undefined || this.state.players[first.player]?.hasLost !== false) return;
+    const pile = this.state.zones.perPlayer[first.player].graveyard;
+    const cards = first.cards
+      .filter((c) => pile.includes(c.object) && this.state.objects[c.object]?.zoneChangeCount === c.stint)
+      .map((c) => c.object);
+    this.askGraveyardOrder(first.player, cards, priorityTo);
+  }
+
+  /** Raise the `choose-from-zone` that arranges `cards` of `player`'s
+   * graveyard, if it's a choice. `true` if it was raised. */
+  private askGraveyardOrder(player: PlayerId, cards: readonly ObjectId[], priorityTo?: PlayerId): boolean {
+    if (!this.libraryOrderMatters(cards)) return false;
+    this.state.awaiting = {
+      kind: "choose-from-zone",
+      player,
+      ids: [...cards],
+      eligible: [...cards],
+      min: cards.length,
+      max: cards.length,
+      destination: "stay",
+      leftover: "stay",
+      order: true,
+      arrangesGraveyard: true,
+      prompt: "Arrange these cards in your graveyard in the order you pick: the first you pick goes on top",
+      ...(priorityTo !== undefined ? { priorityTo } : {}),
+    };
+    return true;
+  }
+
+  /** `chosen`, top first, into the places they already hold in `player`'s
+   * graveyard: everything else keeps its place (a card that arrived after
+   * them is still on top of them). */
+  private arrangeGraveyard(player: PlayerId, chosen: readonly ObjectId[]): void {
+    const pile = this.state.zones.perPlayer[player].graveyard;
+    const moving = new Set(chosen);
+    const places = pile.flatMap((id, index) => (moving.has(id) ? [index] : []));
+    // The list's end is the top of the pile.
+    const bottomFirst = [...chosen].reverse();
+    places.forEach((place, i) => {
+      pile[place] = bottomFirst[i];
+    });
   }
 
   /** Card `id` was put into exile from `from` — `noteGraveyardArrival`'s

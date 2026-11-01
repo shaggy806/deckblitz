@@ -3081,6 +3081,11 @@ export type AwaitingDecision =
        * 701.22a, 701.25a). Nothing is taken, so no `cards-chosen-from-zone`.
        */
       readonly order?: true;
+      /** An `order` over cards in `player`'s own graveyard, which stay there:
+       * rule 404.3's "the owner of those cards may arrange them in any order",
+       * or Fossil Find's "reorder your graveyard as you choose". The first
+       * picked goes on top (`Game.arrangeGraveyard`). */
+      readonly arrangesGraveyard?: true;
       /** Cards to ask the order of once this choice is carried out — a scry
        * that both keeps cards on top and puts cards on the bottom orders the
        * two groups one after the other (rule 701.22a). */
@@ -5251,6 +5256,14 @@ export interface GameState {
    * instruction's draws, each made — and offered dredge again — one at a
    * time once the question before it is answered (the ruling). */
   pendingDraws?: { readonly player: PlayerId; readonly count: number }[];
+  /** Cards put into one player's graveyard at the same time, still to be
+   * arranged by that player (rule 404.3) — queued only while something in the
+   * game reads a graveyard's order (`Game.graveyardOrderIsRead`). Each is the
+   * card and the stint it arrived in. */
+  pendingGraveyardOrders?: {
+    readonly player: PlayerId;
+    readonly cards: readonly { readonly object: ObjectId; readonly stint: number }[];
+  }[];
   pendingEnterAttacking?: {
     readonly player: PlayerId;
     readonly creatures: readonly EnterAttackingChoice[];

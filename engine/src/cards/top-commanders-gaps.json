@@ -4,6 +4,9 @@
  "built": [
   "mechanic:companion",
   "mechanic:deck-any-number-copies",
+  "effect:top-card-of-graveyard",
+  "effect:top-creature-card-of-graveyard",
+  "effect:reorder-graveyard",
   "condition:most-common-color-among-all-permanents",
   "condition:most-common-color-among-chosen-player-permanents",
   "cost:unless-pay-colored-per-amount",

@@ -7610,6 +7610,50 @@ describe("a tapped-for-mana trigger that uses the stack", () => {
     expect(orchard.triggered[0].effect).toEqual({ kind: "create-token", token: "Spirit Token (Colorless)", count: 1, who: "target-controller" });
   });
 });
+describe("a graveyard's order", () => {
+  const face = (type_line: string, oracle_text: string) =>
+    parseFace({ name: "Test Pile", type_line, oracle_text }, { tokenFor: () => null });
+
+  it("reads an exile cost from the top of the pile", () => {
+    const alms = face("Enchantment", "{1}, Exile the top card of your graveyard: Prevent the next 1 damage that would be dealt to target creature this turn.");
+    expect(alms.complete).toBe(true);
+    expect(alms.activated[0].cost.exileFromGraveyard).toEqual({ count: 1, fromTop: true });
+    const atog = face("Creature — Atog", "Exile the top creature card of your graveyard: This creature gets +2/+2 until end of turn.");
+    expect(atog.complete).toBe(true);
+    expect(atog.activated[0].cost.exileFromGraveyard).toEqual({ count: 1, filter: { type: "creature" }, fromTop: true });
+  });
+
+  it("reads the effects: the top, the bottom, an 'if it's', a reorder", () => {
+    const digger = face("Artifact", "{2}: Put the top card of your graveyard on the bottom of your library.");
+    expect(digger.activated[0].effect).toEqual({
+      kind: "top-of-graveyard",
+      then: { kind: "put-on-library", target: 0, position: "bottom" },
+    });
+    const furnace = face("Artifact", "{T}: Exile the bottom card of target player's graveyard.");
+    expect(furnace.activated[0].targets).toEqual(["player"]);
+    expect(furnace.activated[0].effect).toEqual({
+      kind: "top-of-graveyard",
+      whose: 0,
+      bottom: true,
+      then: { kind: "exile", target: 0 },
+    });
+    const spirit = face("Creature — Spirit", "{T}: If the top card of target player's graveyard is a creature card, put that card on top of that player's library.");
+    expect(spirit.activated[0].effect).toEqual({
+      kind: "top-of-graveyard",
+      whose: 0,
+      ifIt: { type: "creature" },
+      then: { kind: "put-on-library", target: 0, position: "top" },
+    });
+    const find = face("Sorcery", "Return a card at random from your graveyard to your hand, then reorder your graveyard as you choose.");
+    expect(find.complete).toBe(true);
+    expect(find.effect.effects[1]).toEqual({ kind: "reorder-graveyard" });
+    const grave = face("Instant", "Return the top creature card of your graveyard to the battlefield. That creature gains haste until end of turn. Exile it at the beginning of the next end step.");
+    expect(grave.complete).toBe(true);
+    expect(grave.effect.kind).toBe("top-of-graveyard");
+    expect(grave.effect.filter).toEqual({ type: "creature" });
+  });
+});
+
 describe("the most common color among permanents", () => {
   const face = (type_line: string, oracle_text: string, name = "Test Common") =>
     parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });
