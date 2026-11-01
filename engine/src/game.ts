@@ -8116,7 +8116,6 @@ export class Game {
       awaiting.destination === "battlefield" &&
       chosen.length > 0 &&
       chosen.every((id) => this.state.objects[id]?.zone === "hand" || this.state.objects[id]?.zone === "graveyard") &&
-      awaiting.enterUnder === undefined &&
       awaiting.then === undefined &&
       awaiting.secondPick === undefined &&
       awaiting.alsoTaken === undefined &&
@@ -8125,7 +8124,13 @@ export class Game {
       awaiting.enterAttacking === undefined &&
       awaiting.enterAs === undefined
     ) {
-      this.state.heldChoices = { ...held, entries: [...(held.entries ?? []), { player, objects: [...chosen] }] };
+      this.state.heldChoices = {
+        ...held,
+        entries: [
+          ...(held.entries ?? []),
+          { player, objects: [...chosen], ...(awaiting.enterUnder !== undefined ? { under: awaiting.enterUnder } : {}) },
+        ],
+      };
       this.emit({ type: "cards-chosen-from-zone", player, objects: [...chosen] });
       this.state.awaiting = null;
       this.prepareForPriority(this.activePlayer);
@@ -8296,19 +8301,22 @@ export class Game {
       filter === undefined
         ? [...finds]
         : finds.filter((id) => matchesFilter(this.state, this.registry, id, filter, { you: player, x: instead.x }));
+    const exactly = instead.pick === "one" ? 1 : typeof instead.pick === "object" ? instead.pick.exactly : undefined;
     const [min, max] =
       instead.pick === "all"
         ? [eligible.length, eligible.length]
-        : instead.pick === "one"
-          ? [Math.min(1, eligible.length), Math.min(1, eligible.length)]
+        : exactly !== undefined
+          ? [Math.min(exactly, eligible.length), Math.min(exactly, eligible.length)]
           : [0, eligible.length];
     const under = instead.under !== undefined && instead.under !== player ? instead.under : undefined;
     const source = awaiting.thenSource === undefined ? undefined : this.state.objects[awaiting.thenSource];
+    // Another player choosing: the cards are still the searcher's.
+    const whose = instead.chooser === undefined ? "your" : "their";
     const where = (to: "battlefield" | "hand" | "graveyard", tapped: boolean, controller: string | null): string =>
       to === "hand"
-        ? "into your hand"
+        ? `into ${whose} hand`
         : to === "graveyard"
-          ? "into your graveyard"
+          ? `into ${whose} graveyard`
           : `onto the battlefield${tapped ? " tapped" : ""}${controller === null ? "" : ` under ${controller} control`}`;
     const picked = where(
       instead.destination,
@@ -8319,6 +8327,8 @@ export class Game {
     const prompt =
       instead.pick === "one"
         ? `Choose one to put ${picked} — the ${finds.length === 2 ? "other goes" : "rest go"} ${rest}`
+        : exactly !== undefined
+          ? `Choose ${exactly} to put ${picked} — the ${finds.length === exactly + 1 ? "other goes" : "rest go"} ${rest}`
         : eligible.length === 1 && finds.length === 1
           ? `Choose it to put it ${picked}, or nothing to put it ${rest}`
           : `Choose any of them to put ${picked} — the rest go ${rest}`;
@@ -8347,7 +8357,16 @@ export class Game {
       this.finishZoneChoice({ kind: "zone-choice", awaiting: next, player, chosen: eligible });
       return;
     }
-    this.state.awaiting = next;
+    // "Target opponent chooses one": another player answers, shown the finds
+    // (which were revealed), about the searcher's cards.
+    if (instead.chooser === "an-opponent") {
+      this.offerToAnOpponent(next, player, awaiting.thenSource);
+      return;
+    }
+    this.state.awaiting =
+      instead.chooser === undefined || instead.chooser === player
+        ? next
+        : { ...next, player: instead.chooser, forPlayer: next.forPlayer ?? player };
   }
 
   /**
@@ -21625,7 +21644,7 @@ export class Game {
     if (entry.kind === "spell") this.enterPermanentSpell(entry.object);
     else if (entry.kind === "land") this.finishLandPlay(entry);
     else if (entry.kind === "exiled-return") this.returnExiledCards(entry.objects);
-    else if (entry.kind === "held-entries") this.enterHeldEntries(entry.objects);
+    else if (entry.kind === "held-entries") this.enterHeldEntries(entry.objects, entry.under);
     else this.finishZoneChoice(entry);
   }
 
@@ -28082,7 +28101,7 @@ export class Game {
           to?.destination === "exile" && stint !== undefined && to.unlinked !== true
             ? { source, zoneChangeCount: stint }
             : undefined;
-        this.beginDiscardChosen(controller, source, target, filter, lookOnly, optional, upTo, to?.destination, exileLink, to?.alsoFrom);
+        this.beginDiscardChosen(to?.chooser ?? controller, source, target, filter, lookOnly, optional, upTo, to?.destination, exileLink, to?.alsoFrom);
       },
       modifyPt: (target, power, toughness, duration) =>
         this.modifyPt(target, power, toughness, lastingHere(duration)),
@@ -30149,7 +30168,10 @@ export class Game {
           ),
         );
       },
-      lookAndChoose: (zone, count, min, max, destination, leftover, filter, enterTapped, then, reveal, leftoverIf, secondPick, attacking, enterAs, chooser, picker, withCounters, unlinked, needsMin, attachTo, playable, together, split) => {
+      offerZoneChoice: (decision) => {
+        this.state.awaiting = decision;
+      },
+      lookAndChoose: (zone, count, min, max, destination, leftover, filter, enterTapped, then, reveal, leftoverIf, secondPick, attacking, enterAs, chooser, picker, withCounters, unlinked, needsMin, attachTo, playable, together, split, more) => {
         // "Exile one of them face down" (hideaway): linked to the source, in
         // the stint this ability refers to (rule 607.2a) — unless `unlinked`.
         const sourceObject = this.state.objects[source];
@@ -30188,7 +30210,10 @@ export class Game {
           // battlefield … under your control" (Cybership): from another
           // player's library (`from`), the one putting them there is this
           // effect's controller, under whose control they enter (rule 110.2a).
-          chooser !== undefined && chooser !== controller && picker === controller ? controller : undefined,
+          // Or by its own word: Scrounge's "under your control".
+          more?.underYou === true || (chooser !== undefined && chooser !== controller && picker === controller)
+            ? controller
+            : undefined,
           needsMin === true,
           attachTo,
           // The effect's controller may play the picks, whoever's library
@@ -30205,6 +30230,7 @@ export class Game {
               },
           together === undefined ? undefined : { together, x },
           split,
+          more?.anOpponent === true,
         );
       },
     };
@@ -30269,6 +30295,8 @@ export class Game {
     /** Where each chosen card goes by what it is — see `look-and-choose`'s
      * `split`. */
     split?: readonly ZoneChoiceSplitCase[],
+    /** "An opponent chooses": see `look-and-choose`'s `chooser`. */
+    anOpponentPicks = false,
   ): void {
     // The exile zone (a processor, Oblivion Sower): only what may be
     // chosen is shown — the cards `player` owns when someone else is
@@ -30294,10 +30322,10 @@ export class Game {
       const prompt =
         destination === "graveyard"
           ? `Choose ${cards} in exile to put into ${most === 1 ? "its owner's graveyard" : "their owners' graveyards"}`
-          : destination === "battlefield"
+          : destination === "battlefield" && !anOpponentPicks
             ? `Choose ${cards} in exile to put onto the battlefield under your control`
             : undefined;
-      this.state.awaiting = {
+      const decision: Extract<AwaitingDecision, { kind: "choose-from-zone" }> = {
         kind: "choose-from-zone",
         player: chooser,
         ids: eligible,
@@ -30318,6 +30346,8 @@ export class Game {
         ...(then !== undefined ? { thenSource: then.source, thenX: then.x } : {}),
         ...(then?.sourceStint !== undefined ? { thenSourceStint: then.sourceStint } : {}),
       };
+      if (anOpponentPicks) this.offerToAnOpponent(decision, player, source);
+      else this.state.awaiting = decision;
       return;
     }
     // Every graveyard, in turn order — all public (Necromantic Selection).
@@ -30364,7 +30394,12 @@ export class Game {
     // what's *revealed* — the player still looks at everything either way,
     // and naturally ends up unable to choose anything if nothing matches
     // (min/max clamp to 0 along with it), same as the real card whiffing.
-    const filtered = ids.filter((id) => this.matchesZoneChoiceFilter(id, filter, player, source));
+    // A card an earlier player has chosen while choices are held can't be
+    // chosen again: Rejoin the Fight's "that hasn't been chosen".
+    const chosenAlready = new Set((this.state.heldChoices?.entries ?? []).flatMap(({ objects }) => objects));
+    const filtered = ids.filter(
+      (id) => !chosenAlready.has(id) && this.matchesZoneChoiceFilter(id, filter, player, source),
+    );
     // "For each card type, you may put a card of that type" (Atraxa): a rule
     // over the chosen set, its tags read now (`zone-choice-together.ts`).
     // A card that fits no slot can't be chosen, and no more cards than
@@ -30372,25 +30407,37 @@ export class Game {
     const together =
       setRule === undefined ? undefined : this.searchTogether(setRule.together, filtered, picker ?? player, setRule.x);
     const eligible = eligibleForTogether(together, filtered);
+    const most =
+      setRule !== undefined && "oneEach" in setRule.together ? Math.min(max, setRule.together.oneEach.length) : max;
     // One card a slot, however many cards there are: a set that can fill only
-    // so many slots can be no bigger, a least included (Guided Passage's
-    // ruling: "ignore those types").
+    // so many slots can't be required to be bigger (Guided Passage's ruling:
+    // "ignore those types").
     const possible = together?.rule === "one-each" ? largestOneEach(together, eligible) : eligible.length;
     // Revealing from your own hand with nothing in it that matches: there's
     // nothing to reveal and no one else to show the choice to.
     if (destination === "reveal" && eligible.length === 0) return;
-    this.state.awaiting = {
+    // Choosing what comes under someone else's control (Drana's defending
+    // player, Scrounge's target opponent): a client's own title would say
+    // "under your control", or nothing.
+    const entersUnder = enterUnder ?? player;
+    const chooser = anOpponentPicks ? undefined : (picker ?? player);
+    const forAnother =
+      destination === "battlefield" && entersUnder !== chooser && together === undefined && split === undefined
+        ? `Choose ${max === 1 ? "a card" : `up to ${max} cards`} to put onto the battlefield under ${entersUnder.charAt(0).toUpperCase()}${entersUnder.slice(1)}'s control`
+        : undefined;
+    const decision: Extract<AwaitingDecision, { kind: "choose-from-zone" }> = {
       kind: "choose-from-zone",
       player: picker ?? player,
       ...(picker !== undefined && picker !== player ? { forPlayer: player } : {}),
+      ...(forAnother !== undefined ? { prompt: forAnother } : {}),
       ids,
       eligible,
       min: Math.min(min, possible),
-      max: Math.min(max, possible),
+      max: Math.min(most, eligible.length),
       ...(together !== undefined ? { together } : {}),
       destination,
       leftover,
-      ...(split !== undefined ? { split, prompt: splitPrompt(split, Math.min(max, possible)) } : {}),
+      ...(split !== undefined ? { split, prompt: splitPrompt(split, Math.min(most, eligible.length)) } : {}),
       ...(enterTapped && destination === "battlefield" ? { enterTapped: true } : {}),
       ...(withCounters !== undefined && destination === "battlefield" ? { enterWithCounters: withCounters } : {}),
       ...(attacking !== undefined && destination === "battlefield" ? { enterAttacking: attacking } : {}),
@@ -30414,6 +30461,43 @@ export class Game {
       // hand": only what's taken is shown, as it's taken.
       ...(reveal === "chosen" && zone === "library" ? { reveal: true } : {}),
     };
+    if (anOpponentPicks) {
+      this.offerToAnOpponent(decision, player, source);
+      return;
+    }
+    this.state.awaiting = decision;
+  }
+
+  /**
+   * "An opponent chooses" (Realms Uncharted, Guided Passage): `decision` for
+   * one of `controller`'s opponents to answer, about `controller`'s cards. Which
+   * opponent is `controller`'s choice, made as this instruction is followed
+   * (Plargg and Nassari's ruling) and so with the revealed cards in view; asked
+   * as a `choose-opponent` is, and not at all with one opponent.
+   */
+  private offerToAnOpponent(
+    decision: Extract<AwaitingDecision, { kind: "choose-from-zone" }>,
+    controller: PlayerId,
+    source: ObjectId | undefined,
+  ): void {
+    const opponents = this.state.turnOrder.filter((p) => p !== controller && this.state.players[p]?.hasLost !== true);
+    const forThem = (player: PlayerId): Extract<AwaitingDecision, { kind: "choose-from-zone" }> => ({
+      ...decision,
+      player,
+      forPlayer: decision.forPlayer ?? controller,
+    });
+    if (opponents.length <= 1) {
+      if (opponents.length === 1) this.state.awaiting = forThem(opponents[0]);
+      return;
+    }
+    this.makeResolutionContext(source ?? asObjectId("choose-from-zone-source"), controller, [], 0).chooseModes(
+      1,
+      1,
+      opponents.map((player) => ({
+        text: `Choose ${player.charAt(0).toUpperCase()}${player.slice(1)}`,
+        effect: { kind: "about-player", player, effect: { kind: "offer-zone-choice", decision: forThem(player) } },
+      })),
+    );
   }
 
   /** See the `"discard-chosen"` {@link EffectSpec}: `target`'s hand revealed
@@ -30557,8 +30641,8 @@ export class Game {
     // "A Forest card and a Plains card" finds one card per slot at most.
     const most = all
       ? eligible.length
-      : set?.rule === "one-each"
-        ? Math.min(max, largestOneEach(set, eligible))
+      : together !== undefined && "oneEach" in together
+        ? Math.min(max, together.oneEach.length)
         : max;
     const exiled = destination === "exile" || destination === "exile-face-down";
     // Finds that go card by card (`instead`): this choice only picks them,
@@ -30586,6 +30670,7 @@ export class Game {
         destination: "stay",
         leftover: "stay",
         searchInstead: instead,
+        ...(set !== undefined ? { together: set } : {}),
         ...(reveal ? { reveal: true } : {}),
         ...(more?.withCounters !== undefined ? { enterWithCounters: more.withCounters } : {}),
         thenSource: more!.source,
@@ -40511,7 +40596,11 @@ export class Game {
       this.drainPendingSacrificeVictims();
     }
     const entering = (held.entries ?? []).flatMap(({ objects }) => objects);
-    if (entering.length > 0) this.enterHeldEntries(entering);
+    const under: Record<string, PlayerId> = {};
+    for (const entry of held.entries ?? []) {
+      if (entry.under !== undefined) for (const id of entry.objects) under[id] = entry.under;
+    }
+    if (entering.length > 0) this.enterHeldEntries(entering, under);
   }
 
   /**
@@ -40520,20 +40609,34 @@ export class Game {
    * each one's "as this enters" choices first, in the order chosen — the
    * active player's, then the others' in turn order — parking the entry
    * (`PendingEntry`) while one is asked, then all of them at once, each
-   * under its owner's control. A card that has left its owner's hand (or
+   * under its owner's control, or the effect's controller's where it says so
+   * (`under` — Dredge the Mire). A card that has left its owner's hand (or
    * graveyard — Tempt with Immortality's returns) since stays where it is.
    */
-  private enterHeldEntries(ids: readonly ObjectId[]): void {
+  private enterHeldEntries(ids: readonly ObjectId[], under: Readonly<Record<string, PlayerId>> = {}): void {
     const entering = ids.filter((id) => this.state.objects[id]?.zone === "hand" || this.state.objects[id]?.zone === "graveyard");
     for (const id of entering) {
-      if (this.askEnterChoice(id, this.state.objects[id].owner)) {
-        this.state.suspendedResolutions.push({ effect: null, enter: { kind: "held-entries", objects: entering } });
+      if (this.askEnterChoice(id, under[id] ?? this.state.objects[id].owner)) {
+        this.state.suspendedResolutions.push({
+          effect: null,
+          enter: { kind: "held-entries", objects: entering, ...(Object.keys(under).length > 0 ? { under } : {}) },
+        });
         return;
       }
     }
     this.withEnterBatch(() => {
       for (const id of entering) {
-        if (this.moveObject(id, "battlefield")) this.emit({ type: "permanent-entered-battlefield", object: id });
+        const to = under[id];
+        if (this.moveObject(id, "battlefield", to !== undefined ? { under: to } : {})) {
+          // Kept there by a control effect, as a reanimation "under your
+          // control" is (see `putOntoBattlefieldByEffect`).
+          const entered = this.state.objects[id];
+          if (to !== undefined && entered?.zone === "battlefield" && entered.controller !== to) {
+            this.gainControlByEffect(to, { kind: "object", object: id }, false, true);
+            entered.summoningSick = true;
+          }
+          this.emit({ type: "permanent-entered-battlefield", object: id });
+        }
       }
     });
   }

@@ -8875,4 +8875,47 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       },
     }),
   ),
+  // --- Another player chooses (2026-11-01, need-keys Phase 2) -------------------------
+  preset(
+    "Zimone's Experiment: each chosen card goes by what it is",
+    board({
+      you: {
+        bf: ['Forest*4'],
+        hand: ["Zimone's Experiment"],
+        lib: ['Grizzly Bears', 'Forest', 'Sol Ring', 'Divination', 'Island'],
+      },
+    }),
+  ),
+  preset(
+    'Intuition: the target opponent chooses among your finds',
+    board({
+      you: { bf: ['Island*3'], hand: ['Intuition'], lib: ['Serra Angel', 'Hill Giant', 'Sol Ring', 'Divination'] },
+      opp: { human: true },
+    }),
+  ),
+  preset(
+    'Realms Uncharted: you choose the opponent after finding',
+    board({
+      you: { bf: ['Forest*3'], hand: ['Realms Uncharted'], lib: ['Forest', 'Island', 'Swamp', 'Plains'] },
+      opp: [{}, { human: true }, {}],
+    }),
+  ),
+  preset(
+    'Drana, the Last Bloodchief: the defending player chooses in your graveyard',
+    board({
+      you: { bf: ['Drana, the Last Bloodchief'], gy: ['Grizzly Bears', 'Hill Giant', 'Isamaru, Hound of Konda'] },
+      opp: { human: true },
+    }),
+  ),
+  preset(
+    'Dredge the Mire: nothing enters until the last opponent has chosen',
+    board({
+      you: { bf: ['Swamp*4'], hand: ['Dredge the Mire'] },
+      opp: [
+        { human: true, gy: ['Grizzly Bears', 'Hill Giant'] },
+        { human: true, gy: ['Serra Angel', 'Llanowar Elves'] },
+        { human: true, gy: ['Air Elemental', 'Ornithopter'] },
+      ],
+    }),
+  ),
 ]

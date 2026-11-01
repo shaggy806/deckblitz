@@ -1027,7 +1027,6 @@ export const SAMPLE_DECKS: readonly SampleDeck[] = [
     ],
     substitutions: [
       sub("Coveted Jewel", "Hedron Archive", "Mana rock that cashes in for cards."),
-      sub("Dredge the Mire", "Victimize", "Reanimation sorcery."),
       sub("Explosion of Riches", "Fireball", "Top-end damage spell aimed at opponents."),
       sub("Scythe Specter", "Hypnotic Specter", "Flying Specter that makes opponents discard."),
       sub("Wildfire Devils", "Cinder Elemental", "Four-mana red creature that turns into damage."),

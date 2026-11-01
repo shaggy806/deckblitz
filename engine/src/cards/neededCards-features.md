@@ -613,7 +613,12 @@ since 2026-11-01 also **`oneEachTypeAmong`** (the types among noncreature spells
 cast this turn, Hurkyl, Master Wizard), **`totalManaValueAtMost`** (Smelting
 Vat), **`split`** for a destination by what each chosen card is (Zimone's
 Experiment), **`from`** another player's graveyard (Grime Gorger), and the
-discarded cards a replacement exiled (Queen Kayla bin-Kroog).
+discarded cards a replacement exiled (Queen Kayla bin-Kroog). A chooser other
+than the controller: `search-library`'s **`instead.chooser`** and `pick: {
+exactly }` (Intuition, Gifts Ungiven, Realms Uncharted), `look-and-choose`'s
+**`chooser: "an-opponent"`** (Guided Passage) and **`under: "you"`** (Scrounge),
+`for-each-player`'s **`choicesHeld`** (Dredge the Mire, Rejoin the Fight),
+`discard-chosen`'s **`chooser`** (Rakdos Augermage).
 `discard-chosen` takes **`alsoFrom`**: the graveyard beside the revealed hand,
 by its own filter (Agonizing Remorse), or the library's revealed top card
 (Psychotic Episode, with a new `destination: "library-bottom"`).

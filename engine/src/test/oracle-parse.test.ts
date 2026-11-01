@@ -5874,6 +5874,52 @@ describe("a choice drawn from several zones, or one card a slot", () => {
       destination: "battlefield",
       leftover: "bottom-random",
     });
+    // Another player divides the finds.
+    const intuition = face(
+      "Intuition",
+      "Instant",
+      "Search your library for three cards and reveal them. Target opponent chooses one. Put that card into your hand and the rest into your graveyard. Then shuffle.",
+    );
+    expect(intuition.effect).toMatchObject({
+      kind: "search-library",
+      destination: "graveyard",
+      min: 3,
+      max: 3,
+      reveal: true,
+      instead: { destination: "hand", pick: "one", chooser: { target: 0 } },
+    });
+    const teachings = face(
+      "Elemental Teachings",
+      "Instant — Lesson",
+      "Search your library for up to four land cards with different names and reveal them. An opponent chooses two of those cards. Put the chosen cards into your graveyard and the rest onto the battlefield tapped, then shuffle.",
+    );
+    expect(teachings.effect).toMatchObject({
+      filter: { type: "land" },
+      destination: "battlefield",
+      enterTapped: true,
+      min: 0,
+      max: 4,
+      together: { distinctNames: true },
+      instead: { destination: "graveyard", pick: { exactly: 2 }, chooser: "an-opponent" },
+    });
+    // Another player chooses in a graveyard, the card under your control.
+    const dredge = face(
+      "Dredge the Mire",
+      "Sorcery",
+      "Each opponent chooses a creature card in their graveyard. Put those cards onto the battlefield under your control.",
+    );
+    expect(dredge.effect).toMatchObject({
+      kind: "for-each-player",
+      who: "each-opponent",
+      choicesHeld: true,
+      effect: { kind: "look-and-choose", player: "that-player", zone: "graveyard", filter: { type: "creature" }, under: "you" },
+    });
+    const scrounge = face(
+      "Scrounge",
+      "Sorcery",
+      "Target opponent chooses an artifact card in their graveyard. Put that card onto the battlefield under your control.",
+    );
+    expect(scrounge.effect).toMatchObject({ who: { target: 0 }, effect: { filter: { type: "artifact" }, under: "you" } });
     // The rest anywhere but the bottom is another shape.
     const rest = face(
       "Test Recruiter",

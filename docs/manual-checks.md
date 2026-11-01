@@ -5928,3 +5928,25 @@ engine terms. A second thing to check is a second test.
 ### Atraxa, Grand Unifier: a card of each card type
 - **Do:** Cast Atraxa. When it enters, pick Ornithopter, Grizzly Bears and Lightning Bolt, and Confirm.
 - **Expect:** The popup reads "Choose a card of each card type to put into your hand" over the top ten cards. With Ornithopter, Grizzly Bears and Sol Ring picked Confirm stays off (two artifacts and a creature need three slots, but only Ornithopter can be both). The three picked go to your hand, the other seven to the bottom.
+
+## Another player chooses (2026-11-01, need-keys Phase 2: build-family, features only)
+
+### Zimone's Experiment: each chosen card goes by what it is
+- **Do:** Cast Zimone's Experiment. Pick Grizzly Bears and Forest, and Confirm.
+- **Expect:** The popup reads "Choose up to 2 cards: land cards onto the battlefield tapped, creature cards into your hand"; Sol Ring and Divination can't be picked. Forest enters tapped, Grizzly Bears goes to your hand, and the other three go to the bottom of your library.
+
+### Intuition: the target opponent chooses among your finds
+- **Do:** Cast Intuition on Bob. Pick Serra Angel, Hill Giant and Sol Ring, and Confirm. As Bob, pick Sol Ring and Confirm.
+- **Expect:** Bob's popup reads "Choose one to put into their hand — the rest go into their graveyard" and shows the three cards. Sol Ring goes to your hand; Serra Angel and Hill Giant go to your graveyard.
+
+### Realms Uncharted: you choose the opponent after finding
+- **Do:** In this 4-player game, cast Realms Uncharted. Pick the Forest, Island and Swamp, and Confirm. Choose Carol. As Carol, pick Forest and Island, and Confirm.
+- **Expect:** You pick the opponent only after the lands are revealed. Only Carol is asked; her popup reads "Choose 2 to put into their graveyard — the other goes into their hand". Forest and Island go to your graveyard and Swamp to your hand.
+
+### Drana, the Last Bloodchief: the defending player chooses in your graveyard
+- **Do:** Attack Bob with Drana. As Bob, pick Grizzly Bears and Confirm.
+- **Expect:** Bob's popup reads "Choose a card to put onto the battlefield under Alice's control", with Grizzly Bears and Hill Giant; Isamaru, Hound of Konda can't be picked. Grizzly Bears enters on your side with a +1/+1 counter, and is a Vampire too.
+
+### Dredge the Mire: nothing enters until the last opponent has chosen
+- **Do:** In this 4-player game, cast Dredge the Mire. As Bob, Carol and Dave in turn, pick a creature from your own graveyard and Confirm.
+- **Expect:** Each popup reads "Choose a card to put onto the battlefield under Alice's control". Each chosen card stays in its graveyard until Dave has chosen, then all three enter on your side at once.

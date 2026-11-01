@@ -914,7 +914,14 @@
   "effect:choose-one-per-mana-value-from-discarded",
   "effect:look-and-choose-library-total-mana-value",
   "effect:look-and-choose-second-pick-together",
-  "effect:look-and-choose-enters-with-counters"
+  "effect:look-and-choose-enters-with-counters",
+  "effect:opponent-chooses-cards-from-hand",
+  "effect:opponent-chooses-exiled",
+  "effect:opponent-chooses-from-found",
+  "effect:defending-player-chooses-from-your-graveyard",
+  "effect:opponent-chooses-from-graveyard",
+  "effect:opponent-returns-from-graveyard",
+  "effect:player-exiles-chosen-from-own-graveyard"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

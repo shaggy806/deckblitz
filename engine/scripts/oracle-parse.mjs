@@ -4268,7 +4268,12 @@ export function parseEffect(text, outer) {
       skip = nameChoice.used - 1;
       continue;
     }
-    const oneEach = oneEachLookAt(sentences, i) ?? splitLookAt(sentences, i) ?? totalManaValueLookAt(sentences, i);
+    const oneEach =
+      oneEachLookAt(sentences, i) ??
+      splitLookAt(sentences, i) ??
+      totalManaValueLookAt(sentences, i) ??
+      opponentDividesFindsAt(sentences, i, ctx) ??
+      opponentChoosesInGraveyardAt(sentences, i, ctx);
     if (oneEach !== null) {
       parsed.push(oneEach.effect);
       hints.push({ sentence, effect: oneEach.effect });
@@ -5261,6 +5266,85 @@ function oneEachLookAt(sentences, i) {
       leftover: "bottom-random",
     },
     used: 3,
+  };
+}
+
+/** A search whose finds another player divides — `search-library`'s
+ * `instead.chooser`: "Search your library for three cards and reveal them.
+ * Target opponent chooses one. Put that card into your hand and the rest into
+ * your graveyard. Then shuffle." (Intuition); "… up to four land cards with
+ * different names and reveal them. An opponent chooses two of those cards. Put
+ * the chosen cards into your graveyard and the rest into your hand. Then
+ * shuffle." (Realms Uncharted), "… and the rest onto the battlefield tapped,
+ * then shuffle." (Elemental Teachings). */
+function opponentDividesFindsAt(sentences, i, ctx) {
+  const search = /^search your library for (up to )?(\w+) (?:(.+?) )?cards?( with different names)? and reveal them\.$/i.exec(sentences[i]);
+  if (search === null) return null;
+  const pick = /^(target opponent|an opponent) chooses (one|two|three)(?: of those cards)?\.$/i.exec(sentences[i + 1] ?? "");
+  if (pick === null) return null;
+  const count = numberOf(search[2]);
+  const picks = numberOf(pick[2]);
+  if (typeof count !== "number") return null;
+  const filter = search[3] === undefined ? {} : parseTypePhrase(search[3], { cards: true });
+  if (filter === null) return null;
+  const put = /^put (?:that card|the chosen cards) (into your hand|into your graveyard) and the rest (into your hand|into your graveyard|onto the battlefield tapped)(, then shuffle)?\.$/i.exec(sentences[i + 2] ?? "");
+  if (put === null) return null;
+  const closed = put[3] !== undefined;
+  if (!closed && !/^then shuffle\.$/i.test(sentences[i + 3] ?? "")) return null;
+  const place = (phrase) => (/hand/.test(phrase) ? "hand" : /graveyard/.test(phrase) ? "graveyard" : "battlefield");
+  const chooser = /^target/i.test(pick[1]) ? { target: ctx.target("opponent") } : "an-opponent";
+  const rest = place(put[2]);
+  return {
+    effect: {
+      kind: "search-library",
+      filter,
+      destination: rest,
+      ...(/tapped/.test(put[2]) ? { enterTapped: true } : {}),
+      min: search[1] === undefined ? count : 0,
+      max: count,
+      reveal: true,
+      ...(search[4] !== undefined ? { together: { distinctNames: true } } : {}),
+      instead: {
+        destination: place(put[1]),
+        pick: picks === 1 ? "one" : { exactly: picks },
+        chooser,
+      },
+    },
+    used: closed ? 3 : 4,
+  };
+}
+
+/** Another player chooses from a graveyard, then "put that card onto the
+ * battlefield": "Target opponent chooses an artifact card in their graveyard.
+ * Put that card onto the battlefield under your control." (Scrounge); "Each
+ * opponent chooses a creature card in their graveyard. Put those cards onto the
+ * battlefield under your control." (Dredge the Mire), the choices held until the
+ * last has chosen. */
+function opponentChoosesInGraveyardAt(sentences, i, ctx) {
+  const m = /^(target opponent|each opponent) chooses an? (.+?) card in their graveyard\.$/i.exec(sentences[i]);
+  if (m === null) return null;
+  if (!/^put (?:that card|those cards) onto the battlefield under your control\.$/i.test(sentences[i + 1] ?? "")) return null;
+  const filter = parseTypePhrase(m[2], { cards: true });
+  if (filter === null) return null;
+  const each = /^each/i.test(m[1]);
+  return {
+    effect: {
+      kind: "for-each-player",
+      who: each ? "each-opponent" : { target: ctx.target("opponent") },
+      ...(each ? { choicesHeld: true } : {}),
+      effect: {
+        kind: "look-and-choose",
+        player: "that-player",
+        zone: "graveyard",
+        min: 1,
+        max: 1,
+        filter,
+        destination: "battlefield",
+        under: "you",
+        leftover: "stay",
+      },
+    },
+    used: 2,
   };
 }
 

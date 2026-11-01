@@ -157,6 +157,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "for-convoker": none,
   "choose-opponent": (n, v) => v.child(n.then),
   "about-player": (n, v) => v.child(n.effect),
+  "offer-zone-choice": none,
   "choose-permanents": none,
   // Its `then` reads the blighted creature as target 0. "Target opponent
   // blights 2" harms the player in that slot.

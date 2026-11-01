@@ -4372,6 +4372,8 @@ export type PendingEntry =
        * together once each has made its "as this enters" choices. */
       readonly kind: "held-entries";
       readonly objects: readonly ObjectId[];
+      /** Who a card enters under when not its owner (Dredge the Mire). */
+      readonly under?: Readonly<Record<string, PlayerId>>;
     };
 
 /**
@@ -5139,7 +5141,7 @@ export interface GameState {
     /** `cause`: who controlled the spell or ability that made them choose
      * — the discard's cause once it happens (`cards-discarded`). */
     readonly discards: readonly { readonly player: PlayerId; readonly objects: readonly ObjectId[]; readonly cause?: PlayerId }[];
-    readonly entries?: readonly { readonly player: PlayerId; readonly objects: readonly ObjectId[] }[];
+    readonly entries?: readonly { readonly player: PlayerId; readonly objects: readonly ObjectId[]; readonly under?: PlayerId }[];
   };
   /**
    * A sacrifice *cost* of several permanents being paid (rules 601.2h, 602.2b

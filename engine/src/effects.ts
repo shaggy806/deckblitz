@@ -29,6 +29,7 @@ import type { RandomPick, Vote, VoteChoice } from "./events.js";
 import type { ThisWayEntry } from "./this-way.js";
 import { textWordKind, type TextChange } from "./text-change.js";
 import type {
+  AwaitingDecision,
   DelayedTriggerTiming,
   EnterAttachHost,
   FaceDownAs,
@@ -156,11 +157,22 @@ export interface SearchMore {
  *   Rootweaver Druid's "one … under your control and the rest … under
  *   their control"). A single find is that one: the instruction for "the
  *   other" can't be followed, so it does only as much as it can (rule 609.3).
+ *   `{ exactly: n }` — that many of the finds, every find when there are no
+ *   more than that: Gifts Ungiven's "target opponent chooses two of those
+ *   cards" ("if you find one or two cards, your opponent must choose them",
+ *   its ruling).
+ * - `chooser`: **another player** picks them from the revealed finds, once
+ *   they're chosen and revealed — a target (`{ target: 0 }`, Intuition's
+ *   "target opponent chooses one"), or `"an-opponent"`: "an opponent chooses"
+ *   (Realms Uncharted), the opponent being the effect's controller's choice as
+ *   that instruction is followed, so with the finds in view. Nobody is asked
+ *   who when there's one opponent, nor anything at all when every find must
+ *   go.
  * - `under: "you"`: those picked enter under the **effect's controller's**
  *   control while the rest enter under the searcher's (Rootweaver Druid's
  *   opponent searching, in an `each-player-may`'s `ifDid`).
  *
- * Not combined with the search's `then`, `restDestination`, `together`,
+ * Not combined with the search's `then`, `restDestination`,
  * `all`, `attachedToSource` or a library-top / exile destination.
  */
 export interface SearchInstead {
@@ -168,7 +180,8 @@ export interface SearchInstead {
   readonly enterTapped?: true;
   readonly filter?: CardFilter;
   readonly condition?: StaticCondition;
-  readonly pick: "all" | "any" | "one";
+  readonly pick: "all" | "any" | "one" | { readonly exactly: number };
+  readonly chooser?: EffectPlayerRef | "an-opponent";
   readonly under?: "you";
 }
 /** A {@link SearchInstead} as `beginLibrarySearch` takes it. */
@@ -176,7 +189,8 @@ export interface ResolvedSearchInstead {
   readonly destination: "battlefield" | "hand" | "graveyard";
   readonly enterTapped?: true;
   readonly filter?: CardFilter;
-  readonly pick: "all" | "any" | "one";
+  readonly pick: "all" | "any" | "one" | { readonly exactly: number };
+  readonly chooser?: PlayerId | "an-opponent";
   readonly under?: PlayerId;
 }
 /**
@@ -2075,6 +2089,14 @@ export type EffectSpec =
       readonly then?: EffectSpec;
     }
   | {
+      /** A `choose-from-zone` waiting for the question of who answers it —
+       * the mode of "an opponent chooses" (`SearchInstead`'s and
+       * `look-and-choose`'s `chooser: "an-opponent"`). Built by the engine —
+       * never authored. */
+      readonly kind: "offer-zone-choice";
+      readonly decision: Extract<AwaitingDecision, { kind: "choose-from-zone" }>;
+    }
+  | {
       /** `effect` with `"that-player"` naming `player` — the mode a
        * `choose-opponent` answer applies. Built by the engine — never
        * authored. Nothing, once `player` has left the game. */
@@ -3950,6 +3972,11 @@ export type EffectSpec =
        * the bottom of their library" (Psychotic Episode).
        */
       readonly destination?: "exile" | "library-top" | "library-bottom" | "battlefield";
+      /** **Another player** chooses from the revealed hand: Rakdos Augermage's
+       * "reveal your hand and discard a card **of target opponent's choice**"
+       * (`target: "you"`, `chooser: { target: 0 }`). The hand's owner still
+       * discards it (rule 701.9a). The effect's controller, when absent. */
+      readonly chooser?: EffectPlayerRef;
       readonly unlinked?: true;
       /**
        * One choice over the hand **and** another of that player's zones at
@@ -6091,6 +6118,14 @@ export type EffectSpec =
        * or more tokens enter" sees them once. Only where nothing in `effect`
        * stops to ask. */
       readonly simultaneous?: boolean;
+      /** "**Each opponent chooses** a creature card in their graveyard. Put
+       * those cards onto the battlefield under your control" (Dredge the
+       * Mire): the players choose in turn, each knowing the choices before
+       * theirs, and only then do the chosen cards enter, all at once (rule
+       * 101.4, the ruling). A card already chosen can't be chosen again:
+       * Rejoin the Fight's "that hasn't been chosen". For a `look-and-choose`
+       * onto the battlefield from a hand or a graveyard. */
+      readonly choicesHeld?: true;
       /** Set by the engine on the copy it parks when one player's `effect`
        * stops to ask something (myriad's "you may"): the players still to
        * go, fixed when it began. */
@@ -7674,8 +7709,17 @@ export type EffectSpec =
        * Tahngarth's Glare's "**that player** looks at the top three cards of
        * **your** library, then puts them back in any order" (inside a
        * `for-each-player` of the target), the cards seen only by them and
-       * staying yours. */
-      readonly chooser?: "that-player";
+       * staying yours. `"an-opponent"` is "reveal the cards in your library.
+       * **An opponent** chooses from among them …" (Guided Passage): which
+       * opponent is the effect's controller's choice once the cards are
+       * revealed (Plargg and Nassari's ruling), asked only among two or
+       * more. */
+      readonly chooser?: "that-player" | "an-opponent";
+      /** Chosen cards bound for the battlefield enter under the **effect's
+       * controller's** control, whoever's zone or choice it was: Scrounge's
+       * "target opponent chooses an artifact card in their graveyard. Put that
+       * card onto the battlefield **under your control**". */
+      readonly under?: "you";
       /** Another player's library, the effect's controller still looking
        * and choosing: "look at the top three cards of **target player's**
        * library" (Architects of Will: `{ target: 0 }`), "**that player**
@@ -9033,8 +9077,9 @@ export interface EffectApi {
     lookOnly: boolean,
     optional: boolean,
     upTo?: number,
-    /** See the effect's `destination`, `unlinked` and `alsoFrom`. */
+    /** See the effect's `chooser`, `destination`, `unlinked` and `alsoFrom`. */
     to?: {
+      readonly chooser?: PlayerId;
       readonly destination?: "exile" | "library-top" | "library-bottom" | "battlefield";
       readonly unlinked?: true;
       readonly alsoFrom?:
@@ -9935,7 +9980,11 @@ export interface EffectApi {
     together?: ResolvedSearchTogether,
     /** See `look-and-choose`'s `split`. */
     split?: readonly ZoneChoiceSplitCase[],
+    /** Its `chooser: "an-opponent"` and `under: "you"`. */
+    more?: { readonly anOpponent?: true; readonly underYou?: true },
   ): void;
+  /** A `choose-from-zone` an `offer-zone-choice` carries: ask it now. */
+  offerZoneChoice(decision: Extract<AwaitingDecision, { kind: "choose-from-zone" }>): void;
 }
 
 export interface ResolutionContext extends EffectApi {
@@ -13420,7 +13469,10 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
             );
       if (target !== undefined) {
         const upTo = spec.upTo === undefined ? undefined : Math.max(0, Math.floor(amountValue(spec.upTo, ctx)));
+        const chooser = spec.chooser === undefined ? undefined : effectPlayer(spec.chooser, ctx);
+        if (spec.chooser !== undefined && chooser === undefined) return;
         ctx.discardChosen(target, spec.filter, spec.lookOnly === true, spec.optional === true, upTo, {
+          ...(chooser !== undefined ? { chooser } : {}),
           ...(spec.destination !== undefined ? { destination: spec.destination } : {}),
           ...(spec.unlinked === true ? { unlinked: true } : {}),
           ...(spec.alsoFrom !== undefined ? { alsoFrom: spec.alsoFrom } : {}),
@@ -14584,14 +14636,22 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         return;
       }
       const pendingBefore = ctx.decisionPending();
+      // "Each opponent chooses …": held until the last has (rule 101.4).
+      const holds = spec.choicesHeld === true;
+      if (holds && spec.remaining === undefined) ctx.holdChoices();
       for (let i = 0; i < players.length; i += 1) {
         const parked = ctx.parkedCount();
         applyEffectSpec(spec.effect, ctx.aboutPlayer(players[i]));
-        if (i + 1 < players.length && !pendingBefore && ctx.decisionPending()) {
-          ctx.resumeAfterDecisions({ ...spec, remaining: players.slice(i + 1) }, parked);
-          return;
+        if (!pendingBefore && ctx.decisionPending()) {
+          // After the last player's answer, what's left is the release: an
+          // empty round of the same effect.
+          if (i + 1 < players.length || holds) {
+            ctx.resumeAfterDecisions({ ...spec, remaining: players.slice(i + 1) }, parked);
+            return;
+          }
         }
       }
+      if (holds) ctx.releaseHeldChoices();
       return;
     }
     case "create-token-copy": {
@@ -15388,6 +15448,11 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
                   ...(spec.instead.enterTapped === true ? { enterTapped: true as const } : {}),
                   ...(spec.instead.filter !== undefined ? { filter: spec.instead.filter } : {}),
                   ...(spec.instead.under === "you" ? { under: ctx.controller } : {}),
+                  ...((who) => (who === undefined ? {} : { chooser: who }))(
+                    spec.instead.chooser === undefined || spec.instead.chooser === "an-opponent"
+                      ? spec.instead.chooser
+                      : effectPlayer(spec.instead.chooser, ctx),
+                  ),
                 },
               }
             : {}),
@@ -15458,9 +15523,16 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         spec.playable,
         resolvedTogether(spec.together, ctx),
         spec.split,
+        {
+          ...(spec.chooser === "an-opponent" ? { anOpponent: true as const } : {}),
+          ...(spec.under === "you" ? { underYou: true as const } : {}),
+        },
       );
       return;
     }
+    case "offer-zone-choice":
+      ctx.offerZoneChoice(spec.decision);
+      return;
     default:
       throw new Error(
         `unhandled effect kind: ${(spec as { kind: string }).kind}`,
