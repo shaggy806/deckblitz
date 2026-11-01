@@ -209,6 +209,7 @@ import _poolDoorkeeperThrull from "../pool/doorkeeper-thrull.js";
 import _poolDownDownToGoblinTown from "../pool/down-down-to-goblin-town.js";
 import _poolDowsingShaman from "../pool/dowsing-shaman.js";
 import _poolDragonbackLancer from "../pool/dragonback-lancer.js";
+import _poolDrannithMagistrate from "../pool/drannith-magistrate.js";
 import _poolDreadwingScavenger from "../pool/dreadwing-scavenger.js";
 import _poolDreadwing from "../pool/dreadwing.js";
 import _poolDunesOfTheDead from "../pool/dunes-of-the-dead.js";
@@ -1072,6 +1073,7 @@ const shard: CardShard = {
     _poolDownDownToGoblinTown,
     _poolDowsingShaman,
     _poolDragonbackLancer,
+    _poolDrannithMagistrate,
     _poolDreadwingScavenger,
     _poolDreadwing,
     _poolDunesOfTheDead,

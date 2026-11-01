@@ -558,6 +558,7 @@ import _poolPiecesOfThePuzzle from "../pool/pieces-of-the-puzzle.js";
 import _poolPillagingHorde from "../pool/pillaging-horde.js";
 import _poolPiratesPillage from "../pool/pirates-pillage.js";
 import _poolPistonFistCyclops from "../pool/piston-fist-cyclops.js";
+import _poolPitImp from "../pool/pit-imp.js";
 import _poolPitOfOfferings from "../pool/pit-of-offerings.js";
 import _poolPithDriller from "../pool/pith-driller.js";
 import _poolPizzaFaceGastromancer from "../pool/pizza-face-gastromancer.js";
@@ -1495,6 +1496,7 @@ const shard: CardShard = {
     _poolPillagingHorde,
     _poolPiratesPillage,
     _poolPistonFistCyclops,
+    _poolPitImp,
     _poolPitOfOfferings,
     _poolPithDriller,
     _poolPizzaFaceGastromancer,

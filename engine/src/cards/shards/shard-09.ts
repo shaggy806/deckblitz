@@ -803,6 +803,7 @@ import _poolTraxosScourgeEternal from "../pool/traxos-scourge-eternal.js";
 import _poolTreacherousPitDweller from "../pool/treacherous-pit-dweller.js";
 import _poolTrenchpost from "../pool/trenchpost.js";
 import _poolTrickeryCharm from "../pool/trickery-charm.js";
+import _poolTurfWound from "../pool/turf-wound.js";
 import _poolTurnBurn from "../pool/turn-burn.js";
 import _poolTurnTheEarth from "../pool/turn-the-earth.js";
 import _poolTwinstrike from "../pool/twinstrike.js";
@@ -1703,6 +1704,7 @@ const shard: CardShard = {
     _poolTreacherousPitDweller,
     _poolTrenchpost,
     _poolTrickeryCharm,
+    _poolTurfWound,
     _poolTurnBurn,
     _poolTurnTheEarth,
     _poolTwinstrike,

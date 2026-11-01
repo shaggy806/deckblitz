@@ -251,6 +251,7 @@ import _poolEnlightenedManiac from "../pool/enlightened-maniac.js";
 import _poolEntDraughtBasin from "../pool/ent-draught-basin.js";
 import _poolEntanglingVines from "../pool/entangling-vines.js";
 import _poolEtchedMonstrosity from "../pool/etched-monstrosity.js";
+import _poolExperimentalFrenzy from "../pool/experimental-frenzy.js";
 import _poolExperimentalOverload from "../pool/experimental-overload.js";
 import _poolFacevaulter from "../pool/facevaulter.js";
 import _poolFaithfulPikemaster from "../pool/faithful-pikemaster.js";
@@ -586,6 +587,7 @@ import _poolParadoxicalOutcome from "../pool/paradoxical-outcome.js";
 import _poolParallaxWave from "../pool/parallax-wave.js";
 import _poolParasiticStrix from "../pool/parasitic-strix.js";
 import _poolParcelbeast from "../pool/parcelbeast.js";
+import _poolPardicMiner from "../pool/pardic-miner.js";
 import _poolPatriarsSeal from "../pool/patriars-seal.js";
 import _poolPearlShard from "../pool/pearl-shard.js";
 import _poolPedanticLearning from "../pool/pedantic-learning.js";
@@ -1173,6 +1175,7 @@ const shard: CardShard = {
     _poolEntDraughtBasin,
     _poolEntanglingVines,
     _poolEtchedMonstrosity,
+    _poolExperimentalFrenzy,
     _poolExperimentalOverload,
     _poolFacevaulter,
     _poolFaithfulPikemaster,
@@ -1508,6 +1511,7 @@ const shard: CardShard = {
     _poolParallaxWave,
     _poolParasiticStrix,
     _poolParcelbeast,
+    _poolPardicMiner,
     _poolPatriarsSeal,
     _poolPearlShard,
     _poolPedanticLearning,

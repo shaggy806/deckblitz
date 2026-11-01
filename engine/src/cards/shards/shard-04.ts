@@ -176,6 +176,7 @@ import _poolDoseOfDawnglow from "../pool/dose-of-dawnglow.js";
 import _poolDoubleDown from "../pool/double-down.js";
 import _poolDoubleJump from "../pool/double-jump.js";
 import _poolDragonThroneOfTarkir from "../pool/dragon-throne-of-tarkir.js";
+import _poolDragonWhelp from "../pool/dragon-whelp.js";
 import _poolDrainpipeVermin from "../pool/drainpipe-vermin.js";
 import _poolDrakeHatchling from "../pool/drake-hatchling.js";
 import _poolDranasSilencer from "../pool/dranas-silencer.js";
@@ -717,6 +718,7 @@ import _poolTawnossWeaponry from "../pool/tawnoss-weaponry.js";
 import _poolTelJiladJustice from "../pool/tel-jilad-justice.js";
 import _poolTerisianMindbreaker from "../pool/terisian-mindbreaker.js";
 import _poolTerminate from "../pool/terminate.js";
+import _poolTerritorialDispute from "../pool/territorial-dispute.js";
 import _poolTheFiligreeSylex from "../pool/the-filigree-sylex.js";
 import _poolTheLordOfTheEagles from "../pool/the-lord-of-the-eagles.js";
 import _poolTheRani from "../pool/the-rani.js";
@@ -1028,6 +1030,7 @@ const shard: CardShard = {
     _poolDoubleDown,
     _poolDoubleJump,
     _poolDragonThroneOfTarkir,
+    _poolDragonWhelp,
     _poolDrainpipeVermin,
     _poolDrakeHatchling,
     _poolDranasSilencer,
@@ -1569,6 +1572,7 @@ const shard: CardShard = {
     _poolTelJiladJustice,
     _poolTerisianMindbreaker,
     _poolTerminate,
+    _poolTerritorialDispute,
     _poolTheFiligreeSylex,
     _poolTheLordOfTheEagles,
     _poolTheRani,

@@ -609,6 +609,7 @@ import _poolSepticRats from "../pool/septic-rats.js";
 import _poolSerraRedeemer from "../pool/serra-redeemer.js";
 import _poolServantOfVolrath from "../pool/servant-of-volrath.js";
 import _poolSethronHurloonGeneral from "../pool/sethron-hurloon-general.js";
+import _poolSewerRats from "../pool/sewer-rats.js";
 import _poolShaleskinBruiser from "../pool/shaleskin-bruiser.js";
 import _poolSheoldredTheApocalypse from "../pool/sheoldred-the-apocalypse.js";
 import _poolSilverbackApe from "../pool/silverback-ape.js";
@@ -1430,6 +1431,7 @@ const shard: CardShard = {
     _poolSerraRedeemer,
     _poolServantOfVolrath,
     _poolSethronHurloonGeneral,
+    _poolSewerRats,
     _poolShaleskinBruiser,
     _poolSheoldredTheApocalypse,
     _poolSilverbackApe,

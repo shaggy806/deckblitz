@@ -6166,6 +6166,7 @@ import _poolDragonThroneOfTarkir from "./pool/dragon-throne-of-tarkir.js";
 import _poolDragonTrainer from "./pool/dragon-trainer.js";
 import _poolDragonTurtle from "./pool/dragon-turtle.js";
 import _poolDragonTyrant from "./pool/dragon-tyrant.js";
+import _poolDragonWhelp from "./pool/dragon-whelp.js";
 import _poolDragonWhisperer from "./pool/dragon-whisperer.js";
 import _poolDragonWings from "./pool/dragon-wings.js";
 import _poolDragonbackAssault from "./pool/dragonback-assault.js";
@@ -6231,6 +6232,7 @@ import _poolDranasChosen from "./pool/dranas-chosen.js";
 import _poolDranasEmissary from "./pool/dranas-emissary.js";
 import _poolDranasSilencer from "./pool/dranas-silencer.js";
 import _poolDrannithHealer from "./pool/drannith-healer.js";
+import _poolDrannithMagistrate from "./pool/drannith-magistrate.js";
 import _poolDrannithRuins from "./pool/drannith-ruins.js";
 import _poolDrannithStinger from "./pool/drannith-stinger.js";
 import _poolDrasticRevelation from "./pool/drastic-revelation.js";
@@ -7409,6 +7411,7 @@ import _poolExperimentalArmor from "./pool/experimental-armor.js";
 import _poolExperimentalAugury from "./pool/experimental-augury.js";
 import _poolExperimentalAviator from "./pool/experimental-aviator.js";
 import _poolExperimentalConfectioner from "./pool/experimental-confectioner.js";
+import _poolExperimentalFrenzy from "./pool/experimental-frenzy.js";
 import _poolExperimentalOverload from "./pool/experimental-overload.js";
 import _poolExperimentalSynthesizer from "./pool/experimental-synthesizer.js";
 import _poolExplodingBorders from "./pool/exploding-borders.js";
@@ -16502,6 +16505,7 @@ import _poolParch from "./pool/parch.js";
 import _poolPardicArsonist from "./pool/pardic-arsonist.js";
 import _poolPardicCollaborator from "./pool/pardic-collaborator.js";
 import _poolPardicLancer from "./pool/pardic-lancer.js";
+import _poolPardicMiner from "./pool/pardic-miner.js";
 import _poolPardicSwordsmith from "./pool/pardic-swordsmith.js";
 import _poolPardicWanderer from "./pool/pardic-wanderer.js";
 import _poolParhelionIi from "./pool/parhelion-ii.js";
@@ -16933,6 +16937,7 @@ import _poolPistonFistCyclops from "./pool/piston-fist-cyclops.js";
 import _poolPistonSledge from "./pool/piston-sledge.js";
 import _poolPistusStrike from "./pool/pistus-strike.js";
 import _poolPitFight from "./pool/pit-fight.js";
+import _poolPitImp from "./pool/pit-imp.js";
 import _poolPitKeeper from "./pool/pit-keeper.js";
 import _poolPitOfOfferings from "./pool/pit-of-offerings.js";
 import _poolPitRaptor from "./pool/pit-raptor.js";
@@ -20178,6 +20183,7 @@ import _poolSeveredStrands from "./pool/severed-strands.js";
 import _poolSevinneTheChronoclasm from "./pool/sevinne-the-chronoclasm.js";
 import _poolSevinnesReclamation from "./pool/sevinnes-reclamation.js";
 import _poolSewerCrocodile from "./pool/sewer-crocodile.js";
+import _poolSewerRats from "./pool/sewer-rats.js";
 import _poolSewerShambler from "./pool/sewer-shambler.js";
 import _poolSewerVeillanceCam from "./pool/sewer-veillance-cam.js";
 import _poolSewerdreg from "./pool/sewerdreg.js";
@@ -23296,6 +23302,7 @@ import _poolTerritorialAllosaurus from "./pool/territorial-allosaurus.js";
 import _poolTerritorialBaloth from "./pool/territorial-baloth.js";
 import _poolTerritorialBoar from "./pool/territorial-boar.js";
 import _poolTerritorialBruntar from "./pool/territorial-bruntar.js";
+import _poolTerritorialDispute from "./pool/territorial-dispute.js";
 import _poolTerritorialHammerskull from "./pool/territorial-hammerskull.js";
 import _poolTerritorialHellkite from "./pool/territorial-hellkite.js";
 import _poolTerritorialKavu from "./pool/territorial-kavu.js";
@@ -24568,6 +24575,7 @@ import _poolTurbulentSprings from "./pool/turbulent-springs.js";
 import _poolTurbulentSteppe from "./pool/turbulent-steppe.js";
 import _poolTurbulentWetlands from "./pool/turbulent-wetlands.js";
 import _poolTurbulentWilderness from "./pool/turbulent-wilderness.js";
+import _poolTurfWound from "./pool/turf-wound.js";
 import _poolTurnAgainst from "./pool/turn-against.js";
 import _poolTurnAside from "./pool/turn-aside.js";
 import _poolTurnBurn from "./pool/turn-burn.js";
@@ -26563,6 +26571,7 @@ import _poolWitheringBoon from "./pool/withering-boon.js";
 import _poolWitheringCurse from "./pool/withering-curse.js";
 import _poolWitheringHex from "./pool/withering-hex.js";
 import _poolWitheringTorment from "./pool/withering-torment.js";
+import _poolWitheringWisps from "./pool/withering-wisps.js";
 import _poolWitherscaleWurm from "./pool/witherscale-wurm.js";
 import _poolWithinRange from "./pool/within-range.js";
 import _poolWithoutWeakness from "./pool/without-weakness.js";
@@ -33862,6 +33871,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDragonTrainer,
   _poolDragonTurtle,
   _poolDragonTyrant,
+  _poolDragonWhelp,
   _poolDragonWhisperer,
   _poolDragonWings,
   _poolDragonbackAssault,
@@ -33927,6 +33937,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDranasEmissary,
   _poolDranasSilencer,
   _poolDrannithHealer,
+  _poolDrannithMagistrate,
   _poolDrannithRuins,
   _poolDrannithStinger,
   _poolDrasticRevelation,
@@ -35105,6 +35116,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolExperimentalAugury,
   _poolExperimentalAviator,
   _poolExperimentalConfectioner,
+  _poolExperimentalFrenzy,
   _poolExperimentalOverload,
   _poolExperimentalSynthesizer,
   _poolExplodingBorders,
@@ -44198,6 +44210,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPardicArsonist,
   _poolPardicCollaborator,
   _poolPardicLancer,
+  _poolPardicMiner,
   _poolPardicSwordsmith,
   _poolPardicWanderer,
   _poolParhelionIi,
@@ -44629,6 +44642,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPistonSledge,
   _poolPistusStrike,
   _poolPitFight,
+  _poolPitImp,
   _poolPitKeeper,
   _poolPitOfOfferings,
   _poolPitRaptor,
@@ -47874,6 +47888,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSevinneTheChronoclasm,
   _poolSevinnesReclamation,
   _poolSewerCrocodile,
+  _poolSewerRats,
   _poolSewerShambler,
   _poolSewerVeillanceCam,
   _poolSewerdreg,
@@ -50992,6 +51007,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTerritorialBaloth,
   _poolTerritorialBoar,
   _poolTerritorialBruntar,
+  _poolTerritorialDispute,
   _poolTerritorialHammerskull,
   _poolTerritorialHellkite,
   _poolTerritorialKavu,
@@ -52264,6 +52280,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTurbulentSteppe,
   _poolTurbulentWetlands,
   _poolTurbulentWilderness,
+  _poolTurfWound,
   _poolTurnAgainst,
   _poolTurnAside,
   _poolTurnBurn,
@@ -54259,6 +54276,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolWitheringCurse,
   _poolWitheringHex,
   _poolWitheringTorment,
+  _poolWitheringWisps,
   _poolWitherscaleWurm,
   _poolWithinRange,
   _poolWithoutWeakness,
@@ -61571,6 +61589,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/dragon-trainer": _poolDragonTrainer,
   "pool/dragon-turtle": _poolDragonTurtle,
   "pool/dragon-tyrant": _poolDragonTyrant,
+  "pool/dragon-whelp": _poolDragonWhelp,
   "pool/dragon-whisperer": _poolDragonWhisperer,
   "pool/dragon-wings": _poolDragonWings,
   "pool/dragonback-assault": _poolDragonbackAssault,
@@ -61636,6 +61655,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/dranas-emissary": _poolDranasEmissary,
   "pool/dranas-silencer": _poolDranasSilencer,
   "pool/drannith-healer": _poolDrannithHealer,
+  "pool/drannith-magistrate": _poolDrannithMagistrate,
   "pool/drannith-ruins": _poolDrannithRuins,
   "pool/drannith-stinger": _poolDrannithStinger,
   "pool/drastic-revelation": _poolDrasticRevelation,
@@ -62814,6 +62834,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/experimental-augury": _poolExperimentalAugury,
   "pool/experimental-aviator": _poolExperimentalAviator,
   "pool/experimental-confectioner": _poolExperimentalConfectioner,
+  "pool/experimental-frenzy": _poolExperimentalFrenzy,
   "pool/experimental-overload": _poolExperimentalOverload,
   "pool/experimental-synthesizer": _poolExperimentalSynthesizer,
   "pool/exploding-borders": _poolExplodingBorders,
@@ -71907,6 +71928,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/pardic-arsonist": _poolPardicArsonist,
   "pool/pardic-collaborator": _poolPardicCollaborator,
   "pool/pardic-lancer": _poolPardicLancer,
+  "pool/pardic-miner": _poolPardicMiner,
   "pool/pardic-swordsmith": _poolPardicSwordsmith,
   "pool/pardic-wanderer": _poolPardicWanderer,
   "pool/parhelion-ii": _poolParhelionIi,
@@ -72338,6 +72360,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/piston-sledge": _poolPistonSledge,
   "pool/pistus-strike": _poolPistusStrike,
   "pool/pit-fight": _poolPitFight,
+  "pool/pit-imp": _poolPitImp,
   "pool/pit-keeper": _poolPitKeeper,
   "pool/pit-of-offerings": _poolPitOfOfferings,
   "pool/pit-raptor": _poolPitRaptor,
@@ -75583,6 +75606,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/sevinne-the-chronoclasm": _poolSevinneTheChronoclasm,
   "pool/sevinnes-reclamation": _poolSevinnesReclamation,
   "pool/sewer-crocodile": _poolSewerCrocodile,
+  "pool/sewer-rats": _poolSewerRats,
   "pool/sewer-shambler": _poolSewerShambler,
   "pool/sewer-veillance-cam": _poolSewerVeillanceCam,
   "pool/sewerdreg": _poolSewerdreg,
@@ -78701,6 +78725,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/territorial-baloth": _poolTerritorialBaloth,
   "pool/territorial-boar": _poolTerritorialBoar,
   "pool/territorial-bruntar": _poolTerritorialBruntar,
+  "pool/territorial-dispute": _poolTerritorialDispute,
   "pool/territorial-hammerskull": _poolTerritorialHammerskull,
   "pool/territorial-hellkite": _poolTerritorialHellkite,
   "pool/territorial-kavu": _poolTerritorialKavu,
@@ -79973,6 +79998,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/turbulent-steppe": _poolTurbulentSteppe,
   "pool/turbulent-wetlands": _poolTurbulentWetlands,
   "pool/turbulent-wilderness": _poolTurbulentWilderness,
+  "pool/turf-wound": _poolTurfWound,
   "pool/turn-against": _poolTurnAgainst,
   "pool/turn-aside": _poolTurnAside,
   "pool/turn-burn": _poolTurnBurn,
@@ -81968,6 +81994,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/withering-curse": _poolWitheringCurse,
   "pool/withering-hex": _poolWitheringHex,
   "pool/withering-torment": _poolWitheringTorment,
+  "pool/withering-wisps": _poolWitheringWisps,
   "pool/witherscale-wurm": _poolWitherscaleWurm,
   "pool/within-range": _poolWithinRange,
   "pool/without-weakness": _poolWithoutWeakness,

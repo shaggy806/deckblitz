@@ -839,6 +839,7 @@ import _poolWindShear from "../pool/wind-shear.js";
 import _poolWindbornMuse from "../pool/windborn-muse.js";
 import _poolWingsOfTheGuard from "../pool/wings-of-the-guard.js";
 import _poolWirewoodLodge from "../pool/wirewood-lodge.js";
+import _poolWitheringWisps from "../pool/withering-wisps.js";
 import _poolWitnessOfTheAges from "../pool/witness-of-the-ages.js";
 import _poolWormfangTurtle from "../pool/wormfang-turtle.js";
 import _poolWrathfulJailbreaker from "../pool/wrathful-jailbreaker.js";
@@ -1715,6 +1716,7 @@ const shard: CardShard = {
     _poolWindbornMuse,
     _poolWingsOfTheGuard,
     _poolWirewoodLodge,
+    _poolWitheringWisps,
     _poolWitnessOfTheAges,
     _poolWormfangTurtle,
     _poolWrathfulJailbreaker,
