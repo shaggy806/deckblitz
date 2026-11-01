@@ -86,6 +86,15 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2: who may look at what** (2026-11-01, `fa44d4209`;
+  `zone:visibility-extensions`, partly) — `StaticAbility.visibility` read by `viewFor` (hands revealed,
+  library tops revealed, face-down creatures, a look at your own top card) and the
+  `look-at-library-top` effect; 5 freed. Telepathy, Wandering Eye, Wizened Snitches, Keeper of the
+  Lens, Found Footage, Lumbering Laundry, Glowcap Lantern, Mishra's Bauble, Merfolk Observer, Peek.
+- **Need-keys Phase 2: a trigger's recipient as a reference** (2026-11-01, `1e88631ab`;
+  `trigger:trigger-recipient-ref`, `trigger:becomes-blocked-attacked-recipient`) — the
+  `"trigger-recipient"` `EffectTargetRef`, `DelayedTrigger.recipient` (603.7c); 2 freed. Ohran Viper,
+  Lowland Basilisk, Sosuke, Son of Seshiro, Permeating Mass, Obelisk Spider, Neko-Te, Rakdos Roustabout.
 - **Need-keys Phase 2: statics acting on a player** (2026-11-01, `4c637137c`; two keys and
   `trigger:enchanted-player-dealt-damage`) — `"enchanted-player"` on `controlledBy`, replacements and
   triggers, `loseCreatureTypes`, `cantWinGame`, `opponentsCantLoseGame`; 3 freed. Curse of Death's

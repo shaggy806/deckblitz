@@ -396,14 +396,16 @@ section keeps only what to do next.
   13 needs per-player targets, Bane Alley Broker its looker following control, Treasure Nabber
   `gain-control` until your next end step, Spinning Darkness an alternative cost, Bösium Strip a cast
   from the graveyard's top, Phyrexian Grimoire a choice among the top two, Curses of Surveillance and
-  Thirst `amount:curses-attached-to-player`). **Those families' count is on `cards:needs -- --stale`:
-  it waits for the authoring sweep**
+  Thirst `amount:curses-attached-to-player`), and a trigger's recipient as a reference and who may
+  look at what (`"trigger-recipient"`, `DelayedTrigger.recipient`, `StaticAbility.visibility`,
+  `look-at-library-top`; 7 freed, 17 proving cards — Sen Triplets on the stale list needs its "this
+  turn" hand reveal and playing from another's hand). **About 1210 freed cards wait for the authoring
+  sweep**
   (`cards:needs -- --stale`); the user authors them in one sweep once the reasonable keys are built.
   Cloud sessions are building `keyword:hexproof-from-colors`, the combat-restriction second group,
   `effect:prevent-next-n-damage-to-you`, the cascade/sunburst grants to spells,
-  `cost:kicker-nonmana-cost` and `cost:alt-cost-discard-cards`. Being built:
-  `trigger:trigger-recipient-ref`, `zone:visibility-extensions`. Next unclaimed:
-  `mechanic:control-attack-block-choices` (10, a design of its own).
+  `cost:kicker-nonmana-cost` and `cost:alt-cost-discard-cards`. Next unclaimed:
+  `mechanic:control-attack-block-choices` (10, a design of its own), then `--greedy --groups`.
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next

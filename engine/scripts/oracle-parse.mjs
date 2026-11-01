@@ -8841,10 +8841,9 @@ function itOf(triggers) {
   // "That Vehicle" / "that Mount" (read as "it"): the permanent crewed or
   // saddled, the trigger object.
   if (triggers.every((t) => t.on === "crews-or-saddles")) return "trigger-object";
-  const objectEvents = ["enters-battlefield", "dies", "attacks", "blocks", "becomes-blocked", "deals-combat-damage-to-player", "tapped-for-mana"];
   // "That creature": what the damage was dealt to.
   if (triggers.every((t) => t.on === "deals-damage" && t.to === "creature")) return "trigger-recipient";
-  const objectEvents = ["enters-battlefield", "dies", "attacks", "blocks", "becomes-blocked", "deals-combat-damage-to-player"];
+  const objectEvents = ["enters-battlefield", "dies", "attacks", "blocks", "becomes-blocked", "deals-combat-damage-to-player", "tapped-for-mana"];
   if (triggers.every((t) => t.who === "self" && objectEvents.includes(t.on))) return "source";
   // The permanent a spell or ability targeted ("that creature" — Monk Gyatso).
   const othersEvents = [...objectEvents, "becomes-target"];
