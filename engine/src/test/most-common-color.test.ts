@@ -5,6 +5,8 @@
  */
 import { describe, expect, it } from "vitest";
 
+import { changeDefinitionText } from "../text-change.js";
+
 import {
   A,
   B,
@@ -15,6 +17,7 @@ import {
   lands,
   pt,
   ref,
+  registryOf,
   settle,
   spawn,
   table,
@@ -51,6 +54,15 @@ describe("Ruham Djinn: a color among all permanents, ties counting", () => {
     expect(pt(game, djinn)).toEqual({ power: 3, toughness: 3 });
     spawn(game, "Grizzly Bears", B);
     expect(pt(game, djinn)).toEqual({ power: 5, toughness: 5 });
+  });
+});
+
+describe("a changed color word (rule 612)", () => {
+  it("reads the color the Djinn's text now says", () => {
+    const { game } = table();
+    const def = changeDefinitionText(registryOf(game).get("Ruham Djinn"), [{ from: "white", to: "green" }]);
+    const condition = def.static[0].condition;
+    expect(condition).toEqual({ kind: "most-common-color", color: "G" });
   });
 });
 
