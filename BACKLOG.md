@@ -327,14 +327,24 @@ section keeps only what to do next.
   `counters-distributed` among permanents chosen on resolution (608.2d); 12 freed, 12 proving
   cards), and enlist with who crewed what (`StaticAbility.enlist` asked after attackers tap,
   `crewedThisTurn`, `crews-or-saddles`, `cant-crew`; 16 freed, 10 proving cards, four manual
-  checks). **837 freed cards wait for the authoring sweep** (`cards:needs -- --stale`); the user
+  checks); then, overnight (2026-10-31, `/build-family overnight`, three local agents with two
+  families each): enter-as characteristics and a spell copy's exceptions and gains
+  (`EnterTypes.addTypes`/`setColors`/`basePt`/`keywords`/`ifCreature`, `copy-spell`'s `except` and
+  `gains`; 15 freed, 8 proving cards), the card discarded to pay a cost and a granted ability's
+  granter (`LastKnownRefs.discarded`/`granter`; 15 freed, 8 proving cards — Fishing Pole and Hold
+  for Ransom left), and several cards into their owners' libraries, owner-ordered, with graveyard
+  cards shuffled in by filter or target (`put-on-libraries`; 9 freed, 13 proving cards — Riptide
+  Gearhulk on a narrow key). **913 freed cards wait for the authoring sweep** (`cards:needs -- --stale`); the user
   authors them in one sweep once the reasonable keys are built. Cloud sessions are building
   `keyword:hexproof-from-colors`, the combat-restriction second group,
   `effect:prevent-next-n-damage-to-you`, the cascade/sunburst grants to spells,
-  `cost:kicker-nonmana-cost` and `cost:alt-cost-discard-cards`. Next unclaimed:
-  `decision:library-ordering` (12), `decision:choose-from-zone-extensions` (12),
-  `effect:put-onto-battlefield-options`' entry riders (12), `effect:sacrificed-object-lki` (11),
-  `effect:text-change-color-or-land-words` (11), `condition:filter-this-turn-history` (11).
+  `cost:kicker-nonmana-cost` and `cost:alt-cost-discard-cards`. Local agents are building
+  `effect:this-way-results` with `effect:look-and-choose-second-pick`,
+  `decision:choose-from-zone-extensions` with `decision:name-a-card`, and `cost:sacrifice-multiple`
+  with `cost:reveal-card-as-additional-cost`. Next unclaimed:
+  `effect:text-change-color-or-land-words` (11), `condition:filter-this-turn-history` (11),
+  `trigger:discards-extensions` (11), `effect:target-spec-additions` (11),
+  `static:grant-to-cards-outside-battlefield` (11).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next

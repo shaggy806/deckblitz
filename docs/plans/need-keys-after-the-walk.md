@@ -742,6 +742,11 @@ missing. Re-run `--greedy` for Phase 2's order.
   `effect:prevention-divided`: the `prevent-damage-divided` effect, a shield per target of its
   share (601.2d, 615.7); `effect:prevent-next-n-damage-to-you` was already `damage-rule`'s
   `players: "you"` with an amount (2 keys, 11 freed, 5 proving cards).
+- **2026-10-31 (evening): three local agents, two families each** (`/build-family overnight`) —
+  enter-as characteristics and a spell copy's exceptions and gains (7 keys, 15 freed, 8 proving
+  cards); the card discarded to pay a cost and a granted ability's granter (4 keys, 15 freed, 8
+  proving cards); several cards into their owners' libraries, owner-ordered, and graveyard cards
+  shuffled in by filter or target (5 keys, 9 freed, 13 proving cards).
 
 ## Rough size
 

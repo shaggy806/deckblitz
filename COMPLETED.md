@@ -86,6 +86,42 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2: what a permanent is as it enters, beyond its own** (2026-10-31, `37782e895`;
+  `effect:return-with-added-color`, `effect:enter-as-additional-card-type`,
+  `effect:reanimate-as-animated-creature`, `effect:add-subtypes-if-creature-on-entry`) —
+  `EnterTypes`' `addTypes`, `setColors`, `basePt`, `keywords` and `ifCreature`, and
+  `put-onto-battlefield`'s own `enterAs`, one lasting effect in place before anything judges it
+  (rules 611.2c, 614.12); 8 freed. Rise from the Grave, Relive the Past, Excava, the Risen Past,
+  Lim-Dûl the Necromancer.
+- **Need-keys Phase 2: a spell's copy with exceptions and gains** (2026-10-31, `54b8edbba`;
+  `effect:copy-spell-except-nonlegendary`, `effect:copy-spell-add-types`,
+  `effect:copy-spell-grants`) — `copy-spell`'s `except` as copiable values the token keeps (707.9b,
+  707.10f) and `gains`, kept by the permanent it becomes (400.7a), `ifPermanent` (110.4b); 7 freed.
+  Double Major, Tawnos, the Toymaker, Donal, Herald of Wings, Nalfeshnee.
+- **Need-keys Phase 2: the card discarded to pay a cost** (2026-10-31, `568a9a5e2`;
+  `effect:cost-discarded-card-ref`) — `LastKnownRefs.discarded` for every cost discard (602.2b,
+  601.2h), read by the `"discarded"` amount ref and condition; the scaffolder reads "Discard a card"
+  ability costs; 8 freed. Volrath the Fallen, Moria Scavenger, Grab the Prize, Stormscale Anarch.
+- **Need-keys Phase 2: a granted ability naming its granter** (2026-10-31, `1d4cd446b`;
+  `cost:granted-ability-sacrifice-granter`, `effect:granted-activated-refers-to-granter`,
+  `effect:granted-trigger-refers-to-granter`) — `LastKnownRefs.granter` and the `"granter"`
+  reference (201.5a; acted on while the same object, 400.7, read from LKI once gone, 608.2h),
+  `from: "granter"` damage, `sacrifice: "granter"`; 7 freed. Ninja's Kunai, Trusty Boomerang,
+  Archery Training, Spare Dagger. Fishing Pole (tap the granter) and Hold for Ransom (the granter's
+  controller) left.
+- **Need-keys Phase 2: several cards into their owners' libraries, each owner ordering**
+  (2026-10-31, `2c67c7482`; `decision:owner-orders-library-placements`,
+  `effect:look-at-target-player-library-reorder`, `effect:put-on-top-of-library-all`) — the
+  `put-on-libraries` effect (401.4, 101.4) on scry's order decision, `owner-chooses` top or bottom,
+  look-and-choose's `chooser: "that-player"` over a library; 4 freed. Plow Under, Forever Young,
+  Harmonic Convergence, Aetherspouts, Ransack, Dimir Machinations, Tahngarth's Glare. Riptide
+  Gearhulk's "Nth from the top together" got a narrow key.
+- **Need-keys Phase 2: graveyard cards shuffled into a library by filter or target** (2026-10-31,
+  `b54a0041c`; `effect:shuffle-graveyard-filter-into-library`,
+  `effect:shuffle-graveyard-targets-into-library`) — `shuffle-graveyard-into-library`'s `filter`,
+  `put-on-libraries`' `position: "shuffle"` and `withSource`, the `cards-shuffled-into-library`
+  event and `"shuffled-into-library"` this-way kind; 5 freed. Elixir, Repopulate, Barishi, Turn the
+  Earth, Serene Remembrance, Perpetual Timepiece.
 - **Need-keys Phase 2: alternative costs paid from the hand** (2026-10-31;
   `cost:alt-cost-discard-cards`, `cost:alt-cost-exile-card-sets-x`, `cost:alt-cost-reveal-hand`) —
   `alternativeCost.discard` (with `others`), `exileFromHand.manaValueX` (X from the exiled card,
