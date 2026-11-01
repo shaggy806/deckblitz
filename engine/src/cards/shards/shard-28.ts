@@ -466,6 +466,7 @@ import _poolMoriaMarauder from "../pool/moria-marauder.js";
 import _poolMortalsArdor from "../pool/mortals-ardor.js";
 import _poolMotivatedPony from "../pool/motivated-pony.js";
 import _poolMouth from "../pool/mouth.js";
+import _poolMunghaWurm from "../pool/mungha-wurm.js";
 import _poolMurasaBehemoth from "../pool/murasa-behemoth.js";
 import _poolMurderInvestigation from "../pool/murder-investigation.js";
 import _poolMurderousRedcap from "../pool/murderous-redcap.js";
@@ -1352,6 +1353,7 @@ const shard: CardShard = {
     _poolMortalsArdor,
     _poolMotivatedPony,
     _poolMouth,
+    _poolMunghaWurm,
     _poolMurasaBehemoth,
     _poolMurderInvestigation,
     _poolMurderousRedcap,

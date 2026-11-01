@@ -87,6 +87,7 @@ import _poolBlowflyInfestation from "../pool/blowfly-infestation.js";
 import _poolBoarUmbra from "../pool/boar-umbra.js";
 import _poolBogHoodlums from "../pool/bog-hoodlums.js";
 import _poolBogbrewWitch from "../pool/bogbrew-witch.js";
+import _poolBondedConstruct from "../pool/bonded-construct.js";
 import _poolBonecrusherGiant from "../pool/bonecrusher-giant.js";
 import _poolBootsOfSpeed from "../pool/boots-of-speed.js";
 import _poolBortukBonerattle from "../pool/bortuk-bonerattle.js";
@@ -968,6 +969,7 @@ const shard: CardShard = {
     _poolBoarUmbra,
     _poolBogHoodlums,
     _poolBogbrewWitch,
+    _poolBondedConstruct,
     _poolBonecrusherGiant,
     _poolBootsOfSpeed,
     _poolBortukBonerattle,

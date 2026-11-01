@@ -754,6 +754,7 @@ import _poolStingingLicid from "../pool/stinging-licid.js";
 import _poolStinkdrinkerBandit from "../pool/stinkdrinker-bandit.js";
 import _poolStoneGiant from "../pool/stone-giant.js";
 import _poolStoneskin from "../pool/stoneskin.js";
+import _poolStorageMatrix from "../pool/storage-matrix.js";
 import _poolStormTheFestival from "../pool/storm-the-festival.js";
 import _poolStranglerootGeist from "../pool/strangleroot-geist.js";
 import _poolStreamOfAcid from "../pool/stream-of-acid.js";
@@ -1681,6 +1682,7 @@ const shard: CardShard = {
     _poolStinkdrinkerBandit,
     _poolStoneGiant,
     _poolStoneskin,
+    _poolStorageMatrix,
     _poolStormTheFestival,
     _poolStranglerootGeist,
     _poolStreamOfAcid,

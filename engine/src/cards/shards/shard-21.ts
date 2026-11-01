@@ -798,6 +798,7 @@ import _poolWhiskerquillScribe from "../pool/whiskerquill-scribe.js";
 import _poolWhiteDragon from "../pool/white-dragon.js";
 import _poolWillOfTheSultai from "../pool/will-of-the-sultai.js";
 import _poolWillbender from "../pool/willbender.js";
+import _poolWinterMoon from "../pool/winter-moon.js";
 import _poolWintermoonMesa from "../pool/wintermoon-mesa.js";
 import _poolWirewoodHerald from "../pool/wirewood-herald.js";
 import _poolWithercrown from "../pool/withercrown.js";
@@ -1633,6 +1634,7 @@ const shard: CardShard = {
     _poolWhiteDragon,
     _poolWillOfTheSultai,
     _poolWillbender,
+    _poolWinterMoon,
     _poolWintermoonMesa,
     _poolWirewoodHerald,
     _poolWithercrown,

@@ -143,6 +143,7 @@ import _poolCorneredByBlackMages from "../pool/cornered-by-black-mages.js";
 import _poolCosmicHunger from "../pool/cosmic-hunger.js";
 import _poolCosmiumBlast from "../pool/cosmium-blast.js";
 import _poolCountrysideCrusher from "../pool/countryside-crusher.js";
+import _poolCravenHulk from "../pool/craven-hulk.js";
 import _poolCrawlFromTheCellar from "../pool/crawl-from-the-cellar.js";
 import _poolCrossbowInfantry from "../pool/crossbow-infantry.js";
 import _poolCrossroadsVillage from "../pool/crossroads-village.js";
@@ -704,6 +705,7 @@ import _poolStarCharter from "../pool/star-charter.js";
 import _poolStarfieldShepherd from "../pool/starfield-shepherd.js";
 import _poolStarfieldVocalist from "../pool/starfield-vocalist.js";
 import _poolStartFinish from "../pool/start-finish.js";
+import _poolStaticOrb from "../pool/static-orb.js";
 import _poolSteamcoreScholar from "../pool/steamcore-scholar.js";
 import _poolSteampathCharger from "../pool/steampath-charger.js";
 import _poolStockpilingCelebrant from "../pool/stockpiling-celebrant.js";
@@ -1013,6 +1015,7 @@ const shard: CardShard = {
     _poolCosmicHunger,
     _poolCosmiumBlast,
     _poolCountrysideCrusher,
+    _poolCravenHulk,
     _poolCrawlFromTheCellar,
     _poolCrossbowInfantry,
     _poolCrossroadsVillage,
@@ -1574,6 +1577,7 @@ const shard: CardShard = {
     _poolStarfieldShepherd,
     _poolStarfieldVocalist,
     _poolStartFinish,
+    _poolStaticOrb,
     _poolSteamcoreScholar,
     _poolSteampathCharger,
     _poolStockpilingCelebrant,

@@ -495,6 +495,7 @@ import _poolMirrorStyleMaster from "../pool/mirror-style-master.js";
 import _poolMistSyndicateNaga from "../pool/mist-syndicate-naga.js";
 import _poolMistformSeaswift from "../pool/mistform-seaswift.js";
 import _poolMobVerdict from "../pool/mob-verdict.js";
+import _poolMoggFlunkies from "../pool/mogg-flunkies.js";
 import _poolMoonsilverSpear from "../pool/moonsilver-spear.js";
 import _poolMordorMuster from "../pool/mordor-muster.js";
 import _poolMorskaUnderseaSleuth from "../pool/morska-undersea-sleuth.js";
@@ -1392,6 +1393,7 @@ const shard: CardShard = {
     _poolMistSyndicateNaga,
     _poolMistformSeaswift,
     _poolMobVerdict,
+    _poolMoggFlunkies,
     _poolMoonsilverSpear,
     _poolMordorMuster,
     _poolMorskaUnderseaSleuth,

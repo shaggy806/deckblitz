@@ -667,6 +667,7 @@ import _poolSlaughterPriestOfMogis from "../pool/slaughter-priest-of-mogis.js";
 import _poolSleekSchooner from "../pool/sleek-schooner.js";
 import _poolSmogElemental from "../pool/smog-elemental.js";
 import _poolSmokeBomb from "../pool/smoke-bomb.js";
+import _poolSmoke from "../pool/smoke.js";
 import _poolSmolderingCrater from "../pool/smoldering-crater.js";
 import _poolSnappingGnarlid from "../pool/snapping-gnarlid.js";
 import _poolSnowVilliers from "../pool/snow-villiers.js";
@@ -1522,6 +1523,7 @@ const shard: CardShard = {
     _poolSleekSchooner,
     _poolSmogElemental,
     _poolSmokeBomb,
+    _poolSmoke,
     _poolSmolderingCrater,
     _poolSnappingGnarlid,
     _poolSnowVilliers,
