@@ -9,6 +9,7 @@ title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLET
   `restDestination` split (Cultivate, Kodama's Reach) asks "Choose up to 2 cards" without saying
   that the one picked goes onto the battlefield and the other to the hand. Fix: move those cards
   to `search-library.instead` with `pick: "one"` (built 2026-10-31), which asks its own prompt.
+  Final Parting waits on the same thing (its split search just says "Choose 2 cards").
 
 - **A processor's move from exile reads as "takes"** (found 2026-10-31). When a processor puts an
   opponent's exiled card into its owner's graveyard (Wasteland Strangler, `look-and-choose` with

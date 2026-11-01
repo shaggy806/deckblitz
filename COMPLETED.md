@@ -86,6 +86,20 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2: one choice across zones, or one card a slot** (2026-10-31, `7bac8a12a`;
+  `decision:choose-from-zone-extensions`, `decision:choose-from-hand-and-graveyard`,
+  `decision:choose-from-hand-and-library-top`, `effect:look-and-choose-one-each`) —
+  look-and-choose's `together` (a search's set rule, one pick a slot, a slot's prompt `text`),
+  `discard-chosen`'s `alsoFrom` (the target's graveyard, or the library's revealed top card) and
+  `destination: "library-bottom"`, `return-from-graveyard`'s `count` as an amount; on the existing
+  `choose-from-zone` prompt, two manual checks; 7 freed. Atraxa, Grand Unifier, Harper Recruiter,
+  Agonizing Remorse, Psychotic Episode, Worldsoul's Rage (the bots' World Shaper deck drops its
+  stand-in for it).
+- **Need-keys Phase 2: a card name chosen with a player, that player's draws revealed**
+  (2026-10-31, `c4888f515`; `decision:name-a-card`, `trigger:chosen-player-draws-named-card`) —
+  on `choose-card-name`: the `revealsDraws: "chosen-player"` static, a `draws` trigger's filter
+  reading the permanent (`chosenName`); the scaffolder reads Booby Trap, Cabal Therapy, Predict and
+  sacrifice-only flashback; 8 freed. Booby Trap, Cabal Therapy, Predict.
 - **Need-keys Phase 2: cards put into a hand this way** (2026-10-31, `cb777132b`;
   `effect:put-into-hand-this-way`, `effect:exiled-this-way-to-hand`, `effect:return-milled-this-way`)
   — the `"put-into-hand"` this-way kind (never a draw), read off `GameObject.handArrivalSeq`, and

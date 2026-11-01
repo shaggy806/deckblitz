@@ -338,17 +338,20 @@ section keeps only what to do next.
   permission (the `"put-into-hand"` this-way kind, `move-exiled-this-way`, look-and-choose's
   `playable` and `leftover: "exile"`; 10 freed, 13 proving cards), and sacrifice costs matched
   against their source with the card revealed for a cost (`isSource`/`hostOfSource`/`ofChosenType`
-  in a cost, the `"revealed"` amount, `reveal.shareColor`; 6 freed, 15 proving cards).
-  **919 freed cards wait for the authoring sweep** (`cards:needs -- --stale`); the user
+  in a cost, the `"revealed"` amount, `reveal.shareColor`; 6 freed, 15 proving cards), and one
+  choice across zones with a card name chosen with a player (look-and-choose's `together`,
+  `discard-chosen`'s `alsoFrom`, `revealsDraws: "chosen-player"`; 15 freed, 8 proving cards, two
+  manual checks — Selective Adaptation on the stale list is still open: one card for two keywords?).
+  **944 freed cards wait for the authoring sweep** (`cards:needs -- --stale`); the user
   authors them in one sweep once the reasonable keys are built. Cloud sessions are building
   `keyword:hexproof-from-colors`, the combat-restriction second group,
   `effect:prevent-next-n-damage-to-you`, the cascade/sunburst grants to spells,
   `cost:kicker-nonmana-cost` and `cost:alt-cost-discard-cards`. Local agents are building
-  `decision:choose-from-zone-extensions` with `decision:name-a-card`,
-  `effect:target-spec-additions` with `condition:filter-attachments`, and
-  `condition:filter-this-turn-history` with `trigger:discards-extensions`. Next unclaimed:
-  `effect:text-change-color-or-land-words` (11), `static:grant-to-cards-outside-battlefield` (11),
-  `static:pt-per-amount` (10), `static:untap-step-limit` (10).
+  `effect:target-spec-additions` with `condition:filter-attachments`,
+  `condition:filter-this-turn-history` with `trigger:discards-extensions`, and
+  `effect:text-change-color-or-land-words` with `effect:add-subtype`. Next unclaimed:
+  `static:grant-to-cards-outside-battlefield` (11), `static:pt-per-amount` (10),
+  `static:untap-step-limit` (10), `cost:target-controller-graveyard-reduction` (10).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next

@@ -749,7 +749,8 @@ missing. Re-run `--greedy` for Phase 2's order.
   shuffled in by filter or target (5 keys, 9 freed, 13 proving cards); then cards put into a hand
   this way and a look's pick exiled with a play permission (8 keys, 10 freed, 13 proving cards),
   and sacrifice costs matched against their source and the card revealed for a cost (6 keys, 6
-  freed, 15 proving cards).
+  freed, 15 proving cards); one choice across zones and a card name chosen with a player (6 keys,
+  15 freed, 8 proving cards).
 
 ## Rough size
 
