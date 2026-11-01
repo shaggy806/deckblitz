@@ -59,7 +59,8 @@ export const chooseFromZone = defineDecision({
       // cost's exile from the hand is asked as a plain exile.
       ...(awaiting.behold !== undefined && awaiting.behold.fromHand !== true ? { behold: true as const } : {}),
       // The Leylines' "begin the game with it on the battlefield" (rule 103.6a).
-      ...(awaiting.openingHand !== undefined ? { openingHand: true as const } : {}),
+      // …and the companion revealed before the hands are drawn (rule 103.2b).
+      ...(awaiting.openingHand !== undefined || awaiting.companion !== undefined ? { openingHand: true as const } : {}),
       // "Reveals three cards from their hand and you choose one of them".
       ...(awaiting.thenChooseFromRevealed !== undefined ? { revealForChoice: true as const } : {}),
     },

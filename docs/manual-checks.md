@@ -5737,6 +5737,36 @@ engine terms. A second thing to check is a second test.
 - **Do:** Cast Black Vise and choose one of the three opponents.
 - **Expect:** The banner reads "Black Vise — Choose an opponent" with a button per opponent and none for you. Once it's on the battlefield, its tile is flagged "chose" and that player's name, in their seat colour.
 
+## Companion (2026-11-01, need-keys Phase 2: build-family)
+
+### Companion: choose one to reveal before the game
+- **Do:** In the popup, pick Keruga and confirm.
+- **Expect:** The popup reads "You may reveal a companion: once this game, you can pay to put it into your hand", offers Keruga and Kaheera, and you can pick only one. Then your panel has a "companion" link and a "To hand" button, the log says you reveal Keruga as your companion, and Kaheera stays in your sideboard.
+
+### Companion: declining reveals nothing
+- **Do:** In the popup, click "Reveal none".
+- **Expect:** No "companion" link on your panel and no "To hand" button. Keruga is still counted in "sideboard 1".
+
+### Companion: pay to put it into your hand
+- **Do:** Click "To hand" on your panel.
+- **Expect:** Three of your four Forests tap at once and Keruga is in your hand, with nothing on the stack and no one given a chance to respond. The "companion" link and the "To hand" button are gone, and the log says you put your companion into your hand.
+
+### Companion: not without the mana
+- **Do:** Look at your panel.
+- **Expect:** The "companion" link is there, with two Forests no "To hand" button.
+
+### Companion: only with the stack empty in your main phase
+- **Do:** Look at your panel, at your beginning of combat. Then pass priority until your postcombat main.
+- **Expect:** No "To hand" button in combat. It's there again in the postcombat main.
+
+### Companion: every player can see it
+- **Do:** Switch to Bob and click "companion" on Alice's panel.
+- **Expect:** A popup titled "Alice's companion" shows Keruga. Bob's own panel has no "To hand" button, and neither does Alice's while you're Bob.
+
+### Companion: beside a commander, with no sideboard
+- **Do:** Click "To hand" on your panel.
+- **Expect:** Before you click, your panel has "companion" but no "sideboard" link. Keruga goes into your hand as usual, and Kaheera stays in the command zone.
+
 ## Cards outside the game: the sideboard (2026-10-30, need-keys Phase 2: build-family)
 
 ### Burning Wish: take a sorcery from your sideboard

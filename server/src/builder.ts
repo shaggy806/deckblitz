@@ -12,7 +12,7 @@
  * way: `docs/plans/scenario-builder.md`.
  */
 
-import { COMMANDER_RULES, Game, asPlayerId, computeCharacteristics, isTokenCard } from "engine/local";
+import { COMMANDER_RULES, Game, asPlayerId, computeCharacteristics, isTokenCard, revealedCompanion } from "engine/local";
 import { cardRegistry } from "./card-registry.js";
 import type { CardRegistry, GameObject, ObjectId, PlayerId, Step } from "engine/local";
 import type { BuilderInfo, ScenarioCard, ScenarioSeat, ScenarioSpec, ScenarioStep, ScenarioZone } from "protocol";
@@ -123,8 +123,23 @@ export function validateScenario(spec: ScenarioSpec, registry: CardRegistry = ca
     const sideboard = spec.cards.filter((c) => c.owner === player && c.zone === "sideboard");
     if (sideboard.length === 0) continue;
     if (sideboard.some((c) => c.commander === true)) throw new Error("a commander can't be in a sideboard");
-    if (commanders.has(player)) throw new Error(`${player} has a commander, and Commander games use no sideboards`);
+    // …but a companion, which can enter a Commander game (702.139d).
+    if (commanders.has(player) && sideboard.some((c) => registry.get(c.name).companion === null)) {
+      throw new Error(`${player} has a commander, and Commander games use no sideboards`);
+    }
     if (sideboard.length > MAX_SIDEBOARD) throw new Error(`${player}'s sideboard holds at most ${MAX_SIDEBOARD} cards`);
+    if (sideboard.filter((c) => c.companion === "revealed").length > 1) {
+      throw new Error(`${player} can reveal only one companion`);
+    }
+  }
+  for (const card of spec.cards) {
+    if (card.companion === undefined) continue;
+    if (card.companion !== "revealed" && card.companion !== "ask") throw new Error(`${card.name}: bad companion flag`);
+    if (card.zone !== "sideboard") throw new Error(`${card.name}: only a card in the sideboard can be a companion`);
+    if (registry.get(card.name).companion === null) throw new Error(`${card.name} has no companion ability`);
+  }
+  if (new Set(spec.cards.filter((c) => c.companion === "ask").map((c) => c.owner)).size > 1) {
+    throw new Error("only one player can be asked for a companion");
   }
   for (const card of spec.cards) {
     if (card.attachedTo === undefined) continue;
@@ -198,6 +213,8 @@ function layOut(spec: ScenarioSpec, registry: CardRegistry): LaidOut {
     shuffle: false,
     registry,
     startingPlayer: spec.active,
+    // A board's decks aren't anyone's: its cards say who has a companion.
+    skipCompanionReveals: true,
     rules: { ...COMMANDER_RULES, openingHandSize: 0 },
     // Past turn 1, a (handless) mulligan holds the first turn back, so the
     // game can be wound to the turn before, the seat before the active
@@ -285,7 +302,9 @@ function layOut(spec: ScenarioSpec, registry: CardRegistry): LaidOut {
     spec.cards
       .filter((c) => c.owner === player && c.zone === "sideboard")
       .forEach((card, i) => {
-        if (outside[i] !== undefined) place(card, outside[i]);
+        if (outside[i] === undefined) return;
+        place(card, outside[i]);
+        if (card.companion === "revealed") game.debugRevealCompanion(player, outside[i]);
       });
   }
   for (const card of spec.cards) {
@@ -329,6 +348,16 @@ function layOut(spec: ScenarioSpec, registry: CardRegistry): LaidOut {
   // would, so the board isn't left waiting on it.
   if (s.awaiting !== null) game.advanceUntil((st) => st.awaiting === null);
   game.state.pendingTriggers = [];
+  // A companion to reveal, asked as the board starts (rule 103.2b).
+  const asked = spec.cards.filter((c) => c.companion === "ask");
+  const [firstAsked] = asked;
+  if (firstAsked !== undefined) {
+    const eligible = asked.flatMap((c) => {
+      const id = byKey.get(c.key);
+      return id === undefined ? [] : [id];
+    });
+    game.debugAskCompanion(firstAsked.owner, eligible);
+  }
   return { game, objects, registry, byKey };
 }
 
@@ -390,7 +419,9 @@ export function snapshotScenario(game: Game, previous: ScenarioSpec): ScenarioSp
     while (bottom > 0 && BASICS.includes(s.objects[library[bottom - 1]].cardName)) bottom -= 1;
     fill = Math.min(fill, library.length - bottom);
     for (const id of library.slice(0, bottom)) add(s.objects[id], "library");
-    for (const id of s.outside?.[seat.player] ?? []) add(s.objects[id], "sideboard");
+    for (const id of s.outside?.[seat.player] ?? []) {
+      add(s.objects[id], "sideboard", revealedCompanion(s, seat.player) === id ? { companion: "revealed" } : {});
+    }
   }
   for (const id of s.zones.shared.exile) {
     const o = s.objects[id];

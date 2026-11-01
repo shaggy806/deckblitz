@@ -41,6 +41,10 @@ interface Side {
   /** The sideboard: cards outside the game, for a wish — never beside a
    * commander (Commander games use none). */
   readonly side?: readonly Card[]
+  /** A revealed companion, outside the game. */
+  readonly companion?: string
+  /** Cards to choose a companion from, asked as the board starts. */
+  readonly askCompanion?: readonly string[]
   readonly life?: number
   readonly poison?: number
   /** Played by you ("Sit" at the seat), not a bot. */
@@ -105,6 +109,12 @@ export function board(opts: BoardOpts): ScenarioSpec {
     put(side.exile, 'exile')
     put(side.lib, 'library')
     put(side.side, 'sideboard')
+    for (const name of side.companion === undefined ? [] : [side.companion]) {
+      cards.push({ key: `m${next++}`, name, owner, zone: 'sideboard', companion: 'revealed' })
+    }
+    for (const name of side.askCompanion ?? []) {
+      cards.push({ key: `m${next++}`, name, owner, zone: 'sideboard', companion: 'ask' })
+    }
     put(
       (side.cmd ?? []).map((name) => ({ name, commander: true })),
       'command',
@@ -8603,6 +8613,37 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     'Black Vise: choose an opponent, named on the card',
     // A four-player table: three opponents to choose among.
     board({ you: { bf: ['Wastes'], hand: ['Black Vise'] }, opp: [{}, {}, {}] }),
+  ),
+  // --- Companion (2026-11-01, build-family) ---
+  preset(
+    'Companion: choose one to reveal before the game',
+    board({ you: { bf: ['Forest*3'], askCompanion: ['Keruga, the Macrosage', 'Kaheera, the Orphanguard'] } }),
+  ),
+  preset(
+    'Companion: declining reveals nothing',
+    board({ you: { bf: ['Forest*3'], askCompanion: ['Keruga, the Macrosage'] } }),
+  ),
+  preset(
+    'Companion: pay to put it into your hand',
+    // A fourth Forest, so you've something left to do and it stays your turn.
+    board({ you: { bf: ['Forest*4'], companion: 'Keruga, the Macrosage' } }),
+  ),
+  preset(
+    'Companion: not without the mana',
+    board({ you: { bf: ['Forest*2'], companion: 'Keruga, the Macrosage' } }),
+  ),
+  preset(
+    'Companion: only with the stack empty in your main phase',
+    board({ you: { bf: ['Forest*3'], companion: 'Keruga, the Macrosage' }, step: 'begin-combat' }),
+  ),
+  preset(
+    'Companion: every player can see it',
+    // A four-player table: Bob, across it, can look at Alice's companion.
+    board({ you: { bf: ['Forest*3'], companion: 'Keruga, the Macrosage' }, opp: [{ human: true }, {}, {}] }),
+  ),
+  preset(
+    'Companion: beside a commander, with no sideboard',
+    board({ you: { cmd: ['Kaheera, the Orphanguard'], bf: ['Forest*4'], companion: 'Keruga, the Macrosage' } }),
   ),
   // --- Cards outside the game: the sideboard (2026-10-30, build-family) ---
   preset(

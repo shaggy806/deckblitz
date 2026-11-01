@@ -299,6 +299,10 @@ export function describeEvent(event: GameEvent, nameOf: NameOf, seats: readonly 
       return `${who(event.player)} foretells a card`
     case 'card-plotted':
       return `${name(event.object)} becomes plotted`
+    case 'companion-revealed':
+      return `${who(event.player)} reveals ${name(event.object)} as their companion`
+    case 'companion-taken':
+      return `${who(event.player)} puts their companion, ${name(event.object)}, into their hand`
     case 'card-cycled':
       return `${who(event.player)} cycles ${name(event.object)}`
     case 'escape-cost-paid':

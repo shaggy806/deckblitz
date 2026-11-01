@@ -430,6 +430,7 @@ from the same link.
 | `pairing` | `CommanderPairing` | the partner-family ability that lets this card be one of **two** commanders (rule 702.124) — §12. Never inferred from `text`. |
 | `canBeCommander` | `boolean` | "~ can be your commander." (rule 903.3a) — how a legendary card that isn't a creature, Vehicle or Spacecraft with P/T (a planeswalker) commands a deck — §12. Never inferred from `text`; `pool.test.ts` checks the two agree. |
 | `deckCopies` | `"any" \| number` | "A deck can have any number of cards named ~." (`"any"`: Rat Colony) or "A deck can have up to seven cards named ~." (`7`: Seven Dwarves) — the card's own exception to the copy limit (rules 100.2a, 903.5b; the card wins, 101.1), read by `deck-validation.ts`'s `copiesAllowed`, and by nothing in play. |
+| `companion` | `CompanionCondition` | "Companion—[Condition]" (rule 702.139), the condition as data, the line's words in `text` without the reminder. `{ kind: "each-card", of: "card" \| "nonland" \| "creature" \| "permanent", test }` with `test` one of `{ manaValueIs: "even" \| "odd" }`, `{ manaValueAtLeast: n }`, `{ manaValueAtMost: n }`, `{ subtypeAmong: [...] }`, `{ hasActivatedAbility: true }`, `{ noRepeatedManaSymbol: true }`; `{ kind: "different-names", of }` (Lutri); `{ kind: "shared-card-type", of }` (Umori); `{ kind: "deck-size-over-minimum", atLeast: 20 }` (Yorion). "…and land cards" is `of: "nonland"`. Everything else is the engine's: the reveal before the game (103.2b) for a card in the deck's sideboard, the {3} special action (116.2g), and a Commander deck bringing one. `kaheera-the-orphanguard.ts`, `keruga-the-macrosage.ts`. |
 | `beginsOnBattlefield` | `boolean` | "If this card is in your opening hand, you may begin the game with it on the battlefield" (rule 103.6a — the Leylines, Quicksilver, Brash Blur). Once every hand is kept, the starting player and then each other player in turn order is asked which such cards to put onto the battlefield (a `choose-from-zone` flagged `openingHand`). Nothing else on the card changes. The scaffolder reads the line. Gemstone Caverns' version (a luck counter, exile a card) is more and isn't this. |
 | `openingHandReveal` | `{ at, effect, text }` | "You may reveal this card from your opening hand. If you do, at the beginning of the first upkeep, …" (rule 103.6b — the Chancellors, Sphinx of Foresight). Asked after the `beginsOnBattlefield` question, the same player, as a `choose-from-zone` with `destination: "reveal"` flagged `openingHand`; each revealed card stays in the hand and sets up a delayed trigger its owner controls. `at`: `"next-upkeep"` ("the first upkeep", whoever's turn), `"your-next-upkeep"` ("your first upkeep"), `"your-next-main-phase"` ("your first main phase of the game"). Chancellor of the Annex's "when each opponent casts their first spell of the game" is a cast-keyed delayed trigger that lasts past turn 1 and isn't this. |
 
@@ -6145,7 +6146,7 @@ its source leaving the battlefield.
 **Not modeled at all:**
 banding, "day/night"-independent double-faced tokens, a static ability that
 makes a planeswalker a creature (Gideon), ability-dependency ordering (rule
-613.8), companions,
+613.8),
 a −X loyalty cost (Ugin, the
 Spirit Dragon).
 

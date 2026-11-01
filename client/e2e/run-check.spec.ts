@@ -227,7 +227,9 @@ test('run a manual check', async ({ page }) => {
   }
   await expect(panel.locator('.bp-mode')).toHaveText('Playing', { timeout: 30_000 })
   // The drawer covers the board's right side: out of the way.
-  await panel.getByTitle('Hide the builder').click()
+  // (A board that starts on a popup, a companion to reveal, has it in front.)
+  const hide = panel.getByTitle('Hide the builder')
+  await hide.click({ timeout: 3_000 }).catch(() => hide.dispatchEvent('click'))
   console.log(`check: ${title}`)
   print('start', await settle(page, true), await shoot(0, 'start'))
 

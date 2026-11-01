@@ -108,6 +108,22 @@ describe("buildScenario", () => {
     expect(() => validateScenario(spec([card("a", "Hill Giant"), card("a", "Hill Giant")]))).toThrow(/unique/);
     expect(() => validateScenario(spec([card("p", "Pacifism", { attachedTo: "nobody" })]))).toThrow(/attached/);
     expect(() => validateScenario(spec([card("h", "Hill Giant", { zone: "command" })]))).toThrow(/command zone/);
+    // A companion is the one thing out there beside a commander (702.139d), and
+    // only something with the ability can be one.
+    expect(() =>
+      validateScenario(
+        spec([
+          card("c", "Legion Angel", { zone: "command", commander: true }),
+          card("s", "Keruga, the Macrosage", { zone: "sideboard", companion: "revealed" }),
+        ]),
+      ),
+    ).not.toThrow();
+    expect(() => validateScenario(spec([card("s", "Forest", { zone: "sideboard", companion: "revealed" })]))).toThrow(
+      /no companion ability/,
+    );
+    expect(() => validateScenario(spec([card("s", "Keruga, the Macrosage", { zone: "hand", companion: "ask" })]))).toThrow(
+      /only a card in the sideboard/,
+    );
     // A sideboard is never beside a commander (rule 903.5e).
     expect(() =>
       validateScenario(

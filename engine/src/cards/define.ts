@@ -26,6 +26,7 @@ import type {
 } from "../effects.js";
 import type { AggregateOf, AggregateSpec, CardFilter, NumCompare } from "../filter.js";
 import type { CardNameChoice } from "../card-names.js";
+import type { CompanionCondition } from "../companion.js";
 import type { Color, ManaType, SpendAs } from "../mana.js";
 import type { ReplacementSpec } from "../replacements.js";
 import type { DelayedTriggerTiming, PlayerCounterKind, TurnHistoryKind, ZoneType } from "../state.js";
@@ -4713,6 +4714,11 @@ export interface CardDefinition {
    * with none. A deckbuilding rule, read by `deck-validation.ts`'s
    * {@link copiesAllowed} and nothing in play. */
   readonly deckCopies: "any" | number | null;
+  /** "Companion—[Condition]" (rule 702.139), `null` for a card without it. It
+   * functions outside the game alone: the condition is read as the card is
+   * offered for revealing (103.2b, `companion.ts`), and in the deck the card
+   * has no effect at all (the rulings). */
+  readonly companion: CompanionCondition | null;
   /** "If this card is in your opening hand, you may begin the game with it
    * on the battlefield" (rule 103.6a — the Leylines): once every hand is
    * kept, its owner is asked, starting player first, which such cards to put
@@ -4874,6 +4880,7 @@ const PRINTED_ABILITY: {
   pairing: (def) => def.pairing !== null,
   canBeCommander: (def) => def.canBeCommander,
   deckCopies: (def) => def.deckCopies !== null,
+  companion: (def) => def.companion !== null,
   beginsOnBattlefield: (def) => def.beginsOnBattlefield,
   openingHandReveal: (def) => def.openingHandReveal !== null,
 };
@@ -5122,6 +5129,7 @@ interface CardDraft {
   pairing?: CommanderPairing;
   canBeCommander?: boolean;
   deckCopies?: "any" | number;
+  companion?: CompanionCondition;
   beginsOnBattlefield?: boolean;
   openingHandReveal?: OpeningHandReveal;
 }
@@ -5353,6 +5361,7 @@ export function defineCard(draft: CardDraft): CardDefinition {
     pairing: draft.pairing ?? null,
     canBeCommander: draft.canBeCommander ?? false,
     deckCopies: draft.deckCopies ?? null,
+    companion: draft.companion ?? null,
     beginsOnBattlefield: draft.beginsOnBattlefield ?? false,
     openingHandReveal: draft.openingHandReveal ?? null,
   };

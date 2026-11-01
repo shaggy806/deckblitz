@@ -3220,6 +3220,13 @@ export type AwaitingDecision =
        * `next` is the next question, counted two a player from the starting
        * player. */
       readonly openingHand?: { readonly next: number };
+      /** Before the opening hands (rule 103.2b — `Game.beginCompanionReveals`):
+       * which of `player`'s cards from outside the game to reveal as their
+       * companion, none or one. `next` is the next player to ask, counted from
+       * the starting player (the rulings); `opening` is how the hands are dealt
+       * after the last, or `null` for a board that's asking outside a game's
+       * start (the scenario builder). */
+      readonly companion?: { readonly next: number; readonly opening: "mulligans" | "hands" | null };
       /** An entering permanent's amplify (rule 702.38a —
        * `CardDefinition.amplify`): `ids` are the cards in `player`'s hand
        * that share a creature type with it, and the answer is how many are
@@ -4968,6 +4975,14 @@ export interface GameState {
    * deck listed them. Seen by their owner alone. Absent while nobody has one.
    */
   outside?: Record<PlayerId, ObjectId[]>;
+  /**
+   * Each player's revealed companion (rule 103.2b), one of their `outside`
+   * cards, there for anyone to see. Gone once its owner takes the special action
+   * that puts it into their hand (116.2g); a wish that finds it first (a
+   * constructed game's sideboard) leaves it here, no longer `zone: "outside"`,
+   * and no one reads it again. Absent while nobody has revealed one.
+   */
+  companions?: Record<PlayerId, ObjectId>;
   turn: TurnState;
   priority: PriorityState;
   result: GameResult;
@@ -5641,6 +5656,27 @@ export interface GameState {
   eventLog: GameEvent[];
   eventSeq: number;
   nextObjectSeq: number;
+}
+
+/**
+ * A player's sideboard: their cards outside the game that a wish can find and
+ * that they count as a sideboard (rules 400.11a, 701.23j). None for a player
+ * with a commander, whatever `GameState.outside` holds: "Commander games do not
+ * use sideboards" (903.5e), and all that can be out there is a companion, which
+ * enters only by its special action (702.139d).
+ */
+export function sideboardOf(state: GameState, player: PlayerId): readonly ObjectId[] {
+  const outside = state.outside?.[player] ?? [];
+  if (outside.length === 0) return outside;
+  const hasCommander = Object.values(state.objects).some((o) => o.owner === player && o.isCommander === true);
+  return hasCommander ? [] : outside;
+}
+
+/** A player's revealed companion while it's still outside the game, or `null`:
+ * a wish can have brought it in first, and then it's a card like any other. */
+export function revealedCompanion(state: GameState, player: PlayerId): ObjectId | null {
+  const card = state.companions?.[player];
+  return card !== undefined && state.objects[card]?.zone === "outside" ? card : null;
 }
 
 export function createPlayerState(id: PlayerId, rules: GameRules): PlayerState {

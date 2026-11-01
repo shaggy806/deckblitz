@@ -54,7 +54,9 @@ import {
   nameOf,
   phasedOutIds,
   printedCardName,
+  revealedCompanion,
   rulesTextName,
+  sideboardOf,
 } from "./state.js";
 import { withoutTypeMarkers } from "./subtypes.js";
 import type { TargetRef } from "./target.js";
@@ -69,6 +71,10 @@ export interface PublicPlayerInfo {
   /** How many cards they have outside the game — their sideboard (rule
    * 400.11a). What those are, only their owner's view says (`zones.sideboard`). */
   readonly sideboardSize: number;
+  /** Their revealed companion while it's still outside the game (rules 103.2b,
+   * 702.139a), for everyone to see: its object is in `objects` for every seat.
+   * `null` for a player with none, or once it's in the game. */
+  readonly companion: ObjectId | null;
   readonly landsPlayedThisTurn: number;
   /** How many lands this player may play this turn — the rules' one, plus
    * extra land drops (Oracle of Mul Daya, Explore). */
@@ -964,7 +970,8 @@ function viewForUncached(
       handSize: zones.hand.length,
       librarySize: zones.library.length,
       graveyardSize: zones.graveyard.length,
-      sideboardSize: state.outside?.[player]?.length ?? 0,
+      sideboardSize: sideboardOf(state, player).length,
+      companion: revealedCompanion(state, player),
       landsPlayedThisTurn: playerState.landsPlayedThisTurn,
       maxLandsThisTurn:
         options.maxLands?.(player) ??
@@ -1032,6 +1039,9 @@ function viewForUncached(
       // Their own sideboard, which they may look at (rule 400.11a).
       visibleIds.push(...(state.outside?.[player] ?? []));
     }
+    // A revealed companion stays revealed outside the game (rule 103.2b).
+    const companion = revealedCompanion(state, player);
+    if (companion !== null) visibleIds.push(companion);
   }
 
   const holdings = exileHoldings(state);
@@ -1112,8 +1122,10 @@ function viewForUncached(
                   }
                 : // An opening hand's Leylines (rule 103.6a) are hand cards
                   // until they're put onto the battlefield.
+                  // A companion being chosen is outside the game until it's
+                  // revealed (rule 103.2b).
                   state.awaiting?.kind === "choose-from-zone" &&
-                    state.awaiting.openingHand !== undefined &&
+                    (state.awaiting.openingHand !== undefined || state.awaiting.companion !== undefined) &&
                     state.awaiting.player !== viewer
                   ? { ...state.awaiting, ids: [], eligible: [] }
                   : state.awaiting,
@@ -1135,7 +1147,7 @@ function viewForUncached(
       command: [...state.zones.shared.command],
       hands,
       graveyards,
-      sideboard: [...(state.outside?.[viewer] ?? [])],
+      sideboard: [...sideboardOf(state, viewer)],
     },
     revealedLibraryTop,
     dayNight: state.dayNight,

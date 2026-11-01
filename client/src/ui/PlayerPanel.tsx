@@ -51,6 +51,15 @@ export interface PlayerPanelProps {
   /** Opens this player's sideboard (rule 400.11a) — only ever your own, the
    * one only you may look at; for anyone else the count alone shows. */
   readonly onOpenSideboard?: () => void
+  /** Shows this player's revealed companion (`info.companion`), anyone's: it
+   * stays revealed outside the game (rule 103.2b). */
+  readonly onOpenCompanion?: () => void
+  /** The card's name, for the link's tooltip. */
+  readonly companionName?: string
+  /** Pays for your companion and puts it into your hand (rule 702.139a), when
+   * you can now, at `companionCost`. */
+  readonly onTakeCompanion?: () => void
+  readonly companionCost?: string
   readonly targetable?: boolean
   /** Picked in a decision still being built (a proliferate's players). */
   readonly selected?: boolean
@@ -102,6 +111,10 @@ export function PlayerPanel({
   onOpenHand,
   onOpenEmblems,
   onOpenSideboard,
+  onOpenCompanion,
+  companionName,
+  onTakeCompanion,
+  companionCost,
   targetable = false,
   selected = false,
   aimedBy = null,
@@ -350,6 +363,36 @@ export function PlayerPanel({
             }}
           >
             sideboard {info.sideboardSize}
+          </button>
+        ) : null}
+        {/* A revealed companion (rule 103.2b): anyone may look, and its owner
+            can buy it from here (the special action, rule 702.139a). */}
+        {info.companion !== null ? (
+          <button
+            type="button"
+            className="pp-zone-link"
+            title={`Companion: ${companionName ?? 'a card outside the game'}`}
+            data-companion-of={info.id}
+            onClick={(e) => {
+              e.stopPropagation()
+              onOpenCompanion?.()
+            }}
+          >
+            companion
+          </button>
+        ) : null}
+        {onTakeCompanion !== undefined ? (
+          <button
+            type="button"
+            className="pp-zone-link"
+            title={`Put ${companionName ?? 'your companion'} into your hand`}
+            data-take-companion={info.id}
+            onClick={(e) => {
+              e.stopPropagation()
+              onTakeCompanion()
+            }}
+          >
+            To hand <Symbols text={companionCost ?? ''} />
           </button>
         ) : null}
         <span>

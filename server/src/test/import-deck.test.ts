@@ -149,6 +149,12 @@ describe("parseDecklistText", () => {
     expect(parseDecklistText(text).commanders).toEqual(["Alice", "Bob"]);
   });
 
+  it("keeps a Companion section with the sideboard: a card from outside the game", () => {
+    const parsed = parseDecklistText(list("Companion", "1 Keruga, the Macrosage", "", "Deck", "4 Forest"));
+    expect(parsed.sideboard.map((e) => e.name)).toEqual(["Keruga, the Macrosage"]);
+    expect(parsed.entries.map((e) => e.name)).toEqual(["Forest"]);
+  });
+
   it("keeps a Sideboard section, and MTGO's SB: lines, out of the deck", () => {
     const parsed = parseDecklistText(list("Deck", "4 Forest", "", "Sideboard", "1 Burning Wish", "2 Demonic Tutor", "SB: 1 Sol Ring"));
     expect(parsed.entries).toEqual([{ name: "Forest", count: 4 }]);

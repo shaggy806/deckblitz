@@ -299,6 +299,10 @@ export function candidateActions(
       return [{ type: "foretell", player, card: legal.card }];
     case "plot":
       return [{ type: "plot", player, card: legal.card }];
+    // A companion into the hand: the search weighs {3} for the card against
+    // spending the mana on something else.
+    case "take-companion":
+      return [{ type: "take-companion", player }];
     // Turning a manifested creature face up: the search weighs it against
     // passing like any other play.
     case "turn-face-up":

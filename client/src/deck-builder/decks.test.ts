@@ -79,9 +79,11 @@ describe('saved-deck migrations', () => {
 })
 
 describe('playableSideboard', () => {
-  it('brings a sideboard only without a commander (Commander games use none), fifteen at most', () => {
+  it('brings a sideboard, fifteen at most (the game keeps only a Commander deck\'s companions)', () => {
     expect(playableSideboard({ commanders: [], sideboard: ['Burning Wish'] })).toEqual(['Burning Wish'])
-    expect(playableSideboard({ commanders: ['Ghalta, Primal Hunger'], sideboard: ['Burning Wish'] })).toBeUndefined()
+    expect(playableSideboard({ commanders: ['Ghalta, Primal Hunger'], sideboard: ['Lurrus of the Dream-Den'] })).toEqual([
+      'Lurrus of the Dream-Den',
+    ])
     expect(playableSideboard({ commanders: [], sideboard: [] })).toBeUndefined()
     expect(playableSideboard({ commanders: [] })).toBeUndefined()
     expect(playableSideboard({ commanders: [], sideboard: Array<string>(20).fill('Forest') })).toHaveLength(15)

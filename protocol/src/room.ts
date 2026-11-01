@@ -58,9 +58,10 @@ export interface WireDeck {
    * the picker existed, or one that never left a card's default printing. */
   readonly printings?: Readonly<Record<string, string>>;
   /** The deck's sideboard (rule 100.4): cards outside the game (400.11a),
-   * which a wish can bring in — `DeckList.sideboard`. At most fifteen
-   * (100.4a), and none with `commanders` (903.5e: Commander games use no
-   * sideboards) — the server refuses either. Absent means none. */
+   * which a wish can bring in, or one revealed as a companion (103.2b) —
+   * `DeckList.sideboard`. At most fifteen (100.4a), which the server refuses
+   * past. With `commanders` only companions count (903.5e: Commander games use
+   * no sideboards; 702.139d): the game leaves out the rest. Absent means none. */
   readonly sideboard?: readonly string[];
 }
 

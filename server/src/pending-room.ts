@@ -109,11 +109,11 @@ function assertDeckIsBuildable(deck: PendingDeck): void {
   if (sideboard.length > MAX_SIDEBOARD) {
     throw new Error(`a sideboard holds at most ${MAX_SIDEBOARD} cards, this one has ${sideboard.length}`);
   }
-  if (sideboard.length > 0 && commanders.length > 0) {
-    throw new Error("a Commander deck has no sideboard (Commander games use none, rule 903.5e)");
-  }
+  // A Commander deck brings only companions from out there (903.5e, 702.139d):
+  // the game leaves the rest out, so a name it doesn't know breaks nothing.
+  const brought = commanders.length > 0 ? [] : (sideboard as readonly string[]);
   const unknown = [
-    ...new Set([...deck.cards, ...commanders, ...(sideboard as readonly string[])].filter((name) => !registry().has(name))),
+    ...new Set([...deck.cards, ...commanders, ...brought].filter((name) => !registry().has(name))),
   ];
   if (unknown.length === 0) return;
   const shown = unknown.slice(0, MAX_REPORTED_UNKNOWN).join(", ");

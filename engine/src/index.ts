@@ -13,6 +13,7 @@ export * from "./abilities.js";
 export * from "./cards.js";
 export * from "./identity.js";
 export * from "./deck-validation.js";
+export * from "./companion.js";
 export * from "./sample-decks.js";
 export * from "./card-replacer.js";
 export * from "./characteristics.js";

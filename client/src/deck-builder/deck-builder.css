@@ -978,6 +978,15 @@
   color: var(--gold);
 }
 
+.db-companion-mark {
+  flex: none;
+  font-size: 0.85em;
+}
+
+.db-companion-mark[data-companion-unmet] {
+  color: var(--danger, #c0392b);
+}
+
 /* --- the printing picker ------------------------------------------------ */
 
 /* Anchored at the top rather than centred: a box that grows as it loads (the

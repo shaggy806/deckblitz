@@ -14,7 +14,8 @@ import type { PlayerId } from "engine";
 
 /** The zones a card can be placed in. A library's cards are listed top first.
  * `"sideboard"` isn't a zone: it's outside the game (rule 400.11a), where a
- * wish finds it — never for a player with a commander (903.5e). */
+ * wish finds it — never for a player with a commander (903.5e), who can have
+ * only a companion out there (702.139d). */
 export type ScenarioZone = "battlefield" | "hand" | "graveyard" | "exile" | "library" | "command" | "sideboard";
 
 /** The steps a scenario can start in: every step with a priority window that
@@ -28,6 +29,12 @@ export interface ScenarioCard {
   readonly name: string;
   readonly owner: PlayerId;
   readonly zone: ScenarioZone;
+  /** A card in the sideboard with a companion ability: `"revealed"`, its owner's
+   * companion already (rule 103.2b), or `"ask"`, offered to them as the board
+   * starts, as a game's start would. A player has one of the first; the second
+   * asks over every such card of theirs. Beside a commander, only these may be
+   * in the "sideboard" (rule 702.139d). */
+  readonly companion?: "revealed" | "ask";
   /** One of its owner's commanders (rule 903.3): put in the command zone by
    * the game itself, then moved to `zone`. At most two per player. */
   readonly commander?: boolean;

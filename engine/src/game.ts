@@ -273,6 +273,8 @@ import type { AggregateReads, AggregateSpec, CardFilter } from "./filter.js";
 import { goadersOf } from "./goad.js";
 import { isRingBearer, RING_EMBLEM_TRIGGERS, ringEmblemText } from "./ring.js";
 import { colorIdentityOf } from "./identity.js";
+import { companionConditionProblem } from "./companion.js";
+import type { StartingDeck } from "./companion.js";
 import type {
   EffectDuration,
   EventOfType,
@@ -329,6 +331,7 @@ import {
   FACE_DOWN_CARDS,
   POISON_LETHAL,
   activePlayerOf,
+  sideboardOf,
   attackRequirementActive,
   cloneGameState,
   clonePlain,
@@ -487,7 +490,11 @@ export interface DeckList {
    * which only an effect that searches outside the game brings in — a wish
    * (701.23j). At most fifteen in constructed play (100.4a) — the server's
    * check, not the engine's. A Commander deck brings none: "Commander games
-   * do not use sideboards" (903.5e), so a deck with `commanders` drops it.
+   * do not use sideboards" (903.5e), so a deck with `commanders` drops it,
+   * all but its companions: those are "a card you own from outside the game"
+   * (702.139a), not a sideboard, and enter only by the special action (702.139d).
+   * What's listed here is what may be revealed as a companion (103.2b), the
+   * deck's condition fulfilled: see `Game.beginCompanionReveals`.
    */
   readonly sideboard?: readonly string[];
 }
@@ -511,6 +518,10 @@ export interface GameConfig {
    * happens to be attached.
    */
   readonly mulligans?: boolean;
+  /** Nobody is asked to reveal a companion before the game (rule 103.2b): a
+   * board built by hand, whose decks aren't anyone's real starting deck, says
+   * for itself who has one (`debugRevealCompanion`). */
+  readonly skipCompanionReveals?: boolean;
   readonly registry?: CardRegistry;
   readonly controllers?: Partial<Record<PlayerId, PlayerController>>;
   readonly rules?: Partial<GameRules>;
@@ -522,6 +533,9 @@ export interface SnapshotEnv {
 }
 
 const ADVANCE_BUDGET = 200_000;
+
+/** What a companion costs to put into your hand (rule 702.139a). */
+const COMPANION_COST = "{3}";
 
 /** Resolutions with nobody acting before a repeating cycle of them is a
  * loop of mandatory actions — a draw (rule 104.4b, `noteMandatoryResolution`).
@@ -1836,7 +1850,7 @@ export class Game {
     };
 
     const game = new Game(state, registry, controllers, rng);
-    game.setup(config.decks, config.shuffle ?? true, config.mulligans ?? false);
+    game.setup(config.decks, config.shuffle ?? true, config.mulligans ?? false, config.skipCompanionReveals === true);
     return game;
   }
 
@@ -1984,6 +1998,9 @@ export class Game {
         break;
       case "plot":
         this.plotCard(action.player, action.card);
+        break;
+      case "take-companion":
+        this.takeCompanion(action.player);
         break;
       case "turn-face-up":
         this.turnFaceUp(action.player, action.permanent, action.morph === true);
@@ -2222,6 +2239,8 @@ export class Game {
         return this.whyCannotForetell(action.player, action.card);
       case "plot":
         return this.whyCannotPlot(action.player, action.card);
+      case "take-companion":
+        return this.whyCannotTakeCompanion(action.player);
       case "turn-face-up":
         return this.whyCannotTurnFaceUp(action.player, action.permanent, action.morph === true);
       case "unlock-door":
@@ -2548,6 +2567,12 @@ export class Game {
       if (def.cycling !== null && this.whyCannotCycle(player, card) === null) {
         out.push({ kind: "cycle", card, cardName, cost: def.cycling.cost });
       }
+    }
+
+    // A revealed companion (rule 702.139a) — a special action (116.2g).
+    if (this.whyCannotTakeCompanion(player) === null) {
+      const card = this.state.companions![player];
+      out.push({ kind: "take-companion", card, cardName: this.state.objects[card].cardName, cost: COMPANION_COST });
     }
 
     // Foretell (rule 702.143) — a card foretold on an earlier turn may be cast
@@ -5305,6 +5330,7 @@ export class Game {
     decks: readonly DeckList[],
     shuffleLibrary: boolean,
     mulligans: boolean,
+    skipCompanionReveals: boolean,
   ): void {
     for (const { player, cards, commanders, printings, sideboard } of decks) {
       const commanderNames = commanders ?? [];
@@ -5342,9 +5368,13 @@ export class Game {
       }
 
       // Its sideboard, outside the game (rule 400.11a) — none in a Commander
-      // game (903.5e).
-      if (commanderNames.length === 0 && sideboard !== undefined && sideboard.length > 0) {
-        (this.state.outside ??= {})[player] = sideboard.map((name) =>
+      // game (903.5e), where only a companion comes from out there (702.139d).
+      const outside =
+        commanderNames.length === 0
+          ? (sideboard ?? [])
+          : (sideboard ?? []).filter((name) => this.registry.has(name) && this.registry.get(name).companion !== null);
+      if (outside.length > 0) {
+        (this.state.outside ??= {})[player] = outside.map((name) =>
           this.makeCardObject(name, player, { zone: "outside" }),
         );
       }
@@ -5358,7 +5388,13 @@ export class Game {
       seed: this.state.seed,
     });
 
-    if (mulligans) {
+    const opening = mulligans ? "mulligans" : "hands";
+    if (skipCompanionReveals) this.dealOpeningHands(opening);
+    else this.beginCompanionReveals(0, opening);
+  }
+
+  private dealOpeningHands(opening: "mulligans" | "hands"): void {
+    if (opening === "mulligans") {
       this.beginMulligans();
       return;
     }
@@ -5369,6 +5405,122 @@ export class Game {
     }
 
     this.beginOpeningHandActions(0);
+  }
+
+  /** The cards `player` may reveal as a companion (rule 103.2b): theirs from
+   * outside the game with a companion ability whose condition their starting
+   * deck fulfils. Asked before anything has left that deck, the library and the
+   * commanders are still all of it (702.139b). */
+  private companionChoices(player: PlayerId): ObjectId[] {
+    const outside = this.state.outside?.[player] ?? [];
+    if (outside.length === 0) return [];
+    const deck: StartingDeck = {
+      cards: this.state.zones.perPlayer[player].library.map((id) => this.state.objects[id].cardName),
+      commanders: this.state.zones.shared.command
+        .filter((id) => this.state.objects[id].owner === player && this.state.objects[id].isCommander === true)
+        .map((id) => this.state.objects[id].cardName),
+    };
+    return outside.filter((id) => {
+      const condition = this.registry.get(this.state.objects[id].cardName).companion;
+      return condition !== null && companionConditionProblem(condition, deck, this.registry) === null;
+    });
+  }
+
+  /**
+   * Rule 103.2b: before the opening hands, each player may reveal one card
+   * with a companion ability they own from outside the game, if their deck
+   * fulfils its condition — the starting player first, then in turn order, and
+   * a player who declined can't change their mind (the rulings). Asked as a
+   * `choose-from-zone` of none or one, flagged `companion`; a player with no
+   * such card isn't asked. `from` counts the players from the starting
+   * player's seat; `opening` is how the hands are dealt after the last.
+   */
+  private beginCompanionReveals(from: number, opening: "mulligans" | "hands"): void {
+    const order = this.state.turnOrder;
+    const start = Math.max(0, order.indexOf(this.state.startingPlayer));
+    for (let pos = from; pos < order.length; pos += 1) {
+      const player = order[(start + pos) % order.length];
+      const eligible = this.companionChoices(player);
+      if (eligible.length === 0) continue;
+      this.askCompanionReveal(player, eligible, { next: pos + 1, opening });
+      return;
+    }
+    this.state.awaiting = null;
+    this.dealOpeningHands(opening);
+  }
+
+  private askCompanionReveal(
+    player: PlayerId,
+    eligible: readonly ObjectId[],
+    companion: { readonly next: number; readonly opening: "mulligans" | "hands" | null },
+  ): void {
+    this.state.awaiting = {
+      kind: "choose-from-zone",
+      player,
+      ids: [...eligible],
+      eligible: [...eligible],
+      min: 0,
+      max: 1,
+      destination: "reveal",
+      leftover: "stay",
+      prompt: "You may reveal a companion: once this game, you can pay to put it into your hand",
+      companion,
+    };
+    this.prepareForPriority(player);
+  }
+
+  /** The answer to {@link beginCompanionReveals}: the card chosen, if any, is
+   * revealed and stays outside the game (rule 103.2b), then the next player is
+   * asked. */
+  private applyCompanionReveal(
+    player: PlayerId,
+    chosen: readonly ObjectId[],
+    companion: { readonly next: number; readonly opening: "mulligans" | "hands" | null },
+  ): void {
+    this.state.awaiting = null;
+    const [card] = chosen;
+    if (card !== undefined) this.revealCompanion(player, card);
+    if (companion.opening === null) this.prepareForPriority(this.activePlayer);
+    else this.beginCompanionReveals(companion.next, companion.opening);
+  }
+
+  private revealCompanion(player: PlayerId, card: ObjectId): void {
+    (this.state.companions ??= {})[player] = card;
+    this.emit({ type: "companion-revealed", player, object: card });
+  }
+
+  /** Why `player` can't pay {3} to put their companion into their hand now:
+   * it's still outside the game (nothing else has brought it in, and they
+   * haven't already, 702.139c), and it's "any time you have priority and the
+   * stack is empty during a main phase of your turn" (116.2g). */
+  private whyCannotTakeCompanion(player: PlayerId): string | null {
+    const card = this.state.companions?.[player];
+    if (card === undefined || this.state.objects[card]?.zone !== "outside") {
+      return `${player} has no companion outside the game`;
+    }
+    const blocked = this.whyCannotAct(player);
+    if (blocked !== null) return blocked;
+    const timing = this.whyNotSorcerySpeed(player, "put a companion into your hand");
+    if (timing !== null) return timing;
+    if (this.payMana(player, parseManaCost(COMPANION_COST)) === null) {
+      return `${player} cannot pay ${COMPANION_COST} for their companion`;
+    }
+    return null;
+  }
+
+  /** The special action: no stack, nothing to respond to (rule 116.2g), and the
+   * card stays in the game from then on (702.139c). */
+  private takeCompanion(player: PlayerId): void {
+    const why = this.whyCannotTakeCompanion(player);
+    if (why !== null) throw new Error(why);
+    const payment = this.payMana(player, parseManaCost(COMPANION_COST));
+    if (payment === null) throw new Error(`${player} cannot pay ${COMPANION_COST} for their companion`);
+    const card = this.state.companions![player];
+    this.executePayment(player, payment);
+    delete this.state.companions![player];
+    this.moveObject(card, "hand");
+    this.emit({ type: "companion-taken", player, object: card });
+    this.afterPlayerAction(player);
   }
 
   /**
@@ -6915,6 +7067,19 @@ export class Game {
    * for setting up a board. Pass the flag when the entry is the thing under
    * test. Returns the new object's id.
    */
+  /** `player`'s card from outside the game is their revealed companion, on a
+   * board built by hand (the game was made with `skipCompanionReveals`). */
+  debugRevealCompanion(player: PlayerId, card: ObjectId): void {
+    (this.state.companions ??= {})[player] = card;
+  }
+
+  /** The reveal question for a board built by hand, so the scenario builder can
+   * show it: `player` is asked now, over these cards, and the game goes on from
+   * where it stands. */
+  debugAskCompanion(player: PlayerId, eligible: readonly ObjectId[]): void {
+    this.askCompanionReveal(player, eligible, { next: 0, opening: null });
+  }
+
   debugSpawn(
     name: string,
     player: PlayerId,
@@ -8284,6 +8449,11 @@ export class Game {
     // Before the game (rule 103.6a): no resolution to go on with.
     if (awaiting.openingHand !== undefined) {
       this.applyOpeningHand(player, chosen, awaiting.openingHand.next, awaiting.destination === "reveal");
+      return;
+    }
+    // Before the opening hands (rule 103.2b): the same.
+    if (awaiting.companion !== undefined) {
+      this.applyCompanionReveal(player, chosen, awaiting.companion);
       return;
     }
     // "Reveals three cards from their hand and you choose one of them"
@@ -31145,7 +31315,7 @@ export class Game {
     const inGraveyard = zones === "library" || outsideOnly ? [] : matching("graveyard");
     const inHand = zones === "graveyard-hand-library" && !outsideOnly ? matching("hand") : [];
     const fits = (id: ObjectId): boolean => matchesFilter(this.state, this.registry, id, filter, { you: player, x });
-    const inOutside = more?.outside !== undefined ? (this.state.outside?.[owner] ?? []).filter(fits) : [];
+    const inOutside = more?.outside !== undefined ? sideboardOf(this.state, owner).filter(fits) : [];
     // "…or choose a face-up artifact card you own in exile" (Karn, the Great
     // Creator).
     const inExile =

@@ -180,7 +180,9 @@ export function parseDecklistText(text: string, registry?: CardRegistry): Parsed
     const match = LINE_PATTERN.exec(sbLine === null ? line : line.slice(sbLine[0].length));
     if (match === null) {
       inCommanderSection = /^commanders?:?$/i.test(line);
-      inSideboard = /^sideboard:?$/i.test(line);
+      // An Arena or Moxfield list's "Companion" section is its card from outside
+      // the game: the deck's sideboard, where the game offers it (rule 103.2b).
+      inSideboard = /^(?:sideboard|companion):?$/i.test(line);
       // A header starts a new block as surely as a blank line does.
       endBlock();
       continue;

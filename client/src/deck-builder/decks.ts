@@ -39,9 +39,10 @@ export interface SavedDeck {
   /**
    * The deck's sideboard (rule 100.4): up to fifteen cards (100.4a) kept
    * outside the game, which a wish (Burning Wish, Karn, the Great Creator) or
-   * learn brings in. Brought to a table only by a deck with no commander:
-   * Commander games use no sideboards (903.5e) — `playableSideboard`.
-   * Absent on every deck saved before sideboards existed.
+   * learn brings in, or a companion to reveal (103.2b). Commander games use no
+   * sideboards (903.5e), so a Commander deck's counts only for its companions
+   * (702.139d): the game leaves out the rest. Absent on every deck saved before
+   * sideboards existed.
    */
   readonly sideboard?: readonly string[];
 }
@@ -50,13 +51,14 @@ export interface SavedDeck {
  * (rule 100.4a) — the server's cap too. */
 export const MAX_SIDEBOARD = 15
 
-/** The sideboard a deck brings to a table: none for a Commander deck (rule
- * 903.5e), and none when it's empty. */
+/** The sideboard a deck brings to a table, none when it's empty. A Commander
+ * deck's goes too: the game keeps its companions and leaves out the rest (rules
+ * 903.5e, 702.139d), and this has no card pool to tell them apart with. */
 export function playableSideboard(deck: {
   readonly commanders: readonly string[]
   readonly sideboard?: readonly string[]
 }): readonly string[] | undefined {
-  if (deck.commanders.length > 0 || deck.sideboard === undefined || deck.sideboard.length === 0) return undefined
+  if (deck.sideboard === undefined || deck.sideboard.length === 0) return undefined
   return deck.sideboard.slice(0, MAX_SIDEBOARD)
 }
 

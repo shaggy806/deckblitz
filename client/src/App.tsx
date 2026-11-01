@@ -1888,6 +1888,12 @@ function Table({
     for (const a of actions) if (a.kind === 'plot') m.set(a.card, a)
     return m
   }, [actions])
+  // A revealed companion that can go into the hand (rule 702.139a): the offer
+  // sits on your own panel, there being no card on the table to hang it on.
+  const takeCompanion = useMemo(() => {
+    for (const a of actions) if (a.kind === 'take-companion') return a
+    return undefined
+  }, [actions])
   // A face-down permanent that can be turned face up (rule 701.40b): the
   // offer sits in the permanent's own ability menu, as its abilities do.
   // A Room's locked doors that can be unlocked (rule 709.5e): a special
@@ -6343,6 +6349,19 @@ function Table({
       }
       onOpenExile={() => openZone(`${playerLabel(pid, game.seats)}'s exile`, exileOf(pid))}
       onOpenSideboard={pid === seat ? () => openZone('Your sideboard', view.zones.sideboard) : undefined}
+      onOpenCompanion={() => {
+        const card = view.players[pid].companion
+        if (card !== null) openZone(`${playerLabel(pid, game.seats)}'s companion`, [card])
+      }}
+      {...(view.players[pid].companion !== null
+        ? { companionName: view.objects[view.players[pid].companion]?.cardName }
+        : {})}
+      {...(pid === seat && mode === 'priority' && takeCompanion !== undefined
+        ? {
+            onTakeCompanion: () => game.dispatch({ type: 'take-companion', player: seat }),
+            companionCost: takeCompanion.cost,
+          }
+        : {})}
       onOpenHand={
         pid === seat
           ? undefined

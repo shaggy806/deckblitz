@@ -7215,6 +7215,77 @@ describe("the turn's blocks", () => {
     });
   });
 
+  it.each([
+    [
+      "Gyruda, Doom of Depths",
+      "Your starting deck contains only cards with even mana values.",
+      { kind: "each-card", of: "card", test: { manaValueIs: "even" } },
+    ],
+    [
+      "Obosh, the Preypiercer",
+      "Your starting deck contains only cards with odd mana values and land cards.",
+      { kind: "each-card", of: "nonland", test: { manaValueIs: "odd" } },
+    ],
+    [
+      "Keruga, the Macrosage",
+      "Your starting deck contains only cards with mana value 3 or greater and land cards.",
+      { kind: "each-card", of: "nonland", test: { manaValueAtLeast: 3 } },
+    ],
+    [
+      "Lurrus of the Dream-Den",
+      "Each permanent card in your starting deck has mana value 2 or less.",
+      { kind: "each-card", of: "permanent", test: { manaValueAtMost: 2 } },
+    ],
+    [
+      "Kaheera, the Orphanguard",
+      "Each creature card in your starting deck is a Cat, Elemental, Nightmare, Dinosaur, or Beast card.",
+      { kind: "each-card", of: "creature", test: { subtypeAmong: ["Cat", "Elemental", "Nightmare", "Dinosaur", "Beast"] } },
+    ],
+    [
+      "Zirda, the Dawnwaker",
+      "Each permanent card in your starting deck has an activated ability.",
+      { kind: "each-card", of: "permanent", test: { hasActivatedAbility: true } },
+    ],
+    [
+      "Jegantha, the Wellspring",
+      "No card in your starting deck has more than one of the same mana symbol in its mana cost.",
+      { kind: "each-card", of: "card", test: { noRepeatedManaSymbol: true } },
+    ],
+    [
+      "Lutri, the Spellchaser",
+      "Each nonland card in your starting deck has a different name.",
+      { kind: "different-names", of: "nonland" },
+    ],
+    [
+      "Umori, the Collector",
+      "Each nonland card in your starting deck shares a card type.",
+      { kind: "shared-card-type", of: "nonland" },
+    ],
+    [
+      "Yorion, Sky Nomad",
+      "Your starting deck contains at least twenty cards more than the minimum deck size.",
+      { kind: "deck-size-over-minimum", atLeast: 20 },
+    ],
+  ])("reads %s's companion condition (702.139)", (name, condition, expected) => {
+    const parsed = parseFace({
+      name,
+      type_line: "Legendary Creature — Test",
+      oracle_text: `Companion — ${condition} (If this card is your chosen companion, you may put it into your hand from outside the game for {3} as a sorcery.)`,
+    });
+    expect(parsed.companion).toEqual(expected);
+    expect(parsed.todo).toEqual([]);
+  });
+
+  it("leaves a companion line no template reads to a person", () => {
+    const parsed = parseFace({
+      name: "Test Companion",
+      type_line: "Creature — Test",
+      oracle_text: "Companion — Your starting deck contains only blue cards.",
+    });
+    expect(parsed.companion).toBeUndefined();
+    expect(parsed.todo.length).toBe(1);
+  });
+
   it("reads a card's own copy limit (100.2a, 903.5b): any number, and up to seven", () => {
     const rats = parseFace({
       name: "Rat Colony",

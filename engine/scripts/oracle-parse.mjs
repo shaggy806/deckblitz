@@ -126,6 +126,42 @@ const KINSHIP =
 
 const MEANINGFUL_LABEL = /^(Power-up|Max speed|Solved|To solve|Companion|Visit|[IVX]+(?:, [IVX]+)*) — /;
 
+/** A companion's condition (rule 702.139, `companion.ts`), or `null` for a
+ * wording no template reads. */
+function companionCondition(text) {
+  const scope = "(permanent|creature|nonland)";
+  const deck = "in your starting deck";
+  let m;
+  if ((m = /^Your starting deck contains only cards with (even|odd) mana values( and land cards)?\.$/.exec(text))) {
+    return { kind: "each-card", of: m[2] ? "nonland" : "card", test: { manaValueIs: m[1] } };
+  }
+  if ((m = /^Your starting deck contains only cards with mana value (\d+) or greater( and land cards)?\.$/.exec(text))) {
+    return { kind: "each-card", of: m[2] ? "nonland" : "card", test: { manaValueAtLeast: Number(m[1]) } };
+  }
+  if ((m = new RegExp(`^Each ${scope} card ${deck} has mana value (\\d+) or less\\.$`).exec(text))) {
+    return { kind: "each-card", of: m[1], test: { manaValueAtMost: Number(m[2]) } };
+  }
+  if ((m = new RegExp(`^Each ${scope} card ${deck} has an activated ability\\.$`).exec(text))) {
+    return { kind: "each-card", of: m[1], test: { hasActivatedAbility: true } };
+  }
+  if ((m = new RegExp(`^Each ${scope} card ${deck} is an? (.+) card\\.$`).exec(text))) {
+    return { kind: "each-card", of: m[1], test: { subtypeAmong: m[2].split(/, (?:or )?| or /) } };
+  }
+  if ((m = new RegExp(`^Each ${scope} card ${deck} has a different name\\.$`).exec(text))) {
+    return { kind: "different-names", of: m[1] };
+  }
+  if ((m = new RegExp(`^Each ${scope} card ${deck} shares a card type\\.$`).exec(text))) {
+    return { kind: "shared-card-type", of: m[1] };
+  }
+  if (text === `No card ${deck} has more than one of the same mana symbol in its mana cost.`) {
+    return { kind: "each-card", of: "card", test: { noRepeatedManaSymbol: true } };
+  }
+  if (text === "Your starting deck contains at least twenty cards more than the minimum deck size.") {
+    return { kind: "deck-size-over-minimum", atLeast: 20 };
+  }
+  return null;
+}
+
 /** "A deck can have up to seven cards named ~" (Seven Dwarves, Nazgûl). */
 const DECK_COPY_WORDS = { two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9, ten: 10 };
 
@@ -6320,6 +6356,13 @@ export function parseFace(face, ctx = {}) {
     // its flags, and the rest aren't read at all.
     // (A villainous choice's dash isn't a label either: what comes before it
     // is the trigger or instruction.)
+    // "Companion—[Condition]" (rule 702.139) is read, its condition as data.
+    const companionLine = /^Companion — (.+)$/.exec(whole);
+    const companion = companionLine === null ? null : companionCondition(companionLine[1]);
+    if (companion !== null) {
+      out.companion = companion;
+      continue;
+    }
     if (MEANINGFUL_LABEL.test(whole) || / villainous choice — /.test(whole)) { out.todo.push(printed(raw)); continue; }
     const label = /^(Exhaust|Boast|Forecast) — /.exec(whole)?.[1];
     const line = label ? whole.slice(label.length + 3) : whole.replace(/^[A-Z][\w' ,-]+ — (?=[A-Z~{+−-])/, "");

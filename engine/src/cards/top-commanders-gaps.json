@@ -2,6 +2,7 @@
  "generated": "2026-09-22",
  "source": "Per-commander triage of every unimplemented top-commanders.txt entry (AI agents reading Oracle text + rulings against the engine), normalized onto one feature vocabulary. See neededCards-features.md, 'The commander gap'.",
  "built": [
+  "mechanic:companion",
   "mechanic:deck-any-number-copies",
   "cost:unless-pay-colored-per-amount",
   "cost:unless-pay-mana-and-life",

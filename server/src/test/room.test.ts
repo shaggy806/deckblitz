@@ -777,6 +777,34 @@ describe("Room", () => {
       expect(Object.keys(after.hands)).toEqual([ALICE]);
     });
 
+    it("a companion is asked of the starting seat first, a bot answering at once and a person's question waiting (rule 103.2b)", () => {
+      const cards = Array<string>(60).fill("Murder");
+      const companion = ["Keruga, the Macrosage"];
+      const game = Game.create({
+        seed: 1,
+        startingPlayer: BOB,
+        mulligans: true,
+        decks: [
+          { player: ALICE, cards, sideboard: companion },
+          { player: BOB, cards, sideboard: companion },
+        ],
+      });
+      const room = new Room("COMP1", game, { pacing: "immediate" });
+      expect(room.game.state.awaiting).toMatchObject({ kind: "choose-from-zone", player: BOB });
+
+      room.addBot(BOB);
+
+      const companions = room.game.state.companions;
+      expect(companions?.[BOB]).toBeDefined();
+      const asked = room.game.state.awaiting;
+      if (asked?.kind !== "choose-from-zone") throw new Error(`expected the reveal, got ${asked?.kind}`);
+      expect(asked.player).toBe(ALICE);
+      // Alice's answer starts the mulligans, the bot's answered at once.
+      room.game.dispatch({ type: "choose-from-zone", player: ALICE, chosen: [] });
+      expect(room.game.state.awaiting?.kind).toBe("mulligan");
+      expect(room.game.state.companions?.[ALICE]).toBeUndefined();
+    });
+
     it("plays its own turn without any dispatch on its behalf", () => {
       const room = makeSparseRoom();
       room.addBot(BOB);

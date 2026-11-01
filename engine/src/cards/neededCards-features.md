@@ -590,6 +590,26 @@ Rielle, the Everwise. Left: Toluz's "exile them" (the discarded cards,
 linked — `effect:linked-exile-from-discard`), Inti's batch key
 (`trigger:discards-batch-trigger`, likely only marking).
 
+### Companion — built 2026-11-01
+
+Rule 702.139, the need-keys Phase 2 family `mechanic:companion`. A definition's
+`companion` is its condition as data (`companion.ts`: one `each-card` shape over a
+scope and a test, plus `different-names`, `shared-card-type` and
+`deck-size-over-minimum`), covering the ten printed ones, which the scaffolder reads
+whole. Before the hands are drawn each player with an eligible card in their
+sideboard is asked, starting player first, through a `choose-from-zone` flagged
+`companion` (103.2b, no new decision kind; the reveal is public, and the other seats
+don't see what's offered). `GameState.companions` holds the revealed card, and the
+new `take-companion` action is the special action: {3}, sorcery timing, no stack
+(116.2g). A Commander deck's `sideboard` keeps its companions alone (702.139d) and
+`sideboardOf` gives it no sideboard to count or wish from (903.5e). In the client:
+the deck builder's sideboard (which marks whether the deck fulfils the condition),
+a "Companion" section in an imported list, and "companion" and "To hand" on the
+player panel. Proving cards: Kaheera, Keruga. Left for `author-freed`: Lurrus's
+castFromGraveyard needs its X held to the mana-value cap (the ruling), Zirda's
+cost reduction beyond permanent sources and Jegantha's mana that can't pay generic
+(both noted in their triage), Obosh's `filter:odd-mana-value`.
+
 ### A card's own copy limit — built 2026-11-01
 
 "A deck can have any number of cards named ~" and "up to seven cards named ~":

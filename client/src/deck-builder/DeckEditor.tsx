@@ -5,6 +5,7 @@ import {
   canCommandAlone,
   canPairCommanders,
   colorIdentityOf,
+  companionProblem,
   edhrecRankOf,
   flavorNamesOf,
   hasPartner,
@@ -259,9 +260,12 @@ export function DeckEditor({
     change({ ...deck, cards: deck.cards.filter((c) => c !== cardName) })
 
   // The sideboard (rule 100.4): up to fifteen cards outside the game, for a
-  // wish or learn to bring in — never brought by a Commander deck (903.5e).
+  // wish or learn to bring in, or a companion to reveal (103.2b). A Commander
+  // deck brings only companions (903.5e, 702.139d).
   const sideboard = deck.sideboard ?? []
-  const sideboardOpen = deck.commanders.length === 0 && sideboard.length < MAX_SIDEBOARD
+  const sideboardOpen = sideboard.length < MAX_SIDEBOARD
+  const belongsInSideboard = (def: CardDefinition | undefined): boolean =>
+    deck.commanders.length === 0 || (def?.companion ?? null) !== null
   const withSideboard = (next: readonly string[], cards = deck.cards): SavedDeck => ({
     ...deck,
     cards,
@@ -607,7 +611,7 @@ export function DeckEditor({
                     ...(n > 0
                       ? [{ label: 'Remove one', onSelect: () => removeCard(c.name) }]
                       : []),
-                    ...(deck.commanders.length === 0
+                    ...(belongsInSideboard(c)
                       ? [{ label: 'Add to sideboard', onSelect: () => addToSideboard(c.name), disabled: !sideboardOpen }]
                       : []),
                   ])}
@@ -746,7 +750,7 @@ export function DeckEditor({
                           { label: 'Add another', onSelect: () => addCard(row.name) },
                           { label: 'Remove one', onSelect: () => removeCard(row.name) },
                           { label: 'Remove all copies', onSelect: () => removeAll(row.name) },
-                          ...(deck.commanders.length === 0
+                          ...(belongsInSideboard(row.def)
                             ? [
                                 {
                                   label: 'Move one to the sideboard',
@@ -815,16 +819,23 @@ export function DeckEditor({
               </div>
               {deck.commanders.length > 0 ? (
                 <p className="db-commander-hint muted">
-                  A Commander deck brings no sideboard to the table (Commander games use none).
+                  Commander games use no sideboard: only a card with companion comes to the table from here.
                 </p>
               ) : sideboard.length === 0 ? (
                 <p className="db-commander-hint muted">
-                  Cards outside the game, for a wish or learn to bring in. Right-click a card to add it.
+                  Cards outside the game, for a wish or learn to bring in, or a companion to reveal. Right-click a card
+                  to add it.
                 </p>
               ) : null}
               <ul>
                 {sideboardRows.map((row) => {
                   const def = cardNamed(row.name)
+                  // Whether this deck could reveal it (rule 103.2b), said here
+                  // because the game simply won't offer one it can't.
+                  const companionUnmet =
+                    (def?.companion ?? null) === null
+                      ? null
+                      : companionProblem(row.name, { cards: deck.cards, commanders: deck.commanders }, cardPool().registry)
                   return (
                     <li
                       key={row.name}
@@ -832,13 +843,30 @@ export function DeckEditor({
                       {...hoverProps(def)}
                       {...menuProps(def, [
                         { label: 'Move one to the deck', onSelect: () => moveToDeck(row.name) },
-                        { label: 'Add another', onSelect: () => addToSideboard(row.name), disabled: !sideboardOpen },
+                        {
+                          label: 'Add another',
+                          onSelect: () => addToSideboard(row.name),
+                          disabled: !sideboardOpen || !belongsInSideboard(def),
+                        },
                         { label: 'Remove one', onSelect: () => removeFromSideboard(row.name) },
                       ])}
                     >
                       <span className="db-count mono">{row.n}</span>
                       <span className="db-card-name">{row.name}</span>
                       {def?.manaCost ? <Symbols text={def.manaCost} /> : null}
+                      {(def?.companion ?? null) !== null ? (
+                        <span
+                          className="db-companion-mark muted"
+                          data-companion-unmet={companionUnmet !== null ? true : undefined}
+                          title={
+                            companionUnmet === null
+                              ? 'This deck can reveal it as its companion when the game begins'
+                              : `This deck can't reveal it as its companion: ${companionUnmet}`
+                          }
+                        >
+                          {companionUnmet === null ? 'companion' : 'companion: not met'}
+                        </span>
+                      ) : null}
                       <span className="db-card-row-spacer" />
                       {readOnly ? null : (
                         <>

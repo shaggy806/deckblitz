@@ -347,6 +347,13 @@ export type Action =
       readonly morph?: boolean;
     }
   | {
+      /** Pay {3} and put your revealed companion into your hand (rule
+       * 702.139a): a special action, once a game, any time you could cast a
+       * sorcery (116.2g). A player has one companion, so it names no card. */
+      readonly type: "take-companion";
+      readonly player: PlayerId;
+    }
+  | {
       /** Unlock a locked door of a Room you control (rule 709.5e): a special
        * action, paying that half's mana cost (its "unlock cost"), any time
        * you could cast a sorcery — your main phase, the stack empty. */
@@ -983,6 +990,14 @@ export type LegalAction =
       readonly permanent: ObjectId;
       readonly door: "left" | "right";
       readonly doorName: string;
+      readonly cost: string;
+    }
+  | {
+      /** Your revealed companion can go into your hand for `cost` (rule
+       * 702.139a). */
+      readonly kind: "take-companion";
+      readonly card: ObjectId;
+      readonly cardName: string;
       readonly cost: string;
     }
   | {
@@ -1671,7 +1686,8 @@ export type LegalAction =
       /** Before turn 1 (rule 103.6a): the cards in the chooser's opening hand
        * that may begin the game on the battlefield (the Leylines), or, with
        * `destination` `"reveal"`, that may be revealed from it (the
-       * Chancellors, rule 103.6b). */
+       * Chancellors, rule 103.6b), or the chooser's companion to reveal from
+       * outside the game (rule 103.2b). */
       readonly openingHand?: true;
       /** The cards picked are shown for another player to choose among — a
        * `discard-chosen`'s `reveals` (Blackmail) — so a bot shows its worst. */

@@ -662,6 +662,20 @@ export type GameEvent =
       readonly object: ObjectId;
     })
   | (Base & {
+      /** A player revealed a card from outside the game as their companion
+       * (rule 103.2b). It stays out there, for everyone to see. */
+      readonly type: "companion-revealed";
+      readonly player: PlayerId;
+      readonly object: ObjectId;
+    })
+  | (Base & {
+      /** A player paid {3} and put their companion into their hand (rule
+       * 702.139a, the special action of 116.2g). */
+      readonly type: "companion-taken";
+      readonly player: PlayerId;
+      readonly object: ObjectId;
+    })
+  | (Base & {
       /** A card was cycled — its cycling cost paid, discarded, a card drawn
        * (rule 702.29). */
       readonly type: "card-cycled";

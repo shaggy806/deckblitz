@@ -200,6 +200,7 @@ function faceSource(face, ctx) {
     pairing: parsed.pairing,
     canBeCommander: parsed.canBeCommander,
     deckCopies: parsed.deckCopies,
+    companion: parsed.companion,
     beginsOnBattlefield: parsed.beginsOnBattlefield,
     cantBeCountered: parsed.cantBeCountered,
     flashThenSacrifice: parsed.flashThenSacrifice,

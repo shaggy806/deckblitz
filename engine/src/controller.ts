@@ -1739,6 +1739,8 @@ export class RandomController extends AutomaticController {
         return { type: "foretell", player, card: legal.card };
       case "plot":
         return { type: "plot", player, card: legal.card };
+      case "take-companion":
+        return { type: "take-companion", player };
       case "turn-face-up":
         return { type: "turn-face-up", player, permanent: legal.permanent, ...(legal.morph !== undefined ? { morph: true } : {}) };
       case "unlock-door":
@@ -3987,6 +3989,11 @@ export class HeuristicBotController extends AutomaticController {
   ): readonly ObjectId[] {
     const awaiting = view.state.awaiting;
     const forPlayer = awaiting?.kind === "choose-from-zone" ? awaiting.forPlayer : undefined;
+    // A companion (rule 103.2b) is a free extra card to buy for {3}: always
+    // reveal one, the most useful of those on offer.
+    if (awaiting?.kind === "choose-from-zone" && awaiting.companion !== undefined) {
+      return this.mostUsefulTo(view.state, this.playerId, eligible, max);
+    }
     // "You choose a card from it. That player discards that card" (Duress):
     // the card that player would most want to keep.
     if (forPlayer !== undefined && forPlayer !== this.playerId && awaiting?.kind === "choose-from-zone" && awaiting.destination === "discard") {
