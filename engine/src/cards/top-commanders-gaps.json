@@ -995,7 +995,9 @@
   "replacement:enter-replacement-sacrifice",
   "effect:reveal-cards-from-hand",
   "effect:reveal-random-card-from-hand",
-  "effect:target-player-reveals-hand"
+  "effect:target-player-reveals-hand",
+  "effect:choose-card-exiled-with-source",
+  "effect:choose-card-from-hand-or-graveyard"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

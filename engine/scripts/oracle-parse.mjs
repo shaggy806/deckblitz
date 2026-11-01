@@ -2370,6 +2370,39 @@ export function parseSentence(sentence, ctx) {
       leftover: "stay",
     };
   }
+  // "Return a card exiled with ~ to its owner's hand" (Bane Alley Broker), "put
+  // a card exiled with this Saga into its owner's hand" (Roads Go Ever, Ever
+  // On): one of them, chosen as this resolves.
+  if (re(`(?:return|put) a card exiled with ~ (?:to|into) its owner's hand`).test(s)) {
+    return { kind: "look-and-choose", zone: "exiled-with-source", min: 1, max: 1, destination: "hand", leftover: "stay" };
+  }
+  // "Return a card exiled with ~ to the battlefield" (Purgatory): a return is
+  // under its owner's control (rule 610.3c), not the chooser's.
+  if (re(`return a card exiled with ~ to the battlefield`).test(s)) {
+    return {
+      kind: "look-and-choose",
+      zone: "exiled-with-source",
+      min: 1,
+      max: 1,
+      destination: "battlefield",
+      under: "owners",
+      leftover: "stay",
+    };
+  }
+  // "[You may] have ~ become a copy of a creature card exiled with it until end
+  // of turn" (Lazav): the card only chosen, and copied as the card it is.
+  if ((m = re(`have ~ become a copy of an? (creature|artifact) card exiled with (?:it|~) until end of turn`).exec(s))) {
+    return {
+      kind: "look-and-choose",
+      zone: "exiled-with-source",
+      min: 1,
+      max: 1,
+      filter: { type: m[1].toLowerCase() },
+      destination: "stay",
+      leftover: "stay",
+      then: { kind: "become-copy", target: "source", of: 0, ofCard: true, until: "end-of-turn" },
+    };
+  }
   // "Then put all cards exiled this way into their owners' hands" (Worlds
   // Within Worlds): every card the resolution exiled, still there.
   if (re(`(?:then )?put all cards exiled this way into their owners' hands`).test(s)) {
@@ -4716,6 +4749,15 @@ export function parseEffect(text, outer) {
       skip = oneEach.used - 1;
       continue;
     }
+    // A card of those exiled with ~ chosen as this resolves (Muse Vessel, Bag
+    // of Devouring), and paying for what follows (Purgatory).
+    const exiledPick = exiledCardPickAt(sentences, i, ctx);
+    if (exiledPick !== null) {
+      parsed.push(exiledPick.effect);
+      hints.push({ sentence, effect: exiledPick.effect });
+      skip = exiledPick.used - 1;
+      continue;
+    }
     // A hand shown, then a count of it (Search Warrant), a card at random
     // from it and what follows on that card (Planeswalker's Fury), up to N
     // cards chosen from your own (Vault 21: House Gambit, Armored Kincaller).
@@ -5596,6 +5638,53 @@ function searchOthersAt(sentences, i, ctx) {
 /** A one-unit effect done "for each" of `amount` instead — parley's create a
  * token, put a counter, +1/+1 to all, add a mana, gain a life — or null. */
 /**
+ * Two sentences that are one effect over the cards exiled with the source
+ * (rule 607.2a), or a cost and what it pays for — or `null`:
+ * - "Choose a card exiled with ~. You may play that card this turn." (Muse
+ *   Vessel): `choose-exiled-to-play`'s `linked`;
+ * - "Roll a d10. Return up to X cards from among cards exiled with ~ to their
+ *   owners' hands, where X is the result." (Bag of Devouring);
+ * - "You may pay {4} and 2 life. If you do, return a card exiled with ~ to the
+ *   battlefield." (Purgatory): a `may` with its `cost` and `costLife`.
+ */
+function exiledCardPickAt(sentences, i, ctx) {
+  const first = sentences[i];
+  const next = sentences[i + 1] ?? "";
+  if (/^choose a card exiled with ~\.$/i.test(first) && /^you may play that card this turn\.$/i.test(next)) {
+    return { effect: { kind: "choose-exiled-to-play", linked: true }, used: 2 };
+  }
+  const roll = /^roll a d(\d+)\.$/i.exec(first);
+  if (roll !== null && /^return up to x cards from among cards exiled with ~ to their owners' hands, where x is the result\.$/i.test(next)) {
+    return {
+      effect: {
+        kind: "roll-dice",
+        sides: Number(roll[1]),
+        then: {
+          kind: "look-and-choose",
+          zone: "exiled-with-source",
+          min: 0,
+          max: { roll: "total" },
+          destination: "hand",
+          leftover: "stay",
+        },
+      },
+      used: 2,
+    };
+  }
+  const pay = /^you may pay ((?:\{[^}]+\})+) and (\d+) life\.$/i.exec(first);
+  const done = /^if you do, (.+)$/i.exec(next);
+  if (pay !== null && done !== null) {
+    const effect = parseSentence(`${done[1][0].toUpperCase()}${done[1].slice(1)}`, ctx);
+    if (effect === null || containsUndefined(effect)) return null;
+    return {
+      effect: { kind: "may", prompt: `Pay ${pay[1]} and ${pay[2]} life?`, cost: pay[1], costLife: Number(pay[2]), effect },
+      used: 2,
+    };
+  }
+  return null;
+}
+
+/**
  * Two sentences that reveal from a hand and act on what was shown, as one
  * effect (rule 701.20a: the cards stay where they are) — or `null`:
  * - "Target player reveals their hand. You gain life equal to the number of
@@ -5724,6 +5813,31 @@ function revealedHandChoiceAt(sentences, i, ctx) {
     return {
       effect: { kind: "discard-chosen", target: target(), destination: "library-bottom", alsoFrom: { zone: "library-top" } },
       used: 3,
+    };
+  }
+  // "You choose a nonland card from that player's graveyard or hand and exile
+  // it." (Memory Leak): the one filter over both zones. "You may cast that
+  // card for as long as it remains exiled, and you may spend mana as though it
+  // were mana of any color to cast that spell." (Psychic Intrusion).
+  const either = /^you choose an? (?:(.+?) )?card from that player's graveyard or hand and exile it\.$/i.exec(sentences[i + 1] ?? "");
+  if (either !== null) {
+    const filter = either[1] === undefined ? {} : parseTypePhrase(either[1]);
+    if (filter === null) return null;
+    const some = Object.keys(filter).length > 0 ? { filter } : {};
+    const castIt =
+      /^you may cast that card for as long as it remains exiled, and you may spend mana as though it were mana of any color to cast that spell\.$/i.test(
+        sentences[i + 2] ?? "",
+      );
+    return {
+      effect: {
+        kind: "discard-chosen",
+        target: target(),
+        ...some,
+        destination: "exile",
+        alsoFrom: { zone: "graveyard", ...some },
+        ...(castIt ? { mayCast: { duration: "while-exiled", spendAs: "any-color" } } : {}),
+      },
+      used: castIt ? 3 : 2,
     };
   }
   const choose =
@@ -7766,6 +7880,8 @@ export function parseFace(face, ctx = {}) {
         // Nautiloid Ship's "exile target player's graveyard", Skyship
         // Weatherlight's "search … exile them".
         if (node.kind === "exile-graveyard") node.linked = true;
+        // Muse Vessel's "target player exiles a card from their hand".
+        if (node.kind === "look-and-choose" && node.destination === "exile") delete node.unlinked;
         if (node.kind === "search-library" && (node.destination === "exile" || node.destination === "exile-face-down")) {
           node.linked = true;
         }

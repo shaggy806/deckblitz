@@ -7489,3 +7489,89 @@ describe("revealing from a hand", () => {
     });
   });
 });
+
+describe("a card chosen from a set as an effect resolves", () => {
+  const face = (type_line: string, oracle_text: string) =>
+    parseFace({ name: "Test Chooser", type_line, oracle_text }, { tokenFor: () => null });
+
+  it("reads a nonland card from that player's graveyard or hand, and casting it", () => {
+    const leak = face("Sorcery", "Target opponent reveals their hand. You choose a nonland card from that player's graveyard or hand and exile it.");
+    expect(leak.complete).toBe(true);
+    expect(leak.targets).toEqual(["opponent"]);
+    expect(leak.effect).toEqual({
+      kind: "discard-chosen",
+      target: 0,
+      filter: { notTypes: ["land"] },
+      destination: "exile",
+      alsoFrom: { zone: "graveyard", filter: { notTypes: ["land"] } },
+    });
+    const intrusion = face(
+      "Sorcery",
+      "Target opponent reveals their hand. You choose a nonland card from that player's graveyard or hand and exile it. You may cast that card for as long as it remains exiled, and you may spend mana as though it were mana of any color to cast that spell.",
+    );
+    expect(intrusion.complete).toBe(true);
+    expect(intrusion.effect.mayCast).toEqual({ duration: "while-exiled", spendAs: "any-color" });
+  });
+
+  it("reads a card exiled with the source chosen for a hand, the battlefield, or to play", () => {
+    const broker = face("Creature — Human Rogue", "{U}{B}, {T}: Return a card exiled with this creature to its owner's hand.");
+    expect(broker.complete).toBe(true);
+    expect(broker.activated[0].effect).toEqual({
+      kind: "look-and-choose",
+      zone: "exiled-with-source",
+      min: 1,
+      max: 1,
+      destination: "hand",
+      leftover: "stay",
+    });
+    const purgatory = face(
+      "Enchantment",
+      "At the beginning of your upkeep, you may pay {4} and 2 life. If you do, return a card exiled with this enchantment to the battlefield.",
+    );
+    expect(purgatory.complete).toBe(true);
+    expect(purgatory.triggered[0].effect).toMatchObject({
+      kind: "may",
+      cost: "{4}",
+      costLife: 2,
+      effect: { kind: "look-and-choose", zone: "exiled-with-source", destination: "battlefield", under: "owners" },
+    });
+    const vessel = face(
+      "Artifact",
+      "{3}, {T}: Target player exiles a card from their hand. Activate only as a sorcery.\n{1}: Choose a card exiled with this artifact. You may play that card this turn.",
+    );
+    expect(vessel.complete).toBe(true);
+    expect(vessel.activated[1].effect).toEqual({ kind: "choose-exiled-to-play", linked: true });
+    // The face reads "exiled with this artifact", so its own exile is linked.
+    expect(vessel.activated[0].effect.effect.unlinked).toBeUndefined();
+    const elsewhere = face("Sorcery", "Target player exiles a card from their hand.");
+    expect(elsewhere.effect.effect.unlinked).toBe(true);
+  });
+
+  it("reads up to X such cards after a die, and a copy of one", () => {
+    const bag = face(
+      "Artifact",
+      "{3}, {T}, Sacrifice this artifact: Roll a d10. Return up to X cards from among cards exiled with this artifact to their owners' hands, where X is the result.",
+    );
+    expect(bag.complete).toBe(true);
+    expect(bag.activated[0].effect).toEqual({
+      kind: "roll-dice",
+      sides: 10,
+      then: { kind: "look-and-choose", zone: "exiled-with-source", min: 0, max: { roll: "total" }, destination: "hand", leftover: "stay" },
+    });
+    const lazav = face(
+      "Legendary Creature — Shapeshifter Detective",
+      "Whenever you sacrifice a Clue, you may have this creature become a copy of a creature card exiled with it until end of turn.",
+    );
+    expect(lazav.complete).toBe(true);
+    expect(lazav.triggered[0].effect.effect).toEqual({
+      kind: "look-and-choose",
+      zone: "exiled-with-source",
+      min: 1,
+      max: 1,
+      filter: { type: "creature" },
+      destination: "stay",
+      leftover: "stay",
+      then: { kind: "become-copy", target: "source", of: 0, ofCard: true, until: "end-of-turn" },
+    });
+  });
+});

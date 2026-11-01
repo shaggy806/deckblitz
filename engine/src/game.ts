@@ -28616,15 +28616,16 @@ export class Game {
               ...(opts?.undaunted === true ? { undaunted: true as const } : {}),
             };
       },
-      chooseExiledToPlay: (filter, free) => {
+      chooseExiledToPlay: (filter, free, among) => {
         // "Choose an exiled card …": face up, matching from the chooser's
-        // side; not a target. "You may play it this turn": a land too.
-        const eligible = this.state.zones.shared.exile.filter((id) => {
+        // side; not a target. "You may play it this turn": a land too. Or
+        // only the cards linked to the source (rule 607.2a — Muse Vessel).
+        const eligible = (among ?? this.state.zones.shared.exile).filter((id) => {
           const card = this.state.objects[id];
           return (
             card !== undefined &&
             card.exiledFaceDown === undefined &&
-            matchesFilter(this.state, this.registry, id, filter, { you: controller })
+            (filter === undefined || matchesFilter(this.state, this.registry, id, filter, { you: controller }))
           );
         });
         if (eligible.length === 0) return;
@@ -28748,7 +28749,19 @@ export class Game {
           });
           return;
         }
-        this.beginDiscardChosen(to?.chooser ?? controller, source, target, filter, lookOnly, optional, upTo, to?.destination, exileLink, to?.alsoFrom);
+        // "You may cast that card for as long as it remains exiled"
+        // (Psychic Intrusion), as an `exile`'s `mayCast`.
+        const mayCast = to?.mayCast;
+        const grant: GameObject["impulse"] =
+          mayCast === undefined
+            ? undefined
+            : {
+                player: controller,
+                ...this.impulseWindow(mayCast.duration, controller, source),
+                ...(mayCast.play === true ? {} : { castOnly: true }),
+                ...(mayCast.spendAs !== undefined ? { spendAs: mayCast.spendAs } : {}),
+              };
+        this.beginDiscardChosen(to?.chooser ?? controller, source, target, filter, lookOnly, optional, upTo, to?.destination, exileLink, to?.alsoFrom, grant);
       },
       modifyPt: (target, power, toughness, duration) =>
         this.modifyPt(target, power, toughness, lastingHere(duration)),
@@ -30900,6 +30913,7 @@ export class Game {
           together === undefined ? undefined : { together, x },
           split,
           more?.anOpponent === true,
+          more?.underOwners === true,
         );
       },
     };
@@ -30966,6 +30980,9 @@ export class Game {
     split?: readonly ZoneChoiceSplitCase[],
     /** "An opponent chooses": see `look-and-choose`'s `chooser`. */
     anOpponentPicks = false,
+    /** A linked card "returned": under its owner's control, not the
+     * chooser's — see `look-and-choose`'s `under`. */
+    underOwners = false,
   ): void {
     // The exile zone (a processor, Oblivion Sower): only what may be
     // chosen is shown — the cards `player` owns when someone else is
@@ -31008,7 +31025,7 @@ export class Game {
         ...(prompt !== undefined ? { prompt } : {}),
         ...(faceDownGroups.length > 0 ? { faceDownGroups } : {}),
         // "Onto the battlefield under your control" (rule 110.2a).
-        ...(destination === "battlefield" ? { enterUnder: enterUnder ?? chooser } : {}),
+        ...(destination === "battlefield" && !underOwners ? { enterUnder: enterUnder ?? chooser } : {}),
         ...(enterTapped && destination === "battlefield" ? { enterTapped: true } : {}),
         ...(withCounters !== undefined && destination === "battlefield" ? { enterWithCounters: withCounters } : {}),
         ...(attacking !== undefined && destination === "battlefield" ? { enterAttacking: attacking } : {}),
@@ -31192,6 +31209,9 @@ export class Game {
     /** One choice over the hand and another zone of that player's — see
      * `discard-chosen`'s `alsoFrom`. */
     alsoFrom?: { readonly zone: "graveyard"; readonly filter?: CardFilter } | { readonly zone: "library-top" },
+    /** What may be done with the card exiled — see `discard-chosen`'s
+     * `mayCast`. */
+    impulseGrant?: GameObject["impulse"],
   ): void {
     if (target.kind !== "player") return;
     const player = target.player;
@@ -31235,6 +31255,7 @@ export class Game {
       // "Onto the battlefield under your control" (Treacherous Urge).
       ...(destination === "battlefield" && chooser !== player ? { enterUnder: chooser } : {}),
       ...(exileLink !== undefined ? { exileLink } : {}),
+      ...(impulseGrant !== undefined ? { impulseGrant } : {}),
       leftover: "stay",
     };
   }

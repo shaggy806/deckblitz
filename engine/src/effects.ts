@@ -3823,9 +3823,13 @@ export type EffectSpec =
        * in exile matching `filter` (from their side) — nothing is targeted —
        * and may play it this turn: a land as their land play, a spell at its
        * normal timing (the rulings), with `free` only without paying its
-       * mana cost. Nothing happens with none to choose. */
+       * mana cost. Nothing happens with none to choose. With `linked`, only
+       * the cards exiled with this effect's source (rule 607.2a), in the stint
+       * the resolving ability refers to: Muse Vessel's "choose a card exiled
+       * with this artifact. You may play that card this turn". */
       readonly kind: "choose-exiled-to-play";
-      readonly filter: CardFilter;
+      readonly filter?: CardFilter;
+      readonly linked?: true;
       readonly free?: boolean;
     }
   | {
@@ -4119,6 +4123,15 @@ export type EffectSpec =
       readonly alsoFrom?:
         | { readonly zone: "graveyard"; readonly filter?: CardFilter }
         | { readonly zone: "library-top" };
+      /**
+       * With `destination: "exile"`, what the effect's controller may do with
+       * the card chosen, as `exile`'s `mayCast`: Psychic Intrusion's "you may
+       * cast that card for as long as it remains exiled, and you may spend
+       * mana as though it were mana of any color to cast that spell"
+       * (`{ duration: "while-exiled", spendAs: "any-color" }`). Not with
+       * `reveals`.
+       */
+      readonly mayCast?: { readonly duration: ImpulseDuration; readonly spendAs?: SpendAs; readonly play?: true };
     }
   | {
       /**
@@ -7957,8 +7970,12 @@ export type EffectSpec =
       /** Chosen cards bound for the battlefield enter under the **effect's
        * controller's** control, whoever's zone or choice it was: Scrounge's
        * "target opponent chooses an artifact card in their graveyard. Put that
-       * card onto the battlefield **under your control**". */
-      readonly under?: "you";
+       * card onto the battlefield **under your control**". `"owners"`: under
+       * their owners', as a "return" is (610.3c), where `zone:
+       * "exiled-with-source"` is otherwise a "put", the chooser's (110.2a) —
+       * Purgatory's "return a card exiled with this enchantment to the
+       * battlefield". */
+      readonly under?: "you" | "owners";
       /** Another player's library, the effect's controller still looking
        * and choosing: "look at the top three cards of **target player's**
        * library" (Architects of Will: `{ target: 0 }`), "**that player**
@@ -8081,7 +8098,12 @@ export type EffectSpec =
         | "exile-face-down"
         | "exile"
         | "manifest"
-        | "reveal";
+        | "reveal"
+        /** Nothing moves: the card is only chosen, and `then` acts on it as
+         * its target 0 — Lazav, Wearer of Faces' "become a copy of a creature
+         * card exiled with it" (`zone: "exiled-with-source"`, `then` a
+         * `become-copy` with `of: 0`, `ofCard`). */
+        | "stay";
       /** `"exile"` without the link (rule 607.2a): a card exiled by an effect
        * that isn't one of a linked pair — Shadow Kin's "you may exile a
        * creature card from among them", which no "the exiled card" of its
@@ -9014,7 +9036,7 @@ export interface EffectApi {
     opts?: { readonly whileExiled?: boolean; readonly undaunted?: boolean },
   ): void;
   /** See the `"choose-exiled-to-play"` {@link EffectSpec}. */
-  chooseExiledToPlay(filter: CardFilter, free: boolean): void;
+  chooseExiledToPlay(filter: CardFilter | undefined, free: boolean, among?: readonly ObjectId[]): void;
   /** See the `"cast-now"` {@link EffectSpec}: offer the effect's
    * controller the cast of one of `cards`, as a `cast-now` decision — or
    * nothing, when none of them can be cast. */
@@ -9342,6 +9364,7 @@ export interface EffectApi {
       readonly alsoFrom?:
         | { readonly zone: "graveyard"; readonly filter?: CardFilter }
         | { readonly zone: "library-top" };
+      readonly mayCast?: { readonly duration: ImpulseDuration; readonly spendAs?: SpendAs; readonly play?: true };
       /** See the effect's `reveals` and `picks`, read as it resolves. */
       readonly reveals?: { readonly count: number; readonly picks: number };
     },
@@ -10251,7 +10274,7 @@ export interface EffectApi {
     /** See `look-and-choose`'s `split`. */
     split?: readonly ZoneChoiceSplitCase[],
     /** Its `chooser: "an-opponent"` and `under: "you"`. */
-    more?: { readonly anOpponent?: true; readonly underYou?: true },
+    more?: { readonly anOpponent?: true; readonly underYou?: true; readonly underOwners?: true },
   ): void;
   /** A `choose-from-zone` an `offer-zone-choice` carries: ask it now. */
   offerZoneChoice(decision: Extract<AwaitingDecision, { kind: "choose-from-zone" }>): void;
@@ -13642,7 +13665,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       applyCastNowSpec(spec, ctx);
       return;
     case "choose-exiled-to-play":
-      ctx.chooseExiledToPlay(spec.filter, spec.free === true);
+      ctx.chooseExiledToPlay(spec.filter, spec.free === true, spec.linked === true ? ctx.cardsExiledWithSource(true) : undefined);
       return;
     case "allow-cast-from-exile": {
       const target = resolveEffectTarget(spec.target, ctx);
@@ -13868,6 +13891,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           ...(spec.destination !== undefined ? { destination: spec.destination } : {}),
           ...(spec.unlinked === true ? { unlinked: true } : {}),
           ...(spec.alsoFrom !== undefined ? { alsoFrom: spec.alsoFrom } : {}),
+          ...(spec.mayCast !== undefined ? { mayCast: spec.mayCast } : {}),
           ...(spec.reveals !== undefined
             ? {
                 reveals: {
@@ -15955,7 +15979,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           ? { cards: ctx.targets.flatMap((t) => (t?.kind === "object" ? [t.object] : [])) }
           : spec.zone === "exiled-with-source"
             ? // Rule 607.2a: only what the linked ability exiled.
-              { exiled: ctx.cardsExiledWithSource() }
+              { exiled: ctx.cardsExiledWithSource(true) }
             : spec.zone;
       ctx.lookAndChoose(
         zone,
@@ -15993,6 +16017,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         {
           ...(spec.chooser === "an-opponent" ? { anOpponent: true as const } : {}),
           ...(spec.under === "you" ? { underYou: true as const } : {}),
+          ...(spec.under === "owners" ? { underOwners: true as const } : {}),
         },
       );
       return;

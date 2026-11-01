@@ -549,6 +549,27 @@ cards: Rule of Law, Deafening Silence, Ethersworn Canonist, Irencrag Feat,
 Curse of Exhaustion. Left: Hedonist's Trove's "this way", Fires of Invention's
 "no more than two" beside its "only during your turn" (one line, two statics).
 
+### A card chosen from a set as an effect resolves — built 2026-11-01
+
+The need-keys Phase 2 family `effect:choose-card-exiled-with-source`'s group,
+features only, beside `create-token-copy`'s `chooseOne`. `look-and-choose`'s
+`zone: "exiled-with-source"` takes `destination: "stay"` (the card only chosen,
+`then` acting on it: Lazav's `become-copy`), `under: "owners"` (Purgatory's
+"return", rule 610.3c) and now reaches an "until this leaves" exile too;
+`choose-exiled-to-play` takes `linked` (Muse Vessel); `discard-chosen` takes
+`mayCast`, as `exile`'s (Psychic Intrusion). "From that player's graveyard or
+hand" was already `discard-chosen`'s `alsoFrom`. The scaffolder reads all of it,
+"you may pay {N} and N life. If you do" included, and links a "target player
+exiles a card from their hand" on a face that reads "exiled with ~". Keys:
+effect:choose-card-exiled-with-source, effect:choose-card-from-hand-or-graveyard.
+Proving cards: Memory Leak, Psychic Intrusion, Muse Vessel, Purgatory, Bag of
+Devouring, Lazav, Wearer of Faces. Left: Bane Alley Broker's "you may look at
+cards exiled with this creature" past a change of control (`exiledFaceDown.lookers`
+is fixed as it's exiled; and a face-down linked card picked is at random within
+its group, `exileChoiceCandidates`), Vault 13's "the rest on the bottom" (the
+linked branch of `beginZoneChoice` forces `leftover: "stay"`), Valki's mana-value
+choice, and each one's other key.
+
 ### Revealing from a hand: the whole hand, at random, or up to N chosen — built 2026-11-01
 
 The need-keys Phase 2 family `effect:target-spec-additions`' top group, features

@@ -437,10 +437,13 @@ function untargetedWorth(effect: EffectSpec, ctx: WorthContext): number {
     case "choose-exiled-to-play": {
       // A card to play this turn — free, an opponent's (Dauthi Voidwalker).
       // Nothing, roughly, when no exiled card of another player's carries
-      // a counter to pick it out by.
+      // a counter to pick it out by. With `linked`, any card exiled with the
+      // source (Muse Vessel).
       const any = ctx.state.zones.shared.exile.some((id) => {
         const card = ctx.state.objects[id];
-        return card !== undefined && card.owner !== ctx.controller && Object.keys(card.counters).length > 0;
+        if (card === undefined) return false;
+        if (effect.linked === true) return card.exiledWith?.source === ctx.source;
+        return card.owner !== ctx.controller && Object.keys(card.counters).length > 0;
       });
       return any ? onPlayers(you, effect.free === true ? CARD * 1.5 : CARD, ctx) : 0;
     }
