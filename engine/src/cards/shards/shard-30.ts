@@ -52,6 +52,7 @@ import _poolAwakenTheBloodAvatar from "../pool/awaken-the-blood-avatar.js";
 import _poolAwakenedAwareness from "../pool/awakened-awareness.js";
 import _poolAzoriusGuildgate from "../pool/azorius-guildgate.js";
 import _poolAzulaAlwaysLies from "../pool/azula-always-lies.js";
+import _poolBairdStewardOfArgive from "../pool/baird-steward-of-argive.js";
 import _poolBalothNull from "../pool/baloth-null.js";
 import _poolBalothWoodcrasher from "../pool/baloth-woodcrasher.js";
 import _poolBannerhideKrushok from "../pool/bannerhide-krushok.js";
@@ -926,6 +927,7 @@ const shard: CardShard = {
     _poolAwakenedAwareness,
     _poolAzoriusGuildgate,
     _poolAzulaAlwaysLies,
+    _poolBairdStewardOfArgive,
     _poolBalothNull,
     _poolBalothWoodcrasher,
     _poolBannerhideKrushok,

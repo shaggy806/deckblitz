@@ -185,6 +185,7 @@ import _poolCuriosity from "../pool/curiosity.js";
 import _poolCursedRack from "../pool/cursed-rack.js";
 import _poolCyberConversion from "../pool/cyber-conversion.js";
 import _poolCyclicalEvolution from "../pool/cyclical-evolution.js";
+import _poolCyclone from "../pool/cyclone.js";
 import _poolDaggerclawImp from "../pool/daggerclaw-imp.js";
 import _poolDaiLiCensor from "../pool/dai-li-censor.js";
 import _poolDainLordOfTheIronHills from "../pool/dain-lord-of-the-iron-hills.js";
@@ -506,6 +507,7 @@ import _poolObeliskOfBant from "../pool/obelisk-of-bant.js";
 import _poolObsessiveStitcher from "../pool/obsessive-stitcher.js";
 import _poolOkibaSalvage from "../pool/okiba-salvage.js";
 import _poolOminousAsylum from "../pool/ominous-asylum.js";
+import _poolOnakkeOathkeeper from "../pool/onakke-oathkeeper.js";
 import _poolOpalArchangel from "../pool/opal-archangel.js";
 import _poolOpalChampion from "../pool/opal-champion.js";
 import _poolOracleOfNectars from "../pool/oracle-of-nectars.js";
@@ -1043,6 +1045,7 @@ const shard: CardShard = {
     _poolCursedRack,
     _poolCyberConversion,
     _poolCyclicalEvolution,
+    _poolCyclone,
     _poolDaggerclawImp,
     _poolDaiLiCensor,
     _poolDainLordOfTheIronHills,
@@ -1364,6 +1367,7 @@ const shard: CardShard = {
     _poolObsessiveStitcher,
     _poolOkibaSalvage,
     _poolOminousAsylum,
+    _poolOnakkeOathkeeper,
     _poolOpalArchangel,
     _poolOpalChampion,
     _poolOracleOfNectars,

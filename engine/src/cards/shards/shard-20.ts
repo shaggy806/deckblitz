@@ -283,6 +283,7 @@ import _poolFlourishingGrapple from "../pool/flourishing-grapple.js";
 import _poolFlowstoneStrike from "../pool/flowstone-strike.js";
 import _poolFoggySwampHunters from "../pool/foggy-swamp-hunters.js";
 import _poolFolkOfAnHavva from "../pool/folk-of-an-havva.js";
+import _poolForbiddingSpirit from "../pool/forbidding-spirit.js";
 import _poolFortifiedArea from "../pool/fortified-area.js";
 import _poolFrodoDeterminedHero from "../pool/frodo-determined-hero.js";
 import _poolFrostwalla from "../pool/frostwalla.js";
@@ -1204,6 +1205,7 @@ const shard: CardShard = {
     _poolFlowstoneStrike,
     _poolFoggySwampHunters,
     _poolFolkOfAnHavva,
+    _poolForbiddingSpirit,
     _poolFortifiedArea,
     _poolFrodoDeterminedHero,
     _poolFrostwalla,

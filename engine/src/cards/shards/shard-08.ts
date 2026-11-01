@@ -632,6 +632,7 @@ import _poolRoilsRetribution from "../pool/roils-retribution.js";
 import _poolRoofstalkerWight from "../pool/roofstalker-wight.js";
 import _poolRootMaze from "../pool/root-maze.js";
 import _poolRuinGhost from "../pool/ruin-ghost.js";
+import _poolRushOfInspiration from "../pool/rush-of-inspiration.js";
 import _poolSageOfTheMaze from "../pool/sage-of-the-maze.js";
 import _poolSaheeliConsulOfOversight from "../pool/saheeli-consul-of-oversight.js";
 import _poolSalvageDrone from "../pool/salvage-drone.js";
@@ -1531,6 +1532,7 @@ const shard: CardShard = {
     _poolRoofstalkerWight,
     _poolRootMaze,
     _poolRuinGhost,
+    _poolRushOfInspiration,
     _poolSageOfTheMaze,
     _poolSaheeliConsulOfOversight,
     _poolSalvageDrone,

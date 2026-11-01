@@ -672,6 +672,7 @@ import _poolSoulcipherBoard from "../pool/soulcipher-board.js";
 import _poolSoulcoilViper from "../pool/soulcoil-viper.js";
 import _poolSoulknifeSpy from "../pool/soulknife-spy.js";
 import _poolSpeciesGorger from "../pool/species-gorger.js";
+import _poolSphereOfSafety from "../pool/sphere-of-safety.js";
 import _poolSphereOfTheSuns from "../pool/sphere-of-the-suns.js";
 import _poolSpikefieldHazard from "../pool/spikefield-hazard.js";
 import _poolSpiketailHatchling from "../pool/spiketail-hatchling.js";
@@ -1539,6 +1540,7 @@ const shard: CardShard = {
     _poolSoulcoilViper,
     _poolSoulknifeSpy,
     _poolSpeciesGorger,
+    _poolSphereOfSafety,
     _poolSphereOfTheSuns,
     _poolSpikefieldHazard,
     _poolSpiketailHatchling,

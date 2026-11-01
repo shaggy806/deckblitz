@@ -135,6 +135,7 @@ import _poolCroakingCurse from "../pool/croaking-curse.js";
 import _poolCruelDeceiver from "../pool/cruel-deceiver.js";
 import _poolCryotheoryAdept from "../pool/cryotheory-adept.js";
 import _poolCryptothrall from "../pool/cryptothrall.js";
+import _poolCurseArtifact from "../pool/curse-artifact.js";
 import _poolCurseOfSilence from "../pool/curse-of-silence.js";
 import _poolCursedWindbreaker from "../pool/cursed-windbreaker.js";
 import _poolCytospawnShambler from "../pool/cytospawn-shambler.js";
@@ -190,6 +191,7 @@ import _poolElugeTheShorelessSea from "../pool/eluge-the-shoreless-sea.js";
 import _poolElvishDreadlord from "../pool/elvish-dreadlord.js";
 import _poolElvishFarmer from "../pool/elvish-farmer.js";
 import _poolEmbodimentOfSpring from "../pool/embodiment-of-spring.js";
+import _poolEnchantersBane from "../pool/enchanters-bane.js";
 import _poolEndrekSahrMasterBreeder from "../pool/endrek-sahr-master-breeder.js";
 import _poolEnduringBondwarden from "../pool/enduring-bondwarden.js";
 import _poolEnslave from "../pool/enslave.js";
@@ -980,6 +982,7 @@ const shard: CardShard = {
     _poolCruelDeceiver,
     _poolCryotheoryAdept,
     _poolCryptothrall,
+    _poolCurseArtifact,
     _poolCurseOfSilence,
     _poolCursedWindbreaker,
     _poolCytospawnShambler,
@@ -1035,6 +1038,7 @@ const shard: CardShard = {
     _poolElvishDreadlord,
     _poolElvishFarmer,
     _poolEmbodimentOfSpring,
+    _poolEnchantersBane,
     _poolEndrekSahrMasterBreeder,
     _poolEnduringBondwarden,
     _poolEnslave,

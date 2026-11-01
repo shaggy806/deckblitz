@@ -126,6 +126,7 @@ import _poolCogworkTracker from "../pool/cogwork-tracker.js";
 import _poolCogworkWrestler from "../pool/cogwork-wrestler.js";
 import _poolColfenorTheLastYew from "../pool/colfenor-the-last-yew.js";
 import _poolCollateralDamage from "../pool/collateral-damage.js";
+import _poolCollectiveRestraint from "../pool/collective-restraint.js";
 import _poolColonelAutumn from "../pool/colonel-autumn.js";
 import _poolColossalCollision from "../pool/colossal-collision.js";
 import _poolCombatCalligrapher from "../pool/combat-calligrapher.js";
@@ -1002,6 +1003,7 @@ const shard: CardShard = {
     _poolCogworkWrestler,
     _poolColfenorTheLastYew,
     _poolCollateralDamage,
+    _poolCollectiveRestraint,
     _poolColonelAutumn,
     _poolColossalCollision,
     _poolCombatCalligrapher,

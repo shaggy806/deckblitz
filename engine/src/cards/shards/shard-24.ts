@@ -808,6 +808,7 @@ import _poolWallOfSpears from "../pool/wall-of-spears.js";
 import _poolWandOfTheWorldsoul from "../pool/wand-of-the-worldsoul.js";
 import _poolWanderlust from "../pool/wanderlust.js";
 import _poolWarRoom from "../pool/war-room.js";
+import _poolWarTax from "../pool/war-tax.js";
 import _poolWarcryPhoenix from "../pool/warcry-phoenix.js";
 import _poolWarlordsFury from "../pool/warlords-fury.js";
 import _poolWatchfulBlisterzoa from "../pool/watchful-blisterzoa.js";
@@ -1675,6 +1676,7 @@ const shard: CardShard = {
     _poolWandOfTheWorldsoul,
     _poolWanderlust,
     _poolWarRoom,
+    _poolWarTax,
     _poolWarcryPhoenix,
     _poolWarlordsFury,
     _poolWatchfulBlisterzoa,

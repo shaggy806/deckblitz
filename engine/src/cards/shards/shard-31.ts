@@ -153,6 +153,7 @@ import _poolCoercedConfession from "../pool/coerced-confession.js";
 import _poolCoercedToKill from "../pool/coerced-to-kill.js";
 import _poolColossodonYearling from "../pool/colossodon-yearling.js";
 import _poolCombatMedic from "../pool/combat-medic.js";
+import _poolCommandBridge from "../pool/command-bridge.js";
 import _poolCommissarSeverinaRaine from "../pool/commissar-severina-raine.js";
 import _poolCommuneWithDinosaurs from "../pool/commune-with-dinosaurs.js";
 import _poolComponentCollector from "../pool/component-collector.js";
@@ -1084,6 +1085,7 @@ const shard: CardShard = {
     _poolCoercedToKill,
     _poolColossodonYearling,
     _poolCombatMedic,
+    _poolCommandBridge,
     _poolCommissarSeverinaRaine,
     _poolCommuneWithDinosaurs,
     _poolComponentCollector,

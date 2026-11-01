@@ -387,6 +387,7 @@ import _poolKaervekThePunisher from "../pool/kaervek-the-punisher.js";
 import _poolKaerveksHex from "../pool/kaerveks-hex.js";
 import _poolKamiOfTheCrescentMoon from "../pool/kami-of-the-crescent-moon.js";
 import _poolKarnsBastion from "../pool/karns-bastion.js";
+import _poolKaroo from "../pool/karoo.js";
 import _poolKarplusanGiant from "../pool/karplusan-giant.js";
 import _poolKavaronSkywarden from "../pool/kavaron-skywarden.js";
 import _poolKaylasReconstruction from "../pool/kaylas-reconstruction.js";
@@ -1268,6 +1269,7 @@ const shard: CardShard = {
     _poolKaerveksHex,
     _poolKamiOfTheCrescentMoon,
     _poolKarnsBastion,
+    _poolKaroo,
     _poolKarplusanGiant,
     _poolKavaronSkywarden,
     _poolKaylasReconstruction,

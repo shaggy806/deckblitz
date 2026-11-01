@@ -668,6 +668,7 @@ import _poolSilentSentinel from "../pool/silent-sentinel.js";
 import _poolSilverclawGriffin from "../pool/silverclaw-griffin.js";
 import _poolSilverquillApprentice from "../pool/silverquill-apprentice.js";
 import _poolSimicSignet from "../pool/simic-signet.js";
+import _poolSivitriDragonMaster from "../pool/sivitri-dragon-master.js";
 import _poolSkitterskin from "../pool/skitterskin.js";
 import _poolSkullProphet from "../pool/skull-prophet.js";
 import _poolSkyCycle from "../pool/sky-cycle.js";
@@ -1557,6 +1558,7 @@ const shard: CardShard = {
     _poolSilverclawGriffin,
     _poolSilverquillApprentice,
     _poolSimicSignet,
+    _poolSivitriDragonMaster,
     _poolSkitterskin,
     _poolSkullProphet,
     _poolSkyCycle,
