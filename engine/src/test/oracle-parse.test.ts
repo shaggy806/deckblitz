@@ -5823,3 +5823,80 @@ describe("a card name chosen and used", () => {
     });
   });
 });
+
+describe("target relations among the chosen targets: shared types, equal toughness, different names", () => {
+  const face = (name: string, type_line: string, oracle_text: string) =>
+    parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });
+
+  it("reads 'two target … that share a card type / a creature type / no creature types' as a related pair", () => {
+    const loyalties = face("Shifting Loyalties", "Sorcery", "Exchange control of two target permanents that share a card type.");
+    expect(loyalties.targets).toEqual(["permanent", { kind: "other", of: "permanent", than: { slot: 0 }, shares: { kind: "card" } }]);
+    expect(loyalties.effect).toEqual({ kind: "exchange-control", objects: [0, 1] });
+    const duel = face(
+      "Rivals' Duel",
+      "Sorcery",
+      "Choose two target creatures that share no creature types. Those creatures fight each other.",
+    );
+    expect(duel.targets).toEqual([
+      "creature",
+      { kind: "other", of: "creature", than: { slot: 0 }, shares: { kind: "creature", none: true } },
+    ]);
+    expect(duel.effect).toEqual({ kind: "fight", a: 0, b: 1 });
+    const tunnel = parseSentence("Two target creatures you control that share a creature type can't be blocked this turn.", ctx());
+    expect(tunnel).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "grant-keyword", target: 0, keyword: "unblockable", duration: "end-of-turn" },
+        { kind: "grant-keyword", target: 1, keyword: "unblockable", duration: "end-of-turn" },
+      ],
+    });
+  });
+
+  it("reads 'another target permanent that shares one of those types with it' as sharing the first slot's types", () => {
+    const legerdemain = face(
+      "Legerdemain",
+      "Sorcery",
+      "Exchange control of target artifact or creature and another target permanent that shares one of those types with it.",
+    );
+    expect(legerdemain.targets).toEqual([
+      "artifact-or-creature",
+      { kind: "other", of: "permanent", than: { slot: 0 }, shares: { kind: "card", among: ["artifact", "creature"] } },
+    ]);
+    expect(legerdemain.effect).toEqual({ kind: "exchange-control", objects: [0, 1] });
+  });
+
+  it("reads 'with equal toughness' and 'with different names' as a group's relation", () => {
+    const vats = face(
+      "V.A.T.S.",
+      "Instant",
+      "Choose any number of target creatures with equal toughness. Destroy the chosen creatures.",
+    );
+    expect(vats.targets).toEqual([{ kind: "any-number", of: "creature", equalToughness: true }]);
+    expect(vats.effect).toEqual({ kind: "for-each-target", from: 0, simultaneous: true, effect: { kind: "destroy", target: 0 } });
+    const six = face(
+      "Behold the Sinister Six!",
+      "Sorcery",
+      "Return up to six target creature cards with different names from your graveyard to the battlefield.",
+    );
+    expect(six.targets).toEqual([
+      {
+        kind: "any-number",
+        of: { kind: "card-in-graveyard", whose: "you", filter: { type: "creature" } },
+        max: 6,
+        differentNames: true,
+      },
+    ]);
+    expect(six.effect).toEqual({
+      kind: "for-each-target",
+      from: 0,
+      simultaneous: true,
+      effect: { kind: "put-onto-battlefield", target: 0 },
+    });
+  });
+
+  it("leaves a choice followed by something else unread", () => {
+    expect(
+      face("Test Card", "Sorcery", "Choose two target creatures that share no creature types. You gain 3 life.").complete,
+    ).toBe(false);
+  });
+});

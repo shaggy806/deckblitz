@@ -402,6 +402,7 @@ import {
   concreteTargetSpecs,
   differentControllerOf,
   sameControllerOf,
+  sharesOf,
   divisionOf as spellDivision,
   groupBounds,
   groupPowerExceeded,
@@ -443,8 +444,9 @@ import {
   protectionBlocks,
   stateTargetFacts,
   targetSpecReadsX,
+  typesShare,
 } from "./targeting.js";
-import type { TargetSource } from "./targeting.js";
+import type { SharedTypeFacts, TargetSource } from "./targeting.js";
 import { exactTokenShape, referencedObjectIds } from "./token-fold.js";
 import { PHASE_OF_STEP, isMainPhase, nextStep, stepUsesPriority } from "./turn.js";
 import type { Step } from "./turn.js";
@@ -21230,6 +21232,8 @@ export class Game {
       this.targetsStillMeant(object),
       object.controller,
       this.cardSource(def, id),
+      [],
+      object.targetZones ?? [],
     );
     const targets = legality.targets;
     if (legality.fizzles) {
@@ -22030,6 +22034,7 @@ export class Game {
         ? { ...targetSource, chooser: object.otherChooser }
         : targetSource,
       object.autoTargetSlots,
+      object.targetZones ?? [],
     );
     if (legality.fizzles) {
       this.removeAbilityFromStack(id);
@@ -25375,6 +25380,9 @@ export class Game {
     forPlayer: PlayerId,
     source?: TargetSource,
     autoSlots: readonly number[] = [],
+    /** Where each target was as it was targeted (`GameObject.targetZones`),
+     * for one already illegal read as it last existed. */
+    targetZones: readonly (ZoneType | null)[] = [],
   ): { readonly fizzles: boolean; readonly illegal: readonly number[]; readonly targets: ResolvedTargets } {
     // An "any number of target …" group has as many slots as it went on the
     // stack with — never as many as the board would allow now.
@@ -25437,6 +25445,39 @@ export class Game {
         if (chosen[slot] === undefined) continue;
         const mine = playerNow(now[i] ?? chosen[i]);
         if (mine === undefined || mine !== playerNow(now[slot] ?? chosen[slot])) drop(i);
+      }
+    });
+    // "…that share a card type", "…share no creature types" (rule 608.2b —
+    // Legerdemain's and Rivals' Duel's rulings): a pair no longer keeping it
+    // are both illegal; one already illegal is read as it last existed
+    // (608.2h — Secret Tunnel's and Unbury's rulings).
+    const typesNow = (i: number): SharedTypeFacts | undefined => {
+      const ref = chosen[i];
+      if (ref?.kind !== "object") return undefined;
+      if (now[i] === undefined) {
+        const lki = this.lastKnownOfTarget(ref.object, targetZones[i] ?? null);
+        if (lki !== undefined) return lki;
+      }
+      const object = this.state.objects[ref.object];
+      if (object === undefined) return undefined;
+      return {
+        types: computeCharacteristics(this.state, this.registry, ref.object).types,
+        subtypes: effectiveSubtypes(this.state, this.registry, object),
+      };
+    };
+    specs.forEach((spec, i) => {
+      const share = sharesOf(spec);
+      if (share === undefined || chosen[i] === undefined) return;
+      const than = otherThan(spec);
+      for (const slot of than === undefined ? [] : otherThanSlots(than)) {
+        if (chosen[slot] === undefined) continue;
+        const mine = typesNow(i);
+        const theirs = typesNow(slot);
+        const shared = mine !== undefined && theirs !== undefined && typesShare(mine, theirs, share);
+        if (shared === (share.none === true)) {
+          drop(i);
+          drop(slot);
+        }
       }
     });
     // A group's "total power N or less" broken now makes every one of its

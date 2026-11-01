@@ -411,6 +411,32 @@ prompt doesn't say which pick goes where), and the other keys of the family.
 Proving cards: Atraxa, Grand Unifier; Harper Recruiter; Agonizing Remorse;
 Psychotic Episode; Worldsoul's Rage.
 
+### Relations among the chosen targets: shared types, equal toughness, different names — built 2026-10-31
+
+The need-keys Phase 2 family `effect:target-spec-additions`'s first group,
+features only, beside `sameController`. An `other` slot's **`shares`** (a
+`TargetShare`: card types or creature types, `among` the card types that
+count, `none` for "share no creature types") — Shifting Loyalties, Legerdemain,
+Rivals' Duel, Secret Tunnel, Unbury; an `any-number` group's
+**`equalToughness`** (V.A.T.S.) and **`differentNames`** (Behold the Sinister
+Six!). Each is narrowed in `slotOptions`, refused by `invalidTargetReason`
+(rule 601.2c) and judged again in `targetLegality` (608.2b): a pair no longer
+sharing are both illegal, one already illegal read as it last existed
+(`targetZones` now reaches `targetLegality`); a group no longer keeping its
+relation, over the members still legal, makes every member illegal (V.A.T.S.'s
+ruling). `TargetFacts` gained `toughnessOf`, `nameOf` and `shareTypes`
+(`targeting.ts`'s `typesShare`). The scaffolder reads "two target … that share
+a card type / a creature type / no creature types [from your graveyard]",
+"any number of / up to N target … with equal toughness / different names",
+"exchange control of two target … that share a card type", "… and (another)
+target … that shares one of those types / a card type with it", the pair
+"can't be blocked this turn", and "Choose … . Those creatures fight each
+other. / Destroy the chosen creatures.". Keys: effect:targets-share-type,
+effect:targets-equal-toughness, effect:targets-with-different-names. Proving
+cards: Legerdemain, Rivals' Duel, Secret Tunnel, V.A.T.S., Behold the Sinister
+Six!. Not this feature after all: Mind Extraction (the sacrificed creature's
+colours) and Dead Ringers ("unless either one is a color the other isn't").
+
 ### A graveyard's matching cards, or target cards, shuffled into libraries — built 2026-10-31
 
 The need-keys Phase 2 family `effect:shuffle-library`, features only, on the

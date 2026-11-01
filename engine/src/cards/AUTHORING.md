@@ -2913,7 +2913,28 @@ ruling). `maxTotalManaValue` is the same over mana values ("with total mana
 value 3 or less" — Patch Up, March from the Tomb; `"x"` or an amount on an
 ability, read with its bounds below — Orcus, Prince of Undeath), and
 `differentManaValues: true` is "that each have a different mana value"
-(Agadeem's Awakening).
+(Agadeem's Awakening). `equalToughness: true` is "any number of target
+creatures **with equal toughness**" (V.A.T.S.): as it resolves, the members
+still legal no longer all equal makes every one illegal (a lone one never
+breaks it); `differentNames: true` is "up to six target creature cards **with
+different names**" (Behold the Sinister Six!).
+
+**"…that share a card type" / "a creature type" / "share no creature
+types"** is `shares` on an `other` slot with a slot relation — a
+`TargetShare` of `kind: "card"` (rule 205.2a) or `"creature"` (205.3m, a
+changeling sharing one with anything that has one, one with none sharing
+none), `among` narrowing the card types that count, `none: true` the
+negation. Shifting Loyalties is `["permanent", { kind: "other", of:
+"permanent", than: { slot: 0 }, shares: { kind: "card" } }]`, Legerdemain's
+"another target permanent that shares **one of those types** with it" the
+same after `"artifact-or-creature"` with `among: ["artifact", "creature"]`,
+Rivals' Duel's "two target creatures that share no creature types" `shares:
+{ kind: "creature", none: true }`, Secret Tunnel's pair of creatures you
+control `{ kind: "creature" }`. The engine's choosers narrow by it
+(`TargetFacts.shareTypes` — the client's facts don't have it yet, so a human
+picks freely and the engine refuses a broken pair); as it resolves, a pair
+no longer keeping it are both illegal, one already illegal read as it last
+existed (Secret Tunnel's and Unbury's rulings).
 
 **"…controlled by different players"** is `differentController: true` on an
 `other` slot with a slot relation: Run Away Together is `["creature", { kind:

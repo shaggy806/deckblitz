@@ -313,6 +313,18 @@ export type TargetSpec =
        * illegal (rule 608.2b); one already illegal still lends its player, as
        * it last existed. Needs {@link TargetFacts}. */
       readonly sameController?: true;
+      /** "…that **share** a card type" / "…a creature type" / "…share
+       * **no** creature types": the slot shares a type of that kind with
+       * every slot `than` names (see {@link TargetShare}) — Shifting
+       * Loyalties' "two target permanents that share a card type",
+       * Legerdemain's "another target permanent that shares one of those
+       * types with it", Rivals' Duel's "two target creatures that share no
+       * creature types". Only with a slot relation. Checked as targets are
+       * chosen (rule 601.2c) and again as the spell or ability resolves
+       * (608.2b): a pair that no longer keeps it are both illegal; one
+       * already illegal is read as it last existed (Secret Tunnel's and
+       * Unbury's rulings). Needs {@link TargetFacts}' `shareTypes`. */
+      readonly shares?: TargetShare;
     }
   /**
    * "Any number of target …" (rule 601.2c: none, one, or as many distinct
@@ -370,6 +382,17 @@ export type TargetSpec =
        * Awakening): no two members share one. Checked as they're chosen
        * and again as it resolves, as the totals are. */
       readonly differentManaValues?: true;
+      /** "…target creatures **with equal toughness**" (V.A.T.S.): every
+       * member's toughness is the first one's. Checked as they're chosen
+       * and again as it resolves, over the members still legal then: no
+       * longer all equal, every member is illegal (the ruling — "none of
+       * the chosen creatures will be destroyed"); a lone one never breaks
+       * it. Needs {@link TargetFacts}' `toughnessOf`. */
+      readonly equalToughness?: true;
+      /** "…target creature cards **with different names**" (Behold the
+       * Sinister Six!): no two members share a name. Checked as
+       * `differentManaValues` is. Needs {@link TargetFacts}' `nameOf`. */
+      readonly differentNames?: true;
       /** Every member's player is the same — "up to two target cards **from
        * a single graveyard**" (Decompose), "two target cards from **an
        * opponent's** graveyard" (Nullmage Advocate: one opponent's) — or,
@@ -393,6 +416,56 @@ export interface TargetFacts {
   /** Its mana value where it is — for a group's `maxTotalManaValue` and
    * `differentManaValues`. Without it those narrow nothing. */
   readonly manaValueOf?: (ref: TargetRef) => number;
+  /** Its toughness where it is — for a group's `equalToughness`. Without
+   * it that narrows nothing. */
+  readonly toughnessOf?: (ref: TargetRef) => number;
+  /** Its name — for a group's `differentNames`. Without it that narrows
+   * nothing. */
+  readonly nameOf?: (ref: TargetRef) => string;
+  /** Do `a` and `b` share a type of `share`'s kind (see
+   * {@link TargetShare})? `none` isn't this one's to read: the relation
+   * negates the answer. Without it an `other` slot's `shares` narrows
+   * nothing. */
+  readonly shareTypes?: (a: TargetRef, b: TargetRef, share: TargetShare) => boolean;
+}
+
+/**
+ * A relation of shared types between two targets — `other`'s `shares`.
+ * `kind` is which types count: `"card"` the card types (rule 205.2a —
+ * artifact, battle, creature, enchantment, kindred, land, planeswalker,
+ * and instant and sorcery off the battlefield), `"creature"` the creature
+ * types (205.3m — a changeling has every one, 702.73a; one with none shares
+ * none). `among` narrows the card types that count to these — "shares
+ * **one of those types** with it" after "target artifact, creature, or
+ * land" (Gauntlets of Chaos). `none` turns it round: "share **no**
+ * creature types" (Rivals' Duel).
+ */
+export interface TargetShare {
+  readonly kind: "card" | "creature";
+  readonly among?: readonly CardType[];
+  readonly none?: true;
+}
+
+/** Slot `spec`'s shared-types relation with the slots its relation names,
+ * if it has one — through an `optional` wrapper. */
+export function sharesOf(spec: TargetSpec): TargetShare | undefined {
+  if (typeof spec !== "object") return undefined;
+  if (spec.kind === "other") return spec.shares;
+  if (spec.kind === "optional") return sharesOf(spec.of);
+  return undefined;
+}
+
+/** Do targets `a` and `b` keep a `shares` relation — `undefined` when the
+ * facts can't tell (a chooser without `shareTypes`). */
+export function sharesHold(
+  a: TargetRef,
+  b: TargetRef,
+  share: TargetShare,
+  facts: TargetFacts,
+): boolean | undefined {
+  if (facts.shareTypes === undefined) return undefined;
+  const shared = facts.shareTypes(a, b, share);
+  return share.none === true ? !shared : shared;
 }
 
 /** Is slot `spec` "…controlled by different players" from the slots its
@@ -832,6 +905,20 @@ export function slotOptions(
       const budget = most - taken.reduce((n, t) => n + facts.powerOf(t), 0);
       left = left.filter((ref) => facts.powerOf(ref) <= budget);
     }
+    // "With equal toughness": only the first member's; "with different
+    // names": none already named.
+    if (typeof spec === "object" && spec.kind === "any-number") {
+      const toughnessOf = facts.toughnessOf;
+      if (spec.equalToughness === true && toughnessOf !== undefined && taken.length > 0) {
+        const toughness = toughnessOf(taken[0]);
+        left = left.filter((ref) => toughnessOf(ref) === toughness);
+      }
+      const nameOf = facts.nameOf;
+      if (spec.differentNames === true && nameOf !== undefined) {
+        const used = new Set(taken.map(nameOf));
+        left = left.filter((ref) => !used.has(nameOf(ref)));
+      }
+    }
     // So for "total mana value 3 or less", and "each a different mana value".
     const manaValueOf = facts.manaValueOf;
     if (manaValueOf === undefined) return left;
@@ -853,8 +940,14 @@ export function slotOptions(
     .map((slot) => picked[slot])
     .filter((ref): ref is TargetRef => ref !== null && ref !== undefined);
   if (earlier.length === 0) return all;
-  const distinct = all.filter((ref) => !earlier.some((e) => sameTarget(ref, e)));
+  let distinct = all.filter((ref) => !earlier.some((e) => sameTarget(ref, e)));
   if (facts === undefined || specs[i] === undefined) return distinct;
+  // "…that share a card type", "…share no creature types": only those
+  // keeping it with every earlier one.
+  const share = sharesOf(specs[i]);
+  if (share !== undefined) {
+    distinct = distinct.filter((ref) => earlier.every((e) => sharesHold(ref, e, share, facts) !== false));
+  }
   // "…that player controls": only those whose player is every earlier one's.
   if (sameControllerOf(specs[i])) {
     const players = new Set(earlier.map((e) => playerOfTarget(e, facts)));
@@ -951,10 +1044,15 @@ export function otherSlotConflict(
     if (mine === null || mine === undefined) continue;
     const byController = facts !== undefined && differentControllerOf(specs[i]);
     const sharing = facts !== undefined && sameControllerOf(specs[i]);
+    const share = sharesOf(specs[i]);
     for (const slot of otherThanSlots(than)) {
       const theirs = chosen[slot];
       if (theirs === null || theirs === undefined) continue;
       if (sameTarget(mine, theirs)) return { slot: i, than: slot };
+      // "…that share a card type" (Shifting Loyalties, Rivals' Duel).
+      if (share !== undefined && facts !== undefined && sharesHold(mine, theirs, share, facts) === false) {
+        return { slot: i, than: slot };
+      }
       // "…controlled by different players" (Protector of the Wastes).
       if (byController && facts.controllerOf(mine) === facts.controllerOf(theirs)) return { slot: i, than: slot };
       // "…that player controls", "from a single graveyard" (Mutiny, Decompose).
@@ -980,7 +1078,28 @@ export function groupPowerExceeded(
   const members = chosen.slice(group).filter((ref): ref is TargetRef => ref !== null && ref !== undefined);
   const most = groupMaxTotalPower(specs[group]);
   if (most !== undefined && members.reduce((n, ref) => n + facts.powerOf(ref), 0) > most) return true;
-  return groupManaValueBroken(specs, chosen, facts);
+  return groupManaValueBroken(specs, chosen, facts) || groupRelationBroken(specs, chosen, facts);
+}
+
+/** Whether `chosen`'s group breaks its "with equal toughness" (V.A.T.S.)
+ * or its "with different names" (Behold the Sinister Six!) — `false`
+ * without either, or without the facts to tell. Holes are left out: as it
+ * resolves, only the members still legal count (V.A.T.S.'s ruling). */
+export function groupRelationBroken(
+  specs: readonly TargetSpec[],
+  chosen: readonly (TargetRef | null | undefined)[],
+  facts?: TargetFacts,
+): boolean {
+  const group = anyNumberSlot(specs);
+  const spec = specs[group];
+  if (group < 0 || facts === undefined || typeof spec !== "object" || spec.kind !== "any-number") return false;
+  const members = chosen.slice(group).filter((ref): ref is TargetRef => ref !== null && ref !== undefined);
+  const toughnessOf = facts.toughnessOf;
+  if (spec.equalToughness === true && toughnessOf !== undefined && new Set(members.map(toughnessOf)).size > 1) {
+    return true;
+  }
+  const nameOf = facts.nameOf;
+  return spec.differentNames === true && nameOf !== undefined && new Set(members.map(nameOf)).size < members.length;
 }
 
 /** Whether `chosen`'s group breaks its "total mana value N or less" (Patch

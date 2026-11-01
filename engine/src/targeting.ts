@@ -5,6 +5,7 @@ import type { EffectAmount } from "./effects.js";
 import {
   chosenProtectionQualities,
   computeCharacteristics,
+  effectiveSubtypes,
   effectiveTypes,
   grantedStatics,
   hasLostAbilities,
@@ -17,19 +18,21 @@ import { filterReadsX, manaValueOfObject, matchesFilter } from "./filter.js";
 import type { CardFilter } from "./filter.js";
 import type { Color } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
-import { printedCardName, rulesTextName } from "./state.js";
+import { nameOf, printedCardName, rulesTextName } from "./state.js";
 import type { GameObject, GameState } from "./state.js";
+import { EVERY_CREATURE_TYPE, hasSubtype, isCreatureType } from "./subtypes.js";
 import {
   anyNumberSlot,
   concreteTargetSpecs,
   groupBounds,
   groupManaValueBroken,
   groupPowerExceeded,
+  groupRelationBroken,
   isOptionalSpec,
   otherSlotConflict,
   playerAtSeat,
 } from "./target.js";
-import type { OtherThan, PlayerStat, TargetFacts } from "./target.js";
+import type { OtherThan, PlayerStat, TargetFacts, TargetShare } from "./target.js";
 import type { ResolvedTargets, TargetRef, TargetSpec } from "./target.js";
 
 /** The colour/type identity of whatever is targeting / damaging / blocking —
@@ -1037,6 +1040,9 @@ export function invalidTargetReason(
   if (groupManaValueBroken(declared, chosen, facts)) {
     return `${name}'s targets break their mana value limit`;
   }
+  if (groupRelationBroken(declared, chosen, facts)) {
+    return `${name}'s targets must have equal toughness or different names`;
+  }
   if (groupPowerExceeded(declared, chosen, facts)) return `${name}'s targets have too much total power`;
   return null;
 }
@@ -1058,5 +1064,45 @@ export function stateTargetFacts(state: GameState, registry: CardRegistry): Targ
       ref.kind === "object" && state.objects[ref.object] !== undefined
         ? manaValueOfObject(registry, state.objects[ref.object])
         : 0,
+    toughnessOf: (ref) =>
+      ref.kind === "object" && state.objects[ref.object] !== undefined
+        ? computeCharacteristics(state, registry, ref.object).toughness
+        : 0,
+    nameOf: (ref) =>
+      ref.kind === "object" && state.objects[ref.object] !== undefined ? nameOf(state.objects[ref.object]) : "",
+    shareTypes: (a, b, share) => {
+      const typesOf = (ref: TargetRef): SharedTypeFacts | undefined =>
+        ref.kind === "object" && state.objects[ref.object] !== undefined
+          ? {
+              types: computeCharacteristics(state, registry, ref.object).types,
+              subtypes: effectiveSubtypes(state, registry, state.objects[ref.object]),
+            }
+          : undefined;
+      const one = typesOf(a);
+      const other = typesOf(b);
+      return one !== undefined && other !== undefined && typesShare(one, other, share);
+    },
   };
+}
+
+/** An object's types, for {@link typesShare}: its card types and its
+ * subtypes, a changeling's every-creature-type marker included — as it is
+ * now, or as it last existed (`LastKnownInfo` has both). */
+export interface SharedTypeFacts {
+  readonly types: readonly CardType[];
+  readonly subtypes: readonly string[];
+}
+
+/**
+ * Do two objects share a type of `share`'s kind (`none` aside — the
+ * relation negates this)? A card type among `share.among` when it names
+ * some (rule 205.2a); a creature type (205.3m) through `hasSubtype`, so a
+ * changeling on either side shares one with anything that has one
+ * (702.73a), and one with no creature type shares none.
+ */
+export function typesShare(a: SharedTypeFacts, b: SharedTypeFacts, share: TargetShare): boolean {
+  if (share.kind === "card") {
+    return a.types.some((t) => (share.among === undefined || share.among.includes(t)) && b.types.includes(t));
+  }
+  return a.subtypes.some((s) => (s === EVERY_CREATURE_TYPE || isCreatureType(s)) && hasSubtype(b.subtypes, s));
 }

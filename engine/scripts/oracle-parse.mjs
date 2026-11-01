@@ -1017,6 +1017,33 @@ function quantifiedSlots(phrase, ctx) {
     const group = { kind: "any-number", of, ...(n !== undefined ? { max: n } : {}), maxTotalManaValue: Number(m[3]) };
     return { slots: [ctx.target(group)], group: true };
   }
+  // "Two target permanents that share a card type" (Shifting Loyalties),
+  // "two target creatures you control that share a creature type" (Secret
+  // Tunnel), "two target creatures that share no creature types" (Rivals'
+  // Duel), "two target creature cards that share a creature type from your
+  // graveyard" (Unbury): the second slot other than the first and keeping
+  // the relation with it (`shares`).
+  if ((m = /^two target (.+?) that share (a card type|a creature type|no creature types)( from your graveyard)?$/i.exec(phrase))) {
+    const one = `target ${singularTarget(m[1])}${m[3] ?? ""}`;
+    const of = m[3] ? graveyardTargetOf(one) : targetOf(one);
+    if (of === undefined) return undefined;
+    const kind = /card type/i.test(m[2]) ? "card" : "creature";
+    const shares = { kind, ...(/^no /i.test(m[2]) ? { none: true } : {}) };
+    const first = ctx.target(of);
+    return { slots: [first, ctx.target({ kind: "other", of, than: { slot: first }, shares })] };
+  }
+  // "Any number of target creatures with equal toughness" (V.A.T.S.), "up
+  // to six target creature cards with different names from your graveyard"
+  // (Behold the Sinister Six!): a group whose members keep the relation.
+  if ((m = /^(any number of|up to (?:two|three|four|five|six)) (target .+?) with (equal toughness|different names)( from .+)?$/i.exec(phrase))) {
+    const n = m[1].toLowerCase() === "any number of" ? undefined : numberOf(m[1].slice(6));
+    const phrase1 = `${singularTarget(m[2])}${m[4] ?? ""}`;
+    const of = m[4] ? graveyardTargetOf(phrase1) : targetOf(phrase1);
+    if (of === undefined || (n !== undefined && typeof n !== "number")) return undefined;
+    const relation = /toughness/i.test(m[3]) ? { equalToughness: true } : { differentNames: true };
+    const group = { kind: "any-number", of, ...(n !== undefined ? { max: n } : {}), ...relation };
+    return { slots: [ctx.target(group)], group: true };
+  }
   // "Up to X target …" / "X target …" (rule 601.2c): a group as big as the
   // spell's X — or, on a permanent's enters ability, the X it was cast with.
   if ((m = /^(up to )?X target (.+)$/.exec(phrase))) {
@@ -2596,8 +2623,9 @@ export function parseSentence(sentence, ctx) {
     };
   }
   // "Return up to three target creature cards with total mana value 3 or
-  // less from your graveyard to the battlefield" (Patch Up): together.
-  if ((m = /^return ((?:any number of|up to \w+) target .+ with total mana value \d+ or less from your graveyard) to the battlefield\.$/i.exec(s))) {
+  // less from your graveyard to the battlefield" (Patch Up), "… with
+  // different names …" (Behold the Sinister Six!): together.
+  if ((m = /^return ((?:any number of|up to \w+) target .+ with (?:total mana value \d+ or less|different names) from your graveyard) to the battlefield\.$/i.exec(s))) {
     const got = quantifiedSlots(m[1], ctx);
     if (got === undefined || !got.group) return null;
     return {
@@ -3258,6 +3286,16 @@ export function parseSentence(sentence, ctx) {
   if ((m = re(`(~|${TARGET}) can't be blocked this turn`).exec(s))) {
     return { kind: "grant-keyword", target: m[1] === "~" ? "source" : slot(m[1]), keyword: "unblockable", duration: "end-of-turn" };
   }
+  // "Two target creatures you control that share a creature type can't be
+  // blocked this turn" (Secret Tunnel): each of the pair.
+  if ((m = /^(two target .+ that share (?:a card type|a creature type|no creature types)) can't be blocked this turn\.$/i.exec(s))) {
+    const got = quantifiedSlots(m[1], ctx);
+    if (got === undefined || got.slots.length !== 2) return null;
+    return {
+      kind: "sequence",
+      effects: got.slots.map((target) => ({ kind: "grant-keyword", target, keyword: "unblockable", duration: "end-of-turn" })),
+    };
+  }
   // "Can't be blocked by [X] this turn" — a rule on it, not an ability
   // (`restrict`'s `cantBeBlockedBy`); "except by [X]" is the negation.
   {
@@ -3285,6 +3323,33 @@ export function parseSentence(sentence, ctx) {
   // Rule 701.12b: two permanents change hands at once, all or nothing.
   if ((m = re(`exchange control of ~ and (${TARGET})`).exec(s))) {
     return { kind: "exchange-control", objects: ["source", slot(m[1])] };
+  }
+  // "Exchange control of two target permanents that share a card type"
+  // (Shifting Loyalties) — the pair `quantifiedSlots` reads.
+  if ((m = /^exchange control of (two target .+ that share a card type)\.$/i.exec(s))) {
+    const got = quantifiedSlots(m[1], ctx);
+    return got === undefined || got.slots.length !== 2 ? null : { kind: "exchange-control", objects: got.slots };
+  }
+  // "Exchange control of target artifact or creature and another target
+  // permanent that shares one of those types with it" (Legerdemain): the
+  // second slot shares with the first one of the card types it names
+  // (`shares` with `among`), or any card type.
+  if ((m = re(`exchange control of (${TARGET}) and (?:another )?target (.+?) that shares (one of those types|a card type) with it`).exec(s))) {
+    const first = slot(m[1]);
+    const of = targetOf(`target ${m[2]}`);
+    // "Target artifact, creature, or land [you control]": the card types it
+    // names (Gauntlets of Chaos).
+    const CARD_TYPES = ["artifact", "battle", "creature", "enchantment", "land", "planeswalker"];
+    const words = m[1]
+      .replace(/^target /i, "")
+      .replace(/ (?:you control|an opponent controls|you don't control)$/i, "")
+      .split(/,? or |, /);
+    const named = words.every((w) => CARD_TYPES.includes(w)) ? words : undefined;
+    const among = /^one/i.test(m[3]) ? named : null;
+    if (first === undefined || of === undefined || among === undefined) return null;
+    const shares = { kind: "card", ...(among !== null ? { among } : {}) };
+    const second = ctx.target({ kind: "other", of, than: { slot: first }, shares });
+    return { kind: "exchange-control", objects: [first, second] };
   }
   if ((m = re(`exchange control of (${TARGET}) and (${TARGET})`).exec(s))) {
     return { kind: "exchange-control", objects: [slot(m[1]), slot(m[2])] };
@@ -3969,7 +4034,7 @@ export function parseEffect(text, outer) {
       skip = removedThen.used - 1;
       continue;
     }
-    const among = amongTargetsAt(sentences, i, ctx);
+    const among = amongTargetsAt(sentences, i, ctx) ?? chosenTargetsAt(sentences, i, ctx);
     if (among !== null) {
       parsed.push(among.effect);
       hints.push({ sentence, effect: among.effect });
@@ -4490,6 +4555,44 @@ function countersRemovedAt(sentences, i, ctx) {
             ? Object.fromEntries(Object.entries(v).map(([k, w]) => [k, swap(w, k)]))
             : v;
   return { effects: [removal, swap(inner)], used: 2 };
+}
+
+/**
+ * "Choose two target creatures that share no creature types. Those
+ * creatures fight each other." (Rivals' Duel) / "Choose any number of
+ * target creatures with equal toughness. Destroy the chosen creatures."
+ * (V.A.T.S.): the targets a related pair or group (`quantifiedSlots`), then
+ * what's done to them — `{ effect, used }`, or null.
+ */
+function chosenTargetsAt(sentences, i, ctx) {
+  const s = (k) => sentences[i + k] ?? "";
+  const m = /^choose ((?:two|any number of) target .+)\.$/i.exec(s(0));
+  if (m === null) return null;
+  const fight = /^those creatures fight each other\.$/i.test(s(1));
+  const act = /^(destroy|exile|tap) the chosen creatures\.$/i.exec(s(1));
+  if (!fight && act === null) return null;
+  const before = ctx.targets.length;
+  const got = quantifiedSlots(m[1], ctx);
+  const undo = () => {
+    ctx.targets.length = before;
+    return null;
+  };
+  if (got === undefined) return undo();
+  if (fight) {
+    if (got.group || got.slots.length !== 2) return undo();
+    return { effect: { kind: "fight", a: got.slots[0], b: got.slots[1] }, used: 2 };
+  }
+  if (!got.group) return undo();
+  const kind = act[1].toLowerCase();
+  return {
+    effect: {
+      kind: "for-each-target",
+      from: got.slots[0],
+      ...(kind === "tap" ? {} : { simultaneous: true }),
+      effect: { kind, target: got.slots[0] },
+    },
+    used: 2,
+  };
 }
 
 function amongTargetsAt(sentences, i, ctx) {
