@@ -212,6 +212,7 @@ import _poolDragonbackLancer from "../pool/dragonback-lancer.js";
 import _poolDrannithMagistrate from "../pool/drannith-magistrate.js";
 import _poolDreadwingScavenger from "../pool/dreadwing-scavenger.js";
 import _poolDreadwing from "../pool/dreadwing.js";
+import _poolDreamDevourer from "../pool/dream-devourer.js";
 import _poolDunesOfTheDead from "../pool/dunes-of-the-dead.js";
 import _poolDwarvenVigilantes from "../pool/dwarven-vigilantes.js";
 import _poolEarthKingdomSoldier from "../pool/earth-kingdom-soldier.js";
@@ -343,6 +344,7 @@ import _poolHightideHermit from "../pool/hightide-hermit.js";
 import _poolHiveStirrings from "../pool/hive-stirrings.js";
 import _poolHollowmurkSiege from "../pool/hollowmurk-siege.js";
 import _poolHomicidalSeclusion from "../pool/homicidal-seclusion.js";
+import _poolHomingSliver from "../pool/homing-sliver.js";
 import _poolHondenOfLifesWeb from "../pool/honden-of-lifes-web.js";
 import _poolHoodwink from "../pool/hoodwink.js";
 import _poolHotDogCart from "../pool/hot-dog-cart.js";
@@ -645,6 +647,7 @@ import _poolSlagFiend from "../pool/slag-fiend.js";
 import _poolSlaveOfBolas from "../pool/slave-of-bolas.js";
 import _poolSlay from "../pool/slay.js";
 import _poolSlitherhead from "../pool/slitherhead.js";
+import _poolSliverLegion from "../pool/sliver-legion.js";
 import _poolSmashToDust from "../pool/smash-to-dust.js";
 import _poolSoShiny from "../pool/so-shiny.js";
 import _poolSojournersCompanion from "../pool/sojourners-companion.js";
@@ -1076,6 +1079,7 @@ const shard: CardShard = {
     _poolDrannithMagistrate,
     _poolDreadwingScavenger,
     _poolDreadwing,
+    _poolDreamDevourer,
     _poolDunesOfTheDead,
     _poolDwarvenVigilantes,
     _poolEarthKingdomSoldier,
@@ -1207,6 +1211,7 @@ const shard: CardShard = {
     _poolHiveStirrings,
     _poolHollowmurkSiege,
     _poolHomicidalSeclusion,
+    _poolHomingSliver,
     _poolHondenOfLifesWeb,
     _poolHoodwink,
     _poolHotDogCart,
@@ -1509,6 +1514,7 @@ const shard: CardShard = {
     _poolSlaveOfBolas,
     _poolSlay,
     _poolSlitherhead,
+    _poolSliverLegion,
     _poolSmashToDust,
     _poolSoShiny,
     _poolSojournersCompanion,

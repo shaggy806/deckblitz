@@ -110,6 +110,7 @@ import _poolCentaurSafeguard from "../pool/centaur-safeguard.js";
 import _poolCephalopodSentry from "../pool/cephalopod-sentry.js";
 import _poolChainflailCentipede from "../pool/chainflail-centipede.js";
 import _poolChameleonMasterOfDisguise from "../pool/chameleon-master-of-disguise.js";
+import _poolChampionOfTheFlame from "../pool/champion-of-the-flame.js";
 import _poolChangelingHero from "../pool/changeling-hero.js";
 import _poolChantOfTheSkifsang from "../pool/chant-of-the-skifsang.js";
 import _poolChillOfForeboding from "../pool/chill-of-foreboding.js";
@@ -415,6 +416,7 @@ import _poolMarduStrikeLeader from "../pool/mardu-strike-leader.js";
 import _poolMarduWarshrieker from "../pool/mardu-warshrieker.js";
 import _poolMarduWoeReaper from "../pool/mardu-woe-reaper.js";
 import _poolMarshmistTitan from "../pool/marshmist-titan.js";
+import _poolMaskwoodNexus from "../pool/maskwood-nexus.js";
 import _poolMasterDecoy from "../pool/master-decoy.js";
 import _poolMazeAbomination from "../pool/maze-abomination.js";
 import _poolMegaFlare from "../pool/mega-flare.js";
@@ -956,6 +958,7 @@ const shard: CardShard = {
     _poolCephalopodSentry,
     _poolChainflailCentipede,
     _poolChameleonMasterOfDisguise,
+    _poolChampionOfTheFlame,
     _poolChangelingHero,
     _poolChantOfTheSkifsang,
     _poolChillOfForeboding,
@@ -1261,6 +1264,7 @@ const shard: CardShard = {
     _poolMarduWarshrieker,
     _poolMarduWoeReaper,
     _poolMarshmistTitan,
+    _poolMaskwoodNexus,
     _poolMasterDecoy,
     _poolMazeAbomination,
     _poolMegaFlare,

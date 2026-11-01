@@ -445,6 +445,7 @@ import _poolMammothBellow from "../pool/mammoth-bellow.js";
 import _poolManaBloom from "../pool/mana-bloom.js";
 import _poolManaGeyser from "../pool/mana-geyser.js";
 import _poolManaLeak from "../pool/mana-leak.js";
+import _poolManaforceMace from "../pool/manaforce-mace.js";
 import _poolMaraudingMaulhorn from "../pool/marauding-maulhorn.js";
 import _poolMarduRunemark from "../pool/mardu-runemark.js";
 import _poolMartialLaw from "../pool/martial-law.js";
@@ -1347,6 +1348,7 @@ const shard: CardShard = {
     _poolManaBloom,
     _poolManaGeyser,
     _poolManaLeak,
+    _poolManaforceMace,
     _poolMaraudingMaulhorn,
     _poolMarduRunemark,
     _poolMartialLaw,

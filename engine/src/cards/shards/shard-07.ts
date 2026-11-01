@@ -297,6 +297,7 @@ import _poolGraveDefiler from "../pool/grave-defiler.js";
 import _poolGraveExchange from "../pool/grave-exchange.js";
 import _poolGravityNegator from "../pool/gravity-negator.js";
 import _poolGravityWell from "../pool/gravity-well.js";
+import _poolGraywatersFixer from "../pool/graywaters-fixer.js";
 import _poolGreaterBasilisk from "../pool/greater-basilisk.js";
 import _poolGreenhouseRicketyGazebo from "../pool/greenhouse-rickety-gazebo.js";
 import _poolGrimFlowering from "../pool/grim-flowering.js";
@@ -1189,6 +1190,7 @@ const shard: CardShard = {
     _poolGraveExchange,
     _poolGravityNegator,
     _poolGravityWell,
+    _poolGraywatersFixer,
     _poolGreaterBasilisk,
     _poolGreenhouseRicketyGazebo,
     _poolGrimFlowering,

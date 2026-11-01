@@ -45,6 +45,7 @@ import _poolArenaAthlete from "../pool/arena-athlete.js";
 import _poolArgentDais from "../pool/argent-dais.js";
 import _poolArmoredCancrix from "../pool/armored-cancrix.js";
 import _poolArterialFlow from "../pool/arterial-flow.js";
+import _poolAshesOfTheFallen from "../pool/ashes-of-the-fallen.js";
 import _poolAshnodsIntervention from "../pool/ashnods-intervention.js";
 import _poolAtraxaPraetorsVoice from "../pool/atraxa-praetors-voice.js";
 import _poolAugurIlVec from "../pool/augur-il-vec.js";
@@ -535,6 +536,7 @@ import _poolMosquitoGuard from "../pool/mosquito-guard.js";
 import _poolMoxiteRefinery from "../pool/moxite-refinery.js";
 import _poolMsMarvelElasticAlly from "../pool/ms-marvel-elastic-ally.js";
 import _poolMuddleTheEverChanging from "../pool/muddle-the-ever-changing.js";
+import _poolMycosynthFiend from "../pool/mycosynth-fiend.js";
 import _poolMyojinOfBloomingDawn from "../pool/myojin-of-blooming-dawn.js";
 import _poolNantukoMonastery from "../pool/nantuko-monastery.js";
 import _poolNaturalSpring from "../pool/natural-spring.js";
@@ -969,6 +971,7 @@ const shard: CardShard = {
     _poolArgentDais,
     _poolArmoredCancrix,
     _poolArterialFlow,
+    _poolAshesOfTheFallen,
     _poolAshnodsIntervention,
     _poolAtraxaPraetorsVoice,
     _poolAugurIlVec,
@@ -1459,6 +1462,7 @@ const shard: CardShard = {
     _poolMoxiteRefinery,
     _poolMsMarvelElasticAlly,
     _poolMuddleTheEverChanging,
+    _poolMycosynthFiend,
     _poolMyojinOfBloomingDawn,
     _poolNantukoMonastery,
     _poolNaturalSpring,

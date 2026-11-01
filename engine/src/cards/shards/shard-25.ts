@@ -47,6 +47,7 @@ import _poolAssimilateEssence from "../pool/assimilate-essence.js";
 import _poolAstralDrift from "../pool/astral-drift.js";
 import _poolAstralSteel from "../pool/astral-steel.js";
 import _poolAtogatog from "../pool/atogatog.js";
+import _poolAuramancersGuise from "../pool/auramancers-guise.js";
 import _poolAvatarYangchen from "../pool/avatar-yangchen.js";
 import _poolAvenWindGuide from "../pool/aven-wind-guide.js";
 import _poolAvengersUnderSiege from "../pool/avengers-under-siege.js";
@@ -889,6 +890,7 @@ const shard: CardShard = {
     _poolAstralDrift,
     _poolAstralSteel,
     _poolAtogatog,
+    _poolAuramancersGuise,
     _poolAvatarYangchen,
     _poolAvenWindGuide,
     _poolAvengersUnderSiege,

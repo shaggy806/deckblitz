@@ -113,6 +113,7 @@ import _poolClashOfWills from "../pool/clash-of-wills.js";
 import _poolClatteringAugur from "../pool/clattering-augur.js";
 import _poolClearwaterGoblet from "../pool/clearwater-goblet.js";
 import _poolCloudspireSkycycle from "../pool/cloudspire-skycycle.js";
+import _poolCoatOfArms from "../pool/coat-of-arms.js";
 import _poolCodsworthHandyHelper from "../pool/codsworth-handy-helper.js";
 import _poolCoilingStalker from "../pool/coiling-stalker.js";
 import _poolColdWaterSnapper from "../pool/cold-water-snapper.js";
@@ -306,6 +307,7 @@ import _poolHauntTheNetwork from "../pool/haunt-the-network.js";
 import _poolHauntedCloak from "../pool/haunted-cloak.js";
 import _poolHearthCharm from "../pool/hearth-charm.js";
 import _poolHearthbornBattler from "../pool/hearthborn-battler.js";
+import _poolHedronMatrix from "../pool/hedron-matrix.js";
 import _poolHellkiteOverlord from "../pool/hellkite-overlord.js";
 import _poolHelmOfChatzuk from "../pool/helm-of-chatzuk.js";
 import _poolHengeWalker from "../pool/henge-walker.js";
@@ -981,6 +983,7 @@ const shard: CardShard = {
     _poolClatteringAugur,
     _poolClearwaterGoblet,
     _poolCloudspireSkycycle,
+    _poolCoatOfArms,
     _poolCodsworthHandyHelper,
     _poolCoilingStalker,
     _poolColdWaterSnapper,
@@ -1174,6 +1177,7 @@ const shard: CardShard = {
     _poolHauntedCloak,
     _poolHearthCharm,
     _poolHearthbornBattler,
+    _poolHedronMatrix,
     _poolHellkiteOverlord,
     _poolHelmOfChatzuk,
     _poolHengeWalker,

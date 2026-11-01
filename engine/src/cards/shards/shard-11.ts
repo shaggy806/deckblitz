@@ -662,6 +662,7 @@ import _poolSingingBellStrike from "../pool/singing-bell-strike.js";
 import _poolSireOfSevenDeaths from "../pool/sire-of-seven-deaths.js";
 import _poolSirenReaver from "../pool/siren-reaver.js";
 import _poolSistersOfTheFlame from "../pool/sisters-of-the-flame.js";
+import _poolSix from "../pool/six.js";
 import _poolSkulduggery from "../pool/skulduggery.js";
 import _poolSkullcapSnail from "../pool/skullcap-snail.js";
 import _poolSkyEelSchool from "../pool/sky-eel-school.js";
@@ -1535,6 +1536,7 @@ const shard: CardShard = {
     _poolSireOfSevenDeaths,
     _poolSirenReaver,
     _poolSistersOfTheFlame,
+    _poolSix,
     _poolSkulduggery,
     _poolSkullcapSnail,
     _poolSkyEelSchool,

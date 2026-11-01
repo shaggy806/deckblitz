@@ -412,6 +412,7 @@ import _poolKinsbaileCourier from "../pool/kinsbaile-courier.js";
 import _poolKitsunesTechnique from "../pool/kitsunes-technique.js";
 import _poolKlothysGodOfDestiny from "../pool/klothys-god-of-destiny.js";
 import _poolKnightOfMalice from "../pool/knight-of-malice.js";
+import _poolKnightOfNewAlara from "../pool/knight-of-new-alara.js";
 import _poolKnightOfOldBenalia from "../pool/knight-of-old-benalia.js";
 import _poolKnightOfTheEbonLegion from "../pool/knight-of-the-ebon-legion.js";
 import _poolKnowledgeSeeker from "../pool/knowledge-seeker.js";
@@ -849,6 +850,7 @@ import _poolWoebringerDemon from "../pool/woebringer-demon.js";
 import _poolWoodlurkerMimic from "../pool/woodlurker-mimic.js";
 import _poolWoodripper from "../pool/woodripper.js";
 import _poolWordsOfWisdom from "../pool/words-of-wisdom.js";
+import _poolWrennAndSix from "../pool/wrenn-and-six.js";
 import _poolYathanRoadwatcher from "../pool/yathan-roadwatcher.js";
 import _poolZahidDjinnOfTheLamp from "../pool/zahid-djinn-of-the-lamp.js";
 import _poolZahurGlorysPast from "../pool/zahur-glorys-past.js";
@@ -1280,6 +1282,7 @@ const shard: CardShard = {
     _poolKitsunesTechnique,
     _poolKlothysGodOfDestiny,
     _poolKnightOfMalice,
+    _poolKnightOfNewAlara,
     _poolKnightOfOldBenalia,
     _poolKnightOfTheEbonLegion,
     _poolKnowledgeSeeker,
@@ -1717,6 +1720,7 @@ const shard: CardShard = {
     _poolWoodlurkerMimic,
     _poolWoodripper,
     _poolWordsOfWisdom,
+    _poolWrennAndSix,
     _poolYathanRoadwatcher,
     _poolZahidDjinnOfTheLamp,
     _poolZahurGlorysPast,

@@ -167,6 +167,7 @@ import _poolDeathpactAngel from "../pool/deathpact-angel.js";
 import _poolDeepcavernImp from "../pool/deepcavern-imp.js";
 import _poolDeepmuckDesperado from "../pool/deepmuck-desperado.js";
 import _poolDeeprootElite from "../pool/deeproot-elite.js";
+import _poolDeeprootHistorian from "../pool/deeproot-historian.js";
 import _poolDeepwoodTantiv from "../pool/deepwood-tantiv.js";
 import _poolDelifsCube from "../pool/delifs-cube.js";
 import _poolDelightedHalfling from "../pool/delighted-halfling.js";
@@ -175,6 +176,7 @@ import _poolDerangedHermit from "../pool/deranged-hermit.js";
 import _poolDesolateLighthouse from "../pool/desolate-lighthouse.js";
 import _poolDevouringStrossus from "../pool/devouring-strossus.js";
 import _poolDiscipleOfMalice from "../pool/disciple-of-malice.js";
+import _poolDisturbingConversion from "../pool/disturbing-conversion.js";
 import _poolDivineGambit from "../pool/divine-gambit.js";
 import _poolDomriRade from "../pool/domri-rade.js";
 import _poolDoomWeaver from "../pool/doom-weaver.js";
@@ -754,6 +756,7 @@ import _poolTalismanOfResilience from "../pool/talisman-of-resilience.js";
 import _poolTarfire from "../pool/tarfire.js";
 import _poolTauntingElf from "../pool/taunting-elf.js";
 import _poolTavernRuffian from "../pool/tavern-ruffian.js";
+import _poolTectonicReformation from "../pool/tectonic-reformation.js";
 import _poolTempleOfPower from "../pool/temple-of-power.js";
 import _poolTemporalSpring from "../pool/temporal-spring.js";
 import _poolTemptingWitch from "../pool/tempting-witch.js";
@@ -1105,6 +1108,7 @@ const shard: CardShard = {
     _poolDeepcavernImp,
     _poolDeepmuckDesperado,
     _poolDeeprootElite,
+    _poolDeeprootHistorian,
     _poolDeepwoodTantiv,
     _poolDelifsCube,
     _poolDelightedHalfling,
@@ -1113,6 +1117,7 @@ const shard: CardShard = {
     _poolDesolateLighthouse,
     _poolDevouringStrossus,
     _poolDiscipleOfMalice,
+    _poolDisturbingConversion,
     _poolDivineGambit,
     _poolDomriRade,
     _poolDoomWeaver,
@@ -1692,6 +1697,7 @@ const shard: CardShard = {
     _poolTarfire,
     _poolTauntingElf,
     _poolTavernRuffian,
+    _poolTectonicReformation,
     _poolTempleOfPower,
     _poolTemporalSpring,
     _poolTemptingWitch,

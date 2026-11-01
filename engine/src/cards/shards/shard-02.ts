@@ -134,6 +134,7 @@ import _poolCompulsoryRest from "../pool/compulsory-rest.js";
 import _poolConcoct from "../pool/concoct.js";
 import _poolCongregationAtDawn from "../pool/congregation-at-dawn.js";
 import _poolConscriptedInfantry from "../pool/conscripted-infantry.js";
+import _poolConspiracy from "../pool/conspiracy.js";
 import _poolConsumingFervor from "../pool/consuming-fervor.js";
 import _poolCoordinatedClobbering from "../pool/coordinated-clobbering.js";
 import _poolCopperHostCrusher from "../pool/copper-host-crusher.js";
@@ -159,6 +160,7 @@ import _poolDaemogothWoeEater from "../pool/daemogoth-woe-eater.js";
 import _poolDaggermawMegalodon from "../pool/daggermaw-megalodon.js";
 import _poolDamningVerdict from "../pool/damning-verdict.js";
 import _poolDarkKnightsGreatsword from "../pool/dark-knights-greatsword.js";
+import _poolDarkMatterManipulator from "../pool/dark-matter-manipulator.js";
 import _poolDarkTemper from "../pool/dark-temper.js";
 import _poolDarklitGargoyle from "../pool/darklit-gargoyle.js";
 import _poolDarksteelPendant from "../pool/darksteel-pendant.js";
@@ -974,6 +976,7 @@ const shard: CardShard = {
     _poolConcoct,
     _poolCongregationAtDawn,
     _poolConscriptedInfantry,
+    _poolConspiracy,
     _poolConsumingFervor,
     _poolCoordinatedClobbering,
     _poolCopperHostCrusher,
@@ -999,6 +1002,7 @@ const shard: CardShard = {
     _poolDaggermawMegalodon,
     _poolDamningVerdict,
     _poolDarkKnightsGreatsword,
+    _poolDarkMatterManipulator,
     _poolDarkTemper,
     _poolDarklitGargoyle,
     _poolDarksteelPendant,

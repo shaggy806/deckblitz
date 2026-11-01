@@ -123,6 +123,7 @@ import _poolChocoSeekerOfParadise from "../pool/choco-seeker-of-paradise.js";
 import _poolChromeProwler from "../pool/chrome-prowler.js";
 import _poolCircuitousRoute from "../pool/circuitous-route.js";
 import _poolCitadelOfPain from "../pool/citadel-of-pain.js";
+import _poolCivicSaber from "../pool/civic-saber.js";
 import _poolClanGuildmage from "../pool/clan-guildmage.js";
 import _poolClawsOfWirewood from "../pool/claws-of-wirewood.js";
 import _poolCleansingBeam from "../pool/cleansing-beam.js";
@@ -585,6 +586,7 @@ import _poolRestlessDead from "../pool/restless-dead.js";
 import _poolReveredUnicorn from "../pool/revered-unicorn.js";
 import _poolRevitalize from "../pool/revitalize.js";
 import _poolRevolutionaryRebuff from "../pool/revolutionary-rebuff.js";
+import _poolRhetTombMystic from "../pool/rhet-tomb-mystic.js";
 import _poolRiggingRunner from "../pool/rigging-runner.js";
 import _poolRimeboundDead from "../pool/rimebound-dead.js";
 import _poolRimehornAurochs from "../pool/rimehorn-aurochs.js";
@@ -972,6 +974,7 @@ const shard: CardShard = {
     _poolChromeProwler,
     _poolCircuitousRoute,
     _poolCitadelOfPain,
+    _poolCivicSaber,
     _poolClanGuildmage,
     _poolClawsOfWirewood,
     _poolCleansingBeam,
@@ -1434,6 +1437,7 @@ const shard: CardShard = {
     _poolReveredUnicorn,
     _poolRevitalize,
     _poolRevolutionaryRebuff,
+    _poolRhetTombMystic,
     _poolRiggingRunner,
     _poolRimeboundDead,
     _poolRimehornAurochs,

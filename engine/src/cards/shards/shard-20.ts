@@ -881,6 +881,7 @@ import _poolWildMagicSorcerer from "../pool/wild-magic-sorcerer.js";
 import _poolWillowrushVerge from "../pool/willowrush-verge.js";
 import _poolWindSail from "../pool/wind-sail.js";
 import _poolWingPuncture from "../pool/wing-puncture.js";
+import _poolWireSurgeons from "../pool/wire-surgeons.js";
 import _poolWirewoodGuardian from "../pool/wirewood-guardian.js";
 import _poolWitchesEye from "../pool/witches-eye.js";
 import _poolWitchsVengeance from "../pool/witchs-vengeance.js";
@@ -1798,6 +1799,7 @@ const shard: CardShard = {
     _poolWillowrushVerge,
     _poolWindSail,
     _poolWingPuncture,
+    _poolWireSurgeons,
     _poolWirewoodGuardian,
     _poolWitchesEye,
     _poolWitchsVengeance,

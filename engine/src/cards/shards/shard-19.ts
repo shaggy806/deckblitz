@@ -20,6 +20,7 @@ import _poolAkroanConscriptor from "../pool/akroan-conscriptor.js";
 import _poolAkromasBlessing from "../pool/akromas-blessing.js";
 import _poolAkulTheUnrepentant from "../pool/akul-the-unrepentant.js";
 import _poolAlabornVeteran from "../pool/alaborn-veteran.js";
+import _poolAlphaStatus from "../pool/alpha-status.js";
 import _poolAltacBloodseeker from "../pool/altac-bloodseeker.js";
 import _poolAmphinMutineer from "../pool/amphin-mutineer.js";
 import _poolAnavolver from "../pool/anavolver.js";
@@ -925,6 +926,7 @@ const shard: CardShard = {
     _poolAkromasBlessing,
     _poolAkulTheUnrepentant,
     _poolAlabornVeteran,
+    _poolAlphaStatus,
     _poolAltacBloodseeker,
     _poolAmphinMutineer,
     _poolAnavolver,

@@ -387,6 +387,7 @@ import _poolKnightErrant from "../pool/knight-errant.js";
 import _poolKnightOfTheNewCoalition from "../pool/knight-of-the-new-coalition.js";
 import _poolKnightOfTheReliquary from "../pool/knight-of-the-reliquary.js";
 import _poolKnotvinePaladin from "../pool/knotvine-paladin.js";
+import _poolKnowledgeIsPower from "../pool/knowledge-is-power.js";
 import _poolKoilosRoc from "../pool/koilos-roc.js";
 import _poolKokushoTheEveningStar from "../pool/kokusho-the-evening-star.js";
 import _poolKorLineSlinger from "../pool/kor-line-slinger.js";
@@ -648,6 +649,7 @@ import _poolSlitherBlade from "../pool/slither-blade.js";
 import _poolSnowCoveredWastes from "../pool/snow-covered-wastes.js";
 import _poolSnowDay from "../pool/snow-day.js";
 import _poolSokkaBoldBoomeranger from "../pool/sokka-bold-boomeranger.js";
+import _poolSolemnDoomguide from "../pool/solemn-doomguide.js";
 import _poolSolitaryHunter from "../pool/solitary-hunter.js";
 import _poolSomberwaldVigilante from "../pool/somberwald-vigilante.js";
 import _poolSongMadRuins from "../pool/song-mad-ruins.js";
@@ -1243,6 +1245,7 @@ const shard: CardShard = {
     _poolKnightOfTheNewCoalition,
     _poolKnightOfTheReliquary,
     _poolKnotvinePaladin,
+    _poolKnowledgeIsPower,
     _poolKoilosRoc,
     _poolKokushoTheEveningStar,
     _poolKorLineSlinger,
@@ -1504,6 +1507,7 @@ const shard: CardShard = {
     _poolSnowCoveredWastes,
     _poolSnowDay,
     _poolSokkaBoldBoomeranger,
+    _poolSolemnDoomguide,
     _poolSolitaryHunter,
     _poolSomberwaldVigilante,
     _poolSongMadRuins,

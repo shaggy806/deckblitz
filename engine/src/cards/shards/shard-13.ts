@@ -281,6 +281,7 @@ import _poolGhoulsteed from "../pool/ghoulsteed.js";
 import _poolGiantsBoulder from "../pool/giants-boulder.js";
 import _poolGiftOfParadise from "../pool/gift-of-paradise.js";
 import _poolGigantoad from "../pool/gigantoad.js";
+import _poolGleamOfAuthority from "../pool/gleam-of-authority.js";
 import _poolGleamOfResistance from "../pool/gleam-of-resistance.js";
 import _poolGoblinBalloonBrigade from "../pool/goblin-balloon-brigade.js";
 import _poolGoblinDarkDwellers from "../pool/goblin-dark-dwellers.js";
@@ -463,6 +464,7 @@ import _poolNettleSentinel from "../pool/nettle-sentinel.js";
 import _poolNewGenerationsTechnique from "../pool/new-generations-technique.js";
 import _poolNezumiBoneReader from "../pool/nezumi-bone-reader.js";
 import _poolNightshadeSeer from "../pool/nightshade-seer.js";
+import _poolNinjaTeen from "../pool/ninja-teen.js";
 import _poolNissaAscendedAnimist from "../pool/nissa-ascended-animist.js";
 import _poolNoblePurpose from "../pool/noble-purpose.js";
 import _poolNoiseMarine from "../pool/noise-marine.js";
@@ -1126,6 +1128,7 @@ const shard: CardShard = {
     _poolGiantsBoulder,
     _poolGiftOfParadise,
     _poolGigantoad,
+    _poolGleamOfAuthority,
     _poolGleamOfResistance,
     _poolGoblinBalloonBrigade,
     _poolGoblinDarkDwellers,
@@ -1308,6 +1311,7 @@ const shard: CardShard = {
     _poolNewGenerationsTechnique,
     _poolNezumiBoneReader,
     _poolNightshadeSeer,
+    _poolNinjaTeen,
     _poolNissaAscendedAnimist,
     _poolNoblePurpose,
     _poolNoiseMarine,

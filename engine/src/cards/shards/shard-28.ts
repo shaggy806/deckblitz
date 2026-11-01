@@ -39,6 +39,7 @@ import _poolAnuridScavenger from "../pool/anurid-scavenger.js";
 import _poolArabaMothrider from "../pool/araba-mothrider.js";
 import _poolArachnoid from "../pool/arachnoid.js";
 import _poolArbaazMir from "../pool/arbaaz-mir.js";
+import _poolArcaneAdaptation from "../pool/arcane-adaptation.js";
 import _poolArcanistsOwl from "../pool/arcanists-owl.js";
 import _poolArcboundLancer from "../pool/arcbound-lancer.js";
 import _poolArcboundMouser from "../pool/arcbound-mouser.js";
@@ -924,6 +925,7 @@ const shard: CardShard = {
     _poolArabaMothrider,
     _poolArachnoid,
     _poolArbaazMir,
+    _poolArcaneAdaptation,
     _poolArcanistsOwl,
     _poolArcboundLancer,
     _poolArcboundMouser,
