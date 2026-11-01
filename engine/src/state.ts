@@ -4571,6 +4571,9 @@ export interface PlayerEffect {
     readonly filter: CardFilter;
     readonly label: string;
     readonly lands?: true;
+    /** Only cards cast or played from these zones (Memory Vessel's "from
+     * their hand"), where the card is as the cast or play begins. */
+    readonly from?: readonly ZoneType[];
   };
   /** `owner` may cast matching spells from their hand without paying their
    * mana costs. */
@@ -5277,6 +5280,9 @@ export interface GameState {
       /** Only the spells matching this, from `you`'s side — "can't cast
        * noncreature spells this turn". */
       readonly spellsMatching?: { readonly filter: CardFilter; readonly you: PlayerId };
+      /** "Target player can't play lands this turn" (Turf Wound — rule
+       * 305.2): no land play, from any zone, by any permission. */
+      readonly lands?: true;
     }[];
     permanents: { readonly object: ObjectId; readonly zoneChangeCount: number }[];
   };

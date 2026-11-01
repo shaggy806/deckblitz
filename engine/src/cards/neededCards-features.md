@@ -321,6 +321,27 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Can't play lands, and casting barred by zone — built 2026-10-31
+
+The need-keys Phase 2 family `effect:cast-and-activate-restrictions`'s
+first unit, features only. The `prohibit` effect takes `lands: true`
+("target player can't play lands this turn" — rule 305.2, a land from any
+zone; a `turnProhibitions` entry read by `whyLandPlayProhibited`). A static
+`prohibits` takes `from` / `notFrom` (zone lists) binding its `spells` and
+`lands` only to a card in, or outside, those zones as the cast or play
+begins (rule 601.2a — `prohibitionReachesZone`): "your opponents can't cast
+spells from anywhere other than their hands" (`notFrom: ["hand"]`), "you
+can't play lands or cast spells from your hand" (`from: ["hand"]`). A
+`player-effect`'s `cantCast` takes `from` too (Memory Vessel's lock). "Players
+can't play lands" was already `prohibits.lands` (Null Chamber's) with `{}` —
+only marked. The scaffolder reads the effect line and the three static
+lines. Keys: effect:prohibit-land-plays, effect:prohibit-cast-by-zone.
+Proving cards: Turf Wound, Pardic Miner, Territorial Dispute, Drannith
+Magistrate, Experimental Frenzy. Left: Memory Vessel's "until your next
+turn, players may play cards they exiled this way" (an impulse permission
+ending as your next turn begins), Moonhold's mana-spent halves (built — a
+`conditional` each), Rock Jockey's `condition:played-land-this-turn`.
+
 ### "When you discard this card", its cause, and the turn's first discard — built 2026-10-31
 
 The need-keys Phase 2 family `trigger:discards-extensions`, features only.

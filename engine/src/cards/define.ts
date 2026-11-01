@@ -1898,8 +1898,20 @@ export interface StaticAbility {
     readonly anyZone?: true;
     /** "…and **lands** with the chosen names **can't be played**" (Null
      * Chamber, rule 305.2): lands matching this filter, from this
-     * permanent's controller's side. */
+     * permanent's controller's side. `{}` is every land — Territorial
+     * Dispute's "players can't play lands". */
     readonly lands?: CardFilter;
+    /** `spells` and `lands` bind only a card cast or played **from** one of
+     * these zones — Experimental Frenzy's "you can't play lands or cast
+     * spells from your hand" (`["hand"]`) — judged where the card is as the
+     * cast or the play begins (rule 601.2a). */
+    readonly from?: readonly ZoneType[];
+    /** `spells` and `lands` bind only a card **not** in one of these zones —
+     * Drannith Magistrate's "can't cast spells from anywhere other than
+     * their hands" (`["hand"]`): the command zone, a graveyard, exile and a
+     * library's top all barred, whatever permission offers the card (rule
+     * 101.2). */
+    readonly notFrom?: readonly ZoneType[];
   };
   /** "You may cast spells as though they had flash" (Heliod, the Warped
    * Eclipse) — every spell (`true`) or ones matching a filter ("creature

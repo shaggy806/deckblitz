@@ -6115,3 +6115,44 @@ describe("discard triggers: this card, its cause, the turn's first", () => {
     expect(gnome.triggered[0].trigger).toEqual({ on: "this-discarded", byOpponent: true });
   });
 });
+
+describe("land-play and cast-by-zone prohibitions", () => {
+  const face = (name: string, type_line: string, oracle_text: string) =>
+    parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });
+
+  it("reads 'target player can't play lands this turn' as a prohibit effect's lands", () => {
+    const wound = face("Turf Wound", "Instant", "Target player can't play lands this turn.\nDraw a card.");
+    expect(wound.complete).toBe(true);
+    expect(wound.targets).toEqual(["player"]);
+    expect(wound.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "prohibit", who: 0, lands: true },
+        { kind: "draw", amount: 1 },
+      ],
+    });
+    const miner = face("Pardic Miner", "Creature — Dwarf", "Sacrifice this creature: Target player can't play lands this turn.");
+    expect(miner.complete).toBe(true);
+    expect(miner.activated[0].effect).toEqual({ kind: "prohibit", who: 0, lands: true });
+  });
+
+  it("reads the static land-play lock and the casting locks by zone", () => {
+    const dispute = face(
+      "Territorial Dispute",
+      "Enchantment",
+      "At the beginning of your upkeep, sacrifice this enchantment unless you sacrifice a land.\nPlayers can't play lands.",
+    );
+    expect(dispute.static[0].prohibits).toEqual({ who: "each-player", lands: {} });
+    const mining = face("Aggressive Mining", "Enchantment", "You can't play lands.");
+    expect(mining.static[0].prohibits).toEqual({ who: "you", lands: {} });
+    const magistrate = face(
+      "Drannith Magistrate",
+      "Creature — Human Wizard",
+      "Your opponents can't cast spells from anywhere other than their hands.",
+    );
+    expect(magistrate.complete).toBe(true);
+    expect(magistrate.static[0].prohibits).toEqual({ who: "opponents", spells: true, notFrom: ["hand"] });
+    const frenzy = face("Experimental Frenzy", "Enchantment", "You can't play lands or cast spells from your hand.");
+    expect(frenzy.static[0].prohibits).toEqual({ who: "you", spells: true, lands: {}, from: ["hand"] });
+  });
+});

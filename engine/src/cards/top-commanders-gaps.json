@@ -872,7 +872,9 @@
   "condition:put-into-graveyard-this-turn-any-zone",
   "trigger:discard-this-card",
   "trigger:discards-extensions",
-  "trigger:discards-first-time-each-turn"
+  "trigger:discards-first-time-each-turn",
+  "effect:prohibit-land-plays",
+  "effect:prohibit-cast-by-zone"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

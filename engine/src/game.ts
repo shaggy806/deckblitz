@@ -10404,11 +10404,15 @@ export class Game {
    * Chamber's static), judged as the face `cardId` would be played as;
    * `null` when nothing bars it. */
   private whyLandPlayProhibited(player: PlayerId, cardId: ObjectId, face: number, def: CardDefinition): string | null {
+    // "Target player can't play lands this turn" (Turf Wound).
+    if (this.state.turnProhibitions?.players.some((p) => p.player === player && p.lands === true) === true) {
+      return `${player} can't play lands this turn`;
+    }
     // "…and lands with the chosen name can't be played" until a turn
     // (Conjurer's Ban).
     for (const effect of this.state.playerEffects ?? []) {
       const cant = effect.cantCast;
-      if (cant?.lands !== true || !cant.players.includes(player)) continue;
+      if (cant?.lands !== true || !cant.players.includes(player) || !this.prohibitionReachesZone(cant, cardId)) continue;
       const barred = this.withFace(cardId, face, () =>
         matchesFilter(this.state, this.registry, cardId, cant.filter, { you: effect.owner }),
       );
@@ -10416,7 +10420,7 @@ export class Game {
     }
     for (const { source, prohibits } of this.prohibitionsOn(player)) {
       const lands = prohibits.lands;
-      if (lands === undefined) continue;
+      if (lands === undefined || !this.prohibitionReachesZone(prohibits, cardId)) continue;
       const barred = this.withFace(cardId, face, () =>
         matchesFilter(this.state, this.registry, cardId, lands, { you: source.controller, source: source.id }),
       );
@@ -28307,6 +28311,14 @@ export class Game {
         for (const p of live) this.state.players[p].cantBecomeMonarchTurn = this.state.turn.number;
         this.emit({ type: "prohibition-imposed", players: live, spells: false, abilities: false, monarch: true });
       },
+      prohibitLandPlays: (players) => {
+        const live = players.filter((p) => this.state.players[p]?.hasLost === false);
+        if (live.length === 0) return;
+        const record = (this.state.turnProhibitions ??= { players: [], permanents: [] });
+        for (const player of live) record.players.push({ player, spells: false, abilities: false, lands: true });
+        // No log line: the client's prohibition line names only spells and
+        // abilities, so a lands-only one would read "can't  this turn".
+      },
       addPlayerEffect: (effect) => {
         const flash = effect.castAsThoughFlash;
         if (flash?.filter?.ofChosenType === true) {
@@ -33376,6 +33388,21 @@ export class Game {
     return out;
   }
 
+  /** Whether a static prohibition's `from` / `notFrom` lets it reach
+   * `cardId` where the card is now — as a cast or a land play begins, before
+   * it moves (rule 601.2a): "from your hand" (Experimental Frenzy), "from
+   * anywhere other than their hands" (Drannith Magistrate). */
+  private prohibitionReachesZone(
+    prohibits: { readonly from?: readonly ZoneType[]; readonly notFrom?: readonly ZoneType[] },
+    cardId: ObjectId,
+  ): boolean {
+    if (prohibits.from === undefined && prohibits.notFrom === undefined) return true;
+    const zone = this.state.objects[cardId]?.zone;
+    if (zone === undefined) return false;
+    if (prohibits.from !== undefined && !prohibits.from.includes(zone)) return false;
+    return prohibits.notFrom === undefined || !prohibits.notFrom.includes(zone);
+  }
+
   /**
    * Why `player` can't cast `cardId` (its face `def`) whatever the timing
    * and cost: a split-second spell on the stack (rule 702.61), a "can't
@@ -33406,7 +33433,7 @@ export class Game {
     // name" (Academic Probation).
     for (const effect of this.state.playerEffects ?? []) {
       const cant = effect.cantCast;
-      if (cant === undefined || !cant.players.includes(player)) continue;
+      if (cant === undefined || !cant.players.includes(player) || !this.prohibitionReachesZone(cant, cardId)) continue;
       if (matchesFilter(this.state, this.registry, cardId, cant.filter, { you: effect.owner })) {
         return `${player} can't cast ${cant.label}`;
       }
@@ -33422,7 +33449,7 @@ export class Game {
     }
     for (const { source, prohibits } of this.prohibitionsOn(player)) {
       const spells = prohibits.spells;
-      if (spells === undefined) continue;
+      if (spells === undefined || !this.prohibitionReachesZone(prohibits, cardId)) continue;
       if (
         spells === true ||
         matchesFilter(this.state, this.registry, cardId, spells, { you: source.controller, source: source.id })

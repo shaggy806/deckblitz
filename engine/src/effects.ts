@@ -4610,12 +4610,17 @@ export type EffectSpec =
        * chosen name" (Academic Probation, Comply): the players `who` names as
        * this resolves can't cast spells matching `filter` (from the
        * controller's side); `lands` — "and lands with the chosen name can't be
-       * played" (Conjurer's Ban, rule 305.2). `label` names them in the log. */
+       * played" (Conjurer's Ban, rule 305.2). `label` names them in the log.
+       * `from`: only cards cast or played from these zones — Memory Vessel's
+       * "until your next turn, … they can't play cards from their hand"
+       * (`filter: {}`, `lands`, `from: ["hand"]`), judged where the card is
+       * as the cast or play begins (601.2a). */
       readonly cantCast?: {
         readonly who: PlayerScope;
         readonly filter: CardFilter;
         readonly label: string;
         readonly lands?: true;
+        readonly from?: readonly ZoneType[];
       };
       readonly castFromHandFree?: { readonly filter?: CardFilter };
       /** "You may cast spells this turn as though they had flash" (Borne
@@ -4861,6 +4866,10 @@ export type EffectSpec =
        * - `monarch`: "you can't become the monarch this turn" (Jared
        *   Carthalion, True Heir — rule 725.4's "a player who can become the
        *   monarch"): on the `who` players.
+       * - `lands`: "target player can't play lands this turn" (Turf Wound,
+       *   Pardic Miner — rule 305.2): on the `who` players, a land from any
+       *   zone, whatever permission offers it. Moonhold's two halves are each
+       *   a `conditional` on the mana spent, one `lands`, one `spells`.
        * On `target`, `abilities` is the default when neither is named.
        * `duration: "until-your-next-turn"` makes a `target`'s abilities
        * prohibition last until this effect's controller's next turn (Dovin
@@ -4871,6 +4880,7 @@ export type EffectSpec =
       readonly target?: EffectTargetRef;
       readonly spells?: boolean | { readonly filter: CardFilter; readonly label: string };
       readonly abilities?: boolean;
+      readonly lands?: boolean;
       readonly regeneration?: boolean;
       readonly monarch?: boolean;
       readonly dealtDamageThisWay?: "creature";
@@ -9146,6 +9156,9 @@ export interface EffectApi {
    * every creature this resolution has dealt damage to so far, can't be
    * regenerated this turn (rule 701.19c). */
   prohibitRegeneration(target: TargetRef | "dealt-damage-this-way"): void;
+  /** See the `"prohibit"` {@link EffectSpec}'s `lands`: `players` can't play
+   * lands this turn (rule 305.2). */
+  prohibitLandPlays(players: readonly PlayerId[]): void;
   /** See the `"prohibit"` {@link EffectSpec}'s `monarch`: `players` can't
    * become the monarch this turn. */
   prohibitMonarch(players: readonly PlayerId[]): void;
@@ -13775,6 +13788,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
                 filter: spec.cantCast.filter,
                 label: spec.cantCast.label,
                 ...(spec.cantCast.lands === true ? { lands: true as const } : {}),
+                ...(spec.cantCast.from !== undefined ? { from: spec.cantCast.from } : {}),
               },
             }
           : {}),
@@ -13857,7 +13871,10 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
               : []
             : ctx.playersInScope(spec.who);
       if (spec.monarch === true) ctx.prohibitMonarch(players);
-      if (spec.monarch === true && spec.spells === undefined && spec.abilities === undefined) return;
+      if (spec.lands === true) ctx.prohibitLandPlays(players);
+      if ((spec.monarch === true || spec.lands === true) && spec.spells === undefined && spec.abilities === undefined) {
+        return;
+      }
       ctx.prohibit(
         players,
         undefined,

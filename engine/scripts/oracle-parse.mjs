@@ -3790,6 +3790,13 @@ export function parseSentence(sentence, ctx) {
   if ((m = re("(target player|target opponent) becomes the monarch").exec(s))) return { kind: "become-monarch", who: slot(m[1]) };
   // "You can't become the monarch this turn" (rule 725.4).
   if (re("you can't become the monarch this turn").test(s)) return { kind: "prohibit", who: "you", monarch: true };
+  // "Target player can't play lands this turn" (Turf Wound, Pardic Miner —
+  // rule 305.2).
+  if ((m = re("(target player|target opponent|you) can't play lands this turn").exec(s))) {
+    return m[1].toLowerCase() === "you"
+      ? { kind: "prohibit", who: "you", lands: true }
+      : { kind: "prohibit", who: slot(m[1]), lands: true };
+  }
   // The initiative (rule 726) — its abilities venture into Undercity — and
   // venturing (701.49): into one of the three Forgotten Realms dungeons.
   if (re("you take the initiative").test(s)) return { kind: "take-initiative" };
@@ -6084,6 +6091,29 @@ export function parseFace(face, ctx = {}) {
       const prohibits =
         m[2] === "cast spells" ? { who, spells: { sameNameWith } } : { who, lands: { notSupertype: "basic", sameNameWith } };
       out.static.push({ affects: { scope: "self" }, prohibits, text: printed(raw) });
+      continue;
+    }
+    // Land plays and casting by zone (rules 101.2, 305.2, 601.2a): "Players
+    // can't play lands" (Territorial Dispute), "Your opponents can't cast
+    // spells from anywhere other than their hands" (Drannith Magistrate),
+    // "You can't play lands or cast spells from your hand" (Experimental
+    // Frenzy).
+    if ((m = /^(You|Your opponents|Players) can't play lands\.$/.exec(line))) {
+      const who = m[1] === "You" ? "you" : m[1] === "Players" ? "each-player" : "opponents";
+      out.static.push({ affects: { scope: "self" }, prohibits: { who, lands: {} }, text: printed(raw) });
+      continue;
+    }
+    if ((m = /^(Your opponents|Players) can't cast spells from anywhere other than their hands\.$/.exec(line))) {
+      const who = m[1] === "Players" ? "each-player" : "opponents";
+      out.static.push({ affects: { scope: "self" }, prohibits: { who, spells: true, notFrom: ["hand"] }, text: printed(raw) });
+      continue;
+    }
+    if (line === "You can't play lands or cast spells from your hand.") {
+      out.static.push({
+        affects: { scope: "self" },
+        prohibits: { who: "you", spells: true, lands: {}, from: ["hand"] },
+        text: printed(raw),
+      });
       continue;
     }
     if (out.chooseCardNameOnEnter !== undefined && (m = /^Activated abilities of sources with the chosen name cost \{(\d+)\} more to activate( unless they're mana abilities)?\.$/.exec(line))) {
