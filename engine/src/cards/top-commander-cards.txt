@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4096 already implemented / 904 missing (marks refreshed 2026-11-01)
+4098 already implemented / 902 missing (marks refreshed 2026-11-01)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -735,7 +735,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   736  Oran-Rief, the Vastwood                  {0}              Land
 [x]   737  Lion's Eye Diamond                       {0}              Artifact
 [x]   738  Abrupt Decay                             {B}{G}           Instant
-[ ]   739  Drannith Magistrate                      {1}{W}           Creature — Human Wizard
+[x]   739  Drannith Magistrate                      {1}{W}           Creature — Human Wizard
 [x]   740  Flare of Fortitude                       {2}{W}{W}        Instant
 [x]   741  Palladium Myr                            {3}              Artifact Creature — Myr
 [x]   742  Spelunking                               {2}{G}           Enchantment
@@ -3849,7 +3849,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3856  Claim the Precious                       {1}{B}{B}        Sorcery
 [ ]  3857  Maddening Hex                            {1}{R}{R}        Enchantment — Aura Curse
 [ ]  3858  Illusionist's Gambit                     {2}{U}{U}        Instant
-[ ]  3859  Unctus, Grand Metatect                   {1}{U}{U}        Legendary Artifact Creature — Phyrexian Vedalken
+[x]  3859  Unctus, Grand Metatect                   {1}{U}{U}        Legendary Artifact Creature — Phyrexian Vedalken
 [x]  3860  Rikku, Resourceful Guardian              {2}{U}           Legendary Creature — Human Artificer
 [ ]  3861  Ozai, the Phoenix King                   {2}{B}{B}{R}{R}  Legendary Creature — Human Noble
 [x]  3862  Broodcaller Scourge                      {5}{G}{G}        Creature — Dragon
