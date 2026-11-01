@@ -390,17 +390,20 @@ section keeps only what to do next.
   graveyard or exile, sacrifice or discard instead of entering, a card's own copy limit, companion
   (32 freed, 33 proving cards — on the stale list Obosh needs `filter:odd-mana-value`, Lurrus its X
   held to the mana-value cap, Lake of the Dead a chosen sacrifice as a mana ability, Aquamorph Entity
-  "or is turned face up", Invasion of Amonkhet a back face's copy). **1170 freed cards wait for the
-  authoring sweep**
+  "or is turned face up", Invasion of Amonkhet a back face's copy), and six more: revealing from a
+  hand, a card chosen from a set, a tapped-for-mana trigger on the stack, the most common color, a
+  graveyard's order, statics acting on a player (27 freed, 36 proving cards — on the stale list Vault
+  13 needs per-player targets, Bane Alley Broker its looker following control, Treasure Nabber
+  `gain-control` until your next end step, Spinning Darkness an alternative cost, Bösium Strip a cast
+  from the graveyard's top, Phyrexian Grimoire a choice among the top two, Curses of Surveillance and
+  Thirst `amount:curses-attached-to-player`). **Those families' count is on `cards:needs -- --stale`:
+  it waits for the authoring sweep**
   (`cards:needs -- --stale`); the user authors them in one sweep once the reasonable keys are built.
   Cloud sessions are building `keyword:hexproof-from-colors`, the combat-restriction second group,
   `effect:prevent-next-n-damage-to-you`, the cascade/sunburst grants to spells,
   `cost:kicker-nonmana-cost` and `cost:alt-cost-discard-cards`. Being built:
-  `effect:target-spec-additions`' reveal group, `effect:choose-card-exiled-with-source`,
-  `trigger:tapped-for-mana-nonmana-trigger`,
-  `condition:most-common-color-among-chosen-player-permanents`, `effect:top-card-of-graveyard`,
-  `static:static-over-enchanted-player`. Next unclaimed: `mechanic:control-attack-block-choices`
-  (10, a design of its own), `zone:visibility-extensions` (9), `trigger:trigger-recipient-ref` (9).
+  `trigger:trigger-recipient-ref`, `zone:visibility-extensions`. Next unclaimed:
+  `mechanic:control-attack-block-choices` (10, a design of its own).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next

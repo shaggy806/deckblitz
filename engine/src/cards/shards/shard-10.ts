@@ -7,6 +7,7 @@ import _pool2Mace from "../pool/2-mace.js";
 import _poolAbsolverThrull from "../pool/absolver-thrull.js";
 import _poolAbsorbIdentity from "../pool/absorb-identity.js";
 import _poolAbstergoEntertainment from "../pool/abstergo-entertainment.js";
+import _poolAbyssalPersecutor from "../pool/abyssal-persecutor.js";
 import _poolAbzanBeastmaster from "../pool/abzan-beastmaster.js";
 import _poolAccumulateWisdom from "../pool/accumulate-wisdom.js";
 import _poolAdultGoldDragon from "../pool/adult-gold-dragon.js";
@@ -893,6 +894,7 @@ const shard: CardShard = {
     _poolAbsolverThrull,
     _poolAbsorbIdentity,
     _poolAbstergoEntertainment,
+    _poolAbyssalPersecutor,
     _poolAbzanBeastmaster,
     _poolAccumulateWisdom,
     _poolAdultGoldDragon,

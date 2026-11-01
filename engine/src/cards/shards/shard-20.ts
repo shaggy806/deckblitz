@@ -119,6 +119,7 @@ import _poolBubbleMatrix from "../pool/bubble-matrix.js";
 import _poolBullHippo from "../pool/bull-hippo.js";
 import _poolBumiBash from "../pool/bumi-bash.js";
 import _poolBurnBright from "../pool/burn-bright.js";
+import _poolBurningEarth from "../pool/burning-earth.js";
 import _poolButcherOfTheHorde from "../pool/butcher-of-the-horde.js";
 import _poolCabalTrainee from "../pool/cabal-trainee.js";
 import _poolCallTheCavalry from "../pool/call-the-cavalry.js";
@@ -285,6 +286,7 @@ import _poolFoggySwampHunters from "../pool/foggy-swamp-hunters.js";
 import _poolFolkOfAnHavva from "../pool/folk-of-an-havva.js";
 import _poolForbiddingSpirit from "../pool/forbidding-spirit.js";
 import _poolFortifiedArea from "../pool/fortified-area.js";
+import _poolFossilFind from "../pool/fossil-find.js";
 import _poolFrodoDeterminedHero from "../pool/frodo-determined-hero.js";
 import _poolFrostwalla from "../pool/frostwalla.js";
 import _poolFugitiveDroid from "../pool/fugitive-droid.js";
@@ -797,6 +799,7 @@ import _poolThornThrashViashino from "../pool/thorn-thrash-viashino.js";
 import _poolThoughtGorger from "../pool/thought-gorger.js";
 import _poolThoughtHarvester from "../pool/thought-harvester.js";
 import _poolThoughtVessel from "../pool/thought-vessel.js";
+import _poolThoughtcutterAgent from "../pool/thoughtcutter-agent.js";
 import _poolThousandLeggedKami from "../pool/thousand-legged-kami.js";
 import _poolThrabenFoulbloods from "../pool/thraben-foulbloods.js";
 import _poolThrabenMilitia from "../pool/thraben-militia.js";
@@ -1042,6 +1045,7 @@ const shard: CardShard = {
     _poolBullHippo,
     _poolBumiBash,
     _poolBurnBright,
+    _poolBurningEarth,
     _poolButcherOfTheHorde,
     _poolCabalTrainee,
     _poolCallTheCavalry,
@@ -1208,6 +1212,7 @@ const shard: CardShard = {
     _poolFolkOfAnHavva,
     _poolForbiddingSpirit,
     _poolFortifiedArea,
+    _poolFossilFind,
     _poolFrodoDeterminedHero,
     _poolFrostwalla,
     _poolFugitiveDroid,
@@ -1720,6 +1725,7 @@ const shard: CardShard = {
     _poolThoughtGorger,
     _poolThoughtHarvester,
     _poolThoughtVessel,
+    _poolThoughtcutterAgent,
     _poolThousandLeggedKami,
     _poolThrabenFoulbloods,
     _poolThrabenMilitia,

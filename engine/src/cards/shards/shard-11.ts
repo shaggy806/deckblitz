@@ -60,6 +60,7 @@ import _poolAvacynsMemorial from "../pool/avacyns-memorial.js";
 import _poolAvatarOfFury from "../pool/avatar-of-fury.js";
 import _poolAvenTrailblazer from "../pool/aven-trailblazer.js";
 import _poolBadgermoleCub from "../pool/badgermole-cub.js";
+import _poolBagOfDevouring from "../pool/bag-of-devouring.js";
 import _poolBantSureblade from "../pool/bant-sureblade.js";
 import _poolBarbarianLunatic from "../pool/barbarian-lunatic.js";
 import _poolBarbaryApes from "../pool/barbary-apes.js";
@@ -939,6 +940,7 @@ const shard: CardShard = {
     _poolAvatarOfFury,
     _poolAvenTrailblazer,
     _poolBadgermoleCub,
+    _poolBagOfDevouring,
     _poolBantSureblade,
     _poolBarbarianLunatic,
     _poolBarbaryApes,

@@ -486,6 +486,7 @@ import _poolMudbuttonCursetosser from "../pool/mudbutton-cursetosser.js";
 import _poolMultaniYavimayasAvatar from "../pool/multani-yavimayas-avatar.js";
 import _poolMummyParamount from "../pool/mummy-paramount.js";
 import _poolMurderousRider from "../pool/murderous-rider.js";
+import _poolMuseVessel from "../pool/muse-vessel.js";
 import _poolMycologist from "../pool/mycologist.js";
 import _poolMyojinOfInfiniteRage from "../pool/myojin-of-infinite-rage.js";
 import _poolMysticPenitent from "../pool/mystic-penitent.js";
@@ -861,6 +862,7 @@ import _poolZacamaPrimalCalamity from "../pool/zacama-primal-calamity.js";
 import _poolZealousInquisitor from "../pool/zealous-inquisitor.js";
 import _poolZephyrScribe from "../pool/zephyr-scribe.js";
 import _poolZhurTaaAncient from "../pool/zhur-taa-ancient.js";
+import _poolZhurTaaDruid from "../pool/zhur-taa-druid.js";
 import _poolZoZuThePunisher from "../pool/zo-zu-the-punisher.js";
 import _poolZodiacDog from "../pool/zodiac-dog.js";
 import _poolZukoFirebendingMaster from "../pool/zuko-firebending-master.js";
@@ -1381,6 +1383,7 @@ const shard: CardShard = {
     _poolMultaniYavimayasAvatar,
     _poolMummyParamount,
     _poolMurderousRider,
+    _poolMuseVessel,
     _poolMycologist,
     _poolMyojinOfInfiniteRage,
     _poolMysticPenitent,
@@ -1756,6 +1759,7 @@ const shard: CardShard = {
     _poolZealousInquisitor,
     _poolZephyrScribe,
     _poolZhurTaaAncient,
+    _poolZhurTaaDruid,
     _poolZoZuThePunisher,
     _poolZodiacDog,
     _poolZukoFirebendingMaster,

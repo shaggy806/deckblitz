@@ -17,6 +17,7 @@ import _poolAirResponseUnit from "../pool/air-response-unit.js";
 import _poolAkoumRefuge from "../pool/akoum-refuge.js";
 import _poolAladdinsRing from "../pool/aladdins-ring.js";
 import _poolAlmsOfTheVein from "../pool/alms-of-the-vein.js";
+import _poolAlms from "../pool/alms.js";
 import _poolAlphaKavu from "../pool/alpha-kavu.js";
 import _poolAncestralStatue from "../pool/ancestral-statue.js";
 import _poolAncientDen from "../pool/ancient-den.js";
@@ -615,6 +616,7 @@ import _poolRuthlessInvasion from "../pool/ruthless-invasion.js";
 import _poolRydiaSummonerOfMist from "../pool/rydia-summoner-of-mist.js";
 import _poolSailorOfMeans from "../pool/sailor-of-means.js";
 import _poolSanctifierOfSouls from "../pool/sanctifier-of-souls.js";
+import _poolSanctimony from "../pool/sanctimony.js";
 import _poolSanctumOfCalmWaters from "../pool/sanctum-of-calm-waters.js";
 import _poolSanctumOfUgin from "../pool/sanctum-of-ugin.js";
 import _poolSandbarCrocodile from "../pool/sandbar-crocodile.js";
@@ -875,6 +877,7 @@ const shard: CardShard = {
     _poolAkoumRefuge,
     _poolAladdinsRing,
     _poolAlmsOfTheVein,
+    _poolAlms,
     _poolAlphaKavu,
     _poolAncestralStatue,
     _poolAncientDen,
@@ -1473,6 +1476,7 @@ const shard: CardShard = {
     _poolRydiaSummonerOfMist,
     _poolSailorOfMeans,
     _poolSanctifierOfSouls,
+    _poolSanctimony,
     _poolSanctumOfCalmWaters,
     _poolSanctumOfUgin,
     _poolSandbarCrocodile,

@@ -12,7 +12,7 @@ describe("an other-slot relation to a slot not asked", () => {
   it("Phantom Blade with nothing in its first slot destroys the one it's asked for", () => {
     const { game } = table();
     const bears = spawn(game, "Grizzly Bears", B);
-    lands(game, "Swamp", 4);
+    lands(game, "Swamp", 5);
     cast(game, toHand(game, "Phantom Blade"));
     const awaiting = game.state.awaiting;
     expect(awaiting?.kind).toBe("choose-targets");

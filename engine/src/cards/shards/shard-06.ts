@@ -425,6 +425,7 @@ import _poolLathlissDragonQueen from "../pool/lathliss-dragon-queen.js";
 import _poolLaunch from "../pool/launch.js";
 import _poolLavaHounds from "../pool/lava-hounds.js";
 import _poolLayDownArms from "../pool/lay-down-arms.js";
+import _poolLazavWearerOfFaces from "../pool/lazav-wearer-of-faces.js";
 import _poolLeaveNoTrace from "../pool/leave-no-trace.js";
 import _poolLegerdemain from "../pool/legerdemain.js";
 import _poolLegionAngel from "../pool/legion-angel.js";
@@ -1288,6 +1289,7 @@ const shard: CardShard = {
     _poolLaunch,
     _poolLavaHounds,
     _poolLayDownArms,
+    _poolLazavWearerOfFaces,
     _poolLeaveNoTrace,
     _poolLegerdemain,
     _poolLegionAngel,

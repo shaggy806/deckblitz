@@ -591,6 +591,7 @@ import _poolRockslideAmbush from "../pool/rockslide-ambush.js";
 import _poolRoilCartographer from "../pool/roil-cartographer.js";
 import _poolRootsOfLife from "../pool/roots-of-life.js";
 import _poolRoughshodMentor from "../pool/roughshod-mentor.js";
+import _poolRuhamDjinn from "../pool/ruham-djinn.js";
 import _poolRuneboggle from "../pool/runeboggle.js";
 import _poolRuneforgeChampion from "../pool/runeforge-champion.js";
 import _poolRushOfAdrenaline from "../pool/rush-of-adrenaline.js";
@@ -1423,6 +1424,7 @@ const shard: CardShard = {
     _poolRoilCartographer,
     _poolRootsOfLife,
     _poolRoughshodMentor,
+    _poolRuhamDjinn,
     _poolRuneboggle,
     _poolRuneforgeChampion,
     _poolRushOfAdrenaline,

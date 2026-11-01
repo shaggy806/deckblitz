@@ -118,6 +118,7 @@ import _poolCrashingDrawbridge from "../pool/crashing-drawbridge.js";
 import _poolCrucibleOfFire from "../pool/crucible-of-fire.js";
 import _poolCruelSomnophage from "../pool/cruel-somnophage.js";
 import _poolCunningLethemancer from "../pool/cunning-lethemancer.js";
+import _poolCurseOfDeathSHold from "../pool/curse-of-death-s-hold.js";
 import _poolCut from "../pool/cut.js";
 import _poolCycloneSire from "../pool/cyclone-sire.js";
 import _poolCystbearer from "../pool/cystbearer.js";
@@ -910,6 +911,7 @@ const shard: CardShard = {
     _poolCrucibleOfFire,
     _poolCruelSomnophage,
     _poolCunningLethemancer,
+    _poolCurseOfDeathSHold,
     _poolCut,
     _poolCycloneSire,
     _poolCystbearer,

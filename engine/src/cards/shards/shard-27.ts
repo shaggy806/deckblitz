@@ -424,6 +424,7 @@ import _poolMegaFlare from "../pool/mega-flare.js";
 import _poolMegatog from "../pool/megatog.js";
 import _poolMemoryErosion from "../pool/memory-erosion.js";
 import _poolMephiticDraught from "../pool/mephitic-draught.js";
+import _poolMerfolkSpy from "../pool/merfolk-spy.js";
 import _poolMerrowLevitator from "../pool/merrow-levitator.js";
 import _poolMesmericGlare from "../pool/mesmeric-glare.js";
 import _poolMidnightHaunting from "../pool/midnight-haunting.js";
@@ -1276,6 +1277,7 @@ const shard: CardShard = {
     _poolMegatog,
     _poolMemoryErosion,
     _poolMephiticDraught,
+    _poolMerfolkSpy,
     _poolMerrowLevitator,
     _poolMesmericGlare,
     _poolMidnightHaunting,

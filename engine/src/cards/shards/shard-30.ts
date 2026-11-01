@@ -508,6 +508,7 @@ import _poolNarsetEnlightenedExile from "../pool/narset-enlightened-exile.js";
 import _poolNautiloidShip from "../pool/nautiloid-ship.js";
 import _poolNayaBattlemage from "../pool/naya-battlemage.js";
 import _poolNeckBreaker from "../pool/neck-breaker.js";
+import _poolNecratog from "../pool/necratog.js";
 import _poolNessianBoar from "../pool/nessian-boar.js";
 import _poolNestingWurm from "../pool/nesting-wurm.js";
 import _poolNickValentinePrivateEye from "../pool/nick-valentine-private-eye.js";
@@ -1384,6 +1385,7 @@ const shard: CardShard = {
     _poolNautiloidShip,
     _poolNayaBattlemage,
     _poolNeckBreaker,
+    _poolNecratog,
     _poolNessianBoar,
     _poolNestingWurm,
     _poolNickValentinePrivateEye,

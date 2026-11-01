@@ -140,6 +140,7 @@ import _poolConsumingFervor from "../pool/consuming-fervor.js";
 import _poolCoordinatedClobbering from "../pool/coordinated-clobbering.js";
 import _poolCopperHostCrusher from "../pool/copper-host-crusher.js";
 import _poolCopperLeafAngel from "../pool/copper-leaf-angel.js";
+import _poolCorpseDance from "../pool/corpse-dance.js";
 import _poolCourtOfAmbition from "../pool/court-of-ambition.js";
 import _poolCramSession from "../pool/cram-session.js";
 import _poolCremate from "../pool/cremate.js";
@@ -525,6 +526,7 @@ import _poolPiratesPrize from "../pool/pirates-prize.js";
 import _poolPitRaptor from "../pool/pit-raptor.js";
 import _poolPitfallTrap from "../pool/pitfall-trap.js";
 import _poolPlacidRottentail from "../pool/placid-rottentail.js";
+import _poolPlaneswalkersFury from "../pool/planeswalkers-fury.js";
 import _poolPlasmaElemental from "../pool/plasma-elemental.js";
 import _poolPlatypusBear from "../pool/platypus-bear.js";
 import _poolPlunderingPredator from "../pool/plundering-predator.js";
@@ -985,6 +987,7 @@ const shard: CardShard = {
     _poolCoordinatedClobbering,
     _poolCopperHostCrusher,
     _poolCopperLeafAngel,
+    _poolCorpseDance,
     _poolCourtOfAmbition,
     _poolCramSession,
     _poolCremate,
@@ -1370,6 +1373,7 @@ const shard: CardShard = {
     _poolPitRaptor,
     _poolPitfallTrap,
     _poolPlacidRottentail,
+    _poolPlaneswalkersFury,
     _poolPlasmaElemental,
     _poolPlatypusBear,
     _poolPlunderingPredator,

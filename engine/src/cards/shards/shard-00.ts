@@ -37,6 +37,7 @@ import _poolAquitectsDefenses from "../pool/aquitects-defenses.js";
 import _poolArcaneSanctum from "../pool/arcane-sanctum.js";
 import _poolArchOfOrazca from "../pool/arch-of-orazca.js";
 import _poolArchiveArbiter from "../pool/archive-arbiter.js";
+import _poolArmoredKincaller from "../pool/armored-kincaller.js";
 import _poolArvadTheCursed from "../pool/arvad-the-cursed.js";
 import _poolAscendantPackleader from "../pool/ascendant-packleader.js";
 import _poolAshmouthHound from "../pool/ashmouth-hound.js";
@@ -542,6 +543,7 @@ import _poolProsperityTycoon from "../pool/prosperity-tycoon.js";
 import _poolPrudentFateseer from "../pool/prudent-fateseer.js";
 import _poolPryingEyes from "../pool/prying-eyes.js";
 import _poolPunishingPunch from "../pool/punishing-punch.js";
+import _poolPurgatory from "../pool/purgatory.js";
 import _poolPurgeTheProfane from "../pool/purge-the-profane.js";
 import _poolPushPull from "../pool/push-pull.js";
 import _poolPutridCyclops from "../pool/putrid-cyclops.js";
@@ -921,6 +923,7 @@ const shard: CardShard = {
     _poolArcaneSanctum,
     _poolArchOfOrazca,
     _poolArchiveArbiter,
+    _poolArmoredKincaller,
     _poolArvadTheCursed,
     _poolAscendantPackleader,
     _poolAshmouthHound,
@@ -1426,6 +1429,7 @@ const shard: CardShard = {
     _poolPrudentFateseer,
     _poolPryingEyes,
     _poolPunishingPunch,
+    _poolPurgatory,
     _poolPurgeTheProfane,
     _poolPushPull,
     _poolPutridCyclops,

@@ -685,6 +685,7 @@ import _poolSnort from "../pool/snort.js";
 import _poolSnowmeltStag from "../pool/snowmelt-stag.js";
 import _poolSoddenVerdure from "../pool/sodden-verdure.js";
 import _poolSoilshaper from "../pool/soilshaper.js";
+import _poolSoldeviDigger from "../pool/soldevi-digger.js";
 import _poolSolemnSimulacrum from "../pool/solemn-simulacrum.js";
 import _poolSolveTheEquation from "../pool/solve-the-equation.js";
 import _poolSomethingWorthSaving from "../pool/something-worth-saving.js";
@@ -797,6 +798,7 @@ import _poolTreetopAmbusher from "../pool/treetop-ambusher.js";
 import _poolTrokinHighGuard from "../pool/trokin-high-guard.js";
 import _poolTrollOfKhazadDum from "../pool/troll-of-khazad-dum.js";
 import _poolTrostanisJudgment from "../pool/trostanis-judgment.js";
+import _poolTsaboSAssassin from "../pool/tsabo-s-assassin.js";
 import _poolTunnel from "../pool/tunnel.js";
 import _poolTwiceUponATime from "../pool/twice-upon-a-time.js";
 import _poolTwilightDrover from "../pool/twilight-drover.js";
@@ -1571,6 +1573,7 @@ const shard: CardShard = {
     _poolSnowmeltStag,
     _poolSoddenVerdure,
     _poolSoilshaper,
+    _poolSoldeviDigger,
     _poolSolemnSimulacrum,
     _poolSolveTheEquation,
     _poolSomethingWorthSaving,
@@ -1683,6 +1686,7 @@ const shard: CardShard = {
     _poolTrokinHighGuard,
     _poolTrollOfKhazadDum,
     _poolTrostanisJudgment,
+    _poolTsaboSAssassin,
     _poolTunnel,
     _poolTwiceUponATime,
     _poolTwilightDrover,

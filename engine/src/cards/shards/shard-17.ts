@@ -58,6 +58,7 @@ import _poolBalinLoremaster from "../pool/balin-loremaster.js";
 import _poolBarbarianBully from "../pool/barbarian-bully.js";
 import _poolBarrageTyrant from "../pool/barrage-tyrant.js";
 import _poolBarrensteppeSiege from "../pool/barrensteppe-siege.js";
+import _poolBarrinSUnmaking from "../pool/barrin-s-unmaking.js";
 import _poolBastionEnforcer from "../pool/bastion-enforcer.js";
 import _poolBattalionFootSoldier from "../pool/battalion-foot-soldier.js";
 import _poolBatterbone from "../pool/batterbone.js";
@@ -935,6 +936,7 @@ const shard: CardShard = {
     _poolBarbarianBully,
     _poolBarrageTyrant,
     _poolBarrensteppeSiege,
+    _poolBarrinSUnmaking,
     _poolBastionEnforcer,
     _poolBattalionFootSoldier,
     _poolBatterbone,

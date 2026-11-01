@@ -103,6 +103,7 @@ import _poolCacheRaiders from "../pool/cache-raiders.js";
 import _poolCacklingFiend from "../pool/cackling-fiend.js";
 import _poolCadricSoulKindler from "../pool/cadric-soul-kindler.js";
 import _poolCallOfTheDeathDweller from "../pool/call-of-the-death-dweller.js";
+import _poolCallToArms from "../pool/call-to-arms.js";
 import _poolCallToServe from "../pool/call-to-serve.js";
 import _poolCanonizedInBlood from "../pool/canonized-in-blood.js";
 import _poolCaptainOfTheMists from "../pool/captain-of-the-mists.js";
@@ -424,6 +425,7 @@ import _poolMarwynTheNurturer from "../pool/marwyn-the-nurturer.js";
 import _poolMaskOfImmolation from "../pool/mask-of-immolation.js";
 import _poolMasterOfDiversion from "../pool/master-of-diversion.js";
 import _poolMavrenFeinDuskApostle from "../pool/mavren-fein-dusk-apostle.js";
+import _poolMemoryLeak from "../pool/memory-leak.js";
 import _poolMerfolkSecretkeeper from "../pool/merfolk-secretkeeper.js";
 import _poolMerfolkWindrobber from "../pool/merfolk-windrobber.js";
 import _poolMerryWardenOfIsengard from "../pool/merry-warden-of-isengard.js";
@@ -943,6 +945,7 @@ const shard: CardShard = {
     _poolCacklingFiend,
     _poolCadricSoulKindler,
     _poolCallOfTheDeathDweller,
+    _poolCallToArms,
     _poolCallToServe,
     _poolCanonizedInBlood,
     _poolCaptainOfTheMists,
@@ -1264,6 +1267,7 @@ const shard: CardShard = {
     _poolMaskOfImmolation,
     _poolMasterOfDiversion,
     _poolMavrenFeinDuskApostle,
+    _poolMemoryLeak,
     _poolMerfolkSecretkeeper,
     _poolMerfolkWindrobber,
     _poolMerryWardenOfIsengard,

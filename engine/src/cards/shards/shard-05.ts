@@ -286,6 +286,7 @@ import _poolFlamingFistOfficer from "../pool/flaming-fist-officer.js";
 import _poolFlawlessManeuver from "../pool/flawless-maneuver.js";
 import _poolFleshlessGladiator from "../pool/fleshless-gladiator.js";
 import _poolFlightOfEquenauts from "../pool/flight-of-equenauts.js";
+import _poolForbiddenOrchard from "../pool/forbidden-orchard.js";
 import _poolFrenziedDevils from "../pool/frenzied-devils.js";
 import _poolFrostWalker from "../pool/frost-walker.js";
 import _poolFrostling from "../pool/frostling.js";
@@ -1148,6 +1149,7 @@ const shard: CardShard = {
     _poolFlawlessManeuver,
     _poolFleshlessGladiator,
     _poolFlightOfEquenauts,
+    _poolForbiddenOrchard,
     _poolFrenziedDevils,
     _poolFrostWalker,
     _poolFrostling,

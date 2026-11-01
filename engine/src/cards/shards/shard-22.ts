@@ -286,6 +286,7 @@ import _poolGrafHarvest from "../pool/graf-harvest.js";
 import _poolGrandArchitect from "../pool/grand-architect.js";
 import _poolGranulate from "../pool/granulate.js";
 import _poolGravestoneStrider from "../pool/gravestone-strider.js";
+import _poolGrievousWound from "../pool/grievous-wound.js";
 import _poolGriffinAerie from "../pool/griffin-aerie.js";
 import _poolGrotesqueHybrid from "../pool/grotesque-hybrid.js";
 import _poolGuadosalamFarplaneGateway from "../pool/guadosalam-farplane-gateway.js";
@@ -1169,6 +1170,7 @@ const shard: CardShard = {
     _poolGrandArchitect,
     _poolGranulate,
     _poolGravestoneStrider,
+    _poolGrievousWound,
     _poolGriffinAerie,
     _poolGrotesqueHybrid,
     _poolGuadosalamFarplaneGateway,

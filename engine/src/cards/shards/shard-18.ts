@@ -314,6 +314,7 @@ import _poolHelmOfChatzuk from "../pool/helm-of-chatzuk.js";
 import _poolHengeWalker from "../pool/henge-walker.js";
 import _poolHeraldsHorn from "../pool/heralds-horn.js";
 import _poolHeraldsOfTzeentch from "../pool/heralds-of-tzeentch.js";
+import _poolHeroicDefiance from "../pool/heroic-defiance.js";
 import _poolHeroicFeast from "../pool/heroic-feast.js";
 import _poolHeronBlessedGeist from "../pool/heron-blessed-geist.js";
 import _poolHiddenHerd from "../pool/hidden-herd.js";
@@ -1186,6 +1187,7 @@ const shard: CardShard = {
     _poolHengeWalker,
     _poolHeraldsHorn,
     _poolHeraldsOfTzeentch,
+    _poolHeroicDefiance,
     _poolHeroicFeast,
     _poolHeronBlessedGeist,
     _poolHiddenHerd,

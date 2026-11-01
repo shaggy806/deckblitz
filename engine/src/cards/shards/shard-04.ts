@@ -692,6 +692,7 @@ import _poolStirThePride from "../pool/stir-the-pride.js";
 import _poolStitchedDrake from "../pool/stitched-drake.js";
 import _poolStokeGenius from "../pool/stoke-genius.js";
 import _poolStonehands from "../pool/stonehands.js";
+import _poolStormCauldron from "../pool/storm-cauldron.js";
 import _poolStrandsOfUndeath from "../pool/strands-of-undeath.js";
 import _poolStreamOfLife from "../pool/stream-of-life.js";
 import _poolStrifeScholar from "../pool/strife-scholar.js";
@@ -1552,6 +1553,7 @@ const shard: CardShard = {
     _poolStitchedDrake,
     _poolStokeGenius,
     _poolStonehands,
+    _poolStormCauldron,
     _poolStrandsOfUndeath,
     _poolStreamOfLife,
     _poolStrifeScholar,

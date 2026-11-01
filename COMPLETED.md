@@ -86,6 +86,29 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2: statics acting on a player** (2026-11-01, `4c637137c`; two keys and
+  `trigger:enchanted-player-dealt-damage`) — `"enchanted-player"` on `controlledBy`, replacements and
+  triggers, `loseCreatureTypes`, `cantWinGame`, `opponentsCantLoseGame`; 3 freed. Curse of Death's
+  Hold, Curse of the Nightly Hunt, Curse of Conformity, Curse of Bloodletting, Grievous Wound, Abyssal
+  Persecutor.
+- **Need-keys Phase 2: a graveyard's order** (2026-11-01, `e51eefe32`; `effect:top-card-of-graveyard`,
+  `effect:top-creature-card-of-graveyard`, `effect:reorder-graveyard`) — rules 404.1-404.3: the
+  `top-of-graveyard` effect, `fromTop` costs, `reorder-graveyard`, cards arriving together arranged by
+  their owner while a card reads the order; 10 freed. Soldevi Digger, Guiding Spirit, Phyrexian
+  Furnace, Alms, Necratog, Corpse Dance, Fossil Find.
+- **Need-keys Phase 2: the most common color among permanents** (2026-11-01, `4e42c49d1`) — the
+  `most-common-color` condition at layer 5; 4 freed. Ruham Djinn, Heroic Defiance, Tsabo's Assassin,
+  Barrin's Unmaking, Call to Arms.
+- **Need-keys Phase 2: a tapped-for-mana trigger on the stack** (2026-11-01, `e62e290e6`) — the
+  `permanent-tapped-for-mana` event (106.12a), also from the auto-payer; 3 freed. Manabarbs, Burning
+  Earth, Zhur-Taa Druid, Forbidden Orchard, Storm Cauldron, Sanctimony.
+- **Need-keys Phase 2: a card chosen from a set as an effect resolves** (2026-11-01, `1b016488a`) —
+  `look-and-choose`'s `destination: "stay"` and `under: "owners"`, `choose-exiled-to-play`'s `linked`,
+  `discard-chosen`'s `mayCast`; 3 freed. Memory Leak, Psychic Intrusion, Muse Vessel, Purgatory, Bag
+  of Devouring, Lazav.
+- **Need-keys Phase 2: revealing from a hand** (2026-11-01, `f3b9c434b`) — mostly existing machinery,
+  with `thisWay`'s `sharingManaValue` and templates; 4 freed. Thoughtcutter Agent, Search Warrant,
+  Merfolk Spy, Planeswalker's Fury, Armored Kincaller, Vault 21: House Gambit.
 - **Need-keys Phase 2: companion** (2026-11-01, `9125a1ba9`; `mechanic:companion`) — rule 702.139:
   `companion.ts`'s ten conditions as data, the reveal as a `choose-from-zone` flagged `companion`
   (103.2b), `take-companion` the {3} special action (116.2g), Commander decks keeping only companions

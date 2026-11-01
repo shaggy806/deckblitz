@@ -135,6 +135,7 @@ import _poolCryptIncursion from "../pool/crypt-incursion.js";
 import _poolCrypticTrilobite from "../pool/cryptic-trilobite.js";
 import _poolCuriousCadaver from "../pool/curious-cadaver.js";
 import _poolCuriousForager from "../pool/curious-forager.js";
+import _poolCurseOfTheNightlyHunt from "../pool/curse-of-the-nightly-hunt.js";
 import _poolCustomsDepot from "../pool/customs-depot.js";
 import _poolDailyBugleReporters from "../pool/daily-bugle-reporters.js";
 import _poolDamn from "../pool/damn.js";
@@ -307,6 +308,7 @@ import _poolGrimeGorger from "../pool/grime-gorger.js";
 import _poolGrovesBounty from "../pool/groves-bounty.js";
 import _poolGuardianOfVituGhazi from "../pool/guardian-of-vitu-ghazi.js";
 import _poolGudulLurker from "../pool/gudul-lurker.js";
+import _poolGuidingSpirit from "../pool/guiding-spirit.js";
 import _poolGurmagNightwatch from "../pool/gurmag-nightwatch.js";
 import _poolGutwrencherOni from "../pool/gutwrencher-oni.js";
 import _poolGyreEngineer from "../pool/gyre-engineer.js";
@@ -1004,6 +1006,7 @@ const shard: CardShard = {
     _poolCrypticTrilobite,
     _poolCuriousCadaver,
     _poolCuriousForager,
+    _poolCurseOfTheNightlyHunt,
     _poolCustomsDepot,
     _poolDailyBugleReporters,
     _poolDamn,
@@ -1176,6 +1179,7 @@ const shard: CardShard = {
     _poolGrovesBounty,
     _poolGuardianOfVituGhazi,
     _poolGudulLurker,
+    _poolGuidingSpirit,
     _poolGurmagNightwatch,
     _poolGutwrencherOni,
     _poolGyreEngineer,

@@ -539,6 +539,7 @@ import _poolPhantatog from "../pool/phantatog.js";
 import _poolPhantomTiger from "../pool/phantom-tiger.js";
 import _poolPhoenixOfAsh from "../pool/phoenix-of-ash.js";
 import _poolPhyrexianDebaser from "../pool/phyrexian-debaser.js";
+import _poolPhyrexianFurnace from "../pool/phyrexian-furnace.js";
 import _poolPhytoburst from "../pool/phytoburst.js";
 import _poolPickUpThePace from "../pool/pick-up-the-pace.js";
 import _poolPietyCharm from "../pool/piety-charm.js";
@@ -1446,6 +1447,7 @@ const shard: CardShard = {
     _poolPhantomTiger,
     _poolPhoenixOfAsh,
     _poolPhyrexianDebaser,
+    _poolPhyrexianFurnace,
     _poolPhytoburst,
     _poolPickUpThePace,
     _poolPietyCharm,

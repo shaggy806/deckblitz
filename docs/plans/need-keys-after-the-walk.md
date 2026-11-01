@@ -778,7 +778,11 @@ missing. Re-run `--greedy` for Phase 2's order.
   keys, 5 freed, 5 proving cards); next-spell cost reductions (2 keys, 5 freed, 4 proving cards); a
   copy on the way in from a graveyard or exile (6 keys, 4 freed, 14 proving cards); sacrifice or
   discard instead of entering (2 keys, 5 freed, 5 proving cards); a card's own copy limit (1 key, 6
-  freed, 3 proving cards); companion (1 key, 7 freed, 2 proving cards).
+  freed, 3 proving cards); companion (1 key, 7 freed, 2 proving cards); revealing from a hand (3
+  keys, 4 freed, 6 proving cards); a card chosen from a set (2 keys, 3 freed, 6 proving cards); a
+  tapped-for-mana trigger on the stack (1 key, 3 freed, 6 proving cards); the most common color (2
+  keys, 4 freed, 5 proving cards); a graveyard's order (3 keys, 10 freed, 7 proving cards); statics
+  acting on a player (3 keys, 3 freed, 6 proving cards).
 
 ## Rough size
 

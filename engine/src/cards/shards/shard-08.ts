@@ -162,6 +162,7 @@ import _poolCrypticSerpent from "../pool/cryptic-serpent.js";
 import _poolCrystalFragments from "../pool/crystal-fragments.js";
 import _poolCrystalGrotto from "../pool/crystal-grotto.js";
 import _poolCrystalRod from "../pool/crystal-rod.js";
+import _poolCurseOfConformity from "../pool/curse-of-conformity.js";
 import _poolCurseOfOblivion from "../pool/curse-of-oblivion.js";
 import _poolCursebreak from "../pool/cursebreak.js";
 import _poolDaghatarTheAdamant from "../pool/daghatar-the-adamant.js";
@@ -472,6 +473,7 @@ import _poolMagetasBoon from "../pool/magetas-boon.js";
 import _poolMagistratesVeto from "../pool/magistrates-veto.js";
 import _poolMalakirCullblade from "../pool/malakir-cullblade.js";
 import _poolManaChains from "../pool/mana-chains.js";
+import _poolManabarbs from "../pool/manabarbs.js";
 import _poolMantleOfTheWolf from "../pool/mantle-of-the-wolf.js";
 import _poolMarkovCrusader from "../pool/markov-crusader.js";
 import _poolMartialCoup from "../pool/martial-coup.js";
@@ -650,6 +652,7 @@ import _poolSculptedPerfection from "../pool/sculpted-perfection.js";
 import _poolSeaEagle from "../pool/sea-eagle.js";
 import _poolSeaHag from "../pool/sea-hag.js";
 import _poolSeaScryer from "../pool/sea-scryer.js";
+import _poolSearchWarrant from "../pool/search-warrant.js";
 import _poolSeasonalRitual from "../pool/seasonal-ritual.js";
 import _poolSecretRendezvous from "../pool/secret-rendezvous.js";
 import _poolSecretsOfTheGoldenCity from "../pool/secrets-of-the-golden-city.js";
@@ -826,6 +829,7 @@ import _poolVampireWarlord from "../pool/vampire-warlord.js";
 import _poolVantressTransmuter from "../pool/vantress-transmuter.js";
 import _poolVantressVisions from "../pool/vantress-visions.js";
 import _poolVastwoodZendikon from "../pool/vastwood-zendikon.js";
+import _poolVault21HouseGambit from "../pool/vault-21-house-gambit.js";
 import _poolVedalkenAethermage from "../pool/vedalken-aethermage.js";
 import _poolVedalkenGhoul from "../pool/vedalken-ghoul.js";
 import _poolVenatHeartOfHydaelyn from "../pool/venat-heart-of-hydaelyn.js";
@@ -1066,6 +1070,7 @@ const shard: CardShard = {
     _poolCrystalFragments,
     _poolCrystalGrotto,
     _poolCrystalRod,
+    _poolCurseOfConformity,
     _poolCurseOfOblivion,
     _poolCursebreak,
     _poolDaghatarTheAdamant,
@@ -1376,6 +1381,7 @@ const shard: CardShard = {
     _poolMagistratesVeto,
     _poolMalakirCullblade,
     _poolManaChains,
+    _poolManabarbs,
     _poolMantleOfTheWolf,
     _poolMarkovCrusader,
     _poolMartialCoup,
@@ -1554,6 +1560,7 @@ const shard: CardShard = {
     _poolSeaEagle,
     _poolSeaHag,
     _poolSeaScryer,
+    _poolSearchWarrant,
     _poolSeasonalRitual,
     _poolSecretRendezvous,
     _poolSecretsOfTheGoldenCity,
@@ -1730,6 +1737,7 @@ const shard: CardShard = {
     _poolVantressTransmuter,
     _poolVantressVisions,
     _poolVastwoodZendikon,
+    _poolVault21HouseGambit,
     _poolVedalkenAethermage,
     _poolVedalkenGhoul,
     _poolVenatHeartOfHydaelyn,
