@@ -6833,6 +6833,9 @@ describe("token copies of a linked source", () => {
       notLegendary: true,
       exceptions: { addSubtypes: ["Mutant"] },
     });
+  });
+});
+
 describe("attack taxes", () => {
   const face = (type_line: string, oracle_text: string) =>
     parseFace({ name: "Test Tax", type_line, oracle_text }, { tokenFor: () => null });
