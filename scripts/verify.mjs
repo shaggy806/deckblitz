@@ -7,8 +7,8 @@
 //   2. build (every workspace) — and, from here on, in the background beside
 //      everything below (they need only the build): the fuzzer at 2 and 4
 //      players, the fuzzer with every card this change adds (or `--with`
-//      names) forced in — each 4-player run as two processes over halves of
-//      its seeds — and the bot gate (on 4 cores or fewer, after the test
+//      names) forced in (at most 10 a deck: `fuzzWithPlan`) — each 4-player
+//      run as two processes over halves of its seeds — and the bot gate (on 4 cores or fewer, after the test
 //      suites instead, each 4-player run one process)
 //   3. the backlog lists re-marked against the build and any sample-deck
 //      stand-in for a card now in the pool dropped
@@ -87,6 +87,32 @@ const withFile = (names) => {
   writeFileSync(file, names.join("\n"));
   return file;
 };
+
+/** The new-cards fuzzer's games for `cards` at `games` (40 full, 20 quick):
+ * at most PER_DECK new cards in a deck. Up to PER_DECK, every card is in every
+ * seat's deck in all `games` games, as always. A longer list (several features
+ * landed between pushes) is packed into groups of like colour identity, one
+ * group per game in turn (`random-demo.mjs --per-deck`), at `games` games in
+ * all (rounded up to a whole number per group), so neither the game count nor
+ * a game's deck grows with the list — but never fewer than MIN_SHARE of
+ * `games` per card (beyond 40 cards the total grows by that): every card stays
+ * in several games, in every seat's deck. Forcing all 25 of a list into one
+ * deck took a commander of their whole identity (five colours) and made a deck
+ * a quarter new cards. Measured on 25 cards, quick (2026-10-31): 20 games of
+ * all 25, 28.6 s a game (one timed out at 120 s); 21 games in groups of 9, 9
+ * and 7, 25.7 s a game — a game's length is mostly its seed's luck, so what
+ * this buys is the bound, not a faster step. Twice the games (each card in 14)
+ * took 444 s against 297 s, so the total stays at `games`. `games` is what
+ * the stamp records. */
+const PER_DECK = 10;
+const MIN_SHARE = 1 / 4;
+function fuzzWithPlan(cards, games) {
+  const names = cards.length > 40 ? ["--with-file", withFile(cards)] : cards.flatMap((c) => ["--with", c]);
+  const groups = Math.ceil(cards.length / PER_DECK);
+  if (groups <= 1) return { total: games, perCard: games, args: names };
+  const perCard = Math.max(Math.ceil(games * MIN_SHARE), Math.ceil(games / groups));
+  return { total: groups * perCard, perCard, args: [...names, "--per-deck", String(PER_DECK)] };
+}
 
 const USAGE = `usage: node scripts/verify.mjs [--full | --quick | --fuzz-new | --landing] [--with "Card Name"]...
                                [--skip step,step | --only step,step] [--games N]
@@ -372,14 +398,15 @@ await stopOnFailure(await run("build", "npm", ["run", "build"]));
 if (fuzzNewOnly) {
   // Alone on the machine, so split in two even on a small one, at the games a
   // full run plays (which covers a quick run's too).
-  const half = Math.ceil(40 / 2);
-  const forcedArgs = cards.length > 40 ? ["--with-file", withFile(cards)] : cards.flatMap((c) => ["--with", c]);
+  const plan = fuzzWithPlan(cards, 40);
+  if (plan.total !== 40) console.log(`verify: ${cards.length} new cards, at most ${PER_DECK} a deck: ${plan.total} games, each card in ${plan.perCard}`);
+  const half = Math.ceil(plan.total / 2);
   const runs = await Promise.all(
     [
       [1, half],
-      [half + 1, 40 - half],
+      [half + 1, plan.total - half],
     ].map(([start, n], i) =>
-      run(`fuzz with new cards (${i + 1} of 2)`, "node", ["scripts/random-demo.mjs", "--games", String(n), "--start", String(start), "--players", "4", "--timeout", "120", ...forcedArgs], ENGINE),
+      run(`fuzz with new cards (${i + 1} of 2)`, "node", ["scripts/random-demo.mjs", "--games", String(n), "--start", String(start), "--players", "4", "--timeout", "120", ...plan.args], ENGINE),
     ),
   );
   for (const r of runs) report(r, grab(r.out, /games —|avg turns|FAILED seed/));
@@ -445,16 +472,9 @@ if (!skip.has("fuzz")) {
   });
 }
 if (!skip.has("fuzzwith") && cards.length > 0) {
-  background(() =>
-    late.push(
-      ...fourPlayer(
-        "fuzz with new cards",
-        fuzzWithGames,
-        // A long list goes in a file: a command line has a length limit.
-        cards.length > 40 ? ["--with-file", withFile(cards)] : cards.flatMap((c) => ["--with", c]),
-      ),
-    ),
-  );
+  const plan = fuzzWithPlan(cards, fuzzWithGames);
+  if (plan.total !== fuzzWithGames) console.log(`verify: ${cards.length} new cards, at most ${PER_DECK} a deck: ${plan.total} games, each card in ${plan.perCard}`);
+  background(() => late.push(...fourPlayer("fuzz with new cards", plan.total, plan.args)));
 }
 if (!skip.has("gate")) background(() => late.push(run("bot gate", "npm", ["run", "-s", "bot:scenarios", "-w", "engine"])));
 

@@ -87,6 +87,34 @@ export function forcedChunks(names, size) {
   return chunks;
 }
 
+/** `names` in `Math.ceil(names.length / perDeck)` groups of near-equal size
+ * (at most `perDeck` each), cards of like colour identity together: each card
+ * in turn (the most colours first) joins the group with room that its identity
+ * widens least. A narrow group lets more commanders carry it, so its decks
+ * play like real ones rather than a five-colour pile of new cards — `verify`'s
+ * new-cards fuzzer (`--per-deck`). Deterministic in `names`' order. */
+export function packedChunks(names, perDeck) {
+  const count = Math.max(1, Math.ceil(names.length / perDeck));
+  const room = Math.ceil(names.length / count);
+  const groups = Array.from({ length: count }, () => ({ names: [], identity: new Set() }));
+  const idOf = (n) => [...(identityOf.get(n) ?? [])].sort();
+  const order = [...names].sort((a, b) => idOf(b).length - idOf(a).length || idOf(a).join("").localeCompare(idOf(b).join("")));
+  for (const n of order) {
+    const id = idOf(n);
+    let best = null;
+    let bestCost = Infinity;
+    for (const g of groups) {
+      if (g.names.length >= room) continue;
+      // Colours it adds first; then the narrower group; then the emptier one.
+      const cost = id.filter((c) => !g.identity.has(c)).length * 1000 + g.identity.size * 10 + g.names.length;
+      if (cost < bestCost) [best, bestCost] = [g, cost];
+    }
+    best.names.push(n);
+    for (const c of id) best.identity.add(c);
+  }
+  return groups.map((g) => g.names);
+}
+
 /**
  * The pool, walked in a fixed order: pass `n` over `list` is its own seeded
  * shuffle, and position `i` is card `i mod length` of pass `i div length`.

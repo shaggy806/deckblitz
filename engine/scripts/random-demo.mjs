@@ -10,6 +10,7 @@
 //   npm run play:random -w engine -- --games 15 --start 16  # seeds 16-30 (a run split across processes)
 //   npm run play:random -w engine -- --timeout 60 # per-game limit, seconds (default 30)
 //   npm run play:random -w engine -- --with "Card Name"  # in every seat's deck
+//   ... --with A --with B ... --per-deck 10  # at most 10 forced cards a deck, a group per seed
 //   npm run play:random -w engine -- --games 100 --coverage  # how much of the pool the decks reach
 //   MTG_ORDER_TRIGGERS=1 node scripts/random-demo.mjs  # every seat orders its own triggers
 //
@@ -28,7 +29,7 @@ import { Worker } from "node:worker_threads";
 import { Game, RandomController, asPlayerId, createRng } from "../dist/index.js";
 import { readFileSync } from "node:fs";
 
-import { coverage, forcedChunks, seatsFor, unknownCards } from "./fuzz-decks.mjs";
+import { coverage, forcedChunks, packedChunks, seatsFor, unknownCards } from "./fuzz-decks.mjs";
 import { printLog, printSummary } from "./format.mjs";
 import { progress } from "./progress.mjs";
 
@@ -72,8 +73,21 @@ if (unknown.length > 0) {
 }
 // More than a deck holds: groups of cards sharing a colour identity, each
 // forced into games of its own — at least one game per group.
+// `--per-deck N`: at most N of them in a deck — the cards packed into
+// ceil(count / N) groups of near-equal size, like colour identities together
+// (`packedChunks`), seed s playing group (s - 1) mod groups. `npm run verify`
+// fuzzes a long list of new cards this way, so no deck is a pile of them.
 const CHUNK = 30;
-const chunks = forced.length > CHUNK ? forcedChunks(forced, CHUNK) : [forced];
+const perDeck = flag("per-deck", null);
+const chunks =
+  perDeck !== null && forced.length > Number(perDeck)
+    ? packedChunks(forced, Number(perDeck))
+    : forced.length > CHUNK
+      ? forcedChunks(forced, CHUNK)
+      : [forced];
+if (chunks.length > 1) {
+  console.log(`forced cards in ${chunks.length} groups (${chunks.map((c) => c.length).join(", ")}), one per seed in turn`);
+}
 if (chunks.length > games) games = chunks.length;
 const seatsForSeed = (seed) => seatsFor(seed, players, { forced: chunks[(seed - 1) % chunks.length] });
 

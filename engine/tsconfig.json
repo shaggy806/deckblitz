@@ -12,6 +12,14 @@
     "declarationMap": true,
     "sourceMap": true,
 
+    /* Incremental: a build after a small edit re-checks and re-emits only
+       what the edit can affect. The state lives inside dist/, so deleting
+       dist deletes it too (tsc never checks that its outputs still exist);
+       scripts/dist-complete.mjs drops it when an output has gone missing,
+       and scripts/bundle-shards.mjs re-bundles from tsc's raw emit. */
+    "incremental": true,
+    "tsBuildInfoFile": "./dist/.tsbuildinfo",
+
     /* Strictness */
     "strict": true,
     "noUnusedLocals": true,

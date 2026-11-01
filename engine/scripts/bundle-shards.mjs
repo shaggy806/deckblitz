@@ -27,9 +27,17 @@
  * through the barrel, never a shard. A shard's cards and the barrel's are
  * separate copies in `dist/` — nothing loads both and compares them (the
  * engine's tests, which do, read `src/`).
+ *
+ * `tsc` is incremental, so a build re-emits a shard or the barrel only when its
+ * own source changed — but a card file it inlines can change without that, and
+ * the bundle would keep the old card. So each is bundled afresh on every build
+ * from `tsc`'s raw emit, kept in `dist/.raw/`: a file `tsc` just wrote (it still
+ * imports card files) is copied there first; one `tsc` left alone (already a
+ * bundle) is restored from there. `dist-complete.mjs` forces a full emit when
+ * a copy is missing.
  */
 
-import { readdirSync, renameSync, rmSync } from "node:fs";
+import { copyFileSync, existsSync, mkdirSync, readFileSync, readdirSync, renameSync, rmSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { rolldown } from "rolldown";
@@ -45,10 +53,35 @@ if (shards.length === 0) throw new Error(`no shards in ${shardsDir} — run tsc 
 
 let cards = 0;
 
+const rawDir = path.join(distDir, ".raw");
+/** A static import of a card file: in `tsc`'s emit of a shard or the barrel,
+ * never in their bundles (every card file is inlined). */
+const importsACard = /^import [^;]* from "(?:\.\.?\/)+(?:pool|tokens)\//m;
+
+/** Leave `input` (and its map) as `tsc`'s raw emit: stash it when `tsc` just
+ * wrote it, restore it from the stash when it's last build's bundle. */
+function restoreRawEmit(input) {
+  const raw = path.join(rawDir, path.relative(distDir, input));
+  if (importsACard.test(readFileSync(input, "utf8"))) {
+    mkdirSync(path.dirname(raw), { recursive: true });
+    copyFileSync(input, raw);
+    copyFileSync(`${input}.map`, `${raw}.map`);
+  } else if (existsSync(raw)) {
+    copyFileSync(raw, input);
+    copyFileSync(`${raw}.map`, `${input}.map`);
+  } else {
+    // Only reachable when dist/.raw was deleted by hand between dist-complete
+    // and here; the next build's dist-complete forces a full emit.
+    rmSync(path.join(distDir, ".tsbuildinfo"), { force: true });
+    throw new Error(`no raw tsc emit for ${input} in ${rawDir} — run the build again (it will emit in full)`);
+  }
+}
+
 /** Bundle `input` in place, its card files inlined. The staging directory
  * sits beside the input's own, at the same depth, so the file name in its
  * source-map comment and the map's relative source paths come out right. */
 async function bundleInPlace(input, stagingDir) {
+  restoreRawEmit(input);
   const ownDir = path.dirname(input);
   const bundle = await rolldown({
     input,

@@ -56,8 +56,8 @@ jobs:
       # The deploy bundle: what this green build of main made, for the live
       # box to install without compiling anything (the engine's type-check
       # needs more memory than the 2 GB box has — DEPLOYMENT.md). The four
-      # dist folders, JavaScript only (no declarations or source maps: nothing
-      # compiles there), as `deploy-<sha>.tar.gz` with its checksum on the
+      # dist folders, JavaScript only (no declarations, source maps, build
+      # info or the engine's raw shard emit: nothing compiles there), as `deploy-<sha>.tar.gz` with its checksum on the
       # rolling `deploy` pre-release, the newest ten kept. Only after every
       # check above has passed, and only for a push to main.
       - name: Publish the deploy bundle
@@ -66,7 +66,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           name="deploy-${GITHUB_SHA}.tar.gz"
-          tar -czf "$name" --exclude='*.d.ts' --exclude='*.map' engine/dist protocol/dist server/dist client/dist
+          tar -czf "$name" --exclude='*.d.ts' --exclude='*.map' --exclude='*.tsbuildinfo' --exclude='engine/dist/.raw' engine/dist protocol/dist server/dist client/dist
           sha256sum "$name" > "$name.sha256"
           ls -l "$name"
           if ! gh release view deploy >/dev/null 2>&1; then
