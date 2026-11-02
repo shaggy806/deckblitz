@@ -9964,3 +9964,10 @@ describe("an effect done to each other permanent", () => {
     });
   });
 });
+
+describe("an effect done by another player", () => {
+  it("reads 'target player scries N' as as-player, on a player slot", () => {
+    const parsed = parseEffect("Target player scries 2.", ctx());
+    expect(parsed.effect).toEqual({ kind: "as-player", who: { target: 0 }, effect: { kind: "scry", amount: 2 } });
+  });
+});

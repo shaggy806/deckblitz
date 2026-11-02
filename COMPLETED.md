@@ -15,6 +15,8 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 - **An effect done to each matching permanent** (`for-each-permanent`, 2026-11-02): one combinator instead
   of a new `-all` twin per effect; 19 keys and 10 proving cards (`neededCards-features.md`). The pilot behind
   it also marked 5 keys the vocabulary already covered, with 7 cards (`test/need-key-recheck.test.ts`).
+- **An effect done by another player** (`as-player`, 2026-11-02): one wrapper instead of a `who` per effect, with
+  `"source-owner"`; 6 keys, Excise the Imperfect, Wheel and Deal, Gandalf, Wandering Wizard.
 - **A filter clause for double-faced cards** (`condition:filter-double-faced`, 2026-11-02):
   `CardFilter`'s `doubleFaced`, all three kinds of rule 712.1, with `meldCard` on a meld pair's
   fronts — Overgrown Pest, Nick Fury, Agent of S.H.I.E.L.D. (whose key,

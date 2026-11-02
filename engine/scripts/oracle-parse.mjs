@@ -2913,6 +2913,13 @@ export function parseSentence(sentence, ctx) {
     return { kind: "mill", target: "each-opponent", amount: amount(m[1]) };
   }
   if ((m = re(`scry ${N}`).exec(s))) return { kind: "scry", amount: amount(m[1]) };
+  // "Target player scries 2": `scry` has no `who`, so the player does it (`as-player`).
+  if ((m = re(`target player scries ${N}`).exec(s))) {
+    const target = slot("target player");
+    return target === undefined
+      ? null
+      : { kind: "as-player", who: { target }, effect: { kind: "scry", amount: amount(m[1]) } };
+  }
   if ((m = re(`surveil ${N}`).exec(s))) return { kind: "surveil", amount: amount(m[1]) };
   // "You may collect evidence N" (rule 701.59a): the decision can be declined.
   if ((m = re(`you may collect evidence (\\d+)`).exec(s))) return { kind: "collect-evidence", amount: Number(m[1]) };

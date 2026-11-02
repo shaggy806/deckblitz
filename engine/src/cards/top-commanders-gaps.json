@@ -1241,7 +1241,13 @@
   "effect:shuffle-library",
   "effect:delayed-life-gain-trigger",
   "effect:target-player-exiles-from-graveyard",
-  "condition:cant-be-blocked-except-by-flying-or-reach"
+  "condition:cant-be-blocked-except-by-flying-or-reach",
+  "effect:target-player-scries",
+  "effect:incubate-for-player",
+  "effect:discard-hand-target-players",
+  "effect:owner-of-source-player-ref",
+  "effect:discover-by-other-player",
+  "effect:sacrifice-controller-of-target"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

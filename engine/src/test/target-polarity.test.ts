@@ -240,8 +240,11 @@ describe("slot polarity", () => {
     // Alchemist's "prevent the next 4 … to target creature you control. Tap
     // that creature" — a shield and its price, on your own. 0.9624 until
     // 2026-11-01 (96.199%): Mirror Universe's and Soul Conduit's exchanges
-    // of life totals — a gift or a cut as the numbers stand.
-    expect(decided / slots).toBeGreaterThan(0.9619);
+    // of life totals — a gift or a cut as the numbers stand. 0.9619 until
+    // 2026-11-02 (96.185%): Lantern of Insight's and Natural Selection's "target
+    // player shuffles" — your own library thinned or an opponent's top undone —
+    // and Disarm's "unattach all Equipment from target creature", either side's.
+    expect(decided / slots).toBeGreaterThan(0.9618);
   });
 });
 

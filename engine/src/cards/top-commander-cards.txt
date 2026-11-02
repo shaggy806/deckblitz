@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4202 already implemented / 798 missing (marks refreshed 2026-11-02)
+4205 already implemented / 795 missing (marks refreshed 2026-11-02)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -4476,7 +4476,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  4483  Deeproot Pilgrimage                      {1}{U}           Enchantment
 [ ]  4484  Katilda, Dawnhart Prime                  {G}{W}           Legendary Creature — Human Warlock
 [x]  4485  Bone-Cairn Butcher                       {1}{R}{W}{B}     Creature — Demon
-[ ]  4486  Vizkopa Guildmage                        {W}{B}           Creature — Human Wizard
+[x]  4486  Vizkopa Guildmage                        {W}{B}           Creature — Human Wizard
 [ ]  4487  Tasha, the Witch Queen                   {3}{U}{B}        Legendary Planeswalker — Tasha
 [x]  4488  Helix Pinnacle                           {G}              Enchantment
 [x]  4489  Agonasaur Rex                            {3}{G}{G}        Creature — Dinosaur
@@ -4591,10 +4591,10 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4598  Cryptic Caves                            {0}              Land
 [x]  4599  Reluctant Role Model                     {1}{W}           Creature — Human Survivor
 [ ]  4600  Tifa's Limit Break                       {G}              Instant
-[ ]  4601  Moonmist                                 {1}{G}           Instant
+[x]  4601  Moonmist                                 {1}{G}           Instant
 [x]  4602  Hunted Horror                            {B}{B}           Creature — Horror
 [x]  4603  Grim Reaper's Sprint                     {4}{R}           Enchantment — Aura
-[ ]  4604  Polymorphist's Jest                      {1}{U}{U}        Instant
+[x]  4604  Polymorphist's Jest                      {1}{U}{U}        Instant
 [x]  4605  Théoden, King of Rohan                   {1}{R}{W}        Legendary Creature — Human Noble
 [x]  4606  Syphon Sliver                            {2}{B}           Creature — Sliver
 [x]  4607  Crawling Infestation                     {2}{G}           Enchantment

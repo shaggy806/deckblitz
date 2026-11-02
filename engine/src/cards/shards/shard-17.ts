@@ -833,6 +833,7 @@ import _poolWeb from "../pool/web.js";
 import _poolWeedPrunerPoplar from "../pool/weed-pruner-poplar.js";
 import _poolWeldfastWingsmith from "../pool/weldfast-wingsmith.js";
 import _poolWhaleboneGlider from "../pool/whalebone-glider.js";
+import _poolWheelAndDeal from "../pool/wheel-and-deal.js";
 import _poolWheelOfFate from "../pool/wheel-of-fate.js";
 import _poolWhiptailMoloch from "../pool/whiptail-moloch.js";
 import _poolWhirlerVirtuoso from "../pool/whirler-virtuoso.js";
@@ -1724,6 +1725,7 @@ const shard: CardShard = {
     _poolWeedPrunerPoplar,
     _poolWeldfastWingsmith,
     _poolWhaleboneGlider,
+    _poolWheelAndDeal,
     _poolWheelOfFate,
     _poolWhiptailMoloch,
     _poolWhirlerVirtuoso,

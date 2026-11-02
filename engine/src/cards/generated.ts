@@ -7524,6 +7524,7 @@ import _poolExcavationMole from "./pool/excavation-mole.js";
 import _poolExcavationTechnique from "./pool/excavation-technique.js";
 import _poolExcavation from "./pool/excavation.js";
 import _poolExcavator from "./pool/excavator.js";
+import _poolExciseTheImperfect from "./pool/excise-the-imperfect.js";
 import _poolExcise from "./pool/excise.js";
 import _poolExclude from "./pool/exclude.js";
 import _poolExclusionMage from "./pool/exclusion-mage.js";
@@ -9019,6 +9020,7 @@ import _poolGandalfFriendOfTheShire from "./pool/gandalf-friend-of-the-shire.js"
 import _poolGandalfGoblinsBane from "./pool/gandalf-goblins-bane.js";
 import _poolGandalfSparkStarter from "./pool/gandalf-spark-starter.js";
 import _poolGandalfTheGrey from "./pool/gandalf-the-grey.js";
+import _poolGandalfWanderingWizard from "./pool/gandalf-wandering-wizard.js";
 import _poolGandalfWhiteRider from "./pool/gandalf-white-rider.js";
 import _poolGandalfsSanction from "./pool/gandalfs-sanction.js";
 import _poolGangOfDevils from "./pool/gang-of-devils.js";
@@ -26826,6 +26828,7 @@ import _poolWetlandSambar from "./pool/wetland-sambar.js";
 import _poolWhack from "./pool/whack.js";
 import _poolWhaleboneGlider from "./pool/whalebone-glider.js";
 import _poolWharfInfiltrator from "./pool/wharf-infiltrator.js";
+import _poolWheelAndDeal from "./pool/wheel-and-deal.js";
 import _poolWheelOfFate from "./pool/wheel-of-fate.js";
 import _poolWheelOfFortune from "./pool/wheel-of-fortune.js";
 import _poolWheelOfMisfortune from "./pool/wheel-of-misfortune.js";
@@ -35853,6 +35856,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolExcavationTechnique,
   _poolExcavation,
   _poolExcavator,
+  _poolExciseTheImperfect,
   _poolExcise,
   _poolExclude,
   _poolExclusionMage,
@@ -37348,6 +37352,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGandalfGoblinsBane,
   _poolGandalfSparkStarter,
   _poolGandalfTheGrey,
+  _poolGandalfWanderingWizard,
   _poolGandalfWhiteRider,
   _poolGandalfsSanction,
   _poolGangOfDevils,
@@ -55155,6 +55160,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolWhack,
   _poolWhaleboneGlider,
   _poolWharfInfiltrator,
+  _poolWheelAndDeal,
   _poolWheelOfFate,
   _poolWheelOfFortune,
   _poolWheelOfMisfortune,
@@ -64195,6 +64201,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/excavation-technique": _poolExcavationTechnique,
   "pool/excavation": _poolExcavation,
   "pool/excavator": _poolExcavator,
+  "pool/excise-the-imperfect": _poolExciseTheImperfect,
   "pool/excise": _poolExcise,
   "pool/exclude": _poolExclude,
   "pool/exclusion-mage": _poolExclusionMage,
@@ -65690,6 +65697,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/gandalf-goblins-bane": _poolGandalfGoblinsBane,
   "pool/gandalf-spark-starter": _poolGandalfSparkStarter,
   "pool/gandalf-the-grey": _poolGandalfTheGrey,
+  "pool/gandalf-wandering-wizard": _poolGandalfWanderingWizard,
   "pool/gandalf-white-rider": _poolGandalfWhiteRider,
   "pool/gandalfs-sanction": _poolGandalfsSanction,
   "pool/gang-of-devils": _poolGangOfDevils,
@@ -83497,6 +83505,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/whack": _poolWhack,
   "pool/whalebone-glider": _poolWhaleboneGlider,
   "pool/wharf-infiltrator": _poolWharfInfiltrator,
+  "pool/wheel-and-deal": _poolWheelAndDeal,
   "pool/wheel-of-fate": _poolWheelOfFate,
   "pool/wheel-of-fortune": _poolWheelOfFortune,
   "pool/wheel-of-misfortune": _poolWheelOfMisfortune,

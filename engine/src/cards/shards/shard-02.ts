@@ -298,6 +298,7 @@ import _poolFurnaceStrider from "../pool/furnace-strider.js";
 import _poolGalinasKnight from "../pool/galinas-knight.js";
 import _poolGallantCitizen from "../pool/gallant-citizen.js";
 import _poolGallifreyFallsNoMore from "../pool/gallifrey-falls-no-more.js";
+import _poolGandalfWanderingWizard from "../pool/gandalf-wandering-wizard.js";
 import _poolGarruksUprising from "../pool/garruks-uprising.js";
 import _poolGeistHonoredMonk from "../pool/geist-honored-monk.js";
 import _poolGenerousSoul from "../pool/generous-soul.js";
@@ -1157,6 +1158,7 @@ const shard: CardShard = {
     _poolGalinasKnight,
     _poolGallantCitizen,
     _poolGallifreyFallsNoMore,
+    _poolGandalfWanderingWizard,
     _poolGarruksUprising,
     _poolGeistHonoredMonk,
     _poolGenerousSoul,

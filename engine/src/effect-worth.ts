@@ -278,6 +278,7 @@ function untargetedWorth(effect: EffectSpec, ctx: WorthContext): number {
     case "for-target":
     case "for-each-permanent":
     case "for-permanent":
+    case "as-player":
     case "delayed-trigger":
       return untargetedWorth(effect.effect, ctx);
     case "conditional":

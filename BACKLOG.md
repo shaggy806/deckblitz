@@ -425,9 +425,12 @@ section keeps only what to do next.
   `cost:choose-cards-as-cost`, `mechanic:face-down`, `effect:double-counters-each-kind`,
   `decision:free-cast-choices` (not `decision:cast-one-per-card-type-from-exile`: its two-type cards
   need rulings), `effect:cast-from-linked-exile-free-this-turn`, `effect:damage-from-attached`,
-  `cost:mana-spending-rules`, `replacement:damage-modification`. Next unclaimed:
-  `amount:damage-prevented-this-way` (7), then `bug:as-enters-choices-any-entry` (7) and `--greedy
-  --groups` (control of a player, rule 723, landed 2026-11-01).
+  `cost:mana-spending-rules`, `replacement:damage-modification`; then the general effects
+  `for-each-permanent` and `as-player`, which closed 25 keys between them, and 5 keys the vocabulary already
+  covered. **Before building a key, try writing its card from `card:find`:** 360 open keys' notes say the
+  vocabulary lacks an option, and the 12 tried of those all ran (`docs/plans/need-keys-after-the-walk.md`, the
+  over-count pilot). Next unclaimed: `amount:damage-prevented-this-way` (7), then
+  `bug:as-enters-choices-any-entry` (7) and `--greedy --groups` (control of a player, rule 723, landed 2026-11-01).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next

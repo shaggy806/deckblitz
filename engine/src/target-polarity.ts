@@ -173,6 +173,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     if (n.as !== undefined) v.child(n.effect);
   },
   "for-permanent": none,
+  "as-player": (n, v) => v.child(n.effect),
   // Their slot 0 is a convoking creature, not the spell's target 0.
   "for-each-convoker": none,
   "for-convoker": none,

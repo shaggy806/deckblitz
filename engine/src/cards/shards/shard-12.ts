@@ -249,6 +249,7 @@ import _poolEverdream from "../pool/everdream.js";
 import _poolEverflameEidolon from "../pool/everflame-eidolon.js";
 import _poolEviscerate from "../pool/eviscerate.js";
 import _poolEvolvedSleeper from "../pool/evolved-sleeper.js";
+import _poolExciseTheImperfect from "../pool/excise-the-imperfect.js";
 import _poolExcise from "../pool/excise.js";
 import _poolExperimentalArmor from "../pool/experimental-armor.js";
 import _poolExterminatus from "../pool/exterminatus.js";
@@ -1126,6 +1127,7 @@ const shard: CardShard = {
     _poolEverflameEidolon,
     _poolEviscerate,
     _poolEvolvedSleeper,
+    _poolExciseTheImperfect,
     _poolExcise,
     _poolExperimentalArmor,
     _poolExterminatus,

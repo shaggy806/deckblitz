@@ -29446,6 +29446,20 @@ export class Game {
             return parts.includes(id) ? parts : [...parts, id];
           })
           .map((object) => ({ object, stint: this.state.objects[object].zoneChangeCount ?? 0 })),
+      asPlayer: (player) =>
+        this.makeResolutionContext(
+          source,
+          player,
+          targets,
+          x,
+          triggerValue,
+          triggerObject,
+          stackMultiplier,
+          resolutionCount,
+          targetZones,
+          refs,
+          opts,
+        ),
       stillOnBattlefield: (object, stint) => {
         const found = this.state.objects[object];
         return found?.zone === "battlefield" && (found.zoneChangeCount ?? 0) === stint;

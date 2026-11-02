@@ -1814,6 +1814,9 @@ export type EffectPlayerRef =
   | "active-player"
   | "trigger-controller"
   | "trigger-owner"
+  /** The owner of the effect's source, wherever it is now — "Gandalf's owner
+   * shuffles him into their library and draws three cards". */
+  | "source-owner"
   | "trigger-player"
   | "that-player"
   /** The player chosen for the effect's source — see the `"chosen-player"`
@@ -2219,6 +2222,21 @@ export type EffectSpec =
       readonly text: string;
       readonly count?: number;
       readonly then?: EffectSpec;
+    }
+  | {
+      /**
+       * `effect` done by `who` instead of the effect's controller: inside it
+       * "you" is them, what it asks is theirs to answer, and what it makes is
+       * theirs — "target player scries 2, then draws a card", "its controller
+       * incubates X" (Excise the Imperfect), "Gandalf's owner … draws three
+       * cards". For an effect with no `who` of its own, or whose `who` takes only
+       * a scope. Its targets stay the spell's. Nothing happens if `who` names
+       * nobody, or a player who has left the game. The spell's controller is
+       * still who controls it for anything outside `effect`.
+       */
+      readonly kind: "as-player";
+      readonly who: EffectPlayerRef;
+      readonly effect: EffectSpec;
     }
   | {
       /**
@@ -9666,6 +9684,8 @@ export interface EffectApi {
   ): readonly { readonly object: ObjectId; readonly stint: number }[];
   /** Whether `object` is still on the battlefield as the same object (400.7). */
   stillOnBattlefield(object: ObjectId, stint: number): boolean;
+  /** This context with `player` as its controller — see `as-player`. */
+  asPlayer(player: PlayerId): ResolutionContext;
   /** This context with `card`, which the resolution found rather than
    * chose, in slot `slot` — every other target, and what was known about
    * it, kept as it is (`choose-random-card`'s `slot`). */
@@ -12966,6 +12986,10 @@ function resolveEnterAttacking(
 
 function effectPlayer(ref: EffectPlayerRef, ctx: ResolutionContext): PlayerId | undefined {
   if (ref === "you") return ctx.controller;
+  if (ref === "source-owner") {
+    const owner = ctx.ownerOf({ kind: "object", object: ctx.source });
+    return owner !== undefined && ctx.playersInScope("each-player").includes(owner) ? owner : undefined;
+  }
   if (typeof ref === "object" && "ownerOfTarget" in ref) {
     const target = ctx.targets[ref.ownerOfTarget];
     const player = target === undefined ? undefined : ctx.ownerOf(target);
@@ -13642,6 +13666,13 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     }
     case "for-target": {
       applyEffectSpec(spec.effect, ctx.withTargetAt(spec.from, spec.index));
+      return;
+    }
+    case "as-player": {
+      const player = effectPlayer(spec.who, ctx);
+      if (player !== undefined && ctx.playersInScope("each-player").includes(player)) {
+        applyEffectSpec(spec.effect, ctx.asPlayer(player));
+      }
       return;
     }
     case "for-each-permanent": {

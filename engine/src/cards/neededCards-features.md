@@ -4081,3 +4081,7 @@ Moonmist.
 note had gone stale or a composition hadn't been tried. Keys: effect:search-library-to-exile, effect:shuffle-library, effect:delayed-life-gain-trigger, effect:target-player-exiles-from-graveyard, condition:cant-be-blocked-except-by-flying-or-reach. Cards: Selective Memory,
 Foresight, Lantern of Insight, Natural Selection, Vizkopa Guildmage, Merrow Bonegnawer, Signal Pest
 (`test/need-key-recheck.test.ts`).
+
+**An effect done by another player (2026-11-02).** `as-player`: `who` (any `EffectPlayerRef`, with the new
+`"source-owner"`), `effect`; inside it "you" is them, what it asks is theirs and what it makes is theirs. Replaces a
+`who` per effect. Keys: effect:target-player-scries, effect:incubate-for-player, effect:discard-hand-target-players, effect:owner-of-source-player-ref, effect:discover-by-other-player, effect:sacrifice-controller-of-target. Proving cards: Excise the Imperfect, Wheel and Deal, Gandalf, Wandering Wizard.
