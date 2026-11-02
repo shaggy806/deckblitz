@@ -2243,8 +2243,8 @@ function lifeDelta(
     return effect.effects.reduce((n, each) => n + lifeDelta(state, registry, each, source, me), 0);
   }
   if (effect.kind === "gain-life" && effect.who === undefined && typeof effect.amount === "number") return effect.amount;
-  if (effect.kind === "exchange-life-toughness" && effect.target === "source") {
-    return computeCharacteristics(state, registry, source).toughness - state.players[me].life;
+  if (effect.kind === "exchange-life-stat" && effect.target === "source" && effect.player === undefined) {
+    return computeCharacteristics(state, registry, source)[effect.stat] - state.players[me].life;
   }
   return 0;
 }

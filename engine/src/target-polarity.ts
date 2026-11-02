@@ -353,11 +353,16 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "put-in-command-zone": (n, v) => v.touch(n.target, "either", MINOR),
   // Its own source in print (Tree of Redemption); which way it cuts turns
   // on the numbers, not the side of the table.
-  "exchange-life-toughness": (n, v) => {
+  "exchange-life-stat": (n, v) => {
     v.touch(n.target, "either", MINOR);
     // Tree of Perdition's target opponent: a life total of 13 is a cut
     // from 40 and a gift at 5.
     if (n.player !== undefined && typeof n.player === "object") v.touch(n.player, "either", MAJOR);
+  },
+  // Which way it cuts is whose life total is the higher, for each of them.
+  "exchange-life-totals": (n, v) => {
+    if (n.first !== undefined && typeof n.first === "object") v.touch(n.first, "either", MAJOR);
+    if (typeof n.second === "object") v.touch(n.second, "either", MAJOR);
   },
   mill: (n, v) => v.touch(n.target, "harm", MINOR),
   // A refill for a self-mill deck, an answer to a graveyard deck: either way.

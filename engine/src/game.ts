@@ -30732,7 +30732,8 @@ export class Game {
         }
         this.markUntilEndOfTurn(target, { assignAsThoughUnblocked: must ? "must" : "may" });
       },
-      exchangeLifeToughness: (target, player) => this.exchangeLifeToughness(player, target),
+      exchangeLifeStat: (target, player, stat) => this.exchangeLifeStat(player, target, stat),
+      exchangeLifeTotals: (first, second) => this.exchangeLifeTotals(first, second),
       putInCommandZone: (target) => {
         // A commander still here as the same object (rule 400.7 — the
         // target slot's stint is checked as it resolves).
@@ -36659,21 +36660,23 @@ export class Game {
   /** A rule about `target` until end of turn, as a modifier carrying
    * `fields`  a token stack splits off the one meant first. */
   /**
-   * See the `"exchange-life-toughness"` effect (rule 701.12g): `player`'s
-   * life total and `target`'s toughness each become the other's previous
-   * value — the toughness by a layer-7b effect with no end, the life by
-   * gaining or losing the difference — or, if either can't, neither does
-   * (701.12a).
+   * See the `"exchange-life-stat"` effect (rule 701.12g): `player`'s life
+   * total and `target`'s power or toughness each become the other's previous
+   * value — the number by a layer-7b effect with no end, the life by gaining
+   * or losing the difference — or, if either can't, neither does (701.12a).
    */
-  private exchangeLifeToughness(player: PlayerId, target: TargetRef): void {
+  private exchangeLifeStat(player: PlayerId, target: TargetRef, stat: "power" | "toughness"): void {
     if (target.kind !== "object") return;
     const seat = this.state.players[player];
     if (seat === undefined || seat.hasLost) return;
+    if (this.state.objects[target.object]?.zone !== "battlefield") return;
+    // A noncreature permanent has no power or toughness (rule 208.3).
+    if (!this.characteristics(target.object).types.includes("creature")) return;
     const id = this.splitOneFromStack(target.object);
     const object = this.state.objects[id];
     if (object === undefined || object.zone !== "battlefield") return;
     const life = seat.life;
-    const delta = this.characteristics(id).toughness - life;
+    const delta = this.characteristics(id)[stat] - life;
     // A player who can't gain life can't be given a higher life total this
     // way, nor one who can't lose life a lower one (rules 119.7–8).
     if (delta > 0 && this.playerCantGainLife(player)) return;
@@ -36683,11 +36686,30 @@ export class Game {
       power: 0,
       toughness: 0,
       keywords: [],
-      setToughness: life,
+      ...(stat === "power" ? { setPower: life } : { setToughness: life }),
       untilEndOfTurn: false,
     });
     invalidateComputedCache();
     if (delta !== 0) this.changeLife(player, delta);
+  }
+
+  /**
+   * See the `"exchange-life-totals"` effect (rule 701.12c): each player gains
+   * or loses the life it takes to reach the other's previous life total — or,
+   * if either can't, neither does (701.12a).
+   */
+  private exchangeLifeTotals(first: PlayerId, second: PlayerId): void {
+    const a = this.state.players[first];
+    const b = this.state.players[second];
+    if (first === second || a === undefined || b === undefined || a.hasLost || b.hasLost) return;
+    const delta = b.life - a.life;
+    if (delta === 0) return;
+    const [higher, lower] = delta > 0 ? [first, second] : [second, first];
+    // Rules 119.7–8: no higher life total for one who can't gain life, no
+    // lower one for one who can't lose it.
+    if (this.playerCantGainLife(higher) || playerCantLoseLife(this.state, lower)) return;
+    this.changeLife(first, delta);
+    this.changeLife(second, -delta);
   }
 
   /** Whether a "can't gain life" effect stops `player` gaining any — a

@@ -955,6 +955,7 @@ function evalStaticCondition(
       const mine = statOf(you);
       const holds = (p: PlayerId): boolean => {
         const theirs = statOf(p);
+        if (condition.compare === "within") return Math.abs(mine - theirs) <= (condition.by ?? 0);
         return condition.compare === "more" ? mine > theirs : condition.compare === "fewer" ? mine < theirs : mine >= theirs;
       };
       if (condition.than !== "each-opponent" && condition.than !== "an-opponent") {

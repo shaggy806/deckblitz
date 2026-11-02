@@ -1117,11 +1117,17 @@ export type StaticCondition =
    * (and there must be one); against `"an-opponent"`, against some one of
    * them; against a `ConditionPlayer`, against that player (false when
    * there's none, or it's you).
+   *
+   * `"within"`: the difference is `by` or less, either way, read as the
+   * numbers actually are (a negative life total too, the ruling) — Psychic
+   * Transfer's "if the difference between your life total and target
+   * player's life total is 5 or less".
    */
   | {
       readonly kind: "player-compare";
       readonly stat: ComparedStat;
-      readonly compare: "more" | "fewer" | "at-least";
+      readonly compare: "more" | "fewer" | "at-least" | "within";
+      readonly by?: number;
       readonly than: "each-opponent" | "an-opponent" | ConditionPlayer;
     }
   /** At least `atLeast` cards in exile, every player's (face-down ones

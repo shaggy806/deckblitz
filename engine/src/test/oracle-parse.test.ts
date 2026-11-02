@@ -9208,3 +9208,53 @@ describe("choices kept, the rest destroyed", () => {
     expect(effectOf("Choose a creature at random, then destroy the rest.")).toBeNull();
   });
 });
+
+describe("exchanges with a life total", () => {
+  const effectOf = (text: string): unknown => parseEffect(text, { targets: [] }).effect;
+  const ability = (name: string, type_line: string, oracle_text: string, power?: string, toughness?: string) =>
+    parseFace({ name, type_line, oracle_text, power, toughness }, { tokenFor: () => null }).activated[0];
+
+  it("reads two players' life totals", () => {
+    expect(effectOf("Exchange life totals with target opponent.")).toEqual({ kind: "exchange-life-totals", second: { target: 0 } });
+    expect(effectOf("Two target players exchange life totals.")).toEqual({
+      kind: "exchange-life-totals",
+      first: { target: 0 },
+      second: { target: 1 },
+    });
+    expect(effectOf("You may have two target players exchange life totals.")).toMatchObject({
+      kind: "may",
+      effect: { kind: "exchange-life-totals", first: { target: 0 }, second: { target: 1 } },
+    });
+  });
+
+  it("reads the clauses that go with them whole", () => {
+    expect(effectOf("You may exchange life totals with target opponent. If you lost life this way, draw that many cards.")).toMatchObject({
+      kind: "may",
+      then: { kind: "draw", amount: { lifeLostThisWay: true, who: "you" } },
+    });
+    expect(
+      effectOf("If the difference between your life total and target player's life total is 5 or less, exchange life totals with that player."),
+    ).toEqual({
+      kind: "conditional",
+      condition: { kind: "player-compare", stat: "life", compare: "within", by: 5, than: { target: 0 } },
+      then: { kind: "exchange-life-totals", second: { target: 0 } },
+    });
+  });
+
+  it("reads a power or a toughness, and an upkeep's restriction", () => {
+    expect(ability("Evra", "Creature — Avatar", "{4}: Exchange your life total with Evra's power.", "4", "4").effect).toEqual({
+      kind: "exchange-life-stat",
+      stat: "power",
+      target: "source",
+    });
+    expect(ability("A Tree", "Creature — Plant", "{T}: Exchange target opponent's life total with this creature's toughness.", "0", "13").effect).toEqual({
+      kind: "exchange-life-stat",
+      stat: "toughness",
+      target: "source",
+      player: { target: 0 },
+    });
+    const mirror = ability("A Mirror", "Artifact", "{T}, Sacrifice this artifact: Exchange life totals with target opponent. Activate only during your upkeep.");
+    expect(mirror.condition).toEqual({ kind: "all", of: [{ kind: "your-turn" }, { kind: "turn-structure", steps: ["upkeep"] }] });
+    expect(mirror.effect).toEqual({ kind: "exchange-life-totals", second: { target: 0 } });
+  });
+});

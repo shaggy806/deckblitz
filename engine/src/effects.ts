@@ -624,6 +624,11 @@ export type EffectAmount =
    * scoped `lose-life` whose amount is read once per player. Outside a
    * scoped effect `"each"` reads the controller's. */
   | { readonly lifeTotal: "you" | "each" }
+  /** The difference between the life totals of the players in these two
+   * target slots, as this is read — Profane Transfusion's "where X is the
+   * difference between those players' life totals". Read even of one that's
+   * an illegal target: it isn't affected, only asked about (rule 608.2b). */
+  | { readonly lifeDifference: readonly [number, number] }
   /** The game's starting life total (rule 119.1): 20, or 40 in Commander —
    * "your life total becomes equal to your starting life total" (Oketra's
    * Last Mercy), and half of it with `half` (The Endstone). */
@@ -5542,22 +5547,42 @@ export type EffectSpec =
   | {
       /**
        * "Exchange your life total with this creature's toughness" (Tree of
-       * Redemption — rule 701.12g): the permanent's toughness becomes the
-       * effect controller's life total, a layer-7b effect with no end
-       * (`PtModifier.setToughness` — counters and bonuses still apply on top,
-       * the ruling), and the player gains or loses the life it takes to
-       * reach the toughness it had, so a life-gain replacement or a "whenever
-       * you gain life" trigger sees it (701.12c). If either half can't
-       * happen — the permanent isn't there as the same object any more (the
-       * ruling), or the player can't gain, or can't lose, the life it would
-       * take (rules 119.7–8) — none of it does (701.12a).
+       * Redemption — rule 701.12g), or "with Evra's power" (Evra, Halcyon
+       * Witness): the permanent's `stat` becomes the effect controller's life
+       * total, a layer-7b effect with no end (`PtModifier.setToughness`,
+       * `setPower` — counters and bonuses still apply on top, the ruling),
+       * and the player gains or loses the life it takes to reach what it was,
+       * so a life-gain replacement or a "whenever you gain life" trigger sees
+       * it (701.12c): a power of 0 or less, and they lose the game (Evra's
+       * ruling). If either half can't happen — the permanent isn't there as
+       * the same object any more (the ruling), it isn't a creature so has no
+       * such number (rule 208.3), or the player can't gain, or can't lose,
+       * the life it would take (rules 119.7–8) — none of it does (701.12a).
        */
-      readonly kind: "exchange-life-toughness";
+      readonly kind: "exchange-life-stat";
+      readonly stat: "power" | "toughness";
       readonly target: EffectTargetRef;
       /** Whose life total — the effect's controller's by default; Tree of
        * Perdition's "exchange **target opponent's** life total" is `{ target:
        * 0 }`. Naming nobody (an illegal or empty slot), nothing happens. */
       readonly player?: EffectPlayerRef;
+    }
+  | {
+      /**
+       * "Exchange life totals with target opponent" (Mirror Universe), "two
+       * target players exchange life totals" (Soul Conduit — rule 701.12c):
+       * each player gains or loses the life it takes to reach the other's
+       * previous life total, so replacement effects may change those amounts
+       * and triggers see them. A player who can't gain life can't be given a
+       * higher life total, nor one who can't lose life a lower one (rules
+       * 119.7–8), and then neither changes (701.12a). Nor does either when
+       * one of the two is an illegal target, or has left the game (the
+       * rulings) — or they're the same player.
+       */
+      readonly kind: "exchange-life-totals";
+      /** The controller of the effect when absent. */
+      readonly first?: EffectPlayerRef;
+      readonly second: EffectPlayerRef;
     }
   | {
       /** `target` (an instant/sorcery card in a graveyard, via the
@@ -10041,8 +10066,10 @@ export interface EffectApi {
   assignAsThoughUnblocked(target: TargetRef | undefined, filter: CardFilter | undefined, must: boolean): void;
   /** See the `"put-in-command-zone"` {@link EffectSpec}. */
   putInCommandZone(target: TargetRef): void;
-  /** See the `"exchange-life-toughness"` {@link EffectSpec}. */
-  exchangeLifeToughness(target: TargetRef, player: PlayerId): void;
+  /** See the `"exchange-life-stat"` {@link EffectSpec}. */
+  exchangeLifeStat(target: TargetRef, player: PlayerId, stat: "power" | "toughness"): void;
+  /** See the `"exchange-life-totals"` {@link EffectSpec}. */
+  exchangeLifeTotals(first: PlayerId, second: PlayerId): void;
   /** See the `"unless"` {@link EffectSpec}. */
   unless(
     chooser: Extract<EffectSpec, { kind: "unless" }>["chooser"],
@@ -11850,6 +11877,13 @@ function signedAmountValue(
   if ("chosenNumber" in amount) return ctx.chosenNumberOfSource() ?? Number.NaN;
   if ("lifeTotal" in amount) {
     return ctx.lifeTotalOf(amount.lifeTotal === "each" ? (each ?? ctx.controller) : ctx.controller);
+  }
+  if ("lifeDifference" in amount) {
+    const [first, second] = amount.lifeDifference.map((slot) => {
+      const ref = ctx.targets[slot];
+      return ref?.kind === "player" ? ctx.lifeTotalOf(ref.player) : undefined;
+    });
+    return first === undefined || second === undefined ? 0 : Math.abs(first - second);
   }
   if ("startingLifeTotal" in amount) return ctx.startingLifeTotal();
   if ("lowestLifeTotal" in amount) {
@@ -15159,10 +15193,16 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       if (target !== undefined) ctx.putInCommandZone(target);
       return;
     }
-    case "exchange-life-toughness": {
+    case "exchange-life-stat": {
       const target = resolveEffectTarget(spec.target, ctx);
       const player = effectPlayer(spec.player ?? "you", ctx);
-      if (target !== undefined && player !== undefined) ctx.exchangeLifeToughness(target, player);
+      if (target !== undefined && player !== undefined) ctx.exchangeLifeStat(target, player, spec.stat);
+      return;
+    }
+    case "exchange-life-totals": {
+      const first = effectPlayer(spec.first ?? "you", ctx);
+      const second = effectPlayer(spec.second, ctx);
+      if (first !== undefined && second !== undefined) ctx.exchangeLifeTotals(first, second);
       return;
     }
     case "grant-triggered": {

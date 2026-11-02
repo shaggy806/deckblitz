@@ -3778,3 +3778,11 @@ cards: Divine Reckoning, Duneblast, Mount Doom, Fall of the First Civilization,
 Fortunate Few, Druid of Purification. Freed and unauthored: Urza's Sylex, Selfless
 Glyphweaver. The clause also reaches Consuming Tide, and Last One Standing given a
 random choice (`effect:random-permanent`).
+
+**Exchanges with a life total (2026-11-01, `effect:exchange-life-power`,
+`effect:exchange-life-totals`).** `exchange-life-totals` (rule 701.12c, all or nothing
+under rules 119.7–8) and `exchange-life-stat`, which was `exchange-life-toughness`,
+now taking `stat: "power"`. The `{ lifeDifference }` amount and `player-compare`'s
+`within`. Proving cards: Evra, Halcyon Witness, Mirror Universe, Soul Conduit, Mister
+Negative, Psychic Transfer, Profane Transfusion. Freed and unauthored: Axis of
+Mortality, Magus of the Mirror.

@@ -4435,6 +4435,26 @@ export function parseSentence(sentence, ctx) {
   if (re(`you may have creatures you control assign their combat damage this turn as though they weren't blocked`).test(s)) {
     return { kind: "assign-as-though-unblocked", filter: { type: "creature", controlledBy: "you" }, optional: true };
   }
+  // Rule 701.12c: "exchange life totals with target opponent" (Mirror
+  // Universe), "two target players exchange life totals" (Soul Conduit).
+  if ((m = re(`exchange life totals with (${TARGET})`).exec(s))) {
+    return { kind: "exchange-life-totals", second: { target: slot(m[1]) } };
+  }
+  if ((m = /^(you may have )?two target players exchange life totals\.$/i.exec(s))) {
+    const first = ctx.target("player");
+    const second = ctx.target({ kind: "other", of: "player", than: { slots: [first] } });
+    const effect = { kind: "exchange-life-totals", first: { target: first }, second: { target: second } };
+    return m[1] ? { kind: "may", prompt: "Have those players exchange life totals?", effect } : effect;
+  }
+  // Rule 701.12g: "exchange your life total with this creature's toughness"
+  // (Tree of Redemption), "with Evra's power", "exchange target opponent's
+  // life total with …" (Tree of Perdition).
+  if ((m = re(`exchange your life total with ~'s (power|toughness)`).exec(s))) {
+    return { kind: "exchange-life-stat", stat: m[1].toLowerCase(), target: "source" };
+  }
+  if ((m = re(`exchange (${TARGET})'s life total with ~'s (power|toughness)`).exec(s))) {
+    return { kind: "exchange-life-stat", stat: m[2].toLowerCase(), target: "source", player: { target: slot(m[1]) } };
+  }
   // Rule 701.12b: two permanents change hands at once, all or nothing.
   if ((m = re(`exchange control of ~ and (${TARGET})`).exec(s))) {
     return { kind: "exchange-control", objects: ["source", slot(m[1])] };
@@ -5012,6 +5032,33 @@ function impulseWindowAt(sentences, i, ctx) {
 }
 
 /**
+ * An exchange of life totals with a clause of its own, read whole: Mister
+ * Negative's "If you lost life this way" and Psychic Transfer's "if the
+ * difference … is 5 or less".
+ */
+function lifeExchanges(text, ctx) {
+  if (/^you may exchange life totals with target opponent\. If you lost life this way, draw that many cards\.$/i.test(text)) {
+    const opponent = ctx.target(targetOf("target opponent"));
+    return {
+      kind: "may",
+      prompt: "Exchange life totals with that opponent?",
+      effect: { kind: "exchange-life-totals", second: { target: opponent } },
+      then: { kind: "draw", amount: { lifeLostThisWay: true, who: "you" } },
+    };
+  }
+  const m = /^If the difference between your life total and target player's life total is (\d+) or less, exchange life totals with that player\.$/.exec(text);
+  if (m) {
+    const player = ctx.target(targetOf("target player"));
+    return {
+      kind: "conditional",
+      condition: { kind: "player-compare", stat: "life", compare: "within", by: Number(m[1]), than: { target: player } },
+      then: { kind: "exchange-life-totals", second: { target: player } },
+    };
+  }
+  return null;
+}
+
+/**
  * "Each player chooses a creature they control. Destroy the rest" (Divine
  * Reckoning): a `vote` with `choose`, then a `destroy-all` of what wasn't chosen
  * (`notThisWay: "chosen"`). "Destroy each permanent chosen this way" (Druid of
@@ -5243,7 +5290,7 @@ export function parseEffect(text, outer) {
     if (won !== null && lost !== null) return { effect: { kind: "flip-coin", won, lost }, todo: [], hints: [] };
     ctx.targets.length = slots;
   }
-  const chosen = chosenNumbers(text, ctx) ?? chosenAndTheRest(text);
+  const chosen = chosenNumbers(text, ctx) ?? chosenAndTheRest(text) ?? lifeExchanges(text, ctx);
   if (chosen !== null) return { effect: chosen, todo: [], hints: [] };
   for (const [i, sentence] of sentences.entries()) {
     if (skip > 0) {
@@ -8904,6 +8951,10 @@ export function parseFace(face, ctx = {}) {
       if (restrictions.includes("as a sorcery")) ability.sorcerySpeed = true;
       if (restrictions.includes("once each turn")) ability.oncePerTurn = true;
       if (restrictions.includes("during your turn")) ability.condition = { kind: "your-turn" };
+      rest = rest.replace(/ Activate only during your upkeep\.$/, () => {
+        ability.condition = { kind: "all", of: [{ kind: "your-turn" }, { kind: "turn-structure", steps: ["upkeep"] }] };
+        return "";
+      });
       {
         const reduced = abilityReductionOf(rest);
         if (reduced !== null) {

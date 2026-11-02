@@ -1135,7 +1135,9 @@
   "cost:free-cast-from-hand-static",
   "cost:free-cast-once-each-turn",
   "effect:destroy-all-except-chosen",
-  "effect:each-player-chooses-destroy-rest"
+  "effect:each-player-chooses-destroy-rest",
+  "effect:exchange-life-power",
+  "effect:exchange-life-totals"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

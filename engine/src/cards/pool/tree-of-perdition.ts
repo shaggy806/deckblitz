@@ -22,7 +22,7 @@ export default defineCard({
     {
       cost: { mana: null, tap: true },
       targets: ["opponent"],
-      effect: { kind: "exchange-life-toughness", target: "source", player: { target: 0 } },
+      effect: { kind: "exchange-life-stat", stat: "toughness", target: "source", player: { target: 0 } },
       resolve: null,
       text: TEXT,
     },
