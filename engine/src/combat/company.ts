@@ -64,8 +64,9 @@ export function tokensFitting(units: readonly CompanyUnit[], size: number): numb
  * requirement to attack or block reaches it (rule 508.1d, 509.1c: "without
  * disobeying any restrictions").
  */
-export function ableInCompany(units: readonly CompanyUnit[]): ObjectId[] {
-  const total = units.reduce((n, u) => n + u.tokens, 0);
+export function ableInCompany(units: readonly CompanyUnit[], most?: number): ObjectId[] {
+  // No group past "no more than N creatures can attack" (`combat/limits.ts`).
+  const total = Math.min(most ?? Infinity, units.reduce((n, u) => n + u.tokens, 0));
   const able = new Set<ObjectId>();
   for (let size = 1; size <= total; size += 1) {
     if (tokensFitting(units, size) < size) continue;

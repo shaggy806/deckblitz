@@ -28,6 +28,7 @@ import {
 } from "../combat/attacking.js";
 import type { AttackOffer, AttackUnit } from "../combat/attacking.js";
 import { ableInCompany, attackCompanyOf } from "../combat/company.js";
+import { attackCaps } from "../combat/limits.js";
 import type { CombatCompany } from "../combat/company.js";
 import {
   attackRequirementsForbid,
@@ -87,14 +88,19 @@ function attackersOffer(ctx: DecisionReadCtx, player: PlayerId): AttackOffer {
     const limit = attackCompanyOf(restrictionsOf(ctx.state, ctx.registry, id));
     if (limit !== null) limits[id] = limit;
   }
-  const inCompany = Object.keys(limits).length > 0;
+  // How many may attack (`combat/limits.ts`), which only the whole declaration
+  // can break as well. Whom each attacks is the second step's, under Master
+  // Warcraft: its first names the group.
+  const readCaps = attackCaps(ctx.state, ctx.registry);
+  const caps = readCaps === null || !naming ? readCaps : readCaps.most !== undefined ? { most: readCaps.most } : null;
+  const inCompany = Object.keys(limits).length > 0 || caps !== null;
   if (inCompany) {
     const units = (Object.keys(defendersFor) as ObjectId[]).map((id) => ({
       id,
       tokens: tokensOf(id),
       ...(limits[id] !== undefined ? { company: limits[id] } : {}),
     }));
-    const able = ableInCompany(units);
+    const able = ableInCompany(units, caps?.most);
     for (const { id } of units) if (!able.includes(id)) delete defendersFor[id];
   }
   const eligible = Object.keys(defendersFor) as ObjectId[];
@@ -136,15 +142,21 @@ function attackersOffer(ctx: DecisionReadCtx, player: PlayerId): AttackOffer {
   // obeying the most requirements are simply "must attack" (508.1d): one that
   // would break a restriction beside the others isn't.
   const units: AttackUnit[] = inCompany
-    ? eligible.map((id) => ({
-        id,
-        tokens: tokensOf(id),
-        ...(limits[id] !== undefined ? { company: limits[id] } : {}),
-        required: required.includes(id),
-        free: (defendersFor[id] ?? []).some((d) => attackIsFree(ctx, id, d)),
-      }))
+    ? eligible.map((id) => {
+        const defenders = defendersFor[id] ?? [];
+        const freeDefenders = defenders.filter((d) => attackIsFree(ctx, id, d));
+        return {
+          id,
+          tokens: tokensOf(id),
+          ...(limits[id] !== undefined ? { company: limits[id] } : {}),
+          required: required.includes(id),
+          free: freeDefenders.length > 0,
+          defenders,
+          freeDefenders,
+        };
+      })
     : [];
-  const most = mostRequirementsObeyed(units);
+  const most = mostRequirementsObeyed(units, caps ?? undefined);
   const stacks: Record<ObjectId, number> = {};
   for (const id of [...eligible, ...(Object.keys(limits) as ObjectId[])]) {
     if (tokensOf(id) > 1) stacks[id] = tokensOf(id);
@@ -162,9 +174,9 @@ function attackersOffer(ctx: DecisionReadCtx, player: PlayerId): AttackOffer {
     defendersFor: naming ? named : defendersFor,
     eligible,
     mustAttack: inCompany
-      ? required.filter((id) => mostRequirementsObeyed(units.filter((u) => u.id !== id)) < most)
+      ? required.filter((id) => mostRequirementsObeyed(units.filter((u) => u.id !== id), caps ?? undefined) < most)
       : required,
-    ...(inCompany ? { company: { limits, tokens: stacks, required } } : {}),
+    ...(inCompany ? { company: { limits, tokens: stacks, required, ...(caps !== null ? { caps } : {}) } } : {}),
     ...(taxed && !naming
       ? {
           attackTax: {
@@ -231,17 +243,25 @@ export const attackers = defineDecision({
     }
     // A restriction keyed to the other attackers (rules 508.1c, 508.1d) needs
     // the whole declaration against the whole offer. Not otherwise, as below.
-    const inCompany = ctx.state.zones.shared.battlefield.some(
-      (id) =>
-        ctx.state.objects[id]?.controller === player &&
-        attackCompanyOf(restrictionsOf(ctx.state, ctx.registry, id)) !== null,
-    );
+    const inCompany =
+      attackCaps(ctx.state, ctx.registry) !== null ||
+      ctx.state.zones.shared.battlefield.some(
+        (id) =>
+          ctx.state.objects[id]?.controller === player &&
+          attackCompanyOf(restrictionsOf(ctx.state, ctx.registry, id)) !== null,
+      );
     if (inCompany) {
       const offer = attackersOffer(ctx, player);
       const left = attackingViolations(action.attackers, offer)[0];
       if (left !== undefined) return `${nameOf(ctx, left.attacker)} must attack if able`;
       const broken = attackCompanyViolations(action.attackers, offer)[0];
       if (broken !== undefined) {
+        if (broken.kind === "too-many") {
+          const creatures = broken.most === 1 ? "one creature" : `${broken.most} creatures`;
+          if (broken.defender === undefined) return `No more than ${creatures} can attack each combat`;
+          const named = ctx.state.objects[broken.defender as ObjectId] !== undefined ? nameOf(ctx, broken.defender as ObjectId) : broken.defender;
+          return `No more than ${creatures} can attack ${named} each combat`;
+        }
         return broken.kind === "attacks-alone"
           ? `${nameOf(ctx, broken.attacker)} can only attack alone`
           : broken.kind === "fewer-requirements"

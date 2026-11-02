@@ -6086,6 +6086,13 @@ export type EffectSpec =
       readonly kind: "end-the-turn" | "end-the-combat-phase";
     }
   | {
+      /** "Each opponent can't block with more than one creature this combat"
+       * (Mirri, Weatherlight Duelist — rule 509.1b, `combat/limits.ts`). */
+      readonly kind: "limit-blockers";
+      readonly who: PlayerScope;
+      readonly most: number;
+    }
+  | {
       /** "You get that many additional upkeep steps after this phase" (Obeka,
        * Splitter of Seconds, whose `amount` is `{ triggerValue: true }`, the
        * combat damage it dealt): an upkeep step belongs to a beginning phase,
@@ -10242,6 +10249,8 @@ export interface EffectApi {
   additionalCombat(afterThisPhase?: { readonly withMain: boolean }): void;
   /** See the `end-the-turn` {@link EffectSpec}. */
   endTurnOrCombat(what: "turn" | "combat"): void;
+  /** See the `limit-blockers` {@link EffectSpec}. */
+  limitBlockers(players: readonly PlayerId[], most: number): void;
   /** See the `additional-upkeep-steps` {@link EffectSpec}. */
   additionalUpkeeps(count: number): void;
   /** See the `additional-land-drop` {@link EffectSpec}. */
@@ -15353,6 +15362,9 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     case "end-the-combat-phase":
       ctx.endTurnOrCombat("combat");
+      return;
+    case "limit-blockers":
+      ctx.limitBlockers(ctx.playersInScope(spec.who), spec.most);
       return;
     case "additional-upkeep-steps":
       ctx.additionalUpkeeps(amountValue(spec.amount, ctx));

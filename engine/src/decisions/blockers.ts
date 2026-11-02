@@ -38,7 +38,8 @@ import {
 } from "../combat/eligibility.js";
 import { blockLimitOf, restrictionsOf } from "../characteristics.js";
 import { whyCountsInvalid } from "../combat/stack-counts.js";
-import { whyMembersInvalid } from "../combat/blocking.js";
+import { tooManyBlockers, whyMembersInvalid } from "../combat/blocking.js";
+import { blockersLeft } from "../combat/limits.js";
 import { mustBlockByChoice } from "../player-control.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
 import { defineDecision } from "./define.js";
@@ -52,13 +53,19 @@ function blockersOffer(
     const target = ctx.state.objects[id].attacking;
     return target !== null && defendingPlayerOf(ctx.state, target) === player;
   });
+  // How many may block (rule 509.1b, `combat/limits.ts`): none of an attacker
+  // that needs more than that (menace under Silent Arbiter).
+  const blockMost = blockersLeft(ctx.state, ctx.registry, player);
+  const blockable =
+    blockMost === null ? attacking : attacking.filter((id) => minimumBlockers(ctx.state, ctx.registry, id) <= blockMost);
   const candidates = ctx.state.zones.shared.battlefield
     .filter((id) => ctx.state.objects[id].controller === player)
     .map((blocker) => {
       const copies = ctx.state.objects[blocker].stackCount ?? 1;
-      const canBlock = attacking.filter(
-        (attacker) => whyCannotBlock(ctx.state, ctx.registry, player, blocker, attacker) === null,
-      );
+      const canBlock =
+        blockMost === 0
+          ? []
+          : blockable.filter((attacker) => whyCannotBlock(ctx.state, ctx.registry, player, blocker, attacker) === null);
       const maxBlocks = Math.min(blockLimitOf(ctx.state, ctx.registry, blocker), canBlock.length);
       return {
         blocker,
@@ -78,7 +85,7 @@ function blockersOffer(
     company: blockCompanyOf(restrictionsOf(ctx.state, ctx.registry, entry.blocker)) ?? undefined,
   }));
   const inCompany = limited.some((u) => u.company !== undefined);
-  const able = inCompany ? ableInCompany(limited) : [];
+  const able = inCompany ? ableInCompany(limited, blockMost ?? undefined) : [];
   const eligible = inCompany ? candidates.filter((entry) => able.includes(entry.blocker)) : candidates;
   for (const { id, company } of limited) if (company !== undefined) blockCompany[id] = company.least;
   // Menace, or "can't be blocked except by N or more creatures" (rule
@@ -156,6 +163,7 @@ function blockersOffer(
     ...(blockRequirements.length > 0 ? { blockRequirements } : {}),
     ...(Object.keys(attackerTokens).length > 0 ? { attackerTokens } : {}),
     ...(Object.keys(blockCompany).length > 0 ? { blockCompany } : {}),
+    ...(blockMost !== null ? { blockMost } : {}),
     ...(rates !== null
       ? { blockTax: { ...rates, budget: ctx.attackTaxBudget(player, []), lifeBudget: ctx.attackTaxLifeBudget(player) } }
       : {}),
@@ -223,6 +231,10 @@ export const blockers = defineDecision({
     // `[0]` keeps the engine reporting one reason, in the order it always
     // has; the client shows the whole list.
     const violation = blockingViolations(action.blocks, offer)[0];
+    if (tooManyBlockers(action.blocks, offer)) {
+      const most = offer.blockMost ?? 0;
+      return `No more than ${most === 1 ? "one creature" : `${most} creatures`} can block now`;
+    }
     if (violation === undefined) {
       const short = blockCompanyViolations(action.blocks, offer)[0];
       if (short === undefined) {

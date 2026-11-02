@@ -8997,6 +8997,30 @@ describe("amounts read from what has happened this turn", () => {
     expect(face("Sorcery", "Draw a card for each opponent who attacked this turn.").complete).toBe(false);
   });
 
+  it("limits on how many creatures attack or block", () => {
+    const limit = (text: string) => face("Artifact", text).static?.[0];
+    expect(limit("No more than two creatures can attack you each combat.")).toMatchObject({
+      affects: { scope: "self" },
+      attackLimit: { most: 2, covers: "you" },
+    });
+    expect(limit("No more than one creature can attack each combat.")).toMatchObject({ attackLimit: { most: 1, covers: "all" } });
+    expect(limit("No more than one creature can block each combat.")).toMatchObject({ blockLimit: { most: 1 } });
+    expect(limit("No more than one creature can attack this artifact each combat.")).toMatchObject({ attackLimit: { most: 1, covers: "self" } });
+    expect(limit("As long as this artifact is tapped, no more than one creature can attack you each combat.")).toMatchObject({
+      condition: { kind: "source", filter: { tapped: true } },
+      attackLimit: { most: 1, covers: "you" },
+    });
+    const tomik = limit('Planeswalkers you control have "No more than one creature can attack this planeswalker each combat."');
+    expect(tomik).toMatchObject({
+      affects: { scope: "filter", filter: { type: "planeswalker", controlledBy: "you" } },
+      grantsStatic: [{ attackLimit: { most: 1, covers: "self" } }],
+    });
+    expect(limit("No more than one creature can block you each combat.")?.blockLimit).toBeUndefined();
+    expect(face(CREATURE, "Whenever this creature attacks, each opponent can't block with more than one creature this combat.").triggered?.[0]).toMatchObject({
+      effect: { kind: "limit-blockers", who: "each-opponent", most: 1 },
+    });
+  });
+
   it("ending the turn and the combat phase (rule 724)", () => {
     expect(face("Instant", "End the turn.").effect).toEqual({ kind: "end-the-turn" });
     expect(face("Instant", "End the combat phase.").effect).toEqual({ kind: "end-the-combat-phase" });

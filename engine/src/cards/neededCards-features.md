@@ -3749,3 +3749,21 @@ ended. The turn's owed phases go with it; the combat phase's don't. No new decis
 log gets `phase-ended-by-effect`). Proving cards: Time Stop, Ultima, Glorious End, Obeka
 Brute Chronologist, Mandate of Peace. The scaffolder reads the lines, "if it's your turn,
 end the turn" and "the player whose turn it is may end the turn" with them.
+
+### Limits on how many creatures attack or block — built 2026-11-01
+
+The need-keys Phase 2 family `static:combat-restriction-extensions`, its group
+`static:attack-limit` + `static:max-attackers-blockers`. `StaticAbility.attackLimit
+{ most, covers: "all" | "you" | "self" }` and `blockLimit { most }`, read by
+`combat/limits.ts` into the offers (`company.caps`, `blockMost`); the effect
+`limit-blockers { who, most }` for one combat. A declaration past one is refused, the
+drivers cut theirs to fit, and requirements obey them first (rules 508.1d, 509.1c: a
+matching under per-defender caps, and N blockers each obeying one is all there can be).
+Menace under a limit of one can't be blocked. Counted across defending players, who are
+asked in turn. No new decision. Proving cards: Crawlspace, Silent Arbiter, Caverns of
+Despair, Dueling Grounds, Tomik Orzhov Lawmage, Mirri Weatherlight Duelist. `static:attack-limit`
+was triaged also on cards it doesn't cover: "can't attack alone" (Raging Kronch, Militia
+Rallier, Bonded Horncrest, Trusty Companion) is `combat/company.ts`'s, built already;
+Scarred Puma's "unless a black or green creature also attacks" and Sightless Brawler's
+granted restriction need `author-freed` to narrow; Mystic Barrier waits on
+`static:attack-direction-restriction`.

@@ -19,6 +19,7 @@ import type { AttackerDeclaration, LegalAction } from "../actions.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
 import { fitsCompany, tokensFitting } from "./company.js";
 import type { CompanyUnit } from "./company.js";
+import type { AttackCaps } from "./limits.js";
 
 /** The `declare-attackers` offer, which is all these checks need. */
 export type AttackOffer = Extract<LegalAction, { kind: "declare-attackers" }>;
@@ -68,42 +69,108 @@ export type AttackCompanyViolation =
   | { readonly kind: "needs-company"; readonly attacker: ObjectId; readonly others: number }
   /** Fewer requirements obeyed than could be without disobeying a restriction
    * (rule 508.1d): `obeyed` of `possible` creatures that must attack. */
-  | { readonly kind: "fewer-requirements"; readonly obeyed: number; readonly possible: number };
+  | { readonly kind: "fewer-requirements"; readonly obeyed: number; readonly possible: number }
+  /** More attackers than "no more than `most` creatures can attack" allows
+   * (`combat/limits.ts`), or, with `defender`, more on that defender. */
+  | { readonly kind: "too-many"; readonly most: number; readonly defender?: string };
 
-/** One eligible attacker, as far as company and requirements care. `free`: it
- * has a defender it needn't pay to attack (508.1d doesn't oblige paying). */
+/** One eligible attacker, as far as company, caps and requirements care.
+ * `free`: it has a defender it needn't pay to attack (508.1d doesn't oblige
+ * paying), and `freeDefenders` are those; `defenders`, all it may attack. */
 export interface AttackUnit extends CompanyUnit {
   readonly required: boolean;
   readonly free: boolean;
+  readonly defenders: readonly string[];
+  readonly freeDefenders: readonly string[];
 }
 
 /** The units of `offer` (which has `company`). */
 function attackUnits(offer: AttackOffer): AttackUnit[] {
   const company = offer.company;
-  return offer.eligible.map((id) => ({
-    id,
-    tokens: company?.tokens[id] ?? 1,
-    ...(company?.limits[id] !== undefined ? { company: company.limits[id] } : {}),
-    required: company?.required.includes(id) === true,
-    free: (offer.defendersFor[id] ?? []).some((d) => taxOn(offer, id, d) === 0),
-  }));
+  return offer.eligible.map((id) => {
+    const defenders = offer.defendersFor[id] ?? [];
+    const freeDefenders = defenders.filter((d) => taxOn(offer, id, d) === 0);
+    return {
+      id,
+      tokens: company?.tokens[id] ?? 1,
+      ...(company?.limits[id] !== undefined ? { company: company.limits[id] } : {}),
+      required: company?.required.includes(id) === true,
+      free: freeDefenders.length > 0,
+      defenders,
+      freeDefenders,
+    };
+  });
+}
+
+/**
+ * The most tokens of `units` that can attack at once with no defender past its
+ * cap (a matching: a creature with a choice of defender makes room for one with
+ * none), and who's where: each capped defender's seats, by index into `units`.
+ * A defender with no cap has room for anyone, so isn't in `seats`.
+ */
+function seatAttackers(
+  units: readonly Pick<AttackUnit, "tokens" | "defenders">[],
+  caps: Readonly<Record<string, number>>,
+): { readonly seated: number; readonly seats: ReadonlyMap<string, number[]> } {
+  const seats = new Map<string, number[]>();
+  const seatOne = (unit: number, tried: Set<string>): boolean => {
+    for (const defender of units[unit].defenders) {
+      if (tried.has(defender)) continue;
+      tried.add(defender);
+      const cap = caps[defender];
+      if (cap === undefined) return true;
+      const here = seats.get(defender) ?? [];
+      seats.set(defender, here);
+      if (here.length < cap) {
+        here.push(unit);
+        return true;
+      }
+      for (let i = 0; i < here.length; i += 1) {
+        if (seatOne(here[i], tried)) {
+          here[i] = unit;
+          return true;
+        }
+      }
+    }
+    return false;
+  };
+  let seated = 0;
+  units.forEach((unit, index) => {
+    // Anyone with an uncapped defender goes there, every token of it.
+    if (unit.defenders.some((d) => caps[d] === undefined)) {
+      seated += unit.tokens;
+      return;
+    }
+    for (let token = 0; token < unit.tokens; token += 1) {
+      if (!seatOne(index, new Set())) break;
+      seated += 1;
+    }
+  });
+  return { seated, seats };
 }
 
 /** The most requirements (creatures that must attack, each token one) a
- * declaration of `size` can obey, or `null` if none of that size is legal. */
-function obeyedAtSize(units: readonly AttackUnit[], size: number): number | null {
-  if (tokensFitting(units, size) < size) return null;
-  const required = units.reduce((n, u) => n + (u.required && fitsCompany(u.company, size) ? u.tokens : 0), 0);
+ * declaration of `size` can obey under `caps`, or `null` if none of that size is
+ * legal. */
+function obeyedAtSize(units: readonly AttackUnit[], size: number, caps?: AttackCaps): number | null {
+  if (tokensFitting(units, size) < size || size > (caps?.most ?? Infinity)) return null;
+  const fitting = units.filter((u) => fitsCompany(u.company, size));
+  const perDefender = caps?.perDefender;
+  if (perDefender !== undefined && seatAttackers(fitting, perDefender).seated < size) return null;
+  const must = fitting.filter((u) => u.required);
+  const required = perDefender !== undefined ? seatAttackers(must, perDefender).seated : must.reduce((n, u) => n + u.tokens, 0);
   return Math.min(size, required);
 }
 
-/** The most requirements any legal declaration of `units` obeys, paying
- * nothing (rule 508.1d). */
-export function mostRequirementsObeyed(units: readonly AttackUnit[]): number {
-  const free = units.filter((u) => u.free);
+/** The most requirements any legal declaration of `units` obeys under `caps`,
+ * paying nothing (rule 508.1d). */
+export function mostRequirementsObeyed(units: readonly AttackUnit[], caps?: AttackCaps): number {
+  const free = units.filter((u) => u.free).map((u) => ({ ...u, defenders: u.freeDefenders }));
   const total = free.reduce((n, u) => n + u.tokens, 0);
   let best = 0;
-  for (let size = 1; size <= total; size += 1) best = Math.max(best, obeyedAtSize(free, size) ?? 0);
+  for (let size = 1; size <= Math.min(total, caps?.most ?? Infinity); size += 1) {
+    best = Math.max(best, obeyedAtSize(free, size, caps) ?? 0);
+  }
   return best;
 }
 
@@ -128,9 +195,16 @@ export function attackCompanyViolations(
     if (size - 1 < limit.least) out.push({ kind: "needs-company", attacker, others: limit.least });
     else if (!fitsCompany(limit, size)) out.push({ kind: "attacks-alone", attacker });
   }
+  const caps = company.caps;
+  if (caps?.most !== undefined && size > caps.most) out.push({ kind: "too-many", most: caps.most });
+  for (const [defender, most] of Object.entries(caps?.perDefender ?? {})) {
+    if (attackersDeclared(declared.filter((d) => d.defender === defender), company.tokens) > most) {
+      out.push({ kind: "too-many", most, defender });
+    }
+  }
   const required = declared.filter((d) => company.required.includes(d.attacker));
   const obeyed = attackersDeclared(required, company.tokens);
-  const possible = mostRequirementsObeyed(attackUnits(offer));
+  const possible = mostRequirementsObeyed(attackUnits(offer), caps);
   if (obeyed < possible) out.push({ kind: "fewer-requirements", obeyed, possible });
   return out;
 }
@@ -153,10 +227,11 @@ export function withinAttackCompany(
   // What's declared counts as it is, taxed or not; nothing taxed is added.
   const units = attackUnits(offer).filter((u) => u.free || named.has(u.id));
   const total = units.reduce((n, u) => n + u.tokens, 0);
-  const possible = mostRequirementsObeyed(attackUnits(offer));
+  const caps = company.caps;
+  const possible = mostRequirementsObeyed(attackUnits(offer), caps);
   let best: { size: number; adding: number; kept: number } | null = possible === 0 ? { size: 0, adding: 0, kept: 0 } : null;
-  for (let size = 1; size <= total; size += 1) {
-    if ((obeyedAtSize(units, size) ?? -1) < possible) continue;
+  for (let size = 1; size <= Math.min(total, caps?.most ?? Infinity); size += 1) {
+    if ((obeyedAtSize(units, size, caps) ?? -1) < possible) continue;
     const fit = declared.filter((d) => fitsCompany(company.limits[d.attacker], size));
     const kept = Math.min(size, attackersDeclared(fit, company.tokens));
     const adding = size - kept;
@@ -168,22 +243,56 @@ export function withinAttackCompany(
   const { size } = best;
   const out: AttackerDeclaration[] = [];
   let room = size;
+  // Room left on each capped defender. What's kept from one that's full goes at
+  // another it may attack free, if any has room, and otherwise stays home.
+  const perDefender = caps?.perDefender;
+  const left = new Map(Object.entries(perDefender ?? {}));
   const place = (attacker: ObjectId, defender: PlayerId | ObjectId, tokens: number, whole: number): void => {
-    const n = Math.min(room, tokens);
-    if (n <= 0) return;
-    room -= n;
-    out.push(n === whole ? { attacker, defender } : { attacker, defender, count: n });
+    let wanted = Math.min(room, tokens);
+    const elsewhere = (offer.defendersFor[attacker] ?? []).filter((d) => d !== defender && taxOn(offer, attacker, d) === 0);
+    for (const at of [defender, ...elsewhere]) {
+      const n = Math.min(wanted, left.get(at) ?? Infinity);
+      if (n <= 0) continue;
+      if (left.has(at)) left.set(at, (left.get(at) ?? 0) - n);
+      wanted -= n;
+      room -= n;
+      out.push(n === whole ? { attacker, defender: at } : { attacker, defender: at, count: n });
+      if (wanted === 0) return;
+    }
   };
   const fitting = units.filter((u) => fitsCompany(u.company, size));
+  // With caps, those that must attack go where a matching has room for the most
+  // of them: their seats first, spoken for before anyone's declaration is read.
+  if (perDefender !== undefined) {
+    const must = fitting.filter((u) => u.required).map((u) => ({ ...u, defenders: u.freeDefenders }));
+    const { seats } = seatAttackers(must, perDefender);
+    const seatedTokens = new Map<ObjectId, number>();
+    for (const [defender, here] of seats) {
+      for (const index of new Set(here)) {
+        const u = must[index];
+        const n = here.filter((i) => i === index).length;
+        seatedTokens.set(u.id, (seatedTokens.get(u.id) ?? 0) + n);
+        place(u.id, defender as PlayerId | ObjectId, n, u.tokens);
+      }
+    }
+    // Who has an uncapped defender wasn't seated: there, every token of it.
+    for (const u of must) {
+      if (seatedTokens.has(u.id)) continue;
+      const defender = u.defenders.find((d) => perDefender[d] === undefined);
+      if (defender !== undefined) place(u.id, defender as PlayerId | ObjectId, u.tokens, u.tokens);
+    }
+  }
+  const placedAlready = new Set(perDefender !== undefined ? out.map((d) => d.attacker) : []);
   const sendAsDeclared = (u: AttackUnit): void => {
     for (const d of declared) {
       if (d.attacker === u.id) place(d.attacker, d.defender, d.count ?? u.tokens, u.tokens);
     }
   };
   const freeDefender = (u: AttackUnit): PlayerId | ObjectId | undefined =>
+    (offer.defendersFor[u.id] ?? []).find((d) => taxOn(offer, u.id, d) === 0 && (left.get(d) ?? Infinity) > 0) ??
     (offer.defendersFor[u.id] ?? []).find((d) => taxOn(offer, u.id, d) === 0);
   // Those that must attack, first; then what was declared; then whoever can.
-  for (const u of fitting.filter((v) => v.required)) {
+  for (const u of fitting.filter((v) => v.required && !placedAlready.has(v.id))) {
     if (named.has(u.id)) {
       sendAsDeclared(u);
     } else {

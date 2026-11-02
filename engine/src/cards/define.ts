@@ -2971,6 +2971,19 @@ export interface StaticAbility {
     readonly covers?: "you" | "you-and-planeswalkers" | "planeswalkers";
   };
   /**
+   * "No more than `most` creatures can attack …" each combat (rule 508.1c,
+   * `combat/limits.ts`), on `covers`: `"all"` is every attack on anything (Silent
+   * Arbiter), `"you"` this permanent's controller and not their planeswalkers
+   * (Crawlspace, Mirri's ruling), `"self"` this planeswalker (The Eternal Wanderer;
+   * granted, Tomik). What must attack obeys it first (508.1d).
+   */
+  readonly attackLimit?: { readonly most: number; readonly covers: "all" | "you" | "self" };
+  /**
+   * "No more than `most` creatures can block each combat" (rule 509.1b — Silent
+   * Arbiter), counted over every defending player.
+   */
+  readonly blockLimit?: { readonly most: number };
+  /**
    * A cost on the creatures this static reaches (`affects`), where
    * `attackTax` is one on attacking a player whatever attacks: "this creature
    * can't attack unless you pay {1} for each +1/+1 counter on it" (Phyrexian

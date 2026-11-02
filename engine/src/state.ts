@@ -5670,6 +5670,10 @@ export interface GameState {
    * decision. Absent otherwise.
    */
   endingPhase?: "turn" | "combat";
+  /** "`player` can't block with more than `most` creatures this combat" (Mirri,
+   * Weatherlight Duelist — the `limit-blockers` effect): in the combat phase
+   * `combat` of this turn (`TurnState.combatPhases`), gone with the turn. */
+  combatBlockLimits?: { readonly player: PlayerId; readonly most: number; readonly combat: number | undefined }[];
   /** Player-level continuous effects that expire (the `player-effect`
    * effect) — see {@link PlayerEffect}. */
   playerEffects?: PlayerEffect[];

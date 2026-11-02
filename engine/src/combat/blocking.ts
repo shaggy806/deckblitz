@@ -343,6 +343,82 @@ export function blockingViolations(
     if (mine.some((a) => offer.mustBlock.includes(a) || (offer.mustBeBlockedIfAble ?? []).includes(a))) continue;
     if (requirementTargets(blocker, offer).length > 0) out.push({ kind: "block-requirement", blocker });
   }
+  // As many requirements as can be without breaking a restriction (rule 509.1c):
+  // with "no more than N creatures can block", N creatures each obeying one is
+  // all there can be, whatever else is left wanting.
+  const most = offer.blockMost;
+  if (
+    most !== undefined &&
+    out.length > 0 &&
+    creaturesBlocking(blocks, offer) === most &&
+    blocks.every((b) => blockObeysRequirement(b, blocks, offer))
+  ) {
+    return out.filter(
+      (v) => v.kind !== "must-be-blocked" && v.kind !== "must-be-blocked-if-able" && v.kind !== "block-requirement",
+    );
+  }
+  return out;
+}
+
+/** How many creatures `blocks` declares: a stack counts each token it sends, and
+ * a creature blocking two attackers once. */
+function creaturesBlocking(blocks: readonly BlockerDeclaration[], offer: BlockOffer): number {
+  const copies = new Map(offer.eligible.map((e) => [e.blocker, e.copies ?? 1]));
+  const sent = new Map<ObjectId, number>();
+  for (const b of blocks) {
+    const whole = copies.get(b.blocker) ?? 1;
+    sent.set(b.blocker, Math.min(whole, (sent.get(b.blocker) ?? 0) + (b.count ?? whole)));
+  }
+  let size = 0;
+  for (const n of sent.values()) size += n;
+  return size;
+}
+
+/** Whether `blocks` declares more creatures than `offer.blockMost` allows. */
+export function tooManyBlockers(blocks: readonly BlockerDeclaration[], offer: BlockOffer): boolean {
+  return offer.blockMost !== undefined && creaturesBlocking(blocks, offer) > offer.blockMost;
+}
+
+/** Whether this block obeys a requirement: on a Lured or "if able" attacker, or
+ * its blocker's own. */
+function blockObeysRequirement(
+  block: BlockerDeclaration,
+  blocks: readonly BlockerDeclaration[],
+  offer: BlockOffer,
+): boolean {
+  return (
+    offer.mustBlock.includes(block.attacker) ||
+    (offer.mustBeBlockedIfAble ?? []).includes(block.attacker) ||
+    obeysOwnRequirement(block.blocker, blocks, offer)
+  );
+}
+
+/**
+ * `blocks` cut to `offer.blockMost` creatures, for a driver that doesn't weigh it:
+ * those obeying a requirement stay ahead of the rest, then in the order declared,
+ * and a stack sends what still fits. Unchanged when it fits already.
+ */
+export function withinBlockMost(blocks: readonly BlockerDeclaration[], offer: BlockOffer): BlockerDeclaration[] {
+  if (!tooManyBlockers(blocks, offer)) return [...blocks];
+  const copies = new Map(offer.eligible.map((e) => [e.blocker, e.copies ?? 1]));
+  const obeying = blocks.filter((b) => blockObeysRequirement(b, blocks, offer));
+  const others = blocks.filter((b) => !blockObeysRequirement(b, blocks, offer));
+  let room = offer.blockMost ?? 0;
+  const seated = new Set<ObjectId>();
+  const out: BlockerDeclaration[] = [];
+  for (const b of [...obeying, ...others]) {
+    const whole = copies.get(b.blocker) ?? 1;
+    // One creature blocking two attackers is one creature.
+    if (whole === 1 && seated.has(b.blocker)) {
+      out.push(b);
+      continue;
+    }
+    const n = Math.min(room, b.count ?? whole);
+    if (n <= 0) continue;
+    room -= n;
+    seated.add(b.blocker);
+    out.push(n === (b.count ?? whole) ? b : { ...b, count: n });
+  }
   return out;
 }
 
@@ -585,9 +661,12 @@ export function obeyingLure(
     offer.eligible.every((e) =>
       moved.some((b) => b.blocker === e.blocker && b.attacker === attacker && (b.count ?? e.copies ?? 1) >= (e.copies ?? 1)),
     );
-  return withinSingleBlockers(
-    moved.filter(
-      (b) => (load.get(b.attacker) ?? 0) >= leastBlockers(offer, b.attacker) && (!all.has(b.attacker) || whole(b.attacker)),
+  return withinBlockMost(
+    withinSingleBlockers(
+      moved.filter(
+        (b) => (load.get(b.attacker) ?? 0) >= leastBlockers(offer, b.attacker) && (!all.has(b.attacker) || whole(b.attacker)),
+      ),
+      offer,
     ),
     offer,
   );
@@ -612,16 +691,9 @@ export function blockCompanyViolations(
 ): BlockCompanyViolation[] {
   const company = offer.blockCompany;
   if (company === undefined) return [];
-  const copies = new Map(offer.eligible.map((e) => [e.blocker, e.copies ?? 1]));
-  const sent = new Map<ObjectId, number>();
-  for (const b of blocks) {
-    const whole = copies.get(b.blocker) ?? 1;
-    sent.set(b.blocker, Math.min(whole, (sent.get(b.blocker) ?? 0) + (b.count ?? whole)));
-  }
-  let size = 0;
-  for (const n of sent.values()) size += n;
+  const size = creaturesBlocking(blocks, offer);
   const out: BlockCompanyViolation[] = [];
-  for (const blocker of sent.keys()) {
+  for (const blocker of new Set(blocks.map((b) => b.blocker))) {
     const others = company[blocker];
     if (others !== undefined && size - 1 < others) out.push({ blocker, others });
   }
@@ -639,7 +711,7 @@ export function withinBlockCompany(
   blocks: readonly BlockerDeclaration[],
   offer: BlockOffer,
 ): BlockerDeclaration[] {
-  if (offer.blockCompany === undefined) return [...blocks];
+  if (offer.blockCompany === undefined && offer.blockMost === undefined) return [...blocks];
   const required = new Set<ObjectId>([
     ...lurePlan(offer).assignment.keys(),
     ...ifAblePlan(offer).assignment.keys(),
@@ -649,6 +721,7 @@ export function withinBlockCompany(
   // Each pass settles one breach; requirements, menace and company can each
   // undo the last's, so it's bounded rather than run until stable.
   for (let pass = 0; pass <= offer.eligible.length * 2 + 2; pass += 1) {
+    out = withinBlockMost(out, offer);
     const broken = blockCompanyViolations(out, offer);
     if (broken.length === 0) {
       if (blockingViolations(out, offer).length === 0) return out;

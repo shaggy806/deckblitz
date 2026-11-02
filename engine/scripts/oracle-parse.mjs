@@ -2571,6 +2571,10 @@ export function parseSentence(sentence, ctx) {
   if ((m = re(`(target player|target opponent) skips their next (?:(${N}) )?turns?`).exec(s))) {
     return { kind: "skip-turn", who: slot(m[1]), ...(m[2] !== undefined ? { count: amount(m[2]) } : {}) };
   }
+  // A limit on one player's blockers for one combat (`limit-blockers`).
+  if ((m = re(`each opponent can't block with more than (one|two|three) creatures? this combat`).exec(s))) {
+    return { kind: "limit-blockers", who: "each-opponent", most: { one: 1, two: 2, three: 3 }[m[1]] };
+  }
   // "End the turn" and "end the combat phase" (rule 724); "the player whose
   // turn it is may end the turn" asks them (Obeka, Brute Chronologist).
   if (re(`end the turn`).test(s)) return { kind: "end-the-turn" };
@@ -10814,6 +10818,23 @@ function spellCostStaticOf(line, text) {
 function parseStatic(line, text) {
   const spellCost = spellCostStaticOf(line, text);
   if (spellCost !== null) return spellCost;
+  // A limit on how many creatures attack or block (`combat/limits.ts`): "No more
+  // than two creatures can attack you each combat" (Crawlspace), "… attack each
+  // combat", "… block each combat" (Silent Arbiter), "… attack ~" (The Eternal
+  // Wanderer), "this planeswalker" as a quoted grant (Tomik), and "As long as ~
+  // is tapped, …" (Mirri).
+  const limit =
+    /^(As long as ~ is tapped, n|N)o more than (one|two|three) creatures? can (attack|block)( you| ~| this planeswalker)? each combat\.$/.exec(line);
+  if (limit !== null && !(limit[3] === "block" && limit[4] !== undefined)) {
+    const most = { one: 1, two: 2, three: 3 }[limit[2]];
+    const covers = limit[4] === undefined ? "all" : limit[4] === " you" ? "you" : "self";
+    return {
+      affects: { scope: "self" },
+      ...(limit[1].length > 1 ? { condition: { kind: "source", filter: { tapped: true } } } : {}),
+      ...(limit[3] === "attack" ? { attackLimit: { most, covers } } : { blockLimit: { most } }),
+      text,
+    };
+  }
   // Casting and activation rules with one reading each.
   const fixed = {
     "Each opponent can cast spells only any time they could cast a sorcery.": { prohibits: { who: "opponents", castOnlyAsSorcery: true } },
@@ -11891,7 +11912,7 @@ function parseStatic(line, text) {
   // get +2/+2'" (Inspiring Leader), "All Sliver creatures have 'This creature
   // gets +1/+1 as long as you control a Swamp'" (Sedge Sliver). The quoted
   // line is read as a static of the object that has it.
-  if ((m = new RegExp(`^(Equipped creature|Enchanted creature|Commander creatures you own|All Sliver creatures|Creatures you control|Creatures you control with flying|Creatures and enchantments you control) (?:has|have) (?:${KW} and )?"([^"]+\\.)"$`).exec(line))) {
+  if ((m = new RegExp(`^(Equipped creature|Enchanted creature|Commander creatures you own|All Sliver creatures|Creatures you control|Creatures you control with flying|Creatures and enchantments you control|Planeswalkers you control) (?:has|have) (?:${KW} and )?"([^"]+\\.)"$`).exec(line))) {
     const affects = {
       "Equipped creature": { scope: "attached" },
       "Enchanted creature": { scope: "attached" },
@@ -11900,6 +11921,7 @@ function parseStatic(line, text) {
       "Creatures you control": { scope: "creatures-you-control" },
       "Creatures you control with flying": { scope: "filter", filter: { type: "creature", keyword: "flying", controlledBy: "you" } },
       "Creatures and enchantments you control": { scope: "filter", filter: { typesAnyOf: ["creature", "enchantment"], controlledBy: "you" } },
+      "Planeswalkers you control": { scope: "filter", filter: { type: "planeswalker", controlledBy: "you" } },
     }[m[1]];
     const quoted = m[3];
     const granted = parseGrantedStatic(quoted);

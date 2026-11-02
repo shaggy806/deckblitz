@@ -8,6 +8,7 @@
 
 import type { CardType } from "./cards/define.js";
 import type { CombatCompany } from "./combat/company.js";
+import type { AttackCaps } from "./combat/limits.js";
 import type { PileFateWord } from "./effects.js";
 import type { CardFilter } from "./filter.js";
 import type { Color, ManaType } from "./mana.js";
@@ -1595,13 +1596,16 @@ export type LegalAction =
        * requirement to attack. With these in play `mustAttack` holds only the
        * ones in every declaration obeying the most requirements (rule 508.1d),
        * and `attackCompanyViolations` checks the rest. `eligible` leaves out
-       * a creature with no group it could attack in. Absent when no creature
-       * has one.
+       * a creature with no group it could attack in. `caps`: how many may
+       * attack at all, or attack one defender (`combat/limits.ts`), which also
+       * make this present. Absent when no creature has one and nothing limits
+       * attacks.
        */
       readonly company?: {
         readonly limits: Readonly<Record<ObjectId, CombatCompany>>;
         readonly tokens: Readonly<Record<ObjectId, number>>;
         readonly required: readonly ObjectId[];
+        readonly caps?: AttackCaps;
       };
     }
   | {
@@ -1651,6 +1655,11 @@ export type LegalAction =
        * `blockCompanyViolations` checking them. `eligible` leaves out a creature
        * with no group it could block in. Absent when no creature has one. */
       readonly blockCompany?: Readonly<Record<ObjectId, number>>;
+      /** How many creatures this player may declare as blockers at most
+       * (`combat/limits.ts`, rule 509.1b), `tooManyBlockers` checking it. An
+       * attacker that needs more than this to be blocked is in no `canBlock`.
+       * Requirements obey it first (509.1c). Absent with no limit. */
+      readonly blockMost?: number;
       /** What blocking costs (rule 509.1d — Hipparion, Awesome Presence, War
        * Cadence), `blockTaxTotal` adding it up for a declaration: the rates,
        * with `budget` the generic mana this player can surely pay and

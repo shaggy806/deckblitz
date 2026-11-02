@@ -4109,6 +4109,15 @@ anthem, the keyword grant and the granted trigger like any other creature.
 
 **Continuous-effect fields:**
 
+`attackLimit: { most: N, covers }` is "no more than N creatures can attack …" each combat
+(rule 508.1c): `covers: "all"` every attack (Silent Arbiter), `"you"` this permanent's controller
+and not their planeswalkers (Crawlspace), `"self"` this planeswalker (The Eternal Wanderer; a
+`grantsStatic` for Tomik's quoted one). `blockLimit: { most: N }` is "no more than N creatures can
+block each combat" (509.1b), counted over every defending player. A `condition` turns either on
+and off (Mirri: `{ kind: "source", filter: { tapped: true } }`). Each is read only as the
+declaration is made. For one combat, "each opponent can't block with more than one creature this
+combat" is the effect `limit-blockers { who, most }`.
+
 `attackTax: { generic: N }` is "creatures can't attack you unless their controller pays {N}
 for each creature they control that's attacking you" (Ghostly Prison, Propaganda, Windborn
 Muse): a cost to attack this permanent's controller (rule 508.1h), not their planeswalkers (the

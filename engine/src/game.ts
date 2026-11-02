@@ -62,6 +62,7 @@ import { bandMatesOf, blockedAttackersOf } from "./combat/banding.js";
 import { blockTaxTotal } from "./combat/blocking.js";
 import { attackCovers, blockTaxRates, creatureAttackTax } from "./combat/tax.js";
 import { ableInCompany, attackCompanyOf } from "./combat/company.js";
+import { attackCaps, blockersLeft } from "./combat/limits.js";
 import {
   creatureDef,
   currentAttackers,
@@ -7468,6 +7469,7 @@ export class Game {
     };
     this.state.spellsCastThisTurn = 0;
     delete this.state.turnRestrictions;
+    delete this.state.combatBlockLimits;
     delete this.state.blockRequirements;
     delete this.state.turnDefenderAttacks;
     delete this.state.turnUnblockedAssignments;
@@ -9884,6 +9886,7 @@ export class Game {
         tokens: this.state.objects[id].stackCount ?? 1,
         company: attackCompanyOf(restrictionsOf(this.state, this.registry, id)) ?? undefined,
       })),
+      attackCaps(this.state, this.registry)?.most,
     );
     if (able.length === 0) return;
     this.state.awaiting = { kind: "attackers", player: this.activePlayer };
@@ -9950,6 +9953,8 @@ export class Game {
       // leaves it where it was (`inGame`).
       const hasEligibleBlocker =
         this.state.players[defender]?.hasLost !== true &&
+        // Silent Arbiter's one blocker, another defending player's already.
+        blockersLeft(this.state, this.registry, defender) !== 0 &&
         this.state.zones.shared.battlefield.some(
           (id) =>
             this.state.objects[id].controller === defender &&
@@ -31355,6 +31360,10 @@ export class Game {
         this.emit({ type: "additional-combat-queued", player: controller });
       },
       endTurnOrCombat: (what) => this.beginEndingTurnOrCombat(what),
+      limitBlockers: (players, most) => {
+        const combat = this.state.turn.combatPhases;
+        (this.state.combatBlockLimits ??= []).push(...players.map((player) => ({ player, most, combat })));
+      },
       additionalUpkeeps: (count) => {
         // "You get" a step on someone else's turn: none is added (rule
         // 500.10a). And "after this phase" is after the combat phase under
