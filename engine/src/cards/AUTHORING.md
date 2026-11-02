@@ -1782,7 +1782,16 @@ exiled with the permanent it became — `GameObject.exiledWith` its new stint, w
 text)` from `helpers.ts`; its "Solved — [ability]" is the ability gated on `{ kind: "solved" }` —
 a static's or activated ability's `condition`, a triggered ability's `whileCondition` — Case of
 the Crimson Pulse; solved lasts until the Case leaves the battlefield),
-`create-emblem { text, static?, triggered?, to? }` (`triggered`: the emblem's triggered
+`create-emblem { text, static?, moreStatics?, triggered?, to? }` (`static`: its static
+ability, written as a permanent's and read off the emblem with "you" its owner, rules 113.6p,
+114.4 — an anthem of any scope (Elspeth, Knight-Errant), `noMaxHandSize`/`maxHandSize` (Tamiyo,
+the Moon Sage), `prohibits`, `costModification`, a `would-deal-damage` `replacement` (Ajani
+Steadfast), `cantLoseGame` and its kin (Gideon of the Trials), `castFromGraveyard` (Jaya Ballard),
+`playFromGraveyard`, `alternativeCostForSpells` (its `fromHand`: Tamiyo, Field Researcher),
+`loyaltyAtInstantSpeed` for every planeswalker its owner controls (Teferi, Temporal Archmage),
+`grantsToGraveyard`, `untapLimit`; `moreStatics` the rest when it has several — Saheeli, Filigree
+Master. Any other field isn't read: `test/emblem-statics.test.ts` fails on it until a reader takes
+it; `triggered`: the emblem's triggered
 abilities, rule 114.4 — an emblem object in the command zone whose abilities trigger and
 resolve as a permanent's, "you" its owner and "this emblem deals 4 damage" damage from a
 colorless source with no types: Koth, Fire of Resistance, Teferi, Hero of Dominaria; `to`: a
@@ -6102,16 +6111,12 @@ Delete an entry in the same commit as the feature that retires it.
   like Command Tower): only the player's commanders' colours, never plain
   `"any-color"` — the two differ for a colourless commander, a player with
   none, and a spell stolen from outside the identity. `mana-provenance.test.ts`.
-- **An emblem's static can only be a `"creatures-you-control"` anthem.**
-  `create-emblem`'s `static?` is folded in by the layer system as an anthem;
-  every other static an emblem might carry — "you have no maximum hand size",
-  "you may cast spells from your hand without paying their mana costs", "you
-  may play lands … from your graveyard", a life floor, instant-speed loyalty
-  abilities, a granted mana ability — is read by its rule only off
-  battlefield permanents, so it's unauthorable (Wrenn and Seven, Tamiyo,
-  Field Researcher, Wrenn and Realmbreaker, Serra the Benevolent, Teferi,
-  Temporal Archmage, Liliana of the Dark Realms). Triggered emblems are
-  built (§6, `create-emblem`'s `triggered`).
+- **An emblem's static can't grant an activated ability or a spell a keyword,
+  or be a layer-4 effect or a life floor.** Those are read only off battlefield
+  permanents (Liliana of the Dark Realms, Mu Yanling, Arlinn Kord, Ral,
+  Crackling Wit, Serra the Benevolent). The statics an emblem does carry are
+  listed under `create-emblem` in §6, and `test/emblem-statics.test.ts` fails
+  on any other field.
 - **The auto-payer pays with a mana ability whose activation cost contains
   mana** — a "converter": `manaSources()` admits one whose own cost is generic,
   coloured or `{C}` pips, or two-colour hybrid (`ManaOption.genericCost` and

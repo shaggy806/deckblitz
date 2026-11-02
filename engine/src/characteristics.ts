@@ -71,6 +71,7 @@ import {
 } from "./state.js";
 import { changeSubtypes } from "./text-change.js";
 import type {
+  EmblemState,
   GameObject,
   GameState,
   LastKnownInfo,
@@ -1950,7 +1951,48 @@ function playerStaticHolds(
       }
     }
   }
+  for (const { source, ability } of emblemStatics(state)) {
+    if (
+      test(ability, source.controller) &&
+      (ability.condition === undefined || staticConditionMet(state, registry, source, ability.condition))
+    ) {
+      return true;
+    }
+  }
   return false;
+}
+
+const NO_EMBLEM_STATICS: readonly { readonly source: GameObject; readonly ability: StaticAbility }[] = [];
+
+/**
+ * The static abilities of the emblems in play, each with its emblem's object
+ * as its source — owned and controlled by the emblem's owner (rule 114.2), so
+ * "you" reads as it does on a permanent. An emblem's abilities work from the
+ * command zone (rules 113.6p, 114.4), and it has them for good: nothing can
+ * remove them. Gone with its owner (rule 800.4a). `owner` narrows to one
+ * player's. Only the readers that ask here hear of them: `test/emblem-statics
+ * .test.ts` pins which static fields those cover against the pool's emblems.
+ */
+export function emblemStatics(
+  state: GameState,
+  owner?: PlayerId,
+): readonly { readonly source: GameObject; readonly ability: StaticAbility }[] {
+  if (state.emblems.length === 0) return NO_EMBLEM_STATICS;
+  let out: { source: GameObject; ability: StaticAbility }[] | null = null;
+  for (const emblem of state.emblems) {
+    if (emblem.object === undefined || (owner !== undefined && emblem.owner !== owner)) continue;
+    if (state.players[emblem.owner]?.hasLost === true) continue;
+    const source = state.objects[emblem.object];
+    if (source === undefined) continue;
+    for (const ability of staticsOfEmblem(emblem)) (out ??= []).push({ source, ability });
+  }
+  return out ?? NO_EMBLEM_STATICS;
+}
+
+/** One emblem's static abilities, in the order its text gives them. */
+export function staticsOfEmblem(emblem: EmblemState): readonly StaticAbility[] {
+  if (emblem.static === null) return emblem.moreStatics ?? [];
+  return emblem.moreStatics === undefined ? [emblem.static] : [emblem.static, ...emblem.moreStatics];
 }
 
 /** Whether `player` can't lose the game right now (rule 104.3 — Platinum
@@ -4064,9 +4106,9 @@ function graveyardGrantReaches(
     }
   }
   // An emblem's works from the command zone (rule 113.6p).
-  for (const emblem of state.emblems) {
-    const grant = emblem.static?.grantsToGraveyard;
-    if (emblem.owner !== owner || (grant?.keywords?.length ?? 0) === 0) continue;
+  for (const { ability } of emblemStatics(state, owner)) {
+    const grant = ability.grantsToGraveyard;
+    if ((grant?.keywords?.length ?? 0) === 0) continue;
     if (matchesFilter(state, registry, card.id, grant!.filter, { you: owner })) return true;
   }
   return false;
@@ -4281,6 +4323,12 @@ function contributingStaticSources(
       if (fromGraveyard === undefined) continue;
       for (const ability of fromGraveyard) out.push({ source, ability });
     }
+  }
+  // An emblem's, from the command zone (rules 113.6p, 114.4): any scope a
+  // permanent's static has, read from its owner's side, after the
+  // battlefield's as its timestamp says.
+  for (const { source, ability } of emblemStatics(state)) {
+    if (contributesToCharacteristics(ability) && !hasLayerFourPart(ability)) out.push({ source, ability });
   }
   // Not while a granted static's lookup is in progress: what it found may
   // be the guard's conservative answer.
@@ -4505,11 +4553,12 @@ function collectStaticEffects(
     const effect = applied(source, ability, timestamp);
     if (effect !== null) out.push(effect);
   }
-  // Emblems (rule 114 — ROADMAP Phase 10): a player-owned anthem with no
-  // battlefield object. Only the `"creatures-you-control"` scope is supported.
+  // An anthem emblem in a state saved before an emblem's statics had an object
+  // (`EmblemState.object`) to read them from: `emblemStatics` has the rest.
   for (const emblem of state.emblems) {
     const ability = emblem.static;
     if (
+      emblem.object !== undefined ||
       ability === null ||
       ability.affects.scope !== "creatures-you-control" ||
       !contributesToCharacteristics(ability)

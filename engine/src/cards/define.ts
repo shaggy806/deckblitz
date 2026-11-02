@@ -2558,7 +2558,9 @@ export interface StaticAbility {
    * paying its mana cost" with `mana: "{0}"` (Demon of Fate's Design, Access
    * Maze): X is 0 and a spell's face counts its own (rules 107.3b, 119.4).
    * `oncePerTurn` + `yourTurnOnly` is "once during each of your turns", spent
-   * per permanent as it's cast; `fromHand` is "cast a spell from your hand".
+   * per permanent as it's cast; `fromHand` is "cast a spell from your hand"
+   * (and Tamiyo, Field Researcher's emblem's "you may cast spells from your
+   * hand without paying their mana costs", `mana: "{0}"`).
    */
   readonly alternativeCostForSpells?: {
     readonly mana: string;
@@ -3021,7 +3023,8 @@ export interface StaticAbility {
    * time you could cast an instant" (Teferi, Master of Time): its loyalty
    * abilities aren't held to sorcery timing (rule 606.3) — still one per
    * turn, each turn. `affects` is ignored — it is always the permanent
-   * carrying it. */
+   * carrying it, or on an emblem every planeswalker its owner controls
+   * (Teferi, Temporal Archmage). */
   readonly loyaltyAtInstantSpeed?: boolean;
   /**
    * "You may exert this creature as it attacks" (rule 701.43d — Glorybringer):

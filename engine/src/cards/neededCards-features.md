@@ -3516,3 +3516,23 @@ of Command and Opposition Agent (723.2, control for a limited duration: during a
 resolution, during a search, each with restrictions of its own), and a bot
 playing another's turn plays nothing it needn't, one step ahead on what it's
 told to decide.
+
+### Statics on an emblem — built 2026-11-01
+
+The need-keys Phase 2 family `effect:emblem-triggered-abilities`, its group
+`effect:emblem-static-abilities` + `effect:emblem-no-max-hand-size` +
+`effect:emblem-instant-speed-loyalty`, with `effect:emblem-play-from-graveyard`
+and `effect:emblem-free-cast-from-hand` riding along. An emblem with any ability
+now has its object, and its statics are read with that object as their source
+(`emblemStatics`, rules 113.6p, 114.4), so `create-emblem`'s `static` (and
+`moreStatics`) is written as a permanent's and "you" is its owner: the layer fold
+at any scope, hand size, `prohibits`, `costModification`, a `would-deal-damage`
+replacement, can't-lose and can't-win, `castFromGraveyard`, `playFromGraveyard`,
+`alternativeCostForSpells` (its new `fromHand`), every `activeStaticsOf` reader,
+and `loyaltyAtInstantSpeed` for all its owner's planeswalkers. `emblem-statics.test.ts`
+pins the fields read against the pool's emblems. Proving cards: Elspeth,
+Knight-Errant, Ajani Steadfast, Teferi, Temporal Archmage, Tamiyo, the Moon Sage,
+Gideon of the Trials, Jaya Ballard, Saheeli, Filigree Master. Not covered:
+`effect:emblem-grants-activated` and `effect:emblem-grants-to-spells` (a grant's
+activation is found by `staticIndex` on the definition, so those need a reference
+to the emblem) and `effect:static-damage-life-floor-emblem`.

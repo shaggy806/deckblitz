@@ -122,7 +122,9 @@ import {
   exemptFromLegendRule,
   hasAnyAbility,
   hasLostAbilities,
+  emblemStatics,
   grantedStatics,
+  staticsOfEmblem,
   pairedPartner,
   hasExileIfLeavesAbility,
   hasLayerFourPart,
@@ -8171,10 +8173,10 @@ export class Game {
         }
       }
     }
-    for (const emblem of this.state.emblems) {
-      const limit = emblem.static?.untapLimit;
-      if (limit !== undefined && reaches(limit.who, emblem.owner)) {
-        limits.push({ count: limit.count, filter: limit.filter, source: emblem.object });
+    for (const { source, ability } of emblemStatics(this.state)) {
+      const limit = ability.untapLimit;
+      if (limit !== undefined && reaches(limit.who, source.controller)) {
+        limits.push({ count: limit.count, filter: limit.filter, source: source.id });
       }
     }
     return { limits, types };
@@ -8439,12 +8441,12 @@ export class Game {
 
   private maxHandSizeOf(player: PlayerId): number {
     const changes: { readonly timestamp: number; readonly apply: (size: number) => number }[] = [];
-    for (const id of this.state.zones.shared.battlefield) {
+    for (const id of this.staticSourceIds()) {
       const source = this.state.objects[id];
       if (source === undefined || hasLostAbilities(this.state, this.registry,source) || this.state.players[source.controller]?.hasLost === true) {
         continue;
       }
-      for (const ability of this.registry.get(rulesTextName(source)).static) {
+      for (const ability of this.staticsOfSource(source)) {
         if (ability.noMaxHandSize === true && source.controller === player && this.staticActive(source, ability)) {
           changes.push({ timestamp: source.timestamp, apply: () => Infinity });
         }
@@ -11131,10 +11133,10 @@ export class Game {
     face: number,
     filterOf: (ability: StaticAbility) => CardFilter | undefined,
   ): boolean {
-    for (const id of this.state.zones.shared.battlefield) {
+    for (const id of this.staticSourceIds()) {
       const source = this.state.objects[id];
       if (source.controller !== player || hasLostAbilities(this.state, this.registry,source)) continue;
-      for (const ability of this.registry.get(rulesTextName(source)).static) {
+      for (const ability of this.staticsOfSource(source)) {
         const filter = filterOf(ability);
         if (filter === undefined || !this.staticActive(source, ability)) continue;
         if (
@@ -13100,12 +13102,12 @@ export class Game {
     costString: string | null,
   ): boolean {
     if (def.costPerExtraTarget !== null || def.additionalCost?.payLifePerTarget !== undefined) return true;
-    const anyPerTarget = [...this.state.zones.shared.battlefield, ...this.state.zones.shared.command].some(
+    const anyPerTarget = [...this.staticSourceIds(), ...this.state.zones.shared.command].some(
       (id) => {
         const source = this.state.objects[id];
         return (
           source !== undefined &&
-          this.registry.get(rulesTextName(source)).static.some((a) => a.costModification?.perTarget === true)
+          this.staticsOfSource(source).some((a) => a.costModification?.perTarget === true)
         );
       },
     );
@@ -13320,16 +13322,17 @@ export class Game {
     let reduceGeneric = 0;
     const colored: ColoredReduction[] = [];
     // The command zone joins the scan for Eminence's static form (The
-    // Ur-Dragon), and contributes only the abilities marked for it.
+    // Ur-Dragon), and contributes only the abilities marked for it. An
+    // emblem's works from there as it says (rule 113.6p).
     const sources = [
-      ...this.state.zones.shared.battlefield,
+      ...this.staticSourceIds(),
       ...this.state.zones.shared.command,
     ];
     for (const id of sources) {
       const source = this.state.objects[id];
       if (source === undefined || hasLostAbilities(this.state, this.registry,source)) continue;
-      const onlyEminence = source.zone === "command";
-      for (const ability of this.registry.get(rulesTextName(source)).static) {
+      const onlyEminence = source.zone === "command" && source.kind !== "emblem";
+      for (const ability of this.staticsOfSource(source)) {
         const mod = ability.costModification;
         if (mod === undefined) continue;
         if (onlyEminence && ability.fromCommandZone !== true) continue;
@@ -18469,9 +18472,6 @@ export class Game {
     )) {
       reach(ability, source.id);
     }
-    for (const emblem of this.state.emblems) {
-      if (emblem.owner === card.owner && emblem.static !== null) reach(emblem.static, emblem.object);
-    }
     return out;
   }
 
@@ -19147,8 +19147,13 @@ export class Game {
       // Loyalty ability (rule 606): sorcery-speed, once per permanent per turn,
       // and a "minus" ability needs that many loyalty counters to spend.
       // Unless the permanent says any time you could cast an instant, on any
-      // player's turn (Teferi, Master of Time) — priority is all it needs.
-      const timing = this.hasOwnStatic(source, (a) => a.loyaltyAtInstantSpeed === true)
+      // player's turn (Teferi, Master of Time), or an emblem of its
+      // controller's does for every planeswalker they control (Teferi,
+      // Temporal Archmage) — priority is all it needs. Still once a turn.
+      const timing = this.hasOwnStatic(source, (a) => a.loyaltyAtInstantSpeed === true) ||
+        emblemStatics(this.state, source.controller).some(
+          (e) => e.ability.loyaltyAtInstantSpeed === true && this.staticActive(e.source, e.ability),
+        )
         ? null
         : this.whyNotSorcerySpeed(player, `activate ${def.name}'s loyalty ability`);
       if (timing !== null) return timing;
@@ -31158,7 +31163,7 @@ export class Game {
           else if (kind === "poison" || kind === "experience" || kind === "rad") this.changePlayerCounters(player, kind, -n);
         }
       },
-      createEmblem: (text, staticAbility, triggered, owner) => {
+      createEmblem: (text, staticAbility, triggered, owner, moreStatics) => {
         const from = this.state.objects[source];
         this.createEmblem(
           owner ?? controller,
@@ -31167,6 +31172,7 @@ export class Game {
           from === undefined ? undefined : nameOf(from),
           triggered ?? [],
           controller,
+          moreStatics ?? [],
         );
       },
       epic: () => this.applyEpic(controller, source),
@@ -33092,7 +33098,7 @@ export class Game {
     const object = this.state.objects[id];
     if (object === undefined || hasLostAbilities(this.state, this.registry,object)) return [];
     const out: NonNullable<StaticAbility["castFromGraveyard"]>[] = [];
-    for (const ability of this.registry.get(rulesTextName(object)).static) {
+    for (const ability of this.staticsOfSource(object)) {
       if (ability.castFromGraveyard !== undefined) out.push(ability.castFromGraveyard);
     }
     return out;
@@ -33243,7 +33249,7 @@ export class Game {
       }
     });
     if (!mine) return out;
-    for (const id of this.state.zones.shared.battlefield) {
+    for (const id of this.staticSourceIds()) {
       const grantor = this.state.objects[id];
       if (grantor.controller !== player) continue;
       for (const permission of this.graveyardCastAbilities(id)) {
@@ -35665,10 +35671,10 @@ export class Game {
     player: PlayerId,
   ): { readonly source: GameObject; readonly prohibits: NonNullable<StaticAbility["prohibits"]> }[] {
     const out: { source: GameObject; prohibits: NonNullable<StaticAbility["prohibits"]> }[] = [];
-    for (const id of this.state.zones.shared.battlefield) {
+    for (const id of this.staticSourceIds()) {
       const source = this.state.objects[id];
       if (hasLostAbilities(this.state, this.registry,source) || this.state.players[source.controller]?.hasLost === true) continue;
-      for (const ability of this.registry.get(rulesTextName(source)).static) {
+      for (const ability of this.staticsOfSource(source)) {
         const prohibits = ability.prohibits;
         if (prohibits === undefined) continue;
         const binds =
@@ -41150,7 +41156,30 @@ export class Game {
         if (pick(ability) && this.staticActive(source, ability)) out.push({ source, ability });
       }
     }
+    for (const { source, ability } of emblemStatics(this.state, controller)) {
+      if (pick(ability) && this.staticActive(source, ability)) out.push({ source, ability });
+    }
     return out;
+  }
+
+  /** What a static scan of the battlefield walks when a rule reaches an
+   * emblem's statics too (rule 113.6p): the battlefield, then the emblems'
+   * objects. Read each one's statics through {@link staticsOfSource}. */
+  private staticSourceIds(): readonly ObjectId[] {
+    const battlefield = this.state.zones.shared.battlefield;
+    if (this.state.emblems.length === 0) return battlefield;
+    const emblems = this.state.emblems.flatMap((e) =>
+      e.object !== undefined && this.state.players[e.owner]?.hasLost !== true ? [e.object] : [],
+    );
+    return emblems.length === 0 ? battlefield : [...battlefield, ...emblems];
+  }
+
+  /** The static abilities an object of {@link staticSourceIds} has: a
+   * permanent's text, or an emblem's (`EmblemState`, not its definition). */
+  private staticsOfSource(source: GameObject): readonly StaticAbility[] {
+    if (source.kind !== "emblem") return this.registry.get(rulesTextName(source)).static;
+    const emblem = this.state.emblems.find((e) => e.object === source.id);
+    return emblem === undefined ? [] : staticsOfEmblem(emblem);
   }
 
   /**
@@ -41373,7 +41402,7 @@ export class Game {
       // Energy only while the caster has that much (601.2h, 107.14).
       if (grant.energy !== undefined && this.state.players[caster].energy < grant.energy) continue;
       // "Once during each of your turns" (Demon of Fate's Design), "from your
-      // hand" (Access Maze).
+      // hand" (Access Maze, Tamiyo, Field Researcher's emblem).
       if (grant.yourTurnOnly === true && this.activePlayer !== caster) continue;
       if (grant.oncePerTurn === true && source.altCostGrantOnTurn === this.state.turn.number) continue;
       if (grant.fromHand === true && card?.zone !== "hand") continue;
@@ -42920,10 +42949,10 @@ export class Game {
     applied: DamageApplied = NO_DAMAGE_APPLIED,
   ): DamageStep[] {
     const applying: { readonly by: GameObject; readonly r: DamageMultiplierReplacement; readonly key: string }[] = [];
-    for (const id of this.state.zones.shared.battlefield) {
+    for (const id of this.staticSourceIds()) {
       const object = this.state.objects[id];
       if (object === undefined || hasLostAbilities(this.state, this.registry,object)) continue;
-      this.registry.get(rulesTextName(object)).static.forEach((ability, index) => {
+      this.staticsOfSource(object).forEach((ability, index) => {
         const r = ability.replacement;
         if (r === undefined || r.event !== "would-deal-damage") return;
         const key = `${id}:${object.zoneChangeCount ?? 0}:${index}`;
@@ -44187,13 +44216,14 @@ export class Game {
 
   /**
    * Give `owner` an emblem (rule 114 — ROADMAP Phase 10), made by an effect
-   * `createdBy` controlled. One with triggered abilities is also an object
+   * `createdBy` controlled. One with abilities is also an object
    * (`EmblemState.object`): kind `"emblem"`, in the command zone but in no
    * zone list (it isn't a commander, can't be cast and never moves), owned
-   * and controlled by `owner` (rule 114.2), carrying its abilities on one
-   * permanent modifier the way a granted trigger rides one — so
-   * `detectTriggers` scans it with the battlefield, and its abilities
-   * trigger and resolve as any permanent's do (rule 114.4).
+   * and controlled by `owner` (rule 114.2). Its triggers ride one permanent
+   * modifier the way a granted trigger rides one — so `detectTriggers` scans
+   * it with the battlefield, and they trigger and resolve as any permanent's
+   * do (rule 114.4). Its statics are read off the emblem, with this object
+   * their source (`emblemStatics`).
    */
   private createEmblem(
     owner: PlayerId,
@@ -44202,21 +44232,24 @@ export class Game {
     sourceName: string | undefined,
     triggered: readonly TriggeredAbility[] = [],
     createdBy: PlayerId = owner,
+    moreStatics: readonly StaticAbility[] = [],
   ): void {
     let object: ObjectId | undefined;
-    if (triggered.length > 0) {
+    if (triggered.length > 0 || staticAbility !== null || moreStatics.length > 0) {
       object = this.makeCardObject(EMBLEM_CARD, owner, { zone: "command" });
       const emblem = this.state.objects[object];
       emblem.kind = "emblem";
       emblem.timestamp = this.freshTimestamp();
-      emblem.modifiers.push({
-        timestamp: emblem.timestamp,
-        power: 0,
-        toughness: 0,
-        keywords: [],
-        grantsTriggered: [...triggered],
-        untilEndOfTurn: false,
-      });
+      if (triggered.length > 0) {
+        emblem.modifiers.push({
+          timestamp: emblem.timestamp,
+          power: 0,
+          toughness: 0,
+          keywords: [],
+          grantsTriggered: [...triggered],
+          untilEndOfTurn: false,
+        });
+      }
     }
     this.state.timestampSeq += 1;
     this.state.emblems.push({
@@ -44226,9 +44259,11 @@ export class Game {
       ...(sourceName !== undefined ? { sourceName } : {}),
       timestamp: this.state.timestampSeq,
       static: staticAbility,
+      ...(moreStatics.length > 0 ? { moreStatics } : {}),
       ...(object !== undefined ? { object } : {}),
       ...(createdBy !== owner ? { createdBy } : {}),
     });
+    invalidateComputedCache();
     this.emit({ type: "emblem-created", player: owner, text });
   }
 

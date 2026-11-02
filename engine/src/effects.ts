@@ -7022,8 +7022,17 @@ export type EffectSpec =
     }
   | {
       /** The effect's controller gets an emblem (rule 114 — ROADMAP Phase 10).
-       * `static` is a `"creatures-you-control"` anthem, folded in by the layer
-       * system (the common planeswalker-ultimate emblem).
+       * `static` is its static ability, as a permanent's is written, working
+       * from the command zone with "you" its owner (rules 113.6p, 114.4): an
+       * anthem of any scope in the layer system (Elspeth, Knight-Errant's
+       * "Artifacts, creatures, enchantments, and lands you control have
+       * indestructible"), and "you have no maximum hand size", a cast or
+       * cost rule, a damage replacement, "you can't lose the game", a cast
+       * permission from the graveyard, `loyaltyAtInstantSpeed` for every
+       * planeswalker its owner controls (Teferi, Temporal Archmage). Only the
+       * fields `test/emblem-statics.test.ts` lists are read off an emblem.
+       * `moreStatics` are the others, when it has several (Saheeli, Filigree
+       * Master's).
        *
        * `triggered` are its triggered abilities (Ob Nixilis Reignited's
        * "Whenever a player draws a card, you lose 2 life"): an emblem
@@ -7038,6 +7047,7 @@ export type EffectSpec =
       readonly kind: "create-emblem";
       readonly text: string;
       readonly static?: StaticAbility;
+      readonly moreStatics?: readonly StaticAbility[];
       readonly triggered?: readonly TriggeredAbility[];
       readonly to?: number;
     }
@@ -10255,6 +10265,7 @@ export interface EffectApi {
     staticAbility: StaticAbility | undefined,
     triggered?: readonly TriggeredAbility[],
     owner?: PlayerId,
+    moreStatics?: readonly StaticAbility[],
   ): void;
   /** Epic as the spell resolves — see the `epic` {@link EffectSpec}. */
   epic(): void;
@@ -15627,12 +15638,12 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     case "create-emblem": {
       if (spec.to === undefined) {
-        ctx.createEmblem(spec.text, spec.static, spec.triggered);
+        ctx.createEmblem(spec.text, spec.static, spec.triggered, undefined, spec.moreStatics);
         return;
       }
       // "Target opponent gets an emblem": nobody, once that target is gone.
       const to = ctx.targets[spec.to];
-      if (to?.kind === "player") ctx.createEmblem(spec.text, spec.static, spec.triggered, to.player);
+      if (to?.kind === "player") ctx.createEmblem(spec.text, spec.static, spec.triggered, to.player, spec.moreStatics);
       return;
     }
     case "prevent-all-combat-damage":

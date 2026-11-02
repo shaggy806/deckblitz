@@ -2071,8 +2071,77 @@ function turnTallyEffect(s, ctx) {
   return null;
 }
 
+/**
+ * A quoted static on an emblem (rule 114): any line `parseStatic` reads, and
+ * those only an emblem says, for the whole of a player's game. `null` for
+ * anything else, a triggered ability among them, so the line stays open.
+ */
+function emblemStaticOf(quoted) {
+  const parsed = parseGrantedStatic(quoted);
+  if (parsed !== null) return parsed;
+  const text = quoted;
+  if (quoted === "You may activate loyalty abilities of planeswalkers you control on any player's turn any time you could cast an instant.") {
+    return { affects: { scope: "self" }, loyaltyAtInstantSpeed: true, text };
+  }
+  if (quoted === "Artifacts, creatures, enchantments, and lands you control have indestructible.") {
+    return {
+      affects: { scope: "filter", filter: { typesAnyOf: ["artifact", "creature", "enchantment", "land"], controlledBy: "you" } },
+      grantKeywords: ["indestructible"],
+      text,
+    };
+  }
+  if (quoted === "If a source would deal damage to you or a planeswalker you control, prevent all but 1 of that damage.") {
+    return {
+      affects: { scope: "self" },
+      replacement: { event: "would-deal-damage", to: "your-side", toFilter: { type: "planeswalker" }, preventAllBut: 1 },
+      text,
+    };
+  }
+  if (quoted === "As long as you control a Gideon planeswalker, you can't lose the game and your opponents can't win the game.") {
+    return {
+      affects: { scope: "self" },
+      condition: { kind: "controls", filter: { type: "planeswalker", subtype: "Gideon" }, atLeast: 1 },
+      cantLoseGame: true,
+      opponentsCantWinGame: true,
+      text,
+    };
+  }
+  if (quoted === "You may cast instant and sorcery spells from your graveyard. If a spell cast this way would be put into your graveyard, exile it instead.") {
+    return {
+      affects: { scope: "self" },
+      castFromGraveyard: { filter: { typesAnyOf: ["instant", "sorcery"] }, exileAfterwards: true },
+      text,
+    };
+  }
+  if (quoted === "You may cast spells from your hand without paying their mana costs.") {
+    return { affects: { scope: "self" }, alternativeCostForSpells: { mana: "{0}", fromHand: true }, text };
+  }
+  if (quoted === "Your opponents can't cast noncreature spells.") {
+    return { affects: { scope: "self" }, prohibits: { who: "opponents", spells: { notTypes: ["creature"] } }, text };
+  }
+  return null;
+}
+
+/** `You get an emblem with "…" [and "…"]`: every quoted ability a static. */
+function emblemOf(s) {
+  const whole = /^You get an emblem with "(.+?)\.?"(?: and "(.+?)\.?")?\.?$/.exec(s);
+  if (whole === null) return null;
+  const quoted = [whole[1], whole[2]].filter((q) => q !== undefined).map((q) => `${q}.`);
+  const statics = quoted.map(emblemStaticOf);
+  if (statics.some((a) => a === null)) return null;
+  const [first, ...more] = statics;
+  return {
+    kind: "create-emblem",
+    text: quoted.join(" "),
+    static: first,
+    ...(more.length > 0 ? { moreStatics: more } : {}),
+  };
+}
+
 export function parseSentence(sentence, ctx) {
   const s = sentence.replace(/\s+/g, " ").trim();
+  const emblem = emblemOf(s);
+  if (emblem !== null) return emblem;
   // "~ deals 2 damage to any target and doesn't untap during your next untap
   // step" (Reveka), "~ gains shroud until end of turn and doesn't untap …"
   // (Deep Spawn): the action, then the hold on the source.

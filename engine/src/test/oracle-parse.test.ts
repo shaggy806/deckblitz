@@ -30,6 +30,67 @@ const ctx = (overrides: Partial<Ctx> = {}): Ctx => {
   return { targets, target: (spec) => targets.push(spec) - 1, tokenFor: () => null, ...overrides };
 };
 
+describe("an emblem's static abilities", () => {
+  const self = { scope: "self" };
+  it.each([
+    ['You get an emblem with "You have no maximum hand size."', { affects: self, noMaxHandSize: true }],
+    [
+      "You get an emblem with \"You may activate loyalty abilities of planeswalkers you control on any player's turn any time you could cast an instant.\"",
+      { affects: self, loyaltyAtInstantSpeed: true },
+    ],
+    [
+      'You get an emblem with "Artifacts, creatures, enchantments, and lands you control have indestructible."',
+      {
+        affects: { scope: "filter", filter: { typesAnyOf: ["artifact", "creature", "enchantment", "land"], controlledBy: "you" } },
+        grantKeywords: ["indestructible"],
+      },
+    ],
+    [
+      'You get an emblem with "If a source would deal damage to you or a planeswalker you control, prevent all but 1 of that damage."',
+      {
+        affects: self,
+        replacement: { event: "would-deal-damage", to: "your-side", toFilter: { type: "planeswalker" }, preventAllBut: 1 },
+      },
+    ],
+    [
+      "You get an emblem with \"As long as you control a Gideon planeswalker, you can't lose the game and your opponents can't win the game.\"",
+      {
+        affects: self,
+        condition: { kind: "controls", filter: { type: "planeswalker", subtype: "Gideon" }, atLeast: 1 },
+        cantLoseGame: true,
+        opponentsCantWinGame: true,
+      },
+    ],
+    [
+      'You get an emblem with "You may cast instant and sorcery spells from your graveyard. If a spell cast this way would be put into your graveyard, exile it instead."',
+      { affects: self, castFromGraveyard: { filter: { typesAnyOf: ["instant", "sorcery"] }, exileAfterwards: true } },
+    ],
+    [
+      'You get an emblem with "You may cast spells from your hand without paying their mana costs."',
+      { affects: self, alternativeCostForSpells: { mana: "{0}", fromHand: true } },
+    ],
+    [
+      "You get an emblem with \"Your opponents can't cast noncreature spells.\"",
+      { affects: self, prohibits: { who: "opponents", spells: { notTypes: ["creature"] } } },
+    ],
+  ])("%s", (line, expected) => {
+    const parsed = parseSentence(line, ctx());
+    expect(parsed.kind).toBe("create-emblem");
+    expect(parsed.static).toMatchObject(expected);
+  });
+
+  it("a quoted triggered ability, or a line no reader takes, stays unread", () => {
+    expect(parseSentence('You get an emblem with "Whenever you cast a spell, draw a card."', ctx())).toBeNull();
+    expect(
+      parseSentence(
+        'You get an emblem with "You have no maximum hand size" and "Whenever a card is put into your graveyard from anywhere, you may return it to your hand."',
+        ctx(),
+      ),
+    ).toBeNull();
+    expect(parseSentence("You get an emblem with \"Islands you control have '{T}: Draw a card.'\"", ctx())).toBeNull();
+  });
+});
+
 describe("effect templates", () => {
   it.each([
     ["Draw two cards.", { kind: "draw", amount: 2 }],

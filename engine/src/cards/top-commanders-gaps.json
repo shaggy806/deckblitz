@@ -1053,7 +1053,12 @@
   "cost:attack-block-cost-self",
   "static:cant-attack-you-player-only",
   "effect:creatures-cant-attack-you-until-next-turn",
-  "static:cant-attack-same-player"
+  "static:cant-attack-same-player",
+  "effect:emblem-static-abilities",
+  "effect:emblem-no-max-hand-size",
+  "effect:emblem-instant-speed-loyalty",
+  "effect:emblem-play-from-graveyard",
+  "effect:emblem-free-cast-from-hand"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {
