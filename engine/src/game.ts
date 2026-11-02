@@ -561,6 +561,34 @@ const LOOP_REPEATS = 8;
 /** The replacement effects already applied to a damage event (rule 614.5):
  * static ones by key, shields by identity. Lives only for one `dealDamage`
  * call and the redirected events it deals. */
+/** One alternative cost a cast could announce (`Game.alternativeCostsOf`). */
+interface AlternativeCostOffer {
+  readonly mana: string;
+  readonly tapCreatures?: { readonly count: number; readonly filter: CardFilter };
+  readonly exileFromHand?: {
+    readonly filter: CardFilter;
+    readonly count?: number;
+    readonly text: string;
+    readonly manaValueX?: true;
+  };
+  readonly payLife?: number;
+  readonly sacrifice?: { readonly filter: CardFilter; readonly count?: number; readonly text: string };
+  readonly returnToHand?: { readonly filter: CardFilter; readonly count?: number; readonly text: string };
+  /** Energy paid with it — an `alternativeCostForSpells`' `energy`. */
+  readonly payEnergy?: number;
+  /** Life equal to the spell's mana value, paid with it (rule 119.4). */
+  readonly payLifeManaValue?: true;
+  /** Who is had to gain how much life for it (Invigorate). */
+  readonly gainLife?: { readonly players: readonly PlayerId[]; readonly amount: number };
+  /** The permanent whose once-a-turn grant a cast for it spends. */
+  readonly spendsGrantOf?: ObjectId;
+  /** Cast for it, the spell may be begun as though it had flash (601.3c). */
+  readonly flash?: true;
+  /** The keyword it is, when it's one (`"prowl"`: "if its prowl cost was
+   * paid"). */
+  readonly keyword?: NonNullable<CardDefinition["alternativeCost"]>["keyword"];
+}
+
 interface DamageApplied {
   readonly statics: readonly string[];
   readonly shields: readonly PreventionShield[];
@@ -2031,6 +2059,11 @@ export class Game {
         this.cycleCard(action.player, action.card);
         break;
       case "cast-spell":
+        // Which alternative cost it pays (rule 601.2b), for all that follows.
+        if (action.altCostIndex !== undefined && this.altCostPick !== action.altCostIndex) {
+          this.withAltCostPick(action.altCostIndex, () => this.dispatchOne(action));
+          break;
+        }
         // "Of an opponent's choice" (rules 601.2c, 700.2e): the opponent
         // named answers first; the cast comes back through here, its targets
         // and modes whole, once they have.
@@ -2266,6 +2299,9 @@ export class Game {
       case "cycle":
         return this.whyCannotCycle(action.player, action.card);
       case "cast-spell":
+        if (action.altCostIndex !== undefined && this.altCostPick !== action.altCostIndex) {
+          return this.withAltCostPick(action.altCostIndex, () => this.canDispatch(action));
+        }
         // Naming the opponent who chooses (rules 601.2c, 700.2e): legal when
         // the cast would be with a choice of theirs in place.
         if (action.otherChooser !== undefined) {
@@ -3585,6 +3621,8 @@ export class Game {
       overload: boolean;
       free: boolean;
       altCost?: boolean;
+      /** Which of `alternativeCostsOf` an `altCost` variant pays, past the first. */
+      altCostIndex?: number;
       costOption?: number;
       prototype?: boolean;
       offspring?: boolean;
@@ -3651,8 +3689,22 @@ export class Game {
     ) {
       variants.push({ kicked: false, overload: false, free: true });
     }
-    if (!warp && impulseFree !== "only" && this.alternativeCostOf(card, def, via, player) !== null) {
-      variants.push({ kicked: false, overload: false, free: false, altCost: true });
+    // An impulse's "pay life equal to its mana value rather than pay its mana
+    // cost" is the only way it allows (Inside Information): no paid variant.
+    if (via === "impulse" && this.state.objects[card]?.impulse?.payLifeManaValue === true) {
+      variants.length = 0;
+    }
+    if (!warp && impulseFree !== "only") {
+      // A variant per alternative cost (rules 118.9a, 601.2b), with kicker
+      // paid on top of it where the card has it (118.9d).
+      this.alternativeCostsOf(card, def, via, player).forEach((alternative, index) => {
+        if (alternative === null) return;
+        const named = index > 0 ? { altCostIndex: index } : {};
+        variants.push({ kicked: false, overload: false, free: false, altCost: true, ...named });
+        if (def.kicker !== null) {
+          variants.push(...kickedVariants(false).map((v) => ({ ...v, altCost: true, ...named })));
+        }
+      });
     }
     // A resolving effect's "you may cast it without paying its mana cost"
     // (a free `cast-now`) is the only way it offers the card: that
@@ -3739,10 +3791,14 @@ export class Game {
       }
       variants.push(...variants.filter((v) => !v.overload).flatMap((v) => sets.map((splice) => ({ ...v, splice }))));
     }
-    for (const { kicked: kickedFlag, kickCount, overload, free, altCost, costOption, prototype, offspring, evoke, harmonizeTap, splice } of variants) {
+    const pickBefore = this.altCostPick;
+    for (const { kicked: kickedFlag, kickCount, overload, free, altCost, altCostIndex, costOption, prototype, offspring, evoke, harmonizeTap, splice } of variants) {
+      // This variant's alternative cost, for everything that reads one below.
+      this.altCostPick = altCost === true ? altCostIndex : undefined;
+      const ownAltPaid = altCost === true && (altCostIndex ?? 0) === 0;
       // A multikicker variant passes its count where `kicked` goes.
       const kicked: boolean | number = kickCount ?? kickedFlag;
-      const kickKey = `${free}|${altCost}|${costOption}|${prototype}|${offspring}|${evoke}|${splice?.join(",")}`;
+      const kickKey = `${free}|${altCost}|${altCostIndex}|${costOption}|${prototype}|${offspring}|${evoke}|${splice?.join(",")}`;
       if (kickCount !== undefined && kickCount > 1 && def.kicker?.second === undefined && kickFailed.has(kickKey)) continue;
       const offeredBefore = out.length;
       // A prototyped variant is worked out as the prototyped spell it is: its
@@ -3938,7 +3994,7 @@ export class Game {
       // (the Shoals): X is announced as it's cast (rules 107.3a, 601.2b), so
       // the variant is offered once per mana value a matching card in hand
       // has — the card itself never one.
-      const pitchX = altCost === true && def.alternativeCost?.exileFromHand?.manaValueX === true;
+      const pitchX = ownAltPaid && def.alternativeCost?.exileFromHand?.manaValueX === true;
       if (pitchX) {
         const pitch = def.alternativeCost!.exileFromHand!;
         const values = new Set<number>();
@@ -4223,16 +4279,16 @@ export class Game {
         ...(evoke !== undefined && evoke === def.evoke?.cost && def.evoke.exileFromHand !== undefined
           ? { altCostText: `exile ${def.evoke.exileFromHand.text} from your hand` }
           : {}),
-        ...(altCost === true && def.alternativeCost?.exileFromHand !== undefined
+        ...(ownAltPaid && def.alternativeCost?.exileFromHand !== undefined
           ? {
               altCostText: [
                 ...(def.alternativeCost.payLife !== undefined ? [`pay ${def.alternativeCost.payLife} life`] : []),
                 `exile ${def.alternativeCost.exileFromHand.text} from your hand`,
               ].join(", "),
             }
-          : altCost === true && def.alternativeCost?.keyword !== undefined
+          : ownAltPaid && def.alternativeCost?.keyword !== undefined
             ? { altCostText: `${def.alternativeCost.keyword} ${def.alternativeCost.mana}` }
-            : altCost === true &&
+            : ownAltPaid &&
                 (def.alternativeCost?.sacrifice !== undefined ||
                   def.alternativeCost?.returnToHand !== undefined ||
                   def.alternativeCost?.discard !== undefined ||
@@ -4255,7 +4311,24 @@ export class Game {
                       `pay ${"{E}".repeat(alternative.payEnergy)}`,
                     ].join(", "),
                   }
-                : {}),
+                : altCost === true && alternative?.payLifeManaValue === true
+                  ? { altCostText: `pay ${this.castNowEnergyOf(card, face ?? 0)} life` }
+                  : altCost === true && alternative?.gainLife !== undefined
+                    ? {
+                        altCostText:
+                          def.alternativeCost?.othersGainLife?.who === "each-other-player"
+                            ? `each other player gains ${alternative.gainLife.amount} life`
+                            : `an opponent gains ${alternative.gainLife.amount} life`,
+                      }
+                    : ownAltPaid && def.alternativeCost?.payLife !== undefined
+                      ? { altCostText: `pay ${def.alternativeCost.payLife} life` }
+                      : {}),
+        // Which alternative cost this variant pays, past the first, and which
+        // opponent it has gain the life.
+        ...(altCost === true && altCostIndex !== undefined ? { altCostIndex } : {}),
+        ...(altCost === true && alternative?.gainLife !== undefined && def.alternativeCost?.othersGainLife?.who === "an-opponent"
+          ? { altCostGainer: alternative.gainLife.players[0] }
+          : {}),
         // Jump-start rides the flashback cast: label it as printed.
         ...(via === "flashback" && this.flashbackOf(card, graveyardGrant)?.keyword === "jump-start"
           ? { altCostText: "jump-start, discarding a card" }
@@ -4534,6 +4607,7 @@ export class Game {
         if (kickCount !== undefined && out.length === offeredBefore) kickFailed.add(kickKey);
       }
     }
+    this.altCostPick = pickBefore;
     return out;
   }
 
@@ -13822,7 +13896,9 @@ export class Game {
     // is paid separately in `castSpell`.
     if (altCost) {
       const alternative = this.alternativeCostOf(cardId, def, via, caster ?? this.state.objects[cardId]?.owner);
-      if (alternative !== null) return alternative.mana + (optionMana ?? "") + escalate;
+      // Kicker is an additional cost, on top of it (118.9d).
+      const kickedOn = !kicked || def.kicker === null ? "" : kickerCostPaid(def.kicker, kicked === true ? 1 : kicked);
+      if (alternative !== null) return alternative.mana + (optionMana ?? "") + kickedOn + escalate;
     }
     // A free-cast permission — conditional (Fierce Guardianship), a static's
     // (Omniscience), an impulse's, or a resolving effect's "without paying
@@ -14487,6 +14563,10 @@ export class Game {
     if (altCost) {
       const alt = this.alternativeCostOf(cardId, def, via, player);
       if (alt === null) return `${def.name} has no alternative cost`;
+      // "Pay life equal to its mana value": this face's, X 0 (rules 107.3b, 119.4).
+      if (alt.payLifeManaValue === true && !this.canPayLife(player, this.castNowEnergyOf(cardId, face ?? 0))) {
+        return `${player} doesn't have the life to cast ${def.name}`;
+      }
       if (
         alt.tapCreatures !== undefined &&
         this.tapCapacity(
@@ -14683,6 +14763,9 @@ export class Game {
     const impulseFree = via === "impulse" ? this.impulseFreeCast(cardId) : null;
     if (impulseFree === "only" && !free) {
       return `${def.name} may be cast from exile only without paying its mana cost`;
+    }
+    if (via === "impulse" && this.state.objects[cardId]?.impulse?.payLifeManaValue === true && !altCost) {
+      return `${def.name} may be cast from exile only by paying life equal to its mana value`;
     }
     if (
       free &&
@@ -15215,6 +15298,10 @@ export class Game {
     }
     this.withAssistChoice(choice, () => this.dispatchOne(cast));
   }
+
+  /** Which of `alternativeCostsOf` the cast being judged or paid for is using,
+   * past the first (`Action.altCostIndex`), only for as long as that takes. */
+  private altCostPick: number | undefined;
 
   // --- another player's choices as it's cast (rules 601.2c, 700.2e) -------
 
@@ -16401,13 +16488,18 @@ export class Game {
     const flashback = via === "flashback" ? this.flashbackOf(cardId, graveyardGrant) : null;
     // Prowl, printed or granted (Hunting Velociraptor), for "if its prowl
     // cost was paid".
-    const prowled = altCost && this.alternativeCostOf(cardId, def, via, player)?.keyword === "prowl";
+    // Read now: a grant "from your hand" no longer reaches it on the stack.
+    const alternativeCost = altCost ? this.alternativeCostOf(cardId, def, via, player) : null;
+    const prowled = alternativeCost?.keyword === "prowl";
     const alternativeTaps = this.spellTapCost(cardId, def, via, player, altCost, kicked !== false && kicked !== 0);
+    // "Pay life equal to its mana value" (Demon of Fate's Design, Inside
+    // Information): the face cast, X 0 (rule 107.3b), paid with the rest below.
+    const alternativeLife = alternativeCost?.payLifeManaValue === true ? this.castNowEnergyOf(cardId, face) : 0;
     // A granted alternative cost's energy (Nissa, Worldsoul Speaker), or a
     // resolving effect's "by paying an amount of {E} equal to its mana
     // value" (Amped Raptor), paid with the rest of the cost below.
     const alternativeEnergy = altCost
-      ? (this.alternativeCostOf(cardId, def, via, player)?.payEnergy ?? 0)
+      ? (alternativeCost?.payEnergy ?? 0)
       : via === "effect" && this.castNowOffer(player, cardId)?.byPayingEnergy === true
         ? this.castNowEnergyOf(cardId, face)
         : 0;
@@ -16433,7 +16525,7 @@ export class Game {
       (via === "flashback" && this.flashbackOf(cardId, graveyardGrant)?.sacrifice?.count === "x") ||
       def.additionalCost?.discard === "x" ||
       // The Shoals' "exile a … card with mana value X" (rule 107.3a).
-      (altCost && def.alternativeCost?.exileFromHand?.manaValueX === true);
+      (altCost && this.ownAltCost(def)?.exileFromHand?.manaValueX === true);
     const chosenX = hasX ? Math.max(0, Math.floor(xValue)) : 0;
     // "Sacrifice X creatures", "Flashback—Sacrifice three creatures": chosen
     // once the spell is on the stack, below.
@@ -16753,8 +16845,13 @@ export class Game {
     }
     if (evoke !== null) object.evokePaid = true;
     if (flashSacrificeOwed) object.flashSacrificeOwed = true;
-    if (altCost && def.alternativeCost?.keyword === "spectacle") object.spectaclePaid = true;
-    if (altCost && def.alternativeCost?.keyword === "surge") object.surgePaid = true;
+    if (alternativeCost?.keyword === "spectacle") object.spectaclePaid = true;
+    if (alternativeCost?.keyword === "surge") object.surgePaid = true;
+    // "Once during each of your turns" is spent as it's cast.
+    if (alternativeCost?.spendsGrantOf !== undefined) {
+      const granter = this.state.objects[alternativeCost.spendsGrantOf];
+      if (granter !== undefined) granter.altCostGrantOnTurn = this.state.turn.number;
+    }
     if (prowled) object.prowlPaid = true;
     if (overload) object.overloaded = true;
     // Cast bestowed: an Aura spell with enchant creature from here on (rule
@@ -16915,8 +17012,16 @@ export class Game {
     }
     // A pitch spell's "pay 1 life" (Force of Will), part of its alternative
     // cost, paid the same way.
-    if (altCost && def.alternativeCost?.payLife !== undefined) {
-      this.changeLife(player, -def.alternativeCost.payLife);
+    if (altCost && this.ownAltCost(def)?.payLife !== undefined) {
+      this.changeLife(player, -this.ownAltCost(def)!.payLife!);
+    }
+    // "Pay life equal to its mana value rather than" (rule 119.4; 0 is always
+    // payable, 119.4b).
+    if (alternativeLife > 0) this.changeLife(player, -alternativeLife);
+    // "Have an opponent gain 3 life": the gain is the cost, and whatever
+    // replaces it applies (rule 614.1; Invigorate's rulings).
+    for (const gainer of alternativeCost?.gainLife?.players ?? []) {
+      this.changeLife(gainer, alternativeCost!.gainLife!.amount);
     }
     // "Pay eight {E} rather than pay the mana cost" (rule 107.14).
     if (alternativeEnergy > 0) this.changeEnergy(player, -alternativeEnergy);
@@ -16970,7 +17075,7 @@ export class Game {
     // "Discard a Plains card rather than pay" (Abolish), "an Island card and
     // another card" (Foil): chosen as the cost is paid (601.2h), the
     // filtered card first, then the others from what's left.
-    const altDiscard = altCost ? def.alternativeCost?.discard : undefined;
+    const altDiscard = altCost ? this.ownAltCost(def)?.discard : undefined;
     if (altDiscard !== undefined) {
       this.payCostDiscard(cardId, cardId, () => {
         this.discardByEffect({ kind: "player", player }, 1, false, altDiscard.filter);
@@ -16980,7 +17085,7 @@ export class Game {
     }
     // "Reveal your hand rather than pay" (Land Grant — rule 701.20a): every
     // player sees it, the spell already on the stack.
-    if (altCost && def.alternativeCost?.revealHand === true) {
+    if (altCost && this.ownAltCost(def)?.revealHand === true) {
       this.revealCards(player, [...this.state.zones.perPlayer[player].hand], "hand");
     }
     // Retrace's land card (rule 702.81a), chosen as the cost is paid.
@@ -17043,8 +17148,8 @@ export class Game {
     // cost's (Force of Will) or an evoke's (Solitude) — is chosen the same
     // way, from the hand alone (`BeholdSpec.fromHand`).
     const pitchExile =
-      altCost && def.alternativeCost?.exileFromHand !== undefined
-        ? def.alternativeCost.exileFromHand
+      altCost && this.ownAltCost(def)?.exileFromHand !== undefined
+        ? this.ownAltCost(def)!.exileFromHand!
         : evoke !== null && def.evoke?.exileFromHand !== undefined && (evoke === "" || evoke === def.evoke.cost)
           ? def.evoke.exileFromHand
           : undefined;
@@ -17070,7 +17175,7 @@ export class Game {
     // A kicker's "return a creature you control to its owner's hand"
     // (Arctic Merfolk — rule 702.33a) is paid the same way.
     const kickReturn = kicked !== false && kicked !== 0 ? def.kicker?.also?.returnToHand : undefined;
-    const altReturn = altCost ? def.alternativeCost?.returnToHand : kickReturn;
+    const altReturn = altCost ? this.ownAltCost(def)?.returnToHand : kickReturn;
     if (altReturn !== undefined) {
       this.payReturnToHandCost(player, cardId, { count: altReturn.count ?? 1, filter: altReturn.filter }, cardId);
       const awaiting = this.state.awaiting;
@@ -17736,7 +17841,7 @@ export class Game {
     const parts: SacrificeCostPart[] = [];
     // "You may sacrifice a Mountain rather than pay this spell's mana cost"
     // (Crash): chosen as it's paid, like the rest.
-    const altSacrifice = altCost ? def.alternativeCost?.sacrifice : undefined;
+    const altSacrifice = altCost ? this.ownAltCost(def)?.sacrifice : undefined;
     if (altSacrifice !== undefined) parts.push({ filter: altSacrifice.filter, count: altSacrifice.count ?? 1 });
     const extra = def.additionalCost;
     if (extra?.sacrifice !== undefined && extra.sacrificeCount !== undefined) {
@@ -32534,6 +32639,7 @@ export class Game {
       readonly gate?: StaticCondition;
       readonly filter?: CardFilter;
       readonly free?: { readonly filter?: CardFilter; readonly only?: boolean };
+      readonly payLifeManaValue?: true;
       readonly whileSource?: boolean;
       readonly oncePerTurn?: boolean;
       readonly faceDown?: boolean;
@@ -32575,6 +32681,7 @@ export class Game {
       ...(castOnly ? { castOnly: true } : {}),
       ...(opts.filter !== undefined ? { filter: opts.filter } : {}),
       ...(opts.free !== undefined ? { free: opts.free } : {}),
+      ...(opts.payLifeManaValue === true ? { payLifeManaValue: true as const } : {}),
       ...(opts.yourTurnOnly ? { yourTurnOnly: true } : {}),
       ...(opts.gate !== undefined ? { gate: opts.gate } : {}),
       ...(linked !== undefined ? { source: linked } : {}),
@@ -35710,7 +35817,10 @@ export class Game {
   private playerCantGainLife(player: PlayerId): boolean {
     if (playerLifeCantChange(this.state, player)) return true;
     return this.playerEventReplacements(player).some(
-      (r) => r.event === "would-gain-life" && (r as LifeGainReplacement).prevent === true,
+      (r) =>
+        r.event === "would-gain-life" &&
+        (r as LifeGainReplacement).prevent === true &&
+        (r as LifeGainReplacement).gainsNoLifeInstead !== true,
     );
   }
 
@@ -40948,97 +41058,164 @@ export class Game {
     def: CardDefinition,
     via: CastVia | undefined,
     caster: PlayerId | undefined,
-  ): {
-    readonly mana: string;
-    readonly tapCreatures?: { readonly count: number; readonly filter: CardFilter };
-    readonly exileFromHand?: {
-      readonly filter: CardFilter;
-      readonly count?: number;
-      readonly text: string;
-      readonly manaValueX?: true;
-    };
-    readonly payLife?: number;
-    readonly sacrifice?: { readonly filter: CardFilter; readonly count?: number; readonly text: string };
-    readonly returnToHand?: { readonly filter: CardFilter; readonly count?: number; readonly text: string };
-    /** Energy paid with it — an `alternativeCostForSpells`' `energy`. */
-    readonly payEnergy?: number;
-    /** Cast for it, the spell may be begun as though it had flash (601.3c). */
-    readonly flash?: true;
-    /** The keyword it is, when it's one (`"prowl"`: "if its prowl cost was
-     * paid"). */
-    readonly keyword?: NonNullable<CardDefinition["alternativeCost"]>["keyword"];
-  } | null {
-    // Cast for airbend's {2}, an alternative cost already (118.9a).
-    if (via === "airbend") return null;
-    if (def.alternativeCost !== null) {
-      // The card's own: only while its condition holds ("If it's not your
-      // turn") and only when its life, its exiles, its sacrifices and its
-      // returns can be paid (601.2h).
-      const own = def.alternativeCost;
-      if (own.condition !== undefined || own.payLife !== undefined || own.exileFromHand !== undefined ||
-        own.sacrifice !== undefined || own.returnToHand !== undefined || own.discard !== undefined) {
-        if (caster === undefined) return null;
-        const card = this.state.objects[cardId];
-        if (own.condition !== undefined &&
-          (card === undefined || !staticConditionMet(this.state, this.registry, card, own.condition))) {
-          return null;
-        }
-        if (own.payLife !== undefined && !this.canPayLife(caster, own.payLife)) return null;
-        if (own.exileFromHand !== undefined && !this.canBehold(caster, Game.pitchSpec(own.exileFromHand), cardId)) {
-          return null;
-        }
-        if (own.sacrifice !== undefined &&
-          permanentCount(this.state, this.costSacrificeEligible(caster, own.sacrifice.filter, undefined)) <
-            (own.sacrifice.count ?? 1)) {
-          return null;
-        }
-        if (own.returnToHand !== undefined &&
-          permanentCount(this.state, this.battlefieldMatching(caster, { ...own.returnToHand.filter, controlledBy: "you" })) <
-            (own.returnToHand.count ?? 1)) {
-          return null;
-        }
-        // "Discard a Plains card" (Abolish), "an Island card and another
-        // card" (Foil): in hand besides the spell itself (601.2h).
-        if (own.discard !== undefined &&
-          (this.discardCandidates(caster, own.discard.filter, cardId).length === 0 ||
-            this.discardCandidates(caster, undefined, cardId).length < 1 + (own.discard.others ?? 0))) {
-          return null;
-        }
-      }
-      return own;
+  ): AlternativeCostOffer | null {
+    return this.alternativeCostsOf(cardId, def, via, caster)[this.altCostPick ?? 0] ?? null;
+  }
+
+  /** The card's own alternative cost, when that's the one the cast being
+   * judged pays (`altCostPick`): it comes first in `alternativeCostsOf`, so
+   * any later entry is a granted one (or another opponent to gain the life). */
+  private ownAltCost(def: CardDefinition): CardDefinition["alternativeCost"] {
+    return (this.altCostPick ?? 0) === 0 ? def.alternativeCost : null;
+  }
+
+  /** Run `fn` judging or paying the `index`th of a card's alternative costs. */
+  private withAltCostPick<T>(index: number | undefined, fn: () => T): T {
+    const before = this.altCostPick;
+    this.altCostPick = index;
+    try {
+      return fn();
+    } finally {
+      this.altCostPick = before;
     }
+  }
+
+  /**
+   * Every alternative cost `caster` could announce for this cast (rules 118.9a,
+   * 601.2b: they choose which, and only one applies), the variant's
+   * `altCostIndex` naming one; an entry is `null` while it can't be paid, so
+   * the others keep their places. The card's own come first, then what's
+   * granted.
+   */
+  private alternativeCostsOf(
+    cardId: ObjectId,
+    def: CardDefinition,
+    via: CastVia | undefined,
+    caster: PlayerId | undefined,
+  ): readonly (AlternativeCostOffer | null)[] {
+    // Cast for airbend's {2}, an alternative cost already (118.9a).
+    if (via === "airbend") return [];
+    const card = this.state.objects[cardId];
+    // An impulse's "pay life equal to its mana value rather than pay its mana
+    // cost" (Inside Information): the only way that permission allows, so no
+    // other alternative cost goes with it (118.9a, the rulings).
+    if (via === "impulse" && card?.impulse?.player === caster && card?.impulse?.payLifeManaValue === true) {
+      return [{ mana: "{0}", payLifeManaValue: true }];
+    }
+    const out: (AlternativeCostOffer | null)[] =
+      def.alternativeCost !== null ? [...this.ownAlternativeCosts(cardId, def.alternativeCost, caster)] : [];
     // Flashback, escape, foretell, disturb, a suspend or cascade cast are
     // alternative costs (or no cost) already: only one applies (118.9a).
     if (via !== undefined && via !== "impulse" && via !== "graveyard-permission" && via !== "adventure" &&
       via !== "prepared") {
-      return null;
+      return out;
     }
-    if (caster === undefined) return null;
+    if (caster === undefined) return out;
     // Granted prowl (rule 702.76a — Hunting Velociraptor's "Dinosaur spells
     // you cast have prowl {2}{R}"): while a source the caster controlled
     // with any of the card's creature types dealt combat damage to a player
     // this turn, as a printed prowl's condition reads.
     const prowl = this.grantedCastCost(caster, cardId, "prowl");
-    const card = this.state.objects[cardId];
     if (prowl !== null && card !== undefined && staticConditionMet(this.state, this.registry, card, { kind: "prowl" })) {
-      return { mana: prowl, keyword: "prowl" };
+      out.push({ mana: prowl, keyword: "prowl" });
     }
-    for (const { ability } of this.activeStaticsOf(caster, (a) => a.alternativeCostForSpells !== undefined)) {
+    // One entry for each different grant: two Demons of Fate's Design offer
+    // one way to pay, spending whichever hasn't been used this turn.
+    const seen = new Set<StaticAbility>();
+    for (const { source, ability } of this.activeStaticsOf(caster, (a) => a.alternativeCostForSpells !== undefined)) {
       const grant = ability.alternativeCostForSpells!;
+      if (seen.has(ability)) continue;
       // Energy only while the caster has that much (601.2h, 107.14).
       if (grant.energy !== undefined && this.state.players[caster].energy < grant.energy) continue;
+      // "Once during each of your turns" (Demon of Fate's Design), "from your
+      // hand" (Access Maze).
+      if (grant.yourTurnOnly === true && this.activePlayer !== caster) continue;
+      if (grant.oncePerTurn === true && source.altCostGrantOnTurn === this.state.turn.number) continue;
+      if (grant.fromHand === true && card?.zone !== "hand") continue;
       if (
         grant.filter === undefined ||
         matchesFilter(this.state, this.registry, cardId, grant.filter, { you: caster })
       ) {
-        return {
+        seen.add(ability);
+        out.push({
           mana: grant.mana,
           ...(grant.energy !== undefined ? { payEnergy: grant.energy } : {}),
           ...(grant.flash === true ? { flash: true as const } : {}),
-        };
+          ...(grant.payLifeManaValue === true ? { payLifeManaValue: true as const } : {}),
+          ...(grant.oncePerTurn === true ? { spendsGrantOf: source.id } : {}),
+        });
       }
     }
-    return null;
+    // "Rather than pay the mana cost of the next spell you cast this turn,
+    // you may pay life equal to that spell's mana value" (Marshland
+    // Bloodcaster's `grant-spells-this-turn`).
+    const from = card?.zone === "stack" ? (card.castFrom ?? undefined) : card?.zone;
+    if ((this.state.spellGrantsThisTurn ?? []).some((g) =>
+      g.payLifeManaValue === true && turnCastGrantReaches(this.state, this.registry, g, cardId, caster, from))) {
+      out.push({ mana: "{0}", payLifeManaValue: true });
+    }
+    return out;
+  }
+
+  /** The card's own alternative cost: only while its condition holds ("If
+   * it's not your turn") and only when its life, its exiles, its sacrifices
+   * and its returns can be paid (601.2h) — one entry for each opponent it
+   * could have gain the life, `null` for one who can't. */
+  private ownAlternativeCosts(
+    cardId: ObjectId,
+    own: NonNullable<CardDefinition["alternativeCost"]>,
+    caster: PlayerId | undefined,
+  ): readonly (AlternativeCostOffer | null)[] {
+    if (own.condition !== undefined || own.payLife !== undefined || own.exileFromHand !== undefined ||
+      own.sacrifice !== undefined || own.returnToHand !== undefined || own.discard !== undefined ||
+      own.othersGainLife !== undefined) {
+      if (caster === undefined) return [null];
+      const card = this.state.objects[cardId];
+      if (own.condition !== undefined &&
+        (card === undefined || !staticConditionMet(this.state, this.registry, card, own.condition))) {
+        return [null];
+      }
+      if (own.payLife !== undefined && !this.canPayLife(caster, own.payLife)) return [null];
+      if (own.exileFromHand !== undefined && !this.canBehold(caster, Game.pitchSpec(own.exileFromHand), cardId)) {
+        return [null];
+      }
+      if (own.sacrifice !== undefined &&
+        permanentCount(this.state, this.costSacrificeEligible(caster, own.sacrifice.filter, undefined)) <
+          (own.sacrifice.count ?? 1)) {
+        return [null];
+      }
+      if (own.returnToHand !== undefined &&
+        permanentCount(this.state, this.battlefieldMatching(caster, { ...own.returnToHand.filter, controlledBy: "you" })) <
+          (own.returnToHand.count ?? 1)) {
+        return [null];
+      }
+      // "Discard a Plains card" (Abolish), "an Island card and another
+      // card" (Foil): in hand besides the spell itself (601.2h).
+      if (own.discard !== undefined &&
+        (this.discardCandidates(caster, own.discard.filter, cardId).length === 0 ||
+          this.discardCandidates(caster, undefined, cardId).length < 1 + (own.discard.others ?? 0))) {
+        return [null];
+      }
+      // "You may have an opponent gain 3 life" (Invigorate): the caster names
+      // which, a variant each (601.2b); "each other player gain 6 life"
+      // (Reverent Silence): all of them. A player who can't gain life can't
+      // be had to, though one whose gain is replaced with nothing can (rule
+      // 118.3, Invigorate's rulings).
+      const gain = own.othersGainLife;
+      if (gain !== undefined) {
+        const others = this.otherChoosers(caster);
+        if (others.length === 0) return [null];
+        if (gain.who === "each-other-player") {
+          return others.some((p) => this.playerCantGainLife(p))
+            ? [null]
+            : [{ ...own, gainLife: { players: others, amount: gain.amount } }];
+        }
+        return others.map((p) =>
+          this.playerCantGainLife(p) ? null : { ...own, gainLife: { players: [p], amount: gain.amount } },
+        );
+      }
+    }
+    return [own];
   }
 
   /** Recompute every battlefield permanent's controller from its layer-2
@@ -46457,6 +46634,7 @@ export class Game {
     // after the move that exiles the card.
     delete object.impulse;
     delete object.impulseCastOnTurn;
+    delete object.altCostGrantOnTurn;
     delete object.attackedThisTurn;
     delete object.attackedPlayersThisTurn;
     delete object.lastAttack;

@@ -1552,6 +1552,7 @@ function castExtras(
   overload?: boolean;
   free?: boolean;
   altCost?: boolean;
+  altCostIndex?: number;
   costOption?: number;
   splice?: ObjectId[];
   sacrifice?: ObjectId;
@@ -1577,6 +1578,7 @@ function castExtras(
     // turns it into a cast at the printed cost, which the variant was never
     // offered as affordable at.
     ...(legal.altCost === true ? { altCost: true } : {}),
+    ...(legal.altCostIndex !== undefined ? { altCostIndex: legal.altCostIndex } : {}),
     // A chosen branch of a choice of additional costs. Echoed back like the
     // flags above, and for the same reason: each branch is its own variant,
     // and a cast that names none is refused outright.

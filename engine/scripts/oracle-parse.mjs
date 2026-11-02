@@ -2187,6 +2187,11 @@ export function parseSentence(sentence, ctx) {
     const r = revealedCardEffectOf(s, ctx);
     if (r !== undefined) return r;
   }
+  // "Rather than pay the mana cost of the next spell you cast this turn, you
+  // may pay life equal to that spell's mana value" (Marshland Bloodcaster).
+  if (/^rather than pay the mana cost of the next spell you cast this turn, you may pay life equal to that spell's mana value\.$/i.test(s)) {
+    return { kind: "grant-spells-this-turn", next: true, payLifeManaValue: true };
+  }
   // A cost reduction on the next matching spell (`grant-spells-this-turn`'s
   // `reduceGeneric`), ahead of the guard for its X: "the next spell you cast
   // this turn costs {1} less to cast" (Hardened Berserker), "… {X} less to
@@ -7135,6 +7140,27 @@ export function parseFace(face, ctx = {}) {
       };
       continue;
     }
+    // Paid in a life change, under a land you control (rule 118.9): "If you
+    // control a Swamp, you may pay 4 life rather than pay this spell's mana
+    // cost" (Snuff Out), "If you control a Forest, rather than pay this spell's
+    // mana cost, you may have an opponent gain 3 life" (Invigorate), "… each
+    // other player gain 6 life" (Reverent Silence).
+    if ((m = /^If you control an? (Plains|Island|Swamp|Mountain|Forest), you may pay (\d+) life rather than pay (?:this spell's|~'s) mana cost\.$/.exec(line))) {
+      out.alternativeCost = {
+        mana: "{0}",
+        payLife: Number(m[2]),
+        condition: { kind: "controls", filter: { subtype: m[1] }, atLeast: 1 },
+      };
+      continue;
+    }
+    if ((m = /^If you control an? (Plains|Island|Swamp|Mountain|Forest), rather than pay (?:this spell's|~'s) mana cost, you may have (an opponent|each other player) gain (\d+) life\.$/.exec(line))) {
+      out.alternativeCost = {
+        mana: "{0}",
+        othersGainLife: { amount: Number(m[3]), who: m[2] === "an opponent" ? "an-opponent" : "each-other-player" },
+        condition: { kind: "controls", filter: { subtype: m[1] }, atLeast: 1 },
+      };
+      continue;
+    }
     // Mercadian Masques' free spells (rule 118.9): "you may sacrifice a
     // Mountain rather than pay this spell's mana cost" (Crash, Fireblast's
     // two), "you may return three Islands you control to their owner's hand
@@ -9580,6 +9606,26 @@ function attackingCreatures(subject) {
 
 function parseStatic(line, text) {
   let m;
+  // Life equal to the mana value for a spell, once a turn (rule 118.9):
+  // "Once during each of your turns, you may cast an enchantment spell by
+  // paying life equal to its mana value rather than paying its mana cost"
+  // (Demon of Fate's Design), "… a spell from your hand …" (Access Maze).
+  if ((m = /^Once during each of your turns, you may cast (?:an? (.+?) spell|a spell from your hand) by paying life equal to its mana value rather than paying its mana cost\.$/.exec(line))) {
+    const filter = m[1] === undefined ? {} : parseTypePhrase(m[1]);
+    if (filter !== null && (m[1] === undefined || Object.keys(filter).length > 0)) {
+      return {
+        affects: { scope: "self" },
+        alternativeCostForSpells: {
+          mana: "{0}",
+          ...(m[1] === undefined ? { fromHand: true } : { filter }),
+          payLifeManaValue: true,
+          oncePerTurn: true,
+          yourTurnOnly: true,
+        },
+        text,
+      };
+    }
+  }
   // A cost keyed to a spell's target (`targetedBySpellsCost`, rule 601.2f):
   // "Spells your opponents cast that target this creature cost {2} more to
   // cast" (Boreal Elemental), "… an additional 3 life" (Terror of the Peaks),

@@ -423,6 +423,12 @@ export interface LifeGainReplacement {
    * Reflection) — applied after every `plus`, the order that gains most. */
   readonly multiplier?: number;
   readonly prevent?: boolean;
+  /** With `prevent`, the wording is a replacement — "if a player would gain
+   * life, that player gains no life instead" (Sulfuric Vortex) — and not "can't
+   * gain life": the gain is still attempted, so an exchange of life totals
+   * happens (rule 119.7) and a cost of having them gain life can be paid
+   * (Invigorate's rulings). */
+  readonly gainsNoLifeInstead?: true;
   /** "…that player loses that much life instead" (Tainted Remedy). The
    * player gaining orders it among the others (rule 616.1) and takes the
    * order best for them: a `prevent` first (nothing happens), else this

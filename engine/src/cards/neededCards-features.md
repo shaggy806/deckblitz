@@ -2810,6 +2810,22 @@ needing their own keys or checks: Curse of Hospitality's "creatures attacking en
 player", and the double-faced Radiant Grace, Faithbound Judge and Accursed Witch, for
 `author-freed`; the two `amount:curses-attached-to-player` Curses wait on that key.
 
+### Alternative costs paid in life or a life change — built 2026-11-01
+
+The group `cost:alt-cost-opponent-gains-life` (+ `cost:alt-cost-pay-life-equal-mana-value`,
+`cost:alternative-cost-pay-life`). `alternativeCost.othersGainLife` ("have an opponent / each
+other player gain N life"; a player who can't gain life can't pay it, one whose gain is
+replaced can: `LifeGainReplacement.gainsNoLifeInstead`). Life equal to the mana value:
+`alternativeCostForSpells.payLifeManaValue` (with `oncePerTurn`, `yourTurnOnly`, `fromHand`),
+`grant-spells-this-turn`'s, `impulse-exile`'s (the only way to cast). New with them, a real
+choice among alternative costs (rules 118.9a, 601.2b): `Game.alternativeCostsOf`, a cast
+variant per cost or per opponent, `altCostIndex` naming one past the first; and kicker on top
+of any of them (118.9d). Proving: Snuff Out, Invigorate, Reverent Silence, Demon of Fate's
+Design, Marshland Bloodcaster, Inside Information. Left on the key's cards: Nashi's "you may
+play **one of** those cards" (the permission lapsing on the others once one is played), and
+`cast-now` has no "by paying life" yet for Anrakyr (which also needs
+`effect:cast-now-from-hand-or-graveyard`).
+
 ### Tapping a counted or totalled set — built 2026-11-01
 
 The group `cost:tap-x-untapped-cost` (+ `cost:tap-creatures-sharing-creature-type`,

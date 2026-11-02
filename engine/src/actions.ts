@@ -522,6 +522,9 @@ export type Action =
        * variant, like `free`, whose mana cost is replaced and which taps
        * creatures as part of the cost. The driver echoes it back. */
       readonly altCost?: boolean;
+      /** Which of the alternative costs on offer an `altCost` cast pays, past
+       * the first (rules 118.9a, 601.2b): Echoed back from the `LegalAction`. */
+      readonly altCostIndex?: number;
       /** Which branch of a choice of additional costs is being paid — an
        * index into `CardDefinition.additionalCost.options` (Bitter Triumph:
        * 0 to discard, 1 to pay 3 life). Echoed back from the `LegalAction`
@@ -1322,6 +1325,13 @@ export type LegalAction =
        * variant, like `free`, whose mana cost is replaced and which taps
        * creatures as part of the cost. The driver echoes it back. */
       readonly altCost?: boolean;
+      /** Which alternative cost this `altCost` variant pays, past the first:
+       * one the caster picks among (Demon of Fate's Design beside Jodah), or
+       * another opponent to gain the life (Invigorate). Echoed back. */
+      readonly altCostIndex?: number;
+      /** The opponent this variant has gain the life — "you may have an
+       * opponent gain 3 life" (Invigorate). Informational, for the label. */
+      readonly altCostGainer?: PlayerId;
       /** An alternative cost's words, for the offer's label — the `altCost`
        * variant's "pay 1 life, exile a blue card from your hand" (Force of
        * Will) or an `evoke` variant's "exile a white card from your hand"

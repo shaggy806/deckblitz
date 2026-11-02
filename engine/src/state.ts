@@ -643,6 +643,10 @@ export interface GameObject {
      * Equipment spells this way without paying their mana costs"). `only`
      * is a permission that is *only* to cast them free (Narset). */
     readonly free?: { readonly filter?: CardFilter; readonly only?: boolean };
+    /** "If you cast a spell this way, pay life equal to its mana value rather
+     * than pay its mana cost" (Inside Information): the only way to cast it
+     * (rule 118.9b); a land card is played as ever. */
+    readonly payLifeManaValue?: true;
     /** Extra gates on *using* the permission, as opposed to when it lapses —
      * Theater of Horrors' "**During your turn, if an opponent lost life this
      * turn**, you may play …". Evaluated live, so the cards become playable
@@ -681,6 +685,10 @@ export interface GameObject {
      * of its caster's opponents, beside any undaunted of its own (702.125c). */
     readonly undaunted?: true;
   };
+  /** The turn a `oncePerTurn` `alternativeCostForSpells` of this permanent was
+   * last used (Demon of Fate's Design). Cleared on any zone change, as
+   * `impulseCastOnTurn` is (rule 400.7). */
+  altCostGrantOnTurn?: number;
   /** The turn a `oncePerTurn` impulse permission this permanent gave was
    * last used (Maralen, Fae Ascendant). Cleared on any zone change: the
    * permanent that comes back is a new object (rule 400.7). */
@@ -2098,6 +2106,9 @@ export interface SpellGrantThisTurn {
   /** The matching spell has affinity for these (rule 702.41a): {1} less for
    * each its caster controls as it's cast. */
   readonly affinityFor?: CardFilter;
+  /** The matching spell may be cast by paying life equal to its mana value
+   * rather than its mana cost (Marshland Bloodcaster). */
+  readonly payLifeManaValue?: true;
   usedBy?: { readonly id: ObjectId; readonly zoneChangeCount: number };
 }
 

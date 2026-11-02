@@ -24,7 +24,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      replacement: { event: "would-gain-life", who: "any-player", prevent: true },
+      replacement: { event: "would-gain-life", who: "any-player", prevent: true, gainsNoLifeInstead: true },
       text: LIFE_TEXT,
     },
   ],

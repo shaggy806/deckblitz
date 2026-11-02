@@ -4716,6 +4716,12 @@ export type EffectSpec =
        * 702.41a), so nothing's fixed as this resolves. Several are cumulative
        * (the Don & Raph ruling). */
       readonly affinityFor?: CardFilter;
+      /** "Rather than pay the mana cost of the next spell you cast this turn,
+       * you may pay life equal to that spell's mana value" (Marshland
+       * Bloodcaster, with `next`): an alternative cost the spell may be cast
+       * for (rule 118.9), X 0 (107.3b). Casting it for anything else still
+       * uses the grant up (the rulings). */
+      readonly payLifeManaValue?: true;
     }
   | {
       /**
@@ -7761,6 +7767,11 @@ export type EffectSpec =
        * Equipment spells); `only` when paying isn't allowed at all (Narset's
        * "you may cast … without paying their mana costs"). */
       readonly free?: { readonly filter?: CardFilter; readonly only?: boolean };
+      /** "If you cast a spell this way, pay life equal to its mana value
+       * rather than pay its mana cost" (Inside Information): the only way a
+       * spell may be cast under this permission, X 0 (rules 118.9b, 107.3b);
+       * additional costs are paid on top (the rulings). */
+      readonly payLifeManaValue?: true;
       /** Grant the permission to only this many of the exiled cards, chosen
        * by the controller — Tectonic Giant's "exile the top two cards of your
        * library. **Choose one of them.**" The rest stay exiled with no
@@ -9678,6 +9689,7 @@ export interface EffectApi {
       readonly gate?: StaticCondition;
       readonly filter?: CardFilter;
       readonly free?: { readonly filter?: CardFilter; readonly only?: boolean };
+      readonly payLifeManaValue?: true;
       readonly whileSource?: boolean;
       readonly oncePerTurn?: boolean;
       /** Exiled face down, for the controller's eyes only (rule 406.3). */
@@ -14181,6 +14193,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         ...(spec.entersWithCounters !== undefined ? { entersWithCounters: spec.entersWithCounters } : {}),
         ...(spec.reduceGeneric !== undefined ? { reduceGeneric: amountValue(spec.reduceGeneric, ctx) } : {}),
         ...(spec.affinityFor !== undefined ? { affinityFor: spec.affinityFor } : {}),
+        ...(spec.payLifeManaValue === true ? { payLifeManaValue: true as const } : {}),
       });
       return;
     case "populate":
@@ -16028,6 +16041,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         gate: spec.gate,
         ...(spec.filter !== undefined ? { filter: spec.filter } : {}),
         ...(spec.free !== undefined ? { free: spec.free } : {}),
+        ...(spec.payLifeManaValue === true ? { payLifeManaValue: true as const } : {}),
         ...(spec.spendAs !== undefined ? { spendAs: spec.spendAs } : {}),
         ...(spec.sourceDid !== undefined ? { sourceDid: spec.sourceDid } : {}),
       });

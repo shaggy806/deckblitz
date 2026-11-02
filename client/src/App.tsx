@@ -227,6 +227,7 @@ function graveyardVariantLabel(
     if (a.splice) parts.push(`splicing ${a.splice.map((s) => `${s.cardName} ${s.cost}`).join(' and ')}`)
     if (a.evoke) parts.push(a.altCostText !== undefined ? `evoke: ${a.altCostText}` : `evoke ${a.evokeCost ?? ''}`.trim())
     if (a.altCost && a.altCostText !== undefined) parts.push(a.altCostText)
+    if (a.altCostGainer !== undefined) parts.push(`${playerLabel(a.altCostGainer)} gains`)
     if (a.harmonizeTap) parts.push(`tapping ${a.harmonizeTap.cardName} (−${a.harmonizeTap.power})`)
     if (a.sneakReturn) parts.push(`returning ${a.sneakReturn.cardName}`)
     if (a.webSlingingReturn) parts.push(`returning ${a.webSlingingReturn.cardName}`)
@@ -252,6 +253,7 @@ const castExtras = (cast: CastAction) => ({
   // cast as the ordinary one (Sephara at its full cost), and a choice of
   // additional costs that names no branch is refused outright.
   ...(cast.altCost === true ? { altCost: true } : {}),
+  ...(cast.altCostIndex !== undefined ? { altCostIndex: cast.altCostIndex } : {}),
   ...(cast.costOption !== undefined ? { costOption: cast.costOption } : {}),
   // Splice (rule 702.47): the offer names the cards; the cast echoes their ids.
   ...(cast.splice !== undefined ? { splice: cast.splice.map((s) => s.object) } : {}),
@@ -563,6 +565,10 @@ interface Targeting {
   /** Casting for the card's alternative cost (Sephara) — its own variant,
    * echoed back like `kicked`. */
   readonly altCost?: boolean
+  /** Which alternative cost it pays, past the first, echoed back; and the
+   * opponent it has gain the life (Invigorate), for the label. */
+  readonly altCostIndex?: number
+  readonly altCostGainer?: PlayerId
   /** The branch of a choice of additional costs this variant pays (Bitter
    * Triumph's "discard a card or pay 3 life"), echoed back. */
   readonly costOption?: number
@@ -2405,6 +2411,7 @@ function Table({
         | 'free'
         | 'manaColors'
         | 'altCost'
+        | 'altCostIndex'
         | 'costOption'
         | 'splice'
         | 'graveyardGrant'
@@ -2451,6 +2458,7 @@ function Table({
                 ...(t.overload === true ? { overload: true } : {}),
                 ...(t.free === true ? { free: true } : {}),
                 ...(t.altCost === true ? { altCost: true } : {}),
+                ...(t.altCostIndex !== undefined ? { altCostIndex: t.altCostIndex } : {}),
                 ...(t.costOption !== undefined ? { costOption: t.costOption } : {}),
                 ...(t.splice !== undefined ? { splice: [...t.splice] } : {}),
                 ...(t.graveyardGrant !== undefined ? { graveyardGrant: t.graveyardGrant } : {}),
@@ -6828,6 +6836,9 @@ function Table({
                         <> (prototype <Symbols text={a.prototypeCost ?? ''} />)</>
                       ) : null}
                       {a.kind === 'cast-spell' && a.altCost ? <> (<Symbols text={a.altCostText ?? 'alternative cost'} />)</> : ''}
+                      {a.kind === 'cast-spell' && a.altCostGainer !== undefined
+                        ? ` (${playerLabel(a.altCostGainer, game.seats)} gains)`
+                        : ''}
                       {a.kind === 'cast-spell' && a.via === 'harmonize'
                         ? a.harmonizeTap
                           ? ` (harmonize, tapping ${a.harmonizeTap.cardName}: −${a.harmonizeTap.power})`

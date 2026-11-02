@@ -2520,12 +2520,22 @@ export interface StaticAbility {
    * for this cost may be cast as though it had flash (Primal Prayers' "if
    * you cast a spell this way, you may cast it as though it had flash" —
    * rule 601.3c: it may be begun any time an instant could).
+   *
+   * `payLifeManaValue`: "by paying life equal to its mana value rather than
+   * paying its mana cost" with `mana: "{0}"` (Demon of Fate's Design, Access
+   * Maze): X is 0 and a spell's face counts its own (rules 107.3b, 119.4).
+   * `oncePerTurn` + `yourTurnOnly` is "once during each of your turns", spent
+   * per permanent as it's cast; `fromHand` is "cast a spell from your hand".
    */
   readonly alternativeCostForSpells?: {
     readonly mana: string;
     readonly filter?: CardFilter;
     readonly energy?: number;
     readonly flash?: true;
+    readonly payLifeManaValue?: true;
+    readonly oncePerTurn?: true;
+    readonly yourTurnOnly?: true;
+    readonly fromHand?: true;
   };
   /**
    * Cards matching `filter` in this permanent's controller's hand have warp
@@ -4091,6 +4101,12 @@ export interface CardDefinition {
     readonly sacrifice?: { readonly filter: CardFilter; readonly count?: number; readonly text: string };
     readonly returnToHand?: { readonly filter: CardFilter; readonly count?: number; readonly text: string };
     readonly payLife?: number;
+    /** "You may have an opponent gain 3 life" (Invigorate; the caster names
+     * which, a cast variant per opponent), "each other player gain 6 life"
+     * (Reverent Silence): `mana: "{0}"`. The gain is paid as the cost is; one
+     * who can't gain life can't pay it, one whose gain is replaced can
+     * (rule 118.3 and Invigorate's rulings). */
+    readonly othersGainLife?: { readonly amount: number; readonly who: "an-opponent" | "each-other-player" };
     readonly condition?: StaticCondition;
   } | null;
   /**

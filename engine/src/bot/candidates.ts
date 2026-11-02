@@ -43,6 +43,7 @@ function castExtras(legal: CastSpellLegal): {
   overload?: boolean;
   free?: boolean;
   altCost?: boolean;
+  altCostIndex?: number;
   costOption?: number;
   splice?: ObjectId[];
   sacrifice?: ObjectId;
@@ -62,6 +63,7 @@ function castExtras(legal: CastSpellLegal): {
     ...(legal.overload === true ? { overload: true } : {}),
     ...(legal.free === true ? { free: true } : {}),
     ...(legal.altCost === true ? { altCost: true } : {}),
+    ...(legal.altCostIndex !== undefined ? { altCostIndex: legal.altCostIndex } : {}),
     // Each branch of a choice of additional costs is its own variant, so the
     // chosen one has to be echoed back or the cast is refused.
     ...(legal.costOption !== undefined ? { costOption: legal.costOption } : {}),

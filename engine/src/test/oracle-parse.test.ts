@@ -2052,6 +2052,37 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     });
   });
 
+  it("a life change rather than pay (rule 118.9): Snuff Out, Invigorate, Reverent Silence, the Demon, the Bloodcaster", () => {
+    const forest = { kind: "controls", filter: { subtype: "Forest" }, atLeast: 1 };
+    expect(face("If you control a Swamp, you may pay 4 life rather than pay this spell's mana cost.", "Instant").alternativeCost).toEqual({
+      mana: "{0}",
+      payLife: 4,
+      condition: { kind: "controls", filter: { subtype: "Swamp" }, atLeast: 1 },
+    });
+    expect(face("If you control a Forest, rather than pay this spell's mana cost, you may have an opponent gain 3 life.", "Instant").alternativeCost).toEqual({
+      mana: "{0}",
+      othersGainLife: { amount: 3, who: "an-opponent" },
+      condition: forest,
+    });
+    expect(face("If you control a Forest, rather than pay this spell's mana cost, you may have each other player gain 6 life.", "Sorcery").alternativeCost).toEqual({
+      mana: "{0}",
+      othersGainLife: { amount: 6, who: "each-other-player" },
+      condition: forest,
+    });
+    const demon = face("Once during each of your turns, you may cast an enchantment spell by paying life equal to its mana value rather than paying its mana cost.", "Creature — Demon");
+    expect(demon.static[0].alternativeCostForSpells).toEqual({
+      mana: "{0}",
+      filter: { type: "enchantment" },
+      payLifeManaValue: true,
+      oncePerTurn: true,
+      yourTurnOnly: true,
+    });
+    const maze = face("Once during each of your turns, you may cast a spell from your hand by paying life equal to its mana value rather than paying its mana cost.", "Enchantment — Room");
+    expect(maze.static[0].alternativeCostForSpells.fromHand).toBe(true);
+    const bloodcaster = face("{1}{B}, {T}: Rather than pay the mana cost of the next spell you cast this turn, you may pay life equal to that spell's mana value.", "Creature — Vampire Warlock");
+    expect(bloodcaster.activated[0].effect).toEqual({ kind: "grant-spells-this-turn", next: true, payLifeManaValue: true });
+  });
+
   it("sacrifice or return lands rather than pay (rule 118.9): Crash, Thwart, the Borderposts", () => {
     expect(face("You may sacrifice a Mountain rather than pay this spell's mana cost.\nDestroy target artifact.", "Instant").alternativeCost).toEqual({
       mana: "{0}",

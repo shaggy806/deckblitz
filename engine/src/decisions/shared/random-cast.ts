@@ -86,6 +86,7 @@ export function randomCast(
     ...(legal.overload === true ? { overload: true } : {}),
     ...(legal.free === true ? { free: true } : {}),
     ...(legal.altCost === true ? { altCost: true } : {}),
+    ...(legal.altCostIndex !== undefined ? { altCostIndex: legal.altCostIndex } : {}),
     ...(legal.costOption !== undefined ? { costOption: legal.costOption } : {}),
     ...(sac !== undefined && sac.choices.length > 0 ? { sacrifice: sac.choices[rng.pickIndex(sac.choices.length)] } : {}),
     ...(legal.tapCost !== undefined ? { tap } : {}),
