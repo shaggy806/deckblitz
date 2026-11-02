@@ -29626,12 +29626,17 @@ export class Game {
           attacking,
           attachTo,
         ),
-      exileGraveyard: (target, filter, linked) => {
+      exileGraveyard: (target, filter, linked, fromHand) => {
         if (target.kind !== "player") return;
         // Snapshot: `moveObject` mutates the graveyard array as it goes. The
         // whole graveyard goes at once — or every card in it matching
-        // `filter` (Living Death's creature cards).
-        const going = [...this.state.zones.perPlayer[target.player].graveyard].filter(
+        // `filter` (Living Death's creature cards) — with the hand's, if the
+        // effect names it (Thought Distortion).
+        const zones = this.state.zones.perPlayer[target.player];
+        const going = [
+          ...(fromHand === "only" ? [] : zones.graveyard),
+          ...(fromHand === undefined ? [] : zones.hand),
+        ].filter(
           (id) => filter === undefined || matchesFilter(this.state, this.registry, id, filter, { you: controller }),
         );
         const exiled: ObjectId[] = [];
@@ -31692,6 +31697,10 @@ export class Game {
         const object = this.state.objects[ref.object];
         if (expectedZoneOf(ref) === "stack" && object !== undefined && object.zone !== "stack") {
           return object.lastStackController ?? object.controller;
+        }
+        // A copy of a spell, countered: it ceased to exist.
+        if (expectedZoneOf(ref) === "stack" && object === undefined) {
+          return this.state.ceasedTokens?.[ref.object]?.controller;
         }
         return lastKnownOf(ref)?.controller ?? object?.controller;
       },
@@ -43098,6 +43107,10 @@ export class Game {
       return true;
     }
     if (object.isCopy) {
+      // It ceases to exist (rule 707.10c), but the rest of the counterspell may
+      // read it as it last existed (608.2h) — Quash's ruling: "its controller's
+      // graveyard, hand, and library" for "the same name as that spell".
+      (this.state.ceasedTokens ??= {})[id] = this.takeLastKnown(id);
       const stack = this.state.zones.shared.stack;
       const index = stack.indexOf(id);
       if (index >= 0) stack.splice(index, 1);

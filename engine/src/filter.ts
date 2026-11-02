@@ -502,9 +502,19 @@ export interface CardFilter {
    * so the target and its namesakes go in one event (the ruling: an
    * indestructible target still takes the others with it). An effect's
    * filter only: `bindDynamicCompares` binds it to `sameNameAs` as the
-   * effect applies; anywhere else it matches nothing.
+   * effect applies; anywhere else it matches nothing. It reaches whatever
+   * zone the effect reads: a `search-library`'s (Splinter, Mask of the Mimic,
+   * Secret Salvage), a `return-from-graveyard`'s (Echoing Return), an
+   * `exile-graveyard`'s (Moratorium Stone, Legion's End).
    */
   readonly sameNameAsTarget?: number;
+  /**
+   * With `sameNameAsTarget`: the namesakes must be tokens, the target itself
+   * needn't be — Legions to Ashes' "exile target nonland permanent an opponent
+   * controls **and all tokens** that player controls with the same name as
+   * that permanent", one `exile-all`.
+   */
+  readonly sameNameTokensOnly?: true;
   /**
    * Has the same name as the trigger object (rule 201.2a) — the Odyssey
    * Shrines' "the number of cards in all graveyards **with the same name as
@@ -1701,6 +1711,7 @@ export function matchesFilter(
     // one name in common is enough.
     const names = live !== undefined ? namesOf(registry, live) : lastKnownNames(registry, lki!);
     if (filter.sameNameAs.name === null || !names.includes(filter.sameNameAs.name)) return false;
+    if (filter.sameNameTokensOnly === true && !(live !== undefined ? isTokenNow(live) : lki!.isToken)) return false;
   }
   if (filter.sameNameAsSource !== undefined) {
     const from = ctx.source === undefined ? undefined : state.objects[ctx.source];

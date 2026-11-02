@@ -225,6 +225,28 @@ describe("another player's graveyard, hand, and library, the finds exiled", () =
     expect(shuffledBy(game)).toEqual([A]);
   });
 
+  it("Quash on a copy of a spell still searches for its name (the ruling)", () => {
+    const { game, a } = table();
+    lands(game, "Island", 6);
+    lands(game, "Mountain", 1);
+    const bolt = toHand(game, "Lightning Bolt");
+    const inLibrary = toLibrary(game, "Lightning Bolt");
+    a.chooseTargetsFn = () => [ref(B)];
+    cast(game, bolt, { targets: [ref(B)], settle: false });
+    const twincast = toHand(game, "Twincast");
+    cast(game, twincast, { targets: [ref(bolt)], settle: false });
+    game.advanceUntil((s) => {
+      const stack = s.zones.shared.stack;
+      return !stack.includes(twincast) && stack.length === 2 && s.priority.holder === A;
+    });
+    const copy = game.state.zones.shared.stack.find((id) => id !== bolt)!;
+    const seen = pickFromZone(a, inLibrary);
+    cast(game, toHand(game, "Quash"), { targets: [ref(copy)], settle: false });
+    game.advanceUntil((s) => s.zones.shared.stack.length === 1 && s.priority.holder === A);
+    expect(seen.offered).toEqual([inLibrary]);
+    expect(zone(game, inLibrary)).toBe("exile");
+  });
+
   it("Crumble to Dust is colourless, and may leave any of them, the graveyard's too", () => {
     const { game, a } = table();
     lands(game, "Mountain", 4);

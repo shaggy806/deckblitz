@@ -316,7 +316,12 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     else v.touch(n.target, "help", MAJOR);
     if (n.under !== undefined && typeof n.under === "object") v.touch(n.under, "help", MINOR);
   },
-  "exile-graveyard": (n, v) => v.touch(n.target, "harm", MINOR),
+  "exile-graveyard": (n, v) => {
+    v.touch(n.target, "harm", MINOR);
+    // "Exile target card from a graveyard and all others of its name"
+    // (Moratorium Stone): the target is hurt with them.
+    v.touch(n.filter?.sameNameAsTarget, "harm", MAJOR);
+  },
   flicker: (n, v) => v.touch(n.target, "help", MINOR),
   "return-flickered": none,
   // Melding (rule 701.42) targets nothing: both cards are your own.
@@ -380,7 +385,9 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "skip-untap-step": (n, v) => v.touch(n.who, "harm", MINOR),
   "skip-step": (n, v) => v.touch(n.who, "harm", MINOR),
   "exile-from-library": (n, v) => v.touch(n.whose, "harm", MINOR),
-  "return-from-graveyard": none,
+  // "Return target creature card and all other cards with the same name"
+  // (Echoing Return): the card you want back.
+  "return-from-graveyard": (n, v) => v.touch(n.filter.sameNameAsTarget, "help", MAJOR),
   // A delayed ability acts on the targets its creator chose (rule 603.7c): it
   // has none of its own, its text not saying "target" (115.10a).
   // One watching a target leave and bringing it back ("when that creature
@@ -837,6 +844,10 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "search-library": (n, v) => {
     v.touch(typeof n.who === "object" ? n.who.controllerOfTarget : undefined, "help", MINOR);
     const whose = n.whose;
+    // "Search your library for a card with the same name as target nontoken
+    // creature" (Mask of the Mimic): your own deck holds your own creature's
+    // namesakes.
+    if (whose === undefined) v.touch(n.filter.sameNameAsTarget, "help", MINOR);
     if (typeof whose !== "object") return;
     v.touch("target" in whose ? whose.target : "controllerOfTarget" in whose ? whose.controllerOfTarget : whose.ownerOfTarget, "harm", MINOR);
   },

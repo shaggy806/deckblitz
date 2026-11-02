@@ -1172,7 +1172,10 @@
   "replacement:discarded-by-opponent-to-battlefield",
   "effect:search-hand-graveyard-library",
   "effect:search-hand-graveyard-library-exile",
-  "effect:search-library-and-graveyard-exile-rest"
+  "effect:search-library-and-graveyard-exile-rest",
+  "condition:same-name-as-target-off-battlefield",
+  "condition:same-name-as-target-tokens-only",
+  "effect:exile-from-hand-by-filter"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

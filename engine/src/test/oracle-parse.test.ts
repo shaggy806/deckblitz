@@ -9555,6 +9555,97 @@ describe("changes of control", () => {
     });
     // No one target to be about: left for a person.
     expect(parseEffect("When you lose control of the creature, tap it.", ctx()).todo).not.toHaveLength(0);
+describe("a target's namesakes off the battlefield", () => {
+  const face = (name: string, type_line: string, oracle_text: string) => parseFace({ name, type_line, oracle_text });
+
+  it("in your graveyard", () => {
+    const echoing = face(
+      "Echoing Return",
+      "Sorcery",
+      "Return target creature card and all other cards with the same name as that card from your graveyard to your hand.",
+    );
+    expect(echoing.complete).toBe(true);
+    expect(echoing.targets).toEqual([{ kind: "card-in-graveyard", whose: "you", filter: { type: "creature" } }]);
+    expect(echoing.effect).toEqual({
+      kind: "return-from-graveyard",
+      filter: { sameNameAsTarget: 0 },
+      destination: "hand",
+      count: "all",
+    });
+    const stone = parseEffect(
+      "Exile target nonland card from a graveyard, all other cards from graveyards with the same name as that card, and all permanents with that name.",
+      ctx(),
+    );
+    expect(stone.effect.effects.map((e: { kind: string }) => e.kind)).toEqual(["exile-graveyard", "exile-all"]);
+  });
+
+  it("in your library", () => {
+    const salvage = face(
+      "Secret Salvage",
+      "Sorcery",
+      "Exile target nonland card from your graveyard. Search your library for any number of cards with the same name as that card, reveal them, put them into your hand, then shuffle.",
+    );
+    expect(salvage.complete).toBe(true);
+    expect(salvage.effect.effects[1]).toEqual({
+      kind: "search-library",
+      filter: { sameNameAsTarget: 0 },
+      destination: "hand",
+      reveal: true,
+      min: 0,
+      max: 99,
+    });
+    const mask = parseEffect(
+      "Search your library for a card with the same name as target nontoken creature, put that card onto the battlefield, then shuffle.",
+      ctx(),
+    );
+    expect(mask.effect.filter).toEqual({ sameNameAsTarget: 0 });
+  });
+
+  it("in a revealed hand and graveyard", () => {
+    const end = face(
+      "Legion's End",
+      "Sorcery",
+      "Exile target creature an opponent controls with mana value 2 or less and all other creatures that player controls with the same name as that creature. Then that player reveals their hand and exiles all cards with that name from their hand and graveyard.",
+    );
+    expect(end.complete).toBe(true);
+    expect(end.effect.effects.map((e: { kind: string }) => e.kind)).toEqual(["exile-all", "reveal-hand", "exile-graveyard"]);
+    expect(end.effect.effects[2].fromHand).toBe("also");
+    const hour = face(
+      "Hour of Glory",
+      "Instant",
+      "Exile target creature. If that creature was a God, its controller reveals their hand and exiles all cards from it with the same name as that creature.",
+    );
+    expect(hour.complete).toBe(true);
+    expect(hour.effect.effects[1].then.effects[1].fromHand).toBe("only");
+    const distortion = face(
+      "Thought Distortion",
+      "Sorcery",
+      "Target opponent reveals their hand. Exile all noncreature, nonland cards from that player's hand and graveyard.",
+    );
+    expect(distortion.complete).toBe(true);
+    expect(distortion.effect.effects[1]).toEqual({
+      kind: "exile-graveyard",
+      target: 0,
+      filter: { notTypes: ["creature", "land"] },
+      fromHand: "also",
+    });
+  });
+
+  it("the target and same-named tokens", () => {
+    const ashes = face(
+      "Legions to Ashes",
+      "Sorcery",
+      "Exile target nonland permanent an opponent controls and all tokens that player controls with the same name as that permanent.",
+    );
+    expect(ashes.complete).toBe(true);
+    expect(ashes.effect).toEqual({
+      kind: "exile-all",
+      filter: { controlledBy: "you", sameNameAsTarget: 0, sameNameTokensOnly: true },
+      controlledByTarget: 0,
+    });
+  });
+});
+
 describe("a search of your own zones", () => {
   it("reads \"and/or\" as a choice of zones as it resolves, attached or not", () => {
     const giant = parseEffect(

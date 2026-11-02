@@ -3390,6 +3390,12 @@ export type EffectSpec =
        * creature card exiled with this Vehicle" reads them. Nothing is
        * linked when the source isn't a permanent. */
       readonly linked?: true;
+      /** From that player's hand too, in the same move — "exile all noncreature,
+       * nonland cards from that player's **hand and graveyard**" (Thought
+       * Distortion, Legion's End) — or (`"only"`) from it instead: "exiles all
+       * cards from it" (Hour of Glory). A hand holds no public cards, so a
+       * `reveal-hand` goes before it. Every match goes: no search, no choice. */
+      readonly fromHand?: "also" | "only";
     }
   | {
       /** Each player in `who` sacrifices every permanent matching `filter`
@@ -9723,7 +9729,7 @@ export interface EffectApi {
   ): void;
   /** Exile every card in `target`'s graveyard (a player — Bojuka Bog), as
    * one move. */
-  exileGraveyard(target: TargetRef, filter?: CardFilter, linked?: boolean): void;
+  exileGraveyard(target: TargetRef, filter?: CardFilter, linked?: boolean, fromHand?: "also" | "only"): void;
   /** Each of `players` sacrifices every permanent matching `filter` they
    * control, at once — see the `"sacrifice-all"` {@link EffectSpec}. */
   sacrificeAll(players: readonly PlayerId[], filter: CardFilter): void;
@@ -14235,7 +14241,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         const scope = spec.target;
         ctx.simultaneously(() => {
           for (const player of ctx.playersInScope(scope)) {
-            ctx.exileGraveyard({ kind: "player", player }, spec.filter, spec.linked === true);
+            ctx.exileGraveyard({ kind: "player", player }, spec.filter, spec.linked === true, spec.fromHand);
           }
         });
         return;
@@ -14249,7 +14255,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       } else {
         target = ctx.targets[spec.target];
       }
-      if (target !== undefined) ctx.exileGraveyard(target, spec.filter, spec.linked === true);
+      if (target !== undefined) ctx.exileGraveyard(target, spec.filter, spec.linked === true, spec.fromHand);
       return;
     }
     case "sacrifice-all":

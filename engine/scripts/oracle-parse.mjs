@@ -3250,6 +3250,93 @@ export function parseSentence(sentence, ctx) {
     const type = { permanents: undefined, creatures: "creature", artifacts: "artifact", enchantments: "enchantment", lands: "land" }[plural.toLowerCase()];
     return target === undefined ? undefined : { ...(type !== undefined ? { type } : {}), sameNameAsTarget: target };
   };
+  // The same names off the battlefield. "Return target creature card and all
+  // other cards with the same name as that card from your graveyard to your
+  // hand" (Echoing Return) / "to the battlefield tapped" (Rat King).
+  if ((m = /^return target creature card and all other cards with the same name as that card from your graveyard to (your hand|the battlefield tapped)\.$/i.exec(s))) {
+    const target = ctx.target({ kind: "card-in-graveyard", whose: "you", filter: { type: "creature" } });
+    const hand = m[1].toLowerCase() === "your hand";
+    return {
+      kind: "return-from-graveyard",
+      filter: { sameNameAsTarget: target },
+      destination: hand ? "hand" : "battlefield",
+      count: "all",
+      ...(hand ? {} : { enterTapped: true }),
+    };
+  }
+  // "Search your library for any number of cards with the same name as that
+  // card, reveal them, put them into your hand, then shuffle" (Secret Salvage),
+  // "for a card with the same name as target nontoken creature, put that card
+  // onto the battlefield, then shuffle" (Mask of the Mimic).
+  if (ctx.targets.length === 1 && /^search your library for any number of cards with the same name as that card, reveal them, put them into your hand, then shuffle\.$/i.test(s)) {
+    return { kind: "search-library", filter: { sameNameAsTarget: 0 }, destination: "hand", reveal: true, min: 0, max: 99 };
+  }
+  if (/^search your library for a card with the same name as target nontoken creature, put that card onto the battlefield, then shuffle\.$/i.test(s)) {
+    const target = ctx.target({ kind: "permanent", filter: { type: "creature", token: false } });
+    return { kind: "search-library", filter: { sameNameAsTarget: target }, destination: "battlefield", min: 0, max: 1 };
+  }
+  // "Exile target nonland permanent an opponent controls and all tokens that
+  // player controls with the same name as that permanent" (Legions to Ashes).
+  if (/^exile target nonland permanent an opponent controls and all tokens that player controls with the same name as that permanent\.$/i.test(s)) {
+    const target = ctx.target({ kind: "permanent", filter: { notTypes: ["land"], controlledBy: "opponent" } });
+    return {
+      kind: "exile-all",
+      filter: { controlledBy: "you", sameNameAsTarget: target, sameNameTokensOnly: true },
+      controlledByTarget: target,
+    };
+  }
+  // "Exile target creature an opponent controls with mana value 2 or less and
+  // all other creatures that player controls with the same name as that
+  // creature." (Legion's End's first sentence; its second is `revealAndExileAt`.)
+  if ((m = /^exile target creature an opponent controls with mana value (\d+) or less and all other creatures that player controls with the same name as that creature\.$/i.exec(s))) {
+    const target = ctx.target({
+      kind: "permanent",
+      filter: { type: "creature", controlledBy: "opponent", manaValue: { op: "lte", n: Number(m[1]) } },
+    });
+    return {
+      kind: "exile-all",
+      filter: { type: "creature", controlledBy: "you", sameNameAsTarget: target },
+      controlledByTarget: target,
+    };
+  }
+  // "If that creature was a God, its controller reveals their hand and exiles
+  // all cards from it with the same name as that creature" (Hour of Glory).
+  if (ctx.targets.length === 1 && (m = /^if that creature was an? ([A-Z][a-z]+), its controller reveals their hand and exiles all cards from it with the same name as that creature\.$/.exec(s[0].toLowerCase() + s.slice(1)))) {
+    return {
+      kind: "conditional",
+      condition: { kind: "target", index: 0, filter: { subtype: m[1] } },
+      then: {
+        kind: "sequence",
+        effects: [
+          { kind: "reveal-hand", who: { controllerOfTarget: 0 } },
+          { kind: "exile-graveyard", target: { controllerOfTarget: 0 }, filter: { sameNameAsTarget: 0 }, fromHand: "only" },
+        ],
+      },
+    };
+  }
+  // "Exile all noncreature, nonland cards from that player's hand and
+  // graveyard" (Thought Distortion), after a player target: every match.
+  if (
+    ctx.targets.length === 1 &&
+    (ctx.targets[0] === "player" || ctx.targets[0] === "opponent") &&
+    (m = /^exile all (.+?) cards from that player's hand and graveyard\.$/i.exec(s))
+  ) {
+    const filter = parseTypePhrase(m[1], { cards: true });
+    if (filter !== null) return { kind: "exile-graveyard", target: 0, filter, fromHand: "also" };
+  }
+  // "Exile target nonland card from a graveyard, all other cards from graveyards
+  // with the same name as that card, and all permanents with that name"
+  // (Moratorium Stone): the graveyards' in one move, then the battlefield's.
+  if (/^exile target nonland card from a graveyard, all other cards from graveyards with the same name as that card, and all permanents with that name\.$/i.test(s)) {
+    const target = ctx.target({ kind: "card-in-graveyard", whose: "any", filter: { notTypes: ["land"] } });
+    return {
+      kind: "sequence",
+      effects: [
+        { kind: "exile-graveyard", target: "each-player", filter: { sameNameAsTarget: target } },
+        { kind: "exile-all", filter: { sameNameAsTarget: target } },
+      ],
+    };
+  }
   // "Destroy target creature that blocked or was blocked by a legendary
   // creature this turn" (You Cannot Pass!), "exile … a Zombie …" (Time to
   // Reflect): the turn's blocks (`blockedThisTurn`).
@@ -5762,6 +5849,17 @@ export function parseEffect(text, outer) {
     // "[Choose a nonland card name.] Search target player's graveyard, hand,
     // and library for all cards with that name and exile them. Then that
     // player shuffles." — two or three sentences, one effect.
+    // "Then that player reveals their hand and exiles all cards with that name
+    // from their hand and graveyard." (Legion's End): two steps of one sentence.
+    if (ctx.targets.length === 1 && /^then that player reveals their hand and exiles all cards with that name from their hand and graveyard\.$/i.test(sentence)) {
+      const steps = [
+        { kind: "reveal-hand", who: { controllerOfTarget: 0 } },
+        { kind: "exile-graveyard", target: { controllerOfTarget: 0 }, filter: { sameNameAsTarget: 0 }, fromHand: "also" },
+      ];
+      parsed.push(...steps);
+      hints.push({ sentence, effect: steps[1] });
+      continue;
+    }
     const searched = searchOthersAt(sentences, i, ctx) ?? searchInsteadAt(sentences, i) ?? searchZonesAt(sentences, i);
     if (searched !== null) {
       parsed.push(searched.effect);

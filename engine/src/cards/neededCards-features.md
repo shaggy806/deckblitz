@@ -3934,3 +3934,20 @@ Proving cards: Boonweaver Giant, Dark Supplicant, Mishra, Artificer Prodigy, Qua
 Dust, The Stone Brain, Doomsday. Left: Kassandra still waits on `condition:equipped-by-filter`
 and Kotose on `zone:choose-one-of-exiled`; Agency Outfitter's two names are a `together:
 oneEach` the scaffolder doesn't draft.
+
+### A target's namesakes off the battlefield, and tokens only — built 2026-11-02
+
+The need-keys Phase 2 family `condition:filter-card-property-clauses`, its keys
+`condition:same-name-as-target-off-battlefield` and `-tokens-only`. The first needed no
+binding: `bindDynamicCompares` has bound `sameNameAsTarget` in every effect since the extract
+family, whatever zone it reads (the key's "battlefield only" was stale), so `return-from-graveyard`,
+`search-library` and `exile-graveyard` already took it. New are `sameNameTokensOnly` (the
+namesakes must be tokens, the target needn't be: Legions to Ashes) and `exile-graveyard`'s
+`fromHand: "also" | "only"`, riding along from `effect:exile-from-hand-by-filter` for Legion's
+End's "hand and graveyard". Proving cards: Echoing Return, Rat King, Verminister, Moratorium Stone,
+Secret Salvage, Mask of the Mimic, Legion's End, Legions to Ashes, Hour of Glory, Thought
+Distortion. Left: March of Burgeoning Life waits on its exile-from-hand cost reduction and
+Tibalt's Trickery on `effect:cast-now-other-player`. `effect:exile-from-hand-by-filter` is marked
+too (Thought Distortion, Hour of Glory, Identity Crisis): Azor's Gateway's distinct mana values and
+Ice Cauldron's noted mana are still their own and will need narrowing. A countered copy of a spell
+now keeps its last-known record, so Quash and Counterbore read its name and controller (Quash's ruling).
