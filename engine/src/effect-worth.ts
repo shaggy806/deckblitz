@@ -276,6 +276,8 @@ function untargetedWorth(effect: EffectSpec, ctx: WorthContext): number {
       return effect.effects.reduce((sum, e) => sum + untargetedWorth(e, ctx), 0);
     case "for-each-target":
     case "for-target":
+    case "for-each-permanent":
+    case "for-permanent":
     case "delayed-trigger":
       return untargetedWorth(effect.effect, ctx);
     case "conditional":

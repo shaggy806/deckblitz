@@ -544,6 +544,7 @@ import _poolPromiseOfPower from "../pool/promise-of-power.js";
 import _poolProudMentor from "../pool/proud-mentor.js";
 import _poolPsychicStrike from "../pool/psychic-strike.js";
 import _poolPteramander from "../pool/pteramander.js";
+import _poolPublicExecution from "../pool/public-execution.js";
 import _poolPurphorossIntervention from "../pool/purphoross-intervention.js";
 import _poolPyramidOfThePantheon from "../pool/pyramid-of-the-pantheon.js";
 import _poolPyroconvergence from "../pool/pyroconvergence.js";
@@ -1442,6 +1443,7 @@ const shard: CardShard = {
     _poolProudMentor,
     _poolPsychicStrike,
     _poolPteramander,
+    _poolPublicExecution,
     _poolPurphorossIntervention,
     _poolPyramidOfThePantheon,
     _poolPyroconvergence,

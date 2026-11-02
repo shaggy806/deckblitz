@@ -453,6 +453,7 @@ import _poolMoggSquad from "../pool/mogg-squad.js";
 import _poolMomentOfHeroism from "../pool/moment-of-heroism.js";
 import _poolMonstrousCarabid from "../pool/monstrous-carabid.js";
 import _poolMonstrousStep from "../pool/monstrous-step.js";
+import _poolMoonmist from "../pool/moonmist.js";
 import _poolMoonrageBrute from "../pool/moonrage-brute.js";
 import _poolMorphling from "../pool/morphling.js";
 import _poolMourningThrull from "../pool/mourning-thrull.js";
@@ -1313,6 +1314,7 @@ const shard: CardShard = {
     _poolMomentOfHeroism,
     _poolMonstrousCarabid,
     _poolMonstrousStep,
+    _poolMoonmist,
     _poolMoonrageBrute,
     _poolMorphling,
     _poolMourningThrull,

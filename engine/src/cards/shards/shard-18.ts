@@ -808,6 +808,7 @@ import _poolVillainousWealth from "../pool/villainous-wealth.js";
 import _poolViolentImpact from "../pool/violent-impact.js";
 import _poolViolentOutburst from "../pool/violent-outburst.js";
 import _poolViscidLemures from "../pool/viscid-lemures.js";
+import _poolVizkopaGuildmage from "../pool/vizkopa-guildmage.js";
 import _poolVoidRend from "../pool/void-rend.js";
 import _poolVolcanicOffering from "../pool/volcanic-offering.js";
 import _poolVolrathTheFallen from "../pool/volrath-the-fallen.js";
@@ -1691,6 +1692,7 @@ const shard: CardShard = {
     _poolViolentImpact,
     _poolViolentOutburst,
     _poolViscidLemures,
+    _poolVizkopaGuildmage,
     _poolVoidRend,
     _poolVolcanicOffering,
     _poolVolrathTheFallen,

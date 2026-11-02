@@ -654,6 +654,7 @@ import _poolScrollOfGriselbrand from "../pool/scroll-of-griselbrand.js";
 import _poolScuttlingButler from "../pool/scuttling-butler.js";
 import _poolSecuritronSquadron from "../pool/securitron-squadron.js";
 import _poolSeedcradleWitch from "../pool/seedcradle-witch.js";
+import _poolSelectiveMemory from "../pool/selective-memory.js";
 import _poolSelesnyaSentry from "../pool/selesnya-sentry.js";
 import _poolSelflessSamurai from "../pool/selfless-samurai.js";
 import _poolSelhoffEntomber from "../pool/selhoff-entomber.js";
@@ -1555,6 +1556,7 @@ const shard: CardShard = {
     _poolScuttlingButler,
     _poolSecuritronSquadron,
     _poolSeedcradleWitch,
+    _poolSelectiveMemory,
     _poolSelesnyaSentry,
     _poolSelflessSamurai,
     _poolSelhoffEntomber,

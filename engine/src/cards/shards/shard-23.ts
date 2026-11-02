@@ -191,6 +191,7 @@ import _poolDemonOfLoathing from "../pool/demon-of-loathing.js";
 import _poolDesperateMeasures from "../pool/desperate-measures.js";
 import _poolDespoil from "../pool/despoil.js";
 import _poolDhundOperative from "../pool/dhund-operative.js";
+import _poolDisarm from "../pool/disarm.js";
 import _poolDisciplinedDuelist from "../pool/disciplined-duelist.js";
 import _poolDisinformationCampaign from "../pool/disinformation-campaign.js";
 import _poolDistinguishedConjurer from "../pool/distinguished-conjurer.js";
@@ -1089,6 +1090,7 @@ const shard: CardShard = {
     _poolDesperateMeasures,
     _poolDespoil,
     _poolDhundOperative,
+    _poolDisarm,
     _poolDisciplinedDuelist,
     _poolDisinformationCampaign,
     _poolDistinguishedConjurer,

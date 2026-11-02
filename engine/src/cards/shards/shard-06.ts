@@ -753,6 +753,7 @@ import _poolThranduilTheElvenking from "../pool/thranduil-the-elvenking.js";
 import _poolThreaten from "../pool/threaten.js";
 import _poolThunderSpirit from "../pool/thunder-spirit.js";
 import _poolThunderingRaiju from "../pool/thundering-raiju.js";
+import _poolThundermare from "../pool/thundermare.js";
 import _poolThwip from "../pool/thwip.js";
 import _poolTidechannelPathway from "../pool/tidechannel-pathway.js";
 import _poolTidusYunasGuardian from "../pool/tidus-yunas-guardian.js";
@@ -1629,6 +1630,7 @@ const shard: CardShard = {
     _poolThreaten,
     _poolThunderSpirit,
     _poolThunderingRaiju,
+    _poolThundermare,
     _poolThwip,
     _poolTidechannelPathway,
     _poolTidusYunasGuardian,

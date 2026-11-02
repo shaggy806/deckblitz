@@ -167,6 +167,12 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   repeat: (n, v) => v.child(n.effect),
   "for-each-voted": none,
   "for-target": (n, v) => v.child(n.effect),
+  // Its slot `as` is each permanent in turn, not the spell's target, so a
+  // single-target polarity inside says nothing about a target when `as` is 0.
+  "for-each-permanent": (n, v) => {
+    if (n.as !== undefined) v.child(n.effect);
+  },
+  "for-permanent": none,
   // Their slot 0 is a convoking creature, not the spell's target 0.
   "for-each-convoker": none,
   "for-convoker": none,

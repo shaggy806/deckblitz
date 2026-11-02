@@ -474,6 +474,7 @@ import _poolMemorialVault from "../pool/memorial-vault.js";
 import _poolMemoryTheft from "../pool/memory-theft.js";
 import _poolMerchantOfVenom from "../pool/merchant-of-venom.js";
 import _poolMercilessEnforcers from "../pool/merciless-enforcers.js";
+import _poolMerrowBonegnawer from "../pool/merrow-bonegnawer.js";
 import _poolMeteorBlast from "../pool/meteor-blast.js";
 import _poolMeteorite from "../pool/meteorite.js";
 import _poolMeticulousCommons from "../pool/meticulous-commons.js";
@@ -573,6 +574,7 @@ import _poolPlanarGenesis from "../pool/planar-genesis.js";
 import _poolPlatedSeastrider from "../pool/plated-seastrider.js";
 import _poolPoliticalTrickery from "../pool/political-trickery.js";
 import _poolPolukranosReborn from "../pool/polukranos-reborn.js";
+import _poolPolymorphistsJest from "../pool/polymorphists-jest.js";
 import _poolPridefulFeastling from "../pool/prideful-feastling.js";
 import _poolPriestOfIroas from "../pool/priest-of-iroas.js";
 import _poolPrimalMight from "../pool/primal-might.js";
@@ -1364,6 +1366,7 @@ const shard: CardShard = {
     _poolMemoryTheft,
     _poolMerchantOfVenom,
     _poolMercilessEnforcers,
+    _poolMerrowBonegnawer,
     _poolMeteorBlast,
     _poolMeteorite,
     _poolMeticulousCommons,
@@ -1463,6 +1466,7 @@ const shard: CardShard = {
     _poolPlatedSeastrider,
     _poolPoliticalTrickery,
     _poolPolukranosReborn,
+    _poolPolymorphistsJest,
     _poolPridefulFeastling,
     _poolPriestOfIroas,
     _poolPrimalMight,

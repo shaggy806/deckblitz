@@ -4069,3 +4069,15 @@ and meld cards (rule 712.1), any zone, either face up, with `meldCard` on a meld
 Keys: condition:filter-double-faced, effect:look-and-choose-may-enter-transformed (which misread its one
 card: Nick Fury puts the card, then may transform it, so the key needed no "enters transformed" option).
 Proving cards: Overgrown Pest, Nick Fury, Agent of S.H.I.E.L.D.
+
+**An effect done to each matching permanent (2026-11-02).** `for-each-permanent`: `filter`, `effect` bound
+to slot `as`, `exceptSource`, `exceptTriggerObject`, `exceptTarget`, `controlledByTarget`, `simultaneous`; a
+token stack is woken first (rule 700.3b) and what's gone by its turn is skipped (400.7). Replaces a new `-all`
+twin per effect. Keys: effect:tap-all-except-source, effect:animate-all-excluding-source, effect:return-to-hand-all-except-source, effect:mass-bounce-except-source, effect:sacrifice-all-except-source, effect:grant-activated-all-except-source, effect:lose-keywords-all-except-source, effect:mass-effect-except-trigger-object, effect:damage-all-except-target, effect:pump-all-except-target, effect:animate-all-lose-abilities, effect:transform-all, effect:set-creature-type-all, effect:set-color-all, effect:shuffle-into-library-all, effect:set-land-types-all, effect:animate-all-controlled-by-target, effect:unattach-effect, effect:damage-all-per-object. Proving cards: Thundermare, Disarm, Nightcreep, Baki's Curse,
+Public Execution, Exhilarating Elocution, Aethersquall Ancient, Polymorphist's Jest, Thundercloud Elemental,
+Moonmist.
+
+**Keys the vocabulary already covered (2026-11-02).** A pilot wrote these keys' cards with no engine change: the
+note had gone stale or a composition hadn't been tried. Keys: effect:search-library-to-exile, effect:shuffle-library, effect:delayed-life-gain-trigger, effect:target-player-exiles-from-graveyard, condition:cant-be-blocked-except-by-flying-or-reach. Cards: Selective Memory,
+Foresight, Lantern of Insight, Natural Selection, Vizkopa Guildmage, Merrow Bonegnawer, Signal Pest
+(`test/need-key-recheck.test.ts`).

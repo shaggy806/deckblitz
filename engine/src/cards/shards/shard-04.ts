@@ -251,6 +251,7 @@ import _poolFlowerFlourish from "../pool/flower-flourish.js";
 import _poolFlowstoneCharger from "../pool/flowstone-charger.js";
 import _poolFlyingKick from "../pool/flying-kick.js";
 import _poolForceOfNature from "../pool/force-of-nature.js";
+import _poolForesight from "../pool/foresight.js";
 import _poolForgingTheTyriteSword from "../pool/forging-the-tyrite-sword.js";
 import _poolForgottenHarvest from "../pool/forgotten-harvest.js";
 import _poolForsakeTheWorldly from "../pool/forsake-the-worldly.js";
@@ -407,6 +408,7 @@ import _poolLampadOfDeathsVigil from "../pool/lampad-of-deaths-vigil.js";
 import _poolLance from "../pool/lance.js";
 import _poolLandCap from "../pool/land-cap.js";
 import _poolLandscaperColos from "../pool/landscaper-colos.js";
+import _poolLanternOfInsight from "../pool/lantern-of-insight.js";
 import _poolLastLaugh from "../pool/last-laugh.js";
 import _poolLathrilBladeOfTheElves from "../pool/lathril-blade-of-the-elves.js";
 import _poolLaughingJasperFlint from "../pool/laughing-jasper-flint.js";
@@ -1123,6 +1125,7 @@ const shard: CardShard = {
     _poolFlowstoneCharger,
     _poolFlyingKick,
     _poolForceOfNature,
+    _poolForesight,
     _poolForgingTheTyriteSword,
     _poolForgottenHarvest,
     _poolForsakeTheWorldly,
@@ -1279,6 +1282,7 @@ const shard: CardShard = {
     _poolLance,
     _poolLandCap,
     _poolLandscaperColos,
+    _poolLanternOfInsight,
     _poolLastLaugh,
     _poolLathrilBladeOfTheElves,
     _poolLaughingJasperFlint,

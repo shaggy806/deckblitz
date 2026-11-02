@@ -9943,3 +9943,24 @@ describe("a search of your own zones", () => {
     expect(doomsday.effect.effects[0]).toMatchObject({ exileRest: true, inAnyOrder: true, destination: "library-top", min: 5 });
   });
 });
+
+describe("an effect done to each other permanent", () => {
+  const each = (text: string) => parseEffect(text, ctx()).effect;
+  it("reads tap, return and lose-flying as for-each-permanent, the source spared", () => {
+    expect(each("Tap all other creatures.")).toEqual({
+      kind: "for-each-permanent",
+      filter: { type: "creature" },
+      exceptSource: true,
+      simultaneous: true,
+      effect: { kind: "tap", target: 0 },
+    });
+    expect(each("Return all other creatures to their owners' hands.")).toMatchObject({
+      kind: "for-each-permanent",
+      effect: { kind: "return-to-hand", target: 0 },
+    });
+    expect(each("All other creatures lose flying until end of turn.")).toMatchObject({
+      kind: "for-each-permanent",
+      effect: { kind: "lose-keywords", target: 0, keywords: ["flying"] },
+    });
+  });
+});

@@ -3489,6 +3489,24 @@ export function parseSentence(sentence, ctx) {
       return { kind: one[1].toLowerCase(), target };
     }
   }
+  // "Tap all other creatures" (Thundermare), "return all other creatures to their
+  // owners' hands" (Aethersquall Ancient), "all other creatures lose flying until
+  // end of turn" (Thundercloud Elemental): one instruction, each but the source.
+  {
+    const eachOther = (phrase, effect) => {
+      const filter = parseTypePhrase(phrase);
+      return filter === null || Object.keys(filter).length === 0
+        ? null
+        : { kind: "for-each-permanent", filter, exceptSource: true, simultaneous: true, effect };
+    };
+    if ((m = re(`tap all other ([a-z]+s)`).exec(s))) return eachOther(m[1], { kind: "tap", target: 0 });
+    if ((m = re(`return all other ([a-z]+s) to their owners' hands`).exec(s))) {
+      return eachOther(m[1], { kind: "return-to-hand", target: 0 });
+    }
+    if ((m = re(`all other ([a-z]+s) lose (flying) until end of turn`).exec(s))) {
+      return eachOther(m[1], { kind: "lose-keywords", target: 0, keywords: [m[2].toLowerCase()], duration: "end-of-turn" });
+    }
+  }
   if ((m = re(`return (${TARGET}) ${NAMESAKES} to their owners' hands`).exec(s))) {
     const filter = namesakes(m[2], slot(m[1]));
     return filter === undefined ? null : { kind: "return-to-hand-all", filter };

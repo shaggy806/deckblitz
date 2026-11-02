@@ -266,6 +266,7 @@ import _poolEscapeArtist from "../pool/escape-artist.js";
 import _poolEssenceFlare from "../pool/essence-flare.js";
 import _poolEternalDominion from "../pool/eternal-dominion.js";
 import _poolEternalWitness from "../pool/eternal-witness.js";
+import _poolExhilaratingElocution from "../pool/exhilarating-elocution.js";
 import _poolExoticDisease from "../pool/exotic-disease.js";
 import _poolExpeditionSkulker from "../pool/expedition-skulker.js";
 import _poolEyeblightAssassin from "../pool/eyeblight-assassin.js";
@@ -1141,6 +1142,7 @@ const shard: CardShard = {
     _poolEssenceFlare,
     _poolEternalDominion,
     _poolEternalWitness,
+    _poolExhilaratingElocution,
     _poolExoticDisease,
     _poolExpeditionSkulker,
     _poolEyeblightAssassin,

@@ -2221,6 +2221,49 @@ export type EffectSpec =
       readonly then?: EffectSpec;
     }
   | {
+      /**
+       * `effect` once for each battlefield permanent `filter` matches as this
+       * begins, nobody choosing — "tap all other creatures" (Thundermare), or
+       * any effect that names one object done to all of them. Each is bound in
+       * turn to target slot `as` (default 0) of `effect`, written as for one
+       * target there, so the other slots stay the spell's: "each other creature
+       * gets -1/-1" beside a target is `as: 1` with `exceptTarget: 0`. A token
+       * stack is woken first, each token its own object (rule 700.3b), so an
+       * effect done to "each" reaches every one. A permanent that's gone by its
+       * turn, or back as a new object (400.7), is skipped.
+       *
+       * `simultaneous` makes it one instruction, as a `sequence`'s does: what
+       * leaves leaves in one event, and `effect` mustn't stop to ask anything.
+       * Say it for a mass effect ("tap all", "return all", "transform all");
+       * without it the permanents take turns, and a `may` or a choice in `effect`
+       * is answered before the next ("for each creature, you may …").
+       */
+      readonly kind: "for-each-permanent";
+      readonly filter: CardFilter;
+      readonly effect: EffectSpec;
+      readonly as?: number;
+      /** "All **other** creatures": never the effect's own source. */
+      readonly exceptSource?: true;
+      /** "…and each other creature": never the trigger's object. */
+      readonly exceptTriggerObject?: true;
+      /** "…other than **target** creature": never what this target slot holds. */
+      readonly exceptTarget?: number;
+      /** "All lands **target player controls**": the filter's `controlledBy`
+       * reads this slot's player, or the controller of what it holds. */
+      readonly controlledByTarget?: number;
+      readonly simultaneous?: true;
+    }
+  | {
+      /** One permanent's turn of a `for-each-permanent`: `object`, in the stint
+       * it was found in, bound to slot `as`. Built by the engine as it applies
+       * one — never authored. */
+      readonly kind: "for-permanent";
+      readonly object: ObjectId;
+      readonly stint: number;
+      readonly as: number;
+      readonly effect: EffectSpec;
+    }
+  | {
       /** One member's turn of a `for-each-target`: target `index` bound to
        * slot `from`. Built by the engine as it applies one — never
        * authored. */
@@ -9613,6 +9656,16 @@ export interface EffectApi {
    * where it was when targeted, whether it was found illegal — moves with
    * it. */
   withTargetAt(from: number, index: number): ResolutionContext;
+  /** The permanents a `for-each-permanent` reaches now, a token stack as each
+   * of its tokens, with the stint each was found in. */
+  eachPermanentMatching(
+    filter: CardFilter,
+    exceptSource: boolean,
+    except: readonly ObjectId[],
+    scopeTo: PlayerId | undefined,
+  ): readonly { readonly object: ObjectId; readonly stint: number }[];
+  /** Whether `object` is still on the battlefield as the same object (400.7). */
+  stillOnBattlefield(object: ObjectId, stint: number): boolean;
   /** This context with `card`, which the resolution found rather than
    * chose, in slot `slot` — every other target, and what was known about
    * it, kept as it is (`choose-random-card`'s `slot`). */
@@ -13589,6 +13642,30 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     }
     case "for-target": {
       applyEffectSpec(spec.effect, ctx.withTargetAt(spec.from, spec.index));
+      return;
+    }
+    case "for-each-permanent": {
+      const scopeTo = scopedController(spec.controlledByTarget, ctx);
+      if (spec.controlledByTarget !== undefined && scopeTo === undefined) return;
+      const except: ObjectId[] = [];
+      if (spec.exceptTriggerObject === true && ctx.triggerObject !== undefined) except.push(ctx.triggerObject);
+      const left = spec.exceptTarget === undefined ? undefined : ctx.targets[spec.exceptTarget];
+      if (left?.kind === "object") except.push(left.object);
+      const as = spec.as ?? 0;
+      const steps: EffectSpec[] = ctx
+        .eachPermanentMatching(spec.filter, spec.exceptSource === true, except, scopeTo)
+        .map(({ object, stint }) => ({ kind: "for-permanent", object, stint, as, effect: spec.effect }));
+      if (steps.length === 0) return;
+      applyEffectSpec(
+        { kind: "sequence", effects: steps, ...(spec.simultaneous === true ? { simultaneous: true } : {}) },
+        ctx,
+      );
+      return;
+    }
+    case "for-permanent": {
+      if (ctx.stillOnBattlefield(spec.object, spec.stint)) {
+        applyEffectSpec(spec.effect, ctx.withFoundAt(spec.as, spec.object));
+      }
       return;
     }
     case "for-each-convoker": {

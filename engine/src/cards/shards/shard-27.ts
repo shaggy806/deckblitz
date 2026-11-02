@@ -625,6 +625,7 @@ import _poolShredsOfSanity from "../pool/shreds-of-sanity.js";
 import _poolShrivelingRot from "../pool/shriveling-rot.js";
 import _poolShunt from "../pool/shunt.js";
 import _poolSigardianSavior from "../pool/sigardian-savior.js";
+import _poolSignalPest from "../pool/signal-pest.js";
 import _poolSilentBladeOni from "../pool/silent-blade-oni.js";
 import _poolSilverShroudCostume from "../pool/silver-shroud-costume.js";
 import _poolSilverbackElder from "../pool/silverback-elder.js";
@@ -1491,6 +1492,7 @@ const shard: CardShard = {
     _poolShrivelingRot,
     _poolShunt,
     _poolSigardianSavior,
+    _poolSignalPest,
     _poolSilentBladeOni,
     _poolSilverShroudCostume,
     _poolSilverbackElder,

@@ -29436,6 +29436,20 @@ export class Game {
           },
         );
       },
+      eachPermanentMatching: (filter, exceptSource, except, scopeTo) =>
+        this.battlefieldMatching(scopeTo ?? controller, filter, x, source)
+          .filter((id) => !(exceptSource && id === source) && !except.includes(id))
+          // Each token of a stack is an object of its own (rule 700.3b); past
+          // the cap the rest of a stack stays together, one unit.
+          .flatMap((id) => {
+            const parts = this.materializeStack(id);
+            return parts.includes(id) ? parts : [...parts, id];
+          })
+          .map((object) => ({ object, stint: this.state.objects[object].zoneChangeCount ?? 0 })),
+      stillOnBattlefield: (object, stint) => {
+        const found = this.state.objects[object];
+        return found?.zone === "battlefield" && (found.zoneChangeCount ?? 0) === stint;
+      },
       withTargetAt: (from, index) => {
         const bind = <T,>(list: readonly T[]): T[] => [...list.slice(0, from), list[index] as T];
         const illegal = opts.illegalTargets;

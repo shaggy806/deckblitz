@@ -812,6 +812,10 @@ missing. Re-run `--greedy` for Phase 2's order.
   search, off-battlefield namesakes, exile-count costs, morph cost kinds, then each-kind counter
   loops, free-cast limits, casts from other zones, damage from a named object, mana-spending purposes,
   damage replacements. Twelve families, freed 1413.
+- **2026-11-02: the over-count pilot** — Nick Fury's key misread him, and 360 of 2,228 open keys have a note saying
+  existing vocabulary lacks an option. Nine hand-picked cards from those all ran with no engine change: notes
+  gone stale since triage, or a composition nobody tried. `for-each-permanent` closed 19 mass-effect keys in one
+  change, and 5 keys were simply already covered. Try writing a key's card from `card:find` before building it.
 
 ## Rough size
 

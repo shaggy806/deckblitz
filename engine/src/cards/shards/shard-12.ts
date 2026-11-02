@@ -53,6 +53,7 @@ import _poolAvoidFate from "../pool/avoid-fate.js";
 import _poolAysenHighway from "../pool/aysen-highway.js";
 import _poolAzoriusArrester from "../pool/azorius-arrester.js";
 import _poolAzoriusSkyguard from "../pool/azorius-skyguard.js";
+import _poolBakisCurse from "../pool/bakis-curse.js";
 import _poolBalaGedScorpion from "../pool/bala-ged-scorpion.js";
 import _poolBalustradeSpy from "../pool/balustrade-spy.js";
 import _poolBanishingKnack from "../pool/banishing-knack.js";
@@ -929,6 +930,7 @@ const shard: CardShard = {
     _poolAysenHighway,
     _poolAzoriusArrester,
     _poolAzoriusSkyguard,
+    _poolBakisCurse,
     _poolBalaGedScorpion,
     _poolBalustradeSpy,
     _poolBanishingKnack,

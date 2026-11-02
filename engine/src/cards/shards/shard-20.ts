@@ -517,6 +517,7 @@ import _poolMysticSnake from "../pool/mystic-snake.js";
 import _poolNantukoTracer from "../pool/nantuko-tracer.js";
 import _poolNarfiBetrayerKing from "../pool/narfi-betrayer-king.js";
 import _poolNarwhal from "../pool/narwhal.js";
+import _poolNaturalSelection from "../pool/natural-selection.js";
 import _poolNaturesCloak from "../pool/natures-cloak.js";
 import _poolNaturesRhythm from "../pool/natures-rhythm.js";
 import _poolNecromentia from "../pool/necromentia.js";
@@ -1459,6 +1460,7 @@ const shard: CardShard = {
     _poolNantukoTracer,
     _poolNarfiBetrayerKing,
     _poolNarwhal,
+    _poolNaturalSelection,
     _poolNaturesCloak,
     _poolNaturesRhythm,
     _poolNecromentia,
