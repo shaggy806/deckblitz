@@ -3725,3 +3725,13 @@ the card in hand, `this-cycled` reading the X as `{ triggerValue: true }`; the
 Proving cards: Street Wraith, Edge of Autumn, Gavi, Nest Warden, New Perspectives,
 Shark Typhoon, Webstrike Elite, Rampaging War Mammoth. Freed and unauthored:
 Valor's Flagship.
+
+**Free casts with a limit (2026-11-01, `cost:free-cast-from-hand-static`,
+`cost:free-cast-once-each-turn`).** `alternativeCostForSpells` gained `fromZones`
+(exile, the library's top, on `via: "library-top"` too) and `anyPlayer`; its
+`filter` is now judged as the face cast and against the permanent, so an `{ amount
+}` operand reads its counters or creatures; a grant's plain-mana offer now has an
+`altCostText`. Proving cards: Omniscience, Omnipresence, Aluren, As Foretold,
+Vision, Spectral Synthezoid, Zaffai and the Tempests, One with the Multiverse,
+Tlincalli Hunter. Not covered: Jacob Hauken, Inspector, which also needs
+`static:play-from-exile-once-each-turn` and `effect:exile-top-face-down-linked`.

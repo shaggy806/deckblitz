@@ -2798,6 +2798,44 @@ describe("templates for features built since the parser began (2026-10-11)", () 
       oncePerTurn: true,
       yourTurnOnly: true,
     });
+    const grantOf = (line: string) => face(line, "Enchantment").static[0].alternativeCostForSpells;
+    expect(grantOf("You may cast spells from your hand without paying their mana costs.")).toEqual({ mana: "{0}", fromHand: true });
+    expect(grantOf("You may cast spells with mana value less than or equal to the number of creatures you control from your hand without paying their mana costs.")).toEqual({
+      mana: "{0}",
+      fromHand: true,
+      filter: { manaValue: { op: "lte", n: { amount: { countOf: { type: "creature", controlledBy: "you" } } } } },
+    });
+    expect(grantOf("Any player may cast creature spells with mana value 3 or less without paying their mana costs and as though they had flash.")).toEqual({
+      mana: "{0}",
+      anyPlayer: true,
+      flash: true,
+      filter: { type: "creature", manaValue: { op: "lte", n: 3 } },
+    });
+    expect(grantOf("Once during each of your turns, you may cast an instant or sorcery spell from your hand without paying its mana cost.")).toEqual({
+      mana: "{0}",
+      oncePerTurn: true,
+      yourTurnOnly: true,
+      fromHand: true,
+      filter: { typesAnyOf: ["instant", "sorcery"] },
+    });
+    expect(grantOf("Once during each of your turns, you may cast a spell from your hand or the top of your library without paying its mana cost.")).toEqual({
+      mana: "{0}",
+      oncePerTurn: true,
+      yourTurnOnly: true,
+      fromHand: true,
+      fromZones: ["library"],
+    });
+    expect(grantOf("Once each turn, you may pay {0} rather than pay the mana cost for a creature spell you cast from exile.")).toEqual({
+      mana: "{0}",
+      oncePerTurn: true,
+      fromZones: ["exile"],
+      filter: { type: "creature" },
+    });
+    expect(grantOf("Once each turn, you may pay {0} rather than pay the mana cost for a spell you cast with mana value X or less, where X is the number of time counters on this enchantment.")).toEqual({
+      mana: "{0}",
+      oncePerTurn: true,
+      filter: { manaValue: { op: "lte", n: { amount: { countersOn: "source", counter: "time" } } } },
+    });
     const maze = face("Once during each of your turns, you may cast a spell from your hand by paying life equal to its mana value rather than paying its mana cost.", "Enchantment — Room");
     expect(maze.static[0].alternativeCostForSpells.fromHand).toBe(true);
     const bloodcaster = face("{1}{B}, {T}: Rather than pay the mana cost of the next spell you cast this turn, you may pay life equal to that spell's mana value.", "Creature — Vampire Warlock");

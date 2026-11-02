@@ -4470,7 +4470,7 @@ is "can't attack a player it has already attacked this turn" (Port Razer), by th
   printed or granted, costs {1} less for each time you've cast a commander
   from the command zone this game (Henzie). Only the cost's generic number
   moves; an `{X}` in it doesn't.
-- `alternativeCostForSpells: { mana, filter?, energy?, flash?, payLifeManaValue?, oncePerTurn?, yourTurnOnly?, fromHand? }` — an alternative cost (rule
+- `alternativeCostForSpells: { mana, filter?, energy?, flash?, payLifeManaValue?, oncePerTurn?, yourTurnOnly?, fromHand?, fromZones?, anyPlayer? }` — an alternative cost (rule
   118.9) for the spells you cast: Jodah, Archmage Eternal's "you may pay
   {W}{U}{B}{R}{G} rather than pay the mana cost for spells you cast" is `{
   mana: "{W}{U}{B}{R}{G}" }`. Offered as the `altCost` variant of any spell
@@ -4483,6 +4483,18 @@ is "can't attack a player it has already attacked this turn" (Port Razer), by th
   `payLifeManaValue` makes it life equal to the spell's mana value, with
   `mana: "{0}"`; "once during each of your turns" (Demon of Fate's Design) is
   `oncePerTurn` + `yourTurnOnly`, "cast a spell from your hand" `fromHand`.
+  "Without paying its mana cost" is `mana: "{0}"`: Omniscience's `{ mana: "{0}",
+  fromHand: true }`, Zaffai and the Tempests' with `oncePerTurn`, `yourTurnOnly`
+  and a `filter`. `fromZones: ["exile"]` is "a creature spell you cast from exile"
+  (Tlincalli Hunter), and beside `fromHand`, `["library"]` "from your hand or the
+  top of your library" (One with the Multiverse): the top card, under a permission
+  to cast it (`castFromLibraryTop`). `anyPlayer: true` is "any player may cast …"
+  (Aluren, with `flash`). `filter` is judged as the spell it would be (rule 601.3e:
+  an Adventure's sorcery from a creature card), against the permanent: `manaValue:
+  { op: "lte", n: { amount } }` reads it, with `{ countersOn: "source", counter:
+  "time" }` (As Foretold) or `{ countOf: { type: "creature", controlledBy: "you" }
+  }` (Omnipresence). The offer says `altCostText: "without paying its mana cost"`
+  (or `"pay {W}{U}{B}{R}{G}"` for Jodah's).
   `energy: n` makes it energy (with `mana: "{0}"` when there's no mana):
   Nissa, Worldsoul Speaker's "you may pay eight {E} rather than pay the mana
   cost for permanent spells you cast" is `{ mana: "{0}", energy: 8, filter:

@@ -2620,7 +2620,18 @@ export interface StaticAbility {
    * `oncePerTurn` + `yourTurnOnly` is "once during each of your turns", spent
    * per permanent as it's cast; `fromHand` is "cast a spell from your hand"
    * (and Tamiyo, Field Researcher's emblem's "you may cast spells from your
-   * hand without paying their mana costs", `mana: "{0}"`).
+   * hand without paying their mana costs", `mana: "{0}"`; Omniscience).
+   *
+   * `fromZones` is a zone of another kind it reaches: "a creature spell you
+   * cast from exile" (Tlincalli Hunter) is `["exile"]`, and beside `fromHand`,
+   * "from your hand or the top of your library" (One with the Multiverse)
+   * `["library"]` — the top card, under a permission to cast it. `anyPlayer`
+   * is "any player may cast …" (Aluren): the spells of every player, this
+   * permanent's controller's as well. `filter` is judged as the spell it would
+   * be (rule 601.3e: the face cast, X 0), against this permanent: an operand
+   * `{ amount }` reads it, so "mana value X or less, where X is the number of
+   * time counters on this" (As Foretold) and "… the number of creatures you
+   * control" (Omnipresence) are `manaValue: { op: "lte", n: { amount } }`.
    */
   readonly alternativeCostForSpells?: {
     readonly mana: string;
@@ -2631,6 +2642,8 @@ export interface StaticAbility {
     readonly oncePerTurn?: true;
     readonly yourTurnOnly?: true;
     readonly fromHand?: true;
+    readonly fromZones?: readonly ("exile" | "library")[];
+    readonly anyPlayer?: true;
   };
   /**
    * Cards matching `filter` in this permanent's controller's hand have warp

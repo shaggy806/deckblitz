@@ -10834,6 +10834,81 @@ function parseStatic(line, text) {
       };
     }
   }
+  // A free cast by an alternative cost (rule 118.9), with its limits.
+  if (line === "You may cast spells from your hand without paying their mana costs.") {
+    return { affects: { scope: "self" }, alternativeCostForSpells: { mana: "{0}", fromHand: true }, text };
+  }
+  if (line === "You may cast spells with mana value less than or equal to the number of creatures you control from your hand without paying their mana costs.") {
+    return {
+      affects: { scope: "self" },
+      alternativeCostForSpells: {
+        mana: "{0}",
+        fromHand: true,
+        filter: { manaValue: { op: "lte", n: { amount: { countOf: { type: "creature", controlledBy: "you" } } } } },
+      },
+      text,
+    };
+  }
+  if ((m = /^Any player may cast (\w+) spells with mana value (\d+) or less without paying their mana costs and as though they had flash\.$/.exec(line))) {
+    const filter = parseTypePhrase(m[1]);
+    if (filter !== null && Object.keys(filter).length > 0) {
+      return {
+        affects: { scope: "self" },
+        alternativeCostForSpells: {
+          mana: "{0}",
+          anyPlayer: true,
+          flash: true,
+          filter: { ...filter, manaValue: { op: "lte", n: Number(m[2]) } },
+        },
+        text,
+      };
+    }
+  }
+  // "Once during each of your turns, you may cast an instant or sorcery spell
+  // from your hand without paying its mana cost" (Zaffai and the Tempests), "a
+  // spell from your hand or the top of your library" (One with the Multiverse).
+  if ((m = /^Once during each of your turns, you may cast (?:an? (.+?) spell|a spell) from your hand( or the top of your library)? without paying its mana cost\.$/.exec(line))) {
+    const filter = m[1] === undefined ? {} : parseTypePhrase(m[1]);
+    if (filter !== null && (m[1] === undefined || Object.keys(filter).length > 0)) {
+      return {
+        affects: { scope: "self" },
+        alternativeCostForSpells: {
+          mana: "{0}",
+          oncePerTurn: true,
+          yourTurnOnly: true,
+          fromHand: true,
+          ...(m[2] !== undefined ? { fromZones: ["library"] } : {}),
+          ...(m[1] !== undefined ? { filter } : {}),
+        },
+        text,
+      };
+    }
+  }
+  // "Once each turn, you may pay {0} rather than pay the mana cost for a
+  // creature spell you cast from exile" (Tlincalli Hunter), "… for a spell you
+  // cast with mana value X or less, where X is the number of time counters on
+  // this enchantment" (As Foretold).
+  if ((m = /^Once each turn, you may pay \{0\} rather than pay the mana cost for an? (.+?) spell you cast from exile\.$/.exec(line))) {
+    const filter = parseTypePhrase(m[1]);
+    if (filter !== null && Object.keys(filter).length > 0) {
+      return {
+        affects: { scope: "self" },
+        alternativeCostForSpells: { mana: "{0}", oncePerTurn: true, fromZones: ["exile"], filter },
+        text,
+      };
+    }
+  }
+  if ((m = /^Once each turn, you may pay \{0\} rather than pay the mana cost for a spell you cast with mana value X or less, where X is the number of (\w+) counters on (?:~|this \w+)\.$/.exec(line))) {
+    return {
+      affects: { scope: "self" },
+      alternativeCostForSpells: {
+        mana: "{0}",
+        oncePerTurn: true,
+        filter: { manaValue: { op: "lte", n: { amount: { countersOn: "source", counter: m[1] } } } },
+      },
+      text,
+    };
+  }
   // Life equal to the mana value for a spell, once a turn (rule 118.9):
   // "Once during each of your turns, you may cast an enchantment spell by
   // paying life equal to its mana value rather than paying its mana cost"

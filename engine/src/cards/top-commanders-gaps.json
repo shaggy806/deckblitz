@@ -1127,7 +1127,9 @@
   "effect:reveal-until-rest-exile",
   "effect:reveal-until-count",
   "cost:cycling-alt-cost",
-  "cost:cycling-x"
+  "cost:cycling-x",
+  "cost:free-cast-from-hand-static",
+  "cost:free-cast-once-each-turn"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

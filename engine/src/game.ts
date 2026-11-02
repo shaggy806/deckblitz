@@ -1425,6 +1425,9 @@ function cyclingAbilityFrom(
   };
 }
 
+/** How a cast offer says it's for an alternative cost of {0}. */
+const WITHOUT_PAYING = "without paying its mana cost";
+
 /** A printed cycling ability's name and cost, as the player is offered it. */
 function cyclingText(cycling: CyclingAbility): string {
   const name = cycling.search === undefined ? "Cycling" : "Landcycling";
@@ -4391,7 +4394,12 @@ export class Game {
                       }
                     : ownAltPaid && def.alternativeCost?.payLife !== undefined
                       ? { altCostText: `pay ${def.alternativeCost.payLife} life` }
-                      : {}),
+                      : // A grant's plain mana (Jodah, Omniscience), beside the
+                        // same card's offer for its mana cost: words to tell
+                        // them apart by.
+                        altCost === true && (!ownAltPaid || def.alternativeCost === null) && alternative !== null
+                        ? { altCostText: alternative.mana === "{0}" ? WITHOUT_PAYING : `pay ${alternative.mana}` }
+                        : {}),
         // Which alternative cost this variant pays, past the first, and which
         // opponent it has gain the life.
         ...(altCost === true && altCostIndex !== undefined ? { altCostIndex } : {}),
@@ -41965,7 +41973,7 @@ export class Game {
     // Flashback, escape, foretell, disturb, a suspend or cascade cast are
     // alternative costs (or no cost) already: only one applies (118.9a).
     if (via !== undefined && via !== "impulse" && via !== "graveyard-permission" && via !== "adventure" &&
-      via !== "prepared") {
+      via !== "prepared" && via !== "library-top") {
       return out;
     }
     if (caster === undefined) return out;
@@ -41980,19 +41988,36 @@ export class Game {
     // One entry for each different grant: two Demons of Fate's Design offer
     // one way to pay, spending whichever hasn't been used this turn.
     const seen = new Set<StaticAbility>();
-    for (const { source, ability } of this.activeStaticsOf(caster, (a) => a.alternativeCostForSpells !== undefined)) {
+    for (const { source, ability } of this.alternativeCostGrantsReaching(caster)) {
       const grant = ability.alternativeCostForSpells!;
       if (seen.has(ability)) continue;
       // Energy only while the caster has that much (601.2h, 107.14).
       if (grant.energy !== undefined && this.state.players[caster].energy < grant.energy) continue;
       // "Once during each of your turns" (Demon of Fate's Design), "from your
-      // hand" (Access Maze, Tamiyo, Field Researcher's emblem).
+      // hand" (Access Maze, Tamiyo, Field Researcher's emblem), "from exile"
+      // (Tlincalli Hunter), "or the top of your library" (One with the
+      // Multiverse: the cast itself is what keeps it to the top card).
       if (grant.yourTurnOnly === true && this.activePlayer !== caster) continue;
       if (grant.oncePerTurn === true && source.altCostGrantOnTurn === this.state.turn.number) continue;
-      if (grant.fromHand === true && card?.zone !== "hand") continue;
+      if (grant.fromHand === true || grant.fromZones !== undefined) {
+        const reaches =
+          (grant.fromHand === true && card?.zone === "hand") ||
+          (card?.zone === "exile" && grant.fromZones?.includes("exile") === true) ||
+          (card?.zone === "library" && grant.fromZones?.includes("library") === true);
+        if (!reaches) continue;
+      }
       if (
         grant.filter === undefined ||
-        matchesFilter(this.state, this.registry, cardId, grant.filter, { you: caster })
+        // The spell it would be: an Adventure's sorcery from a creature card,
+        // a split card's half (rule 601.3e), its X 0 under this cost (107.3b).
+        // What the filter compares with is read off this permanent.
+        this.withFace(cardId, Math.max(0, card?.faces?.indexOf(def.name) ?? 0), () =>
+          matchesFilter(this.state, this.registry, cardId, grant.filter!, {
+            you: caster,
+            source: source.id,
+            amount: this.filterAmounts({ source: source.id, controller: source.controller }),
+          }),
+        )
       ) {
         seen.add(ability);
         out.push({
@@ -42011,6 +42036,25 @@ export class Game {
     if ((this.state.spellGrantsThisTurn ?? []).some((g) =>
       g.payLifeManaValue === true && turnCastGrantReaches(this.state, this.registry, g, cardId, caster, from))) {
       out.push({ mana: "{0}", payLifeManaValue: true });
+    }
+    return out;
+  }
+
+  /** The `alternativeCostForSpells` statics reaching `caster`'s spells: their
+   * own, then any other player's that says "any player may" (Aluren). */
+  private alternativeCostGrantsReaching(
+    caster: PlayerId,
+  ): readonly { readonly source: GameObject; readonly ability: StaticAbility }[] {
+    const out = this.activeStaticsOf(caster, (a) => a.alternativeCostForSpells !== undefined);
+    for (const id of this.state.zones.shared.battlefield) {
+      const source = this.state.objects[id];
+      if (source === undefined || source.controller === caster) continue;
+      for (const ability of this.registry.get(rulesTextName(source)).static) {
+        if (ability.alternativeCostForSpells?.anyPlayer !== true) continue;
+        if (this.state.players[source.controller]?.hasLost !== false) continue;
+        if (hasLostAbilities(this.state, this.registry, source) || !this.staticActive(source, ability)) continue;
+        out.push({ source, ability });
+      }
     }
     return out;
   }
