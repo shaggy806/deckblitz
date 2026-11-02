@@ -1851,6 +1851,26 @@ describe("templates for features built since the parser began (2026-10-11)", () 
       who: "you",
     });
     expect(face("Basic landcycling {1}").cycling).toEqual({ cost: "{1}", search: { supertype: "basic", type: "land" } });
+    // Cycling's cost as a variant: mana with an X, life, a sacrifice.
+    expect(face("Cycling {X}{1}{U} ({X}{1}{U}, Discard this card: Draw a card.)").cycling).toEqual({ cost: "{X}{1}{U}" });
+    expect(face("Cycling—Pay 2 life. (Pay 2 life, Discard this card: Draw a card.)").cycling).toEqual({
+      cost: "",
+      also: { payLife: 2 },
+      costText: "Pay 2 life",
+    });
+    expect(face("Cycling—Sacrifice a land. (Sacrifice a land, Discard this card: Draw a card.)").cycling).toEqual({
+      cost: "",
+      also: { sacrifice: { filter: { type: "land" } } },
+      costText: "Sacrifice a land",
+    });
+    expect(face("You may pay {0} rather than pay the cycling cost of the first card you cycle each turn.").static[0].alternativeCyclingCost)
+      .toEqual({ mana: "{0}", firstEachTurn: true });
+    const perspectives = face("As long as you have seven or more cards in hand, you may pay {0} rather than pay cycling costs.").static[0];
+    expect(perspectives.alternativeCyclingCost).toEqual({ mana: "{0}" });
+    expect(perspectives.condition).toEqual({ kind: "hand-size", atLeast: 7 });
+    expect(parseTrigger("When you cycle this card")).toEqual([{ on: "this-cycled" }]);
+    // Reading the X of its cycling cost is `triggerValue`, a person's.
+    expect(face("When you cycle this card, draw X cards.").triggered).toEqual([]);
     expect(face("Undying").triggered[0].trigger).toEqual({ on: "dies", who: "self" });
     // Increment (rule 702.191a): the helper's cast trigger and intervening-if.
     const incremented = face(

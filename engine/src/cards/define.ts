@@ -12,7 +12,7 @@
  * escape hatch). Vanilla permanents need neither.
  */
 
-import type { ActivatedAbility, CostReductionAmount, TriggeredAbility } from "../abilities.js";
+import type { AbilityCost, ActivatedAbility, CostReductionAmount, TriggeredAbility } from "../abilities.js";
 import type {
   BeholdSpec,
   CopyExceptions,
@@ -2650,6 +2650,19 @@ export interface StaticAbility {
    */
   readonly grantsNinjutsuInHand?: { readonly cost: string; readonly filter: CardFilter };
   /**
+   * "You may pay `mana` rather than pay cycling costs" (rule 702.29f: a
+   * typecycling cost is a cycling cost too) — New Perspectives, under the
+   * static's own `condition` (`{ kind: "hand-size", atLeast: 7 }`), and Gavi,
+   * Nest Warden's "… rather than pay the cycling cost of the first card you
+   * cycle each turn" with `firstEachTurn` (counting every card this player
+   * has cycled this turn, before Gavi arrived too). The cards in this
+   * permanent's controller's hand with any cycling ability, printed or
+   * granted, have a second one at that cost, which is how the player chooses
+   * (rule 602.2b): X is 0 in it, and it still discards the card, since only
+   * the `[Cost]` of "[Cost], Discard this card" is replaced.
+   */
+  readonly alternativeCyclingCost?: { readonly mana: string; readonly firstEachTurn?: true };
+  /**
    * Cards matching `filter` in this permanent's controller's hand have
    * cycling for `cost` (rule 702.29a) — Rhet-Tomb Mystic's "each creature card
    * in your hand has cycling {1}{U}", Jo Grant's for historic cards. `search`
@@ -3706,6 +3719,30 @@ export interface SelfCostReduction {
    * (`flashback.cost`), not when another effect lets it be cast from the
    * graveyard for something else. */
   readonly thisWay?: "flashback";
+}
+
+/** A card's own cycling ability (`CardDefinition.cycling`). */
+export interface CyclingAbility {
+  /** The mana in its cost, `""` for none. An `{X}` (Shark Typhoon's "Cycling
+   * {X}{1}{U}") is announced as it's activated (rules 107.3a, 602.2b), and a
+   * "when you cycle this card" trigger reads it as `{ triggerValue: true }`. */
+  readonly cost: string;
+  /**
+   * **Landcycling / typecycling** (rules 702.29e–f — Migratory Route's "Basic
+   * landcycling {2}"): instead of drawing, search your library for a card
+   * matching this filter, reveal it and put it into your hand.
+   *
+   * Same ability as ordinary cycling — pay, discard, then this instead of
+   * the draw as it resolves.
+   */
+  readonly search?: CardFilter;
+  /** The rest of a cost that isn't only mana: "Cycling—Pay 2 life" (Street
+   * Wraith) is `{ payLife: 2 }`, "Cycling—Sacrifice a land" (Edge of Autumn) `{
+   * sacrifice: { filter: { type: "land" } } }`. Paid as any activated
+   * ability's is, beside discarding the card. */
+  readonly also?: Omit<AbilityCost, "mana" | "tap">;
+  /** What the cost reads as where `cost` doesn't say it all: `"Pay 2 life"`. */
+  readonly costText?: string;
 }
 
 export interface CardDefinition {
@@ -4860,18 +4897,7 @@ export interface CardDefinition {
    * "when you cycle this card" trigger (`this-cycled` — Dismantling Wave)
    * goes on above it and resolves first (the rulings). `null` for a card
    * without cycling. */
-  readonly cycling: {
-    readonly cost: string;
-    /**
-     * **Landcycling / typecycling** (rules 702.29e–f — Migratory Route's "Basic
-     * landcycling {2}"): instead of drawing, search your library for a card
-     * matching this filter, reveal it and put it into your hand.
-     *
-     * Same ability as ordinary cycling — pay, discard, then this instead of
-     * the draw as it resolves.
-     */
-    readonly search?: CardFilter;
-  } | null;
+  readonly cycling: CyclingAbility | null;
   /** Saga chapters (rule 714 — ROADMAP Phase 10). A Saga enters with one lore
    * counter and gains one at the start of its controller's precombat main
    * phase; each `SagaChapter` fires when the lore count reaches any number in
@@ -5425,7 +5451,7 @@ interface CardDraft {
   morph?: MorphCost;
   asTurnedFaceUp?: { readonly counters: number };
   suspend?: { readonly n: number; readonly cost: string };
-  cycling?: { readonly cost: string; readonly search?: CardFilter };
+  cycling?: CyclingAbility;
   escape?: {
     readonly cost: string;
     readonly exileCount: number;

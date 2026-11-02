@@ -2564,6 +2564,9 @@ export interface PlayerState {
    * itself, not cards put into hand another way — a tutor to hand is not a
    * draw. Reset in `beginTurn`. */
   cardsDrawnThisTurn: number;
+  /** How many cards this player has cycled this turn (rule 702.29c) — Gavi,
+   * Nest Warden's "the first card you cycle each turn". Reset in `beginTurn`. */
+  cardsCycledThisTurn?: number;
   /** Whether this player has drawn a card during their own draw step this
    * turn — so the next one isn't "the first one they draw in each of their
    * draw steps" (Xyris, the Writhing Storm; Orcish Bowmasters). Reset in

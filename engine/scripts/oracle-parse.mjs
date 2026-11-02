@@ -1610,6 +1610,7 @@ export function parseTrigger(clause) {
   if ((m = /^Whenever you cycle (a|another) card$/.exec(c))) {
     return [{ on: "cycles", who: "you", ...(m[1] === "another" ? { otherOnly: true } : {}) }];
   }
+  if (c === "When you cycle this card") return [{ on: "this-cycled" }];
   // Foretell (rule 702.143a): "whenever you foretell a card".
   if (c === "Whenever you foretell a card") return [{ on: "foretells", who: "you" }];
   // The renowned designation (rule 702.112b) becoming true.
@@ -7922,6 +7923,18 @@ export function parseFace(face, ctx = {}) {
       continue;
     }
     if ((m = /^Cycling ((?:\{[^}]+\})+)$/.exec(line))) { out.cycling = { cost: m[1] }; continue; }
+    // A cycling cost that isn't mana (Street Wraith, Edge of Autumn).
+    if ((m = /^Cycling—Pay (\d+) life\.?$/.exec(line))) {
+      out.cycling = { cost: "", also: { payLife: Number(m[1]) }, costText: `Pay ${m[1]} life` };
+      continue;
+    }
+    if ((m = /^Cycling—Sacrifice an? (.+?)\.?$/.exec(line))) {
+      const filter = parseTypePhrase(m[1]);
+      if (filter !== null && Object.keys(filter).length > 0) {
+        out.cycling = { cost: "", also: { sacrifice: { filter } }, costText: `Sacrifice a${/^[aeiou]/i.test(m[1]) ? "n" : ""} ${m[1]}` };
+        continue;
+      }
+    }
     if ((m = /^Flashback ((?:\{[^}]+\})+)$/.exec(line))) { out.flashback = { cost: m[1] }; continue; }
     // Jump-start (rule 702.133a): the graveyard cast for the card's own mana
     // cost, discarding a card.
@@ -8936,6 +8949,13 @@ export function parseFace(face, ctx = {}) {
         continue;
       }
       let rest = comma > 0 ? line.slice(comma + 2) : "";
+      // "When you cycle this card" reading its cycling cost's X (Shark
+      // Typhoon) is `{ triggerValue: true }`, not the spell's `"x"` the
+      // sentences below would read: a person's.
+      if (parsedTriggers.every((t) => t.on === "this-cycled") && /\bX\b/.test(rest)) {
+        out.todo.push(printed(raw));
+        continue;
+      }
       // "That Vehicle" / "that Mount or Vehicle": the trigger object, as "it".
       if (parsedTriggers.every((t) => t.on === "crews-or-saddles")) {
         rest = rest.replace(/^that (?:Mount or Vehicle|Vehicle or Mount|Vehicle|Mount) /, "it ");
@@ -10798,6 +10818,22 @@ function parseStatic(line, text) {
   }[line];
   if (fixed !== undefined) return { affects: { scope: "self" }, ...fixed, text };
   let m;
+  // A cycling cost's alternative (rule 702.29f has typecycling's a cycling
+  // cost too): Gavi, Nest Warden, New Perspectives.
+  if (line === "You may pay {0} rather than pay the cycling cost of the first card you cycle each turn.") {
+    return { affects: { scope: "self" }, alternativeCyclingCost: { mana: "{0}", firstEachTurn: true }, text };
+  }
+  if ((m = /^As long as you have (\w+) or more cards in hand, you may pay (\{\d+\}) rather than pay cycling costs\.$/.exec(line))) {
+    const atLeast = NUMBERS[m[1].toLowerCase()];
+    if (atLeast !== undefined) {
+      return {
+        affects: { scope: "self" },
+        condition: { kind: "hand-size", atLeast },
+        alternativeCyclingCost: { mana: m[2] },
+        text,
+      };
+    }
+  }
   // Life equal to the mana value for a spell, once a turn (rule 118.9):
   // "Once during each of your turns, you may cast an enchantment spell by
   // paying life equal to its mana value rather than paying its mana cost"

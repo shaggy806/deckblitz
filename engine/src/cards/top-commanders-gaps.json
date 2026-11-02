@@ -1125,7 +1125,9 @@
   "effect:reveal-until-count-to-hand",
   "effect:reveal-until-count-tapped",
   "effect:reveal-until-rest-exile",
-  "effect:reveal-until-count"
+  "effect:reveal-until-count",
+  "cost:cycling-alt-cost",
+  "cost:cycling-x"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

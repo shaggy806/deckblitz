@@ -1050,7 +1050,7 @@ function MechanicChips({ def, isToken }: { readonly def: CardDefinition; readonl
   if (def.evoke) chips.push(`evoke ${def.evoke.cost}`)
   if (def.prototype) chips.push(`prototype ${def.prototype.cost} — ${def.prototype.power}/${def.prototype.toughness}`)
   if (def.suspend) chips.push(`suspend ${def.suspend.n} — ${def.suspend.cost}`)
-  if (def.cycling) chips.push(`cycling ${def.cycling.cost}`)
+  if (def.cycling) chips.push(`cycling ${def.cycling.costText ?? def.cycling.cost}`)
   if (def.kicker) chips.push(`${def.kicker.keyword ?? "kicker"} ${def.kicker.cost}`)
   if (def.overload) chips.push(`${def.overload.keyword ?? 'overload'} ${def.overload.cost}`)
   if (def.disturb) chips.push(`disturb ${def.disturb.cost}`)

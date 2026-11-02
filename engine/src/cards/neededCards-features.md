@@ -3716,3 +3716,12 @@ Hylda's Crown of Winter, Suppression Field, Oppressive Rays. Thaumaton Torpedo s
 waits on `stat:attacked-with-filter-this-turn`. Left in the family: `cost:first-equip-each-turn-free`
 and `cost:power-up-alternative-cost` need a {0} that replaces a whole cost, and an equip
 can cost life, not mana, so the mana path alone wouldn't be faithful.
+
+**Cycling's cost as a variant (2026-11-01, `cost:cycling-alt-cost`,
+`cost:cycling-x`).** `CyclingAbility`'s `also` (any non-mana cost, with
+`costText`) and an `{X}` in `cost`, both activated as an `activate-ability` on
+the card in hand, `this-cycled` reading the X as `{ triggerValue: true }`; the
+`alternativeCyclingCost` static, `firstEachTurn` from `cardsCycledThisTurn`.
+Proving cards: Street Wraith, Edge of Autumn, Gavi, Nest Warden, New Perspectives,
+Shark Typhoon, Webstrike Elite, Rampaging War Mammoth. Freed and unauthored:
+Valor's Flagship.

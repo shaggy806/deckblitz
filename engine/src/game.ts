@@ -77,6 +77,7 @@ import { defaultRegistry } from "./cards/default-registry.js";
 import { EMBLEM_CARD } from "./cards/emblem.js";
 import { embalmAbility, encoreAbility, ninjutsu, unearth } from "./cards/helpers.js";
 import { bestowedDefinition, licidDefinition, readsGraveyardOrder } from "./cards/define.js";
+import type { CyclingAbility } from "./cards/define.js";
 import { DUNGEONS } from "./cards/dungeons.js";
 import { MADNESS_EFFECT, MADNESS_TEXT } from "./cards/madness.js";
 import { MIRACLE_EFFECT, MIRACLE_TEXT } from "./cards/miracle.js";
@@ -1407,11 +1408,11 @@ function arrangeManaSources(
  * for (rule 702.29a, e): "Draw a card", or the search — reveal the card found
  * and put it into your hand. */
 function cyclingAbilityFrom(
-  cycling: { readonly cost: string; readonly search?: CardFilter },
+  cycling: { readonly cost: string; readonly search?: CardFilter; readonly also?: CyclingAbility["also"] },
   text: string,
 ): ActivatedAbility {
   return {
-    cost: { mana: cycling.cost, tap: false },
+    cost: { mana: cycling.cost === "" ? null : cycling.cost, tap: false, ...cycling.also },
     targets: [],
     effect:
       cycling.search === undefined
@@ -1422,6 +1423,21 @@ function cyclingAbilityFrom(
     cycling: true,
     text,
   };
+}
+
+/** A printed cycling ability's name and cost, as the player is offered it. */
+function cyclingText(cycling: CyclingAbility): string {
+  const name = cycling.search === undefined ? "Cycling" : "Landcycling";
+  return cycling.costText !== undefined ? `${name}—${cycling.costText}` : `${name} ${cycling.cost}`;
+}
+
+/** Does this cycling cost ask for more than an amount of mana: an X to announce
+ * (Shark Typhoon) or a cost of another kind, a permanent to sacrifice (Edge of
+ * Autumn)? Those are activated as any other ability is, which asks all that
+ * (`activate-ability`, through `handGrantedActivated`); the plain `cycle`
+ * action names only the card. */
+function cyclingAsksMore(cycling: CyclingAbility): boolean {
+  return cycling.also !== undefined || parseManaCost(cycling.cost).x > 0;
 }
 
 /** One permission a graveyard card could be played under, with the static
@@ -2655,7 +2671,8 @@ export class Game {
         out.push({ kind: "plot", card, cardName, cost: def.plot.cost });
       }
       // Cycling (rule 702.29) — a special action, any time you could cast an instant.
-      if (def.cycling !== null && this.whyCannotCycle(player, card) === null) {
+      // One whose cost asks for more is an `activate-ability` offer.
+      if (def.cycling !== null && !cyclingAsksMore(def.cycling) && this.whyCannotCycle(player, card) === null) {
         out.push({ kind: "cycle", card, cardName, cost: def.cycling.cost });
       }
     }
@@ -7573,6 +7590,7 @@ export class Game {
       this.state.players[player].creaturesDiedThisTurn = 0;
       this.state.players[player].createdTokenThisTurn = false;
       this.state.players[player].usedGraveyardThisTurn = false;
+      delete this.state.players[player].cardsCycledThisTurn;
       delete this.state.players[player].crimesThisTurn;
       delete this.state.players[player].turnHistory;
     }
@@ -12311,6 +12329,7 @@ export class Game {
     }
     const def = this.registry.get(this.state.objects[cardId].cardName);
     if (def.cycling === null) return `${def.name} does not have cycling`;
+    if (cyclingAsksMore(def.cycling)) return `${def.name}'s cycling cost is chosen as it's activated: activate it`;
     // Cycling is an activated ability that isn't a mana ability (rule
     // 702.29a), so a split-second spell on the stack stops it (702.61a), and
     // so does a "can't activate abilities" prohibition on its player. Not one
@@ -12348,7 +12367,15 @@ export class Game {
     if (!this.registry.has(cardName)) return undefined;
     const cycling = this.registry.get(cardName).cycling;
     if (cycling === null) return undefined;
-    return cyclingAbilityFrom(cycling, `${cycling.search === undefined ? "Cycling" : "Landcycling"} ${cycling.cost}`);
+    return cyclingAbilityFrom(cycling, cyclingText(cycling));
+  }
+
+  /** A card was cycled (rule 702.29c), for everything watching and for the
+   * count "the first card you cycle each turn" reads. */
+  private noteCycled(player: PlayerId, object: ObjectId, x: number): void {
+    const state = this.state.players[player];
+    state.cardsCycledThisTurn = (state.cardsCycledThisTurn ?? 0) + 1;
+    this.emit({ type: "card-cycled", player, object, ...(x > 0 ? { x } : {}) });
   }
 
   /** Cycling (rule 702.29a) — an activated ability from the hand: pay the
@@ -12371,7 +12398,7 @@ export class Game {
     // of Ifnir's "whenever you cycle or discard another card", Waste Not —
     // and a card with madness is exiled instead (702.35a).
     this.discardCards(player, [cardId]);
-    this.emit({ type: "card-cycled", player, object: cardId });
+    this.noteCycled(player, cardId, 0);
     // The ability itself, its costs paid (rule 602.2): the draw — or
     // landcycling's search, `min: 0` so an empty library isn't a hard
     // failure, revealing what it finds (702.29e) — happens as it resolves,
@@ -18692,6 +18719,15 @@ export class Game {
     const add = (granted: ActivatedAbility): void => {
       out.push({ ability: granted, ref: { kind: "modifier-activated", ability: granted } });
     };
+    // Every cycling ability the card has: its printed one, whose cost asks for
+    // more than mana or is an X (`cyclingAsksMore`), is listed here beside
+    // what a static gave it.
+    const cyclings: { readonly search?: CardFilter }[] = [];
+    const printedCycling = this.registry.has(card.cardName) ? this.registry.get(card.cardName).cycling : null;
+    if (printedCycling !== null) {
+      cyclings.push(printedCycling);
+      if (cyclingAsksMore(printedCycling)) add(cyclingAbilityFrom(printedCycling, cyclingText(printedCycling)));
+    }
     for (const { ability } of this.activeStaticsOf(card.owner, (a) => a.grantsNinjutsuInHand !== undefined)) {
       const grant = ability.grantsNinjutsuInHand!;
       if (!matchesFilter(this.state, this.registry, card.id, grant.filter, { you: card.owner })) continue;
@@ -18707,6 +18743,29 @@ export class Game {
         if (hasLostAbilities(this.state, this.registry, source) || !this.staticActive(source, ability)) continue;
         if (!matchesFilter(this.state, this.registry, card.id, grant.filter, { you: card.owner })) continue;
         add(cyclingAbilityFrom(grant, `${grant.search === undefined ? "Cycling" : "Typecycling"} ${grant.cost}`));
+        cyclings.push(grant);
+      }
+    }
+    // "You may pay {0} rather than pay cycling costs" (New Perspectives; Gavi,
+    // Nest Warden's for the first card each turn; rule 702.29f has a
+    // typecycling cost one too): the same ability once more at that cost, one
+    // each for what its cycling abilities do, so the player picks by which
+    // they activate (rule 602.2b).
+    if (cyclings.length > 0) {
+      const cycled = this.state.players[card.owner]?.cardsCycledThisTurn ?? 0;
+      const seen = new Set<string>();
+      for (const { ability } of this.activeStaticsOf(card.owner, (a) => a.alternativeCyclingCost !== undefined)) {
+        const grant = ability.alternativeCyclingCost!;
+        if (grant.firstEachTurn === true && cycled > 0) continue;
+        for (const { search } of cyclings) {
+          const key = `${grant.mana}|${JSON.stringify(search ?? null)}`;
+          if (seen.has(key)) continue;
+          seen.add(key);
+          add(cyclingAbilityFrom(
+            { cost: grant.mana, ...(search !== undefined ? { search } : {}) },
+            `${search === undefined ? "Cycling" : "Typecycling"} ${grant.mana}`,
+          ));
+        }
       }
     }
     return out;
@@ -20075,9 +20134,10 @@ export class Game {
       // Channel (rule 702.51a): discarding the source card is an implicit,
       // unconditional part of the cost, paid alongside the mana above.
       this.discardCards(player, [sourceId]);
-      // Cycling a static gave the card (`grantsCyclingInHand`) is cycling to
-      // everything watching for it, as `cycleCard` has a printed one.
-      if (ability.cycling === true) this.emit({ type: "card-cycled", player, object: sourceId });
+      // Cycling a static gave the card (`grantsCyclingInHand`), or a printed
+      // cost that had to be activated, is cycling to everything watching for
+      // it, as `cycleCard` has a plain printed one.
+      if (ability.cycling === true) this.noteCycled(player, sourceId, chosenX);
     } else if (ability.zone === "graveyard") {
       this.state.players[player].usedGraveyardThisTurn = true;
       // The graveyard equivalent — "Exile this card from your graveyard" is
@@ -24378,6 +24438,8 @@ export class Game {
         trigger.batched === true &&
         event.type === "permanent-entered-battlefield"
         ? this.enterBatchMatches(trigger, event, object)
+        : event.type === "card-cycled"
+        ? event.x ?? 0
         : event.type === "dice-rolled"
         ? event.results.reduce((n, r) => n + r, 0)
         : // "If you won": 1 for a clash won, 0 for one lost.

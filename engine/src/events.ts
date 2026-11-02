@@ -706,6 +706,9 @@ export type GameEvent =
       readonly type: "card-cycled";
       readonly player: PlayerId;
       readonly object: ObjectId;
+      /** The X its cycling cost was paid with (Shark Typhoon): a cycling
+       * trigger's `{ triggerValue: true }`. */
+      readonly x?: number;
     })
   | (Base & {
       /** `object` was cast via escape (rule 702.139) — `exiled` are the other
