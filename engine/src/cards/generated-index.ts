@@ -418,6 +418,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Mutavault Token",
   "Myr Token",
   "Necron Warrior Token",
+  "Nightmare Horror Token",
   "Nightmare Token (Ashiok)",
   "Ninja Token",
   "Ninja Token (Dark Leo & Shredder)",

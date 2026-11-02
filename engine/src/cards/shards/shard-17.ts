@@ -647,6 +647,7 @@ import _poolSeedshipAgrarian from "../pool/seedship-agrarian.js";
 import _poolSeek from "../pool/seek.js";
 import _poolSeethingLandscape from "../pool/seething-landscape.js";
 import _poolSeismicWave from "../pool/seismic-wave.js";
+import _poolSelflessExorcist from "../pool/selfless-exorcist.js";
 import _poolSentinelOfThePearlTrident from "../pool/sentinel-of-the-pearl-trident.js";
 import _poolSeraphOfNewPhyrexia from "../pool/seraph-of-new-phyrexia.js";
 import _poolSevinneTheChronoclasm from "../pool/sevinne-the-chronoclasm.js";
@@ -1537,6 +1538,7 @@ const shard: CardShard = {
     _poolSeek,
     _poolSeethingLandscape,
     _poolSeismicWave,
+    _poolSelflessExorcist,
     _poolSentinelOfThePearlTrident,
     _poolSeraphOfNewPhyrexia,
     _poolSevinneTheChronoclasm,

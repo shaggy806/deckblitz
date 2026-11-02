@@ -493,6 +493,7 @@ import _poolMirriCatWarrior from "../pool/mirri-cat-warrior.js";
 import _poolMirrorRoomFracturedRealm from "../pool/mirror-room-fractured-realm.js";
 import _poolMirrorform from "../pool/mirrorform.js";
 import _poolMischievousPoltergeist from "../pool/mischievous-poltergeist.js";
+import _poolMisthollowGriffin from "../pool/misthollow-griffin.js";
 import _poolMobilizedDistrict from "../pool/mobilized-district.js";
 import _poolMoltenTributary from "../pool/molten-tributary.js";
 import _poolMoltensteelDragon from "../pool/moltensteel-dragon.js";
@@ -1434,6 +1435,7 @@ const shard: CardShard = {
     _poolMirrorRoomFracturedRealm,
     _poolMirrorform,
     _poolMischievousPoltergeist,
+    _poolMisthollowGriffin,
     _poolMobilizedDistrict,
     _poolMoltenTributary,
     _poolMoltensteelDragon,

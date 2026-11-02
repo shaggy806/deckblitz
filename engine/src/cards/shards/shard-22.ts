@@ -435,6 +435,7 @@ import _poolMentalDiscipline from "../pool/mental-discipline.js";
 import _poolMercadianBazaar from "../pool/mercadian-bazaar.js";
 import _poolMidnightMayhem from "../pool/midnight-mayhem.js";
 import _poolMildManneredLibrarian from "../pool/mild-mannered-librarian.js";
+import _poolMindleechMass from "../pool/mindleech-mass.js";
 import _poolMindscourDragon from "../pool/mindscour-dragon.js";
 import _poolMinersBane from "../pool/miners-bane.js";
 import _poolMinotaurWarrior from "../pool/minotaur-warrior.js";
@@ -631,6 +632,7 @@ import _poolSeedpodSquire from "../pool/seedpod-squire.js";
 import _poolSeekTheHeart from "../pool/seek-the-heart.js";
 import _poolSeekersFolly from "../pool/seekers-folly.js";
 import _poolSeismicSpike from "../pool/seismic-spike.js";
+import _poolSenTriplets from "../pool/sen-triplets.js";
 import _poolSentinelsOfGlenElendra from "../pool/sentinels-of-glen-elendra.js";
 import _poolSentryOfTheUnderworld from "../pool/sentry-of-the-underworld.js";
 import _poolSerumRaker from "../pool/serum-raker.js";
@@ -823,6 +825,7 @@ import _poolVillagePillagers from "../pool/village-pillagers.js";
 import _poolVirtuousCharge from "../pool/virtuous-charge.js";
 import _poolVirulentSwipe from "../pool/virulent-swipe.js";
 import _poolVithianStinger from "../pool/vithian-stinger.js";
+import _poolViviensInvocation from "../pool/viviens-invocation.js";
 import _poolViviensJaguar from "../pool/viviens-jaguar.js";
 import _poolViviensTalent from "../pool/viviens-talent.js";
 import _poolVoidShatter from "../pool/void-shatter.js";
@@ -1330,6 +1333,7 @@ const shard: CardShard = {
     _poolMercadianBazaar,
     _poolMidnightMayhem,
     _poolMildManneredLibrarian,
+    _poolMindleechMass,
     _poolMindscourDragon,
     _poolMinersBane,
     _poolMinotaurWarrior,
@@ -1526,6 +1530,7 @@ const shard: CardShard = {
     _poolSeekTheHeart,
     _poolSeekersFolly,
     _poolSeismicSpike,
+    _poolSenTriplets,
     _poolSentinelsOfGlenElendra,
     _poolSentryOfTheUnderworld,
     _poolSerumRaker,
@@ -1718,6 +1723,7 @@ const shard: CardShard = {
     _poolVirtuousCharge,
     _poolVirulentSwipe,
     _poolVithianStinger,
+    _poolViviensInvocation,
     _poolViviensJaguar,
     _poolViviensTalent,
     _poolVoidShatter,

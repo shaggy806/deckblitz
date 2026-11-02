@@ -51,6 +51,7 @@ import _poolBellowingSaddlebrute from "../pool/bellowing-saddlebrute.js";
 import _poolBelovedPrincess from "../pool/beloved-princess.js";
 import _poolBenalishCavalry from "../pool/benalish-cavalry.js";
 import _poolBenevolentHydra from "../pool/benevolent-hydra.js";
+import _poolBindTheMonster from "../pool/bind-the-monster.js";
 import _poolBlazeCommando from "../pool/blaze-commando.js";
 import _poolBlessedRespite from "../pool/blessed-respite.js";
 import _poolBlightedCataract from "../pool/blighted-cataract.js";
@@ -783,6 +784,7 @@ import _poolWreckageWickerfolk from "../pool/wreckage-wickerfolk.js";
 import _poolYorvoLordOfGarenbrig from "../pool/yorvo-lord-of-garenbrig.js";
 import _poolYoungRedDragon from "../pool/young-red-dragon.js";
 import _poolYoungWeiRecruits from "../pool/young-wei-recruits.js";
+import _poolZaraRenegadeRecruiter from "../pool/zara-renegade-recruiter.js";
 import _poolZhalfirinLancer from "../pool/zhalfirin-lancer.js";
 import _tokens44RedBirdToken from "../tokens/4-4-red-bird-token.js";
 import _tokensBirdToken from "../tokens/bird-token.js";
@@ -859,6 +861,7 @@ const shard: CardShard = {
     _poolBelovedPrincess,
     _poolBenalishCavalry,
     _poolBenevolentHydra,
+    _poolBindTheMonster,
     _poolBlazeCommando,
     _poolBlessedRespite,
     _poolBlightedCataract,
@@ -1591,6 +1594,7 @@ const shard: CardShard = {
     _poolYorvoLordOfGarenbrig,
     _poolYoungRedDragon,
     _poolYoungWeiRecruits,
+    _poolZaraRenegadeRecruiter,
     _poolZhalfirinLancer,
   ],
   tokens: [

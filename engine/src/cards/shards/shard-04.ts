@@ -448,6 +448,7 @@ import _poolMemnarchTheWarden from "../pool/memnarch-the-warden.js";
 import _poolMentalNote from "../pool/mental-note.js";
 import _poolMerfolkSeer from "../pool/merfolk-seer.js";
 import _poolMidnightRitual from "../pool/midnight-ritual.js";
+import _poolMindclawShaman from "../pool/mindclaw-shaman.js";
 import _poolMindfulBiomancer from "../pool/mindful-biomancer.js";
 import _poolMistfireWeaver from "../pool/mistfire-weaver.js";
 import _poolMobJustice from "../pool/mob-justice.js";
@@ -1319,6 +1320,7 @@ const shard: CardShard = {
     _poolMentalNote,
     _poolMerfolkSeer,
     _poolMidnightRitual,
+    _poolMindclawShaman,
     _poolMindfulBiomancer,
     _poolMistfireWeaver,
     _poolMobJustice,

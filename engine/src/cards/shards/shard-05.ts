@@ -398,6 +398,7 @@ import _poolHuntingDrake from "../pool/hunting-drake.js";
 import _poolHush from "../pool/hush.js";
 import _poolIceCreamKitty from "../pool/ice-cream-kitty.js";
 import _poolIcingdeathFrostTyrant from "../pool/icingdeath-frost-tyrant.js";
+import _poolIdolOfEndurance from "../pool/idol-of-endurance.js";
 import _poolImoenMysticTrickster from "../pool/imoen-mystic-trickster.js";
 import _poolInThePresenceOfAges from "../pool/in-the-presence-of-ages.js";
 import _poolIncarnationTechnique from "../pool/incarnation-technique.js";
@@ -1272,6 +1273,7 @@ const shard: CardShard = {
     _poolHush,
     _poolIceCreamKitty,
     _poolIcingdeathFrostTyrant,
+    _poolIdolOfEndurance,
     _poolImoenMysticTrickster,
     _poolInThePresenceOfAges,
     _poolIncarnationTechnique,

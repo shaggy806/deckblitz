@@ -910,6 +910,7 @@ import _tokensHeartwoodToken from "../tokens/heartwood-token.js";
 import _tokensHumanNobleToken from "../tokens/human-noble-token.js";
 import _tokensJumblebones from "../tokens/jumblebones.js";
 import _tokensKnightAllyToken from "../tokens/knight-ally-token.js";
+import _tokensNightmareHorrorToken from "../tokens/nightmare-horror-token.js";
 import _tokensPhyrexianMiteToken from "../tokens/phyrexian-mite-token.js";
 import _tokensPrismToken from "../tokens/prism-token.js";
 import _tokensRedElementalToken11 from "../tokens/red-elemental-token-1-1.js";
@@ -1830,6 +1831,7 @@ const shard: CardShard = {
     _tokensHumanNobleToken,
     _tokensJumblebones,
     _tokensKnightAllyToken,
+    _tokensNightmareHorrorToken,
     _tokensPhyrexianMiteToken,
     _tokensPrismToken,
     _tokensRedElementalToken11,

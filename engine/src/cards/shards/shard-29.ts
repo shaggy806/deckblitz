@@ -507,6 +507,7 @@ import _poolOverride from "../pool/override.js";
 import _poolOwlinHistorian from "../pool/owlin-historian.js";
 import _poolPackHunt from "../pool/pack-hunt.js";
 import _poolPain101 from "../pool/pain-101.js";
+import _poolPainForAll from "../pool/pain-for-all.js";
 import _poolPantherHabit from "../pool/panther-habit.js";
 import _poolParalyze from "../pool/paralyze.js";
 import _poolParhelionIi from "../pool/parhelion-ii.js";
@@ -1388,6 +1389,7 @@ const shard: CardShard = {
     _poolOwlinHistorian,
     _poolPackHunt,
     _poolPain101,
+    _poolPainForAll,
     _poolPantherHabit,
     _poolParalyze,
     _poolParhelionIi,

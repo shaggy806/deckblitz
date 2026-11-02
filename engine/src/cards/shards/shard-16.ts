@@ -550,6 +550,7 @@ import _poolOvergrowth from "../pool/overgrowth.js";
 import _poolPackMastiff from "../pool/pack-mastiff.js";
 import _poolPainDistributor from "../pool/pain-distributor.js";
 import _poolPalladiumMyr from "../pool/palladium-myr.js";
+import _poolPanglacialWurm from "../pool/panglacial-wurm.js";
 import _poolParadoxZone from "../pool/paradox-zone.js";
 import _poolParagonOfOpenGraves from "../pool/paragon-of-open-graves.js";
 import _poolPardicCollaborator from "../pool/pardic-collaborator.js";
@@ -1511,6 +1512,7 @@ const shard: CardShard = {
     _poolPackMastiff,
     _poolPainDistributor,
     _poolPalladiumMyr,
+    _poolPanglacialWurm,
     _poolParadoxZone,
     _poolParagonOfOpenGraves,
     _poolPardicCollaborator,

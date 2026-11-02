@@ -140,6 +140,7 @@ import _poolConduitOfEmrakul from "../pool/conduit-of-emrakul.js";
 import _poolConfrontTheUnknown from "../pool/confront-the-unknown.js";
 import _poolConquerorsGalleon from "../pool/conquerors-galleon.js";
 import _poolConstrictingTendrils from "../pool/constricting-tendrils.js";
+import _poolConsumingFerocity from "../pool/consuming-ferocity.js";
 import _poolContrabandLivestock from "../pool/contraband-livestock.js";
 import _poolCorneredMarket from "../pool/cornered-market.js";
 import _poolCorporealProjection from "../pool/corporeal-projection.js";
@@ -1043,6 +1044,7 @@ const shard: CardShard = {
     _poolConfrontTheUnknown,
     _poolConquerorsGalleon,
     _poolConstrictingTendrils,
+    _poolConsumingFerocity,
     _poolContrabandLivestock,
     _poolCorneredMarket,
     _poolCorporealProjection,
