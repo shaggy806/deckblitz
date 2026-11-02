@@ -86,8 +86,8 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
-- **Need-keys Phase 2: attack triggers narrowed by attackers and the player attacked** (2026-11-01;
-  `trigger:attacks-player-filter`, `trigger:creature-attacks-enchanted-player`) — `attacks-player`'s
+- **Need-keys Phase 2: attack triggers narrowed by attackers and the player attacked** (2026-11-01,
+  `fe5078a6c`; `trigger:attacks-player-filter`, `trigger:creature-attacks-enchanted-player`) — `attacks-player`'s
   `filter`, still once per player, and `attacks`' `attackedPlayer`, once per creature and never a
   creature attacking that player's planeswalker (rule 508.3a). Attuma, Atlantean Warlord, Curse of
   Predation, Curse of the Forsaken; 5 more cards freed.
