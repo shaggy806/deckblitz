@@ -2756,6 +2756,19 @@ life (Hollow Warrior's tap, a `declare-attackers` choice), and the client's runn
 cost line doesn't add `perAttacker` or show a block's yet (the engine refuses what
 can't be paid).
 
+### A can't-attack restriction scoped to the defender — built 2026-11-01
+
+The need-keys group `static:cant-attack-you-player-only` +
+`effect:creatures-cant-attack-you-until-next-turn` + `static:cant-attack-same-player`:
+`cantAttackController: "player"` (the player alone, not their planeswalkers), the
+`player-effect` effect's `cantAttack`, and the restriction
+`cant-attack-player-attacked-this-turn` (`GameObject.attackedPlayersThisTurn`).
+`cantAttackController` no longer stops an attack on a battle its controller protects
+(neither form names one). Proving cards: Reverence, Blazing Archon, Teferi's Moat,
+Queen Mother Ramonda, Elephant Grass (and its tax by colour), Heat Wave, Chronomantic
+Escape, Port Razer, Bloodthirster. Beside it: `effect:player-cant-attack-you-this-turn`
+and `-next-turn`, a prohibition on one player, are a group of their own.
+
 ### Statics acting on a player — built 2026-11-01
 
 The need-keys group `static:static-over-enchanted-player` and

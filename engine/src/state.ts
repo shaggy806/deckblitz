@@ -395,6 +395,10 @@ export interface GameObject {
    * creature didn't attack during your last combat" (Territorial Hellkite).
    * Gone with any change of zone. */
   lastAttack?: { readonly combat: CombatId; readonly player: PlayerId | null };
+  /** The players this object has attacked this turn, not their planeswalkers:
+   * "can't attack a player it has already attacked this turn" (Port Razer).
+   * Reset as each turn begins, and by any zone change, like `attackedThisTurn`. */
+  attackedPlayersThisTurn?: PlayerId[];
   /** `mustAttackPlayer` lasts only this combat (rule 500.5a) — Territorial
    * Hellkite's "attacks that player this combat if able". */
   mustAttackPlayerThisCombat?: true;
@@ -4845,6 +4849,10 @@ export interface PlayerEffect {
    * each blocking creature they control" (War Cadence): a cost on every
    * block by anyone (rule 509.1d), read as the effect was created (611.2b). */
   readonly blockTax?: { readonly generic: number; readonly life: number };
+  /** "Until your next turn, creatures can't attack you" (Chronomantic Escape):
+   * every creature, `owner` being "you", a planeswalker of theirs only under
+   * `"you-and-planeswalkers"` (rule 508.1b). */
+  readonly cantAttack?: "you" | "you-and-planeswalkers";
 }
 
 /**

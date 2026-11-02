@@ -7249,6 +7249,7 @@ export class Game {
     for (const id of [...this.state.zones.shared.battlefield, ...phasedOutIds(this.state)]) {
       const object = this.state.objects[id];
       if (object.attackedThisTurn === true) object.attackedThisTurn = false;
+      delete object.attackedPlayersThisTurn;
     }
     this.state.extraCombats = 0;
     // The turn that just ended, for "if no spells were cast last turn" (the
@@ -9667,6 +9668,9 @@ export class Game {
           combat: { turn: this.state.turn.number, phase: this.state.turn.combatPhases ?? 1 },
           player: this.state.players[defender as PlayerId] !== undefined ? (defender as PlayerId) : null,
         };
+        if (object.lastAttack.player !== null) {
+          object.attackedPlayersThisTurn = [...(object.attackedPlayersThisTurn ?? []), object.lastAttack.player];
+        }
         // Melee's "each opponent you attacked this combat" (702.121a) — kept
         // past the attacker leaving combat.
         if (object.lastAttack.player !== null) {
@@ -46122,6 +46126,7 @@ export class Game {
     delete object.impulse;
     delete object.impulseCastOnTurn;
     delete object.attackedThisTurn;
+    delete object.attackedPlayersThisTurn;
     delete object.lastAttack;
     delete object.mustAttackPlayer;
     delete object.mustAttackPlayerThisCombat;

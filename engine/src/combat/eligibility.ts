@@ -40,6 +40,7 @@ import { hasRingBearerDesignation } from "../ring.js";
 import { attackRequirementActive, printedCardName, rulesTextName } from "../state.js";
 import type { AttackRequirementRule, GameObject, GameState } from "../state.js";
 import { permanentSource, protectionBlocks } from "../targeting.js";
+import { attackCovers } from "./tax.js";
 
 /** Each landwalk keyword and the land type it walks (rule 702.14). */
 export const LANDWALK: ReadonlyArray<readonly [Keyword, string]> = [
@@ -245,6 +246,12 @@ function whyCannotAttackUncached(
   if (restrictions.has("cant-attack-owner") && target === object.owner) {
     return `${def.name} can't attack its owner`;
   }
+  if (
+    restrictions.has("cant-attack-player-attacked-this-turn") &&
+    object.attackedPlayersThisTurn?.includes(target as PlayerId) === true
+  ) {
+    return `${def.name} can't attack a player it has already attacked this turn`;
+  }
   const nearest = nearestOpponentRule(state, registry, player);
   if (nearest !== null && !nearest.includes(defendingPlayer)) {
     return nearest.length === 0
@@ -271,7 +278,10 @@ function whyCannotAttackUncached(
     const source = state.objects[id];
     if (source.controller !== defendingPlayer || hasLostAbilities(state, registry, source)) continue;
     for (const ability of registry.get(rulesTextName(source)).static) {
-      if (ability.cantAttackController !== true) continue;
+      if (ability.cantAttackController === undefined || ability.cantAttackController === false) continue;
+      // Neither form names a battle (rule 310.5): one they protect may be attacked.
+      const covers = ability.cantAttackController === "player" ? "you" : "you-and-planeswalkers";
+      if (!attackCovers(state, registry, covers, source.controller, target)) continue;
       if (!staticReaches(state, registry, source, ability, object)) continue;
       if (
         ability.condition !== undefined &&
@@ -279,6 +289,13 @@ function whyCannotAttackUncached(
       ) {
         continue;
       }
+      return `${def.name} can't attack ${defendingPlayer}`;
+    }
+  }
+  // "Until your next turn, creatures can't attack you" (Chronomantic Escape):
+  // a player effect, binding creatures that weren't there when it began.
+  for (const { owner, cantAttack } of state.playerEffects ?? []) {
+    if (cantAttack !== undefined && attackCovers(state, registry, cantAttack, owner, target)) {
       return `${def.name} can't attack ${defendingPlayer}`;
     }
   }

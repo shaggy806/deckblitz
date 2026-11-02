@@ -4016,6 +4016,14 @@ budget (`withinAttackTax`, `withinBlockTax`). For a turn: the `player-effect` ef
 (War Cadence), every block by anyone. A cost that isn't mana or life (Hollow Warrior's tapping
 another creature) needs a choice the declaration doesn't carry, so isn't here.
 
+`cantAttackController: "player"` is "creatures can't attack you" with no planeswalkers named
+(Reverence, Blazing Archon, Teferi's Moat: rule 508.1b), where `true` is "you or planeswalkers you
+control" (Vow of Duty); `affects` says which creatures, `condition` when (Queen Mother Ramonda's
+monarch). For a while: the `player-effect` effect's `cantAttack: "you"` (Chronomantic Escape), a
+rule that binds creatures arriving later. The restriction `"cant-attack-player-attacked-this-turn"`
+is "can't attack a player it has already attacked this turn" (Port Razer), by the object's own
+`attackedPlayersThisTurn`; a planeswalker it attacked isn't the player.
+
 - `grantPt: [p, t]` — layer 7d P/T bonus.
 - `grantPtPerCount`, each affected permanent by its own: `relativeToAffected`
   asks `filter` of it, so `attachedTo: { isSource: true }` is "attached to it"

@@ -519,6 +519,10 @@ export type CombatRestriction =
    * Xantcha's "can't attack its owner or planeswalkers its owner controls"
    * would be a restriction of its own. */
   | "cant-attack-owner"
+  /** "Can't attack a player it has already attacked this turn" (Port Razer,
+   * Bloodthirster): the player only, as above, by this object's own
+   * `attackedPlayersThisTurn` (rule 400.7: a new object starts afresh). */
+  | "cant-attack-player-attacked-this-turn"
   /** "Can't attack alone" (Bonded Construct; with `cant-block-alone`, Mogg
    * Flunkies's "can't attack or block alone"), and the rest of a restriction
    * keyed to the other creatures declared with it (rules 508.1c, 509.1b — see
@@ -1982,8 +1986,12 @@ export interface StaticAbility {
    * that's enchanted by an Aura you control" — a `filter` scope with
    * `enchantedBy: "you"`). Checked directly in `whyCannotAttack` rather than
    * as a `CombatRestriction`: those are bare strings, and this one has to
-   * know whose "you" it means. */
-  readonly cantAttackController?: boolean;
+   * know whose "you" it means.
+   *
+   * `"player"` is "can't attack you" with no planeswalkers named: the player
+   * only, so a creature may still attack a planeswalker they control (rule
+   * 508.1b): Reverence, Blazing Archon, Teferi's Moat. */
+  readonly cantAttackController?: boolean | "player";
   /** "This creature can't attack **unless defending player** controls an
    * Island" (Sea Serpent), "… is the monarch" (Crown-Hunter Hireling), "…
    * unless you control more creatures than defending player" (Mogg Toady):

@@ -4991,6 +4991,10 @@ export type EffectSpec =
        * every block by anyone (rule 509.1d). `generic` and `life` are read as
        * this resolves (rule 611.2b), a creature. */
       readonly blockTax?: { readonly generic?: EffectAmount; readonly life?: EffectAmount };
+      /** "Until your next turn, creatures can't attack you" (Chronomantic
+       * Escape): every creature, entering later too; `"you-and-planeswalkers"`
+       * if the text also names planeswalkers. */
+      readonly cantAttack?: "you" | "you-and-planeswalkers";
     }
   | {
       /**
@@ -14538,6 +14542,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
               },
             }
           : {}),
+        ...(spec.cantAttack !== undefined ? { cantAttack: spec.cantAttack } : {}),
       });
       return;
     case "win-game":

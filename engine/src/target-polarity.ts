@@ -993,7 +993,7 @@ export function auraPolarity(def: CardDefinition): Polarity {
       else help = true;
     }
     if (ability.protection !== undefined || ability.cantBeSacrificed === true) help = true;
-    if (ability.doesntUntap === true || ability.cantAttackController === true) harm = true;
+    if (ability.doesntUntap === true || ability.cantAttackController === true || ability.cantAttackController === "player") harm = true;
     // A cost to attack or block with it (Brainwash) hurts; one on blocking it
     // (Awesome Presence) is evasion.
     if (ability.combatTax !== undefined) {

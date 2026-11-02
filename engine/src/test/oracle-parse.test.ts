@@ -6936,6 +6936,50 @@ describe("a cost on a creature to attack or block", () => {
     });
   });
 
+  it("reads can't attack you, the player alone, by what it names", () => {
+    const line = (subject: string) => read("Enchantment", `${subject} can't attack you.`);
+    expect(line("Creatures")).toMatchObject({
+      affects: { scope: "filter", filter: { type: "creature" } },
+      cantAttackController: "player",
+    });
+    expect(line("Creatures with power 2 or less")).toMatchObject({
+      affects: { filter: { type: "creature", power: { op: "lte", n: 2 } } },
+    });
+    expect(line("Black creatures")).toMatchObject({ affects: { filter: { type: "creature", colors: ["B"] } } });
+    expect(line("Creatures without flying")).toMatchObject({ affects: { filter: { type: "creature", notKeyword: "flying" } } });
+    expect(line("Creatures of the chosen color without flying")).toMatchObject({
+      affects: { filter: { type: "creature", ofChosenColor: true, notKeyword: "flying" } },
+    });
+    expect(line("Goblins and elves")).toBeNull();
+    expect(read("Enchantment", "As long as you're the monarch, creatures with power 2 or less can't attack you.")).toMatchObject({
+      condition: { kind: "monarch", who: "you" },
+      cantAttackController: "player",
+    });
+  });
+
+  it("reads the taxes by colour, and the restriction by who it attacked", () => {
+    expect(
+      read("Enchantment", "Nonblack creatures can't attack you unless their controller pays {2} for each creature they control that's attacking you."),
+    ).toMatchObject({
+      affects: { filter: { type: "creature", notColors: ["B"] } },
+      combatTax: { on: ["attack"], generic: 2, covers: "you" },
+    });
+    expect(
+      read("Enchantment", "Nonblue creatures can't block creatures you control unless their controller pays 1 life for each blocking creature they control."),
+    ).toMatchObject({
+      affects: { filter: { type: "creature", notColors: ["U"] } },
+      combatTax: { on: ["block"], life: 1, attacker: { controlledBy: "you" } },
+    });
+    expect(own("This creature can't attack a player it has already attacked this turn.")).toMatchObject({
+      restrictions: ["cant-attack-player-attacked-this-turn"],
+    });
+  });
+
+  it("reads creatures can't attack you for a while", () => {
+    const escape = parseEffect("Until your next turn, creatures can't attack you.", ctx());
+    expect(escape.effect).toEqual({ kind: "player-effect", duration: "until-your-next-turn", cantAttack: "you" });
+  });
+
   it("reads a block tax for the turn", () => {
     const cadence = parseEffect("This turn, creatures can't block unless their controller pays {X} for each blocking creature they control.", ctx());
     expect(cadence.effect).toEqual({ kind: "player-effect", duration: "end-of-turn", blockTax: { generic: "x" } });

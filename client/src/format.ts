@@ -40,6 +40,7 @@ const RESTRICTION_TEXT: Record<CombatRestriction, string> = {
   'must-be-blocked': 'must be blocked by every creature able',
   'must-be-blocked-if-able': 'must be blocked if able',
   'cant-attack-owner': "can't attack its owner",
+  'cant-attack-player-attacked-this-turn': "can't attack a player it has already attacked this turn",
   'doesnt-untap': "doesn't untap during its controller's untap step",
   'cant-be-blocked': "can't be blocked",
   'cant-turn-face-up': "can't be turned face up",

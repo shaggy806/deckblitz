@@ -1999,6 +1999,11 @@ export function parseSentence(sentence, ctx) {
   if (/^this turn, creatures can't attack unless their controller pays \{X\} for each attacking creature they control\.$/i.test(s)) {
     return { kind: "player-effect", duration: "end-of-turn", attackTax: { generic: "x", covers: "all" } };
   }
+  // "Until your next turn, creatures can't attack you" (Chronomantic Escape):
+  // a rule for a while, no cost.
+  if (/^until your next turn, creatures can't attack you\.$/i.test(s)) {
+    return { kind: "player-effect", duration: "until-your-next-turn", cantAttack: "you" };
+  }
   // Its block twin (War Cadence, rule 509.1d).
   if (/^this turn, creatures can't block unless their controller pays \{X\} for each blocking creature they control\.$/i.test(s)) {
     return { kind: "player-effect", duration: "end-of-turn", blockTax: { generic: "x" } };
@@ -8355,6 +8360,8 @@ const STATIC_CONDITION_PREFIXES = [
   ["As long as ~ is renowned, ", { kind: "source", filter: { renowned: true } }],
   // Winter Orb, Static Orb, Storage Matrix.
   ["As long as ~ is untapped, ", { kind: "source", filter: { tapped: false } }],
+  // Queen Mother Ramonda.
+  ["As long as you're the monarch, ", { kind: "monarch", who: "you" }],
   // Murders at Karlov Manor's "five or more mana values among cards in your
   // graveyard" (Aven Heartstabber): a `distinct` aggregate there.
   ["As long as there are five or more mana values among cards in your graveyard, ", FIVE_MANA_VALUES],
@@ -9412,6 +9419,27 @@ function attackTaxCount(phrase) {
   return filter === null || Object.keys(filter).length === 0 ? null : { countOf: { ...filter, controlledBy: "you" } };
 }
 
+/** The creatures a "can't attack you" names, as a filter: all of them, by
+ * colour, by power, without flying, of the chosen colour; `null` for any other
+ * subject. */
+function attackingCreatures(subject) {
+  const COLORS = { white: "W", blue: "U", black: "B", red: "R", green: "G" };
+  if (subject === "Creatures") return { type: "creature" };
+  let m;
+  if ((m = /^(Non)?(white|blue|black|red|green) creatures$/i.exec(subject))) {
+    const color = COLORS[m[2].toLowerCase()];
+    return { type: "creature", ...(m[1] === undefined ? { colors: [color] } : { notColors: [color] }) };
+  }
+  if ((m = /^Creatures with power (\d+) or (less|greater)$/.exec(subject))) {
+    return { type: "creature", power: { op: m[2] === "less" ? "lte" : "gte", n: Number(m[1]) } };
+  }
+  if (subject === "Creatures without flying") return { type: "creature", notKeyword: "flying" };
+  if (subject === "Creatures of the chosen color without flying") {
+    return { type: "creature", ofChosenColor: true, notKeyword: "flying" };
+  }
+  return null;
+}
+
 function parseStatic(line, text) {
   let m;
   // A cost keyed to a spell's target (`targetedBySpellsCost`, rule 601.2f):
@@ -9841,6 +9869,34 @@ function parseStatic(line, text) {
     if (covers !== null && generic !== null) {
       return { affects: { scope: "self" }, attackTax: { generic, ...(covers === "you" ? {} : { covers }) }, text };
     }
+  }
+  // "Creatures with power 2 or less can't attack you" (Reverence): the player
+  // alone (`cantAttackController: "player"`, rule 508.1b).
+  if ((m = /^(.+) can't attack you\.$/.exec(line))) {
+    const filter = attackingCreatures(m[1]);
+    if (filter !== null) return { affects: { scope: "filter", filter }, cantAttackController: "player", text };
+  }
+  // Elephant Grass's other half, a `combatTax` by colour on attacking you.
+  if ((m = /^(.+) can't attack you unless their controller pays \{(\d+)\} for each creature they control that's attacking you\.$/.exec(line))) {
+    const filter = attackingCreatures(m[1]);
+    if (filter !== null) {
+      return { affects: { scope: "filter", filter }, combatTax: { on: ["attack"], generic: Number(m[2]), covers: "you" }, text };
+    }
+  }
+  // Heat Wave's: a cost to block by colour, in life, on what "you" control.
+  if ((m = /^(.+) can't block creatures you control unless their controller pays (\d+) life for each blocking creature they control\.$/.exec(line))) {
+    const filter = attackingCreatures(m[1]);
+    if (filter !== null) {
+      return {
+        affects: { scope: "filter", filter },
+        combatTax: { on: ["block"], life: Number(m[2]), attacker: { controlledBy: "you" } },
+        text,
+      };
+    }
+  }
+  // "~ can't attack a player it has already attacked this turn" (Port Razer).
+  if (line === "~ can't attack a player it has already attacked this turn.") {
+    return { affects: { scope: "self" }, restrictions: ["cant-attack-player-attacked-this-turn"], text };
   }
   // A cost on a creature to attack or block (rules 508.1h, 509.1d, `combatTax`):
   // "~ can't attack unless you pay {1} for each +1/+1 counter on it" (Phyrexian
