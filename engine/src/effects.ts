@@ -35,6 +35,7 @@ import type {
   EnterAttachHost,
   FaceDownAs,
   LeaveDestination,
+  HeldPlayerCounter,
   PlayerCounterKind,
   CombatChoice,
   PlayerEffect,
@@ -891,7 +892,7 @@ export type EffectAmount =
    * "where X is the number of **experience counters you have**" (Ezuri, Claw
    * of Progress). `who` defaults to `"you"`. See `PlayerState.counters`.
    */
-  | { readonly playerCounters: PlayerCounterKind; readonly who?: PlayerScope }
+  | { readonly playerCounters: HeldPlayerCounter; readonly who?: PlayerScope }
   /**
    * The effect's controller's speed (rule 702.179) — "where X is your
    * speed" (The Speed Demon, Point the Way, Momentum Breaker's "life equal
@@ -2155,6 +2156,10 @@ export type EffectSpec =
        * `choose` (rule 101.4).
        */
       readonly chooser?: EffectPlayerRef;
+      /** "A creature an opponent controls **chosen at random**" (Cinderheart
+       * Giant): nobody is asked, one of the matches is picked, and `then` runs
+       * with it at slot 0. `upTo` isn't read: it's one permanent. */
+      readonly random?: true;
     }
   | {
       /**
@@ -5294,7 +5299,10 @@ export type EffectSpec =
        * instead" — `floor: 1`). Angel's Grace, Everybody Lives!.
        */
       readonly kind: "player-effect";
-      readonly duration: "end-of-turn" | "until-your-next-turn" | "until-end-of-your-next-turn";
+      readonly duration: "end-of-turn" | "until-your-next-turn" | "until-end-of-your-next-turn" | "rest-of-game";
+      /** "You have no maximum hand size until your next turn" (Enter the
+       * Infinite), "… for the rest of the game" (Praetor's Counsel). */
+      readonly noMaxHandSize?: PlayerScope;
       /** `allCasters`: every player's matching spells, not only the
        * controller's — Cheering Fanatic's "spells with the chosen name cost
        * {1} less to cast this turn". */
@@ -10931,7 +10939,7 @@ export interface EffectApi {
   addPlayerCounters(player: PlayerId, counter: PlayerCounterKind, amount: number): void;
   /** How many counters of `counter` `player` has — see the `playerCounters`
    * {@link EffectAmount}. */
-  playerCountersOf(player: PlayerId, counter: PlayerCounterKind): number;
+  playerCountersOf(player: PlayerId, counter: HeldPlayerCounter): number;
   /** Every kind of counter `player` has now (rule 122.1), energy included,
    * each with how many — `{}` for a player who has left the game. */
   playerCounterKinds(player: PlayerId): Readonly<Record<string, number>>;
@@ -13858,6 +13866,14 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       if (chooser === undefined) return;
       const except =
         spec.exceptTriggerObject === true && ctx.triggerObject !== undefined ? [ctx.triggerObject] : [];
+      if (spec.random === true) {
+        // Nobody is asked: the game picks, each with an equal chance.
+        const among = ctx.eachPermanentMatching(spec.filter, spec.exceptSource === true, except, undefined);
+        if (among.length === 0) return;
+        const picked = among[ctx.pickAtRandom(among.length, (i) => ({ kind: "card", object: among[i].object }))];
+        applyEffectSpec(spec.then, ctx.withFoundAt(0, picked.object));
+        return;
+      }
       ctx.choosePermanents(
         spec.filter,
         Math.max(0, Math.floor(amountValue(spec.min ?? 0, ctx))),
@@ -15625,7 +15641,10 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
             ? { kind: "end-of-turn" }
             : spec.duration === "until-end-of-your-next-turn"
               ? { kind: "end-of-your-next-turn" }
-              : { kind: "your-next-turn" },
+              : spec.duration === "rest-of-game"
+                ? { kind: "rest-of-game" }
+                : { kind: "your-next-turn" },
+        ...(spec.noMaxHandSize !== undefined ? { noMaxHandSize: ctx.playersInScope(spec.noMaxHandSize) } : {}),
         ...(spec.reduceSpells !== undefined
           ? {
               reduceSpells: {

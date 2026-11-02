@@ -180,7 +180,13 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     if (n.as !== undefined) v.child(n.effect);
   },
   "for-permanent": none,
-  "as-player": (n, v) => v.child(n.effect),
+  // Whoever's in `who`'s slot is doing it: what that means for them is the
+  // inner effect's to say, and with nothing inner naming the slot it's the
+  // board's call (Encircling Fissure's "creatures target opponent controls").
+  "as-player": (n, v) => {
+    if (typeof n.who === "object" && "target" in n.who) v.touch(n.who.target, "either", MINOR);
+    v.child(n.effect);
+  },
   // Their slot 0 is a convoking creature, not the spell's target 0.
   "for-each-convoker": none,
   "for-convoker": none,

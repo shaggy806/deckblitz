@@ -372,6 +372,7 @@ import {
   LOCKED_ROOM,
   tokenFoldKey,
   speedOf,
+  playerCountersHeld,
 } from "./state.js";
 import type {
   AssistAsk,
@@ -8800,7 +8801,10 @@ export class Game {
         continue;
       }
       for (const ability of this.staticsOfSource(source)) {
-        if (ability.noMaxHandSize === true && source.controller === player && this.staticActive(source, ability)) {
+        if (
+          (ability.noMaxHandSize === "each-player" || (ability.noMaxHandSize === true && source.controller === player)) &&
+          this.staticActive(source, ability)
+        ) {
           changes.push({ timestamp: source.timestamp, apply: () => Infinity });
         }
         const rule = ability.maxHandSize;
@@ -8820,6 +8824,23 @@ export class Game {
             return (rule.set === undefined ? size : rule.set - minus) + (rule.adjust ?? 0);
           },
         });
+      }
+    }
+    // A one-shot's "you have no maximum hand size until your next turn"
+    // (Enter the Infinite) or "for the rest of the game" (Praetor's Counsel).
+    for (const effect of this.state.playerEffects ?? []) {
+      if (effect.noMaxHandSize?.includes(player) === true) {
+        changes.push({ timestamp: effect.timestamp ?? 0, apply: () => Infinity });
+      }
+    }
+    // One an Aura gave a permanent they control (Nerd Rage): that permanent's
+    // "you" is its controller, not the Aura's.
+    for (const id of this.state.zones.shared.battlefield) {
+      const object = this.state.objects[id];
+      if (object === undefined || object.controller !== player) continue;
+      const granted = grantedStatics(this.state, this.registry, object, (a) => a.noMaxHandSize === true);
+      if (granted.some((a) => this.staticActive(object, a))) {
+        changes.push({ timestamp: object.timestamp, apply: () => Infinity });
       }
     }
     // A stable sort: one permanent's abilities apply in printed order.
@@ -31264,7 +31285,9 @@ export class Game {
           const { ofChosenType: _chosen, ...rest } = flash.filter;
           effect = { ...effect, castAsThoughFlash: { ...flash, filter: { ...rest, subtype: chosen } } };
         }
-        (this.state.playerEffects ??= []).push(effect);
+        (this.state.playerEffects ??= []).push(
+          effect.noMaxHandSize === undefined ? effect : { ...effect, timestamp: this.freshTimestamp() },
+        );
       },
       flipCoin: () => {
         const won = this.rng.next() < 0.5;
@@ -32228,7 +32251,7 @@ export class Game {
       },
       addPlayerCounters: (player, counter, amount) =>
         this.changePlayerCounters(player, counter, amount),
-      playerCountersOf: (player, counter) => this.state.players[player]?.counters[counter] ?? 0,
+      playerCountersOf: (player, counter) => playerCountersHeld(this.state, player, counter),
       playerCounterKinds: (player) => {
         const ps = this.state.players[player];
         if (ps === undefined || ps.hasLost) return {};

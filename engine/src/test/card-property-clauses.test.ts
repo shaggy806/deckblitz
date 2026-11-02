@@ -411,11 +411,13 @@ describe("hasAbilities — any ability at all (rule 113)", () => {
     expect(lastKnown(game, bears, { hasAbilities: false })).toBe(true);
   });
 
-  it("fails closed as a static's scope, which the layer fold can't answer", () => {
+  it("is answered as a static's scope, in the fold's last pass", () => {
     const game = makeGame();
     const bears = spawn(game, "Grizzly Bears");
+    const angel = spawn(game, "Serra Angel");
     spawn(game, VANILLA_LORD);
-    expect(game.characteristics(bears).power).toBe(2);
+    expect(game.characteristics(bears).power).toBe(3);
+    expect(game.characteristics(angel).power).toBe(4);
   });
 });
 

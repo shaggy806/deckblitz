@@ -35,7 +35,7 @@ import type { ObjectId, PlayerId } from "./primitives.js";
 import { LOCKED_ROOM, activePlayerOf, blockedAttackersOf, isTokenNow, manaCostOverride, nameOf, printedCardName, rulesTextName } from "./state.js";
 import type { GameObject, GameState, LastKnownInfo, ZoneType } from "./state.js";
 import { CREATURE_TYPES } from "./creature-types.js";
-import { EVERY_CREATURE_TYPE, hasSubtype, isCreatureType, isLandType, isTypeMarker } from "./subtypes.js";
+import { EVERY_CREATURE_TYPE, EVERY_LAND_TYPE, hasSubtype, isCreatureType, isLandType, isTypeMarker } from "./subtypes.js";
 import { lastKnownNames, namesOf } from "./card-names.js";
 import type { TargetRef } from "./target.js";
 import { thisWayEntries } from "./this-way.js";
@@ -1227,6 +1227,7 @@ export interface FilterContext {
     readonly types?: readonly CardType[] | undefined;
     readonly subtypes?: readonly string[] | undefined;
     readonly keywords?: (() => ReadonlySet<Keyword>) | undefined;
+    readonly hasProtection?: (() => boolean) | undefined;
   };
 }
 
@@ -1590,15 +1591,45 @@ export function matchesFilter(
   }
   // "Shares a card type with the sacrificed creature" (or the trigger object)
   // is bound to plain types by the effect applying it
-  // (`bindDynamicCompares`); left unbound — anywhere nothing could answer
-  // it — it matches nothing.
+  // (`bindDynamicCompares`). Left unbound, it's answered here if this context
+  // can name what it means — a trigger's "a spell that shares a creature type
+  // with this creature" (Folk Hero) — and otherwise matches nothing.
   if (
     filter.sharesCardTypeWith !== undefined ||
     filter.sharesPermanentTypeWith !== undefined ||
     filter.sharesCreatureTypeWith !== undefined ||
     filter.sharesLandTypeWith !== undefined
   ) {
-    return false;
+    if (ctx.layered !== undefined) return false;
+    const shares = (reference: ShareReference, kind: SharedTypes["kind"]): boolean => {
+      const objects = liveReferenceObjects(state, registry, reference, ctx, live?.controller ?? lki?.controller);
+      if (objects === undefined) return false;
+      if (objects.includes(id)) return true;
+      if (kind === "card" || kind === "permanent") {
+        const mine = live !== undefined ? effectiveTypes(state, registry, live) : lki!.types;
+        return objects.some((other) => {
+          const object = state.objects[other];
+          if (object === undefined) return false;
+          return effectiveTypes(state, registry, object).some(
+            (t) => mine.includes(t) && (kind === "card" || PERMANENT_TYPES.includes(t)),
+          );
+        });
+      }
+      const mine = live !== undefined ? effectiveSubtypes(state, registry, live) : lki!.subtypes;
+      return objects.some((other) => {
+        const object = state.objects[other];
+        if (object === undefined) return false;
+        return effectiveSubtypes(state, registry, object).some((s) =>
+          kind === "creature"
+            ? (s === EVERY_CREATURE_TYPE || isCreatureType(s)) && hasSubtype(mine, s)
+            : (s === EVERY_LAND_TYPE || isLandType(s)) && hasSubtype(mine, s),
+        );
+      });
+    };
+    if (filter.sharesCardTypeWith !== undefined && !shares(filter.sharesCardTypeWith, "card")) return false;
+    if (filter.sharesPermanentTypeWith !== undefined && !shares(filter.sharesPermanentTypeWith, "permanent")) return false;
+    if (filter.sharesCreatureTypeWith !== undefined && !shares(filter.sharesCreatureTypeWith, "creature")) return false;
+    if (filter.sharesLandTypeWith !== undefined && !shares(filter.sharesLandTypeWith, "land")) return false;
   }
   if (
     filter.isSpell !== undefined &&
@@ -2384,14 +2415,21 @@ export function matchesFilter(
     if (has !== filter.hasManaAbility) return false;
   }
   // These can't be answered from inside the layer fold (see each clause).
-  if (
-    layered !== undefined &&
-    (filter.hasAbilities !== undefined || filter.nameDiffersFromEach !== undefined || filter.nameUnlike !== undefined)
-  ) {
+  if (layered !== undefined && (filter.nameDiffersFromEach !== undefined || filter.nameUnlike !== undefined)) {
     return false;
   }
   if (filter.hasAbilities !== undefined) {
-    const has = live !== undefined ? hasAnyAbility(state, registry, live) : lki!.hasAbilities;
+    const has =
+      live !== undefined
+        ? hasAnyAbility(
+            state,
+            registry,
+            live,
+            layered !== undefined
+              ? { inFold: true, types: layered.types, subtypes: layered.subtypes, keywords: layered.keywords, hasProtection: layered.hasProtection }
+              : {},
+          )
+        : lki!.hasAbilities;
     if (has !== filter.hasAbilities) return false;
   }
   if (filter.nameDiffersFromEach !== undefined) {

@@ -2431,6 +2431,18 @@ export interface ReflexiveTrigger {
  * `PlayerState.counters`. */
 export type PlayerCounterKind = "poison" | "experience" | "rad";
 
+/** A counter a player can be asked how many of: energy too ("where X is the
+ * amount of {E} you have" — Razorfield Ripper), which `PlayerState.energy` holds
+ * and only its own effects change. */
+export type HeldPlayerCounter = PlayerCounterKind | "energy";
+
+/** How many `kind` counters `player` has (rule 122.1), energy included. */
+export function playerCountersHeld(state: GameState, player: PlayerId, kind: HeldPlayerCounter): number {
+  const ps = state.players[player];
+  if (ps === undefined) return 0;
+  return kind === "energy" ? ps.energy : (ps.counters[kind] ?? 0);
+}
+
 /** How many poison counters make a player lose (rule 704.5c). */
 export const POISON_LETHAL = 10;
 
@@ -4965,7 +4977,12 @@ export interface PlayerEffect {
   readonly expires:
     | { readonly kind: "end-of-turn" }
     | { readonly kind: "your-next-turn" }
-    | { readonly kind: "end-of-your-next-turn" };
+    | { readonly kind: "end-of-your-next-turn" }
+    | { readonly kind: "rest-of-game" };
+  /** These players have no maximum hand size (rule 402.2) — applied at its
+   * `timestamp`, as every effect on the rules of the game is (rule 613.11). */
+  readonly noMaxHandSize?: readonly PlayerId[];
+  readonly timestamp?: number;
   /** Matching spells `owner` casts cost this much generic mana less — the
    * amount read as the effect was created (rule 611.2b). */
   readonly reduceSpells?: {

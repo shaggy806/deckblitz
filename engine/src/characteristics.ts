@@ -65,6 +65,7 @@ import {
   manaCostOverride,
   permanentCount,
   printedCardName,
+  playerCountersHeld,
   rulesTextName,
   speedOf,
   textChangesOf,
@@ -759,8 +760,7 @@ function evalStaticCondition(
       return speedWithin(speedOf(state, you), condition);
     }
     case "player-counters": {
-      const has = (p: PlayerId): boolean =>
-        (state.players[p]?.counters[condition.counter] ?? 0) >= condition.atLeast;
+      const has = (p: PlayerId): boolean => playerCountersHeld(state, p, condition.counter) >= condition.atLeast;
       // "That player" is known only to a trigger or a resolution
       // (`thatPlayer`); a static has nobody it's about.
       if (condition.who === "that-player") {
@@ -936,6 +936,14 @@ function evalStaticCondition(
     }
     case "of-player": {
       // The inner condition with that player as its "you" (see `of-player`).
+      if (condition.player === "an-opponent") {
+        return state.turnOrder.some(
+          (p) =>
+            p !== you &&
+            state.players[p]?.hasLost !== true &&
+            evalStaticCondition(state, registry, source, condition.condition, { ...opts, asPlayer: p }),
+        );
+      }
       const player = conditionPlayerOf(state, condition.player, opts, source);
       return (
         player !== undefined && evalStaticCondition(state, registry, source, condition.condition, { ...opts, asPlayer: player })
@@ -3571,6 +3579,36 @@ function scopedByKeyword(affects: AffectSpec): boolean {
   );
 }
 
+/** Whether a `filter` scope asks if its target has any ability at all, which
+ * has to wait until every other static has had its say (`layerStatics`). */
+function scopedByAbilities(affects: AffectSpec): boolean {
+  const reads = (filter: CardFilter): boolean =>
+    filter.hasAbilities !== undefined || (filter.anyOf?.some(reads) ?? false) || (filter.not !== undefined && reads(filter.not));
+  return affects.scope === "filter" && reads(affects.filter);
+}
+
+/** Whether a filter reads power or toughness, which nothing inside the fold
+ * computing them can answer. */
+function filterReadsPt(filter: CardFilter): boolean {
+  return (
+    filter.power !== undefined ||
+    filter.toughness !== undefined ||
+    (filter.anyOf?.some(filterReadsPt) ?? false) ||
+    (filter.not !== undefined && filterReadsPt(filter.not))
+  );
+}
+
+/**
+ * A static putting a combat restriction on what its filter's power or toughness
+ * picks out — Meekstone's "creatures with power 3 or greater don't untap", Tetsuko
+ * Umezawa's "creatures you control with power or toughness 1 or less can't be
+ * blocked". A restriction is no characteristic and the fold doesn't need it to
+ * reach P/T, so `restrictionsOf` applies these after the fold rather than in it.
+ */
+function isPtScopedRestriction(ability: StaticAbility): boolean {
+  return ability.restrictions !== undefined && ability.affects.scope === "filter" && filterReadsPt(ability.affects.filter);
+}
+
 /**
  * What a scope check may know about its target beyond the object itself,
  * when the caller is partway through computing it.
@@ -3588,6 +3626,9 @@ export interface TargetView {
    * one caller; without one, printed keywords (less ability loss).
    */
   readonly keywords?: () => ReadonlySet<Keyword>;
+  /** Whether the layer fold has granted the target a protection so far, for a
+   * scope asking whether it has any ability (`hasAnyAbility`). */
+  readonly hasProtection?: () => boolean;
   /** The caller is the layer fold computing this target's characteristics:
    * a `filter` scope's clauses must not ask for them again (see
    * `FilterContext.layered`). */
@@ -3652,7 +3693,7 @@ export function staticAffects(
       // What `ofChosenType` ("of the chosen type") reads the choice off.
       source: source.id,
       ...(view.inFold === true
-        ? { layered: { types: view.types, subtypes: view.subtypes, keywords: view.keywords } }
+        ? { layered: { types: view.types, subtypes: view.subtypes, keywords: view.keywords, hasProtection: view.hasProtection } }
         : {}),
       ...(view.amount !== undefined ? { amount: view.amount } : {}),
     });
@@ -4055,14 +4096,15 @@ export function hasManaAbility(
  *   one-shot effect gave it;
  * - suspend's haste (rule 702.62).
  *
- * Only asked outside the layer fold: a granted keyword can come from any
- * static, so a scope asking this from inside the fold can't be answered
- * (`matchesFilter` fails such a clause closed).
+ * Asked from inside the layer fold (`view.inFold` — Muraganda Petroglyphs'
+ * "creatures with no abilities get +2/+2"), a scope like this waits for the last
+ * pass, and reads what the passes before it granted through `view`.
  */
 export function hasAnyAbility(
   state: GameState,
   registry: CardRegistry,
   object: GameObject,
+  view: TargetView = {},
 ): boolean {
   const onBattlefield = object.zone === "battlefield";
   const lostAt = onBattlefield ? abilitiesLostAt(state, registry, object) : null;
@@ -4070,17 +4112,21 @@ export function hasAnyAbility(
   if (lostAt === null && printedHasAbility(def)) return true;
   if (intrinsicManaColors(state, registry, object).length > 0) return true;
   if (object.hastyUntilItLeaves === true) return true;
-  const c = computeCharacteristics(state, registry, object.id);
-  if (c.keywords.size > 0) return true;
-  const protection = c.protectionFrom;
-  if (
-    protection.colors.size > 0 ||
-    protection.types.size > 0 ||
-    protection.filters.length > 0 ||
-    protection.boundFilters.length > 0 ||
-    protection.players.size > 0
-  ) {
-    return true;
+  if (view.inFold === true) {
+    if ((view.keywords?.().size ?? 0) > 0 || view.hasProtection?.() === true) return true;
+  } else {
+    const c = computeCharacteristics(state, registry, object.id);
+    if (c.keywords.size > 0) return true;
+    const protection = c.protectionFrom;
+    if (
+      protection.colors.size > 0 ||
+      protection.types.size > 0 ||
+      protection.filters.length > 0 ||
+      protection.boundFilters.length > 0 ||
+      protection.players.size > 0
+    ) {
+      return true;
+    }
   }
   if (
     object.modifiers.some(
@@ -4096,7 +4142,7 @@ export function hasAnyAbility(
       state,
       registry,
       object,
-      {},
+      view.inFold === true ? view : {},
       (ability) => (ability.grantsActivated?.length ?? 0) > 0 || (ability.grantsTriggered?.length ?? 0) > 0,
       lostAt,
     );
@@ -4224,6 +4270,8 @@ interface StaticsInfo {
   readonly loseAll: readonly StaticAbility[];
   /** What {@link staticGrantSources} takes (`grantsStatic`). */
   readonly grantsStatic: readonly StaticAbility[];
+  /** What {@link ptScopedRestrictionSources} takes. */
+  readonly ptRestrictions: readonly StaticAbility[];
 }
 
 const staticsInfoByRegistry = new WeakMap<CardRegistry, Map<string, StaticsInfo>>();
@@ -4249,6 +4297,7 @@ function staticsInfo(registry: CardRegistry, name: string): StaticsInfo | null {
     grants: statics.filter((a) => a.grantsActivated !== undefined || a.grantsTriggered !== undefined),
     loseAll: statics.filter((a) => a.loseAllAbilities === true),
     grantsStatic: statics.filter((a) => a.grantsStatic !== undefined),
+    ptRestrictions: statics.filter((a) => a.fromGraveyard !== true && isPtScopedRestriction(a)),
   };
   byName.set(name, info);
   return info;
@@ -4592,7 +4641,8 @@ function collectStaticEffects(
   };
   let keywordScoped = false;
   for (const { source, ability, timestamp } of sources) {
-    if (scopedByKeyword(ability.affects)) {
+    if (isPtScopedRestriction(ability)) continue;
+    if (scopedByKeyword(ability.affects) || scopedByAbilities(ability.affects)) {
       keywordScoped = true;
       continue;
     }
@@ -4629,7 +4679,7 @@ function collectStaticEffects(
     };
     const second: AppliedEffect[] = [];
     for (const { source, ability, timestamp } of sources) {
-      if (!scopedByKeyword(ability.affects)) continue;
+      if (!scopedByKeyword(ability.affects) || scopedByAbilities(ability.affects) || isPtScopedRestriction(ability)) continue;
       if (
         !staticReaches(state, registry, source, ability, target, {
           inFold: true,
@@ -4642,6 +4692,24 @@ function collectStaticEffects(
       if (effect !== null) second.push(effect);
     }
     out.push(...second);
+    // "Creatures with no abilities" last, seeing what those keyword-scoped
+    // statics just granted.
+    keywords = null;
+    const hasProtection = (): boolean => {
+      const lostAt = target.zone === "battlefield" ? abilitiesLostAt(state, registry, target) : null;
+      return (
+        out.some((effect) => effect.protection !== null && grantOutlastsLoss(lostAt, effect.timestamp)) ||
+        target.modifiers.some((modifier) => modifier.protection !== undefined && modifierGrantApplies(modifier, lostAt))
+      );
+    };
+    const third: AppliedEffect[] = [];
+    for (const { source, ability, timestamp } of sources) {
+      if (!scopedByAbilities(ability.affects) || isPtScopedRestriction(ability)) continue;
+      if (!staticReaches(state, registry, source, ability, target, { inFold: true, keywords: targetKeywords, hasProtection })) continue;
+      const effect = applied(source, ability, timestamp);
+      if (effect !== null) third.push(effect);
+    }
+    out.push(...third);
   }
   out.sort((a, b) => a.timestamp - b.timestamp);
   return out;
@@ -5217,18 +5285,44 @@ export function restrictionsOf(
   id: ObjectId,
 ): ReadonlySet<CombatRestriction> {
   const own = computeCharacteristics(state, registry, id).restrictions;
+  let out: Set<CombatRestriction> | null = null;
+  const target = state.objects[id];
+  for (const { source, ability } of ptScopedRestrictionSources(state, registry)) {
+    if (target === undefined || !staticAffects(state, registry, ability.affects, source, target)) continue;
+    if (ability.condition !== undefined && !staticConditionMet(state, registry, source, ability.condition)) continue;
+    out ??= new Set(own);
+    for (const r of ability.restrictions ?? []) out.add(r);
+  }
   // A turn-wide rule ("creatures your opponents control can't block this
   // turn") binds whatever matches it now, so it's matched here, outside the
   // fold, rather than baked into the characteristics.
   const rules = state.turnRestrictions;
-  if (rules === undefined || rules.length === 0) return own;
-  let out: Set<CombatRestriction> | null = null;
+  if (rules === undefined || rules.length === 0) return out ?? own;
   for (const rule of rules) {
     if (!turnRuleCovers(state, registry, id, rule)) continue;
     out ??= new Set(own);
     for (const r of rule.restrictions) out.add(r);
   }
   return out ?? own;
+}
+
+/** The battlefield's {@link isPtScopedRestriction} statics, whose controllers
+ * are still in the game and whose sources still have them. */
+function ptScopedRestrictionSources(state: GameState, registry: CardRegistry): readonly ContributingStatic[] {
+  const key = "ptScopedRestrictionSources";
+  const known = activeCache?.misc.get(key) as readonly ContributingStatic[] | undefined;
+  if (known !== undefined) return known;
+  let out: ContributingStatic[] | null = null;
+  for (const sourceId of state.zones.shared.battlefield) {
+    const source = state.objects[sourceId];
+    if (source === undefined || state.players[source.controller]?.hasLost === true) continue;
+    const statics = staticsOf(registry, rulesTextName(source)).ptRestrictions;
+    if (statics.length === 0 || hasLostAbilities(state, registry, source)) continue;
+    for (const ability of statics) (out ??= []).push({ source, ability });
+  }
+  const result = out ?? NO_STATICS;
+  activeCache?.misc.set(key, result);
+  return result;
 }
 
 /** Whether `id` may attack as though it didn't have defender (rule 702.3b):

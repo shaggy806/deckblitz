@@ -29,7 +29,7 @@ import type { CardNameChoice } from "../card-names.js";
 import type { CompanionCondition } from "../companion.js";
 import type { Color, ManaType, SpendAs } from "../mana.js";
 import type { ReplacementSpec } from "../replacements.js";
-import type { DelayedTriggerTiming, PlayerCounterKind, TurnHistoryKind, ZoneType } from "../state.js";
+import type { DelayedTriggerTiming, HeldPlayerCounter, PlayerCounterKind, TurnHistoryKind, ZoneType } from "../state.js";
 import type { TargetSpec } from "../target.js";
 import type { Step } from "../turn.js";
 
@@ -1005,7 +1005,7 @@ export type StaticCondition =
    */
   | {
       readonly kind: "player-counters";
-      readonly counter: PlayerCounterKind;
+      readonly counter: HeldPlayerCounter;
       readonly who: "you" | "opponent" | "that-player";
       readonly atLeast: number;
     }
@@ -1101,7 +1101,9 @@ export type StaticCondition =
    */
   | {
       readonly kind: "of-player";
-      readonly player: ConditionPlayer;
+      /** `"an-opponent"`: it holds for at least one opponent still in the game
+       * — Guul Draz Specter's "as long as an opponent has no cards in hand". */
+      readonly player: ConditionPlayer | "an-opponent";
       readonly condition: StaticCondition;
     }
   /**
@@ -2884,8 +2886,9 @@ export interface StaticAbility {
   /** "You have no maximum hand size" (Thought Vessel, Reliquary Tower). A
    * property of the *controller*, not of anything this ability `affects`, so
    * it's read straight off the battlefield at cleanup rather than through the
-   * layer system. */
-  readonly noMaxHandSize?: boolean;
+   * layer system. `"each-player"` is Folio of Fancies' "players have no maximum
+   * hand size". */
+  readonly noMaxHandSize?: boolean | "each-player";
   /** "You don't lose unspent red mana as steps and phases end" (Leyline
    * Tyrant): mana of these types in the controller's pool isn't emptied as
    * each step and phase ends (rule 500.4) — cleanup included, so it lasts
