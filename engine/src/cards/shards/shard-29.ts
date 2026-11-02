@@ -14,6 +14,7 @@ import _poolAidFromTheCowl from "../pool/aid-from-the-cowl.js";
 import _poolAirMarshal from "../pool/air-marshal.js";
 import _poolAjaniValiantProtector from "../pool/ajani-valiant-protector.js";
 import _poolAjanisInfluence from "../pool/ajanis-influence.js";
+import _poolAlchemistsGambit from "../pool/alchemists-gambit.js";
 import _poolAliBaba from "../pool/ali-baba.js";
 import _poolAlliedAssault from "../pool/allied-assault.js";
 import _poolAllosaurusShepherd from "../pool/allosaurus-shepherd.js";
@@ -292,6 +293,7 @@ import _poolGlimmeringAngel from "../pool/glimmering-angel.js";
 import _poolGlimmerpointStag from "../pool/glimmerpoint-stag.js";
 import _poolGloryOfWarfare from "../pool/glory-of-warfare.js";
 import _poolGluttonousSlime from "../pool/gluttonous-slime.js";
+import _poolGnollHunter from "../pool/gnoll-hunter.js";
 import _poolGnottvoldSlumbermound from "../pool/gnottvold-slumbermound.js";
 import _poolGoblinArsonist from "../pool/goblin-arsonist.js";
 import _poolGoblinOffensive from "../pool/goblin-offensive.js";
@@ -889,6 +891,7 @@ const shard: CardShard = {
     _poolAirMarshal,
     _poolAjaniValiantProtector,
     _poolAjanisInfluence,
+    _poolAlchemistsGambit,
     _poolAliBaba,
     _poolAlliedAssault,
     _poolAllosaurusShepherd,
@@ -1167,6 +1170,7 @@ const shard: CardShard = {
     _poolGlimmerpointStag,
     _poolGloryOfWarfare,
     _poolGluttonousSlime,
+    _poolGnollHunter,
     _poolGnottvoldSlumbermound,
     _poolGoblinArsonist,
     _poolGoblinOffensive,

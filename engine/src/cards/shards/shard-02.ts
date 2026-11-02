@@ -714,6 +714,7 @@ import _poolSymbolOfUnsummoning from "../pool/symbol-of-unsummoning.js";
 import _poolTangle from "../pool/tangle.js";
 import _poolTanglesap from "../pool/tanglesap.js";
 import _poolTaoistMystic from "../pool/taoist-mystic.js";
+import _poolTargNarDemonFangGnoll from "../pool/targ-nar-demon-fang-gnoll.js";
 import _poolTauntingKobold from "../pool/taunting-kobold.js";
 import _poolTeekasDragon from "../pool/teekas-dragon.js";
 import _poolTeferiMasterOfTime from "../pool/teferi-master-of-time.js";
@@ -1564,6 +1565,7 @@ const shard: CardShard = {
     _poolTangle,
     _poolTanglesap,
     _poolTaoistMystic,
+    _poolTargNarDemonFangGnoll,
     _poolTauntingKobold,
     _poolTeekasDragon,
     _poolTeferiMasterOfTime,

@@ -242,6 +242,7 @@ import _poolDuskworker from "../pool/duskworker.js";
 import _poolDutifulServants from "../pool/dutiful-servants.js";
 import _poolDynamiteDiver from "../pool/dynamite-diver.js";
 import _poolEarthenAlly from "../pool/earthen-ally.js";
+import _poolEaterOfDays from "../pool/eater-of-days.js";
 import _poolEbonDragon from "../pool/ebon-dragon.js";
 import _poolEchoingRuin from "../pool/echoing-ruin.js";
 import _poolElrondLordOfRivendell from "../pool/elrond-lord-of-rivendell.js";
@@ -1108,6 +1109,7 @@ const shard: CardShard = {
     _poolDutifulServants,
     _poolDynamiteDiver,
     _poolEarthenAlly,
+    _poolEaterOfDays,
     _poolEbonDragon,
     _poolEchoingRuin,
     _poolElrondLordOfRivendell,

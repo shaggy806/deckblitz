@@ -113,6 +113,7 @@ import _poolCephalopodSentry from "../pool/cephalopod-sentry.js";
 import _poolChainflailCentipede from "../pool/chainflail-centipede.js";
 import _poolChameleonMasterOfDisguise from "../pool/chameleon-master-of-disguise.js";
 import _poolChampionOfTheFlame from "../pool/champion-of-the-flame.js";
+import _poolChanceForGlory from "../pool/chance-for-glory.js";
 import _poolChangelingHero from "../pool/changeling-hero.js";
 import _poolChantOfTheSkifsang from "../pool/chant-of-the-skifsang.js";
 import _poolChillOfForeboding from "../pool/chill-of-foreboding.js";
@@ -969,6 +970,7 @@ const shard: CardShard = {
     _poolChainflailCentipede,
     _poolChameleonMasterOfDisguise,
     _poolChampionOfTheFlame,
+    _poolChanceForGlory,
     _poolChangelingHero,
     _poolChantOfTheSkifsang,
     _poolChillOfForeboding,

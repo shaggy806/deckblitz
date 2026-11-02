@@ -798,6 +798,7 @@ import _poolWallOfGlare from "../pool/wall-of-glare.js";
 import _poolWardOfPiety from "../pool/ward-of-piety.js";
 import _poolWarrenSoultrader from "../pool/warren-soultrader.js";
 import _poolWarriorEnKor from "../pool/warrior-en-kor.js";
+import _poolWarriorsOath from "../pool/warriors-oath.js";
 import _poolWaterElemental from "../pool/water-elemental.js";
 import _poolWaterloggedGrove from "../pool/waterlogged-grove.js";
 import _poolWeiStrikeForce from "../pool/wei-strike-force.js";
@@ -1644,6 +1645,7 @@ const shard: CardShard = {
     _poolWardOfPiety,
     _poolWarrenSoultrader,
     _poolWarriorEnKor,
+    _poolWarriorsOath,
     _poolWaterElemental,
     _poolWaterloggedGrove,
     _poolWeiStrikeForce,

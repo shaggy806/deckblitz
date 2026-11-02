@@ -457,6 +457,7 @@ import _poolMascotInterception from "../pool/mascot-interception.js";
 import _poolMathemagics from "../pool/mathemagics.js";
 import _poolMauhurUrukHaiCaptain from "../pool/mauhur-uruk-hai-captain.js";
 import _poolMaximizeVelocity from "../pool/maximize-velocity.js";
+import _poolMedomaiTheAgeless from "../pool/medomai-the-ageless.js";
 import _poolMercurialKite from "../pool/mercurial-kite.js";
 import _poolMerfolkMesmerist from "../pool/merfolk-mesmerist.js";
 import _poolMerfolkSkyscout from "../pool/merfolk-skyscout.js";
@@ -1346,6 +1347,7 @@ const shard: CardShard = {
     _poolMathemagics,
     _poolMauhurUrukHaiCaptain,
     _poolMaximizeVelocity,
+    _poolMedomaiTheAgeless,
     _poolMercurialKite,
     _poolMerfolkMesmerist,
     _poolMerfolkSkyscout,

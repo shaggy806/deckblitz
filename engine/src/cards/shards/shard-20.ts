@@ -469,6 +469,7 @@ import _poolMassProduction from "../pool/mass-production.js";
 import _poolMassacreGirlMostWanted from "../pool/massacre-girl-most-wanted.js";
 import _poolMeandersGuide from "../pool/meanders-guide.js";
 import _poolMechanicalMobster from "../pool/mechanical-mobster.js";
+import _poolMeditate from "../pool/meditate.js";
 import _poolMentalJourney from "../pool/mental-journey.js";
 import _poolMercadianLift from "../pool/mercadian-lift.js";
 import _poolMercurialTransformation from "../pool/mercurial-transformation.js";
@@ -1399,6 +1400,7 @@ const shard: CardShard = {
     _poolMassacreGirlMostWanted,
     _poolMeandersGuide,
     _poolMechanicalMobster,
+    _poolMeditate,
     _poolMentalJourney,
     _poolMercadianLift,
     _poolMercurialTransformation,
