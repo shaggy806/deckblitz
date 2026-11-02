@@ -39,6 +39,7 @@ import {
 import { blockLimitOf, restrictionsOf } from "../characteristics.js";
 import { whyCountsInvalid } from "../combat/stack-counts.js";
 import { whyMembersInvalid } from "../combat/blocking.js";
+import { mustBlockByChoice } from "../player-control.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
 import { defineDecision } from "./define.js";
 import type { DecisionReadCtx } from "./contract.js";
@@ -125,7 +126,12 @@ function blockersOffer(
   // requirement on the creature as a static or a `restrict` gives it.
   for (const entry of eligible) {
     if (blockRequirements.some((r) => r.blocker === entry.blocker && r.attacker === undefined)) continue;
-    if (restrictionsOf(ctx.state, ctx.registry, entry.blocker).has("must-block")) {
+    if (
+      restrictionsOf(ctx.state, ctx.registry, entry.blocker).has("must-block") ||
+      // "Creatures your opponents control block this turn if able" (Brutal
+      // Hordechief): a rule over the turn, whatever arrived since.
+      mustBlockByChoice(ctx.state, player)
+    ) {
       blockRequirements.push({ blocker: entry.blocker });
     }
   }

@@ -29,13 +29,14 @@
  */
 
 import { EvalBotController, Game, actionPlayer, activePlayerOf, isSettled } from "engine/local";
-import { autoAnswerFor, forcedZoneChoice, stackCopyKey } from "engine/local";
+import { answeringPlayer, askedPlayer, autoAnswerFor, decidingPlayer, forcedZoneChoice, playersControlledBy, stackCopyKey, standInFor } from "engine/local";
 import type { CaptureFactory, CaptureLog } from "./capture.js";
 import { cardRegistry } from "./card-registry.js";
 import type {
   Action,
   AwaitingDecision,
   ControllerView,
+  LegalAction,
   DecisionAudit,
   EvalBotOptions,
   GameConfig,
@@ -60,7 +61,7 @@ export interface Connection {
  * means a *later* turn than that — not an already-current one.
  */
 type AutoPassUntil =
-  | { readonly kind: "rest-of-turn" }
+  | { readonly kind: "rest-of-turn"; readonly turn: number }
   | { readonly kind: "next-own-turn"; readonly afterTurn: number };
 
 interface Seat {
@@ -800,7 +801,10 @@ export class Room {
     const seat = this.seatOf(connection);
     if (seat === null) throw new Error("claim a seat before acting");
     if (this.bots.has(seat)) throw new Error("a bot is playing this seat — take it back first");
-    if (actionPlayer(action) !== seat) {
+    // The seat that makes this player's decisions now: their own, or whoever
+    // controls them or chooses for them (rule 723.5). A controlled seat's own
+    // actions are refused; it may still concede, which is no action (723.6).
+    if (answeringPlayer(this.game.state, actionPlayer(action)) !== seat) {
       throw new Error(
         `cannot dispatch an action for ${actionPlayer(action)} from ${seat}'s seat`,
       );
@@ -836,7 +840,7 @@ export class Room {
     const player = this.seatOf(connection);
     if (player === null) throw new Error("claim a seat before acting");
     const seat = this.seatFor(player);
-    seat.autoPassUntil = { kind: "rest-of-turn" };
+    seat.autoPassUntil = { kind: "rest-of-turn", turn: this.game.state.turn.number };
     seat.autoPassFrom = this.game.events.length;
     seat.autoPassPausedAt = null;
     seat.stoppedAt = stepKey(this.game.state);
@@ -902,11 +906,17 @@ export class Room {
     this.settle();
   }
 
+  /** Whether this turn is `seat`'s to play: its own, or the active player's it
+   * controls (rule 723.5), for the settings that read "my turn". */
+  private playsActiveTurn(seat: Seat, state: GameState): boolean {
+    return decidingPlayer(state, activePlayerOf(state)) === seat.player;
+  }
+
   /** Whether `seat` should keep the window it's in for a stop it flagged —
    * the first window of a flagged step only (see `Seat.stoppedAt`). Marks the
    * step as held, so ask only where the answer is acted on. */
   private holdsForStop(seat: Seat, state: GameState): boolean {
-    const own = activePlayerOf(state) === seat.player;
+    const own = this.playsActiveTurn(seat, state);
     const flagged = (own ? seat.pass.stops.mine : seat.pass.stops.theirs).includes(state.turn.step);
     const key = stepKey(state);
     if (!flagged || seat.stoppedAt === key) return false;
@@ -920,7 +930,7 @@ export class Room {
   private passesByPreference(seat: Seat, state: GameState): boolean {
     if (state.zones.shared.stack.length > 0) return false;
     const step = state.turn.step;
-    if (seat.pass.passToMain && activePlayerOf(state) === seat.player && (step === "upkeep" || step === "draw")) {
+    if (seat.pass.passToMain && this.playsActiveTurn(seat, state) && (step === "upkeep" || step === "draw")) {
       return true;
     }
     return seat.pass.passThroughCombat && COMBAT_STEPS.has(step);
@@ -1033,17 +1043,31 @@ export class Room {
       const stillDeciding = Object.keys(awaiting.hands) as PlayerId[];
       return stillDeciding.find((p) => this.bots.has(p)) ?? null;
     }
-    return this.bots.has(awaiting.player) ? awaiting.player : null;
+    const answering = answeringPlayer(this.game.state, awaiting.player);
+    return this.bots.has(answering) ? answering : null;
   }
 
   /** The bot seat that owes the game its next action right now, if any —
-   * whether that's a raised decision or simply holding priority. */
+   * whether that's a raised decision or simply holding priority. A bot
+   * controlling another player answers for them; a bot controlled by a person
+   * doesn't. */
   private currentBotActor(): PlayerId | null {
     const s = this.game.state;
     if (s.result.over) return null;
     if (s.awaiting !== null) return this.nextBotDecider(s.awaiting);
     const holder = s.priority.holder;
-    return holder !== null && this.bots.has(holder) ? holder : null;
+    if (holder === null) return null;
+    const answering = answeringPlayer(s, holder);
+    return this.bots.has(answering) ? answering : null;
+  }
+
+  /** What `seat` may do right now: the decision put to whichever player it's
+   * answering for (rule 723.5), its own or another's, whose name the actions
+   * carry. Nothing while someone else answers for it. */
+  actionsFor(seat: PlayerId): readonly LegalAction[] {
+    const asked = askedPlayer(this.game.state);
+    if (asked === null) return this.game.legalActions(seat);
+    return answeringPlayer(this.game.state, asked) === seat ? this.game.legalActions(asked) : [];
   }
 
   /**
@@ -1069,16 +1093,20 @@ export class Room {
     // the land that casts a spell this turn, paying for a shock land, a cast
     // payoff first) did nothing in a real room: a captured Sol Ring stayed in
     // hand behind a tapped Woodland Cemetery (2026-10-04).
-    const view: ControllerView = this.game.controllerView(seat);
+    // Another player's decision, if it's making theirs (rule 723.5): asked as
+    // them, of what stands in for them, and captured for nobody.
+    const askedPlayerNow = askedPlayer(this.game.state) ?? seat;
+    const forAnother = askedPlayerNow !== seat;
+    const view: ControllerView = this.game.controllerView(askedPlayerNow);
     // Captured only where there was a choice: a window where passing and
     // tapping for mana are all there is teaches nothing.
     const captured =
-      this.captures !== null && !this.game.isDeadForMana(seat)
+      this.captures !== null && !forAnother && !this.game.isDeadForMana(seat)
         ? this.captures.before(this.game.state)
         : null;
     this.searchTrace = [];
     const asked = performance.now();
-    const action = bot.act(view);
+    const action = forAnother ? standInFor(bot, askedPlayerNow).act(view) : bot.act(view);
     decisionRecorder?.record(Math.max(1, Math.round((performance.now() - asked) * 1000)));
     if (captured !== null) {
       const audit = "lastDecision" in bot ? ((bot as { lastDecision: DecisionAudit | null }).lastDecision ?? null) : null;
@@ -1099,10 +1127,11 @@ export class Room {
   private clearAutoPassIfDone(seat: Seat, state: GameState): boolean {
     const until = seat.autoPassUntil;
     if (until === null) return false;
-    const isMyTurnNow = activePlayerOf(state) === seat.player;
+    const isMyTurnNow = this.playsActiveTurn(seat, state);
     const done =
       until.kind === "rest-of-turn"
-        ? !isMyTurnNow
+        ? // That turn only: the next may be another this seat plays (rule 723).
+          !isMyTurnNow || state.turn.number !== until.turn
         : isMyTurnNow && state.turn.number > until.afterTurn;
     if (done) {
       seat.autoPassUntil = null;
@@ -1157,7 +1186,8 @@ export class Room {
         this.game.dispatch({ type: "choose-from-zone", ...forced });
         return true;
       }
-      const seat = this.seatFor(s.awaiting.player);
+      // Whoever answers for them passes by their own settings (rule 723.5).
+      const seat = this.seatFor(answeringPlayer(s, s.awaiting.player));
       // No resuming here, only at a priority window. A decision owed while
       // paused is usually the interruption's own consequence (an edict's
       // sacrifice, asked once the edict has left the stack). Resuming before
@@ -1171,7 +1201,7 @@ export class Room {
       // A stop on this step (declare attackers, say) keeps the decision too.
       const skip =
         wasActive && !justCleared && !this.holdsForStop(seat, s)
-          ? autoAnswerFor(s.awaiting, seat.player, this.game.legalActions(seat.player))
+          ? autoAnswerFor(s.awaiting, s.awaiting.player, this.game.legalActions(s.awaiting.player))
           : null;
       if (skip !== null) {
         this.game.dispatch(skip);
@@ -1186,7 +1216,7 @@ export class Room {
 
     const holder = s.priority.holder;
     if (holder === null) return false;
-    const seat = this.seatFor(holder);
+    const seat = this.seatFor(answeringPlayer(s, holder));
     this.resumeAutoPassIfClear(seat, s);
     const wasActive = this.autoPassRunning(seat);
     const justCleared = this.clearAutoPassIfDone(seat, s);
@@ -1197,7 +1227,12 @@ export class Room {
     const kept =
       this.holdsPriority !== null && s.zones.shared.stack.length === 0 && this.holdsPriority(this, holder);
     const forcedPass = !kept && legal.length === 1 && legal[0].kind === "pass-priority";
-    const manaOnlyAndSkipping = !kept && seat.pass.skipManaOnly !== false && this.game.isDeadForMana(holder);
+    // A seat playing another's turn is spared its own windows with nothing in
+    // them, whatever it likes on its own: each would turn the table back to its
+    // seat and away again.
+    const playingAnother = holder === seat.player && playersControlledBy(s, holder).length > 0;
+    const manaOnlyAndSkipping =
+      !kept && (seat.pass.skipManaOnly !== false || playingAnother) && this.game.isDeadForMana(holder);
 
     // A one-shot resolve-all: keep passing while the stack drains, and
     // disarm the moment anything real happens (including the stack running

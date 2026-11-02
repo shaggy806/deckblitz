@@ -21,6 +21,9 @@ that file. The board-overhaul record is `BOARD_REDESIGN_PLAN.md`.
 - **Draw from `usePlayback`'s `shown` view, never `game.view`.** They differ while an animation
   runs. Frames play one at a time (`game/usePlayback.ts`), and `Table` remounts per frame shown,
   so state that must survive a frame lives in `GameScreen`.
+- **`seat` on the table can be someone else's.** A seat making another player's decisions (rule
+  723) has `Table` drawn as `view.perspective`, so everything it does is theirs; only `GameScreen`
+  and what it hands down as its own use `game.seat`.
 - **`setState` updaters must stay pure.** Measure layout that changes what's drawn in a
   `useLayoutEffect` or a callback ref, never a plain `useEffect`.
 - **`data-tour="…"` attributes are the tutorials' contract** (`tutorial/anchors.ts` lists them):

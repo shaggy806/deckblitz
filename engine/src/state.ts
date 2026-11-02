@@ -2923,8 +2923,48 @@ export interface RevealedHandChoice {
   readonly exileLink?: { readonly source: ObjectId; readonly zoneChangeCount: number };
 }
 
+/**
+ * One player controlling another (rule 723): `controller` makes `controlled`'s
+ * decisions. Only that: every object stays with its controller and `controlled`
+ * stays the active player (723.3), so the engine's rules read nothing here.
+ * Who answers an action is the one thing it changes (`player-control.ts`).
+ */
+export interface PlayerControl {
+  readonly controlled: PlayerId;
+  readonly controller: PlayerId;
+  /** Which of `controlled`'s turns or combat phases: the next they actually
+   * take (723.1, 723.1b). */
+  readonly during: "next-turn" | "next-combat";
+  /** The turn it began working, absent while it waits. It works until the next
+   * turn begins, the whole of this one (723.1); `next-combat`, until that
+   * combat phase ends. */
+  began?: number;
+  /** "After that turn, that player takes an extra turn" (Emrakul), whichever
+   * effect ended up working that turn. */
+  readonly extraTurnAfter?: true;
+}
+
+/** "You choose which creatures attack / block this turn" (the `choose-combat`
+ * effect). */
+export interface CombatChoice {
+  readonly chooser: PlayerId;
+  readonly attackers?: true;
+  /** Whose creatures' blocks: everyone's (Master Warcraft), or the chooser's
+   * opponents' (Brutal Hordechief). */
+  readonly blocks?: "all" | "opponents";
+  /** And those creatures block this turn if able. */
+  readonly blockIfAble?: true;
+}
+
 export type AwaitingDecision =
-  | { readonly kind: "attackers"; readonly player: PlayerId }
+  | {
+      readonly kind: "attackers";
+      readonly player: PlayerId;
+      /** "You choose which creatures attack this turn" (Master Warcraft), its
+       * second step: the group that player chose, which the active player now
+       * sends (its 2008 ruling; `player-control.ts`). Absent otherwise. */
+      readonly group?: readonly ObjectId[];
+    }
   | { readonly kind: "blockers"; readonly player: PlayerId }
   | {
       readonly kind: "discard";
@@ -5554,6 +5594,19 @@ export interface GameState {
     readonly attackerZoneChangeCount?: number;
     readonly thisCombat?: boolean;
   }[];
+  /** Rule 723, oldest first: "you control target player during that player's
+   * next turn" (`control-player`), waiting for that turn and then working
+   * through it. Read through `player-control.ts`. */
+  playerControl?: PlayerControl[];
+  /** "You choose which creatures attack / block this turn" (`choose-combat`),
+   * oldest first; the last that covers a player works. Turn-scoped, and a rule
+   * over the turn rather than over any creature, so one arriving later counts
+   * too (Brutal Hordechief's ruling). Read through `player-control.ts`. */
+  combatChoices?: readonly CombatChoice[];
+  /** Creatures whose controller, asked to send them, wouldn't pay what it costs
+   * (`attackers`' second step): the chooser proposes again without them. Lasts
+   * until this combat's attackers are declared. */
+  attackChoiceRefused?: readonly ObjectId[];
   /** "Creatures you control with defender can attack this turn as though
    * they didn't have defender" (the `attack-despite-defender` effect's
    * `filter` form — Wakestone Gargoyle): every permanent matching `filter`

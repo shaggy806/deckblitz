@@ -16,6 +16,8 @@ that file.
   compose. `settle()` stops at each bot action and publishes a numbered **frame**, then
   releases the move once every acking client reports finishing its animations (with timeouts
   as backstops). Tests and scripts use `RoomOptions.pacing: "immediate"` and fake timers.
+- **A seat answers for whoever `answeringPlayer` says** (rule 723): `dispatch`, `actionsFor`, the bots
+  and auto-pass all go through it, never `action.player === seat`.
 - **`broadcast` is never called from a message handler.** A room publishes its own frames
   (`room.publish()` → `onUpdate`).
 - **The host** (`host.ts`) is whoever created the room. Only they may add or remove seats and

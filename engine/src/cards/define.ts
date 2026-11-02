@@ -1302,6 +1302,9 @@ export type StaticCondition =
    * declared. It stays true though that creature has left combat since.
    * See `PlayerState.attackedInCombat`. */
   | { readonly kind: "attacked-this-step" }
+  /** "Cast this spell only before attackers are declared" (Master Warcraft):
+   * before the turn's first declare attackers step begins, its ruling says. */
+  | { readonly kind: "before-attackers-declared" }
   /**
    * The object whose event fired the *triggered ability* currently resolving
    * matches `filter` — Akoum Hellkite's "Whenever a land you control enters,

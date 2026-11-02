@@ -8979,4 +8979,70 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { human: true, bf: ['Grizzly Bears'] },
     }),
   ),
+  preset(
+    "Mindslaver: you play Bob's next turn, with his cards and his mana",
+    board({
+      you: { bf: ['Mindslaver', 'Wastes*4', 'Swamp*2'] },
+      opp: { bf: ['Forest*2'], hand: ['Grizzly Bears'] },
+    }),
+  ),
+  preset(
+    'Mindslaver: at a table of four, the others see nothing of it',
+    board({
+      you: { bf: ['Mindslaver', 'Wastes*4'] },
+      opp: [{ bf: ['Forest*2'], hand: ['Grizzly Bears'] }, { human: true }, {}],
+    }),
+  ),
+  preset(
+    'Mindslaver: Bob controls you, and you may still concede',
+    board({
+      you: { bf: ['Forest*2'], hand: ['Grizzly Bears'] },
+      opp: { human: true, bf: ['Mindslaver', 'Wastes*4'] },
+      turn: 0,
+    }),
+  ),
+  preset(
+    "Secret of Bloodbending: only Bob's combat is yours",
+    board({
+      you: { bf: ['Island*4'], hand: ['Secret of Bloodbending'] },
+      opp: { bf: ['Grizzly Bears', 'Forest'] },
+    }),
+  ),
+  preset(
+    "Emrakul, the Promised End: Bob's next turn is yours, then he takes another",
+    board({
+      you: { bf: ['Wastes*13'], hand: ['Emrakul, the Promised End'] },
+      opp: { bf: ['Forest'] },
+    }),
+  ),
+  preset(
+    "Master Warcraft: you choose how Bob's creatures block",
+    board({
+      you: { bf: ['Grizzly Bears', 'Mountain*4'], hand: ['Master Warcraft'] },
+      opp: { bf: ['Hill Giant'], hand: ['Serra Angel'] },
+    }),
+  ),
+  preset(
+    "Master Warcraft: you name Bob's attackers",
+    board({
+      you: { bf: ['Mountain*4'], hand: ['Master Warcraft'] },
+      opp: { bf: ['Grizzly Bears', 'Hill Giant'] },
+      turn: 0,
+    }),
+  ),
+  preset(
+    'Master Warcraft: you name the group, Bob sends it at a planeswalker',
+    board({
+      you: { bf: ['Mountain*4', 'Liliana of the Veil'], hand: ['Master Warcraft'] },
+      opp: { human: true, bf: ['Grizzly Bears', 'Hill Giant'] },
+      turn: 0,
+    }),
+  ),
+  preset(
+    "Brutal Hordechief: Bob's creatures must block, and you choose how",
+    board({
+      you: { bf: ['Brutal Hordechief', 'Mountain*5'] },
+      opp: { bf: ['Grizzly Bears', 'Hill Giant'] },
+    }),
+  ),
 ]

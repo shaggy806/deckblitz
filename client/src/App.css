@@ -75,6 +75,12 @@
   white-space: nowrap;
   font-family: var(--font-mono);
 }
+.ts-control {
+  flex: 0 0 auto;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
 .ts-acting {
   color: var(--muted);
   white-space: nowrap;

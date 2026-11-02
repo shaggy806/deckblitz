@@ -29,6 +29,7 @@ export function useFollowAction(): readonly [boolean, (on: boolean) => void] {
 /** Whoever the game is waiting on: a decision's player, else the priority holder. */
 export function waitingOn(view: PlayerView | null): PlayerId | null {
   if (view === null || view.result.over) return null
+  if (view.answering !== undefined) return view.answering
   if (view.awaiting !== null) return view.awaiting.player
   return view.priority.active ? view.priority.holder : null
 }

@@ -21,6 +21,7 @@ export { registryFrom } from "./cards/registry-from.js";
 // (`server/src/card-registry.ts`), which runs in both.
 export { defaultRegistry } from "./cards/default-registry.js";
 export { actionPlayer } from "./actions.js";
+export { answeringPlayer, askedPlayer, decidingPlayer, playersControlledBy } from "./player-control.js";
 export { computeCharacteristics } from "./characteristics.js";
 export { autoAnswerFor, decisionHasSource, mayActOn } from "./decisions/registry.js";
 export * from "./game.js";

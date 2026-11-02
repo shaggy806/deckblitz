@@ -33,6 +33,15 @@ const ctx = (overrides: Partial<Ctx> = {}): Ctx => {
 describe("effect templates", () => {
   it.each([
     ["Draw two cards.", { kind: "draw", amount: 2 }],
+    ["You control target player during that player's next turn.", { kind: "control-player", target: 0 }],
+    ["You control target opponent during their next turn.", { kind: "control-player", target: 0 }],
+    ["You control target opponent during their next combat phase.", { kind: "control-player", target: 0, during: "next-combat" }],
+    ["You choose which creatures attack this turn.", { kind: "choose-combat", attackers: true }],
+    ["You choose which creatures block this turn and how those creatures block.", { kind: "choose-combat", blocks: "all" }],
+    [
+      "Creatures your opponents control block this turn if able, and you choose how those creatures block.",
+      { kind: "choose-combat", blocks: "opponents", blockIfAble: true },
+    ],
     ["You gain 3 life.", { kind: "gain-life", amount: 3 }],
     ["Each opponent loses 1 life.", { kind: "lose-life", amount: 1, who: "each-opponent" }],
     ["~ deals 3 damage to any target.", { kind: "damage", amount: 3, target: 0 }],

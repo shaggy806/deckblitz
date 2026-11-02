@@ -751,6 +751,10 @@ export type CostReductionAmount =
   | { readonly countOf: CardFilter }
   | { readonly countersOnSource: string }
   | { readonly cardsInGraveyard: CardFilter }
+  /** One per card type among graveyard cards matching the filter, each type
+   * once — Emrakul, the Promised End's `{ cardTypesInGraveyard: { ownedBy:
+   * "you" } }`. The {@link EffectAmount} of that name, for a cost. */
+  | { readonly cardTypesInGraveyard: CardFilter }
   /** One per counter of a kind its controller has — Mizzix of the Izmagnus's
    * "{1} less to cast for each experience counter you have". */
   | { readonly playerCounters: PlayerCounterKind }

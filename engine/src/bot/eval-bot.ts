@@ -26,7 +26,7 @@ import type { Action, AttackerDeclaration, BlockerDeclaration, LegalAction } fro
 import type { CardRegistry } from "../cards.js";
 import { withRequiredAttackers } from "../combat/attacking.js";
 import { defaultRegistry } from "../cards/default-registry.js";
-import { HeuristicBotController, compareReach, isLandfallPermanent, payoffFirst } from "../controller.js";
+import { HeuristicBotController, StandInController, compareReach, isLandfallPermanent, payoffFirst } from"../controller.js";
 import type { ControllerView, LandReach, PlayerController } from "../controller.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
 import type { GameState } from "../state.js";
@@ -688,6 +688,43 @@ class DecisionRolloutController extends CombatRolloutController {
   }
 }
 
+/**
+ * A searching bot making another player's decisions: `StandInController`'s turn
+ * of doing nothing, and each decision it's told to make the answer that leaves
+ * the board best for the bot, read one step ahead. Which is the worst for the
+ * player, near enough, and costs no search of a turn that isn't its own.
+ */
+class EvalStandIn extends StandInController {
+  private readonly forPlayer: PlayerId;
+  private readonly cards: CardRegistry;
+  private readonly weights: EvalWeights;
+
+  constructor(player: PlayerId, forPlayer: PlayerId, cards: CardRegistry, weights: EvalWeights) {
+    super(player);
+    this.forPlayer = forPlayer;
+    this.cards = cards;
+    this.weights = weights;
+  }
+
+  act(view: ControllerView): Action {
+    if (view.state.awaiting !== null && view.viewAfter !== undefined) {
+      let best: Action | null = null;
+      let bestScore = -Infinity;
+      for (const candidate of view.legalActions().flatMap((o) => decisionCandidates(o, view.player) ?? [])) {
+        const after = view.viewAfter(candidate);
+        if (after === null) continue;
+        const score = evaluateState(after.state, this.cards, this.forPlayer, this.weights);
+        if (score > bestScore) {
+          best = candidate;
+          bestScore = score;
+        }
+      }
+      if (best !== null) return best;
+    }
+    return super.act(view);
+  }
+}
+
 export class EvalBotController extends HeuristicBotController {
   private readonly cards: CardRegistry;
   readonly weights: EvalWeights;
@@ -797,6 +834,11 @@ export class EvalBotController extends HeuristicBotController {
     this.maxSimulations = options.maxSimulations ?? DEFAULT_MAX_SIMULATIONS;
     this.timeBudgetMs = options.timeBudgetMs ?? Infinity;
     this.trace = options.trace;
+  }
+
+  /** Another player's decisions (rule 723) are answered for this bot's good. */
+  standIn(player: PlayerId): PlayerController {
+    return new EvalStandIn(player, this.playerId, this.cards, this.weights);
   }
 
   /** Every decision reads a permanent's track record off the real board in

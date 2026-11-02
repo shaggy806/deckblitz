@@ -2300,6 +2300,22 @@ export function parseSentence(sentence, ctx) {
       return { kind: "put-on-libraries", what: { targetsFrom: got.slots[0] }, position: "shuffle", withSource: true };
     }
   }
+  // Controlling a player (rule 723): the next turn they actually take, or their
+  // next combat phase.
+  if ((m = re(`you control (target player|target opponent) during (?:that player's|their) next turn`).exec(s))) {
+    return { kind: "control-player", target: slot(m[1]) };
+  }
+  if ((m = re(`you control (target player|target opponent) during (?:that player's|their) next combat phase`).exec(s))) {
+    return { kind: "control-player", target: slot(m[1]), during: "next-combat" };
+  }
+  // Who chooses the attackers and the blocks, for the rest of the turn.
+  if (re(`you choose which creatures attack this turn`).test(s)) return { kind: "choose-combat", attackers: true };
+  if (re(`you choose which creatures block this turn and how those creatures block`).test(s)) {
+    return { kind: "choose-combat", blocks: "all" };
+  }
+  if (re(`creatures your opponents control block this turn if able, and you choose how those creatures block`).test(s)) {
+    return { kind: "choose-combat", blocks: "opponents", blockIfAble: true };
+  }
   // "Skips their next untap step" (rule 614.10): the whole step.
   if (re(`you skip your next untap step`).test(s)) return { kind: "skip-untap-step", who: "you" };
   if (re(`each opponent skips their next untap step`).test(s)) return { kind: "skip-untap-step", who: "each-opponent" };

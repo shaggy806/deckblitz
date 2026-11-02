@@ -5992,3 +5992,40 @@ engine terms. A second thing to check is a second test.
 ### Karoo: return an untapped Plains or sacrifice it
 - **Do:** Play Karoo, answer Yes to "Return an untapped Plains you control to its owner's hand", click the untapped Plains and Confirm.
 - **Expect:** Only the untapped Plains can be picked. It goes to your hand, and Karoo stays, tapped.
+
+### Mindslaver: you play Bob's next turn, with his cards and his mana
+- **Do:** Activate Mindslaver on Bob and pass the turn. On his turn, cast his Grizzly Bears and pass to the end of the turn.
+- **Expect:** The top strip says "You control Bob", the table is drawn from Bob's seat, and his hand is yours to play from. His Forests pay; yours stay untapped. The Bears are his. On your next turn the strip is gone and his hand is hidden again.
+- **Not a bug:** when it's your own priority in his turn the table turns back to your seat, then to his for his next decision.
+
+### Mindslaver: at a table of four, the others see nothing of it
+- **Do:** Activate Mindslaver on Bob and pass the turn. On his turn, switch to Carol.
+- **Expect:** Carol's strip says "Alice controls Bob". His hand is face down to her. Switching back, Alice's shows it and "You control Bob".
+
+### Mindslaver: Bob controls you, and you may still concede
+- **Do:** As Bob, activate Mindslaver on Alice and pass the turn. On Alice's turn, switch to Alice.
+- **Expect:** Alice's strip says "Bob controls you", "Bob to act", and nothing of hers can be clicked. The Game menu's Concede still works (rule 723.6).
+
+### Secret of Bloodbending: only Bob's combat is yours
+- **Do:** Cast it on Bob without the waterbend and pass the turn.
+- **Expect:** Bob's main phase is his own. At his beginning of combat the strip says "You control Bob" and you're asked to declare his attackers. The strip is gone again after combat. The spell is in exile.
+
+### Emrakul, the Promised End: Bob's next turn is yours, then he takes another
+- **Do:** Cast Emrakul, choosing Bob for its trigger, and pass the turn. Pass through his turn.
+- **Expect:** His turn says "You control Bob". After it the log says "Bob takes an extra turn after this one", and that next turn is his own: no strip.
+
+### Master Warcraft: you choose how Bob's creatures block
+- **Do:** Cast Master Warcraft, go to combat and attack with the Bears.
+- **Expect:** Your own attack is as usual. Then the strip says "You choose for Bob", the table turns to his seat, and the block prompt is yours: Hill Giant may block the Bears or not. Your choice stands.
+
+### Master Warcraft: you name Bob's attackers
+- **Do:** This is Bob's main phase. When you get priority, cast Master Warcraft. When asked, send the Bears but not the Giant.
+- **Expect:** The attack prompt comes to you, on his seat's table, "You choose for Bob". Only the Bears attack you.
+
+### Master Warcraft: you name the group, Bob sends it at a planeswalker
+- **Do:** This is Bob's main phase. Pass until you get priority, cast Master Warcraft, and name the Bears alone: it asks for no target. Then as Bob, declare.
+- **Expect:** Bob's prompt offers only the Bears, which must attack, at you or at Liliana: his choice.
+
+### Brutal Hordechief: Bob's creatures must block, and you choose how
+- **Do:** Activate Hordechief, go to combat and attack with it.
+- **Expect:** The drain happens as it attacks. The strip says "You choose for Bob", and the block prompt won't confirm until both his creatures block.

@@ -3412,3 +3412,22 @@ mid-resolution cost), Station (shared with the popularity backlog above),
 and a name-preserving copy exception (Sarkhan, Soul Aflame). None of these
 are worth a dedicated pass alone; fold them into whichever popularity-backlog
 feature above happens to unblock the same primitive.
+
+### Controlling a player — built 2026-11-01
+
+The need-keys Phase 2 family `mechanic:control-attack-block-choices` with
+`mechanic:control-player`. Rule 723 as **who answers**, not as anything the rules
+read (`player-control.ts`): the **`control-player`** effect (`target`,
+`controller`, `during: "next-turn" | "next-combat"`, `extraTurnAfter`) and the
+**`choose-combat`** effect (`attackers`, `blocks: "all" | "opponents"`,
+`blockIfAble`). A seat answers the actions naming the player it decides for, sees
+what they see (723.4), and draws the table from their seat (`view.perspective`);
+bots answer through a stand-in. No new decision kind: attackers under a chooser
+are the same `attackers` asked twice. `CostReductionAmount.cardTypesInGraveyard`
+and `castOnlyIf: { kind: "before-attackers-declared" }` came with them. Proving
+cards: Mindslaver, Worst Fears, Cruel Entertainment, Secret of Bloodbending,
+Emrakul, the Promised End, Master Warcraft, Brutal Hordechief. Not covered: Word
+of Command and Opposition Agent (723.2, control for a limited duration: during a
+resolution, during a search, each with restrictions of its own), and a bot
+playing another's turn plays nothing it needn't, one step ahead on what it's
+told to decide.

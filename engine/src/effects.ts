@@ -35,6 +35,7 @@ import type {
   FaceDownAs,
   LeaveDestination,
   PlayerCounterKind,
+  CombatChoice,
   PlayerEffect,
   SpellGrantThisTurn,
   SpellSnapshot,
@@ -5541,6 +5542,36 @@ export type EffectSpec =
     }
   | {
       /**
+       * "You control target player during that player's next turn" (rule
+       * 723): `target`, the slot of the player controlled; `controller`, the
+       * slot of the player controlling them when it isn't this effect's
+       * controller (Cruel Entertainment). The next turn they actually take,
+       * and all of it (723.1); or with `during: "next-combat"`, their next
+       * combat phase (Secret of Bloodbending). `extraTurnAfter`: "after that
+       * turn, that player takes an extra turn" (Emrakul).
+       */
+      readonly kind: "control-player";
+      readonly target: number;
+      readonly controller?: number;
+      readonly during?: "next-turn" | "next-combat";
+      readonly extraTurnAfter?: true;
+    }
+  | {
+      /**
+       * "You choose which creatures attack this turn" (`attackers`) and "you
+       * choose which creatures block this turn and how those creatures block"
+       * (`blocks: "all"` — Master Warcraft; `"opponents"`, those your opponents
+       * control — Brutal Hordechief, with `blockIfAble`: "creatures your
+       * opponents control block this turn if able"). A rule over the rest of
+       * the turn: a creature arriving later is covered too.
+       */
+      readonly kind: "choose-combat";
+      readonly attackers?: true;
+      readonly blocks?: "all" | "opponents";
+      readonly blockIfAble?: true;
+    }
+  | {
+      /**
        * Gift (rule 702.174): the gift given to the opponent it was promised
        * to — the spell's, or for a permanent, its spell's as it entered
        * (`GameObject.giftTo` / `enteredGiftTo`, read as it last existed if
@@ -9819,6 +9850,15 @@ export interface EffectApi {
   grantActivatedAll(filter: CardFilter, ability: ActivatedAbility, duration: PtDuration): void;
   /** `player` takes an extra turn after this one (Time Warp). */
   takeExtraTurn(player: PlayerId, skipUntapStep?: boolean): void;
+  /** See the `"control-player"` {@link EffectSpec}. */
+  controlPlayer(
+    controlled: PlayerId,
+    controller: PlayerId,
+    during: "next-turn" | "next-combat",
+    extraTurnAfter: boolean,
+  ): void;
+  /** See the `"choose-combat"` {@link EffectSpec}. */
+  chooseCombat(choice: Omit<CombatChoice, "chooser">): void;
   /** See the `"gift"` {@link EffectSpec}. */
   giveGift(gift: GiftKind): void;
   /** `player` wins the game, unless they can't — see the `"win-game"`
@@ -14751,6 +14791,27 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       const target = spec.target === undefined ? undefined : ctx.targets[spec.target];
       if (spec.target !== undefined && target?.kind !== "player") return;
       ctx.takeExtraTurn(target?.kind === "player" ? target.player : ctx.controller, spec.skipUntapStep === true);
+      return;
+    }
+    case "control-player": {
+      const controlled = ctx.targets[spec.target];
+      if (controlled?.kind !== "player" || illegalSlot(spec.target, ctx)) return;
+      let controller = ctx.controller;
+      if (spec.controller !== undefined) {
+        const slot = ctx.targets[spec.controller];
+        // An illegal first target of Cruel Entertainment: nobody to control them.
+        if (slot?.kind !== "player" || illegalSlot(spec.controller, ctx)) return;
+        controller = slot.player;
+      }
+      ctx.controlPlayer(controlled.player, controller, spec.during ?? "next-turn", spec.extraTurnAfter === true);
+      return;
+    }
+    case "choose-combat": {
+      ctx.chooseCombat({
+        ...(spec.attackers === true ? { attackers: true } : {}),
+        ...(spec.blocks !== undefined ? { blocks: spec.blocks } : {}),
+        ...(spec.blockIfAble === true ? { blockIfAble: true } : {}),
+      });
       return;
     }
     case "storm": {

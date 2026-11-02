@@ -36,6 +36,7 @@ import {
   createDefaultRegistry,
   createRng,
   handsPlayedRevealed,
+  playersControlledBy,
   isDeckableCard,
   viewFor,
 } from "../dist/index.js";
@@ -355,9 +356,11 @@ export function checkInvariants(game, label, holes = []) {
     const view = viewFor(s, registry, viewer);
     const shown = new Set([...s.revealedThisTurn, ...Object.values(view.revealedLibraryTop ?? {}).filter(Boolean)]);
     const revealedHands = handsPlayedRevealed(s, registry, viewer);
+    // A player being controlled shows their controller what they see (rule 723.4).
+    const controlled = playersControlledBy(s, viewer);
     for (const p of s.turnOrder) {
       const zones = s.zones.perPlayer[p];
-      const hidden = [...zones.library, ...(p === viewer || revealedHands.has(p) ? [] : zones.hand)];
+      const hidden = [...zones.library, ...(p === viewer || revealedHands.has(p) || controlled.includes(p) ? [] : zones.hand)];
       for (const id of hidden) {
         if (view.objects[id] === undefined || shown.has(id) || awaitingIds.has(id)) continue;
         const where = zones.library.includes(id) ? "library" : "hand";

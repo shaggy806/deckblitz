@@ -52,6 +52,7 @@ function snapshot(page: Page): Promise<Snapshot> {
       zones: { stack: string[]; exile: string[]; exileOwners: Record<string, string> }
       priority: { active: boolean; holder: string | null }
       awaiting: { player?: string } | null
+      answering?: string
     }
     const dv = (window as Window & { deckblitzView?: { view: View | null; seat: string | null; log: string[] } }).deckblitzView
     const view = dv?.view ?? null
@@ -92,8 +93,9 @@ function snapshot(page: Page): Promise<Snapshot> {
       stack,
       log,
       key,
-      deciding: seat !== null && view?.awaiting?.player === seat,
-      holding: seat !== null && view?.priority.active === true && view.priority.holder === seat,
+      // Another player's decision this seat makes is its own to answer (rule 723).
+      deciding: seat !== null && view?.awaiting != null && (view.answering ?? view.awaiting.player) === seat,
+      holding: seat !== null && view?.priority.active === true && (view.answering ?? view.priority.holder) === seat,
       ownTop: seat !== null && view?.objects[view.zones.stack.at(-1) ?? '']?.controller === seat,
     }
   })
@@ -147,10 +149,10 @@ function print(label: string, s: Snapshot, shot: string): void {
 function findId(page: Page, zone: 'hand' | 'battlefield', name: string): Promise<string | null> {
   return page.evaluate(
     ([zone, name]) => {
-      const dv = (window as Window & { deckblitzView?: { view: { objects: Record<string, { cardName: string; copyOf?: string | null }>; zones: { battlefield: string[]; hands: Record<string, string[]> } } | null; seat: string | null } }).deckblitzView
+      const dv = (window as Window & { deckblitzView?: { view: { perspective?: string; objects: Record<string, { cardName: string; copyOf?: string | null }>; zones: { battlefield: string[]; hands: Record<string, string[]> } } | null; seat: string | null } }).deckblitzView
       const view = dv?.view
       if (!view) return null
-      const ids = zone === 'hand' ? (view.zones.hands[dv?.seat ?? ''] ?? []) : view.zones.battlefield
+      const ids = zone === 'hand' ? (view.zones.hands[view.perspective ?? dv?.seat ?? ''] ?? []) : view.zones.battlefield
       const wanted = name.toLowerCase()
       const exact = ids.find((id) => view.objects[id]?.cardName.toLowerCase() === wanted)
       return exact ?? ids.find((id) => view.objects[id]?.cardName.toLowerCase().includes(wanted)) ?? null

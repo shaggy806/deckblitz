@@ -101,6 +101,13 @@ export type GameEvent =
       readonly player: PlayerId;
     })
   | (Base & {
+      /** `controller` begins making `controlled`'s decisions (rule 723). */
+      readonly type: "player-control-began";
+      readonly controlled: PlayerId;
+      readonly controller: PlayerId;
+      readonly during: "next-turn" | "next-combat";
+    })
+  | (Base & {
       /** `player` skipped their untap step (rule 614.10 — the
        * `skip-untap-step` effect, Savor the Moment's extra turn). */
       readonly type: "untap-step-skipped";

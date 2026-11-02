@@ -42,6 +42,7 @@ import { creatureAttackTax, creatureAttackTaxes } from "../combat/tax.js";
 import { bandingAbilitiesOf, whyBandsInvalid } from "../combat/banding.js";
 import type { BandingAbilities } from "../combat/banding.js";
 import { declaredTokens, MAX_MATERIALIZED, whyCountsInvalid } from "../combat/stack-counts.js";
+import { attackChooser } from "../player-control.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
 import { defineDecision } from "./define.js";
 import type { DecisionReadCtx } from "./contract.js";
@@ -55,10 +56,26 @@ function attackIsFree(ctx: DecisionReadCtx, attacker: ObjectId, defender: Player
   return own.generic === 0 && own.life === 0;
 }
 
+/**
+ * "You choose which creatures attack this turn" (Master Warcraft) splits the
+ * declaration in two (its ruling): `naming`, its chooser names the group, every
+ * defender left for the second step; `sending`, the active player sends that
+ * group. Neither, for an ordinary declaration.
+ */
+function declarationStep(ctx: DecisionReadCtx, player: PlayerId): { naming: boolean; sending?: readonly ObjectId[] } {
+  const awaiting = ctx.state.awaiting;
+  const sending = awaiting?.kind === "attackers" ? awaiting.group : undefined;
+  if (sending !== undefined) return { naming: false, sending };
+  return { naming: attackChooser(ctx.state, player) !== null };
+}
+
 function attackersOffer(ctx: DecisionReadCtx, player: PlayerId): AttackOffer {
+  const { naming, sending } = declarationStep(ctx, player);
   const defenders = legalDefenders(ctx.state, ctx.registry, player);
   const defendersFor: Record<ObjectId, readonly (PlayerId | ObjectId)[]> = {};
   for (const id of ctx.state.zones.shared.battlefield) {
+    if (sending !== undefined && !sending.includes(id)) continue;
+    if (naming && ctx.state.attackChoiceRefused?.includes(id) === true) continue;
     const legal = defendersForAttacker(ctx.state, ctx.registry, player, id);
     if (legal.length > 0) defendersFor[id] = legal;
   }
@@ -112,7 +129,7 @@ function attackersOffer(ctx: DecisionReadCtx, player: PlayerId): AttackOffer {
   // 508.1d).
   const required = eligible.filter(
     (id) =>
-      mustAttack(ctx.state, ctx.registry, id) &&
+      (sending !== undefined || mustAttack(ctx.state, ctx.registry, id)) &&
       (defendersFor[id] ?? []).some((d) => attackIsFree(ctx, id, d)),
   );
   // Under a restriction keyed to the others, only those in every declaration
@@ -132,19 +149,23 @@ function attackersOffer(ctx: DecisionReadCtx, player: PlayerId): AttackOffer {
   for (const id of [...eligible, ...(Object.keys(limits) as ObjectId[])]) {
     if (tokensOf(id) > 1) stacks[id] = tokensOf(id);
   }
+  // Naming the group is no choice of defender, nor of paying or banding: those
+  // are the second step's. One defender a creature, so nothing asks.
+  const named: Record<ObjectId, readonly (PlayerId | ObjectId)[]> = {};
+  if (naming) for (const id of eligible) named[id] = (defendersFor[id] ?? []).slice(0, 1);
   return {
     kind: "declare-attackers",
     // The union across every attacker. NOT the list for any one of them —
     // `defendersFor` is that, per creature, and picking from the union builds
     // a declaration this module's own validator rejects.
-    defenders,
-    defendersFor,
+    defenders: naming ? [...new Set(Object.values(named).flat())] : defenders,
+    defendersFor: naming ? named : defendersFor,
     eligible,
     mustAttack: inCompany
       ? required.filter((id) => mostRequirementsObeyed(units.filter((u) => u.id !== id)) < most)
       : required,
     ...(inCompany ? { company: { limits, tokens: stacks, required } } : {}),
-    ...(taxed
+    ...(taxed && !naming
       ? {
           attackTax: {
             perCreature,
@@ -155,7 +176,7 @@ function attackersOffer(ctx: DecisionReadCtx, player: PlayerId): AttackOffer {
           },
         }
       : {}),
-    ...(Object.keys(banding).length > 0 ? { banding } : {}),
+    ...(Object.keys(banding).length > 0 && !naming ? { banding } : {}),
   };
 }
 
@@ -189,7 +210,15 @@ export const attackers = defineDecision({
     );
     if (badCounts !== null) return badCounts;
     const declared = declaredTokens(entries, tokensIn);
-    for (const { attacker, defender } of action.attackers) {
+    const { naming, sending } = declarationStep(ctx, player);
+    for (const { attacker, defender, band } of action.attackers) {
+      if (sending !== undefined && !sending.includes(attacker)) {
+        return `${nameOf(ctx, attacker)} wasn't chosen to attack`;
+      }
+      if (naming && ctx.state.attackChoiceRefused?.includes(attacker) === true) {
+        return `${nameOf(ctx, attacker)}'s controller won't pay for it to attack`;
+      }
+      if (naming && band !== undefined) return "bands are the active player's to declare";
       const why = whyCannotAttack(ctx.state, ctx.registry, player, attacker, defender);
       if (why !== null) return why;
       // Rule 508.1d — as many of its requirements obeyed as can be: goad's
@@ -231,7 +260,7 @@ export const attackers = defineDecision({
       (id) =>
         (declared.get(id) ?? 0) < tokensIn(id) &&
         ctx.state.objects[id]?.controller === player &&
-        mustAttack(ctx.state, ctx.registry, id) &&
+        (sending?.includes(id) === true || mustAttack(ctx.state, ctx.registry, id)) &&
         // Not one it could attack only by paying for it (rule 508.1d).
         defendersForAttacker(ctx.state, ctx.registry, player, id).some((d) => attackIsFree(ctx, id, d)),
     );
@@ -243,7 +272,8 @@ export const attackers = defineDecision({
       nameOf(ctx, id),
     );
     if (badBands !== null) return badBands;
-    return ctx.whyCannotPayAttackTax(player, action.attackers);
+    // The second step pays, once it's been said who goes where.
+    return naming ? null : ctx.whyCannotPayAttackTax(player, action.attackers);
   },
 
   apply: (host, action): void => {
@@ -256,8 +286,11 @@ export const attackers = defineDecision({
   // may attack. A person is asked instead: the client won't confirm without
   // it.
   ask: (controller, view, _awaiting, player): Action => {
-    const declared = controller.declareAttackers(view);
     const offer = view.legalActions().find((o): o is AttackOffer => o.kind === "declare-attackers");
+    // A group someone else named: a bot's plan may have others in mind.
+    const declared = controller
+      .declareAttackers(view)
+      .filter((d) => view.state.awaiting?.kind !== "attackers" || view.state.awaiting.group?.includes(d.attacker) !== false);
     return {
       type: "declare-attackers",
       player,

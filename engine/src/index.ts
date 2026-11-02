@@ -32,6 +32,7 @@ export * from "./game.js";
  * seat's own windows.
  */
 export { autoAnswerFor, decisionHasSource, mayActOn } from "./decisions/registry.js";
+export { answeringPlayer, askedPlayer, decidingPlayer, playersControlledBy } from "./player-control.js";
 export type { DecisionKind } from "./decisions/contract.js";
 
 /**

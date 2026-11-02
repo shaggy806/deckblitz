@@ -157,6 +157,10 @@ export interface PlayerController {
   readonly playerId: PlayerId;
   /** Called whenever this player holds priority. Return an action to take. */
   act(view: ControllerView): Action;
+  /** What answers as `player` while this controller makes their decisions
+   * (rule 723.5), when it should be something other than {@link standInFor}'s
+   * default. The answers name `player`. */
+  standIn?(player: PlayerId): PlayerController;
   /** Choose exactly `count` cards from `hand` to discard. `view` is the
    * board it's asked on, for a controller that weighs a card by what's
    * already in play. */
@@ -620,6 +624,17 @@ function flickerReturnPending(state: GameState, object: GameObject): boolean {
     link !== undefined &&
     state.delayedTriggers.some((d) => d.effect.kind === "return-flickered" && d.effect.link === link)
   );
+}
+
+/**
+ * Who answers as `player` for a controller that's making their decisions (rule
+ * 723.5, or Master Warcraft's declarations): the controller's own stand-in when
+ * it has one, else one that plays nothing it needn't and answers what it must
+ * with the defaults below — never the controller itself, whose `act` answers
+ * for its own player.
+ */
+export function standInFor(controller: PlayerController, player: PlayerId): PlayerController {
+  return controller.standIn?.(player) ?? new StandInController(player);
 }
 
 export class AutomaticController implements PlayerController {
@@ -1089,11 +1104,31 @@ type TimeTravelChooser = (
 type DamageAssigner = (view: ControllerView, assignment: DamageAssignmentAsk) => readonly number[] | "unblocked";
 
 /**
+ * Answering as a player for whoever controls them: passes every window, attacks
+ * with nothing and blocks with nothing beyond what the rules require, since it
+ * is no friend of theirs. {@link standInFor}.
+ */
+export class StandInController extends AutomaticController {
+  declareBlockers(view: ControllerView): readonly BlockerDeclaration[] {
+    const offer = view.legalActions().find((o) => o.kind === "declare-blockers");
+    return offer?.kind === "declare-blockers" ? obeyingLure([], offer) : [];
+  }
+}
+
+/**
  * Plays a fixed queue of priority actions (each firing when its `when` guard is
  * true), and delegates the other decisions to assignable callbacks. Useful for
  * tests and scripted demos.
  */
 export class ScriptedController implements PlayerController {
+  /** What answers as another player while this seat makes their decisions (rule
+   * 723.5): a test's own controller for them, else the default. */
+  standInFn: ((player: PlayerId) => PlayerController | undefined) | undefined = undefined;
+
+  standIn(player: PlayerId): PlayerController {
+    return this.standInFn?.(player) ?? new StandInController(player);
+  }
+
   readonly playerId: PlayerId;
   private readonly queue: ScriptEntry[];
 
@@ -1632,6 +1667,19 @@ export class RandomController extends AutomaticController {
   constructor(playerId: PlayerId, random: () => number = Math.random) {
     super(playerId);
     this.random = random;
+  }
+
+  /** Another player's decisions (rule 723) get the same dice, kept per player
+   * for the free-activation count below. */
+  private readonly standIns = new Map<PlayerId, RandomController>();
+
+  standIn(player: PlayerId): PlayerController {
+    let standIn = this.standIns.get(player);
+    if (standIn === undefined) {
+      standIn = new RandomController(player, this.random);
+      this.standIns.set(player, standIn);
+    }
+    return standIn;
   }
 
   act(view: ControllerView): Action {

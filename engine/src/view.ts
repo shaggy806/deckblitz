@@ -60,6 +60,14 @@ import {
   rulesTextName,
   sideboardOf,
 } from "./state.js";
+import {
+  answeringPlayer,
+  askedPlayer,
+  controlOf,
+  decidingPlayer,
+  perspectiveOf,
+  playersControlledBy,
+} from "./player-control.js";
 import { withoutTypeMarkers } from "./subtypes.js";
 import type { TargetRef } from "./target.js";
 
@@ -426,6 +434,21 @@ export interface PlayerView {
    * the history names an object in a line from a time it was known, after it
    * has gone somewhere this viewer can't see. */
   readonly publicStints: Readonly<Record<string, readonly PublicStint[]>>;
+  /** Rule 723: which players are being controlled now, and by whom. Public: the
+   * effects that did it are. Absent when nobody is. */
+  readonly playerControl?: readonly {
+    readonly controlled: PlayerId;
+    readonly controller: PlayerId;
+    readonly during: "next-turn" | "next-combat";
+  }[];
+  /** The player this seat should draw the table as, when it isn't its own: the
+   * one whose decision it's making now, or the one it controls while it waits
+   * (`perspectiveOf`). The server's `actions` are that player's when they're
+   * asked, and name them. */
+  readonly perspective?: PlayerId;
+  /** Who the game is waiting on, when it isn't the player being asked: who
+   * controls them or chooses for them. */
+  readonly answering?: PlayerId;
 }
 
 export interface ViewOptions {
@@ -940,7 +963,56 @@ export function viewFor(
 ): PlayerView {
   // A pure read over one settled state, computing characteristics for every
   // visible object — cache them for the duration.
-  return withComputedCache(() => viewForUncached(state, registry, viewer, options));
+  return withComputedCache(() => {
+    const own = viewForUncached(state, registry, viewer, options);
+    if (state.playerControl === undefined && state.combatChoices === undefined) return own;
+    const controlled = playersControlledBy(state, viewer).map((player) => ({
+      player,
+      view: viewForUncached(state, registry, player, options),
+    }));
+    const seen = controlled.reduce((view, other) => withControlledSight(state, view, other.player, other.view), own);
+    const perspective = perspectiveOf(state, viewer);
+    const asked = askedPlayer(state);
+    const answering = asked === null ? asked : answeringPlayer(state, asked);
+    const control = (state.playerControl ?? [])
+      .filter((c) => c.began !== undefined && controlOf(state, c.controlled) === c)
+      .map((c) => ({ controlled: c.controlled, controller: decidingPlayer(state, c.controlled), during: c.during }));
+    return {
+      ...seen,
+      ...(perspective !== viewer ? { perspective } : {}),
+      ...(answering !== asked && answering !== null ? { answering } : {}),
+      ...(control.length > 0 ? { playerControl: control } : {}),
+    };
+  });
+}
+
+/**
+ * `view`, with what `controlled` can see too (rule 723.4): every object that
+ * player's view shows, the way it shows it for what they control (a face-down
+ * creature's face), their library's looked-at top, and the decision as they're
+ * asked it. But not "cards outside the game": their sideboard stays theirs.
+ */
+function withControlledSight(
+  state: GameState,
+  view: PlayerView,
+  controlled: PlayerId,
+  theirs: PlayerView,
+): PlayerView {
+  const objects = { ...view.objects };
+  for (const [id, object] of Object.entries(theirs.objects) as [ObjectId, VisibleObject][]) {
+    if (state.objects[id]?.zone === "outside") continue;
+    if (objects[id] === undefined || state.objects[id]?.controller === controlled) objects[id] = object;
+  }
+  const asked = state.awaiting !== null && state.awaiting.kind !== "mulligan" && state.awaiting.player === controlled;
+  return {
+    ...view,
+    objects,
+    revealedLibraryTop: {
+      ...view.revealedLibraryTop,
+      [controlled]: theirs.revealedLibraryTop[controlled] ?? view.revealedLibraryTop[controlled] ?? null,
+    },
+    awaiting: asked ? theirs.awaiting : view.awaiting,
+  };
 }
 
 function viewForUncached(

@@ -262,7 +262,7 @@ export class RoomService {
       game: room.gameNumber,
       seat,
       ...this.newEvents(room, room.game.viewFor(seat), connection),
-      actions: room.frozen ? [] : room.game.legalActions(seat),
+      actions: room.frozen ? [] : room.actionsFor(seat),
       seats,
       autoPassing: room.isAutoPassing(seat),
       autoPassPaused: room.isAutoPassPaused(seat),

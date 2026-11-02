@@ -688,6 +688,7 @@ function maySkipSlot(t: Targeting): boolean {
  * seat" and "whoever must act" are frequently different players.
  */
 function actingPlayer(view: PlayerView): PlayerId | null {
+  if (view.answering !== undefined) return view.answering
   if (view.awaiting !== null) return view.awaiting.player
   return view.priority.active ? view.priority.holder : null
 }
@@ -1108,6 +1109,35 @@ function GameResultPanel({
  * loaded (the defeat sting runs 3.7 seconds, the victory tune 5.4). */
 const TUNE_FALLBACK_MS = 4000
 
+/**
+ * Who is making whose decisions, in the top strip: the one thing on a table
+ * drawn from another player's seat (or of a hand gone quiet) that says why.
+ */
+function ControlNotice({
+  view,
+  seat,
+  seats,
+}: {
+  readonly view: PlayerView
+  readonly seat: PlayerId | null
+  readonly seats: NetworkGame['seats']
+}) {
+  const control = view.playerControl ?? []
+  const mine = control.find((c) => c.controller === seat)
+  const overMe = control.find((c) => c.controlled === seat)
+  const notice =
+    mine !== undefined
+      ? `You control ${playerLabel(mine.controlled, seats)}`
+      : overMe !== undefined
+        ? `${playerLabel(overMe.controller, seats)} controls you`
+        : view.perspective !== undefined && view.perspective !== seat
+          ? `You choose for ${playerLabel(view.perspective, seats)}`
+          : control.length > 0
+            ? `${playerLabel(control[0].controller, seats)} controls ${playerLabel(control[0].controlled, seats)}`
+            : null
+  return notice === null ? null : <span className="ts-control">{notice}</span>
+}
+
 /** Leaves the waiting room for the landing page, giving up my seat so the
  * table isn't left waiting on someone who has gone. */
 function BackToMenu({ game }: { readonly game: NetworkGame }) {
@@ -1181,7 +1211,6 @@ function WaitingForPlayersScreen({ game }: { readonly game: NetworkGame }) {
  * resolving a card name in the history popup.
  */
 function GameScreen({ game }: { readonly game: NetworkGame }) {
-  const { seat } = game
   const [showHistory, setShowHistory] = useState(false)
   const [showCapture, setShowCapture] = useState(false)
   const [dismissedHighroll, setDismissedHighroll] = useState(false)
@@ -1227,6 +1256,12 @@ function GameScreen({ game }: { readonly game: NetworkGame }) {
   // animations rather than racing ahead of them.
   const shown = usePlayback(game.frame, bus, game.ackFrame, game.spectating ? null : game.seat)
   const view = shown.view
+  // My seat, and the seat the table is drawn from: the same, unless I'm making
+  // another player's decisions (rule 723, Master Warcraft). Then everything the
+  // table does (the hand, the board, the actions naming a player) is theirs, and
+  // the view has what they can see. Concession and the menus stay my own.
+  const ownSeat = game.seat
+  const seat = view?.perspective ?? ownSeat
   // The seats around me as the frame being *shown* has them, not the newest
   // one: a scenario builder can change how many players there are between
   // frames, and the table must only ask the board it's drawing about the
@@ -1237,7 +1272,7 @@ function GameScreen({ game }: { readonly game: NetworkGame }) {
     const i = order.indexOf(seat)
     return i < 0 ? game.opponents.filter((p) => order.includes(p)) : [...order.slice(i + 1), ...order.slice(0, i)]
   }, [view, seat, game.opponents])
-  const botPlaying = game.seats.find((s) => s.player === seat)?.isBot === true
+  const botPlaying = game.seats.find((s) => s.player === ownSeat)?.isBot === true
   // My passing preferences live on this device and the server does the
   // passing: sent when the game screen opens and whenever they change.
   const passSettings = usePassSettings()
@@ -1248,13 +1283,13 @@ function GameScreen({ game }: { readonly game: NetworkGame }) {
   }, [passSettings, sendPassSettings, status, spectating])
   // The winner hears a tune as the game ends: with the result panel, once the
   // last frame has played. Not someone watching.
-  const won = view !== null && seat !== null && !spectating && view.result.over && view.result.winner === seat
+  const won = view !== null && ownSeat !== null && !spectating && view.result.over && view.result.winner === ownSeat
   useEffect(() => {
     if (won) playSound('victory')
   }, [won])
   // And a loser a sting, the moment they're out: the game's end, or knocked
   // out of a table that plays on without them.
-  const lost = view !== null && seat !== null && !spectating && view.players[seat]?.hasLost === true
+  const lost = view !== null && ownSeat !== null && !spectating && view.players[ownSeat]?.hasLost === true
   useEffect(() => {
     if (lost) playSound('defeat')
   }, [lost])
@@ -1322,6 +1357,7 @@ function GameScreen({ game }: { readonly game: NetworkGame }) {
         </span>
         <TurnBanner view={view} seats={game.seats} />
         <PhaseTrack view={view} seat={seat} />
+        <ControlNotice view={view} seat={ownSeat} seats={game.seats} />
         <span className="ts-acting">
           {over
             ? 'Game over'
@@ -1493,7 +1529,7 @@ function GameScreen({ game }: { readonly game: NetworkGame }) {
       {over && !resultDismissed ? (
         <GameResultPanel
           view={view}
-          seat={seat}
+          seat={ownSeat ?? seat}
           seats={game.seats}
           onDismiss={dismissResult}
           offer={rematchOffer({

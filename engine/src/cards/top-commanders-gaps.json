@@ -14,6 +14,8 @@
   "zone:visibility-extensions",
   "trigger:trigger-recipient-ref",
   "trigger:becomes-blocked-attacked-recipient",
+  "mechanic:control-attack-block-choices",
+  "mechanic:control-player",
   "mechanic:companion",
   "mechanic:deck-any-number-copies",
   "static:static-over-enchanted-player",

@@ -541,6 +541,13 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "grant-activated-all": none,
   "grant-triggered-all": none,
   "take-extra-turn": (n, v) => v.touch(n.target, "help", MAJOR),
+  // Taking their turn is the worst of it; being handed the other one is a turn
+  // of someone else's (Cruel Entertainment's slots read as a fair trade).
+  "control-player": (n, v) => {
+    v.touch(n.target, "harm", MAJOR);
+    if (n.controller !== undefined) v.touch(n.controller, "harm", MINOR);
+  },
+  "choose-combat": none,
   storm: none,
   cascade: none,
   discover: none,

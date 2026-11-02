@@ -1170,6 +1170,10 @@ function evalStaticCondition(
       return state.turnOrder.some(
         (p) => p !== you && state.players[p].lifeLostThisTurn > 0,
       );
+    case "before-attackers-declared": {
+      const combats = state.turn.combatPhases ?? 0;
+      return combats === 0 || (combats === 1 && state.turn.step === "begin-combat");
+    }
     case "attacked-this-step": {
       const attacked = state.players[you]?.attackedInCombat;
       return (

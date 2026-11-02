@@ -163,7 +163,7 @@ import type {
   LifeGainReplacement,
   MillMultiplierReplacement,
 } from "./replacements.js";
-import { AutomaticController } from "./controller.js";
+import { AutomaticController, standInFor } from "./controller.js";
 import type { ControllerView, PlayerController } from "./controller.js";
 import type { DecisionHost, DecisionReadCtx } from "./decisions/contract.js";
 import { decisionFor, decisionForAction, mayActOn } from "./decisions/registry.js";
@@ -275,6 +275,10 @@ import {
 } from "./filter.js";
 import type { AggregateReads, AggregateSpec, CardFilter } from "./filter.js";
 import { goadersOf } from "./goad.js";
+import { answeringPlayer, attackChooser, decidingPlayer } from "./player-control.js";
+import type { PlayerControl } from "./state.js";
+import { defendersForAttacker } from "./combat/eligibility.js";
+import { bandingAbilitiesOf } from "./combat/banding.js";
 import { isRingBearer, RING_EMBLEM_TRIGGERS, ringEmblemText } from "./ring.js";
 import { colorIdentityOf } from "./identity.js";
 import { companionProblem } from "./companion.js";
@@ -5345,7 +5349,10 @@ export class Game {
     if (this.state.priority.active && this.state.priority.holder !== null) {
       const holder = this.state.priority.holder;
       const view = this.controllerView(holder);
-      const action = this.controllers[holder].act(view);
+      // Whoever makes this player's decisions now answers, as them (rule 723.5).
+      const answering = answeringPlayer(this.state, holder);
+      const controller = this.controllers[answering];
+      const action = answering === holder ? controller.act(view) : standInFor(controller, holder).act(view);
       if (actionPlayer(action) !== holder) {
         throw new Error(
           `controller for ${holder} returned an action for ${actionPlayer(action)}`,
@@ -7297,6 +7304,9 @@ export class Game {
     delete this.state.extraMainPhases;
     delete this.state.turn.combatPhases;
     delete this.state.turn.mainPhases;
+    delete this.state.combatChoices;
+    delete this.state.attackChoiceRefused;
+    this.endTurnsPlayerControl();
     // Where the normal rotation is: the seat of the last turn that wasn't an
     // extra one. An extra turn is added directly after a turn (rule 500.7),
     // so it doesn't move the rotation — the turn after Bob's extra one is
@@ -7395,6 +7405,7 @@ export class Game {
     );
     // "Their last turn" is this one now (see `PlayerState.lastTurnTaken`).
     this.state.players[this.activePlayer].lastTurnTaken = this.state.turn.number;
+    this.beginPlayerControl("next-turn");
     if (this.state.playerEffects !== undefined) {
       this.state.playerEffects = this.state.playerEffects.filter(
         (e) => !(e.expires.kind === "your-next-turn" && beginningFor.includes(e.owner)),
@@ -7551,6 +7562,7 @@ export class Game {
     }
     // "Until end of combat" effects end with the combat phase (rule 500.5a).
     if (!stillCombat) this.expireUntilEndOfCombat();
+    if (step === "begin-combat") this.beginPlayerControl("next-combat");
     this.state.priority.active = false;
     this.state.priority.holder = null;
     this.state.priority.passed = [];
@@ -9214,6 +9226,10 @@ export class Game {
     if (this.state.blockRequirements?.some((r) => r.thisCombat === true) === true) {
       this.state.blockRequirements = this.state.blockRequirements.filter((r) => r.thisCombat !== true);
     }
+    // "During their next combat phase" (Secret of Bloodbending) is over.
+    if (this.state.playerControl?.some((c) => c.during === "next-combat" && c.began !== undefined) === true) {
+      this.state.playerControl = this.state.playerControl.filter((c) => c.during !== "next-combat" || c.began === undefined);
+    }
     const expired: ObjectId[] = [];
     for (const id of this.state.zones.shared.battlefield) {
       const object = this.state.objects[id];
@@ -9658,6 +9674,27 @@ export class Game {
     // chose: the validator refuses one that leaves it out (rule 508.1d).
     const why = this.whyCannotDeclareAttackers(player, declarations);
     if (why !== null) throw new Error(why);
+    // "You choose which creatures attack this turn" (Master Warcraft): its
+    // chooser names the group, then the active player sends each one, says its
+    // 2008 ruling. Where that leaves them nothing to say, they aren't asked. A
+    // creature they won't pay to send comes out of the proposal, which goes back
+    // to the chooser, as Brutal Hordechief's ruling has it for a block.
+    const asked = this.state.awaiting;
+    if (asked?.kind === "attackers") {
+      if (asked.group !== undefined) {
+        const refused = asked.group.filter((id) => !declarations.some((d) => d.attacker === id));
+        if (refused.length > 0) {
+          this.state.attackChoiceRefused = [...(this.state.attackChoiceRefused ?? []), ...refused];
+          this.state.awaiting = { kind: "attackers", player };
+          return;
+        }
+      } else if (attackChooser(this.state, player) !== null && this.sendingAttackersIsAChoice(player, declarations)) {
+        const group = declarations.flatMap(({ attacker, count }) => this.attackingStackPart(attacker, count));
+        this.state.awaiting = { kind: "attackers", player, group };
+        return;
+      }
+    }
+    delete this.state.attackChoiceRefused;
     // What attacking costs (Ghostly Prison), locked in before anything
     // taps (rule 508.1h) and paid once the attackers have tapped (508.1f,
     // 508.1j) — so an attacker can't tap for its own tax.
@@ -29957,6 +29994,18 @@ export class Game {
         this.state.extraTurns.push(player);
         this.emit({ type: "extra-turn-queued", player });
       },
+      controlPlayer: (controlled, controller, during, extraTurnAfter) => {
+        if (this.state.players[controlled]?.hasLost !== false) return;
+        // Oldest first: the last one created is the one that works (723.1a),
+        // through `controlOf`, and an overwritten Emrakul still owes its turn.
+        this.state.playerControl = [
+          ...(this.state.playerControl ?? []),
+          { controlled, controller, during, ...(extraTurnAfter ? { extraTurnAfter: true as const } : {}) },
+        ];
+      },
+      chooseCombat: (choice) => {
+        this.state.combatChoices = [...(this.state.combatChoices ?? []), { chooser: controller, ...choice }];
+      },
       giveGift: (gift) => {
         // Who it was promised to: the resolving spell's, or the permanent's
         // spell's as it entered — as it last existed there, if it has left.
@@ -31529,7 +31578,12 @@ export class Game {
     const inGraveyard = zones === "library" || outsideOnly ? [] : matching("graveyard");
     const inHand = zones === "graveyard-hand-library" && !outsideOnly ? matching("hand") : [];
     const fits = (id: ObjectId): boolean => matchesFilter(this.state, this.registry, id, filter, { you: player, x });
-    const inOutside = more?.outside !== undefined ? sideboardOf(this.state, owner).filter(fits) : [];
+    // Controlling a player shows nothing outside the game (rule 723.4), so "you
+    // can't have that player choose any card" from there (Mindslaver's ruling).
+    const inOutside =
+      more?.outside !== undefined && decidingPlayer(this.state, owner) === owner
+        ? sideboardOf(this.state, owner).filter(fits)
+        : [];
     // "…or choose a face-up artifact card you own in exile" (Karn, the Great
     // Creator).
     const inExile =
@@ -35690,6 +35744,55 @@ export class Game {
    * one that leaves the battlefield takes no requirement back with it (rule
    * 400.7); `combat/blocking.ts` weighs it when blockers are declared.
    */
+  /** A turn begins: the control that worked through the last one is over (rule
+   * 723.1), and "after that turn, that player takes an extra turn" comes due,
+   * directly after it (500.7) and for each such effect, whichever one worked. */
+  private endTurnsPlayerControl(): void {
+    const all = this.state.playerControl;
+    if (all === undefined) return;
+    for (const control of all) {
+      if (control.began !== undefined && control.extraTurnAfter === true && !this.state.players[control.controlled].hasLost) {
+        this.state.extraTurns.push(control.controlled);
+        this.emit({ type: "extra-turn-queued", player: control.controlled });
+      }
+    }
+    const waiting = all.filter((control) => control.began === undefined);
+    if (waiting.length > 0) this.state.playerControl = waiting;
+    else delete this.state.playerControl;
+  }
+
+  /** The active player's next turn or combat phase, as it begins: what was
+   * waiting for it starts working. Waiting on the turn they actually take is
+   * what makes a skipped turn wait too (723.1b). */
+  private beginPlayerControl(during: PlayerControl["during"]): void {
+    for (const control of this.state.playerControl ?? []) {
+      if (control.during !== during || control.began !== undefined || control.controlled !== this.activePlayer) continue;
+      control.began = this.state.turn.number;
+      if (this.state.players[control.controller]?.hasLost === false) {
+        this.emit({ type: "player-control-began", controlled: control.controlled, controller: control.controller, during });
+      }
+    }
+  }
+
+  /** Whether "you choose which creatures attack" leaves anything for the active
+   * player: which of several defenders each is sent at, what it costs them to
+   * send it, or who bands. */
+  private sendingAttackersIsAChoice(player: PlayerId, declarations: readonly AttackerDeclaration[]): boolean {
+    return declarations.some(({ attacker }) => {
+      const defenders = defendersForAttacker(this.state, this.registry, player, attacker);
+      const taxed = defenders.some((defender) => {
+        const { generic, life } = this.attackTaxOn(defender);
+        return generic > 0 || life > 0;
+      });
+      const banding = bandingAbilitiesOf(this.state, this.registry, attacker);
+      return (
+        defenders.length > 1 ||
+        taxed ||
+        (declarations.length > 1 && (banding.banding || banding.bandsWithOther.length > 0))
+      );
+    });
+  }
+
   private blockIfAble(target: TargetRef, attacker: TargetRef | undefined, thisCombat: boolean): void {
     if (target.kind !== "object") return;
     const id = this.splitOneFromStack(target.object);
@@ -35871,6 +35974,9 @@ export class Game {
   ): number {
     if (typeof amount === "number") return amount;
     if ("countOf" in amount) return this.countBattlefieldMatching(player, amount.countOf);
+    if ("cardTypesInGraveyard" in amount) {
+      return cardTypesInGraveyards(this.state, this.registry, player, amount.cardTypesInGraveyard);
+    }
     if ("aggregate" in amount) {
       // Ghalta's "X is the total power of creatures you control". Clamped at
       // 0: a negative total doesn't make the spell cost more (rule 107.1b).
