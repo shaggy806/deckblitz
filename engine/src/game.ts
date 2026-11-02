@@ -632,6 +632,8 @@ function isTargetKeyed(mod: NonNullable<StaticAbility["costModification"]>): boo
 type DamageStep =
   | { readonly kind: "times"; readonly by: number }
   | { readonly kind: "plus"; readonly by: number }
+  /** "It deals 2 damage … instead", each source's (Equal Treatment). */
+  | { readonly kind: "set"; readonly to: number }
   | { readonly kind: "at-least"; readonly power: number }
   | {
       readonly kind: "prevent-all";
@@ -715,6 +717,10 @@ function runDamageSteps(
         break;
       case "plus":
         total += step.by * sources;
+        break;
+      case "set":
+        // Only "1 or more": the loop has stopped already at none.
+        total = step.to * sources;
         break;
       case "at-least":
         total = Math.max(total, step.power * sources);
@@ -44364,6 +44370,41 @@ export class Game {
     if (playerMultiplier !== 1) steps.push({ kind: "times", by: playerMultiplier });
     for (const { r } of applying) if ((r.multiplier ?? 1) !== 1) steps.push({ kind: "times", by: r.multiplier ?? 1 });
     for (const { r } of applying) if ((r.plus ?? 0) !== 0) steps.push({ kind: "plus", by: r.plus ?? 0 });
+    // "Plus X, where X is Hawkeye's power": as the damage would be dealt.
+    for (const { by, r } of applying) {
+      const plusOf =
+        r.plusOf === undefined
+          ? 0
+          : r.plusOf === "this-power"
+            ? computeCharacteristics(this.state, this.registry, by.id).power
+            : (by.counters[r.plusOf.countersOnThis] ?? 0);
+      if (plusOf > 0) steps.push({ kind: "plus", by: plusOf });
+    }
+    // The same, made by a spell or ability for a duration (The Flame of Keld).
+    for (const effect of this.state.playerEffects ?? []) {
+      const d = effect.damageReplacement;
+      if (d === undefined || (d.combat !== undefined && d.combat !== combat)) continue;
+      if (
+        d.to === "player-or-battle" &&
+        target.kind === "object" &&
+        !computeCharacteristics(this.state, this.registry, target.object).types.includes("battle")
+      ) {
+        continue;
+      }
+      if (
+        d.source !== undefined &&
+        (sourceLastKnown === undefined && this.state.objects[source] === undefined
+          ? true
+          : !matchesFilter(this.state, this.registry, source, d.source, {
+              you: effect.owner,
+              ...(sourceLastKnown !== undefined ? { snapshot: sourceLastKnown } : {}),
+            }))
+      ) {
+        continue;
+      }
+      if ((d.plus ?? 0) !== 0) steps.push({ kind: "plus", by: d.plus ?? 0 });
+      if (d.setTo !== undefined) steps.push({ kind: "set", to: d.setTo });
+    }
     // "…less than ~'s power …, that source deals damage equal to ~'s power
     // instead": raised, never lowered.
     for (const { by, r } of applying) {
@@ -44503,6 +44544,7 @@ export class Game {
       target.kind === "player" ? target.player : this.state.objects[target.object]?.controller;
     if (r.combat !== undefined && r.combat !== combat) return false;
     if (r.fromSelf === true && source !== by.id) return false;
+    if (r.fromOther === true && source === by.id) return false;
     if (r.fromAttached === true && (by.attachedTo === null || source !== by.attachedTo)) return false;
     if (r.toOther === true && target.kind === "object" && target.object === by.id) return false;
     switch (r.to) {

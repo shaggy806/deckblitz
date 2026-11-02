@@ -5268,6 +5268,24 @@ export type EffectSpec =
         readonly multiplier: number;
         readonly permanentsToo?: boolean;
       };
+      /**
+       * A would-deal-damage replacement for a duration, made by a spell or an
+       * ability (rule 614.1a): "if a red source you control would deal damage
+       * to a permanent or player this turn, it deals that much damage plus 2"
+       * (The Flame of Keld: `plus`, `source`), "if a source would deal damage to
+       * a player or battle this turn, … plus 2" (Rankle and Torbran: `to`), "if
+       * any source would deal 1 or more damage … this turn, it deals 2 damage"
+       * (Equal Treatment: `setTo`). `plus` is fixed as this resolves (`"x"`
+       * reads the ability's X); `source` is asked from your side as the damage
+       * would be dealt, so a source that arrives later counts.
+       */
+      readonly damageReplacement?: {
+        readonly plus?: EffectAmount;
+        readonly setTo?: number;
+        readonly source?: CardFilter;
+        readonly combat?: boolean;
+        readonly to?: "player-or-battle";
+      };
       readonly cantLoseGame?: PlayerScope;
       readonly cantWinGame?: PlayerScope;
       readonly cantLoseLife?: PlayerScope;
@@ -15454,6 +15472,19 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
                 players: ctx.playersInScope(spec.damageTo.who),
                 multiplier: spec.damageTo.multiplier,
                 ...(spec.damageTo.permanentsToo === true ? { permanentsToo: true } : {}),
+              },
+            }
+          : {}),
+        ...(spec.damageReplacement !== undefined
+          ? {
+              damageReplacement: {
+                ...(spec.damageReplacement.plus !== undefined
+                  ? { plus: Math.max(0, amountValue(spec.damageReplacement.plus, ctx)) }
+                  : {}),
+                ...(spec.damageReplacement.setTo !== undefined ? { setTo: spec.damageReplacement.setTo } : {}),
+                ...(spec.damageReplacement.source !== undefined ? { source: spec.damageReplacement.source } : {}),
+                ...(spec.damageReplacement.combat !== undefined ? { combat: spec.damageReplacement.combat } : {}),
+                ...(spec.damageReplacement.to !== undefined ? { to: spec.damageReplacement.to } : {}),
               },
             }
           : {}),

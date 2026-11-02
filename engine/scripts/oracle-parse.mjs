@@ -4297,6 +4297,28 @@ export function parseSentence(sentence, ctx) {
     };
   }
 
+  // A would-deal-damage replacement for the turn (rule 614.1a) — `player-effect`'s
+  // `damageReplacement`: The Flame of Keld's "if a red source you control …",
+  // Rankle and Torbran's "… to a player or battle …", Equal Treatment's "1 or more".
+  if ((m = /^if any source would deal 1 or more damage to a permanent or player this turn, it deals (\d+) damage to that permanent or player instead\.$/i.exec(s))) {
+    return { kind: "player-effect", duration: "end-of-turn", damageReplacement: { setTo: Number(m[1]) } };
+  }
+  if ((m = /^if a ((?:white|blue|black|red|green) )?source( you control)? would deal (noncombat )?damage to (a permanent or player|a player or battle) this turn, it deals that much damage plus (\d+)(?: to that permanent or player)? instead\.$/i.exec(s))) {
+    const colors = m[1] === undefined ? {} : { colors: [COLOR_WORD[m[1].trim().toLowerCase()]] };
+    const controlled = m[2] === undefined ? {} : { controlledBy: "you" };
+    const source = { ...colors, ...controlled };
+    return {
+      kind: "player-effect",
+      duration: "end-of-turn",
+      damageReplacement: {
+        plus: Number(m[5]),
+        ...(Object.keys(source).length > 0 ? { source } : {}),
+        ...(m[3] !== undefined ? { combat: false } : {}),
+        ...(m[4].toLowerCase() === "a player or battle" ? { to: "player-or-battle" } : {}),
+      },
+    };
+  }
+
   // Mana.
   if ((m = /^add ((?:\{[WUBRGC]\})+)\.$/i.exec(s))) {
     const units = m[1].match(/[WUBRGC]/g);
@@ -11859,6 +11881,25 @@ function parseStatic(line, text) {
       const host = m[1] === "a creature" ? { type: "creature" } : { subtype: "Equipment" };
       return { ...inner, condition: { kind: "source", filter: { attachedTo: host } } };
     }
+  }
+  // "If another [red] source you control would deal [noncombat] damage to …, it
+  // deals that much damage plus N … instead" (Thor, Asgard's Avenger; Embermaw
+  // Hellion; Tor Wauki the Younger) — `fromOther`, by object.
+  m = /^If another ((?:white|blue|black|red|green) )?source you control would deal (noncombat )?damage to (an opponent or a permanent an opponent controls|a permanent or player), it deals that much damage plus (\d+)(?: to that permanent or player)? instead\.$/.exec(line);
+  if (m !== null) {
+    const colors = m[1] === undefined ? {} : { colors: [COLOR_WORD[m[1].trim()]] };
+    return {
+      affects: { scope: "self" },
+      replacement: {
+        event: "would-deal-damage",
+        plus: Number(m[4]),
+        ...(m[2] !== undefined ? { combat: false } : {}),
+        fromOther: true,
+        source: { ...colors, controlledBy: "you" },
+        ...(m[3] === "a permanent or player" ? {} : { to: "opponent-side" }),
+      },
+      text,
+    };
   }
   // A static prevention (rule 615): "prevent all noncombat damage that would
   // be dealt to other creatures you control" (Crystal Barricade, Tajic).

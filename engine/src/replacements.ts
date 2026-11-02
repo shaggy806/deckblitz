@@ -511,6 +511,11 @@ export interface DamageMultiplierReplacement {
   readonly event: "would-deal-damage";
   readonly multiplier?: number;
   readonly plus?: number;
+  /** A `plus` read as the damage would be dealt: "plus X, where X is Hawkeye's
+   * power" (`"this-power"`, nothing while that's 0 or less), "plus an amount
+   * of damage equal to the number of fire counters on this enchantment" (Fated
+   * Firepower: `{ countersOnThis: "fire" }`). */
+  readonly plusOf?: "this-power" | { readonly countersOnThis: string };
   /** "…would deal an amount of damage **less than ~'s power** …, that
    * source deals damage equal to ~'s power instead" (Ojer Axonil, Deepest
    * Might) — raised to this permanent's power, never lowered. After the
@@ -537,6 +542,10 @@ export interface DamageMultiplierReplacement {
   /** Only damage **this permanent** would deal — Wolverine, Best There
    * Is's "double all damage Wolverine would deal". */
   readonly fromSelf?: boolean;
+  /** Not damage this permanent would deal: "**another** source you control"
+   * (Thor, Asgard's Avenger; Jaya, Venerated Firemage). This object and not its
+   * name, so a namesake's damage still counts. */
+  readonly fromOther?: true;
   /** Only damage the permanent this Aura or Equipment is attached to would
    * deal — Muzzle's "prevent all damage that would be dealt by enchanted
    * creature", Inquisitor's Flail's doubling. */

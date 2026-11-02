@@ -1620,6 +1620,44 @@ describe("costs and triggers", () => {
     expect(unknown.complete).toBe(false);
   });
 
+  it("a damage replacement from another source, and one for the turn", () => {
+    const thor = parseFace(
+      {
+        name: "Test Thor",
+        type_line: "Creature",
+        oracle_text:
+          "If another source you control would deal damage to an opponent or a permanent an opponent controls, it deals that much damage plus 1 instead.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(thor.static[0].replacement).toEqual({
+      event: "would-deal-damage",
+      plus: 1,
+      fromOther: true,
+      source: { controlledBy: "you" },
+      to: "opponent-side",
+    });
+    expect(
+      parseSentence(
+        "If a red source you control would deal damage to a permanent or player this turn, it deals that much damage plus 2 to that permanent or player instead.",
+        ctx(),
+      ),
+    ).toEqual({
+      kind: "player-effect",
+      duration: "end-of-turn",
+      damageReplacement: { plus: 2, source: { colors: ["R"], controlledBy: "you" } },
+    });
+    expect(
+      parseSentence("If a source would deal damage to a player or battle this turn, it deals that much damage plus 2 instead.", ctx()),
+    ).toEqual({ kind: "player-effect", duration: "end-of-turn", damageReplacement: { plus: 2, to: "player-or-battle" } });
+    expect(
+      parseSentence(
+        "If any source would deal 1 or more damage to a permanent or player this turn, it deals 2 damage to that permanent or player instead.",
+        ctx(),
+      ),
+    ).toEqual({ kind: "player-effect", duration: "end-of-turn", damageReplacement: { setTo: 2 } });
+  });
+
   it("one type of mana spent as a colour: `SpendUnitAs`", () => {
     const glasses = parseFace(
       { name: "Test Glasses", type_line: "Artifact", oracle_text: "You may spend white mana as though it were red mana." },

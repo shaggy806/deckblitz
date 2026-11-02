@@ -1198,7 +1198,16 @@
   "cost:mana-spend-only-x-costs",
   "cost:mana-restriction-class-level",
   "cost:spend-colorless-as-any-color",
-  "mana:spend-color-as-another-color"
+  "mana:spend-color-as-another-color",
+  "replacement:damage-becomes-fixed-amount-this-turn",
+  "replacement:damage-plus-from-other-sources",
+  "replacement:damage-plus-source-power",
+  "replacement:damage-plus-this-turn-to-player-or-battle",
+  "replacement:damage-plus-x-this-turn",
+  "replacement:damage-plus-counters-on-source",
+  "replacement:affected-player-orders-damage-modifiers",
+  "effect:damage-source-itself",
+  "effect:damage-source-controller-draws"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

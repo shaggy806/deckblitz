@@ -5016,6 +5016,15 @@ export interface PlayerEffect {
     readonly multiplier: number;
     readonly permanentsToo?: boolean;
   };
+  /** Damage that would be dealt while this lasts, changed (rule 614.1a) — see
+   * `player-effect`'s `damageReplacement`, its amount fixed as it resolved. */
+  readonly damageReplacement?: {
+    readonly plus?: number;
+    readonly setTo?: number;
+    readonly source?: CardFilter;
+    readonly combat?: boolean;
+    readonly to?: "player-or-battle";
+  };
   /** These players can't lose the game (Angel's Grace: "you can't lose the
    * game this turn") — no state-based action and no effect that says they
    * lose makes them lose; conceding still does (rule 104.3a). See

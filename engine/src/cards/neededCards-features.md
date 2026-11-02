@@ -4024,3 +4024,21 @@ Peeper, Unblinking Observer, Freya Crescent, Quinjet Technician, Rosheen Meander
 Palette, Sunglasses of Urza, Abstruse Appropriation. Left: "Spend only black mana on X" (Drain Life,
 Atalya) needs its own narrow key; North Star's one-spell permission and Grell Philosopher stay on
 spend-mana-as-any-color.
+
+### Damage replacements from another source, by a live amount, and for the turn — built 2026-11-02
+
+The need-keys Phase 2 family `replacement:damage-modification`, features only. A `would-deal-damage`
+static takes `fromOther` ("another source you control", by object, so a namesake's damage counts) and
+`plusOf` (`"this-power"`, `{ countersOnThis }`, read as the damage would be dealt).
+`player-effect`'s `damageReplacement` makes one for a duration: `plus` fixed as it resolves, `setTo`
+("it deals 2 damage instead", a new `set` damage step), `source` asked as the damage would be dealt,
+`combat`, and `to: "player-or-battle"`. `bestDamageOrder` already works out the order that hurts least
+(rule 616.1), so the ordering key was stale, as were two more: a prevention's `then` reads the
+damage's source (Swans), and "1 damage to itself" is a simultaneous `sequence`. The scaffolder reads
+the "another source" statics and the for-the-turn sentences. Keys: damage-becomes-fixed-amount-this-turn,
+damage-plus-from-other-sources, damage-plus-source-power, damage-plus-this-turn-to-player-or-battle,
+damage-plus-x-this-turn, damage-plus-counters-on-source, affected-player-orders-damage-modifiers,
+damage-source-itself, damage-source-controller-draws. Proving cards: Thor, Asgard's Avenger; Embermaw
+Hellion; Hawkeye, Young Avenger; Fated Firepower; Equal Treatment; The Flame of Keld; Rankle and
+Torbran; Swans of Bryn Argoll; Reckless Embermage. Left: Taii Wakeen's "deals noncombat damage equal
+to that creature's toughness" trigger, for `author-freed` to narrow.
