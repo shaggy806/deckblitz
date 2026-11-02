@@ -428,7 +428,7 @@ section keeps only what to do next.
   `cost:mana-spending-rules`, `replacement:damage-modification`; then the general effects
   `for-each-permanent` and `as-player`, which closed 25 keys between them, and 5 keys the vocabulary already
   covered. **Before building a key, try writing its card from `card:find`:** 360 open keys' notes say the
-  vocabulary lacks an option, and the 12 tried of those all ran (`docs/plans/need-keys-after-the-walk.md`, the
+  vocabulary lacks an option, and the 9 tried of those all ran as it stood (`docs/plans/need-keys-after-the-walk.md`, the
   over-count pilot). Next unclaimed: `amount:damage-prevented-this-way` (7), then
   `bug:as-enters-choices-any-entry` (7) and `--greedy --groups` (control of a player, rule 723, landed 2026-11-01).
 
