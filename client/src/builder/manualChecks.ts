@@ -9129,6 +9129,20 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'Time Stop: the turn ends at once',
+    board({
+      you: { bf: ['Island*6', 'Grizzly Bears'], hand: ['Time Stop'] },
+      opp: { bf: ['Hill Giant'] },
+    }),
+  ),
+  preset(
+    'Silent Arbiter: only one creature can attack',
+    board({
+      you: { bf: ['Silent Arbiter', 'Grizzly Bears'] },
+      opp: { bf: ['Hill Giant'] },
+    }),
+  ),
+  preset(
     "Dragon's Prey: {2} more for a Dragon, so 3 mana can't aim at one",
     board({
       you: { bf: ['Swamp*3'], hand: ["Dragon's Prey"] },

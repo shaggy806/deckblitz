@@ -799,7 +799,8 @@ missing. Re-run `--greedy` for Phase 2's order.
   pack tactics (4 keys, 10 freed, 10 proving cards); cost reductions and cast rules (33 keys, 46 freed, 36
   proving cards, 2 manual checks); player scopes and ability cost reductions (15 keys, 13 freed, 25 proving
   cards); a number a player chooses (2 keys, 3 freed, 7 proving cards, 7 manual checks); cycling variants
-  and limited free casts (4 keys, 1 freed, 15 proving cards, 5 manual checks).
+  and limited free casts (4 keys, 1 freed, 15 proving cards, 5 manual checks); ending the turn or combat
+  and attack or block limits (4 keys, 6 freed, 11 proving cards, 2 manual checks).
 
 ## Rough size
 

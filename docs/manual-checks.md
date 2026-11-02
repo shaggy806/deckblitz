@@ -6101,3 +6101,11 @@ engine terms. A second thing to check is a second test.
 ### Aluren: any player may cast with it, here Bob's Aluren for you
 - **Do:** Bob controls Aluren and you have no lands. Cast Grizzly Bears from your hand.
 - **Expect:** A click casts it, and the Bears come in under your control. Hill Giant in your hand can't be cast.
+
+### Time Stop: the turn ends at once
+- **Do:** Cast Time Stop in your main phase.
+- **Expect:** The log says the turn ends, nothing of your combat or end step happens, and it is Bob's turn next.
+
+### Silent Arbiter: only one creature can attack
+- **Do:** You start at declare attackers. Click All attack, then Attack with 2. When refused, click the Silent Arbiter to take it out, and attack.
+- **Expect:** Two attackers are refused with a message, and the Bears alone attack.

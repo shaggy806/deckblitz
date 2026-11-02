@@ -6,6 +6,12 @@ rule number, the code that does it today and the cards it blocks. `BACKLOG.md` k
 per gap under the same bold title; when a gap closes, delete it here and move its
 `BACKLOG.md` line to `COMPLETED.md`.
 
+- **Goad's defender narrowing ignores attack caps** (found 2026-11-01, unconfirmed by a test). Rule
+  508.1d maximises requirements obeyed within restrictions. `decisions/attackers.ts` narrows a goaded
+  creature's defenders without reading `combat/limits.ts`, so a second goaded creature facing a full
+  Crawlspace isn't sent at its goader. Related: `withinBlockCompany` (`combat/blocking.ts`) can reach
+  an empty set for two Lured menace attackers under Caverns of Despair, which may be refused. And a
+  global block limit (`blockersLeft`, `combat/limits.ts`) goes to whichever defender is asked first.
 - **A spell needing two target-keyed reductions at once is refused** (found 2026-11-01). Rule 601.2f
   totals the cost after targets are chosen, so two targets that each earn a reduction both count.
   `reducingTargetsNeeded` (`game.ts`) guarantees only one earning target in the offer, so a multi-target

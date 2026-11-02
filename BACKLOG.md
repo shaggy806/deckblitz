@@ -409,7 +409,8 @@ section keeps only what to do next.
   damage to the source (5 freed, 13 proving cards), skip-turn and pack tactics (10 freed, 10 proving
   cards), cost reductions and cast rules (46 freed, 36 proving cards), player scopes and ability cost
   reductions (13 freed, 25 proving cards), a number a player chooses (3 freed, 7 proving cards), cycling
-  variants and limited free casts (1 freed, 15 proving cards). **About 1340 freed cards wait for the authoring
+  variants and limited free casts (1 freed, 15 proving cards), ending the turn or combat and attack or
+  block limits (6 freed, 11 proving cards). **About 1346 freed cards wait for the authoring
   sweep**
   (`cards:needs -- --stale`); the user authors them in one sweep once the reasonable keys are built.
   Cloud sessions are building `keyword:hexproof-from-colors`, the combat-restriction second group,
@@ -484,6 +485,7 @@ One line each; the detail (rule numbers, code sites, the cards each blocks) is i
 **`docs/engine-gaps.md`**, under the same bold title. When a gap closes, delete its detail
 there and move this line to `COMPLETED.md`.
 
+- **Goad's defender narrowing ignores attack caps** — a second goaded creature facing a full Crawlspace isn't sent at its goader (508.1d); two Lured menace attackers under Caverns of Despair can also leave no legal block set (`combat/blocking.ts`).
 - **A spell needing two target-keyed reductions at once is refused** — `reducingTargets` keeps one earning target, so a multi-target spell affordable only with both is refused at the cast.
 - **Limited-duration control of a player** — rule 723.2's Word of Command and Opposition Agent; `player-control.ts` holds a next turn or a next combat only.
 - **`exile-all` and `damage-all`'s `except` spare a whole token stack** — they compare the stack's id, where `destroy-all`'s `exceptSource` spares one token and takes the rest.
@@ -638,10 +640,11 @@ One line each; the detail is in **`docs/client-gaps.md`**, under the same bold t
 animation follow-ups in `docs/plans/legibility-of-play.md`, "Follow-ups". When an item lands,
 delete its detail there and move this line to `COMPLETED.md`.
 
+- **Clear can't undo All attack at a two-player table** — All attack assigns each one-defender creature outright, and Clear only empties `attackPicks`, so it stays disabled; each attacker has to be clicked off.
 - **The discard prompt says "any number" under a cap** — `App.tsx` (~6015) words an `atMost` discard as "any number of cards"; the cap itself is enforced (Jaya Ballard's +1).
 - **The combat prompts' cost lines miss the per-creature taxes** — the attack line ignores `attackTax.perAttacker` and blocks show no cost; the engine refuses what can't be paid.
 - **The tap-cost prompt doesn't check a shared creature type** — Confirm enables on count alone; `creatureTypes` is on the offer, and the engine refuses a pair that doesn't share one.
-- **The attack and block Confirm doesn't check company restrictions** — a lone Mogg Flunkies is refused with a toast; `attackCompanyViolations`/`blockCompanyViolations` are exported for the client.
+- **The attack and block Confirm doesn't check company restrictions** — a lone Mogg Flunkies is refused with a toast, and so is one attacker too many under Silent Arbiter or Crawlspace; `attackCompanyViolations`/`blockCompanyViolations` and `combat/limits.ts` are there for the client to read.
 - **The X prompt and shown cost ignore a target's tax** — `App.tsx` doesn't read `xCost.targetTaxes`/`maxXUnreduced`, so a taxed target at too high an X is refused rather than never offered, and the shown cost omits the tax.
 - **A hand card's types show as printed under a static outside the battlefield** — `view.ts` under `typesOutsideBattlefield` (Conspiracy, Arcane Adaptation); the filters read the new types.
 - **A lands-only prohibition writes no log line** — `format.ts`'s `prohibition-imposed` names only spells and abilities, so Turf Wound's "can't play lands this turn" emits none (found 2026-11-01).

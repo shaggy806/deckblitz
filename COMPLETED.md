@@ -86,6 +86,12 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2: limits on how many creatures attack or block** (2026-11-01, `b5fb71223`;
+  `static:attack-limit`, `static:max-attackers-blockers`) — `attackLimit`, `blockLimit`, the `limit-blockers`
+  effect, `combat/limits.ts`. Crawlspace, Silent Arbiter, Caverns of Despair, Dueling Grounds, Tomik, Mirri.
+- **Need-keys Phase 2: ending the turn and the combat phase** (2026-11-01, `fead394c2`;
+  `effect:end-the-turn`, `effect:end-the-combat-phase`) — rule 724: the stack exiled uncountered, on to
+  cleanup, or to the next phase. Time Stop, Ultima, Glorious End, Obeka Brute Chronologist, Mandate of Peace.
 - **Need-keys Phase 2: free casts with a limit** (2026-11-01, `822249c08`, fix `cef9dee3c`, checks
   `506beb17c`; `cost:free-cast-from-hand-static`, `cost:free-cast-once-each-turn`) —
   `alternativeCostForSpells`' `fromZones` and `anyPlayer`, reaching `via: "library-top"` and any paid
