@@ -6045,3 +6045,11 @@ engine terms. A second thing to check is a second test.
 ### Brutal Hordechief: Bob's creatures must block, and you choose how
 - **Do:** Activate Hordechief, go to combat and attack with it.
 - **Expect:** The drain happens as it attacks. The strip says "You choose for Bob", and the block prompt won't confirm until both his creatures block.
+
+### Rout: on Bob's turn it costs {2} more
+- **Do:** This is Bob's main phase. When you get priority, cast Rout.
+- **Expect:** The only way offered is "flash {2}", and it takes all seven Plains. The Bears are destroyed.
+
+### Dragon's Prey: {2} more for a Dragon, so 3 mana can't aim at one
+- **Do:** Cast Dragon's Prey with your three Swamps.
+- **Expect:** Grizzly Bears can be targeted, Shivan Dragon can't. The Bears are destroyed.

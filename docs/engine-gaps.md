@@ -6,6 +6,11 @@ rule number, the code that does it today and the cards it blocks. `BACKLOG.md` k
 per gap under the same bold title; when a gap closes, delete it here and move its
 `BACKLOG.md` line to `COMPLETED.md`.
 
+- **A spell needing two target-keyed reductions at once is refused** (found 2026-11-01). Rule 601.2f
+  totals the cost after targets are chosen, so two targets that each earn a reduction both count.
+  `reducingTargetsNeeded` (`game.ts`) guarantees only one earning target in the offer, so a multi-target
+  spell affordable only with both (two Spellwild Ouphes, say) is refused at the cast: a legal play
+  missing, never an illegal one allowed. Narrow; no proving card reaches it.
 - **Limited-duration control of a player** (found 2026-11-01). Rule 723.2: Word of Command and
   Opposition Agent control a player for less than a turn. `player-control.ts` holds a next turn or a
   next combat, not these; Word of Command is on the stale list and needs its own narrow key.

@@ -795,7 +795,9 @@ missing. Re-run `--greedy` for Phase 2's order.
   proving cards); alternative costs in life and costs that exile a chosen object (7 keys, 7 freed, 12
   proving cards, 4 manual checks); a player's number against yours and amounts from this turn's events
   (13 keys, 6 freed, 17 proving cards); emblem statics and reveal-until (12 keys, 15 freed, 15 proving
-  cards); same-name filters and damage to the source (6 keys, 5 freed, 13 proving cards).
+  cards); same-name filters and damage to the source (6 keys, 5 freed, 13 proving cards); skip-turn and
+  pack tactics (4 keys, 10 freed, 10 proving cards); cost reductions and cast rules (33 keys, 46 freed, 36
+  proving cards, 2 manual checks).
 
 ## Rough size
 

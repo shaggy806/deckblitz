@@ -9072,4 +9072,19 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: ['Hill Giant'] },
     }),
   ),
+  preset(
+    "Rout: on Bob's turn it costs {2} more",
+    board({
+      you: { bf: ['Plains*7'], hand: ['Rout'] },
+      opp: { bf: ['Grizzly Bears'] },
+      turn: 0,
+    }),
+  ),
+  preset(
+    "Dragon's Prey: {2} more for a Dragon, so 3 mana can't aim at one",
+    board({
+      you: { bf: ['Swamp*3'], hand: ["Dragon's Prey"] },
+      opp: { bf: ['Grizzly Bears', 'Shivan Dragon'] },
+    }),
+  ),
 ]

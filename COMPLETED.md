@@ -86,6 +86,28 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2: when a spell may be cast or an ability activated** (2026-11-01, `18faa95cc`;
+  `effect:cast-and-activate-restrictions`' top group, 13 keys) — flash for an extra cost (`kicker`'s
+  `keyword: "flash"`), opponents may activate, bans on non-mana and loyalty abilities, as-though haste,
+  loyalty twice, until-your-next-turn bans, sorcery timing for opponents, legendary sorcery,
+  uncounterable-if, can't cast creature spells. Rout, Saproling Symbiosis, Harbinger of the Tides,
+  Detention Vortex, The Immortal Sun, Overwhelming Splendor, Thousand-Year Elixir, Oath of Teferi, Reflector
+  Mage, Single Combat, Teferi Time Raveler, Urza's Ruinous Blast, Exquisite Firecraft, Steel Golem.
+- **Need-keys Phase 2: cost reductions read more and take more** (2026-11-01, `bd0b0c094`;
+  `cost:cost-modification-extensions`' top group, 20 keys) — `CostReductionAmount`'s every counter, colours
+  among, same name, source's or equipped power; self-coloured, domain and several conditions; target-keyed
+  costs; died, sacrificed and energy this turn (`turnStat`'s `"energy-paid-or-lost"`); flashback reduced;
+  by cast zone. Lumbering Megasloth, Wildvine Pummeler, Tamiyo's Logbook, Locket of Yesterdays, Gargantuan
+  Leech, Khalni Hydra, Ertai's Scorn, Stormwing Entity, Assassin's Ink, Diregraf Rebirth, The Balrog, The
+  Scarlet Witch, Visions of Glory, Gravebreaker Lamia, Brush Off, Dragon's Prey, Vanish into Eternity,
+  Killian, Spellwild Ouphe, Battlefield Thaumaturge, Monastery Siege, Icefall Regent.
+- **Need-keys Phase 2: pack tactics** (2026-11-01, `9107d724b`; `keyword:pack-tactics`) — `TurnStat`'s
+  `"power-attacked-with-this-combat"`, recorded at declaration. Gnoll Hunter, Targ Nar, Battle Cry Goblin.
+- **Need-keys Phase 2: skipping a turn, and scoped extra turns** (2026-11-01, `767fc5e70`;
+  `effect:skip-next-turn`, `effect:extra-turn-scoped-effects`, `condition:extra-turn`) — `skip-turn`
+  (`PlayerState.turnsToSkip`, extra turns too, 614.10a), `take-extra-turn`'s `thatTurn`, the
+  `"this-turn-end-step"` delayed timing. Meditate, Eater of Days, Wormfang Manta, Warrior's Oath, Chance for
+  Glory, Alchemist's Gambit, Medomai the Ageless.
 - **Need-keys Phase 2: untargeted damage to the ability's own source** (2026-11-01, `9b205b0bd`;
   `effect:damage-to-source`) — `damage`'s `target: "source"`; the scaffolder reads coin flips too. Psionic
   Entity, Psionic Sliver, Goblin Bangchuckers, Goblin Tinkerer.

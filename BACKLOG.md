@@ -406,7 +406,8 @@ section keeps only what to do next.
   freed, 11 proving cards), alternative costs in life and costs that exile a chosen object (7 freed,
   12 proving cards), a player's number against yours and amounts from this turn's events (6 freed, 17
   proving cards), emblem statics and reveal-until (15 freed, 15 proving cards), same-name filters and
-  damage to the source (5 freed, 13 proving cards). **About 1267 freed cards wait for the authoring
+  damage to the source (5 freed, 13 proving cards), skip-turn and pack tactics (10 freed, 10 proving
+  cards), cost reductions and cast rules (46 freed, 36 proving cards). **About 1323 freed cards wait for the authoring
   sweep**
   (`cards:needs -- --stale`); the user authors them in one sweep once the reasonable keys are built.
   Cloud sessions are building `keyword:hexproof-from-colors`, the combat-restriction second group,
@@ -481,6 +482,7 @@ One line each; the detail (rule numbers, code sites, the cards each blocks) is i
 **`docs/engine-gaps.md`**, under the same bold title. When a gap closes, delete its detail
 there and move this line to `COMPLETED.md`.
 
+- **A spell needing two target-keyed reductions at once is refused** — `reducingTargets` keeps one earning target, so a multi-target spell affordable only with both is refused at the cast.
 - **Limited-duration control of a player** — rule 723.2's Word of Command and Opposition Agent; `player-control.ts` holds a next turn or a next combat only.
 - **`exile-all` and `damage-all`'s `except` spare a whole token stack** — they compare the stack's id, where `destroy-all`'s `exceptSource` spares one token and takes the rest.
 - **A must-block creature's only companion can't legally join it** — `withinBlockCompany` (`combat/blocking.ts`) can answer with an illegal `[]`, as with an attacker that can't be blocked by more than one; a person would have no legal declaration.
