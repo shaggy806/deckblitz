@@ -174,6 +174,7 @@ import _poolDeepchannelMentor from "../pool/deepchannel-mentor.js";
 import _poolDefenderOfChaos from "../pool/defender-of-chaos.js";
 import _poolDefilerOfSouls from "../pool/defiler-of-souls.js";
 import _poolDeflectingSwat from "../pool/deflecting-swat.js";
+import _poolDemonOfFatesDesign from "../pool/demon-of-fates-design.js";
 import _poolDemonicRuckus from "../pool/demonic-ruckus.js";
 import _poolDepose from "../pool/depose.js";
 import _poolDescentIntoAvernus from "../pool/descent-into-avernus.js";
@@ -1072,6 +1073,7 @@ const shard: CardShard = {
     _poolDefenderOfChaos,
     _poolDefilerOfSouls,
     _poolDeflectingSwat,
+    _poolDemonOfFatesDesign,
     _poolDemonicRuckus,
     _poolDepose,
     _poolDescentIntoAvernus,

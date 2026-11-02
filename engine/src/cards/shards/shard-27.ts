@@ -643,6 +643,7 @@ import _poolSmallpox from "../pool/smallpox.js";
 import _poolSmeltWardGatekeepers from "../pool/smelt-ward-gatekeepers.js";
 import _poolSmeltWardIgnus from "../pool/smelt-ward-ignus.js";
 import _poolSnappingCreeper from "../pool/snapping-creeper.js";
+import _poolSnuffOut from "../pool/snuff-out.js";
 import _poolSokkaLateralStrategist from "../pool/sokka-lateral-strategist.js";
 import _poolSokkaWolfCovesProtector from "../pool/sokka-wolf-coves-protector.js";
 import _poolSolsticeRevelations from "../pool/solstice-revelations.js";
@@ -1497,6 +1498,7 @@ const shard: CardShard = {
     _poolSmeltWardGatekeepers,
     _poolSmeltWardIgnus,
     _poolSnappingCreeper,
+    _poolSnuffOut,
     _poolSokkaLateralStrategist,
     _poolSokkaWolfCovesProtector,
     _poolSolsticeRevelations,

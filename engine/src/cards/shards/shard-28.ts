@@ -495,6 +495,7 @@ import _poolNightshadePeddler from "../pool/nightshade-peddler.js";
 import _poolNightwindGlider from "../pool/nightwind-glider.js";
 import _poolNihilisticGlee from "../pool/nihilistic-glee.js";
 import _poolNissasPilgrimage from "../pool/nissas-pilgrimage.js";
+import _poolNivmagusElemental from "../pool/nivmagus-elemental.js";
 import _poolNorthernPaladin from "../pool/northern-paladin.js";
 import _poolNoyanDarRoilShaper from "../pool/noyan-dar-roil-shaper.js";
 import _poolNyamiClassMotherShip from "../pool/nyami-class-mother-ship.js";
@@ -1389,6 +1390,7 @@ const shard: CardShard = {
     _poolNightwindGlider,
     _poolNihilisticGlee,
     _poolNissasPilgrimage,
+    _poolNivmagusElemental,
     _poolNorthernPaladin,
     _poolNoyanDarRoilShaper,
     _poolNyamiClassMotherShip,

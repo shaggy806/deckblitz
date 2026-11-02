@@ -388,6 +388,7 @@ import _poolInfinityFormula from "../pool/infinity-formula.js";
 import _poolIngaRuneEyes from "../pool/inga-rune-eyes.js";
 import _poolInheritance from "../pool/inheritance.js";
 import _poolInquisitionOfKozilek from "../pool/inquisition-of-kozilek.js";
+import _poolInsideInformation from "../pool/inside-information.js";
 import _poolInsight from "../pool/insight.js";
 import _poolInspiringOverseer from "../pool/inspiring-overseer.js";
 import _poolIntoTheNorth from "../pool/into-the-north.js";
@@ -395,6 +396,7 @@ import _poolIntrudingSoulrager from "../pool/intruding-soulrager.js";
 import _poolInvasionOfInnistrad from "../pool/invasion-of-innistrad.js";
 import _poolInvasionOfKamigawa from "../pool/invasion-of-kamigawa.js";
 import _poolInvasionTactics from "../pool/invasion-tactics.js";
+import _poolInvigorate from "../pool/invigorate.js";
 import _poolIridianMaelstrom from "../pool/iridian-maelstrom.js";
 import _poolIronclawOrcs from "../pool/ironclaw-orcs.js";
 import _poolIrreverentRevelers from "../pool/irreverent-revelers.js";
@@ -1269,6 +1271,7 @@ const shard: CardShard = {
     _poolIngaRuneEyes,
     _poolInheritance,
     _poolInquisitionOfKozilek,
+    _poolInsideInformation,
     _poolInsight,
     _poolInspiringOverseer,
     _poolIntoTheNorth,
@@ -1276,6 +1279,7 @@ const shard: CardShard = {
     _poolInvasionOfInnistrad,
     _poolInvasionOfKamigawa,
     _poolInvasionTactics,
+    _poolInvigorate,
     _poolIridianMaelstrom,
     _poolIronclawOrcs,
     _poolIrreverentRevelers,

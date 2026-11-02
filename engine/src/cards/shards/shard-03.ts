@@ -73,6 +73,7 @@ import _poolBurstOfStrength from "../pool/burst-of-strength.js";
 import _poolBuzzardWaspColony from "../pool/buzzard-wasp-colony.js";
 import _poolByInvitationOnly from "../pool/by-invitation-only.js";
 import _poolBygoneMarvels from "../pool/bygone-marvels.js";
+import _poolCadaverousBloom from "../pool/cadaverous-bloom.js";
 import _poolCaitSithFortuneTeller from "../pool/cait-sith-fortune-teller.js";
 import _poolCalamityGallopingInferno from "../pool/calamity-galloping-inferno.js";
 import _poolCandlekeepSage from "../pool/candlekeep-sage.js";
@@ -870,6 +871,7 @@ const shard: CardShard = {
     _poolBuzzardWaspColony,
     _poolByInvitationOnly,
     _poolBygoneMarvels,
+    _poolCadaverousBloom,
     _poolCaitSithFortuneTeller,
     _poolCalamityGallopingInferno,
     _poolCandlekeepSage,

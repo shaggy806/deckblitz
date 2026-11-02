@@ -151,6 +151,7 @@ import _poolChimneyRabble from "../pool/chimney-rabble.js";
 import _poolChordOfCalling from "../pool/chord-of-calling.js";
 import _poolChorusOfTheTides from "../pool/chorus-of-the-tides.js";
 import _poolCitanulWoodreaders from "../pool/citanul-woodreaders.js";
+import _poolCityOfShadows from "../pool/city-of-shadows.js";
 import _poolClanDefiance from "../pool/clan-defiance.js";
 import _poolClatteringSkeletons from "../pool/clattering-skeletons.js";
 import _poolCleopatraExiledPharaoh from "../pool/cleopatra-exiled-pharaoh.js";
@@ -1015,6 +1016,7 @@ const shard: CardShard = {
     _poolChordOfCalling,
     _poolChorusOfTheTides,
     _poolCitanulWoodreaders,
+    _poolCityOfShadows,
     _poolClanDefiance,
     _poolClatteringSkeletons,
     _poolCleopatraExiledPharaoh,

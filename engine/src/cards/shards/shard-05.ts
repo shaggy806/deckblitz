@@ -486,6 +486,7 @@ import _poolMarkForDeath from "../pool/mark-for-death.js";
 import _poolMarkOfSakiko from "../pool/mark-of-sakiko.js";
 import _poolMarkovBlademaster from "../pool/markov-blademaster.js";
 import _poolMarshalOfTheLost from "../pool/marshal-of-the-lost.js";
+import _poolMarshlandBloodcaster from "../pool/marshland-bloodcaster.js";
 import _poolMartyrForTheCause from "../pool/martyr-for-the-cause.js";
 import _poolMaskOfMemory from "../pool/mask-of-memory.js";
 import _poolMatoyaArchonElder from "../pool/matoya-archon-elder.js";
@@ -1352,6 +1353,7 @@ const shard: CardShard = {
     _poolMarkOfSakiko,
     _poolMarkovBlademaster,
     _poolMarshalOfTheLost,
+    _poolMarshlandBloodcaster,
     _poolMartyrForTheCause,
     _poolMaskOfMemory,
     _poolMatoyaArchonElder,

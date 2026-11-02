@@ -458,6 +458,7 @@ import _poolNagaOracle from "../pool/naga-oracle.js";
 import _poolNausea from "../pool/nausea.js";
 import _poolNavigationOrb from "../pool/navigation-orb.js";
 import _poolNecromanticSummons from "../pool/necromantic-summons.js";
+import _poolNecroticFumes from "../pool/necrotic-fumes.js";
 import _poolNeedlethornDrake from "../pool/needlethorn-drake.js";
 import _poolNekoTe from "../pool/neko-te.js";
 import _poolNekrataal from "../pool/nekrataal.js";
@@ -1347,6 +1348,7 @@ const shard: CardShard = {
     _poolNausea,
     _poolNavigationOrb,
     _poolNecromanticSummons,
+    _poolNecroticFumes,
     _poolNeedlethornDrake,
     _poolNekoTe,
     _poolNekrataal,

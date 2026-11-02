@@ -274,6 +274,7 @@ import _poolFocusTheMind from "../pool/focus-the-mind.js";
 import _poolFodderLaunch from "../pool/fodder-launch.js";
 import _poolFolkOfThePines from "../pool/folk-of-the-pines.js";
 import _poolFomoriNomad from "../pool/fomori-nomad.js";
+import _poolFoodChain from "../pool/food-chain.js";
 import _poolForeverYoung from "../pool/forever-young.js";
 import _poolForiysianTotem from "../pool/foriysian-totem.js";
 import _poolForlornPseudamma from "../pool/forlorn-pseudamma.js";
@@ -512,6 +513,7 @@ import _poolNeurokFamiliar from "../pool/neurok-familiar.js";
 import _poolNiblisOfDusk from "../pool/niblis-of-dusk.js";
 import _poolNightClubber from "../pool/night-clubber.js";
 import _poolNightDealings from "../pool/night-dealings.js";
+import _poolNightSoil from "../pool/night-soil.js";
 import _poolNighthawkScavenger from "../pool/nighthawk-scavenger.js";
 import _poolNimGrotesque from "../pool/nim-grotesque.js";
 import _poolNix from "../pool/nix.js";
@@ -1220,6 +1222,7 @@ const shard: CardShard = {
     _poolFodderLaunch,
     _poolFolkOfThePines,
     _poolFomoriNomad,
+    _poolFoodChain,
     _poolForeverYoung,
     _poolForiysianTotem,
     _poolForlornPseudamma,
@@ -1458,6 +1461,7 @@ const shard: CardShard = {
     _poolNiblisOfDusk,
     _poolNightClubber,
     _poolNightDealings,
+    _poolNightSoil,
     _poolNighthawkScavenger,
     _poolNimGrotesque,
     _poolNix,
