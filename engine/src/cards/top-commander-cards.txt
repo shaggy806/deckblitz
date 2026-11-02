@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4163 already implemented / 837 missing (marks refreshed 2026-11-02)
+4172 already implemented / 828 missing (marks refreshed 2026-11-02)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -874,7 +874,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   878  City on Fire                             {5}{R}{R}{R}     Enchantment
 [x]   879  Expressive Iteration                     {U}{R}           Sorcery
 [x]   880  Elvish Archdruid                         {1}{G}{G}        Creature — Elf Druid
-[ ]   881  Thousand-Year Elixir                     {3}              Artifact
+[x]   881  Thousand-Year Elixir                     {3}              Artifact
 [x]   882  Myr Retriever                            {2}              Artifact Creature — Myr
 [x]   883  Bear Umbra                               {2}{G}{G}        Enchantment — Aura
 [x]   884  Witch's Cottage                          {0}              Land — Swamp
@@ -1130,7 +1130,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1135  Enduring Courage                         {2}{R}{R}        Enchantment Creature — Dog Glimmer
 [x]  1136  Deflecting Palm                          {R}{W}           Instant
 [x]  1137  Gisela, Blade of Goldnight               {4}{R}{W}{W}     Legendary Creature — Angel
-[ ]  1138  Teferi, Time Raveler                     {1}{W}{U}        Legendary Planeswalker — Teferi
+[x]  1138  Teferi, Time Raveler                     {1}{W}{U}        Legendary Planeswalker — Teferi
 [x]  1139  Spore Frog                               {G}              Creature — Frog
 [x]  1140  Augur of Autumn                          {1}{G}{G}        Creature — Human Druid
 [x]  1141  Lonely Sandbar                           {0}              Land
@@ -1611,7 +1611,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  1618  Replicating Ring                         {3}              Snow Artifact
 [x]  1619  Masterwork of Ingenuity                  {1}              Artifact — Equipment
 [x]  1620  Stitch Together                          {B}{B}           Sorcery
-[ ]  1621  Urza's Ruinous Blast                     {4}{W}           Legendary Sorcery
+[x]  1621  Urza's Ruinous Blast                     {4}{W}           Legendary Sorcery
 [x]  1622  Ophidian Eye                             {2}{U}           Enchantment — Aura
 [ ]  1623  Chainer, Nightmare Adept                 {2}{B}{R}        Legendary Creature — Human Minion
 [x]  1624  Elvish Warmaster                         {1}{G}           Creature — Elf Warrior
@@ -2039,7 +2039,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2046  Trinket Mage                             {2}{U}           Creature — Human Wizard
 [x]  2047  Birthing Pod                             {3}{G/P}         Artifact
 [x]  2048  There and Back Again                     {3}{R}{R}        Enchantment — Saga
-[ ]  2049  Single Combat                            {3}{W}{W}        Sorcery
+[x]  2049  Single Combat                            {3}{W}{W}        Sorcery
 [ ]  2050  The Council of Four                      {3}{W}{U}        Legendary Creature — Human Noble
 [ ]  2051  Mycosynth Lattice                        {6}              Artifact
 [x]  2052  Copy Enchantment                         {2}{U}           Enchantment
@@ -2611,7 +2611,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2618  Ancient Bronze Dragon                    {5}{G}{G}        Creature — Elder Dragon
 [x]  2619  Gleaming Splendor                        {1}{W}           Enchantment
 [x]  2620  Gateway Plaza                            {0}              Land — Gate
-[ ]  2621  The Immortal Sun                         {6}              Legendary Artifact
+[x]  2621  The Immortal Sun                         {6}              Legendary Artifact
 [x]  2622  Blood Pet                                {B}              Creature — Thrull
 [x]  2623  Twinferno                                {1}{R}           Instant
 [x]  2624  Thornbite Staff                          {2}              Kindred Artifact — Shaman Equipment
@@ -3020,7 +3020,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3027  Ultima, Origin of Oblivion               {5}              Legendary Creature — God
 [x]  3028  Dazzling Angel                           {2}{W}           Creature — Angel
 [x]  3029  Magic Damper                             {U}              Instant
-[ ]  3030  Oath of Teferi                           {3}{W}{U}        Legendary Enchantment
+[x]  3030  Oath of Teferi                           {3}{W}{U}        Legendary Enchantment
 [x]  3031  Citadel Gate                             {0}              Land — Gate
 [x]  3032  Cornered by Black Mages                  {1}{B}{B}        Sorcery
 [x]  3033  Mizzium Mortars                          {1}{R}           Sorcery
@@ -3387,7 +3387,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3394  O'aka, Traveling Merchant                {1}{U}           Legendary Creature — Human Citizen
 [x]  3395  Hooded Hydra                             {X}{G}{G}        Creature — Snake Hydra
 [x]  3396  Sigil of Sleep                           {U}              Enchantment — Aura
-[ ]  3397  Killian, Ink Duelist                     {W}{B}           Legendary Creature — Human Warlock
+[x]  3397  Killian, Ink Duelist                     {W}{B}           Legendary Creature — Human Warlock
 [x]  3398  Angelic Accord                           {3}{W}           Enchantment
 [x]  3399  Squirrel Nest                            {1}{G}{G}        Enchantment — Aura
 [x]  3400  Pathbreaker Ibex                         {4}{G}{G}        Creature — Goat
@@ -3769,7 +3769,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3776  Putrid Goblin                            {1}{B}           Creature — Zombie Goblin
 [x]  3777  Blacksmith's Talent                      {R}              Enchantment — Class
 [x]  3778  Salvation Engine                         {4}{W}           Artifact — Vehicle
-[ ]  3779  Gravebreaker Lamia                       {4}{B}           Enchantment Creature — Snake Lamia
+[x]  3779  Gravebreaker Lamia                       {4}{B}           Enchantment Creature — Snake Lamia
 [ ]  3780  Chainsaw                                 {1}{R}           Artifact — Equipment
 [ ]  3781  Angel of Serenity                        {4}{W}{W}{W}     Creature — Angel
 [x]  3782  Laughing Jasper Flint                    {1}{B}{R}        Legendary Creature — Lizard Rogue
@@ -4844,7 +4844,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4851  Lumbering Falls                          {0}              Land
 [x]  4852  Goblin Lackey                            {R}              Creature — Goblin
 [x]  4853  Open the Gates                           {G}              Sorcery
-[ ]  4854  Reflector Mage                           {1}{W}{U}        Creature — Human Wizard
+[x]  4854  Reflector Mage                           {1}{W}{U}        Creature — Human Wizard
 [x]  4855  Astor, Bearer of Blades                  {2}{R}{W}        Legendary Creature — Human Warrior
 [x]  4856  Nelly Borca, Impulsive Accuser           {2}{R}{W}        Legendary Creature — Human Detective
 [ ]  4857  Aang, Airbending Master                  {4}{W}           Legendary Creature — Human Avatar Ally
