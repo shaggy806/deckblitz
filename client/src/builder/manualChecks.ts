@@ -9235,6 +9235,18 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       you: { hand: ['Providence', 'Forest*6'] },
     }),
   ),
+  // --- A search of the hand and graveyard too (2026-11-02, need-keys Phase 2) ---
+  preset(
+    'Boonweaver Giant: choose which of your graveyard, hand and library to search',
+    board({
+      you: {
+        bf: ['Plains*7'],
+        hand: ['Boonweaver Giant', 'Pacifism'],
+        gy: ['Rancor'],
+        lib: ['Holy Strength', 'Forest', 'Forest'],
+      },
+    }),
+  ),
   preset(
     'Leyline of Sanctity: the starting player acts first, at four players',
     board({

@@ -6143,3 +6143,7 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Leyline of Sanctity: the starting player acts first, at four players
 - **Do:** Bob starts the game. Click Keep and wait for the bots. When the popup comes, look at the log, then click Leyline Axe and Confirm.
 - **Expect:** The log has Bob's Leyline of Sanctity first, before you're asked; your Axe follows it, then "Round 1, turn 1 — Bob".
+
+### Boonweaver Giant: choose which of your graveyard, hand and library to search
+- **Do:** Cast Boonweaver Giant. As its ability resolves, say yes to the search, then click "Search your graveyard and hand".
+- **Expect:** Seven choices are offered, from "Search your graveyard, hand, and library" down to "Search your library". This one offers Rancor and Pacifism, not Holy Strength. The Aura you pick enters attached to the Giant, and your library isn't shuffled.

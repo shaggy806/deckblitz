@@ -37,8 +37,10 @@ interface Snapshot {
 /** Text as a case-blind pattern, a hyphen matching a minus sign too (the
  * loyalty costs are written −6). */
 function pattern(text: string): RegExp {
-  const escaped = text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/[-−]/g, '[-−]')
-  return new RegExp(escaped, 'i')
+  // "=Search your hand": the whole text, where another button's holds it too.
+  const whole = text.startsWith('=')
+  const escaped = (whole ? text.slice(1) : text).replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/[-−]/g, '[-−]')
+  return new RegExp(whole ? `^\\s*${escaped}\\s*$` : escaped, 'i')
 }
 
 /** Everything the run prints, read in the page from the DOM and the dev

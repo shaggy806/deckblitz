@@ -43107,7 +43107,7 @@ export class Game {
       return true;
     }
     if (object.isCopy) {
-      // It ceases to exist (rule 707.10c), but the rest of the counterspell may
+      // It ceases to exist (rules 707.10a, 704.5e), but the rest of the counterspell may
       // read it as it last existed (608.2h) — Quash's ruling: "its controller's
       // graveyard, hand, and library" for "the same name as that spell".
       (this.state.ceasedTokens ??= {})[id] = this.takeLastKnown(id);

@@ -13,7 +13,8 @@
 // has emptied). After every step the run passes priority while your own
 // spell or ability is on top of the stack, so the decision a check is about
 // comes up as it resolves. A steps file is a JSON array of the same strings.
-// Names and texts match in part, case aside; a hyphen matches a minus sign.
+// Names and texts match in part, case aside; a hyphen matches a minus sign; a
+// leading = matches the whole text (click:=Search your hand).
 //
 // It runs e2e/run-check.spec.ts through the Playwright config, on ports of its
 // own (E2E_WEB_PORT etc., or 5183/4020/4119), starting dev-rooms (which has
