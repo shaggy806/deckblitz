@@ -794,6 +794,7 @@ import _poolWingedPortent from "../pool/winged-portent.js";
 import _poolWirewoodPride from "../pool/wirewood-pride.js";
 import _poolWistfulThinking from "../pool/wistful-thinking.js";
 import _poolWitchsMist from "../pool/witchs-mist.js";
+import _poolWorstFears from "../pool/worst-fears.js";
 import _poolWorthyKnight from "../pool/worthy-knight.js";
 import _poolWurmcoilEngine from "../pool/wurmcoil-engine.js";
 import _poolWurmwallSweeper from "../pool/wurmwall-sweeper.js";
@@ -1628,6 +1629,7 @@ const shard: CardShard = {
     _poolWirewoodPride,
     _poolWistfulThinking,
     _poolWitchsMist,
+    _poolWorstFears,
     _poolWorthyKnight,
     _poolWurmcoilEngine,
     _poolWurmwallSweeper,

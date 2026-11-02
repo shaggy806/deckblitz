@@ -457,6 +457,7 @@ import _poolMightyEmergence from "../pool/mighty-emergence.js";
 import _poolMightyMutanimals from "../pool/mighty-mutanimals.js";
 import _poolMindSpring from "../pool/mind-spring.js";
 import _poolMindTwist from "../pool/mind-twist.js";
+import _poolMindslaver from "../pool/mindslaver.js";
 import _poolMinisterOfInquiries from "../pool/minister-of-inquiries.js";
 import _poolMinwuWhiteMage from "../pool/minwu-white-mage.js";
 import _poolMiraculousRecovery from "../pool/miraculous-recovery.js";
@@ -1304,6 +1305,7 @@ const shard: CardShard = {
     _poolMightyMutanimals,
     _poolMindSpring,
     _poolMindTwist,
+    _poolMindslaver,
     _poolMinisterOfInquiries,
     _poolMinwuWhiteMage,
     _poolMiraculousRecovery,

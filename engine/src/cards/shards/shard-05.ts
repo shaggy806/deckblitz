@@ -256,6 +256,7 @@ import _poolEmptiness from "../pool/emptiness.js";
 import _poolEmptyShrineKannushi from "../pool/empty-shrine-kannushi.js";
 import _poolEmpyrealVoyager from "../pool/empyreal-voyager.js";
 import _poolEmpyrialStorm from "../pool/empyrial-storm.js";
+import _poolEmrakulThePromisedEnd from "../pool/emrakul-the-promised-end.js";
 import _poolEndbringer from "../pool/endbringer.js";
 import _poolEnormousBaloth from "../pool/enormous-baloth.js";
 import _poolEpicDownfall from "../pool/epic-downfall.js";
@@ -1121,6 +1122,7 @@ const shard: CardShard = {
     _poolEmptyShrineKannushi,
     _poolEmpyrealVoyager,
     _poolEmpyrialStorm,
+    _poolEmrakulThePromisedEnd,
     _poolEndbringer,
     _poolEnormousBaloth,
     _poolEpicDownfall,

@@ -424,6 +424,7 @@ import _poolManholeMissile from "../pool/manhole-missile.js";
 import _poolManorGate from "../pool/manor-gate.js";
 import _poolMantisEngine from "../pool/mantis-engine.js";
 import _poolMartyrsBond from "../pool/martyrs-bond.js";
+import _poolMasterWarcraft from "../pool/master-warcraft.js";
 import _poolMatsuTribeBirdstalker from "../pool/matsu-tribe-birdstalker.js";
 import _poolMechanAssembler from "../pool/mechan-assembler.js";
 import _poolMedicineRunner from "../pool/medicine-runner.js";
@@ -1296,6 +1297,7 @@ const shard: CardShard = {
     _poolManorGate,
     _poolMantisEngine,
     _poolMartyrsBond,
+    _poolMasterWarcraft,
     _poolMatsuTribeBirdstalker,
     _poolMechanAssembler,
     _poolMedicineRunner,

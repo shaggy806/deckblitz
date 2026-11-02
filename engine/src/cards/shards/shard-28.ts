@@ -106,6 +106,7 @@ import _poolBroadsideBarrage from "../pool/broadside-barrage.js";
 import _poolBronzeHorse from "../pool/bronze-horse.js";
 import _poolBrotherhoodOutcast from "../pool/brotherhood-outcast.js";
 import _poolBrushstrider from "../pool/brushstrider.js";
+import _poolBrutalHordechief from "../pool/brutal-hordechief.js";
 import _poolBullCerodon from "../pool/bull-cerodon.js";
 import _poolBurningSunsFury from "../pool/burning-suns-fury.js";
 import _poolBurnout from "../pool/burnout.js";
@@ -999,6 +1000,7 @@ const shard: CardShard = {
     _poolBronzeHorse,
     _poolBrotherhoodOutcast,
     _poolBrushstrider,
+    _poolBrutalHordechief,
     _poolBullCerodon,
     _poolBurningSunsFury,
     _poolBurnout,

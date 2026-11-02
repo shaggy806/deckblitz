@@ -555,6 +555,7 @@ import _poolSearchForGlory from "../pool/search-for-glory.js";
 import _poolSeasideCitadel from "../pool/seaside-citadel.js";
 import _poolSeatOfTheSynod from "../pool/seat-of-the-synod.js";
 import _poolSecretDoor from "../pool/secret-door.js";
+import _poolSecretOfBloodbending from "../pool/secret-of-bloodbending.js";
 import _poolSeekThrills from "../pool/seek-thrills.js";
 import _poolSeekerOfInsight from "../pool/seeker-of-insight.js";
 import _poolSejiriMerfolk from "../pool/sejiri-merfolk.js";
@@ -1351,6 +1352,7 @@ const shard: CardShard = {
     _poolSeasideCitadel,
     _poolSeatOfTheSynod,
     _poolSecretDoor,
+    _poolSecretOfBloodbending,
     _poolSeekThrills,
     _poolSeekerOfInsight,
     _poolSejiriMerfolk,

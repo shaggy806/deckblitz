@@ -3045,6 +3045,7 @@ import _poolBrushstrider from "./pool/brushstrider.js";
 import _poolBrushwagg from "./pool/brushwagg.js";
 import _poolBrutalCathar from "./pool/brutal-cathar.js";
 import _poolBrutalDeceiver from "./pool/brutal-deceiver.js";
+import _poolBrutalHordechief from "./pool/brutal-hordechief.js";
 import _poolBrutalNightstalker from "./pool/brutal-nightstalker.js";
 import _poolBrutalizerExarch from "./pool/brutalizer-exarch.js";
 import _poolBruteForce from "./pool/brute-force.js";
@@ -4849,6 +4850,7 @@ import _poolCruelCalculations from "./pool/cruel-calculations.js";
 import _poolCruelCelebrant from "./pool/cruel-celebrant.js";
 import _poolCruelDeceiver from "./pool/cruel-deceiver.js";
 import _poolCruelEdict from "./pool/cruel-edict.js";
+import _poolCruelEntertainment from "./pool/cruel-entertainment.js";
 import _poolCruelFate from "./pool/cruel-fate.js";
 import _poolCruelFeeding from "./pool/cruel-feeding.js";
 import _poolCruelFinality from "./pool/cruel-finality.js";
@@ -7056,6 +7058,7 @@ import _poolEmpyreanEagle from "./pool/empyrean-eagle.js";
 import _poolEmpyrialArchangel from "./pool/empyrial-archangel.js";
 import _poolEmpyrialStorm from "./pool/empyrial-storm.js";
 import _poolEmrakulTheAeonsTorn from "./pool/emrakul-the-aeons-torn.js";
+import _poolEmrakulThePromisedEnd from "./pool/emrakul-the-promised-end.js";
 import _poolEmrakulTheWorldAnew from "./pool/emrakul-the-world-anew.js";
 import _poolEmrakulsEvangel from "./pool/emrakuls-evangel.js";
 import _poolEmrakulsHatcher from "./pool/emrakuls-hatcher.js";
@@ -14295,6 +14298,7 @@ import _poolMasterTheWay from "./pool/master-the-way.js";
 import _poolMasterThief from "./pool/master-thief.js";
 import _poolMasterTransmuter from "./pool/master-transmuter.js";
 import _poolMasterTrinketeer from "./pool/master-trinketeer.js";
+import _poolMasterWarcraft from "./pool/master-warcraft.js";
 import _poolMasterfulFlourish from "./pool/masterful-flourish.js";
 import _poolMasterfulReplication from "./pool/masterful-replication.js";
 import _poolMastermindPlum from "./pool/mastermind-plum.js";
@@ -14692,6 +14696,7 @@ import _poolMindsEye from "./pool/minds-eye.js";
 import _poolMindscourDragon from "./pool/mindscour-dragon.js";
 import _poolMindseekerOculus from "./pool/mindseeker-oculus.js";
 import _poolMindshrieker from "./pool/mindshrieker.js";
+import _poolMindslaver from "./pool/mindslaver.js";
 import _poolMindslicer from "./pool/mindslicer.js";
 import _poolMindsparker from "./pool/mindsparker.js";
 import _poolMindspliceApparatus from "./pool/mindsplice-apparatus.js";
@@ -20127,6 +20132,7 @@ import _poolSecondThoughts from "./pool/second-thoughts.js";
 import _poolSecondWind from "./pool/second-wind.js";
 import _poolSecretDoor from "./pool/secret-door.js";
 import _poolSecretIdentity from "./pool/secret-identity.js";
+import _poolSecretOfBloodbending from "./pool/secret-of-bloodbending.js";
 import _poolSecretPassage from "./pool/secret-passage.js";
 import _poolSecretPlans from "./pool/secret-plans.js";
 import _poolSecretRendezvous from "./pool/secret-rendezvous.js";
@@ -26958,6 +26964,7 @@ import _poolWormwoodDryad from "./pool/wormwood-dryad.js";
 import _poolWormwoodTreefolk from "./pool/wormwood-treefolk.js";
 import _poolWornPowerstone from "./pool/worn-powerstone.js";
 import _poolWorryBeads from "./pool/worry-beads.js";
+import _poolWorstFears from "./pool/worst-fears.js";
 import _poolWortBoggartAuntie from "./pool/wort-boggart-auntie.js";
 import _poolWortTheRaidmother from "./pool/wort-the-raidmother.js";
 import _poolWorthyCause from "./pool/worthy-cause.js";
@@ -31022,6 +31029,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBrushwagg,
   _poolBrutalCathar,
   _poolBrutalDeceiver,
+  _poolBrutalHordechief,
   _poolBrutalNightstalker,
   _poolBrutalizerExarch,
   _poolBruteForce,
@@ -32826,6 +32834,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCruelCelebrant,
   _poolCruelDeceiver,
   _poolCruelEdict,
+  _poolCruelEntertainment,
   _poolCruelFate,
   _poolCruelFeeding,
   _poolCruelFinality,
@@ -35033,6 +35042,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolEmpyrialArchangel,
   _poolEmpyrialStorm,
   _poolEmrakulTheAeonsTorn,
+  _poolEmrakulThePromisedEnd,
   _poolEmrakulTheWorldAnew,
   _poolEmrakulsEvangel,
   _poolEmrakulsHatcher,
@@ -42272,6 +42282,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMasterThief,
   _poolMasterTransmuter,
   _poolMasterTrinketeer,
+  _poolMasterWarcraft,
   _poolMasterfulFlourish,
   _poolMasterfulReplication,
   _poolMastermindPlum,
@@ -42669,6 +42680,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMindscourDragon,
   _poolMindseekerOculus,
   _poolMindshrieker,
+  _poolMindslaver,
   _poolMindslicer,
   _poolMindsparker,
   _poolMindspliceApparatus,
@@ -48104,6 +48116,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSecondWind,
   _poolSecretDoor,
   _poolSecretIdentity,
+  _poolSecretOfBloodbending,
   _poolSecretPassage,
   _poolSecretPlans,
   _poolSecretRendezvous,
@@ -54935,6 +54948,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolWormwoodTreefolk,
   _poolWornPowerstone,
   _poolWorryBeads,
+  _poolWorstFears,
   _poolWortBoggartAuntie,
   _poolWortTheRaidmother,
   _poolWorthyCause,
@@ -59012,6 +59026,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/brushwagg": _poolBrushwagg,
   "pool/brutal-cathar": _poolBrutalCathar,
   "pool/brutal-deceiver": _poolBrutalDeceiver,
+  "pool/brutal-hordechief": _poolBrutalHordechief,
   "pool/brutal-nightstalker": _poolBrutalNightstalker,
   "pool/brutalizer-exarch": _poolBrutalizerExarch,
   "pool/brute-force": _poolBruteForce,
@@ -60816,6 +60831,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/cruel-celebrant": _poolCruelCelebrant,
   "pool/cruel-deceiver": _poolCruelDeceiver,
   "pool/cruel-edict": _poolCruelEdict,
+  "pool/cruel-entertainment": _poolCruelEntertainment,
   "pool/cruel-fate": _poolCruelFate,
   "pool/cruel-feeding": _poolCruelFeeding,
   "pool/cruel-finality": _poolCruelFinality,
@@ -63023,6 +63039,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/empyrial-archangel": _poolEmpyrialArchangel,
   "pool/empyrial-storm": _poolEmpyrialStorm,
   "pool/emrakul-the-aeons-torn": _poolEmrakulTheAeonsTorn,
+  "pool/emrakul-the-promised-end": _poolEmrakulThePromisedEnd,
   "pool/emrakul-the-world-anew": _poolEmrakulTheWorldAnew,
   "pool/emrakuls-evangel": _poolEmrakulsEvangel,
   "pool/emrakuls-hatcher": _poolEmrakulsHatcher,
@@ -70262,6 +70279,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/master-thief": _poolMasterThief,
   "pool/master-transmuter": _poolMasterTransmuter,
   "pool/master-trinketeer": _poolMasterTrinketeer,
+  "pool/master-warcraft": _poolMasterWarcraft,
   "pool/masterful-flourish": _poolMasterfulFlourish,
   "pool/masterful-replication": _poolMasterfulReplication,
   "pool/mastermind-plum": _poolMastermindPlum,
@@ -70659,6 +70677,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/mindscour-dragon": _poolMindscourDragon,
   "pool/mindseeker-oculus": _poolMindseekerOculus,
   "pool/mindshrieker": _poolMindshrieker,
+  "pool/mindslaver": _poolMindslaver,
   "pool/mindslicer": _poolMindslicer,
   "pool/mindsparker": _poolMindsparker,
   "pool/mindsplice-apparatus": _poolMindspliceApparatus,
@@ -76094,6 +76113,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/second-wind": _poolSecondWind,
   "pool/secret-door": _poolSecretDoor,
   "pool/secret-identity": _poolSecretIdentity,
+  "pool/secret-of-bloodbending": _poolSecretOfBloodbending,
   "pool/secret-passage": _poolSecretPassage,
   "pool/secret-plans": _poolSecretPlans,
   "pool/secret-rendezvous": _poolSecretRendezvous,
@@ -82925,6 +82945,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/wormwood-treefolk": _poolWormwoodTreefolk,
   "pool/worn-powerstone": _poolWornPowerstone,
   "pool/worry-beads": _poolWorryBeads,
+  "pool/worst-fears": _poolWorstFears,
   "pool/wort-boggart-auntie": _poolWortBoggartAuntie,
   "pool/wort-the-raidmother": _poolWortTheRaidmother,
   "pool/worthy-cause": _poolWorthyCause,
