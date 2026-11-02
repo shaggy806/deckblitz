@@ -391,6 +391,13 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   slots are alike, as here), and a skipped optional first slot still needs the cast refused or the
   random controller kept from skipping it. Found 2026-10-23, batch 151's checks.
 
+**A copy of a spell loses its sacrificed, discarded and revealed cost references.** Rule 707.10: a
+copy of a spell copies the choices made for it, and an effect reading "the sacrificed creature" on
+the copy reads the original's. `exiled-as-cost` now carries over to a copy
+(`lastKnownRefs.exiledCost`, `cost:choose-cards-as-cost`, 2026-11-02); the `sacrificed`, `discarded`
+and `revealed` refs of `AmountRef` don't, so a copy of such a spell reads nothing. Found building that
+family; not reported from play.
+
 ## Latent
 
 The engine departs from the rules here, but no pool card reaches it yet: fix each when a card

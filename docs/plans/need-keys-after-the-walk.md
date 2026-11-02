@@ -808,6 +808,9 @@ missing. Re-run `--greedy` for Phase 2's order.
 - **2026-11-01 (late): two engine-only families, one session** — a reflexive ability naming what its
   parent made or targeted (3 keys, 4 freed, 5 proving cards); attack triggers narrowed by attackers and
   the player attacked (2 keys, 5 freed, 3 proving cards). Built keys 1157, freed 1381.
+- **2026-11-02: third overnight round** — lose-control triggers, attachment references, multi-zone
+  search, off-battlefield namesakes, exile-count costs, morph cost kinds (54 proving cards in all,
+  freed 1399).
 
 ## Rough size
 

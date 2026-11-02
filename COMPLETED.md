@@ -12,6 +12,14 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **Six families, third overnight round** (2026-11-02): changes of control as trigger events, on a
+  permanent and delayed (`trigger:lose-control-trigger`); references to attachments and the source's
+  host (`condition:filter-attachments`); searches of hand and graveyard with and/or zones, Doomsday's
+  exile-the-rest (`effect:search-hand-graveyard-library`); target namesakes off the battlefield,
+  tokens-only namesakes, exile from a revealed hand (`condition:filter-card-property-clauses`); a cost
+  exiling a count of graveyard cards, X, optional or per opponent (`cost:choose-cards-as-cost`); morph
+  and disguise costs that reveal, take X or change with a count (`mechanic:face-down`).
+  `git log --grep "Engine.*Cards" --since 2026-11-02`.
 - **"Those tokens plus that many" and the missing tokens' commanders**
   (`replacement:token-creation-additive`, `effect:missing-tokens`): `would-create-token`'s
   `plusTokens` — Chatterfang, Squirrel General (#32) — and Shilgengar, Sire of Famine (#273), whose

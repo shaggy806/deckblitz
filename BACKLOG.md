@@ -419,8 +419,11 @@ section keeps only what to do next.
   (`cards:needs -- --stale`); the user authors them in one sweep once the reasonable keys are built.
   Cloud sessions are building `keyword:hexproof-from-colors`, the combat-restriction second group,
   `effect:prevent-next-n-damage-to-you`, the cascade/sunburst grants to spells,
-  `cost:kicker-nonmana-cost` and `cost:alt-cost-discard-cards`. Next unclaimed:
-  `trigger:lose-control-trigger` (8), then `condition:filter-attachments` (8) and `--greedy --groups` (control of a player, rule 723, landed 2026-11-01).
+  `cost:kicker-nonmana-cost` and `cost:alt-cost-discard-cards`. Built 2026-11-02 (third overnight
+  round, 1399 freed): `trigger:lose-control-trigger`, `condition:filter-attachments`,
+  `effect:search-hand-graveyard-library`, `condition:filter-card-property-clauses`,
+  `cost:choose-cards-as-cost`, `mechanic:face-down`. Next unclaimed: `--greedy --groups` (control of a
+  player, rule 723, landed 2026-11-01).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next
@@ -489,6 +492,7 @@ One line each; the detail (rule numbers, code sites, the cards each blocks) is i
 **`docs/engine-gaps.md`**, under the same bold title. When a gap closes, delete its detail
 there and move this line to `COMPLETED.md`.
 
+- **A copy of a spell loses its sacrificed, discarded and revealed cost references** — rule 707.10; exiled-as-cost now carries over, the others read nothing on a copy.
 - **Mulligans are declared at once, and two opening-hand rules are loose** — rule 103.5 has turn-order declarations but `beginMulligans` asks in parallel (a design call); `COMMANDER_RULES` gives the free mulligan at two players, while 103.5c names multiplayer and Brawl; a revealed opening-hand card isn't kept revealed until the first turn (103.6b).
 - **An opponent-caused discard's replacement beats the graveyard ones without asking** — `Game` puts Obstinate Baloth onto the battlefield rather than asking its controller (616.1) when Leyline of the Void also applies.
 - **Goad's defender narrowing ignores attack caps** — a second goaded creature facing a full Crawlspace isn't sent at its goader (508.1d); two Lured menace attackers under Caverns of Despair can also leave no legal block set (`combat/blocking.ts`).

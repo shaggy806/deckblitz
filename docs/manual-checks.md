@@ -6152,7 +6152,7 @@ These boards start before the first turn (the builder's `openingHands`), with th
 - **Expect:** Two Islands go to exile, one stays in your graveyard, and the Craw Wurm has taken 2 damage.
 
 ### Redemptor Dreadnought: you may exile a creature card as you cast it
-- **Do:** Cast Redemptor Dreadnought. In the "You may choose a card to exile" popup, click Put none (a second try: click Hill Giant, then Confirm).
+- **Do:** Cast Redemptor Dreadnought. In the "You may choose a card to exile" popup, click Exile none (a second try: click Hill Giant, then Confirm).
 - **Expect:** The popup lets you exile Hill Giant or nothing, and the Island can't be chosen. Either way the Dreadnought enters; Hill Giant stays in your graveyard unless you chose it.
 
 ### Bane of the Living: choose X as you turn it face up
