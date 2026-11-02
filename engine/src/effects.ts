@@ -2267,8 +2267,13 @@ export type EffectSpec =
        * creature**" (Ornery Goblin — `blocks` with `object: "blocked"`, and
        * `blocked-by`, whose trigger object is the blocker). One that has left
        * the battlefield since is dealt nothing. Or `"attached"`: an Aura's
-       * "deals 2 damage to that creature" (Earthbind) — what it enchants. */
-      readonly target?: number | "trigger-object" | "attached";
+       * "deals 2 damage to that creature" (Earthbind) — what it enchants. Or
+       * `"source"`, untargeted: "this creature deals 3 damage to **itself**"
+       * (Psionic Entity), "that artifact deals damage … to **this creature**"
+       * (Goblin Tinkerer, with `from: { target: 0 }`). A source that has left
+       * since, even if it's back, is a new object and is dealt nothing (rule
+       * 400.7). */
+      readonly target?: number | "trigger-object" | "attached" | "source";
       /** Untargeted damage to a whole scope of players (Sabotender / Tannuk:
        * "deals 1 damage to each opponent" — needed-cards P16), instead of a
        * chosen target. A per-player `amount` (`lifeTotal: "each"`) is read

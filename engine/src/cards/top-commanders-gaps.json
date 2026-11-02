@@ -648,6 +648,7 @@
   "filter:same-name-as-trigger-object",
   "filter:same-name-as-card-in-casters-graveyard",
   "keyword:imprint-same-name",
+  "effect:damage-to-source",
   "effect:search-opponent-library",
   "effect:extract-same-name",
   "replacement:damage-redirection",

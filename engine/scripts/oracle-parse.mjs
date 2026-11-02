@@ -4451,6 +4451,24 @@ export function parseSentence(sentence, ctx) {
       ],
     };
   }
+  // "This creature deals 2 damage to any target and 3 damage to itself" (Psionic
+  // Entity), both at once; "… 2 damage to itself" (Goblin Bangchuckers); "that
+  // artifact deals damage equal to its mana value to this creature" (Goblin
+  // Tinkerer): the source, untargeted.
+  if ((m = re(`~ deals ${N} damage to (${TARGET}) and ${N} damage to itself`).exec(s))) {
+    return {
+      kind: "sequence",
+      simultaneous: true,
+      effects: [
+        { kind: "damage", amount: amount(m[1]), target: slot(m[2]) },
+        { kind: "damage", amount: amount(m[3]), target: "source" },
+      ],
+    };
+  }
+  if ((m = re(`~ deals ${N} damage to itself`).exec(s))) return { kind: "damage", amount: amount(m[1]), target: "source" };
+  if (ctx.targets.length === 1 && re("that (?:artifact|creature|enchantment|permanent) deals damage equal to its mana value to ~").test(s)) {
+    return { kind: "damage", amount: { manaValueOf: 0 }, target: "source", from: { target: 0 } };
+  }
   if ((m = re(`~ deals ${N} damage to (${TARGET}) and ${N} damage to you`).exec(s))) {
     // One instruction: both are dealt at once (rule 120.3, one damage event).
     return {
@@ -4883,6 +4901,17 @@ export function parseEffect(text, outer) {
       todo: [],
       hints: [],
     };
+  }
+  // "Flip a coin. If you win the flip, … If you lose the flip, …" (rule 705, Goblin
+  // Bangchuckers): one sentence each way. Nothing read, no target is kept.
+  const flip = /^Flip a coin\. If you win the flip, (.+?\.) If you lose the flip, (.+?\.)$/.exec(text);
+  if (flip !== null) {
+    const slots = ctx.targets.length;
+    const capital = (line) => `${line[0].toUpperCase()}${line.slice(1)}`;
+    const won = parseSentence(capital(flip[1]), ctx);
+    const lost = won === null ? null : parseSentence(capital(flip[2]), ctx);
+    if (won !== null && lost !== null) return { effect: { kind: "flip-coin", won, lost }, todo: [], hints: [] };
+    ctx.targets.length = slots;
   }
   for (const [i, sentence] of sentences.entries()) {
     if (skip > 0) {

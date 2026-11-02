@@ -582,6 +582,57 @@ describe("costs and triggers", () => {
     });
   });
 
+  it("reads damage to the source: itself, beside a target, from a flip, or from the artifact it destroyed", () => {
+    const entity = parseFace({
+      name: "Psionic Entity",
+      type_line: "Creature — Illusion",
+      power: "2",
+      toughness: "2",
+      oracle_text: "{T}: This creature deals 2 damage to any target and 3 damage to itself.",
+    });
+    expect(entity.complete).toBe(true);
+    expect(entity.activated[0].effect).toEqual({
+      kind: "sequence",
+      simultaneous: true,
+      effects: [
+        { kind: "damage", amount: 2, target: 0 },
+        { kind: "damage", amount: 3, target: "source" },
+      ],
+    });
+
+    const bangchuckers = parseFace({
+      name: "Goblin Bangchuckers",
+      type_line: "Creature — Goblin Warrior",
+      power: "2",
+      toughness: "2",
+      oracle_text:
+        "{T}: Flip a coin. If you win the flip, this creature deals 2 damage to any target. If you lose the flip, this creature deals 2 damage to itself.",
+    });
+    expect(bangchuckers.complete).toBe(true);
+    expect(bangchuckers.activated[0].targets).toEqual(["any-target"]);
+    expect(bangchuckers.activated[0].effect).toEqual({
+      kind: "flip-coin",
+      won: { kind: "damage", amount: 2, target: 0 },
+      lost: { kind: "damage", amount: 2, target: "source" },
+    });
+
+    const tinkerer = parseFace({
+      name: "Goblin Tinkerer",
+      type_line: "Creature — Goblin Artificer",
+      power: "1",
+      toughness: "2",
+      oracle_text: "{R}, {T}: Destroy target artifact. That artifact deals damage equal to its mana value to this creature.",
+    });
+    expect(tinkerer.complete).toBe(true);
+    expect(tinkerer.activated[0].effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "destroy", target: 0 },
+        { kind: "damage", amount: { manaValueOf: 0 }, target: "source", from: { target: 0 } },
+      ],
+    });
+  });
+
   it("reads a spell named like a card in a graveyard, a creature that died, another permanent and an imprinted card", () => {
     const kolaghanLine = parseFace({
       name: "Test",

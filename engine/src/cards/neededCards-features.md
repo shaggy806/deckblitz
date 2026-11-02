@@ -2011,6 +2011,19 @@ suspend X), Ajani Goldmane's Avatar token (a token with the CDA, authorable).
 Proving cards: Grim Strider, Enemy of Enlightenment, Righteous Authority,
 Death's Shadow, Serra Avatar.
 
+### Damage to the source — built 2026-11-01
+
+The need-keys Phase 2 family `effect:damage-to-source`, features only: `damage`'s
+**`target: "source"`**, untargeted, nothing once the source has left (rule 400.7),
+one token of a stack hit. With `from: { target: 0 }` something else deals it
+(Goblin Tinkerer). The scaffolder reads "~ deals N damage to X and M damage to
+itself", "~ deals N damage to itself", "that artifact deals damage equal to its mana
+value to ~" and a whole "Flip a coin. If you win the flip, … If you lose the flip, …",
+which is new. Key: effect:damage-to-source. Karplusan Yeti and Tracker need none
+of it (Tahngarth's one-sided `fight`); Goblin Kaboomist still needs its Land Mine
+token. Proving cards: Psionic Entity, Psionic Sliver, Goblin Bangchuckers, Goblin
+Tinkerer.
+
 ### The same name as another named object — built 2026-11-01
 
 The need-keys Phase 2 family `filter:same-name-as-card-in-graveyard`, features
