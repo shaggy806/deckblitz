@@ -2037,6 +2037,12 @@ export function parseSentence(sentence, ctx) {
   // The one exception: "for each … counter removed this way", which is the
   // cost's X (`removeCounter.count: "x"`), read by the mana templates below.
   let m;
+  // "Investigate once for each opponent who has more cards in hand than you"
+  // (Wojek Investigator): a count of the players it holds for.
+  if ((m = /^investigate once for each opponent who has more (cards in hand|life) than you\.$/i.exec(s))) {
+    const where = { kind: "player-compare", stat: COMPARED_STATS[m[1].toLowerCase()], compare: "fewer", than: "that-player" };
+    return { kind: "create-token", token: "Clue Token", count: { countPlayers: "each-opponent", where } };
+  }
   // A cost to attack for a while (the `attackTax` player effect, rule 508.1h),
   // whose "for each" is per creature, not an amount: "Until your next turn,
   // creatures can't attack you or planeswalkers you control unless their
@@ -3355,7 +3361,11 @@ export function parseSentence(sentence, ctx) {
       ...(onStack ? { from: "stack" } : inGraveyard ? { from: "graveyard" } : {}),
     };
   }
-  if (re("return ~ to its owner's hand").test(s)) return { kind: "return-to-hand", target: "source" };
+  // A spell's own "return ~ to its owner's hand" (Pulse of the Fields, rule
+  // 608.2n) comes from the stack, not the battlefield.
+  if (re("return ~ to its owner's hand").test(s)) {
+    return { kind: "return-to-hand", target: "source", ...(ctx.spell === true ? { from: "stack" } : {}) };
+  }
   // "… doesn't untap during its controller's next two untap steps" (Telekinesis),
   // "during your next untap step" (Reveka): the N and whose step of `tap`'s hold.
   const heldThrough = (whose, n) => ({
@@ -5142,6 +5152,24 @@ export function parseEffect(text, outer) {
     // (Adventure Awaits), "If you don't put a card into your hand this way,
     // create a Food token" (Courier of Comestibles): after whatever could
     // have put one there, the `"put-into-hand"` this-way kind with none.
+    // "If an opponent has more life than you, you gain 4 life" (Sunset Revelry),
+    // "You gain 2 life. Then if you have more life than an opponent, draw a
+    // card" (Survival Cache), "Create a Treasure token if an opponent controls
+    // more lands than you" (Beza): read as the instruction comes up (rule 608.2c).
+    const comparedM =
+      /^(?:then )?if ([^,]+), (.+)$/i.exec(sentence) ?? /^(.+) if ((?:an opponent|you) [^,]+ than (?:you|an opponent))\.$/i.exec(sentence);
+    if (comparedM !== null) {
+      const leading = /^(?:then )?if /i.test(sentence);
+      const compared = playerComparisonOf(leading ? comparedM[1] : comparedM[2], ctx);
+      const said = leading ? comparedM[2] : `${comparedM[1]}.`;
+      const then = compared === undefined ? null : parseSentence(`${said[0].toUpperCase()}${said.slice(1)}`, ctx);
+      if (then !== null && !containsUndefined(then)) {
+        const effect = { kind: "conditional", condition: compared, then };
+        parsed.push(effect);
+        hints.push({ sentence, effect });
+        continue;
+      }
+    }
     const noneToHandM = /^if you (?:didn't|don't) put a card into your hand this way, (.+)$/i.exec(sentence);
     if (noneToHandM !== null && parsed.length > 0) {
       const then = parseSentence(`${noneToHandM[1][0].toUpperCase()}${noneToHandM[1].slice(1)}`, ctx);
@@ -8726,6 +8754,37 @@ function devotionIf(clause) {
   return { kind: "devotion", colors: devotionColors(m[1], m[2]), ...(m[4] === "greater" ? { atLeast: n } : { atMost: n }) };
 }
 
+const COMPARED_STATS = { "cards in hand": "hand", life: "life" };
+
+/**
+ * A number of yours against another player's, the clause alone (no "if", no
+ * comma): "an opponent has more life than you", "you have less life than an
+ * opponent", "you control fewer creatures than an opponent". With a lone player
+ * target, "that player has more cards in hand than you" (Pulse of the Dross)
+ * and "that player or that planeswalker's controller has more life than you"
+ * (Pulse of the Forge). `undefined` for any other clause.
+ */
+function playerComparisonOf(clause, ctx) {
+  const c = clause.toLowerCase();
+  let m = /^an opponent has more (cards in hand|life) than you$/.exec(c);
+  if (m !== null) return { kind: "player-compare", stat: COMPARED_STATS[m[1]], compare: "fewer", than: "an-opponent" };
+  m = /^you have (more|less|fewer) (cards in hand|life) than an opponent$/.exec(c);
+  if (m !== null) {
+    return { kind: "player-compare", stat: COMPARED_STATS[m[2]], compare: m[1] === "more" ? "more" : "fewer", than: "an-opponent" };
+  }
+  m = /^(?:an opponent controls more (lands|creatures|artifacts|enchantments) than you|you control fewer (lands|creatures|artifacts|enchantments) than an opponent)$/.exec(c);
+  if (m !== null) return { kind: "opponent-controls-more", filter: { type: singular(m[1] ?? m[2]) } };
+  const slot = ctx?.targets?.length === 1 ? ctx.targets[0] : undefined;
+  m = /^that player has more (cards in hand|life) than you$/.exec(c);
+  if (m !== null && (slot === "player" || slot === "opponent")) {
+    return { kind: "player-compare", stat: COMPARED_STATS[m[1]], compare: "fewer", than: { target: 0 } };
+  }
+  if (c === "that player or that planeswalker's controller has more life than you" && slot === "player-or-planeswalker") {
+    return { kind: "player-compare", stat: "life", compare: "fewer", than: { controllerOfTarget: 0 } };
+  }
+  return undefined;
+}
+
 /**
  * An intervening-if on a player's state (`of-player`, `player-compare`, a
  * starting-life bound, a count of everyone's permanents) — Lavaborn Muse's
@@ -8773,6 +8832,9 @@ function playerStateIf(clause, triggers) {
     const than = m[1] === "an opponent" ? "an-opponent" : that === "that-player" ? "that-player" : undefined;
     return than === undefined ? undefined : { kind: "player-compare", stat: STATS[m[2]], compare: "fewer", than };
   }
+  // "If you have more life than an opponent," (Glorious Enforcer) and the rest.
+  const compared = playerComparisonOf(c.replace(/^if /, "").replace(/,$/, ""));
+  if (compared !== undefined) return compared;
   m = /^if you have at least (\d+|a|an|one|two|three|four|five|six|seven|eight|nine|ten|fifteen) life more than your starting life total,$/.exec(c);
   if (m !== null) {
     const n = m[1] === "fifteen" ? 15 : numberOf(m[1]);

@@ -8130,3 +8130,61 @@ describe("exile until a named event (rule 610.3)", () => {
     expect(other.complete).toBe(false);
   });
 });
+
+describe("a number of yours against another player's (player-compare)", () => {
+  const face = (type_line: string, oracle_text: string, name = "Thing") =>
+    parseFace({ name, type_line, mana_cost: "{1}", oracle_text }, { tokenFor: () => "A Token" });
+  const SPELL = "Sorcery";
+
+  it("a spell's own conditional sentence, read as it comes up", () => {
+    const fields = face(SPELL, "You gain 4 life. Then if an opponent has more life than you, return Thing to its owner's hand.");
+    expect(fields.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "gain-life", amount: 4 },
+        {
+          kind: "conditional",
+          condition: { kind: "player-compare", stat: "life", compare: "fewer", than: "an-opponent" },
+          then: { kind: "return-to-hand", target: "source", from: "stack" },
+        },
+      ],
+    });
+    expect(fields.complete).toBe(true);
+    const timely = face(SPELL, "If you have less life than an opponent, you gain 6 life. If you control fewer creatures than an opponent, create three 1/1 white Soldier creature tokens.");
+    expect(timely.effect.effects[0].condition).toEqual({ kind: "player-compare", stat: "life", compare: "fewer", than: "an-opponent" });
+    expect(timely.effect.effects[1].condition).toEqual({ kind: "opponent-controls-more", filter: { type: "creature" } });
+    const cache = face(SPELL, "You gain 2 life. Then if you have more life than an opponent, draw a card.");
+    expect(cache.effect.effects[1].condition).toEqual({ kind: "player-compare", stat: "life", compare: "more", than: "an-opponent" });
+  });
+
+  it("a target slot's player, or a planeswalker's controller", () => {
+    const dross = face(SPELL, "Target player discards a card. Then if that player has more cards in hand than you, return Thing to its owner's hand.");
+    expect(dross.effect.effects[1].condition).toEqual({ kind: "player-compare", stat: "hand", compare: "fewer", than: { target: 0 } });
+    expect(dross.complete).toBe(true);
+    const forge = face("Instant", "Thing deals 4 damage to target player or planeswalker. Then if that player or that planeswalker's controller has more life than you, return Thing to its owner's hand.");
+    expect(forge.effect.effects[1].condition).toEqual({ kind: "player-compare", stat: "life", compare: "fewer", than: { controllerOfTarget: 0 } });
+    expect(forge.complete).toBe(true);
+  });
+
+  it("the clause after the instruction, and as an intervening-if", () => {
+    const beza = face("Creature — Elk", "When Thing enters, create a Treasure token if an opponent controls more lands than you. You gain 4 life if an opponent has more life than you. Draw a card if an opponent has more cards in hand than you.");
+    expect(beza.triggered[0].effect.effects.map((e: { condition: unknown }) => e.condition)).toEqual([
+      { kind: "opponent-controls-more", filter: { type: "land" } },
+      { kind: "player-compare", stat: "life", compare: "fewer", than: "an-opponent" },
+      { kind: "player-compare", stat: "hand", compare: "fewer", than: "an-opponent" },
+    ]);
+    const enforcer = face("Creature — Angel", "At the beginning of each combat, if you have more life than an opponent, this creature gains double strike until end of turn.");
+    expect(enforcer.triggered[0].condition).toEqual({ kind: "player-compare", stat: "life", compare: "more", than: "an-opponent" });
+  });
+
+  it("a count of the opponents it holds for; no other player's clause is read as one", () => {
+    const wojek = face("Creature — Angel", "At the beginning of your upkeep, investigate once for each opponent who has more cards in hand than you.");
+    expect(wojek.triggered[0].effect).toEqual({
+      kind: "create-token",
+      token: "Clue Token",
+      count: { countPlayers: "each-opponent", where: { kind: "player-compare", stat: "hand", compare: "fewer", than: "that-player" } },
+    });
+    expect(face(SPELL, "If a player has more life than you, draw a card.").complete).toBe(false);
+    expect(face(SPELL, "If that player has more life than you, draw a card.").complete).toBe(false);
+  });
+});

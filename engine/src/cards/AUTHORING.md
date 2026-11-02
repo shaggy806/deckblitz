@@ -5256,8 +5256,12 @@ clause (section 9):
   "if an opponent has more life than you" is you having **fewer** than an
   opponent: `{ stat: "life", compare: "fewer", than: "an-opponent" }`; Robber
   of the Rich's "if defending player has more cards in hand than you" `than:
-  "that-player"`. Under `of-player` it's that player's number (Rivalry's "if
-  that player controls more lands than each other player").
+  "that-player"`. A spell's own: Pulse of the Dross's "if that player has more
+  cards in hand than you" is `than: { target: 0 }`, Pulse of the Forge's "that
+  player or that planeswalker's controller" `than: { controllerOfTarget: 0 }`.
+  Under `of-player` it's that player's number (Rivalry's "if that player controls
+  more lands than each other player"). `countPlayers`' `where` counts with it:
+  Wojek Investigator's "for each opponent who has more cards in hand than you".
 - `for-each-player`'s **`whoIf`** — "each player **who** …": only the players
   for whom the condition holds, read with each as `"that-player"` and all
   found before any acts. Depopulate's "each player who controls a

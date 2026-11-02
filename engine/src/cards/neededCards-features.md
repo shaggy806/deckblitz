@@ -2931,6 +2931,17 @@ Shapeshifter). Keys: `replacement:copy-on-enter-options`,
 `next-enter-with-counters`; Aquamorph Entity's "or is turned face up" and The
 Mimeoplasm's two exiled cards aren't covered by what's marked.
 
+### A player's number against yours — built 2026-11-01
+
+The need-keys group `condition:opponent-more-life` + `condition:you-more-life-than-an-opponent` +
+`condition:target-player-more-cards-in-hand-than-you` + `condition:target-player-more-life-than-you`,
+and `amount:opponents-with-more-cards-in-hand`: all already said by `player-compare` (since
+2026-10-30) and `countPlayers`' `where`, and triaged before them, so no engine code. "That player
+or that planeswalker's controller" is `than: { controllerOfTarget: N }`. New: the scaffolder reads
+the comparison as a spell's own sentence, after an instruction and as an intervening-if
+(`playerComparisonOf`), and a spell's "return ~ to its owner's hand" from the stack. Proving cards:
+Linvala, the Preserver; Glorious Enforcer; Pulse of the Forge; Pulse of the Dross; Wojek Investigator.
+
 ### Choosing a card name — built 2026-10-28
 
 The need-keys Phase 2 family `decision:choose-card-name` (B246): rule 201.4's
