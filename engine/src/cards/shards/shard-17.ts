@@ -51,6 +51,7 @@ import _poolAuspiciousAncestor from "../pool/auspicious-ancestor.js";
 import _poolAvenAugur from "../pool/aven-augur.js";
 import _poolAvengerOfTheFallen from "../pool/avenger-of-the-fallen.js";
 import _poolAvengersHangar from "../pool/avengers-hangar.js";
+import _poolAwesomePresence from "../pool/awesome-presence.js";
 import _poolBadlandsRevival from "../pool/badlands-revival.js";
 import _poolBalduvianDead from "../pool/balduvian-dead.js";
 import _poolBalefireLiege from "../pool/balefire-liege.js";
@@ -929,6 +930,7 @@ const shard: CardShard = {
     _poolAvenAugur,
     _poolAvengerOfTheFallen,
     _poolAvengersHangar,
+    _poolAwesomePresence,
     _poolBadlandsRevival,
     _poolBalduvianDead,
     _poolBalefireLiege,

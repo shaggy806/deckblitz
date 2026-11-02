@@ -130,6 +130,7 @@ import _poolChandraFlamesFury from "../pool/chandra-flames-fury.js";
 import _poolCheerfulOsteomancer from "../pool/cheerful-osteomancer.js";
 import _poolChoArrimLegate from "../pool/cho-arrim-legate.js";
 import _poolChromeHostSeedshark from "../pool/chrome-host-seedshark.js";
+import _poolChronomanticEscape from "../pool/chronomantic-escape.js";
 import _poolCinderGiant from "../pool/cinder-giant.js";
 import _poolClackbridgeTroll from "../pool/clackbridge-troll.js";
 import _poolClamorShaman from "../pool/clamor-shaman.js";
@@ -719,6 +720,7 @@ import _poolTarPitcher from "../pool/tar-pitcher.js";
 import _poolTeamAvatar from "../pool/team-avatar.js";
 import _poolTectonicGiant from "../pool/tectonic-giant.js";
 import _poolTeferisHonorGuard from "../pool/teferis-honor-guard.js";
+import _poolTeferisMoat from "../pool/teferis-moat.js";
 import _poolTelJiladFallen from "../pool/tel-jilad-fallen.js";
 import _poolTeleminPerformance from "../pool/telemin-performance.js";
 import _poolTempleGarden from "../pool/temple-garden.js";
@@ -982,6 +984,7 @@ const shard: CardShard = {
     _poolCheerfulOsteomancer,
     _poolChoArrimLegate,
     _poolChromeHostSeedshark,
+    _poolChronomanticEscape,
     _poolCinderGiant,
     _poolClackbridgeTroll,
     _poolClamorShaman,
@@ -1571,6 +1574,7 @@ const shard: CardShard = {
     _poolTeamAvatar,
     _poolTectonicGiant,
     _poolTeferisHonorGuard,
+    _poolTeferisMoat,
     _poolTelJiladFallen,
     _poolTeleminPerformance,
     _poolTempleGarden,

@@ -573,6 +573,7 @@ import _poolPitKeeper from "../pool/pit-keeper.js";
 import _poolPlagonLordOfTheBeach from "../pool/plagon-lord-of-the-beach.js";
 import _poolPlanarCollapse from "../pool/planar-collapse.js";
 import _poolPolukranosUnchained from "../pool/polukranos-unchained.js";
+import _poolPortRazer from "../pool/port-razer.js";
 import _poolPreemptiveStrike from "../pool/preemptive-strike.js";
 import _poolPressForAnswers from "../pool/press-for-answers.js";
 import _poolPrimalDruid from "../pool/primal-druid.js";
@@ -586,6 +587,7 @@ import _poolPsychicVortex from "../pool/psychic-vortex.js";
 import _poolPuppeteerClique from "../pool/puppeteer-clique.js";
 import _poolPuresightMerrow from "../pool/puresight-merrow.js";
 import _poolPygmyAllosaurus from "../pool/pygmy-allosaurus.js";
+import _poolQalSismaBehemoth from "../pool/qal-sisma-behemoth.js";
 import _poolQuestingBeast from "../pool/questing-beast.js";
 import _poolRageWeaver from "../pool/rage-weaver.js";
 import _poolRagemonger from "../pool/ragemonger.js";
@@ -1481,6 +1483,7 @@ const shard: CardShard = {
     _poolPlagonLordOfTheBeach,
     _poolPlanarCollapse,
     _poolPolukranosUnchained,
+    _poolPortRazer,
     _poolPreemptiveStrike,
     _poolPressForAnswers,
     _poolPrimalDruid,
@@ -1494,6 +1497,7 @@ const shard: CardShard = {
     _poolPuppeteerClique,
     _poolPuresightMerrow,
     _poolPygmyAllosaurus,
+    _poolQalSismaBehemoth,
     _poolQuestingBeast,
     _poolRageWeaver,
     _poolRagemonger,

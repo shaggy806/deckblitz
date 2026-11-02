@@ -82,6 +82,7 @@ import _poolBlackVise from "../pool/black-vise.js";
 import _poolBladedSentinel from "../pool/bladed-sentinel.js";
 import _poolBlanchwoodArmor from "../pool/blanchwood-armor.js";
 import _poolBlastedLandscape from "../pool/blasted-landscape.js";
+import _poolBlazingArchon from "../pool/blazing-archon.js";
 import _poolBleachboneVerge from "../pool/bleachbone-verge.js";
 import _poolBlessedLight from "../pool/blessed-light.js";
 import _poolBlessingsOfNature from "../pool/blessings-of-nature.js";
@@ -946,6 +947,7 @@ const shard: CardShard = {
     _poolBladedSentinel,
     _poolBlanchwoodArmor,
     _poolBlastedLandscape,
+    _poolBlazingArchon,
     _poolBleachboneVerge,
     _poolBlessedLight,
     _poolBlessingsOfNature,

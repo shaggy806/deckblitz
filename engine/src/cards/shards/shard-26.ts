@@ -562,6 +562,7 @@ import _poolPygmyKavu from "../pool/pygmy-kavu.js";
 import _poolPygmyRazorback from "../pool/pygmy-razorback.js";
 import _poolPygmyTroll from "../pool/pygmy-troll.js";
 import _poolQarsiRevenant from "../pool/qarsi-revenant.js";
+import _poolQueenMotherRamonda from "../pool/queen-mother-ramonda.js";
 import _poolQueensAgent from "../pool/queens-agent.js";
 import _poolRadiantDestiny from "../pool/radiant-destiny.js";
 import _poolRadiantSerraArchangel from "../pool/radiant-serra-archangel.js";
@@ -1442,6 +1443,7 @@ const shard: CardShard = {
     _poolPygmyRazorback,
     _poolPygmyTroll,
     _poolQarsiRevenant,
+    _poolQueenMotherRamonda,
     _poolQueensAgent,
     _poolRadiantDestiny,
     _poolRadiantSerraArchangel,

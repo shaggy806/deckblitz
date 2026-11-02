@@ -478,6 +478,7 @@ import _poolNezahalPrimalTide from "../pool/nezahal-primal-tide.js";
 import _poolNiallSilvain from "../pool/niall-silvain.js";
 import _poolNicolBolasTheDeceiver from "../pool/nicol-bolas-the-deceiver.js";
 import _poolNightmareShepherd from "../pool/nightmare-shepherd.js";
+import _poolNilsDisciplineEnforcer from "../pool/nils-discipline-enforcer.js";
 import _poolNimbleBrigand from "../pool/nimble-brigand.js";
 import _poolNobleQuarry from "../pool/noble-quarry.js";
 import _poolNovaChaser from "../pool/nova-chaser.js";
@@ -1321,6 +1322,7 @@ const shard: CardShard = {
     _poolNiallSilvain,
     _poolNicolBolasTheDeceiver,
     _poolNightmareShepherd,
+    _poolNilsDisciplineEnforcer,
     _poolNimbleBrigand,
     _poolNobleQuarry,
     _poolNovaChaser,

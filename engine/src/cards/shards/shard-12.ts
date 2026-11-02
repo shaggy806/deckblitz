@@ -97,6 +97,7 @@ import _poolBorrowedHostility from "../pool/borrowed-hostility.js";
 import _poolBoseijuReachesSkyward from "../pool/boseiju-reaches-skyward.js";
 import _poolBottomlessPoolLockerRoom from "../pool/bottomless-pool-locker-room.js";
 import _poolBraidsConjurerAdept from "../pool/braids-conjurer-adept.js";
+import _poolBrainwash from "../pool/brainwash.js";
 import _poolBravado from "../pool/bravado.js";
 import _poolBreathOfFire from "../pool/breath-of-fire.js";
 import _poolBrightglassGearhulk from "../pool/brightglass-gearhulk.js";
@@ -958,6 +959,7 @@ const shard: CardShard = {
     _poolBoseijuReachesSkyward,
     _poolBottomlessPoolLockerRoom,
     _poolBraidsConjurerAdept,
+    _poolBrainwash,
     _poolBravado,
     _poolBreathOfFire,
     _poolBrightglassGearhulk,

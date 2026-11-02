@@ -333,6 +333,7 @@ import _poolHeartfireImmolator from "../pool/heartfire-immolator.js";
 import _poolHenchfiendOfUkor from "../pool/henchfiend-of-ukor.js";
 import _poolHermitOfTheNatterknolls from "../pool/hermit-of-the-natterknolls.js";
 import _poolHexavus from "../pool/hexavus.js";
+import _poolHipparion from "../pool/hipparion.js";
 import _poolHordeOfBoggarts from "../pool/horde-of-boggarts.js";
 import _poolHourOfPromise from "../pool/hour-of-promise.js";
 import _poolHumblerOfMortals from "../pool/humbler-of-mortals.js";
@@ -1180,6 +1181,7 @@ const shard: CardShard = {
     _poolHenchfiendOfUkor,
     _poolHermitOfTheNatterknolls,
     _poolHexavus,
+    _poolHipparion,
     _poolHordeOfBoggarts,
     _poolHourOfPromise,
     _poolHumblerOfMortals,

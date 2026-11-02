@@ -829,6 +829,7 @@ import _poolWallOfNets from "../pool/wall-of-nets.js";
 import _poolWanderersIntervention from "../pool/wanderers-intervention.js";
 import _poolWanderwineDistracter from "../pool/wanderwine-distracter.js";
 import _poolWanderwineHub from "../pool/wanderwine-hub.js";
+import _poolWarCadence from "../pool/war-cadence.js";
 import _poolWarfireJavelineer from "../pool/warfire-javelineer.js";
 import _poolWarleadersCall from "../pool/warleaders-call.js";
 import _poolWarrenTorchmaster from "../pool/warren-torchmaster.js";
@@ -1707,6 +1708,7 @@ const shard: CardShard = {
     _poolWanderersIntervention,
     _poolWanderwineDistracter,
     _poolWanderwineHub,
+    _poolWarCadence,
     _poolWarfireJavelineer,
     _poolWarleadersCall,
     _poolWarrenTorchmaster,

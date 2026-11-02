@@ -207,6 +207,7 @@ import _poolEidolonOfObstruction from "../pool/eidolon-of-obstruction.js";
 import _poolEject from "../pool/eject.js";
 import _poolElectryte from "../pool/electryte.js";
 import _poolElementalMasterpiece from "../pool/elemental-masterpiece.js";
+import _poolElephantGrass from "../pool/elephant-grass.js";
 import _poolElvishFury from "../pool/elvish-fury.js";
 import _poolEmbargo from "../pool/embargo.js";
 import _poolEmeriaShatteredSkyclave from "../pool/emeria-shattered-skyclave.js";
@@ -514,6 +515,7 @@ import _poolPhantomInterference from "../pool/phantom-interference.js";
 import _poolPhoenixFleetAirship from "../pool/phoenix-fleet-airship.js";
 import _poolPhyresis from "../pool/phyresis.js";
 import _poolPhyrexianAtlas from "../pool/phyrexian-atlas.js";
+import _poolPhyrexianMarauder from "../pool/phyrexian-marauder.js";
 import _poolPhyrexianProwler from "../pool/phyrexian-prowler.js";
 import _poolPillarOfLight from "../pool/pillar-of-light.js";
 import _poolPillarfieldOx from "../pool/pillarfield-ox.js";
@@ -1093,6 +1095,7 @@ const shard: CardShard = {
     _poolEject,
     _poolElectryte,
     _poolElementalMasterpiece,
+    _poolElephantGrass,
     _poolElvishFury,
     _poolEmbargo,
     _poolEmeriaShatteredSkyclave,
@@ -1400,6 +1403,7 @@ const shard: CardShard = {
     _poolPhoenixFleetAirship,
     _poolPhyresis,
     _poolPhyrexianAtlas,
+    _poolPhyrexianMarauder,
     _poolPhyrexianProwler,
     _poolPillarOfLight,
     _poolPillarfieldOx,

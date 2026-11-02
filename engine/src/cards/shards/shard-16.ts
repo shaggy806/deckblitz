@@ -342,6 +342,7 @@ import _poolHeartflameDuelist from "../pool/heartflame-duelist.js";
 import _poolHearthElemental from "../pool/hearth-elemental.js";
 import _poolHearthcageGiant from "../pool/hearthcage-giant.js";
 import _poolHeartstone from "../pool/heartstone.js";
+import _poolHeatWave from "../pool/heat-wave.js";
 import _poolHematiteGolem from "../pool/hematite-golem.js";
 import _poolHewTheEntwood from "../pool/hew-the-entwood.js";
 import _poolHideousFleshwheeler from "../pool/hideous-fleshwheeler.js";
@@ -1287,6 +1288,7 @@ const shard: CardShard = {
     _poolHearthElemental,
     _poolHearthcageGiant,
     _poolHeartstone,
+    _poolHeatWave,
     _poolHematiteGolem,
     _poolHewTheEntwood,
     _poolHideousFleshwheeler,

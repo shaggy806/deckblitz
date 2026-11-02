@@ -84,6 +84,7 @@ import _poolBloodcurdler from "../pool/bloodcurdler.js";
 import _poolBloodfireColossus from "../pool/bloodfire-colossus.js";
 import _poolBloodscaleProwler from "../pool/bloodscale-prowler.js";
 import _poolBloodsporeThrinax from "../pool/bloodspore-thrinax.js";
+import _poolBloodthirster from "../pool/bloodthirster.js";
 import _poolBlowflyInfestation from "../pool/blowfly-infestation.js";
 import _poolBoarUmbra from "../pool/boar-umbra.js";
 import _poolBogHoodlums from "../pool/bog-hoodlums.js";
@@ -971,6 +972,7 @@ const shard: CardShard = {
     _poolBloodfireColossus,
     _poolBloodscaleProwler,
     _poolBloodsporeThrinax,
+    _poolBloodthirster,
     _poolBlowflyInfestation,
     _poolBoarUmbra,
     _poolBogHoodlums,
