@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4192 already implemented / 808 missing (marks refreshed 2026-11-02)
+4195 already implemented / 805 missing (marks refreshed 2026-11-02)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -740,7 +740,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   741  Palladium Myr                            {3}              Artifact Creature — Myr
 [x]   742  Spelunking                               {2}{G}           Enchantment
 [x]   743  Kenrith's Transformation                 {1}{G}           Enchantment — Aura
-[ ]   744  Champion's Helm                          {3}              Artifact — Equipment
+[x]   744  Champion's Helm                          {3}              Artifact — Equipment
 [x]   745  Leyline of Anticipation                  {2}{U}{U}        Enchantment
 [ ]   746  Elvish Spirit Guide                      {2}{G}           Creature — Elf Spirit
 [x]   747  Thought Monitor                          {6}{U}           Artifact Creature — Construct
@@ -3379,7 +3379,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  3386  Ghostway                                 {2}{W}           Instant
 [ ]  3387  Esior, Wardwing Familiar                 {1}{U}           Legendary Creature — Bird
 [x]  3388  The Gold Saucer                          {0}              Land — Town
-[ ]  3389  Daybreak Coronet                         {W}{W}           Enchantment — Aura
+[x]  3389  Daybreak Coronet                         {W}{W}           Enchantment — Aura
 [x]  3390  Rocky Tar Pit                            {0}              Land
 [x]  3391  Vizier of Tumbling Sands                 {2}{U}           Creature — Human Cleric
 [x]  3392  Lathiel, the Bounteous Dawn              {2}{G}{W}        Legendary Creature — Unicorn
@@ -4610,7 +4610,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4617  Viridian Longbow                         {1}              Artifact — Equipment
 [x]  4618  Vivid Creek                              {0}              Land
 [x]  4619  Calamity of the Titans                   {4}{C}{C}        Sorcery
-[ ]  4620  Khârn the Betrayer                       {3}{R}           Legendary Creature — Astartes Berserker
+[x]  4620  Khârn the Betrayer                       {3}{R}           Legendary Creature — Astartes Berserker
 [x]  4621  Stolen Strategy                          {4}{R}           Enchantment
 [x]  4622  Pyre of Heroes                           {2}              Artifact
 [x]  4623  Stormchaser's Talent                     {U}              Enchantment — Class
