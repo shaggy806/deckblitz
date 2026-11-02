@@ -737,6 +737,7 @@ import _poolStormFleetAerialist from "../pool/storm-fleet-aerialist.js";
 import _poolStormFleetPyromancer from "../pool/storm-fleet-pyromancer.js";
 import _poolStormGodsOracle from "../pool/storm-gods-oracle.js";
 import _poolStormsWrath from "../pool/storms-wrath.js";
+import _poolStrataScythe from "../pool/strata-scythe.js";
 import _poolStreetRiot from "../pool/street-riot.js";
 import _poolStrengthOfArms from "../pool/strength-of-arms.js";
 import _poolStripMine from "../pool/strip-mine.js";
@@ -1685,6 +1686,7 @@ const shard: CardShard = {
     _poolStormFleetPyromancer,
     _poolStormGodsOracle,
     _poolStormsWrath,
+    _poolStrataScythe,
     _poolStreetRiot,
     _poolStrengthOfArms,
     _poolStripMine,

@@ -573,6 +573,7 @@ import _poolProfessorOfZoomancy from "../pool/professor-of-zoomancy.js";
 import _poolProfessorZeiAnthropologist from "../pool/professor-zei-anthropologist.js";
 import _poolPromisedKannushi from "../pool/promised-kannushi.js";
 import _poolProsperousBandit from "../pool/prosperous-bandit.js";
+import _poolPsionicSliver from "../pool/psionic-sliver.js";
 import _poolPsychicSymbiont from "../pool/psychic-symbiont.js";
 import _poolPterodonKnight from "../pool/pterodon-knight.js";
 import _poolPunySnack from "../pool/puny-snack.js";
@@ -1487,6 +1488,7 @@ const shard: CardShard = {
     _poolProfessorZeiAnthropologist,
     _poolPromisedKannushi,
     _poolProsperousBandit,
+    _poolPsionicSliver,
     _poolPsychicSymbiont,
     _poolPterodonKnight,
     _poolPunySnack,

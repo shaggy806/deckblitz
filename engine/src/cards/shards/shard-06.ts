@@ -230,6 +230,7 @@ import _poolDomrisNodorog from "../pool/domris-nodorog.js";
 import _poolDoomsTimePlatform from "../pool/dooms-time-platform.js";
 import _poolDragToTheBottom from "../pool/drag-to-the-bottom.js";
 import _poolDragToTheRoots from "../pool/drag-to-the-roots.js";
+import _poolDragonlordKolaghan from "../pool/dragonlord-kolaghan.js";
 import _poolDrainTheWell from "../pool/drain-the-well.js";
 import _poolDrakusethMawOfFlames from "../pool/drakuseth-maw-of-flames.js";
 import _poolDrippingTongueZubera from "../pool/dripping-tongue-zubera.js";
@@ -1095,6 +1096,7 @@ const shard: CardShard = {
     _poolDoomsTimePlatform,
     _poolDragToTheBottom,
     _poolDragToTheRoots,
+    _poolDragonlordKolaghan,
     _poolDrainTheWell,
     _poolDrakusethMawOfFlames,
     _poolDrippingTongueZubera,

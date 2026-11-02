@@ -530,6 +530,7 @@ import _poolPrognosticSphinx from "../pool/prognostic-sphinx.js";
 import _poolPropheticRavings from "../pool/prophetic-ravings.js";
 import _poolProtectServe from "../pool/protect-serve.js";
 import _poolProtectiveResponse from "../pool/protective-response.js";
+import _poolPsionicEntity from "../pool/psionic-entity.js";
 import _poolPsychicMembrane from "../pool/psychic-membrane.js";
 import _poolPsychicTrance from "../pool/psychic-trance.js";
 import _poolPummelerForHire from "../pool/pummeler-for-hire.js";
@@ -1380,6 +1381,7 @@ const shard: CardShard = {
     _poolPropheticRavings,
     _poolProtectServe,
     _poolProtectiveResponse,
+    _poolPsionicEntity,
     _poolPsychicMembrane,
     _poolPsychicTrance,
     _poolPummelerForHire,

@@ -320,6 +320,7 @@ import _poolGnarledMass from "../pool/gnarled-mass.js";
 import _poolGnarledSage from "../pool/gnarled-sage.js";
 import _poolGoNuts from "../pool/go-nuts.js";
 import _poolGoShintaiOfSharedPurpose from "../pool/go-shintai-of-shared-purpose.js";
+import _poolGoblinBangchuckers from "../pool/goblin-bangchuckers.js";
 import _poolGoblinCaves from "../pool/goblin-caves.js";
 import _poolGoblinCommando from "../pool/goblin-commando.js";
 import _poolGodsEyeGateToTheReikai from "../pool/gods-eye-gate-to-the-reikai.js";
@@ -1185,6 +1186,7 @@ const shard: CardShard = {
     _poolGnarledSage,
     _poolGoNuts,
     _poolGoShintaiOfSharedPurpose,
+    _poolGoblinBangchuckers,
     _poolGoblinCaves,
     _poolGoblinCommando,
     _poolGodsEyeGateToTheReikai,

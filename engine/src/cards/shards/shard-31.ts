@@ -416,6 +416,7 @@ import _poolInspirit from "../pool/inspirit.js";
 import _poolInterfaceAce from "../pool/interface-ace.js";
 import _poolIntoTheMawOfHell from "../pool/into-the-maw-of-hell.js";
 import _poolIntruderAlarm from "../pool/intruder-alarm.js";
+import _poolInvaderParasite from "../pool/invader-parasite.js";
 import _poolIonasBlessing from "../pool/ionas-blessing.js";
 import _poolIronBully from "../pool/iron-bully.js";
 import _poolIronCrawCrusher from "../pool/iron-craw-crusher.js";
@@ -1349,6 +1350,7 @@ const shard: CardShard = {
     _poolInterfaceAce,
     _poolIntoTheMawOfHell,
     _poolIntruderAlarm,
+    _poolInvaderParasite,
     _poolIonasBlessing,
     _poolIronBully,
     _poolIronCrawCrusher,

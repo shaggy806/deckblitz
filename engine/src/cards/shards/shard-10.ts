@@ -579,6 +579,7 @@ import _poolReiterate from "../pool/reiterate.js";
 import _poolRekiTheHistoryOfKamigawa from "../pool/reki-the-history-of-kamigawa.js";
 import _poolRelentlessPursuit from "../pool/relentless-pursuit.js";
 import _poolRelentlessRohirrim from "../pool/relentless-rohirrim.js";
+import _poolRemembrance from "../pool/remembrance.js";
 import _poolRenegadeDoppelganger from "../pool/renegade-doppelganger.js";
 import _poolRenegadesGetaway from "../pool/renegades-getaway.js";
 import _poolRepelTheAbominable from "../pool/repel-the-abominable.js";
@@ -1467,6 +1468,7 @@ const shard: CardShard = {
     _poolRekiTheHistoryOfKamigawa,
     _poolRelentlessPursuit,
     _poolRelentlessRohirrim,
+    _poolRemembrance,
     _poolRenegadeDoppelganger,
     _poolRenegadesGetaway,
     _poolRepelTheAbominable,

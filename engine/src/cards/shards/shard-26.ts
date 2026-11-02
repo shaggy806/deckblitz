@@ -813,6 +813,7 @@ import _poolVeilOfBirds from "../pool/veil-of-birds.js";
 import _poolVengevine from "../pool/vengevine.js";
 import _poolVenomousVines from "../pool/venomous-vines.js";
 import _poolVenomousWords from "../pool/venomous-words.js";
+import _poolVerdantSuccession from "../pool/verdant-succession.js";
 import _poolViashinoSlasher from "../pool/viashino-slasher.js";
 import _poolViashinoWarrior from "../pool/viashino-warrior.js";
 import _poolVillageIronsmith from "../pool/village-ironsmith.js";
@@ -1696,6 +1697,7 @@ const shard: CardShard = {
     _poolVengevine,
     _poolVenomousVines,
     _poolVenomousWords,
+    _poolVerdantSuccession,
     _poolViashinoSlasher,
     _poolViashinoWarrior,
     _poolVillageIronsmith,

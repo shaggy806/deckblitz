@@ -66,6 +66,7 @@ import _poolBattleFrenzy from "../pool/battle-frenzy.js";
 import _poolBattlefieldRaptor from "../pool/battlefield-raptor.js";
 import _poolBaxterStockman from "../pool/baxter-stockman.js";
 import _poolBayouDragonfly from "../pool/bayou-dragonfly.js";
+import _poolBazaarOfWonders from "../pool/bazaar-of-wonders.js";
 import _poolBearsCompanion from "../pool/bears-companion.js";
 import _poolBearscape from "../pool/bearscape.js";
 import _poolBeastMode from "../pool/beast-mode.js";
@@ -243,6 +244,7 @@ import _poolEvendoWakingHaven from "../pool/evendo-waking-haven.js";
 import _poolEvolvingAdaptive from "../pool/evolving-adaptive.js";
 import _poolExclusionMage from "../pool/exclusion-mage.js";
 import _poolExpeditionHealer from "../pool/expedition-healer.js";
+import _poolExtraplanarLens from "../pool/extraplanar-lens.js";
 import _poolExtravagantSpirit from "../pool/extravagant-spirit.js";
 import _poolEyesOfTheWatcher from "../pool/eyes-of-the-watcher.js";
 import _poolEzioBladeOfVengeance from "../pool/ezio-blade-of-vengeance.js";
@@ -957,6 +959,7 @@ const shard: CardShard = {
     _poolBattlefieldRaptor,
     _poolBaxterStockman,
     _poolBayouDragonfly,
+    _poolBazaarOfWonders,
     _poolBearsCompanion,
     _poolBearscape,
     _poolBeastMode,
@@ -1134,6 +1137,7 @@ const shard: CardShard = {
     _poolEvolvingAdaptive,
     _poolExclusionMage,
     _poolExpeditionHealer,
+    _poolExtraplanarLens,
     _poolExtravagantSpirit,
     _poolEyesOfTheWatcher,
     _poolEzioBladeOfVengeance,

@@ -539,6 +539,7 @@ import _poolPurge from "../pool/purge.js";
 import _poolPutridLeech from "../pool/putrid-leech.js";
 import _poolPyreticRitual from "../pool/pyretic-ritual.js";
 import _poolPyricSalamander from "../pool/pyric-salamander.js";
+import _poolPyromancerAscension from "../pool/pyromancer-ascension.js";
 import _poolPyromancersSwath from "../pool/pyromancers-swath.js";
 import _poolQuandrixCampus from "../pool/quandrix-campus.js";
 import _poolRadhasFirebrand from "../pool/radhas-firebrand.js";
@@ -1402,6 +1403,7 @@ const shard: CardShard = {
     _poolPutridLeech,
     _poolPyreticRitual,
     _poolPyricSalamander,
+    _poolPyromancerAscension,
     _poolPyromancersSwath,
     _poolQuandrixCampus,
     _poolRadhasFirebrand,
