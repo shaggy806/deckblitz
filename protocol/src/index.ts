@@ -33,7 +33,7 @@ export type {
   ScenarioZone,
 } from "./scenario.js";
 
-export type { TutorialAnchor, TutorialCoachStep, TutorialGoal, TutorialInfo } from "./tutorial.js";
+export type { TutorialAllows, TutorialAnchor, TutorialCoachStep, TutorialGoal, TutorialInfo } from "./tutorial.js";
 
 export type {
   DeckFormatReport,

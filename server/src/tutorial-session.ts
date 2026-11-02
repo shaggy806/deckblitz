@@ -16,17 +16,18 @@
 
 import { Game } from "engine/local";
 import type { GameState, PlayerId } from "engine/local";
-import type { TutorialCoachStep, TutorialInfo } from "protocol";
+import type { TutorialAllows, TutorialCoachStep, TutorialInfo } from "protocol";
 import { buildScenario } from "./builder.js";
 import type { CaptureFactory } from "./capture.js";
 import type { HostRole } from "./host.js";
 import { Room } from "./room.js";
-import type { RoomOptions } from "./room.js";
+import type { RoomGuide, RoomOptions } from "./room.js";
 import { ScriptedBot } from "./scripted-bot.js";
 import { cardRegistry } from "./card-registry.js";
 import { metAt } from "./tutorials/conditions.js";
 import { humanSeat } from "./tutorials/lesson.js";
-import type { Lesson, LessonBoard, LessonStep } from "./tutorials/lesson.js";
+import type { Lesson, LessonBoard, LessonMove, LessonStep } from "./tutorials/lesson.js";
+import { allowsOf, BETWEEN_CARDS, openActions, refusal } from "./tutorials/moves.js";
 
 /** What a tutorial session needs from the manager that owns its code. */
 export interface TutorialHost {
@@ -47,6 +48,9 @@ interface Checkpoint {
 /** How many steps one check may take: a backstop, never reached by a lesson. */
 const ADVANCE_LIMIT = 200;
 
+/** What a lesson that isn't scripted leaves open. */
+const EVERYTHING: TutorialAllows = { passTurn: true, autoPass: true, declareAtLeast: 0 };
+
 export class TutorialSession {
   readonly id: string;
   readonly lesson: Lesson;
@@ -61,6 +65,8 @@ export class TutorialSession {
   /** The card showing, by index in its chapter; `null` while the chapter
    * waits for its `opensOn`. */
   private step: number | null = 0;
+  /** The card at `step` is waiting on its `opensOn`, so it isn't up yet. */
+  private waiting = false;
   /** The event-log index the card (or the wait) started from. */
   private from = 0;
   /** Where each of the card's goals was met, by goal; absent while unmet. */
@@ -108,7 +114,7 @@ export class TutorialSession {
     }
     // What happened while the card was up counts toward what comes next.
     this.finishStep(this.from, this.current.game);
-    this.current.publish();
+    this.current.resume();
   }
 
   /** Back to the start of the chapter under way (or the last one opened):
@@ -127,6 +133,7 @@ export class TutorialSession {
     const chapter = this.lesson.chapters[this.chapter];
     const step = this.currentStep();
     const goals = step?.goals ?? [];
+    const limits = this.lessonMoves();
     return {
       lesson: this.lesson.id,
       title: this.lesson.title,
@@ -136,14 +143,32 @@ export class TutorialSession {
       chapterCount: this.lesson.chapters.length,
       step: step === null ? null : coachCard(step),
       goals: goals.map((goal, i) => ({ id: goal.id, label: goal.label, done: this.met[i] !== undefined })),
-      canRetry: !this.complete,
+      // Once the game has gone on from the chapter's start, there's something to undo.
+      canRetry: !this.complete && this.current.game.state.eventLog.length > this.checkpoint.state.eventLog.length,
+      allows: limits === null ? EVERYTHING : allowsOf(limits.moves),
       complete: this.complete,
     };
   }
 
   private currentStep(): LessonStep | null {
-    if (this.complete || this.step === null) return null;
+    if (this.complete || this.step === null || this.waiting) return null;
     return this.lesson.chapters[this.chapter].steps[this.step] ?? null;
+  }
+
+  /** A scripted lesson's limits as the lesson stands, or `null` for none: what
+   * the card up leaves open, nothing under a Next card, only passing between
+   * cards. A finished lesson leaves the game to the player. */
+  private lessonMoves(): { readonly moves: readonly LessonMove[]; readonly reading: boolean } | null {
+    if (this.lesson.scripted !== true || this.complete) return null;
+    const step = this.currentStep();
+    if (step === null) return { moves: BETWEEN_CARDS, reading: false };
+    return (step.goals?.length ?? 0) > 0 ? { moves: step.allow ?? [], reading: false } : { moves: [], reading: true };
+  }
+
+  /** Whether a card is up that the player is reading: a Next card. */
+  private reading(): boolean {
+    const step = this.currentStep();
+    return step !== null && (step.goals?.length ?? 0) === 0;
   }
 
   /** Opens chapter `index` at log index `at`: its first card up, and the
@@ -151,6 +176,7 @@ export class TutorialSession {
   private open(index: number, game: Game, at: number): Checkpoint {
     this.chapter = index;
     this.step = 0;
+    this.waiting = false;
     this.from = at;
     this.met = [];
     return { chapter: index, board: this.board, state: game.snapshot() };
@@ -165,6 +191,7 @@ export class TutorialSession {
     this.from = at;
     if (this.step + 1 < chapters[this.chapter].steps.length) {
       this.step += 1;
+      this.waiting = chapters[this.chapter].steps[this.step].opensOn !== undefined;
       return;
     }
     const following = chapters[this.chapter + 1];
@@ -194,6 +221,14 @@ export class TutorialSession {
         this.checkpoint = this.open(this.chapter, game, at);
         continue;
       }
+      if (this.waiting) {
+        const opensOn = chapter.steps[this.step].opensOn;
+        const at = opensOn === undefined ? this.from : metAt(state, this.from, opensOn);
+        if (at === null) return;
+        this.waiting = false;
+        this.from = at;
+        continue;
+      }
       const goals = chapter.steps[this.step].goals ?? [];
       if (goals.length === 0) return; // a Next card
       goals.forEach((goal, g) => {
@@ -221,6 +256,36 @@ export class TutorialSession {
     return this.currentStep()?.holdPriority === true;
   }
 
+  /** The lesson's say over its room (`RoomGuide`): a card being read holds the
+   * game, and a scripted lesson's seat is offered only what the card leaves
+   * open. Each brought up to date first, as `holdsPriority` is. */
+  private guide(): RoomGuide {
+    const live = (room: Room): boolean => {
+      if (room !== this.current) return false;
+      this.advance(room.game);
+      return true;
+    };
+    return {
+      holds: (room) => live(room) && this.reading(),
+      offers: (room, player, legal) => {
+        if (!live(room) || player !== this.seat) return legal;
+        const limits = this.lessonMoves();
+        if (limits === null) return legal;
+        return limits.reading ? [] : openActions(room.game.state, limits.moves, legal);
+      },
+      refuses: (room, player, request) => {
+        if (!live(room) || player !== this.seat) return null;
+        const limits = this.lessonMoves();
+        if (limits === null) return null;
+        const closed = "The lesson is waiting for something else: see its card.";
+        if (limits.reading) return closed;
+        if (request === "pass-turn") return allowsOf(limits.moves).passTurn ? null : closed;
+        if (request === "auto-pass") return allowsOf(limits.moves).autoPass ? null : closed;
+        return refusal(room.game.state, limits.moves, room.game.legalActions(player), request);
+      },
+    };
+  }
+
   private makeRoom(game: Game, startSeq: number): Room {
     const board = this.board;
     return new Room(this.id, game, {
@@ -229,6 +294,9 @@ export class TutorialSession {
       onUpdate: this.env.onUpdate,
       onPublish: (room) => this.onPublish(room),
       holdsPriority: (room, player) => this.holdsPriority(room, player),
+      guide: this.guide(),
+      // The cards talk to "you".
+      seatNames: { [this.seat]: "You" },
       botSpeed: "normal",
       botController: (player) => {
         const opponent = board.opponents[player];
@@ -276,5 +344,6 @@ function coachCard(step: LessonStep): TutorialCoachStep {
     ...(step.anchor !== undefined ? { anchor: step.anchor } : {}),
     ...(step.placement !== undefined ? { placement: step.placement } : {}),
     advance: (step.goals?.length ?? 0) > 0 ? "goal" : "next",
+    ...(step.showHand === true ? { showHand: true } : {}),
   };
 }

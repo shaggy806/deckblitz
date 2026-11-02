@@ -261,6 +261,21 @@ const realTimers: RoomTimers = {
   clearTimeout: (handle) => clearTimeout(handle as ReturnType<typeof setTimeout>),
 };
 
+/**
+ * What a tutorial may say about the game in its room. Asked from `settle()` and
+ * from a seat's requests, so like `onPublish` it may read the game and the room
+ * but not start another settle.
+ */
+export interface RoomGuide {
+  /** Nothing moves on while this is true: a card the player is reading.
+   * `Room.resume` carries on once it isn't. */
+  readonly holds: (room: Room) => boolean;
+  /** What of `legal` the seat is offered. */
+  readonly offers: (room: Room, player: PlayerId, legal: readonly LegalAction[]) => readonly LegalAction[];
+  /** Why the seat can't do this now, or `null` if it can. */
+  readonly refuses: (room: Room, player: PlayerId, request: Action | "pass-turn" | "auto-pass") => string | null;
+}
+
 export interface RoomOptions {
   /** Where this room's published frames go. The transport layer turns each
    * into a `state` push per connected seat (see `room-service.ts`), and binds
@@ -341,6 +356,10 @@ export interface RoomOptions {
    * Auto-pass still passes the window.
    */
   readonly holdsPriority?: (room: Room, player: PlayerId) => boolean;
+  /** A tutorial's say over the game (`tutorial-session.ts`). See `RoomGuide`. */
+  readonly guide?: RoomGuide;
+  /** What each seat is called here, whatever its player claims it as. */
+  readonly seatNames?: Readonly<Record<string, string>>;
   /** {@link SETTLE_SLICE_MS} by default. The fake-clock pacing tests set
    * `Infinity`, since a slice is real time and a yield resumes on their
    * hand-cranked clock; the slicing test sets 0, yielding after every pass. */
@@ -476,6 +495,10 @@ export class Room {
   private readonly onPublish: ((room: Room) => void) | null;
   /** See `RoomOptions.holdsPriority`. */
   private readonly holdsPriority: ((room: Room, player: PlayerId) => boolean) | null;
+  /** See `RoomOptions.guide`. */
+  private readonly guide: RoomGuide | null;
+  /** See `RoomOptions.seatNames`. */
+  private readonly seatNames: Readonly<Record<string, string>>;
   /** See `RoomOptions.recipe`; `null` when this room can't be rematched. */
   readonly recipe: GameRecipe | null;
   /** See `RoomOptions.gameNumber`. */
@@ -494,6 +517,8 @@ export class Room {
     this.onUpdate = options.onUpdate ?? (() => {});
     this.onPublish = options.onPublish ?? null;
     this.holdsPriority = options.holdsPriority ?? null;
+    this.guide = options.guide ?? null;
+    this.seatNames = options.seatNames ?? {};
     this.pacing = options.pacing ?? "realtime";
     this.showStackArrivals = options.showStackArrivals ?? true;
     this.timers = options.timers ?? realTimers;
@@ -678,7 +703,7 @@ export class Room {
     // about to trigger.
     seat.acksFrames = false;
     seat.ackedSeq = this.seq;
-    const trimmed = displayName?.trim();
+    const trimmed = (this.seatNames[player] ?? displayName)?.trim();
     if (trimmed) {
       seat.displayName = trimmed.slice(0, MAX_DISPLAY_NAME_LENGTH);
     }
@@ -809,8 +834,19 @@ export class Room {
         `cannot dispatch an action for ${actionPlayer(action)} from ${seat}'s seat`,
       );
     }
+    this.refuseIfGuided(seat, action);
     this.game.dispatch(action);
     this.lastActivityAt = Date.now();
+    this.settle();
+  }
+
+  private refuseIfGuided(seat: PlayerId, request: Action | "pass-turn" | "auto-pass"): void {
+    const refused = this.guide?.refuses(this, seat, request) ?? null;
+    if (refused !== null) throw new Error(refused);
+  }
+
+  /** Carries the game on after `RoomOptions.guide` has stopped holding it. */
+  resume(): void {
     this.settle();
   }
 
@@ -839,6 +875,7 @@ export class Room {
   requestPassTurn(connection: Connection): void {
     const player = this.seatOf(connection);
     if (player === null) throw new Error("claim a seat before acting");
+    this.refuseIfGuided(player, "pass-turn");
     const seat = this.seatFor(player);
     seat.autoPassUntil = { kind: "rest-of-turn", turn: this.game.state.turn.number };
     seat.autoPassFrom = this.game.events.length;
@@ -859,6 +896,7 @@ export class Room {
     if (player === null) throw new Error("claim a seat before acting");
     const seat = this.seatFor(player);
     const cancelling = seat.autoPassUntil !== null;
+    if (!cancelling) this.refuseIfGuided(player, "auto-pass");
     seat.autoPassUntil = cancelling
       ? null
       : { kind: "next-own-turn", afterTurn: this.game.state.turn.number };
@@ -1066,8 +1104,13 @@ export class Room {
    * carry. Nothing while someone else answers for it. */
   actionsFor(seat: PlayerId): readonly LegalAction[] {
     const asked = askedPlayer(this.game.state);
-    if (asked === null) return this.game.legalActions(seat);
-    return answeringPlayer(this.game.state, asked) === seat ? this.game.legalActions(asked) : [];
+    const legal =
+      asked === null
+        ? this.game.legalActions(seat)
+        : answeringPlayer(this.game.state, asked) === seat
+          ? this.game.legalActions(asked)
+          : [];
+    return this.guide === null ? legal : this.guide.offers(this, seat, legal);
   }
 
   /**
@@ -1226,7 +1269,10 @@ export class Room {
     // them even with nothing in it (`RoomOptions.holdsPriority`).
     const kept =
       this.holdsPriority !== null && s.zones.shared.stack.length === 0 && this.holdsPriority(this, holder);
-    const forcedPass = !kept && legal.length === 1 && legal[0].kind === "pass-priority";
+    // What the seat is offered, which a tutorial may have cut down to the pass:
+    // a window with nothing else in it passes itself, whatever the settings.
+    const offered = this.guide === null ? legal : this.guide.offers(this, holder, legal);
+    const forcedPass = !kept && offered.length === 1 && offered[0].kind === "pass-priority";
     // A seat playing another's turn is spared its own windows with nothing in
     // them, whatever it likes on its own: each would turn the table back to its
     // seat and away again.
@@ -1398,6 +1444,9 @@ export class Room {
         this.holdForClients(() => this.settle(), false);
         return;
       }
+      // A card the player is reading: everything that has happened is shown
+      // above, and nothing more happens behind it. `resume` carries on.
+      if (this.guide?.holds(this) === true) break;
 
       const bot = this.currentBotActor();
       if (bot !== null) {

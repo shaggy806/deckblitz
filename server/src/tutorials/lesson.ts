@@ -8,8 +8,10 @@
  *
  * Chapters run in order, and each chapter's cards in order. A card with
  * `goals` waits until every goal has been met since the card came up, then
- * moves on by itself; a card without waits for the player's Next. A chapter
- * is done when its last card is.
+ * moves on by itself; a card without waits for the player's Next, and holds
+ * the game while it's up, so nothing happens behind it. A chapter is done when
+ * its last card is. A card with `opensOn` comes up when that happens in the
+ * game.
  *
  * The next chapter then opens at once, or — with `opensOn` — when that
  * happens in the game; until then there is no card and the game plays on.
@@ -31,6 +33,18 @@ import { cardRegistry } from "../card-registry.js";
 import { conditionCards } from "./conditions.js";
 import type { TutorialCondition } from "./conditions.js";
 
+/**
+ * A move a card of a `scripted` lesson leaves open. Naming a `card` narrows it
+ * to those cards. `pass` is the Pass button, `pass-turn` the Pass Turn button
+ * (which needs a window to pass, so Pass stays open with it). A card that opens
+ * `attack` or `block` wants a declaration of at least `atLeast` creatures: its
+ * goal could never be met after one with fewer.
+ */
+export type LessonMove =
+  | { readonly do: "play-land" | "cast"; readonly card?: string }
+  | { readonly do: "pass" | "pass-turn" }
+  | { readonly do: "attack" | "block"; readonly card?: readonly string[]; readonly atLeast: number };
+
 export interface LessonGoal {
   /** Unique within the lesson. */
   readonly id: string;
@@ -48,6 +62,15 @@ export interface LessonStep {
   readonly anchor?: TutorialAnchor;
   readonly placement?: TutorialCoachStep["placement"];
   readonly goals?: readonly LessonGoal[];
+  /** In a `scripted` lesson, what the player may do while this card is up. A
+   * goal card there must say; a Next card holds the game, so nothing is open. */
+  readonly allow?: readonly LessonMove[];
+  /** The card comes up when this happens in the game, not as the card before
+   * it goes: until then there's no card and the game plays on. Never on a
+   * chapter's first card, which the chapter's `opensOn` says. */
+  readonly opensOn?: TutorialCondition;
+  /** Keeps the hand tray raised while the card is up. */
+  readonly showHand?: boolean;
   /**
    * While this card is up, the player's windows with an empty stack wait for
    * them even when there's nothing to do in them (`RoomOptions.holdsPriority`)
@@ -79,6 +102,10 @@ export interface Lesson {
   readonly id: string;
   readonly title: string;
   readonly chapters: readonly LessonChapter[];
+  /** The player can only do what the card up says (`LessonStep.allow`), and
+   * only pass while no card is: for someone who can't yet know which of the
+   * board's clicks would run off and leave the lesson behind. */
+  readonly scripted?: boolean;
 }
 
 /** The seat a board keeps for the player. */
@@ -110,13 +137,21 @@ export function validateLesson(lesson: Lesson): void {
     unique(chapter.id, "chapter");
     if (chapter.steps.length === 0) throw new Error(where(`chapter ${chapter.id} has no cards`));
     if (chapter.opensOn !== undefined) for (const name of conditionCards(chapter.opensOn)) known(name, chapter.id);
-    for (const step of chapter.steps) {
+    chapter.steps.forEach((step, s) => {
       unique(step.id, "card");
+      if (s === 0 && step.opensOn !== undefined) throw new Error(where(`card ${step.id} is its chapter's first, so the chapter says when it opens`));
+      if (step.opensOn !== undefined) for (const name of conditionCards(step.opensOn)) known(name, step.id);
+      if (lesson.scripted === true && (step.goals?.length ?? 0) > 0 && step.allow === undefined) {
+        throw new Error(where(`card ${step.id} has goals but doesn't say what it allows`));
+      }
+      for (const move of step.allow ?? []) {
+        for (const name of "card" in move && move.card !== undefined ? [move.card].flat() : []) known(name, step.id);
+      }
       for (const goal of step.goals ?? []) {
         unique(goal.id, "goal");
         for (const name of conditionCards(goal.when)) known(name, goal.id);
       }
-    }
+    });
     const board = chapter.board;
     if (board === undefined) return;
     if (chapter.opensOn !== undefined) throw new Error(where(`chapter ${chapter.id} has a board, so it opens at once`));

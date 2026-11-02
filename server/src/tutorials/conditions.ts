@@ -14,6 +14,9 @@ import type { GameEvent, GameState, ObjectId, PlayerId, Step } from "engine/loca
  *
  * - `land-played`, `spell-cast`, `ability-activated`: by `player`, of a card
  *   named `card` (an ability: its source's name).
+ * - `spell-resolved`: a spell named `card` finished resolving, so a creature
+ *   spell is on the battlefield.
+ * - `combat-damage`: combat damage was dealt.
  * - `attackers-declared`: `player` attacked with at least `atLeast` (1)
  *   creatures.
  * - `blocker-declared`: a creature `player` controls, named `card`, blocked.
@@ -24,6 +27,8 @@ import type { GameEvent, GameState, ObjectId, PlayerId, Step } from "engine/loca
 export type TutorialCondition =
   | { readonly event: "land-played"; readonly player?: PlayerId; readonly card?: string }
   | { readonly event: "spell-cast"; readonly player?: PlayerId; readonly card?: string }
+  | { readonly event: "spell-resolved"; readonly card?: string }
+  | { readonly event: "combat-damage" }
   | { readonly event: "ability-activated"; readonly player?: PlayerId; readonly card?: string }
   | { readonly event: "attackers-declared"; readonly player?: PlayerId; readonly atLeast?: number }
   | { readonly event: "blocker-declared"; readonly player?: PlayerId; readonly card?: string }
@@ -60,15 +65,23 @@ export function metAt(state: GameState, from: number, condition: TutorialConditi
     return player !== undefined && player.life <= condition.lifeAtMost.value ? log.length : null;
   }
   const name = (id: ObjectId): string => state.objects[id]?.cardName ?? "";
-  const by = (player: PlayerId): boolean => condition.player === undefined || condition.player === player;
+  const by = (player: PlayerId): boolean =>
+    !("player" in condition) || condition.player === undefined || condition.player === player;
   const named = (id: ObjectId): boolean => !("card" in condition) || condition.card === undefined || name(id) === condition.card;
   let active = activeAt(log, from);
   for (let i = Math.max(0, from); i < log.length; i += 1) {
     const event = log[i];
     if (event.type === "turn-began") active = event.activePlayer;
+    if (condition.event === "combat-damage") {
+      if (event.type === "damage-dealt" && event.combat) return i + 1;
+      continue;
+    }
     if (event.type !== condition.event) continue;
     let met = false;
     switch (event.type) {
+      case "spell-resolved":
+        met = named(event.object);
+        break;
       case "land-played":
       case "spell-cast":
         met = by(event.player) && named(event.object);

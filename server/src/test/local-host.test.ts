@@ -64,7 +64,7 @@ describe("a local room host", () => {
     const before = first.last("state")!;
     // A waiting room and a lesson aren't kept; the game is.
     first.host.message({ type: "create-room", hostToken: "other" });
-    first.host.message({ type: "tutorial-create", lesson: "basics-proof", hostToken: "t" });
+    first.host.message({ type: "tutorial-create", lesson: "learn-commander", hostToken: "t" });
     // Through a structured clone, as IndexedDB keeps it.
     const saved = structuredClone(first.host.save());
     expect(saved.map((s) => s.id)).toEqual([roomId]);
@@ -94,7 +94,7 @@ describe("a local room host", () => {
 
   it("opens a lesson", () => {
     const { host, last } = page();
-    host.message({ type: "tutorial-create", lesson: "basics-proof", hostToken: "t" });
+    host.message({ type: "tutorial-create", lesson: "learn-commander", hostToken: "t" });
     const created = last("room-created");
     expect(created?.seat).toBe("alice");
   });

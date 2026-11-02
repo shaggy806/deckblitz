@@ -271,7 +271,7 @@ describe("rooms on two shards (loopback)", () => {
   it("keeps a tutorial's retry and a builder's rebuild on their shard, frames numbered on", async () => {
     const h = await serve();
     const t = await connect();
-    t.send({ type: "tutorial-create", lesson: "basics-proof", hostToken: "t" });
+    t.send({ type: "tutorial-create", lesson: "learn-commander", hostToken: "t" });
     const created = await t.next();
     if (created.type !== "room-created") throw new Error(`got ${created.type}`);
     const tutorial = created.roomId;
@@ -374,7 +374,7 @@ describe("rooms on two shards (loopback)", () => {
     const h = await serve({ pacing: "immediate" }, { maxRoomsPerIp: 2 });
     const c = await connect("198.51.100.4");
     const { roomId } = await startWithBot(c);
-    c.send({ type: "tutorial-create", lesson: "basics-proof" });
+    c.send({ type: "tutorial-create", lesson: "learn-commander" });
     expect((await c.next((m) => m.type === "room-created" || m.type === "error")).type).toBe("room-created");
     c.send({ type: "create-room" });
     expect(await c.next((m) => m.type === "error")).toEqual({
@@ -400,7 +400,7 @@ describe("rooms on two shards (loopback)", () => {
     const first = await create(c);
     const second = await create(c);
     expect([h.shardOf(first), h.shardOf(second)].sort()).toEqual([0, 1]);
-    c.send({ type: "tutorial-create", lesson: "basics-proof" });
+    c.send({ type: "tutorial-create", lesson: "learn-commander" });
     expect(await c.next()).toEqual({
       type: "error",
       code: "server-full",

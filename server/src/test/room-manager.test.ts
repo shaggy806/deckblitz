@@ -29,9 +29,9 @@ describe("RoomManager", () => {
     expect(room.id).toBe("ABCDE");
     expect(manager.get("ABCDE")).toBe(room);
     expect(() => manager.createPending(2, config(), undefined, "ABCDE")).toThrow(/already in use/);
-    expect(() => manager.createTutorial("basics-proof", undefined, "ABCDE")).toThrow(/already in use/);
+    expect(() => manager.createTutorial("learn-commander", undefined, "ABCDE")).toThrow(/already in use/);
     expect(manager.get("ABCDE")).toBe(room);
-    expect(manager.createTutorial("basics-proof", undefined, "TUTOR").id).toBe("TUTOR");
+    expect(manager.createTutorial("learn-commander", undefined, "TUTOR").id).toBe("TUTOR");
     expect(manager.createBuilder("dev", "BUILD").id).toBe("BUILD");
     expect(manager.kindOf("ABCDE")).toBe("lobby");
     expect(manager.kindOf("TUTOR")).toBe("tutorial");

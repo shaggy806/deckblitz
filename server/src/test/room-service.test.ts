@@ -11,7 +11,7 @@ import { RoomManager } from "../room-manager.js";
 import { RoomService } from "../room-service.js";
 import type { RoomEvent } from "../room-host.js";
 import { Room } from "../room.js";
-import { BASICS_PROOF } from "../tutorials/basics-proof.js";
+import { LEARN_COMMANDER } from "../tutorials/learn-commander.js";
 import { ALICE, BOB } from "../decks.js";
 
 function serviceWith(manager: RoomManager, options: ConstructorParameters<typeof RoomService>[2] = {}) {
@@ -59,7 +59,7 @@ describe("RoomService room events", () => {
   it("reports a tutorial, a builder and an adopted room by kind", () => {
     const manager = new RoomManager({ pacing: "immediate" });
     const { service, events, sent } = serviceWith(manager, { builder: true });
-    service.handle(1, { type: "tutorial-create", lesson: BASICS_PROOF.id });
+    service.handle(1, { type: "tutorial-create", lesson: LEARN_COMMANDER.id });
     service.handle(2, { type: "builder-create", hostToken: "dev" });
     const [tutorial, builder] = sent.filter((s) => s.message.type === "room-created").map((s) => {
       if (s.message.type !== "room-created") throw new Error("unreachable");

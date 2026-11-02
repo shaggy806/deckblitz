@@ -16,8 +16,8 @@ import type { Connection } from "../room.js";
 import { RoomManager } from "../room-manager.js";
 import { LESSONS, metAt, validateLesson } from "../tutorials/index.js";
 import type { Lesson } from "../tutorials/index.js";
-import { BASICS_PROOF } from "../tutorials/basics-proof.js";
 import { BOARD_TOUR } from "../tutorials/board-tour.js";
+import { LEARN_COMMANDER } from "../tutorials/learn-commander.js";
 import { attachRoomServer } from "../ws-server.js";
 
 const ALICE = asPlayerId("alice");
@@ -83,15 +83,19 @@ describe("the lesson table", () => {
   });
 
   it("refuses a lesson that couldn't", () => {
-    const [first, ...rest] = BASICS_PROOF.chapters;
-    const lesson = (chapters: Lesson["chapters"]): Lesson => ({ ...BASICS_PROOF, chapters });
+    const [first, ...rest] = LEARN_COMMANDER.chapters;
+    const lesson = (chapters: Lesson["chapters"]): Lesson => ({ ...LEARN_COMMANDER, chapters });
+    const goalCard = rest[0].steps[0];
     expect(() => validateLesson(lesson([{ ...first, board: undefined }, ...rest]))).toThrow(/first chapter needs a board/);
     // A fresh board after a goal card: only Next can reach it.
-    expect(() => validateLesson(lesson([first, rest[0], { ...rest[1], board: first.board }]))).toThrow(/Next card/);
+    expect(() => validateLesson(lesson([first, { ...rest[0], steps: [goalCard] }, { ...rest[1], board: first.board, opensOn: undefined }]))).toThrow(/Next card/);
     expect(() =>
-      validateLesson(lesson([first, { ...rest[0], steps: [{ ...rest[0].steps[0], goals: [{ id: "x", label: "x", when: { event: "spell-cast", card: "No Such Card" } }] }] }])),
+      validateLesson(lesson([first, { ...rest[0], steps: [{ ...goalCard, goals: [{ id: "x", label: "x", when: { event: "spell-cast", card: "No Such Card" } }] }] }])),
     ).toThrow(/isn't a card/);
-    expect(() => validateLesson(lesson([first, { ...rest[0], id: "welcome" }]))).toThrow(/used twice/);
+    expect(() => validateLesson(lesson([first, { ...rest[0], id: "table" }]))).toThrow(/used twice/);
+    // A scripted lesson's goal card has to say what it leaves open.
+    expect(() => validateLesson(lesson([first, { ...rest[0], steps: [{ ...goalCard, allow: undefined }] }]))).toThrow(/what it allows/);
+    expect(() => validateLesson(lesson([first, { ...rest[0], steps: [{ ...goalCard, opensOn: { event: "turn-began" } }] }]))).toThrow(/chapter says when/);
   });
 });
 
@@ -131,62 +135,291 @@ function openLesson(id: string) {
   return { manager, session, frames, info, passUntil };
 }
 
-describe("a tutorial room", () => {
-  it("plays basics-proof through with the right answers, chapter by chapter, to the end", () => {
-    const { manager, session, info } = openLesson("basics-proof");
+/** Alice's moves in `learn-commander`, as the board's clicks send them. */
+function coachedMoves({ session }: { readonly session: ReturnType<typeof openLesson>["session"] }) {
+  const state = (): GameState => session.room.game.state;
+  const named = (name: string): ObjectId => {
+    const s = state();
+    const id = s.zones.shared.battlefield.find((b) => s.objects[b].cardName === name);
+    if (id === undefined) throw new Error(`no ${name} on the battlefield`);
+    return id;
+  };
+  return {
+    state,
+    named,
+    land: () => session.room.dispatch(connection, { type: "play-land", player: ALICE, card: idNamed(state(), "Swamp", "hand") }),
+    cast: (name: string, zone = "hand") =>
+      session.room.dispatch(connection, { type: "cast-spell", player: ALICE, card: idNamed(state(), name, zone), targets: [] }),
+    pass: () => session.room.dispatch(connection, { type: "pass-priority", player: ALICE }),
+    attack: (...names: string[]) =>
+      session.room.dispatch(connection, {
+        type: "declare-attackers",
+        player: ALICE,
+        attackers: names.map((name) => ({ attacker: named(name), defender: BOB })),
+      }),
+    block: (blocker: string, attacker: string) =>
+      session.room.dispatch(connection, {
+        type: "declare-blockers",
+        player: ALICE,
+        blocks: [{ blocker: named(blocker), attacker: named(attacker) }],
+      }),
+    /** On through the first chapter's Next cards. */
+    pastTheTable: () => {
+      for (const id of ["welcome", "life", "hand", "read-a-card", "command-zone", "library"]) session.next(id);
+    },
+  };
+}
+
+describe("Learn Commander", () => {
+  it("plays through with the right answers, chapter by chapter, to a win on turn 7", () => {
+    const opened = openLesson("learn-commander");
+    const { manager, session, info } = opened;
+    const m = coachedMoves(opened);
+    const life = (): number => m.state().players[BOB].life;
     expect(manager.tutorial(session.id)).toBe(session);
     expect(session.seat).toBe(ALICE);
     expect(session.room.seatStatuses().find((s) => s.player === BOB)).toMatchObject({ isBot: true, displayName: "Rowan" });
+    expect(m.state().players[ALICE].life).toBe(40);
+    expect(life()).toBe(13);
 
-    // An intro card, waiting on Next.
-    expect(info()).toMatchObject({ lesson: "basics-proof", chapter: "welcome", chapterIndex: 0, complete: false });
+    // The table: Next cards, and nothing yet to undo.
+    expect(info()).toMatchObject({ lesson: "learn-commander", chapter: "table", chapterIndex: 0, complete: false, canRetry: false });
     expect(info().step).toMatchObject({ id: "welcome", advance: "next" });
-    expect(() => session.next("play-land")).toThrow(/already gone/);
-    session.next("welcome");
+    expect(() => session.next("first-land")).toThrow(/already gone/);
+    m.pastTheTable();
 
-    // Play a land: a goal card.
-    expect(info().chapter).toBe("land");
-    expect(info().step).toMatchObject({ id: "play-land", advance: "goal", anchor: "card:Forest" });
-    expect(info().goals).toEqual([{ id: "land-played", label: "Play a Forest", done: false }]);
-    expect(() => session.next("play-land")).toThrow(/goals/);
-    const s = session.room.game.state;
-    session.room.dispatch(connection, { type: "play-land", player: ALICE, card: idNamed(s, "Forest", "hand") });
+    // Land and mana.
+    expect(info().chapter).toBe("mana");
+    expect(info().step).toMatchObject({ id: "first-land", advance: "goal", anchor: "card:Swamp", showHand: true });
+    expect(() => session.next("first-land")).toThrow(/goals/);
+    m.land();
+    expect(info().step?.id).toBe("cast-rats");
+    m.cast("Muck Rats");
+    // Her cast has resolved and the card after it can point at the Rats.
+    expect(info().step?.id).toBe("tapped");
+    expect(m.state().objects[m.named("Muck Rats")].zone).toBe("battlefield");
+    expect(m.state().objects[m.named("Swamp")].tapped).toBe(true);
+    session.next("tapped");
+    session.next("summoning-sick");
 
-    // Cast a creature.
-    expect(info().chapter).toBe("creature");
-    expect(info().step?.id).toBe("cast-elves");
-    const elves = idNamed(session.room.game.state, "Llanowar Elves", "hand");
-    session.room.dispatch(connection, { type: "cast-spell", player: ALICE, card: elves, targets: [] });
-
-    // Pass the turn. Alice has nothing left to do, but the card asking her to
-    // pass holds her window once the Elves have resolved (`holdPriority`),
-    // rather than the room passing it for her straight into Rowan's turn.
-    expect(info().chapter).toBe("turn");
-    expect(info().step).toMatchObject({ id: "pass-turn", anchor: "tour:game-pass-turn", advance: "goal" });
-    const held = session.room.game.state;
-    expect(held).toMatchObject({ turn: { number: 1, step: "precombat-main" }, awaiting: null });
-    expect(held.priority.holder).toBe(ALICE);
-    expect(held.zones.shared.stack).toEqual([]);
-    expect(held.objects[elves].zone).toBe("battlefield");
-    // Pass Turn passes it; Rowan's scripted attack opens the last chapter.
+    // Pass the turn: the card holds her window, which has nothing else in it.
+    expect(info().step).toMatchObject({ id: "first-pass", anchor: "tour:game-pass-turn" });
+    expect(m.state()).toMatchObject({ turn: { number: 1, step: "precombat-main" }, awaiting: null });
     session.room.requestPassTurn(connection);
-    expect(session.room.game.state.awaiting?.kind).toBe("blockers");
-    expect(info()).toMatchObject({ chapter: "block", chapterIndex: 4 });
-    expect(info().step).toMatchObject({ id: "block", advance: "goal" });
-    const st = session.room.game.state;
-    const mystic = st.zones.shared.battlefield.find((id) => st.objects[id].cardName === "Elvish Mystic")!;
-    expect(st.objects[mystic].attacking).toBe(ALICE);
-    session.room.dispatch(connection, {
-      type: "declare-blockers",
-      player: ALICE,
-      blocks: [{ blocker: elves, attacker: mystic }],
-    });
 
-    expect(info().step?.id).toBe("well-done");
-    session.next("well-done");
+    // Rowan's turn, narrated.
+    expect(info()).toMatchObject({ chapter: "rowans-turn", step: { id: "phase-track" } });
+    expect(m.state().turn).toMatchObject({ number: 2, step: "precombat-main" });
+    session.next("phase-track");
+    expect(info().step?.id).toBe("rowan-creature");
+    session.next("rowan-creature");
+
+    // Attack.
+    expect(info()).toMatchObject({ chapter: "attack", step: { id: "your-turn-again" } });
+    expect(m.state().turn).toMatchObject({ number: 3, step: "precombat-main" });
+    expect(m.state().objects[m.named("Swamp")].tapped).toBe(false);
+    session.next("your-turn-again");
+    m.land();
+    m.cast("Cabal Evangel");
+    expect(info().step?.id).toBe("first-to-combat");
+    m.pass();
+    expect(info().step?.id).toBe("first-attack");
+    expect(m.state().awaiting?.kind).toBe("attackers");
+    m.attack("Muck Rats");
+    expect(info().step?.id).toBe("first-hit");
+    expect(life()).toBe(12);
+    session.next("first-hit");
+    expect(info().step?.id).toBe("second-pass");
+    session.room.requestPassTurn(connection);
+
+    // Block: the Rats stayed tapped, the Evangel kills the Trader and lives.
+    expect(info()).toMatchObject({ chapter: "block", step: { id: "block" } });
+    expect(m.state().awaiting?.kind).toBe("blockers");
+    expect(m.state().objects[m.named("Muck Rats")].tapped).toBe(true);
+    m.block("Cabal Evangel", "Dwarven Trader");
+    expect(info().step?.id).toBe("block-result");
+    expect(m.state().zones.shared.battlefield.some((id) => m.state().objects[id].cardName === "Dwarven Trader")).toBe(false);
+    expect(m.state().zones.shared.battlefield.some((id) => m.state().objects[id].cardName === "Cabal Evangel")).toBe(true);
+    expect(m.state().players[ALICE].life).toBe(40);
+    session.next("block-result");
+    session.next("graveyard");
+
+    // The commander.
+    expect(info()).toMatchObject({ chapter: "commander", step: { id: "third-land" } });
+    expect(m.state().turn.number).toBe(5);
+    m.land();
+    m.cast("Kalakscion, Hunger Tyrant", "command");
+    expect(info().step?.id).toBe("commander-rules");
+    expect(m.state().objects[m.named("Kalakscion, Hunger Tyrant")].zone).toBe("battlefield");
+    session.next("commander-rules");
+    m.pass();
+    expect(info().step?.id).toBe("second-attack");
+    m.attack("Muck Rats", "Cabal Evangel");
+    expect(life()).toBe(9);
+    expect(info().step?.id).toBe("third-pass");
+    session.room.requestPassTurn(connection);
+
+    // The finish: Rowan's commander, and an attack it can only half stop.
+    expect(info()).toMatchObject({ chapter: "finish", step: { id: "rowan-commander" } });
+    expect(m.state().turn.number).toBe(6);
+    session.next("rowan-commander");
+    expect(info().step?.id).toBe("last-turn");
+    expect(m.state().turn.number).toBe(7);
+    session.next("last-turn");
+    m.pass();
+    expect(info().step?.id).toBe("last-attack");
+    m.attack("Kalakscion, Hunger Tyrant", "Cabal Evangel", "Muck Rats");
+    expect(info().step?.id).toBe("blocked");
+    expect(m.state().result.over).toBe(false);
+    session.next("blocked");
+    expect(info().step?.id).toBe("won");
+    expect(m.state().result.over).toBe(true);
+    expect(life()).toBeLessThanOrEqual(0);
+    session.next("won");
     expect(info()).toMatchObject({ complete: true, step: null, goals: [], canRetry: false });
   });
 
+  it("can't be left waiting for a move that can no longer happen", () => {
+    const opened = openLesson("learn-commander");
+    const { session, info } = opened;
+    const m = coachedMoves(opened);
+    const offered = () => [...new Set(session.room.actionsFor(ALICE).map((a) => a.kind))];
+    m.pastTheTable();
+
+    // Passing early was the soft-lock: the turn went by, and the card waiting
+    // for it was waiting for a turn already gone. Nothing but the land now.
+    expect(info().step?.id).toBe("first-land");
+    expect(info().allows).toEqual({ passTurn: false, autoPass: false, declareAtLeast: 0 });
+    expect(offered()).toEqual(["play-land"]);
+    expect(() => session.room.requestPassTurn(connection)).toThrow(/waiting for something else/);
+    expect(() => session.room.requestAutoPass(connection)).toThrow(/waiting for something else/);
+    expect(() => m.pass()).toThrow(/waiting for something else/);
+    expect(() => m.cast("Muck Rats")).toThrow(/waiting for something else/);
+    expect(m.state().turn.number).toBe(1);
+
+    m.land();
+    // The wrong card, and a land too many, are closed as well.
+    expect(() => m.cast("Barony Vampire")).toThrow(/waiting for something else/);
+    expect(() => m.land()).toThrow(/waiting for something else/);
+    m.cast("Muck Rats");
+
+    // A Next card closes everything.
+    expect(info().step?.id).toBe("tapped");
+    expect(offered()).toEqual([]);
+    expect(() => m.pass()).toThrow(/waiting for something else/);
+    session.next("tapped");
+    session.next("summoning-sick");
+
+    // Pass Turn's card opens Pass Turn, and the Pass it needs.
+    expect(info().allows.passTurn).toBe(true);
+    expect(offered()).toEqual(["pass-priority"]);
+    // Pressing Pass instead only gets there a step at a time.
+    for (let i = 0; i < 30 && m.state().turn.number === 1; i += 1) m.pass();
+    expect(info()).toMatchObject({ chapter: "rowans-turn", step: { id: "phase-track" } });
+  });
+
+  it("wants an attack and a block with everyone the card names in them", () => {
+    const opened = openLesson("learn-commander");
+    const { session, info } = opened;
+    const m = coachedMoves(opened);
+    m.pastTheTable();
+    m.land();
+    m.cast("Muck Rats");
+    session.next("tapped");
+    session.next("summoning-sick");
+    session.room.requestPassTurn(connection);
+    session.next("phase-track");
+    session.next("rowan-creature");
+    session.next("your-turn-again");
+    m.land();
+    m.cast("Cabal Evangel");
+
+    // To combat: Pass, and not Pass Turn, which would skip the attack.
+    expect(info().step?.id).toBe("first-to-combat");
+    expect(info().allows.passTurn).toBe(false);
+    expect(() => session.room.requestPassTurn(connection)).toThrow(/waiting for something else/);
+    m.pass();
+
+    expect(info().step?.id).toBe("first-attack");
+    expect(info().allows.declareAtLeast).toBe(1);
+    const offer = session.room.actionsFor(ALICE).find((a) => a.kind === "declare-attackers");
+    if (offer?.kind !== "declare-attackers") throw new Error("no attack offered");
+    expect(offer.eligible).toEqual([m.named("Muck Rats")]);
+    expect(() => m.attack()).toThrow(/waiting for something else/);
+    m.attack("Muck Rats");
+    session.next("first-hit");
+    session.room.requestPassTurn(connection);
+
+    expect(info().step?.id).toBe("block");
+    expect(info().allows.declareAtLeast).toBe(1);
+    expect(() => session.room.dispatch(connection, { type: "declare-blockers", player: ALICE, blocks: [] })).toThrow(/waiting for something else/);
+    m.block("Cabal Evangel", "Dwarven Trader");
+    session.next("block-result");
+    session.next("graveyard");
+
+    m.land();
+    m.cast("Kalakscion, Hunger Tyrant", "command");
+    session.next("commander-rules");
+    m.pass();
+    // Its commander can't attack yet; one creature of two isn't enough.
+    expect(info().allows.declareAtLeast).toBe(2);
+    expect(() => m.attack("Muck Rats")).toThrow(/waiting for something else/);
+    expect(() => m.attack("Kalakscion, Hunger Tyrant", "Muck Rats")).toThrow(/waiting for something else/);
+    m.attack("Muck Rats", "Cabal Evangel");
+    expect(info().step?.id).toBe("third-pass");
+  });
+
+  it("holds the game under a card being read, so nothing happens behind it", () => {
+    const opened = openLesson("learn-commander");
+    const { session, info } = opened;
+    const m = coachedMoves(opened);
+    m.pastTheTable();
+    m.land();
+    m.cast("Muck Rats");
+    session.next("tapped");
+    session.next("summoning-sick");
+    session.room.requestPassTurn(connection);
+
+    // Rowan's main phase, with Rowan's land still in hand until Next.
+    expect(info().step?.id).toBe("phase-track");
+    const rowansLands = (): number => m.state().zones.shared.battlefield.filter((id) => m.state().objects[id].cardName === "Mountain").length;
+    expect(rowansLands()).toBe(0);
+    const seq = m.state().eventSeq;
+    session.room.resume();
+    expect(m.state().eventSeq).toBe(seq);
+    session.next("phase-track");
+    expect(rowansLands()).toBe(1);
+    // And its next card stops the game again, before Rowan's turn runs on.
+    expect(info().step?.id).toBe("rowan-creature");
+    expect(m.state().turn.number).toBe(2);
+  });
+
+  it("offers a retry only once there's something to undo, and rewinds to the chapter's start", () => {
+    const opened = openLesson("learn-commander");
+    const { session, info } = opened;
+    const m = coachedMoves(opened);
+    m.pastTheTable();
+    m.land();
+    expect(info().step?.id).toBe("cast-rats");
+    expect(info().canRetry).toBe(true);
+    const before = session.room;
+    session.retry();
+
+    expect(session.room).not.toBe(before);
+    expect(session.room.seatOf(connection)).toBe(ALICE);
+    expect(session.room.frameSeq).toBeGreaterThan(before.frameSeq);
+    expect(info()).toMatchObject({ chapter: "mana", step: { id: "first-land" }, canRetry: false });
+    expect(info().goals.every((g) => !g.done)).toBe(true);
+    expect(m.state().zones.shared.battlefield.some((id) => m.state().objects[id].cardName === "Swamp")).toBe(false);
+
+    // And the chapter plays on from there as it would have.
+    m.land();
+    m.cast("Muck Rats");
+    expect(info().step?.id).toBe("tapped");
+  });
+});
+
+describe("a tutorial room", () => {
   it("tours the board: commander damage and tax on the board, Next cards, and a flashback cast from the graveyard", () => {
     const { session, info } = openLesson("board-tour");
     const s = session.room.game.state;
@@ -223,41 +456,6 @@ describe("a tutorial room", () => {
     nextUntil("done");
     session.next("done");
     expect(info()).toMatchObject({ complete: true, step: null });
-  });
-
-  it("rewinds a chapter gone wrong to its start", () => {
-    const { session, info, passUntil } = openLesson("basics-proof");
-    session.next("welcome");
-    session.room.dispatch(connection, {
-      type: "play-land",
-      player: ALICE,
-      card: idNamed(session.room.game.state, "Forest", "hand"),
-    });
-    expect(info().step?.id).toBe("cast-elves");
-    const start = session.room.game.snapshot();
-
-    // Wrong: pass without casting the Elves. Rowan's turn comes and goes.
-    passUntil((s) => s.turn.number === 3);
-    expect(info().step?.id).toBe("cast-elves");
-    const before = session.room;
-    session.retry();
-
-    expect(session.room).not.toBe(before);
-    expect(session.room.seatOf(connection)).toBe(ALICE);
-    expect(session.room.frameSeq).toBeGreaterThan(before.frameSeq);
-    const now = session.room.game.state;
-    expect(now.turn).toEqual(start.turn);
-    expect(now.zones).toEqual(start.zones);
-    expect(now.players).toEqual(start.players);
-    expect(now.eventLog.length).toBe(start.eventLog.length);
-    expect(info()).toMatchObject({ chapter: "creature", step: { id: "cast-elves" } });
-    expect(info().goals.every((g) => !g.done)).toBe(true);
-
-    // And the chapter plays on from there as it would have.
-    const elves = idNamed(now, "Llanowar Elves", "hand");
-    session.room.dispatch(connection, { type: "cast-spell", player: ALICE, card: elves, targets: [] });
-    passUntil((s) => s.awaiting?.kind === "blockers");
-    expect(info().step?.id).toBe("block");
   });
 });
 
@@ -317,14 +515,14 @@ describe("a tutorial over the wire", () => {
     send({ type: "tutorial-create", lesson: "no-such-lesson", hostToken: "h" });
     const m = await next();
     expect(m.type === "error" && m.message).toMatch(/no lesson "no-such-lesson"/);
-    send({ type: "tutorial-create", lesson: { id: "basics-proof" }, hostToken: "h" });
+    send({ type: "tutorial-create", lesson: { id: "learn-commander" }, hostToken: "h" });
     const n = await next();
     expect(n.type).toBe("error");
   });
 
   it("opens a lesson by id on a server without --builder, and moves on with Next", async () => {
     const { next, send } = await connect();
-    send({ type: "tutorial-create", lesson: "basics-proof", hostToken: "h" });
+    send({ type: "tutorial-create", lesson: "learn-commander", hostToken: "h" });
     const created = await next();
     if (created.type !== "room-created") throw new Error(`got ${created.type}`);
     expect(created.seat).toBe(ALICE);
@@ -335,28 +533,28 @@ describe("a tutorial over the wire", () => {
     const first = await nextState(next);
     expect(first.builder).toBeUndefined();
     expect(first.tutorial?.step).toMatchObject({ id: "welcome", advance: "next" });
-    expect(first.actions.some((a) => a.kind === "play-land")).toBe(true);
+    // A card being read leaves nothing to do.
+    expect(first.actions).toEqual([]);
     // No library card is visible, Rowan's or alice's: the lesson says
     // where it stands, never what its board holds.
     expect(Object.values(first.view.objects).filter((o) => (o as { zone?: string }).zone === "library")).toEqual([]);
-    expect(JSON.stringify(first.tutorial)).not.toMatch(/library|Elvish Mystic/);
+    expect(JSON.stringify(first.tutorial)).not.toMatch(/library|Dwarven Trader/);
 
     send({ type: "tutorial-next", roomId, step: "welcome" });
     const second = await nextState(next);
     expect(second.seq).toBeGreaterThan(first.seq);
-    expect(second.tutorial?.step?.id).toBe("play-land");
+    expect(second.tutorial?.step?.id).toBe("life");
 
     send({ type: "tutorial-retry", roomId });
     const rewound = await nextState(next);
     expect(rewound.seq).toBeGreaterThan(second.seq);
-    // The chapter under way is "land", which began at the Next.
-    expect(rewound.tutorial).toMatchObject({ chapter: "land", step: { id: "play-land" } });
+    expect(rewound.tutorial).toMatchObject({ chapter: "table", step: { id: "welcome" } });
   });
 
   it("sends a client that keeps the event log the whole of it again after a retry", async () => {
     const { next, send } = await connect();
     send({ type: "event-deltas" });
-    send({ type: "tutorial-create", lesson: "basics-proof", hostToken: "h" });
+    send({ type: "tutorial-create", lesson: "learn-commander", hostToken: "h" });
     const created = await next();
     if (created.type !== "room-created") throw new Error(`got ${created.type}`);
     const roomId = created.roomId;
@@ -365,16 +563,22 @@ describe("a tutorial over the wire", () => {
     send({ type: "claim-seat", roomId, seat: ALICE, clientToken: "t" });
     const first = await nextState(next);
     expect(first.eventsFrom).toBe(0);
-    send({ type: "tutorial-next", roomId, step: "welcome" });
-    const second = await nextState(next);
-    expect(second.eventsFrom).toBe(first.view.events.length);
+    // On through the table's cards to the land.
+    let sent = first.view.events.length;
+    let second = first;
+    for (const step of ["welcome", "life", "hand", "read-a-card", "command-zone", "library"]) {
+      send({ type: "tutorial-next", roomId, step });
+      second = await nextState(next);
+      expect(second.eventsFrom).toBe(sent);
+      sent += second.view.events.length;
+    }
 
     // The land goes down: only its events come.
     const land = second.actions.find((a) => a.kind === "play-land");
     if (land?.kind !== "play-land") throw new Error("no land to play");
     send({ type: "dispatch", roomId, action: { type: "play-land", player: ALICE, card: land.card } });
     const played = await nextState(next);
-    expect(played.eventsFrom).toBe(first.view.events.length + second.view.events.length);
+    expect(played.eventsFrom).toBe(sent);
     expect(played.view.events.some((e) => e.type === "land-played")).toBe(true);
 
     // Back to the chapter's start: a new room under the code, its log (no

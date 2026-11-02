@@ -17,6 +17,8 @@
  *   banner…: the client's anchor contract).
  * - `card:<Card Name>` — the tile of the card with that name: the viewer's
  *   own first (hand, battlefield, command zone), then anyone's.
+ * - `battlefield:<Card Name>` — that card on the viewer's battlefield, for a
+ *   card by the name of one still in their hand, which `card:` would find first.
  * - `player:<seat>` — that player's panel (`data-player-id`); `player:me` is
  *   the viewer's own, `player:opponent` the first other seat.
  * - `step:<Step>` — that step's pip on the phase track (`precombat-main`,
@@ -42,6 +44,18 @@ export interface TutorialCoachStep {
    * to mark every one of `TutorialInfo.goals` done, then moves on by itself.
    */
   readonly advance: "next" | "goal";
+  /** Keep the hand tray raised while this card is up: it's about a hand card. */
+  readonly showHand?: boolean;
+}
+
+/** What a lesson leaves open that the seat's legal actions can't say. */
+export interface TutorialAllows {
+  /** The Pass Turn button. */
+  readonly passTurn: boolean;
+  /** The Auto-pass button. */
+  readonly autoPass: boolean;
+  /** How few attackers or blockers a declaration may have. */
+  readonly declareAtLeast: number;
 }
 
 /** Something the player is asked to do on the current coach card. */
@@ -74,6 +88,7 @@ export interface TutorialInfo {
   readonly goals: readonly TutorialGoal[];
   /** `tutorial-retry` would rewind to this chapter's start. */
   readonly canRetry: boolean;
+  readonly allows: TutorialAllows;
   /** Every chapter is done. The game itself may play on. */
   readonly complete: boolean;
 }

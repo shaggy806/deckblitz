@@ -701,7 +701,7 @@ describe("the caps on opening rooms (in-process)", () => {
     const created = await c.next();
     if (created.type !== "room-created") throw new Error(`got ${created.type}`);
     const roomId = created.roomId;
-    c.ws.send(JSON.stringify({ type: "tutorial-create", lesson: "basics-proof" }));
+    c.ws.send(JSON.stringify({ type: "tutorial-create", lesson: "learn-commander" }));
     expect((await c.next()).type).toBe("room-created");
     c.ws.send(JSON.stringify({ type: "create-room" }));
     expect(await c.next()).toEqual({
@@ -746,7 +746,7 @@ describe("the caps on opening rooms (in-process)", () => {
     c.ws.send(JSON.stringify({ type: "create-room" }));
     const created = await c.next();
     if (created.type !== "room-created") throw new Error(`got ${created.type}`);
-    c.ws.send(JSON.stringify({ type: "tutorial-create", lesson: "basics-proof" }));
+    c.ws.send(JSON.stringify({ type: "tutorial-create", lesson: "learn-commander" }));
     expect((await c.next()).type).toBe("room-created");
     c.ws.send(JSON.stringify({ type: "create-room" }));
     expect(await c.next()).toEqual({
