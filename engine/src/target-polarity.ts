@@ -994,6 +994,12 @@ export function auraPolarity(def: CardDefinition): Polarity {
     }
     if (ability.protection !== undefined || ability.cantBeSacrificed === true) help = true;
     if (ability.doesntUntap === true || ability.cantAttackController === true) harm = true;
+    // A cost to attack or block with it (Brainwash) hurts; one on blocking it
+    // (Awesome Presence) is evasion.
+    if (ability.combatTax !== undefined) {
+      if (ability.combatTax.on.includes("be-blocked")) help = true;
+      else harm = true;
+    }
     if (ability.prohibits !== undefined) harm = true;
   }
   // Nothing in its statics: what its own "enchanted creature" triggers do to

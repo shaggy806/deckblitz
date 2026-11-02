@@ -1999,6 +1999,10 @@ export function parseSentence(sentence, ctx) {
   if (/^this turn, creatures can't attack unless their controller pays \{X\} for each attacking creature they control\.$/i.test(s)) {
     return { kind: "player-effect", duration: "end-of-turn", attackTax: { generic: "x", covers: "all" } };
   }
+  // Its block twin (War Cadence, rule 509.1d).
+  if (/^this turn, creatures can't block unless their controller pays \{X\} for each blocking creature they control\.$/i.test(s)) {
+    return { kind: "player-effect", duration: "end-of-turn", blockTax: { generic: "x" } };
+  }
   // An `unless`'s life by the target's toughness (Essence Vortex): its "equal
   // to" is the option's amount, which the amount guard below would refuse.
   if (/^destroy target creature unless its controller pays life equal to its toughness\.$/i.test(s)) {
@@ -9837,6 +9841,42 @@ function parseStatic(line, text) {
     if (covers !== null && generic !== null) {
       return { affects: { scope: "self" }, attackTax: { generic, ...(covers === "you" ? {} : { covers }) }, text };
     }
+  }
+  // A cost on a creature to attack or block (rules 508.1h, 509.1d, `combatTax`):
+  // "~ can't attack unless you pay {1} for each +1/+1 counter on it" (Phyrexian
+  // Marauder), "Enchanted creature can't attack or block unless its controller
+  // pays {3}" (Brainwash, Oppressive Rays), "… {1} for each card in your hand"
+  // (Cowed by Wisdom).
+  if ((m = /^(~|Enchanted creature|Equipped creature) can't (attack|block|attack or block) unless (you pay|its controller pays) \{(\d+)\}(?: for each (\+1\/\+1 counter on it|card in your hand))?\.$/.exec(line))) {
+    if ((m[1] === "~") === (m[3] === "you pay") && (m[5] !== "card in your hand" || m[4] === "1")) {
+      const on = m[2] === "attack or block" ? ["attack", "block"] : [m[2]];
+      const amount =
+        m[5] === "card in your hand"
+          ? { generic: "cards-in-your-hand" }
+          : { generic: Number(m[4]), ...(m[5] === undefined ? {} : { perCounter: "+1/+1" }) };
+      return { affects: { scope: m[1] === "~" ? "self" : "attached" }, combatTax: { on, ...amount }, text };
+    }
+  }
+  // "~ can't block creatures with power 3 or greater unless you pay {1}" (Hipparion).
+  if ((m = /^~ can't block creatures with power (\d+) or greater unless you pay \{(\d+)\}\.$/.exec(line))) {
+    return {
+      affects: { scope: "self" },
+      combatTax: { on: ["block"], generic: Number(m[2]), attacker: { power: { op: "gte", n: Number(m[1]) } } },
+      text,
+    };
+  }
+  // "Enchanted creature can't be blocked unless defending player pays {3} for
+  // each creature they control that's blocking it" (Awesome Presence).
+  if ((m = /^Enchanted creature can't be blocked unless defending player pays \{(\d+)\} for each creature they control that's blocking it\.$/.exec(line))) {
+    return { affects: { scope: "attached" }, combatTax: { on: ["be-blocked"], generic: Number(m[1]) }, text };
+  }
+  // "… unless its controller pays {X}, where X is the number of counters on that creature" (Nils).
+  if (/^Each creature with one or more counters on it can't attack you or planeswalkers you control unless its controller pays \{X\}, where X is the number of counters on that creature\.$/.test(line)) {
+    return {
+      affects: { scope: "all-creatures" },
+      combatTax: { on: ["attack"], generic: 1, perCounter: "any", covers: "you-and-planeswalkers" },
+      text,
+    };
   }
   // Restrictions asked of the defending (or attacking) player — rules 508.1c
   // and 509.1b: "~ can't attack unless defending player controls an Island".

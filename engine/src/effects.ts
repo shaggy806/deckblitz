@@ -4986,6 +4986,11 @@ export type EffectSpec =
         readonly life?: EffectAmount;
         readonly covers?: "you" | "you-and-planeswalkers" | "planeswalkers" | "all";
       };
+      /** "This turn, creatures can't block unless their controller pays {X}
+       * for each blocking creature they control" (War Cadence): a cost on
+       * every block by anyone (rule 509.1d). `generic` and `life` are read as
+       * this resolves (rule 611.2b), a creature. */
+      readonly blockTax?: { readonly generic?: EffectAmount; readonly life?: EffectAmount };
     }
   | {
       /**
@@ -14522,6 +14527,14 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
                 generic: spec.attackTax.generic === undefined ? 0 : amountValue(spec.attackTax.generic, ctx),
                 life: spec.attackTax.life === undefined ? 0 : amountValue(spec.attackTax.life, ctx),
                 covers: spec.attackTax.covers ?? "you",
+              },
+            }
+          : {}),
+        ...(spec.blockTax !== undefined
+          ? {
+              blockTax: {
+                generic: spec.blockTax.generic === undefined ? 0 : amountValue(spec.blockTax.generic, ctx),
+                life: spec.blockTax.life === undefined ? 0 : amountValue(spec.blockTax.life, ctx),
               },
             }
           : {}),

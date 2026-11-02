@@ -58,6 +58,8 @@ import {
   needsDamageAssignmentChoice,
 } from "./combat/damage.js";
 import { bandMatesOf, blockedAttackersOf } from "./combat/banding.js";
+import { blockTaxTotal } from "./combat/blocking.js";
+import { attackCovers, blockTaxRates, creatureAttackTax } from "./combat/tax.js";
 import { ableInCompany, attackCompanyOf } from "./combat/company.js";
 import {
   creatureDef,
@@ -1729,6 +1731,13 @@ export class Game {
         return this.canPayLife(player, life + (payment?.life ?? 0))
           ? null
           : `${player} can't pay the ${life} life it costs to attack`;
+      },
+      whyCannotPayBlockTax: (player, { generic, life }) => {
+        const payment = generic === 0 ? null : this.payMana(player, parseManaCost(`{${generic}}`));
+        if (generic > 0 && payment === null) return `${player} can't pay the {${generic}} it costs to block`;
+        return life + (payment?.life ?? 0) === 0 || this.canPayLife(player, life + (payment?.life ?? 0))
+          ? null
+          : `${player} can't pay the ${life} life it costs to block`;
       },
     };
     this.decisionHost = {
@@ -6814,16 +6823,9 @@ export class Game {
    * only what says so; a battle is neither. */
   private attackTaxOn(defender: PlayerId | ObjectId): { generic: number; life: number } {
     const isPlayer = this.state.players[defender as PlayerId] !== undefined;
-    const object = isPlayer ? undefined : this.state.objects[defender as ObjectId];
-    const guarded = isPlayer ? (defender as PlayerId) : object?.controller;
-    const isWalker =
-      object !== undefined && computeCharacteristics(this.state, this.registry, object.id).types.includes("planeswalker");
-    const covered = (covers: "you" | "you-and-planeswalkers" | "planeswalkers" | "all", owner: PlayerId): boolean => {
-      if (covers === "all") return true;
-      if (owner !== guarded) return false;
-      if (covers === "you") return isPlayer;
-      return covers === "planeswalkers" ? isWalker : isPlayer || isWalker;
-    };
+    const guarded = isPlayer ? (defender as PlayerId) : this.state.objects[defender as ObjectId]?.controller;
+    const covered = (covers: "you" | "you-and-planeswalkers" | "planeswalkers" | "all", owner: PlayerId): boolean =>
+      attackCovers(this.state, this.registry, covers, owner, defender);
     let generic = 0;
     let life = 0;
     if (guarded !== undefined) {
@@ -6844,11 +6846,15 @@ export class Game {
   }
 
   /** What `declarations` cost to attack in all (rule 508.1h): each creature's
-   * tax for the defender it attacks, a token stack's per token. */
+   * tax for the defender it attacks and its own (`creatureAttackTax`), a token
+   * stack's per token. */
   private attackTaxTotal(declarations: readonly AttackerDeclaration[]): { generic: number; life: number } {
     const total = { generic: 0, life: 0 };
     for (const { attacker, defender, count } of declarations) {
-      const { generic, life } = this.attackTaxOn(defender);
+      const on = this.attackTaxOn(defender);
+      const own = creatureAttackTax(this.state, this.registry, attacker, defender);
+      const generic = on.generic + own.generic;
+      const life = on.life + own.life;
       if (generic === 0 && life === 0) continue;
       const creatures = count ?? this.state.objects[attacker]?.stackCount ?? 1;
       total.generic += generic * creatures;
@@ -9918,6 +9924,16 @@ export class Game {
   ): void {
     const why = this.whyCannotDeclareBlockers(player, blocks);
     if (why !== null) throw new Error(why);
+    // What blocking costs (Hipparion, War Cadence), locked in now (rule
+    // 509.1d), while a stack is still one object, and paid below.
+    const taxRates = blockTaxRates(
+      this.state,
+      this.registry,
+      [...new Set(blocks.map((b) => b.blocker))],
+      currentAttackers(this.state),
+    );
+    const blockTax =
+      taxRates === null ? null : blockTaxTotal(blocks, taxRates, (id) => this.state.objects[id]?.stackCount ?? 1);
 
     // Every block is made before any is announced, as with attackers: the
     // declaration is one action (rule 509.1) and its triggers see all of it.
@@ -9966,6 +9982,12 @@ export class Game {
         }
       }
     }
+    if (blockTax !== null && blockTax.generic > 0) {
+      const payment = this.payMana(player, parseManaCost(`{${blockTax.generic}}`));
+      if (payment === null) throw new Error(`${player} can't pay the {${blockTax.generic}} it costs to block`);
+      this.executePayment(player, payment);
+    }
+    if (blockTax !== null && blockTax.life > 0) this.changeLife(player, -blockTax.life);
     for (const { blocker, attacker, alsoBlocked } of blockedNow) {
       this.emit({ type: "blocker-declared", blocker, attacker, ...(alsoBlocked === true ? { alsoBlocked } : {}) });
     }

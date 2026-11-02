@@ -2738,11 +2738,23 @@ your planeswalkers, or both), `generic` as a live `CountSpec`, `life`, and the
 every attack). The offer's rates are per defender, a planeswalker's included,
 with `lifePerCreature` and `lifeBudget` beside the mana. Keys: `cost:attack-tax`,
 `cost:attack-tax-amount`, `cost:attack-tax-life`, `cost:attack-tax-planeswalkers`.
-Still open beside it: a Phyrexian tax (Norn's Annex), a rate by attacker
-(Elephant Grass, Nils, `cost:attack-tax-per-counters`), a creature's own "can't
-attack or block unless you pay" (`cost:attack-block-cost-self`,
-`static:attack-cost-for-creature`) and the block tax Archangel of Tithes also
-needs (`static:block-tax`).
+Still open beside it: a Phyrexian tax (Norn's Annex).
+
+### A cost on a particular creature to attack or block — built 2026-11-01
+
+The need-keys group `cost:attack-tax-per-counters` + `static:attack-cost-for-creature`
++ `static:block-tax`, with `cost:attack-block-cost-self` riding along:
+`StaticAbility.combatTax` (`combat/tax.ts`) on the creatures a static reaches, on
+attacking, blocking or being blocked, fixed, by a `CountSpec` or per counter on
+the taxed creature, narrowed to defenders (`covers`) or attackers (`attacker`);
+the `player-effect` effect's `blockTax` (War Cadence). The `declare-attackers`
+offer's `attackTax.perAttacker` and the `declare-blockers` offer's `blockTax`
+carry the rates; a requirement never obliges paying. Proving cards: Brainwash,
+Phyrexian Marauder, Nils, Cowed by Wisdom, Qal Sisma Behemoth, Hipparion, Awesome
+Presence, War Cadence, Archangel of Tithes. Still open: a cost that isn't mana or
+life (Hollow Warrior's tap, a `declare-attackers` choice), and the client's running
+cost line doesn't add `perAttacker` or show a block's yet (the engine refuses what
+can't be paid).
 
 ### Statics acting on a player — built 2026-11-01
 

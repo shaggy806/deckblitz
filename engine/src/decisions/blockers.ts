@@ -19,10 +19,13 @@ import type { Action, BlockerDeclaration, LegalAction } from "../actions.js";
 import {
   blockCompanyViolations,
   blockingViolations,
+  blockTaxTotal,
   obeyingLure,
   withinBlockCompany,
+  withinBlockTax,
   withinSingleBlockers,
 } from "../combat/blocking.js";
+import { blockTaxRates } from "../combat/tax.js";
 import { ableInCompany, blockCompanyOf } from "../combat/company.js";
 import {
   blockedByAtMostOne,
@@ -132,6 +135,9 @@ function blockersOffer(
     const n = ctx.state.objects[id]?.stackCount ?? 1;
     if (n > 1) attackerTokens[id] = n;
   }
+  // What blocking costs (rule 509.1d). Blocking taps nothing, so the budget is
+  // everything the player's sources make.
+  const rates = blockTaxRates(ctx.state, ctx.registry, eligible.map((e) => e.blocker), attacking);
   return {
     kind: "declare-blockers",
     eligible,
@@ -144,6 +150,9 @@ function blockersOffer(
     ...(blockRequirements.length > 0 ? { blockRequirements } : {}),
     ...(Object.keys(attackerTokens).length > 0 ? { attackerTokens } : {}),
     ...(Object.keys(blockCompany).length > 0 ? { blockCompany } : {}),
+    ...(rates !== null
+      ? { blockTax: { ...rates, budget: ctx.attackTaxBudget(player, []), lifeBudget: ctx.attackTaxLifeBudget(player) } }
+      : {}),
   };
 }
 
@@ -210,7 +219,14 @@ export const blockers = defineDecision({
     const violation = blockingViolations(action.blocks, offer)[0];
     if (violation === undefined) {
       const short = blockCompanyViolations(action.blocks, offer)[0];
-      if (short === undefined) return null;
+      if (short === undefined) {
+        return offer.blockTax === undefined
+          ? null
+          : ctx.whyCannotPayBlockTax(
+              player,
+              blockTaxTotal(action.blocks, offer.blockTax, (id) => ctx.state.objects[id]?.stackCount ?? 1),
+            );
+      }
       return short.others === 1
         ? `${name(short.blocker)} can't block alone`
         : `${name(short.blocker)} can't block unless at least ${short.others} other creatures block`;
@@ -235,14 +251,19 @@ export const blockers = defineDecision({
     host.applyBlockerDeclarations(action.player, action.blocks);
   },
 
-  // A bot's or a test's blocks, cut to what restrictions on company allow (a
-  // person is refused instead: the client's Confirm goes through `apply`).
+  // A bot's or a test's blocks, cut to what restrictions on company and block
+  // taxes allow (a person is refused instead: the client's Confirm goes through
+  // `apply`).
   ask: (controller, view, _awaiting, player): Action => {
     const blocks = controller.declareBlockers(view);
     const offer = view
       .legalActions()
       .find((o): o is Extract<LegalAction, { kind: "declare-blockers" }> => o.kind === "declare-blockers");
-    return { type: "declare-blockers", player, blocks: offer === undefined ? blocks : withinBlockCompany(blocks, offer) };
+    return {
+      type: "declare-blockers",
+      player,
+      blocks: offer === undefined ? blocks : withinBlockTax(withinBlockCompany(blocks, offer), offer),
+    };
   },
 
   // candidates: deliberately absent — like `attackers`, combat is never
@@ -283,6 +304,10 @@ export const blockers = defineDecision({
     );
     // And one that can't be blocked by more than one keeps its first.
     blocks = withinSingleBlockers(blocks, legal);
-    return { type: "declare-blockers", player, blocks: withinBlockCompany(obeyingLure(blocks, legal), legal) };
+    return {
+      type: "declare-blockers",
+      player,
+      blocks: withinBlockTax(withinBlockCompany(obeyingLure(blocks, legal), legal), legal),
+    };
   },
 });

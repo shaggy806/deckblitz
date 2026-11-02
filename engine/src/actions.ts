@@ -175,6 +175,26 @@ export interface AttackerDeclaration {
   readonly band?: number;
 }
 
+/** A cost to attack or to block, in generic mana and in life (rules 508.1h,
+ * 509.1d). */
+export interface CombatCost {
+  readonly generic: number;
+  readonly life: number;
+}
+
+/** One tax on one creature blocking: paid once for it, however many attackers
+ * it blocks, if it blocks any of `attackers` (absent: any at all). */
+export interface BlockerTax extends CombatCost {
+  readonly attackers?: readonly ObjectId[];
+}
+
+/** What blocking costs: `onBlocker`, each creature's own taxes; `onAttacker`,
+ * what each creature blocking that attacker costs. */
+export interface BlockTaxRates {
+  readonly onBlocker?: Readonly<Record<ObjectId, readonly BlockerTax[]>>;
+  readonly onAttacker?: Readonly<Record<ObjectId, CombatCost>>;
+}
+
 export interface BlockerDeclaration {
   readonly blocker: ObjectId;
   readonly attacker: ObjectId;
@@ -1480,11 +1500,14 @@ export type LegalAction =
        * total, or 0 when they can't pay life at all (rule 119.4b). Paying all
        * of it is legal (119.4); `withinAttackTax` stops one short.
        * `tokens` is each compacted token stack's size among `eligible`, since
-       * an entry without a `count` sends all of it. Absent when no defender
-       * is taxed.
+       * an entry without a `count` sends all of it. `perAttacker` is what a
+       * creature costs on its own, on top of its defender's rate (Brainwash,
+       * Nils — `StaticAbility.combatTax`): per attacker, per defender, only
+       * the pairs that cost something. Absent when nothing is taxed.
        */
       readonly attackTax?: {
         readonly perCreature: Readonly<Record<string, number>>;
+        readonly perAttacker?: Readonly<Record<ObjectId, Readonly<Record<string, CombatCost>>>>;
         readonly budget: number;
         readonly lifePerCreature?: Readonly<Record<string, number>>;
         readonly lifeBudget?: number;
@@ -1560,6 +1583,13 @@ export type LegalAction =
        * `blockCompanyViolations` checking them. `eligible` leaves out a creature
        * with no group it could block in. Absent when no creature has one. */
       readonly blockCompany?: Readonly<Record<ObjectId, number>>;
+      /** What blocking costs (rule 509.1d — Hipparion, Awesome Presence, War
+       * Cadence), `blockTaxTotal` adding it up for a declaration: the rates,
+       * with `budget` the generic mana this player can surely pay and
+       * `lifeBudget` the life they can (rule 119.4b). A creature that would
+       * cost something to block isn't obliged to by a requirement (509.1c).
+       * Absent when no block is taxed. */
+      readonly blockTax?: BlockTaxRates & { readonly budget: number; readonly lifeBudget: number };
       /** Attackers that must be blocked (Lure — rule 509.1c): as many of this
        * defender's creatures as can be must block one of these. With no menace
        * among them, that's every creature able to block one; one with menace

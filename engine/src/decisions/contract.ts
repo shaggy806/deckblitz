@@ -34,6 +34,7 @@ import type {
   AttackerDeclaration,
   BlockerDeclaration,
   ChosenTargets,
+  CombatCost,
   LegalAction,
 } from "../actions.js";
 import type { CardRegistry } from "../cards.js";
@@ -236,6 +237,9 @@ export interface DecisionReadCtx {
   /** How much attack tax `player` can surely pay without tapping any of
    * `attackers` — see `AttackOffer.attackTax.budget`. Runs the mana solver. */
   readonly attackTaxBudget: (player: PlayerId, attackers: readonly ObjectId[]) => number;
+  /** Why `player` can't pay `cost` to block (rule 509.1d–f), or `null` when
+   * they can or it's free. */
+  readonly whyCannotPayBlockTax: (player: PlayerId, cost: CombatCost) => string | null;
   /** Why `player` can't pay what `declarations` cost to attack (rule
    * 508.1h–j), or `null` when they can or it's free. */
   readonly whyCannotPayAttackTax: (

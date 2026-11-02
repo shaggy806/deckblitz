@@ -53,7 +53,7 @@ export function withRequiredAttackers(
     // A defender that costs nothing to attack first: the requirement never
     // obliges paying a cost (rule 508.1d).
     const options = offer.defendersFor[attacker] ?? [];
-    const defender = options.find((d) => attackIsFree(offer, d)) ?? options[0];
+    const defender = options.find((d) => attackIsFree(offer, attacker, d)) ?? options[0];
     if (defender !== undefined) out.push({ attacker, defender });
   }
   return withinAttackCompany(withinAttackTax(out, offer), offer);
@@ -85,7 +85,7 @@ function attackUnits(offer: AttackOffer): AttackUnit[] {
     tokens: company?.tokens[id] ?? 1,
     ...(company?.limits[id] !== undefined ? { company: company.limits[id] } : {}),
     required: company?.required.includes(id) === true,
-    free: (offer.defendersFor[id] ?? []).some((d) => taxOn(offer, d) === 0),
+    free: (offer.defendersFor[id] ?? []).some((d) => taxOn(offer, id, d) === 0),
   }));
 }
 
@@ -181,7 +181,7 @@ export function withinAttackCompany(
     }
   };
   const freeDefender = (u: AttackUnit): PlayerId | ObjectId | undefined =>
-    (offer.defendersFor[u.id] ?? []).find((d) => taxOn(offer, d) === 0);
+    (offer.defendersFor[u.id] ?? []).find((d) => taxOn(offer, u.id, d) === 0);
   // Those that must attack, first; then what was declared; then whoever can.
   for (const u of fitting.filter((v) => v.required)) {
     if (named.has(u.id)) {
@@ -199,19 +199,21 @@ export function withinAttackCompany(
   return out;
 }
 
-/** The generic mana one creature attacking `defender` costs under `offer`'s attack tax. */
-function taxOn(offer: AttackOffer, defender: string): number {
-  return offer.attackTax?.perCreature[defender] ?? 0;
+/** The generic mana `attacker` attacking `defender` costs under `offer`'s attack tax. */
+function taxOn(offer: AttackOffer, attacker: ObjectId, defender: string): number {
+  const tax = offer.attackTax;
+  return (tax?.perCreature[defender] ?? 0) + (tax?.perAttacker?.[attacker]?.[defender]?.generic ?? 0);
 }
 
-/** The life one creature attacking `defender` costs under `offer`'s attack tax. */
-function lifeTaxOn(offer: AttackOffer, defender: string): number {
-  return offer.attackTax?.lifePerCreature?.[defender] ?? 0;
+/** The life `attacker` attacking `defender` costs under `offer`'s attack tax. */
+function lifeTaxOn(offer: AttackOffer, attacker: ObjectId, defender: string): number {
+  const tax = offer.attackTax;
+  return (tax?.lifePerCreature?.[defender] ?? 0) + (tax?.perAttacker?.[attacker]?.[defender]?.life ?? 0);
 }
 
-/** Whether attacking `defender` costs nothing at all under `offer`. */
-function attackIsFree(offer: AttackOffer, defender: string): boolean {
-  return taxOn(offer, defender) === 0 && lifeTaxOn(offer, defender) === 0;
+/** Whether `attacker` attacking `defender` costs nothing at all under `offer`. */
+function attackIsFree(offer: AttackOffer, attacker: ObjectId, defender: string): boolean {
+  return taxOn(offer, attacker, defender) === 0 && lifeTaxOn(offer, attacker, defender) === 0;
 }
 
 /**
@@ -231,8 +233,8 @@ export function withinAttackTax(
   const tax = offer.attackTax;
   if (tax === undefined) return [...declared];
   const tokensOf = (d: AttackerDeclaration): number => d.count ?? tax.tokens?.[d.attacker] ?? 1;
-  const costOf = (d: AttackerDeclaration): number => taxOn(offer, d.defender) * tokensOf(d);
-  const lifeOf = (d: AttackerDeclaration): number => lifeTaxOn(offer, d.defender) * tokensOf(d);
+  const costOf = (d: AttackerDeclaration): number => taxOn(offer, d.attacker, d.defender) * tokensOf(d);
+  const lifeOf = (d: AttackerDeclaration): number => lifeTaxOn(offer, d.attacker, d.defender) * tokensOf(d);
   const lifeLimit = Math.max(0, (tax.lifeBudget ?? 0) - 1);
   const out = [...declared];
   let total = out.reduce((n, d) => n + costOf(d), 0);
@@ -248,7 +250,7 @@ export function withinAttackTax(
       total -= costOf(d);
       life -= lifeOf(d);
       const free = required
-        ? (offer.defendersFor[d.attacker] ?? []).find((x) => attackIsFree(offer, x))
+        ? (offer.defendersFor[d.attacker] ?? []).find((x) => attackIsFree(offer, d.attacker, x))
         : undefined;
       if (free !== undefined) out[i] = { ...d, defender: free };
       else out.splice(i, 1);

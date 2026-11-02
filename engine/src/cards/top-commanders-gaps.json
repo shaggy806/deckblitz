@@ -1009,7 +1009,11 @@
   "effect:target-player-reveals-hand",
   "effect:choose-card-exiled-with-source",
   "effect:choose-card-from-hand-or-graveyard",
-  "trigger:tapped-for-mana-nonmana-trigger"
+  "trigger:tapped-for-mana-nonmana-trigger",
+  "cost:attack-tax-per-counters",
+  "static:attack-cost-for-creature",
+  "static:block-tax",
+  "cost:attack-block-cost-self"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

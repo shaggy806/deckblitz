@@ -38,6 +38,7 @@ import {
   mustAttack,
   whyCannotAttack,
 } from "../combat/eligibility.js";
+import { creatureAttackTax, creatureAttackTaxes } from "../combat/tax.js";
 import { bandingAbilitiesOf, whyBandsInvalid } from "../combat/banding.js";
 import type { BandingAbilities } from "../combat/banding.js";
 import { declaredTokens, MAX_MATERIALIZED, whyCountsInvalid } from "../combat/stack-counts.js";
@@ -45,11 +46,13 @@ import type { ObjectId, PlayerId } from "../primitives.js";
 import { defineDecision } from "./define.js";
 import type { DecisionReadCtx } from "./contract.js";
 
-/** Whether attacking `defender` costs nothing at all (rule 508.1d: a creature
- * that must attack isn't obliged to pay to). */
-function attackIsFree(ctx: DecisionReadCtx, defender: PlayerId | ObjectId): boolean {
+/** Whether `attacker` attacking `defender` costs nothing at all (rule 508.1d:
+ * a creature that must attack isn't obliged to pay to). */
+function attackIsFree(ctx: DecisionReadCtx, attacker: ObjectId, defender: PlayerId | ObjectId): boolean {
   const { generic, life } = ctx.attackTaxOf(defender);
-  return generic === 0 && life === 0;
+  if (generic !== 0 || life !== 0) return false;
+  const own = creatureAttackTax(ctx.state, ctx.registry, attacker, defender);
+  return own.generic === 0 && own.life === 0;
 }
 
 function attackersOffer(ctx: DecisionReadCtx, player: PlayerId): AttackOffer {
@@ -85,8 +88,13 @@ function attackersOffer(ctx: DecisionReadCtx, player: PlayerId): AttackOffer {
     if (generic > 0) perCreature[d] = generic;
     if (life > 0) lifePerCreature[d] = life;
   }
-  const lifeTaxed = Object.keys(lifePerCreature).length > 0;
-  const taxed = lifeTaxed || Object.keys(perCreature).length > 0;
+  // What a creature costs on its own (Brainwash, Nils), on top of those.
+  const perAttacker = creatureAttackTaxes(ctx.state, ctx.registry, defendersFor);
+  const creatureTaxed = Object.keys(perAttacker).length > 0;
+  const lifeTaxed =
+    Object.keys(lifePerCreature).length > 0 ||
+    Object.values(perAttacker).some((rates) => Object.values(rates).some((cost) => cost.life > 0));
+  const taxed = lifeTaxed || creatureTaxed || Object.keys(perCreature).length > 0;
   // Who can lead a band (rule 702.22c): banding, or a "bands with other".
   const banding: Record<ObjectId, BandingAbilities> = {};
   for (const id of eligible) {
@@ -105,7 +113,7 @@ function attackersOffer(ctx: DecisionReadCtx, player: PlayerId): AttackOffer {
   const required = eligible.filter(
     (id) =>
       mustAttack(ctx.state, ctx.registry, id) &&
-      (defendersFor[id] ?? []).some((d) => attackIsFree(ctx, d)),
+      (defendersFor[id] ?? []).some((d) => attackIsFree(ctx, id, d)),
   );
   // Under a restriction keyed to the others, only those in every declaration
   // obeying the most requirements are simply "must attack" (508.1d): one that
@@ -116,7 +124,7 @@ function attackersOffer(ctx: DecisionReadCtx, player: PlayerId): AttackOffer {
         tokens: tokensOf(id),
         ...(limits[id] !== undefined ? { company: limits[id] } : {}),
         required: required.includes(id),
-        free: (defendersFor[id] ?? []).some((d) => attackIsFree(ctx, d)),
+        free: (defendersFor[id] ?? []).some((d) => attackIsFree(ctx, id, d)),
       }))
     : [];
   const most = mostRequirementsObeyed(units);
@@ -140,6 +148,7 @@ function attackersOffer(ctx: DecisionReadCtx, player: PlayerId): AttackOffer {
       ? {
           attackTax: {
             perCreature,
+            ...(creatureTaxed ? { perAttacker } : {}),
             budget: ctx.attackTaxBudget(player, eligible),
             ...(lifeTaxed ? { lifePerCreature, lifeBudget: ctx.attackTaxLifeBudget(player) } : {}),
             ...(Object.keys(tokens).length > 0 ? { tokens } : {}),
@@ -224,7 +233,7 @@ export const attackers = defineDecision({
         ctx.state.objects[id]?.controller === player &&
         mustAttack(ctx.state, ctx.registry, id) &&
         // Not one it could attack only by paying for it (rule 508.1d).
-        defendersForAttacker(ctx.state, ctx.registry, player, id).some((d) => attackIsFree(ctx, d)),
+        defendersForAttacker(ctx.state, ctx.registry, player, id).some((d) => attackIsFree(ctx, id, d)),
     );
     if (missing.length > 0) {
       return `${missing.map((id) => nameOf(ctx, id)).join(", ")} must attack if able`;

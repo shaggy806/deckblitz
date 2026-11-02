@@ -3998,8 +3998,23 @@ turns it on and off. For a while: the `player-effect` effect's `attackTax` (`gen
 as `EffectAmount`s, fixed as it resolves), with `covers: "all"` for "creatures can't attack
 unless …" with no "you" (War Tax: every attack by anyone, its controller's too). Not here yet:
 a Phyrexian tax (Norn's Annex's {W/P}, paying which needs a choice the declaration doesn't
-carry), a rate by attacker (Elephant Grass's nonblack, Nils's counters) and the same creature's
-own "can't attack unless you pay" (Qal Sisma Behemoth, `cost:attack-block-cost-self`).
+carry).
+
+`combatTax: { on, generic, life, perCounter, covers, attacker }` is the same cost on the creatures
+the static's `affects` reaches, where `attackTax` is on attacking a player whatever attacks:
+`on: ["attack"]`, `["block"]` or both is "this / enchanted creature can't attack or block unless
+its controller pays" (Qal Sisma Behemoth, Brainwash; rules 508.1h, 509.1d), and `["be-blocked"]`
+"can't be blocked unless defending player pays {3} for each creature they control that's blocking
+it" (Awesome Presence). A blocker pays once however many attackers it blocks. `generic` may be a
+`CountSpec` from this permanent's controller's side (Cowed by Wisdom's `"cards-in-your-hand"`);
+`perCounter` makes it per counter on the taxed creature, `"any"` or a kind (Nils, Phyrexian
+Marauder); `covers` narrows an attack to "you", as above (Nils); `attacker` narrows a block to the
+attackers matching a filter, "you" being this permanent's controller (Hipparion). A `condition`
+turns it on and off (Archangel of Tithes). No requirement obliges paying (508.1d, 509.1c: the
+offers' `mustAttack` and `lurePlan` leave a taxed creature out); bots and the fuzzer cut to the
+budget (`withinAttackTax`, `withinBlockTax`). For a turn: the `player-effect` effect's `blockTax`
+(War Cadence), every block by anyone. A cost that isn't mana or life (Hollow Warrior's tapping
+another creature) needs a choice the declaration doesn't carry, so isn't here.
 
 - `grantPt: [p, t]` — layer 7d P/T bonus.
 - `grantPtPerCount`, each affected permanent by its own: `relativeToAffected`

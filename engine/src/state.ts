@@ -4841,6 +4841,10 @@ export interface PlayerEffect {
     readonly life: number;
     readonly covers: "you" | "you-and-planeswalkers" | "planeswalkers" | "all";
   };
+  /** "This turn, creatures can't block unless their controller pays {X} for
+   * each blocking creature they control" (War Cadence): a cost on every
+   * block by anyone (rule 509.1d), read as the effect was created (611.2b). */
+  readonly blockTax?: { readonly generic: number; readonly life: number };
 }
 
 /**

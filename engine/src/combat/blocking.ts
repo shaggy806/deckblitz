@@ -34,7 +34,7 @@
  * made the shared version worse than the copy it replaced.
  */
 
-import type { BlockerDeclaration, LegalAction } from "../actions.js";
+import type { BlockerDeclaration, BlockTaxRates, CombatCost, LegalAction } from "../actions.js";
 import type { ObjectId } from "../primitives.js";
 
 /** The `declare-blockers` offer, which is all these checks need. */
@@ -106,8 +106,9 @@ export function lurePlan(offer: BlockOffer): LurePlan {
   const pairable: { blocker: ObjectId; weight: number; options: ObjectId[]; free: boolean }[] = [];
   for (const entry of offer.eligible) {
     const weight = entry.copies ?? 1;
-    const plain = entry.canBlock.filter((a) => must.has(a) && !menace.has(a));
-    const withMenace = entry.canBlock.filter((a) => must.has(a) && menace.has(a));
+    const free = entry.canBlock.filter((a) => blockIsFree(offer, entry.blocker, a));
+    const plain = free.filter((a) => must.has(a) && !menace.has(a));
+    const withMenace = free.filter((a) => must.has(a) && menace.has(a));
     if (plain.length > 0) {
       required += weight;
       assignment.set(entry.blocker, plain[0]);
@@ -370,11 +371,82 @@ export function requirementTargets(blocker: ObjectId, offer: BlockOffer): Object
   const named = reqs.some((r) => r.attacker === undefined)
     ? entry.canBlock
     : entry.canBlock.filter((a) => reqs.some((r) => r.attacker === a));
-  // Enough creatures able to block it, this one with them.
+  // Enough creatures able to block it, this one with them; a block that costs
+  // something is never obliged (rule 509.1c).
   return named.filter(
     (a) =>
-      offer.eligible.reduce((n, e) => n + (e.canBlock.includes(a) ? (e.copies ?? 1) : 0), 0) >= leastBlockers(offer, a),
+      blockIsFree(offer, blocker, a) &&
+      offer.eligible.reduce((n, e) => n + (e.canBlock.includes(a) && blockIsFree(offer, e.blocker, a) ? (e.copies ?? 1) : 0), 0) >=
+        leastBlockers(offer, a),
   );
+}
+
+/** Whether `blocker` blocking `attacker` costs nothing under `offer`'s block
+ * tax. A player is never obliged to pay to block, even to obey a requirement
+ * (rule 509.1c), so the plans below count only these. */
+export function blockIsFree(offer: BlockOffer, blocker: ObjectId, attacker: ObjectId): boolean {
+  const tax = offer.blockTax;
+  if (tax === undefined) return true;
+  if (tax.onAttacker?.[attacker] !== undefined) return false;
+  return !(tax.onBlocker?.[blocker] ?? []).some((t) => t.attackers === undefined || t.attackers.includes(attacker));
+}
+
+/**
+ * What `blocks` cost in all (rule 509.1d). A tax on an attacker is per
+ * creature blocking it. A tax on a blocker is per creature blocking: one
+ * named once for each of several attackers pays once, and a token stack's
+ * entries are that many creatures.
+ */
+export function blockTaxTotal(
+  blocks: readonly BlockerDeclaration[],
+  rates: BlockTaxRates,
+  copiesOf: (id: ObjectId) => number,
+): CombatCost {
+  let generic = 0;
+  let life = 0;
+  const pay = (cost: CombatCost, creatures: number): void => {
+    generic += cost.generic * creatures;
+    life += cost.life * creatures;
+  };
+  for (const b of blocks) {
+    const on = rates.onAttacker?.[b.attacker];
+    if (on !== undefined) pay(on, b.count ?? copiesOf(b.blocker));
+  }
+  for (const blocker of Object.keys(rates.onBlocker ?? {}) as ObjectId[]) {
+    const mine = blocks.filter((b) => b.blocker === blocker);
+    for (const tax of rates.onBlocker?.[blocker] ?? []) {
+      const paying = mine.filter((b) => tax.attackers === undefined || tax.attackers.includes(b.attacker));
+      if (paying.length === 0) continue;
+      const copies = copiesOf(blocker);
+      pay(tax, copies > 1 ? paying.reduce((n, b) => n + (b.count ?? copies), 0) : 1);
+    }
+  }
+  return { generic, life };
+}
+
+/**
+ * `blocks` cut down to what the block tax budget surely pays, in mana and in
+ * life, the life stopping short of the last point: taxed blocks go from the
+ * end until the rest fits, then whatever that leaves illegal (a menace
+ * attacker with a lone blocker). For a driver that doesn't weigh the cost
+ * itself: a bot, the fuzzer's random player. Unchanged without a tax, or when
+ * it fits, so it moves no fuzzer seed.
+ */
+export function withinBlockTax(blocks: readonly BlockerDeclaration[], offer: BlockOffer): BlockerDeclaration[] {
+  const tax = offer.blockTax;
+  if (tax === undefined) return [...blocks];
+  const copies = new Map(offer.eligible.map((e) => [e.blocker, e.copies ?? 1]));
+  const lifeLimit = Math.max(0, tax.lifeBudget - 1);
+  const fits = (list: readonly BlockerDeclaration[]): boolean => {
+    const cost = blockTaxTotal(list, tax, (id) => copies.get(id) ?? 1);
+    return cost.generic <= tax.budget && cost.life <= lifeLimit;
+  };
+  if (fits(blocks)) return [...blocks];
+  const out = [...blocks];
+  for (let i = out.length - 1; i >= 0 && !fits(out); i -= 1) {
+    if (!blockIsFree(offer, out[i].blocker, out[i].attacker)) out.splice(i, 1);
+  }
+  return withinBlockCompany(obeyingLure(out, offer), offer);
 }
 
 /**
@@ -401,7 +473,7 @@ export function ifAblePlan(offer: BlockOffer): LurePlan {
   // creatures between them (a stack counting as every token in it), no
   // entry in a group it isn't needed in. Bounded like the search.
   const ways = attackers.map((attacker) => {
-    const able = free.filter((e) => e.canBlock.includes(attacker));
+    const able = free.filter((e) => e.canBlock.includes(attacker) && blockIsFree(offer, e.blocker, attacker));
     const need = leastBlockers(offer, attacker);
     if (need === 1) return able.map((e) => [e.blocker]);
     const out: ObjectId[][] = [];

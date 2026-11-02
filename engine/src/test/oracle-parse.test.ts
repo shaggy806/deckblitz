@@ -6884,6 +6884,64 @@ describe("attack taxes", () => {
   });
 });
 
+describe("a cost on a creature to attack or block", () => {
+  const read = (type_line: string, oracle_text: string) => {
+    const card = parseFace({ name: "Test Tax", type_line, oracle_text }, { tokenFor: () => null });
+    return card.complete ? card.static[card.static.length - 1] : null;
+  };
+  const aura = (line: string) => read("Enchantment — Aura", `Enchant creature\n${line}`);
+  const own = (line: string) => read("Creature — Golem", line);
+
+  it("reads the creature's own, and an Aura's on its host", () => {
+    expect(own("This creature can't attack unless you pay {1} for each +1/+1 counter on it.")).toMatchObject({
+      affects: { scope: "self" },
+      combatTax: { on: ["attack"], generic: 1, perCounter: "+1/+1" },
+    });
+    expect(own("This creature can't attack or block unless you pay {2}.")).toMatchObject({
+      affects: { scope: "self" },
+      combatTax: { on: ["attack", "block"], generic: 2 },
+    });
+    expect(aura("Enchanted creature can't attack unless its controller pays {3}.")).toMatchObject({
+      affects: { scope: "attached" },
+      combatTax: { on: ["attack"], generic: 3 },
+    });
+    expect(aura("Enchanted creature can't attack or block unless its controller pays {1} for each card in your hand.")).toMatchObject({
+      combatTax: { on: ["attack", "block"], generic: "cards-in-your-hand" },
+    });
+    // "You pay" is a creature's own, "its controller pays" an Aura's; and only
+    // {1} for each card is a count this reads.
+    expect(aura("Enchanted creature can't attack unless you pay {3}.")).toBeNull();
+    expect(aura("Enchanted creature can't block unless its controller pays {2} for each card in your hand.")).toBeNull();
+  });
+
+  it("reads a block's by the attacker, and the attacker's own", () => {
+    expect(own("This creature can't block creatures with power 3 or greater unless you pay {1}.")).toMatchObject({
+      combatTax: { on: ["block"], generic: 1, attacker: { power: { op: "gte", n: 3 } } },
+    });
+    expect(aura("Enchanted creature can't be blocked unless defending player pays {3} for each creature they control that's blocking it.")).toMatchObject({
+      affects: { scope: "attached" },
+      combatTax: { on: ["be-blocked"], generic: 3 },
+    });
+  });
+
+  it("reads Nils's, per counter on the attacker", () => {
+    expect(
+      read(
+        "Enchantment",
+        "Each creature with one or more counters on it can't attack you or planeswalkers you control unless its controller pays {X}, where X is the number of counters on that creature.",
+      ),
+    ).toMatchObject({
+      affects: { scope: "all-creatures" },
+      combatTax: { on: ["attack"], generic: 1, perCounter: "any", covers: "you-and-planeswalkers" },
+    });
+  });
+
+  it("reads a block tax for the turn", () => {
+    const cadence = parseEffect("This turn, creatures can't block unless their controller pays {X} for each blocking creature they control.", ctx());
+    expect(cadence.effect).toEqual({ kind: "player-effect", duration: "end-of-turn", blockTax: { generic: "x" } });
+  });
+});
+
 describe("an unless's payments", () => {
   const read = (sentence: string, context = ctx()) => parseEffect(sentence, context).effect;
 

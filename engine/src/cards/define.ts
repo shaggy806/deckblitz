@@ -1673,6 +1673,16 @@ export interface GraveyardCastCosts {
  * 7b / 7d), and/or carries a `replacement` clause (rule 614 — applied by
  * `game.ts`, not by the layer fold).
  */
+/** See `StaticAbility.combatTax`. */
+export interface CombatTax {
+  readonly on: readonly ("attack" | "block" | "be-blocked")[];
+  readonly generic?: number | CountSpec;
+  readonly life?: number;
+  readonly perCounter?: string;
+  readonly covers?: "you" | "you-and-planeswalkers" | "planeswalkers";
+  readonly attacker?: CardFilter;
+}
+
 export interface StaticAbility {
   readonly affects: AffectSpec;
   /**
@@ -2809,6 +2819,33 @@ export interface StaticAbility {
     readonly life?: number;
     readonly covers?: "you" | "you-and-planeswalkers" | "planeswalkers";
   };
+  /**
+   * A cost on the creatures this static reaches (`affects`), where
+   * `attackTax` is one on attacking a player whatever attacks: "this creature
+   * can't attack unless you pay {1} for each +1/+1 counter on it" (Phyrexian
+   * Marauder), "enchanted creature can't attack or block unless its
+   * controller pays {3}" (Brainwash, Oppressive Rays). A cost to attack (rule
+   * 508.1h) or to block (509.1d): added up, locked in and paid as the
+   * declaration is made, and never obliged by a requirement (508.1d, 509.1c).
+   *
+   * - `on`: what it taxes. `"attack"` and `"block"` are the reached creature
+   *   attacking or blocking, its controller paying, once a creature however
+   *   many attackers it blocks ("for each blocking creature they control");
+   *   `"be-blocked"` the reached creature being blocked, the defending player
+   *   paying for each creature blocking it (Awesome Presence).
+   * - `generic`, `life`: the cost, a `CountSpec` read from this permanent's
+   *   controller's side (Cowed by Wisdom's "{1} for each card in your hand").
+   * - `perCounter`: `generic` is per counter on the taxed creature, read as
+   *   the cost is determined — of that kind, or any for `"any"` (Nils,
+   *   Discipline Enforcer's "pays {X}, where X is the number of counters on
+   *   that creature").
+   * - `covers`: only attacking these, as on `attackTax`, "you" being this
+   *   permanent's controller (Nils). Absent: anyone.
+   * - `attacker`: only blocking an attacker matching this, "you" being this
+   *   permanent's controller (Hipparion's "creatures with power 3 or
+   *   greater", Heat Wave's "creatures you control").
+   */
+  readonly combatTax?: CombatTax;
   /**
    * A maximum hand size, read at cleanup like `noMaxHandSize`: `who`'s
    * becomes `set` less the live count `minus` (a `CountSpec`, from this
