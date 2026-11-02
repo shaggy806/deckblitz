@@ -41973,8 +41973,18 @@ export class Game {
     // Flashback, escape, foretell, disturb, a suspend or cascade cast are
     // alternative costs (or no cost) already: only one applies (118.9a).
     if (via !== undefined && via !== "impulse" && via !== "graveyard-permission" && via !== "adventure" &&
-      via !== "prepared" && via !== "library-top") {
+      via !== "prepared" && via !== "library-top" && via !== "effect") {
       return out;
+    }
+    // "You may cast it" as something resolves (Chandra, Torch of Defiance) is
+    // a cast for its mana cost like any other, unless the offer says what it
+    // costs instead: free, for madness or miracle, by discarding or for energy.
+    if (via === "effect") {
+      const asked = this.castNowOffer(caster, cardId);
+      if (asked === null || asked.free || asked.madness !== undefined || asked.miracle !== undefined ||
+        asked.byDiscarding === true || asked.byPayingEnergy === true) {
+        return out;
+      }
     }
     if (caster === undefined) return out;
     // Granted prowl (rule 702.76a — Hunting Velociraptor's "Dinosaur spells

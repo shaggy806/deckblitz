@@ -12,10 +12,13 @@ import type { ObjectId, PlayerId } from "../primitives.js";
 import {
   A,
   B,
+  activate,
   cast,
   counters,
   hand,
   lands,
+  loyalty,
+  named,
   nextTurn,
   pickTargets,
   ref,
@@ -243,6 +246,69 @@ describe("from another zone", () => {
     expect(zone(game, dead)).toBe("battlefield");
     // And the Hunter on its Adventure is another: this turn's is spent.
     expect(freeOffer(game, prey)).toBeUndefined();
+  });
+
+  it("Tlincalli Hunter: a creature cast from exile as something resolves", () => {
+    const { game, a } = table();
+    spawn(game, "Tlincalli Hunter");
+    const chandra = spawn(game, "Chandra, Torch of Defiance");
+    const giant = toLibrary(game, "Hill Giant");
+    let offered: readonly CastOffer[] = [];
+    a.chooseCastNowFn = (_view, offer) => {
+      offered = offer.casts;
+      return { type: "cast-spell", player: A, card: giant, targets: [], via: "effect", altCost: true };
+    };
+    // No mana: {0} is the only way this can be cast at all.
+    loyalty(game, chandra, 1);
+    expect(offered.map((o) => o.altCostText)).toEqual(["without paying its mana cost"]);
+    expect(zone(game, giant)).toBe("battlefield");
+  });
+
+  it("Tlincalli Hunter: not a noncreature spell cast that way", () => {
+    const { game, a } = table();
+    spawn(game, "Tlincalli Hunter");
+    const chandra = spawn(game, "Chandra, Torch of Defiance");
+    toLibrary(game, "Divination");
+    let offered: readonly CastOffer[] = [];
+    a.chooseCastNowFn = (_view, offer) => {
+      offered = offer.casts;
+      return null;
+    };
+    loyalty(game, chandra, 1);
+    expect(offered).toEqual([]);
+  });
+
+  it("As Foretold: a spell cast as something resolves is a spell you cast", () => {
+    const { game, a } = table();
+    const foretold = spawn(game, "As Foretold");
+    game.state.objects[foretold].counters.time = 4;
+    const chandra = spawn(game, "Chandra, Torch of Defiance");
+    const giant = toLibrary(game, "Hill Giant");
+    a.chooseCastNowFn = () => ({ type: "cast-spell", player: A, card: giant, targets: [], via: "effect", altCost: true });
+    loyalty(game, chandra, 1);
+    expect(zone(game, giant)).toBe("battlefield");
+  });
+
+  it("a free 'you may cast it' stays the one way it offers", () => {
+    const { game, a } = table();
+    spawn(game, "Omniscience");
+    spawn(game, "Jodah, Archmage Eternal");
+    spawn(game, "Sarevok's Tome");
+    toHand(game, "Grizzly Bears");
+    const tome = named(game, "Sarevok's Tome")[0];
+    const giant = toLibrary(game, "Hill Giant");
+    game.state.players[A].completedDungeons = ["Lost Mine of Phandelver"];
+    lands(game, "Wastes", 3);
+    let offered: readonly CastOffer[] = [];
+    a.chooseCastNowFn = (_view, offer) => {
+      offered = offer.casts;
+      return null;
+    };
+    activate(game, tome, 1); // after its mana ability
+    expect(offered.length).toBe(1);
+    expect(offered[0].card).toBe(giant);
+    expect(offered[0].free).toBe(true);
+    expect(offered[0].altCost).toBeUndefined();
   });
 
   it("Tlincalli Hunter: no permission from it to cast what's in exile", () => {

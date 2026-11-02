@@ -4488,7 +4488,9 @@ is "can't attack a player it has already attacked this turn" (Port Razer), by th
   and a `filter`. `fromZones: ["exile"]` is "a creature spell you cast from exile"
   (Tlincalli Hunter), and beside `fromHand`, `["library"]` "from your hand or the
   top of your library" (One with the Multiverse): the top card, under a permission
-  to cast it (`castFromLibraryTop`). `anyPlayer: true` is "any player may cast …"
+  to cast it (`castFromLibraryTop`). Every grant also reaches a paid "you may cast
+  it" as something resolves (`cast-now`, Chandra, Torch of Defiance), never a free
+  one or one that names its own cost. `anyPlayer: true` is "any player may cast …"
   (Aluren, with `flash`). `filter` is judged as the spell it would be (rule 601.3e:
   an Adventure's sorcery from a creature card), against the permanent: `manaValue:
   { op: "lte", n: { amount } }` reads it, with `{ countersOn: "source", counter:
