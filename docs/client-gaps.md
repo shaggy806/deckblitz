@@ -5,6 +5,9 @@ and the cleanups found along the way. `BACKLOG.md` keeps one line per item under
 title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLETED.md`. The animation follow-ups are in
 `docs/plans/legibility-of-play.md`, "Follow-ups".
 
+- **The discard prompt says "any number" under a cap** (found 2026-11-01). `client/src/App.tsx`
+  (~6015) words a discard with `atMost` (Jaya Ballard's +1) as "any number of cards". The engine
+  enforces the cap, so only the wording is wrong.
 - **The combat prompts' cost lines miss the per-creature taxes** (found 2026-11-01). The attack cost
   line ignores `attackTax.perAttacker` and the block prompt shows no cost, though `combat/tax.ts`
   works both out and the engine refuses a declaration that can't be paid.

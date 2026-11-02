@@ -405,7 +405,8 @@ section keeps only what to do next.
   (3 freed, 7 proving cards), held down through N untap steps and an exile's end as a parameter (7
   freed, 11 proving cards), alternative costs in life and costs that exile a chosen object (7 freed,
   12 proving cards), a player's number against yours and amounts from this turn's events (6 freed, 17
-  proving cards). **About 1247 freed cards wait for the authoring
+  proving cards), emblem statics and reveal-until (15 freed, 15 proving cards), same-name filters and
+  damage to the source (5 freed, 13 proving cards). **About 1267 freed cards wait for the authoring
   sweep**
   (`cards:needs -- --stale`); the user authors them in one sweep once the reasonable keys are built.
   Cloud sessions are building `keyword:hexproof-from-colors`, the combat-restriction second group,
@@ -633,6 +634,7 @@ One line each; the detail is in **`docs/client-gaps.md`**, under the same bold t
 animation follow-ups in `docs/plans/legibility-of-play.md`, "Follow-ups". When an item lands,
 delete its detail there and move this line to `COMPLETED.md`.
 
+- **The discard prompt says "any number" under a cap** — `App.tsx` (~6015) words an `atMost` discard as "any number of cards"; the cap itself is enforced (Jaya Ballard's +1).
 - **The combat prompts' cost lines miss the per-creature taxes** — the attack line ignores `attackTax.perAttacker` and blocks show no cost; the engine refuses what can't be paid.
 - **The tap-cost prompt doesn't check a shared creature type** — Confirm enables on count alone; `creatureTypes` is on the offer, and the engine refuses a pair that doesn't share one.
 - **The attack and block Confirm doesn't check company restrictions** — a lone Mogg Flunkies is refused with a toast; `attackCompanyViolations`/`blockCompanyViolations` are exported for the client.

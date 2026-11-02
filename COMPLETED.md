@@ -86,6 +86,29 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2: untargeted damage to the ability's own source** (2026-11-01, `9b205b0bd`;
+  `effect:damage-to-source`) — `damage`'s `target: "source"`; the scaffolder reads coin flips too. Psionic
+  Entity, Psionic Sliver, Goblin Bangchuckers, Goblin Tinkerer.
+- **Need-keys Phase 2: a filter matching an object named like another** (2026-11-01, `5a5373d16`;
+  `filter:same-name-as-card-in-graveyard`, `filter:same-name-as-trigger-object`,
+  `filter:same-name-as-another-permanent`, `filter:same-name-as-card-in-casters-graveyard`,
+  `keyword:imprint-same-name`, partly) — `ShareReference`'s `{ graveyard, itsController? }`,
+  `sameNameAsAnother`, `destroy-all`'s `exceptTriggerObject`; `nameForMatching` uses last-known names;
+  bound names match either split half. Pyromancer Ascension, Bazaar of Wonders, Dragonlord Kolaghan,
+  Remembrance, Verdant Succession, Eye of Singularity, Invader Parasite, Strata Scythe, Extraplanar Lens.
+- **Need-keys Phase 2: reveal until a condition or a count** (2026-11-01, `cda9080f7`;
+  `effect:reveal-until-count-exile`, `effect:reveal-until-rest-bottom-any-order`,
+  `effect:reveal-until-rest-to-hand`, `effect:reveal-until-count-to-hand`,
+  `effect:reveal-until-count-tapped`, `effect:reveal-until-rest-exile`, `effect:reveal-until-count`,
+  partly) — a shared `RevealedCardsGo`, `thenKeepsTargets`; the any-order rest reuses `choose-from-zone`.
+  Treasure Hunt, Erratic Explosion, Explosive Revelation, Erratic Mutation, Goblin Machinist, Fathom
+  Trawl, Auspicious Starrix, Proteus Staff.
+- **Need-keys Phase 2: a static ability on an emblem, read off the emblem** (2026-11-01, `e087f7f28`,
+  `f72793849`, `30eb04604`; `effect:emblem-static-abilities`, `effect:emblem-no-max-hand-size`,
+  `effect:emblem-instant-speed-loyalty`, `effect:emblem-play-from-graveyard`,
+  `effect:emblem-free-cast-from-hand`) — `emblemStatics`, the emblem's object as source (114.2, 114.4);
+  `discard`'s `atMost`. Elspeth Knight-Errant, Ajani Steadfast, Teferi Temporal Archmage, Tamiyo the Moon
+  Sage, Gideon of the Trials, Jaya Ballard, Saheeli Filigree Master.
 - **Need-keys Phase 2: amounts read from this turn's events** (2026-11-01, `d4da8b9e5`;
   `effect:counters-put-this-turn-stat`, `effect:total-mana-value-cast-this-turn`,
   `effect:turn-stat-cards-discarded`, `effect:turn-stat-counters-put`, `effect:turn-stat-lands-entered`,

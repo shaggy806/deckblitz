@@ -794,7 +794,8 @@ missing. Re-run `--greedy` for Phase 2's order.
   untap steps (3 keys, 3 freed, 6 proving cards); an exile's end as a parameter (3 keys, 4 freed, 5
   proving cards); alternative costs in life and costs that exile a chosen object (7 keys, 7 freed, 12
   proving cards, 4 manual checks); a player's number against yours and amounts from this turn's events
-  (13 keys, 6 freed, 17 proving cards).
+  (13 keys, 6 freed, 17 proving cards); emblem statics and reveal-until (12 keys, 15 freed, 15 proving
+  cards); same-name filters and damage to the source (6 keys, 5 freed, 13 proving cards).
 
 ## Rough size
 
