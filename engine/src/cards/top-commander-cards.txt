@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4190 already implemented / 810 missing (marks refreshed 2026-11-02)
+4192 already implemented / 808 missing (marks refreshed 2026-11-02)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -1353,7 +1353,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1360  Gold Myr                                 {2}              Artifact Creature — Myr
 [x]  1361  Formidable Speaker                       {2}{G}           Creature — Elf Druid
 [x]  1362  Kinnan, Bonder Prodigy                   {G}{U}           Legendary Creature — Human Druid
-[ ]  1363  Leyline Axe                              {4}              Artifact — Equipment
+[x]  1363  Leyline Axe                              {4}              Artifact — Equipment
 [x]  1364  Atarka, World Render                     {5}{R}{G}        Legendary Creature — Dragon
 [x]  1365  Embercleave                              {4}{R}{R}        Legendary Artifact — Equipment
 [x]  1366  Third Path Iconoclast                    {U}{R}           Creature — Human Monk
@@ -3741,7 +3741,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  3748  Phyresis Outbreak                        {2}{B}           Sorcery
 [x]  3749  The Necrobloom                           {1}{W}{B}{G}     Legendary Creature — Plant
 [ ]  3750  Another Round                            {X}{X}{2}{W}     Sorcery
-[ ]  3751  Minds Aglow                              {U}              Sorcery
+[x]  3751  Minds Aglow                              {U}              Sorcery
 [x]  3752  Kor Haven                                {0}              Legendary Land
 [x]  3753  Deceptive Frostkite                      {U}{U}           Creature — Dragon
 [x]  3754  Mishra's Workshop                        {0}              Land
