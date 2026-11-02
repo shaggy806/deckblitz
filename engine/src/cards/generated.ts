@@ -5830,6 +5830,7 @@ import _poolDevoteeOfStrength from "./pool/devotee-of-strength.js";
 import _poolDevourFlesh from "./pool/devour-flesh.js";
 import _poolDevourInShadow from "./pool/devour-in-shadow.js";
 import _poolDevourIntellect from "./pool/devour-intellect.js";
+import _poolDevourerOfDestiny from "./pool/devourer-of-destiny.js";
 import _poolDevourerOfMemory from "./pool/devourer-of-memory.js";
 import _poolDevouringDeep from "./pool/devouring-deep.js";
 import _poolDevouringGreed from "./pool/devouring-greed.js";
@@ -13377,6 +13378,7 @@ import _poolLevitatingStatue from "./pool/levitating-statue.js";
 import _poolLevitation from "./pool/levitation.js";
 import _poolLeyDruid from "./pool/ley-druid.js";
 import _poolLeyWeaver from "./pool/ley-weaver.js";
+import _poolLeylineAxe from "./pool/leyline-axe.js";
 import _poolLeylineBinding from "./pool/leyline-binding.js";
 import _poolLeylineDowser from "./pool/leyline-dowser.js";
 import _poolLeylineInvocation from "./pool/leyline-invocation.js";
@@ -17728,6 +17730,7 @@ import _poolProtomatterPowder from "./pool/protomatter-powder.js";
 import _poolProudMentor from "./pool/proud-mentor.js";
 import _poolProudPackRhino from "./pool/proud-pack-rhino.js";
 import _poolProvenCombatant from "./pool/proven-combatant.js";
+import _poolProvidence from "./pool/providence.js";
 import _poolProvisionsMerchant from "./pool/provisions-merchant.js";
 import _poolProvokeTheTrolls from "./pool/provoke-the-trolls.js";
 import _poolProvoke from "./pool/provoke.js";
@@ -20514,6 +20517,7 @@ import _poolSerrasSanctum from "./pool/serras-sanctum.js";
 import _poolSerratedArrows from "./pool/serrated-arrows.js";
 import _poolSerratedBiskelion from "./pool/serrated-biskelion.js";
 import _poolSerratedScorpion from "./pool/serrated-scorpion.js";
+import _poolSerumPowder from "./pool/serum-powder.js";
 import _poolSerumRaker from "./pool/serum-raker.js";
 import _poolSerumSnare from "./pool/serum-snare.js";
 import _poolSerumSovereign from "./pool/serum-sovereign.js";
@@ -34032,6 +34036,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDevourFlesh,
   _poolDevourInShadow,
   _poolDevourIntellect,
+  _poolDevourerOfDestiny,
   _poolDevourerOfMemory,
   _poolDevouringDeep,
   _poolDevouringGreed,
@@ -41579,6 +41584,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLevitation,
   _poolLeyDruid,
   _poolLeyWeaver,
+  _poolLeylineAxe,
   _poolLeylineBinding,
   _poolLeylineDowser,
   _poolLeylineInvocation,
@@ -45930,6 +45936,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolProudMentor,
   _poolProudPackRhino,
   _poolProvenCombatant,
+  _poolProvidence,
   _poolProvisionsMerchant,
   _poolProvokeTheTrolls,
   _poolProvoke,
@@ -48716,6 +48723,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSerratedArrows,
   _poolSerratedBiskelion,
   _poolSerratedScorpion,
+  _poolSerumPowder,
   _poolSerumRaker,
   _poolSerumSnare,
   _poolSerumSovereign,
@@ -62247,6 +62255,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/devour-flesh": _poolDevourFlesh,
   "pool/devour-in-shadow": _poolDevourInShadow,
   "pool/devour-intellect": _poolDevourIntellect,
+  "pool/devourer-of-destiny": _poolDevourerOfDestiny,
   "pool/devourer-of-memory": _poolDevourerOfMemory,
   "pool/devouring-deep": _poolDevouringDeep,
   "pool/devouring-greed": _poolDevouringGreed,
@@ -69794,6 +69803,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/levitation": _poolLevitation,
   "pool/ley-druid": _poolLeyDruid,
   "pool/ley-weaver": _poolLeyWeaver,
+  "pool/leyline-axe": _poolLeylineAxe,
   "pool/leyline-binding": _poolLeylineBinding,
   "pool/leyline-dowser": _poolLeylineDowser,
   "pool/leyline-invocation": _poolLeylineInvocation,
@@ -74145,6 +74155,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/proud-mentor": _poolProudMentor,
   "pool/proud-pack-rhino": _poolProudPackRhino,
   "pool/proven-combatant": _poolProvenCombatant,
+  "pool/providence": _poolProvidence,
   "pool/provisions-merchant": _poolProvisionsMerchant,
   "pool/provoke-the-trolls": _poolProvokeTheTrolls,
   "pool/provoke": _poolProvoke,
@@ -76931,6 +76942,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/serrated-arrows": _poolSerratedArrows,
   "pool/serrated-biskelion": _poolSerratedBiskelion,
   "pool/serrated-scorpion": _poolSerratedScorpion,
+  "pool/serum-powder": _poolSerumPowder,
   "pool/serum-raker": _poolSerumRaker,
   "pool/serum-snare": _poolSerumSnare,
   "pool/serum-sovereign": _poolSerumSovereign,

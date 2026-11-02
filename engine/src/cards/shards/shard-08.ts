@@ -195,6 +195,7 @@ import _poolDevastate from "../pool/devastate.js";
 import _poolDevilsPlayground from "../pool/devils-playground.js";
 import _poolDevkarinDissident from "../pool/devkarin-dissident.js";
 import _poolDevourFlesh from "../pool/devour-flesh.js";
+import _poolDevourerOfDestiny from "../pool/devourer-of-destiny.js";
 import _poolDevouringDeep from "../pool/devouring-deep.js";
 import _poolDevoutLightcaster from "../pool/devout-lightcaster.js";
 import _poolDisciplesOfGix from "../pool/disciples-of-gix.js";
@@ -1115,6 +1116,7 @@ const shard: CardShard = {
     _poolDevilsPlayground,
     _poolDevkarinDissident,
     _poolDevourFlesh,
+    _poolDevourerOfDestiny,
     _poolDevouringDeep,
     _poolDevoutLightcaster,
     _poolDisciplesOfGix,

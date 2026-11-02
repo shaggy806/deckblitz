@@ -563,6 +563,7 @@ import _poolProsperity from "../pool/prosperity.js";
 import _poolProstheticInjector from "../pool/prosthetic-injector.js";
 import _poolProtect from "../pool/protect.js";
 import _poolProtegesAwakening from "../pool/proteges-awakening.js";
+import _poolProvidence from "../pool/providence.js";
 import _poolPsychicMiasma from "../pool/psychic-miasma.js";
 import _poolPugnaciousHammerskull from "../pool/pugnacious-hammerskull.js";
 import _poolPullUnder from "../pool/pull-under.js";
@@ -1433,6 +1434,7 @@ const shard: CardShard = {
     _poolProstheticInjector,
     _poolProtect,
     _poolProtegesAwakening,
+    _poolProvidence,
     _poolPsychicMiasma,
     _poolPugnaciousHammerskull,
     _poolPullUnder,

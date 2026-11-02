@@ -670,6 +670,7 @@ import _poolSelesnyaGuildmage from "../pool/selesnya-guildmage.js";
 import _poolSenateCourier from "../pool/senate-courier.js";
 import _poolSentinelOfTheNamelessCity from "../pool/sentinel-of-the-nameless-city.js";
 import _poolSentinelsMark from "../pool/sentinels-mark.js";
+import _poolSerumPowder from "../pool/serum-powder.js";
 import _poolSeshirosLivingLegacy from "../pool/seshiros-living-legacy.js";
 import _poolShadowSliver from "../pool/shadow-sliver.js";
 import _poolShadowUrchin from "../pool/shadow-urchin.js";
@@ -1625,6 +1626,7 @@ const shard: CardShard = {
     _poolSenateCourier,
     _poolSentinelOfTheNamelessCity,
     _poolSentinelsMark,
+    _poolSerumPowder,
     _poolSeshirosLivingLegacy,
     _poolShadowSliver,
     _poolShadowUrchin,
