@@ -1693,6 +1693,16 @@ export function parseTrigger(clause) {
     return [{ on: "explores", who: "you", filter: { type: "creature" }, ...(m[1] ? { revealed: m[1] } : {}) }];
   }
   if (/^Whenever you attack$/.test(c)) return [{ on: "attack-with", who: "you", atLeast: 1 }];
+  // "Whenever one or more Merfolk you control attack a player": once per
+  // player, by the attackers that match (Attuma, Atlantean Warlord).
+  if ((m = /^Whenever one or more (.+?) you control attack a player$/.exec(c))) {
+    const filter = parseTypePhrase(m[1]);
+    if (filter !== null) return [{ on: "attacks-player", who: "you", defender: "any", filter }];
+  }
+  // A Curse's "whenever a creature attacks enchanted player": once per creature.
+  if (c === "Whenever a creature attacks enchanted player") {
+    return [{ on: "attacks", who: "any", attackedPlayer: "attached" }];
+  }
   // Day and night (rule 731.1a).
   if (/^Whenever day becomes night or night becomes day$/.test(c)) return [{ on: "day-night-changes" }];
   if ((m = /^Whenever (day becomes night|night becomes day)$/.exec(c))) {

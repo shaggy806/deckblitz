@@ -1132,6 +1132,19 @@ Shatterskull Smashing's "twice X if X is 6 or more") — the offer names a
 number or `x`, so the client would need the amount; the scaffolder doesn't
 read "When you do" at all.
 
+### Attack triggers narrowed by attackers and the player attacked — built 2026-11-01
+
+The need-keys Phase 2 family `trigger:attacks-player-filter`, features only. `attacks-player`'s
+**`filter`** narrows the attackers that count: still once per player attacked by at least one of
+them, and `{ triggerValue: true }` counts only them. `attacks`' **`attackedPlayer`** (a `TriggerWho`,
+`"attached"` for a Curse's "enchanted player") is once per creature and never a creature attacking
+that player's planeswalker (rule 508.3a). The scaffolder reads "whenever one or more … you control
+attack a player" and "whenever a creature attacks enchanted player". Keys: attacks-player-filter,
+creature-attacks-enchanted-player. Proving cards: Attuma, Atlantean Warlord, Curse of Predation,
+Curse of the Forsaken. Freed but not authored: Crimson Cowl, Whirlwind, Bitter Work, Meriadoc
+Brandybuck, Dollmaker's Shop, Canal Courier (its "attack different players" isn't this trigger, so
+`author-freed` should give it a narrow key).
+
 ### A reflexive ability that names what its parent made or targeted — built 2026-11-01
 
 The need-keys Phase 2 family `effect:reflexive-trigger`, its top group, features only. A

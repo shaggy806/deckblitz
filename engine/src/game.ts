@@ -24592,7 +24592,7 @@ export class Game {
             ? this.creatureCount(this.batchedAttackers(trigger, event.attackers, object))
             : // How many creatures attack that player.
               trigger.on === "attacks-player" && event.type === "player-attacked"
-            ? this.creatureCount(event.attackers)
+            ? this.creatureCount(this.batchedAttackers(trigger, event.attackers, object))
             : // How many cards left the graveyard, for "that many".
               trigger.on === "leaves-graveyard" && event.type === "cards-left-graveyard"
               ? this.graveyardLeavers(trigger, event.objects, object).length
@@ -25760,7 +25760,7 @@ export class Game {
   }
 
   private batchedAttackers(
-    spec: Extract<TriggerSpec, { on: "attacks-batch" }>,
+    spec: Extract<TriggerSpec, { on: "attacks-batch" | "attacks-player" }>,
     attackers: readonly ObjectId[],
     self: GameObject,
   ): readonly ObjectId[] {
@@ -26008,6 +26008,9 @@ export class Game {
           (spec.attackingYou !== true || this.attacksYouOrYourPlaneswalker(event.defender, self.controller)) &&
           (spec.youDefend !== true || this.defendingPlayerOf(event.defender) === self.controller) &&
           (spec.defender === undefined || this.defenderKind(event.defender) === spec.defender) &&
+          (spec.attackedPlayer === undefined ||
+            (this.defenderKind(event.defender) === "player" &&
+              this.matchesWhoPlayer(spec.attackedPlayer, event.defender as PlayerId, self))) &&
           (spec.aloneAgainstDefender !== true || this.attackingAlone(event.attacker, event.defender)) &&
           (spec.firstTimeEachTurn !== true || event.firstThisTurn === true) &&
           (spec.withGreaterPower !== true || this.attacksWithGreaterPower(event.attacker)) &&
@@ -26039,6 +26042,7 @@ export class Game {
           event.type === "player-attacked" &&
           this.matchesWhoPlayer(spec.who, event.player, self) &&
           this.matchesWhoPlayer(spec.defender, event.defender, self) &&
+          this.batchedAttackers(spec, event.attackers, self).length > 0 &&
           (spec.defenderHasInitiative !== true || this.state.initiative === event.defender) &&
           (spec.defenderLife === undefined ||
             this.defenderLifeRanks(spec.defenderLife, event.defender, self.controller))

@@ -412,13 +412,15 @@ section keeps only what to do next.
   variants and limited free casts (1 freed, 15 proving cards), ending the turn or combat and attack or
   block limits (6 freed, 11 proving cards), choices kept and life exchanges (4 freed, 12 proving cards),
   token replacements and damage history (12 freed, 16 proving cards), join forces, life bidding,
-  opponent-caused discards and opening-hand abilities (10 freed, 16 proving cards). **About 1372 freed cards wait for the authoring
+  opponent-caused discards and opening-hand abilities (10 freed, 16 proving cards), a reflexive
+  ability naming what its parent made or targeted (3 keys, 4 freed, 5 proving cards), attack triggers
+  narrowed by attackers and the player attacked (2 keys, 5 freed, 3 proving cards). **About 1381 freed cards wait for the authoring
   sweep**
   (`cards:needs -- --stale`); the user authors them in one sweep once the reasonable keys are built.
   Cloud sessions are building `keyword:hexproof-from-colors`, the combat-restriction second group,
   `effect:prevent-next-n-damage-to-you`, the cascade/sunburst grants to spells,
   `cost:kicker-nonmana-cost` and `cost:alt-cost-discard-cards`. Next unclaimed:
-  `effect:reflexive-trigger` (9), then `--greedy --groups` (control of a player, rule 723, landed 2026-11-01).
+  `trigger:lose-control-trigger` (8), then `condition:filter-attachments` (8) and `--greedy --groups` (control of a player, rule 723, landed 2026-11-01).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next

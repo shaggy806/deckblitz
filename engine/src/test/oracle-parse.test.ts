@@ -9472,6 +9472,15 @@ describe("exchanges with a life total", () => {
     expect(mirror.effect).toEqual({ kind: "exchange-life-totals", second: { target: 0 } });
   });
 
+  it("reads attack triggers narrowed by their attackers and the player attacked", () => {
+    expect(parseTrigger("Whenever one or more Merfolk you control attack a player")).toEqual([
+      { on: "attacks-player", who: "you", defender: "any", filter: { subtype: "Merfolk" } },
+    ]);
+    expect(parseTrigger("Whenever a creature attacks enchanted player")).toEqual([
+      { on: "attacks", who: "any", attackedPlayer: "attached" },
+    ]);
+  });
+
   it("reads a 'When you do' naming what the step before made, returned or targeted", () => {
     const opponentCreature = { kind: "optional", of: { kind: "permanent", whose: "opponent", filter: { type: "creature" } } };
     const fight = { kind: "fight", a: "trigger-object", b: 0 };

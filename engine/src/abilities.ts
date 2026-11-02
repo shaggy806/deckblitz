@@ -1345,6 +1345,13 @@ export type TriggerSpec =
        */
       readonly defender?: "player" | "planeswalker" | "battle";
       /**
+       * Which player it must be attacking, relative to this permanent —
+       * Curse of Predation's "whenever a creature attacks **enchanted
+       * player**" is `"attached"`. Never a creature attacking that player's
+       * planeswalker (rule 508.3a).
+       */
+      readonly attackedPlayer?: TriggerWho;
+      /**
        * "…, **if no other creatures are attacking that player**" — an
        * intervening-if (rule 603.4) over the declaration: no other creature
        * is attacking the player or planeswalker this one attacks. Checked
@@ -1423,6 +1430,11 @@ export type TriggerSpec =
       readonly on: "attacks-player";
       readonly who: TriggerWho;
       readonly defender: TriggerWho;
+      /** Narrow which attackers count: "whenever one or more Merfolk you
+       * control attack a player" (Attuma, Atlantean Warlord), still once per
+       * player attacked by at least one of them, and `{ triggerValue: true }`
+       * counts only them. */
+      readonly filter?: CardFilter;
       /** How the attacked player's life total ranks — Breena's "if that
        * opponent has more life than another of your opponents". See
        * {@link DefenderLife}. */

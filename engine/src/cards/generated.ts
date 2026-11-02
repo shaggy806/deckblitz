@@ -1343,6 +1343,7 @@ import _poolAttentiveSkywarden from "./pool/attentive-skywarden.js";
 import _poolAttentiveSunscribe from "./pool/attentive-sunscribe.js";
 import _poolAttercop from "./pool/attercop.js";
 import _poolAttrition from "./pool/attrition.js";
+import _poolAttumaAtlanteanWarlord from "./pool/attuma-atlantean-warlord.js";
 import _poolAttuneWithAether from "./pool/attune-with-aether.js";
 import _poolAttunedHunter from "./pool/attuned-hunter.js";
 import _poolAttunement from "./pool/attunement.js";
@@ -5040,9 +5041,11 @@ import _poolCurseOfMaritLage from "./pool/curse-of-marit-lage.js";
 import _poolCurseOfOblivion from "./pool/curse-of-oblivion.js";
 import _poolCurseOfObsession from "./pool/curse-of-obsession.js";
 import _poolCurseOfOpulence from "./pool/curse-of-opulence.js";
+import _poolCurseOfPredation from "./pool/curse-of-predation.js";
 import _poolCurseOfShallowGraves from "./pool/curse-of-shallow-graves.js";
 import _poolCurseOfSilence from "./pool/curse-of-silence.js";
 import _poolCurseOfTheBloodyTome from "./pool/curse-of-the-bloody-tome.js";
+import _poolCurseOfTheForsaken from "./pool/curse-of-the-forsaken.js";
 import _poolCurseOfTheNightlyHunt from "./pool/curse-of-the-nightly-hunt.js";
 import _poolCurseOfTheRestlessDead from "./pool/curse-of-the-restless-dead.js";
 import _poolCurseOfTheSwine from "./pool/curse-of-the-swine.js";
@@ -29554,6 +29557,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAttentiveSunscribe,
   _poolAttercop,
   _poolAttrition,
+  _poolAttumaAtlanteanWarlord,
   _poolAttuneWithAether,
   _poolAttunedHunter,
   _poolAttunement,
@@ -33251,9 +33255,11 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCurseOfOblivion,
   _poolCurseOfObsession,
   _poolCurseOfOpulence,
+  _poolCurseOfPredation,
   _poolCurseOfShallowGraves,
   _poolCurseOfSilence,
   _poolCurseOfTheBloodyTome,
+  _poolCurseOfTheForsaken,
   _poolCurseOfTheNightlyHunt,
   _poolCurseOfTheRestlessDead,
   _poolCurseOfTheSwine,
@@ -57778,6 +57784,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/attentive-sunscribe": _poolAttentiveSunscribe,
   "pool/attercop": _poolAttercop,
   "pool/attrition": _poolAttrition,
+  "pool/attuma-atlantean-warlord": _poolAttumaAtlanteanWarlord,
   "pool/attune-with-aether": _poolAttuneWithAether,
   "pool/attuned-hunter": _poolAttunedHunter,
   "pool/attunement": _poolAttunement,
@@ -61475,9 +61482,11 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/curse-of-oblivion": _poolCurseOfOblivion,
   "pool/curse-of-obsession": _poolCurseOfObsession,
   "pool/curse-of-opulence": _poolCurseOfOpulence,
+  "pool/curse-of-predation": _poolCurseOfPredation,
   "pool/curse-of-shallow-graves": _poolCurseOfShallowGraves,
   "pool/curse-of-silence": _poolCurseOfSilence,
   "pool/curse-of-the-bloody-tome": _poolCurseOfTheBloodyTome,
+  "pool/curse-of-the-forsaken": _poolCurseOfTheForsaken,
   "pool/curse-of-the-nightly-hunt": _poolCurseOfTheNightlyHunt,
   "pool/curse-of-the-restless-dead": _poolCurseOfTheRestlessDead,
   "pool/curse-of-the-swine": _poolCurseOfTheSwine,

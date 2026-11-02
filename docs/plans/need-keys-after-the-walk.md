@@ -805,6 +805,9 @@ missing. Re-run `--greedy` for Phase 2's order.
   keys, 12 freed, 16 proving cards); join forces, life bidding and opponent-caused discards (4 keys, 12
   proving cards); opening-hand abilities (2 keys, 4 proving cards, 6 manual checks; 10 freed with the last).
   The run stopped there by choice: 32 families, 18 agents, built keys 1007 to 1152, freed 1211 to 1372.
+- **2026-11-01 (late): two engine-only families, one session** — a reflexive ability naming what its
+  parent made or targeted (3 keys, 4 freed, 5 proving cards); attack triggers narrowed by attackers and
+  the player attacked (2 keys, 5 freed, 3 proving cards). Built keys 1157, freed 1381.
 
 ## Rough size
 

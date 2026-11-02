@@ -36,6 +36,7 @@ import _poolAshadTheLoneCyberman from "../pool/ashad-the-lone-cyberman.js";
 import _poolAshePrincessOfDalmasca from "../pool/ashe-princess-of-dalmasca.js";
 import _poolAshnodsAltar from "../pool/ashnods-altar.js";
 import _poolAttemptedMurder from "../pool/attempted-murder.js";
+import _poolAttumaAtlanteanWarlord from "../pool/attuma-atlantean-warlord.js";
 import _poolAuriokGlaivemaster from "../pool/auriok-glaivemaster.js";
 import _poolAvenEnvoy from "../pool/aven-envoy.js";
 import _poolAxebaneStag from "../pool/axebane-stag.js";
@@ -891,6 +892,7 @@ const shard: CardShard = {
     _poolAshePrincessOfDalmasca,
     _poolAshnodsAltar,
     _poolAttemptedMurder,
+    _poolAttumaAtlanteanWarlord,
     _poolAuriokGlaivemaster,
     _poolAvenEnvoy,
     _poolAxebaneStag,
