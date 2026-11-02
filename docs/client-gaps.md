@@ -217,10 +217,9 @@ title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLET
   one or two seeded games with lessons as chapters, custom decks, blocking clicks, a first-visit
   callout, a friendly voice. **Built 2026-10-13** (plan phases 1-2): the overlay and site tour,
   the tutorial room (`server/src/tutorial-session.ts`, `server/src/tutorials/`,
-  `server/src/scripted-bot.ts`), and Learn Commander in the "?" menu playing `basics-proof`, a
-  proof lesson (`LEARN_COMMANDER_LESSON` in `client/src/tutorial/lesson.ts` names it). Left: the
-  seeded decks and the real chapters, the in-game tour stops, raising the hand tray while a hand
-  card is spotlit, pausing the opponent under a Next card mid-game.
+  `server/src/scripted-bot.ts`), and Learn Commander's first game (2026-11-02,
+  `server/src/tutorials/learn-commander.ts`). Left: game 2, Commander's own rules (a commander
+  dying and being recast with tax, commander damage, instants and the stack, a table of three).
 
 **A cast copy logs as "a card"**
 

@@ -1,10 +1,10 @@
 # Tutorials
 
 Status: **in progress** (planned 2026-10-12; the user's answers 2026-10-13). Build order
-phases 1 and 2 are built (2026-10-13): the overlay with the site tour, and the tutorial room with
-Learn Commander playing `basics-proof`, a proof lesson standing in for the real games. Next:
-phase 4's seeded decks and game 1's chapters. Phase 3's in-game stops were built as the board
-tour (2026-10-13), when the site tour was cut down to the front page. The user's decisions
+phases 1 and 2 are built (2026-10-13): the overlay with the site tour, and the tutorial room.
+Phase 3's in-game stops were built as the board tour (2026-10-13), when the site tour was cut down
+to the front page. Phase 4's first game is built (2026-11-02): `learn-commander`, whose as-built
+notes are below, replacing the proof lesson. Next: game 2, Commander's own rules. The user's decisions
 are recorded at the end and shape everything above them; "As built" below records where the
 build departed from this plan.
 
@@ -242,6 +242,26 @@ detail):
   graveyard's count and the zone viewer (the step players trip on), the phase track's stops,
   Pass / Pass Turn / Auto-pass, the History, Settings and the Game menu. The anchor grammar
   gained `zone:<zone>:<who>`. The lobby, deck builder and library stops were dropped.
+
+## As built: the first game (2026-11-02)
+
+- **A whole game, won on turn 7**, in seven chapters (`server/src/tutorials/learn-commander.ts`).
+  Cards with no rules text and basic lands only, Rowan on 13 life (a card says why), the damage
+  worked out to the point. The commander is a 7/2 for three, so its turn is worth waiting for.
+- **The proof lesson could be soft-locked**: Pass Turn on "Play a land" let the turn go by, and a
+  later card then waited for a turn already gone, with Retry no help. As built above, a goal card
+  let clicks through to the whole page, so the fix is the user's decision 3 by another route: the
+  board stays clickable, but a `scripted` lesson's seat is only offered what the card asks for
+  (`tutorials/moves.ts`), and the server refuses the rest. It can't strand the player: a decision
+  no card names stays whole, and a window with nothing the card names can still be passed.
+- **A card being read holds the game**, closing the plan's "pausing the opponent under a Next
+  card". Damage is shown before the card that explains it (`LessonStep.opensOn`).
+- **A card can cover what it asks for**: the walk found "Attack with both" over the second
+  creature, which only a real click shows. The attack cards sit above their creatures now.
+- **Back only looks**: a client-side list of the cards seen, shown in words alone, since what a card
+  pointed at may have moved on.
+- **The way on** is a real game on a starter deck against the plain precons, not a blitz's upgraded
+  ones, for someone with no decklist.
 
 ## The user's decisions (2026-10-13)
 

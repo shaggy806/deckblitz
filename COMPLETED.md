@@ -2680,6 +2680,11 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Client / UI
 
+- **Learn Commander's first game** (2026-11-02: f1322a3f, 3658a8f8): a whole game for someone who
+  has never played, won on turn 7 (`learn-commander`, replacing the proof lesson), which can't be
+  soft-locked (a scripted lesson offers only what its card asks for) and holds still under a card
+  being read, with Back, the hand raised for cards about it, a seat reading "You", and a first real
+  game on a starter deck at the end. Game 2, Commander's own rules, is still open.
 - **An opponent's whole board takes the attack click** (2026-11-02): not only their panel, once attackers
   wait for a defender. A legal planeswalker or battle is still attacked itself, and one those attackers can't
   attack is no click on its controller (`e2e/attack-board-click.spec.ts`).
