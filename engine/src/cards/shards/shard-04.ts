@@ -383,6 +383,7 @@ import _poolKingCheetah from "../pool/king-cheetah.js";
 import _poolKingpinWilsonFisk from "../pool/kingpin-wilson-fisk.js";
 import _poolKinscaerSentry from "../pool/kinscaer-sentry.js";
 import _poolKirriTalentedSprout from "../pool/kirri-talented-sprout.js";
+import _poolKitesailFreebooter from "../pool/kitesail-freebooter.js";
 import _poolKlauthUnrivaledAncient from "../pool/klauth-unrivaled-ancient.js";
 import _poolKnightErrant from "../pool/knight-errant.js";
 import _poolKnightOfTheNewCoalition from "../pool/knight-of-the-new-coalition.js";
@@ -1244,6 +1245,7 @@ const shard: CardShard = {
     _poolKingpinWilsonFisk,
     _poolKinscaerSentry,
     _poolKirriTalentedSprout,
+    _poolKitesailFreebooter,
     _poolKlauthUnrivaledAncient,
     _poolKnightErrant,
     _poolKnightOfTheNewCoalition,

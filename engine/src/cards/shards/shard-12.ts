@@ -617,6 +617,7 @@ import _poolRuthlessInstincts from "../pool/ruthless-instincts.js";
 import _poolRuthlessInvasion from "../pool/ruthless-invasion.js";
 import _poolRydiaSummonerOfMist from "../pool/rydia-summoner-of-mist.js";
 import _poolSailorOfMeans from "../pool/sailor-of-means.js";
+import _poolSamiteAlchemist from "../pool/samite-alchemist.js";
 import _poolSanctifierOfSouls from "../pool/sanctifier-of-souls.js";
 import _poolSanctimony from "../pool/sanctimony.js";
 import _poolSanctumOfCalmWaters from "../pool/sanctum-of-calm-waters.js";
@@ -1479,6 +1480,7 @@ const shard: CardShard = {
     _poolRuthlessInvasion,
     _poolRydiaSummonerOfMist,
     _poolSailorOfMeans,
+    _poolSamiteAlchemist,
     _poolSanctifierOfSouls,
     _poolSanctimony,
     _poolSanctumOfCalmWaters,

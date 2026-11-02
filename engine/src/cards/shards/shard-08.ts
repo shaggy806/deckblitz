@@ -180,6 +180,7 @@ import _poolDeathcurseOgre from "../pool/deathcurse-ogre.js";
 import _poolDeathmark from "../pool/deathmark.js";
 import _poolDeathsprout from "../pool/deathsprout.js";
 import _poolDeception from "../pool/deception.js";
+import _poolDeepCavernBat from "../pool/deep-cavern-bat.js";
 import _poolDeflectingPalm from "../pool/deflecting-palm.js";
 import _poolDegaSanctuary from "../pool/dega-sanctuary.js";
 import _poolDehydration from "../pool/dehydration.js";
@@ -551,6 +552,7 @@ import _poolOverlaidTerrain from "../pool/overlaid-terrain.js";
 import _poolOverrun from "../pool/overrun.js";
 import _poolOxiddaDaredevil from "../pool/oxidda-daredevil.js";
 import _poolPainSuffering from "../pool/pain-suffering.js";
+import _poolPalaceJailer from "../pool/palace-jailer.js";
 import _poolParadigmShift from "../pool/paradigm-shift.js";
 import _poolParapet from "../pool/parapet.js";
 import _poolPardicSwordsmith from "../pool/pardic-swordsmith.js";
@@ -1091,6 +1093,7 @@ const shard: CardShard = {
     _poolDeathmark,
     _poolDeathsprout,
     _poolDeception,
+    _poolDeepCavernBat,
     _poolDeflectingPalm,
     _poolDegaSanctuary,
     _poolDehydration,
@@ -1462,6 +1465,7 @@ const shard: CardShard = {
     _poolOverrun,
     _poolOxiddaDaredevil,
     _poolPainSuffering,
+    _poolPalaceJailer,
     _poolParadigmShift,
     _poolParapet,
     _poolPardicSwordsmith,

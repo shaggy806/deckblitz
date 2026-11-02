@@ -689,6 +689,7 @@ import _poolSoulcatchersAerie from "../pool/soulcatchers-aerie.js";
 import _poolSouthernAirTemple from "../pool/southern-air-temple.js";
 import _poolSpawnOfMayhem from "../pool/spawn-of-mayhem.js";
 import _poolSpawningKraken from "../pool/spawning-kraken.js";
+import _poolSpectralBears from "../pool/spectral-bears.js";
 import _poolSpectralHuntCaller from "../pool/spectral-hunt-caller.js";
 import _poolSpellbindingSoprano from "../pool/spellbinding-soprano.js";
 import _poolSphinxBoneWand from "../pool/sphinx-bone-wand.js";
@@ -1568,6 +1569,7 @@ const shard: CardShard = {
     _poolSouthernAirTemple,
     _poolSpawnOfMayhem,
     _poolSpawningKraken,
+    _poolSpectralBears,
     _poolSpectralHuntCaller,
     _poolSpellbindingSoprano,
     _poolSphinxBoneWand,

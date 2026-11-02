@@ -99,6 +99,7 @@ import _poolBurrentonBombardier from "../pool/burrenton-bombardier.js";
 import _poolCabalSlaver from "../pool/cabal-slaver.js";
 import _poolCabalTorturer from "../pool/cabal-torturer.js";
 import _poolCaligoSkinWitch from "../pool/caligo-skin-witch.js";
+import _poolCalixDestinysHand from "../pool/calix-destinys-hand.js";
 import _poolCallTheScions from "../pool/call-the-scions.js";
 import _poolCallousGiant from "../pool/callous-giant.js";
 import _poolCallousInspector from "../pool/callous-inspector.js";
@@ -996,6 +997,7 @@ const shard: CardShard = {
     _poolCabalSlaver,
     _poolCabalTorturer,
     _poolCaligoSkinWitch,
+    _poolCalixDestinysHand,
     _poolCallTheScions,
     _poolCallousGiant,
     _poolCallousInspector,

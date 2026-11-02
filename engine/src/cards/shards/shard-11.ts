@@ -218,6 +218,7 @@ import _poolDragonWhisperer from "../pool/dragon-whisperer.js";
 import _poolDranaLiberatorOfMalakir from "../pool/drana-liberator-of-malakir.js";
 import _poolDreadSummons from "../pool/dread-summons.js";
 import _poolDreamCoat from "../pool/dream-coat.js";
+import _poolDreamshackleGeist from "../pool/dreamshackle-geist.js";
 import _poolDregscapeZombie from "../pool/dregscape-zombie.js";
 import _poolDrivenDespair from "../pool/driven-despair.js";
 import _poolDrownerOfHope from "../pool/drowner-of-hope.js";
@@ -1098,6 +1099,7 @@ const shard: CardShard = {
     _poolDranaLiberatorOfMalakir,
     _poolDreadSummons,
     _poolDreamCoat,
+    _poolDreamshackleGeist,
     _poolDregscapeZombie,
     _poolDrivenDespair,
     _poolDrownerOfHope,

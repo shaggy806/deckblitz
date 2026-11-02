@@ -89,6 +89,7 @@ import _poolBontusMonument from "../pool/bontus-monument.js";
 import _poolBorosSignet from "../pool/boros-signet.js";
 import _poolBorrowingTheEastWind from "../pool/borrowing-the-east-wind.js";
 import _poolBoulderDash from "../pool/boulder-dash.js";
+import _poolBrainMaggot from "../pool/brain-maggot.js";
 import _poolBraveBrawler from "../pool/brave-brawler.js";
 import _poolBreachingLeviathan from "../pool/breaching-leviathan.js";
 import _poolBreakAsunder from "../pool/break-asunder.js";
@@ -961,6 +962,7 @@ const shard: CardShard = {
     _poolBorosSignet,
     _poolBorrowingTheEastWind,
     _poolBoulderDash,
+    _poolBrainMaggot,
     _poolBraveBrawler,
     _poolBreachingLeviathan,
     _poolBreakAsunder,

@@ -583,6 +583,7 @@ import _poolResuscitate from "../pool/resuscitate.js";
 import _poolRetchedWretch from "../pool/retched-wretch.js";
 import _poolRetributionOfTheAncients from "../pool/retribution-of-the-ancients.js";
 import _poolRevealingEye from "../pool/revealing-eye.js";
+import _poolRevekaWizardSavant from "../pool/reveka-wizard-savant.js";
 import _poolRevivingMelody from "../pool/reviving-melody.js";
 import _poolRhysticTutor from "../pool/rhystic-tutor.js";
 import _poolRingwraiths from "../pool/ringwraiths.js";
@@ -1456,6 +1457,7 @@ const shard: CardShard = {
     _poolRetchedWretch,
     _poolRetributionOfTheAncients,
     _poolRevealingEye,
+    _poolRevekaWizardSavant,
     _poolRevivingMelody,
     _poolRhysticTutor,
     _poolRingwraiths,

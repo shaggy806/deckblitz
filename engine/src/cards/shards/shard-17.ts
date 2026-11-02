@@ -735,6 +735,7 @@ import _poolTatteredApparition from "../pool/tattered-apparition.js";
 import _poolTeethingWurmlet from "../pool/teething-wurmlet.js";
 import _poolTeferisCare from "../pool/teferis-care.js";
 import _poolTelJiladArchers from "../pool/tel-jilad-archers.js";
+import _poolTelekinesis from "../pool/telekinesis.js";
 import _poolTemporaryTruce from "../pool/temporary-truce.js";
 import _poolTestOfTalents from "../pool/test-of-talents.js";
 import _poolTezzeretsTouch from "../pool/tezzerets-touch.js";
@@ -1617,6 +1618,7 @@ const shard: CardShard = {
     _poolTeethingWurmlet,
     _poolTeferisCare,
     _poolTelJiladArchers,
+    _poolTelekinesis,
     _poolTemporaryTruce,
     _poolTestOfTalents,
     _poolTezzeretsTouch,
