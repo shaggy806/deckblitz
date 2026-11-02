@@ -417,7 +417,7 @@ function ImportReportBanner({
       <div className="db-import-report-head">
         <strong>
           Imported {report.total} card{report.total === 1 ? '' : 's'} — {report.asIs} as-is,{' '}
-          {report.substituted.length} substituted, {report.dropped.length} dropped
+          {report.substitutedCards} substituted, {report.droppedCards} dropped
           {report.printings > 0 ? `, ${report.printings} keeping their printing` : ''}
         </strong>
         <span className="db-import-report-actions">

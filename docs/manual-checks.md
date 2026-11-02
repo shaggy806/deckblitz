@@ -6253,3 +6253,13 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 - **Do:** Activate Nick Fury's power-up, choose Bonesplitter from the popup and confirm.
 - **Expect:** Bonesplitter enters and no "You may transform it" prompt appears.
+
+### Attacking: a click on an opponent's board attacks them
+
+- **Do:** Pass to declare attackers and click Serra Angel. Then click Carol's Hill Giant, or anywhere on her board.
+- **Expect:** Both opponents' whole frames are outlined while the Angel waits, and your own isn't. After the click the Angel is marked as attacking Carol.
+
+### Attacking: a click on a planeswalker attacks it, not its controller
+
+- **Do:** Pass to declare attackers and click Serra Angel. Then click Garruk Wildspeaker on Bob's board.
+- **Expect:** The Angel is marked as attacking Garruk, not Bob.

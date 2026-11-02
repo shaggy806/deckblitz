@@ -1,9 +1,19 @@
 import { describe, expect, it } from 'vitest'
 
-import { attackTaxCost } from './attackGroups.ts'
+import { attackTaxCost, isOwnDefender } from './attackGroups.ts'
 import type { AttackAssign } from './attackGroups.ts'
 
 const assign = (entries: Record<string, string>): AttackAssign => entries as unknown as AttackAssign
+
+describe('isOwnDefender', () => {
+  it('is a planeswalker or a battle, whatever else it is', () => {
+    expect(isOwnDefender(['planeswalker'])).toBe(true)
+    expect(isOwnDefender(['battle'])).toBe(true)
+    expect(isOwnDefender(['creature', 'planeswalker'])).toBe(true)
+    expect(isOwnDefender(['creature'])).toBe(false)
+    expect(isOwnDefender(['artifact', 'land'])).toBe(false)
+  })
+})
 
 describe('attackTaxCost', () => {
   it('is nothing without a tax', () => {

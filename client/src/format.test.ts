@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import type { GameEvent, ObjectId, PlayerId } from 'engine/client'
 import type { SeatStatus } from 'protocol'
-import { describeEvent, withNames } from './format.ts'
+import { HIDDEN_CARD, describeEvent, logName, withNames } from './format.ts'
 
 const p1 = 'p1' as PlayerId
 const p2 = 'p2' as PlayerId
@@ -58,6 +58,19 @@ describe('describeEvent', () => {
         seats,
       ),
     ).toBe('card:o1 deals 2 to Toby')
+  })
+})
+
+describe('logName', () => {
+  it('calls an object this seat was never shown "a card", not its id', () => {
+    const id = 'obj-169' as ObjectId
+    expect(logName(id, id)).toBe(HIDDEN_CARD)
+    const line = describeEvent(event({ type: 'card-drawn', player: p1, object: id }), (o) => logName(o, o), seats)
+    expect(line).toBe('Toby draws a card')
+  })
+
+  it('keeps a name it was given', () => {
+    expect(logName('obj-169' as ObjectId, 'Sol Ring')).toBe('Sol Ring')
   })
 })
 

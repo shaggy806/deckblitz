@@ -9444,4 +9444,19 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       you: { bf: ['Nick Fury, Agent of S.H.I.E.L.D.', 'Plains', 'Island', 'Swamp', 'Mountain', 'Forest'], lib: ['Bonesplitter', 'Grizzly Bears'] },
     }),
   ),
+  // --- Choosing who to attack on the board (2026-11-02) ---------------------
+  preset(
+    'Attacking: a click on an opponent\'s board attacks them',
+    board({
+      you: { bf: ['Serra Angel'] },
+      opp: [{ bf: ['Grizzly Bears'] }, { bf: ['Hill Giant'] }],
+    }),
+  ),
+  preset(
+    'Attacking: a click on a planeswalker attacks it, not its controller',
+    board({
+      you: { bf: ['Serra Angel'] },
+      opp: [{ bf: ['Garruk Wildspeaker'] }, {}],
+    }),
+  ),
 ]

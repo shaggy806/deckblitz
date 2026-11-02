@@ -2680,6 +2680,12 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Client / UI
 
+- **An opponent's whole board takes the attack click** (2026-11-02): not only their panel, once attackers
+  wait for a defender. A legal planeswalker or battle is still attacked itself, and one those attackers can't
+  attack is no click on its controller (`e2e/attack-board-click.spec.ts`).
+- **Four small fixes from a UX pass** (2026-11-02): a card this seat never saw logs as "a card", not
+  "obj-169"; a long word in a name on the stack or a hover card shrinks rather than breaking mid-word; the
+  import report counts copies, so it adds up to the list; the first lesson is "The basics", not "(proof)".
 - **Large live mana amounts by hand** (2026-10-22): "X mana in any combination of …" with a live X
   too large to list every split of (two colours past X = 22) offers one more variant whose split
   the player picks in the split-mana strip (`manaSplit`, `standaloneManaSplit`); choosing what

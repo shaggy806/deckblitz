@@ -44,6 +44,12 @@ export function attackTaxCost(
   return { mana, life, overBudget: mana > (tax?.budget ?? 0) || life > (tax?.lifeBudget ?? 0) }
 }
 
+/** A planeswalker or battle is a defender in its own right (rule 508.1b), so
+ * a click on one is never a click on the player whose board it's on. */
+export function isOwnDefender(types: readonly string[]): boolean {
+  return types.includes('planeswalker') || types.includes('battle')
+}
+
 /** Of a tile's members, the one a click should take: eligible, not
  * attacking yet and not already waiting in the group. `null` once every
  * member is spoken for. */

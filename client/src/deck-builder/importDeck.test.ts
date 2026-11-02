@@ -48,7 +48,25 @@ describe('resolveImport', () => {
     expect(resolved.printings).toEqual({ Forest: 'abc' })
     expect(resolved.report.substituted.map((s) => [s.from, s.to])).toEqual([['Tooth and Nail', 'Natural Order']])
     expect(resolved.report.dropped).toEqual(['Nothing Like It'])
-    expect(resolved.report.asIs).toBe(2)
+    expect(resolved.report.asIs).toBe(4)
+  })
+
+  it('counts copies, so the report adds up to the list', () => {
+    const { report } = resolveImport(
+      [
+        card('Forest', { count: 30 }),
+        card('Sol Ring'),
+        card('Rat Colony', { count: 4, implemented: false, suggestedReplacement: 'Grizzly Bears' }),
+        card('Nothing Like It', { count: 2, implemented: false }),
+      ],
+      null,
+    )
+    expect(report.total).toBe(37)
+    expect(report.asIs).toBe(31)
+    expect(report.substitutedCards).toBe(4)
+    expect(report.droppedCards).toBe(2)
+    expect(report.substituted).toHaveLength(1)
+    expect(report.dropped).toEqual(['Nothing Like It'])
   })
 
   it('stands a commander in by its replacement, and has none when the list named none', () => {
@@ -76,7 +94,7 @@ describe('resolveImport — a sideboard', () => {
     )
     expect(resolved.cards).toHaveLength(20)
     expect(resolved.sideboard).toEqual(['Burning Wish', 'Burning Wish', 'Demonic Tutor'])
-    expect(resolved.report.total).toBe(4)
+    expect(resolved.report.total).toBe(24)
     expect(resolved.report.substituted.map((s) => s.to)).toEqual(['Demonic Tutor'])
     expect(resolved.report.dropped).toEqual(['Nothing Like It'])
   })

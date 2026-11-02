@@ -1,5 +1,5 @@
 import { Suspense, lazy, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
-import type { CSSProperties, ReactNode } from 'react'
+import type { CSSProperties, MouseEvent as ReactMouseEvent, ReactNode } from 'react'
 import type {
   Action,
   CastVia,
@@ -63,7 +63,7 @@ import type { ResolveAims } from './game/resolveAims.ts'
 import { Symbols } from './ui/Symbols.tsx'
 import type { BoardEntry } from './game/board.ts'
 import { blockPairs, freeBlocker, leastBlocked, setPairCount } from './game/blockGroups.ts'
-import { attackPairs, attackTaxCost, freeAttacker, setAttackPairCount } from './game/attackGroups.ts'
+import { attackPairs, attackTaxCost, freeAttacker, isOwnDefender, setAttackPairCount } from './game/attackGroups.ts'
 import {
   collapseAttacks,
   blockEntries,
@@ -93,7 +93,7 @@ import { setShare } from './game/divideShares.ts'
 import { StableLabel } from './ui/StableLabel.tsx'
 import { usePlayback } from './game/usePlayback.ts'
 import { AnimationBus } from './game/animationBus.ts'
-import { describeEvent, isDetailOnlyEvent, playerLabel, seatClassOf, withNames } from './format.ts'
+import { describeEvent, isDetailOnlyEvent, logName, playerLabel, seatClassOf, withNames } from './format.ts'
 import { PhaseTrack } from './ui/PhaseTrack.tsx'
 import { TurnBanner } from './ui/TurnBanner.tsx'
 import { AnimationLayer } from './ui/AnimationLayer.tsx'
@@ -1533,7 +1533,7 @@ function GameScreen({ game }: { readonly game: NetworkGame }) {
             </div>
             <EventLog
               events={view.events}
-              nameAt={(id, seq) => publicNameAt(view.publicStints, id, seq) ?? game.nameOf(id)}
+              nameAt={(id, seq) => publicNameAt(view.publicStints, id, seq) ?? logName(id, game.nameOf(id))}
               seats={game.seats}
               onSelect={(event) => {
                 // Close the log so the board is in view, then point the
@@ -6998,6 +6998,22 @@ function Table({
   // top-row cell from a bottom-row one.
   const quadrantColumns = opponents.length === 1 ? 1 : 2
 
+  // While a group of attackers waits for a defender, an opponent's whole board
+  // takes the click their panel does. Whatever has a click of its own keeps it:
+  // a legal planeswalker or battle is an enabled tile, so it's attacked itself.
+  // One these attackers can't attack is no click on its controller either.
+  const clickBoardAsDefender = (pid: PlayerId, e: ReactMouseEvent<HTMLElement>) => {
+    const el = e.target as Element
+    // A hover card or a count popup is portalled out of the board, and React
+    // still bubbles its clicks through here.
+    if (!e.currentTarget.contains(el)) return
+    if (el.closest('button:not(:disabled), a, input, select') !== null) return
+    const tile = el.closest<HTMLElement>('[data-obj-id]')?.dataset.objId
+    const obj = tile === undefined ? undefined : view.objects[realId(tile as ObjectId)]
+    if (obj !== undefined && isOwnDefender(obj.types)) return
+    sendPicksAt(pid)
+  }
+
   return (
     <div className="player-col" ref={playerColRef}>
       {/* The band under the board the hand's tray and the priority controls
@@ -7013,11 +7029,16 @@ function Table({
                 pid === seat ? 'self' : ''
               } ${
                 view.activePlayer === pid ? 'active-turn' : ''
-              } ${view.players[pid]?.hasLost ? 'eliminated' : ''}`}
+              } ${view.players[pid]?.hasLost ? 'eliminated' : ''} ${
+                mode === 'attackers' && canSendPicksAt(pid) ? 'attack-target' : ''
+              }`}
               key={pid}
             >
               <div className="quadrant-head">{renderPlayerPanel(pid)}</div>
-              <div className="quadrant-body">
+              <div
+                className="quadrant-body"
+                onClick={mode === 'attackers' && canSendPicksAt(pid) ? (e) => clickBoardAsDefender(pid, e) : undefined}
+              >
                 <div className="board-with-sidezone">
                   {/* a cell past the first row sits along the bottom edge of
                       the table, so its lands go under its creatures — see

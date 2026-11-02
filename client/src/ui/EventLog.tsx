@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import type { CardDefinition, GameEvent, ObjectId } from 'engine/client'
 import type { SeatStatus } from 'protocol'
-import { describeEvent, isDetailOnlyEvent } from '../format.ts'
+import { HIDDEN_CARD, describeEvent, isDetailOnlyEvent } from '../format.ts'
 import { requestCards, useCardData } from '../cards/cardData.ts'
 import { CardTile } from './CardTile.tsx'
 import { defToVisible } from './defToVisible.ts'
@@ -43,8 +43,7 @@ const MARK_END = '\u0002'
  * A card name in a log line, which shows the whole card on hover or focus,
  * portalled out of the log's scroll box the way the board's previews are
  * (`useHoverPopover`). The definition is fetched the first time the pointer
- * reaches the name rather than for every name the log holds; a name that
- * isn't a card (an object nobody could see) is just bold text.
+ * reaches the name rather than for every name the log holds.
  */
 function LogCardName({ name, lookup }: { readonly name: string; readonly lookup: CardLookup }) {
   const def = lookup(name)
@@ -94,7 +93,15 @@ function EventText({
   readonly seats: readonly SeatStatus[]
   readonly lookup: CardLookup
 }) {
-  const marked = describeEvent(event, (id) => `${MARK_START}${nameAt(id, event.seq)}${MARK_END}`, seats)
+  // A card this seat was never shown is plain words: there's nothing to hover.
+  const marked = describeEvent(
+    event,
+    (id) => {
+      const name = nameAt(id, event.seq)
+      return name === HIDDEN_CARD ? name : `${MARK_START}${name}${MARK_END}`
+    },
+    seats,
+  )
   // Odd indices are the marked names — `split` on a single-char delimiter
   // pair alternates plain/marked as long as marks never nest, which they
   // can't: the name is a leaf substitution.

@@ -1160,6 +1160,26 @@
    which is why the desaturation goes on the *contents* instead: the board's
    hover popovers are portalled out to <body>, but the ones inside the cell
    must not start resolving against it. */
+/* Attackers waiting for a defender: this seat's whole frame can be clicked,
+   so the whole frame is outlined rather than its panel. A disabled tile would
+   swallow the click (a browser sends none from a disabled button), so it lets
+   it through to the tile's wrap, which still has the hover card. */
+.quadrant-cell.attack-target {
+  outline: 2px solid var(--warn);
+  outline-offset: -2px;
+}
+.quadrant-cell.attack-target .player-panel.targetable {
+  outline: none;
+}
+.quadrant-cell.attack-target .quadrant-body {
+  cursor: pointer;
+}
+.quadrant-cell.attack-target .quadrant-body:hover {
+  background: color-mix(in srgb, var(--warn) 8%, transparent);
+}
+.quadrant-cell.attack-target .mini-tile-wrap > button:disabled {
+  pointer-events: none;
+}
 .quadrant-cell.eliminated {
   position: relative;
   border-color: color-mix(in srgb, var(--bad) 55%, var(--border-soft));
@@ -2577,7 +2597,9 @@
 .mini-tile-popover .ct-name,
 .stack-entry .ct-name {
   white-space: normal;
-  overflow-wrap: anywhere;
+  /* A word too long for the row shrinks (--name-scale, CardTile.tsx) rather
+     than breaking mid-word ("Enlightenmen / t"). */
+  font-size: calc(10.5px * var(--name-scale, 1) * var(--ct-scale, 1));
 }
 .ct-cost {
   display: flex;

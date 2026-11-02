@@ -601,6 +601,14 @@ export const playerLabel = (id: PlayerId, seats?: readonly SeatStatus[]): string
   return custom || id.charAt(0).toUpperCase() + id.slice(1)
 }
 
+/** What the log calls a card this seat was never shown. */
+export const HIDDEN_CARD = 'a card'
+
+/** A log line's name for `id`, given what `nameOf` answered: `nameOf` hands
+ * back the bare id for an object this seat isn't shown, which read as "Bob
+ * draws obj-169". */
+export const logName = (id: ObjectId, name: string): string => (name === id ? HIDDEN_CARD : name)
+
 /** `text` — a refusal from the engine or server, which names players by
  * seat id ("bob is not being asked to block") and objects by id — with each
  * seat's `playerLabel` and each object's name (`nameOf`) in their place. */

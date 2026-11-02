@@ -32,7 +32,7 @@ const cards: ScenarioCard[] = [
 
 export const BASICS_PROOF: Lesson = {
   id: "basics-proof",
-  title: "The basics (proof)",
+  title: "The basics",
   chapters: [
     {
       id: "welcome",

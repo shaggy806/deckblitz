@@ -242,11 +242,13 @@ export function CardTile({
     }
   }, [artFirst, typeLineText])
   // And the name, the same way: Smaug, the Great Calamity shrinks to fit
-  // the hand's tile rather than end in "Cala…".
+  // the hand's tile rather than end in "Cala…". A title bar's name that wraps
+  // (a hover card, the stack) overflows only on a word too long for its row,
+  // and shrinks the same way; one on a single line keeps its ellipsis.
   const nameRef = useRef<HTMLSpanElement>(null)
   useLayoutEffect(() => {
     const el = nameRef.current
-    if (!artFirst || !el) return
+    if (!el || (!artFirst && getComputedStyle(el).whiteSpace === 'nowrap')) return
     el.style.removeProperty('--name-scale')
     let scale = 1
     while (el.scrollWidth > el.clientWidth && scale > 0.55) {
@@ -286,7 +288,7 @@ export function CardTile({
     }
   }, [artFirst, splitKey, obj.name, face])
   const nameNode = (
-    <span className="ct-name" ref={artFirst ? nameRef : undefined}>
+    <span className="ct-name" ref={nameRef}>
       {faceDown ?? obj.name ?? face}
       {obj.copyOf ? <span className="ct-copy"> (copy)</span> : null}
       {obj.faces && obj.faces.length > 1 && obj.doors === undefined ? (

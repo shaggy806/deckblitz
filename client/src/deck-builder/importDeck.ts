@@ -31,8 +31,12 @@ export interface ImportSubstitution {
 /** What an import changed, for the deck builder's banner and a blitz game's
  * notice. */
 export interface ImportReport {
+  /** Cards, copies counted: "30 Forest" is thirty. The next three add up to it. */
   readonly total: number
   readonly asIs: number
+  readonly substitutedCards: number
+  readonly droppedCards: number
+  /** One entry a name, however many copies of it the list had. */
   readonly substituted: readonly ImportSubstitution[]
   readonly dropped: readonly string[]
   /** How many cards kept the specific printing the pasted list named. */
@@ -133,6 +137,8 @@ export function resolveImport(
   const cards: string[] = []
   const substituted: ImportSubstitution[] = []
   const dropped: string[] = []
+  let substitutedCards = 0
+  let droppedCards = 0
   // Which printing each kept card arrived with, from the pasted list's own
   // `(SET) number` suffixes — only ever present for a card kept as-is, since
   // a substitution is a different card entirely.
@@ -149,8 +155,10 @@ export function resolveImport(
     } else if (c.suggestedReplacement) {
       resolvedName = c.suggestedReplacement
       substituted.push({ from: c.name, to: c.suggestedReplacement, options: c.replacements })
+      substitutedCards += c.count
     } else {
       dropped.push(c.name)
+      droppedCards += c.count
       continue
     }
     if (commanderNames.includes(c.name)) {
@@ -169,13 +177,17 @@ export function resolveImport(
     const resolvedName = c.implemented ? c.name : c.suggestedReplacement
     if (!resolvedName) {
       dropped.push(c.name)
+      droppedCards += c.count
       continue
     }
     if (c.implemented && c.printingId !== null) printings[c.name] ??= c.printingId
-    if (!c.implemented) substituted.push({ from: c.name, to: resolvedName, options: c.replacements })
+    if (!c.implemented) {
+      substituted.push({ from: c.name, to: resolvedName, options: c.replacements })
+      substitutedCards += c.count
+    }
     for (let i = 0; i < c.count; i += 1) sideboard.push(resolvedName)
   }
-  const total = cardReports.length + sideboardReports.length
+  const total = [...cardReports, ...sideboardReports].reduce((sum, c) => sum + c.count, 0)
 
   return {
     name: commanders.length > 0 ? `Imported: ${commanders.join(' & ')}` : 'Imported deck',
@@ -185,7 +197,9 @@ export function resolveImport(
     sideboard,
     report: {
       total,
-      asIs: total - substituted.length - dropped.length,
+      asIs: total - substitutedCards - droppedCards,
+      substitutedCards,
+      droppedCards,
       substituted,
       dropped,
       printings: Object.keys(printings).length,
