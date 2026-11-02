@@ -5099,6 +5099,10 @@ export interface CardDefinition {
    * is the fronts' summed (712.8g). Its own `manaCost` is `null`, so a copy
    * of it has mana value 0 (202.3c). `null` for every other card. */
   readonly meldOf: readonly [string, string] | null;
+  /** One of a meld pair's two front faces (rule 712.4): a double-faced card
+   * (712.1) though it has no `faces`, its back half being on the pair's
+   * `meldOf` definition. Read by `CardFilter`'s `doubleFaced`. */
+  readonly meldCard: boolean;
   /** Disturb (rule 702.150 — ROADMAP Phase 10) — a transforming DFC whose back
    * face may be cast from the graveyard for `cost`; a spell so cast is exiled
    * instead of going anywhere else (like flashback), and a permanent back face
@@ -5347,6 +5351,7 @@ const PRINTED_ABILITY: {
   transform: false,
   flip: false,
   meldOf: false,
+  meldCard: false,
   disturb: (def) => def.disturb !== null,
   adventure: false,
   omen: false,
@@ -5608,6 +5613,8 @@ interface CardDraft {
   flip?: true;
   /** See {@link CardDefinition.meldOf}. */
   meldOf?: readonly [string, string];
+  /** See {@link CardDefinition.meldCard}. */
+  meldCard?: true;
   split?: boolean;
   divided?: { readonly total: EffectAmount; readonly slot: number; readonly of?: string; readonly x?: true };
   disturb?: { readonly cost: string };
@@ -5860,6 +5867,7 @@ export function defineCard(draft: CardDraft): CardDefinition {
     transform: draft.transform ?? false,
     flip: draft.flip === true,
     meldOf: draft.meldOf ?? null,
+    meldCard: draft.meldCard === true,
     disturb: draft.disturb ?? null,
     adventure: draft.adventure ?? false,
     omen: draft.omen ?? false,

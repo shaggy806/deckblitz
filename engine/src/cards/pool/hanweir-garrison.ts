@@ -11,6 +11,7 @@ export default defineCard({
   colors: ["R"],
   types: ["creature"],
   subtypes: ["Human", "Soldier"],
+  meldCard: true,
   power: 2,
   toughness: 3,
   text: `${ATTACK_TEXT}\n(Melds with Hanweir Battlements.)`,

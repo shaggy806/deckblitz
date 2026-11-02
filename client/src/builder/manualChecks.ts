@@ -9432,4 +9432,16 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: ['Serra Angel'] },
     }),
   ),
+  preset(
+    'Nick Fury: a double-faced card may turn over once it\'s in',
+    board({
+      you: { bf: ['Nick Fury, Agent of S.H.I.E.L.D.', 'Plains', 'Island', 'Swamp', 'Mountain', 'Forest'], lib: ['Dowsing Dagger', 'Grizzly Bears'] },
+    }),
+  ),
+  preset(
+    'Nick Fury: a single-faced card isn\'t asked about',
+    board({
+      you: { bf: ['Nick Fury, Agent of S.H.I.E.L.D.', 'Plains', 'Island', 'Swamp', 'Mountain', 'Forest'], lib: ['Bonesplitter', 'Grizzly Bears'] },
+    }),
+  ),
 ]

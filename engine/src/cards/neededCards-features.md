@@ -4063,3 +4063,9 @@ counters", on the creature it was attached to even once the Aura has gone). Keys
 damage-from-created-token, damage-from-exiled-card, damage-from-this-way. Proving cards: Bind the Monster,
 Dizzying Gaze, Pain for All, Consuming Ferocity, Aura Barbs, Chainer's Torment, Selfless Exorcist,
 Vivien's Invocation.
+
+**A filter clause for double-faced cards (2026-11-02).** `CardFilter`'s `doubleFaced`: nonmodal, modal
+and meld cards (rule 712.1), any zone, either face up, with `meldCard` on a meld pair's fronts.
+Keys: condition:filter-double-faced, effect:look-and-choose-may-enter-transformed (which misread its one
+card: Nick Fury puts the card, then may transform it, so the key needed no "enters transformed" option).
+Proving cards: Overgrown Pest, Nick Fury, Agent of S.H.I.E.L.D.

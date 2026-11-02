@@ -2644,6 +2644,12 @@ It reads whatever zone the effect does: `return-from-graveyard` (Echoing Return'
 Mimic), `exile-graveyard` (Moratorium Stone; with `fromHand`, Legion's End).
 `sameNameTokensOnly: true` beside it has the namesakes be tokens, the target needn't
 be: Legions to Ashes' "and all tokens that player controls with the same name".
+`doubleFaced: true` is a double-faced card or token (rule 712.1, all three kinds; a meld
+card's two fronts carry `meldCard: true`), whichever face is up: Overgrown Pest's `anyOf`
+with a land. "If it's a double-faced card, you may transform it" after a put is a step of its
+own, not "enters transformed": a `choose-permanents` over `{ thisWay: "put-onto-battlefield",
+doubleFaced: true }`, `upTo: 1`, `then: { kind: "transform", target: 0 }` (Nick Fury, Agent of
+S.H.I.E.L.D.).
 `sameNameAsTriggerObject: true` is the same for the trigger object — the
 Shrines' "where X is the number of cards in all graveyards **with the same name
 as that spell**" (Aven Shrine): `{ countInGraveyard: { sameNameAsTriggerObject:

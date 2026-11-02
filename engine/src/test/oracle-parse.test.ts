@@ -1530,6 +1530,9 @@ describe("costs and triggers", () => {
     // (artifact creature) or (Vehicle) — Canoptek Spyder. Read as one filter it
     // came out as "an artifact creature that's a Vehicle".
     expect(parseTypePhrase("nontoken artifact creature or Vehicle")).toBeNull();
+    expect(parseTypePhrase("double-faced artifact")).toMatchObject({ doubleFaced: true });
+    // Not "a double-faced land": one filter's clauses are all of them.
+    expect(parseTypePhrase("land or double-faced card")).toBeNull();
     expect(parseTypePhrase("artifact creature or enchantment")).toBeNull();
     // Ice Cream Kitty's "another creature or token" is a creature or any
     // token; read as one filter it was a creature token.

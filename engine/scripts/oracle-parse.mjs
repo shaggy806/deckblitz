@@ -667,7 +667,8 @@ export function parseTypePhrase(phrase, { cards = false } = {}) {
       if (cards) notTypes.push("instant", "sorcery");
       continue;
     }
-    if (w === "nontoken") filter.token = false;
+    if (w === "double-faced") filter.doubleFaced = true;
+    else if (w === "nontoken") filter.token = false;
     else if (w === "token" || w === "tokens") filter.token = true;
     else if (w === "legendary") filter.supertype = "legendary";
     else if (w === "basic") filter.supertype = "basic";

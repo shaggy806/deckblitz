@@ -547,6 +547,7 @@ import _poolOnyxGoblet from "../pool/onyx-goblet.js";
 import _poolOonasGatewarden from "../pool/oonas-gatewarden.js";
 import _poolOpportunist from "../pool/opportunist.js";
 import _poolOranRiefSurvivalist from "../pool/oran-rief-survivalist.js";
+import _poolOvergrownPest from "../pool/overgrown-pest.js";
 import _poolOxDrover from "../pool/ox-drover.js";
 import _poolPactdollTerror from "../pool/pactdoll-terror.js";
 import _poolPaladinDanseSteelMaverick from "../pool/paladin-danse-steel-maverick.js";
@@ -1429,6 +1430,7 @@ const shard: CardShard = {
     _poolOonasGatewarden,
     _poolOpportunist,
     _poolOranRiefSurvivalist,
+    _poolOvergrownPest,
     _poolOxDrover,
     _poolPactdollTerror,
     _poolPaladinDanseSteelMaverick,

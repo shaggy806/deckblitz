@@ -12,6 +12,10 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **A filter clause for double-faced cards** (`condition:filter-double-faced`, 2026-11-02):
+  `CardFilter`'s `doubleFaced`, all three kinds of rule 712.1, with `meldCard` on a meld pair's
+  fronts — Overgrown Pest, Nick Fury, Agent of S.H.I.E.L.D. (whose key,
+  `effect:look-and-choose-may-enter-transformed`, misread the card: it's put, then turned over).
 - **Six families, third overnight round** (2026-11-02): changes of control as trigger events, on a
   permanent and delayed (`trigger:lose-control-trigger`); references to attachments and the source's
   host (`condition:filter-attachments`); searches of hand and graveyard with and/or zones, Doomsday's

@@ -516,6 +516,14 @@ export interface CardFilter {
    */
   readonly sameNameTokensOnly?: true;
   /**
+   * It's a double-faced card or token (rule 712.1: nonmodal, modal or a meld
+   * card), asked of what physically represents it, whichever face is up —
+   * Overgrown Pest's "a land **or double-faced card**", Nick Fury's "if it's a
+   * double-faced card, you may transform it". A permanent that's a copy of one
+   * isn't, unless it's a token copy (707.8a), which is made with its faces.
+   */
+  readonly doubleFaced?: true;
+  /**
    * Has the same name as the trigger object (rule 201.2a) — the Odyssey
    * Shrines' "the number of cards in all graveyards **with the same name as
    * that spell**", the spell whose casting fired the trigger: a `count` of `{
@@ -1712,6 +1720,15 @@ export function matchesFilter(
     const names = live !== undefined ? namesOf(registry, live) : lastKnownNames(registry, lki!);
     if (filter.sameNameAs.name === null || !names.includes(filter.sameNameAs.name)) return false;
     if (filter.sameNameTokensOnly === true && !(live !== undefined ? isTokenNow(live) : lki!.isToken)) return false;
+  }
+  if (filter.doubleFaced === true) {
+    const card = object;
+    const isOne =
+      card !== undefined &&
+      ((card.faces?.length ?? 0) > 1 ||
+        card.melded !== undefined ||
+        (registry.has(card.cardName) && registry.get(card.cardName).meldCard));
+    if (!isOne) return false;
   }
   if (filter.sameNameAsSource !== undefined) {
     const from = ctx.source === undefined ? undefined : state.objects[ctx.source];

@@ -14,6 +14,7 @@ export default defineCard({
   name: "Hanweir Battlements",
   colors: [],
   types: ["land"],
+  meldCard: true,
   text: `{T}: Add {C}.\n{R}, {T}: Target creature gains haste until end of turn.\n${MELD_TEXT}`,
   activated: [
     {

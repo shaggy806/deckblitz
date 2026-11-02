@@ -15874,6 +15874,7 @@ import _poolNiblisOfTheBreath from "./pool/niblis-of-the-breath.js";
 import _poolNiblisOfTheMist from "./pool/niblis-of-the-mist.js";
 import _poolNiblisOfTheUrn from "./pool/niblis-of-the-urn.js";
 import _poolNicanzilCurrentConductor from "./pool/nicanzil-current-conductor.js";
+import _poolNickFuryAgentOfSHIELD from "./pool/nick-fury-agent-of-s-h-i-e-l-d.js";
 import _poolNickFurySpymaster from "./pool/nick-fury-spymaster.js";
 import _poolNickValentinePrivateEye from "./pool/nick-valentine-private-eye.js";
 import _poolNicoMinoruRunaway from "./pool/nico-minoru-runaway.js";
@@ -16690,6 +16691,7 @@ import _poolOvergrownArmasaur from "./pool/overgrown-armasaur.js";
 import _poolOvergrownBattlement from "./pool/overgrown-battlement.js";
 import _poolOvergrownEstate from "./pool/overgrown-estate.js";
 import _poolOvergrownFarmland from "./pool/overgrown-farmland.js";
+import _poolOvergrownPest from "./pool/overgrown-pest.js";
 import _poolOvergrownTomb from "./pool/overgrown-tomb.js";
 import _poolOvergrownZealot from "./pool/overgrown-zealot.js";
 import _poolOvergrowthElemental from "./pool/overgrowth-elemental.js";
@@ -44184,6 +44186,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolNiblisOfTheMist,
   _poolNiblisOfTheUrn,
   _poolNicanzilCurrentConductor,
+  _poolNickFuryAgentOfSHIELD,
   _poolNickFurySpymaster,
   _poolNickValentinePrivateEye,
   _poolNicoMinoruRunaway,
@@ -45000,6 +45003,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolOvergrownBattlement,
   _poolOvergrownEstate,
   _poolOvergrownFarmland,
+  _poolOvergrownPest,
   _poolOvergrownTomb,
   _poolOvergrownZealot,
   _poolOvergrowthElemental,
@@ -72507,6 +72511,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/niblis-of-the-mist": _poolNiblisOfTheMist,
   "pool/niblis-of-the-urn": _poolNiblisOfTheUrn,
   "pool/nicanzil-current-conductor": _poolNicanzilCurrentConductor,
+  "pool/nick-fury-agent-of-s-h-i-e-l-d": _poolNickFuryAgentOfSHIELD,
   "pool/nick-fury-spymaster": _poolNickFurySpymaster,
   "pool/nick-valentine-private-eye": _poolNickValentinePrivateEye,
   "pool/nico-minoru-runaway": _poolNicoMinoruRunaway,
@@ -73323,6 +73328,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/overgrown-battlement": _poolOvergrownBattlement,
   "pool/overgrown-estate": _poolOvergrownEstate,
   "pool/overgrown-farmland": _poolOvergrownFarmland,
+  "pool/overgrown-pest": _poolOvergrownPest,
   "pool/overgrown-tomb": _poolOvergrownTomb,
   "pool/overgrown-zealot": _poolOvergrownZealot,
   "pool/overgrowth-elemental": _poolOvergrowthElemental,

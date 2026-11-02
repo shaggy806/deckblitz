@@ -13,6 +13,7 @@ export default defineCard({
   colors: ["B"],
   types: ["creature"],
   subtypes: ["Rat"],
+  meldCard: true,
   power: 2,
   toughness: 1,
   text: MELD_TEXT,

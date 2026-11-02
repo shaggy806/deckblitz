@@ -6243,3 +6243,13 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Vivien's Invocation: the creature you put deals the damage
 - **Do:** Cast Vivien's Invocation. In the popup pick Hill Giant and confirm. Then target Bob's Serra Angel when asked.
 - **Expect:** The Giant enters first and the target is chosen after, with a trigger on the stack you can respond to. The Angel takes 3.
+
+### Nick Fury: a double-faced card may turn over once it's in
+
+- **Do:** Activate Nick Fury's power-up, choose Dowsing Dagger from the popup and confirm. When asked "You may transform it", pick the Dagger.
+- **Expect:** Nick gets two +1/+1 counters. The Dagger enters as an Equipment, then turns into Lost Vale, a land. Its enter trigger still happens (Bob gets two Plants), since it entered front face up. The other looked-at cards go to the bottom.
+
+### Nick Fury: a single-faced card isn't asked about
+
+- **Do:** Activate Nick Fury's power-up, choose Bonesplitter from the popup and confirm.
+- **Expect:** Bonesplitter enters and no "You may transform it" prompt appears.

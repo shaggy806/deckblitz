@@ -1215,7 +1215,9 @@
   "replacement:damage-plus-counters-on-source",
   "replacement:affected-player-orders-damage-modifiers",
   "effect:damage-source-itself",
-  "effect:damage-source-controller-draws"
+  "effect:damage-source-controller-draws",
+  "condition:filter-double-faced",
+  "effect:look-and-choose-may-enter-transformed"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

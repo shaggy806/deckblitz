@@ -11,6 +11,7 @@ export default defineCard({
   colors: ["B"],
   types: ["creature"],
   subtypes: ["Human", "Rogue"],
+  meldCard: true,
   power: 3,
   toughness: 3,
   text: `${ENTER_TEXT}\n(Melds with Graf Rats.)`,
