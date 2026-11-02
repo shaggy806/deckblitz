@@ -6109,3 +6109,7 @@ engine terms. A second thing to check is a second test.
 ### Silent Arbiter: only one creature can attack
 - **Do:** You start at declare attackers. Click All attack, then Attack with 2. When refused, click the Silent Arbiter to take it out, and attack.
 - **Expect:** Two attackers are refused with a message, and the Bears alone attack.
+
+### Fortunate Few: each player's choice survives, the rest are destroyed
+- **Do:** Cast Fortunate Few and choose the Hill Giant.
+- **Expect:** The prompt names a permanent you don't control, and each other player chooses one not chosen yet. Only the chosen permanents remain; the lands stay.

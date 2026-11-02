@@ -9129,6 +9129,13 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    "Fortunate Few: each player's choice survives, the rest are destroyed",
+    board({
+      you: { bf: ['Plains*5', 'Grizzly Bears'], hand: ['Fortunate Few'] },
+      opp: [{ bf: ['Hill Giant', 'Llanowar Elves'] }, { bf: ['Serra Angel'] }, { bf: ['Elite Vanguard'] }],
+    }),
+  ),
+  preset(
     'Time Stop: the turn ends at once',
     board({
       you: { bf: ['Island*6', 'Grizzly Bears'], hand: ['Time Stop'] },

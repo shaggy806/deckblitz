@@ -86,6 +86,26 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2: what a permanent has dealt damage to** (2026-11-01, `6faf982be`;
+  `stat:filter-dealt-damage-this-turn`, `stat:filter-dealt-damage-to-you-this-turn` and three more) —
+  `GameObject.dealtDamage`, the `dealtDamageThisTurn` filter, the `self-hasnt-dealt-damage` condition.
+  Reciprocate, Retaliate, Spear of Heliod, Restore the Peace, Red Guardian, Karakyk Guardian, Ruric Thar, Soul
+  Collector, Witch-king.
+- **Need-keys Phase 2: token creation's replacements planned as one event** (2026-11-01, `ab972f7cb`;
+  `replacement:token-creation-add-extra`, `replacement:artifact-tokens-instead`,
+  `replacement:token-creation-substitute-replacement` and one-of-each) — `token-replacements.ts`,
+  `plusOneToken`, `tokensInstead`, `oneOfEach`, `ofTokens`; `tokenCreationMultiplier` counts a stack's copies,
+  capped at 1000. Xorn, Stridehangar Automaton, Tippy-Toe, Queen Allenal, Draconic Visitor, Fisher's Talent,
+  Academy Manufactor.
+- **Need-keys Phase 2: exchanges with a life total** (2026-11-01, `ad7ae3cdf`; `effect:exchange-life-power`,
+  `effect:exchange-life-totals`) — `exchange-life-totals`, `exchange-life-stat` (was `exchange-life-toughness`),
+  the `{ lifeDifference }` amount, `player-compare`'s `within` (119.7, 119.8). Evra, Mirror Universe, Soul
+  Conduit, Mister Negative, Psychic Transfer, Profane Transfusion.
+- **Need-keys Phase 2: choices kept and the rest destroyed** (2026-11-01, `e66a1bd9e`;
+  `effect:destroy-all-except-chosen`, `effect:each-player-chooses-destroy-rest`) — `vote` for a permanent
+  takes `count`, `upTo` (replacing `upToOne`) and `keep`; `startingWith`'s `"you-then-active-player"`; `thisWay:
+  "chosen"` reads votes too. Divine Reckoning, Duneblast, Mount Doom, Fall of the First Civilization, Fortunate
+  Few, Druid of Purification.
 - **Need-keys Phase 2: limits on how many creatures attack or block** (2026-11-01, `b5fb71223`;
   `static:attack-limit`, `static:max-attackers-blockers`) — `attackLimit`, `blockLimit`, the `limit-blockers`
   effect, `combat/limits.ts`. Crawlspace, Silent Arbiter, Caverns of Despair, Dueling Grounds, Tomik, Mirri.

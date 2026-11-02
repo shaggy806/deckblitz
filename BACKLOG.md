@@ -410,7 +410,8 @@ section keeps only what to do next.
   cards), cost reductions and cast rules (46 freed, 36 proving cards), player scopes and ability cost
   reductions (13 freed, 25 proving cards), a number a player chooses (3 freed, 7 proving cards), cycling
   variants and limited free casts (1 freed, 15 proving cards), ending the turn or combat and attack or
-  block limits (6 freed, 11 proving cards). **About 1346 freed cards wait for the authoring
+  block limits (6 freed, 11 proving cards), choices kept and life exchanges (4 freed, 12 proving cards),
+  token replacements and damage history (12 freed, 16 proving cards). **About 1362 freed cards wait for the authoring
   sweep**
   (`cards:needs -- --stale`); the user authors them in one sweep once the reasonable keys are built.
   Cloud sessions are building `keyword:hexproof-from-colors`, the combat-restriction second group,
