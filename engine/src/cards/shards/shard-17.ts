@@ -597,6 +597,7 @@ import _poolReaperFromTheAbyss from "../pool/reaper-from-the-abyss.js";
 import _poolReasonBelieve from "../pool/reason-believe.js";
 import _poolRecruiterOfTheGuard from "../pool/recruiter-of-the-guard.js";
 import _poolRecuperate from "../pool/recuperate.js";
+import _poolRedGuardianSuperSoldier from "../pool/red-guardian-super-soldier.js";
 import _poolRedMagesRapier from "../pool/red-mages-rapier.js";
 import _poolRedirect from "../pool/redirect.js";
 import _poolRelmsSketching from "../pool/relms-sketching.js";
@@ -1482,6 +1483,7 @@ const shard: CardShard = {
     _poolReasonBelieve,
     _poolRecruiterOfTheGuard,
     _poolRecuperate,
+    _poolRedGuardianSuperSoldier,
     _poolRedMagesRapier,
     _poolRedirect,
     _poolRelmsSketching,

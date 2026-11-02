@@ -206,6 +206,7 @@ import _poolDivest from "../pool/divest.js";
 import _poolDocOcksHenchmen from "../pool/doc-ocks-henchmen.js";
 import _poolDocentOfPerfection from "../pool/docent-of-perfection.js";
 import _poolDowsingDevice from "../pool/dowsing-device.js";
+import _poolDraconicVisitor from "../pool/draconic-visitor.js";
 import _poolDragonflySuit from "../pool/dragonfly-suit.js";
 import _poolDrainingWhelk from "../pool/draining-whelk.js";
 import _poolDraugrThoughtThief from "../pool/draugr-thought-thief.js";
@@ -614,6 +615,7 @@ import _poolRealitySmasher from "../pool/reality-smasher.js";
 import _poolRealmScorcherHellkite from "../pool/realm-scorcher-hellkite.js";
 import _poolReapersScythe from "../pool/reapers-scythe.js";
 import _poolReaverAmbush from "../pool/reaver-ambush.js";
+import _poolReciprocate from "../pool/reciprocate.js";
 import _poolReduceToAshes from "../pool/reduce-to-ashes.js";
 import _poolRefocus from "../pool/refocus.js";
 import _poolRefuteDestiny from "../pool/refute-destiny.js";
@@ -624,6 +626,7 @@ import _poolRenewingDawn from "../pool/renewing-dawn.js";
 import _poolRepentantBlacksmith from "../pool/repentant-blacksmith.js";
 import _poolRepulsorRays from "../pool/repulsor-rays.js";
 import _poolReservoirWalker from "../pool/reservoir-walker.js";
+import _poolRetaliate from "../pool/retaliate.js";
 import _poolRetractionHelix from "../pool/retraction-helix.js";
 import _poolReturnTheFavor from "../pool/return-the-favor.js";
 import _poolReturnedCentaur from "../pool/returned-centaur.js";
@@ -1123,6 +1126,7 @@ const shard: CardShard = {
     _poolDocOcksHenchmen,
     _poolDocentOfPerfection,
     _poolDowsingDevice,
+    _poolDraconicVisitor,
     _poolDragonflySuit,
     _poolDrainingWhelk,
     _poolDraugrThoughtThief,
@@ -1531,6 +1535,7 @@ const shard: CardShard = {
     _poolRealmScorcherHellkite,
     _poolReapersScythe,
     _poolReaverAmbush,
+    _poolReciprocate,
     _poolReduceToAshes,
     _poolRefocus,
     _poolRefuteDestiny,
@@ -1541,6 +1546,7 @@ const shard: CardShard = {
     _poolRepentantBlacksmith,
     _poolRepulsorRays,
     _poolReservoirWalker,
+    _poolRetaliate,
     _poolRetractionHelix,
     _poolReturnTheFavor,
     _poolReturnedCentaur,

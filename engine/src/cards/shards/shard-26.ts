@@ -694,6 +694,7 @@ import _poolSoratamiCloudskater from "../pool/soratami-cloudskater.js";
 import _poolSorinsThirst from "../pool/sorins-thirst.js";
 import _poolSpaceMarineDevastator from "../pool/space-marine-devastator.js";
 import _poolSpawnGangCommander from "../pool/spawn-gang-commander.js";
+import _poolSpearOfHeliod from "../pool/spear-of-heliod.js";
 import _poolSpearSpewer from "../pool/spear-spewer.js";
 import _poolSpectralArcanist from "../pool/spectral-arcanist.js";
 import _poolSpectralReserves from "../pool/spectral-reserves.js";
@@ -1582,6 +1583,7 @@ const shard: CardShard = {
     _poolSorinsThirst,
     _poolSpaceMarineDevastator,
     _poolSpawnGangCommander,
+    _poolSpearOfHeliod,
     _poolSpearSpewer,
     _poolSpectralArcanist,
     _poolSpectralReserves,

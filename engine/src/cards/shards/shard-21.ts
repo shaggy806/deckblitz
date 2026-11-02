@@ -586,6 +586,7 @@ import _poolRowdyCrew from "../pool/rowdy-crew.js";
 import _poolRummagingGoblin from "../pool/rummaging-goblin.js";
 import _poolRunOutOfTown from "../pool/run-out-of-town.js";
 import _poolRunawayBoulder from "../pool/runaway-boulder.js";
+import _poolRuricTharMagecrusher from "../pool/ruric-thar-magecrusher.js";
 import _poolRustwingFalcon from "../pool/rustwing-falcon.js";
 import _poolSageOfEpityr from "../pool/sage-of-epityr.js";
 import _poolSalvagingStation from "../pool/salvaging-station.js";
@@ -1435,6 +1436,7 @@ const shard: CardShard = {
     _poolRummagingGoblin,
     _poolRunOutOfTown,
     _poolRunawayBoulder,
+    _poolRuricTharMagecrusher,
     _poolRustwingFalcon,
     _poolSageOfEpityr,
     _poolSalvagingStation,

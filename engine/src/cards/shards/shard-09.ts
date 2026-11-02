@@ -580,6 +580,7 @@ import _poolPsychicSymbiont from "../pool/psychic-symbiont.js";
 import _poolPterodonKnight from "../pool/pterodon-knight.js";
 import _poolPunySnack from "../pool/puny-snack.js";
 import _poolPuppeteer from "../pool/puppeteer.js";
+import _poolQueenAllenalOfRuadach from "../pool/queen-allenal-of-ruadach.js";
 import _poolQuestForTheGemblades from "../pool/quest-for-the-gemblades.js";
 import _poolQuicksilverBehemoth from "../pool/quicksilver-behemoth.js";
 import _poolQuilledCharger from "../pool/quilled-charger.js";
@@ -1499,6 +1500,7 @@ const shard: CardShard = {
     _poolPterodonKnight,
     _poolPunySnack,
     _poolPuppeteer,
+    _poolQueenAllenalOfRuadach,
     _poolQuestForTheGemblades,
     _poolQuicksilverBehemoth,
     _poolQuilledCharger,

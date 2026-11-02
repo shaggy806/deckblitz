@@ -523,6 +523,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Shapeshifter Token (Irregular Cohort)",
   "Shapeshifter Token (X/X Changeling Deathtouch)",
   "Shard Token",
+  "Shark Token",
   "Shark Token (Shark Typhoon)",
   "Sheep Token",
   "Shrine Token",

@@ -655,6 +655,7 @@ import _poolSmugglersBuggy from "../pool/smugglers-buggy.js";
 import _poolSnowCoveredSwamp from "../pool/snow-covered-swamp.js";
 import _poolSoldeviHeretic from "../pool/soldevi-heretic.js";
 import _poolSolemnRecruit from "../pool/solemn-recruit.js";
+import _poolSoulCollector from "../pool/soul-collector.js";
 import _poolSoulFeast from "../pool/soul-feast.js";
 import _poolSoulOfWindgrace from "../pool/soul-of-windgrace.js";
 import _poolSoulOfZendikar from "../pool/soul-of-zendikar.js";
@@ -1512,6 +1513,7 @@ const shard: CardShard = {
     _poolSnowCoveredSwamp,
     _poolSoldeviHeretic,
     _poolSolemnRecruit,
+    _poolSoulCollector,
     _poolSoulFeast,
     _poolSoulOfWindgrace,
     _poolSoulOfZendikar,

@@ -703,6 +703,7 @@ import _poolStormCrow from "../pool/storm-crow.js";
 import _poolStormTheCitadel from "../pool/storm-the-citadel.js";
 import _poolStorySeeker from "../pool/story-seeker.js";
 import _poolStrengthOfIsolation from "../pool/strength-of-isolation.js";
+import _poolStridehangarAutomaton from "../pool/stridehangar-automaton.js";
 import _poolStrionicResonator from "../pool/strionic-resonator.js";
 import _poolStrongholdMachinist from "../pool/stronghold-machinist.js";
 import _poolStructuralAssault from "../pool/structural-assault.js";
@@ -1553,6 +1554,7 @@ const shard: CardShard = {
     _poolStormTheCitadel,
     _poolStorySeeker,
     _poolStrengthOfIsolation,
+    _poolStridehangarAutomaton,
     _poolStrionicResonator,
     _poolStrongholdMachinist,
     _poolStructuralAssault,

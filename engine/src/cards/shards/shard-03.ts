@@ -800,6 +800,7 @@ import _tokensOrbToken from "../tokens/orb-token.js";
 import _tokensOxToken from "../tokens/ox-token.js";
 import _tokensPlantToken from "../tokens/plant-token.js";
 import _tokensScrapToken from "../tokens/scrap-token.js";
+import _tokensSharkToken from "../tokens/shark-token.js";
 import _tokensSpiritTokenWhiteBlack from "../tokens/spirit-token-white-black.js";
 import _tokensWhaleToken from "../tokens/whale-token.js";
 import _tokensWhiteCitizenToken from "../tokens/white-citizen-token.js";
@@ -1607,6 +1608,7 @@ const shard: CardShard = {
     _tokensOxToken,
     _tokensPlantToken,
     _tokensScrapToken,
+    _tokensSharkToken,
     _tokensSpiritTokenWhiteBlack,
     _tokensWhaleToken,
     _tokensWhiteCitizenToken,

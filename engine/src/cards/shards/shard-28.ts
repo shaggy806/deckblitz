@@ -593,6 +593,7 @@ import _poolResplendentGriffin from "../pool/resplendent-griffin.js";
 import _poolResplendentMentor from "../pool/resplendent-mentor.js";
 import _poolRestlessReef from "../pool/restless-reef.js";
 import _poolRestorationSpecialist from "../pool/restoration-specialist.js";
+import _poolRestoreThePeace from "../pool/restore-the-peace.js";
 import _poolReturnToTheRanks from "../pool/return-to-the-ranks.js";
 import _poolReturnedPhalanx from "../pool/returned-phalanx.js";
 import _poolReveillark from "../pool/reveillark.js";
@@ -1491,6 +1492,7 @@ const shard: CardShard = {
     _poolResplendentMentor,
     _poolRestlessReef,
     _poolRestorationSpecialist,
+    _poolRestoreThePeace,
     _poolReturnToTheRanks,
     _poolReturnedPhalanx,
     _poolReveillark,

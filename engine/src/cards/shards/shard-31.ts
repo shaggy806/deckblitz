@@ -9,6 +9,7 @@ import _poolAbbeyGargoyles from "../pool/abbey-gargoyles.js";
 import _poolAberrantMindSorcerer from "../pool/aberrant-mind-sorcerer.js";
 import _poolAboshanCephalidEmperor from "../pool/aboshan-cephalid-emperor.js";
 import _poolAbzanBanner from "../pool/abzan-banner.js";
+import _poolAcademyManufactor from "../pool/academy-manufactor.js";
 import _poolAcolyteOfAclazotz from "../pool/acolyte-of-aclazotz.js";
 import _poolActOnImpulse from "../pool/act-on-impulse.js";
 import _poolAerialGuide from "../pool/aerial-guide.js";
@@ -947,6 +948,7 @@ const shard: CardShard = {
     _poolAberrantMindSorcerer,
     _poolAboshanCephalidEmperor,
     _poolAbzanBanner,
+    _poolAcademyManufactor,
     _poolAcolyteOfAclazotz,
     _poolActOnImpulse,
     _poolAerialGuide,

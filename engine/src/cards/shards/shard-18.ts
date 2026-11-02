@@ -749,6 +749,7 @@ import _poolThundersongTrumpeter from "../pool/thundersong-trumpeter.js";
 import _poolTifaMartialArtist from "../pool/tifa-martial-artist.js";
 import _poolTimeWarp from "../pool/time-warp.js";
 import _poolTimelessWitness from "../pool/timeless-witness.js";
+import _poolTippyToeTerrificPartner from "../pool/tippy-toe-terrific-partner.js";
 import _poolTivadarOfThorn from "../pool/tivadar-of-thorn.js";
 import _poolTolarianWinds from "../pool/tolarian-winds.js";
 import _poolTombTrawler from "../pool/tomb-trawler.js";
@@ -1625,6 +1626,7 @@ const shard: CardShard = {
     _poolTifaMartialArtist,
     _poolTimeWarp,
     _poolTimelessWitness,
+    _poolTippyToeTerrificPartner,
     _poolTivadarOfThorn,
     _poolTolarianWinds,
     _poolTombTrawler,

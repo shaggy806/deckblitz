@@ -264,6 +264,7 @@ import _poolFireElemental from "../pool/fire-elemental.js";
 import _poolFireball from "../pool/fireball.js";
 import _poolFirebladeArtist from "../pool/fireblade-artist.js";
 import _poolFirstDayOfClass from "../pool/first-day-of-class.js";
+import _poolFishersTalent from "../pool/fishers-talent.js";
 import _poolFlailingDrake from "../pool/flailing-drake.js";
 import _poolFlameOn from "../pool/flame-on.js";
 import _poolFlameSweep from "../pool/flame-sweep.js";
@@ -1143,6 +1144,7 @@ const shard: CardShard = {
     _poolFireball,
     _poolFirebladeArtist,
     _poolFirstDayOfClass,
+    _poolFishersTalent,
     _poolFlailingDrake,
     _poolFlameOn,
     _poolFlameSweep,

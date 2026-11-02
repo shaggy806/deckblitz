@@ -921,6 +921,7 @@ import _poolWoodlandAcolyte from "../pool/woodland-acolyte.js";
 import _poolWoodweaversPuzzleknot from "../pool/woodweavers-puzzleknot.js";
 import _poolWorldsWithinWorlds from "../pool/worlds-within-worlds.js";
 import _poolX23DeadlyWeapon from "../pool/x-23-deadly-weapon.js";
+import _poolXorn from "../pool/xorn.js";
 import _poolXyrisTheWrithingStorm from "../pool/xyris-the-writhing-storm.js";
 import _poolYavimayaEnchantress from "../pool/yavimaya-enchantress.js";
 import _poolYouAreAlreadyDead from "../pool/you-are-already-dead.js";
@@ -1874,6 +1875,7 @@ const shard: CardShard = {
     _poolWoodweaversPuzzleknot,
     _poolWorldsWithinWorlds,
     _poolX23DeadlyWeapon,
+    _poolXorn,
     _poolXyrisTheWrithingStorm,
     _poolYavimayaEnchantress,
     _poolYouAreAlreadyDead,
