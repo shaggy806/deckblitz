@@ -67,6 +67,7 @@ import _poolBayekOfSiwa from "../pool/bayek-of-siwa.js";
 import _poolBearerOfGlory from "../pool/bearer-of-glory.js";
 import _poolBeastsOfBogardan from "../pool/beasts-of-bogardan.js";
 import _poolBedazzle from "../pool/bedazzle.js";
+import _poolBehemothOfVault0 from "../pool/behemoth-of-vault-0.js";
 import _poolBeholdTheMultiverse from "../pool/behold-the-multiverse.js";
 import _poolBelbesArmor from "../pool/belbes-armor.js";
 import _poolBelltollDragon from "../pool/belltoll-dragon.js";
@@ -938,6 +939,7 @@ const shard: CardShard = {
     _poolBearerOfGlory,
     _poolBeastsOfBogardan,
     _poolBedazzle,
+    _poolBehemothOfVault0,
     _poolBeholdTheMultiverse,
     _poolBelbesArmor,
     _poolBelltollDragon,

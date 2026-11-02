@@ -163,6 +163,7 @@ import _poolCrowOfDarkTidings from "../pool/crow-of-dark-tidings.js";
 import _poolCrudeRampart from "../pool/crude-rampart.js";
 import _poolCrystalCarapace from "../pool/crystal-carapace.js";
 import _poolCrystalVein from "../pool/crystal-vein.js";
+import _poolDainIronfoot from "../pool/dain-ironfoot.js";
 import _poolDakkonShadowSlayer from "../pool/dakkon-shadow-slayer.js";
 import _poolDarkPetition from "../pool/dark-petition.js";
 import _poolDarkwatchElves from "../pool/darkwatch-elves.js";
@@ -1083,6 +1084,7 @@ const shard: CardShard = {
     _poolCrudeRampart,
     _poolCrystalCarapace,
     _poolCrystalVein,
+    _poolDainIronfoot,
     _poolDakkonShadowSlayer,
     _poolDarkPetition,
     _poolDarkwatchElves,

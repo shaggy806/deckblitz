@@ -1584,6 +1584,7 @@ import _poolAzureMage from "./pool/azure-mage.js";
 import _poolAzusaLostButSeeking from "./pool/azusa-lost-but-seeking.js";
 import _poolAzusasManyJourneys from "./pool/azusas-many-journeys.js";
 import _poolBaSingSe from "./pool/ba-sing-se.js";
+import _poolBackForMore from "./pool/back-for-more.js";
 import _poolBackForSeconds from "./pool/back-for-seconds.js";
 import _poolBackInTown from "./pool/back-in-town.js";
 import _poolBackOnTrack from "./pool/back-on-track.js";
@@ -1970,6 +1971,7 @@ import _poolBefriendingTheMoths from "./pool/befriending-the-moths.js";
 import _poolBefuddle from "./pool/befuddle.js";
 import _poolBeginTheInvasion from "./pool/begin-the-invasion.js";
 import _poolBeguilerOfWills from "./pool/beguiler-of-wills.js";
+import _poolBehemothOfVault0 from "./pool/behemoth-of-vault-0.js";
 import _poolBehemothSledge from "./pool/behemoth-sledge.js";
 import _poolBehemothsHerald from "./pool/behemoths-herald.js";
 import _poolBehindTheMask from "./pool/behind-the-mask.js";
@@ -5044,6 +5046,7 @@ import _poolCurseOfTheBloodyTome from "./pool/curse-of-the-bloody-tome.js";
 import _poolCurseOfTheNightlyHunt from "./pool/curse-of-the-nightly-hunt.js";
 import _poolCurseOfTheRestlessDead from "./pool/curse-of-the-restless-dead.js";
 import _poolCurseOfTheSwine from "./pool/curse-of-the-swine.js";
+import _poolCurseOfTheWerefox from "./pool/curse-of-the-werefox.js";
 import _poolCurseOfUnbinding from "./pool/curse-of-unbinding.js";
 import _poolCurseOfVerbosity from "./pool/curse-of-verbosity.js";
 import _poolCurseOfVitality from "./pool/curse-of-vitality.js";
@@ -5131,6 +5134,7 @@ import _poolDailyBugleBuilding from "./pool/daily-bugle-building.js";
 import _poolDailyBugleNewspaper from "./pool/daily-bugle-newspaper.js";
 import _poolDailyBugleReporters from "./pool/daily-bugle-reporters.js";
 import _poolDailyRegimen from "./pool/daily-regimen.js";
+import _poolDainIronfoot from "./pool/dain-ironfoot.js";
 import _poolDainLordOfTheIronHills from "./pool/dain-lord-of-the-iron-hills.js";
 import _poolDainsCompany from "./pool/dains-company.js";
 import _poolDakkonBlackblade from "./pool/dakkon-blackblade.js";
@@ -8632,6 +8636,7 @@ import _poolFortressKinGuard from "./pool/fortress-kin-guard.js";
 import _poolFortuitousFind from "./pool/fortuitous-find.js";
 import _poolFortunateFew from "./pool/fortunate-few.js";
 import _poolForumFamiliar from "./pool/forum-familiar.js";
+import _poolForumFilibuster from "./pool/forum-filibuster.js";
 import _poolForumNecroscribe from "./pool/forum-necroscribe.js";
 import _poolForumOfAmity from "./pool/forum-of-amity.js";
 import _poolForumsFavor from "./pool/forums-favor.js";
@@ -29790,6 +29795,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAzusaLostButSeeking,
   _poolAzusasManyJourneys,
   _poolBaSingSe,
+  _poolBackForMore,
   _poolBackForSeconds,
   _poolBackInTown,
   _poolBackOnTrack,
@@ -30176,6 +30182,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBefuddle,
   _poolBeginTheInvasion,
   _poolBeguilerOfWills,
+  _poolBehemothOfVault0,
   _poolBehemothSledge,
   _poolBehemothsHerald,
   _poolBehindTheMask,
@@ -33250,6 +33257,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCurseOfTheNightlyHunt,
   _poolCurseOfTheRestlessDead,
   _poolCurseOfTheSwine,
+  _poolCurseOfTheWerefox,
   _poolCurseOfUnbinding,
   _poolCurseOfVerbosity,
   _poolCurseOfVitality,
@@ -33337,6 +33345,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDailyBugleNewspaper,
   _poolDailyBugleReporters,
   _poolDailyRegimen,
+  _poolDainIronfoot,
   _poolDainLordOfTheIronHills,
   _poolDainsCompany,
   _poolDakkonBlackblade,
@@ -36838,6 +36847,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFortuitousFind,
   _poolFortunateFew,
   _poolForumFamiliar,
+  _poolForumFilibuster,
   _poolForumNecroscribe,
   _poolForumOfAmity,
   _poolForumsFavor,
@@ -58009,6 +58019,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/azusa-lost-but-seeking": _poolAzusaLostButSeeking,
   "pool/azusas-many-journeys": _poolAzusasManyJourneys,
   "pool/ba-sing-se": _poolBaSingSe,
+  "pool/back-for-more": _poolBackForMore,
   "pool/back-for-seconds": _poolBackForSeconds,
   "pool/back-in-town": _poolBackInTown,
   "pool/back-on-track": _poolBackOnTrack,
@@ -58395,6 +58406,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/befuddle": _poolBefuddle,
   "pool/begin-the-invasion": _poolBeginTheInvasion,
   "pool/beguiler-of-wills": _poolBeguilerOfWills,
+  "pool/behemoth-of-vault-0": _poolBehemothOfVault0,
   "pool/behemoth-sledge": _poolBehemothSledge,
   "pool/behemoths-herald": _poolBehemothsHerald,
   "pool/behind-the-mask": _poolBehindTheMask,
@@ -61469,6 +61481,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/curse-of-the-nightly-hunt": _poolCurseOfTheNightlyHunt,
   "pool/curse-of-the-restless-dead": _poolCurseOfTheRestlessDead,
   "pool/curse-of-the-swine": _poolCurseOfTheSwine,
+  "pool/curse-of-the-werefox": _poolCurseOfTheWerefox,
   "pool/curse-of-unbinding": _poolCurseOfUnbinding,
   "pool/curse-of-verbosity": _poolCurseOfVerbosity,
   "pool/curse-of-vitality": _poolCurseOfVitality,
@@ -61556,6 +61569,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/daily-bugle-newspaper": _poolDailyBugleNewspaper,
   "pool/daily-bugle-reporters": _poolDailyBugleReporters,
   "pool/daily-regimen": _poolDailyRegimen,
+  "pool/dain-ironfoot": _poolDainIronfoot,
   "pool/dain-lord-of-the-iron-hills": _poolDainLordOfTheIronHills,
   "pool/dains-company": _poolDainsCompany,
   "pool/dakkon-blackblade": _poolDakkonBlackblade,
@@ -65057,6 +65071,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/fortuitous-find": _poolFortuitousFind,
   "pool/fortunate-few": _poolFortunateFew,
   "pool/forum-familiar": _poolForumFamiliar,
+  "pool/forum-filibuster": _poolForumFilibuster,
   "pool/forum-necroscribe": _poolForumNecroscribe,
   "pool/forum-of-amity": _poolForumOfAmity,
   "pool/forums-favor": _poolForumsFavor,

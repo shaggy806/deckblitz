@@ -29468,7 +29468,7 @@ export class Game {
           value: { sentinel, resume },
         };
       },
-      reflexiveTrigger: (specs, effect, text, value, divided) => {
+      reflexiveTrigger: (specs, effect, text, value, divided, about) => {
         // Rule 603.12: it triggers now and waits, like any trigger, to be put
         // on the stack the next time a player would receive priority.
         const object = this.state.objects[source];
@@ -29486,8 +29486,21 @@ export class Game {
           // Its own value, when the spec reads one (Tip the Scales' X), else
           // the creating ability's.
           ...((value ?? triggerValue) !== 0 ? { triggerValue: value ?? triggerValue } : {}),
-          ...(triggerObject !== undefined ? { triggerObject } : {}),
-          ...(Object.keys(refs).length > 0 ? { lastKnownRefs: refs } : {}),
+          // What the spec's `about` names takes the trigger object's place,
+          // and is followed from this stint (rule 400.7).
+          ...(about !== undefined
+            ? {
+                triggerObject: about,
+                lastKnownRefs: {
+                  ...refs,
+                  triggerObjectAfterLeaving: undefined,
+                  triggerObject: this.state.objects[about]?.zoneChangeCount ?? 0,
+                },
+              }
+            : {
+                ...(triggerObject !== undefined ? { triggerObject } : {}),
+                ...(Object.keys(refs).length > 0 ? { lastKnownRefs: refs } : {}),
+              }),
           reflexive: { targets: [...specs], effect, text, ...(divided !== undefined ? { divided } : {}) },
         });
       },

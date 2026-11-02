@@ -406,7 +406,13 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "gain-class-level": none,
   "unlock-door": (n, v) => v.touch(n.target, "help", MINOR),
   "set-door": none,
-  "reflexive-trigger": none,
+  // Its targets are its own, but an `about` slot is the enclosing ability's,
+  // and takes what the reflexive ability does to it (Behemoth of Vault 0's
+  // "destroy that permanent").
+  "reflexive-trigger": (n, v) => {
+    if (typeof n.about !== "number") return;
+    for (const { polarity, weight } of slotTouches(n.effect, 1, undefined, true)[0]) v.touch(n.about, polarity, weight);
+  },
   "put-on-library": (n, v) => v.touch(n.target, "help", MINOR),
   // Lands or artifacts off the battlefield onto their owners' libraries are
   // removal (Plow Under, Rebuking Ceremony). "Target creature cards from your
@@ -912,6 +918,9 @@ function slotTouches(
   effect: EffectSpec | null | undefined,
   count: number,
   bias?: PolarityBias,
+  /** Read `"trigger-object"` as slot 0, and no slot as itself: what a
+   * reflexive ability does to its `about`. */
+  triggerObjectOnly = false,
 ): Touch[][] {
   const touches: Touch[][] = Array.from({ length: count }, () => []);
   // The kind whose rule is touching right now, for `bias`. A child's walk
@@ -922,6 +931,10 @@ function slotTouches(
   const visit: Visit = {
     touch(ref, polarity, weight) {
       const side = (kind !== null ? bias?.[kind] : undefined) ?? polarity;
+      if (triggerObjectOnly) {
+        if (ref === "trigger-object") touches[0].push({ polarity: side, weight });
+        return;
+      }
       for (const read of slotsOf(ref)) {
         const slot = read - shift;
         if (slot >= 0 && slot < count) touches[slot].push({ polarity: side, weight });

@@ -5343,6 +5343,60 @@ function chosenNumbers(text, ctx) {
   return null;
 }
 
+/**
+ * A step and the "When you do, …" after it, whose effect names what the step
+ * made, returned or targeted (the `reflexive-trigger`'s `about`, rule 603.12),
+ * as the step's effect and the reflexive one; `null` when either isn't read.
+ * The reflexive ability's targets are its own, so they don't take a slot of
+ * the creating ability's.
+ */
+function reflexiveAboutAt(sentences, i, ctx) {
+  const clause = /^When you do, (.+\.)$/.exec(sentences[i + 1] ?? "");
+  if (clause === null) return null;
+  const slots = ctx.targets.length;
+  const step = parseSentence(sentences[i], ctx);
+  const about = step === null || step === undefined ? undefined : reflexiveAbout(step, clause[1]);
+  const read = about === undefined ? null : reflexiveClause(clause[1]);
+  if (read === null) {
+    ctx.targets.length = slots;
+    return null;
+  }
+  return [step, { kind: "reflexive-trigger", about, targets: read.targets, effect: read.effect, text: sentences[i + 1] }];
+}
+
+/** What a "When you do" clause's "it", "that token" or "that creature" means
+ * after `step`: its token, the card it returned, or the host it named. */
+function reflexiveAbout(step, clause) {
+  if (step.kind === "put-onto-battlefield") return /^it /.test(clause) ? "put-this-way" : undefined;
+  if (step.kind !== "create-token") return undefined;
+  if (/^that creature /.test(clause)) return typeof step.attachedTo === "number" ? step.attachedTo : undefined;
+  return /\b(it|that token)\b/.test(clause) ? "created" : undefined;
+}
+
+/** The templates of a "When you do" clause reading its `about`. */
+function reflexiveClause(clause) {
+  const opponentCreature = { kind: "permanent", whose: "opponent", filter: { type: "creature" } };
+  if (clause === "attach it to target creature you control.") {
+    return {
+      targets: ["creature-you-control"],
+      effect: { kind: "attach", target: 0, attachment: "trigger-object" },
+    };
+  }
+  if (/^(it|that creature) fights up to one target creature you don't control\.$/.test(clause)) {
+    return {
+      targets: [{ kind: "optional", of: opponentCreature }],
+      effect: { kind: "fight", a: "trigger-object", b: 0 },
+    };
+  }
+  if (clause === "return up to one target Aura or Equipment card from your graveyard to the battlefield attached to that token.") {
+    return {
+      targets: [{ kind: "optional", of: { kind: "card-in-graveyard", whose: "you", filter: { subtypes: ["Aura", "Equipment"] } } }],
+      effect: { kind: "put-onto-battlefield", target: 0, attachedTo: "trigger-object" },
+    };
+  }
+  return null;
+}
+
 export function parseEffect(text, outer) {
   // Each target a sentence names takes the next slot of the ability's list.
   const ctx = { ...outer, target: (spec) => outer.targets.push(spec) - 1 };
@@ -5398,6 +5452,18 @@ export function parseEffect(text, outer) {
     if (impulse !== null) {
       parsed.push(impulse);
       hints.push({ sentence, effect: impulse });
+      skip = 1;
+      continue;
+    }
+    // "Create a … token. When you do, attach it to target creature you
+    // control." and the others reading what the step before made, returned or
+    // targeted (`reflexiveAboutAt`).
+    const reflexive = reflexiveAboutAt(sentences, i, ctx);
+    if (reflexive !== null) {
+      for (const effect of reflexive) {
+        parsed.push(effect);
+        hints.push({ sentence, effect });
+      }
       skip = 1;
       continue;
     }

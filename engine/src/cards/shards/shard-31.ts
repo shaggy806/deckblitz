@@ -176,6 +176,7 @@ import _poolCrumble from "../pool/crumble.js";
 import _poolCryptek from "../pool/cryptek.js";
 import _poolCurseOfBloodletting from "../pool/curse-of-bloodletting.js";
 import _poolCurseOfOpulence from "../pool/curse-of-opulence.js";
+import _poolCurseOfTheWerefox from "../pool/curse-of-the-werefox.js";
 import _poolCurseOfVerbosity from "../pool/curse-of-verbosity.js";
 import _poolCyberneticaDatasmith from "../pool/cybernetica-datasmith.js";
 import _poolDaiLiIndoctrination from "../pool/dai-li-indoctrination.js";
@@ -1116,6 +1117,7 @@ const shard: CardShard = {
     _poolCryptek,
     _poolCurseOfBloodletting,
     _poolCurseOfOpulence,
+    _poolCurseOfTheWerefox,
     _poolCurseOfVerbosity,
     _poolCyberneticaDatasmith,
     _poolDaiLiIndoctrination,

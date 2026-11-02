@@ -4141,6 +4141,23 @@ export type EffectSpec =
        */
       readonly value?: EffectAmount;
       /**
+       * What "it", "that token" or "that creature" names in `effect`, when
+       * that's something the creating resolution knows and the reflexive
+       * ability doesn't target: the token it created (`"created"` — Dáin
+       * Ironfoot's "create … Axe. When you do, attach it to target creature
+       * you control"), the card it put onto the battlefield (`"put-this-way"`
+       * — Back for More's "when you do, it fights up to one target creature
+       * you don't control"), or its own target (a slot — Curse of the
+       * Werefox's "that creature", Behemoth of Vault 0's "that permanent").
+       * Read as it triggers, and `"trigger-object"` in `effect` and in
+       * amounts: one object, followed as any trigger object is, so one that
+       * has left by the time the ability resolves isn't acted on (rule 400.7)
+       * though it's still read as it last existed (608.2h). Naming nothing,
+       * the action didn't happen, so nothing triggers (rule 603.12) — a
+       * Back for More whose card couldn't return.
+       */
+      readonly about?: AttachRef;
+      /**
        * "When you do, it deals 7 damage divided as you choose among one or
        * two targets" (Death to Our Enemies): the reflexive ability divides an
        * amount among its `any-number` group, as a triggered ability's
@@ -9625,13 +9642,15 @@ export interface EffectApi {
    * {@link EffectSpec}. */
   /** `value`: the reflexive ability's trigger value, when the spec sets one
    * (see its `value`); `divided`, what it divides among its group (see its
-   * `divided`). */
+   * `divided`); `about`, the object it reads as its trigger object (see its
+   * `about`). */
   reflexiveTrigger(
     targets: readonly TargetSpec[],
     effect: EffectSpec,
     text: string,
     value?: number,
     divided?: TriggeredAbility["divided"],
+    about?: ObjectId,
   ): void;
   /** Exile every card in `target`'s graveyard (a player — Bojuka Bog), as
    * one move. */
@@ -16724,15 +16743,23 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "each-player-may":
       applyEachPlayerMay(spec, ctx);
       return;
-    case "reflexive-trigger":
+    case "reflexive-trigger": {
+      // Naming nothing, the action it reacts to didn't happen (rule 603.12).
+      const about =
+        spec.about === undefined || (typeof spec.about === "number" && illegalSlot(spec.about, ctx))
+          ? undefined
+          : resolveAttachRef(spec.about, ctx);
+      if (spec.about !== undefined && about?.kind !== "object") return;
       ctx.reflexiveTrigger(
         spec.targets,
         spec.effect,
         spec.text,
         spec.value === undefined ? undefined : amountValue(spec.value, ctx),
         spec.divided,
+        about?.kind === "object" ? about.object : undefined,
       );
       return;
+    }
     case "ward":
       ctx.ward(spec.cost);
       return;

@@ -1132,6 +1132,22 @@ Shatterskull Smashing's "twice X if X is 6 or more") — the offer names a
 number or `x`, so the client would need the amount; the scaffolder doesn't
 read "When you do" at all.
 
+### A reflexive ability that names what its parent made or targeted — built 2026-11-01
+
+The need-keys Phase 2 family `effect:reflexive-trigger`, its top group, features only. A
+`reflexive-trigger`'s **`about`** (`"created"`, `"put-this-way"` or a slot of the creating ability)
+is read as it triggers and becomes the reflexive ability's trigger object, followed from that stint
+(rules 603.12, 400.7, 608.2h), so everything that reads `"trigger-object"` works in its effect, an
+`attachedTo` included. Naming nothing, nothing triggers. A bot reads an `about` slot by what the
+reflexive ability does to it (`target-polarity.ts`). The scaffolder reads three clauses after a
+step it read whole (`reflexiveAboutAt`): "attach it to target creature you control", "it/that
+creature fights up to one target creature you don't control", and "return up to one target Aura or
+Equipment card … attached to that token". Keys: reflexive-refers-to-creating-objects,
+reflexive-refers-to-parent-target, reflexive-trigger-outer-target. Proving cards: Dáin Ironfoot,
+Back for More, Curse of the Werefox, Forum Filibuster, Behemoth of Vault 0. Freed but not authored:
+Thorin, Mountain-king ("become attached this way" needs its own count of attachments), Hans
+Eriksson, Jailbreak, Ratonhnhaké꞉ton (`author-freed` re-reads each).
+
 ### The aggregate amount over any set — built 2026-10-31
 
 The need-keys Phase 2 family `effect:amount-aggregate`, its top group with

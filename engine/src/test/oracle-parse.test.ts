@@ -9471,4 +9471,26 @@ describe("exchanges with a life total", () => {
     expect(mirror.condition).toEqual({ kind: "all", of: [{ kind: "your-turn" }, { kind: "turn-structure", steps: ["upkeep"] }] });
     expect(mirror.effect).toEqual({ kind: "exchange-life-totals", second: { target: 0 } });
   });
+
+  it("reads a 'When you do' naming what the step before made, returned or targeted", () => {
+    const opponentCreature = { kind: "optional", of: { kind: "permanent", whose: "opponent", filter: { type: "creature" } } };
+    const fight = { kind: "fight", a: "trigger-object", b: 0 };
+    const back = ctx();
+    const it = "When you do, it fights up to one target creature you don't control.";
+    expect(parseEffect(`Return target creature card from your graveyard to the battlefield. ${it}`, back).effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "put-onto-battlefield", target: 0 },
+        { kind: "reflexive-trigger", about: "put-this-way", targets: [opponentCreature], effect: fight, text: it },
+      ],
+    });
+    // The reflexive ability's target is its own, not a slot of the spell's.
+    expect(back.targets).toHaveLength(1);
+    const curse = "When you do, that creature fights up to one target creature you don't control.";
+    expect(
+      parseEffect(`Create a Monster Role token attached to target creature you control. ${curse}`, ctx()).effect,
+    ).toMatchObject({ effects: [{ kind: "create-token", attachedTo: 0 }, { kind: "reflexive-trigger", about: 0, effect: fight, text: curse }] });
+    // Nothing the template knows: the whole thing stays for a person.
+    expect(parseEffect(`Draw a card. ${it}`, ctx()).todo).not.toHaveLength(0);
+  });
 });
