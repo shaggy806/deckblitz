@@ -94,7 +94,7 @@ import {
 } from "./subtypes.js";
 import { CREATURE_TYPES } from "./creature-types.js";
 import type { TargetRef } from "./target.js";
-import { isMainPhase } from "./turn.js";
+import { PHASE_OF_STEP, isMainPhase } from "./turn.js";
 import type { Step } from "./turn.js";
 
 /** The steps of a combat phase (rule 506.1). */
@@ -1625,6 +1625,11 @@ export function turnStatOf(state: GameState, player: PlayerId, stat: TurnStat): 
       return seat.turnHistory?.manaSpentOnSpells ?? 0;
     case "opponents-attacked":
       return seat.turnHistory?.attackedPlayers?.filter((p) => p !== player).length ?? 0;
+    case "power-attacked-with-this-combat": {
+      const record = seat.turnHistory?.attackedPower;
+      if (record === undefined || PHASE_OF_STEP[state.turn.step] !== "combat") return 0;
+      return record.combat === (state.turn.combatPhases ?? 1) ? record.power : 0;
+    }
   }
 }
 

@@ -882,6 +882,12 @@ they've declared as attackers — one declared in two combats counts once, one
 put onto the battlefield attacking never: Windbrisk Heights' "if you attacked
 with three or more creatures this turn" is the `turn-stat` condition
 `{ stat: "attackers", who: "you", atLeast: 3 }`),
+`"power-attacked-with-this-combat"` (the total power of the creatures they
+declared as attackers this combat, as they were declared — later changes and
+creatures put onto the battlefield attacking don't touch it: pack tactics' "if
+you attacked with creatures with total power 6 or greater this combat" is the
+`turn-stat` condition `{ stat: "power-attacked-with-this-combat", who: "you",
+atLeast: 6 }`),
 `"cards-to-graveyard-from-hand-or-library"` (cards put into their graveyard
 from their hand or library — discarded, milled, surveilled, cycled; Welcome
 the Dead's X) or `"cards-left-graveyard"` (cards that left their graveyard,

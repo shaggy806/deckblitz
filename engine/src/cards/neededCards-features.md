@@ -3607,3 +3607,17 @@ Alchemist's Gambit, Medomai the Ageless. Not covered: Kang the Conqueror's "duri
 that turn, power-up abilities can't be activated", and the static "if a player
 would begin an extra turn, that player skips that turn instead" (Ugin's Nexus,
 Stranglehold, Trouble in Pairs, Gerrard's Hourglass Pendant).
+
+### Pack tactics — built 2026-11-01
+
+The need-keys Phase 2 family `keyword:pack-tactics`, an ability word: a
+`turn-stat` condition on the new `TurnStat`
+`"power-attacked-with-this-combat"`. `Game` records the total as the declaration
+is made (`TurnHistory.attackedPower`, with which combat phase it was), so a pump,
+a removal or a creature put onto the battlefield attacking afterwards changes
+nothing, at the trigger or at its resolution (rule 603.4). A counted token stack
+is every token in it. No new decision. Proving cards: Gnoll Hunter, Targ Nar,
+Demon-Fang Gnoll, Battle Cry Goblin. Still needing more than this: Tiger-Tribe
+Hunter's reflexive sacrifice, Minion of the Mighty's creature card from hand
+tapped and attacking, Intrepid Outlander's dungeon, each for `author-freed` to
+read.

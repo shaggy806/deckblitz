@@ -30,6 +30,23 @@ const ctx = (overrides: Partial<Ctx> = {}): Ctx => {
   return { targets, target: (spec) => targets.push(spec) - 1, tokenFor: () => null, ...overrides };
 };
 
+describe("pack tactics", () => {
+  it("reads the attackers' total power as an intervening-if, under the ability word", () => {
+    const gnoll = parseFace(
+      {
+        name: "Test Gnoll",
+        type_line: "Creature — Gnoll",
+        mana_cost: "{1}",
+        oracle_text: "Pack tactics — Whenever this creature attacks, if you attacked with creatures with total power 6 or greater this combat, put a +1/+1 counter on this creature.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(gnoll.complete).toBe(true);
+    expect(gnoll.triggered[0].condition).toEqual({ kind: "turn-stat", stat: "power-attacked-with-this-combat", who: "you", atLeast: 6 });
+    expect(gnoll.triggered[0].effect).toEqual({ kind: "add-counter", target: "source", counter: "+1/+1", amount: 1 });
+  });
+});
+
 describe("skipping a turn and what's said about an extra one", () => {
   const face = (type_line: string, oracle_text: string) =>
     parseFace({ name: "Medomai the Test", type_line, mana_cost: "{1}", oracle_text }, { tokenFor: () => null });

@@ -9087,6 +9087,13 @@ const INTERVENING_IFS = {
   "if it's night,": { kind: "day-night", is: "night" },
   "if it's day,": { kind: "day-night", is: "day" },
   "if you attacked this turn,": { kind: "turn-stat", stat: "attacked", who: "you", atLeast: 1 },
+  // Pack tactics: the attackers' total power, as they were declared.
+  "if you attacked with creatures with total power 6 or greater this combat,": {
+    kind: "turn-stat",
+    stat: "power-attacked-with-this-combat",
+    who: "you",
+    atLeast: 6,
+  },
   "if a creature died this turn,": { kind: "creature-died-this-turn" },
   // The Innistrad werewolves' transforms: the previous turn's spells.
   "if no spells were cast last turn,": { kind: "spells-cast-last-turn", none: true },

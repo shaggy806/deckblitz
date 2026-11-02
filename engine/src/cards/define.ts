@@ -692,7 +692,15 @@ export type TurnStat =
    * combat of it. As melee's count (rule 702.121): whether or not those
    * creatures still attack, never one put onto the battlefield attacking, and
    * a planeswalker attacked isn't its controller. */
-  | "opponents-attacked";
+  | "opponents-attacked"
+  /** The total power of the creatures the player declared as attackers this
+   * combat, as they were declared (pack tactics' "if you attacked with
+   * creatures with total power 6 or greater this combat"): what happens to
+   * those creatures or their power afterwards doesn't change it, one put onto
+   * the battlefield attacking never adds to it (rule 508.4), and it's 0 outside
+   * the combat phase it was declared in. A negative power counts as itself
+   * (rule 107.1b). */
+  | "power-attacked-with-this-combat";
 
 /**
  * Counters put on permanents this turn — the `countersPutThisTurn` amount and

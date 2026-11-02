@@ -4362,6 +4362,11 @@ export interface TurnHistory {
    * battlefield stint it was in (a creature that left and came back is a
    * different one, rule 400.7). */
   attackers?: { readonly object: ObjectId; readonly zoneChangeCount: number }[];
+  /** The total power of the creatures this player last declared as attackers
+   * this turn, read as they were declared, and which of the turn's combat
+   * phases that was (`TurnState.combatPhases`) — `TurnStat`'s
+   * `"power-attacked-with-this-combat"`. */
+  attackedPower?: { readonly combat: number; readonly power: number };
 }
 
 /** Where a permanent can go when it leaves the battlefield. */

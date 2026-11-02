@@ -9956,6 +9956,20 @@ export class Game {
       if (members.length < 2) continue;
       for (const id of members) this.state.objects[id].band = members[0];
     }
+    // Pack tactics' "you attacked with creatures with total power 6 or
+    // greater this combat": their power now that they all attack (rule
+    // 508.1k), and no later change to it or to them. Enlist's bonus comes by a
+    // trigger after this, and a creature put onto the battlefield attacking
+    // was never declared (508.4). A counted stack is every token in it.
+    invalidateComputedCache();
+    (this.state.players[player].turnHistory ??= {}).attackedPower = {
+      combat: this.state.turn.combatPhases ?? 1,
+      power: declaredNow.reduce(
+        (total, { id }) =>
+          total + computeCharacteristics(this.state, this.registry, id).power * (this.state.objects[id].stackCount ?? 1),
+        0,
+      ),
+    };
     if (tax.generic > 0) {
       const payment = this.payMana(player, parseManaCost(`{${tax.generic}}`));
       if (payment === null) throw new Error(`${player} can't pay the {${tax.generic}} it costs to attack`);
