@@ -529,6 +529,7 @@ import _poolNotOnMyWatch from "../pool/not-on-my-watch.js";
 import _poolNulldrifter from "../pool/nulldrifter.js";
 import _poolNurturingPixie from "../pool/nurturing-pixie.js";
 import _poolOboroPalaceInTheClouds from "../pool/oboro-palace-in-the-clouds.js";
+import _poolObservedStasis from "../pool/observed-stasis.js";
 import _poolObuunMulDayaAncestor from "../pool/obuun-mul-daya-ancestor.js";
 import _poolOfOneMind from "../pool/of-one-mind.js";
 import _poolOketrasAttendant from "../pool/oketras-attendant.js";
@@ -1464,6 +1465,7 @@ const shard: CardShard = {
     _poolNulldrifter,
     _poolNurturingPixie,
     _poolOboroPalaceInTheClouds,
+    _poolObservedStasis,
     _poolObuunMulDayaAncestor,
     _poolOfOneMind,
     _poolOketrasAttendant,

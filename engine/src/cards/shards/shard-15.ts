@@ -624,6 +624,7 @@ import _poolSethronHurloonGeneral from "../pool/sethron-hurloon-general.js";
 import _poolSewerRats from "../pool/sewer-rats.js";
 import _poolShaleskinBruiser from "../pool/shaleskin-bruiser.js";
 import _poolSheoldredTheApocalypse from "../pool/sheoldred-the-apocalypse.js";
+import _poolSilumgarTheDriftingDeath from "../pool/silumgar-the-drifting-death.js";
 import _poolSilverbackApe from "../pool/silverback-ape.js";
 import _poolSilvercoatLion from "../pool/silvercoat-lion.js";
 import _poolSilverstormSamurai from "../pool/silverstorm-samurai.js";
@@ -1461,6 +1462,7 @@ const shard: CardShard = {
     _poolSewerRats,
     _poolShaleskinBruiser,
     _poolSheoldredTheApocalypse,
+    _poolSilumgarTheDriftingDeath,
     _poolSilverbackApe,
     _poolSilvercoatLion,
     _poolSilverstormSamurai,

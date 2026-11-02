@@ -185,6 +185,7 @@ import _poolEliteSkirmisher from "../pool/elite-skirmisher.js";
 import _poolEloiseNephaliaSleuth from "../pool/eloise-nephalia-sleuth.js";
 import _poolElvishRejuvenator from "../pool/elvish-rejuvenator.js";
 import _poolEmbalmedAscendant from "../pool/embalmed-ascendant.js";
+import _poolEmberGale from "../pool/ember-gale.js";
 import _poolEmberwildeCaptain from "../pool/emberwilde-captain.js";
 import _poolEmbolden from "../pool/embolden.js";
 import _poolEmergencyEject from "../pool/emergency-eject.js";
@@ -657,6 +658,7 @@ import _poolSumalaSentry from "../pool/sumala-sentry.js";
 import _poolSunSpiderNimbleWebber from "../pool/sun-spider-nimble-webber.js";
 import _poolSunderingArchaic from "../pool/sundering-archaic.js";
 import _poolSunspireGriffin from "../pool/sunspire-griffin.js";
+import _poolSuperIntelligence from "../pool/super-intelligence.js";
 import _poolSupplyDemand from "../pool/supply-demand.js";
 import _poolSupplyLineCranes from "../pool/supply-line-cranes.js";
 import _poolSurgingDementia from "../pool/surging-dementia.js";
@@ -986,6 +988,7 @@ const shard: CardShard = {
     _poolEloiseNephaliaSleuth,
     _poolElvishRejuvenator,
     _poolEmbalmedAscendant,
+    _poolEmberGale,
     _poolEmberwildeCaptain,
     _poolEmbolden,
     _poolEmergencyEject,
@@ -1458,6 +1461,7 @@ const shard: CardShard = {
     _poolSunSpiderNimbleWebber,
     _poolSunderingArchaic,
     _poolSunspireGriffin,
+    _poolSuperIntelligence,
     _poolSupplyDemand,
     _poolSupplyLineCranes,
     _poolSurgingDementia,

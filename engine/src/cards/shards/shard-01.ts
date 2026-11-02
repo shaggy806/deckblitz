@@ -837,6 +837,7 @@ import _poolYavimayaHollow from "../pool/yavimaya-hollow.js";
 import _poolYavimayaSojourner from "../pool/yavimaya-sojourner.js";
 import _poolYavimayasEmbrace from "../pool/yavimayas-embrace.js";
 import _poolYgraEaterOfAll from "../pool/ygra-eater-of-all.js";
+import _poolYoseiTheMorningStar from "../pool/yosei-the-morning-star.js";
 import _poolYoureAmbushedOnTheRoad from "../pool/youre-ambushed-on-the-road.js";
 import _poolZadasCommando from "../pool/zadas-commando.js";
 import _poolZephyrim from "../pool/zephyrim.js";
@@ -1690,6 +1691,7 @@ const shard: CardShard = {
     _poolYavimayaSojourner,
     _poolYavimayasEmbrace,
     _poolYgraEaterOfAll,
+    _poolYoseiTheMorningStar,
     _poolYoureAmbushedOnTheRoad,
     _poolZadasCommando,
     _poolZephyrim,

@@ -133,6 +133,7 @@ import _poolChillingGrasp from "../pool/chilling-grasp.js";
 import _poolChoMannoRevolutionary from "../pool/cho-manno-revolutionary.js";
 import _poolChronozoa from "../pool/chronozoa.js";
 import _poolCinderCrawler from "../pool/cinder-crawler.js";
+import _poolCitadelSiege from "../pool/citadel-siege.js";
 import _poolCityPigeon from "../pool/city-pigeon.js";
 import _poolClotSliver from "../pool/clot-sliver.js";
 import _poolCloudcrestLake from "../pool/cloudcrest-lake.js";
@@ -1082,6 +1083,7 @@ const shard: CardShard = {
     _poolChoMannoRevolutionary,
     _poolChronozoa,
     _poolCinderCrawler,
+    _poolCitadelSiege,
     _poolCityPigeon,
     _poolClotSliver,
     _poolCloudcrestLake,

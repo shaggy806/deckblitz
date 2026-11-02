@@ -417,6 +417,7 @@ import _poolLatchSeeker from "../pool/latch-seeker.js";
 import _poolLatchkeyFaerie from "../pool/latchkey-faerie.js";
 import _poolLavaSerpent from "../pool/lava-serpent.js";
 import _poolLavaTubes from "../pool/lava-tubes.js";
+import _poolLavalanche from "../pool/lavalanche.js";
 import _poolLavastepRaider from "../pool/lavastep-raider.js";
 import _poolLazotepBehemoth from "../pool/lazotep-behemoth.js";
 import _poolLeave from "../pool/leave.js";
@@ -532,6 +533,7 @@ import _poolPipBoy3000 from "../pool/pip-boy-3000.js";
 import _poolPippinsBravery from "../pool/pippins-bravery.js";
 import _poolPitFight from "../pool/pit-fight.js";
 import _poolPlagueWitch from "../pool/plague-witch.js";
+import _poolPlaguecrafter from "../pool/plaguecrafter.js";
 import _poolPlatedOnslaught from "../pool/plated-onslaught.js";
 import _poolPledgeOfUnity from "../pool/pledge-of-unity.js";
 import _poolPlunderingPirate from "../pool/plundering-pirate.js";
@@ -1310,6 +1312,7 @@ const shard: CardShard = {
     _poolLatchkeyFaerie,
     _poolLavaSerpent,
     _poolLavaTubes,
+    _poolLavalanche,
     _poolLavastepRaider,
     _poolLazotepBehemoth,
     _poolLeave,
@@ -1425,6 +1428,7 @@ const shard: CardShard = {
     _poolPippinsBravery,
     _poolPitFight,
     _poolPlagueWitch,
+    _poolPlaguecrafter,
     _poolPlatedOnslaught,
     _poolPledgeOfUnity,
     _poolPlunderingPirate,

@@ -534,6 +534,7 @@ import _poolRatsFeast from "../pool/rats-feast.js";
 import _poolRavagedHighlands from "../pool/ravaged-highlands.js";
 import _poolRavenousSquirrel from "../pool/ravenous-squirrel.js";
 import _poolRazorgrassAmbush from "../pool/razorgrass-ambush.js";
+import _poolRazorlashTransmogrant from "../pool/razorlash-transmogrant.js";
 import _poolReaperOfFlightMoonsilver from "../pool/reaper-of-flight-moonsilver.js";
 import _poolRearingEmbermare from "../pool/rearing-embermare.js";
 import _poolReclusiveTaxidermist from "../pool/reclusive-taxidermist.js";
@@ -1389,6 +1390,7 @@ const shard: CardShard = {
     _poolRavagedHighlands,
     _poolRavenousSquirrel,
     _poolRazorgrassAmbush,
+    _poolRazorlashTransmogrant,
     _poolReaperOfFlightMoonsilver,
     _poolRearingEmbermare,
     _poolReclusiveTaxidermist,

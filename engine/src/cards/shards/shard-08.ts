@@ -66,6 +66,7 @@ import _poolAuroraChampion from "../pool/aurora-champion.js";
 import _poolAvariciousDragon from "../pool/avaricious-dragon.js";
 import _poolAvenInitiate from "../pool/aven-initiate.js";
 import _poolAwakenTheErstwhile from "../pool/awaken-the-erstwhile.js";
+import _poolAzogMoriasRuin from "../pool/azog-morias-ruin.js";
 import _poolAzoriusLocket from "../pool/azorius-locket.js";
 import _poolAzusaLostButSeeking from "../pool/azusa-lost-but-seeking.js";
 import _poolBagEndPorter from "../pool/bag-end-porter.js";
@@ -481,6 +482,7 @@ import _poolMantleOfTheWolf from "../pool/mantle-of-the-wolf.js";
 import _poolMarkovCrusader from "../pool/markov-crusader.js";
 import _poolMartialCoup from "../pool/martial-coup.js";
 import _poolMaskOfIntolerance from "../pool/mask-of-intolerance.js";
+import _poolMassDiminish from "../pool/mass-diminish.js";
 import _poolMatsuTribeDecoy from "../pool/matsu-tribe-decoy.js";
 import _poolMattMurdockJusticeSeeker from "../pool/matt-murdock-justice-seeker.js";
 import _poolMemnite from "../pool/memnite.js";
@@ -981,6 +983,7 @@ const shard: CardShard = {
     _poolAvariciousDragon,
     _poolAvenInitiate,
     _poolAwakenTheErstwhile,
+    _poolAzogMoriasRuin,
     _poolAzoriusLocket,
     _poolAzusaLostButSeeking,
     _poolBagEndPorter,
@@ -1396,6 +1399,7 @@ const shard: CardShard = {
     _poolMarkovCrusader,
     _poolMartialCoup,
     _poolMaskOfIntolerance,
+    _poolMassDiminish,
     _poolMatsuTribeDecoy,
     _poolMattMurdockJusticeSeeker,
     _poolMemnite,

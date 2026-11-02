@@ -755,6 +755,7 @@ import _poolThalisseReverentMedium from "../pool/thalisse-reverent-medium.js";
 import _poolThancredWaters from "../pool/thancred-waters.js";
 import _poolTheAesirEscapeValhalla from "../pool/the-aesir-escape-valhalla.js";
 import _poolTheEternityElevator from "../pool/the-eternity-elevator.js";
+import _poolTheFallOfKroog from "../pool/the-fall-of-kroog.js";
 import _poolTheFirstEruption from "../pool/the-first-eruption.js";
 import _poolTheGitrogMonster from "../pool/the-gitrog-monster.js";
 import _poolTheTriumphOfAnax from "../pool/the-triumph-of-anax.js";
@@ -1631,6 +1632,7 @@ const shard: CardShard = {
     _poolThancredWaters,
     _poolTheAesirEscapeValhalla,
     _poolTheEternityElevator,
+    _poolTheFallOfKroog,
     _poolTheFirstEruption,
     _poolTheGitrogMonster,
     _poolTheTriumphOfAnax,

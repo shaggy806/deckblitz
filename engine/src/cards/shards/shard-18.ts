@@ -78,6 +78,7 @@ import _poolBoneSaw from "../pool/bone-saw.js";
 import _poolBorneUponAWind from "../pool/borne-upon-a-wind.js";
 import _poolBoseijuWhoEndures from "../pool/boseiju-who-endures.js";
 import _poolBounteousKirin from "../pool/bounteous-kirin.js";
+import _poolBountyBoard from "../pool/bounty-board.js";
 import _poolBraskasFinalAeon from "../pool/braskas-final-aeon.js";
 import _poolBrazenCannonade from "../pool/brazen-cannonade.js";
 import _poolBrightcapBadger from "../pool/brightcap-badger.js";
@@ -953,6 +954,7 @@ const shard: CardShard = {
     _poolBorneUponAWind,
     _poolBoseijuWhoEndures,
     _poolBounteousKirin,
+    _poolBountyBoard,
     _poolBraskasFinalAeon,
     _poolBrazenCannonade,
     _poolBrightcapBadger,

@@ -708,6 +708,7 @@ import _poolSummonBahamut from "../pool/summon-bahamut.js";
 import _poolSunDappledCelebrant from "../pool/sun-dappled-celebrant.js";
 import _poolSunfall from "../pool/sunfall.js";
 import _poolSuntailHawk from "../pool/suntail-hawk.js";
+import _poolSuppressionField from "../pool/suppression-field.js";
 import _poolSurvivalOfTheFittest from "../pool/survival-of-the-fittest.js";
 import _poolSwarmyardMassacre from "../pool/swarmyard-massacre.js";
 import _poolSweatworksBrawler from "../pool/sweatworks-brawler.js";
@@ -1573,6 +1574,7 @@ const shard: CardShard = {
     _poolSunDappledCelebrant,
     _poolSunfall,
     _poolSuntailHawk,
+    _poolSuppressionField,
     _poolSurvivalOfTheFittest,
     _poolSwarmyardMassacre,
     _poolSweatworksBrawler,

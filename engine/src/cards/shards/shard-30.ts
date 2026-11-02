@@ -641,6 +641,7 @@ import _poolSavageLands from "../pool/savage-lands.js";
 import _poolSavageSwipe from "../pool/savage-swipe.js";
 import _poolSavageThallid from "../pool/savage-thallid.js";
 import _poolScarredVinebreeder from "../pool/scarred-vinebreeder.js";
+import _poolSearingBlaze from "../pool/searing-blaze.js";
 import _poolSeasClaim from "../pool/seas-claim.js";
 import _poolSeedsOfRenewal from "../pool/seeds-of-renewal.js";
 import _poolSeismicMage from "../pool/seismic-mage.js";
@@ -1523,6 +1524,7 @@ const shard: CardShard = {
     _poolSavageSwipe,
     _poolSavageThallid,
     _poolScarredVinebreeder,
+    _poolSearingBlaze,
     _poolSeasClaim,
     _poolSeedsOfRenewal,
     _poolSeismicMage,

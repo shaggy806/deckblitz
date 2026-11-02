@@ -146,6 +146,7 @@ import _poolCramSession from "../pool/cram-session.js";
 import _poolCremate from "../pool/cremate.js";
 import _poolCribSwap from "../pool/crib-swap.js";
 import _poolCripplingFatigue from "../pool/crippling-fatigue.js";
+import _poolCrownOfGondor from "../pool/crown-of-gondor.js";
 import _poolCruelReality from "../pool/cruel-reality.js";
 import _poolCryptAngel from "../pool/crypt-angel.js";
 import _poolCryptwailing from "../pool/cryptwailing.js";
@@ -350,6 +351,7 @@ import _poolHornswoggle from "../pool/hornswoggle.js";
 import _poolHuntedTroll from "../pool/hunted-troll.js";
 import _poolHuntersEdge from "../pool/hunters-edge.js";
 import _poolHurloonShaman from "../pool/hurloon-shaman.js";
+import _poolHyldasCrownOfWinter from "../pool/hyldas-crown-of-winter.js";
 import _poolHyraxTowerScout from "../pool/hyrax-tower-scout.js";
 import _poolIcatianPhalanx from "../pool/icatian-phalanx.js";
 import _poolIceberg from "../pool/iceberg.js";
@@ -998,6 +1000,7 @@ const shard: CardShard = {
     _poolCremate,
     _poolCribSwap,
     _poolCripplingFatigue,
+    _poolCrownOfGondor,
     _poolCruelReality,
     _poolCryptAngel,
     _poolCryptwailing,
@@ -1202,6 +1205,7 @@ const shard: CardShard = {
     _poolHuntedTroll,
     _poolHuntersEdge,
     _poolHurloonShaman,
+    _poolHyldasCrownOfWinter,
     _poolHyraxTowerScout,
     _poolIcatianPhalanx,
     _poolIceberg,

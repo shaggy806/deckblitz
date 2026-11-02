@@ -347,6 +347,7 @@ import _poolGravetillerWurm from "../pool/gravetiller-wurm.js";
 import _poolGreatGildedBoat from "../pool/great-gilded-boat.js";
 import _poolGreenDragon from "../pool/green-dragon.js";
 import _poolGreenwheelLiberator from "../pool/greenwheel-liberator.js";
+import _poolGremlinInfestation from "../pool/gremlin-infestation.js";
 import _poolGrotesqueMutation from "../pool/grotesque-mutation.js";
 import _poolGrounded from "../pool/grounded.js";
 import _poolGroundswell from "../pool/groundswell.js";
@@ -370,6 +371,7 @@ import _poolHarbingerOfTheSeas from "../pool/harbinger-of-the-seas.js";
 import _poolHardCover from "../pool/hard-cover.js";
 import _poolHarmoniousArchon from "../pool/harmonious-archon.js";
 import _poolHeartflameSlash from "../pool/heartflame-slash.js";
+import _poolHeartwoodStoryteller from "../pool/heartwood-storyteller.js";
 import _poolHedronArchive from "../pool/hedron-archive.js";
 import _poolHeirToTheNight from "../pool/heir-to-the-night.js";
 import _poolHelicarrierStrike from "../pool/helicarrier-strike.js";
@@ -751,6 +753,7 @@ import _poolSpreadingInsurrection from "../pool/spreading-insurrection.js";
 import _poolSpriteDragon from "../pool/sprite-dragon.js";
 import _poolSquallmonger from "../pool/squallmonger.js";
 import _poolStalwartAven from "../pool/stalwart-aven.js";
+import _poolStandstill from "../pool/standstill.js";
 import _poolStart from "../pool/start.js";
 import _poolStartledRelicSloth from "../pool/startled-relic-sloth.js";
 import _poolStensiaBloodhall from "../pool/stensia-bloodhall.js";
@@ -1281,6 +1284,7 @@ const shard: CardShard = {
     _poolGreatGildedBoat,
     _poolGreenDragon,
     _poolGreenwheelLiberator,
+    _poolGremlinInfestation,
     _poolGrotesqueMutation,
     _poolGrounded,
     _poolGroundswell,
@@ -1304,6 +1308,7 @@ const shard: CardShard = {
     _poolHardCover,
     _poolHarmoniousArchon,
     _poolHeartflameSlash,
+    _poolHeartwoodStoryteller,
     _poolHedronArchive,
     _poolHeirToTheNight,
     _poolHelicarrierStrike,
@@ -1685,6 +1690,7 @@ const shard: CardShard = {
     _poolSpriteDragon,
     _poolSquallmonger,
     _poolStalwartAven,
+    _poolStandstill,
     _poolStart,
     _poolStartledRelicSloth,
     _poolStensiaBloodhall,

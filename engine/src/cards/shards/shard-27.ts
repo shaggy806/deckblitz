@@ -361,6 +361,7 @@ import _poolJuvenileMistDragon from "../pool/juvenile-mist-dragon.js";
 import _poolKabiraOutrider from "../pool/kabira-outrider.js";
 import _poolKaijinOfTheVanishingTouch from "../pool/kaijin-of-the-vanishing-touch.js";
 import _poolKalamaxTheStormsire from "../pool/kalamax-the-stormsire.js";
+import _poolKamiOfJealousThirst from "../pool/kami-of-jealous-thirst.js";
 import _poolKelinoreBat from "../pool/kelinore-bat.js";
 import _poolKheruDreadmaw from "../pool/kheru-dreadmaw.js";
 import _poolKillMaimBurn from "../pool/kill-maim-burn.js";
@@ -1220,6 +1221,7 @@ const shard: CardShard = {
     _poolKabiraOutrider,
     _poolKaijinOfTheVanishingTouch,
     _poolKalamaxTheStormsire,
+    _poolKamiOfJealousThirst,
     _poolKelinoreBat,
     _poolKheruDreadmaw,
     _poolKillMaimBurn,

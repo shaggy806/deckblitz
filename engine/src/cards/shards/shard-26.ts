@@ -227,6 +227,7 @@ import _poolEntrancingLyre from "../pool/entrancing-lyre.js";
 import _poolEnvironmentalSciences from "../pool/environmental-sciences.js";
 import _poolEpfPointSquad from "../pool/epf-point-squad.js";
 import _poolErrandRiderOfGondor from "../pool/errand-rider-of-gondor.js";
+import _poolEsquireOfTheKing from "../pool/esquire-of-the-king.js";
 import _poolEstridTheMasked from "../pool/estrid-the-masked.js";
 import _poolEverWatchingThreshold from "../pool/ever-watching-threshold.js";
 import _poolEvolutionSage from "../pool/evolution-sage.js";
@@ -1114,6 +1115,7 @@ const shard: CardShard = {
     _poolEnvironmentalSciences,
     _poolEpfPointSquad,
     _poolErrandRiderOfGondor,
+    _poolEsquireOfTheKing,
     _poolEstridTheMasked,
     _poolEverWatchingThreshold,
     _poolEvolutionSage,
