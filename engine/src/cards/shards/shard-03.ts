@@ -433,6 +433,7 @@ import _poolMoltenExhale from "../pool/molten-exhale.js";
 import _poolMoltenMonstrosity from "../pool/molten-monstrosity.js";
 import _poolMonasteryLoremaster from "../pool/monastery-loremaster.js";
 import _poolMoonlace from "../pool/moonlace.js";
+import _poolMoratoriumStone from "../pool/moratorium-stone.js";
 import _poolMorbidHunger from "../pool/morbid-hunger.js";
 import _poolMoriaScavenger from "../pool/moria-scavenger.js";
 import _poolMorningtide from "../pool/morningtide.js";
@@ -1239,6 +1240,7 @@ const shard: CardShard = {
     _poolMoltenMonstrosity,
     _poolMonasteryLoremaster,
     _poolMoonlace,
+    _poolMoratoriumStone,
     _poolMorbidHunger,
     _poolMoriaScavenger,
     _poolMorningtide,

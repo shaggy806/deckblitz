@@ -228,6 +228,7 @@ import _poolEarthServant from "../pool/earth-servant.js";
 import _poolEarthblighter from "../pool/earthblighter.js";
 import _poolEbondeathDracolich from "../pool/ebondeath-dracolich.js";
 import _poolEccentricApprentice from "../pool/eccentric-apprentice.js";
+import _poolEchoingReturn from "../pool/echoing-return.js";
 import _poolEddytrailHawk from "../pool/eddytrail-hawk.js";
 import _poolEidolonOfBlossoms from "../pool/eidolon-of-blossoms.js";
 import _poolElderCathar from "../pool/elder-cathar.js";
@@ -1085,6 +1086,7 @@ const shard: CardShard = {
     _poolEarthblighter,
     _poolEbondeathDracolich,
     _poolEccentricApprentice,
+    _poolEchoingReturn,
     _poolEddytrailHawk,
     _poolEidolonOfBlossoms,
     _poolElderCathar,

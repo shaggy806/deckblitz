@@ -740,6 +740,7 @@ import _poolTheLegendOfRoku from "../pool/the-legend-of-roku.js";
 import _poolThePartingOfTheWays from "../pool/the-parting-of-the-ways.js";
 import _poolThopterSpyNetwork from "../pool/thopter-spy-network.js";
 import _poolThoughtCollapse from "../pool/thought-collapse.js";
+import _poolThoughtDistortion from "../pool/thought-distortion.js";
 import _poolThoughtlace from "../pool/thoughtlace.js";
 import _poolThreeStepsAhead from "../pool/three-steps-ahead.js";
 import _poolThroneOfEmpires from "../pool/throne-of-empires.js";
@@ -1592,6 +1593,7 @@ const shard: CardShard = {
     _poolThePartingOfTheWays,
     _poolThopterSpyNetwork,
     _poolThoughtCollapse,
+    _poolThoughtDistortion,
     _poolThoughtlace,
     _poolThreeStepsAhead,
     _poolThroneOfEmpires,

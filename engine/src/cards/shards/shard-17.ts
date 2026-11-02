@@ -427,6 +427,7 @@ import _poolLandslide from "../pool/landslide.js";
 import _poolLashOfTheWhip from "../pool/lash-of-the-whip.js";
 import _poolLastKiss from "../pool/last-kiss.js";
 import _poolLayClaim from "../pool/lay-claim.js";
+import _poolLegionsToAshes from "../pool/legions-to-ashes.js";
 import _poolLeoninSnarecaster from "../pool/leonin-snarecaster.js";
 import _poolLetterOfAcceptance from "../pool/letter-of-acceptance.js";
 import _poolLiberate from "../pool/liberate.js";
@@ -1313,6 +1314,7 @@ const shard: CardShard = {
     _poolLashOfTheWhip,
     _poolLastKiss,
     _poolLayClaim,
+    _poolLegionsToAshes,
     _poolLeoninSnarecaster,
     _poolLetterOfAcceptance,
     _poolLiberate,

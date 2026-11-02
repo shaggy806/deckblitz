@@ -152,6 +152,7 @@ import _poolCourtOfGarenbrig from "../pool/court-of-garenbrig.js";
 import _poolCraterize from "../pool/craterize.js";
 import _poolCreakwoodLiege from "../pool/creakwood-liege.js";
 import _poolCrossbonesMaliciousMercenary from "../pool/crossbones-malicious-mercenary.js";
+import _poolCrumbleToDust from "../pool/crumble-to-dust.js";
 import _poolCruxOfFate from "../pool/crux-of-fate.js";
 import _poolCunningSparkmage from "../pool/cunning-sparkmage.js";
 import _poolCurseMarredDemon from "../pool/curse-marred-demon.js";
@@ -664,6 +665,7 @@ import _poolScroungingBandar from "../pool/scrounging-bandar.js";
 import _poolScurryOak from "../pool/scurry-oak.js";
 import _poolSeaSnidd from "../pool/sea-snidd.js";
 import _poolSealFromExistence from "../pool/seal-from-existence.js";
+import _poolSecretSalvage from "../pool/secret-salvage.js";
 import _poolSecurityDetail from "../pool/security-detail.js";
 import _poolSedgeTroll from "../pool/sedge-troll.js";
 import _poolSeizeOpportunity from "../pool/seize-opportunity.js";
@@ -1109,6 +1111,7 @@ const shard: CardShard = {
     _poolCraterize,
     _poolCreakwoodLiege,
     _poolCrossbonesMaliciousMercenary,
+    _poolCrumbleToDust,
     _poolCruxOfFate,
     _poolCunningSparkmage,
     _poolCurseMarredDemon,
@@ -1621,6 +1624,7 @@ const shard: CardShard = {
     _poolScurryOak,
     _poolSeaSnidd,
     _poolSealFromExistence,
+    _poolSecretSalvage,
     _poolSecurityDetail,
     _poolSedgeTroll,
     _poolSeizeOpportunity,

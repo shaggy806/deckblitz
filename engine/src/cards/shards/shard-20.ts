@@ -445,6 +445,7 @@ import _poolLavakinBrawler from "../pool/lavakin-brawler.js";
 import _poolLearnFromThePast from "../pool/learn-from-the-past.js";
 import _poolLeechingBite from "../pool/leeching-bite.js";
 import _poolLeeringOnlooker from "../pool/leering-onlooker.js";
+import _poolLegionSEnd from "../pool/legion-s-end.js";
 import _poolLeonardoTheBalance from "../pool/leonardo-the-balance.js";
 import _poolLeoninAbunas from "../pool/leonin-abunas.js";
 import _poolLeoninArmorguard from "../pool/leonin-armorguard.js";
@@ -1383,6 +1384,7 @@ const shard: CardShard = {
     _poolLearnFromThePast,
     _poolLeechingBite,
     _poolLeeringOnlooker,
+    _poolLegionSEnd,
     _poolLeonardoTheBalance,
     _poolLeoninAbunas,
     _poolLeoninArmorguard,

@@ -361,6 +361,7 @@ import _poolHorizonDrake from "../pool/horizon-drake.js";
 import _poolHorncallersChant from "../pool/horncallers-chant.js";
 import _poolHorriblyAwry from "../pool/horribly-awry.js";
 import _poolHoundOfTheFarbogs from "../pool/hound-of-the-farbogs.js";
+import _poolHourOfGlory from "../pool/hour-of-glory.js";
 import _poolHowlingBanshee from "../pool/howling-banshee.js";
 import _poolHyenaPack from "../pool/hyena-pack.js";
 import _poolHyenaUmbra from "../pool/hyena-umbra.js";
@@ -790,6 +791,7 @@ import _poolTheElderDragonWar from "../pool/the-elder-dragon-war.js";
 import _poolTheEnd from "../pool/the-end.js";
 import _poolTheLadyOfOtaria from "../pool/the-lady-of-otaria.js";
 import _poolTheLunarWhale from "../pool/the-lunar-whale.js";
+import _poolTheStoneBrain from "../pool/the-stone-brain.js";
 import _poolThermalNavigator from "../pool/thermal-navigator.js";
 import _poolThirst from "../pool/thirst.js";
 import _poolThopterMechanic from "../pool/thopter-mechanic.js";
@@ -1283,6 +1285,7 @@ const shard: CardShard = {
     _poolHorncallersChant,
     _poolHorriblyAwry,
     _poolHoundOfTheFarbogs,
+    _poolHourOfGlory,
     _poolHowlingBanshee,
     _poolHyenaPack,
     _poolHyenaUmbra,
@@ -1712,6 +1715,7 @@ const shard: CardShard = {
     _poolTheEnd,
     _poolTheLadyOfOtaria,
     _poolTheLunarWhale,
+    _poolTheStoneBrain,
     _poolThermalNavigator,
     _poolThirst,
     _poolThopterMechanic,

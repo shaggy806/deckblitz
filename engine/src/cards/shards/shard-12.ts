@@ -446,6 +446,7 @@ import _poolMarbleDiamond from "../pool/marble-diamond.js";
 import _poolMaro from "../pool/maro.js";
 import _poolMarshdrinkerGiant from "../pool/marshdrinker-giant.js";
 import _poolMarwynThePreserver from "../pool/marwyn-the-preserver.js";
+import _poolMaskOfTheMimic from "../pool/mask-of-the-mimic.js";
 import _poolMassacre from "../pool/massacre.js";
 import _poolMasterfulReplication from "../pool/masterful-replication.js";
 import _poolMasticore from "../pool/masticore.js";
@@ -1320,6 +1321,7 @@ const shard: CardShard = {
     _poolMaro,
     _poolMarshdrinkerGiant,
     _poolMarwynThePreserver,
+    _poolMaskOfTheMimic,
     _poolMassacre,
     _poolMasterfulReplication,
     _poolMasticore,

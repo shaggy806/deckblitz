@@ -194,6 +194,7 @@ import _poolDivergentEquation from "../pool/divergent-equation.js";
 import _poolDivinerSpirit from "../pool/diviner-spirit.js";
 import _poolDoctorDoomUnrivaled from "../pool/doctor-doom-unrivaled.js";
 import _poolDoctorJaneFoster from "../pool/doctor-jane-foster.js";
+import _poolDoomsday from "../pool/doomsday.js";
 import _poolDovinArchitectOfLaw from "../pool/dovin-architect-of-law.js";
 import _poolDragonlordAtarka from "../pool/dragonlord-atarka.js";
 import _poolDreamSalvage from "../pool/dream-salvage.js";
@@ -522,6 +523,7 @@ import _poolPrideOfTheRoad from "../pool/pride-of-the-road.js";
 import _poolPridemalkin from "../pool/pridemalkin.js";
 import _poolPrisonRealm from "../pool/prison-realm.js";
 import _poolProtectionMagic from "../pool/protection-magic.js";
+import _poolQuash from "../pool/quash.js";
 import _poolQuestingPhelddagrif from "../pool/questing-phelddagrif.js";
 import _poolRabidAttack from "../pool/rabid-attack.js";
 import _poolRadiantEpicure from "../pool/radiant-epicure.js";
@@ -1052,6 +1054,7 @@ const shard: CardShard = {
     _poolDivinerSpirit,
     _poolDoctorDoomUnrivaled,
     _poolDoctorJaneFoster,
+    _poolDoomsday,
     _poolDovinArchitectOfLaw,
     _poolDragonlordAtarka,
     _poolDreamSalvage,
@@ -1380,6 +1383,7 @@ const shard: CardShard = {
     _poolPridemalkin,
     _poolPrisonRealm,
     _poolProtectionMagic,
+    _poolQuash,
     _poolQuestingPhelddagrif,
     _poolRabidAttack,
     _poolRadiantEpicure,

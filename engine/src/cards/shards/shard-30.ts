@@ -487,6 +487,7 @@ import _poolMikaeusTheLunarch from "../pool/mikaeus-the-lunarch.js";
 import _poolMindsEye from "../pool/minds-eye.js";
 import _poolMirkwoodMeditator from "../pool/mirkwood-meditator.js";
 import _poolMirrex from "../pool/mirrex.js";
+import _poolMishraArtificerProdigy from "../pool/mishra-artificer-prodigy.js";
 import _poolMisinformation from "../pool/misinformation.js";
 import _poolMistveinBorderpost from "../pool/mistvein-borderpost.js";
 import _poolMoaningWall from "../pool/moaning-wall.js";
@@ -1375,6 +1376,7 @@ const shard: CardShard = {
     _poolMindsEye,
     _poolMirkwoodMeditator,
     _poolMirrex,
+    _poolMishraArtificerProdigy,
     _poolMisinformation,
     _poolMistveinBorderpost,
     _poolMoaningWall,
