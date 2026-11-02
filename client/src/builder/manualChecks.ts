@@ -9293,6 +9293,9 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     board({
       you: { bf: ['Swamp*7'], hand: ['Bane of the Living'] },
       opp: [{ bf: ['Hill Giant'] }, {}, {}],
+    }),
+  ),
+  preset(
     'Collected Conjuring: up to two spells, the count on the offer',
     board({
       you: {
