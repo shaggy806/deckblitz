@@ -4157,6 +4157,18 @@ export interface DeclaredAttacker {
   readonly first: boolean;
 }
 
+/** One placement of counters in {@link TurnHistory}'s `countersPut`: `count`
+ * is every counter it put, on every token of a stack; `controller` and `types`
+ * are the permanent's as they went on. It names no object: a list that did would
+ * keep every token given a counter from folding back into its stack
+ * (`token-fold.ts`'s `referencedObjectIds`), and only counting reads it. */
+export interface CountersPutRecord {
+  readonly counter: string;
+  readonly count: number;
+  readonly controller: PlayerId;
+  readonly types: readonly CardType[];
+}
+
 /** One object in a {@link TurnHistory} list; a token stack entering or
  * leaving at once counts as every token in it. */
 export interface TurnHistoryEntry {
@@ -4264,6 +4276,12 @@ export interface TurnHistory {
   /** The permanents this player put a lore counter on, each in the stint it
    * was in — an impulse permission's `sourceDid: "lore-counter"`. */
   loreCountersOn?: { readonly object: ObjectId; readonly stint: number }[];
+  /** Every placement of counters this player put on a permanent this turn
+   * (`CountersPutSpec`), read as they went on. */
+  countersPut?: CountersPutRecord[];
+  /** The players this player has declared an attacker at this turn, each once
+   * (`TurnStat`'s `"opponents-attacked"`). */
+  attackedPlayers?: PlayerId[];
   /** Each block declared by a creature this player controlled, once per
    * attacker it blocked — `CardFilter.blockedThisTurn`. */
   blocks?: BlockRecord[];

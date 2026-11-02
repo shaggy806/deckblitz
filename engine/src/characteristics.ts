@@ -34,6 +34,7 @@ import type {
   CombatRestriction,
   ConditionPlayer,
   CountSpec,
+  CountersPutSpec,
   Keyword,
   LifeFromStarting,
   StaticAbility,
@@ -1230,6 +1231,8 @@ function evalStaticCondition(
       );
       return n >= (condition.atLeast ?? 1);
     }
+    case "counters-put-this-turn":
+      return countersPutThisTurn(state, condition, you) >= (condition.atLeast ?? 1);
     case "turn-stat": {
       // Per player, never summed: "an opponent lost 4 or more life this
       // turn" is satisfied by one opponent reaching 4, not by two reaching
@@ -1617,7 +1620,27 @@ export function turnStatOf(state: GameState, player: PlayerId, stat: TurnStat): 
       return seat.turnHistory?.scriedOrSurveilled ?? 0;
     case "mana-spent-on-spells":
       return seat.turnHistory?.manaSpentOnSpells ?? 0;
+    case "opponents-attacked":
+      return seat.turnHistory?.attackedPlayers?.filter((p) => p !== player).length ?? 0;
   }
+}
+
+/**
+ * How many counters were put on permanents this turn, as `spec` narrows them,
+ * from `you`'s side — the `countersPutThisTurn` amount and the
+ * `counters-put-this-turn` condition.
+ */
+export function countersPutThisTurn(state: GameState, spec: CountersPutSpec, you: PlayerId): number {
+  let n = 0;
+  for (const player of spec.by === "any-player" ? state.turnOrder : [you]) {
+    for (const put of state.players[player]?.turnHistory?.countersPut ?? []) {
+      if (spec.counter !== undefined && put.counter !== spec.counter) continue;
+      if (spec.onType !== undefined && !put.types.includes(spec.onType)) continue;
+      if (spec.onYours === true && put.controller !== you) continue;
+      n += put.count;
+    }
+  }
+  return n;
 }
 
 /**

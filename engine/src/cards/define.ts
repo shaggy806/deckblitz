@@ -686,7 +686,36 @@ export type TurnStat =
   | "scried-or-surveilled"
   /** The mana the player has spent to cast spells this turn (rule 700.14,
    * expend). The "whenever you expend N" trigger is `{ on: "expend" }`. */
-  | "mana-spent-on-spells";
+  | "mana-spent-on-spells"
+  /** How many opponents the player has declared an attacker at this turn —
+   * Militant Angel's "the number of opponents you attacked this turn", at any
+   * combat of it. As melee's count (rule 702.121): whether or not those
+   * creatures still attack, never one put onto the battlefield attacking, and
+   * a planeswalker attacked isn't its controller. */
+  | "opponents-attacked";
+
+/**
+ * Counters put on permanents this turn — the `countersPutThisTurn` amount and
+ * the `counters-put-this-turn` condition. Every clause narrows it, and each
+ * reads the permanent as the counters went on, so a creature that has since
+ * left or changed hands still counts (`TurnHistory.countersPut`).
+ *
+ * `by` is who put them (default `"you"`): the controller of the effect, or the
+ * permanent's own controller for counters it entered with (rule 122.6) —
+ * replacement effects' extras included. `counter` is one kind (any by default):
+ * Iridescent Hornbeetle's "each +1/+1 counter you've put on creatures under
+ * your control this turn" is `{ counter: "+1/+1", onType: "creature",
+ * onYours: true }`, Lord Jyscal Guado's "you put a counter on a creature this
+ * turn" `{ onType: "creature" }`, Fairgrounds Trumpeter's "a +1/+1 counter was
+ * put on a permanent under your control" `{ by: "any-player", counter: "+1/+1",
+ * onYours: true }`.
+ */
+export interface CountersPutSpec {
+  readonly by?: "you" | "any-player";
+  readonly counter?: string;
+  readonly onType?: CardType;
+  readonly onYours?: true;
+}
 
 /**
  * A condition gating a static ability (rule 604.3 — "as long as …"). Evaluated
@@ -1203,6 +1232,10 @@ export type StaticCondition =
       readonly from?: readonly ZoneType[];
       readonly notFrom?: readonly ZoneType[];
     }
+  /** At least `atLeast` (default 1) counters put this turn, as
+   * {@link CountersPutSpec} narrows them — "if you put a counter on a creature
+   * this turn" (Lord Jyscal Guado). */
+  | ({ readonly kind: "counters-put-this-turn"; readonly atLeast?: number } & CountersPutSpec)
   /** The source's controller created a token this turn (Idol of Oblivion). */
   | { readonly kind: "created-token-this-turn" }
   /** The source's controller attacked with a commander this turn — declared

@@ -17,6 +17,7 @@ import type {
   StaticAbility,
   StaticCondition,
   Supertype,
+  CountersPutSpec,
   TurnStat,
 } from "./cards.js";
 import type { AggregateSpec, CardFilter, ShareReference, SharedTypes } from "./filter.js";
@@ -798,18 +799,28 @@ export type EffectAmount =
    * in that target slot instead — Astarion, the Decadent's "target opponent
    * loses life equal to the amount of life **they** lost this turn".
    */
-  | { readonly turnStat: TurnStat; readonly who?: PlayerScope; readonly target?: number }
+  | { readonly turnStat: TurnStat; readonly who?: PlayerScope | "each"; readonly target?: number }
   /** The spells `who` (you by default) cast this turn that match the
    * filter, each read as it was cast (`PlayerState.spellsCastThisTurnAs`):
    * how many, or with `greatest: "mana-value"` the greatest mana value
    * among them, its {X} counted (Rootha, Mastering the Moment's "the greatest
-   * mana value among instant and sorcery spells you've cast this turn"). 0
-   * with none. */
+   * mana value among instant and sorcery spells you've cast this turn"), or with
+   * `total: "mana-value"` the sum of them. `other` leaves out the spell this is
+   * reading from: Call Forth the Tempest's "the total mana value of other spells
+   * you've cast this turn" is `{ castThisTurn: {}, total: "mana-value", other:
+   * true }`. 0 with none. */
   | {
       readonly castThisTurn: CardFilter;
       readonly who?: PlayerScope;
       readonly greatest?: "mana-value";
+      readonly total?: "mana-value";
+      readonly other?: true;
     }
+  /** How many counters were put on permanents this turn, as
+   * {@link CountersPutSpec} narrows them, whoever or wherever they are now —
+   * Iridescent Hornbeetle's "for each +1/+1 counter you've put on creatures
+   * under your control this turn". */
+  | { readonly countersPutThisTurn: CountersPutSpec }
   /**
    * How many of the players `who` names have a nonzero {@link TurnStat} this
    * turn — "for each opponent who lost life this turn". Counts players, not
@@ -8716,7 +8727,13 @@ export interface EffectApi {
   /** How many of the spells `player` cast this turn match `filter`, as
    * they were cast — or the greatest mana value among them. See the
    * `castThisTurn` {@link EffectAmount}. */
-  castThisTurnOf(player: PlayerId, filter: CardFilter, greatest?: "mana-value"): number;
+  castThisTurnOf(
+    player: PlayerId,
+    filter: CardFilter,
+    read?: { readonly greatest?: "mana-value"; readonly total?: "mana-value"; readonly other?: true },
+  ): number;
+  /** See the `{ countersPutThisTurn }` {@link EffectAmount}. */
+  countersPutThisTurn(spec: CountersPutSpec): number;
   /** See the `{ countInGraveyard }` {@link EffectAmount}; `you` reads the
    * filter from that player's side (the effect's controller's otherwise). */
   countInGraveyard(filter: CardFilter, you?: PlayerId): number;
@@ -11709,6 +11726,9 @@ function signedAmountValue(
       const ref = ctx.targets[amount.target];
       return ref?.kind === "player" ? ctx.turnStatOf(ref.player, amount.turnStat) : 0;
     }
+    // Wound Reflection's "each opponent loses life equal to the life they lost
+    // this turn": each one's own, read as the scoped effect reaches them.
+    if (amount.who === "each") return ctx.turnStatOf(each ?? ctx.controller, amount.turnStat);
     // What happened this turn stays so after a player leaves: "life your
     // opponents have lost this turn" counts one who has since lost the game
     // (Neheb, the Eternal's ruling).
@@ -11717,11 +11737,10 @@ function signedAmountValue(
       .reduce((n, p) => n + ctx.turnStatOf(p, amount.turnStat), 0);
   }
   if ("castThisTurn" in amount) {
-    const each = ctx
-      .playersInScope(amount.who ?? "you")
-      .map((p) => ctx.castThisTurnOf(p, amount.castThisTurn, amount.greatest));
-    return amount.greatest === undefined ? each.reduce((n, v) => n + v, 0) : Math.max(0, ...each);
+    const cast = ctx.playersInScope(amount.who ?? "you").map((p) => ctx.castThisTurnOf(p, amount.castThisTurn, amount));
+    return amount.greatest === undefined ? cast.reduce((n, v) => n + v, 0) : Math.max(0, ...cast);
   }
+  if ("countersPutThisTurn" in amount) return ctx.countersPutThisTurn(amount.countersPutThisTurn);
   if ("playerCounters" in amount) {
     return ctx
       .playersInScope(amount.who ?? "you")
@@ -12414,6 +12433,7 @@ function readsEachPlayer(amount: EffectAmount): boolean {
   if ("librarySize" in amount) return amount.librarySize === "each";
   if ("graveyardSize" in amount) return amount.graveyardSize === "each";
   if ("cardsInHand" in amount) return amount.cardsInHand === "each";
+  if ("turnStat" in amount) return amount.who === "each";
   if ("attackingPlayer" in amount) return true;
   if ("countOf" in amount) return amount.forEachPlayer === true;
   if ("countInGraveyard" in amount) return amount.forEachPlayer === true;

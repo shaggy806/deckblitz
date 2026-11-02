@@ -1831,6 +1831,7 @@ export function parseTrigger(clause) {
   if (/^At the beginning of each combat$/.test(c)) return [{ on: "step-begins", step: "begin-combat", who: "any" }];
   // Every combat's end of combat step (rule 511): Kjeldoran Frostbeast.
   if (/^At end of combat$/.test(c)) return [{ on: "step-begins", step: "end-combat", who: "any" }];
+  if (/^At end of combat on your turn$/.test(c)) return [{ on: "step-begins", step: "end-combat", who: "you" }];
   if ((m = /^At the beginning of (your|each of your|each|the|each opponent's|each player's|enchanted player's|the chosen player's) (upkeep|draw step|end step|precombat main phase|first main phase|postcombat main phases?)$/.exec(c))) {
     return [{ on: "step-begins", step: STEPS[m[2]], who: WHO_STEP[m[1]] }];
   }
@@ -2007,6 +2008,69 @@ function distributedCountersOf(s, ctx) {
   };
 }
 
+/**
+ * What a "for each …" over this turn's events counts, the phrase alone:
+ * Iridescent Hornbeetle's counters, Rose's opponents attacked, Smuggler's Share's
+ * opponents past a threshold. `undefined` for any other phrase.
+ */
+function turnTallyOf(phrase) {
+  const p = phrase.toLowerCase();
+  if (p === "+1/+1 counter you've put on creatures under your control this turn") {
+    return { countersPutThisTurn: { counter: "+1/+1", onType: "creature", onYours: true } };
+  }
+  if (p === "opponent you attacked" || p === "opponent you attacked this turn") return { turnStat: "opponents-attacked" };
+  const each = (condition) => ({ countPlayers: "each-opponent", where: { kind: "of-player", player: "that-player", condition } });
+  let m = /^opponent who drew (two|three|four|five) or more cards this turn$/.exec(p);
+  if (m !== null) return each({ kind: "turn-stat", stat: "cards-drawn", who: "you", atLeast: numberOf(m[1]) });
+  m = /^opponent who had (two|three|four|five) or more lands enter the battlefield under their control this turn$/.exec(p);
+  if (m !== null) return each({ kind: "turn-history", what: "entered", filter: { type: "land" }, atLeast: numberOf(m[1]) });
+  return undefined;
+}
+
+/**
+ * A sentence whose amount is read from this turn's events; `null` for any
+ * other. Above the guard in `parseSentence` that leaves every other "for each"
+ * and "equal to" to a person.
+ */
+function turnTallyEffect(s, ctx) {
+  const capital = (text) => `${text[0].toUpperCase()}${text.slice(1)}`;
+  let m = /^(.+ for each .+ this turn), then (.+ for each .+ this turn)\.$/i.exec(s);
+  if (m !== null) {
+    const first = turnTallyEffect(`${m[1]}.`, ctx);
+    const second = turnTallyEffect(`${capital(m[2])}.`, ctx);
+    return first === null || second === null ? null : { kind: "sequence", effects: [first, second] };
+  }
+  m = /^(.+?) for each (.+)\.$/i.exec(s);
+  if (m !== null) {
+    const amount = turnTallyOf(m[2]);
+    if (amount === undefined) return null;
+    const base = parseSentence(`${capital(m[1])}.`, ctx);
+    if (base?.kind === "create-token" && base.count === 1) return { ...base, count: amount };
+    if (base?.kind === "draw" && base.amount === 1) return { ...base, amount };
+    return null;
+  }
+  m = /^create a number of (.+?) tokens?( with .+?)? equal to the number of opponents you attacked this turn\.$/i.exec(s);
+  if (m !== null) {
+    const base = parseSentence(`Create a ${m[1]} token${m[2] ?? ""}.`, ctx);
+    return base?.kind === "create-token" && base.count === 1 ? { ...base, count: { turnStat: "opponents-attacked" } } : null;
+  }
+  m = /^draw cards equal to the number of cards (target opponent|target player) discarded this turn\.$/i.exec(s);
+  if (m !== null) {
+    return { kind: "draw", amount: { turnHistory: "discarded", target: ctx.target(m[1].toLowerCase() === "target opponent" ? "opponent" : "player") } };
+  }
+  if (/^~ deals damage to each creature your opponents control equal to the total mana value of other spells you've cast this turn\.$/i.test(s)) {
+    return {
+      kind: "damage-all",
+      filter: { type: "creature", controlledBy: "opponent" },
+      amount: { castThisTurn: {}, total: "mana-value", other: true },
+    };
+  }
+  if (/^each opponent loses life equal to the life they lost this turn\.$/i.test(s)) {
+    return { kind: "lose-life", who: "each-opponent", amount: { turnStat: "life-lost", who: "each" } };
+  }
+  return null;
+}
+
 export function parseSentence(sentence, ctx) {
   const s = sentence.replace(/\s+/g, " ").trim();
   // "~ deals 2 damage to any target and doesn't untap during your next untap
@@ -2043,6 +2107,8 @@ export function parseSentence(sentence, ctx) {
     const where = { kind: "player-compare", stat: COMPARED_STATS[m[1].toLowerCase()], compare: "fewer", than: "that-player" };
     return { kind: "create-token", token: "Clue Token", count: { countPlayers: "each-opponent", where } };
   }
+  const tallied = turnTallyEffect(s, ctx);
+  if (tallied !== null) return tallied;
   // A cost to attack for a while (the `attackTax` player effect, rule 508.1h),
   // whose "for each" is per creature, not an amount: "Until your next turn,
   // creatures can't attack you or planeswalkers you control unless their
@@ -7246,6 +7312,23 @@ export function parseFace(face, ctx = {}) {
       out.selfCostReduction = { condition: { kind: "controls", filter: {}, atLeast: 0 }, reduceGeneric: perEach };
       continue;
     }
+    // Hollow One's "{2} less for each card you've cycled or discarded this
+    // turn": cycling is discarding (rule 702.29a). Fast Forward's "{1} less for
+    // each opponent you attacked this turn".
+    if ((m = /^~ costs \{(\d+)\} less to cast for each card you've (?:cycled or )?discarded this turn\.$/.exec(line))) {
+      out.selfCostReduction = {
+        condition: { kind: "controls", filter: {}, atLeast: 0 },
+        reduceGeneric: { turnHistory: "discarded", ...(m[1] === "1" ? {} : { times: Number(m[1]) }) },
+      };
+      continue;
+    }
+    if (line === "~ costs {1} less to cast for each opponent you attacked this turn.") {
+      out.selfCostReduction = {
+        condition: { kind: "controls", filter: {}, atLeast: 0 },
+        reduceGeneric: { turnStat: "opponents-attacked", who: "you" },
+      };
+      continue;
+    }
     // Devotion (rule 700.5): "~ costs {X} less to cast, where X is your
     // devotion to black" — Drag to the Underworld.
     if ((m = /^~ costs \{X\} less to cast, where X is your devotion to (white|blue|black|red|green)\.$/.exec(line))) {
@@ -8596,6 +8679,15 @@ const TURN_TALLY_IFS = {
   // Dragon Whelp's: activations of this ability so far this turn, resolved
   // or not.
   "if this ability has been activated four or more times this turn,": { kind: "activated-this-turn", atLeast: 4 },
+  "if a player discarded a card this turn,": { kind: "turn-history", what: "discarded", who: "any-player" },
+  // Counters put this turn (`CountersPutSpec`).
+  "if you put a counter on a creature this turn,": { kind: "counters-put-this-turn", onType: "creature" },
+  "if a +1/+1 counter was put on a permanent under your control this turn,": {
+    kind: "counters-put-this-turn",
+    by: "any-player",
+    counter: "+1/+1",
+    onYours: true,
+  },
   "if you discarded a card this turn,": DISCARDED_THIS_TURN,
   "if you've discarded a card this turn,": DISCARDED_THIS_TURN,
   "if an artifact or creature was put into a graveyard from the battlefield this turn,": {
@@ -10576,6 +10668,19 @@ function parseStatic(line, text) {
         event: "others-enter-battlefield",
         filter: { type: "creature", controlledBy: "you", ofChosenType: true },
         counters: { kind: "+1/+1", amount: 1 },
+      },
+      text,
+    };
+  }
+  // "… for each land that entered the battlefield under your control this
+  // turn" (Bioengineered Future): the turn history's list, ones gone included.
+  if (line === "Each creature you control enters with an additional +1/+1 counter on it for each land that entered the battlefield under your control this turn.") {
+    return {
+      affects: { scope: "self" },
+      replacement: {
+        event: "others-enter-battlefield",
+        filter: { type: "creature", controlledBy: "you" },
+        counters: { kind: "+1/+1", amount: { turnHistory: "entered", filter: { type: "land" } } },
       },
       text,
     };

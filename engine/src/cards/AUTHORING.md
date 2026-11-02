@@ -848,13 +848,30 @@ countPlayers: "each-player", where: { kind: "player-compare", stat: {
 controls: { type: "land" } }, compare: "fewer", than: "that-player" } }`,
 "each graveyard with seven or more cards" an `of-player` over
 `cards-in-graveyard`),
-`{ castThisTurn: CardFilter, who?, greatest?: "mana-value" }` (the spells `who`
+`{ castThisTurn: CardFilter, who?, greatest?: "mana-value", total?: "mana-value", other? }` (the spells `who`
 — you by default — cast this turn that match, as they were cast: how many, or
 the greatest mana value among them, {X} counted — Rootha, Mastering the
 Moment's "the greatest mana value among instant and sorcery spells you've cast
-this turn"),
-`{ turnStat: TurnStat, who?: PlayerScope, target? }` (with `target` a player
+this turn" — or the sum; `other` leaves out the spell reading it: Call Forth the
+Tempest's "the total mana value of other spells you've cast this turn" is `{
+castThisTurn: {}, total: "mana-value", other: true }`),
+`{ countersPutThisTurn: { by?, counter?, onType?, onYours? } }` (counters
+put on permanents this turn, each read as it went on, gone or not. `by` is who put
+them: `"you"` by default, the controller of the effect or the permanent's own
+controller for what it entered with, or `"any-player"`. Iridescent Hornbeetle's
+"each +1/+1 counter you've put on creatures under your control this turn" is `{
+counter: "+1/+1", onType: "creature", onYours: true }`; the `counters-put-this-turn`
+condition takes the same fields and `atLeast?`: Lord Jyscal Guado's "if you put a
+counter on a creature this turn" `{ onType: "creature" }`, Fairgrounds Trumpeter's
+"if a +1/+1 counter was put on a permanent under your control this turn" `{ by:
+"any-player", counter: "+1/+1", onYours: true }`. No "on this creature": a list
+naming objects would keep tokens from folding back into their stacks),
+`{ turnStat: TurnStat, who?: PlayerScope | "each", target? }` (`who: "each"` for each
+player a scoped effect reaches — Wound Reflection's "each opponent loses life equal to
+the life they lost this turn" — with `target` a player
 target slot instead of a scope — Astarion's "life **they** lost this turn" — a per-turn running total —
+`"opponents-attacked"` (Militant Angel, Rose: at any combat of the turn, a planeswalker
+attacked isn't its controller),
 `"life-lost"`, `"life-gained"`, `"cards-drawn"`, `"spells-cast"`,
 `"damage-taken"`, `"combat-damage-taken"`, `"noncombat-damage-taken"` (the
 rest of `"damage-taken"`: Whiplash Wordsmith's and Grim Repriser's "an

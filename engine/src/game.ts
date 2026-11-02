@@ -150,6 +150,7 @@ import {
   turnSpellGrantReaches,
   staticReaches,
   suspendComputedCache,
+  countersPutThisTurn,
   turnStatOf,
   speedWithin,
   withComputedCache,
@@ -9885,6 +9886,10 @@ export class Game {
           if (!players.includes(object.lastAttack.player)) {
             this.state.players[player].attackedThisCombat = { combat, players: [...players, object.lastAttack.player] };
           }
+          // And "the opponents you attacked this turn", at any of its combats.
+          const history = (this.state.players[player].turnHistory ??= {});
+          const attacked = (history.attackedPlayers ??= []);
+          if (!attacked.includes(object.lastAttack.player)) attacked.push(object.lastAttack.player);
         }
         // "During any turn you attacked with a commander" (Neriv).
         if (object.isCommander) this.state.players[player].attackedWithCommanderOnTurn = this.state.turn.number;
@@ -28048,12 +28053,20 @@ export class Game {
       lifeTotalOf: (player) => this.state.players[player]?.life ?? 0,
       startingLifeTotal: () => this.state.rules.startingLife,
       turnStatOf: (player, stat) => turnStatOf(this.state, player, stat),
-      castThisTurnOf: (player, filter, greatest) => {
-        const cast = (this.state.players[player]?.spellsCastThisTurnAs ?? []).filter(({ id, spell }) =>
-          matchesFilter(this.state, this.registry, id, filter, { you: controller, snapshot: spell }),
+      castThisTurnOf: (player, filter, read) => {
+        const records = this.state.players[player]?.spellsCastThisTurnAs ?? [];
+        // "Other spells": this one's own record alone, its latest (the same
+        // card cast twice is two spells, rule 400.7). A copy has no record, so
+        // the spell it copies is one of its "other spells".
+        const own = read?.other === true ? records.findLastIndex(({ id }) => id === source) : -1;
+        const cast = records.filter(
+          ({ id, spell }, index) =>
+            index !== own && matchesFilter(this.state, this.registry, id, filter, { you: controller, snapshot: spell }),
         );
-        return greatest === undefined ? cast.length : cast.reduce((n, { spell }) => Math.max(n, spell.manaValue), 0);
+        if (read?.total === "mana-value") return cast.reduce((n, { spell }) => n + spell.manaValue, 0);
+        return read?.greatest === undefined ? cast.length : cast.reduce((n, { spell }) => Math.max(n, spell.manaValue), 0);
       },
+      countersPutThisTurn: (spec) => countersPutThisTurn(this.state, spec, controller),
       countInGraveyard: (filter, you = controller) => {
         let n = 0;
         for (const player of this.state.turnOrder) {
@@ -40760,11 +40773,20 @@ export class Game {
         return;
       }
       case "counter-added": {
-        if (event.counter !== "lore") return;
         const permanent = this.state.objects[event.object];
         const history = historyOf(event.by ?? permanent?.controller);
-        if (history !== undefined) {
+        if (history === undefined || permanent === undefined) return;
+        if (event.counter === "lore") {
           (history.loreCountersOn ??= []).push({ object: event.object, stint: permanent.zoneChangeCount ?? 0 });
+        }
+        // None put is none put: a replacement can take a placement to zero.
+        if (event.amount > 0) {
+          (history.countersPut ??= []).push({
+            counter: event.counter,
+            count: event.amount * (event.count ?? permanent.stackCount ?? 1),
+            controller: permanent.controller,
+            types: effectiveTypes(this.state, this.registry, permanent),
+          });
         }
         return;
       }

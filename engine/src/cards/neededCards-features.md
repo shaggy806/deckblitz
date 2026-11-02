@@ -2942,6 +2942,23 @@ the comparison as a spell's own sentence, after an instruction and as an interve
 (`playerComparisonOf`), and a spell's "return ~ to its owner's hand" from the stack. Proving cards:
 Linvala, the Preserver; Glorious Enforcer; Pulse of the Forge; Pulse of the Dross; Wojek Investigator.
 
+### What has happened this turn, as an amount — built 2026-11-01
+
+The need-keys group `effect:counters-put-this-turn-stat` + `effect:turn-stat-counters-put` +
+`effect:total-mana-value-cast-this-turn` + `effect:turn-stat-cards-discarded` +
+`effect:turn-stat-lands-entered`, then `effect:count-players-with-turn-history` +
+`effect:turn-stat-per-player-amount`, and `amount:opponents-attacked-this-turn`. New: counters put
+(`TurnHistory.countersPut`, the `countersPutThisTurn` amount and `counters-put-this-turn` condition,
+over one `CountersPutSpec`: who, which kind, on what), `castThisTurn`'s `total` and
+`other`, `turnStat`'s `who: "each"`, and the stat `"opponents-attacked"`. Already there: discards
+and lands through `turnHistory` and `countPlayers`' `where`. Proving cards: Iridescent Hornbeetle,
+Fairgrounds Trumpeter, Lord Jyscal Guado; Call Forth the Tempest; The Raven Man, Dream Salvage, Hollow
+One; Bioengineered Future; Wound Reflection, Smuggler's Share; Militant Angel, Rose, Cutthroat Raider.
+`CountersPutSpec` holds a type and "yours", not a whole `CardFilter`, because a placement keeps only
+its permanent's types and controller, and no object id: a list naming objects keeps a token from
+folding back into its stack (`referencedObjectIds`). So "a counter on this creature" isn't said:
+Fractal Tender and Beast, Erudite Aerialist need a mark on the object that token folding respects.
+
 ### Choosing a card name — built 2026-10-28
 
 The need-keys Phase 2 family `decision:choose-card-name` (B246): rule 201.4's

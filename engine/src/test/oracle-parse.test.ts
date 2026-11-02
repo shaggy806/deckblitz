@@ -8188,3 +8188,75 @@ describe("a number of yours against another player's (player-compare)", () => {
     expect(face(SPELL, "If that player has more life than you, draw a card.").complete).toBe(false);
   });
 });
+
+describe("amounts read from what has happened this turn", () => {
+  const face = (type_line: string, oracle_text: string) =>
+    parseFace({ name: "Thing", type_line, mana_cost: "{1}", oracle_text }, { tokenFor: () => "A Token" });
+  const CREATURE = "Creature — Insect";
+
+  it("counters put: an amount and intervening-ifs", () => {
+    const beetle = face(CREATURE, "At the beginning of your end step, create a 1/1 green Insect creature token for each +1/+1 counter you've put on creatures under your control this turn.");
+    expect(beetle.triggered[0].effect).toEqual({
+      kind: "create-token",
+      token: "A Token",
+      count: { countersPutThisTurn: { counter: "+1/+1", onType: "creature", onYours: true } },
+    });
+    expect(face(CREATURE, "At the beginning of each end step, if you put a counter on a creature this turn, investigate.").triggered[0].condition)
+      .toEqual({ kind: "counters-put-this-turn", onType: "creature" });
+    expect(face(CREATURE, "At the beginning of each end step, if you put a counter on this creature this turn, investigate.").complete).toBe(false);
+    expect(face(CREATURE, "At the beginning of each end step, if a +1/+1 counter was put on a permanent under your control this turn, put a +1/+1 counter on this creature.").triggered[0].condition)
+      .toEqual({ kind: "counters-put-this-turn", by: "any-player", counter: "+1/+1", onYours: true });
+  });
+
+  it("the total mana value of other spells, and a stat read per player", () => {
+    expect(face("Sorcery", "Thing deals damage to each creature your opponents control equal to the total mana value of other spells you've cast this turn.").effect).toEqual({
+      kind: "damage-all",
+      filter: { type: "creature", controlledBy: "opponent" },
+      amount: { castThisTurn: {}, total: "mana-value", other: true },
+    });
+    expect(face("Enchantment", "At the beginning of each end step, each opponent loses life equal to the life they lost this turn.").triggered[0].effect).toEqual({
+      kind: "lose-life",
+      who: "each-opponent",
+      amount: { turnStat: "life-lost", who: "each" },
+    });
+  });
+
+  it("cards discarded: a condition, an amount with a target, a cost", () => {
+    expect(face(CREATURE, "At the beginning of each end step, if a player discarded a card this turn, draw a card.").triggered[0].condition)
+      .toEqual({ kind: "turn-history", what: "discarded", who: "any-player" });
+    const salvage = face("Instant", "Draw cards equal to the number of cards target opponent discarded this turn.");
+    expect(salvage.effect).toEqual({ kind: "draw", amount: { turnHistory: "discarded", target: 0 } });
+    expect(salvage.targets).toEqual(["opponent"]);
+    expect(face(CREATURE, "This spell costs {2} less to cast for each card you've cycled or discarded this turn.").selfCostReduction).toEqual({
+      condition: { kind: "controls", filter: {}, atLeast: 0 },
+      reduceGeneric: { turnHistory: "discarded", times: 2 },
+    });
+  });
+
+  it("lands entered, and the opponents past a threshold", () => {
+    expect(face("Enchantment", "Each creature you control enters with an additional +1/+1 counter on it for each land that entered the battlefield under your control this turn.").static[0].replacement).toEqual({
+      event: "others-enter-battlefield",
+      filter: { type: "creature", controlledBy: "you" },
+      counters: { kind: "+1/+1", amount: { turnHistory: "entered", filter: { type: "land" } } },
+    });
+    const share = face("Enchantment", "At the beginning of each end step, draw a card for each opponent who drew two or more cards this turn, then create a Treasure token for each opponent who had two or more lands enter the battlefield under their control this turn.");
+    const each = (condition: unknown) => ({ countPlayers: "each-opponent", where: { kind: "of-player", player: "that-player", condition } });
+    expect(share.triggered[0].effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "draw", amount: each({ kind: "turn-stat", stat: "cards-drawn", who: "you", atLeast: 2 }) },
+        { kind: "create-token", token: "A Token", count: each({ kind: "turn-history", what: "entered", filter: { type: "land" }, atLeast: 2 }) },
+      ],
+    });
+  });
+
+  it("the opponents attacked; no other 'for each' is read as one", () => {
+    const rose = face(CREATURE, "At end of combat on your turn, if you attacked this turn, create a Junk token for each opponent you attacked.");
+    expect(rose.triggered[0].trigger).toEqual({ on: "step-begins", step: "end-combat", who: "you" });
+    expect(rose.triggered[0].effect).toEqual({ kind: "create-token", token: "A Token", count: { turnStat: "opponents-attacked" } });
+    const angel = face(CREATURE, "When this creature enters, create a number of 2/2 white Knight creature tokens with vigilance equal to the number of opponents you attacked this turn.");
+    expect(angel.triggered[0].effect).toEqual({ kind: "create-token", token: "A Token", count: { turnStat: "opponents-attacked" } });
+    expect(face("Sorcery", "This spell costs {1} less to cast for each opponent you attacked this turn.").selfCostReduction.reduceGeneric).toEqual({ turnStat: "opponents-attacked", who: "you" });
+    expect(face("Sorcery", "Draw a card for each opponent who attacked this turn.").complete).toBe(false);
+  });
+});
