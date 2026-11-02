@@ -4553,50 +4553,6 @@ function collectStaticEffects(
     const effect = applied(source, ability, timestamp);
     if (effect !== null) out.push(effect);
   }
-  // An anthem emblem in a state saved before an emblem's statics had an object
-  // (`EmblemState.object`) to read them from: `emblemStatics` has the rest.
-  for (const emblem of state.emblems) {
-    const ability = emblem.static;
-    if (
-      emblem.object !== undefined ||
-      ability === null ||
-      ability.affects.scope !== "creatures-you-control" ||
-      !contributesToCharacteristics(ability)
-    ) {
-      continue;
-    }
-    if (
-      target.controller !== emblem.owner ||
-      !effectiveTypes(state, registry, target).includes("creature")
-    ) {
-      continue;
-    }
-    if (
-      ability.affects.subtype !== undefined &&
-      !hasSubtype(effectiveSubtypes(state, registry, target), ability.affects.subtype)
-    ) {
-      continue;
-    }
-    out.push({
-      timestamp: emblem.timestamp,
-      power: ability.grantPt?.[0] ?? 0,
-      toughness: ability.grantPt?.[1] ?? 0,
-      keywords: ability.grantKeywords ?? [],
-      loseKeywords: ability.loseKeywords ?? [],
-      toxic: ability.grantToxic ?? 0,
-      restrictions: ability.restrictions ?? [],
-      combatDamageByToughness: ability.combatDamageByToughness,
-      canAttackAsThoughNoDefender: ability.canAttackAsThoughNoDefender === true,
-      canAttackAttackersDespiteDefender: ability.canAttackAsThoughNoDefender === "players-who-attacked-you",
-      assignAsThoughUnblocked: ability.assignAsThoughUnblocked === true,
-      cantBeSacrificed: ability.cantBeSacrificed === true,
-      blockAdditional: ability.blockAdditional ?? 0,
-      protection: ability.protection ?? null,
-      hexproofFrom: ability.hexproofFrom ?? null,
-      bandsWithOther: ability.bandsWithOther ?? null,
-      setBase: null,
-    });
-  }
   if (keywordScoped) {
     let keywords: Set<Keyword> | null = null;
     const targetKeywords = (): ReadonlySet<Keyword> => {

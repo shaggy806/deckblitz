@@ -1909,7 +1909,23 @@ export class Game {
       controllers[player] =
         env.controllers?.[player] ?? new AutomaticController(player);
     }
-    return new Game(state, registry, controllers, createRng(state.rngState));
+    const game = new Game(state, registry, controllers, createRng(state.rngState));
+    game.giveEmblemsTheirObjects();
+    return game;
+  }
+
+  /** A snapshot saved before an emblem's statics were read off its object
+   * (`EmblemState.object`, 2026-11-01): each of its emblems with a static gets
+   * one, as `createEmblem` would have made it. */
+  private giveEmblemsTheirObjects(): void {
+    this.state.emblems.forEach((emblem, index) => {
+      if (emblem.object !== undefined || staticsOfEmblem(emblem).length === 0) return;
+      const object = this.makeCardObject(EMBLEM_CARD, emblem.owner, { zone: "command" });
+      const made = this.state.objects[object];
+      made.kind = "emblem";
+      made.timestamp = emblem.timestamp;
+      this.state.emblems[index] = { ...emblem, object };
+    });
   }
 
   // --- read-only accessors ----------------------------------------------

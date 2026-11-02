@@ -168,17 +168,20 @@ describe("untap step limits", () => {
     const forests = lands(game, "Forest", 3);
     const swamps = lands(game, "Swamp", 3, B);
     tapAll(game, [...forests, ...swamps]);
-    game.state.emblems.push({
-      id: "emblem-1",
-      owner: A,
-      text: "Your opponents can't untap more than two permanents during their untap steps.",
-      timestamp: 0,
-      static: {
-        affects: { scope: "self" },
-        untapLimit: { who: "opponents", count: 2 },
+    game.debugApplyEffect(
+      A,
+      {
+        kind: "create-emblem",
         text: "Your opponents can't untap more than two permanents during their untap steps.",
+        static: {
+          affects: { scope: "self" },
+          untapLimit: { who: "opponents", count: 2 },
+          text: "Your opponents can't untap more than two permanents during their untap steps.",
+        },
       },
-    });
+      [],
+      { source: forests[0] },
+    );
     pickPermanents(b, swamps[0], swamps[2]);
     const mine = pickPermanents(a);
     toAlicesNextTurn(game);

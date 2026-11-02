@@ -12,7 +12,7 @@ import { POOL_CARDS } from "../cards.js";
 import type { StaticAbility } from "../cards.js";
 import { playerCantLoseGame, playerCantWinGame } from "../characteristics.js";
 import type { EffectSpec } from "../effects.js";
-import type { Game } from "../game.js";
+import { Game } from "../game.js";
 import {
   A,
   B,
@@ -288,6 +288,25 @@ describe("cast and play permissions, off an emblem", () => {
     expect(offered(bears)).toBe(true);
     expect(offered(buried)).toBe(false);
     expect(hand(game)).toContain(bears);
+  });
+});
+
+describe("a snapshot from before emblems' statics had an object", () => {
+  it("an anthem and a hand size still work, and the object it's given is in no zone list", () => {
+    const { game } = table();
+    const bears = spawn(game, "Grizzly Bears");
+    game.state.emblems.push({
+      id: "emblem-old",
+      owner: A,
+      text: "Creatures you control get +2/+2.",
+      timestamp: 1,
+      static: { affects: { scope: "creatures-you-control" }, grantPt: [2, 2], text: "Creatures you control get +2/+2." },
+    });
+    const restored = Game.fromSnapshot(game.state);
+    const emblem = restored.state.emblems[0];
+    expect(emblem.object).toBeDefined();
+    expect(restored.state.zones.shared.command).not.toContain(emblem.object);
+    expect(pt(restored, bears)).toEqual({ power: 4, toughness: 4 });
   });
 });
 
