@@ -5989,6 +5989,22 @@ engine terms. A second thing to check is a second test.
 - **Do:** Use Sivitri's +1 and pass the turn. As Bob, go to combat and attack Alice with the Bears.
 - **Expect:** The prompt adds "costs 2 life to attack". Declaring costs Bob 2 life.
 
+### Invigorate: you choose which opponent gains the life
+- **Do:** In this 4-player game, cast Invigorate, pick the option ending "(Carol gains)", and target your Grizzly Bears.
+- **Expect:** There's one option for each opponent, each reading "an opponent gains 3 life". Carol goes to 43 life, Bob and Dave stay at 40, and your Bears get +4/+4. No land taps.
+
+### Snuff Out: 4 life beside its mana cost
+- **Do:** Cast Snuff Out, pick the option reading "pay 4 life", and target Bob's Grizzly Bears.
+- **Expect:** You're offered that and the plain cast. You lose 4 life, no land taps, and the Bears are destroyed.
+
+### Marshland Bloodcaster: two alternative costs, paying the second
+- **Do:** Activate Marshland Bloodcaster and let it resolve. Cast Gush and pick the option reading "pay 5 life".
+- **Expect:** You're offered "return two Islands you control to hand" and "pay 5 life". You lose 5 life and draw two cards, and both Islands stay on the battlefield.
+
+### Necrotic Fumes: the creature you pick is exiled, not sacrificed
+- **Do:** Cast Necrotic Fumes, click your Grizzly Bears, and target Bob's Hill Giant.
+- **Expect:** The prompt reads "choose a creature to exile". Your Bears go to exile, not your graveyard, and so does the Giant.
+
 ### Karoo: return an untapped Plains or sacrifice it
 - **Do:** Play Karoo, answer Yes to "Return an untapped Plains you control to its owner's hand", click the untapped Plains and Confirm.
 - **Expect:** Only the untapped Plains can be picked. It goes to your hand, and Karoo stays, tapped.

@@ -9045,4 +9045,31 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: ['Grizzly Bears', 'Hill Giant'] },
     }),
   ),
+  preset(
+    'Invigorate: you choose which opponent gains the life',
+    board({
+      you: { bf: ['Forest', 'Grizzly Bears'], hand: ['Invigorate'] },
+      opp: [{}, {}, {}],
+    }),
+  ),
+  preset(
+    'Snuff Out: 4 life beside its mana cost',
+    board({
+      you: { bf: ['Swamp*4'], hand: ['Snuff Out'] },
+      opp: { bf: ['Grizzly Bears'] },
+    }),
+  ),
+  preset(
+    'Marshland Bloodcaster: two alternative costs, paying the second',
+    board({
+      you: { bf: ['Marshland Bloodcaster', 'Swamp*2', 'Island*2'], hand: ['Gush'] },
+    }),
+  ),
+  preset(
+    'Necrotic Fumes: the creature you pick is exiled, not sacrificed',
+    board({
+      you: { bf: ['Swamp*3', 'Grizzly Bears', 'Llanowar Elves'], hand: ['Necrotic Fumes'] },
+      opp: { bf: ['Hill Giant'] },
+    }),
+  ),
 ]
