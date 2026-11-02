@@ -9504,6 +9504,43 @@ describe("exchanges with a life total", () => {
   });
 });
 
+describe("references to the source's host and to attachments", () => {
+  const aura = (oracle_text: string) =>
+    parseFace({ name: "Card", type_line: "Enchantment — Aura", oracle_text }, { tokenFor: (d: string) => d });
+
+  it("reads a live read of the host, and another Aura on it", () => {
+    const banner = parseFace(
+      {
+        name: "Card",
+        type_line: "Artifact — Equipment",
+        oracle_text:
+          "Creatures that share a color with equipped creature get +1/+1.\nCreatures that share a creature type with equipped creature get +1/+1.",
+      },
+      { tokenFor: (d: string) => d },
+    );
+    expect(banner.static).toMatchObject([
+      { affects: { scope: "filter", filter: { type: "creature", sharesColorWithHost: true } }, grantPt: [1, 1] },
+      { affects: { scope: "filter", filter: { type: "creature", sharesCreatureTypeWithHost: true } }, grantPt: [1, 1] },
+    ]);
+    expect(
+      aura("Enchant creature\nAs long as another Aura is attached to enchanted creature, it has first strike and lifelink.")
+        .static,
+    ).toMatchObject([
+      {
+        affects: { scope: "attached" },
+        condition: { filter: { attachedTo: { attachments: { filter: { subtype: "Aura" }, otherThanSource: true } } } },
+        grantKeywords: ["first-strike", "lifelink"],
+      },
+    ]);
+  });
+
+  it("reads a target other than enchanted creature", () => {
+    const reading = ctx();
+    parseEffect("Target creature other than enchanted creature gets +2/+2 until end of turn.", reading);
+    expect(reading.targets).toMatchObject([{ kind: "permanent", whose: "any", filter: { type: "creature", hostOfSource: false } }]);
+  });
+});
+
 describe("changes of control", () => {
   it("reads the triggers about one, and the delayed ability about the one target", () => {
     expect(parseTrigger("When you lose control of ~")).toEqual([{ on: "loses-control", who: "self" }]);

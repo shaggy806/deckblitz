@@ -755,6 +755,10 @@ export interface CountersPutSpec {
  * player controls an artifact". Nobody while the source isn't attacking. */
 export type ConditionPlayer =
   | "that-player"
+  /** The controller of the permanent the source is attached to, as it is now
+   * — So Tiny's "as long as **its controller** has seven or more cards in
+   * their graveyard". A static can ask this. Attached to nothing, nobody. */
+  | "host-controller"
   | "active-player"
   | "defending-player"
   | { readonly target: number }
@@ -802,6 +806,9 @@ export type StaticCondition =
        * entering doesn't count, and once it has left, the rest still do.
        * Only meaningful as a triggered ability's intervening-if. */
       readonly excludeTriggerObject?: boolean;
+      /** Not the permanent the source is attached to — Favorable Destiny's
+       * "as long as its controller controls **another** creature". */
+      readonly excludeHost?: boolean;
       readonly countsSelf?: boolean;
       /** Count different names, not permanents — The Necrobloom's "if you
        * control seven or more lands **with different names**": several

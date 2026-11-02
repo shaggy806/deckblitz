@@ -950,6 +950,8 @@ const TARGET_PHRASES = [
   ["target creature you don't control", "creature-an-opponent-controls"],
   ["target artifact an opponent controls", "artifact-an-opponent-controls"],
   ["target artifact you don't control", "artifact-an-opponent-controls"],
+  ["target creature you control other than enchanted creature", { kind: "permanent", whose: "you", filter: { type: "creature", hostOfSource: false } }],
+  ["target creature other than enchanted creature", { kind: "permanent", whose: "any", filter: { type: "creature", hostOfSource: false } }],
   ["target creature you control", "creature-you-control"],
   ["target land you control", "land-you-control"],
   ["target artifact or enchantment", "artifact-or-enchantment"],
@@ -12286,6 +12288,23 @@ function parseStatic(line, text) {
   if ((m = new RegExp(`^The chosen creature gets ([+-]\\d+)/([+-]\\d+)(?: and has ${KW}(?: and ${KW})?)?\\.$`, "i").exec(line))) {
     const kws = [m[3], m[4]].filter(Boolean).map((k) => KEYWORDS[k.toLowerCase()]);
     return { affects: { scope: "chosen" }, grantPt: [Number(m[1]), Number(m[2])], ...(kws.length ? { grantKeywords: kws } : {}), text };
+  }
+  // "Creatures that share a color with equipped creature get +1/+1" (Konda's
+  // Banner): a live read of the host.
+  if ((m = /^Creatures that share a (color|creature type) with (?:equipped|enchanted) creature get ([+-]\d+)\/([+-]\d+)\.$/.exec(line))) {
+    const clause = m[1] === "color" ? { sharesColorWithHost: true } : { sharesCreatureTypeWithHost: true };
+    return { affects: { scope: "filter", filter: { type: "creature", ...clause } }, grantPt: [Number(m[2]), Number(m[3])], text };
+  }
+  // "As long as another Aura is attached to enchanted creature, it has first
+  // strike and lifelink" (Face of Divinity).
+  if ((m = new RegExp(`^As long as another Aura is attached to enchanted creature, it has ${KW}(?: and ${KW})?\\.$`, "i").exec(line))) {
+    const kws = [m[1], m[2]].filter(Boolean).map((k) => KEYWORDS[k.toLowerCase()]);
+    return {
+      affects: { scope: "attached" },
+      condition: { kind: "source", filter: { attachedTo: { attachments: { filter: { subtype: "Aura" }, otherThanSource: true } } } },
+      grantKeywords: kws,
+      text,
+    };
   }
   if ((m = new RegExp(`^(?:Equipped|Enchanted) creature gets ([+-]\\d+)/([+-]\\d+)(?: and has ${KW}(?: and ${KW})?)?\\.$`, "i").exec(line))) {
     const kws = [m[3], m[4]].filter(Boolean).map((k) => KEYWORDS[k.toLowerCase()]);

@@ -440,7 +440,10 @@ export function conditionPlayerOf(
 ): PlayerId | undefined {
   let player: PlayerId | undefined;
   if (who === "that-player") player = opts.thatPlayer;
-  else if (who === "active-player") player = state.turnOrder[state.turn.activePlayerIndex];
+  else if (who === "host-controller") {
+    const host = source?.zone === "battlefield" ? source.attachedTo : null;
+    player = host === null || host === undefined ? undefined : state.objects[host]?.controller;
+  } else if (who === "active-player") player = state.turnOrder[state.turn.activePlayerIndex];
   else if (who === "defending-player") {
     // Rule 802.2a: the player the source attacks, or who defends what it
     // attacks (`combat/eligibility.ts`'s `defendingPlayerOf`, not imported:
@@ -885,6 +888,9 @@ function evalStaticCondition(
       // A static ability's scan has already skipped the source whole.
       const except: ObjectId[] = [];
       if (condition.excludeSelf === true && opts.includeSelf === true) except.push(source.id);
+      if (condition.excludeHost === true && source.attachedTo !== null && source.attachedTo !== undefined) {
+        except.push(source.attachedTo);
+      }
       if (condition.excludeTarget !== undefined) {
         const ref = opts.targets?.[condition.excludeTarget];
         if (ref?.kind === "object") except.push(ref.object);
@@ -1060,6 +1066,8 @@ function evalStaticCondition(
     case "source":
       return matchesFilter(state, registry, source.id, condition.filter, {
         you,
+        // "Another Aura": `attachments`' `otherThanSource`.
+        source: source.id,
         ...(opts.sourceLastKnown !== undefined ? { snapshot: opts.sourceLastKnown } : {}),
       });
     case "source-came-under-control-since-last-upkeep": {

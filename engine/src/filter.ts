@@ -820,6 +820,37 @@ export interface CardFilter {
    * (a `source` condition). The host is matched as it is now. */
   readonly attachedTo?: CardFilter;
   /**
+   * Has permanents attached to it: at least `atLeast` (one) matching `filter`,
+   * whoever controls them. Daybreak Coronet's "enchant creature with **another
+   * Aura attached to it**" and Face of Divinity's "as long as another Aura is
+   * attached to enchanted creature" are `otherThanSource` (the one applying the
+   * filter doesn't count itself); Bride's Gown's "an Equipment named Groom's
+   * Finery is attached to a creature you control" a `controls` of a creature
+   * with this. Read as it is now: one that has left has nothing attached.
+   */
+  readonly attachments?: {
+    readonly filter?: CardFilter;
+    readonly atLeast?: number;
+    readonly otherThanSource?: true;
+  };
+  /**
+   * It shares a color (rule 105.2) with the permanent the one applying the
+   * filter is attached to, as that is now — Konda's Banner's "creatures that
+   * share a color with equipped creature". The host shares one with itself if
+   * it has a color (the ruling); attached to nothing, nothing matches. A live
+   * read, for a static; an effect fixing the color as it applies is
+   * `sharesColorWithTarget`.
+   */
+  readonly sharesColorWithHost?: true;
+  /**
+   * As `sharesColorWithHost`, for a creature type (rule 205.3m, a changeling
+   * on either side sharing through `hasSubtype`): the host shares one with
+   * itself only if it has one (Konda's Banner's ruling). `sharesCreatureTypeWith:
+   * "attached"` is the effect's form, which always includes the host (the
+   * Crowns).
+   */
+  readonly sharesCreatureTypeWithHost?: true;
+  /**
    * Is attached to the object or player in this target slot — "return target
    * creature and all Auras attached to it" (Hubris), "destroy all Equipment
    * attached to that creature" (Blastfire Bolt), "all Auras attached to
@@ -2223,6 +2254,35 @@ export function matchesFilter(
       !matchesFilter(state, registry, host, filter.attachedTo, hostCtx)
     ) {
       return false;
+    }
+  }
+  if (filter.attachments !== undefined) {
+    if (live === undefined || live.zone !== "battlefield") return false;
+    const { filter: of, atLeast = 1, otherThanSource } = filter.attachments;
+    const { snapshot: _snapshot, lastKnown: _lastKnown, layered: _layered, ...attachedCtx } = ctx;
+    let attached = 0;
+    for (const other of state.zones.shared.battlefield) {
+      if (state.objects[other].attachedTo !== live.id) continue;
+      if (otherThanSource === true && other === ctx.source) continue;
+      if (of === undefined || matchesFilter(state, registry, other, of, attachedCtx)) attached += 1;
+    }
+    if (attached < atLeast) return false;
+  }
+  if (filter.sharesColorWithHost === true || filter.sharesCreatureTypeWithHost === true) {
+    const by = ctx.source === undefined ? undefined : state.objects[ctx.source];
+    const hostId = by?.zone === "battlefield" ? by.attachedTo : null;
+    const host = hostId === null || hostId === undefined ? undefined : state.objects[hostId];
+    if (host === undefined || live === undefined) return false;
+    if (filter.sharesColorWithHost === true) {
+      const colors = effectiveColors(state, registry, live);
+      if (![...effectiveColors(state, registry, host)].some((color) => colors.has(color))) return false;
+    }
+    if (filter.sharesCreatureTypeWithHost === true) {
+      const subtypes = layered?.subtypes ?? effectiveSubtypes(state, registry, live);
+      const theirs = effectiveSubtypes(state, registry, host).filter(
+        (t) => isCreatureType(t) || t === EVERY_CREATURE_TYPE,
+      );
+      if (!theirs.some((t) => hasSubtype(subtypes, t))) return false;
     }
   }
   // "Attached to it / that creature" (an effect's bound target slot) and

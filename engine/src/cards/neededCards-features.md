@@ -3901,3 +3901,23 @@ Betrayer, Ray of Command, Magus of the Unseen, Ogre Geargrabber, Stolen Uniform,
 Tantalus Thief, Risky Move. Freed but not authored: Duplicity (and Gustha's Scepter) need their
 face-down exile. Coffin Queen needs "becomes untapped or you lose control". Krovikan Vampire needs its
 end-step intervening "if" over creatures that died.
+
+### References to a permanent's attachments and to the source's host — built 2026-11-02
+
+The need-keys Phase 2 family `condition:filter-attachments`, features only. `CardFilter.attachments`
+(`filter?`, `atLeast?`, `otherThanSource?`) asks what is attached to a permanent, live, whoever
+controls it. `sharesColorWithHost` and `sharesCreatureTypeWithHost` are static reads of the source's
+host, which shares with itself only if it has a color or type (Konda's Banner's ruling). The
+`ConditionPlayer` `"host-controller"` is "its controller", which a static can ask; `controls`'
+`excludeHost` is "another creature" beside the host; `sacrifice`'s `exceptHost` is "other than
+enchanted creature" for an edict, whose filter is read after the source context has gone. A `source`
+condition's filter now sees its source. `hostOfSource: false` already covered a target's "other than
+enchanted creature". The scaffolder reads the two target phrases, the Banner's two lines and Face of
+Divinity's. Keys: attached-host-condition, not-attached-to-source, shares-color-with-attached,
+shares-creature-type-with-equipped, enchanted-by-another-aura, auras-attached-count, equipped-by-filter,
+equipment-attached-count-condition, named-equipment-attached-to-your-creature. Proving cards: Konda's
+Banner, So Tiny, Face of Divinity, Favorable Destiny, Champion's Helm, Due Diligence, Kjeldoran Pride,
+Sporogenic Infection, Daybreak Coronet, Bride's Gown, Groom's Finery. Freed but not authored: Combat
+Research, Ghost Lantern. Left for `author-freed` to narrow: Crown of Convergence needs a library-top
+condition, a live color read of that card and "put the top card on the bottom"; Kitsune Mystic its
+attach on resolution; Kassandra her search of the hand; Brass Knuckles its cast-trigger copy.

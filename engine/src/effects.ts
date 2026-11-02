@@ -2836,6 +2836,9 @@ export type EffectSpec =
       /** Exclude the effect's own source ("sacrifice **another** permanent" —
        * Korvold). needed-cards P6. */
       readonly exceptSource?: boolean;
+      /** Exclude what the source is attached to, or was last — "a creature of
+       * their choice **other than enchanted creature**" (Sporogenic Infection). */
+      readonly exceptHost?: true;
       /** Exploit's sacrifice (rule 702.110 — the `exploit()` helper): the
        * effect's source "exploits" what's sacrificed (702.110b), which an
        * `exploits` trigger watches (`permanent-sacrificed`'s `exploitedBy`). */
@@ -13888,7 +13891,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "sacrifice": {
-      const exceptId = spec.exceptSource ? ctx.source : undefined;
+      const exceptId = spec.exceptSource ? ctx.source : spec.exceptHost === true ? ctx.attachedHost() : undefined;
       if (spec.who === "target") {
         const target = ctx.targets[0];
         if (target?.kind === "player") {
