@@ -3660,3 +3660,23 @@ mana), Revel in Silence's one-shot loyalty ban (`prohibit`'s `abilities` is
 all-or-nothing), Urza Assembles the Titans and Kaito's one-shot "twice this turn",
 Yuriko's "attacks a player alone", Iona's chosen colour, Void Winnower's parity
 and Inventive Iteration's same mana value.
+
+### More player scopes: a target's player, an Aura's host's controller, the trigger's opponents, who can't — built 2026-11-01
+
+The need-keys Phase 2 family `effect:player-scope-extensions`, its top units. Much of
+it was there already: `sameController` covers `target:controlled-by-target-player`,
+`damage-all`'s and `restrict`'s `controlledByTarget` read a planeswalker's controller,
+and a filter's `controlledBy: "active-player"` is `effect:step-trigger-active-player-target`.
+New: `sameObjectAllowed` on an `other` slot (rule 115.3), the `PlayerScope`s
+`"attached-controller"` and `"opponents-of-trigger-controller"`, a `step-begins`
+`who: "attached"` on a permanent's Aura (its controller's step), `for-each-player`'s
+`before` (each player who can't, found first), `amass`'s `who`, `modify-pt-all`'s
+`controlledByPlayer`, `animate-all`'s `controlledByTarget`, and the condition
+`target-controlled-by-you`. No new decision. Proving cards: The Fall of Kroog, Searing
+Blaze, Yosei the Morning Star, Mass Diminish, Gremlin Infestation, Observed Stasis,
+Standstill, Heartwood Storyteller, Bounty Board, Lavalanche, Ember Gale, Cruel Grimnarch,
+Plaguecrafter, Super Intelligence, Citadel Siege, Azog Moria's Ruin, Silumgar the
+Drifting Death. Partly covered: Fall of the Impostor still needs an exile chosen, not
+targeted, among a target opponent's creatures; Curse of Thirst and Curse of Surveillance
+a count of Curses attached; Overencumbered its `effect:pay-or-cant-attack-you`.
+`author-freed` narrows those.

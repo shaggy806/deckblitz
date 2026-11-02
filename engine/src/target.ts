@@ -313,6 +313,13 @@ export type TargetSpec =
        * illegal (rule 608.2b); one already illegal still lends its player, as
        * it last existed. Needs {@link TargetFacts}. */
       readonly sameController?: true;
+      /** With `sameController`: not "another", only the same player's — the
+       * slot may name the very object slot `than` names. "Target player or
+       * planeswalker and … target creature that player or that planeswalker's
+       * controller controls" (Searing Blaze) uses the word "target" twice, so
+       * a planeswalker that's also a creature may be chosen for both (rule
+       * 115.3). Mutiny's "**another** target creature" stays without it. */
+      readonly sameObjectAllowed?: true;
       /** "…that **share** a card type" / "…a creature type" / "…share
        * **no** creature types": the slot shares a type of that kind with
        * every slot `than` names (see {@link TargetShare}) — Shifting
@@ -509,6 +516,16 @@ export function sameControllerOf(spec: TargetSpec): boolean {
   if (typeof spec !== "object") return false;
   if (spec.kind === "other") return spec.sameController === true;
   if (spec.kind === "optional") return sameControllerOf(spec.of);
+  return false;
+}
+
+/** May slot `spec` name the very object its relation names — two instances of
+ * the word "target" (`sameObjectAllowed`, rule 115.3)? Looked for through an
+ * `optional` wrapper. */
+export function sameObjectAllowedOf(spec: TargetSpec): boolean {
+  if (typeof spec !== "object") return false;
+  if (spec.kind === "other") return spec.sameObjectAllowed === true;
+  if (spec.kind === "optional") return sameObjectAllowedOf(spec.of);
   return false;
 }
 
@@ -966,7 +983,8 @@ export function slotOptions(
     .map((slot) => picked[slot])
     .filter((ref): ref is TargetRef => ref !== null && ref !== undefined);
   if (earlier.length === 0) return all;
-  let distinct = all.filter((ref) => !earlier.some((e) => sameTarget(ref, e)));
+  const mayRepeat = specs[i] !== undefined && sameObjectAllowedOf(specs[i]);
+  let distinct = mayRepeat ? all : all.filter((ref) => !earlier.some((e) => sameTarget(ref, e)));
   if (facts === undefined || specs[i] === undefined) return distinct;
   // "…that share a card type", "…share no creature types": only those
   // keeping it with every earlier one.
@@ -1078,7 +1096,7 @@ export function otherSlotConflict(
     for (const slot of otherThanSlots(than)) {
       const theirs = chosen[slot];
       if (theirs === null || theirs === undefined) continue;
-      if (sameTarget(mine, theirs)) return { slot: i, than: slot };
+      if (sameTarget(mine, theirs) && !sameObjectAllowedOf(specs[i])) return { slot: i, than: slot };
       // "…that share a card type" (Shifting Loyalties, Rivals' Duel).
       if (share !== undefined && facts !== undefined && sharesHold(mine, theirs, share, facts) === false) {
         return { slot: i, than: slot };

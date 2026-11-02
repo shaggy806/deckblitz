@@ -1778,7 +1778,7 @@ export function parseTrigger(clause) {
     const graveyard = m[3] === "your" ? { graveyard: { ownedBy: "you" } } : { graveyard: {}, itsController: true };
     return [{ on: "cast-spell", who, filter: { ...filter, sameNameWith: graveyard } }];
   }
-  if ((m = /^Whenever (you|an opponent|a player) casts? (a|an|your first|their first) (?:(.+?) )?spell(?: each turn)?$/.exec(c))) {
+  if ((m = /^When(?:ever)? (you|an opponent|a player) casts? (a|an|your first|their first) (?:(.+?) )?spell(?: each turn)?$/.exec(c))) {
     const who = { you: "you", "an opponent": "opponent", "a player": "any" }[m[1]];
     const spec = { on: "cast-spell", who };
     if (/first/.test(m[2])) spec.firstEachTurn = true;
@@ -1861,6 +1861,9 @@ export function parseTrigger(clause) {
   // Steps.
   if (/^At the beginning of combat on your turn$/.test(c)) return [{ on: "step-begins", step: "begin-combat", who: "you" }];
   if (/^At the beginning of each combat$/.test(c)) return [{ on: "step-begins", step: "begin-combat", who: "any" }];
+  if (/^At the beginning of combat on each opponent's turn$/.test(c)) return [{ on: "step-begins", step: "begin-combat", who: "opponent" }];
+  // Super Intelligence: the step belongs to whoever controls the Aura's host.
+  if (/^At the beginning of the upkeep of enchanted creature's controller$/.test(c)) return [{ on: "step-begins", step: "upkeep", who: "attached" }];
   // Every combat's end of combat step (rule 511): Kjeldoran Frostbeast.
   if (/^At end of combat$/.test(c)) return [{ on: "step-begins", step: "end-combat", who: "any" }];
   if (/^At end of combat on your turn$/.test(c)) return [{ on: "step-begins", step: "end-combat", who: "you" }];
@@ -2202,6 +2205,21 @@ export function parseSentence(sentence, ctx) {
   // The one exception: "for each … counter removed this way", which is the
   // cost's X (`removeCounter.count: "x"`), read by the mana templates below.
   let m;
+  // "… to target player or planeswalker and each creature that player or that
+  // planeswalker's controller controls" (Bonfire of the Damned, Lavalanche),
+  // ahead of the plain "~ deals N damage to target …".
+  if ((m = sentenceRe(`~ deals ${N} damage to target player or planeswalker and each creature that player or that planeswalker's controller controls`).exec(s))) {
+    const first = ctx.target("player-or-planeswalker");
+    const n = numberOf(m[1]);
+    return {
+      kind: "sequence",
+      simultaneous: true,
+      effects: [
+        { kind: "damage", amount: n, target: first },
+        { kind: "damage-all", filter: { type: "creature" }, amount: n, controlledByTarget: first },
+      ],
+    };
+  }
   // "Investigate once for each opponent who has more cards in hand than you"
   // (Wojek Investigator): a count of the players it holds for.
   if ((m = /^investigate once for each opponent who has more (cards in hand|life) than you\.$/i.exec(s))) {
@@ -3575,6 +3593,11 @@ export function parseSentence(sentence, ctx) {
     }
   }
   if (re("tap ~").test(s)) return { kind: "tap", target: "source" };
+  // "That player" of a trigger on someone's step (Citadel Siege): whoever's
+  // step it is.
+  if (ctx.thatPlayer === "active-player" && re("tap target creature that player controls").test(s)) {
+    return { kind: "tap", target: ctx.target({ kind: "permanent", filter: { type: "creature", controlledBy: "active-player" } }) };
+  }
   if ((m = re(`tap (${TARGET})`).exec(s))) return { kind: "tap", target: slot(m[1]) };
   if ((m = re(`untap (${TARGET})`).exec(s))) return { kind: "untap", target: slot(m[1]) };
   // Detain (rule 701.35a).
@@ -3733,6 +3756,89 @@ export function parseSentence(sentence, ctx) {
   // (Manabarbs): the player the event names.
   if (ctx.thatPlayer === "trigger-player" && (m = re(`~ deals ${N} damage to that player`).exec(s))) {
     return { kind: "damage", amount: amount(m[1]), who: "trigger-player" };
+  }
+  // A second "target" tied to the first's player (Searing Blaze's shape; the
+  // word twice, so one creature planeswalker may be both — rule 115.3).
+  if (
+    (m = re(`~ deals ${N} damage to target (player|opponent) or planeswalker and ${N} damage to (up to one )?target creature that player or that planeswalker's controller controls`).exec(s))
+  ) {
+    const first = ctx.target(`${m[2].toLowerCase()}-or-planeswalker`);
+    const of = { kind: "other", of: "creature", than: { slot: first }, sameController: true, sameObjectAllowed: true };
+    const second = ctx.target(m[4] !== undefined ? { kind: "optional", of } : of);
+    return {
+      kind: "sequence",
+      simultaneous: true,
+      effects: [
+        { kind: "damage", amount: amount(m[1]), target: first },
+        { kind: "damage", amount: amount(m[3]), target: second },
+      ],
+    };
+  }
+  // "Tap up to five target permanents that player controls" (Yosei): a group
+  // tied to the player an earlier sentence targeted.
+  if ((m = re(`tap up to ${N} target (permanents|creatures) that player controls`).exec(s))) {
+    const anchor = ctx.targets.findLastIndex((t) => t === "player" || t === "opponent");
+    if (anchor >= 0) {
+      const of = m[2].toLowerCase() === "permanents" ? "permanent" : "creature";
+      const from = ctx.target({ kind: "any-number", of, max: amount(m[1]), sameController: { slot: anchor } });
+      return { kind: "for-each-target", from, simultaneous: true, effect: { kind: "tap", target: from } };
+    }
+  }
+  // "Enchanted creature's controller": `"attached-controller"`.
+  if ((m = re(`~ deals ${N} damage to enchanted (?:artifact|creature|land|permanent)'s controller`).exec(s))) {
+    return { kind: "damage", amount: amount(m[1]), who: "attached-controller" };
+  }
+  // "Creatures defending player controls get -1/-1 until end of turn"
+  // (Silumgar, the Drifting Death).
+  if (ctx.thatPlayer === "trigger-player" && (m = re("creatures defending player controls get ([+-]\\d+)/([+-]\\d+) until end of turn").exec(s))) {
+    return {
+      kind: "modify-pt-all",
+      filter: { type: "creature", controlledBy: "you" },
+      controlledByPlayer: "trigger-player",
+      power: Number(m[1]),
+      toughness: Number(m[2]),
+      duration: "end-of-turn",
+    };
+  }
+  // "Until your next turn, creatures target player controls have base power
+  // and toughness 1/1" (Mass Diminish): fixed as it resolves (rule 611.2c).
+  if ((m = re("until your next turn, creatures target (player|opponent) controls have base power and toughness (\\d+)/(\\d+)").exec(s))) {
+    return {
+      kind: "animate-all",
+      filter: { type: "creature", controlledBy: "you" },
+      controlledByTarget: ctx.target(m[1].toLowerCase()),
+      power: Number(m[2]),
+      toughness: Number(m[3]),
+      duration: "until-your-next-turn",
+    };
+  }
+  // "Each of that player's opponents" (Standstill, Heartwood Storyteller) and
+  // "each of its controller's opponents" (Bounty Board): opponents of whoever
+  // the trigger is about.
+  if (ctx.thatPlayer === "trigger-controller") {
+    if ((m = re(`each (?:of that player's opponents|other player) draws ${N} cards?`).exec(s))) {
+      return { kind: "draw", amount: amount(m[1]), who: "opponents-of-trigger-controller" };
+    }
+    if (re("each of that player's opponents may draw a card").test(s)) {
+      return {
+        kind: "each-player-may",
+        who: "opponents-of-trigger-controller",
+        prompt: "Draw a card?",
+        effect: { kind: "draw", amount: 1 },
+      };
+    }
+  }
+  if ((m = re(`each of its controller's opponents draws ${N} cards? and gains ${N} life`).exec(s))) {
+    return {
+      kind: "sequence",
+      effects: [
+        { kind: "draw", amount: amount(m[1]), who: "opponents-of-trigger-controller" },
+        { kind: "gain-life", amount: amount(m[2]), who: "opponents-of-trigger-controller" },
+      ],
+    };
+  }
+  if (ctx.thatPlayer === "active-player" && (m = re(`that player draws ${N} cards?`).exec(s))) {
+    return { kind: "draw", amount: amount(m[1]), who: "active-player" };
   }
   // "… a land an opponent controls … enters, ~ deals 2 damage to that player"
   // (Invader Parasite); "… casts a … spell …, that player loses 10 life"
@@ -5315,6 +5421,25 @@ export function parseEffect(text, outer) {
         continue;
       }
     }
+    // "Sacrifice ~. If you do, each of that player's opponents draws three
+    // cards." (Standstill).
+    const sacDraw = new RegExp(`^If you do, each of that player's opponents draws ${N} cards?\\.$`).exec(sentence);
+    if (sacDraw !== null && ctx.thatPlayer === "trigger-controller" && parsed.at(-1)?.kind === "sacrifice-source" && parsed.at(-1).then === undefined) {
+      const n = numberOf(sacDraw[1]);
+      if (typeof n === "number") {
+        const sac = { kind: "sacrifice-source", then: { kind: "draw", amount: n, who: "opponents-of-trigger-controller" } };
+        parsed[parsed.length - 1] = sac;
+        hints.push({ sentence, effect: sac });
+        continue;
+      }
+    }
+    const whoCant = whoCantAt(sentences, i);
+    if (whoCant !== null) {
+      parsed.push(whoCant.effect);
+      hints.push({ sentence, effect: whoCant.effect });
+      skip = whoCant.used - 1;
+      continue;
+    }
     const nameChoice = nameChoiceAt(sentences, i, ctx);
     if (nameChoice !== null) {
       parsed.push(nameChoice.effect);
@@ -6072,6 +6197,61 @@ function graveyardArrivalAt(sentences, i, ctx) {
       ? { kind: "put-onto-battlefield", target, underYourControl: true }
       : { kind: "return-to-hand", target, from: "graveyard" };
   return { effect, used: 2 };
+}
+
+/**
+ * "Each opponent discards a card. Each opponent who can't loses 3 life."
+ * (Entropic Battlecruiser), "… For each opponent who can't, you gain 4 life."
+ * (Cruel Grimnarch), "Each player sacrifices a creature or planeswalker of
+ * their choice. Each player who can't discards a card." (Plaguecrafter):
+ * `for-each-player`'s `before`, those who can't found first.
+ */
+function whoCantAt(sentences, i) {
+  const first = sentences[i] ?? "";
+  const then = sentences[i + 1] ?? "";
+  if (new RegExp(`^Each opponent discards a card\\.$`, "i").test(first)) {
+    const base = {
+      kind: "for-each-player",
+      who: "each-opponent",
+      whoIf: { kind: "of-player", player: "that-player", condition: { kind: "hand-size", atMost: 0 } },
+      before: { kind: "discard", target: "each-opponent", amount: 1 },
+    };
+    const loses = new RegExp(`^Each opponent who can't loses ${N} life\\.$`, "i").exec(then);
+    if (loses !== null) {
+      const n = numberOf(loses[1]);
+      if (typeof n !== "number") return null;
+      return { effect: { ...base, effect: { kind: "lose-life", amount: n, who: "that-player" } }, used: 2 };
+    }
+    const gains = new RegExp(`^For each opponent who can't, you gain ${N} life\\.$`, "i").exec(then);
+    if (gains !== null) {
+      const n = numberOf(gains[1]);
+      if (typeof n !== "number") return null;
+      return { effect: { ...base, effect: { kind: "gain-life", amount: n } }, used: 2 };
+    }
+    return null;
+  }
+  if (
+    /^Each player sacrifices a creature or planeswalker of their choice\.$/i.test(first) &&
+    /^Each player who can't discards a card\.$/i.test(then)
+  ) {
+    const filter = { typesAnyOf: ["creature", "planeswalker"] };
+    return {
+      effect: {
+        kind: "for-each-player",
+        who: "each-player",
+        whoIf: {
+          kind: "of-player",
+          player: "that-player",
+          condition: { kind: "not", of: { kind: "controls", filter, atLeast: 1 } },
+        },
+        before: { kind: "sacrifice", who: "each-player", filter, count: 1 },
+        choicesHeld: true,
+        effect: { kind: "discard", target: "that-player", amount: 1 },
+      },
+      used: 2,
+    };
+  }
+  return null;
 }
 
 function amongTargetsAt(sentences, i, ctx) {
@@ -9369,6 +9549,7 @@ function thatPlayerOf(triggers) {
   // (Thieving Amalgam); "deal combat damage to a player, … that player's
   // library" (Orochi Soul-Reaver).
   if (triggers.every((t) => t.on === "step-begins" && t.who === "opponent")) return "active-player";
+  if (triggers.every((t) => t.on === "step-begins" && t.who === "attached")) return "active-player";
   if (triggers.every((t) => t.on === "deals-damage-batch" && t.combat === true)) return "trigger-player";
   if (triggers.every((t) => t.on === "deals-combat-damage-to-player")) return "trigger-player";
   // "Whenever a player taps a land for mana, ~ deals 1 damage to that player"

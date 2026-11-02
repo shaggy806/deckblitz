@@ -124,6 +124,16 @@ function playersIn(scope: PlayerScope, ctx: WorthContext): readonly PlayerId[] |
       const object = ctx.triggerObject !== undefined ? state.objects[ctx.triggerObject] : undefined;
       return object !== undefined ? [object.owner] : null;
     }
+    case "attached-controller": {
+      const on = ctx.source !== undefined ? state.objects[ctx.source] : undefined;
+      if (on?.attachedToPlayer !== undefined) return [on.attachedToPlayer];
+      const host = on?.attachedTo !== null && on?.attachedTo !== undefined ? state.objects[on.attachedTo] : undefined;
+      return host !== undefined ? [host.controller] : null;
+    }
+    case "opponents-of-trigger-controller": {
+      const object = ctx.triggerObject !== undefined ? state.objects[ctx.triggerObject] : undefined;
+      return object !== undefined ? opponentsOf(state, object.controller) : null;
+    }
   }
 }
 

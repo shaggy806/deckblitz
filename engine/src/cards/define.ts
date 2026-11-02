@@ -1556,6 +1556,13 @@ export type StaticCondition =
    */
   | { readonly kind: "target-is-source"; readonly index: number }
   /**
+   * The ability's controller controls the permanent in this target slot, or
+   * did as it last existed if it has left (rule 608.2h): Azog, Moria's Ruin's
+   * "destroy … **If you controlled that creature**, draw a card". Only a
+   * resolution can answer it.
+   */
+  | { readonly kind: "target-controlled-by-you"; readonly index: number }
+  /**
    * The ability's own source matches `filter` — "as long as ~ is equipped",
    * "if ~ is attacking", "if ~ is tapped". A triggered ability whose source
    * was a permanent that has since left (its own dies trigger) reads it as it

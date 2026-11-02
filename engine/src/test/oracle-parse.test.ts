@@ -278,6 +278,102 @@ describe("skipping a turn and what's said about an extra one", () => {
   });
 });
 
+describe("the players a sentence names by another target, the Aura's host and the trigger", () => {
+  const face = (type_line: string, oracle_text: string) =>
+    parseFace({ name: "Test", type_line, mana_cost: "{1}", oracle_text }, { tokenFor: () => null });
+  const CREATURE = "Creature — Human";
+
+  it("a second target tied to the first's player, the word twice", () => {
+    const blaze = face(
+      "Creature — Avatar",
+      "When this creature enters, this creature deals 2 damage to target opponent or planeswalker and 2 damage to up to one target creature that player or that planeswalker's controller controls.",
+    );
+    expect(blaze.triggered[0].targets).toEqual([
+      "opponent-or-planeswalker",
+      { kind: "optional", of: { kind: "other", of: "creature", than: { slot: 0 }, sameController: true, sameObjectAllowed: true } },
+    ]);
+    expect(blaze.triggered[0].effect).toEqual({
+      kind: "sequence",
+      simultaneous: true,
+      effects: [
+        { kind: "damage", amount: 2, target: 0 },
+        { kind: "damage", amount: 2, target: 1 },
+      ],
+    });
+    expect(
+      face("Sorcery", "Test deals 4 damage to target player or planeswalker and each creature that player or that planeswalker's controller controls.").effect,
+    ).toEqual({
+      kind: "sequence",
+      simultaneous: true,
+      effects: [
+        { kind: "damage", amount: 4, target: 0 },
+        { kind: "damage-all", filter: { type: "creature" }, amount: 4, controlledByTarget: 0 },
+      ],
+    });
+  });
+
+  it("a group tied to a player an earlier sentence targeted, and not without one", () => {
+    const yosei = face(CREATURE, "When this creature dies, target player skips their next untap step. Tap up to five target permanents that player controls.");
+    expect(yosei.triggered[0].targets).toEqual(["player", { kind: "any-number", of: "permanent", max: 5, sameController: { slot: 0 } }]);
+    expect(yosei.triggered[0].effect.effects[1]).toEqual({ kind: "for-each-target", from: 1, simultaneous: true, effect: { kind: "tap", target: 1 } });
+    expect(face(CREATURE, "When this creature dies, tap up to five target permanents that player controls.").triggered[0].complete).toBeFalsy();
+  });
+
+  it("the Aura's host's controller, and the upkeep that's theirs", () => {
+    const aura = "Enchantment — Aura";
+    const gremlin = face(aura, "Enchant artifact\nAt the beginning of your end step, this Aura deals 2 damage to enchanted artifact's controller.");
+    expect(gremlin.triggered[0].effect).toEqual({ kind: "damage", amount: 2, who: "attached-controller" });
+    const smart = face(aura, "Enchant creature\nAt the beginning of the upkeep of enchanted creature's controller, that player draws a card.");
+    expect(smart.triggered[0].trigger).toEqual({ on: "step-begins", step: "upkeep", who: "attached" });
+    expect(smart.triggered[0].effect).toEqual({ kind: "draw", amount: 1, who: "active-player" });
+  });
+
+  it("that player's step: a creature they control", () => {
+    const siege = face("Enchantment", "At the beginning of combat on each opponent's turn, tap target creature that player controls.");
+    expect(siege.triggered[0].trigger).toEqual({ on: "step-begins", step: "begin-combat", who: "opponent" });
+    expect(siege.triggered[0].targets).toEqual([{ kind: "permanent", filter: { type: "creature", controlledBy: "active-player" } }]);
+  });
+
+  it("the opponents of whoever the trigger is about", () => {
+    const stand = face("Enchantment", "When a player casts a spell, sacrifice this enchantment. If you do, each of that player's opponents draws three cards.");
+    expect(stand.triggered[0].effect).toEqual({
+      kind: "sacrifice-source",
+      then: { kind: "draw", amount: 3, who: "opponents-of-trigger-controller" },
+    });
+    const wood = face(CREATURE, "Whenever a player casts a noncreature spell, each of that player's opponents may draw a card.");
+    expect(wood.triggered[0].effect.who).toBe("opponents-of-trigger-controller");
+    const board = parseSentence("Each of its controller's opponents draws a card and gains 2 life.", ctx());
+    expect(board.effects[1]).toEqual({ kind: "gain-life", amount: 2, who: "opponents-of-trigger-controller" });
+  });
+
+  it("each player who can't, found before the instruction", () => {
+    const grim = face(CREATURE, "When this creature enters, each opponent discards a card. For each opponent who can't, you gain 4 life.");
+    expect(grim.triggered[0].effect).toMatchObject({
+      kind: "for-each-player",
+      who: "each-opponent",
+      before: { kind: "discard", target: "each-opponent", amount: 1 },
+      effect: { kind: "gain-life", amount: 4 },
+    });
+    const craft = face(CREATURE, "When this creature enters, each player sacrifices a creature or planeswalker of their choice. Each player who can't discards a card.");
+    expect(craft.triggered[0].effect).toMatchObject({ choicesHeld: true, effect: { kind: "discard", target: "that-player" } });
+    // Nothing about "can't", the plain discard.
+    expect(face(CREATURE, "When this creature enters, each opponent discards a card.").triggered[0].effect.kind).toBe("discard");
+  });
+
+  it("a defending player's creatures, and base power and toughness over a target player's", () => {
+    const dragon = face(CREATURE, "Whenever this creature attacks, creatures defending player controls get -1/-1 until end of turn.");
+    expect(dragon.triggered[0].effect).toMatchObject({ kind: "modify-pt-all", controlledByPlayer: "trigger-player", power: -1 });
+    expect(face("Sorcery", "Until your next turn, creatures target player controls have base power and toughness 1/1.").effect).toEqual({
+      kind: "animate-all",
+      filter: { type: "creature", controlledBy: "you" },
+      controlledByTarget: 0,
+      power: 1,
+      toughness: 1,
+      duration: "until-your-next-turn",
+    });
+  });
+});
+
 describe("reveal until, and where the rest goes", () => {
   const nonland = { notTypes: ["land"] };
   const spell = (oracle_text: string) =>

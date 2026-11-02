@@ -145,7 +145,10 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     });
   },
   "for-each-target": (n, v) => v.child(n.effect),
-  "for-each-player": (n, v) => v.child(n.effect),
+  "for-each-player": (n, v) => {
+    v.child(n.before);
+    v.child(n.effect);
+  },
   // A vote names no target; a `for-each-voted`'s slot 0 is a permanent voted
   // for, not the spell's target 0.
   vote: none,
@@ -620,7 +623,10 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   // base on a creature (Fractalize's X+1) is still the board's call.
   animate: (n, v) => v.touch(n.target, animatePolarity(n), MAJOR),
   "add-types": (n, v) => v.touch(n.target, "either", MINOR),
-  "animate-all": none,
+  // A target player's creatures made small (Mass Diminish's 1/1s).
+  "animate-all": (n, v) => {
+    if (typeof n.toughness === "number" && n.toughness <= 1) v.touch(n.controlledByTarget, "harm", MINOR);
+  },
   // "Its controller creates a 3/3 Beast" rides on the removal it follows.
   // Reality Shift's manifest is the consolation for the creature exiled: it
   // aims at nothing.
@@ -1053,6 +1059,24 @@ export function auraPolarity(def: CardDefinition): Polarity {
       // hurt — Parasitic Bond's 2 damage, Power Taint's "loses 2 life unless
       // they pay {2}".
       if (enchantedControllersTurn(ability.whileCondition) && hurtsActivePlayer(ability.effect)) harm = true;
+      // "This Aura deals 2 damage to enchanted artifact's controller" (Gremlin
+      // Infestation): that player is hurt, whenever it comes.
+      if (
+        (ability.effect?.kind === "damage" || ability.effect?.kind === "lose-life") &&
+        ability.effect.who === "attached-controller"
+      ) {
+        harm = true;
+      }
+      // "The upkeep of enchanted creature's controller, that player draws a
+      // card" (Super Intelligence): a gift to them.
+      if (
+        ability.trigger.on === "step-begins" &&
+        ability.trigger.who === "attached" &&
+        ability.effect?.kind === "draw" &&
+        ability.effect.who === "active-player"
+      ) {
+        help = true;
+      }
       if (!("who" in ability.trigger) || ability.trigger.who !== "attached") continue;
       // "Whenever enchanted creature deals damage to a creature, destroy
       // that creature" (Venomous Fangs), or tap or exile it: a weapon for it.

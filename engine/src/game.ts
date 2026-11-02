@@ -26134,6 +26134,12 @@ export class Game {
             // "Enchanted player's upkeep" (a Curse): the step belongs to the
             // player this Aura is attached to.
             (spec.who === "attached" && this.matchesWhoPlayer("attached", this.activePlayer, self)) ||
+            // "The upkeep of enchanted creature's controller" (Super
+            // Intelligence): the player controlling this Aura's host now.
+            (spec.who === "attached" &&
+              self.attachedTo !== null &&
+              self.attachedTo !== undefined &&
+              this.state.objects[self.attachedTo]?.controller === this.activePlayer) ||
             // "The chosen player's upkeep" (Black Vise).
             (spec.who === "chosen-player" && this.matchesWhoPlayer("chosen-player", this.activePlayer, self)))
         );
@@ -27794,6 +27800,19 @@ export class Game {
         const p = departed !== undefined ? departed.chosenPlayer : this.state.objects[source]?.chosenPlayer;
         return p === undefined || this.state.players[p]?.hasLost !== false ? [] : [p];
       }
+      if (who === "attached-controller") {
+        // Its controller as the host is now, or as it last existed if it's
+        // gone (608.2h). A Curse's host is a player: that player.
+        const known = attachedKnown();
+        const departed = departedSource();
+        const p =
+          known !== undefined
+            ? (known.lastKnown?.controller ?? this.state.objects[known.id]?.controller)
+            : departed !== undefined
+              ? departed.attachedToPlayer
+              : this.state.objects[source]?.attachedToPlayer;
+        return p === undefined || this.state.players[p]?.hasLost !== false ? [] : [p];
+      }
       if (who !== "opponents-who-voted-with-you" && who !== "you-and-opponents-who-voted-with-you") {
         return this.scopedPlayers(controller, who, triggerObject, triggerLastKnown(), refs.player, false, refs.triggerSpellController);
       }
@@ -27996,6 +28015,11 @@ export class Game {
       if (condition.kind === "target-is-source") {
         const ref = targets[condition.index];
         return ref?.kind === "object" && ref.object === source;
+      }
+      if (condition.kind === "target-controlled-by-you") {
+        const ref = targets[condition.index];
+        if (ref?.kind !== "object") return false;
+        return (lastKnownOf(ref)?.controller ?? this.state.objects[ref.object]?.controller) === controller;
       }
       if (condition.kind === "excess-damage-this-way") {
         if (condition.to === undefined) return excessDamageSince(this.state, since) > 0;
@@ -29765,7 +29789,7 @@ export class Game {
         this.doubleCountersAll(controller, filter, counterKind),
       addCounter: (target, counter, amount, by, training) =>
         this.addCounter(target, counter, amount, true, by ?? controller, training),
-      amass: (amount, creatureType, onto) => this.amass(controller, amount, creatureType, source, x, onto),
+      amass: (amount, creatureType, onto, player) => this.amass(player ?? controller, amount, creatureType, source, x, onto),
       exert: (target, asItAttacks) => {
         if (target.kind !== "object") return;
         this.exertPermanent(target.object, controller, asItAttacks);
@@ -31209,9 +31233,9 @@ export class Game {
         // a creature mustn't change what the filter matches mid-loop), and a
         // token stack is animated whole, like any mass effect's.
         const timestamp = this.freshTimestamp();
-        const { exceptSource, ...rest } = opts;
+        const { exceptSource, scopeTo, ...rest } = opts;
         const kept = { ...rest, duration: lastingHere(opts.duration) };
-        for (const id of this.battlefieldMatching(controller, filter)) {
+        for (const id of this.battlefieldMatching(scopeTo ?? controller, filter)) {
           if (exceptSource === true && id === source) continue;
           this.animate({ kind: "object", object: id }, kept, false, timestamp);
         }
@@ -32670,7 +32694,8 @@ export class Game {
           { type: "creature", subtype: "Army", controlledBy: "you" },
           1,
           1,
-          { kind: "amass", amount, creatureType, onto: 0 },
+          // The Army chosen is slot 0, and its controller is who's amassing.
+          { kind: "amass", amount, creatureType, onto: 0, who: { controllerOfTarget: 0 } },
           "Amass: choose an Army creature you control",
         );
         return;
@@ -44327,9 +44352,22 @@ export class Game {
     if (
       who === "opponents-who-voted-with-you" ||
       who === "you-and-opponents-who-voted-with-you" ||
-      who === "chosen-player"
+      who === "chosen-player" ||
+      who === "attached-controller"
     ) {
       return [];
+    }
+    // "Each of that player's opponents": of whoever cast the spell, or last
+    // controlled the permanent, the trigger is about.
+    if (who === "opponents-of-trigger-controller") {
+      const about =
+        triggerSpellController ??
+        triggerLastKnown?.controller ??
+        (triggerObject === undefined ? undefined : this.state.objects[triggerObject]?.controller);
+      if (about === undefined) return [];
+      const at = this.state.turnOrder.indexOf(this.activePlayer);
+      const order = [...this.state.turnOrder.slice(at), ...this.state.turnOrder.slice(0, at)];
+      return order.filter((p) => p !== about && (includeDeparted || !this.state.players[p].hasLost));
     }
     if (who === "you-and-opponents-attacking-trigger-player") {
       const attacking = new Set<PlayerId>();

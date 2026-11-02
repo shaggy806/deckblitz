@@ -1672,6 +1672,24 @@ export type PlayerScope =
    * was chosen or they've left the game. Not a target. Only a resolution
    * knows its source, so elsewhere it names nobody. */
   | "chosen-player"
+  /** "**Enchanted creature's controller**": whoever controls the permanent the
+   * effect's source is attached to as this resolves (Gremlin Infestation). The
+   * source and its host gone together, the host as it last existed (rule
+   * 608.2h); an Aura left behind first last existed attached to nothing, and
+   * names nobody. A sentence that goes on once the host may have left names
+   * the player first, a `for-each-player` of this with `"that-player"` inside:
+   * Strangling Grasp's "enchanted permanent's controller sacrifices …, then
+   * that player loses 1 life". On a Curse it's the enchanted player. Not a
+   * target. Only a resolution knows its source, so elsewhere it names nobody. */
+  | "attached-controller"
+  /** "**Each of that player's opponents**" / "each other player", of the
+   * `"trigger-controller"`: the opponents of the player who cast the spell
+   * (Standstill, Heartwood Storyteller; every other player is an opponent,
+   * rule 102.2) or who last controlled the permanent the event is about
+   * (Bounty Board's "each of its controller's opponents"). The effect's own
+   * controller is one of them unless they're that player. Nobody when the
+   * trigger is about no one. Not a target. */
+  | "opponents-of-trigger-controller"
   /** "That player" in an `"each-player-may"`'s `ifDid` / `ifDidnt`: the
    * player the follow-up is about. Elsewhere, the same as
    * `"trigger-player"`. Not a target. */
@@ -1697,6 +1715,9 @@ export type EffectPlayerRef =
   /** The player chosen for the effect's source — see the `"chosen-player"`
    * {@link PlayerScope}. */
   | "chosen-player"
+  /** The controller of what the source is attached to — see the
+   * `"attached-controller"` {@link PlayerScope}. */
+  | "attached-controller"
   | { readonly target: number }
   /** The controller of the permanent in this target slot, as it last existed
    * on the battlefield if it has left — "**its controller** exiles cards …,
@@ -4345,6 +4366,11 @@ export type EffectSpec =
        * "you" mean that player: **pair it with `controlledBy: "you"`** —
        * without it the filter matches every player's creatures. */
       readonly controlledByTarget?: number;
+      /** The same scope, for a player the event names rather than a target:
+       * "creatures **defending player** controls get -1/-1 until end of turn"
+       * (Silumgar, the Drifting Death: `"trigger-player"`, on a
+       * `creature-attacks`). Nothing when it names nobody. */
+      readonly controlledByPlayer?: EffectPlayerRef;
     }
   | {
       /** Double each matching permanent's *current* power and toughness
@@ -4803,6 +4829,11 @@ export type EffectSpec =
       readonly amount: EffectAmount;
       /** The creature type amass names; the Army gains it (701.47a). */
       readonly creatureType: string;
+      /** Who amasses, when that isn't the effect's controller — Azog, Moria's
+       * Ruin's "**its controller** amasses Goblins X" (`{ controllerOfTarget:
+       * 0 }`, as the creature last existed): their Army, their choice among
+       * several, their token. */
+      readonly who?: EffectPlayerRef;
       /** Set only by the engine: the Army chosen, as the target slot a
        * `choose-permanents` binds it to — never authored. */
       readonly onto?: number;
@@ -6320,6 +6351,11 @@ export type EffectSpec =
       /** "Each **other** creature" — not the effect's own permanent (Graven
        * Dominator). Read from exile (a haunt trigger), nothing is left out. */
       readonly exceptSource?: boolean;
+      /** "Creatures **target player** controls have base power and toughness
+       * 1/1" (Mass Diminish): `filter` read from the side of the player in
+       * this target slot, as `modify-pt-all`'s. Nothing when that target has
+       * gone illegal (rule 608.2b). */
+      readonly controlledByTarget?: number;
     }
   | {
       /** "Manifest the top card of your library" (rule 701.40), or cloak it
@@ -6502,6 +6538,17 @@ export type EffectSpec =
        * sacrifices two lands": a tied player still sacrifices after the first
        * has). */
       readonly whoIf?: StaticCondition;
+      /** With `whoIf`: the instruction those players are found **before** —
+       * "each opponent discards a card. **Each opponent who can't** loses 3
+       * life" (Entropic Battlecruiser), "for each opponent who can't, you gain
+       * 4 life" (Cruel Grimnarch), "each player sacrifices a creature or
+       * planeswalker of their choice. Each player who can't discards a card"
+       * (Plaguecrafter). `whoIf` says who can't as this begins, then this is
+       * done, then `effect` for each of them: a player who discards their last
+       * card could, and isn't one. */
+      readonly before?: EffectSpec;
+      /** Set by the engine once `before` has been done: the players found. */
+      readonly found?: readonly PlayerId[];
       /** One instruction, one event, as a `sequence`'s `simultaneous` is:
        * Adeline's Humans, one per opponent, enter together, so "whenever one
        * or more tokens enter" sees them once. Only where nothing in `effect`
@@ -9931,7 +9978,7 @@ export interface EffectApi {
   populate(): void;
   /** See the `"amass"` {@link EffectSpec}. `onto`: the Army already
    * chosen. */
-  amass(amount: number, creatureType: string, onto?: ObjectId): void;
+  amass(amount: number, creatureType: string, onto?: ObjectId, player?: PlayerId): void;
   /** See the `"monstrosity"` {@link EffectSpec}. */
   monstrosity(amount: number): void;
   /** See the `"renown"` {@link EffectSpec}. */
@@ -10181,6 +10228,7 @@ export interface EffectApi {
       readonly keywords: readonly Keyword[];
       readonly duration: PtDuration;
       readonly exceptSource?: boolean;
+      readonly scopeTo?: PlayerId;
     },
   ): void;
   /** `player` manifests (or cloaks) the top card of their library — see the
@@ -12230,6 +12278,8 @@ const NESTED_EFFECT_KEYS: ReadonlySet<string> = new Set([
   // controller sacrificed in answer, which only exists by then.
   "ifDid",
   "ifDidnt",
+  // A `for-each-player`'s instruction to do before its players act.
+  "before",
   // A granted ability (`grant-activated`, `grant-triggered`, their `-all`
   // forms) and an emblem's: each is bound when *it* triggers or is
   // activated, against its own source — Guardian Scalelord's "mana value X
@@ -14317,16 +14367,19 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       if (target !== undefined) ctx.switchPt(target, spec.duration);
       return;
     }
-    case "modify-pt-all":
+    case "modify-pt-all": {
+      const named = spec.controlledByPlayer === undefined ? undefined : effectPlayer(spec.controlledByPlayer, ctx);
+      if (spec.controlledByPlayer !== undefined && named === undefined) return;
       ctx.modifyPtAll(
         spec.filter,
         ptChangeValue(spec.power, ctx),
         ptChangeValue(spec.toughness, ctx),
         spec.duration,
         spec.exceptSource === true,
-        scopedController(spec.controlledByTarget, ctx),
+        named ?? scopedController(spec.controlledByTarget, ctx),
       );
       return;
+    }
     case "double-pt-all":
       ctx.doublePtAll(spec.filter, spec.duration, spec.powerOnly === true, spec.exceptSource === true);
       return;
@@ -14353,10 +14406,13 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "amass": {
       const chosen = spec.onto === undefined ? undefined : ctx.targets[spec.onto];
       if (spec.onto !== undefined && chosen?.kind !== "object") return;
+      const player = spec.who === undefined ? undefined : effectPlayer(spec.who, ctx);
+      if (spec.who !== undefined && player === undefined) return;
       ctx.amass(
         amountValue(spec.amount, ctx),
         spec.creatureType,
         chosen?.kind === "object" ? chosen.object : undefined,
+        player,
       );
       return;
     }
@@ -15305,7 +15361,9 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       }
       return;
     }
-    case "animate-all":
+    case "animate-all": {
+      const scopeTo = scopedController(spec.controlledByTarget, ctx);
+      if (spec.controlledByTarget !== undefined && scopeTo === undefined) return;
       ctx.animateAll(spec.filter, {
         power: amountValue(spec.power, ctx),
         toughness: amountValue(spec.toughness, ctx),
@@ -15314,8 +15372,10 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         keywords: spec.keywords ?? [],
         duration: spec.duration,
         ...(spec.exceptSource === true ? { exceptSource: true } : {}),
+        ...(scopeTo !== undefined ? { scopeTo } : {}),
       });
       return;
+    }
     case "create-token":
       // A per-player count ("its controller creates a token for each
       // creature destroyed this way") — or per-player counters on it
@@ -15443,6 +15503,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       // parked with the players fixed as they were when this began.
       const scope =
         spec.remaining ??
+        spec.found ??
         (spec.who === "owners-of-exiled-with-source"
           ? ((owners) => ctx.playersInScope("each-player").filter((p) => owners.has(p)))(
               new Set(ctx.cardsExiledWithSource().map((id) => ctx.ownerOf({ kind: "object", object: id }))),
@@ -15453,9 +15514,15 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       // "Each player who …": fixed now, before anyone acts (`remaining` was).
       const whoIf = spec.whoIf;
       const players =
-        spec.remaining !== undefined || whoIf === undefined
+        spec.remaining !== undefined || spec.found !== undefined || whoIf === undefined
           ? scope
           : scope.filter((p) => ctx.aboutPlayer(p).conditionMet(whoIf));
+      // "Each player who can't": found already, and the instruction done first.
+      if (spec.before !== undefined) {
+        const { before, ...rest } = spec;
+        applyEffectSpec({ kind: "sequence", effects: [before, { ...rest, found: players }] }, ctx);
+        return;
+      }
       if (spec.simultaneous === true) {
         ctx.simultaneously(() => {
           for (const player of players) applyEffectSpec(spec.effect, ctx.aboutPlayer(player));
