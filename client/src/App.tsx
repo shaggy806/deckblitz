@@ -392,6 +392,18 @@ type ChoosePileAction = Extract<LegalAction, { kind: 'choose-pile' }>
 type ChooseNumberAction = Extract<LegalAction, { kind: 'choose-number' }>
 type ScryAction = Extract<LegalAction, { kind: 'scry' }>
 type CastNowAction = Extract<LegalAction, { kind: 'cast-now' }>
+
+/** What a limited `cast-now` has left — "up to two spells", "total mana value
+ * 10 or less" — for its prompt: " (2 spells left)", or nothing. */
+function castNowLimitText(offer: CastNowAction): string {
+  const parts: string[] = []
+  if (offer.castsLeft !== undefined) {
+    parts.push(`${offer.castsLeft} ${offer.castsLeft === 1 ? 'spell' : 'spells'} left`)
+  }
+  if (offer.manaValueLeft !== undefined) parts.push(`${offer.manaValueLeft} total mana value left`)
+  return parts.length > 0 ? ` (${parts.join(', ')})` : ''
+}
+
 type AssignDamageAction = Extract<LegalAction, { kind: 'assign-combat-damage' }>
 type ChooseTargetsAction = Extract<LegalAction, { kind: 'choose-targets' }>
 
@@ -5413,7 +5425,7 @@ function Table({
             : castNowAction.free && ways.length > 0
               ? ' without paying its mana cost'
               : ' now'}
-          ?
+          ?{castNowLimitText(castNowAction)}
         </span>
         {landWays.map((l, i) => (
           <button
@@ -7258,7 +7270,7 @@ function Table({
         <ZoneViewer
           title={`${game.nameOf(castNowAction.source)} — you may cast ${
             castNowAction.cards.length === 1 ? 'this spell' : 'one of these'
-          }${castNowAction.free ? ' without paying its mana cost' : ''}`}
+          }${castNowAction.free ? ' without paying its mana cost' : ''}${castNowLimitText(castNowAction)}`}
           ids={castNowAction.looked ?? castNowAction.cards}
           resolve={(id) => view.objects[id]}
           selection={{

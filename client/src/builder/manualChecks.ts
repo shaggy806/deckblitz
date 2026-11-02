@@ -9293,6 +9293,63 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     board({
       you: { bf: ['Swamp*7'], hand: ['Bane of the Living'] },
       opp: [{ bf: ['Hill Giant'] }, {}, {}],
+    'Collected Conjuring: up to two spells, the count on the offer',
+    board({
+      you: {
+        hand: ['Collected Conjuring'],
+        bf: ['Island', 'Mountain', 'Wastes*2'],
+        lib: ['Divination', "Night's Whisper", 'Preordain', 'Wrath of God', 'Lightning Bolt', 'Grizzly Bears'],
+      },
+    }),
+  ),
+  preset(
+    'Primeval Spawn: a running total of mana value',
+    board({
+      you: {
+        hand: ['Terminate'],
+        bf: ['Primeval Spawn', 'Mountain', 'Swamp'],
+        lib: ['Pelakka Wurm', 'Wrath of God', 'Divination', 'Wastes*7'],
+      },
+    }),
+  ),
+  preset(
+    'Primeval Spawn: exiled instead of entering when no mana was spent',
+    board({
+      you: { bf: [{ name: 'Ashiok, Nightmare Muse', counters: { loyalty: 7 } }] },
+      opp: { exile: ['Primeval Spawn'] },
+    }),
+  ),
+  preset(
+    'Uldaros Theorix: copies under a total',
+    board({
+      you: {
+        hand: ['Uldaros Theorix'],
+        bf: ['Island', 'Swamp*2', 'Wastes*3'],
+        gy: ['Grizzly Bears', 'Divination'],
+      },
+    }),
+  ),
+  preset(
+    'Ashiok, Nightmare Muse: three spells from what opponents own in exile, at four players',
+    board({
+      you: { bf: [{ name: 'Ashiok, Nightmare Muse', counters: { loyalty: 7 } }], exile: ['Wrath of God'] },
+      opp: [{ exile: ['Divination', 'Preordain'] }, { exile: ["Night's Whisper"] }, { exile: ['Grizzly Bears'] }],
+    }),
+  ),
+  preset(
+    'Quarry Hauler: another counter or one fewer, kind by kind',
+    board({
+      you: {
+        hand: ['Quarry Hauler'],
+        bf: ['Forest', 'Wastes*3', { name: 'Grizzly Bears', counters: { '+1/+1': 2, stun: 1 } }],
+      },
+    }),
+  ),
+  preset(
+    'Powerful Broker: another counter of each kind, on a player',
+    board({
+      you: { bf: ['Powerful Broker'] },
+      opp: { poison: 3 },
     }),
   ),
 ]

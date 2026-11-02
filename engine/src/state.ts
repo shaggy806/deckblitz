@@ -947,6 +947,9 @@ export interface GameObject {
      * enter: `false`, and it goes to its owner's graveyard instead
      * (`moveObject`). */
     readonly insteadDone?: boolean;
+    /** With `insteadDone: false`: exile it, not the graveyard (`EnterInstead`'s
+     * `exileUnless`). */
+    readonly insteadExile?: true;
     /** How many cards its controller revealed for its amplify as it was
      * about to enter (rule 702.38a — `CardDefinition.amplify`), counted for
      * its +1/+1 counters as it enters. */
@@ -4105,6 +4108,11 @@ export type AwaitingDecision =
       readonly exileAfter: boolean | "instants-and-sorceries";
       /** Cascade's or suspend's own free cast — see `CastNowOptions`. */
       readonly freeCastOf?: "cascade" | "suspend";
+      /** "Up to N": how many more spells this may be, this one included. */
+      readonly castsLeft?: number;
+      /** "Total mana value N or less": how much is left. `spell` already
+       * holds an offer to it; this is for the prompt. */
+      readonly manaValueLeft?: number;
     }
   | {
       /** A blocked attacker's controller assigns its combat damage among the

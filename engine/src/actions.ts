@@ -2179,6 +2179,11 @@ export type LegalAction =
        * it'd be played as — played during the resolution, it uses a land
        * play (rule 305.2a). Answered with a `play-land` as the `cast`. */
       readonly lands?: readonly PlayLandOffer[];
+      /** "Up to N": how many more spells may be cast, this one included. */
+      readonly castsLeft?: number;
+      /** "Total mana value N or less": how much is left to spend; every cast
+       * on offer fits it. */
+      readonly manaValueLeft?: number;
     }
   | {
       /** A triggered ability / suspended spell needs targets — one per

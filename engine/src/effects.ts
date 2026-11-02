@@ -1981,6 +1981,12 @@ export interface CastNowOptions {
    * face up on the stack (rule 712.11a); see the `cast-now` effect's
    * `transformed`. */
   readonly transformed?: boolean;
+  /** How many more spells an "up to N" allows — the `cast-now` effect's
+   * `upTo`, for the offer to say. */
+  readonly castsLeft?: number;
+  /** How much mana value a "total mana value N or less" has left — the
+   * effect's `totalManaValue`, for the offer to say (`spell` holds it to it). */
+  readonly manaValueLeft?: number;
 }
 
 /** A `cast-now` parked across its decision: the event it asked at and the
@@ -1992,6 +1998,10 @@ export interface CastNowProgress {
   readonly cards: readonly ObjectId[];
   readonly looked: readonly ObjectId[];
   readonly followed?: boolean;
+  /** `upTo`, less the spells cast so far. */
+  readonly castsLeft?: number;
+  /** `totalManaValue`, less the mana values of the spells cast so far. */
+  readonly manaValueLeft?: number;
 }
 
 /**
@@ -3937,6 +3947,9 @@ export type EffectSpec =
          * you may cast it transformed" (rule 310.12b). */
         | "source-exiled-this-way"
         | "targets"
+        /** Ashiok, Nightmare Muse's "from among **face-up cards your
+         * opponents own from exile**": every such card as this applies. */
+        | "face-up-exile-opponents-own"
         | {
             readonly libraryTop: EffectAmount;
             /** "**Reveal** the top X cards" (Sunbird's Invocation): every
@@ -3960,6 +3973,22 @@ export type EffectSpec =
        * `then` or `else`.
        */
       readonly repeat?: boolean;
+      /**
+       * With `repeat`: "you may cast **up to two** spells from among them"
+       * (Collected Conjuring): the offers stop after this many spells cast.
+       * Read once, as the first offer is made (rule 608.2h). Not with `play`:
+       * a land isn't a spell cast.
+       */
+      readonly upTo?: EffectAmount;
+      /**
+       * With `repeat`: "you may cast any number of spells **with total mana
+       * value 10 or less** from among them" (Primeval Spawn): a running total
+       * — only a spell whose mana value (at X = 0, rule 107.3b, as the spell
+       * it would be, rule 202.3) fits what's left is offered, and each one
+       * cast spends its own. Read once, as `upTo` is. With `spell`, which then
+       * mustn't compare `manaValue` itself.
+       */
+      readonly totalManaValue?: EffectAmount;
       /**
        * "You may **play** the card", not only cast it: a land card on offer
        * may be played as part of the resolution — only during its player's
@@ -9671,6 +9700,12 @@ export interface EffectApi {
   /** Whether the effect's controller has cast (or played, a land) one of
    * `cards` at a `cast-now`'s offer since event `since`. */
   castSince(cards: readonly ObjectId[], since: number, by?: PlayerId): boolean;
+  /** The total mana value of the spells among `cards` cast off a `cast-now`
+   * offer since event `since` (rule 202.3e, X as chosen). */
+  manaValueCastSince(cards: readonly ObjectId[], since: number): number;
+  /** "Face-up cards your opponents own" in exile — see the `cast-now`
+   * effect's `from`. */
+  faceUpExileOpponentsOwn(): readonly ObjectId[];
   /** The cards in `player`'s hand or graveyard. */
   cardsIn(player: PlayerId, zone: "hand" | "graveyard"): readonly ObjectId[];
   /** The cards this resolution has exiled so far from a library, a hand or
@@ -12027,11 +12062,14 @@ function offerCastNow(
   progress: CastNowProgress,
   ctx: ResolutionContext,
 ): boolean {
-  const { cards, looked } = progress;
+  const { cards, looked, castsLeft, manaValueLeft } = progress;
+  if (castsLeft === 0) return false;
   const parked = ctx.parkedCount();
   const pendingBefore = ctx.decisionPending();
   const by = spec.by === undefined ? undefined : effectPlayer(spec.by, ctx);
   if (spec.by !== undefined && by === undefined) return false;
+  const spell: CardFilter | undefined =
+    manaValueLeft === undefined ? spec.spell : { ...spec.spell, manaValue: { op: "lte", n: manaValueLeft } };
   if (cards.length > 0) {
     ctx.castNow(cards, {
       ...(by !== undefined ? { by } : {}),
@@ -12043,7 +12081,9 @@ function offerCastNow(
       exileAfter: spec.exileAfter ?? false,
       ...(spec.play === true ? { play: true } : {}),
       ...(spec.suspend === true ? { freeCastOf: "suspend" as const } : {}),
-      ...(spec.spell !== undefined ? { spell: spec.spell } : {}),
+      ...(spell !== undefined ? { spell } : {}),
+      ...(castsLeft !== undefined ? { castsLeft } : {}),
+      ...(manaValueLeft !== undefined ? { manaValueLeft } : {}),
       ...(looked.length > 0 ? { looked } : {}),
       ...(spec.transformed === true ? { transformed: true } : {}),
     });
@@ -12077,6 +12117,8 @@ function applyCastNowSpec(spec: Extract<EffectSpec, { kind: "cast-now" }>, ctx: 
       cards = ctx.cardsDrawnThisWay();
     } else if (from === "source-exiled-this-way") {
       cards = ctx.sourceExiledThisWay();
+    } else if (from === "face-up-exile-opponents-own") {
+      cards = ctx.faceUpExileOpponentsOwn();
     } else if (from === "any-graveyard") {
       cards = ctx.playersInScope("each-player").flatMap((p) => ctx.cardsIn(p, "graveyard"));
     } else if (from === "targets") {
@@ -12094,7 +12136,13 @@ function applyCastNowSpec(spec: Extract<EffectSpec, { kind: "cast-now" }>, ctx: 
         return;
       }
     }
-    progress = { since: ctx.nextEventSeq(), cards, looked };
+    progress = {
+      since: ctx.nextEventSeq(),
+      cards,
+      looked,
+      ...(spec.upTo !== undefined ? { castsLeft: Math.floor(amountValue(spec.upTo, ctx)) } : {}),
+      ...(spec.totalManaValue !== undefined ? { manaValueLeft: Math.floor(amountValue(spec.totalManaValue, ctx)) } : {}),
+    };
     if (offerCastNow(spec, progress, ctx)) return;
     if (spec.repeat === true) {
       placeCastNowRest(spec, progress, ctx);
@@ -12109,7 +12157,16 @@ function applyCastNowSpec(spec: Extract<EffectSpec, { kind: "cast-now" }>, ctx: 
   // "this way".
   if (spec.repeat === true) {
     if (ctx.castSince(progress.cards, progress.since)) {
-      const next = { since: ctx.nextEventSeq(), cards: progress.cards, looked: progress.looked };
+      const { castsLeft, manaValueLeft } = progress;
+      const next: CastNowProgress = {
+        since: ctx.nextEventSeq(),
+        cards: progress.cards,
+        looked: progress.looked,
+        ...(castsLeft !== undefined ? { castsLeft: castsLeft - 1 } : {}),
+        ...(manaValueLeft !== undefined
+          ? { manaValueLeft: manaValueLeft - ctx.manaValueCastSince(progress.cards, progress.since) }
+          : {}),
+      };
       if (offerCastNow(spec, next, ctx)) return;
     }
     placeCastNowRest(spec, progress, ctx);

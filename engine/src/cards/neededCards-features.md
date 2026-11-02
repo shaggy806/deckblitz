@@ -3992,3 +3992,16 @@ Revolutionary, Quarry Hauler, Dramatist's Puppet. Left: Arna Kennerüd's "for ea
 to it, create a token that's a copy of that permanent attached to that creature" and Ultimate Spider-Man's
 "each kind of counter on each Spider and legendary creature you control" (`double-counters-all` takes one
 kind) are not reached; `author-freed` should narrow them.
+
+### Free casts under a limit — built 2026-11-02
+
+The family `decision:free-cast-choices`. `cast-now`'s `repeat` already offered one spell after another, so
+no decision kind is new: `upTo` and `totalManaValue` are limits read once, carried in `CastNowProgress`, with
+a running total narrowing `spell`'s `manaValue` and both on the offer (`castsLeft`, `manaValueLeft`, shown in
+its prompt). Also `from: "face-up-exile-opponents-own"` and `EnterInstead`'s `exileUnless`. Keys:
+decision:cast-up-to-n-free, decision:cast-now-total-mana-value, decision:cast-copies-total-mana-value. Proving
+cards: Collected Conjuring, Doom Reigns Supreme, Ashiok, Nightmare Muse, Primeval Spawn, Uldaros Theorix. Left:
+`decision:cast-one-per-card-type-from-exile` (Aminatou's Augury) is an until-end-of-turn permission, not a cast
+as it resolves, and how a card of two types uses the permissions needs its rulings, which the snapshot doesn't
+hold. Plargg and Nassari needs `new:opponent-chooses-exiled`, Wand of Wonder the die's rows around an
+exile-until per opponent, Baron Helmut Zemo and Rod of Absorption their other keys.

@@ -92,6 +92,12 @@ export interface EnterInstead {
   /** "You **may** discard a land card instead" (Mox Diamond): one card from
    * its controller's hand matching this; choosing none is declining. */
   readonly discard?: { readonly filter: CardFilter };
+  /** "If this creature would enter and it wasn't cast or no mana was spent to
+   * cast it, **exile it instead**" (Primeval Spawn, `{ manaSpent: { op: "gte",
+   * n: 1 } }`): nothing to choose. It enters if it matches this as it's about
+   * to, and otherwise goes to exile from wherever it was. A token copy is never
+   * cast, so none is made (`Game.createTokenCopy`, rule 111.7). */
+  readonly exileUnless?: CardFilter;
 }
 
 /** As the source permanent enters the battlefield (rule 614.1c). A self-

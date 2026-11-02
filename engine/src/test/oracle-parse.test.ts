@@ -9546,6 +9546,45 @@ describe("exchanges with a life total", () => {
       ).effect,
     ).toEqual({ kind: "another-counter-of-each-kind", target: 0, orRemove: true });
   });
+
+  it("reads a free cast from among exiled cards under a limit: a count or a total mana value", () => {
+    expect(
+      parseEffect(
+        "Exile the top six cards of your library. You may cast up to two sorcery spells with mana value 3 or less from among them without paying their mana costs. Put the exiled cards not cast this way on the bottom of your library in a random order.",
+        ctx(),
+      ).effect,
+    ).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "exile-from-library", amount: 6 },
+        {
+          kind: "cast-now",
+          from: "exiled-this-way",
+          repeat: true,
+          upTo: 2,
+          free: true,
+          spell: { type: "sorcery", manaValue: { op: "lte", n: 3 } },
+        },
+        { kind: "move-exiled-this-way", to: "library-bottom" },
+      ],
+    });
+    expect(
+      parseEffect(
+        "Exile the top ten cards of your library. You may cast any number of spells with total mana value 10 or less from among them without paying their mana costs.",
+        ctx(),
+      ).effect,
+    ).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "exile-from-library", amount: 10 },
+        { kind: "cast-now", from: "exiled-this-way", repeat: true, totalManaValue: 10, free: true },
+      ],
+    });
+    expect(
+      parseEffect("You may cast up to three spells from among face-up cards your opponents own from exile without paying their mana costs.", ctx())
+        .effect,
+    ).toEqual({ kind: "cast-now", from: "face-up-exile-opponents-own", repeat: true, upTo: 3, free: true });
+  });
 });
 
 describe("references to the source's host and to attachments", () => {

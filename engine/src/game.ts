@@ -11824,6 +11824,11 @@ export class Game {
     const done = (insteadDone: boolean): void => {
       object.enterChoice = { ...object.enterChoice, insteadDone };
     };
+    if (spec.exileUnless !== undefined) {
+      const enters = matchesFilter(this.state, this.registry, id, spec.exileUnless, { you: chooser, source: id });
+      object.enterChoice = { ...object.enterChoice, insteadDone: enters, ...(enters ? {} : { insteadExile: true }) };
+      return false;
+    }
     if (spec.discard !== undefined) {
       const eligible = this.state.zones.perPlayer[chooser].hand.filter(
         (card) =>
@@ -16746,6 +16751,8 @@ export class Game {
       ...(options.spell !== undefined ? { spell: options.spell } : {}),
       exileAfter: options.exileAfter,
       ...(options.freeCastOf !== undefined ? { freeCastOf: options.freeCastOf } : {}),
+      ...(options.castsLeft !== undefined ? { castsLeft: options.castsLeft } : {}),
+      ...(options.manaValueLeft !== undefined ? { manaValueLeft: options.manaValueLeft } : {}),
     };
   }
 
@@ -31268,6 +31275,26 @@ export class Game {
             event.player === (by ?? controller) &&
             cards.includes(event.object),
         ),
+      manaValueCastSince: (cards, since) =>
+        eventLogSince(this.state, since).reduce(
+          (total, event) =>
+            event.type === "spell-cast" && event.via === "effect" && cards.includes(event.object)
+              ? total + manaValueOfObject(this.registry, this.state.objects[event.object], event.x ?? 0)
+              : total,
+          0,
+        ),
+      faceUpExileOpponentsOwn: () => {
+        const opponents = this.scopedPlayers(controller, "each-opponent");
+        return this.state.zones.shared.exile.filter((id) => {
+          const object = this.state.objects[id];
+          return (
+            object !== undefined &&
+            opponents.includes(object.owner) &&
+            object.exiledFaceDown === undefined &&
+            object.foretold !== true
+          );
+        });
+      },
       cardsIn: (player, zone) => [...(this.state.zones.perPlayer[player]?.[zone] ?? [])],
       putExiledIntoGraveyard: (card) => this.putExiledIntoGraveyard(card),
       stillExiled: (card, zoneChangeCount) => {
@@ -34964,7 +34991,12 @@ export class Game {
     const of = this.state.objects[ofId];
     if (of === undefined && departed === undefined) return;
     const copyName = this.unflippedName(departed !== undefined ? departed.name : printedCardName(of!));
-    this.registry.get(copyName); // validate it's a known definition
+    const copied = this.registry.get(copyName); // validate it's a known definition
+    // "If this creature would enter and it wasn't cast …, exile it instead"
+    // (Primeval Spawn): a token is never cast, and one in exile ceases to be.
+    if (copied.static.some((s) => s.replacement?.event === "enters-battlefield" && s.replacement.instead?.exileUnless !== undefined)) {
+      return;
+    }
     // The copy defaults to the copied permanent's controller (Miirym), but a
     // card that copies something an *opponent* controls means "under your
     // control" (Hate Mirage).
@@ -47796,8 +47828,9 @@ export class Game {
     // "If you don't, put it into its owner's graveyard" (`EnterInstead`): it
     // never enters. Already there (a reanimation), it just stays.
     if (to === "battlefield" && object.enterChoice?.insteadDone === false) {
+      const instead = object.enterChoice.insteadExile === true ? "exile" : "graveyard";
       object.enterChoice = undefined;
-      if (object.zone !== "graveyard") this.moveObjectUncached(id, "graveyard", {});
+      if (object.zone !== instead) this.moveObjectUncached(id, instead, {});
       return false;
     }
     const leavingBattlefield = object.zone === "battlefield" && to !== "battlefield";

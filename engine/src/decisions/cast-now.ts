@@ -104,5 +104,7 @@ function offerOf(awaiting: Extract<AwaitingDecision, { kind: "cast-now" }>): Ext
     ...(awaiting.miracle !== undefined ? { miracle: awaiting.miracle } : {}),
     casts: [...awaiting.offers],
     ...(awaiting.lands !== undefined ? { lands: [...awaiting.lands] } : {}),
+    ...(awaiting.castsLeft !== undefined ? { castsLeft: awaiting.castsLeft } : {}),
+    ...(awaiting.manaValueLeft !== undefined ? { manaValueLeft: awaiting.manaValueLeft } : {}),
   };
 }

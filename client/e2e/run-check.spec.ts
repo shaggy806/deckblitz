@@ -188,10 +188,14 @@ async function runStep(page: Page, step: string): Promise<boolean> {
       // A card in an open popup first (it's over the board), then the board,
       // then the hand.
       const inPopup = page.locator('.zone-viewer-card', { has: page.locator('.ct-name', { hasText: pattern(arg) }) })
-      if (await visibleFirst(inPopup.locator('.card-tile'))) return true
-      const id = await findId(page, 'battlefield', arg)
-      if (id !== null) return visibleFirst(page.locator(`.board [data-obj-id="${id}"]`))
-      return runStep(page, `hand:${arg}`)
+      // The popup waits out a long animation (ten cards exiled), as `click:` does.
+      for (const limit = Date.now() + 25_000; ; await page.waitForTimeout(250)) {
+        if (await visibleFirst(inPopup.locator('.card-tile'))) return true
+        const id = await findId(page, 'battlefield', arg)
+        if (id !== null) return visibleFirst(page.locator(`.board [data-obj-id="${id}"]`))
+        if ((await findId(page, 'hand', arg)) !== null) return runStep(page, `hand:${arg}`)
+        if (Date.now() > limit) return false
+      }
     }
     case 'click':
       // The decision bar's own buttons first: a card tile is a button too,

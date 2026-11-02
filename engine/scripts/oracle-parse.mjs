@@ -3181,6 +3181,11 @@ export function parseSentence(sentence, ctx) {
     const target = slot(m[1]);
     return target === undefined ? null : { kind: "double-counters", target };
   }
+  // "You may cast up to three spells from among face-up cards your opponents
+  // own from exile without paying their mana costs" (Ashiok, Nightmare Muse).
+  if ((m = re(`you may cast up to ${N} spells from among face-up cards your opponents own from exile without paying their mana costs`).exec(s))) {
+    return { kind: "cast-now", from: "face-up-exile-opponents-own", repeat: true, upTo: amount(m[1]), free: true };
+  }
   // Time travel (rule 701.56a).
   if (re("time travel").test(s)) return { kind: "time-travel" };
   // Moving counters (rule 122.5): "a [kind] counter from ~ onto …", "all
@@ -5820,9 +5825,34 @@ export function parseEffect(text, outer) {
         hints.push({ sentence, effect: castNow });
         continue;
       }
+      // "You may cast up to two sorcery spells with mana value 3 or less from
+      // among them without paying their mana costs" (Collected Conjuring);
+      // "You may cast any number of spells with total mana value 10 or less
+      // from among them …" (Primeval Spawn).
+      const upToM = /^you may cast up to (\w+) (?:(\w+) )?spells(?: with mana value (\d+) or less)? from among (?:them|the exiled cards) without paying their mana costs\.$/i.exec(sentence);
+      const totalM = /^you may cast any number of spells with total mana value (\d+) or less from among (?:them|the exiled cards) without paying their mana costs\.$/i.exec(sentence);
+      const upTo = upToM === null ? null : numberOf(upToM[1]);
+      const typed = upToM?.[2] === undefined ? {} : parseTypePhrase(upToM[2]);
+      if ((upToM !== null && upTo !== null && typed !== null) || totalM !== null) {
+        const spell = {
+          ...(typed ?? {}),
+          ...(upToM?.[3] !== undefined ? { manaValue: { op: "lte", n: Number(upToM[3]) } } : {}),
+        };
+        const castNow = {
+          kind: "cast-now",
+          from: "exiled-this-way",
+          repeat: true,
+          ...(upToM !== null ? { upTo } : { totalManaValue: Number(totalM[1]) }),
+          free: true,
+          ...(Object.keys(spell).length > 0 ? { spell } : {}),
+        };
+        parsed.push(castNow);
+        hints.push({ sentence, effect: castNow });
+        continue;
+      }
     }
     if (parsed.at(-1)?.kind === "cast-now" && parsed.at(-1).from === "exiled-this-way" && parsed.at(-2)?.kind === "exile-from-library") {
-      const moves = /^then put the rest on the bottom of your library in a random order\.$/i.test(sentence)
+      const moves = /^(?:then put the rest|put the exiled cards not cast this way) on the bottom of your library in a random order\.$/i.test(sentence)
         ? [{ kind: "move-exiled-this-way", to: "library-bottom" }]
         : /^then put the exiled instant and sorcery cards that weren't cast this way into your hand and the rest on the bottom of your library in a random order\.$/i.test(sentence)
           ? [

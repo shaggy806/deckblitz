@@ -6170,3 +6170,33 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Bane of the Living: choose X at four players
 - **Do:** As the two-player check: cast it face down, click it, turn it face up, set X to 1, and confirm.
 - **Expect:** The X banner reads the same at four players, and Hill Giant becomes a 2/2.
+## Free casts under a limit (2026-11-02)
+
+### Collected Conjuring: up to two spells, the count on the offer
+- **Do:** Cast Collected Conjuring. In the popup click Divination, then Confirm. Do the same for Night's Whisper.
+- **Expect:** The popup's title ends "(2 spells left)". After Divination it comes back with "(1 spell left)", without Divination. After the second cast there's no third offer, though Preordain is still there. The spells resolve; the four cards left go to the bottom of your library.
+- **Not a bug:** Wrath of God and the Bears aren't offered: one is mana value 4, the other isn't a sorcery.
+
+### Primeval Spawn: a running total of mana value
+- **Do:** Cast Terminate on your Primeval Spawn. As its trigger resolves, click Pelakka Wurm in the popup, then Confirm.
+- **Expect:** The popup's title ends "(10 total mana value left)" and offers Pelakka Wurm, Wrath of God and Divination. The next offer, in the bar alone, reads "Cast Divination without paying its mana cost? (3 total mana value left)": Wrath of God (mana value 4) no longer fits.
+
+### Primeval Spawn: exiled instead of entering when no mana was spent
+- **Do:** Activate Ashiok's -7. Click "Cast Primeval Spawn (free)".
+- **Expect:** It resolves and goes to exile, not onto the battlefield. Your library stays as it was: it never entered, so it never left.
+
+### Uldaros Theorix: copies under a total
+- **Do:** Cast Uldaros Theorix and let him resolve. Choose Grizzly Bears, then Divination, from the target popups. Cast Divination's copy from the next popup, then "Cast Grizzly Bears".
+- **Expect:** He asks only for the two card types you have. Both cards are exiled and stay there. The popup's title ends "(6 total mana value left)", the next offer "(3 total mana value left)". The Bears' copy enters as a token.
+
+### Ashiok, Nightmare Muse: three spells from what opponents own in exile, at four players
+- **Do:** Activate Ashiok's -7. In the popup click Divination and Confirm, then Night's Whisper, then Grizzly Bears.
+- **Expect:** The popup offers the exiled cards Bob, Carol and Dave own, not your own Wrath of God, its title ending "(3 spells left)", "(2 spells left)", "(1 spell left)". After three casts it stops, though Preordain is left.
+
+### Quarry Hauler: another counter or one fewer, kind by kind
+- **Do:** Cast Quarry Hauler and target your Grizzly Bears, which has two +1/+1 counters and a stun counter. Choose "Put another +1/+1 counter on it." then "Remove a stun counter from it."
+- **Expect:** The Bears end with three +1/+1 counters and no stun counter.
+
+### Powerful Broker: another counter of each kind, on a player
+- **Do:** Activate Powerful Broker, targeting Bob.
+- **Expect:** Nothing to choose: the log says "Bob gets 1 poison counter (now 4)".
