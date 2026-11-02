@@ -5,6 +5,12 @@ and the cleanups found along the way. `BACKLOG.md` keeps one line per item under
 title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLETED.md`. The animation follow-ups are in
 `docs/plans/legibility-of-play.md`, "Follow-ups".
 
+- **The combat prompts' cost lines miss the per-creature taxes** (found 2026-11-01). The attack cost
+  line ignores `attackTax.perAttacker` and the block prompt shows no cost, though `combat/tax.ts`
+  works both out and the engine refuses a declaration that can't be paid.
+- **The tap-cost prompt doesn't check a shared creature type** (found 2026-11-01). `App.tsx` (~4740)
+  enables Confirm on the count alone, so a pair that shares no type (Weight of Conscience's
+  `shareCreatureType` cost) is refused only by the engine; `creatureTypes` is on the offer.
 - **The attack and block Confirm doesn't check company restrictions** (found 2026-11-01). An illegal
   declaration (a lone Mogg Flunkies, Craven Hulk) is refused with a toast rather than Confirm being
   disabled; `combat/company.ts` exports `attackCompanyViolations` and `blockCompanyViolations` for

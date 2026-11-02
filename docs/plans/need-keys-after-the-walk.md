@@ -785,6 +785,10 @@ missing. Re-run `--greedy` for Phase 2's order.
   acting on a player (3 keys, 3 freed, 6 proving cards); a trigger's recipient as a reference (2
   keys, 2 freed, 7 proving cards); who may look at what (1 key, 5 freed, 10 proving cards). The run
   stopped there at its coordinator's context limit: 34 families, 15 agents.
+- **2026-11-01 (evening): the next overnight round** (`/build-family overnight`, local agents, two
+  families each) — a combat tax on particular creatures (4 keys, 18 proving cards with the next,
+  2 freed with it); can't-attack scoped to the defender (3 keys); sacrifice costs in parts (5 keys, 6
+  proving cards); tap costs counted or by shared type (4 keys, 5 proving cards; 11 freed with the last).
 
 ## Rough size
 

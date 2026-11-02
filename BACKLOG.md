@@ -399,7 +399,9 @@ section keeps only what to do next.
   Thirst `amount:curses-attached-to-player`), and a trigger's recipient as a reference and who may
   look at what (`"trigger-recipient"`, `DelayedTrigger.recipient`, `StaticAbility.visibility`,
   `look-at-library-top`; 7 freed, 17 proving cards — Sen Triplets on the stale list needs its "this
-  turn" hand reveal and playing from another's hand). **About 1210 freed cards wait for the authoring
+  turn" hand reveal and playing from another's hand); the next night's: a combat tax on particular
+  creatures, can't-attack scoped to the defender, sacrifice costs in parts, tap costs counted or by
+  shared type (2 freed by the first two, 11 by the last two; 29 proving cards). **About 1224 freed cards wait for the authoring
   sweep**
   (`cards:needs -- --stale`); the user authors them in one sweep once the reasonable keys are built.
   Cloud sessions are building `keyword:hexproof-from-colors`, the combat-restriction second group,
@@ -625,6 +627,8 @@ One line each; the detail is in **`docs/client-gaps.md`**, under the same bold t
 animation follow-ups in `docs/plans/legibility-of-play.md`, "Follow-ups". When an item lands,
 delete its detail there and move this line to `COMPLETED.md`.
 
+- **The combat prompts' cost lines miss the per-creature taxes** — the attack line ignores `attackTax.perAttacker` and blocks show no cost; the engine refuses what can't be paid.
+- **The tap-cost prompt doesn't check a shared creature type** — Confirm enables on count alone; `creatureTypes` is on the offer, and the engine refuses a pair that doesn't share one.
 - **The attack and block Confirm doesn't check company restrictions** — a lone Mogg Flunkies is refused with a toast; `attackCompanyViolations`/`blockCompanyViolations` are exported for the client.
 - **The X prompt and shown cost ignore a target's tax** — `App.tsx` doesn't read `xCost.targetTaxes`/`maxXUnreduced`, so a taxed target at too high an X is refused rather than never offered, and the shown cost omits the tax.
 - **A hand card's types show as printed under a static outside the battlefield** — `view.ts` under `typesOutsideBattlefield` (Conspiracy, Arcane Adaptation); the filters read the new types.

@@ -86,6 +86,26 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2: tap a counted or shared-type set as a cost** (2026-11-01, `a679a5df5`;
+  `cost:tap-cost-transform-trigger`, `cost:tap-creatures-sharing-creature-type`,
+  `cost:tap-x-untapped-cost`, `effect:tap-x-then`) — `tapOthers.count: "x"`, `shareCreatureType`,
+  `manaFrom.fromSource`. Secluded Starforge, Necron Overlord, Aryel, Weight of Conscience, Thousand
+  Moons Smithy // Barracks of the Thousand.
+- **Need-keys Phase 2: sacrifice costs in parts** (2026-11-01, `8c77dfb92`; `cost:sacrifice-multiple`,
+  `cost:sacrifice-x-mana-ability`, `cost:tap-creatures-total-power`, `cost:flashback-sacrifice-x`,
+  `replacement:regenerate-instead-of-destroy`) — `SacrificeCost.parts`, `differentNames`, a mana
+  ability sacrificing X, flashback's X, `regeneratesInstead` (701.19b). Springjack Pasture, Emrakul's
+  Evangel, Glass-Cast Heart, Transmutation Font, Firecat Blitz, Mossbridge Troll.
+- **Need-keys Phase 2: can't-attack scoped to the defender** (2026-11-01, `1150995af`;
+  `static:cant-attack-you-player-only`, `effect:creatures-cant-attack-you-until-next-turn`,
+  `static:cant-attack-same-player`) — `cantAttackController: "player"`, the `cantAttack` player effect,
+  `cant-attack-player-attacked-this-turn`. Reverence, Blazing Archon, Teferi's Moat, Queen Mother
+  Ramonda, Elephant Grass, Heat Wave, Chronomantic Escape, Port Razer, Bloodthirster.
+- **Need-keys Phase 2: a cost on a particular creature to attack, block or be blocked** (2026-11-01,
+  `9910bf7e2`; `cost:attack-tax-per-counters`, `static:attack-cost-for-creature`, `static:block-tax`,
+  `cost:attack-block-cost-self`) — the `combatTax` static, the `blockTax` player effect, `combat/tax.ts`
+  (508.1h, 509.1d). Brainwash, Phyrexian Marauder, Nils, Cowed by Wisdom, Qal Sisma Behemoth, Hipparion,
+  Awesome Presence, War Cadence, Archangel of Tithes.
 - **Need-keys Phase 2: who may look at what** (2026-11-01, `fa44d4209`;
   `zone:visibility-extensions`, partly) — `StaticAbility.visibility` read by `viewFor` (hands revealed,
   library tops revealed, face-down creatures, a look at your own top card) and the
