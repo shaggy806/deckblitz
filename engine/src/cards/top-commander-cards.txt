@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4172 already implemented / 828 missing (marks refreshed 2026-11-02)
+4179 already implemented / 821 missing (marks refreshed 2026-11-02)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -635,7 +635,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   636  Ophiomancer                              {2}{B}           Creature — Human Shaman
 [x]   637  Treasure Cruise                          {7}{U}           Sorcery
 [x]   638  Open the Armory                          {1}{W}           Sorcery
-[ ]   639  Plaguecrafter                            {2}{B}           Creature — Human Shaman
+[x]   639  Plaguecrafter                            {2}{B}           Creature — Human Shaman
 [x]   640  Altar of Dementia                        {2}              Artifact
 [x]   641  Incubation Druid                         {1}{G}           Creature — Elf Druid
 [x]   642  Ozolith, the Shattered Spire             {1}{G}           Legendary Artifact
@@ -1014,7 +1014,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1018  Arasta of the Endless Web                {2}{G}{G}        Legendary Enchantment Creature — Spider
 [x]  1019  Nyxbloom Ancient                         {4}{G}{G}{G}     Enchantment Creature — Elemental
 [x]  1020  Bloodghast                               {B}{B}           Creature — Vampire Spirit
-[ ]  1021  Omniscience                              {7}{U}{U}{U}     Enchantment
+[x]  1021  Omniscience                              {7}{U}{U}{U}     Enchantment
 [x]  1022  Rivendell                                {0}              Legendary Land
 [x]  1023  Dictate of Erebos                        {3}{B}{B}        Enchantment
 [x]  1024  Serra Ascendant                          {W}              Creature — Human Monk
@@ -1194,7 +1194,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1199  Dreamtide Whale                          {2}{U}           Creature — Whale
 [x]  1200  Notion Thief                             {2}{U}{B}        Creature — Human Rogue
 [x]  1201  Moonshaker Cavalry                       {5}{W}{W}{W}     Creature — Spirit Knight
-[ ]  1202  Wheel of Misfortune                      {2}{R}           Sorcery
+[x]  1202  Wheel of Misfortune                      {2}{R}           Sorcery
 [x]  1203  Thriving Bluff                           {0}              Land
 [ ]  1204  Mount Doom                               {0}              Legendary Land
 [x]  1205  Expedite                                 {R}              Instant
@@ -1238,7 +1238,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1244  Secure the Wastes                        {X}{W}           Instant
 [x]  1245  Waste Not                                {1}{B}           Enchantment
 [x]  1246  Topiary Stomper                          {1}{G}{G}        Creature — Plant Dinosaur
-[ ]  1247  Shark Typhoon                            {5}{U}           Enchantment
+[x]  1247  Shark Typhoon                            {5}{U}           Enchantment
 [ ]  1248  Liberator, Urza's Battlethopter          {3}              Legendary Artifact Creature — Thopter
 [ ]  1249  Vorinclex, Monstrous Raider              {4}{G}{G}        Legendary Creature — Phyrexian Praetor
 [x]  1250  Chromatic Orrery                         {7}              Legendary Artifact
@@ -1870,7 +1870,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  1877  Wedding Ring                             {2}{W}{W}        Artifact
 [x]  1878  Kazuul, Tyrant of the Cliffs             {3}{R}{R}        Legendary Creature — Ogre Warrior
 [x]  1879  Starfield Vocalist                       {3}{U}           Creature — Human Bard
-[ ]  1880  As Foretold                              {2}{U}           Enchantment
+[x]  1880  As Foretold                              {2}{U}           Enchantment
 [x]  1881  Sword of Forge and Frontier              {3}              Artifact — Equipment
 [x]  1882  Colossal Grave-Reaver                    {6}{B}{G}        Creature — Dragon
 [x]  1883  Terrain Generator                        {0}              Land
@@ -1926,7 +1926,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  1933  Inti, Seneschal of the Sun               {1}{R}           Legendary Creature — Human Knight
 [x]  1934  Adaptive Omnitool                        {2}              Artifact — Equipment
 [x]  1935  Dreamstone Hedron                        {6}              Artifact
-[ ]  1936  One with the Multiverse                  {6}{U}{U}        Enchantment
+[x]  1936  One with the Multiverse                  {6}{U}{U}        Enchantment
 [ ]  1937  Wild Magic Surge                         {R}{R}           Instant
 [ ]  1938  Rise of the Witch-king                   {2}{B}{G}        Sorcery
 [ ]  1939  For the Common Good                      {X}{X}{G}        Sorcery
@@ -3996,7 +3996,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4003  Firespitter Whelp                        {2}{R}           Creature — Dragon
 [x]  4004  Turbulent Steppe                         {0}              Land — Mountain Plains
 [x]  4005  Doomed Necromancer                       {2}{B}           Creature — Human Cleric Mercenary
-[ ]  4006  Heartwood Storyteller                    {1}{G}{G}        Creature — Treefolk
+[x]  4006  Heartwood Storyteller                    {1}{G}{G}        Creature — Treefolk
 [x]  4007  Merrow Reejerey                          {2}{U}           Creature — Merfolk Soldier
 [x]  4008  Cryogen Relic                            {1}{U}           Artifact
 [ ]  4009  Tezzeret, Betrayer of Flesh              {2}{U}{U}        Legendary Planeswalker — Tezzeret
