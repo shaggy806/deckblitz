@@ -59,8 +59,9 @@ export type AwaitingOf<K extends DecisionKind> = Extract<AwaitingDecision, { kin
  * {@link DecisionModule.randomAnswer}: that member is handed an offer and must
  * build an answer from it, so narrowing it here means no module needs a
  * runtime `if (legal.kind !== …)` guard for a case the table already rules
- * out. `mulligan` is the one kind where this stays a union — it offers both
- * `mulligan` and `put-on-bottom` — and its module switches on the two.
+ * out. `mulligan` is the one kind where this stays a union — it offers
+ * `mulligan`, `put-on-bottom` and `mulligan-hand-ability` — and its module
+ * switches on them.
  */
 export type OfferOf<K extends DecisionKind> = Extract<
   LegalAction,
@@ -78,9 +79,10 @@ export type OfferOf<K extends DecisionKind> = Extract<
  * canary nobody chose. This table is the chosen one, and it fails at the
  * table rather than several hundred lines away.
  *
- * `mulligan` is the one kind answered by two action types: one
+ * `mulligan` is the one kind answered by several action types: one
  * `AwaitingDecision` carries both halves of the phase, switching on the
- * player's `hand.step`.
+ * player's `hand.step`, and a card may act while a player decides (rule
+ * 103.5b).
  */
 export const DECISION_ACTIONS = {
   attackers: ["declare-attackers"],
@@ -88,7 +90,7 @@ export const DECISION_ACTIONS = {
   "assign-combat-damage": ["assign-combat-damage"],
   discard: ["discard"],
   "choose-from-zone": ["choose-from-zone"],
-  mulligan: ["mulligan", "put-on-bottom"],
+  mulligan: ["mulligan", "put-on-bottom", "mulligan-hand-ability"],
   "commander-replacement": ["commander-replacement"],
   "pay-life-for-untapped": ["pay-life-for-untapped"],
   "miracle-reveal": ["miracle-reveal"],
@@ -132,7 +134,7 @@ export const DECISION_OFFERS = {
   "assign-combat-damage": ["assign-combat-damage"],
   discard: ["discard"],
   "choose-from-zone": ["choose-from-zone"],
-  mulligan: ["mulligan", "put-on-bottom"],
+  mulligan: ["mulligan", "put-on-bottom", "mulligan-hand-ability"],
   "commander-replacement": ["commander-replacement"],
   "pay-life-for-untapped": ["pay-life-for-untapped"],
   "miracle-reveal": ["miracle-reveal"],
@@ -293,6 +295,7 @@ export interface DecisionHost {
   readonly applyCommanderChoice: (player: PlayerId, toCommandZone: boolean) => void;
   readonly applyMulligan: (player: PlayerId, keep: boolean) => void;
   readonly applyPutOnBottom: (player: PlayerId, cards: readonly ObjectId[]) => void;
+  readonly applyMulliganHandAbility: (player: PlayerId, card: ObjectId) => void;
   readonly applyAssignCombatDamage: (
     player: PlayerId,
     assignment: readonly number[],

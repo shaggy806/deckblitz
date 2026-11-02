@@ -672,6 +672,14 @@ export type Action =
       readonly keep: boolean;
     }
   | {
+      /** Uses a card's "any time you could mulligan" ability (rule 103.5b —
+       * Serum Powder) instead of declaring yet: the same player declares
+       * afterwards, over the hand that leaves them with. */
+      readonly type: "mulligan-hand-ability";
+      readonly player: PlayerId;
+      readonly card: ObjectId;
+    }
+  | {
       /** Answers a pending "put N cards on the bottom of your library"
        * decision after keeping a mulliganed hand. */
       readonly type: "put-on-bottom";
@@ -1819,6 +1827,18 @@ export type LegalAction =
       readonly kind: "mulligan";
       /** Mulligans already taken; this decision would be number `count + 1`. */
       readonly count: number;
+      /** Present when the hand may only be kept: one more mulligan would
+       * leave nothing to keep (rule 103.5). */
+      readonly mustKeep?: true;
+      /** Hands this player has replaced some other way while deciding
+       * (`MulliganHandState.redraws`), when any. */
+      readonly redraws?: number;
+    }
+  | {
+      /** A card in the hand whose "any time you could mulligan" ability may
+       * be used now (rule 103.5b). */
+      readonly kind: "mulligan-hand-ability";
+      readonly card: ObjectId;
     }
   | {
       readonly kind: "put-on-bottom";

@@ -102,6 +102,36 @@ describe("buildScenario", () => {
     expect(game.state.zones.shared.command).toContain(idOf(objects, "cmdr"));
   });
 
+  it("starts before the first turn on an opening-hands board, the hand dealt and the rest on top", () => {
+    const hand = ["Serum Powder", ...Array<string>(6).fill("Forest")].map((name, i) =>
+      card(`h${i}`, name, { zone: "hand" }),
+    );
+    const { game, objects } = buildScenario(
+      spec([...hand, card("next", "Grizzly Bears", { zone: "library" })], { openingHands: true, active: BOB }),
+    );
+    expect(game.state.turn.number).toBe(0);
+    expect(game.state.startingPlayer).toBe(BOB);
+    expect(game.state.awaiting?.kind).toBe("mulligan");
+    expect(game.handOf(ALICE)).toHaveLength(7);
+    expect(game.state.objects[idOf(objects, "h0")].cardName).toBe("Serum Powder");
+    expect(game.state.objects[idOf(objects, "h0")].zone).toBe("hand");
+    expect(game.state.zones.perPlayer[ALICE].library[0]).toBe(idOf(objects, "next"));
+    expect(game.state.objects[idOf(objects, "next")].cardName).toBe("Grizzly Bears");
+    expect(game.legalActions(ALICE).map((a) => a.kind)).toEqual(["mulligan", "mulligan-hand-ability"]);
+    // Bob dealt from the fill, topped up to seven.
+    expect(game.handOf(BOB)).toHaveLength(7);
+  });
+
+  it("refuses what an opening-hands board can't hold", () => {
+    const opening = { openingHands: true as const };
+    expect(() => validateScenario(spec([card("b", "Hill Giant")], opening))).toThrow(/hand or a library/);
+    expect(() => validateScenario(spec([], { ...opening, turn: 5 }))).toThrow(/before the first turn/);
+    const eight = Array.from({ length: 8 }, (_, i) => card(`h${i}`, "Forest", { zone: "hand" }));
+    expect(() => validateScenario(spec(eight, opening))).toThrow(/seven/);
+    const commander = card("c", "Hill Giant", { zone: "hand", commander: true });
+    expect(() => validateScenario(spec([commander], opening))).toThrow(/no commander/);
+  });
+
   it("refuses a board it can't build", () => {
     expect(() => validateScenario(spec([card("x", "Not A Real Card")]))).toThrow(/no card named/);
     expect(() => validateScenario(spec([card("t", "Soldier Token", { zone: "hand" })]))).toThrow(/token/);

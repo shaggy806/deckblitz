@@ -202,6 +202,8 @@ function faceSource(face, ctx) {
     deckCopies: parsed.deckCopies,
     companion: parsed.companion,
     beginsOnBattlefield: parsed.beginsOnBattlefield,
+    openingHandReveal: parsed.openingHandReveal,
+    mulliganHandAbility: parsed.mulliganHandAbility,
     cantBeCountered: parsed.cantBeCountered,
     flashThenSacrifice: parsed.flashThenSacrifice,
     flashIf: parsed.flashIf,

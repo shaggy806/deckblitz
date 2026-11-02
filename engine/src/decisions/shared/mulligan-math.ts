@@ -17,3 +17,16 @@
 export function mulliganCardsOwed(taken: number, freeFirstMulligan: boolean): number {
   return Math.max(0, taken - (freeFirstMulligan ? 1 : 0));
 }
+
+/**
+ * Rule 103.5: "A player can take mulligans until their opening hand would be
+ * zero cards, after which they may not take further mulligans." So a player
+ * who already owes a whole hand must keep. (Rule 103.5c's free first mulligan
+ * counts toward neither, which is why this reads what's owed, not `taken`.)
+ */
+export function mayTakeMulligan(
+  taken: number,
+  rules: { readonly openingHandSize: number; readonly freeFirstMulligan: boolean },
+): boolean {
+  return mulliganCardsOwed(taken, rules.freeFirstMulligan) < rules.openingHandSize;
+}

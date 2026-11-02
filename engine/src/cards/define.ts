@@ -5134,7 +5134,21 @@ export interface CardDefinition {
    * `"your-next-main-phase"` for "your first main phase of the game". The
    * card stays in the hand (`Game.beginOpeningHandActions`). */
   readonly openingHandReveal: OpeningHandReveal | null;
+  /** "Any time you could mulligan and this card is in your hand, you may …"
+   * (rule 103.5b — Serum Powder): offered beside keep and mulligan each time
+   * its holder is asked to declare, as many times as a card with it is in
+   * the hand. See `decisions/mulligan.ts` and {@link MulliganHandAbility}. */
+  readonly mulliganHandAbility: MulliganHandAbility | null;
 }
+
+/**
+ * What a card does from the hand while its holder could mulligan. It happens
+ * at once, not on the stack, in a phase with no priority and no permanents,
+ * so it's a named action rather than an `EffectSpec`:
+ * - `"exile-hand-draw-that-many"`: "exile all the cards from your hand, then
+ *   draw that many cards" — not a mulligan: none is counted, nothing shuffled.
+ */
+export type MulliganHandAbility = "exile-hand-draw-that-many";
 
 /** See {@link CardDefinition.openingHandReveal}. */
 export interface OpeningHandReveal {
@@ -5285,6 +5299,7 @@ const PRINTED_ABILITY: {
   companion: (def) => def.companion !== null,
   beginsOnBattlefield: (def) => def.beginsOnBattlefield,
   openingHandReveal: (def) => def.openingHandReveal !== null,
+  mulliganHandAbility: (def) => def.mulliganHandAbility !== null,
 };
 
 const PRINTED_ABILITY_TESTS: readonly ((def: CardDefinition) => boolean)[] = Object.values(
@@ -5536,6 +5551,7 @@ interface CardDraft {
   companion?: CompanionCondition;
   beginsOnBattlefield?: boolean;
   openingHandReveal?: OpeningHandReveal;
+  mulliganHandAbility?: MulliganHandAbility;
 }
 
 /** Build a {@link CardDefinition} from a partial draft, filling in defaults. */
@@ -5785,5 +5801,6 @@ export function defineCard(draft: CardDraft): CardDefinition {
     companion: draft.companion ?? null,
     beginsOnBattlefield: draft.beginsOnBattlefield ?? false,
     openingHandReveal: draft.openingHandReveal ?? null,
+    mulliganHandAbility: draft.mulliganHandAbility ?? null,
   };
 }

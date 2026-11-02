@@ -42,11 +42,11 @@ describe("decision tables", () => {
         owner.set(action, kind as DecisionKind);
       }
     }
-    // One more action than kinds: `mulligan` is the one kind with two, because a
-    // single AwaitingDecision carries both halves of the mulligan phase and
-    // switches on the player's own `hand.step`.
-    expect(owner.size).toBe(KIND_COUNT + 1);
-    expect(DECISION_ACTIONS.mulligan).toEqual(["mulligan", "put-on-bottom"]);
+    // Two more actions than kinds: `mulligan` is the one kind with three, because
+    // a single AwaitingDecision carries both halves of the mulligan phase,
+    // switching on the player's own `hand.step`, and a card can act during it.
+    expect(owner.size).toBe(KIND_COUNT + 2);
+    expect(DECISION_ACTIONS.mulligan).toEqual(["mulligan", "put-on-bottom", "mulligan-hand-ability"]);
   });
 
   it("offers what it answers", () => {

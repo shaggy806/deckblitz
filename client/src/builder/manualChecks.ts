@@ -59,6 +59,10 @@ interface BoardOpts {
   readonly turn?: 'you' | number
   readonly step?: ScenarioStep
   readonly fill?: number
+  /** Start before the first turn: the mulligans, then the opening-hand
+   * actions. Hands and libraries only; a hand of under seven is topped up from
+   * the library. `turn` says who starts. */
+  readonly openingHands?: true
 }
 
 export interface ManualCheckPreset {
@@ -139,8 +143,14 @@ export function board(opts: BoardOpts): ScenarioSpec {
     active: opts.turn === undefined || opts.turn === 'you' ? PLAYERS[0] : PLAYERS[opts.turn + 1],
     step: opts.step ?? 'precombat-main',
     libraryFill: opts.fill ?? 40,
+    ...(opts.openingHands ? { openingHands: true as const } : {}),
   }
 }
+
+/** The seven cards Serum Powder's checks draw. */
+const POWDER_NEXT_HAND = ['Grizzly Bears', 'Hill Giant', 'Island', 'Mountain', 'Plains', 'Swamp', 'Shock']
+/** A hand a bot keeps, with a Leyline it begins the game with. */
+const BOT_KEEPS_LEYLINE = ['Leyline of Sanctity', 'Plains*3', 'Grizzly Bears', 'Hill Giant', 'Shock']
 
 const preset = (title: string, spec: ScenarioSpec, variant?: string): ManualCheckPreset => ({
   title,
@@ -9189,6 +9199,49 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     board({
       you: { hand: ['Grizzly Bears', 'Hill Giant'] },
       opp: [{ bf: ['Aluren'] }, {}, {}],
+    }),
+  ),
+  // --- Before the first turn (openingHands): mulligans, opening-hand actions -------
+  preset(
+    'Serum Powder: exile your hand and draw as many',
+    board({
+      openingHands: true,
+      you: { hand: ['Serum Powder', 'Forest*6'], lib: POWDER_NEXT_HAND },
+    }),
+  ),
+  preset(
+    'Serum Powder: at a four-player table',
+    board({
+      openingHands: true,
+      you: { hand: ['Serum Powder', 'Forest*6'], lib: POWDER_NEXT_HAND },
+      opp: [{}, {}, {}],
+    }),
+  ),
+  preset(
+    'Mulligan: you can go no further than an empty hand',
+    board({ openingHands: true, you: {} }),
+  ),
+  preset(
+    'Leyline Axe: begin the game with it on the battlefield',
+    board({
+      openingHands: true,
+      you: { hand: ['Leyline Axe', 'Forest*6'] },
+    }),
+  ),
+  preset(
+    'Providence: revealed, your life becomes 26 at the first upkeep',
+    board({
+      openingHands: true,
+      you: { hand: ['Providence', 'Forest*6'] },
+    }),
+  ),
+  preset(
+    'Leyline of Sanctity: the starting player acts first, at four players',
+    board({
+      openingHands: true,
+      turn: 0,
+      you: { hand: ['Leyline Axe', 'Forest*6'] },
+      opp: [{ hand: BOT_KEEPS_LEYLINE }, {}, {}],
     }),
   ),
 ]

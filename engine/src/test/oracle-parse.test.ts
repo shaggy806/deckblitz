@@ -1425,6 +1425,47 @@ describe("costs and triggers", () => {
     expect(caverns.beginsOnBattlefield).toBeUndefined();
   });
 
+  it("reads an ability that acts while its holder could mulligan (rule 103.5b)", () => {
+    const powder = parseFace({
+      name: "Serum Powder",
+      type_line: "Artifact",
+      oracle_text:
+        "{T}: Add {C}.\nAny time you could mulligan and this card is in your hand, you may exile all the cards from your hand, then draw that many cards. (You can do this in addition to taking mulligans.)",
+    });
+    expect(powder.mulliganHandAbility).toBe("exile-hand-draw-that-many");
+    expect(powder.complete).toBe(true);
+  });
+
+  it("reads a reveal from the opening hand, either way round (rule 103.6b)", () => {
+    const reveal = (oracle_text: string) => parseFace({ name: "Some Card", type_line: "Sorcery", oracle_text });
+    const providence = reveal(
+      "You may reveal this card from your opening hand. If you do, at the beginning of the first upkeep, your life total becomes 26.",
+    );
+    expect(providence.openingHandReveal).toMatchObject({
+      at: "next-upkeep",
+      effect: { kind: "set-life-total", who: "you", amount: 26 },
+    });
+    expect(providence.complete).toBe(true);
+    // An effect the parser can't read whole leaves the line to a person.
+    const devourer = reveal(
+      "You may reveal this card from your opening hand. If you do, at the beginning of your first upkeep, look at the top four cards of your library. You may put one of those cards back on top of your library. Exile the rest.",
+    );
+    expect(devourer.openingHandReveal).toBeUndefined();
+    expect(devourer.complete).toBe(false);
+    const sphinx = reveal("You may reveal this card from your opening hand. If you do, scry 3 at the beginning of your first upkeep.");
+    expect(sphinx.openingHandReveal).toMatchObject({ at: "your-next-upkeep", effect: { kind: "scry", amount: 3 } });
+    const tangle = reveal(
+      "You may reveal this card from your opening hand. If you do, at the beginning of your first main phase of the game, add {G}.",
+    );
+    expect(tangle.openingHandReveal).toMatchObject({ at: "your-next-main-phase" });
+    // A moment no delayed timing covers stays a person's (Chancellor of the Annex).
+    const annex = reveal(
+      "You may reveal this card from your opening hand. If you do, when each opponent casts their first spell of the game, counter that spell unless that player pays {1}.",
+    );
+    expect(annex.openingHandReveal).toBeUndefined();
+    expect(annex.complete).toBe(false);
+  });
+
   it("lines the scaffolder must leave to a person, and what it must get right (the 2026-10-12 review)", () => {
     // Two typecyclings on one line are two abilities; `cycling` holds one.
     const rannet = parseFace({ name: "Valley Rannet", type_line: "Creature — Mount", oracle_text: "Mountaincycling {2}, forestcycling {2}" });

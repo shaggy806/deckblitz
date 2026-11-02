@@ -6113,3 +6113,33 @@ engine terms. A second thing to check is a second test.
 ### Fortunate Few: each player's choice survives, the rest are destroyed
 - **Do:** Cast Fortunate Few and choose the Hill Giant.
 - **Expect:** The prompt names a permanent you don't control, and each other player chooses one not chosen yet. Only the chosen permanents remain; the lands stay.
+
+## Before the first turn: mulligans and opening hands (2026-11-01)
+
+These boards start before the first turn (the builder's `openingHands`), with the opening-hand popup up. The bots answer their own mulligans beside you.
+
+### Serum Powder: exile your hand and draw as many
+- **Do:** In the popup, click "Serum Powder: exile this hand, draw as many".
+- **Expect:** Your seven cards go to exile, Serum Powder with them. The popup still says "Keep your opening hand?" over a new hand of seven (Grizzly Bears, Hill Giant, Island, Mountain, Plains, Swamp, Shock), and the Serum Powder button is gone.
+- **Not a bug:** It isn't a mulligan: keeping puts nothing on the bottom.
+
+### Serum Powder: at a four-player table
+- **Do:** Click "Serum Powder: exile this hand, draw as many", then Keep.
+- **Expect:** Each opponent's own mulligan goes on without holding yours up. You keep the new seven and the game begins, with the first turn yours.
+
+### Mulligan: you can go no further than an empty hand
+- **Do:** Click Mulligan eight times.
+- **Expect:** After the eighth the popup offers Keep alone. Keep asks for seven cards for the bottom of your library, and the game starts with no hand.
+- **Not a bug:** The first mulligan is free in this game, so eight, not seven.
+
+### Leyline Axe: begin the game with it on the battlefield
+- **Do:** Click Keep and wait for the bot. In the "Opening hand: choose any of these to begin the game with on the battlefield" popup, click Leyline Axe, then Confirm.
+- **Expect:** The first turn begins with Leyline Axe on your battlefield, unattached, and six Forests in your hand. "Keep them in hand" instead leaves it in your hand.
+
+### Providence: revealed, your life becomes 26 at the first upkeep
+- **Do:** Click Keep and wait for the bot. In the "Opening hand: choose any of these to reveal" popup, click Providence, then Confirm.
+- **Expect:** The log says you reveal it, and it stays in your hand. As the first turn reaches its upkeep your life goes from 40 to 26.
+
+### Leyline of Sanctity: the starting player acts first, at four players
+- **Do:** Bob starts the game. Click Keep and wait for the bots. When the popup comes, look at the log, then click Leyline Axe and Confirm.
+- **Expect:** The log has Bob's Leyline of Sanctity first, before you're asked; your Axe follows it, then "Round 1, turn 1 — Bob".

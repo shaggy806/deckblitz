@@ -285,6 +285,8 @@ export const makeFormatter = (game) => {
         return e.winner ? `${e.winner} wins — ${e.reason}` : `draw — ${e.reason}`;
       case "mulligan-taken":
         return `${e.player} mulligans (#${e.count})`;
+      case "hand-exiled-while-mulliganing":
+        return `${e.player} uses ${e.card}, exiling ${e.objects.length} cards`;
       case "hand-kept":
         return e.mulligans > 0
           ? `${e.player} keeps, after ${e.mulligans} mulligan(s)`

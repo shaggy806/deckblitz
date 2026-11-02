@@ -3838,3 +3838,21 @@ Spiritual Focus. Left: Pure Intentions' "this turn" trigger returning those card
 and Sand Golem's return at the next end step (delayed, from the graveyard, if it never left), Nephalia
 Academy's replacement from a land. Rule 616.1's choice against a graveyard replacement (Leyline of the
 Void) isn't asked: the battlefield is taken, as a player would all but always choose.
+
+### Acting from the hand before the game: the opening hand and "any time you could mulligan" — built 2026-11-01
+
+The need-keys Phase 2 family `mechanic:leyline-opening-hand`, its group with
+`mechanic:mulligan-hand-ability`. Rule 103.6's two actions were already there
+(`beginsOnBattlefield`, `openingHandReveal`) and the key needed only marking and
+proving; new is rule 103.5b: `mulliganHandAbility: "exile-hand-draw-that-many"`, a
+third action on the `mulligan` decision, not a mulligan (`taken` stays, nothing
+shuffled, the holder declares again). Also rule 103.5's floor, closing a soft-lock
+past seven mulligans: `mayTakeMulligan`, the offer's `mustKeep`, the bottoming owed
+capped at the hand. The scaffolder reads Serum Powder's line and both word orders of
+a reveal whose effect it reads whole. The builder can now start at the mulligans
+(`ScenarioSpec.openingHands`). Keys: mechanic:leyline-opening-hand,
+mechanic:mulligan-hand-ability. Proving cards: Serum Powder, Providence, Leyline Axe,
+Devourer of Destiny. Left: the freed Leylines' other lines are `author-freed`'s to
+narrow (Leyline of Combustion's trigger, Guildpact's all-colors, Transformation's
+types); Gemstone Caverns has its own key, `mechanic:opening-hand-not-starting-player`;
+Chancellor of the Annex's reveal fires on a first spell, not at a step.

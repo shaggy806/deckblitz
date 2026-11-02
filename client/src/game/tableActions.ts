@@ -21,7 +21,7 @@ export function tableActions(
   if (botPlaying) return NONE
   if (!busy) return shown
   if (!latest.some((a) => a.kind === 'mulligan')) return NONE
-  const mulligan = shown.filter((a) => a.kind === 'mulligan')
+  const mulligan = shown.filter((a) => a.kind === 'mulligan' || a.kind === 'mulligan-hand-ability')
   return mulligan.length > 0 ? mulligan : NONE
 }
 
@@ -30,11 +30,12 @@ export function tableActions(
  * (`busy`) — they're locked otherwise, as everything is. Mulligans are
  * decided in parallel, so another player's mulligan (a bot's shuffle) leaves
  * the viewer's own decision as it was: the frame on screen and the newest
- * one ask the same mulligan (`count`, the mulligans taken), and answering it
- * now races nothing. Locked only while the viewer's own hand is changing —
- * their own mulligan going back and the new hand being dealt — when the
- * counts differ. (A bug report, 2026-10-15: a table of mulliganing bots kept
- * the player's buttons locked shuffle after shuffle.)
+ * one ask the same mulligan (`count`, the mulligans taken, and `redraws`, the
+ * hands a card replaced), and answering it now races nothing. Locked only
+ * while the viewer's own hand is changing — their own mulligan going back, or
+ * the hand Serum Powder exiled, and the new hand being dealt — when they
+ * differ. (A bug report, 2026-10-15: a table of mulliganing bots kept the
+ * player's buttons locked shuffle after shuffle.)
  */
 export function mulliganLive(
   shown: readonly LegalAction[],
@@ -44,7 +45,7 @@ export function mulliganLive(
   if (!busy) return false
   const asked = (actions: readonly LegalAction[]) => {
     const m = actions.find((a) => a.kind === 'mulligan')
-    return m?.kind === 'mulligan' ? m.count : null
+    return m?.kind === 'mulligan' ? `${m.count}/${m.redraws ?? 0}` : null
   }
   const now = asked(shown)
   return now !== null && now === asked(latest)

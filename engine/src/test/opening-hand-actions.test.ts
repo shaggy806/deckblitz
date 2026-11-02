@@ -8,7 +8,7 @@ import { describe, expect, it } from "vitest";
 import { Game } from "../game.js";
 import type { GameConfig } from "../game.js";
 import { asPlayerId } from "../primitives.js";
-import { destroy, enter, pickModes, spawn, table } from "./harness.js";
+import { activate, destroy, enter, keywords, lands, pickModes, pt, ref, settle, spawn, table } from "./harness.js";
 import type { ObjectId } from "../primitives.js";
 
 const A = asPlayerId("alice");
@@ -126,5 +126,23 @@ describe("the cards that begin on the battlefield", () => {
     const bears = enter(game, "Grizzly Bears", A);
     expect(game.viewFor(A).objects[bears].toughness).toBe(3);
     expect(game.state.players[A].life).toBe(21);
+  });
+
+  it("Leyline Axe begins on the battlefield unattached, and equips for {3}", () => {
+    const game = newGame({ alice: deck("Leyline Axe"), bob: deck() });
+    const [axe] = inHand(game, A, "Leyline Axe");
+    game.dispatch({ type: "choose-from-zone", player: A, chosen: [axe] });
+    expect(game.state.objects[axe].zone).toBe("battlefield");
+    expect(game.state.objects[axe].attachedTo).toBeNull();
+
+    const { game: played } = table();
+    lands(played, "Wastes", 3);
+    const bears = spawn(played, "Grizzly Bears", A);
+    const axeOnBoard = spawn(played, "Leyline Axe", A);
+    activate(played, axeOnBoard, 0, { targets: [ref(bears)] });
+    settle(played);
+    expect(pt(played, bears)).toEqual({ power: 3, toughness: 3 });
+    expect(keywords(played, bears).has("double-strike")).toBe(true);
+    expect(keywords(played, bears).has("trample")).toBe(true);
   });
 });

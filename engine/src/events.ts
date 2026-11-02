@@ -1480,6 +1480,15 @@ export type GameEvent =
       readonly count: number;
     })
   | (Base & {
+      /** A card's "any time you could mulligan" ability exiled this player's
+       * hand (rule 103.5b — Serum Powder); the draws follow as `card-drawn`. */
+      readonly type: "hand-exiled-while-mulliganing";
+      readonly player: PlayerId;
+      /** The card whose ability it was, exiled with the rest. */
+      readonly card: ObjectId;
+      readonly objects: readonly ObjectId[];
+    })
+  | (Base & {
       readonly type: "hand-kept";
       readonly player: PlayerId;
       /** Mulligans taken before keeping this hand (0 for the opening hand). */

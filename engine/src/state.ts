@@ -2930,6 +2930,11 @@ export interface MulliganHandState {
   /** `"decide"` — still choosing keep-or-mulligan-again; `"bottom"` — kept,
    * now owes `taken` cards to the bottom of the library (London mulligan). */
   readonly step: "decide" | "bottom";
+  /** Hands replaced by a card's ability while deciding (rule 103.5b — Serum
+   * Powder), which is no mulligan and so isn't in `taken`. Absent means 0.
+   * Only the client reads it, to tell a hand it's still dealing from the one
+   * it asked about. */
+  readonly redraws?: number;
 }
 
 /**

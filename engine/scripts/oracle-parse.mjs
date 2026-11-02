@@ -7880,6 +7880,20 @@ function enteringFormOf(words) {
   };
 }
 
+/** The opening-hand reveal's two word orders, and when each moment is. */
+const OPENING_REVEAL_AT = {
+  "the first upkeep": "next-upkeep",
+  "your first upkeep": "your-next-upkeep",
+  "your first main phase of the game": "your-next-main-phase",
+};
+const OPENING_REVEAL_WHEN = "the first upkeep|your first upkeep|your first main phase of the game";
+const OPENING_REVEAL = new RegExp(
+  `^You may reveal (?:~|this card) from your opening hand\\. If you do, at the beginning of (${OPENING_REVEAL_WHEN}), (.+)\\.$`,
+);
+const OPENING_REVEAL_AFTER = new RegExp(
+  `^You may reveal (?:~|this card) from your opening hand\\. If you do, (.+) at the beginning of (${OPENING_REVEAL_WHEN})\\.$`,
+);
+
 export function parseFace(face, ctx = {}) {
   const out = { keywords: [], activated: [], triggered: [], static: [], todo: [] };
   const lines = (face.oracle_text ?? "").split("\n").filter(Boolean);
@@ -8054,6 +8068,24 @@ export function parseFace(face, ctx = {}) {
     if (/^If (?:~|this card) is in your opening hand, you may begin the game with (?:it|him|her|them) on the battlefield\.$/.test(line)) {
       out.beginsOnBattlefield = true;
       continue;
+    }
+    // Rule 103.5b, Serum Powder: at a time its holder would declare a mulligan.
+    if (/^Any time you could mulligan and (?:~|this card) is in your hand, you may exile all the cards from your hand, then draw that many cards\.$/.test(line)) {
+      out.mulliganHandAbility = "exile-hand-draw-that-many";
+      continue;
+    }
+    // Rule 103.6b, the Chancellors, Providence: a delayed ability, either way
+    // round ("…, at the beginning of the first upkeep, [effect]" and Sphinx of
+    // Foresight's "[effect] at the beginning of your first upkeep"). One that
+    // reads a target, or isn't read whole, is left to a person.
+    if ((m = OPENING_REVEAL.exec(line) ?? OPENING_REVEAL_AFTER.exec(line))) {
+      const [when, said] = OPENING_REVEAL.test(line) ? [m[1], m[2]] : [m[2], m[1]];
+      const targets = [];
+      const r = parseEffect(`${said.charAt(0).toUpperCase()}${said.slice(1)}.`, { targets, tokenFor, onStack: ctx.onStack });
+      if (r.effect !== null && targets.length === 0) {
+        out.openingHandReveal = { at: OPENING_REVEAL_AT[when], effect: r.effect, text: printed(raw) };
+        continue;
+      }
     }
     if (line === "Partner") { out.pairing = { kind: "partner" }; continue; }
     if ((m = /^Partner with (.+)$/.exec(line))) {

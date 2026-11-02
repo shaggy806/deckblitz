@@ -337,6 +337,7 @@ type BlockAction = Extract<LegalAction, { kind: 'declare-blockers' }>
 type DiscardAction = Extract<LegalAction, { kind: 'discard' }>
 type ZoneChoiceAction = Extract<LegalAction, { kind: 'choose-from-zone' }>
 type MulliganAction = Extract<LegalAction, { kind: 'mulligan' }>
+type MulliganAbilityAction = Extract<LegalAction, { kind: 'mulligan-hand-ability' }>
 type BottomAction = Extract<LegalAction, { kind: 'put-on-bottom' }>
 type CommanderChoiceAction = Extract<LegalAction, { kind: 'commander-replacement' }>
 type ShockChoiceAction = Extract<LegalAction, { kind: 'pay-life-for-untapped' }>
@@ -2097,6 +2098,10 @@ function Table({
   )
   const mulliganAction = actions.find(
     (a): a is MulliganAction => a.kind === 'mulligan',
+  )
+  // Any card with the ability: they all replace the same hand (rule 103.5b).
+  const mulliganAbility = actions.find(
+    (a): a is MulliganAbilityAction => a.kind === 'mulligan-hand-ability',
   )
   const bottomAction = actions.find(
     (a): a is BottomAction => a.kind === 'put-on-bottom',
@@ -6635,9 +6640,22 @@ function Table({
           <button type="button" disabled={locked} onClick={() => confirmMulligan(true)}>
             Keep
           </button>
-          <button type="button" disabled={locked} onClick={() => confirmMulligan(false)}>
-            Mulligan
-          </button>
+          {mulliganAction.mustKeep ? null : (
+            <button type="button" disabled={locked} onClick={() => confirmMulligan(false)}>
+              Mulligan
+            </button>
+          )}
+          {mulliganAbility ? (
+            <button
+              type="button"
+              disabled={locked}
+              onClick={() =>
+                game.dispatch({ type: 'mulligan-hand-ability', player: seat, card: mulliganAbility.card })
+              }
+            >
+              {view.objects[mulliganAbility.card]?.cardName}: exile this hand, draw as many
+            </button>
+          ) : null}
         </div>
       </div>
     )

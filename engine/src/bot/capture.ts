@@ -192,6 +192,8 @@ export function describeMove(state: GameState, action: Action, registry?: CardRe
         : `Block: ${action.blocks.map((b) => `${nameOf(state, b.blocker)} blocks ${nameOf(state, b.attacker)}`).join("; ")}`;
     case "mulligan":
       return action.keep ? "Keep the hand" : "Mulligan";
+    case "mulligan-hand-ability":
+      return `Use ${nameOf(state, action.card)}`;
     case "put-on-bottom":
       return `Put on the bottom: ${action.cards.map((id) => nameOf(state, id)).join(", ")}`;
     default:

@@ -86,6 +86,12 @@ export interface ScenarioSpec {
   /** Basic lands under each library's listed cards, so drawing doesn't lose
    * the game at once. */
   readonly libraryFill: number;
+  /** Start before the first turn, at the opening hands: each seat is dealt its
+   * `hand` cards, then the top of its `library` (then the fill) up to seven,
+   * nothing is anywhere else, and the mulligans and opening-hand actions are
+   * asked as a real game's start asks them (rules 103.5, 103.6). `active` is
+   * the starting player; `step` and `turn` say nothing. */
+  readonly openingHands?: true;
 }
 
 /** What a builder room adds to each `state` push. */

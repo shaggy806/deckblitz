@@ -563,6 +563,8 @@ export function describeEvent(event: GameEvent, nameOf: NameOf, seats: readonly 
         : `draw — ${event.reason}`
     case 'mulligan-taken':
       return `${who(event.player)} mulligans (#${event.count})`
+    case 'hand-exiled-while-mulliganing':
+      return `${who(event.player)} uses ${name(event.card)}, exiling ${event.objects.map(name).join(', ')}`
     case 'hand-kept':
       return event.mulligans > 0
         ? `${who(event.player)} keeps, after ${event.mulligans} mulligan(s)`

@@ -2,6 +2,8 @@
  "generated": "2026-09-22",
  "source": "Per-commander triage of every unimplemented top-commanders.txt entry (AI agents reading Oracle text + rulings against the engine), normalized onto one feature vocabulary. See neededCards-features.md, 'The commander gap'.",
  "built": [
+  "mechanic:leyline-opening-hand",
+  "mechanic:mulligan-hand-ability",
   "static:attack-limit",
   "static:max-attackers-blockers",
   "effect:end-the-combat-phase",

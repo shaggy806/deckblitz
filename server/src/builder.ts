@@ -141,6 +141,19 @@ export function validateScenario(spec: ScenarioSpec, registry: CardRegistry = ca
   if (new Set(spec.cards.filter((c) => c.companion === "ask").map((c) => c.owner)).size > 1) {
     throw new Error("only one player can be asked for a companion");
   }
+  if (spec.openingHands !== undefined) {
+    if (spec.openingHands !== true) throw new Error("the opening-hands flag is true or absent");
+    if (spec.turn !== undefined && spec.turn !== 1) throw new Error("opening hands come before the first turn");
+    for (const card of spec.cards) {
+      if ((card.zone !== "hand" && card.zone !== "library") || card.commander === true) {
+        throw new Error(`before the first turn a card is in a hand or a library, and no commander (${card.name})`);
+      }
+    }
+    for (const player of players) {
+      const held = spec.cards.filter((c) => c.owner === player && c.zone === "hand").length;
+      if (held > 7) throw new Error(`${player} is dealt seven cards, not ${held}`);
+    }
+  }
   for (const card of spec.cards) {
     if (card.attachedTo === undefined) continue;
     const host = keys.get(card.attachedTo);
@@ -200,8 +213,50 @@ function damageProblem(laid: LaidOut, card: ScenarioCard): string | null {
   return null;
 }
 
+/**
+ * A board that starts before the first turn (`ScenarioSpec.openingHands`): a
+ * game made the way a room makes one, its decks stacked so each player is
+ * dealt the scenario's hand, waiting on the mulligans.
+ */
+function layOutOpeningHands(spec: ScenarioSpec, registry: CardRegistry): LaidOut {
+  const players = spec.seats.map((s) => s.player);
+  const of = (player: PlayerId, zone: ScenarioZone): readonly ScenarioCard[] =>
+    spec.cards.filter((c) => c.owner === player && c.zone === zone);
+  const fill = Array.from({ length: spec.libraryFill }, (_, i) => BASICS[i % BASICS.length]);
+  const game = Game.create({
+    seed: 1,
+    shuffle: false,
+    registry,
+    startingPlayer: spec.active,
+    skipCompanionReveals: true,
+    rules: COMMANDER_RULES,
+    mulligans: true,
+    decks: players.map((player) => ({
+      player,
+      cards: [...of(player, "hand"), ...of(player, "library")].map((c) => c.name).concat(fill),
+    })),
+  });
+  const s = game.state;
+  const objects: Record<ObjectId, string> = {};
+  const byKey = new Map<string, ObjectId>();
+  for (const seat of spec.seats) {
+    s.players[seat.player].life = seat.life;
+    if (seat.poison !== undefined && seat.poison > 0) {
+      s.players[seat.player].counters = { ...s.players[seat.player].counters, poison: seat.poison };
+    }
+    // Dealt in deck order, and what wasn't dealt is the library, top first.
+    const dealt = [...s.zones.perPlayer[seat.player].hand, ...s.zones.perPlayer[seat.player].library];
+    [...of(seat.player, "hand"), ...of(seat.player, "library")].forEach((card, i) => {
+      objects[dealt[i]] = card.key;
+      byKey.set(card.key, dealt[i]);
+    });
+  }
+  return { game, objects, registry, byKey };
+}
+
 function layOut(spec: ScenarioSpec, registry: CardRegistry): LaidOut {
   validateScenario(spec, registry);
+  if (spec.openingHands === true) return layOutOpeningHands(spec, registry);
   const players = spec.seats.map((s) => s.player);
   const fill = Array.from({ length: spec.libraryFill }, (_, i) => BASICS[i % BASICS.length]);
   const turn = spec.turn ?? 1;

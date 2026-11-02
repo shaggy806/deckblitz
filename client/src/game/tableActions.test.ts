@@ -41,6 +41,17 @@ describe('mulliganLive', () => {
     expect(mulliganLive([mulligan(0)], [pass], true)).toBe(false)
   })
 
+  it("locks them while a hand a card replaced is being dealt, at the same mulligan count", () => {
+    const after: LegalAction = { kind: 'mulligan', count: 0, redraws: 1 }
+    expect(mulliganLive([mulligan(0)], [after], true)).toBe(false)
+    expect(mulliganLive([after], [after], true)).toBe(true)
+  })
+
+  it("keeps a card's ability up with the mulligan while a frame plays", () => {
+    const ability: LegalAction = { kind: 'mulligan-hand-ability', card: 'obj-1' as never }
+    expect(tableActions([mulligan(0), ability, pass], [mulligan(0)], true, false)).toEqual([mulligan(0), ability])
+  })
+
   it('has nothing to say when no frame is playing, or no mulligan is asked', () => {
     expect(mulliganLive([mulligan(0)], [mulligan(0)], false)).toBe(false)
     expect(mulliganLive([pass], [pass], true)).toBe(false)

@@ -1853,6 +1853,7 @@ export class Game {
       applyCommanderChoice: (player, toCz) => this.applyCommanderChoice(player, toCz),
       applyMulligan: (player, keep) => this.applyMulligan(player, keep),
       applyPutOnBottom: (player, cards) => this.applyPutOnBottom(player, cards),
+      applyMulliganHandAbility: (player, card) => this.applyMulliganHandAbility(player, card),
       applyAssignCombatDamage: (p, a, forAll, unblocked) => this.applyAssignCombatDamage(p, a, forAll, unblocked),
       applyAttackerDeclarations: (p, d) => this.applyAttackerDeclarations(p, d),
       applyBlockerDeclarations: (p, b) => this.applyBlockerDeclarations(p, b),
@@ -5808,10 +5809,13 @@ export class Game {
   /**
    * Deals opening hands, then runs the London mulligan phase. Every player is
    * asked to keep-or-mulligan **at the same time** — they act in parallel, in
-   * whatever order they choose, not turn order (rule 103.4 — a player never
-   * waits on another to make their own mulligan decision). Each player loops
-   * their own decide → (mulligan → decide)* → keep → (bottom `taken` cards)
-   * independently; turn 1 begins once every player has finished.
+   * whatever order they choose. This is a deliberate shortcut of rule 103.5,
+   * which has the starting player declare first, then the others in turn
+   * order, and everyone who declared a mulligan take it together, round after
+   * round: here nobody waits on the table, and nobody can be made to declare
+   * before seeing another's. Each player loops their own decide → (mulligan
+   * → decide)* → keep → (bottom `taken` cards) independently; turn 1 begins
+   * once every player has finished.
    */
   private beginMulligans(): void {
     const hands: Record<string, MulliganHandState> = {};
@@ -5840,7 +5844,7 @@ export class Game {
   }
 
   private applyMulligan(player: PlayerId, keep: boolean): void {
-    const why = this.whyCannotMulligan(player);
+    const why = this.whyCannotMulligan(player, keep);
     if (why !== null) throw new Error(why);
 
     const awaiting = this.state.awaiting;
@@ -5863,31 +5867,59 @@ export class Game {
         this.drawCard(player, true);
       }
       this.emit({ type: "mulligan-taken", player, count: taken + 1 });
-      hands[player] = { taken: taken + 1, step: "decide" };
+      hands[player] = { ...hands[player], taken: taken + 1, step: "decide" };
       this.advanceMulliganPhase(hands);
       return;
     }
 
     this.emit({ type: "hand-kept", player, mulligans: taken });
-    if (this.mulliganCardsOwed(taken) > 0) {
-      hands[player] = { taken, step: "bottom" };
+    // A hand a short library left smaller than what's owed gives what it has.
+    const owed = Math.min(this.mulliganCardsOwed(taken), this.state.zones.perPlayer[player].hand.length);
+    if (owed > 0) {
+      hands[player] = { ...hands[player], taken, step: "bottom" };
     } else {
       delete hands[player];
     }
     this.advanceMulliganPhase(hands);
   }
 
+  /**
+   * "Any time you could mulligan and this card is in your hand, you may exile
+   * all the cards from your hand, then draw that many cards" (rule 103.5b —
+   * Serum Powder), the card itself among them. No mulligan: `taken` stays, so
+   * nothing more is owed on keeping, and nothing is shuffled. The player then
+   * declares as before, over the new hand. A library too short for it leaves
+   * them having drawn from an empty library, which loses the game when state-
+   * based actions are next checked, as the game's first turn begins (704.5b).
+   */
+  private applyMulliganHandAbility(player: PlayerId, card: ObjectId): void {
+    const why = mulligan.whyCannot(this.decisionCtx, { type: "mulligan-hand-ability", player, card }, player);
+    if (why !== null) throw new Error(why);
+    const awaiting = this.state.awaiting;
+    if (awaiting === null || awaiting.kind !== "mulligan") {
+      throw new Error("unreachable: whyCannot should have caught this");
+    }
+    const hands = { ...awaiting.hands };
+    const exiled = [...this.state.zones.perPlayer[player].hand].filter((id) => this.moveObject(id, "exile"));
+    this.emit({ type: "hand-exiled-while-mulliganing", player, card, objects: exiled });
+    for (let i = 0; i < exiled.length; i += 1) {
+      this.drawCard(player, true);
+    }
+    hands[player] = { ...hands[player], redraws: (hands[player].redraws ?? 0) + 1 };
+    this.advanceMulliganPhase(hands);
+  }
+
   /** How many cards a player who has taken `taken` mulligans owes to the
-   * bottom of their library on keeping (rule 103.4, or the traditional
-   * Commander waiver on the first one — `GameRules.freeFirstMulligan`). */
+   * bottom of their library on keeping (rule 103.5, or the free first one —
+   * rule 103.5c, `GameRules.freeFirstMulligan`). */
   private mulliganCardsOwed(taken: number): number {
     return mulliganCardsOwed(taken, this.state.rules.freeFirstMulligan);
   }
 
   /** Kept because the matching apply validates before applying and throws;
    * the rules live in `decisions/mulligan.ts`. */
-  private whyCannotMulligan(player: PlayerId): string | null {
-    return mulligan.whyCannot(this.decisionCtx, { type: "mulligan", player, keep: false }, player);
+  private whyCannotMulligan(player: PlayerId, keep: boolean): string | null {
+    return mulligan.whyCannot(this.decisionCtx, { type: "mulligan", player, keep }, player);
   }
 
   private applyPutOnBottom(player: PlayerId, cards: readonly ObjectId[]): void {
