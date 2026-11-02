@@ -210,6 +210,7 @@ import _poolDoorkeeperThrull from "../pool/doorkeeper-thrull.js";
 import _poolDownDownToGoblinTown from "../pool/down-down-to-goblin-town.js";
 import _poolDowsingShaman from "../pool/dowsing-shaman.js";
 import _poolDragonbackLancer from "../pool/dragonback-lancer.js";
+import _poolDragonsPrey from "../pool/dragons-prey.js";
 import _poolDrannithMagistrate from "../pool/drannith-magistrate.js";
 import _poolDreadwingScavenger from "../pool/dreadwing-scavenger.js";
 import _poolDreadwing from "../pool/dreadwing.js";
@@ -678,6 +679,7 @@ import _poolStaggeringInsight from "../pool/staggering-insight.js";
 import _poolStampedeRider from "../pool/stampede-rider.js";
 import _poolStarwinder from "../pool/starwinder.js";
 import _poolStatecraft from "../pool/statecraft.js";
+import _poolSteelGolem from "../pool/steel-golem.js";
 import _poolSteelHellkite from "../pool/steel-hellkite.js";
 import _poolSteelSabotage from "../pool/steel-sabotage.js";
 import _poolSteelWall from "../pool/steel-wall.js";
@@ -781,10 +783,12 @@ import _poolUproot from "../pool/uproot.js";
 import _poolUrGolemsEye from "../pool/ur-golems-eye.js";
 import _poolUrgentExorcism from "../pool/urgent-exorcism.js";
 import _poolUrtetRemnantOfMemnarch from "../pool/urtet-remnant-of-memnarch.js";
+import _poolUrzasRuinousBlast from "../pool/urzas-ruinous-blast.js";
 import _poolUrzasTower from "../pool/urzas-tower.js";
 import _poolVampireOpportunist from "../pool/vampire-opportunist.js";
 import _poolVampireSocialite from "../pool/vampire-socialite.js";
 import _poolVanguardSeraph from "../pool/vanguard-seraph.js";
+import _poolVanishIntoEternity from "../pool/vanish-into-eternity.js";
 import _poolVaporSnare from "../pool/vapor-snare.js";
 import _poolVastwoodGorger from "../pool/vastwood-gorger.js";
 import _poolVastwoodSurge from "../pool/vastwood-surge.js";
@@ -1080,6 +1084,7 @@ const shard: CardShard = {
     _poolDownDownToGoblinTown,
     _poolDowsingShaman,
     _poolDragonbackLancer,
+    _poolDragonsPrey,
     _poolDrannithMagistrate,
     _poolDreadwingScavenger,
     _poolDreadwing,
@@ -1548,6 +1553,7 @@ const shard: CardShard = {
     _poolStampedeRider,
     _poolStarwinder,
     _poolStatecraft,
+    _poolSteelGolem,
     _poolSteelHellkite,
     _poolSteelSabotage,
     _poolSteelWall,
@@ -1651,10 +1657,12 @@ const shard: CardShard = {
     _poolUrGolemsEye,
     _poolUrgentExorcism,
     _poolUrtetRemnantOfMemnarch,
+    _poolUrzasRuinousBlast,
     _poolUrzasTower,
     _poolVampireOpportunist,
     _poolVampireSocialite,
     _poolVanguardSeraph,
+    _poolVanishIntoEternity,
     _poolVaporSnare,
     _poolVastwoodGorger,
     _poolVastwoodSurge,

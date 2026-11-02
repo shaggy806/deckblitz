@@ -508,6 +508,7 @@ import _poolNovijenSages from "../pool/novijen-sages.js";
 import _poolNullGroupBiologicalAssets from "../pool/null-group-biological-assets.js";
 import _poolNullmageShepherd from "../pool/nullmage-shepherd.js";
 import _poolOathOfAjani from "../pool/oath-of-ajani.js";
+import _poolOathOfTeferi from "../pool/oath-of-teferi.js";
 import _poolObNixilisTheFallen from "../pool/ob-nixilis-the-fallen.js";
 import _poolOdricLunarchMarshal from "../pool/odric-lunarch-marshal.js";
 import _poolOfficiousInterrogation from "../pool/officious-interrogation.js";
@@ -1423,6 +1424,7 @@ const shard: CardShard = {
     _poolNullGroupBiologicalAssets,
     _poolNullmageShepherd,
     _poolOathOfAjani,
+    _poolOathOfTeferi,
     _poolObNixilisTheFallen,
     _poolOdricLunarchMarshal,
     _poolOfficiousInterrogation,

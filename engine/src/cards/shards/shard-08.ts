@@ -746,6 +746,7 @@ import _poolStokeTheFlames from "../pool/stoke-the-flames.js";
 import _poolStolenIdentity from "../pool/stolen-identity.js";
 import _poolStonebrowKrosanHero from "../pool/stonebrow-krosan-hero.js";
 import _poolStormStrike from "../pool/storm-strike.js";
+import _poolStormwingEntity from "../pool/stormwing-entity.js";
 import _poolStratosoarer from "../pool/stratosoarer.js";
 import _poolStriderRangerOfTheNorth from "../pool/strider-ranger-of-the-north.js";
 import _poolStunSniper from "../pool/stun-sniper.js";
@@ -1660,6 +1661,7 @@ const shard: CardShard = {
     _poolStolenIdentity,
     _poolStonebrowKrosanHero,
     _poolStormStrike,
+    _poolStormwingEntity,
     _poolStratosoarer,
     _poolStriderRangerOfTheNorth,
     _poolStunSniper,

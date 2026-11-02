@@ -399,6 +399,7 @@ import _poolKefkaCourtMage from "../pool/kefka-court-mage.js";
 import _poolKelsFightFixer from "../pool/kels-fight-fixer.js";
 import _poolKestiaTheCultivator from "../pool/kestia-the-cultivator.js";
 import _poolKhalniAmbush from "../pool/khalni-ambush.js";
+import _poolKhalniHydra from "../pool/khalni-hydra.js";
 import _poolKinTreeSeverance from "../pool/kin-tree-severance.js";
 import _poolKingMacarTheGoldCursed from "../pool/king-macar-the-gold-cursed.js";
 import _poolKitnap from "../pool/kitnap.js";
@@ -823,6 +824,7 @@ import _poolVindictiveVampire from "../pool/vindictive-vampire.js";
 import _poolVirtueOfPersistence from "../pool/virtue-of-persistence.js";
 import _poolVirulentPlague from "../pool/virulent-plague.js";
 import _poolVisageBandit from "../pool/visage-bandit.js";
+import _poolVisionsOfGlory from "../pool/visions-of-glory.js";
 import _poolVivisurgeonsInsight from "../pool/vivisurgeons-insight.js";
 import _poolVodaSeaScavenger from "../pool/voda-sea-scavenger.js";
 import _poolVoiceOfGrace from "../pool/voice-of-grace.js";
@@ -1284,6 +1286,7 @@ const shard: CardShard = {
     _poolKelsFightFixer,
     _poolKestiaTheCultivator,
     _poolKhalniAmbush,
+    _poolKhalniHydra,
     _poolKinTreeSeverance,
     _poolKingMacarTheGoldCursed,
     _poolKitnap,
@@ -1708,6 +1711,7 @@ const shard: CardShard = {
     _poolVirtueOfPersistence,
     _poolVirulentPlague,
     _poolVisageBandit,
+    _poolVisionsOfGlory,
     _poolVivisurgeonsInsight,
     _poolVodaSeaScavenger,
     _poolVoiceOfGrace,

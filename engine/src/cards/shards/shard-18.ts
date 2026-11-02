@@ -47,6 +47,7 @@ import _poolBarbedBattlegear from "../pool/barbed-battlegear.js";
 import _poolBaruFistOfKrosa from "../pool/baru-fist-of-krosa.js";
 import _poolBasandraBattleSeraph from "../pool/basandra-battle-seraph.js";
 import _poolBattlefieldButcher from "../pool/battlefield-butcher.js";
+import _poolBattlefieldThaumaturge from "../pool/battlefield-thaumaturge.js";
 import _poolBaxterFlyInTheOintment from "../pool/baxter-fly-in-the-ointment.js";
 import _poolBebopRocksteady from "../pool/bebop-rocksteady.js";
 import _poolBedevil from "../pool/bedevil.js";
@@ -665,6 +666,7 @@ import _poolSpellbookVendor from "../pool/spellbook-vendor.js";
 import _poolSpellheartChimera from "../pool/spellheart-chimera.js";
 import _poolSpellkeeperWeird from "../pool/spellkeeper-weird.js";
 import _poolSpellruneHowler from "../pool/spellrune-howler.js";
+import _poolSpellwildOuphe from "../pool/spellwild-ouphe.js";
 import _poolSphinxOfForgottenLore from "../pool/sphinx-of-forgotten-lore.js";
 import _poolSpiderManHometownHero from "../pool/spider-man-hometown-hero.js";
 import _poolSpiketailDrake from "../pool/spiketail-drake.js";
@@ -920,6 +922,7 @@ const shard: CardShard = {
     _poolBaruFistOfKrosa,
     _poolBasandraBattleSeraph,
     _poolBattlefieldButcher,
+    _poolBattlefieldThaumaturge,
     _poolBaxterFlyInTheOintment,
     _poolBebopRocksteady,
     _poolBedevil,
@@ -1538,6 +1541,7 @@ const shard: CardShard = {
     _poolSpellheartChimera,
     _poolSpellkeeperWeird,
     _poolSpellruneHowler,
+    _poolSpellwildOuphe,
     _poolSphinxOfForgottenLore,
     _poolSpiderManHometownHero,
     _poolSpiketailDrake,

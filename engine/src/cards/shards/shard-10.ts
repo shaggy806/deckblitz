@@ -44,6 +44,7 @@ import _poolArmyAnts from "../pool/army-ants.js";
 import _poolAsceticism from "../pool/asceticism.js";
 import _poolAshlingThePilgrim from "../pool/ashling-the-pilgrim.js";
 import _poolAssassinGauntlet from "../pool/assassin-gauntlet.js";
+import _poolAssassinsInk from "../pool/assassins-ink.js";
 import _poolAuguryAdept from "../pool/augury-adept.js";
 import _poolAuraOfDominion from "../pool/aura-of-dominion.js";
 import _poolAuraThief from "../pool/aura-thief.js";
@@ -934,6 +935,7 @@ const shard: CardShard = {
     _poolAsceticism,
     _poolAshlingThePilgrim,
     _poolAssassinGauntlet,
+    _poolAssassinsInk,
     _poolAuguryAdept,
     _poolAuraOfDominion,
     _poolAuraThief,

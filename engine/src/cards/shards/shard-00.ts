@@ -337,6 +337,7 @@ import _poolHannaShipsNavigator from "../pool/hanna-ships-navigator.js";
 import _poolHannasCustody from "../pool/hannas-custody.js";
 import _poolHanweirBattlements from "../pool/hanweir-battlements.js";
 import _poolHarbingerOfNight from "../pool/harbinger-of-night.js";
+import _poolHarbingerOfTheTides from "../pool/harbinger-of-the-tides.js";
 import _poolHarmonizedCrescendo from "../pool/harmonized-crescendo.js";
 import _poolHarrowingJourney from "../pool/harrowing-journey.js";
 import _poolHaughtyDjinn from "../pool/haughty-djinn.js";
@@ -736,6 +737,7 @@ import _poolTarielReckonerOfSouls from "../pool/tariel-reckoner-of-souls.js";
 import _poolTauntingChallenge from "../pool/taunting-challenge.js";
 import _poolTavernSmasher from "../pool/tavern-smasher.js";
 import _poolTectonicHazard from "../pool/tectonic-hazard.js";
+import _poolTeferiTimeRaveler from "../pool/teferi-time-raveler.js";
 import _poolTeferisSentinel from "../pool/teferis-sentinel.js";
 import _poolTeganJovanka from "../pool/tegan-jovanka.js";
 import _poolTempestAngler from "../pool/tempest-angler.js";
@@ -1228,6 +1230,7 @@ const shard: CardShard = {
     _poolHannasCustody,
     _poolHanweirBattlements,
     _poolHarbingerOfNight,
+    _poolHarbingerOfTheTides,
     _poolHarmonizedCrescendo,
     _poolHarrowingJourney,
     _poolHaughtyDjinn,
@@ -1627,6 +1630,7 @@ const shard: CardShard = {
     _poolTauntingChallenge,
     _poolTavernSmasher,
     _poolTectonicHazard,
+    _poolTeferiTimeRaveler,
     _poolTeferisSentinel,
     _poolTeganJovanka,
     _poolTempestAngler,

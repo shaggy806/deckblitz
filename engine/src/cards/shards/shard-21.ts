@@ -692,6 +692,7 @@ import _poolSwordOfFeastAndFamine from "../pool/sword-of-feast-and-famine.js";
 import _poolSylvokBattleChair from "../pool/sylvok-battle-chair.js";
 import _poolSylvokReplica from "../pool/sylvok-replica.js";
 import _poolSymbioticBeast from "../pool/symbiotic-beast.js";
+import _poolTamiyosLogbook from "../pool/tamiyos-logbook.js";
 import _poolTangleTumbler from "../pool/tangle-tumbler.js";
 import _poolTanglebloom from "../pool/tanglebloom.js";
 import _poolTanglepoolBridge from "../pool/tanglepool-bridge.js";
@@ -1539,6 +1540,7 @@ const shard: CardShard = {
     _poolSylvokBattleChair,
     _poolSylvokReplica,
     _poolSymbioticBeast,
+    _poolTamiyosLogbook,
     _poolTangleTumbler,
     _poolTanglebloom,
     _poolTanglepoolBridge,

@@ -626,6 +626,7 @@ import _poolSanctumOfCalmWaters from "../pool/sanctum-of-calm-waters.js";
 import _poolSanctumOfUgin from "../pool/sanctum-of-ugin.js";
 import _poolSandbarCrocodile from "../pool/sandbar-crocodile.js";
 import _poolSanguinePraetor from "../pool/sanguine-praetor.js";
+import _poolSaprolingSymbiosis from "../pool/saproling-symbiosis.js";
 import _poolSarpadianSimulacrum from "../pool/sarpadian-simulacrum.js";
 import _poolSatyaAetherfluxGenius from "../pool/satya-aetherflux-genius.js";
 import _poolSavagePunch from "../pool/savage-punch.js";
@@ -831,6 +832,7 @@ import _poolWildIdea from "../pool/wild-idea.js";
 import _poolWildernessReclamation from "../pool/wilderness-reclamation.js";
 import _poolWildfireEternal from "../pool/wildfire-eternal.js";
 import _poolWildsize from "../pool/wildsize.js";
+import _poolWildvinePummeler from "../pool/wildvine-pummeler.js";
 import _poolWilheltTheRotcleaver from "../pool/wilhelt-the-rotcleaver.js";
 import _poolWindcallerAven from "../pool/windcaller-aven.js";
 import _poolWitchBlessedMeadow from "../pool/witch-blessed-meadow.js";
@@ -1492,6 +1494,7 @@ const shard: CardShard = {
     _poolSanctumOfUgin,
     _poolSandbarCrocodile,
     _poolSanguinePraetor,
+    _poolSaprolingSymbiosis,
     _poolSarpadianSimulacrum,
     _poolSatyaAetherfluxGenius,
     _poolSavagePunch,
@@ -1697,6 +1700,7 @@ const shard: CardShard = {
     _poolWildernessReclamation,
     _poolWildfireEternal,
     _poolWildsize,
+    _poolWildvinePummeler,
     _poolWilheltTheRotcleaver,
     _poolWindcallerAven,
     _poolWitchBlessedMeadow,

@@ -403,6 +403,7 @@ import _poolLingeringMirage from "../pool/lingering-mirage.js";
 import _poolLittleBear from "../pool/little-bear.js";
 import _poolLoamDweller from "../pool/loam-dweller.js";
 import _poolLockAndLoad from "../pool/lock-and-load.js";
+import _poolLocketOfYesterdays from "../pool/locket-of-yesterdays.js";
 import _poolLordSkitterSewerKing from "../pool/lord-skitter-sewer-king.js";
 import _poolLoreholdCampus from "../pool/lorehold-campus.js";
 import _poolLoxodonWayfarer from "../pool/loxodon-wayfarer.js";
@@ -715,6 +716,7 @@ import _poolThallidShellDweller from "../pool/thallid-shell-dweller.js";
 import _poolThassasRebuff from "../pool/thassas-rebuff.js";
 import _poolTheHunterMaze from "../pool/the-hunter-maze.js";
 import _poolTheMeathookMassacre from "../pool/the-meathook-massacre.js";
+import _poolTheScarletWitch from "../pool/the-scarlet-witch.js";
 import _poolTheSpearOfLeonidas from "../pool/the-spear-of-leonidas.js";
 import _poolTheftOfDreams from "../pool/theft-of-dreams.js";
 import _poolThermopod from "../pool/thermopod.js";
@@ -1254,6 +1256,7 @@ const shard: CardShard = {
     _poolLittleBear,
     _poolLoamDweller,
     _poolLockAndLoad,
+    _poolLocketOfYesterdays,
     _poolLordSkitterSewerKing,
     _poolLoreholdCampus,
     _poolLoxodonWayfarer,
@@ -1566,6 +1569,7 @@ const shard: CardShard = {
     _poolThassasRebuff,
     _poolTheHunterMaze,
     _poolTheMeathookMassacre,
+    _poolTheScarletWitch,
     _poolTheSpearOfLeonidas,
     _poolTheftOfDreams,
     _poolThermopod,

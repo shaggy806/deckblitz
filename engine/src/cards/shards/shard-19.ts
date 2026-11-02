@@ -211,6 +211,7 @@ import _poolDevilthornFox from "../pool/devilthorn-fox.js";
 import _poolDeviousCoverUp from "../pool/devious-cover-up.js";
 import _poolDevouringRage from "../pool/devouring-rage.js";
 import _poolDimensionX from "../pool/dimension-x.js";
+import _poolDiregrafRebirth from "../pool/diregraf-rebirth.js";
 import _poolDisharmony from "../pool/disharmony.js";
 import _poolDismiss from "../pool/dismiss.js";
 import _poolDisruptivePitmage from "../pool/disruptive-pitmage.js";
@@ -571,6 +572,7 @@ import _poolOswaldFiddlebender from "../pool/oswald-fiddlebender.js";
 import _poolOutlawMedic from "../pool/outlaw-medic.js";
 import _poolOverlordOfTheMistmoors from "../pool/overlord-of-the-mistmoors.js";
 import _poolOverwhelmingDenial from "../pool/overwhelming-denial.js";
+import _poolOverwhelmingSplendor from "../pool/overwhelming-splendor.js";
 import _poolOwlbear from "../pool/owlbear.js";
 import _poolPackRat from "../pool/pack-rat.js";
 import _poolPactOfTheTitan from "../pool/pact-of-the-titan.js";
@@ -632,6 +634,7 @@ import _poolRecantation from "../pool/recantation.js";
 import _poolRecklessBrute from "../pool/reckless-brute.js";
 import _poolRedElementalBlast from "../pool/red-elemental-blast.js";
 import _poolReefShaman from "../pool/reef-shaman.js";
+import _poolReflectorMage from "../pool/reflector-mage.js";
 import _poolRelicCrush from "../pool/relic-crush.js";
 import _poolRendingVines from "../pool/rending-vines.js";
 import _poolRenegadeBull from "../pool/renegade-bull.js";
@@ -1122,6 +1125,7 @@ const shard: CardShard = {
     _poolDeviousCoverUp,
     _poolDevouringRage,
     _poolDimensionX,
+    _poolDiregrafRebirth,
     _poolDisharmony,
     _poolDismiss,
     _poolDisruptivePitmage,
@@ -1482,6 +1486,7 @@ const shard: CardShard = {
     _poolOutlawMedic,
     _poolOverlordOfTheMistmoors,
     _poolOverwhelmingDenial,
+    _poolOverwhelmingSplendor,
     _poolOwlbear,
     _poolPackRat,
     _poolPactOfTheTitan,
@@ -1543,6 +1548,7 @@ const shard: CardShard = {
     _poolRecklessBrute,
     _poolRedElementalBlast,
     _poolReefShaman,
+    _poolReflectorMage,
     _poolRelicCrush,
     _poolRendingVines,
     _poolRenegadeBull,

@@ -741,6 +741,7 @@ import _poolThopterSquadron from "../pool/thopter-squadron.js";
 import _poolThornwatchScarecrow from "../pool/thornwatch-scarecrow.js";
 import _poolThoughtweftGambit from "../pool/thoughtweft-gambit.js";
 import _poolThousandMoonsInfantry from "../pool/thousand-moons-infantry.js";
+import _poolThousandYearElixir from "../pool/thousand-year-elixir.js";
 import _poolThrillingDiscovery from "../pool/thrilling-discovery.js";
 import _poolThroatSlitter from "../pool/throat-slitter.js";
 import _poolThrummingHivepool from "../pool/thrumming-hivepool.js";
@@ -1592,6 +1593,7 @@ const shard: CardShard = {
     _poolThornwatchScarecrow,
     _poolThoughtweftGambit,
     _poolThousandMoonsInfantry,
+    _poolThousandYearElixir,
     _poolThrillingDiscovery,
     _poolThroatSlitter,
     _poolThrummingHivepool,

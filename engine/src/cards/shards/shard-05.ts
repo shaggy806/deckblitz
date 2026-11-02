@@ -204,6 +204,7 @@ import _poolDelugeOfTheDead from "../pool/deluge-of-the-dead.js";
 import _poolDemonsDisciple from "../pool/demons-disciple.js";
 import _poolDemonsGrasp from "../pool/demons-grasp.js";
 import _poolDesculptingBlast from "../pool/desculpting-blast.js";
+import _poolDetentionVortex from "../pool/detention-vortex.js";
 import _poolDevastation from "../pool/devastation.js";
 import _poolDeviantGlee from "../pool/deviant-glee.js";
 import _poolDiamondFaerie from "../pool/diamond-faerie.js";
@@ -1074,6 +1075,7 @@ const shard: CardShard = {
     _poolDemonsDisciple,
     _poolDemonsGrasp,
     _poolDesculptingBlast,
+    _poolDetentionVortex,
     _poolDevastation,
     _poolDeviantGlee,
     _poolDiamondFaerie,

@@ -230,6 +230,7 @@ import _poolEnterTheGodEternals from "../pool/enter-the-god-eternals.js";
 import _poolEntreatTheAngels from "../pool/entreat-the-angels.js";
 import _poolEntreatTheDead from "../pool/entreat-the-dead.js";
 import _poolEpharasWarden from "../pool/epharas-warden.js";
+import _poolErtaisScorn from "../pool/ertais-scorn.js";
 import _poolEtherealAbsolution from "../pool/ethereal-absolution.js";
 import _poolEtherealAmbush from "../pool/ethereal-ambush.js";
 import _poolEvergloveCourier from "../pool/everglove-courier.js";
@@ -1113,6 +1114,7 @@ const shard: CardShard = {
     _poolEntreatTheAngels,
     _poolEntreatTheDead,
     _poolEpharasWarden,
+    _poolErtaisScorn,
     _poolEtherealAbsolution,
     _poolEtherealAmbush,
     _poolEvergloveCourier,

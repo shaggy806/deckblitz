@@ -623,6 +623,7 @@ import _poolSigardianSavior from "../pool/sigardian-savior.js";
 import _poolSilverShroudCostume from "../pool/silver-shroud-costume.js";
 import _poolSilverbackElder from "../pool/silverback-elder.js";
 import _poolSilverchaseFox from "../pool/silverchase-fox.js";
+import _poolSingleCombat from "../pool/single-combat.js";
 import _poolSkarrganSkybreaker from "../pool/skarrgan-skybreaker.js";
 import _poolSkinshifter from "../pool/skinshifter.js";
 import _poolSkirkOutrider from "../pool/skirk-outrider.js";
@@ -719,6 +720,7 @@ import _poolTeysaOpulentOligarch from "../pool/teysa-opulent-oligarch.js";
 import _poolTeysaOrzhovScion from "../pool/teysa-orzhov-scion.js";
 import _poolThalakosDrifters from "../pool/thalakos-drifters.js";
 import _poolThantisTheWarweaver from "../pool/thantis-the-warweaver.js";
+import _poolTheBalrogDurinsBane from "../pool/the-balrog-durins-bane.js";
 import _poolTheFlux from "../pool/the-flux.js";
 import _poolTheKeyToTheVault from "../pool/the-key-to-the-vault.js";
 import _poolTheLionTurtle from "../pool/the-lion-turtle.js";
@@ -1480,6 +1482,7 @@ const shard: CardShard = {
     _poolSilverShroudCostume,
     _poolSilverbackElder,
     _poolSilverchaseFox,
+    _poolSingleCombat,
     _poolSkarrganSkybreaker,
     _poolSkinshifter,
     _poolSkirkOutrider,
@@ -1576,6 +1579,7 @@ const shard: CardShard = {
     _poolTeysaOrzhovScion,
     _poolThalakosDrifters,
     _poolThantisTheWarweaver,
+    _poolTheBalrogDurinsBane,
     _poolTheFlux,
     _poolTheKeyToTheVault,
     _poolTheLionTurtle,

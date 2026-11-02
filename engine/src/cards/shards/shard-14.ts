@@ -96,6 +96,7 @@ import _poolBreakAsunder from "../pool/break-asunder.js";
 import _poolBriarpackAlpha from "../pool/briarpack-alpha.js";
 import _poolBrokenDam from "../pool/broken-dam.js";
 import _poolBroodingSaurian from "../pool/brooding-saurian.js";
+import _poolBrushOff from "../pool/brush-off.js";
 import _poolBrushland from "../pool/brushland.js";
 import _poolBubbleSnare from "../pool/bubble-snare.js";
 import _poolBurdenedStoneback from "../pool/burdened-stoneback.js";
@@ -342,6 +343,7 @@ import _poolGrandAbolisher from "../pool/grand-abolisher.js";
 import _poolGrandmotherRaviSengir from "../pool/grandmother-ravi-sengir.js";
 import _poolGraniteWitness from "../pool/granite-witness.js";
 import _poolGrappleWithDeath from "../pool/grapple-with-death.js";
+import _poolGravebreakerLamia from "../pool/gravebreaker-lamia.js";
 import _poolGravecrawler from "../pool/gravecrawler.js";
 import _poolGraveyardTrespasser from "../pool/graveyard-trespasser.js";
 import _poolGreatTeachersDecree from "../pool/great-teachers-decree.js";
@@ -970,6 +972,7 @@ const shard: CardShard = {
     _poolBriarpackAlpha,
     _poolBrokenDam,
     _poolBroodingSaurian,
+    _poolBrushOff,
     _poolBrushland,
     _poolBubbleSnare,
     _poolBurdenedStoneback,
@@ -1216,6 +1219,7 @@ const shard: CardShard = {
     _poolGrandmotherRaviSengir,
     _poolGraniteWitness,
     _poolGrappleWithDeath,
+    _poolGravebreakerLamia,
     _poolGravecrawler,
     _poolGraveyardTrespasser,
     _poolGreatTeachersDecree,

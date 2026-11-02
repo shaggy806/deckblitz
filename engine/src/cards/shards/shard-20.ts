@@ -259,6 +259,7 @@ import _poolEternitySnare from "../pool/eternity-snare.js";
 import _poolEtherealArmor from "../pool/ethereal-armor.js";
 import _poolExcavationExplosion from "../pool/excavation-explosion.js";
 import _poolExplosiveProdigy from "../pool/explosive-prodigy.js";
+import _poolExquisiteFirecraft from "../pool/exquisite-firecraft.js";
 import _poolEyeOfSingularity from "../pool/eye-of-singularity.js";
 import _poolEyeblightCullers from "../pool/eyeblight-cullers.js";
 import _poolFactOrFiction from "../pool/fact-or-fiction.js";
@@ -297,6 +298,7 @@ import _poolFungalRebirth from "../pool/fungal-rebirth.js";
 import _poolFurnaceSpirit from "../pool/furnace-spirit.js";
 import _poolGaeasEmbrace from "../pool/gaeas-embrace.js";
 import _poolGaladrielGiftGiver from "../pool/galadriel-gift-giver.js";
+import _poolGargantuanLeech from "../pool/gargantuan-leech.js";
 import _poolGarrisonCat from "../pool/garrison-cat.js";
 import _poolGatstafHowler from "../pool/gatstaf-howler.js";
 import _poolGavonyDawnguard from "../pool/gavony-dawnguard.js";
@@ -458,6 +460,7 @@ import _poolLongLakeNuisance from "../pool/long-lake-nuisance.js";
 import _poolLordOfShatterskullPass from "../pool/lord-of-shatterskull-pass.js";
 import _poolLostLeonin from "../pool/lost-leonin.js";
 import _poolLuckyClover from "../pool/lucky-clover.js";
+import _poolLumberingMegasloth from "../pool/lumbering-megasloth.js";
 import _poolLushOasis from "../pool/lush-oasis.js";
 import _poolMaceOfTheValiant from "../pool/mace-of-the-valiant.js";
 import _poolMaelstromPulse from "../pool/maelstrom-pulse.js";
@@ -491,6 +494,7 @@ import _poolMoltensteelDragon from "../pool/moltensteel-dragon.js";
 import _poolMoltingSkin from "../pool/molting-skin.js";
 import _poolMomentOfCraving from "../pool/moment-of-craving.js";
 import _poolMonasteryMentor from "../pool/monastery-mentor.js";
+import _poolMonasterySiege from "../pool/monastery-siege.js";
 import _poolMonomania from "../pool/monomania.js";
 import _poolMooglesValor from "../pool/moogles-valor.js";
 import _poolMorningApparition from "../pool/morning-apparition.js";
@@ -1190,6 +1194,7 @@ const shard: CardShard = {
     _poolEtherealArmor,
     _poolExcavationExplosion,
     _poolExplosiveProdigy,
+    _poolExquisiteFirecraft,
     _poolEyeOfSingularity,
     _poolEyeblightCullers,
     _poolFactOrFiction,
@@ -1228,6 +1233,7 @@ const shard: CardShard = {
     _poolFurnaceSpirit,
     _poolGaeasEmbrace,
     _poolGaladrielGiftGiver,
+    _poolGargantuanLeech,
     _poolGarrisonCat,
     _poolGatstafHowler,
     _poolGavonyDawnguard,
@@ -1389,6 +1395,7 @@ const shard: CardShard = {
     _poolLordOfShatterskullPass,
     _poolLostLeonin,
     _poolLuckyClover,
+    _poolLumberingMegasloth,
     _poolLushOasis,
     _poolMaceOfTheValiant,
     _poolMaelstromPulse,
@@ -1422,6 +1429,7 @@ const shard: CardShard = {
     _poolMoltingSkin,
     _poolMomentOfCraving,
     _poolMonasteryMentor,
+    _poolMonasterySiege,
     _poolMonomania,
     _poolMooglesValor,
     _poolMorningApparition,

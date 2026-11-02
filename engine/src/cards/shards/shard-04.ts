@@ -342,6 +342,7 @@ import _poolHurricane from "../pool/hurricane.js";
 import _poolHydraInfiltration from "../pool/hydra-infiltration.js";
 import _poolHymnToTourach from "../pool/hymn-to-tourach.js";
 import _poolIceOut from "../pool/ice-out.js";
+import _poolIcefallRegent from "../pool/icefall-regent.js";
 import _poolIllusionistsStratagem from "../pool/illusionists-stratagem.js";
 import _poolImpatience from "../pool/impatience.js";
 import _poolImpelledGiant from "../pool/impelled-giant.js";
@@ -1206,6 +1207,7 @@ const shard: CardShard = {
     _poolHydraInfiltration,
     _poolHymnToTourach,
     _poolIceOut,
+    _poolIcefallRegent,
     _poolIllusionistsStratagem,
     _poolImpatience,
     _poolImpelledGiant,
