@@ -615,8 +615,11 @@ let engineTests = await run(
 // suite. A random-games test that takes 17 s alone passed its 30 s under the
 // full suite's load on a 4-core session, and B219 (2026-10-27) re-ran the
 // whole `--only` check, ~15 minutes, for it. A timeout that recurs alone is
-// a real failure.
+// a real failure. So is a worker that died: the file it held never finished
+// and lists no FAIL, so re-running the timeouts would pass without it (2026-11-01,
+// oracle-parse's 456 tests, under three agents' load).
 const timedOutFiles = (out) => {
+  if (/Worker exited unexpectedly/.test(out)) return null;
   const failed = Number(/^\s*Tests\s+(\d+) failed/m.exec(out)?.[1] ?? 0);
   const timeouts = (out.match(/Test timed out in \d+ms/g) ?? []).length;
   const files = [...new Set([...out.matchAll(/FAIL\s+(\S+\.test\.tsx?)/g)].map((m) => m[1]))];
