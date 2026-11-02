@@ -2901,7 +2901,7 @@ export class Game {
     // counters). Either face of a modal double-faced card, as from the hand.
     const exileStatics = this.hasPlayFromExileStatic(player);
     for (const card of this.state.zones.shared.exile) {
-      if (!this.impulsePlayable(player, card) && !exileStatics) continue;
+      if (!this.impulsePlayable(player, card) && !exileStatics && this.linkedCastGrantFor(player, card) === null) continue;
       for (const face of this.modalFaces(card)) {
         if (!this.mayPlayFromExile(player, card, face ?? 0)) continue;
         const def = this.faceDef(card, face ?? 0);
@@ -2921,6 +2921,31 @@ export class Game {
             costString: def.manaCost,
           }),
         );
+      }
+    }
+
+    // "You may play lands and cast spells from that player's hand this turn"
+    // (Sen Triplets — rule 601.3): each hand it opens, by the ordinary rules
+    // for timing, costs and the land drop.
+    for (const of of this.handsOpenTo(player)) {
+      for (const card of this.state.zones.perPlayer[of].hand) {
+        for (const face of this.modalFaces(card)) {
+          const def = this.faceDef(card, face ?? 0);
+          const faceProp = face !== undefined ? { face } : {};
+          if (def.types.includes("land")) {
+            if (this.whyCannotPlayLand(player, card, face ?? 0) === null) {
+              out.push({ kind: "play-land", card, cardName: def.name, ...faceProp });
+            }
+            continue;
+          }
+          out.push(
+            ...this.castSpellActions(player, card, def.name, def, {
+              via: "other-hand",
+              ...faceProp,
+              costString: def.manaCost,
+            }),
+          );
+        }
       }
     }
 
@@ -3816,7 +3841,7 @@ export class Game {
     };
     const kickFailed = new Set<string>();
     // An impulse permission only to cast it free (Narset): no paid variant.
-    const impulseFree = via === "impulse" ? this.impulseFreeCast(card) : null;
+    const impulseFree = via === "impulse" ? this.impulseFreeCast(card, player, face ?? 0) : null;
     if (impulseFree === "only") variants.length = 0;
     if (def.kicker !== null && impulseFree !== "only") {
       variants.push(...kickedVariants(false));
@@ -11488,7 +11513,62 @@ export class Game {
       const land = this.faceDef(cardId, face).types.includes("land");
       if (!land || object.impulse?.castOnly !== true) return true;
     }
+    if (this.linkedCastGrantFor(player, cardId, face) !== null && !this.faceDef(cardId, face).types.includes("land")) return true;
     return this.exilePermissionsFor(player, cardId, face).length > 0;
+  }
+
+  /**
+   * The resolved permission to cast `cardId` from among the cards exiled with
+   * a permanent (`GameObject.linkedCastGrants` — Idol of Endurance), for
+   * `player` this turn: which permanent's and which of them. With `face`, it
+   * must also take the spell the card would be as that face. Rule 607.2a: only
+   * the stint that exiled it; it goes on after that permanent has left (rule
+   * 113.7a), for a card left in exile.
+   */
+  private linkedCastGrantFor(
+    player: PlayerId,
+    cardId: ObjectId,
+    face?: number,
+  ): { readonly source: ObjectId; readonly grant: NonNullable<GameObject["linkedCastGrants"]>[number] } | null {
+    const card = this.state.objects[cardId];
+    if (card === undefined || card.zone !== "exile" || card.exiledFaceDown !== undefined) return null;
+    for (const link of [card.exiledWith, card.exiledUntil]) {
+      if (link === undefined) continue;
+      const grants = this.state.objects[link.source]?.linkedCastGrants;
+      if (grants === undefined) continue;
+      for (const grant of grants) {
+        if (grant.player !== player || grant.turn !== this.state.turn.number || grant.stint !== link.zoneChangeCount) continue;
+        if (
+          face !== undefined &&
+          grant.spell !== undefined &&
+          !this.withFace(cardId, face, () => matchesFilter(this.state, this.registry, cardId, grant.spell!, { you: player }))
+        ) {
+          continue;
+        }
+        return { source: link.source, grant };
+      }
+    }
+    return null;
+  }
+
+  /** The players whose hands `player` may play from right now (Sen Triplets —
+   * `PlayerEffect.playFromHandsOf`). One who has left the game has no hand. */
+  private handsOpenTo(player: PlayerId): readonly PlayerId[] {
+    const effects = this.state.playerEffects;
+    if (effects === undefined || effects.length === 0) return [];
+    const out = new Set<PlayerId>();
+    for (const effect of effects) {
+      if (effect.owner !== player || effect.playFromHandsOf === undefined) continue;
+      for (const of of effect.playFromHandsOf) {
+        if (of !== player && this.state.players[of]?.hasLost === false) out.add(of);
+      }
+    }
+    return [...out];
+  }
+
+  /** Whether `cardId` is in a hand opened to `player` (see {@link handsOpenTo}). */
+  private inHandOpenTo(player: PlayerId, cardId: ObjectId): boolean {
+    return this.handsOpenTo(player).some((of) => this.state.zones.perPlayer[of].hand.includes(cardId));
   }
 
   /** Whether an active static of `player`'s whose `filter` this picks out
@@ -11573,7 +11653,9 @@ export class Game {
       // "Impulse draw" that says *play* rather than *cast* includes lands
       // (Tectonic Giant, Theater of Horrors), as does a `playFromExile`
       // static that plays lands (Grolnok, the Omnivore).
-      this.mayPlayFromExile(player, cardId, face);
+      this.mayPlayFromExile(player, cardId, face) ||
+      // Another player's hand, opened for the turn (Sen Triplets).
+      this.inHandOpenTo(player, cardId);
     if (!playable) {
       return `${player} cannot play that card as a land`;
     }
@@ -14475,7 +14557,7 @@ export class Game {
       free &&
       (def.freeCastIf !== null ||
         (via === undefined && this.freeFromHand(cardId)) ||
-        (via === "impulse" && this.impulseFreeCast(cardId) !== null) ||
+        (via === "impulse" && this.impulseFreeCast(cardId, caster ?? this.state.objects[cardId]?.owner, face) !== null) ||
         via === "plot" ||
         (via === "effect" &&
           this.castNowOffer(caster ?? this.state.objects[cardId]?.owner, cardId)?.free === true));
@@ -15031,9 +15113,15 @@ export class Game {
     } else if (via === "impulse") {
       // "Impulse draw" — exiled face-up with permission to play it, for its
       // ordinary cost — or a `playFromExile` static's permission (Grolnok).
-      if (!this.impulsePlayable(player, cardId) && this.exilePermissionsFor(player, cardId, face).length === 0) {
+      if (
+        !this.impulsePlayable(player, cardId) &&
+        this.exilePermissionsFor(player, cardId, face).length === 0 &&
+        this.linkedCastGrantFor(player, cardId, face) === null
+      ) {
         return `${def.name} is not playable from exile by ${player}`;
       }
+    } else if (via === "other-hand") {
+      if (!this.inHandOpenTo(player, cardId)) return `${player} may not cast ${def.name} from that hand`;
     } else if (via === "library-top") {
       // The top card of the caster's library, under a `castFromLibraryTop`
       // static that takes the spell it would be — at the X announced
@@ -15330,7 +15418,7 @@ export class Game {
       }
     }
     if (overload && def.overload === null) return `${def.name} has no overload cost`;
-    const impulseFree = via === "impulse" ? this.impulseFreeCast(cardId) : null;
+    const impulseFree = via === "impulse" ? this.impulseFreeCast(cardId, player, face) : null;
     if (impulseFree === "only" && !free) {
       return `${def.name} may be cast from exile only without paying its mana cost`;
     }
@@ -17327,6 +17415,18 @@ export class Game {
     // one a player casts it under, since it costs nothing to use.
     const impulseUsed =
       via === "impulse" && this.exilePermissionsFor(player, cardId, face).length === 0 ? object.impulse : undefined;
+    // "A creature spell from among cards exiled with this artifact" (Idol of
+    // Endurance): this cast is the one that permission allowed.
+    const linkedGrantUsed =
+      via === "impulse" && !this.impulsePlayable(player, cardId) && this.exilePermissionsFor(player, cardId, face).length === 0
+        ? this.linkedCastGrantFor(player, cardId, face)
+        : null;
+    if (linkedGrantUsed !== null) {
+      const holder = this.state.objects[linkedGrantUsed.source];
+      const left = [...(holder.linkedCastGrants ?? [])];
+      left.splice(left.indexOf(linkedGrantUsed.grant), 1);
+      holder.linkedCastGrants = left;
+    }
     // Cast from the top of the library: whether the permission gives the
     // spell haste (Thundermane Dragon) — read while it's still on top.
     const hasteFromTop =
@@ -29781,8 +29881,11 @@ export class Game {
           attacking,
           attachTo,
         ),
-      exileGraveyard: (target, filter, linked, fromHand) => {
+      exileGraveyard: (target, filter, linked, fromHand, untilSourceLeaves) => {
         if (target.kind !== "player") return;
+        // Rule 610.3b: exiled "until" something that has already happened —
+        // its source gone, or back as a new object (400.7) — it isn't exiled.
+        if (untilSourceLeaves === true && !sourceStillOn()) return;
         // Snapshot: `moveObject` mutates the graveyard array as it goes. The
         // whole graveyard goes at once — or every card in it matching
         // `filter` (Living Death's creature cards) — with the hand's, if the
@@ -29802,6 +29905,12 @@ export class Game {
             if (moved && object?.zone === "exile" && object.isToken !== true) exiled.push(id);
           }
         });
+        if (untilSourceLeaves === true) {
+          const stint = this.state.objects[source]?.zoneChangeCount ?? 0;
+          for (const id of exiled) {
+            this.state.objects[id].exiledUntil = { source, zoneChangeCount: stint, returnTo: "graveyard" };
+          }
+        }
         // "Exile … with this" (rule 607.2a): linked to the stint the
         // resolving ability refers to, and counted by it for good.
         if (linked === true) {
@@ -31372,6 +31481,19 @@ export class Game {
         });
       },
       cardsIn: (player, zone) => [...(this.state.zones.perPlayer[player]?.[zone] ?? [])],
+      castableWhileSearching: (player) =>
+        (this.state.zones.perPlayer[player]?.library ?? []).filter(
+          (id) => this.registry.get(this.state.objects[id].cardName).castWhileSearchingLibrary === true,
+        ),
+      allowCastLinkedExile: (spell, free) => {
+        const holder = this.state.objects[source];
+        const stint = refs.source ?? (holder?.zone === "battlefield" ? (holder.zoneChangeCount ?? 0) : undefined);
+        if (holder === undefined || stint === undefined) return;
+        holder.linkedCastGrants = [
+          ...(holder.linkedCastGrants ?? []).filter((g) => g.turn === this.state.turn.number),
+          { player: controller, turn: this.state.turn.number, stint, free, ...(spell !== undefined ? { spell } : {}) },
+        ];
+      },
       putExiledIntoGraveyard: (card) => this.putExiledIntoGraveyard(card),
       stillExiled: (card, zoneChangeCount) => {
         const object = this.state.objects[card];
@@ -34302,8 +34424,12 @@ export class Game {
   /** Whether `cardId`'s impulse permission lets it be cast without paying
    * its mana cost (`GameObject.impulse.free`): `"may"`, `"only"` (paying
    * isn't allowed — Narset), or `null`. */
-  private impulseFreeCast(cardId: ObjectId): "may" | "only" | null {
+  private impulseFreeCast(cardId: ObjectId, player?: PlayerId, face?: number): "may" | "only" | null {
     const impulse = this.state.objects[cardId]?.impulse;
+    // Idol of Endurance's: "only" as the card has no other way to be cast.
+    if (impulse === undefined && player !== undefined && this.linkedCastGrantFor(player, cardId, face)?.grant.free === true) {
+      return "only";
+    }
     if (impulse?.free === undefined) return null;
     const { filter, only } = impulse.free;
     if (filter !== undefined && !matchesFilter(this.state, this.registry, cardId, filter, { you: impulse.player })) {
@@ -34324,7 +34450,8 @@ export class Game {
       object.owner === player &&
       object.exiledFaceDown === undefined &&
       object.faceDown === undefined &&
-      this.registry.get(rulesTextName(object)).castSelfFromGraveyard?.fromExile === true
+      (this.registry.get(rulesTextName(object)).castSelfFromGraveyard?.fromExile === true ||
+        this.registry.get(rulesTextName(object)).castSelfFromExile === true)
     ) {
       return true;
     }
@@ -39659,10 +39786,12 @@ export class Game {
       return left.some((l) => l.source === until.source && l.zoneChangeCount === until.zoneChangeCount);
     });
     // Rule 610.3: "returns the object to its previous zone" — what came from
-    // a hand goes back to its owner's (Kitesail Freebooter).
+    // a hand goes back to its owner's (Kitesail Freebooter), and what came
+    // from a graveyard to its owner's (Idol of Endurance).
     const toBattlefield = returning.filter((id) => {
-      if (this.state.objects[id].exiledUntil?.returnTo !== "hand") return true;
-      this.moveObject(id, "hand");
+      const returnTo = this.state.objects[id].exiledUntil?.returnTo;
+      if (returnTo === undefined) return true;
+      this.moveObject(id, returnTo);
       return false;
     });
     if (toBattlefield.length > 0) this.returnExiledCards(toBattlefield);
@@ -40953,13 +41082,15 @@ export class Game {
     // Graveyard as well as battlefield: "Exile target card from a graveyard"
     // (Withered Wretch, Scavenging Ooze) targets a card, not a permanent. A
     // library card is one a `reveal-until` has just revealed there (Creative
-    // Technique's "exile that card"). Anything already in exile is left alone.
+    // Technique's "exile that card"), a hand card one just revealed from it
+    // (Planeswalker's Mischief's "exile it"). Anything already in exile is
+    // left alone.
     if (object === undefined) return;
     if (object.zone === "stack") {
       this.exileSpell(id);
       return;
     }
-    if (object.zone !== "battlefield" && object.zone !== "graveyard" && object.zone !== "library") return;
+    if (object.zone !== "battlefield" && object.zone !== "graveyard" && object.zone !== "library" && object.zone !== "hand") return;
     const wasPermanent = object.zone === "battlefield";
     if (!this.moveObject(id, "exile")) return;
     // After the move: `moveObject` clears zone-scoped state on the way out,
@@ -42495,7 +42626,7 @@ export class Game {
     via: CastVia | undefined,
     player: PlayerId | undefined,
   ): readonly string[] {
-    if (via !== undefined && via !== "impulse" && via !== "graveyard-permission" && via !== "adventure" && via !== "prepared") return [];
+    if (via !== undefined && via !== "impulse" && via !== "graveyard-permission" && via !== "adventure" && via !== "prepared" && via !== "other-hand") return [];
     // An evoke that exiles a card from the hand (Solitude) only with another
     // such card there to exile (rule 601.2h).
     const printedPayable = def.evoke !== null && (def.evoke.exileFromHand === undefined ||
@@ -42664,7 +42795,7 @@ export class Game {
     // Flashback, escape, foretell, disturb, a suspend or cascade cast are
     // alternative costs (or no cost) already: only one applies (118.9a).
     if (via !== undefined && via !== "impulse" && via !== "graveyard-permission" && via !== "adventure" &&
-      via !== "prepared" && via !== "library-top" && via !== "effect") {
+      via !== "prepared" && via !== "library-top" && via !== "effect" && via !== "other-hand") {
       return out;
     }
     // "You may cast it" as something resolves (Chandra, Torch of Defiance) is

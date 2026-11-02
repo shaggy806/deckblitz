@@ -9353,6 +9353,67 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     board({
       you: { bf: ['Powerful Broker'] },
       opp: { poison: 3 },
+    'Sen Triplets: cast a spell from the opponent\'s revealed hand',
+    board({
+      you: { bf: ['Sen Triplets', 'Island*3'], lib: ['Island*4'] },
+      opp: { hand: ['Divination', 'Forest'] },
+      turn: 0,
+      step: 'end',
+    }),
+  ),
+  preset(
+    'Sen Triplets: at four players only the chosen opponent\'s hand opens',
+    board({
+      you: { bf: ['Sen Triplets', 'Island*3'], lib: ['Island*4'] },
+      opp: [{ hand: ['Divination'] }, { hand: ['Divination', 'Forest'] }, {}],
+      turn: 2,
+      step: 'end',
+    }),
+  ),
+  preset(
+    'Silent-Blade Oni: look at the hand and cast a spell from it free',
+    board({
+      you: { bf: ['Silent-Blade Oni'], lib: ['Island*4'] },
+      opp: { hand: ['Divination', 'Island'] },
+    }),
+  ),
+  preset(
+    'Silent-Blade Oni: a hand with nothing to cast is still looked at',
+    board({
+      you: { bf: ['Silent-Blade Oni'] },
+      opp: { hand: ['Island*2'] },
+    }),
+  ),
+  preset(
+    'Zara: a creature from the hand joins the attack',
+    board({
+      you: { bf: ['Zara, Renegade Recruiter'] },
+      opp: { hand: ['Grizzly Bears', 'Island'] },
+    }),
+  ),
+  preset(
+    'Panglacial Wurm: cast it while searching',
+    board({
+      you: { bf: ['Forest*9'], hand: ['Rampant Growth'], lib: ['Panglacial Wurm', 'Forest'] },
+    }),
+  ),
+  preset(
+    'Idol of Endurance: one free creature from the exiled cards',
+    board({
+      you: { bf: ['Plains*5'], hand: ['Idol of Endurance'], gy: ['Grizzly Bears', 'Llanowar Elves'] },
+    }),
+  ),
+  preset(
+    'Planeswalker\'s Mischief: the exiled spell goes home at the end step',
+    board({
+      you: { bf: ['Planeswalker\'s Mischief', 'Island*4'] },
+      opp: { hand: ['Divination'] },
+    }),
+  ),
+  preset(
+    'Misthollow Griffin: cast it from exile',
+    board({
+      you: { bf: ['Island*4'], exile: ['Misthollow Griffin'] },
     }),
   ),
 ]

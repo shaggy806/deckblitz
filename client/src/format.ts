@@ -292,7 +292,7 @@ export function describeEvent(event: GameEvent, nameOf: NameOf, seats: readonly 
       return `${who(event.player)} plays ${name(event.object)}${fromZone(event.from)}`
     case 'spell-cast':
       return `${who(event.player)} casts ${name(event.object)}${fromZone(event.from)}${
-        event.via ? ` (${event.via})` : ''
+        event.via === 'other-hand' ? " from another player's hand" : event.via ? ` (${event.via})` : ''
       }${event.x != null ? ` (X=${event.x})` : ''}${
         event.targets.length ? ` at ${event.targets.map(tgt).join(', ')}` : ''
       }`
@@ -382,6 +382,8 @@ export function describeEvent(event: GameEvent, nameOf: NameOf, seats: readonly 
       return `${name(event.object)} becomes the target of ${name(event.source)} (${event.by})`
     case 'ability-triggered':
       return `${name(event.source)}'s trigger goes on the stack (${who(event.controller)})`
+    case 'delayed-trigger-created':
+      return `${name(event.source)} sets up a later trigger: ${event.text}`
     case 'trigger-removed':
       return `${name(event.source)}'s trigger removed — ${event.reason}`
     case 'pt-modified':

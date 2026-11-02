@@ -3418,6 +3418,12 @@ export type EffectSpec =
        * cards from it" (Hour of Glory). A hand holds no public cards, so a
        * `reveal-hand` goes before it. Every match goes: no search, no choice. */
       readonly fromHand?: "also" | "only";
+      /** "…**until this artifact leaves the battlefield**" (Idol of Endurance
+       * — rule 610.3): nothing is exiled if the source has already left
+       * (610.3b); when it leaves, each card goes back to its owner's graveyard,
+       * its previous zone, at once. A later ability of the source reaches them
+       * as its "cards exiled with" it, as `exile`'s `untilSourceLeaves` does. */
+      readonly untilSourceLeaves?: true;
     }
   | {
       /** Each player in `who` sacrifices every permanent matching `filter`
@@ -3958,12 +3964,26 @@ export type EffectSpec =
         /** Ashiok, Nightmare Muse's "from among **face-up cards your
          * opponents own from exile**": every such card as this applies. */
         | "face-up-exile-opponents-own"
+        /** The engine's own, before a search of the caster's library goes on
+         * (`castWhileSearchingLibrary` — Panglacial Wurm): the cards that may
+         * be cast from there, the library looked at. Not for card
+         * definitions; `search-library` asks it. */
+        | "while-searching"
         | {
             readonly libraryTop: EffectAmount;
             /** "**Reveal** the top X cards" (Sunbird's Invocation): every
              * player sees them (rule 701.16), not only their owner. */
             readonly reveal?: true;
-          };
+          }
+        /** Another player's hand, a hidden zone the caster gets to see whole:
+         * "look at that player's hand. You may cast a spell from among those
+         * cards without paying its mana cost" (Silent-Blade Oni). The caster
+         * controls the spell and its owner still owns it (rule 108.3). A land
+         * card is never offered, by `play` alone. `look`: the looking is part
+         * of the instruction, so with nothing to cast the hand is still shown
+         * and closed; without it the looking came earlier, in a `reveal-hand`
+         * (Mindclaw Shaman). */
+        | { readonly handOf: EffectPlayerRef; readonly look?: true };
       /**
        * "You may play lands and cast spells **from among** cards exiled this
        * way" — any number of them, one after another while this resolves
@@ -4141,6 +4161,21 @@ export type EffectSpec =
       /** "That spell has **undaunted**" (rule 702.125 — Durnan): cast this
        * way, it costs {1} less for each of its caster's opponents. */
       readonly undaunted?: true;
+    }
+  | {
+      /**
+       * "Until end of turn, you may cast **a** creature spell **from among
+       * cards exiled with this artifact** without paying its mana cost" (Idol
+       * of Endurance, rule 607.2a): one spell for each time this resolves,
+       * by the effect's controller, keeping its timing and any additional
+       * costs. Read over the linked cards as they are when it's cast, so one
+       * exiled later this turn counts. `spell` is the spell it may be, judged
+       * as the face being cast (an adventure's instant half isn't a creature
+       * spell). `free` permits only the free cast.
+       */
+      readonly kind: "allow-cast-linked-exile";
+      readonly spell?: CardFilter;
+      readonly free?: true;
     }
   | {
       /**
@@ -5263,6 +5298,15 @@ export type EffectSpec =
         readonly spendAs?: SpendAs;
         readonly exileAfterwards?: true;
       };
+      /** "You may play lands and cast spells **from that player's hand** this
+       * turn" (Sen Triplets — rule 601.3): the player in this target slot,
+       * for the effect's controller, by the ordinary rules for timing, costs
+       * and the land drop (rule 305). The caster controls what they cast, its
+       * owner still owns it (rule 108.3). A `via: "other-hand"` cast. */
+      readonly playFromHandOf?: number;
+      /** "…and plays with their hand revealed" (Sen Triplets): the player in
+       * this target slot, to every player, while this lasts. */
+      readonly handRevealed?: number;
       readonly damageTo?: {
         readonly who: PlayerScope;
         readonly multiplier: number;
@@ -8415,6 +8459,10 @@ export type EffectSpec =
        * search clamps `min` to what's there. A "you may search" is a `may`
        * around the search, so declining doesn't search or shuffle at all. */
       readonly kind: "search-library";
+      /** The engine's own: the cards this search lets its player cast
+       * (`castWhileSearchingLibrary`) have been offered. Not for card
+       * definitions. */
+      readonly castsWhileSearchingAsked?: true;
       readonly filter: CardFilter;
       /** `"library-top"` is the tutor-to-top family (Vampiric Tutor, Mystical
        * Tutor): the find never leaves the library, it is just moved to the top
@@ -9733,7 +9781,12 @@ export interface EffectApi {
    * effect's `from`. */
   faceUpExileOpponentsOwn(): readonly ObjectId[];
   /** The cards in `player`'s hand or graveyard. */
-  cardsIn(player: PlayerId, zone: "hand" | "graveyard"): readonly ObjectId[];
+  cardsIn(player: PlayerId, zone: "hand" | "graveyard" | "library"): readonly ObjectId[];
+  /** The cards in `player`'s library they may cast while searching it
+   * (`CardDefinition.castWhileSearchingLibrary`). */
+  castableWhileSearching(player: PlayerId): readonly ObjectId[];
+  /** See the `"allow-cast-linked-exile"` {@link EffectSpec}. */
+  allowCastLinkedExile(spell: CardFilter | undefined, free: boolean): void;
   /** The cards this resolution has exiled so far from a library, a hand or
    * a graveyard, still in exile — a `cast-now`'s `"exiled-this-way"`. */
   cardsExiledThisWay(): readonly ObjectId[];
@@ -9813,7 +9866,7 @@ export interface EffectApi {
   ): void;
   /** Exile every card in `target`'s graveyard (a player — Bojuka Bog), as
    * one move. */
-  exileGraveyard(target: TargetRef, filter?: CardFilter, linked?: boolean, fromHand?: "also" | "only"): void;
+  exileGraveyard(target: TargetRef, filter?: CardFilter, linked?: boolean, fromHand?: "also" | "only", untilSourceLeaves?: boolean): void;
   /** Each of `players` sacrifices every permanent matching `filter` they
    * control, at once — see the `"sacrifice-all"` {@link EffectSpec}. */
   sacrificeAll(players: readonly PlayerId[], filter: CardFilter): void;
@@ -12125,12 +12178,23 @@ function applyCastNowSpec(spec: Extract<EffectSpec, { kind: "cast-now" }>, ctx: 
   let progress = spec.progress;
   if (progress === undefined) {
     const from = spec.from;
+    const handOwner =
+      typeof from === "object" && "handOf" in from ? effectPlayer(from.handOf, ctx) : undefined;
+    const searcher = from === "while-searching" ? (spec.by === undefined ? ctx.controller : effectPlayer(spec.by, ctx)) : undefined;
     const looked =
-      typeof from === "object"
+      typeof from === "object" && "libraryTop" in from
         ? ctx.libraryTop(ctx.controller, Math.max(0, Math.floor(amountValue(from.libraryTop, ctx))), from.reveal === true)
-        : [];
+        : handOwner !== undefined
+          ? ctx.cardsIn(handOwner, "hand")
+          : searcher !== undefined
+            ? ctx.cardsIn(searcher, "library")
+            : [];
     let cards: readonly ObjectId[];
-    if (spec.encoded !== undefined) {
+    if (typeof from === "object" && "handOf" in from) {
+      cards = looked;
+    } else if (from === "while-searching") {
+      cards = searcher === undefined ? [] : ctx.castableWhileSearching(searcher);
+    } else if (spec.encoded !== undefined) {
       cards = ctx.stillExiled(spec.encoded.card, spec.encoded.zoneChangeCount);
     } else if (from === undefined) {
       const target = spec.target === undefined ? undefined : resolveEffectTarget(spec.target, ctx);
@@ -12170,6 +12234,11 @@ function applyCastNowSpec(spec: Extract<EffectSpec, { kind: "cast-now" }>, ctx: 
       ...(spec.totalManaValue !== undefined ? { manaValueLeft: Math.floor(amountValue(spec.totalManaValue, ctx)) } : {}),
     };
     if (offerCastNow(spec, progress, ctx)) return;
+    // "Look at that player's hand": still looked at with nothing to cast.
+    if (typeof from === "object" && "handOf" in from && from.look === true && handOwner !== undefined) {
+      ctx.discardChosen({ kind: "player", player: handOwner }, undefined, true, true, 0);
+      return;
+    }
     if (spec.repeat === true) {
       placeCastNowRest(spec, progress, ctx);
       return;
@@ -14368,7 +14437,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       } else {
         target = ctx.targets[spec.target];
       }
-      if (target !== undefined) ctx.exileGraveyard(target, spec.filter, spec.linked === true, spec.fromHand);
+      if (target !== undefined) ctx.exileGraveyard(target, spec.filter, spec.linked === true, spec.fromHand, spec.untilSourceLeaves === true);
       return;
     }
     case "sacrifice-all":
@@ -14672,6 +14741,9 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     case "choose-exiled-to-play":
       ctx.chooseExiledToPlay(spec.filter, spec.free === true, spec.linked === true ? ctx.cardsExiledWithSource(true) : undefined);
+      return;
+    case "allow-cast-linked-exile":
+      ctx.allowCastLinkedExile(spec.spell, spec.free === true);
       return;
     case "allow-cast-from-exile": {
       const target = resolveEffectTarget(spec.target, ctx);
@@ -15465,6 +15537,12 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
                 },
               };
             })()
+          : {}),
+        ...(spec.playFromHandOf !== undefined && ctx.targets[spec.playFromHandOf]?.kind === "player"
+          ? { playFromHandsOf: [(ctx.targets[spec.playFromHandOf] as { readonly player: PlayerId }).player] }
+          : {}),
+        ...(spec.handRevealed !== undefined && ctx.targets[spec.handRevealed]?.kind === "player"
+          ? { handsRevealed: [(ctx.targets[spec.handRevealed] as { readonly player: PlayerId }).player] }
           : {}),
         ...(spec.damageTo !== undefined
           ? {
@@ -17076,6 +17154,30 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       // "Search target opponent's library": nobody there, nothing searched.
       const owner = spec.whose === undefined ? undefined : effectPlayer(spec.whose, ctx);
       if (spec.whose !== undefined && owner === undefined) return;
+      // "While you're searching your library, you may cast this card from
+      // your library" (Panglacial Wurm, rule 601.3): any number of them, as
+      // part of the search, before anything is found; the search then goes on
+      // and the spell waits on the stack above what's resolving.
+      const searching = searcher ?? ctx.controller;
+      if (
+        spec.castsWhileSearchingAsked !== true &&
+        (owner === undefined || owner === searching) &&
+        spec.zones !== "graveyard" &&
+        spec.outside !== "only" &&
+        ctx.castableWhileSearching(searching).length > 0
+      ) {
+        applyEffectSpec(
+          {
+            kind: "sequence",
+            effects: [
+              { kind: "cast-now", from: "while-searching", repeat: true, ...(spec.who !== undefined ? { by: spec.who } : {}) },
+              { ...spec, castsWhileSearchingAsked: true },
+            ],
+          },
+          ctx,
+        );
+        return;
+      }
       ctx.searchLibrary(
         searcher,
         spec.filter,

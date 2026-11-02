@@ -87,6 +87,11 @@ export type CastVia =
    * or one a `playFromExile` static lets its controller play (Grolnok, the
    * Omnivore's croak counters). */
   | "impulse"
+  /** From another player's hand, under a resolved permission for the turn
+   * (Sen Triplets — `PlayerEffect.playFromHandsOf`), paying every cost and
+   * keeping every timing rule. The caster controls it; its owner still owns
+   * it (rule 108.3). */
+  | "other-hand"
   /** From the top of the caster's library, under a `castFromLibraryTop`
    * static (Glarb, Calamity's Augur; Sigarda, Font of Blessings), paying
    * every cost and keeping every timing rule. */

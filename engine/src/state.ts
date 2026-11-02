@@ -224,7 +224,7 @@ export interface GameObject {
    * exiled from a hand goes back to (rule 610.3's "previous zone" — Kitesail
    * Freebooter), its owner's.
    */
-  exiledUntil?: { readonly source: ObjectId; readonly zoneChangeCount: number; readonly returnTo?: "hand" };
+  exiledUntil?: { readonly source: ObjectId; readonly zoneChangeCount: number; readonly returnTo?: "hand" | "graveyard" };
   /**
    * Exiled "until an opponent becomes the monarch" (Palace Jailer, rule
    * 610.3): an opponent of this player, the effect's controller. It returns,
@@ -699,6 +699,18 @@ export interface GameObject {
    * last used (Maralen, Fae Ascendant). Cleared on any zone change: the
    * permanent that comes back is a new object (rule 400.7). */
   impulseCastOnTurn?: number;
+  /** Resolved "until end of turn, you may cast a creature spell from among
+   * cards exiled with this artifact without paying its mana cost" permissions
+   * (Idol of Endurance — `allow-cast-linked-exile`), one spell each: read live
+   * over the cards linked to `stint` (rule 607.2a), and one is spent by each
+   * cast it allows. Past their `turn`, nothing. */
+  linkedCastGrants?: readonly {
+    readonly player: PlayerId;
+    readonly turn: number;
+    readonly stint: number;
+    readonly spell?: CardFilter;
+    readonly free: boolean;
+  }[];
   /**
    * Players this permanent has dealt combat damage to this turn — Steel
    * Hellkite's "whose controller was dealt combat damage by this creature
@@ -5009,6 +5021,13 @@ export interface PlayerEffect {
     readonly spendAs?: SpendAs;
     readonly exileAfterwards?: true;
   };
+  /** "You may play lands and cast spells from that player's hand this turn"
+   * (Sen Triplets): `owner` may, from each of these players' hands, by the
+   * ordinary rules for timing, costs and the land drop. Rule 601.3. */
+  readonly playFromHandsOf?: readonly PlayerId[];
+  /** These players play with their hands revealed while this lasts (Sen
+   * Triplets), to every player, as a `visibility` static has them do. */
+  readonly handsRevealed?: readonly PlayerId[];
   /** Damage any source would deal to one of `players` — or, with
    * `permanentsToo`, to a permanent one of them controls — is multiplied. */
   readonly damageTo?: {

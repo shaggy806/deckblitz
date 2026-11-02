@@ -6200,3 +6200,38 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Powerful Broker: another counter of each kind, on a player
 - **Do:** Activate Powerful Broker, targeting Bob.
 - **Expect:** Nothing to choose: the log says "Bob gets 1 poison counter (now 4)".
+### Sen Triplets: cast a spell from the opponent's revealed hand
+- **Do:** It's Bob's end step. Pass to your upkeep and target Bob with the trigger. At your main phase click "hand" on Bob's panel, then "Cast from their hand" under Divination.
+- **Expect:** Bob's hand shows face up. Divination costs your Islands, you draw two cards, and it goes to Bob's graveyard.
+
+### Sen Triplets: at four players only the chosen opponent's hand opens
+- **Do:** It's Dave's end step. Pass to your upkeep and target Carol with the trigger. At your main phase click "hand" on Carol's panel, then on Bob's.
+- **Expect:** Carol's Forest offers "Play land" and her Divination "Cast from their hand". Bob's hand stays face down with nothing to click.
+
+### Silent-Blade Oni: look at the hand and cast a spell from it free
+- **Do:** Attack Bob with the Oni. When the trigger resolves, look at the popup and click Divination.
+- **Expect:** The popup shows all of Bob's hand, the Island not clickable. Divination costs nothing, you draw two cards and it goes to Bob's graveyard.
+
+### Silent-Blade Oni: a hand with nothing to cast is still looked at
+- **Do:** Attack Bob with the Oni. When the trigger resolves, read the popup and close it.
+- **Expect:** The popup shows Bob's two Islands, with nothing to pick. You aren't offered a cast.
+
+### Zara: a creature from the hand joins the attack
+- **Do:** Attack Bob with Zara. In the popup pick Grizzly Bears and confirm. Pass to the end of the turn.
+- **Expect:** The Bears enter tapped and attacking Bob under your control, and he takes 6. At the end step they return to Bob's hand.
+
+### Panglacial Wurm: cast it while searching
+- **Do:** Cast Rampant Growth. When you're offered the Wurm, click it and click Confirm, then find a Forest.
+- **Expect:** The popup shows your library, only the Wurm clickable. The Forest enters, then the Wurm resolves from the stack afterwards.
+
+### Idol of Endurance: one free creature from the exiled cards
+- **Do:** Cast Idol of Endurance. Then activate it, open your exile, and cast Grizzly Bears from there.
+- **Expect:** The Bears and the Elves leave your graveyard as the Idol enters. The Bears cost nothing. The Elves can't be cast now as well.
+
+### Planeswalker's Mischief: the exiled spell goes home at the end step
+- **Do:** Activate the Mischief, targeting Bob. Open Bob's exile pile and look; don't cast Divination. Pass to the end of the turn.
+- **Expect:** Divination is revealed and exiled, and Bob's exile pile offers it to you to cast. At the end step it goes back to Bob's hand.
+
+### Misthollow Griffin: cast it from exile
+- **Do:** Click "exile" on your panel and cast Misthollow Griffin.
+- **Expect:** It costs your four Islands and enters the battlefield.

@@ -403,6 +403,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   },
   "enters-with-counters": (n, v) => v.touch(n.target, "help", MINOR),
   "allow-cast-from-exile": (n, v) => v.touch(n.target, "take", MAJOR),
+  "allow-cast-linked-exile": () => {},
   "cast-now": (n, v) => {
     v.touch(n.from === "targets" ? EVERY_SLOT : n.target, "take", MAJOR);
     v.child(n.then);

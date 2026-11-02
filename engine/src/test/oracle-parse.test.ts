@@ -6078,6 +6078,49 @@ describe("each permanent of a kind deals damage (each-deals-damage)", () => {
   });
 });
 
+describe("permissions to cast from a zone other than the hand", () => {
+  const effectOf = (oracle_text: string) => {
+    const targets: unknown[] = [];
+    return { effect: parseEffect(oracle_text, { targets, tokenFor: () => null }).effect, targets };
+  };
+  it("reads a card's own permission over exile and over its library during a search", () => {
+    const read = (name: string, oracle_text: string) => parseFace({ name, type_line: "Creature — Griffin", oracle_text }, { tokenFor: () => null });
+    expect(read("Misthollow Griffin", "You may cast this card from exile.").castSelfFromExile).toBe(true);
+    expect(
+      read("Panglacial Wurm", "While you're searching your library, you may cast this card from your library.").castWhileSearchingLibrary,
+    ).toBe(true);
+  });
+  it("reads a cast from another player's hand", () => {
+    expect(effectOf("Look at that player's hand. You may cast a spell from among those cards without paying its mana cost.").effect).toEqual({
+      kind: "cast-now",
+      from: { handOf: "trigger-player", look: true },
+      free: true,
+    });
+    const mindclaw = effectOf("Target opponent reveals their hand. You may cast an instant or sorcery spell from among those cards without paying its mana cost.");
+    expect(mindclaw.targets).toEqual(["opponent"]);
+    expect(mindclaw.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "reveal-hand", who: 0 },
+        { kind: "cast-now", from: { handOf: { target: 0 } }, free: true, spell: { typesAnyOf: ["instant", "sorcery"] } },
+      ],
+    });
+  });
+  it("reads a graveyard exiled until the source leaves, and the free cast from among it", () => {
+    expect(effectOf("Exile all creature cards with mana value 3 or less from your graveyard until ~ leaves the battlefield.").effect).toEqual({
+      kind: "exile-graveyard",
+      target: "you",
+      filter: { type: "creature", manaValue: { op: "lte", n: 3 } },
+      untilSourceLeaves: true,
+    });
+    expect(effectOf("Until end of turn, you may cast a creature spell from among cards exiled with ~ without paying its mana cost.").effect).toEqual({
+      kind: "allow-cast-linked-exile",
+      spell: { type: "creature" },
+      free: true,
+    });
+  });
+});
+
 describe("a card's own graveyard permission with costs (castSelfFromGraveyard)", () => {
   const read = (name: string, type_line: string, oracle_text: string) =>
     parseFace({ name, type_line, oracle_text }, { tokenFor: () => null }).castSelfFromGraveyard;

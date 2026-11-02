@@ -7234,6 +7234,7 @@ function Table({
               // Most routes read fine as their own name ("flashback", "escape");
               // a permission granted by another permanent doesn't.
               if (c?.via === 'graveyard-permission') return 'Cast from graveyard'
+              if (c?.via === 'other-hand') return 'Cast from their hand'
               if (c?.via) return `Cast (${c.via})`
               if (landByCard.has(id)) return 'Play land'
               return 'Cast'

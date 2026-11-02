@@ -243,6 +243,8 @@ function faceSource(face, ctx) {
     readAhead: parsed.readAhead,
     castFromGraveyardIf: parsed.castFromGraveyardIf,
     castSelfFromGraveyard: parsed.castSelfFromGraveyard,
+    castSelfFromExile: parsed.castSelfFromExile,
+    castWhileSearchingLibrary: parsed.castWhileSearchingLibrary,
     morph: parsed.morph,
     disturb: parsed.disturb,
     suspend: parsed.suspend,

@@ -4042,3 +4042,15 @@ damage-source-itself, damage-source-controller-draws. Proving cards: Thor, Asgar
 Hellion; Hawkeye, Young Avenger; Fated Firepower; Equal Treatment; The Flame of Keld; Rankle and
 Torbran; Swans of Bryn Argoll; Reckless Embermage. Left: Taii Wakeen's "deals noncombat damage equal
 to that creature's toughness" trigger, for `author-freed` to narrow.
+
+**Casting from a zone other than the hand** (2026-11-02). `cast-now`'s `from: { handOf, look? }` is another
+player's hand during a resolution, seen whole through the decision's `looked`; `player-effect`'s
+`playFromHandOf` and `handRevealed` are Sen Triplets' turn-long permission, a `via: "other-hand"` cast
+and the land play beside it (`Game.handsOpenTo`); `castSelfFromExile` is the card's own permission;
+`exile-graveyard`'s `untilSourceLeaves` with `allow-cast-linked-exile` (`GameObject.linkedCastGrants`,
+one spell per resolution, live over the linked cards) is Idol of Endurance; `castWhileSearchingLibrary`
+offers a `cast-now` (`from: "while-searching"`) as a search of your own library begins. Look-and-choose's
+`zone: "hand"` with `from` already took Zara. Keys: cast-from-opponents-hand, cast-self-from-exile,
+cast-from-linked-exile-free-this-turn, cast-while-searching-library. Proving cards: Silent-Blade Oni,
+Mindleech Mass, Mindclaw Shaman, Sen Triplets, Zara, Renegade Recruiter, Eternal Scourge, Misthollow
+Griffin, Idol of Endurance, Planeswalker's Mischief, Panglacial Wurm.

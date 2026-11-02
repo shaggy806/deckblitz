@@ -4075,6 +4075,25 @@ export function parseSentence(sentence, ctx) {
     return { kind: "destroy-all", filter: { sameNameAsAnother: {}, ...(m[1] ? { notSupertype: "basic" } : {}) } };
   }
   if (re("exile all graveyards").test(s)) return { kind: "exile-graveyard", target: "each-player" };
+  // "Exile all creature cards with mana value 3 or less from your graveyard
+  // until ~ leaves the battlefield" (Idol of Endurance — rule 610.3).
+  if ((m = re("exile all (.+?) cards?(?: with mana value (\\d+) or less)? from your graveyard until ~ leaves the battlefield").exec(s))) {
+    const filter = parseTypePhrase(m[1]);
+    if (filter !== null && Object.keys(filter).length > 0) {
+      return {
+        kind: "exile-graveyard",
+        target: "you",
+        filter: { ...filter, ...(m[2] !== undefined ? { manaValue: { op: "lte", n: Number(m[2]) } } : {}) },
+        untilSourceLeaves: true,
+      };
+    }
+  }
+  // "Until end of turn, you may cast a creature spell from among cards exiled
+  // with ~ without paying its mana cost" (Idol of Endurance — rule 607.2a).
+  if ((m = re("until end of turn, you may cast an? (.+?) spell from among cards exiled with ~ without paying its mana cost").exec(s))) {
+    const spell = parseTypePhrase(m[1]);
+    if (spell !== null && Object.keys(spell).length > 0) return { kind: "allow-cast-linked-exile", spell, free: true };
+  }
   // Bazaar of Wonders: asked as it resolves (rule 608.2c), of the spell.
   if (re("counter it if a card with the same name is in a graveyard or a nontoken permanent with the same name is on the battlefield").test(s)) {
     return {
@@ -5671,6 +5690,39 @@ export function parseEffect(text, outer) {
     const lost = won === null ? null : parseSentence(capital(flip[2]), ctx);
     if (won !== null && lost !== null) return { effect: { kind: "flip-coin", won, lost }, todo: [], hints: [] };
     ctx.targets.length = slots;
+  }
+  // A spell cast from another player's hand as this resolves (rule 601.3 —
+  // `cast-now`'s `handOf`): "look at that player's hand. You may cast a spell
+  // from among those cards without paying its mana cost" (Silent-Blade Oni),
+  // "you may look … If you do, you may cast …" (Mindleech Mass), and "target
+  // opponent reveals their hand. You may cast an instant or sorcery spell from
+  // among those cards …" (Mindclaw Shaman).
+  const looksThenCasts = /^(You may look|Look) at that player's hand\. (?:If you do, you|You) may cast a spell from among those cards without paying its mana cost\.$/.exec(text);
+  if (looksThenCasts !== null) {
+    const castNow = { kind: "cast-now", from: { handOf: "trigger-player", look: true }, free: true };
+    return {
+      effect: looksThenCasts[1] === "Look" ? castNow : { kind: "may", prompt: "Look at that player's hand?", effect: castNow },
+      todo: [],
+      hints: [],
+    };
+  }
+  const revealsThenCasts = /^Target opponent reveals their hand\. You may cast (?:an? (.+?) )?spell from among those cards without paying its mana cost\.$/.exec(text);
+  if (revealsThenCasts !== null) {
+    const spell = revealsThenCasts[1] === undefined ? {} : parseTypePhrase(revealsThenCasts[1]);
+    if (spell !== null) {
+      const slot = ctx.target("opponent");
+      return {
+        effect: {
+          kind: "sequence",
+          effects: [
+            { kind: "reveal-hand", who: slot },
+            { kind: "cast-now", from: { handOf: { target: slot } }, free: true, ...(revealsThenCasts[1] !== undefined ? { spell } : {}) },
+          ],
+        },
+        todo: [],
+        hints: [],
+      };
+    }
   }
   const chosen = paidAndBid(text, ctx) ?? chosenNumbers(text, ctx) ?? chosenAndTheRest(text) ?? lifeExchanges(text, ctx);
   if (chosen !== null) return { effect: chosen, todo: [], hints: [] };
@@ -9028,6 +9080,16 @@ export function parseFace(face, ctx = {}) {
       const self = selfGraveyardCast(line);
       if (self !== null) {
         out.castSelfFromGraveyard = self;
+        continue;
+      }
+      // Its own permission over exile (Misthollow Griffin) or its library
+      // during a search of it (Panglacial Wurm): rule 601.3.
+      if (line === "You may cast ~ from exile.") {
+        out.castSelfFromExile = true;
+        continue;
+      }
+      if (line === "While you're searching your library, you may cast ~ from your library.") {
+        out.castWhileSearchingLibrary = true;
         continue;
       }
     }

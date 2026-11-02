@@ -946,6 +946,10 @@ function sightOf(state: GameState, registry: CardRegistry, viewer: PlayerId): Si
       }
     }
   }
+  // "…and plays with their hand revealed" for a turn (Sen Triplets).
+  for (const effect of state.playerEffects ?? []) {
+    for (const player of effect.handsRevealed ?? []) hands.add(player);
+  }
   return { hands, libraryTops, faceDownCreatures, ownLibraryTop };
 }
 

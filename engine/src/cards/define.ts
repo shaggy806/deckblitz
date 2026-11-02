@@ -4849,6 +4849,16 @@ export interface CardDefinition {
    * exile, its owner casting it there as an `"impulse"` cast does.
    */
   readonly castSelfFromGraveyard?: { readonly if?: StaticCondition; readonly fromExile?: true } & GraveyardCastCosts;
+  /** "You may cast this card from exile" (Misthollow Griffin, Eternal
+   * Scourge): an ability that functions from exile (rule 113.6f), for the
+   * card's owner, while it's face up, under its normal timing and costs. As
+   * Squee's `fromExile`, a `via: "impulse"` cast. */
+  readonly castSelfFromExile?: true;
+  /** "While you're searching your library, you may cast this card from your
+   * library" (Panglacial Wurm — rule 601.3): offered, as a `cast-now`, at the
+   * start of each search of its owner's own library, at its normal cost and
+   * ignoring timing, the search going on afterwards. */
+  readonly castWhileSearchingLibrary?: true;
   /** Foretell (rule 702.143 — ROADMAP Phase 6b) — during your turn you may pay
    * `{2}` to exile this card from your hand face-down; on a later turn you may
    * cast it from exile for `cost`. `null` for a card without foretell. */
@@ -5315,6 +5325,8 @@ const PRINTED_ABILITY: {
   cycling: (def) => def.cycling !== null,
   castFromGraveyardIf: (def) => def.castFromGraveyardIf !== undefined,
   castSelfFromGraveyard: (def) => def.castSelfFromGraveyard !== undefined,
+  castSelfFromExile: (def) => def.castSelfFromExile !== undefined,
+  castWhileSearchingLibrary: (def) => def.castWhileSearchingLibrary !== undefined,
   chapters: (def) => def.chapters !== null && def.chapters.length > 0,
   readAhead: (def) => def.readAhead,
   faces: false,
@@ -5547,6 +5559,8 @@ interface CardDraft {
   flashback?: NonNullable<CardDefinition["flashback"]>;
   castFromGraveyardIf?: StaticCondition;
   castSelfFromGraveyard?: NonNullable<CardDefinition["castSelfFromGraveyard"]>;
+  castSelfFromExile?: true;
+  castWhileSearchingLibrary?: true;
   harmonize?: { readonly cost: string };
   retrace?: boolean;
   madness?: { readonly cost: string };
@@ -5823,6 +5837,8 @@ export function defineCard(draft: CardDraft): CardDefinition {
     cycling: draft.cycling ?? null,
     ...(draft.castFromGraveyardIf !== undefined ? { castFromGraveyardIf: draft.castFromGraveyardIf } : {}),
     ...(draft.castSelfFromGraveyard !== undefined ? { castSelfFromGraveyard: draft.castSelfFromGraveyard } : {}),
+    ...(draft.castSelfFromExile !== undefined ? { castSelfFromExile: draft.castSelfFromExile } : {}),
+    ...(draft.castWhileSearchingLibrary !== undefined ? { castWhileSearchingLibrary: draft.castWhileSearchingLibrary } : {}),
     escape: draft.escape ?? null,
     chapters: draft.chapters ?? null,
     readAhead: draft.readAhead === true,
