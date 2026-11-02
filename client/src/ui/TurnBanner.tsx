@@ -1,5 +1,5 @@
 import type { PlayerView } from 'engine/client'
-import { STEP_LABEL, playerLabel, seatClassOf } from '../format.ts'
+import { STEP_LABEL, playerLabel, possessive, seatClassOf } from '../format.ts'
 import type { SeatStatus } from 'protocol'
 import { StableLabel } from './StableLabel.tsx'
 
@@ -37,8 +37,8 @@ export function TurnBanner({
           the phase pips start where this ends, and slid along with every
           step (the user's ask, 2026-10-10). */}
       <span className="turn-banner-player">
-        <StableLabel widest={view.turnOrder.map((p) => `${playerLabel(p, seats)}'s Turn`)}>
-          {playerLabel(view.activePlayer, seats)}'s Turn{view.turn.isExtra ? ' (extra)' : ''}
+        <StableLabel widest={view.turnOrder.map((p) => `${possessive(playerLabel(p, seats))} Turn`)}>
+          {possessive(playerLabel(view.activePlayer, seats))} Turn{view.turn.isExtra ? ' (extra)' : ''}
         </StableLabel>
       </span>
       <span className="turn-banner-sep turn-banner-phase-sep">·</span>

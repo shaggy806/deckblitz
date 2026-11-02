@@ -1,6 +1,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { useMotionPrefs } from '../game/motionPrefs.ts'
+import { Symbols } from '../ui/Symbols.tsx'
 import {
   advance,
   autoAdvanced,
@@ -369,7 +370,7 @@ function StepView({
         // A blank line starts a paragraph (a lesson's copy uses them).
         step.body.split(/\n\s*\n/).map((para, i) => (
           <p key={i} className="coach-body">
-            {para}
+            <Symbols text={para} />
           </p>
         ))
       )}

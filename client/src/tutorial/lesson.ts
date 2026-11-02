@@ -1,5 +1,5 @@
-import { useEffect, useLayoutEffect, useRef } from 'react'
-import type { TutorialInfo } from 'protocol'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import type { TutorialCoachStep, TutorialInfo } from 'protocol'
 import { getCoach, startTour, stopTour } from './coach.ts'
 import { finishLesson } from './progress.ts'
 import type { Anchor, Step, StepButton, Tour } from './types.ts'
@@ -15,9 +15,9 @@ import type { Anchor, Step, StepButton, Tour } from './types.ts'
  * the effect that applies it.
  */
 
-/** The lesson the "?" menu's *Learn Commander* opens. The proof lesson for
- * now; the real Learn Commander lesson replaces it here. */
-export const LEARN_COMMANDER_LESSON = 'basics-proof'
+/** The lesson the "?" menu's *Learn Commander* opens
+ * (`server/src/tutorials/learn-commander.ts`). */
+export const LEARN_COMMANDER_LESSON = 'learn-commander'
 
 /** The board tour: the site tour's second half, on a practice table
  * (`server/src/tutorials/board-tour.ts`). */
@@ -31,6 +31,12 @@ export const LESSON_PARAM = 'tutorial'
  * which a page load leaves as a game's "Leave the room" does. */
 export const lessonUrl = (lesson: string): string => `/?${LESSON_PARAM}=${encodeURIComponent(lesson)}`
 
+/** The URL parameter that starts a first real game as the page loads, on a
+ * starter deck against three bots: the way on from Learn Commander, for someone
+ * with no decklist to blitz. */
+export const FIRST_GAME_PARAM = 'first-game'
+export const FIRST_GAME_URL = `/?${FIRST_GAME_PARAM}=1`
+
 /** What a lesson's card can do, wired by the game screen. */
 export interface LessonControls {
   /** Next on a card that only explains (`tutorial-next`). */
@@ -41,6 +47,8 @@ export interface LessonControls {
   readonly exit: () => void
   /** Lesson `lesson` again from the beginning, in a room of its own. */
   readonly again: (lesson: string) => void
+  /** On to a real game, on a starter deck against bots. */
+  readonly realGame: () => void
 }
 
 /** The tour id a lesson's cards go under: one per lesson, so a card that
@@ -67,13 +75,15 @@ export const LESSON_GUARD = '.top-strip .ts-menu'
  * - Once the lesson is **complete**, a last card to say well done, with the
  *   way back to the menu and the way to play it again.
  *
- * Every card offers Exit, and Retry chapter while the server says it can
- * (not in the first chapter, where there's nothing yet to undo).
+ * Every card offers Exit, Retry chapter while the server says there's something
+ * to undo (not in the first chapter, which is only reading), and Back with
+ * `back`, a look at the card before it.
  */
 export function lessonTour(
   info: TutorialInfo,
   anchorFor: (anchor: string | undefined) => Anchor | undefined,
   controls: LessonControls,
+  back?: () => void,
 ): Tour | null {
   const base = {
     id: lessonTourId(info.lesson),
@@ -86,12 +96,13 @@ export function lessonTour(
       page: 'game',
       title: 'You did it!',
       body:
-        "That's the lesson done — lands, spells, passing the turn and blocking, the moves every game is built from.\n\n" +
-        'Play it again any time from the "?" menu, or head back and start a game of your own.',
+        "You've just played a whole game: those are the moves every game is built from. Real decks have far more kinds of card, so read each one as it comes.\n\n" +
+        'Ready for a real game? You get a starter deck against three bots. It opens by asking whether to keep your seven cards or draw a new hand.',
       advance: 'next',
       buttons: [
-        { label: 'Back to menu', onClick: controls.exit },
-        { label: 'Play again', onClick: () => controls.again(info.lesson), primary: true },
+        { label: 'Back to menu', onClick: controls.exit, link: true },
+        { label: 'Play again', onClick: () => controls.again(info.lesson) },
+        { label: 'Play a real game', onClick: controls.realGame, primary: true },
       ],
     }
     return { ...base, counter: `${info.title} · complete`, steps: [step] }
@@ -100,7 +111,8 @@ export function lessonTour(
   if (card === null) return null
   const goal = card.advance === 'goal'
   const buttons: StepButton[] = [{ label: 'Exit lesson', onClick: controls.exit, link: true }]
-  if (info.canRetry && info.chapterIndex > 0) buttons.push({ label: 'Retry chapter', onClick: controls.retry })
+  if (info.canRetry && info.chapterIndex > 0) buttons.push({ label: 'Retry chapter', onClick: controls.retry, link: true })
+  if (back !== undefined) buttons.push({ label: 'Back', onClick: back })
   if (!goal) buttons.push({ label: 'Next', onClick: () => controls.next(card.id), primary: true })
   const anchor = anchorFor(card.anchor)
   const step: Step = {
@@ -120,6 +132,31 @@ export function lessonTour(
     counter: `${info.title} · chapter ${info.chapterIndex + 1} of ${info.chapterCount}`,
     steps: [step],
   }
+}
+
+/**
+ * A card already gone, for reading again: words only, in the middle of the
+ * page, since what it pointed at may have moved on. Nothing in the game changes
+ * while it's up; `back` goes further back, `resume` returns to the card up now.
+ */
+export function reviewTour(
+  info: TutorialInfo,
+  card: TutorialCoachStep,
+  resume: () => void,
+  back?: () => void,
+): Tour {
+  const buttons: StepButton[] = []
+  if (back !== undefined) buttons.push({ label: 'Back', onClick: back })
+  buttons.push({ label: 'Return to the lesson', onClick: resume, primary: true })
+  const step: Step = { id: `review:${card.id}`, page: 'game', title: card.title, body: card.body, advance: 'next', buttons }
+  return { id: lessonTourId(info.lesson), title: info.title, keepOnEscape: true, counter: `${info.title} · looking back`, steps: [step] }
+}
+
+/** The cards seen so far with `card` the latest: a card seen before (a retry
+ * going back to it) drops those after it. */
+export function cardsSeen(seen: readonly TutorialCoachStep[], card: TutorialCoachStep): readonly TutorialCoachStep[] {
+  const at = seen.findIndex((c) => c.id === card.id)
+  return at === -1 ? [...seen, card] : seen.slice(0, at + 1)
 }
 
 /** What about `info` changes the card: a frame that only moved the board
@@ -160,12 +197,25 @@ export function useLessonCoach(
   useEffect(() => {
     if (complete && lesson !== null) finishLesson(lesson)
   }, [complete, lesson])
+  // The cards seen, for Back: read back through `reviewing`, the index of the
+  // one on show instead of the card that's up. Kept here, as Back only looks.
+  const seen = useRef<readonly TutorialCoachStep[]>([])
+  const [reviewing, setReviewing] = useState<number | null>(null)
   useEffect(() => {
     const now = latest.current
-    const tour = now === null ? null : lessonTour(now, anchorFor, controls)
+    if (now?.step != null) seen.current = cardsSeen(seen.current, now.step)
+    const cards = seen.current
+    const earlier = (i: number) => (i > 0 ? () => setReviewing(i - 1) : undefined)
+    const review = now === null || now.complete || reviewing === null ? undefined : cards[reviewing]
+    const tour =
+      now === null
+        ? null
+        : review !== undefined && reviewing !== null
+          ? reviewTour(now, review, () => setReviewing(null), earlier(reviewing))
+          : lessonTour(now, anchorFor, controls, now.step === null ? undefined : earlier(cards.length - 1))
     if (tour !== null) startTour(tour, 0)
     else if (getCoach().tour?.id.startsWith('lesson:') === true) stopTour()
-  }, [key, anchorFor, controls])
+  }, [key, reviewing, anchorFor, controls])
   useEffect(
     () => () => {
       if (getCoach().tour?.id.startsWith('lesson:') === true) stopTour()

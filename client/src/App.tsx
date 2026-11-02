@@ -40,7 +40,7 @@ import {
   targetCountAtX,
   waterbendAt,
 } from 'engine/client'
-import type { SeatStatus } from 'protocol'
+import type { SeatStatus, TutorialInfo } from 'protocol'
 import { useNetworkGame } from './net/useNetworkGame.ts'
 import type { BlitzReport, NetworkGame } from './net/useNetworkGame.ts'
 import { rematchOffer } from './net/rematch.ts'
@@ -129,7 +129,7 @@ import { CornerToolbar } from './ui/CornerToolbar.tsx'
 import { CoachLayer } from './tutorial/CoachLayer.tsx'
 import type { PageId } from './tutorial/types.ts'
 import { lessonAnchor } from './tutorial/anchors.ts'
-import { lessonUrl, useLessonCoach } from './tutorial/lesson.ts'
+import { FIRST_GAME_URL, lessonUrl, useLessonCoach } from './tutorial/lesson.ts'
 import type { LessonControls } from './tutorial/lesson.ts'
 import { InviteLink } from './lobby/InviteLink.tsx'
 import './App.css'
@@ -1353,6 +1353,7 @@ function GameScreen({ game }: { readonly game: NetworkGame }) {
       // Out of the room the way the Game menu's "Leave the room" goes.
       exit: () => window.location.assign('/'),
       again: (lesson) => window.location.assign(lessonUrl(lesson)),
+      realGame: () => window.location.assign(FIRST_GAME_URL),
     }),
     [tutorialNext, tutorialRetry],
   )
@@ -1496,6 +1497,7 @@ function GameScreen({ game }: { readonly game: NetworkGame }) {
         actions={actionsOnTable}
         locked={tableLocked}
         hand={hand}
+        lesson={spectating ? null : shown.tutorial}
         previousView={shown.previousView}
         answered={shown.answered}
         boardDrag={boardDrag}
@@ -1590,6 +1592,9 @@ interface TableProps {
   /** A frame is still playing out: what `actions` holds anyway (the
    * mulligan) is shown but can't be answered yet. */
   readonly locked: boolean
+  /** The lesson this game is, if it is one: what its card leaves open beyond
+   * `actions`, and whether it's about the hand. */
+  readonly lesson: TutorialInfo | null
   /** The peekable hand tray's raised state, owned by `GameScreen` so it
    * survives this component's per-frame remount. */
   readonly hand: {
@@ -1629,6 +1634,7 @@ function Table({
   game,
   actions,
   locked,
+  lesson,
   hand,
   previousView,
   answered,
@@ -2253,7 +2259,9 @@ function Table({
   const canPass = actions.some((a) => a.kind === 'pass-priority')
   // Only the active player may skip the rest of their own turn — a defender
   // holding priority to respond during it shouldn't get this button.
-  const canPassTurn = canPass && seat === view.activePlayer
+  const canPassTurn = canPass && seat === view.activePlayer && lesson?.allows.passTurn !== false
+  // A lesson's card can ask for a declaration with someone in it.
+  const declareAtLeast = lesson?.allows.declareAtLeast ?? 0
 
   const mode:
     | 'discard'
@@ -5889,7 +5897,7 @@ function Table({
         <button type="button" disabled={attackPicks.length === 0} onClick={() => setAttackPicks([])}>
           Clear
         </button>
-        <button type="button" disabled={unmetMusts.length > 0} onClick={confirmAttackers}>
+        <button type="button" disabled={unmetMusts.length > 0 || assignedCount < declareAtLeast} onClick={confirmAttackers}>
           {enterAttackingAction !== undefined ? (
             'Confirm'
           ) : (
@@ -6033,7 +6041,8 @@ function Table({
             unforcedBlockers.length > 0 ||
             requiredBlockers.length > 0 ||
             unblockedMusts.length > 0 ||
-            overBlocked.length > 0
+            overBlocked.length > 0 ||
+            n < declareAtLeast
           }
           onClick={confirmBlockers}
         >
@@ -6339,6 +6348,7 @@ function Table({
               type="button"
               data-tour="game-auto-pass"
               onClick={game.autoPass}
+              disabled={lesson?.allows.autoPass === false}
               title={
                 game.autoPassPaused
                   ? 'Paused so you can respond — resumes by itself once the stack is clear. Click to turn it off.'
@@ -6697,7 +6707,7 @@ function Table({
         // Empty in the mulligan (the popup holds the hand), and out of the
         // layout then: in flow, it took the board's height on top of the
         // band the board keeps for the tray.
-        className={`hand-strip ${peekable ? 'peekable' : 'idle'} ${handRaised || handForcedOpen ? 'raised' : ''} ${
+        className={`hand-strip ${peekable ? 'peekable' : 'idle'} ${handRaised || handForcedOpen || lesson?.step?.showHand === true ? 'raised' : ''} ${
           handForcedOpen ? 'hand-decision' : ''
         }`}
         onMouseLeave={() => setHandRaised(false)}

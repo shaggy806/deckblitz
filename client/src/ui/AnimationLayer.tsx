@@ -18,7 +18,7 @@ import { closeStackGap } from './stackDepth.ts'
 import { diceStrikeMs, throwDice } from './diceRoll.ts'
 import { defToVisible } from './defToVisible.ts'
 import { loadCard, peekCard } from '../cards/cardData.ts'
-import { playerLabel, seatClassOf } from '../format.ts'
+import { forYou, playerLabel, seatClassOf } from '../format.ts'
 import type { SeatClass } from '../format.ts'
 import type { SeatStatus } from 'protocol'
 import {
@@ -2513,7 +2513,7 @@ export function AnimationLayer({
         // Where it came from, when that isn't the hand: flashback, a
         // commander, an impulse draw are worth saying.
         const from = FROM_ZONE[ev.from] ?? ''
-        const caption = `${who} ${verb}${from ? ` ${from}` : ''}`
+        const caption = forYou(`${who} ${verb}${from ? ` ${from}` : ''}`)
         const seatClass = seatClassOf(view.turnOrder, ev.player)
         const holds = cue.putDown === true
         setPlayedCards((cur) => [

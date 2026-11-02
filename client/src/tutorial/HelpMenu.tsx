@@ -95,13 +95,13 @@ export function HelpMenu({
             ×
           </button>
           <p className="help-callout-title">New here?</p>
-          <p>Take a quick tour of the site, or learn to play Commander in a short guided game.</p>
+          <p>Never played? Learn Commander in a short guided game. Know Magic already? Take a quick tour of the site.</p>
           <div className="help-callout-actions">
-            <button type="button" className="coach-next" onClick={() => takeTour()}>
-              Take the tour
-            </button>
-            <button type="button" onClick={learn}>
+            <button type="button" className="coach-next" onClick={learn}>
               Learn to play
+            </button>
+            <button type="button" onClick={() => takeTour()}>
+              Take the tour
             </button>
           </div>
         </div>

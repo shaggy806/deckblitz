@@ -1,12 +1,12 @@
 import { describe, expect, it } from 'vitest'
 import type { TutorialInfo } from 'protocol'
 import { isInteractive } from './coach.ts'
-import { LESSON_GUARD, lessonKey, lessonTour, lessonTourId, lessonUrl } from './lesson.ts'
+import { cardsSeen, LESSON_GUARD, lessonKey, lessonTour, lessonTourId, lessonUrl, reviewTour } from './lesson.ts'
 import type { LessonControls } from './lesson.ts'
 import type { Anchor } from './types.ts'
 
 const INFO: TutorialInfo = {
-  lesson: 'basics-proof',
+  lesson: 'learn-commander',
   title: 'The basics',
   chapter: 'welcome',
   chapterTitle: 'Welcome',
@@ -15,6 +15,7 @@ const INFO: TutorialInfo = {
   step: { id: 'welcome', title: 'Welcome!', body: 'Hello.\n\nOne step at a time.', advance: 'next' },
   goals: [],
   canRetry: true,
+  allows: { passTurn: false, autoPass: false, declareAtLeast: 0 },
   complete: false,
 }
 
@@ -35,6 +36,7 @@ function recorder() {
     retry: () => calls.push('retry'),
     exit: () => calls.push('exit'),
     again: (lesson) => calls.push(`again ${lesson}`),
+    realGame: () => calls.push('real game'),
   }
   return { calls, controls }
 }
@@ -57,7 +59,7 @@ describe("a lesson's card on the overlay", () => {
   it('is a one-step game tour that Escape leaves alone, counted by chapter', () => {
     const { controls } = recorder()
     const tour = lessonTour(INFO, anchorFor, controls)
-    expect(tour).toMatchObject({ id: lessonTourId('basics-proof'), keepOnEscape: true, counter: 'The basics · chapter 1 of 5' })
+    expect(tour).toMatchObject({ id: lessonTourId('learn-commander'), keepOnEscape: true, counter: 'The basics · chapter 1 of 5' })
     expect(tour?.persist).toBeUndefined()
     expect(tour?.steps).toHaveLength(1)
     expect(tour?.steps[0]).toMatchObject({ id: 'welcome', page: 'game', title: 'Welcome!', body: 'Hello.\n\nOne step at a time.' })
@@ -105,16 +107,47 @@ describe("a lesson's card on the overlay", () => {
     expect(lessonTour({ ...GOAL, step: null, goals: [] }, anchorFor, recorder().controls)).toBeNull()
   })
 
-  it('ends on a card of its own, back to the menu or round again', () => {
+  it('ends on a card of its own: on to a real game, round again, or back to the menu', () => {
     const { calls, controls } = recorder()
     const tour = lessonTour({ ...INFO, step: null, goals: [], canRetry: false, complete: true }, anchorFor, controls)
     expect(tour?.steps[0]).toMatchObject({ id: 'lesson-complete', page: 'game', title: 'You did it!', advance: 'next' })
     expect(tour?.steps[0].anchor).toBeUndefined()
-    expect(labels(tour)).toEqual(['Back to menu', 'Play again'])
-    expect(tour?.steps[0].buttons?.find((b) => b.primary === true)?.label).toBe('Play again')
+    expect(labels(tour)).toEqual(['Back to menu', 'Play again', 'Play a real game'])
+    expect(tour?.steps[0].buttons?.find((b) => b.primary === true)?.label).toBe('Play a real game')
+    press(tour, 'Play a real game')
     press(tour, 'Play again')
     press(tour, 'Back to menu')
-    expect(calls).toEqual(['again basics-proof', 'exit'])
+    expect(calls).toEqual(['real game', 'again learn-commander', 'exit'])
+  })
+
+  it('offers Back when given a way back, and shows an earlier card in words alone', () => {
+    const { controls } = recorder()
+    const backs: string[] = []
+    expect(labels(lessonTour(GOAL, anchorFor, controls))).not.toContain('Back')
+    const tour = lessonTour(GOAL, anchorFor, controls, () => backs.push('back'))
+    expect(labels(tour)).toContain('Back')
+    press(tour, 'Back')
+    expect(backs).toEqual(['back'])
+
+    const card = GOAL.step!
+    const review = reviewTour(GOAL, card, () => backs.push('resume'), () => backs.push('further'))
+    expect(review.steps[0]).toMatchObject({ id: 'review:play-land', title: card.title, body: card.body, advance: 'next' })
+    expect(review.steps[0].anchor).toBeUndefined()
+    expect(labels(review)).toEqual(['Back', 'Return to the lesson'])
+    press(review, 'Return to the lesson')
+    press(review, 'Back')
+    expect(backs).toEqual(['back', 'resume', 'further'])
+    expect(labels(reviewTour(GOAL, card, () => {}))).toEqual(['Return to the lesson'])
+  })
+
+  it('remembers the cards seen, and forgets those after one a retry goes back to', () => {
+    const a = INFO.step!
+    const b = GOAL.step!
+    const c = { ...b, id: 'c' }
+    expect(cardsSeen([], a)).toEqual([a])
+    expect(cardsSeen([a, b], c)).toEqual([a, b, c])
+    expect(cardsSeen([a, b, c], b)).toEqual([a, b])
+    expect(cardsSeen([a, b], b)).toEqual([a, b])
   })
 
   it('changes only when the card would: a goal ticked, a new card, Retry gone', () => {
@@ -127,7 +160,7 @@ describe("a lesson's card on the overlay", () => {
   })
 
   it('opens from a URL of its own', () => {
-    expect(lessonUrl('basics-proof')).toBe('/?tutorial=basics-proof')
+    expect(lessonUrl('learn-commander')).toBe('/?tutorial=learn-commander')
     expect(lessonUrl('a b')).toBe('/?tutorial=a%20b')
   })
 })

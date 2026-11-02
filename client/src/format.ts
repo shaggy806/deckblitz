@@ -114,6 +114,23 @@ export function describeTarget(ref: TargetRef, nameOf: NameOf): string {
  * capitalised seat id.
  */
 export function describeEvent(event: GameEvent, nameOf: NameOf, seats: readonly SeatStatus[] = []): string {
+  return forYou(eventText(event, nameOf, seats))
+}
+
+/** A player's name with an 's, or "Your" for a seat named "You". */
+export const possessive = (name: string): string => (name === 'You' ? 'Your' : `${name}'s`)
+
+/** A line about a seat named "You", as a lesson names its player: "You plays
+ * Swamp" reads "You play Swamp". */
+export function forYou(text: string): string {
+  return text.replace(/^You ([a-z]+)/, (_, verb: string) => {
+    if (verb === 'has') return 'You have'
+    if (/(ss|sh|ch|x|o)es$/.test(verb)) return `You ${verb.slice(0, -2)}`
+    return `You ${verb.endsWith('s') && !verb.endsWith('ss') ? verb.slice(0, -1) : verb}`
+  })
+}
+
+function eventText(event: GameEvent, nameOf: NameOf, seats: readonly SeatStatus[]): string {
   const name = nameOf
   const who = (id: PlayerId): string => playerLabel(id, seats)
   const tgt = (ref: TargetRef): string => (ref.kind === 'player' ? who(ref.player) : name(ref.object))

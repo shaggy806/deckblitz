@@ -3,13 +3,12 @@ import { join } from 'node:path'
 import { expect, test } from '@playwright/test'
 import type { APIRequestContext, Locator, Page } from '@playwright/test'
 
-// Learn Commander, end to end (docs/plans/tutorials.md, phase 2): the "?"
-// menu opens a tutorial room on the server's `basics-proof` lesson, and the
-// coach overlay shows each card the server sends, as its frame is shown. The
-// lesson is played through the UI the way a player would — Next, click a
-// Forest, click Llanowar Elves, Pass Turn, block with the Elves — every card
-// in order, to the last one, and the progress store marks it done. Retry
-// rewinds a chapter gone wrong.
+// Learn Commander, end to end (docs/plans/tutorials.md): the "?" menu opens a
+// tutorial room on the server's `learn-commander` lesson, and the coach overlay
+// shows each card the server sends, as its frame is shown. The lesson is played
+// through the UI the way a player would, every card in order, to the win on turn
+// 7 and on into a first real game. A second test checks what's closed: the
+// buttons that used to leave the lesson waiting for a move that couldn't happen.
 //
 // Set LESSON_SHOTS_DIR to also walk it at 1920x1080 and 2560x1440 and save a
 // screenshot of every card at each size.
@@ -25,13 +24,24 @@ const SIZES = SHOTS
   : [{ width: 1366, height: 768 }]
 
 /** Every card the lesson shows, in order. */
-const CARDS = ['welcome', 'play-land', 'cast-elves', 'pass-turn', 'block', 'well-done', 'lesson-complete']
+const CARDS = [
+  'welcome', 'life', 'hand', 'read-a-card', 'command-zone', 'library',
+  'first-land', 'cast-rats', 'tapped', 'summoning-sick', 'first-pass',
+  'phase-track', 'rowan-creature',
+  'your-turn-again', 'second-land', 'cast-evangel', 'first-to-combat', 'first-attack', 'first-hit', 'second-pass',
+  'block', 'block-result', 'graveyard',
+  'third-land', 'cast-commander', 'commander-rules', 'second-to-combat', 'second-attack', 'third-pass',
+  'rowan-commander', 'last-turn', 'last-to-combat', 'last-attack', 'blocked', 'won',
+  'lesson-complete',
+]
 
 interface GameState {
   readonly turn: number
   readonly step: string
   readonly players: Record<string, { readonly life: number; readonly lands: number; readonly hand: readonly string[] }>
 }
+
+type Size = { readonly width: number; readonly height: number }
 
 async function control<T>(request: APIRequestContext, data: Record<string, unknown>): Promise<T> {
   const response = await request.post(CONTROL, { data })
@@ -99,7 +109,7 @@ async function expectSpotlit(page: Page, target: Locator): Promise<void> {
 
 /** Waits for card `id`, on screen and settled (its frame shown, the board
  * idle), and saves its screenshot when asked to. */
-async function expectCard(page: Page, id: string, size: { width: number; height: number }): Promise<Locator> {
+async function expectCard(page: Page, id: string, size: Size): Promise<Locator> {
   const card = cardOf(page, id)
   await expect(card, `card ${id}`).toBeVisible({ timeout: 60_000 })
   await expect(page.locator('.ts-acting'), `card ${id}: the board settles`).not.toHaveText('Resolving…', { timeout: 30_000 })
@@ -112,6 +122,12 @@ async function expectCard(page: Page, id: string, size: { width: number; height:
     await page.screenshot({ path: join(dir, `${size.width}x${size.height}-${String(CARDS.indexOf(id) + 1).padStart(2, '0')}-${id}.png`) })
   }
   return card
+}
+
+/** On through a Next card. */
+async function next(page: Page, id: string, size: Size): Promise<void> {
+  const card = await expectCard(page, id, size)
+  await card.getByRole('button', { name: 'Next' }).click()
 }
 
 /** A click on the page under the overlay lands on the overlay instead. */
@@ -129,6 +145,20 @@ async function expectBlocked(page: Page, target: Locator): Promise<void> {
 const handCard = (page: Page, name: string) => page.locator('.hand-card', { hasText: name }).first()
 const myTile = (page: Page, name: string) =>
   page.locator('.quadrant-cell.self .mini-tile-wrap', { hasText: name }).first()
+const banner = (page: Page) => page.locator('[data-tour="game-decision-banner"]')
+
+/** Declares `names` as attackers, each picked on the board, with the banner's
+ * button, which stays closed short of everyone the card asks for. */
+async function attackWith(page: Page, names: readonly string[]): Promise<void> {
+  const confirm = banner(page).getByRole('button', { name: /Attack with|No attacks/ })
+  for (const name of names) {
+    await expect(confirm).toBeDisabled()
+    await myTile(page, name).click()
+  }
+  await expect(confirm).toHaveText(`Attack with ${names.length}`)
+  await expect(confirm).toBeEnabled()
+  await confirm.click()
+}
 
 async function startLesson(page: Page): Promise<void> {
   await page.goto('/')
@@ -139,126 +169,177 @@ async function startLesson(page: Page): Promise<void> {
 }
 
 for (const size of SIZES) {
-  test(`${size.width}x${size.height}: Learn Commander plays basics-proof through, card by card`, async ({ page, request }) => {
-    test.setTimeout(240_000)
+  test(`${size.width}x${size.height}: Learn Commander plays through to the win, card by card`, async ({ page, request }) => {
+    test.setTimeout(420_000)
     const errors: string[] = []
     page.on('pageerror', (e) => errors.push(e.message))
     await page.setViewportSize(size)
     await recordCards(page)
     await startLesson(page)
+    const pass = page.locator('[data-tour="game-pass"]')
+    const passTurn = page.locator('[data-tour="game-pass-turn"]')
+    const autoPass = page.locator('[data-tour="game-auto-pass"]')
 
-    // Welcome: a card on its own, everything else blocked, and no Retry yet.
+    // The table: Next cards, everything else blocked, nothing yet to retry, and
+    // nothing to go back to at first.
     const welcome = await expectCard(page, 'welcome', size)
     await expect(layer(page)).toHaveAttribute('data-phase', 'center')
     await expect(welcome.getByRole('button', { name: 'Retry chapter' })).toHaveCount(0)
-    await expectBlocked(page, page.locator('[data-tour="game-pass-turn"]'))
+    await expect(welcome.getByRole('button', { name: 'Back' })).toHaveCount(0)
+    await expectBlocked(page, passTurn)
     await welcome.getByRole('button', { name: 'Next' }).click()
+    await next(page, 'life', size)
+    // The hand comes up by itself for the cards about it.
+    await expectCard(page, 'hand', size)
+    await expect(page.locator('.hand-strip')).toHaveClass(/raised/)
+    await cardOf(page, 'hand').getByRole('button', { name: 'Next' }).click()
+    await expectCard(page, 'read-a-card', size)
+    await expect(cardOf(page, 'read-a-card').locator('.pip').first()).toBeVisible()
+    await cardOf(page, 'read-a-card').getByRole('button', { name: 'Next' }).click()
+    await next(page, 'command-zone', size)
+    await next(page, 'library', size)
 
-    // Play a land: the Forest in hand is lit, and clicking it plays it.
-    const land = await expectCard(page, 'play-land', size)
+    // Land and mana.
+    const land = await expectCard(page, 'first-land', size)
     await expect(layer(page)).toHaveAttribute('data-reach', 'page')
-    await expect(land.locator('[data-goal="land-played"]')).toHaveAttribute('data-done', 'false')
     await expect(land.getByRole('button', { name: 'Next' })).toHaveCount(0)
-    await expectSpotlit(page, handCard(page, 'Forest'))
-    await expectApart(land, handCard(page, 'Forest'), 'the Forest')
-    // The top strip's menus stay out of reach while a goal card is up.
-    await expectBlocked(page, page.locator('[data-tour="game-history"]'))
-    await handCard(page, 'Forest').click()
-
-    // Cast Llanowar Elves: one click, the Forest paying for it.
-    const cast = await expectCard(page, 'cast-elves', size)
+    await expectSpotlit(page, handCard(page, 'Swamp'))
+    await expect(page.locator('.hand-strip')).toHaveClass(/raised/)
+    await expectApart(land, handCard(page, 'Swamp'), 'the Swamp')
+    await handCard(page, 'Swamp').click()
+    await expectCard(page, 'cast-rats', size)
     expect((await state(page, request)).players.alice.lands).toBe(1)
-    await expectSpotlit(page, handCard(page, 'Llanowar Elves'))
-    await expectApart(cast, handCard(page, 'Llanowar Elves'), 'the Elves')
-    await handCard(page, 'Llanowar Elves').click()
-
-    // Pass the turn: the room keeps the window for it, on turn 1 with the
-    // Elves down, rather than passing it for the player.
-    const pass = await expectCard(page, 'pass-turn', size)
-    await expect.poll(async () => (await state(page, request)).turn).toBe(1)
-    await expect(myTile(page, 'Llanowar Elves')).toBeVisible()
-    const passTurn = page.locator('[data-tour="game-pass-turn"]')
+    await handCard(page, 'Muck Rats').click()
+    await next(page, 'tapped', size)
+    await next(page, 'summoning-sick', size)
+    const firstPass = await expectCard(page, 'first-pass', size)
     await expectSpotlit(page, passTurn)
-    await expectApart(pass, passTurn, 'Pass Turn')
-    await expect(passTurn).toBeEnabled()
+    await expectApart(firstPass, passTurn, 'Pass Turn')
     await passTurn.click()
 
-    // Block: Rowan's Mystic attacks; the Elves, then the banner's Block.
+    // Rowan's turn stops at each card, with nothing going on behind it.
+    await expectCard(page, 'phase-track', size)
+    expect((await state(page, request)).players.bob.lands).toBe(0)
+    await cardOf(page, 'phase-track').getByRole('button', { name: 'Next' }).click()
+    await next(page, 'rowan-creature', size)
+
+    // Attack.
+    await next(page, 'your-turn-again', size)
+    await expectCard(page, 'second-land', size)
+    await handCard(page, 'Swamp').click()
+    await expectCard(page, 'cast-evangel', size)
+    await handCard(page, 'Cabal Evangel').click()
+    await expectCard(page, 'first-to-combat', size)
+    await expect(passTurn).toBeDisabled()
+    await expect(autoPass).toBeDisabled()
+    await pass.click()
+    const firstAttack = await expectCard(page, 'first-attack', size)
+    await expectApart(firstAttack, banner(page), 'the decision banner')
+    await attackWith(page, ['Muck Rats'])
+    await expectCard(page, 'first-hit', size)
+    expect((await state(page, request)).players.bob.life).toBe(12)
+    await cardOf(page, 'first-hit').getByRole('button', { name: 'Next' }).click()
+    await expectCard(page, 'second-pass', size)
+    await passTurn.click()
+
+    // Block.
     const block = await expectCard(page, 'block', size)
     await expect(page.getByText(/Declare blockers/)).toBeVisible()
-    await expectSpotlit(page, myTile(page, 'Llanowar Elves'))
-    await expectApart(block, myTile(page, 'Llanowar Elves'), 'the Elves')
-    const attacker = page.locator('.quadrant-cell:not(.self) .mini-tile-wrap', { hasText: 'Elvish Mystic' }).first()
-    await expectApart(block, attacker, "Rowan's attacking Mystic")
-    const banner = page.locator('[data-tour="game-decision-banner"]')
-    await expectApart(block, banner, 'the decision banner')
-    await myTile(page, 'Llanowar Elves').click()
-    const confirm = banner.getByRole('button', { name: /^Block/ })
+    await expectApart(block, banner(page), 'the decision banner')
+    // "No blocks" would have left the card waiting for a block that can't come.
+    const confirm = banner(page).getByRole('button', { name: /^Block|No blocks/ })
+    await expect(confirm).toBeDisabled()
+    await myTile(page, 'Cabal Evangel').click()
     await expect(confirm).toBeEnabled()
     await confirm.click()
+    await expectCard(page, 'block-result', size)
+    await expect(page.locator('.quadrant-cell:not(.self) .mini-tile-wrap', { hasText: 'Dwarven Trader' })).toHaveCount(0)
+    await cardOf(page, 'block-result').getByRole('button', { name: 'Next' }).click()
+    await next(page, 'graveyard', size)
 
-    const done = await expectCard(page, 'well-done', size)
-    await done.getByRole('button', { name: 'Next' }).click()
+    // The commander, cast from the command zone: the tile with no name on it.
+    await expectCard(page, 'third-land', size)
+    await handCard(page, 'Swamp').click()
+    await expectCard(page, 'cast-commander', size)
+    await page.locator('.quadrant-cell.self [data-obj-id]', { hasNotText: /\w/ }).first().click()
+    await next(page, 'commander-rules', size)
+    await expectCard(page, 'second-to-combat', size)
+    await pass.click()
+    await expectCard(page, 'second-attack', size)
+    await attackWith(page, ['Muck Rats', 'Cabal Evangel'])
+    await expectCard(page, 'third-pass', size)
+    expect((await state(page, request)).players.bob.life).toBe(9)
+    await passTurn.click()
 
-    // The end: a card of its own, and the lesson recorded as done.
+    // The finish.
+    await next(page, 'rowan-commander', size)
+    await next(page, 'last-turn', size)
+    await expectCard(page, 'last-to-combat', size)
+    await pass.click()
+    await expectCard(page, 'last-attack', size)
+    await attackWith(page, ['Kalakscion', 'Cabal Evangel', 'Muck Rats'])
+    await next(page, 'blocked', size)
+    await next(page, 'won', size)
+
+    // The end: a card of its own, the lesson recorded as done, and on to a game.
     const end = await expectCard(page, 'lesson-complete', size)
     await expect(end.getByRole('heading')).toHaveText('You did it!')
     await expect(end.getByRole('button', { name: 'Play again' })).toBeVisible()
     await expect
       .poll(() => page.evaluate(() => JSON.parse(window.localStorage.getItem('mtg.tutorials') ?? '{}').lessons))
-      .toEqual({ 'basics-proof': 'done' })
+      .toEqual({ 'learn-commander': 'done' })
     expect(await cardsSeen(page)).toEqual(CARDS)
-    // Rowan never lost a life he wasn't meant to; alice took no damage.
     expect((await state(page, request)).players.alice.life).toBe(40)
 
-    // Back to the menu, where the "?" menu says it's done.
-    await end.getByRole('button', { name: 'Back to menu' }).click()
-    await expect(page.locator('[data-tour="landing-create"]')).toBeVisible({ timeout: 30_000 })
-    await page.locator('[data-tour="corner-help"]').click()
-    await expect(page.getByRole('menuitem', { name: /Learn Commander again/ })).toContainText('Done')
+    await end.getByRole('button', { name: 'Play a real game' }).click()
+    await expect(page.locator('.mulligan-modal')).toBeVisible({ timeout: 60_000 })
+    await expect(page.locator('.coach-card')).toHaveCount(0)
     expect(errors).toEqual([])
   })
 }
 
-test('Retry rewinds a chapter gone wrong to its start', async ({ page, request }) => {
+test('nothing can run off and leave the lesson waiting, Back looks, and Retry rewinds', async ({ page, request }) => {
   test.setTimeout(180_000)
   const errors: string[] = []
   page.on('pageerror', (e) => errors.push(e.message))
   await startLesson(page)
-  await cardOf(page, 'welcome').getByRole('button', { name: 'Next' }).click()
-  await expect(cardOf(page, 'play-land')).toBeVisible()
-  await handCard(page, 'Forest').click()
-  await expect(cardOf(page, 'cast-elves')).toBeVisible({ timeout: 30_000 })
-  const start = await state(page, request)
-  expect(start).toMatchObject({ turn: 1 })
-  expect(start.players.alice.hand).toHaveLength(2)
+  const size = { width: 1366, height: 768 }
+  for (const id of ['welcome', 'life', 'hand', 'read-a-card', 'command-zone', 'library']) await next(page, id, size)
 
-  // The wrong move: pass the turn without casting the Elves. Rowan's turn
-  // plays out (his Mystic swings in unblocked), and it's alice's again.
-  await page.locator('[data-tour="game-pass-turn"]').click()
-  await expect.poll(async () => (await state(page, request)).turn, { timeout: 60_000 }).toBe(3)
-  const wrong = await state(page, request)
-  expect(wrong.players.alice.life).toBe(39)
-  expect(wrong.players.alice.hand).toHaveLength(3)
-  // Still asked to cast them.
-  await expect(cardOf(page, 'cast-elves')).toBeVisible()
-  await expect(cardOf(page, 'cast-elves').locator('[data-goal="elves-cast"]')).toHaveAttribute('data-done', 'false')
+  // Passing early was the soft-lock (2026-11-02): all three buttons are closed.
+  await expectCard(page, 'first-land', size)
+  for (const button of ['game-pass', 'game-pass-turn', 'game-auto-pass']) {
+    await expect(page.locator(`[data-tour="${button}"]`)).toBeDisabled()
+  }
+  await page.keyboard.press('Space')
+  await page.waitForTimeout(500)
+  expect((await state(page, request)).turn).toBe(1)
+  await expect(cardOf(page, 'first-land')).toBeVisible()
+  // Nor is another card in the hand any use.
+  await handCard(page, 'Barony Vampire').click({ force: true })
+  await page.waitForTimeout(300)
+  expect((await state(page, request)).players.alice.hand).toHaveLength(7)
 
-  // Retry: back to the chapter's start — turn 1, the life back, the draw undone.
-  await cardOf(page, 'cast-elves').getByRole('button', { name: 'Retry chapter' }).click()
-  await expect.poll(async () => (await state(page, request)).turn, { timeout: 30_000 }).toBe(1)
-  const rewound = await state(page, request)
-  expect(rewound.players.alice.life).toBe(40)
-  expect(rewound.players.alice.hand).toEqual(start.players.alice.hand)
-  expect(rewound.players.alice.lands).toBe(1)
-  await expect(cardOf(page, 'cast-elves')).toBeVisible()
-  await expect(handCard(page, 'Llanowar Elves')).toBeVisible()
-  // The rewound board on screen, settled, before the click.
-  await expect(page.locator('.hand-card')).toHaveCount(2)
-  await expect(page.locator('.ts-acting')).toHaveText(/Alice to act/, { timeout: 30_000 })
+  // Back reads the card before, and returns; the game hasn't moved.
+  await cardOf(page, 'first-land').getByRole('button', { name: 'Back' }).click()
+  const review = cardOf(page, 'review:library')
+  await expect(review).toContainText('Your library')
+  await review.getByRole('button', { name: 'Back' }).click()
+  await expect(cardOf(page, 'review:command-zone')).toBeVisible()
+  await cardOf(page, 'review:command-zone').getByRole('button', { name: 'Return to the lesson' }).click()
+  await expect(cardOf(page, 'first-land')).toBeVisible()
 
-  // And it plays on from there: cast them now.
-  await handCard(page, 'Llanowar Elves').click()
-  await expect(cardOf(page, 'pass-turn')).toBeVisible({ timeout: 30_000 })
+  // No Retry until there's something to undo; then back to the chapter's start.
+  await expect(cardOf(page, 'first-land').getByRole('button', { name: 'Retry chapter' })).toHaveCount(0)
+  await handCard(page, 'Swamp').click()
+  const cast = await expectCard(page, 'cast-rats', size)
+  expect((await state(page, request)).players.alice.lands).toBe(1)
+  await cast.getByRole('button', { name: 'Retry chapter' }).click()
+  await expect(cardOf(page, 'first-land')).toBeVisible({ timeout: 30_000 })
+  await expect.poll(async () => (await state(page, request)).players.alice.lands, { timeout: 30_000 }).toBe(0)
+
+  // And it plays on from there.
+  await handCard(page, 'Swamp').click()
+  await expect(cardOf(page, 'cast-rats')).toBeVisible({ timeout: 30_000 })
   expect(errors).toEqual([])
 })

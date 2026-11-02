@@ -13,6 +13,7 @@
  */
 
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { SAMPLE_DECKS } from 'engine/client'
 import type { Action, LegalAction, ObjectId, PlayerId, PlayerView } from 'engine/client'
 import type { Frame } from '../game/usePlayback.ts'
 import { realId } from '../game/stackMembers.ts'
@@ -34,7 +35,7 @@ import { randomBotDecks } from '../lobby/randomBotDeck.ts'
 import { isRematch } from './rematch.ts'
 import { NO_EVENT_LOG, receiveFrame } from './eventLog.ts'
 import type { EventLogState } from './eventLog.ts'
-import { LESSON_PARAM } from '../tutorial/lesson.ts'
+import { FIRST_GAME_PARAM, LESSON_PARAM } from '../tutorial/lesson.ts'
 import type { GameKey } from './rematch.ts'
 import { localMode } from '../local/localMode.ts'
 import { localStart } from '../lobby/localStart.ts'
@@ -167,6 +168,19 @@ function takeLessonFromUrl(): string | null {
   window.history.replaceState(null, '', url)
   return lesson
 }
+
+/** A `?first-game=` the page loaded with (`FIRST_GAME_URL`), taken off the URL
+ * the same way. */
+function takeFirstGameFromUrl(): boolean {
+  const url = new URL(window.location.href)
+  if (!url.searchParams.has(FIRST_GAME_PARAM)) return false
+  url.searchParams.delete(FIRST_GAME_PARAM)
+  window.history.replaceState(null, '', url)
+  return true
+}
+
+/** The starter deck for someone just out of Learn Commander. */
+const FIRST_GAME_DECK = 'First Flight'
 
 /** What a capture-enabled server has answered so far — see
  * `NetworkGame.capture`. */
@@ -433,6 +447,8 @@ export function useNetworkGame(): NetworkGame {
   /** `createTutorial`, for the socket's `onopen` (a `?tutorial=` URL), which
    * is built before it. */
   const startTutorialRef = useRef<(lesson: string) => void>(() => {})
+  /** The same for a `?first-game=` URL. */
+  const startFirstGameRef = useRef<() => void>(() => {})
   /** The game the last frame was from, to tell a rematch's first frame. */
   const lastGameRef = useRef<GameKey | null>(null)
   /** The event log as this socket's frames have built it (`eventLog.ts`). */
@@ -534,12 +550,15 @@ export function useNetworkGame(): NetworkGame {
       const url = new URL(window.location.href)
       const fromUrl = url.searchParams.get('room')
       const lesson = fromUrl ? null : takeLessonFromUrl()
+      const firstGame = !fromUrl && takeFirstGameFromUrl()
       if (fromUrl) {
         joinRoomId(fromUrl)
       } else {
         setStatus('no-room')
         // "Play again", or Learn Commander from a lobby: a room of its own.
         if (lesson !== null) startTutorialRef.current(lesson)
+        // The way on from Learn Commander.
+        else if (firstGame) startFirstGameRef.current()
         // A dev build's `?check=<title>`: a builder room, whose Manual checks
         // list takes the parameter and plays that test (e2e/run-check.mjs).
         else if (import.meta.env.DEV && url.searchParams.has(CHECK_PARAM)) {
@@ -859,14 +878,14 @@ export function useNetworkGame(): NetworkGame {
   }, [send])
 
   const blitz = useCallback(
-    (deck: WireDeck, report: BlitzReport) => {
+    (deck: WireDeck, report: BlitzReport, against: 'upgraded' | 'precon' = 'upgraded') => {
       const hostToken = newClientToken()
       pendingHostTokenRef.current = hostToken
       pendingBlitzRef.current = {
         deck,
         // A blitz is a game against the bots at their best: the upgraded
-        // precons (`UPGRADED_DECKS`).
-        bots: randomBotDecks(BLITZ_PLAYERS - 1, deck.name === undefined ? [] : [deck.name], Math.random, 'upgraded'),
+        // precons (`UPGRADED_DECKS`). A first game isn't.
+        bots: randomBotDecks(BLITZ_PLAYERS - 1, deck.name === undefined ? [] : [deck.name], Math.random, against),
         sent: false,
       }
       setBlitzing(true)
@@ -875,6 +894,22 @@ export function useNetworkGame(): NetworkGame {
     },
     [sendSolo],
   )
+
+  useEffect(() => {
+    startFirstGameRef.current = () => {
+      const starter = SAMPLE_DECKS.find((d) => d.name === FIRST_GAME_DECK) ?? SAMPLE_DECKS[0]
+      blitz(
+        {
+          cards: starter.cards,
+          commanders: starter.commanders,
+          name: starter.name,
+          ...(starter.printings !== undefined ? { printings: starter.printings } : {}),
+        },
+        { deckName: starter.name, substituted: [], dropped: [] },
+        'precon',
+      )
+    }
+  }, [blitz])
 
   const dismissBlitzReport = useCallback(() => setBlitzReport(null), [])
 

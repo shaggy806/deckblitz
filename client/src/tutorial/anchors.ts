@@ -79,6 +79,7 @@ export const bannerButton =
 /**
  * Where a tutorial room's coach card points (`protocol`'s `TutorialAnchor`),
  * read: `tour:<name>` (a `data-tour` name above), `card:<Card Name>`,
+ * `battlefield:<Card Name>` (only there, for a name also in the hand),
  * `player:<seat | me | opponent>`, `zone:<hand | library | graveyard |
  * exile>:<seat | me | opponent>` (that count in the player's panel, which
  * opens the zone), `step:<Step>` (a phase-track pip) or `css:<selector>`. Anything else reads as no anchor at all — a centred
@@ -87,6 +88,7 @@ export const bannerButton =
 export type LessonAnchor =
   | { readonly kind: 'tour'; readonly name: string }
   | { readonly kind: 'card'; readonly name: string }
+  | { readonly kind: 'battlefield'; readonly name: string }
   | { readonly kind: 'player'; readonly who: string }
   | { readonly kind: 'zone'; readonly zone: PanelZone; readonly who: string }
   | { readonly kind: 'step'; readonly step: string }
@@ -118,6 +120,8 @@ export function parseLessonAnchor(anchor: string | undefined): LessonAnchor | nu
       return { kind: 'tour', name: rest }
     case 'card':
       return { kind: 'card', name: rest }
+    case 'battlefield':
+      return { kind: 'battlefield', name: rest }
     case 'player':
       return { kind: 'player', who: rest }
     case 'zone': {
@@ -231,10 +235,12 @@ export function lessonAnchor(
         return player === null ? null : find(`[${PANEL_ZONE_ATTR[parsed.zone]}="${attrValue(player)}"]`)
       }
     case 'card':
+    case 'battlefield':
       return () => {
         const v = view()
         if (v === null) return null
-        for (const id of cardIdsNamed(v, seat, parsed.name)) {
+        const ids = cardIdsNamed(v, seat, parsed.name)
+        for (const id of parsed.kind === 'card' ? ids : ids.filter((i) => v.zones.battlefield.includes(i))) {
           for (const selector of objectSelectors(id)) {
             const el = find(selector)
             if (el !== null) return el
