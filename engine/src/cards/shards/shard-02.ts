@@ -93,6 +93,7 @@ import _poolBruceBanner from "../pool/bruce-banner.js";
 import _poolBrushfireElemental from "../pool/brushfire-elemental.js";
 import _poolBulette from "../pool/bulette.js";
 import _poolBulkUp from "../pool/bulk-up.js";
+import _poolBurnAway from "../pool/burn-away.js";
 import _poolCabalCoffers from "../pool/cabal-coffers.js";
 import _poolCallForBlood from "../pool/call-for-blood.js";
 import _poolCampaignOfVengeance from "../pool/campaign-of-vengeance.js";
@@ -346,6 +347,7 @@ import _poolHeroOfTheDunes from "../pool/hero-of-the-dunes.js";
 import _poolHeronsGraceChampion from "../pool/herons-grace-champion.js";
 import _poolHiddenAncients from "../pool/hidden-ancients.js";
 import _poolHiddenCourtyard from "../pool/hidden-courtyard.js";
+import _poolHoardingDragon from "../pool/hoarding-dragon.js";
 import _poolHobblingZombie from "../pool/hobbling-zombie.js";
 import _poolHollowOne from "../pool/hollow-one.js";
 import _poolHollowhengeBeast from "../pool/hollowhenge-beast.js";
@@ -526,6 +528,7 @@ import _poolPearlDragon from "../pool/pearl-dragon.js";
 import _poolPeculiarLighthouse from "../pool/peculiar-lighthouse.js";
 import _poolPenumbraWurm from "../pool/penumbra-wurm.js";
 import _poolPerilousVault from "../pool/perilous-vault.js";
+import _poolPerishTheThought from "../pool/perish-the-thought.js";
 import _poolPewterGolem from "../pool/pewter-golem.js";
 import _poolPhalanxLeader from "../pool/phalanx-leader.js";
 import _poolPharagaxGiant from "../pool/pharagax-giant.js";
@@ -953,6 +956,7 @@ const shard: CardShard = {
     _poolBrushfireElemental,
     _poolBulette,
     _poolBulkUp,
+    _poolBurnAway,
     _poolCabalCoffers,
     _poolCallForBlood,
     _poolCampaignOfVengeance,
@@ -1206,6 +1210,7 @@ const shard: CardShard = {
     _poolHeronsGraceChampion,
     _poolHiddenAncients,
     _poolHiddenCourtyard,
+    _poolHoardingDragon,
     _poolHobblingZombie,
     _poolHollowOne,
     _poolHollowhengeBeast,
@@ -1386,6 +1391,7 @@ const shard: CardShard = {
     _poolPeculiarLighthouse,
     _poolPenumbraWurm,
     _poolPerilousVault,
+    _poolPerishTheThought,
     _poolPewterGolem,
     _poolPhalanxLeader,
     _poolPharagaxGiant,

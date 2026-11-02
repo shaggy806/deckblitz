@@ -145,6 +145,7 @@ import _poolCorpseAugur from "../pool/corpse-augur.js";
 import _poolCorruptedHarvester from "../pool/corrupted-harvester.js";
 import _poolCostlyPlunder from "../pool/costly-plunder.js";
 import _poolCourtOfGrace from "../pool/court-of-grace.js";
+import _poolCrackdown from "../pool/crackdown.js";
 import _poolCrackedSkull from "../pool/cracked-skull.js";
 import _poolCraftWithPride from "../pool/craft-with-pride.js";
 import _poolCragSaurian from "../pool/crag-saurian.js";
@@ -267,6 +268,7 @@ import _poolFlamespeakersWill from "../pool/flamespeakers-will.js";
 import _poolFleetingFlight from "../pool/fleeting-flight.js";
 import _poolFleetwheelCruiser from "../pool/fleetwheel-cruiser.js";
 import _poolFleshBlood from "../pool/flesh-blood.js";
+import _poolFlunk from "../pool/flunk.js";
 import _poolForerunnerOfTheLegion from "../pool/forerunner-of-the-legion.js";
 import _poolForgeBoss from "../pool/forge-boss.js";
 import _poolForlornFlats from "../pool/forlorn-flats.js";
@@ -1037,6 +1039,7 @@ const shard: CardShard = {
     _poolCorruptedHarvester,
     _poolCostlyPlunder,
     _poolCourtOfGrace,
+    _poolCrackdown,
     _poolCrackedSkull,
     _poolCraftWithPride,
     _poolCragSaurian,
@@ -1159,6 +1162,7 @@ const shard: CardShard = {
     _poolFleetingFlight,
     _poolFleetwheelCruiser,
     _poolFleshBlood,
+    _poolFlunk,
     _poolForerunnerOfTheLegion,
     _poolForgeBoss,
     _poolForlornFlats,

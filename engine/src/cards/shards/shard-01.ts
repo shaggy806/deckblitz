@@ -107,6 +107,7 @@ import _poolChance from "../pool/chance.js";
 import _poolChaosShrinesBlackCrystal from "../pool/chaos-shrines-black-crystal.js";
 import _poolChargingBandits from "../pool/charging-bandits.js";
 import _poolCinderStorm from "../pool/cinder-storm.js";
+import _poolCinderheartGiant from "../pool/cinderheart-giant.js";
 import _poolClaimTerritory from "../pool/claim-territory.js";
 import _poolClaimTheKingdom from "../pool/claim-the-kingdom.js";
 import _poolClarionCathars from "../pool/clarion-cathars.js";
@@ -427,6 +428,7 @@ import _poolManorSkeleton from "../pool/manor-skeleton.js";
 import _poolMantaRiders from "../pool/manta-riders.js";
 import _poolMaraleafPixie from "../pool/maraleaf-pixie.js";
 import _poolMarchOfTheDrowned from "../pool/march-of-the-drowned.js";
+import _poolMarchOfTheWorldOoze from "../pool/march-of-the-world-ooze.js";
 import _poolMarchesaDealerOfDeath from "../pool/marchesa-dealer-of-death.js";
 import _poolMarchesasInfiltrator from "../pool/marchesas-infiltrator.js";
 import _poolMarionetteMaster from "../pool/marionette-master.js";
@@ -589,6 +591,7 @@ import _poolRummagingWizard from "../pool/rummaging-wizard.js";
 import _poolRusticClachan from "../pool/rustic-clachan.js";
 import _poolRustmouthOgre from "../pool/rustmouth-ogre.js";
 import _poolRuthlessDeathfang from "../pool/ruthless-deathfang.js";
+import _poolRuxaPatientProfessor from "../pool/ruxa-patient-professor.js";
 import _poolSacredCat from "../pool/sacred-cat.js";
 import _poolSakashimaOfAThousandFaces from "../pool/sakashima-of-a-thousand-faces.js";
 import _poolSaltRoadPackbeast from "../pool/salt-road-packbeast.js";
@@ -967,6 +970,7 @@ const shard: CardShard = {
     _poolChaosShrinesBlackCrystal,
     _poolChargingBandits,
     _poolCinderStorm,
+    _poolCinderheartGiant,
     _poolClaimTerritory,
     _poolClaimTheKingdom,
     _poolClarionCathars,
@@ -1287,6 +1291,7 @@ const shard: CardShard = {
     _poolMantaRiders,
     _poolMaraleafPixie,
     _poolMarchOfTheDrowned,
+    _poolMarchOfTheWorldOoze,
     _poolMarchesaDealerOfDeath,
     _poolMarchesasInfiltrator,
     _poolMarionetteMaster,
@@ -1449,6 +1454,7 @@ const shard: CardShard = {
     _poolRusticClachan,
     _poolRustmouthOgre,
     _poolRuthlessDeathfang,
+    _poolRuxaPatientProfessor,
     _poolSacredCat,
     _poolSakashimaOfAThousandFaces,
     _poolSaltRoadPackbeast,

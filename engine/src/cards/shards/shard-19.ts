@@ -397,6 +397,7 @@ import _poolHulklingYoungAvenger from "../pool/hulkling-young-avenger.js";
 import _poolHurkylsRecall from "../pool/hurkyls-recall.js";
 import _poolIceMagic from "../pool/ice-magic.js";
 import _poolIchorDrinker from "../pool/ichor-drinker.js";
+import _poolIchorid from "../pool/ichorid.js";
 import _poolIgnisScientia from "../pool/ignis-scientia.js";
 import _poolIgniteTheFuture from "../pool/ignite-the-future.js";
 import _poolIllusionaryArmor from "../pool/illusionary-armor.js";
@@ -1317,6 +1318,7 @@ const shard: CardShard = {
     _poolHurkylsRecall,
     _poolIceMagic,
     _poolIchorDrinker,
+    _poolIchorid,
     _poolIgnisScientia,
     _poolIgniteTheFuture,
     _poolIllusionaryArmor,

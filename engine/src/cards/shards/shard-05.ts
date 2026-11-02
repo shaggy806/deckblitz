@@ -558,6 +558,7 @@ import _poolOverwhelmingStampede from "../pool/overwhelming-stampede.js";
 import _poolPactOfNegation from "../pool/pact-of-negation.js";
 import _poolPainKami from "../pool/pain-kami.js";
 import _poolPaladinsArms from "../pool/paladins-arms.js";
+import _poolPapalymoTotolymo from "../pool/papalymo-totolymo.js";
 import _poolPapercraftDecoy from "../pool/papercraft-decoy.js";
 import _poolPathmakerInitiate from "../pool/pathmaker-initiate.js";
 import _poolPatriciansScorn from "../pool/patricians-scorn.js";
@@ -705,6 +706,7 @@ import _poolSparkReaper from "../pool/spark-reaper.js";
 import _poolSpectatorSeating from "../pool/spectator-seating.js";
 import _poolSpellshock from "../pool/spellshock.js";
 import _poolSpellskite from "../pool/spellskite.js";
+import _poolSpikeCannibal from "../pool/spike-cannibal.js";
 import _poolSpinewoodsArmadillo from "../pool/spinewoods-armadillo.js";
 import _poolSpiritSummoning from "../pool/spirit-summoning.js";
 import _poolSpiteMalice from "../pool/spite-malice.js";
@@ -1434,6 +1436,7 @@ const shard: CardShard = {
     _poolPactOfNegation,
     _poolPainKami,
     _poolPaladinsArms,
+    _poolPapalymoTotolymo,
     _poolPapercraftDecoy,
     _poolPathmakerInitiate,
     _poolPatriciansScorn,
@@ -1581,6 +1584,7 @@ const shard: CardShard = {
     _poolSpectatorSeating,
     _poolSpellshock,
     _poolSpellskite,
+    _poolSpikeCannibal,
     _poolSpinewoodsArmadillo,
     _poolSpiritSummoning,
     _poolSpiteMalice,

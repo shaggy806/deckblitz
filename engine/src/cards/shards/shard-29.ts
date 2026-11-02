@@ -273,6 +273,7 @@ import _poolFoulRebirth from "../pool/foul-rebirth.js";
 import _poolFracturedSanity from "../pool/fractured-sanity.js";
 import _poolFrodoSauronsBane from "../pool/frodo-saurons-bane.js";
 import _poolFrogTongue from "../pool/frog-tongue.js";
+import _poolFullFlowering from "../pool/full-flowering.js";
 import _poolFuneralRoomAwakeningHall from "../pool/funeral-room-awakening-hall.js";
 import _poolFurtiveHomunculus from "../pool/furtive-homunculus.js";
 import _poolGallantPieWielder from "../pool/gallant-pie-wielder.js";
@@ -399,6 +400,7 @@ import _poolKujarSeedsculptor from "../pool/kujar-seedsculptor.js";
 import _poolKulrathZealot from "../pool/kulrath-zealot.js";
 import _poolLairOfTheHydra from "../pool/lair-of-the-hydra.js";
 import _poolLanternScout from "../pool/lantern-scout.js";
+import _poolLeadershipVacuum from "../pool/leadership-vacuum.js";
 import _poolLegolasMasterArcher from "../pool/legolas-master-archer.js";
 import _poolLegolassQuickReflexes from "../pool/legolass-quick-reflexes.js";
 import _poolLeylineSurge from "../pool/leyline-surge.js";
@@ -1155,6 +1157,7 @@ const shard: CardShard = {
     _poolFracturedSanity,
     _poolFrodoSauronsBane,
     _poolFrogTongue,
+    _poolFullFlowering,
     _poolFuneralRoomAwakeningHall,
     _poolFurtiveHomunculus,
     _poolGallantPieWielder,
@@ -1281,6 +1284,7 @@ const shard: CardShard = {
     _poolKulrathZealot,
     _poolLairOfTheHydra,
     _poolLanternScout,
+    _poolLeadershipVacuum,
     _poolLegolasMasterArcher,
     _poolLegolassQuickReflexes,
     _poolLeylineSurge,

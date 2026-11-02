@@ -444,6 +444,7 @@ import _poolMassCalcify from "../pool/mass-calcify.js";
 import _poolMassOfGhouls from "../pool/mass-of-ghouls.js";
 import _poolMaulSplicer from "../pool/maul-splicer.js";
 import _poolMeasureOfWickedness from "../pool/measure-of-wickedness.js";
+import _poolMeekstone from "../pool/meekstone.js";
 import _poolMenacingOgre from "../pool/menacing-ogre.js";
 import _poolMentalAgony from "../pool/mental-agony.js";
 import _poolMercurialPretender from "../pool/mercurial-pretender.js";
@@ -1346,6 +1347,7 @@ const shard: CardShard = {
     _poolMassOfGhouls,
     _poolMaulSplicer,
     _poolMeasureOfWickedness,
+    _poolMeekstone,
     _poolMenacingOgre,
     _poolMentalAgony,
     _poolMercurialPretender,

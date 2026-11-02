@@ -902,6 +902,7 @@ import _poolWintermoorCommander from "../pool/wintermoor-commander.js";
 import _poolWipeClean from "../pool/wipe-clean.js";
 import _poolWispweaverAngel from "../pool/wispweaver-angel.js";
 import _poolWoodlandLiege from "../pool/woodland-liege.js";
+import _poolWorldfire from "../pool/worldfire.js";
 import _poolWormHarvest from "../pool/worm-harvest.js";
 import _poolWormwoodDryad from "../pool/wormwood-dryad.js";
 import _poolWormwoodTreefolk from "../pool/wormwood-treefolk.js";
@@ -1843,6 +1844,7 @@ const shard: CardShard = {
     _poolWipeClean,
     _poolWispweaverAngel,
     _poolWoodlandLiege,
+    _poolWorldfire,
     _poolWormHarvest,
     _poolWormwoodDryad,
     _poolWormwoodTreefolk,

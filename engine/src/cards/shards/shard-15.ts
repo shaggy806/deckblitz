@@ -311,6 +311,7 @@ import _poolGruulBeastmaster from "../pool/gruul-beastmaster.js";
 import _poolGruulGuildmage from "../pool/gruul-guildmage.js";
 import _poolGuardianScalelord from "../pool/guardian-scalelord.js";
 import _poolGuruPathik from "../pool/guru-pathik.js";
+import _poolGuulDrazSpecter from "../pool/guul-draz-specter.js";
 import _poolHamatoNinpo from "../pool/hamato-ninpo.js";
 import _poolHarborBandit from "../pool/harbor-bandit.js";
 import _poolHardenedBerserker from "../pool/hardened-berserker.js";
@@ -389,6 +390,7 @@ import _poolKithkinHarbinger from "../pool/kithkin-harbinger.js";
 import _poolKjeldoranGargoyle from "../pool/kjeldoran-gargoyle.js";
 import _poolKjeldoranOutpost from "../pool/kjeldoran-outpost.js";
 import _poolKjeldoranWarrior from "../pool/kjeldoran-warrior.js";
+import _poolKnightOfWundagore from "../pool/knight-of-wundagore.js";
 import _poolKrallenhordeHowler from "../pool/krallenhorde-howler.js";
 import _poolKrovikanRot from "../pool/krovikan-rot.js";
 import _poolKyoshiIslandPlaza from "../pool/kyoshi-island-plaza.js";
@@ -1157,6 +1159,7 @@ const shard: CardShard = {
     _poolGruulGuildmage,
     _poolGuardianScalelord,
     _poolGuruPathik,
+    _poolGuulDrazSpecter,
     _poolHamatoNinpo,
     _poolHarborBandit,
     _poolHardenedBerserker,
@@ -1235,6 +1238,7 @@ const shard: CardShard = {
     _poolKjeldoranGargoyle,
     _poolKjeldoranOutpost,
     _poolKjeldoranWarrior,
+    _poolKnightOfWundagore,
     _poolKrallenhordeHowler,
     _poolKrovikanRot,
     _poolKyoshiIslandPlaza,

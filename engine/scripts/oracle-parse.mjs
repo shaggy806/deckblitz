@@ -9938,6 +9938,8 @@ export function parseFace(face, ctx = {}) {
   if (
     /\bexiled with (?:this \w+|it)\b/.test(oracleText) ||
     /\breturn the exiled card\b/.test(oracleText) ||
+    // Hoarding Dragon's "you may put the exiled card into its owner's hand".
+    /\bput the exiled card into\b/.test(oracleText) ||
     /\bsame name as the exiled card\b/.test(oracleText) ||
     (face.name !== undefined && oracleText.includes(`exiled with ${face.name}`))
   ) {

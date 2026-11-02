@@ -211,7 +211,9 @@ import _poolElvishHydromancer from "../pool/elvish-hydromancer.js";
 import _poolEmberhornMinotaur from "../pool/emberhorn-minotaur.js";
 import _poolEmberwildeCaliph from "../pool/emberwilde-caliph.js";
 import _poolEmptyTheLaboratory from "../pool/empty-the-laboratory.js";
+import _poolEncirclingFissure from "../pool/encircling-fissure.js";
 import _poolEndlessCockroaches from "../pool/endless-cockroaches.js";
+import _poolEnduringScalelord from "../pool/enduring-scalelord.js";
 import _poolEnigmaSphinx from "../pool/enigma-sphinx.js";
 import _poolEnragedRevolutionary from "../pool/enraged-revolutionary.js";
 import _poolEnshrinedMemories from "../pool/enshrined-memories.js";
@@ -479,6 +481,7 @@ import _poolMostValuableSlayer from "../pool/most-valuable-slayer.js";
 import _poolMournwillow from "../pool/mournwillow.js";
 import _poolMtendaHerder from "../pool/mtenda-herder.js";
 import _poolMukotaiSoulripper from "../pool/mukotai-soulripper.js";
+import _poolMuragandaPetroglyphs from "../pool/muraganda-petroglyphs.js";
 import _poolMyrMindservant from "../pool/myr-mindservant.js";
 import _poolMyrReservoir from "../pool/myr-reservoir.js";
 import _poolMysteriousEgg from "../pool/mysterious-egg.js";
@@ -1095,7 +1098,9 @@ const shard: CardShard = {
     _poolEmberhornMinotaur,
     _poolEmberwildeCaliph,
     _poolEmptyTheLaboratory,
+    _poolEncirclingFissure,
     _poolEndlessCockroaches,
+    _poolEnduringScalelord,
     _poolEnigmaSphinx,
     _poolEnragedRevolutionary,
     _poolEnshrinedMemories,
@@ -1363,6 +1368,7 @@ const shard: CardShard = {
     _poolMournwillow,
     _poolMtendaHerder,
     _poolMukotaiSoulripper,
+    _poolMuragandaPetroglyphs,
     _poolMyrMindservant,
     _poolMyrReservoir,
     _poolMysteriousEgg,

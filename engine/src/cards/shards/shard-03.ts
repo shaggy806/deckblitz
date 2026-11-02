@@ -51,6 +51,7 @@ import _poolBellowingSaddlebrute from "../pool/bellowing-saddlebrute.js";
 import _poolBelovedPrincess from "../pool/beloved-princess.js";
 import _poolBenalishCavalry from "../pool/benalish-cavalry.js";
 import _poolBenevolentHydra from "../pool/benevolent-hydra.js";
+import _poolBindSpirit from "../pool/bind-spirit.js";
 import _poolBindTheMonster from "../pool/bind-the-monster.js";
 import _poolBlazeCommando from "../pool/blaze-commando.js";
 import _poolBlessedRespite from "../pool/blessed-respite.js";
@@ -140,6 +141,7 @@ import _poolDeathOrGlory from "../pool/death-or-glory.js";
 import _poolDeathbonnetHulk from "../pool/deathbonnet-hulk.js";
 import _poolDeathsDuet from "../pool/deaths-duet.js";
 import _poolDeceiverExarch from "../pool/deceiver-exarch.js";
+import _poolDeceiverOfForm from "../pool/deceiver-of-form.js";
 import _poolDecimate from "../pool/decimate.js";
 import _poolDecreeOfJustice from "../pool/decree-of-justice.js";
 import _poolDeeptreadMerrow from "../pool/deeptread-merrow.js";
@@ -861,6 +863,7 @@ const shard: CardShard = {
     _poolBelovedPrincess,
     _poolBenalishCavalry,
     _poolBenevolentHydra,
+    _poolBindSpirit,
     _poolBindTheMonster,
     _poolBlazeCommando,
     _poolBlessedRespite,
@@ -950,6 +953,7 @@ const shard: CardShard = {
     _poolDeathbonnetHulk,
     _poolDeathsDuet,
     _poolDeceiverExarch,
+    _poolDeceiverOfForm,
     _poolDecimate,
     _poolDecreeOfJustice,
     _poolDeeptreadMerrow,

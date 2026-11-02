@@ -1196,6 +1196,7 @@ export const COMMANDER_BANNED: readonly string[] = [
   "Emrakul, the Aeons Torn",
   "Golos, Tireless Pilgrim",
   "Griselbrand",
+  "Iona, Shield of Emeria",
   "Jeweled Lotus",
   "Karakas",
   "Library of Alexandria",

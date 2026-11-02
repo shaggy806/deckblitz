@@ -77,6 +77,7 @@ import _poolBraingeyser from "../pool/braingeyser.js";
 import _poolBrainstorm from "../pool/brainstorm.js";
 import _poolBribery from "../pool/bribery.js";
 import _poolBrineSeer from "../pool/brine-seer.js";
+import _poolBringToLight from "../pool/bring-to-light.js";
 import _poolBristlingBackwoods from "../pool/bristling-backwoods.js";
 import _poolBruteStrength from "../pool/brute-strength.js";
 import _poolBucolicRanch from "../pool/bucolic-ranch.js";
@@ -631,6 +632,7 @@ import _poolShadowRift from "../pool/shadow-rift.js";
 import _poolShadowyBackstreet from "../pool/shadowy-backstreet.js";
 import _poolShamelessCharlatan from "../pool/shameless-charlatan.js";
 import _poolShapersSanctuary from "../pool/shapers-sanctuary.js";
+import _poolSharedSummons from "../pool/shared-summons.js";
 import _poolShellOfTheLastKappa from "../pool/shell-of-the-last-kappa.js";
 import _poolShelobsAmbush from "../pool/shelobs-ambush.js";
 import _poolShessraDeathsWhisper from "../pool/shessra-deaths-whisper.js";
@@ -951,6 +953,7 @@ const shard: CardShard = {
     _poolBrainstorm,
     _poolBribery,
     _poolBrineSeer,
+    _poolBringToLight,
     _poolBristlingBackwoods,
     _poolBruteStrength,
     _poolBucolicRanch,
@@ -1505,6 +1508,7 @@ const shard: CardShard = {
     _poolShadowyBackstreet,
     _poolShamelessCharlatan,
     _poolShapersSanctuary,
+    _poolSharedSummons,
     _poolShellOfTheLastKappa,
     _poolShelobsAmbush,
     _poolShessraDeathsWhisper,

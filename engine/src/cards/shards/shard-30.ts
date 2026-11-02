@@ -611,6 +611,7 @@ import _poolRejuvenate from "../pool/rejuvenate.js";
 import _poolRelease from "../pool/release.js";
 import _poolRelentlessAdvance from "../pool/relentless-advance.js";
 import _poolReluctantRoleModel from "../pool/reluctant-role-model.js";
+import _poolRenderSilent from "../pool/render-silent.js";
 import _poolRepairAndRecharge from "../pool/repair-and-recharge.js";
 import _poolRepentance from "../pool/repentance.js";
 import _poolRescuePepperPotts from "../pool/rescue-pepper-potts.js";
@@ -794,6 +795,7 @@ import _poolTricksterMage from "../pool/trickster-mage.js";
 import _poolTrickstersStratagem from "../pool/tricksters-stratagem.js";
 import _poolTripNoose from "../pool/trip-noose.js";
 import _poolTunnelTipster from "../pool/tunnel-tipster.js";
+import _poolTwinflameTravelers from "../pool/twinflame-travelers.js";
 import _poolTyrantOfKherRidges from "../pool/tyrant-of-kher-ridges.js";
 import _poolTyrantsChoice from "../pool/tyrants-choice.js";
 import _poolUlamogTheInfiniteGyre from "../pool/ulamog-the-infinite-gyre.js";
@@ -1503,6 +1505,7 @@ const shard: CardShard = {
     _poolRelease,
     _poolRelentlessAdvance,
     _poolReluctantRoleModel,
+    _poolRenderSilent,
     _poolRepairAndRecharge,
     _poolRepentance,
     _poolRescuePepperPotts,
@@ -1686,6 +1689,7 @@ const shard: CardShard = {
     _poolTrickstersStratagem,
     _poolTripNoose,
     _poolTunnelTipster,
+    _poolTwinflameTravelers,
     _poolTyrantOfKherRidges,
     _poolTyrantsChoice,
     _poolUlamogTheInfiniteGyre,

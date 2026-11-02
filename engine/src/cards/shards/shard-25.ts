@@ -364,6 +364,7 @@ import _poolInnerDemonsGangsters from "../pool/inner-demons-gangsters.js";
 import _poolInnerFire from "../pool/inner-fire.js";
 import _poolInspiringPaladin from "../pool/inspiring-paladin.js";
 import _poolInspiringRefrain from "../pool/inspiring-refrain.js";
+import _poolIonaShieldOfEmeria from "../pool/iona-shield-of-emeria.js";
 import _poolJacesTriumph from "../pool/jaces-triumph.js";
 import _poolJaggedLightning from "../pool/jagged-lightning.js";
 import _poolJetMedallion from "../pool/jet-medallion.js";
@@ -636,6 +637,7 @@ import _poolSeaGateStormcaller from "../pool/sea-gate-stormcaller.js";
 import _poolSearchPartyCaptain from "../pool/search-party-captain.js";
 import _poolSeasonOfRenewal from "../pool/season-of-renewal.js";
 import _poolSecretPassage from "../pool/secret-passage.js";
+import _poolSecurityBypass from "../pool/security-bypass.js";
 import _poolSeedglaiveMentor from "../pool/seedglaive-mentor.js";
 import _poolSelesnyaGuildgate from "../pool/selesnya-guildgate.js";
 import _poolSeraphOfTheSuns from "../pool/seraph-of-the-suns.js";
@@ -1217,6 +1219,7 @@ const shard: CardShard = {
     _poolInnerFire,
     _poolInspiringPaladin,
     _poolInspiringRefrain,
+    _poolIonaShieldOfEmeria,
     _poolJacesTriumph,
     _poolJaggedLightning,
     _poolJetMedallion,
@@ -1489,6 +1492,7 @@ const shard: CardShard = {
     _poolSearchPartyCaptain,
     _poolSeasonOfRenewal,
     _poolSecretPassage,
+    _poolSecurityBypass,
     _poolSeedglaiveMentor,
     _poolSelesnyaGuildgate,
     _poolSeraphOfTheSuns,

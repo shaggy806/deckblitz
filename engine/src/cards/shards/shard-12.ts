@@ -136,6 +136,7 @@ import _poolCleansingBeam from "../pool/cleansing-beam.js";
 import _poolCleanupCrew from "../pool/cleanup-crew.js";
 import _poolClericOfTheForwardOrder from "../pool/cleric-of-the-forward-order.js";
 import _poolClickslither from "../pool/clickslither.js";
+import _poolCloneLegion from "../pool/clone-legion.js";
 import _poolCloudPirates from "../pool/cloud-pirates.js";
 import _poolCloudchaserKestrel from "../pool/cloudchaser-kestrel.js";
 import _poolCloudcrownOak from "../pool/cloudcrown-oak.js";
@@ -235,6 +236,7 @@ import _poolEmberethPaladin from "../pool/embereth-paladin.js";
 import _poolEmpressGalina from "../pool/empress-galina.js";
 import _poolEnchantedBeing from "../pool/enchanted-being.js";
 import _poolEncroach from "../pool/encroach.js";
+import _poolEndlessSands from "../pool/endless-sands.js";
 import _poolEnduranceBobblehead from "../pool/endurance-bobblehead.js";
 import _poolEnterprisingScallywag from "../pool/enterprising-scallywag.js";
 import _poolEntomb from "../pool/entomb.js";
@@ -1014,6 +1016,7 @@ const shard: CardShard = {
     _poolCleanupCrew,
     _poolClericOfTheForwardOrder,
     _poolClickslither,
+    _poolCloneLegion,
     _poolCloudPirates,
     _poolCloudchaserKestrel,
     _poolCloudcrownOak,
@@ -1113,6 +1116,7 @@ const shard: CardShard = {
     _poolEmpressGalina,
     _poolEnchantedBeing,
     _poolEncroach,
+    _poolEndlessSands,
     _poolEnduranceBobblehead,
     _poolEnterprisingScallywag,
     _poolEntomb,

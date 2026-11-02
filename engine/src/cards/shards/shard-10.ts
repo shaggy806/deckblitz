@@ -246,6 +246,7 @@ import _poolEmberwildeDjinn from "../pool/emberwilde-djinn.js";
 import _poolEndlessFootAssault from "../pool/endless-foot-assault.js";
 import _poolEnduringSliver from "../pool/enduring-sliver.js";
 import _poolEnragedFlamecaster from "../pool/enraged-flamecaster.js";
+import _poolEnterTheInfinite from "../pool/enter-the-infinite.js";
 import _poolEntropicCloud from "../pool/entropic-cloud.js";
 import _poolEpharasEnlightenment from "../pool/epharas-enlightenment.js";
 import _poolEssenceDepleter from "../pool/essence-depleter.js";
@@ -339,6 +340,7 @@ import _poolHallowedHealer from "../pool/hallowed-healer.js";
 import _poolHammerOfNazahn from "../pool/hammer-of-nazahn.js";
 import _poolHanweirLancer from "../pool/hanweir-lancer.js";
 import _poolHardenedEscort from "../pool/hardened-escort.js";
+import _poolHarmonicProdigy from "../pool/harmonic-prodigy.js";
 import _poolHarperRecruiter from "../pool/harper-recruiter.js";
 import _poolHarriedArtisan from "../pool/harried-artisan.js";
 import _poolHauntedCadaver from "../pool/haunted-cadaver.js";
@@ -452,6 +454,7 @@ import _poolMajesticMetamorphosis from "../pool/majestic-metamorphosis.js";
 import _poolMalametBattleGlyph from "../pool/malamet-battle-glyph.js";
 import _poolManglehorn from "../pool/manglehorn.js";
 import _poolManifoldKey from "../pool/manifold-key.js";
+import _poolMarbleTitan from "../pool/marble-titan.js";
 import _poolMarduDevotee from "../pool/mardu-devotee.js";
 import _poolMarduHateblade from "../pool/mardu-hateblade.js";
 import _poolMarduScout from "../pool/mardu-scout.js";
@@ -1140,6 +1143,7 @@ const shard: CardShard = {
     _poolEndlessFootAssault,
     _poolEnduringSliver,
     _poolEnragedFlamecaster,
+    _poolEnterTheInfinite,
     _poolEntropicCloud,
     _poolEpharasEnlightenment,
     _poolEssenceDepleter,
@@ -1233,6 +1237,7 @@ const shard: CardShard = {
     _poolHammerOfNazahn,
     _poolHanweirLancer,
     _poolHardenedEscort,
+    _poolHarmonicProdigy,
     _poolHarperRecruiter,
     _poolHarriedArtisan,
     _poolHauntedCadaver,
@@ -1346,6 +1351,7 @@ const shard: CardShard = {
     _poolMalametBattleGlyph,
     _poolManglehorn,
     _poolManifoldKey,
+    _poolMarbleTitan,
     _poolMarduDevotee,
     _poolMarduHateblade,
     _poolMarduScout,

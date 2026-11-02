@@ -58,6 +58,7 @@ import _poolAuroraOfEmrakul from "../pool/aurora-of-emrakul.js";
 import _poolAvacynGuardianAngel from "../pool/avacyn-guardian-angel.js";
 import _poolAvacynsMemorial from "../pool/avacyns-memorial.js";
 import _poolAvatarOfFury from "../pool/avatar-of-fury.js";
+import _poolAvatarOfWill from "../pool/avatar-of-will.js";
 import _poolAvenTrailblazer from "../pool/aven-trailblazer.js";
 import _poolBadgermoleCub from "../pool/badgermole-cub.js";
 import _poolBagOfDevouring from "../pool/bag-of-devouring.js";
@@ -575,6 +576,7 @@ import _poolPlatedSeastrider from "../pool/plated-seastrider.js";
 import _poolPoliticalTrickery from "../pool/political-trickery.js";
 import _poolPolukranosReborn from "../pool/polukranos-reborn.js";
 import _poolPolymorphistsJest from "../pool/polymorphists-jest.js";
+import _poolPraetorsCounsel from "../pool/praetors-counsel.js";
 import _poolPridefulFeastling from "../pool/prideful-feastling.js";
 import _poolPriestOfIroas from "../pool/priest-of-iroas.js";
 import _poolPrimalMight from "../pool/primal-might.js";
@@ -950,6 +952,7 @@ const shard: CardShard = {
     _poolAvacynGuardianAngel,
     _poolAvacynsMemorial,
     _poolAvatarOfFury,
+    _poolAvatarOfWill,
     _poolAvenTrailblazer,
     _poolBadgermoleCub,
     _poolBagOfDevouring,
@@ -1467,6 +1470,7 @@ const shard: CardShard = {
     _poolPoliticalTrickery,
     _poolPolukranosReborn,
     _poolPolymorphistsJest,
+    _poolPraetorsCounsel,
     _poolPridefulFeastling,
     _poolPriestOfIroas,
     _poolPrimalMight,

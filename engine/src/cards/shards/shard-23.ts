@@ -72,6 +72,7 @@ import _poolBearscape from "../pool/bearscape.js";
 import _poolBeastMode from "../pool/beast-mode.js";
 import _poolBeifongsBountyHunters from "../pool/beifongs-bounty-hunters.js";
 import _poolBenalishMarshal from "../pool/benalish-marshal.js";
+import _poolBenalishMissionary from "../pool/benalish-missionary.js";
 import _poolBenthicDjinn from "../pool/benthic-djinn.js";
 import _poolBigScore from "../pool/big-score.js";
 import _poolBilboBagginsBurglar from "../pool/bilbo-baggins-burglar.js";
@@ -505,6 +506,7 @@ import _poolNarnamCobra from "../pool/narnam-cobra.js";
 import _poolNecrite from "../pool/necrite.js";
 import _poolNemataGroveGuardian from "../pool/nemata-grove-guardian.js";
 import _poolNeoExdeathDimensionsEnd from "../pool/neo-exdeath-dimensions-end.js";
+import _poolNerdRage from "../pool/nerd-rage.js";
 import _poolNewsHelicopter from "../pool/news-helicopter.js";
 import _poolNezumiLinkbreaker from "../pool/nezumi-linkbreaker.js";
 import _poolNightMarket from "../pool/night-market.js";
@@ -971,6 +973,7 @@ const shard: CardShard = {
     _poolBeastMode,
     _poolBeifongsBountyHunters,
     _poolBenalishMarshal,
+    _poolBenalishMissionary,
     _poolBenthicDjinn,
     _poolBigScore,
     _poolBilboBagginsBurglar,
@@ -1404,6 +1407,7 @@ const shard: CardShard = {
     _poolNecrite,
     _poolNemataGroveGuardian,
     _poolNeoExdeathDimensionsEnd,
+    _poolNerdRage,
     _poolNewsHelicopter,
     _poolNezumiLinkbreaker,
     _poolNightMarket,

@@ -20,6 +20,7 @@ import _poolAeveProgenitorOoze from "../pool/aeve-progenitor-ooze.js";
 import _poolAffaGuardHound from "../pool/affa-guard-hound.js";
 import _poolAgencyCoroner from "../pool/agency-coroner.js";
 import _poolAirbenderAscension from "../pool/airbender-ascension.js";
+import _poolAjanisAid from "../pool/ajanis-aid.js";
 import _poolAkiriLineSlinger from "../pool/akiri-line-slinger.js";
 import _poolAkroanHorse from "../pool/akroan-horse.js";
 import _poolAlelaArtfulProvocateur from "../pool/alela-artful-provocateur.js";
@@ -343,6 +344,7 @@ import _poolGranGran from "../pool/gran-gran.js";
 import _poolGravedigger from "../pool/gravedigger.js";
 import _poolGraveyardMarshal from "../pool/graveyard-marshal.js";
 import _poolGrazilaxxIllithidScholar from "../pool/grazilaxx-illithid-scholar.js";
+import _poolGreenbeltRampager from "../pool/greenbelt-rampager.js";
 import _poolGriffinGuide from "../pool/griffin-guide.js";
 import _poolGriffinRider from "../pool/griffin-rider.js";
 import _poolGrimCaptainsCall from "../pool/grim-captains-call.js";
@@ -963,6 +965,7 @@ const shard: CardShard = {
     _poolAffaGuardHound,
     _poolAgencyCoroner,
     _poolAirbenderAscension,
+    _poolAjanisAid,
     _poolAkiriLineSlinger,
     _poolAkroanHorse,
     _poolAlelaArtfulProvocateur,
@@ -1286,6 +1289,7 @@ const shard: CardShard = {
     _poolGravedigger,
     _poolGraveyardMarshal,
     _poolGrazilaxxIllithidScholar,
+    _poolGreenbeltRampager,
     _poolGriffinGuide,
     _poolGriffinRider,
     _poolGrimCaptainsCall,

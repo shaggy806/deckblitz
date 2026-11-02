@@ -288,6 +288,7 @@ import _poolFrilledCaveWurm from "../pool/frilled-cave-wurm.js";
 import _poolFrilledOculus from "../pool/frilled-oculus.js";
 import _poolFrilledSandwalla from "../pool/frilled-sandwalla.js";
 import _poolFrondlandFelidar from "../pool/frondland-felidar.js";
+import _poolFrontlineMedic from "../pool/frontline-medic.js";
 import _poolFrontlineWarRager from "../pool/frontline-war-rager.js";
 import _poolFrostbitePyromental from "../pool/frostbite-pyromental.js";
 import _poolFurySliver from "../pool/fury-sliver.js";
@@ -1250,6 +1251,7 @@ const shard: CardShard = {
     _poolFrilledOculus,
     _poolFrilledSandwalla,
     _poolFrondlandFelidar,
+    _poolFrontlineMedic,
     _poolFrontlineWarRager,
     _poolFrostbitePyromental,
     _poolFurySliver,

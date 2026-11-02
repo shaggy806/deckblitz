@@ -304,6 +304,7 @@ import _poolGarbageFire from "../pool/garbage-fire.js";
 import _poolGargoyleFlock from "../pool/gargoyle-flock.js";
 import _poolGarruksWarsteed from "../pool/garruks-warsteed.js";
 import _poolGeneralLeoCristophe from "../pool/general-leo-cristophe.js";
+import _poolGhostLantern from "../pool/ghost-lantern.js";
 import _poolGhostlyTouch from "../pool/ghostly-touch.js";
 import _poolGhoulcallersBell from "../pool/ghoulcallers-bell.js";
 import _poolGhoulflesh from "../pool/ghoulflesh.js";
@@ -753,6 +754,7 @@ import _poolStokeTheFlames from "../pool/stoke-the-flames.js";
 import _poolStolenIdentity from "../pool/stolen-identity.js";
 import _poolStonebrowKrosanHero from "../pool/stonebrow-krosan-hero.js";
 import _poolStormStrike from "../pool/storm-strike.js";
+import _poolStormtideLeviathan from "../pool/stormtide-leviathan.js";
 import _poolStormwingEntity from "../pool/stormwing-entity.js";
 import _poolStratosoarer from "../pool/stratosoarer.js";
 import _poolStriderRangerOfTheNorth from "../pool/strider-ranger-of-the-north.js";
@@ -1226,6 +1228,7 @@ const shard: CardShard = {
     _poolGargoyleFlock,
     _poolGarruksWarsteed,
     _poolGeneralLeoCristophe,
+    _poolGhostLantern,
     _poolGhostlyTouch,
     _poolGhoulcallersBell,
     _poolGhoulflesh,
@@ -1675,6 +1678,7 @@ const shard: CardShard = {
     _poolStolenIdentity,
     _poolStonebrowKrosanHero,
     _poolStormStrike,
+    _poolStormtideLeviathan,
     _poolStormwingEntity,
     _poolStratosoarer,
     _poolStriderRangerOfTheNorth,

@@ -19,6 +19,7 @@ import _poolAfterlifeFromTheLoam from "../pool/afterlife-from-the-loam.js";
 import _poolAfterthoughtSentry from "../pool/afterthought-sentry.js";
 import _poolAgentOfHorizons from "../pool/agent-of-horizons.js";
 import _poolAgentOfKotis from "../pool/agent-of-kotis.js";
+import _poolAggravate from "../pool/aggravate.js";
 import _poolAjaniUnrelenting from "../pool/ajani-unrelenting.js";
 import _poolAjanisResponse from "../pool/ajanis-response.js";
 import _poolAkroanMastiff from "../pool/akroan-mastiff.js";
@@ -263,6 +264,7 @@ import _poolFlowstoneHellion from "../pool/flowstone-hellion.js";
 import _poolFlyingCarpet from "../pool/flying-carpet.js";
 import _poolFogOfGnats from "../pool/fog-of-gnats.js";
 import _poolFogwalker from "../pool/fogwalker.js";
+import _poolFolkHero from "../pool/folk-hero.js";
 import _poolFoulImp from "../pool/foul-imp.js";
 import _poolFountainOfYouth from "../pool/fountain-of-youth.js";
 import _poolFractalMascot from "../pool/fractal-mascot.js";
@@ -571,6 +573,7 @@ import _poolRoboticsMastery from "../pool/robotics-mastery.js";
 import _poolRope from "../pool/rope.js";
 import _poolRosethornHalberd from "../pool/rosethorn-halberd.js";
 import _poolRottingMastodon from "../pool/rotting-mastodon.js";
+import _poolRousingRefrain from "../pool/rousing-refrain.js";
 import _poolRoyalFalcon from "../pool/royal-falcon.js";
 import _poolRulikMonsWarrenChief from "../pool/rulik-mons-warren-chief.js";
 import _poolRunThePlay from "../pool/run-the-play.js";
@@ -587,6 +590,7 @@ import _poolSagittarsVolley from "../pool/sagittars-volley.js";
 import _poolSaheelisDirective from "../pool/saheelis-directive.js";
 import _poolSakashimasProtege from "../pool/sakashimas-protege.js";
 import _poolSakuraTribeElder from "../pool/sakura-tribe-elder.js";
+import _poolSaltRoadAmbushers from "../pool/salt-road-ambushers.js";
 import _poolSalvationSwan from "../pool/salvation-swan.js";
 import _poolSamiteBlessing from "../pool/samite-blessing.js";
 import _poolSamutTheTested from "../pool/samut-the-tested.js";
@@ -880,6 +884,7 @@ const shard: CardShard = {
     _poolAfterthoughtSentry,
     _poolAgentOfHorizons,
     _poolAgentOfKotis,
+    _poolAggravate,
     _poolAjaniUnrelenting,
     _poolAjanisResponse,
     _poolAkroanMastiff,
@@ -1124,6 +1129,7 @@ const shard: CardShard = {
     _poolFlyingCarpet,
     _poolFogOfGnats,
     _poolFogwalker,
+    _poolFolkHero,
     _poolFoulImp,
     _poolFountainOfYouth,
     _poolFractalMascot,
@@ -1432,6 +1438,7 @@ const shard: CardShard = {
     _poolRope,
     _poolRosethornHalberd,
     _poolRottingMastodon,
+    _poolRousingRefrain,
     _poolRoyalFalcon,
     _poolRulikMonsWarrenChief,
     _poolRunThePlay,
@@ -1448,6 +1455,7 @@ const shard: CardShard = {
     _poolSaheelisDirective,
     _poolSakashimasProtege,
     _poolSakuraTribeElder,
+    _poolSaltRoadAmbushers,
     _poolSalvationSwan,
     _poolSamiteBlessing,
     _poolSamutTheTested,

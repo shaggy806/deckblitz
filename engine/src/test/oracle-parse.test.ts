@@ -3363,6 +3363,16 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(parseCost("{1}{W}, {Q}").cost).toEqual({ mana: "{1}{W}", tap: false, untap: true });
   });
 
+  it("a search's exile is linked when another ability puts the exiled card somewhere (Hoarding Dragon)", () => {
+    const dragon = parseFace({
+      name: "Hoarding Dragon",
+      type_line: "Creature — Dragon",
+      oracle_text:
+        "Flying\nWhen this creature enters, you may search your library for an artifact card, exile it, then shuffle.\nWhen this creature dies, you may put the exiled card into its owner's hand.",
+    });
+    expect(dragon.triggered[0].effect).toMatchObject({ kind: "may", effect: { destination: "exile", linked: true } });
+  });
+
   it("a card at random from a hand, or from the cards exiled with ~ (Urza's Bauble, Hired Torturer, Skyship Weatherlight)", () => {
     expect(parseEffect("Look at a card at random in target player's hand.", ctx()).effect).toEqual({
       kind: "choose-random-card",
