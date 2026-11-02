@@ -561,6 +561,10 @@ export type CombatRestriction =
  * CDA works in every zone.
  */
 export type CountSpec =
+  /** The number this permanent chose (`GameObject.chosenOnEnter`), 0 while it
+   * has none — Shapeshifter's "the last chosen number". Only a
+   * `setBasePtFromCount` knows which permanent that is. */
+  | "chosen-number"
   | "cards-in-all-graveyards"
   /** How many cards are in its controller's hand (Psychosis Crawler) — its
    * owner's, off the battlefield. */
@@ -1549,6 +1553,18 @@ export type StaticCondition =
    * Only a resolution can answer it.
    */
   | { readonly kind: "votes-cast" }
+  /**
+   * Of the `vote` of `for: { number }` this resolution held: `who` chose the
+   * `"highest"` or `"lowest"` number chosen (equal to it, with anyone else
+   * who did) — Wheel of Misfortune's "each player who chose that number"
+   * under a `whoseIf`, Menacing Ogre's "if **you** are one of those players".
+   * False for a player who chose none. Only a resolution can answer it.
+   */
+  | {
+      readonly kind: "voted-number";
+      readonly who: "you" | "that-player";
+      readonly is: "highest" | "lowest";
+    }
   /**
    * The object in target slot `index` is the ability's own source — backup's
    * "if that's **another** creature" is this under a `not` (rule 702.165a).
@@ -3488,6 +3504,9 @@ export interface StaticAbility {
     readonly countOf: CountSpec;
     readonly plusPower: number;
     readonly plusToughness: number;
+    /** Its toughness goes down as the count goes up: `plusToughness` minus
+     * the count — Shapeshifter's "7 minus that number". */
+    readonly toughnessMinusCount?: true;
     /** A CDA that defines only its power (Eluge, the Shoreless Sea: a star
      * over a printed 5 — "power is equal to the number of Islands you
      * control") or only its toughness; the other stays as printed. */
@@ -3827,6 +3846,15 @@ export interface CardDefinition {
     readonly discardAtRandom?: boolean;
     readonly payLife?: number;
     readonly payLifeX?: boolean;
+    /**
+     * "As an additional cost to cast this spell, **choose a number between 0
+     * and 5**" (Liquid Fire — the ruling: "you choose the number as you cast
+     * the spell"): it makes the spell an `{X}` spell the way `payLifeX` does,
+     * X announced as it's cast (rule 601.2b), from `min` to `max`, and `ctx.x`
+     * reading it. Not a modal spell (rule 700.2) and not an {X} in its mana
+     * cost, so its mana value doesn't count it.
+     */
+    readonly chooseNumber?: { readonly min: number; readonly max: number };
     /** "This spell costs **3 life more** to cast **for each target**"
      * (Phyrexian Purge — a cost increase, rule 601.2f): this much life for
      * each distinct target, the targets chosen before the cost is locked in
@@ -5259,6 +5287,7 @@ interface CardDraft {
   targets?: readonly TargetSpec[];
   castModal?: CastModalSpec;
   additionalCost?: {
+    readonly chooseNumber?: { readonly min: number; readonly max: number };
     readonly sacrifice?: CardFilter;
     readonly exilesSacrifice?: true;
     readonly sacrificeCount?: number | "x";

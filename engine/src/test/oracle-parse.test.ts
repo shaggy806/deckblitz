@@ -8939,3 +8939,98 @@ describe("amounts read from what has happened this turn", () => {
     expect(face("Sorcery", "Draw a card for each opponent who attacked this turn.").complete).toBe(false);
   });
 });
+
+describe("a number a player chooses", () => {
+  const read = (name: string, type_line: string, oracle_text: string, power?: string, toughness?: string) =>
+    parseFace({ name, type_line, oracle_text, ...(power !== undefined ? { power, toughness } : {}) });
+
+  it("as an additional cost, read as X (Liquid Fire)", () => {
+    const fire = read(
+      "Liquid Fire",
+      "Sorcery",
+      "As an additional cost to cast this spell, choose a number between 0 and 5.\nLiquid Fire deals X damage to target creature and 5 minus X damage to that creature's controller, where X is the chosen number.",
+    );
+    expect(fire.complete).toBe(true);
+    expect(fire.additionalCost).toEqual({ chooseNumber: { min: 0, max: 5 } });
+    expect(fire.effect).toEqual({
+      kind: "sequence",
+      simultaneous: true,
+      effects: [
+        { kind: "damage", amount: "x", target: 0 },
+        { kind: "damage", amount: { sum: [5, { product: ["x", -1] }] }, who: { controllerOfTarget: 0 } },
+      ],
+    });
+  });
+
+  it("by each player in secret, or by a target opponent (a vote of numbers)", () => {
+    const wheel = read(
+      "Wheel of Misfortune",
+      "Sorcery",
+      "Each player secretly chooses a number 0 or greater, then all players reveal those numbers simultaneously and determine the highest and lowest numbers revealed this way. Wheel of Misfortune deals damage equal to the highest number to each player who chose that number. Each player who didn't choose the lowest number discards their hand, then draws seven cards.",
+    );
+    expect(wheel.complete).toBe(true);
+    expect(wheel.effect.effects[0]).toEqual({ kind: "vote", choose: true, secret: true, for: { number: { min: 0 } } });
+
+    const ogre = read(
+      "Menacing Ogre",
+      "Creature — Ogre",
+      "Trample, haste\nWhen this creature enters, each player secretly chooses a number. Then those numbers are revealed. Each player with the highest number loses that much life. If you are one of those players, put two +1/+1 counters on this creature.",
+      "3",
+      "3",
+    );
+    expect(ogre.complete).toBe(true);
+    expect(ogre.triggered[0].effect.effects[2].condition).toEqual({ kind: "voted-number", who: "you", is: "highest" });
+
+    const choice = read(
+      "Choice of Damnations",
+      "Sorcery — Arcane",
+      "Target opponent chooses a number. You may have that player lose that much life. If you don't, that player sacrifices all but that many permanents of their choice.",
+    );
+    expect(choice.complete).toBe(true);
+    expect(choice.effect.effects[0]).toEqual({ kind: "vote", choose: true, who: { target: 0 }, for: { number: {} } });
+    expect(choice.effect.effects[1].else.keep).toEqual({ votedNumber: 0 });
+  });
+
+  it("by each player in turn, drawing as they go (Diminishing Returns)", () => {
+    const returns = read(
+      "Diminishing Returns",
+      "Sorcery",
+      "Each player shuffles their hand and graveyard into their library. You exile the top ten cards of your library. Then each player draws up to seven cards.",
+    );
+    expect(returns.complete).toBe(true);
+    expect(returns.effect.effects[2].effect).toMatchObject({ kind: "choose-value", who: "that-player", max: 7 });
+  });
+
+  it("as an enters ability resolves, with an echo of your life total (Volcano Hellion)", () => {
+    const hellion = read(
+      "Volcano Hellion",
+      "Creature — Hellion",
+      "This creature has echo {X}, where X is your life total. (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)\nWhen this creature enters, it deals an amount of damage of your choice to you and target creature. The damage can't be prevented.",
+      "6",
+      "5",
+    );
+    expect(hellion.complete).toBe(true);
+    expect(hellion.triggered[0].effect.options[0]).toEqual({ payGeneric: { lifeTotal: "you" }, text: "Pay {X}" });
+    expect(hellion.triggered[1].effect).toMatchObject({ kind: "choose-value", min: 0 });
+  });
+
+  it("as it enters and at upkeep, setting its P/T (Shapeshifter), and an enters menu of numbers alone (Talion)", () => {
+    const shifter = read(
+      "Shapeshifter",
+      "Artifact Creature — Shapeshifter",
+      "As this creature enters, choose a number between 0 and 7.\nAt the beginning of your upkeep, you may choose a number between 0 and 7.\nShapeshifter's power is equal to the last chosen number and its toughness is equal to 7 minus that number.",
+      "*",
+      "7-*",
+    );
+    expect(shifter.complete).toBe(true);
+    expect(shifter.chooseOnEnter).toEqual(["0", "1", "2", "3", "4", "5", "6", "7"]);
+    expect(shifter.static[0].setBasePtFromCount).toEqual({
+      countOf: "chosen-number",
+      plusPower: 0,
+      plusToughness: 7,
+      toughnessMinusCount: true,
+    });
+    expect(shifter.triggered[0].effect.effect).toMatchObject({ kind: "choose-value", remember: true, max: 7 });
+    expect(read("Elsewhere", "Creature — Bird", "As this creature enters, choose a number between 1 and 3.", "1", "1").chooseOnEnter).toEqual(["1", "2", "3"]);
+  });
+});

@@ -3608,6 +3608,28 @@ that turn, power-up abilities can't be activated", and the static "if a player
 would begin an extra turn, that player skips that turn instead" (Ugin's Nexus,
 Stranglehold, Trouble in Pairs, Gerrard's Hourglass Pendant).
 
+### A number a player chooses — built 2026-11-01
+
+The need-keys Phase 2 group `decision:choose-number` + `cost:choose-number-additional`:
+one existing decision, `choose-number`, reached four new ways, and no new
+decision kind. As an additional cost, announced like an X
+(`additionalCost.chooseNumber`, the offer's `xCost.chosenNumber`). By several
+players or a target opponent, open or secret and kept for later steps: a `vote`
+of `for: { number }`, read by the amount `{ votedNumber }` and the `voted-number`
+condition. By another player as it resolves (`choose-value`'s `who`), up to a
+bound read then (`max` as an amount, with the new `{ leastOf }`). Kept on the
+permanent, the last replacing the one before (`choose-value`'s `remember`, the
+count `"chosen-number"` and `setBasePtFromCount.toughnessMinusCount`).
+`sacrifice-all-but` now takes an amount and a player named through a target.
+Proving cards: Liquid Fire, Wheel of Misfortune, Menacing Ogre, Choice of
+Damnations, Diminishing Returns, Shapeshifter, Volcano Hellion. Still needing
+more than this: the Clockwork creatures' "attacked or blocked this combat"
+(`condition:attacked-or-blocked-this-combat`; the "up to X, total no more than
+four" is `max` with `leastOf`), and Terra's token Saga copy, for `author-freed`
+to read. Well of Lost Dreams and Galvanic Discharge were reachable already
+(`may`'s `maxX` and `costEnergyX`). `decision:secret-choice`'s other cards are a
+secret creature, player or option, not a number, so that key stays open.
+
 ### Pack tactics — built 2026-11-01
 
 The need-keys Phase 2 family `keyword:pack-tactics`, an ability word: a

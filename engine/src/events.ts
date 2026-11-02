@@ -14,13 +14,15 @@ import type { Phase, Step } from "./turn.js";
 
 /**
  * What one vote was for (rule 701.38b): one of a vote's named options (its
- * index and words), a permanent (with its battlefield stint, rule 400.7), or
- * a player.
+ * index and words), a permanent (with its battlefield stint, rule 400.7), a
+ * player, or a number — an "each player chooses a number" (Wheel of
+ * Misfortune), kept the same way.
  */
 export type VoteChoice =
   | { readonly option: number; readonly text: string }
   | { readonly object: ObjectId; readonly zoneChangeCount: number }
-  | { readonly player: PlayerId };
+  | { readonly player: PlayerId }
+  | { readonly number: number };
 
 /** One vote cast: who cast it, and for what. A player with more than one vote
  * (rule 701.38d) casts more than one of these. */
@@ -33,6 +35,7 @@ export interface Vote {
 export function sameVoteChoice(a: VoteChoice, b: VoteChoice): boolean {
   if ("option" in a) return "option" in b && a.option === b.option;
   if ("object" in a) return "object" in b && a.object === b.object && a.zoneChangeCount === b.zoneChangeCount;
+  if ("number" in a) return "number" in b && a.number === b.number;
   return "player" in b && a.player === b.player;
 }
 

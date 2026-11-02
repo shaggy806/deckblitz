@@ -193,11 +193,19 @@ async function runStep(page: Page, step: string): Promise<boolean> {
     }
     case 'click':
       // The decision bar's own buttons first: a card tile is a button too,
-      // and a mode's text is also its card's (Fiery Confluence in hand).
-      return (
-        (await visibleFirst(page.locator('.controls button', { hasText: pattern(arg) }))) ||
-        visibleFirst(page.locator('button, [role="menuitem"], [role="button"]', { hasText: pattern(arg) }))
-      )
+      // and a mode's text is also its card's (Fiery Confluence in hand). The
+      // view moves on ahead of the screen: a long animation (ten cards exiled)
+      // is still playing when the snapshot says the decision has come, so the
+      // button gets a while to appear.
+      for (const limit = Date.now() + 25_000; ; await page.waitForTimeout(250)) {
+        if (
+          (await visibleFirst(page.locator('.controls button', { hasText: pattern(arg) }))) ||
+          (await visibleFirst(page.locator('button, [role="menuitem"], [role="button"]', { hasText: pattern(arg) })))
+        ) {
+          return true
+        }
+        if (Date.now() > limit) return false
+      }
     case 'player':
       return visibleFirst(page.locator('[data-player-id]', { has: page.locator('.pp-name', { hasText: pattern(arg) }) }))
     case 'pass':

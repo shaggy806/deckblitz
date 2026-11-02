@@ -4577,6 +4577,16 @@ export class Game {
               // lands can make (rule 118.4: any amount of life you have);
               // nothing but 0 while they can't lose life (119.8).
               { xCost: { maxX: playerCantLoseLife(this.state, player) ? 0 : Math.max(0, this.state.players[player].life) } }
+            : def.additionalCost?.chooseNumber !== undefined
+              ? // "Choose a number between 0 and 5" (Liquid Fire): no more than
+                // the card's range says, whatever there is to pay with.
+                {
+                  xCost: {
+                    maxX: def.additionalCost.chooseNumber.max,
+                    ...(def.additionalCost.chooseNumber.min > 0 ? { minX: def.additionalCost.chooseNumber.min } : {}),
+                    chosenNumber: true as const,
+                  },
+                }
             : sacrificeX !== undefined
               ? {
                   xCost:
@@ -6447,7 +6457,19 @@ export class Game {
       this.resumeAssistedCast(player, awaiting.assist, number);
       return;
     }
-    this.emit({ type: "number-chosen", player, object: awaiting.source, number });
+    // Shapeshifter's "the last chosen number", on the permanent of that stint
+    // alone (rule 400.7).
+    if (awaiting.remember !== undefined) {
+      const object = this.state.objects[awaiting.source];
+      if (object?.zone === "battlefield" && (object.zoneChangeCount ?? 0) === awaiting.remember.stint) {
+        object.chosenOnEnter = String(number);
+      }
+    }
+    // A vote's number is logged by the vote: at once, or a secret one only
+    // when they're all revealed (`votes-finished`).
+    if (awaiting.then.kind !== "cast-vote") {
+      this.emit({ type: "number-chosen", player, object: awaiting.source, number });
+    }
     this.resumeResolution(awaiting.then, awaiting.source, { ...awaiting.resume, x: number });
     if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
   }
@@ -15121,6 +15143,10 @@ export class Game {
       if (def.additionalCost.payLifeX === true && !this.canPayLife(player, xValue)) {
         return `${player} can't pay ${xValue} life to cast ${def.name}`;
       }
+      const chooseNumber = def.additionalCost.chooseNumber;
+      if (chooseNumber !== undefined && (!Number.isSafeInteger(xValue) || xValue < chooseNumber.min || xValue > chooseNumber.max)) {
+        return `${def.name}'s number must be from ${chooseNumber.min} to ${chooseNumber.max}`;
+      }
     }
     // A non-modal spell's target legality is checked up front; a modal spell's
     // is checked per chosen mode (only once `modes` is known — at enumeration
@@ -16807,8 +16833,9 @@ export class Game {
     const hasX =
       parseManaCost(costString).x > 0 ||
       def.additionalCost?.payLifeX === true ||
+      def.additionalCost?.chooseNumber !== undefined ||
       def.additionalCost?.sacrificeCount === "x" ||
-      (via === "flashback" && this.flashbackOf(cardId, graveyardGrant)?.sacrifice?.count === "x") ||
+      (via === "flashback"&& this.flashbackOf(cardId, graveyardGrant)?.sacrifice?.count === "x") ||
       def.additionalCost?.discard === "x" ||
       // The Shoals' "exile a … card with mana value X" (rule 107.3a).
       (altCost && this.ownAltCost(def)?.exileFromHand?.manaValueX === true);
@@ -28018,6 +28045,16 @@ export class Game {
         return [...tally].every(([option, n]) => option === condition.option || n < mine) && mine > 0;
       }
       if (condition.kind === "votes-cast") return votes().length > 0;
+      if (condition.kind === "voted-number") {
+        const numbers = votes().flatMap(({ voter, choice }) =>
+          "number" in choice ? [{ voter, number: choice.number }] : [],
+        );
+        const player = condition.who === "you" ? controller : refs.player;
+        const own = numbers.find((v) => v.voter === player);
+        if (own === undefined) return false;
+        const best = (condition.is === "highest" ? Math.max : Math.min)(...numbers.map((v) => v.number));
+        return own.number === best;
+      }
       if (condition.kind === "target-is-source") {
         const ref = targets[condition.index];
         return ref?.kind === "object" && ref.object === source;
@@ -29107,8 +29144,9 @@ export class Game {
           },
         });
       },
-      chooseValue: (spec) => {
-        if (this.state.players[controller]?.hasLost !== false) return;
+      chooseValue: (spec, asked) => {
+        const chooser = asked?.chooser ?? controller;
+        if (this.state.players[chooser]?.hasLost !== false) return;
         const resume: ResolutionResume = {
           controller,
           targets,
@@ -29119,15 +29157,21 @@ export class Game {
           refs,
         };
         if (spec.value === "number") {
+          const min = spec.min ?? 0;
+          const max = asked?.max ?? (typeof spec.max === "number" ? spec.max : undefined);
+          const remembered = this.state.objects[source];
           this.state.awaiting = {
             kind: "choose-number",
-            player: controller,
+            player: chooser,
             source,
-            min: spec.min ?? 0,
-            ...(spec.max !== undefined ? { max: spec.max } : {}),
+            min,
+            ...(max !== undefined ? { max: Math.max(min, max) } : {}),
             prompt: spec.prompt ?? "Choose a number",
             then: spec.then,
             resume,
+            ...(spec.remember === true && remembered?.zone === "battlefield"
+              ? { remember: { stint: remembered.zoneChangeCount ?? 0 } }
+              : {}),
           };
           return;
         }
@@ -33117,6 +33161,22 @@ export class Game {
         targets: [],
         x,
       });
+      return;
+    }
+    if ("number" in what) {
+      // Answered as a `choose-number`, cast as the number it names. Nothing
+      // about the answer reaches a view until the vote's `votes-finished`.
+      const min = what.number.min ?? 0;
+      this.state.awaiting = {
+        kind: "choose-number",
+        player,
+        source,
+        min,
+        ...(what.number.max !== undefined ? { max: what.number.max } : {}),
+        prompt: secret ? "Secretly choose a number" : "Choose a number",
+        then: { kind: "cast-vote", voter: player, choice: "number" },
+        resume: { controller, targets: [], x, triggerValue: 0, targetZones: [], refs: {} },
+      };
       return;
     }
     if ("permanent" in what) {

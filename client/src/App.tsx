@@ -5680,7 +5680,9 @@ function Table({
           {pxVerb} {pendingX.action.cardName} —{' '}
           {pendingX.action.kind === 'cast-spell' && pendingX.action.xCost?.sacrifice === true
             ? 'how many to sacrifice'
-            : 'choose X'}
+            : pendingX.action.kind === 'cast-spell' && pendingX.action.xCost?.chosenNumber === true
+              ? 'choose a number'
+              : 'choose X'}
         </span>
         <input
           type="number"

@@ -1210,6 +1210,9 @@ export type LegalAction =
         readonly minX?: number;
         /** See `XCostOffer.sacrifice`. */
         readonly sacrifice?: true;
+        /** X is a number chosen as an additional cost, nothing paid for it
+         * (`CardDefinition.additionalCost.chooseNumber` — Liquid Fire). */
+        readonly chosenNumber?: true;
         readonly maxXByTargetCount?: readonly number[];
         readonly minXByTargetCount?: readonly number[];
         /** See `XCostOffer.maxXUnreduced`. */

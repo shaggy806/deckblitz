@@ -4996,6 +4996,148 @@ function impulseWindowAt(sentences, i, ctx) {
   };
 }
 
+/**
+ * The whole effects a number a player chooses runs through: a `vote` of `for: {
+ * number }`, read by `{ votedNumber }` and the `voted-number` condition, or a
+ * `choose-value` of a number read as `"x"`. Each is one card's wording, its parts
+ * too interlinked to read a sentence at a time.
+ */
+function chosenNumbers(text, ctx) {
+  if (/^Target opponent chooses a number\. You may have that player lose that much life\. If you don't, that player sacrifices all but that many permanents of their choice\.$/.test(text)) {
+    const opponent = ctx.target(targetOf("target opponent"));
+    const that = { target: opponent };
+    return {
+      kind: "sequence",
+      effects: [
+        { kind: "vote", choose: true, who: that, for: { number: {} } },
+        {
+          kind: "may",
+          prompt: "Have that player lose that much life? If you don't, they sacrifice all but that many permanents.",
+          effect: { kind: "lose-life", amount: { votedNumber: opponent }, who: that },
+          else: { kind: "sacrifice-all-but", who: that, keep: { votedNumber: opponent }, filter: {} },
+        },
+      ],
+    };
+  }
+  const highest = { kind: "voted-number", who: "that-player", is: "highest" };
+  if (/^Each player secretly chooses a number\. Then those numbers are revealed\. Each player with the highest number loses that much life\. If you are one of those players, put two \+1\/\+1 counters on ~\.$/.test(text)) {
+    return {
+      kind: "sequence",
+      effects: [
+        { kind: "vote", choose: true, secret: true, for: { number: {} } },
+        {
+          kind: "for-each-player",
+          who: "each-player",
+          whoIf: highest,
+          simultaneous: true,
+          effect: { kind: "lose-life", amount: { votedNumber: "highest" }, who: "that-player" },
+        },
+        {
+          kind: "conditional",
+          condition: { kind: "voted-number", who: "you", is: "highest" },
+          then: { kind: "add-counter", target: "source", counter: "+1/+1", amount: 2 },
+        },
+      ],
+    };
+  }
+  if (/^Each player secretly chooses a number 0 or greater, then all players reveal those numbers simultaneously and determine the highest and lowest numbers revealed this way\. ~ deals damage equal to the highest number to each player who chose that number\. Each player who didn't choose the lowest number discards their hand, then draws seven cards\.$/.test(text)) {
+    const notLowest = { kind: "not", of: { kind: "voted-number", who: "that-player", is: "lowest" } };
+    return {
+      kind: "sequence",
+      effects: [
+        { kind: "vote", choose: true, secret: true, for: { number: { min: 0 } } },
+        { kind: "damage", amount: { votedNumber: "highest" }, who: "each-player", whoseIf: highest },
+        {
+          kind: "for-each-player",
+          who: "each-player",
+          whoIf: notLowest,
+          simultaneous: true,
+          effect: { kind: "discard-hand", who: "that-player" },
+        },
+        {
+          kind: "for-each-player",
+          who: "each-player",
+          whoIf: notLowest,
+          effect: { kind: "draw", amount: 7, who: "that-player" },
+        },
+      ],
+    };
+  }
+  if (/^(?:It|~) deals an amount of damage of your choice to you and target creature\. The damage can't be prevented\.$/.test(text)) {
+    const creature = ctx.target(targetOf("target creature"));
+    return {
+      kind: "choose-value",
+      value: "number",
+      min: 0,
+      prompt: "How much damage?",
+      then: {
+        kind: "sequence",
+        simultaneous: true,
+        effects: [
+          { kind: "damage", amount: "x", who: "you", cantBePrevented: true },
+          { kind: "damage", amount: "x", target: creature, cantBePrevented: true },
+        ],
+      },
+    };
+  }
+  if (/^Each player shuffles their hand and graveyard into their library\. You exile the top ten cards of your library\. Then each player draws up to seven cards\.$/.test(text)) {
+    return {
+      kind: "sequence",
+      effects: [
+        { kind: "shuffle-graveyard-into-library", target: "each-player", zones: ["hand", "graveyard"] },
+        { kind: "exile-from-library", amount: 10 },
+        {
+          kind: "for-each-player",
+          who: "each-player",
+          effect: {
+            kind: "choose-value",
+            value: "number",
+            who: "that-player",
+            min: 0,
+            max: 7,
+            prompt: "How many cards do you draw?",
+            then: { kind: "draw", amount: "x", who: "that-player" },
+          },
+        },
+      ],
+    };
+  }
+  // Shapeshifter's: the answer kept on the permanent, a line of its P/T reading it.
+  const again = /^You may choose a number between (\d+) and (\d+)\.$/.exec(text);
+  if (again !== null) {
+    return {
+      kind: "may",
+      prompt: `Choose a new number between ${again[1]} and ${again[2]}?`,
+      effect: {
+        kind: "choose-value",
+        value: "number",
+        min: Number(again[1]),
+        max: Number(again[2]),
+        remember: true,
+        then: { kind: "sequence", effects: [] },
+      },
+    };
+  }
+  // Liquid Fire: the number is its `additionalCost.chooseNumber`, read as X.
+  const fire = /^~ deals X damage to target creature and (\d+) minus X damage to that creature's controller, where X is the chosen number\.$/.exec(text);
+  if (fire !== null) {
+    const creature = ctx.target(targetOf("target creature"));
+    return {
+      kind: "sequence",
+      simultaneous: true,
+      effects: [
+        { kind: "damage", amount: "x", target: creature },
+        {
+          kind: "damage",
+          amount: { sum: [Number(fire[1]), { product: ["x", -1] }] },
+          who: { controllerOfTarget: creature },
+        },
+      ],
+    };
+  }
+  return null;
+}
+
 export function parseEffect(text, outer) {
   // Each target a sentence names takes the next slot of the ability's list.
   const ctx = { ...outer, target: (spec) => outer.targets.push(spec) - 1 };
@@ -5037,6 +5179,8 @@ export function parseEffect(text, outer) {
     if (won !== null && lost !== null) return { effect: { kind: "flip-coin", won, lost }, todo: [], hints: [] };
     ctx.targets.length = slots;
   }
+  const chosen = chosenNumbers(text, ctx);
+  if (chosen !== null) return { effect: chosen, todo: [], hints: [] };
   for (const [i, sentence] of sentences.entries()) {
     if (skip > 0) {
       skip -= 1;
@@ -7640,6 +7784,11 @@ export function parseFace(face, ctx = {}) {
     // plain ward; one part of anything else leaves the whole line to a person.
     // Recover's half-life cost has a comma of its own (Garza's Assassin).
     if (/^Recover—Pay half your life, rounded up\.?$/i.test(line)) { out.triggered.push(recover("half-life")); continue; }
+    // Volcano Hellion's echo, read as the echo trigger resolves (the ruling).
+    if (/^~ has echo \{X\}, where X is your life total\.$/.test(line)) {
+      out.triggered.push(echo({ payGeneric: { lifeTotal: "you" }, text: "Pay {X}" }));
+      continue;
+    }
     // Imprint's exile is linked to this permanent (rule 607.2a — Mirror Golem).
     if (/^Imprint — When (?:~|this creature|this artifact) enters, you may exile target card from a graveyard\.$/i.test(whole)) {
       out.triggered.push({
@@ -8102,6 +8251,11 @@ export function parseFace(face, ctx = {}) {
         continue;
       }
     }
+    // "Choose a number between 0 and 5" (Liquid Fire): announced like an X.
+    if (isSpell && (m = /^As an additional cost to cast ~, choose a number between (\d+) and (\d+)\.$/.exec(line))) {
+      out.additionalCost = { chooseNumber: { min: Number(m[1]), max: Number(m[2]) } };
+      continue;
+    }
     if (isSpell && line === "As an additional cost to cast ~, sacrifice a creature.") {
       out.additionalCost = { sacrifice: { type: "creature", controlledBy: "you" } };
       continue;
@@ -8521,6 +8675,13 @@ export function parseFace(face, ctx = {}) {
     // (`chosenOnEnter`).
     if (line === "As ~ enters, choose a color.") {
       out.chooseOnEnter = ["W", "U", "B", "R", "G"];
+      continue;
+    }
+    // "As ~ enters, choose a number between 1 and 10" (Talion): the words of a
+    // short menu, read back as `{ chosenNumber }`.
+    if ((m = /^As ~ enters, choose a number between (\d+) and (\d+)\.$/.exec(line))) {
+      const low = Number(m[1]);
+      out.chooseOnEnter = Array.from({ length: Number(m[2]) - low + 1 }, (_, i) => String(low + i));
       continue;
     }
     if (line === "As ~ enters, choose a color and an opponent.") {
@@ -11469,6 +11630,20 @@ function parseStatic(line, text) {
       const count = x[5] === "your life total" ? { lifeTotal: true } : { cardsInHand: true };
       return { affects: affectsOf(x[1]), grantPtPerCount: { ...count, pt }, text };
     }
+  }
+  // Shapeshifter's "*/7-*" (a CDA, rule 604.3): the number it last chose.
+  const lastChosen = /^~'s power is equal to the last chosen number and its toughness is equal to (\d+) minus that number\.$/.exec(line);
+  if (lastChosen !== null) {
+    return {
+      affects: { scope: "self" },
+      setBasePtFromCount: {
+        countOf: "chosen-number",
+        plusPower: 0,
+        plusToughness: Number(lastChosen[1]),
+        toughnessMinusCount: true,
+      },
+      text,
+    };
   }
   // Serra Avatar's "~'s power and toughness are each equal to your life
   // total" — a CDA (rule 604.3).

@@ -122,7 +122,13 @@ export function describeEvent(event: GameEvent, nameOf: NameOf, seats: readonly 
     seats.some((s) => s.player === id) ? who(id as PlayerId) : name(id as ObjectId)
   const signed = (n: number): string => (n >= 0 ? `+${n}` : `${n}`)
   const voteText = (choice: VoteChoice): string =>
-    'option' in choice ? choice.text : 'player' in choice ? who(choice.player) : name(choice.object)
+    'option' in choice
+      ? choice.text
+      : 'player' in choice
+        ? who(choice.player)
+        : 'number' in choice
+          ? String(choice.number)
+          : name(choice.object)
 
   switch (event.type) {
     case 'game-started':

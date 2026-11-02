@@ -4,7 +4,8 @@ import { CountStepper } from './CountStepper.tsx'
 
 /**
  * The banner's controls for a `choose-number` decision — "choose a number"
- * as a spell resolves (Void): a stepper from the offer's `min` (up to its
+ * as a spell resolves (Void), a player's own in a vote of numbers (Wheel of
+ * Misfortune, in secret): a stepper from the offer's `min` (up to its
  * `max`, when the card bounds the choice), then Choose. Holds the number
  * until it's sent, so the parent keys it by the decision to start each one
  * afresh.

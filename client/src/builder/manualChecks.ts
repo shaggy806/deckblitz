@@ -9060,6 +9060,54 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'Liquid Fire: choose a number as you cast it',
+    board({
+      you: { bf: ['Mountain*6'], hand: ['Liquid Fire'] },
+      opp: { bf: ['Hill Giant'] },
+    }),
+  ),
+  preset(
+    'Wheel of Misfortune: your number stays secret until everyone has chosen',
+    board({
+      you: { bf: ['Mountain*3'], hand: ['Wheel of Misfortune', 'Grizzly Bears'] },
+      opp: { hand: ['Hill Giant'] },
+    }),
+  ),
+  preset(
+    'Wheel of Misfortune: four numbers revealed together',
+    board({
+      you: { bf: ['Mountain*3'], hand: ['Wheel of Misfortune', 'Grizzly Bears'] },
+      opp: [{ hand: ['Hill Giant'] }, { hand: ['Hill Giant'] }, { hand: ['Hill Giant'] }],
+    }),
+  ),
+  preset(
+    'Choice of Damnations: Bob chooses the number, you choose what it costs him',
+    board({
+      you: { bf: ['Swamp*6'], hand: ['Choice of Damnations'] },
+      opp: { human: true, bf: ['Hill Giant', 'Grizzly Bears', 'Forest', 'Mountain'] },
+    }),
+  ),
+  preset(
+    'Diminishing Returns: each player chooses how many to draw, in turn',
+    board({
+      you: { bf: ['Island*4'], hand: ['Diminishing Returns', 'Grizzly Bears'], gy: ['Hill Giant'] },
+      opp: { hand: ['Hill Giant'] },
+    }),
+  ),
+  preset(
+    'Shapeshifter: a new number at your upkeep',
+    board({
+      you: { bf: ['Wastes*6'], hand: ['Shapeshifter'] },
+    }),
+  ),
+  preset(
+    'Volcano Hellion: damage of your choice to you and a target creature',
+    board({
+      you: { bf: ['Mountain*4'], hand: ['Volcano Hellion'] },
+      opp: { bf: ['Hill Giant'] },
+    }),
+  ),
+  preset(
     'Marshland Bloodcaster: two alternative costs, paying the second',
     board({
       you: { bf: ['Marshland Bloodcaster', 'Swamp*2', 'Island*2'], hand: ['Gush'] },

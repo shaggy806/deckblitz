@@ -5997,6 +5997,34 @@ engine terms. A second thing to check is a second test.
 - **Do:** Cast Snuff Out, pick the option reading "pay 4 life", and target Bob's Grizzly Bears.
 - **Expect:** You're offered that and the plain cast. You lose 4 life, no land taps, and the Bears are destroyed.
 
+### Liquid Fire: choose a number as you cast it
+- **Do:** Cast Liquid Fire. When asked, set the number to 2 and Confirm, then target Bob's Hill Giant.
+- **Expect:** The banner reads "Cast Liquid Fire — choose a number (max 5)", before the target is asked for. The six lands tap and nothing more. Once it resolves the Giant has 2 damage on it and Bob loses 3 life.
+
+### Wheel of Misfortune: your number stays secret until everyone has chosen
+- **Do:** Cast Wheel of Misfortune and let it resolve. Choose 3 in the banner.
+- **Expect:** The banner reads "Wheel of Misfortune — secretly choose a number", with no upper limit. Only once Bob has chosen too, the log says "choices revealed: Alice → 3, Bob → …". Whoever chose the higher number is dealt that much damage and discards their hand, then draws seven.
+
+### Wheel of Misfortune: four numbers revealed together
+- **Do:** In this 4-player game, cast Wheel of Misfortune and choose 2.
+- **Expect:** The log shows no one's number until the single line with all four. Each player with the highest number is dealt that much; each who didn't choose the lowest wheels.
+
+### Choice of Damnations: Bob chooses the number, you choose what it costs him
+- **Do:** Cast Choice of Damnations at Bob. As Bob, choose 2. As Alice, decline the life loss. As Bob, keep two permanents.
+- **Expect:** Bob's banner reads "Choice of Damnations — choose a number"; the log shows his number at once. Alice is asked whether he loses that much life. Declined, he picks two permanents on the board and sacrifices the other two.
+
+### Diminishing Returns: each player chooses how many to draw, in turn
+- **Do:** Cast Diminishing Returns, and choose 3 when asked.
+- **Expect:** Hand and graveyard are shuffled in and ten of your cards are exiled before you're asked. The banner reads "Diminishing Returns — how many cards do you draw? (0–7)". You draw 3, and Bob only then chooses and draws.
+
+### Shapeshifter: a new number at your upkeep
+- **Do:** Cast Shapeshifter and pick 3 in the menu. Pass until your next upkeep, say Yes when asked, and set the number to 5.
+- **Expect:** It's a 3/4 after it enters and a 5/2 after your upkeep. The banner reads "Shapeshifter — choose a number (0–7)".
+
+### Volcano Hellion: damage of your choice to you and a target creature
+- **Do:** Cast Volcano Hellion, target Bob's Hill Giant with its trigger, and set the number to 3 when it resolves.
+- **Expect:** The banner reads "Volcano Hellion — how much damage?", with no upper limit. You lose 3 life and the Giant takes 3 and dies.
+
 ### Marshland Bloodcaster: two alternative costs, paying the second
 - **Do:** Activate Marshland Bloodcaster and let it resolve. Cast Gush and pick the option reading "pay 5 life".
 - **Expect:** You're offered "return two Islands you control to hand" and "pay 5 life". You lose 5 life and draw two cards, and both Islands stay on the battlefield.

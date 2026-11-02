@@ -3543,8 +3543,20 @@ export type AwaitingDecision =
       readonly max?: number;
       readonly prompt?: string;
     } & (
-      | { readonly then: EffectSpec; readonly resume: ResolutionResume; readonly assist?: undefined }
-      | { readonly assist: AssistAsk; readonly then?: undefined; readonly resume?: undefined }
+      | {
+          readonly then: EffectSpec;
+          readonly resume: ResolutionResume;
+          readonly assist?: undefined;
+          /** Keep the answer on `source` too, while it's still the permanent
+           * of this stint (`GameObject.chosenOnEnter`) — Shapeshifter. */
+          readonly remember?: { readonly stint: number };
+        }
+      | {
+          readonly assist: AssistAsk;
+          readonly then?: undefined;
+          readonly resume?: undefined;
+          readonly remember?: undefined;
+        }
     ))
   | {
       /**

@@ -852,6 +852,10 @@ export type EffectAmount =
    * toughness".
    */
   | { readonly difference: readonly [EffectAmount, EffectAmount]; readonly absolute?: boolean }
+  /** The smallest of these — "put up to X counters … can't cause the total
+   * … to be greater than four" (Clockwork Beast) as a number's `max`: the
+   * lesser of X and the room left. */
+  | { readonly leastOf: readonly EffectAmount[] }
   /** How many cards are in the hands of the players a scope names, summed —
    * "the number of cards in **defending player's** hand" is `{ cardsInHand:
    * "trigger-player" }` in an attack trigger. `"each"` is the hand of the
@@ -898,6 +902,14 @@ export type EffectAmount =
    * or the permanent in a target slot (Trap the Trespassers' "put that many
    * stun counters on it"). */
   | { readonly votesReceived: "that-player" | number }
+  /**
+   * A number chosen in the `vote` of `for: { number }` this resolution held:
+   * the `"highest"` or `"lowest"` of them all (Wheel of Misfortune's "damage
+   * equal to the highest number"), or one player's own — `"that-player"`, or
+   * the player in a target slot (Choice of Damnations' "that much"). 0 with
+   * no such number: nobody chose, or that player didn't.
+   */
+  | { readonly votedNumber: "highest" | "lowest" | "that-player" | number }
   /** "The number of opponents who voted for a choice you didn't vote for"
    * (Erestor of the Council): each opponent with a vote for a choice none of
    * the effect's controller's votes was for, counted once. */
@@ -1386,11 +1398,33 @@ export function substituteChosenThisWay(spec: EffectSpec, chosen: readonly strin
 
 /** What `CHOSEN_THIS_WAY` stands for, for one vote or choice: a named
  * option's (or a creature type's) text, a player's id. A permanent has no
- * text to substitute. */
+ * text to substitute, and a number is read as `{ votedNumber }`. */
 function voteChoiceText(choice: VoteChoice): string {
   if ("option" in choice) return choice.text;
   if ("player" in choice) return choice.player;
   return "";
+}
+
+/** The number `player` chose in the `vote` this resolution held. */
+function votedNumberOf(votes: readonly Vote[], player: PlayerId | undefined): number | undefined {
+  for (const { voter, choice } of votes) if (voter === player && "number" in choice) return choice.number;
+  return undefined;
+}
+
+/** See the `{ votedNumber }` {@link EffectAmount}. */
+function votedNumberAmount(
+  which: Extract<EffectAmount, { votedNumber: unknown }>["votedNumber"],
+  ctx: ResolutionContext,
+): number {
+  const votes = ctx.votes();
+  if (which === "highest" || which === "lowest") {
+    const numbers = votes.flatMap(({ choice }) => ("number" in choice ? [choice.number] : []));
+    if (numbers.length === 0) return 0;
+    return which === "highest" ? Math.max(...numbers) : Math.min(...numbers);
+  }
+  if (which === "that-player") return votedNumberOf(votes, ctx.playersInScope("that-player")[0]) ?? 0;
+  const ref = ctx.targets[which];
+  return (ref?.kind === "player" ? votedNumberOf(votes, ref.player) : undefined) ?? 0;
 }
 
 /** Does `spec` read `CHOSEN_THIS_WAY` anywhere? */
@@ -3102,7 +3136,17 @@ export type EffectSpec =
        *   happens").
        * - `"number"`: a whole number from `min` (default 0), up to `max` when
        *   the card bounds it — the `choose-number` decision. `then` reads it
-       *   as `"x"`, so `then` can't also read the spell's own {X}.
+       *   as `"x"`, so `then` can't also read the spell's own {X} — but `max`
+       *   can: "put **up to X** +1/+0 counters on this creature" is read
+       *   before the answer replaces it. `who` is who chooses, when that
+       *   isn't the effect's controller: Diminishing Returns' "each player
+       *   draws **up to seven** cards" is a `for-each-player` of this with
+       *   `"that-player"`. `remember` keeps the answer on the source as the
+       *   number it chose (`GameObject.chosenOnEnter`, read as `{ chosenNumber
+       *   }`), the last one replacing any before it: Shapeshifter's "you may
+       *   choose a number" at each upkeep. Several players choosing one number
+       *   each, kept for later steps or kept secret, is a `vote`'s
+       *   `for: { number }`.
        *
        * The colour, card type and counter kind are asked as a short menu
        * (the `choose-creature-type` decision with `options`). The enclosing
@@ -3119,10 +3163,15 @@ export type EffectSpec =
       readonly on?: number;
       readonly among?: CardFilter;
       readonly min?: number;
-      readonly max?: number;
+      readonly max?: EffectAmount;
       /** A number's question, when it isn't "Choose a number" — a
        * `counters-distributed` share's "How many +1/+1 counters on …?". */
       readonly prompt?: string;
+      /** A number's chooser — see `"number"` above. Naming nobody, nothing is
+       * asked and `then` doesn't happen. */
+      readonly who?: EffectPlayerRef;
+      /** See `"number"` above. */
+      readonly remember?: true;
     }
   | {
       /**
@@ -6610,7 +6659,14 @@ export type EffectSpec =
         /** A creature type (rule 205.3m) — only with `choose`: Harsh
          * Mercy's "each player chooses a creature type". The type is the
          * vote's `text`; `CHOSEN_THIS_WAY` reads it back. */
-        | { readonly creatureType: true };
+        | { readonly creatureType: true }
+        /** A whole number from `min` (default 0), up to `max` when the card
+         * bounds it — only with `choose`, asked as the `choose-number`
+         * decision. Wheel of Misfortune's "each player secretly chooses a
+         * number 0 or greater", Choice of Damnations' "target opponent
+         * chooses a number". `{ votedNumber }` and the `voted-number`
+         * condition read them. */
+        | { readonly number: { readonly min?: number; readonly max?: number } };
       readonly secret?: boolean;
       /**
        * "Each player chooses …" rather than "votes" — the same questions
@@ -6646,8 +6702,9 @@ export type EffectSpec =
       readonly kind: "cast-vote";
       readonly voter: PlayerId;
       /** `"creature-type"`: the creature type just chosen, substituted in
-       * as the vote's option (`castCreatureTypeVote`). */
-      readonly choice: VoteChoice | "target" | "creature-type";
+       * as the vote's option (`castCreatureTypeVote`). `"number"`: the
+       * `choose-number` just answered, read as `"x"`. */
+      readonly choice: VoteChoice | "target" | "creature-type" | "number";
     }
   | {
       /**
@@ -7624,11 +7681,14 @@ export type EffectSpec =
        * choices before theirs, then every one not chosen is sacrificed at
        * once. Exactly `keep` (all of them with no more than that, unasked);
        * `upTo` is "chooses **up to** two creatures" (Archfiend of Depravity),
-       * where fewer may be kept, so it's always asked.
+       * where fewer may be kept, so it's always asked. `keep` is read as the
+       * effect applies, `who` one player named through a target when that's
+       * who it is: Choice of Damnations' "that player sacrifices all but that
+       * many permanents of their choice" (`{ votedNumber: 0 }`).
        */
       readonly kind: "sacrifice-all-but";
-      readonly who: PlayerScope;
-      readonly keep: number;
+      readonly who: PlayerScope | ChosenPlayerRef;
+      readonly keep: EffectAmount;
       readonly filter: CardFilter;
       readonly upTo?: boolean;
       /** Set only by the engine: the players still to choose, and what those
@@ -9391,7 +9451,11 @@ export interface EffectApi {
   /** See the `"choose-card-name"` {@link EffectSpec}. */
   chooseCardName(spec: Extract<EffectSpec, { kind: "choose-card-name" }>): void;
   /** See the `"choose-value"` {@link EffectSpec}. */
-  chooseValue(spec: Extract<EffectSpec, { kind: "choose-value" }>): void;
+  chooseValue(
+    spec: Extract<EffectSpec, { kind: "choose-value" }>,
+    /** A number's `max` and `who`, read as the effect applies. */
+    asked?: { readonly max?: number; readonly chooser?: PlayerId },
+  ): void;
   /** Trigger a reflexive ability — see the `"reflexive-trigger"`
    * {@link EffectSpec}. */
   /** `value`: the reflexive ability's trigger value, when the spec sets one
@@ -11769,6 +11833,7 @@ function signedAmountValue(
     const b = signedAmountValue(amount.difference[1], ctx, each);
     return amount.absolute === true ? Math.abs(a - b) : Math.max(0, a - b);
   }
+  if ("leastOf" in amount) return Math.min(...amount.leastOf.map((a) => signedAmountValue(a, ctx, each)));
   if ("librarySize" in amount) {
     return ctx.librarySizeOf(amount.librarySize === "each" ? (each ?? ctx.controller) : ctx.controller);
   }
@@ -11806,6 +11871,7 @@ function signedAmountValue(
     if (ref?.kind !== "object") return 0;
     return ctx.votes().filter((v) => "object" in v.choice && v.choice.object === ref.object).length;
   }
+  if ("votedNumber" in amount) return votedNumberAmount(amount.votedNumber, ctx);
   if ("opponentsVotedOtherwise" in amount) {
     return opponentsVoting(ctx.votes(), ctx.controller, ctx.playersInScope("each-opponent"), false).length;
   }
@@ -12601,6 +12667,7 @@ function readsEachPlayer(amount: EffectAmount): boolean {
   if ("product" in amount) return amount.product.some(readsEachPlayer);
   if ("sum" in amount) return amount.sum.some(readsEachPlayer);
   if ("difference" in amount) return amount.difference.some(readsEachPlayer);
+  if ("leastOf" in amount) return amount.leastOf.some(readsEachPlayer);
   if ("ifCondition" in amount) return readsEachPlayer(amount.then) || readsEachPlayer(amount.else);
   return false;
 }
@@ -13703,9 +13770,15 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "choose-card-name":
       ctx.chooseCardName(spec);
       return;
-    case "choose-value":
-      ctx.chooseValue(spec);
+    case "choose-value": {
+      const chooser = spec.who === undefined ? undefined : effectPlayer(spec.who, ctx);
+      if (spec.who !== undefined && chooser === undefined) return;
+      ctx.chooseValue(spec, {
+        ...(spec.max !== undefined ? { max: amountValue(spec.max, ctx) } : {}),
+        ...(chooser !== undefined ? { chooser } : {}),
+      });
       return;
+    }
     case "put-onto-battlefield": {
       const target = resolveEffectTarget(spec.target, ctx);
       const parked = ctx.parkedCount();
@@ -15447,6 +15520,10 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       // A creature type is substituted in as it's chosen; unsubstituted,
       // nothing was.
       if (spec.choice === "creature-type") return;
+      if (spec.choice === "number") {
+        ctx.castVote(spec.voter, { number: ctx.x });
+        return;
+      }
       if (spec.choice !== "target") {
         ctx.castVote(spec.voter, spec.choice);
         return;
@@ -16076,18 +16153,23 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       // One player at a time, as `keep-total-power` asks; the sacrifice waits
       // for them all.
       const below = ctx.parkedCount();
-      let toAsk = spec.progress?.toAsk ?? ctx.apnap(ctx.playersInScope(spec.who));
+      const players =
+        typeof spec.who === "object"
+          ? ((player) => (player === undefined ? [] : [player]))(effectPlayer(spec.who, ctx))
+          : ctx.playersInScope(spec.who);
+      let toAsk = spec.progress?.toAsk ?? ctx.apnap(players);
       let kept = [...(spec.progress?.kept ?? []), ...ctx.takeKept()];
+      const keep = amountValue(spec.keep, ctx);
       while (toAsk.length > 0) {
         const player = toAsk[0];
         toAsk = toAsk.slice(1);
-        if (ctx.askKeep(player, spec.filter, spec.keep, spec.upTo === true)) {
+        if (ctx.askKeep(player, spec.filter, keep, spec.upTo === true)) {
           ctx.resumeAfterDecisions({ ...spec, progress: { toAsk, kept } }, below);
           return;
         }
         kept = [...kept, ...ctx.takeKept()];
       }
-      ctx.sacrificeAllExcept(ctx.playersInScope(spec.who), spec.filter, kept);
+      ctx.sacrificeAllExcept(players, spec.filter, kept);
       return;
     }
     case "keep-total-power": {

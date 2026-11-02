@@ -209,6 +209,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "gain-life": (n, v) => v.touch(n.toControllerOfTarget, "help", MINOR),
   "lose-life": (n, v) => {
     v.touch(n.target, "harm", MINOR);
+    if (typeof n.who === "object" && "target" in n.who) v.touch(n.who.target, "harm", MINOR);
     v.touch(n.toControllerOfTarget, "harm", MINOR);
   },
   // A total this low is a blow to whoever it's aimed at (Magister Sphinx's 10,
@@ -750,7 +751,10 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     (n.choices ?? []).forEach((choice) => v.child(choice.effect));
   },
   ward: none,
-  "sacrifice-all-but": none,
+  // "That player sacrifices all but that many" (Choice of Damnations).
+  "sacrifice-all-but": (n, v) => {
+    if (typeof n.who === "object" && "target" in n.who) v.touch(n.who.target, "harm", MAJOR);
+  },
   "keep-total-power": none,
   // Separating a targeted player's permanents (Liliana of the Veil) takes
   // from them; a targeted separator or chooser (Fortune's Favor's opponent)

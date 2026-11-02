@@ -1305,6 +1305,7 @@ function evalStaticCondition(
     case "source-on-battlefield":
     case "vote-won":
     case "votes-cast":
+    case "voted-number":
     case "target-is-source":
     case "target-controlled-by-you":
     case "target-legal":
@@ -3395,6 +3396,14 @@ export function partySizeOf(state: GameState, registry: CardRegistry, player: Pl
  * `forChosenPlayer` the player chosen for it (`GameObject.chosenPlayer`) —
  * nobody when none was chosen or they've left the game (rule 800.4a), which
  * a count reads as 0. */
+/** The number `object` chose (`chosenOnEnter`, a `"chosen-number"` count): 0
+ * while it has none, as off the battlefield. */
+function chosenNumberOf(object: GameObject): number {
+  if (object.zone !== "battlefield") return 0;
+  const n = Number(object.chosenOnEnter ?? 0);
+  return Number.isInteger(n) ? n : 0;
+}
+
 function countSide(state: GameState, object: GameObject, forChosenPlayer: true | undefined): PlayerId | undefined {
   if (forChosenPlayer !== true) return object.controller;
   const chosen = object.chosenPlayer;
@@ -3487,6 +3496,9 @@ export function countValue(
   switch (spec) {
     case "cards-in-all-graveyards":
       return allGraveyards().length;
+    case "chosen-number":
+      // Which permanent's is only known to a `setBasePtFromCount`.
+      return 0;
     case "cards-in-your-hand":
       return state.zones.perPlayer[controller]?.hand.length ?? 0;
     case "your-life-total":
@@ -4901,7 +4913,12 @@ function computeCharacteristicsUncached(
       cdaInProgress.add(object.id);
       try {
         const side = countSide(state, object, ability.setBasePtFromCount.forChosenPlayer);
-        n = side === undefined ? 0 : countValue(ability.setBasePtFromCount.countOf, state, registry, side);
+        n =
+          ability.setBasePtFromCount.countOf === "chosen-number"
+            ? chosenNumberOf(object)
+            : side === undefined
+              ? 0
+              : countValue(ability.setBasePtFromCount.countOf, state, registry, side);
       } finally {
         cdaInProgress.delete(object.id);
       }
@@ -4909,7 +4926,12 @@ function computeCharacteristicsUncached(
       // (Eluge, the Shoreless Sea's "*/5").
       const only = ability.setBasePtFromCount.only;
       if (only !== "toughness") power = n + ability.setBasePtFromCount.plusPower;
-      if (only !== "power") toughness = n + ability.setBasePtFromCount.plusToughness;
+      if (only !== "power") {
+        toughness =
+          ability.setBasePtFromCount.toughnessMinusCount === true
+            ? ability.setBasePtFromCount.plusToughness - n
+            : n + ability.setBasePtFromCount.plusToughness;
+      }
     }
   }
   // Layer 7b — a "becomes a N/N" (man-land animation, Turn to Frog) and a
