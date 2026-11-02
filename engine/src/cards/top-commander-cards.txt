@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4161 already implemented / 839 missing (marks refreshed 2026-11-02)
+4163 already implemented / 837 missing (marks refreshed 2026-11-02)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -1692,7 +1692,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1699  Spirit Mantle                            {1}{W}           Enchantment — Aura
 [x]  1700  Glen Elendra Archmage                    {3}{U}           Creature — Faerie Wizard
 [x]  1701  Curiosity Crafter                        {3}{U}           Creature — Bird Wizard
-[ ]  1702  Extraplanar Lens                         {3}              Artifact
+[x]  1702  Extraplanar Lens                         {3}              Artifact
 [x]  1703  Timely Ward                              {2}{W}           Enchantment — Aura
 [x]  1704  Oversold Cemetery                        {1}{B}           Enchantment
 [ ]  1705  Mirror Box                               {3}              Artifact
@@ -4251,7 +4251,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4258  Dazzling Denial                          {1}{U}           Instant
 [x]  4259  Demonic Junker                           {6}{B}           Artifact — Vehicle
 [x]  4260  Vizier of the Menagerie                  {3}{G}           Creature — Snake Cleric
-[ ]  4261  Teferi, Temporal Archmage                {4}{U}{U}        Legendary Planeswalker — Teferi
+[x]  4261  Teferi, Temporal Archmage                {4}{U}{U}        Legendary Planeswalker — Teferi
 [x]  4262  Archmage of Echoes                       {4}{U}           Creature — Faerie Wizard
 [x]  4263  Jaws of Defeat                           {3}{B}           Enchantment
 [x]  4264  Heartbeat of Spring                      {2}{G}           Enchantment
