@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4179 already implemented / 821 missing (marks refreshed 2026-11-02)
+4190 already implemented / 810 missing (marks refreshed 2026-11-02)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -258,7 +258,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]   259  Sylvan Library                           {1}{G}           Enchantment
 [x]   260  Syr Konrad, the Grim                     {3}{B}{B}        Legendary Creature — Human Knight
 [x]   261  Infernal Grasp                           {1}{B}           Instant
-[ ]   262  Academy Manufactor                       {3}              Artifact Creature — Assembly-Worker
+[x]   262  Academy Manufactor                       {3}              Artifact Creature — Assembly-Worker
 [x]   263  Sundown Pass                             {0}              Land
 [x]   264  Withering Torment                        {2}{B}           Instant
 [x]   265  Untimely Malfunction                     {1}{R}           Instant
@@ -889,7 +889,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   893  Loot, Exuberant Explorer                 {2}{G}           Legendary Creature — Beast Noble
 [ ]   894  Demonic Consultation                     {B}              Instant
 [x]   895  Rite of Replication                      {2}{U}{U}        Sorcery
-[ ]   896  Xorn                                     {2}{R}           Creature — Elemental
+[x]   896  Xorn                                     {2}{R}           Creature — Elemental
 [x]   897  Forsaken Monument                        {5}              Legendary Artifact
 [x]   898  Reconnaissance                           {W}              Enchantment
 [x]   899  Reconnaissance Mission                   {2}{U}{U}        Enchantment
@@ -1153,7 +1153,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1158  Titania, Protector of Argoth             {3}{G}{G}        Legendary Creature — Elemental
 [x]  1159  Vindicate                                {1}{W}{B}        Sorcery
 [x]  1160  Soul Shatter                             {2}{B}           Instant
-[ ]  1161  Silent Arbiter                           {4}              Artifact Creature — Construct
+[x]  1161  Silent Arbiter                           {4}              Artifact Creature — Construct
 [x]  1162  Glasspool Mimic // Glasspool Shore       {3}              Creature — Shapeshifter Rogue // Land
 [x]  1163  City of Traitors                         {0}              Land
 [x]  1164  Essence Warden                           {G}              Creature — Elf Shaman
@@ -1196,7 +1196,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1201  Moonshaker Cavalry                       {5}{W}{W}{W}     Creature — Spirit Knight
 [x]  1202  Wheel of Misfortune                      {2}{R}           Sorcery
 [x]  1203  Thriving Bluff                           {0}              Land
-[ ]  1204  Mount Doom                               {0}              Legendary Land
+[x]  1204  Mount Doom                               {0}              Legendary Land
 [x]  1205  Expedite                                 {R}              Instant
 [x]  1206  Artisan of Kozilek                       {9}              Creature — Eldrazi
 [x]  1207  Millikin                                 {2}              Artifact Creature — Construct
@@ -1393,7 +1393,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1400  Grave Titan                              {4}{B}{B}        Creature — Giant
 [x]  1401  Weftstalker Ardent                       {2}{R}           Creature — Drix Artificer
 [x]  1402  Thousand-Year Storm                      {4}{U}{R}        Enchantment
-[ ]  1403  Crawlspace                               {3}              Artifact
+[x]  1403  Crawlspace                               {3}              Artifact
 [x]  1404  Adrix and Nev, Twincasters               {2}{G}{U}        Legendary Creature — Merfolk Wizard
 [x]  1405  Call of the Ring                         {1}{B}           Enchantment
 [x]  1406  Decree of Pain                           {6}{B}{B}        Sorcery
@@ -1642,7 +1642,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1649  Zetalpa, Primal Dawn                     {6}{W}{W}        Legendary Creature — Elder Dinosaur
 [x]  1650  Silent Clearing                          {0}              Land
 [x]  1651  The Gaffer                               {2}{W}           Legendary Creature — Halfling Peasant
-[ ]  1652  Stridehangar Automaton                   {3}              Artifact Creature — Construct
+[x]  1652  Stridehangar Automaton                   {3}              Artifact Creature — Construct
 [x]  1653  Blast Zone                               {0}              Land
 [x]  1654  Prismatic Lens                           {2}              Artifact
 [x]  1655  Botanical Sanctum                        {0}              Land
@@ -2442,7 +2442,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  2449  Dollmaker's Shop // Porcelain Gallery    {1}{W} // {4}{W}{W} Enchantment — Room // Enchantment — Room
 [x]  2450  Cranial Plating                          {2}              Artifact — Equipment
 [x]  2451  Endless Ranks of the Dead                {2}{B}{B}        Enchantment
-[ ]  2452  Druid of Purification                    {3}{G}           Creature — Human Druid
+[x]  2452  Druid of Purification                    {3}{G}           Creature — Human Druid
 [ ]  2453  Ancient Cellarspawn                      {1}{B}{B}        Enchantment Creature — Horror
 [x]  2454  Collector Ouphe                          {1}{G}           Creature — Ouphe
 [x]  2455  Molten Echoes                            {2}{R}{R}        Enchantment
@@ -2654,7 +2654,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  2661  Ashiok, Dream Render                     {1}{U/B}{U/B}    Legendary Planeswalker — Ashiok
 [x]  2662  Teval, the Balanced Scale                {1}{B}{G}{U}     Legendary Creature — Spirit Dragon
 [ ]  2663  The Earth King                           {3}{G}           Legendary Creature — Human Noble Ally
-[ ]  2664  Mirri, Weatherlight Duelist              {1}{G}{W}        Legendary Creature — Cat Warrior
+[x]  2664  Mirri, Weatherlight Duelist              {1}{G}{W}        Legendary Creature — Cat Warrior
 [ ]  2665  Zack Fair                                {W}              Legendary Creature — Human Soldier
 [x]  2666  Volatile Fault                           {0}              Land — Cave
 [x]  2667  Khalni Heart Expedition                  {1}{G}           Enchantment
@@ -2753,7 +2753,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2760  Double Vision                            {3}{R}{R}        Enchantment
 [x]  2761  Guardian Augmenter                       {2}{G}           Creature — Troll Wizard
 [ ]  2762  Folio of Fancies                         {1}{U}           Artifact — Book
-[ ]  2763  Witch-king of Angmar                     {3}{B}{B}        Legendary Creature — Wraith Noble
+[x]  2763  Witch-king of Angmar                     {3}{B}{B}        Legendary Creature — Wraith Noble
 [ ]  2764  Rousing Refrain                          {3}{R}{R}        Sorcery
 [x]  2765  Quietus Spike                            {3}              Artifact — Equipment
 [x]  2766  Caesar, Legion's Emperor                 {1}{R}{W}{B}     Legendary Creature — Human Soldier
@@ -3784,7 +3784,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3791  White Auracite                           {2}{W}{W}        Artifact
 [x]  3792  Tempered Steel                           {1}{W}{W}        Enchantment
 [x]  3793  Fire Magic                               {R}              Instant
-[ ]  3794  Divine Reckoning                         {2}{W}{W}        Sorcery
+[x]  3794  Divine Reckoning                         {2}{W}{W}        Sorcery
 [x]  3795  Sanctum of Stone Fangs                   {1}{B}           Legendary Enchantment — Shrine
 [x]  3796  Garruk, Cursed Huntsman                  {4}{B}{G}        Legendary Planeswalker — Garruk
 [x]  3797  Animal Sanctuary                         {0}              Land
@@ -4142,7 +4142,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4149  Dion, Bahamut's Dominant // Bahamut, Warden of Light {4}              Legendary Creature — Human Noble Knight // Legendary Enchantment Creature — Saga Dragon
 [x]  4150  Tymna the Weaver                         {1}{W}{B}        Legendary Creature — Human Cleric
 [ ]  4151  Amalia Benavides Aguirre                 {W}{B}           Legendary Creature — Vampire Scout
-[ ]  4152  Queen Allenal of Ruadach                 {G}{W}{W}        Legendary Creature — Elf Noble
+[x]  4152  Queen Allenal of Ruadach                 {G}{W}{W}        Legendary Creature — Elf Noble
 [x]  4153  Azami, Lady of Scrolls                   {2}{U}{U}{U}     Legendary Creature — Human Wizard
 [ ]  4154  Norn's Decree                            {2}{W}           Enchantment
 [x]  4155  Search for Glory                         {2}{W}           Snow Sorcery

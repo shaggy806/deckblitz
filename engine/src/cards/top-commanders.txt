@@ -1,5 +1,5 @@
 Top 500 Commander *commanders* by EDHREC deck count (fetched 2026-09-22)
-455 already implemented / 45 missing
+456 already implemented / 44 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -325,7 +325,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  319  Slimefoot and Squee                             8791 decks  {B}{R}{G}        Legendary Creature — Fungus Goblin
 [x]  320  Adrix and Nev, Twincasters                      8734 decks  {2}{G}{U}        Legendary Creature — Merfolk Wizard
 [x]  321  Lumra, Bellow of the Woods                      8733 decks  {4}{G}{G}        Legendary Creature — Elemental Bear
-[ ]  322  Obeka, Brute Chronologist                       8714 decks  {1}{U}{B}{R}     Legendary Creature — Ogre Wizard
+[x]  322  Obeka, Brute Chronologist                       8714 decks  {1}{U}{B}{R}     Legendary Creature — Ogre Wizard
 [x]  323  Winter, Misanthropic Guide                      8693 decks  {1}{B}{R}{G}     Legendary Creature — Human Warlock
 [x]  324  Ikra Shidiqi, the Usurper                       8690 decks  {3}{B}{G}        Legendary Creature — Snake Wizard
 [x]  325  Elas il-Kor, Sadistic Pilgrim                   8681 decks  {W}{B}           Legendary Creature — Phyrexian Kor Cleric
