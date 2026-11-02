@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4147 already implemented / 853 missing (marks refreshed 2026-11-02)
+4151 already implemented / 849 missing (marks refreshed 2026-11-02)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -1742,7 +1742,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1749  Relic of Sauron                          {4}              Artifact
 [x]  1750  Vampire Nighthawk                        {1}{B}{B}        Creature — Vampire Shaman
 [ ]  1751  Season of Gathering                      {4}{G}{G}        Sorcery
-[ ]  1752  Vorinclex, Voice of Hunger               {6}{G}{G}        Legendary Creature — Phyrexian Praetor
+[x]  1752  Vorinclex, Voice of Hunger               {6}{G}{G}        Legendary Creature — Phyrexian Praetor
 [x]  1753  Barad-dûr                                {0}              Legendary Land
 [ ]  1754  Seize the Spotlight                      {2}{R}           Sorcery
 [x]  1755  Mana Leak                                {1}{U}           Instant
@@ -1834,7 +1834,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1841  Undead Augur                             {B}{B}           Creature — Zombie Wizard
 [ ]  1842  Firemane Commando                        {3}{W}           Creature — Angel Soldier
 [ ]  1843  Archetype of Imagination                 {4}{U}{U}        Enchantment Creature — Human Wizard
-[ ]  1844  Emrakul, the Promised End                {13}             Legendary Creature — Eldrazi
+[x]  1844  Emrakul, the Promised End                {13}             Legendary Creature — Eldrazi
 [x]  1845  Wooded Ridgeline                         {0}              Land — Mountain Forest
 [x]  1846  Boros Guildgate                          {0}              Land — Gate
 [ ]  1847  Claim Jumper                             {2}{W}           Creature — Rabbit Mercenary
@@ -4003,7 +4003,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4010  Grim Servant                             {3}{B}           Creature — Zombie Warlock
 [x]  4011  King of the Pride                        {2}{W}           Creature — Cat
 [x]  4012  Flame Rift                               {1}{R}           Sorcery
-[ ]  4013  Palace Jailer                            {2}{W}{W}        Creature — Human Soldier
+[x]  4013  Palace Jailer                            {2}{W}{W}        Creature — Human Soldier
 [x]  4014  Pestilence                               {2}{B}{B}        Enchantment
 [ ]  4015  Papalymo Totolymo                        {W}{B}           Legendary Creature — Dwarf Wizard
 [x]  4016  Volcanic Torrent                         {4}{R}           Sorcery
@@ -4575,7 +4575,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4582  Master of the Feast                      {1}{B}{B}        Enchantment Creature — Demon
 [x]  4583  Boon of the Spirit Realm                 {3}{W}{W}        Enchantment
 [x]  4584  Mind Flayer                              {3}{U}{U}        Creature — Horror
-[ ]  4585  Mindslaver                               {6}              Legendary Artifact
+[x]  4585  Mindslaver                               {6}              Legendary Artifact
 [ ]  4586  Jeska, Thrice Reborn                     {2}{R}           Legendary Planeswalker — Jeska
 [x]  4587  Elderfang Disciple                       {1}{B}           Creature — Elf Cleric
 [x]  4588  Impassioned Orator                       {1}{W}           Creature — Human Cleric
