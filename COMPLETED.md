@@ -86,6 +86,30 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2: free casts with a limit** (2026-11-01, `822249c08`, fix `cef9dee3c`, checks
+  `506beb17c`; `cost:free-cast-from-hand-static`, `cost:free-cast-once-each-turn`) —
+  `alternativeCostForSpells`' `fromZones` and `anyPlayer`, reaching `via: "library-top"` and any paid
+  `cast-now`; its filter judged as the face cast. Omniscience, Omnipresence, Aluren, As Foretold, Vision,
+  Zaffai, One with the Multiverse, Tlincalli Hunter.
+- **Need-keys Phase 2: cycling's cost as a variant** (2026-11-01, `d42cb2264`; `cost:cycling-alt-cost`,
+  `cost:cycling-x`) — `CyclingAbility.also` and `costText`, `{X}` in the cost, `alternativeCyclingCost`
+  (`firstEachTurn`, `cardsCycledThisTurn`), `card-cycled.x` read as `triggerValue`. Street Wraith, Edge of
+  Autumn, Gavi, New Perspectives, Shark Typhoon, Webstrike Elite, Rampaging War Mammoth.
+- **Need-keys Phase 2: a number a player chooses** (2026-11-01, `c9c7b3300`; `decision:choose-number`,
+  `cost:choose-number-additional`) — no new decision kind: `additionalCost.chooseNumber`, `vote`'s
+  `for: { number }` open or secret with `{ votedNumber }`, `choose-value`'s `who`, `max` as an amount
+  (`{ leastOf }`) and `remember`, the `"chosen-number"` CDA count, `sacrifice-all-but`'s amount and `who`.
+  Liquid Fire, Wheel of Misfortune, Menacing Ogre, Choice of Damnations, Diminishing Returns, Shapeshifter,
+  Volcano Hellion.
+- **Need-keys Phase 2: an activated ability's own reduction, under a condition** (2026-11-01, `36ad5772b`;
+  `cost:ability-cost-reduction-conditional`, `-conditional-colored`, `cost:ability-cost-modification-all-zones`,
+  `static:ability-cost-increase-attached`). Flying Drone, Kami of Jealous Thirst, Esquire, Crown of Gondor,
+  Razorlash, Hylda's Crown, Suppression Field, Oppressive Rays.
+- **Need-keys Phase 2: more players an effect can name** (2026-11-01, `81ab84c1e`;
+  `effect:player-scope-extensions`' top group, 11 keys) — a second target on the same player's permanent,
+  `PlayerScope`'s `"attached-controller"`, the trigger controller's opponents. Fall of Kroog, Searing Blaze,
+  Yosei, Mass Diminish, Gremlin Infestation, Observed Stasis, Standstill, Heartwood Storyteller, Bounty Board,
+  Lavalanche, Ember Gale, Cruel Grimnarch, Plaguecrafter, Super Intelligence, Citadel Siege, Azog, Silumgar.
 - **Need-keys Phase 2: when a spell may be cast or an ability activated** (2026-11-01, `18faa95cc`;
   `effect:cast-and-activate-restrictions`' top group, 13 keys) — flash for an extra cost (`kicker`'s
   `keyword: "flash"`), opponents may activate, bans on non-mana and loyalty abilities, as-though haste,

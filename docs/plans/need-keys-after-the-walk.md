@@ -797,7 +797,9 @@ missing. Re-run `--greedy` for Phase 2's order.
   (13 keys, 6 freed, 17 proving cards); emblem statics and reveal-until (12 keys, 15 freed, 15 proving
   cards); same-name filters and damage to the source (6 keys, 5 freed, 13 proving cards); skip-turn and
   pack tactics (4 keys, 10 freed, 10 proving cards); cost reductions and cast rules (33 keys, 46 freed, 36
-  proving cards, 2 manual checks).
+  proving cards, 2 manual checks); player scopes and ability cost reductions (15 keys, 13 freed, 25 proving
+  cards); a number a player chooses (2 keys, 3 freed, 7 proving cards, 7 manual checks); cycling variants
+  and limited free casts (4 keys, 1 freed, 15 proving cards, 5 manual checks).
 
 ## Rough size
 
