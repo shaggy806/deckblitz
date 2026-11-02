@@ -9137,3 +9137,74 @@ describe("a number a player chooses", () => {
     expect(read("Elsewhere", "Creature — Bird", "As this creature enters, choose a number between 1 and 3.", "1", "1").chooseOnEnter).toEqual(["1", "2", "3"]);
   });
 });
+
+describe("choices kept, the rest destroyed", () => {
+  const effectOf = (text: string): unknown => parseEffect(text, { targets: [] }).effect;
+  const rest = (filter: object): object => ({ kind: "destroy-all", filter: { ...filter, notThisWay: "chosen" } });
+
+  it("reads each player choosing their own, and what the rest are", () => {
+    expect(effectOf("Each player chooses a creature they control. Destroy the rest.")).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "vote", choose: true, for: { permanent: { type: "creature", controlledBy: "you" }, own: true, keep: true } },
+        rest({ type: "creature" }),
+      ],
+    });
+    expect(effectOf("Each player chooses three nonland permanents they control. Destroy all other nonland permanents.")).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "vote", choose: true, for: { permanent: { notTypes: ["land"], controlledBy: "you" }, own: true, count: 3, keep: true } },
+        rest({ notTypes: ["land"] }),
+      ],
+    });
+    expect(effectOf("Each player chooses six lands they control. Destroy all other permanents.")).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "vote", choose: true, for: { permanent: { type: "land", controlledBy: "you" }, own: true, count: 6, keep: true } },
+        rest({}),
+      ],
+    });
+  });
+
+  it("reads the controller choosing any, up to some, one way or the other", () => {
+    expect(effectOf("Choose up to one creature. Destroy the rest.")).toEqual({
+      kind: "sequence",
+      effects: [{ kind: "vote", choose: true, who: "you", for: { permanent: { type: "creature" }, upTo: 1, keep: true } }, rest({ type: "creature" })],
+    });
+    expect(effectOf("Choose up to two creatures, then destroy the rest.")).toEqual({
+      kind: "sequence",
+      effects: [{ kind: "vote", choose: true, who: "you", for: { permanent: { type: "creature" }, upTo: 2, keep: true } }, rest({ type: "creature" })],
+    });
+    expect(effectOf("Choose a creature or planeswalker, then destroy all other creatures and planeswalkers.")).toMatchObject({
+      effects: [{ who: "you", for: { keep: true } }, { filter: { notThisWay: "chosen", typesAnyOf: ["creature", "planeswalker"] } }],
+    });
+  });
+
+  it("reads Fortunate Few and Druid of Purification whole", () => {
+    expect(
+      effectOf(
+        "Choose a nonland permanent you don't control, then each other player chooses a nonland permanent they don't control that hasn't been chosen this way. Destroy all other nonland permanents.",
+      ),
+    ).toMatchObject({
+      effects: [{ startingWith: "you-then-active-player", for: { own: true, permanent: { notThisWay: "chosen" } } }, rest({ notTypes: ["land"] })],
+    });
+    expect(
+      effectOf("Starting with you, each player may choose an artifact or enchantment you don't control. Destroy each permanent chosen this way."),
+    ).toEqual({
+      kind: "sequence",
+      effects: [
+        {
+          kind: "vote",
+          choose: true,
+          startingWith: "you",
+          for: { permanent: { typesAnyOf: ["artifact", "enchantment"], controlledBy: "opponent" }, upTo: 1 },
+        },
+        { kind: "destroy-all", filter: { thisWay: "chosen" } },
+      ],
+    });
+  });
+
+  it("leaves a random choice alone: nothing here reads it", () => {
+    expect(effectOf("Choose a creature at random, then destroy the rest.")).toBeNull();
+  });
+});

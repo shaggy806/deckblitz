@@ -33,7 +33,7 @@ export default defineCard({
             kind: "vote",
             choose: true,
             startingWith: "you",
-            for: { permanent: { manaValue: { op: "gte", n: 3 }, controlledBy: "opponent" }, upToOne: true },
+            for: { permanent: { manaValue: { op: "gte", n: 3 }, controlledBy: "opponent" }, upTo: 1 },
           },
           { kind: "for-each-voted", which: "voted", simultaneous: true, effect: { kind: "exile", target: 0 } },
         ],

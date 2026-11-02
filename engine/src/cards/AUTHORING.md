@@ -2299,9 +2299,13 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
   each seeing the votes before theirs; `secret: true` is secret council
   ("each player secretly votes …, then those votes are revealed"): no vote
   shows until all are revealed together. `for` is `{ options: ["time",
-  "knowledge"] }`, `{ permanent: <filter read from your side>, upToOne? }`
+  "knowledge"] }`, `{ permanent: <filter read from your side>, upTo?, count?, own?, keep? }`
   (Council's Judgment's "a nonland permanent you don't control" — not a
-  target, so hexproof doesn't stop it; Vault 11's "up to one creature") or
+  target, so hexproof doesn't stop it; Vault 11's "up to one creature" is
+  `upTo: 1`; with `choose`, `count: 3` is "chooses three", one vote a permanent;
+  `keep: true` says what's chosen is spared, for how it's asked: "each player
+  chooses a creature they control. Destroy the rest" (Divine Reckoning) is this
+  and a `destroy-all` of `{ type: "creature", notThisWay: "chosen" }`) or
   `{ player: "any" | "another" }`. A player with a "while voting, you may
   vote an additional time" (`static: [{ votesAdditionalTime: true }]` — Tivit)
   may cast one more vote per such permanent (701.38d). The steps after it

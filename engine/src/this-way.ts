@@ -225,6 +225,14 @@ export function thisWayEntries(
         if (event.type === "cards-chosen-from-zone") {
           for (const object of event.objects) add(object, event.player, false);
         }
+        // A vote's or a choice's permanents: one at a time as they're chosen,
+        // a secret vote's all at once as they're revealed.
+        if (event.type === "vote-cast" && "object" in event.vote.choice) {
+          add(event.vote.choice.object, event.vote.voter, false);
+        }
+        if (event.type === "votes-finished") {
+          for (const { voter, choice } of event.votes) if ("object" in choice) add(choice.object, voter, false);
+        }
         break;
       case "put-into-graveyard":
         // Whose graveyard: its owner's, wherever it came from.

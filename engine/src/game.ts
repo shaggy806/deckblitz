@@ -33341,14 +33341,33 @@ export class Game {
     if ("permanent" in what) {
       const eligible = this.battlefieldMatching(what.own === true ? player : controller, what.permanent);
       if (eligible.length === 0) return;
+      const keep = what.keep === true;
+      const units = (id: ObjectId): number => this.state.objects[id]?.stackCount ?? 1;
+      const available = eligible.reduce((n, id) => n + units(id), 0);
+      const most = extra ? 1 : Math.min(what.upTo ?? what.count ?? 1, available);
+      const mayChooseFewer = extra || what.upTo !== undefined;
+      if (keep && !mayChooseFewer && most === available) {
+        // "Chooses three" with three or fewer: nothing to choose.
+        const votes = this.makeResolutionContext(source, controller, [], x);
+        for (const id of eligible) {
+          for (let i = units(id); i > 0; i -= 1) votes.castVote(player, { permanent: id });
+        }
+        return;
+      }
+      const power = (id: ObjectId): number => computeCharacteristics(this.state, this.registry, id).power;
+      const count = what.upTo ?? what.count ?? 1;
+      const noun = count === 1 ? "a permanent" : `${count} permanents`;
       this.state.awaiting = {
         kind: "choose-permanents",
         player,
-        eligible,
-        min: extra || what.upToOne === true ? 0 : 1,
-        max: 1,
-        prompt: extra ? "Vote an additional time (or choose none)" : `${verb} a permanent`,
-        then: { kind: "cast-vote", voter: player, choice: "target" },
+        // The strongest first: what a default answer, keeping what it may, keeps.
+        eligible: keep ? [...eligible].sort((a, b) => power(b) - power(a)) : eligible,
+        min: mayChooseFewer ? 0 : most,
+        max: most,
+        prompt: extra
+          ? "Vote an additional time (or choose none)"
+          : `${verb} ${what.upTo !== undefined ? "up to " : ""}${what.upTo === 1 ? "one permanent" : noun}${keep ? " to keep" : ""}`,
+        then: { kind: "cast-vote", voter: player, choice: "target", ...(keep ? { keep: true } : {}) },
         source,
         x,
       };

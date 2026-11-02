@@ -1649,7 +1649,14 @@ export type ThisWayKind =
    * player's graveyard. **If you do**, …" holds though a replacement exiled
    * the card again instead (Rest in Peace — the processors' ruling: "you can
    * still put an exiled card into its opponent's graveyard"). Counted by the
-   * player who chose. */
+   * player who chose.
+   *
+   * And permanents chosen or voted for in a `vote` it held, each counted
+   * once, read from the moment they're chosen: Divine Reckoning's "each
+   * player chooses a creature they control. Destroy the rest" (`notThisWay`),
+   * Fortunate Few's "that hasn't been chosen this way", Druid of
+   * Purification's "destroy each permanent chosen this way" (`thisWay`). One
+   * token of a stack is its own object here, singled out as it's chosen. */
   | "chosen";
 
 export type PlayerScope =
@@ -6667,16 +6674,29 @@ export type EffectSpec =
         | { readonly options: readonly string[] }
         /** A permanent matching `permanent`, read from the effect's
          * controller's side — Council's Judgment's "a nonland permanent you
-         * don't control". `upToOne` is Vault 11's "votes for **up to one**
-         * creature": a player may cast no vote. A player with nothing to
-         * vote for casts none. */
+         * don't control". `upTo` is Vault 11's "votes for **up to one**
+         * creature": a player may cast no vote, or Mount Doom's "choose **up
+         * to two** creatures" — one vote a permanent. A player with nothing
+         * to vote for casts none. */
         | {
             readonly permanent: CardFilter;
-            readonly upToOne?: boolean;
+            readonly upTo?: number;
+            /** Only with `choose`: "each player chooses **three** nonland
+             * permanents they control" (Fall of the First Civilization) —
+             * one vote a permanent, and as many as there are with fewer
+             * (rule 609.3). One when absent. */
+            readonly count?: number;
             /** Read from the chooser's side instead — Agitator Ant's "each
              * player may put two +1/+1 counters on a creature **they**
              * control" (`controlledBy: "you"` is the chooser). */
             readonly own?: true;
+            /** Only with `choose`: what's chosen is what's spared ("each
+             * player chooses a creature they control. Destroy the rest" —
+             * Divine Reckoning; the next step's filter says `notThisWay:
+             * "chosen"`). It only changes how it's asked: "… to keep", the
+             * strongest first, and nothing asked when exactly `count` is all
+             * there is. */
+            readonly keep?: true;
           }
         /** A player still in the game — `"another"`: other than the voter
          * (Mob Verdict's "votes for another player"). */
@@ -6713,8 +6733,11 @@ export type EffectSpec =
        * controller (a vote's "starting with you", 701.38a — a vote always
        * starts there), the active player (rule 101.4 — a choice's default),
        * or the next opponent in turn order after the controller (Sadistic
-       * Shell Game's "starting with the next opponent in turn order"). */
-      readonly startingWith?: "you" | "active-player" | "next-opponent";
+       * Shell Game's "starting with the next opponent in turn order").
+       * `"you-then-active-player"` is the controller, then everyone else from
+       * the active player (Fortunate Few's "choose …, then each other player
+       * chooses …", by its ruling). */
+      readonly startingWith?: "you" | "active-player" | "next-opponent" | "you-then-active-player";
       /** Set by the engine on the copy it parks between one vote and the
        * next: the votes still to ask for, each with whether it's an
        * additional, optional one. */
@@ -6726,6 +6749,8 @@ export type EffectSpec =
        * in target slot 0 (a `vote` for a permanent). */
       readonly kind: "cast-vote";
       readonly voter: PlayerId;
+      /** The `vote`'s `keep`, for a default answer: what's chosen is spared. */
+      readonly keep?: true;
       /** `"creature-type"`: the creature type just chosen, substituted in
        * as the vote's option (`castCreatureTypeVote`). `"number"`: the
        * `choose-number` just answered, read as `"x"`. */
@@ -11238,7 +11263,12 @@ function applyVote(spec: Extract<EffectSpec, { kind: "vote" }>, ctx: ResolutionC
           ? fromYou[0] === ctx.controller
             ? [...fromYou.slice(1), fromYou[0]]
             : fromYou
-          : ctx.apnap(fromYou);
+          : spec.startingWith === "you-then-active-player"
+            ? [
+                ...fromYou.filter((player) => player === ctx.controller),
+                ...ctx.apnap(fromYou.filter((player) => player !== ctx.controller)),
+              ]
+            : ctx.apnap(fromYou);
     toAsk = order.map((player) => ({ player, extra: false }));
   }
   if (toAsk === undefined) {

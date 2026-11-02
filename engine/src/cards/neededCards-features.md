@@ -3767,3 +3767,14 @@ Rallier, Bonded Horncrest, Trusty Companion) is `combat/company.ts`'s, built alr
 Scarred Puma's "unless a black or green creature also attacks" and Sightless Brawler's
 granted restriction need `author-freed` to narrow; Mystic Barrier waits on
 `static:attack-direction-restriction`.
+
+**Choices kept, the rest destroyed (2026-11-01, `effect:destroy-all-except-chosen`,
+`effect:each-player-chooses-destroy-rest`).** The `vote` with `choose` already asked
+the question; `thisWay: "chosen"` reads its answers, so "destroy the rest" is
+`notThisWay: "chosen"` on any mass effect's filter and "that hasn't been chosen" the
+same clause on the next chooser's. `for.permanent` gained `count`, `upTo` (for
+`upToOne`) and `keep`; `startingWith` gained `"you-then-active-player"`. Proving
+cards: Divine Reckoning, Duneblast, Mount Doom, Fall of the First Civilization,
+Fortunate Few, Druid of Purification. Freed and unauthored: Urza's Sylex, Selfless
+Glyphweaver. The clause also reaches Consuming Tide, and Last One Standing given a
+random choice (`effect:random-permanent`).

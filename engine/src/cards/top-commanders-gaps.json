@@ -1133,7 +1133,9 @@
   "cost:cycling-alt-cost",
   "cost:cycling-x",
   "cost:free-cast-from-hand-static",
-  "cost:free-cast-once-each-turn"
+  "cost:free-cast-once-each-turn",
+  "effect:destroy-all-except-chosen",
+  "effect:each-player-chooses-destroy-rest"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

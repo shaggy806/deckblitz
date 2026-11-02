@@ -5012,6 +5012,55 @@ function impulseWindowAt(sentences, i, ctx) {
 }
 
 /**
+ * "Each player chooses a creature they control. Destroy the rest" (Divine
+ * Reckoning): a `vote` with `choose`, then a `destroy-all` of what wasn't chosen
+ * (`notThisWay: "chosen"`). "Destroy each permanent chosen this way" (Druid of
+ * Purification) is the same `vote` read the other way round.
+ */
+function chosenAndTheRest(text) {
+  const COUNTS = { a: 1, an: 1, one: 1, two: 2, three: 3, four: 4, five: 5, six: 6 };
+  const destroyRest = (kept, words) => {
+    const rest = words === undefined ? kept : parseTypePhrase(words.replace(" and ", " or "));
+    return rest === null ? null : { kind: "destroy-all", filter: { ...rest, notThisWay: "chosen" } };
+  };
+  const chooseThenRest = (vote, kept, words) => {
+    const destroy = destroyRest(kept, words);
+    return destroy === null ? null : { kind: "sequence", effects: [{ kind: "vote", choose: true, ...vote }, destroy] };
+  };
+  let m;
+  if (text === "Choose a nonland permanent you don't control, then each other player chooses a nonland permanent they don't control that hasn't been chosen this way. Destroy all other nonland permanents.") {
+    const permanent = { permanent: { notTypes: ["land"], controlledBy: "opponent", notThisWay: "chosen" }, own: true, keep: true };
+    return chooseThenRest({ startingWith: "you-then-active-player", for: permanent }, { notTypes: ["land"] }, undefined);
+  }
+  if ((m = /^Each player chooses (an?|two|three|four|five|six) (.+?) they control\. Destroy (?:the rest|all other (.+))\.$/.exec(text))) {
+    const kept = parseTypePhrase(m[2]);
+    if (kept === null) return null;
+    const count = COUNTS[m[1]];
+    const permanent = { permanent: { ...kept, controlledBy: "you" }, own: true, ...(count > 1 ? { count } : {}), keep: true };
+    return chooseThenRest({ for: permanent }, kept, m[3]);
+  }
+  if ((m = /^Choose (up to one|up to two|up to three|an?) (.+?)(?:\. Destroy|, then destroy) (?:the rest|all other (.+))\.$/.exec(text))) {
+    const kept = parseTypePhrase(m[2]);
+    if (kept === null) return null;
+    const upTo = m[1].startsWith("up to") ? COUNTS[m[1].slice("up to ".length)] : undefined;
+    const permanent = { permanent: kept, ...(upTo !== undefined ? { upTo } : {}), keep: true };
+    return chooseThenRest({ who: "you", for: permanent }, kept, m[3]);
+  }
+  if ((m = /^starting with you, each player may choose an? (.+?) you don't control\. Destroy each permanent chosen this way\.$/i.exec(text))) {
+    const chosen = parseTypePhrase(m[1]);
+    if (chosen === null) return null;
+    return {
+      kind: "sequence",
+      effects: [
+        { kind: "vote", choose: true, startingWith: "you", for: { permanent: { ...chosen, controlledBy: "opponent" }, upTo: 1 } },
+        { kind: "destroy-all", filter: { thisWay: "chosen" } },
+      ],
+    };
+  }
+  return null;
+}
+
+/**
  * The whole effects a number a player chooses runs through: a `vote` of `for: {
  * number }`, read by `{ votedNumber }` and the `voted-number` condition, or a
  * `choose-value` of a number read as `"x"`. Each is one card's wording, its parts
@@ -5194,7 +5243,7 @@ export function parseEffect(text, outer) {
     if (won !== null && lost !== null) return { effect: { kind: "flip-coin", won, lost }, todo: [], hints: [] };
     ctx.targets.length = slots;
   }
-  const chosen = chosenNumbers(text, ctx);
+  const chosen = chosenNumbers(text, ctx) ?? chosenAndTheRest(text);
   if (chosen !== null) return { effect: chosen, todo: [], hints: [] };
   for (const [i, sentence] of sentences.entries()) {
     if (skip > 0) {

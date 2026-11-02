@@ -891,7 +891,7 @@ export class AutomaticController implements PlayerController {
     }
     const awaiting = view.state.awaiting;
     if (awaiting?.kind === "choose-permanents" && awaiting.devour === true) return devourPicks(view, eligible, max);
-    if (awaiting?.kind === "choose-permanents" && awaiting.then.kind === "cast-vote") {
+    if (awaiting?.kind === "choose-permanents" && awaiting.then.kind === "cast-vote" && awaiting.then.keep !== true && max === 1) {
       return votePermanent(view, eligible, min);
     }
     return ownPermanentsFirst(view, eligible, min, max);

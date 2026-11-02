@@ -36,7 +36,7 @@ export default defineCard({
       effect: {
         kind: "sequence",
         effects: [
-          { kind: "vote", for: { permanent: { type: "creature" }, upToOne: true }, secret: true },
+          { kind: "vote", for: { permanent: { type: "creature" }, upTo: 1 }, secret: true },
           {
             kind: "conditional",
             condition: { kind: "votes-cast" },

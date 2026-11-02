@@ -4,7 +4,7 @@ import { defineCard } from "../define.js";
 //
 // "Each player may put … on a creature they control" is a choice in turn order
 // starting with you (the ruling; it's your end step), each knowing the ones
-// before (`vote` with `choose`, `own`: the chooser's creatures, `upToOne`: may).
+// before (`vote` with `choose`, `own`: the chooser's creatures, `upTo: 1`: may).
 // Then every chosen creature gets its counters at once — put by the player who
 // chose it (`by`) — and only those that did get counters this way are goaded
 // (`thisWay: "counters-put"`): a replacement that stops them stops the goad too.
@@ -31,7 +31,7 @@ export default defineCard({
             kind: "vote",
             choose: true,
             startingWith: "you",
-            for: { permanent: { type: "creature", controlledBy: "you" }, own: true, upToOne: true },
+            for: { permanent: { type: "creature", controlledBy: "you" }, own: true, upTo: 1 },
           },
           {
             kind: "for-each-voted",
