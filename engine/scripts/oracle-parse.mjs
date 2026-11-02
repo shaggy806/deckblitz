@@ -2437,6 +2437,15 @@ export function parseSentence(sentence, ctx) {
     const r = revealedCardEffectOf(s, ctx);
     if (r !== undefined) return r;
   }
+  // "Damage equal to the exiled card's power" where the cost exiled it from a
+  // graveyard (Corpse Explosion): the `"exiled-as-cost"` amount ref.
+  if (ctx?.costExiled === true && /^~ deals damage equal to the exiled card's power to each creature and each planeswalker\.$/.test(s)) {
+    return {
+      kind: "damage-all",
+      filter: { typesAnyOf: ["creature", "planeswalker"] },
+      amount: { powerOf: "exiled-as-cost" },
+    };
+  }
   // "Rather than pay the mana cost of the next spell you cast this turn, you
   // may pay life equal to that spell's mana value" (Marshland Bloodcaster).
   if (/^rather than pay the mana cost of the next spell you cast this turn, you may pay life equal to that spell's mana value\.$/i.test(s)) {
@@ -8877,9 +8886,11 @@ export function parseFace(face, ctx = {}) {
     }
     // "Exile two creature cards from your graveyard" (the Skaabs): which,
     // chosen as the cost is paid (`additionalCost.exileFromGraveyard`).
-    if (castable && (m = /^As an additional cost to cast ~, exile (a|an|one|two|three|four|five|six|seven|eight) (creature )?cards? from your graveyard\.$/.exec(line))) {
-      const count = { a: 1, an: 1, one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8 }[m[1]];
-      out.additionalCost = { exileFromGraveyard: { count, ...(m[2] ? { filter: { type: "creature" } } : {}) } };
+    // "Exile X cards" (Harvest Pyre): X announced as it's cast.
+    if (castable && (m = /^As an additional cost to cast ~, exile (X|a|an|one|two|three|four|five|six|seven|eight) (creature |instant or sorcery )?cards? from your graveyard\.$/.exec(line))) {
+      const count = { X: "x", a: 1, an: 1, one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8 }[m[1]];
+      const filter = m[2] === "creature " ? { type: "creature" } : m[2] ? { typesAnyOf: ["instant", "sorcery"] } : undefined;
+      out.additionalCost = { exileFromGraveyard: { count, ...(filter !== undefined ? { filter } : {}) } };
       continue;
     }
     // The card's own graveyard permission with costs of its own (rule
@@ -9579,6 +9590,8 @@ export function parseFace(face, ctx = {}) {
         divided: {},
         // "As an additional cost …, discard a card": "the discarded card".
         ...(out.additionalCost?.discard === 1 ? { costDiscarded: true } : {}),
+        // "…, exile a creature card from your graveyard": "the exiled card".
+        ...(out.additionalCost?.exileFromGraveyard?.count === 1 ? { costExiled: true } : {}),
         // "…, reveal a creature card from your hand": "the revealed card".
         ...(out.additionalCost?.behold?.fromHand === true &&
         out.additionalCost.behold.exile !== true &&

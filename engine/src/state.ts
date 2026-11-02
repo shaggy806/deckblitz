@@ -1597,6 +1597,10 @@ export interface SpellSnapshot {
    * effect of a copy that refers to objects used to pay its costs uses
    * those that paid the original's (rule 707.10). */
   readonly convokedBy?: readonly { readonly object: ObjectId; readonly stint: number }[];
+  /** The cards exiled from a graveyard to pay its cost
+   * (`LastKnownRefs.exiledCost`): a copy's "the exiled card" is the
+   * original's, as `convokedBy` is (rule 707.10). */
+  readonly exiledCost?: readonly ObjectId[];
   /** Its copiable modifiers (a prototyped spell's — rule 718.3c). */
   readonly modifiers: readonly PtModifier[];
   /** A copy without its epic ability (`GameObject.withoutEpic`). */

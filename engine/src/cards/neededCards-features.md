@@ -3951,3 +3951,18 @@ Tibalt's Trickery on `effect:cast-now-other-player`. `effect:exile-from-hand-by-
 too (Thought Distortion, Hour of Glory, Identity Crisis): Azor's Gateway's distinct mana values and
 Ice Cauldron's noted mana are still their own and will need narrowing. A countered copy of a spell
 now keeps its last-known record, so Quash and Counterbore read its name and controller (Quash's ruling).
+### A cost exiling a count of graveyard cards — built 2026-11-02
+
+The need-keys Phase 2 family `cost:choose-cards-as-cost`, features only.
+`additionalCost.exileFromGraveyard`'s **`count: "x"`** is X announced as it's cast (rule 107.3a),
+capped at the matching cards there, and the same X as a `{X}` in the mana cost; **`optional`** always
+asks, none an answer; **`linked`** links what's exiled to the permanent the spell becomes (rule
+607.2a). The `AmountRef` **`"exiled-as-cost"`** reads the one card exiled, a copy reading the
+original's (rule 707.10, `SpellSnapshot.exiledCost`); `{ exiledWithSourcePower }` and the
+`exiled-with-source` condition's **`now`** and `filter` read a linked one. An activated ability's
+**`count: "opponents"`** is read as it's activated. The scaffolder reads "exile X … cards" and Corpse
+Explosion's damage line. Keys: additional-cost-exile-from-graveyard, exile-x-cards-cost,
+exile-x-from-graveyard-additional, condition:exiled-with-source-filter. Proving cards: Harvest Pyre,
+Chill Haunting, Skeletal Scrying, Corpse Explosion, Draconic Intervention, Redemptor Dreadnought,
+Araumi of the Dead Tide. Left: Ludevic, Necrogenius needs its other keys; a copy's other cost refs
+(`sacrificed`, `discarded`, `revealed`) still aren't carried to a copy.

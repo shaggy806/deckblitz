@@ -2592,6 +2592,25 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(face("As an additional cost to cast this spell, exile six cards from your graveyard.\nFlying").additionalCost).toEqual({
       exileFromGraveyard: { count: 6 },
     });
+    // Harvest Pyre's X, announced as it's cast; Corpse Explosion's "the exiled card".
+    const pyre = face(
+      "As an additional cost to cast this spell, exile X cards from your graveyard.\nThis spell deals X damage to target creature.",
+      "Instant",
+      {},
+    );
+    expect(pyre.additionalCost).toEqual({ exileFromGraveyard: { count: "x" } });
+    const explosion = face(
+      "As an additional cost to cast this spell, exile a creature card from your graveyard.\nThis spell deals damage equal to the exiled card's power to each creature and each planeswalker.",
+      "Sorcery",
+      {},
+    );
+    expect(explosion.additionalCost).toEqual({ exileFromGraveyard: { count: 1, filter: { type: "creature" } } });
+    expect(explosion.effect).toEqual({
+      kind: "damage-all",
+      filter: { typesAnyOf: ["creature", "planeswalker"] },
+      amount: { powerOf: "exiled-as-cost" },
+    });
+    expect(explosion.complete).toBe(true);
     // "Discard a card / N cards / X cards [at random]" (Sickening Dreams'
     // X is the discard's, the mana cost having none).
     const thrill = face("As an additional cost to cast this spell, discard a card.\nDraw two cards.", "Instant", {});

@@ -9256,4 +9256,17 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{ hand: BOT_KEEPS_LEYLINE }, {}, {}],
     }),
   ),
+  preset(
+    'Harvest Pyre: X is announced, and exiles that many cards from your graveyard',
+    board({
+      you: { bf: ['Mountain*2'], hand: ['Harvest Pyre'], gy: ['Island*3'] },
+      opp: [{ bf: ['Craw Wurm'] }],
+    }),
+  ),
+  preset(
+    'Redemptor Dreadnought: you may exile a creature card as you cast it',
+    board({
+      you: { bf: ['Island*5'], hand: ['Redemptor Dreadnought'], gy: ['Hill Giant', 'Island'] },
+    }),
+  ),
 ]

@@ -1282,7 +1282,14 @@ export type StaticCondition =
    * been exiled with this artifact" (its ruling: "over the course of the
    * entire game"). False for a source not on the battlefield. See
    * `GameObject.exiledWithCount`. */
-  | { readonly kind: "exiled-with-source"; readonly atLeast: number }
+  | {
+      readonly kind: "exiled-with-source";
+      readonly atLeast: number;
+      /** Counts the cards in exile with it **now**, not ever — "if a card is
+       * exiled with it" (Redemptor Dreadnought) — narrowed by `filter`. */
+      readonly now?: true;
+      readonly filter?: CardFilter;
+    }
   /** The negation of another condition — Titan Hunter's "**if no creatures
    * died this turn**". Cheaper than a `no-` variant of every condition, and
    * it composes. */
@@ -3978,8 +3985,23 @@ export interface CardDefinition {
      * decision — the same payment as an activated ability's
      * `AbilityCost.exileFromGraveyard`. No more matching cards than that is
      * no choice. Exiled for good even if the spell is countered.
+     *
+     * `count: "x"` is "exile X [creature] cards from your graveyard" (Harvest
+     * Pyre, Chill Haunting): X announced as it's cast (rule 107.3a), at most
+     * the matching cards there, and the same X as a `{X}` in its mana cost
+     * (Skeletal Scrying). `optional` is "you **may** exile" (Redemptor
+     * Dreadnought): asked even with few cards there, none an answer. `linked`
+     * makes what's exiled "exiled with" the permanent the spell becomes (rule
+     * 607.2a). "The exiled card" of the spell's effect is the `AmountRef`
+     * `"exiled-as-cost"` (Corpse Explosion); of the permanent's, an
+     * `exiled-with-source` read.
      */
-    readonly exileFromGraveyard?: { readonly count: number; readonly filter?: CardFilter };
+    readonly exileFromGraveyard?: {
+      readonly count: number | "x";
+      readonly filter?: CardFilter;
+      readonly optional?: true;
+      readonly linked?: true;
+    };
     /**
      * "As an additional cost to cast this spell, **put a card an opponent
      * owns from exile into that player's graveyard**" (Processor Assault;
@@ -5396,7 +5418,12 @@ interface CardDraft {
     readonly payLifePerTarget?: number;
     readonly waterbend?: number | "x";
     readonly behold?: BeholdSpec;
-    readonly exileFromGraveyard?: { readonly count: number; readonly filter?: CardFilter };
+    readonly exileFromGraveyard?: {
+      readonly count: number | "x";
+      readonly filter?: CardFilter;
+      readonly optional?: true;
+      readonly linked?: true;
+    };
     readonly putFromExile?: number;
     readonly options?: readonly AdditionalCostOption[];
   };

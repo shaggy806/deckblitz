@@ -4295,10 +4295,15 @@ export class Game {
       // Swine): the number of targets and X bound each other.
       // "Discard X cards" (Sickening Dreams): as many as the other cards in
       // hand — the spell can't discard itself (rule 601.2h).
+      // "Exile X cards from your graveyard" (Harvest Pyre): as many as match
+      // there, the spell itself not among them when it's cast from there.
+      const graveyardExileCost = def.additionalCost?.exileFromGraveyard;
       const discardX =
         xPlan === null && sacrificeX === undefined && def.additionalCost?.discard === "x"
           ? this.state.zones.perPlayer[player].hand.filter((id) => id !== card).length
-          : undefined;
+          : xPlan === null && sacrificeX === undefined && graveyardExileCost?.count === "x"
+            ? this.graveyardCostCandidates(player, graveyardExileCost.filter, card).length
+            : undefined;
       const payableX = xPlan?.maxX ?? sacrificeX ?? discardX;
       const xGroup =
         payableX !== undefined && targetCount === undefined && groupReadsX(specs)
@@ -14058,7 +14063,12 @@ export class Game {
     const byWaterbend = this.maxXByWaterbend(player, cardId, def, costString, face, targetCount, plan.maxX);
     const byAssist = this.maxXByAssist(player, cardId, def, costString, face, targetCount, plan.maxX);
     const most = Math.max(byDelve, byWaterbend, byAssist);
-    return most > plan.maxX ? { maxX: most, convoke: [] } : plan;
+    const best = most > plan.maxX ? { maxX: most, convoke: [] } : plan;
+    // "{X}{B}, exile X cards from your graveyard" (Skeletal Scrying): the one
+    // X pays both, so no more than the cards there (rule 107.3a, 118.3).
+    const exileCost = def.additionalCost?.exileFromGraveyard;
+    if (exileCost?.count !== "x") return best;
+    return { ...best, maxX: Math.min(best.maxX, this.graveyardCostCandidates(player, exileCost.filter, cardId).length) };
   }
 
   /**
@@ -15292,10 +15302,14 @@ export class Game {
           return `${player} has too few cards in hand to cast ${def.name}`;
         }
       }
+      // "You may exile" (Redemptor Dreadnought) asks for nothing to be there;
+      // "exile X" (Harvest Pyre) for as many as the X announced (rule 118.3).
       const exileCost = def.additionalCost.exileFromGraveyard;
       if (
         exileCost !== undefined &&
-        this.graveyardCostCandidates(player, exileCost.filter, cardId).length < exileCost.count
+        exileCost.optional !== true &&
+        this.graveyardCostCandidates(player, exileCost.filter, cardId).length <
+          (exileCost.count === "x" ? Math.max(0, Math.floor(xValue)) : exileCost.count)
       ) {
         return `${player} has too few cards in their graveyard to cast ${def.name}`;
       }
@@ -17009,6 +17023,7 @@ export class Game {
       def.additionalCost?.sacrificeCount === "x" ||
       (via === "flashback"&& this.flashbackOf(cardId, graveyardGrant)?.sacrifice?.count === "x") ||
       def.additionalCost?.discard === "x" ||
+      def.additionalCost?.exileFromGraveyard?.count === "x" ||
       // The Shoals' "exile a … card with mana value X" (rule 107.3a).
       (altCost && this.ownAltCost(def)?.exileFromHand?.manaValueX === true);
     const chosenX = hasX ? Math.max(0, Math.floor(xValue)) : 0;
@@ -17674,8 +17689,24 @@ export class Game {
       }
     }
     if (graveyardExile !== undefined) {
+      const onStack = this.state.objects[cardId];
       this.withDecisionSource(cardId, () =>
-        this.payGraveyardExileCost(player, cardId, graveyardExile, priorityTo, cardId),
+        this.payGraveyardExileCost(
+          player,
+          cardId,
+          {
+            // "Exile X": the X announced as it was cast.
+            count: graveyardExile.count === "x" ? chosenX : graveyardExile.count,
+            ...(graveyardExile.filter !== undefined ? { filter: graveyardExile.filter } : {}),
+            ...(graveyardExile.optional === true ? { optional: true as const } : {}),
+            // "Exiled with it": the permanent this spell becomes (rule 607.2a).
+            ...(graveyardExile.linked === true && onStack !== undefined
+              ? { exileLink: { source: cardId, zoneChangeCount: (onStack.zoneChangeCount ?? 0) + 1 } }
+              : {}),
+          },
+          priorityTo,
+          cardId,
+        ),
       );
     }
     // "Put a card an opponent owns from exile into that player's graveyard"
@@ -19789,7 +19820,12 @@ export class Game {
         return `${def.name}'s ability can't ask for two cost choices at once yet`;
       }
       const { count, filter, singleGraveyard } = ability.cost.exileFromGraveyard;
-      const n = count === "x" ? (x ?? ability.minX ?? 0) : count;
+      const n =
+        count === "x"
+          ? (x ?? ability.minX ?? 0)
+          : count === "opponents"
+            ? this.scopedPlayers(player, "each-opponent").length
+            : count;
       if (singleGraveyard === true) {
         if (this.singleGraveyardCostCandidates(player, n, filter, sourceId).length < n) {
           return `no graveyard has enough cards to pay ${def.name}'s cost`;
@@ -20416,7 +20452,12 @@ export class Game {
     // chosen).
     const costExile = ability.cost.exileFromGraveyard;
     if (costExile !== undefined) {
-      const count = costExile.count === "x" ? chosenX : costExile.count;
+      const count =
+        costExile.count === "x"
+          ? chosenX
+          : costExile.count === "opponents"
+            ? this.scopedPlayers(player, "each-opponent").length
+            : costExile.count;
       this.withDecisionSource(sourceId, () =>
         this.payGraveyardExileCost(
           player,
@@ -20760,12 +20801,21 @@ export class Game {
    * paid as 601.2h): the player picks which with a `choose-from-zone` over
    * their graveyard (`destination: "exile"`), and gets priority back once
    * it's paid (117.3c). No more matching cards than that is no choice: they
-   * are all exiled at once. Either way they leave as one move.
+   * are all exiled at once. Either way they leave as one move. `optional`
+   * ("you may exile") always asks, and none is an answer; `exileLink` links
+   * what's exiled to the permanent the spell becomes (rule 607.2a).
    */
   private payGraveyardExileCost(
     player: PlayerId,
     source: ObjectId,
-    cost: { readonly count: number; readonly filter?: CardFilter; readonly fromTop?: true; readonly singleGraveyard?: true },
+    cost: {
+      readonly count: number;
+      readonly filter?: CardFilter;
+      readonly fromTop?: true;
+      readonly singleGraveyard?: true;
+      readonly optional?: true;
+      readonly exileLink?: { readonly source: ObjectId; readonly zoneChangeCount: number };
+    },
     priorityTo: PlayerId = player,
     /** The spell or ability on the stack this pays for, which remembers the
      * cards — its effect's "the exiled card". */
@@ -20806,9 +20856,13 @@ export class Game {
     // "The top creature card of your graveyard" (rule 404.2): which is no
     // choice. The list's end is the top of the pile.
     if (cost.fromTop === true) eligible = eligible.slice(-cost.count);
-    if (eligible.length <= cost.count) {
+    if (cost.optional === true ? eligible.length === 0 : eligible.length <= cost.count) {
       this.withGraveyardLeaveBatch(() => {
-        for (const id of eligible) this.moveObject(id, "exile");
+        for (const id of eligible) {
+          if (this.moveObject(id, "exile") && cost.exileLink !== undefined) {
+            this.state.objects[id].exiledWith = cost.exileLink;
+          }
+        }
       });
       if (forStackObject !== undefined) this.recordCostExile(forStackObject, eligible);
       return;
@@ -20820,11 +20874,13 @@ export class Game {
       // cards may be picked.
       ids: this.state.zones.perPlayer[player].graveyard.filter((id) => id !== source),
       eligible,
-      min: cost.count,
+      min: cost.optional === true ? 0 : cost.count,
       max: cost.count,
       destination: "exile",
       leftover: "stay",
       priorityTo,
+      ...(cost.optional === true ? { prompt: "You may choose a card to exile" } : {}),
+      ...(cost.exileLink !== undefined ? { exileLink: cost.exileLink } : {}),
       ...(forStackObject !== undefined ? { costExileFor: forStackObject } : {}),
     };
   }
@@ -35473,6 +35529,7 @@ export class Game {
       ...(object.offspringGrantPaid === true ? { offspringGrantPaid: true } : {}),
       ...(object.giftTo !== undefined ? { giftTo: object.giftTo } : {}),
       ...(object.convokedBy !== undefined ? { convokedBy: [...object.convokedBy] } : {}),
+      ...(object.lastKnownRefs?.exiledCost !== undefined ? { exiledCost: [...object.lastKnownRefs.exiledCost] } : {}),
       modifiers: object.modifiers.filter((m) => m.copiable === true).map((m) => ({ ...m })),
       ...(object.withoutEpic === true ? { withoutEpic: true } : {}),
     };
@@ -35560,6 +35617,7 @@ export class Game {
       ...(spell.giftTo !== undefined ? { giftTo: spell.giftTo } : {}),
       // "Each creature that convoked this spell": the original's (707.10).
       ...(spell.convokedBy !== undefined ? { convokedBy: [...spell.convokedBy] } : {}),
+      ...(spell.exiledCost !== undefined ? { lastKnownRefs: { exiledCost: [...spell.exiledCost] } } : {}),
       attacking: null,
       blocking: null,
       blockedBy: [],

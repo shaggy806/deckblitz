@@ -299,15 +299,16 @@ export interface ZoneChoiceSplitCase {
  * put it — and `"revealed"`, the one card revealed from the hand to pay the
  * cost ("where X is the revealed card's mana value" — Induce Despair), read
  * in the hand while it's still there and as it last existed there once it
- * has left (the rulings). Nothing sacrificed, tapped, discarded or revealed
- * reads 0.
+ * has left (the rulings) — and `"exiled-as-cost"`, the one card exiled from a
+ * graveyard to pay it ("damage equal to the exiled card's power" — Corpse
+ * Explosion). Nothing sacrificed, tapped, discarded, revealed or exiled reads 0.
  *
  * An object that was a permanent when the spell or ability referred to it
  * and has left the battlefield since is read as it last existed there (rule
  * 608.2h — see `LastKnownRefs`): "When Juri dies, it deals damage equal to
  * its power" counts the counters Juri died with.
  */
-export type AmountRef = EffectTargetRef | "sacrificed" | "tapped" | "discarded" | "revealed";
+export type AmountRef = EffectTargetRef | "sacrificed" | "tapped" | "discarded" | "revealed" | "exiled-as-cost";
 /** Where a `return-to-hand` effect takes its object from. */
 export type ReturnToHandZone = "battlefield" | "graveyard" | "exile" | "stack";
 /**
@@ -663,6 +664,9 @@ export type EffectAmount =
    * the exiled card" (its ruling: several exiled cards add up). Printed
    * costs, an {X} counting 0. 0 when there are none. */
   | { readonly exiledWithSourceManaValue: true }
+  /** Their total power, as above: Redemptor Dreadnought's "where X is the
+   * power of the exiled card". 0 when there are none. */
+  | { readonly exiledWithSourcePower: true }
   /** A current life total: the effect controller's (`"you"` — Ajani, Caller
    * of the Pride's ultimate: "create X 2/2 white Cat creature tokens, where X
    * is your life total"), or `"each"`, the life of **each player the effect
@@ -12440,6 +12444,9 @@ function signedAmountValue(
   if ("exiledWithSourceManaValue" in amount) {
     return ctx.cardsExiledWithSource().reduce((n, id) => n + ctx.manaValueOf({ kind: "object", object: id }), 0);
   }
+  if ("exiledWithSourcePower" in amount) {
+    return ctx.cardsExiledWithSource().reduce((n, id) => n + ctx.powerOf({ kind: "object", object: id }), 0);
+  }
   if ("commanderCastsOf" in amount) {
     const ref = resolveAmountRef(amount.commanderCastsOf, ctx);
     return ref === undefined ? 0 : ctx.commanderCastsOf(ref);
@@ -12553,6 +12560,10 @@ function resolveAmountRef(ref: AmountRef, ctx: ResolutionContext): TargetRef | u
   // know to take it as it was in the hand once it has left.
   if (ref === "revealed") {
     return ctx.revealed?.length === 1 ? { kind: "object", object: ctx.revealed[0] } : undefined;
+  }
+  // "The exiled card": the cost's one card exiled from a graveyard.
+  if (ref === "exiled-as-cost") {
+    return ctx.exiledAsCost?.length === 1 ? { kind: "object", object: ctx.exiledAsCost[0] } : undefined;
   }
   // A read of the granter: as it last existed once it has left (608.2h) —
   // "the number of arrow counters on Archery Training".

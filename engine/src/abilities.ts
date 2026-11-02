@@ -404,10 +404,12 @@ export interface AbilityCost {
    *
    * `fromTop` is "exile **the top** [creature] card of your graveyard" (Alms,
    * Necratog — rule 404.2): no choice, the first `count` matching cards down
-   * from the top of the pile.
+   * from the top of the pile. `count: "opponents"` is Araumi of the Dead
+   * Tide's "Exile cards from your graveyard equal to the number of opponents
+   * you have": the opponents still in the game as it's activated.
    */
   readonly exileFromGraveyard?: {
-    readonly count: number | "x";
+    readonly count: number | "x" | "opponents";
     readonly filter?: CardFilter;
     readonly fromTop?: true;
     /** "From a single graveyard" (Night Soil's "Exile two creature cards from a

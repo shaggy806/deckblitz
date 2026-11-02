@@ -6147,3 +6147,10 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Boonweaver Giant: choose which of your graveyard, hand and library to search
 - **Do:** Cast Boonweaver Giant. As its ability resolves, say yes to the search, then click "Search your graveyard and hand".
 - **Expect:** Seven choices are offered, from "Search your graveyard, hand, and library" down to "Search your library". This one offers Rancor and Pacifism, not Holy Strength. The Aura you pick enters attached to the Giant, and your library isn't shuffled.
+### Harvest Pyre: X is announced, and exiles that many cards from your graveyard
+- **Do:** Cast Harvest Pyre, set X to 2 (the banner says "max 3", the cards in your graveyard), confirm, and target the Craw Wurm. Pick two Islands when asked, then Confirm.
+- **Expect:** Two Islands go to exile, one stays in your graveyard, and the Craw Wurm has taken 2 damage.
+
+### Redemptor Dreadnought: you may exile a creature card as you cast it
+- **Do:** Cast Redemptor Dreadnought. In the "You may choose a card to exile" popup, click Put none (a second try: click Hill Giant, then Confirm).
+- **Expect:** The popup lets you exile Hill Giant or nothing, and the Island can't be chosen. Either way the Dreadnought enters; Hill Giant stays in your graveyard unless you chose it.

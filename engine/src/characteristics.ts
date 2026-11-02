@@ -1163,6 +1163,14 @@ function evalStaticCondition(
     case "used-graveyard-this-turn":
       return state.players[you]?.usedGraveyardThisTurn === true;
     case "exiled-with-source": {
+      // "If a card is exiled with it" (Redemptor Dreadnought): in exile now,
+      // and of the filter's kind, rather than ever (rule 607.2a).
+      if (condition.now === true) {
+        const cards = liveReferenceObjects(state, registry, "exiled-with-source", { you, source: source.id }) ?? [];
+        const { filter } = condition;
+        const n = cards.filter((id) => filter === undefined || matchesFilter(state, registry, id, filter, { you })).length;
+        return n >= condition.atLeast;
+      }
       const stint = source.zoneChangeCount ?? 0;
       const record = source.exiledWithCount;
       const n = source.zone === "battlefield" && record?.stint === stint ? record.count : 0;
