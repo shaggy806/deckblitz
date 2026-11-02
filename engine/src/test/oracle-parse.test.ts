@@ -24,6 +24,76 @@ import { parseEffect, parseFace, parseTrigger, parseCost, parseSentence, parseTy
 // @ts-expect-error — as above.
 import { checkPool } from "../../scripts/oracle-parse-check.mjs";
 
+describe("each player paying or bidding an amount of their choosing", () => {
+  const read = (type_line: string, oracle_text: string) =>
+    parseFace({ name: "Card", type_line, oracle_text, power: "5", toughness: "5" }, { tokenFor: (d: string) => d });
+  const join = "Join forces — Starting with you, each player may pay any amount of mana. ";
+  const pays = { kind: "players-pay-any-amount", resource: "mana", startingWithYou: true };
+  it("join forces: the total, read by what follows", () => {
+    expect(read("Sorcery", `${join}Each player draws X cards, where X is the total amount of mana paid this way.`).effect).toEqual({
+      ...pays,
+      then: { kind: "draw", amount: "x", who: "each-player" },
+    });
+    expect(read("Sorcery", `${join}Each player mills X cards, where X is the total amount of mana paid this way.`).effect).toEqual({
+      ...pays,
+      then: { kind: "mill", target: "each-player", amount: "x" },
+    });
+    expect(read("Sorcery", `${join}Each player creates X 1/1 white Soldier creature tokens, where X is the total amount of mana paid this way.`).effect).toEqual({
+      ...pays,
+      then: { kind: "create-token", token: "1/1 white Soldier creature token", count: "x", who: "each-player" },
+    });
+    const dragon = read(
+      "Creature — Dragon",
+      "Join forces — Whenever this creature attacks or blocks, each player starting with you may pay any amount of mana. This creature gets +X/+0 until end of turn, where X is the total amount of mana paid this way.",
+    );
+    expect(dragon.complete).toBe(true);
+    expect(dragon.triggered.map((t: { trigger: { on: string } }) => t.trigger.on)).toEqual(["attacks", "blocks"]);
+    expect(dragon.triggered[1].effect).toEqual({
+      ...pays,
+      then: { kind: "modify-pt", target: "source", power: "x", toughness: 0, duration: "end-of-turn" },
+    });
+  });
+  it("what each paid: mana from the active player, life round and round", () => {
+    const liege = read(
+      "Creature — Spirit",
+      "When this creature dies, each player may pay any amount of mana. Then each player creates a number of 1/1 green Squirrel creature tokens equal to the amount of mana they paid this way.",
+    );
+    expect(liege.triggered[0].effect).toEqual({
+      kind: "players-pay-any-amount",
+      resource: "mana",
+      each: { kind: "create-token", token: "1/1 green Squirrel creature token", count: "x", who: "that-player" },
+    });
+    expect(
+      read(
+        "Sorcery",
+        "Starting with you, each player may pay any amount of life. Repeat this process until no one pays life. Each player creates a 1/1 black Rat creature token for each 1 life they paid this way.",
+      ).effect,
+    ).toMatchObject({ kind: "players-pay-any-amount", resource: "life", untilNoOnePays: true });
+  });
+  it("bidding life: who bids, the opening bid and what winning does", () => {
+    const rules =
+      "In turn order, each player may top the high bid. The bidding ends if the high bid stands. The high bidder loses life equal to the high bid";
+    const auction = read(
+      "Sorcery",
+      `Each player may bid life for control of target creature. You start the bidding with a bid of 0. ${rules} and gains control of the creature. (This effect lasts indefinitely.)`,
+    );
+    expect(auction.targets).toHaveLength(1);
+    expect(auction.effect).toMatchObject({ kind: "bid-life", who: "each-player", opening: 0 });
+    expect(
+      read("Sorcery", `Each player may bid life. You start the bidding with a bid of any number. ${rules} and draws four cards.`).effect,
+    ).toMatchObject({ kind: "bid-life", opening: "any" });
+    expect(
+      read("Instant", `You and target spell's controller bid life. You start the bidding with a bid of 1. ${rules}. If you win the bidding, counter that spell.`).effect,
+    ).toEqual({
+      kind: "bid-life",
+      who: { youAndControllerOfTarget: 0 },
+      opening: 1,
+      then: { kind: "lose-life", amount: "x", who: "that-player" },
+      ifYouWin: { kind: "counter", target: 0 },
+    });
+  });
+});
+
 describe("what a permanent has dealt damage to", () => {
   const read = (type_line: string, oracle_text: string, power?: string) =>
     parseFace({ name: "Card", type_line, oracle_text, ...(power ? { power, toughness: power } : {}) }, { tokenFor: () => null });

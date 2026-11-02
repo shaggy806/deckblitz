@@ -28980,6 +28980,43 @@ export class Game {
           { ...refs, player },
           opts,
         ),
+      withX: (value) =>
+        this.makeResolutionContext(
+          source,
+          controller,
+          targets,
+          value,
+          triggerValue,
+          triggerObject,
+          stackMultiplier,
+          resolutionCount,
+          targetZones,
+          refs,
+          opts,
+        ),
+      askPlayerAboutEffect: (player, prompt, yes, no, cost) =>
+        this.beginModesChoice(
+          source,
+          player,
+          0,
+          0,
+          1,
+          [{ text: prompt, effect: yes }],
+          no,
+          targets,
+          cost,
+          triggerValue,
+          triggerObject,
+          controller,
+          refs,
+          targetZones,
+          { modesController: controller },
+        ),
+      mostPayable: (player, resource) => {
+        if (resource === "mana") return this.maxAffordableAbilityX(player, (n) => concreteX(parseManaCost("{X}"), n, undefined));
+        const life = this.state.players[player]?.life ?? 0;
+        return life > 0 && this.canPayLife(player, life) ? life : 0;
+      },
       withTargetSlice: (offset, count) => {
         const cut = <T,>(list: readonly T[]): T[] => list.slice(offset, offset + count);
         const illegal = opts.illegalTargets;

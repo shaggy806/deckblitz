@@ -3817,3 +3817,14 @@ Trap counts creatures that dealt you damage, those gone included, which this rec
 Bushi Tenderfoot, Scythe of the Wretched and Repentant Vampire need more of their own; the
 family's one-card stats and the player targets (Wicked Akuba, Diseased Vermin, Hope of
 Ghirapur) stay open.
+
+### Paying or bidding an amount, player by player — built 2026-11-01
+
+`mechanic:join-forces`, `effect:life-bidding`. `players-pay-any-amount` (mana as a `choose-modes`
+with an `{X}`, life as a `choose-number`; the total as `then`'s `"x"`, what each paid as `each`'s;
+`untilNoOnePays`) and `bid-life` (an opening bid, then a yes or no and how much round the table
+until it comes back to the high bidder), on no new decision: Minds Aglow, Alliance of Arms,
+Mana-Charged Dragon, Liege of the Hollows, Plague of Vermin, Illicit Auction, Pain's Reward, Mages'
+Contest. Left: Collective Voyage's lands would enter player by player on `for-each-player`, where
+its text has them entering together, and a `who` on the effect would reach Necrodominance's and
+Errant Minion's one payer (`effect:pay-any-amount-of-mana`, `effect:pay-any-amount-of-life`).

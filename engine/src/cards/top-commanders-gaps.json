@@ -1147,7 +1147,9 @@
   "filter:dealt-combat-damage-to-you-this-turn",
   "condition:source-hasnt-dealt-damage",
   "condition:source-hasnt-dealt-combat-damage",
-  "trigger:creature-damaged-by-source-dies"
+  "trigger:creature-damaged-by-source-dies",
+  "mechanic:join-forces",
+  "effect:life-bidding"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

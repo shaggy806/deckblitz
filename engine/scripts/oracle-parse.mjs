@@ -5121,6 +5121,84 @@ function chosenAndTheRest(text) {
 }
 
 /**
+ * The whole effects where each player in turn pays or bids an amount of their
+ * choosing: `players-pay-any-amount` (join forces' total as `"x"`, or what each
+ * paid) and `bid-life`, the high bidder its `"that-player"` and the bid its `"x"`.
+ */
+function paidAndBid(text, ctx) {
+  const m = /^(?:Starting with you, each player|[Ee]ach player starting with you) may pay any amount of mana\. (.+), where X is the total amount of mana paid this way\.$/.exec(text);
+  if (m) {
+    const rest = m[1];
+    let then = parseSentence(`${rest}.`, ctx);
+    let part;
+    if ((part = /^Each player creates X (.+? creature) tokens$/.exec(rest))) {
+      const token = ctx.tokenFor?.(`${part[1]} token`);
+      then = token ? { kind: "create-token", token, count: "x", who: "each-player" } : null;
+    } else if (/^Each player mills X cards$/.test(rest)) {
+      then = { kind: "mill", target: "each-player", amount: "x" };
+    } else if (/^~ gets \+X\/\+0 until end of turn$/.test(rest)) {
+      then = { kind: "modify-pt", target: "source", power: "x", toughness: 0, duration: "end-of-turn" };
+    }
+    return then == null ? null : { kind: "players-pay-any-amount", resource: "mana", startingWithYou: true, then };
+  }
+  const liege = /^[Ee]ach player may pay any amount of mana\. Then each player creates a number of (.+? creature) tokens equal to the amount of mana they paid this way\.$/.exec(text);
+  if (liege) {
+    const token = ctx.tokenFor?.(`${liege[1]} token`);
+    if (!token) return null;
+    return {
+      kind: "players-pay-any-amount",
+      resource: "mana",
+      each: { kind: "create-token", token, count: "x", who: "that-player" },
+    };
+  }
+  const vermin = /^Starting with you, each player may pay any amount of life\. Repeat this process until no one pays life\. Each player creates a (.+? creature) token for each 1 life they paid this way\.$/.exec(text);
+  if (vermin) {
+    const token = ctx.tokenFor?.(`${vermin[1]} token`);
+    if (!token) return null;
+    return {
+      kind: "players-pay-any-amount",
+      resource: "life",
+      startingWithYou: true,
+      untilNoOnePays: true,
+      each: { kind: "create-token", token, count: "x", who: "that-player" },
+    };
+  }
+  const BIDDING = "In turn order, each player may top the high bid\\. The bidding ends if the high bid stands\\. The high bidder loses life equal to the high bid";
+  const loses = { kind: "lose-life", amount: "x", who: "that-player" };
+  if (new RegExp(`^Each player may bid life for control of target creature\\. You start the bidding with a bid of 0\\. ${BIDDING} and gains control of the creature\\.$`).test(text)) {
+    const creature = ctx.target(targetOf("target creature"));
+    return {
+      kind: "bid-life",
+      who: "each-player",
+      opening: 0,
+      then: {
+        kind: "sequence",
+        effects: [loses, { kind: "gain-control", target: creature, untilEndOfTurn: false, who: "that-player" }],
+      },
+    };
+  }
+  if (new RegExp(`^Each player may bid life\\. You start the bidding with a bid of any number\\. ${BIDDING} and draws four cards\\.$`).test(text)) {
+    return {
+      kind: "bid-life",
+      who: "each-player",
+      opening: "any",
+      then: { kind: "sequence", effects: [loses, { kind: "draw", amount: 4, who: "that-player" }] },
+    };
+  }
+  if (new RegExp(`^You and target spell's controller bid life\\. You start the bidding with a bid of 1\\. ${BIDDING}\\. If you win the bidding, counter that spell\\.$`).test(text)) {
+    const spell = ctx.target(targetOf("target spell"));
+    return {
+      kind: "bid-life",
+      who: { youAndControllerOfTarget: spell },
+      opening: 1,
+      then: loses,
+      ifYouWin: { kind: "counter", target: spell },
+    };
+  }
+  return null;
+}
+
+/**
  * The whole effects a number a player chooses runs through: a `vote` of `for: {
  * number }`, read by `{ votedNumber }` and the `voted-number` condition, or a
  * `choose-value` of a number read as `"x"`. Each is one card's wording, its parts
@@ -5303,7 +5381,7 @@ export function parseEffect(text, outer) {
     if (won !== null && lost !== null) return { effect: { kind: "flip-coin", won, lost }, todo: [], hints: [] };
     ctx.targets.length = slots;
   }
-  const chosen = chosenNumbers(text, ctx) ?? chosenAndTheRest(text) ?? lifeExchanges(text, ctx);
+  const chosen = paidAndBid(text, ctx) ?? chosenNumbers(text, ctx) ?? chosenAndTheRest(text) ?? lifeExchanges(text, ctx);
   if (chosen !== null) return { effect: chosen, todo: [], hints: [] };
   for (const [i, sentence] of sentences.entries()) {
     if (skip > 0) {

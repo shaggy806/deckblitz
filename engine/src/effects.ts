@@ -7670,6 +7670,81 @@ export type EffectSpec =
     }
   | {
       /**
+       * "Each player may pay any amount of mana" as this resolves, one player
+       * at a time, each knowing what those before them paid: join forces
+       * (`startingWithYou` — Minds Aglow, Mana-Charged Dragon), and the same
+       * shape without the name (Liege of the Hollows, from the active player:
+       * its ruling). Mana is the `choose-modes` decision with an `{X}` cost,
+       * as a `may`'s; life is a `choose-number` up to what the player can pay
+       * (rule 119.4), paid at once (Plague of Vermin's rulings). Nobody who
+       * can pay nothing is asked: the answer could only be 0.
+       *
+       * Once the last has answered, `then` happens with the total as `"x"`
+       * ("each player draws X cards, where X is the total amount of mana paid
+       * this way"); and `each`, all at once (Liege's ruling), for every player
+       * who paid, about them (`"that-player"`), with what they alone paid as
+       * `"x"`. A resolving spell's own X isn't read.
+       *
+       * `untilNoOnePays`: "Repeat this process until no one pays life" — a
+       * whole round in which nobody pays ends it, and one player declining
+       * doesn't (Plague of Vermin's ruling).
+       */
+      readonly kind: "players-pay-any-amount";
+      readonly resource: "mana" | "life";
+      readonly startingWithYou?: true;
+      readonly untilNoOnePays?: true;
+      readonly then?: EffectSpec;
+      readonly each?: EffectSpec;
+      /** Set only by the engine on the copy each answer resumes. `paying`:
+       * the player whose payment arrives as `"x"`. */
+      readonly progress?: {
+        readonly toAsk: readonly PlayerId[];
+        readonly paid: readonly { readonly player: PlayerId; readonly amount: number }[];
+        readonly anyPaid: boolean;
+        readonly paying?: PlayerId;
+      };
+    }
+  | {
+      /**
+       * "Each player may bid life": the effect's controller opens at `opening`
+       * — a number, or `"any"` for "a bid of any number" (Pain's Reward, asked
+       * as a `choose-number`) — then in turn order each other bidder may top
+       * the high bid, until it comes back round to the high bidder ("The
+       * bidding ends if the high bid stands" — "until all players except the
+       * one with the current high bid have declined to top that bid", the
+       * ruling). A bid isn't a payment: nothing is lost until the end, and a
+       * player may bid more life than they have (the rulings), so no answer
+       * has an upper bound. Each top is a yes or no, then how much.
+       *
+       * `who` is who bids: everyone still in the game, or "you and target
+       * spell's controller" (Mages' Contest: `{ youAndControllerOfTarget: 0 }`,
+       * just you if that's you).
+       *
+       * Once it ends, `then` happens with the high bidder as `"that-player"`
+       * and the high bid as `"x"`: "the high bidder loses life equal to the
+       * high bid" is a `lose-life` of `who: "that-player"` in it. `ifYouWin`
+       * follows, the same way, if that's the effect's controller ("if you win
+       * the bidding").
+       */
+      readonly kind: "bid-life";
+      readonly who: "each-player" | { readonly youAndControllerOfTarget: number };
+      readonly opening: number | "any";
+      readonly then?: EffectSpec;
+      readonly ifYouWin?: EffectSpec;
+      /** Set only by the engine on the copy each answer resumes. `at`: the
+       * last bidder asked, an index in `bidders`. `topping`: they've said yes,
+       * and how much is next. `bidding`: their bid arrives as `"x"`. */
+      readonly progress?: {
+        readonly bidders: readonly PlayerId[];
+        readonly high: number;
+        readonly highBidder: PlayerId;
+        readonly at: number;
+        readonly topping?: PlayerId;
+        readonly bidding?: PlayerId;
+      };
+    }
+  | {
+      /**
        * "Each player may …", "each opponent may …", "its controller may …",
        * "the player whose turn it is may …" — a choice that belongs to
        * players other than the effect's controller, or to several of them.
@@ -9362,6 +9437,17 @@ export interface EffectApi {
   /** This context, about `player`: the `"that-player"` scope names them —
    * an `"each-player-may"`'s follow-ups. */
   aboutPlayer(player: PlayerId): ResolutionContext;
+  /** This context with `"x"` read as `x` — an amount a later step of the
+   * effect found: the total a `"players-pay-any-amount"` was paid. */
+  withX(x: number): ResolutionContext;
+  /** Ask `player` a yes or no as this resolves — `yes` or `no` is then this
+   * effect's own (its controller stays this context's), not `player`'s. With
+   * `cost` (an `{X}`), saying yes pays it, the X paid arriving as `yes`'s
+   * `"x"`: 0 if none. See `"players-pay-any-amount"`, `"bid-life"`. */
+  askPlayerAboutEffect(player: PlayerId, prompt: string, yes: EffectSpec, no: EffectSpec, cost?: string): void;
+  /** The most of `resource` that `player` could pay right now (rule 119.4:
+   * no more life than they have, and none if they can't lose life). */
+  mostPayable(player: PlayerId, resource: "mana" | "life"): number;
   /** Keep `player` as the effect's source's "chosen player"
    * (`choose-opponent { remember }`) — nothing once it has left the
    * battlefield. */
@@ -11320,6 +11406,137 @@ function applyVote(spec: Extract<EffectSpec, { kind: "vote" }>, ctx: ResolutionC
     }
   }
   ctx.finishVoting();
+}
+
+/**
+ * A `players-pay-any-amount`: one question at a time, the rest of the round
+ * carried on the copy the answer resumes, the payment arriving as its `"x"`.
+ */
+function applyPlayersPayAnyAmount(
+  spec: Extract<EffectSpec, { kind: "players-pay-any-amount" }>,
+  ctx: ResolutionContext,
+): void {
+  const round = (): readonly PlayerId[] => {
+    const players = ctx.playersInScope("each-player");
+    return spec.startingWithYou === true ? eachPlayerMayAsks("each-player", ctx, true) : ctx.apnap(players);
+  };
+  let toAsk = spec.progress?.toAsk ?? round();
+  let paid = spec.progress?.paid ?? [];
+  let anyPaid = spec.progress?.anyPaid ?? false;
+  const paying = spec.progress?.paying;
+  if (paying !== undefined) {
+    const amount = Math.max(0, Math.floor(ctx.x));
+    if (amount > 0) {
+      // Mana was paid as the question was answered; life is paid here, its
+      // answer read only now (rule 119.4: paying it is losing it).
+      if (spec.resource === "life") ctx.loseLife(paying, amount);
+      paid = [...paid, { player: paying, amount }];
+      anyPaid = true;
+    }
+  }
+  for (;;) {
+    while (toAsk.length > 0) {
+      const player = toAsk[0];
+      toAsk = toAsk.slice(1);
+      const most = ctx.mostPayable(player, spec.resource);
+      if (most <= 0) continue;
+      const after = { toAsk, paid, anyPaid };
+      const resume: EffectSpec = { ...spec, progress: { ...after, paying: player } };
+      if (spec.resource === "life") {
+        ctx.chooseValue(
+          { kind: "choose-value", value: "number", prompt: "Pay how much life?", then: resume },
+          { chooser: player, max: most },
+        );
+      } else {
+        ctx.askPlayerAboutEffect(player, "Pay any amount of mana?", resume, { ...spec, progress: after }, "{X}");
+      }
+      return;
+    }
+    if (spec.untilNoOnePays !== true || !anyPaid) break;
+    toAsk = round();
+    anyPaid = false;
+  }
+  const total = paid.reduce((n, p) => n + p.amount, 0);
+  const each = spec.each;
+  if (each !== undefined) {
+    const players = [...new Set(paid.map((p) => p.player))];
+    ctx.simultaneously(() => {
+      for (const player of players) {
+        const theirs = paid.filter((p) => p.player === player).reduce((n, p) => n + p.amount, 0);
+        applyEffectSpec(each, ctx.aboutPlayer(player).withX(theirs));
+      }
+    });
+  }
+  if (spec.then !== undefined) applyEffectSpec(spec.then, ctx.withX(total));
+}
+
+/**
+ * A `bid-life`: the opening bid, then round the table in turn order from the
+ * last bidder asked, each answer resuming a copy carrying the bidding so far,
+ * until the turn comes back to the high bidder. A player who has left the
+ * game in the meantime isn't asked.
+ */
+function applyBidLife(spec: Extract<EffectSpec, { kind: "bid-life" }>, ctx: ResolutionContext): void {
+  const progress = spec.progress;
+  if (progress === undefined) {
+    const who = spec.who;
+    const inGame = eachPlayerMayAsks("each-player", ctx, true);
+    let bidders = inGame;
+    if (who !== "each-player") {
+      const ref = ctx.targets[who.youAndControllerOfTarget];
+      const other = ref === undefined ? undefined : ctx.controllerOf(ref);
+      bidders = inGame.filter((player) => player === ctx.controller || player === other);
+    }
+    const opened = { bidders, highBidder: ctx.controller, at: 0 };
+    if (spec.opening === "any") {
+      ctx.chooseValue({
+        kind: "choose-value",
+        value: "number",
+        prompt: "Start the bidding: bid how much life?",
+        then: { ...spec, progress: { ...opened, high: 0, bidding: ctx.controller } },
+      });
+      return;
+    }
+    applyBidLife({ ...spec, progress: { ...opened, high: spec.opening } }, ctx);
+    return;
+  }
+  const { bidders, topping } = progress;
+  let { high, highBidder, at } = progress;
+  if (topping !== undefined) {
+    ctx.chooseValue(
+      {
+        kind: "choose-value",
+        value: "number",
+        min: high + 1,
+        prompt: `Bid how much life? (More than ${high}.)`,
+        then: { ...spec, progress: { bidders, high, highBidder, at, bidding: topping } },
+      },
+      { chooser: topping },
+    );
+    return;
+  }
+  if (progress.bidding !== undefined) {
+    high = Math.floor(ctx.x);
+    highBidder = progress.bidding;
+  }
+  const inGame = ctx.playersInScope("each-player");
+  for (;;) {
+    at = (at + 1) % bidders.length;
+    const player = bidders[at];
+    if (player === highBidder) break;
+    if (!inGame.includes(player)) continue;
+    const here = { bidders, high, highBidder, at };
+    ctx.askPlayerAboutEffect(
+      player,
+      `Top the high bid of ${high} life?`,
+      { ...spec, progress: { ...here, topping: player } },
+      { ...spec, progress: here },
+    );
+    return;
+  }
+  const won = ctx.aboutPlayer(highBidder).withX(high);
+  if (spec.then !== undefined) applyEffectSpec(spec.then, won);
+  if (spec.ifYouWin !== undefined && highBidder === ctx.controller) applyEffectSpec(spec.ifYouWin, won);
 }
 
 /** How many passes a `repeat` makes at most — a guard, like `MAX_CLASHES`. */
@@ -13865,6 +14082,12 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     case "choose-card-name":
       ctx.chooseCardName(spec);
+      return;
+    case "players-pay-any-amount":
+      applyPlayersPayAnyAmount(spec, ctx);
+      return;
+    case "bid-life":
+      applyBidLife(spec, ctx);
       return;
     case "choose-value": {
       const chooser = spec.who === undefined ? undefined : effectPlayer(spec.who, ctx);

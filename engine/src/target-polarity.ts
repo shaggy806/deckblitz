@@ -153,6 +153,15 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   // for, not the spell's target 0.
   vote: none,
   "cast-vote": none,
+  // Everyone may pay or bid: what follows says who it helps.
+  "players-pay-any-amount": (n, v) => {
+    v.child(n.then);
+    v.child(n.each);
+  },
+  "bid-life": (n, v) => {
+    v.child(n.then);
+    v.child(n.ifYouWin);
+  },
   "for-each-vote": (n, v) => v.child(n.effect),
   "with-choices": (n, v) => v.child(n.effect),
   repeat: (n, v) => v.child(n.effect),
