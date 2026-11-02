@@ -661,9 +661,23 @@ animation follow-ups in `docs/plans/legibility-of-play.md`, "Follow-ups". When a
 delete its detail there and move this line to `COMPLETED.md`.
 
 - **Which seat you see while controlling another player** (the user's call, after playing it) — today the table flips to the controlled player's seat; the other option is to stay in your own seat with a clear marker.
-- **A cast copy logs as an object id** — "obj-91 resolves", "commits a crime with obj-81"; `format.ts`.
+- **Too many priority stops with a land like Bountiful Landscape** (a design call) — a non-mana ability on the battlefield stopped the game about 40 times in one four-player round, and Auto-pass pauses on each opposing spell.
+- **Blitz is the last thing on the landing page** — the site's main feature sits under the navigation, in the same yellow as "Create a game", with its paste form's button just below the fold at 768px.
+- **Blitz starts an incomplete deck without a word** — a 4-card list went straight into a game with an empty library.
+- **The lobby doesn't show that Ready is the next step** — Start Game is disabled until you press it, and it doesn't look like the thing to press.
+- **Library search only matches exact phrases** — "atraxa praetors" and "flying dragon" find nothing, and the message says to try a shorter search.
+- **The history log names a hidden draw once the card is public** — "Silumgar draws Swamp" after the Swamp is played: `publicNameAt` is right, and its fallback to the current name isn't.
+- **The history log's layout** — a full-screen popup you can't read beside the board, event numbers on every line, and the phase banner draws over it.
+- **The hand's rules text is tiny at rest** — 8.5-9.5px and tilted at 1366×768, readable only on hover.
+- **The stack's card hides a seat's board** — at 1366×768 it covers the fourth player's board while you decide whether to respond.
+- **The Cycle popup is easy to miss and ignores Escape** — a small button under the hover card; Settings closes on Escape and this doesn't.
+- **The pass buttons don't explain themselves** — only Auto-pass has a tooltip; "Pass (space)" and "Pass Turn" are left to guess.
+- **A hover card's reminder can name a keyword the card lacks** — Dragonmaster Outcast shows a Flying reminder, from the token its text makes.
+- **Deck builder rough edges** — long deck titles cut off, the hover preview covers the search box, the search box's count ignores the colour filter, re-importing makes a second deck of the same name, "1 issue(s)".
+- **The game's top bar and labels stay small at 2560×1440** — judged by eye; measure before changing.
+- **A cast copy logs as "a card"** — "a card resolves", "commits a crime with a card": the raw id is gone, the copy's name still isn't there; `format.ts`.
 - **Two log lines read wrong** — a card beginning on the battlefield from an opening hand logs as "takes Leyline Axe", and `delayed-trigger-created` prints raw JSON (`format.ts` ~591).
-- **Clear can't undo All attack at a two-player table** — All attack assigns each one-defender creature outright, and Clear only empties `attackPicks`, so it stays disabled; each attacker has to be clicked off.
+- **Clear can't undo an attacker that already has a target** — at any table size: Clear only empties `attackPicks`, so once a creature is in `attackAssignments` it stays disabled and each attacker has to be clicked off.
 - **The discard prompt says "any number" under a cap** — `App.tsx` (~6015) words an `atMost` discard as "any number of cards"; the cap itself is enforced (Jaya Ballard's +1).
 - **The combat prompts' cost lines miss the per-creature taxes** — the attack line ignores `attackTax.perAttacker` and blocks show no cost; the engine refuses what can't be paid.
 - **The tap-cost prompt doesn't check a shared creature type** — Confirm enables on count alone; `creatureTypes` is on the offer, and the engine refuses a pair that doesn't share one.

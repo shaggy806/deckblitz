@@ -15,12 +15,53 @@ title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLET
     whose decision it is, with their hand shown from across the table. You keep your bearings, but you
     act on cards and permanents away from where you usually do. It would need those seats' hand and
     prompts to work from the other side of the board.
+- **Too many priority stops with a land like Bountiful Landscape** (found 2026-11-02, a UX pass; a design
+  call). With one on the battlefield the game stopped at nearly every step of every player's turn, about 40
+  stops in one four-player round. "Skip mana stops" doesn't cover a non-mana ability, and a fetch land or a
+  utility land is in most Commander decks. That the ability is the cause is inferred from when the stops
+  began, not tested alone. Auto-pass is the way out, but it paused on both opposing spells seen, each needing
+  a "Resolve stack" click.
+- **Blitz is the last thing on the landing page** (found 2026-11-02). The site's main feature comes after
+  the navigation, in the same yellow as "Create a game", worded "Have a deck copied? Click here to blitz!".
+  When the clipboard is refused, the paste form opens with its Blitz button just below the fold at 768px
+  (top at 770, the page scrolls).
+- **Blitz starts an incomplete deck without a word** (found 2026-11-02). A 4-card list started a game with
+  an empty library, and the notice only spoke of the one card left out. The lobby's default is "Any deck"
+  too, so this may want a warning rather than a refusal.
+- **The lobby doesn't show that Ready is the next step** (found 2026-11-02). Start Game is disabled with
+  "Waiting for everyone to ready up…", and Ready is drawn as a plain button. An open seat's "Pick a deck"
+  and the small "Add bot" compete with it, and starting life shows both the 20/30/40 buttons and a field.
+- **Library search only matches exact phrases** (found 2026-11-02). "dragon" finds 519 and "flying" 3902,
+  but "flying dragon" and "dragon flying" find 0, as does "atraxa praetors", and the box advertises name, type
+  or rules text. Matching every word would fit. The deck builder's search wasn't checked.
+- **The history log names a hidden draw once the card is public** (found 2026-11-02). "Silumgar draws Swamp"
+  shows after the Swamp is played, which says what they drew. `publicNameAt` rightly finds nothing public at
+  that moment, then `App.tsx`'s `nameAt` falls back to `game.nameOf`, today's name. Your own draws need that
+  fallback, so it wants to apply only to what this seat could see then.
+- **The history log's layout** (found 2026-11-02). It's a full-screen popup, so it can't be read beside the
+  board; each line carries its event number; and the phase banner ("MAIN PHASE") draws over it.
+- **The hand's rules text is tiny at rest** (found 2026-11-02). At 1366×768 a hand card's rules are 9.5px and
+  its type line 8.5px, on a tilted card; hovering makes one readable. The mulligan's fan looks the same.
+- **The stack's card hides a seat's board** (found 2026-11-02). At 1366×768 it sits over the fourth player's
+  board, just when you're deciding whether to respond to what's on it.
+- **The Cycle popup is easy to miss and ignores Escape** (found 2026-11-02). It's a small button under the
+  hover card, and Escape leaves it open, though Escape closes Settings.
+- **The pass buttons don't explain themselves** (found 2026-11-02). Auto-pass has a tooltip; "Pass (space)"
+  and "Pass Turn" have none.
+- **A hover card's reminder can name a keyword the card lacks** (found 2026-11-02). Dragonmaster Outcast
+  shows a Flying reminder panel, read from "create a 5/5 red Dragon creature token with flying".
+- **Deck builder rough edges** (found 2026-11-02). A long deck title is cut off ("IMPORTED: ATRAXA, PRAETOR");
+  the hover preview can cover the search box and filters; the search box says 26980 while the colour-filtered
+  count says 20874; re-importing makes a second deck of the same name; "1 issue(s)".
+- **The game's top bar and labels stay small at 2560×1440** (found 2026-11-02). Judged by eye from a
+  screenshot, on the user's own monitor size; measure before changing.
 - **Two log lines read wrong** (found 2026-11-01). A card that begins on the battlefield from an opening
   hand logs as "takes Leyline Axe", and `delayed-trigger-created` prints as raw JSON (`format.ts` ~591).
-- **Clear can't undo All attack at a two-player table** (found 2026-11-01). In `App.tsx`'s attack bar,
-  All attack puts a creature with one legal defender straight into `attackAssignments`, and Clear only
-  empties `attackPicks`, so after All attack at two players it stays disabled and each attacker has to
-  be clicked off. Older than the night's work; seen playing Silent Arbiter's check.
+- **Clear can't undo an attacker that already has a target** (found 2026-11-01). In `App.tsx`'s attack bar,
+  Clear only empties `attackPicks`, so once a creature is in `attackAssignments` it stays disabled and each
+  attacker has to be clicked off. All attack does that at two players, by giving a creature with one legal
+  defender its target outright; at four players (2026-11-02) sending one attacker at a seat does too. Older
+  than the night's work; seen playing Silent Arbiter's check.
 - **The discard prompt says "any number" under a cap** (found 2026-11-01). `client/src/App.tsx`
   (~6015) words a discard with `atMost` (Jaya Ballard's +1) as "any number of cards". The engine
   enforces the cap, so only the wording is wrong.
@@ -181,11 +222,12 @@ title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLET
   seeded decks and the real chapters, the in-game tour stops, raising the hand tray while a hand
   card is spotlit, pausing the opponent under a Next card mid-game.
 
-**A cast copy logs as an object id**
+**A cast copy logs as "a card"**
 
-The game log prints "obj-91 resolves" for a cast copy and "commits a crime with obj-81", from
+The game log prints "a card resolves" for a cast copy and "commits a crime with a card", from
 `format.ts`'s `spell-resolved` case and the crime line. A name lookup that fails falls through to
-the raw id. Seen 2026-11-02 playing Collected Conjuring's copies; not caused by that family.
+`logName`'s "a card" (it was the raw id until 2026-11-02), and the copy, gone by then, should be
+named. Seen 2026-11-02 playing Collected Conjuring's copies; not caused by that family.
 
 **The initiative and the venture marker have no animation**
 
