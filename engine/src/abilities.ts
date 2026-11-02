@@ -951,7 +951,8 @@ export type TriggerSpec =
       /**
        * "When you lose control of this permanent" (Khârn the Betrayer): another
        * player gains control of it, or it leaves the battlefield (Khârn's
-       * ruling). Looks back in time (rule 603.10d): "you" is whoever controlled
+       * 2022-10-07 ruling, Gustha's Scepter's 2004-10-04 one). Looks back in
+       * time (rule 603.10d): "you" is whoever controlled
        * it just before, and the ability is that player's. Its one permanent is
        * the trigger object.
        */

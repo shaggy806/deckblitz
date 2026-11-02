@@ -192,6 +192,16 @@ describe("Seraph", () => {
     expect(zone(game, back)).toBe("graveyard");
   });
 
+  it("Seraph leaving after the return is losing control of it (Khârn's ruling): sacrificed", () => {
+    const { game, seraph } = killed();
+    toStep(game, "end");
+    settle(game);
+    const [back] = named(game, "Grizzly Bears", A);
+    destroy(game, seraph);
+    settle(game);
+    expect(zone(game, back)).toBe("graveyard");
+  });
+
   it("never asks for the sacrifice once Seraph has left before the return (the ruling)", () => {
     const { game, seraph } = killed();
     destroy(game, seraph);

@@ -401,8 +401,9 @@ export interface DelayedLeaves {
  * A `delayed-trigger` keyed to its controller losing control of one permanent:
  * "When you lose control of **the creature**, tap it" (Ray of Command) — for any
  * reason, its own "until end of turn" ending in the cleanup step, another
- * player gaining control of it, or it leaving the battlefield (rule 603.10d;
- * Khârn the Betrayer's and Ogre Geargrabber's rulings). `losesControl` is a
+ * player gaining control of it (Ray of Command's and Ogre Geargrabber's
+ * rulings), or it leaving the battlefield (Khârn the Betrayer's 2022-10-07
+ * ruling, Gustha's Scepter's 2004-10-04 one). `losesControl` is a
  * target slot, `"source"` or `"trigger-object"`, and must name a permanent on
  * the battlefield as the effect applies (otherwise there is nothing to watch,
  * and no trigger is made). When it fires, that permanent is the ability's

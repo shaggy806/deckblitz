@@ -1266,7 +1266,8 @@ const LOOK_BACK_TRIGGERS: ReadonlySet<TriggerSpec["on"]> = new Set<TriggerSpec["
   "dies",
   "leaves-battlefield",
   "sacrifice",
-  // Leaving the battlefield is losing control of it (603.10d).
+  // Leaving the battlefield is losing control of it: Khârn the Betrayer's
+  // 2022-10-07 ruling and Gustha's Scepter's 2004-10-04 one.
   "loses-control",
 ]);
 
@@ -41471,8 +41472,10 @@ export class Game {
    * The "when you lose control of it" delayed triggers `event` answers (see
    * `DelayedLoseControlWatch`): another player gained control of the permanent
    * from the trigger's controller, or it left the battlefield under theirs
-   * (rule 603.10d). Queued like any trigger, the permanent as its trigger
-   * object; used up unless it has a stated duration (rule 603.7b).
+   * (which is losing control of it: Khârn the Betrayer's 2022-10-07 ruling and
+   * Gustha's Scepter's 2004-10-04 one; rule 603.10d is only that these look
+   * back). Queued like any trigger, the permanent as its trigger object; used
+   * up unless it has a stated duration (rule 603.7b).
    */
   private fireLoseControlWatchers(
     event: Extract<GameEvent, { type: "permanent-left-battlefield" | "control-changed" }>,
