@@ -364,6 +364,7 @@ import _poolHanweirTheWrithingTownship from "../pool/hanweir-the-writhing-townsh
 import _poolHarnessedLightning from "../pool/harnessed-lightning.js";
 import _poolHarrow from "../pool/harrow.js";
 import _poolHarshAnnotation from "../pool/harsh-annotation.js";
+import _poolHarvestPyre from "../pool/harvest-pyre.js";
 import _poolHateMirage from "../pool/hate-mirage.js";
 import _poolHawkeyeTrickShot from "../pool/hawkeye-trick-shot.js";
 import _poolHaythamKenway from "../pool/haytham-kenway.js";
@@ -1303,6 +1304,7 @@ const shard: CardShard = {
     _poolHarnessedLightning,
     _poolHarrow,
     _poolHarshAnnotation,
+    _poolHarvestPyre,
     _poolHateMirage,
     _poolHawkeyeTrickShot,
     _poolHaythamKenway,

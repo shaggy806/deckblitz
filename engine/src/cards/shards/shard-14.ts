@@ -142,6 +142,7 @@ import _poolConsecrate from "../pool/consecrate.js";
 import _poolConservatory from "../pool/conservatory.js";
 import _poolConsultTheNecrosages from "../pool/consult-the-necrosages.js";
 import _poolCoopedUp from "../pool/cooped-up.js";
+import _poolCorpseExplosion from "../pool/corpse-explosion.js";
 import _poolCorpseHauler from "../pool/corpse-hauler.js";
 import _poolCosmograndZenith from "../pool/cosmogrand-zenith.js";
 import _poolCouncilOfEchoes from "../pool/council-of-echoes.js";
@@ -1021,6 +1022,7 @@ const shard: CardShard = {
     _poolConservatory,
     _poolConsultTheNecrosages,
     _poolCoopedUp,
+    _poolCorpseExplosion,
     _poolCorpseHauler,
     _poolCosmograndZenith,
     _poolCouncilOfEchoes,

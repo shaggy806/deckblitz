@@ -246,6 +246,7 @@ import _poolForumOfAmity from "../pool/forum-of-amity.js";
 import _poolFragmentOfKonda from "../pool/fragment-of-konda.js";
 import _poolFranklinRichardsAscendant from "../pool/franklin-richards-ascendant.js";
 import _poolFrillscareMentor from "../pool/frillscare-mentor.js";
+import _poolFugitiveCodebreaker from "../pool/fugitive-codebreaker.js";
 import _poolFumingEffigy from "../pool/fuming-effigy.js";
 import _poolFury from "../pool/fury.js";
 import _poolGainsay from "../pool/gainsay.js";
@@ -1105,6 +1106,7 @@ const shard: CardShard = {
     _poolFragmentOfKonda,
     _poolFranklinRichardsAscendant,
     _poolFrillscareMentor,
+    _poolFugitiveCodebreaker,
     _poolFumingEffigy,
     _poolFury,
     _poolGainsay,

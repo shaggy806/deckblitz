@@ -557,6 +557,7 @@ import _poolRazeTheEffigy from "../pool/raze-the-effigy.js";
 import _poolRecklessAmplimancer from "../pool/reckless-amplimancer.js";
 import _poolReckonersBargain from "../pool/reckoners-bargain.js";
 import _poolRedeemTheLost from "../pool/redeem-the-lost.js";
+import _poolRedemptorDreadnought from "../pool/redemptor-dreadnought.js";
 import _poolRedtoothVanguard from "../pool/redtooth-vanguard.js";
 import _poolReflectiveGolem from "../pool/reflective-golem.js";
 import _poolReplicate from "../pool/replicate.js";
@@ -1426,6 +1427,7 @@ const shard: CardShard = {
     _poolRecklessAmplimancer,
     _poolReckonersBargain,
     _poolRedeemTheLost,
+    _poolRedemptorDreadnought,
     _poolRedtoothVanguard,
     _poolReflectiveGolem,
     _poolReplicate,

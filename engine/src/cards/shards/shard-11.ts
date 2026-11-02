@@ -214,6 +214,7 @@ import _poolDisplacerBeast from "../pool/displacer-beast.js";
 import _poolDivineTransformation from "../pool/divine-transformation.js";
 import _poolDivineVerdict from "../pool/divine-verdict.js";
 import _poolDoomedArtisan from "../pool/doomed-artisan.js";
+import _poolDraconicIntervention from "../pool/draconic-intervention.js";
 import _poolDragonWhisperer from "../pool/dragon-whisperer.js";
 import _poolDranaLiberatorOfMalakir from "../pool/drana-liberator-of-malakir.js";
 import _poolDreadSummons from "../pool/dread-summons.js";
@@ -674,6 +675,7 @@ import _poolSireOfSevenDeaths from "../pool/sire-of-seven-deaths.js";
 import _poolSirenReaver from "../pool/siren-reaver.js";
 import _poolSistersOfTheFlame from "../pool/sisters-of-the-flame.js";
 import _poolSix from "../pool/six.js";
+import _poolSkeletalScrying from "../pool/skeletal-scrying.js";
 import _poolSkulduggery from "../pool/skulduggery.js";
 import _poolSkullcapSnail from "../pool/skullcap-snail.js";
 import _poolSkyEelSchool from "../pool/sky-eel-school.js";
@@ -1099,6 +1101,7 @@ const shard: CardShard = {
     _poolDivineTransformation,
     _poolDivineVerdict,
     _poolDoomedArtisan,
+    _poolDraconicIntervention,
     _poolDragonWhisperer,
     _poolDranaLiberatorOfMalakir,
     _poolDreadSummons,
@@ -1559,6 +1562,7 @@ const shard: CardShard = {
     _poolSirenReaver,
     _poolSistersOfTheFlame,
     _poolSix,
+    _poolSkeletalScrying,
     _poolSkulduggery,
     _poolSkullcapSnail,
     _poolSkyEelSchool,

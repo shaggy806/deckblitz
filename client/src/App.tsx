@@ -7332,6 +7332,7 @@ function Table({
             // An optional behold (Theorist's Sanctum): declining it isn't "putting" anything.
             ...(zoneChoiceAction.behold === true ? { noneLabel: "Don't behold" } : {}),
             ...(zoneChoiceAction.destination === 'reveal' ? { noneLabel: 'Reveal none' } : {}),
+            ...(zoneChoiceAction.destination === 'exile' ? { noneLabel: 'Exile none' } : {}),
             ...(zoneChoiceAction.openingHand === true && zoneChoiceAction.destination !== 'reveal' ? { noneLabel: 'Keep them in hand' } : {}),
             // A look alone (Glasses of Urza): closing it is the answer.
             ...(zoneChoiceAction.max === 0 ? { noneLabel: 'Done' } : {}),

@@ -815,6 +815,7 @@ import _poolWakeOfDestruction from "../pool/wake-of-destruction.js";
 import _poolWakedancer from "../pool/wakedancer.js";
 import _poolWallOfEarth from "../pool/wall-of-earth.js";
 import _poolWallOfFaith from "../pool/wall-of-faith.js";
+import _poolWarbreakTrumpeter from "../pool/warbreak-trumpeter.js";
 import _poolWardenOfTheChained from "../pool/warden-of-the-chained.js";
 import _poolWarrenScourgeElf from "../pool/warren-scourge-elf.js";
 import _poolWarriorsSword from "../pool/warriors-sword.js";
@@ -1673,6 +1674,7 @@ const shard: CardShard = {
     _poolWakedancer,
     _poolWallOfEarth,
     _poolWallOfFaith,
+    _poolWarbreakTrumpeter,
     _poolWardenOfTheChained,
     _poolWarrenScourgeElf,
     _poolWarriorsSword,

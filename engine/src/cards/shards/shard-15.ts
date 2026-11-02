@@ -100,6 +100,7 @@ import _poolChandraAcolyteOfFlame from "../pool/chandra-acolyte-of-flame.js";
 import _poolChandrasRevolution from "../pool/chandras-revolution.js";
 import _poolChandrasTriumph from "../pool/chandras-triumph.js";
 import _poolChatterfangSquirrelGeneral from "../pool/chatterfang-squirrel-general.js";
+import _poolChillHaunting from "../pool/chill-haunting.js";
 import _poolChimericCoils from "../pool/chimeric-coils.js";
 import _poolCidFreeflierPilot from "../pool/cid-freeflier-pilot.js";
 import _poolCinderbones from "../pool/cinderbones.js";
@@ -945,6 +946,7 @@ const shard: CardShard = {
     _poolChandrasRevolution,
     _poolChandrasTriumph,
     _poolChatterfangSquirrelGeneral,
+    _poolChillHaunting,
     _poolChimericCoils,
     _poolCidFreeflierPilot,
     _poolCinderbones,

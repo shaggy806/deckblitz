@@ -602,6 +602,7 @@ import _poolRubblehulk from "../pool/rubblehulk.js";
 import _poolRuinsOfTrokair from "../pool/ruins-of-trokair.js";
 import _poolRunedServitor from "../pool/runed-servitor.js";
 import _poolRustlerRampage from "../pool/rustler-rampage.js";
+import _poolRuthlessRipper from "../pool/ruthless-ripper.js";
 import _poolSacredArmory from "../pool/sacred-armory.js";
 import _poolSacredMesa from "../pool/sacred-mesa.js";
 import _poolSaddleOfTheCavalier from "../pool/saddle-of-the-cavalier.js";
@@ -1481,6 +1482,7 @@ const shard: CardShard = {
     _poolRuinsOfTrokair,
     _poolRunedServitor,
     _poolRustlerRampage,
+    _poolRuthlessRipper,
     _poolSacredArmory,
     _poolSacredMesa,
     _poolSaddleOfTheCavalier,
