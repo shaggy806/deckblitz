@@ -8643,7 +8643,7 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
   ),
   preset(
     'Companion: beside a commander, with no sideboard',
-    board({ you: { cmd: ['Kaheera, the Orphanguard'], bf: ['Forest*4'], companion: 'Keruga, the Macrosage' } }),
+    board({ you: { cmd: ['Aesi, Tyrant of Gyre Strait'], bf: ['Forest*4'], companion: 'Keruga, the Macrosage' } }),
   ),
   // --- Cards outside the game: the sideboard (2026-10-30, build-family) ---
   preset(

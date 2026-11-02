@@ -47,11 +47,24 @@ test('a Commander deck keeps its sideboard for a companion, and says so', async 
   await openWithDeck(page, {
     id: 'companion-test',
     name: 'Companion test',
-    commanders: ['Kaheera, the Orphanguard'],
+    commanders: ['Aesi, Tyrant of Gyre Strait'],
     cards: ['Forest'],
     sideboard: ['Keruga, the Macrosage'],
   })
   const side = page.getByTestId('db-sideboard')
   await expect(side).toContainText('only a card with companion comes to the table')
   await expect(side.locator('.db-companion-mark')).toHaveText('companion')
+})
+
+test('a companion outside the commander\'s colour identity is marked as not met', async ({ page }) => {
+  await openWithDeck(page, {
+    id: 'companion-test',
+    name: 'Companion test',
+    commanders: ['Kaheera, the Orphanguard'],
+    cards: ['Forest'],
+    sideboard: ['Keruga, the Macrosage'],
+  })
+  const mark = page.getByTestId('db-sideboard').locator('.db-companion-mark')
+  await expect(mark).toHaveText('companion: not met')
+  await expect(mark).toHaveAttribute('title', /outside the commander's colour identity/)
 })

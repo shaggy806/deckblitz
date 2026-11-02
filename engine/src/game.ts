@@ -274,7 +274,7 @@ import type { AggregateReads, AggregateSpec, CardFilter } from "./filter.js";
 import { goadersOf } from "./goad.js";
 import { isRingBearer, RING_EMBLEM_TRIGGERS, ringEmblemText } from "./ring.js";
 import { colorIdentityOf } from "./identity.js";
-import { companionConditionProblem } from "./companion.js";
+import { companionProblem } from "./companion.js";
 import type { StartingDeck } from "./companion.js";
 import type {
   EffectDuration,
@@ -5410,8 +5410,9 @@ export class Game {
 
   /** The cards `player` may reveal as a companion (rule 103.2b): theirs from
    * outside the game with a companion ability whose condition their starting
-   * deck fulfils. Asked before anything has left that deck, the library and the
-   * commanders are still all of it (702.139b). */
+   * deck fulfils, and within their commanders' colour identity. Asked before
+   * anything has left that deck, the library and the commanders are still all
+   * of it (702.139b). */
   private companionChoices(player: PlayerId): ObjectId[] {
     const outside = this.state.outside?.[player] ?? [];
     if (outside.length === 0) return [];
@@ -5421,10 +5422,7 @@ export class Game {
         .filter((id) => this.state.objects[id].owner === player && this.state.objects[id].isCommander === true)
         .map((id) => this.state.objects[id].cardName),
     };
-    return outside.filter((id) => {
-      const condition = this.registry.get(this.state.objects[id].cardName).companion;
-      return condition !== null && companionConditionProblem(condition, deck, this.registry) === null;
-    });
+    return outside.filter((id) => companionProblem(this.state.objects[id].cardName, deck, this.registry) === null);
   }
 
   /**

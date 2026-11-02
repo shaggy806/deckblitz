@@ -5765,7 +5765,7 @@ engine terms. A second thing to check is a second test.
 
 ### Companion: beside a commander, with no sideboard
 - **Do:** Click "To hand" on your panel.
-- **Expect:** Before you click, your panel has "companion" but no "sideboard" link. Keruga goes into your hand as usual, and Kaheera stays in the command zone.
+- **Expect:** Before you click, your panel has "companion" but no "sideboard" link. Keruga goes into your hand as usual, and Aesi stays in the command zone.
 
 ## Cards outside the game: the sideboard (2026-10-30, need-keys Phase 2: build-family)
 

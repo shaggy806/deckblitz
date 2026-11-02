@@ -240,7 +240,7 @@ describe("revealing a companion (103.2b)", () => {
     const fits = start([
       {
         cards: Array<string>(99).fill("Forest"),
-        commanders: ["Kaheera, the Orphanguard"],
+        commanders: ["Aesi, Tyrant of Gyre Strait"],
         sideboard: ["Keruga, the Macrosage", "Lightning Bolt"],
       },
       { cards: SIXTY_MURDERS },
@@ -250,13 +250,41 @@ describe("revealing a companion (103.2b)", () => {
     expect(awaiting.eligible.map((id) => fits.game.state.objects[id].cardName)).toEqual(["Keruga, the Macrosage"]);
     expect(fits.game.state.outside?.[A]?.map((id) => fits.game.state.objects[id].cardName)).toEqual(["Keruga, the Macrosage"]);
 
-    // Lurrus-sized commander against Keruga's: Grizzly Bears as the commander
-    // has mana value 2, so the deck fails, commander alone.
+    // Within the identity, but a mana value 2 card in the deck fails Keruga's condition.
     const fails = start([
-      { cards: Array<string>(99).fill("Forest"), commanders: ["Grizzly Bears"], sideboard: ["Keruga, the Macrosage"] },
+      {
+        cards: [...Array<string>(98).fill("Forest"), "Grizzly Bears"],
+        commanders: ["Aesi, Tyrant of Gyre Strait"],
+        sideboard: ["Keruga, the Macrosage"],
+      },
       { cards: SIXTY_MURDERS },
     ]);
     expect(fails.game.state.awaiting?.kind).not.toBe("choose-from-zone");
+  });
+
+  it("a Commander deck can't reveal one outside its commander's colour identity (903.5c), asked or not", () => {
+    // Kaheera is green-white, and Keruga's blue is outside it. The deck meets Keruga's condition.
+    const outside = start([
+      {
+        cards: Array<string>(99).fill("Forest"),
+        commanders: ["Kaheera, the Orphanguard"],
+        sideboard: ["Keruga, the Macrosage"],
+      },
+      { cards: SIXTY_MURDERS },
+    ]);
+    expect(outside.game.state.awaiting?.kind).not.toBe("choose-from-zone");
+    expect(outside.game.state.companions?.[A]).toBeUndefined();
+
+    const forests = Array<string>(99).fill("Forest");
+    const problem = (commanders: readonly string[]) =>
+      companionProblem("Keruga, the Macrosage", { cards: forests, commanders }, reg);
+    expect(problem(["Kaheera, the Orphanguard"])).toBe("it's outside the commander's colour identity (WG)");
+    expect(problem(["Aesi, Tyrant of Gyre Strait"])).toBeNull();
+    // A pair's identity is the union of both (903.4): neither alone covers Keruga's.
+    expect(problem(["Kodama of the East Tree"])).toBe("it's outside the commander's colour identity (G)");
+    expect(problem(["Sakashima of a Thousand Faces", "Kodama of the East Tree"])).toBeNull();
+    // Not a Commander deck, so no identity to fall within.
+    expect(problem([])).toBeNull();
   });
 });
 
@@ -363,7 +391,7 @@ describe("the special action (116.2g, 702.139a)", () => {
       controllers: { [A]: a },
       skipCompanionReveals: true,
       decks: [
-        { player: A, cards: Array<string>(99).fill("Forest"), commanders: ["Kaheera, the Orphanguard"], sideboard: ["Keruga, the Macrosage"] },
+        { player: A, cards: Array<string>(99).fill("Forest"), commanders: ["Aesi, Tyrant of Gyre Strait"], sideboard: ["Keruga, the Macrosage"] },
         { player: B, cards: SIXTY_MURDERS },
       ],
     });

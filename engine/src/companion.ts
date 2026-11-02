@@ -9,7 +9,9 @@
  * on `CardDefinition.companion`; the ten printed ones are four shapes.
  */
 
+import { colorIdentityOf, identityString, withinIdentity } from "./identity.js";
 import { manaValue, parseManaCost } from "./mana.js";
+import type { Color } from "./mana.js";
 import { hasSubtype, EVERY_CREATURE_TYPE } from "./subtypes.js";
 import type { CardDefinition, CardType } from "./cards/define.js";
 import type { CardRegistry } from "./cards/card-registry.js";
@@ -160,10 +162,25 @@ export function companionConditionProblem(
 }
 
 /** Why the card named `name` can't be revealed as a companion for `deck` (rule
- * 103.2b), or `null` if it can. */
+ * 103.2b), or `null` if it can. Beside commanders it must also fall within their
+ * colour identity, as a card of the deck must (903.5c), a pair's being the union
+ * of both (903.4). The Comprehensive Rules leave this to the Commander format's
+ * own rules, which is the user's call here (2026-11-01). */
 export function companionProblem(name: string, deck: StartingDeck, registry: CardRegistry): string | null {
   if (!registry.has(name)) return `"${name}" is not implemented`;
-  const condition = registry.get(name).companion;
+  const def = registry.get(name);
+  const condition = def.companion;
   if (condition === null) return `"${name}" has no companion ability`;
+  const commanders = deck.commanders ?? [];
+  if (commanders.length > 0) {
+    const identity = new Set<Color>();
+    for (const commander of commanders) {
+      if (!registry.has(commander)) continue;
+      for (const c of colorIdentityOf(registry.get(commander), registry)) identity.add(c);
+    }
+    if (!withinIdentity(colorIdentityOf(def, registry), identity)) {
+      return `it's outside the commander's colour identity (${identityString(identity) || "colourless"})`;
+    }
+  }
   return companionConditionProblem(condition, deck, registry);
 }
