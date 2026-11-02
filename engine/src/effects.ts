@@ -4250,6 +4250,9 @@ export type EffectSpec =
        * from none to their whole hand; `amount` is ignored. "That many" after
        * it is `{ thisWay: "discarded" }`. */
       readonly anyNumber?: true;
+      /** With `anyNumber`, at most this many, chosen as it resolves: "discard
+       * **up to three** cards" (Jaya Ballard). */
+      readonly atMost?: EffectAmount;
       /** Only cards matching this can be discarded — "discard **a creature
        * card**" (Hidden Horror, Pack Guardian), "discard any number of
        * **land** cards" (Nantuko Cultivator, with `anyNumber`). With fewer
@@ -14150,7 +14153,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         for (const player of ordered) {
           ctx.discardCards(
             { kind: "player", player },
-            amountValue(spec.amount, ctx, player),
+            amountValue(spec.anyNumber === true ? (spec.atMost ?? 0) : spec.amount, ctx, player),
             false,
             spec.unlessOne,
             spec.anyNumber === true,
@@ -14167,7 +14170,11 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       for (const target of players) {
         ctx.discardCards(
           target,
-          amountValue(spec.amount, ctx, target.kind === "player" ? target.player : undefined),
+          amountValue(
+            spec.anyNumber === true ? (spec.atMost ?? 0) : spec.amount,
+            ctx,
+            target.kind === "player" ? target.player : undefined,
+          ),
           spec.random === true,
           spec.unlessOne,
           spec.anyNumber === true,

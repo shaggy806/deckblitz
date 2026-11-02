@@ -6,17 +6,6 @@ const EMBLEM =
   "You may cast instant and sorcery spells from your graveyard. If a spell cast this way would be put into your graveyard, exile it instead.";
 const ULT = `−8: You get an emblem with "${EMBLEM}"`;
 
-const discardThenDraw = (amount: number) => ({
-  effect: {
-    kind: "sequence" as const,
-    effects: [
-      { kind: "discard" as const, target: "you" as const, amount },
-      { kind: "draw" as const, amount: { thisWay: "discarded" as const } },
-    ],
-  },
-  text: `Discard ${amount}, then draw that many.`,
-});
-
 export default defineCard({
   name: "Jaya Ballard",
   manaCost: "{2}{R}{R}{R}",
@@ -47,16 +36,11 @@ export default defineCard({
       loyaltyCost: 1,
       cost: { mana: null, tap: false },
       targets: [],
-      // "Up to three", the number chosen as it resolves, as Daretti's two.
       effect: {
-        kind: "modal",
-        minModes: 1,
-        maxModes: 1,
-        modes: [
-          { effect: { kind: "sequence", effects: [] }, text: "Discard nothing." },
-          discardThenDraw(1),
-          discardThenDraw(2),
-          discardThenDraw(3),
+        kind: "sequence",
+        effects: [
+          { kind: "discard", target: "you", amount: 0, anyNumber: true, atMost: 3 },
+          { kind: "draw", amount: { thisWay: "discarded" } },
         ],
       },
       resolve: null,

@@ -291,6 +291,24 @@ describe("cast and play permissions, off an emblem", () => {
   });
 });
 
+describe("discard up to a number, chosen as it resolves", () => {
+  it("Jaya Ballard's +1: at most three, that many drawn", () => {
+    const { game, a } = table();
+    const jaya = enter(game, "Jaya Ballard");
+    const held = [toHand(game, "Island"), toHand(game, "Island"), toHand(game, "Island"), toHand(game, "Island")];
+    const size = hand(game).length;
+    let most = -1;
+    a.chooseDiscardsFn = (_hand, count) => {
+      most = count;
+      return held.slice(0, 2);
+    };
+    activate(game, jaya, 1);
+    expect(most).toBe(3);
+    expect(graveyard(game)).toEqual(expect.arrayContaining(held.slice(0, 2)));
+    expect(hand(game).length).toBe(size);
+  });
+});
+
 describe("a snapshot from before emblems' statics had an object", () => {
   it("an anthem and a hand size still work, and the object it's given is in no zone list", () => {
     const { game } = table();

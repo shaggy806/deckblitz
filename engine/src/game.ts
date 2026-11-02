@@ -42347,8 +42347,8 @@ export class Game {
     random = false,
     filter?: CardFilter,
     unlessOne?: CardFilter,
-    /** "Discard any number of cards": up to the whole hand, the player's
-     * pick of how many — `amount` is ignored. */
+    /** "Discard any number of cards": up to `amount` cards ("up to three"),
+     * or with `amount` 0 the whole hand, the player's pick of how many. */
     upTo = false,
   ): void {
     if (target.kind !== "player") return;
@@ -42360,7 +42360,7 @@ export class Game {
         const from = this.state.decisionSource;
         this.state.pendingDiscards.push({
           player,
-          count: 0,
+          count: amount,
           upTo: true,
           ...(from !== null ? { source: from } : {}),
           ...(filter !== undefined ? { filter } : {}),
@@ -42368,7 +42368,7 @@ export class Game {
         });
         return;
       }
-      this.discardNow(player, 0, filter, undefined, true);
+      this.discardNow(player, amount, filter, undefined, true);
       return;
     }
     if (amount <= 0) return;
@@ -42594,7 +42594,7 @@ export class Game {
       this.state.awaiting = {
         kind: "discard",
         player,
-        count: hand.length,
+        count: amount > 0 ? Math.min(amount, hand.length) : hand.length,
         upTo: true,
         fromEffect: true,
         ...(filter !== undefined ? { eligible: hand } : {}),
