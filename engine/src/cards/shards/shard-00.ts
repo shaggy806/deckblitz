@@ -21,6 +21,7 @@ import _poolAirliftChaplain from "../pool/airlift-chaplain.js";
 import _poolAkkiRaider from "../pool/akki-raider.js";
 import _poolAkoumFlameseeker from "../pool/akoum-flameseeker.js";
 import _poolAleshaWhoLaughsAtFate from "../pool/alesha-who-laughs-at-fate.js";
+import _poolAllianceOfArms from "../pool/alliance-of-arms.js";
 import _poolAlliesAtLast from "../pool/allies-at-last.js";
 import _poolAlloyMyr from "../pool/alloy-myr.js";
 import _poolAmbitiousAetherborn from "../pool/ambitious-aetherborn.js";
@@ -917,6 +918,7 @@ const shard: CardShard = {
     _poolAkkiRaider,
     _poolAkoumFlameseeker,
     _poolAleshaWhoLaughsAtFate,
+    _poolAllianceOfArms,
     _poolAlliesAtLast,
     _poolAlloyMyr,
     _poolAmbitiousAetherborn,

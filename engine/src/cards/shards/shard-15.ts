@@ -530,6 +530,7 @@ import _poolPilgrimOfTheAges from "../pool/pilgrim-of-the-ages.js";
 import _poolPiranhaMarsh from "../pool/piranha-marsh.js";
 import _poolPitScorpion from "../pool/pit-scorpion.js";
 import _poolPitchburnDevils from "../pool/pitchburn-devils.js";
+import _poolPlagueOfVermin from "../pool/plague-of-vermin.js";
 import _poolPlanarCleansing from "../pool/planar-cleansing.js";
 import _poolPlatoonDispenser from "../pool/platoon-dispenser.js";
 import _poolPoliticalTriumph from "../pool/political-triumph.js";
@@ -1373,6 +1374,7 @@ const shard: CardShard = {
     _poolPiranhaMarsh,
     _poolPitScorpion,
     _poolPitchburnDevils,
+    _poolPlagueOfVermin,
     _poolPlanarCleansing,
     _poolPlatoonDispenser,
     _poolPoliticalTriumph,

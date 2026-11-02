@@ -357,6 +357,7 @@ import _poolHotfootGnome from "../pool/hotfoot-gnome.js";
 import _poolHumility from "../pool/humility.js";
 import _poolHuntersProwess from "../pool/hunters-prowess.js";
 import _poolIceFangCoatl from "../pool/ice-fang-coatl.js";
+import _poolIllicitAuction from "../pool/illicit-auction.js";
 import _poolIllusionReality from "../pool/illusion-reality.js";
 import _poolImpoliteEntrance from "../pool/impolite-entrance.js";
 import _poolIncubationSac from "../pool/incubation-sac.js";
@@ -449,6 +450,7 @@ import _poolMindFlayer from "../pool/mind-flayer.js";
 import _poolMindRot from "../pool/mind-rot.js";
 import _poolMindcrank from "../pool/mindcrank.js";
 import _poolMindlashSliver from "../pool/mindlash-sliver.js";
+import _poolMindsAglow from "../pool/minds-aglow.js";
 import _poolMindwarper from "../pool/mindwarper.js";
 import _poolMinisterOfImpediments from "../pool/minister-of-impediments.js";
 import _poolMireBoa from "../pool/mire-boa.js";
@@ -1237,6 +1239,7 @@ const shard: CardShard = {
     _poolHumility,
     _poolHuntersProwess,
     _poolIceFangCoatl,
+    _poolIllicitAuction,
     _poolIllusionReality,
     _poolImpoliteEntrance,
     _poolIncubationSac,
@@ -1329,6 +1332,7 @@ const shard: CardShard = {
     _poolMindRot,
     _poolMindcrank,
     _poolMindlashSliver,
+    _poolMindsAglow,
     _poolMindwarper,
     _poolMinisterOfImpediments,
     _poolMireBoa,

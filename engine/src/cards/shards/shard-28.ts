@@ -561,6 +561,7 @@ import _poolPryingBlade from "../pool/prying-blade.js";
 import _poolPygmyPyrosaur from "../pool/pygmy-pyrosaur.js";
 import _poolQarsiHighPriest from "../pool/qarsi-high-priest.js";
 import _poolQuagFeast from "../pool/quag-feast.js";
+import _poolQuagnoth from "../pool/quagnoth.js";
 import _poolQuarrelsEnd from "../pool/quarrels-end.js";
 import _poolQuirionTrailblazer from "../pool/quirion-trailblazer.js";
 import _poolQumulox from "../pool/qumulox.js";
@@ -1460,6 +1461,7 @@ const shard: CardShard = {
     _poolPygmyPyrosaur,
     _poolQarsiHighPriest,
     _poolQuagFeast,
+    _poolQuagnoth,
     _poolQuarrelsEnd,
     _poolQuirionTrailblazer,
     _poolQumulox,

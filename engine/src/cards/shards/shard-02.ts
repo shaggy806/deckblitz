@@ -515,6 +515,7 @@ import _poolOriginOfTheAvengers from "../pool/origin-of-the-avengers.js";
 import _poolOrimsThunder from "../pool/orims-thunder.js";
 import _poolOrzhovRacketeers from "../pool/orzhov-racketeers.js";
 import _poolOrzhovaTheChurchOfDeals from "../pool/orzhova-the-church-of-deals.js";
+import _poolPainsReward from "../pool/pains-reward.js";
 import _poolPaleBears from "../pool/pale-bears.js";
 import _poolPathOfThePyromancer from "../pool/path-of-the-pyromancer.js";
 import _poolPavelMaliki from "../pool/pavel-maliki.js";
@@ -1369,6 +1370,7 @@ const shard: CardShard = {
     _poolOrimsThunder,
     _poolOrzhovRacketeers,
     _poolOrzhovaTheChurchOfDeals,
+    _poolPainsReward,
     _poolPaleBears,
     _poolPathOfThePyromancer,
     _poolPavelMaliki,

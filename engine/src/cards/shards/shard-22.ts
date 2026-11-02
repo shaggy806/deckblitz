@@ -187,6 +187,7 @@ import _poolDistantMelody from "../pool/distant-melody.js";
 import _poolDisturbedBurial from "../pool/disturbed-burial.js";
 import _poolDivineLight from "../pool/divine-light.js";
 import _poolDjinniWindseer from "../pool/djinni-windseer.js";
+import _poolDodecapod from "../pool/dodecapod.js";
 import _poolDongZhouTheTyrant from "../pool/dong-zhou-the-tyrant.js";
 import _poolDoomBlade from "../pool/doom-blade.js";
 import _poolDraconauticsEngineer from "../pool/draconautics-engineer.js";
@@ -419,6 +420,7 @@ import _poolMagusOfTheMind from "../pool/magus-of-the-mind.js";
 import _poolMagusOfTheVineyard from "../pool/magus-of-the-vineyard.js";
 import _poolMajesticAuricorn from "../pool/majestic-auricorn.js";
 import _poolMalakirBloodPriest from "../pool/malakir-blood-priest.js";
+import _poolManaChargedDragon from "../pool/mana-charged-dragon.js";
 import _poolMarangRiverRegent from "../pool/marang-river-regent.js";
 import _poolMarhaultElsdragon from "../pool/marhault-elsdragon.js";
 import _poolMarkOfTheOni from "../pool/mark-of-the-oni.js";
@@ -1079,6 +1081,7 @@ const shard: CardShard = {
     _poolDisturbedBurial,
     _poolDivineLight,
     _poolDjinniWindseer,
+    _poolDodecapod,
     _poolDongZhouTheTyrant,
     _poolDoomBlade,
     _poolDraconauticsEngineer,
@@ -1311,6 +1314,7 @@ const shard: CardShard = {
     _poolMagusOfTheVineyard,
     _poolMajesticAuricorn,
     _poolMalakirBloodPriest,
+    _poolManaChargedDragon,
     _poolMarangRiverRegent,
     _poolMarhaultElsdragon,
     _poolMarkOfTheOni,

@@ -415,6 +415,7 @@ import _poolLoxodonSurveyor from "../pool/loxodon-surveyor.js";
 import _poolLuminousBroodmoth from "../pool/luminous-broodmoth.js";
 import _poolLurkingChupacabra from "../pool/lurking-chupacabra.js";
 import _poolMadRatter from "../pool/mad-ratter.js";
+import _poolMagesContest from "../pool/mages-contest.js";
 import _poolMagmakinArtillerist from "../pool/magmakin-artillerist.js";
 import _poolMagusOfTheBazaar from "../pool/magus-of-the-bazaar.js";
 import _poolMakeMischief from "../pool/make-mischief.js";
@@ -1272,6 +1273,7 @@ const shard: CardShard = {
     _poolLuminousBroodmoth,
     _poolLurkingChupacabra,
     _poolMadRatter,
+    _poolMagesContest,
     _poolMagmakinArtillerist,
     _poolMagusOfTheBazaar,
     _poolMakeMischief,

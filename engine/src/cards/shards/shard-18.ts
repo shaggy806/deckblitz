@@ -673,6 +673,7 @@ import _poolSpiderManHometownHero from "../pool/spider-man-hometown-hero.js";
 import _poolSpiketailDrake from "../pool/spiketail-drake.js";
 import _poolSpiritAway from "../pool/spirit-away.js";
 import _poolSpiritOfTheHearth from "../pool/spirit-of-the-hearth.js";
+import _poolSpiritualFocus from "../pool/spiritual-focus.js";
 import _poolSpiteOfMogis from "../pool/spite-of-mogis.js";
 import _poolStalkingVengeance from "../pool/stalking-vengeance.js";
 import _poolStandingTroops from "../pool/standing-troops.js";
@@ -1550,6 +1551,7 @@ const shard: CardShard = {
     _poolSpiketailDrake,
     _poolSpiritAway,
     _poolSpiritOfTheHearth,
+    _poolSpiritualFocus,
     _poolSpiteOfMogis,
     _poolStalkingVengeance,
     _poolStandingTroops,

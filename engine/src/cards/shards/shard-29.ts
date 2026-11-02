@@ -401,6 +401,7 @@ import _poolLanternScout from "../pool/lantern-scout.js";
 import _poolLegolasMasterArcher from "../pool/legolas-master-archer.js";
 import _poolLegolassQuickReflexes from "../pool/legolass-quick-reflexes.js";
 import _poolLeylineSurge from "../pool/leyline-surge.js";
+import _poolLiegeOfTheHollows from "../pool/liege-of-the-hollows.js";
 import _poolLifeline from "../pool/lifeline.js";
 import _poolLightOfSanction from "../pool/light-of-sanction.js";
 import _poolLightfootRogue from "../pool/lightfoot-rogue.js";
@@ -1279,6 +1280,7 @@ const shard: CardShard = {
     _poolLegolasMasterArcher,
     _poolLegolassQuickReflexes,
     _poolLeylineSurge,
+    _poolLiegeOfTheHollows,
     _poolLifeline,
     _poolLightOfSanction,
     _poolLightfootRogue,

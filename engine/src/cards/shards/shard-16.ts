@@ -527,6 +527,7 @@ import _poolOathOfEorl from "../pool/oath-of-eorl.js";
 import _poolObNixilisTheAscended from "../pool/ob-nixilis-the-ascended.js";
 import _poolObekaSplitterOfSeconds from "../pool/obeka-splitter-of-seconds.js";
 import _poolObsessiveSearch from "../pool/obsessive-search.js";
+import _poolObstinateBaloth from "../pool/obstinate-baloth.js";
 import _poolOceanusDragon from "../pool/oceanus-dragon.js";
 import _poolOctoprophet from "../pool/octoprophet.js";
 import _poolOgreMenial from "../pool/ogre-menial.js";
@@ -1481,6 +1482,7 @@ const shard: CardShard = {
     _poolObNixilisTheAscended,
     _poolObekaSplitterOfSeconds,
     _poolObsessiveSearch,
+    _poolObstinateBaloth,
     _poolOceanusDragon,
     _poolOctoprophet,
     _poolOgreMenial,
