@@ -5178,6 +5178,7 @@ export function parseEffect(text, outer) {
       oneEachLookAt(sentences, i) ??
       splitLookAt(sentences, i) ??
       totalManaValueLookAt(sentences, i) ??
+      revealUntilAt(sentences, i, ctx) ??
       opponentDividesFindsAt(sentences, i, ctx) ??
       opponentChoosesInGraveyardAt(sentences, i, ctx);
     if (oneEach !== null) {
@@ -6636,6 +6637,111 @@ function opponentChoosesInGraveyardAt(sentences, i, ctx) {
  * of your library in a random order. Put all land cards revealed this way onto
  * the battlefield tapped and put all creature cards revealed this way into your
  * hand." (Zimone's Experiment) — one `look-and-choose` with a `split`. */
+/**
+ * "Reveal cards from the top of your library until you reveal a nonland card",
+ * and where the card found and the rest go: Treasure Hunt's one sentence,
+ * "put that card into your hand and the rest on the bottom of your library in
+ * any order", the count form (Fathom Trawl), and between the two the steps that
+ * read the card found, with the target they read chosen first (Erratic
+ * Explosion, Erratic Mutation, Goblin Machinist). Auspicious Starrix's exile.
+ */
+function revealUntilAt(sentences, i, ctx) {
+  const FROM_TOP = "reveal cards from the top of your library until you reveal";
+  const REST = "on the bottom of your library in (any|a random) order";
+  const restOf = (word) => (word.toLowerCase() === "any" ? "bottom-any-order" : "bottom-random");
+  const whole = sentenceRe(`${FROM_TOP} an? ([\\w-]+) card, then put all cards revealed this way into your hand`).exec(sentences[i]);
+  if (whole !== null) {
+    const filter = parseTypePhrase(whole[1]);
+    if (filter === null) return null;
+    return { effect: { kind: "reveal-until", filter, rest: "hand" }, used: 1 };
+  }
+  if (
+    /^exile cards from the top of your library until you exile x permanent cards, where x is the number of times ~ has mutated\.$/i.test(sentences[i]) &&
+    /^put those permanent cards onto the battlefield\.$/i.test(sentences[i + 1] ?? "")
+  ) {
+    return {
+      effect: {
+        kind: "reveal-until-count",
+        filter: { notTypes: ["instant", "sorcery"] },
+        count: { timesMutated: "source" },
+        exile: true,
+        rest: "stay",
+      },
+      used: 2,
+    };
+  }
+  const own = /^choose (any target|target creature)\.$/i.exec(sentences[i]);
+  let j = own === null ? i : i + 1;
+  const reveal = sentenceRe(`${FROM_TOP} ${N} ([\\w-]+) cards?`).exec(sentences[j] ?? "");
+  if (reveal === null) return null;
+  const count = numberOf(reveal[1]);
+  const filter = parseTypePhrase(reveal[2]);
+  if (typeof count !== "number" || filter === null) return null;
+  j += 1;
+  if (count > 1) {
+    if (own !== null) return null;
+    const puts = sentenceRe(
+      `put the [\\w-]+ cards revealed this way into your hand, then put the rest of the revealed cards ${REST}`,
+    ).exec(sentences[j] ?? "");
+    if (puts === null) return null;
+    return {
+      effect: { kind: "reveal-until-count", filter, count, put: "hand", rest: restOf(puts[1]) },
+      used: j + 1 - i,
+    };
+  }
+  // A step reading the card found, its target a slot up from where it's chosen.
+  const OF_CARD = "until end of turn, where x is that card's mana value";
+  let then;
+  const read = sentences[j] ?? "";
+  const aimedAt = own === null ? null : own[1].toLowerCase() === "any target" ? "any-target" : "creature";
+  if (aimedAt === "any-target" && /^~ deals damage equal to that card's mana value to that permanent or player\.$/i.test(read)) {
+    then = (slot) => ({ kind: "damage", target: slot + 1, amount: { manaValueOf: 0 } });
+  } else if (aimedAt === "creature" && sentenceRe(`that creature gets \\+x/-x ${OF_CARD}`).test(read)) {
+    then = (slot) => ({
+      kind: "modify-pt",
+      target: slot + 1,
+      power: { manaValueOf: 0 },
+      toughness: { product: [{ manaValueOf: 0 }, -1] },
+      duration: "end-of-turn",
+    });
+  } else if (aimedAt === null && sentenceRe(`~ gets \\+x/\\+0 ${OF_CARD}`).test(read)) {
+    then = () => ({ kind: "modify-pt", target: "source", power: { manaValueOf: 0 }, toughness: 0, duration: "end-of-turn" });
+  }
+  if (then !== undefined) j += 1;
+  else if (aimedAt !== null) return null;
+  const close = sentences[j] ?? "";
+  let puts = sentenceRe(`put that card (into your hand|onto the battlefield)( tapped)? and the rest ${REST}`).exec(close);
+  let where = {};
+  let rest;
+  if (puts !== null) {
+    where = {
+      put: puts[1].toLowerCase() === "into your hand" ? "hand" : "battlefield",
+      ...(puts[2] !== undefined ? { tapped: true } : {}),
+    };
+    if (where.tapped === true && where.put === "hand") return null;
+    rest = puts[3];
+  } else {
+    puts = sentenceRe(`put the [\\w-]+ card into your hand and the rest ${REST}`).exec(close);
+    if (puts !== null) {
+      where = { put: "hand" };
+      rest = puts[1];
+    } else {
+      puts = sentenceRe(`put (?:the revealed cards|all cards revealed this way) ${REST}`).exec(close);
+      if (puts === null || then === undefined) return null;
+      rest = puts[1];
+    }
+  }
+  const effect = {
+    kind: "reveal-until",
+    filter,
+    ...where,
+    ...(then !== undefined ? { then: then(aimedAt === null ? 0 : ctx.target(aimedAt)) } : {}),
+    ...(aimedAt !== null ? { thenKeepsTargets: true } : {}),
+    rest: restOf(rest),
+  };
+  return { effect, used: j + 1 - i };
+}
+
 function splitLookAt(sentences, i) {
   const look = sentenceRe(`look at the top ${N} cards of your library`).exec(sentences[i]);
   if (look === null) return null;

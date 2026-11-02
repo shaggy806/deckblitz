@@ -71,6 +71,9 @@ interface Visit {
   touch(ref: unknown, polarity: Polarity, weight: number): void;
   /** An effect nested inside this one that reads the same target slots. */
   child(effect: EffectSpec | null | undefined): void;
+  /** One that reads them each a slot up, a card found at target 0 before them
+   * (`reveal-until`'s `thenKeepsTargets`). */
+  childAfterFound(effect: EffectSpec | null | undefined): void;
 }
 
 type Kind = EffectSpec["kind"];
@@ -555,8 +558,13 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   cascade: none,
   discover: none,
   "craft-return": none,
-  // Its `then` sees the card found as target 0, not the enclosing slot 0.
-  "reveal-until": (n, v) => v.touch(n.whose, "harm", MINOR),
+  // Its `then` sees the card found as target 0, not the enclosing slot 0 —
+  // with `thenKeepsTargets`, the enclosing slots a place up (Erratic
+  // Explosion's damage to its target).
+  "reveal-until": (n, v) => {
+    v.touch(n.whose, "harm", MINOR);
+    if (n.thenKeepsTargets === true) v.childAfterFound(n.then);
+  },
   // The copy is yours whoever cast the original. A copy aimed at a target
   // slot (Zada's order) aims it at your own permanent.
   "copy-spell": (n, v) => {
@@ -765,7 +773,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "put-exiled-this-way-onto-battlefield": none,
   "move-exiled-this-way": none,
   "put-arrived-onto-battlefield": none,
-  "reveal-until-count": none,
+  "reveal-until-count": (n, v) => v.touch(n.whose, "harm", MINOR),
   encore: none,
   goad: (n, v) => v.touch(n.target, "harm", MINOR),
   // Menace and can't block: a drawback on a blocker, a boon on an attacker.
@@ -881,15 +889,24 @@ function slotTouches(
   // The kind whose rule is touching right now, for `bias`. A child's walk
   // sets its own and puts this one back.
   let kind: Kind | null = null;
+  // How many cards found sit before the enclosing slots here.
+  let shift = 0;
   const visit: Visit = {
     touch(ref, polarity, weight) {
       const side = (kind !== null ? bias?.[kind] : undefined) ?? polarity;
-      for (const slot of slotsOf(ref)) {
+      for (const read of slotsOf(ref)) {
+        const slot = read - shift;
         if (slot >= 0 && slot < count) touches[slot].push({ polarity: side, weight });
       }
     },
     child(nested) {
       if (nested !== null && nested !== undefined) walk(nested);
+    },
+    childAfterFound(nested) {
+      if (nested === null || nested === undefined) return;
+      shift += 1;
+      walk(nested);
+      shift -= 1;
     },
   };
   const walk = (node: EffectSpec): void => {

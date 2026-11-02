@@ -233,6 +233,7 @@ import type {
   DelayedWhenever,
   EffectAmount,
   EffectSpec,
+  RevealedCardsGo,
   ManaSplitAsk,
   EnterTypes,
   FlickerCounters,
@@ -30680,28 +30681,60 @@ export class Game {
         const it = this.state.objects[object];
         return it?.zone === "battlefield" && (it.zoneChangeCount ?? 0) === zoneChangeCount;
       },
-      revealUntilCount: (owner, filter, count) => {
+      revealUntilCount: (owner, filter, count, exile) => {
         const library = this.state.zones.perPlayer[owner]?.library ?? [];
         const revealed: ObjectId[] = [];
         const found: ObjectId[] = [];
+        const matches = (id: ObjectId): boolean =>
+          matchesFilter(this.state, this.registry, id, filter, { you: controller });
+        if (exile) {
+          // One at a time, face up: each is in exile before the next.
+          while (found.length < count && library.length > 0) {
+            const top = library[0];
+            this.moveObject(top, "exile");
+            revealed.push(top);
+            if (matches(top)) found.push(top);
+          }
+          return { revealed, found };
+        }
         for (const id of library) {
           if (found.length >= count) break;
           revealed.push(id);
-          if (matchesFilter(this.state, this.registry, id, filter, { you: controller })) found.push(id);
+          if (matches(id)) found.push(id);
         }
         if (revealed.length > 0) this.revealCards(owner, revealed, "library");
         return { revealed, found };
       },
-      putOntoBattlefieldTogether: (cards) => {
+      putOntoBattlefieldTogether: (cards, tapped) => {
         const still = cards.filter((id) => this.state.objects[id] !== undefined);
         if (still.some((id) => this.askEnterChoice(id, this.state.objects[id].owner))) return true;
         this.withEnterBatch(() => {
           for (const id of still) {
-            if (this.moveObject(id, "battlefield")) this.emit({ type: "permanent-entered-battlefield", object: id });
+            if (this.moveObject(id, "battlefield", tapped === true ? { tapped: true } : {})) {
+              this.emit({ type: "permanent-entered-battlefield", object: id });
+            }
           }
         });
         return false;
       },
+      withFoundBeforeTargets: (found) =>
+        this.makeResolutionContext(
+          source,
+          controller,
+          [found, ...targets],
+          x,
+          triggerValue,
+          triggerObject,
+          stackMultiplier,
+          resolutionCount,
+          [found.kind === "object" ? (this.state.objects[found.object]?.zone ?? null) : null, ...targetZones],
+          refs,
+          {
+            ...opts,
+            ...(opts.readTargets !== undefined ? { readTargets: [found, ...opts.readTargets] } : {}),
+            ...(opts.illegalTargets !== undefined ? { illegalTargets: opts.illegalTargets.map((slot) => slot + 1) } : {}),
+          },
+        ),
       withTargets: (newTargets) =>
         this.makeResolutionContext(
           source,
@@ -35301,13 +35334,19 @@ export class Game {
   private placeRevealed(
     owner: PlayerId,
     revealed: readonly ObjectId[],
-    rest: Extract<EffectSpec, { kind: "reveal-until" }>["rest"] | "bottom-any-order",
+    rest: RevealedCardsGo,
     exiled: boolean,
   ): void {
     const zone: ZoneType = exiled ? "exile" : "library";
     const still = revealed.filter((id) => this.state.objects[id]?.zone === zone);
     switch (rest) {
       case "stay":
+        return;
+      case "hand":
+        for (const id of still) this.moveObject(id, "hand");
+        return;
+      case "exile":
+        for (const id of still) this.moveObject(id, "exile");
         return;
       case "bottom-any-order": {
         // Ripple's "on the bottom of your library in any order" (rule

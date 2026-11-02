@@ -30,6 +30,93 @@ const ctx = (overrides: Partial<Ctx> = {}): Ctx => {
   return { targets, target: (spec) => targets.push(spec) - 1, tokenFor: () => null, ...overrides };
 };
 
+describe("reveal until, and where the rest goes", () => {
+  const nonland = { notTypes: ["land"] };
+  const spell = (oracle_text: string) =>
+    parseFace({ name: "Test", type_line: "Sorcery", mana_cost: "{1}", oracle_text }, { tokenFor: () => null });
+
+  it.each([
+    [
+      "Reveal cards from the top of your library until you reveal a nonland card, then put all cards revealed this way into your hand.",
+      [],
+      { kind: "reveal-until", filter: nonland, rest: "hand" },
+    ],
+    [
+      "Reveal cards from the top of your library until you reveal a creature card. Put that card into your hand and the rest on the bottom of your library in any order.",
+      [],
+      { kind: "reveal-until", filter: { type: "creature" }, put: "hand", rest: "bottom-any-order" },
+    ],
+    [
+      "Reveal cards from the top of your library until you reveal a land card. Put that card onto the battlefield tapped and the rest on the bottom of your library in a random order.",
+      [],
+      { kind: "reveal-until", filter: { type: "land" }, put: "battlefield", tapped: true, rest: "bottom-random" },
+    ],
+    [
+      "Choose any target. Reveal cards from the top of your library until you reveal a nonland card. Test deals damage equal to that card's mana value to that permanent or player. Put the revealed cards on the bottom of your library in any order.",
+      ["any-target"],
+      {
+        kind: "reveal-until",
+        filter: nonland,
+        then: { kind: "damage", target: 1, amount: { manaValueOf: 0 } },
+        thenKeepsTargets: true,
+        rest: "bottom-any-order",
+      },
+    ],
+    [
+      "Choose any target. Reveal cards from the top of your library until you reveal a nonland card. Test deals damage equal to that card's mana value to that permanent or player. Put the nonland card into your hand and the rest on the bottom of your library in any order.",
+      ["any-target"],
+      {
+        kind: "reveal-until",
+        filter: nonland,
+        put: "hand",
+        then: { kind: "damage", target: 1, amount: { manaValueOf: 0 } },
+        thenKeepsTargets: true,
+        rest: "bottom-any-order",
+      },
+    ],
+    [
+      "Choose target creature. Reveal cards from the top of your library until you reveal a nonland card. That creature gets +X/-X until end of turn, where X is that card's mana value. Put all cards revealed this way on the bottom of your library in any order.",
+      ["creature"],
+      {
+        kind: "reveal-until",
+        filter: nonland,
+        then: {
+          kind: "modify-pt",
+          target: 1,
+          power: { manaValueOf: 0 },
+          toughness: { product: [{ manaValueOf: 0 }, -1] },
+          duration: "end-of-turn",
+        },
+        thenKeepsTargets: true,
+        rest: "bottom-any-order",
+      },
+    ],
+    [
+      "Reveal cards from the top of your library until you reveal three nonland cards. Put the nonland cards revealed this way into your hand, then put the rest of the revealed cards on the bottom of your library in any order.",
+      [],
+      { kind: "reveal-until-count", filter: nonland, count: 3, put: "hand", rest: "bottom-any-order" },
+    ],
+  ])("%s", (text, targets, effect) => {
+    const parsed = spell(text);
+    expect(parsed.complete).toBe(true);
+    expect(parsed.effect).toEqual(effect);
+    expect(parsed.targets).toEqual(targets);
+  });
+
+  it("the shapes it doesn't know stay unread", () => {
+    expect(
+      spell(
+        "Reveal cards from the top of your library until you reveal a nonland card. Put the revealed cards on the bottom of your library in any order.",
+      ).complete,
+    ).toBe(false);
+    expect(
+      spell(
+        "Choose any target. Reveal cards from the top of your library until you reveal a nonland card. Put that card into your hand and the rest on the bottom of your library in any order.",
+      ).complete,
+    ).toBe(false);
+  });
+});
+
 describe("an emblem's static abilities", () => {
   const self = { scope: "self" };
   it.each([

@@ -1058,7 +1058,14 @@
   "effect:emblem-no-max-hand-size",
   "effect:emblem-instant-speed-loyalty",
   "effect:emblem-play-from-graveyard",
-  "effect:emblem-free-cast-from-hand"
+  "effect:emblem-free-cast-from-hand",
+  "effect:reveal-until-count-exile",
+  "effect:reveal-until-rest-bottom-any-order",
+  "effect:reveal-until-rest-to-hand",
+  "effect:reveal-until-count-to-hand",
+  "effect:reveal-until-count-tapped",
+  "effect:reveal-until-rest-exile",
+  "effect:reveal-until-count"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

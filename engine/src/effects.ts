@@ -1412,6 +1412,16 @@ export function substituteChosenCardName(spec: EffectSpec, name: string): Effect
   return walk(spec) as EffectSpec;
 }
 
+/**
+ * Where a `reveal-until`'s revealed cards go: `"bottom-random"` (the bottom of
+ * the library in a random order), `"bottom-any-order"` (in the order its owner
+ * chooses, rule 401.4 — Erratic Explosion), `"graveyard"`, `"hand"` (Treasure
+ * Hunt's "put all cards revealed this way into your hand"), `"exile"` (Sacred
+ * Guide), `"shuffle"` (into the library, which is shuffled — "then shuffle") or
+ * `"stay"` (exiled cards stay exiled; revealed ones stay on top).
+ */
+export type RevealedCardsGo = "bottom-random" | "bottom-any-order" | "graveyard" | "hand" | "exile" | "shuffle" | "stay";
+
 /** A `reveal-until` waiting on a decision — see its `progress`. */
 export interface RevealUntilProgress {
   readonly owner: PlayerId;
@@ -3240,21 +3250,35 @@ export type EffectSpec =
       readonly filter: CardFilter;
     }
   | {
-      /** Reveal cards from the top of the controller's library until
-       * `count` cards matching `filter` are revealed — all of it if there
-       * aren't that many — put those onto the battlefield together under
-       * their owner's control, and the rest where `rest` says: Selvala's
+      /** Reveal cards from the top of a library until `count` cards matching
+       * `filter` are revealed — all of it if there aren't that many — put
+       * those where `put` says, and the rest where `rest` says: Selvala's
        * Stampede's "reveal cards from the top of your library until you
        * reveal a creature card for each wild vote. Put those creature cards
        * onto the battlefield, then shuffle the rest into your library".
-       * Nothing is revealed for a count of 0. Each card's "as this enters"
-       * choices are asked first (rule 614.12). */
+       * Nothing is revealed for a count of 0.
+       *
+       * `whose` as `reveal-until`'s; the controller's when absent. `exile`:
+       * each card exiled, face up, as it goes, rather than revealed
+       * (Auspicious Starrix). `put`: `"battlefield"` (absent;
+       * together, under their owner's control, each card's "as this enters"
+       * choices asked first, rule 614.12 — `tapped` enters them tapped),
+       * `"hand"` (Fathom Trawl), or `"with-rest"`, going where the rest goes
+       * in one event (Mind Funeral). `rest` is `reveal-until`'s. */
       readonly kind: "reveal-until-count";
       readonly filter: CardFilter;
       readonly count: EffectAmount;
-      readonly rest: "shuffle" | "bottom-random";
+      readonly rest: RevealedCardsGo;
+      readonly whose?: number | "that-player" | { readonly controllerOfTarget: number };
+      readonly exile?: boolean;
+      readonly put?: "battlefield" | "hand" | "with-rest";
+      readonly tapped?: boolean;
       /** Set only on the copy parked across an "as this enters" choice. */
-      readonly progress?: { readonly revealed: readonly ObjectId[]; readonly found: readonly ObjectId[] };
+      readonly progress?: {
+        readonly owner: PlayerId;
+        readonly revealed: readonly ObjectId[];
+        readonly found: readonly ObjectId[];
+      };
     }
   | {
       /** Put `count` of the cards a batched `put-into-graveyard` trigger
@@ -5725,14 +5749,18 @@ export type EffectSpec =
        * may put that card onto the battlefield" is a `may` of a
        * `put-onto-battlefield` of 0. Skipped when nothing matched. */
       readonly then?: EffectSpec;
+      /** `then` reads the resolution's own targets too, each a slot up from
+       * where it was, target 0 still the card found: Erratic Explosion's
+       * "choose any target … deals damage equal to that card's mana value to
+       * that permanent or player" is `then: { kind: "damage", target: 1,
+       * amount: { manaValueOf: 0 } }`. */
+      readonly thenKeepsTargets?: boolean;
       /**
        * What happens to every revealed card still where it was revealed —
-       * the rest, and the card found if nothing moved it: `"bottom-random"`
-       * (the bottom of the library in a random order), `"graveyard"`,
-       * `"shuffle"` (into the library, which is shuffled — "then shuffle")
-       * or `"stay"` (exiled cards stay exiled; revealed ones stay on top).
+       * the rest, and the card found if nothing moved it. See
+       * {@link RevealedCardsGo}.
        */
-      readonly rest: "bottom-random" | "graveyard" | "shuffle" | "stay";
+      readonly rest: RevealedCardsGo;
       /** The card found isn't one of the rest, whatever became of it — Codie,
        * Vociferous Codex's "put each **other** card exiled this way on the
        * bottom", which leaves it in exile to be cast. */
@@ -8797,11 +8825,12 @@ export interface EffectApi {
     owner: PlayerId,
     filter: CardFilter,
     count: number,
+    exile: boolean,
   ): { readonly revealed: readonly ObjectId[]; readonly found: readonly ObjectId[] };
   /** Put these cards onto the battlefield together, each under its owner's
    * control. `true` when it stopped first to ask an "as this enters"
    * choice (nothing has moved; do it again once that's answered). */
-  putOntoBattlefieldTogether(cards: readonly ObjectId[]): boolean;
+  putOntoBattlefieldTogether(cards: readonly ObjectId[], tapped?: boolean): boolean;
   /** The permanents matching `filter` (from the effect's controller's
    * side, with the source as `FilterContext.source`), each with how many
    * tokens it stands for — a token stack is one
@@ -9366,12 +9395,15 @@ export interface EffectApi {
   placeRevealed(
     owner: PlayerId,
     revealed: readonly ObjectId[],
-    rest: Extract<EffectSpec, { kind: "reveal-until" }>["rest"] | "bottom-any-order",
+    rest: RevealedCardsGo,
     exiled: boolean,
   ): void;
   /** This context with other targets — a step applied to cards the
    * resolution found rather than chose (a `reveal-until`'s `then`). */
   withTargets(targets: readonly TargetRef[]): ResolutionContext;
+  /** This context with `found` as target 0 and its own targets after it, each
+   * a slot up — see `reveal-until`'s `thenKeepsTargets`. */
+  withFoundBeforeTargets(found: TargetRef): ResolutionContext;
   /** Exile `targets`, then return them to the battlefield together — at once,
    * or linked to a delayed return — see the `"flicker"` {@link EffectSpec}.
    * `fromSource` marks a target that is the ability's own source, which is
@@ -11325,6 +11357,18 @@ export function opponentsVoting(
   );
 }
 
+/** Whose library a `reveal-until` or a `reveal-until-count` reads: `undefined`
+ * when that player isn't there to name. */
+function revealingPlayer(
+  whose: Extract<EffectSpec, { kind: "reveal-until" }>["whose"],
+  ctx: ResolutionContext,
+): PlayerId | undefined {
+  if (whose === undefined) return ctx.controller;
+  if (whose === "that-player" || typeof whose === "object") return effectPlayer(whose, ctx);
+  const ref = ctx.targets[whose];
+  return ref?.kind === "player" ? ref.player : undefined;
+}
+
 /**
  * A `"reveal-until"`: reveal, place the card found, apply `then` to it, then
  * place the rest. Placing it onto the battlefield may stop to ask its "as
@@ -11337,16 +11381,8 @@ function applyRevealUntil(
 ): void {
   let progress = spec.progress;
   if (progress === undefined) {
-    let owner: PlayerId = ctx.controller;
-    if (spec.whose === "that-player" || typeof spec.whose === "object") {
-      const player = effectPlayer(spec.whose, ctx);
-      if (player === undefined) return;
-      owner = player;
-    } else if (spec.whose !== undefined) {
-      const ref = ctx.targets[spec.whose];
-      if (ref === undefined || ref.kind !== "player") return;
-      owner = ref.player;
-    }
+    const owner = revealingPlayer(spec.whose, ctx);
+    if (owner === undefined) return;
     const found = ctx.revealUntil(owner, spec);
     progress = {
       owner,
@@ -11374,7 +11410,8 @@ function applyRevealUntil(
     progress = { ...progress, placed: true };
     if (spec.then !== undefined) {
       const pendingBefore = ctx.decisionPending();
-      applyEffectSpec(spec.then, ctx.withTargets([{ kind: "object", object: hit }]));
+      const found: TargetRef = { kind: "object", object: hit };
+      applyEffectSpec(spec.then, spec.thenKeepsTargets === true ? ctx.withFoundBeforeTargets(found) : ctx.withTargets([found]));
       if (!pendingBefore && ctx.decisionPending()) {
         ctx.resumeAfterDecisions({ ...spec, progress }, parked);
         return;
@@ -13638,19 +13675,31 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       if (progress === undefined) {
         const n = amountValue(spec.count, ctx);
         if (n <= 0) return;
-        progress = ctx.revealUntilCount(ctx.controller, spec.filter, n);
+        const owner = revealingPlayer(spec.whose, ctx);
+        if (owner === undefined) return;
+        progress = { owner, ...ctx.revealUntilCount(owner, spec.filter, n, spec.exile === true) };
       }
-      const parked = ctx.parkedCount();
-      if (ctx.putOntoBattlefieldTogether(progress.found)) {
-        ctx.resumeAfterDecisions({ ...spec, progress }, parked);
+      const put = spec.put ?? "battlefield";
+      const exiled = spec.exile === true;
+      if (put === "battlefield") {
+        const parked = ctx.parkedCount();
+        if (ctx.putOntoBattlefieldTogether(progress.found, spec.tapped === true)) {
+          ctx.resumeAfterDecisions({ ...spec, progress }, parked);
+          return;
+        }
+      } else if (put === "hand") {
+        ctx.placeRevealed(progress.owner, progress.found, "hand", exiled);
+      }
+      if (put === "with-rest") {
+        ctx.placeRevealed(progress.owner, progress.revealed, spec.rest, exiled);
         return;
       }
       const found = new Set(progress.found);
       ctx.placeRevealed(
-        ctx.controller,
+        progress.owner,
         progress.revealed.filter((id) => !found.has(id)),
         spec.rest,
-        false,
+        exiled,
       );
       return;
     }

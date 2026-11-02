@@ -3536,3 +3536,21 @@ Gideon of the Trials, Jaya Ballard, Saheeli, Filigree Master. Not covered:
 `effect:emblem-grants-activated` and `effect:emblem-grants-to-spells` (a grant's
 activation is found by `staticIndex` on the definition, so those need a reference
 to the emblem) and `effect:static-damage-life-floor-emblem`.
+
+### Reveal until, with where the rest goes — built 2026-11-01
+
+The need-keys Phase 2 family `effect:reveal-until-count-exile`, its group with
+`effect:reveal-until-rest-bottom-any-order` and `effect:reveal-until-rest-to-hand`,
+and `effect:reveal-until-count-to-hand`, `effect:reveal-until-count-tapped`,
+`effect:reveal-until-rest-exile` and `effect:reveal-until-count` riding along.
+`reveal-until` and `reveal-until-count` share one `rest` (`RevealedCardsGo`: bottom
+random, bottom in the order chosen through the existing `choose-from-zone` order,
+rule 401.4, graveyard, hand, exile, shuffle, stay). `reveal-until-count` gains
+`whose`, `exile`, `put` (`"hand"`, `"with-rest"`) and `tapped`. `reveal-until`'s
+`thenKeepsTargets` lets its `then` read the resolution's own targets beside the card
+found. No new decision. Proving cards: Treasure Hunt, Erratic Explosion, Explosive
+Revelation, Erratic Mutation, Goblin Machinist, Fathom Trawl, Auspicious Starrix,
+Proteus Staff. `effect:reveal-until-count` is only partly covered: Open the Way
+still needs its cap, Kindred Summons a creature type chosen on resolution, Thought
+Dissector an "or X cards" stop, Indomitable Creativity one reveal per permanent
+destroyed. `author-freed` narrows those.
