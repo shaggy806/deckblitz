@@ -39,6 +39,9 @@ describe("art pins", () => {
 // Tokens Scryfall has no printing of (checked 2026-10-18, a token search by
 // name): nothing to pin, so they draw as a text panel.
 const NO_TOKEN_PRINTING = new Set([
+  // Firecat Blitz (JUD)'s 1/1 red Elemental Cat with haste: no token printing in
+  // the Oracle snapshot.
+  "Elemental Cat Token",
   // Dune-Brood Nephilim (GPT)'s 1/1 colorless Sand was never printed as a token.
   "Sand Token",
   // Blessed Sanctuary (P02)'s vanilla white 2/2 Unicorn: no token printing in

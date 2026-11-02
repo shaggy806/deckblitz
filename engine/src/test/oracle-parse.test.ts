@@ -194,6 +194,19 @@ describe("costs and triggers", () => {
     expect(parseCost("Sacrifice ~ and a creature named Spitting Drake")).toBeNull();
   });
 
+  it("reads a tap cost of X and of creatures that share a creature type", () => {
+    expect(parseCost("{2}, {T}, Tap X untapped artifacts you control").cost.tapOthers).toEqual({
+      count: "x",
+      filter: { type: "artifact", controlledBy: "you" },
+    });
+    expect(parseCost("Tap two untapped creatures you control that share a creature type").cost.tapOthers).toEqual({
+      count: 2,
+      filter: { type: "creature", controlledBy: "you" },
+      shareCreatureType: true,
+      includeSelf: true,
+    });
+  });
+
   it("reads a sacrifice cost of a number of permanents, X, any number and with different names", () => {
     expect(parseCost("Sacrifice three Foods").cost.sacrifice).toEqual({ filter: { subtype: "Food" }, count: 3 });
     expect(parseCost("{T}, Sacrifice X Goats").cost.sacrifice).toEqual({ filter: { subtype: "Goat" }, count: "x" });

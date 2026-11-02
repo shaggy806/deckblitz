@@ -1419,10 +1419,16 @@ export function parseCost(text) {
       cost.reveal = { count, filter, text: noun };
     } else if ((m = /^(\{E\})+$/.exec(part))) cost.payEnergy = part.length / 3;
     else if ((m = new RegExp(`^Tap ${N} untapped (.+?) you control$`, "i").exec(part))) {
+      // "Tap X untapped artifacts you control": announced as it's activated.
+      const count = numberOf(m[1]);
+      const filter = parseTypePhrase(m[2]);
+      if (count === undefined || filter === null) return null;
+      cost.tapOthers = { count, filter: { ...filter, controlledBy: "you" } };
+    } else if ((m = new RegExp(`^Tap ${N} untapped (.+?) you control that share a creature type$`, "i").exec(part))) {
       const count = numberOf(m[1]);
       const filter = parseTypePhrase(m[2]);
       if (typeof count !== "number" || filter === null) return null;
-      cost.tapOthers = { count, filter: { ...filter, controlledBy: "you" } };
+      cost.tapOthers = { count, shareCreatureType: true, filter: { ...filter, controlledBy: "you" } };
     } else if (part === "Exile ~ from your graveyard") extra.zone = "graveyard";
     else if (part === "Discard ~") extra.zone = "hand";
     else if (part === "Exile ~") cost.exileSelf = true;

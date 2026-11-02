@@ -12,6 +12,7 @@ import type { PileFateWord } from "./effects.js";
 import type { CardFilter } from "./filter.js";
 import type { Color, ManaType } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
+import { EVERY_CREATURE_TYPE, hasSubtype, isCreatureType } from "./subtypes.js";
 import type { TargetRef, TargetSpec } from "./target.js";
 import type { TargetCountRange } from "./target-count.js";
 import type { TriggerOrderEntry } from "./state.js";
@@ -235,12 +236,65 @@ export interface TapCostOffer {
    * each choice's power now (one token's, for a stack). */
   readonly totalPower?: number;
   readonly power?: Readonly<Record<ObjectId, number>>;
+  /** "That share a creature type" (Weight of Conscience): each choice's
+   * subtypes, marker and all (`subtypes.ts`). The picks must have one creature
+   * type in common; `choices` holds only those with enough others to do it. */
+  readonly creatureTypes?: Readonly<Record<ObjectId, readonly string[]>>;
 }
 
 /** The power a set of tap picks adds up to under a crew offer (each id once
  * per token it names). */
 export function tapPicksPower(offer: TapCostOffer, picks: readonly ObjectId[]): number {
   return picks.reduce((sum, id) => sum + (offer.power?.[id] ?? 0), 0);
+}
+
+/** Whether the permanents with these subtype lists have a creature type in
+ * common — a changeling's list has every one (rule 702.73a), a creature with
+ * none shares nothing. */
+export function shareACreatureType(lists: readonly (readonly string[])[]): boolean {
+  if (lists.length === 0) return true;
+  if (lists.some((list) => !hasSubtype(list, EVERY_CREATURE_TYPE))) return false;
+  // Any one that isn't a changeling names the candidates; all changelings
+  // share every type.
+  const named = lists.find((list) => !list.includes(EVERY_CREATURE_TYPE));
+  if (named === undefined) return true;
+  return named.some((type) => isCreatureType(type) && lists.every((list) => hasSubtype(list, type)));
+}
+
+/** A share offer's choices by creature type, each list only those with that
+ * type (a changeling in every one, or one of its own if it's all there is), in
+ * offer order; `null` for an offer with no such constraint. */
+function tapShareGroups(offer: TapCostOffer): ObjectId[][] | null {
+  const types = offer.creatureTypes;
+  if (types === undefined) return null;
+  const named = new Set<string>();
+  for (const id of offer.choices) for (const type of types[id] ?? []) if (isCreatureType(type)) named.add(type);
+  const groups = [...named].map((type) => offer.choices.filter((id) => hasSubtype(types[id] ?? [], type)));
+  // Nothing but changelings.
+  if (named.size === 0) groups.push(offer.choices.filter((id) => (types[id] ?? []).includes(EVERY_CREATURE_TYPE)));
+  return groups;
+}
+
+/** A share offer's groups with enough tokens between them to make `count`. */
+function tapShareGroupsFilling(offer: TapCostOffer): ObjectId[][] | null {
+  return (
+    tapShareGroups(offer)?.filter((group) => group.reduce((n, id) => n + (offer.copies?.[id] ?? 1), 0) >= offer.count) ??
+    null
+  );
+}
+
+/** The choices a share offer's picks may come from: one type's whose tokens
+ * make `count`, the `pick`th of those there are (the first by default);
+ * everything for an offer with no such constraint. */
+export function tapShareChoices(offer: TapCostOffer, pick: (n: number) => number = () => 0): readonly ObjectId[] {
+  const groups = tapShareGroupsFilling(offer);
+  if (groups === null) return offer.choices;
+  return groups.length === 0 ? [] : groups[pick(groups.length)];
+}
+
+/** Every choice of a share offer that has enough others to share a type with. */
+export function tapShareFit(offer: TapCostOffer): ReadonlySet<ObjectId> {
+  return new Set((tapShareGroupsFilling(offer) ?? [offer.choices]).flat());
 }
 
 /**
@@ -251,7 +305,8 @@ export function tapPicksPower(offer: TapCostOffer, picks: readonly ObjectId[]): 
  * power) when the offer can't be met.
  */
 export function defaultTapPicks(offer: TapCostOffer, preferFirst: (id: ObjectId) => boolean): ObjectId[] {
-  const order = [...offer.choices.filter(preferFirst), ...offer.choices.filter((id) => !preferFirst(id))];
+  const from = tapShareChoices(offer);
+  const order = [...from.filter(preferFirst), ...from.filter((id) => !preferFirst(id))];
   const picked: ObjectId[] = [];
   const enough = (): boolean =>
     offer.totalPower !== undefined ? tapPicksPower(offer, picked) >= offer.totalPower : picked.length >= offer.count;

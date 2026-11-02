@@ -20,6 +20,7 @@ import {
   sacrificeCostParts,
   sacrificeCostReadsX,
   sacrificePartsFillable,
+  tapOthersAtX,
 } from "./abilities.js";
 import type {
   AbilityCost,
@@ -34,7 +35,7 @@ import type {
   TriggerSpec,
   TriggerWho,
 } from "./abilities.js";
-import { actionPlayer, defaultTapPicks, tapPicksPower } from "./actions.js";
+import { actionPlayer, defaultTapPicks, shareACreatureType, tapPicksPower, tapShareFit } from "./actions.js";
 import type {
   Action,
   AttackerDeclaration,
@@ -3055,6 +3056,12 @@ export class Game {
       const sacrificeX = sacrificeCostReadsX(ability.cost)
         ? this.costSacrificeCapacity(player, source, ability)
         : undefined;
+      // "Tap X untapped artifacts": as many as there are (and each X's own
+      // mana is checked as it's offered, below).
+      const tapOthersX =
+        ability.cost.tapOthers?.count === "x"
+          ? this.tapCapacity(this.tapOthersCandidates(player, source, ability.cost.tapOthers))
+          : undefined;
       // "Exile X cards from your graveyard": as many as there are.
       const exileX =
         ability.cost.exileFromGraveyard?.count === "x"
@@ -3082,7 +3089,7 @@ export class Game {
         ability.loyaltyCost === "-x"
           ? (this.state.objects[source]?.counters.loyalty ?? 0) + this.loyaltyCostIncrease(player, source, ability)
           : undefined;
-      const caps = [manaX, sacrificeX, exileX, discardX, revealX, counterX, loyaltyX].filter(
+      const caps = [manaX, sacrificeX, tapOthersX, exileX, discardX, revealX, counterX, loyaltyX].filter(
         (n): n is number => n !== undefined,
       );
       const maxX = caps.length === 0 ? undefined : Math.min(...caps);
@@ -3139,7 +3146,12 @@ export class Game {
             ? { sacrifice: { choices: this.sacrificeCandidates(player, source, ability) } }
             : {}),
           ...(() => {
-            const tapCost = this.abilityTapCostOffer(player, source, ability);
+            const tapCost = this.abilityTapCostOffer(
+              player,
+              source,
+              ability,
+              xCost?.minX !== undefined && xCost.minX === xCost.maxX ? xCost.minX : 0,
+            );
             return tapCost === null ? {} : { tapCost };
           })(),
           ...(ability.cost.waterbend === true
@@ -3194,12 +3206,19 @@ export class Game {
       }
       // How much X is left depends on a taxed target, so an X ability is
       // offered once per X too.
-      if (maxX !== undefined && (taxed || ability.targets.some(targetSpecReadsX) || groupReadsX(ability.targets))) {
+      const tapsX = ability.cost.tapOthers?.count === "x";
+      if (maxX !== undefined && (taxed || tapsX || ability.targets.some(targetSpecReadsX) || groupReadsX(ability.targets))) {
         // "Target Saga card with mana value X": what may be targeted depends
         // on X, so the ability is offered once per X that has a legal set of
         // targets, each with that X fixed and that X's options. So is "X
-        // target cards" (Shigeki's channel): the group is X big at each.
+        // target cards" (Shigeki's channel): the group is X big at each. And
+        // "Tap X untapped artifacts": what there is to tap depends on that X's
+        // mana, and the offer's `tapCost` says how many.
         for (let x = minX; x <= maxX; x += 1) {
+          if (tapsX) {
+            const tapCost = this.abilityTapCostOffer(player, source, ability, x);
+            if (tapCost === null || !this.tapOfferPayable(tapCost)) continue;
+          }
           const specs = this.activatedSpecsAt(ability.targets, source, player, x);
           const all = this.targetOptionsFor(specs, player, this.permanentSource(source, x));
           const options = taxed ? affordable(all, x) : all;
@@ -18977,7 +18996,7 @@ export class Game {
     }
     if (ability.cost.tapOthers !== undefined) {
       // The tap half is checked against the same mana — see `tapCostOffer`.
-      const offer = this.abilityTapCostOffer(player, sourceId, ability);
+      const offer = this.abilityTapCostOffer(player, sourceId, ability, x ?? ability.minX ?? 0);
       if (offer === null) return `${player} cannot pay for ${def.name}'s ability`;
       if (!this.tapOfferPayable(offer)) {
         return offer.totalPower !== undefined
@@ -19319,7 +19338,7 @@ export class Game {
         const offer = this.tapCostOffer(
           player,
           sourceId,
-          ability.cost.tapOthers,
+          tapOthersAtX(ability.cost.tapOthers, xValue),
           manaCost,
           ability.cost.tap || ability.zone !== undefined ? undefined : sourceId,
           ability.cost.tap ? sourceId : undefined,
@@ -21496,6 +21515,8 @@ export class Game {
       types: [...effectiveTypes(this.state, this.registry, object)],
       subtypes: [...effectiveSubtypes(this.state, this.registry, object)],
       supertypes: [...supertypesOf(this.registry, object)],
+      object: id,
+      stint: object.zoneChangeCount ?? 0,
     };
   }
 
@@ -32975,8 +32996,6 @@ export class Game {
     player: PlayerId,
     sourceId: ObjectId,
     spec: {
-      readonly count: number;
-      readonly totalPower?: number;
       readonly filter: CardFilter;
       readonly includeSelf?: boolean;
     },
@@ -33050,6 +33069,7 @@ export class Game {
       readonly totalPower?: number;
       readonly filter: CardFilter;
       readonly includeSelf?: boolean;
+      readonly shareCreatureType?: true;
     },
     manaCost: ManaCost,
     avoid: ObjectId | undefined,
@@ -33066,11 +33086,26 @@ export class Game {
     });
     if (plan === null) return null;
     const used = new Set(plan.steps.map((step) => step.source));
-    const choices = candidates.filter((id) => !used.has(id));
+    const unused = candidates.filter((id) => !used.has(id));
+    const allCopies: Record<ObjectId, number> = {};
+    for (const id of unused) {
+      const n = this.state.objects[id].stackCount ?? 1;
+      if (n > 1) allCopies[id] = n;
+    }
+    // "That share a creature type": only those with enough others to do it.
+    let choices = unused;
+    let creatureTypes: Record<ObjectId, readonly string[]> | undefined;
+    if (spec.shareCreatureType === true) {
+      const types: Record<ObjectId, readonly string[]> = {};
+      for (const id of unused) types[id] = effectiveSubtypes(this.state, this.registry, this.state.objects[id]);
+      const fit = tapShareFit({ count: spec.count, choices: unused, copies: allCopies, creatureTypes: types });
+      choices = unused.filter((id) => fit.has(id));
+      creatureTypes = {};
+      for (const id of choices) creatureTypes[id] = types[id];
+    }
     const copies: Record<ObjectId, number> = {};
     for (const id of choices) {
-      const n = this.state.objects[id].stackCount ?? 1;
-      if (n > 1) copies[id] = n;
+      if (allCopies[id] !== undefined) copies[id] = allCopies[id];
     }
     // Crew's total power (rule 702.122a): each creature's power as the cost
     // is paid — nothing can change it once the activation is announced (the
@@ -33084,23 +33119,26 @@ export class Game {
       choices,
       ...(Object.keys(copies).length > 0 ? { copies } : {}),
       ...(spec.totalPower !== undefined ? { totalPower: spec.totalPower, power } : {}),
+      ...(creatureTypes !== undefined ? { creatureTypes } : {}),
     };
   }
 
   /** {@link tapCostOffer} for an activated ability's `tapOthers`, with its
-   * mana paid the way `activateAbility` pays it (X at 0). `null` when the
-   * ability has no such cost or its mana can't be paid. */
+   * mana paid the way `activateAbility` pays it, at this X ("Tap X untapped
+   * artifacts" taps that many). `null` when the ability has no such cost or
+   * its mana can't be paid. */
   private abilityTapCostOffer(
     player: PlayerId,
     sourceId: ObjectId,
     ability: ActivatedAbility,
+    x = 0,
   ): TapCostOffer | null {
     if (ability.cost.tapOthers === undefined) return null;
     return this.tapCostOffer(
       player,
       sourceId,
-      ability.cost.tapOthers,
-      this.activatedAbilityManaCost(player, sourceId, ability).cost,
+      tapOthersAtX(ability.cost.tapOthers, x),
+      this.activatedAbilityManaCost(player, sourceId, ability, x).cost,
       ability.cost.tap || ability.zone !== undefined ? undefined : sourceId,
       ability.cost.tap ? sourceId : undefined,
       { kind: "ability", source: sourceId, ability },
@@ -33191,6 +33229,10 @@ export class Game {
         return `${what} names ${name} more times than there are to tap`;
       }
       named.set(id, times);
+    }
+    const types = offer.creatureTypes;
+    if (types !== undefined && !shareACreatureType(tap.map((id) => types[id] ?? []))) {
+      return `${what} taps creatures that share a creature type`;
     }
     return null;
   }

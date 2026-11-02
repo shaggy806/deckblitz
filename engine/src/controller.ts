@@ -17,7 +17,7 @@ import type {
   TapCostOffer,
 } from "./actions.js";
 import { abilityLifeCost } from "./abilities.js";
-import { convokeProofFor, defaultTapPicks, delvePicks, fillModes, fitModeSet, tapPicksPower } from "./actions.js";
+import { convokeProofFor, defaultTapPicks, delvePicks, fillModes, fitModeSet, tapPicksPower, tapShareChoices } from "./actions.js";
 import { obeyingLure } from "./combat/blocking.js";
 import { whyCannotAttack } from "./combat/eligibility.js";
 import { defaultAssignment } from "./combat/damage.js";
@@ -1427,7 +1427,9 @@ export class ScriptedController implements PlayerController {
  */
 function randomTapPicks(offer: TapCostOffer, pickIndex: (n: number) => number): ObjectId[] {
   const pool: ObjectId[] = [];
-  for (const id of offer.choices) {
+  // "That share a creature type": all from one type's. Only such an offer draws
+  // for it, so no other's seed moves.
+  for (const id of offer.creatureTypes === undefined ? offer.choices : tapShareChoices(offer, pickIndex)) {
     // Under crew, a creature with no power to give would only lower the total.
     if (offer.totalPower !== undefined && (offer.power?.[id] ?? 0) <= 0) continue;
     for (let i = 0; i < (offer.copies?.[id] ?? 1); i += 1) pool.push(id);

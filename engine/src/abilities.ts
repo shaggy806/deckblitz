@@ -151,11 +151,17 @@ export function loyaltyDelta(ability: ActivatedAbility, x: number | undefined): 
 export function costAnnouncesX(cost: AbilityCost): boolean {
   return (
     sacrificeCostReadsX(cost) ||
+    cost.tapOthers?.count === "x" ||
     cost.discard?.count === "x" ||
     cost.exileFromGraveyard?.count === "x" ||
     cost.reveal?.count === "x" ||
     cost.removeCounter?.count === "x"
   );
+}
+
+/** A `tapOthers` cost with its count read at `x` ("Tap X untapped artifacts"). */
+export function tapOthersAtX<T extends { readonly count: number | "x" }>(spec: T, x: number): T & { readonly count: number } {
+  return { ...spec, count: spec.count === "x" ? Math.max(0, Math.floor(x)) : spec.count };
 }
 
 /**
@@ -444,9 +450,19 @@ export interface AbilityCost {
    * offered as `tapCost`), because it matters: a creature tapped for the cost
    * can't attack or block this turn. A driver that doesn't choose gets the
    * summoning-sick ones first — they couldn't attack anyway.
+   *
+   * `count: "x"` is "Tap X untapped artifacts you control" (Secluded
+   * Starforge, Aryel): an X announced as it's activated (rule 107.3a), which
+   * the effect and a target's filter read. It's offered once per X, each with
+   * that many to pick and what's left once that X's mana is paid.
+   *
+   * `shareCreatureType` is the total constraint "that share a creature type"
+   * (Weight of Conscience): the offer's `creatureTypes` says what each choice
+   * has, and a choice of creatures with no type in common is refused.
    */
   readonly tapOthers?: {
-    readonly count: number;
+    readonly count: number | "x";
+    readonly shareCreatureType?: true;
     /** Crew's form instead of a count (rule 702.122a): "tap **any number**
      * of other untapped creatures you control with **total power N or
      * greater**". `count` is then 0 and ignored; the tapped creatures'

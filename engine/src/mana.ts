@@ -128,6 +128,10 @@ export interface ManaOrigin {
   readonly types: readonly CardType[];
   readonly subtypes: readonly string[];
   readonly supertypes: readonly Supertype[];
+  /** Which permanent made it, and its stint on the battlefield (rule 400.7) —
+   * "mana produced by Barracks of the Thousand". */
+  readonly object?: ObjectId;
+  readonly stint?: number;
 }
 
 /** Which sources of mana count — a `CardFilter.manaFrom` clause. Every field
@@ -136,6 +140,9 @@ export interface ManaFromSpec {
   readonly type?: CardType;
   readonly subtype?: string;
   readonly supertype?: Supertype;
+  /** The filter's source itself made it — its current stint on the
+   * battlefield. The caller compares that (`CardFilter.manaFrom` does). */
+  readonly fromSource?: true;
 }
 
 /** Whether mana made by `origin` is mana from what `spec` names. A source

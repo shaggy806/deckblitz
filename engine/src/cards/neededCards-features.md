@@ -2785,6 +2785,19 @@ needing their own keys or checks: Curse of Hospitality's "creatures attacking en
 player", and the double-faced Radiant Grace, Faithbound Judge and Accursed Witch, for
 `author-freed`; the two `amount:curses-attached-to-player` Curses wait on that key.
 
+### Tapping a counted or totalled set — built 2026-11-01
+
+The group `cost:tap-x-untapped-cost` (+ `cost:tap-creatures-sharing-creature-type`,
+`effect:tap-x-then`, `cost:tap-cost-transform-trigger`). `tapOthers.count: "x"` is
+offered once per X, each with its own `tapCost.count` and what that X's mana leaves;
+`shareCreatureType` puts each choice's subtypes on the offer (`creatureTypes`) and
+refuses a pick with nothing in common. The effect forms needed nothing new. New with
+them, `manaFrom.fromSource` and `ManaOrigin.object`/`stint`. Proving: Secluded
+Starforge, Necron Overlord, Aryel, Weight of Conscience, Thousand Moons Smithy //
+Barracks of the Thousand. Left on the key's cards: Resonance Technician's "target
+spell with mana value X" (a `stack` target doesn't read X yet), Cryptic Gateway's
+`filter:shares-creature-type-with-this-way`, Invasion of New Phyrexia's emblem.
+
 ### Sacrifice costs of a number, in parts, and in a mana ability — built 2026-11-01
 
 The group `cost:sacrifice-multiple` (+ `cost:sacrifice-x-mana-ability`,

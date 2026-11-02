@@ -2,6 +2,10 @@
  "generated": "2026-09-22",
  "source": "Per-commander triage of every unimplemented top-commanders.txt entry (AI agents reading Oracle text + rulings against the engine), normalized onto one feature vocabulary. See neededCards-features.md, 'The commander gap'.",
  "built": [
+  "cost:tap-x-untapped-cost",
+  "cost:tap-creatures-sharing-creature-type",
+  "effect:tap-x-then",
+  "cost:tap-cost-transform-trigger",
   "cost:sacrifice-multiple",
   "cost:sacrifice-x-mana-ability",
   "cost:tap-creatures-total-power",

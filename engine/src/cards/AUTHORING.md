@@ -2606,8 +2606,9 @@ Equipment, or an Aura controlled by the permanent's *own* controller.
 `manaSpent` compares the mana spent to cast it (The Emperor of Palamecia's
 cast trigger filters on `{ manaSpent: { op: "gte", n: 4 } }`). `manaFrom` asks
 where that mana came from: `{ type: "artifact" }` is "if mana from an artifact
-was spent to cast it", `{ subtype: "Treasure" }` "…from a Treasure", and
-`atLeast` (default 1) how many units ("two or more mana from creatures" is `{
+was spent to cast it", `{ subtype: "Treasure" }` "…from a Treasure",
+`{ fromSource: true }` "using mana produced by [this]" (Barracks of the
+Thousand), and `atLeast` (default 1) how many units ("two or more mana from creatures" is `{
 type: "creature", atLeast: 2 }`). Each unit is read off its source as it made
 the mana — a Treasure sacrificed for it was still a Treasure — and extra mana a
 triggered mana ability added is that ability's permanent's, not the one tapped.
@@ -3422,13 +3423,20 @@ tapOthers?, untap? }`.
   ability, nor beside another cost that asks. A spell's "as an additional
   cost" is `additionalCost.putFromExile` (Processor Assault).
   `put-exiled-into-graveyard.test.ts`.
-- `tapOthers: { count, filter, includeSelf? }` — tap *other* permanents you
-  control (Gravespawn Sovereign's "Tap five untapped Zombies you control"), as
-  opposed to `tap`, which taps the source. `includeSelf` lets the source be
-  one of them, which it can be when the ability has no `{T}` of its own. The
-  player picks which (`tapCost` on the offer, `tap` on the action), a token
-  stack paying token by token; one creature never pays both this and the
-  mana half of the same cost. `totalPower: N` (with `count: 0`) is crew's
+- `tapOthers: { count, filter, includeSelf?, shareCreatureType? }` — tap *other*
+  permanents you control (Gravespawn Sovereign's "Tap five untapped Zombies you
+  control"), as opposed to `tap`, which taps the source. `includeSelf` lets the
+  source be one of them, which it can be when the ability has no `{T}` of its
+  own. The player picks which (`tapCost` on the offer, `tap` on the action), a
+  token stack paying token by token; one creature never pays both this and the
+  mana half of the same cost. `count: "x"` is "Tap X untapped artifacts you
+  control" (Secluded Starforge, Aryel, Necron Overlord): X announced as it's
+  activated and read by the effect and a target's filter, offered once per X.
+  `shareCreatureType` is "that share a creature type" (Weight of Conscience).
+  `tap-cost-counted.test.ts`. As an effect, "you may tap five…; if you do" is a
+  `may` over a `choose-permanents` with `min`, behind a `controls` condition
+  (Thousand Moons Smithy); "tap any number…; when you do" a `reflexive-trigger`
+  with `value: { thisWay: "tapped" }`. `totalPower: N` (with `count: 0`) is crew's
   form instead: any number of them whose powers add up to N or more, the
   offer carrying each one's power (`TapCostOffer.totalPower` / `power`) —
   write it with the `crew(n)` helper.

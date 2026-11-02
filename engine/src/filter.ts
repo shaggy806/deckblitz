@@ -1909,9 +1909,20 @@ export function matchesFilter(
   if (filter.manaFrom !== undefined) {
     const spec = filter.manaFrom;
     const origins = (live !== undefined ? live.manaSpentFrom : lki!.manaSpentFrom) ?? [];
-    if (origins.filter((origin) => manaOriginMatches(origin, spec)).length < (spec.atLeast ?? 1)) {
-      return false;
-    }
+    const made = origins.filter((origin) => manaOriginMatches(origin, spec));
+    // "Using mana produced by Barracks of the Thousand": this permanent, in
+    // this stint on the battlefield.
+    const source = ctx.source === undefined ? undefined : state.objects[ctx.source];
+    const fromSource =
+      spec.fromSource !== true
+        ? made
+        : made.filter(
+            (origin) =>
+              source !== undefined &&
+              origin.object === ctx.source &&
+              origin.stint === (source.zoneChangeCount ?? 0),
+          );
+    if (fromSource.length < (spec.atLeast ?? 1)) return false;
   }
   if (filter.manaSpentOfColors !== undefined || filter.manaSpentOfOneColor !== undefined) {
     const byColor = (live !== undefined ? live.manaSpentByColor : lki!.manaSpentByColor) ?? {};
