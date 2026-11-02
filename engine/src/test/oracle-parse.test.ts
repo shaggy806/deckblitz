@@ -24,6 +24,56 @@ import { parseEffect, parseFace, parseTrigger, parseCost, parseSentence, parseTy
 // @ts-expect-error — as above.
 import { checkPool } from "../../scripts/oracle-parse-check.mjs";
 
+describe("when a spell may be cast or an ability activated", () => {
+  const face = (type_line: string, oracle_text: string) =>
+    parseFace({ name: "Test Card", type_line, oracle_text, mana_cost: "{7}", colors: [], cmc: 7 } as never) as unknown as Record<string, unknown> & {
+      static?: Record<string, unknown>[];
+      activated?: Record<string, unknown>[];
+    };
+  const staticOf = (text: string): Record<string, unknown> | undefined => face("Artifact", text).static?.[0];
+
+  it("reads flash for an extra cost, and a condition on being countered", () => {
+    expect(face("Sorcery", "You may cast this spell as though it had flash if you pay {2} more to cast it. (You may cast it any time you could cast an instant.)").kicker).toEqual({
+      cost: "{2}",
+      keyword: "flash",
+      flash: true,
+    });
+    expect(face("Sorcery", "Spell mastery — If there are two or more instant and/or sorcery cards in your graveyard, this spell can't be countered.").cantBeCountered).toEqual({
+      kind: "cards-in-graveyard",
+      atLeast: 2,
+      filter: { typesAnyOf: ["instant", "sorcery"] },
+    });
+  });
+
+  it("reads only your opponents activating", () => {
+    const ability = face("Enchantment", "{3}: Destroy this enchantment. Only your opponents may activate this ability and only as a sorcery.").activated?.[0];
+    expect(ability?.anyPlayer).toBe(true);
+    expect(ability?.onlyOpponents).toBe(true);
+    expect(ability?.sorcerySpeed).toBe(true);
+  });
+
+  it("reads the statics of timing, haste and loyalty", () => {
+    expect(staticOf("Each opponent can cast spells only any time they could cast a sorcery.")?.prohibits).toEqual({
+      who: "opponents",
+      castOnlyAsSorcery: true,
+    });
+    expect(staticOf("You may activate abilities of creatures you control as though those creatures had haste.")?.activateAsThoughHaste).toEqual({ type: "creature" });
+    expect(staticOf("You may activate the loyalty abilities of planeswalkers you control twice each turn rather than only once.")?.loyaltyActivationsEachTurn).toBe(2);
+    expect(staticOf("Players can't activate planeswalkers' loyalty abilities.")?.prohibits).toEqual({
+      who: "each-player",
+      abilitiesOf: { type: "planeswalker" },
+      onlyLoyaltyAbilities: true,
+    });
+    expect(staticOf("Enchanted player can't activate abilities that aren't mana abilities or loyalty abilities.")?.prohibits).toEqual({
+      who: "enchanted-player",
+      abilitiesOf: {},
+      anyZone: true,
+      exceptManaAbilities: true,
+      exceptLoyaltyAbilities: true,
+    });
+  });
+});
+
 describe("what a spell costs: amounts, colours and targets", () => {
   const always = { kind: "controls", filter: {}, atLeast: 0 };
   const face = (type_line: string, oracle_text: string) =>

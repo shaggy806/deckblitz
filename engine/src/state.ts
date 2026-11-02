@@ -372,6 +372,9 @@ export interface GameObject {
    * (rule 606.3 — at most one per turn). Reset in the controller's untap step.
    */
   loyaltyActivatedThisTurn: boolean;
+  /** How many, while `loyaltyActivatedThisTurn` — Oath of Teferi's second (rule
+   * 606.3). Stale, and unread, once that's false. */
+  loyaltyActivationsThisTurn?: number;
   /**
    * Indices of this permanent's activated abilities marked
    * `oncePerTurn` that have already been used this turn (rule 602.5g —
@@ -4867,8 +4870,12 @@ export interface CombatDamageState {
  */
 export interface PlayerEffect {
   readonly owner: PlayerId;
-  /** Gone at this turn's cleanup, or as `owner`'s next turn begins. */
-  readonly expires: { readonly kind: "end-of-turn" } | { readonly kind: "your-next-turn" };
+  /** Gone at this turn's cleanup, as `owner`'s next turn begins, or at the
+   * cleanup of that turn (Single Combat's "until the end of your next turn"). */
+  readonly expires:
+    | { readonly kind: "end-of-turn" }
+    | { readonly kind: "your-next-turn" }
+    | { readonly kind: "end-of-your-next-turn" };
   /** Matching spells `owner` casts cost this much generic mana less — the
    * amount read as the effect was created (rule 611.2b). */
   readonly reduceSpells?: {

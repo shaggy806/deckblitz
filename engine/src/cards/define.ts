@@ -2138,6 +2138,18 @@ export interface StaticAbility {
     /** "…can't be activated **unless they're mana abilities**" (Pithing
      * Needle): `abilitiesOf` leaves mana abilities alone. */
     readonly exceptManaAbilities?: true;
+    /** "…can't activate abilities that aren't mana abilities **or loyalty
+     * abilities**" (Overwhelming Splendor): `abilitiesOf` leaves loyalty
+     * abilities alone too. */
+    readonly exceptLoyaltyAbilities?: true;
+    /** "Players can't activate planeswalkers' **loyalty abilities**" (The
+     * Immortal Sun): `abilitiesOf` bars only those (rule 606). */
+    readonly onlyLoyaltyAbilities?: true;
+    /** "Each opponent can cast spells **only any time they could cast a
+     * sorcery**" (Teferi, Time Raveler): a prohibition, so it stops a cast at
+     * any other time whatever would allow it, flash included (rules 101.2,
+     * 601.3). With no `spells`, it stands alone. */
+    readonly castOnlyAsSorcery?: true;
     /** "…its activated abilities **with {T} in their costs** can't be
      * activated" (Serra Bestiary): `abilitiesOf` bars only abilities whose
      * cost taps the permanent, mana abilities among them. */
@@ -2164,6 +2176,17 @@ export interface StaticAbility {
      * 101.2). */
     readonly notFrom?: readonly ZoneType[];
   };
+  /** "You may activate abilities of creatures you control as though those
+   * creatures had haste" (Thousand-Year Elixir, Shang-Chi): this permanent's
+   * controller may pay {T} and {Q} on creatures matching this that they've
+   * not controlled continuously since their turn began (rule 302.6). It gives
+   * no haste: they still can't attack. */
+  readonly activateAsThoughHaste?: CardFilter;
+  /** "You may activate the loyalty abilities of planeswalkers you control
+   * **twice each turn** rather than only once" (Oath of Teferi, rule 606.3):
+   * how many times this permanent's controller may. Two of them are still
+   * twice (its ruling). */
+  readonly loyaltyActivationsEachTurn?: 2;
   /** "You may cast spells as though they had flash" (Heliod, the Warped
    * Eclipse) — every spell (`true`) or ones matching a filter ("creature
    * spells"), for this permanent's controller. */
@@ -3953,8 +3976,13 @@ export interface CardDefinition {
      * quality with `fromHand`, and the kicked variant the one that reveals,
      * offered only with such a card in hand (the spell itself, already on the
      * stack, never one). See `orControls`.
+     *
+     * `"flash"` is "you may cast this spell as though it had flash **if you
+     * pay {N} more** to cast it" (Rout, Harbinger of the Tides): `cost` is
+     * `"{N}"`, with `flash: true`. It's a cost to begin it at that time (rule
+     * 601.3c), not kicker: the spell isn't a kicked one to anything else.
      */
-    readonly keyword?: "offspring" | "gift" | "teamwork" | "blight" | "behold" | "waterbend" | "squad" | "collect-evidence" | "bargain" | "entwine" | "buyback" | "replicate" | "reveal";
+    readonly keyword?: "offspring" | "gift" | "teamwork" | "blight" | "behold" | "waterbend" | "squad" | "collect-evidence" | "bargain" | "entwine" | "buyback" | "replicate" | "reveal" | "flash";
     /**
      * "This spell costs {N} less to cast if it's bargained" (Ice Out,
      * Hamlet Glutton): N generic off the kicked variant's total cost, after
@@ -4834,7 +4862,10 @@ export interface CardDefinition {
   /** "This spell can't be countered." (rule 701.5f) — a `counter` effect / a
    * ward "counter it" clause does nothing to this spell. `false` for normal
    * cards. */
-  readonly cantBeCountered: boolean;
+  /** A condition is "**if** [it holds], this spell can't be countered" (Spell
+   * mastery — Exquisite Firecraft), read from the spell's side at the moment
+   * something would counter it. */
+  readonly cantBeCountered: boolean | StaticCondition;
   /** "You may cast this spell as though it had flash. If you cast it any time
    * a sorcery couldn't have been cast, the controller of the permanent it
    * becomes sacrifices it at the beginning of the next cleanup step" (the
@@ -5120,7 +5151,7 @@ const PRINTED_ABILITY: {
   chapters: (def) => def.chapters !== null && def.chapters.length > 0,
   readAhead: (def) => def.readAhead,
   faces: false,
-  cantBeCountered: (def) => def.cantBeCountered,
+  cantBeCountered: (def) => def.cantBeCountered !== false,
   flashThenSacrifice: (def) => def.flashThenSacrifice,
   commanderTaxAsLife: (def) => def.commanderTaxAsLife,
   exileOnResolve: (def) => def.exileOnResolve,
@@ -5241,7 +5272,7 @@ interface CardDraft {
     readonly cost: string;
     readonly targets?: readonly TargetSpec[];
     readonly effect?: EffectSpec;
-    readonly keyword?: "offspring" | "gift" | "teamwork" | "blight" | "behold" | "waterbend" | "squad" | "collect-evidence" | "bargain" | "entwine" | "buyback" | "replicate" | "reveal";
+    readonly keyword?: "offspring" | "gift" | "teamwork" | "blight" | "behold" | "waterbend" | "squad" | "collect-evidence" | "bargain" | "entwine" | "buyback" | "replicate" | "reveal" | "flash";
     readonly reduceGeneric?: number;
     readonly behold?: BeholdSpec;
     readonly orControls?: CardFilter;
@@ -5368,7 +5399,7 @@ interface CardDraft {
   /** See {@link CardDefinition.readAhead}. */
   readAhead?: true;
   faces?: readonly string[];
-  cantBeCountered?: boolean;
+  cantBeCountered?: boolean | StaticCondition;
   /** See {@link CardDefinition.flashThenSacrifice}. */
   flashThenSacrifice?: true;
   commanderTaxAsLife?: boolean;

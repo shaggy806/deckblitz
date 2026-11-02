@@ -1900,7 +1900,9 @@ export function spellHasSplitSecond(state: GameState, registry: CardRegistry, sp
  * alongside this. */
 export function spellCantBeCountered(state: GameState, registry: CardRegistry, spell: GameObject): boolean {
   if (spell.kind !== "card") return false;
-  if (registry.get(rulesTextName(spell)).cantBeCountered) return true;
+  const printed = registry.get(rulesTextName(spell)).cantBeCountered;
+  if (printed === true) return true;
+  if (printed !== false && staticConditionMet(state, registry, spell, printed)) return true;
   for (const id of state.zones.shared.battlefield) {
     const source = state.objects[id];
     if (source === undefined) continue;

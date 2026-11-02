@@ -3643,3 +3643,20 @@ Vine Gecko ("kicked" isn't a spell filter as it's priced), Mavinda, an ability
 reduced by its target's stats, and several reductions a multi-target spell needs
 at once: `reducingTargets` keeps one earning target, so two needed is refused at
 the cast rather than narrowed in the offer.
+
+**When a spell may be cast or an ability activated (2026-11-01,
+`effect:cast-and-activate-restrictions`).** A kicker keyword `"flash"` for "as
+though it had flash if you pay {N} more" (rule 601.3c), not a kicked spell;
+`onlyOpponents` on an ability; `prohibits.onlyLoyaltyAbilities`,
+`exceptLoyaltyAbilities`, `castOnlyAsSorcery`; `activateAsThoughHaste` (rule
+302.6); `loyaltyActivationsEachTurn` (rule 606.3; a permanent's count kept beside
+its flag); rule 205.4e in `whyProhibitedFromCasting`; `cantBeCountered` under a
+condition; a `player-effect` lasting to the end of your next turn. Proving cards:
+Rout, Saproling Symbiosis, Harbinger of the Tides, Detention Vortex, The Immortal
+Sun, Overwhelming Splendor, Thousand-Year Elixir, Oath of Teferi, Reflector Mage,
+Single Combat, Teferi, Time Raveler, Urza's Ruinous Blast, Exquisite Firecraft,
+Steel Golem. Not covered: Tegwyll's Scouring (flash by tapping creatures, not
+mana), Revel in Silence's one-shot loyalty ban (`prohibit`'s `abilities` is
+all-or-nothing), Urza Assembles the Titans and Kaito's one-shot "twice this turn",
+Yuriko's "attacks a player alone", Iona's chosen colour, Void Winnower's parity
+and Inventive Iteration's same mana value.

@@ -590,6 +590,10 @@ export interface ActivatedAbility {
    * so "you" in it is them. With `sorcerySpeed`, "but only as a sorcery" — the
    * activator's main phase. */
   readonly anyPlayer?: true;
+  /** "**Only your opponents** may activate this ability" (Detention Vortex,
+   * Oft-Nabbed Goat): an opponent of the permanent's controller may, as with
+   * `anyPlayer`, and its controller may not. */
+  readonly onlyOpponents?: true;
   /** One of reconfigure's two abilities (rule 702.151a — the `reconfigure`
    * helper): what lets an Equipment that's a creature equip (301.5c). */
   readonly reconfigure?: "attach" | "unattach";

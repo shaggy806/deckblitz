@@ -3339,8 +3339,9 @@ export class Game {
       if (!own && !this.registry.get(rulesTextName(object)).activated.some((a) => a.anyPlayer === true)) continue;
       this.effectiveActivated(source, abilityGrantors).forEach((ability, index) => {
         // Another player's permanent: only what says any player may activate
-        // it (rule 602.2).
+        // it (rule 602.2). Its controller's own: not what only opponents may.
         if (!own && ability.anyPlayer !== true) return;
+        if (own && ability.onlyOpponents === true) return;
         // "Add one mana of any color" (Command Tower) is one ability with
         // several outcomes; enumerate it once per outcome so activating it on
         // its own is a real choice rather than whatever the engine's default
@@ -7566,9 +7567,15 @@ export class Game {
     this.state.players[this.activePlayer].lastTurnTaken = this.state.turn.number;
     this.beginPlayerControl("next-turn");
     if (this.state.playerEffects !== undefined) {
-      this.state.playerEffects = this.state.playerEffects.filter(
-        (e) => !(e.expires.kind === "your-next-turn" && beginningFor.includes(e.owner)),
-      );
+      this.state.playerEffects = this.state.playerEffects
+        .filter((e) => !(e.expires.kind === "your-next-turn" && beginningFor.includes(e.owner)))
+        // "Until the end of your next turn": this is that turn, so this
+        // turn's cleanup ends it.
+        .map((e) =>
+          e.expires.kind === "end-of-your-next-turn" && beginningFor.includes(e.owner)
+            ? { ...e, expires: { kind: "end-of-turn" as const } }
+            : e,
+        );
     }
     // A permanent that phased out under a player who has left the game phases
     // in during the next untap step after that player's next turn would have
@@ -19307,6 +19314,9 @@ export class Game {
       if (source.controller !== player && ability.anyPlayer !== true) {
         return `${player} does not control that permanent`;
       }
+      if (source.controller === player && ability.onlyOpponents === true) {
+        return `only ${player}'s opponents may activate that ability`;
+      }
       // What was granted it after it lost them, it has (rule 613.7) — those
       // are left out of `effectiveActivated` when they came before.
       if (abilityIndex < this.registry.get(rulesTextName(source)).activated.length && hasLostAbilities(this.state, this.registry,source)) {
@@ -19328,7 +19338,7 @@ export class Game {
         }
       }
     }
-    if (this.abilitiesProhibited(player, source, isManaAbility(ability), ability.cost.tap)) {
+    if (this.abilitiesProhibited(player, source, isManaAbility(ability), ability.cost.tap, ability.loyaltyCost !== undefined)) {
       return `${player} can't activate ${def.name}'s abilities`;
     }
     if (
@@ -19393,7 +19403,10 @@ export class Game {
         ? null
         : this.whyNotSorcerySpeed(player, `activate ${def.name}'s loyalty ability`);
       if (timing !== null) return timing;
-      if (source.loyaltyActivatedThisTurn) {
+      if (
+        source.loyaltyActivatedThisTurn &&
+        (source.loyaltyActivationsThisTurn ?? 1) >= this.loyaltyActivationsAllowed(player)
+      ) {
         return `a loyalty ability of ${def.name} has already been activated this turn`;
       }
       // A "−X" cost removes the X announced (rule 107.3a), so it needs that
@@ -19984,6 +19997,7 @@ export class Game {
     const loyaltyPaid = this.modifiedLoyaltyDelta(player, sourceId, ability, chosenX);
     if (loyaltyPaid !== undefined) {
       source.counters.loyalty = (source.counters.loyalty ?? 0) + loyaltyPaid;
+      source.loyaltyActivationsThisTurn = (source.loyaltyActivatedThisTurn ? (source.loyaltyActivationsThisTurn ?? 1) : 0) + 1;
       source.loyaltyActivatedThisTurn = true;
       this.emit({
         type: "loyalty-changed",
@@ -21474,8 +21488,43 @@ export class Game {
     return (
       effectiveTypes(this.state, this.registry, object).includes("creature") &&
       this.hasSummoningSickness(object) &&
-      !this.objHasKeyword(object.id, "haste")
+      !this.objHasKeyword(object.id, "haste") &&
+      !this.activatesAsThoughHaste(object)
     );
+  }
+
+  /** "You may activate abilities of creatures you control as though those
+   * creatures had haste" (Thousand-Year Elixir): a static of `object`'s
+   * controller's that reaches it (rule 302.6). */
+  private activatesAsThoughHaste(object: GameObject): boolean {
+    return this.state.zones.shared.battlefield.some((id) => {
+      const source = this.state.objects[id];
+      if (source === undefined || source.controller !== object.controller) return false;
+      if (hasLostAbilities(this.state, this.registry, source)) return false;
+      return this.registry.get(rulesTextName(source)).static.some(
+        (ability) =>
+          ability.activateAsThoughHaste !== undefined &&
+          this.staticActive(source, ability) &&
+          matchesFilter(this.state, this.registry, object.id, ability.activateAsThoughHaste, {
+            you: source.controller,
+            source: source.id,
+          }),
+      );
+    });
+  }
+
+  /** How many times `player` may activate loyalty abilities of a permanent
+   * this turn: once (rule 606.3), or twice with Oath of Teferi's static. */
+  private loyaltyActivationsAllowed(player: PlayerId): number {
+    const twice = this.state.zones.shared.battlefield.some((id) => {
+      const source = this.state.objects[id];
+      if (source === undefined || source.controller !== player) return false;
+      if (hasLostAbilities(this.state, this.registry, source)) return false;
+      return this.registry.get(rulesTextName(source)).static.some(
+        (ability) => ability.loyaltyActivationsEachTurn !== undefined && this.staticActive(source, ability),
+      );
+    });
+    return twice ? 2 : 1;
   }
 
   /**
@@ -36059,6 +36108,10 @@ export class Game {
       return `${player} can't cast spells from anywhere other than their hand`;
     }
     for (const { source, prohibits } of this.prohibitionsOn(player)) {
+      // "Only any time they could cast a sorcery" (Teferi, Time Raveler).
+      if (prohibits.castOnlyAsSorcery === true && this.whyNotSorcerySpeed(player, `cast ${def.name}`) !== null) {
+        return `${player} can cast spells only as a sorcery (${printedCardName(source)})`;
+      }
       const spells = prohibits.spells;
       if (spells === undefined || !this.prohibitionReachesZone(prohibits, cardId)) continue;
       if (
@@ -36088,6 +36141,19 @@ export class Game {
     ) {
       return `${def.name} can't be cast now`;
     }
+    // Rule 205.4e: a legendary instant or sorcery needs a legendary creature
+    // or planeswalker of its caster's.
+    if (
+      def.supertypes.includes("legendary") &&
+      (def.types.includes("instant") || def.types.includes("sorcery")) &&
+      this.countBattlefieldMatching(player, {
+        supertype: "legendary",
+        typesAnyOf: ["creature", "planeswalker"],
+        controlledBy: "you",
+      }) === 0
+    ) {
+      return `${player} controls no legendary creature or planeswalker to cast ${def.name} (rule 205.4e)`;
+    }
     return null;
   }
 
@@ -36095,7 +36161,7 @@ export class Game {
    * abilities this turn or by a static — `mana`: the ability is a mana
    * ability, which most prohibitions bar too (Myrel) but some spare (Pithing
    * Needle's "unless they're mana abilities"). */
-  private abilitiesProhibited(player: PlayerId, source: GameObject, mana: boolean, tap = false): boolean {
+  private abilitiesProhibited(player: PlayerId, source: GameObject, mana: boolean, tap = false, loyalty = false): boolean {
     // Detained (rule 701.35a) — the modifier is gone once its duration ends.
     if (source.modifiers.some((m) => m.abilitiesCantBeActivated === true)) return true;
     const turn = this.state.turnProhibitions;
@@ -36117,6 +36183,8 @@ export class Game {
         prohibits.abilitiesOf !== undefined &&
         (onBattlefield || prohibits.anyZone === true) &&
         !(mana && prohibits.exceptManaAbilities === true) &&
+        !(loyalty && prohibits.exceptLoyaltyAbilities === true) &&
+        (prohibits.onlyLoyaltyAbilities !== true || loyalty) &&
         (prohibits.onlyTapAbilities !== true || tap) &&
         matchesFilter(this.state, this.registry, source.id, prohibits.abilitiesOf, {
           you: by.controller,

@@ -4963,7 +4963,7 @@ export type EffectSpec =
        * instead" — `floor: 1`). Angel's Grace, Everybody Lives!.
        */
       readonly kind: "player-effect";
-      readonly duration: "end-of-turn" | "until-your-next-turn";
+      readonly duration: "end-of-turn" | "until-your-next-turn" | "until-end-of-your-next-turn";
       /** `allCasters`: every player's matching spells, not only the
        * controller's — Cheering Fanatic's "spells with the chosen name cost
        * {1} less to cast this turn". */
@@ -4982,7 +4982,8 @@ export type EffectSpec =
        * (`filter: {}`, `lands`, `from: ["hand"]`), judged where the card is
        * as the cast or play begins (601.2a). */
       readonly cantCast?: {
-        readonly who: PlayerScope;
+        /** `{ ownerOfTarget }`: "that creature's owner" (Reflector Mage). */
+        readonly who: PlayerScope | { readonly ownerOfTarget: number };
         readonly filter: CardFilter;
         readonly label: string;
         readonly lands?: true;
@@ -10691,6 +10692,15 @@ function eachPlayerMayAsks(
   return player === undefined || !ctx.playersInScope("each-player").includes(player) ? [] : [player];
 }
 
+/** Who a `player-effect`'s `cantCast` binds as it resolves: a scope, or the
+ * owner of a target, who hasn't left the game. */
+function cantCastPlayers(who: PlayerScope | { readonly ownerOfTarget: number }, ctx: ResolutionContext): readonly PlayerId[] {
+  if (typeof who !== "object" || !("ownerOfTarget" in who)) return ctx.playersInScope(who);
+  const target = ctx.targets[who.ownerOfTarget];
+  const owner = target === undefined || target === null ? undefined : ctx.ownerOf(target);
+  return owner === undefined || !ctx.playersInScope("each-player").includes(owner) ? [] : [owner];
+}
+
 /** Where a card goes in its owner's library — see `put-on-library`. */
 export type LibraryPosition = "top" | "bottom" | { readonly fromTop: number };
 
@@ -14699,7 +14709,12 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "player-effect":
       ctx.addPlayerEffect({
         owner: ctx.controller,
-        expires: spec.duration === "end-of-turn" ? { kind: "end-of-turn" } : { kind: "your-next-turn" },
+        expires:
+          spec.duration === "end-of-turn"
+            ? { kind: "end-of-turn" }
+            : spec.duration === "until-end-of-your-next-turn"
+              ? { kind: "end-of-your-next-turn" }
+              : { kind: "your-next-turn" },
         ...(spec.reduceSpells !== undefined
           ? {
               reduceSpells: {
@@ -14752,7 +14767,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         ...(spec.cantCast !== undefined
           ? {
               cantCast: {
-                players: ctx.playersInScope(spec.cantCast.who),
+                players: cantCastPlayers(spec.cantCast.who, ctx),
                 filter: spec.cantCast.filter,
                 label: spec.cantCast.label,
                 ...(spec.cantCast.lands === true ? { lands: true as const } : {}),

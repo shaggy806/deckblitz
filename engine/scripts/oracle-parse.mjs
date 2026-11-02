@@ -7842,6 +7842,18 @@ export function parseFace(face, ctx = {}) {
       out.flashThenSacrifice = true;
       continue;
     }
+    // "You may cast this spell as though it had flash if you pay {2} more to
+    // cast it" (Rout — rule 601.3c): the extra cost, not kicker.
+    if ((m = /^You may cast ~ as though it had flash if you pay (\{\d+\}) more to cast it\.$/.exec(line))) {
+      out.kicker = { cost: m[1], keyword: "flash", flash: true };
+      continue;
+    }
+    // "Spell mastery — If there are two or more instant and/or sorcery cards
+    // in your graveyard, this spell can't be countered" (Exquisite Firecraft).
+    if (/^(?:Spell mastery — )?If there are two or more instant and\/or sorcery cards in your graveyard, ~ can't be countered\.$/.test(line)) {
+      out.cantBeCountered = { kind: "cards-in-graveyard", atLeast: 2, filter: { typesAnyOf: ["instant", "sorcery"] } };
+      continue;
+    }
     // A spell's own conditional flash (`flashIf`, rules 601.3b, 601.3d):
     // "You may cast this spell as though it had flash if you control a
     // Human / if it targets a commander", "As long as … / If …, you may cast
@@ -8444,6 +8456,14 @@ export function parseFace(face, ctx = {}) {
       // 602.2 — Prophecy's Glittering Lion, Excavation).
       rest = rest.replace(/ Any player may activate this ability( but only as a sorcery)?\.$/, (_x, sorcery) => {
         ability.anyPlayer = true;
+        if (sorcery !== undefined) ability.sorcerySpeed = true;
+        return "";
+      });
+      // "Only your opponents may activate this ability and only as a sorcery"
+      // (Detention Vortex, Oft-Nabbed Goat).
+      rest = rest.replace(/ Only your opponents may activate this ability( and only as a sorcery)?\.$/, (_x, sorcery) => {
+        ability.anyPlayer = true;
+        ability.onlyOpponents = true;
         if (sorcery !== undefined) ability.sorcerySpeed = true;
         return "";
       });
@@ -10365,6 +10385,19 @@ function spellCostStaticOf(line, text) {
 function parseStatic(line, text) {
   const spellCost = spellCostStaticOf(line, text);
   if (spellCost !== null) return spellCost;
+  // Casting and activation rules with one reading each.
+  const fixed = {
+    "Each opponent can cast spells only any time they could cast a sorcery.": { prohibits: { who: "opponents", castOnlyAsSorcery: true } },
+    "You may activate abilities of creatures you control as though those creatures had haste.": { activateAsThoughHaste: { type: "creature" } },
+    "You may activate the loyalty abilities of planeswalkers you control twice each turn rather than only once.": { loyaltyActivationsEachTurn: 2 },
+    "Players can't activate planeswalkers' loyalty abilities.": {
+      prohibits: { who: "each-player", abilitiesOf: { type: "planeswalker" }, onlyLoyaltyAbilities: true },
+    },
+    "Enchanted player can't activate abilities that aren't mana abilities or loyalty abilities.": {
+      prohibits: { who: "enchanted-player", abilitiesOf: {}, anyZone: true, exceptManaAbilities: true, exceptLoyaltyAbilities: true },
+    },
+  }[line];
+  if (fixed !== undefined) return { affects: { scope: "self" }, ...fixed, text };
   let m;
   // Life equal to the mana value for a spell, once a turn (rule 118.9):
   // "Once during each of your turns, you may cast an enchantment spell by
