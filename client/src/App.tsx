@@ -336,6 +336,7 @@ type EnterAttackingAction = Extract<LegalAction, { kind: 'enter-attacking' }>
 type BlockAction = Extract<LegalAction, { kind: 'declare-blockers' }>
 type DiscardAction = Extract<LegalAction, { kind: 'discard' }>
 type ZoneChoiceAction = Extract<LegalAction, { kind: 'choose-from-zone' }>
+type TurnFaceUpAction = Extract<LegalAction, { kind: 'turn-face-up' }>
 type MulliganAction = Extract<LegalAction, { kind: 'mulligan' }>
 type MulliganAbilityAction = Extract<LegalAction, { kind: 'mulligan-hand-ability' }>
 type BottomAction = Extract<LegalAction, { kind: 'put-on-bottom' }>
@@ -1654,7 +1655,7 @@ function Table({
   // X spell (`CastAction`) or an X activated ability (`AbilityAction`, EG-3).
   const [pendingX, setPendingX] = useState<
     | ({
-        readonly action: CastAction | AbilityAction
+        readonly action: CastAction | AbilityAction | TurnFaceUpAction
         readonly value: number
       } & CastPicks)
     | null
@@ -2799,6 +2800,11 @@ function Table({
       startAbilityAtX(action, value)
       return
     }
+    // A morph or disguise cost's {X} (Bane of the Living).
+    if (action.kind === 'turn-face-up') {
+      game.dispatch({ type: 'turn-face-up', player: seat, permanent: action.permanent, morph: true, xValue: value })
+      return
+    }
     // Delve on an {X} spell (rule 702.66a): its range at this X, asked now.
     const range = action.delve?.byX?.[value]
     if (action.delve !== undefined && range !== undefined && picks.delve === undefined && range.maxCards > 0) {
@@ -2816,7 +2822,7 @@ function Table({
       return
     }
     castAtX(action, value, picks)
-  }, [castAtX, pendingX, startAbilityAtX])
+  }, [castAtX, game, pendingX, seat, startAbilityAtX])
 
   const startAbility = useCallback(
     (ab: AbilityAction, sacrifice?: ObjectId) => {
@@ -5678,7 +5684,12 @@ function Table({
   } else if (mode === 'choose-x' && pendingX) {
     const pxMax = pendingX.action.xCost?.maxX ?? 0
     const pxMin = pendingX.action.xCost?.minX ?? 0
-    const pxVerb = pendingX.action.kind === 'activate-ability' ? 'Activate' : 'Cast'
+    const pxVerb =
+      pendingX.action.kind === 'activate-ability'
+        ? 'Activate'
+        : pendingX.action.kind === 'turn-face-up'
+          ? 'Turn face up'
+          : 'Cast'
     controls = (
       <div className="controls">
         <span>
@@ -7098,6 +7109,10 @@ function Table({
               label: `Turn face up — ${up.cardName}, ${up.morph !== undefined ? `${up.morph} ` : ''}${up.cost}`,
               onSelect: () => {
                 setSelectedSource(null)
+                if (up.xCost !== undefined) {
+                  setPendingX({ action: up, value: up.xCost.maxX })
+                  return
+                }
                 game.dispatch({
                   type: 'turn-face-up',
                   player: seat,

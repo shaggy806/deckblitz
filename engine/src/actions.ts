@@ -421,6 +421,8 @@ export type Action =
       readonly player: PlayerId;
       readonly permanent: ObjectId;
       readonly morph?: boolean;
+      /** The X announced for a morph or disguise cost with an `{X}`. */
+      readonly xValue?: number;
     }
   | {
       /** Pay {3} and put your revealed companion into your hand (rule
@@ -1068,6 +1070,9 @@ export type LegalAction =
       readonly cardName: string;
       readonly cost: string;
       readonly morph?: "morph" | "megamorph" | "disguise";
+      /** A morph or disguise cost with an `{X}` (Bane of the Living): the most
+       * X the mana reaches, the X asked for as it's turned up (rule 107.3a). */
+      readonly xCost?: { readonly maxX: number; readonly minX?: number };
     }
   | {
       /** A locked door of one of your Rooms can be unlocked (rule 709.5e):

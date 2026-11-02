@@ -78,7 +78,7 @@ import { defaultRegistry } from "./cards/default-registry.js";
 import { EMBLEM_CARD } from "./cards/emblem.js";
 import { embalmAbility, encoreAbility, ninjutsu, unearth } from "./cards/helpers.js";
 import { bestowedDefinition, licidDefinition, readsGraveyardOrder } from "./cards/define.js";
-import type { CyclingAbility } from "./cards/define.js";
+import type { CyclingAbility, MorphCost } from "./cards/define.js";
 import { DUNGEONS } from "./cards/dungeons.js";
 import { MADNESS_EFFECT, MADNESS_TEXT } from "./cards/madness.js";
 import { MIRACLE_EFFECT, MIRACLE_TEXT } from "./cards/miracle.js";
@@ -2126,7 +2126,7 @@ export class Game {
         this.takeCompanion(action.player);
         break;
       case "turn-face-up":
-        this.turnFaceUp(action.player, action.permanent, action.morph === true);
+        this.turnFaceUp(action.player, action.permanent, action.morph === true, action.xValue ?? 0);
         break;
       case "unlock-door":
         this.payToUnlock(action.player, action.permanent, action.door);
@@ -2370,7 +2370,7 @@ export class Game {
       case "take-companion":
         return this.whyCannotTakeCompanion(action.player);
       case "turn-face-up":
-        return this.whyCannotTurnFaceUp(action.player, action.permanent, action.morph === true);
+        return this.whyCannotTurnFaceUp(action.player, action.permanent, action.morph === true, action.xValue ?? 0);
       case "unlock-door":
         return this.whyCannotUnlock(action.player, action.permanent, action.door);
       case "end-licid-effect":
@@ -3089,7 +3089,19 @@ export class Game {
         out.push({ kind: "turn-face-up", permanent: id, cardName: card.name, cost: card.manaCost ?? "" });
       }
       if (card.morph !== null && this.whyCannotTurnFaceUp(player, id, true) === null) {
-        out.push({ kind: "turn-face-up", permanent: id, cardName: card.name, cost: card.morph.text ?? card.morph.cost, morph: card.morph.keyword });
+        const printed = card.morph;
+        const xCost =
+          parseManaCost(printed.cost).x > 0
+            ? { maxX: this.maxAffordableAbilityX(player, (x) => this.morphManaCost(player, id, printed, x)) }
+            : undefined;
+        out.push({
+          kind: "turn-face-up",
+          permanent: id,
+          cardName: card.name,
+          cost: this.morphCostShown(player, id, printed),
+          morph: printed.keyword,
+          ...(xCost !== undefined ? { xCost } : {}),
+        });
       }
     }
     // Unlocking a Room's locked door (rule 709.5e) — a special action too,
@@ -24651,6 +24663,9 @@ export class Game {
         ? this.enterBatchMatches(trigger, event, object)
         : event.type === "card-cycled"
         ? event.x ?? 0
+        : // The X paid to turn it face up (rules 702.37f, 702.168e).
+          event.type === "permanent-turned-face-up"
+        ? event.x ?? 0
         : event.type === "dice-rolled"
         ? event.results.reduce((n, r) => n + r, 0)
         : // "If you won": 1 for a clash won, 0 for one lost.
@@ -40564,7 +40579,7 @@ export class Game {
    * one with no mana cost (118.6), nor one cast face down. With `morph`, for
    * its morph, megamorph or disguise cost (702.37e, 702.168d) — a card cast
    * face down, or a manifested card with morph (701.40c). */
-  private whyCannotTurnFaceUp(player: PlayerId, id: ObjectId, morph = false): string | null {
+  private whyCannotTurnFaceUp(player: PlayerId, id: ObjectId, morph = false, x = 0): string | null {
     const blocked = this.whyCannotAct(player);
     if (blocked !== null) return blocked;
     const object = this.state.objects[id];
@@ -40577,7 +40592,7 @@ export class Game {
     // turned face up during your turn" (Karlov Watchdog).
     if (restrictionsOf(this.state, this.registry, id).has("cant-turn-face-up")) return "it can't be turned face up";
     const card = this.registry.get(object.cardName);
-    const cost = this.turnFaceUpCost(id, morph);
+    const cost = this.turnFaceUpCost(player, id, morph);
     if (cost === null) {
       if (morph) return "that card has no morph or disguise";
       if (object.faceDown.kind === "morph" || object.faceDown.kind === "disguise") {
@@ -40587,13 +40602,16 @@ export class Game {
       if (!card.types.includes("creature")) return "that card isn't a creature card";
       return "that card has no mana cost to pay";
     }
-    const plan = this.payMana(player, parseManaCost(cost));
+    const plan = this.payMana(player, morph ? concreteX(parseManaCost(cost), Math.max(0, Math.floor(x)), undefined) : parseManaCost(cost));
     if (plan === null) return `${player} cannot pay ${cost}`;
     const also = morph ? card.morph?.also : undefined;
     if (also !== undefined) {
       // One part that asks at a time, as an activated ability's cost.
-      const asks = [also.sacrifice, also.discard, also.returnToHand].filter((part) => part !== undefined).length;
+      const asks = [also.sacrifice, also.discard, also.returnToHand, also.reveal].filter((part) => part !== undefined).length;
       if (asks > 1) return `${card.name}'s morph cost can't ask for two choices at once yet`;
+      if (also.reveal !== undefined && this.revealCostCandidates(player, also.reveal, id).length < also.reveal.count) {
+        return `${player} has too few ${also.reveal.text} in hand to turn it face up`;
+      }
       if (also.payLife !== undefined && !this.canPayLife(player, also.payLife)) {
         return `${player} does not have ${also.payLife} life to pay`;
       }
@@ -40621,16 +40639,63 @@ export class Game {
 
   /** What turning face-down `id` face up costs that way — see
    * {@link whyCannotTurnFaceUp} — or `null` if it can't be turned so. */
-  private turnFaceUpCost(id: ObjectId, morph: boolean): string | null {
+  private turnFaceUpCost(player: PlayerId, id: ObjectId, morph: boolean): string | null {
     const object = this.state.objects[id];
     if (object?.faceDown === undefined) return null;
     const card = this.registry.get(object.cardName);
-    if (morph) return card.morph?.cost ?? null;
+    if (morph) return card.morph === null ? null : this.morphCostNow(player, id, card.morph);
     // For its mana cost: a manifested or cloaked permanent only (701.40b,
     // 701.58b) — not one cast face down, nor one an effect put or turned
     // face down (708.2a).
     if (object.faceDown.kind !== "manifest" && object.faceDown.kind !== "cloak") return null;
     return card.types.includes("creature") ? card.manaCost : null;
+  }
+
+  /**
+   * The mana of `printed`, a morph or disguise cost, as `player` would pay it
+   * now: "all morph costs cost {2} more" (Exiled Doomsayer) added, on a morph
+   * or megamorph cost alone (rule 702.37b), and its own "reduced by {1} for
+   * each …" (Fugitive Codebreaker) taken off generic mana (rule 118.7a). An
+   * `{X}` stays in it, for the chosen X to fill.
+   */
+  private morphCostNow(player: PlayerId, id: ObjectId, printed: MorphCost): string {
+    let cost = printed.cost;
+    let more = 0;
+    if (printed.keyword !== "disguise") {
+      for (const other of this.state.zones.shared.battlefield) {
+        const source = this.state.objects[other];
+        // A face-down permanent has no text (rule 708.2a).
+        if (source === undefined || source.faceDown !== undefined || hasLostAbilities(this.state, this.registry, source)) continue;
+        for (const ability of this.registry.get(rulesTextName(source)).static) {
+          if (ability.morphCostIncrease !== undefined && this.staticActive(source, ability)) more += ability.morphCostIncrease;
+        }
+      }
+    }
+    if (more > 0) {
+      cost = /\{\d+\}/.test(cost)
+        ? cost.replace(/\{(\d+)\}/, (_token, digits: string) => `{${Number(digits) + more}}`)
+        : `{${more}}${cost}`;
+    }
+    return printed.costReduction === undefined
+      ? cost
+      : withGenericReducedBy(cost, this.costReductionAmount(printed.costReduction, player, id));
+  }
+
+  /** `printed` at `x`, as a cost to pay. */
+  private morphManaCost(player: PlayerId, id: ObjectId, printed: MorphCost, x: number): ManaCost {
+    return concreteX(parseManaCost(this.morphCostNow(player, id, printed)), x, undefined);
+  }
+
+  /** What the turn-face-up offer shows of `printed` (rule 702.37e: "show all
+   * players what the permanent's morph cost would be"): as printed, with the
+   * mana as it stands now when something has changed it. */
+  private morphCostShown(player: PlayerId, id: ObjectId, printed: MorphCost): string {
+    const now = this.morphCostNow(player, id, printed);
+    if (printed.text === undefined) return now;
+    if (now === printed.cost) return printed.text;
+    return printed.cost !== "" && printed.text.includes(printed.cost)
+      ? printed.text.replace(printed.cost, now)
+      : `${now}, ${printed.text}`;
   }
 
   /** Why `player` can't end the Licid `id`'s Aura effect now: it isn't one,
@@ -40671,14 +40736,17 @@ export class Game {
    * and whatever applied to the 2/2 still applies. Turned up for its
    * megamorph cost, it gets a +1/+1 counter as it is (702.37b); a card that
    * says "as this is turned face up" (Hooded Hydra) gets its counters
-   * however it is. A special action: the player keeps priority (116.3c). */
-  private turnFaceUp(player: PlayerId, id: ObjectId, morph = false): void {
-    const why = this.whyCannotTurnFaceUp(player, id, morph);
+   * however it is. A special action: the player keeps priority (116.3c).
+   * `x` is the X announced for a morph or disguise cost with one, which the
+   * permanent's abilities read (702.37f, 702.168e). */
+  private turnFaceUp(player: PlayerId, id: ObjectId, morph = false, x = 0): void {
+    const why = this.whyCannotTurnFaceUp(player, id, morph, x);
     if (why !== null) throw new Error(why);
     const object = this.state.objects[id];
     const card = this.registry.get(object.cardName);
-    const cost = this.turnFaceUpCost(id, morph) ?? "";
-    const payment = this.payMana(player, parseManaCost(cost));
+    const cost = this.turnFaceUpCost(player, id, morph) ?? "";
+    const chosenX = morph ? Math.max(0, Math.floor(x)) : 0;
+    const payment = this.payMana(player, morph ? concreteX(parseManaCost(cost), chosenX, undefined) : parseManaCost(cost));
     if (payment === null) throw new Error(`${player} cannot pay ${cost}`);
     this.executePayment(player, payment);
     // A morph cost that isn't only mana ("Morph—Sacrifice another creature"):
@@ -40699,15 +40767,26 @@ export class Game {
       this.costDiscardPriorityTo(player);
     }
     if (also?.returnToHand !== undefined) this.payReturnToHandCost(player, id, also.returnToHand);
-    this.becomeFaceUp(id, player, morph && card.morph?.keyword === "megamorph");
+    const reveal = also?.reveal;
+    if (reveal !== undefined) {
+      this.withDecisionSource(id, () => {
+        this.beginBehold(
+          player,
+          id,
+          { filter: reveal.filter, text: reveal.text, count: reveal.count, fromHand: true },
+          { priorityTo: player, except: id },
+        );
+      });
+    }
+    this.becomeFaceUp(id, player, morph && card.morph?.keyword === "megamorph", chosenX);
     this.afterPlayerAction(player);
   }
 
   /** Face-down `id` has its own characteristics again, shown to everyone
    * (rule 708.8): both ways of turning it, its special action's cost paid or
    * by an effect. `megamorphCounter`: turned up for its megamorph cost
-   * (702.37b). */
-  private becomeFaceUp(id: ObjectId, player: PlayerId, megamorphCounter: boolean): void {
+   * (702.37b). `x`: the X paid in that cost, 0 by any other way. */
+  private becomeFaceUp(id: ObjectId, player: PlayerId, megamorphCounter: boolean, x = 0): void {
     const object = this.state.objects[id];
     const card = this.registry.get(object.cardName);
     delete object.faceDown;
@@ -40716,7 +40795,7 @@ export class Game {
     const ref = { kind: "object", object: id } as const;
     if (megamorphCounter) this.addCounter(ref, "+1/+1", 1, false, player);
     if (card.asTurnedFaceUp !== undefined) this.addCounter(ref, "+1/+1", card.asTurnedFaceUp.counters, false, player);
-    this.emit({ type: "permanent-turned-face-up", player, object: id });
+    this.emit({ type: "permanent-turned-face-up", player, object: id, ...(x > 0 ? { x } : {}) });
   }
 
   /** "Turn target face-down creature face up": by an effect, nothing paid

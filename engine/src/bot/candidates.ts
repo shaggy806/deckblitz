@@ -308,7 +308,16 @@ export function candidateActions(
     // Turning a manifested creature face up: the search weighs it against
     // passing like any other play.
     case "turn-face-up":
-      return [{ type: "turn-face-up", player, permanent: legal.permanent, ...(legal.morph !== undefined ? { morph: true } : {}) }];
+      return [
+        {
+          type: "turn-face-up",
+          player,
+          permanent: legal.permanent,
+          ...(legal.morph !== undefined ? { morph: true } : {}),
+          // The most X there is, the search weighing it against passing.
+          ...(legal.xCost !== undefined ? { xValue: legal.xCost.maxX } : {}),
+        },
+      ];
     case "unlock-door":
       return [{ type: "unlock-door", player, permanent: legal.permanent, door: legal.door }];
     // Ending a Licid's Aura effect: weighed like any other play (saving it

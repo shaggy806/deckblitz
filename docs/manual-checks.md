@@ -6154,3 +6154,19 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Redemptor Dreadnought: you may exile a creature card as you cast it
 - **Do:** Cast Redemptor Dreadnought. In the "You may choose a card to exile" popup, click Put none (a second try: click Hill Giant, then Confirm).
 - **Expect:** The popup lets you exile Hill Giant or nothing, and the Island can't be chosen. Either way the Dreadnought enters; Hill Giant stays in your graveyard unless you chose it.
+
+### Bane of the Living: choose X as you turn it face up
+- **Do:** Cast Bane of the Living face down, click it, and pick "Turn face up — Bane of the Living, morph {X}{B}{B}". Set X to 1 and confirm.
+- **Expect:** The banner says "Turn face up Bane of the Living — choose X (max 2)". It turns up, and every creature gets -1/-1 until end of turn: Hill Giant is a 2/2.
+
+### Watcher of the Roost: turn it face up by revealing a white card
+- **Do:** Cast Watcher of the Roost face down, click it, and pick "Turn face up — Watcher of the Roost, morph Reveal a white card in your hand".
+- **Expect:** With one white card in hand, Savannah Lions is revealed without asking and stays in your hand. The Watcher turns up and you gain 2 life.
+
+### Exiled Doomsayer: a morph cost costs {2} more
+- **Do:** Cast Den Protector face down and click it.
+- **Expect:** The turn-face-up choice reads "megamorph {3}{G}", not {1}{G}.
+
+### Bane of the Living: choose X at four players
+- **Do:** As the two-player check: cast it face down, click it, turn it face up, set X to 1, and confirm.
+- **Expect:** The X banner reads the same at four players, and Hill Giant becomes a 2/2.

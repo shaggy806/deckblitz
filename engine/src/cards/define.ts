@@ -3483,6 +3483,11 @@ export interface StaticAbility {
      * left to take is lost rather than taken off the generic part. */
     readonly coloredOnly?: boolean;
   };
+  /** "All morph costs cost {2} more" (Exiled Doomsayer): generic mana on
+   * turning a permanent up for its morph or megamorph cost, whoever's — a
+   * megamorph cost is a morph cost (rule 702.37b), a disguise cost isn't, nor
+   * the {3} to cast one face down (its reminder text). `affects` is ignored. */
+  readonly morphCostIncrease?: number;
   /**
    * Changes what activated abilities cost to activate (rule 602.2b, which
    * applies rule 601.2f's cost modifications to activation costs):
@@ -3731,13 +3736,22 @@ export interface CastModalSpec {
  * permanent is turned face up (702.37e), the choices made then: a face-down
  * permanent has no name or subtypes, so it never pays its own cost (it isn't
  * a Bird or an Island while face down). `text` is the cost as printed, which
- * the turn-face-up offer shows.
+ * the turn-face-up offer shows. An `{X}` in `cost` (Bane of the Living,
+ * Aurelia's Vindicator) is announced as it's turned up, and its abilities read
+ * that X (702.37f, 702.168e) as a "turned face up" trigger's `{ triggerValue:
+ * true }`. `costReduction` is "This cost is reduced by {1} for each …"
+ * (Fugitive Codebreaker), read as it's turned up, generic mana only.
  */
 export interface MorphCost {
   readonly keyword: "morph" | "megamorph" | "disguise";
   readonly cost: string;
+  readonly costReduction?: CostReductionAmount;
   readonly also?: {
     readonly payLife?: number;
+    /** "Morph—Reveal a white card in your hand" (Watcher of the Roost): `count`
+     * cards from your hand matching `filter`, your choice, which stay there.
+     * `text` names them in the prompt, as `AbilityCost.reveal`'s does. */
+    readonly reveal?: { readonly count: number; readonly filter: CardFilter; readonly text: string };
     /** Permanents you control matching `filter`, `count` of them, all at once. */
     readonly sacrifice?: { readonly filter: CardFilter; readonly count: number };
     /** Cards from your hand matching `filter`, your choice. */

@@ -1794,7 +1794,13 @@ export class RandomController extends AutomaticController {
       case "take-companion":
         return { type: "take-companion", player };
       case "turn-face-up":
-        return { type: "turn-face-up", player, permanent: legal.permanent, ...(legal.morph !== undefined ? { morph: true } : {}) };
+        return {
+          type: "turn-face-up",
+          player,
+          permanent: legal.permanent,
+          ...(legal.morph !== undefined ? { morph: true } : {}),
+          ...(legal.xCost !== undefined ? { xValue: legal.xCost.maxX } : {}),
+        };
       case "unlock-door":
         return { type: "unlock-door", player, permanent: legal.permanent, door: legal.door };
       case "end-licid-effect":

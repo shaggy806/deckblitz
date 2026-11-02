@@ -1068,6 +1068,9 @@ export type GameEvent =
       readonly type: "permanent-turned-face-up";
       readonly player: PlayerId;
       readonly object: ObjectId;
+      /** The X paid in its morph or disguise cost (rules 702.37f, 702.168e),
+       * when more than 0: a "turned face up" trigger's `{ triggerValue: true }`. */
+      readonly x?: number;
     })
   | (Base & {
       /** `object` fought `opponent` (rule 701.14a) — one event for each of

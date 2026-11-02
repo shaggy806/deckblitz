@@ -3966,3 +3966,17 @@ exile-x-from-graveyard-additional, condition:exiled-with-source-filter. Proving 
 Chill Haunting, Skeletal Scrying, Corpse Explosion, Draconic Intervention, Redemptor Dreadnought,
 Araumi of the Dead Tide. Left: Ludevic, Necrogenius needs its other keys; a copy's other cost refs
 (`sacrificed`, `discarded`, `revealed`) still aren't carried to a copy.
+
+### Morph and disguise costs beyond fixed mana — built 2026-11-02
+
+The need-keys Phase 2 family `mechanic:face-down`, features only. `MorphCost.also.reveal` reveals
+a card from the hand through `beginBehold`; an `{X}` in `morph.cost` is announced on the
+`turn-face-up` action (`xValue`, the offer's `xCost`, the client's X banner) and read by a "turned
+face up" trigger as `{ triggerValue: true }` (rules 702.37f, 702.168e); `morph.costReduction` takes
+a live count off generic mana; the static's `morphCostIncrease` adds to morph and megamorph costs
+(702.37b says a megamorph cost is one), never disguise. The offer shows the cost as it stands now
+(702.37e). The scaffolder reads "Morph—Reveal a … card in your hand" and "All morph costs cost {N}
+more". Keys: morph-reveal-card, disguise-x-cost, disguise-cost-reduction, morph-cost-increase.
+Proving cards: Watcher of the Roost, Ruthless Ripper, Bane of the Living, Warbreak Trumpeter, Fugitive
+Codebreaker, Exiled Doomsayer. Left: Aurelia's Vindicator's "up to X other target" over the
+battlefield and graveyards needs a trigger's target count reading the X, for `author-freed` to narrow.

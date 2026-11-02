@@ -1884,11 +1884,17 @@ describe("templates for features built since the parser began (2026-10-11)", () 
       text: "Sacrifice two Mountains",
     });
     expect(face("Morph—Pay 5 life.").morph?.also).toEqual({ payLife: 5 });
+    expect(face("Morph—Reveal a blue card in your hand.").morph).toEqual({
+      keyword: "morph",
+      cost: "",
+      also: { reveal: { count: 1, filter: { colors: ["U"] }, text: "blue card" } },
+      text: "Reveal a blue card in your hand",
+    });
+    expect(face("All morph costs cost {2} more.").static?.[0]?.morphCostIncrease).toBe(2);
     expect(face("Morph—Discard a Zombie card.").morph?.also).toEqual({ discard: { count: 1, filter: { subtype: "Zombie" } } });
     expect(face("Morph—Return a Bird you control to its owner's hand.").morph?.also).toEqual({
       returnToHand: { count: 1, filter: { subtype: "Bird" } },
     });
-    expect(face("Morph—Reveal a blue card in your hand.").morph).toBeUndefined();
     expect(face("Convoke", "Instant", {}).convoke).toBe(true);
     expect(face("Improvise", "Sorcery", {}).improvise).toBe(true);
     // Assist (rule 702.132a), its reminder text stripped.

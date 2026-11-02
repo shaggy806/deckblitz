@@ -1262,11 +1262,15 @@ function kickerAlso(text) {
   return null;
 }
 
-/** A morph cost that isn't mana, as `MorphCost.also` — one part, never one
- * that reveals ("Morph—Reveal a blue card in your hand" isn't modeled). */
+/** A morph cost that isn't mana, as `MorphCost.also` — one part. */
 function morphNonManaCost(text) {
   let m;
   if ((m = /^Pay (\d+) life$/.exec(text))) return { payLife: Number(m[1]) };
+  // "Morph—Reveal a blue card in your hand" (Dragon's Eye Savants).
+  if ((m = /^Reveal an? (white|blue|black|red|green) card in your hand$/.exec(text))) {
+    const color = { white: "W", blue: "U", black: "B", red: "R", green: "G" }[m[1]];
+    return { reveal: { count: 1, filter: { colors: [color] }, text: `${m[1]} card` } };
+  }
   if ((m = new RegExp(`^Sacrifice (another|${N.slice(1, -1)}) (.+)$`).exec(text))) {
     const count = m[1] === "another" ? 1 : numberOf(m[1]);
     const filter = parseTypePhrase(m[2]);
@@ -9117,6 +9121,11 @@ export function parseFace(face, ctx = {}) {
         prohibits: { who: "you", spells: true, lands: {}, from: ["hand"] },
         text: printed(raw),
       });
+      continue;
+    }
+    // Exiled Doomsayer: on morph and megamorph costs alone.
+    if ((m = /^All morph costs cost \{(\d+)\} more\.$/.exec(line))) {
+      out.static.push({ affects: { scope: "self" }, morphCostIncrease: Number(m[1]), text: printed(raw) });
       continue;
     }
     if (out.chooseCardNameOnEnter !== undefined && (m = /^Activated abilities of sources with the chosen name cost \{(\d+)\} more to activate( unless they're mana abilities)?\.$/.exec(line))) {

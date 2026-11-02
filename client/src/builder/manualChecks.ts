@@ -9269,4 +9269,30 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       you: { bf: ['Island*5'], hand: ['Redemptor Dreadnought'], gy: ['Hill Giant', 'Island'] },
     }),
   ),
+  preset(
+    'Bane of the Living: choose X as you turn it face up',
+    board({
+      you: { bf: ['Swamp*7'], hand: ['Bane of the Living'] },
+      opp: [{ bf: ['Hill Giant'] }],
+    }),
+  ),
+  preset(
+    'Watcher of the Roost: turn it face up by revealing a white card',
+    board({
+      you: { bf: ['Plains*3'], hand: ['Watcher of the Roost', 'Savannah Lions', 'Grizzly Bears'] },
+    }),
+  ),
+  preset(
+    'Exiled Doomsayer: a morph cost costs {2} more',
+    board({
+      you: { bf: ['Forest*7', 'Exiled Doomsayer'], hand: ['Den Protector'] },
+    }),
+  ),
+  preset(
+    'Bane of the Living: choose X at four players',
+    board({
+      you: { bf: ['Swamp*7'], hand: ['Bane of the Living'] },
+      opp: [{ bf: ['Hill Giant'] }, {}, {}],
+    }),
+  ),
 ]
