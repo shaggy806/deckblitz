@@ -746,6 +746,7 @@ import _poolThunderheads from "../pool/thunderheads.js";
 import _poolThunderingSparkmage from "../pool/thundering-sparkmage.js";
 import _poolTigerClaws from "../pool/tiger-claws.js";
 import _poolTillingTreefolk from "../pool/tilling-treefolk.js";
+import _poolTimeStop from "../pool/time-stop.js";
 import _poolTipTheScales from "../pool/tip-the-scales.js";
 import _poolTitaniasCommand from "../pool/titanias-command.js";
 import _poolTithingBlade from "../pool/tithing-blade.js";
@@ -1612,6 +1613,7 @@ const shard: CardShard = {
     _poolThunderingSparkmage,
     _poolTigerClaws,
     _poolTillingTreefolk,
+    _poolTimeStop,
     _poolTipTheScales,
     _poolTitaniasCommand,
     _poolTithingBlade,

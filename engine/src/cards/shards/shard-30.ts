@@ -309,6 +309,7 @@ import _poolGimlisRecklessMight from "../pool/gimlis-reckless-might.js";
 import _poolGixYawgmothPraetor from "../pool/gix-yawgmoth-praetor.js";
 import _poolGlimmerpost from "../pool/glimmerpost.js";
 import _poolGlisteningGoremonger from "../pool/glistening-goremonger.js";
+import _poolGloriousEnd from "../pool/glorious-end.js";
 import _poolGnarledEffigy from "../pool/gnarled-effigy.js";
 import _poolGoblinEliteInfantry from "../pool/goblin-elite-infantry.js";
 import _poolGoblinMaskmaker from "../pool/goblin-maskmaker.js";
@@ -460,6 +461,7 @@ import _poolMalanthrope from "../pool/malanthrope.js";
 import _poolMaleficScythe from "../pool/malefic-scythe.js";
 import _poolMalevolentNoble from "../pool/malevolent-noble.js";
 import _poolManaVortex from "../pool/mana-vortex.js";
+import _poolMandateOfPeace from "../pool/mandate-of-peace.js";
 import _poolManyPartings from "../pool/many-partings.js";
 import _poolMarchingDuodrone from "../pool/marching-duodrone.js";
 import _poolMarkovPatrician from "../pool/markov-patrician.js";
@@ -524,6 +526,7 @@ import _poolNurturingLicid from "../pool/nurturing-licid.js";
 import _poolOakaTravelingMerchant from "../pool/oaka-traveling-merchant.js";
 import _poolOathOfTheAncientWood from "../pool/oath-of-the-ancient-wood.js";
 import _poolOathOfTheGreyHost from "../pool/oath-of-the-grey-host.js";
+import _poolObekaBruteChronologist from "../pool/obeka-brute-chronologist.js";
 import _poolOboroBreezecaller from "../pool/oboro-breezecaller.js";
 import _poolOdiousTrow from "../pool/odious-trow.js";
 import _poolOdylicWraith from "../pool/odylic-wraith.js";
@@ -1193,6 +1196,7 @@ const shard: CardShard = {
     _poolGixYawgmothPraetor,
     _poolGlimmerpost,
     _poolGlisteningGoremonger,
+    _poolGloriousEnd,
     _poolGnarledEffigy,
     _poolGoblinEliteInfantry,
     _poolGoblinMaskmaker,
@@ -1344,6 +1348,7 @@ const shard: CardShard = {
     _poolMaleficScythe,
     _poolMalevolentNoble,
     _poolManaVortex,
+    _poolMandateOfPeace,
     _poolManyPartings,
     _poolMarchingDuodrone,
     _poolMarkovPatrician,
@@ -1408,6 +1413,7 @@ const shard: CardShard = {
     _poolOakaTravelingMerchant,
     _poolOathOfTheAncientWood,
     _poolOathOfTheGreyHost,
+    _poolObekaBruteChronologist,
     _poolOboroBreezecaller,
     _poolOdiousTrow,
     _poolOdylicWraith,

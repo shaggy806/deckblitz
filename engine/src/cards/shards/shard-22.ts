@@ -146,6 +146,7 @@ import _poolCountryRoads from "../pool/country-roads.js";
 import _poolCovenantOfBlood from "../pool/covenant-of-blood.js";
 import _poolCracklingPerimeter from "../pool/crackling-perimeter.js";
 import _poolCradleOfTheAccursed from "../pool/cradle-of-the-accursed.js";
+import _poolCrawlspace from "../pool/crawlspace.js";
 import _poolCrazedArmodon from "../pool/crazed-armodon.js";
 import _poolCreakwoodSafewright from "../pool/creakwood-safewright.js";
 import _poolCreepyDoll from "../pool/creepy-doll.js";
@@ -1037,6 +1038,7 @@ const shard: CardShard = {
     _poolCovenantOfBlood,
     _poolCracklingPerimeter,
     _poolCradleOfTheAccursed,
+    _poolCrawlspace,
     _poolCrazedArmodon,
     _poolCreakwoodSafewright,
     _poolCreepyDoll,

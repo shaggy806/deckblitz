@@ -632,6 +632,7 @@ import _poolSiegeGangLieutenant from "../pool/siege-gang-lieutenant.js";
 import _poolSiegeWurm from "../pool/siege-wurm.js";
 import _poolSightedCasteSorcerer from "../pool/sighted-caste-sorcerer.js";
 import _poolSignalingRoar from "../pool/signaling-roar.js";
+import _poolSilentArbiter from "../pool/silent-arbiter.js";
 import _poolSilentDart from "../pool/silent-dart.js";
 import _poolSilkenfistOrder from "../pool/silkenfist-order.js";
 import _poolSilverbladePaladin from "../pool/silverblade-paladin.js";
@@ -1488,6 +1489,7 @@ const shard: CardShard = {
     _poolSiegeWurm,
     _poolSightedCasteSorcerer,
     _poolSignalingRoar,
+    _poolSilentArbiter,
     _poolSilentDart,
     _poolSilkenfistOrder,
     _poolSilverbladePaladin,

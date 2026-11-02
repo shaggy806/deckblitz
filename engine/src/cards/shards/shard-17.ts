@@ -204,6 +204,7 @@ import _poolDrossProwler from "../pool/dross-prowler.js";
 import _poolDrownedSecrets from "../pool/drowned-secrets.js";
 import _poolDrudgeBeetle from "../pool/drudge-beetle.js";
 import _poolDryadArbor from "../pool/dryad-arbor.js";
+import _poolDuelingGrounds from "../pool/dueling-grounds.js";
 import _poolDwarvenMattock from "../pool/dwarven-mattock.js";
 import _poolDwarvenStrikeForce from "../pool/dwarven-strike-force.js";
 import _poolDwynensElite from "../pool/dwynens-elite.js";
@@ -1088,6 +1089,7 @@ const shard: CardShard = {
     _poolDrownedSecrets,
     _poolDrudgeBeetle,
     _poolDryadArbor,
+    _poolDuelingGrounds,
     _poolDwarvenMattock,
     _poolDwarvenStrikeForce,
     _poolDwynensElite,

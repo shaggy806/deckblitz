@@ -124,6 +124,7 @@ import _poolCapitalGuard from "../pool/capital-guard.js";
 import _poolCaptivatingGyre from "../pool/captivating-gyre.js";
 import _poolCaseyJonesVigilante from "../pool/casey-jones-vigilante.js";
 import _poolCatacombDragon from "../pool/catacomb-dragon.js";
+import _poolCavernsOfDespair from "../pool/caverns-of-despair.js";
 import _poolCelestialArchon from "../pool/celestial-archon.js";
 import _poolCelestialMessenger from "../pool/celestial-messenger.js";
 import _poolCentaurGarden from "../pool/centaur-garden.js";
@@ -1015,6 +1016,7 @@ const shard: CardShard = {
     _poolCaptivatingGyre,
     _poolCaseyJonesVigilante,
     _poolCatacombDragon,
+    _poolCavernsOfDespair,
     _poolCelestialArchon,
     _poolCelestialMessenger,
     _poolCentaurGarden,

@@ -724,6 +724,7 @@ import _poolThwart from "../pool/thwart.js";
 import _poolTidepoolTurtle from "../pool/tidepool-turtle.js";
 import _poolTitansVanguard from "../pool/titans-vanguard.js";
 import _poolTolsimirFriendToWolves from "../pool/tolsimir-friend-to-wolves.js";
+import _poolTomikOrzhovLawmage from "../pool/tomik-orzhov-lawmage.js";
 import _poolTouchOfDeath from "../pool/touch-of-death.js";
 import _poolTouchOfTheEternal from "../pool/touch-of-the-eternal.js";
 import _poolTovolarTheMidnightScourge from "../pool/tovolar-the-midnight-scourge.js";
@@ -1564,6 +1565,7 @@ const shard: CardShard = {
     _poolTidepoolTurtle,
     _poolTitansVanguard,
     _poolTolsimirFriendToWolves,
+    _poolTomikOrzhovLawmage,
     _poolTouchOfDeath,
     _poolTouchOfTheEternal,
     _poolTovolarTheMidnightScourge,
