@@ -200,6 +200,9 @@ async function runStep(page: Page, step: string): Promise<boolean> {
       for (const limit = Date.now() + 25_000; ; await page.waitForTimeout(250)) {
         if (
           (await visibleFirst(page.locator('.controls button', { hasText: pattern(arg) }))) ||
+          // Then a real button before a tile, whose rules text may say the same
+          // ("Cycling—Pay 2 life", under the card in hand).
+          (await visibleFirst(page.locator('button:not(.card-tile):not(:has(.card-tile))', { hasText: pattern(arg) }))) ||
           (await visibleFirst(page.locator('button, [role="menuitem"], [role="button"]', { hasText: pattern(arg) })))
         ) {
           return true

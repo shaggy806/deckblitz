@@ -9135,4 +9135,39 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: ['Grizzly Bears', 'Shivan Dragon'] },
     }),
   ),
+  preset(
+    'Street Wraith: cycling by paying 2 life, with no mana',
+    board({
+      you: { hand: ['Street Wraith'] },
+      opp: {},
+    }),
+  ),
+  preset(
+    'Shark Typhoon: cycling for X makes an X/X Shark',
+    board({
+      you: { bf: ['Island*5'], hand: ['Shark Typhoon'] },
+      opp: {},
+    }),
+  ),
+  preset(
+    'Omniscience: a spell from your hand is cast free',
+    board({
+      you: { bf: ['Omniscience'], hand: ['Grizzly Bears'] },
+      opp: {},
+    }),
+  ),
+  preset(
+    'Jodah, Archmage Eternal: its cost is a choice beside the mana cost',
+    board({
+      you: { bf: ['Jodah, Archmage Eternal', 'Plains', 'Island', 'Swamp', 'Mountain', 'Forest'], hand: ['Grizzly Bears'] },
+      opp: {},
+    }),
+  ),
+  preset(
+    "Aluren: any player may cast with it, here Bob's Aluren for you",
+    board({
+      you: { hand: ['Grizzly Bears', 'Hill Giant'] },
+      opp: [{ bf: ['Aluren'] }, {}, {}],
+    }),
+  ),
 ]

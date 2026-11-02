@@ -6081,3 +6081,23 @@ engine terms. A second thing to check is a second test.
 ### Dragon's Prey: {2} more for a Dragon, so 3 mana can't aim at one
 - **Do:** Cast Dragon's Prey with your three Swamps.
 - **Expect:** Grizzly Bears can be targeted, Shivan Dragon can't. The Bears are destroyed.
+
+### Street Wraith: cycling by paying 2 life, with no mana
+- **Do:** Click Street Wraith in your hand, then "Cycling—Pay 2 life".
+- **Expect:** You go from 40 life to 38. Street Wraith is in your graveyard and you draw a card.
+
+### Shark Typhoon: cycling for X makes an X/X Shark
+- **Do:** Click Shark Typhoon in your hand, then "Cycling {X}{1}{U}", and choose X = 3.
+- **Expect:** All five Islands tap. A 3/3 flying Shark token appears, and you draw a card.
+
+### Omniscience: a spell from your hand is cast free
+- **Do:** You have no lands. Cast Grizzly Bears from your hand.
+- **Expect:** A click casts it, since it's the only way. The Bears resolve and nothing was paid.
+
+### Jodah, Archmage Eternal: its cost is a choice beside the mana cost
+- **Do:** Click Grizzly Bears in your hand and read the choices. Pick "pay {W}{U}{B}{R}{G}".
+- **Expect:** A plain cast and "pay {W}{U}{B}{R}{G}" are both offered. All five lands tap, not two.
+
+### Aluren: any player may cast with it, here Bob's Aluren for you
+- **Do:** Bob controls Aluren and you have no lands. Cast Grizzly Bears from your hand.
+- **Expect:** A click casts it, and the Bears come in under your control. Hill Giant in your hand can't be cast.
