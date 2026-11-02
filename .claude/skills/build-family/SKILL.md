@@ -375,6 +375,16 @@ in its own worktree (`isolation: "worktree"`), integrated by cherry-pick.
   read any hunk outside the routine files. Let a verify finish before picking onto `main`: it reads
   the working tree. Keep a coordinator's per-agent review small; 15 agents and 34 families took about
   460K of context.
+- **Found on the next night (18 agents, 32 families, ~470K of context):** agents touch `App.tsx`,
+  change what an offer says, or ship a card only partly reached, then say so under "unsure". Read
+  that section as work: send the agent back with `SendMessage` for manual checks and a fix (it keeps
+  its context and worktree; `E2E_WEB_PORT`, `E2E_SERVER_PORT` and `E2E_CONTROL_PORT` let two run
+  live checks at once), and put "a proving card runs its whole text" in the brief. `card:verify` is
+  the only check that catches a wrong mana cost, so a family isn't done until a verify has run on
+  it. A Bash `cd` persists and can move the session (into a worktree, even): use `git -C` and
+  subshells. Most pick conflicts are mechanical (the `built` array, `neededCards-features.md`, one
+  long line of `engine.md`), so a small helper script for those saves a lot of context. After a
+  merge, run Playwright once: verify doesn't, and client work from several agents has only met there.
 - **Clean up** each worktree: unlink every junction by absolute path
   (`[IO.Directory]::Delete("<path>", $false)`), sweep for any other
   (`Get-ChildItem -Recurse -Attributes ReparsePoint`), confirm none is left,
