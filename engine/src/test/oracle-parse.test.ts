@@ -9527,6 +9527,25 @@ describe("exchanges with a life total", () => {
     // Nothing the template knows: the whole thing stays for a person.
     expect(parseEffect(`Draw a card. ${it}`, ctx()).todo).not.toHaveLength(0);
   });
+
+  it("reads the loop over each kind of counter: doubling, one more, one more or one fewer", () => {
+    expect(parseEffect("Double the number of each kind of counter on target creature.", ctx()).effect).toEqual({
+      kind: "double-counters",
+      target: 0,
+    });
+    expect(
+      parseEffect(
+        "For each kind of counter on target permanent or player, give that permanent or player another counter of that kind.",
+        ctx(),
+      ).effect,
+    ).toEqual({ kind: "another-counter-of-each-kind", target: 0 });
+    expect(
+      parseEffect(
+        "For each kind of counter on target permanent, put another counter of that kind on it or remove one from it.",
+        ctx(),
+      ).effect,
+    ).toEqual({ kind: "another-counter-of-each-kind", target: 0, orRemove: true });
+  });
 });
 
 describe("references to the source's host and to attachments", () => {

@@ -3980,3 +3980,15 @@ more". Keys: morph-reveal-card, disguise-x-cost, disguise-cost-reduction, morph-
 Proving cards: Watcher of the Roost, Ruthless Ripper, Bane of the Living, Warbreak Trumpeter, Fugitive
 Codebreaker, Exiled Doomsayer. Left: Aurelia's Vindicator's "up to X other target" over the
 battlefield and graveyards needs a trigger's target count reading the X, for `author-freed` to narrow.
+### A loop over each kind of counter on one thing — built 2026-11-02
+
+The family `effect:double-counters-each-kind`. `double-counters` already did the doubling (Deepglow Skate,
+Ferrafor), so its key only needed marking and a template. New: `another-counter-of-each-kind { target,
+orRemove? }`: proliferate's step on one permanent or player (it shares `Game.anotherCounterOfEachKind` with
+the `proliferate` answer, so energy and a Doubling Season behave the same), and with `orRemove` one
+`choose-modes` a kind. Keys: effect:double-counters-each-kind, effect:one-more-of-each-counter-kind,
+effect:add-or-remove-each-counter-kind. Proving cards: Vorel of the Hull Clade, Powerful Broker, Maulfist
+Revolutionary, Quarry Hauler, Dramatist's Puppet. Left: Arna Kennerüd's "for each nontoken permanent attached
+to it, create a token that's a copy of that permanent attached to that creature" and Ultimate Spider-Man's
+"each kind of counter on each Spider and legendary creature you control" (`double-counters-all` takes one
+kind) are not reached; `author-freed` should narrow them.

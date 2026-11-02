@@ -2467,6 +2467,23 @@ export function parseSentence(sentence, ctx) {
       return { kind: "grant-spells-this-turn", next: true, ...(filter === true ? {} : { filter }), reduceGeneric: amt };
     }
   }
+  // The loop over each kind of counter on one thing: "for each kind of counter
+  // on target permanent or player, give that permanent or player another
+  // counter of that kind" (Powerful Broker), "…put another counter of that kind
+  // on it or remove one from it" (Quarry Hauler).
+  {
+    const eachKind = sentenceRe(
+      `for each kind of counter on (${TARGET}), (?:give that (?:permanent or player|permanent|creature) another counter of that kind|(put another counter of that kind on it or remove one from it))`,
+    ).exec(s);
+    const spec = eachKind === null ? undefined : targetOf(eachKind[1]);
+    if (spec !== undefined) {
+      return {
+        kind: "another-counter-of-each-kind",
+        target: ctx.target(spec),
+        ...(eachKind[2] !== undefined ? { orRemove: true } : {}),
+      };
+    }
+  }
   if (/\bwhere X\b|\bfor each\b/i.test(s) && !/^add .*for each [\w+/-]+ counter removed this way\.$/i.test(s)) return null;
   // "Until end of turn, whenever …, …", "whenever … this turn, …" and "until
   // your next turn, whenever …, …" (rule 603.7c): a delayed triggered
@@ -3158,6 +3175,12 @@ export function parseSentence(sentence, ctx) {
     return { kind: "add-counter", target: slot(m[3]), counter, amount: n };
   }
   if (re("proliferate").test(s)) return { kind: "proliferate" };
+  // "Double the number of each kind of counter on target creature" (Vorel of
+  // the Hull Clade).
+  if ((m = re(`double the number of each kind of counter on (${TARGET})`).exec(s))) {
+    const target = slot(m[1]);
+    return target === undefined ? null : { kind: "double-counters", target };
+  }
   // Time travel (rule 701.56a).
   if (re("time travel").test(s)) return { kind: "time-travel" };
   // Moving counters (rule 122.5): "a [kind] counter from ~ onto …", "all

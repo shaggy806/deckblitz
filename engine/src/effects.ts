@@ -4556,6 +4556,23 @@ export type EffectSpec =
       readonly counter?: string;
     }
   | {
+      /** "For each kind of counter on target permanent or player, give that
+       * permanent or player another counter of that kind" (Powerful Broker) —
+       * proliferate's own step (rule 701.34a) on one thing, with nothing to
+       * choose. Each kind is read before any is added, and each counter is
+       * put on as any effect's is, so a Doubling Season applies. A player's
+       * energy is a kind of counter too (rule 107.14). With nothing on it,
+       * nothing happens.
+       *
+       * `orRemove`: "…put another counter of that kind on it **or remove one
+       * from it**" (Quarry Hauler) — for a permanent, the effect's controller
+       * chooses per kind as it resolves (rule 608.2d's choice made on
+       * resolution, one `choose-modes` a kind). */
+      readonly kind: "another-counter-of-each-kind";
+      readonly target: EffectTargetRef;
+      readonly orRemove?: true;
+    }
+  | {
       /** Every battlefield permanent matching `filter` gains `keyword` (Overrun:
        * trample until end of turn). */
       readonly kind: "grant-keyword-all";
@@ -9184,6 +9201,8 @@ export interface EffectApi {
   graveyardSizeOf(player: PlayerId): number;
   /** See the `"double-counters"` {@link EffectSpec}. */
   doubleCounters(target: TargetRef, counter?: string): void;
+  /** See the `"another-counter-of-each-kind"` {@link EffectSpec}. */
+  anotherCounterOfEachKind(target: TargetRef): void;
   /** The colours of what `target` points at, as it last existed on the
    * battlefield if it has left — see `{ colorsOf }`. */
   colorsOf(target: TargetRef): readonly Color[];
@@ -14969,6 +14988,42 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "double-counters": {
       const target = resolveEffectTarget(spec.target, ctx);
       if (target !== undefined) ctx.doubleCounters(target, spec.counter);
+      return;
+    }
+    case "another-counter-of-each-kind": {
+      const target = resolveEffectTarget(spec.target, ctx);
+      if (target === undefined) return;
+      if (spec.orRemove !== true) {
+        ctx.anotherCounterOfEachKind(target);
+        return;
+      }
+      // The kinds as they are now: a choice per kind, each carried out before
+      // the next is asked, and nothing else can happen in between.
+      const kinds = Object.entries(ctx.counterKindsOf(target)).filter(([, n]) => n > 0);
+      if (kinds.length === 0) return;
+      applyEffectSpec(
+        {
+          kind: "sequence",
+          effects: kinds.map(
+            ([counter]): EffectSpec => ({
+              kind: "modal",
+              minModes: 1,
+              maxModes: 1,
+              modes: [
+                {
+                  text: `Put another ${counter} counter on it.`,
+                  effect: { kind: "add-counter", target: spec.target, counter, amount: 1 },
+                },
+                {
+                  text: `Remove a ${counter} counter from it.`,
+                  effect: { kind: "remove-counter", target: spec.target, counter, amount: 1 },
+                },
+              ],
+            }),
+          ),
+        },
+        ctx,
+      );
       return;
     }
     case "grant-keyword-all": {

@@ -28773,6 +28773,7 @@ export class Game {
           if ((current ?? 0) > 0) this.addCounter(target, kind, current ?? 0, false, controller);
         }
       },
+      anotherCounterOfEachKind: (target) => this.anotherCounterOfEachKind(target, controller),
       colorsOf: (target) => {
         if (target.kind !== "object") return [];
         const lki = lastKnownOf(target);
@@ -37998,6 +37999,31 @@ export class Game {
     this.state.awaiting = { kind: "proliferate", player, eligible, then, source, x };
   }
 
+  /** One more counter of each kind already on `target` (rule 701.34a's step,
+   * and the `another-counter-of-each-kind` effect), put on by `by`. */
+  private anotherCounterOfEachKind(target: TargetRef, by: PlayerId): void {
+    if (target.kind === "player") {
+      // One more of each kind the player already has.
+      const ps = this.state.players[target.player];
+      if (ps === undefined || ps.hasLost) return;
+      if (ps.energy > 0) this.changeEnergy(target.player, 1);
+      for (const kind of Object.keys(ps.counters) as PlayerCounterKind[]) {
+        if ((ps.counters[kind] ?? 0) > 0) this.changePlayerCounters(target.player, kind, 1);
+      }
+      return;
+    }
+    const object = this.state.objects[target.object];
+    // Re-checked rather than trusted: the choice was made against the board
+    // as it was when the decision went up, and a permanent can leave in
+    // between (a sacrifice the same effect queued, say).
+    if (object === undefined || object.zone !== "battlefield") return;
+    // Through `addCounter`, as any effect putting counters: a doubler
+    // doubles it (Doubling Season), and a Saga's chapter fires.
+    for (const kind of Object.keys(object.counters)) {
+      if (object.counters[kind] > 0) this.addCounter(target, kind, 1, false, by);
+    }
+  }
+
   /** Answers a pending `proliferate` decision. */
   private applyProliferate(player: PlayerId, chosen: readonly TargetRef[]): void {
     const why = this.whyCannotProliferate(player, chosen);
@@ -38009,28 +38035,7 @@ export class Game {
     const { then, source, x } = awaiting;
     this.state.awaiting = null;
 
-    for (const target of chosen) {
-      if (target.kind === "player") {
-        // One more of each kind the player already has.
-        const ps = this.state.players[target.player];
-        if (ps === undefined || ps.hasLost) continue;
-        if (ps.energy > 0) this.changeEnergy(target.player, 1);
-        for (const kind of Object.keys(ps.counters) as PlayerCounterKind[]) {
-          if ((ps.counters[kind] ?? 0) > 0) this.changePlayerCounters(target.player, kind, 1);
-        }
-        continue;
-      }
-      const object = this.state.objects[target.object];
-      // Re-checked rather than trusted: the choice was made against the board
-      // as it was when the decision went up, and a permanent can leave in
-      // between (a sacrifice the same effect queued, say).
-      if (object === undefined || object.zone !== "battlefield") continue;
-      // Through `addCounter`, as any effect putting counters: a doubler
-      // doubles it (Doubling Season), and a Saga's chapter fires.
-      for (const kind of Object.keys(object.counters)) {
-        if (object.counters[kind] > 0) this.addCounter(target, kind, 1, false, player);
-      }
-    }
+    for (const target of chosen) this.anotherCounterOfEachKind(target, player);
     this.emit({ type: "proliferated", player, count: chosen.length });
 
     if (then !== null) {
