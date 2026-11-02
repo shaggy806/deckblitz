@@ -86,12 +86,12 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
-- **Need-keys Phase 2: attack triggers narrowed by attackers and the player attacked** (2026-11-01,
+- **Need-keys Phase 2: attack triggers narrowed by attackers and the player attacked** (2026-11-02,
   `fe5078a6c`; `trigger:attacks-player-filter`, `trigger:creature-attacks-enchanted-player`) — `attacks-player`'s
   `filter`, still once per player, and `attacks`' `attackedPlayer`, once per creature and never a
   creature attacking that player's planeswalker (rule 508.3a). Attuma, Atlantean Warlord, Curse of
   Predation, Curse of the Forsaken; 5 more cards freed.
-- **Need-keys Phase 2: a reflexive ability naming what its parent made or targeted** (2026-11-01,
+- **Need-keys Phase 2: a reflexive ability naming what its parent made or targeted** (2026-11-02,
   `2effb9a13`; `effect:reflexive-refers-to-creating-objects`, `effect:reflexive-refers-to-parent-target`,
   `effect:reflexive-trigger-outer-target`) — `reflexive-trigger`'s `about`, read as it triggers and
   followed as its trigger object (rules 603.12, 400.7); a bot reads an `about` slot by what the ability
