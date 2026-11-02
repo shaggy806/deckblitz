@@ -23515,7 +23515,7 @@ export class Game {
         object: id,
         reason: "all targets are illegal",
       });
-      // A copy that fizzles ceases to exist (707.10c); a real spell goes to the
+      // A copy that fizzles ceases to exist (707.10a); a real spell goes to the
       // graveyard.
       if (object.isCopy) {
         const idx = stack.indexOf(id);
@@ -23727,7 +23727,7 @@ export class Game {
     // the Omen's name alone, with no faces or face index of its own.
     const spellDef = this.registry.get(printedCardName(object));
     const omen = spellDef.omen && spellDef.faces !== null && spellDef.faces[0] !== spellDef.name;
-    // A copy of a spell (rule 707.10c) ceases to exist instead of moving to
+    // A copy of a spell (rule 707.10a) ceases to exist instead of moving to
     // any zone other than the stack — a copy of an Omen too, though its
     // owner still shuffles their library (the ruling).
     if (object.isCopy) {
@@ -40201,7 +40201,7 @@ export class Game {
    * spell that is itself resolving is skipped — it is about to finish
    * resolving and move on its own, and moving it first would leave its
    * resolution to move a card that's already in a hand. A copy of a spell ceases to exist rather
-   * than going anywhere (rule 707.10c), the same as a fizzled one.
+   * than going anywhere (rule 707.10a), the same as a fizzled one.
    */
   private returnCardToHand(
     id: ObjectId,
@@ -40713,7 +40713,7 @@ export class Game {
    * "Exile target spell" (Mindbreak Trap): the spell leaves the stack and
    * won't resolve, but it isn't countered — so a spell that can't be
    * countered goes too, and nothing watching for a counter sees it (the
-   * ruling). A copy of a spell ceases to exist instead (rule 707.10c). An
+   * ruling). A copy of a spell ceases to exist instead (rule 707.10a). An
    * ability on the stack isn't a spell and is left alone.
    */
   private exileSpell(id: ObjectId): void {
@@ -43086,7 +43086,7 @@ export class Game {
    * owner's graveyard"). Each is still `moveObject`'s
    * to redirect: a flashed-back spell is exiled (rule 702.34a), and a
    * commander sent to hand may go to the command zone (rule 903.9b). A copy
-   * of a spell goes to neither — it ceases to exist (rule 707.10c).
+   * of a spell goes to neither — it ceases to exist (rule 707.10a).
    */
   private counterObject(id: ObjectId, into: "graveyard" | "hand" | "exile" = "graveyard"): boolean {
     const object = this.state.objects[id];

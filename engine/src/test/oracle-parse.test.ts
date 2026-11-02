@@ -9555,6 +9555,9 @@ describe("changes of control", () => {
     });
     // No one target to be about: left for a person.
     expect(parseEffect("When you lose control of the creature, tap it.", ctx()).todo).not.toHaveLength(0);
+  });
+});
+
 describe("a target's namesakes off the battlefield", () => {
   const face = (name: string, type_line: string, oracle_text: string) => parseFace({ name, type_line, oracle_text });
 
