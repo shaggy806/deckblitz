@@ -817,6 +817,12 @@ missing. Re-run `--greedy` for Phase 2's order.
   gone stale since triage, or a composition nobody tried. `for-each-permanent` closed 19 mass-effect keys in one
   change, 5 keys were simply already covered, and `as-player` closed 6 more. Try writing a key's card from
   `card:find` before building it.
+- **2026-11-02: the recheck of those notes** — all 328 still open were read, about 45 tried on real cards. 33 keys ran
+  with no engine change; of the 37 tried expecting that, 4 needed a small general change, so the hand-picked hit rate
+  was 89% (not a random sample: the likeliest were tried first). Seven small general reads closed 11 more keys. The
+  rest of the list is judged from notes only; the larger seams are unbuilt (a spell's additional cost taking
+  `AbilityCost`'s parts, one amount in `setBasePtFromCount` and `grantPtPerCount`, a spell-level `minX`, a batch
+  trigger's own creatures).
 
 ## Rough size
 

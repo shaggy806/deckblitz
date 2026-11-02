@@ -3921,6 +3921,23 @@ Sporogenic Infection, Daybreak Coronet, Bride's Gown, Groom's Finery. Freed but 
 Research, Ghost Lantern. Left for `author-freed` to narrow: Crown of Convergence needs a library-top
 condition, a live color read of that card and "put the top card on the bottom"; Kitsune Mystic its
 attach on resolution; Kassandra her search of the hand; Brass Knuckles its cast-trigger copy.
+### The need-key recheck: stale notes, and five small general reads — built 2026-11-02
+
+328 open keys' notes said the vocabulary lacks something. 33 of them ran with no engine change, each on a real
+card (`need-key-recheck.test.ts`): a note gone stale, or a composition nobody tried. The compositions worth
+knowing: `isSource: false` in a filter is "another", in a trigger, a choice or a static; `as-player` reads a
+"you" amount or scope as someone else's; `for-each-permanent`'s `controlledByTarget` is whose side its filter
+reads from, so the filter still says `controlledBy: "you"`; of a `whileCondition`, `of-player` with
+`"defending-player"` reads the attacked player.
+
+Seven general reads, each smaller than a key: energy as a held player counter (`HeldPlayerCounter`); `hasAbilities`
+inside the layer fold, in a last pass; a combat restriction scoped by power or toughness, applied by
+`restrictionsOf` after the fold; a `shares…TypeWith` clause outside an effect, answered from what the filter's
+context can name; no maximum hand size for each player (`noMaxHandSize: "each-player"`), from a one-shot
+(`player-effect`'s `noMaxHandSize`, `duration: "rest-of-game"`) and from a granted static; `choose-permanents`'s
+`random`; `of-player`'s `"an-opponent"`. Keys: the 44 this pass added to `built`, listed in COMPLETED.md.
+Proving cards: Hoarding Dragon, Worldfire, Clone Legion and the rest of `need-key-recheck.test.ts`.
+
 ### A search that adds the hand and the graveyard — built 2026-11-02
 
 The need-keys Phase 2 family `effect:search-hand-graveyard-library`. `search-library`'s

@@ -429,7 +429,8 @@ section keeps only what to do next.
   `for-each-permanent` and `as-player`, which closed 25 keys between them, and 5 keys the vocabulary already
   covered. **Before building a key, try writing its card from `card:find`:** 360 open keys' notes say the
   vocabulary lacks an option, and the 9 tried of those all ran as it stood (`docs/plans/need-keys-after-the-walk.md`, the
-  over-count pilot). Next unclaimed: `amount:damage-prevented-this-way` (7), then
+  over-count pilot and its recheck, which closed 44 more). Next seam: a spell's `additionalCost` taking
+  `AbilityCost`'s parts (about 15 cards). Next unclaimed: `amount:damage-prevented-this-way` (7), then
   `bug:as-enters-choices-any-entry` (7) and `--greedy --groups` (control of a player, rule 723, landed 2026-11-01).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
@@ -685,6 +686,8 @@ delete its detail there and move this line to `COMPLETED.md`.
 - **The game page's own rendering on a slow laptop** (2026-10-13/14): a 250-400 ms hitch when a frame's board lands on a ~50-permanent board (`Table` remounting, forced layout in `usePlayback`'s `show`); measurements and next steps in `docs/client-gaps.md`.
 - **A wordy card's rules text is illegible in the hand** (the user, 2026-10-15): the hovered hand card shrinks long text until it can't be read (The Dawning Archaic); no fix in mind yet.
 - **Split cards look like double-faced cards in the library** (the user, 2026-10-28): the library page (`client/src/library/LibraryPage.tsx`) presents a split card as an MDFC.
+- **Blitzing a deck immediately saves it to your locally stored list of decks** (the user, 2026-11-02): it shouldn't; explore offering to save the deck after the game instead.
+- **No way to ask the card replacer for one card while building a deck** (the user, 2026-11-02): right-clicking a card in the deck builder should offer a "suggest replacement" button, so players can use the automatic card replacer to modify their deck.
 - **Animation follow-ups** (re-measure bot speeds, static buffs, library put-backs, the exile filter, the crown's flight, merged tokens, folding tokens with counters, dies-trigger pulses, history highlights, real sounds): `docs/plans/legibility-of-play.md`, "Follow-ups".
 
 ## Tooling / docs

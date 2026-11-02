@@ -110,6 +110,25 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **The need-key recheck: 44 keys, 49 cards** (2026-11-02, `da62c56c7`, `34c4a2709`) — re-reading the open keys whose notes
+  claim the vocabulary lacks something. No engine change, each run on a real card in `need-key-recheck.test.ts`:
+  effect:search-to-linked-exile, effect:exile-all-hands, effect:token-copy-each-of-target-players,
+  condition:blocked-creature-filter, effect:return-linked-filter, effect:move-counters-from-all,
+  effect:return-commanders-to-command-zone, effect:populate-x-times, effect:restrict-dealt-damage-this-way,
+  effect:become-copy-filter-except-source, static:trigger-doubler-exclude-self, trigger:counters-put-other,
+  trigger:turned-face-up-other, condition:you-have-most-life-trigger-condition, trigger:battalion,
+  effect:damage-all-controller-of-target, effect:add-counter-equipped-creature, amount:cards-in-target-player-hand,
+  amount:cards-in-hand-of-target-controller, effect:exile-graveyard-of-trigger-object-controller,
+  trigger:attack-trigger-defender-controls-count, effect:search-to-exile-then-cast, effect:prohibit-cast-chosen-color,
+  condition:attacking-alone-condition, condition:trigger-condition-casters-turn,
+  effect:scope-opponents-who-lost-life-this-turn, effect:prevent-combat-damage-by-chosen-creature,
+  effect:prevent-combat-damage-by-target-players-creatures, effect:prohibit-controller-of-target,
+  effect:chosen-hand-card-shuffle-into-library, effect:search-different-names, filter:graveyard-choice-other-than-source,
+  static:cant-attack-lacking-either-keyword. On seven small general reads: effect:energy-count-amount,
+  condition:no-abilities-filter, filter:static-affects-by-power, static:pt-filtered-static,
+  condition:filter-shares-creature-type-with-source, effect:player-no-max-hand-size-for-game,
+  static:players-no-max-hand-size, effect:no-max-hand-size-until-your-next-turn, static:granted-no-max-hand-size,
+  effect:random-permanent, condition:opponent-hand-size.
 - **Need-keys Phase 2: attack triggers narrowed by attackers and the player attacked** (2026-11-02,
   `fe5078a6c`; `trigger:attacks-player-filter`, `trigger:creature-attacks-enchanted-player`) — `attacks-player`'s
   `filter`, still once per player, and `attacks`' `attackedPlayer`, once per creature and never a
