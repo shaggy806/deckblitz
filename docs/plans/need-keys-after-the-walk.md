@@ -802,7 +802,9 @@ missing. Re-run `--greedy` for Phase 2's order.
   and limited free casts (4 keys, 1 freed, 15 proving cards, 5 manual checks); ending the turn or combat
   and attack or block limits (4 keys, 6 freed, 11 proving cards, 2 manual checks); choices kept and life
   exchanges (4 keys, 4 freed, 12 proving cards, 1 manual check); token replacements and damage history (9
-  keys, 12 freed, 16 proving cards).
+  keys, 12 freed, 16 proving cards); join forces, life bidding and opponent-caused discards (4 keys, 12
+  proving cards); opening-hand abilities (2 keys, 4 proving cards, 6 manual checks; 10 freed with the last).
+  The run stopped there by choice: 32 families, 18 agents, built keys 1007 to 1152, freed 1211 to 1372.
 
 ## Rough size
 

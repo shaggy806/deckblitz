@@ -86,6 +86,11 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2: acting from the hand while you could mulligan** (2026-11-01, `3554c77d6`;
+  `mechanic:leyline-opening-hand`, `mechanic:mulligan-hand-ability`) — rule 103.5b's `mulliganHandAbility`, a
+  third action on the `mulligan` decision; rule 103.5's zero-hand floor (`mustKeep`), closing a soft-lock past
+  seven mulligans; the builder's `ScenarioSpec.openingHands`. Serum Powder, Providence, Leyline Axe, Devourer
+  of Destiny.
 - **Need-keys Phase 2: a discard an opponent's spell or ability caused** (2026-11-01, `58eb5998f`;
   `replacement:discarded-by-opponent-to-battlefield`, `trigger:discarded-by-opponent-effect`). Obstinate
   Baloth, Dodecapod, Quagnoth, Spiritual Focus.

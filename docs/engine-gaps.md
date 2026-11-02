@@ -6,6 +6,11 @@ rule number, the code that does it today and the cards it blocks. `BACKLOG.md` k
 per gap under the same bold title; when a gap closes, delete it here and move its
 `BACKLOG.md` line to `COMPLETED.md`.
 
+- **Mulligans are declared at once, and two opening-hand rules are loose** (found 2026-11-01, all older
+  than the finding). Rule 103.5 has each player declare in turn order; `beginMulligans` (`game.ts`) asks in
+  parallel, and changing it is a design call. Rule 103.5c gives the free mulligan to multiplayer and
+  Brawl; `COMMANDER_RULES` gives it at two players too. Rule 103.6b keeps a revealed opening-hand card
+  revealed until the first turn begins; the engine reveals it once.
 - **An opponent-caused discard's replacement beats the graveyard ones without asking** (found
   2026-11-01). Rule 616.1 lets the affected object's controller choose among replacement effects. With
   Obstinate Baloth, Dodecapod or Quagnoth discarded under Leyline of the Void, `game.ts` (~43286)

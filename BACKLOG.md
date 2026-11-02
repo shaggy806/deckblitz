@@ -411,13 +411,14 @@ section keeps only what to do next.
   reductions (13 freed, 25 proving cards), a number a player chooses (3 freed, 7 proving cards), cycling
   variants and limited free casts (1 freed, 15 proving cards), ending the turn or combat and attack or
   block limits (6 freed, 11 proving cards), choices kept and life exchanges (4 freed, 12 proving cards),
-  token replacements and damage history (12 freed, 16 proving cards). **About 1362 freed cards wait for the authoring
+  token replacements and damage history (12 freed, 16 proving cards), join forces, life bidding,
+  opponent-caused discards and opening-hand abilities (10 freed, 16 proving cards). **About 1372 freed cards wait for the authoring
   sweep**
   (`cards:needs -- --stale`); the user authors them in one sweep once the reasonable keys are built.
   Cloud sessions are building `keyword:hexproof-from-colors`, the combat-restriction second group,
   `effect:prevent-next-n-damage-to-you`, the cascade/sunburst grants to spells,
   `cost:kicker-nonmana-cost` and `cost:alt-cost-discard-cards`. Next unclaimed:
-  `--greedy --groups` (control of a player, rule 723, landed 2026-11-01).
+  `effect:reflexive-trigger` (9), then `--greedy --groups` (control of a player, rule 723, landed 2026-11-01).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next
@@ -486,6 +487,7 @@ One line each; the detail (rule numbers, code sites, the cards each blocks) is i
 **`docs/engine-gaps.md`**, under the same bold title. When a gap closes, delete its detail
 there and move this line to `COMPLETED.md`.
 
+- **Mulligans are declared at once, and two opening-hand rules are loose** — rule 103.5 has turn-order declarations but `beginMulligans` asks in parallel (a design call); `COMMANDER_RULES` gives the free mulligan at two players, while 103.5c names multiplayer and Brawl; a revealed opening-hand card isn't kept revealed until the first turn (103.6b).
 - **An opponent-caused discard's replacement beats the graveyard ones without asking** — `Game` puts Obstinate Baloth onto the battlefield rather than asking its controller (616.1) when Leyline of the Void also applies.
 - **Goad's defender narrowing ignores attack caps** — a second goaded creature facing a full Crawlspace isn't sent at its goader (508.1d); two Lured menace attackers under Caverns of Despair can also leave no legal block set (`combat/blocking.ts`).
 - **A spell needing two target-keyed reductions at once is refused** — `reducingTargets` keeps one earning target, so a multi-target spell affordable only with both is refused at the cast.
@@ -642,6 +644,7 @@ One line each; the detail is in **`docs/client-gaps.md`**, under the same bold t
 animation follow-ups in `docs/plans/legibility-of-play.md`, "Follow-ups". When an item lands,
 delete its detail there and move this line to `COMPLETED.md`.
 
+- **Two log lines read wrong** — a card beginning on the battlefield from an opening hand logs as "takes Leyline Axe", and `delayed-trigger-created` prints raw JSON (`format.ts` ~591).
 - **Clear can't undo All attack at a two-player table** — All attack assigns each one-defender creature outright, and Clear only empties `attackPicks`, so it stays disabled; each attacker has to be clicked off.
 - **The discard prompt says "any number" under a cap** — `App.tsx` (~6015) words an `atMost` discard as "any number of cards"; the cap itself is enforced (Jaya Ballard's +1).
 - **The combat prompts' cost lines miss the per-creature taxes** — the attack line ignores `attackTax.perAttacker` and blocks show no cost; the engine refuses what can't be paid.

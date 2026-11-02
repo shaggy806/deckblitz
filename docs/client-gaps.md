@@ -5,6 +5,8 @@ and the cleanups found along the way. `BACKLOG.md` keeps one line per item under
 title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLETED.md`. The animation follow-ups are in
 `docs/plans/legibility-of-play.md`, "Follow-ups".
 
+- **Two log lines read wrong** (found 2026-11-01). A card that begins on the battlefield from an opening
+  hand logs as "takes Leyline Axe", and `delayed-trigger-created` prints as raw JSON (`format.ts` ~591).
 - **Clear can't undo All attack at a two-player table** (found 2026-11-01). In `App.tsx`'s attack bar,
   All attack puts a creature with one legal defender straight into `attackAssignments`, and Clear only
   empties `attackPicks`, so after All attack at two players it stays disabled and each attacker has to
