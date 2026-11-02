@@ -809,8 +809,9 @@ missing. Re-run `--greedy` for Phase 2's order.
   parent made or targeted (3 keys, 4 freed, 5 proving cards); attack triggers narrowed by attackers and
   the player attacked (2 keys, 5 freed, 3 proving cards). Built keys 1157, freed 1381.
 - **2026-11-02: third overnight round** — lose-control triggers, attachment references, multi-zone
-  search, off-battlefield namesakes, exile-count costs, morph cost kinds (54 proving cards in all,
-  freed 1399).
+  search, off-battlefield namesakes, exile-count costs, morph cost kinds, then each-kind counter
+  loops, free-cast limits, casts from other zones, damage from a named object, mana-spending purposes,
+  damage replacements. Twelve families, freed 1413.
 
 ## Rough size
 

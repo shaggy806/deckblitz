@@ -20,6 +20,13 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
   exiling a count of graveyard cards, X, optional or per opponent (`cost:choose-cards-as-cost`); morph
   and disguise costs that reveal, take X or change with a count (`mechanic:face-down`).
   `git log --grep "Engine.*Cards" --since 2026-11-02`.
+- **Six more families, same round** (2026-11-02): a loop over each kind of counter
+  (`effect:double-counters-each-kind`); free casts under a count or a mana-value total
+  (`decision:free-cast-choices`); casting from another hand, its own exile, a linked exile, the
+  library while searching (`effect:cast-from-linked-exile-free-this-turn`); damage dealt by the host,
+  a token just made, a card just exiled or put (`effect:damage-from-attached`); restricted mana by
+  purpose, one type spent as a colour (`cost:mana-spending-rules`); damage replacements from another
+  source, by a live amount, for the turn (`replacement:damage-modification`).
 - **"Those tokens plus that many" and the missing tokens' commanders**
   (`replacement:token-creation-additive`, `effect:missing-tokens`): `would-create-token`'s
   `plusTokens` — Chatterfang, Squirrel General (#32) — and Shilgengar, Sire of Famine (#273), whose

@@ -22841,7 +22841,7 @@ export class Game {
   }
 
   /**
-   * Whether one floating unit of mana may pay for `purpose` (rule 106.6b).
+   * Whether one floating unit of mana may pay for `purpose` (rule 106.6).
    *
    * Unrestricted mana always may. Restricted mana never pays for a purpose
    * the engine can't name: a nameless payment satisfies no printed

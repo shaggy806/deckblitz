@@ -24,7 +24,7 @@ export const poolTotal = (pool: ManaPool): number =>
   MANA_TYPES.reduce((sum, type) => sum + pool[type], 0);
 
 /**
- * What a restricted unit of mana may be spent on (rule 106.6b) — "Spend this
+ * What a restricted unit of mana may be spent on (rule 106.6) — "Spend this
  * mana only to cast a creature spell of the chosen type" and its relatives.
  *
  * Both clauses are optional and at least one must be set; a unit whose

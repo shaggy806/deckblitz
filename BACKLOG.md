@@ -420,10 +420,14 @@ section keeps only what to do next.
   Cloud sessions are building `keyword:hexproof-from-colors`, the combat-restriction second group,
   `effect:prevent-next-n-damage-to-you`, the cascade/sunburst grants to spells,
   `cost:kicker-nonmana-cost` and `cost:alt-cost-discard-cards`. Built 2026-11-02 (third overnight
-  round, 1399 freed): `trigger:lose-control-trigger`, `condition:filter-attachments`,
+  round, 1413 freed): `trigger:lose-control-trigger`, `condition:filter-attachments`,
   `effect:search-hand-graveyard-library`, `condition:filter-card-property-clauses`,
-  `cost:choose-cards-as-cost`, `mechanic:face-down`. Next unclaimed: `--greedy --groups` (control of a
-  player, rule 723, landed 2026-11-01).
+  `cost:choose-cards-as-cost`, `mechanic:face-down`, `effect:double-counters-each-kind`,
+  `decision:free-cast-choices` (not `decision:cast-one-per-card-type-from-exile`: its two-type cards
+  need rulings), `effect:cast-from-linked-exile-free-this-turn`, `effect:damage-from-attached`,
+  `cost:mana-spending-rules`, `replacement:damage-modification`. Next unclaimed:
+  `amount:damage-prevented-this-way` (7), then `bug:as-enters-choices-any-entry` (7) and `--greedy
+  --groups` (control of a player, rule 723, landed 2026-11-01).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next
@@ -651,6 +655,7 @@ animation follow-ups in `docs/plans/legibility-of-play.md`, "Follow-ups". When a
 delete its detail there and move this line to `COMPLETED.md`.
 
 - **Which seat you see while controlling another player** (the user's call, after playing it) — today the table flips to the controlled player's seat; the other option is to stay in your own seat with a clear marker.
+- **A cast copy logs as an object id** — "obj-91 resolves", "commits a crime with obj-81"; `format.ts`.
 - **Two log lines read wrong** — a card beginning on the battlefield from an opening hand logs as "takes Leyline Axe", and `delayed-trigger-created` prints raw JSON (`format.ts` ~591).
 - **Clear can't undo All attack at a two-player table** — All attack assigns each one-defender creature outright, and Clear only empties `attackPicks`, so it stays disabled; each attacker has to be clicked off.
 - **The discard prompt says "any number" under a cap** — `App.tsx` (~6015) words an `atMost` discard as "any number of cards"; the cap itself is enforced (Jaya Ballard's +1).

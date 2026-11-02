@@ -181,6 +181,12 @@ title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLET
   seeded decks and the real chapters, the in-game tour stops, raising the hand tray while a hand
   card is spotlit, pausing the opponent under a Next card mid-game.
 
+**A cast copy logs as an object id**
+
+The game log prints "obj-91 resolves" for a cast copy and "commits a crime with obj-81", from
+`format.ts`'s `spell-resolved` case and the crime line. A name lookup that fails falls through to
+the raw id. Seen 2026-11-02 playing Collected Conjuring's copies; not caused by that family.
+
 **The initiative and the venture marker have no animation**
 
 The plan (`docs/plans/initiative-dungeons.md`, section 6) asks for two small cues through
