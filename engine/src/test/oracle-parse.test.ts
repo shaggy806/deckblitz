@@ -24,6 +24,30 @@ import { parseEffect, parseFace, parseTrigger, parseCost, parseSentence, parseTy
 // @ts-expect-error — as above.
 import { checkPool } from "../../scripts/oracle-parse-check.mjs";
 
+describe("an opponent's spell or ability causing you to discard", () => {
+  const read = (type_line: string, oracle_text: string) =>
+    parseFace({ name: "Card", type_line, oracle_text, power: "3", toughness: "3" }, { tokenFor: (d: string) => d });
+  it("put it onto the battlefield instead, with counters or without", () => {
+    const baloth = read(
+      "Creature — Beast",
+      "If a spell or ability an opponent controls causes you to discard this card, put it onto the battlefield instead of putting it into your graveyard.",
+    );
+    expect(baloth.complete).toBe(true);
+    expect(baloth.discardedByOpponentEnters).toEqual({});
+    expect(
+      read(
+        "Artifact Creature — Golem",
+        "If a spell or ability an opponent controls causes you to discard this card, put it onto the battlefield with two +1/+1 counters on it instead of putting it into your graveyard.",
+      ).discardedByOpponentEnters,
+    ).toEqual({ withCounters: { kind: "+1/+1", amount: 2 } });
+  });
+  it("whenever it causes you to discard a card, once per card", () => {
+    expect(
+      read("Enchantment", "Whenever a spell or ability an opponent controls causes you to discard a card, you gain 2 life.").triggered[0].trigger,
+    ).toEqual({ on: "discards", who: "you", byOpponent: true, perCard: true });
+  });
+});
+
 describe("each player paying or bidding an amount of their choosing", () => {
   const read = (type_line: string, oracle_text: string) =>
     parseFace({ name: "Card", type_line, oracle_text, power: "5", toughness: "5" }, { tokenFor: (d: string) => d });

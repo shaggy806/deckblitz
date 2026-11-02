@@ -209,6 +209,7 @@ function faceSource(face, ctx) {
     flashback: parsed.flashback,
     plot: parsed.plot,
     madness: parsed.madness,
+    discardedByOpponentEnters: parsed.discardedByOpponentEnters,
     miracle: parsed.miracle,
     evoke: parsed.evoke,
     alternativeCost: parsed.alternativeCost,

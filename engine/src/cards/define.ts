@@ -4758,6 +4758,16 @@ export interface CardDefinition {
    * doesn't, they put this card into their graveyard." `cost` is the madness
    * cost. `null` for a card without madness. */
   readonly madness: { readonly cost: string } | null;
+  /** "If a spell or ability an opponent controls causes you to discard this
+   * card, put it onto the battlefield [with two +1/+1 counters on it] instead
+   * of putting it into your graveyard" (Obstinate Baloth, Dodecapod): a
+   * replacement that works from the hand (rule 113.6), whoever chose the card
+   * (the ruling). It's still discarded: "whenever you discard a card" sees it,
+   * and "the discarded card" is the permanent (the rulings). The owner's choice
+   * between this and a replacement of a card going to their graveyard
+   * (rule 616.1 — Leyline of the Void) isn't asked: this one is taken. `null`
+   * for a card without it. */
+  readonly discardedByOpponentEnters: { readonly withCounters?: { readonly kind: string; readonly amount: number } } | null;
   /** Miracle (rule 702.94a) — "You may reveal this card from your hand as
    * you draw it if it's the first card you've drawn this turn. When you
    * reveal this card this way, you may cast it by paying [cost] rather than
@@ -5230,6 +5240,7 @@ const PRINTED_ABILITY: {
   harmonize: (def) => def.harmonize !== null,
   retrace: (def) => def.retrace,
   madness: (def) => def.madness !== null,
+  discardedByOpponentEnters: (def) => def.discardedByOpponentEnters !== null,
   miracle: (def) => def.miracle !== null,
   foretell: (def) => def.foretell !== null,
   plot: (def) => def.plot !== null,
@@ -5476,6 +5487,7 @@ interface CardDraft {
   harmonize?: { readonly cost: string };
   retrace?: boolean;
   madness?: { readonly cost: string };
+  discardedByOpponentEnters?: NonNullable<CardDefinition["discardedByOpponentEnters"]>;
   miracle?: { readonly cost: string };
   foretell?: { readonly cost: string };
   plot?: { readonly cost: string };
@@ -5730,6 +5742,7 @@ export function defineCard(draft: CardDraft): CardDefinition {
     harmonize: draft.harmonize ?? null,
     retrace: draft.retrace ?? false,
     madness: draft.madness ?? null,
+    discardedByOpponentEnters: draft.discardedByOpponentEnters ?? null,
     miracle: draft.miracle ?? null,
     foretell: draft.foretell ?? null,
     plot: draft.plot ?? null,

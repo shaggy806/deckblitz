@@ -1876,6 +1876,10 @@ export type TriggerSpec =
       readonly who: TriggerWho;
       readonly filter?: CardFilter;
       readonly perCard?: boolean;
+      /** "Whenever a spell or ability an opponent controls causes you to
+       * discard a card" (Spiritual Focus): the discard's `cause` was an
+       * opponent of the discarding player, as `this-discarded`'s is. */
+      readonly byOpponent?: true;
       /** "Whenever you discard one or more [nonland] cards **for the first
        * time each turn**" (Rielle, the Everwise; Veronica, Dissident Scribe):
        * only the discard event that brings the player's first matching

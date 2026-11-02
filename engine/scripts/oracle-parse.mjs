@@ -1861,6 +1861,9 @@ export function parseTrigger(clause) {
   if (/^When a spell or ability an opponent controls causes you to discard (?:~|this card)$/.test(c)) {
     return [{ on: "this-discarded", byOpponent: true }];
   }
+  if (/^Whenever a spell or ability an opponent controls causes you to discard a card$/.test(c)) {
+    return [{ on: "discards", who: "you", byOpponent: true, perCard: true }];
+  }
   if (/^Whenever you surveil$/.test(c)) return [{ on: "surveils", who: "you" }];
 
   // Steps.
@@ -8148,6 +8151,11 @@ export function parseFace(face, ctx = {}) {
     // Madness [cost] (rule 702.35a) — a mana cost only ("Madness—{2}{B}, Pay 8
     // life" isn't read).
     if ((m = /^Madness ((?:\{[^}]+\})+)$/.exec(line))) { out.madness = { cost: m[1] }; continue; }
+    // A replacement working from the hand (Obstinate Baloth, Dodecapod).
+    if ((m = /^If a spell or ability an opponent controls causes you to discard (?:~|this card), put it onto the battlefield( with two \+1\/\+1 counters on it)? instead of putting it into your graveyard\.$/.exec(line))) {
+      out.discardedByOpponentEnters = m[1] ? { withCounters: { kind: "+1/+1", amount: 2 } } : {};
+      continue;
+    }
     // Miracle [cost] (rule 702.94a) — a mana cost.
     if ((m = /^Miracle ((?:\{[^}]+\})+)$/.exec(line))) { out.miracle = { cost: m[1] }; continue; }
     // Evoke [cost] (rule 702.74a), and the Incarnations' "Evoke—Exile a white

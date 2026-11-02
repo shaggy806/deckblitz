@@ -2923,8 +2923,12 @@ export type EffectSpec =
        *
        * A commander returned to hand from any of these may go to the command
        * zone instead (rule 903.9b), exactly like a bounced one.
+       *
+       * `"where-discarded"`, with `"source"` off a `this-discarded` trigger:
+       * from the graveyard or the exile the discard put it in, still there as
+       * the same object (Quagnoth's rulings).
        */
-      readonly from?: ReturnToHandZone;
+      readonly from?: ReturnToHandZone | "where-discarded";
     }
   | {
       /** Return every battlefield permanent matching `filter` to its owner's
@@ -9481,7 +9485,7 @@ export interface EffectApi {
   subtypesOf(target: TargetRef): readonly string[];
   /** See the `"return-to-hand"` {@link EffectSpec} — `from` defaults to the
    * battlefield. */
-  returnToHand(target: TargetRef, from?: ReturnToHandZone): void;
+  returnToHand(target: TargetRef, from?: ReturnToHandZone | "where-discarded"): void;
   /** `withCounters`: counters the card gets there ("exile it with a croak
    * counter on it"). */
   exileObject(

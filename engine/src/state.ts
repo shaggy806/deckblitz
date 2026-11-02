@@ -4707,6 +4707,8 @@ export type PendingEntry =
       readonly objects: readonly ObjectId[];
       /** Who a card enters under when not its owner (Dredge the Mire). */
       readonly under?: Readonly<Record<string, PlayerId>>;
+      /** Counters a card enters with (a discarded Dodecapod's). */
+      readonly withCounters?: Readonly<Record<string, { readonly kind: string; readonly amount: number }>>;
     };
 
 /**

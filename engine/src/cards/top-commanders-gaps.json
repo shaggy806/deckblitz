@@ -1149,7 +1149,9 @@
   "condition:source-hasnt-dealt-combat-damage",
   "trigger:creature-damaged-by-source-dies",
   "mechanic:join-forces",
-  "effect:life-bidding"
+  "effect:life-bidding",
+  "trigger:discarded-by-opponent-effect",
+  "replacement:discarded-by-opponent-to-battlefield"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

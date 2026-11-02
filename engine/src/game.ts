@@ -23274,7 +23274,7 @@ export class Game {
     if (entry.kind === "spell") this.enterPermanentSpell(entry.object);
     else if (entry.kind === "land") this.finishLandPlay(entry);
     else if (entry.kind === "exiled-return") this.returnExiledCards(entry.objects);
-    else if (entry.kind === "held-entries") this.enterHeldEntries(entry.objects, entry.under);
+    else if (entry.kind === "held-entries") this.enterHeldEntries(entry.objects, entry.under, entry.withCounters);
     else this.finishZoneChoice(entry);
   }
 
@@ -26242,6 +26242,7 @@ export class Game {
           (spec.who === "any" ||
             (spec.who === "you" && event.player === self.controller) ||
             (spec.who === "opponent" && event.player !== self.controller)) &&
+          (spec.byOpponent !== true || (event.cause !== undefined && event.cause !== event.player)) &&
           this.discardedMatching(spec, event.objects, self).length > 0 &&
           (spec.firstTimeEachTurn !== true || this.firstMatchingDiscardThisTurn(spec, event.player, event.objects, self))
         );
@@ -29209,6 +29210,15 @@ export class Game {
           refs.triggerSpell !== undefined &&
           (this.state.objects[target.object]?.zoneChangeCount ?? 0) !== refs.triggerSpell
         ) {
+          return;
+        }
+        // "Return it to your hand" off a discard's trigger: from wherever the
+        // discard put it, but not once it has moved on (Quagnoth's rulings).
+        if (from === "where-discarded") {
+          const card = target.kind === "object" ? this.state.objects[target.object] : undefined;
+          if (card === undefined || (card.zone !== "graveyard" && card.zone !== "exile")) return;
+          if (refs.source !== undefined && (card.zoneChangeCount ?? 0) !== refs.source) return;
+          this.returnToHandByEffect(target, true, card.zone, source);
           return;
         }
         this.returnToHandByEffect(target, true, from ?? "battlefield", source);
@@ -43242,16 +43252,46 @@ export class Game {
    */
   private discardCards(player: PlayerId, ids: readonly ObjectId[]): void {
     if (ids.length === 0) return;
-    const mad: ObjectId[] = [];
-    this.withGraveyardEnterBatch(() => {
-      for (const id of ids) if (this.moveDiscarded(id)) mad.push(id);
-    });
-    if (this.costDiscardFor !== null) this.recordCostDiscard(this.costDiscardFor, ids);
     // What's resolving (or paying a cost) caused it — its controller is the
     // discard's cause (Psychic Purge). Nothing is at cleanup (rule 514.1).
     const cause = this.state.decisionSource?.controller;
+    const mad = this.moveDiscardedCards([{ objects: ids, cause }]);
+    if (this.costDiscardFor !== null) this.recordCostDiscard(this.costDiscardFor, ids);
     this.emit({ type: "cards-discarded", player, objects: [...ids], ...(cause !== undefined ? { cause } : {}) });
     this.queueMadness(mad);
+  }
+
+  /**
+   * Move every card of a discard out of its owner's hand, as one batch — those
+   * going to a graveyard or exile, then those a spell or ability an opponent
+   * controls put onto the battlefield instead (`discardedByOpponentEnters`).
+   * Returns the cards madness exiled.
+   */
+  private moveDiscardedCards(
+    discards: readonly { readonly objects: readonly ObjectId[]; readonly cause: PlayerId | undefined }[],
+  ): ObjectId[] {
+    const mad: ObjectId[] = [];
+    const entering: ObjectId[] = [];
+    const withCounters: Record<string, { readonly kind: string; readonly amount: number }> = {};
+    this.withGraveyardEnterBatch(() => {
+      for (const { objects, cause } of discards) {
+        for (const id of objects) {
+          const object = this.state.objects[id];
+          const enters =
+            object?.zone === "hand" && cause !== undefined && cause !== object.owner && this.registry.has(object.cardName)
+              ? this.registry.get(object.cardName).discardedByOpponentEnters
+              : null;
+          if (enters !== null) {
+            entering.push(id);
+            if (enters.withCounters !== undefined) withCounters[id] = enters.withCounters;
+          } else if (this.moveDiscarded(id)) {
+            mad.push(id);
+          }
+        }
+      }
+    });
+    if (entering.length > 0) this.enterHeldEntries(entering, {}, withCounters);
+    return mad;
   }
 
   /**
@@ -43326,10 +43366,7 @@ export class Game {
       }))
       .filter((d) => d.objects.length > 0);
     if (discards.length > 0) {
-      const mad: ObjectId[] = [];
-      this.withGraveyardEnterBatch(() => {
-        for (const { objects } of discards) for (const id of objects) if (this.moveDiscarded(id)) mad.push(id);
-      });
+      const mad = this.moveDiscardedCards(discards.map(({ objects, cause }) => ({ objects, cause })));
       for (const discard of discards) this.emit({ type: "cards-discarded", ...discard });
       this.queueMadness(mad);
     }
@@ -43354,13 +43391,22 @@ export class Game {
    * (`under` — Dredge the Mire). A card that has left its owner's hand (or
    * graveyard — Tempt with Immortality's returns) since stays where it is.
    */
-  private enterHeldEntries(ids: readonly ObjectId[], under: Readonly<Record<string, PlayerId>> = {}): void {
+  private enterHeldEntries(
+    ids: readonly ObjectId[],
+    under: Readonly<Record<string, PlayerId>> = {},
+    withCounters: Readonly<Record<string, { readonly kind: string; readonly amount: number }>> = {},
+  ): void {
     const entering = ids.filter((id) => this.state.objects[id]?.zone === "hand" || this.state.objects[id]?.zone === "graveyard");
     for (const id of entering) {
       if (this.askEnterChoice(id, under[id] ?? this.state.objects[id].owner)) {
         this.state.suspendedResolutions.push({
           effect: null,
-          enter: { kind: "held-entries", objects: entering, ...(Object.keys(under).length > 0 ? { under } : {}) },
+          enter: {
+            kind: "held-entries",
+            objects: entering,
+            ...(Object.keys(under).length > 0 ? { under } : {}),
+            ...(Object.keys(withCounters).length > 0 ? { withCounters } : {}),
+          },
         });
         return;
       }
@@ -43375,6 +43421,10 @@ export class Game {
           if (to !== undefined && entered?.zone === "battlefield" && entered.controller !== to) {
             this.gainControlByEffect(to, { kind: "object", object: id }, false, true);
             entered.summoningSick = true;
+          }
+          const counters = withCounters[id];
+          if (counters !== undefined && entered?.zone === "battlefield") {
+            this.addCounter({ kind: "object", object: id }, counters.kind, counters.amount, true, to ?? entered.owner);
           }
           this.emit({ type: "permanent-entered-battlefield", object: id });
         }

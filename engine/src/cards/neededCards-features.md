@@ -3828,3 +3828,13 @@ Mana-Charged Dragon, Liege of the Hollows, Plague of Vermin, Illicit Auction, Pa
 Contest. Left: Collective Voyage's lands would enter player by player on `for-each-player`, where
 its text has them entering together, and a `who` on the effect would reach Necrodominance's and
 Errant Minion's one payer (`effect:pay-any-amount-of-mana`, `effect:pay-any-amount-of-life`).
+
+### A discard an opponent caused — built 2026-11-01
+
+`replacement:discarded-by-opponent-to-battlefield`, `trigger:discarded-by-opponent-effect`. The card
+field `discardedByOpponentEnters { withCounters? }`; `discards`' `byOpponent`, beside
+`this-discarded`'s; `return-to-hand`'s `from: "where-discarded"`: Obstinate Baloth, Dodecapod, Quagnoth,
+Spiritual Focus. Left: Pure Intentions' "this turn" trigger returning those cards, Mangara's Blessing's
+and Sand Golem's return at the next end step (delayed, from the graveyard, if it never left), Nephalia
+Academy's replacement from a land. Rule 616.1's choice against a graveyard replacement (Leyline of the
+Void) isn't asked: the battlefield is taken, as a player would all but always choose.
