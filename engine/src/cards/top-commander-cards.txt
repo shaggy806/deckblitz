@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4151 already implemented / 849 missing (marks refreshed 2026-11-02)
+4161 already implemented / 839 missing (marks refreshed 2026-11-02)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -693,7 +693,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   694  Aggravated Assault                       {2}{R}           Enchantment
 [x]   695  Mortuary Mire                            {0}              Land
 [x]   696  Muddle the Mixture                       {U}{U}           Instant
-[ ]   697  Snuff Out                                {3}{B}           Instant
+[x]   697  Snuff Out                                {3}{B}           Instant
 [x]   698  Charcoal Diamond                         {2}              Artifact
 [x]   699  Curse of Opulence                        {R}              Enchantment — Aura Curse
 [x]   700  The Earth Crystal                        {2}{G}{G}        Legendary Artifact
@@ -1671,7 +1671,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  1678  Open the Way                             {X}{G}{G}        Sorcery
 [x]  1679  Run Away Together                        {1}{U}           Instant
 [x]  1680  Horizon Canopy                           {0}              Land
-[ ]  1681  Smuggler's Share                         {2}{W}           Enchantment
+[x]  1681  Smuggler's Share                         {2}{W}           Enchantment
 [x]  1682  Fire Nation Palace                       {0}              Land
 [x]  1683  Woe Strider                              {2}{B}           Creature — Horror
 [ ]  1684  Void Winnower                            {9}              Creature — Eldrazi
@@ -1794,7 +1794,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1801  Chameleon, Master of Disguise            {3}{U}           Legendary Creature — Human Shapeshifter Villain
 [x]  1802  Kami of the Crescent Moon                {U}{U}           Legendary Creature — Spirit
 [x]  1803  Zacama, Primal Calamity                  {6}{R}{G}{W}     Legendary Creature — Elder Dinosaur
-[ ]  1804  Call Forth the Tempest                   {5}{R}{R}{R}     Sorcery
+[x]  1804  Call Forth the Tempest                   {5}{R}{R}{R}     Sorcery
 [x]  1805  Brave the Sands                          {1}{W}           Enchantment
 [x]  1806  Collector's Vault                        {2}              Artifact
 [x]  1807  Orim's Chant                             {W}              Instant
@@ -1952,7 +1952,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1959  Hulking Raptor                           {2}{G}{G}        Creature — Dinosaur
 [x]  1960  Deafening Silence                        {W}              Enchantment
 [x]  1961  Spectral Sailor                          {U}              Creature — Spirit Pirate
-[ ]  1962  Wound Reflection                         {5}{B}           Enchantment
+[x]  1962  Wound Reflection                         {5}{B}           Enchantment
 [x]  1963  Chart a Course                           {1}{U}           Sorcery
 [x]  1964  Junk Diver                               {3}              Artifact Creature — Bird
 [x]  1965  Shinka, the Bloodsoaked Keep             {0}              Legendary Land
@@ -2121,7 +2121,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2128  Diregraf Colossus                        {2}{B}           Creature — Zombie Giant
 [x]  2129  Horn of Greed                            {3}              Artifact
 [ ]  2130  Emeria Shepherd                          {5}{W}{W}        Creature — Angel
-[ ]  2131  Food Chain                               {2}{G}           Enchantment
+[x]  2131  Food Chain                               {2}{G}           Enchantment
 [x]  2132  Koma, World-Eater                        {3}{G}{G}{U}{U}  Legendary Creature — Serpent
 [x]  2133  Haunted Cloak                            {3}              Artifact — Equipment
 [x]  2134  Ancient Gold Dragon                      {5}{W}{W}        Creature — Elder Dragon
@@ -3148,7 +3148,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3155  Kess, Dissident Mage                     {1}{U}{B}{R}     Legendary Creature — Human Wizard
 [x]  3156  River's Rebuke                           {4}{U}{U}        Sorcery
 [x]  3157  Edgar Markov                             {3}{R}{W}{B}     Legendary Creature — Vampire Knight
-[ ]  3158  Demon of Fate's Design                   {4}{B}{B}        Enchantment Creature — Demon
+[x]  3158  Demon of Fate's Design                   {4}{B}{B}        Enchantment Creature — Demon
 [x]  3159  Malcolm, Keen-Eyed Navigator             {2}{U}           Legendary Creature — Siren Pirate
 [x]  3160  Kilo, Apogee Mind                        {U}{R}{W}        Legendary Artifact Creature — Robot Artificer
 [x]  3161  Darkstar Augur                           {2}{B}           Creature — Bat Warlock
@@ -3455,7 +3455,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3462  Devilish Valet                           {2}{R}           Creature — Devil Warrior
 [ ]  3463  Spirit Water Revival                     {1}{U}{U}        Sorcery
 [x]  3464  Auriok Champion                          {W}{W}           Creature — Human Cleric
-[ ]  3465  Invigorate                               {2}{G}           Instant
+[x]  3465  Invigorate                               {2}{G}           Instant
 [x]  3466  Andúril, Flame of the West               {3}              Legendary Artifact — Equipment
 [x]  3467  Trygon Predator                          {1}{G}{U}        Creature — Beast
 [x]  3468  Hashaton, Scarab's Fist                  {W}{B}           Legendary Creature — Zombie Wizard
@@ -4646,7 +4646,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4653  Brallin, Skyshark Rider                  {3}{R}           Legendary Creature — Human Shaman
 [x]  4654  Kellan, Inquisitive Prodigy // Tail the Suspect {2}{G}{U} // {G}{U} Legendary Creature — Human Faerie Detective // Sorcery — Adventure
 [x]  4655  Rat Colony                               {1}{B}           Creature — Rat
-[ ]  4656  Rose, Cutthroat Raider                   {2}{R}{R}        Legendary Artifact Creature — Robot
+[x]  4656  Rose, Cutthroat Raider                   {2}{R}{R}        Legendary Artifact Creature — Robot
 [x]  4657  Sami, Wildcat Captain                    {4}{R}{W}        Legendary Creature — Human Artificer Rogue
 [x]  4658  Tyrant's Familiar                        {5}{R}{R}        Creature — Dragon
 [x]  4659  Sliver Legion                            {W}{U}{B}{R}{G}  Legendary Creature — Sliver
@@ -4713,7 +4713,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4720  Nezumi Informant                         {1}{B}           Creature — Rat Rogue
 [x]  4721  Blade Splicer                            {2}{W}           Creature — Phyrexian Human Artificer
 [ ]  4722  Ulalek, Fused Atrocity                   {C/W}{C/U}{C/B}{C/R}{C/G} Legendary Creature — Eldrazi
-[ ]  4723  The Raven Man                            {1}{B}           Legendary Creature — Human Wizard
+[x]  4723  The Raven Man                            {1}{B}           Legendary Creature — Human Wizard
 [x]  4724  Rabanastre, Royal City                   {0}              Land — Town
 [x]  4725  Brightglass Gearhulk                     {G}{G}{W}{W}     Artifact Creature — Construct
 [x]  4726  Research Thief                           {4}{U}           Artifact Creature — Moonfolk Wizard
@@ -4770,7 +4770,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4777  Path of Annihilation                     {3}{G}           Enchantment
 [ ]  4778  Bringer of the Last Gift                 {6}{B}{B}        Creature — Vampire Demon
 [x]  4779  Towering Titan                           {4}{G}{G}        Creature — Giant
-[ ]  4780  Wojek Investigator                       {2}{W}           Creature — Angel Detective
+[x]  4780  Wojek Investigator                       {2}{W}           Creature — Angel Detective
 [ ]  4781  With Great Power . . .                   {3}{W}           Enchantment — Aura
 [x]  4782  Urban Retreat                            {0}              Land
 [ ]  4783  Fade from History                        {2}{G}{G}        Sorcery
