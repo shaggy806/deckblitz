@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4139 already implemented / 861 missing (marks refreshed 2026-11-02)
+4147 already implemented / 853 missing (marks refreshed 2026-11-02)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -1932,7 +1932,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  1939  For the Common Good                      {X}{X}{G}        Sorcery
 [x]  1940  Brawn                                    {3}{G}           Creature — Incarnation
 [x]  1941  The Walls of Ba Sing Se                  {8}              Legendary Artifact Creature — Wall
-[ ]  1942  Port Razer                               {3}{R}{R}        Creature — Orc Pirate
+[x]  1942  Port Razer                               {3}{R}{R}        Creature — Orc Pirate
 [x]  1943  Helpful Hunter                           {1}{W}           Creature — Cat
 [x]  1944  Erode                                    {W}              Instant
 [ ]  1945  Eldritch Immunity                        {C}              Kindred Instant — Eldrazi
@@ -2051,7 +2051,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2058  Garruk, Primal Hunter                    {2}{G}{G}{G}     Legendary Planeswalker — Garruk
 [ ]  2059  Generous Plunderer                       {1}{R}           Creature — Human Rogue
 [ ]  2060  Skrelv's Hive                            {1}{W}           Enchantment
-[ ]  2061  Thousand Moons Smithy // Barracks of the Thousand {4}              Legendary Artifact // Legendary Artifact Land
+[x]  2061  Thousand Moons Smithy // Barracks of the Thousand {4}              Legendary Artifact // Legendary Artifact Land
 [x]  2062  Abstergo Entertainment                   {0}              Legendary Land
 [x]  2063  Cybermen Squadron                        {7}              Artifact Creature — Cyberman
 [x]  2064  Angel of Vitality                        {2}{W}           Creature — Angel
@@ -2176,7 +2176,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  2183  Jidoor, Aristocratic Capital // Overture {4}{U}{U}        Land — Town // Sorcery — Adventure
 [x]  2184  Aura of Silence                          {1}{W}{W}        Enchantment
 [x]  2185  Flare of Cultivation                     {1}{G}{G}        Sorcery
-[ ]  2186  Archangel of Tithes                      {1}{W}{W}{W}     Creature — Angel
+[x]  2186  Archangel of Tithes                      {1}{W}{W}{W}     Creature — Angel
 [x]  2187  Niv-Mizzet, Visionary                    {4}{U}{R}        Legendary Creature — Dragon Wizard
 [ ]  2188  Descendants' Path                        {2}{G}           Enchantment
 [x]  2189  Earthbender Ascension                    {2}{G}           Enchantment
@@ -2584,7 +2584,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2591  Priest of Fell Rites                     {W}{B}           Creature — Human Warlock
 [x]  2592  Soul's Fire                              {2}{R}           Instant
 [ ]  2593  Ascend from Avernus                      {X}{W}{W}{W}     Sorcery
-[ ]  2594  Bloodthirster                            {5}{R}           Creature — Demon
+[x]  2594  Bloodthirster                            {5}{R}           Creature — Demon
 [x]  2595  Brass Squire                             {3}              Artifact Creature — Myr
 [ ]  2596  Echo of Eons                             {4}{U}{U}        Sorcery
 [x]  2597  Rakdos, Lord of Riots                    {B}{B}{R}{R}     Legendary Creature — Demon
@@ -3408,7 +3408,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3415  Obyra, Dreaming Duelist                  {U}{B}           Legendary Creature — Faerie Warrior
 [ ]  3416  Lembas                                   {2}              Artifact — Food
 [x]  3417  Blood Pact                               {2}{B}           Instant
-[ ]  3418  Transmutation Font                       {5}              Artifact
+[x]  3418  Transmutation Font                       {5}              Artifact
 [x]  3419  Zada, Hedron Grinder                     {3}{R}           Legendary Creature — Goblin Ally
 [x]  3420  Feline Sovereign                         {2}{G}           Creature — Cat
 [x]  3421  Turbulent Fen                            {0}              Land — Swamp Forest
@@ -3794,7 +3794,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3801  Heliod's Pilgrim                         {2}{W}           Creature — Human Cleric
 [ ]  3802  Fortune Teller's Talent                  {U}              Enchantment — Class
 [x]  3803  Sunfrill Imitator                        {2}{G}           Creature — Dinosaur
-[ ]  3804  Secluded Starforge                       {0}              Land
+[x]  3804  Secluded Starforge                       {0}              Land
 [ ]  3805  Yes Man, Personal Securitron             {2}{W}           Legendary Artifact Creature — Robot
 [x]  3806  Akoum Refuge                             {0}              Land
 [x]  3807  Karazikar, the Eye Tyrant                {3}{B}{R}        Legendary Creature — Beholder
@@ -3907,7 +3907,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  3914  Tevesh Szat, Doom of Fools               {4}{B}           Legendary Planeswalker — Szat
 [x]  3915  Squee, Goblin Nabob                      {2}{R}           Legendary Creature — Goblin
 [ ]  3916  Metalworker                              {3}              Artifact Creature — Construct
-[ ]  3917  Nils, Discipline Enforcer                {2}{W}           Legendary Creature — Human Cleric
+[x]  3917  Nils, Discipline Enforcer                {2}{W}           Legendary Creature — Human Cleric
 [x]  3918  Haste Magic                              {1}{R}           Instant
 [x]  3919  Cactus Preserve                          {0}              Land — Desert
 [x]  3920  Sorin of House Markov // Sorin, Ravenous Neonate {2}              Legendary Creature — Human Noble // Legendary Planeswalker — Sorin
@@ -4896,7 +4896,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4903  Helping Hand                             {W}              Sorcery
 [x]  4904  Cryptolith Fragment // Aurora of Emrakul {3}              Artifact // Creature — Eldrazi Reflection
 [x]  4905  Witherbloom Charm                        {B}{G}           Instant
-[ ]  4906  Glass-Cast Heart                         {2}{B}           Artifact
+[x]  4906  Glass-Cast Heart                         {2}{B}           Artifact
 [x]  4907  Felix Five-Boots                         {2}{B}{G}{U}     Legendary Creature — Ooze Rogue
 [x]  4908  Bloodbraid Elf                           {2}{R}{G}        Creature — Elf Berserker
 [x]  4909  Titan of Littjara                        {4}{U}{U}        Creature — Illusion
