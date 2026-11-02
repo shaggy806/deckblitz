@@ -139,6 +139,12 @@ export type GameEvent =
       readonly type: "additional-combat-phase";
     })
   | (Base & {
+      /** An effect ended the turn (rule 724.1) or the combat phase (724.2):
+       * the game skips to the cleanup step, or to the next phase. */
+      readonly type: "phase-ended-by-effect";
+      readonly what: "turn" | "combat";
+    })
+  | (Base & {
       /** A copy of a spell was put on the stack (storm / Twincast — rule
        * 707.10 / ROADMAP Phase 8). */
       readonly type: "spell-copied";

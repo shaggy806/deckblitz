@@ -589,6 +589,8 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "collect-evidence": none,
   solve: none,
   "additional-combat": none,
+  "end-the-turn": none,
+  "end-the-combat-phase": none,
   "additional-upkeep-steps": none,
   "additional-land-drop": none,
   "shuffle-library": none,

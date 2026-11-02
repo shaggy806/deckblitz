@@ -3735,3 +3735,17 @@ Valor's Flagship.
 Vision, Spectral Synthezoid, Zaffai and the Tempests, One with the Multiverse,
 Tlincalli Hunter. Not covered: Jacob Hauken, Inspector, which also needs
 `static:play-from-exile-once-each-turn` and `effect:exile-top-face-down-linked`.
+
+### Ending the turn and the combat phase — built 2026-11-01
+
+The need-keys Phase 2 family `effect:end-the-combat-phase`, keys `effect:end-the-turn`
+and `effect:end-the-combat-phase` (rule 724). The effects `end-the-turn` and
+`end-the-combat-phase`: `Game.beginEndingTurnOrCombat` empties the waiting triggers and
+exiles the stack as the effect happens, the resolving object last as it leaves
+(`GameState.endingPhase` tells `leaveStackAfterResolving` so); `prepareForPriority` then
+checks state-based actions, any answer they ask included, and `finishEndingTurnOrCombat`
+skips to the cleanup step, or to the next phase through `endStep` as if end of combat had
+ended. The turn's owed phases go with it; the combat phase's don't. No new decision (the
+log gets `phase-ended-by-effect`). Proving cards: Time Stop, Ultima, Glorious End, Obeka
+Brute Chronologist, Mandate of Peace. The scaffolder reads the lines, "if it's your turn,
+end the turn" and "the player whose turn it is may end the turn" with them.

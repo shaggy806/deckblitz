@@ -1661,6 +1661,17 @@ exile or a token does nothing. "Exile target spell. It becomes plotted" (Aven In
 enters trigger) is an `exile` of the spell (it leaves the stack uncountered) then a
 `become-plotted` of the same slot.
 
+`end-the-turn` is "End the turn" (rule 724.1: Time Stop, Ultima, Glorious End)
+and `end-the-combat-phase` "End the combat phase" (724.2: Mandate of Peace, the
+one card), neither with a field. Every trigger waiting ceases to exist and the
+stack is exiled, this spell or ability included, so nothing is countered and
+nothing resolves; state-based actions follow, then the skip to the cleanup step
+or the next phase. Write the rest of the text in order: what comes before it
+happens first (Ultima's destroy-all, whose dies triggers then vanish), and what
+comes after still happens (Glorious End's delayed trigger). "The player whose
+turn it is may end the turn" is an `each-player-may` of `who: "active-player"`
+(Obeka, Brute Chronologist).
+
 `additional-combat` alone is Aggravated Assault's "after this main phase,
 there is an additional combat phase followed by an additional main phase":
 both come after the postcombat main phase. `afterThisPhase: true` puts the

@@ -149,6 +149,8 @@ export function describeEvent(event: GameEvent, nameOf: NameOf, seats: readonly 
       return `${who(event.player)} gets an additional combat phase`
     case 'additional-combat-phase':
       return `additional combat phase`
+    case 'phase-ended-by-effect':
+      return event.what === 'turn' ? `the turn ends` : `the combat phase ends`
     case 'spell-copied':
       return `${who(event.controller)} copies ${name(event.original)}`
     case 'ability-copied':

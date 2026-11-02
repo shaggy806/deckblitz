@@ -2571,6 +2571,16 @@ export function parseSentence(sentence, ctx) {
   if ((m = re(`(target player|target opponent) skips their next (?:(${N}) )?turns?`).exec(s))) {
     return { kind: "skip-turn", who: slot(m[1]), ...(m[2] !== undefined ? { count: amount(m[2]) } : {}) };
   }
+  // "End the turn" and "end the combat phase" (rule 724); "the player whose
+  // turn it is may end the turn" asks them (Obeka, Brute Chronologist).
+  if (re(`end the turn`).test(s)) return { kind: "end-the-turn" };
+  if (re(`if it's your turn, end the turn`).test(s)) {
+    return { kind: "conditional", condition: { kind: "your-turn" }, then: { kind: "end-the-turn" } };
+  }
+  if (re(`end the combat phase`).test(s)) return { kind: "end-the-combat-phase" };
+  if (re(`the player whose turn it is may end the turn`).test(s)) {
+    return { kind: "each-player-may", who: "active-player", prompt: "End the turn?", effect: { kind: "end-the-turn" } };
+  }
   // "Take an extra turn after this one" (rule 500.7). What's said about that
   // turn is `extraTurnScopeAt`'s.
   if (re(`(?:you )?take an extra turn after this one`).test(s)) return { kind: "take-extra-turn" };

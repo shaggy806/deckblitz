@@ -6068,6 +6068,24 @@ export type EffectSpec =
       readonly withMain?: boolean;
     }
   | {
+      /**
+       * "End the turn" (rule 724.1 — Time Stop, Sundial of the Infinite) and
+       * "end the combat phase" (724.2 — Mandate of Peace, the one card). Every
+       * trigger waiting ceases to exist and every spell and ability on the
+       * stack is exiled, this one included, none of them countered; then
+       * state-based actions, with no one getting priority; then the game skips
+       * to the cleanup step, or to the next phase with everything removed
+       * from combat. Nothing skipped happens: "at the beginning of the end
+       * step" and "at end of combat" don't trigger, and a phase the turn was
+       * owed is gone with the turn (it isn't with the combat phase, whose next
+       * phase it may be). What triggers from here on goes on the stack in the
+       * cleanup step, with another one after it, or in the next phase. Whatever
+       * the same spell says after this still happens (Glorious End). "End the
+       * combat phase" outside a combat phase does nothing at all (724.2g).
+       */
+      readonly kind: "end-the-turn" | "end-the-combat-phase";
+    }
+  | {
       /** "You get that many additional upkeep steps after this phase" (Obeka,
        * Splitter of Seconds, whose `amount` is `{ triggerValue: true }`, the
        * combat damage it dealt): an upkeep step belongs to a beginning phase,
@@ -10222,6 +10240,8 @@ export interface EffectApi {
   /** Queue an additional combat + main phase after this main phase (Aggravated
    * Assault). */
   additionalCombat(afterThisPhase?: { readonly withMain: boolean }): void;
+  /** See the `end-the-turn` {@link EffectSpec}. */
+  endTurnOrCombat(what: "turn" | "combat"): void;
   /** See the `additional-upkeep-steps` {@link EffectSpec}. */
   additionalUpkeeps(count: number): void;
   /** See the `additional-land-drop` {@link EffectSpec}. */
@@ -15327,6 +15347,12 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       ctx.additionalCombat(
         spec.afterThisPhase === true ? { withMain: spec.withMain === true } : undefined,
       );
+      return;
+    case "end-the-turn":
+      ctx.endTurnOrCombat("turn");
+      return;
+    case "end-the-combat-phase":
+      ctx.endTurnOrCombat("combat");
       return;
     case "additional-upkeep-steps":
       ctx.additionalUpkeeps(amountValue(spec.amount, ctx));

@@ -8996,6 +8996,27 @@ describe("amounts read from what has happened this turn", () => {
     expect(face("Sorcery", "This spell costs {1} less to cast for each opponent you attacked this turn.").selfCostReduction.reduceGeneric).toEqual({ turnStat: "opponents-attacked", who: "you" });
     expect(face("Sorcery", "Draw a card for each opponent who attacked this turn.").complete).toBe(false);
   });
+
+  it("ending the turn and the combat phase (rule 724)", () => {
+    expect(face("Instant", "End the turn.").effect).toEqual({ kind: "end-the-turn" });
+    expect(face("Instant", "End the combat phase.").effect).toEqual({ kind: "end-the-combat-phase" });
+    expect(face("Instant", "Draw a card. End the turn.").effect).toEqual({
+      kind: "sequence",
+      effects: [{ kind: "draw", amount: 1 }, { kind: "end-the-turn" }],
+    });
+    expect(face("Sorcery", "If it's your turn, end the turn.").effect).toEqual({
+      kind: "conditional",
+      condition: { kind: "your-turn" },
+      then: { kind: "end-the-turn" },
+    });
+    expect(face("Artifact", "{1}, {T}: End the turn. Activate only during your turn.").activated[0].effect).toEqual({ kind: "end-the-turn" });
+    expect(face(CREATURE, "{T}: The player whose turn it is may end the turn.").activated[0].effect).toEqual({
+      kind: "each-player-may",
+      who: "active-player",
+      prompt: "End the turn?",
+      effect: { kind: "end-the-turn" },
+    });
+  });
 });
 
 describe("a number a player chooses", () => {

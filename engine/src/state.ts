@@ -5661,6 +5661,15 @@ export interface GameState {
    * a permanent it puts onto the battlefield records as `entry.by`. Absent
    * while a spell resolves, and between resolutions. */
   resolvingSource?: { readonly source: ObjectId; readonly timestamp: number };
+  /**
+   * An effect has ended the turn or the combat phase (rule 724): every trigger
+   * waiting has ceased to exist and the stack has been exiled, and what's left
+   * of the process — state-based actions with no one getting priority, then
+   * the skip to the cleanup step or the next phase (724.1c-d, 724.2c-d) — is
+   * owed. `prepareForPriority` carries it out once nothing is waiting on a
+   * decision. Absent otherwise.
+   */
+  endingPhase?: "turn" | "combat";
   /** Player-level continuous effects that expire (the `player-effect`
    * effect) — see {@link PlayerEffect}. */
   playerEffects?: PlayerEffect[];

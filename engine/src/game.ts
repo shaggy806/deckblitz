@@ -7934,6 +7934,12 @@ export class Game {
         this.releaseHeldChoices();
         continue;
       }
+      // An effect ended the turn or the combat phase, and the state-based
+      // actions above were the last of it before the skip (rule 724.1c-d).
+      if (this.state.endingPhase !== undefined) {
+        this.finishEndingTurnOrCombat(this.state.endingPhase);
+        return;
+      }
       if (!this.placePendingTriggers()) break;
     }
     // Nothing is waiting on anyone, so whatever resolved last is no longer
@@ -7942,6 +7948,69 @@ export class Game {
     // Tokens split off a stack that are the same again go back into one.
     this.refoldSplitTokens();
     this.grantPriority(player);
+  }
+
+  /**
+   * "End the turn" (rule 724.1) or "end the combat phase" (724.2), as the
+   * effect happens: every trigger waiting ceases to exist (724.1a, 724.2a) and
+   * the stack is exiled (724.1b, 724.2b), none of it countered. The object
+   * resolving goes last, as it would leave the stack anyway
+   * (`leaveStackAfterResolving`, to exile), so what its own text says after
+   * this can still read it. The rest waits for `prepareForPriority`, which
+   * checks state-based actions first — with anything they ask answered — and
+   * then calls `finishEndingTurnOrCombat`. What triggers from here on stays
+   * (724.1f, 724.2f). Ending the combat phase outside one: nothing (724.2g).
+   */
+  private beginEndingTurnOrCombat(what: "turn" | "combat"): void {
+    if (what === "combat" && PHASE_OF_STEP[this.state.turn.step] !== "combat") return;
+    // The turn ending takes the combat phase with it.
+    if (this.state.endingPhase !== "turn") this.state.endingPhase = what;
+    this.state.pendingTriggers = [];
+    const stack = this.state.zones.shared.stack;
+    const resolving = stack[stack.length - 1];
+    for (const id of [...stack].reverse()) {
+      if (id !== resolving) this.exileFromStack(id);
+    }
+  }
+
+  /** One object off the stack by rule 724's exile: a spell to exile, a copy or
+   * an ability out of existence, every copy a stacked ability stands for. */
+  private exileFromStack(id: ObjectId): void {
+    if (this.state.objects[id]?.kind === "ability") this.removeAbilityFromStack(id);
+    else this.exileSpell(id);
+  }
+
+  /**
+   * What's left of ending the turn or the combat phase once state-based actions
+   * have been checked (rules 724.1d, 724.2d): the current step ends, no player
+   * having had priority, with everything removed from combat. The turn skips
+   * straight to its cleanup step, a new one if that's where it is, and any
+   * phases it was still owed are gone with what they'd have followed. The combat
+   * phase goes on to whatever phase comes after it, as if its end of combat step
+   * had just ended (`endStep`), though it never began: "at end of combat"
+   * doesn't trigger (724.2e), and "until end of combat" ends on the way
+   * (`enterStep`).
+   */
+  private finishEndingTurnOrCombat(what: "turn" | "combat"): void {
+    delete this.state.endingPhase;
+    this.state.priority.active = false;
+    this.state.priority.holder = null;
+    this.state.priority.passed = [];
+    this.endCombatStep();
+    this.emit({ type: "phase-ended-by-effect", what });
+    if (what === "combat") {
+      this.state.turn.step = "end-combat";
+      this.endStep();
+      return;
+    }
+    this.removeAllFromCombat();
+    this.state.extraCombats = 0;
+    delete this.state.extraMainPhases;
+    delete this.state.phasesAfterThisCombat;
+    delete this.state.turn.addedUpkeep;
+    delete this.state.turn.endsAfterAddedCombat;
+    delete this.state.turn.cleanupHadPriority;
+    this.enterStep("cleanup");
   }
 
   private endStep(): void {
@@ -23542,7 +23611,7 @@ export class Game {
       this.state.suspendedResolutions.splice(parked, 0, { effect: null, leaveStack: id });
       return;
     }
-    this.emit({ type: "spell-resolved", object: id });
+    this.announceResolved(id);
     this.leaveStackAfterResolving(id);
   }
 
@@ -23552,11 +23621,12 @@ export class Game {
    * resolution held back. Announced while it still waited, a client played
    * its exit with the entry still on the stack, then drew it there over the
    * next entry's resolution (a bug report, 2026-10-18). Nothing for one that
-   * has left already.
+   * has left already, nor for one its own effect is exiling (rule 724.1b).
    */
   private announceResolved(id: ObjectId): void {
     const object = this.state.objects[id];
     if (object === undefined || object.zone !== "stack") return;
+    if (this.state.endingPhase !== undefined) return;
     if (object.kind === "ability") {
       this.emit({ type: "ability-resolved", source: object.sourceObjectId ?? id, object: id });
     } else {
@@ -23568,11 +23638,16 @@ export class Game {
    * An instant or sorcery, done resolving, leaves the stack (rule 608.2n):
    * to its owner's graveyard, or wherever its own rules send it instead —
    * exile on an adventure, the library, exile — and a copy ceases to exist.
-   * Nothing, if it has left already.
+   * Nothing, if it has left already. One that ended the turn or the combat
+   * phase is exiled, whatever else it would have done (rules 724.1b, 724.2b).
    */
   private leaveStackAfterResolving(id: ObjectId, encodeAsked = false): void {
     const object = this.state.objects[id];
     if (object === undefined || object.zone !== "stack") return;
+    if (this.state.endingPhase !== undefined) {
+      this.exileFromStack(id);
+      return;
+    }
     // An ability, done resolving, ceases to exist (rule 608.2n).
     if (object.kind === "ability") {
       this.removeOneAbilityCopy(id);
@@ -24254,6 +24329,10 @@ export class Game {
     // as it leaves (`announceResolved`), not while it still waits.
     if (this.state.suspendedResolutions.length > parked || this.decisionOutstanding()) {
       this.state.suspendedResolutions.splice(parked, 0, { effect: null, leaveStack: id });
+      return;
+    }
+    if (this.state.endingPhase !== undefined) {
+      this.exileFromStack(id);
       return;
     }
     this.emit({ type: "ability-resolved", source, object: id });
@@ -31275,6 +31354,7 @@ export class Game {
         }
         this.emit({ type: "additional-combat-queued", player: controller });
       },
+      endTurnOrCombat: (what) => this.beginEndingTurnOrCombat(what),
       additionalUpkeeps: (count) => {
         // "You get" a step on someone else's turn: none is added (rule
         // 500.10a). And "after this phase" is after the combat phase under
