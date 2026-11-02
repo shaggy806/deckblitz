@@ -16,7 +16,7 @@
 import type { ActivatedAbility } from "./abilities.js";
 import type { BoardManaList, EffectSpec } from "./effects.js";
 import { COLORS, manaValue, poolCounts, poolTotal } from "./mana.js";
-import type { Color, HybridOption, HybridPip, ManaCost, ManaType, ManaUnit, SpendAs } from "./mana.js";
+import type { Color, HybridOption, HybridPip, ManaCost, ManaType, ManaUnit, SpendUnitAs, WideSpendAs } from "./mana.js";
 import type { ObjectId } from "./primitives.js";
 
 /** One possible output of a single mana-ability activation: `fixed` is the
@@ -230,6 +230,13 @@ export type ManaPurpose =
       /** Cast for its bestow cost (rule 702.103b): a restriction reads it as
        * the Aura spell it is, not the creature card. */
       readonly bestow?: true;
+      /** Cast for its disturb cost: "spend this mana only to pay a disturb
+       * cost" (`ManaSpendPurpose`). */
+      readonly via?: "disturb";
+      /** The total cost being paid has `{X}` in it — an alternative cost's or
+       * a kicker's counts, and a mana cost's doesn't when an alternative cost
+       * replaced it (Rosheen Meanderer's ruling). */
+      readonly xCost?: true;
     }
   /** An activated ability of `source` being paid for. */
   | {
@@ -239,6 +246,15 @@ export type ManaPurpose =
        * "granted"` asks about (Drana and Linvala's "to activate those
        * abilities"). */
       readonly ability?: ActivatedAbility;
+    }
+  /** Neither: a special action a restriction names (`"turn-face-up"`,
+   * `"unlock-door"`), or a cost with `{X}` in it that's neither a spell's nor
+   * an ability's (`"other"` — a suspend cost, one asked for as something
+   * resolves). `xCost` as a cast's. */
+  | {
+      readonly kind: "special";
+      readonly action: "turn-face-up" | "unlock-door" | "other";
+      readonly xCost?: true;
     }
   | null;
 
@@ -298,12 +314,15 @@ export interface ManaPlanningView {
    * "mana of any type" (`"any-type"` — Gonti, Canny Acquisitor; rule
    * 118.14: any colour *or* colourless). See {@link costAsSpendable}.
    */
-  readonly spendAs?: SpendAs;
+  readonly spendAs?: WideSpendAs;
+  /** An effect lets one type of mana be spent as a colour it isn't (Sunglasses
+   * of Urza, Abstruse Appropriation). See {@link pipsAsSpendable}. */
+  readonly spendUnits?: readonly SpendUnitAs[];
 }
 
 /** The more generous of two spending permissions (either may be absent):
  * `"any-type"` covers everything `"any-color"` does. */
-export function widerSpendAs(a: SpendAs | undefined, b: SpendAs | undefined): SpendAs | undefined {
+export function widerSpendAs(a: WideSpendAs | undefined, b: WideSpendAs | undefined): WideSpendAs | undefined {
   if (a === "any-type" || b === "any-type") return "any-type";
   return a ?? b;
 }
@@ -318,7 +337,7 @@ export function widerSpendAs(a: SpendAs | undefined, b: SpendAs | undefined): Sp
  * left alone — {@link resolveHybridCost} lowers them first, to a coloured
  * pip this then folds the same way.
  */
-export function costAsSpendable(cost: ManaCost, spendAs: SpendAs | undefined): ManaCost {
+export function costAsSpendable(cost: ManaCost, spendAs: WideSpendAs | undefined): ManaCost {
   if (spendAs === undefined) return cost;
   const colored = COLORS.reduce((n, c) => n + cost.colored[c], 0);
   const colorless = spendAs === "any-type" ? cost.colorless : 0;
@@ -329,6 +348,51 @@ export function costAsSpendable(cost: ManaCost, spendAs: SpendAs | undefined): M
     colored: { W: 0, U: 0, B: 0, R: 0, G: 0 },
     colorless: cost.colorless - colorless,
   };
+}
+
+/**
+ * `cost` as a payment allowed `units` sees it: each coloured pip one of them
+ * covers becomes a hybrid pip of its own colour and the mana spent as it
+ * (rule 609.4b), so {@link resolveHybridCost} settles it like any other, its
+ * own colour first. A printed hybrid pip gains the same halves, and the
+ * Phyrexian or twobrid halves it had stay. Only ever a step of a payment: what
+ * the spell costs doesn't change, and a resolved payment has no hybrid left.
+ */
+export function pipsAsSpendable(cost: ManaCost, units: readonly SpendUnitAs[] | undefined): ManaCost {
+  if (units === undefined || units.length === 0) return cost;
+  const extraFor = (color: Color): HybridOption[] =>
+    units
+      .filter((u) => u.unit !== color && (u.as === "any-color" || u.as === color))
+      .map((u): HybridOption => (u.unit === "C" ? { kind: "colorless" } : { kind: "color", color: u.unit }));
+  const colored = { ...cost.colored };
+  const widened: HybridPip[] = cost.hybrid.map((pip) => {
+    const options = [...pip];
+    for (const option of pip) {
+      if (option.kind !== "color") continue;
+      for (const extra of extraFor(option.color)) {
+        const already = options.some(
+          (o) => o.kind === extra.kind && (o.kind !== "color" || extra.kind !== "color" || o.color === extra.color),
+        );
+        if (!already) options.push(extra);
+      }
+    }
+    return options;
+  });
+  for (const color of COLORS) {
+    const extra = extraFor(color);
+    if (extra.length === 0 || colored[color] === 0) continue;
+    for (let i = 0; i < cost.colored[color]; i += 1) widened.push([{ kind: "color", color }, ...extra]);
+    colored[color] = 0;
+  }
+  return { ...cost, colored, hybrid: widened };
+}
+
+/** `concrete` with one more pip paid by `option`, when it's one a payment can
+ * simply add (a colour, or colorless mana on a widened pip). */
+function withOptionPaid(concrete: ManaCost, option: HybridOption): ManaCost | null {
+  if (option.kind === "colorless") return { ...concrete, colorless: concrete.colorless + 1 };
+  if (option.kind !== "color") return null;
+  return { ...concrete, colored: { ...concrete.colored, [option.color]: concrete.colored[option.color] + 1 } };
 }
 
 /**
@@ -511,13 +575,11 @@ function resolveReducedTwobrid(
   for (const pip of cost.hybrid) {
     let paid = false;
     for (const option of pip) {
-      if (option.kind !== "color") continue;
-      const colored = { ...concrete.colored };
-      colored[option.color] += 1;
-      const trial: ManaCost = { ...concrete, colored };
+      const trial = withOptionPaid(concrete, option);
+      if (trial === null) continue;
       if (planManaPayment(view, trial, avoid, exclude) !== null) {
         concrete = trial;
-        inColour.push({ pip, color: option.color });
+        if (option.kind === "color") inColour.push({ pip, color: option.color });
         paid = true;
         break;
       }
@@ -601,10 +663,8 @@ export function resolveHybridCost(
     }
     let chosen: ManaCost | null = null;
     for (const option of pip) {
-      if (option.kind !== "color") continue;
-      const nextColored = { ...concrete.colored };
-      nextColored[option.color] += 1;
-      const trial: ManaCost = { ...concrete, colored: nextColored };
+      const trial = withOptionPaid(concrete, option);
+      if (trial === null) continue;
       if (planManaPayment(view, trial, avoid, exclude) !== null) {
         chosen = trial;
         break;
@@ -1472,7 +1532,7 @@ export function planPayment(
   avoid?: ObjectId,
   exclude?: ObjectId,
 ): ManaPayment | null {
-  const resolved = resolveHybridCost(view, cost, avoid, exclude);
+  const resolved = resolveHybridCost(view, pipsAsSpendable(cost, view.spendUnits), avoid, exclude);
   if (resolved === null) return null;
   const steps = planManaPayment(view, resolved.concrete, avoid, exclude);
   if (steps === null) return null;

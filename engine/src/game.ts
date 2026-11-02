@@ -320,10 +320,13 @@ import type {
   ManaCost,
   ManaOrigin,
   ManaRestriction,
+  ManaSpendPurpose,
   ManaSpendRider,
   ManaType,
   ManaUnit,
   SpendAs,
+  SpendUnitAs,
+  WideSpendAs,
 } from "./mana.js";
 import {
   isSnowMana,
@@ -1104,6 +1107,47 @@ function kickerCostPaid(kicker: NonNullable<CardDefinition["kicker"]>, n: number
   return ((n & 1) !== 0 ? kicker.cost : "") + ((n & 2) !== 0 ? kicker.second : "");
 }
 
+/** Whether `purpose` is what `named` names (rule 106.6 — `ManaSpendPurpose`). */
+function manaPurposeIs(named: ManaSpendPurpose, purpose: Exclude<ManaPurpose, null>): boolean {
+  if (named === "cost-with-x") {
+    if (purpose.kind !== "ability") return purpose.xCost === true;
+    return purpose.ability !== undefined && parseManaCost(purpose.ability.cost.mana).x > 0;
+  }
+  if (purpose.kind === "cast") return named === "disturb" && purpose.via === "disturb";
+  if (purpose.kind === "special") return named === purpose.action;
+  const ability = purpose.ability;
+  if (ability === undefined) return false;
+  if (named === "equip-ability") return isEquipAbility(ability);
+  if (named === "power-up-ability") return ability.powerUp === true;
+  return named === "class-level" && ability.effect?.kind === "gain-class-level";
+}
+
+/** Turning a permanent face up for `cost` (rule 116.2b), a special action. */
+function turnFaceUpPurpose(cost: string): ManaPurpose {
+  return { kind: "special", action: "turn-face-up", ...(parseManaCost(cost).x > 0 ? { xCost: true as const } : {}) };
+}
+
+/** A cost that's neither a spell's nor an ability's (a suspend cost, one asked
+ * for as something resolves): nothing a restriction can name, unless it has
+ * `{X}` in it (`hasX`, for one whose X is already a number by now — Condescend's
+ * "pays {X}"). */
+function otherCostPurpose(cost: string | null, hasX = false): ManaPurpose {
+  return hasX || (cost !== null && parseManaCost(cost).x > 0)
+    ? { kind: "special", action: "other", xCost: true }
+    : null;
+}
+
+/** What "spend this mana only to pay a disturb cost" and "only on costs that
+ * contain {X}" (`ManaSpendPurpose`) read of a spell's cast: the way it's cast,
+ * and the total cost's own string, not the card's mana cost (Rosheen
+ * Meanderer's ruling: an alternative cost and a kicker count). */
+function castPaying(via: CastVia | undefined, costString: string | null): { readonly via?: "disturb"; readonly xCost?: true } {
+  return {
+    ...(via === "disturb" ? { via } : {}),
+    ...(costString !== null && parseManaCost(costString).x > 0 ? { xCost: true as const } : {}),
+  };
+}
+
 function bestowPurpose(def: CardDefinition, overload: boolean | undefined): { readonly bestow?: true } {
   return overload === true && def.overload?.keyword === "bestow" ? { bestow: true } : {};
 }
@@ -1802,7 +1846,9 @@ export class Game {
       registry: this.registry,
       maxAffordableAbilityX: (player, cost, xColor) => {
         const parsed = parseManaCost(cost);
-        return parsed.x === 0 ? 0 : this.maxAffordableAbilityX(player, (x) => concreteX(parsed, x, xColor));
+        return parsed.x === 0
+          ? 0
+          : this.maxAffordableAbilityX(player, (x) => concreteX(parsed, x, xColor), undefined, undefined, otherCostPurpose(cost));
       },
       pendingTriggerTargetSource: () => {
         const pending = this.state.pendingTargetedTrigger;
@@ -3092,7 +3138,13 @@ export class Game {
         const printed = card.morph;
         const xCost =
           parseManaCost(printed.cost).x > 0
-            ? { maxX: this.maxAffordableAbilityX(player, (x) => this.morphManaCost(player, id, printed, x)) }
+            ? {
+                maxX: this.maxAffordableAbilityX(player, (x) => this.morphManaCost(player, id, printed, x), undefined, undefined, {
+                  kind: "special",
+                  action: "turn-face-up",
+                  xCost: true,
+                }),
+              }
             : undefined;
         out.push({
           kind: "turn-face-up",
@@ -3182,6 +3234,7 @@ export class Game {
                 (x) => this.activatedAbilityManaCost(player, source, ability, x).cost,
                 ability.cost.tap || ability.zone !== undefined ? undefined : source,
                 ability.cost.tap ? source : undefined,
+                { kind: "ability", source, ability },
               )
           : undefined;
       // "Sacrifice X Treasures": as many as there are to sacrifice once the
@@ -4176,7 +4229,7 @@ export class Game {
           const total = this.withFace(card, face ?? 0, () =>
             this.castingCostOf(player, card, def, 0, withModes, pricedAt),
           );
-          if (this.payMana(player, total, undefined, undefined, { kind: "cast", card, face: face ?? 0, ...bestowPurpose(def, overload) }) !== null) return k;
+          if (this.payMana(player, total, undefined, undefined, { kind: "cast", card, face: face ?? 0, ...bestowPurpose(def, overload), ...castPaying(via, withModes) }) !== null) return k;
         }
         return Math.max(1, modal.minModes);
       };
@@ -4283,7 +4336,7 @@ export class Game {
                 this.withFace(card, face ?? 0, () => this.castingCostOf(player, card, def, 0, cost, pricedAt)),
                 undefined,
                 undefined,
-                { kind: "cast", card, face: face ?? 0, ...bestowPurpose(def, overload) },
+                { kind: "cast", card, face: face ?? 0, ...bestowPurpose(def, overload), ...castPaying(via, cost) },
                 { last: candidates },
               );
               if (plan === null) return 0;
@@ -4602,7 +4655,7 @@ export class Game {
                       rest,
                       undefined,
                       undefined,
-                      { kind: "cast", card, face: face ?? 0 },
+                      { kind: "cast", card, face: face ?? 0, ...castPaying(via, variantCost) },
                       withheld.size > 0 ? { withheld } : undefined,
                     ) !== null,
                   xPlan === null ? undefined : xPlan.maxX,
@@ -6641,6 +6694,8 @@ export class Game {
       readonly sourceLost?: boolean;
       /** The colour `cost`'s X is paid in — see `may`'s `xColor`. */
       readonly xColor?: Color;
+      /** See the `choose-modes` decision's `costHasX`. */
+      readonly costHasX?: true;
       /** The most that X may be — see `may`'s `maxX`. */
       readonly maxX?: number;
       /** X paid in energy rather than mana — see `may`'s `costEnergyX`. */
@@ -6699,7 +6754,7 @@ export class Game {
       costParsed === null
         ? null
         : { ...costParsed, generic: costParsed.generic, x: 0 };
-    if (baseline !== null && this.payMana(controller, baseline) === null) {
+    if (baseline !== null && this.payMana(controller, baseline, undefined, undefined, otherCostPurpose(cost ?? null, ability.costHasX === true)) === null) {
       decline();
       return;
     }
@@ -6768,6 +6823,7 @@ export class Game {
         : {}),
       ...(cost !== undefined ? { cost } : {}),
       ...(ability.xColor !== undefined ? { xColor: ability.xColor } : {}),
+      ...(ability.costHasX === true ? { costHasX: true as const } : {}),
       ...(energyCap !== undefined ? { maxX: energyCap } : ability.maxX !== undefined ? { maxX: ability.maxX } : {}),
       ...(energyX !== undefined ? { energyX } : {}),
       ...(key !== undefined ? { abilityKey: key } : {}),
@@ -6914,7 +6970,7 @@ export class Game {
       const parsed = parseManaCost(cost);
       chosenX = parsed.x > 0 ? Math.max(0, Math.floor(xValue ?? 0)) : 0;
       const concrete = concreteX(parsed, chosenX, awaiting.xColor);
-      const payment = this.payMana(player, concrete);
+      const payment = this.payMana(player, concrete, undefined, undefined, otherCostPurpose(cost, awaiting.costHasX === true));
       if (payment === null) chosen = [];
       else this.executePayment(player, payment);
     }
@@ -12482,7 +12538,7 @@ export class Game {
       const timing = this.whyNotSorcerySpeed(player, `suspend ${def.name}`);
       if (timing !== null) return timing;
     }
-    if (this.payMana(player, parseManaCost(def.suspend.cost)) === null) {
+    if (this.payMana(player, parseManaCost(def.suspend.cost), undefined, undefined, otherCostPurpose(def.suspend.cost)) === null) {
       return `${player} cannot pay the suspend cost of ${def.name}`;
     }
     return null;
@@ -12585,7 +12641,7 @@ export class Game {
     const suspend = def.suspend;
     if (suspend === null) throw new Error(`${def.name} does not have suspend`);
 
-    const payment = this.payMana(player, parseManaCost(suspend.cost));
+    const payment = this.payMana(player, parseManaCost(suspend.cost), undefined, undefined, otherCostPurpose(suspend.cost));
     if (payment === null) throw new Error(`${player} cannot pay the suspend cost of ${def.name}`);
 
     this.moveObject(cardId, "exile");
@@ -14106,7 +14162,7 @@ export class Game {
     const choice = this.assistChoice;
     if (choice === undefined || choice.for !== cardId || !def.assist) return floor;
     return this.withFace(cardId, face, () => {
-      const purpose: ManaPurpose = { kind: "cast", card: cardId };
+      const purpose: ManaPurpose = { kind: "cast", card: cardId, ...castPaying(undefined, costString) };
       const payable = (k: number): boolean => {
         const cost = this.castingCostOf(player, cardId, def, k, costString, targetCount);
         const helped =
@@ -14142,7 +14198,7 @@ export class Game {
   ): number {
     if (def.additionalCost?.waterbend === undefined) return floor;
     return this.withFace(cardId, face, () => {
-      const purpose: ManaPurpose = { kind: "cast", card: cardId };
+      const purpose: ManaPurpose = { kind: "cast", card: cardId, ...castPaying(undefined, costString) };
       const pays = (rest: ManaCost, withheld: ReadonlySet<ObjectId>): boolean =>
         this.payMana(player, rest, undefined, undefined, purpose, withheld.size > 0 ? { withheld } : undefined) !==
         null;
@@ -14185,7 +14241,7 @@ export class Game {
     const pool = this.state.zones.perPlayer[player].graveyard.filter((id) => id !== cardId);
     if (pool.length === 0) return floor;
     return this.withFace(cardId, face, () => {
-      const purpose: ManaPurpose = { kind: "cast", card: cardId };
+      const purpose: ManaPurpose = { kind: "cast", card: cardId, ...castPaying(undefined, costString) };
       const payable = (k: number): boolean => {
         const cost = this.castingCostOf(player, cardId, def, k, costString, targetCount);
         const rest = this.reduceCostByDelve(cost, pool.slice(0, Math.min(pool.length, cost.generic)));
@@ -14219,7 +14275,7 @@ export class Game {
   ): { maxX: number; convoke: PaidConvoke[] } {
     if (!this.tapsToPay(def, cardId, player)) return { maxX: manaOnly, convoke: [] };
     return this.withFace(cardId, face, () => {
-      const purpose: ManaPurpose = { kind: "cast", card: cardId };
+      const purpose: ManaPurpose = { kind: "cast", card: cardId, ...castPaying(undefined, costString) };
       const payable = (k: number, pool: readonly ObjectId[]): PaidConvoke[] | null => {
         const cost = this.castingCostOf(player, cardId, def, k, costString, targetCount);
         const proof = this.maxConvokeFor(pool, cost, def, cardId, player);
@@ -14299,7 +14355,7 @@ export class Game {
             this.castingCostOf(player, cardId, def, k, costString, targetCount),
             undefined,
             undefined,
-            { kind: "cast", card: cardId },
+            { kind: "cast", card: cardId, ...castPaying(undefined, costString) },
             arrangement,
           ) === null
         ) {
@@ -14330,6 +14386,7 @@ export class Game {
     costAt: (x: number) => ManaCost,
     avoid?: ObjectId,
     exclude?: ObjectId,
+    purpose: ManaPurpose = null,
   ): number {
     const pool = this.state.players[player].manaPool;
     const cap =
@@ -14337,7 +14394,7 @@ export class Game {
       pool.length;
     let best = 0;
     for (let k = 1; k <= cap; k += 1) {
-      if (this.payMana(player, costAt(k), avoid, exclude) === null) break;
+      if (this.payMana(player, costAt(k), avoid, exclude, purpose) === null) break;
       best = k;
     }
     return best;
@@ -15416,7 +15473,7 @@ export class Game {
       convoked = resolved;
     }
     const cost = convoked.length > 0 ? this.reduceCostByConvoke(delved, convoked) : delved;
-    const purpose: ManaPurpose = { kind: "cast", card: cardId, face, ...bestowPurpose(def, overload) };
+    const purpose: ManaPurpose = { kind: "cast", card: cardId, face, ...bestowPurpose(def, overload), ...castPaying(via, costString) };
     const alternativeTaps = this.spellTapCost(cardId, def, via, player, altCost, kicked !== false && kicked !== 0);
     if (alternativeTaps !== undefined) {
       // The tap half is checked against the same mana — see `tapCostOffer`.
@@ -17134,6 +17191,7 @@ export class Game {
       const offer = this.tapCostOffer(player, cardId, spec, cost, undefined, undefined, {
         kind: "cast",
         card: cardId,
+        ...castPaying(via, costString),
       });
       if (offer === null) throw new Error(`${player} cannot pay the cost of ${def.name}`);
       tapPicked = this.tapCostPicks(def.name, offer, tap);
@@ -17172,7 +17230,7 @@ export class Game {
             cost,
             this.spellWaterbend(def, kicked, chosenX),
             (rest, withheld) =>
-              this.payMana(player, rest, undefined, undefined, { kind: "cast", card: cardId, ...bestowPurpose(def, overload) }, withWaterbent(withheld)) !==
+              this.payMana(player, rest, undefined, undefined, { kind: "cast", card: cardId, ...bestowPurpose(def, overload), ...castPaying(via, costString) }, withWaterbent(withheld)) !==
               null,
           );
     if (typeof waterbent === "string") throw new Error(waterbent);
@@ -17182,7 +17240,7 @@ export class Game {
       { ...cost, generic: cost.generic - waterbent.length },
       undefined,
       undefined,
-      { kind: "cast", card: cardId, ...bestowPurpose(def, overload) },
+      { kind: "cast", card: cardId, ...bestowPurpose(def, overload), ...castPaying(via, costString) },
       manaArrangement,
     );
     if (payment === null) {
@@ -21896,7 +21954,7 @@ export class Game {
     // Life a spell's cost already spends outside the mana (Liesa's commander
     // tax) isn't there for a painland or a Phyrexian pip to spend as well.
     const reserved = purpose?.kind === "cast" ? this.commanderTaxLife(player, purpose.card) : 0;
-    const spendAs = this.spendAsFor(player, purpose);
+    const spend = this.spendAsFor(player, purpose);
     return {
       pool: this.state.players[player].manaPool,
       life: this.state.players[player].life - reserved,
@@ -21906,7 +21964,8 @@ export class Game {
       canPay: (unit) => this.manaUnitCanPay(player, unit, purpose),
       preferred: this.deckColors(player),
       keepCosts: this.otherCardCosts(player, purpose?.kind === "cast" ? purpose.card : undefined),
-      ...(spendAs !== undefined ? { spendAs } : {}),
+      ...(spend.wide !== undefined ? { spendAs: spend.wide } : {}),
+      ...(spend.units.length > 0 ? { spendUnits: spend.units } : {}),
     };
   }
 
@@ -21962,8 +22021,16 @@ export class Game {
    * way, so it's read while the card is still where it's cast from, which is
    * where every payment for a cast is planned.
    */
-  private spendAsFor(player: PlayerId, purpose: ManaPurpose): SpendAs | undefined {
-    let out: SpendAs | undefined;
+  private spendAsFor(
+    player: PlayerId,
+    purpose: ManaPurpose,
+  ): { readonly wide: WideSpendAs | undefined; readonly units: readonly SpendUnitAs[] } {
+    let wide: WideSpendAs | undefined;
+    const units: SpendUnitAs[] = [];
+    const allow = (as: SpendAs | undefined): void => {
+      if (typeof as === "object") units.push(as);
+      else wide = widerSpendAs(wide, as);
+    };
     // Every payment asks, so the board scan is memoized per cache region.
     const rules = computedCacheMemo(`spendManaAs:${player}`, () => {
       const found: (NonNullable<StaticAbility["spendManaAs"]> & { readonly from: ObjectId })[] = [];
@@ -22010,7 +22077,7 @@ export class Game {
           if (!granted) continue;
         }
       }
-      out = widerSpendAs(out, rule.as);
+      allow(rule.as);
     }
     if (spellCard !== undefined) {
       const card = this.state.objects[spellCard];
@@ -22020,18 +22087,18 @@ export class Game {
       if (card?.zone === "graveyard") {
         const scope = this.castGrantScope;
         const grant = scope?.card === spellCard ? scope.grant : undefined;
-        out = widerSpendAs(out, this.findGraveyardGrant(player, spellCard, castFace, grant)?.spendAs);
+        allow(this.findGraveyardGrant(player, spellCard, castFace, grant)?.spendAs);
       }
       if (card?.zone === "exile") {
         if (card.impulse?.spendAs !== undefined && this.impulsePlayable(player, spellCard)) {
-          out = widerSpendAs(out, card.impulse.spendAs);
+          allow(card.impulse.spendAs);
         }
         for (const permission of this.exilePermissionsFor(player, spellCard, castFace)) {
-          out = widerSpendAs(out, permission.spendAs);
+          allow(permission.spendAs);
         }
       }
     }
-    return out;
+    return { wide, units };
   }
 
   /**
@@ -22726,6 +22793,7 @@ export class Game {
         ...(spendOnly.abilityOfAnyZone === true ? { abilityOfAnyZone: true } : {}),
         ...(spendOnly.notSpell !== undefined ? { notSpell: spendOnly.notSpell } : {}),
         ...(spendOnly.fromYourGraveyard === true ? { fromYourGraveyard: true } : {}),
+        ...(spendOnly.purposes !== undefined ? { purposes: spendOnly.purposes } : {}),
         text: spendOnly.text,
       };
       if (spendOnly.uncounterable === true) tag.uncounterable = true;
@@ -22813,6 +22881,8 @@ export class Game {
       );
     }
     if (purpose === null) return false;
+    if (restriction.purposes?.some((named) => manaPurposeIs(named, purpose)) === true) return true;
+    if (purpose.kind === "special") return false;
     const [filter, subject] =
       purpose.kind === "cast"
         ? [restriction.spell, purpose.card]
@@ -33354,6 +33424,7 @@ export class Game {
       controller,
       known.lastKnownRefs,
       known.targetZones,
+      offer.costHasX === true ? { costHasX: true } : {},
     );
   }
 
@@ -33369,12 +33440,12 @@ export class Game {
     options: readonly BoundUnlessOption[],
     source: ObjectId,
     targets: ResolvedTargets,
-  ): { readonly modes: ModeOption[]; readonly cost?: string } | null {
+  ): { readonly modes: ModeOption[]; readonly cost?: string; readonly costHasX?: true } | null {
     const hasPermanent = (filter: CardFilter): boolean =>
       this.state.zones.shared.battlefield.some((id) => matchesFilter(this.state, this.registry, id, filter, { you: player }));
     const available = options.filter((option) => {
       if ("pay" in option) {
-        const payment = this.payMana(player, parseManaCost(option.pay));
+        const payment = this.payMana(player, parseManaCost(option.pay), undefined, undefined, otherCostPurpose(option.pay, option.paysX === true));
         return payment !== null && this.canPayLife(player, payment.life + (option.andLife ?? 0));
       }
       if ("payLife" in option) return this.canPayLife(player, option.payLife);
@@ -33492,7 +33563,11 @@ export class Game {
         ),
       }),
     );
-    return { modes, ...(mana !== undefined ? { cost: mana.pay } : {}) };
+    return {
+      modes,
+      ...(mana !== undefined ? { cost: mana.pay } : {}),
+      ...(mana?.paysX === true ? { costHasX: true as const } : {}),
+    };
   }
 
   /**
@@ -37778,7 +37853,7 @@ export class Game {
     const timing = this.whyNotSorcerySpeed(player, "unlock a door");
     if (timing !== null) return timing;
     if (this.doorDef(id, door).manaCost === null) return "that door has no mana cost to pay";
-    if (this.payMana(player, this.unlockCost(player, id, door)) === null) {
+    if (this.payMana(player, this.unlockCost(player, id, door), undefined, undefined, { kind: "special", action: "unlock-door" }) === null) {
       return `${player} cannot pay the unlock cost`;
     }
     return null;
@@ -37790,7 +37865,7 @@ export class Game {
   private payToUnlock(player: PlayerId, id: ObjectId, door: "left" | "right"): void {
     const why = this.whyCannotUnlock(player, id, door);
     if (why !== null) throw new Error(why);
-    const payment = this.payMana(player, this.unlockCost(player, id, door));
+    const payment = this.payMana(player, this.unlockCost(player, id, door), undefined, undefined, { kind: "special", action: "unlock-door" });
     if (payment === null) throw new Error(`${player} cannot pay the unlock cost`);
     this.executePayment(player, payment);
     this.unlockDoor(id, door, player);
@@ -40639,7 +40714,13 @@ export class Game {
       if (!card.types.includes("creature")) return "that card isn't a creature card";
       return "that card has no mana cost to pay";
     }
-    const plan = this.payMana(player, morph ? concreteX(parseManaCost(cost), Math.max(0, Math.floor(x)), undefined) : parseManaCost(cost));
+    const plan = this.payMana(
+      player,
+      morph ? concreteX(parseManaCost(cost), Math.max(0, Math.floor(x)), undefined) : parseManaCost(cost),
+      undefined,
+      undefined,
+      turnFaceUpPurpose(cost),
+    );
     if (plan === null) return `${player} cannot pay ${cost}`;
     const also = morph ? card.morph?.also : undefined;
     if (also !== undefined) {
@@ -40783,7 +40864,13 @@ export class Game {
     const card = this.registry.get(object.cardName);
     const cost = this.turnFaceUpCost(player, id, morph) ?? "";
     const chosenX = morph ? Math.max(0, Math.floor(x)) : 0;
-    const payment = this.payMana(player, morph ? concreteX(parseManaCost(cost), chosenX, undefined) : parseManaCost(cost));
+    const payment = this.payMana(
+      player,
+      morph ? concreteX(parseManaCost(cost), chosenX, undefined) : parseManaCost(cost),
+      undefined,
+      undefined,
+      turnFaceUpPurpose(cost),
+    );
     if (payment === null) throw new Error(`${player} cannot pay ${cost}`);
     this.executePayment(player, payment);
     // A morph cost that isn't only mana ("Morph—Sacrifice another creature"):

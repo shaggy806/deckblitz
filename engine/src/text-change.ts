@@ -119,6 +119,10 @@ export function changeSubtypes(subtypes: readonly string[], changes: readonly Te
  * colour sits in is a mana symbol or a choice's value — the pool audit
  * (`test/text-change.test.ts`) holds the list of those. */
 export const COLOR_WORD_KEYS: ReadonlySet<string> = new Set([
+  // Sunglasses of Urza's "white mana as though it were red mana" (`SpendUnitAs`):
+  // both are words, and rule 612.2 reaches them, unlike a mana symbol.
+  "unit",
+  "as",
   // Ruham Djinn's "as long as white is the most common color" (`most-common-color`).
   "color",
   "colors",

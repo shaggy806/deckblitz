@@ -5246,12 +5246,15 @@ is "can't attack a player it has already attacked this turn" (Port Razer), by th
   the lands; `yourTurnOnly` is "during your turn" (Tinybones, Bauble
   Burglar); `spendAs` is the spending rule below, for those casts alone.
   `affects` is ignored. `play-from-exile-permission.test.ts`.
-- `spendManaAs: { as: "any-color" | "any-type", spell? }` — how this
+- `spendManaAs: { as: "any-color" | "any-type" | { unit, as }, spell? }` — how this
   permanent's controller may spend mana (rules 118.14, 609.4b):
   `"any-color"` is "you may spend mana as though it were mana of any
   color" (Chromatic Orrery) — any unit pays a coloured pip, but a `{C}` pip
   still wants colourless mana; `"any-type"` is "mana of any type can be
-  spent", `{C}` included. Without `spell` it covers every mana cost they
+  spent", `{C}` included; `{ unit: "W", as: "R" }` is one type of mana only
+  (Sunglasses of Urza's "white mana as though it were red mana", and
+  `{ unit: "C", as: "any-color" }` on an exile's `mayCast`, Abstruse
+  Appropriation). Without `spell` it covers every mana cost they
   pay (Orrery); with it, only casting a spell that matches (Vizier of the
   Menagerie's "creature spells", from anywhere — its ruling). It changes how
   a cost may be paid, never the cost: the spell's mana value, converge's
@@ -6254,10 +6257,14 @@ Delete an entry in the same commit as the feature that retires it.
 - ~~**Mana provenance / restricted spend.**~~ **Built.** The mana pool is a
   list of tagged `ManaUnit`s, so a unit remembers where it came from. An
   `add-mana` effect stamps three optional things on what it produces:
-  - `spendOnly: { spell?, abilityOf?, chosenType?, uncounterable?, text }` —
+  - `spendOnly: { spell?, abilityOf?, purposes?, chosenType?, uncounterable?, text }` —
     "Spend this mana only to cast a creature spell of the chosen type"
     (Cavern of Souls, Unclaimed Territory, Secluded Courtyard, Ancient
-    Ziggurat). `chosenType` folds in the type named as the permanent entered;
+    Ziggurat). `purposes` names what a filter can't, beside `spell` or alone:
+    `"turn-face-up"`, `"unlock-door"`, `"disturb"`, `"equip-ability"`,
+    `"power-up-ability"`, `"class-level"` and `"cost-with-x"` ("on costs that
+    contain {X}": the total cost being paid, an ability's, a suspend cost, or
+    one asked for as something resolves). `chosenType` folds in the type named as the permanent entered;
     `abilityOf` adds the "…or activate an ability of" half — of a
     permanent on the battlefield ("abilities of creatures" means creature
     permanents: Castle Garenbrig's ruling), unless `abilityOfAnyZone: true`

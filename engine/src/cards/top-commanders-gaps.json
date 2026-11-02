@@ -1189,7 +1189,16 @@
   "effect:search-library-and-graveyard-exile-rest",
   "condition:same-name-as-target-off-battlefield",
   "condition:same-name-as-target-tokens-only",
-  "effect:exile-from-hand-by-filter"
+  "effect:exile-from-hand-by-filter",
+  "cost:spend-only-disturb-cost",
+  "cost:spend-only-equip-abilities",
+  "cost:spend-only-power-up",
+  "cost:spend-only-turn-face-up",
+  "cost:spend-only-unlock-door",
+  "cost:mana-spend-only-x-costs",
+  "cost:mana-restriction-class-level",
+  "cost:spend-colorless-as-any-color",
+  "mana:spend-color-as-another-color"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

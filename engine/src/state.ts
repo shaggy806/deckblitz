@@ -3965,6 +3965,10 @@ export type AwaitingDecision =
       /** The colour `cost`'s X is paid in — a `may`'s `xColor` ("pay any
        * amount of {R}"). */
       readonly xColor?: Color;
+      /** `cost` was written with `{X}`, already a number by now — Condescend's
+       * "pays {X}": what "spend this mana only on costs that contain {X}"
+       * reads (Rosheen Meanderer's ruling). */
+      readonly costHasX?: true;
       /** The most `cost`'s X may be — a `may`'s `maxX` ("X can't be greater
        * than the amount of life you lost this turn"). With `energyX`, the
        * most energy the chooser can pay (what they have, under `maxX`). */

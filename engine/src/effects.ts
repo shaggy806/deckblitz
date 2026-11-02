@@ -22,7 +22,7 @@ import type {
 } from "./cards.js";
 import type { AggregateSpec, CardFilter, ShareReference, SharedTypes } from "./filter.js";
 import type { CardNameAim, CardNameFilter } from "./card-names.js";
-import { manaOriginMatches, type Color, type ManaFromSpec, type ManaOrigin, type ManaType, type SpendAs } from "./mana.js";
+import { manaOriginMatches, type Color, type ManaFromSpec, type ManaOrigin, type ManaSpendPurpose, type ManaType, type SpendAs } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import { EVERY_CREATURE_TYPE, EVERY_LAND_TYPE, isCreatureType, isLandType } from "./subtypes.js";
 import { sameVoteChoice } from "./events.js";
@@ -377,6 +377,10 @@ export interface ManaSpendOnly {
   /** "Spend this mana only to cast a spell from your graveyard" (Lord of the
    * Forsaken). Set alone. See `ManaRestriction.fromYourGraveyard`. */
   readonly fromYourGraveyard?: true;
+  /** What else it may pay for, beside `spell` and `abilityOf` or on their own:
+   * "to turn permanents face up", "to pay a disturb cost", "on costs that
+   * contain {X}". See `ManaSpendPurpose`. */
+  readonly purposes?: readonly ManaSpendPurpose[];
   /** The card's own wording, for the log and the mana display. */
   readonly text: string;
 }
@@ -1196,6 +1200,10 @@ export type UnlessOption =
   | ({
       readonly pay: string;
       readonly text: string;
+      /** Written with `{X}` (a bound `payGeneric`): "spend this mana only on
+       * costs that contain {X}" pays it, though the X is a number by now
+       * (Rosheen Meanderer's ruling). Never authored. */
+      readonly paysX?: true;
       /** "…unless its controller pays {1} **and 1 life**" (Mundungu): life as
        * part of the same payment, all of it or none (rule 118.3). */
       readonly andLife?: number;
@@ -16949,7 +16957,11 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         spec.options.map((option): BoundUnlessOption => {
           if ("payGeneric" in option) {
             const n = amountValue(option.payGeneric, ctx);
-            return { pay: `{${n}}`, text: option.text.split("{X}").join(`{${n}}`) };
+            return {
+              pay: `{${n}}`,
+              text: option.text.split("{X}").join(`{${n}}`),
+              ...(option.text.includes("{X}") ? { paysX: true as const } : {}),
+            };
           }
           if ("payLifeAmount" in option) {
             const n = Math.max(0, amountValue(option.payLifeAmount, ctx));

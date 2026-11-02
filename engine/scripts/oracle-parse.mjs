@@ -5564,6 +5564,39 @@ function reflexiveClause(clause) {
   return null;
 }
 
+/** The "spend this mana only" lines that name a `ManaSpendPurpose`, as their
+ * `spendOnly`. A list, not a grammar: the printed lines are few and worded
+ * every way. */
+const MANA_SPEND_PURPOSE_LINES = {
+  "Spend this mana only to turn permanents face up.": { purposes: ["turn-face-up"] },
+  "Spend this mana only to cast an enchantment spell, unlock a door, or turn a permanent face up.": {
+    spell: { type: "enchantment" },
+    purposes: ["unlock-door", "turn-face-up"],
+  },
+  "Spend this mana only to cast Room spells and unlock doors.": {
+    spell: { subtype: "Room" },
+    purposes: ["unlock-door"],
+  },
+  "Spend this mana only to pay a disturb cost or cast an instant or sorcery spell.": {
+    spell: { typesAnyOf: ["instant", "sorcery"] },
+    purposes: ["disturb"],
+  },
+  "Spend this mana only to cast an Equipment spell or activate an equip ability.": {
+    spell: { subtype: "Equipment" },
+    purposes: ["equip-ability"],
+  },
+  "Spend this mana only to cast Equipment spells or activate equip abilities.": {
+    spell: { subtype: "Equipment" },
+    purposes: ["equip-ability"],
+  },
+  "Spend this mana only to activate power-up abilities.": { purposes: ["power-up-ability"] },
+  "Spend this mana only to cast an instant or sorcery spell or to gain a Class level.": {
+    spell: { typesAnyOf: ["instant", "sorcery"] },
+    purposes: ["class-level"],
+  },
+  "Spend this mana only on costs that contain {X}.": { purposes: ["cost-with-x"] },
+};
+
 export function parseEffect(text, outer) {
   // Each target a sentence names takes the next slot of the ability's list.
   const ctx = { ...outer, target: (spec) => outer.targets.push(spec) - 1 };
@@ -5593,6 +5626,18 @@ export function parseEffect(text, outer) {
       todo: [],
       hints: [],
     };
+  }
+  // "Add … . Spend this mana only to …" naming a `ManaSpendPurpose` (rule
+  // 106.6): the mana ability with its restriction, whole.
+  const spendOnly = /^(Add .+?\.) (Spend this mana only .+\.)$/.exec(text);
+  const spendClause = spendOnly === null ? undefined : MANA_SPEND_PURPOSE_LINES[spendOnly[2]];
+  if (spendClause !== undefined) {
+    const slots = ctx.targets.length;
+    const add = parseSentence(spendOnly[1], ctx);
+    if (add?.kind === "add-mana") {
+      return { effect: { ...add, spendOnly: { ...spendClause, text: spendOnly[2] } }, todo: [], hints: [] };
+    }
+    ctx.targets.length = slots;
   }
   // "Flip a coin. If you win the flip, … If you lose the flip, …" (rule 705, Goblin
   // Bangchuckers): one sentence each way. Nothing read, no target is kept.
@@ -11863,6 +11908,17 @@ function parseStatic(line, text) {
   }
   if (line === "You may spend mana as though it were mana of any color to pay the activation costs of ~'s abilities.") {
     return { affects: { scope: "self" }, spendManaAs: { as: "any-color", activating: "this" }, text };
+  }
+  // "You may spend white mana as though it were red mana" (Sunglasses of Urza,
+  // rule 609.4b) — `SpendUnitAs`.
+  const spendUnit = /^You may spend (white|blue|black|red|green|colorless) mana as though it were (white|blue|black|red|green) mana\.$/.exec(line);
+  if (spendUnit !== null) {
+    const symbol = { white: "W", blue: "U", black: "B", red: "R", green: "G", colorless: "C" };
+    return {
+      affects: { scope: "self" },
+      spendManaAs: { as: { unit: symbol[spendUnit[1]], as: symbol[spendUnit[2]] } },
+      text,
+    };
   }
   // Rule 722.3a — `entersPrepared()`.
   if (line === "~ enters prepared.") {

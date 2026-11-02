@@ -60,8 +60,37 @@ export interface ManaRestriction {
    * Forsaken): any spell, cast from its owner's graveyard — the player
    * spending it. Set alone. */
   readonly fromYourGraveyard?: true;
+  /** The other things this mana may pay for, beside `spell` and `abilityOf`
+   * (or on their own): see {@link ManaSpendPurpose}. */
+  readonly purposes?: readonly ManaSpendPurpose[];
   readonly text: string;
 }
+
+/**
+ * A thing "spend this mana only to …" (rule 106.6) names that isn't a spell
+ * or a permanent's abilities by filter:
+ *
+ * - `"turn-face-up"`: turning a permanent face up (rule 116.2b — Overgrown
+ *   Zealot); `"unlock-door"`: unlocking a Room's door (rule 709.5e — Creeping
+ *   Peeper). Special actions, so neither is an ability of anything.
+ * - `"disturb"`: "to pay a disturb cost" (Unblinking Observer): a spell cast
+ *   for its disturb cost (rule 702.146), whatever spell it is.
+ * - `"equip-ability"`: an equip ability (Ronin, Shadow Stalker), not every
+ *   ability of an Equipment; `"power-up-ability"` (Quinjet Technician, rule
+ *   702.193a); `"class-level"`: a Class's level bar (Sorcerer Class, rule
+ *   716.2a).
+ * - `"cost-with-x"`: "on costs that contain {X}" (Rosheen Meanderer's ruling:
+ *   a spell's total cost, an activated ability's cost, a suspend cost, or a
+ *   cost asked for as something resolves). All of that cost, not just its X.
+ */
+export type ManaSpendPurpose =
+  | "turn-face-up"
+  | "unlock-door"
+  | "disturb"
+  | "equip-ability"
+  | "power-up-ability"
+  | "class-level"
+  | "cost-with-x";
 
 /**
  * How freely a payment may spend mana (rules 118.14, 609.4b): `"any-color"`
@@ -71,7 +100,22 @@ export interface ManaRestriction {
  * It changes how a cost may be paid, never the cost or what was spent. See
  * `mana-payment.ts`'s `costAsSpendable`.
  */
-export type SpendAs = "any-color" | "any-type";
+export type WideSpendAs = "any-color" | "any-type";
+
+/**
+ * One type of mana only, spent as though it were one colour or any colour
+ * (rule 609.4b): "you may spend white mana as though it were red mana"
+ * (Sunglasses of Urza), "colorless mana as though it were mana of any color"
+ * (Abstruse Appropriation). A pip keeps its own colour too, so this widens the
+ * pip rather than folding it into generic: `mana-payment.ts`'s
+ * `pipsAsSpendable`.
+ */
+export interface SpendUnitAs {
+  readonly unit: ManaType;
+  readonly as: Color | "any-color";
+}
+
+export type SpendAs = WideSpendAs | SpendUnitAs;
 
 /**
  * One unit of mana sitting in a player's pool (rule 106.4).
@@ -178,7 +222,10 @@ export type HybridOption =
   /** twobrid — the `{2}` half of `{2/W}` (`amount` is always 2 in practice). */
   | { readonly kind: "generic"; readonly amount: number }
   /** Phyrexian — the `{P}` half of `{W/P}`: pay 2 life instead of the pip. */
-  | { readonly kind: "phyrexian" };
+  | { readonly kind: "phyrexian" }
+  /** Colorless mana, only ever on a pip a payment widened (`pipsAsSpendable`
+   * — no printed hybrid symbol has it). */
+  | { readonly kind: "colorless" };
 
 /** A single hybrid pip: the alternative payments it accepts, in the symbol's
  * written order (`{2/W}` → `[{2}, {W}]`, `{W/P}` → `[{W}, {P}]`). */

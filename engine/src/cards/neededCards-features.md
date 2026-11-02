@@ -4005,3 +4005,22 @@ cards: Collected Conjuring, Doom Reigns Supreme, Ashiok, Nightmare Muse, Primeva
 as it resolves, and how a card of two types uses the permissions needs its rulings, which the snapshot doesn't
 hold. Plargg and Nassari needs `new:opponent-chooses-exiled`, Wand of Wonder the die's rows around an
 exile-until per opponent, Baron Helmut Zemo and Rod of Absorption their other keys.
+
+### What restricted mana may pay for, and one type of mana spent as a colour — built 2026-11-02
+
+The need-keys Phase 2 family `cost:mana-spending-rules`, features only. `ManaSpendOnly.purposes` /
+`ManaRestriction.purposes` name what a filter can't (`ManaSpendPurpose`): the special actions
+turn-face-up and unlock-door, a disturb cost, equip and power-up abilities, a Class's level bar, and
+any cost with `{X}` in it, read from the total cost being paid (Rosheen Meanderer's ruling: an
+alternative cost and a kicker count, and a suspend cost and one asked for as something resolves do
+too). `ManaPurpose` gained `{ kind: "special" }`, and a cast's `via` and `xCost`; every X sizing now
+passes its purpose, so restricted mana counts toward it. `SpendUnitAs` is one type of mana spent as
+one colour or any (rule 609.4b): `pipsAsSpendable` widens each covered pip to a hybrid one, its own
+colour first, for `resolveHybridCost` to settle. The scaffolder reads the lines as a list. Keys:
+spend-only-disturb-cost, spend-only-equip-abilities, spend-only-power-up, spend-only-turn-face-up,
+spend-only-unlock-door, mana-spend-only-x-costs, mana-restriction-class-level,
+spend-colorless-as-any-color, spend-color-as-another-color. Proving cards: Overgrown Zealot, Creeping
+Peeper, Unblinking Observer, Freya Crescent, Quinjet Technician, Rosheen Meanderer, Elementalist's
+Palette, Sunglasses of Urza, Abstruse Appropriation. Left: "Spend only black mana on X" (Drain Life,
+Atalya) needs its own narrow key; North Star's one-spell permission and Grell Philosopher stay on
+spend-mana-as-any-color.

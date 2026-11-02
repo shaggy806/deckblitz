@@ -1599,6 +1599,35 @@ describe("costs and triggers", () => {
     });
   });
 
+  it("mana spendable only on what a filter can't name: its `ManaSpendPurpose`", () => {
+    const line = (oracle_text: string) => parseFace({ name: "Test Dork", type_line: "Creature", oracle_text }, { tokenFor: () => null });
+    const zealot = line("{T}: Add two mana of any one color. Spend this mana only to turn permanents face up.");
+    expect(zealot.activated[0].effect).toEqual({
+      kind: "add-mana",
+      mana: "any-color",
+      amount: 2,
+      spendOnly: { purposes: ["turn-face-up"], text: "Spend this mana only to turn permanents face up." },
+    });
+    const rosheen = line("{T}: Add {C}{C}{C}{C}. Spend this mana only on costs that contain {X}.");
+    expect(rosheen.activated[0].effect).toMatchObject({ mana: "C", amount: 4, spendOnly: { purposes: ["cost-with-x"] } });
+    const observer = line("{T}: Add {U}. Spend this mana only to pay a disturb cost or cast an instant or sorcery spell.");
+    expect(observer.activated[0].effect).toMatchObject({
+      spendOnly: { spell: { typesAnyOf: ["instant", "sorcery"] }, purposes: ["disturb"] },
+    });
+    // A line it doesn't know stays out, rather than a restriction dropped.
+    const unknown = line("{T}: Add {U}. Spend this mana only on Tuesdays.");
+    expect(unknown.activated[0].effect?.kind === "add-mana" && "spendOnly" in unknown.activated[0].effect).toBe(false);
+    expect(unknown.complete).toBe(false);
+  });
+
+  it("one type of mana spent as a colour: `SpendUnitAs`", () => {
+    const glasses = parseFace(
+      { name: "Test Glasses", type_line: "Artifact", oracle_text: "You may spend white mana as though it were red mana." },
+      { tokenFor: () => null },
+    );
+    expect(glasses.static[0].spendManaAs).toEqual({ as: { unit: "W", as: "R" } });
+  });
+
   it("several mana of any one color: any-color x N in a mana ability, a mode per colour on the stack", () => {
     // Any-color with an amount is all of one colour (Gilded Lotus).
     expect(parseSentence("Add two mana of any one color.", ctx())).toEqual({
