@@ -6,6 +6,9 @@ rule number, the code that does it today and the cards it blocks. `BACKLOG.md` k
 per gap under the same bold title; when a gap closes, delete it here and move its
 `BACKLOG.md` line to `COMPLETED.md`.
 
+- **Limited-duration control of a player** (found 2026-11-01). Rule 723.2: Word of Command and
+  Opposition Agent control a player for less than a turn. `player-control.ts` holds a next turn or a
+  next combat, not these; Word of Command is on the stale list and needs its own narrow key.
 - **`exile-all` and `damage-all`'s `except` spare a whole token stack** (found 2026-11-01). They
   compare the stack's id, so a token stack as the source is spared whole, where `destroy-all`'s
   `exceptSource` spares one token and takes the rest. Representation must not change a result.

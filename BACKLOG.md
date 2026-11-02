@@ -401,13 +401,15 @@ section keeps only what to do next.
   `look-at-library-top`; 7 freed, 17 proving cards — Sen Triplets on the stale list needs its "this
   turn" hand reveal and playing from another's hand); the next night's: a combat tax on particular
   creatures, can't-attack scoped to the defender, sacrifice costs in parts, tap costs counted or by
-  shared type (2 freed by the first two, 11 by the last two; 29 proving cards). **About 1224 freed cards wait for the authoring
+  shared type (2 freed by the first two, 11 by the last two; 29 proving cards), controlling a player
+  (3 freed, 7 proving cards), held down through N untap steps and an exile's end as a parameter (7
+  freed, 11 proving cards). **About 1234 freed cards wait for the authoring
   sweep**
   (`cards:needs -- --stale`); the user authors them in one sweep once the reasonable keys are built.
   Cloud sessions are building `keyword:hexproof-from-colors`, the combat-restriction second group,
   `effect:prevent-next-n-damage-to-you`, the cascade/sunburst grants to spells,
   `cost:kicker-nonmana-cost` and `cost:alt-cost-discard-cards`. Next unclaimed:
-  `mechanic:control-attack-block-choices` (10, a design of its own), then `--greedy --groups`.
+  `--greedy --groups` (control of a player, rule 723, landed 2026-11-01).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next
@@ -476,6 +478,7 @@ One line each; the detail (rule numbers, code sites, the cards each blocks) is i
 **`docs/engine-gaps.md`**, under the same bold title. When a gap closes, delete its detail
 there and move this line to `COMPLETED.md`.
 
+- **Limited-duration control of a player** — rule 723.2's Word of Command and Opposition Agent; `player-control.ts` holds a next turn or a next combat only.
 - **`exile-all` and `damage-all`'s `except` spare a whole token stack** — they compare the stack's id, where `destroy-all`'s `exceptSource` spares one token and takes the rest.
 - **A must-block creature's only companion can't legally join it** — `withinBlockCompany` (`combat/blocking.ts`) can answer with an illegal `[]`, as with an attacker that can't be blocked by more than one; a person would have no legal declaration.
 - **A target tax's offers are approximate in two corners** — `target-count.ts`'s sum over a `targeting` tax and a two-slot `targetCostReduction` beside a tax mis-offer, never mis-charge.
@@ -549,6 +552,7 @@ live games for" (wraths since `threat`, pumping an opponent's attacker, the `"ac
 big boards and deep stacks under count budgets, deck biases, 1/1 tokens since `smallTokens`,
 Shiko or the other spell, and haste enablers in the crackback).
 
+- **A bot controlling another player only passes** (2026-11-01) — `eval-bot.ts`'s stand-in makes that player's forced decisions one step ahead and casts nothing, so a bot's Mindslaver turn is legal but timid.
 - **Bots never band, and price a band's blocker as blocking one creature** (2026-10-28, B247): a bot's attack never sets `AttackerDeclaration.band`, and `bot/combat-math.ts` judges a block as one blocker on one attacker, though a blocker of a band blocks all of it and takes all their damage (rule 702.22h). Dividing damage under banding is right already (`opposedAssignment`).
 - **Play with the bots' simulation budget** (the user, 2026-10-13): v2 stops on whichever comes first,
   a count (`maxSimulations`, default 200 a decision; 12 rollouts for a non-priority decision) or the

@@ -86,6 +86,21 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2: an exile's end as a parameter** (2026-11-01, `e927fd648`;
+  `effect:exile-from-hand-until-source-leaves`, partly, `effect:exile-until-opponent-becomes-monarch`,
+  `effect:exile-until-other-target-leaves`) — `discard-chosen`'s `untilSourceLeaves`, `exile`'s `until`
+  (610.3). Kitesail Freebooter, Brain Maggot, Deep-Cavern Bat, Palace Jailer, Calix.
+- **Need-keys Phase 2: held down through a chosen player's next N untap steps** (2026-11-01,
+  `91a108a40`; `effect:doesnt-untap-next-two-untap-steps`, `effect:doesnt-untap-next-untap-step`,
+  `effect:doesnt-untap-your-next-untap-step`) — `tap`'s `doesntUntapSteps` and `untapStepOf`, also on
+  `tap-all`; `skipsUntapOf` is now per player. Telekinesis, Reveka, Samite Alchemist, Spectral Bears,
+  Vorinclex, Dreamshackle Geist.
+- **Need-keys Phase 2: controlling a player (rule 723), and choosing another's attackers and blocks**
+  (2026-11-01, `227da0fb0`; `mechanic:control-player`, partly, `mechanic:control-attack-block-choices`)
+  — the `control-player` and `choose-combat` effects, `player-control.ts` (who answers; nothing in the
+  rules reads it), `viewFor` with what the controlled player sees (723.4), the server's seat check, the
+  table drawn from `view.perspective`. No new decision kind. Mindslaver, Worst Fears, Cruel Entertainment,
+  Secret of Bloodbending, Emrakul the Promised End, Master Warcraft, Brutal Hordechief.
 - **Need-keys Phase 2: tap a counted or shared-type set as a cost** (2026-11-01, `a679a5df5`;
   `cost:tap-cost-transform-trigger`, `cost:tap-creatures-sharing-creature-type`,
   `cost:tap-x-untapped-cost`, `effect:tap-x-then`) — `tapOthers.count: "x"`, `shareCreatureType`,

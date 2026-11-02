@@ -788,7 +788,11 @@ missing. Re-run `--greedy` for Phase 2's order.
 - **2026-11-01 (evening): the next overnight round** (`/build-family overnight`, local agents, two
   families each) — a combat tax on particular creatures (4 keys, 18 proving cards with the next,
   2 freed with it); can't-attack scoped to the defender (3 keys); sacrifice costs in parts (5 keys, 6
-  proving cards); tap costs counted or by shared type (4 keys, 5 proving cards; 11 freed with the last).
+  proving cards); tap costs counted or by shared type (4 keys, 5 proving cards; 11 freed with the last);
+  controlling a player, rule 723, with choosing another's attackers and blocks (2 keys, 3 freed, 7
+  proving cards, 9 manual checks: the design the earlier rounds left for last); held down through N
+  untap steps (3 keys, 3 freed, 6 proving cards); an exile's end as a parameter (3 keys, 4 freed, 5
+  proving cards).
 
 ## Rough size
 
