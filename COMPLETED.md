@@ -86,6 +86,32 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2: amounts read from this turn's events** (2026-11-01, `d4da8b9e5`;
+  `effect:counters-put-this-turn-stat`, `effect:total-mana-value-cast-this-turn`,
+  `effect:turn-stat-cards-discarded`, `effect:turn-stat-counters-put`, `effect:turn-stat-lands-entered`,
+  `effect:count-players-with-turn-history`, `effect:turn-stat-per-player-amount`,
+  `amount:opponents-attacked-this-turn`) — `TurnHistory.countersPut`, the `countersPutThisTurn` amount
+  and `counters-put-this-turn` condition, `castThisTurn`'s `total`/`other`, `turnStat`'s `who: "each"`,
+  the `"opponents-attacked"` stat. Iridescent Hornbeetle, Fairgrounds Trumpeter, Lord Jyscal Guado, Call
+  Forth the Tempest, The Raven Man, Dream Salvage, Hollow One, Bioengineered Future, Wound Reflection,
+  Smuggler's Share, Militant Angel, Rose.
+- **Need-keys Phase 2: a player's number against yours as a spell's sentence** (2026-11-01, `854249e10`;
+  `condition:opponent-more-life`, `condition:you-more-life-than-an-opponent`,
+  `condition:target-player-more-cards-in-hand-than-you`, `condition:target-player-more-life-than-you`,
+  `amount:opponents-with-more-cards-in-hand`) — no engine code: `player-compare` and
+  `countPlayers.where` already said it, so the scaffolder and pins. Linvala the Preserver, Glorious
+  Enforcer, Pulse of the Forge, Pulse of the Dross, Wojek Investigator.
+- **Need-keys Phase 2: costs that exile a chosen object** (2026-11-01, `d933185e3`;
+  `cost:exile-card-from-hand`, `cost:exile-creature-cost`, `cost:exile-from-single-graveyard`,
+  `cost:exile-spell-you-control`) — `exilesSacrifice`, `exileFromHand` (a mana ability waits for it,
+  `thenManaAbility`), `singleGraveyard`, `exileSpell`. Food Chain, City of Shadows, Necrotic Fumes,
+  Cadaverous Bloom, Night Soil, Nivmagus Elemental.
+- **Need-keys Phase 2: alternative costs in life or a life change** (2026-11-01, `072a408ab`, checks
+  `cbbb328e3`; `cost:alt-cost-opponent-gains-life`, `cost:alt-cost-pay-life-equal-mana-value`,
+  `cost:alternative-cost-pay-life`) — `alternativeCost.othersGainLife`, `payLifeManaValue` on
+  `alternativeCostForSpells`, `grant-spells-this-turn` and `impulse-exile`, `Game.alternativeCostsOf`
+  with `altCostIndex` (a choice among them), kicker on alternative costs. Snuff Out, Invigorate, Reverent
+  Silence, Demon of Fate's Design, Marshland Bloodcaster, Inside Information.
 - **Need-keys Phase 2: an exile's end as a parameter** (2026-11-01, `e927fd648`;
   `effect:exile-from-hand-until-source-leaves`, partly, `effect:exile-until-opponent-becomes-monarch`,
   `effect:exile-until-other-target-leaves`) — `discard-chosen`'s `untilSourceLeaves`, `exile`'s `until`

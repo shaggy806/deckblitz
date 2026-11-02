@@ -403,7 +403,9 @@ section keeps only what to do next.
   creatures, can't-attack scoped to the defender, sacrifice costs in parts, tap costs counted or by
   shared type (2 freed by the first two, 11 by the last two; 29 proving cards), controlling a player
   (3 freed, 7 proving cards), held down through N untap steps and an exile's end as a parameter (7
-  freed, 11 proving cards). **About 1234 freed cards wait for the authoring
+  freed, 11 proving cards), alternative costs in life and costs that exile a chosen object (7 freed,
+  12 proving cards), a player's number against yours and amounts from this turn's events (6 freed, 17
+  proving cards). **About 1247 freed cards wait for the authoring
   sweep**
   (`cards:needs -- --stale`); the user authors them in one sweep once the reasonable keys are built.
   Cloud sessions are building `keyword:hexproof-from-colors`, the combat-restriction second group,

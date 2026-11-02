@@ -792,7 +792,9 @@ missing. Re-run `--greedy` for Phase 2's order.
   controlling a player, rule 723, with choosing another's attackers and blocks (2 keys, 3 freed, 7
   proving cards, 9 manual checks: the design the earlier rounds left for last); held down through N
   untap steps (3 keys, 3 freed, 6 proving cards); an exile's end as a parameter (3 keys, 4 freed, 5
-  proving cards).
+  proving cards); alternative costs in life and costs that exile a chosen object (7 keys, 7 freed, 12
+  proving cards, 4 manual checks); a player's number against yours and amounts from this turn's events
+  (13 keys, 6 freed, 17 proving cards).
 
 ## Rough size
 
