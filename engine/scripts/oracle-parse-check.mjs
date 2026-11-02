@@ -75,6 +75,10 @@ function canon(v) {
     if (val === undefined || k === "text" || k === "resolve" || k.startsWith("__")) continue;
     if (k === "targets" && Array.isArray(val) && val.length === 0 && v.effect !== undefined && v.trigger === undefined && v.cost === undefined) continue;
     if (k === "token" && v.kind === "create-token") continue;
+    if (v.event === "would-create-token" && ["plusOneToken", "plusTokens", "tokensInstead", "creatureTokensInstead", "oneOfEach"].includes(k)) {
+      out[k] = "a token";
+      continue;
+    }
     if (k === "prompt" && (v.kind === "may" || v.kind === "choose-among-targets")) continue;
     // `who: "you"` is the default for life, draws and the like.
     if (k === "who" && val === "you" && ["gain-life", "lose-life", "draw"].includes(v.kind)) continue;

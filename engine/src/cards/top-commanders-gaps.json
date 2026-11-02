@@ -1137,7 +1137,11 @@
   "effect:destroy-all-except-chosen",
   "effect:each-player-chooses-destroy-rest",
   "effect:exchange-life-power",
-  "effect:exchange-life-totals"
+  "effect:exchange-life-totals",
+  "replacement:token-creation-add-extra",
+  "replacement:artifact-tokens-instead",
+  "replacement:token-creation-substitute-replacement",
+  "replacement:token-creation-one-of-each"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

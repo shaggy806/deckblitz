@@ -24,6 +24,57 @@ import { parseEffect, parseFace, parseTrigger, parseCost, parseSentence, parseTy
 // @ts-expect-error — as above.
 import { checkPool } from "../../scripts/oracle-parse-check.mjs";
 
+describe("would-create-token replacements", () => {
+  const read = (oracle_text: string) => {
+    const face = parseFace(
+      { name: "Card", type_line: "Creature — Elf", oracle_text, power: "1", toughness: "1" },
+      { tokenFor: (desc: string) => `${/(\w+)(?: creature| artifact)*( with .*)?$/.exec(desc)?.[1]} Token` },
+    );
+    return face.static[0]?.replacement;
+  };
+  it("those tokens plus an additional one, of any token or some", () => {
+    expect(
+      read(
+        'If you would create one or more tokens, instead create those tokens plus an additional Food token. (It\'s an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life.")',
+      ),
+    ).toEqual({ event: "would-create-token", plusOneToken: "Food Token" });
+    expect(
+      read("If you would create one or more Treasure tokens, instead create those tokens plus an additional Treasure token."),
+    ).toEqual({ event: "would-create-token", plusOneToken: "Treasure Token", ofTokens: { subtypesAnyOf: ["Treasure"] } });
+    expect(
+      read(
+        "If one or more artifact tokens would be created under your control, those tokens plus an additional 1/1 colorless Thopter artifact creature token with flying are created instead.",
+      ),
+    ).toEqual({ event: "would-create-token", plusOneToken: "Thopter Token", ofTokens: { type: "artifact" } });
+    expect(
+      read("If one or more creature tokens would be created under your control, those tokens plus a 1/1 white Soldier creature token are created instead."),
+    ).toEqual({ event: "would-create-token", plusOneToken: "Soldier Token", ofTokens: { type: "creature" } });
+    expect(
+      read("If one or more tokens would be created under your control, those tokens plus that many 1/1 green Squirrel creature tokens are created instead."),
+    ).toEqual({ event: "would-create-token", plusTokens: "Squirrel Token" });
+  });
+  it("other tokens instead, and one of each", () => {
+    expect(
+      read("If one or more artifact tokens would be created under your control, that many 5/5 red Dragon creature tokens with flying are created instead."),
+    ).toEqual({ event: "would-create-token", tokensInstead: "Dragon Token", ofTokens: { type: "artifact" } });
+    expect(read("If you would create a Fish token, create a 3/3 blue Shark creature token instead.")).toEqual({
+      event: "would-create-token",
+      tokensInstead: "Shark Token",
+      ofTokens: { subtypesAnyOf: ["Fish"] },
+    });
+    expect(read("If you would create a Clue, Food, or Treasure token, instead create one of each.")).toEqual({
+      event: "would-create-token",
+      oneOfEach: ["Clue Token", "Food Token", "Treasure Token"],
+      ofTokens: { subtypesAnyOf: ["Clue", "Food", "Treasure"] },
+    });
+  });
+  it("not a replacement the player may choose", () => {
+    expect(
+      read("If you would create one or more tokens, you may instead create that many 2/2 green Cat creature tokens with haste or that many 3/1 green Dog creature tokens with vigilance."),
+    ).toBeUndefined();
+  });
+});
+
 describe("when a spell may be cast or an ability activated", () => {
   const face = (type_line: string, oracle_text: string) =>
     parseFace({ name: "Test Card", type_line, oracle_text, mana_cost: "{7}", colors: [], cmc: 7 } as never) as unknown as Record<string, unknown> & {

@@ -9565,6 +9565,9 @@ export interface EffectApi {
    * enter (rule 603.6a). See the `sequence` {@link EffectSpec}'s
    * `simultaneous`. */
   simultaneously(fn: () => void): void;
+  /** Carry out `fn` as one token-creation event: a replacement that adds one
+   * token to an event gets one opportunity at all of it (rule 614.5). */
+  oneTokenEvent(fn: () => void): void;
   /** The creature this effect's source equips — see `create-token-copy`'s
    * `of: "equipped"`. */
   equippedCreature(): ObjectId | undefined;
@@ -15765,17 +15768,22 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         });
       const specCount = amountValue(spec.count, ctx);
       if (spec.of === "entered-together") {
-        for (const { object, count } of ctx.enteredTogether ?? []) copy(object, specCount * count);
+        ctx.oneTokenEvent(() => {
+          for (const { object, count } of ctx.enteredTogether ?? []) copy(object, specCount * count);
+        });
         return;
       }
       if (typeof spec.of === "object") {
         // Which ones, fixed before the first copy enters (rule 608.2h): a
         // copy made here doesn't count itself.
-        if ("eachExiled" in spec.of) {
-          for (const card of ctx.exiledCardsMatching(spec.of.eachExiled)) copy(card, specCount);
-          return;
-        }
-        for (const { object, count } of ctx.permanentsMatching(spec.of.each)) copy(object, specCount * count);
+        const of = spec.of;
+        ctx.oneTokenEvent(() => {
+          if ("eachExiled" in of) {
+            for (const card of ctx.exiledCardsMatching(of.eachExiled)) copy(card, specCount);
+          } else {
+            for (const { object, count } of ctx.permanentsMatching(of.each)) copy(object, specCount * count);
+          }
+        });
         return;
       }
       if (ofCards) {
@@ -15797,9 +15805,11 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           });
           return;
         }
-        for (const card of spec.chooseOne === true ? cards.slice(0, 1) : cards) {
-          copy(card, specCount * ctx.stackMultiplier);
-        }
+        ctx.oneTokenEvent(() => {
+          for (const card of spec.chooseOne === true ? cards.slice(0, 1) : cards) {
+            copy(card, specCount * ctx.stackMultiplier);
+          }
+        });
         return;
       }
       let of: ObjectId | undefined;

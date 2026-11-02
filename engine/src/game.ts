@@ -159,8 +159,11 @@ import {
   speedWithin,
   withComputedCache,
   meldPartners,
+  withChangeling,
 } from "./characteristics.js";
 import type { Characteristics } from "./characteristics.js";
+import { planTokenEvent } from "./token-replacements.js";
+import type { PlannedTokens, TokenKind, TokenReplacementInstance } from "./token-replacements.js";
 import type {
   DamageMultiplierReplacement,
   EnterInstead,
@@ -1732,6 +1735,11 @@ export class Game {
   private enterBatchFired: Set<string> | null = null;
   /** …and that entry's announcements, which a batched trigger counts. */
   private enterBatchEvents: readonly GameEventInput[] | null = null;
+  /** The `plusOneToken` replacements that have had their one opportunity at
+   * the token-creation event under way (rule 614.5), while one instruction
+   * makes several kinds of token: see {@link withTokenEvent}. Not game state:
+   * it only ever spans one synchronous call. */
+  private tokenEventUsed: Set<string> | null = null;
   /** The player whose leaving the game (`leaveGame`) is under way. While it
    * is, their own cards may still move — off the stack, as they leave — and
    * nothing triggers on it: those cards left the game rather than going
@@ -29606,8 +29614,11 @@ export class Game {
       // gain (rule 702.15e).
       simultaneously: (fn) =>
         this.withLeaveBatch(() =>
-          this.withGraveyardLeaveBatch(() => this.withEnterBatch(() => this.withDamageBatch(fn))),
+          this.withGraveyardLeaveBatch(() =>
+            this.withEnterBatch(() => this.withDamageBatch(() => this.withTokenEvent(fn))),
+          ),
         ),
+      oneTokenEvent: (fn) => this.withTokenEvent(fn),
       flicker: (flickered, options) => this.flickerByEffect(source, controller, flickered, options),
       meld: (self, partnerFilter, into, partner) => this.meldByEffect(controller, x, self, partnerFilter, into, partner),
       returnFlickered: (link, thenCounters, underYourControl, transformed, tapped) =>
@@ -34499,7 +34510,7 @@ export class Game {
      * `attachedTo`. */
     attachTo?: ObjectId | null,
   ): readonly ObjectId[] {
-    let def = this.registry.get(tokenName); // validate the token is a known definition
+    const def = this.registry.get(tokenName); // validate the token is a known definition
     if (attachTo !== undefined) {
       if (attachTo === null || !this.canCreateAttached(def, attachTo, controller)) return [];
       // One token of a compacted stack is the one it goes on, as an attach
@@ -34507,16 +34518,12 @@ export class Game {
       attachTo = this.splitOneFromStack(attachTo);
       separate = true;
     }
-    // Doubling Season / Parallel Lives (rule 614): "twice that many instead".
-    const total = count * this.tokenCreationMultiplier(controller);
-    // Divine Visitation (rule 614.1a): creature tokens are made as its
-    // Angels instead — what the token was, an X/X's size too, is gone.
-    const instead = def.types.includes("creature") ? this.creatureTokenSubstitute(controller) : undefined;
-    if (instead !== undefined) {
-      tokenName = instead;
-      def = this.registry.get(instead);
-      basePt = undefined;
-    }
+    // The would-create-token replacements (rule 614): the tokens themselves
+    // only where they're still what the effect named. In their place, Divine
+    // Visitation's Angels (rule 614.1a) — what the token was, an X/X's size
+    // too, is gone.
+    const plan = this.tokenEventPlan(controller, { types: def.types, subtypes: withChangeling(def, def.subtypes) }, count);
+    const total = plan.find((t) => t.name === null)?.count ?? 0;
     // What the effect does to the tokens, not what they are: Chatterfang's
     // Squirrels get these and nothing else of the tokens' (the ruling).
     const riders: PtModifier[] = [
@@ -34586,60 +34593,100 @@ export class Game {
         separate,
         attachTo ?? undefined,
       ),
-      ...this.mintPlusTokens(controller, total, (name, n) =>
-        this.mintTokenBatch(
-          controller,
-          name,
-          null,
-          n,
-          riders.map((m) => ({ ...m })),
-          exileAtEndStep,
-          false,
-          false,
-          tapped,
-          sacrificeAtEndStep,
-          goadedForGameBy,
-          separate,
-        ),
+      ...plan.flatMap((t) =>
+        t.name === null
+          ? []
+          : this.mintTokenBatch(
+              controller,
+              t.name,
+              null,
+              t.count,
+              [...this.tokenNameModifier(t.name), ...riders.map((m) => ({ ...m }))],
+              exileAtEndStep,
+              false,
+              false,
+              tapped,
+              sacrificeAtEndStep,
+              goadedForGameBy,
+              separate,
+            ),
       ),
     ]);
   }
 
+  /** A token named after a real card carries its name as a copiable value
+   * (`CardDefinition.tokenName`, rule 111.3). */
+  private tokenNameModifier(tokenName: string): PtModifier[] {
+    const name = this.registry.get(tokenName).tokenName;
+    return name === undefined
+      ? []
+      : [
+          {
+            power: 0,
+            toughness: 0,
+            keywords: [],
+            copiable: true as const,
+            setName: name,
+            untilEndOfTurn: false,
+            timestamp: -1,
+          },
+        ];
+  }
+
   /**
-   * The tokens `controller`'s "those tokens plus that many …" replacements
-   * add to `total` being created (Chatterfang — `TokenMultiplierReplacement.
-   * plusTokens`), minted by `mint`: each counting every token before it,
-   * and made Angels by Divine Visitation if they're creatures (see
-   * `plusTokens` for the order).
+   * Carry out `fn` as one token-creation event: one instruction that makes
+   * several kinds of token ("create a Treasure token and a Clue token") or
+   * copies of several permanents. `Game` makes them a kind at a time, but
+   * "those tokens plus an additional Food token" gets its one opportunity
+   * at all of them (rule 614.5). Nested calls join the outer event.
    */
-  private mintPlusTokens(
-    controller: PlayerId,
-    total: number,
-    mint: (name: string, count: number) => readonly ObjectId[],
-  ): readonly ObjectId[] {
-    if (total <= 0) return [];
-    const names: string[] = [];
+  private withTokenEvent<T>(fn: () => T): T {
+    if (this.tokenEventUsed !== null) return fn();
+    this.tokenEventUsed = new Set();
+    try {
+      return fn();
+    } finally {
+      this.tokenEventUsed = null;
+    }
+  }
+
+  /**
+   * What `count` tokens of `kind` come to under `controller`'s
+   * would-create-token replacements (`token-replacements.ts`): `null` for
+   * the tokens themselves, anything else by name. Each token of a stack is
+   * a replacement of its own.
+   */
+  private tokenEventPlan(controller: PlayerId, kind: TokenKind, count: number): readonly PlannedTokens[] {
+    const replacements: TokenReplacementInstance[] = [];
+    const used = this.tokenEventUsed;
     for (const id of this.state.zones.shared.battlefield) {
       const object = this.state.objects[id];
-      if (object.controller !== controller || hasLostAbilities(this.state, this.registry,object)) continue;
-      for (const ability of this.registry.get(rulesTextName(object)).static) {
-        const r = ability.replacement;
-        if (r?.event === "would-create-token" && r.plusTokens !== undefined && this.staticActive(object, ability)) {
-          names.push(r.plusTokens);
+      if (object.controller !== controller || hasLostAbilities(this.state, this.registry, object)) continue;
+      const statics = this.registry.get(rulesTextName(object)).static;
+      for (let i = 0; i < statics.length; i++) {
+        const r = statics[i].replacement;
+        if (r?.event !== "would-create-token" || r.multiplier !== undefined || !this.staticActive(object, statics[i])) {
+          continue;
+        }
+        for (let n = 0; n < (object.stackCount ?? 1); n++) {
+          const key = `${id}:${i}:${n}`;
+          if (used?.has(key) !== true) replacements.push({ key, replacement: r });
         }
       }
     }
-    if (names.length === 0) return [];
-    const substitute = this.creatureTokenSubstitute(controller);
-    const made: ObjectId[] = [];
-    let soFar = total;
-    for (const name of names) {
-      const count = Math.min(soFar, Game.MAX_EFFECT_INSTANCES);
-      const as = substitute !== undefined && this.registry.get(name).types.includes("creature") ? substitute : name;
-      made.push(...mint(as, count));
-      soFar = Math.min(soFar + count, Game.MAX_EFFECT_INSTANCES);
-    }
-    return made;
+    const plan = planTokenEvent(
+      kind,
+      count,
+      replacements,
+      this.tokenCreationMultiplier(controller),
+      (name) => {
+        const def = this.registry.get(name);
+        return { types: def.types, subtypes: withChangeling(def, def.subtypes) };
+      },
+      Game.MAX_EFFECT_INSTANCES,
+    );
+    if (used !== null) for (const key of plan.used) used.add(key);
+    return plan.tokens;
   }
 
   /** Create `count` token(s) that are copies of the permanent `ofId` (rule
@@ -34690,7 +34737,6 @@ export class Game {
     // card that copies something an *opponent* controls means "under your
     // control" (Hate Mirage).
     const controller = opts.under ?? departed?.controller ?? of!.controller;
-    const total = count * this.tokenCreationMultiplier(controller);
     // A copy exception is part of the copiable values (rule 707.9b): every
     // other effect applies over it, and a copy of this copy has it too. So
     // the copied object's own exceptions come first (a copy of an Anikthea
@@ -34739,67 +34785,60 @@ export class Game {
     // creature — by what it copies or a copy exception — is made as its
     // Angel instead, none of the copy's values kept; "they gain haste" and
     // the rest of what the effect does to them still apply (the ruling).
-    let copiedTypes: readonly CardType[] = this.registry.get(copyName).types;
+    const copiedDef = this.registry.get(copyName);
+    let copiedTypes: readonly CardType[] = copiedDef.types;
     // "If an effect would create a token that is a copy of an instant or
     // sorcery card, no token is created" (rule 111.5 — Mimic Vat's ruling
     // about a manifested instant).
     if (copiedTypes.includes("instant") || copiedTypes.includes("sorcery")) return;
+    let copiedSubtypes: readonly string[] = withChangeling(copiedDef, copiedDef.subtypes);
     for (const m of modifiers) {
       if (m.copiable !== true) continue;
       if (m.setTypes !== undefined) copiedTypes = m.setTypes;
       if (m.addTypes !== undefined) copiedTypes = [...copiedTypes, ...m.addTypes];
+      if (m.setSubtypes !== undefined) copiedSubtypes = m.setSubtypes;
+      if (m.addSubtypes !== undefined) copiedSubtypes = [...copiedSubtypes, ...m.addSubtypes];
     }
-    const instead = copiedTypes.includes("creature") ? this.creatureTokenSubstitute(controller) : undefined;
+    const plan = this.tokenEventPlan(controller, { types: copiedTypes, subtypes: copiedSubtypes }, count);
+    const total = plan.find((t) => t.name === null)?.count ?? 0;
     // Tokens removed at the end step are each their own object, so the
     // delayed trigger over them reaches every one (`endStepTokenRemoval`).
     const removedAtEnd = opts.exileAtEndStep || opts.sacrificeAtEndStep === true;
     const made = this.withEnterBatch(() => [
-      ...(instead !== undefined
-        ? this.mintTokenBatch(
-            controller,
-            instead,
-            null,
-            total,
-            modifiers.filter((m) => m.copiable !== true),
-            opts.exileAtEndStep,
-            false,
-            false,
-            opts.tapped === true,
-            opts.sacrificeAtEndStep === true,
-            undefined,
-            removedAtEnd,
-          )
-        : this.mintTokenBatch(
-            controller,
-            copyName,
-            copyName,
-            total,
-            modifiers,
-            opts.exileAtEndStep,
-            opts.notLegendary || (departed !== undefined ? departed.notLegendary === true : of!.notLegendary === true),
-            true,
-            opts.tapped === true,
-            opts.sacrificeAtEndStep === true,
-            undefined,
-            removedAtEnd,
-          )),
-      // Chatterfang's Squirrels: nothing of what was copied, only what the
-      // effect does to the tokens (the ruling).
-      ...this.mintPlusTokens(controller, total, (name, n) =>
-        this.mintTokenBatch(
-          controller,
-          name,
-          null,
-          n,
-          modifiers.filter((m) => m.copiable !== true),
-          opts.exileAtEndStep,
-          false,
-          false,
-          opts.tapped === true,
-          opts.sacrificeAtEndStep === true,
-          undefined,
-          removedAtEnd,
-        ),
+      ...this.mintTokenBatch(
+        controller,
+        copyName,
+        copyName,
+        total,
+        modifiers,
+        opts.exileAtEndStep,
+        opts.notLegendary || (departed !== undefined ? departed.notLegendary === true : of!.notLegendary === true),
+        true,
+        opts.tapped === true,
+        opts.sacrificeAtEndStep === true,
+        undefined,
+        removedAtEnd,
+      ),
+      // Chatterfang's Squirrels and Divine Visitation's Angels: nothing of
+      // what was copied, only what the effect does to the tokens (the
+      // ruling).
+      ...plan.flatMap((t) =>
+        t.name === null
+          ? []
+          : this.mintTokenBatch(
+              controller,
+              t.name,
+              null,
+              t.count,
+              [...this.tokenNameModifier(t.name), ...modifiers.filter((m) => m.copiable !== true)],
+              opts.exileAtEndStep,
+              false,
+              false,
+              opts.tapped === true,
+              opts.sacrificeAtEndStep === true,
+              undefined,
+              removedAtEnd,
+            ),
       ),
     ]);
     // "Exile / sacrifice them at the beginning of the next end step": one
@@ -46637,7 +46676,7 @@ export class Game {
       for (const ability of this.registry.get(rulesTextName(object)).static) {
         const r = ability.replacement;
         if (r?.event === "would-create-token" && r.multiplier !== undefined && this.staticActive(object, ability)) {
-          mult *= r.multiplier;
+          mult = Math.min(mult * r.multiplier ** (object.stackCount ?? 1), Game.MAX_EFFECT_INSTANCES);
         }
       }
     }
@@ -46646,28 +46685,6 @@ export class Game {
       if (effect.owner === controller && effect.tokenMultiplier !== undefined) mult *= effect.tokenMultiplier;
     }
     return mult;
-  }
-
-  /** The token a `would-create-token` `creatureTokensInstead` makes in place
-   * of creature tokens that would be created under `controller`'s control
-   * (Divine Visitation), or `undefined`. Two of them make the same Angels
-   * whichever applies last, so the first found is the answer. */
-  private creatureTokenSubstitute(controller: PlayerId): string | undefined {
-    for (const id of this.state.zones.shared.battlefield) {
-      const object = this.state.objects[id];
-      if (object.controller !== controller || hasLostAbilities(this.state, this.registry,object)) continue;
-      for (const ability of this.registry.get(rulesTextName(object)).static) {
-        const r = ability.replacement;
-        if (
-          r?.event === "would-create-token" &&
-          r.creatureTokensInstead !== undefined &&
-          this.staticActive(object, ability)
-        ) {
-          return r.creatureTokensInstead;
-        }
-      }
-    }
-    return undefined;
   }
 
   /** Product of every `would-add-counter` multiplier (rule 614) that applies

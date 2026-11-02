@@ -3786,3 +3786,19 @@ now taking `stat: "power"`. The `{ lifeDifference }` amount and `player-compare`
 `within`. Proving cards: Evra, Halcyon Witness, Mirror Universe, Soul Conduit, Mister
 Negative, Psychic Transfer, Profane Transfusion. Freed and unauthored: Axis of
 Mortality, Magus of the Mirror.
+
+### Token-creation replacements as one event — built 2026-11-01
+
+`replacement:token-creation-add-extra`, `replacement:artifact-tokens-instead`,
+`replacement:token-creation-one-of-each`, `replacement:token-creation-substitute-replacement`
+(its unconditional half). `would-create-token` gains `plusOneToken`, `tokensInstead`,
+`oneOfEach` and `ofTokens`, and every token creation now plans its replacements through
+`token-replacements.ts`: the event changes as each applies (rule 616.1), each has one
+opportunity (rule 614.5), and the order is the one making the most, doublers last. One
+instruction's several kinds of token, or copies of several permanents, are one event
+(`withTokenEvent`). A token copy in a stack counts as its own replacement, doublers too.
+No new decision. Proving cards: Xorn, Stridehangar Automaton, Tippy-Toe, Queen Allenal,
+Draconic Visitor, Fisher's Talent, Academy Manufactor. Left in the family:
+`replacement:token-creation-replace-with-copies` (Esix, Mirrormind Crown, Moonlit Meditation)
+and Jinnie Fay, all "you may instead", which needs a choice asked in the middle of creating a
+token, and the first three a first-time-each-turn record too.

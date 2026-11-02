@@ -33,6 +33,7 @@
 import type { StaticCondition } from "./cards/define.js";
 import type { BeholdSpec, EffectAmount, EffectSpec } from "./effects.js";
 import type { CardFilter } from "./filter.js";
+import type { CardType } from "./cards.js";
 
 /** A single replacement clause on a `StaticAbility`. Discriminated by `event`. */
 export type ReplacementSpec =
@@ -277,6 +278,48 @@ export interface TokenMultiplierReplacement {
    * the order that gives the most.
    */
   readonly plusTokens?: string;
+  /**
+   * "Those tokens **plus an additional** Food token" (Tippy-Toe, Xorn,
+   * Stridehangar Automaton): one more of the named token, however many the
+   * event makes, with what the effect does to the tokens and none of what
+   * they are (Chatterfang's rulings). One opportunity per event (rule 614.5):
+   * a Treasure and a Clue made by one instruction (a `sequence`'s
+   * `simultaneous`) get one Food between them. With a doubler its controller
+   * orders them (rule 616.1), and the order taken makes the most: the extra
+   * one is doubled too (`token-replacements.ts`).
+   */
+  readonly plusOneToken?: string;
+  /**
+   * Draconic Visitor's "if one or more artifact tokens would be created under
+   * your control, that many 5/5 red Dragons are created instead", and Fisher's
+   * Talent's "if you would create a Fish token, create a Shark instead":
+   * `creatureTokensInstead` for the tokens `ofTokens` names, and what's said
+   * there about what's kept holds here too.
+   */
+  readonly tokensInstead?: string;
+  /**
+   * Academy Manufactor's "if you would create a Clue, Food, or Treasure
+   * token, instead create one of each": each token `ofTokens` names becomes
+   * one of each of these. One opportunity at the event, over every such
+   * token in it, so two of them make three of each of a Treasure.
+   */
+  readonly oneOfEach?: readonly string[];
+  /**
+   * "One or more **artifact** tokens": applies only when the event would make
+   * a token of this kind, and so can start to when another replacement adds
+   * one (rule 616.1). A token is what it would be created as, its definition
+   * or a copy's copiable values, not what an effect makes it as it enters
+   * (the Divine Visitation ruling). `plusOneToken` adds to the whole event;
+   * `tokensInstead` and `oneOfEach` replace just the tokens it names.
+   */
+  readonly ofTokens?: TokenKindFilter;
+}
+
+/** Which tokens a {@link TokenMultiplierReplacement} is about. */
+export interface TokenKindFilter {
+  readonly type?: CardType;
+  /** "A Fish token", "a Clue, Food, or Treasure token". */
+  readonly subtypesAnyOf?: readonly string[];
 }
 
 /** "If one or more counters would be put on a permanent you control, twice that

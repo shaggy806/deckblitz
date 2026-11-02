@@ -5747,6 +5747,20 @@ clause (section 9):
   does to the tokens (tapped, attacking, haste, exiled later) and none of what
   they are (the rulings). With a doubler the totals are the same in either
   order (rule 616.1); before Divine Visitation, which makes them Angels too.
+  `plusOneToken: "<token>"` is "those tokens **plus an additional** Food token"
+  (Tippy-Toe, Xorn): one more however many are made, one opportunity at an
+  event (rule 614.5), so a `sequence` with `simultaneous` making a Treasure and
+  a Clue gets one Food between them. `tokensInstead: "<token>"` is that many of
+  another token in place of the ones `ofTokens` names (Draconic Visitor,
+  Fisher's Talent: `atLevel` it for a Class). `oneOfEach: ["<token>", …]` is
+  Academy Manufactor: each token `ofTokens` names becomes one of each.
+  `ofTokens: { type?, subtypesAnyOf? }` limits any of these to tokens of a kind:
+  what they'd be created as (a definition or a copy's copiable values). The
+  event changes as they apply, so a Frog from one replacement makes Queen
+  Allenal's "creature tokens" apply; the controller's order is the one that
+  makes the most, worked out (`token-replacements.ts`), with doublers last. A
+  replacement the player may decline ("you may instead", Jinnie Fay, Mirrormind
+  Crown) isn't this vocabulary: nothing asks mid-creation.
 - `{ event: "tap-for-mana", multiplier }` — "if you tap a permanent for mana,
   it produces twice as much of that mana instead" (Mana Reflection, Nyxbloom
   Ancient): see "Triggered mana abilities" in §8.

@@ -8889,6 +8889,8 @@ export function parseFace(face, ctx = {}) {
     }
 
     // Static lines.
+    const tokenReplacement = tokenReplacementOf(line, printed(raw), tokenFor);
+    if (tokenReplacement !== null) { out.static.push(tokenReplacement); continue; }
     const st = parseStatic(line, printed(raw));
     if (st !== null) { out.static.push(st); continue; }
 
@@ -10911,6 +10913,56 @@ function spellCostStaticOf(line, text) {
       caster: "you",
       reduceGeneric: { powerOf: m[3] === "equipped creature" ? "attached" : "source" },
     });
+  }
+  return null;
+}
+
+/**
+ * A `would-create-token` replacement (`TokenMultiplierReplacement`): "those
+ * tokens plus an additional Food token" (Tippy-Toe), plus that many
+ * (Chatterfang), that many of another token instead (Draconic Visitor),
+ * another token instead (Fisher's Talent), one of each (Academy Manufactor).
+ * Not one the player may choose ("you may instead"), which no template reads.
+ */
+function tokenReplacementOf(line, text, tokenFor) {
+  const static_ = (replacement) => ({ affects: { scope: "self" }, replacement: { event: "would-create-token", ...replacement }, text });
+  // "artifact tokens" names a type, "Treasure tokens" a subtype.
+  const of = (word) => {
+    if (word === undefined || word === "") return {};
+    const w = word.trim();
+    if (["artifact", "creature", "enchantment"].includes(w)) return { ofTokens: { type: w } };
+    return /^[A-Z][a-z]+$/.test(w) ? { ofTokens: { subtypesAnyOf: [w] } } : null;
+  };
+  let m;
+  // "If you would create a Clue, Food, or Treasure token, instead create one of each."
+  if ((m = /^If you would create a (\w+), (\w+), or (\w+) token, instead create one of each\.$/.exec(line))) {
+    const kinds = [m[1], m[2], m[3]];
+    const names = kinds.map((k) => tokenFor(k));
+    if (names.some((n) => n === null)) return null;
+    return static_({ oneOfEach: names, ofTokens: { subtypesAnyOf: kinds } });
+  }
+  // "If you would create a Fish token, create a 3/3 blue Shark creature token instead."
+  if ((m = /^If you would create an? (\w+) token, create an? ([^"“]+?) token instead\.$/.exec(line))) {
+    const name = tokenFor(m[2]);
+    const ofTokens = of(m[1]);
+    return name === null || ofTokens === null ? null : static_({ tokensInstead: name, ...ofTokens });
+  }
+  m =
+    /^If you would create one or more (?:(\w+) )?tokens, instead create those tokens plus (an additional|that many) ([^"“]+?) tokens?(?: with ([^"“]+?))?\.$/.exec(line) ??
+    /^If one or more (?:(\w+) )?tokens would be created under your control, those tokens plus (an additional|an?|that many) ([^"“]+?) tokens?(?: with ([^"“]+?))? are created instead\.$/.exec(line);
+  if (m !== null) {
+    const name = tokenFor(`${m[3]}${m[4] ? ` with ${m[4]}` : ""}`);
+    const ofTokens = of(m[1]);
+    if (name === null || ofTokens === null) return null;
+    return static_({ ...(m[2] === "that many" ? { plusTokens: name } : { plusOneToken: name }), ...ofTokens });
+  }
+  // "… that many 5/5 red Dragon creature tokens with flying are created instead."
+  if ((m = /^If one or more (\w+) tokens would be created under your control, that many ([^"“]+?) tokens?(?: with ([^"“]+?))? are created instead\.$/.exec(line))) {
+    const name = tokenFor(`${m[2]}${m[3] ? ` with ${m[3]}` : ""}`);
+    if (name === null) return null;
+    if (m[1] === "creature") return static_({ creatureTokensInstead: name });
+    const ofTokens = of(m[1]);
+    return ofTokens === null ? null : static_({ tokensInstead: name, ...ofTokens });
   }
   return null;
 }
