@@ -3885,3 +3885,19 @@ Devourer of Destiny. Left: the freed Leylines' other lines are `author-freed`'s 
 narrow (Leyline of Combustion's trigger, Guildpact's all-colors, Transformation's
 types); Gemstone Caverns has its own key, `mechanic:opening-hand-not-starting-player`;
 Chancellor of the Annex's reveal fires on a first spell, not at a step.
+
+### Changes of control as trigger events — built 2026-11-02
+
+The need-keys Phase 2 family `trigger:lose-control-trigger`, features only. `control-changed` names its
+`previousController`. Three triggers: **`loses-control`** ("when you lose control of this": another
+player gains it or it leaves the battlefield, Khârn's ruling), **`gains-control`** ("from another
+player") and **`control-taken`** ("an opponent gains control of a permanent from you"). The first and
+last look back (rule 603.10d): the ability is its former controller's, and `withControlBatch` keeps
+that for permanents changing hands at once. `delayed-trigger`'s **`at: { losesControl, thisTurn?,
+onlyIf? }`** is the delayed form. A "prevent that damage and …" follow-up that asks waits behind one
+already asking. The scaffolder reads the three triggers and "when you lose control of the creature,
+tap it / unattach it". Keys: lose-control-trigger, gains-control-of-this. Proving cards: Khârn the
+Betrayer, Ray of Command, Magus of the Unseen, Ogre Geargrabber, Stolen Uniform, Seraph, Zidane,
+Tantalus Thief, Risky Move. Freed but not authored: Duplicity (and Gustha's Scepter) need their
+face-down exile. Coffin Queen needs "becomes untapped or you lose control". Krovikan Vampire needs its
+end-step intervening "if" over creatures that died.

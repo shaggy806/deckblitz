@@ -9503,3 +9503,20 @@ describe("exchanges with a life total", () => {
     expect(parseEffect(`Draw a card. ${it}`, ctx()).todo).not.toHaveLength(0);
   });
 });
+
+describe("changes of control", () => {
+  it("reads the triggers about one, and the delayed ability about the one target", () => {
+    expect(parseTrigger("When you lose control of ~")).toEqual([{ on: "loses-control", who: "self" }]);
+    expect(parseTrigger("When you gain control of ~ from another player")).toEqual([{ on: "gains-control", who: "self" }]);
+    expect(parseTrigger("Whenever an opponent gains control of a permanent from you")).toEqual([{ on: "control-taken" }]);
+    const tapIt = parseEffect(
+      "Gain control of target creature until end of turn. When you lose control of the creature, tap it.",
+      ctx(),
+    ).effect;
+    expect(tapIt).toMatchObject({
+      effects: [{ kind: "gain-control" }, { kind: "delayed-trigger", at: { losesControl: 0 }, effect: { kind: "tap", target: 0 } }],
+    });
+    // No one target to be about: left for a person.
+    expect(parseEffect("When you lose control of the creature, tap it.", ctx()).todo).not.toHaveLength(0);
+  });
+});

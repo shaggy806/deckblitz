@@ -388,6 +388,7 @@ import type {
   DelayedCastWatch,
   DelayedDamageWatch,
   DelayedLeaveWatch,
+  DelayedLoseControlWatch,
   DelayedUnblockedWatch,
   DelayedWheneverWatch,
   DelayedTrigger,
@@ -1265,6 +1266,8 @@ const LOOK_BACK_TRIGGERS: ReadonlySet<TriggerSpec["on"]> = new Set<TriggerSpec["
   "dies",
   "leaves-battlefield",
   "sacrifice",
+  // Leaving the battlefield is losing control of it (603.10d).
+  "loses-control",
 ]);
 
 /** The modifier that gives a token being created `keywords` until end of
@@ -1668,6 +1671,12 @@ export class Game {
     readonly batch: object | null;
     readonly entries: ReadonlyMap<ObjectId, readonly TriggeredEntry[]>;
   } | null = null;
+
+  /** Permanents changing hands at once (`withControlBatch`), each with who
+   * controlled it just before: an ability looking back (rule 603.10d) reads
+   * its source's controller from here, once its source has gone in the same
+   * change. Transient, like `leaveBatch`: lives within one synchronous call. */
+  private controlBatch: Map<ObjectId, PlayerId> | null = null;
 
   private leaveBatch: {
     readonly left: ObjectId[];
@@ -4999,6 +5008,7 @@ export class Game {
       pinned.add(trigger.source);
       for (const t of trigger.targets) if (t?.kind === "object") pinned.add(t.object);
       if (typeof trigger.at === "object" && "leaves" in trigger.at) pinned.add(trigger.at.leaves);
+      if (typeof trigger.at === "object" && "losesControl" in trigger.at) pinned.add(trigger.at.losesControl);
       if (typeof trigger.at === "object" && "dealsCombatDamage" in trigger.at) pinned.add(trigger.at.dealsCombatDamage);
       if (typeof trigger.at === "object" && "attacksUnblocked" in trigger.at) pinned.add(trigger.at.attacksUnblocked);
       if (trigger.triggerObject !== undefined) pinned.add(trigger.triggerObject);
@@ -7491,6 +7501,7 @@ export class Game {
         t.at !== "this-turn-end-step" &&
         (typeof t.at !== "object" ||
           ("leaves" in t.at && t.at.thisTurn !== true) ||
+          ("losesControl" in t.at && t.at.thisTurn !== true) ||
           ("whenever" in t.at && t.at.untilYourNextTurn === true)),
     );
     // Nothing has attacked this turn yet — whoever controls it. (The untap
@@ -10929,7 +10940,11 @@ export class Game {
       this.preventedThisEvent = null;
     }
     for (const { by, controller, then, amount } of owed) {
-      applyEffectSpec(then, this.makeResolutionContext(by, controller, [], amount));
+      const ctx = this.makeResolutionContext(by, controller, [], amount);
+      // One already asking (Khârn the Betrayer's opponent of your choice):
+      // the next waits for its answer.
+      if (this.decisionOutstanding()) ctx.resumeAfterDecisions(then);
+      else applyEffectSpec(then, ctx);
     }
   }
 
@@ -24699,7 +24714,13 @@ export class Game {
         ? (event.count ?? this.state.objects[event.object]?.stackCount ?? 1)
         : 1;
     const entered = event.type === "permanent-entered-battlefield" ? (event.count ?? 1) : 1;
-    return departed * recipients * attacked * dealtBy * turned * countered * entered;
+    // A stack handed over whole is every token in it changing hands (Zidane,
+    // Tantalus Thief's ruling: a trigger for each of those permanents).
+    const handedOver =
+      trigger.on === "control-taken" && event.type === "control-changed" && event.object !== id
+        ? (this.state.objects[event.object]?.stackCount ?? 1)
+        : 1;
+    return departed * recipients * attacked * dealtBy * turned * countered * entered * handedOver;
   }
 
   /**
@@ -24904,7 +24925,7 @@ export class Game {
         leaving && (id === subject || lookBack.has(id)) && live.zone !== "battlefield"
           ? live.lastKnown
           : undefined;
-      const object =
+      const seen =
         lastSeen !== undefined && lastSeen.controller !== live.controller
           ? { ...live, controller: lastSeen.controller }
           : live;
@@ -24918,7 +24939,7 @@ export class Game {
       // this, Jhoira ("whenever you cast a historic spell") drew off its own
       // legendary casting, and Ms. Bumbleflower off hers.
       const onlyThisCast =
-        event.type === "spell-cast" && id === event.object && object.zone === "stack";
+        event.type === "spell-cast" && id === event.object && seen.zone === "stack";
       // The card just cycled: only its own "when you cycle this card".
       const onlyThisCycled = event.type === "card-cycled" && id === event.object;
       // The card just plotted, in exile: only its "when this card becomes
@@ -24927,7 +24948,7 @@ export class Game {
       // An eliminated player's permanents are left on the board to be seen,
       // not to keep playing: their triggers stop firing. They leave play rather
       // than view — see the note in `matchesFilter`.
-      if (this.state.players[object.controller]?.hasLost === true) continue;
+      if (this.state.players[seen.controller]?.hasLost === true) continue;
       const current =
         lastSeen !== undefined
           ? this.departedTriggeredEntries(lastSeen)
@@ -24942,6 +24963,9 @@ export class Game {
       entries.forEach(({ ability, ref, lost }, index) => {
         // Layer 6 — a printed ability it has lost doesn't trigger.
         if (lost === true) return;
+        // "You lose control of this": whoever had it just before (603.10d).
+        const object = this.controlLookedBack(ability.trigger, event, seen);
+        if (this.state.players[object.controller]?.hasLost === true) return;
         if (onlyEminence && ability.fromCommandZone !== true) return;
         if ((ability.fromGraveyard === true) !== graveyardOnly.has(id)) return;
         if (hauntOnly.has(id) !== (ability.trigger.on === "haunted-dies")) return;
@@ -25322,6 +25346,9 @@ export class Game {
     // it dies or is exiled") belong to no permanent, so the scan above can't
     // see them.
     if (event.type === "permanent-left-battlefield") this.fireLeaveWatchers(event);
+    if (event.type === "permanent-left-battlefield" || event.type === "control-changed") {
+      this.fireLoseControlWatchers(event);
+    }
     if (event.type === "spell-cast") this.fireCastWatchers(event);
     if (event.type === "ability-activated" && event.onStack && event.ability !== undefined) {
       this.fireActivationWatchers(event.player, event.ability);
@@ -25976,6 +26003,22 @@ export class Game {
             event.object === self.id &&
             this.state.objects[self.id]?.lastKnown?.attachedTo !== undefined)
         );
+      case "loses-control":
+        // Another player gains control of it, or it leaves the battlefield.
+        return (
+          (event.type === "control-changed" || event.type === "permanent-left-battlefield") &&
+          event.object === self.id
+        );
+      case "gains-control":
+        return event.type === "control-changed" && event.object === self.id;
+      case "control-taken":
+        // `self.controller` is who had this just before (`controlLookedBack`).
+        return (
+          event.type === "control-changed" &&
+          event.previousController === self.controller &&
+          event.controller !== self.controller &&
+          this.triggerFilterOk(spec.filter, event.object, self)
+        );
       case "leaves-battlefield":
         // Read as it last existed on the battlefield, like `dies`.
         return (
@@ -26583,6 +26626,7 @@ export class Game {
         : event.type === "permanent-entered-battlefield" ||
       event.type === "permanent-destroyed" ||
       event.type === "permanent-left-battlefield" ||
+      event.type === "control-changed" ||
       event.type === "permanent-sacrificed" ||
       event.type === "permanent-transformed" ||
       event.type === "permanent-mutated" ||
@@ -41123,7 +41167,8 @@ export class Game {
       | DelayedNextSpell
       | { readonly dealsCombatDamage: ObjectId }
       | { readonly attacksUnblocked: ObjectId }
-      | (DelayedWhenever & { readonly player?: PlayerId }),
+      | (DelayedWhenever & { readonly player?: PlayerId })
+      | { readonly losesControl: ObjectId; readonly thisTurn?: true; readonly onlyIf?: StaticCondition },
     effect: EffectSpec,
     text: string,
     targets: ResolvedTargets,
@@ -41137,8 +41182,13 @@ export class Game {
       | DelayedCastWatch
       | DelayedDamageWatch
       | DelayedUnblockedWatch
-      | DelayedWheneverWatch;
-    if (typeof at === "object" && "whenever" in at) {
+      | DelayedWheneverWatch
+      | DelayedLoseControlWatch;
+    if (typeof at === "object" && "losesControl" in at) {
+      const watched = this.state.objects[at.losesControl];
+      if (watched?.zone !== "battlefield") return;
+      when = { ...at, stint: watched.zoneChangeCount ?? 0 };
+    } else if (typeof at === "object" && "whenever" in at) {
       when = {
         whenever: at.whenever,
         ...(at.targets !== undefined ? { targets: at.targets } : {}),
@@ -41414,6 +41464,88 @@ export class Game {
         },
         delayed: trigger,
       });
+    }
+  }
+
+  /**
+   * The "when you lose control of it" delayed triggers `event` answers (see
+   * `DelayedLoseControlWatch`): another player gained control of the permanent
+   * from the trigger's controller, or it left the battlefield under theirs
+   * (rule 603.10d). Queued like any trigger, the permanent as its trigger
+   * object; used up unless it has a stated duration (rule 603.7b).
+   */
+  private fireLoseControlWatchers(
+    event: Extract<GameEvent, { type: "permanent-left-battlefield" | "control-changed" }>,
+  ): void {
+    if (this.state.delayedTriggers.length === 0) return;
+    const object = this.state.objects[event.object];
+    if (object === undefined) return;
+    const left = event.type === "permanent-left-battlefield";
+    const stint = left ? object.lastKnown?.zoneChangeCount : (object.zoneChangeCount ?? 0);
+    const from = left ? object.lastKnown?.controller : event.previousController;
+    if (stint === undefined || from === undefined) return;
+    const usedUp: DelayedTrigger[] = [];
+    for (const trigger of this.state.delayedTriggers) {
+      const at = trigger.at;
+      if (
+        typeof at !== "object" ||
+        !("losesControl" in at) ||
+        at.losesControl !== event.object ||
+        at.stint !== stint ||
+        trigger.controller !== from
+      ) {
+        continue;
+      }
+      // The intervening "if" (rule 603.4), about the creating effect's targets.
+      if (
+        at.onlyIf !== undefined &&
+        !this.makeResolutionContext(trigger.source, trigger.controller, trigger.targets, 0, 0, event.object).conditionMet(
+          at.onlyIf,
+        )
+      ) {
+        continue;
+      }
+      if (at.thisTurn !== true) usedUp.push(trigger);
+      this.state.pendingTriggers.push({
+        sourceObjectId: trigger.source,
+        cardName: trigger.sourceName,
+        abilityIndex: 0,
+        controller: trigger.controller,
+        triggerObject: event.object,
+        lastKnownRefs: left
+          ? { triggerObject: stint, triggerObjectAfterLeaving: object.zoneChangeCount ?? 0 }
+          : { triggerObject: stint },
+        delayed: trigger,
+      });
+    }
+    if (usedUp.length > 0) {
+      this.state.delayedTriggers = this.state.delayedTriggers.filter((t) => !usedUp.includes(t));
+    }
+  }
+
+  /**
+   * The source an ability that looks back at a change of control reads (rule
+   * 603.10d): "you lose control of this" and "… gains control of a permanent
+   * from you" are about whoever controlled it just before, and are that
+   * player's abilities. Anything else reads it as it is.
+   */
+  private controlLookedBack(trigger: TriggerSpec, event: GameEvent, self: GameObject): GameObject {
+    if (event.type !== "control-changed" || (trigger.on !== "loses-control" && trigger.on !== "control-taken")) {
+      return self;
+    }
+    const before = self.id === event.object ? event.previousController : this.controlBatch?.get(self.id);
+    return before === undefined || before === self.controller ? self : { ...self, controller: before };
+  }
+
+  /** Permanents that change hands within `fn` do so at once: each looks back
+   * to before all of it (rule 603.10d — `controlBatch`). */
+  private withControlBatch<T>(fn: () => T): T {
+    if (this.controlBatch !== null) return fn();
+    this.controlBatch = new Map();
+    try {
+      return fn();
+    } finally {
+      this.controlBatch = null;
     }
   }
 
@@ -42408,6 +42540,10 @@ export class Game {
    * timestamp order, so the latest one wins (rule 613.7); with none, the
    * owner controls it. Returns whether any controller changed. */
   private recomputeControl(): boolean {
+    return this.withControlBatch(() => this.recomputeControlNow());
+  }
+
+  private recomputeControlNow(): boolean {
     // Cheap early-out for the overwhelmingly common no-control-effects board.
     const anyControlEffect = this.state.zones.shared.battlefield.some((id) => {
       const o = this.state.objects[id];
@@ -42466,6 +42602,8 @@ export class Game {
         continue;
       }
       if (object.controller !== controller) {
+        const previousController = object.controller;
+        if (!this.controlBatch?.has(id)) this.controlBatch?.set(id, previousController);
         object.controller = controller;
         object.summoningSick = true;
         object.controlSinceSeq = this.state.timestampSeq;
@@ -42477,6 +42615,7 @@ export class Game {
           type: "control-changed",
           object: id,
           controller,
+          previousController,
           untilEndOfTurn: false,
         });
         changed = true;
@@ -42565,6 +42704,8 @@ export class Game {
     object.controlEndsAtCleanup = object.controlEffects.some((e) => e.untilEndOfTurn);
     invalidateComputedCache();
     if (object.controller === player) return;
+    const previousController = object.controller;
+    if (!this.controlBatch?.has(id)) this.controlBatch?.set(id, previousController);
     object.controller = player;
     object.summoningSick = true;
     object.controlSinceSeq = this.state.timestampSeq;
@@ -42575,6 +42716,7 @@ export class Game {
       type: "control-changed",
       object: id,
       controller: player,
+      previousController,
       untilEndOfTurn,
     });
   }
@@ -42600,17 +42742,19 @@ export class Game {
     if (matched.length === 0) return;
     this.state.timestampSeq += 1;
     const timestamp = this.state.timestampSeq;
-    for (const id of matched) {
-      const object = this.state.objects[id];
-      if (object === undefined) continue;
-      this.gainControlByEffect(
-        who === "owner" ? object.owner : who,
-        { kind: "object", object: id },
-        untilEndOfTurn,
-        false,
-        { split: false, timestamp },
-      );
-    }
+    this.withControlBatch(() => {
+      for (const id of matched) {
+        const object = this.state.objects[id];
+        if (object === undefined) continue;
+        this.gainControlByEffect(
+          who === "owner" ? object.owner : who,
+          { kind: "object", object: id },
+          untilEndOfTurn,
+          false,
+          { split: false, timestamp },
+        );
+      }
+    });
   }
 
   /**
@@ -42645,9 +42789,11 @@ export class Game {
     if (moves.length === 0) return;
     this.state.timestampSeq += 1;
     const timestamp = this.state.timestampSeq;
-    for (const { player, object } of moves) {
-      this.gainControlByEffect(player, { kind: "object", object }, false, false, { split: false, timestamp });
-    }
+    this.withControlBatch(() => {
+      for (const { player, object } of moves) {
+        this.gainControlByEffect(player, { kind: "object", object }, false, false, { split: false, timestamp });
+      }
+    });
   }
 
   /**
@@ -42667,8 +42813,10 @@ export class Game {
     if (this.state.players[toB]?.hasLost !== false || this.state.players[toA]?.hasLost !== false) return false;
     this.state.timestampSeq += 1;
     const timestamp = this.state.timestampSeq;
-    this.gainControlByEffect(toA, first, false, false, { timestamp });
-    this.gainControlByEffect(toB, second, false, false, { timestamp });
+    this.withControlBatch(() => {
+      this.gainControlByEffect(toA, first, false, false, { timestamp });
+      this.gainControlByEffect(toB, second, false, false, { timestamp });
+    });
     return true;
   }
 
@@ -42688,9 +42836,11 @@ export class Game {
     if (moves.length === 0) return;
     this.state.timestampSeq += 1;
     const timestamp = this.state.timestampSeq;
-    for (const { id, to } of moves) {
-      this.gainControlByEffect(to, { kind: "object", object: id }, untilEndOfTurn, false, { split: false, timestamp });
-    }
+    this.withControlBatch(() => {
+      for (const { id, to } of moves) {
+        this.gainControlByEffect(to, { kind: "object", object: id }, untilEndOfTurn, false, { split: false, timestamp });
+      }
+    });
   }
 
   /** See the `"cant-be-sacrificed"` {@link EffectSpec}: `target` gains "This
@@ -44462,7 +44612,10 @@ export class Game {
           else owed.push({ by: step.by, controller: step.controller, then: step.then, to, amount: thatMany });
         } else if (step.then !== undefined) {
           // The damage's source is "that source" (Swans of Bryn Argoll).
-          applyEffectSpec(step.then, this.makeResolutionContext(step.by, step.controller, [], thatMany, 0, source));
+          const ctx = this.makeResolutionContext(step.by, step.controller, [], thatMany, 0, source);
+          // A sweep's earlier one still asking (Khârn the Betrayer): after it.
+          if (this.decisionOutstanding()) ctx.resumeAfterDecisions(step.then);
+          else applyEffectSpec(step.then, ctx);
         }
         if (outcome.dealt <= 0) return 0;
       }

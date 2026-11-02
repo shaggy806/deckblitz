@@ -1534,6 +1534,10 @@ export function parseTrigger(clause) {
   if (/^When(?:ever)? ~ enters or attacks$/.test(c)) return [...self("enters-battlefield"), ...self("attacks")];
   if (/^When(?:ever)? ~ dies$/.test(c)) return self("dies");
   if (/^When(?:ever)? ~ leaves the battlefield$/.test(c)) return self("leaves-battlefield");
+  // Changes of control (rule 603.10d): Khârn the Betrayer, Risky Move, Zidane.
+  if (/^When you lose control of ~$/.test(c)) return self("loses-control");
+  if (/^When you gain control of ~ from another player$/.test(c)) return self("gains-control");
+  if (/^Whenever an opponent gains control of a permanent from you$/.test(c)) return [{ on: "control-taken" }];
   // "Whenever a permanent is returned to a player's hand" (Warped Devotion),
   // "Whenever a nontoken permanent is put into a player's graveyard from the
   // battlefield" (Liability).
@@ -2195,6 +2199,18 @@ export function parseSentence(sentence, ctx) {
   const s = sentence.replace(/\s+/g, " ").trim();
   const emblem = emblemOf(s);
   if (emblem !== null) return emblem;
+  // "When you lose control of the creature, tap it" (Ray of Command), "… of
+  // that Equipment, unattach it" (Ogre Geargrabber): a delayed ability about
+  // the one target (rule 603.10d).
+  const losing = /^When you lose control of (?:the (?:creature|artifact)|that (?:creature|artifact|Equipment)), (tap|unattach) it\.$/.exec(s);
+  if (losing !== null && ctx.targets.length === 1) {
+    return {
+      kind: "delayed-trigger",
+      at: { losesControl: 0 },
+      effect: { kind: losing[1], target: 0 },
+      text: s,
+    };
+  }
   // "~ deals 2 damage to any target and doesn't untap during your next untap
   // step" (Reveka), "~ gains shroud until end of turn and doesn't untap …"
   // (Deep Spawn): the action, then the hold on the source.

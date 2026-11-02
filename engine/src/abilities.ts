@@ -949,6 +949,38 @@ export type TriggerWho =
 export type TriggerSpec =
   | {
       /**
+       * "When you lose control of this permanent" (Khârn the Betrayer): another
+       * player gains control of it, or it leaves the battlefield (Khârn's
+       * ruling). Looks back in time (rule 603.10d): "you" is whoever controlled
+       * it just before, and the ability is that player's. Its one permanent is
+       * the trigger object.
+       */
+      readonly on: "loses-control";
+      readonly who: "self";
+    }
+  | {
+      /**
+       * "When you gain control of this enchantment from another player" (Risky
+       * Move): "you" is who has it now. Entering the battlefield under your
+       * control isn't gaining control of it from anyone.
+       */
+      readonly on: "gains-control";
+      readonly who: "self";
+    }
+  | {
+      /**
+       * "Whenever an opponent gains control of a permanent from you" (Zidane,
+       * Tantalus Thief). Looks back in time (rule 603.10d): this permanent
+       * going too sees it, its ability its former controller's, and permanents
+       * changing hands at once are each seen by a watcher that went among them.
+       * The permanent that changed hands is the trigger object; a token stack
+       * handed over whole is a permanent per token. `filter` narrows it.
+       */
+      readonly on: "control-taken";
+      readonly filter?: CardFilter;
+    }
+  | {
+      /**
        * "Whenever the Ring tempts you" (rule 701.54d): once the player has
        * chosen a Ring-bearer, or found no creature to choose. The creature
        * chosen is the trigger object (Gandalf, Friend of the Shire's "if you

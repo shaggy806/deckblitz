@@ -397,6 +397,30 @@ export interface DelayedLeaves {
   readonly thisTurn?: boolean;
 }
 
+/**
+ * A `delayed-trigger` keyed to its controller losing control of one permanent:
+ * "When you lose control of **the creature**, tap it" (Ray of Command) — for any
+ * reason, its own "until end of turn" ending in the cleanup step, another
+ * player gaining control of it, or it leaving the battlefield (rule 603.10d;
+ * Khârn the Betrayer's and Ogre Geargrabber's rulings). `losesControl` is a
+ * target slot, `"source"` or `"trigger-object"`, and must name a permanent on
+ * the battlefield as the effect applies (otherwise there is nothing to watch,
+ * and no trigger is made). When it fires, that permanent is the ability's
+ * trigger object; the creating effect's targets ride along by slot.
+ * It triggers once (rule 603.7b), unless it's `thisTurn`.
+ */
+export interface DelayedLosesControl {
+  readonly losesControl: EffectTargetRef;
+  /** "…this turn" (Stolen Uniform): a stated duration, so every time, until
+   * the next turn begins — past the cleanup step that ends "until end of
+   * turn" control. */
+  readonly thisTurn?: true;
+  /** "…, if it's attached to a creature you control" (Stolen Uniform): an
+   * intervening "if" (rule 603.4) over the creating effect's targets. Asked as
+   * it would trigger; the effect asks it again as it resolves. */
+  readonly onlyIf?: StaticCondition;
+}
+
 /** "When you next cast a [filter] spell this turn" (Yuna, Grand Summoner;
  * Codie, Vociferous Codex) — a delayed trigger keyed to its controller's next
  * spell matching `nextSpell` (`{}` for any), once, and this turn only. That
@@ -3774,7 +3798,8 @@ export type EffectSpec =
         | DelayedNextSpell
         | DelayedCombatDamage
         | DelayedUnblocked
-        | DelayedWhenever;
+        | DelayedWhenever
+        | DelayedLosesControl;
       readonly effect: EffectSpec;
       /** Text for the log and the stack. */
       readonly text: string;
@@ -9548,7 +9573,8 @@ export interface EffectApi {
       | DelayedNextSpell
       | { readonly dealsCombatDamage: ObjectId }
       | { readonly attacksUnblocked: ObjectId }
-      | (DelayedWhenever & { readonly player?: PlayerId }),
+      | (DelayedWhenever & { readonly player?: PlayerId })
+      | { readonly losesControl: ObjectId; readonly thisTurn?: true; readonly onlyIf?: StaticCondition },
     effect: EffectSpec,
     text: string,
     controller: PlayerId,
@@ -14387,6 +14413,28 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         const watched = resolveEffectTarget(spec.at.attacksUnblocked, ctx);
         if (watched?.kind !== "object") return;
         ctx.delayTrigger({ attacksUnblocked: watched.object }, spec.effect, spec.text, controller);
+        return;
+      }
+      if (typeof spec.at === "object" && "losesControl" in spec.at) {
+        const watched = resolveEffectTarget(spec.at.losesControl, ctx);
+        if (watched?.kind !== "object") return;
+        // "Sacrifice the creature": what this resolution put there (Seraph).
+        const about =
+          spec.about === undefined || spec.about === "attached"
+            ? undefined
+            : ctx.thisWay(spec.about).map((e) => ({ kind: "object", object: e.object }) as const);
+        if (about?.length === 0) return;
+        ctx.delayTrigger(
+          {
+            losesControl: watched.object,
+            ...(spec.at.thisTurn === true ? { thisTurn: true as const } : {}),
+            ...(spec.at.onlyIf !== undefined ? { onlyIf: spec.at.onlyIf } : {}),
+          },
+          spec.effect,
+          spec.text,
+          controller,
+          about,
+        );
         return;
       }
       if (typeof spec.at === "object" && "whenever" in spec.at) {

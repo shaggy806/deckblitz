@@ -4459,6 +4459,18 @@ export interface DelayedWheneverWatch {
   readonly turn: number;
 }
 
+/** A delayed trigger waiting for its controller to lose control of one
+ * permanent — see `DelayedLosesControl`. Used up as it fires (rule 603.7b)
+ * unless it's `thisTurn`'s, which lapses as the next turn begins. */
+export interface DelayedLoseControlWatch {
+  readonly losesControl: ObjectId;
+  /** Which stint of it on the battlefield. */
+  readonly stint: number;
+  readonly thisTurn?: true;
+  /** `DelayedLosesControl.onlyIf`. */
+  readonly onlyIf?: StaticCondition;
+}
+
 export interface DelayedCastWatch {
   readonly nextSpell: CardFilter;
   /** Or the next ability its controller activates with {X} in its
@@ -4490,7 +4502,8 @@ export interface DelayedTrigger {
     | DelayedCastWatch
     | DelayedDamageWatch
     | DelayedUnblockedWatch
-    | DelayedWheneverWatch;
+    | DelayedWheneverWatch
+    | DelayedLoseControlWatch;
   /** The creating ability's trigger object, and its `zoneChangeCount` then
    * — "return **that card** to the battlefield" (Shirei, Shizo's Caretaker).
    * It's the delayed ability's trigger object too, as long as it's still that

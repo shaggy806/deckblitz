@@ -1030,6 +1030,9 @@ export type GameEvent =
       readonly type: "control-changed";
       readonly object: ObjectId;
       readonly controller: PlayerId;
+      /** Who controlled it just before — "when you lose control of this",
+       * "… gains control of a permanent from you" (rule 603.10d). */
+      readonly previousController: PlayerId;
       readonly untilEndOfTurn: boolean;
     })
   | (Base & {
