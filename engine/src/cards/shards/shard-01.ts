@@ -624,6 +624,7 @@ import _poolSerrasGuardian from "../pool/serras-guardian.js";
 import _poolShadowRitePriest from "../pool/shadow-rite-priest.js";
 import _poolShadowfeed from "../pool/shadowfeed.js";
 import _poolShadyTraveler from "../pool/shady-traveler.js";
+import _poolShapeshifter from "../pool/shapeshifter.js";
 import _poolShardOfBrokenGlass from "../pool/shard-of-broken-glass.js";
 import _poolShatteredYard from "../pool/shattered-yard.js";
 import _poolShinenOfFurysFire from "../pool/shinen-of-furys-fire.js";
@@ -1478,6 +1479,7 @@ const shard: CardShard = {
     _poolShadowRitePriest,
     _poolShadowfeed,
     _poolShadyTraveler,
+    _poolShapeshifter,
     _poolShardOfBrokenGlass,
     _poolShatteredYard,
     _poolShinenOfFurysFire,

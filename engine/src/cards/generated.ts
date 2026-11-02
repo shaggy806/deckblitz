@@ -3920,6 +3920,7 @@ import _poolChocoSeekerOfParadise from "./pool/choco-seeker-of-paradise.js";
 import _poolChocoboCamp from "./pool/chocobo-camp.js";
 import _poolChocoboKnights from "./pool/chocobo-knights.js";
 import _poolChocoboRacetrack from "./pool/chocobo-racetrack.js";
+import _poolChoiceOfDamnations from "./pool/choice-of-damnations.js";
 import _poolChoke from "./pool/choke.js";
 import _poolChokedEstuary from "./pool/choked-estuary.js";
 import _poolChokingFumes from "./pool/choking-fumes.js";
@@ -5883,6 +5884,7 @@ import _poolDimensionalExile from "./pool/dimensional-exile.js";
 import _poolDimensionalInfiltrator from "./pool/dimensional-infiltrator.js";
 import _poolDiminish from "./pool/diminish.js";
 import _poolDiminisherWitch from "./pool/diminisher-witch.js";
+import _poolDiminishingReturns from "./pool/diminishing-returns.js";
 import _poolDimirAqueduct from "./pool/dimir-aqueduct.js";
 import _poolDimirCluestone from "./pool/dimir-cluestone.js";
 import _poolDimirCutpurse from "./pool/dimir-cutpurse.js";
@@ -13535,6 +13537,7 @@ import _poolLionSash from "./pool/lion-sash.js";
 import _poolLionheartGlimmer from "./pool/lionheart-glimmer.js";
 import _poolLionheartMaverick from "./pool/lionheart-maverick.js";
 import _poolLionsEyeDiamond from "./pool/lions-eye-diamond.js";
+import _poolLiquidFire from "./pool/liquid-fire.js";
 import _poolLiquify from "./pool/liquify.js";
 import _poolLiquimetalCoating from "./pool/liquimetal-coating.js";
 import _poolLiquimetalTorque from "./pool/liquimetal-torque.js";
@@ -14500,6 +14503,7 @@ import _poolMemorySluice from "./pool/memory-sluice.js";
 import _poolMemoryTheft from "./pool/memory-theft.js";
 import _poolMemoryTrap from "./pool/memory-trap.js";
 import _poolMemoryWorm from "./pool/memory-worm.js";
+import _poolMenacingOgre from "./pool/menacing-ogre.js";
 import _poolMenagerieLiberator from "./pool/menagerie-liberator.js";
 import _poolMendTheWilds from "./pool/mend-the-wilds.js";
 import _poolMendicantCoreGuidelight from "./pool/mendicant-core-guidelight.js";
@@ -20600,6 +20604,7 @@ import _poolShaperParasite from "./pool/shaper-parasite.js";
 import _poolShapersOfNature from "./pool/shapers-of-nature.js";
 import _poolShapersSanctuary from "./pool/shapers-sanctuary.js";
 import _poolShapesharer from "./pool/shapesharer.js";
+import _poolShapeshifter from "./pool/shapeshifter.js";
 import _poolShardConvergence from "./pool/shard-convergence.js";
 import _poolShardOfBrokenGlass from "./pool/shard-of-broken-glass.js";
 import _poolShardOfTheNightbringer from "./pool/shard-of-the-nightbringer.js";
@@ -26075,6 +26080,7 @@ import _poolVolcanicUpheaval from "./pool/volcanic-upheaval.js";
 import _poolVolcanicVillain from "./pool/volcanic-villain.js";
 import _poolVolcanicVision from "./pool/volcanic-vision.js";
 import _poolVolcanicWind from "./pool/volcanic-wind.js";
+import _poolVolcanoHellion from "./pool/volcano-hellion.js";
 import _poolVolcanoImp from "./pool/volcano-imp.js";
 import _poolVoldarenAmbusher from "./pool/voldaren-ambusher.js";
 import _poolVoldarenDuelist from "./pool/voldaren-duelist.js";
@@ -26635,6 +26641,7 @@ import _poolWhaleboneGlider from "./pool/whalebone-glider.js";
 import _poolWharfInfiltrator from "./pool/wharf-infiltrator.js";
 import _poolWheelOfFate from "./pool/wheel-of-fate.js";
 import _poolWheelOfFortune from "./pool/wheel-of-fortune.js";
+import _poolWheelOfMisfortune from "./pool/wheel-of-misfortune.js";
 import _poolWheelOfTorture from "./pool/wheel-of-torture.js";
 import _poolWhelmingWave from "./pool/whelming-wave.js";
 import _poolWhenWeWereYoung from "./pool/when-we-were-young.js";
@@ -32044,6 +32051,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolChocoboCamp,
   _poolChocoboKnights,
   _poolChocoboRacetrack,
+  _poolChoiceOfDamnations,
   _poolChoke,
   _poolChokedEstuary,
   _poolChokingFumes,
@@ -34007,6 +34015,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDimensionalInfiltrator,
   _poolDiminish,
   _poolDiminisherWitch,
+  _poolDiminishingReturns,
   _poolDimirAqueduct,
   _poolDimirCluestone,
   _poolDimirCutpurse,
@@ -41659,6 +41668,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLionheartGlimmer,
   _poolLionheartMaverick,
   _poolLionsEyeDiamond,
+  _poolLiquidFire,
   _poolLiquify,
   _poolLiquimetalCoating,
   _poolLiquimetalTorque,
@@ -42624,6 +42634,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMemoryTheft,
   _poolMemoryTrap,
   _poolMemoryWorm,
+  _poolMenacingOgre,
   _poolMenagerieLiberator,
   _poolMendTheWilds,
   _poolMendicantCoreGuidelight,
@@ -48724,6 +48735,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolShapersOfNature,
   _poolShapersSanctuary,
   _poolShapesharer,
+  _poolShapeshifter,
   _poolShardConvergence,
   _poolShardOfBrokenGlass,
   _poolShardOfTheNightbringer,
@@ -54199,6 +54211,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolVolcanicVillain,
   _poolVolcanicVision,
   _poolVolcanicWind,
+  _poolVolcanoHellion,
   _poolVolcanoImp,
   _poolVoldarenAmbusher,
   _poolVoldarenDuelist,
@@ -54759,6 +54772,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolWharfInfiltrator,
   _poolWheelOfFate,
   _poolWheelOfFortune,
+  _poolWheelOfMisfortune,
   _poolWheelOfTorture,
   _poolWhelmingWave,
   _poolWhenWeWereYoung,
@@ -60181,6 +60195,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/chocobo-camp": _poolChocoboCamp,
   "pool/chocobo-knights": _poolChocoboKnights,
   "pool/chocobo-racetrack": _poolChocoboRacetrack,
+  "pool/choice-of-damnations": _poolChoiceOfDamnations,
   "pool/choke": _poolChoke,
   "pool/choked-estuary": _poolChokedEstuary,
   "pool/choking-fumes": _poolChokingFumes,
@@ -62144,6 +62159,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/dimensional-infiltrator": _poolDimensionalInfiltrator,
   "pool/diminish": _poolDiminish,
   "pool/diminisher-witch": _poolDiminisherWitch,
+  "pool/diminishing-returns": _poolDiminishingReturns,
   "pool/dimir-aqueduct": _poolDimirAqueduct,
   "pool/dimir-cluestone": _poolDimirCluestone,
   "pool/dimir-cutpurse": _poolDimirCutpurse,
@@ -69796,6 +69812,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/lionheart-glimmer": _poolLionheartGlimmer,
   "pool/lionheart-maverick": _poolLionheartMaverick,
   "pool/lions-eye-diamond": _poolLionsEyeDiamond,
+  "pool/liquid-fire": _poolLiquidFire,
   "pool/liquify": _poolLiquify,
   "pool/liquimetal-coating": _poolLiquimetalCoating,
   "pool/liquimetal-torque": _poolLiquimetalTorque,
@@ -70761,6 +70778,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/memory-theft": _poolMemoryTheft,
   "pool/memory-trap": _poolMemoryTrap,
   "pool/memory-worm": _poolMemoryWorm,
+  "pool/menacing-ogre": _poolMenacingOgre,
   "pool/menagerie-liberator": _poolMenagerieLiberator,
   "pool/mend-the-wilds": _poolMendTheWilds,
   "pool/mendicant-core-guidelight": _poolMendicantCoreGuidelight,
@@ -76861,6 +76879,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/shapers-of-nature": _poolShapersOfNature,
   "pool/shapers-sanctuary": _poolShapersSanctuary,
   "pool/shapesharer": _poolShapesharer,
+  "pool/shapeshifter": _poolShapeshifter,
   "pool/shard-convergence": _poolShardConvergence,
   "pool/shard-of-broken-glass": _poolShardOfBrokenGlass,
   "pool/shard-of-the-nightbringer": _poolShardOfTheNightbringer,
@@ -82336,6 +82355,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/volcanic-villain": _poolVolcanicVillain,
   "pool/volcanic-vision": _poolVolcanicVision,
   "pool/volcanic-wind": _poolVolcanicWind,
+  "pool/volcano-hellion": _poolVolcanoHellion,
   "pool/volcano-imp": _poolVolcanoImp,
   "pool/voldaren-ambusher": _poolVoldarenAmbusher,
   "pool/voldaren-duelist": _poolVoldarenDuelist,
@@ -82896,6 +82916,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/wharf-infiltrator": _poolWharfInfiltrator,
   "pool/wheel-of-fate": _poolWheelOfFate,
   "pool/wheel-of-fortune": _poolWheelOfFortune,
+  "pool/wheel-of-misfortune": _poolWheelOfMisfortune,
   "pool/wheel-of-torture": _poolWheelOfTorture,
   "pool/whelming-wave": _poolWhelmingWave,
   "pool/when-we-were-young": _poolWhenWeWereYoung,

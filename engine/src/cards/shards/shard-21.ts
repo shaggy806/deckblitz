@@ -188,6 +188,7 @@ import _poolDescendUponTheSinful from "../pool/descend-upon-the-sinful.js";
 import _poolDesolationOfSmaug from "../pool/desolation-of-smaug.js";
 import _poolDesperateBloodseeker from "../pool/desperate-bloodseeker.js";
 import _poolDesperateRitual from "../pool/desperate-ritual.js";
+import _poolDiminishingReturns from "../pool/diminishing-returns.js";
 import _poolDiscipleOfPerdition from "../pool/disciple-of-perdition.js";
 import _poolDiscovery from "../pool/discovery.js";
 import _poolDisruptDecorum from "../pool/disrupt-decorum.js";
@@ -1036,6 +1037,7 @@ const shard: CardShard = {
     _poolDesolationOfSmaug,
     _poolDesperateBloodseeker,
     _poolDesperateRitual,
+    _poolDiminishingReturns,
     _poolDiscipleOfPerdition,
     _poolDiscovery,
     _poolDisruptDecorum,

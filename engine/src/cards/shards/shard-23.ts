@@ -857,6 +857,7 @@ import _poolWaywardAngel from "../pool/wayward-angel.js";
 import _poolWebWarriors from "../pool/web-warriors.js";
 import _poolWeirdingWood from "../pool/weirding-wood.js";
 import _poolWhack from "../pool/whack.js";
+import _poolWheelOfMisfortune from "../pool/wheel-of-misfortune.js";
 import _poolWhiteTigerAmuletKeeper from "../pool/white-tiger-amulet-keeper.js";
 import _poolWilderlandScrounger from "../pool/wilderland-scrounger.js";
 import _poolWillbreaker from "../pool/willbreaker.js";
@@ -1751,6 +1752,7 @@ const shard: CardShard = {
     _poolWebWarriors,
     _poolWeirdingWood,
     _poolWhack,
+    _poolWheelOfMisfortune,
     _poolWhiteTigerAmuletKeeper,
     _poolWilderlandScrounger,
     _poolWillbreaker,

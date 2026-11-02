@@ -94,6 +94,7 @@ import _poolChitterspitter from "../pool/chitterspitter.js";
 import _poolChivalricAlliance from "../pool/chivalric-alliance.js";
 import _poolChoArrimAlchemist from "../pool/cho-arrim-alchemist.js";
 import _poolChocoboCamp from "../pool/chocobo-camp.js";
+import _poolChoiceOfDamnations from "../pool/choice-of-damnations.js";
 import _poolChromanticore from "../pool/chromanticore.js";
 import _poolChromeshellCrab from "../pool/chromeshell-crab.js";
 import _poolChronostutter from "../pool/chronostutter.js";
@@ -387,6 +388,7 @@ import _poolLiberatedDwarf from "../pool/liberated-dwarf.js";
 import _poolLifeChisel from "../pool/life-chisel.js";
 import _poolLilianaTheNecromancer from "../pool/liliana-the-necromancer.js";
 import _poolLinvalaThePreserver from "../pool/linvala-the-preserver.js";
+import _poolLiquidFire from "../pool/liquid-fire.js";
 import _poolLivingLibrary from "../pool/living-library.js";
 import _poolLizardConnorssCurse from "../pool/lizard-connorss-curse.js";
 import _poolLlanowarTribe from "../pool/llanowar-tribe.js";
@@ -897,6 +899,7 @@ const shard: CardShard = {
     _poolChivalricAlliance,
     _poolChoArrimAlchemist,
     _poolChocoboCamp,
+    _poolChoiceOfDamnations,
     _poolChromanticore,
     _poolChromeshellCrab,
     _poolChronostutter,
@@ -1190,6 +1193,7 @@ const shard: CardShard = {
     _poolLifeChisel,
     _poolLilianaTheNecromancer,
     _poolLinvalaThePreserver,
+    _poolLiquidFire,
     _poolLivingLibrary,
     _poolLizardConnorssCurse,
     _poolLlanowarTribe,
