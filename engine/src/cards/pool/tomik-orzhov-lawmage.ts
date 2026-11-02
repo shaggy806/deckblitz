@@ -9,8 +9,8 @@ const FLYING_LINE = "{T}: Target creature with a +1/+1 counter on it gains flyin
 
 export default defineCard({
   name: "Tomik, Orzhov Lawmage",
-  manaCost: "{W}{B}",
-  colors: ["W", "B"],
+  manaCost: "{1}{W}",
+  colors: ["W"],
   supertypes: ["legendary"],
   types: ["creature"],
   subtypes: ["Human", "Advisor"],
