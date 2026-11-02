@@ -1630,6 +1630,8 @@ export function turnStatOf(state: GameState, player: PlayerId, stat: TurnStat): 
       if (record === undefined || PHASE_OF_STEP[state.turn.step] !== "combat") return 0;
       return record.combat === (state.turn.combatPhases ?? 1) ? record.power : 0;
     }
+    case "energy-paid-or-lost":
+      return seat.turnHistory?.energyPaidOrLost ?? 0;
   }
 }
 

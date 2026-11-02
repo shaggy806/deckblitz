@@ -7647,6 +7647,25 @@ export function parseFace(face, ctx = {}) {
     if ((m = /^Mutate ((?:\{[^}]+\})+)$/.exec(line))) { out.mutate = m[1]; continue; }
     // Bestow [cost] (rule 702.103a): the card's `bestow`.
     if ((m = /^Bestow ((?:\{[^}]+\})+)$/.exec(line))) { out.bestow = m[1]; continue; }
+    // A spell's own cost changes (rule 601.2f) that the general read below
+    // takes: a number, colored mana, per unit, under conditions, by target.
+    if (!/\bLand\b/.test(face.type_line ?? "")) {
+      const priced = selfCostLine(line);
+      if (priced !== null) {
+        Object.assign(out, priced);
+        continue;
+      }
+    }
+    // The Visions cycle's flashback, reduced "this way" by a commander.
+    if (isSpell && (m = /^Flashback ((?:\{[^}]+\})+)\. ~ costs \{X\} less to cast this way, where X is the greatest mana value of a commander you own on the battlefield or in the command zone\.$/.exec(line))) {
+      out.flashback = { cost: m[1] };
+      out.selfCostReduction = {
+        condition: { kind: "controls", filter: {}, atLeast: 0 },
+        thisWay: "flashback",
+        reduceGeneric: { commanderManaValue: "battlefield-or-command-zone" },
+      };
+      continue;
+    }
     // Party (rule 700.8) and domain (207.2c) cost reductions: {1} less for
     // each, unconditionally — the always-true gate Leyline Binding uses.
     const perEach = {
@@ -8386,6 +8405,14 @@ export function parseFace(face, ctx = {}) {
         });
       }
       let rest = line.slice(colon + 2);
+      // "This ability costs {1} less to activate for each other artifact you
+      // control" (Tamiyo's Logbook): the ability's `costReduction`.
+      rest = rest.replace(/ This ability costs \{1\} less to activate for each ((?:other )?.+? you control)\.$/, (whole, each) => {
+        const amount = costEachAmount(each);
+        if (amount === null) return whole;
+        ability.costReduction = { reduceGeneric: amount };
+        return "";
+      });
       const restrictions = [];
       rest = rest.replace(/ Activate only (as a sorcery|once each turn|during your turn)\.$/, (_x, r) => {
         restrictions.push(r);
@@ -10154,7 +10181,190 @@ function attackingCreatures(subject) {
   return null;
 }
 
+/** A `CostReductionAmount`'s "for each …", or null for one the engine has no
+ * count for. */
+function costEachAmount(phrase) {
+  const fixed = {
+    "color among permanents you control": { colorsAmong: { controlledBy: "you" } },
+    "counter among players and permanents": { allCounters: true },
+    "creature attacking you": { countOf: { type: "creature", attackingYou: true } },
+    "creature that died this turn": { turnHistory: "died", who: "any-player", filter: { type: "creature" } },
+    "permanent sacrificed this turn": { turnHistory: "sacrificed", who: "any-player" },
+    "card type among permanents you've sacrificed this turn": { turnHistory: "sacrificed", cardTypes: true },
+    "{E} you've paid or lost this turn": { turnStat: "energy-paid-or-lost", who: "you" },
+    "basic land type among lands you control": { basicLandTypes: "you" },
+  }[phrase];
+  if (fixed !== undefined) return fixed;
+  let m;
+  if ((m = /^(.+?) you control and each (.+?) card in your graveyard$/.exec(phrase))) {
+    const here = parseTypePhrase(m[1]);
+    const there = parseTypePhrase(m[2]);
+    if (here === null || there === null) return null;
+    return { sum: [{ countOf: { ...here, controlledBy: "you" } }, { cardsInGraveyard: there }] };
+  }
+  if ((m = /^(other )?(?:(white|blue|black|red|green) )?(.+?) you control$/.exec(phrase))) {
+    const filter = parseTypePhrase(m[3]);
+    if (filter === null || Object.keys(filter).length === 0) return null;
+    const color = { white: "W", blue: "U", black: "B", red: "R", green: "G" }[m[2]];
+    return {
+      countOf: { ...filter, ...(color !== undefined ? { colors: [color] } : {}), controlledBy: "you" },
+      ...(m[1] !== undefined ? { excludeSelf: true } : {}),
+    };
+  }
+  return null;
+}
+
+/** An amount of mana in a cost line, parted as a reduction takes it. */
+function costLessParts(cost) {
+  const pips = cost.match(/\{[^}]+\}/g) ?? [];
+  let generic = 0;
+  let colored = "";
+  for (const pip of pips) {
+    if (/^\{\d+\}$/.test(pip)) generic += Number(pip.slice(1, -1));
+    else if (/^\{[WUBRG]\}$/.test(pip)) colored += pip;
+    else return null;
+  }
+  return { generic, colored };
+}
+
+/** The condition of "~ costs … less to cast if …", or null. */
+function costIfCondition(phrase) {
+  const count = (word) => NUMBERS[word];
+  let m;
+  if ((m = /^you control an? (.+)$/.exec(phrase))) {
+    const filter = parseTypePhrase(m[1]);
+    if (filter === null || Object.keys(filter).length === 0) return null;
+    return { kind: "controls", filter, atLeast: 1 };
+  }
+  if ((m = /^an opponent cast (\w+) or more spells this turn$/.exec(phrase)) && count(m[1]) !== undefined) {
+    return { kind: "turn-stat", stat: "spells-cast", who: "opponent", atLeast: count(m[1]) };
+  }
+  if ((m = /^an opponent has drawn (\w+) or more cards this turn$/.exec(phrase)) && count(m[1]) !== undefined) {
+    return { kind: "turn-stat", stat: "cards-drawn", who: "opponent", atLeast: count(m[1]) };
+  }
+  if (phrase === "you've cast an instant or sorcery spell this turn") {
+    return { kind: "cast-this-turn", who: "you", filter: { typesAnyOf: ["instant", "sorcery"] } };
+  }
+  return null;
+}
+
+/** The card fields of one line that changes what a spell itself costs, or null. */
+function selfCostLine(line) {
+  const always = { kind: "controls", filter: {}, atLeast: 0 };
+  const reducing = (cost, condition, each) => {
+    const parts = costLessParts(cost);
+    if (parts === null) return null;
+    const { generic, colored } = parts;
+    if (each === undefined) {
+      return {
+        condition,
+        ...(generic > 0 ? { reduceGeneric: generic } : {}),
+        ...(colored !== "" ? { reduceColored: colored } : {}),
+      };
+    }
+    if (colored !== "" && generic > 0) return null;
+    if (colored !== "") return { condition, reduceColored: colored, reduceColoredTimes: each };
+    if (generic === 1) return { condition, reduceGeneric: each };
+    return {
+      condition,
+      reduceGeneric: "turnHistory" in each ? { ...each, times: generic } : { scaled: each, by: generic },
+    };
+  };
+  let m;
+  // "… {N} more … if it targets …" and "… less … if it targets …".
+  if ((m = /^~ costs \{(\d+)\} more to cast if it targets an? (.+)\.$/.exec(line))) {
+    const filter = parseTypePhrase(m[2]);
+    if (filter === null || Object.keys(filter).length === 0) return null;
+    return { targetCostIncrease: { filter, increaseGeneric: Number(m[1]) } };
+  }
+  if ((m = /^~ costs ((?:\{[^}]+\})+) less to cast if it targets an? (instant or sorcery spell)\.$/.exec(line))) {
+    const parts = costLessParts(m[1]);
+    if (parts === null) return null;
+    return {
+      targetCostReduction: {
+        filter: { typesAnyOf: ["instant", "sorcery"] },
+        reduceGeneric: parts.generic,
+        ...(parts.colored !== "" ? { reduceColored: parts.colored } : {}),
+      },
+    };
+  }
+  // Two independent conditions, in one sentence or two (Assassin's Ink,
+  // Geistlight Snare).
+  if ((m = /^~ costs ((?:\{[^}]+\})+) less to cast if (.+?)(?: and|\. It also costs) ((?:\{[^}]+\})+) less to cast if (.+)\.$/.exec(line))) {
+    const first = costIfCondition(m[2]);
+    const second = costIfCondition(m[4]);
+    if (first === null || second === null) return null;
+    const both = [reducing(m[1], first), reducing(m[3], second)];
+    return both.includes(null) ? null : { selfCostReduction: both };
+  }
+  if ((m = /^~ costs ((?:\{[^}]+\})+) less to cast if (.+)\.$/.exec(line))) {
+    const condition = costIfCondition(m[2]);
+    if (condition === null) return null;
+    const one = reducing(m[1], condition);
+    return one === null ? null : { selfCostReduction: one };
+  }
+  if ((m = /^During your turn, ~ costs ((?:\{[^}]+\})+) less to cast\.$/.exec(line))) {
+    const one = reducing(m[1], { kind: "your-turn" });
+    return one === null ? null : { selfCostReduction: one };
+  }
+  if ((m = /^~ costs ((?:\{[^}]+\})+) less to cast for each (.+)\.$/.exec(line))) {
+    const each = costEachAmount(m[2]);
+    if (each === null) return null;
+    const one = reducing(m[1], always, each);
+    return one === null ? null : { selfCostReduction: one };
+  }
+  return null;
+}
+
+/** "Spells … cost … to cast" statics keyed to the spell's targets or to where
+ * it's cast from, or read off the spell or its source (`costModification`),
+ * or null. */
+function spellCostStaticOf(line, text) {
+  const made = (costModification) => ({ affects: { scope: "self" }, costModification, text });
+  let m;
+  if ((m = /^Spells you cast that target an? (.+?) cost \{(\d+)\} less to cast\.$/.exec(line))) {
+    const targeting = parseTypePhrase(m[1]);
+    if (targeting === null || Object.keys(targeting).length === 0) return null;
+    return made({ applies: {}, caster: "you", targeting, reduceGeneric: Number(m[2]) });
+  }
+  if ((m = /^Spells that target (?:~|this creature|this permanent) cost \{(\d+)\} less to cast\.$/.exec(line))) {
+    return made({ applies: {}, targetingSource: true, reduceGeneric: Number(m[1]) });
+  }
+  if ((m = /^Each instant and sorcery spell you cast costs \{(\d+)\} less to cast for each (\w+) it targets\.$/.exec(line))) {
+    const targeting = parseTypePhrase(m[2]);
+    if (targeting === null) return null;
+    return made({
+      applies: { typesAnyOf: ["instant", "sorcery"] },
+      caster: "you",
+      perTarget: true,
+      targeting,
+      reduceGeneric: Number(m[1]),
+    });
+  }
+  if ((m = /^Spells you cast cost \{(\d+)\} less to cast for each card with the same name as that spell in your graveyard\.$/.exec(line))) {
+    const each = { cardsInGraveyard: {}, sameNameAsSpell: true };
+    return made({ applies: {}, caster: "you", reduceGeneric: m[1] === "1" ? each : { scaled: each, by: Number(m[1]) } });
+  }
+  if ((m = /^Spells you cast from your graveyard cost \{(\d+)\} less to cast\.$/.exec(line))) {
+    return made({ applies: {}, caster: "you", castFrom: "graveyard", reduceGeneric: Number(m[1]) });
+  }
+  if ((m = /^Spells your opponents cast from graveyards or from exile cost \{(\d+)\} more to cast\.$/.exec(line))) {
+    return made({ applies: {}, caster: "opponent", castFrom: ["graveyard", "exile"], castFromAnyones: true, increaseGeneric: Number(m[1]) });
+  }
+  if ((m = /^(Instant and sorcery|Aura and Equipment) spells you cast(?: with mana value (\d+) or greater)? cost \{X\} less to cast, where X is (~|this creature|equipped creature)'s power\.$/.exec(line))) {
+    const applies = m[1] === "Instant and sorcery" ? { typesAnyOf: ["instant", "sorcery"] } : { subtypes: ["Aura", "Equipment"] };
+    return made({
+      applies: { ...applies, ...(m[2] !== undefined ? { manaValue: { op: "gte", n: Number(m[2]) } } : {}) },
+      caster: "you",
+      reduceGeneric: { powerOf: m[3] === "equipped creature" ? "attached" : "source" },
+    });
+  }
+  return null;
+}
+
 function parseStatic(line, text) {
+  const spellCost = spellCostStaticOf(line, text);
+  if (spellCost !== null) return spellCost;
   let m;
   // Life equal to the mana value for a spell, once a turn (rule 118.9):
   // "Once during each of your turns, you may cast an enchantment spell by
@@ -10184,6 +10394,13 @@ function parseStatic(line, text) {
     return {
       affects: { scope: "self" },
       targetedBySpellsCost: m[1] !== undefined ? { payGeneric: Number(m[1]) } : { payLife: Number(m[2]) },
+      text,
+    };
+  }
+  if ((m = /^Spells your opponents cast that target you or a permanent you control cost \{(\d+)\} more to cast\.$/.exec(line))) {
+    return {
+      affects: { scope: "self" },
+      targetedBySpellsCost: { payGeneric: Number(m[1]), targetingYou: true, targeting: { controlledBy: "you" } },
       text,
     };
   }

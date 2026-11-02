@@ -3621,3 +3621,25 @@ Demon-Fang Gnoll, Battle Cry Goblin. Still needing more than this: Tiger-Tribe
 Hunter's reflexive sacrifice, Minion of the Mighty's creature card from hand
 tapped and attacking, Intrepid Outlander's dungeon, each for `author-freed` to
 read.
+
+**Cost reductions: new amounts, coloured, several, by target (2026-11-01,
+`cost:cost-modification-extensions`).** `CostReductionAmount` gained
+`excludeSelf`, `allCounters`, `colorsAmong`, `sameNameAsSpell`, `powerOf`,
+`commanderManaValue`, `sum` and `scaled`, and `turnHistory` gained `who` and
+`cardTypes`; the turn stat `energy-paid-or-lost` is new. `selfCostReduction` may
+be a list, take coloured mana and be tied to a printed flashback (`thisWay`).
+`targetCostReduction` takes coloured mana; `targetCostIncrease` is its other
+half. `costModification` reads a spell's chosen targets (`targeting`,
+`targetingSource`, with `perTarget`), with `Game.spellPricedByTargets` narrowing
+the offers as for a spell's own reduction, and `targetedBySpellsCost` reaches a
+player (`targetingYou`). `castFrom` takes a list. Proving cards: Lumbering
+Megasloth, Wildvine Pummeler, Tamiyo's Logbook, Locket of Yesterdays, Gargantuan
+Leech, Khalni Hydra, Ertai's Scorn, Stormwing Entity, Assassin's Ink, Diregraf
+Rebirth, The Balrog, The Scarlet Witch, Visions of Glory, Gravebreaker Lamia,
+Brush Off, Dragon's Prey, Vanish into Eternity, Killian, Spellwild Ouphe,
+Battlefield Thaumaturge, Monastery Siege, Icefall Regent. Not covered: Catalyst
+Stone (a static on flashback costs; castingCostOf doesn't know the cast's way),
+Vine Gecko ("kicked" isn't a spell filter as it's priced), Mavinda, an ability
+reduced by its target's stats, and several reductions a multi-target spell needs
+at once: `reducingTargets` keeps one earning target, so two needed is refused at
+the cast rather than narrowed in the offer.

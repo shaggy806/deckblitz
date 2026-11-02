@@ -1,0 +1,27 @@
+import { defineCard } from "../define.js";
+
+const TEXT =
+  "Instant and sorcery spells you cast with mana value 4 or greater cost {X} less to cast, where X is The Scarlet Witch's power.";
+
+export default defineCard({
+  name: "The Scarlet Witch",
+  manaCost: "{2}{R}",
+  colors: ["R"],
+  supertypes: ["legendary"],
+  types: ["creature"],
+  subtypes: ["Mutant", "Warlock", "Hero"],
+  power: 2,
+  toughness: 3,
+  text: TEXT,
+  static: [
+    {
+      affects: { scope: "self" },
+      costModification: {
+        applies: { typesAnyOf: ["instant", "sorcery"], manaValue: { op: "gte", n: 4 } },
+        caster: "you",
+        reduceGeneric: { powerOf: "source" },
+      },
+      text: TEXT,
+    },
+  ],
+});

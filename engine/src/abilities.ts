@@ -782,9 +782,35 @@ export interface ActivatedAbility {
  */
 export type CostReductionAmount =
   | number
-  | { readonly countOf: CardFilter }
+  /** `excludeSelf`: "for each **other** artifact you control" (Etherium
+   * Pteramander, Plate Armor) — the permanent doing the reducing isn't one. */
+  | { readonly countOf: CardFilter; readonly excludeSelf?: boolean }
   | { readonly countersOnSource: string }
-  | { readonly cardsInGraveyard: CardFilter }
+  /** `sameNameAsSpell`: "each card with the same name as that spell in your
+   * graveyard" (Locket of Yesterdays). A spell cast from that graveyard
+   * doesn't count itself: it's on the stack before its cost is worked out
+   * (rules 601.2a, 601.2f). */
+  | { readonly cardsInGraveyard: CardFilter; readonly sameNameAsSpell?: boolean }
+  /** One per counter of any kind on any player and any permanent — Lumbering
+   * Megasloth's "for each counter among players and permanents" (rule 122). */
+  | { readonly allCounters: true }
+  /** One per color among permanents matching the filter — Vivid (Wildvine
+   * Pummeler). `characteristics.ts`'s `colorsAmongPermanents`. */
+  | { readonly colorsAmong: CardFilter }
+  /** The power of the permanent doing the reducing (The Scarlet Witch's "where
+   * X is The Scarlet Witch's power") or of what it's attached to (Glamdring's
+   * "equipped creature's power"). 0 if it's negative or there's no creature
+   * (rule 107.1b). */
+  | { readonly powerOf: "source" | "attached" }
+  /** The greatest mana value of a commander its controller owns on the
+   * battlefield or in the command zone (the Visions cycle) — not one in a
+   * graveyard or exile. 0 with none. */
+  | { readonly commanderManaValue: "battlefield-or-command-zone" }
+  /** Several counts added up — Gargantuan Leech's "for each Cave you control
+   * and each Cave card in your graveyard". */
+  | { readonly sum: readonly CostReductionAmount[] }
+  /** A count taken `by` times — Draco's "{2} less for each basic land type". */
+  | { readonly scaled: CostReductionAmount; readonly by: number }
   /** One per card type among graveyard cards matching the filter, each type
    * once — Emrakul, the Promised End's `{ cardTypesInGraveyard: { ownedBy:
    * "you" } }`. The {@link EffectAmount} of that name, for a cost. */
@@ -805,8 +831,18 @@ export type CostReductionAmount =
    * `filter` — Dargo, the Shipwrecker's "{2} less to cast for each other
    * artifact or creature you've sacrificed this turn" is `{ turnHistory:
    * "sacrificed", filter: { typesAnyOf: ["artifact", "creature"] }, times: 2
-   * }`. See `TurnHistory`. */
-  | { readonly turnHistory: TurnHistoryKind; readonly filter?: CardFilter; readonly times?: number }
+   * }`. See `TurnHistory`. `who: "any-player"` reads every player's list —
+   * Death-Rattle Oni's "{2} less for each creature that died this turn", The
+   * Balrog's "for each permanent sacrificed this turn". `cardTypes` counts
+   * each card type among them once instead — Korvold, Gleeful Glutton's "for
+   * each card type among permanents you've sacrificed this turn". */
+  | {
+      readonly turnHistory: TurnHistoryKind;
+      readonly filter?: CardFilter;
+      readonly times?: number;
+      readonly who?: "you" | "any-player";
+      readonly cardTypes?: boolean;
+    }
   /** Domain — {1} less for each basic land type among lands its controller
    * controls (Leyline Binding, Jodah's Codex). `characteristics.ts`'s
    * `basicLandTypesAmong`; see the `EffectAmount` of the same name. */

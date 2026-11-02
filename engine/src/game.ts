@@ -600,6 +600,24 @@ interface DamageApplied {
 }
 const NO_DAMAGE_APPLIED: DamageApplied = { statics: [], shields: [] };
 
+/** The card types a cost's `turnHistory` `cardTypes` read walks (rule 205.2a). */
+const COST_READ_CARD_TYPES: readonly CardType[] = [
+  "artifact",
+  "battle",
+  "creature",
+  "enchantment",
+  "instant",
+  "kindred",
+  "land",
+  "planeswalker",
+  "sorcery",
+];
+
+/** Whether a `costModification` applies only to a spell with certain targets. */
+function isTargetKeyed(mod: NonNullable<StaticAbility["costModification"]>): boolean {
+  return mod.targeting !== undefined || mod.targetingSource === true;
+}
+
 /** One effect that would change a damage event — see `Game.damageSteps`. */
 type DamageStep =
   | { readonly kind: "times"; readonly by: number }
@@ -4057,7 +4075,7 @@ export class Game {
         // and that X's options (as for Rydia's ability). Mana alone pays.
         let most = 0;
         if (variantCost !== null && parseManaCost(variantCost).x > 0) {
-          this.targetCostReductionAssumed = def.targetCostReduction !== null;
+          this.targetCostReductionAssumed = this.spellPricedByTargets(def, player, card);
           try {
             most = this.xPlanFor(player, card, def, variantCost, face ?? 0, 0).maxX;
           } finally {
@@ -4545,7 +4563,7 @@ export class Game {
                   ? {
                       maxX: xPlan.maxX,
                       ...(xFloor > 0 ? { minX: xFloor } : {}),
-                      ...(def.targetCostReduction !== null
+                      ...(this.spellPricedByTargets(def, player, card)
                         ? this.unreducedXOffer(player, card, def, cost, face ?? 0, pricedAt, options, xPlan.maxX)
                         : {}),
                     }
@@ -4625,7 +4643,7 @@ export class Game {
             ...offer,
             targetOptions: xOptions,
             xCost: { maxX: x, minX: x },
-            ...(def.targetCostReduction !== null
+            ...(this.spellPricedByTargets(def, player, card)
               ? { reducingTargets: this.reducingTargetsNeeded(def, player, card, xOptions, castable) }
               : {}),
             ...(xTax !== null ? { targetTaxes: { taxes: xTax.taxes, afford: xTax.afford } } : {}),
@@ -12580,11 +12598,13 @@ export class Game {
     let life = 0;
     let generic = 0;
     const named = new Map<ObjectId, number>();
+    const namedPlayers = new Set<PlayerId>();
     for (const target of targets) {
       if (target?.kind === "object") named.set(target.object, (named.get(target.object) ?? 0) + 1);
+      if (target?.kind === "player") namedPlayers.add(target.player);
     }
-    if (named.size === 0) return { life, generic };
-    const add = (cost: NonNullable<StaticAbility["targetedBySpellsCost"]>, times: number): void => {
+    if (named.size === 0 && namedPlayers.size === 0) return { life, generic };
+    const add =(cost: NonNullable<StaticAbility["targetedBySpellsCost"]>, times: number): void => {
       life += (cost.payLife ?? 0) * times;
       generic += (cost.payGeneric ?? 0) * times;
     };
@@ -12594,7 +12614,7 @@ export class Game {
       if (object === undefined || object.zone !== "battlefield" || object.controller === caster) continue;
       const times = Math.min(slots, Math.max(1, object.stackCount ?? 1));
       for (const cost of active.get(id) ?? []) {
-        if (cost.targeting === undefined) add(cost, times);
+        if (cost.targeting === undefined && cost.targetingYou !== true) add(cost, times);
       }
     }
     for (const [sourceId, costs] of active) {
@@ -12602,12 +12622,15 @@ export class Game {
       if (source === undefined || source.controller === caster) continue;
       for (const cost of costs) {
         const filter = cost.targeting;
-        if (filter === undefined) continue;
-        const reached = [...named.keys()].some(
-          (id) =>
-            this.state.objects[id]?.zone === "battlefield" &&
-            matchesFilter(this.state, this.registry, id, filter, { you: source.controller, source: sourceId }),
-        );
+        if (filter === undefined && cost.targetingYou !== true) continue;
+        const reached =
+          (cost.targetingYou === true && namedPlayers.has(source.controller)) ||
+          (filter !== undefined &&
+            [...named.keys()].some(
+              (id) =>
+                this.state.objects[id]?.zone === "battlefield" &&
+                matchesFilter(this.state, this.registry, id, filter, { you: source.controller, source: sourceId }),
+            ));
         if (reached) add(cost, 1);
       }
     }
@@ -12632,20 +12655,26 @@ export class Game {
     readonly afford: number;
     readonly within: (ref: TargetRef) => boolean;
   } | null {
-    if (!this.targetedCostsInPlay().mana) return null;
+    if (!this.targetedCostsInPlay().mana && def.targetCostIncrease === null) return null;
     const source = this.cardSource(def, card, x);
     const taxOf = new Map<ObjectId, number>();
+    const taxOfPlayer = new Map<PlayerId, number>();
     const look = (specs: readonly TargetSpec[]): void => {
       for (const ref of this.targetOptionsFor(specs, player, source).flat()) {
+        if (ref.kind === "player") {
+          if (!taxOfPlayer.has(ref.player)) taxOfPlayer.set(ref.player, this.targetingCost(player, [ref]).generic);
+          continue;
+        }
         if (ref.kind !== "object" || taxOf.has(ref.object)) continue;
-        taxOf.set(ref.object, this.targetingCost(player, [ref]).generic);
+        taxOf.set(ref.object, this.targetingCost(player, [ref]).generic + this.ownTargetTax(def, player, card, [ref]));
       }
     };
     look(this.effectiveTargetSpecs(def, undefined, kicked, overload));
     for (const mode of def.castModal?.modes ?? []) look(mode.targets ?? []);
     const taxes = [...taxOf].flatMap(([object, generic]) => (generic > 0 ? [{ object, generic }] : []));
-    if (taxes.length === 0) return null;
-    const cap = taxes.reduce((sum, tax) => sum + tax.generic, 0);
+    const playerTaxes = [...taxOfPlayer.values()].filter((generic) => generic > 0);
+    if (taxes.length === 0 && playerTaxes.length === 0) return null;
+    const cap = taxes.reduce((sum, tax) => sum + tax.generic, 0) + playerTaxes.reduce((sum, tax) => sum + tax, 0);
     // The most generic mana that can be added at this price: -1 for none,
     // when the spell can't be cast at this price at all.
     const most = (reductionOff: boolean): number => {
@@ -12664,14 +12693,14 @@ export class Game {
         this.targetCostReductionOff = wasOff;
       }
     };
-    const reduces = def.targetCostReduction !== null;
+    const reduces = this.spellPricedByTargets(def, player, card);
     const atFullPrice = most(reduces);
     const whenEarned = reduces ? most(false) : atFullPrice;
     return {
       taxes,
       afford: Math.max(atFullPrice, whenEarned),
       within: (ref) => {
-        const tax = ref.kind === "object" ? (taxOf.get(ref.object) ?? 0) : 0;
+        const tax = ref.kind === "object" ? (taxOf.get(ref.object) ?? 0) : ref.kind === "player" ? (taxOfPlayer.get(ref.player) ?? 0) : 0;
         if (tax === 0) return true;
         return tax <= (reduces && this.targetsEarnReduction(def, player, card, [ref]) ? whenEarned : atFullPrice);
       },
@@ -12893,7 +12922,8 @@ export class Game {
             ) as Record<Color, number>,
           };
     const tax = this.isCastableCommander(player, cardId) ? this.commanderTax(player, cardId) : 0;
-    const mods = this.costModificationFor(player, cardId, targetCount);
+    const mods = this.costModificationFor(player, cardId, targetCount, targets, def, xValue);
+    const colored: ColoredReduction[] = [...mods.colored];
     // Harmonize's tapped creature (rule 702.180a), probed by the caller.
     // A bargained Ice Out's {1} (`kicker.reduceGeneric`), likewise probed.
     // So is emerge's sacrificed creature's mana value (rule 702.119a).
@@ -12902,11 +12932,15 @@ export class Game {
       this.harmonizePower +
       this.emergeManaValue +
       (this.kickedCostReduction?.card === cardId ? this.kickedCostReduction.generic : 0);
-    if (
-      def.selfCostReduction !== null &&
-      staticConditionMet(this.state, this.registry, this.state.objects[cardId], def.selfCostReduction.condition)
-    ) {
-      reduction += this.costReductionAmount(def.selfCostReduction.reduceGeneric, player, cardId);
+    // What the spell prints on itself: each one judged alone (Assassin's Ink).
+    for (const self of def.selfCostReduction === null ? [] : [def.selfCostReduction].flat()) {
+      if (self.thisWay === "flashback" && costString !== def.flashback?.cost) continue;
+      if (!staticConditionMet(this.state, this.registry, this.state.objects[cardId], self.condition)) continue;
+      if (self.reduceGeneric !== undefined) reduction += this.costReductionAmount(self.reduceGeneric, player, cardId, cardId);
+      if (self.reduceColored !== undefined) {
+        const times = self.reduceColoredTimes === undefined ? 1 : this.costReductionAmount(self.reduceColoredTimes, player, cardId, cardId);
+        if (times > 0) colored.push(coloredReductionOf(self.reduceColored, self.coloredOnly === true, times));
+      }
     }
     // "That spell has undaunted" (Durnan of the Yawning Portal — rule
     // 702.125a), from the permission it's cast from exile under; another
@@ -12921,18 +12955,27 @@ export class Game {
     if (def.targetCostReduction !== null) {
       const earned =
         targets !== undefined
-          ? this.targetsEarnReduction(def, player, cardId, targets)
+          ? this.targetsEarnOwnReduction(def, player, cardId, targets)
           : !this.targetCostReductionOff &&
             (this.targetCostReductionAssumed ||
               this.targetOptionsFor(this.effectiveTargetSpecs(def, undefined), player, this.cardSource(def, cardId, xValue)).some((slot) =>
-                this.targetsEarnReduction(def, player, cardId, slot),
+                this.targetsEarnOwnReduction(def, player, cardId, slot),
               ));
-      if (earned) reduction += def.targetCostReduction.reduceGeneric;
+      if (earned) {
+        reduction += def.targetCostReduction.reduceGeneric;
+        if (def.targetCostReduction.reduceColored !== undefined) {
+          colored.push(coloredReductionOf(def.targetCostReduction.reduceColored, false));
+        }
+      }
     }
     // "Spells your opponents cast that target this creature cost {2} more"
-    // (Boreal Elemental): a cost increase, so before any reduction (rule
+    // (Boreal Elemental), "this spell costs {2} more to cast if it targets a
+    // Dragon" (Dragon's Prey): a cost increase, so before any reduction (rule
     // 601.2f). Fixed once the targets are (rule 601.2c).
-    const targetTax = targets !== undefined ? this.targetingCost(player, targets).generic : this.targetTaxProbe;
+    const targetTax =
+      targets !== undefined
+        ? this.targetingCost(player, targets).generic + this.ownTargetTax(def, player, cardId, targets)
+        : this.targetTaxProbe;
     // "{2} less for each creature sacrificed this way" (Dargo): X is how
     // many, announced as it's cast (rule 601.2b).
     const perSacrificed = def.additionalCost?.sacrificeReduces;
@@ -12946,8 +12989,27 @@ export class Game {
         x: 0,
       },
       reduction,
-      mods.colored,
+      colored,
     );
+  }
+
+  /** What `def`'s own `targetCostIncrease` adds with these targets: once,
+   * however many of them match, from the caster's side. */
+  private ownTargetTax(
+    def: CardDefinition,
+    player: PlayerId,
+    cardId: ObjectId,
+    targets: readonly (TargetRef | null | undefined)[],
+  ): number {
+    const increase = def.targetCostIncrease;
+    if (increase === null) return 0;
+    return targets.some(
+      (t) =>
+        t?.kind === "object" &&
+        matchesFilter(this.state, this.registry, t.object, increase.filter, { you: player, source: cardId }),
+    )
+      ? increase.increaseGeneric
+      : 0;
   }
 
   /** While set, a spell offered for casting is priced without its
@@ -12988,10 +13050,10 @@ export class Game {
     return unreduced >= maxX ? {} : { maxXUnreduced: unreduced, reducingTargets: reducing };
   }
 
-  /** Whether `targets` earn `def`'s `targetCostReduction`: one of them an
+  /** Whether `targets` earn `def`'s own `targetCostReduction`: one of them an
    * object (a permanent, or a spell on the stack) matching its filter from
    * the caster's side. */
-  private targetsEarnReduction(
+  private targetsEarnOwnReduction(
     def: CardDefinition,
     player: PlayerId,
     cardId: ObjectId,
@@ -13003,6 +13065,59 @@ export class Game {
       (t) =>
         t?.kind === "object" &&
         matchesFilter(this.state, this.registry, t.object, reduction.filter, { you: player, source: cardId }),
+    );
+  }
+
+  /** Whether `targets` earn anything that a spell's targets take off its cost:
+   * its own `targetCostReduction`, or a `costModification` keyed to them
+   * (Killian, Ink Duelist) that reaches it. */
+  private targetsEarnReduction(
+    def: CardDefinition,
+    player: PlayerId,
+    cardId: ObjectId,
+    targets: readonly (TargetRef | null | undefined)[],
+  ): boolean {
+    if (this.targetsEarnOwnReduction(def, player, cardId, targets)) return true;
+    return this.reachingCostModifications(player, cardId).some(
+      ({ source, mod }) =>
+        isTargetKeyed(mod) &&
+        targets.some((t) => t?.kind === "object" && this.modificationKeyedTo(mod, source, t.object)),
+    );
+  }
+
+  /** Whether a target-keyed `costModification` of `source` is earned by
+   * `object` being targeted. */
+  private modificationKeyedTo(
+    mod: NonNullable<StaticAbility["costModification"]>,
+    source: GameObject,
+    object: ObjectId,
+  ): boolean {
+    if (mod.targetingSource === true && object === source.id) return true;
+    return (
+      mod.targeting !== undefined &&
+      matchesFilter(this.state, this.registry, object, mod.targeting, { you: source.controller, source: source.id })
+    );
+  }
+
+  /** Whether what `player` pays for `cardId` can fall with its targets: the
+   * offers then say which targets earn it. Asked of every spell offered, and
+   * almost never true, so the static half is memoised per cache region. */
+  private spellPricedByTargets(def: CardDefinition, player: PlayerId, cardId: ObjectId): boolean {
+    if (def.targetCostReduction !== null) return true;
+    if (!this.targetKeyedCostModsInPlay()) return false;
+    return this.reachingCostModifications(player, cardId).some(({ mod }) => isTargetKeyed(mod));
+  }
+
+  /** Whether any permanent prints a `costModification` keyed to a spell's targets. */
+  private targetKeyedCostModsInPlay(): boolean {
+    return computedCacheMemo("targetKeyedCostModsInPlay", () =>
+      this.state.zones.shared.battlefield.some((id) => {
+        const object = this.state.objects[id];
+        return (
+          object !== undefined &&
+          this.registry.get(rulesTextName(object)).static.some((a) => a.costModification !== undefined && isTargetKeyed(a.costModification))
+        );
+      }),
     );
   }
 
@@ -13123,7 +13238,7 @@ export class Game {
     fullPriceCastable: () => boolean,
   ): TargetRef[][] {
     const all = options.map((slot) => [...slot]);
-    if (def.targetCostReduction === null) return all;
+    if (!this.spellPricedByTargets(def, player, cardId)) return all;
     const earning = all.map((slot) => slot.filter((ref) => this.targetsEarnReduction(def, player, cardId, [ref])));
     const slots = earning.flatMap((slot, i) => (slot.length > 0 ? [i] : []));
     if (slots.length !== 1) return all;
@@ -13149,7 +13264,7 @@ export class Game {
     options: readonly (readonly TargetRef[])[],
     fullPriceCastable: () => boolean,
   ): ObjectId[] | undefined {
-    if (def.targetCostReduction === null) return undefined;
+    if (!this.spellPricedByTargets(def, player, cardId)) return undefined;
     const earning = [
       ...new Set(
         options
@@ -13393,11 +13508,80 @@ export class Game {
   private costModificationFor(
     player: PlayerId,
     cardId: ObjectId,
-    targetCount = 0,
+    targetCount: number,
+    /** The targets chosen, once they are (rule 601.2c): what a modification
+     * keyed to them reads. Left out, it's assumed whenever some legal target
+     * would earn it, as a `targetCostReduction` is. */
+    targets: readonly (TargetRef | null | undefined)[] | undefined,
+    def: CardDefinition,
+    xValue: number,
   ): { increaseGeneric: number; reduceGeneric: number; colored: ColoredReduction[] } {
     let increaseGeneric = 0;
     let reduceGeneric = 0;
     const colored: ColoredReduction[] = [];
+    for (const { source, mod } of this.reachingCostModifications(player, cardId)) {
+      let times = mod.perTarget === true ? targetCount : 1;
+      if (isTargetKeyed(mod)) {
+        if (targets !== undefined) {
+          const earning = new Set(
+            targets.flatMap((t) => (t?.kind === "object" && this.modificationKeyedTo(mod, source, t.object) ? [t.object] : [])),
+          );
+          times = mod.perTarget === true ? earning.size : Math.min(1, earning.size);
+        } else if (this.targetCostReductionOff) {
+          times = 0;
+        } else if (
+          !this.targetCostReductionAssumed &&
+          !this.targetOptionsFor(this.effectiveTargetSpecs(def, undefined), player, this.cardSource(def, cardId, xValue))
+            .flat()
+            .some((ref) => ref.kind === "object" && this.modificationKeyedTo(mod, source, ref.object))
+        ) {
+          times = 0;
+        }
+        if (times === 0) continue;
+      }
+      if (mod.reduceGeneric !== undefined) {
+        reduceGeneric += times * this.costReductionAmount(mod.reduceGeneric, source.controller, source.id, cardId);
+      }
+      increaseGeneric += times * (mod.increaseGeneric ?? 0);
+      if (mod.reduceColored !== undefined) {
+        const n =
+          times *
+          (mod.reduceColoredTimes === undefined
+            ? 1
+            : this.costReductionAmount(mod.reduceColoredTimes, source.controller, source.id, cardId));
+        if (n > 0) colored.push(coloredReductionOf(mod.reduceColored, mod.coloredOnly === true, n));
+      }
+    }
+    // A temporary player effect's reduction (Rowan): the caster's own.
+    for (const effect of this.state.playerEffects ?? []) {
+      const mod = effect.reduceSpells;
+      if (mod === undefined || (effect.owner !== player && mod.allCasters !== true)) continue;
+      if (matchesFilter(this.state, this.registry, cardId, mod.applies, { you: effect.owner })) {
+        reduceGeneric += mod.reduceGeneric;
+      }
+    }
+    // "The next spell you cast this turn costs {N} less" / "has affinity for
+    // artifacts": every unspent `next` grant it would use up, all at once, the
+    // rulings' cumulative instances.
+    const card = this.state.objects[cardId];
+    const castFrom = card?.zone === "stack" ? (card.castFrom ?? undefined) : card?.zone;
+    for (const grant of this.state.spellGrantsThisTurn ?? []) {
+      if (grant.reduceGeneric === undefined && grant.affinityFor === undefined) continue;
+      if (!turnCastGrantReaches(this.state, this.registry, grant, cardId, player, castFrom)) continue;
+      reduceGeneric += grant.reduceGeneric ?? 0;
+      // Rule 702.41a: {1} less for each one its caster controls now, as it's cast.
+      if (grant.affinityFor !== undefined) reduceGeneric += this.countBattlefieldMatching(player, grant.affinityFor);
+    }
+    return { increaseGeneric, reduceGeneric, colored };
+  }
+
+  /** The `costModification` statics that reach `cardId` as `player` casts it,
+   * targets aside: on the battlefield, and Eminence's in the command zone. */
+  private reachingCostModifications(
+    player: PlayerId,
+    cardId: ObjectId,
+  ): { readonly source: GameObject; readonly mod: NonNullable<StaticAbility["costModification"]> }[] {
+    const reaching: { readonly source: GameObject; readonly mod: NonNullable<StaticAbility["costModification"]> }[] = [];
     // The command zone joins the scan for Eminence's static form (The
     // Ur-Dragon), and contributes only the abilities marked for it. An
     // emblem's works from there as it says (rule 113.6p).
@@ -13443,10 +13627,17 @@ export class Game {
         if (mod.castFrom !== undefined) {
           const card = this.state.objects[cardId];
           const from = card?.zone === "stack" ? card.castFrom : card?.zone;
-          if (from !== mod.castFrom) continue;
+          if (from === undefined || from === null || ![mod.castFrom].flat().includes(from)) continue;
           // "Your graveyard": a card is in its owner's graveyard (hand,
           // library), so one cast from an opponent's (Memory Plunder) isn't.
-          if ((from === "graveyard" || from === "hand" || from === "library") && card?.owner !== source.controller) continue;
+          // "From graveyards" (Aven Interrupter) reads any of them.
+          if (
+            mod.castFromAnyones !== true &&
+            (from === "graveyard" || from === "hand" || from === "library") &&
+            card?.owner !== source.controller
+          ) {
+            continue;
+          }
         }
         // "The first … spell you cast each turn": any matching spell this
         // player has already cast this turn has had it.
@@ -13458,42 +13649,10 @@ export class Game {
         ) {
           continue;
         }
-        const times = mod.perTarget === true ? targetCount : 1;
-        if (mod.reduceGeneric !== undefined) {
-          reduceGeneric += times * this.costReductionAmount(mod.reduceGeneric, source.controller, source.id);
-        }
-        increaseGeneric += times * (mod.increaseGeneric ?? 0);
-        if (mod.reduceColored !== undefined) {
-          const n =
-            times *
-            (mod.reduceColoredTimes === undefined
-              ? 1
-              : this.costReductionAmount(mod.reduceColoredTimes, source.controller, source.id));
-          if (n > 0) colored.push(coloredReductionOf(mod.reduceColored, mod.coloredOnly === true, n));
-        }
+        reaching.push({ source, mod });
       }
     }
-    // A temporary player effect's reduction (Rowan): the caster's own.
-    for (const effect of this.state.playerEffects ?? []) {
-      const mod = effect.reduceSpells;
-      if (mod === undefined || (effect.owner !== player && mod.allCasters !== true)) continue;
-      if (matchesFilter(this.state, this.registry, cardId, mod.applies, { you: effect.owner })) {
-        reduceGeneric += mod.reduceGeneric;
-      }
-    }
-    // "The next spell you cast this turn costs {N} less" / "has affinity for
-    // artifacts": every unspent `next` grant it would use up, all at once, the
-    // rulings' cumulative instances.
-    const card = this.state.objects[cardId];
-    const castFrom = card?.zone === "stack" ? (card.castFrom ?? undefined) : card?.zone;
-    for (const grant of this.state.spellGrantsThisTurn ?? []) {
-      if (grant.reduceGeneric === undefined && grant.affinityFor === undefined) continue;
-      if (!turnCastGrantReaches(this.state, this.registry, grant, cardId, player, castFrom)) continue;
-      reduceGeneric += grant.reduceGeneric ?? 0;
-      // Rule 702.41a: {1} less for each one its caster controls now, as it's cast.
-      if (grant.affinityFor !== undefined) reduceGeneric += this.countBattlefieldMatching(player, grant.affinityFor);
-    }
-    return { increaseGeneric, reduceGeneric, colored };
+    return reaching;
   }
 
   /** Whether a temporary player effect lets `cardId` — in its owner's hand —
@@ -36541,9 +36700,32 @@ export class Game {
     amount: CostReductionAmount,
     player: PlayerId,
     sourceId?: ObjectId,
+    /** The spell being priced, for what's read off it (Locket of Yesterdays). */
+    spellId?: ObjectId,
   ): number {
     if (typeof amount === "number") return amount;
-    if ("countOf" in amount) return this.countBattlefieldMatching(player, amount.countOf);
+    if ("countOf" in amount) {
+      return this.countBattlefieldMatching(player, amount.countOf, amount.excludeSelf === true && sourceId !== undefined ? [sourceId] : []);
+    }
+    if ("sum" in amount) return amount.sum.reduce<number>((n, part) => n + this.costReductionAmount(part, player, sourceId, spellId), 0);
+    if ("scaled" in amount) return amount.by * this.costReductionAmount(amount.scaled, player, sourceId, spellId);
+    if ("allCounters" in amount) return this.countersAmongPlayersAndPermanents();
+    if ("colorsAmong" in amount) return colorsAmongPermanents(this.state, this.registry, player, amount.colorsAmong, []);
+    if ("powerOf" in amount) {
+      const source = sourceId === undefined ? undefined : this.state.objects[sourceId];
+      const of = amount.powerOf === "source" ? source?.id : source?.attachedTo;
+      if (typeof of !== "string" || this.state.objects[of]?.zone !== "battlefield") return 0;
+      return Math.max(0, computeCharacteristics(this.state, this.registry, of).power);
+    }
+    if ("commanderManaValue" in amount) {
+      let best = 0;
+      for (const id of [...this.state.zones.shared.battlefield, ...this.state.zones.shared.command]) {
+        const object = this.state.objects[id];
+        if (object?.isCommander !== true || object.owner !== player) continue;
+        best = Math.max(best, manaValueOfObject(this.registry, object));
+      }
+      return best;
+    }
     if ("cardTypesInGraveyard" in amount) {
       return cardTypesInGraveyards(this.state, this.registry, player, amount.cardTypesInGraveyard);
     }
@@ -36566,8 +36748,16 @@ export class Game {
     if ("opponents" in amount) return this.scopedPlayers(player, "each-opponent").length;
     if ("devotionTo" in amount) return devotionOf(this.state, this.registry, player, amount.devotionTo);
     if ("turnHistory" in amount) {
+      const players = amount.who === "any-player" ? this.state.turnOrder : [player];
+      if (amount.cardTypes === true) {
+        // Each card type once (Korvold): whether any entry has it, read as
+        // each one last was.
+        return COST_READ_CARD_TYPES.filter(
+          (type) => turnHistoryCount(this.state, this.registry, players, amount.turnHistory, { ...amount.filter, type }, player) > 0,
+        ).length;
+      }
       return (
-        (amount.times ?? 1) * turnHistoryCount(this.state, this.registry, [player], amount.turnHistory, amount.filter, player)
+        (amount.times ?? 1) * turnHistoryCount(this.state, this.registry, players, amount.turnHistory, amount.filter, player)
       );
     }
     if ("turnStat" in amount) {
@@ -36575,9 +36765,32 @@ export class Game {
         .filter((p) => amount.who === "any-player" || (amount.who === "you") === (p === player))
         .reduce((n, p) => n + turnStatOf(this.state, p, amount.turnStat), 0);
     }
-    return this.state.zones.perPlayer[player].graveyard.filter((id) =>
-      matchesFilter(this.state, this.registry, id, amount.cardsInGraveyard, { you: player }),
+    const spell = amount.sameNameAsSpell === true && spellId !== undefined ? this.state.objects[spellId] : undefined;
+    const filter: CardFilter =
+      spell === undefined
+        ? amount.cardsInGraveyard
+        : { ...amount.cardsInGraveyard, sameNameAs: { object: spell.id, name: spell.faceDown !== undefined ? null : nameOf(spell) } };
+    return this.state.zones.perPlayer[player].graveyard.filter(
+      (id) => id !== spell?.id && matchesFilter(this.state, this.registry, id, filter, { you: player }),
     ).length;
+  }
+
+  /** Every counter on a player or a permanent — energy, poison and the rest,
+   * and a token stack's once per token. Phased-out permanents aren't on the
+   * battlefield's list (rule 702.26b). */
+  private countersAmongPlayersAndPermanents(): number {
+    let n = 0;
+    for (const player of this.state.turnOrder) {
+      const seat = this.state.players[player];
+      n += seat.energy + Object.values(seat.counters).reduce((sum, count) => sum + (count ?? 0), 0);
+    }
+    for (const id of this.state.zones.shared.battlefield) {
+      const object = this.state.objects[id];
+      if (object === undefined) continue;
+      const each = Object.values(object.counters).reduce((sum, count) => sum + (count ?? 0), 0);
+      n += each * Math.max(1, object.stackCount ?? 1);
+    }
+    return n;
   }
 
   private modifyPtAll(
@@ -40985,6 +41198,12 @@ export class Game {
           const history = historyOf(card.owner);
           if (history !== undefined) (history.descended ??= []).push({ object: id, count: 1 });
         }
+        return;
+      }
+      case "energy-changed": {
+        if (event.delta >= 0) return;
+        const history = historyOf(event.player);
+        if (history !== undefined) history.energyPaidOrLost = (history.energyPaidOrLost ?? 0) - event.delta;
         return;
       }
       case "damage-dealt": {

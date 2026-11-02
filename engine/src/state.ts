@@ -4343,6 +4343,9 @@ export interface TurnHistory {
    * dealt it, was an Assassin creature or a commander this player
    * controlled — what lets them pay a freerunning cost (rule 702.173a). */
   freerunning?: boolean;
+  /** Energy counters this player has paid or lost (the `energy-paid-or-lost`
+   * turn stat). */
+  energyPaidOrLost?: number;
   /** Damage dealt to this player, and the part of it that was combat damage. */
   damageTaken?: number;
   combatDamageTaken?: number;

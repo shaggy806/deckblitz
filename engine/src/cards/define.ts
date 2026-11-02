@@ -700,7 +700,10 @@ export type TurnStat =
    * the battlefield attacking never adds to it (rule 508.4), and it's 0 outside
    * the combat phase it was declared in. A negative power counts as itself
    * (rule 107.1b). */
-  | "power-attacked-with-this-combat";
+  | "power-attacked-with-this-combat"
+  /** Energy counters the player has paid or lost this turn — Blaster Hulk's
+   * "for each {E} you've paid or lost this turn". */
+  | "energy-paid-or-lost";
 
 /**
  * Counters put on permanents this turn — the `countersPutThisTurn` amount and
@@ -3092,6 +3095,10 @@ export interface StaticAbility {
     readonly payLife?: number;
     readonly payGeneric?: number;
     readonly targeting?: CardFilter;
+    /** "That target **you**, or a permanent you control" (Monastery Siege,
+     * with `targeting`): this static's controller, as a target, counts as
+     * well. Once per spell, like `targeting`. */
+    readonly targetingYou?: boolean;
   };
   /**
    * Untap during each **other** player's untap step, as well as your own:
@@ -3317,16 +3324,32 @@ export interface StaticAbility {
      * from your graveyard cost {2} less": the zone the card is cast from (its
      * zone as the cost is worked out, rule 601.2f's card on its way). A
      * player's own zone (graveyard, hand, library) is the static's
-     * controller's: a card cast from an opponent's graveyard isn't one. */
-    readonly castFrom?: ZoneType;
+     * controller's: a card cast from an opponent's graveyard isn't one —
+     * unless `castFromAnyones`, Aven Interrupter's "spells your opponents
+     * cast from **graveyards** or from exile" (a list of zones). */
+    readonly castFrom?: ZoneType | readonly ZoneType[];
+    /** See `castFrom`. */
+    readonly castFromAnyones?: boolean;
     /** "…cost {1} less to cast **for each target**" (Hinata, Dawn-Crowned):
      * `reduceGeneric` / `increaseGeneric` are multiplied by the number of
      * distinct players and objects the spell targets as it's cast (Hinata's
      * ruling: two "target creature"s aimed at one creature count once). The
      * cost is locked in after targets are chosen (rule 601.2c before
      * 601.2f), so `legalActions` offers such a spell with the `targetCount`
-     * range it is affordable at. */
+     * range it is affordable at. With `targeting`, the number of its
+     * targets matching that — Battlefield Thaumaturge's "for each creature
+     * it targets". */
     readonly perTarget?: boolean;
+    /** Only a spell with a target matching this, from this static's
+     * controller's side — Killian, Ink Duelist's "spells you cast that target
+     * a creature cost {2} less". Read off the chosen targets (rule 601.2c
+     * before 601.2f); a spell its caster can only afford with the reduction is
+     * offered with only the targets that earn it, as `targetCostReduction`'s
+     * is. A reduction: "cost more" is `targetedBySpellsCost`. */
+    readonly targeting?: CardFilter;
+    /** Only a spell with this permanent among its targets — Spellwild Ouphe's
+     * "spells that target this creature cost {2} less". */
+    readonly targetingSource?: boolean;
     /** Only the caster's first spell each turn that matches `applies` ("the
      * first creature spell you cast each turn costs {1} less") — earlier
      * spells are asked the same question, so a matching spell cast earlier
@@ -3611,6 +3634,31 @@ export interface MorphCost {
   readonly text?: string;
 }
 /** Printed characteristics of a card. Immutable reference data. */
+/**
+ * One reduction a spell prints on itself ({@link CardDefinition.selfCostReduction}):
+ * rule 601.2f, judged as its cost is worked out, from the card's side.
+ */
+export interface SelfCostReduction {
+  readonly condition: StaticCondition;
+  /** Generic mana taken off: a fixed number or a live count. */
+  readonly reduceGeneric?: CostReductionAmount;
+  /** Coloured mana taken off, as a mana string — Ertai's Scorn's "{U} less",
+   * Stormwing Entity's "{2}{U} less" (`reduceGeneric: 2, reduceColored: "{U}"`).
+   * Each symbol takes a pip of its colour, else a hybrid pip with it (rule
+   * 118.7e), else, by 118.7b/c, one generic, unless `coloredOnly`. */
+  readonly reduceColored?: string;
+  /** `reduceColored` that many times — Khalni Hydra's "{G} less for each green
+   * creature you control". */
+  readonly reduceColoredTimes?: CostReductionAmount;
+  /** See `reduceColored`. */
+  readonly coloredOnly?: boolean;
+  /** "This spell costs {X} less to cast **this way**" after a flashback cost
+   * (the Visions cycle): only when it's that printed flashback cost being paid
+   * (`flashback.cost`), not when another effect lets it be cast from the
+   * graveyard for something else. */
+  readonly thisWay?: "flashback";
+}
+
 export interface CardDefinition {
   readonly name: string;
   /**
@@ -4227,11 +4275,13 @@ export interface CardDefinition {
    * cast for each creature on the battlefield", no `controlledBy` clause so
    * every player's creatures count) mirroring {@link StaticAbility.costModification}'s
    * `reduceGeneric`. needed-cards P19.
+   *
+   * A list is several independent reductions (Assassin's Ink's "{1} less if
+   * you control an artifact and {1} less if you control an enchantment"): each
+   * is judged alone and they add up. See {@link SelfCostReduction} for the
+   * coloured ones and the ones tied to one way of casting.
    */
-  readonly selfCostReduction: {
-    readonly condition: StaticCondition;
-    readonly reduceGeneric: CostReductionAmount;
-  } | null;
+  readonly selfCostReduction: SelfCostReduction | readonly SelfCostReduction[] | null;
   /**
    * "This spell costs {1} more to cast for each target beyond the first"
    * (Fireball; Strive — Twinflame's {2}{R}): this cost, once per distinct
@@ -4249,9 +4299,24 @@ export interface CardDefinition {
    * is the cast's when any one of its targets matches, from the caster's
    * side ("a Hero **you control**"). An offer the caster can only afford with
    * the reduction offers only the targets that earn it, in the one slot that
-   * can. `null` for none.
+   * can. `reduceColored` is what it takes of the cost's coloured pips (Brush
+   * Off's "{1}{U} less": `reduceGeneric: 1, reduceColored: "{U}"`), as
+   * {@link SelfCostReduction}'s does. `null` for none.
    */
-  readonly targetCostReduction: { readonly filter: CardFilter; readonly reduceGeneric: number } | null;
+  readonly targetCostReduction: {
+    readonly filter: CardFilter;
+    readonly reduceGeneric: number;
+    readonly reduceColored?: string;
+  } | null;
+  /**
+   * "This spell costs {N} **more** to cast if it targets [a permanent matching
+   * `filter`]" (Dragon's Prey: `{ subtype: "Dragon" }`, Vanish into Eternity's
+   * creature). A cost increase, added before any reduction (rule 601.2f) and
+   * fixed once the targets are (601.2c); a target its caster can't afford this
+   * way isn't offered, as a `targetedBySpellsCost`'s isn't. Once however many
+   * of its targets match. `null` for none.
+   */
+  readonly targetCostIncrease: { readonly filter: CardFilter; readonly increaseGeneric: number } | null;
   /**
    * Casualty N (rule 702.153a — Cut Your Losses' "Casualty 2"): "As an
    * additional cost to cast this spell, you may sacrifice a creature with
@@ -4996,6 +5061,7 @@ const PRINTED_ABILITY: {
   selfCostReduction: (def) => def.selfCostReduction !== null,
   costPerExtraTarget: (def) => def.costPerExtraTarget !== null,
   targetCostReduction: (def) => def.targetCostReduction !== null,
+  targetCostIncrease: (def) => def.targetCostIncrease !== null,
   casualty: (def) => def.casualty !== null,
   conspire: (def) => def.conspire,
   effect: (def) => def.effect !== null,
@@ -5227,13 +5293,12 @@ interface CardDraft {
   assist?: boolean;
   /** See {@link CardDefinition.opponentChoosesTargets}. */
   opponentChoosesTargets?: readonly number[];
-  selfCostReduction?: {
-    readonly condition: StaticCondition;
-    readonly reduceGeneric: CostReductionAmount;
-  };
+  selfCostReduction?: SelfCostReduction | readonly SelfCostReduction[];
   costPerExtraTarget?: string;
   /** See {@link CardDefinition.targetCostReduction}. */
-  targetCostReduction?: { readonly filter: CardFilter; readonly reduceGeneric: number };
+  targetCostReduction?: { readonly filter: CardFilter; readonly reduceGeneric: number; readonly reduceColored?: string };
+  /** See {@link CardDefinition.targetCostIncrease}. */
+  targetCostIncrease?: { readonly filter: CardFilter; readonly increaseGeneric: number };
   /** See {@link CardDefinition.casualty}. */
   casualty?: number;
   /** See {@link CardDefinition.conspire}. */
@@ -5495,6 +5560,7 @@ export function defineCard(draft: CardDraft): CardDefinition {
     selfCostReduction: draft.selfCostReduction ?? null,
     costPerExtraTarget: draft.costPerExtraTarget ?? null,
     targetCostReduction: draft.targetCostReduction ?? null,
+    targetCostIncrease: draft.targetCostIncrease ?? null,
     casualty: draft.casualty ?? null,
     conspire: draft.conspire ?? false,
     effect: draft.effect ?? null,

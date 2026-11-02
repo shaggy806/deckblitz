@@ -24,6 +24,140 @@ import { parseEffect, parseFace, parseTrigger, parseCost, parseSentence, parseTy
 // @ts-expect-error — as above.
 import { checkPool } from "../../scripts/oracle-parse-check.mjs";
 
+describe("what a spell costs: amounts, colours and targets", () => {
+  const always = { kind: "controls", filter: {}, atLeast: 0 };
+  const face = (type_line: string, oracle_text: string) =>
+    parseFace({ name: "Test Card", type_line, oracle_text, mana_cost: "{7}", colors: [], cmc: 7 } as never) as unknown as Record<string, unknown> & {
+      static?: { costModification?: unknown; targetedBySpellsCost?: unknown }[];
+      activated?: { costReduction?: unknown }[];
+    };
+  const self = (text: string): unknown => face("Sorcery", text).selfCostReduction;
+
+  it("reads a count of what a spell costs less for", () => {
+    expect(self("This spell costs {1} less to cast for each counter among players and permanents.")).toEqual({
+      condition: always,
+      reduceGeneric: { allCounters: true },
+    });
+    expect(self("Vivid — This spell costs {1} less to cast for each color among permanents you control.")).toEqual({
+      condition: always,
+      reduceGeneric: { colorsAmong: { controlledBy: "you" } },
+    });
+    expect(self("This spell costs {1} less to cast for each Cave you control and each Cave card in your graveyard.")).toEqual({
+      condition: always,
+      reduceGeneric: { sum: [{ countOf: { subtype: "Cave", controlledBy: "you" } }, { cardsInGraveyard: { subtype: "Cave" } }] },
+    });
+    expect(self("This spell costs {2} less to cast for each creature that died this turn.")).toEqual({
+      condition: always,
+      reduceGeneric: { turnHistory: "died", who: "any-player", filter: { type: "creature" }, times: 2 },
+    });
+    expect(self("Domain — This spell costs {2} less to cast for each basic land type among lands you control.")).toEqual({
+      condition: always,
+      reduceGeneric: { scaled: { basicLandTypes: "you" }, by: 2 },
+    });
+  });
+
+  it("reads coloured reductions and two conditions", () => {
+    expect(self("This spell costs {G} less to cast for each green creature you control.")).toEqual({
+      condition: always,
+      reduceColored: "{G}",
+      reduceColoredTimes: { countOf: { type: "creature", colors: ["G"], controlledBy: "you" } },
+    });
+    expect(self("This spell costs {U} less to cast if an opponent cast two or more spells this turn.")).toEqual({
+      condition: { kind: "turn-stat", stat: "spells-cast", who: "opponent", atLeast: 2 },
+      reduceColored: "{U}",
+    });
+    expect(self("This spell costs {2}{U} less to cast if you've cast an instant or sorcery spell this turn.")).toEqual({
+      condition: { kind: "cast-this-turn", who: "you", filter: { typesAnyOf: ["instant", "sorcery"] } },
+      reduceGeneric: 2,
+      reduceColored: "{U}",
+    });
+    expect(self("This spell costs {1} less to cast if you control an artifact and {1} less to cast if you control an enchantment.")).toEqual([
+      { condition: { kind: "controls", filter: { type: "artifact" }, atLeast: 1 }, reduceGeneric: 1 },
+      { condition: { kind: "controls", filter: { type: "enchantment" }, atLeast: 1 }, reduceGeneric: 1 },
+    ]);
+  });
+
+  it("reads a spell's own price by target", () => {
+    expect(face("Instant", "This spell costs {2} more to cast if it targets a Dragon.").targetCostIncrease).toEqual({
+      filter: { subtype: "Dragon" },
+      increaseGeneric: 2,
+    });
+    expect(face("Instant", "This spell costs {1}{U} less to cast if it targets an instant or sorcery spell.").targetCostReduction).toEqual({
+      filter: { typesAnyOf: ["instant", "sorcery"] },
+      reduceGeneric: 1,
+      reduceColored: "{U}",
+    });
+  });
+
+  it("reads a flashback reduced this way", () => {
+    const visions = face(
+      "Sorcery",
+      "Flashback {8}{W}{W}. This spell costs {X} less to cast this way, where X is the greatest mana value of a commander you own on the battlefield or in the command zone. (You may cast this card from your graveyard for its flashback cost. Then exile it.)",
+    );
+    expect(visions.flashback).toEqual({ cost: "{8}{W}{W}" });
+    expect(visions.selfCostReduction).toEqual({
+      condition: always,
+      thisWay: "flashback",
+      reduceGeneric: { commanderManaValue: "battlefield-or-command-zone" },
+    });
+  });
+
+  it("reads statics keyed to a spell's targets, zone, namesakes and a power", () => {
+    const creature = "Creature — Human";
+    const staticOf = (text: string): unknown => face(creature, text).static?.[0]?.costModification;
+    expect(staticOf("Spells you cast that target a creature cost {2} less to cast.")).toEqual({
+      applies: {},
+      caster: "you",
+      targeting: { type: "creature" },
+      reduceGeneric: 2,
+    });
+    expect(staticOf("Spells that target this creature cost {2} less to cast.")).toEqual({
+      applies: {},
+      targetingSource: true,
+      reduceGeneric: 2,
+    });
+    expect(staticOf("Each instant and sorcery spell you cast costs {1} less to cast for each creature it targets.")).toEqual({
+      applies: { typesAnyOf: ["instant", "sorcery"] },
+      caster: "you",
+      perTarget: true,
+      targeting: { type: "creature" },
+      reduceGeneric: 1,
+    });
+    expect(staticOf("Spells you cast cost {1} less to cast for each card with the same name as that spell in your graveyard.")).toEqual({
+      applies: {},
+      caster: "you",
+      reduceGeneric: { cardsInGraveyard: {}, sameNameAsSpell: true },
+    });
+    expect(staticOf("Spells your opponents cast from graveyards or from exile cost {2} more to cast.")).toEqual({
+      applies: {},
+      caster: "opponent",
+      castFrom: ["graveyard", "exile"],
+      castFromAnyones: true,
+      increaseGeneric: 2,
+    });
+    expect(staticOf("Instant and sorcery spells you cast with mana value 4 or greater cost {X} less to cast, where X is this creature's power.")).toEqual({
+      applies: { typesAnyOf: ["instant", "sorcery"], manaValue: { op: "gte", n: 4 } },
+      caster: "you",
+      reduceGeneric: { powerOf: "source" },
+    });
+    expect(face(creature, "Spells your opponents cast that target you or a permanent you control cost {2} more to cast.").static?.[0]?.targetedBySpellsCost).toEqual({
+      payGeneric: 2,
+      targetingYou: true,
+      targeting: { controlledBy: "you" },
+    });
+  });
+
+  it("reads an ability's own reduction", () => {
+    const logbook = face(
+      "Artifact",
+      "{5}{U}, {T}: Draw a card. This ability costs {1} less to activate for each other artifact you control.",
+    );
+    expect(logbook.activated?.[0].costReduction).toEqual({
+      reduceGeneric: { countOf: { type: "artifact", controlledBy: "you" }, excludeSelf: true },
+    });
+  });
+});
+
 type Ctx = { targets: unknown[]; target: (spec: unknown) => number; tokenFor: () => string | null; onStack?: boolean };
 const ctx = (overrides: Partial<Ctx> = {}): Ctx => {
   const targets: unknown[] = [];
