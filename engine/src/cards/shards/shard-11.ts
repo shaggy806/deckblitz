@@ -157,6 +157,7 @@ import _poolCoatWithVenom from "../pool/coat-with-venom.js";
 import _poolCodecrackerHound from "../pool/codecracker-hound.js";
 import _poolCoffinPurge from "../pool/coffin-purge.js";
 import _poolCognivore from "../pool/cognivore.js";
+import _poolCollectedConjuring from "../pool/collected-conjuring.js";
 import _poolComboAttack from "../pool/combo-attack.js";
 import _poolCommanderMustard from "../pool/commander-mustard.js";
 import _poolConclaveMentor from "../pool/conclave-mentor.js";
@@ -1044,6 +1045,7 @@ const shard: CardShard = {
     _poolCodecrackerHound,
     _poolCoffinPurge,
     _poolCognivore,
+    _poolCollectedConjuring,
     _poolComboAttack,
     _poolCommanderMustard,
     _poolConclaveMentor,

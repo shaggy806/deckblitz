@@ -533,6 +533,7 @@ import _poolPoisonTheCup from "../pool/poison-the-cup.js";
 import _poolPollutedDelta from "../pool/polluted-delta.js";
 import _poolPompousBattlemage from "../pool/pompous-battlemage.js";
 import _poolPoreOverThePages from "../pool/pore-over-the-pages.js";
+import _poolPowerfulBroker from "../pool/powerful-broker.js";
 import _poolPrecisionBolt from "../pool/precision-bolt.js";
 import _poolPredatorsStrike from "../pool/predators-strike.js";
 import _poolPrimordialHydra from "../pool/primordial-hydra.js";
@@ -1427,6 +1428,7 @@ const shard: CardShard = {
     _poolPollutedDelta,
     _poolPompousBattlemage,
     _poolPoreOverThePages,
+    _poolPowerfulBroker,
     _poolPrecisionBolt,
     _poolPredatorsStrike,
     _poolPrimordialHydra,

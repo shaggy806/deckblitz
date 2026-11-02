@@ -775,6 +775,7 @@ import _poolTwoHeadedSliver from "../pool/two-headed-sliver.js";
 import _poolTyrantsFamiliar from "../pool/tyrants-familiar.js";
 import _poolUchuulon from "../pool/uchuulon.js";
 import _poolUginsConjurant from "../pool/ugins-conjurant.js";
+import _poolUldarosTheorix from "../pool/uldaros-theorix.js";
 import _poolUnbreathingHorde from "../pool/unbreathing-horde.js";
 import _poolUncoveredClues from "../pool/uncovered-clues.js";
 import _poolUndercityScrounger from "../pool/undercity-scrounger.js";
@@ -1648,6 +1649,7 @@ const shard: CardShard = {
     _poolTyrantsFamiliar,
     _poolUchuulon,
     _poolUginsConjurant,
+    _poolUldarosTheorix,
     _poolUnbreathingHorde,
     _poolUncoveredClues,
     _poolUndercityScrounger,

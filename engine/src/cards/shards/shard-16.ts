@@ -585,6 +585,7 @@ import _poolPredatorySliver from "../pool/predatory-sliver.js";
 import _poolPridefulParent from "../pool/prideful-parent.js";
 import _poolPriestOfTheBlessedGraf from "../pool/priest-of-the-blessed-graf.js";
 import _poolPrimalPrayers from "../pool/primal-prayers.js";
+import _poolPrimevalSpawn from "../pool/primeval-spawn.js";
 import _poolPrismabasher from "../pool/prismabasher.js";
 import _poolProwcatcherSpecialist from "../pool/prowcatcher-specialist.js";
 import _poolPsionicBlast from "../pool/psionic-blast.js";
@@ -1544,6 +1545,7 @@ const shard: CardShard = {
     _poolPridefulParent,
     _poolPriestOfTheBlessedGraf,
     _poolPrimalPrayers,
+    _poolPrimevalSpawn,
     _poolPrismabasher,
     _poolProwcatcherSpecialist,
     _poolPsionicBlast,

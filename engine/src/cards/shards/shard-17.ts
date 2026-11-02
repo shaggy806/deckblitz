@@ -810,6 +810,7 @@ import _poolViridescentWisps from "../pool/viridescent-wisps.js";
 import _poolVizierOfTheScorpion from "../pool/vizier-of-the-scorpion.js";
 import _poolVoiceOfAll from "../pool/voice-of-all.js";
 import _poolVolatileFault from "../pool/volatile-fault.js";
+import _poolVorelOfTheHullClade from "../pool/vorel-of-the-hull-clade.js";
 import _poolVowOfMalice from "../pool/vow-of-malice.js";
 import _poolVraskaJoinsUp from "../pool/vraska-joins-up.js";
 import _poolWailingGhoul from "../pool/wailing-ghoul.js";
@@ -1697,6 +1698,7 @@ const shard: CardShard = {
     _poolVizierOfTheScorpion,
     _poolVoiceOfAll,
     _poolVolatileFault,
+    _poolVorelOfTheHullClade,
     _poolVowOfMalice,
     _poolVraskaJoinsUp,
     _poolWailingGhoul,

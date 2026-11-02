@@ -551,6 +551,7 @@ import _poolPsychosisCrawler from "../pool/psychosis-crawler.js";
 import _poolPutrefy from "../pool/putrefy.js";
 import _poolQuandrixPledgemage from "../pool/quandrix-pledgemage.js";
 import _poolQuarryColossus from "../pool/quarry-colossus.js";
+import _poolQuarryHauler from "../pool/quarry-hauler.js";
 import _poolQuirionDryad from "../pool/quirion-dryad.js";
 import _poolQuirionSentinel from "../pool/quirion-sentinel.js";
 import _poolRabidBloodsucker from "../pool/rabid-bloodsucker.js";
@@ -1432,6 +1433,7 @@ const shard: CardShard = {
     _poolPutrefy,
     _poolQuandrixPledgemage,
     _poolQuarryColossus,
+    _poolQuarryHauler,
     _poolQuirionDryad,
     _poolQuirionSentinel,
     _poolRabidBloodsucker,

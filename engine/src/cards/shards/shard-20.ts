@@ -226,6 +226,7 @@ import _poolDoubleCleave from "../pool/double-cleave.js";
 import _poolDoublingSeason from "../pool/doubling-season.js";
 import _poolDraconicDestiny from "../pool/draconic-destiny.js";
 import _poolDragoonsLance from "../pool/dragoons-lance.js";
+import _poolDramatistsPuppet from "../pool/dramatists-puppet.js";
 import _poolDreadhordeArcanist from "../pool/dreadhorde-arcanist.js";
 import _poolDreamThiefsBandana from "../pool/dream-thiefs-bandana.js";
 import _poolDreamdewEntrancer from "../pool/dreamdew-entrancer.js";
@@ -1166,6 +1167,7 @@ const shard: CardShard = {
     _poolDoublingSeason,
     _poolDraconicDestiny,
     _poolDragoonsLance,
+    _poolDramatistsPuppet,
     _poolDreadhordeArcanist,
     _poolDreamThiefsBandana,
     _poolDreamdewEntrancer,

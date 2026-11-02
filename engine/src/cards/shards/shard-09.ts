@@ -189,6 +189,7 @@ import _poolDisownedAncestor from "../pool/disowned-ancestor.js";
 import _poolDivideByZero from "../pool/divide-by-zero.js";
 import _poolDominariasJudgment from "../pool/dominarias-judgment.js";
 import _poolDoomCannon from "../pool/doom-cannon.js";
+import _poolDoomReignsSupreme from "../pool/doom-reigns-supreme.js";
 import _poolDoomWhisperer from "../pool/doom-whisperer.js";
 import _poolDoomskar from "../pool/doomskar.js";
 import _poolDragDown from "../pool/drag-down.js";
@@ -914,6 +915,7 @@ import _tokensInsectTokenInfestationSage from "../tokens/insect-token-infestatio
 import _tokensMerfolkWizardToken from "../tokens/merfolk-wizard-token.js";
 import _tokensMouseToken from "../tokens/mouse-token.js";
 import _tokensMowu from "../tokens/mowu.js";
+import _tokensNightmareTokenAshiok from "../tokens/nightmare-token-ashiok.js";
 import _tokensPhyrexianWurmTokenWurmcoilLarvaDeathtouch from "../tokens/phyrexian-wurm-token-wurmcoil-larva-deathtouch.js";
 import _tokensReflectionToken from "../tokens/reflection-token.js";
 import _tokensRobotTokenAutomatedAssemblyLine from "../tokens/robot-token-automated-assembly-line.js";
@@ -1113,6 +1115,7 @@ const shard: CardShard = {
     _poolDivideByZero,
     _poolDominariasJudgment,
     _poolDoomCannon,
+    _poolDoomReignsSupreme,
     _poolDoomWhisperer,
     _poolDoomskar,
     _poolDragDown,
@@ -1840,6 +1843,7 @@ const shard: CardShard = {
     _tokensMerfolkWizardToken,
     _tokensMouseToken,
     _tokensMowu,
+    _tokensNightmareTokenAshiok,
     _tokensPhyrexianWurmTokenWurmcoilLarvaDeathtouch,
     _tokensReflectionToken,
     _tokensRobotTokenAutomatedAssemblyLine,
