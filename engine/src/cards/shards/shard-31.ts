@@ -289,6 +289,7 @@ import _poolFogBank from "../pool/fog-bank.js";
 import _poolFog from "../pool/fog.js";
 import _poolFontOfMythos from "../pool/font-of-mythos.js";
 import _poolFootfallCrater from "../pool/footfall-crater.js";
+import _poolFortunateFew from "../pool/fortunate-few.js";
 import _poolFoundryInspector from "../pool/foundry-inspector.js";
 import _poolFountainportBell from "../pool/fountainport-bell.js";
 import _poolFoxfireOak from "../pool/foxfire-oak.js";
@@ -1226,6 +1227,7 @@ const shard: CardShard = {
     _poolFog,
     _poolFontOfMythos,
     _poolFootfallCrater,
+    _poolFortunateFew,
     _poolFoundryInspector,
     _poolFountainportBell,
     _poolFoxfireOak,

@@ -695,6 +695,7 @@ import _poolSolGrail from "../pool/sol-grail.js";
 import _poolSoltariTrooper from "../pool/soltari-trooper.js";
 import _poolSongOfEarendil from "../pool/song-of-earendil.js";
 import _poolSophiaDoggedDetective from "../pool/sophia-dogged-detective.js";
+import _poolSoulConduit from "../pool/soul-conduit.js";
 import _poolSouvenirSnatcher from "../pool/souvenir-snatcher.js";
 import _poolSpectacularSpiderMan from "../pool/spectacular-spider-man.js";
 import _poolSpectersShroud from "../pool/specters-shroud.js";
@@ -1564,6 +1565,7 @@ const shard: CardShard = {
     _poolSoltariTrooper,
     _poolSongOfEarendil,
     _poolSophiaDoggedDetective,
+    _poolSoulConduit,
     _poolSouvenirSnatcher,
     _poolSpectacularSpiderMan,
     _poolSpectersShroud,

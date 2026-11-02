@@ -467,6 +467,7 @@ import _poolMindseekerOculus from "../pool/mindseeker-oculus.js";
 import _poolMindwrackHarpy from "../pool/mindwrack-harpy.js";
 import _poolMinersGuidewing from "../pool/miners-guidewing.js";
 import _poolMirageMirror from "../pool/mirage-mirror.js";
+import _poolMirrorUniverse from "../pool/mirror-universe.js";
 import _poolMistformMutant from "../pool/mistform-mutant.js";
 import _poolMistralCharger from "../pool/mistral-charger.js";
 import _poolMizzixsMastery from "../pool/mizzixs-mastery.js";
@@ -1385,6 +1386,7 @@ const shard: CardShard = {
     _poolMindwrackHarpy,
     _poolMinersGuidewing,
     _poolMirageMirror,
+    _poolMirrorUniverse,
     _poolMistformMutant,
     _poolMistralCharger,
     _poolMizzixsMastery,

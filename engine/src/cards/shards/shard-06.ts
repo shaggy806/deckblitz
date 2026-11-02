@@ -260,6 +260,7 @@ import _poolEtherealChampion from "../pool/ethereal-champion.js";
 import _poolEtheriumSculptor from "../pool/etherium-sculptor.js";
 import _poolEverybodyLives from "../pool/everybody-lives.js";
 import _poolEvilReawakened from "../pool/evil-reawakened.js";
+import _poolEvraHalcyonWitness from "../pool/evra-halcyon-witness.js";
 import _poolExpelTheUnworthy from "../pool/expel-the-unworthy.js";
 import _poolEyeOfUgin from "../pool/eye-of-ugin.js";
 import _poolEyesOfTheBeholder from "../pool/eyes-of-the-beholder.js";
@@ -477,6 +478,7 @@ import _poolMischievousCatgeist from "../pool/mischievous-catgeist.js";
 import _poolMishrasGroundbreaker from "../pool/mishras-groundbreaker.js";
 import _poolMistbreathElder from "../pool/mistbreath-elder.js";
 import _poolMisterFantastic from "../pool/mister-fantastic.js";
+import _poolMisterNegative from "../pool/mister-negative.js";
 import _poolMockingbirdBobbiMorse from "../pool/mockingbird-bobbi-morse.js";
 import _poolMoggSalvage from "../pool/mogg-salvage.js";
 import _poolMoggSentry from "../pool/mogg-sentry.js";
@@ -1129,6 +1131,7 @@ const shard: CardShard = {
     _poolEtheriumSculptor,
     _poolEverybodyLives,
     _poolEvilReawakened,
+    _poolEvraHalcyonWitness,
     _poolExpelTheUnworthy,
     _poolEyeOfUgin,
     _poolEyesOfTheBeholder,
@@ -1346,6 +1349,7 @@ const shard: CardShard = {
     _poolMishrasGroundbreaker,
     _poolMistbreathElder,
     _poolMisterFantastic,
+    _poolMisterNegative,
     _poolMockingbirdBobbiMorse,
     _poolMoggSalvage,
     _poolMoggSentry,

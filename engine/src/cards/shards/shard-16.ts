@@ -180,6 +180,7 @@ import _poolDevouringStrossus from "../pool/devouring-strossus.js";
 import _poolDiscipleOfMalice from "../pool/disciple-of-malice.js";
 import _poolDisturbingConversion from "../pool/disturbing-conversion.js";
 import _poolDivineGambit from "../pool/divine-gambit.js";
+import _poolDivineReckoning from "../pool/divine-reckoning.js";
 import _poolDollhouseOfHorrors from "../pool/dollhouse-of-horrors.js";
 import _poolDomriRade from "../pool/domri-rade.js";
 import _poolDoomWeaver from "../pool/doom-weaver.js";
@@ -1132,6 +1133,7 @@ const shard: CardShard = {
     _poolDiscipleOfMalice,
     _poolDisturbingConversion,
     _poolDivineGambit,
+    _poolDivineReckoning,
     _poolDollhouseOfHorrors,
     _poolDomriRade,
     _poolDoomWeaver,

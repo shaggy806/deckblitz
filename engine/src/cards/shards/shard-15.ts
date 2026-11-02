@@ -549,6 +549,7 @@ import _poolProteanRaider from "../pool/protean-raider.js";
 import _poolProwlingPangolin from "../pool/prowling-pangolin.js";
 import _poolPsionicSnoop from "../pool/psionic-snoop.js";
 import _poolPsychatog from "../pool/psychatog.js";
+import _poolPsychicTransfer from "../pool/psychic-transfer.js";
 import _poolPulverize from "../pool/pulverize.js";
 import _poolPureSimple from "../pool/pure-simple.js";
 import _poolPyreticRebirth from "../pool/pyretic-rebirth.js";
@@ -1390,6 +1391,7 @@ const shard: CardShard = {
     _poolProwlingPangolin,
     _poolPsionicSnoop,
     _poolPsychatog,
+    _poolPsychicTransfer,
     _poolPulverize,
     _poolPureSimple,
     _poolPyreticRebirth,

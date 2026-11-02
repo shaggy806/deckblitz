@@ -575,6 +575,7 @@ import _poolPrimeSpeakerVannifar from "../pool/prime-speaker-vannifar.js";
 import _poolPrimevalBounty from "../pool/primeval-bounty.js";
 import _poolPrismite from "../pool/prismite.js";
 import _poolPrizedElephant from "../pool/prized-elephant.js";
+import _poolProfaneTransfusion from "../pool/profane-transfusion.js";
 import _poolProfanerOfTheDead from "../pool/profaner-of-the-dead.js";
 import _poolProfessionalFaceBreaker from "../pool/professional-face-breaker.js";
 import _poolProfitLoss from "../pool/profit-loss.js";
@@ -1452,6 +1453,7 @@ const shard: CardShard = {
     _poolPrimevalBounty,
     _poolPrismite,
     _poolPrizedElephant,
+    _poolProfaneTransfusion,
     _poolProfanerOfTheDead,
     _poolProfessionalFaceBreaker,
     _poolProfitLoss,

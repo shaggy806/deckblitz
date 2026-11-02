@@ -208,6 +208,7 @@ import _poolDreamsOfTheDead from "../pool/dreams-of-the-dead.js";
 import _poolDreamscapeArtist from "../pool/dreamscape-artist.js";
 import _poolDromarsCharm from "../pool/dromars-charm.js";
 import _poolDrownInIchor from "../pool/drown-in-ichor.js";
+import _poolDruidOfPurification from "../pool/druid-of-purification.js";
 import _poolDruidicSatchel from "../pool/druidic-satchel.js";
 import _poolDugganPrivateDetective from "../pool/duggan-private-detective.js";
 import _poolDwarvenHold from "../pool/dwarven-hold.js";
@@ -1057,6 +1058,7 @@ const shard: CardShard = {
     _poolDreamscapeArtist,
     _poolDromarsCharm,
     _poolDrownInIchor,
+    _poolDruidOfPurification,
     _poolDruidicSatchel,
     _poolDugganPrivateDetective,
     _poolDwarvenHold,

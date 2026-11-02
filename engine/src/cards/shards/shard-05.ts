@@ -271,6 +271,7 @@ import _poolExpeditionSkulker from "../pool/expedition-skulker.js";
 import _poolEyeblightAssassin from "../pool/eyeblight-assassin.js";
 import _poolFaithfulSquire from "../pool/faithful-squire.js";
 import _poolFakeYourOwnDeath from "../pool/fake-your-own-death.js";
+import _poolFallOfTheFirstCivilization from "../pool/fall-of-the-first-civilization.js";
 import _poolFamiliarGround from "../pool/familiar-ground.js";
 import _poolFatalFrenzy from "../pool/fatal-frenzy.js";
 import _poolFateUnraveler from "../pool/fate-unraveler.js";
@@ -1143,6 +1144,7 @@ const shard: CardShard = {
     _poolEyeblightAssassin,
     _poolFaithfulSquire,
     _poolFakeYourOwnDeath,
+    _poolFallOfTheFirstCivilization,
     _poolFamiliarGround,
     _poolFatalFrenzy,
     _poolFateUnraveler,

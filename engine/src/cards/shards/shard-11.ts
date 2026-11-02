@@ -494,6 +494,7 @@ import _poolMorbidBloom from "../pool/morbid-bloom.js";
 import _poolMoriokReaver from "../pool/moriok-reaver.js";
 import _poolMossDiamond from "../pool/moss-diamond.js";
 import _poolMossdog from "../pool/mossdog.js";
+import _poolMountDoom from "../pool/mount-doom.js";
 import _poolMoxSapphire from "../pool/mox-sapphire.js";
 import _poolMoxTantalite from "../pool/mox-tantalite.js";
 import _poolMugging from "../pool/mugging.js";
@@ -1377,6 +1378,7 @@ const shard: CardShard = {
     _poolMoriokReaver,
     _poolMossDiamond,
     _poolMossdog,
+    _poolMountDoom,
     _poolMoxSapphire,
     _poolMoxTantalite,
     _poolMugging,

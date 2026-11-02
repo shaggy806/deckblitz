@@ -310,6 +310,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Horror Token (4/4)",
   "Horror Token (Black 0/0)",
   "Horror Token (Blue Black Flying)",
+  "Horror Token (Profane Transfusion)",
   "Horror Token (The Final Days)",
   "Horse Token",
   "Horse Token (The Girl in the Fireplace)",
