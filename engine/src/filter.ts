@@ -919,6 +919,14 @@ export interface CardFilter {
   readonly excessDamageThisTurn?: boolean;
   /** Dealt damage to another creature this turn. */
   readonly dealtDamageToCreatureThisTurn?: boolean;
+  /** Dealt damage this turn (`GameObject.dealtDamage`): `true` to anything
+   * (Red Guardian, Restore the Peace); `to: "you"`, to the player whose
+   * filter it is (Spear of Heliod, Retaliate), and `combat`, combat damage
+   * (Witch-king of Angmar). `{ player }` is "you" bound to one player, where
+   * the player choosing isn't the "you" of the text. */
+  readonly dealtDamageThisTurn?:
+    | true
+    | { readonly to: "you" | { readonly player: PlayerId }; readonly combat?: true };
   /** It entered the battlefield (this stint) as a spell that was cast and
    * resolved — "if it was cast" (see `GameObject.entry`). */
   readonly cast?: boolean;
@@ -2092,6 +2100,17 @@ export function matchesFilter(
     if (filter.dealtDamageToCreatureThisTurn !== undefined) {
       const turn = live !== undefined ? live.dealtDamageToCreatureOnTurn : lki!.dealtDamageToCreatureOnTurn;
       if ((onBattlefield && turn === state.turn.number) !== filter.dealtDamageToCreatureThisTurn) return false;
+    }
+  }
+  if (filter.dealtDamageThisTurn !== undefined) {
+    const onBattlefield = live === undefined || live.zone === "battlefield";
+    const record = live !== undefined ? live.dealtDamage : lki!.dealtDamage;
+    const now = onBattlefield && record?.thisTurn?.turn === state.turn.number ? record.thisTurn : undefined;
+    if (now === undefined) return false;
+    const clause = filter.dealtDamageThisTurn;
+    if (clause !== true) {
+      const player = clause.to === "you" ? ctx.you : clause.to.player;
+      if (!(clause.combat === true ? now.combatPlayers : now.players).includes(player)) return false;
     }
   }
   if (filter.attackedThisTurn !== undefined) {

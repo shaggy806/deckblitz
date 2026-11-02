@@ -7467,6 +7467,7 @@ export class Game {
       const object = this.state.objects[id];
       if (object.attackedThisTurn === true) object.attackedThisTurn = false;
       delete object.attackedPlayersThisTurn;
+      if (object.dealtDamage?.thisTurn !== undefined) object.dealtDamage = { combat: object.dealtDamage.combat };
     }
     this.state.extraCombats = 0;
     // The turn that just ended, for "if no spells were cast last turn" (the
@@ -39619,6 +39620,11 @@ export class Game {
     andEach?: readonly CardFilter[],
   ): void {
     if (typeof count === "number" && count <= 0) return;
+    // "That dealt combat damage to you": the effect's controller, not the
+    // player choosing what to sacrifice (Witch-king of Angmar).
+    if (filter.dealtDamageThisTurn !== true && filter.dealtDamageThisTurn?.to === "you") {
+      filter = { ...filter, dealtDamageThisTurn: { ...filter.dealtDamageThisTurn, to: { player: controller } } };
+    }
     // "A creature, an artifact, and a land": one part per filter, each asked
     // in turn and each a different permanent (`promptNextSacrifice`).
     const parts = [filter, ...(andEach ?? [])];
@@ -44048,6 +44054,33 @@ export class Game {
     return excessAmount;
   }
 
+  /**
+   * A permanent dealt damage, to anything: `GameObject.dealtDamage`, read by
+   * the filter clause `dealtDamageThisTurn` and the condition
+   * `self-hasnt-dealt-damage`. A spell, or a source already gone from the
+   * battlefield, has no stint to record it on.
+   */
+  private recordDealtDamage(source: ObjectId, target: TargetRef, combat: boolean): void {
+    const object = this.state.objects[source];
+    if (object === undefined || object.zone !== "battlefield") return;
+    const turn = this.state.turn.number;
+    const prior = object.dealtDamage;
+    const now = prior?.thisTurn?.turn === turn ? prior.thisTurn : { turn, players: [], combatPlayers: [] };
+    const add = (players: readonly PlayerId[], player: PlayerId): readonly PlayerId[] =>
+      players.includes(player) ? players : [...players, player];
+    object.dealtDamage = {
+      combat: prior?.combat === true || combat,
+      thisTurn:
+        target.kind === "player"
+          ? {
+              turn,
+              players: add(now.players, target.player),
+              combatPlayers: combat ? add(now.combatPlayers, target.player) : now.combatPlayers,
+            }
+          : now,
+    };
+  }
+
   /** A permanent dealing damage to an opponent of its controller adds to
    * its `tally`: combat damage, or an ability's whose source it is. A spell,
    * or a source already gone from the battlefield, has no stint to add to. */
@@ -44338,6 +44371,7 @@ export class Game {
         this.emit({ type: "damage-prevented", source, target, amount });
         return 0;
       }
+      if (sourceLastKnown === undefined) this.recordDealtDamage(source, target, combat);
       this.emit({ type: "damage-dealt", source, target, amount, combat, ...by, ...many });
       this.tallyDamage(source, target, amount);
       // The damage is dealt in full — lifelink, commander damage and "is
@@ -44386,6 +44420,7 @@ export class Game {
     // What damaged it this turn, and whether any was excess (rule 120.4a) —
     // read before the damage lands.
     const excess = this.recordDamage(source, object, amount, sourceLastKnown);
+    if (sourceLastKnown === undefined) this.recordDealtDamage(source, target, combat);
     const excessField = excess > 0 ? { excess } : {};
     // Damage to a planeswalker removes that many loyalty counters (rule
     // 120.3c / 306.7) — it's not "marked" like a creature's. One that's a
@@ -46962,6 +46997,7 @@ export class Game {
       ...(object.dealtDamageToCreatureOnTurn !== undefined
         ? { dealtDamageToCreatureOnTurn: object.dealtDamageToCreatureOnTurn }
         : {}),
+      ...(object.dealtDamage !== undefined ? { dealtDamage: object.dealtDamage } : {}),
       attacking: object.attacking !== null,
       blocking: object.blocking !== null,
       ...(blockedAttackersOf(this.state, id).length > 0
@@ -47720,6 +47756,7 @@ export class Game {
     delete object.mustAttackPlayerThisCombat;
     delete object.damageThisTurn;
     delete object.dealtDamageToCreatureOnTurn;
+    delete object.dealtDamage;
     // Goaded and suspected are designations of the permanent that left
     // (rules 400.7, 701.15b, 701.60a).
     delete object.goadedBy;

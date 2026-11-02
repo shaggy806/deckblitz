@@ -1662,6 +1662,12 @@ export type StaticCondition =
   /** "Solved —" (rules 702.169, 719.3c): the source has the solved
    * designation — a Case's abilities that work only once it's solved. */
   | { readonly kind: "solved" }
+  /**
+   * "As long as it hasn't dealt damage yet" (Karakyk Guardian), since it
+   * entered the battlefield: `GameObject.dealtDamage`, none of it prevented.
+   * `combat`: "hasn't dealt combat damage yet" (Ruric Thar).
+   */
+  | { readonly kind: "self-hasnt-dealt-damage"; readonly combat?: true }
   | {
       readonly kind: "self-counters";
       readonly counter?: string;

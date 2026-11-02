@@ -424,6 +424,9 @@ export interface GameObject {
   /** The turn it last dealt damage to another creature (Wolverine's "if
    * it dealt damage to another creature this turn"). */
   dealtDamageToCreatureOnTurn?: number;
+  /** The damage it has dealt, to anything, this stint — see
+   * {@link DealtDamageRecord}. Absent: it hasn't dealt any yet. */
+  dealtDamage?: DealtDamageRecord;
   /**
    * Players who have goaded this creature (rule 701.15) with a one-shot goad
    * — "goad target creature", "goad each creature target player controls".
@@ -1995,6 +1998,7 @@ export interface LastKnownInfo {
    * left: a creature that died of it was still dealt it this turn. */
   readonly damageThisTurn?: DamageHistory;
   readonly dealtDamageToCreatureOnTurn?: number;
+  readonly dealtDamage?: DealtDamageRecord;
   readonly attacking: boolean;
   readonly blocking: boolean;
   /** The attackers it was blocking as it left (`blockedAttackersOf`), and
@@ -4597,6 +4601,26 @@ export interface DamageHistory {
   readonly turn: number;
   readonly by: readonly DamageSourceRecord[];
   readonly excess?: true;
+}
+
+/**
+ * The damage a permanent has dealt in this stint on the battlefield (a zone
+ * change makes a new object, rule 400.7): the other side of
+ * {@link DamageHistory}. Only damage dealt, so none that was prevented (rule
+ * 615). Per object, so tokens with different records don't fold together.
+ */
+export interface DealtDamageRecord {
+  /** Some of it was combat damage: Ruric Thar's "hasn't dealt combat damage
+   * yet". */
+  readonly combat: boolean;
+  /** This turn's, cleared as the next turn begins. Absent: none this turn. */
+  readonly thisTurn?: {
+    readonly turn: number;
+    /** The players it dealt damage to this turn, any one of them once. */
+    readonly players: readonly PlayerId[];
+    /** …and combat damage to. */
+    readonly combatPlayers: readonly PlayerId[];
+  };
 }
 
 /**

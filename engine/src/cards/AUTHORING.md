@@ -2565,7 +2565,7 @@ manaValue, power, toughness, basePower, baseToughness, counters, controlledBy,
 ownedBy, keyword, notKeyword, tapped, token, isCommander, equipped, enchanted,
 modified, anyOf, manaSpent, manaFrom, putIntoGraveyardFromLibraryThisTurn, putIntoGraveyardThisTurn, blockedThisTurn,
 discardedThisTurn, enteredThisTurn, attackedThisTurn, damagedThisTurnBy, excessDamageThisTurn,
-dealtDamageToCreatureThisTurn, cast, castBy, castFrom, castVia, enteredFrom,
+dealtDamageToCreatureThisTurn, dealtDamageThisTurn, cast, castBy, castFrom, castVia, enteredFrom,
 putThereBySource, sharesCardTypeWith, sharesPermanentTypeWith, sharesCreatureTypeWith, sharesLandTypeWith, sameNameWith, sameNameAsAnother, thisWay, attacking, blocking, blockingRelation, goaded, suspected, saddled, saddledSource, crewedSource, crewedBySource, enlistedThisCombat, monstrous, renowned, hasManaAbility, hasAbilities,
 xInManaCost, manaCost, coloredManaSymbols, cardTypeCount, nameDiffersFromEach,
 nameUnlike, sameNameAsTarget, sameNameAsTriggerObject, sharesColorWithTarget, ofChosenType, targets, greatestAmongItsController }`,
@@ -2788,7 +2788,11 @@ Ungoliant), matched against each source as it was when it dealt the damage
 than the lethal damage it needed then — toughness less damage already marked,
 1 from a deathtouch source, none once it had lethal damage; a planeswalker's
 loyalty — Maarika, Brutal Gladiator's `toFilter`) and
-`dealtDamageToCreatureThisTurn` (it dealt damage to another creature). `cast` / `castBy: "you"` / `castFrom` / `enteredFrom` /
+`dealtDamageToCreatureThisTurn` (it dealt damage to another creature). `dealtDamageThisTurn: true` is
+"that dealt damage this turn", to anything (Restore the Peace); `{ to: "you" }` "that dealt damage to you this
+turn" (Spear of Heliod), with `combat: true` for combat damage (Witch-king of Angmar: a sacrifice keeps "you" as
+the effect's controller, not the player choosing). The condition `{ kind: "self-hasnt-dealt-damage", combat? }`
+is "as long as it hasn't dealt [combat] damage yet" (Karakyk Guardian, Ruric Thar). `cast` / `castBy: "you"` / `castFrom` / `enteredFrom` /
 `putThereBySource` read how a permanent came onto the battlefield, this stint
 (`GameObject.entry`): as a spell that was cast and resolved ("if you cast it"
 — Anti-Venom's enters trigger is `{ on: "enters-battlefield", who: "self",

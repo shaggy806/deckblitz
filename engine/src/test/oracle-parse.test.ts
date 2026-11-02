@@ -24,6 +24,34 @@ import { parseEffect, parseFace, parseTrigger, parseCost, parseSentence, parseTy
 // @ts-expect-error — as above.
 import { checkPool } from "../../scripts/oracle-parse-check.mjs";
 
+describe("what a permanent has dealt damage to", () => {
+  const read = (type_line: string, oracle_text: string, power?: string) =>
+    parseFace({ name: "Card", type_line, oracle_text, ...(power ? { power, toughness: power } : {}) }, { tokenFor: () => null });
+  it("a filter on a creature that dealt damage this turn, to you or at all", () => {
+    expect(read("Instant", "Exile target creature that dealt damage to you this turn.").targets[0].filter).toEqual({
+      type: "creature",
+      dealtDamageThisTurn: { to: "you" },
+    });
+    expect(read("Instant", "Destroy all creatures that dealt damage to you this turn.").effect.filter).toEqual({
+      type: "creature",
+      dealtDamageThisTurn: { to: "you" },
+    });
+    expect(read("Instant", "Destroy target creature that dealt damage this turn.").targets[0].filter).toEqual({
+      type: "creature",
+      dealtDamageThisTurn: true,
+    });
+  });
+  it("hexproof until it has dealt damage, or combat damage", () => {
+    expect(read("Creature — Dragon", "This creature has hexproof as long as it hasn't dealt damage yet.", "1").static[0]).toMatchObject({
+      condition: { kind: "self-hasnt-dealt-damage" },
+      grantKeywords: ["hexproof"],
+    });
+    expect(read("Creature — Ogre", "This creature has hexproof as long as they haven't dealt combat damage yet.", "1").static[0]).toMatchObject({
+      condition: { kind: "self-hasnt-dealt-damage", combat: true },
+    });
+  });
+});
+
 describe("would-create-token replacements", () => {
   const read = (oracle_text: string) => {
     const face = parseFace(

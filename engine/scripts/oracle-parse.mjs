@@ -913,6 +913,10 @@ function revealedCardEffectOf(s, ctx) {
 
 /** Target phrases, longest first, as the engine's target specs. */
 const TARGET_PHRASES = [
+  // What it has dealt damage to this turn (`dealtDamageThisTurn`).
+  ["target creature that dealt damage to you this turn", { kind: "permanent", whose: "any", filter: { type: "creature", dealtDamageThisTurn: { to: "you" } } }],
+  ["target creature an opponent controls that dealt damage this turn", { kind: "permanent", whose: "opponent", filter: { type: "creature", dealtDamageThisTurn: true } }],
+  ["target creature that dealt damage this turn", { kind: "permanent", whose: "any", filter: { type: "creature", dealtDamageThisTurn: true } }],
   // A creature in a blocking relation with the source or its host
   // (`blockingRelation`): Goblin Javelineer, Tinder Wall, Plasma Caster.
   ...[
@@ -3240,6 +3244,15 @@ export function parseSentence(sentence, ctx) {
   if ((m = re(`destroy all (${BLOCK_RELATION})`).exec(s))) {
     const filter = blockRelationFilterOf(m[1]);
     return filter === undefined ? null : { kind: "destroy-all", filter };
+  }
+  // "Destroy all creatures that dealt damage to you this turn" (Retaliate),
+  // "Return each creature that dealt damage this turn to its owner's hand"
+  // (Restore the Peace).
+  if (/^destroy all creatures that dealt damage to you this turn\.$/i.test(s)) {
+    return { kind: "destroy-all", filter: { type: "creature", dealtDamageThisTurn: { to: "you" } } };
+  }
+  if (/^return each creature that dealt damage this turn to its owner's hand\.$/i.test(s)) {
+    return { kind: "return-to-hand-all", filter: { type: "creature", dealtDamageThisTurn: true } };
   }
   // "Destroy all other creatures" (Novablast Wurm), "destroy all other
   // enchantments" (Tranquil Grove), "destroy all creatures except for ~"
@@ -11089,6 +11102,16 @@ function parseStatic(line, text) {
         oncePerTurn: true,
         filter: { manaValue: { op: "lte", n: { amount: { countersOn: "source", counter: m[1] } } } },
       },
+      text,
+    };
+  }
+  // "~ has hexproof as long as it hasn't dealt damage yet." (Karakyk Guardian),
+  // "… as long as they haven't dealt combat damage yet" (Ruric Thar).
+  if ((m = /^~ has (\w+) as long as (?:it hasn't|they haven't) dealt (combat )?damage yet\.$/.exec(line))) {
+    return {
+      affects: { scope: "self" },
+      condition: { kind: "self-hasnt-dealt-damage", ...(m[2] !== undefined ? { combat: true } : {}) },
+      grantKeywords: [m[1]],
       text,
     };
   }

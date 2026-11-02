@@ -3802,3 +3802,18 @@ Draconic Visitor, Fisher's Talent, Academy Manufactor. Left in the family:
 `replacement:token-creation-replace-with-copies` (Esix, Mirrormind Crown, Moonlit Meditation)
 and Jinnie Fay, all "you may instead", which needs a choice asked in the middle of creating a
 token, and the first three a first-time-each-turn record too.
+
+### What a permanent has dealt damage to — built 2026-11-01
+
+`stat:filter-dealt-damage-this-turn`, `stat:filter-dealt-damage-to-you-this-turn`,
+`filter:dealt-combat-damage-to-you-this-turn`, `condition:source-hasnt-dealt-damage`,
+`condition:source-hasnt-dealt-combat-damage`, `trigger:creature-damaged-by-source-dies`
+(already Sengir Vampire's shape; marked with a proving card). `GameObject.dealtDamage`, kept
+by `dealDamage` for each permanent, and read by the filter clause `dealtDamageThisTurn`
+(`true`, or `{ to: "you", combat? }`) and the condition `self-hasnt-dealt-damage`. No new
+decision. Proving cards: Reciprocate, Retaliate, Spear of Heliod, Restore the Peace, Red
+Guardian, Karakyk Guardian, Ruric Thar, Soul Collector, Witch-king of Angmar. Left: Inferno
+Trap counts creatures that dealt you damage, those gone included, which this record can't;
+Bushi Tenderfoot, Scythe of the Wretched and Repentant Vampire need more of their own; the
+family's one-card stats and the player targets (Wicked Akuba, Diseased Vermin, Hope of
+Ghirapur) stay open.

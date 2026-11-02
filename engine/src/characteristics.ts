@@ -1263,6 +1263,11 @@ function evalStaticCondition(
     }
     case "solved":
       return source.zone === "battlefield" && source.solved === true;
+    case "self-hasnt-dealt-damage":
+      return (
+        source.zone === "battlefield" &&
+        (source.dealtDamage === undefined || (condition.combat === true && !source.dealtDamage.combat))
+      );
     case "self-counters": {
       // Last-known information once the source has left the battlefield
       // (603.10) — `moveObject` clears `counters`, so a dies-trigger asking

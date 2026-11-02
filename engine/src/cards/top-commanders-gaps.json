@@ -1141,7 +1141,13 @@
   "replacement:token-creation-add-extra",
   "replacement:artifact-tokens-instead",
   "replacement:token-creation-substitute-replacement",
-  "replacement:token-creation-one-of-each"
+  "replacement:token-creation-one-of-each",
+  "stat:filter-dealt-damage-this-turn",
+  "stat:filter-dealt-damage-to-you-this-turn",
+  "filter:dealt-combat-damage-to-you-this-turn",
+  "condition:source-hasnt-dealt-damage",
+  "condition:source-hasnt-dealt-combat-damage",
+  "trigger:creature-damaged-by-source-dies"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {
