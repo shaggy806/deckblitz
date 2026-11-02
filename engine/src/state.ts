@@ -218,9 +218,21 @@ export interface GameObject {
    * Light): the source and the stint it was in. When that source leaves the
    * battlefield in that stint, the card returns at once, under its owner's
    * control — a one-shot effect right after the event, not a triggered
-   * ability (`returnUntilLeft`). Cleared by any move, like `exiledBy`.
+   * ability (`returnUntilLeft`). Cleared by any move, like `exiledBy`. The
+   * object it waits on needn't be what exiled it (Calix's "until target
+   * enchantment you control leaves"). `returnTo: "hand"` is the zone a card
+   * exiled from a hand goes back to (rule 610.3's "previous zone" — Kitesail
+   * Freebooter), its owner's.
    */
-  exiledUntil?: { readonly source: ObjectId; readonly zoneChangeCount: number };
+  exiledUntil?: { readonly source: ObjectId; readonly zoneChangeCount: number; readonly returnTo?: "hand" };
+  /**
+   * Exiled "until an opponent becomes the monarch" (Palace Jailer, rule
+   * 610.3): an opponent of this player, the effect's controller. It returns,
+   * under its owner's control, right after any of them next becomes the
+   * monarch, whatever has become of what exiled it (`returnUntilMonarch`). An
+   * opponent being the monarch already doesn't count. Cleared by any move.
+   */
+  exiledUntilMonarch?: PlayerId;
   /**
    * The player whose effect put this card into exile — what "cards **you
    * exiled**" means (Haldan, Avid Arcanist's `playFromExile.exiledByYou`).
@@ -3157,6 +3169,10 @@ export type AwaitingDecision =
        * `"exile"` (imprint, face up): the permanent, in the stint it's in,
        * the chosen cards are exiled with (rule 607.2a — `GameObject.exiledWith`). */
       readonly exileLink?: { readonly source: ObjectId; readonly zoneChangeCount: number };
+      /** For `destination: "exile"`: "exile that card **until this creature
+       * leaves the battlefield**" (Kitesail Freebooter) — `exiledUntil` for
+       * the chosen card. */
+      readonly exileUntil?: NonNullable<GameObject["exiledUntil"]>;
       /** For `destination: "exile-playable"` — the impulse permission to
        * stamp on the chosen cards, which stay in exile either way
        * (Tectonic Giant: "exile the top two, choose one of them"). */
@@ -5725,6 +5741,10 @@ export interface GameState {
    * the monarch — triggered abilities that use the stack (725.2), carried by
    * `monarchAbility`. */
   monarch: PlayerId | null;
+  /** The `eventSeq` each player last became the monarch at: an "until an
+   * opponent becomes the monarch" whose event came after its ability went on
+   * the stack exiles nothing (rule 610.3b). */
+  monarchBecameAt?: Partial<Record<PlayerId, number>>;
   /** The object the monarch's two inherent triggered abilities ride on (rule
    * 725.2 — `cards/monarch.ts`): made the first time anyone becomes the
    * monarch, in the command zone but in no zone list, kind `"emblem"`, its

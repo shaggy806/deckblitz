@@ -8017,3 +8017,63 @@ describe("doesn't untap during a chosen player's next N untap steps", () => {
     expect(longer.complete).toBe(false);
   });
 });
+
+describe("exile until a named event (rule 610.3)", () => {
+  const face = (type_line: string, oracle_text: string) =>
+    parseFace({ name: "Test Until", type_line, oracle_text }, { tokenFor: () => null });
+
+  it("a card from a hand, until this creature leaves, revealed or looked at", () => {
+    const freebooter = face(
+      "Creature — Human Pirate",
+      "When this creature enters, target opponent reveals their hand. You choose a noncreature, nonland card from it. Exile that card until this creature leaves the battlefield.",
+    );
+    expect(freebooter.complete).toBe(true);
+    expect(freebooter.triggered[0].effect).toEqual({
+      kind: "discard-chosen",
+      target: 0,
+      filter: { notTypes: ["creature", "land"] },
+      destination: "exile",
+      untilSourceLeaves: true,
+    });
+    const maggot = face(
+      "Enchantment Creature — Insect",
+      "When this creature enters, target opponent reveals their hand and you choose a nonland card from it. Exile that card until this creature leaves the battlefield.",
+    );
+    expect(maggot.complete).toBe(true);
+    expect(maggot.triggered[0].effect.untilSourceLeaves).toBe(true);
+    const bat = face(
+      "Creature — Bat",
+      "When this creature enters, look at target opponent's hand. You may exile a nonland card from it until this creature leaves the battlefield.",
+    );
+    expect(bat.complete).toBe(true);
+    expect(bat.triggered[0].effect).toEqual({
+      kind: "discard-chosen",
+      target: 0,
+      filter: { notTypes: ["land"] },
+      lookOnly: true,
+      optional: true,
+      destination: "exile",
+      untilSourceLeaves: true,
+    });
+  });
+
+  it("until an opponent becomes the monarch, or another target leaves", () => {
+    const jailer = face("Creature — Human Soldier", "When this creature enters, exile target creature an opponent controls until an opponent becomes the monarch.");
+    expect(jailer.complete).toBe(true);
+    expect(jailer.triggered[0].effect).toEqual({ kind: "exile", target: 0, until: "opponent-becomes-monarch" });
+    const calix = face("Enchantment", "When this enchantment enters, exile target creature you don't control until target enchantment you control leaves the battlefield.");
+    expect(calix.complete).toBe(true);
+    expect(calix.triggered[0].targets).toHaveLength(2);
+    expect(calix.triggered[0].effect).toEqual({ kind: "exile", target: 0, until: { targetLeaves: 1 } });
+  });
+
+  it("leaves a discard with an until, and any other event, unread", () => {
+    const discard = face(
+      "Creature — Horror",
+      "When this creature enters, target opponent reveals their hand. You choose a nonland card from it. That player discards that card until this creature leaves the battlefield.",
+    );
+    expect(discard.complete).toBe(false);
+    const other = face("Enchantment", "When this enchantment enters, exile target creature an opponent controls until an opponent loses the game.");
+    expect(other.complete).toBe(false);
+  });
+});

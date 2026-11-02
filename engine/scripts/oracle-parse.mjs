@@ -3143,6 +3143,18 @@ export function parseSentence(sentence, ctx) {
   if ((m = re(`gain control of (${TARGET})( until end of turn)?`).exec(s))) {
     return { kind: "gain-control", target: slot(m[1]), untilEndOfTurn: m[2] !== undefined };
   }
+  // "Exile target creature an opponent controls until an opponent becomes the
+  // monarch" (Palace Jailer), "… until target enchantment you control leaves the
+  // battlefield" (Calix, Destiny's Hand): rule 610.3, the end a parameter.
+  if ((m = re(`exile (target [a-z' ]+?) until an opponent becomes the monarch`).exec(s))) {
+    return { kind: "exile", target: slot(m[1]), until: "opponent-becomes-monarch" };
+  }
+  if ((m = re(`exile (target [a-z' ]+?) until (target [a-z' ]+?) leaves the battlefield`).exec(s))) {
+    const exiled = slot(m[1]);
+    const leaves = slot(m[2]);
+    if (exiled === undefined || leaves === undefined) return null;
+    return { kind: "exile", target: exiled, until: { targetLeaves: leaves } };
+  }
   if ((m = re(`exile (${TARGET})`).exec(s))) return { kind: "exile", target: slot(m[1]) };
   // Airbend (rule 701.65a): exiled, its owner may cast it for {2}. Several
   // targets are one instruction, exiled together (603.10a).
@@ -6079,6 +6091,34 @@ function handRevealAt(sentences, i, ctx) {
 function revealedHandChoiceAt(sentences, i, ctx) {
   const some = revealedFromHandChoiceAt(sentences, i, ctx);
   if (some !== null) return some;
+  // "Target opponent reveals their hand and you choose a nonland card from it.
+  // Exile that card until …" (Brain Maggot): the same two sentences as one.
+  const joined = /^(target opponent|target player) reveals their hand and (you choose .+)$/i.exec(sentences[i]);
+  if (joined !== null) {
+    const split = [...sentences.slice(0, i), `${joined[1]} reveals their hand.`, joined[2], ...sentences.slice(i + 1)];
+    const read = revealedHandChoiceAt(split, i, ctx);
+    return read === null ? null : { ...read, used: read.used - 1 };
+  }
+  // "Look at target opponent's hand. You may exile a nonland card from it
+  // until ~ leaves the battlefield" (Deep-Cavern Bat, rule 610.3).
+  const looked = /^look at (target opponent|target player)'s hand\.$/i.exec(sentences[i]);
+  const mayExile = looked === null ? null : /^you may exile an? (?:(.+?) )?card from it until ~ leaves the battlefield\.$/i.exec(sentences[i + 1] ?? "");
+  if (mayExile !== null) {
+    const lookFilter = mayExile[1] === undefined ? {} : parseTypePhrase(mayExile[1]);
+    if (lookFilter === null) return null;
+    return {
+      effect: {
+        kind: "discard-chosen",
+        target: ctx.target(looked[1].toLowerCase() === "target opponent" ? "opponent" : "player"),
+        ...(Object.keys(lookFilter).length > 0 ? { filter: lookFilter } : {}),
+        lookOnly: true,
+        optional: true,
+        destination: "exile",
+        untilSourceLeaves: true,
+      },
+      used: 2,
+    };
+  }
   const who = /^(target opponent|target player) reveals their hand( and the top card of their library)?\.$/i.exec(sentences[i]);
   if (who === null) return null;
   const target = () => ctx.target(who[1].toLowerCase() === "target opponent" ? "opponent" : "player");
@@ -6129,10 +6169,13 @@ function revealedHandChoiceAt(sentences, i, ctx) {
   if (graveyardFilter === null) return null;
   let exile = choose[3] !== undefined;
   let used = 2;
+  let until = false;
   if (!exile) {
-    const then = /^(that player discards that card|exile that card|that player exiles that card)\.$/i.exec(sentences[i + 2] ?? "");
+    const then = /^(that player discards that card|exile that card|that player exiles that card)( until ~ leaves the battlefield)?\.$/i.exec(sentences[i + 2] ?? "");
     if (then === null) return null;
     exile = !/discards/i.test(then[1]);
+    until = then[2] !== undefined;
+    if (until && !exile) return null;
     used = 3;
   }
   // A graveyard's card can't be discarded: only an exile reads that way.
@@ -6142,6 +6185,7 @@ function revealedHandChoiceAt(sentences, i, ctx) {
     target: target(),
     ...(Object.keys(filter).length > 0 ? { filter } : {}),
     ...(exile ? { destination: "exile" } : {}),
+    ...(until ? { untilSourceLeaves: true } : {}),
     ...(orGraveyard
       ? { alsoFrom: { zone: "graveyard", ...(Object.keys(graveyardFilter).length > 0 ? { filter: graveyardFilter } : {}) } }
       : {}),

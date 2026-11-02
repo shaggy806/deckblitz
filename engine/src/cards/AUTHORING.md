@@ -1835,7 +1835,15 @@ happens though the source has lost its abilities. Author only the exile —
 `exile-all { untilSourceLeaves: true }` for "exile each …" (Temporary Lockdown); the
 engine returns the card itself, under its owner's control, together with
 anything else returning in the same event (610.3d; `GameObject.exiledUntil`,
-the source's stint). `moveObject` clears the link on any zone change: a card
+the source's stint). **A card from a hand** is `discard-chosen { destination:
+"exile", untilSourceLeaves: true }`: back to its owner's hand, rule 610.3's
+"previous zone" (Kitesail Freebooter, Brain Maggot, `lookOnly` and `optional` for
+Deep-Cavern Bat), and with the source gone the hand is still shown, no card chosen.
+**Another end** is `exile`'s `until`: `{ targetLeaves: N }`, a second target whose
+leaving ends it (Calix's −3, nothing exiled once that slot is illegal), or
+`"opponent-becomes-monarch"` (Palace Jailer, any opponent of the effect's controller,
+the next time one does, whatever became of the Jailer; `exile-until.test.ts`).
+`moveObject` clears the link on any zone change: a card
 that leaves exile some other way is no longer the one this permanent took, and
 a token that was exiled ceased to exist (rule 111.7), so neither comes back. A
 card printed with its *own* "When ~ leaves the battlefield, return the exiled

@@ -321,6 +321,20 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### An exile's end as a parameter — built 2026-11-01
+
+The need-keys group `effect:exile-from-hand-until-source-leaves` +
+`effect:exile-until-opponent-becomes-monarch` + `effect:exile-until-other-target-leaves`,
+all rule 610.3: `discard-chosen`'s `untilSourceLeaves` (back to the hand it came from,
+`exiledUntil.returnTo`), and `exile`'s `until`, `{ targetLeaves: N }` or
+`"opponent-becomes-monarch"` (`GameObject.exiledUntilMonarch`, read in `Game.setMonarch`;
+`GameState.monarchBecameAt` for 610.3b). Proving cards: Kitesail Freebooter, Brain Maggot,
+Deep-Cavern Bat, Palace Jailer, Calix. Left over from the first key: Cloak and Dagger,
+Entwined (one choice over a hand and a creature), Intellect Devourer (each opponent's own
+choice, and playing them), Hypnox and Wormfang Behemoth (a whole hand exiled at once).
+Mesmeric Fiend reads as Tidehollow Sculler's shape, no new code. The family's next unit is
+the "until your next turn" durations.
+
 ### Held down through a chosen player's next N untap steps — built 2026-11-01
 
 The need-keys group `effect:doesnt-untap-next-two-untap-steps` +

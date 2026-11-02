@@ -8996,6 +8996,7 @@ export class Game {
         if (this.moveObject(id, "exile")) {
           const object = this.state.objects[id];
           if (awaiting.exileLink !== undefined) object.exiledWith = awaiting.exileLink;
+          if (awaiting.exileUntil !== undefined) object.exiledUntil = awaiting.exileUntil;
           if (awaiting.impulseGrant !== undefined) object.impulse = { ...awaiting.impulseGrant };
           if (awaiting.costExileFor !== undefined) this.recordCostExile(awaiting.costExileFor, [id]);
         }
@@ -27108,6 +27109,16 @@ export class Game {
     };
     // "For as long as [this] remains on the battlefield": the source in the
     // stint this refers to, or nothing if it has left (rule 611.2b).
+    /** The source is still the object this refers to, on the battlefield or
+     * phased out, for "until it leaves" (rule 610.3a/b, 702.26d). */
+    const sourceStillOn = (): boolean => {
+      const src = this.state.objects[source];
+      return (
+        src !== undefined &&
+        (src.zone === "battlefield" || src.zone === "phased-out") &&
+        (refs.source === undefined || (src.zoneChangeCount ?? 0) === refs.source)
+      );
+    };
     const lastingHere = (duration: PtDuration): EffectDuration => {
       let here: WhileSource | null = null;
       if (
@@ -28297,19 +28308,19 @@ export class Game {
         if (exiled?.zone !== "exile" || haunted === undefined) return;
         exiled.haunting = { object: creature, zoneChangeCount: haunted.zoneChangeCount ?? 0 };
       },
-      exileObject: (target, untilSourceLeaves, withCounters, mayCast, linked, airbend) => {
-        if (untilSourceLeaves === true) {
-          // Rule 610.3a/b: exiled "until" something that has already happened
-          // — its source gone, or back as a new object (400.7) — it isn't
-          // exiled at all. A source phased out hasn't left (702.26d).
-          const src = this.state.objects[source];
-          if (
-            src === undefined ||
-            (src.zone !== "battlefield" && src.zone !== "phased-out") ||
-            (refs.source !== undefined && (src.zoneChangeCount ?? 0) !== refs.source)
-          ) {
-            return;
-          }
+      exileObject: (target, untilSourceLeaves, withCounters, mayCast, linked, airbend, until) => {
+        // Rule 610.3a/b: exiled "until" something that has already happened
+        // — its source gone, or back as a new object (400.7) — it isn't
+        // exiled at all. A source phased out hasn't left (702.26d).
+        if (untilSourceLeaves === true && !sourceStillOn()) return;
+        const waitsOn = typeof until === "object" ? this.state.objects[until.leaves] : undefined;
+        if (typeof until === "object" && waitsOn?.zone !== "battlefield" && waitsOn?.zone !== "phased-out") return;
+        // Likewise an opponent who has become the monarch since this ability
+        // went on the stack (the event has happened: rule 610.3b).
+        if (until === "opponent-becomes-monarch" && opts.transformSince !== undefined) {
+          const since = opts.transformSince;
+          const became = this.state.monarchBecameAt ?? {};
+          if (this.state.turnOrder.some((p) => p !== controller && (became[p] ?? -1) > since)) return;
         }
         const before = target.kind === "object" ? this.state.objects[target.object]?.zoneChangeCount : undefined;
         this.exileByEffect(target, untilSourceLeaves === true ? source : undefined);
@@ -28322,6 +28333,14 @@ export class Game {
           // Each card a merged or melded permanent became (730.3c).
           for (const card of [exiled.id, ...(exiled.leftWith ?? [])]) {
             if (this.state.objects[card]?.zone === "exile") this.state.objects[card].exiledUntil = until;
+          }
+        }
+        if (until !== undefined && exiled?.zone === "exile" && exiled.zoneChangeCount !== before) {
+          for (const card of [exiled.id, ...(exiled.leftWith ?? [])]) {
+            const object = this.state.objects[card];
+            if (object?.zone !== "exile") continue;
+            if (until === "opponent-becomes-monarch") object.exiledUntilMonarch = controller;
+            else object.exiledUntil = { source: until.leaves, zoneChangeCount: waitsOn?.zoneChangeCount ?? 0 };
           }
         }
         // "Cards you exiled" (Haldan): this effect's controller exiled it.
@@ -29007,7 +29026,28 @@ export class Game {
                 ...(mayCast.play === true ? {} : { castOnly: true }),
                 ...(mayCast.spendAs !== undefined ? { spendAs: mayCast.spendAs } : {}),
               };
-        this.beginDiscardChosen(to?.chooser ?? controller, source, target, filter, lookOnly, optional, upTo, to?.destination, exileLink, to?.alsoFrom, grant);
+        // "Exile that card until this creature leaves the battlefield" (rule
+        // 610.3): back to the hand it came from. With the source gone already
+        // the hand is still shown, and nothing is chosen (610.3b).
+        const until = to?.untilSourceLeaves === true;
+        const standing = until && sourceStillOn();
+        const exileUntil = standing
+          ? { source, zoneChangeCount: this.state.objects[source].zoneChangeCount ?? 0, returnTo: "hand" as const }
+          : undefined;
+        this.beginDiscardChosen(
+          to?.chooser ?? controller,
+          source,
+          target,
+          filter,
+          lookOnly,
+          optional,
+          until && !standing ? 0 : upTo,
+          to?.destination,
+          exileLink,
+          to?.alsoFrom,
+          grant,
+          exileUntil,
+        );
       },
       modifyPt: (target, power, toughness, duration) =>
         this.modifyPt(target, power, toughness, lastingHere(duration)),
@@ -31472,6 +31512,8 @@ export class Game {
     /** What may be done with the card exiled — see `discard-chosen`'s
      * `mayCast`. */
     impulseGrant?: GameObject["impulse"],
+    /** See `discard-chosen`'s `untilSourceLeaves`. */
+    exileUntil?: NonNullable<GameObject["exiledUntil"]>,
   ): void {
     if (target.kind !== "player") return;
     const player = target.player;
@@ -31515,6 +31557,7 @@ export class Game {
       // "Onto the battlefield under your control" (Treacherous Urge).
       ...(destination === "battlefield" && chooser !== player ? { enterUnder: chooser } : {}),
       ...(exileLink !== undefined ? { exileLink } : {}),
+      ...(exileUntil !== undefined ? { exileUntil } : {}),
       ...(impulseGrant !== undefined ? { impulseGrant } : {}),
       leftover: "stay",
     };
@@ -38159,6 +38202,24 @@ export class Game {
       if (until === undefined || object.isToken) return false;
       return left.some((l) => l.source === until.source && l.zoneChangeCount === until.zoneChangeCount);
     });
+    // Rule 610.3: "returns the object to its previous zone" — what came from
+    // a hand goes back to its owner's (Kitesail Freebooter).
+    const toBattlefield = returning.filter((id) => {
+      if (this.state.objects[id].exiledUntil?.returnTo !== "hand") return true;
+      this.moveObject(id, "hand");
+      return false;
+    });
+    if (toBattlefield.length > 0) this.returnExiledCards(toBattlefield);
+  }
+
+  /** `player` has just become the monarch: what was exiled "until an opponent
+   * becomes the monarch" by one of their opponents returns, under its owner's
+   * control (rule 610.3, 610.3c — Palace Jailer). */
+  private returnUntilMonarch(player: PlayerId): void {
+    const returning = this.state.zones.shared.exile.filter((id) => {
+      const object = this.state.objects[id];
+      return object?.exiledUntilMonarch !== undefined && object.exiledUntilMonarch !== player && !object.isToken;
+    });
     if (returning.length > 0) this.returnExiledCards(returning);
   }
 
@@ -43504,6 +43565,8 @@ export class Game {
     this.state.monarch = player;
     this.ensureMonarchAbility();
     this.emit({ type: "monarch-changed", player, via });
+    (this.state.monarchBecameAt ??= {})[player] = this.state.eventSeq;
+    this.returnUntilMonarch(player);
   }
 
   /** Whether `player` can become the monarch now: not under a "you can't
@@ -46657,6 +46720,7 @@ export class Game {
     // *after* its own move, so an exile doesn't clear its own mark.
     object.exiledBy = undefined;
     object.exiledUntil = undefined;
+    delete object.exiledUntilMonarch;
     // And who exiled it ("cards you exiled" — Haldan): that was this stint.
     object.exiledByPlayer = undefined;
     // And the creature it haunted (rule 702.55b).

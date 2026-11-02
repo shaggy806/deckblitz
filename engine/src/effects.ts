@@ -2931,6 +2931,16 @@ export type EffectSpec =
        */
       readonly untilSourceLeaves?: boolean;
       /**
+       * Exile until something other than this source (rule 610.3), the same
+       * way: `{ targetLeaves: N }` — "exile target creature or enchantment you
+       * don't control **until target enchantment you control leaves the
+       * battlefield**" (Calix, Destiny's Hand), nothing exiled once target
+       * slot N is illegal or gone; `"opponent-becomes-monarch"` — "**until an
+       * opponent becomes the monarch**" (Palace Jailer), any opponent of the
+       * effect's controller, the next time one does (`GameObject.exiledUntilMonarch`).
+       */
+      readonly until?: { readonly targetLeaves: number } | "opponent-becomes-monarch";
+      /**
        * "You may cast that card for as long as it remains exiled, and mana of
        * any type can be spent to cast that spell" (Hostage Taker): the
        * effect's controller gets an impulse permission to *cast* the card
@@ -4150,6 +4160,15 @@ export type EffectSpec =
        * discards it (rule 701.9a). The effect's controller, when absent. */
       readonly chooser?: EffectPlayerRef;
       readonly unlinked?: true;
+      /**
+       * With `destination: "exile"`: "exile that card **until this creature
+       * leaves the battlefield**" (Kitesail Freebooter, Brain Maggot,
+       * Deep-Cavern Bat — rule 610.3): the card goes back to its owner's hand
+       * as a one-shot effect right after the source leaves, no trigger to
+       * respond to. With the source gone already, the hand is still revealed
+       * or looked at, and no card is chosen or exiled (610.3b, their rulings).
+       */
+      readonly untilSourceLeaves?: true;
       /**
        * One choice over the hand **and** another of that player's zones at
        * once: `{ zone: "graveyard", filter }` — "you choose a nonland card
@@ -9092,6 +9111,8 @@ export interface EffectApi {
     linked?: boolean,
     /** Airbend it (rule 701.65a) — see the `exile` effect's `airbend`. */
     airbend?: boolean,
+    /** See the `exile` effect's `until`, with its slot read. */
+    until?: { readonly leaves: ObjectId } | "opponent-becomes-monarch",
   ): void;
   /** Haunt (rule 702.55b): `card`, just exiled by this effect, haunts
    * `creature` — in the battlefield stint it's in now. Nothing unless the
@@ -9467,6 +9488,7 @@ export interface EffectApi {
       readonly chooser?: PlayerId;
       readonly destination?: "exile" | "library-top" | "library-bottom" | "battlefield";
       readonly unlinked?: true;
+      readonly untilSourceLeaves?: true;
       readonly alsoFrom?:
         | { readonly zone: "graveyard"; readonly filter?: CardFilter }
         | { readonly zone: "library-top" };
@@ -13423,8 +13445,12 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "exile": {
       const target = resolveEffectTarget(spec.target, ctx);
       if (target !== undefined) {
+        // Rule 610.3a: until a target leaves, and that target is gone or
+        // illegal already: it doesn't move (Calix's ruling).
+        const leaves = typeof spec.until === "object" ? ctx.targets[spec.until.targetLeaves] : undefined;
+        if (typeof spec.until === "object" && leaves?.kind !== "object") return;
         ctx.exileObject(target, spec.untilSourceLeaves === true, spec.withCounters, spec.mayCast, spec.linked === true,
-          spec.airbend === true);
+          spec.airbend === true, leaves?.kind === "object" ? { leaves: leaves.object } : spec.until === "opponent-becomes-monarch" ? spec.until : undefined);
         const haunted = spec.haunting === undefined ? undefined : ctx.targets[spec.haunting];
         if (haunted?.kind === "object" && target.kind === "object") ctx.markHaunting(target.object, haunted.object);
       }
@@ -14036,6 +14062,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           ...(chooser !== undefined ? { chooser } : {}),
           ...(spec.destination !== undefined ? { destination: spec.destination } : {}),
           ...(spec.unlinked === true ? { unlinked: true } : {}),
+          ...(spec.untilSourceLeaves === true ? { untilSourceLeaves: true } : {}),
           ...(spec.alsoFrom !== undefined ? { alsoFrom: spec.alsoFrom } : {}),
           ...(spec.mayCast !== undefined ? { mayCast: spec.mayCast } : {}),
           ...(spec.reveals !== undefined

@@ -283,6 +283,9 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     // Haunt (rule 702.55): the creature haunted is the one whose death
     // fires the card again — best an opponent's, the one likelier to die.
     if (n.haunting !== undefined) v.touch(n.haunting, "harm", MINOR);
+    // "Until target enchantment you control leaves" (Calix): it holds the
+    // exile, so it's one of your own you'd keep.
+    if (typeof n.until === "object") v.touch(n.until.targetLeaves, "help", MINOR);
   },
   "choose-creature-type": (n, v) => v.child(n.then),
   "choose-card-name": (n, v) => {
