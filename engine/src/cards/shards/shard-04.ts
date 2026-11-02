@@ -718,6 +718,7 @@ import _poolSzarekhTheSilentKing from "../pool/szarekh-the-silent-king.js";
 import _poolTahCropElite from "../pool/tah-crop-elite.js";
 import _poolTajNarSwordsmith from "../pool/taj-nar-swordsmith.js";
 import _poolTakePossession from "../pool/take-possession.js";
+import _poolTamiyoTheMoonSage from "../pool/tamiyo-the-moon-sage.js";
 import _poolTamsResistance from "../pool/tams-resistance.js";
 import _poolTangledFlorahedron from "../pool/tangled-florahedron.js";
 import _poolTasigursCruelty from "../pool/tasigurs-cruelty.js";
@@ -1580,6 +1581,7 @@ const shard: CardShard = {
     _poolTahCropElite,
     _poolTajNarSwordsmith,
     _poolTakePossession,
+    _poolTamiyoTheMoonSage,
     _poolTamsResistance,
     _poolTangledFlorahedron,
     _poolTasigursCruelty,

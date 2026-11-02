@@ -664,6 +664,7 @@ import _poolRunawaySteamKin from "../pool/runaway-steam-kin.js";
 import _poolRushingRiver from "../pool/rushing-river.js";
 import _poolSageOwl from "../pool/sage-owl.js";
 import _poolSagesNouliths from "../pool/sages-nouliths.js";
+import _poolSaheeliFiligreeMaster from "../pool/saheeli-filigree-master.js";
 import _poolSaltRoadSkirmish from "../pool/salt-road-skirmish.js";
 import _poolSandblast from "../pool/sandblast.js";
 import _poolSandwurmConvergence from "../pool/sandwurm-convergence.js";
@@ -1574,6 +1575,7 @@ const shard: CardShard = {
     _poolRushingRiver,
     _poolSageOwl,
     _poolSagesNouliths,
+    _poolSaheeliFiligreeMaster,
     _poolSaltRoadSkirmish,
     _poolSandblast,
     _poolSandwurmConvergence,

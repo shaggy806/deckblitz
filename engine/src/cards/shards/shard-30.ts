@@ -740,6 +740,7 @@ import _poolTajuruStalwart from "../pool/tajuru-stalwart.js";
 import _poolTalonSliver from "../pool/talon-sliver.js";
 import _poolTangleMantis from "../pool/tangle-mantis.js";
 import _poolTectonicFiend from "../pool/tectonic-fiend.js";
+import _poolTeferiTemporalArchmage from "../pool/teferi-temporal-archmage.js";
 import _poolTeleport from "../pool/teleport.js";
 import _poolTempleOfMalice from "../pool/temple-of-malice.js";
 import _poolTemporalFirestorm from "../pool/temporal-firestorm.js";
@@ -1620,6 +1621,7 @@ const shard: CardShard = {
     _poolTalonSliver,
     _poolTangleMantis,
     _poolTectonicFiend,
+    _poolTeferiTemporalArchmage,
     _poolTeleport,
     _poolTempleOfMalice,
     _poolTemporalFirestorm,

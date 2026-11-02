@@ -315,6 +315,7 @@ import _poolGlaringAegis from "../pool/glaring-aegis.js";
 import _poolGlasspoolShore from "../pool/glasspool-shore.js";
 import _poolGlitteringStockpile from "../pool/glittering-stockpile.js";
 import _poolGoblinBoomKeg from "../pool/goblin-boom-keg.js";
+import _poolGoblinMachinist from "../pool/goblin-machinist.js";
 import _poolGoblinOriflamme from "../pool/goblin-oriflamme.js";
 import _poolGoblinPicker from "../pool/goblin-picker.js";
 import _poolGoblinSpy from "../pool/goblin-spy.js";
@@ -1228,6 +1229,7 @@ const shard: CardShard = {
     _poolGlasspoolShore,
     _poolGlitteringStockpile,
     _poolGoblinBoomKeg,
+    _poolGoblinMachinist,
     _poolGoblinOriflamme,
     _poolGoblinPicker,
     _poolGoblinSpy,

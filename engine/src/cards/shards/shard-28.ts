@@ -370,6 +370,7 @@ import _poolIsperiasSkywatch from "../pool/isperias-skywatch.js";
 import _poolIvyElemental from "../pool/ivy-elemental.js";
 import _poolJabarisBanner from "../pool/jabaris-banner.js";
 import _poolJadelightSpelunker from "../pool/jadelight-spelunker.js";
+import _poolJayaBallard from "../pool/jaya-ballard.js";
 import _poolJewelThief from "../pool/jewel-thief.js";
 import _poolJhessianThief from "../pool/jhessian-thief.js";
 import _poolJotunOwlKeeper from "../pool/jotun-owl-keeper.js";
@@ -1265,6 +1266,7 @@ const shard: CardShard = {
     _poolIvyElemental,
     _poolJabarisBanner,
     _poolJadelightSpelunker,
+    _poolJayaBallard,
     _poolJewelThief,
     _poolJhessianThief,
     _poolJotunOwlKeeper,

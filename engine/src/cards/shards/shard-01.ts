@@ -746,6 +746,7 @@ import _poolTranquility from "../pool/tranquility.js";
 import _poolTraumatize from "../pool/traumatize.js";
 import _poolTravelThroughCaradhras from "../pool/travel-through-caradhras.js";
 import _poolTraxosScourgeOfKroog from "../pool/traxos-scourge-of-kroog.js";
+import _poolTreasureHunt from "../pool/treasure-hunt.js";
 import _poolTrespassersCurse from "../pool/trespassers-curse.js";
 import _poolTribalGolem from "../pool/tribal-golem.js";
 import _poolTroublesomeSpirit from "../pool/troublesome-spirit.js";
@@ -1595,6 +1596,7 @@ const shard: CardShard = {
     _poolTraumatize,
     _poolTravelThroughCaradhras,
     _poolTraxosScourgeOfKroog,
+    _poolTreasureHunt,
     _poolTrespassersCurse,
     _poolTribalGolem,
     _poolTroublesomeSpirit,

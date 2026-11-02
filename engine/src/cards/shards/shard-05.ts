@@ -572,6 +572,7 @@ import _poolPracticedTactics from "../pool/practiced-tactics.js";
 import _poolPrimoTheUnbounded from "../pool/primo-the-unbounded.js";
 import _poolPrimordialPlasm from "../pool/primordial-plasm.js";
 import _poolProphetOfDistortion from "../pool/prophet-of-distortion.js";
+import _poolProteusStaff from "../pool/proteus-staff.js";
 import _poolProtomatterPowder from "../pool/protomatter-powder.js";
 import _poolPulsatingIllusion from "../pool/pulsating-illusion.js";
 import _poolPuresteelPaladin from "../pool/puresteel-paladin.js";
@@ -1441,6 +1442,7 @@ const shard: CardShard = {
     _poolPrimoTheUnbounded,
     _poolPrimordialPlasm,
     _poolProphetOfDistortion,
+    _poolProteusStaff,
     _poolProtomatterPowder,
     _poolPulsatingIllusion,
     _poolPuresteelPaladin,

@@ -41,6 +41,7 @@ import _poolAssassinInitiate from "../pool/assassin-initiate.js";
 import _poolAstorBearerOfBlades from "../pool/astor-bearer-of-blades.js";
 import _poolAuraFinesse from "../pool/aura-finesse.js";
 import _poolAuriokChampion from "../pool/auriok-champion.js";
+import _poolAuspiciousStarrix from "../pool/auspicious-starrix.js";
 import _poolAustereCommand from "../pool/austere-command.js";
 import _poolAvidReclaimer from "../pool/avid-reclaimer.js";
 import _poolBackdraftHellkite from "../pool/backdraft-hellkite.js";
@@ -941,6 +942,7 @@ const shard: CardShard = {
     _poolAstorBearerOfBlades,
     _poolAuraFinesse,
     _poolAuriokChampion,
+    _poolAuspiciousStarrix,
     _poolAustereCommand,
     _poolAvidReclaimer,
     _poolBackdraftHellkite,

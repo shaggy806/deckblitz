@@ -242,6 +242,7 @@ import _poolEntourageOfTrest from "../pool/entourage-of-trest.js";
 import _poolEphemeralShields from "../pool/ephemeral-shields.js";
 import _poolEpiphanyStorm from "../pool/epiphany-storm.js";
 import _poolErrandOfDuty from "../pool/errand-of-duty.js";
+import _poolErraticExplosion from "../pool/erratic-explosion.js";
 import _poolEstridsInvocation from "../pool/estrids-invocation.js";
 import _poolEvilEyeOfOrmsByGore from "../pool/evil-eye-of-orms-by-gore.js";
 import _poolEvisceratorsInsight from "../pool/eviscerators-insight.js";
@@ -1091,6 +1092,7 @@ const shard: CardShard = {
     _poolEphemeralShields,
     _poolEpiphanyStorm,
     _poolErrandOfDuty,
+    _poolErraticExplosion,
     _poolEstridsInvocation,
     _poolEvilEyeOfOrmsByGore,
     _poolEvisceratorsInsight,

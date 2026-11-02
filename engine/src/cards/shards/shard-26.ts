@@ -212,6 +212,7 @@ import _poolEdgarCharmedGroom from "../pool/edgar-charmed-groom.js";
 import _poolEdgeOfTheDivinity from "../pool/edge-of-the-divinity.js";
 import _poolEladamriLordOfLeaves from "../pool/eladamri-lord-of-leaves.js";
 import _poolEliteArrester from "../pool/elite-arrester.js";
+import _poolElspethKnightErrant from "../pool/elspeth-knight-errant.js";
 import _poolElvenRiders from "../pool/elven-riders.js";
 import _poolElvishArchdruid from "../pool/elvish-archdruid.js";
 import _poolElvishArchers from "../pool/elvish-archers.js";
@@ -1094,6 +1095,7 @@ const shard: CardShard = {
     _poolEdgeOfTheDivinity,
     _poolEladamriLordOfLeaves,
     _poolEliteArrester,
+    _poolElspethKnightErrant,
     _poolElvenRiders,
     _poolElvishArchdruid,
     _poolElvishArchers,

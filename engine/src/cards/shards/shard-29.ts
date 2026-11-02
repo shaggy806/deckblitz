@@ -220,6 +220,7 @@ import _poolExdeathVoidWarlock from "../pool/exdeath-void-warlock.js";
 import _poolExpandedAnatomy from "../pool/expanded-anatomy.js";
 import _poolExpeditionDiviner from "../pool/expedition-diviner.js";
 import _poolExploreTheUnderdark from "../pool/explore-the-underdark.js";
+import _poolExplosiveRevelation from "../pool/explosive-revelation.js";
 import _poolExtractFromDarkness from "../pool/extract-from-darkness.js";
 import _poolExtricatorOfFlesh from "../pool/extricator-of-flesh.js";
 import _poolExtricatorOfSin from "../pool/extricator-of-sin.js";
@@ -1094,6 +1095,7 @@ const shard: CardShard = {
     _poolExpandedAnatomy,
     _poolExpeditionDiviner,
     _poolExploreTheUnderdark,
+    _poolExplosiveRevelation,
     _poolExtractFromDarkness,
     _poolExtricatorOfFlesh,
     _poolExtricatorOfSin,
