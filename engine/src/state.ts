@@ -3176,6 +3176,15 @@ export type AwaitingDecision =
       /** A cost's exile: the spell or ability on the stack this pays for,
        * which remembers the cards (`LastKnownRefs.exiledCost`). */
       readonly costExileFor?: ObjectId;
+      /** A mana ability's cost (Cadaverous Bloom's "Exile a card from your
+       * hand"), which never goes on the stack (rule 605.3b): what's needed to
+       * add its mana once this is answered. */
+      readonly thenManaAbility?: {
+        readonly source: ObjectId;
+        readonly abilityIndex: number;
+        readonly x: number;
+        readonly manaColors?: readonly ManaType[];
+      };
       /** For `destination: "exile-face-down"` (hideaway — rule 702.75a) and
        * `"exile"` (imprint, face up): the permanent, in the stint it's in,
        * the chosen cards are exiled with (rule 607.2a — `GameObject.exiledWith`). */

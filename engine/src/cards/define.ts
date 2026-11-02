@@ -3687,6 +3687,12 @@ export interface CardDefinition {
    */
   readonly additionalCost: {
     readonly sacrifice?: CardFilter;
+    /** `sacrifice`'s one chosen permanent is **exiled** instead — "As an
+     * additional cost to cast this spell, exile a creature you control"
+     * (Necrotic Fumes, Soul Exchange). Offered and named as a sacrifice is and
+     * read back as `"sacrificed"`, but it's no sacrifice: nothing stops or sees
+     * one (rule 701.21a). */
+    readonly exilesSacrifice?: true;
     readonly sacrificeCount?: number | "x";
     readonly sacrificeReduces?: number;
     readonly discard?: number | "x";
@@ -5103,6 +5109,7 @@ interface CardDraft {
   castModal?: CastModalSpec;
   additionalCost?: {
     readonly sacrifice?: CardFilter;
+    readonly exilesSacrifice?: true;
     readonly sacrificeCount?: number | "x";
     readonly sacrificeReduces?: number;
     readonly discard?: number | "x";

@@ -1263,7 +1263,7 @@ export type LegalAction =
       /** Present when casting this costs an additional sacrifice (rule 601.2f
        * — Harrow "sacrifice a land"): `choices` is every permanent that could
        * pay it. The driver picks one and echoes it as `sacrifice`. P8. */
-      readonly sacrifice?: { readonly choices: readonly ObjectId[] };
+      readonly sacrifice?: { readonly choices: readonly ObjectId[]; readonly exile?: true };
       /** A kickable spell (rule 702.33) is enumerated **twice**, once unkicked
        * and once with `kicked: true` and the kicker cost folded in — the same
        * "one entry per playable variant" shape `via` / `face` already use, so a
@@ -1461,7 +1461,7 @@ export type LegalAction =
       /** Present when the cost includes sacrificing a creature you control:
        * `choices` is every permanent that could be sacrificed to pay it. A
        * `"self"` sacrifice is implicit (no field) — the source is always used. */
-      readonly sacrifice?: { readonly choices: readonly ObjectId[] };
+      readonly sacrifice?: { readonly choices: readonly ObjectId[]; readonly exile?: true };
       /** Present when the cost taps other permanents ("Tap five untapped
        * Zombies you control") — see {@link TapCostOffer}. */
       readonly tapCost?: TapCostOffer;

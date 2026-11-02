@@ -1432,6 +1432,28 @@ export function parseCost(text) {
     } else if (part === "Exile ~ from your graveyard") extra.zone = "graveyard";
     else if (part === "Discard ~") extra.zone = "hand";
     else if (part === "Exile ~") cost.exileSelf = true;
+    // "Exile a card from your hand" (Cadaverous Bloom), "Exile a creature you
+    // control" (Food Chain: `sacrifice` paid by exile), "Exile an instant or
+    // sorcery spell you control" (Nivmagus Elemental), "Exile two creature
+    // cards from a single graveyard" (Night Soil).
+    else if (part === "Exile a card from your hand") cost.exileFromHand = { count: 1 };
+    else if ((m = /^Exile (?:an?|another) (.+?) spell you control$/.exec(part))) {
+      const filter = parseTypePhrase(m[1]);
+      if (filter === null || Object.keys(filter).length === 0) return null;
+      cost.exileSpell = { filter };
+    } else if (part === "Exile a spell you control") cost.exileSpell = {};
+    else if ((m = /^Exile (an?|another) (.+?) you control$/.exec(part))) {
+      const filter = parseTypePhrase(m[2]);
+      if (filter === null || Object.keys(filter).length === 0) return null;
+      cost.sacrifice = { filter: { ...filter, controlledBy: "you" } };
+      cost.exilesSacrifice = true;
+      if (m[1] === "another") extra.otherOnly = true;
+    } else if ((m = new RegExp(`^Exile ${N} (?:(.+?) )?cards from a single graveyard$`, "i").exec(part))) {
+      const count = numberOf(m[1]);
+      const filter = m[2] === undefined ? undefined : parseTypePhrase(m[2]);
+      if (typeof count !== "number" || filter === null || (filter !== undefined && Object.keys(filter).length === 0)) return null;
+      cost.exileFromGraveyard = { count, ...(filter !== undefined ? { filter } : {}), singleGraveyard: true };
+    }
     // "Exile the top card of your library" (Royal Herbalist), "the top two
     // cards" (Whirling Catapult).
     // "Exile a creature card from your graveyard": one, chosen as it's paid.
@@ -7457,6 +7479,12 @@ export function parseFace(face, ctx = {}) {
     }
     if (castable && (m = /^As an additional cost to cast ~, you may waterbend (\{\d+\})\.$/.exec(line))) {
       out.kicker = { cost: m[1], keyword: "waterbend" };
+      continue;
+    }
+    // "Exile a creature you control" (Necrotic Fumes, Soul Exchange): named as a
+    // sacrifice is, and exiled.
+    if (castable && /^As an additional cost to cast ~, exile a creature you control\.$/.test(line)) {
+      out.additionalCost = { sacrifice: { type: "creature" }, exilesSacrifice: true };
       continue;
     }
     // "Exile two creature cards from your graveyard" (the Skaabs): which,

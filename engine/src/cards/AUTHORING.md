@@ -3409,6 +3409,17 @@ tapOthers?, untap? }`.
 - `exileFromGraveyard: { count: 1, filter?, fromTop: true }` — "Exile **the top**
   [creature] card of your graveyard" (Alms, Necratog; rule 404.2): no choice, the
   first match down from the top of the pile.
+- `sacrifice: { filter }, exilesSacrifice: true` — "Exile a creature you control" (Food Chain, City of
+  Shadows; `otherOnly` for "another"): offered and named as a sacrifice is, read back as
+  `"sacrificed"` (`manaValueOf`, the `sacrificed` condition), but exiled: no sacrifice event, and
+  what can't be sacrificed still pays. On a spell, `additionalCost: { sacrifice, exilesSacrifice: true }`
+  (Necrotic Fumes). `exile-chosen-costs.test.ts`.
+- `exileFromHand: { count, filter? }` — "Exile a card from your hand" (Cadaverous Bloom), asked with
+  a `choose-from-zone`; a mana ability adds its mana with the answer (rule 605.3b).
+- `exileSpell: { filter? }` — "Exile an instant or sorcery spell you control" (Nivmagus Elemental):
+  a spell or copy of yours off the stack, exiled and not countered. Not on a mana ability.
+- `exileFromGraveyard: { count, filter?, singleGraveyard: true }` — "Exile two creature cards from a
+  single graveyard" (Night Soil): any player's holding enough, all from one.
 - `exileFromGraveyard: { count, filter? }` — "Exile two cards from your
   graveyard" (Varina, Lich Queen; Mines of Moria), "Exile a creature card
   from your graveyard" (Moorland Haunt: `filter: { type: "creature" }`). The

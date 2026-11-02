@@ -2810,6 +2810,22 @@ needing their own keys or checks: Curse of Hospitality's "creatures attacking en
 player", and the double-faced Radiant Grace, Faithbound Judge and Accursed Witch, for
 `author-freed`; the two `amount:curses-attached-to-player` Curses wait on that key.
 
+### Costs that exile a chosen object from a named place — built 2026-11-01
+
+The group `cost:exile-card-from-hand` (+ `cost:exile-creature-cost`,
+`cost:exile-from-single-graveyard`, `cost:exile-spell-you-control`), no new decision. A
+permanent you control is `sacrifice` + `exilesSacrifice` (`AbilityCost` and `additionalCost`):
+the same offer and action field (the offer's `sacrifice.exile` says so to the client), read
+back as `"sacrificed"`, but no sacrifice event and what can't be sacrificed still pays.
+`exileFromHand { count, filter? }` asks with `choose-from-zone`; a mana ability waits for the
+answer and adds its mana then (`thenManaAbility`, rule 605.3b). `exileFromGraveyard.singleGraveyard`
+is any player's graveyard holding enough, all from one (a `share` rule, a card's tag its owner).
+`exileSpell { filter? }` takes a spell or copy of yours off the stack. Proving: Food Chain, City of
+Shadows, Necrotic Fumes, Cadaverous Bloom, Night Soil, Nivmagus Elemental. Left on the keys' cards:
+Holistic Wisdom's `condition:shares-card-type-with-cost-exiled`, Curie's copy of the exiled
+creature and base power, Soul Exchange's +2/+2 counter (no such counter's P/T), Synthesis Pod's
+reveal-until from the exiled spell's mana value, Fear of Abduction's return to hand.
+
 ### Alternative costs paid in life or a life change — built 2026-11-01
 
 The group `cost:alt-cost-opponent-gains-life` (+ `cost:alt-cost-pay-life-equal-mana-value`,

@@ -2052,6 +2052,28 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     });
   });
 
+  it("costs that exile a chosen object: Food Chain, Cadaverous Bloom, Night Soil, Nivmagus, Necrotic Fumes", () => {
+    expect(parseCost("Exile a creature you control").cost).toMatchObject({
+      sacrifice: { filter: { type: "creature", controlledBy: "you" } },
+      exilesSacrifice: true,
+    });
+    expect(parseCost("Exile another nontoken artifact creature you control").extra.otherOnly).toBe(true);
+    expect(parseCost("Exile a card from your hand").cost.exileFromHand).toEqual({ count: 1 });
+    expect(parseCost("{1}, Exile two creature cards from a single graveyard").cost.exileFromGraveyard).toEqual({
+      count: 2,
+      filter: { type: "creature" },
+      singleGraveyard: true,
+    });
+    expect(parseCost("Exile an instant or sorcery spell you control").cost.exileSpell).toEqual({
+      filter: { typesAnyOf: ["instant", "sorcery"] },
+    });
+    expect(parseCost("Exile a spell you control").cost.exileSpell).toEqual({});
+    expect(face("As an additional cost to cast this spell, exile a creature you control.\nExile target creature or planeswalker.", "Sorcery").additionalCost).toEqual({
+      sacrifice: { type: "creature" },
+      exilesSacrifice: true,
+    });
+  });
+
   it("a life change rather than pay (rule 118.9): Snuff Out, Invigorate, Reverent Silence, the Demon, the Bloodcaster", () => {
     const forest = { kind: "controls", filter: { subtype: "Forest" }, atLeast: 1 };
     expect(face("If you control a Swamp, you may pay 4 life rather than pay this spell's mana cost.", "Instant").alternativeCost).toEqual({

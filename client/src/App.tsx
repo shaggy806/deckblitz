@@ -5632,7 +5632,8 @@ function Table({
     controls = (
       <div className="controls">
         <span>
-          {pendingSac.cardName} — choose {/^[aeiou]/i.test(noun) ? 'an' : 'a'} {noun} to sacrifice
+          {pendingSac.cardName} — choose {/^[aeiou]/i.test(noun) ? 'an' : 'a'} {noun} to{' '}
+          {pendingSac.sacrifice.exile === true ? 'exile' : 'sacrifice'}
         </span>
         <button type="button" onClick={() => setPendingSac(null)}>
           Cancel

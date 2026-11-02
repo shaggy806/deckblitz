@@ -406,7 +406,41 @@ export interface AbilityCost {
    * Necratog — rule 404.2): no choice, the first `count` matching cards down
    * from the top of the pile.
    */
-  readonly exileFromGraveyard?: { readonly count: number | "x"; readonly filter?: CardFilter; readonly fromTop?: true };
+  readonly exileFromGraveyard?: {
+    readonly count: number | "x";
+    readonly filter?: CardFilter;
+    readonly fromTop?: true;
+    /** "From a single graveyard" (Night Soil's "Exile two creature cards from a
+     * single graveyard"): any player's, all `count` from the same one (its
+     * ruling: payable only if some graveyard has them). */
+    readonly singleGraveyard?: true;
+  };
+  /**
+   * `sacrifice`'s one chosen permanent is **exiled** instead — "Exile a
+   * creature you control" (Food Chain, City of Shadows). Offered and named on
+   * the action just as a sacrifice is, and read back as `"sacrificed"` (its
+   * mana value, "if it was a …") since the effect's "the exiled creature" is
+   * the same last-known read. But it's no sacrifice: nothing stops or sees one
+   * (rule 701.21a), and it doesn't die. Not with `"self"`, `"granter"` or a
+   * cost of several.
+   */
+  readonly exilesSacrifice?: true;
+  /**
+   * "Exile a card from your hand" (Cadaverous Bloom, Holistic Wisdom): `count`
+   * cards matching `filter`, chosen as it's paid with a `choose-from-zone`
+   * (`destination: "exile"`), or taken with no choice to make. A mana ability
+   * waits for the answer and adds its mana then (rule 605.3b), as a sacrifice
+   * of several does; any other goes on the stack first, as `exileFromGraveyard`.
+   */
+  readonly exileFromHand?: { readonly count: number; readonly filter?: CardFilter };
+  /**
+   * "Exile an instant or sorcery spell you control" (Nivmagus Elemental, Synthesis
+   * Pod): a spell or a copy on the stack, its controller's, matching `filter`.
+   * It's exiled, not countered: one that can't be countered goes as well (the
+   * ruling), and it doesn't resolve. Paid as `exileFromGraveyard` is, on the
+   * stack, so never on a mana ability.
+   */
+  readonly exileSpell?: { readonly filter?: CardFilter };
   /**
    * Put `count` cards an opponent owns from exile into their owners'
    * graveyards as part of the cost — a processor's "{2}{U}, Put a card an
