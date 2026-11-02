@@ -734,9 +734,13 @@ export interface ActivatedAbility {
    * creature you control." `condition` gates it, read from the source's
    * side as `selfCostReduction`'s is — Sewer Crocodile's "costs {3} less to
    * activate **if** there are five or more mana values among cards in your
-   * graveyard". */
+   * graveyard". `reduceColored` is the coloured part of what it takes off, as
+   * a spell's: Flying Drone's "costs {1}{U} less" is `reduceGeneric: 1`,
+   * `reduceColored: "{U}"`. A symbol the cost hasn't comes off its generic
+   * part (rule 118.7c). */
   readonly costReduction?: {
     readonly reduceGeneric: CostReductionAmount;
+    readonly reduceColored?: string;
     readonly condition?: StaticCondition;
   };
   /**

@@ -3790,6 +3790,11 @@ carries; several compound. An "any colour" unit becomes `multiplier` of
   ability itself (mirrors `CardDefinition.selfCostReduction`, but for an
   activated ability's own cost) — the Kamigawa Channel lands' "This ability
   costs {1} less to activate for each legendary creature you control."
+  `condition` gates it, read as it's activated from the source's side: "… if
+  you're the monarch" (Crown of Gondor, on an `equip()`), "during your turn"
+  (Hylda's Crown of Winter), and from the graveyard (Razorlash Transmogrant).
+  `reduceColored` is the coloured part: Flying Drone's "{1}{U} less" is
+  `reduceGeneric: 1, reduceColored: "{U}"` (rule 118.7).
 - `targetCostReduction: { filter, reduceGeneric, count? }` — "This ability
   costs {N} less to activate if it targets [`count`, default one, objects
   matching `filter`]" (the spell's `targetCostReduction`, for an ability):

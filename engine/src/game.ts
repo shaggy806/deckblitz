@@ -18996,6 +18996,7 @@ export class Game {
       generic = Math.max(Math.min(generic, floor), generic - mod.reduceGenericLeavingOne);
     }
     const reducer = this.state.objects[sourceId];
+    const colored: ColoredReduction[] = [];
     if (
       ability.costReduction !== undefined &&
       (ability.costReduction.condition === undefined ||
@@ -19005,6 +19006,10 @@ export class Game {
       // Its own source: "costs {1} less for each page counter on this" (Diary
       // of Dreams) reads that permanent's counters.
       generic -= this.costReductionAmount(ability.costReduction.reduceGeneric, player, sourceId);
+      // "Costs {1}{U} less" (Flying Drone): a pip of its colour, else generic.
+      if (ability.costReduction.reduceColored !== undefined) {
+        colored.push(coloredReductionOf(ability.costReduction.reduceColored, false));
+      }
     }
     // "Costs {N} less to activate if it targets …" (Wayta, Trainer Prodigy).
     if (ability.targetCostReduction !== undefined) {
@@ -19021,7 +19026,7 @@ export class Game {
       if (earned) generic -= ability.targetCostReduction.reduceGeneric;
     }
     generic -= mod.reduceGeneric;
-    const cost: ManaCost = {
+    const whole: ManaCost = {
       colored: parsed.colored,
       colorless: parsed.colorless,
       snow: parsed.snow,
@@ -19029,6 +19034,7 @@ export class Game {
       x: 0,
       hybrid: parsed.hybrid,
     };
+    const cost = colored.length > 0 ? reduceManaCost(whole, 0, colored) : whole;
     return { cost: ability.powerUp === true ? this.poweredUp(cost, sourceId) : cost, chosenX };
   }
 

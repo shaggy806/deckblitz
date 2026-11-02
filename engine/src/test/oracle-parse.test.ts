@@ -278,6 +278,41 @@ describe("skipping a turn and what's said about an extra one", () => {
   });
 });
 
+describe("an activated ability's own reduction, under a condition", () => {
+  const face = (type_line: string, oracle_text: string) =>
+    parseFace({ name: "Test", type_line, mana_cost: "{1}", oracle_text }, { tokenFor: () => null });
+
+  it.each([
+    ["during your turn", { kind: "your-turn" }],
+    ["if you're the monarch", { kind: "monarch", who: "you" }],
+    ["if you have one or fewer cards in hand", { kind: "hand-size", atMost: 1 }],
+    ["if you've drawn three or more cards this turn", { kind: "turn-stat", stat: "cards-drawn", who: "you", atLeast: 3 }],
+    ["if you control a legendary creature", { kind: "controls", filter: { type: "creature", supertype: "legendary" }, atLeast: 1 }],
+  ])("costs {2} less to activate %s", (clause, condition) => {
+    const thing = face("Artifact", `{3}, {T}: Draw a card. This ability costs {2} less to activate ${clause}.`);
+    expect(thing.activated[0].costReduction).toEqual({ reduceGeneric: 2, condition });
+    expect(thing.activated[0].effect).toEqual({ kind: "draw", amount: 1 });
+  });
+
+  it("the coloured part, before an 'Activate only'", () => {
+    const kami = face(
+      "Creature — Spirit",
+      "{4}{B}: Draw a card. This ability costs {4}{B} less to activate if you've drawn three or more cards this turn. Activate only once each turn.",
+    );
+    expect(kami.activated[0].costReduction).toMatchObject({ reduceGeneric: 4, reduceColored: "{B}" });
+    expect(kami.activated[0].oncePerTurn).toBe(true);
+  });
+
+  it("an equip, and a condition it can't read stays for a person", () => {
+    const shield = face("Artifact — Equipment", "Equip {4}. This ability costs {3} less to activate if you're the monarch.");
+    expect(shield.activated[0].cost.mana).toBe("{4}");
+    expect(shield.activated[0].costReduction).toEqual({ reduceGeneric: 3, condition: { kind: "monarch", who: "you" } });
+    const odd = face("Artifact", "{3}: Draw a card. This ability costs {2} less to activate if the moon is full.");
+    expect(odd.activated.length === 0 || odd.activated[0].costReduction === undefined).toBe(true);
+    expect(odd.complete).toBe(false);
+  });
+});
+
 describe("the players a sentence names by another target, the Aura's host and the trigger", () => {
   const face = (type_line: string, oracle_text: string) =>
     parseFace({ name: "Test", type_line, mana_cost: "{1}", oracle_text }, { tokenFor: () => null });

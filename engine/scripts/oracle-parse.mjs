@@ -6200,6 +6200,54 @@ function graveyardArrivalAt(sentences, i, ctx) {
 }
 
 /**
+ * "… This ability costs {1}{U} less to activate if …" on an activated ability's
+ * line: the line without it and the ability's `costReduction`, or `null` when
+ * there's none or the condition isn't one read here (the sentence then stays,
+ * for a person).
+ */
+function abilityReductionOf(line) {
+  const m = / This ability costs ((?:\{[^}]+\})+) less to activate (during your turn|if [^.]+)\.( Activate [^.]+\.)?$/.exec(line);
+  if (m === null) return null;
+  let reduceGeneric = 0;
+  let reduceColored = "";
+  for (const symbol of m[1].match(/\{[^}]+\}/g)) {
+    if (/^\{\d+\}$/.test(symbol)) reduceGeneric += Number(symbol.slice(1, -1));
+    else if (/^\{[WUBRG]\}$/.test(symbol)) reduceColored += symbol;
+    else return null;
+  }
+  const condition = abilityReductionCondition(m[2]);
+  if (condition === undefined) return null;
+  return {
+    rest: line.slice(0, m.index) + (m[3] ?? ""),
+    costReduction: { reduceGeneric, ...(reduceColored !== "" ? { reduceColored } : {}), condition },
+  };
+}
+
+function abilityReductionCondition(clause) {
+  if (clause === "during your turn") return { kind: "your-turn" };
+  if (clause === "if you're the monarch") return { kind: "monarch", who: "you" };
+  let m;
+  if ((m = new RegExp(`^if you have ${N} or fewer cards in hand$`, "i").exec(clause))) {
+    const atMost = numberOf(m[1]);
+    return typeof atMost === "number" ? { kind: "hand-size", atMost } : undefined;
+  }
+  if ((m = new RegExp(`^if you've drawn ${N} or more cards this turn$`, "i").exec(clause))) {
+    const atLeast = numberOf(m[1]);
+    return typeof atLeast === "number" ? { kind: "turn-stat", stat: "cards-drawn", who: "you", atLeast } : undefined;
+  }
+  if ((m = new RegExp(`^if an opponent controls ${N} or more (.+)$`, "i").exec(clause))) {
+    const atLeast = numberOf(m[1]);
+    const filter = parseTypePhrase(m[2]);
+    return typeof atLeast === "number" && filter !== null ? { kind: "opponent-controls", filter, atLeast } : undefined;
+  }
+  if ((m = /^if you control an? (.+)$/i.exec(clause))) {
+    const filter = parseTypePhrase(m[1]);
+    return filter !== null ? { kind: "controls", filter, atLeast: 1 } : undefined;
+  }
+  return undefined;
+}
+
+/**
  * "Each opponent discards a card. Each opponent who can't loses 3 life."
  * (Entropic Battlecruiser), "… For each opponent who can't, you gain 4 life."
  * (Cruel Grimnarch), "Each player sacrifices a creature or planeswalker of
@@ -7671,8 +7719,10 @@ export function parseFace(face, ctx = {}) {
       out.enchant = targetOf(`target ${m[1]}`);
       continue;
     }
-    if ((m = /^Equip ((?:\{[^}]+\})+)$/.exec(line))) {
+    const equipReduced = /^Equip \{/.test(line) ? abilityReductionOf(line) : null;
+    if ((m = /^Equip ((?:\{[^}]+\})+)\.?$/.exec(equipReduced?.rest ?? line))) {
       out.activated.push({
+        ...(equipReduced !== null ? { costReduction: equipReduced.costReduction } : {}),
         cost: { mana: m[1], tap: false },
         targets: ["creature-you-control"],
         effect: { kind: "attach", target: 0 },
@@ -8617,6 +8667,13 @@ export function parseFace(face, ctx = {}) {
       if (restrictions.includes("as a sorcery")) ability.sorcerySpeed = true;
       if (restrictions.includes("once each turn")) ability.oncePerTurn = true;
       if (restrictions.includes("during your turn")) ability.condition = { kind: "your-turn" };
+      {
+        const reduced = abilityReductionOf(rest);
+        if (reduced !== null) {
+          rest = reduced.rest;
+          ability.costReduction = reduced.costReduction;
+        }
+      }
       // "Activate no more than twice each turn" (Pit Imp — rule 602.5b), and
       // "no more times each turn than the number of snow Swamps you control"
       // (Withering Wisps): `timesEachTurn`, a number or a count.

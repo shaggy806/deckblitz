@@ -3680,3 +3680,17 @@ Drifting Death. Partly covered: Fall of the Impostor still needs an exile chosen
 targeted, among a target opponent's creatures; Curse of Thirst and Curse of Surveillance
 a count of Curses attached; Overencumbered its `effect:pay-or-cant-attack-you`.
 `author-freed` narrows those.
+
+### An activated ability's own reduction, under a condition — built 2026-11-01
+
+The need-keys Phase 2 family `cost:ability-cost-modification`, its top two units.
+`costReduction.condition` had landed with Sewer Crocodile; new here are its
+`reduceColored` (rule 118.7, through `reduceManaCost`) and the scaffolder reading "This
+ability costs {N} less to activate if …", on an equip line too. `anyZone` and
+`hostOfSource` already covered `cost:ability-cost-modification-all-zones` and
+`static:ability-cost-increase-attached`. No new decision. Proving cards: Flying Drone,
+Kami of Jealous Thirst, Esquire of the King, Crown of Gondor, Razorlash Transmogrant,
+Hylda's Crown of Winter, Suppression Field, Oppressive Rays. Thaumaton Torpedo still
+waits on `stat:attacked-with-filter-this-turn`. Left in the family: `cost:first-equip-each-turn-free`
+and `cost:power-up-alternative-cost` need a {0} that replaces a whole cost, and an equip
+can cost life, not mana, so the mana path alone wouldn't be faithful.
