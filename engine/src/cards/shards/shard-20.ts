@@ -48,6 +48,7 @@ import _poolArmoredWarhorse from "../pool/armored-warhorse.js";
 import _poolArmoryOfIroas from "../pool/armory-of-iroas.js";
 import _poolArniRenownedChampion from "../pool/arni-renowned-champion.js";
 import _poolArtfulManeuver from "../pool/artful-maneuver.js";
+import _poolAsForetold from "../pool/as-foretold.js";
 import _poolAscendedLawmage from "../pool/ascended-lawmage.js";
 import _poolAshiokSculptorOfFears from "../pool/ashiok-sculptor-of-fears.js";
 import _poolAshlingRimebound from "../pool/ashling-rimebound.js";
@@ -984,6 +985,7 @@ const shard: CardShard = {
     _poolArmoryOfIroas,
     _poolArniRenownedChampion,
     _poolArtfulManeuver,
+    _poolAsForetold,
     _poolAscendedLawmage,
     _poolAshiokSculptorOfFears,
     _poolAshlingRimebound,

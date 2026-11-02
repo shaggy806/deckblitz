@@ -902,6 +902,7 @@ import _poolZukosExile from "../pool/zukos-exile.js";
 import _tokens11BlackBirdTokenTheRavenMan from "../tokens/1-1-black-bird-token-the-raven-man.js";
 import _tokensBeastToken55Trample from "../tokens/beast-token-5-5-trample.js";
 import _tokensBlueSphinxToken44Flying from "../tokens/blue-sphinx-token-4-4-flying.js";
+import _tokensDinosaurCatToken from "../tokens/dinosaur-cat-token.js";
 import _tokensHeartwoodToken from "../tokens/heartwood-token.js";
 import _tokensHumanNobleToken from "../tokens/human-noble-token.js";
 import _tokensJumblebones from "../tokens/jumblebones.js";
@@ -1818,6 +1819,7 @@ const shard: CardShard = {
     _tokens11BlackBirdTokenTheRavenMan,
     _tokensBeastToken55Trample,
     _tokensBlueSphinxToken44Flying,
+    _tokensDinosaurCatToken,
     _tokensHeartwoodToken,
     _tokensHumanNobleToken,
     _tokensJumblebones,

@@ -533,6 +533,7 @@ import _poolOgreShaman from "../pool/ogre-shaman.js";
 import _poolOjutaiMonument from "../pool/ojutai-monument.js";
 import _poolOmegaMyr from "../pool/omega-myr.js";
 import _poolOneWithNature from "../pool/one-with-nature.js";
+import _poolOneWithTheMultiverse from "../pool/one-with-the-multiverse.js";
 import _poolOneWithTheWind from "../pool/one-with-the-wind.js";
 import _poolOniCultAnvil from "../pool/oni-cult-anvil.js";
 import _poolOnulet from "../pool/onulet.js";
@@ -942,6 +943,7 @@ import _tokensPlaguebearerOfNurgle from "../tokens/plaguebearer-of-nurgle.js";
 import _tokensRobotHeroToken from "../tokens/robot-hero-token.js";
 import _tokensRobotWarriorToken from "../tokens/robot-warrior-token.js";
 import _tokensShapeshifterToken from "../tokens/shapeshifter-token.js";
+import _tokensSharkTokenXXFlying from "../tokens/shark-token-x-x-flying.js";
 import _tokensSoldierArtifactToken from "../tokens/soldier-artifact-token.js";
 import _tokensTyranidToken55 from "../tokens/tyranid-token-5-5.js";
 import _tokensVampireTokenEdgarCharmedGroomEdgarMarkovsCoffin from "../tokens/vampire-token-edgar-charmed-groom-edgar-markovs-coffin.js";
@@ -1483,6 +1485,7 @@ const shard: CardShard = {
     _poolOjutaiMonument,
     _poolOmegaMyr,
     _poolOneWithNature,
+    _poolOneWithTheMultiverse,
     _poolOneWithTheWind,
     _poolOniCultAnvil,
     _poolOnulet,
@@ -1894,6 +1897,7 @@ const shard: CardShard = {
     _tokensRobotHeroToken,
     _tokensRobotWarriorToken,
     _tokensShapeshifterToken,
+    _tokensSharkTokenXXFlying,
     _tokensSoldierArtifactToken,
     _tokensTyranidToken55,
     _tokensVampireTokenEdgarCharmedGroomEdgarMarkovsCoffin,

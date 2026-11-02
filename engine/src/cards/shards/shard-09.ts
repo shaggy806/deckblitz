@@ -804,6 +804,7 @@ import _poolTimeStretch from "../pool/time-stretch.js";
 import _poolTinderWall from "../pool/tinder-wall.js";
 import _poolTitaniasBoon from "../pool/titanias-boon.js";
 import _poolTitansRevenge from "../pool/titans-revenge.js";
+import _poolTlincalliHunter from "../pool/tlincalli-hunter.js";
 import _poolTocasiaDigSiteMentor from "../pool/tocasia-dig-site-mentor.js";
 import _poolTocasiasWelcome from "../pool/tocasias-welcome.js";
 import _poolTombOfHorrorsAdventurer from "../pool/tomb-of-horrors-adventurer.js";
@@ -1720,6 +1721,7 @@ const shard: CardShard = {
     _poolTinderWall,
     _poolTitaniasBoon,
     _poolTitansRevenge,
+    _poolTlincalliHunter,
     _poolTocasiaDigSiteMentor,
     _poolTocasiasWelcome,
     _poolTombOfHorrorsAdventurer,

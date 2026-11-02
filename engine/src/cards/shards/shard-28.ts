@@ -489,6 +489,7 @@ import _poolNecrobite from "../pool/necrobite.js";
 import _poolNestingBot from "../pool/nesting-bot.js";
 import _poolNetherbornAltar from "../pool/netherborn-altar.js";
 import _poolNevermore from "../pool/nevermore.js";
+import _poolNewPerspectives from "../pool/new-perspectives.js";
 import _poolNezumiProwler from "../pool/nezumi-prowler.js";
 import _poolNightguardPatrol from "../pool/nightguard-patrol.js";
 import _poolNightmareUnmaking from "../pool/nightmare-unmaking.js";
@@ -1386,6 +1387,7 @@ const shard: CardShard = {
     _poolNestingBot,
     _poolNetherbornAltar,
     _poolNevermore,
+    _poolNewPerspectives,
     _poolNezumiProwler,
     _poolNightguardPatrol,
     _poolNightmareUnmaking,

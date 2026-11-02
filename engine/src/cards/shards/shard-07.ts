@@ -598,6 +598,7 @@ import _poolRelicOfLegends from "../pool/relic-of-legends.js";
 import _poolRepositorySkaab from "../pool/repository-skaab.js";
 import _poolRestoreWithEmpathy from "../pool/restore-with-empathy.js";
 import _poolResurrectionOrb from "../pool/resurrection-orb.js";
+import _poolRetrievePrey from "../pool/retrieve-prey.js";
 import _poolReturnToNature from "../pool/return-to-nature.js";
 import _poolReverberation from "../pool/reverberation.js";
 import _poolRevokeExistence from "../pool/revoke-existence.js";
@@ -1499,6 +1500,7 @@ const shard: CardShard = {
     _poolRepositorySkaab,
     _poolRestoreWithEmpathy,
     _poolResurrectionOrb,
+    _poolRetrievePrey,
     _poolReturnToNature,
     _poolReverberation,
     _poolRevokeExistence,

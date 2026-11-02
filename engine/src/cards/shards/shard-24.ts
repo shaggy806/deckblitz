@@ -25,6 +25,7 @@ import _poolAlaniaDivergentStorm from "../pool/alania-divergent-storm.js";
 import _poolAlchemistsApprentice from "../pool/alchemists-apprentice.js";
 import _poolAlisaieLeveilleur from "../pool/alisaie-leveilleur.js";
 import _poolAlleyAssailant from "../pool/alley-assailant.js";
+import _poolAluren from "../pool/aluren.js";
 import _poolAncestorsAid from "../pool/ancestors-aid.js";
 import _poolAncestorsChosen from "../pool/ancestors-chosen.js";
 import _poolAncestralKnowledge from "../pool/ancestral-knowledge.js";
@@ -543,6 +544,7 @@ import _poolRaggedShortSpear from "../pool/ragged-short-spear.js";
 import _poolRakdosLordOfRiots from "../pool/rakdos-lord-of-riots.js";
 import _poolRamosianLieutenant from "../pool/ramosian-lieutenant.js";
 import _poolRampagingFerocidon from "../pool/rampaging-ferocidon.js";
+import _poolRampagingWarMammoth from "../pool/rampaging-war-mammoth.js";
 import _poolRampagingWerewolf from "../pool/rampaging-werewolf.js";
 import _poolRankRat from "../pool/rank-rat.js";
 import _poolRapaciousOne from "../pool/rapacious-one.js";
@@ -799,6 +801,7 @@ import _poolVigilantMartyr from "../pool/vigilant-martyr.js";
 import _poolVildinPackOutcast from "../pool/vildin-pack-outcast.js";
 import _poolVineMare from "../pool/vine-mare.js";
 import _poolViridianClaw from "../pool/viridian-claw.js";
+import _poolVisionSpectralSynthezoid from "../pool/vision-spectral-synthezoid.js";
 import _poolVituGhaziGuildmage from "../pool/vitu-ghazi-guildmage.js";
 import _poolVividMeadow from "../pool/vivid-meadow.js";
 import _poolVividRevival from "../pool/vivid-revival.js";
@@ -822,6 +825,7 @@ import _poolWaterWings from "../pool/water-wings.js";
 import _poolWeaponsVendor from "../pool/weapons-vendor.js";
 import _poolWeaselbackRedcap from "../pool/weaselback-redcap.js";
 import _poolWeaverOfBlossoms from "../pool/weaver-of-blossoms.js";
+import _poolWebstrikeElite from "../pool/webstrike-elite.js";
 import _poolWerefoxBodyguard from "../pool/werefox-bodyguard.js";
 import _poolWhetstone from "../pool/whetstone.js";
 import _poolWhirOfInvention from "../pool/whir-of-invention.js";
@@ -899,6 +903,7 @@ const shard: CardShard = {
     _poolAlchemistsApprentice,
     _poolAlisaieLeveilleur,
     _poolAlleyAssailant,
+    _poolAluren,
     _poolAncestorsAid,
     _poolAncestorsChosen,
     _poolAncestralKnowledge,
@@ -1417,6 +1422,7 @@ const shard: CardShard = {
     _poolRakdosLordOfRiots,
     _poolRamosianLieutenant,
     _poolRampagingFerocidon,
+    _poolRampagingWarMammoth,
     _poolRampagingWerewolf,
     _poolRankRat,
     _poolRapaciousOne,
@@ -1673,6 +1679,7 @@ const shard: CardShard = {
     _poolVildinPackOutcast,
     _poolVineMare,
     _poolViridianClaw,
+    _poolVisionSpectralSynthezoid,
     _poolVituGhaziGuildmage,
     _poolVividMeadow,
     _poolVividRevival,
@@ -1696,6 +1703,7 @@ const shard: CardShard = {
     _poolWeaponsVendor,
     _poolWeaselbackRedcap,
     _poolWeaverOfBlossoms,
+    _poolWebstrikeElite,
     _poolWerefoxBodyguard,
     _poolWhetstone,
     _poolWhirOfInvention,

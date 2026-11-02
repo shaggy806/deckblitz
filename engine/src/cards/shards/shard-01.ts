@@ -182,6 +182,7 @@ import _poolDuskSight from "../pool/dusk-sight.js";
 import _poolDutifulReplicator from "../pool/dutiful-replicator.js";
 import _poolDwarfholdChampion from "../pool/dwarfhold-champion.js";
 import _poolEagleVision from "../pool/eagle-vision.js";
+import _poolEdgeOfAutumn from "../pool/edge-of-autumn.js";
 import _poolEldraziMimic from "../pool/eldrazi-mimic.js";
 import _poolEldraziMonument from "../pool/eldrazi-monument.js";
 import _poolEldritchEvolution from "../pool/eldritch-evolution.js";
@@ -484,6 +485,7 @@ import _poolNyxbornWolf from "../pool/nyxborn-wolf.js";
 import _poolOgnis from "../pool/ognis.js";
 import _poolOgreTaskmaster from "../pool/ogre-taskmaster.js";
 import _poolOminousCemetery from "../pool/ominous-cemetery.js";
+import _poolOmnipresence from "../pool/omnipresence.js";
 import _poolOpalGargoyle from "../pool/opal-gargoyle.js";
 import _poolOphidian from "../pool/ophidian.js";
 import _poolOrdruunVeteran from "../pool/ordruun-veteran.js";
@@ -1037,6 +1039,7 @@ const shard: CardShard = {
     _poolDutifulReplicator,
     _poolDwarfholdChampion,
     _poolEagleVision,
+    _poolEdgeOfAutumn,
     _poolEldraziMimic,
     _poolEldraziMonument,
     _poolEldritchEvolution,
@@ -1339,6 +1342,7 @@ const shard: CardShard = {
     _poolOgnis,
     _poolOgreTaskmaster,
     _poolOminousCemetery,
+    _poolOmnipresence,
     _poolOpalGargoyle,
     _poolOphidian,
     _poolOrdruunVeteran,

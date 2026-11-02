@@ -263,6 +263,7 @@ import _poolGallifreyStands from "../pool/gallifrey-stands.js";
 import _poolGanaxAstralHunter from "../pool/ganax-astral-hunter.js";
 import _poolGarrisonGriffin from "../pool/garrison-griffin.js";
 import _poolGastalBlockbuster from "../pool/gastal-blockbuster.js";
+import _poolGaviNestWarden from "../pool/gavi-nest-warden.js";
 import _poolGavonyTownship from "../pool/gavony-township.js";
 import _poolGazeOfGranite from "../pool/gaze-of-granite.js";
 import _poolGazeOfPain from "../pool/gaze-of-pain.js";
@@ -623,6 +624,7 @@ import _poolServantOfVolrath from "../pool/servant-of-volrath.js";
 import _poolSethronHurloonGeneral from "../pool/sethron-hurloon-general.js";
 import _poolSewerRats from "../pool/sewer-rats.js";
 import _poolShaleskinBruiser from "../pool/shaleskin-bruiser.js";
+import _poolSharkTyphoon from "../pool/shark-typhoon.js";
 import _poolSheoldredTheApocalypse from "../pool/sheoldred-the-apocalypse.js";
 import _poolSilumgarTheDriftingDeath from "../pool/silumgar-the-drifting-death.js";
 import _poolSilverbackApe from "../pool/silverback-ape.js";
@@ -1101,6 +1103,7 @@ const shard: CardShard = {
     _poolGanaxAstralHunter,
     _poolGarrisonGriffin,
     _poolGastalBlockbuster,
+    _poolGaviNestWarden,
     _poolGavonyTownship,
     _poolGazeOfGranite,
     _poolGazeOfPain,
@@ -1461,6 +1464,7 @@ const shard: CardShard = {
     _poolSethronHurloonGeneral,
     _poolSewerRats,
     _poolShaleskinBruiser,
+    _poolSharkTyphoon,
     _poolSheoldredTheApocalypse,
     _poolSilumgarTheDriftingDeath,
     _poolSilverbackApe,
