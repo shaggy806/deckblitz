@@ -70,6 +70,7 @@ import _poolBelligerentWhiptail from "../pool/belligerent-whiptail.js";
 import _poolBenalishHonorGuard from "../pool/benalish-honor-guard.js";
 import _poolBesottedKnight from "../pool/besotted-knight.js";
 import _poolBetorAncestorsVoice from "../pool/betor-ancestors-voice.js";
+import _poolBioengineeredFuture from "../pool/bioengineered-future.js";
 import _poolBirthingHulk from "../pool/birthing-hulk.js";
 import _poolBitterbowSharpshooters from "../pool/bitterbow-sharpshooters.js";
 import _poolBlackBoltInhumanKing from "../pool/black-bolt-inhuman-king.js";
@@ -938,6 +939,7 @@ const shard: CardShard = {
     _poolBenalishHonorGuard,
     _poolBesottedKnight,
     _poolBetorAncestorsVoice,
+    _poolBioengineeredFuture,
     _poolBirthingHulk,
     _poolBitterbowSharpshooters,
     _poolBlackBoltInhumanKing,

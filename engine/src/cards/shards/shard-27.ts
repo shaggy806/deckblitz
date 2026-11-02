@@ -97,6 +97,7 @@ import _poolBrigidHeroOfKinsbaile from "../pool/brigid-hero-of-kinsbaile.js";
 import _poolBrilliantPlan from "../pool/brilliant-plan.js";
 import _poolButchersGlee from "../pool/butchers-glee.js";
 import _poolCabarettiInitiate from "../pool/cabaretti-initiate.js";
+import _poolCallForthTheTempest from "../pool/call-forth-the-tempest.js";
 import _poolCallToTheNetherworld from "../pool/call-to-the-netherworld.js";
 import _poolCancel from "../pool/cancel.js";
 import _poolCandlelightVigil from "../pool/candlelight-vigil.js";
@@ -952,6 +953,7 @@ const shard: CardShard = {
     _poolBrilliantPlan,
     _poolButchersGlee,
     _poolCabarettiInitiate,
+    _poolCallForthTheTempest,
     _poolCallToTheNetherworld,
     _poolCancel,
     _poolCandlelightVigil,

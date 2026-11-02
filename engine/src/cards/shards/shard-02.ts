@@ -342,6 +342,7 @@ import _poolHeronsGraceChampion from "../pool/herons-grace-champion.js";
 import _poolHiddenAncients from "../pool/hidden-ancients.js";
 import _poolHiddenCourtyard from "../pool/hidden-courtyard.js";
 import _poolHobblingZombie from "../pool/hobbling-zombie.js";
+import _poolHollowOne from "../pool/hollow-one.js";
 import _poolHollowhengeBeast from "../pool/hollowhenge-beast.js";
 import _poolHonorWornShaku from "../pool/honor-worn-shaku.js";
 import _poolHornswoggle from "../pool/hornswoggle.js";
@@ -1190,6 +1191,7 @@ const shard: CardShard = {
     _poolHiddenAncients,
     _poolHiddenCourtyard,
     _poolHobblingZombie,
+    _poolHollowOne,
     _poolHollowhengeBeast,
     _poolHonorWornShaku,
     _poolHornswoggle,

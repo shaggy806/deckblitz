@@ -229,6 +229,7 @@ import _poolExultantSkymarcher from "../pool/exultant-skymarcher.js";
 import _poolEyeOfNidhogg from "../pool/eye-of-nidhogg.js";
 import _poolFaerieHarbinger from "../pool/faerie-harbinger.js";
 import _poolFailureComply from "../pool/failure-comply.js";
+import _poolFairgroundsTrumpeter from "../pool/fairgrounds-trumpeter.js";
 import _poolFallenFerromancer from "../pool/fallen-ferromancer.js";
 import _poolFalthisShadowcatFamiliar from "../pool/falthis-shadowcat-familiar.js";
 import _poolFamishedPaladin from "../pool/famished-paladin.js";
@@ -1128,6 +1129,7 @@ const shard: CardShard = {
     _poolEyeOfNidhogg,
     _poolFaerieHarbinger,
     _poolFailureComply,
+    _poolFairgroundsTrumpeter,
     _poolFallenFerromancer,
     _poolFalthisShadowcatFamiliar,
     _poolFamishedPaladin,

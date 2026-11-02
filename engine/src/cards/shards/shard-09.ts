@@ -378,6 +378,7 @@ import _poolInsatiableSouleater from "../pool/insatiable-souleater.js";
 import _poolInspiredSkypainter from "../pool/inspired-skypainter.js";
 import _poolInvasionOfDominaria from "../pool/invasion-of-dominaria.js";
 import _poolInvasionOfUlgrotha from "../pool/invasion-of-ulgrotha.js";
+import _poolIridescentHornbeetle from "../pool/iridescent-hornbeetle.js";
 import _poolIronfang from "../pool/ironfang.js";
 import _poolIronhoofBoar from "../pool/ironhoof-boar.js";
 import _poolIrrigatedFarmland from "../pool/irrigated-farmland.js";
@@ -1290,6 +1291,7 @@ const shard: CardShard = {
     _poolInspiredSkypainter,
     _poolInvasionOfDominaria,
     _poolInvasionOfUlgrotha,
+    _poolIridescentHornbeetle,
     _poolIronfang,
     _poolIronhoofBoar,
     _poolIrrigatedFarmland,

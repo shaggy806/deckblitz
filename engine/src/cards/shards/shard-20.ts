@@ -894,6 +894,7 @@ import _poolWireSurgeons from "../pool/wire-surgeons.js";
 import _poolWirewoodGuardian from "../pool/wirewood-guardian.js";
 import _poolWitchesEye from "../pool/witches-eye.js";
 import _poolWitchsVengeance from "../pool/witchs-vengeance.js";
+import _poolWojekInvestigator from "../pool/wojek-investigator.js";
 import _poolWoodenSphere from "../pool/wooden-sphere.js";
 import _poolWordOfBlasting from "../pool/word-of-blasting.js";
 import _poolWorldWeary from "../pool/world-weary.js";
@@ -1822,6 +1823,7 @@ const shard: CardShard = {
     _poolWirewoodGuardian,
     _poolWitchesEye,
     _poolWitchsVengeance,
+    _poolWojekInvestigator,
     _poolWoodenSphere,
     _poolWordOfBlasting,
     _poolWorldWeary,

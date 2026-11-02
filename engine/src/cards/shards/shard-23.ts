@@ -557,6 +557,7 @@ import _poolProgenitorMimic from "../pool/progenitor-mimic.js";
 import _poolProgenitus from "../pool/progenitus.js";
 import _poolPromptoArgentum from "../pool/prompto-argentum.js";
 import _poolProtectorOfGondor from "../pool/protector-of-gondor.js";
+import _poolPulseOfTheForge from "../pool/pulse-of-the-forge.js";
 import _poolPulseOfTheTangle from "../pool/pulse-of-the-tangle.js";
 import _poolPuppetCrafting from "../pool/puppet-crafting.js";
 import _poolPurphorosBronzeBlooded from "../pool/purphoros-bronze-blooded.js";
@@ -1447,6 +1448,7 @@ const shard: CardShard = {
     _poolProgenitus,
     _poolPromptoArgentum,
     _poolProtectorOfGondor,
+    _poolPulseOfTheForge,
     _poolPulseOfTheTangle,
     _poolPuppetCrafting,
     _poolPurphorosBronzeBlooded,

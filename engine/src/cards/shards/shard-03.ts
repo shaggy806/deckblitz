@@ -385,6 +385,7 @@ import _poolLazotepChancellor from "../pool/lazotep-chancellor.js";
 import _poolLiberatedDwarf from "../pool/liberated-dwarf.js";
 import _poolLifeChisel from "../pool/life-chisel.js";
 import _poolLilianaTheNecromancer from "../pool/liliana-the-necromancer.js";
+import _poolLinvalaThePreserver from "../pool/linvala-the-preserver.js";
 import _poolLivingLibrary from "../pool/living-library.js";
 import _poolLizardConnorssCurse from "../pool/lizard-connorss-curse.js";
 import _poolLlanowarTribe from "../pool/llanowar-tribe.js";
@@ -527,6 +528,7 @@ import _poolRithsAttendant from "../pool/riths-attendant.js";
 import _poolRiverDelta from "../pool/river-delta.js";
 import _poolRoarOfEndlessSong from "../pool/roar-of-endless-song.js";
 import _poolRocHunter from "../pool/roc-hunter.js";
+import _poolRoseCutthroatRaider from "../pool/rose-cutthroat-raider.js";
 import _poolRowanScholarOfSparks from "../pool/rowan-scholar-of-sparks.js";
 import _poolRowansGrimSearch from "../pool/rowans-grim-search.js";
 import _poolRubblebeltRecluse from "../pool/rubblebelt-recluse.js";
@@ -1183,6 +1185,7 @@ const shard: CardShard = {
     _poolLiberatedDwarf,
     _poolLifeChisel,
     _poolLilianaTheNecromancer,
+    _poolLinvalaThePreserver,
     _poolLivingLibrary,
     _poolLizardConnorssCurse,
     _poolLlanowarTribe,
@@ -1325,6 +1328,7 @@ const shard: CardShard = {
     _poolRiverDelta,
     _poolRoarOfEndlessSong,
     _poolRocHunter,
+    _poolRoseCutthroatRaider,
     _poolRowanScholarOfSparks,
     _poolRowansGrimSearch,
     _poolRubblebeltRecluse,

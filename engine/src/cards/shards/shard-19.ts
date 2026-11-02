@@ -895,6 +895,7 @@ import _poolZombieBrute from "../pool/zombie-brute.js";
 import _poolZombieGoliath from "../pool/zombie-goliath.js";
 import _poolZoologicalStudy from "../pool/zoological-study.js";
 import _poolZukosExile from "../pool/zukos-exile.js";
+import _tokens11BlackBirdTokenTheRavenMan from "../tokens/1-1-black-bird-token-the-raven-man.js";
 import _tokensBeastToken55Trample from "../tokens/beast-token-5-5-trample.js";
 import _tokensBlueSphinxToken44Flying from "../tokens/blue-sphinx-token-4-4-flying.js";
 import _tokensHeartwoodToken from "../tokens/heartwood-token.js";
@@ -1806,6 +1807,7 @@ const shard: CardShard = {
     _poolZukosExile,
   ],
   tokens: [
+    _tokens11BlackBirdTokenTheRavenMan,
     _tokensBeastToken55Trample,
     _tokensBlueSphinxToken44Flying,
     _tokensHeartwoodToken,

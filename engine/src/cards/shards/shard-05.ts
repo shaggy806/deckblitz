@@ -325,6 +325,7 @@ import _poolGlacialRevelation from "../pool/glacial-revelation.js";
 import _poolGlenElendraPranksters from "../pool/glen-elendra-pranksters.js";
 import _poolGlimmerbell from "../pool/glimmerbell.js";
 import _poolGlisterBairn from "../pool/glister-bairn.js";
+import _poolGloriousEnforcer from "../pool/glorious-enforcer.js";
 import _poolGlorySeeker from "../pool/glory-seeker.js";
 import _poolGlowsporeShaman from "../pool/glowspore-shaman.js";
 import _poolGluttonousZombie from "../pool/gluttonous-zombie.js";
@@ -830,6 +831,7 @@ import _poolWoodvineElemental from "../pool/woodvine-elemental.js";
 import _poolWorkhorse from "../pool/workhorse.js";
 import _poolWorldMap from "../pool/world-map.js";
 import _poolWorldslayer from "../pool/worldslayer.js";
+import _poolWoundReflection from "../pool/wound-reflection.js";
 import _poolWretchedCamel from "../pool/wretched-camel.js";
 import _poolWuLongbowman from "../pool/wu-longbowman.js";
 import _poolYoshimaru from "../pool/yoshimaru.js";
@@ -1192,6 +1194,7 @@ const shard: CardShard = {
     _poolGlenElendraPranksters,
     _poolGlimmerbell,
     _poolGlisterBairn,
+    _poolGloriousEnforcer,
     _poolGlorySeeker,
     _poolGlowsporeShaman,
     _poolGluttonousZombie,
@@ -1697,6 +1700,7 @@ const shard: CardShard = {
     _poolWorkhorse,
     _poolWorldMap,
     _poolWorldslayer,
+    _poolWoundReflection,
     _poolWretchedCamel,
     _poolWuLongbowman,
     _poolYoshimaru,

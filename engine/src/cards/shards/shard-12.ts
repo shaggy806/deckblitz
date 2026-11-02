@@ -452,6 +452,7 @@ import _poolMetamorphicBlast from "../pool/metamorphic-blast.js";
 import _poolMetathranAerostat from "../pool/metathran-aerostat.js";
 import _poolMightOfAlara from "../pool/might-of-alara.js";
 import _poolMigratoryRoute from "../pool/migratory-route.js";
+import _poolMilitantAngel from "../pool/militant-angel.js";
 import _poolMilitaryDiscipline from "../pool/military-discipline.js";
 import _poolMindSculpt from "../pool/mind-sculpt.js";
 import _poolMindSlash from "../pool/mind-slash.js";
@@ -684,6 +685,7 @@ import _poolSlipperyKarst from "../pool/slippery-karst.js";
 import _poolSmolderInitiate from "../pool/smolder-initiate.js";
 import _poolSmolderingTar from "../pool/smoldering-tar.js";
 import _poolSmolderingWerewolf from "../pool/smoldering-werewolf.js";
+import _poolSmugglersShare from "../pool/smugglers-share.js";
 import _poolSnareTheSkies from "../pool/snare-the-skies.js";
 import _poolSnowHound from "../pool/snow-hound.js";
 import _poolSolGrail from "../pool/sol-grail.js";
@@ -1315,6 +1317,7 @@ const shard: CardShard = {
     _poolMetathranAerostat,
     _poolMightOfAlara,
     _poolMigratoryRoute,
+    _poolMilitantAngel,
     _poolMilitaryDiscipline,
     _poolMindSculpt,
     _poolMindSlash,
@@ -1547,6 +1550,7 @@ const shard: CardShard = {
     _poolSmolderInitiate,
     _poolSmolderingTar,
     _poolSmolderingWerewolf,
+    _poolSmugglersShare,
     _poolSnareTheSkies,
     _poolSnowHound,
     _poolSolGrail,

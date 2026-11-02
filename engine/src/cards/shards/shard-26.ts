@@ -749,6 +749,7 @@ import _poolTheEchoverseFulcrum from "../pool/the-echoverse-fulcrum.js";
 import _poolTheFireCrystal from "../pool/the-fire-crystal.js";
 import _poolTheGreatHenge from "../pool/the-great-henge.js";
 import _poolTheMagicMirror from "../pool/the-magic-mirror.js";
+import _poolTheRavenMan from "../pool/the-raven-man.js";
 import _poolTheSeedcore from "../pool/the-seedcore.js";
 import _poolTheWorldSpell from "../pool/the-world-spell.js";
 import _poolTheodenKingOfRohan from "../pool/theoden-king-of-rohan.js";
@@ -1630,6 +1631,7 @@ const shard: CardShard = {
     _poolTheFireCrystal,
     _poolTheGreatHenge,
     _poolTheMagicMirror,
+    _poolTheRavenMan,
     _poolTheSeedcore,
     _poolTheWorldSpell,
     _poolTheodenKingOfRohan,

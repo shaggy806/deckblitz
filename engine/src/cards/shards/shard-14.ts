@@ -455,6 +455,7 @@ import _poolLingeringSouls from "../pool/lingering-souls.js";
 import _poolLlanowarElves from "../pool/llanowar-elves.js";
 import _poolLocthwainGargoyle from "../pool/locthwain-gargoyle.js";
 import _poolLonghornSharpshooter from "../pool/longhorn-sharpshooter.js";
+import _poolLordJyscalGuado from "../pool/lord-jyscal-guado.js";
 import _poolLordOfTheVoid from "../pool/lord-of-the-void.js";
 import _poolLordOfTresserhorn from "../pool/lord-of-tresserhorn.js";
 import _poolLotusRing from "../pool/lotus-ring.js";
@@ -1328,6 +1329,7 @@ const shard: CardShard = {
     _poolLlanowarElves,
     _poolLocthwainGargoyle,
     _poolLonghornSharpshooter,
+    _poolLordJyscalGuado,
     _poolLordOfTheVoid,
     _poolLordOfTresserhorn,
     _poolLotusRing,

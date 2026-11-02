@@ -541,6 +541,7 @@ import _poolProctorsGaze from "../pool/proctors-gaze.js";
 import _poolPromisingVein from "../pool/promising-vein.js";
 import _poolPsychicSpear from "../pool/psychic-spear.js";
 import _poolPullFromTheDeep from "../pool/pull-from-the-deep.js";
+import _poolPulseOfTheDross from "../pool/pulse-of-the-dross.js";
 import _poolPyreHound from "../pool/pyre-hound.js";
 import _poolPyroclasticHellion from "../pool/pyroclastic-hellion.js";
 import _poolPyrostaticPillar from "../pool/pyrostatic-pillar.js";
@@ -1386,6 +1387,7 @@ const shard: CardShard = {
     _poolPromisingVein,
     _poolPsychicSpear,
     _poolPullFromTheDeep,
+    _poolPulseOfTheDross,
     _poolPyreHound,
     _poolPyroclasticHellion,
     _poolPyrostaticPillar,
