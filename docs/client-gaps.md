@@ -5,6 +5,16 @@ and the cleanups found along the way. `BACKLOG.md` keeps one line per item under
 title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLETED.md`. The animation follow-ups are in
 `docs/plans/legibility-of-play.md`, "Follow-ups".
 
+- **Which seat you see while controlling another player** (open 2026-11-02, the user will decide after
+  playing it; the Mindslaver checks in `docs/manual-checks.md` show it). Rule 723.4 only says what the
+  controller may see, so this is a UI call.
+  - **Option A, the flip (built):** `GameScreen` in `App.tsx` draws `Table` as `view.perspective`, so the
+    controlled player's seat sits at the bottom, and flips back only for your own decisions that aren't
+    just mana. Everything on the table is the seat you're acting for, but the view moves under you.
+  - **Option B, your own seat with a clear marker (not built):** the table stays put, and a marker says
+    whose decision it is, with their hand shown from across the table. You keep your bearings, but you
+    act on cards and permanents away from where you usually do. It would need those seats' hand and
+    prompts to work from the other side of the board.
 - **Two log lines read wrong** (found 2026-11-01). A card that begins on the battlefield from an opening
   hand logs as "takes Leyline Axe", and `delayed-trigger-created` prints as raw JSON (`format.ts` ~591).
 - **Clear can't undo All attack at a two-player table** (found 2026-11-01). In `App.tsx`'s attack bar,
