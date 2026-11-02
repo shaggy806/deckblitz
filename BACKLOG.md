@@ -486,6 +486,7 @@ One line each; the detail (rule numbers, code sites, the cards each blocks) is i
 **`docs/engine-gaps.md`**, under the same bold title. When a gap closes, delete its detail
 there and move this line to `COMPLETED.md`.
 
+- **An opponent-caused discard's replacement beats the graveyard ones without asking** — `Game` puts Obstinate Baloth onto the battlefield rather than asking its controller (616.1) when Leyline of the Void also applies.
 - **Goad's defender narrowing ignores attack caps** — a second goaded creature facing a full Crawlspace isn't sent at its goader (508.1d); two Lured menace attackers under Caverns of Despair can also leave no legal block set (`combat/blocking.ts`).
 - **A spell needing two target-keyed reductions at once is refused** — `reducingTargets` keeps one earning target, so a multi-target spell affordable only with both is refused at the cast.
 - **Limited-duration control of a player** — rule 723.2's Word of Command and Opposition Agent; `player-control.ts` holds a next turn or a next combat only.

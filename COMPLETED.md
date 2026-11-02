@@ -86,6 +86,13 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2: a discard an opponent's spell or ability caused** (2026-11-01, `58eb5998f`;
+  `replacement:discarded-by-opponent-to-battlefield`, `trigger:discarded-by-opponent-effect`). Obstinate
+  Baloth, Dodecapod, Quagnoth, Spiritual Focus.
+- **Need-keys Phase 2: join forces and life bidding** (2026-11-01, `fb86c138e`; `effect:life-bidding`,
+  `mechanic:join-forces`) — `players-pay-any-amount`, `bid-life`, no new decision kind. Minds Aglow, Alliance
+  of Arms, Mana-Charged Dragon, Liege of the Hollows, Plague of Vermin, Illicit Auction, Pain's Reward, Mages'
+  Contest.
 - **Need-keys Phase 2: what a permanent has dealt damage to** (2026-11-01, `6faf982be`;
   `stat:filter-dealt-damage-this-turn`, `stat:filter-dealt-damage-to-you-this-turn` and three more) —
   `GameObject.dealtDamage`, the `dealtDamageThisTurn` filter, the `self-hasnt-dealt-damage` condition.

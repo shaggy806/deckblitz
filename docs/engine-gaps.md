@@ -6,6 +6,10 @@ rule number, the code that does it today and the cards it blocks. `BACKLOG.md` k
 per gap under the same bold title; when a gap closes, delete it here and move its
 `BACKLOG.md` line to `COMPLETED.md`.
 
+- **An opponent-caused discard's replacement beats the graveyard ones without asking** (found
+  2026-11-01). Rule 616.1 lets the affected object's controller choose among replacement effects. With
+  Obstinate Baloth, Dodecapod or Quagnoth discarded under Leyline of the Void, `game.ts` (~43286)
+  always takes the battlefield. Almost always the choice a player would make, but not asked.
 - **Goad's defender narrowing ignores attack caps** (found 2026-11-01, unconfirmed by a test). Rule
   508.1d maximises requirements obeyed within restrictions. `decisions/attackers.ts` narrows a goaded
   creature's defenders without reading `combat/limits.ts`, so a second goaded creature facing a full
