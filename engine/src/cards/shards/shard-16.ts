@@ -642,6 +642,7 @@ import _poolRoadsideAssistance from "../pool/roadside-assistance.js";
 import _poolRogueSkycaptain from "../pool/rogue-skycaptain.js";
 import _poolRonomUnicorn from "../pool/ronom-unicorn.js";
 import _poolRootboundCrag from "../pool/rootbound-crag.js";
+import _poolRosheenMeanderer from "../pool/rosheen-meanderer.js";
 import _poolRubblebeltBraggart from "../pool/rubblebelt-braggart.js";
 import _poolRuinRat from "../pool/ruin-rat.js";
 import _poolRuinousWaterbending from "../pool/ruinous-waterbending.js";
@@ -1602,6 +1603,7 @@ const shard: CardShard = {
     _poolRogueSkycaptain,
     _poolRonomUnicorn,
     _poolRootboundCrag,
+    _poolRosheenMeanderer,
     _poolRubblebeltBraggart,
     _poolRuinRat,
     _poolRuinousWaterbending,

@@ -571,6 +571,7 @@ import _poolRazorclawBear from "../pool/razorclaw-bear.js";
 import _poolRazorkinHordecaller from "../pool/razorkin-hordecaller.js";
 import _poolReadyWilling from "../pool/ready-willing.js";
 import _poolReapingTheGraves from "../pool/reaping-the-graves.js";
+import _poolRecklessEmbermage from "../pool/reckless-embermage.js";
 import _poolReclusiveArtificer from "../pool/reclusive-artificer.js";
 import _poolRecollect from "../pool/recollect.js";
 import _poolRedHulk from "../pool/red-hulk.js";
@@ -1453,6 +1454,7 @@ const shard: CardShard = {
     _poolRazorkinHordecaller,
     _poolReadyWilling,
     _poolReapingTheGraves,
+    _poolRecklessEmbermage,
     _poolReclusiveArtificer,
     _poolRecollect,
     _poolRedHulk,

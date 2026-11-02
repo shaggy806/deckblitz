@@ -581,6 +581,7 @@ import _poolPsemillaMeletianPoet from "../pool/psemilla-meletian-poet.js";
 import _poolQuarrel from "../pool/quarrel.js";
 import _poolQuillSlingerBoggart from "../pool/quill-slinger-boggart.js";
 import _poolQuilledSlagwurm from "../pool/quilled-slagwurm.js";
+import _poolQuinjetTechnician from "../pool/quinjet-technician.js";
 import _poolRacecourseFury from "../pool/racecourse-fury.js";
 import _poolRadiantGrove from "../pool/radiant-grove.js";
 import _poolRadiantPurge from "../pool/radiant-purge.js";
@@ -1469,6 +1470,7 @@ const shard: CardShard = {
     _poolQuarrel,
     _poolQuillSlingerBoggart,
     _poolQuilledSlagwurm,
+    _poolQuinjetTechnician,
     _poolRacecourseFury,
     _poolRadiantGrove,
     _poolRadiantPurge,

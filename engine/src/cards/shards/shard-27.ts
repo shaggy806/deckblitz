@@ -145,6 +145,7 @@ import _poolCourtOfIre from "../pool/court-of-ire.js";
 import _poolCowabunga from "../pool/cowabunga.js";
 import _poolCrackleWithPower from "../pool/crackle-with-power.js";
 import _poolCrawlingFilth from "../pool/crawling-filth.js";
+import _poolCreepingPeeper from "../pool/creeping-peeper.js";
 import _poolCrimsonHonorGuard from "../pool/crimson-honor-guard.js";
 import _poolCrosissCatacombs from "../pool/crosiss-catacombs.js";
 import _poolCrosissCharm from "../pool/crosiss-charm.js";
@@ -1009,6 +1010,7 @@ const shard: CardShard = {
     _poolCowabunga,
     _poolCrackleWithPower,
     _poolCrawlingFilth,
+    _poolCreepingPeeper,
     _poolCrimsonHonorGuard,
     _poolCrosissCatacombs,
     _poolCrosissCharm,

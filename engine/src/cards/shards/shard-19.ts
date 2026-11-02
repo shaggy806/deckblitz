@@ -251,6 +251,7 @@ import _poolEnrage from "../pool/enrage.js";
 import _poolEnslavedDwarf from "../pool/enslaved-dwarf.js";
 import _poolEntering from "../pool/entering.js";
 import _poolEntropicEidolon from "../pool/entropic-eidolon.js";
+import _poolEqualTreatment from "../pool/equal-treatment.js";
 import _poolErhnamDjinn from "../pool/erhnam-djinn.js";
 import _poolEruptingDreadwolf from "../pool/erupting-dreadwolf.js";
 import _poolEscapedNull from "../pool/escaped-null.js";
@@ -1168,6 +1169,7 @@ const shard: CardShard = {
     _poolEnslavedDwarf,
     _poolEntering,
     _poolEntropicEidolon,
+    _poolEqualTreatment,
     _poolErhnamDjinn,
     _poolEruptingDreadwolf,
     _poolEscapedNull,

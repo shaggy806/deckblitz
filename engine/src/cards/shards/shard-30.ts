@@ -734,6 +734,7 @@ import _poolStridingShotcaller from "../pool/striding-shotcaller.js";
 import _poolSummonLeviathan from "../pool/summon-leviathan.js";
 import _poolSunhomeStalwart from "../pool/sunhome-stalwart.js";
 import _poolSunscourgeChampion from "../pool/sunscourge-champion.js";
+import _poolSwansOfBrynArgoll from "../pool/swans-of-bryn-argoll.js";
 import _poolSwarmCuller from "../pool/swarm-culler.js";
 import _poolSwelteringSuns from "../pool/sweltering-suns.js";
 import _poolSwiftReckoning from "../pool/swift-reckoning.js";
@@ -1623,6 +1624,7 @@ const shard: CardShard = {
     _poolSummonLeviathan,
     _poolSunhomeStalwart,
     _poolSunscourgeChampion,
+    _poolSwansOfBrynArgoll,
     _poolSwarmCuller,
     _poolSwelteringSuns,
     _poolSwiftReckoning,

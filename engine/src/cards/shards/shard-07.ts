@@ -209,6 +209,7 @@ import _poolDwarvenRuins from "../pool/dwarven-ruins.js";
 import _poolDwarvenWarriors from "../pool/dwarven-warriors.js";
 import _poolEldraziObligator from "../pool/eldrazi-obligator.js";
 import _poolElectrickery from "../pool/electrickery.js";
+import _poolElementalistsPalette from "../pool/elementalists-palette.js";
 import _poolEliteGuardmage from "../pool/elite-guardmage.js";
 import _poolEliteInstructor from "../pool/elite-instructor.js";
 import _poolEliteInterceptor from "../pool/elite-interceptor.js";
@@ -1111,6 +1112,7 @@ const shard: CardShard = {
     _poolDwarvenWarriors,
     _poolEldraziObligator,
     _poolElectrickery,
+    _poolElementalistsPalette,
     _poolEliteGuardmage,
     _poolEliteInstructor,
     _poolEliteInterceptor,

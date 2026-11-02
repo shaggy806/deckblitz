@@ -245,6 +245,7 @@ import _poolFaerieSnoop from "../pool/faerie-snoop.js";
 import _poolFanaticalDevotion from "../pool/fanatical-devotion.js";
 import _poolFanaticalFever from "../pool/fanatical-fever.js";
 import _poolFatedConflagration from "../pool/fated-conflagration.js";
+import _poolFatedFirepower from "../pool/fated-firepower.js";
 import _poolFaunaShaman from "../pool/fauna-shaman.js";
 import _poolFearOfMissingOut from "../pool/fear-of-missing-out.js";
 import _poolFelidarCub from "../pool/felidar-cub.js";
@@ -1145,6 +1146,7 @@ const shard: CardShard = {
     _poolFanaticalDevotion,
     _poolFanaticalFever,
     _poolFatedConflagration,
+    _poolFatedFirepower,
     _poolFaunaShaman,
     _poolFearOfMissingOut,
     _poolFelidarCub,

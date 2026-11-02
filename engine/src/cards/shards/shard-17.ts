@@ -275,6 +275,7 @@ import _poolFoundryChampion from "../pool/foundry-champion.js";
 import _poolFowlStrike from "../pool/fowl-strike.js";
 import _poolFrenziedGoblin from "../pool/frenzied-goblin.js";
 import _poolFretworkColony from "../pool/fretwork-colony.js";
+import _poolFreyaCrescent from "../pool/freya-crescent.js";
 import _poolFriendlyGhost from "../pool/friendly-ghost.js";
 import _poolFromTheCatacombs from "../pool/from-the-catacombs.js";
 import _poolFrostAugur from "../pool/frost-augur.js";
@@ -538,6 +539,7 @@ import _poolOrzhovPontiff from "../pool/orzhov-pontiff.js";
 import _poolOstracize from "../pool/ostracize.js";
 import _poolOutlawsFury from "../pool/outlaws-fury.js";
 import _poolOutriderOfJhess from "../pool/outrider-of-jhess.js";
+import _poolOvergrownZealot from "../pool/overgrown-zealot.js";
 import _poolOverrule from "../pool/overrule.js";
 import _poolPaladinOfPredation from "../pool/paladin-of-predation.js";
 import _poolPalianoTheHighCity from "../pool/paliano-the-high-city.js";
@@ -1163,6 +1165,7 @@ const shard: CardShard = {
     _poolFowlStrike,
     _poolFrenziedGoblin,
     _poolFretworkColony,
+    _poolFreyaCrescent,
     _poolFriendlyGhost,
     _poolFromTheCatacombs,
     _poolFrostAugur,
@@ -1426,6 +1429,7 @@ const shard: CardShard = {
     _poolOstracize,
     _poolOutlawsFury,
     _poolOutriderOfJhess,
+    _poolOvergrownZealot,
     _poolOverrule,
     _poolPaladinOfPredation,
     _poolPalianoTheHighCity,

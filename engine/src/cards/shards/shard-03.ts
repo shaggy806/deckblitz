@@ -510,6 +510,7 @@ import _poolRaidersKarve from "../pool/raiders-karve.js";
 import _poolRakdosPitDragon from "../pool/rakdos-pit-dragon.js";
 import _poolRalsDispersal from "../pool/rals-dispersal.js";
 import _poolRampagingHippo from "../pool/rampaging-hippo.js";
+import _poolRankleAndTorbran from "../pool/rankle-and-torbran.js";
 import _poolRaugrinCrystal from "../pool/raugrin-crystal.js";
 import _poolRavagersMace from "../pool/ravagers-mace.js";
 import _poolRavenousSkirge from "../pool/ravenous-skirge.js";
@@ -1317,6 +1318,7 @@ const shard: CardShard = {
     _poolRakdosPitDragon,
     _poolRalsDispersal,
     _poolRampagingHippo,
+    _poolRankleAndTorbran,
     _poolRaugrinCrystal,
     _poolRavagersMace,
     _poolRavenousSkirge,

@@ -368,6 +368,7 @@ import _poolHangarbackWalker from "../pool/hangarback-walker.js";
 import _poolHarvesttideSentry from "../pool/harvesttide-sentry.js";
 import _poolHauntedMire from "../pool/haunted-mire.js";
 import _poolHauntedPlateMail from "../pool/haunted-plate-mail.js";
+import _poolHawkeyeYoungAvenger from "../pool/hawkeye-young-avenger.js";
 import _poolHealingGrace from "../pool/healing-grace.js";
 import _poolHedgewitchsMask from "../pool/hedgewitchs-mask.js";
 import _poolHedronCrawler from "../pool/hedron-crawler.js";
@@ -1241,6 +1242,7 @@ const shard: CardShard = {
     _poolHarvesttideSentry,
     _poolHauntedMire,
     _poolHauntedPlateMail,
+    _poolHawkeyeYoungAvenger,
     _poolHealingGrace,
     _poolHedgewitchsMask,
     _poolHedronCrawler,
