@@ -1,5 +1,5 @@
 Top 500 Commander *commanders* by EDHREC deck count (fetched 2026-09-22)
-456 already implemented / 44 missing
+457 already implemented / 43 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -347,7 +347,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  341  Imotekh the Stormlord                           8137 decks  {2}{B}{B}        Legendary Artifact Creature — Necron
 [x]  342  Talion, the Kindly Lord                         8105 decks  {2}{U}{B}        Legendary Creature — Faerie Noble
 [x]  343  Maelstrom Wanderer                              8102 decks  {5}{G}{U}{R}     Legendary Creature — Elemental
-[ ]  344  Sen Triplets                                    8043 decks  {2}{W}{U}{B}     Legendary Artifact Creature — Human Wizard
+[x]  344  Sen Triplets                                    8043 decks  {2}{W}{U}{B}     Legendary Artifact Creature — Human Wizard
 [ ]  345  Xavier Sal, Infested Captain                    8040 decks  {B}{G}{U}        Legendary Creature — Human Fungus Pirate
 [x]  346  Elesh Norn, Mother of Machines                  8031 decks  {4}{W}           Legendary Creature — Phyrexian Praetor
 [x]  347  Tuvasa the Sunlit                               8030 decks  {G}{W}{U}        Legendary Creature — Merfolk Shaman

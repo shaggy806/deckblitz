@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4195 already implemented / 805 missing (marks refreshed 2026-11-02)
+4202 already implemented / 798 missing (marks refreshed 2026-11-02)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -2862,7 +2862,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2869  Fell                                     {1}{B}           Sorcery
 [x]  2870  Ripjaw Raptor                            {2}{G}{G}        Creature — Dinosaur
 [x]  2871  Tooth and Nail                           {5}{G}{G}        Sorcery
-[ ]  2872  Pain for All                             {2}{R}           Enchantment — Aura
+[x]  2872  Pain for All                             {2}{R}           Enchantment — Aura
 [x]  2873  Elvish Harbinger                         {2}{G}           Creature — Elf Druid
 [ ]  2874  Nowhere to Run                           {1}{B}           Enchantment
 [x]  2875  Mocking Sprite                           {2}{U}           Creature — Faerie Rogue
@@ -2871,7 +2871,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  2878  Archetype of Endurance                   {6}{G}{G}        Enchantment Creature — Boar
 [x]  2879  Celestine, the Living Saint              {4}{W}           Legendary Creature — Human Warrior
 [x]  2880  Basilisk Gate                            {0}              Land — Gate
-[ ]  2881  Silent-Blade Oni                         {3}{U}{U}{B}{B}  Creature — Demon Ninja
+[x]  2881  Silent-Blade Oni                         {3}{U}{U}{B}{B}  Creature — Demon Ninja
 [ ]  2882  Stormtide Leviathan                      {5}{U}{U}{U}     Creature — Leviathan
 [x]  2883  Jodah, the Unifier                       {W}{U}{B}{R}{G}  Legendary Creature — Human Wizard
 [x]  2884  Glistening Sphere                        {3}              Artifact
@@ -2943,7 +2943,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  2950  Nazgûl                                   {2}{B}           Creature — Wraith Knight
 [x]  2951  Shoreline Looter                         {1}{U}           Creature — Rat Rogue
 [x]  2952  Dragonstorm Globe                        {3}              Artifact
-[ ]  2953  Fated Firepower                          {X}{R}{R}{R}     Enchantment
+[x]  2953  Fated Firepower                          {X}{R}{R}{R}     Enchantment
 [x]  2954  Curious Altisaur                         {3}{G}           Creature — Dinosaur
 [ ]  2955  Underrealm Lich                          {3}{B}{G}        Creature — Zombie Elf Shaman
 [x]  2956  Eye of Ugin                              {0}              Legendary Land
@@ -3236,7 +3236,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  3243  Chain of Smog                            {1}{B}           Sorcery
 [x]  3244  Archenemy's Charm                        {B}{B}{B}        Instant
 [x]  3245  Virulent Emissary                        {G}              Creature — Elf Assassin
-[ ]  3246  Vorel of the Hull Clade                  {1}{G}{U}        Legendary Creature — Human Merfolk
+[x]  3246  Vorel of the Hull Clade                  {1}{G}{U}        Legendary Creature — Human Merfolk
 [x]  3247  Solar Transformer                        {2}              Artifact
 [x]  3248  Skyhunter Strike Force                   {2}{W}           Creature — Cat Knight
 [ ]  3249  Soulless Jailer                          {2}              Artifact Creature — Phyrexian Golem
@@ -3962,7 +3962,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3969  Annoyed Altisaur                         {5}{G}{G}        Creature — Dinosaur
 [ ]  3970  Ob Nixilis, Unshackled                   {4}{B}{B}        Legendary Creature — Demon
 [ ]  3971  Vesuvan Duplimancy                       {3}{U}           Enchantment
-[ ]  3972  Elementalist's Palette                   {3}              Artifact
+[x]  3972  Elementalist's Palette                   {3}              Artifact
 [ ]  3973  Hushbringer                              {1}{W}           Creature — Faerie
 [x]  3974  Wizards of Thay                          {3}{U}           Creature — Human Wizard
 [x]  3975  Zur, Eternal Schemer                     {W}{U}{B}        Legendary Creature — Human Wizard
@@ -4689,7 +4689,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4696  Cartographer's Hawk                      {1}{W}           Creature — Bird
 [x]  4697  Filth                                    {3}{B}           Creature — Incarnation
 [x]  4698  Restless Fortress                        {0}              Land
-[ ]  4699  Freya Crescent                           {R}              Legendary Creature — Rat Knight
+[x]  4699  Freya Crescent                           {R}              Legendary Creature — Rat Knight
 [x]  4700  Restless Bivouac                         {0}              Land
 [x]  4701  Galvanic Blast                           {R}              Instant
 [x]  4702  Peacewalker Colossus                     {3}              Artifact — Vehicle
@@ -4868,7 +4868,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  4875  Arvinox, the Mind Flail                  {4}{B}{B}{B}     Legendary Enchantment Creature — Horror
 [x]  4876  Balefire Liege                           {2}{R/W}{R/W}{R/W} Creature — Spirit Horror
 [ ]  4877  Treasure Chest                           {3}              Artifact
-[ ]  4878  Zara, Renegade Recruiter                 {3}{U}{R}        Legendary Creature — Human Pirate
+[x]  4878  Zara, Renegade Recruiter                 {3}{U}{R}        Legendary Creature — Human Pirate
 [ ]  4879  Izzet Generatorium                       {U}{R}           Artifact
 [x]  4880  Biomass Mutation                         {X}{G/U}{G/U}    Instant
 [x]  4881  Overcharged Amalgam                      {2}{U}{U}        Creature — Zombie Horror
