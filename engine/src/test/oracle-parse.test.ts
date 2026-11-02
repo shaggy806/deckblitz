@@ -192,7 +192,34 @@ describe("costs and triggers", () => {
     });
     // What it can't read whole is left to a person.
     expect(parseCost("Sacrifice ~ and a creature named Spitting Drake")).toBeNull();
-    expect(parseCost("{T}, Sacrifice ~ and any number of other non-Eldrazi creatures")).toBeNull();
+  });
+
+  it("reads a sacrifice cost of a number of permanents, X, any number and with different names", () => {
+    expect(parseCost("Sacrifice three Foods").cost.sacrifice).toEqual({ filter: { subtype: "Food" }, count: 3 });
+    expect(parseCost("{T}, Sacrifice X Goats").cost.sacrifice).toEqual({ filter: { subtype: "Goat" }, count: "x" });
+    expect(parseCost("{T}, Sacrifice one or more artifacts")).toEqual({
+      cost: { mana: null, tap: true, sacrifice: { filter: { type: "artifact" }, count: "x" } },
+      extra: { minX: 1 },
+    });
+    expect(parseCost("Sacrifice any number of lands").cost.sacrifice).toEqual({ filter: { type: "land" }, count: "x" });
+    expect(parseCost("{3}, {T}, Sacrifice three artifact tokens with different names").cost.sacrifice).toEqual({
+      filter: { type: "artifact", token: true },
+      count: 3,
+      differentNames: true,
+    });
+    expect(parseCost("{T}, Sacrifice ~ and any number of other non-Eldrazi creatures").cost.sacrifice).toEqual({
+      parts: [
+        { filter: { isSource: true }, count: 1 },
+        { filter: { type: "creature", notSubtypes: ["Eldrazi"], isSource: false }, count: "x" },
+      ],
+    });
+    const blitz = parseFace({
+      name: "Firecat Blitz",
+      mana_cost: "{X}{R}{R}",
+      type_line: "Sorcery",
+      oracle_text: "Flashback—{R}{R}, Sacrifice X Mountains. (You may cast this card from your graveyard for its flashback cost. Then exile it.)",
+    });
+    expect(blitz.flashback).toEqual({ cost: "{R}{R}", sacrifice: { filter: { subtype: "Mountain" }, count: "x" } });
   });
 
   it("reads parley's three sentences as one reveal-top, the effect scaled by the cards revealed", () => {

@@ -5356,12 +5356,22 @@ export interface GameState {
     readonly player: PlayerId;
     /** The card whose cost it is, named in the prompt. */
     readonly source: ObjectId;
-    readonly parts: readonly { readonly filter: CardFilter; readonly count: number }[];
+    readonly parts: readonly { readonly filter: CardFilter; readonly count: number; readonly differentNames?: true }[];
     /** "Sacrifice two **other** creatures": the source can't pay. */
     readonly except?: ObjectId;
     readonly picked: readonly ObjectId[];
     /** Who gets priority once it's paid: the player who activated it. */
     readonly priorityTo: PlayerId;
+    /** The cost is a mana ability's (Springjack Pasture's "Sacrifice X
+     * Goats"), which never goes on the stack (rule 605.3b): nothing has
+     * resolved yet, and this is what's needed to add its mana once the last
+     * permanent is chosen — that ability of `source`, its X, and the colours
+     * picked as it was activated. */
+    readonly manaAbility?: {
+      readonly abilityIndex: number;
+      readonly x: number;
+      readonly manaColors?: readonly ManaType[];
+    };
   };
   /**
    * The commander whose owner is being asked whether to put it into the

@@ -1297,6 +1297,14 @@ export function sourceSacrificeOf(part) {
     return Array.from({ length: count }, () => filter);
   };
   let m;
+  // "This creature and any number of other non-Eldrazi creatures" (Emrakul's
+  // Evangel): the `parts` form, X the number of others.
+  if ((m = /^Sacrifice ~ and any number of other (?:non-([A-Z][a-z]+) )?(.+)$/.exec(part))) {
+    const filter = parseTypePhrase(m[2]);
+    if (filter === null || Object.keys(filter).length === 0) return null;
+    const others = { ...filter, ...(m[1] !== undefined ? { notSubtypes: [m[1]] } : {}), isSource: false };
+    return { parts: [{ filter: { isSource: true }, count: 1 }, { filter: others, count: "x" }] };
+  }
   if ((m = /^Sacrifice ~ and (.+)$/.exec(part))) {
     const others = othersOf(m[1]);
     return others === null ? null : { each: [{ isSource: true }, ...others] };
@@ -1348,6 +1356,16 @@ export function parseCost(text) {
       if (filter === null) return null;
       cost.sacrifice = Object.keys(filter).length === 1 && filter.type === "creature" ? "creature-you-control" : { filter };
       if (m[1] === "another") extra.otherOnly = true;
+    } else if ((m = /^Sacrifice (any number of|one or more|two|three|four|five|six|seven|eight|nine|ten|x|\d+) (.+?)( with different names)?$/i.exec(part))) {
+      // "Sacrifice three Foods", "Sacrifice X Goats" (a mana ability's too),
+      // "any number of", "one or more" (X, at least 1), "three artifact tokens
+      // with different names" (Transmutation Font): chosen as it's paid.
+      const word = m[1].toLowerCase();
+      const count = word === "any number of" || word === "one or more" ? "x" : numberOf(word);
+      const filter = parseTypePhrase(m[2]);
+      if (count === undefined || filter === null || Object.keys(filter).length === 0) return null;
+      cost.sacrifice = { filter, count, ...(m[3] !== undefined ? { differentNames: true } : {}) };
+      if (word === "one or more") extra.minX = 1;
     } else if ((m = /^Pay (\d+) life$/.exec(part))) cost.payLife = Number(m[1]);
     else if (part === "Discard your hand") cost.discardHand = true;
     // "Discard a card at random" (Mage il-Vec): nothing to choose.
@@ -7374,6 +7392,15 @@ export function parseFace(face, ctx = {}) {
       const also = kickerAlso(m[1]);
       if (also?.sacrifice !== undefined) {
         out.flashback = { cost: "", sacrifice: also.sacrifice };
+        continue;
+      }
+    }
+    // "Flashback—{R}{R}, Sacrifice X Mountains." (Firecat Blitz): X announced
+    // for the cast though the flashback's mana has none.
+    if (isSpell && (m = /^Flashback—((?:\{[^}]+\})+), Sacrifice X (.+)\.$/.exec(line))) {
+      const filter = parseTypePhrase(m[2]);
+      if (filter !== null && Object.keys(filter).length > 0) {
+        out.flashback = { cost: m[1], sacrifice: { filter, count: "x" } };
         continue;
       }
     }

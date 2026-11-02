@@ -2182,6 +2182,15 @@ export interface StaticAbility {
    */
   readonly crewsAs?: { readonly plus?: number; readonly toughness?: true; readonly saddles?: true };
   /**
+   * "If this creature would be destroyed, regenerate it" (rule 701.19b —
+   * Mossbridge Troll, Knight of the Holy Nimbus): every destruction is
+   * replaced by being tapped, removed from combat and having its damage
+   * removed, with no shield and no limit. "Can't be regenerated" stops it
+   * (701.19c), as it stops a shield. Only `affects: { scope: "self" }`, and
+   * gone once it has lost its abilities.
+   */
+  readonly regeneratesInstead?: true;
+  /**
    * The affected creatures "can attack as though they didn't have defender"
    * (Arcades, the Strategist; Felothar the Steadfast; High Alert). A
    * permission rather than a restriction, so it lifts only defender's "can't
@@ -4434,8 +4443,11 @@ export interface CardDefinition {
     readonly payLife?: number;
     /** Permanents sacrificed as (or with) the flashback cost — Dread
      * Return's "Flashback—Sacrifice three creatures", whose `cost` is `""`.
-     * Chosen as the cost is paid, as `additionalCost.sacrificeCount`'s are. */
-    readonly sacrifice?: { readonly filter: CardFilter; readonly count: number };
+     * Chosen as the cost is paid, as `additionalCost.sacrificeCount`'s are.
+     * `count: "x"` is Firecat Blitz's "Flashback—{R}{R}, Sacrifice X Mountains":
+     * an X announced for this cast though the flashback's mana has none,
+     * which the spell then reads (rules 107.3a, 601.2b). */
+    readonly sacrifice?: { readonly filter: CardFilter; readonly count: number | "x" };
     /** Beholding as part of the flashback cost — Kindle the Inner Flame's
      * "Flashback—{1}{R}, Behold three Elementals" (rule 701.4a). Castable
      * that way only with as many to behold; which ones is chosen as the cost

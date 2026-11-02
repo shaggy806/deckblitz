@@ -44,8 +44,27 @@ export type SacrificeCost =
    * ability is on the stack and its mana paid — never for the player — and a
    * compacted token stack counts as every token in it. All of them are
    * sacrificed at once. Without `count` it's one permanent, named on the
-   * `activate-ability` action as before. */
-  | { readonly filter: CardFilter; readonly count?: number | "x" }
+   * `activate-ability` action as before.
+   *
+   * "Sacrifice any number of …" is `count: "x"` too, "one or more" with the
+   * ability's `minX: 1` (Radiant Lotus): the number sacrificed is the X the
+   * effect reads ("for each artifact sacrificed this way"), announced as it's
+   * activated and paid to the permanent. A mana ability may take it (Springjack
+   * Pasture's "Sacrifice X Goats: Add X mana of any one color"): activated by
+   * hand only, its mana added once the last is chosen, still never on the
+   * stack (rule 605.3b).
+   *
+   * `differentNames` is the cost's total constraint — Transmutation Font's
+   * "three artifact tokens with different names": asked one at a time, each
+   * offering only names not yet chosen. */
+  | { readonly filter: CardFilter; readonly count?: number | "x"; readonly differentNames?: true }
+  /** Several kinds, each with a number of its own, every one a different
+   * permanent — the `each` form with counts: Glass-Cast Heart's "Sacrifice
+   * this artifact and thirteen Blood tokens" is `{ isSource: true }` × 1 and
+   * Blood × 13; Emrakul's Evangel's "this creature and any number of other
+   * non-Eldrazi creatures" has an `"x"` count on its second part, which reads
+   * as `count: "x"` does above. */
+  | { readonly parts: readonly { readonly filter: CardFilter; readonly count: number | "x" }[] }
   /** One permanent for each filter, every one a different permanent —
    * Jarad, Golgari Lich Lord's "Sacrifice a Swamp and a Forest" (a land that
    * is both still pays only one of them: its ruling). Asked one filter at a
@@ -68,6 +87,8 @@ export type SacrificeCost =
 export interface SacrificeCostPart {
   readonly filter: CardFilter;
   readonly count: number;
+  /** "With different names": no two of the part's share a name. */
+  readonly differentNames?: true;
 }
 
 /**
@@ -82,16 +103,26 @@ export function sacrificeCostParts(
   x: number,
 ): readonly SacrificeCostPart[] | null {
   if (sacrifice === undefined || typeof sacrifice === "string") return null;
+  const at = (count: number | "x"): number => (count === "x" ? Math.max(0, Math.floor(x)) : count);
   if ("each" in sacrifice) return sacrifice.each.map((filter) => ({ filter, count: 1 }));
+  if ("parts" in sacrifice) return sacrifice.parts.map((part) => ({ filter: part.filter, count: at(part.count) }));
   if (sacrifice.count === undefined) return null;
-  return [{ filter: sacrifice.filter, count: sacrifice.count === "x" ? Math.max(0, Math.floor(x)) : sacrifice.count }];
+  return [
+    {
+      filter: sacrifice.filter,
+      count: at(sacrifice.count),
+      ...(sacrifice.differentNames === true ? { differentNames: true as const } : {}),
+    },
+  ];
 }
 
 /** Does this cost sacrifice X permanents — an `{X}` the mana cost needn't
  * have (Grim Hireling's "{B}, Sacrifice X Treasures")? */
 export function sacrificeCostReadsX(cost: { readonly sacrifice?: SacrificeCost }): boolean {
   const sacrifice = cost.sacrifice;
-  return typeof sacrifice === "object" && "filter" in sacrifice && sacrifice.count === "x";
+  if (typeof sacrifice !== "object") return false;
+  if ("parts" in sacrifice) return sacrifice.parts.some((part) => part.count === "x");
+  return "filter" in sacrifice && sacrifice.count === "x";
 }
 
 /** Whether a cost's `removeCounter` is chosen as it's paid — from a
@@ -166,6 +197,7 @@ export function sacrificePartsFillable(
 /** Every filter a sacrifice cost's choice can be made from — one for the
  * forms that have one, each of an `each`'s. */
 export function sacrificeCostFilters(sacrifice: Exclude<SacrificeCost, "self" | "granter" | "creature-you-control">): readonly CardFilter[] {
+  if ("parts" in sacrifice) return sacrifice.parts.map((part) => part.filter);
   return "each" in sacrifice ? sacrifice.each : [sacrifice.filter];
 }
 

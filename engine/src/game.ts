@@ -1389,7 +1389,7 @@ type FlashbackOption = {
   readonly payLife?: number;
   /** Permanents sacrificed for it — only a printed flashback's (Dread
    * Return's "Flashback—Sacrifice three creatures"). */
-  readonly sacrifice?: { readonly filter: CardFilter; readonly count: number };
+  readonly sacrifice?: { readonly filter: CardFilter; readonly count: number | "x" };
   /** What's beheld for it — only a printed flashback's (Kindle the Inner
    * Flame's "Behold three Elementals", rule 701.4a). */
   readonly behold?: BeholdSpec;
@@ -3116,7 +3116,9 @@ export class Game {
               ? `${ability.text} (choose how much of each)`
               : makes.length === 0
                 ? `${ability.text} (add no mana)`
-                : `${ability.text} (add ${makes.map((m) => `{${m}}`).join("")})`;
+                : ability.effect?.kind === "add-mana" && ability.effect.amount === "x"
+                  ? `${ability.text} (X {${makes[0]}})`
+                  : `${ability.text} (add ${makes.map((m) => `{${m}}`).join("")})`;
         out.push({
           kind: "activate-ability",
           source,
@@ -4085,8 +4087,13 @@ export class Game {
       // "Sacrifice X creatures" (Eliminate the Competition): an X the mana
       // cost needn't have, as many as there are to sacrifice once the mana is
       // paid.
+      const flashbackSacrifice = via === "flashback" ? this.flashbackOf(card, graveyardGrant)?.sacrifice : undefined;
       const sacrificeXFilter =
-        def.additionalCost?.sacrificeCount === "x" ? def.additionalCost.sacrifice : undefined;
+        def.additionalCost?.sacrificeCount === "x"
+          ? def.additionalCost.sacrifice
+          : flashbackSacrifice?.count === "x"
+            ? flashbackSacrifice.filter
+            : undefined;
       const sacrificeX =
         sacrificeRange !== null
           ? sacrificeRange.most
@@ -16330,6 +16337,7 @@ export class Game {
       parseManaCost(costString).x > 0 ||
       def.additionalCost?.payLifeX === true ||
       def.additionalCost?.sacrificeCount === "x" ||
+      (via === "flashback" && this.flashbackOf(cardId, graveyardGrant)?.sacrifice?.count === "x") ||
       def.additionalCost?.discard === "x" ||
       // The Shoals' "exile a … card with mana value X" (rule 107.3a).
       (altCost && def.alternativeCost?.exileFromHand?.manaValueX === true);
@@ -17585,11 +17593,16 @@ export class Game {
     remaining: ReadonlyMap<ObjectId, number>,
     source?: ObjectId,
   ): boolean {
+    const eligibleFor = (part: SacrificeCostPart): ObjectId[] =>
+      this.costSacrificeEligible(player, part.filter, except, source).filter((id) => remaining.has(id));
+    // "Three artifact tokens with different names": that many names to choose from.
+    for (const part of parts) {
+      if (part.differentNames !== true) continue;
+      const names = new Set(eligibleFor(part).filter((id) => (remaining.get(id) ?? 0) > 0).map((id) => printedCardName(this.state.objects[id])));
+      if (names.size < part.count) return false;
+    }
     return sacrificePartsFillable(
-      parts.map((part) => ({
-        eligible: this.costSacrificeEligible(player, part.filter, except, source).filter((id) => remaining.has(id)),
-        count: part.count,
-      })),
+      parts.map((part) => ({ eligible: eligibleFor(part), count: part.count })),
       remaining,
     );
   }
@@ -17646,7 +17659,10 @@ export class Game {
     if (kickerSacrifice !== undefined) parts.push({ filter: kickerSacrifice.filter, count: kickerSacrifice.count });
     if (via === "flashback") {
       const flashback = this.flashbackOf(cardId, grant)?.sacrifice;
-      if (flashback !== undefined) parts.push({ filter: flashback.filter, count: flashback.count });
+      // "Flashback—{R}{R}, Sacrifice X Mountains" (Firecat Blitz).
+      if (flashback !== undefined) {
+        parts.push({ filter: flashback.filter, count: flashback.count === "x" ? Math.max(0, Math.floor(x)) : flashback.count });
+      }
     }
     return parts.length === 0 ? null : parts;
   }
@@ -17658,7 +17674,16 @@ export class Game {
     if (remaining === null) return 0;
     let n = 0;
     for (const left of remaining.values()) n += left;
-    return n;
+    // "This creature and any number of other non-Eldrazi creatures": the most
+    // X that leaves what the other parts take.
+    const sacrifice = ability.cost.sacrifice;
+    if (typeof sacrifice !== "object" || !("parts" in sacrifice)) return n;
+    const except = ability.otherOnly === true ? sourceId : undefined;
+    for (let x = n; x > 0; x -= 1) {
+      const parts = sacrificeCostParts(sacrifice, x);
+      if (parts !== null && this.costSacrificeFillable(player, parts, except, remaining, sourceId)) return x;
+    }
+    return 0;
   }
 
   /**
@@ -18991,9 +19016,6 @@ export class Game {
       return `${def.name}'s ability can't be activated with X less than ${ability.minX ?? 0}`;
     }
     if (sacrificeParts !== null) {
-      // A mana ability never uses the stack, so there's nowhere for it to wait
-      // while the player chooses; none in the pool has such a cost.
-      if (isManaAbility(ability)) return `${def.name}'s mana ability can't sacrifice several permanents yet`;
       if (this.costSacrificePool(player, sourceId, ability, sacrificeParts, x ?? 0) === null) {
         return `${player} has too few permanents to sacrifice for ${def.name}'s ability`;
       }
@@ -19517,120 +19539,20 @@ export class Game {
     // cast: no commander tax, no cast trigger.
 
     if (isManaAbility(ability)) {
-      // Mana abilities resolve immediately and never use the stack (rule
-      // 605.3b) — handed what the cost sacrificed or tapped, read as it last
-      // existed (608.2h): Priest of Yawgmoth's "the sacrificed artifact's
-      // mana value".
-      const manaGranter = granterOfRef(grantedAbility);
-      const base = this.makeResolutionContext(sourceId, player, [], chosenX, 0, undefined, 1, 0, [], {
-        ...(sacrificedRef !== undefined ? { sacrificed: sacrificedRef } : {}),
-        ...(tappedRef !== undefined ? { tapped: tappedRef } : {}),
-        ...(manaGranter !== undefined ? { granter: manaGranter } : {}),
-      });
-      // The colour(s) the activating player picked, one per unit whose type
-      // was theirs to pick: an "any color" / "any combination of" ability's
-      // own units first (see `standaloneManaChoices`), then one per
-      // triggered mana ability's extra mana with a choice in it (below).
-      // Only the unfixed part of the output is redirected, so a source that
-      // makes a concrete mana alongside a choice still makes its concrete
-      // mana. "Choose a color" (Nykthos) is the first pick, which is also
-      // the colour an amount read for "that color" is read for.
-      const effect = ability.effect;
-      const manaColor =
-        effect?.kind === "add-mana" && effect.mana === "any-color" ? manaColors?.[0] : undefined;
-      let picked = 0;
-      const context: ResolutionContext = {
-        ...base,
-        manaAbility: true,
-        ...(manaColor !== undefined ? { manaColor } : {}),
-        addMana: (p, mana, amount, spec): void => {
-          if (manaColors === undefined || (mana !== "any-color" && typeof mana !== "object")) {
-            base.addMana(p, mana, amount, spec);
-            return;
-          }
-          // The effect's own amount is what gets made, one unit per pick; a
-          // pick the ability can't make (or a missing one — the action is a
-          // client's word) falls back to the default colour, so a hand-built
-          // `manaColors` can't mint extra mana or a colour the card doesn't
-          // offer. `spec` rides along so a restricted source (Cavern of
-          // Souls) still stamps its restriction on mana floated by hand.
-          const allowed: readonly ManaType[] =
-            mana === "any-color"
-              ? COLORS
-              : "oneOf" in mana
-                ? mana.oneOf
-                : this.manaOneOf(mana, player, sourceId);
-          // A list naming nothing makes nothing (rule 106.5), and it was
-          // offered with no pick for it (`standaloneManaVariants`): none is
-          // used up, so a later pick still lines up.
-          if (allowed.length === 0) return;
-          const units = Math.min(amount, Game.MAX_EFFECT_INSTANCES);
-          // "Any color" is any *one* colour however much is made (Gilded
-          // Lotus), so the first pick names it for all — as it does for "X
-          // {G} or X {W}" (`same`).
-          const oneType = mana === "any-color" || ("same" in mana && mana.same === true);
-          const first = picked;
-          for (let i = 0; i < units; i += 1) {
-            const pick = oneType ? manaColors[first] : manaColors[first + i];
-            base.addMana(p, pick !== undefined && allowed.includes(pick) ? pick : mana, 1, spec);
-          }
-          picked += units;
-        },
-      };
-      const pool = this.state.players[player].manaPool;
-      const poolBefore = pool.length;
-      if (effect !== null) applyEffectSpec(effect, context);
-      if (ability.cost.tap) {
-        // "If you tap a permanent for mana, it produces twice as much of that
-        // mana instead" (Mana Reflection): its own mana, each unit with all
-        // it carries (rule 106.6a).
-        const multiplier = this.tapManaMultiplier(player);
-        if (multiplier > 1) {
-          const made = pool.slice(poolBefore);
-          for (const unit of made) {
-            for (let k = 1; k < multiplier && pool.length < poolBefore + Game.MAX_EFFECT_INSTANCES; k += 1) {
-              pool.push({ ...unit });
-            }
-          }
-          for (const type of MANA_TYPES) {
-            const n = made.filter((u) => u.type === type).length * (multiplier - 1);
-            if (n > 0) this.emit({ type: "mana-added", player, mana: type, amount: n });
-          }
-        }
-        // Tapped for mana: triggered mana abilities (rule 605.1b) add theirs
-        // at once, "of any type that permanent produced" read off what it
-        // just made — a choice among several the player's, with the rest of
-        // the picks.
-        const produced = pool.slice(poolBefore).map((unit) => unit.type);
-        for (const out of this.extraManaOutputs(source, produced, player)) {
-          const origin = this.manaOriginOf(out.holder);
-          if ("units" in out) {
-            for (const type of out.units) this.addMana(player, type, 1, undefined, origin);
-            continue;
-          }
-          const pick = manaColors?.[picked];
-          picked += 1;
-          const type = pick !== undefined && out.choices.includes(pick) ? pick : out.choices[0];
-          this.addMana(player, type, out.amount, undefined, origin);
-        }
-        // What triggers on the tap and uses the stack (rule 106.12a).
-        if (produced.length > 0) this.emit({ type: "permanent-tapped-for-mana", object: sourceId, player, produced });
+      // "Sacrifice X Goats" (Springjack Pasture): which ones is the player's
+      // choice, and nothing can resolve until it's made. The mana comes as
+      // the last one is chosen (`finishCostSacrifice`), and nobody gets
+      // priority meanwhile.
+      if (sacrificeParts !== null) {
+        this.beginCostSacrifice(player, sourceId, sacrificeParts, ability.otherOnly === true ? sourceId : undefined, player, {
+          abilityIndex,
+          x: chosenX,
+          ...(manaColors !== undefined ? { manaColors } : {}),
+        });
+        this.afterPlayerAction(player);
+        return;
       }
-      this.emit({
-        type: "ability-activated",
-        source: sourceId,
-        player,
-        onStack: false,
-      });
-      // Activated by hand, its player holding priority (`whyCannotAct`) —
-      // one activated while paying a cost is `executePayment`'s, inside the
-      // cast or activation, and gives no priority until that's done (601.2g-h,
-      // 605.3a). This player receives priority again (117.3c), so the
-      // state-based actions are checked and triggers put on the stack first
-      // (117.5): Wall of Roots at 0 toughness dies now, and a sacrificed
-      // Treasure's "whenever you sacrifice" trigger goes on the stack. Being
-      // an action, it also ends any run of passes (117.4).
-      this.afterPlayerAction(player);
+      this.resolveManaAbility(sourceId, player, ability, chosenX, manaColors, grantedAbility, sacrificedRef, tappedRef);
       return;
     }
 
@@ -19802,6 +19724,133 @@ export class Game {
         }),
       );
     }
+    this.afterPlayerAction(player);
+  }
+
+  /** A mana ability's effect, its cost paid: it resolves immediately and never
+   * uses the stack (rule 605.3b) — handed what the cost sacrificed or tapped,
+   * read as it last existed (608.2h): Priest of Yawgmoth's "the sacrificed
+   * artifact's mana value". */
+  private resolveManaAbility(
+    sourceId: ObjectId,
+    player: PlayerId,
+    ability: ActivatedAbility,
+    chosenX: number,
+    manaColors: readonly ManaType[] | undefined,
+    grantedAbility: GrantedAbilityRef | undefined,
+    sacrificedRef: LastKnownRefs["sacrificed"],
+    tappedRef: LastKnownRefs["tapped"],
+  ): void {
+    const source = this.state.objects[sourceId];
+    const manaGranter = granterOfRef(grantedAbility);
+    const base = this.makeResolutionContext(sourceId, player, [], chosenX, 0, undefined, 1, 0, [], {
+      ...(sacrificedRef !== undefined ? { sacrificed: sacrificedRef } : {}),
+      ...(tappedRef !== undefined ? { tapped: tappedRef } : {}),
+      ...(manaGranter !== undefined ? { granter: manaGranter } : {}),
+    });
+    // The colour(s) the activating player picked, one per unit whose type
+    // was theirs to pick: an "any color" / "any combination of" ability's
+    // own units first (see `standaloneManaChoices`), then one per
+    // triggered mana ability's extra mana with a choice in it (below).
+    // Only the unfixed part of the output is redirected, so a source that
+    // makes a concrete mana alongside a choice still makes its concrete
+    // mana. "Choose a color" (Nykthos) is the first pick, which is also
+    // the colour an amount read for "that color" is read for.
+    const effect = ability.effect;
+    const manaColor =
+      effect?.kind === "add-mana" && effect.mana === "any-color" ? manaColors?.[0] : undefined;
+    let picked = 0;
+    const context: ResolutionContext = {
+      ...base,
+      manaAbility: true,
+      ...(manaColor !== undefined ? { manaColor } : {}),
+      addMana: (p, mana, amount, spec): void => {
+        if (manaColors === undefined || (mana !== "any-color" && typeof mana !== "object")) {
+          base.addMana(p, mana, amount, spec);
+          return;
+        }
+        // The effect's own amount is what gets made, one unit per pick; a
+        // pick the ability can't make (or a missing one — the action is a
+        // client's word) falls back to the default colour, so a hand-built
+        // `manaColors` can't mint extra mana or a colour the card doesn't
+        // offer. `spec` rides along so a restricted source (Cavern of
+        // Souls) still stamps its restriction on mana floated by hand.
+        const allowed: readonly ManaType[] =
+          mana === "any-color"
+            ? COLORS
+            : "oneOf" in mana
+              ? mana.oneOf
+              : this.manaOneOf(mana, player, sourceId);
+        // A list naming nothing makes nothing (rule 106.5), and it was
+        // offered with no pick for it (`standaloneManaVariants`): none is
+        // used up, so a later pick still lines up.
+        if (allowed.length === 0) return;
+        const units = Math.min(amount, Game.MAX_EFFECT_INSTANCES);
+        // "Any color" is any *one* colour however much is made (Gilded
+        // Lotus), so the first pick names it for all — as it does for "X
+        // {G} or X {W}" (`same`).
+        const oneType = mana === "any-color" || ("same" in mana && mana.same === true);
+        const first = picked;
+        for (let i = 0; i < units; i += 1) {
+          const pick = oneType ? manaColors[first] : manaColors[first + i];
+          base.addMana(p, pick !== undefined && allowed.includes(pick) ? pick : mana, 1, spec);
+        }
+        picked += units;
+      },
+    };
+    const pool = this.state.players[player].manaPool;
+    const poolBefore = pool.length;
+    if (effect !== null) applyEffectSpec(effect, context);
+    if (ability.cost.tap) {
+      // "If you tap a permanent for mana, it produces twice as much of that
+      // mana instead" (Mana Reflection): its own mana, each unit with all
+      // it carries (rule 106.6a).
+      const multiplier = this.tapManaMultiplier(player);
+      if (multiplier > 1) {
+        const made = pool.slice(poolBefore);
+        for (const unit of made) {
+          for (let k = 1; k < multiplier && pool.length < poolBefore + Game.MAX_EFFECT_INSTANCES; k += 1) {
+            pool.push({ ...unit });
+          }
+        }
+        for (const type of MANA_TYPES) {
+          const n = made.filter((u) => u.type === type).length * (multiplier - 1);
+          if (n > 0) this.emit({ type: "mana-added", player, mana: type, amount: n });
+        }
+      }
+      // Tapped for mana: triggered mana abilities (rule 605.1b) add theirs
+      // at once, "of any type that permanent produced" read off what it
+      // just made — a choice among several the player's, with the rest of
+      // the picks.
+      const produced = pool.slice(poolBefore).map((unit) => unit.type);
+      for (const out of this.extraManaOutputs(source, produced, player)) {
+        const origin = this.manaOriginOf(out.holder);
+        if ("units" in out) {
+          for (const type of out.units) this.addMana(player, type, 1, undefined, origin);
+          continue;
+        }
+        const pick = manaColors?.[picked];
+        picked += 1;
+        const type = pick !== undefined && out.choices.includes(pick) ? pick : out.choices[0];
+        this.addMana(player, type, out.amount, undefined, origin);
+      }
+      // What triggers on the tap and uses the stack (rule 106.12a).
+      if (produced.length > 0) this.emit({ type: "permanent-tapped-for-mana", object: sourceId, player, produced });
+    }
+    this.emit({
+      type: "ability-activated",
+      source: sourceId,
+      player,
+      onStack: false,
+    });
+    // Activated by hand, its player holding priority (`whyCannotAct`) —
+    // one activated while paying a cost is `executePayment`'s, inside the
+    // cast or activation, and gives no priority until that's done (601.2g-h,
+    // 605.3a). This player receives priority again (117.3c), so the
+    // state-based actions are checked and triggers put on the stack first
+    // (117.5): Wall of Roots at 0 toughness dies now, and a sacrificed
+    // Treasure's "whenever you sacrifice" trigger goes on the stack. Being
+    // an action, it also ends any run of passes (117.4).
     this.afterPlayerAction(player);
   }
 
@@ -21192,6 +21241,10 @@ export class Game {
         else none = true;
       }
       if (none) own.push({ picks: [], makes: [] });
+    } else if (effect.kind === "add-mana" && effect.mana === "any-color" && effect.amount === "x") {
+      // "Add X mana of any one color" (Springjack Pasture, Haruspex): X waits
+      // for the activation, the colour is one pick that names all of it.
+      own = COLORS.map((c) => ({ picks: [c], makes: [c] }));
     } else {
       const oneOf = (m: { readonly oneOf: readonly ManaType[] } | BoardManaList) => this.manaOneOf(m, player, sourceId);
       const live = () =>
@@ -37729,12 +37782,23 @@ export class Game {
   private regenerateInstead(id: ObjectId): boolean {
     const object = this.state.objects[id];
     const shields = object?.regenerationShields ?? 0;
-    if (shields <= 0) return false;
+    // "If this creature would be destroyed, regenerate it" (rule 701.19b): a
+    // static ability's replaces each destruction, with no shield used up, so
+    // its controller keeps any shield for later.
+    const byStatic =
+      object !== undefined &&
+      !hasLostAbilities(this.state, this.registry, object) &&
+      this.registry
+        .get(rulesTextName(object))
+        .static.some((ability) => ability.regeneratesInstead === true && this.staticActive(object, ability));
+    if (shields <= 0 && !byStatic) return false;
     // "It can't be regenerated this turn" (rule 701.19c): its shields aren't
     // applied, and stay until cleanup.
     if (object.cantBeRegeneratedTurn === this.state.turn.number) return false;
-    if (shields === 1) delete object.regenerationShields;
-    else object.regenerationShields = shields - 1;
+    if (!byStatic) {
+      if (shields === 1) delete object.regenerationShields;
+      else object.regenerationShields = shields - 1;
+    }
     if (object.damageMarked !== 0 || object.markedByDeathtouch) {
       object.damageMarked = 0;
       object.markedByDeathtouch = false;
@@ -38435,6 +38499,7 @@ export class Game {
     parts: readonly SacrificeCostPart[],
     except: ObjectId | undefined,
     priorityTo: PlayerId,
+    manaAbility?: NonNullable<GameState["pendingCostSacrifice"]>["manaAbility"],
   ): void {
     this.state.pendingCostSacrifice = {
       player,
@@ -38443,6 +38508,7 @@ export class Game {
       ...(except !== undefined ? { except } : {}),
       picked: [],
       priorityTo,
+      ...(manaAbility !== undefined ? { manaAbility } : {}),
     };
     this.continueCostSacrifice();
   }
@@ -38470,7 +38536,7 @@ export class Game {
       // With parts after it, a permanent is offered only if one of it can go
       // and leave them payable; with one part (or one permanent each), this
       // is exact.
-      const eligible =
+      const fitting =
         rest.length === 0
           ? eligibleFor(part.filter)
           : eligibleFor(part.filter).filter((id) => {
@@ -38478,6 +38544,12 @@ export class Game {
               left.set(id, (left.get(id) ?? 1) - 1);
               return sacrificePartsFillable(restParts, left);
             });
+      // "With different names": no name already chosen, and one at a time so
+      // the next question can leave out this one's.
+      const different = part.differentNames === true;
+      const namesTaken = different ? new Set(pending.picked.map((id) => printedCardName(this.state.objects[id]))) : null;
+      const eligible =
+        namesTaken === null ? fitting : fitting.filter((id) => !namesTaken.has(printedCardName(this.state.objects[id])));
       let total = 0;
       for (const id of eligible) total += capacity.get(id) ?? 1;
       if (part.count <= 0 || total <= part.count) {
@@ -38491,7 +38563,7 @@ export class Game {
         };
         continue;
       }
-      this.state.awaiting = { kind: "sacrifice", player: pending.player, count: part.count, eligible };
+      this.state.awaiting = { kind: "sacrifice", player: pending.player, count: different ? 1 : part.count, eligible };
       const object = this.state.objects[pending.source];
       this.state.decisionSource =
         object === undefined ? null : { object: pending.source, cardName: printedCardName(object) };
@@ -38500,23 +38572,34 @@ export class Game {
   }
 
   /** Sacrifice everything a cost of several picked, as one event (rule
-   * 603.10a — each one's dies trigger sees the others go). */
+   * 603.10a — each one's dies trigger sees the others go). A mana ability's
+   * cost (`pending.manaAbility`) then adds its mana: nothing has resolved
+   * until now. */
   private finishCostSacrifice(): void {
     const pending = this.state.pendingCostSacrifice;
     if (pending === undefined) return;
     delete this.state.pendingCostSacrifice;
+    // Read before it might be among those sacrificed, like the ability's
+    // other last-known information (rule 608.2h).
+    const manaAbility = pending.manaAbility;
+    const ability = manaAbility === undefined ? undefined : this.effectiveActivated(pending.source)[manaAbility.abilityIndex];
+    const grantedAbility = manaAbility === undefined ? undefined : this.activatedRefFor(pending.source, manaAbility.abilityIndex);
     const victims = pending.picked.filter((id) => this.state.objects[id]?.zone === "battlefield");
-    if (victims.length === 0) return;
-    this.withLeaveBatch(() => {
-      this.snapshotLeaving(victims);
-      for (const id of victims) {
-        // Its controller sacrifices it (rule 701.21a) — read before the move
-        // hands it back to its owner.
-        const sacrificer = this.state.objects[id].controller;
-        this.moveObject(id, "graveyard");
-        this.emit({ type: "permanent-sacrificed", object: id, player: sacrificer });
-      }
-    });
+    if (victims.length > 0) {
+      this.withLeaveBatch(() => {
+        this.snapshotLeaving(victims);
+        for (const id of victims) {
+          // Its controller sacrifices it (rule 701.21a) — read before the move
+          // hands it back to its owner.
+          const sacrificer = this.state.objects[id].controller;
+          this.moveObject(id, "graveyard");
+          this.emit({ type: "permanent-sacrificed", object: id, player: sacrificer });
+        }
+      });
+    }
+    if (manaAbility !== undefined && ability !== undefined) {
+      this.resolveManaAbility(pending.source, pending.player, ability, manaAbility.x, manaAbility.manaColors, grantedAbility, undefined, undefined);
+    }
   }
 
   /** Answers a pending `sacrifice` decision. */
@@ -38530,10 +38613,15 @@ export class Game {
     if (cost !== undefined) {
       // A part of a sacrifice cost: each pick singles out one permanent — a
       // token named out of a stack is split off it now, so the next part
-      // can't name it again.
+      // can't name it again. A part asked one at a time ("with different
+      // names") stays until it has them all.
+      const [part, ...others] = cost.parts;
       this.state.pendingCostSacrifice = {
         ...cost,
-        parts: cost.parts.slice(1),
+        parts:
+          part?.differentNames === true && part.count > permanents.length
+            ? [{ ...part, count: part.count - permanents.length }, ...others]
+            : others,
         picked: [...cost.picked, ...permanents.map((id) => this.splitOneFromStack(id))],
       };
       this.continueCostSacrifice();

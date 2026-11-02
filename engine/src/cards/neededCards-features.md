@@ -2785,6 +2785,21 @@ needing their own keys or checks: Curse of Hospitality's "creatures attacking en
 player", and the double-faced Radiant Grace, Faithbound Judge and Accursed Witch, for
 `author-freed`; the two `amount:curses-attached-to-player` Curses wait on that key.
 
+### Sacrifice costs of a number, in parts, and in a mana ability — built 2026-11-01
+
+The group `cost:sacrifice-multiple` (+ `cost:sacrifice-x-mana-ability`,
+`cost:tap-creatures-total-power`), with `cost:flashback-sacrifice-x` and
+`replacement:regenerate-instead-of-destroy` riding along. `SacrificeCost`'s
+`{ parts: [{ filter, count }] }` gives each kind its own number or `"x"`,
+`differentNames` a total constraint, asked one at a time; a mana ability may now
+sacrifice several (`pendingCostSacrifice.manaAbility`: the mana comes as the last
+is chosen, off the stack, rule 605.3b); "any number of" and "one or more" are `"x"`
+and `minX`; `flashback.sacrifice.count: "x"`. "X mana of any one color" is offered
+per colour. `regeneratesInstead` is rule 701.19b. Proving: Springjack Pasture,
+Emrakul's Evangel, Glass-Cast Heart, Transmutation Font, Firecat Blitz, Mossbridge
+Troll. Left on the key's cards: "up to three" (`maxX`, Baba Lysaga), a spell's
+Plumb the Forbidden copies, Lich-Knights' Conquest's sacrifice as an effect.
+
 ### A graveyard's order — built 2026-11-01
 
 The need-keys `effect:top-card-of-graveyard`, `effect:top-creature-card-of-graveyard`
