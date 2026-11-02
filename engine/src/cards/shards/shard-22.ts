@@ -50,6 +50,7 @@ import _poolBackToBasics from "../pool/back-to-basics.js";
 import _poolBackfire from "../pool/backfire.js";
 import _poolBalduvianRage from "../pool/balduvian-rage.js";
 import _poolBaronAirshipKingdom from "../pool/baron-airship-kingdom.js";
+import _poolBarracksOfTheThousand from "../pool/barracks-of-the-thousand.js";
 import _poolBarrageOgre from "../pool/barrage-ogre.js";
 import _poolBarrierOfBones from "../pool/barrier-of-bones.js";
 import _poolBatColony from "../pool/bat-colony.js";
@@ -938,6 +939,7 @@ const shard: CardShard = {
     _poolBackfire,
     _poolBalduvianRage,
     _poolBaronAirshipKingdom,
+    _poolBarracksOfTheThousand,
     _poolBarrageOgre,
     _poolBarrierOfBones,
     _poolBatColony,

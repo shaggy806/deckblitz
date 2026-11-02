@@ -841,6 +841,7 @@ import _poolWaterloggedHulk from "../pool/waterlogged-hulk.js";
 import _poolWaterwhirl from "../pool/waterwhirl.js";
 import _poolWeaverOfCurrents from "../pool/weaver-of-currents.js";
 import _poolWeaverOfHarmony from "../pool/weaver-of-harmony.js";
+import _poolWeightOfConscience from "../pool/weight-of-conscience.js";
 import _poolWellOfDiscovery from "../pool/well-of-discovery.js";
 import _poolWestgateRegent from "../pool/westgate-regent.js";
 import _poolWhirlermaker from "../pool/whirlermaker.js";
@@ -1733,6 +1734,7 @@ const shard: CardShard = {
     _poolWaterwhirl,
     _poolWeaverOfCurrents,
     _poolWeaverOfHarmony,
+    _poolWeightOfConscience,
     _poolWellOfDiscovery,
     _poolWestgateRegent,
     _poolWhirlermaker,

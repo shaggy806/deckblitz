@@ -296,6 +296,7 @@ import _poolGiftOfOrzhova from "../pool/gift-of-orzhova.js";
 import _poolGiftOfStrength from "../pool/gift-of-strength.js";
 import _poolGiottKingOfTheDwarves from "../pool/giott-king-of-the-dwarves.js";
 import _poolGiselaBladeOfGoldnight from "../pool/gisela-blade-of-goldnight.js";
+import _poolGlassCastHeart from "../pool/glass-cast-heart.js";
 import _poolGlistenerSeer from "../pool/glistener-seer.js";
 import _poolGlitteringMassif from "../pool/glittering-massif.js";
 import _poolGloomPangolin from "../pool/gloom-pangolin.js";
@@ -489,6 +490,7 @@ import _poolMomentOfTriumph from "../pool/moment-of-triumph.js";
 import _poolMonkIdealist from "../pool/monk-idealist.js";
 import _poolMoonlightHunt from "../pool/moonlight-hunt.js";
 import _poolMorningtidesLight from "../pool/morningtides-light.js";
+import _poolMossbridgeTroll from "../pool/mossbridge-troll.js";
 import _poolMountainValley from "../pool/mountain-valley.js";
 import _poolNardoleResourcefulCyborg from "../pool/nardole-resourceful-cyborg.js";
 import _poolNathOfTheGiltLeaf from "../pool/nath-of-the-gilt-leaf.js";
@@ -746,6 +748,7 @@ import _poolThermalGlider from "../pool/thermal-glider.js";
 import _poolThingSwing from "../pool/thing-swing.js";
 import _poolThirstForMeaning from "../pool/thirst-for-meaning.js";
 import _poolThoughtbind from "../pool/thoughtbind.js";
+import _poolThousandMoonsSmithy from "../pool/thousand-moons-smithy.js";
 import _poolThreeTreeScribe from "../pool/three-tree-scribe.js";
 import _poolThreeVisits from "../pool/three-visits.js";
 import _poolThroneOfTheGodPharaoh from "../pool/throne-of-the-god-pharaoh.js";
@@ -1175,6 +1178,7 @@ const shard: CardShard = {
     _poolGiftOfStrength,
     _poolGiottKingOfTheDwarves,
     _poolGiselaBladeOfGoldnight,
+    _poolGlassCastHeart,
     _poolGlistenerSeer,
     _poolGlitteringMassif,
     _poolGloomPangolin,
@@ -1368,6 +1372,7 @@ const shard: CardShard = {
     _poolMonkIdealist,
     _poolMoonlightHunt,
     _poolMorningtidesLight,
+    _poolMossbridgeTroll,
     _poolMountainValley,
     _poolNardoleResourcefulCyborg,
     _poolNathOfTheGiltLeaf,
@@ -1625,6 +1630,7 @@ const shard: CardShard = {
     _poolThingSwing,
     _poolThirstForMeaning,
     _poolThoughtbind,
+    _poolThousandMoonsSmithy,
     _poolThreeTreeScribe,
     _poolThreeVisits,
     _poolThroneOfTheGodPharaoh,

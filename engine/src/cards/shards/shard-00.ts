@@ -39,6 +39,7 @@ import _poolArchOfOrazca from "../pool/arch-of-orazca.js";
 import _poolArchiveArbiter from "../pool/archive-arbiter.js";
 import _poolArmoredKincaller from "../pool/armored-kincaller.js";
 import _poolArvadTheCursed from "../pool/arvad-the-cursed.js";
+import _poolAryelKnightOfWindgrace from "../pool/aryel-knight-of-windgrace.js";
 import _poolAscendantPackleader from "../pool/ascendant-packleader.js";
 import _poolAshmouthHound from "../pool/ashmouth-hound.js";
 import _poolAssassinsStrike from "../pool/assassins-strike.js";
@@ -233,6 +234,7 @@ import _poolEliteArchers from "../pool/elite-archers.js";
 import _poolElvishHandservant from "../pool/elvish-handservant.js";
 import _poolElvishHarbinger from "../pool/elvish-harbinger.js";
 import _poolEmbercleave from "../pool/embercleave.js";
+import _poolEmrakulsEvangel from "../pool/emrakuls-evangel.js";
 import _poolEnigmaticIncarnation from "../pool/enigmatic-incarnation.js";
 import _poolEnlistmentOfficer from "../pool/enlistment-officer.js";
 import _poolEnragedCeratok from "../pool/enraged-ceratok.js";
@@ -927,6 +929,7 @@ const shard: CardShard = {
     _poolArchiveArbiter,
     _poolArmoredKincaller,
     _poolArvadTheCursed,
+    _poolAryelKnightOfWindgrace,
     _poolAscendantPackleader,
     _poolAshmouthHound,
     _poolAssassinsStrike,
@@ -1121,6 +1124,7 @@ const shard: CardShard = {
     _poolElvishHandservant,
     _poolElvishHarbinger,
     _poolEmbercleave,
+    _poolEmrakulsEvangel,
     _poolEnigmaticIncarnation,
     _poolEnlistmentOfficer,
     _poolEnragedCeratok,

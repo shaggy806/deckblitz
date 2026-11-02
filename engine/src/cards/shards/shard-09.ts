@@ -487,6 +487,7 @@ import _poolMystifyingMaze from "../pool/mystifying-maze.js";
 import _poolNahirisBinding from "../pool/nahiris-binding.js";
 import _poolNamoraTheSeaQueen from "../pool/namora-the-sea-queen.js";
 import _poolNayaCharm from "../pool/naya-charm.js";
+import _poolNecronOverlord from "../pool/necron-overlord.js";
 import _poolNefashu from "../pool/nefashu.js";
 import _poolNemesisMask from "../pool/nemesis-mask.js";
 import _poolNetherHorror from "../pool/nether-horror.js";
@@ -655,6 +656,7 @@ import _poolScuttletide from "../pool/scuttletide.js";
 import _poolScuzzbackScrounger from "../pool/scuzzback-scrounger.js";
 import _poolSeaLegs from "../pool/sea-legs.js";
 import _poolSearchlightCompanion from "../pool/searchlight-companion.js";
+import _poolSecludedStarforge from "../pool/secluded-starforge.js";
 import _poolSedgemoorWitch from "../pool/sedgemoor-witch.js";
 import _poolSeedSpark from "../pool/seed-spark.js";
 import _poolSeizeTheSoul from "../pool/seize-the-soul.js";
@@ -716,6 +718,7 @@ import _poolSplatterGoblin from "../pool/splatter-goblin.js";
 import _poolSplinterRadicalRat from "../pool/splinter-radical-rat.js";
 import _poolSpontaneousMutation from "../pool/spontaneous-mutation.js";
 import _poolSpringLeafAvenger from "../pool/spring-leaf-avenger.js";
+import _poolSpringjackPasture from "../pool/springjack-pasture.js";
 import _poolSproutingVines from "../pool/sprouting-vines.js";
 import _poolSpymastersVault from "../pool/spymasters-vault.js";
 import _poolStaffOfEdenVaultsKey from "../pool/staff-of-eden-vaults-key.js";
@@ -1396,6 +1399,7 @@ const shard: CardShard = {
     _poolNahirisBinding,
     _poolNamoraTheSeaQueen,
     _poolNayaCharm,
+    _poolNecronOverlord,
     _poolNefashu,
     _poolNemesisMask,
     _poolNetherHorror,
@@ -1564,6 +1568,7 @@ const shard: CardShard = {
     _poolScuzzbackScrounger,
     _poolSeaLegs,
     _poolSearchlightCompanion,
+    _poolSecludedStarforge,
     _poolSedgemoorWitch,
     _poolSeedSpark,
     _poolSeizeTheSoul,
@@ -1625,6 +1630,7 @@ const shard: CardShard = {
     _poolSplinterRadicalRat,
     _poolSpontaneousMutation,
     _poolSpringLeafAvenger,
+    _poolSpringjackPasture,
     _poolSproutingVines,
     _poolSpymastersVault,
     _poolStaffOfEdenVaultsKey,

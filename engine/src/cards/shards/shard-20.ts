@@ -915,6 +915,7 @@ import _tokensCursedRoleToken from "../tokens/cursed-role-token.js";
 import _tokensDjinnMonkToken from "../tokens/djinn-monk-token.js";
 import _tokensFaerieToken from "../tokens/faerie-token.js";
 import _tokensGiantWizardToken from "../tokens/giant-wizard-token.js";
+import _tokensGnomeSoldierToken from "../tokens/gnome-soldier-token.js";
 import _tokensGreenDogToken11 from "../tokens/green-dog-token-1-1.js";
 import _tokensIllusionTokenMinn from "../tokens/illusion-token-minn.js";
 import _tokensInsectTokenBlackGreen from "../tokens/insect-token-black-green.js";
@@ -1843,6 +1844,7 @@ const shard: CardShard = {
     _tokensDjinnMonkToken,
     _tokensFaerieToken,
     _tokensGiantWizardToken,
+    _tokensGnomeSoldierToken,
     _tokensGreenDogToken11,
     _tokensIllusionTokenMinn,
     _tokensInsectTokenBlackGreen,

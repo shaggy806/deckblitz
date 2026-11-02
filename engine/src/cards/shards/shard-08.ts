@@ -276,6 +276,7 @@ import _poolFinalRevels from "../pool/final-revels.js";
 import _poolFindThePath from "../pool/find-the-path.js";
 import _poolFireDrake from "../pool/fire-drake.js";
 import _poolFireUrchin from "../pool/fire-urchin.js";
+import _poolFirecatBlitz from "../pool/firecat-blitz.js";
 import _poolFirstSliversChosen from "../pool/first-slivers-chosen.js";
 import _poolFlareOfDuplication from "../pool/flare-of-duplication.js";
 import _poolFlawlessForgery from "../pool/flawless-forgery.js";
@@ -1186,6 +1187,7 @@ const shard: CardShard = {
     _poolFindThePath,
     _poolFireDrake,
     _poolFireUrchin,
+    _poolFirecatBlitz,
     _poolFirstSliversChosen,
     _poolFlareOfDuplication,
     _poolFlawlessForgery,
