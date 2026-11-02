@@ -11,17 +11,17 @@ import { Game } from "../game.js";
 import { asPlayerId } from "../primitives.js";
 import type { ObjectId } from "../primitives.js";
 import type { TargetRef } from "../target.js";
-import { licidDefinition } from "../cards/define.js";
 import { haunt } from "../cards/helpers.js";
 import {
   abilityPolarities,
-  auraPolarity,
   castPolarities,
   onlyWrongSide,
   pendingTargetPolarities,
   rankTargets,
+  slotStrengths,
   specSide,
 } from "../target-polarity.js";
+import type { TargetSpec } from "../target.js";
 
 const registry = createDefaultRegistry();
 const cast = (name: string) => castPolarities(registry.get(name));
@@ -198,53 +198,54 @@ describe("slot polarity", () => {
     expect(cast("Necromantic Thirst")).toEqual(["help"]);
   });
 
-  it("classifies nearly every targeted slot in the pool", () => {
-    // A ratchet, not a target: 98.6% when this was written (1,771 slots).
-    // What's left is genuinely the board's call — a transform, an animated
-    // land, a suspect — and a drop means new cards are reaching for effects
-    // the table doesn't know which way to point.
+  it("rates nearly every targeted slot in the pool", () => {
+    // A ratchet on slots no effect says anything about. "either" is a rating:
+    // the table has looked and it's the board's call (a transform, a land's
+    // type, an exchange of life totals), so it never counts against this. Until
+    // 2026-11-02 it did, and every honest either-way lowered the bar. A slot
+    // left here can be right too: "draw a card for each creature target player
+    // controls" only reads its target (Biomantic Mastery). A rise means new
+    // cards are reaching for effects the table hasn't been told about.
+    const unrated: string[] = [];
     let slots = 0;
-    let decided = 0;
+    const read = (
+      name: string,
+      effect: Parameters<typeof slotStrengths>[0],
+      specs: readonly TargetSpec[],
+      firstIsRated = false,
+    ): void => {
+      slotStrengths(effect, specs.length).forEach((strength, slot) => {
+        slots += 1;
+        const spec = specs[slot];
+        // `gatedOpponents`: the spec picked the side.
+        const gated = typeof spec === "object" && spec.kind === "opponent-compared";
+        if (strength === null && !gated && !(firstIsRated && slot === 0)) unrated.push(name);
+      });
+    };
     for (const def of POOL_CARDS) {
-      const all = [
-        ...(def.targets.length > 0 && def.castModal === null ? castPolarities(def) : []),
-        // A Licid's slot leans as its Aura does, the way `offerPolarities`
-        // reads it for a bot.
-        ...def.activated.flatMap((a) =>
-          a.targets.length === 0 ? [] : a.licid === true ? [auraPolarity(licidDefinition(def))] : abilityPolarities(a),
-        ),
-        ...def.triggered.flatMap((t) => (t.targets.length > 0 ? abilityPolarities(t) : [])),
-      ];
-      slots += all.length;
-      decided += all.filter((p) => p !== "either").length;
+      if (def.targets.length > 0 && def.castModal === null) {
+        // An Aura's slot leans as its Aura does (`auraPolarity`).
+        read(def.name, def.effect, def.targets, (def.subtypes ?? []).includes("Aura"));
+      }
+      for (const ability of def.activated) read(def.name, ability.effect, ability.targets, ability.licid === true);
+      for (const ability of def.triggered) read(def.name, ability.effect, ability.targets);
     }
     expect(slots).toBeGreaterThan(1500);
-    // 0.97 until 2026-10-27: batches 216-218 (~10,400 slots) brought it to
-    // 96.99% with honest either-ways — Cagemail's "+2/+2 and can't attack",
-    // Telekinetic Bonds' "tap or untap". 0.968 until round twenty's batches
-    // (230-233) took it to 96.795%, again honest either-ways — Defiling
-    // Tears' "+1/-1 and regenerate", Metathran Transport's "becomes blue".
-    // 0.967 until B253 (2026-10-29) took it to 96.43%: three dozen "target
-    // land becomes [a basic land type]" cards (Tideshaper Mystic, Spreading
-    // Seas, Convincing Mirage) — your own colour fixing or an opponent's
-    // lock, the board's call. 0.964 until 2026-10-31 (96.397%): Magus of the
-    // Arena's "tap target creature you control and … Those creatures fight"
-    // — tapping your own fighter is a minor harm, the fight a minor help.
-    // 0.9635 until 2026-10-31 (96.341%): Ransack's and Dimir Machinations'
-    // "look at the top cards of target player's library" — your own draws
-    // set up or an opponent's disrupted, the board's call. 0.963 until
-    // 2026-10-31 (96.295%): the text changes' "change the text of target
-    // spell or permanent" (Sleight of Mind, Mind Bend — which side a changed
-    // word helps is the words') and Indigo Faerie's "becomes blue in addition"
-    // — honest either-ways. 0.9625 until 2026-11-01 (96.249%): Samite
-    // Alchemist's "prevent the next 4 … to target creature you control. Tap
-    // that creature" — a shield and its price, on your own. 0.9624 until
-    // 2026-11-01 (96.199%): Mirror Universe's and Soul Conduit's exchanges
-    // of life totals — a gift or a cut as the numbers stand. 0.9619 until
-    // 2026-11-02 (96.185%): Lantern of Insight's and Natural Selection's "target
-    // player shuffles" — your own library thinned or an opponent's top undone —
-    // and Disarm's "unattach all Equipment from target creature", either side's.
-    expect(decided / slots).toBeGreaterThan(0.9618);
+    // 0.75% on 2026-11-02: 91 of 12,164.
+    expect(unrated.length / slots, unrated.slice(0, 40).join("; ")).toBeLessThan(0.0076);
+  });
+
+  it("tells a slot rated either way from one nothing rates", () => {
+    const strength = (effect: Parameters<typeof slotStrengths>[0]) => slotStrengths(effect, 1)[0];
+    // "Target player shuffles": looked at, and it's the board's call.
+    expect(strength(registry.get("Lantern of Insight").activated[0].effect)?.polarity).toBe("either");
+    expect(strength(registry.get("Disarm").effect)?.polarity).toBe("either");
+    // "You gain 2 life for each creature target player controls" only reads it.
+    expect(strength(registry.get("Divine Congregation").effect)).toBeNull();
+  });
+
+  it("reads what's done to each permanent as done to the target player who controls them", () => {
+    expect(cast("Polymorphist's Jest")).toEqual(["harm"]);
   });
 });
 

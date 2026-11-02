@@ -169,7 +169,14 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "for-target": (n, v) => v.child(n.effect),
   // Its slot `as` is each permanent in turn, not the spell's target, so a
   // single-target polarity inside says nothing about a target when `as` is 0.
+  // What's done to each is done to the player whose permanents they are
+  // (Polymorphist's Jest), and a target whose attachments they are could be
+  // anyone's (Disarm).
   "for-each-permanent": (n, v) => {
+    const as = n.as ?? 0;
+    const each = slotStrengths(n.effect, as + 1)[as];
+    if (each !== null && each !== undefined) v.touch(n.controlledByTarget, each.polarity, each.weight);
+    v.touch(n.filter.attachedToTarget, "either", MINOR);
     if (n.as !== undefined) v.child(n.effect);
   },
   "for-permanent": none,
@@ -632,7 +639,8 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "limit-blockers": none,
   "additional-upkeep-steps": none,
   "additional-land-drop": none,
-  "shuffle-library": none,
+  // Your own library thinned, or an opponent's known top undone.
+  "shuffle-library": (n, v) => v.touch(n.target, "either", MINOR),
   foraged: none,
   // The split's targets take the damage (Inferno Titan, Electrolyze).
   "damage-divided": (n, v) => v.touch(n.from, "harm", MAJOR),
@@ -757,10 +765,11 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   },
   // A colour isn't good or bad by itself: what it's for (dodging a Circle of
   // Protection, or walking into one) decides.
-  "become-color": none,
+  // Whether a colour helps depends on what it dodges or walks into.
+  "become-color": (n, v) => v.touch(n.target, "either", MINOR),
   // Which side a changed word helps depends on the words — it's the search
   // that tells (the choices are a resolving menu).
-  "change-text": none,
+  "change-text": (n, v) => v.touch(n.target, "either", MINOR),
   // An announced modal ability's modes bring targets of their own, known
   // only once chosen — see `pendingTargetPolarities`.
   modal: (n, v) => {
@@ -871,6 +880,8 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     // reorder alone (Portent) is anyone's to use.
     if (n.from !== undefined && (n.destination === "graveyard" || n.destination.startsWith("exile"))) {
       v.touch(n.from, "harm", MAJOR);
+    } else {
+      v.touch(n.from, "either", MINOR);
     }
   },
 };
