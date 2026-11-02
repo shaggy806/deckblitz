@@ -62,6 +62,7 @@ import {
   soulbond,
   spectacle,
   sunburst,
+  searchZonesAndOr,
   surge,
   undying,
   unearth,
@@ -2832,6 +2833,10 @@ export function parseSentence(sentence, ctx) {
   if (re(`put all cards exiled with (?:~|it) onto the battlefield`).test(s)) {
     return { kind: "return-exiled-by-source", linked: "battlefield", under: "you" };
   }
+  // "You lose half your life, rounded up" (rule 107.1a — Doomsday).
+  if (/^you lose half your life, rounded up\.$/i.test(s)) {
+    return { kind: "lose-life", amount: { half: { lifeTotal: "you" }, round: "up" } };
+  }
   // Grievous Wound's "they": the player it enchants, the player the damage hit.
   if (/^they lose half their life, rounded up\.$/i.test(s)) {
     return { kind: "lose-life", who: "trigger-player", amount: { half: { lifeTotal: "each" }, round: "up" } };
@@ -3992,6 +3997,12 @@ export function parseSentence(sentence, ctx) {
   if ((m = /^search your library for a basic land card that doesn't share a land type with a land you control, put (?:it|that card) onto the battlefield( tapped)?, then shuffle\.$/i.exec(s))) {
     const filter = { type: "land", supertype: "basic", not: { sharesLandTypeWith: { controlled: { type: "land" } } } };
     return { kind: "search-library", filter, destination: "battlefield", min: 0, max: 1, ...(m[1] ? { enterTapped: true } : {}) };
+  }
+  // "Search your graveyard, hand, and library for a card named X [and] put it
+  // onto the battlefield, then shuffle" (Kassandra, Shaun & Rebecca): all three
+  // zones, no choice of them.
+  if ((m = /^search your graveyard, hand, and library for a card named (.+?)(?:,| and) put it onto the battlefield, then shuffle\.$/i.exec(s))) {
+    return { kind: "search-library", zones: "graveyard-hand-library", filter: { name: m[1] }, destination: "battlefield", min: 0, max: 1 };
   }
   if ((m = /^search your library for an? (.+?) card, put it onto the battlefield( tapped)?, then shuffle\.$/i.exec(s))) {
     const filter = parseTypePhrase(m[1], { cards: true });
@@ -5751,7 +5762,7 @@ export function parseEffect(text, outer) {
     // "[Choose a nonland card name.] Search target player's graveyard, hand,
     // and library for all cards with that name and exile them. Then that
     // player shuffles." — two or three sentences, one effect.
-    const searched = searchOthersAt(sentences, i, ctx) ?? searchInsteadAt(sentences, i);
+    const searched = searchOthersAt(sentences, i, ctx) ?? searchInsteadAt(sentences, i) ?? searchZonesAt(sentences, i);
     if (searched !== null) {
       parsed.push(searched.effect);
       hints.push({ sentence, effect: searched.effect });
@@ -6870,6 +6881,65 @@ function searchInsteadAt(sentences, i) {
   return {
     effect: one[1] ? { kind: "may", prompt: `Search your library for ${/^[aeiou]/i.test(one[2]) ? "an" : "a"} ${one[2]} card?`, effect: search } : search,
     used: 4,
+  };
+}
+
+/**
+ * A search of your own zones over two sentences, or null:
+ * - "[You may s]earch your graveyard, hand, and/or library for a card named X
+ *   and put it onto the battlefield [attached to this creature]. If you search
+ *   your library this way, shuffle." (Boonweaver Giant, Dark Supplicant): the
+ *   zones chosen as it resolves (`searchZonesAndOr`);
+ * - "Search your library and graveyard for five cards and exile the rest. Put
+ *   the chosen cards on top of your library in any order." (Doomsday).
+ */
+function searchZonesAt(sentences, i) {
+  if (
+    /^search your library and graveyard for five cards and exile the rest\.$/i.test(sentences[i] ?? "") &&
+    /^put the chosen cards on top of your library in any order\.$/i.test(sentences[i + 1] ?? "")
+  ) {
+    return {
+      effect: {
+        kind: "search-library",
+        zones: "library-and-graveyard",
+        filter: {},
+        destination: "library-top",
+        min: 5,
+        max: 5,
+        exileRest: true,
+        inAnyOrder: true,
+      },
+      used: 2,
+    };
+  }
+  const m =
+    /^(you may )?search your ((?:graveyard|library|hand)(?:, (?:graveyard|library|hand),?| ) ?and\/or (?:graveyard|library|hand)) for (.+?) and put it onto the battlefield( attached to this (?:creature|equipment))?\.$/i.exec(
+      sentences[i] ?? "",
+    );
+  if (m === null || !/^if you search your library this way, shuffle\.$/i.test(sentences[i + 1] ?? "")) return null;
+  const zones = m[2].toLowerCase().match(/graveyard|library|hand/g);
+  // With only the library and the graveyard, the older cards spell the modes out.
+  if (!zones.includes("hand")) return null;
+  const what = m[3];
+  let filter;
+  let n;
+  if ((n = /^a card named (.+)$/i.exec(what))) {
+    if (/ and\/or /i.test(n[1])) return null;
+    filter = { name: n[1] };
+  } else if (/^a card with the same name as that spell$/i.test(what)) filter = { sameNameAsTriggerObject: true };
+  else if ((n = /^an? (.+?) card$/i.exec(what))) filter = parseTypePhrase(n[1], { cards: true });
+  if (filter === undefined || filter === null) return null;
+  const search = searchZonesAndOr(zones, {
+    kind: "search-library",
+    filter,
+    destination: "battlefield",
+    ...(m[4] ? { attachedToSource: true } : {}),
+    min: 0,
+    max: 1,
+  });
+  return {
+    effect: m[1] ? { kind: "may", prompt: `Search your ${m[2]} for ${what}?`, effect: search } : search,
+    used: 2,
   };
 }
 

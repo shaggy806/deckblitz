@@ -9555,5 +9555,72 @@ describe("changes of control", () => {
     });
     // No one target to be about: left for a person.
     expect(parseEffect("When you lose control of the creature, tap it.", ctx()).todo).not.toHaveLength(0);
+describe("a search of your own zones", () => {
+  it("reads \"and/or\" as a choice of zones as it resolves, attached or not", () => {
+    const giant = parseEffect(
+      "You may search your graveyard, hand, and/or library for an Aura card and put it onto the battlefield attached to this creature. If you search your library this way, shuffle.",
+      ctx(),
+    );
+    expect(giant.todo).toEqual([]);
+    expect(giant.effect.kind).toBe("may");
+    const modal = giant.effect.effect.effects[0];
+    expect(modal.modes.map((mode: { text: string }) => mode.text)).toEqual([
+      "Search your graveyard, hand, and library",
+      "Search your graveyard and hand",
+      "Search your graveyard and library",
+      "Search your hand and library",
+      "Search your graveyard",
+      "Search your hand",
+      "Search your library",
+    ]);
+    expect(modal.modes[3].effect).toEqual({
+      kind: "search-library",
+      filter: { subtype: "Aura" },
+      destination: "battlefield",
+      attachedToSource: true,
+      min: 0,
+      max: 1,
+      zones: "hand-and-library",
+    });
+    const named = parseEffect(
+      "Search your graveyard, hand, and/or library for a card named Scion of Darkness and put it onto the battlefield. If you search your library this way, shuffle.",
+      ctx(),
+    );
+    expect(named.effect.kind).toBe("sequence");
+    expect(named.effect.effects[0].modes[0].effect.filter).toEqual({ name: "Scion of Darkness" });
+  });
+
+  it("reads the same name as that spell, and the printed order of the zones", () => {
+    const crown = parseEffect(
+      "You may search your library, hand, and/or graveyard for a Rune card and put it onto the battlefield attached to this Equipment. If you search your library this way, shuffle.",
+      ctx(),
+    );
+    expect(crown.effect.effect.effects[0].modes[0].text).toBe("Search your library, hand, and graveyard");
+    const mishra = parseEffect(
+      "You may search your graveyard, hand, and/or library for a card with the same name as that spell and put it onto the battlefield. If you search your library this way, shuffle.",
+      ctx(),
+    );
+    expect(mishra.effect.effect.effects[0].modes[0].effect.filter).toEqual({ sameNameAsTriggerObject: true });
+  });
+
+  it("reads all three zones with no choice, and Doomsday's five", () => {
+    expect(
+      parseEffect("Search your graveyard, hand, and library for a card named The Spear of Leonidas, put it onto the battlefield, then shuffle.", ctx()).effect,
+    ).toEqual({
+      kind: "search-library",
+      zones: "graveyard-hand-library",
+      filter: { name: "The Spear of Leonidas" },
+      destination: "battlefield",
+      min: 0,
+      max: 1,
+    });
+    const doomsday = parseFace({
+      name: "Doomsday",
+      type_line: "Sorcery",
+      oracle_text:
+        "Search your library and graveyard for five cards and exile the rest. Put the chosen cards on top of your library in any order. You lose half your life, rounded up.",
+    });
+    expect(doomsday.complete).toBe(true);
+    expect(doomsday.effect.effects[0]).toMatchObject({ exileRest: true, inAnyOrder: true, destination: "library-top", min: 5 });
   });
 });

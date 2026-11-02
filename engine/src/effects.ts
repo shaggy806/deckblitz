@@ -126,7 +126,24 @@ export type LookAndChooseZone =
   | { readonly cards: readonly ObjectId[] }
   | { readonly exiled: readonly ObjectId[] };
 /** What a `search-library` searches — see its `zones`. */
-export type SearchZones = "library" | "graveyard" | "library-and-graveyard" | "graveyard-hand-library";
+export type SearchZones =
+  | "library"
+  | "graveyard"
+  | "hand"
+  | "library-and-graveyard"
+  | "graveyard-and-hand"
+  | "hand-and-library"
+  | "graveyard-hand-library";
+/** Which zones each {@link SearchZones} takes in. */
+export const SEARCHED_ZONES = {
+  library: { library: true, graveyard: false, hand: false },
+  graveyard: { library: false, graveyard: true, hand: false },
+  hand: { library: false, graveyard: false, hand: true },
+  "library-and-graveyard": { library: true, graveyard: true, hand: false },
+  "graveyard-and-hand": { library: false, graveyard: true, hand: true },
+  "hand-and-library": { library: true, graveyard: false, hand: true },
+  "graveyard-hand-library": { library: true, graveyard: true, hand: true },
+} as const satisfies Record<SearchZones, { readonly library: boolean; readonly graveyard: boolean; readonly hand: boolean }>;
 /** A `search-library`'s other player's zones and what follows the finds, as
  * `ResolutionContext.searchLibrary` takes them — see the effect's `whose`,
  * `all`, `playable` and `then`. */
@@ -139,6 +156,10 @@ export interface SearchMore {
   readonly then?: EffectSpec;
   readonly outside?: true | "only";
   readonly faceUpExile?: true;
+  /** Its `exileRest`. */
+  readonly exileRest?: true;
+  /** Its `inAnyOrder`. */
+  readonly inAnyOrder?: true;
   /** Its `instead`, its `condition` already read (one that didn't hold is no
    * `instead` at all) and its `under` named. */
   readonly instead?: ResolvedSearchInstead;
@@ -8357,14 +8378,32 @@ export type EffectSpec =
       readonly who?: { readonly controllerOfTarget: number } | "that-player";
       /**
        * Which zones are searched: the library (the default), the graveyard,
-       * or both — "search your library **and/or graveyard**" (Finale of
-       * Devastation) is a resolution-time `modal` over the three, so the
-       * player says which. Only a search that includes the library shuffles
-       * it ("if you search your library this way, shuffle"). A graveyard is
-       * public, so a matching card there can't be missed: failing to find is
-       * allowed only in a hidden zone (rule 701.23b).
+       * the hand, or any of them together — "search your library **and/or
+       * graveyard**" (Finale of Devastation) is a resolution-time `modal` over
+       * the three, so the player says which, and "your graveyard, hand,
+       * **and/or** library" (Boonweaver Giant) the same over all seven: the
+       * `searchZonesAndOr` helper writes it. "Your graveyard, hand, **and**
+       * library" (Kassandra) is just `"graveyard-hand-library"`. Only a search
+       * that includes the library shuffles it ("if you search your library
+       * this way, shuffle"). A graveyard is public, so a matching card there
+       * can't be missed: failing to find is allowed only in a hidden zone
+       * (rule 701.23b).
        */
       readonly zones?: SearchZones;
+      /**
+       * "Search your library and graveyard for five cards **and exile the
+       * rest**" (Doomsday): every card searched and not found is exiled face
+       * up in the move that takes the finds, and the library isn't shuffled —
+       * the card says nothing of shuffling, and the rest of it is gone.
+       */
+      readonly exileRest?: true;
+      /**
+       * With `destination: "library-top"`, "put the chosen cards on top of
+       * your library **in any order**" (Doomsday): the order is asked once
+       * they're there, as a `choose-from-zone` of `order`. Without it a
+       * multi-card find lands in the order it was picked.
+       */
+      readonly inAnyOrder?: true;
       /**
        * Outside the game too (rule 701.23j: "may choose an appropriate card
        * they own from outside the game") — the cards in the searcher's
@@ -16885,6 +16924,8 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           ...(spec.then !== undefined ? { then: spec.then } : {}),
           ...(spec.outside !== undefined ? { outside: spec.outside } : {}),
           ...(spec.faceUpExile === true ? { faceUpExile: true } : {}),
+          ...(spec.exileRest === true ? { exileRest: true } : {}),
+          ...(spec.inAnyOrder === true ? { inAnyOrder: true } : {}),
           // "…if you control a land named Wastes": read now — nothing between
           // the search and the put could change it. Not holding, every find
           // goes to `destination`.

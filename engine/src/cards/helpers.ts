@@ -5,7 +5,7 @@
  */
 
 import type { ActivatedAbility, CraftMaterials, TriggeredAbility, TriggerSpec } from "../abilities.js";
-import { wardCostText, type BoundUnlessOption, type EffectAmount, type EffectSpec, type GiftKind, type UnlessOption, type WardCost } from "../effects.js";
+import { SEARCHED_ZONES, wardCostText, type BoundUnlessOption, type EffectAmount, type EffectSpec, type GiftKind, type SearchZones, type UnlessOption, type WardCost } from "../effects.js";
 import type { CardFilter } from "../filter.js";
 import type { Color, ManaType } from "../mana.js";
 import type { TargetSpec } from "../target.js";
@@ -18,6 +18,41 @@ export { CHOSEN_CREATURE_TYPE } from "../effects.js";
 /** "Choose a basic land type": the five, for a `chooseOnEnter` or a
  * `choose-creature-type`'s `options`. */
 export { BASIC_LAND_TYPE_CHOICES } from "../subtypes.js";
+
+/**
+ * "Search your graveyard, hand, **and/or** library for …" (Boonweaver Giant,
+ * Dark Supplicant; rule 701.23): the player's choice of zones, made as it
+ * resolves — a `modal` over every non-empty set of the `zones` named, printed
+ * order, widest first, in a `sequence` so that it stays a choice on resolution
+ * as a whole ability's effect. Only a set with the library in it shuffles.
+ */
+export const searchZonesAndOr = (
+  zones: readonly ("library" | "graveyard" | "hand")[],
+  search: Omit<Extract<EffectSpec, { kind: "search-library" }>, "zones">,
+): EffectSpec => {
+  const sets = Array.from({ length: 2 ** zones.length - 1 }, (_, i) => zones.filter((_zone, at) => ((i + 1) >> at) & 1));
+  const ordered = [...sets].sort((a, b) => b.length - a.length);
+  const list = (set: readonly string[]): string =>
+    set.length < 3 ? set.join(" and ") : `${set.slice(0, -1).join(", ")}, and ${set[set.length - 1]}`;
+  const zonesOf = (set: readonly string[]): SearchZones =>
+    (Object.keys(SEARCHED_ZONES) as SearchZones[]).find((key) =>
+      (["library", "graveyard", "hand"] as const).every((zone) => SEARCHED_ZONES[key][zone] === set.includes(zone)),
+    )!;
+  return {
+    kind: "sequence",
+    effects: [
+      {
+        kind: "modal",
+        minModes: 1,
+        maxModes: 1,
+        modes: ordered.map((set) => ({
+          text: `Search your ${list(set)}`,
+          effect: { ...search, zones: zonesOf(set) },
+        })),
+      },
+    ],
+  };
+};
 
 /**
  * "Two target lands", "up to two target creatures": one instance of the word

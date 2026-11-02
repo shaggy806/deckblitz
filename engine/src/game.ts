@@ -224,6 +224,7 @@ import {
   CHOSEN_COLOR,
   CHOSEN_COUNTER,
   CHOSEN_TEXT_WORD,
+  SEARCHED_ZONES,
 } from "./effects.js";
 import type {
   ImpulseDuration,
@@ -9494,6 +9495,11 @@ export class Game {
     // so a multi-card find ends up in the order it was chosen.
     if (awaiting.destination === "library-top") {
       for (const id of [...chosen].reverse()) if (!toCommandZone.has(id)) this.putOnLibrary(id, "top");
+    }
+    // "Put the chosen cards on top of your library in any order" (Doomsday):
+    // on top now, so only their order is asked.
+    if (awaiting.findsInAnyOrder === true) {
+      return { cards: chosen.filter((id) => !toCommandZone.has(id)), position: "top" };
     }
     return { cards: toOrder, position: orderOnTop ? "top" : "bottom" };
   }
@@ -32728,9 +32734,10 @@ export class Game {
     // "You may reveal a sorcery card you own from outside the game" (rule
     // 701.23j): its owner's sideboard alone, or beside the zones searched.
     const outsideOnly = more?.outside === "only";
-    const library = zones !== "graveyard" && !outsideOnly;
-    const inGraveyard = zones === "library" || outsideOnly ? [] : matching("graveyard");
-    const inHand = zones === "graveyard-hand-library" && !outsideOnly ? matching("hand") : [];
+    const searched = SEARCHED_ZONES[zones];
+    const library = searched.library && !outsideOnly;
+    const inGraveyard = searched.graveyard && !outsideOnly ? matching("graveyard") : [];
+    const inHand = searched.hand && !outsideOnly ? matching("hand") : [];
     const fits = (id: ObjectId): boolean => matchesFilter(this.state, this.registry, id, filter, { you: player, x });
     // Controlling a player shows nothing outside the game (rule 723.4), so "you
     // can't have that player choose any card" from there (Mindslaver's ruling).
@@ -32821,8 +32828,10 @@ export class Game {
       ...(set !== undefined ? { together: set } : {}),
       destination,
       // "If you search your library this way, shuffle" — "then that player
-      // shuffles": the library's owner (rule 701.24a).
-      leftover: library ? "shuffle" : "stay",
+      // shuffles": the library's owner (rule 701.24a). "And exile the rest"
+      // (Doomsday): gone, with no shuffle.
+      leftover: more?.exileRest === true ? "exile" : library ? "shuffle" : "stay",
+      ...(more?.inAnyOrder === true && destination === "library-top" ? { findsInAnyOrder: true } : {}),
       // "…with an additional +1/+1 counter on it" (Neoform).
       ...(more?.withCounters !== undefined && destination === "battlefield"
         ? { enterWithCounters: more.withCounters }

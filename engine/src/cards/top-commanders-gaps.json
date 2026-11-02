@@ -1169,7 +1169,10 @@
   "mechanic:join-forces",
   "effect:life-bidding",
   "trigger:discarded-by-opponent-effect",
-  "replacement:discarded-by-opponent-to-battlefield"
+  "replacement:discarded-by-opponent-to-battlefield",
+  "effect:search-hand-graveyard-library",
+  "effect:search-hand-graveyard-library-exile",
+  "effect:search-library-and-graveyard-exile-rest"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

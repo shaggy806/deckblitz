@@ -3921,3 +3921,16 @@ Sporogenic Infection, Daybreak Coronet, Bride's Gown, Groom's Finery. Freed but 
 Research, Ghost Lantern. Left for `author-freed` to narrow: Crown of Convergence needs a library-top
 condition, a live color read of that card and "put the top card on the bottom"; Kitsune Mystic its
 attach on resolution; Kassandra her search of the hand; Brass Knuckles its cast-trigger copy.
+### A search that adds the hand and the graveyard — built 2026-11-02
+
+The need-keys Phase 2 family `effect:search-hand-graveyard-library`. `search-library`'s
+`zones` was library, graveyard, both, or the extract family's three together; it now takes
+every set of the three (`SearchZones`, read through `SEARCHED_ZONES`), and the
+`searchZonesAndOr` helper writes "your graveyard, hand, and/or library" as a `modal` over all
+seven as it resolves, the Finale of Devastation shape. No new decision. The exile half
+(`-exile`) was already the extract family's: Quash and Crumble to Dust needed only authoring.
+`effect:search-library-and-graveyard-exile-rest` is `exileRest` and `inAnyOrder` (Doomsday).
+Proving cards: Boonweaver Giant, Dark Supplicant, Mishra, Artificer Prodigy, Quash, Crumble to
+Dust, The Stone Brain, Doomsday. Left: Kassandra still waits on `condition:equipped-by-filter`
+and Kotose on `zone:choose-one-of-exiled`; Agency Outfitter's two names are a `together:
+oneEach` the scaffolder doesn't draft.

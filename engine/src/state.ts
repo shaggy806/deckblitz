@@ -3301,6 +3301,9 @@ export type AwaitingDecision =
        * goes to `destination`. Distinct from `leftover`, which is about cards
        * that were **not** chosen. */
       readonly restDestination?: "battlefield" | "hand";
+      /** A search's `inAnyOrder`: its finds, on top of the library once this
+       * is answered, have their order asked next. */
+      readonly findsInAnyOrder?: true;
       /** A library search whose finds go card by card (`search-library`'s
        * `instead`): this choice only picks them — `destination` is
        * `"stay"` and nothing is shuffled yet — and its answer raises the
