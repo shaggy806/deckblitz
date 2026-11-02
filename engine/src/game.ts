@@ -21865,7 +21865,7 @@ export class Game {
         if (!this.matchesWho(trigger.who, tapped.id, holder)) continue;
         if (
           trigger.filter !== undefined &&
-          !matchesFilter(this.state, this.registry, tapped.id, trigger.filter, { you: holder.controller })
+          !matchesFilter(this.state, this.registry, tapped.id, trigger.filter, { you: holder.controller, source: holder.id })
         ) {
           continue;
         }
@@ -28204,6 +28204,12 @@ export class Game {
           object,
           count: this.state.objects[object].stackCount ?? 1,
         })),
+      graveyardCardsMatching: (filter) =>
+        this.state.turnOrder.flatMap((player) =>
+          this.state.zones.perPlayer[player].graveyard.filter((id) =>
+            matchesFilter(this.state, this.registry, id, filter, { you: controller, source }),
+          ),
+        ),
       cardTypesInGraveyard: (filter) =>
         cardTypesInGraveyards(this.state, this.registry, controller, filter),
       thisWay: thisWayDone,
@@ -28290,6 +28296,13 @@ export class Game {
       },
       nameForMatching: (object) => {
         const it = this.state.objects[object];
+        // A permanent gone since is named as it last existed (rule 608.2h): a
+        // Clone that died a copy of Grizzly Bears was Grizzly Bears, and a
+        // token has no other record of its name.
+        const stint = stintOf(object);
+        const gone =
+          stint !== undefined ? this.lastKnownOfStint(object, stint) : it === undefined ? this.state.ceasedTokens?.[object] : undefined;
+        if (gone !== undefined) return gone.faceDown === true || gone.name === LOCKED_ROOM ? null : (gone.renamed ?? gone.name);
         if (it === undefined || it.faceDown !== undefined || printedCardName(it) === LOCKED_ROOM) return null;
         return nameOf(it);
       },
@@ -28373,14 +28386,14 @@ export class Game {
       },
       destroyPermanent: (target, cantBeRegenerated) =>
         this.destroyByEffect(target, true, cantBeRegenerated === true),
-      destroyAll: (filter, onlyDamaged, cantBeRegenerated, scopeTo, exceptSource) =>
+      destroyAll: (filter, onlyDamaged, cantBeRegenerated, scopeTo, exceptSource, except) =>
         this.destroyAllByEffect(
           scopeTo ?? controller,
           filter,
           onlyDamaged === true ? source : undefined,
           x,
           cantBeRegenerated === true,
-          exceptSource === true ? source : undefined,
+          exceptSource === true ? source : except,
         ),
       regenerate: (target) => this.regenerateByEffect(target),
       regenerateAll: (filter) => {

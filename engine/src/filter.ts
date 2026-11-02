@@ -197,6 +197,12 @@ export function supertypesOf(registry: CardRegistry, object: GameObject): readon
  *   that matches the filter: "a land you control" (Hiveheart Shaman);
  * - `{ permanents }` — every permanent on the battlefield that matches it,
  *   whoever controls it: "a nontoken permanent" (Cornered Market);
+ * - `{ graveyard }` — every card in a graveyard that matches it: "a card in
+ *   a graveyard" (Bazaar of Wonders) with `{}`, "a card in your graveyard"
+ *   (Pyromancer Ascension) with `ownedBy: "you"`; `itsController: true` only
+ *   looks in the graveyard of the controller of the object being asked
+ *   about — "a creature spell with the same name as a card in **their**
+ *   graveyard" (Dragonlord Kolaghan), which only a live read can answer;
  * - `"exiled-with-source"` — the cards in exile linked to the source's
  *   battlefield stint (rule 607.2a, `GameObject.exiledWith`) or exiled until
  *   it leaves (610.3, `exiledUntil`): "the exiled card", "a card exiled with
@@ -213,7 +219,8 @@ export type ShareReference =
   | "exiled-with-source"
   | number
   | { readonly controlled: CardFilter }
-  | { readonly permanents: CardFilter };
+  | { readonly permanents: CardFilter }
+  | { readonly graveyard: CardFilter; readonly itsController?: true };
 
 /** One bound `shares…TypeWith` clause: the reference objects themselves
  * (each always matches — "target creature and each other creature that
@@ -532,12 +539,24 @@ export interface CardFilter {
    * to `sameNameAsAny` as it applies (`bindDynamicCompares`); elsewhere — a
    * static's prohibition, a trigger's filter — `"source"`,
    * `"exiled-with-source"` (Ixalan's Binding's "your opponents can't cast
-   * spells with the same name as the exiled card"), `{ controlled }` and `{
-   * permanents }` (Cornered Market's "a nontoken permanent") are read live
-   * off `FilterContext.source` and `.you`, and the others match nothing.
-   * Fails closed inside the layer fold.
+   * spells with the same name as the exiled card"), `{ controlled }`, `{
+   * permanents }` (Cornered Market's "a nontoken permanent") and `{ graveyard
+   * }` (Pyromancer Ascension's "a card in your graveyard") are read live off
+   * `FilterContext.source` and `.you`, and the others match nothing. Fails
+   * closed inside the layer fold, but a static's count isn't in the fold:
+   * Strata Scythe's "+1/+1 for each land on the battlefield with the same name
+   * as the exiled card" reads it live.
    */
   readonly sameNameWith?: ShareReference;
+  /**
+   * Has the same name as **another** permanent matching this filter (`{}` for
+   * any) — Eye of Singularity's "destroy each permanent with the same name as
+   * another permanent" (rule 201.2a). Read live against the battlefield, so
+   * a mass effect asks it of everything before anything moves. The tokens of
+   * one stack are each their own permanent (rule 111.1), so a stack of two has
+   * the same name as another permanent. Fails closed inside the layer fold.
+   */
+  readonly sameNameAsAnother?: CardFilter;
   /**
    * Has the same name as one of the cards the resolving spell or ability
    * did this to so far (rule 201.2a) — Haunting Echoes' "exile all cards from
@@ -1416,6 +1435,9 @@ export function liveReferenceObjects(
   registry: CardRegistry,
   reference: ShareReference,
   ctx: FilterContext,
+  /** The controller of the object being asked about, for a `{ graveyard }` of
+   * `itsController`. */
+  itsController?: PlayerId,
 ): readonly ObjectId[] | undefined {
   if (reference === "source") return ctx.source === undefined ? [] : [ctx.source];
   if (reference === "exiled-with-source") {
@@ -1433,13 +1455,21 @@ export function liveReferenceObjects(
     });
   }
   if (typeof reference !== "object") return undefined;
-  const inner: CardFilter = "controlled" in reference ? { ...reference.controlled, controlledBy: "you" } : reference.permanents;
   const innerCtx: FilterContext = {
     you: ctx.you,
     ...(ctx.x !== undefined ? { x: ctx.x } : {}),
     ...(ctx.amount !== undefined ? { amount: ctx.amount } : {}),
     ...(ctx.source !== undefined ? { source: ctx.source } : {}),
   };
+  if ("graveyard" in reference) {
+    const players = reference.itsController === true ? (itsController === undefined ? [] : [itsController]) : state.turnOrder;
+    return players.flatMap((player) =>
+      (state.zones.perPlayer[player]?.graveyard ?? []).filter((card) =>
+        matchesFilter(state, registry, card, reference.graveyard, innerCtx),
+      ),
+    );
+  }
+  const inner: CardFilter = "controlled" in reference ? { ...reference.controlled, controlledBy: "you" } : reference.permanents;
   return state.zones.shared.battlefield.filter((other) => matchesFilter(state, registry, other, inner, innerCtx));
 }
 
@@ -1621,17 +1651,17 @@ export function matchesFilter(
   if (filter.sameNameAsTarget !== undefined || filter.sameNameAsTriggerObject !== undefined) return false;
   if (filter.sameNameAsThisWay !== undefined) return false;
   if (filter.sameNameAsAny !== undefined) {
-    // A nameless object (face down, rule 708.2a) shares a name with nothing.
-    const nameless =
-      live !== undefined ? live.faceDown !== undefined || name === LOCKED_ROOM : lki!.faceDown === true;
-    if (nameless || !filter.sameNameAsAny.includes(named)) return false;
+    // A nameless object (face down, rule 708.2a) shares a name with nothing;
+    // one name in common is enough — a split card's either half (201.2a).
+    const names = live !== undefined ? namesOf(registry, live) : lastKnownNames(registry, lki!);
+    if (!names.some((n) => filter.sameNameAsAny!.includes(n))) return false;
   }
   if (filter.sameNameAs !== undefined && id !== filter.sameNameAs.object) {
     // Rule 201.2a: an object with no name shares it with nothing — a
-    // face-down permanent, or a Room with both doors locked (709.5).
-    const nameless =
-      live !== undefined ? live.faceDown !== undefined || name === LOCKED_ROOM : lki!.faceDown === true;
-    if (filter.sameNameAs.name === null || nameless || named !== filter.sameNameAs.name) return false;
+    // face-down permanent, or a Room with both doors locked (709.5) — and
+    // one name in common is enough.
+    const names = live !== undefined ? namesOf(registry, live) : lastKnownNames(registry, lki!);
+    if (filter.sameNameAs.name === null || !names.includes(filter.sameNameAs.name)) return false;
   }
   if (filter.sameNameAsSource !== undefined) {
     const from = ctx.source === undefined ? undefined : state.objects[ctx.source];
@@ -1647,7 +1677,7 @@ export function matchesFilter(
     // only an effect can read is bound before it gets here; one left
     // unbound, or asked inside the layer fold, matches nothing.
     if (layered !== undefined) return false;
-    const others = liveReferenceObjects(state, registry, filter.sameNameWith, ctx);
+    const others = liveReferenceObjects(state, registry, filter.sameNameWith, ctx, live?.controller ?? lki?.controller);
     if (others === undefined) return false;
     const names = live !== undefined ? namesOf(registry, live) : lastKnownNames(registry, lki!);
     const shared = others.some((other) => {
@@ -1655,6 +1685,25 @@ export function matchesFilter(
       return object !== undefined && namesOf(registry, object).some((n) => names.includes(n));
     });
     if (!shared) return false;
+  }
+  if (filter.sameNameAsAnother !== undefined) {
+    if (layered !== undefined) return false;
+    const inner = filter.sameNameAsAnother;
+    const innerCtx: FilterContext = { you: ctx.you, ...(ctx.source !== undefined ? { source: ctx.source } : {}) };
+    const names = live !== undefined ? namesOf(registry, live) : lastKnownNames(registry, lki!);
+    if (names.length === 0) return false;
+    const fellowToken = (live?.stackCount ?? 1) > 1 && matchesFilter(state, registry, id, inner, innerCtx);
+    const another = (): boolean =>
+      state.zones.shared.battlefield.some((other) => {
+        if (other === id) return false;
+        const object = state.objects[other];
+        return (
+          object !== undefined &&
+          namesOf(registry, object).some((n) => names.includes(n)) &&
+          matchesFilter(state, registry, other, inner, innerCtx)
+        );
+      });
+    if (!fellowToken && !another()) return false;
   }
   if (filter.notName !== undefined && named === filter.notName) return false;
   if (filter.hasName !== undefined || filter.chosenName === true) {

@@ -2011,6 +2011,27 @@ suspend X), Ajani Goldmane's Avatar token (a token with the CDA, authorable).
 Proving cards: Grim Strider, Enemy of Enlightenment, Righteous Authority,
 Death's Shadow, Serra Avatar.
 
+### The same name as another named object — built 2026-11-01
+
+The need-keys Phase 2 family `filter:same-name-as-card-in-graveyard`, features
+only (rule 201.2a). `ShareReference` gains `{ graveyard: filter }`, with
+`itsController` for "their graveyard" (live only), read in a trigger's filter and
+a `trigger-object` condition. **`sameNameAsAnother: filter`** asks the whole
+battlefield, a token stack its own namesake. `destroy-all` gains
+`exceptTriggerObject` (rule 400.7), one token of a stack spared, so namesakes
+entering together destroy each other. `nameForMatching` now names a permanent
+gone since as it last existed (rule 608.2h), so a dead copy is named as what it
+copied; `sameNameAs` and `sameNameAsAny` match either half of a split card (the
+Shrines missed those). A `tapped-for-mana` trigger's filter reads with its source.
+The scaffolder reads each proving card's lines but Pyromancer Ascension's "while"
+line. Keys: filter:same-name-as-card-in-graveyard,
+filter:same-name-as-trigger-object, filter:same-name-as-another-permanent,
+filter:same-name-as-card-in-casters-graveyard, keyword:imprint-same-name (partly:
+Thought Prison's and Mourner's Shield's shared color or mana value and Spellweaver
+Helix's copy need keys of their own). Proving cards: Pyromancer Ascension, Bazaar
+of Wonders, Dragonlord Kolaghan, Remembrance, Verdant Succession, Eye of
+Singularity, Invader Parasite, Strata Scythe, Extraplanar Lens.
+
 ### The same name as a reference object — built 2026-10-31
 
 The need-keys Phase 2 family `condition:filter-card-property-clauses`, its
@@ -2031,8 +2052,7 @@ condition:filter-same-name-as-permanent-you-control. Left in the group:
 filter:same-name-as-trigger-spell (Harness the Storm's target filter, read as
 the trigger is put on the stack — target legality, not an effect's filter),
 condition:filter-same-name-as-chosen (Canoptek Wraith's land chosen as it
-resolves), filter:same-name-as-card-in-casters-graveyard (Dragonlord
-Kolaghan: "their graveyard", the caster's, from a trigger filter). Still open
+resolves). Still open
 on built keys' cards: the copy-with-an-ability cards (Callidus Assassin, Evil
 Twin, Pirated Copy), Retraced Image's reveal-then-maybe, Search the City.
 Proving cards: Ixalan's Binding, Exclusion Ritual, Cornered Market, Mitotic

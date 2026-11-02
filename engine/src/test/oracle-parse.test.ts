@@ -582,6 +582,107 @@ describe("costs and triggers", () => {
     });
   });
 
+  it("reads a spell named like a card in a graveyard, a creature that died, another permanent and an imprinted card", () => {
+    const kolaghanLine = parseFace({
+      name: "Test",
+      type_line: "Enchantment",
+      oracle_text:
+        "Whenever an opponent casts a creature or planeswalker spell with the same name as a card in their graveyard, that player loses 10 life.",
+    });
+    expect(kolaghanLine.complete).toBe(true);
+    expect(kolaghanLine.triggered[0].trigger).toEqual({
+      on: "cast-spell",
+      who: "opponent",
+      filter: { typesAnyOf: ["creature", "planeswalker"], sameNameWith: { graveyard: {}, itsController: true } },
+    });
+    expect(kolaghanLine.triggered[0].effect).toEqual({ kind: "lose-life", amount: 10, who: "trigger-controller" });
+
+    const yourGraveyard = parseFace({
+      name: "Test",
+      type_line: "Enchantment",
+      oracle_text:
+        "Whenever you cast an instant or sorcery spell that has the same name as a card in your graveyard, you may put a quest counter on this enchantment.",
+    });
+    expect(yourGraveyard.triggered[0].trigger.filter.sameNameWith).toEqual({ graveyard: { ownedBy: "you" } });
+
+    const bazaar = parseFace({
+      name: "Bazaar of Wonders",
+      type_line: "World Enchantment",
+      oracle_text:
+        "When this enchantment enters, exile all graveyards.\nWhenever a player casts a spell, counter it if a card with the same name is in a graveyard or a nontoken permanent with the same name is on the battlefield.",
+    });
+    expect(bazaar.complete).toBe(true);
+    expect(bazaar.triggered[1].effect.kind).toBe("conditional");
+
+    const remembrance = parseFace({
+      name: "Remembrance",
+      type_line: "Enchantment",
+      oracle_text:
+        "Whenever a nontoken creature you control dies, you may search your library for a card with the same name as that creature, reveal it, put it into your hand, then shuffle.",
+    });
+    expect(remembrance.complete).toBe(true);
+    expect(remembrance.triggered[0].effect.effect.filter).toEqual({ sameNameAsTriggerObject: true });
+
+    const succession = parseFace({
+      name: "Verdant Succession",
+      type_line: "Enchantment",
+      oracle_text:
+        "Whenever a green nontoken creature dies, that creature's controller may search their library for a card with the same name as that creature, put it onto the battlefield, then shuffle.",
+    });
+    expect(succession.complete).toBe(true);
+    expect(succession.triggered[0].effect).toMatchObject({ kind: "each-player-may", who: "trigger-controller" });
+
+    const eye = parseFace({
+      name: "Eye of Singularity",
+      type_line: "World Enchantment",
+      oracle_text:
+        "When this enchantment enters, destroy each permanent with the same name as another permanent, except for basic lands. They can't be regenerated.\nWhenever a permanent other than a basic land enters, destroy all other permanents with that name. They can't be regenerated.",
+    });
+    expect(eye.complete).toBe(true);
+    expect(eye.triggered[0].effect).toEqual({
+      kind: "destroy-all",
+      filter: { sameNameAsAnother: {}, notSupertype: "basic" },
+      cantBeRegenerated: true,
+    });
+    expect(eye.triggered[1].effect).toEqual({
+      kind: "destroy-all",
+      filter: { sameNameAsTriggerObject: true },
+      exceptTriggerObject: true,
+      cantBeRegenerated: true,
+    });
+
+    const parasite = parseFace({
+      name: "Invader Parasite",
+      type_line: "Creature — Phyrexian Insect",
+      power: "3",
+      toughness: "2",
+      oracle_text:
+        "Imprint — When this creature enters, exile target land.\nWhenever a land an opponent controls with the same name as the exiled card enters, this creature deals 2 damage to that player.",
+    });
+    expect(parasite.complete).toBe(true);
+    expect(parasite.triggered[0].effect).toEqual({ kind: "exile", target: 0, linked: true });
+    expect(parasite.triggered[1].trigger.filter).toEqual({ type: "land", controlledBy: "opponent", sameNameWith: "exiled-with-source" });
+
+    const lens = parseFace({
+      name: "Extraplanar Lens",
+      type_line: "Artifact",
+      oracle_text:
+        "Imprint — When this artifact enters, you may exile target land you control.\nWhenever a land with the same name as the exiled card is tapped for mana, its controller adds one mana of any type that land produced.",
+    });
+    expect(lens.complete).toBe(true);
+    expect(lens.triggered[1].effect).toEqual({ kind: "add-mana", mana: "produced", amount: 1 });
+
+    const scythe = parseFace({
+      name: "Strata Scythe",
+      type_line: "Artifact — Equipment",
+      oracle_text:
+        "Imprint — When this Equipment enters, search your library for a land card, exile it, then shuffle.\nEquipped creature gets +1/+1 for each land on the battlefield with the same name as the exiled card.\nEquip {3}",
+    });
+    expect(scythe.complete).toBe(true);
+    expect(scythe.triggered[0].effect).toMatchObject({ destination: "exile", linked: true });
+    expect(scythe.static[0].grantPtPerCount).toEqual({ filter: { type: "land", sameNameWith: "exiled-with-source" }, pt: [1, 1] });
+  });
+
   it("reads \"with the same name as\" a reference object", () => {
     const ritual = parseFace({
       name: "Exclusion Ritual",

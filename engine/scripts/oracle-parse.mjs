@@ -1549,6 +1549,25 @@ export function parseTrigger(clause) {
   // tapped for mana" (Storm Cauldron), "whenever you tap ~ for mana" (Zhur-Taa
   // Druid): rule 106.12a, as the mana ability resolves and produces mana.
   if (/^Whenever you tap ~ for mana$/.test(c)) return [{ on: "tapped-for-mana", who: "self" }];
+  // A filter's name read off the card linked to this one (rule 607.2a, the
+  // exile linked below by "same name as the exiled card"): Extraplanar Lens,
+  // Invader Parasite.
+  if ((m = /^Whenever an? (.+?)( an opponent controls)? with the same name as the exiled card (enters|is tapped for mana)$/.exec(c))) {
+    const filter = parseTypePhrase(m[1]);
+    if (filter === null) return null;
+    const on = m[3] === "enters" ? "enters-battlefield" : "tapped-for-mana";
+    return [
+      {
+        on,
+        who: "any",
+        filter: { ...filter, sameNameWith: "exiled-with-source", ...(m[2] ? { controlledBy: "opponent" } : {}) },
+      },
+    ];
+  }
+  // Eye of Singularity: "a permanent other than a basic land".
+  if (/^Whenever a permanent other than a basic land enters$/.test(c)) {
+    return [{ on: "enters-battlefield", who: "any", filter: { notSupertype: "basic" } }];
+  }
   if ((m = /^Whenever (a player|an opponent|you) taps? (?:a|an) (.+) for mana$/.exec(c)) || (m = /^Whenever ()(?:a|an) (.+) is tapped for mana$/.exec(c))) {
     const filter = m[2] === "nonbasic land" ? { type: "land", notSupertype: "basic" } : parseTypePhrase(m[2]);
     if (filter === null) return null;
@@ -1712,8 +1731,11 @@ export function parseTrigger(clause) {
         c,
       ))
   ) {
-    let filter = parseTypePhrase(m[2]);
+    // "A green nontoken creature" (Verdant Succession): one color first.
+    const colorWord = /^(white|blue|black|red|green) (.+)$/.exec(m[2]);
+    let filter = parseTypePhrase(colorWord !== null ? colorWord[2] : m[2]);
     if (filter === null) return null;
+    if (colorWord !== null) filter = { ...filter, colors: [COLOR_WORD[colorWord[1]]] };
     // Only a creature dies (rule 700.4): the `dies` trigger is any trip from
     // the battlefield to a graveyard, so "a Human you control dies" says so —
     // or a noncreature changeling going there would count.
@@ -1746,6 +1768,15 @@ export function parseTrigger(clause) {
   }
 
   // Casting.
+  // "A spell with the same name as a card in your / their graveyard" (rule
+  // 201.2a): Pyromancer Ascension's yours, Dragonlord Kolaghan's the caster's.
+  if ((m = /^Whenever (you|an opponent|a player) casts? an? (.+?) spell (?:that has|with) the same name as a card in (your|their) graveyard$/.exec(c))) {
+    const who = { you: "you", "an opponent": "opponent", "a player": "any" }[m[1]];
+    const filter = parseTypePhrase(m[2]);
+    if (filter === null) return null;
+    const graveyard = m[3] === "your" ? { graveyard: { ownedBy: "you" } } : { graveyard: {}, itsController: true };
+    return [{ on: "cast-spell", who, filter: { ...filter, sameNameWith: graveyard } }];
+  }
   if ((m = /^Whenever (you|an opponent|a player) casts? (a|an|your first|their first) (?:(.+?) )?spell(?: each turn)?$/.exec(c))) {
     const who = { you: "you", "an opponent": "opponent", "a player": "any" }[m[1]];
     const spec = { on: "cast-spell", who };
@@ -3684,6 +3715,69 @@ export function parseSentence(sentence, ctx) {
   // (Manabarbs): the player the event names.
   if (ctx.thatPlayer === "trigger-player" && (m = re(`~ deals ${N} damage to that player`).exec(s))) {
     return { kind: "damage", amount: amount(m[1]), who: "trigger-player" };
+  }
+  // "… a land an opponent controls … enters, ~ deals 2 damage to that player"
+  // (Invader Parasite); "… casts a … spell …, that player loses 10 life"
+  // (Dragonlord Kolaghan): the trigger object's controller.
+  if (ctx.thatPlayer === "trigger-controller") {
+    if ((m = re(`~ deals ${N} damage to that player`).exec(s))) {
+      return { kind: "damage", amount: amount(m[1]), who: "trigger-controller" };
+    }
+    if ((m = re(`that player loses ${N} life`).exec(s))) {
+      return { kind: "lose-life", amount: amount(m[1]), who: "trigger-controller" };
+    }
+  }
+  // Mana Flare's "that player adds one mana of any type that land produced",
+  // Extraplanar Lens's "its controller adds …" (a triggered mana ability, rule
+  // 605.1b).
+  if (ctx.thatPlayer === "trigger-player" && re("(?:that player|its controller) adds one mana of any type that land produced").test(s)) {
+    return { kind: "add-mana", mana: "produced", amount: 1 };
+  }
+  // "With the same name as" another named object (rule 201.2a). Remembrance's
+  // and Verdant Succession's "that creature" is the one the trigger names, as
+  // it last existed.
+  if (ctx.it === "trigger-object" && ctx.targets.length === 0) {
+    if (re("search your library for a card with the same name as that creature, reveal it, put it into your hand, then shuffle").test(s)) {
+      return { kind: "search-library", filter: { sameNameAsTriggerObject: true }, destination: "hand", min: 0, max: 1, reveal: true };
+    }
+    if (re("that creature's controller may search their library for a card with the same name as that creature, put it onto the battlefield, then shuffle").test(s)) {
+      return {
+        kind: "each-player-may",
+        who: "trigger-controller",
+        prompt: "Search your library for a card with the same name as that creature and put it onto the battlefield?",
+        effect: { kind: "search-library", filter: { sameNameAsTriggerObject: true }, destination: "battlefield", min: 0, max: 1 },
+      };
+    }
+    // Eye of Singularity's "that name": the permanent the trigger names, spared.
+    if (re("destroy all other permanents with that name").test(s)) {
+      return { kind: "destroy-all", filter: { sameNameAsTriggerObject: true }, exceptTriggerObject: true };
+    }
+  }
+  // Eye of Singularity's "each permanent with the same name as another
+  // permanent", asked of everything before anything goes.
+  if ((m = re("destroy each permanent with the same name as another permanent(, except for basic lands)?").exec(s))) {
+    return { kind: "destroy-all", filter: { sameNameAsAnother: {}, ...(m[1] ? { notSupertype: "basic" } : {}) } };
+  }
+  if (re("exile all graveyards").test(s)) return { kind: "exile-graveyard", target: "each-player" };
+  // Bazaar of Wonders: asked as it resolves (rule 608.2c), of the spell.
+  if (re("counter it if a card with the same name is in a graveyard or a nontoken permanent with the same name is on the battlefield").test(s)) {
+    return {
+      kind: "conditional",
+      condition: {
+        kind: "any",
+        of: [
+          { kind: "trigger-object", filter: { sameNameWith: { graveyard: {} } } },
+          { kind: "trigger-object", filter: { sameNameWith: { permanents: { token: false } } } },
+        ],
+      },
+      then: { kind: "counter", target: "trigger-object" },
+    };
+  }
+  // Strata Scythe's imprint: the exile is linked below, for "the exiled card".
+  if ((m = /^search your library for an? (.+?) card, exile it, then shuffle\.$/i.exec(s))) {
+    const filter = parseTypePhrase(m[1], { cards: true });
+    if (filter === null) return null;
+    return { kind: "search-library", filter, destination: "exile", min: 0, max: 1 };
   }
   // "That player" who owned what the trigger is about (Warped Devotion,
   // Liability — `thatPlayerOf`).
@@ -9150,6 +9244,11 @@ function thatPlayerOf(triggers) {
   // (Manabarbs): who activated the mana ability.
   if (triggers.every((t) => t.on === "tapped-for-mana")) return "trigger-player";
   if (triggers.every((t) => t.on === "deals-damage" && t.to === "player")) return "trigger-player";
+  // "Whenever a land an opponent controls … enters, … that player" (Invader
+  // Parasite), "whenever an opponent casts a … spell, … that player" (Dragonlord
+  // Kolaghan): who controls the trigger object.
+  if (triggers.every((t) => t.on === "enters-battlefield" && t.filter?.controlledBy === "opponent")) return "trigger-controller";
+  if (triggers.every((t) => t.on === "cast-spell" && (t.who === "opponent" || t.who === "any"))) return "trigger-controller";
   // "When the chosen player draws a card with the chosen name, … that
   // player" (Booby Trap): who drew, the drawn card's controller.
   if (triggers.every((t) => t.on === "draws" && t.who === "chosen-player")) return "trigger-controller";
@@ -9840,6 +9939,16 @@ function perAmountStaticOf(line, text) {
         ...(m[1] === "~" ? {} : { relativeToAffected: true }),
         pt: pair(m[2], m[3]),
       },
+      text,
+    };
+  }
+  // Strata Scythe: every player's lands, named like the card linked to this one.
+  if ((m = new RegExp(`^${P}([+-]\\d+)/([+-]\\d+) for each (.+?) on the battlefield with the same name as the exiled card\\.$`).exec(line))) {
+    const filter = parseTypePhrase(m[4]);
+    if (filter === null) return null;
+    return {
+      affects: subjectOf(m[1]),
+      grantPtPerCount: { filter: { ...filter, sameNameWith: "exiled-with-source" }, pt: pair(m[2], m[3]) },
       text,
     };
   }

@@ -2633,6 +2633,11 @@ export type EffectSpec =
        * left out, whatever `filter` says of it. One token of a stack is the
        * source; the rest of the stack goes. */
       readonly exceptSource?: boolean;
+      /** "Destroy all **other** permanents with that name" (Eye of
+       * Singularity): the trigger object is left out, while it's still the
+       * object that fired the trigger (rule 400.7). One token of a stack is
+       * that object, as for `exceptSource`. */
+      readonly exceptTriggerObject?: boolean;
     }
   | {
       /** Deal `amount` damage to every battlefield permanent matching `filter`
@@ -8836,6 +8841,9 @@ export interface EffectApi {
    * tokens it stands for — a token stack is one
    * object for every token in it. */
   permanentsMatching(filter: CardFilter): readonly { readonly object: ObjectId; readonly count: number }[];
+  /** The cards in every graveyard matching `filter`, read as the effect's
+   * controller — `ShareReference`'s `{ graveyard }`. */
+  graveyardCardsMatching(filter: CardFilter): readonly ObjectId[];
   /** See the `{ cardTypesInGraveyard }` {@link EffectAmount}. */
   cardTypesInGraveyard(filter: CardFilter): number;
   /** What this resolution has done `what` to so far, whose it was among
@@ -9015,6 +9023,8 @@ export interface EffectApi {
     cantBeRegenerated?: boolean,
     scopeTo?: PlayerId,
     exceptSource?: boolean,
+    /** Left out, whatever `filter` says of it — one token of a stack. */
+    except?: ObjectId,
   ): void;
   /** Give a permanent a regeneration shield (rule 701.15a). */
   regenerate(target: TargetRef): void;
@@ -12472,6 +12482,9 @@ function shareReferenceObjects(reference: ShareReference, ctx: ResolutionContext
     const target = ctx.targets[reference];
     return target?.kind === "object" ? [target.object] : [];
   }
+  // "Their graveyard" asks about the object being matched, which an effect
+  // binding its filter ahead of time doesn't have: it names nothing.
+  if ("graveyard" in reference) return reference.itsController === true ? [] : ctx.graveyardCardsMatching(reference.graveyard);
   const filter = "controlled" in reference ? { ...reference.controlled, controlledBy: "you" as const } : reference.permanents;
   return ctx.permanentsMatching(filter).map((m) => m.object);
 }
@@ -13266,7 +13279,14 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "destroy-all": {
       const scopeTo = scopedController(spec.controlledByTarget, ctx);
       if (spec.controlledByTarget !== undefined && scopeTo === undefined) return;
-      ctx.destroyAll(spec.filter, spec.onlyControllersDamagedBySource, spec.cantBeRegenerated === true, scopeTo, spec.exceptSource === true);
+      ctx.destroyAll(
+        spec.filter,
+        spec.onlyControllersDamagedBySource,
+        spec.cantBeRegenerated === true,
+        scopeTo,
+        spec.exceptSource === true,
+        spec.exceptTriggerObject === true && ctx.triggerObjectLost !== true ? ctx.triggerObject : undefined,
+      );
       return;
     }
     case "regenerate": {
