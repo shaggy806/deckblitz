@@ -841,6 +841,7 @@ import _poolWritOfPassage from "../pool/writ-of-passage.js";
 import _poolZektarShrineExpedition from "../pool/zektar-shrine-expedition.js";
 import _poolZephidsEmbrace from "../pool/zephids-embrace.js";
 import _poolZiatorasEnvoy from "../pool/ziatoras-envoy.js";
+import _poolZidaneTantalusThief from "../pool/zidane-tantalus-thief.js";
 import _poolZodiarkUmbralGod from "../pool/zodiark-umbral-god.js";
 import _poolZombieOgre from "../pool/zombie-ogre.js";
 import _poolZuberiGoldenFeather from "../pool/zuberi-golden-feather.js";
@@ -1697,6 +1698,7 @@ const shard: CardShard = {
     _poolZektarShrineExpedition,
     _poolZephidsEmbrace,
     _poolZiatorasEnvoy,
+    _poolZidaneTantalusThief,
     _poolZodiarkUmbralGod,
     _poolZombieOgre,
     _poolZuberiGoldenFeather,

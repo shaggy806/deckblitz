@@ -719,6 +719,7 @@ import _poolStingingHivemaster from "../pool/stinging-hivemaster.js";
 import _poolStingingShot from "../pool/stinging-shot.js";
 import _poolStitchTogether from "../pool/stitch-together.js";
 import _poolStolenGoodies from "../pool/stolen-goodies.js";
+import _poolStolenUniform from "../pool/stolen-uniform.js";
 import _poolStormFleetNegotiator from "../pool/storm-fleet-negotiator.js";
 import _poolStormShakerOfSkies from "../pool/storm-shaker-of-skies.js";
 import _poolStormchasersTalent from "../pool/stormchasers-talent.js";
@@ -1597,6 +1598,7 @@ const shard: CardShard = {
     _poolStingingShot,
     _poolStitchTogether,
     _poolStolenGoodies,
+    _poolStolenUniform,
     _poolStormFleetNegotiator,
     _poolStormShakerOfSkies,
     _poolStormchasersTalent,

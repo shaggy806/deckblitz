@@ -210,6 +210,7 @@ import _poolDroveOfElves from "../pool/drove-of-elves.js";
 import _poolDrownedRusalka from "../pool/drowned-rusalka.js";
 import _poolDrownyardAmalgam from "../pool/drownyard-amalgam.js";
 import _poolDualStrike from "../pool/dual-strike.js";
+import _poolDueDiligence from "../pool/due-diligence.js";
 import _poolDungeonMap from "../pool/dungeon-map.js";
 import _poolDuskfangMentor from "../pool/duskfang-mentor.js";
 import _poolDuskwatchHunter from "../pool/duskwatch-hunter.js";
@@ -1106,6 +1107,7 @@ const shard: CardShard = {
     _poolDrownedRusalka,
     _poolDrownyardAmalgam,
     _poolDualStrike,
+    _poolDueDiligence,
     _poolDungeonMap,
     _poolDuskfangMentor,
     _poolDuskwatchHunter,

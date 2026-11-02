@@ -101,6 +101,7 @@ import _poolBraidsConjurerAdept from "../pool/braids-conjurer-adept.js";
 import _poolBrainwash from "../pool/brainwash.js";
 import _poolBravado from "../pool/bravado.js";
 import _poolBreathOfFire from "../pool/breath-of-fire.js";
+import _poolBridesGown from "../pool/brides-gown.js";
 import _poolBrightglassGearhulk from "../pool/brightglass-gearhulk.js";
 import _poolBristlebaneBattler from "../pool/bristlebane-battler.js";
 import _poolBristlepackSentry from "../pool/bristlepack-sentry.js";
@@ -335,6 +336,7 @@ import _poolGrabThePrize from "../pool/grab-the-prize.js";
 import _poolGreaterAuramancy from "../pool/greater-auramancy.js";
 import _poolGremlinTamer from "../pool/gremlin-tamer.js";
 import _poolGrimRoustabout from "../pool/grim-roustabout.js";
+import _poolGroomsFinery from "../pool/grooms-finery.js";
 import _poolGrotagBugCatcher from "../pool/grotag-bug-catcher.js";
 import _poolGrowthCycle from "../pool/growth-cycle.js";
 import _poolGruesomeScourger from "../pool/gruesome-scourger.js";
@@ -973,6 +975,7 @@ const shard: CardShard = {
     _poolBrainwash,
     _poolBravado,
     _poolBreathOfFire,
+    _poolBridesGown,
     _poolBrightglassGearhulk,
     _poolBristlebaneBattler,
     _poolBristlepackSentry,
@@ -1207,6 +1210,7 @@ const shard: CardShard = {
     _poolGreaterAuramancy,
     _poolGremlinTamer,
     _poolGrimRoustabout,
+    _poolGroomsFinery,
     _poolGrotagBugCatcher,
     _poolGrowthCycle,
     _poolGruesomeScourger,

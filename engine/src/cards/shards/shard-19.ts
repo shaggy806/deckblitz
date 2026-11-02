@@ -747,6 +747,7 @@ import _poolSpiderWomanStunningSavior from "../pool/spider-woman-stunning-savior
 import _poolSpikeDrone from "../pool/spike-drone.js";
 import _poolSpittingEarth from "../pool/spitting-earth.js";
 import _poolSporebackWolf from "../pool/sporeback-wolf.js";
+import _poolSporogenicInfection from "../pool/sporogenic-infection.js";
 import _poolSpringCleaning from "../pool/spring-cleaning.js";
 import _poolSquirmingEmergence from "../pool/squirming-emergence.js";
 import _poolSramSeniorEdificer from "../pool/sram-senior-edificer.js";
@@ -1663,6 +1664,7 @@ const shard: CardShard = {
     _poolSpikeDrone,
     _poolSpittingEarth,
     _poolSporebackWolf,
+    _poolSporogenicInfection,
     _poolSpringCleaning,
     _poolSquirmingEmergence,
     _poolSramSeniorEdificer,

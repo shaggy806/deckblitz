@@ -377,6 +377,7 @@ import _poolKaslemsStrider from "../pool/kaslems-strider.js";
 import _poolKeeperOfFables from "../pool/keeper-of-fables.js";
 import _poolKetramoseTheNewDawn from "../pool/ketramose-the-new-dawn.js";
 import _poolKetriaTriome from "../pool/ketria-triome.js";
+import _poolKharnTheBetrayer from "../pool/kharn-the-betrayer.js";
 import _poolKheruLichLord from "../pool/kheru-lich-lord.js";
 import _poolKilliansConfidence from "../pool/killians-confidence.js";
 import _poolKiloApogeeMind from "../pool/kilo-apogee-mind.js";
@@ -1221,6 +1222,7 @@ const shard: CardShard = {
     _poolKeeperOfFables,
     _poolKetramoseTheNewDawn,
     _poolKetriaTriome,
+    _poolKharnTheBetrayer,
     _poolKheruLichLord,
     _poolKilliansConfidence,
     _poolKiloApogeeMind,

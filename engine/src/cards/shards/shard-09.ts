@@ -593,6 +593,7 @@ import _poolRakshasasBargain from "../pool/rakshasas-bargain.js";
 import _poolRallyThePeasants from "../pool/rally-the-peasants.js";
 import _poolRathiIntimidator from "../pool/rathi-intimidator.js";
 import _poolRavenousDemon from "../pool/ravenous-demon.js";
+import _poolRayOfCommand from "../pool/ray-of-command.js";
 import _poolRayOfRevelation from "../pool/ray-of-revelation.js";
 import _poolRealityHemorrhage from "../pool/reality-hemorrhage.js";
 import _poolReaperOfTheWilds from "../pool/reaper-of-the-wilds.js";
@@ -1514,6 +1515,7 @@ const shard: CardShard = {
     _poolRallyThePeasants,
     _poolRathiIntimidator,
     _poolRavenousDemon,
+    _poolRayOfCommand,
     _poolRayOfRevelation,
     _poolRealityHemorrhage,
     _poolReaperOfTheWilds,

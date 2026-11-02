@@ -162,6 +162,7 @@ import _poolCybermanPatrol from "../pool/cyberman-patrol.js";
 import _poolDawnCharm from "../pool/dawn-charm.js";
 import _poolDawnglareInvoker from "../pool/dawnglare-invoker.js";
 import _poolDayOfDestiny from "../pool/day-of-destiny.js";
+import _poolDaybreakCoronet from "../pool/daybreak-coronet.js";
 import _poolDazzlingRamparts from "../pool/dazzling-ramparts.js";
 import _poolDeadwoodTreefolk from "../pool/deadwood-treefolk.js";
 import _poolDeathToOurEnemies from "../pool/death-to-our-enemies.js";
@@ -1118,6 +1119,7 @@ const shard: CardShard = {
     _poolDawnCharm,
     _poolDawnglareInvoker,
     _poolDayOfDestiny,
+    _poolDaybreakCoronet,
     _poolDazzlingRamparts,
     _poolDeadwoodTreefolk,
     _poolDeathToOurEnemies,

@@ -457,6 +457,7 @@ import _poolLumengridGargoyle from "../pool/lumengrid-gargoyle.js";
 import _poolMadameMasque from "../pool/madame-masque.js";
 import _poolMageTowerReferee from "../pool/mage-tower-referee.js";
 import _poolMagmaticHellkite from "../pool/magmatic-hellkite.js";
+import _poolMagusOfTheUnseen from "../pool/magus-of-the-unseen.js";
 import _poolMalanthrope from "../pool/malanthrope.js";
 import _poolMaleficScythe from "../pool/malefic-scythe.js";
 import _poolMalevolentNoble from "../pool/malevolent-noble.js";
@@ -1344,6 +1345,7 @@ const shard: CardShard = {
     _poolMadameMasque,
     _poolMageTowerReferee,
     _poolMagmaticHellkite,
+    _poolMagusOfTheUnseen,
     _poolMalanthrope,
     _poolMaleficScythe,
     _poolMalevolentNoble,
