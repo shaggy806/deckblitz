@@ -22,7 +22,7 @@ export default defineCard({
         kind: "add-mana",
         mana: { oneOf: ["W", "U"] },
         amount: 1,
-        also: { kind: "tap", target: "source", doesntUntapNext: true, onlyDoesntUntap: true },
+        also: { kind: "tap", target: "source", doesntUntapNext: true, onlyDoesntUntap: true, untapStepOf: "you" },
       },
       resolve: null,
       text: "{T}: Add {W} or {U}. This land doesn't untap during your next untap step.",

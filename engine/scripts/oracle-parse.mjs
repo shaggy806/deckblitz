@@ -1987,6 +1987,17 @@ function distributedCountersOf(s, ctx) {
 
 export function parseSentence(sentence, ctx) {
   const s = sentence.replace(/\s+/g, " ").trim();
+  // "~ deals 2 damage to any target and doesn't untap during your next untap
+  // step" (Reveka), "~ gains shroud until end of turn and doesn't untap …"
+  // (Deep Spawn): the action, then the hold on the source.
+  const andHeld = /^(~ .+?) and (doesn't untap during (?:your|its controller's) next (?:two )?untap steps?)\.?$/i.exec(s);
+  if (andHeld !== null) {
+    const first = parseSentence(`${andHeld[1]}.`, ctx);
+    const held = parseSentence(`~ ${andHeld[2]}.`, ctx);
+    if (first !== null && first !== undefined && held !== null && held !== undefined) {
+      return { kind: "sequence", effects: [first, held] };
+    }
+  }
   // "Destroy target creature if it shares a color with the most common color
   // among all permanents or a color tied for most common" (Tsabo's Assassin,
   // Barrin's Unmaking): rule 105.2, read as the slot's target stands.
@@ -3306,6 +3317,31 @@ export function parseSentence(sentence, ctx) {
     };
   }
   if (re("return ~ to its owner's hand").test(s)) return { kind: "return-to-hand", target: "source" };
+  // "… doesn't untap during its controller's next two untap steps" (Telekinesis),
+  // "during your next untap step" (Reveka): the N and whose step of `tap`'s hold.
+  const heldThrough = (whose, n) => ({
+    doesntUntapNext: true,
+    onlyDoesntUntap: true,
+    ...(n === undefined ? {} : { doesntUntapSteps: 2 }),
+    ...(whose.toLowerCase() === "your" ? { untapStepOf: "you" } : {}),
+  });
+  const HELD = "doesn't untap during (your|its controller's) next (two )?untap steps?";
+  if ((m = re(`~ ${HELD}`).exec(s))) return { kind: "tap", target: "source", ...heldThrough(m[1], m[2]) };
+  if ((m = re(`(${TARGET}) ${HELD}`).exec(s))) return { kind: "tap", target: slot(m[1]), ...heldThrough(m[2], m[3]) };
+  // "It" and "that creature" of the sentence before: the one target it named
+  // (Samite Alchemist's "Tap that creature. It doesn't untap …"), or the
+  // ability's own object (Spectral Bears' "it doesn't untap …").
+  const heldObject = ctx.targets.length === 1 ? 0 : ctx.targets.length === 0 ? ctx.it : undefined;
+  if (heldObject !== undefined) {
+    if ((m = re(`(?:it|that creature|that land|that permanent) ${HELD}`).exec(s))) {
+      return { kind: "tap", target: heldObject, ...heldThrough(m[1], m[2]) };
+    }
+    if (ctx.targets.length === 1 && re("tap that creature").test(s)) return { kind: "tap", target: 0 };
+    if (ctx.targets.length === 1 && re("prevent all combat damage that would be dealt by that creature this turn").test(s)) {
+      return { kind: "damage-rule", by: { target: 0 }, combat: true };
+    }
+  }
+  if (re("tap ~").test(s)) return { kind: "tap", target: "source" };
   if ((m = re(`tap (${TARGET})`).exec(s))) return { kind: "tap", target: slot(m[1]) };
   if ((m = re(`untap (${TARGET})`).exec(s))) return { kind: "untap", target: slot(m[1]) };
   // Detain (rule 701.35a).
@@ -3743,8 +3779,8 @@ export function parseSentence(sentence, ctx) {
   if ((m = re(`prevent the next ${N} (combat )?damage that would be dealt to you this turn`).exec(s))) {
     return { kind: "damage-rule", to: { players: "you" }, amount: amount(m[1]), ...(m[2] !== undefined ? { combat: true } : {}) };
   }
-  if ((m = re(`prevent the next ${N} damage that would be dealt to (${TARGET}) this turn`).exec(s))) {
-    return { kind: "prevent-damage", target: slot(m[2]), amount: amount(m[1]) };
+  if ((m = re(`prevent the next ${N} damage that would be dealt (?:this turn to (${TARGET})|to (${TARGET}) this turn)`).exec(s))) {
+    return { kind: "prevent-damage", target: slot(m[2] ?? m[3]), amount: amount(m[1]) };
   }
   // A redirection (rule 614.9): the en-Kor creatures, Daughter of Autumn.
   if ((m = re(`the next ${N} damage that would be dealt (?:to (~|${TARGET}) this turn|this turn to (~|${TARGET})) is dealt to (~|${TARGET}) instead`).exec(s))) {
@@ -5411,6 +5447,15 @@ export function parseEffect(text, outer) {
     }
   }
   if (todo.length > 0) return { effect: null, todo, hints };
+  // "Tap target creature. It doesn't untap during its controller's next untap
+  // step": one `tap`, the hold on it, as the two are one thing to the object.
+  for (let i = parsed.length - 2; i >= 0; i -= 1) {
+    const [tap, hold] = [parsed[i], parsed[i + 1]];
+    if (tap.kind === "tap" && hold.kind === "tap" && hold.onlyDoesntUntap === true && tap.doesntUntapNext !== true && tap.target === hold.target) {
+      const { onlyDoesntUntap: _only, ...held } = hold;
+      parsed.splice(i, 2, held);
+    }
+  }
   return { effect: parsed.length === 1 ? parsed[0] : { kind: "sequence", effects: parsed }, todo: [], hints: [] };
 }
 

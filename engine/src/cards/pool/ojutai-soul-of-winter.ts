@@ -20,7 +20,7 @@ export default defineCard({
   triggered: [
     {
       trigger: { on: "attacks", who: "you-control", filter: { subtype: "Dragon" } },
-      targets: [{ kind: "permanent", filter: { notTypes: ["land"], controlledBy: "opponent" } }],
+      targets: ["nonland-permanent-an-opponent-controls"],
       effect: { kind: "tap", target: 0, doesntUntapNext: true },
       resolve: null,
       text: TRIGGER_TEXT,

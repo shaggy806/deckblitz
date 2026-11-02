@@ -321,6 +321,17 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Held down through a chosen player's next N untap steps — built 2026-11-01
+
+The need-keys group `effect:doesnt-untap-next-two-untap-steps` +
+`effect:doesnt-untap-next-untap-step` + `effect:doesnt-untap-your-next-untap-step`:
+`tap`'s `doesntUntapSteps` (and `tap-all`'s) and `untapStepOf: "you"`, on
+`GameObject.skipsFurtherUntaps` and a `skipsUntapOf` that holds one `{ player, steps }`
+a player. Overlapping holds keep the longer rather than add. Proving cards: Telekinesis,
+Reveka, Samite Alchemist, Spectral Bears, Vorinclex, Dreamshackle Geist; the ten Tempest
+lands read "your next untap step" exactly now. Left over: `Deep Spawn`'s and `Homarid
+Warrior`'s effects are expressible, only the Homarid's "Tap it" wants the parser's help.
+
 ### Attacking and blocking alone, or not — built 2026-11-01
 
 The need-keys Phase 2 family `static:can-only-attack-alone` (its group's four

@@ -351,6 +351,7 @@ import {
   manaCostOverride,
   permanentCount,
   phasedOutIds,
+  heldThroughUntapStepOf,
   printedCardName,
   rulesTextName,
   textNameOf,
@@ -7956,7 +7957,7 @@ export class Game {
         object.tapped &&
         object.exertedBy !== active &&
         object.skipsNextUntap !== true &&
-        object.skipsUntapOf !== active &&
+        !heldThroughUntapStepOf(object, active) &&
         !skips.some((filter) => matchesFilter(this.state, this.registry, id, filter, { you: active })) &&
         !this.hasOwnStatic(object, (a) => a.doesntUntap === true) &&
         // "Enchanted creature doesn't untap during its controller's untap
@@ -8105,7 +8106,7 @@ export class Game {
       const object = this.state.objects[id];
       if (object === undefined || object.controller === active || !object.tapped) continue;
       if (this.state.players[object.controller]?.hasLost === true) continue;
-      if (object.exertedBy !== active && object.skipsUntapOf !== active && this.untapsDuringOthersUntap(object)) {
+      if (object.exertedBy !== active && !heldThroughUntapStepOf(object, active) && this.untapsDuringOthersUntap(object)) {
         this.untapUnlessStunned(id);
       }
     }
@@ -8115,11 +8116,46 @@ export class Game {
     for (const id of [...this.state.zones.shared.battlefield, ...phasedOutIds(this.state)]) {
       const object = this.state.objects[id];
       if (object?.exertedBy === active) delete object.exertedBy;
-      if (object?.controller === active) delete object.skipsNextUntap;
-      if (object?.skipsUntapOf === active) delete object.skipsUntapOf;
+      if (object !== undefined) this.serveUntapStepOf(object, active);
     }
     const activeState = this.state.players[active];
     if (activeState?.untapSkips !== undefined) delete activeState.untapSkips;
+  }
+
+  /**
+   * "It doesn't untap during its controller's next `steps` untap steps", or
+   * `player`'s (`GameObject.skipsNextUntap`, `skipsFurtherUntaps`,
+   * `skipsUntapOf`). Two such effects run side by side: each ends in its own
+   * time, so what's left is the longer of the two, not their sum.
+   */
+  private holdThroughUntapSteps(object: GameObject, steps: number, player?: PlayerId): void {
+    if (player !== undefined) {
+      const others = (object.skipsUntapOf ?? []).filter((hold) => hold.player !== player);
+      const before = object.skipsUntapOf?.find((hold) => hold.player === player)?.steps ?? 0;
+      object.skipsUntapOf = [...others, { player, steps: Math.max(before, steps) }];
+      return;
+    }
+    object.skipsNextUntap = true;
+    const further = Math.max(object.skipsFurtherUntaps ?? 0, steps - 1);
+    if (further > 0) object.skipsFurtherUntaps = further;
+  }
+
+  /** `active`'s untap step has happened: one fewer left of what held this
+   * permanent through it, whether or not it was tapped. */
+  private serveUntapStepOf(object: GameObject, active: PlayerId): void {
+    if (object.controller === active && object.skipsNextUntap === true) {
+      const further = object.skipsFurtherUntaps ?? 0;
+      if (further > 1) object.skipsFurtherUntaps = further - 1;
+      else delete object.skipsFurtherUntaps;
+      if (further === 0) delete object.skipsNextUntap;
+    }
+    if (object.skipsUntapOf !== undefined) {
+      const left = object.skipsUntapOf.flatMap((hold) =>
+        hold.player !== active ? [hold] : hold.steps > 1 ? [{ player: hold.player, steps: hold.steps - 1 }] : [],
+      );
+      if (left.length > 0) object.skipsUntapOf = left;
+      else delete object.skipsUntapOf;
+    }
   }
 
   /**
@@ -27941,7 +27977,7 @@ export class Game {
           spec === undefined ? undefined : this.manaTagFor(this.state.objects[source], spec),
           this.manaOriginOf(source),
         ),
-      tapPermanent: (target, doesntUntapNext, onlyDoesntUntap) => {
+      tapPermanent: (target, doesntUntapNext, onlyDoesntUntap, doesntUntapSteps, untapStepOf) => {
         if (doesntUntapNext !== true || target.kind !== "object") {
           this.setTapped(target, true);
           return;
@@ -27952,8 +27988,7 @@ export class Game {
         // leaves it as it is.
         const id = this.splitOneFromStack(target.object);
         if (onlyDoesntUntap !== true) this.setTapped({ kind: "object", object: id }, true);
-        const object = this.state.objects[id];
-        object.skipsNextUntap = true;
+        this.holdThroughUntapSteps(this.state.objects[id], doesntUntapSteps ?? 1, untapStepOf);
       },
       untapPermanent: (target) => this.setTapped(target, false),
       becomePrepared: (id) => {
@@ -30387,7 +30422,7 @@ export class Game {
           this.untapUnlessStunned(id);
         }
       },
-      tapAll: (filter, doesntUntapNext, onlyDoesntUntap, scopeTo, untapStepOfScope) => {
+      tapAll: (filter, doesntUntapNext, onlyDoesntUntap, scopeTo, untapStepOfScope, doesntUntapSteps) => {
         for (const id of this.battlefieldMatching(scopeTo ?? controller, filter)) {
           const object = this.state.objects[id];
           if (!object.tapped && !(doesntUntapNext === true && onlyDoesntUntap === true)) {
@@ -30395,10 +30430,8 @@ export class Game {
             this.emit({ type: "permanent-tapped", object: id });
           }
           // A stack matched whole: every token in it skips the untap.
-          if (doesntUntapNext === true && untapStepOfScope === true && scopeTo !== undefined) {
-            object.skipsUntapOf = scopeTo;
-          } else if (doesntUntapNext === true) {
-            object.skipsNextUntap = true;
+          if (doesntUntapNext === true) {
+            this.holdThroughUntapSteps(object, doesntUntapSteps ?? 1, untapStepOfScope === true ? scopeTo : undefined);
           }
         }
       },
@@ -46390,6 +46423,7 @@ export class Game {
     delete object.exertedBy;
     delete object.exertedOnTurn;
     delete object.skipsNextUntap;
+    delete object.skipsFurtherUntaps;
     delete object.skipsUntapOf;
     object.blocking = null;
     delete object.blockingAlso;

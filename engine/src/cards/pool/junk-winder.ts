@@ -21,7 +21,7 @@ export default defineCard({
   triggered: [
     {
       trigger: { on: "enters-battlefield", who: "you-control", filter: { token: true } },
-      targets: [{ kind: "permanent", filter: { notTypes: ["land"], controlledBy: "opponent" } }],
+      targets: ["nonland-permanent-an-opponent-controls"],
       effect: { kind: "tap", target: 0, doesntUntapNext: true },
       resolve: null,
       text: TAP_TEXT,

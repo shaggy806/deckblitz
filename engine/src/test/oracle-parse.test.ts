@@ -7966,3 +7966,54 @@ describe("the most common color among permanents", () => {
     });
   });
 });
+
+describe("doesn't untap during a chosen player's next N untap steps", () => {
+  const face = (type_line: string, oracle_text: string) =>
+    parseFace({ name: "Test Hold", type_line, oracle_text }, { tokenFor: () => null });
+  const yours = { doesntUntapNext: true, onlyDoesntUntap: true, untapStepOf: "you" };
+
+  it("reads N and whose step, on a target, on the source, or on the sentence before's object", () => {
+    const telekinesis = face(
+      "Instant",
+      "Tap target creature. Prevent all combat damage that would be dealt by that creature this turn. It doesn't untap during its controller's next two untap steps.",
+    );
+    expect(telekinesis.complete).toBe(true);
+    expect(telekinesis.effect.effects).toEqual([
+      { kind: "tap", target: 0 },
+      { kind: "damage-rule", by: { target: 0 }, combat: true },
+      { kind: "tap", target: 0, doesntUntapNext: true, onlyDoesntUntap: true, doesntUntapSteps: 2 },
+    ]);
+    const reveka = face("Creature — Dwarf Wizard", "{T}: This creature deals 2 damage to any target and doesn't untap during your next untap step.");
+    expect(reveka.complete).toBe(true);
+    expect(reveka.activated[0].effect.effects[1]).toEqual({ kind: "tap", target: "source", ...yours });
+    const alchemist = face(
+      "Creature — Human Cleric",
+      "{W}{W}, {T}: Prevent the next 4 damage that would be dealt this turn to target creature you control. Tap that creature. It doesn't untap during your next untap step.",
+    );
+    expect(alchemist.complete).toBe(true);
+    expect(alchemist.activated[0].effect.effects).toEqual([
+      { kind: "prevent-damage", target: 0, amount: 4 },
+      { kind: "tap", target: 0, doesntUntapNext: true, untapStepOf: "you" },
+    ]);
+    const vorinclex = face(
+      "Creature — Phyrexian Praetor",
+      "Whenever an opponent taps a land for mana, that land doesn't untap during its controller's next untap step.",
+    );
+    expect(vorinclex.complete).toBe(true);
+    expect(vorinclex.triggered[0].effect).toEqual({ kind: "tap", target: "trigger-object", doesntUntapNext: true, onlyDoesntUntap: true });
+  });
+
+  it("folds a tap and the hold on it into one, and rides a mana ability off the stack (rule 605.1a)", () => {
+    const frost = face("Creature — Elemental", "When this creature enters, tap target creature an opponent controls. That creature doesn't untap during its controller's next untap step.");
+    expect(frost.complete).toBe(true);
+    expect(frost.triggered[0].effect).toEqual({ kind: "tap", target: 0, doesntUntapNext: true });
+    const marsh = face("Land", "{T}: Add {B} or {R}. This land doesn't untap during your next untap step.");
+    expect(marsh.complete).toBe(true);
+    expect(marsh.activated[0].effect.also).toEqual({ kind: "tap", target: "source", ...yours });
+  });
+
+  it("leaves another number of steps unread", () => {
+    const longer = face("Creature — Wall", "{T}: This creature deals 1 damage to any target and doesn't untap during your next three untap steps.");
+    expect(longer.complete).toBe(false);
+  });
+});

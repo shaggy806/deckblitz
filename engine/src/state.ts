@@ -531,13 +531,21 @@ export interface GameObject {
    */
   skipsNextUntap?: true;
   /**
-   * "Those creatures don't untap during **that player's** next untap step"
-   * (Sleep): the skip is tied to that player's untap step, not to whoever
-   * controls the permanent then — one that changes hands first untaps in its
-   * new controller's untap step as usual. Cleared as that player's untap step
-   * happens, and by any change of zone.
+   * With `skipsNextUntap`: how many more of its controllers' untap steps pass
+   * it by after that next one — "its controller's next **two** untap steps"
+   * (Telekinesis) is 1. Counted whoever controls it during each (its ruling).
    */
-  skipsUntapOf?: PlayerId;
+  skipsFurtherUntaps?: number;
+  /**
+   * "Those creatures don't untap during **that player's** next untap step"
+   * (Sleep), "this creature doesn't untap during **your** next untap step"
+   * (Reveka): the skip is tied to that player's untap step, not to whoever
+   * controls the permanent then — one that changes hands first untaps in its
+   * new controller's untap step as usual. One entry a player, each with how
+   * many of that player's untap steps are left. Spent as that player's untap
+   * step happens, and all gone with any change of zone.
+   */
+  skipsUntapOf?: readonly { readonly player: PlayerId; readonly steps: number }[];
   /** This creature must attack this specific player if able — Encore's
    * "create a token copy that attacks that opponent this turn if able". */
   mustAttackPlayer?: PlayerId;
@@ -6078,6 +6086,11 @@ export const permanentCount = (state: GameState, ids: readonly ObjectId[]): numb
  * expiring (702.26f), a player leaving (702.26k), and a view. */
 export const phasedOutIds = (state: GameState): readonly ObjectId[] => state.phasedOut ?? [];
 
+/** "Doesn't untap during **that player's** next untap step" still holds this
+ * permanent through `player`'s (`GameObject.skipsUntapOf`). */
+export const heldThroughUntapStepOf = (object: GameObject, player: PlayerId): boolean =>
+  object.skipsUntapOf?.some((hold) => hold.player === player) === true;
+
 /** Every attacker `blockerId` blocks that is still attacking and still
  * blocked by it: the one it was declared blocking and the rest of that
  * attacker's band (rule 702.22h). An attacker removed from combat leaves it
@@ -6154,6 +6167,7 @@ export function tokenFoldKey(o: GameObject): string {
     o.exertedBy ?? null,
     o.exertedOnTurn ?? null,
     o.skipsNextUntap ?? false,
+    o.skipsFurtherUntaps ?? null,
     o.skipsUntapOf ?? null,
     o.mustAttackPlayer ?? null,
     o.controlEffects ?? null,

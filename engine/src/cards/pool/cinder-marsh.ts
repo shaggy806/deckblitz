@@ -5,8 +5,8 @@ import { addManaAbility } from "../helpers.js";
 // next untap step" is part of the mana ability (rule 605.1a), so it rides on
 // the add-mana's `also` (The Great Henge's shape) and the ability stays off
 // the stack. The land is already tapped by the cost: `onlyDoesntUntap` just
-// marks it (`skipsNextUntap`, read at its controller's next untap step —
-// exert's "your next untap step" reads the same mark).
+// marks it for its activator's next untap step
+// (`untapStepOf`, `skipsUntapOf`).
 
 const COLOR_TEXT = "{T}: Add {B} or {R}. This land doesn't untap during your next untap step.";
 
@@ -24,7 +24,7 @@ export default defineCard({
         kind: "add-mana",
         mana: { oneOf: ["B", "R"] },
         amount: 1,
-        also: { kind: "tap", target: "source", doesntUntapNext: true, onlyDoesntUntap: true },
+        also: { kind: "tap", target: "source", doesntUntapNext: true, onlyDoesntUntap: true, untapStepOf: "you" },
       },
       resolve: null,
       text: COLOR_TEXT,

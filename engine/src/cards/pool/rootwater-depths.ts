@@ -24,7 +24,7 @@ export default defineCard({
         amount: 1,
         // Part of the mana ability, so no stack: the cost has tapped the land
         // already, and this only holds it through the next untap step.
-        also: { kind: "tap", target: "source", doesntUntapNext: true, onlyDoesntUntap: true },
+        also: { kind: "tap", target: "source", doesntUntapNext: true, onlyDoesntUntap: true, untapStepOf: "you" },
       },
       resolve: null,
       text: "{T}: Add {U} or {B}. This land doesn't untap during your next untap step.",

@@ -2510,6 +2510,15 @@ export type EffectSpec =
        * (Kefnet's Monument, Wall of Frost, Ajani Vengeant's +1): it stays
        * tapped or untapped as it is. */
       readonly onlyDoesntUntap?: boolean;
+      /** With `doesntUntapNext`: how many untap steps it stays down for, 1 by
+       * default — "**next two untap steps**" (Telekinesis). */
+      readonly doesntUntapSteps?: number;
+      /** With `doesntUntapNext`: whose untap step — `"you"` is "doesn't untap
+       * during **your** next untap step" (Reveka, Arbalest Elite, Samite
+       * Alchemist): the effect's controller's, not whoever controls the
+       * permanent then, so it comes back under someone else without a pause
+       * (`GameObject.skipsUntapOf`). */
+      readonly untapStepOf?: "you";
     }
   | {
       /** `target` accepts `"trigger-object"` for an untargeted "untap it"
@@ -6020,6 +6029,9 @@ export type EffectSpec =
        * rather than to whoever controls each permanent then
        * (`GameObject.skipsUntapOf`). */
       readonly untapStepOfTarget?: boolean;
+      /** As `tap`'s: "their controllers' next **two** untap steps" (Cone of
+       * Cold's top roll), 1 by default. */
+      readonly doesntUntapSteps?: number;
     }
   | {
       /**
@@ -8892,7 +8904,13 @@ export interface EffectApi {
     spec?: Extract<EffectSpec, { kind: "add-mana" }>,
   ): void;
   /** `doesntUntapNext`: see the `tap` {@link EffectSpec}. */
-  tapPermanent(target: TargetRef, doesntUntapNext?: boolean, onlyDoesntUntap?: boolean): void;
+  tapPermanent(
+    target: TargetRef,
+    doesntUntapNext?: boolean,
+    onlyDoesntUntap?: boolean,
+    doesntUntapSteps?: number,
+    untapStepOf?: PlayerId,
+  ): void;
   /** `id` becomes prepared (rule 722.3a — `Game.becomePrepared`): each
    * token of a compacted stack, singly. */
   becomePrepared(id: ObjectId): void;
@@ -9966,6 +9984,7 @@ export interface EffectApi {
     onlyDoesntUntap?: boolean,
     scopeTo?: PlayerId,
     untapStepOfScope?: boolean,
+    doesntUntapSteps?: number,
   ): void;
   /** See the `"phase-out"` {@link EffectSpec}: `target` (an object ref), or
    * the permanent the source is attached to, or every permanent matching
@@ -13100,7 +13119,15 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     }
     case "tap": {
       const target = resolveEffectTarget(spec.target, ctx);
-      if (target !== undefined) ctx.tapPermanent(target, spec.doesntUntapNext === true, spec.onlyDoesntUntap === true);
+      if (target !== undefined) {
+        ctx.tapPermanent(
+          target,
+          spec.doesntUntapNext === true,
+          spec.onlyDoesntUntap === true,
+          spec.doesntUntapSteps,
+          spec.untapStepOf === "you" ? ctx.controller : undefined,
+        );
+      }
       return;
     }
     case "untap": {
@@ -15021,6 +15048,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         spec.onlyDoesntUntap === true,
         scopeTo,
         spec.untapStepOfTarget === true,
+        spec.doesntUntapSteps,
       );
       return;
     }

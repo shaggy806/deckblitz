@@ -20,7 +20,7 @@ export default defineCard({
         kind: "add-mana",
         mana: { oneOf: ["U", "B"] },
         amount: 1,
-        also: { kind: "tap", target: "source", doesntUntapNext: true, onlyDoesntUntap: true },
+        also: { kind: "tap", target: "source", doesntUntapNext: true, onlyDoesntUntap: true, untapStepOf: "you" },
       },
       resolve: null,
       text: COLOR_TEXT,
