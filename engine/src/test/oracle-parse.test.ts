@@ -6078,6 +6078,35 @@ describe("each permanent of a kind deals damage (each-deals-damage)", () => {
   });
 });
 
+describe("damage dealt by another object than the source", () => {
+  const read = (oracle_text: string) => {
+    const targets: unknown[] = [];
+    return { effect: parseEffect(oracle_text, { targets, tokenFor: () => null }).effect, targets };
+  };
+  it("reads the enchanted creature as the source", () => {
+    expect(read("Enchanted creature deals 1 damage to target creature with flying.").effect).toEqual({
+      kind: "damage",
+      amount: 1,
+      target: 0,
+      from: "attached",
+    });
+    expect(read("Enchanted creature deals damage equal to its power to any other target.")).toEqual({
+      effect: { kind: "damage", amount: { powerOf: "attached" }, target: 0, from: "attached" },
+      targets: [{ kind: "other", of: "any-target", than: "host" }],
+    });
+  });
+  it("reads a card exiled this way as the source", () => {
+    const { effect } = read("Exile target creature card from a graveyard. That card deals damage equal to its power to ~.");
+    expect(effect).toMatchObject({
+      kind: "sequence",
+      effects: [
+        { kind: "exile", target: 0 },
+        { kind: "damage", amount: { powerOf: 0 }, target: "source", from: { target: 0 } },
+      ],
+    });
+  });
+});
+
 describe("permissions to cast from a zone other than the hand", () => {
   const effectOf = (oracle_text: string) => {
     const targets: unknown[] = [];

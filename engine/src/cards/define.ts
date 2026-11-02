@@ -1592,6 +1592,14 @@ export type StaticCondition =
    */
   | { readonly kind: "target-is-source"; readonly index: number }
   /**
+   * "If **that creature** has three or more +1/+0 counters on it" (Consuming
+   * Ferocity): the permanent the effect's source is attached to as this
+   * resolves — or last was, if the source has left, the same object still
+   * there (rule 608.2h) — matching `filter` from the controller's side. Only
+   * a resolution can answer it.
+   */
+  | { readonly kind: "host-now"; readonly filter: CardFilter }
+  /**
    * The ability's controller controls the permanent in this target slot, or
    * did as it last existed if it has left (rule 608.2h): Azog, Moria's Ruin's
    * "destroy … **If you controlled that creature**, draw a card". Only a

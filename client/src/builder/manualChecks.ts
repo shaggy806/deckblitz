@@ -9353,6 +9353,9 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     board({
       you: { bf: ['Powerful Broker'] },
       opp: { poison: 3 },
+    }),
+  ),
+  preset(
     'Sen Triplets: cast a spell from the opponent\'s revealed hand',
     board({
       you: { bf: ['Sen Triplets', 'Island*3'], lib: ['Island*4'] },
@@ -9414,6 +9417,19 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     'Misthollow Griffin: cast it from exile',
     board({
       you: { bf: ['Island*4'], exile: ['Misthollow Griffin'] },
+    }),
+  ),
+  preset(
+    'Pain for All: "any other target" leaves out the enchanted creature',
+    board({
+      you: { bf: ['Hill Giant', 'Mountain*3'], hand: ['Pain for All'] },
+    }),
+  ),
+  preset(
+    'Vivien\'s Invocation: the creature you put deals the damage',
+    board({
+      you: { bf: ['Forest*7'], hand: ['Vivien\'s Invocation'], lib: ['Hill Giant', 'Forest*6'] },
+      opp: { bf: ['Serra Angel'] },
     }),
   ),
 ]

@@ -2844,7 +2844,10 @@ export type EffectSpec =
        *   **that creature**" (Sarkhan the Masterless's attacker), nothing
        *   once it has left the battlefield;
        * - `{ who }` — "each creature you control deals damage equal to its
-       *   power to **each opponent**" (Lukka, Coppercoat Outcast).
+       *   power to **each opponent**" (Lukka, Coppercoat Outcast);
+       * - `"host"` — "each Aura attached to a creature deals 2 damage to **the
+       *   creature it's attached to**" (Aura Barbs), each to its own, nothing
+       *   for one attached to nothing.
        *
        * A token stack deals its damage once per token: to itself, each
        * token to itself; to anything else, as that many identical sources
@@ -2852,7 +2855,7 @@ export type EffectSpec =
       readonly kind: "each-deals-damage";
       readonly filter: CardFilter;
       readonly amount: EffectAmount | "its-power";
-      readonly to: "itself" | number | "trigger-object" | { readonly who: PlayerScope };
+      readonly to: "itself" | "host" | number | "trigger-object" | { readonly who: PlayerScope };
       /** Only permanents the player in this target slot controls — or that
        * permanent's controller: Alpha Brawl's "each of those creatures" (each
        * other creature **that player** controls). Nothing when that target
@@ -3132,6 +3135,11 @@ export type EffectSpec =
        * nothing to cast.
        */
       readonly mayCast?: { readonly duration: ImpulseDuration; readonly spendAs?: SpendAs; readonly play?: true };
+      /** The card is in a hand, a `choose-random-card`'s find there: "reveals
+       * a card at random from their hand … exile it" (Planeswalker's
+       * Mischief). Only with this does `exile` reach a hand, so a target that
+       * has been bounced in response stays where it went. */
+      readonly fromHand?: true;
       /**
        * **Airbend** it (rule 701.65a): exile it, and for as long as the card
        * remains exiled its *owner* may cast it by paying {2} rather than its
@@ -9578,7 +9586,7 @@ export interface EffectApi {
       readonly whose?: PlayerId;
     },
     amount: number | "its-power",
-    to: "itself" | readonly TargetRef[],
+    to: "itself" | "host" | readonly TargetRef[],
   ): void;
   /** Each of `who` (a scope, or `{ player }` for a targeted edict) sacrifices
    * `count` permanents matching `filter`. */
@@ -9867,6 +9875,8 @@ export interface EffectApi {
   /** Exile every card in `target`'s graveyard (a player — Bojuka Bog), as
    * one move. */
   exileGraveyard(target: TargetRef, filter?: CardFilter, linked?: boolean, fromHand?: "also" | "only", untilSourceLeaves?: boolean): void;
+  /** See `exile`'s `fromHand`. */
+  exileFromHand(card: ObjectId): void;
   /** Each of `players` sacrifices every permanent matching `filter` they
    * control, at once — see the `"sacrifice-all"` {@link EffectSpec}. */
   sacrificeAll(players: readonly PlayerId[], filter: CardFilter): void;
@@ -14094,8 +14104,8 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         whose = scopedController(spec.controlledByTarget, ctx);
         if (whose === undefined) return;
       }
-      let to: "itself" | readonly TargetRef[];
-      if (spec.to === "itself") to = "itself";
+      let to: "itself" | "host" | readonly TargetRef[];
+      if (spec.to === "itself" || spec.to === "host") to = spec.to;
       else if (typeof spec.to === "object") {
         to = ctx.playersInScope(spec.to.who).map((player): TargetRef => ({ kind: "player", player }));
       } else {
@@ -14301,6 +14311,10 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     }
     case "exile": {
       const target = resolveEffectTarget(spec.target, ctx);
+      if (spec.fromHand === true) {
+        if (target?.kind === "object") ctx.exileFromHand(target.object);
+        return;
+      }
       if (target !== undefined) {
         // Rule 610.3a: until a target leaves, and that target is gone or
         // illegal already: it doesn't move (Calix's ruling).

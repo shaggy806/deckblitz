@@ -2,6 +2,10 @@
  "generated": "2026-09-22",
  "source": "Per-commander triage of every unimplemented top-commanders.txt entry (AI agents reading Oracle text + rulings against the engine), normalized onto one feature vocabulary. See neededCards-features.md, 'The commander gap'.",
  "built": [
+  "effect:damage-from-attached",
+  "effect:damage-from-created-token",
+  "effect:damage-from-exiled-card",
+  "effect:damage-from-this-way",
   "zone:cast-from-opponents-hand",
   "zone:cast-self-from-exile",
   "effect:cast-from-linked-exile-free-this-turn",

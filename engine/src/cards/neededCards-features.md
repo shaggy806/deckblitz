@@ -4054,3 +4054,12 @@ offers a `cast-now` (`from: "while-searching"`) as a search of your own library 
 cast-from-linked-exile-free-this-turn, cast-while-searching-library. Proving cards: Silent-Blade Oni,
 Mindleech Mass, Mindclaw Shaman, Sen Triplets, Zara, Renegade Recruiter, Eternal Scourge, Misthollow
 Griffin, Idol of Endurance, Planeswalker's Mischief, Panglacial Wurm.
+
+**Damage dealt by another object** (2026-11-02). Most of it was there: `DamageFrom`'s `"attached"`, a slot
+and `"trigger-object"`, a `reflexive-trigger`'s `about: "put-this-way"`, `each-deals-damage`. New:
+`OtherThan`'s `"host"` (Pain for All's "any other target"), `each-deals-damage`'s `to: "host"` (Aura
+Barbs), and the `host-now` condition (Consuming Ferocity's "if that creature has three or more +1/+0
+counters", on the creature it was attached to even once the Aura has gone). Keys: damage-from-attached,
+damage-from-created-token, damage-from-exiled-card, damage-from-this-way. Proving cards: Bind the Monster,
+Dizzying Gaze, Pain for All, Consuming Ferocity, Aura Barbs, Chainer's Torment, Selfless Exorcist,
+Vivien's Invocation.

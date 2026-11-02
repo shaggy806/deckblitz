@@ -425,8 +425,12 @@ function isPermanentOfType(
 /** Is `ref` the one thing an `other` slot must differ from? An "other than
  * slot n" relation isn't this ref's alone to answer — `otherSlotConflict`
  * checks the pair. */
-function excludedAsOther(than: OtherThan, ref: TargetRef, source: TargetSource | undefined): boolean {
+function excludedAsOther(state: GameState, than: OtherThan, ref: TargetRef, source: TargetSource | undefined): boolean {
   if (typeof than === "object" || source === undefined) return false;
+  if (than === "host") {
+    const host = source.object === undefined ? undefined : state.objects[source.object]?.attachedTo;
+    return ref.kind === "object" && host !== undefined && host !== null && ref.object === host;
+  }
   if (than === "trigger-player") {
     return ref.kind === "player" && source.triggerPlayer !== undefined && ref.player === source.triggerPlayer;
   }
@@ -550,7 +554,7 @@ function isLegalTargetUncached(
   }
   // "Another target …": the inner spec, less what it has to differ from.
   if (typeof spec === "object" && spec.kind === "other") {
-    if (excludedAsOther(spec.than ?? "source", ref, source)) return false;
+    if (excludedAsOther(state, spec.than ?? "source", ref, source)) return false;
     return isLegalTarget(state, registry, spec.of, ref, forPlayer, source, opts);
   }
   // A filtered battlefield permanent (see `TargetSpec`). Like the graveyard
@@ -964,7 +968,7 @@ function legalTargetsUncached(
   if (typeof spec === "object" && spec.kind === "other") {
     const than = spec.than ?? "source";
     return legalTargets(state, registry, spec.of, forPlayer, source).filter(
-      (ref) => !excludedAsOther(than, ref, source),
+      (ref) => !excludedAsOther(state, than, ref, source),
     );
   }
   const out: TargetRef[] = [];

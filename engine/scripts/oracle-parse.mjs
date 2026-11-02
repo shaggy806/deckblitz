@@ -3944,6 +3944,26 @@ export function parseSentence(sentence, ctx) {
   if ((m = re(`enchanted creature deals ${N} damage to its owner`).exec(s))) {
     return { kind: "damage", amount: amount(m[1]), who: "attached-owner", from: "attached" };
   }
+  // "Enchanted creature deals 1 damage to target creature with flying" (Dizzying
+  // Gaze), "… deals damage equal to its power to any other target" (Pain for
+  // All): the host the source (`DamageFrom`'s `"attached"`).
+  if ((m = re(`enchanted creature deals ${N} damage to (${TARGET})`).exec(s))) {
+    const target = slot(m[2]);
+    if (target !== undefined) return { kind: "damage", amount: amount(m[1]), target, from: "attached" };
+  }
+  if (re("enchanted creature deals damage equal to its power to any other target").test(s)) {
+    return {
+      kind: "damage",
+      amount: { powerOf: "attached" },
+      target: ctx.target({ kind: "other", of: "any-target", than: "host" }),
+      from: "attached",
+    };
+  }
+  // "Exile target creature card from a graveyard. That card deals damage equal
+  // to its power to ~" (Selfless Exorcist): the card in its target slot, in exile.
+  if (ctx.targets.length === 1 && re("that card deals damage equal to its power to ~").test(s)) {
+    return { kind: "damage", amount: { powerOf: 0 }, target: "source", from: { target: 0 } };
+  }
   // "Whenever a player taps a land for mana, ~ deals 1 damage to that player"
   // (Manabarbs): the player the event names.
   if (ctx.thatPlayer === "trigger-player" && (m = re(`~ deals ${N} damage to that player`).exec(s))) {

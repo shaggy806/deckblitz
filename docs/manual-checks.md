@@ -6235,3 +6235,11 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Misthollow Griffin: cast it from exile
 - **Do:** Click "exile" on your panel and cast Misthollow Griffin.
 - **Expect:** It costs your four Islands and enters the battlefield.
+
+### Pain for All: "any other target" leaves out the enchanted creature
+- **Do:** Cast Pain for All on Hill Giant. When the trigger asks for a target, hover the Giant, then click Bob.
+- **Expect:** The Giant can't be picked. The damage comes from the Giant: Bob loses 3.
+
+### Vivien's Invocation: the creature you put deals the damage
+- **Do:** Cast Vivien's Invocation. In the popup pick Hill Giant and confirm. Then target Bob's Serra Angel when asked.
+- **Expect:** The Giant enters first and the target is chosen after, with a trigger on the stack you can respond to. The Angel takes 3.

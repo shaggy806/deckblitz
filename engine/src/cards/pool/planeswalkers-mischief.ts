@@ -27,7 +27,7 @@ export default defineCard({
           then: {
             kind: "sequence",
             effects: [
-              { kind: "exile", target: 0 },
+              { kind: "exile", target: 0, fromHand: true },
               { kind: "allow-cast-from-exile", target: 0, free: true, whileExiled: true },
               // Cast, it has left exile: a new object the return can't reach
               // (rule 400.7), and so "if you haven't cast it".

@@ -734,6 +734,9 @@ export type OtherThan =
   | "source"
   | "trigger-object"
   | "trigger-player"
+  /** The permanent the source is attached to — Pain for All's "any **other**
+   * target" of its enchanted creature's damage. */
+  | "host"
   | { readonly slot: number }
   | { readonly slots: readonly number[] };
 
@@ -1212,7 +1215,9 @@ export function describeTargetSpec(spec: TargetSpec | string): string {
       ? `another ${inner}`
       : than === "trigger-object"
         ? `${inner} other than that one`
-        : `${inner} other than that player`;
+        : than === "host"
+          ? `${inner} other than the one it's attached to`
+          : `${inner} other than that player`;
   }
   if (spec.kind === "opponent-compared") {
     const what = {

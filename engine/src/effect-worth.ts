@@ -500,6 +500,9 @@ export function onlyUntilEndOfTurn(effect: EffectSpec | null | undefined): boole
     case "grant-protection":
     case "animate":
       return effect.duration === "end-of-turn";
+    // "Until end of turn, you may cast …" (Idol of Endurance).
+    case "allow-cast-linked-exile":
+      return true;
     // Matters only to this turn's combat damage (Gurzigost).
     case "assign-as-though-unblocked":
       return true;

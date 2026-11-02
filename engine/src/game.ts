@@ -28560,6 +28560,10 @@ export class Game {
         const best = (condition.is === "highest" ? Math.max : Math.min)(...numbers.map((v) => v.number));
         return own.number === best;
       }
+      if (condition.kind === "host-now") {
+        const host = attachedHostNow();
+        return host !== undefined && matchesFilter(this.state, this.registry, host, condition.filter, { you: controller });
+      }
       if (condition.kind === "target-is-source") {
         const ref = targets[condition.index];
         return ref?.kind === "object" && ref.object === source;
@@ -29881,6 +29885,9 @@ export class Game {
           attacking,
           attachTo,
         ),
+      exileFromHand: (card) => {
+        if (this.state.objects[card]?.zone === "hand") this.moveObject(card, "exile");
+      },
       exileGraveyard: (target, filter, linked, fromHand, untilSourceLeaves) => {
         if (target.kind !== "player") return;
         // Rule 610.3b: exiled "until" something that has already happened —
@@ -40047,10 +40054,10 @@ export class Game {
       readonly whose?: PlayerId;
     },
     amount: number | "its-power",
-    to: "itself" | readonly TargetRef[],
+    to: "itself" | "host" | readonly TargetRef[],
   ): void {
     if (amount !== "its-power" && amount <= 0) return;
-    if (to !== "itself" && to.length === 0) return;
+    if (to !== "itself" && to !== "host" && to.length === 0) return;
     const dealing: { readonly id: ObjectId; readonly amount: number }[] = [];
     for (const id of this.state.zones.shared.battlefield) {
       if (dealers.exceptSource && id === source) continue;
@@ -40070,6 +40077,14 @@ export class Game {
           // into one object each (a stack is only a representation).
           const each = tokens > 1 ? this.materializeStack(id, undefined, Game.MAX_EFFECT_INSTANCES) : [id];
           for (const token of each) this.dealDamage(token, { kind: "object", object: token }, dealt);
+          continue;
+        }
+        // Each to what it's attached to (Aura Barbs).
+        if (to === "host") {
+          const host = this.state.objects[id].attachedTo;
+          if (host !== undefined && host !== null && this.state.objects[host]?.zone === "battlefield") {
+            this.dealDamage(id, { kind: "object", object: host }, dealt);
+          }
           continue;
         }
         // To anything else, a stack's tokens are that many identical
@@ -41082,15 +41097,13 @@ export class Game {
     // Graveyard as well as battlefield: "Exile target card from a graveyard"
     // (Withered Wretch, Scavenging Ooze) targets a card, not a permanent. A
     // library card is one a `reveal-until` has just revealed there (Creative
-    // Technique's "exile that card"), a hand card one just revealed from it
-    // (Planeswalker's Mischief's "exile it"). Anything already in exile is
-    // left alone.
+    // Technique's "exile that card"). Anything already in exile is left alone.
     if (object === undefined) return;
     if (object.zone === "stack") {
       this.exileSpell(id);
       return;
     }
-    if (object.zone !== "battlefield" && object.zone !== "graveyard" && object.zone !== "library" && object.zone !== "hand") return;
+    if (object.zone !== "battlefield" && object.zone !== "graveyard" && object.zone !== "library") return;
     const wasPermanent = object.zone === "battlefield";
     if (!this.moveObject(id, "exile")) return;
     // After the move: `moveObject` clears zone-scoped state on the way out,
