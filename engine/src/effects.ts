@@ -1784,6 +1784,12 @@ export interface DieResultRow {
   readonly effect: EffectSpec;
 }
 
+/** See the `take-extra-turn` {@link EffectSpec}'s `thatTurn`. */
+export interface ExtraTurnScope {
+  readonly damageCantBePrevented?: true;
+  readonly atEndStep?: { readonly effect: EffectSpec; readonly text: string };
+}
+
 /** A declarative effect. Grows as milestones add vocabulary. */
 /** What cascade found: the card it may cast, its name, and everything it
  * exiled on the way (the card included). */
@@ -5621,6 +5627,27 @@ export type EffectSpec =
       /** "Skip the untap step of that turn" (Savor the Moment — rule
        * 614.10): that extra turn's untap step, and no other, is skipped. */
       readonly skipUntapStep?: true;
+      /** What the effect says about that turn alone, taken up as it begins
+       * and lost with it if it's skipped or never begins (rule 614.10a):
+       * "during that turn, damage can't be prevented" (Alchemist's Gambit —
+       * rule 615.12), and "at the beginning of that turn's end step, you lose
+       * the game" (Warrior's Oath), a delayed ability (rule 603.7) of this
+       * effect's controller that lapses unfired if that end step never comes. */
+      readonly thatTurn?: ExtraTurnScope;
+    }
+  | {
+      /**
+       * "You skip your next turn" (Meditate — rules 500.11, 614.10): `who`'s
+       * next `count` turns (one by default) pass as though they didn't exist,
+       * an extra turn among them as much as one in the rotation. Nothing
+       * happens in them, and anything waiting for "their next turn" waits for
+       * the first that isn't skipped; two effects skip the next two
+       * (614.10a). The turn under way can't be skipped (614.10). `who` is a
+       * player slot or a scope, `"you"` by default.
+       */
+      readonly kind: "skip-turn";
+      readonly who?: number | PlayerScope;
+      readonly count?: EffectAmount;
     }
   | {
       /**
@@ -9978,7 +10005,9 @@ export interface EffectApi {
   /** See the `"grant-activated-all"` {@link EffectSpec}. */
   grantActivatedAll(filter: CardFilter, ability: ActivatedAbility, duration: PtDuration): void;
   /** `player` takes an extra turn after this one (Time Warp). */
-  takeExtraTurn(player: PlayerId, skipUntapStep?: boolean): void;
+  takeExtraTurn(player: PlayerId, skipUntapStep?: boolean, thatTurn?: ExtraTurnScope): void;
+  /** `player` skips their next `count` turns (the `skip-turn` effect). */
+  skipTurn(player: PlayerId, count: number): void;
   /** See the `"control-player"` {@link EffectSpec}. */
   controlPlayer(
     controlled: PlayerId,
@@ -14969,7 +14998,13 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "take-extra-turn": {
       const target = spec.target === undefined ? undefined : ctx.targets[spec.target];
       if (spec.target !== undefined && target?.kind !== "player") return;
-      ctx.takeExtraTurn(target?.kind === "player" ? target.player : ctx.controller, spec.skipUntapStep === true);
+      ctx.takeExtraTurn(target?.kind === "player" ? target.player : ctx.controller, spec.skipUntapStep === true, spec.thatTurn);
+      return;
+    }
+    case "skip-turn": {
+      for (const target of scopedOrTargetedPlayers(spec.who ?? "you", ctx)) {
+        if (target.kind === "player") ctx.skipTurn(target.player, amountValue(spec.count ?? 1, ctx, target.player));
+      }
       return;
     }
     case "control-player": {

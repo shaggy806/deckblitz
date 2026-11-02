@@ -30,6 +30,53 @@ const ctx = (overrides: Partial<Ctx> = {}): Ctx => {
   return { targets, target: (spec) => targets.push(spec) - 1, tokenFor: () => null, ...overrides };
 };
 
+describe("skipping a turn and what's said about an extra one", () => {
+  const face = (type_line: string, oracle_text: string) =>
+    parseFace({ name: "Medomai the Test", type_line, mana_cost: "{1}", oracle_text }, { tokenFor: () => null });
+
+  it.each([
+    ["You skip your next turn.", { kind: "skip-turn", who: "you" }],
+    ["Skip your next turn.", { kind: "skip-turn", who: "you" }],
+    ["You skip your next two turns.", { kind: "skip-turn", who: "you", count: 2 }],
+    ["Each opponent skips their next turn.", { kind: "skip-turn", who: "each-opponent" }],
+  ])("%s", (text, effect) => {
+    const spell = face("Sorcery", text);
+    expect(spell.complete).toBe(true);
+    expect(spell.effect).toEqual(effect);
+  });
+
+  it("a targeted skip takes a slot", () => {
+    const spell = face("Sorcery", "Target opponent skips their next turn.");
+    expect(spell.effect).toEqual({ kind: "skip-turn", who: 0 });
+    expect(spell.targets).toHaveLength(1);
+  });
+
+  it("an extra turn alone, and with what's said about that turn", () => {
+    expect(face("Sorcery", "Take an extra turn after this one.").effect).toEqual({ kind: "take-extra-turn" });
+    expect(face("Sorcery", "Target player takes an extra turn after this one.").effect).toEqual({ kind: "take-extra-turn", target: 0 });
+    expect(face("Sorcery", "Take an extra turn after this one. Skip the untap step of that turn.").effect).toEqual({
+      kind: "take-extra-turn",
+      skipUntapStep: true,
+    });
+    const lose = { effect: { kind: "lose-game" }, text: "At the beginning of that turn's end step, you lose the game." };
+    expect(face("Sorcery", "Take an extra turn after this one. At the beginning of that turn's end step, you lose the game.").effect).toEqual({
+      kind: "take-extra-turn",
+      thatTurn: { atEndStep: lose },
+    });
+    expect(
+      face("Sorcery", "Take an extra turn after this one. During that turn, damage can't be prevented. At the beginning of that turn's end step, you lose the game.").effect,
+    ).toEqual({ kind: "take-extra-turn", thatTurn: { damageCantBePrevented: true, atEndStep: lose } });
+    // What it doesn't know about that turn, it doesn't read.
+    expect(face("Sorcery", "Take an extra turn after this one. During that turn, power-up abilities can't be activated.").complete).toBe(false);
+  });
+
+  it("can't attack during extra turns", () => {
+    const sphinx = face("Legendary Creature — Sphinx", "Medomai can't attack during extra turns.");
+    expect(sphinx.complete).toBe(true);
+    expect(sphinx.static[0]).toMatchObject({ affects: { scope: "self" }, condition: { kind: "extra-turn" }, restrictions: ["cant-attack"] });
+  });
+});
+
 describe("reveal until, and where the rest goes", () => {
   const nonland = { notTypes: ["land"] };
   const spell = (oracle_text: string) =>

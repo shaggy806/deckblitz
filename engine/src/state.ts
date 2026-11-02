@@ -2613,6 +2613,12 @@ export interface PlayerState {
    * permanent that doesn't untap during it, an exert) waits for the first one
    * that isn't skipped. Absent with none. See the `skip-untap-step` effect. */
   untapStepsToSkip?: number;
+  /** "You skip your next turn" (Meditate — rules 500.11, 614.10): how many of
+   * this player's turns are still to be skipped, extra turns included, each
+   * effect satisfied by one (614.10a: two skip the next two). A skipped turn
+   * never begins, so whatever waits for "their next turn" waits for the first
+   * one that isn't skipped. Absent with none. See the `skip-turn` effect. */
+  turnsToSkip?: number;
   /** "[That player] skips their next draw step" (Fatigue, Molten Firebird —
    * rule 614.10) and the same for an upkeep step: how many of each are still
    * to be skipped, each effect satisfied by one (614.10a). A step a static
@@ -4108,6 +4114,22 @@ export type AwaitingDecision =
       readonly unblockedOnly?: true;
     };
 
+/** See `GameState.extraTurnRiders`. */
+export interface ExtraTurnRider {
+  /** The turn's index in `GameState.extraTurns`. */
+  readonly at: number;
+  /** "During that turn, damage can't be prevented" (rule 615.12). */
+  readonly damageCantBePrevented?: true;
+  /** "At the beginning of that turn's end step, …": the delayed ability
+   * (rule 603.7) that turn sets up, as its effect's controller made it. */
+  readonly atEndStep?: {
+    readonly source: ObjectId;
+    readonly controller: PlayerId;
+    readonly effect: EffectSpec;
+    readonly text: string;
+  };
+}
+
 /**
  * When a delayed triggered ability fires (rule 603.7).
  *
@@ -4134,6 +4156,10 @@ export type DelayedTriggerTiming =
   /** "At this turn's next end of combat" (Venomous Breath): as `"end-of-combat"`,
    * but with none left this turn it lapses with the turn, never firing. */
   | "end-of-combat-this-turn"
+  /** This turn's end step and no other: "at the beginning of that turn's end
+   * step" of an extra turn (Warrior's Oath), which is set up as that turn
+   * begins. A turn whose end step never comes lets it lapse, unfired. */
+  | "this-turn-end-step"
   /** "At the beginning of the next cleanup step" — put on the stack once that
    * step's turn-based actions are done (rule 514.3a), the Mirage block's
    * flash-and-sacrifice (`CardDefinition.flashThenSacrifice`). */
@@ -5756,6 +5782,13 @@ export interface GameState {
    * index in `extraTurns` its turn was queued at, which a stack's push and
    * pop keep. Absent with none. */
   extraTurnsSkippingUntap?: number[];
+  /** What the effect that queued an extra turn said about that turn ("during
+   * that turn, …", "at the beginning of that turn's end step, …"): each with
+   * the index in `extraTurns` its turn was queued at, as
+   * `extraTurnsSkippingUntap` keeps it. Taken up as that turn begins; lost
+   * with a turn that's skipped or never begins (rule 614.10a). Absent with
+   * none. */
+  extraTurnRiders?: ExtraTurnRider[];
   /** Additional combat phases still owed *this turn* (Aggravated Assault —
    * ROADMAP Phase 7). When the postcombat main phase ends with this > 0,
    * `endStep` decrements it and re-enters `begin-combat` (a combat phase then

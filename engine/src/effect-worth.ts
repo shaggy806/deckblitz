@@ -410,6 +410,10 @@ function untargetedWorth(effect: EffectSpec, ctx: WorthContext): number {
     }
     case "take-extra-turn":
       return effect.target === undefined ? onPlayers(you, 3 * CARD, ctx) : 0;
+    case "skip-turn":
+      // The mirror of an extra turn: a turn gone.
+      if (typeof effect.who === "number") return 0;
+      return onPlayers(playersIn(effect.who ?? "you", ctx), -3 * CARD * sizeOf(effect.count ?? 1), ctx);
     case "increase-speed": {
       // Speed going up is good for its player (rule 702.179): a step toward
       // max speed, whose abilities are what the cards are built around —

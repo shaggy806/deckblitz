@@ -131,6 +131,8 @@ export function describeEvent(event: GameEvent, nameOf: NameOf, seats: readonly 
       return `${event.round !== undefined ? `Round ${event.round}, turn ${event.turn}` : `Turn ${event.turn}`} — ${who(event.activePlayer)}${event.extra ? ' (extra turn)' : ''}`
     case 'extra-turn-queued':
       return `${who(event.player)} takes an extra turn after this one`
+    case 'turn-skipped':
+      return `${who(event.player)} skips a turn`
     case 'player-control-began':
       return `${who(event.controller)} controls ${who(event.controlled)} this ${event.during === 'next-combat' ? 'combat' : 'turn'}`
     case 'untap-step-skipped':

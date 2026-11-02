@@ -101,6 +101,11 @@ export type GameEvent =
       readonly player: PlayerId;
     })
   | (Base & {
+      /** `player`'s turn was skipped (rule 614.10): it never began. */
+      readonly type: "turn-skipped";
+      readonly player: PlayerId;
+    })
+  | (Base & {
       /** `controller` begins making `controlled`'s decisions (rule 723). */
       readonly type: "player-control-began";
       readonly controlled: PlayerId;

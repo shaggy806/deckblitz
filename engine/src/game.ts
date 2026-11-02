@@ -389,6 +389,7 @@ import type {
   EnterAttackingChoice,
   EntryRecord,
   DelayedTriggerTiming,
+  ExtraTurnRider,
   GameObject,
   GameRules,
   GameState,
@@ -7380,6 +7381,7 @@ export class Game {
     this.state.delayedTriggers = this.state.delayedTriggers.filter(
       (t) =>
         t.at !== "end-of-combat-this-turn" &&
+        t.at !== "this-turn-end-step" &&
         (typeof t.at !== "object" ||
           ("leaves" in t.at && t.at.thisTurn !== true) ||
           ("whenever" in t.at && t.at.untilYourNextTurn === true)),
@@ -7428,6 +7430,7 @@ export class Game {
     // recently created one first (rule 500.7); one for a player who has left
     // the game doesn't begin (800.4k).
     let extraFor: PlayerId | null = null;
+    let extraRiders: readonly ExtraTurnRider[] = [];
     while (extraFor === null && this.state.extraTurns.length > 0) {
       const next = this.state.extraTurns.pop() as PlayerId;
       // "Skip the untap step of that turn" (Savor the Moment): queued at the
@@ -7440,14 +7443,25 @@ export class Game {
         if (left.length === 0) delete this.state.extraTurnsSkippingUntap;
         else this.state.extraTurnsSkippingUntap = left;
       }
-      if (this.state.turnOrder.includes(next) && !this.state.players[next].hasLost) {
+      const riders = this.state.extraTurnRiders?.filter((r) => r.at === at) ?? [];
+      if (riders.length > 0) {
+        const left = this.state.extraTurnRiders?.filter((r) => r.at !== at) ?? [];
+        if (left.length === 0) delete this.state.extraTurnRiders;
+        else this.state.extraTurnRiders = left;
+      }
+      // A skip takes an extra turn as readily as any other (rule 614.10), and
+      // what was scheduled for the turn goes with it (614.10a).
+      if (this.state.turnOrder.includes(next) && !this.state.players[next].hasLost && !this.skipOwedTurn(next)) {
         extraFor = next;
         if (skipsUntap) {
           const player = this.state.players[next];
           player.untapStepsToSkip = (player.untapStepsToSkip ?? 0) + 1;
         }
+        extraRiders = riders;
       }
     }
+    // How many seats the normal rotation moves on, for the round (below).
+    let seatsAdvanced = 0;
     if (extraFor !== null) {
       turn.rotationIndex = rotation;
       turn.activePlayerIndex = this.state.turnOrder.indexOf(extraFor);
@@ -7458,16 +7472,26 @@ export class Game {
       if (turn.number > 1) {
         // Skip anyone who has left the game (rule 800.4). Without this an
         // eliminated player kept taking turns: untapping, drawing and holding
-        // priority in a game they are no longer in.
+        // priority in a game they are no longer in. A player skipping their
+        // turn is passed too (rule 614.10) — all the way round if everyone
+        // left owes one — but their turn hasn't begun, so what waits for it
+        // goes on waiting (614.10a).
         const order = this.state.turnOrder;
         let index = rotation;
-        for (let step = 1; step <= order.length; step += 1) {
-          const candidate = (rotation + step) % order.length;
-          if (!this.state.players[order[candidate]].hasLost) {
+        let departedInARow = 0;
+        while (departedInARow < order.length) {
+          seatsAdvanced += 1;
+          const candidate = (rotation + seatsAdvanced) % order.length;
+          const seat = order[candidate];
+          if (this.state.players[seat].hasLost) {
+            departedInARow += 1;
+            if (!beginningFor.includes(seat)) beginningFor.push(seat);
+          } else if (this.skipOwedTurn(seat)) {
+            departedInARow = 0;
+          } else {
             index = candidate;
             break;
           }
-          beginningFor.push(order[candidate]);
         }
         turn.activePlayerIndex = index;
       }
@@ -7483,7 +7507,17 @@ export class Game {
       const start = Math.max(0, this.state.turnOrder.indexOf(this.state.startingPlayer));
       const after = (index: number): number => (index - start + seats) % seats;
       const round = turn.round ?? Math.ceil((turn.number - 1) / Math.max(1, seats));
-      turn.round = after(turn.activePlayerIndex) <= after(rotation) ? round + 1 : round;
+      // Counted, not compared: skipped turns can carry the rotation past the
+      // starting seat more than once, or all the way round to where it was.
+      turn.round = round + Math.floor((after(rotation) + seatsAdvanced) / Math.max(1, seats));
+    }
+    // What the effect that queued this extra turn said about it.
+    for (const rider of extraRiders) {
+      if (rider.damageCantBePrevented === true) this.state.damageUnpreventableThisTurn = true;
+      if (rider.atEndStep !== undefined) {
+        const { source, controller, effect, text } = rider.atEndStep;
+        this.createDelayedTrigger(source, controller, "this-turn-end-step", effect, text, []);
+      }
     }
     for (const player of this.state.turnOrder) {
       this.state.players[player].landsPlayedThisTurn = 0;
@@ -9940,6 +9974,18 @@ export class Game {
       if (this.promptNextEnlist()) return;
     }
     this.announceAttackers(declaredNow);
+  }
+
+  /** If `player` still owes a skipped turn (`PlayerState.turnsToSkip`), the
+   * one about to begin is it: one effect satisfied (rule 614.10a), and true. */
+  private skipOwedTurn(player: PlayerId): boolean {
+    const state = this.state.players[player];
+    const owed = state.turnsToSkip ?? 0;
+    if (owed <= 0) return false;
+    if (owed === 1) delete state.turnsToSkip;
+    else state.turnsToSkip = owed - 1;
+    this.emit({ type: "turn-skipped", player });
+    return true;
   }
 
   /** Has `id`, a permanent, enlist (rule 702.154a — `StaticAbility.enlist`)? */
@@ -30437,7 +30483,21 @@ export class Game {
           }
         }
       },
-      takeExtraTurn: (player, skipUntapStep) => {
+      skipTurn: (player, count) => {
+        const state = this.state.players[player];
+        if (state !== undefined && !state.hasLost && count > 0) state.turnsToSkip = (state.turnsToSkip ?? 0) + count;
+      },
+      takeExtraTurn: (player, skipUntapStep, thatTurn) => {
+        if (thatTurn !== undefined) {
+          this.state.extraTurnRiders = [
+            ...(this.state.extraTurnRiders ?? []),
+            {
+              at: this.state.extraTurns.length,
+              ...(thatTurn.damageCantBePrevented === true ? { damageCantBePrevented: true as const } : {}),
+              ...(thatTurn.atEndStep !== undefined ? { atEndStep: { ...thatTurn.atEndStep, source, controller } } : {}),
+            },
+          ];
+        }
         if (this.state.players[player]?.hasLost !== false) return;
         if (skipUntapStep === true) {
           this.state.extraTurnsSkippingUntap = [...(this.state.extraTurnsSkippingUntap ?? []), this.state.extraTurns.length];
@@ -40494,6 +40554,8 @@ export class Game {
         return step === "end-combat";
       case "end-of-combat-this-turn":
         return step === "end-combat" && !laterTurn;
+      case "this-turn-end-step":
+        return step === "end" && !laterTurn;
       // Fired only once the cleanup step's turn-based actions are done (rule
       // 514.3a); one made in that step's priority window waits for the
       // cleanup step that follows it.

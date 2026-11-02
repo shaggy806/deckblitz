@@ -3587,3 +3587,23 @@ Proteus Staff. `effect:reveal-until-count` is only partly covered: Open the Way
 still needs its cap, Kindred Summons a creature type chosen on resolution, Thought
 Dissector an "or X cards" stop, Indomitable Creativity one reveal per permanent
 destroyed. `author-freed` narrows those.
+
+### Skipping a turn, and what's said about an extra turn — built 2026-11-01
+
+The need-keys Phase 2 family `condition:extra-turn`: `effect:skip-next-turn`,
+`effect:extra-turn-scoped-effects` and the condition itself. `skip-turn { who?,
+count? }` (rules 500.11, 614.10) leaves `PlayerState.turnsToSkip`, used up as the
+turn would begin, an extra one as readily as one in the rotation; nothing that
+waits for a next turn ends, since that turn never begins (614.10a). The rotation
+can go all the way round when everyone owes one, and the round counts each pass.
+`take-extra-turn`'s `thatTurn` holds what the effect says about that turn alone
+(`GameState.extraTurnRiders`, by the queue index `extraTurnsSkippingUntap` uses):
+`damageCantBePrevented` and `atEndStep`, a delayed ability set up as the turn
+begins, at the new timing `"this-turn-end-step"`, so a skipped turn loses it and
+one whose end step never comes lets it lapse. The `extra-turn` condition reads
+`TurnState.isExtra`. No new decision; the log gets a `turn-skipped` line. Proving
+cards: Meditate, Eater of Days, Wormfang Manta, Warrior's Oath, Chance for Glory,
+Alchemist's Gambit, Medomai the Ageless. Not covered: Kang the Conqueror's "during
+that turn, power-up abilities can't be activated", and the static "if a player
+would begin an extra turn, that player skips that turn instead" (Ugin's Nexus,
+Stranglehold, Trouble in Pairs, Gerrard's Hourglass Pendant).

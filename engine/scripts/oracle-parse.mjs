@@ -97,8 +97,9 @@ const numberOf = (word) => {
 export const stripReminder = (line) => line.replace(/\s*\([^)]*\)/g, "").trim();
 
 /** The line as the templates read it: reminder text gone, the card's own name
- * (and its short name, "Kibo" for "Kibo, Uktabi Prince") and "this creature" /
- * "this artifact" / … all written "~". */
+ * (and its short name, "Kibo" for "Kibo, Uktabi Prince" and "Medomai" for
+ * "Medomai the Ageless") and "this creature" / "this artifact" / … all written
+ * "~". */
 export function normalize(line, faceName) {
   let s = stripReminder(line);
   // A meld card's combined back face is another card's name, though it may
@@ -107,7 +108,7 @@ export function normalize(line, faceName) {
   const meldInto = /meld them into (.+)\.$/.exec(s)?.[1];
   if (meldInto !== undefined) s = s.replace(`meld them into ${meldInto}.`, "meld them into \u0001.");
   s = s.split(faceName).join("~");
-  const short = faceName.split(",")[0];
+  const short = /^([A-Z][\w'-]+) the [A-Z]/.exec(faceName)?.[1] ?? faceName.split(",")[0];
   if (short !== faceName && short.length >= 3) s = s.replace(new RegExp(`\\b${escapeRe(short)}\\b`, "g"), "~");
   s = s.replace(/\bthis (creature|artifact|enchantment|land|permanent|Equipment|Vehicle|Aura|token|spell|card|Saga)\b/gi, "~");
   if (meldInto !== undefined) s = s.replace("\u0001", meldInto);
@@ -2539,6 +2540,23 @@ export function parseSentence(sentence, ctx) {
   }
   if ((m = re(`(target player|target opponent) skips their next (draw|upkeep) step`).exec(s))) {
     return { kind: "skip-step", step: m[2], who: slot(m[1]) };
+  }
+  // "You skip your next turn" (rule 614.10), a turn in any seat's rotation or
+  // an extra one: the `skip-turn` effect, with how many.
+  if ((m = re(`(?:you )?skip your next (?:(${N}) )?turns?`).exec(s))) {
+    return { kind: "skip-turn", who: "you", ...(m[1] !== undefined ? { count: amount(m[1]) } : {}) };
+  }
+  if ((m = re(`each opponent skips their next (?:(${N}) )?turns?`).exec(s))) {
+    return { kind: "skip-turn", who: "each-opponent", ...(m[1] !== undefined ? { count: amount(m[1]) } : {}) };
+  }
+  if ((m = re(`(target player|target opponent) skips their next (?:(${N}) )?turns?`).exec(s))) {
+    return { kind: "skip-turn", who: slot(m[1]), ...(m[2] !== undefined ? { count: amount(m[2]) } : {}) };
+  }
+  // "Take an extra turn after this one" (rule 500.7). What's said about that
+  // turn is `extraTurnScopeAt`'s.
+  if (re(`(?:you )?take an extra turn after this one`).test(s)) return { kind: "take-extra-turn" };
+  if ((m = re(`(target player|target opponent) takes an extra turn after this one`).exec(s))) {
+    return { kind: "take-extra-turn", target: slot(m[1]) };
   }
   if ((m = re(`draw ${N} cards?, then discard ${N} cards?`).exec(s))) {
     return {
@@ -5249,6 +5267,13 @@ export function parseEffect(text, outer) {
     // "Choose target creature card in a graveyard that was put there from the
     // battlefield this turn. Put that card onto the battlefield under your
     // control." (Grim Return) — two sentences, one effect on the target.
+    const extraTurn = extraTurnScopeAt(sentences, i);
+    if (extraTurn !== null) {
+      parsed.push(extraTurn.effect);
+      hints.push({ sentence, effect: extraTurn.effect });
+      skip = extraTurn.used - 1;
+      continue;
+    }
     const blocks = blocksAtEndOfCombatAt(sentences, i, ctx);
     if (blocks !== null) {
       parsed.push(blocks.effect);
@@ -5983,6 +6008,29 @@ function blockPartnerPhrase(phrase) {
  * creatures that were blocked by that creature this turn." (Glyph of Doom): the
  * delayed ability reads the turn's blocks, "it" fixed as it's set up.
  */
+/** "Take an extra turn after this one", and what the next sentences say about
+ * that turn: "Skip the untap step of that turn" (Savor the Moment), "During
+ * that turn, damage can't be prevented" (Alchemist's Gambit), "At the
+ * beginning of that turn's end step, you lose the game" (Warrior's Oath). */
+function extraTurnScopeAt(sentences, i) {
+  if (!/^(?:you )?take an extra turn after this one\.$/i.test(sentences[i] ?? "")) return null;
+  const effect = { kind: "take-extra-turn" };
+  const thatTurn = {};
+  let used = 1;
+  for (;;) {
+    const next = sentences[i + used] ?? "";
+    if (/^skip the untap step of that turn\.$/i.test(next)) effect.skipUntapStep = true;
+    else if (/^during that turn, damage can't be prevented\.$/i.test(next)) thatTurn.damageCantBePrevented = true;
+    else if (/^at the beginning of that turn's end step, you lose the game\.$/i.test(next)) {
+      thatTurn.atEndStep = { effect: { kind: "lose-game" }, text: "At the beginning of that turn's end step, you lose the game." };
+    } else break;
+    used += 1;
+  }
+  if (used === 1) return null;
+  if (Object.keys(thatTurn).length > 0) effect.thatTurn = thatTurn;
+  return { effect, used };
+}
+
 function blocksAtEndOfCombatAt(sentences, i, ctx) {
   const choose = /^[Cc]hoose target (?:([A-Z][a-z]+) )?creature\.$/.exec(sentences[i] ?? "");
   if (choose === null) return null;
@@ -10572,6 +10620,10 @@ function parseStatic(line, text) {
         text,
       };
     }
+  }
+  // "~ can't attack during extra turns" (Medomai): the `extra-turn` condition.
+  if (line === "~ can't attack during extra turns.") {
+    return { affects: { scope: "self" }, condition: { kind: "extra-turn" }, restrictions: ["cant-attack"], text };
   }
   // "~ can't attack a player it has already attacked this turn" (Port Razer).
   if (line === "~ can't attack a player it has already attacked this turn.") {

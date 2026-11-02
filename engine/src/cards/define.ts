@@ -923,6 +923,9 @@ export type StaticCondition =
   | { readonly kind: "opponent-count"; readonly atLeast: number }
   /** It's your turn. */
   | { readonly kind: "your-turn" }
+  /** This turn is an extra turn, whoever's it is (rule 500.7): "can't attack
+   * during extra turns" (Medomai the Ageless). */
+  | { readonly kind: "extra-turn" }
   /**
    * Your devotion (rule 700.5) to `colors`, inclusive bounds: the mana
    * symbols of those colours among the mana costs of permanents you control,
