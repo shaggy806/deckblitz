@@ -1176,7 +1176,12 @@ function evalStaticCondition(
       if (condition.now === true) {
         const cards = liveReferenceObjects(state, registry, "exiled-with-source", { you, source: source.id }) ?? [];
         const { filter } = condition;
-        const n = cards.filter((id) => filter === undefined || matchesFilter(state, registry, id, filter, { you })).length;
+        // A card exiled face down has no characteristics (rule 406.3a): it's of no kind.
+        const n = cards.filter(
+          (id) =>
+            filter === undefined ||
+            (state.objects[id].exiledFaceDown === undefined && matchesFilter(state, registry, id, filter, { you })),
+        ).length;
         return n >= condition.atLeast;
       }
       const stint = source.zoneChangeCount ?? 0;

@@ -1244,8 +1244,11 @@ export interface GameObject {
    * instruction at the same time (the event sequence number it began at):
    * a processor choosing a face-down card chooses one of these groups and
    * takes a card from it at random (the processors' ruling — see
-   * {@link faceDownExileGroup}). */
-  exiledFaceDown?: { readonly lookers: readonly PlayerId[]; readonly group?: number };
+   * {@link faceDownExileGroup}). `lookersOnly`: an `exile-from-library`'s:
+   * these players and no others, whoever comes to control a source it's
+   * linked to, as a hideaway's controller wouldn't be (Kayla's Music Box's
+   * ruling). */
+  exiledFaceDown?: { readonly lookers: readonly PlayerId[]; readonly group?: number; readonly lookersOnly?: true };
   /** A **face-down permanent** (rule 708): manifested (701.40) or cloaked
    * (701.58). It has no characteristics but a face-down 2/2's — no name, no
    * text, no subtypes, no mana cost, and ward {2} if cloaked (708.2a) — which

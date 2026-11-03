@@ -4110,6 +4110,13 @@ Proving cards: Nightveil Specter, Intellect Devourer, Raphael, Most Attitude, So
 Suspend Aggression, Elite Spellbinder, Lightstall Inquisitor, Rona, Disciple of Gix, Serpent's Soul-Jar, Null Summoner,
 Court of Locthwain, Gonti, Lord of Luxury, Norin, Swift Survivalist (`test/exile-permission-options.test.ts`).
 
+**Exiled face down, linked, with no permission (2026-11-02).** `exile-from-library`'s `faceDown` (`true`: nobody may
+look; `"looked"`: the effect's controller alone), with `exiledFaceDown.lookersOnly` keeping a linked source's next
+controller out, as a hideaway's isn't; `turn-exiled-face-up`; `search-library`'s `"exile-face-down"` with `linked` was
+there. Keys: effect:exile-top-face-down-linked, effect:search-to-linked-exile-face-down. Proving cards: Bomat Courier,
+Knowledge Vault, Pyxis of Pandemonium, Wall of Mourning, Kayla's Music Box, The Creation of Avacyn
+(`test/exile-face-down-linked.test.ts`).
+
 **An effect done by another player (2026-11-02).** `as-player`: `who` (any `EffectPlayerRef`, with the new
 `"source-owner"`), `effect`; inside it "you" is them, what it asks is theirs and what it makes is theirs. Replaces a
 `who` per effect. Keys: effect:target-player-scries, effect:incubate-for-player, effect:discard-hand-target-players, effect:owner-of-source-player-ref, effect:discover-by-other-player, effect:sacrifice-controller-of-target. Proving cards: Excise the Imperfect, Wheel and Deal, Gandalf, Wandering Wizard.

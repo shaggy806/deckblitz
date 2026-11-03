@@ -2100,6 +2100,10 @@ function turnTallyOf(phrase) {
  */
 function turnTallyEffect(s, ctx) {
   const capital = (text) => `${text[0].toUpperCase()}${text.slice(1)}`;
+  // Wall of Mourning's, one instruction: a count, not an effect done for each.
+  if (/^exile a card from the top of your library face down for each opponent you have\.$/i.test(s)) {
+    return { kind: "exile-from-library", amount: { countPlayers: "each-opponent" }, faceDown: true, linked: true };
+  }
   let m = /^(.+ for each .+ this turn), then (.+ for each .+ this turn)\.$/i.exec(s);
   if (m !== null) {
     const first = turnTallyEffect(`${m[1]}.`, ctx);
@@ -2698,6 +2702,41 @@ export function parseSentence(sentence, ctx) {
   // "Exile the top eight cards of your library" (Herald of Amity): face up,
   // with no permission to play them — what a following sentence says of
   // them reads `thisWay: "exiled"`.
+  // Face down and linked, with no permission (rules 406.3, 607.2a): "exile the
+  // top card of your library face down" (Bomat Courier) and each player's
+  // (Pyxis of Pandemonium), or "look at … then exile it face down" (Kayla's
+  // Music Box, Lobelia).
+  const faceDownExile = (faceDown, rest) => ({ kind: "exile-from-library", ...rest, faceDown, linked: true });
+  if (re("exile the top card of your library face down").test(s)) return faceDownExile(true, { amount: 1 });
+  if ((m = re(`exile the top ${N} cards of your library face down`).exec(s))) return faceDownExile(true, { amount: amount(m[1]) });
+  if (re("each player exiles the top card of their library face down").test(s)) {
+    return faceDownExile(true, { whose: "each-player", amount: 1 });
+  }
+  if (re("look at the top card of your library, then exile it face down").test(s)) return faceDownExile("looked", { amount: 1 });
+  if (re("look at the top card of each opponent's library and exile those cards face down").test(s)) {
+    return faceDownExile("looked", { whose: "each-opponent", amount: 1 });
+  }
+  // What the source's other abilities do with them.
+  if (re("put all cards exiled with (?:~|it) into (?:their owners?'s?|its owner's) hands?").test(s)) {
+    return { kind: "return-exiled-by-source", linked: "hand" };
+  }
+  if (re("put all cards exiled with (?:~|it) into (?:their owners?'s?|its owner's) graveyards?").test(s)) {
+    return { kind: "return-exiled-by-source", linked: "graveyard" };
+  }
+  if (re("turn (?:all cards exiled with ~|the exiled card) face up").test(s)) return { kind: "turn-exiled-face-up" };
+  if (re("each player turns face up all cards they own exiled with ~, then puts all permanent cards among them onto the battlefield").test(s)) {
+    return {
+      kind: "sequence",
+      effects: [
+        { kind: "turn-exiled-face-up" },
+        {
+          kind: "return-exiled-by-source",
+          linked: "battlefield",
+          filter: { typesAnyOf: ["artifact", "battle", "creature", "enchantment", "land", "planeswalker"] },
+        },
+      ],
+    };
+  }
   if ((m = re(`exile the top ${N} cards of your library`).exec(s))) return { kind: "exile-from-library", amount: amount(m[1]) };
   // The top card of a player the effect names; `linkedExile` below links it if
   // the card says "exiled with" it (Nightveil Specter).

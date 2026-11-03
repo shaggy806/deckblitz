@@ -30380,12 +30380,35 @@ export class Game {
         }
         state.stepsToSkip = { ...state.stepsToSkip, [step]: (state.stepsToSkip?.[step] ?? 0) + 1 };
       },
-      exileFromLibrary: (target, count, withCounters, linked) => {
+      exileFromLibrary: (target, count, withCounters, linked, faceDown) => {
+        const since = this.state.eventSeq;
         const exiled = this.exileFromLibraryByEffect(target, count, controller, withCounters);
         if (linked === true) {
           const src = this.state.objects[source];
           const stint = refs.source ?? (src?.zone === "battlefield" ? (src.zoneChangeCount ?? 0) : undefined);
           if (stint !== undefined) this.linkExiledToSource(exiled, source, stint);
+        }
+        // Rule 406.3: nobody may look, or the player told to look first. It
+        // comes with no look for a linked source's next controller.
+        if (faceDown !== undefined) {
+          for (const id of exiled) {
+            this.state.objects[id].exiledFaceDown = {
+              lookers: faceDown === "looked" ? [controller] : [],
+              group: since,
+              lookersOnly: true,
+            };
+          }
+          this.forgetStints(exiled, since);
+        }
+      },
+      turnExiledFaceUp: () => {
+        const src = this.state.objects[source];
+        const stint = refs.source ?? (src?.zone === "battlefield" ? (src.zoneChangeCount ?? 0) : undefined);
+        if (stint === undefined) return;
+        for (const id of this.state.zones.shared.exile) {
+          const card = this.state.objects[id];
+          const linked = [card?.exiledWith, card?.exiledUntil].some((l) => l?.source === source && l.zoneChangeCount === stint);
+          if (linked && card.exiledFaceDown !== undefined) card.exiledFaceDown = undefined;
         }
       },
       countMatching: (filter, except, you) => this.countBattlefieldMatching(you ?? controller, filter, except, source),
@@ -48110,7 +48133,7 @@ export class Game {
       const card = this.state.objects[id];
       const link = card?.exiledWith;
       const faceDown = card?.exiledFaceDown;
-      if (link === undefined || faceDown === undefined) continue;
+      if (link === undefined || faceDown === undefined || faceDown.lookersOnly === true) continue;
       if (link.source !== permanent || link.zoneChangeCount !== stint) continue;
       if (!faceDown.lookers.includes(controller)) {
         card.exiledFaceDown = { ...faceDown, lookers: [...faceDown.lookers, controller] };

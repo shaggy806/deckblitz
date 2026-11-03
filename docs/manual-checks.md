@@ -6263,3 +6263,35 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 - **Do:** Pass to declare attackers and click Serra Angel. Then click Garruk Wildspeaker on Bob's board.
 - **Expect:** The Angel is marked as attacking Garruk, not Bob.
+
+## Permissions over exiled cards, and cards exiled face down (2026-11-02)
+
+### Soul Partition: its owner plays it back, for {2} more
+
+- **Do:** Cast Soul Partition on Bob's Grizzly Bears. Pass to Bob's turn and, as Bob, cast the Bears from exile.
+- **Expect:** Alice is never offered the Bears. Casting them, Bob pays four mana, not two: all four Forests tap.
+
+### Lightstall Inquisitor: a land played this way enters tapped
+
+- **Do:** Cast Lightstall Inquisitor. As Bob, exile your Forest. Pass to Bob's turn and play the Forest from exile.
+- **Expect:** The Forest is on Bob's battlefield, tapped.
+
+### Nightveil Specter: you play what the damaged player exiled
+
+- **Do:** Attack Bob with Nightveil Specter. After combat, open Bob's exile and cast the Grizzly Bears there.
+- **Expect:** The Bears are face up in Bob's exile, offered to you for {1}{G}, and enter on your side.
+
+### Bomat Courier: exiled face down, nobody may look
+
+- **Do:** Attack with Bomat Courier and open your exile. After combat, activate its "{R}, Discard your hand, Sacrifice" ability.
+- **Expect:** Your exile shows a face-down card with no name, and nothing offers to play it. After the ability, Lightning Bolt is in your graveyard and Grizzly Bears is in your hand.
+
+### Kayla's Music Box: you may look at the card, and play it
+
+- **Do:** Activate "{W}, {T}" and open your exile. Pass to your next turn, activate "{T}", and cast the Grizzly Bears from exile.
+- **Expect:** You can read Grizzly Bears in your exile, though Bob sees only a back. Before "{T}" it can't be cast; after, it can.
+
+### The Creation of Avacyn: the card turns face up, and costs you life
+
+- **Do:** Cast The Creation of Avacyn and choose Grizzly Bears from your library. Pass to your next turn.
+- **Expect:** After chapter I the Bears are face down in your exile. After chapter II they're face up and you've lost 2 life.

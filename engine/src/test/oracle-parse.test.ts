@@ -10143,6 +10143,45 @@ describe("permissions over exiled cards", () => {
   });
 });
 
+describe("exiled face down and linked to the source", () => {
+  const effectOf = (text: string): unknown => parseEffect(text, ctx()).effect;
+  it("reads the exile, nobody looking or the one told to look", () => {
+    expect(effectOf("Exile the top card of your library face down.")).toEqual({
+      kind: "exile-from-library",
+      amount: 1,
+      faceDown: true,
+      linked: true,
+    });
+    expect(effectOf("Each player exiles the top card of their library face down.")).toEqual({
+      kind: "exile-from-library",
+      whose: "each-player",
+      amount: 1,
+      faceDown: true,
+      linked: true,
+    });
+    expect(effectOf("Look at the top card of your library, then exile it face down.")).toEqual({
+      kind: "exile-from-library",
+      amount: 1,
+      faceDown: "looked",
+      linked: true,
+    });
+    expect(effectOf("Exile a card from the top of your library face down for each opponent you have.")).toEqual({
+      kind: "exile-from-library",
+      amount: { countPlayers: "each-opponent" },
+      faceDown: true,
+      linked: true,
+    });
+  });
+  it("reads what the source's other abilities do with them", () => {
+    expect(effectOf("Put all cards exiled with ~ into their owners' hands.")).toEqual({ kind: "return-exiled-by-source", linked: "hand" });
+    expect(effectOf("Put all cards exiled with it into their owner's graveyard.")).toEqual({
+      kind: "return-exiled-by-source",
+      linked: "graveyard",
+    });
+    expect(effectOf("Turn the exiled card face up.")).toEqual({ kind: "turn-exiled-face-up" });
+  });
+});
+
 describe("an effect done by another player", () => {
   it("reads 'target player scries N' as as-player, on a player slot", () => {
     const parsed = parseEffect("Target player scries 2.", ctx());

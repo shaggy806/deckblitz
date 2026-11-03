@@ -9459,4 +9459,44 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{ bf: ['Garruk Wildspeaker'] }, {}],
     }),
   ),
+  // --- Permissions over exiled cards, and cards exiled face down (2026-11-02) ---
+  preset(
+    'Soul Partition: its owner plays it back, for {2} more',
+    board({
+      you: { bf: ['Plains*2'], hand: ['Soul Partition'] },
+      opp: { human: true, bf: ['Grizzly Bears', 'Forest*4'] },
+    }),
+  ),
+  preset(
+    'Lightstall Inquisitor: a land played this way enters tapped',
+    board({
+      you: { bf: ['Plains'], hand: ['Lightstall Inquisitor'] },
+      opp: { human: true, hand: ['Forest'] },
+    }),
+  ),
+  preset(
+    'Nightveil Specter: you play what the damaged player exiled',
+    board({
+      you: { bf: ['Nightveil Specter', 'Forest*2'] },
+      opp: { lib: ['Grizzly Bears'] },
+    }),
+  ),
+  preset(
+    'Bomat Courier: exiled face down, nobody may look',
+    board({
+      you: { bf: ['Bomat Courier', 'Mountain'], hand: ['Lightning Bolt'], lib: ['Grizzly Bears'] },
+    }),
+  ),
+  preset(
+    'Kayla\'s Music Box: you may look at the card, and play it',
+    board({
+      you: { bf: ['Kayla\'s Music Box', 'Plains', 'Forest*2'], lib: ['Grizzly Bears', 'Forest'] },
+    }),
+  ),
+  preset(
+    'The Creation of Avacyn: the card turns face up, and costs you life',
+    board({
+      you: { bf: ['Swamp*3'], hand: ['The Creation of Avacyn'], lib: ['Grizzly Bears'] },
+    }),
+  ),
 ]

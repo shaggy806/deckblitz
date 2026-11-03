@@ -3912,6 +3912,20 @@ export type EffectSpec =
        * as `exile`'s `linked`, for its "cards exiled with this": Nightveil
        * Specter's "that player exiles the top card of their library". */
       readonly linked?: true;
+      /** **Face down** (rule 406.3), with no permission to play them: `true`
+       * is "exile the top card of your library face down. (You can't look at
+       * it.)" (Bomat Courier), nobody may look, its owner included; `"looked"`
+       * is "look at the top card of your library, then exile it face down"
+       * (Kayla's Music Box), and only the effect's controller may, even if
+       * another player gains control of a linked source (their rulings). */
+      readonly faceDown?: true | "looked";
+    }
+  | {
+      /** "**Turn** the exiled card / all cards exiled with this **face up**"
+       * (The Creation of Avacyn, Pyxis of Pandemonium): every card in exile
+       * linked to this source (rule 607.2a) is face up from here on, its
+       * characteristics back (rule 406.3a), for every player to see. */
+      readonly kind: "turn-exiled-face-up";
     }
   | {
       /** Return every card matching `filter` from the effect's controller's
@@ -10247,7 +10261,10 @@ export interface EffectApi {
     count: { readonly top: number } | { readonly allBut: number },
     withCounters?: { readonly kind: string; readonly amount: number },
     linked?: boolean,
+    faceDown?: true | "looked",
   ): void;
+  /** See the `"turn-exiled-face-up"` {@link EffectSpec}. */
+  turnExiledFaceUp(): void;
   /** Number of battlefield permanents matching `filter`, evaluated with the
    * effect's controller as "you" (for an `EffectAmount` `{ countOf }`) —
    * or `you`, given one (a `countOf`'s `forTarget`). */
@@ -14866,10 +14883,13 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
               },
       }));
       ctx.simultaneously(() => {
-        for (const { target, count } of plan) ctx.exileFromLibrary(target, count, spec.withCounters, spec.linked === true);
+        for (const { target, count } of plan) ctx.exileFromLibrary(target, count, spec.withCounters, spec.linked === true, spec.faceDown);
       });
       return;
     }
+    case "turn-exiled-face-up":
+      ctx.turnExiledFaceUp();
+      return;
     case "delayed-trigger": {
       let controller = ctx.controller;
       if (spec.controller !== undefined) {
