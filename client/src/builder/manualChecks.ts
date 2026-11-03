@@ -9960,4 +9960,11 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{}, {}, {}],
     }),
   ),
+  preset(
+    'Moment of Silence: this turn has no combat',
+    board({
+      you: { bf: ['Grizzly Bears', 'Plains'], hand: ['Moment of Silence'] },
+      opp: [{}],
+    }),
+  ),
 ]

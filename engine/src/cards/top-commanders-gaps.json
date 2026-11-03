@@ -67,6 +67,7 @@
   "trigger:attacks-player-at-least",
   "effect:look-at-top-of-target-players-library",
   "effect:random-target",
+  "effect:skip-next-combat-phase",
   "effect:attack-batch-those-creatures",
   "trigger:attack-batch-per-defender-those-creatures",
   "trigger:creature-attacks-enchanted-player",

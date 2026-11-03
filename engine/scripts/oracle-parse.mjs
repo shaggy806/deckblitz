@@ -2839,6 +2839,17 @@ export function parseSentence(sentence, ctx) {
   if ((m = re(`(target player|target opponent) skips their next (draw|upkeep) step`).exec(s))) {
     return { kind: "skip-step", step: m[2], who: slot(m[1]) };
   }
+  // A whole combat phase, by the same effect: "skips their next combat phase",
+  // "… this turn" (Moment of Silence), "all combat phases of their next turn".
+  if ((m = re(`(target player|target opponent) skips their next combat phase( this turn)?`).exec(s))) {
+    return { kind: "skip-step", step: "combat", who: slot(m[1]), ...(m[2] !== undefined ? { thisTurn: true } : {}) };
+  }
+  if ((m = re(`(target player|target opponent) skips all combat phases of their next turn`).exec(s))) {
+    return { kind: "skip-step", step: "combat", who: slot(m[1]), allOfNextTurn: true };
+  }
+  if (ctx?.thatPlayer === "trigger-player" && re(`that player skips their next combat phase`).test(s)) {
+    return { kind: "skip-step", step: "combat", who: "trigger-player" };
+  }
   // "You skip your next turn" (rule 614.10), a turn in any seat's rotation or
   // an extra one: the `skip-turn` effect, with how many.
   if ((m = re(`(?:you )?skip your next (?:(${N}) )?turns?`).exec(s))) {

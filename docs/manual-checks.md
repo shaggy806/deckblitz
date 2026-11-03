@@ -6606,3 +6606,8 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 - **Do:** Pass priority until your end step, and pass once more when the ability is on the stack.
 - **Expect:** You aren't asked for a target. The log says which opponent was chosen at random, and Witch Hunt moves to that player's side of the table.
+
+### Moment of Silence: this turn has no combat
+
+- **Do:** Cast Moment of Silence, target yourself, then pass priority until the turn ends.
+- **Expect:** The log reads "Alice skips their combat phase". You're never offered an attack with the Grizzly Bears, and Bob takes no damage.

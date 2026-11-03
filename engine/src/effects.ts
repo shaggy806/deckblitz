@@ -6885,11 +6885,19 @@ export type EffectSpec =
        * "you skip your draw step **this turn**" (Elfhame Sanctuary) — only
        * the active player's, this turn's, and nothing later. `who` is a
        * player slot or a scope, `"you"` by default.
+       *
+       * `"combat"` is a whole phase, by the same rule (500.11, 614.10): "skips
+       * their next combat phase" (Stonehorn Dignitary) waits for that player's
+       * turn, and one under way can't be skipped, so it's the next. `thisTurn`
+       * is "their next combat phase **this turn**" (Moment of Silence).
        */
       readonly kind: "skip-step";
-      readonly step: "untap" | "upkeep" | "draw";
+      readonly step: "untap" | "upkeep" | "draw" | "combat";
       readonly who?: number | PlayerScope;
       readonly thisTurn?: true;
+      /** With `"combat"`: "skips **all** combat phases of their next turn"
+       * (False Peace), additional ones too. Two of these are still one turn. */
+      readonly allOfNextTurn?: true;
     }
   | {
       /**
@@ -10508,7 +10516,7 @@ export interface EffectApi {
   skipUntapStep(player: PlayerId): void;
   /** See the `"skip-step"` {@link EffectSpec}: one more of `player`'s steps
    * of this kind to skip, or — `thisTurn` — this turn's, if they're active. */
-  skipStep(player: PlayerId, step: "untap" | "upkeep" | "draw", thisTurn: boolean): void;
+  skipStep(player: PlayerId, step: "untap" | "upkeep" | "draw" | "combat", thisTurn: boolean, allOfNextTurn?: boolean): void;
   /** See the `"exile-from-library"` {@link EffectSpec}: the top `top` cards
    * of `target`'s library, or all of it but the bottom `allBut`. */
   exileFromLibrary(
@@ -15161,7 +15169,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       for (const target of scopedOrTargetedPlayers(spec.who ?? "you", ctx)) {
         if (target.kind !== "player") continue;
         if (spec.step === "untap" && spec.thisTurn !== true) ctx.skipUntapStep(target.player);
-        else ctx.skipStep(target.player, spec.step, spec.thisTurn === true);
+        else ctx.skipStep(target.player, spec.step, spec.thisTurn === true, spec.allOfNextTurn === true);
       }
       return;
     }

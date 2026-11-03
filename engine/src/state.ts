@@ -2709,8 +2709,13 @@ export interface PlayerState {
    * to be skipped, each effect satisfied by one (614.10a). A step a static
    * already skips (`skipsSteps`) doesn't count: what's scheduled for the
    * "next" one waits for the first that isn't skipped. Absent with none. See
-   * the `skip-step` effect. */
-  stepsToSkip?: { upkeep?: number; draw?: number };
+   * the `skip-step` effect. `combat` is the same for a whole combat phase of
+   * this player's turn (Stonehorn Dignitary). */
+  stepsToSkip?: { upkeep?: number; draw?: number; combat?: number };
+  /** "[That player] skips all combat phases of their next turn" (False Peace):
+   * set until that turn begins, when it becomes `TurnState.noCombat`. A turn
+   * that's skipped never begins, so this waits for the first that isn't. */
+  noCombatNextTurn?: true;
   /** What this player's turn so far has held — see {@link TurnHistory}.
    * Absent until something is recorded; reset as each turn begins. */
   turnHistory?: TurnHistory;
@@ -2988,8 +2993,12 @@ export interface TurnState {
   cleanupHadPriority?: boolean;
   /** "You skip your draw step this turn" (Elfhame Sanctuary — the
    * `skip-step` effect's `thisTurn`): the active player's steps of these
-   * kinds this turn are skipped, and none of a later turn. */
-  skipsThisTurn?: ("upkeep" | "draw")[];
+   * kinds this turn are skipped, and none of a later turn. `"combat"` is a
+   * whole combat phase (Moment of Silence), one for each. */
+  skipsThisTurn?: ("upkeep" | "draw" | "combat")[];
+  /** Every combat phase of this turn is skipped — see
+   * `PlayerState.noCombatNextTurn`. */
+  noCombat?: true;
   /** True when this turn was taken via an extra-turn effect (Time Warp) rather
    * than the normal rotation — ROADMAP Phase 7. */
   isExtra: boolean;

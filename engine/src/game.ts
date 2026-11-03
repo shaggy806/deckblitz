@@ -7985,6 +7985,7 @@ export class Game {
     delete this.state.turn.addedUpkeep;
     delete this.state.turn.endsAfterAddedCombat;
     delete this.state.turn.skipsThisTurn;
+    delete this.state.turn.noCombat;
     delete this.state.extraMainPhases;
     delete this.state.turn.combatPhases;
     delete this.state.turn.mainPhases;
@@ -8125,6 +8126,12 @@ export class Game {
     // "Their last turn" is this one now (see `PlayerState.lastTurnTaken`).
     this.state.players[this.activePlayer].lastTurnTaken = this.state.turn.number;
     this.beginPlayerControl("next-turn");
+    // "All combat phases of their next turn": this is that turn.
+    const nowActive = this.state.players[this.activePlayer];
+    if (nowActive?.noCombatNextTurn === true) {
+      delete nowActive.noCombatNextTurn;
+      this.state.turn.noCombat = true;
+    }
     if (this.state.playerEffects !== undefined) {
       this.state.playerEffects = this.state.playerEffects
         .filter((e) => !(e.expires.kind === "your-next-turn" && beginningFor.includes(e.owner)))
@@ -8320,6 +8327,16 @@ export class Game {
     // turn's own resets happen there all the same — `untapStep`.)
     if ((step === "upkeep" || step === "draw") && !this.activeHasLeft() && this.skipsStepNow(step)) {
       this.emit({ type: "step-skipped", player: this.activePlayer, step });
+      this.endStep();
+      return;
+    }
+    // A skipped combat phase, the same way, its steps with it: on to what comes
+    // after a combat phase, an additional one owed or the next main phase. It
+    // doesn't count as one of the turn's, and the main phase after it is still
+    // the postcombat one (rule 505.1a).
+    if (step === "begin-combat" && !this.activeHasLeft() && this.skipsStepNow("combat")) {
+      this.emit({ type: "step-skipped", player: this.activePlayer, step: "combat" });
+      this.state.turn.step = "end-combat";
       this.endStep();
       return;
     }
@@ -9182,13 +9199,14 @@ export class Game {
     return false;
   }
 
-  /** Whether the active player's upkeep or draw step, about to begin, is
-   * skipped (rule 614.10) — using up the one-shot skip that does it. A
-   * static's skip first, which leaves a "next" one waiting for a step that
-   * isn't skipped (614.10a); then "this turn"'s; then a "next" one. */
-  private skipsStepNow(step: "upkeep" | "draw"): boolean {
+  /** Whether the active player's upkeep step, draw step or combat phase, about
+   * to begin, is skipped (rule 614.10) — using up the one-shot skip that does
+   * it. A skip that lasts first (a static's, or all of this turn's combat
+   * phases), which leaves a "next" one waiting for one that isn't skipped
+   * (614.10a); then "this turn"'s; then a "next" one. */
+  private skipsStepNow(step: "upkeep" | "draw" | "combat"): boolean {
     const active = this.activePlayer;
-    if (this.staticSkipsStep(active, step)) return true;
+    if (step === "combat" ? this.state.turn.noCombat === true : this.staticSkipsStep(active, step)) return true;
     const thisTurn = this.state.turn.skipsThisTurn;
     const at = thisTurn?.indexOf(step) ?? -1;
     if (thisTurn !== undefined && at >= 0) {
@@ -9202,7 +9220,7 @@ export class Game {
     if (player === undefined || owed === 0) return false;
     const rest = { ...player.stepsToSkip, [step]: owed - 1 };
     if (rest[step] === 0) delete rest[step];
-    if (rest.upkeep === undefined && rest.draw === undefined) delete player.stepsToSkip;
+    if (rest.upkeep === undefined && rest.draw === undefined && rest.combat === undefined) delete player.stepsToSkip;
     else player.stepsToSkip = rest;
     return true;
   }
@@ -20861,15 +20879,12 @@ export class Game {
     // "Any target chosen at random": picked now, before any cost is paid, as a
     // player would choose them (rules 602.2b, 601.2c), and judged like theirs.
     let targets = chosenTargets;
-    if (this.effectiveActivated(sourceId)[abilityIndex]?.targetsAtRandom === true) {
+    const atRandom =
+      this.state.objects[sourceId] === undefined ? undefined : this.effectiveActivated(sourceId)[abilityIndex];
+    if (atRandom?.targetsAtRandom === true) {
       const why = this.whyCannotActivateAbility(player, sourceId, abilityIndex, tap, xValue, targets);
       if (why !== null) throw new Error(why);
-      const specs = this.activatedSpecsAt(
-        this.activationSpecs(this.effectiveActivated(sourceId)[abilityIndex]),
-        sourceId,
-        player,
-        xValue,
-      );
+      const specs = this.activatedSpecsAt(this.activationSpecs(atRandom), sourceId, player, xValue);
       targets = this.randomTargets(player, sourceId, this.targetOptionsFor(specs, player, this.permanentSource(sourceId, xValue)));
     }
     // Checking and planning share one cache region, so the board's mana
@@ -31151,9 +31166,13 @@ export class Game {
         const state = this.state.players[player];
         if (state !== undefined && !state.hasLost) state.untapStepsToSkip = (state.untapStepsToSkip ?? 0) + 1;
       },
-      skipStep: (player, step, thisTurn) => {
+      skipStep: (player, step, thisTurn, allOfNextTurn) => {
         const state = this.state.players[player];
         if (state === undefined || state.hasLost || step === "untap") return;
+        if (allOfNextTurn === true) {
+          state.noCombatNextTurn = true;
+          return;
+        }
         if (thisTurn) {
           // "This turn": the active player's alone — nobody else has a
           // step of their own this turn to skip.

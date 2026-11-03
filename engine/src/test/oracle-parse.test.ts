@@ -9036,6 +9036,24 @@ describe("the turn's blocks", () => {
     const observer = face("Creature — Merfolk Rogue", "When this creature enters, look at the top card of target player's library.");
     expect(observer.complete).toBe(true);
     expect(observer.triggered[0].effect).toEqual({ kind: "look-at-library-top", target: 0 });
+    const dignitary = face("Creature — Rhino Soldier", "When this creature enters, target opponent skips their next combat phase.");
+    expect(dignitary.complete).toBe(true);
+    expect(dignitary.triggered[0].effect).toEqual({ kind: "skip-step", step: "combat", who: 0 });
+    const angel = face("Creature — Angel", "Whenever this creature deals combat damage to a player, that player skips their next combat phase.");
+    expect(angel.complete).toBe(true);
+    expect(angel.triggered[0].effect).toEqual({ kind: "skip-step", step: "combat", who: "trigger-player" });
+    expect(face("Instant", "Target player skips their next combat phase this turn.").effect).toEqual({
+      kind: "skip-step",
+      step: "combat",
+      who: 0,
+      thisTurn: true,
+    });
+    expect(face("Sorcery", "Target player skips all combat phases of their next turn.").effect).toEqual({
+      kind: "skip-step",
+      step: "combat",
+      who: 0,
+      allOfNextTurn: true,
+    });
     const pilot = face("Creature — Goblin Pilot Wizard", "{T}: This creature deals 2 damage to any target chosen at random.");
     expect(pilot.complete).toBe(true);
     expect(pilot.activated[0]).toMatchObject({

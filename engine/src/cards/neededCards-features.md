@@ -4104,6 +4104,17 @@ attack-with-exactly, attack-with-total-power, attacks-player-at-least,
 attack-with-count-amount. Proving cards: Alluring Suitor, Desert Were-Worm, Horn
 of the Mark, Landroval, Horizon Witness, Grand Warlord Radha, The Earth King.
 
+### Skipping a combat phase — built 2026-11-02
+
+The need-keys Phase 2 unit `effect:skip-next-combat-phase`. `skip-step` gained
+`step: "combat"`, a whole phase by rules 500.11 and 614.10, counted as its steps
+are (614.10a) and waiting for that player's own turn, with `thisTurn` for "next
+combat phase this turn" and `allOfNextTurn` for "all combat phases of their next
+turn". The turn goes on to whatever follows a combat phase: an additional one
+owed, or the postcombat main phase. All six key cards are proving cards: Stonehorn
+Dignitary, Blinding Angel, Revenant Patriarch, Moment of Silence, False Peace,
+Empty City Ruse.
+
 ### A target chosen at random — built 2026-11-02
 
 The need-keys Phase 2 unit `effect:random-target`. One ability field,

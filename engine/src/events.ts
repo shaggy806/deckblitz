@@ -147,7 +147,8 @@ export type GameEvent =
        * it as though it didn't exist, with no `step-began` for it. */
       readonly type: "step-skipped";
       readonly player: PlayerId;
-      readonly step: "upkeep" | "draw";
+      /** `"combat"` is the whole combat phase. */
+      readonly step: "upkeep" | "draw" | "combat";
     })
   | (Base & {
       /** Aggravated Assault queued an extra combat phase this turn. */
