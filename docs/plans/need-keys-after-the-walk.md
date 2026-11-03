@@ -867,6 +867,8 @@ missing. Re-run `--greedy` for Phase 2's order.
   six families each beside them.
 - **2026-11-03: one session, six families in series.** `condition:attacked-battle-this-turn`;
   `condition:attacking-an-opponent-filter` with `trigger:attacks-your-opponent` and `trigger:player-attacks-not-you`.
+- **2026-11-03: `keyword:hexproof-from-abilities`.** Hexproof from activated and triggered abilities, and the printed
+  "can't be the target of …" marked `notHexproof` so a loss of hexproof leaves it; Volatile Stormdrake, Shanna.
 
 ## Rough size
 

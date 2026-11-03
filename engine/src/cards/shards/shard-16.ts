@@ -688,6 +688,7 @@ import _poolSeshirosLivingLegacy from "../pool/seshiros-living-legacy.js";
 import _poolShadowSliver from "../pool/shadow-sliver.js";
 import _poolShadowUrchin from "../pool/shadow-urchin.js";
 import _poolShadrixSilverquill from "../pool/shadrix-silverquill.js";
+import _poolShannaSisaysLegacy from "../pool/shanna-sisays-legacy.js";
 import _poolShatteredSanctum from "../pool/shattered-sanctum.js";
 import _poolShaukusMinion from "../pool/shaukus-minion.js";
 import _poolShipwreckMarsh from "../pool/shipwreck-marsh.js";
@@ -1659,6 +1660,7 @@ const shard: CardShard = {
     _poolShadowSliver,
     _poolShadowUrchin,
     _poolShadrixSilverquill,
+    _poolShannaSisaysLegacy,
     _poolShatteredSanctum,
     _poolShaukusMinion,
     _poolShipwreckMarsh,

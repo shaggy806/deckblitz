@@ -321,6 +321,13 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Hexproof from abilities, and a "can't be the target" that isn't hexproof — built 2026-11-03
+
+`keyword:hexproof-from-abilities`: Volatile Stormdrake's keyword is `hexproofFrom: { abilitiesOnly: true }` (lost with
+hexproof, 702.11e); the printed "can't be the target of …" statics take `notHexproof` and keep through a loss of
+hexproof (Shanna, Sisay's Legacy against Shadowspear — and Dense Foliage, Fiendslayer Paladin, Mercenary Informer,
+Thrun, marked the same). Proving cards: Volatile Stormdrake, Shanna, Sisay's Legacy.
+
 ### A player becoming a target, an ability's targets, the first time by anyone — built 2026-11-03
 
 `trigger:player-becomes-target`, `trigger:becomes-target-by-your-ability`, `trigger:becomes-target-first-time-by-anyone`

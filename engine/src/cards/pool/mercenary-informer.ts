@@ -15,7 +15,7 @@ export default defineCard({
   power: 2,
   toughness: 1,
   text: `${TARGET_TEXT}\n${BOTTOM_TEXT}`,
-  static: [{ affects: { scope: "self" }, hexproofFrom: { colors: ["B"], anyController: true }, text: TARGET_TEXT }],
+  static: [{ affects: { scope: "self" }, hexproofFrom: { colors: ["B"], anyController: true, notHexproof: true }, text: TARGET_TEXT }],
   activated: [
     {
       cost: { mana: "{2}{W}", tap: false },

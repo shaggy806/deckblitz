@@ -21,7 +21,7 @@ export default defineCard({
   cantBeCountered: true,
   text: `This spell can't be countered.\nTrample\n${TARGET_TEXT}\n${TURN_TEXT}`,
   static: [
-    { affects: { scope: "self" }, hexproofFrom: { filter: { notColors: ["G"] } }, text: TARGET_TEXT },
+    { affects: { scope: "self" }, hexproofFrom: { filter: { notColors: ["G"] }, notHexproof: true }, text: TARGET_TEXT },
     { affects: { scope: "self" }, condition: { kind: "your-turn" }, grantKeywords: ["indestructible"], text: TURN_TEXT },
   ],
 });

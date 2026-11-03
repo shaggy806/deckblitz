@@ -3519,6 +3519,12 @@ export interface StaticAbility {
     readonly spellsOnly?: true;
     readonly abilitiesOnly?: true;
     readonly anyController?: true;
+    /** Not a hexproof ability: the printed "~ can't be the target of
+     * abilities your opponents control" (Shanna, Sisay's Legacy), which an
+     * effect that makes a permanent lose hexproof doesn't take away — unlike
+     * the keyword "hexproof from [quality]" (rule 702.11e: Volatile
+     * Stormdrake's "hexproof from activated and triggered abilities"). */
+    readonly notHexproof?: true;
   };
   /**
    * "Cards in graveyards can't be the targets of spells or abilities"

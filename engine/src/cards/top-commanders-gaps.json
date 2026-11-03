@@ -1431,7 +1431,8 @@
   "cost:tap-enchanted-permanent",
   "cost:tap-untapped-creature-additional",
   "effect:hand-mana-ability",
-  "effect:mana-ability-graveyard-exile-cost"
+  "effect:mana-ability-graveyard-exile-cost",
+  "keyword:hexproof-from-abilities"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

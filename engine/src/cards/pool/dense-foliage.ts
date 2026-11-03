@@ -12,6 +12,6 @@ export default defineCard({
   types: ["enchantment"],
   text: TARGET_TEXT,
   static: [
-    { affects: { scope: "all-creatures" }, hexproofFrom: { spellsOnly: true, anyController: true }, text: TARGET_TEXT },
+    { affects: { scope: "all-creatures" }, hexproofFrom: { spellsOnly: true, anyController: true, notHexproof: true }, text: TARGET_TEXT },
   ],
 });
