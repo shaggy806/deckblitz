@@ -12,7 +12,7 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
-- **Hexproof from abilities, and "can't be the target" that isn't hexproof** (2026-11-03, `FAM5`): `hexproofFrom`'s
+- **Hexproof from abilities, and "can't be the target" that isn't hexproof** (2026-11-03, `88f6dd490`): `hexproofFrom`'s
   `notHexproof`, kept through a loss of hexproof; the prose forms marked. Volatile Stormdrake, Shanna, Sisay's Legacy.
 - **A player becoming a target, and the first time by anyone** (2026-11-03, `711f1e44c`): `player-targeted`, and
   `becomes-target`'s `player`, `playerOnly`, `abilityOnly`, `firstTimeEachTurnByAnyone`. Amulet of Safekeeping, Unsettled
