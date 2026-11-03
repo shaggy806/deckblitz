@@ -182,6 +182,7 @@ import _poolDecreeOfSilence from "../pool/decree-of-silence.js";
 import _poolDeepfathomSkulker from "../pool/deepfathom-skulker.js";
 import _poolDetonate from "../pool/detonate.js";
 import _poolDevotedPaladin from "../pool/devoted-paladin.js";
+import _poolDimirCharm from "../pool/dimir-charm.js";
 import _poolDireFleetWarmonger from "../pool/dire-fleet-warmonger.js";
 import _poolDireWolves from "../pool/dire-wolves.js";
 import _poolDirectCurrent from "../pool/direct-current.js";
@@ -1082,6 +1083,7 @@ const shard: CardShard = {
     _poolDeepfathomSkulker,
     _poolDetonate,
     _poolDevotedPaladin,
+    _poolDimirCharm,
     _poolDireFleetWarmonger,
     _poolDireWolves,
     _poolDirectCurrent,

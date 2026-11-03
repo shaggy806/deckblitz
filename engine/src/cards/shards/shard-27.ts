@@ -127,6 +127,7 @@ import _poolClachanFestival from "../pool/clachan-festival.js";
 import _poolClawingTorment from "../pool/clawing-torment.js";
 import _poolCloudSprite from "../pool/cloud-sprite.js";
 import _poolCoffinPuppets from "../pool/coffin-puppets.js";
+import _poolCommandersPlate from "../pool/commanders-plate.js";
 import _poolCommercialDistrict from "../pool/commercial-district.js";
 import _poolCommuneWithEvil from "../pool/commune-with-evil.js";
 import _poolConnive from "../pool/connive.js";
@@ -718,6 +719,7 @@ import _poolSzarelGenesisShepherd from "../pool/szarel-genesis-shepherd.js";
 import _poolTaintedTreats from "../pool/tainted-treats.js";
 import _poolTalionTheKindlyLord from "../pool/talion-the-kindly-lord.js";
 import _poolTalismanOfIndulgence from "../pool/talisman-of-indulgence.js";
+import _poolTalruumPiper from "../pool/talruum-piper.js";
 import _poolTarriansSoulcleaver from "../pool/tarrians-soulcleaver.js";
 import _poolTawnossWand from "../pool/tawnoss-wand.js";
 import _poolTectonicHellion from "../pool/tectonic-hellion.js";
@@ -1003,6 +1005,7 @@ const shard: CardShard = {
     _poolClawingTorment,
     _poolCloudSprite,
     _poolCoffinPuppets,
+    _poolCommandersPlate,
     _poolCommercialDistrict,
     _poolCommuneWithEvil,
     _poolConnive,
@@ -1594,6 +1597,7 @@ const shard: CardShard = {
     _poolTaintedTreats,
     _poolTalionTheKindlyLord,
     _poolTalismanOfIndulgence,
+    _poolTalruumPiper,
     _poolTarriansSoulcleaver,
     _poolTawnossWand,
     _poolTectonicHellion,

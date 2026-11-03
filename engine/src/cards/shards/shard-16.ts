@@ -208,6 +208,7 @@ import _poolEchoesOfTheKinTree from "../pool/echoes-of-the-kin-tree.js";
 import _poolEdgarMoonlitSovereign from "../pool/edgar-moonlit-sovereign.js";
 import _poolEfreetFlamepainter from "../pool/efreet-flamepainter.js";
 import _poolEiganjoCastle from "../pool/eiganjo-castle.js";
+import _poolEkunduCyclops from "../pool/ekundu-cyclops.js";
 import _poolElderPineOfJukai from "../pool/elder-pine-of-jukai.js";
 import _poolElectroduplicate from "../pool/electroduplicate.js";
 import _poolElegantRotunda from "../pool/elegant-rotunda.js";
@@ -1180,6 +1181,7 @@ const shard: CardShard = {
     _poolEdgarMoonlitSovereign,
     _poolEfreetFlamepainter,
     _poolEiganjoCastle,
+    _poolEkunduCyclops,
     _poolElderPineOfJukai,
     _poolElectroduplicate,
     _poolElegantRotunda,

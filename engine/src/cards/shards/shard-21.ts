@@ -471,6 +471,7 @@ import _poolMyrEnforcer from "../pool/myr-enforcer.js";
 import _poolMyrRetriever from "../pool/myr-retriever.js";
 import _poolMysticRestraints from "../pool/mystic-restraints.js";
 import _poolNabanDeanOfIteration from "../pool/naban-dean-of-iteration.js";
+import _poolNacatlWarPride from "../pool/nacatl-war-pride.js";
 import _poolNagaEternal from "../pool/naga-eternal.js";
 import _poolNarcolepsy from "../pool/narcolepsy.js";
 import _poolNashiSearcherInTheDark from "../pool/nashi-searcher-in-the-dark.js";
@@ -1331,6 +1332,7 @@ const shard: CardShard = {
     _poolMyrRetriever,
     _poolMysticRestraints,
     _poolNabanDeanOfIteration,
+    _poolNacatlWarPride,
     _poolNagaEternal,
     _poolNarcolepsy,
     _poolNashiSearcherInTheDark,

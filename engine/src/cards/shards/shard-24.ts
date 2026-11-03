@@ -33,6 +33,7 @@ import _poolAngelsMercy from "../pool/angels-mercy.js";
 import _poolAnnihilatingGlare from "../pool/annihilating-glare.js";
 import _poolAnotherChance from "../pool/another-chance.js";
 import _poolAppealToEirdu from "../pool/appeal-to-eirdu.js";
+import _poolArachnePsionicWeaver from "../pool/arachne-psionic-weaver.js";
 import _poolArcaneInvestigator from "../pool/arcane-investigator.js";
 import _poolArchdemonOfGreed from "../pool/archdemon-of-greed.js";
 import _poolArchersOfQarsi from "../pool/archers-of-qarsi.js";
@@ -811,6 +812,7 @@ import _poolVastwoodGorger from "../pool/vastwood-gorger.js";
 import _poolVastwoodSurge from "../pool/vastwood-surge.js";
 import _poolVerdantForce from "../pool/verdant-force.js";
 import _poolVeteranArmorer from "../pool/veteran-armorer.js";
+import _poolViashinoBey from "../pool/viashino-bey.js";
 import _poolVictimOfNight from "../pool/victim-of-night.js";
 import _poolVigilantMartyr from "../pool/vigilant-martyr.js";
 import _poolVildinPackOutcast from "../pool/vildin-pack-outcast.js";
@@ -927,6 +929,7 @@ const shard: CardShard = {
     _poolAnnihilatingGlare,
     _poolAnotherChance,
     _poolAppealToEirdu,
+    _poolArachnePsionicWeaver,
     _poolArcaneInvestigator,
     _poolArchdemonOfGreed,
     _poolArchersOfQarsi,
@@ -1705,6 +1708,7 @@ const shard: CardShard = {
     _poolVastwoodSurge,
     _poolVerdantForce,
     _poolVeteranArmorer,
+    _poolViashinoBey,
     _poolVictimOfNight,
     _poolVigilantMartyr,
     _poolVildinPackOutcast,

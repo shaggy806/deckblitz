@@ -432,6 +432,7 @@ import _poolMachineOverMatter from "../pool/machine-over-matter.js";
 import _poolMaelstromOfTheSpiritDragon from "../pool/maelstrom-of-the-spirit-dragon.js";
 import _poolMagesGuile from "../pool/mages-guile.js";
 import _poolMagmaticForce from "../pool/magmatic-force.js";
+import _poolMagneticWeb from "../pool/magnetic-web.js";
 import _poolMalakirBloodwitch from "../pool/malakir-bloodwitch.js";
 import _poolMaliciousIntent from "../pool/malicious-intent.js";
 import _poolManaplasm from "../pool/manaplasm.js";
@@ -506,6 +507,7 @@ import _poolOrbitalPlunge from "../pool/orbital-plunge.js";
 import _poolOrchardWarden from "../pool/orchard-warden.js";
 import _poolOrcishConscripts from "../pool/orcish-conscripts.js";
 import _poolOrcishMedicine from "../pool/orcish-medicine.js";
+import _poolOrcishSpy from "../pool/orcish-spy.js";
 import _poolOrdealOfThassa from "../pool/ordeal-of-thassa.js";
 import _poolOreskosSunGuide from "../pool/oreskos-sun-guide.js";
 import _poolOriginSpellbomb from "../pool/origin-spellbomb.js";
@@ -1331,6 +1333,7 @@ const shard: CardShard = {
     _poolMaelstromOfTheSpiritDragon,
     _poolMagesGuile,
     _poolMagmaticForce,
+    _poolMagneticWeb,
     _poolMalakirBloodwitch,
     _poolMaliciousIntent,
     _poolManaplasm,
@@ -1405,6 +1408,7 @@ const shard: CardShard = {
     _poolOrchardWarden,
     _poolOrcishConscripts,
     _poolOrcishMedicine,
+    _poolOrcishSpy,
     _poolOrdealOfThassa,
     _poolOreskosSunGuide,
     _poolOriginSpellbomb,

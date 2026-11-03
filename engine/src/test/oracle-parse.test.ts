@@ -12028,6 +12028,8 @@ describe("requirements a whole declaration answers", () => {
       kind: "block-if-able",
       filter: { type: "creature" },
     });
+  });
+});
 describe("oracle-parse: Commander's Plate", () => {
   it("protection outside your commander's color identity, and Equip commander", () => {
     const card = parseFace({

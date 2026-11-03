@@ -753,6 +753,7 @@ import _poolTajuruBlightblade from "../pool/tajuru-blightblade.js";
 import _poolTakeDown from "../pool/take-down.js";
 import _poolTakeItBack from "../pool/take-it-back.js";
 import _poolTakeTheFall from "../pool/take-the-fall.js";
+import _poolTaleOfKataraAndToph from "../pool/tale-of-katara-and-toph.js";
 import _poolTalismanOfProgress from "../pool/talisman-of-progress.js";
 import _poolTamiyoFieldResearcher from "../pool/tamiyo-field-researcher.js";
 import _poolTamiyoMeetsTheStoryCircle from "../pool/tamiyo-meets-the-story-circle.js";
@@ -1658,6 +1659,7 @@ const shard: CardShard = {
     _poolTakeDown,
     _poolTakeItBack,
     _poolTakeTheFall,
+    _poolTaleOfKataraAndToph,
     _poolTalismanOfProgress,
     _poolTamiyoFieldResearcher,
     _poolTamiyoMeetsTheStoryCircle,

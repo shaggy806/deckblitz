@@ -829,6 +829,7 @@ import _poolVedalkenEngineer from "../pool/vedalken-engineer.js";
 import _poolVengefulAncestor from "../pool/vengeful-ancestor.js";
 import _poolVenomspoutBrackus from "../pool/venomspout-brackus.js";
 import _poolVentSentinel from "../pool/vent-sentinel.js";
+import _poolVerityCircle from "../pool/verity-circle.js";
 import _poolVermiculos from "../pool/vermiculos.js";
 import _poolVialOfPoison from "../pool/vial-of-poison.js";
 import _poolVibrantCityscape from "../pool/vibrant-cityscape.js";
@@ -1731,6 +1732,7 @@ const shard: CardShard = {
     _poolVengefulAncestor,
     _poolVenomspoutBrackus,
     _poolVentSentinel,
+    _poolVerityCircle,
     _poolVermiculos,
     _poolVialOfPoison,
     _poolVibrantCityscape,

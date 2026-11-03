@@ -234,6 +234,7 @@ import _poolEchoingReturn from "../pool/echoing-return.js";
 import _poolEddytrailHawk from "../pool/eddytrail-hawk.js";
 import _poolEidolonOfBlossoms from "../pool/eidolon-of-blossoms.js";
 import _poolElderCathar from "../pool/elder-cathar.js";
+import _poolEldritchImmunity from "../pool/eldritch-immunity.js";
 import _poolElectrosiphon from "../pool/electrosiphon.js";
 import _poolEliteCatWarrior from "../pool/elite-cat-warrior.js";
 import _poolEliteVanguard from "../pool/elite-vanguard.js";
@@ -486,6 +487,7 @@ import _poolMolderingKarok from "../pool/moldering-karok.js";
 import _poolMoleWorms from "../pool/mole-worms.js";
 import _poolMorselTheft from "../pool/morsel-theft.js";
 import _poolMortusStrider from "../pool/mortus-strider.js";
+import _poolMotherOfRunes from "../pool/mother-of-runes.js";
 import _poolMountain from "../pool/mountain.js";
 import _poolMutalithVortexBeast from "../pool/mutalith-vortex-beast.js";
 import _poolMycosynthWellspring from "../pool/mycosynth-wellspring.js";
@@ -553,6 +555,7 @@ import _poolPlasmaElemental from "../pool/plasma-elemental.js";
 import _poolPlatypusBear from "../pool/platypus-bear.js";
 import _poolPlunderingPredator from "../pool/plundering-predator.js";
 import _poolPoisonbellyOgre from "../pool/poisonbelly-ogre.js";
+import _poolPredatoryRampage from "../pool/predatory-rampage.js";
 import _poolPressTheAdvantage from "../pool/press-the-advantage.js";
 import _poolPrimaryResearch from "../pool/primary-research.js";
 import _poolPrimordialSage from "../pool/primordial-sage.js";
@@ -1111,6 +1114,7 @@ const shard: CardShard = {
     _poolEddytrailHawk,
     _poolEidolonOfBlossoms,
     _poolElderCathar,
+    _poolEldritchImmunity,
     _poolElectrosiphon,
     _poolEliteCatWarrior,
     _poolEliteVanguard,
@@ -1363,6 +1367,7 @@ const shard: CardShard = {
     _poolMoleWorms,
     _poolMorselTheft,
     _poolMortusStrider,
+    _poolMotherOfRunes,
     _poolMountain,
     _poolMutalithVortexBeast,
     _poolMycosynthWellspring,
@@ -1430,6 +1435,7 @@ const shard: CardShard = {
     _poolPlatypusBear,
     _poolPlunderingPredator,
     _poolPoisonbellyOgre,
+    _poolPredatoryRampage,
     _poolPressTheAdvantage,
     _poolPrimaryResearch,
     _poolPrimordialSage,

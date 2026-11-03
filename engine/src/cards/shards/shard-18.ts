@@ -74,6 +74,7 @@ import _poolBlurOfHeroism from "../pool/blur-of-heroism.js";
 import _poolBodyOfKnowledge from "../pool/body-of-knowledge.js";
 import _poolBogBadger from "../pool/bog-badger.js";
 import _poolBogardanLancer from "../pool/bogardan-lancer.js";
+import _poolBoldwyrIntimidator from "../pool/boldwyr-intimidator.js";
 import _poolBomatBazaarBarge from "../pool/bomat-bazaar-barge.js";
 import _poolBonePitBrute from "../pool/bone-pit-brute.js";
 import _poolBoneSaw from "../pool/bone-saw.js";
@@ -971,6 +972,7 @@ const shard: CardShard = {
     _poolBodyOfKnowledge,
     _poolBogBadger,
     _poolBogardanLancer,
+    _poolBoldwyrIntimidator,
     _poolBomatBazaarBarge,
     _poolBonePitBrute,
     _poolBoneSaw,

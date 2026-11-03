@@ -691,6 +691,7 @@ import _poolSkycloudExpanse from "../pool/skycloud-expanse.js";
 import _poolSkylineDespot from "../pool/skyline-despot.js";
 import _poolSkymarkRoc from "../pool/skymark-roc.js";
 import _poolSlashOfLight from "../pool/slash-of-light.js";
+import _poolSlayersCleaver from "../pool/slayers-cleaver.js";
 import _poolSlipperyBogbonder from "../pool/slippery-bogbonder.js";
 import _poolSlitheringShade from "../pool/slithering-shade.js";
 import _poolSlobadGoblinTinkerer from "../pool/slobad-goblin-tinkerer.js";
@@ -1598,6 +1599,7 @@ const shard: CardShard = {
     _poolSkylineDespot,
     _poolSkymarkRoc,
     _poolSlashOfLight,
+    _poolSlayersCleaver,
     _poolSlipperyBogbonder,
     _poolSlitheringShade,
     _poolSlobadGoblinTinkerer,
