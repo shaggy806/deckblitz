@@ -4230,3 +4230,9 @@ effect:stops-being-creature, effect:stops-being-creature-until-eot, static:self-
 to need no code: effect:animate-planeswalker-with-trigger, effect:set-pt-from-target, static:set-characteristics. Proving cards:
 Myth Realized, Chimeric Mass, Svogthos, the Restless Tomb, Beorn's Hospitality, Druid Class, Oko, Thief of Crowns, Sparkshaper
 Visionary, Sworn Defender, Neurok Transmuter, Blink, Grist, the Hunger Tide.
+
+**Combat restrictions read as another player (2026-11-02).** `PlayerTest.holds`: any condition read with the defending or attacking
+player as its "you", in place of the `monarch` and `poisoned` clauses it replaces. The same asked of you is the static's own
+`condition` over `restrictions`. Keys: static:cant-attack-unless-defender-controls (a graveyard count was the only code), found to
+need no code: static:cant-attack-if-defender-controls, static:block-restriction-attacking-player-condition. Proving cards: Vantress
+Gargoyle, Monstrous Hound, Branded Brawlers, Lurking Green Dragon, Crown-Hunter Hireling.

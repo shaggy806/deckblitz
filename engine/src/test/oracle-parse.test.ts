@@ -4793,7 +4793,30 @@ describe("damage by this source, switches, defending-player restrictions, a targ
     const serpent = face("Creature — Serpent", "This creature can't attack unless defending player controls an Island.");
     expect(serpent.static[0].cantAttackUnlessDefender).toEqual({ controls: { subtype: "Island" } });
     const hireling = face("Creature — Ogre", "This creature can't attack unless defending player is the monarch.");
-    expect(hireling.static[0].cantAttackUnlessDefender).toEqual({ monarch: true });
+    expect(hireling.static[0].cantAttackUnlessDefender).toEqual({ holds: { kind: "monarch", who: "you" } });
+    const throatseeker = face("Creature — Horror", "This creature can't attack unless defending player is poisoned.");
+    expect(throatseeker.static[0].cantAttackUnlessDefender).toEqual({
+      holds: { kind: "player-counters", who: "you", counter: "poison", atLeast: 1 },
+    });
+    const gargoyle = face(
+      "Artifact Creature — Gargoyle",
+      "This creature can't attack unless defending player has seven or more cards in their graveyard.\nThis creature can't block unless you have four or more cards in hand.",
+    );
+    expect(gargoyle.static[0].cantAttackUnlessDefender).toEqual({ holds: { kind: "cards-in-graveyard", atLeast: 7 } });
+    expect(gargoyle.static[1]).toMatchObject({ condition: { kind: "hand-size", atMost: 3 }, restrictions: ["cant-block"] });
+    const brawlers = face(
+      "Creature — Human Soldier",
+      "This creature can't attack if defending player controls an untapped land.\nThis creature can't block if you control an untapped land.",
+    );
+    expect(brawlers.static[0].cantAttackIfDefender).toEqual({ controls: { type: "land", tapped: false } });
+    expect(brawlers.static[1]).toMatchObject({
+      condition: { kind: "controls", filter: { type: "land", tapped: false }, atLeast: 1 },
+      restrictions: ["cant-block"],
+    });
+    const dragon = face("Creature — Dragon", "This creature can't attack unless defending player controls a creature with flying.");
+    expect(dragon.static[0].cantAttackUnlessDefender).toEqual({ controls: { type: "creature", keyword: "flying" } });
+    const orgg = face("Creature — Orgg", "This creature can't attack if defending player controls an untapped creature with power 3 or greater.");
+    expect(orgg.static[0].cantAttackIfDefender).toEqual({ controls: { type: "creature", tapped: false, power: { op: "gte", n: 3 } } });
     const toady = face(
       "Creature — Goblin",
       "This creature can't attack unless you control more creatures than defending player.\nThis creature can't block unless you control more creatures than attacking player.",

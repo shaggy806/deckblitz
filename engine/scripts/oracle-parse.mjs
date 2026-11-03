@@ -730,6 +730,32 @@ function aggregateSetOf(phrase) {
 }
 
 /**
+ * What a player controls in a combat restriction: "Island", "untapped land",
+ * "creature with flying", "untapped creature with power 3 or greater" — a
+ * filter, or `null`.
+ */
+function playerTestPermanent(phrase) {
+  let rest = phrase;
+  const extra = {};
+  let m;
+  if ((m = /^(.+) with (flying|reach|haste|defender|trample|vigilance|deathtouch|lifelink)$/.exec(rest))) {
+    extra.keyword = m[2];
+    rest = m[1];
+  } else if ((m = /^(.+) with power (\d+) or (greater|less)$/.exec(rest))) {
+    extra.power = { op: m[3] === "greater" ? "gte" : "lte", n: Number(m[2]) };
+    rest = m[1];
+  }
+  let tapped;
+  if ((m = /^(untapped|tapped) (.+)$/.exec(rest))) {
+    tapped = m[1] === "tapped";
+    rest = m[2];
+  }
+  const kind = parseTypePhrase(rest);
+  if (kind === null || Object.keys(kind).length === 0) return null;
+  return { ...kind, ...(tapped !== undefined ? { tapped } : {}), ...extra };
+}
+
+/**
  * The permanents of an "each … deals damage" (`each-deals-damage`): "creature",
  * "tapped creature", "other Bird you control", "modified creature you
  * control", "creature you control that's a Wolf or a Werewolf", "creature
@@ -13026,13 +13052,32 @@ function parseStatic(line, text) {
   }
   // Restrictions asked of the defending (or attacking) player — rules 508.1c
   // and 509.1b: "~ can't attack unless defending player controls an Island".
-  if ((m = /^~ can't (attack unless|attack if|block unless) (defending|attacking) player (controls an? (.+)|is the monarch|is poisoned)\.$/.exec(line))) {
+  if ((m = /^~ can't (attack unless|attack if|block unless) (defending|attacking) player (controls an? (.+)|is the monarch|is poisoned|has (\w+) or more cards in their graveyard)\.$/.exec(line))) {
     const field = { "attack unless": "cantAttackUnlessDefender", "attack if": "cantAttackIfDefender", "block unless": "cantBlockUnlessAttacker" }[m[1]];
     if ((field === "cantBlockUnlessAttacker") !== (m[2] === "attacking")) return null;
-    const filter = m[4] === undefined ? undefined : parseTypePhrase(m[4]);
+    if (m[4] !== undefined) {
+      const filter = playerTestPermanent(m[4]);
+      return filter === null ? null : { affects: { scope: "self" }, [field]: { controls: filter }, text };
+    }
+    if (m[5] !== undefined) {
+      const atLeast = numberOf(m[5]);
+      return typeof atLeast !== "number" ? null : { affects: { scope: "self" }, [field]: { holds: { kind: "cards-in-graveyard", atLeast } }, text };
+    }
+    const holds = m[3] === "is the monarch" ? { kind: "monarch", who: "you" } : { kind: "player-counters", who: "you", counter: "poison", atLeast: 1 };
+    return { affects: { scope: "self" }, [field]: { holds }, text };
+  }
+  // The same restriction asked of you: "~ can't block if you control an
+  // untapped land" (Branded Brawlers), "~ can't block unless you have four or
+  // more cards in hand" (Vantress Gargoyle) — a condition on the static.
+  if ((m = /^~ can't (attack|block) if you control an? (.+)\.$/.exec(line))) {
+    const filter = playerTestPermanent(m[2]);
     if (filter === null) return null;
-    const test = filter !== undefined ? { controls: filter } : m[3] === "is the monarch" ? { monarch: true } : { poisoned: true };
-    return { affects: { scope: "self" }, [field]: test, text };
+    return { affects: { scope: "self" }, condition: { kind: "controls", filter, atLeast: 1 }, restrictions: [m[1] === "attack" ? "cant-attack" : "cant-block"], text };
+  }
+  if ((m = /^~ can't (attack|block) unless you have (\w+) or more cards in hand\.$/.exec(line))) {
+    const atLeast = numberOf(m[2]);
+    if (typeof atLeast !== "number") return null;
+    return { affects: { scope: "self" }, condition: { kind: "hand-size", atMost: atLeast - 1 }, restrictions: [m[1] === "attack" ? "cant-attack" : "cant-block"], text };
   }
   if ((m = /^~ can't (attack|block) unless you control more (creatures|lands) than (defending|attacking) player\.$/.exec(line))) {
     if ((m[1] === "block") !== (m[3] === "attacking")) return null;

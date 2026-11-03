@@ -335,8 +335,7 @@ export function playerTestHolds(
         matchesFilter(state, registry, id, filter, { you: who, source: source.id }),
     ).reduce((sum, match) => sum + match.weight, 0);
   if (test.controls !== undefined && controlled(player, test.controls) === 0) return false;
-  if (test.monarch === true && state.monarch !== player) return false;
-  if (test.poisoned === true && (state.players[player].counters.poison ?? 0) === 0) return false;
+  if (test.holds !== undefined && !staticConditionMet(state, registry, source, test.holds, { asPlayer: player })) return false;
   if (
     test.youControlMore !== undefined &&
     controlled(source.controller, test.youControlMore) <= controlled(player, test.youControlMore)

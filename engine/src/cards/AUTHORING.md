@@ -4663,16 +4663,20 @@ is "can't attack a player it has already attacked this turn" (Port Razer), by th
 - `cantAttackUnlessDefender: PlayerTest`, `cantAttackIfDefender: PlayerTest`,
   `cantBlockUnlessAttacker: PlayerTest` (`affects: { scope: "self" }`) — "This
   creature can't attack **unless defending player** controls an Island" (Sea
-  Serpent: `{ controls: { subtype: "Island" } }`), "… is the monarch"
-  (`{ monarch: true }`), "… is poisoned" (`{ poisoned: true }`), "… if
-  defending player controls an untapped creature with power 3 or greater"
+  Serpent: `{ controls: { subtype: "Island" } }`), `holds`, any condition read
+  with that player as its "you" — "… is the monarch" (`{ holds: { kind:
+  "monarch", who: "you" } }`), "… is poisoned" (`player-counters`), "… has seven
+  or more cards in their graveyard" (Vantress Gargoyle: `cards-in-graveyard`) —
+  "… if defending player controls an untapped creature with power 3 or greater"
   (Orgg), "… unless you control more creatures than defending player" /
   "can't block unless … than attacking player" (Mogg Toady:
   `{ youControlMore: { type: "creature" } }`). Asked per attack of the player
   it would defend against (rules 506.2, 508.1c — a planeswalker's controller),
   and per block of the attacker's controller (509.1b), so at a table of four
-  it may attack one opponent and not another. The scaffolder reads these.
-  `attack-restriction-defending-player.test.ts`.
+  it may attack one opponent and not another. The same asked of **you** is the
+  static's own `condition` over `restrictions` (Branded Brawlers' "can't block if
+  you control an untapped land"). The scaffolder reads these.
+  `attack-restriction-defending-player.test.ts`, `attack-restriction-player-condition.test.ts`.
 - `goads: true` — the affected creatures **are goaded** (rule 701.15b), with
   this permanent's controller as the goader, for exactly as long as the
   static applies: Baeloth Barrityl, Entertainer's "creatures your opponents

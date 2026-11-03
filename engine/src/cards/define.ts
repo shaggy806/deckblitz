@@ -1739,10 +1739,14 @@ export interface PlayerTest {
    * `controlledBy` is implied) — "controls an Island", "controls an untapped
    * creature with power 3 or greater". */
   readonly controls?: CardFilter;
-  /** They're the monarch (rule 724). */
-  readonly monarch?: true;
-  /** They're poisoned: one or more poison counters (rule 122.1f). */
-  readonly poisoned?: true;
+  /** Any condition, read with them as its "you" (as `of-player` reads one) —
+   * "is the monarch" (Crown-Hunter Hireling: `{ kind: "monarch", who: "you" }`),
+   * "is poisoned" (Chained Throatseeker: `{ kind: "player-counters", who: "you",
+   * counter: "poison", atLeast: 1 }`), "has seven or more cards in their
+   * graveyard" (Vantress Gargoyle: `{ kind: "cards-in-graveyard", atLeast: 7 }`).
+   * For a player's state: a condition about the creature itself is the static's
+   * own `condition`. */
+  readonly holds?: StaticCondition;
   /** "You control more [filter] than [that player]": this permanent's
    * controller has more permanents matching it than they do — Mogg Toady's
    * creatures, Monstrous Hound's lands. */

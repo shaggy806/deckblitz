@@ -1345,7 +1345,10 @@
   "effect:remove-card-type-until-eot",
   "effect:stops-being-creature",
   "effect:stops-being-creature-until-eot",
-  "static:self-type-changes"
+  "static:self-type-changes",
+  "static:cant-attack-unless-defender-controls",
+  "static:cant-attack-if-defender-controls",
+  "static:block-restriction-attacking-player-condition"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {
