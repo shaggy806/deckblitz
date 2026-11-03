@@ -47,7 +47,7 @@ import { rematchOffer } from './net/rematch.ts'
 import type { RematchOffer } from './net/rematch.ts'
 import { stackShowsSomething } from './game/decisionSource.ts'
 import { fitWidth } from './game/boardFit.ts'
-import { waitingLabel } from './game/waitingLabel.ts'
+import { isWordChoice, waitingLabel } from './game/waitingLabel.ts'
 import { gameStats } from './game/gameStats.ts'
 import { cueLengthMs, playSound } from './game/sound.ts'
 import { useMusic } from './game/music.ts'
@@ -6331,7 +6331,7 @@ function Table({
             coming and going moves none of them. */}
         {awaiting !== null ? (
           <span className="muted priority-waiting">
-            {`Waiting for ${playerLabel(who, game.seats)} to ${AWAITING_LABEL[awaiting.kind]}…`}
+            {`Waiting for ${playerLabel(who, game.seats)} to ${isWordChoice(awaiting) ? 'make a choice' : AWAITING_LABEL[awaiting.kind]}…`}
           </span>
         ) : null}
         {/* A spectator only watches: no passing of any kind. */}

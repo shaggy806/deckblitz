@@ -14,6 +14,12 @@ const viewOf = (awaiting: unknown, stack: readonly ObjectId[] = [], controller: 
   }) as unknown as PlayerView
 
 describe('waitingLabel', () => {
+  it('says a creature type only when one is being named', () => {
+    const asked = (catalog: boolean) => viewOf({ kind: 'choose-creature-type', player: bob, catalog })
+    expect(waitingLabel(asked(true), bob, false)).toBe('naming a creature type')
+    expect(waitingLabel(asked(false), bob, false)).toBe('making a choice')
+  })
+
   it('says what a pending decision is', () => {
     expect(waitingLabel(viewOf({ kind: 'scry', player: bob }), bob, true)).toBe('scrying')
     expect(waitingLabel(viewOf({ kind: 'blockers', player: bob }), bob, true)).toBe('declaring blockers')

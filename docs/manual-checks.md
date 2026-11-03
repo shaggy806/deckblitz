@@ -6427,6 +6427,11 @@ These boards start before the first turn (the builder's `openingHands`), with th
 - **Do:** Pass priority until Bob's turn ends, and choose "Take this turn" when asked.
 - **Expect:** Your turn begins as usual, and Time Vault stays tapped through your untap step.
 
+### Time Vault: the other players see a choice being made
+
+- **Do:** Turn off **Follow the action**, then pass priority until your turn ends. Stay as Alice while Bob is asked.
+- **Expect:** While you wait, the line by your pass buttons says "Waiting for Bob to make a choice", and Bob's panel says "making a choice". Neither mentions a creature type. Then switch to Bob and choose either answer.
+
 ### Gerrard's Hourglass Pendant: an extra turn is skipped, for whoever's it is
 
 - **Do:** Cast Capture of Jingzhou, then pass priority until your turn ends.

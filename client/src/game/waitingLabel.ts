@@ -1,5 +1,12 @@
 import type { PlayerId, PlayerView } from 'engine/client'
 
+/** A `choose-creature-type` decision that isn't naming a creature type: the
+ * same decision asks any short list of words (a colour, a Tribute, whether to
+ * skip a turn), which only the player asked is shown. */
+export function isWordChoice(awaiting: NonNullable<PlayerView['awaiting']>): boolean {
+  return awaiting.kind === 'choose-creature-type' && !awaiting.catalog
+}
+
 /** What a seat is doing while the game waits on its decision, as the line on
  * its panel says it ("scrying…"). Every decision kind has one. */
 const DOING: Record<NonNullable<PlayerView['awaiting']>['kind'], string> = {
@@ -45,7 +52,9 @@ const DOING: Record<NonNullable<PlayerView['awaiting']>['kind'], string> = {
  */
 export function waitingLabel(view: PlayerView, player: PlayerId, bot: boolean): string {
   const awaiting = view.awaiting
-  if (awaiting !== null && awaiting.player === player) return DOING[awaiting.kind]
+  if (awaiting !== null && awaiting.player === player) {
+    return isWordChoice(awaiting) ? 'making a choice' : DOING[awaiting.kind]
+  }
   const top = view.zones.stack.at(-1)
   if (top !== undefined && view.objects[top]?.controller !== player) return 'responding'
   return bot ? 'thinking' : 'deciding'

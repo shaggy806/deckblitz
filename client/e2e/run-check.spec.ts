@@ -24,6 +24,9 @@ interface Snapshot {
   readonly players: readonly string[]
   readonly stack: readonly string[]
   readonly log: readonly string[]
+  /** What this seat is told while it waits on another: the line by the pass
+   * buttons, and each panel's. */
+  readonly waiting: readonly string[]
   /** What changes when anything does: the settle loop waits on it. */
   readonly key: string
   /** A decision is this seat's. */
@@ -94,6 +97,7 @@ function snapshot(page: Page): Promise<Snapshot> {
       players,
       stack,
       log,
+      waiting: [...document.querySelectorAll('.priority-waiting, .pp-waiting')].map(line),
       key,
       // Another player's decision this seat makes is its own to answer (rule 723).
       deciding: seat !== null && view?.awaiting != null && (view.answering ?? view.awaiting.player) === seat,
@@ -141,6 +145,7 @@ function print(label: string, s: Snapshot, shot: string): void {
   if (s.badges.length > 0) out.push(`  badges: ${s.badges.join('; ')}`)
   for (const p of s.players) out.push(`  ${p}`)
   out.push(`  stack: ${s.stack.length > 0 ? s.stack.join(', ') : '—'}`)
+  if (s.waiting.length > 0) out.push(`  waiting: ${s.waiting.join(' / ')}`)
   if (s.log.length > 0) out.push(`  log: ${s.log.join(' / ')}`)
   out.push(`  shot: ${shot}`)
   console.log(out.join('\n'))
@@ -221,8 +226,18 @@ async function runStep(page: Page, step: string): Promise<boolean> {
       return visibleFirst(page.getByRole('button', { name: /^Pass/ }))
     case 'wait':
       return true
+    case 'unfollow': {
+      // Stay in this seat while another of yours must act, to see what it sees.
+      // The toggle is on the builder's panel, hidden as the run starts.
+      await page.getByRole('button', { name: /^Builder/ }).click({ timeout: 5_000 })
+      const follow = page.locator('.bp-seat-follow input')
+      if ((await follow.count()) === 0) return false
+      await follow.setChecked(false)
+      await page.getByTitle('Hide the builder').click({ timeout: 3_000 })
+      return true
+    }
     default:
-      throw new Error(`unknown step "${step}": cast:, hand:, card:, click:, player:, pass, wait`)
+      throw new Error(`unknown step "${step}": cast:, hand:, card:, click:, player:, pass, wait, unfollow`)
   }
 }
 

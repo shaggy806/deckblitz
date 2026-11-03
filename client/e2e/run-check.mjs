@@ -10,7 +10,8 @@
 // Steps: cast:<hand card> (or hand:), card:<card in a popup, on the board,
 // or in hand>, click:<button or menu item text>, player:<name>, pass, wait
 // (for the bots, up to 30 s: until a decision is yours, or a stack seen
-// has emptied). After every step the run passes priority while your own
+// has emptied), unfollow (stay in this seat while another of yours must act).
+// After every step the run passes priority while your own
 // spell or ability is on top of the stack, so the decision a check is about
 // comes up as it resolves. A steps file is a JSON array of the same strings.
 // Names and texts match in part, case aside; a hyphen matches a minus sign; a

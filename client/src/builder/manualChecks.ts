@@ -9707,4 +9707,11 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{ bf: ['Gerrard\'s Hourglass Pendant'] }],
     }),
   ),
+  preset(
+    'Time Vault: the other players see a choice being made',
+    board({
+      you: { bf: ['Forest'] },
+      opp: [{ human: true, bf: [{ name: 'Time Vault', tapped: true }] }, {}, {}],
+    }),
+  ),
 ]
