@@ -6,6 +6,8 @@
   "replacement:skip-turn",
   "bug:token-copy-skips-as-enters-choices",
   "bug:token-copy-aura-attach-choice",
+  "effect:counter-ability",
+  "effect:counter-all-abilities",
   "decision:choose-any-number-different-names",
   "decision:choose-any-number-different-powers",
   "effect:returned-this-way-grant",

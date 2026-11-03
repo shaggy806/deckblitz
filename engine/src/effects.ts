@@ -3791,6 +3791,38 @@ export type EffectSpec =
        * permanent it was as the ability was put on the stack (rule 400.7),
        * and not at all when nothing was countered. */
       readonly lockSource?: true;
+      /** "If a permanent's ability is countered this way, destroy that
+       * permanent" (Green Slime, Teferi's Response): `effect` with **the
+       * ability's source** as its target 0 — only while the source is still
+       * the permanent it was as the ability was put on the stack (rule 400.7),
+       * and only when the ability was countered. `filter`: "if an ability of an
+       * artifact, creature, or planeswalker is countered this way" (Tishana's
+       * Tidebinder). `evenIfNotCountered`: "counter … and destroy that artifact
+       * if it's on the battlefield" (Ouphe Vandals), no "this way" about it. */
+      readonly thenSource?: {
+        readonly effect: EffectSpec;
+        readonly filter?: CardFilter;
+        readonly evenIfNotCountered?: true;
+      };
+    }
+  | {
+      /**
+       * `effect` once for each spell and/or ability on the stack as this begins,
+       * nobody choosing, each bound in turn to target slot 0 — "counter all
+       * abilities your opponents control" (Kadena's Silencer: `abilities: true`,
+       * `whose: "opponent"`, `effect: { kind: "counter", target: 0 }`), "exile all
+       * other spells" (Summary Dismissal: `spells: true`). Never what's resolving
+       * (it is still on the stack, rule 608.2n), which is why "other" needs no
+       * field. A mana ability is never on the stack (rule 605.3b). An ability
+       * object standing for several copies is that many turns. `effect` mustn't
+       * stop to ask anything.
+       */
+      readonly kind: "for-each-on-stack";
+      readonly spells?: true;
+      readonly abilities?: true;
+      /** Only those this player controls, the effect's controller's side. */
+      readonly whose?: "you" | "opponent";
+      readonly effect: EffectSpec;
     }
   | {
       /** A player gains control of a permanent (rule 613.1b, layer 2): a
@@ -10284,7 +10316,19 @@ export interface EffectApi {
   fight(a: TargetRef, b: TargetRef, oneSided: boolean): void;
   /** Counter a target spell on the stack — into its owner's hand instead
    * of their graveyard with `into: "hand"`. */
-  counterSpell(target: TargetRef, into?: "hand" | "exile", lockSource?: boolean): void;
+  counterSpell(
+    target: TargetRef,
+    into?: "hand" | "exile",
+    lockSource?: boolean,
+  ): {
+    readonly countered: boolean;
+    /** The ability's source, still the permanent it was as the ability went
+     * on the stack (rule 400.7). */
+    readonly sourcePermanent?: ObjectId;
+  };
+  /** What a `for-each-on-stack` goes over, bottom to top: an object once per
+   * copy it stands for, what's resolving left out. */
+  onTheStack(spells: boolean, abilities: boolean, whose: "you" | "opponent" | undefined): readonly ObjectId[];
   /** `player` gains control of `target` — see the `"gain-control"`
    * {@link EffectSpec}. */
   gainControl(
@@ -14516,7 +14560,19 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     }
     case "counter": {
       const target = resolveEffectTarget(spec.target, ctx);
-      if (target !== undefined) ctx.counterSpell(target, spec.into, spec.lockSource === true);
+      if (target === undefined) return;
+      const { countered, sourcePermanent } = ctx.counterSpell(target, spec.into, spec.lockSource === true);
+      const then = spec.thenSource;
+      if (then === undefined || sourcePermanent === undefined) return;
+      if (!countered && then.evenIfNotCountered !== true) return;
+      if (then.filter !== undefined && !ctx.cardMatches(sourcePermanent, then.filter)) return;
+      applyEffectSpec(then.effect, ctx.withFoundAt(0, sourcePermanent));
+      return;
+    }
+    case "for-each-on-stack": {
+      for (const object of ctx.onTheStack(spec.spells === true, spec.abilities === true, spec.whose)) {
+        applyEffectSpec(spec.effect, ctx.withFoundAt(0, object));
+      }
       return;
     }
     case "gain-control": {

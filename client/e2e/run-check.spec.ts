@@ -220,6 +220,9 @@ async function runStep(page: Page, step: string): Promise<boolean> {
         }
         if (Date.now() > limit) return false
       }
+    case 'stack':
+      // An entry on the stack, whose source may be on the board too.
+      return visibleFirst(page.locator('.stack-entry', { hasText: pattern(arg) }).locator('.stack-card .card-tile'))
     case 'player':
       return visibleFirst(page.locator('[data-player-id]', { has: page.locator('.pp-name', { hasText: pattern(arg) }) }))
     case 'pass':
@@ -237,7 +240,7 @@ async function runStep(page: Page, step: string): Promise<boolean> {
       return true
     }
     default:
-      throw new Error(`unknown step "${step}": cast:, hand:, card:, click:, player:, pass, wait, unfollow`)
+      throw new Error(`unknown step "${step}": cast:, hand:, card:, stack:, click:, player:, pass, wait, unfollow`)
   }
 }
 

@@ -6550,6 +6550,7 @@ export function parseEffect(text, outer) {
       revealUntilAt(sentences, i, ctx) ??
       opponentDividesFindsAt(sentences, i, ctx) ??
       distinctSetAt(sentences, i) ??
+      counterAbilityAt(sentences, i, ctx) ??
       opponentChoosesInGraveyardAt(sentences, i, ctx);
     if (oneEach !== null) {
       parsed.push(oneEach.effect);
@@ -8371,6 +8372,61 @@ function opponentDividesFindsAt(sentences, i, ctx) {
       },
     },
     used: closed ? 3 : 4,
+  };
+}
+
+/** An ability on the stack countered: "Counter target spell, activated ability,
+ * or triggered ability." (Disallow), "Counter target activated or triggered
+ * ability you don't control." (Nimble Obstructionist), "… from an artifact or
+ * enchantment source. If a permanent's ability is countered this way, destroy
+ * that permanent." (Green Slime), "… and destroy that artifact if it's on the
+ * battlefield." (Ouphe Vandals); and all of them: "Counter all abilities your
+ * opponents control." (Kadena's Silencer), "Exile all other spells and counter
+ * all abilities." (Summary Dismissal). */
+function counterAbilityAt(sentences, i, ctx) {
+  const each = (fields, effect) => ({ kind: "for-each-on-stack", ...fields, effect });
+  const counter = { kind: "counter", target: 0 };
+  if (/^counter all abilities your opponents control\.$/i.test(sentences[i])) {
+    return { effect: each({ abilities: true, whose: "opponent" }, counter), used: 1 };
+  }
+  if (/^exile all other spells and counter all abilities\.$/i.test(sentences[i])) {
+    return {
+      effect: {
+        kind: "sequence",
+        effects: [each({ spells: true }, { kind: "exile", target: 0 }), each({ abilities: true }, counter)],
+      },
+      used: 1,
+    };
+  }
+  const m = /^counter target (spell, activated ability, or triggered ability|activated or triggered ability|activated ability|triggered ability)( you don't control)?(?: from an? ([a-z]+)(?: or ([a-z]+))? source)?( and destroy that (?:artifact|enchantment) if it's on the battlefield)?\.$/i.exec(sentences[i]);
+  if (m === null) return null;
+  const noun = m[1].toLowerCase();
+  const sourceTypes = [m[3], m[4]].filter((t) => t !== undefined).map((t) => t.toLowerCase());
+  if (noun.startsWith("spell") && (m[2] !== undefined || sourceTypes.length > 0)) return null;
+  const spec = noun.startsWith("spell")
+    ? { kind: "stack", spells: "any", abilities: true }
+    : noun === "activated or triggered ability" && m[2] === undefined && sourceTypes.length === 0
+      ? "activated-or-triggered-ability"
+      : {
+        kind: "ability",
+        ...(m[2] !== undefined ? { whose: "opponent" } : {}),
+        ...(noun === "activated ability" ? { abilityKind: "activated" } : noun === "triggered ability" ? { abilityKind: "triggered" } : {}),
+        ...(sourceTypes.length > 0 ? { sourceTypes } : {}),
+      };
+  const thenThisWay = /^if a permanent's ability is countered this way, destroy that permanent\.$/i.test(sentences[i + 1] ?? "");
+  const destroy = { kind: "destroy", target: 0 };
+  const target = ctx.target(spec);
+  return {
+    effect: {
+      kind: "counter",
+      target,
+      ...(m[5] !== undefined
+        ? { thenSource: { effect: destroy, evenIfNotCountered: true } }
+        : thenThisWay
+          ? { thenSource: { effect: destroy } }
+          : {}),
+    },
+    used: thenThisWay ? 2 : 1,
   };
 }
 

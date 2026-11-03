@@ -30821,6 +30821,27 @@ export class Game {
       },
       fight: (a, b, oneSided) => this.fightCreatures(a, b, oneSided),
       counterSpell: (target, into, lockSource) => this.counterSpellByEffect(target, into, lockSource === true),
+      onTheStack: (spells, abilities, whose) => {
+        const stack = this.state.zones.shared.stack;
+        // What's resolving stays on the stack until it's done (rule 608.2n):
+        // this very spell, or the topmost of this source's abilities.
+        const resolving = this.state.objects[source]?.zone === "stack"
+          ? source
+          : [...stack].reverse().find((id) => {
+              const object = this.state.objects[id];
+              return object?.kind === "ability" && object.sourceObjectId === source && object.controller === controller;
+            });
+        return stack.flatMap((id) => {
+          const object = this.state.objects[id];
+          if (object === undefined) return [];
+          if (object.kind === "ability" ? !abilities : !spells) return [];
+          if (whose === "you" && object.controller !== controller) return [];
+          if (whose === "opponent" && object.controller === controller) return [];
+          const copies = object.kind === "ability" ? (object.stackCount ?? 1) : 1;
+          const turns = id === resolving ? copies - 1 : copies;
+          return Array<ObjectId>(turns).fill(id);
+        });
+      },
       gainControl: (target, untilEndOfTurn, player, whileSource, whileSourceTapped, whileYouControlSource, until) => {
         if (until !== undefined) {
           this.gainControlByEffect(player, target, false, false, { untilPoint: untilPointOf(until, controller) });
@@ -44475,18 +44496,23 @@ export class Game {
     return true;
   }
 
-  private counterSpellByEffect(target: TargetRef, into: "hand" | "exile" | undefined, lockSource = false): void {
-    if (target.kind !== "object") return;
+  private counterSpellByEffect(
+    target: TargetRef,
+    into: "hand" | "exile" | undefined,
+    lockSource = false,
+  ): { readonly countered: boolean; readonly sourcePermanent?: ObjectId } {
+    if (target.kind !== "object") return { countered: false };
     // Trickbind's "that permanent": the ability's source as it was put on
     // the stack — a permanent then, and still that permanent (rule 400.7).
     const ability = this.state.objects[target.object];
     const sourceId = ability?.kind === "ability" ? ability.sourceObjectId : null;
     const stint = ability?.lastKnownRefs?.source;
     const countered = this.counterObject(target.object, into ?? "graveyard");
-    if (!lockSource || !countered || sourceId === null || sourceId === undefined || stint === undefined) return;
+    if (sourceId === null || sourceId === undefined || stint === undefined) return { countered };
     const source = this.state.objects[sourceId];
-    if (source === undefined || source.zone !== "battlefield" || (source.zoneChangeCount ?? 0) !== stint) return;
-    this.prohibit([], { kind: "object", object: sourceId }, false, true);
+    if (source === undefined || source.zone !== "battlefield" || (source.zoneChangeCount ?? 0) !== stint) return { countered };
+    if (lockSource && countered) this.prohibit([], { kind: "object", object: sourceId }, false, true);
+    return { countered, sourcePermanent: sourceId };
   }
 
   /**

@@ -5619,7 +5619,10 @@ function Table({
           : view.objects[keep.object]
             ? game.nameOf(keep.object)
             : 'its target'
-    controls = allStackTargets && !grouped && keep === undefined ? null : (
+    // "Up to one target" over stack targets (Tishana's Tidebinder) keeps its
+    // prompt too: Skip is how it declines.
+    const mayDecline = slotSpec !== undefined && isOptionalSpec(slotSpec)
+    controls = allStackTargets && !grouped && keep === undefined && !mayDecline ? null : (
       <div className="controls">
         <span>
           {activeTargeting.label}: choose {slotSpec === undefined ? 'a target' : describeTargetSpec(slotSpec)}{' '}

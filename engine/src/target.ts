@@ -2,7 +2,7 @@
 
 import type { CardType } from "./cards.js";
 import type { EffectAmount } from "./effects.js";
-import type { CardFilter } from "./filter.js";
+import type { CardFilter, SpellTargetsFilter } from "./filter.js";
 import type { Color } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 
@@ -238,8 +238,10 @@ export type TargetSpec =
    */
   | {
       readonly kind: "ability";
-      /** Whose ability: its controller. Defaults to `"any"`. */
-      readonly whose?: "any" | "you";
+      /** Whose ability: its controller. Defaults to `"any"`. `"opponent"` is
+       * also "you don't control" (Nimble Obstructionist): everyone else at the
+       * table is an opponent. */
+      readonly whose?: "any" | "you" | "opponent";
       /** Only an activated or only a triggered ability — a Saga's chapter
        * ability, a delayed or reflexive trigger and a ward trigger are all
        * triggered (rules 714.2b, 603.7, 603.12, 702.21a). Either when
@@ -269,6 +271,11 @@ export type TargetSpec =
        * stack (rule 115.9a — the same object twice is two), however many of
        * them are still legal. A slot its own rules filled isn't a target. */
       readonly singleTarget?: true;
+      /** "…an opponent controls" (Teferi's Response): its controller. */
+      readonly whose?: "any" | "you" | "opponent";
+      /** "…that targets a land you control" (Teferi's Response): what it
+       * targets now, as a spell filter's `targets` reads it. */
+      readonly targeting?: SpellTargetsFilter;
     }
   /**
    * A slot that may be left empty — "up to one target creature" (Ajani,
@@ -1240,12 +1247,14 @@ export function describeTargetSpec(spec: TargetSpec | string): string {
     const spells =
       spec.spells === "none" ? null : spec.spells === "instant-or-sorcery" ? "instant or sorcery spell" : "spell";
     const nouns = [spells, spec.abilities ? "ability" : null].filter((n) => n !== null).join(" or ");
-    return `${nouns}${spec.singleTarget === true ? " with a single target" : ""}`;
+    const whose = spec.whose === "you" ? " you control" : spec.whose === "opponent" ? " an opponent controls" : "";
+    return `${nouns}${whose}${spec.singleTarget === true ? " with a single target" : ""}`;
   }
   if (spec.kind === "ability") {
     const from = spec.sourceTypes === undefined ? "" : ` from ${spec.sourceTypes.join(" or ")} source`;
     const noun = spec.abilityKind === undefined ? "activated or triggered" : spec.abilityKind;
-    return `${noun} ability${spec.whose === "you" ? " you control" : ""}${from}`;
+    const whose = spec.whose === "you" ? " you control" : spec.whose === "opponent" ? " an opponent controls" : "";
+    return `${noun} ability${whose}${from}`;
   }
   if (spec.kind === "spell") {
     const colour = spec.filter.colors?.length === 1 ? `${COLOUR_WORD[spec.filter.colors[0]]} ` : "";

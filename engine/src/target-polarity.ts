@@ -347,6 +347,8 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   // Melding (rule 701.42) targets nothing: both cards are your own.
   meld: none,
   counter: (n, v) => v.touch(n.target, "harm", DECISIVE),
+  // Over the stack, nobody targeted.
+  "for-each-on-stack": none,
   "gain-control": (n, v) => {
     v.touch(n.target, "harm", DECISIVE);
     // "Target opponent gains control of target permanent you control"
@@ -1516,7 +1518,7 @@ export function specSide(spec: TargetSpec): SpecSide {
       case "spell":
         return spec.whose === "you" ? "you" : spec.whose === "opponent" ? "opponent" : "any";
       case "ability":
-        return spec.whose === "you" ? "you" : "any";
+        return spec.whose === "you" ? "you" : spec.whose === "opponent" ? "opponent" : "any";
       case "opponent-compared":
         return "opponent";
       case "spell-or-permanent":

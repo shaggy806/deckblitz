@@ -6474,3 +6474,20 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 - **Do:** Cast Threats Undetected and find all four creatures. As Bob, pick two of them and confirm.
 - **Expect:** Bob is told the two go "back into their library, shuffled", with plain picks rather than numbered ones. The other two come to your hand.
+
+## Countering abilities (2026-11-02)
+
+### Tishana's Tidebinder: the countered ability's source loses its abilities while it stays
+
+- **Do:** As Bob, activate Prodigal Pyromancer at Alice and pass priority. As Alice, cast Tishana's Tidebinder and target that ability.
+- **Expect:** No damage is dealt. The Pyromancer's ability is no longer offered to Bob next time he could use it, for as long as the Tidebinder stays.
+
+### Kadena's Silencer: turning it up counters every ability an opponent controls
+
+- **Do:** Cast Kadena's Silencer face down, then pass priority. As Bob, activate Prodigal Pyromancer at Alice and pass priority. As Alice, with it on the stack, turn the Silencer face up for {1}{U}.
+- **Expect:** The Silencer's ability goes on the stack, then Bob's ability is gone from it and no damage is dealt. No target was asked for.
+
+### Summary Dismissal: every other spell exiled, every ability countered
+
+- **Do:** As Bob, cast Lightning Bolt at Alice. As Alice, cast Summary Dismissal, with no target asked for.
+- **Expect:** Lightning Bolt goes to exile, not a graveyard, no damage is dealt, and Summary Dismissal goes to your graveyard.

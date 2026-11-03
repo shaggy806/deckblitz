@@ -955,6 +955,19 @@ as it resolves), Awaken the Sleeper ("if it's equipped, you may …"), Glamer
 Spinners and Simic Guildmage (moving an Aura to another permanent), Fulgent
 Distraction (unattach).
 
+### Countering abilities: their sources, and every one on the stack — built 2026-11-02
+
+Family `effect:counter-ability`. Counter a target ability was already there
+(Stifle, Azorius Guildmage), and `stack` already held Disallow's three nouns.
+New: `counter`'s `thenSource` (an effect on the ability's source, while it's
+still that permanent); `for-each-on-stack`, a combinator over the stack like
+`for-each-permanent`, never what's resolving (rule 608.2n); `ability.whose:
+"opponent"` and `stack.whose` / `stack.targeting`. Keys: effect:counter-ability,
+effect:counter-all-abilities. Found to need no code: Disallow. Proving cards:
+Disallow, Green Slime, Ouphe Vandals, Nimble Obstructionist, Tishana's Tidebinder,
+Teferi's Response, Kadena's Silencer, Summary Dismissal. Left open: Strict Proctor,
+whose trigger is `trigger:ability-triggered-by-entering`.
+
 ### Any number with different names or powers — built 2026-11-02
 
 Family `decision:choose-from-zone-extensions`, its top unit. `together` gains

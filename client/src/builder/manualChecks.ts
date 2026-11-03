@@ -9774,4 +9774,29 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { human: true },
     }),
   ),
+
+  // --- Countering abilities (2026-11-02) ------------------------------------
+  preset(
+    "Tishana's Tidebinder: the countered ability's source loses its abilities while it stays",
+    board({
+      you: { bf: ['Island*3'], hand: ["Tishana's Tidebinder"] },
+      opp: { human: true, bf: ['Prodigal Pyromancer', 'Forest'], hand: ['Giant Growth'] },
+      turn: 0,
+    }),
+  ),
+  preset(
+    "Kadena's Silencer: turning it up counters every ability an opponent controls",
+    board({
+      you: { bf: ['Island*5'], hand: ["Kadena's Silencer"] },
+      opp: { human: true, bf: ['Prodigal Pyromancer', 'Forest'], hand: ['Giant Growth'] },
+    }),
+  ),
+  preset(
+    'Summary Dismissal: every other spell exiled, every ability countered',
+    board({
+      you: { bf: ['Island*4'], hand: ['Summary Dismissal'] },
+      opp: { human: true, bf: ['Mountain'], hand: ['Lightning Bolt'] },
+      turn: 0,
+    }),
+  ),
 ]

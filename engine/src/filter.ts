@@ -1125,7 +1125,19 @@ function spellTargetsMatch(
   clause: SpellTargetsFilter,
   ctx: FilterContext,
 ): boolean {
-  if (spell.zone !== "stack" || spell.kind !== "card") return false;
+  return spell.kind === "card" && stackObjectTargetsMatch(state, registry, spell, clause, ctx);
+}
+
+/** {@link spellTargetsMatch} for an ability on the stack as well: "target spell
+ * or ability … that targets a land you control" (Teferi's Response). */
+export function stackObjectTargetsMatch(
+  state: GameState,
+  registry: CardRegistry,
+  spell: GameObject,
+  clause: SpellTargetsFilter,
+  ctx: FilterContext,
+): boolean {
+  if (spell.zone !== "stack") return false;
   const auto = new Set(spell.autoTargetSlots ?? []);
   // A target that has changed zones since it was targeted is a new object
   // (rule 400.7) the spell doesn't target — the Rebuff the Wicked ruling.

@@ -10522,6 +10522,55 @@ describe("an effect done by another player", () => {
   });
 });
 
+describe("countering abilities on the stack", () => {
+  const spell = (text: string) => (parseFace({ name: "Thing", type_line: "Instant", oracle_text: text }) as unknown as { effect: unknown; targets?: unknown }) ;
+
+  it("reads a spell, an activated ability or a triggered ability in one slot", () => {
+    const parsed = spell("Counter target spell, activated ability, or triggered ability.");
+    expect(parsed.targets).toEqual([{ kind: "stack", spells: "any", abilities: true }]);
+    expect(parsed.effect).toEqual({ kind: "counter", target: 0 });
+  });
+
+  it("reads a source's type and 'if countered this way, destroy that permanent'", () => {
+    const parsed = spell(
+      "Counter target activated or triggered ability from an artifact or enchantment source. If a permanent's ability is countered this way, destroy that permanent.",
+    );
+    expect(parsed.targets).toEqual([{ kind: "ability", sourceTypes: ["artifact", "enchantment"] }]);
+    expect(parsed.effect).toEqual({
+      kind: "counter",
+      target: 0,
+      thenSource: { effect: { kind: "destroy", target: 0 } },
+    });
+  });
+
+  it("reads 'you don't control' and the destroy that doesn't wait on the counter", () => {
+    expect(spell("Counter target activated or triggered ability you don't control.").targets).toEqual([
+      { kind: "ability", whose: "opponent" },
+    ]);
+    expect(spell("Counter target activated ability from an artifact source and destroy that artifact if it's on the battlefield.").effect).toEqual({
+      kind: "counter",
+      target: 0,
+      thenSource: { effect: { kind: "destroy", target: 0 }, evenIfNotCountered: true },
+    });
+  });
+
+  it("reads every ability, and every other spell", () => {
+    expect(spell("Counter all abilities your opponents control.").effect).toEqual({
+      kind: "for-each-on-stack",
+      abilities: true,
+      whose: "opponent",
+      effect: { kind: "counter", target: 0 },
+    });
+    expect(spell("Exile all other spells and counter all abilities.").effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "for-each-on-stack", spells: true, effect: { kind: "exile", target: 0 } },
+        { kind: "for-each-on-stack", abilities: true, effect: { kind: "counter", target: 0 } },
+      ],
+    });
+  });
+});
+
 describe("any number of … with different names or powers", () => {
   const face = (name: string, type_line: string, oracle_text: string) =>
     parseFace({ name, type_line, oracle_text, power: "3", toughness: "3" }, { tokenFor: () => null }) as unknown as {

@@ -16,7 +16,7 @@ import {
   staticConditionMet,
   withComputedCache,
 } from "./characteristics.js";
-import { filterReadsX, manaValueOfObject, matchesFilter } from "./filter.js";
+import { filterReadsX, manaValueOfObject, matchesFilter, stackObjectTargetsMatch } from "./filter.js";
 import type { CardFilter } from "./filter.js";
 import type { Color } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
@@ -636,6 +636,11 @@ function isLegalTargetUncached(
       const chosen = (object.targets ?? []).filter((t, i) => t !== undefined && t !== null && !auto.has(i));
       if (chosen.length !== 1) return false;
     }
+    if (spec.whose === "you" && object.controller !== forPlayer) return false;
+    if (spec.whose === "opponent" && object.controller === forPlayer) return false;
+    if (spec.targeting !== undefined && !stackObjectTargetsMatch(state, registry, object, spec.targeting, targetFilterContext(forPlayer, source))) {
+      return false;
+    }
     return true;
   }
   // "Target opponent who has more life than you do" (the Keepers).
@@ -649,6 +654,7 @@ function isLegalTargetUncached(
     const ability = state.objects[ref.object];
     if (ability === undefined || ability.zone !== "stack" || ability.kind !== "ability") return false;
     if (spec.whose === "you" && ability.controller !== forPlayer) return false;
+    if (spec.whose === "opponent" && ability.controller === forPlayer) return false;
     // A chapter ability is a triggered ability (rule 714.2b).
     if (spec.abilityKind !== undefined) {
       const kind = ability.abilityKind === "chapter" ? "triggered" : ability.abilityKind;
