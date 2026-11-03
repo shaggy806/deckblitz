@@ -42176,7 +42176,7 @@ export class Game {
     // by `moveObject`, which returns `false` while that choice is pending.
     if (!this.moveObject(id, "hand")) return;
     // A flashed-back spell is exiled instead (rule 702.34a) — not a return.
-    if (this.state.objects[id]?.zone !== "hand") return;
+    if (from === "library" || this.state.objects[id]?.zone !== "hand") return;
     this.emit({ type: "permanent-returned-to-hand", object: id, owner, from });
   }
 

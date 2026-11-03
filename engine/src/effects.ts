@@ -318,7 +318,7 @@ export interface ZoneChoiceSplitCase {
  */
 export type AmountRef = EffectTargetRef | "sacrificed" | "tapped" | "discarded" | "revealed" | "exiled-as-cost";
 /** Where a `return-to-hand` effect takes its object from. */
-export type ReturnToHandZone = "battlefield" | "graveyard" | "exile" | "stack";
+export type ReturnToHandZone = "battlefield" | "graveyard" | "exile" | "stack" | "library";
 /**
  * How long an effect on a permanent lasts (rule 611.2a): until end of turn;
  * for as long as the permanent stays on the battlefield (`"permanent"`);
@@ -3230,6 +3230,9 @@ export type EffectSpec =
        *   Regrowth), or with `"source"` / `"trigger-object"` the card behind
        *   the ability ("return it to its owner's hand" off a dies trigger, now
        *   or inside a `delayed-trigger`).
+       * - `"library"` — a card a `reveal-top` has in its slot, still there:
+       *   "otherwise, put that card into your hand" (Sin Prodder). Put, not
+       *   drawn, and not "returned" for anything watching for that.
        * - `"stack"` — a **spell** to its owner's hand (Unsubstantiate,
        *   Venser, Shaper Savant — not Remand, which counters the spell and
        *   is the `counter` effect's `into: "hand"`). Not a counter
@@ -13874,6 +13877,11 @@ export function mayBeDone(effect: EffectSpec, ctx: ResolutionContext): boolean {
       return has >= amountValue(action.amount, ctx, ref.player);
     });
   }
+  // "Any opponent may have you put that card into your graveyard" with no such
+  // card (an empty library revealed nothing), or "into your hand" with nothing
+  // exiled this way: an impossible option isn't one to choose (rule 608.2d).
+  if (action.kind === "put-into-graveyard") return resolveEffectTarget(action.target, ctx)?.kind === "object";
+  if (action.kind === "move-exiled-this-way" && action.filter === undefined) return ctx.cardsExiledThisWay().length > 0;
   // "You may blight 1": a player who controls no creature the counters can
   // go on can't choose to (rule 701.68b).
   if (action.kind === "blight") return blightingPlayers(action.who, ctx).every((player) => ctx.canBlight(player));

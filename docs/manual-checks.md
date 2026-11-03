@@ -6645,3 +6645,28 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 - **Do:** Cast Goblin Game and enter 3 when you're asked for a number.
 - **Expect:** It won't take less than 1. The log shows no count until both are in, then both together. You lose 3 life; whoever hid fewer then also loses half their life, rounded up.
+
+### Sin Prodder: each opponent is asked in turn, and the first yes ends it
+
+- **Do:** Pass priority to your upkeep. When Sin Prodder's ability resolves, answer no as Bob, then yes as Carol.
+- **Expect:** Grizzly Bears is shown as revealed. Bob is asked first, then Carol, and each sees the option to have you put it into your graveyard. After Carol's yes, the Bears are in your graveyard and Carol loses 2 life. Dave is never asked, and Bob loses nothing.
+
+### Distant Memories: the first opponent to say yes gives you the card
+
+- **Do:** Cast Distant Memories and choose Sol Ring. Answer yes as Bob.
+- **Expect:** Sol Ring is in exile while Bob is asked. On his yes it goes to your hand, and you draw nothing. Carol is never asked.
+
+### Distant Memories: if no opponent says yes, you draw three
+
+- **Do:** Cast Distant Memories and choose Sol Ring. Answer no as Bob, then no as Carol.
+- **Expect:** Bob is asked, then Carol. Sol Ring stays in exile and you draw three cards.
+
+### Arcum Dagsson: the sacrificed creature's controller decides on the search
+
+- **Do:** Tap Arcum Dagsson targeting Bob's Ornithopter. Answer yes as Bob and choose Sol Ring.
+- **Expect:** The Ornithopter is sacrificed. Bob, not you, is asked "Search your library for a noncreature artifact card?". Sol Ring enters under Bob's control.
+
+### Farrel's Mantle: its controller targets, the creature's controller answers
+
+- **Do:** Attack Bob with your Grizzly Bears. Bob doesn't block. As Bob, target Carol's Hill Giant; then answer yes as you.
+- **Expect:** Bob, who controls the Aura, chooses the target, and your Bears aren't offered. You, who control the Bears, are asked. On your yes, the Giant dies and the Bears deal Bob no combat damage.

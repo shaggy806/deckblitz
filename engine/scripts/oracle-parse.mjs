@@ -4517,6 +4517,10 @@ export function parseSentence(sentence, ctx) {
       then: { kind: "counter", target: "trigger-object" },
     };
   }
+  // Distant Memories' any card, which it must find: a quantity, no quality (rule 701.23d).
+  if (/^search your library for a card, exile it, then shuffle\.$/i.test(s)) {
+    return { kind: "search-library", filter: {}, destination: "exile", min: 1, max: 1 };
+  }
   // Strata Scythe's imprint: the exile is linked below, for "the exiled card".
   if ((m = /^search your library for an? (.+?) card, exile it, then shuffle\.$/i.exec(s))) {
     const filter = parseTypePhrase(m[1], { cards: true });
@@ -7592,6 +7596,34 @@ export function parseEffect(text, outer) {
         continue;
       }
     }
+    // "Target artifact creature's controller sacrifices it. That player may
+    // search their library for a noncreature artifact card, put it onto the
+    // battlefield, then shuffle" (Arcum Dagsson): its controller's to decline.
+    const sacrificesM = /^target (.+?)'s controller sacrifices it\.$/i.exec(sentence);
+    if (sacrificesM !== null && ctx.targets.length === 0) {
+      const types = parseTypePhrase(sacrificesM[1]);
+      const spec = targetOf(sacrificesM[1]) ?? (types === null ? null : { kind: "permanent", filter: types });
+      if (spec !== undefined && spec !== null) {
+        ctx.targets.push(spec);
+        const effect = { kind: "sacrifice-target", target: 0, byItsController: true };
+        parsed.push(effect);
+        hints.push({ sentence, effect });
+        continue;
+      }
+    }
+    const mayFor = controllerMaySearch(sentence, ctx, parsed);
+    if (mayFor !== null) {
+      parsed.push(mayFor);
+      hints.push({ sentence, effect: mayFor });
+      continue;
+    }
+    const anyOpponent = anyOpponentMayAt(sentences, i, parsed);
+    if (anyOpponent !== null) {
+      parsed.push(anyOpponent.effect);
+      hints.push({ sentence, effect: anyOpponent.effect });
+      skip = anyOpponent.used - 1;
+      continue;
+    }
     const before = ctx.targets.length;
     // The rhystic cards (Prophecy): "[effect] unless any player pays {2}." /
     // "Unless any player pays {2}, [effect]." — the effect behind an
@@ -9094,6 +9126,86 @@ function opponentChoosesInGraveyardAt(sentences, i, ctx) {
  * read the card found, with the target they read chosen first (Erratic
  * Explosion, Erratic Mutation, Goblin Machinist). Auspicious Starrix's exile.
  */
+/**
+ * "Its controller / That player may search their library for a basic land
+ * card, put it onto the battlefield [tapped], then shuffle" after the one
+ * sentence that targeted (Path to Exile, Assassin's Trophy, Arcum Dagsson):
+ * theirs to decline, the target's controller as it last existed.
+ */
+function controllerMaySearch(sentence, ctx, parsed) {
+  if (ctx.targets.length !== 1 || parsed.length === 0) return null;
+  const m = /^(?:its controller|that player) may search their library for an? (.+?) card, put (?:it|that card) onto the battlefield( tapped)?, then shuffle\.$/i.exec(sentence);
+  if (m === null) return null;
+  const filter = parseTypePhrase(m[1], { cards: true });
+  if (filter === null) return null;
+  return {
+    kind: "each-player-may",
+    who: { controllerOfTarget: 0 },
+    prompt: `Search your library for a ${m[1]} card?`,
+    effect: { kind: "search-library", filter, destination: "battlefield", min: 0, max: 1, ...(m[2] ? { enterTapped: true } : {}) },
+  };
+}
+
+/**
+ * "Any opponent may have you put that card into your hand. If no player does,
+ * you draw three cards" after a search that exiled it (Distant Memories), and
+ * "Reveal the top card of your library. Any opponent may have you put that card
+ * into your graveyard. If a player does, ~ deals damage to that player equal to
+ * that card's mana value. Otherwise, put that card into your hand" (Sin Prodder):
+ * an `unless` over the opponents, each asked in turn until one says yes.
+ */
+function anyOpponentMayAt(sentences, i, parsed) {
+  const s = (n) => sentences[i + n] ?? "";
+  const anyOpponent = (doing, text, otherwise) => ({
+    kind: "unless",
+    chooser: { anyOf: "each-opponent" },
+    options: [{ doing, text }],
+    otherwise,
+  });
+  if (
+    /^any opponent may have you put that card into your hand\.$/i.test(s(0)) &&
+    parsed.at(-1)?.kind === "search-library" &&
+    parsed.at(-1).destination === "exile"
+  ) {
+    const draw = /^if no player does, you draw (\w+) cards?\.$/i.exec(s(1));
+    const amount = draw === null ? undefined : numberOf(draw[1]);
+    if (typeof amount !== "number") return null;
+    return {
+      effect: anyOpponent(
+        { kind: "move-exiled-this-way", to: "hand" },
+        "Have them put the exiled card into their hand",
+        { kind: "draw", amount },
+      ),
+      used: 2,
+    };
+  }
+  if (
+    /^reveal the top card of your library\.$/i.test(s(0)) &&
+    /^any opponent may have you put that card into your graveyard\.$/i.test(s(1)) &&
+    /^if a player does, ~ deals damage to that player equal to that card's mana value\.$/i.test(s(2)) &&
+    /^otherwise, put that card into your hand\.$/i.test(s(3))
+  ) {
+    return {
+      effect: {
+        kind: "reveal-top",
+        then: anyOpponent(
+          {
+            kind: "sequence",
+            effects: [
+              { kind: "put-into-graveyard", target: 0 },
+              { kind: "damage", amount: { manaValueOf: 0 }, who: "you" },
+            ],
+          },
+          "Have them put the revealed card into their graveyard, and be dealt damage equal to its mana value",
+          { kind: "return-to-hand", target: 0, from: "library" },
+        ),
+      },
+      used: 4,
+    };
+  }
+  return null;
+}
+
 function revealUntilAt(sentences, i, ctx) {
   const FROM_TOP = "reveal cards from the top of your library until you reveal";
   const REST = "on the bottom of your library in (any|a random) order";

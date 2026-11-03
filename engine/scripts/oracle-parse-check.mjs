@@ -79,7 +79,7 @@ function canon(v) {
       out[k] = "a token";
       continue;
     }
-    if (k === "prompt" && (v.kind === "may" || v.kind === "choose-among-targets")) continue;
+    if (k === "prompt" && (v.kind === "may" || v.kind === "each-player-may" || v.kind === "choose-among-targets")) continue;
     // `who: "you"` is the default for life, draws and the like.
     if (k === "who" && val === "you" && ["gain-life", "lose-life", "draw"].includes(v.kind)) continue;
     // A `{0}` mana cost is no mana cost (Equip {0}).

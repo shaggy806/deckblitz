@@ -11314,6 +11314,82 @@ describe("spells of a colour costing a coloured pip more", () => {
   });
 });
 
+describe("a may another player answers", () => {
+  const spell = (oracle_text: string) =>
+    parseFace({ name: "Card", type_line: "Sorcery", oracle_text }, { tokenFor: (d: string) => d }).effect;
+  const creature = (oracle_text: string) =>
+    parseFace({ name: "Card", type_line: "Creature — Devil", oracle_text }, { tokenFor: (d: string) => d });
+  it("reads its controller's search, theirs to decline", () => {
+    expect(
+      spell("Destroy target land. Its controller may search their library for a basic land card, put it onto the battlefield tapped, then shuffle."),
+    ).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "destroy", target: 0 },
+        {
+          kind: "each-player-may",
+          who: { controllerOfTarget: 0 },
+          prompt: "Search your library for a basic land card?",
+          effect: {
+            kind: "search-library",
+            filter: { supertype: "basic", type: "land" },
+            destination: "battlefield",
+            min: 0,
+            max: 1,
+            enterTapped: true,
+          },
+        },
+      ],
+    });
+  });
+  it("reads a target's controller sacrificing it, then that player's search", () => {
+    const { activated } = creature(
+      "{T}: Target artifact creature's controller sacrifices it. That player may search their library for a noncreature artifact card, put it onto the battlefield, then shuffle.",
+    );
+    expect(activated[0]).toMatchObject({
+      targets: [{ kind: "permanent", filter: { types: ["artifact", "creature"] } }],
+      effect: {
+        kind: "sequence",
+        effects: [
+          { kind: "sacrifice-target", target: 0, byItsController: true },
+          { kind: "each-player-may", who: { controllerOfTarget: 0 } },
+        ],
+      },
+    });
+  });
+  it("reads any opponent having you put the exiled card into your hand", () => {
+    expect(
+      spell(
+        "Search your library for a card, exile it, then shuffle. Any opponent may have you put that card into your hand. If no player does, you draw three cards.",
+      ),
+    ).toMatchObject({
+      kind: "sequence",
+      effects: [
+        { kind: "search-library", filter: {}, destination: "exile", min: 1, max: 1 },
+        {
+          kind: "unless",
+          chooser: { anyOf: "each-opponent" },
+          options: [{ doing: { kind: "move-exiled-this-way", to: "hand" } }],
+          otherwise: { kind: "draw", amount: 3 },
+        },
+      ],
+    });
+  });
+  it("reads any opponent having you put the revealed card into your graveyard", () => {
+    const { triggered } = creature(
+      "At the beginning of your upkeep, reveal the top card of your library. Any opponent may have you put that card into your graveyard. If a player does, this creature deals damage to that player equal to that card's mana value. Otherwise, put that card into your hand.",
+    );
+    expect(triggered[0].effect).toMatchObject({
+      kind: "reveal-top",
+      then: {
+        kind: "unless",
+        chooser: { anyOf: "each-opponent" },
+        otherwise: { kind: "return-to-hand", target: 0, from: "library" },
+      },
+    });
+  });
+});
+
 describe("offering", () => {
   const read = (oracle_text: string) =>
     parseFace({ name: "Card", type_line: "Legendary Creature — Spirit", oracle_text }, { tokenFor: (d: string) => d });

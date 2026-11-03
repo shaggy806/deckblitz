@@ -869,6 +869,8 @@
   "decision:separate-into-piles",
   "decision:choose-player",
   "decision:secret-choice",
+  "decision:any-opponent-may",
+  "decision:may-answered-by-other-player",
   "effect:protection-from-player-for-permanent",
   "effect:choose-opponent-most-life",
   "static:attacking-chosen-player-anthem",
