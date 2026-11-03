@@ -11,7 +11,7 @@
 
 import { describe, expect, it } from "vitest";
 
-import { isManaAbility, isManaAbilityByRule } from "../abilities.js";
+import { isManaAbility } from "../abilities.js";
 import { defineCard } from "../cards/define.js";
 import { createDefaultRegistry } from "../cards/registry.js";
 import type { EffectSpec } from "../effects.js";
@@ -289,8 +289,7 @@ describe("hasManaAbility — a mana ability (rule 605.1)", () => {
 
   it("counts one that works from another zone — rule 605.1a doesn't care where", () => {
     const def = registry.get(HAND_MANA);
-    expect(isManaAbility(def.activated[0]!)).toBe(false);
-    expect(isManaAbilityByRule(def.activated[0]!)).toBe(true);
+    expect(isManaAbility(def.activated[0]!)).toBe(true);
     const game = makeGame();
     expect(matches(game, spawn(game, HAND_MANA), { hasManaAbility: true })).toBe(true);
   });

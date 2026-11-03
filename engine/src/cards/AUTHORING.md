@@ -3537,6 +3537,12 @@ tapOthers?, untap? }`.
   permanent a cost tapped, as an `EffectTargetRef` too: an additional cost's
   `also.tapUntapped` of one, "the creature tapped to pay this spell's additional
   cost" (Swallow Whole), a copy's the original's (rule 707.10).
+- **A mana ability may work from another zone or exile from a graveyard** (rule
+  605.1a, Molt Tender's `exileFromGraveyard`, Cryptex's `collectEvidence`,
+  Jack-o'-Lantern's `zone: "graveyard"`, Simian Spirit Guide's `zone: "hand"`
+  with `exilesFromHand: true`, the exile instead of channel's discard). It never
+  uses the stack; a choice waits and the mana comes with its answer (605.3b). The
+  auto-payer doesn't spend any of them: the player activates by hand, first.
 - `untap: true` — **{Q}**, the untap symbol (rule 107.6 — Patrol Signaler,
   Hateflayer): payable only while the source is tapped, and a creature's
   only past summoning sickness (302.6); refused while it has a stun counter.
@@ -3736,7 +3742,7 @@ tapOthers?, untap? }`.
   pickable — and gets priority back once it's paid (rule 117.3c), whoever's
   turn it is; no more matching cards than that are exiled without asking.
   Either way they leave the graveyard as one move. Gates activation on having
-  `count` such cards besides the source. Not on a mana ability, nor beside a
+  `count` such cards besides the source. Not beside a
   `discard`, a `returnToHand` or a sacrifice of several (each asks; one at a
   time isn't built). `count: "x"` is Necropolis Fiend's "{X}, {T}, Exile X
   cards from your graveyard": the same X as the mana's, capped by the cards

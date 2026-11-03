@@ -24,7 +24,7 @@
  * `GameObject.controller`, not here.
  */
 
-import { isManaAbilityByRule, isTriggeredManaAbility } from "./abilities.js";
+import { isManaAbility, isTriggeredManaAbility } from "./abilities.js";
 import type { ActivatedAbility } from "./abilities.js";
 import type {
   AffectSpec,
@@ -4203,7 +4203,7 @@ const MANA_TYPES: ReadonlySet<string> = new Set<ManaType>(["W", "U", "B", "R", "
 /**
  * Whether `object` has a **mana ability** (rule 605.1) — Raggadragga, Goreguts
  * Boss's "each creature you control with a mana ability". An activated one
- * (605.1a — `isManaAbilityByRule`, so one that works from another zone counts
+ * (605.1a — `isManaAbility`, so one that works from another zone counts
  * too) or a triggered one (605.1b — `isTriggeredManaAbility`, which
  * Raggadragga's ruling includes): printed, granted by a static that reaches it
  * (Cryptolith Rite, an Aura or Equipment), or granted by a one-shot modifier.
@@ -4223,7 +4223,7 @@ export function hasManaAbility(
   const def = registry.get(rulesTextName(object));
   if (
     lostAt === null &&
-    (def.activated.some((a, i) => isManaAbilityByRule(a) && !inactiveStandIn(state, registry, object, i)) ||
+    (def.activated.some((a, i) => isManaAbility(a) && !inactiveStandIn(state, registry, object, i)) ||
       def.triggered.some(isTriggeredManaAbility))
   ) {
     return true;
@@ -4234,7 +4234,7 @@ export function hasManaAbility(
       (m) =>
         modifierGrantApplies(m, lostAt) &&
         (m.grantsTriggered?.some(isTriggeredManaAbility) === true ||
-          m.grantsActivated?.some(isManaAbilityByRule) === true),
+          m.grantsActivated?.some(isManaAbility) === true),
     )
   ) {
     return true;
@@ -4246,7 +4246,7 @@ export function hasManaAbility(
     object,
     view,
     (ability) =>
-      ability.grantsActivated?.some(isManaAbilityByRule) === true ||
+      ability.grantsActivated?.some(isManaAbility) === true ||
       ability.grantsTriggered?.some(isTriggeredManaAbility) === true,
     lostAt,
   );

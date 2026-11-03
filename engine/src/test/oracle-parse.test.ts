@@ -11503,6 +11503,67 @@ describe("offering", () => {
   });
 });
 
+describe("mana abilities from a hand, and paid by exiling from a graveyard", () => {
+  const read = (type_line: string, oracle_text: string) =>
+    (parseFace({ name: "Card", type_line, oracle_text, mana_cost: "{1}", colors: [], cmc: 1 } as never, { tokenFor: (d: string) => d }) as unknown as {
+      activated: Record<string, unknown>[];
+    }).activated;
+  it("Exile this card from your hand: exiled, not discarded", () => {
+    const [ability] = read("Creature — Ape", "Exile this card from your hand: Add {R}.");
+    expect(ability.zone).toBe("hand");
+    expect(ability.exilesFromHand).toBe(true);
+    expect(ability.effect).toEqual({ kind: "add-mana", mana: "R", amount: 1 });
+  });
+  it("Discard this card stays a discard", () => {
+    const [ability] = read("Creature — Ape", "Discard this card: Draw a card.");
+    expect(ability.zone).toBe("hand");
+    expect(ability.exilesFromHand).toBeUndefined();
+  });
+  it("Exile a card from your graveyard, and When you do: the reflexive rider", () => {
+    const [ability] = read(
+      "Creature — Dwarf",
+      "{T}, Exile a card from your graveyard: Add {R}. When you do, this creature deals 1 damage to each opponent.",
+    );
+    expect(ability.cost).toEqual({ mana: null, tap: true, exileFromGraveyard: { count: 1 } });
+    expect(ability.effect).toEqual({
+      kind: "add-mana",
+      mana: "R",
+      amount: 1,
+      also: {
+        kind: "reflexive-trigger",
+        targets: [],
+        effect: { kind: "damage", amount: 1, who: "each-opponent" },
+        text: "When you do, this creature deals 1 damage to each opponent.",
+      },
+    });
+  });
+  it("Collect evidence as a cost, and a counter riding the mana", () => {
+    const [ability] = read("Artifact", "{T}, Collect evidence 3: Add one mana of any color. Put an unlock counter on this artifact.");
+    expect(ability.cost).toEqual({ mana: null, tap: true, collectEvidence: 3 });
+    expect(ability.effect).toEqual({
+      kind: "add-mana",
+      mana: "any-color",
+      amount: 1,
+      also: { kind: "add-counter", target: "source", counter: "unlock", amount: 1 },
+    });
+  });
+  it("a spell's colours and no {X}, as a restriction on the mana", () => {
+    const [ability] = read(
+      "Enchantment",
+      "Exile a card from your graveyard: Add {C}. Spend this mana only to cast a spell that's one or more colors without {X} in its mana cost.",
+    );
+    expect(ability.effect).toEqual({
+      kind: "add-mana",
+      mana: "C",
+      amount: 1,
+      spendOnly: {
+        spell: { colorless: false, xInManaCost: false },
+        text: "Spend this mana only to cast a spell that's one or more colors without {X} in its mana cost.",
+      },
+    });
+  });
+});
+
 describe("a tap cost on the host, and the creature a cost tapped", () => {
   const read = (type_line: string, oracle_text: string) =>
     parseFace({ name: "Card", type_line, oracle_text, mana_cost: "{1}", colors: [], cmc: 1 } as never, { tokenFor: (d: string) => d }) as unknown as {

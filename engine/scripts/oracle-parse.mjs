@@ -1506,6 +1506,8 @@ export function parseCost(text) {
       const { count, filter, noun } = handRevealOf(m[1]);
       cost.reveal = { count, filter, text: noun };
     } else if ((m = /^(\{E\})+$/.exec(part))) cost.payEnergy = part.length / 3;
+    // "Collect evidence 3" (rule 701.59a — Forensic Researcher, Cryptex).
+    else if ((m = /^Collect evidence (\d+)$/.exec(part))) cost.collectEvidence = Number(m[1]);
     // "Tap enchanted land" (Earthlore): the one permanent the source is on.
     else if (/^Tap (?:enchanted|equipped) (?:creature|land|permanent)$/.test(part)) cost.tapOthers = { count: 1, filter: { hostOfSource: true } };
     else if ((m = new RegExp(`^Tap ${N} untapped (.+?) you control$`, "i").exec(part))) {
@@ -1520,7 +1522,10 @@ export function parseCost(text) {
       if (typeof count !== "number" || filter === null) return null;
       cost.tapOthers = { count, shareCreatureType: true, filter: { ...filter, controlledBy: "you" } };
     } else if (part === "Exile ~ from your graveyard") extra.zone = "graveyard";
-    else if (part === "Discard ~") extra.zone = "hand";
+    else if (part === "Exile ~ from your hand") {
+      extra.zone = "hand";
+      extra.exilesFromHand = true;
+    } else if (part === "Discard ~") extra.zone = "hand";
     else if (part === "Exile ~") cost.exileSelf = true;
     // The secret chosen for this permanent (`GameObject.secretChoice`).
     else if (part === "Reveal the player you chose" || part === "Reveal the creature type you chose") cost.revealChosen = true;
@@ -6422,6 +6427,9 @@ const MANA_SPEND_PURPOSE_LINES = {
     purposes: ["class-level"],
   },
   "Spend this mana only on costs that contain {X}.": { purposes: ["cost-with-x"] },
+  "Spend this mana only to cast a spell that's one or more colors without {X} in its mana cost.": {
+    spell: { colorless: false, xInManaCost: false },
+  },
 };
 
 const COLOR_LETTER = { white: "W", blue: "U", black: "B", red: "R", green: "G" };
@@ -6556,6 +6564,24 @@ export function parseEffect(text, outer) {
     const add = parseSentence(spendOnly[1], ctx);
     if (add?.kind === "add-mana") {
       return { effect: { ...add, spendOnly: { ...spendClause, text: spendOnly[2] } }, todo: [], hints: [] };
+    }
+    ctx.targets.length = slots;
+  }
+  // "Add {R}. When you do, this creature deals 1 damage to each opponent"
+  // (Rubble Rouser): the mana ability off the stack, a reflexive ability on it
+  // (rule 603.12, its ruling), with no target for the mana ability to have.
+  const addThenDo = /^(Add .+?\.) When you do, (.+\.)$/.exec(text);
+  if (addThenDo !== null) {
+    const slots = ctx.targets.length;
+    const add = parseSentence(addThenDo[1], ctx);
+    const reflexive = add?.kind === "add-mana" ? parseSentence(`${addThenDo[2][0].toUpperCase()}${addThenDo[2].slice(1)}`, ctx) : null;
+    if (reflexive !== null && !containsUndefined(reflexive) && ctx.targets.length === slots) {
+      const said = addThenDo[2].replaceAll("~", "this creature");
+      return {
+        effect: { ...add, also: { kind: "reflexive-trigger", targets: [], effect: reflexive, text: `When you do, ${said}` } },
+        todo: [],
+        hints: [],
+      };
     }
     ctx.targets.length = slots;
   }

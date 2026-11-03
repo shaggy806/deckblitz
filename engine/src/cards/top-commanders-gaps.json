@@ -1417,7 +1417,9 @@
   "condition:controlled-since-turn-start",
   "filter:controlled-continuously-since-turn-start",
   "cost:tap-enchanted-permanent",
-  "cost:tap-untapped-creature-additional"
+  "cost:tap-untapped-creature-additional",
+  "effect:hand-mana-ability",
+  "effect:mana-ability-graveyard-exile-cost"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

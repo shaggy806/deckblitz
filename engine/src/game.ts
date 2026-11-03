@@ -20895,9 +20895,8 @@ export class Game {
       }
     }
     if (ability.cost.exileFromGraveyard !== undefined) {
-      // Paid with a decision once the ability is on the stack, which a mana
-      // ability never is; and one cost asks one thing at a time.
-      if (isManaAbility(ability)) return `${def.name}'s mana ability can't exile cards from a graveyard yet`;
+      // Paid with a decision (a mana ability's waiting for it, rule 605.3b);
+      // and one cost asks one thing at a time.
       if (ability.cost.discard !== undefined || ability.cost.returnToHand !== undefined || sacrificeParts !== null) {
         return `${def.name}'s ability can't ask for two cost choices at once yet`;
       }
@@ -21029,10 +21028,10 @@ export class Game {
       if (!this.canBlight(player)) return `${player} controls no creature to blight for ${def.name}'s cost`;
     }
     if (ability.cost.collectEvidence !== undefined) {
-      // Chosen once the ability is on the stack, as a blight is — so never
-      // on a mana ability, nor beside another cost that asks.
+      // Chosen once the ability is on the stack, as a blight is (a mana
+      // ability's waiting for it, rule 605.3b) — never beside another cost
+      // that asks.
       if (
-        isManaAbility(ability) ||
         ability.cost.blight !== undefined ||
         sacrificeParts !== null ||
         ability.cost.discard !== undefined ||
@@ -21442,6 +21441,9 @@ export class Game {
       // — ninjutsu's (702.49a, b), Zareth San's: it stays in the hand,
       // revealed, until the ability leaves the stack.
       this.revealCards(player, [sourceId], "hand");
+    } else if (ability.zone === "hand" && ability.exilesFromHand === true) {
+      // "Exile this card from your hand" (Simian Spirit Guide): no discard.
+      this.moveObject(sourceId, "exile");
     } else if (ability.zone === "hand") {
       // Channel (rule 702.51a): discarding the source card is an implicit,
       // unconditional part of the cost, paid alongside the mana above.
@@ -21494,6 +21496,25 @@ export class Game {
           this.afterPlayerAction(player);
           return;
         }
+      }
+      // "Exile a card from your graveyard" (Molt Tender) and "Collect evidence
+      // 3" (Cryptex) wait the same way, where there's a choice to make.
+      const manaAfter = { source: sourceId, abilityIndex, x: chosenX, ...(manaColors !== undefined ? { manaColors } : {}) };
+      const graveyardExile = ability.cost.exileFromGraveyard;
+      if (graveyardExile !== undefined) {
+        this.withDecisionSource(sourceId, () =>
+          this.payGraveyardExileCost(player, sourceId, this.graveyardExileCostAt(player, graveyardExile, chosenX), player, undefined, manaAfter),
+        );
+      }
+      const evidence = ability.cost.collectEvidence;
+      if (evidence !== undefined) {
+        this.withDecisionSource(sourceId, () =>
+          this.beginCollectEvidence(player, sourceId, evidence, { x: chosenX, priorityTo: player, thenManaAbility: manaAfter }),
+        );
+      }
+      if (this.state.awaiting !== null) {
+        this.afterPlayerAction(player);
+        return;
       }
       this.resolveManaAbility(sourceId, player, ability, chosenX, manaColors, grantedAbility, sacrificedRef, tappedRef);
       return;
@@ -21583,25 +21604,8 @@ export class Game {
     // chosen).
     const costExile = ability.cost.exileFromGraveyard;
     if (costExile !== undefined) {
-      const count =
-        costExile.count === "x"
-          ? chosenX
-          : costExile.count === "opponents"
-            ? this.scopedPlayers(player, "each-opponent").length
-            : costExile.count;
       this.withDecisionSource(sourceId, () =>
-        this.payGraveyardExileCost(
-          player,
-          sourceId,
-          {
-            count,
-            ...(costExile.filter !== undefined ? { filter: costExile.filter } : {}),
-            ...(costExile.fromTop === true ? { fromTop: true as const } : {}),
-            ...(costExile.singleGraveyard === true ? { singleGraveyard: true as const } : {}),
-          },
-          player,
-          abilityId,
-        ),
+        this.payGraveyardExileCost(player, sourceId, this.graveyardExileCostAt(player, costExile, chosenX), player, abilityId),
       );
     }
     // "Exile a card from your hand", "exile a spell you control" likewise.
@@ -21926,6 +21930,22 @@ export class Game {
     );
   }
 
+  /** An ability's `exileFromGraveyard` at the X it was activated with: how
+   * many ("exile X", "equal to the number of opponents"), for
+   * {@link payGraveyardExileCost}. */
+  private graveyardExileCostAt(
+    player: PlayerId,
+    cost: NonNullable<AbilityCost["exileFromGraveyard"]>,
+    x: number,
+  ): { count: number; filter?: CardFilter; fromTop?: true; singleGraveyard?: true } {
+    return {
+      count: cost.count === "x" ? x : cost.count === "opponents" ? this.scopedPlayers(player, "each-opponent").length : cost.count,
+      ...(cost.filter !== undefined ? { filter: cost.filter } : {}),
+      ...(cost.fromTop === true ? { fromTop: true as const } : {}),
+      ...(cost.singleGraveyard === true ? { singleGraveyard: true as const } : {}),
+    };
+  }
+
   /**
    * Pay an activated ability's "exile N [kind of] cards from your graveyard"
    * (`AbilityCost.exileFromGraveyard`) as it goes on the stack (rule 602.2b,
@@ -21934,7 +21954,9 @@ export class Game {
    * it's paid (117.3c). No more matching cards than that is no choice: they
    * are all exiled at once. Either way they leave as one move. `optional`
    * ("you may exile") always asks, and none is an answer; `exileLink` links
-   * what's exiled to the permanent the spell becomes (rule 607.2a).
+   * what's exiled to the permanent the spell becomes (rule 607.2a). A mana
+   * ability's (`manaAbility`) adds its mana once a choice is answered, and
+   * nothing is on the stack (rule 605.3b).
    */
   private payGraveyardExileCost(
     player: PlayerId,
@@ -21951,6 +21973,7 @@ export class Game {
     /** The spell or ability on the stack this pays for, which remembers the
      * cards — its effect's "the exiled card". */
     forStackObject?: ObjectId,
+    manaAbility?: Extract<AwaitingDecision, { kind: "choose-from-zone" }>["thenManaAbility"],
   ): void {
     if (cost.count <= 0) return;
     // "From a single graveyard" (Night Soil): any player's that has enough, all
@@ -21980,6 +22003,7 @@ export class Game {
           text: "from a single graveyard",
         },
         ...(forStackObject !== undefined ? { costExileFor: forStackObject } : {}),
+        ...(manaAbility !== undefined ? { thenManaAbility: manaAbility } : {}),
       };
       return;
     }
@@ -22013,6 +22037,7 @@ export class Game {
       ...(cost.optional === true ? { prompt: "You may choose a card to exile" } : {}),
       ...(cost.exileLink !== undefined ? { exileLink: cost.exileLink } : {}),
       ...(forStackObject !== undefined ? { costExileFor: forStackObject } : {}),
+      ...(manaAbility !== undefined ? { thenManaAbility: manaAbility } : {}),
     };
   }
 
@@ -22523,6 +22548,9 @@ export class Game {
           abilityIndex < printedLost ||
           inactiveStandIn(this.state, this.registry, object, abilityIndex) ||
           !isManaAbility(ability) ||
+          // One that works from another zone is activated by hand (a permanent
+          // has no use of Elvish Spirit Guide's or Jack-o'-Lantern's here).
+          ability.zone !== undefined ||
           ability.effect === null ||
           ability.effect.kind !== "add-mana" ||
           // "Its activated abilities with {T} in their costs" (Serra
@@ -40542,7 +40570,14 @@ export class Game {
     player: PlayerId,
     source: ObjectId,
     amount: number,
-    opts: { readonly optional?: boolean; readonly then?: EffectSpec; readonly x?: number; readonly priorityTo?: PlayerId } = {},
+    opts: {
+      readonly optional?: boolean;
+      readonly then?: EffectSpec;
+      readonly x?: number;
+      readonly priorityTo?: PlayerId;
+      /** A mana ability's cost (Cryptex): its mana, once this is answered. */
+      readonly thenManaAbility?: Extract<AwaitingDecision, { kind: "choose-from-zone" }>["thenManaAbility"];
+    } = {},
   ): void {
     if (this.state.players[player]?.hasLost !== false || !this.canCollectEvidence(player, amount)) return;
     const eligible = [...this.state.zones.perPlayer[player].graveyard];
@@ -40568,6 +40603,7 @@ export class Game {
       collectEvidence: amount,
       ...(opts.then !== undefined ? { then: opts.then, thenSource: source, thenX: opts.x ?? 0 } : {}),
       ...(opts.priorityTo !== undefined ? { priorityTo: opts.priorityTo } : {}),
+      ...(opts.thenManaAbility !== undefined ? { thenManaAbility: opts.thenManaAbility } : {}),
     };
   }
 
