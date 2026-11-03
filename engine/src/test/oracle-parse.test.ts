@@ -4807,7 +4807,9 @@ describe("block limits, lost abilities and chosen types (B249)", () => {
 });
 
 describe("agreement with the hand-authored pool", () => {
-  it("every ability the parser claims complete matches the authored one", () => {
+  // The whole pool, parsed: ~30 s on a 4-core cloud session by 2026-11-03,
+  // past the suite's default timeout, and growing with the pool.
+  it("every ability the parser claims complete matches the authored one", { timeout: 180_000 }, () => {
     const { stats, mismatches } = checkPool(POOL_CARDS);
     expect(stats.claimed).toBeGreaterThan(400);
     expect(mismatches.map((m: { card: string; text: string }) => `${m.card}: ${m.text}`)).toEqual([]);
