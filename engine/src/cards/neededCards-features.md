@@ -4124,6 +4124,22 @@ attack-with-exactly, attack-with-total-power, attacks-player-at-least,
 attack-with-count-amount. Proving cards: Alluring Suitor, Desert Were-Worm, Horn
 of the Mark, Landroval, Horizon Witness, Grand Warlord Radha, The Earth King.
 
+### Attacking one of your opponents, and not attacking you — built 2026-11-03
+
+The need-keys Phase 2 family `condition:attacking-an-opponent-filter`: its key,
+`trigger:attacks-your-opponent` and `trigger:player-attacks-not-you`. The filter
+was already there (`CardFilter.attackingOpponent`, from Blast-Furnace Hellkite):
+"whenever a creature … attacks one of your opponents" is an `attacks` trigger
+with `who: "any"` and that clause (the player, not a planeswalker or battle of
+theirs, rule 508.3a), which the scaffolder now reads with "with a [+1/+1]
+counter on it" and "enchanted". New: `attack-with`'s `notAttackingYou` —
+"whenever a player attacks, if they aren't attacking you" (Mirkwood Trapper; a
+planeswalker or battle of yours doesn't count, the ruling), an intervening if
+asked again on resolution (rule 603.4). `attacking-an-opponent.test.ts`.
+Proving cards: Skyboon Evangelist, Soulblade Corrupter, Mirkwood Trapper. Left
+for `author-freed`: Oviya and Mazzy (their other abilities not checked here);
+Scriv still waits on a token created attached.
+
 ### Attacked a battle this turn — built 2026-11-03
 
 The need-keys Phase 2 key `condition:attacked-battle-this-turn`.

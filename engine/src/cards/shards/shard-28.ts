@@ -691,6 +691,7 @@ import _poolSivitriDragonMaster from "../pool/sivitri-dragon-master.js";
 import _poolSkitterskin from "../pool/skitterskin.js";
 import _poolSkullProphet from "../pool/skull-prophet.js";
 import _poolSkyCycle from "../pool/sky-cycle.js";
+import _poolSkyboonEvangelist from "../pool/skyboon-evangelist.js";
 import _poolSkyclaveGeopede from "../pool/skyclave-geopede.js";
 import _poolSkyriderPatrol from "../pool/skyrider-patrol.js";
 import _poolSkyscanner from "../pool/skyscanner.js";
@@ -1601,6 +1602,7 @@ const shard: CardShard = {
     _poolSkitterskin,
     _poolSkullProphet,
     _poolSkyCycle,
+    _poolSkyboonEvangelist,
     _poolSkyclaveGeopede,
     _poolSkyriderPatrol,
     _poolSkyscanner,

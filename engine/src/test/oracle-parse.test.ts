@@ -10165,6 +10165,21 @@ describe("exchanges with a life total", () => {
     expect(parseTrigger("Whenever a creature attacks enchanted player")).toEqual([
       { on: "attacks", who: "any", attackedPlayer: "attached" },
     ]);
+    // "Attacks one of your opponents": the player, whoever's creature it is.
+    const opponent = { attackingOpponent: true };
+    expect(parseTrigger("Whenever a creature with a counter on it attacks one of your opponents")).toEqual([
+      { on: "attacks", who: "any", filter: { type: "creature", counters: { compare: { op: "gte", n: 1 } }, ...opponent } },
+    ]);
+    expect(parseTrigger("Whenever a creature with a +1/+1 counter on it attacks one of your opponents")).toEqual([
+      {
+        on: "attacks",
+        who: "any",
+        filter: { type: "creature", counters: { kind: "+1/+1", compare: { op: "gte", n: 1 } }, ...opponent },
+      },
+    ]);
+    expect(parseTrigger("Whenever an enchanted creature attacks one of your opponents")).toEqual([
+      { on: "attacks", who: "any", filter: { type: "creature", enchanted: true, ...opponent } },
+    ]);
   });
 
   it("reads a 'When you do' naming what the step before made, returned or targeted", () => {

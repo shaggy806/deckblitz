@@ -10535,6 +10535,20 @@ export class Game {
   private attackConditionsStillHold(ability: StackAbility, object: GameObject): boolean {
     // A delayed or reflexive trigger carries no `trigger` of its own.
     const trigger = (ability as Partial<TriggeredAbility>).trigger;
+    if (trigger?.on === "attack-with" && trigger.notAttackingYou === true) {
+      // "If they aren't attacking you", asked again: no creature of the
+      // attacking player's attacks this ability's controller now.
+      const you = object.controller;
+      const attacker = activePlayerOf(this.state);
+      if (
+        this.state.zones.shared.battlefield.some((id) => {
+          const o = this.state.objects[id];
+          return o.attacking === you && o.controller === attacker;
+        })
+      ) {
+        return false;
+      }
+    }
     if (trigger?.on === "attack-with" && trigger.stillAttacking === true) {
       return this.stillAttackingWith(trigger, object);
     }
@@ -27042,6 +27056,9 @@ export class Game {
     attackers: readonly ObjectId[],
     self: GameObject,
   ): boolean {
+    if (spec.notAttackingYou === true && attackers.some((id) => this.state.objects[id]?.attacking === self.controller)) {
+      return false;
+    }
     const counted = this.attackWithCounted(spec, attackers, self);
     const n = this.creatureCount(counted);
     if (spec.exactly !== undefined ? n !== spec.exactly : n < (spec.atLeast ?? 1)) return false;

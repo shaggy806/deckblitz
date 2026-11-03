@@ -1908,6 +1908,16 @@ export function parseTrigger(clause) {
     const any = on === "leaves-battlefield" && Object.keys(filter).length === 0;
     return [{ on, who, ...(any ? {} : { filter }), ...(m[1] === "another" ? { otherOnly: true } : {}) }];
   }
+  // "Whenever a creature with a counter on it attacks one of your opponents"
+  // (Skyboon Evangelist, Soulblade Corrupter): whoever controls it, attacking
+  // the player — not a planeswalker or battle of theirs (rule 508.3a).
+  if ((m = /^Whenever (a|an) (enchanted )?(.+?)( with an? (?:(\+1\/\+1|[a-z]+) )?counter on it)? attacks one of your opponents$/.exec(c))) {
+    const filter = parseTypePhrase(m[3]);
+    if (filter === null) return null;
+    const counters = m[4] ? { counters: { ...(m[5] ? { kind: m[5] } : {}), compare: { op: "gte", n: 1 } } } : {};
+    const enchanted = m[2] ? { enchanted: true } : {};
+    return [{ on: "attacks", who: "any", filter: { ...filter, ...enchanted, ...counters, attackingOpponent: true } }];
+  }
   if ((m = /^Whenever (a|another) (.+?) you control deals combat damage to a player$/.exec(c))) {
     const filter = parseTypePhrase(m[2]);
     if (filter === null) return null;
