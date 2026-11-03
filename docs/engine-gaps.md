@@ -407,6 +407,10 @@ paid in any order. Found 2026-11-02; not reported from play.
 deals its damage as two instances rather than one; the total is right (rule 615.5, the loop over `outcome.shields`
 in `game.ts`). Found 2026-11-02; not reported from play.
 
+**A token with riot is never asked.** A token enters without the riot choice and takes haste
+(`entersBattlefieldReplacement`, `game.ts`), though rule 702.136a gives it the choice as it enters. Blocks Spider-Punk's
+Spider tokens; Spider-Punk isn't authored. Found 2026-11-02; not reported from play.
+
 ## Latent
 
 The engine departs from the rules here, but no pool card reaches it yet: fix each when a card

@@ -433,9 +433,11 @@ section keeps only what to do next.
   `AbilityCost`'s parts (about 15 cards). Fourth overnight round, 2026-11-02: damage prevented this way, this-way
   results, permissions over exiled cards, linked face-down exile, unattach as a cost, a keyword's non-mana cost,
   can't-have keywords, added supertypes, whole hands exiled face down, returns from every graveyard, token copies'
-  as-enters choices, turn skips, durations to a later turn's point and animates setting characteristics (101 proving
-  cards; `--stale` 1,530 wait for `author-freed`). Next by `--greedy --groups`: `cost:dynamic-life-cost` (6),
-  `cost:choose-cards-as-cost` (6), `effect:animate-grants-conditional-static` (7).
+  as-enters choices, turn skips, durations to a later turn's point, animates setting characteristics, different-named
+  choices, countering abilities, combat restrictions read as another player, animates granting abilities, alternative
+  costs' non-mana parts, spells gaining abilities, one unless clause and copies per permanent (162 proving cards;
+  `--stale` 1,540 wait for `author-freed`). Next by `--greedy --groups`: `decision:secret-choice` (6),
+  `effect:look-at-top-of-target-players-library` (6), `effect:random-target` (6).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next
@@ -507,6 +509,7 @@ there and move this line to `COMPLETED.md`.
 - **A player can't play another player's face-down exiled card blind** (rule 406.3a; blocks Urianger Augurelt, Lobelia).
 - **A keyword's other cost counts the graveyard as the cast starts** (rule 601.2h, a splice set's costs in any order).
 - **A shield's `then` runs once per damage event** (Refraction Trap over a split sweep: two instances, right total).
+- **A token with riot is never asked** (it takes haste; blocks Spider-Punk's Spider tokens).
 - **A copy of a spell loses its sacrificed, discarded and revealed cost references** — rule 707.10; exiled-as-cost now carries over, the others read nothing on a copy.
 - **Mulligans are declared at once, and two opening-hand rules are loose** — rule 103.5 has turn-order declarations but `beginMulligans` asks in parallel (a design call); `COMMANDER_RULES` gives the free mulligan at two players, while 103.5c names multiplayer and Brawl; a revealed opening-hand card isn't kept revealed until the first turn (103.6b).
 - **An opponent-caused discard's replacement beats the graveyard ones without asking** — `Game` puts Obstinate Baloth onto the battlefield rather than asking its controller (616.1) when Leyline of the Void also applies.

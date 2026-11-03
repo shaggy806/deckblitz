@@ -12,6 +12,18 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **A copy for each permanent a spell could target, by whoever makes it** (2026-11-02, `80ef4666f`): `forEachItCouldTarget`
+  with `controller`, `chooseAndPayEach`; gravestorm as a helper and a template; Mirrorwing Dragon, Precursor Golem, Ink-Treader
+  Nephilim, Feather, Ominous Harvest, Follow the Bodies, Bitter Ordeal.
+- **One unless clause, whoever answers and whatever they do** (2026-11-02, `700d705c2`): `unless.chooser` takes any
+  `EffectPlayerRef` or `{anyOf}`, with `doing` and `payManaCostOf`; 10 keys, 13 proving cards, among them Grip of Amnesia,
+  Perplex, Tainted Specter, Ice Cave and Tariff.
+- **A spell gaining an ability carried onto its permanent** (2026-11-02, `43d273048`): `castRider`s, `rebound` as a
+  keyword, gained bloodthirst, riot from statics and mana per instance (rule 702.136b); Taigam, Cast Through Time, Bloodlord
+  of Vaasgoth, Rhythm of the Wild, Uncivil Unrest, Domri Chaos Bringer, Rivaz of the Claw, Thief of Existence.
+- **An alternative cost's non-mana parts** (2026-11-02, `220c48f6d`): `alternativeCost.also` as a `KickerAlsoCost`,
+  `self-alternative-cost-paid`, a keywordless optional additional cost; 8 proving cards, among them Stalwart Valkyrie,
+  Blasphemous Edict, Asmoranomardicadaistinaculdacar, Ingenious Mastery and Undergrowth.
 - **An animate that grants a whole ability** (2026-11-02, `9bd4a9cd3`): mostly composition; granted statics now bind in
   `ownStatics`, and `add-types`' `removeSubtypes`; Raging Ravine, Restless Spire, Veiled Serpent, Veiled Apparition, Opal
   Guardian, Monument to Perfection, Dancing Sword.
