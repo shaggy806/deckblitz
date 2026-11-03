@@ -277,6 +277,7 @@ import _poolFeastingHobbit from "../pool/feasting-hobbit.js";
 import _poolFellingBlow from "../pool/felling-blow.js";
 import _poolFemerefKnight from "../pool/femeref-knight.js";
 import _poolFerociousCharge from "../pool/ferocious-charge.js";
+import _poolFerventMastery from "../pool/fervent-mastery.js";
 import _poolFinalRevels from "../pool/final-revels.js";
 import _poolFindThePath from "../pool/find-the-path.js";
 import _poolFireDrake from "../pool/fire-drake.js";
@@ -338,6 +339,7 @@ import _poolGriffinCanyon from "../pool/griffin-canyon.js";
 import _poolGrimReaperLethalLegionnaire from "../pool/grim-reaper-lethal-legionnaire.js";
 import _poolGrimaWormtongue from "../pool/grima-wormtongue.js";
 import _poolGrimgrinCorpseBorn from "../pool/grimgrin-corpse-born.js";
+import _poolGripOfAmnesia from "../pool/grip-of-amnesia.js";
 import _poolGristleGrinner from "../pool/gristle-grinner.js";
 import _poolGrixisSlavedriver from "../pool/grixis-slavedriver.js";
 import _poolGrizzledOutcasts from "../pool/grizzled-outcasts.js";
@@ -586,6 +588,7 @@ import _poolPlanarBirth from "../pool/planar-birth.js";
 import _poolPlanarCollapse from "../pool/planar-collapse.js";
 import _poolPolukranosUnchained from "../pool/polukranos-unchained.js";
 import _poolPortRazer from "../pool/port-razer.js";
+import _poolPrecursorGolem from "../pool/precursor-golem.js";
 import _poolPreemptiveStrike from "../pool/preemptive-strike.js";
 import _poolPressForAnswers from "../pool/press-for-answers.js";
 import _poolPrimalDruid from "../pool/primal-druid.js";
@@ -772,6 +775,7 @@ import _poolSweetGumRecluse from "../pool/sweet-gum-recluse.js";
 import _poolSylvanBasilisk from "../pool/sylvan-basilisk.js";
 import _poolSyphonFuel from "../pool/syphon-fuel.js";
 import _poolSyrCarahTheBold from "../pool/syr-carah-the-bold.js";
+import _poolTaigamOjutaiMaster from "../pool/taigam-ojutai-master.js";
 import _poolTalarasBattalion from "../pool/talaras-battalion.js";
 import _poolTalasWarrior from "../pool/talas-warrior.js";
 import _poolTalismanOfImpulse from "../pool/talisman-of-impulse.js";
@@ -1205,6 +1209,7 @@ const shard: CardShard = {
     _poolFellingBlow,
     _poolFemerefKnight,
     _poolFerociousCharge,
+    _poolFerventMastery,
     _poolFinalRevels,
     _poolFindThePath,
     _poolFireDrake,
@@ -1266,6 +1271,7 @@ const shard: CardShard = {
     _poolGrimReaperLethalLegionnaire,
     _poolGrimaWormtongue,
     _poolGrimgrinCorpseBorn,
+    _poolGripOfAmnesia,
     _poolGristleGrinner,
     _poolGrixisSlavedriver,
     _poolGrizzledOutcasts,
@@ -1514,6 +1520,7 @@ const shard: CardShard = {
     _poolPlanarCollapse,
     _poolPolukranosUnchained,
     _poolPortRazer,
+    _poolPrecursorGolem,
     _poolPreemptiveStrike,
     _poolPressForAnswers,
     _poolPrimalDruid,
@@ -1700,6 +1707,7 @@ const shard: CardShard = {
     _poolSylvanBasilisk,
     _poolSyphonFuel,
     _poolSyrCarahTheBold,
+    _poolTaigamOjutaiMaster,
     _poolTalarasBattalion,
     _poolTalasWarrior,
     _poolTalismanOfImpulse,

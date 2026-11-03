@@ -334,6 +334,7 @@ import _poolHundroog from "../pool/hundroog.js";
 import _poolHungryGhoul from "../pool/hungry-ghoul.js";
 import _poolHuntingPack from "../pool/hunting-pack.js";
 import _poolHydrolash from "../pool/hydrolash.js";
+import _poolIceCave from "../pool/ice-cave.js";
 import _poolIcefeatherAven from "../pool/icefeather-aven.js";
 import _poolIchigaWhoTopplesOaks from "../pool/ichiga-who-topples-oaks.js";
 import _poolIchorclawMyr from "../pool/ichorclaw-myr.js";
@@ -1202,6 +1203,7 @@ const shard: CardShard = {
     _poolHungryGhoul,
     _poolHuntingPack,
     _poolHydrolash,
+    _poolIceCave,
     _poolIcefeatherAven,
     _poolIchigaWhoTopplesOaks,
     _poolIchorclawMyr,

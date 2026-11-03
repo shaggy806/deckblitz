@@ -205,6 +205,7 @@ import _poolEliminateTheCompetition from "../pool/eliminate-the-competition.js";
 import _poolElvishMystic from "../pool/elvish-mystic.js";
 import _poolEmbalmedBrawler from "../pool/embalmed-brawler.js";
 import _poolEmbraceTheUnknown from "../pool/embrace-the-unknown.js";
+import _poolEnergyVortex from "../pool/energy-vortex.js";
 import _poolEpicStruggle from "../pool/epic-struggle.js";
 import _poolErinisGloomStalker from "../pool/erinis-gloom-stalker.js";
 import _poolEssenceCapture from "../pool/essence-capture.js";
@@ -1055,6 +1056,7 @@ const shard: CardShard = {
     _poolElvishMystic,
     _poolEmbalmedBrawler,
     _poolEmbraceTheUnknown,
+    _poolEnergyVortex,
     _poolEpicStruggle,
     _poolErinisGloomStalker,
     _poolEssenceCapture,

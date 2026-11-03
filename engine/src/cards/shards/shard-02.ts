@@ -515,6 +515,7 @@ import _poolObliterate from "../pool/obliterate.js";
 import _poolObsessiveSkinner from "../pool/obsessive-skinner.js";
 import _poolOketrasMonument from "../pool/oketras-monument.js";
 import _poolOloroAgelessAscetic from "../pool/oloro-ageless-ascetic.js";
+import _poolOminousHarvest from "../pool/ominous-harvest.js";
 import _poolOnslaught from "../pool/onslaught.js";
 import _poolOpenTheGates from "../pool/open-the-gates.js";
 import _poolOrbweaverKumo from "../pool/orbweaver-kumo.js";
@@ -1381,6 +1382,7 @@ const shard: CardShard = {
     _poolObsessiveSkinner,
     _poolOketrasMonument,
     _poolOloroAgelessAscetic,
+    _poolOminousHarvest,
     _poolOnslaught,
     _poolOpenTheGates,
     _poolOrbweaverKumo,

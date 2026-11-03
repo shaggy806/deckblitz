@@ -380,6 +380,7 @@ import _poolIncubation from "../pool/incubation.js";
 import _poolInducedAmnesia from "../pool/induced-amnesia.js";
 import _poolInfectiousInquiry from "../pool/infectious-inquiry.js";
 import _poolInfernalPlunge from "../pool/infernal-plunge.js";
+import _poolInkTreaderNephilim from "../pool/ink-treader-nephilim.js";
 import _poolInkfathomWitch from "../pool/inkfathom-witch.js";
 import _poolInsatiableSouleater from "../pool/insatiable-souleater.js";
 import _poolInspiredSkypainter from "../pool/inspired-skypainter.js";
@@ -1311,6 +1312,7 @@ const shard: CardShard = {
     _poolInducedAmnesia,
     _poolInfectiousInquiry,
     _poolInfernalPlunge,
+    _poolInkTreaderNephilim,
     _poolInkfathomWitch,
     _poolInsatiableSouleater,
     _poolInspiredSkypainter,

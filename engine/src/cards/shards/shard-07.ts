@@ -267,6 +267,7 @@ import _poolFortitude from "../pool/fortitude.js";
 import _poolFreshStart from "../pool/fresh-start.js";
 import _poolFrightshroudCourier from "../pool/frightshroud-courier.js";
 import _poolFrogify from "../pool/frogify.js";
+import _poolFromUnderTheFloorboards from "../pool/from-under-the-floorboards.js";
 import _poolFumikoTheLowblood from "../pool/fumiko-the-lowblood.js";
 import _poolFuneralMarch from "../pool/funeral-march.js";
 import _poolFuriousStrength from "../pool/furious-strength.js";
@@ -610,6 +611,7 @@ import _poolReverberation from "../pool/reverberation.js";
 import _poolRevokeExistence from "../pool/revoke-existence.js";
 import _poolRhoxFaithmender from "../pool/rhox-faithmender.js";
 import _poolRhoxVeteran from "../pool/rhox-veteran.js";
+import _poolRhythmOfTheWild from "../pool/rhythm-of-the-wild.js";
 import _poolRidersOfRohan from "../pool/riders-of-rohan.js";
 import _poolRiftElemental from "../pool/rift-elemental.js";
 import _poolRighteousFury from "../pool/righteous-fury.js";
@@ -1177,6 +1179,7 @@ const shard: CardShard = {
     _poolFreshStart,
     _poolFrightshroudCourier,
     _poolFrogify,
+    _poolFromUnderTheFloorboards,
     _poolFumikoTheLowblood,
     _poolFuneralMarch,
     _poolFuriousStrength,
@@ -1520,6 +1523,7 @@ const shard: CardShard = {
     _poolRevokeExistence,
     _poolRhoxFaithmender,
     _poolRhoxVeteran,
+    _poolRhythmOfTheWild,
     _poolRidersOfRohan,
     _poolRiftElemental,
     _poolRighteousFury,

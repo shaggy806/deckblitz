@@ -759,6 +759,7 @@ import _poolTakeIntoCustody from "../pool/take-into-custody.js";
 import _poolTandemTactics from "../pool/tandem-tactics.js";
 import _poolTanglespanLookout from "../pool/tanglespan-lookout.js";
 import _poolTarPitWarrior from "../pool/tar-pit-warrior.js";
+import _poolTariff from "../pool/tariff.js";
 import _poolTaskForce from "../pool/task-force.js";
 import _poolTasseledDromedary from "../pool/tasseled-dromedary.js";
 import _poolTeamTransmitter from "../pool/team-transmitter.js";
@@ -1660,6 +1661,7 @@ const shard: CardShard = {
     _poolTandemTactics,
     _poolTanglespanLookout,
     _poolTarPitWarrior,
+    _poolTariff,
     _poolTaskForce,
     _poolTasseledDromedary,
     _poolTeamTransmitter,

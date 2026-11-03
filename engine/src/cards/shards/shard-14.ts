@@ -77,6 +77,7 @@ import _poolBenthicInfiltrator from "../pool/benthic-infiltrator.js";
 import _poolBileUrchin from "../pool/bile-urchin.js";
 import _poolBind from "../pool/bind.js";
 import _poolBirthOfTheImperium from "../pool/birth-of-the-imperium.js";
+import _poolBitterOrdeal from "../pool/bitter-ordeal.js";
 import _poolBlackTomCassidy from "../pool/black-tom-cassidy.js";
 import _poolBlightedBurgeoning from "../pool/blighted-burgeoning.js";
 import _poolBlinkmothNexus from "../pool/blinkmoth-nexus.js";
@@ -806,6 +807,7 @@ import _poolUmezawasCharm from "../pool/umezawas-charm.js";
 import _poolUnbreakableBond from "../pool/unbreakable-bond.js";
 import _poolUndercityNecrolisk from "../pool/undercity-necrolisk.js";
 import _poolUndercityUpheaval from "../pool/undercity-upheaval.js";
+import _poolUndergrowth from "../pool/undergrowth.js";
 import _poolUndermine from "../pool/undermine.js";
 import _poolUnexpectedAssistance from "../pool/unexpected-assistance.js";
 import _poolUnionOfTheThirdPath from "../pool/union-of-the-third-path.js";
@@ -847,6 +849,7 @@ import _poolWarleadersHelix from "../pool/warleaders-helix.js";
 import _poolWeakness from "../pool/weakness.js";
 import _poolWeddingInvitation from "../pool/wedding-invitation.js";
 import _poolWeiNightRaiders from "../pool/wei-night-raiders.js";
+import _poolWelcomeToTheFold from "../pool/welcome-to-the-fold.js";
 import _poolWellgabberApothecary from "../pool/wellgabber-apothecary.js";
 import _poolWhirlerRogue from "../pool/whirler-rogue.js";
 import _poolWhisperingMadness from "../pool/whispering-madness.js";
@@ -969,6 +972,7 @@ const shard: CardShard = {
     _poolBileUrchin,
     _poolBind,
     _poolBirthOfTheImperium,
+    _poolBitterOrdeal,
     _poolBlackTomCassidy,
     _poolBlightedBurgeoning,
     _poolBlinkmothNexus,
@@ -1698,6 +1702,7 @@ const shard: CardShard = {
     _poolUnbreakableBond,
     _poolUndercityNecrolisk,
     _poolUndercityUpheaval,
+    _poolUndergrowth,
     _poolUndermine,
     _poolUnexpectedAssistance,
     _poolUnionOfTheThirdPath,
@@ -1739,6 +1744,7 @@ const shard: CardShard = {
     _poolWeakness,
     _poolWeddingInvitation,
     _poolWeiNightRaiders,
+    _poolWelcomeToTheFold,
     _poolWellgabberApothecary,
     _poolWhirlerRogue,
     _poolWhisperingMadness,

@@ -115,6 +115,7 @@ import _poolCarnivorousMossBeast from "../pool/carnivorous-moss-beast.js";
 import _poolCarrierThrall from "../pool/carrier-thrall.js";
 import _poolCartoucheOfKnowledge from "../pool/cartouche-of-knowledge.js";
 import _poolCaseOfTheShiftingVisage from "../pool/case-of-the-shifting-visage.js";
+import _poolCastThroughTime from "../pool/cast-through-time.js";
 import _poolCatOwl from "../pool/cat-owl.js";
 import _poolCausticCaterpillar from "../pool/caustic-caterpillar.js";
 import _poolCavesOfChaosAdventurer from "../pool/caves-of-chaos-adventurer.js";
@@ -769,6 +770,7 @@ import _poolSwordsmansSteel from "../pool/swordsmans-steel.js";
 import _poolSylviaBrightspear from "../pool/sylvia-brightspear.js";
 import _poolSymmetryMatrix from "../pool/symmetry-matrix.js";
 import _poolTahngarthTalruumHero from "../pool/tahngarth-talruum-hero.js";
+import _poolTaintedSpecter from "../pool/tainted-specter.js";
 import _poolTakeFlight from "../pool/take-flight.js";
 import _poolTakeToTheStreets from "../pool/take-to-the-streets.js";
 import _poolTakeVengeance from "../pool/take-vengeance.js";
@@ -1079,6 +1081,7 @@ const shard: CardShard = {
     _poolCarrierThrall,
     _poolCartoucheOfKnowledge,
     _poolCaseOfTheShiftingVisage,
+    _poolCastThroughTime,
     _poolCatOwl,
     _poolCausticCaterpillar,
     _poolCavesOfChaosAdventurer,
@@ -1733,6 +1736,7 @@ const shard: CardShard = {
     _poolSylviaBrightspear,
     _poolSymmetryMatrix,
     _poolTahngarthTalruumHero,
+    _poolTaintedSpecter,
     _poolTakeFlight,
     _poolTakeToTheStreets,
     _poolTakeVengeance,

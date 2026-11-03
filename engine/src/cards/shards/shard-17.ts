@@ -397,6 +397,7 @@ import _poolIronfistCrusher from "../pool/ironfist-crusher.js";
 import _poolIrontreadCrusher from "../pool/irontread-crusher.js";
 import _poolItlimocCradleOfTheSun from "../pool/itlimoc-cradle-of-the-sun.js";
 import _poolIzzetGuildgate from "../pool/izzet-guildgate.js";
+import _poolJaceMultiverseArchitect from "../pool/jace-multiverse-architect.js";
 import _poolJanglingAutomaton from "../pool/jangling-automaton.js";
 import _poolJarethLeonineTitan from "../pool/jareth-leonine-titan.js";
 import _poolJeskaiMonument from "../pool/jeskai-monument.js";
@@ -1295,6 +1296,7 @@ const shard: CardShard = {
     _poolIrontreadCrusher,
     _poolItlimocCradleOfTheSun,
     _poolIzzetGuildgate,
+    _poolJaceMultiverseArchitect,
     _poolJanglingAutomaton,
     _poolJarethLeonineTitan,
     _poolJeskaiMonument,

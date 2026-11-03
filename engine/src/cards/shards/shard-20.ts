@@ -54,6 +54,7 @@ import _poolAsForetold from "../pool/as-foretold.js";
 import _poolAscendedLawmage from "../pool/ascended-lawmage.js";
 import _poolAshiokSculptorOfFears from "../pool/ashiok-sculptor-of-fears.js";
 import _poolAshlingRimebound from "../pool/ashling-rimebound.js";
+import _poolAsmoranomardicadaistinaculdacar from "../pool/asmoranomardicadaistinaculdacar.js";
 import _poolAssassinsTrophy from "../pool/assassins-trophy.js";
 import _poolAtlantisAttacks from "../pool/atlantis-attacks.js";
 import _poolAuraFracture from "../pool/aura-fracture.js";
@@ -497,6 +498,7 @@ import _poolMirageMesa from "../pool/mirage-mesa.js";
 import _poolMirriCatWarrior from "../pool/mirri-cat-warrior.js";
 import _poolMirrorRoomFracturedRealm from "../pool/mirror-room-fractured-realm.js";
 import _poolMirrorform from "../pool/mirrorform.js";
+import _poolMirrorwingDragon from "../pool/mirrorwing-dragon.js";
 import _poolMischievousPoltergeist from "../pool/mischievous-poltergeist.js";
 import _poolMisthollowGriffin from "../pool/misthollow-griffin.js";
 import _poolMobilizedDistrict from "../pool/mobilized-district.js";
@@ -653,6 +655,7 @@ import _poolRiptideMangler from "../pool/riptide-mangler.js";
 import _poolRiseToGlory from "../pool/rise-to-glory.js";
 import _poolRishkarPeemaRenegade from "../pool/rishkar-peema-renegade.js";
 import _poolRitualOfSoot from "../pool/ritual-of-soot.js";
+import _poolRivazOfTheClaw from "../pool/rivaz-of-the-claw.js";
 import _poolRottedHystrix from "../pool/rotted-hystrix.js";
 import _poolRouseTheMob from "../pool/rouse-the-mob.js";
 import _poolRubyMedallion from "../pool/ruby-medallion.js";
@@ -1005,6 +1008,7 @@ const shard: CardShard = {
     _poolAscendedLawmage,
     _poolAshiokSculptorOfFears,
     _poolAshlingRimebound,
+    _poolAsmoranomardicadaistinaculdacar,
     _poolAssassinsTrophy,
     _poolAtlantisAttacks,
     _poolAuraFracture,
@@ -1448,6 +1452,7 @@ const shard: CardShard = {
     _poolMirriCatWarrior,
     _poolMirrorRoomFracturedRealm,
     _poolMirrorform,
+    _poolMirrorwingDragon,
     _poolMischievousPoltergeist,
     _poolMisthollowGriffin,
     _poolMobilizedDistrict,
@@ -1604,6 +1609,7 @@ const shard: CardShard = {
     _poolRiseToGlory,
     _poolRishkarPeemaRenegade,
     _poolRitualOfSoot,
+    _poolRivazOfTheClaw,
     _poolRottedHystrix,
     _poolRouseTheMob,
     _poolRubyMedallion,

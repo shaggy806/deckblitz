@@ -803,6 +803,7 @@ import _poolTyrantOfKherRidges from "../pool/tyrant-of-kher-ridges.js";
 import _poolTyrantsChoice from "../pool/tyrants-choice.js";
 import _poolUlamogTheInfiniteGyre from "../pool/ulamog-the-infinite-gyre.js";
 import _poolUmbrisFearManifest from "../pool/umbris-fear-manifest.js";
+import _poolUncivilUnrest from "../pool/uncivil-unrest.js";
 import _poolUndergrowthScavenger from "../pool/undergrowth-scavenger.js";
 import _poolUnderhandedDesigns from "../pool/underhanded-designs.js";
 import _poolUnearth from "../pool/unearth.js";
@@ -1701,6 +1702,7 @@ const shard: CardShard = {
     _poolTyrantsChoice,
     _poolUlamogTheInfiniteGyre,
     _poolUmbrisFearManifest,
+    _poolUncivilUnrest,
     _poolUndergrowthScavenger,
     _poolUnderhandedDesigns,
     _poolUnearth,

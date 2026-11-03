@@ -133,6 +133,7 @@ import _poolCateranSlaver from "../pool/cateran-slaver.js";
 import _poolCathedralAcolyte from "../pool/cathedral-acolyte.js";
 import _poolCathedralOfWar from "../pool/cathedral-of-war.js";
 import _poolCaughtInTheBrights from "../pool/caught-in-the-brights.js";
+import _poolChampionsOfMinasTirith from "../pool/champions-of-minas-tirith.js";
 import _poolChandler from "../pool/chandler.js";
 import _poolChangeOfHeart from "../pool/change-of-heart.js";
 import _poolChanneledForce from "../pool/channeled-force.js";
@@ -166,6 +167,7 @@ import _poolCroakingCounterpart from "../pool/croaking-counterpart.js";
 import _poolCrosswinds from "../pool/crosswinds.js";
 import _poolCruelSadist from "../pool/cruel-sadist.js";
 import _poolCurseOfTheRestlessDead from "../pool/curse-of-the-restless-dead.js";
+import _poolCursedMonstrosity from "../pool/cursed-monstrosity.js";
 import _poolCutIn from "../pool/cut-in.js";
 import _poolCyclopsTyrant from "../pool/cyclops-tyrant.js";
 import _poolDargoTheShipwrecker from "../pool/dargo-the-shipwrecker.js";
@@ -245,6 +247,7 @@ import _poolFblthpImpossiblyLost from "../pool/fblthp-impossibly-lost.js";
 import _poolFblthpTheLost from "../pool/fblthp-the-lost.js";
 import _poolFearOfDeath from "../pool/fear-of-death.js";
 import _poolFearlessLiberator from "../pool/fearless-liberator.js";
+import _poolFeatherRadiantArbiter from "../pool/feather-radiant-arbiter.js";
 import _poolFeloniousRage from "../pool/felonious-rage.js";
 import _poolFertileThicket from "../pool/fertile-thicket.js";
 import _poolFertilid from "../pool/fertilid.js";
@@ -679,6 +682,7 @@ import _poolSilvergillDouser from "../pool/silvergill-douser.js";
 import _poolSilverskinArmor from "../pool/silverskin-armor.js";
 import _poolSilverstrike from "../pool/silverstrike.js";
 import _poolSimicLocket from "../pool/simic-locket.js";
+import _poolSivrissNightmareSpeaker from "../pool/sivriss-nightmare-speaker.js";
 import _poolSkeletalChangeling from "../pool/skeletal-changeling.js";
 import _poolSkred from "../pool/skred.js";
 import _poolSkulkingKnight from "../pool/skulking-knight.js";
@@ -716,6 +720,7 @@ import _poolSpringmaneCervin from "../pool/springmane-cervin.js";
 import _poolSquiresDevotion from "../pool/squires-devotion.js";
 import _poolStaffOfDomination from "../pool/staff-of-domination.js";
 import _poolStaffOfTitania from "../pool/staff-of-titania.js";
+import _poolStalwartValkyrie from "../pool/stalwart-valkyrie.js";
 import _poolStampedingElkHerd from "../pool/stampeding-elk-herd.js";
 import _poolStarlightSnare from "../pool/starlight-snare.js";
 import _poolStartlingDevelopment from "../pool/startling-development.js";
@@ -1026,6 +1031,7 @@ const shard: CardShard = {
     _poolCathedralAcolyte,
     _poolCathedralOfWar,
     _poolCaughtInTheBrights,
+    _poolChampionsOfMinasTirith,
     _poolChandler,
     _poolChangeOfHeart,
     _poolChanneledForce,
@@ -1059,6 +1065,7 @@ const shard: CardShard = {
     _poolCrosswinds,
     _poolCruelSadist,
     _poolCurseOfTheRestlessDead,
+    _poolCursedMonstrosity,
     _poolCutIn,
     _poolCyclopsTyrant,
     _poolDargoTheShipwrecker,
@@ -1138,6 +1145,7 @@ const shard: CardShard = {
     _poolFblthpTheLost,
     _poolFearOfDeath,
     _poolFearlessLiberator,
+    _poolFeatherRadiantArbiter,
     _poolFeloniousRage,
     _poolFertileThicket,
     _poolFertilid,
@@ -1572,6 +1580,7 @@ const shard: CardShard = {
     _poolSilverskinArmor,
     _poolSilverstrike,
     _poolSimicLocket,
+    _poolSivrissNightmareSpeaker,
     _poolSkeletalChangeling,
     _poolSkred,
     _poolSkulkingKnight,
@@ -1609,6 +1618,7 @@ const shard: CardShard = {
     _poolSquiresDevotion,
     _poolStaffOfDomination,
     _poolStaffOfTitania,
+    _poolStalwartValkyrie,
     _poolStampedingElkHerd,
     _poolStarlightSnare,
     _poolStartlingDevelopment,

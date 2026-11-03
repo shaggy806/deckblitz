@@ -167,6 +167,7 @@ import _poolDisruptiveStormbrood from "../pool/disruptive-stormbrood.js";
 import _poolDisruptorFlute from "../pool/disruptor-flute.js";
 import _poolDogWalker from "../pool/dog-walker.js";
 import _poolDominatingVampire from "../pool/dominating-vampire.js";
+import _poolDomriChaosBringer from "../pool/domri-chaos-bringer.js";
 import _poolDoomskarOracle from "../pool/doomskar-oracle.js";
 import _poolDormantSliver from "../pool/dormant-sliver.js";
 import _poolDragonMantle from "../pool/dragon-mantle.js";
@@ -1036,6 +1037,7 @@ const shard: CardShard = {
     _poolDisruptorFlute,
     _poolDogWalker,
     _poolDominatingVampire,
+    _poolDomriChaosBringer,
     _poolDoomskarOracle,
     _poolDormantSliver,
     _poolDragonMantle,

@@ -66,6 +66,7 @@ import _poolBestialBloodline from "../pool/bestial-bloodline.js";
 import _poolBestialIncursion from "../pool/bestial-incursion.js";
 import _poolBetrayal from "../pool/betrayal.js";
 import _poolBlackMarketConnections from "../pool/black-market-connections.js";
+import _poolBlasphemousEdict from "../pool/blasphemous-edict.js";
 import _poolBlessedBreath from "../pool/blessed-breath.js";
 import _poolBlightGrenade from "../pool/blight-grenade.js";
 import _poolBloatedContaminator from "../pool/bloated-contaminator.js";
@@ -520,6 +521,7 @@ import _poolPathwayArrows from "../pool/pathway-arrows.js";
 import _poolPatientNaturalist from "../pool/patient-naturalist.js";
 import _poolPatriotShieldWielder from "../pool/patriot-shield-wielder.js";
 import _poolPeemaOutrider from "../pool/peema-outrider.js";
+import _poolPerplex from "../pool/perplex.js";
 import _poolPetalmaneBaku from "../pool/petalmane-baku.js";
 import _poolPhantasmalImage from "../pool/phantasmal-image.js";
 import _poolPhantasmalMount from "../pool/phantasmal-mount.js";
@@ -920,6 +922,7 @@ const shard: CardShard = {
     _poolBestialIncursion,
     _poolBetrayal,
     _poolBlackMarketConnections,
+    _poolBlasphemousEdict,
     _poolBlessedBreath,
     _poolBlightGrenade,
     _poolBloatedContaminator,
@@ -1374,6 +1377,7 @@ const shard: CardShard = {
     _poolPatientNaturalist,
     _poolPatriotShieldWielder,
     _poolPeemaOutrider,
+    _poolPerplex,
     _poolPetalmaneBaku,
     _poolPhantasmalImage,
     _poolPhantasmalMount,

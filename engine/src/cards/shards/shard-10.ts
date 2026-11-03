@@ -797,6 +797,7 @@ import _poolTomakulScrapsmith from "../pool/tomakul-scrapsmith.js";
 import _poolToothCollector from "../pool/tooth-collector.js";
 import _poolTorbranThaneOfRedFell from "../pool/torbran-thane-of-red-fell.js";
 import _poolTorchSong from "../pool/torch-song.js";
+import _poolTormentOfVenom from "../pool/torment-of-venom.js";
 import _poolTormentedSoul from "../pool/tormented-soul.js";
 import _poolToxrillTheCorrosive from "../pool/toxrill-the-corrosive.js";
 import _poolTranquilCove from "../pool/tranquil-cove.js";
@@ -1697,6 +1698,7 @@ const shard: CardShard = {
     _poolToothCollector,
     _poolTorbranThaneOfRedFell,
     _poolTorchSong,
+    _poolTormentOfVenom,
     _poolTormentedSoul,
     _poolToxrillTheCorrosive,
     _poolTranquilCove,

@@ -422,6 +422,7 @@ import _poolLiability from "../pool/liability.js";
 import _poolLichsRelic from "../pool/lichs-relic.js";
 import _poolLifeMatrix from "../pool/life-matrix.js";
 import _poolLightningElemental from "../pool/lightning-elemental.js";
+import _poolLimDulsHex from "../pool/lim-duls-hex.js";
 import _poolLingeringDeath from "../pool/lingering-death.js";
 import _poolLivingPhone from "../pool/living-phone.js";
 import _poolLoafingGiant from "../pool/loafing-giant.js";
@@ -745,6 +746,7 @@ import _poolTheRani from "../pool/the-rani.js";
 import _poolTheReaperKingNoMore from "../pool/the-reaper-king-no-more.js";
 import _poolTheSensationalSheHulk from "../pool/the-sensational-she-hulk.js";
 import _poolTheVision from "../pool/the-vision.js";
+import _poolThiefOfExistence from "../pool/thief-of-existence.js";
 import _poolThievingVarmint from "../pool/thieving-varmint.js";
 import _poolThirdPathIconoclast from "../pool/third-path-iconoclast.js";
 import _poolThirstingBloodlord from "../pool/thirsting-bloodlord.js";
@@ -1299,6 +1301,7 @@ const shard: CardShard = {
     _poolLichsRelic,
     _poolLifeMatrix,
     _poolLightningElemental,
+    _poolLimDulsHex,
     _poolLingeringDeath,
     _poolLivingPhone,
     _poolLoafingGiant,
@@ -1622,6 +1625,7 @@ const shard: CardShard = {
     _poolTheReaperKingNoMore,
     _poolTheSensationalSheHulk,
     _poolTheVision,
+    _poolThiefOfExistence,
     _poolThievingVarmint,
     _poolThirdPathIconoclast,
     _poolThirstingBloodlord,

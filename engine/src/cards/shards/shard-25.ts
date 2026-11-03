@@ -358,6 +358,7 @@ import _poolIndigoFaerie from "../pool/indigo-faerie.js";
 import _poolIndomitableWill from "../pool/indomitable-will.js";
 import _poolInfantryShield from "../pool/infantry-shield.js";
 import _poolInfernoElemental from "../pool/inferno-elemental.js";
+import _poolIngeniousMastery from "../pool/ingenious-mastery.js";
 import _poolIngenuityEngine from "../pool/ingenuity-engine.js";
 import _poolInkwellLeviathan from "../pool/inkwell-leviathan.js";
 import _poolInnerDemonsGangsters from "../pool/inner-demons-gangsters.js";
@@ -506,6 +507,7 @@ import _poolOrnithopter from "../pool/ornithopter.js";
 import _poolOrthionHeroOfLavabrink from "../pool/orthion-hero-of-lavabrink.js";
 import _poolOrthodoxyEnforcer from "../pool/orthodoxy-enforcer.js";
 import _poolOscorpResearchTeam from "../pool/oscorp-research-team.js";
+import _poolOverencumbered from "../pool/overencumbered.js";
 import _poolPangosaur from "../pool/pangosaur.js";
 import _poolParanoidParishBlade from "../pool/paranoid-parish-blade.js";
 import _poolParaselene from "../pool/paraselene.js";
@@ -1215,6 +1217,7 @@ const shard: CardShard = {
     _poolIndomitableWill,
     _poolInfantryShield,
     _poolInfernoElemental,
+    _poolIngeniousMastery,
     _poolIngenuityEngine,
     _poolInkwellLeviathan,
     _poolInnerDemonsGangsters,
@@ -1363,6 +1366,7 @@ const shard: CardShard = {
     _poolOrthionHeroOfLavabrink,
     _poolOrthodoxyEnforcer,
     _poolOscorpResearchTeam,
+    _poolOverencumbered,
     _poolPangosaur,
     _poolParanoidParishBlade,
     _poolParaselene,
