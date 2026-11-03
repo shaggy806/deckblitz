@@ -857,6 +857,10 @@ export type EffectAmount =
    * as that ability resolves. Prevention's immediate additional effect (rule
    * 615.5 — Temper, right after each hit) is a `then` with `"x"` instead. */
   | { readonly damagePreventedThisWay: true }
+  /** The cards a scry or surveil of this resolution left on top of the
+   * library — Starving Revenant's "surveil 2. Then for each card you put on
+   * top of your library, …". A count: which cards they are stays hidden. */
+  | { readonly keptOnTopThisWay: true }
   /**
    * A per-player running total for this turn ({@link TurnStat}), summed over
    * the players `who` names (default `"you"`) — Kydele's "{C} for each card
@@ -1692,6 +1696,17 @@ export type ThisWayKind =
    * `shuffle-graveyard-into-library`, or `put-on-libraries`' `"shuffle"`).
    * Counted by the library's owner. */
   | "shuffled-into-library"
+  /** Permanents it gave a new controller (`control-changed`) — Coveted
+   * Falcon's "for each one they gained control of this way", Kain's "If they
+   * do". Counted by the new controller; a stack changes hands whole. A player
+   * who already controlled it didn't gain it. */
+  | "gained-control"
+  /** Permanents a control-changing effect of this resolution applied to,
+   * whether or not they changed hands — "Untap them", "Untap those creatures"
+   * (Broadcast Takeover; Mob Rule, whose ruling says they include the ones you
+   * already controlled, whatever their power has become by then). Counted by
+   * the controller now. */
+  | "control-effect"
   /** Permanents it tapped — Myr Battlesphere's "you may tap X untapped Myr
    * you control. If you do, this creature gets +X/+0": a `choose-permanents`
    * tapping them, then this. One already tapped isn't tapped again, and so
@@ -9471,6 +9486,8 @@ export interface EffectApi {
   damageDealtThisWay(to?: TargetRef): number;
   /** See the `damagePreventedThisWay` {@link EffectAmount}. */
   damagePreventedThisWay(): number;
+  /** See the `keptOnTopThisWay` {@link EffectAmount}. */
+  keptOnTopThisWay(): number;
   /** Announce that the effect's controller foraged — see the `foraged`
    * {@link EffectSpec}. */
   foraged(): void;
@@ -12633,6 +12650,7 @@ function signedAmountValue(
     return ref === undefined ? 0 : ctx.damageDealtThisWay(ref);
   }
   if ("damagePreventedThisWay" in amount) return ctx.damagePreventedThisWay();
+  if ("keptOnTopThisWay" in amount) return ctx.keptOnTopThisWay();
   if ("turnStat" in amount) {
     if (amount.target !== undefined) {
       const ref = ctx.targets[amount.target];

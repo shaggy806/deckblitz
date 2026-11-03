@@ -10022,6 +10022,55 @@ describe("damage prevented this way", () => {
   });
 });
 
+describe("what an earlier step did, read by a later one", () => {
+  const spell = (oracle_text: string) =>
+    (parseFace({ name: "Card", type_line: "Sorcery", oracle_text }, { tokenFor: () => null }) as unknown as { effect: unknown }).effect;
+
+  it("reads what a gain-control-all took, or applied to", () => {
+    const thisWay = "control-effect";
+    const taken = (what: string, filter: unknown, them: string) => {
+      expect(spell(`Gain control of all ${what} until end of turn. Untap ${them}. They gain haste until end of turn.`)).toEqual({
+        kind: "sequence",
+        effects: [
+          { kind: "gain-control-all", filter, untilEndOfTurn: true },
+          { kind: "untap-all", filter: { thisWay } },
+          { kind: "grant-keyword-all", filter: { thisWay }, keyword: "haste", duration: "end-of-turn" },
+        ],
+      });
+    };
+    taken("artifacts your opponents control", { type: "artifact", controlledBy: "opponent" }, "them");
+    taken("creatures with power 4 or greater", { type: "creature", power: { op: "gte", n: 4 } }, "those creatures");
+  });
+
+  it("reads what a reveal-until or a shuffle did", () => {
+    const madcap = spell(
+      "Reveal cards from the top of your library until you reveal an artifact card. Put that card onto the battlefield and the rest on the bottom of your library in a random order. ~ deals damage to you equal to the number of cards revealed this way.",
+    ) as { effects: unknown[] };
+    expect(madcap.effects.at(-1)).toEqual({ kind: "damage", amount: { thisWay: "revealed" }, who: "you" });
+    expect(spell("Shuffle all cards from your graveyard into your library. Target player mills that many cards.")).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "shuffle-graveyard-into-library", target: "you" },
+        { kind: "mill", target: 0, amount: { thisWay: "shuffled-into-library" } },
+      ],
+    });
+  });
+
+  it("reads a count of the cards a surveil kept on top", () => {
+    expect(spell("Surveil 2. Then for each card you put on top of your library, you draw a card and you lose 3 life.")).toEqual({
+      kind: "surveil",
+      amount: 2,
+      then: {
+        kind: "sequence",
+        effects: [
+          { kind: "draw", amount: { keptOnTopThisWay: true } },
+          { kind: "lose-life", amount: { product: [{ keptOnTopThisWay: true }, 3] } },
+        ],
+      },
+    });
+  });
+});
+
 describe("an effect done by another player", () => {
   it("reads 'target player scries N' as as-player, on a player slot", () => {
     const parsed = parseEffect("Target player scries 2.", ctx());

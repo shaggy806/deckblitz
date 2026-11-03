@@ -76,8 +76,8 @@ export default defineCard({
         kind: "sequence",
         effects: [
           { kind: "gain-control-all", filter: nonland, untilEndOfTurn: true },
-          { kind: "untap-all", filter: { ...nonland, controlledBy: "you" } },
-          { kind: "grant-keyword-all", filter: { ...nonland, controlledBy: "you" }, keyword: "haste", duration: "end-of-turn" },
+          { kind: "untap-all", filter: { thisWay: "control-effect" } },
+          { kind: "grant-keyword-all", filter: { thisWay: "control-effect" }, keyword: "haste", duration: "end-of-turn" },
         ],
       },
       resolve: null,

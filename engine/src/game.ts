@@ -466,6 +466,7 @@ import {
   damagePreventedBy,
   eventsSince as eventLogSince,
   excessDamageSince,
+  keptOnTopSince,
   lifeLostSince,
   playerCountersRemovedSince,
   thisWayEntries,
@@ -28918,14 +28919,15 @@ export class Game {
       commanderCastsBy: (player) =>
         Object.values(this.state.players[player]?.commanderCastCounts ?? {}).reduce((n, c) => n + c, 0),
       powerAmong: (entries, of = "power") =>
-        entries.reduce((n, { object: id, departed, count }) => {
+        entries.reduce((n, { object: id, departed, count, revealed }) => {
           const object = this.state.objects[id];
           if (of === "mana-value") {
             // "The total mana value of those cards": each found where it
-            // went, if that's a public zone (rule 701.17c), {X} as 0.
+            // went, if that's a public zone (rule 701.17c) or it was shown
+            // doing this, {X} as 0.
             const known = object === undefined ? this.state.ceasedTokens?.[id] : departed ? object.lastKnown : undefined;
             if (known !== undefined) return n + known.manaValue * count;
-            if (object === undefined || object.zone === "library" || object.zone === "hand") return n;
+            if (object === undefined || (revealed !== true && (object.zone === "library" || object.zone === "hand"))) return n;
             return n + this.manaValueOfTarget({ kind: "object", object: id }) * count;
           }
           const value =
@@ -29085,6 +29087,7 @@ export class Game {
       excessDamageThisWay: (to) => excessDamageSince(this.state, since, to),
       damageDealtThisWay: (to) => damageDealtSince(this.state, since, to),
       damagePreventedThisWay: () => damagePreventedBy(this.state, refs?.madeIn ?? since),
+      keptOnTopThisWay: () => keptOnTopSince(this.state, since),
       exileDamagedThisWayIfTheyDie: (creaturesOnly) => {
         // Every permanent this resolution has dealt damage to so far — damage
         // prevented was never dealt (rule 615.1) — or only the creatures
@@ -43161,6 +43164,7 @@ export class Game {
       controller: player,
       timestamp,
       untilEndOfTurn,
+      madeAtSeq: this.state.eventSeq,
       ...(entered ? { entered: true } : {}),
       ...(whileSource !== undefined ? { whileSource } : {}),
     };

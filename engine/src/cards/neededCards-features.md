@@ -4109,3 +4109,12 @@ in a delayed ability it set up too (`LastKnownRefs.madeIn`). A chosen source's `
 targets, not the source chosen (`ownTargets`). Key: amount:damage-prevented-this-way. Found to need nothing:
 effect:prevent-all-damage-by-filter (`damage-rule`'s `by.filter`). Proving cards: Sacred Boon, Scars of the
 Veteran, Bone Mask, Brace for Impact, Refraction Trap, Chant of Vitu-Ghazi.
+
+**What an earlier step did: control and counts (2026-11-02).** `ThisWayKind`'s `"gained-control"` (what really changed
+hands) and `"control-effect"` (what a control effect applied to, already yours or not: Mob Rule's ruling;
+`ControlEffect.madeAtSeq`), and the `keptOnTopThisWay` amount (a count off `scried`, the cards stay hidden). A revealed
+card's mana value now reads in a hidden zone. Dihada, Rowan and Tibalt's "Untap them" moved to `"control-effect"`.
+Keys: effect:this-way-gained-control, effect:surveil-kept-on-top-count. Found to need no code: effect:returned-this-way-grant
+(`put-onto-battlefield`), amount:cards-revealed-this-way (`reveal-until` already reports them), amount:cards-shuffled-this-way
+(`shuffled-into-library`). Proving cards: Broadcast Takeover, Mob Rule, Wake the Past, Coveted Falcon, Kain, Yes Man, Madcap
+Experiment, Goblin Charbelcher, Kamahl's Summons, Naya Soulbeast, Psychic Spiral, Starving Revenant.

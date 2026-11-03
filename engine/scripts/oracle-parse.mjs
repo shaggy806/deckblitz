@@ -2586,6 +2586,9 @@ export function parseSentence(sentence, ctx) {
       return { kind: "shuffle-graveyard-into-library", target, filter };
     }
   }
+  if (/^shuffle all cards from your graveyard into your library\.$/i.test(s)) {
+    return { kind: "shuffle-graveyard-into-library", target: "you" };
+  }
   if (/^you gain life equal to the number of cards shuffled into your library this way\.$/i.test(s)) {
     return { kind: "gain-life", amount: { thisWay: "shuffled-into-library" } };
   }
@@ -3596,6 +3599,24 @@ export function parseSentence(sentence, ctx) {
   // the effect lasts, which without a duration is the rest of the game.
   if ((m = re(`gain control of (${TARGET})( until end of turn)?`).exec(s))) {
     return { kind: "gain-control", target: slot(m[1]), untilEndOfTurn: m[2] !== undefined };
+  }
+  // "Gain control of all artifacts your opponents control until end of turn"
+  // (Broadcast Takeover), "… all creatures with power 4 or greater …" (Mob Rule).
+  if ((m = re(`gain control of all (.+) until end of turn`).exec(s))) {
+    const theirs = /^(.+) your opponents control$/i.exec(m[1]);
+    const strong = /^(.+) with power (\d+) or (greater|less)$/i.exec(theirs?.[1] ?? m[1]);
+    const filter = parseTypePhrase(strong?.[1] ?? theirs?.[1] ?? m[1]);
+    if (filter !== null && Object.keys(filter).length > 0) {
+      return {
+        kind: "gain-control-all",
+        filter: {
+          ...filter,
+          ...(strong !== null ? { power: { op: strong[3].toLowerCase() === "greater" ? "gte" : "lte", n: Number(strong[2]) } } : {}),
+          ...(theirs !== null ? { controlledBy: "opponent" } : {}),
+        },
+        untilEndOfTurn: true,
+      };
+    }
   }
   // "Exile target creature an opponent controls until an opponent becomes the
   // monarch" (Palace Jailer), "… until target enchantment you control leaves the
@@ -6506,6 +6527,65 @@ export function parseEffect(text, outer) {
       };
       parsed.push(...both.effects);
       hints.push({ sentence, effect: both });
+      continue;
+    }
+    // What the step before did, read by this one. "Untap them" / "Untap those
+    // creatures" after a gain-control-all: what the effect applied to, already
+    // yours or not (Mob Rule's ruling), whatever its power has become.
+    const priorStep = parsed.at(-1);
+    const untapTaken = /^untap (?:them|those creatures)\.$/i.exec(sentence);
+    if (untapTaken !== null && priorStep?.kind === "gain-control-all") {
+      const untap = { kind: "untap-all", filter: { thisWay: "control-effect" } };
+      parsed.push(untap);
+      hints.push({ sentence, effect: untap });
+      continue;
+    }
+    // "They gain haste until end of turn." after that untap (the same
+    // permanents), or a return to the battlefield (Wake the Past).
+    if (/^they gain haste until end of turn\.$/i.test(sentence)) {
+      const those =
+        priorStep?.kind === "untap-all" && priorStep.filter?.thisWay !== undefined
+          ? priorStep.filter.thisWay
+          : priorStep?.kind === "return-from-graveyard" && priorStep.destination === "battlefield"
+            ? "put-onto-battlefield"
+            : null;
+      if (those !== null) {
+        const haste = { kind: "grant-keyword-all", filter: { thisWay: those }, keyword: "haste", duration: "end-of-turn" };
+        parsed.push(haste);
+        hints.push({ sentence, effect: haste });
+        continue;
+      }
+    }
+    // "~ deals damage to you equal to the number of cards revealed this way."
+    // after a reveal-until (Madcap Experiment, Audacious Reshapers).
+    if (/^~ deals damage to you equal to the number of cards revealed this way\.$/i.test(sentence) && priorStep?.kind === "reveal-until") {
+      const burn = { kind: "damage", amount: { thisWay: "revealed" }, who: "you" };
+      parsed.push(burn);
+      hints.push({ sentence, effect: burn });
+      continue;
+    }
+    // "Target player mills that many cards." after a shuffle into the library
+    // (Psychic Spiral).
+    if (/^target player mills that many cards\.$/i.test(sentence) && priorStep?.kind === "shuffle-graveyard-into-library") {
+      const mill = { kind: "mill", target: ctx.target("player"), amount: { thisWay: "shuffled-into-library" } };
+      parsed.push(mill);
+      hints.push({ sentence, effect: mill });
+      continue;
+    }
+    // "Then for each card you put on top of your library, you draw a card and
+    // you lose 3 life." after a surveil (Starving Revenant).
+    const keptM = /^then for each card you put on top of your library, you draw a card and you lose (\d+) life\.$/i.exec(sentence);
+    if (keptM !== null && (priorStep?.kind === "surveil" || priorStep?.kind === "scry") && priorStep.then === undefined) {
+      parsed[parsed.length - 1] = {
+        ...priorStep,
+        then: {
+          kind: "sequence",
+          effects: [
+            { kind: "draw", amount: { keptOnTopThisWay: true } },
+            { kind: "lose-life", amount: { product: [{ keptOnTopThisWay: true }, Number(keptM[1])] } },
+          ],
+        },
+      };
       continue;
     }
     // "For each 1 damage prevented this way, put a +1/+1 counter on that

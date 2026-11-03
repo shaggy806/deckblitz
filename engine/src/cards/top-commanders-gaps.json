@@ -2,6 +2,11 @@
  "generated": "2026-09-22",
  "source": "Per-commander triage of every unimplemented top-commanders.txt entry (AI agents reading Oracle text + rulings against the engine), normalized onto one feature vocabulary. See neededCards-features.md, 'The commander gap'.",
  "built": [
+  "effect:returned-this-way-grant",
+  "effect:this-way-gained-control",
+  "amount:cards-revealed-this-way",
+  "amount:cards-shuffled-this-way",
+  "effect:surveil-kept-on-top-count",
   "amount:damage-prevented-this-way",
   "effect:prevent-all-damage-by-filter",
   "effect:damage-from-attached",

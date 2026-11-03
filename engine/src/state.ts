@@ -104,6 +104,8 @@ export interface ControlEffect {
   readonly timestamp: number;
   /** Act of Treason's "until end of turn" — ends in the cleanup step. */
   readonly untilEndOfTurn: boolean;
+  /** The event it was made at — the `"control-effect"` this-way read. */
+  readonly madeAtSeq?: number;
   /** Made by "put it onto the battlefield under your control" rather than a
    * control-changing effect: `controller` is then who the permanent entered
    * under, its default controller (rule 110.2). The two differ only once that

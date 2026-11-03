@@ -1031,6 +1031,24 @@ and toughness, `add-mana`'s and `gain-life`'s amount; Phabine's "for each
 land card" is `PARLEY_LAND`. The scaffolder reads the three sentences when X
 is one unit of a sentence it reads.
 
+**"Those creatures", "they gained control of this way".** `thisWay:
+"control-effect"` (a filter clause or an amount) is every permanent a control
+effect of this resolution applied to, already yours or not: "Untap them. They
+gain haste" after a `gain-control-all` is an `untap-all` and a
+`grant-keyword-all` of `{ thisWay: "control-effect" }` (Mob Rule's ruling).
+`"gained-control"` is only what really changed hands, by its new controller:
+Coveted Falcon's `draw` of that amount, Kain's and Yes Man's "if they do" as a
+`this-way` condition. "They gain haste" after a return to the battlefield is
+`{ thisWay: "put-onto-battlefield" }` (Wake the Past).
+
+**Cards revealed this way, kept on top.** A `reveal-until` reports what it
+revealed, so a following step reads `{ thisWay: "revealed", filter? }` wherever
+the cards went (Madcap Experiment; Goblin Charbelcher's nonland count, its
+Mountain a `this-way` condition with a `filter`). `sumOf: "mana-value"` reads a
+revealed card even in a library (Naya Soulbeast, whose cast trigger gives the
+spell `enters-with-counters`). `{ keptOnTopThisWay: true }` counts what a `scry`
+or `surveil` left on top, in its `then` (Starving Revenant).
+
 **"The damage prevented this way."** Right after each hit it's the shield's
 `then` with `"x"` (rule 615.5 — Temper, Brace for Impact, Bone Mask, Refraction
 Trap; a `prevent-damage-from-chosen-source`'s `then` reads the spell's own

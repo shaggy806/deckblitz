@@ -30,6 +30,9 @@ export interface ThisWayEntry {
   readonly departed: boolean;
   /** How many permanents it stands for: a token stack that went whole. */
   readonly count: number;
+  /** Shown to everyone: its mana value can be read in a hidden zone too (Naya
+   * Soulbeast's "the total mana value of all cards revealed this way"). */
+  readonly revealed?: true;
 }
 
 /** The events since `seq` (inclusive), oldest first. The log is append-only
@@ -131,6 +134,16 @@ export function damagePreventedBy(state: GameState, madeIn: number): number {
   return prevented;
 }
 
+/** The cards the scries and surveils since event `since` looked at and left on
+ * top of the library — see the `keptOnTopThisWay` amount. */
+export function keptOnTopSince(state: GameState, since: number): number {
+  let kept = 0;
+  for (const event of eventsSince(state, since)) {
+    if (event.type === "scried") kept += event.looked - event.movedAway;
+  }
+  return kept;
+}
+
 /**
  * What the resolution that began at event `since` — by default the one under
  * way, and nothing between resolutions — has done `what` to, each object
@@ -170,6 +183,17 @@ export function thisWayEntries(
     }
     arrived.sort((a, b) => a.seq - b.seq);
     for (const { id, owner } of arrived) add(id, owner, false);
+    return out;
+  }
+  // Read off the permanents, not the log: a control effect on a permanent its
+  // player already controls changes nothing, so no event says it applied.
+  if (what === "control-effect") {
+    for (const id of state.zones.shared.battlefield) {
+      const object = state.objects[id];
+      if (object?.controlEffects?.some((e) => e.entered !== true && (e.madeAtSeq ?? -1) >= since) === true) {
+        out.push({ object: id, player: object.controller, departed: false, count: object.stackCount ?? 1 });
+      }
+    }
     return out;
   }
   // What left the battlefield for a graveyard, for "died": a destroyed
@@ -270,6 +294,16 @@ export function thisWayEntries(
         // — the mulligan's bottoming never happens during a resolution).
         if (event.type === "cards-put-on-bottom") for (const id of event.objects) add(id, event.player, false);
         break;
+      case "gained-control":
+        // A stack changes hands whole.
+        if (event.type === "control-changed" && !seen.has(event.object)) {
+          const object = state.objects[event.object];
+          if (object !== undefined) {
+            seen.add(event.object);
+            out.push({ object: event.object, player: event.controller, departed: false, count: object.stackCount ?? 1 });
+          }
+        }
+        break;
       case "tapped":
         // A stack tapped whole is every token in it.
         if (event.type === "permanent-tapped" && !seen.has(event.object)) {
@@ -309,7 +343,11 @@ export function thisWayEntries(
         // their library") or a hand (the Scents' "reveal any number of green
         // cards in your hand"), counted by the player who revealed it.
         if (event.type === "cards-revealed" && (event.from === "library" || event.from === "hand")) {
-          for (const id of event.objects) add(id, event.player, false);
+          for (const id of event.objects) {
+            if (seen.has(id)) continue;
+            seen.add(id);
+            out.push({ object: id, player: event.player, departed: false, count: 1, revealed: true });
+          }
         }
         break;
       case "put-onto-battlefield":
