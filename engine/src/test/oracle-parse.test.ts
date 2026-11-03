@@ -11957,6 +11957,15 @@ describe("landwalk of a kind no keyword names", () => {
   });
 });
 
+describe("whenever one or more ... become tapped", () => {
+  it.each([
+    ["Whenever one or more creatures you control become tapped", { type: "creature" }],
+    ["Whenever one or more nontoken Merfolk you control become tapped", { subtype: "Merfolk", token: false }],
+  ])("%s", (clause, filter) => {
+    expect(parseTrigger(clause)).toEqual([{ on: "becomes-tapped", who: "you-control", filter, batched: true }]);
+  });
+});
+
 describe("requirements a whole declaration answers", () => {
   const staticOf = (type_line: string, oracle_text: string): Record<string, unknown> => {
     const { text: _text, ...rest } = (

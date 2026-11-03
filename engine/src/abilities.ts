@@ -2188,6 +2188,19 @@ export type TriggerSpec =
       readonly on: "becomes-tapped";
       readonly who: TriggerWho;
       readonly filter?: CardFilter;
+      /** "Whenever **one or more** … become tapped" (Deeproot Pilgrimage, Rewrite
+       * History): once per tapping at the same time, however many matched —
+       * a whole attack declaration, a `tap-all`, one cost. Its trigger object
+       * is the first of them to match; don't read it. */
+      readonly batched?: true;
+      /** "… becomes tapped **for the first time** [this turn]" (Tale of Katara
+       * and Toph, with a `your-turn` condition for "during each of your turns"):
+       * only the first time that object has become tapped this turn, even if
+       * that was before this ability's source arrived. */
+      readonly firstTimeEachTurn?: true;
+      /** "… if it isn't being declared as an attacker" (Verity Circle): not the
+       * tapping of an attack declaration (rule 508.1f). */
+      readonly notAttacking?: true;
     }
   | {
       /** A creature fought (rule 701.14) — Foe-Razer Regent's "whenever a

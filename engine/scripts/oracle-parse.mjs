@@ -1660,6 +1660,16 @@ export function parseTrigger(clause) {
   const c = clause.replace(/\s+/g, " ").trim();
   let m;
   const self = (on) => [{ on, who: "self" }];
+  // Once per tapping at the same time (`batched`), however many of them.
+  if ((m = /^Whenever one or more (creatures|nontoken [A-Z][a-z]+|[A-Z][a-z]+) you control become tapped$/.exec(c))) {
+    const filter =
+      m[1] === "creatures"
+        ? { type: "creature" }
+        : m[1].startsWith("nontoken ")
+          ? { subtype: m[1].slice("nontoken ".length), token: false }
+          : { subtype: m[1].replace(/s$/, "") };
+    return [{ on: "becomes-tapped", who: "you-control", filter, batched: true }];
+  }
   if (/^When(?:ever)? ~ enters$/.test(c)) return self("enters-battlefield");
   if (/^When(?:ever)? ~ enters or attacks$/.test(c)) return [...self("enters-battlefield"), ...self("attacks")];
   if (/^When(?:ever)? ~ dies$/.test(c)) return self("dies");

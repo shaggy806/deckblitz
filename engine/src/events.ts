@@ -577,7 +577,14 @@ export type GameEvent =
        * (Prosper, Tome-Bound). */
       readonly from: ZoneType;
     })
-  | (Base & { readonly type: "permanent-tapped"; readonly object: ObjectId })
+  | (Base & {
+      readonly type: "permanent-tapped";
+      readonly object: ObjectId;
+      /** The first time this object became tapped this turn (`Game.emit` says). */
+      readonly firstThisTurn?: true;
+      /** Tapped by being declared as an attacker (rule 508.1f). */
+      readonly asAttacker?: true;
+    })
   | (Base & {
       /** A mana ability of `object` with {T} in its cost resolved and made
        * mana (rule 106.12a): "whenever … is tapped for mana". `player`

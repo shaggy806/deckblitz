@@ -4258,6 +4258,17 @@ Wolverine: blocking now, not `blocked`, rule 509.1h). "For each creature it's
 blocking" (Guardian of the Gateless) needed nothing new: `countOf` over
 `blockingRelation: "blocked-by"`.
 
+### The forms of "becomes tapped" — built 2026-11-03
+
+The need-keys Phase 2 group `trigger:becomes-tapped-batch`. `becomes-tapped` gained
+`batched` ("one or more … become tapped": once per tapping at the same time, a whole
+attack declaration or `tap-all` or one spell's sequence of taps; Deeproot Pilgrimage),
+`firstTimeEachTurn` (`GameObject.tappedOnTurn`, set in `Game.emit` for every tapping;
+Tale of Katara and Toph with a `your-turn` condition) and `notAttacking` (Verity
+Circle). Captain America, Living Legend's "if it's the first time" is an intervening
+if, so it also has to hold as the ability resolves: not read yet, so that card waits
+on a look at the creature's count.
+
 ### Combat requirements only a whole declaration answers — built 2026-11-03
 
 The need-keys Phase 2 family `static:combat-restriction-extensions`' first units.

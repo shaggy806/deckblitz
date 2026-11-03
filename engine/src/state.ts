@@ -420,6 +420,10 @@ export interface GameObject {
    * "can't attack a player it has already attacked this turn" (Port Razer).
    * Reset as each turn begins, and by any zone change, like `attackedThisTurn`. */
   attackedPlayersThisTurn?: PlayerId[];
+  /** The turn this object last became tapped, in this battlefield stint (rule
+   * 400.7), so a tapping can say whether it's the first this turn. Cleared as a
+   * turn begins, so it keeps no two tokens apart for long. */
+  tappedOnTurn?: number;
   /** True once this permanent has been declared as an attacker attacking a
    * battle this turn (rule 506.3) — War Historian's "as long as it attacked
    * a battle this turn", which holds from that declaration for the rest of

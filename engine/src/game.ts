@@ -1905,6 +1905,14 @@ export class Game {
    * held back until all of its permanents are on the battlefield — see
    * {@link withEnterBatch}. `null` outside one. */
   private enterAnnouncements: GameEventInput[] | null = null;
+  /** The batched `becomes-tapped` abilities that have fired for the tapping
+   * under way: permanents tapped at once are announced one event after another,
+   * or held together across an attack declaration's own events (`tapBatchHeld`).
+   * `lastTapSeq` is how the next tapping tells. Not game state: nothing waits
+   * between two events of one tapping. */
+  private readonly tapBatchFired = new Set<string>();
+  private tapBatchHeld = false;
+  private lastTapSeq = -2;
   /** Resolutions since a player last did anything but pass priority, and
    * what the latest of them were — see `noteMandatoryResolution`. Not game
    * state: a restored game counts afresh. */
@@ -8095,6 +8103,7 @@ export class Game {
       if (object.attackedThisTurn === true) object.attackedThisTurn = false;
       delete object.attackedPlayersThisTurn;
       delete object.attackedBattleThisTurn;
+      delete object.tappedOnTurn;
       if (object.dealtDamage?.thisTurn !== undefined) object.dealtDamage = { combat: object.dealtDamage.combat };
     }
     this.state.extraCombats = 0;
@@ -11205,13 +11214,16 @@ export class Game {
    */
   private announceAttackers(declaredNow: readonly DeclaredAttacker[]): void {
     const allAttackers = declaredNow.map((d) => d.id);
+    // They all became tapped at once (rule 508.1f), an event apiece between.
+    this.tapBatchFired.clear();
+    this.tapBatchHeld = true;
     for (const { id, defender, taps, first } of declaredNow) {
       // Attacking *taps* the creature, so a "becomes tapped" trigger (rule
       // 701.21a) fires here exactly as it would for a cost or for convoke —
       // Emmara, Soul of the Accord makes its Soldier when it attacks. This was
       // setting the flag without announcing it, so those triggers silently
       // never fired on the commonest way a creature gets tapped.
-      if (taps) this.emit({ type: "permanent-tapped", object: id });
+      if (taps) this.emit({ type: "permanent-tapped", object: id, asAttacker: true });
       this.emit({ type: "attacker-declared", attacker: id, defender, ...(first ? { firstThisTurn: true as const } : {}) });
       // Who attacked whom, for the bots' sense of threat (`PlayerState.
       // lastAttackedBy`): a planeswalker's controller counts as attacked, and
@@ -11223,6 +11235,7 @@ export class Game {
         record[attackerController] = this.state.turn.number;
       }
     }
+    this.tapBatchHeld = false;
     // Exalted (rule 702.111a — needed-cards P15): a single dedicated event
     // once the whole declaration is known, rather than checking "how many
     // attackers so far" per `attacker-declared` (which would wrongly read as
@@ -26624,6 +26637,9 @@ export class Game {
           const batchedEntry =
             ability.trigger.on === "enters-battlefield" && ability.trigger.batched === true;
           if (batchedEntry) this.enterBatchFired?.add(`${id}#${index}`);
+          if (ability.trigger.on === "becomes-tapped" && ability.trigger.batched === true) {
+            this.tapBatchFired.add(`${id}#${index}`);
+          }
           // Each token of the watcher's own stack has the ability, and each
           // triggers (rule 603.2) — except for counters a batch entering
           // with them brought onto it: those were put on the new tokens only
@@ -27316,6 +27332,7 @@ export class Game {
    * an entry outside a batch is its own event.
    */
   private enterBatchAlreadyFired(spec: TriggerSpec, key: string): boolean {
+    if (spec.on === "becomes-tapped") return spec.batched === true && this.tapBatchFired.has(key);
     return (
       spec.on === "enters-battlefield" &&
       spec.batched === true &&
@@ -27914,6 +27931,8 @@ export class Game {
       case "becomes-tapped":
         return (
           event.type === "permanent-tapped" &&
+          (spec.firstTimeEachTurn !== true || event.firstThisTurn === true) &&
+          (spec.notAttacking !== true || event.asAttacker !== true) &&
           this.matchesWho(spec.who, event.object, self) &&
           this.triggerFilterOk(spec.filter, event.object, self)
         );
@@ -50674,6 +50693,7 @@ export class Game {
     delete object.attackedThisTurn;
     delete object.attackedPlayersThisTurn;
     delete object.attackedBattleThisTurn;
+    delete object.tappedOnTurn;
     delete object.lastAttack;
     delete object.mustAttackPlayer;
     delete object.mustAttackPlayerThisCombat;
@@ -51936,7 +51956,18 @@ export class Game {
     }
     const seq = this.state.eventSeq;
     this.state.eventSeq += 1;
-    const full = { ...event, seq } as GameEvent;
+    let full = { ...event, seq } as GameEvent;
+    if (full.type === "permanent-tapped") {
+      // A new tapping, unless it follows straight on from the last or an attack
+      // is holding them together: `becomes-tapped`'s `batched`.
+      if (!this.tapBatchHeld && seq !== this.lastTapSeq + 1) this.tapBatchFired.clear();
+      this.lastTapSeq = seq;
+      const tapped = this.state.objects[full.object];
+      if (tapped !== undefined && tapped.tappedOnTurn !== this.state.turn.number) {
+        tapped.tappedOnTurn = this.state.turn.number;
+        full = { ...full, firstThisTurn: true };
+      }
+    }
     // Each death has its own events: this one only asks the triggers.
     if (full.type !== "permanents-died") this.state.eventLog.push(full);
     this.recordTurnHistory(full);
