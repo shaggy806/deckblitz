@@ -2613,6 +2613,18 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
     one chosen replacing the last — Triarch Stalker's "at the beginning of
     combat on your turn, choose an opponent. Creatures attacking **the last
     chosen player** have menace" (`then` may be an empty `sequence`).
+  - **Secretly**: `secretChoiceOnEnter: true` beside `choosePlayerOnEnter`
+    (Guardian Archon's "as this creature enters, secretly choose an
+    opponent"), `choose-opponent { remember: true, secret: true }` as an
+    ability resolves (Stalking Leonin), and `choose-creature-type { options,
+    remember: true, secret: true }` for a word from a short list (A Killer
+    Among Us, read back by `ofChosenType`). Kept as `GameObject.secretChoice`:
+    no other seat's view has the answer and no event names it, until the
+    cost `revealChosen: true` ("reveal the player you chose", "reveal the
+    creature type you chose") shows it. Only the player who chose can pay
+    that, so a new controller can't activate it. Each player's own secret
+    *number* is a `vote { choose: true, secret: true, for: { number } }`
+    (Goblin Game), with nothing kept on a permanent.
   - **Read back** by the `"chosen-player"` `PlayerScope` (effects and
     amounts: `damage { who: "chosen-player" }`, `{ cardsInHand:
     "chosen-player" }` — as the source last existed once it has left), the
@@ -3949,6 +3961,10 @@ carries; several compound. An "any colour" unit becomes `multiplier` of
   once for as long as the object exists, rather than once a turn (Loot, the
   Pathfinder). Recorded on `GameObject.exhaustedAbilities`; a zone change
   clears it.
+- `onlyOnce: true` — a plain "Activate only once" on an ability without the
+  Exhaust label (Stalking Leonin, Duggan, Private Detective): the same limit,
+  tracked the same way, but "exhaust abilities" (Boom Scholar's cost reduction,
+  rule 702.177b) don't count it.
 - `condition: StaticCondition` — "Activate only if …" (rule 602.5, Fanatic of
   Rhonas's Ferocious: "{T}: Add {G}{G}{G}{G}. Activate only if you control a
   creature with power 4 or greater"). Mirrors `StaticAbility`/

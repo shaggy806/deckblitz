@@ -359,8 +359,14 @@ export interface VisibleObject {
    * the choice is announced. Absent when it had nothing to choose. */
   readonly chosen?: string;
   /** On a permanent: "the chosen player" (`GameObject.chosenPlayer` —
-   * Black Vise's opponent, Triarch Stalker's last chosen). Public. */
+   * Black Vise's opponent, Triarch Stalker's last chosen). Public, unless it
+   * was chosen secretly. */
   readonly chosenPlayer?: PlayerId;
+  /** On a permanent with a secret choice not yet revealed
+   * (`GameObject.secretChoice`): `"hidden"` to everyone but the player who made
+   * it, whose view leaves out `chosen` and `chosenPlayer`; `"yours"` to that
+   * player, who sees them. Absent once it's revealed. */
+  readonly secretChoice?: "hidden" | "yours";
 }
 
 export interface PlayerView {
@@ -553,6 +559,12 @@ function visible(
   const roomDoors = zone === "battlefield" ? object.doors : undefined;
   const cardDef = roomDoors !== undefined ? registry.get(object.cardName) : def;
   const chosen = chosenOf(state, object);
+  const secret: "hidden" | "yours" | null =
+    object.secretChoice === undefined || object.secretChoice.revealed === true
+      ? null
+      : object.secretChoice.by === viewer
+        ? "yours"
+        : "hidden";
   const live = computeCharacteristics(state, registry, id);
   const computed =
     phased === undefined
@@ -751,10 +763,13 @@ function visible(
     tapped: object.tapped,
     damageMarked: object.damageMarked,
     regenerationShields: object.regenerationShields ?? 0,
-    ...(chosen !== null ? { chosen } : {}),
-    ...(object.chosenPlayer !== undefined && (object.zone === "battlefield" || object.zone === "phased-out")
+    ...(chosen !== null && secret !== "hidden" ? { chosen } : {}),
+    ...(object.chosenPlayer !== undefined &&
+    secret !== "hidden" &&
+    (object.zone === "battlefield" || object.zone === "phased-out")
       ? { chosenPlayer: object.chosenPlayer }
       : {}),
+    ...(secret !== null ? { secretChoice: secret } : {}),
     counters: { ...object.counters },
     summoningSick: object.summoningSick,
     attacking: object.attacking,

@@ -368,6 +368,12 @@ function eventText(event: GameEvent, nameOf: NameOf, seats: readonly SeatStatus[
           ? who(event.creatureType as PlayerId)
           : (CHOSEN_COLOR_NAMES[event.creatureType] ?? event.creatureType)
       }`
+    case 'secret-choice-made':
+      return `${who(event.player)} secretly chooses for ${name(event.object)}`
+    case 'secret-choice-revealed':
+      return `${who(event.player)} reveals the choice for ${name(event.object)}: ${
+        seats.some((s) => s.player === event.choice) ? who(event.choice as PlayerId) : event.choice
+      }`
     case 'number-chosen':
       return `${who(event.player)} chooses ${event.number} for ${name(event.object)}`
     case 'assist-requested':

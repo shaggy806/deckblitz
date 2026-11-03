@@ -6663,7 +6663,14 @@ export class Game {
     sourceId: ObjectId,
     controller: PlayerId,
     options?: readonly string[],
-    resume?: { then: EffectSpec; targets: ResolvedTargets; x: number; prompt?: string },
+    resume?: {
+      then: EffectSpec;
+      targets: ResolvedTargets;
+      x: number;
+      prompt?: string;
+      secret?: true;
+      remember?: { readonly stint: number; readonly as: "player" | "creature-type" };
+    },
     /** All but a few of the catalogue ("other than Wall"): still a search. */
     catalog?: boolean,
   ): void {
@@ -6678,6 +6685,19 @@ export class Game {
   }
 
 
+  /** A `revealChosen` cost: the secret choice made for `source` is shown to
+   * every player from now on, and the log names it. */
+  private revealSecretChoice(source: GameObject, player: PlayerId): void {
+    if (source.secretChoice === undefined) return;
+    source.secretChoice = { ...source.secretChoice, revealed: true };
+    this.emit({
+      type: "secret-choice-revealed",
+      object: source.id,
+      player,
+      choice: source.chosenPlayer ?? source.chosenCreatureType ?? "",
+    });
+  }
+
   /** Answers a pending `choose-creature-type` decision. */
   private applyCreatureTypeChoice(player: PlayerId, creatureType: string): void {
     const why = this.whyCannotCreatureTypeChoice(player, creatureType);
@@ -6686,12 +6706,24 @@ export class Game {
     if (awaiting === null || awaiting.kind !== "choose-creature-type") {
       throw new Error("unreachable: whyCannotCreatureTypeChoice should have caught this");
     }
-    this.emit({
-      type: "creature-type-chosen",
-      object: awaiting.source,
-      creatureType,
-    });
+    // A secret choice's answer goes in no event: the log is every seat's.
+    this.emit(
+      awaiting.secret === true
+        ? { type: "secret-choice-made", object: awaiting.source, player }
+        : { type: "creature-type-chosen", object: awaiting.source, creatureType },
+    );
     this.state.awaiting = null;
+    if (awaiting.remember !== undefined) {
+      // A resolving effect's answer, kept on its source while that's still
+      // the permanent that asked (rule 400.7).
+      const keptOn = this.state.objects[awaiting.source];
+      if (keptOn?.zone === "battlefield" && (keptOn.zoneChangeCount ?? 0) === awaiting.remember.stint) {
+        if (awaiting.remember.as === "player") keptOn.chosenPlayer = creatureType as PlayerId;
+        else keptOn.chosenCreatureType = creatureType;
+        if (awaiting.secret === true) keptOn.secretChoice = { by: player };
+        invalidateComputedCache();
+      }
+    }
 
     if (awaiting.turnSkip !== undefined) {
       this.answerTurnBegin(awaiting, awaiting.turnSkip, creatureType);
@@ -6743,7 +6775,11 @@ export class Game {
       } else if (awaiting.lookAt === true) {
         source.enterChoice = { ...source.enterChoice, lookAt: creatureType as PlayerId };
       } else if (awaiting.choosePlayer === true) {
-        source.enterChoice = { ...source.enterChoice, chosenPlayer: creatureType as PlayerId };
+        source.enterChoice = {
+          ...source.enterChoice,
+          chosenPlayer: creatureType as PlayerId,
+          ...(awaiting.secret === true ? { chosenSecretlyBy: player } : {}),
+        };
       } else if (awaiting.tribute === "pay") {
         // The first option pays (`tributeOptions`).
         source.enterChoice = { ...source.enterChoice, tributePaid: creatureType === awaiting.options[0] };
@@ -12420,7 +12456,7 @@ export class Game {
     | { readonly kind: "amplify"; readonly as: CardDefinition }
     | { readonly kind: "protector"; readonly siege: boolean }
     | { readonly kind: "name"; readonly spec: CardNameOnEnter }
-    | { readonly kind: "player"; readonly among: "player" | "opponent" }
+    | { readonly kind: "player"; readonly among: "player" | "opponent"; readonly secret?: true }
     | { readonly kind: "permanent"; readonly spec: PermanentOnEnter }
     | { readonly kind: "attach-host"; readonly filter: CardFilter }
     | null {
@@ -12482,7 +12518,11 @@ export class Game {
     }
     // "As this enters, choose a player / an opponent" — printed, or a copy's.
     if (answered?.chosenPlayer === undefined && becoming.choosePlayerOnEnter !== null) {
-      return { kind: "player", among: becoming.choosePlayerOnEnter };
+      return {
+        kind: "player",
+        among: becoming.choosePlayerOnEnter,
+        ...(becoming.secretChoiceOnEnter === true ? { secret: true as const } : {}),
+      };
     }
     // "As this enters, choose another creature you control" — printed, or a
     // copy's.
@@ -12859,11 +12899,21 @@ export class Game {
             options,
             catalog: false,
             choosePlayer: true,
-            prompt: next.among === "player" ? "Choose a player" : "Choose an opponent",
+            ...(next.secret === true ? { secret: true as const } : {}),
+            prompt: `${next.secret === true ? "Secretly choose" : "Choose"} ${next.among === "player" ? "a player" : "an opponent"}`,
           };
           return true;
         }
-        object.enterChoice = { ...object.enterChoice, chosenPlayer: options[0] ?? null };
+        object.enterChoice = {
+          ...object.enterChoice,
+          chosenPlayer: options[0] ?? null,
+          // With one to choose nobody is asked, but it's still a choice its
+          // chooser can reveal.
+          ...(next.secret === true && options.length === 1 ? { chosenSecretlyBy: chooser } : {}),
+        };
+        if (next.secret === true && options.length === 1) {
+          this.emit({ type: "secret-choice-made", object: id, player: chooser });
+        }
         continue;
       }
       if (next.kind === "protector") {
@@ -19748,6 +19798,7 @@ export class Game {
         ability.timesEachTurn !== undefined ||
         ability.exhaust === true ||
         ability.powerUp === true ||
+        ability.onlyOnce === true ||
         ability.boast === true;
       if (!limited) {
         if (seen.has(ability)) return;
@@ -20639,10 +20690,14 @@ export class Game {
     }
     // Exhaust and power-up: once for as long as this object exists.
     if (
-      (ability.exhaust === true || ability.powerUp === true) &&
+      (ability.exhaust === true || ability.powerUp === true || ability.onlyOnce === true) &&
       (source.exhaustedAbilities ?? []).includes(abilityIndex)
     ) {
       return `${def.name}'s ability can be activated only once, and has been`;
+    }
+    // "Reveal the player you chose": only the player who chose has it to show.
+    if (ability.cost.revealChosen === true && source.secretChoice?.by !== player) {
+      return `${player} made no secret choice for ${def.name} to reveal`;
     }
     if (ability.loyaltyCost !== undefined) {
       // Loyalty ability (rule 606): sorcery-speed, once per permanent per turn,
@@ -21217,7 +21272,8 @@ export class Game {
     let chosenX = planned.chosenX;
     let sacrificedRef: LastKnownRefs["sacrificed"];
 
-    // Pay the cost.
+    // Pay the cost. The secret first: a sacrifice beside it clears the choice.
+    if (ability.cost.revealChosen === true) this.revealSecretChoice(source, player);
     if (ability.cost.tap) {
       source.tapped = true;
       this.emit({ type: "permanent-tapped", object: sourceId });
@@ -21299,7 +21355,7 @@ export class Game {
         abilityIndex,
       ];
     }
-    if (ability.exhaust === true || ability.powerUp === true) {
+    if (ability.exhaust === true || ability.powerUp === true || ability.onlyOnce === true) {
       source.exhaustedAbilities = [...(source.exhaustedAbilities ?? []), abilityIndex];
     }
     if (ability.cost.addCounter !== undefined) {
@@ -22505,7 +22561,9 @@ export class Game {
           ability.cost.putFromExile !== undefined ||
           ability.cost.returnSelfToHand === true ||
           ability.cost.exertSelf === true ||
+          ability.cost.revealChosen === true ||
           ability.exhaust === true ||
+          ability.onlyOnce === true ||
           ability.powerUp === true
         ) {
           return;
@@ -30279,12 +30337,16 @@ export class Game {
       // it", its source blinked — `sourceLost`, rule 400.7) isn't "it".
       sacrificeSource: () =>
         opts.sourceLost === true ? false : this.sacrificeSourceByEffect(source, controller, refs.source),
-      rememberChosenPlayer: (player) => {
+      rememberChosenPlayer: (player, secret) => {
         const object = this.state.objects[source];
         if (object?.zone !== "battlefield" || (refs.source !== undefined && refs.source !== (object.zoneChangeCount ?? 0))) {
           return;
         }
         object.chosenPlayer = player;
+        if (secret === true) {
+          object.secretChoice = { by: controller };
+          this.emit({ type: "secret-choice-made", object: source, player: controller });
+        }
         invalidateComputedCache();
       },
       aboutPlayer: (player) =>
@@ -30658,22 +30720,36 @@ export class Game {
           }
         }
       },
-      chooseCreatureType: (then, exclude, fixed) =>
-        fixed !== undefined
-          ? this.beginCreatureTypeChoice(
-              source,
-              controller,
-              fixed.options.filter((t) => !(exclude ?? []).includes(t)),
-              { then, targets, x, ...(fixed.prompt !== undefined ? { prompt: fixed.prompt } : {}) },
-              false,
-            )
-          : this.beginCreatureTypeChoice(
-              source,
-              controller,
-              exclude === undefined ? undefined : CREATURE_TYPES.filter((t) => !exclude.includes(t)),
-              { then, targets, x },
-              true,
-            ),
+      chooseCreatureType: (then, exclude, fixed, keep) => {
+        const kept = {
+          ...(keep?.secret === true ? { secret: true as const } : {}),
+          ...(keep?.remember !== undefined
+            ? {
+                remember: {
+                  stint: refs.source ?? this.state.objects[source]?.zoneChangeCount ?? 0,
+                  as: keep.remember,
+                },
+              }
+            : {}),
+        };
+        if (fixed !== undefined) {
+          this.beginCreatureTypeChoice(
+            source,
+            controller,
+            fixed.options.filter((t) => !(exclude ?? []).includes(t)),
+            { then, targets, x, ...(fixed.prompt !== undefined ? { prompt: fixed.prompt } : {}), ...kept },
+            false,
+          );
+        } else {
+          this.beginCreatureTypeChoice(
+            source,
+            controller,
+            exclude === undefined ? undefined : CREATURE_TYPES.filter((t) => !exclude.includes(t)),
+            { then, targets, x, ...kept },
+            true,
+          );
+        }
+      },
       chooseCardName: (spec) => {
         // "Target player chooses a card name" (Vexing Arcanix): the player in
         // that slot names it, if they're still in the game; the resolution
@@ -50169,6 +50245,7 @@ export class Game {
     delete object.chosenOnEnter;
     delete object.chosenNames;
     delete object.chosenPlayer;
+    delete object.secretChoice;
     delete object.chosenPermanent;
     // A battle's protector was this stint's (rule 400.7).
     delete object.protector;
@@ -50213,6 +50290,7 @@ export class Game {
       }
       if (enterChoice.chosenName != null) object.chosenNames = [enterChoice.chosenName];
       if (enterChoice.chosenPlayer != null) object.chosenPlayer = enterChoice.chosenPlayer;
+      if (enterChoice.chosenSecretlyBy !== undefined) object.secretChoice = { by: enterChoice.chosenSecretlyBy };
       // A battle enters protected by the player chosen for it (rule 310.9a).
       if (enterChoice.protector !== undefined) object.protector = enterChoice.protector;
       // Deadpool's exchange (rule 612.5): it enters with the other's rules

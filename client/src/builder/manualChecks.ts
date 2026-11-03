@@ -8624,6 +8624,29 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     // A four-player table: three opponents to choose among.
     board({ you: { bf: ['Wastes'], hand: ['Black Vise'] }, opp: [{}, {}, {}] }),
   ),
+  // --- A secret choice (2026-11-03, build-family) ---
+  preset(
+    'Guardian Archon: secretly choose an opponent, hidden from the others',
+    // A four-player table: three opponents to choose among, and three seats
+    // that mustn't see the answer.
+    board({ you: { bf: ['Plains*6'], hand: ['Guardian Archon'] }, opp: [{ human: true }, {}, {}] }),
+  ),
+  preset(
+    'Guardian Archon: revealing shows the player to everyone',
+    board({ you: { bf: ['Plains*6', 'Grizzly Bears'], hand: ['Guardian Archon'] }, opp: { human: true, bf: ['Forest'] } }),
+  ),
+  preset(
+    'Stalking Leonin: secretly choose as its ability resolves',
+    board({ you: { bf: ['Plains*3'], hand: ['Stalking Leonin'] }, opp: [{ human: true }, {}] }),
+  ),
+  preset(
+    'A Killer Among Us: secretly choose a creature type',
+    board({ you: { bf: ['Forest*5'], hand: ['A Killer Among Us'] }, opp: { human: true } }),
+  ),
+  preset(
+    'Goblin Game: nobody sees how many you hid until all are in',
+    board({ you: { bf: ['Mountain*7'], hand: ['Goblin Game'] }, opp: { bf: ['Forest'] } }),
+  ),
   // --- Companion (2026-11-01, build-family) ---
   preset(
     'Companion: choose one to reveal before the game',

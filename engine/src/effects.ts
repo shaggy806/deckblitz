@@ -2513,6 +2513,11 @@ export type EffectSpec =
        * an opponent. Creatures attacking **the last chosen player** have
        * menace". Nothing is kept once the source has left the battlefield. */
       readonly remember?: true;
+      /** "**Secretly** choose an opponent" (Stalking Leonin), only with
+       * `remember`: kept hidden as `GameObject.secretChoice` until a
+       * `revealChosen` cost shows it. Asked as a `choose-creature-type` menu of
+       * players, whose answer stays out of the log. */
+      readonly secret?: true;
     }
   | {
       /**
@@ -2608,6 +2613,8 @@ export type EffectSpec =
       readonly effect: EffectSpec;
       /** `choose-opponent`'s `remember`: keep `player` on the source first. */
       readonly remember?: true;
+      /** `choose-opponent`'s `secret`, with `remember`. */
+      readonly secret?: true;
     }
   | {
       /**
@@ -3419,6 +3426,15 @@ export type EffectSpec =
        * type"`), substituted into `then` the same way. */
       readonly options?: readonly string[];
       readonly prompt?: string;
+      /** The answer is kept on this effect's source as its chosen creature
+       * type (`GameObject.chosenCreatureType`, which `ofChosenType` reads),
+       * while it's still the permanent it was (rule 400.7). */
+      readonly remember?: true;
+      /** "**Secretly** choose Human, Merfolk, or Goblin" (A Killer Among Us),
+       * only with `remember`: the answer stays out of the log and is kept
+       * hidden as `GameObject.secretChoice` until a `revealChosen` cost shows
+       * it. */
+      readonly secret?: true;
     }
   | {
       /**
@@ -5705,6 +5721,9 @@ export type EffectSpec =
        * of spells or abilities, not enchanted by Auras, all damage to them
        * prevented. */
       readonly protectionFromEverything?: PlayerScope;
+      /** "You … gain protection from the chosen player" (rule 702.16k —
+       * Guardian Archon): `who` from `from`, both fixed as this resolves. */
+      readonly protectionFromPlayers?: { readonly who: PlayerScope; readonly from: PlayerScope };
       /** "Until your next turn, creatures can't attack you or planeswalkers
        * you control unless their controller pays {2} for each of those
        * creatures" (Forbidding Spirit): the `attackTax` static's cost to
@@ -9619,6 +9638,9 @@ export interface ProtectionQualities {
    * opponents", fixed to those players as the effect resolves (Cliffside
    * Rescuer's ruling) — a new controller doesn't change them. */
   readonly fromPlayers?: "opponents" | readonly PlayerId[];
+  /** "Protection from **the chosen player**" (Guardian Archon): the effect's
+   * source's (`"chosen-player"`), fixed to that player as the effect resolves. */
+  readonly fromChosenPlayer?: true;
 }
 
 /** A protection quality chosen as the effect resolves (a `grant-protection`'s
@@ -10125,7 +10147,7 @@ export interface EffectApi {
   /** Keep `player` as the effect's source's "chosen player"
    * (`choose-opponent { remember }`) — nothing once it has left the
    * battlefield. */
-  rememberChosenPlayer(player: PlayerId): void;
+  rememberChosenPlayer(player: PlayerId, secret?: true): void;
   /** An index in `0…count-1` (`count` > 0) picked with the game's seeded
    * randomness, and announced as a `chosen-at-random` event naming what
    * `pick` says the index stands for — a `random` choice: `choose-opponent`,
@@ -10299,6 +10321,8 @@ export interface EffectApi {
     then: EffectSpec,
     exclude?: readonly string[],
     options?: { readonly options: readonly string[]; readonly prompt?: string },
+    /** What to keep of the answer on the source, and whether it's secret. */
+    keep?: { readonly remember?: "player" | "creature-type"; readonly secret?: true },
   ): void;
   /** See the `"choose-card-name"` {@link EffectSpec}. */
   chooseCardName(spec: Extract<EffectSpec, { kind: "choose-card-name" }>): void;
@@ -13348,7 +13372,13 @@ function protectionFilterWords(filter: CardFilter): readonly string[] {
  * protected permanent's controller's side, which a later change of control
  * would move. Rewritten to the players themselves (`controllerIn`). */
 function fixProtectionSide(from: ProtectionQualities, ctx: ResolutionContext): ProtectionQualities {
-  const fixed = from.fromPlayers === "opponents" ? { ...from, fromPlayers: ctx.playersInScope("each-opponent") } : from;
+  const { fromChosenPlayer, ...named } = from;
+  const fixed =
+    fromChosenPlayer === true
+      ? { ...named, fromPlayers: ctx.playersInScope("chosen-player") }
+      : from.fromPlayers === "opponents"
+        ? { ...named, fromPlayers: ctx.playersInScope("each-opponent") }
+        : named;
   const filter = fixed.filter;
   if (filter?.controlledBy !== "you" && filter?.controlledBy !== "opponent") return fixed;
   const { controlledBy, ...rest } = filter;
@@ -14178,7 +14208,19 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         player,
         effect: spec.then,
         ...(spec.remember === true ? { remember: true as const } : {}),
+        ...(spec.secret === true ? { secret: true as const } : {}),
       });
+      if (spec.secret === true && among.length > 1) {
+        // A `choose-modes` would log the answer; this menu is asked the way
+        // an "as this enters, secretly choose" is.
+        ctx.chooseCreatureType(
+          { kind: "about-player", player: CHOSEN_CREATURE_TYPE as PlayerId, effect: spec.then },
+          undefined,
+          { options: among, prompt: `Secretly choose ${spec.anyPlayer === true ? "a player" : "an opponent"}` },
+          { ...(spec.remember === true ? { remember: "player" as const } : {}), secret: true },
+        );
+        return;
+      }
       if (spec.random === true) {
         // Nobody is asked: the game picks, each with an equal chance.
         const chosen = among[ctx.pickAtRandom(among.length, (i) => ({ kind: "player", player: among[i] }))];
@@ -14201,7 +14243,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     }
     case "about-player":
       if (!ctx.playersInScope("each-player").includes(spec.player)) return;
-      if (spec.remember === true) ctx.rememberChosenPlayer(spec.player);
+      if (spec.remember === true) ctx.rememberChosenPlayer(spec.player, spec.secret);
       applyEffectSpec(spec.effect, ctx.aboutPlayer(spec.player));
       return;
     case "become-prepared": {
@@ -14954,6 +14996,10 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         spec.options === undefined
           ? undefined
           : { options: spec.options, ...(spec.prompt !== undefined ? { prompt: spec.prompt } : {}) },
+        {
+          ...(spec.remember === true ? { remember: "creature-type" as const } : {}),
+          ...(spec.secret === true ? { secret: true as const } : {}),
+        },
       );
       return;
     case "choose-card-name":
@@ -16233,6 +16279,14 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         ...(spec.lifeCantChange !== undefined ? { lifeCantChange: ctx.playersInScope(spec.lifeCantChange) } : {}),
         ...(spec.protectionFromEverything !== undefined
           ? { protectionFromEverything: ctx.playersInScope(spec.protectionFromEverything) }
+          : {}),
+        ...(spec.protectionFromPlayers !== undefined
+          ? {
+              protectionFromPlayers: {
+                who: ctx.playersInScope(spec.protectionFromPlayers.who),
+                from: ctx.playersInScope(spec.protectionFromPlayers.from),
+              },
+            }
           : {}),
         ...(spec.attackTax !== undefined
           ? {

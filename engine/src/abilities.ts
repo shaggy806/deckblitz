@@ -387,6 +387,12 @@ export interface AbilityCost {
    * `sacrifice: "self"` — the source doesn't reach a graveyard, so nothing
    * that watches for a death sees one. */
   readonly exileSelf?: boolean;
+  /** "Reveal the player you chose" (Stalking Leonin, Guardian Archon), "reveal
+   * the creature type you chose" (A Killer Among Us): the secret choice made
+   * for this permanent (`GameObject.secretChoice`) is shown to every player,
+   * as the cost is paid. Payable only by the player who made it: nobody else
+   * has anything to reveal. */
+  readonly revealChosen?: true;
   /** Return the source itself to its owner's hand as part of the cost
    * (Shigeki, Jukai Visionary's "{1}{G}, {T}, Return Shigeki to its owner's
    * hand: …"). Paid as the ability is activated, so nothing can answer it;
@@ -771,6 +777,11 @@ export interface ActivatedAbility {
    * `GameObject.exhaustedAbilities`, which a zone change clears — the
    * permanent that comes back is a new object (rule 400.7). */
   readonly exhaust?: boolean;
+  /** "Activate only once" on an ability that isn't an exhaust ability (rule
+   * 702.177a says the two limit it alike): tracked as `exhaust` is, but nothing
+   * that reads "exhaust abilities" (702.177b, Boom Scholar) counts it —
+   * Stalking Leonin, Guardian Archon. */
+  readonly onlyOnce?: true;
   /** Power-up (rule 702.193a): "Activate this ability only once", tracked as
    * `exhaust` is — and while its permanent is on the battlefield the turn it
    * entered, the ability costs less by that permanent's mana cost (702.193b,

@@ -4785,6 +4785,13 @@ export interface CardDefinition {
    */
   readonly choosePlayerOnEnter: "player" | "opponent" | null;
   /**
+   * "As this creature enters, **secretly** choose an opponent" (Guardian
+   * Archon, Emissary of Grudges), with `choosePlayerOnEnter`: the player is
+   * kept hidden as `GameObject.secretChoice` until a `revealChosen` cost shows
+   * it, and asked without the answer reaching the log.
+   */
+  readonly secretChoiceOnEnter?: true;
+  /**
    * "As this enters, choose another creature you control" (rule 614.1c —
    * Tyrannical Pitlord, Dauntless Bodyguard): asked of its controller among
    * the permanents matching the filter — not targeted — and kept as
@@ -5432,6 +5439,7 @@ const PRINTED_ABILITY: {
   chooseCardNameOnEnter: (def) => def.chooseCardNameOnEnter !== null,
   chooseOnEnter: (def) => def.chooseOnEnter !== null,
   choosePlayerOnEnter: (def) => def.choosePlayerOnEnter !== null,
+  secretChoiceOnEnter: false,
   choosePermanentOnEnter: (def) => def.choosePermanentOnEnter !== null,
   loyalty: false,
   defense: false,
@@ -5685,6 +5693,7 @@ interface CardDraft {
   chooseCardNameOnEnter?: CardNameOnEnter;
   chooseOnEnter?: readonly string[];
   choosePlayerOnEnter?: "player" | "opponent";
+  secretChoiceOnEnter?: true;
   choosePermanentOnEnter?: PermanentOnEnter;
   loyalty?: number;
   /** Compleated (rule 702.150a): it enters with two fewer loyalty counters
@@ -5951,6 +5960,7 @@ export function defineCard(draft: CardDraft): CardDefinition {
     chooseCardNameOnEnter: draft.chooseCardNameOnEnter ?? null,
     chooseOnEnter: draft.chooseOnEnter ?? readAheadChoices(draft),
     choosePlayerOnEnter: draft.choosePlayerOnEnter ?? null,
+    ...(draft.secretChoiceOnEnter === true ? { secretChoiceOnEnter: true as const } : {}),
     choosePermanentOnEnter: draft.choosePermanentOnEnter ?? null,
     loyalty,
     defense,

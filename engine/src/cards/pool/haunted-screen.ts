@@ -54,7 +54,7 @@ export default defineCard({
       },
       resolve: null,
       text: ANIMATE_TEXT,
-      exhaust: true,
+      onlyOnce: true,
     },
   ],
 });

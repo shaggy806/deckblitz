@@ -67,7 +67,7 @@ export default defineCard({
       // long as this object exists (Duggan's `exhaust` bookkeeping), so a
       // Surge Engine that leaves and comes back may again.
       condition: { kind: "source", filter: { colors: ["U"] } },
-      exhaust: true,
+      onlyOnce: true,
       targets: [],
       effect: { kind: "draw", amount: 3 },
       resolve: null,

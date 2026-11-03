@@ -257,6 +257,14 @@ export function playerProtectionBlocks(
   by?: PlayerId,
 ): boolean {
   if (state.players[player]?.hasLost !== false) return false;
+  // Protection from a player, gained by an effect (rule 702.16k — Guardian
+  // Archon's "you … gain protection from the chosen player").
+  for (const effect of state.playerEffects ?? []) {
+    const fromPlayers = effect.protectionFromPlayers;
+    if (fromPlayers === undefined || !fromPlayers.who.includes(player)) continue;
+    const prot = { colors: new Set<Color>(), types: new Set<CardType>(), filters: [], players: new Set(fromPlayers.from) };
+    if (qualityMatches(state, registry, player, prot, source, undefined, by)) return true;
+  }
   for (const id of state.zones.shared.battlefield) {
     const holder = state.objects[id];
     if (holder === undefined || holder.controller !== player) continue;

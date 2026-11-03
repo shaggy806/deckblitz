@@ -35,7 +35,7 @@ export default defineCard({
       },
       resolve: null,
       condition: { kind: "controls", filter: { subtype: "Mountain", supertype: "snow" }, atLeast: 1 },
-      exhaust: true,
+      onlyOnce: true,
       text: TEXT,
     },
   ],

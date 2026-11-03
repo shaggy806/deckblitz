@@ -1520,6 +1520,8 @@ export function parseCost(text) {
     } else if (part === "Exile ~ from your graveyard") extra.zone = "graveyard";
     else if (part === "Discard ~") extra.zone = "hand";
     else if (part === "Exile ~") cost.exileSelf = true;
+    // The secret chosen for this permanent (`GameObject.secretChoice`).
+    else if (part === "Reveal the player you chose" || part === "Reveal the creature type you chose") cost.revealChosen = true;
     // "Exile a card from your hand" (Cadaverous Bloom), "Exile a creature you
     // control" (Food Chain: `sacrifice` paid by exile), "Exile an instant or
     // sorcery spell you control" (Nivmagus Elemental), "Exile two creature
@@ -6152,6 +6154,30 @@ function chosenNumbers(text, ctx) {
       ],
     };
   }
+  // Stalking Leonin: kept on the permanent, hidden until a cost reveals it.
+  const secretly = /^Secretly choose (an opponent|a player)\.$/.exec(text);
+  if (secretly !== null) {
+    return {
+      kind: "choose-opponent",
+      ...(secretly[1] === "a player" ? { anyPlayer: true } : {}),
+      remember: true,
+      secret: true,
+      then: { kind: "sequence", effects: [] },
+    };
+  }
+  // Stalking Leonin's reveal: the target's whoever's, read as it resolves.
+  const stalked = /^Exile target creature that's attacking you if it's controlled by the chosen player\.$/.exec(text);
+  if (stalked !== null) {
+    return {
+      kind: "conditional",
+      condition: {
+        kind: "target",
+        index: ctx.target({ kind: "permanent", filter: { type: "creature", attackingYou: true } }),
+        filter: { controlledBy: "chosen-player" },
+      },
+      then: { kind: "exile", target: 0 },
+    };
+  }
   // Shapeshifter's: the answer kept on the permanent, a line of its P/T reading it.
   const again = /^You may choose a number between (\d+) and (\d+)\.$/.exec(text);
   if (again !== null) {
@@ -10418,8 +10444,9 @@ export function parseFace(face, ctx = {}) {
       };
       continue;
     }
-    if ((m = /^As ~ enters, choose (a player|an opponent)\.$/.exec(line))) {
-      out.choosePlayerOnEnter = m[1] === "a player" ? "player" : "opponent";
+    if ((m = /^As ~ enters, (secretly )?choose (a player|an opponent)\.$/.exec(line))) {
+      out.choosePlayerOnEnter = m[2] === "a player" ? "player" : "opponent";
+      if (m[1] !== undefined) out.secretChoiceOnEnter = true;
       continue;
     }
     // "As ~ enters, choose a nonland card name." (rule 201.4, asked as it
@@ -10762,6 +10789,12 @@ export function parseFace(face, ctx = {}) {
       });
       rest = rest.replace(/ Activate only (as a sorcery|once each turn|during your turn)\.$/, (_x, r) => {
         restrictions.push(r);
+        return "";
+      });
+      // "Activate only once" (Stalking Leonin): the limit an Exhaust label's
+      // ability has, on an ability that isn't one.
+      rest = rest.replace(/ Activate only once\.$/, () => {
+        ability.onlyOnce = true;
         return "";
       });
       if (restrictions.includes("as a sorcery")) ability.sorcerySpeed = true;

@@ -72,6 +72,7 @@ export function CardFlags({
     enchanting === null &&
     protectedBy === null &&
     chosenPlayer === null &&
+    obj.secretChoice === undefined &&
     level === null
   ) {
     return null
@@ -104,6 +105,18 @@ export function CardFlags({
           title={`The chosen player: ${chosenPlayer.name}`}
         >
           {compact ? `◎ ${chosenPlayer.name}` : `chose ${chosenPlayer.name}`}
+        </span>
+      ) : null}
+      {obj.secretChoice !== undefined ? (
+        <span
+          className="card-flag chosen"
+          title={
+            obj.secretChoice === 'yours'
+              ? 'Your secret choice: only you can see it until you reveal it'
+              : 'A secret choice: hidden until its controller reveals it'
+          }
+        >
+          {obj.secretChoice === 'yours' ? 'secret' : compact ? '◎ ?' : 'chose secretly'}
         </span>
       ) : null}
       {goaders.map((g) => (

@@ -31,7 +31,7 @@ export default defineCard({
       },
       resolve: null,
       text: TEXT,
-      exhaust: true,
+      onlyOnce: true,
     },
   ],
 });

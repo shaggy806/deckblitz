@@ -1119,6 +1119,21 @@ export type GameEvent =
       readonly creatureType: string;
     })
   | (Base & {
+      /** `player` secretly chose something for `object` (`GameObject.
+       * secretChoice`): that they did, never what. */
+      readonly type: "secret-choice-made";
+      readonly object: ObjectId;
+      readonly player: PlayerId;
+    })
+  | (Base & {
+      /** `player` revealed the secret choice made for `object`, as a cost:
+       * `choice` is the player or word chosen. */
+      readonly type: "secret-choice-revealed";
+      readonly object: ObjectId;
+      readonly player: PlayerId;
+      readonly choice: string;
+    })
+  | (Base & {
       /** A card name was chosen (rule 201.4) for `object` — as it entered
        * (Pithing Needle) or as its spell or ability resolved (Memoricide). */
       readonly type: "card-name-chosen";

@@ -2575,6 +2575,26 @@ land comparison (Boreas Charger), "permanents they control but don't own"
 (Incite Rebellion), tapped/nonbasic counts the scaffolder can't phrase —
 `author-freed` narrows them.
 
+### A secret choice — built 2026-11-03
+
+The need-keys Phase 2 key `decision:secret-choice` (no new decision kind). A
+player chosen secretly as a permanent enters (`secretChoiceOnEnter`) or as an
+ability resolves (`choose-opponent { remember, secret }`), or a word from a short
+list (`choose-creature-type { options, remember, secret }`), kept as
+`GameObject.secretChoice`: `viewFor` leaves the answer out of every view but the
+chooser's and the log has only `secret-choice-made`, until the cost `revealChosen`
+(payable by the chooser alone) shows it with `secret-choice-revealed`. With it:
+`onlyOnce` for a plain "Activate only once", which moves seven cards off `exhaust`;
+`controlledBy: "chosen-player"`; `stackObjectTargets`, a filter's `targets` that
+reads an ability too; a player's protection from a player
+(`player-effect { protectionFromPlayers }`, rule 702.16k) and a grant's
+`fromChosenPlayer`. Key also marked: `effect:protection-from-player-for-permanent`.
+`secret-choice.test.ts` (engine and server, whose test reads real frames). Proving
+cards: Stalking Leonin, Guardian Archon, Emissary of Grudges, A Killer Among Us,
+Goblin Game. Two of the key's cards are still blocked: The Toymaker's Trap (a
+number not chosen before, then an opponent's guess) and Stronghold Gambit (each
+player secretly picks a card in hand, then the lowest creature enters).
+
 ### The chosen player — built 2026-10-29
 
 The need-keys Phase 2 family `decision:choose-player` (features only). A

@@ -757,8 +757,11 @@ export interface CardFilter {
    * no such chooser (`FilterContext.chooser`), nothing matches.
    * `"enchanted-player"`: the player the filter's source, an Aura, is attached
    * to (a Curse's "creatures **enchanted player controls**" — Curse of Death's
-   * Hold); with no such source, nothing matches. */
-  readonly controlledBy?: "you" | "opponent" | "active-player" | "chooser" | "enchanted-player";
+   * Hold); with no such source, nothing matches. `"chosen-player"`: the
+   * filter's source's chosen player (`GameObject.chosenPlayer`, as it last
+   * existed if it has left — rule 608.2h): Stalking Leonin's "if it's
+   * controlled by the chosen player". */
+  readonly controlledBy?: "you" | "opponent" | "active-player" | "chooser" | "enchanted-player" | "chosen-player";
   /** Controlled by one of these players — set by the engine, never authored:
    * a protection grant's "creatures **your opponents** control" fixed to the
    * players they were as it resolved (`grant-protection`). */
@@ -1027,6 +1030,10 @@ export interface CardFilter {
    * only a spell on the stack; anything else has no targets to ask about.
    */
   readonly targets?: SpellTargetsFilter;
+  /** `targets`, for an activated or triggered ability on the stack as well as
+   * a spell: Emissary of Grudges's "target spell or ability … if it targets
+   * you or a permanent you control". */
+  readonly stackObjectTargets?: SpellTargetsFilter;
   /**
    * It is the reference object (see `ShareReference`), or shares at least
    * one **card type** (rule 205.2a) with it — "a permanent that shares a
@@ -2184,6 +2191,11 @@ export function matchesFilter(
     const aura = ctx.source === undefined ? undefined : state.objects[ctx.source];
     if (aura?.attachedToPlayer === undefined || controller !== aura.attachedToPlayer) return false;
   }
+  if (filter.controlledBy === "chosen-player") {
+    const from = ctx.source === undefined ? undefined : state.objects[ctx.source];
+    const chosen = from?.zone === "battlefield" ? from.chosenPlayer : from?.lastKnown?.chosenPlayer;
+    if (chosen === undefined || controller !== chosen) return false;
+  }
   if (filter.controllerIn !== undefined && !filter.controllerIn.includes(controller)) return false;
   if (
     filter.controllerGraveyardAtLeast !== undefined &&
@@ -2250,6 +2262,12 @@ export function matchesFilter(
   }
   // A spell's targets, as it is on the stack: a snapshot is of a permanent,
   // which has none.
+  if (
+    filter.stackObjectTargets !== undefined &&
+    (live === undefined || !stackObjectTargetsMatch(state, registry, live, filter.stackObjectTargets, ctx))
+  ) {
+    return false;
+  }
   if (filter.targets !== undefined && (live === undefined || !spellTargetsMatch(state, registry, live, filter.targets, ctx))) {
     return false;
   }

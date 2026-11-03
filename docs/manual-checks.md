@@ -6621,3 +6621,27 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 - **Do:** It's your upkeep. Click Patron of the Akki in your command zone.
 - **Expect:** It isn't cast yet: a menu opens with one item, "Cast Patron of the Akki (offering sacrificing Goblin Piker: -{1}{R})". Choosing it sacrifices Goblin Piker and taps your four Mountains.
+### Guardian Archon: secretly choose an opponent, hidden from the others
+
+- **Do:** Cast Guardian Archon, choose Carol at "Secretly choose an opponent", then switch to Bob.
+- **Expect:** As Alice, the Archon's tile reads "◎ Carol" and "secret". As Bob, it reads "◎ ?" and names nobody. The log reads "Alice secretly chooses for Guardian Archon", for both.
+
+### Guardian Archon: revealing shows the player to everyone
+
+- **Do:** Cast Guardian Archon (there's only Bob, so you aren't asked), click it to activate its ability, and target the Grizzly Bears.
+- **Expect:** The log reads "Alice reveals the choice for Guardian Archon: Bob". As Bob, the tile now reads "◎ Bob", and "◎ ?" is gone. The ability isn't offered a second time.
+
+### Stalking Leonin: secretly choose as its ability resolves
+
+- **Do:** Cast Stalking Leonin, let it and its ability resolve, choose Carol, then switch to Bob.
+- **Expect:** The banner reads "Secretly choose an opponent", and the Leonin's tile reads "◎ Carol" and "secret". As Bob, it reads "◎ ?", and the log doesn't name Carol.
+
+### A Killer Among Us: secretly choose a creature type
+
+- **Do:** Cast A Killer Among Us, let its ability resolve, choose Merfolk, then switch to Bob.
+- **Expect:** Three 1/1 tokens enter first, then the banner offers Human, Merfolk and Goblin. Your tile reads "Merfolk" and "secret". As Bob, it reads "◎ ?", and the log doesn't say Merfolk.
+
+### Goblin Game: nobody sees how many you hid until all are in
+
+- **Do:** Cast Goblin Game and enter 3 when you're asked for a number.
+- **Expect:** It won't take less than 1. The log shows no count until both are in, then both together. You lose 3 life; whoever hid fewer then also loses half their life, rounded up.

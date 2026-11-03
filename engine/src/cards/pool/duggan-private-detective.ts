@@ -49,7 +49,7 @@ export default defineCard({
       effect: { kind: "damage", amount: { product: [{ powerOf: "source" }, 2] }, target: 0 },
       resolve: null,
       text: PUNCH_TEXT,
-      exhaust: true,
+      onlyOnce: true,
     },
   ],
 });

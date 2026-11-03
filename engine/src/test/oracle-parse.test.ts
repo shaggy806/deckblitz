@@ -4349,6 +4349,34 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(face("As this creature enters, choose two players.", "Creature — Demon").choosePlayerOnEnter).toBeUndefined();
   });
 
+  it("a choice made secretly, and the cost that reveals it (decision:secret-choice)", () => {
+    const archon = face("As this creature enters, secretly choose an opponent.", "Creature — Archon");
+    expect(archon.choosePlayerOnEnter).toBe("opponent");
+    expect(archon.secretChoiceOnEnter).toBe(true);
+    // Not said, not secret.
+    expect(face("As this creature enters, choose an opponent.", "Creature — Archon").secretChoiceOnEnter).toBeUndefined();
+    const leonin = face(
+      "When this creature enters, secretly choose an opponent.\nReveal the player you chose: Exile target creature that's attacking you if it's controlled by the chosen player. Activate only once.",
+      "Creature — Cat Archer",
+    );
+    expect(leonin.triggered?.[0].effect).toEqual({
+      kind: "choose-opponent",
+      remember: true,
+      secret: true,
+      then: { kind: "sequence", effects: [] },
+    });
+    expect(leonin.activated?.[0]).toMatchObject({
+      cost: { mana: null, tap: false, revealChosen: true },
+      onlyOnce: true,
+      targets: [{ kind: "permanent", filter: { type: "creature", attackingYou: true } }],
+      effect: {
+        kind: "conditional",
+        condition: { kind: "target", index: 0, filter: { controlledBy: "chosen-player" } },
+        then: { kind: "exile", target: 0 },
+      },
+    });
+  });
+
   it("a count from the chosen player's side (amount:count-for-chosen-player)", () => {
     const order = face(
       "As this creature enters, choose an opponent.\nTest Card's power and toughness are each equal to 1 plus the number of creatures the chosen player controls.",

@@ -894,6 +894,16 @@ export interface GameObject {
    * player"). What a `"chosen-player"` scope, trigger subject or filter
    * reads off its source. Cleared on any zone change (rule 400.7). */
   chosenPlayer?: PlayerId;
+  /** What was chosen for this permanent (`chosenPlayer`, `chosenCreatureType`)
+   * was chosen **secretly** — "secretly choose an opponent" (Stalking Leonin,
+   * Guardian Archon), "secretly choose Human, Merfolk, or Goblin" (A Killer
+   * Among Us). `by` is who chose: while it isn't `revealed` only they see it
+   * (`viewFor` leaves it out of every other seat's view, spectators included,
+   * and nothing in the log names it), and only they can pay a "reveal the
+   * player you chose" cost (`AbilityCost.revealChosen`) — a player who gains
+   * control of the permanent didn't choose anything. Cleared on any zone
+   * change, with the choice (rule 400.7). */
+  secretChoice?: { readonly by: PlayerId; readonly revealed?: true };
   /** "The chosen creature": the permanent chosen as this one entered
    * (`CardDefinition.choosePermanentOnEnter` — Tyrannical Pitlord, Dauntless
    * Bodyguard; rules 614.1c, 607.2d), with the stint it was chosen in
@@ -1000,6 +1010,10 @@ export interface GameObject {
      * (`CardDefinition.choosePlayerOnEnter`), or `null` with nobody to
      * choose. Lands on `GameObject.chosenPlayer`. */
     readonly chosenPlayer?: PlayerId | null;
+    /** `chosenPlayer` was chosen secretly, by this player
+     * (`CardDefinition.secretChoiceOnEnter`). Lands on
+     * `GameObject.secretChoice`. */
+    readonly chosenSecretlyBy?: PlayerId;
     /** The permanent chosen for it as it was about to enter
      * (`CardDefinition.choosePermanentOnEnter`), or `null` for none. Lands
      * on `GameObject.chosenPermanent`. */
@@ -3634,6 +3648,14 @@ export type AwaitingDecision =
        * (`CardDefinition.choosePlayerOnEnter`) — `options` are the players
        * who may be chosen, recorded as `enterChoice.chosenPlayer`. */
       readonly choosePlayer?: true;
+      /** "**Secretly** choose …": the answer stays out of the log (a
+       * `secret-choice-made` event names who chose, not what) and, with
+       * `remember` or `choosePlayer`, is marked `GameObject.secretChoice`. */
+      readonly secret?: true;
+      /** A resolving effect's answer is kept on `source` while it's still the
+       * permanent that asked (`stint` — rule 400.7): as
+       * `GameObject.chosenPlayer`, or as its `chosenCreatureType`. */
+      readonly remember?: { readonly stint: number; readonly as: "player" | "creature-type" };
       /** What a turn about to begin comes to (rule 614.10 — `Game.askTurnBegin`):
        * this source's "you may skip that turn" (Time Vault), the first option
        * taking the turn; or, with `owed`, whether the skip this player owes is
@@ -5244,6 +5266,11 @@ export interface PlayerEffect {
    * (a Curse on one goes, 704.5m), and all damage that would be dealt to them
    * is prevented. See `playerHasProtectionFromEverything`. */
   readonly protectionFromEverything?: readonly PlayerId[];
+  /** "You … gain protection from the chosen player" (rule 702.16k — Guardian
+   * Archon): `who` can't be the target of spells or abilities `from` controls,
+   * can't be enchanted by Auras they control, and damage from sources they
+   * control is prevented. See `playerProtectionBlocks`. */
+  readonly protectionFromPlayers?: { readonly who: readonly PlayerId[]; readonly from: readonly PlayerId[] };
   /** "Until your next turn, creatures can't attack you or planeswalkers you
    * control unless their controller pays {2} for each of those creatures"
    * (Forbidding Spirit): the `attackTax` static's cost to attack (rule
@@ -6587,6 +6614,7 @@ export function tokenFoldKey(o: GameObject): string {
     o.chosenCreatureType ?? null,
     o.chosenNames ?? null,
     o.chosenPlayer ?? null,
+    o.secretChoice ?? null,
     o.chosenPermanent ?? null,
     o.counters,
     o.counterTimestamps ?? null,

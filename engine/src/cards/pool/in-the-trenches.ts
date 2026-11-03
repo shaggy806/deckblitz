@@ -30,7 +30,7 @@ export default defineCard({
       resolve: null,
       text: EXILE_TEXT,
       sorcerySpeed: true,
-      exhaust: true,
+      onlyOnce: true,
     },
   ],
 });
