@@ -6837,7 +6837,10 @@ export type EffectSpec =
        * neither, its P/T is what it was, or what a `grant-static`'s
        * `setBasePtFromCount` beside it says: "becomes a Monk Avatar creature
        * … and gains 'This creature's power and toughness are each equal to
-       * the number of lore counters on it'" (Myth Realized), read live. */
+       * the number of lore counters on it'" (Myth Realized), read live.
+       * Any other whole ability it becomes a creature "with" goes the same way,
+       * a grant beside it in one `sequence`: `grant-triggered` (Raging Ravine),
+       * `grant-static` (Restless Spire), `grant-protection` (Opal Guardian). */
       readonly power?: EffectAmount;
       readonly toughness?: EffectAmount;
       readonly addTypes: readonly CardType[];
@@ -6893,6 +6896,11 @@ export type EffectSpec =
        * removed from combat (rule 506.4).
        */
       readonly removeTypes?: readonly CardType[];
+      /**
+       * "It **isn't an Equipment**" (Dancing Sword): these subtypes go, its
+       * types stay.
+       */
+      readonly removeSubtypes?: readonly string[];
       /**
        * "Becomes a Coward" / "becomes the creature type of your choice"
        * (Boldwyr Intimidator, the Mistforms — `CHOSEN_CREATURE_TYPE` under a
@@ -11021,6 +11029,7 @@ export interface EffectApi {
     set?: {
       readonly setTypes?: readonly CardType[];
       readonly removeTypes?: readonly CardType[];
+      readonly removeSubtypes?: readonly string[];
       readonly setSubtypes?: readonly string[];
       readonly addColors?: readonly Color[];
     },
@@ -16545,6 +16554,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         ctx.addTypes(target, spec.addTypes ?? [], spec.addSubtypes ?? [], spec.duration, {
           ...(spec.setTypes !== undefined ? { setTypes: spec.setTypes } : {}),
           ...(spec.removeTypes !== undefined ? { removeTypes: spec.removeTypes } : {}),
+          ...(spec.removeSubtypes !== undefined ? { removeSubtypes: spec.removeSubtypes } : {}),
           ...(spec.setSubtypes !== undefined ? { setSubtypes: spec.setSubtypes } : {}),
           ...(spec.addColors !== undefined ? { addColors: spec.addColors } : {}),
         });

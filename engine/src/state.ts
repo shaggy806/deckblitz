@@ -1736,6 +1736,9 @@ export interface PtModifier {
    * attached, this isn't a creature", folded in as one at its attachment's
    * timestamp (`reconfiguredModifier`). */
   removeTypes?: CardType[];
+  /** Layer 4 — subtypes taken away, its types left: `add-types`'
+   * `removeSubtypes` ("it isn't an Equipment" — Dancing Sword). */
+  removeSubtypes?: string[];
   /** Layer 4 — subtypes this modifier adds (e.g. `["Blinkmoth"]`). */
   addSubtypes?: string[];
   /** Layer 4 — subtypes this modifier *replaces* them with (Turn to Frog:

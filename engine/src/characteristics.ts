@@ -2837,6 +2837,10 @@ function applyModifierTypes(
     t = kept;
     st = st.filter((s) => subtypeFitsTypes(s, kept));
   }
+  if (modifier.removeSubtypes) {
+    const removed = modifier.removeSubtypes;
+    st = st.filter((s) => !removed.includes(s));
+  }
   if (modifier.setSubtypes) {
     // Rule 205.1a: the new subtypes replace the existing ones of their own
     // kind — creature types for creature types — and the rest stay.

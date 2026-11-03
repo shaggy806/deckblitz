@@ -306,14 +306,21 @@ function whyCannotAttackUncached(
  * "self" }`) that apply now: none once it has lost its abilities, and none
  * whose condition fails. */
 function ownStatics(state: GameState, registry: CardRegistry, object: GameObject): readonly StaticAbility[] {
-  if (hasLostAbilities(state, registry, object)) return [];
-  return registry
-    .get(rulesTextName(object))
-    .static.filter(
-      (ability) =>
-        ability.affects.scope === "self" &&
-        (ability.condition === undefined || staticConditionMet(state, registry, object, ability.condition)),
-    );
+  const printed = hasLostAbilities(state, registry, object) ? [] : registry.get(rulesTextName(object)).static;
+  // And any a `grant-static` gave it (Veiled Serpent's "it becomes a 4/4
+  // Serpent creature with 'This creature can't attack unless …'"), which a
+  // loss of all abilities earlier than the grant leaves (rule 613.7).
+  const granted = grantedStatics(
+    state,
+    registry,
+    object,
+    (a) => a.cantAttackUnlessDefender !== undefined || a.cantAttackIfDefender !== undefined || a.cantBlockUnlessAttacker !== undefined,
+  );
+  return (granted.length === 0 ? printed : [...printed, ...granted]).filter(
+    (ability) =>
+      ability.affects.scope === "self" &&
+      (ability.condition === undefined || staticConditionMet(state, registry, object, ability.condition)),
+  );
 }
 
 /** Whether `player` passes a combat restriction's {@link PlayerTest}, as

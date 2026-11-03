@@ -4236,3 +4236,9 @@ player as its "you", in place of the `monarch` and `poisoned` clauses it replace
 `condition` over `restrictions`. Keys: static:cant-attack-unless-defender-controls (a graveyard count was the only code), found to
 need no code: static:cant-attack-if-defender-controls, static:block-restriction-attacking-player-condition. Proving cards: Vantress
 Gargoyle, Monstrous Hound, Branded Brawlers, Lurking Green Dragon, Crown-Hunter Hireling.
+
+**An animate that grants a whole ability (2026-11-02).** All composition: `animate`, then `grant-triggered`, `grant-static` or
+`grant-protection` in one `sequence`, by one duration. Two pieces of code: `combat/eligibility.ts`'s `ownStatics` reads granted statics
+too, so a granted "can't attack unless defending player …" binds, and `add-types`' `removeSubtypes` for "it isn't an Equipment". Keys:
+effect:animate-grants-conditional-static, effect:animate-grants-protection, effect:animate-grants-toxic, effect:animate-grants-triggered.
+Proving cards: Raging Ravine, Restless Spire, Veiled Serpent, Veiled Apparition, Opal Guardian, Monument to Perfection, Dancing Sword.

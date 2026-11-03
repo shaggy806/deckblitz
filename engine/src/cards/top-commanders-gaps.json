@@ -1348,7 +1348,11 @@
   "static:self-type-changes",
   "static:cant-attack-unless-defender-controls",
   "static:cant-attack-if-defender-controls",
-  "static:block-restriction-attacking-player-condition"
+  "static:block-restriction-attacking-player-condition",
+  "effect:animate-grants-conditional-static",
+  "effect:animate-grants-protection",
+  "effect:animate-grants-toxic",
+  "effect:animate-grants-triggered"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

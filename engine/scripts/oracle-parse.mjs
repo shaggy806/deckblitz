@@ -6005,6 +6005,71 @@ const MANA_SPEND_PURPOSE_LINES = {
   "Spend this mana only on costs that contain {X}.": { purposes: ["cost-with-x"] },
 };
 
+const COLOR_LETTER = { white: "W", blue: "U", black: "B", red: "R", green: "G" };
+
+/**
+ * "~ becomes a 3/3 red and green Elemental creature with "Whenever …"": `animate`
+ * with the whole ability granted beside it (`grant-triggered`, `grant-static`,
+ * `grant-protection`), by the animation's duration — Raging Ravine, Restless
+ * Spire, Veiled Serpent, Veiled Apparition, Opal Guardian. "It's still a land"
+ * adds the type; with no such sentence the types are replaced (rule 205.1a).
+ * `null` for anything else, a bare keyword animate among it.
+ */
+function becomesWithAbilitiesOf(text) {
+  const still = /^(.+) It's still a land\.$/s.exec(text);
+  const body = still === null ? text : still[1];
+  const m = /^(Until end of turn, )?(?:~|It) becomes an? (\d+)\/(\d+) (.+?) creature with (.+?)$/s.exec(body);
+  if (m === null) return null;
+  const duration = m[1] !== undefined ? "end-of-turn" : "permanent";
+  // The characteristics: colors, then capitalized creature types.
+  const described = /^((?:(?:white|blue|black|red|green)(?:, and |, | and )?)+ )?([A-Z][a-z]+(?: [A-Z][a-z]+)*)$/.exec(m[4]);
+  if (described === null) return null;
+  const colors = (described[1] ?? "").split(/, and |, | and | /).filter(Boolean).map((c) => COLOR_LETTER[c]);
+  const subtypes = described[2].split(" ");
+  // The abilities: keywords and a protection, then at most one quoted ability.
+  const quoted = /^(?:(.+) and )?"(.+)"$/s.exec(m[5]);
+  const plain = quoted !== null ? (quoted[1] ?? "") : m[5].replace(/\.$/, "");
+  const keywords = [];
+  const grants = [];
+  for (const word of plain.split(/, and |, | and /).filter(Boolean)) {
+    const keyword = KEYWORDS[word.toLowerCase()];
+    const protection = /^protection from (white|blue|black|red|green)$/.exec(word);
+    if (keyword !== undefined) keywords.push(keyword);
+    else if (protection !== null) grants.push({ kind: "grant-protection", target: "source", from: { colors: [COLOR_LETTER[protection[1]]] }, duration });
+    else return null;
+  }
+  if (quoted !== null) {
+    // Read as a face of its own, as "this creature" in the text it's given.
+    const ability = quoted[2].replace(/^~/, "This creature").replace(/~/g, "this creature");
+    const inner = parseFace({ name: "Quoted Ability", type_line: "Creature", oracle_text: ability });
+    if (inner.complete !== true) return null;
+    if (inner.triggered.length === 1 && inner.static.length === 0) {
+      grants.push({ kind: "grant-triggered", target: "source", ability: inner.triggered[0], duration });
+    } else if (inner.static.length === 1 && inner.triggered.length === 0) {
+      grants.push({ kind: "grant-static", target: "source", ability: inner.static[0], duration });
+    } else return null;
+  }
+  if (grants.length === 0) return null;
+  return {
+    kind: "sequence",
+    effects: [
+      {
+        kind: "animate",
+        target: "source",
+        power: Number(m[2]),
+        toughness: Number(m[3]),
+        ...(still !== null
+          ? { addTypes: ["creature"], addSubtypes: subtypes }
+          : { setTypes: ["creature"], addTypes: [], addSubtypes: [], setSubtypes: subtypes }),
+        ...(colors.length > 0 ? { setColors: colors } : {}),
+        ...(keywords.length > 0 ? { keywords } : {}),
+        duration,
+      },
+      ...grants,
+    ],
+  };
+}
+
 export function parseEffect(text, outer) {
   // Each target a sentence names takes the next slot of the ability's list.
   const ctx = { ...outer, target: (spec) => outer.targets.push(spec) - 1 };
@@ -6013,6 +6078,8 @@ export function parseEffect(text, outer) {
   const todo = [];
   const hints = [];
   let skip = 0;
+  const becomes = becomesWithAbilitiesOf(text);
+  if (becomes !== null) return { effect: becomes, todo: [], hints: [] };
   // Shallow Grave's and Corpse Dance's whole text: the top creature card of
   // your graveyard (rule 404.2), and what follows reads it as target 0.
   if (
@@ -11035,6 +11102,8 @@ const INTERVENING_IFS = {
   // Coven (Midnight Hunt) and day/night (rule 731.1).
   "if you control three or more creatures with different powers,": { kind: "coven" },
   "if it's night,": { kind: "day-night", is: "night" },
+  // Opal Guardian, Veiled Serpent (Hidden Spider's shape): rule 603.4, read of itself.
+  "if ~ is an enchantment,": { kind: "source", filter: { type: "enchantment" } },
   "if it's day,": { kind: "day-night", is: "day" },
   "if you attacked this turn,": { kind: "turn-stat", stat: "attacked", who: "you", atLeast: 1 },
   // Pack tactics: the attackers' total power, as they were declared.

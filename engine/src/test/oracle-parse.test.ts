@@ -4789,6 +4789,41 @@ describe("damage by this source, switches, defending-player restrictions, a targ
     });
   });
 
+  it("reads a creature it becomes, with a whole ability granted beside it", () => {
+    const ravine = face(
+      "Land",
+      '{2}{R}{G}: Until end of turn, this land becomes a 3/3 red and green Elemental creature with "Whenever this creature attacks, put a +1/+1 counter on it." It\'s still a land.',
+    );
+    expect(ravine.activated[0].effect).toMatchObject({
+      kind: "sequence",
+      effects: [
+        { kind: "animate", target: "source", power: 3, toughness: 3, addTypes: ["creature"], addSubtypes: ["Elemental"], setColors: ["R", "G"], duration: "end-of-turn" },
+        { kind: "grant-triggered", target: "source", ability: { trigger: { on: "attacks", who: "self" } }, duration: "end-of-turn" },
+      ],
+    });
+    const spire = face(
+      "Land",
+      '{U}{R}: Until end of turn, this land becomes a 2/1 blue and red Elemental creature with "During your turn, this creature has first strike." It\'s still a land.',
+    );
+    expect(spire.activated[0].effect.effects[1]).toMatchObject({
+      kind: "grant-static",
+      ability: { condition: { kind: "your-turn" }, grantKeywords: ["first-strike"], text: "During your turn, this creature has first strike." },
+    });
+    const serpent = face(
+      "Enchantment",
+      'When an opponent casts a spell, if this permanent is an enchantment, it becomes a 4/4 Serpent creature with "This creature can\'t attack unless defending player controls an Island."',
+    );
+    expect(serpent.triggered[0].condition).toEqual({ kind: "source", filter: { type: "enchantment" } });
+    expect(serpent.triggered[0].effect.effects[0]).toMatchObject({ setTypes: ["creature"], setSubtypes: ["Serpent"], duration: "permanent" });
+    expect(serpent.triggered[0].effect.effects[1].ability.cantAttackUnlessDefender).toEqual({ controls: { subtype: "Island" } });
+    const guardian = face(
+      "Enchantment",
+      "When an opponent casts a creature spell, if this permanent is an enchantment, this enchantment becomes a 3/4 Gargoyle creature with flying and protection from red.",
+    );
+    expect(guardian.triggered[0].effect.effects[0].keywords).toEqual(["flying"]);
+    expect(guardian.triggered[0].effect.effects[1]).toEqual({ kind: "grant-protection", target: "source", from: { colors: ["R"] }, duration: "permanent" });
+  });
+
   it("reads restrictions asked of the defending or attacking player", () => {
     const serpent = face("Creature — Serpent", "This creature can't attack unless defending player controls an Island.");
     expect(serpent.static[0].cantAttackUnlessDefender).toEqual({ controls: { subtype: "Island" } });

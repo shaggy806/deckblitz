@@ -38826,11 +38826,16 @@ export class Game {
     set: {
       readonly setTypes?: readonly CardType[];
       readonly removeTypes?: readonly CardType[];
+      readonly removeSubtypes?: readonly string[];
       readonly setSubtypes?: readonly string[];
       readonly addColors?: readonly Color[];
     } = {},
   ): void {
-    const replaces = set.setTypes !== undefined || set.removeTypes !== undefined || set.setSubtypes !== undefined;
+    const replaces =
+      set.setTypes !== undefined ||
+      set.removeTypes !== undefined ||
+      set.removeSubtypes !== undefined ||
+      set.setSubtypes !== undefined;
     const colors = set.addColors ?? [];
     if (target.kind !== "object" || (types.length === 0 && subtypes.length === 0 && !replaces && colors.length === 0)) return;
     const id = this.splitOneFromStack(target.object);
@@ -38848,6 +38853,7 @@ export class Game {
       keywords: [],
       ...(set.setTypes !== undefined ? { setTypes: [...set.setTypes] } : {}),
       ...(set.removeTypes !== undefined ? { removeTypes: [...set.removeTypes] } : {}),
+      ...(set.removeSubtypes !== undefined ? { removeSubtypes: [...set.removeSubtypes] } : {}),
       ...(set.setSubtypes !== undefined ? { setSubtypes: [...set.setSubtypes] } : {}),
       ...(colors.length > 0 ? { addColors: [...colors] } : {}),
       addTypes: [...types],
