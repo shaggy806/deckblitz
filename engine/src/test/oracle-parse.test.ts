@@ -6726,6 +6726,16 @@ describe("creatures in a blocking relation (blockingRelation)", () => {
     const cyclops = face("Rampaging Cyclops", "Creature — Cyclops", "This creature gets -2/-0 as long as two or more creatures are blocking it.");
     expect(cyclops.complete).toBe(true);
     expect(cyclops.static[0].condition).toEqual({ kind: "source", filter: { blockerCount: { op: "gte", n: 2 } } });
+    // The turn's attack history (rule 506.3 — War Historian).
+    const historian = face("War Historian", "Creature — Human Monk", "Reach\nThis creature has indestructible as long as it attacked a battle this turn.");
+    expect(historian.complete).toBe(true);
+    expect(historian.static[0]).toMatchObject({
+      affects: { scope: "self" },
+      grantKeywords: ["indestructible"],
+      condition: { kind: "source", filter: { attackedBattleThisTurn: true } },
+    });
+    const horrigan = face("Agent Frank Horrigan", "Legendary Creature — Mutant", "~ has indestructible as long as it attacked this turn.");
+    expect(horrigan.static[0].condition).toEqual({ kind: "source", filter: { attackedThisTurn: true } });
     const wolverine = face(
       "Grizzled Wolverine",
       "Creature — Wolverine",

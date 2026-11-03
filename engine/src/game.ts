@@ -8050,6 +8050,7 @@ export class Game {
       const object = this.state.objects[id];
       if (object.attackedThisTurn === true) object.attackedThisTurn = false;
       delete object.attackedPlayersThisTurn;
+      delete object.attackedBattleThisTurn;
       if (object.dealtDamage?.thisTurn !== undefined) object.dealtDamage = { combat: object.dealtDamage.combat };
     }
     this.state.extraCombats = 0;
@@ -10876,6 +10877,13 @@ export class Game {
         };
         if (object.lastAttack.player !== null) {
           object.attackedPlayersThisTurn = [...(object.attackedPlayersThisTurn ?? []), object.lastAttack.player];
+        } else if (
+          this.state.objects[defender as ObjectId]?.zone === "battlefield" &&
+          computeCharacteristics(this.state, this.registry, defender as ObjectId).types.includes("battle")
+        ) {
+          // Attacking a battle (rule 506.3): War Historian's "attacked a
+          // battle this turn" holds from here on, whatever becomes of it.
+          object.attackedBattleThisTurn = true;
         }
         // Melee's "each opponent you attacked this combat" (702.121a) — kept
         // past the attacker leaving combat.
@@ -49381,6 +49389,7 @@ export class Game {
       ...(object.renowned === true ? { renowned: true as const } : {}),
       ...(object.entry !== undefined ? { entry: object.entry } : {}),
       ...(object.attackedThisTurn === true ? { attackedOnTurn: this.state.turn.number } : {}),
+      ...(object.attackedBattleThisTurn === true ? { attackedBattleOnTurn: this.state.turn.number } : {}),
       ...(object.damageThisTurn !== undefined ? { damageThisTurn: object.damageThisTurn } : {}),
       ...(object.dealtDamageToCreatureOnTurn !== undefined
         ? { dealtDamageToCreatureOnTurn: object.dealtDamageToCreatureOnTurn }
@@ -50157,6 +50166,7 @@ export class Game {
     delete object.altCostGrantOnTurn;
     delete object.attackedThisTurn;
     delete object.attackedPlayersThisTurn;
+    delete object.attackedBattleThisTurn;
     delete object.lastAttack;
     delete object.mustAttackPlayer;
     delete object.mustAttackPlayerThisCombat;

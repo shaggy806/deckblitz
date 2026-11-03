@@ -26796,6 +26796,7 @@ import _poolWarElemental from "./pool/war-elemental.js";
 import _poolWarElephant from "./pool/war-elephant.js";
 import _poolWarFalcon from "./pool/war-falcon.js";
 import _poolWarFlare from "./pool/war-flare.js";
+import _poolWarHistorian from "./pool/war-historian.js";
 import _poolWarHorn from "./pool/war-horn.js";
 import _poolWarMachineAvengingArsenal from "./pool/war-machine-avenging-arsenal.js";
 import _poolWarMachineJamesRhodes from "./pool/war-machine-james-rhodes.js";
@@ -55414,6 +55415,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolWarElephant,
   _poolWarFalcon,
   _poolWarFlare,
+  _poolWarHistorian,
   _poolWarHorn,
   _poolWarMachineAvengingArsenal,
   _poolWarMachineJamesRhodes,
@@ -84045,6 +84047,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/war-elephant": _poolWarElephant,
   "pool/war-falcon": _poolWarFalcon,
   "pool/war-flare": _poolWarFlare,
+  "pool/war-historian": _poolWarHistorian,
   "pool/war-horn": _poolWarHorn,
   "pool/war-machine-avenging-arsenal": _poolWarMachineAvengingArsenal,
   "pool/war-machine-james-rhodes": _poolWarMachineJamesRhodes,

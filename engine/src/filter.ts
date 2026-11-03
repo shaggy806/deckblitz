@@ -969,6 +969,11 @@ export interface CardFilter {
    * permanent that left the battlefield and came back is a new object that
    * hasn't; one that has left is asked as it last was. */
   readonly attackedThisTurn?: boolean;
+  /** Was declared as an attacker attacking a battle this turn (or wasn't) —
+   * War Historian's "as long as it attacked a battle this turn" (rule
+   * 506.3). Holds from that declaration whatever then happens to the
+   * battle; one that has left is asked as it last was. */
+  readonly attackedBattleThisTurn?: boolean;
   /** Was dealt damage this turn by a source matching this, as that source
    * was then (`DamageHistory`) — Shelob, Child of Ungoliant's "dealt
    * damage this turn by a Spider **you controlled**": `controlledBy` from
@@ -2321,6 +2326,13 @@ export function matchesFilter(
         ? live.zone === "battlefield" && live.attackedThisTurn === true
         : lki!.attackedOnTurn === state.turn.number;
     if (attacked !== filter.attackedThisTurn) return false;
+  }
+  if (filter.attackedBattleThisTurn !== undefined) {
+    const attacked =
+      live !== undefined
+        ? live.zone === "battlefield" && live.attackedBattleThisTurn === true
+        : lki!.attackedBattleOnTurn === state.turn.number;
+    if (attacked !== filter.attackedBattleThisTurn) return false;
   }
   if (filter.putIntoGraveyardFromLibraryThisTurn !== undefined) {
     // A snapshot is of a permanent, which didn't come from a library.

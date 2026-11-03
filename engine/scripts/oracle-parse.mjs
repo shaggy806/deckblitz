@@ -11476,6 +11476,12 @@ const STATIC_CONDITION_SUFFIXES = [
   [" as long as you have the city's blessing.", { kind: "citys-blessing" }],
   // "… as long as two or more creatures are blocking it" (Rampaging Cyclops).
   [" as long as two or more creatures are blocking it.", { kind: "source", filter: { blockerCount: { op: "gte", n: 2 } } }],
+  // The turn's attack history: "… as long as it attacked this turn" (Agent
+  // Frank Horrigan), "… as long as it attacked a battle this turn" (War
+  // Historian, rule 506.3), "… as long as it entered this turn" (Crew Captain).
+  [" as long as it attacked this turn.", { kind: "source", filter: { attackedThisTurn: true } }],
+  [" as long as it attacked a battle this turn.", { kind: "source", filter: { attackedBattleThisTurn: true } }],
+  [" as long as it entered this turn.", { kind: "source", filter: { enteredThisTurn: true } }],
 ];
 /** The same, leading: "As long as you have the city's blessing, ~ has
  * hexproof" (Slippery Scoundrel). */

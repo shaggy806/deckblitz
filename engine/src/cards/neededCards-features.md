@@ -4124,6 +4124,17 @@ attack-with-exactly, attack-with-total-power, attacks-player-at-least,
 attack-with-count-amount. Proving cards: Alluring Suitor, Desert Were-Worm, Horn
 of the Mark, Landroval, Horizon Witness, Grand Warlord Radha, The Earth King.
 
+### Attacked a battle this turn — built 2026-11-03
+
+The need-keys Phase 2 key `condition:attacked-battle-this-turn`.
+`GameObject.attackedBattleThisTurn`, set as a creature is declared attacking a
+battle (rule 506.3) and kept for the turn whatever becomes of the battle (War
+Historian's ruling), reset like `attackedThisTurn` (and kept in the
+last-known snapshot as `attackedBattleOnTurn`); `CardFilter.attackedBattleThisTurn`
+asks it. The scaffolder reads "… as long as it attacked [a battle] this turn"
+and "… as long as it entered this turn". `attacked-battle-this-turn.test.ts`.
+Proving card: War Historian.
+
 ### How many creatures are blocking it — built 2026-11-03
 
 The need-keys Phase 2 keys `amount:creatures-blocking-it`,

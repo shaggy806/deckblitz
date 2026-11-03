@@ -419,6 +419,12 @@ export interface GameObject {
    * "can't attack a player it has already attacked this turn" (Port Razer).
    * Reset as each turn begins, and by any zone change, like `attackedThisTurn`. */
   attackedPlayersThisTurn?: PlayerId[];
+  /** True once this permanent has been declared as an attacker attacking a
+   * battle this turn (rule 506.3) — War Historian's "as long as it attacked
+   * a battle this turn", which holds from that declaration for the rest of
+   * the turn whatever then happens to the battle. Reset as each turn begins,
+   * and by any zone change, like `attackedThisTurn`. */
+  attackedBattleThisTurn?: true;
   /** `mustAttackPlayer` lasts only this combat (rule 500.5a) — Territorial
    * Hellkite's "attacks that player this combat if able". */
   mustAttackPlayerThisCombat?: true;
@@ -2066,6 +2072,8 @@ export interface LastKnownInfo {
   /** How it had entered — `GameObject.entry`. */
   readonly entry?: EntryRecord;
   readonly attackedOnTurn?: number;
+  /** The turn it attacked a battle on, if it did — `attackedBattleThisTurn`. */
+  readonly attackedBattleOnTurn?: number;
   /** `GameObject.damageThisTurn` and `dealtDamageToCreatureOnTurn` as it
    * left: a creature that died of it was still dealt it this turn. */
   readonly damageThisTurn?: DamageHistory;

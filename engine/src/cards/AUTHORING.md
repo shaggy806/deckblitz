@@ -2700,7 +2700,7 @@ subtypes, supertype, notSupertype, name, notName, colors, notColors, colorless,
 manaValue, power, toughness, basePower, baseToughness, counters, controlledBy,
 ownedBy, keyword, notKeyword, tapped, token, isCommander, equipped, enchanted,
 modified, anyOf, manaSpent, manaFrom, putIntoGraveyardFromLibraryThisTurn, putIntoGraveyardThisTurn, blockedThisTurn,
-discardedThisTurn, enteredThisTurn, attackedThisTurn, damagedThisTurnBy, excessDamageThisTurn,
+discardedThisTurn, enteredThisTurn, attackedThisTurn, attackedBattleThisTurn, damagedThisTurnBy, excessDamageThisTurn,
 dealtDamageToCreatureThisTurn, dealtDamageThisTurn, cast, castBy, castFrom, castVia, enteredFrom,
 putThereBySource, sharesCardTypeWith, sharesPermanentTypeWith, sharesCreatureTypeWith, sharesLandTypeWith, sameNameWith, sameNameAsAnother, thisWay, attacking, blocking, blockingRelation, goaded, suspected, saddled, saddledSource, crewedSource, crewedBySource, enlistedThisCombat, monstrous, renowned, hasManaAbility, hasAbilities,
 xInManaCost, manaCost, coloredManaSymbols, cardTypeCount, nameDiffersFromEach,
@@ -2936,7 +2936,9 @@ nothing shares. Unbound — a static's or a trigger's filter — it matches
 nothing. `enteredThisTurn` /
 `attackedThisTurn` are a permanent's history this turn — "creatures that
 entered this turn", Kratos, God of War's "creatures that player controls that
-**didn't attack** this turn" (`attackedThisTurn: false`). A permanent that
+**didn't attack** this turn" (`attackedThisTurn: false`);
+`attackedBattleThisTurn` is "attacked **a battle** this turn" (War Historian,
+rule 506.3), true from the declaration on whatever becomes of the battle. A permanent that
 changes zones is a new object that did neither; one that has left is asked as
 it last was — as is `monstrous`, the designation monstrosity gives (rule 701.37b; "as long as this creature is monstrous" is a static's `condition: { kind: "source", filter: { monstrous: true } }` — Domesticated Hydra), and `renowned`, the one renown gives (702.112b). So are `damagedThisTurnBy: { subtype?, type?, controlledBy?, source? }` (`source: "this"` is "dealt damage by **this creature** this turn" — Sengir Vampire's dies trigger, Kumano's Pupils' "would die, exile it instead"; `"host"` is "… by **enchanted/equipped** creature" — Vampiric Embrace; either matched by the source's battlefield stint, rule 400.7, so damage from before it last left doesn't count, while one leaving in the same event still does, 603.10a; `damaged-by-this-source.test.ts`) —
 "dealt damage this turn by a Spider **you controlled**" (Shelob, Child of
