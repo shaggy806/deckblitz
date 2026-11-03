@@ -161,6 +161,8 @@ export interface SearchMore {
   readonly exileRest?: true;
   /** Its `inAnyOrder`. */
   readonly inAnyOrder?: true;
+  /** Its `upTo`. */
+  readonly upTo?: true;
   /** Its `instead`, its `condition` already read (one that didn't hold is no
    * `instead` at all) and its `under` named. */
   readonly instead?: ResolvedSearchInstead;
@@ -9016,9 +9018,18 @@ export type EffectSpec =
        * that includes the library shuffles it ("if you search your library
        * this way, shuffle"). A graveyard is public, so a matching card there
        * can't be missed: failing to find is allowed only in a hidden zone
-       * (rule 701.23b).
+       * (rule 701.23b) — unless the card says `upTo`.
        */
       readonly zones?: SearchZones;
+      /**
+       * The count is printed "**up to** N": finding fewer, none included, is
+       * the card's own choice, so it holds in a public zone too. "Search your
+       * library and/or graveyard for up to five Doctor cards" (The Five
+       * Doctors), with the graveyard alone chosen, may find none of the Doctors
+       * there. Without it `min: 0` is only 701.23b's leave to miss in a hidden
+       * zone, so "a card" still must be found in a graveyard searched alone.
+       */
+      readonly upTo?: true;
       /**
        * "Search your library and graveyard for five cards **and exile the
        * rest**" (Doomsday): every card searched and not found is exiled face
@@ -18046,6 +18057,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           ...(spec.faceUpExile === true ? { faceUpExile: true } : {}),
           ...(spec.exileRest === true ? { exileRest: true } : {}),
           ...(spec.inAnyOrder === true ? { inAnyOrder: true } : {}),
+          ...(spec.upTo === true ? { upTo: true } : {}),
           // "…if you control a land named Wastes": read now — nothing between
           // the search and the put could change it. Not holding, every find
           // goes to `destination`.

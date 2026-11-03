@@ -10048,4 +10048,39 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       step: 'upkeep',
     }),
   ),
+  // --- Searches over several zones, and "up to" in a graveyard (2026-11-03, need-keys Phase 2) ---
+  preset(
+    "Ancient Vendetta: at four players, only the target's three zones are searched",
+    board({
+      you: { bf: ['Swamp*4'], hand: ['Ancient Vendetta'] },
+      opp: [
+        { hand: ['Grizzly Bears'] },
+        { hand: ['Grizzly Bears', 'Forest'], gy: ['Grizzly Bears'], lib: ['Grizzly Bears', 'Forest'] },
+        { gy: ['Grizzly Bears'] },
+      ],
+    }),
+  ),
+  preset(
+    'The Five Doctors: the graveyard alone may find none, at four players',
+    board({
+      you: {
+        bf: ['Forest*6'],
+        hand: ['The Five Doctors'],
+        gy: ['Cult Healer', 'Grizzly Bears'],
+        lib: ['Doctor Jane Foster', 'Forest'],
+      },
+      opp: [{}, {}, {}],
+    }),
+  ),
+  preset(
+    "Last Light of Durin's Day: the sixth Mountain asks your hand and/or library, at four players",
+    board({
+      you: {
+        bf: [{ name: "Last Light of Durin's Day", counters: { quest: 5 } }],
+        hand: ['Mountain', 'Balefire Dragon'],
+        lib: ['Balefire Dragon', 'Forest'],
+      },
+      opp: [{}, {}, {}],
+    }),
+  ),
 ]

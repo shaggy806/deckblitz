@@ -6670,3 +6670,20 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 - **Do:** Attack Bob with your Grizzly Bears. Bob doesn't block. As Bob, target Carol's Hill Giant; then answer yes as you.
 - **Expect:** Bob, who controls the Aura, chooses the target, and your Bears aren't offered. You, who control the Bears, are asked. On your yes, the Giant dies and the Bears deal Bob no combat damage.
+
+## Searches over several zones, and "up to" in a graveyard (2026-11-03)
+
+### Ancient Vendetta: at four players, only the target's three zones are searched
+
+- **Do:** Cast Ancient Vendetta targeting Carol and name Grizzly Bears.
+- **Expect:** The popup offers Carol's three Grizzly Bears (graveyard, hand, library), not Bob's or Dave's, with her Forests not among them. Each is labelled with its zone, and you may click **Exile none**, even with the graveyard's still there. Carol's library is shuffled either way.
+
+### The Five Doctors: the graveyard alone may find none, at four players
+
+- **Do:** Cast The Five Doctors. As it resolves, click "Search your graveyard", then click **Put none**.
+- **Expect:** Three choices are offered: "Search your library and graveyard", "Search your library", "Search your graveyard". This one offers Cult Healer, not Doctor Jane Foster or Grizzly Bears, and lets you find none. Your library is not shuffled.
+
+### Last Light of Durin's Day: the sixth Mountain asks your hand and/or library, at four players
+
+- **Do:** Play your Mountain. As the trigger resolves, click "Search your hand and library" and choose a Balefire Dragon.
+- **Expect:** Last Light goes to your graveyard first. Three choices are offered: "Search your hand and library", "Search your hand", "Search your library". The popup shows both Dragons, one from your hand and one from your library; the one you choose enters, and your library is shuffled.

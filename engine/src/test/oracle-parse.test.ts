@@ -10463,6 +10463,30 @@ describe("a target's namesakes off the battlefield", () => {
 });
 
 describe("a search of your own zones", () => {
+  it("reads \"and/or … up to N\" as a choice of zones whose count may find none anywhere", () => {
+    const doctors = parseEffect(
+      "Search your library and/or graveyard for up to five Doctor cards, reveal them, and put them into your hand. If you search your library this way, shuffle.",
+      ctx(),
+    );
+    expect(doctors.todo).toEqual([]);
+    const modal = doctors.effect.effects[0];
+    expect(modal.modes.map((mode: { text: string }) => mode.text)).toEqual([
+      "Search your library and graveyard",
+      "Search your library",
+      "Search your graveyard",
+    ]);
+    expect(modal.modes[2].effect).toEqual({
+      kind: "search-library",
+      filter: { subtype: "Doctor" },
+      destination: "hand",
+      min: 0,
+      max: 5,
+      upTo: true,
+      reveal: true,
+      zones: "graveyard",
+    });
+  });
+
   it("reads \"and/or\" as a choice of zones as it resolves, attached or not", () => {
     const giant = parseEffect(
       "You may search your graveyard, hand, and/or library for an Aura card and put it onto the battlefield attached to this creature. If you search your library this way, shuffle.",

@@ -1251,6 +1251,8 @@
   "effect:search-hand-graveyard-library",
   "effect:search-hand-graveyard-library-exile",
   "effect:search-library-and-graveyard-exile-rest",
+  "decision:search-hand-and-library",
+  "effect:search-up-to-public-zone",
   "condition:same-name-as-target-off-battlefield",
   "condition:same-name-as-target-tokens-only",
   "effect:exile-from-hand-by-filter",

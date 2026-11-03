@@ -4021,6 +4021,17 @@ Dust, The Stone Brain, Doomsday. Left: Kassandra still waits on `condition:equip
 and Kotose on `zone:choose-one-of-exiled`; Agency Outfitter's two names are a `together:
 oneEach` the scaffolder doesn't draft.
 
+### "Up to" in a public zone, and the hand and/or library — built 2026-11-03
+
+The need-keys Phase 2 family `decision:choose-from-zone-extensions`, its two search keys.
+`effect:search-up-to-public-zone` is `search-library`'s `upTo`: a graveyard searched alone must
+yield a match for "a card" (701.23b frees only a hidden zone), but "up to five" may find none.
+`decision:search-hand-and-library` was already `zones` and `searchZonesAndOr` from the family
+above, triaged before they landed; it needed its cards. No new decision: both are the
+`choose-from-zone` a search raises, whose popup labels each card with its zone, checked live at
+four players. Proving cards: The Five Doctors, Gate to the Afterlife, Last Light of Durin's Day,
+Ancient Vendetta.
+
 ### A target's namesakes off the battlefield, and tokens only — built 2026-11-02
 
 The need-keys Phase 2 family `condition:filter-card-property-clauses`, its keys

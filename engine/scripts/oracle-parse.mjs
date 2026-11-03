@@ -8353,6 +8353,10 @@ function searchInsteadAt(sentences, i) {
  *   and put it onto the battlefield [attached to this creature]. If you search
  *   your library this way, shuffle." (Boonweaver Giant, Dark Supplicant): the
  *   zones chosen as it resolves (`searchZonesAndOr`);
+ * - "Search your library and/or graveyard for up to five Doctor cards, reveal
+ *   them, and put them into your hand. If you search your library this way,
+ *   shuffle." (The Five Doctors): the same, "up to" holding in a graveyard too
+ *   (`upTo`);
  * - "Search your library and graveyard for five cards and exile the rest. Put
  *   the chosen cards on top of your library in any order." (Doomsday).
  */
@@ -8372,6 +8376,27 @@ function searchZonesAt(sentences, i) {
         exileRest: true,
         inAnyOrder: true,
       },
+      used: 2,
+    };
+  }
+  const upTo =
+    /^search your ((?:graveyard|library|hand)(?:, (?:graveyard|library|hand),?| ) ?and\/or (?:graveyard|library|hand)) for up to (\w+) (.+?) cards, reveal them, and put them into your hand\.$/i.exec(
+      sentences[i] ?? "",
+    );
+  if (upTo !== null && /^if you search your library this way, shuffle\.$/i.test(sentences[i + 1] ?? "")) {
+    const max = numberOf(upTo[2]);
+    const filter = parseTypePhrase(upTo[3], { cards: true });
+    if (typeof max !== "number" || filter === null || filter === undefined) return null;
+    return {
+      effect: searchZonesAndOr(upTo[1].toLowerCase().match(/graveyard|library|hand/g), {
+        kind: "search-library",
+        filter,
+        destination: "hand",
+        min: 0,
+        max,
+        upTo: true,
+        reveal: true,
+      }),
       used: 2,
     };
   }
