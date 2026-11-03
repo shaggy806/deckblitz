@@ -863,6 +863,8 @@ missing. Re-run `--greedy` for Phase 2's order.
   `player`/`playerOnly`/`abilityOnly`/`firstTimeEachTurnByAnyone` (`player-becomes-target`, `becomes-target-by-your-ability`,
   `becomes-target-first-time-by-anyone`); Amulet of Safekeeping, Unsettled Mariner, Dormant Gomazoa, Loki, Angelic Cub.
   Left: the spell-on-stack and targets-only-it keys.
+- **2026-11-03: `keyword:hexproof-from-abilities`.** Hexproof from activated and triggered abilities, and the printed
+  "can't be the target of …" marked `notHexproof` so a loss of hexproof leaves it; Volatile Stormdrake, Shanna.
 
 ## Rough size
 

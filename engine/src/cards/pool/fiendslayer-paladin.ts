@@ -15,5 +15,5 @@ export default defineCard({
   toughness: 2,
   keywords: ["first-strike", "lifelink"],
   text: `First strike\nLifelink\n${TARGET_TEXT}`,
-  static: [{ affects: { scope: "self" }, hexproofFrom: { colors: ["B", "R"], spellsOnly: true }, text: TARGET_TEXT }],
+  static: [{ affects: { scope: "self" }, hexproofFrom: { colors: ["B", "R"], spellsOnly: true, notHexproof: true }, text: TARGET_TEXT }],
 });

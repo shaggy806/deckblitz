@@ -12747,6 +12747,8 @@ function untargetablePhrase(phrase) {
   let m;
   if (rest === "spells") return { spellsOnly: true, ...owner };
   if (rest === "spells or abilities") return { ...owner };
+  // "~ can't be the target of abilities your opponents control" (Shanna).
+  if (rest === "abilities") return { abilitiesOnly: true, ...owner };
   if ((m = /^abilities from (.+) sources$/.exec(rest)) !== null) {
     const q = quality(m[1]);
     return q === null ? null : { ...q, abilitiesOnly: true, ...owner };
@@ -13890,7 +13892,9 @@ function parseStatic(line, text) {
             : m[1] === "Creatures"
               ? { scope: "all-creatures" }
               : { scope: "attached" };
-      return { affects, hexproofFrom: hexproof, text };
+      // Not the keyword, so a loss of hexproof doesn't take it (Shanna,
+      // Sisay's Legacy against Shadowspear).
+      return { affects, hexproofFrom: { ...hexproof, notHexproof: true }, text };
     }
   }
   // "Cards in graveyards can't be the targets of spells or abilities"

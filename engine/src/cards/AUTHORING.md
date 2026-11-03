@@ -5312,7 +5312,14 @@ is "can't attack a player it has already attacked this turn" (Port Razer), by th
   Dense Foliage's "Creatures can't be the targets of spells" is `affects: {
   scope: "all-creatures" }, hexproofFrom: { spellsOnly: true, anyController:
   true }`; Shielding Plax's "spells or abilities your opponents control" is
-  `{}`. A one-shot "… this turn" form isn't built.
+  `{}`. Each of these prose forms also takes `notHexproof: true`: it isn't a
+  hexproof ability, so an effect that makes a permanent lose hexproof
+  (Shadowspear) leaves it (Shanna, Sisay's Legacy's "can't be the target of
+  abilities your opponents control" is `{ abilitiesOnly: true, notHexproof:
+  true }`). The keyword "hexproof from activated and triggered abilities"
+  (Volatile Stormdrake) is `{ abilitiesOnly: true }` alone — static abilities
+  never target — and a loss of hexproof takes it (702.11e). A one-shot "…
+  this turn" form isn't built.
 - `graveyardCardsUntargetable: { filter?, byOpponents? }` — "Cards in
   graveyards can't be the targets of spells or abilities" (Ground Seal, Silent
   Gravestone, Dennick): no spell or ability may target a card in any graveyard

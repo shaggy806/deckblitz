@@ -1507,6 +1507,7 @@ function isQualifiedHexproof(h: NonNullable<StaticAbility["hexproofFrom"]>): boo
     h.spellsOnly === true ||
     h.abilitiesOnly === true ||
     h.anyController === true ||
+    h.notHexproof === true ||
     ((h.colors ?? []).length === 0 && (h.types ?? []).length === 0 && h.filter === undefined)
   );
 }
@@ -5112,7 +5113,10 @@ function computeCharacteristicsUncached(
       for (const p of effect.protection.players ?? []) protPlayers.add(p);
     }
     // A loss of hexproof takes every "hexproof from" with it (rule 702.11e).
-    const hexproofFromStays = granted && !lostAfter(losses, "hexproof", effect.hexproofFromAt);
+    // A "can't be the target of …" that isn't the keyword (`notHexproof` —
+    // Shanna, Sisay's Legacy) stays.
+    const hexproofFromStays =
+      granted && (effect.hexproofFrom?.notHexproof === true || !lostAfter(losses, "hexproof", effect.hexproofFromAt));
     if (effect.hexproofFrom && hexproofFromStays && isQualifiedHexproof(effect.hexproofFrom)) {
       hexQualified.push(effect.hexproofFrom);
     } else if (effect.hexproofFrom && hexproofFromStays) {

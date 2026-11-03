@@ -6982,9 +6982,9 @@ describe("can't be the target of … (hexproofFrom's qualifiers, graveyardCardsU
       "Creature — Human Wizard",
       "This creature can't be the target of red spells or abilities from red sources.",
     );
-    expect(informer.static[0].hexproofFrom).toEqual({ colors: ["R"], anyController: true });
+    expect(informer.static[0].hexproofFrom).toEqual({ colors: ["R"], anyController: true, notHexproof: true });
     const ward = face("Ward A", "Enchantment — Aura", "Enchant creature\nEnchanted creature can't be the target of abilities from artifact sources.").static[0];
-    expect(ward.hexproofFrom).toEqual({ types: ["artifact"], abilitiesOnly: true, anyController: true });
+    expect(ward.hexproofFrom).toEqual({ types: ["artifact"], abilitiesOnly: true, anyController: true, notHexproof: true });
     expect(face("Dense Foliage", "Enchantment", "Creatures can't be the targets of spells.").static[0]).toMatchObject({
       affects: { scope: "all-creatures" },
       hexproofFrom: { spellsOnly: true, anyController: true },
@@ -6993,8 +6993,14 @@ describe("can't be the target of … (hexproofFrom's qualifiers, graveyardCardsU
       filter: { subtype: "Aura" },
       spellsOnly: true,
       anyController: true,
+      notHexproof: true,
     });
-    expect(face("Plax C", "Enchantment — Aura", "Enchant creature\nEnchanted creature can't be the target of spells or abilities your opponents control.").static[0].hexproofFrom).toEqual({});
+    expect(face("Plax C", "Enchantment — Aura", "Enchant creature\nEnchanted creature can't be the target of spells or abilities your opponents control.").static[0].hexproofFrom).toEqual({ notHexproof: true });
+    // Not the keyword, so a loss of hexproof leaves it (Shanna against Shadowspear).
+    expect(
+      face("Shanna D", "Creature — Human Warrior", "This creature can't be the target of abilities your opponents control.").static[0]
+        .hexproofFrom,
+    ).toEqual({ abilitiesOnly: true, notHexproof: true });
   });
 
   it("reads the graveyard rule", () => {

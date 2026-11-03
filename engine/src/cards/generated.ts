@@ -21016,6 +21016,7 @@ import _poolShangChiAndTheTenRings from "./pool/shang-chi-and-the-ten-rings.js";
 import _poolShangChiMartialMentor from "./pool/shang-chi-martial-mentor.js";
 import _poolShanidSleepersScourge from "./pool/shanid-sleepers-scourge.js";
 import _poolShannaPurifyingBlade from "./pool/shanna-purifying-blade.js";
+import _poolShannaSisaysLegacy from "./pool/shanna-sisays-legacy.js";
 import _poolShanodinDryads from "./pool/shanodin-dryads.js";
 import _poolShantottoTacticianMagician from "./pool/shantotto-tactician-magician.js";
 import _poolShaoJun from "./pool/shao-jun.js";
@@ -26581,6 +26582,7 @@ import _poolVolatileClaws from "./pool/volatile-claws.js";
 import _poolVolatileFault from "./pool/volatile-fault.js";
 import _poolVolatileFjord from "./pool/volatile-fjord.js";
 import _poolVolatileRig from "./pool/volatile-rig.js";
+import _poolVolatileStormdrake from "./pool/volatile-stormdrake.js";
 import _poolVolatileWanderglyph from "./pool/volatile-wanderglyph.js";
 import _poolVolcanicAwakening from "./pool/volcanic-awakening.js";
 import _poolVolcanicDragon from "./pool/volcanic-dragon.js";
@@ -49700,6 +49702,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolShangChiMartialMentor,
   _poolShanidSleepersScourge,
   _poolShannaPurifyingBlade,
+  _poolShannaSisaysLegacy,
   _poolShanodinDryads,
   _poolShantottoTacticianMagician,
   _poolShaoJun,
@@ -55265,6 +55268,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolVolatileFault,
   _poolVolatileFjord,
   _poolVolatileRig,
+  _poolVolatileStormdrake,
   _poolVolatileWanderglyph,
   _poolVolcanicAwakening,
   _poolVolcanicDragon,
@@ -78397,6 +78401,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/shang-chi-martial-mentor": _poolShangChiMartialMentor,
   "pool/shanid-sleepers-scourge": _poolShanidSleepersScourge,
   "pool/shanna-purifying-blade": _poolShannaPurifyingBlade,
+  "pool/shanna-sisays-legacy": _poolShannaSisaysLegacy,
   "pool/shanodin-dryads": _poolShanodinDryads,
   "pool/shantotto-tactician-magician": _poolShantottoTacticianMagician,
   "pool/shao-jun": _poolShaoJun,
@@ -83962,6 +83967,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/volatile-fault": _poolVolatileFault,
   "pool/volatile-fjord": _poolVolatileFjord,
   "pool/volatile-rig": _poolVolatileRig,
+  "pool/volatile-stormdrake": _poolVolatileStormdrake,
   "pool/volatile-wanderglyph": _poolVolatileWanderglyph,
   "pool/volcanic-awakening": _poolVolcanicAwakening,
   "pool/volcanic-dragon": _poolVolcanicDragon,
