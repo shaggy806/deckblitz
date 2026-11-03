@@ -2385,6 +2385,40 @@ export function parseSentence(sentence, ctx) {
       };
     }
   }
+  // Every graveyard at once, with no "this turn": "return all artifact and
+  // enchantment cards from all graveyards to the battlefield under their
+  // owners' control" (Open the Vaults), "… to the battlefield tapped …"
+  // (Planar Birth); "each player returns each creature card from their
+  // graveyard to the battlefield with an additional -1/-1 counter on it"
+  // (Pyrrhic Revival); "return all Zombie cards from all graveyards to their
+  // owners' hands" (Infernal Caretaker).
+  if ((m = /^return all (.+?) cards from all graveyards to (the battlefield( tapped)? under their owners' control|their owners' hands)\.$/i.exec(s))) {
+    const types = graveyardReturnTypes(m[1]);
+    if (types !== null) {
+      const toHand = /hands$/i.test(m[2]);
+      return {
+        kind: "return-from-graveyard",
+        from: toHand ? "all-graveyards" : "each-graveyard",
+        filter: types,
+        destination: toHand ? "hand" : "battlefield",
+        ...(m[3] !== undefined ? { enterTapped: true } : {}),
+        count: "all",
+      };
+    }
+  }
+  if ((m = /^each player returns (?:all|each) (.+?) cards? from their graveyard to the battlefield(?: with an additional (-1\/-1|\+1\/\+1) counter on it)?\.$/i.exec(s))) {
+    const types = graveyardReturnTypes(m[1]);
+    if (types !== null) {
+      return {
+        kind: "return-from-graveyard",
+        from: "each-graveyard",
+        filter: types,
+        destination: "battlefield",
+        ...(m[2] !== undefined ? { withCounters: { kind: m[2], amount: 1 } } : {}),
+        count: "all",
+      };
+    }
+  }
   // What a `remove-counters` just before took off, counted one by one:
   // "For each counter removed this way, ~ gets +1/+0 until end of turn" (Hex
   // Parasite), "You draw cards and lose life equal to the number of counters

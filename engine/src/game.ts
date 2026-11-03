@@ -30200,7 +30200,7 @@ export class Game {
           return (
             object !== undefined &&
             players.includes(object.controller) &&
-            matchesFilter(this.state, this.registry, id, filter, { you: object.controller }) &&
+            matchesFilter(this.state, this.registry, id, filter, { you: object.controller, source }) &&
             this.canBeSacrificed(id)
           );
         });

@@ -6384,3 +6384,9 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 - **Do:** Cast Divination. Pass to your next upkeep and answer yes.
 - **Expect:** Divination draws two, and two more cards go face down into exile. At your upkeep those two come to your hand, and the rest of your hand goes face down.
+## Every graveyard at once (2026-11-02)
+
+### Open the Vaults: an Aura's owner chooses what it enchants
+
+- **Do:** Cast Open the Vaults. As Bob, choose Grizzly Bears for Pacifism.
+- **Expect:** Sol Ring comes back under you, and Glorious Anthem and Pacifism under Bob. Pacifism enchants your Grizzly Bears.

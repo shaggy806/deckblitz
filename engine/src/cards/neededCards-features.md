@@ -4161,6 +4161,7 @@ with, so an effect adding "basic" comes before a "nonbasic lands" one whatever t
 static:static-grant-supertype, static:characteristics-of-library-cards (the "land cards in your library" half). Found to
 need no code: static:static-add-chosen-type (`addsChosenCreatureType`). Proving cards: On Serra's Wings, In Bolas's Clutches,
 Leyline of Singularity, Glittering Frost, Rimefeather Owl, Rootpath Purifier, Lifecraft Engine.
+
 **Every graveyard at once (2026-11-02).** No new vocabulary: `return-from-graveyard`'s `from: "each-graveyard"` (each card
 under its owner's control, `enterTapped`, `withCounters`) and `from: "all-graveyards"` with `destination: "hand"` (each to its
 owner's) already ran these, and the scaffolder now reads them. `sacrifice-all`'s filter now sees its source, for "all other

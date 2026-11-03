@@ -9641,4 +9641,13 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       you: { bf: ['Moonring Mirror', 'Island*3'], hand: ['Divination', 'Lightning Bolt'], lib: ['Grizzly Bears', 'Forest', 'Sol Ring', 'Ornithopter'] },
     }),
   ),
+
+  // --- Every graveyard at once (2026-11-02) ---
+  preset(
+    'Open the Vaults: an Aura\'s owner chooses what it enchants',
+    board({
+      you: { bf: ['Plains*6', 'Grizzly Bears'], hand: ['Open the Vaults'], gy: ['Sol Ring'] },
+      opp: { human: true, gy: ['Pacifism', 'Glorious Anthem'] },
+    }),
+  ),
 ]

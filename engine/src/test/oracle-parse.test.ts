@@ -8467,6 +8467,7 @@ describe("a sweep of the cards put into a graveyard from the battlefield this tu
     expect(spell("Exile all cards from your hand face down.").complete).toBe(false);
   });
 
+
   it("reads a sweep of every graveyard, under each owner or to each owner's hand", () => {
     const base = { kind: "return-from-graveyard", count: "all" };
     expect(spell("Return all artifact and enchantment cards from all graveyards to the battlefield under their owners' control.").effect).toEqual({

@@ -1322,7 +1322,9 @@
   "effect:return-all-graveyards-under-owners-control",
   "effect:return-from-all-graveyards-to-hand",
   "effect:exile-hands-face-down-return-later",
-  "effect:delayed-trigger-next-turn-end-step"
+  "effect:delayed-trigger-next-turn-end-step",
+  "effect:return-all-graveyards-under-owners-control",
+  "effect:return-from-all-graveyards-to-hand"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

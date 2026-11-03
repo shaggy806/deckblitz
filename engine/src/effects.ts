@@ -3963,14 +3963,18 @@ export type EffectSpec =
        * battlefield under your control": a card someone else owns enters
        * under the effect's controller's control, kept there by a control
        * effect (rule 110.2; it's exiled if they leave the game, 800.4a).
-       * With `count: "all"` and `destination: "battlefield"` only.
+       * With `count: "all"`; with `destination: "hand"` it's Infernal
+       * Caretaker's "return all Zombie cards from all graveyards to their
+       * owners' hands", each to its owner's (rule 400.3).
        * `"hand-or-graveyard"`: the controller's hand and graveyard together,
        * one choice over both — Kastral, the Windcrested's "a Bird creature
        * card from your hand or graveyard". `"each-graveyard"`: every
        * graveyard, each card under its owner's control — "each player
        * returns all creature cards … from their graveyard to the
-       * battlefield" (Patriarch's Bidding), all at once. With `count:
-       * "all"` only. */
+       * battlefield" (Patriarch's Bidding), "return all artifact and
+       * enchantment cards from all graveyards to the battlefield under their
+       * owners' control" (Open the Vaults), all at once. With `count: "all"`
+       * only. */
       readonly from?: "all-graveyards" | "hand-or-graveyard" | "each-graveyard";
       /** …with these types and colours in addition to their own, in place
        * as they enter (rule 614.12) — Grimoire of the Dead's "They're black

@@ -2398,7 +2398,12 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
   Bidding's `subtypes: [CHOSEN_THIS_WAY]` — its "each player returns all
   creature cards … from their graveyard to the battlefield" is
   `return-from-graveyard`'s `from: "each-graveyard"`, `count: "all"`: every
-  graveyard at once, each card under its owner's control); inside `for-each-vote` it is that
+  graveyard at once, each card under its owner's control, also Open the Vaults'
+  "return all … from all graveyards … under their owners' control", Planar Birth's
+  `enterTapped` and Pyrrhic Revival's `withCounters`; `from: "all-graveyards"` with
+  `destination: "hand"` is Infernal Caretaker's "to their owners' hands"; "that
+  weren't put there this way" is the filter's `notThisWay`, Bringer of the Last
+  Gift's); inside `for-each-vote` it is that
   voter's own choice (Grave Sifter's "cards of that type"). Not yet: a
   choice kept on a permanent for its statics (Archangel of Strife's "players
   who chose war"), or chosen among another player's permanents (Grenzo's
