@@ -26,13 +26,21 @@
 import type { Action, LegalAction } from "../actions.js";
 import { computeCharacteristics } from "../characteristics.js";
 import type { ObjectId } from "../primitives.js";
+import { completeTogether, fitsTogether, togetherViolation, type ZoneChoiceTogether } from "../zone-choice-together.js";
 import type { DecisionReadCtx } from "./contract.js";
 import { defineDecision } from "./define.js";
 import { subsetOf, withinCopies } from "./shared/picks.js";
 
-/** How many permanents each stack entry stands for, where more than one. */
-function stackSizes(ctx: DecisionReadCtx, eligible: readonly ObjectId[]): Record<ObjectId, number> {
+/** How many permanents each stack entry stands for, where more than one. A
+ * set rule's picks share no tag, so a stack's tokens, all alike, are one
+ * choice under it — none is counted. */
+function stackSizes(
+  ctx: DecisionReadCtx,
+  eligible: readonly ObjectId[],
+  together?: ZoneChoiceTogether,
+): Record<ObjectId, number> {
   const copies: Record<ObjectId, number> = {};
+  if (together !== undefined) return copies;
   for (const id of eligible) {
     const n = ctx.state.objects[id]?.stackCount ?? 1;
     if (n > 1) copies[id] = n;
@@ -46,7 +54,7 @@ export const choosePermanents = defineDecision({
   hasSource: true,
 
   legal: (ctx, awaiting): LegalAction[] => {
-    const copies = stackSizes(ctx, awaiting.eligible);
+    const copies = stackSizes(ctx, awaiting.eligible, awaiting.together);
     return [
       {
         kind: "choose-permanents",
@@ -55,6 +63,7 @@ export const choosePermanents = defineDecision({
         max: awaiting.max,
         prompt: awaiting.prompt,
         ...(Object.keys(copies).length > 0 ? { copies } : {}),
+        ...(awaiting.together !== undefined ? { together: awaiting.together } : {}),
         ...(awaiting.maxTotalPower !== undefined
           ? { maxTotalPower: awaiting.maxTotalPower, powers: powersOf(ctx, awaiting.eligible) }
           : {}),
@@ -78,11 +87,13 @@ export const choosePermanents = defineDecision({
         : `${player} must choose from ${awaiting.min} to ${awaiting.max}, chose ${picked.length}`;
     }
     const why =
-      withinCopies(picked, stackSizes(ctx, awaiting.eligible), (id, limit) =>
+      withinCopies(picked, stackSizes(ctx, awaiting.eligible, awaiting.together), (id, limit) =>
         limit === 1
           ? `${player} chose the same permanent twice`
           : `${player} chose ${id} more than the ${limit} it stands for`,
-      ) ?? subsetOf(picked, awaiting.eligible, (id) => `${id} can't be chosen`);
+      ) ??
+      subsetOf(picked, awaiting.eligible, (id) => `${id} can't be chosen`) ??
+      (awaiting.together === undefined ? null : togetherViolation(awaiting.together, picked));
     if (why !== null || awaiting.maxTotalPower === undefined) return why;
     const powers = powersOf(ctx, awaiting.eligible);
     const total = picked.reduce((n, id) => n + (powers[id] ?? 0), 0);
@@ -104,10 +115,15 @@ export const choosePermanents = defineDecision({
       awaiting.maxTotalPower !== undefined && offer?.powers !== undefined
         ? { maxTotalPower: awaiting.maxTotalPower, powers: offer.powers }
         : undefined;
+    const permanents = controller.choosePermanents(view, awaiting.eligible, awaiting.min, awaiting.max, cap);
     return {
       type: "choose-permanents",
       player,
-      permanents: controller.choosePermanents(view, awaiting.eligible, awaiting.min, awaiting.max, cap),
+      // A chooser's ranking knows nothing of a set rule.
+      permanents:
+        awaiting.together === undefined
+          ? permanents
+          : completeTogether(awaiting.together, permanents, awaiting.eligible, awaiting.min, awaiting.max),
     };
   },
 
@@ -120,6 +136,31 @@ export const choosePermanents = defineDecision({
    */
   candidates: (legal, player, limit, helpers): Action[] => {
     if (legal.kind !== "choose-permanents") return [];
+    // Under a set rule ("with different powers"), what the search weighs: one
+    // of each your most valuable first, as few as allowed, your least valuable,
+    // and one of each from the whole board.
+    const together = legal.together;
+    if (together !== undefined) {
+      const ordered = helpers.order(legal.eligible);
+      const mine = ordered.filter((id) => helpers.controllerOf(id) === player);
+      const fold = (list: readonly ObjectId[]): ObjectId[] => {
+        const kept: ObjectId[] = [];
+        for (const id of list) {
+          if (kept.length < legal.max && fitsTogether(together, [...kept, id])) kept.push(id);
+        }
+        return completeTogether(together, kept, legal.eligible, legal.min, legal.max);
+      };
+      const answers = [fold(mine), fold([]), fold([...mine].reverse()), fold(ordered)];
+      const seen = new Set<string>();
+      return answers
+        .filter((picked) => {
+          const key = [...picked].sort().join(",");
+          if (seen.has(key)) return false;
+          seen.add(key);
+          return true;
+        })
+        .map((permanents) => ({ type: "choose-permanents", player, permanents }));
+    }
     // Kept under a power cap (Slaughter the Strong): the most power that
     // fits, the most valuable first while it fits, and keeping nothing (for
     // a deck that wants its creatures to die).
@@ -224,7 +265,14 @@ export const choosePermanents = defineDecision({
     while (permanents.length < count && pool.length > 0) {
       permanents.push(pool.splice(rng.pickIndex(pool.length), 1)[0]);
     }
-    return { type: "choose-permanents", player, permanents };
+    return {
+      type: "choose-permanents",
+      player,
+      permanents:
+        legal.together === undefined
+          ? permanents
+          : completeTogether(legal.together, permanents, legal.eligible, legal.min, legal.max),
+    };
   },
 });
 

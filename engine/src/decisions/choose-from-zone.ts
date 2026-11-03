@@ -52,6 +52,7 @@ export const chooseFromZone = defineDecision({
       ...(awaiting.restDestination !== undefined ? { split: true } : {}),
       ...(awaiting.together !== undefined ? { together: awaiting.together } : {}),
       ...(awaiting.order === true ? { order: true } : {}),
+      ...(awaiting.searchRest?.shuffle != null ? { shuffledIn: true as const } : {}),
       ...(awaiting.forPlayer !== undefined ? { forPlayer: awaiting.forPlayer } : {}),
       ...(awaiting.prompt !== undefined ? { prompt: awaiting.prompt } : {}),
       ...(awaiting.alsoTaken !== undefined ? { alsoTaken: [...awaiting.alsoTaken] } : {}),

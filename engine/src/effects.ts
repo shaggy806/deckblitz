@@ -193,6 +193,9 @@ export interface SearchMore {
  *   more than that: Gifts Ungiven's "target opponent chooses two of those
  *   cards" ("if you find one or two cards, your opponent must choose them",
  *   its ruling).
+ * - `destination: "library"`: those picked go back into the library the search
+ *   then shuffles — Threats Undetected's "shuffle the chosen cards into your
+ *   library and put the rest into your hand".
  * - `chooser`: **another player** picks them from the revealed finds, once
  *   they're chosen and revealed — a target (`{ target: 0 }`, Intuition's
  *   "target opponent chooses one"), or `"an-opponent"`: "an opponent chooses"
@@ -208,7 +211,7 @@ export interface SearchMore {
  * `all`, `attachedToSource` or a library-top / exile destination.
  */
 export interface SearchInstead {
-  readonly destination: "battlefield" | "hand" | "graveyard";
+  readonly destination: "battlefield" | "hand" | "graveyard" | "library";
   readonly enterTapped?: true;
   readonly filter?: CardFilter;
   readonly condition?: StaticCondition;
@@ -218,7 +221,7 @@ export interface SearchInstead {
 }
 /** A {@link SearchInstead} as `beginLibrarySearch` takes it. */
 export interface ResolvedSearchInstead {
-  readonly destination: "battlefield" | "hand" | "graveyard";
+  readonly destination: "battlefield" | "hand" | "graveyard" | "library";
   readonly enterTapped?: true;
   readonly filter?: CardFilter;
   readonly pick: "all" | "any" | "one" | { readonly exactly: number };
@@ -238,8 +241,12 @@ export interface ResolvedSearchInstead {
  */
 export type SearchTogether =
   | { readonly share: "land-type" }
-  /** "…that each have different names" (Tiamat): no two finds share a name. */
+  /** "…that each have different names" (Tiamat): no two finds share a name,
+   * and a card with no name can't be one of them (rule 201.2b). */
   | { readonly distinctNames: true }
+  /** "…with different powers" (Rip, Spawn Hunter; Threats Undetected): no two
+   * share a power, read as the choice is raised. */
+  | { readonly distinctPowers: true }
   | {
       readonly oneEach: readonly {
         /** How the client names the slot: "a Forest card". */
@@ -2243,6 +2250,12 @@ export type EffectSpec =
        * Giant): nobody is asked, one of the matches is picked, and `then` runs
        * with it at slot 0. `upTo` isn't read: it's one permanent. */
       readonly random?: true;
+      /** What the chosen permanents must be as a set: "choose any number of
+       * creatures **with different powers**" (Sigarda's Vanguard), "tokens you
+       * control **with different names**" (Battle for Bretagard). A token
+       * stack's tokens share both, so one of a stack at most; a permanent with
+       * no name can't be chosen for different names (rule 201.2b). */
+      readonly together?: { readonly distinctNames: true } | { readonly distinctPowers: true };
     }
   | {
       /**
@@ -9901,6 +9914,8 @@ export interface EffectApi {
     except?: readonly ObjectId[],
     /** Who chooses — the effect's controller when absent. */
     chooser?: PlayerId,
+    /** What the chosen ones must be as a set — the effect's `together`. */
+    together?: { readonly distinctNames: true } | { readonly distinctPowers: true },
   ): void;
   /** See the `"blight"` {@link EffectSpec}: `player` blights `amount` — the
    * creature chosen now, or asked for — then `then` with it as target 0.
@@ -14077,6 +14092,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         spec.exceptSource,
         except,
         chooser,
+        spec.together,
       );
       return;
     }

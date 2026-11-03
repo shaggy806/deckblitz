@@ -1825,6 +1825,10 @@ export type LegalAction =
        * card in `ids` is picked (`min` = `max` = all of them), and the order
        * they're picked in is where each goes, per `destination`. */
       readonly order?: true;
+      /** A search's library is shuffled right after this choice, so where a
+       * chosen card goes on it means nothing (Threats Undetected's "shuffle
+       * the chosen cards into your library"): no order to show. */
+      readonly shuffledIn?: true;
       /** A rule the chosen cards must obey as a set (Myriad Landscape's
        * "that share a land type"): `fitsTogether` says whether a pick does. */
       readonly together?: ZoneChoiceTogether;
@@ -2137,6 +2141,9 @@ export type LegalAction =
        * each eligible permanent's power (`powers`). */
       readonly maxTotalPower?: number;
       readonly powers?: Readonly<Record<ObjectId, number>>;
+      /** What the picks must be as a set — "with different powers" (Sigarda's
+       * Vanguard), "with different names" (Battle for Bretagard). */
+      readonly together?: ZoneChoiceTogether;
       /** Set when it's which creature blights this many (rule 701.68a):
        * exactly one, and the counters go on it. */
       readonly blight?: number;

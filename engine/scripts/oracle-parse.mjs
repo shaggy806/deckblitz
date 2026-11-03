@@ -6549,6 +6549,7 @@ export function parseEffect(text, outer) {
       totalManaValueLookAt(sentences, i) ??
       revealUntilAt(sentences, i, ctx) ??
       opponentDividesFindsAt(sentences, i, ctx) ??
+      distinctSetAt(sentences, i) ??
       opponentChoosesInGraveyardAt(sentences, i, ctx);
     if (oneEach !== null) {
       parsed.push(oneEach.effect);
@@ -8315,10 +8316,14 @@ function oneEachLookAt(sentences, i) {
  * different names and reveal them. An opponent chooses two of those cards. Put
  * the chosen cards into your graveyard and the rest into your hand. Then
  * shuffle." (Realms Uncharted), "… and the rest onto the battlefield tapped,
- * then shuffle." (Elemental Teachings). */
+ * then shuffle." (Elemental Teachings); "… creature cards with different powers
+ * and reveal them. An opponent chooses two of those cards. Shuffle the chosen
+ * cards into your library and put the rest into your hand." (Threats
+ * Undetected). */
 function opponentDividesFindsAt(sentences, i, ctx) {
-  const search = /^search your library for (up to )?(\w+) (?:(.+?) )?cards?( with different names)? and reveal them\.$/i.exec(sentences[i]);
+  const search = /^search your library for (up to )?(\w+) (?:(.+?) )?cards?( with different (?:names|powers))? and reveal them\.$/i.exec(sentences[i]);
   if (search === null) return null;
+  const together = search[4] === undefined ? {} : { together: /powers/i.test(search[4]) ? { distinctPowers: true } : { distinctNames: true } };
   const pick = /^(target opponent|an opponent) chooses (one|two|three)(?: of those cards)?\.$/i.exec(sentences[i + 1] ?? "");
   if (pick === null) return null;
   const count = numberOf(search[2]);
@@ -8326,12 +8331,28 @@ function opponentDividesFindsAt(sentences, i, ctx) {
   if (typeof count !== "number") return null;
   const filter = search[3] === undefined ? {} : parseTypePhrase(search[3], { cards: true });
   if (filter === null) return null;
+  const chooser = /^target/i.test(pick[1]) ? { target: ctx.target("opponent") } : "an-opponent";
+  const shuffledIn = /^shuffle (?:that card|the chosen cards) into your library and put the rest into your hand\.$/i.test(sentences[i + 2] ?? "");
+  if (shuffledIn) {
+    return {
+      effect: {
+        kind: "search-library",
+        filter,
+        destination: "hand",
+        min: search[1] === undefined ? count : 0,
+        max: count,
+        reveal: true,
+        ...together,
+        instead: { destination: "library", pick: picks === 1 ? "one" : { exactly: picks }, chooser },
+      },
+      used: 3,
+    };
+  }
   const put = /^put (?:that card|the chosen cards) (into your hand|into your graveyard) and the rest (into your hand|into your graveyard|onto the battlefield tapped)(, then shuffle)?\.$/i.exec(sentences[i + 2] ?? "");
   if (put === null) return null;
   const closed = put[3] !== undefined;
   if (!closed && !/^then shuffle\.$/i.test(sentences[i + 3] ?? "")) return null;
   const place = (phrase) => (/hand/.test(phrase) ? "hand" : /graveyard/.test(phrase) ? "graveyard" : "battlefield");
-  const chooser = /^target/i.test(pick[1]) ? { target: ctx.target("opponent") } : "an-opponent";
   const rest = place(put[2]);
   return {
     effect: {
@@ -8342,7 +8363,7 @@ function opponentDividesFindsAt(sentences, i, ctx) {
       min: search[1] === undefined ? count : 0,
       max: count,
       reveal: true,
-      ...(search[4] !== undefined ? { together: { distinctNames: true } } : {}),
+      ...together,
       instead: {
         destination: place(put[1]),
         pick: picks === 1 ? "one" : { exactly: picks },
@@ -8350,6 +8371,48 @@ function opponentDividesFindsAt(sentences, i, ctx) {
       },
     },
     used: closed ? 3 : 4,
+  };
+}
+
+/** An untargeted choice under a set rule: "Return any number of permanent
+ * cards with different names from your graveyard to the battlefield." (Eerie
+ * Ultimatum), and "Choose any number of creatures with different powers. Those
+ * creatures gain double strike until end of turn." (Sigarda's Vanguard). */
+function distinctSetAt(sentences, i) {
+  const rule = (word) => (/powers/i.test(word) ? { distinctPowers: true } : { distinctNames: true });
+  const back = /^return any number of (.+?) cards with different (names|powers) from your graveyard to the battlefield\.$/i.exec(sentences[i]);
+  if (back !== null) {
+    const filter = parseTypePhrase(back[1], { cards: true });
+    if (filter === null) return null;
+    return {
+      effect: {
+        kind: "look-and-choose",
+        zone: "graveyard",
+        min: 0,
+        max: 99,
+        filter,
+        together: rule(back[2]),
+        destination: "battlefield",
+        leftover: "stay",
+      },
+      used: 1,
+    };
+  }
+  const choose = /^choose any number of (creatures) with different (names|powers)\.$/i.exec(sentences[i]);
+  const gain = /^those creatures gain (.+?) until end of turn\.$/i.exec(sentences[i + 1] ?? "");
+  if (choose === null || gain === null) return null;
+  const keyword = KEYWORDS[gain[1].toLowerCase()];
+  if (keyword === undefined) return null;
+  return {
+    effect: {
+      kind: "choose-permanents",
+      filter: { type: "creature" },
+      upTo: 99,
+      together: rule(choose[2]),
+      then: { kind: "grant-keyword", target: 0, keyword, duration: "end-of-turn" },
+      prompt: `Choose any number of creatures with different ${choose[2].toLowerCase()} to gain ${gain[1].toLowerCase()}`,
+    },
+    used: 2,
   };
 }
 

@@ -10521,3 +10521,57 @@ describe("an effect done by another player", () => {
     expect(parsed.effect).toEqual({ kind: "as-player", who: { target: 0 }, effect: { kind: "scry", amount: 2 } });
   });
 });
+
+describe("any number of … with different names or powers", () => {
+  const face = (name: string, type_line: string, oracle_text: string) =>
+    parseFace({ name, type_line, oracle_text, power: "3", toughness: "3" }, { tokenFor: () => null }) as unknown as {
+      effect?: unknown;
+      triggered?: readonly { effect: unknown }[];
+    };
+
+  it("reads the graveyard's return as a look-and-choose under the rule", () => {
+    const parsed = face(
+      "Eerie Ultimatum",
+      "Sorcery",
+      "Return any number of permanent cards with different names from your graveyard to the battlefield.",
+    );
+    expect(parsed.effect).toMatchObject({
+      kind: "look-and-choose",
+      zone: "graveyard",
+      min: 0,
+      together: { distinctNames: true },
+      destination: "battlefield",
+    });
+  });
+
+  it("reads the choosing of creatures as a choose-permanents under the rule", () => {
+    const parsed = face(
+      "Sigarda's Vanguard",
+      "Creature — Angel",
+      "When this creature enters, choose any number of creatures with different powers. Those creatures gain double strike until end of turn.",
+    );
+    expect(parsed.triggered?.[0].effect).toMatchObject({
+      kind: "choose-permanents",
+      filter: { type: "creature" },
+      together: { distinctPowers: true },
+      then: { kind: "grant-keyword", target: 0, keyword: "double-strike", duration: "end-of-turn" },
+    });
+  });
+
+  it("reads a search whose chosen finds are shuffled back in", () => {
+    const parsed = face(
+      "Threats Undetected",
+      "Sorcery",
+      "Search your library for up to four creature cards with different powers and reveal them. An opponent chooses two of those cards. Shuffle the chosen cards into your library and put the rest into your hand.",
+    );
+    expect(parsed.effect).toMatchObject({
+      kind: "search-library",
+      filter: { type: "creature" },
+      destination: "hand",
+      min: 0,
+      max: 4,
+      together: { distinctPowers: true },
+      instead: { destination: "library", pick: { exactly: 2 }, chooser: "an-opponent" },
+    });
+  });
+});

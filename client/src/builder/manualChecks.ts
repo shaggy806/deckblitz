@@ -9714,4 +9714,64 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{ human: true, bf: [{ name: 'Time Vault', tapped: true }] }, {}, {}],
     }),
   ),
+
+
+  // --- Any number with different names or powers (2026-11-02) ---------------
+  preset(
+    "Sigarda's Vanguard: a creature of a power already picked swaps out the first",
+    board({
+      you: { bf: ['Plains*5', 'Grizzly Bears', 'Runeclaw Bear'], hand: ["Sigarda's Vanguard"] },
+      opp: { bf: ['Hill Giant'] },
+    }),
+  ),
+  preset(
+    "Sigarda's Vanguard: creatures on four sides are picked one a power",
+    board({
+      you: { bf: ['Plains*5', 'Grizzly Bears'], hand: ["Sigarda's Vanguard"] },
+      opp: [{ bf: ['Runeclaw Bear'] }, { bf: ['Air Elemental'] }, { bf: ['Llanowar Elves'] }],
+    }),
+  ),
+  preset(
+    'Battle for Bretagard: one token of each name is copied',
+    board({
+      you: {
+        bf: [
+          { name: 'Battle for Bretagard', counters: { lore: 2 } },
+          'Human Warrior Token*2',
+          'Elf Warrior Token',
+        ],
+      },
+      step: 'draw',
+    }),
+  ),
+  preset(
+    'Eerie Ultimatum: two cards of one name can\'t both come back',
+    board({
+      you: {
+        bf: ['Plains*2', 'Swamp*3', 'Forest*2'],
+        hand: ['Eerie Ultimatum'],
+        gy: ['Grizzly Bears*2', 'Hill Giant', 'Lightning Bolt'],
+      },
+    }),
+  ),
+  preset(
+    'Rip, Spawn Hunter: two cards of one power can\'t both be taken',
+    board({
+      you: {
+        bf: [{ name: 'Rip, Spawn Hunter', tapped: true }],
+        lib: ['Grizzly Bears', 'Runeclaw Bear', 'Hill Giant', 'Wastes'],
+      },
+    }),
+  ),
+  preset(
+    'Threats Undetected: the opponent\'s two go back and the rest come to hand',
+    board({
+      you: {
+        bf: ['Forest*3'],
+        hand: ['Threats Undetected'],
+        lib: ['Llanowar Elves', 'Grizzly Bears', 'Hill Giant', 'Air Elemental'],
+      },
+      opp: { human: true },
+    }),
+  ),
 ]

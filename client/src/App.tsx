@@ -3260,13 +3260,14 @@ function Table({
           setStackMenu((cur) => (cur === id ? null : id))
           return
         }
-        setPermanentPicks((cur) =>
-          cur.includes(id)
-            ? cur.filter((x) => x !== id)
-            : cur.length >= choosePermanentsAction.max
-              ? [...cur.slice(1), id]
-              : [...cur, id],
-        )
+        setPermanentPicks((cur) => {
+          if (cur.includes(id)) return cur.filter((x) => x !== id)
+          // Under a set rule ("with different powers"), a click swaps out
+          // whichever pick it can't sit beside.
+          const together = choosePermanentsAction.together
+          const kept = together ? cur.filter((x) => fitsTogether(together, [x, id])) : cur
+          return kept.length >= choosePermanentsAction.max ? [...kept.slice(1), id] : [...kept, id]
+        })
         return
       }
       if (mode === 'remove-counters' && removeCountersAction) {
@@ -7399,9 +7400,13 @@ function Table({
             // A look alone (Glasses of Urza): closing it is the answer.
             ...(zoneChoiceAction.max === 0 ? { noneLabel: 'Done' } : {}),
             ...(zoneChoiceAction.together
-              ? { fits: (picked: readonly ObjectId[]) => fitsTogether(zoneChoiceAction.together!, picked) }
+              ? {
+                  fits: (picked: readonly ObjectId[]) => fitsTogether(zoneChoiceAction.together!, picked),
+                  swaps: zoneChoiceAction.together.rule === 'distinct',
+                }
               : {}),
-            ...(zoneChoiceAction.destination === 'library-top' || zoneChoiceAction.destination === 'library-bottom'
+            ...((zoneChoiceAction.destination === 'library-top' || zoneChoiceAction.destination === 'library-bottom') &&
+            zoneChoiceAction.shuffledIn !== true
               ? { ordered: true }
               : {}),
           }}

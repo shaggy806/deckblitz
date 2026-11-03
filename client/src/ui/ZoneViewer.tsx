@@ -65,6 +65,9 @@ export interface ZoneViewerProps {
     /** A rule over the picks as a set (Myriad Landscape's "that share a
      * land type"): Confirm waits until the picks obey it. */
     readonly fits?: (picked: readonly ObjectId[]) => boolean
+    /** The rule is pairwise ("with different powers"): a click takes the pick
+     * off whatever it can't sit beside. */
+    readonly swaps?: boolean
   }
   /** Selection mode only: hidden so the board can be seen ("View board").
    * The component stays mounted, so picks made so far survive; the owner
@@ -124,8 +127,10 @@ export function ZoneViewer({
     if (!selection || !selection.eligible.includes(id)) return
     setPicked((cur) => {
       if (cur.includes(id)) return cur.filter((x) => x !== id)
-      if (cur.length >= selection.max) return cur
-      return [...cur, id]
+      // "With different powers": a click swaps out the pick it can't sit beside.
+      const kept = selection.swaps === true ? cur.filter((x) => selection.fits?.([x, id]) ?? true) : cur
+      if (kept.length >= selection.max) return cur
+      return [...kept, id]
     })
   }
 

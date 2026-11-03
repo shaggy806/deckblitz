@@ -19,7 +19,9 @@
  *   creature cards with total mana value 4 or less". With `orNone`, choosing
  *   nothing passes too (a "you may").
  * - `"distinct"`: no two chosen cards share a tag — Tiamat's "Dragon cards
- *   … that each have different names", a card's one tag its name.
+ *   … that each have different names", a card's tags its names; Sigarda's
+ *   Vanguard's "creatures with different powers", its one tag its power. A
+ *   card with no tag has no name, so no different one (rule 201.2b).
  * - `"variety"`: the chosen cards' tags, all together, number `atLeast` or
  *   more — Winter, Cynical Opportunist's "any number of cards … with four or
  *   more card types among them", a card's tags its card types. With
@@ -116,6 +118,7 @@ export function fitsTogether(together: ZoneChoiceTogether, chosen: readonly Obje
   if (together.rule === "distinct") {
     const seen = new Set<string>();
     for (const id of chosen) {
+      if (tagsOf(id).length === 0) return false;
       for (const tag of tagsOf(id)) {
         if (seen.has(tag)) return false;
         seen.add(tag);

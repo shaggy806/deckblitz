@@ -3867,6 +3867,9 @@ export type AwaitingDecision =
       readonly then: EffectSpec;
       readonly source: ObjectId;
       readonly x: number;
+      /** What the picks must be as a set — "with different powers", each
+       * eligible permanent's tags read as the choice is raised. */
+      readonly together?: ZoneChoiceTogether;
       /** Set when the choice is of a source of damage (rule 609.7a —
        * `prevent-damage-from-chosen-source`): a spell on the stack may be
        * chosen as well as a permanent. */

@@ -6442,3 +6442,35 @@ These boards start before the first turn (the builder's `openingHands`), with th
 - **Do:** Cast Capture of Jingzhou, activate Chronatog once, then choose "No attacks". Choose "Use the skipped turn I owe on it" when asked.
 - **Expect:** You're asked as the extra turn would begin. It's skipped, Bob takes his turn, and your turn after that happens as usual: the skip you owed is spent.
 - **Not a bug:** Choosing "Keep owing it" instead skips your next turn as well.
+
+## Any number with different names or powers (2026-11-02)
+
+### Sigarda's Vanguard: a creature of a power already picked swaps out the first
+
+- **Do:** Cast Sigarda's Vanguard. When its ability asks, click Grizzly Bears, then Runeclaw Bear.
+- **Expect:** The banner asks for "any number of creatures with different powers". Clicking Runeclaw Bear takes the pick off Grizzly Bears (both have power 2). Click Hill Giant too and Confirm: Runeclaw Bear and Hill Giant have double strike.
+
+### Sigarda's Vanguard: creatures on four sides are picked one a power
+
+- **Do:** Cast Sigarda's Vanguard. When its ability asks, click Grizzly Bears, Air Elemental and Llanowar Elves, then Confirm.
+- **Expect:** Any player's creature can be picked. The three you picked have double strike.
+
+### Battle for Bretagard: one token of each name is copied
+
+- **Do:** The third chapter triggers as your main phase begins. Click a Human Warrior token and the Elf Warrior token, and Confirm.
+- **Expect:** The banner shows 2 at most. You end with one more Human Warrior and one more Elf Warrior, and the Saga is gone.
+
+### Eerie Ultimatum: two cards of one name can't both come back
+
+- **Do:** Cast Eerie Ultimatum. In the graveyard popup, pick a Grizzly Bears and Hill Giant, then click the other Grizzly Bears.
+- **Expect:** Lightning Bolt can't be picked, and the second Grizzly Bears takes the pick off the first. Confirm: the picked two come back and the other Grizzly Bears stays.
+
+### Rip, Spawn Hunter: two cards of one power can't both be taken
+
+- **Do:** Your turn runs on to your second main phase by itself. In the popup, pick Grizzly Bears and Hill Giant, then click Runeclaw Bear.
+- **Expect:** Runeclaw Bear, the second card of power 2, takes the pick off Grizzly Bears, and Wastes can't be picked. Confirm: Runeclaw Bear and Hill Giant come to your hand, and the other two go to the bottom of your library.
+
+### Threats Undetected: the opponent's two go back and the rest come to hand
+
+- **Do:** Cast Threats Undetected and find all four creatures. As Bob, pick two of them and confirm.
+- **Expect:** Bob is told the two go "back into their library, shuffled", with plain picks rather than numbered ones. The other two come to your hand.

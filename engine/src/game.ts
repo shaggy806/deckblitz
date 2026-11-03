@@ -801,7 +801,9 @@ const shieldLeft = (shield: PreventionShield): number =>
 /** The cards a set rule lets be chosen at all: a card fitting no slot can't
  * fill one, and a card over a mana value cap can't be under it. */
 function eligibleForTogether(together: ZoneChoiceTogether | undefined, cards: readonly ObjectId[]): readonly ObjectId[] {
-  if (together?.rule === "one-each") return cards.filter((id) => (together.tags[id] ?? []).length > 0);
+  if (together?.rule === "one-each" || together?.rule === "distinct") {
+    return cards.filter((id) => (together.tags[id] ?? []).length > 0);
+  }
   if (together?.rule === "total" && together.atMost !== undefined) {
     const cap = together.atMost;
     return cards.filter((id) => Number(together.tags[id]?.[0] ?? 0) <= cap);
@@ -9690,12 +9692,14 @@ export class Game {
     const source = awaiting.thenSource === undefined ? undefined : this.state.objects[awaiting.thenSource];
     // Another player choosing: the cards are still the searcher's.
     const whose = instead.chooser === undefined ? "your" : "their";
-    const where = (to: "battlefield" | "hand" | "graveyard", tapped: boolean, controller: string | null): string =>
+    const where = (to: "battlefield" | "hand" | "graveyard" | "library", tapped: boolean, controller: string | null): string =>
       to === "hand"
         ? `into ${whose} hand`
         : to === "graveyard"
           ? `into ${whose} graveyard`
-          : `onto the battlefield${tapped ? " tapped" : ""}${controller === null ? "" : ` under ${controller} control`}`;
+          : to === "library"
+            ? `back into ${whose} library, shuffled`
+            : `onto the battlefield${tapped ? " tapped" : ""}${controller === null ? "" : ` under ${controller} control`}`;
     const picked = where(
       instead.destination,
       instead.enterTapped === true,
@@ -9718,7 +9722,8 @@ export class Game {
       eligible,
       min,
       max,
-      destination: instead.destination,
+      // Back into the library the search shuffles once the rest have moved.
+      destination: instead.destination === "library" ? "library-bottom" : instead.destination,
       leftover: "stay",
       ...(instead.enterTapped === true && instead.destination === "battlefield" ? { enterTapped: true } : {}),
       ...(under !== undefined && instead.destination === "battlefield" ? { enterUnder: under } : {}),
@@ -31707,8 +31712,8 @@ export class Game {
           return object?.owner === controller && object.suspended === true && (object.counters.time ?? 0) > 0;
         }).length,
       giveSuspend: (counters, options) => this.giveSuspend(controller, counters, options),
-      choosePermanents: (filter, min, max, then, prompt, exceptSource, except, chooser) =>
-        this.beginChoosePermanents(source, chooser ?? controller, x, filter, min, max, then, prompt, exceptSource === true, except),
+      choosePermanents: (filter, min, max, then, prompt, exceptSource, except, chooser, together) =>
+        this.beginChoosePermanents(source, chooser ?? controller, x, filter, min, max, then, prompt, exceptSource === true, except, together),
       blight: (player, amount, then) => this.beginBlight(player, source, amount, { x, ...(then !== undefined ? { then } : {}) }),
       bolster: (amount) => this.beginBolster(controller, source, amount, x),
       behold: (spec, then) => this.beginBehold(controller, source, spec, { x, ...(then !== undefined ? { then } : {}) }),
@@ -33413,7 +33418,12 @@ export class Game {
     // One card a slot, however many cards there are: a set that can fill only
     // so many slots can't be required to be bigger (Guided Passage's ruling:
     // "ignore those types").
-    const possible = together?.rule === "one-each" ? largestOneEach(together, eligible) : eligible.length;
+    const possible =
+      together?.rule === "one-each"
+        ? largestOneEach(together, eligible)
+        : together?.rule === "distinct"
+          ? new Set(eligible.flatMap((id) => together.tags[id] ?? [])).size
+          : eligible.length;
     // Revealing from your own hand with nothing in it that matches: there's
     // nothing to reveal and no one else to show the choice to.
     if (destination === "reveal" && eligible.length === 0) return;
@@ -33434,7 +33444,7 @@ export class Game {
       ids,
       eligible,
       min: Math.min(min, possible),
-      max: Math.min(most, eligible.length),
+      max: Math.min(most, together?.rule === "distinct" ? possible : eligible.length),
       ...(together !== undefined ? { together } : {}),
       destination,
       leftover,
@@ -33844,8 +33854,13 @@ export class Game {
       return { rule: "share", tags, text: "that share a land type" };
     }
     if ("distinctNames" in together) {
-      for (const id of eligible) tags[id] = [printedCardName(this.state.objects[id])];
+      // Every name it has (rule 201.2a — a split card's two), none face down.
+      for (const id of eligible) tags[id] = namesOf(this.registry, this.state.objects[id]);
       return { rule: "distinct", tags, text: "that each have different names" };
+    }
+    if ("distinctPowers" in together) {
+      for (const id of eligible) tags[id] = [String(computeCharacteristics(this.state, this.registry, id).power)];
+      return { rule: "distinct", tags, text: "with different powers" };
     }
     for (const id of eligible) {
       tags[id] = together.oneEach.flatMap((slot, index) =>
@@ -40140,11 +40155,18 @@ export class Game {
     prompt: string,
     exceptSource = false,
     except: readonly ObjectId[] = [],
+    togetherRule?: { readonly distinctNames: true } | { readonly distinctPowers: true },
   ): void {
-    const eligible = this.battlefieldMatching(player, filter).filter(
+    const matching = this.battlefieldMatching(player, filter).filter(
       (id) => (!exceptSource || id !== source) && !except.includes(id),
     );
-    const available = eligible.reduce((n, id) => n + (this.state.objects[id]?.stackCount ?? 1), 0);
+    const together = togetherRule === undefined ? undefined : this.searchTogether(togetherRule, matching, player, x);
+    const eligible = eligibleForTogether(together, matching);
+    // One a name or a power at most, so no more than there are of those.
+    const available =
+      together === undefined
+        ? eligible.reduce((n, id) => n + (this.state.objects[id]?.stackCount ?? 1), 0)
+        : new Set(eligible.flatMap((id) => together.tags[id] ?? [])).size;
     const most = Math.min(Math.max(0, max), available);
     if (most <= 0) return;
     this.state.awaiting = {
@@ -40157,6 +40179,7 @@ export class Game {
       then,
       source,
       x,
+      ...(together !== undefined ? { together } : {}),
     };
   }
 

@@ -955,6 +955,20 @@ as it resolves), Awaken the Sleeper ("if it's equipped, you may …"), Glamer
 Spinners and Simic Guildmage (moving an Aura to another permanent), Fulgent
 Distraction (unattach).
 
+### Any number with different names or powers — built 2026-11-02
+
+Family `decision:choose-from-zone-extensions`, its top unit. `together` gains
+`distinctPowers` beside `distinctNames`, on a search and a `look-and-choose`,
+and `choose-permanents` takes either: the awaiting and the offer carry the
+same `ZoneChoiceTogether`, so a bot, the fuzzer and the client read one rule.
+No new decision. Names are `namesOf`, so a face-down permanent has none and
+can't be chosen (rule 201.2b). A `search-library`'s `instead.destination:
+"library"` is "shuffle the chosen cards into your library". The client's picks,
+on the board and in the popup, swap out whichever they can't sit beside. Keys:
+decision:choose-any-number-different-names,
+decision:choose-any-number-different-powers. Proving cards: Eerie Ultimatum,
+Battle for Bretagard, Sigarda's Vanguard, Rip, Spawn Hunter, Threats Undetected.
+
 ### Relations among the chosen targets: shared types, equal toughness, different names — built 2026-10-31
 
 The need-keys Phase 2 family `effect:target-spec-additions`'s first group,
