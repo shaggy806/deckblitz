@@ -332,10 +332,16 @@ export type Keyword =
   | "bands-with-other"
   /** Riot (rule 702.136a) — "you may have this permanent enter with an
    * additional +1/+1 counter on it; if you don't, it gains haste". Asked as
-   * it's about to enter (`Game.askEnterChoice`) when it's printed or copied;
-   * a static granting it to others (Rhythm of the Wild) isn't read as they
-   * enter (AUTHORING §15). */
+   * it's about to enter (`Game.askEnterChoice`), printed or copied, granted by
+   * a static that will reach it there (Rhythm of the Wild, rule 614.12) or
+   * gained as a spell (Domri, Chaos Bringer); each instance is asked apart
+   * (702.136b). */
   | "riot"
+  /** Rebound (rule 702.88a), when something gives it to an instant or sorcery
+   * spell: "it gains rebound" (Taigam, Ojutai Master), "have rebound" (Cast
+   * Through Time). Read as the spell resolves; one printed is the card's
+   * `rebound`. */
+  | "rebound"
   /** Unleash (rule 702.98a) — "you may have this permanent enter with an
    * additional +1/+1 counter on it" and "this permanent can't block as long
    * as it has a +1/+1 counter on it". The first is asked as it's about to

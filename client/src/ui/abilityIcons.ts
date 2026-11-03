@@ -82,6 +82,9 @@ export const KEYWORD_GLYPH: Record<Keyword, string> = {
   // No phasing icon anywhere in the font; fading's — a permanent going
   // out of the game for a while — reads closest.
   phasing: '', // ms-ability-fading
+  // No rebound icon in the font; phasing's, a thing that goes away and comes
+  // back.
+  rebound: '', // ms-ability-fading
   decayed: '', // ms-ability-decayed
   // Landwalk: Arena's own icons for the five basic types. Desert has none
   // anywhere in the font, and landwalk is conditional unblockability, so

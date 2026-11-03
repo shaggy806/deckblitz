@@ -74,6 +74,10 @@ export const KEYWORD_REMINDER: Record<Keyword, { readonly name: string; readonly
     text: "If you control ten or more permanents, you get the city's blessing for the rest of the game.",
   },
   riot: { name: 'Riot', text: 'Enters with your choice of a +1/+1 counter or haste.' },
+  rebound: {
+    name: 'Rebound',
+    text: 'If cast from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast it from exile without paying its mana cost.',
+  },
   unleash: {
     name: 'Unleash',
     text: "You may have it enter with a +1/+1 counter. It can't block as long as it has a +1/+1 counter.",

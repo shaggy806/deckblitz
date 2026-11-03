@@ -6500,3 +6500,23 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 - **Do:** Click Undergrowth in your hand and look at the casts offered. Choose the one with the extra cost.
 - **Expect:** One cast for {G}, and one that says "additional cost {2}{R}", which taps four lands. It doesn't say "kicked".
+
+### Rhythm of the Wild: a creature with riot of its own is asked twice
+
+- **Do:** Cast Burning-Tree Vandal. Choose "+1/+1 counter" the first time you're asked and haste the second.
+- **Expect:** You're asked twice before it enters, the same question each time. It enters with one +1/+1 counter and can attack this turn.
+
+### Rhythm of the Wild: a creature with riot from it, in a four-player game
+
+- **Do:** Cast Grizzly Bears, and choose haste when asked.
+- **Expect:** You're asked once, and while you choose, the other players see only that you're making a choice. The Bears enter with no counter and can attack this turn.
+
+### Domri, Chaos Bringer: mana that gives a creature spell riot
+
+- **Do:** Use Domri's +1 and choose either color. Cast Grizzly Bears with that mana and your Forest.
+- **Expect:** You're asked to choose a +1/+1 counter or haste as the Bears enter. Cast with other mana, you wouldn't be.
+
+### Cast Through Time: a spell with rebound from it
+
+- **Do:** Cast Divination. Pass until your next upkeep and cast it when offered.
+- **Expect:** Divination goes to exile as it resolves, not to your graveyard. At your upkeep you're offered it free, and it goes to your graveyard after that.

@@ -2435,6 +2435,38 @@ export function entersWithoutAbilities(state: GameState, registry: CardRegistry,
   return false;
 }
 
+/**
+ * How many instances of `keyword` a card about to enter the battlefield under
+ * `under` will have that its own text doesn't give it (rule 614.12): one for
+ * each time it gained the keyword as a spell, which the permanent keeps (rule
+ * 400.7a), and one for each static that will reach it there. Matched as
+ * {@link entersWithoutAbilities} matches: as it is now, under that player.
+ */
+export function enteringKeywordInstances(
+  state: GameState,
+  registry: CardRegistry,
+  object: GameObject,
+  keyword: Keyword,
+  under: PlayerId,
+): number {
+  let instances = 0;
+  for (const modifier of object.modifiers) {
+    if (modifier.castRider === true && modifier.keywords.includes(keyword)) instances += 1;
+  }
+  for (const id of state.zones.shared.battlefield) {
+    const source = state.objects[id];
+    if (source === undefined || source.id === object.id || state.players[source.controller]?.hasLost === true) continue;
+    for (const ability of registry.get(rulesTextName(source)).static) {
+      if (ability.grantKeywords?.includes(keyword) !== true) continue;
+      if (hasLostAbilities(state, registry, source)) continue;
+      if (ability.affects.scope === "attached" || ability.affects.scope === "paired" || ability.affects.scope === "chosen") continue;
+      if (ability.condition !== undefined && !staticConditionMet(state, registry, source, ability.condition)) continue;
+      if (staticAffects(state, registry, ability.affects, source, object, { entering: true, enteringUnder: under })) instances += 1;
+    }
+  }
+  return instances;
+}
+
 /** The board scan behind {@link staticAbilityLosses}. */
 function computeStaticAbilityLosses(state: GameState, registry: CardRegistry): StaticLosses {
   interface Pending {
@@ -3774,6 +3806,8 @@ export interface TargetView {
    * `entersWithoutAbilities`): a `filter` scope is matched against it where
    * it is, as it would exist there. */
   readonly entering?: boolean;
+  /** With `entering`: the player it will enter under. */
+  readonly enteringUnder?: PlayerId;
   /** Answers a `filter` scope's `{ amount }` operand (`FilterContext.amount`)
    * — only a caller outside the fold has anything to answer it with (a
    * static goad: "power less than Baeloth Barrityl's power"). Without one,
@@ -3833,11 +3867,12 @@ export function staticAffects(
         ? { layered: { types: view.types, subtypes: view.subtypes, supertypes: view.supertypes, keywords: view.keywords, hasProtection: view.hasProtection } }
         : {}),
       ...(view.amount !== undefined ? { amount: view.amount } : {}),
+      ...(view.enteringUnder !== undefined ? { enteringUnder: view.enteringUnder } : {}),
     });
   }
   if (affects.scope === "lands-you-control") {
     return (
-      target.controller === source.controller &&
+      (view.enteringUnder ?? target.controller) === source.controller &&
       (view.types ?? effectiveTypes(state, registry, target)).includes("land")
     );
   }
@@ -3854,7 +3889,7 @@ export function staticAffects(
   }
   // "creatures-you-control"
   if (affects.excludeSelf && source.id === target.id) return false;
-  if (target.controller !== source.controller) return false;
+  if ((view.enteringUnder ?? target.controller) !== source.controller) return false;
   if (!isCreatureNow()) return false;
   if (affects.tokenOnly === true && !isTokenNow(target)) return false;
   if (affects.withKeyword !== undefined && !hasKeyword(affects.withKeyword)) return false;

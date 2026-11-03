@@ -1841,6 +1841,12 @@ export function parseTrigger(clause) {
     const graveyard = m[3] === "your" ? { graveyard: { ownedBy: "you" } } : { graveyard: {}, itsController: true };
     return [{ on: "cast-spell", who, filter: { ...filter, sameNameWith: graveyard } }];
   }
+  // "Whenever you cast an instant spell from your hand" (Ojer Pakpatiq).
+  if ((m = /^Whenever you cast an? (?:(.+?) )?spell from your (hand|graveyard)$/.exec(c))) {
+    const filter = m[1] === undefined ? undefined : parseTypePhrase(m[1]);
+    if (filter === null) return null;
+    return [{ on: "cast-spell", who: "you", from: m[2], ...(filter !== undefined ? { filter } : {}) }];
+  }
   if ((m = /^When(?:ever)? (you|an opponent|a player) casts? (a|an|your first|their first) (?:(.+?) )?spell(?: each turn)?$/.exec(c))) {
     const who = { you: "you", "an opponent": "opponent", "a player": "any" }[m[1]];
     const spec = { on: "cast-spell", who };
@@ -4121,6 +4127,21 @@ export function parseSentence(sentence, ctx) {
     const except = m[1] === undefined ? undefined : copyExceptOf(m[1]);
     if (except === null) return null;
     return { kind: "copy-spell", target: "trigger-spell", ...(except !== undefined ? { except } : {}) };
+  }
+  // "It gains rebound" (Taigam, Ojutai Master), "it gains bloodthirst 3"
+  // (Bloodlord of Vaasgoth): on the spell, which the permanent it becomes keeps
+  // (rule 400.7a).
+  if (ctx.castSpell === true && (m = /^(?:it|that spell) gains (rebound|riot)\.$/i.exec(s))) {
+    return { kind: "grant-keyword", target: "trigger-object", keyword: m[1].toLowerCase(), duration: "permanent" };
+  }
+  if (ctx.castSpell === true && (m = /^(?:it|that spell) gains bloodthirst (\d+)\.$/i.exec(s))) {
+    return {
+      kind: "enters-with-counters",
+      target: "trigger-object",
+      counter: "+1/+1",
+      amount: Number(m[1]),
+      ifAsItEnters: { kind: "turn-stat", stat: "damage-taken", who: "opponent", atLeast: 1 },
+    };
   }
   // "Put target creature card from a graveyard onto the battlefield under
   // your control" (Rise from the Grave, Portal to Phyrexia).
@@ -12749,6 +12770,23 @@ function parseStatic(line, text) {
     const rest = line.slice(prefix.length).replace(/^it /, "~ ");
     const inner = parseStatic(rest.charAt(0).toUpperCase() + rest.slice(1), text);
     if (inner !== null && inner.condition === undefined) return { ...inner, condition };
+  }
+  // "Nontoken creatures you control have riot" (Rhythm of the Wild, Uncivil
+  // Unrest): asked of each as it enters (rule 614.12).
+  if (line === "Nontoken creatures you control have riot.") {
+    return {
+      affects: { scope: "filter", filter: { type: "creature", token: false, controlledBy: "you" } },
+      grantKeywords: ["riot"],
+      text,
+    };
+  }
+  // "Instant and sorcery spells you control have rebound" (Cast Through Time).
+  if (line === "Instant and sorcery spells you control have rebound.") {
+    return {
+      affects: { scope: "self" },
+      grantsToSpells: { keywords: ["rebound"], filter: { typesAnyOf: ["instant", "sorcery"] } },
+      text,
+    };
   }
   // A casting ability given to the spells you cast (`grantsToSpells`):
   // "Artifact spells you cast have convoke" (Chief Engineer), "Nonartifact

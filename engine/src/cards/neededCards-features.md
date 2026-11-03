@@ -4250,3 +4250,11 @@ condition:alternative-cost-paid, cost:alternative-cost-exile-from-graveyard, cos
 half stays narrow). Found to need no code: cost:conditional-alternative-cost (`condition` took any `StaticCondition` already). Proving
 cards: Stalwart Valkyrie, Blasphemous Edict, Asmoranomardicadaistinaculdacar, Fervent Mastery, Ingenious Mastery, From Under the
 Floorboards, Welcome to the Fold, Undergrowth.
+
+**A spell gaining an ability, carried onto the permanent (2026-11-02).** `grant-keyword` and `grant-triggered` on a permanent spell are
+kept by the permanent it becomes (rule 400.7a). `"rebound"` is a `Keyword`, read as the spell resolves. `enters-with-counters`'
+`ifAsItEnters` is a gained bloodthirst. Riot from a static or from what the spell gained is asked as it enters (614.12:
+`enteringKeywordInstances`), each instance apart (702.136b). `add-mana`'s `spellGains.lasting`. Keys: effect:cast-spell-gains-bloodthirst,
+effect:grant-ability-to-permanent-spell, effect:grant-rebound-to-spell, static:grant-riot. Found already built: static:grant-cascade,
+static:next-spell-uncounterable. Proving cards: Taigam, Ojutai Master; Cast Through Time; Bloodlord of Vaasgoth; Rhythm of the Wild; Uncivil
+Unrest; Domri, Chaos Bringer; Rivaz of the Claw; Thief of Existence.

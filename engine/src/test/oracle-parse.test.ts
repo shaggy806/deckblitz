@@ -3095,6 +3095,37 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     });
   });
 
+  it("a spell gaining rebound or bloodthirst from a cast trigger, and rebound and riot from a static", () => {
+    const effect = (line: string) => (face(line, "Enchantment") as unknown as { triggered: { effect: unknown }[] }).triggered[0].effect;
+    expect(face("Whenever you cast an instant spell from your hand, it gains rebound.", "Enchantment").triggered[0].trigger).toEqual({
+      on: "cast-spell",
+      who: "you",
+      from: "hand",
+      filter: { type: "instant" },
+    });
+    expect(effect("Whenever you cast an instant spell from your hand, it gains rebound.")).toEqual({
+      kind: "grant-keyword",
+      target: "trigger-object",
+      keyword: "rebound",
+      duration: "permanent",
+    });
+    expect(effect("Whenever you cast a Vampire creature spell, it gains bloodthirst 3.")).toEqual({
+      kind: "enters-with-counters",
+      target: "trigger-object",
+      counter: "+1/+1",
+      amount: 3,
+      ifAsItEnters: { kind: "turn-stat", stat: "damage-taken", who: "opponent", atLeast: 1 },
+    });
+    expect(face("Instant and sorcery spells you control have rebound.", "Enchantment").static[0].grantsToSpells).toEqual({
+      keywords: ["rebound"],
+      filter: { typesAnyOf: ["instant", "sorcery"] },
+    });
+    expect(face("Nontoken creatures you control have riot.", "Enchantment").static[0]).toMatchObject({
+      affects: { scope: "filter", filter: { type: "creature", token: false, controlledBy: "you" } },
+      grantKeywords: ["riot"],
+    });
+  });
+
   it("a mana alternative cost and what goes with it (rule 118.9), and a keywordless optional additional cost (118.8)", () => {
     expect(face("You may pay {2}{R}{R} rather than pay this spell's mana cost.", "Sorcery").alternativeCost).toEqual({ mana: "{2}{R}{R}" });
     expect(face("You may pay {1}{W} and exile a creature card from your graveyard rather than pay this spell's mana cost.", "Creature — Angel Warrior").alternativeCost).toEqual({

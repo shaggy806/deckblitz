@@ -2705,7 +2705,12 @@ export type EffectSpec =
        * can't be responded to and happens with its source gone. The spell
        * (matched by `spell`, as it is on the stack) gains `keywords` until end
        * of turn, and so does the permanent it becomes (a `castRider`). */
-      readonly spellGains?: { readonly spell?: CardFilter; readonly keywords: readonly Keyword[] };
+      readonly spellGains?: {
+        readonly spell?: CardFilter;
+        readonly keywords: readonly Keyword[];
+        /** "It gains riot" (Domri, Chaos Bringer): with no end. */
+        readonly lasting?: true;
+      };
       /** "When that mana is spent to cast …, [effect]" — Path of Ancestry's
        * scry. Rides on each unit produced and fires as it is spent. */
       readonly whenSpent?: {
@@ -4135,6 +4140,10 @@ export type EffectSpec =
       readonly target: EffectTargetRef;
       readonly counter: string;
       readonly amount: EffectAmount;
+      /** Only if this holds as it enters, read from the permanent's side: "it
+       * gains bloodthirst 3" (Bloodlord of Vaasgoth, rule 702.54a). `amount` is
+       * fixed as this resolves. */
+      readonly ifAsItEnters?: StaticCondition;
     }
   | {
       /**
@@ -10078,7 +10087,7 @@ export interface EffectApi {
     turnOf?: PlayerId,
   ): void;
   /** See the `"enters-with-counters"` {@link EffectSpec}. */
-  entersWithCounters(target: TargetRef, counter: string, amount: number): void;
+  entersWithCounters(target: TargetRef, counter: string, amount: number, condition?: StaticCondition): void;
   /** See the `"allow-cast-from-exile"` {@link EffectSpec}. */
   allowCastFromExile(
     target: TargetRef,
@@ -15156,7 +15165,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     }
     case "enters-with-counters": {
       const target = resolveEffectTarget(spec.target, ctx);
-      if (target !== undefined) ctx.entersWithCounters(target, spec.counter, amountValue(spec.amount, ctx));
+      if (target !== undefined) ctx.entersWithCounters(target, spec.counter, amountValue(spec.amount, ctx), spec.ifAsItEnters);
       return;
     }
     case "cast-now":

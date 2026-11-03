@@ -963,8 +963,9 @@ export interface GameObject {
      * for none (it enters tapped) — or what a behold land's controller
      * beheld (`tappedUnlessBehold`, rule 701.4a), a card or a permanent. */
     readonly reveal?: ObjectId | null;
-    /** Riot's choice (rule 702.136a): an additional +1/+1 counter, or haste. */
-    readonly riot?: "counter" | "haste";
+    /** Riot's choices (rule 702.136a), one for each instance (702.136b): an
+     * additional +1/+1 counter, or haste. */
+    readonly riot?: readonly ("counter" | "haste")[];
     /** Unleash's choice (rule 702.98a): whether it enters with the
      * additional +1/+1 counter. */
     readonly unleash?: boolean;
@@ -1390,7 +1391,7 @@ export interface GameObject {
   /** A spell's counters to enter the battlefield with — the
    * `enters-with-counters` effect. Cleared by any zone change but its own
    * resolution onto the battlefield. */
-  entersWithCounters?: { readonly kind: string; readonly amount: number }[];
+  entersWithCounters?: { readonly kind: string; readonly amount: number; readonly condition?: StaticCondition }[];
   /** A card's mana value as it last existed on the stack, {X} included (rule
    * 202.3e), set each time it leaves the stack. Read only through a target
    * that was a spell — see `targetZones` — so it needn't be cleared when the

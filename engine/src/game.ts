@@ -122,6 +122,7 @@ import {
   objHasKeyword,
   effectiveSubtypes,
   effectiveTypes,
+  enteringKeywordInstances,
   entersWithoutAbilities,
   exemptFromLegendRule,
   hasAnyAbility,
@@ -6678,7 +6679,10 @@ export class Game {
           awaiting.protector === true
             ? { ...source.enterChoice, protector: creatureType as PlayerId }
             : awaiting.riot === true
-              ? { ...source.enterChoice, riot: creatureType === RIOT_COUNTER ? "counter" : "haste" }
+              ? {
+                  ...source.enterChoice,
+                  riot: [...(source.enterChoice?.riot ?? []), creatureType === RIOT_COUNTER ? ("counter" as const) : ("haste" as const)],
+                }
               : awaiting.unleash === true
                 ? { ...source.enterChoice, unleash: creatureType === UNLEASH_OPTIONS[0] }
                 : { ...source.enterChoice, chosen: creatureType };
@@ -12246,6 +12250,8 @@ export class Game {
    */
   private nextEnterChoice(
     id: ObjectId,
+    /** The player it will enter under, who chooses for it. */
+    under?: PlayerId,
   ):
     | { readonly kind: "copy" }
     | { readonly kind: "choose"; readonly options?: readonly string[]; readonly prompt?: string }
@@ -12347,9 +12353,15 @@ export class Game {
       return { kind: "protector", siege: becoming.subtypes.includes("Siege") };
     }
     // Riot (rule 702.136a): "you may have this permanent enter with an
-    // additional +1/+1 counter on it" — a printed (or copied) riot. One
-    // granted by another permanent isn't asked (AUTHORING §15).
-    if (answered?.riot === undefined && becoming.keywords.includes("riot")) return { kind: "riot" };
+    // additional +1/+1 counter on it" — printed or copied, and what it will
+    // have there or gained as a spell (614.12), each instance apart (702.136b).
+    if (
+      (answered?.riot?.length ?? 0) <
+      (becoming.keywords.includes("riot") ? 1 : 0) +
+        enteringKeywordInstances(this.state, this.registry, object, "riot", under ?? object.controller)
+    ) {
+      return { kind: "riot" };
+    }
     // Unleash (rule 702.98a): "you may have this permanent enter with an
     // additional +1/+1 counter on it" — printed or copied, as riot.
     if (answered?.unleash === undefined && becoming.keywords.includes("unleash")) return { kind: "unleash" };
@@ -12562,7 +12574,7 @@ export class Game {
   private askEnterChoice(id: ObjectId, chooser: PlayerId): boolean {
     const object = this.state.objects[id];
     if (object === undefined) return false;
-    for (let next = this.nextEnterChoice(id); next !== null; next = this.nextEnterChoice(id)) {
+    for (let next = this.nextEnterChoice(id, chooser); next !== null; next = this.nextEnterChoice(id, chooser)) {
       if (next.kind === "choose") {
         this.beginCreatureTypeChoice(id, chooser, next.options);
         const asked = this.state.awaiting as AwaitingDecision | null;
@@ -23385,7 +23397,7 @@ export class Game {
           power: 0,
           toughness: 0,
           keywords: [...gains.keywords],
-          untilEndOfTurn: true,
+          untilEndOfTurn: gains.lasting !== true,
           castRider: true,
         });
         invalidateComputedCache();
@@ -24036,6 +24048,8 @@ export class Game {
     }
     if (extraCounters !== undefined && this.state.objects[id]?.zone === "battlefield") {
       for (const c of extraCounters) {
+        // "It gains bloodthirst 3" (Bloodlord of Vaasgoth): asked as it enters.
+        if (c.condition !== undefined && !staticConditionMet(this.state, this.registry, this.state.objects[id], c.condition)) continue;
         // A granted sunburst (Solar Array — rule 702.44a): +1/+1 counters if
         // it entered as a creature by its copiable types, else charge.
         const kind = c.kind === "sunburst" ? (def.types.includes("creature") ? "+1/+1" : "charge") : c.kind;
@@ -24760,7 +24774,8 @@ export class Game {
     return (
       object.isCopy !== true &&
       object.castFrom === "hand" &&
-      this.registry.get(printedCardName(object)).rebound
+      (this.registry.get(printedCardName(object)).rebound ||
+        computeCharacteristics(this.state, this.registry, object.id).keywords.has("rebound"))
     );
   }
 
@@ -30760,7 +30775,7 @@ export class Game {
             ...(turnOf !== undefined ? { turnOf } : {}),
           },
         ),
-      entersWithCounters: (target, counter, given) => {
+      entersWithCounters: (target, counter, given, condition) => {
         if (target.kind !== "object") return;
         const spell = this.state.objects[target.object];
         if (spell === undefined || spell.zone !== "stack" || spell.kind !== "card") return;
@@ -30771,7 +30786,10 @@ export class Game {
             ? Object.values(spell.manaSpentByColor ?? {}).filter((n) => (n ?? 0) > 0).length
             : given;
         if (amount <= 0) return;
-        spell.entersWithCounters = [...(spell.entersWithCounters ?? []), { kind: counter, amount }];
+        spell.entersWithCounters = [
+          ...(spell.entersWithCounters ?? []),
+          { kind: counter, amount, ...(condition !== undefined ? { condition } : {}) },
+        ];
       },
       allowCastFromExile: (target, free, laterTurns, opts) => {
         if (target.kind !== "object") return;
@@ -37717,10 +37735,11 @@ export class Game {
     const id = split ? this.splitOneFromStack(target.object) : target.object;
     const object = this.state.objects[id];
     // A permanent, or a spell — Judith's "that spell gains deathtouch and
-    // lifelink", which lasts as long as it's on the stack (`moveObject`
-    // clears modifiers as it leaves).
+    // lifelink". On a permanent spell it goes on applying to the permanent the
+    // spell becomes (rule 400.7a: "it gains riot").
     if (object === undefined) return;
-    if (object.zone !== "battlefield" && !(object.zone === "stack" && object.kind === "card")) return;
+    const onStack = object.zone === "stack" && object.kind === "card";
+    if (object.zone !== "battlefield" && !onStack) return;
     if (!durationBegins(object, duration)) return;
     // One it can't have now isn't created at all (`grantableKeywords`).
     if (grantableKeywords(this.state, this.registry, object, [keyword]).length === 0) return;
@@ -37729,6 +37748,7 @@ export class Game {
       power: 0,
       toughness: 0,
       keywords: [keyword],
+      ...(onStack ? { castRider: true as const } : {}),
       ...durationFields(duration),
     });
     this.emit({
@@ -38754,13 +38774,18 @@ export class Game {
     if (target.kind !== "object") return;
     const id = this.splitOneFromStack(target.object);
     const object = this.state.objects[id];
-    if (object === undefined || object.zone !== "battlefield" || !durationBegins(object, duration)) return;
+    if (object === undefined) return;
+    // A permanent, or a permanent spell, which the permanent it becomes goes
+    // on having it for (rule 400.7a: Rivaz of the Claw's "it gains …").
+    const onStack = object.zone === "stack" && object.kind === "card";
+    if ((object.zone !== "battlefield" && !onStack) || !durationBegins(object, duration)) return;
     object.modifiers.push({
       timestamp: this.freshTimestamp(),
       power: 0,
       toughness: 0,
       keywords: [],
       grantsTriggered: [ability],
+      ...(onStack ? { castRider: true as const } : {}),
       ...durationFields(duration),
     });
   }
@@ -48233,7 +48258,7 @@ export class Game {
     effectTransformed = false,
     reveal?: ObjectId | null,
     copyEnter?: NonNullable<GameObject["enterChoice"]>["copyEnter"],
-    riot?: "counter" | "haste",
+    riot?: readonly ("counter" | "haste")[],
     devoured?: number,
     tributePaid?: boolean,
     unleash?: boolean,
@@ -48261,7 +48286,7 @@ export class Game {
     effectTransformed = false,
     reveal?: ObjectId | null,
     copyEnter?: NonNullable<GameObject["enterChoice"]>["copyEnter"],
-    riot?: "counter" | "haste",
+    riot?: readonly ("counter" | "haste")[],
     devoured?: number,
     tributePaid?: boolean,
     unleash?: boolean,
@@ -48385,9 +48410,15 @@ export class Game {
     // that never asked (a token copy), nobody had it enter with the counter,
     // so it gains haste.
     let riotHaste = false;
-    if (!ownLost && def.keywords.includes("riot")) {
-      if (riot === "counter") addCounters("+1/+1", 1);
-      else riotHaste = true;
+    if (
+      !ownLost &&
+      (riot !== undefined ||
+        def.keywords.includes("riot") ||
+        enteringKeywordInstances(this.state, this.registry, object, "riot", object.controller) > 0)
+    ) {
+      const asCounters = riot?.filter((pick) => pick === "counter").length ?? 0;
+      if (asCounters > 0) addCounters("+1/+1", asCounters);
+      riotHaste = riot === undefined || riot.includes("haste");
     }
     // Unleash (rule 702.98a): the +1/+1 counter its controller chose as it
     // was about to enter. Entering some way that never asked (a token copy),

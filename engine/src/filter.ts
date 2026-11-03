@@ -1185,6 +1185,9 @@ export function stackObjectTargetsMatch(
 export interface FilterContext {
   /** Whose perspective `"you"` / `"opponent"` are evaluated from. */
   readonly you: PlayerId;
+  /** About to enter the battlefield under this player: what `controlledBy`
+   * reads for it (rule 614.12), who may not control it now. */
+  readonly enteringUnder?: PlayerId;
   /** The player choosing the target being judged, when another than `you`
    * chooses it — what `controlledBy: "chooser"` reads. */
   readonly chooser?: PlayerId;
@@ -2095,7 +2098,7 @@ export function matchesFilter(
     if (filter.manaSpentOfOneColor !== undefined && most < filter.manaSpentOfOneColor) return false;
   }
   // Cheap, purely-positional clauses before the expensive fold below.
-  const controller = live !== undefined ? live.controller : lki!.controller;
+  const controller = ctx.enteringUnder ?? (live !== undefined ? live.controller : lki!.controller);
   const owner = live !== undefined ? live.owner : lki!.owner;
   if (filter.controlledBy === "you" && controller !== ctx.you) return false;
   if (filter.controlledBy === "opponent" && controller === ctx.you) return false;

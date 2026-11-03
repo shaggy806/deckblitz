@@ -9814,4 +9814,32 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{}],
     }),
   ),
+  preset(
+    'Rhythm of the Wild: a creature with riot of its own is asked twice',
+    board({
+      you: { bf: ['Rhythm of the Wild', 'Mountain*3'], hand: ['Burning-Tree Vandal'] },
+      opp: [{}],
+    }),
+  ),
+  preset(
+    'Rhythm of the Wild: a creature with riot from it, in a four-player game',
+    board({
+      you: { bf: ['Rhythm of the Wild', 'Forest*2'], hand: ['Grizzly Bears'] },
+      opp: [{}, {}, {}],
+    }),
+  ),
+  preset(
+    'Domri, Chaos Bringer: mana that gives a creature spell riot',
+    board({
+      you: { bf: ['Domri, Chaos Bringer', 'Forest'], hand: ['Grizzly Bears'] },
+      opp: [{}],
+    }),
+  ),
+  preset(
+    'Cast Through Time: a spell with rebound from it',
+    board({
+      you: { bf: ['Cast Through Time', 'Island*3'], hand: ['Divination'] },
+      opp: [{}],
+    }),
+  ),
 ]

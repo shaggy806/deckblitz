@@ -150,7 +150,7 @@ export interface ManaUnit {
   /** "If that mana is spent on a [filter] spell, it gains [keywords] until
    * end of turn" (Carnelian Orb of Dragonkind — rule 106.6): what the spell
    * this unit pays for gets, as `add-mana`'s `spellGains` says. */
-  readonly spellGains?: { readonly spell?: CardFilter; readonly keywords: readonly Keyword[] };
+  readonly spellGains?: { readonly spell?: CardFilter; readonly keywords: readonly Keyword[]; readonly lasting?: true };
   /** Fires when this unit is spent — Path of Ancestry's "When that mana is
    * spent to cast a creature spell that shares a creature type with your
    * commander, scry 1". Carried as plain data so it survives a snapshot. */
