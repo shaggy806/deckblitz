@@ -3279,6 +3279,14 @@ export function parseSentence(sentence, ctx) {
     return { kind: "damage-all", amount: amount(m[1]), filter: { type: "creature", controlledBy: "opponent" } };
   }
   if ((m = re(`~ fights (${TARGET})`).exec(s))) return { kind: "fight", a: "source", b: slot(m[1]) };
+  // "When this creature enters, it fights target creature…" (Scab-Clan Giant).
+  if ((m = re(`it fights (${TARGET})`).exec(s)) && ctx.it === "source" && ctx.targets.length === 0) {
+    return { kind: "fight", a: "source", b: slot(m[1]) };
+  }
+  // "Target opponent gains control of this artifact" (Jinxed Idol, Witch Hunt).
+  if ((m = re(`(target opponent|target player) gains control of ~`).exec(s))) {
+    return { kind: "gain-control", target: "source", who: { target: slot(m[1]) }, untilEndOfTurn: false };
+  }
   // Every permanent of a kind its own source (`each-deals-damage`): "each
   // creature deals damage to itself equal to its power" (Solar Blaze), "each
   // other Bird you control deals damage equal to its power to target creature
@@ -11992,7 +12000,10 @@ function fillEffect(ability, text, ctx, lines, i) {
   // A divided amount (rules 602.2b, 603.3d, 601.2d): the ability's
   // `divided`, its group the last slot.
   const divided = {};
-  const r = parseEffect(text, {
+  // "Target opponent chosen at random" (Witch Hunt): the game picks it as the
+  // ability goes on the stack, the slot otherwise as any (`targetsAtRandom`).
+  const atRandom = /\btarget\b[^.]*? chosen at random\b/i.exec(text);
+  const r = parseEffect(atRandom === null ? text : text.replace(" chosen at random", ""), {
     targets: ability.targets,
     tokenFor: ctx.tokenFor,
     onStack: ctx.onStack,
@@ -12013,6 +12024,7 @@ function fillEffect(ability, text, ctx, lines, i) {
     ...(theirSlots !== undefined ? { opponentChoosesTargets: theirSlots } : {}),
   });
   if (r.effect !== null && theirSlots !== undefined && theirSlots.length > 0) ability.opponentChoosesTargets = theirSlots;
+  if (atRandom !== null && r.effect !== null) ability.targetsAtRandom = true;
   const division = r.effect === null ? undefined : divided.value;
   if (division !== undefined && division.slot !== ability.targets.length - 1) {
     ability.effect = null;

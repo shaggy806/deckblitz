@@ -2640,7 +2640,8 @@ export class Game {
         // The chosen targets, judged as `activateAbility` judges them — not
         // only that each slot has some legal option (Hotfoot Gnome's "another
         // target creature" aimed at itself, Pirate Hat's Equip Pirate at a
-        // non-Pirate).
+        // non-Pirate). "Chosen at random": it names none, and they're legal ones.
+        if (ability?.targetsAtRandom === true) return null;
         if (ability !== undefined) {
           const xValue = action.xValue ?? 0;
           if (modes === undefined && this.activationModeOffer(action.player, action.source, action.abilityIndex, ability) !== null) {
@@ -3550,6 +3551,11 @@ export class Game {
           if (!targetsFillable(specs, options, [], 0, stateTargetFacts(this.state, this.registry))) continue;
           push(options, xCost, specs, modes);
         }
+        return;
+      }
+      // "Any target chosen at random": no one chooses, so nothing to offer.
+      if (ability.targetsAtRandom === true) {
+        push([], maxX !== undefined ? { maxX, ...(minX > 0 ? { minX } : {}) } : undefined, []);
         return;
       }
       // How much X is left depends on a taxed target, so an X ability is
@@ -10184,6 +10190,48 @@ export class Game {
     this.state.rngState = this.rng.seed;
     this.emit({ type: "chosen-at-random", player: controller, source, chosen: pick(index) });
     return index;
+  }
+
+  /**
+   * "Target … chosen at random" (`targetsAtRandom`): one target for each slot
+   * from its legal `options`, none twice (rule 115.3). Each token of a stack is
+   * a permanent of its own, equally likely (a stack is a representation). One
+   * candidate is no choice, so nothing is drawn or announced for it.
+   */
+  private randomTargets(
+    controller: PlayerId,
+    source: ObjectId,
+    options: readonly (readonly TargetRef[])[],
+  ): (TargetRef | undefined)[] {
+    const chosen: TargetRef[] = [];
+    return options.map((slot) => {
+      const left = slot.filter((option) => !chosen.some((t) => sameTargetRef(t, option)));
+      if (left.length === 0) return undefined;
+      const tokens = (ref: TargetRef): number =>
+        ref.kind === "object" ? (this.state.objects[ref.object]?.stackCount ?? 1) : 1;
+      const at = (n: number): TargetRef => {
+        let rest = n;
+        for (const ref of left) {
+          rest -= tokens(ref);
+          if (rest < 0) return ref;
+        }
+        return left[left.length - 1];
+      };
+      const total = left.reduce((sum, ref) => sum + tokens(ref), 0);
+      const picked =
+        left.length === 1
+          ? left[0]
+          : at(
+              this.pickAtRandom(controller, source, total, (i) => {
+                const ref = at(i);
+                return ref.kind === "player"
+                  ? { kind: "player", player: ref.player }
+                  : { kind: "card", object: ref.object };
+              }),
+            );
+      chosen.push(picked);
+      return picked;
+    });
   }
 
   /** End every modifier that lasts "until end of combat" (rule 500.5a) —
@@ -20340,6 +20388,9 @@ export class Game {
     if ((ability.opponentChoosesTargets?.length ?? 0) > 0 && this.otherChoice?.for !== sourceId) {
       return `an opponent chooses targets for ${def.name}'s ability: activate it naming one`;
     }
+    if (ability.targetsAtRandom === true && (targets?.length ?? 0) > 0) {
+      return `${def.name}'s ability has its targets chosen at random`;
+    }
     if (ability.zone !== undefined) {
       // Channel (702.51a) from hand, a graveyard ability or a command-zone
       // one (Derevi) — activatable only from that zone, never as a
@@ -20800,20 +20851,42 @@ export class Game {
     player: PlayerId,
     sourceId: ObjectId,
     abilityIndex: number,
-    targets: ResolvedTargets,
+    chosenTargets: ResolvedTargets,
     sacrifice?: ObjectId,
     xValue = 0,
     manaColors?: readonly ManaType[],
     tap?: readonly ObjectId[],
     division?: readonly number[],
   ): void {
+    // "Any target chosen at random": picked now, before any cost is paid, as a
+    // player would choose them (rules 602.2b, 601.2c), and judged like theirs.
+    let targets = chosenTargets;
+    if (this.effectiveActivated(sourceId)[abilityIndex]?.targetsAtRandom === true) {
+      const why = this.whyCannotActivateAbility(player, sourceId, abilityIndex, tap, xValue, targets);
+      if (why !== null) throw new Error(why);
+      const specs = this.activatedSpecsAt(
+        this.activationSpecs(this.effectiveActivated(sourceId)[abilityIndex]),
+        sourceId,
+        player,
+        xValue,
+      );
+      targets = this.randomTargets(player, sourceId, this.targetOptionsFor(specs, player, this.permanentSource(sourceId, xValue)));
+    }
     // Checking and planning share one cache region, so the board's mana
     // sources are worked out once: `whyCannotActivateAbility` plans the
     // payment to see that it can be made, then it is planned again to pay,
     // and nothing changes in between. On seed 50's 73 permanents the second
     // `manaSources` was an eighth of a bot's turn.
     const planned = withComputedCache(() => {
-      const why = this.whyCannotActivateAbility(player, sourceId, abilityIndex, tap, xValue, targets);
+      // The targets it picked aren't an action naming some.
+      const why = this.whyCannotActivateAbility(
+        player,
+        sourceId,
+        abilityIndex,
+        tap,
+        xValue,
+        targets === chosenTargets ? targets : undefined,
+      );
       if (why !== null) throw new Error(why);
 
       const source = this.state.objects[sourceId];
@@ -28386,6 +28459,21 @@ export class Game {
       return "done";
     }
 
+    // "Target opponent chosen at random": the game's choice, with each slot left
+    // with the one it picked.
+    const atRandom = (ability as TriggeredAbility).targetsAtRandom === true;
+    if (atRandom) {
+      const picks = this.randomTargets(
+        trigger.controller,
+        trigger.sourceObjectId,
+        slots.map((s) => ("spec" in s ? s.options : [])),
+      );
+      slots.forEach((s, i) => {
+        const pick = picks[i];
+        if ("spec" in s) slots[i] = pick === undefined ? { skip: true } : { spec: s.spec, options: [pick] };
+      });
+    }
+
     const chooserSlots = slots.filter(
       (s): s is { spec: TargetSpec; options: readonly TargetRef[] } => "spec" in s,
     );
@@ -28395,7 +28483,7 @@ export class Game {
     // return the only card it could).
     const forced =
       chooserSlots.length > 0 &&
-      chooserSlots.every((s) => s.options.length === 1 && !isOptionalSpec(s.spec));
+      chooserSlots.every((s) => s.options.length === 1 && (atRandom || !isOptionalSpec(s.spec)));
     if (chooserSlots.length === 0 || forced) {
       // A skipped slot is a hole — or, for an "any number of" group, which
       // is always last, no slot at all.

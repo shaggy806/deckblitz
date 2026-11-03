@@ -9036,6 +9036,33 @@ describe("the turn's blocks", () => {
     const observer = face("Creature — Merfolk Rogue", "When this creature enters, look at the top card of target player's library.");
     expect(observer.complete).toBe(true);
     expect(observer.triggered[0].effect).toEqual({ kind: "look-at-library-top", target: 0 });
+    const pilot = face("Creature — Goblin Pilot Wizard", "{T}: This creature deals 2 damage to any target chosen at random.");
+    expect(pilot.complete).toBe(true);
+    expect(pilot.activated[0]).toMatchObject({
+      targets: ["any-target"],
+      targetsAtRandom: true,
+      effect: { kind: "damage", amount: 2, target: 0 },
+    });
+    const giant = face("Creature — Giant Warrior", "When this creature enters, it fights target creature an opponent controls chosen at random.");
+    expect(giant.complete).toBe(true);
+    expect(giant.triggered[0]).toMatchObject({
+      targets: ["creature-an-opponent-controls"],
+      targetsAtRandom: true,
+      effect: { kind: "fight", a: "source", b: 0 },
+    });
+    const knight = face("Artifact Creature — Knight", "When this creature dies, it deals 4 damage to target opponent chosen at random.");
+    expect(knight.complete).toBe(true);
+    expect(knight.triggered[0]).toMatchObject({ targets: ["opponent"], targetsAtRandom: true });
+    const hunt = face("Enchantment", "At the beginning of your end step, target opponent chosen at random gains control of this enchantment.");
+    expect(hunt.complete).toBe(true);
+    expect(hunt.triggered[0]).toMatchObject({
+      targets: ["opponent"],
+      targetsAtRandom: true,
+      effect: { kind: "gain-control", target: "source", who: { target: 0 } },
+    });
+    // No target in it, so not a target: `choose-permanents`' pick as it resolves.
+    const cinderheart = face("Creature — Giant", "When this creature dies, it deals 7 damage to a creature an opponent controls chosen at random.");
+    expect(cinderheart.triggered[0].targetsAtRandom).toBeUndefined();
     const look = { kind: "look-and-choose", zone: "library", count: 1, min: 0, max: 1, leftover: "stay" };
     const coral = face(
       "Creature — Merfolk Soldier",

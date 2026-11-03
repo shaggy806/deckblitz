@@ -4104,6 +4104,19 @@ attack-with-exactly, attack-with-total-power, attacks-player-at-least,
 attack-with-count-amount. Proving cards: Alluring Suitor, Desert Were-Worm, Horn
 of the Mark, Landroval, Horizon Witness, Grand Warlord Radha, The Earth King.
 
+### A target chosen at random — built 2026-11-02
+
+The need-keys Phase 2 unit `effect:random-target`. One ability field,
+`targetsAtRandom`, on triggered and activated abilities: the game picks each slot
+from its legal targets with the seeded randomness, as the ability goes on the
+stack or before an activation's costs. They're real targets, so hexproof keeps one
+out and ward answers one, and each token of a stack is as likely as any other
+permanent. An activated one offers no choice and refuses a named target. Proving
+cards: Witch Hunt, Knight Rampager, Scab-Clan Giant, Goblin Test Pilot, Power Pack.
+Capricious Efreet needed no code: it's Wild Swing's random modal over chosen
+targets. Grip of Chaos is left: it also needs a trigger on anything going on the
+stack, `trigger:spell-or-ability-put-on-stack`.
+
 ### Looking at the top of another player's library — built 2026-11-02
 
 The need-keys Phase 2 unit `effect:look-at-top-of-target-players-library`. Its

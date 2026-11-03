@@ -9946,4 +9946,18 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{ lib: ['Island'] }],
     }),
   ),
+  preset(
+    'Goblin Test Pilot: nobody chooses the target',
+    board({
+      you: { bf: ['Goblin Test Pilot'] },
+      opp: [{ bf: ['Grizzly Bears'] }],
+    }),
+  ),
+  preset(
+    'Witch Hunt: it goes to an opponent at random',
+    board({
+      you: { bf: ['Witch Hunt'] },
+      opp: [{}, {}, {}],
+    }),
+  ),
 ]

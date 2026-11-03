@@ -6596,3 +6596,13 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 - **Do:** Activate Wand of Denial, target Bob, then press Done.
 - **Expect:** A popup titled "Looking at these cards: none can be chosen" shows Island. Done asks for no payment, and Island stays on top of Bob's library.
+
+### Goblin Test Pilot: nobody chooses the target
+
+- **Do:** Activate Goblin Test Pilot.
+- **Expect:** You aren't asked for a target. The log says what was chosen at random, and that one takes 2 damage: Alice, Bob, Grizzly Bears or the Pilot itself.
+
+### Witch Hunt: it goes to an opponent at random
+
+- **Do:** Pass priority until your end step, and pass once more when the ability is on the stack.
+- **Expect:** You aren't asked for a target. The log says which opponent was chosen at random, and Witch Hunt moves to that player's side of the table.

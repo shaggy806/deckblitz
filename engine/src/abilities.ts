@@ -627,6 +627,10 @@ export interface ActivatedAbility {
    * activated (rules 602.2b, 601.2c).
    */
   readonly opponentChoosesTargets?: readonly number[];
+  /** "This creature deals 2 damage to any target **chosen at random**" (Goblin
+   * Test Pilot). See `TriggeredAbility.targetsAtRandom`. Nothing is offered to
+   * choose: the action names no targets, and they're picked as it's activated. */
+  readonly targetsAtRandom?: true;
   readonly effect: EffectSpec | null;
   readonly resolve: SpellResolver | null;
   readonly text: string;
@@ -2383,6 +2387,16 @@ export interface TriggeredAbility {
    * would choose them. Nobody to ask (they've left the game): its controller.
    */
   readonly targetsChosenBy?: "trigger-player" | "active-player" | "trigger-object-controller";
+  /**
+   * "Target opponent **chosen at random**" (Witch Hunt, Knight Rampager, Scab-Clan
+   * Giant): the game picks each slot's target as the ability is put on the stack
+   * (rule 603.3d), among the targets that are legal for its controller, so they're
+   * real targets: hexproof takes one out of the running and ward answers one.
+   * Each permanent is equally likely, each token of a stack its own. Unlike
+   * `choose-opponent`'s `random` or `choose-permanents`', which pick untargeted as
+   * it resolves.
+   */
+  readonly targetsAtRandom?: true;
   /**
    * Eminence — this ability functions while its card is in the **command
    * zone**, not only on the battlefield, because its text says so (rule
