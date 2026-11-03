@@ -841,6 +841,9 @@ missing. Re-run `--greedy` for Phase 2's order.
 - **2026-11-03: overnight, three agents at once.** `filter:blocking-trigger-object`, `amount:creatures-blocking-it` with
   `effect:amount-creatures-blocking-it` and `condition:source-blocked-by-at-least-one`, `static:cost-increase-colored`,
   `keyword:offering`, `decision:secret-choice` with `effect:protection-from-player-for-permanent`.
+- **2026-11-03: one cloud session, six named families in order.** `effect:linked-exiled-card` with
+  `effect:linked-face-down-exile-to-battlefield`, `target:card-in-exile` and `condition:filter-has-flashback`;
+  `effect:manifested-this-way` with `effect:put-counters-of-created`.
 
 ## Rough size
 

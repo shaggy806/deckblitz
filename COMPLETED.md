@@ -12,6 +12,12 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **What a manifest or a create step put onto the battlefield** (2026-11-03, `3b79b62a8`): `manifest-dread`'s `count` an
+  amount, counters on the manifested cards through `thisWay: "put-onto-battlefield"`, `put-counters-of` onto `"created"`.
+  Valgavoth's Onslaught, Wildcall, Formless Nurturing, Ambitious Augmenter, Moldering Gym // Weight Room.
+- **A card in exile as a target** (2026-11-03, `0ad1f5631`): `card-in-exile` (`whose`, `faceUp`, `linked`), the filter
+  `hasFlashback`, `allow-cast-linked-exile`'s `spendAs`. Pull from Eternity, Gelatinous Cube, Runic Repetition, Clone
+  Shell, Cemetery Protector, King Narfi's Betrayal.
 - **Secret choices** (2026-11-03, `5b1a2ff17`): `GameObject.secretChoice`, made as a permanent enters or on resolution and
   hidden per seat until a `revealChosen` cost; also player protection from a player and a plain `onlyOnce`. Stalking Leonin,
   Guardian Archon, Emissary of Grudges, A Killer Among Us, Goblin Game.
