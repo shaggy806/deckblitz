@@ -6730,4 +6730,24 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Dimir Charm: look at the top three of target player's library, one back and the rest in their graveyard
 
 - **Do:** Cast Dimir Charm, choose its third mode, target Bob, and put Forest back.
-- **Expect:** A popup offers Sol Ring, Forest and Grizzly Bears, choose 1. Forest stays on Bob's library, and Sol Ring and Grizzly Bears go to Bob's graveyard, not yours.
+- **Expect:** A popup "Choose a card to put back on top of Bob's library" offers Sol Ring, Forest and Grizzly Bears. Forest stays on Bob's library, and Sol Ring and Grizzly Bears go to Bob's graveyard, not yours.
+
+### Commander's Plate: protection from each color outside your commander's identity
+
+- **Do:** Use Equip commander {3} on Isamaru, then cast Lightning Bolt.
+- **Expect:** Isamaru is 5/5. Lightning Bolt can't target him: only the players and nothing else are offered as its target.
+
+### Commander's Plate: a color in your commander's identity still gets through, at four players
+
+- **Do:** Use Equip commander {3} on Isamaru, then cast Swords to Plowshares on him.
+- **Expect:** Isamaru is a legal target of the white spell. You gain 5 life, the power he had with the Plate, and are asked whether he goes to the command zone.
+
+### Mother of Runes: the color of your choice, as the ability resolves
+
+- **Do:** Tap Mother of Runes targeting Grizzly Bears, then choose red and cast Lightning Bolt.
+- **Expect:** The choice lists "Protection from white" and the other four. Lightning Bolt can't target the Bears, and can target Mother of Runes.
+
+### Eldritch Immunity: overloaded, it protects each creature you control
+
+- **Do:** Cast Eldritch Immunity for its overload cost, then cast Lightning Bolt.
+- **Expect:** Casting asks for no target. Lightning Bolt can't target either of your creatures, and can target Bob's Hill Giant.

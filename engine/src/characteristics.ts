@@ -63,6 +63,7 @@ import type { ObjectId, PlayerId } from "./primitives.js";
 import {
   activePlayerOf,
   attackedYouDuringTheirLastTurn,
+  hasCommander,
   isTokenNow,
   manaCostOverride,
   permanentCount,
@@ -1584,11 +1585,18 @@ function staticProtection(
     p.doesntRemoveSource !== true &&
     p.filter === undefined &&
     p.fromPlayers === undefined &&
-    p.exiledCardTypes !== true
+    p.exiledCardTypes !== true &&
+    p.outsideCommanderIdentity !== true
   ) {
     return p;
   }
   const { colors, types } = chosenProtectionQualities(p, source);
+  // "That's not in your commander's color identity" (rule 903.4f: with no
+  // commander, that quality is undefined and this part does nothing).
+  if (p.outsideCommanderIdentity === true && hasCommander(state, source.controller)) {
+    const identity = state.players[source.controller]?.commanderIdentity ?? [];
+    colors.push(...COLORS.filter((c) => !identity.includes(c)));
+  }
   const exiledTypes =
     p.exiledCardTypes === true
       ? (liveReferenceObjects(state, registry, "exiled-with-source", { you: source.controller, source: source.id }) ?? []).flatMap(

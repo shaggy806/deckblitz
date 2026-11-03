@@ -10241,6 +10241,19 @@ export function parseFace(face, ctx = {}) {
       });
       continue;
     }
+    // "Equip commander {3}" (rule 702.6a's "Equip [quality]"): a commander you
+    // control, whoever owns it.
+    if ((m = /^Equip commander ((?:\{[^}]+\})+)$/.exec(line))) {
+      out.activated.push({
+        cost: { mana: m[1], tap: false },
+        targets: [{ kind: "permanent", whose: "you", filter: { type: "creature", isCommander: true } }],
+        effect: { kind: "attach", target: 0 },
+        resolve: null,
+        text: printed(raw),
+        sorcerySpeed: true,
+      });
+      continue;
+    }
     // Reconfigure [cost] (rule 702.151a): the `reconfigure` helper's two
     // abilities — attach to another creature you control, or unattach.
     if ((m = /^Reconfigure ((?:\{[^}]+\})+)$/.exec(line))) {
@@ -15049,6 +15062,11 @@ function parseStatic(line, text) {
   if ((m = new RegExp(`^(?:Equipped|Enchanted) creature gets ([+-]\\d+)/([+-]\\d+)(?: and has ${KW}(?: and ${KW})?)?\\.$`, "i").exec(line))) {
     const kws = [m[3], m[4]].filter(Boolean).map((k) => KEYWORDS[k.toLowerCase()]);
     return { affects: { scope: "attached" }, grantPt: [Number(m[1]), Number(m[2])], ...(kws.length ? { grantKeywords: kws } : {}), text };
+  }
+  // "… and has protection from each color that's not in your commander's color
+  // identity" (Commander's Plate): worked out as it applies.
+  if ((m = /^(?:Equipped|Enchanted) creature gets ([+-]\d+)\/([+-]\d+) and has protection from each color that's not in your commander's color identity\.$/.exec(line))) {
+    return { affects: { scope: "attached" }, grantPt: [Number(m[1]), Number(m[2])], protection: { outsideCommanderIdentity: true }, text };
   }
   // A static granting a static (`grantsStatic` — rule 613.1f): "Equipped
   // creature has [flying and] 'You can't lose the game …'" (Cloudsteel

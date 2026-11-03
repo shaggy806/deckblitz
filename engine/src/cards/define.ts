@@ -3526,6 +3526,12 @@ export interface StaticAbility {
      * source (rule 607.2a, `exiled-with-source`), as long as they stay there.
      * Nothing while none is. */
     readonly exiledCardTypes?: true;
+    /** "Protection from **each color that's not in your commander's color
+     * identity**" (Commander's Plate), the static's controller's as it is now
+     * (rule 903.4; both commanders' together for a pair): every colour for a
+     * colourless commander, and nothing with no commander at all (rule 903.4f
+     * and the card's rulings). */
+    readonly outsideCommanderIdentity?: true;
     /** Protection from players (rule 702.16k): `"opponents"` is "each of your
      * opponents", the static's controller's as it is now (Figure of Fable);
      * `"chosen"` "the chosen player", `GameObject.chosenPlayer` of the

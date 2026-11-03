@@ -5330,6 +5330,7 @@ is "can't attack a player it has already attacked this turn" (Port Razer), by th
   battlefield — for the legend rule and for every "legendary" filter
   (`supertypesOf`). A storm copy is a token once it resolves (rule 707.10f).
   `affects` is irrelevant.
+- `protection: { outsideCommanderIdentity? }` — Commander's Plate's "each color that's not in your commander's color identity", the static's controller's as it is now: nothing with no commander (rule 903.4f), every colour with a colourless one. Beside the rest of the shape:
 - `protection: { colors?, types?, filter?, chosenColor?, chosenCardType?, exiledCardTypes?, fromPlayers?, doesntRemoveSource? }` — rule 702.16 (White Knight: `{ colors:
   ["B"] }`; a `filter` for what neither names — Basri's Lieutenant's
   multicolored, Baneslayer Angel's `{ anyOf: [{ subtype: "Demon" }, { subtype:

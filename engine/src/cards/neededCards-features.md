@@ -4326,6 +4326,18 @@ Capricious Efreet needed no code: it's Wild Swing's random modal over chosen
 targets. Grip of Chaos is left: it also needs a trigger on anything going on the
 stack, `trigger:spell-or-ability-put-on-stack`.
 
+### Protection outside your commander's color identity — built 2026-11-03
+
+The need-keys Phase 2 units `effect:protection-choice-and-dynamic` and
+`effect:protection-from-each-color-overload`. Only one line was missing:
+`protection.outsideCommanderIdentity`, read off the static's controller as it
+applies, nothing with no commander (rule 903.4f; `hasCommander`, because
+`commanderIdentity` is empty both with none and with a colourless one).
+Mother of Runes ran on `grant-protection`'s `{ choose: "color" }`, and Eldritch
+Immunity on `overload` with `grant-protection`'s `filter`, unchanged. The
+scaffolder reads the Plate's line and "Equip commander"; it still reads no
+"Overload" line (hand-authored, every one of the 118).
+
 ### Looking at a hand as it enters, and more of another's library — built 2026-11-03
 
 The need-keys Phase 2 units `effect:look-at-opponent-hand-as-enters` and

@@ -12028,6 +12028,30 @@ describe("requirements a whole declaration answers", () => {
       kind: "block-if-able",
       filter: { type: "creature" },
     });
+describe("oracle-parse: Commander's Plate", () => {
+  it("protection outside your commander's color identity, and Equip commander", () => {
+    const card = parseFace({
+      name: "Commander's Plate",
+      type_line: "Artifact — Equipment",
+      oracle_text:
+        "Equipped creature gets +3/+3 and has protection from each color that's not in your commander's color identity.\nEquip commander {3}\nEquip {5}",
+    });
+    expect(card.todo).toEqual([]);
+    expect(card.static[0]).toMatchObject({
+      affects: { scope: "attached" },
+      grantPt: [3, 3],
+      protection: { outsideCommanderIdentity: true },
+    });
+    expect(card.activated[0]).toMatchObject({
+      cost: { mana: "{3}", tap: false },
+      targets: [{ kind: "permanent", whose: "you", filter: { type: "creature", isCommander: true } }],
+      effect: { kind: "attach", target: 0 },
+      sorcerySpeed: true,
+    });
+    expect(card.activated[1].cost.mana).toBe("{5}");
+  });
+});
+
 describe("oracle-parse: looks at a hand and at another's library", () => {
   it("a hand looked at before a card type chosen as it enters, and spells of that type taxed", () => {
     const card = parseFace({

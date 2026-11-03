@@ -1464,6 +1464,8 @@
   "effect:mana-ability-graveyard-exile-cost",
   "effect:look-at-opponent-hand-as-enters",
   "effect:look-at-target-player-library",
+  "effect:protection-choice-and-dynamic",
+  "effect:protection-from-each-color-overload",
   "keyword:hexproof-from-abilities"
  ],
  "features": {

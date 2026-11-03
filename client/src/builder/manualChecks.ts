@@ -10137,4 +10137,34 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{ lib: ['Sol Ring', 'Forest', 'Grizzly Bears', 'Island'] }],
     }),
   ),
+  preset(
+    "Commander's Plate: protection from each color outside your commander's identity",
+    board({
+      you: {
+        bf: [{ name: 'Isamaru, Hound of Konda', commander: true }, "Commander's Plate", 'Wastes*3', 'Mountain'],
+        hand: ['Lightning Bolt'],
+      },
+    }),
+  ),
+  preset(
+    "Commander's Plate: a color in your commander's identity still gets through, at four players",
+    board({
+      you: {
+        bf: [{ name: 'Isamaru, Hound of Konda', commander: true }, "Commander's Plate", 'Wastes*3', 'Plains'],
+        hand: ['Swords to Plowshares'],
+      },
+      opp: [{}, {}, {}],
+    }),
+  ),
+  preset(
+    'Mother of Runes: the color of your choice, as the ability resolves',
+    board({ you: { bf: ['Mother of Runes', 'Grizzly Bears', 'Mountain'], hand: ['Lightning Bolt'] } }),
+  ),
+  preset(
+    'Eldritch Immunity: overloaded, it protects each creature you control',
+    board({
+      you: { bf: ['Grizzly Bears', 'Savannah Lions', 'Wastes*5', 'Mountain'], hand: ['Eldritch Immunity', 'Lightning Bolt'] },
+      opp: [{ bf: ['Hill Giant'] }],
+    }),
+  ),
 ]
