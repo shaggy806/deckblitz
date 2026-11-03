@@ -1327,6 +1327,17 @@ export type UnlessOption =
    * being dealt damage needs nothing (prevented, it was still chosen). */
   | { readonly takeDamage: number; readonly text: string };
 
+/** Which permanents a `copy-spell`'s `forEachItCouldTarget` makes a copy for.
+ * `chooseAndPayEach`: "you may choose any number of other creatures that spell
+ * could target and pay {2} for each of those creatures. If you do, for each of
+ * those creatures, copy that spell" (Feather, Radiant Arbiter): the copier picks
+ * as many as they can pay for, in the order the copies go on the stack. */
+export interface CopyForEach {
+  readonly filter: CardFilter;
+  readonly other?: true | "targeted";
+  readonly chooseAndPayEach?: string;
+}
+
 /** An {@link UnlessOption} with any generic or life amount fixed — what the
  * engine offers. `"each-player-may"`'s options are these already. */
 export type BoundUnlessOption = Exclude<
@@ -6478,7 +6489,7 @@ export type EffectSpec =
        * may choose new targets for that copy" (rule 702.144a: `"that-player"`
        * under a `choose-opponent`). They choose its new targets. Naming
        * nobody — a player who has left the game — nothing is copied. Not with
-       * `forEachItCouldTarget` or `retargetTo`. */
+       * `retargetTo`. */
       readonly controller?: EffectPlayerRef;
       /** "Copy that spell if it targets a permanent or player" — any of its
        * targets was, when chosen. Otherwise it isn't copied. */
@@ -6507,8 +6518,18 @@ export type EffectSpec =
        * their controller puts them on the stack in the order they choose — a
        * `choose-permanents` decision naming them all, in order. With
        * `"trigger-spell"` only.
+       *
+       * With `controller`: "**that player** copies that spell for each other
+       * creature they control …" (Mirrorwing Dragon's `"trigger-controller"`),
+       * they choosing the order and `filter` read from their side. "Could
+       * target" is always the spell's as its caster cast it, even when someone
+       * else copies it; the copies then resolve as their controller's, so one
+       * aimed at what its controller couldn't target doesn't (Ink-Treader
+       * Nephilim's ruling). `other: "targeted"` leaves out what the spell
+       * targets instead of the effect's own permanent: "each **other** Golem"
+       * (Precursor Golem). See {@link CopyForEach} for `chooseAndPayEach`.
        */
-      readonly forEachItCouldTarget?: { readonly filter: CardFilter; readonly other?: true };
+      readonly forEachItCouldTarget?: CopyForEach;
       /**
        * "Copy it **for each** …": how many copies, read as the effect
        * applies — Thousand-Year Storm's "for each other instant and sorcery
@@ -6523,8 +6544,14 @@ export type EffectSpec =
       /** The spell to copy, captured: only the engine sets this, on the copy
        * that a `forEachItCouldTarget` hands its `choose-permanents` decision
        * (which applies it once per permanent chosen, with that one as target
-       * 0, outside the triggered ability that knew the spell). */
-      readonly spell?: { readonly snapshot: SpellSnapshot; readonly original: ObjectId };
+       * 0, outside the triggered ability that knew the spell). `caster`: whose
+       * side "could target" is judged from. `payEach`: what this copy costs. */
+      readonly spell?: {
+        readonly snapshot: SpellSnapshot;
+        readonly original: ObjectId;
+        readonly caster?: PlayerId;
+        readonly payEach?: string;
+      };
     }
   | {
       /**
@@ -10993,6 +11020,11 @@ export interface EffectApi {
       readonly controller?: PlayerId;
       /** Its exceptions and what it gains (`copy-spell`'s `except`, `gains`). */
       readonly change?: SpellCopyChange;
+      /** Whose side `retargetTo` is judged legal from — the copy's controller
+       * when omitted. */
+      readonly caster?: PlayerId;
+      /** Paid first, or there's no copy. */
+      readonly payEach?: string;
     },
   ): boolean;
   /** See the `copy-ability` {@link EffectSpec}: copy the ability object
@@ -11001,10 +11033,7 @@ export interface EffectApi {
   copyAbility(target: TargetRef | "trigger-ability", newTargets: boolean): void;
   /** See `copy-spell`'s `forEachItCouldTarget`: copy `spell` once for each
    * permanent it could target, in the order its controller chooses. */
-  copyTriggerSpellForEach(
-    spell: SpellSnapshot,
-    each: { readonly filter: CardFilter; readonly other?: true },
-  ): void;
+  copyTriggerSpellForEach(spell: SpellSnapshot, each: CopyForEach, copier: PlayerId): void;
   /** See the `exile-spell-as-it-resolves` {@link EffectSpec}: mark the
    * trigger's spell. */
   exileTriggerSpellAsItResolves(returnAtNextEndStep: boolean, plotted: boolean): void;
@@ -13716,8 +13745,9 @@ export function mayBeDone(effect: EffectSpec, ctx: ResolutionContext): boolean {
   const action = effect.kind === "sequence" ? effect.effects[0] : effect;
   if (action === undefined) return true;
   // "You may put a card from your hand on top of your library": not with none.
-  if (action.kind === "look-and-choose" && action.zone === "hand" && action.player === undefined) {
-    return ctx.handSizeOf(ctx.controller, action.filter) >= amountValue(action.min, ctx);
+  // An amount is "all of them", which none satisfies (Manabond).
+  if (action.kind === "look-and-choose" && action.zone === "hand" && action.player === undefined && typeof action.min === "number") {
+    return ctx.handSizeOf(ctx.controller, action.filter) >= action.min;
   }
   if (action.kind === "mill" || action.kind === "discard") {
     return scopedOrTargetedPlayers(action.target, ctx).every((ref) => {
@@ -16473,7 +16503,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         const spell = spec.spell?.snapshot ?? ctx.triggerSpell();
         if (spell !== null && (spec.ifTargets === undefined || targetsPermanentOrPlayer(spell))) {
           if (spec.forEachItCouldTarget !== undefined) {
-            ctx.copyTriggerSpellForEach(spell, spec.forEachItCouldTarget);
+            ctx.copyTriggerSpellForEach(spell, spec.forEachItCouldTarget, copier ?? ctx.controller);
             copied = true;
           } else {
             const retargetTo = spec.retargetTo === undefined ? undefined : resolveEffectTarget(spec.retargetTo, ctx);
@@ -16486,6 +16516,8 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
                   ...(copier !== undefined ? { controller: copier } : {}),
                   ...(retargetTo !== undefined ? { retargetTo } : {}),
                   ...(spec.spell !== undefined ? { original: spec.spell.original } : {}),
+                  ...(spec.spell?.caster !== undefined ? { caster: spec.spell.caster } : {}),
+                  ...(spec.spell?.payEach !== undefined ? { payEach: spec.spell.payEach } : {}),
                   ...(change !== undefined ? { change } : {}),
                 });
                 copied = copied || made;

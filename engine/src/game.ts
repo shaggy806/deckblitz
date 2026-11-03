@@ -257,6 +257,7 @@ import type {
   SpellCopyChange,
   ZoneSecondPick,
   BoundUnlessOption,
+  CopyForEach,
   WardCost,
   ModeOption,
   PileFate,
@@ -32469,15 +32470,24 @@ export class Game {
         if (original === undefined) return false;
         let copy = spell;
         if (copyOpts.retargetTo !== undefined) {
-          const aimed = this.retargetedSnapshot(spell, copyOpts.retargetTo, controller, original);
+          const aimed = this.retargetedSnapshot(spell, copyOpts.retargetTo, copyOpts.caster ?? controller, original);
           if (aimed === null) return false;
           copy = aimed;
         }
-        this.copySpellFrom(copy, original, copyOpts.controller ?? controller, copyOpts.newTargets, copyOpts.change);
+        const copier = copyOpts.controller ?? controller;
+        if (copyOpts.payEach !== undefined) {
+          const payment = this.payMana(copier, parseManaCost(copyOpts.payEach), undefined, undefined, otherCostPurpose(copyOpts.payEach, false));
+          if (payment === null) return false;
+          this.executePayment(copier, payment);
+        }
+        this.copySpellFrom(copy, original, copier, copyOpts.newTargets, copyOpts.change);
         return true;
       },
-      copyTriggerSpellForEach: (spell, each) => {
-        if (triggerObject !== undefined) this.copySpellForEachItCouldTarget(spell, triggerObject, controller, source, each);
+      copyTriggerSpellForEach: (spell, each, copier) => {
+        if (triggerObject === undefined) return;
+        // "Could target" is the spell's, as its caster cast it.
+        const caster = refs.triggerSpellController ?? this.state.objects[triggerObject]?.controller ?? copier;
+        this.copySpellForEachItCouldTarget(spell, triggerObject, copier, caster, source, each);
       },
       solveSource: () => {
         const object = this.state.objects[source];
@@ -37072,13 +37082,18 @@ export class Game {
     spell: SpellSnapshot,
     original: ObjectId,
     controller: PlayerId,
+    caster: PlayerId,
     source: ObjectId,
-    each: { readonly filter: CardFilter; readonly other?: true },
+    each: CopyForEach,
   ): void {
     const aims: ObjectId[] = [];
+    const cost = each.chooseAndPayEach;
+    const targeted = (id: ObjectId): boolean =>
+      (spell.targets ?? []).some((t) => t?.kind === "object" && t.object === id);
     for (const id of this.battlefieldMatching(controller, each.filter)) {
       if (each.other === true && id === source) continue;
-      if (this.retargetedSnapshot(spell, { kind: "object", object: id }, controller, original) === null) continue;
+      if (each.other === "targeted" && targeted(id)) continue;
+      if (this.retargetedSnapshot(spell, { kind: "object", object: id }, caster, original) === null) continue;
       aims.push(id);
       let more = (this.state.objects[id]?.stackCount ?? 1) - 1;
       while (more > 0 && aims.length < Game.MAX_EFFECT_INSTANCES) {
@@ -37088,8 +37103,19 @@ export class Game {
       if (aims.length >= Game.MAX_EFFECT_INSTANCES) break;
     }
     if (aims.length === 0) return;
-    if (aims.length === 1) {
-      const aimed = this.retargetedSnapshot(spell, { kind: "object", object: aims[0] }, controller, original);
+    // As many as they could pay for, all of it (rule 118.3).
+    let affordable = aims.length;
+    if (cost !== undefined) {
+      affordable = 0;
+      while (
+        affordable < aims.length &&
+        this.payMana(controller, parseManaCost(cost.repeat(affordable + 1)), undefined, undefined, otherCostPurpose(cost, false)) !== null
+      ) {
+        affordable += 1;
+      }
+      if (affordable === 0) return;
+    } else if (aims.length === 1) {
+      const aimed = this.retargetedSnapshot(spell, { kind: "object", object: aims[0] }, caster, original);
       if (aimed !== null) this.copySpellFrom(aimed, original, controller, false);
       return;
     }
@@ -37099,12 +37125,20 @@ export class Game {
       kind: "choose-permanents",
       player: controller,
       eligible: aims,
-      min: aims.length,
-      max: aims.length,
+      min: cost !== undefined ? 0 : aims.length,
+      max: affordable,
       prompt:
-        `Order the copies of ${spell.cardName}: pick each target in turn — the copy for the first ` +
-        "goes on the stack first, and resolves last",
-      then: { kind: "copy-spell", target: "trigger-spell", retargetTo: 0, spell: { snapshot: spell, original } },
+        cost !== undefined
+          ? `Choose any number to copy ${spell.cardName} for, paying ${cost} for each — the copy for the first ` +
+            "goes on the stack first, and resolves last"
+          : `Order the copies of ${spell.cardName}: pick each target in turn — the copy for the first ` +
+            "goes on the stack first, and resolves last",
+      then: {
+        kind: "copy-spell",
+        target: "trigger-spell",
+        retargetTo: 0,
+        spell: { snapshot: spell, original, caster, ...(cost !== undefined ? { payEach: cost } : {}) },
+      },
       source,
       x: 0,
     };

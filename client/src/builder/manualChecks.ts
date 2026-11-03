@@ -9865,4 +9865,11 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       turn: 0,
     }),
   ),
+  preset(
+    'Feather, Radiant Arbiter: copies for the creatures you choose and pay for',
+    board({
+      you: { bf: ['Feather, Radiant Arbiter', 'Grizzly Bears*2', 'Forest*5'], hand: ['Giant Growth'] },
+      opp: [{}],
+    }),
+  ),
 ]

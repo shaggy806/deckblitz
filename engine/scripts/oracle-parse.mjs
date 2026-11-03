@@ -464,6 +464,23 @@ function keywordPart(part, faceName, typeLine = "") {
       ],
     }),
     storm: () => ({ triggered: [{ trigger: { on: "this-cast" }, targets: [], effect: { kind: "storm" }, resolve: null, text: "Storm" }] }),
+    // Gravestorm (rule 702.69a): the `gravestorm()` helper.
+    gravestorm: () => ({
+      triggered: [
+        {
+          trigger: { on: "this-cast" },
+          targets: [],
+          effect: {
+            kind: "copy-spell",
+            target: "trigger-spell",
+            newTargets: true,
+            count: { turnHistory: "to-graveyard", who: "each-player", from: ["battlefield"] },
+          },
+          resolve: null,
+          text: "Gravestorm",
+        },
+      ],
+    }),
     cascade: () => ({
       triggered: [{ trigger: { on: "this-cast" }, targets: [], effect: { kind: "cascade" }, resolve: null, text: "Cascade" }],
     }),
@@ -6129,6 +6146,32 @@ export function parseEffect(text, outer) {
   let skip = 0;
   const becomes = becomesWithAbilitiesOf(text);
   if (becomes !== null) return { effect: becomes, todo: [], hints: [] };
+
+  // A copy for each permanent the spell could target (rule 707.10d): Zada's,
+  // Ink-Treader Nephilim's own, Mirrorwing Dragon's and Precursor Golem's made
+  // by the caster, from whose side "they control" reads.
+  const eachCopy =
+    /^(That player copies|Copy) (?:that|the) spell for each other (creature you control|creature they control|creature|Golem) that (?:the )?spell could target\. Each copy targets a different one of those (?:creatures|Golems)\.$/.exec(
+      text,
+    );
+  if (eachCopy !== null) {
+    const byCaster = eachCopy[1] === "That player copies";
+    const golem = eachCopy[2] === "Golem";
+    const own = / (you|they) control$/.test(eachCopy[2]);
+    return {
+      effect: {
+        kind: "copy-spell",
+        target: "trigger-spell",
+        ...(byCaster ? { controller: "trigger-controller" } : {}),
+        forEachItCouldTarget: {
+          filter: golem ? { subtype: "Golem" } : own ? { type: "creature", controlledBy: "you" } : { type: "creature" },
+          other: golem ? "targeted" : true,
+        },
+      },
+      todo: [],
+      hints: [],
+    };
+  }
   // Shallow Grave's and Corpse Dance's whole text: the top creature card of
   // your graveyard (rule 404.2), and what follows reads it as target 0.
   if (

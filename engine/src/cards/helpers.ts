@@ -434,6 +434,28 @@ export const demonstrate = (): TriggeredAbility => ({
 });
 
 /**
+ * Gravestorm (rule 702.69a): "When you cast this spell, copy it for each
+ * permanent that was put into a graveyard from the battlefield this turn. If
+ * the spell has any targets, you may choose new targets for any of the copies."
+ * Anyone's, tokens included (the rulings), counted as the ability resolves. A
+ * copy of `copy-spell` with a `count`: its own trigger, so it can be countered
+ * alone, and it copies a spell countered in response as it last was. Put the
+ * reminder text in `text` as well.
+ */
+export const gravestorm = (): TriggeredAbility => ({
+  trigger: { on: "this-cast" },
+  targets: [],
+  effect: {
+    kind: "copy-spell",
+    target: "trigger-spell",
+    newTargets: true,
+    count: { turnHistory: "to-graveyard", who: "each-player", from: ["battlefield"] },
+  },
+  resolve: null,
+  text: "Gravestorm",
+});
+
+/**
  * The Commander 2017 Curses' trigger (Curse of Opulence, Verbosity, Bounty,
  * Disturbance): "Whenever enchanted player is attacked, [effect]. Each
  * opponent attacking that player does the same." Once per declaration,

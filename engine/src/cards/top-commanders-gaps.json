@@ -1371,7 +1371,10 @@
   "effect:unless-discard-filtered-card",
   "effect:unless-target-controller",
   "effect:unless-that-player",
-  "effect:unless-discard-hand"
+  "effect:unless-discard-hand",
+  "effect:copy-spell-for-each-by-caster",
+  "effect:copy-spell-for-each-chosen-paid",
+  "keyword:gravestorm"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

@@ -1330,7 +1330,11 @@ function evalStaticCondition(
       const id = opts.triggerObject;
       if (id === undefined) return false;
       // A spell on the stack (a cast trigger's) is read as it is.
-      return matchesFilter(state, registry, id, condition.filter, { you, lastKnown: state.objects[id]?.zone !== "stack" });
+      return matchesFilter(state, registry, id, condition.filter, {
+        you,
+        source: source.id,
+        lastKnown: state.objects[id]?.zone !== "stack",
+      });
     }
     case "target":
     case "target-chosen":

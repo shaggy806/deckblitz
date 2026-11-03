@@ -6534,3 +6534,8 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 - **Do:** It's Bob's turn. As Bob, pass priority to go to combat, choose "No" to paying {2}, then pass until you declare attackers and pick Grizzly Bears.
 - **Expect:** The Bears can attack Alice or Chandra, but Jace isn't offered as what they attack.
+
+### Feather, Radiant Arbiter: copies for the creatures you choose and pay for
+
+- **Do:** Cast Giant Growth on Feather, then pick one Grizzly Bears and Confirm.
+- **Expect:** The banner says "Choose any number to copy Giant Growth for, paying {2} for each". Your lands tap for the one you picked, and those Bears and Feather each get +3/+3, the other Bears nothing.

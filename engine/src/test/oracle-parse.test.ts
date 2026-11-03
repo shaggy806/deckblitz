@@ -10621,6 +10621,48 @@ describe("an animate that sets creature characteristics", () => {
   });
 });
 
+describe("a copy for each permanent the spell could target", () => {
+  const sentence = (who: string, each: string, plural: string): string =>
+    `${who} that spell for each other ${each} that the spell could target. Each copy targets a different one of those ${plural}.`;
+  it("reads who makes them, and whose creatures", () => {
+    expect(parseEffect(sentence("That player copies", "creature they control", "creatures"), ctx()).effect).toEqual({
+      kind: "copy-spell",
+      target: "trigger-spell",
+      controller: "trigger-controller",
+      forEachItCouldTarget: { filter: { type: "creature", controlledBy: "you" }, other: true },
+    });
+    expect(parseEffect(sentence("Copy", "creature", "creatures"), ctx()).effect).toEqual({
+      kind: "copy-spell",
+      target: "trigger-spell",
+      forEachItCouldTarget: { filter: { type: "creature" }, other: true },
+    });
+  });
+  it("reads 'each other Golem' as other than what the spell targets", () => {
+    expect(parseEffect(sentence("That player copies", "Golem", "Golems"), ctx()).effect).toEqual({
+      kind: "copy-spell",
+      target: "trigger-spell",
+      controller: "trigger-controller",
+      forEachItCouldTarget: { filter: { subtype: "Golem" }, other: "targeted" },
+    });
+  });
+  it("reads gravestorm as a copy for each permanent put into a graveyard from the battlefield", () => {
+    const card = parseFace(
+      {
+        name: "Card",
+        type_line: "Sorcery",
+        oracle_text: "Gravestorm (When you cast this spell, copy it for each permanent put into a graveyard from the battlefield this turn.)\nDraw a card.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(card.triggered[0].effect).toEqual({
+      kind: "copy-spell",
+      target: "trigger-spell",
+      newTargets: true,
+      count: { turnHistory: "to-graveyard", who: "each-player", from: ["battlefield"] },
+    });
+  });
+});
+
 describe("an unless whose way out is an effect of its own", () => {
   it("reads what a spell's controller may do instead of having it countered", () => {
     expect(parseEffect("Counter target spell unless its controller exiles all cards from their graveyard.", ctx()).effect).toEqual({

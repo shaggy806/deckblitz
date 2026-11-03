@@ -1656,7 +1656,16 @@ it goes on applying to the permanent it becomes (rule 400.7a) and a copy of that
   for every one of the spell's targets — a token stack counting as each of its tokens, each
   split off — and with two or more, their controller orders them: a `choose-permanents`
   naming every one, the copy for the first named going on the stack first (so resolving
-  last).
+  last). With `controller: "trigger-controller"`, the caster makes them, `filter` from their
+  side (Mirrorwing Dragon); "could target" is always the caster's, even when another player
+  makes the copies (Ink-Treader Nephilim's ruling: such a copy may then not resolve). `other:
+  "targeted"` leaves out what the spell targets rather than the source ("each other Golem" —
+  Precursor Golem). `chooseAndPayEach: "{2}"`: "you may choose any number … and pay {2} for each
+  … for each of those creatures, copy that spell" (Feather, Radiant Arbiter), as many offered
+  as can be paid for.
+- **Gravestorm** is `gravestorm()` (helpers.ts, rule 702.69a): a `this-cast` `copy-spell` with
+  `newTargets` and a `count` of `{ turnHistory: "to-graveyard", who: "each-player", from:
+  ["battlefield"] }`, tokens included, read as it resolves (Ominous Harvest).
 
 `count` is "copy it **for each** …", an `EffectAmount` read as the effect
 applies: Thousand-Year Storm's `{ triggerValue: true }` off a cast trigger's

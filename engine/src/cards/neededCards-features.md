@@ -4269,3 +4269,12 @@ effect:sacrifice-greatest-unless-pay-its-mana-cost, effect:unless-target-control
 Found to need no code: effect:unless-discard-filtered-card (`may` with `else`: Hidden Horror's shape), and "{B} or {3}" (two `unless`es
 nested). Proving cards: Grip of Amnesia, Perplex, Tainted Specter, Cursed Monstrosity, Torment of Venom, Energy Vortex, Lim-Dûl's Hex,
 Sivriss, Nightmare Speaker, Ice Cave, Tariff, Champions of Minas Tirith, Jace, Multiverse Architect, Overencumbered.
+
+**A copy for each permanent a spell could target, by whoever makes it (2026-11-02).** `copy-spell`'s `forEachItCouldTarget` takes
+`controller` (the caster's copies, `filter` from their side), judges "could target" from the spell's caster always (Ink-Treader
+Nephilim's ruling), `other: "targeted"` (other than what the spell targets), and `chooseAndPayEach` (a `choose-permanents` of up to
+what can be paid for, `min` 0, each answer paying then copying). A `trigger-object` condition now knows its `source`, so an intervening
+"if that spell targets only this creature" reads. `gravestorm()` (rule 702.69a) needed no engine code: `copy-spell`'s `count` of
+`turnHistory: "to-graveyard"`. Keys: effect:copy-spell-for-each-by-caster, effect:copy-spell-for-each-chosen-paid, keyword:gravestorm.
+Proving cards: Mirrorwing Dragon, Precursor Golem, Ink-Treader Nephilim, Feather, Radiant Arbiter, Ominous Harvest, Follow the Bodies,
+Bitter Ordeal.
