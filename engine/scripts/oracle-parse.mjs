@@ -6076,6 +6076,37 @@ function reflexiveAboutAt(sentences, i, ctx) {
   return [step, { kind: "reflexive-trigger", about, targets: read.targets, effect: read.effect, text: sentences[i + 1] }];
 }
 
+/**
+ * "You may pay {1}{W} any number of times. When you pay this cost one or more
+ * times, put that many valor counters on this creature." (Intrepid Adversary;
+ * "up to three times", `maxX`): a `may` whose `cost` is paid a chosen number of
+ * times, and the reflexive ability that triggers once (rule 603.12a), reading
+ * that number as X. Its effect takes no target here, so it takes no slot of
+ * the creating ability's: a clause with one, or "choose up to that many"'s
+ * modes, is left to be authored. `null` when not read whole.
+ */
+function payTimesAt(sentences, i, ctx) {
+  const pay = /^you may pay ((?:\{[^}]+\})+) (any number of times|up to (one|two|three|four|five) times?)\.$/i.exec(sentences[i] ?? "");
+  const clause = /^when you pay this cost one or more times, (.+\.)$/i.exec(sentences[i + 1] ?? "");
+  if (pay === null || clause === null) return null;
+  const slots = ctx.targets.length;
+  const text = clause[1].replace(/\bthat many\b/gi, "X");
+  const effect = parseSentence(`${text[0].toUpperCase()}${text.slice(1)}`, ctx);
+  if (effect === null || containsUndefined(effect) || ctx.targets.length !== slots || !JSON.stringify(effect).includes('"x"')) {
+    ctx.targets.length = slots;
+    return null;
+  }
+  const most = pay[3] === undefined ? undefined : ["one", "two", "three", "four", "five"].indexOf(pay[3].toLowerCase()) + 1;
+  return {
+    kind: "may",
+    prompt: `Pay ${pay[1]} ${pay[2].toLowerCase()}?`,
+    cost: pay[1],
+    costTimes: true,
+    ...(most !== undefined ? { maxX: most } : {}),
+    effect: { kind: "reflexive-trigger", targets: [], effect, text: sentences[i + 1].replaceAll("~", "this creature") },
+  };
+}
+
 /** What a "When you do" clause's "it", "that token" or "that creature" means
  * after `step`: its token, the card it returned, or the host it named. */
 function reflexiveAbout(step, clause) {
@@ -6356,6 +6387,15 @@ export function parseEffect(text, outer) {
         parsed.push(effect);
         hints.push({ sentence, effect });
       }
+      skip = 1;
+      continue;
+    }
+    // "You may pay {1}{W} any number of times. When you pay this cost one or
+    // more times, …" (`payTimesAt`).
+    const payTimes = payTimesAt(sentences, i, ctx);
+    if (payTimes !== null) {
+      parsed.push(payTimes);
+      hints.push({ sentence, effect: payTimes });
       skip = 1;
       continue;
     }

@@ -2027,8 +2027,10 @@ export type LegalAction =
        * driver echoes its pick back as `xValue`. `energy`: X is paid in
        * energy (a `may`'s `costEnergyX` — "you may pay one or more {E}",
        * `minX` 1, or "any amount of {E}", where choosing no mode pays 0 and
-       * the mode still happens). */
-      readonly xCost?: { readonly maxX: number; readonly minX?: number; readonly energy?: true };
+       * the mode still happens). `times`: X is how many times this cost is
+       * paid (a `may`'s `costTimes` — "you may pay {1}{G} any number of
+       * times", `minX` 1). */
+      readonly xCost?: { readonly maxX: number; readonly minX?: number; readonly energy?: true; readonly times?: string };
       /** Rules text of each mode, in order — index into this is what the
        * `choose-modes` action submits. */
       readonly modeTexts: readonly string[];

@@ -10,6 +10,7 @@
   "effect:delayed-trigger-target-deals-damage",
   "effect:delayed-trigger-target-player-next-upkeep",
   "effect:delayed-trigger-until-your-next-turn",
+  "decision:pay-cost-up-to-n-times",
   "replacement:skip-extra-turns",
   "replacement:skip-turn",
   "bug:token-copy-skips-as-enters-choices",

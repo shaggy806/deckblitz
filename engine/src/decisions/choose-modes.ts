@@ -49,8 +49,22 @@ export const chooseModes = defineDecision({
             },
           }
         : {}),
+      // "You may pay {1}{G} any number of times": X is how many, from one
+      // (none is declining), and the driver says what each one costs.
+      ...(awaiting.costTimes === true && awaiting.cost !== undefined
+        ? {
+            xCost: {
+              maxX: Math.min(
+                ctx.maxAffordableAbilityX(awaiting.player, awaiting.cost, undefined, true),
+                awaiting.maxX ?? Infinity,
+              ),
+              minX: 1,
+              times: awaiting.cost,
+            },
+          }
+        : {}),
       // "You may pay {X}{R}" — tell the driver how large X may be.
-      ...(awaiting.energyX === undefined && awaiting.cost !== undefined && parseManaCost(awaiting.cost).x > 0
+      ...(awaiting.energyX === undefined && awaiting.costTimes !== true && awaiting.cost !== undefined && parseManaCost(awaiting.cost).x > 0
         ? {
             xCost: {
               maxX: Math.min(
@@ -101,6 +115,10 @@ export const chooseModes = defineDecision({
     if (awaiting.energyX === "one-or-more" && chosen.length > 0 && (action.xValue ?? 0) < 1) {
       return `${player} must pay at least one {E}`;
     }
+    // "Any number of times": saying yes pays it at least once.
+    if (awaiting.costTimes === true && chosen.length > 0 && (action.xValue ?? 0) < 1) {
+      return `${player} must pay the cost at least once`;
+    }
     return null;
   },
 
@@ -123,6 +141,9 @@ export const chooseModes = defineDecision({
       player,
       modes,
       ...(awaiting.energyX !== undefined && modes.length > 0 ? { xValue: awaiting.maxX ?? 0 } : {}),
+      // And pays a repeatable cost once, which the question's being asked
+      // says it can.
+      ...(awaiting.costTimes === true && modes.length > 0 ? { xValue: 1 } : {}),
     };
   },
 
@@ -169,11 +190,11 @@ export const chooseModes = defineDecision({
     for (let i = 0; i < count && pool.length > 0; i += 1) {
       modes.push(pool.splice(rng.pickIndex(pool.length), 1)[0]);
     }
-    // An amount of energy: any amount it may pay.
-    const energy = legal.xCost?.energy === true ? legal.xCost : undefined;
-    if (energy !== undefined && modes.length > 0) {
-      const min = energy.minX ?? 0;
-      return { type: "choose-modes", player, modes, xValue: min + rng.pickIndex(energy.maxX - min + 1) };
+    // An amount of energy, or a number of times to pay: any it may.
+    const amount = legal.xCost?.energy === true || legal.xCost?.times !== undefined ? legal.xCost : undefined;
+    if (amount !== undefined && modes.length > 0) {
+      const min = amount.minX ?? 0;
+      return { type: "choose-modes", player, modes, xValue: min + rng.pickIndex(amount.maxX - min + 1) };
     }
     return { type: "choose-modes", player, modes };
   },

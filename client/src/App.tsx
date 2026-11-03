@@ -4601,7 +4601,15 @@ function Table({
           <>
             {xCost !== undefined && (
               <>
-                <span>{xCost.energy ? <>Pay <Symbols text="{E}" /> ×</> : 'X ='}</span>
+                <span>
+                  {xCost.energy ? (
+                    <>Pay <Symbols text="{E}" /> ×</>
+                  ) : xCost.times !== undefined ? (
+                    <>Pay <Symbols text={xCost.times} /> ×</>
+                  ) : (
+                    'X ='
+                  )}
+                </span>
                 <input
                   type="number"
                   aria-label="X"

@@ -24,6 +24,38 @@ import { parseEffect, parseFace, parseTrigger, parseCost, parseSentence, parseTy
 // @ts-expect-error — as above.
 import { checkPool } from "../../scripts/oracle-parse-check.mjs";
 
+describe("a cost paid a chosen number of times", () => {
+  const read = (oracle_text: string) =>
+    parseFace({ name: "Card", type_line: "Creature — Human", oracle_text, power: "3", toughness: "1" }, { tokenFor: (d: string) => d }).triggered[0];
+  const counters = "When you pay this cost one or more times, put that many valor counters on this creature.";
+  it("any number of times, and that many through the reflexive ability", () => {
+    const ability = read(`When this creature enters, you may pay {1}{W} any number of times. ${counters}`);
+    expect(ability.targets).toEqual([]);
+    expect(ability.effect).toEqual({
+      kind: "may",
+      prompt: "Pay {1}{W} any number of times?",
+      cost: "{1}{W}",
+      costTimes: true,
+      effect: {
+        kind: "reflexive-trigger",
+        targets: [],
+        effect: { kind: "add-counter", target: "source", counter: "valor", amount: "x" },
+        text: counters,
+      },
+    });
+  });
+  it("up to three times is a ceiling", () => {
+    const ability = read(`When this creature enters, you may pay {G} up to three times. ${counters}`);
+    expect(ability.effect).toMatchObject({ cost: "{G}", costTimes: true, maxX: 3 });
+  });
+  it("leaves a clause it can't read whole", () => {
+    const ability = read(
+      "When this creature enters, you may pay {1}{W} any number of times. When you pay this cost one or more times, put that many valor counters on this creature, then up to that many target lands you control become 3/3 Wolf creatures with haste that are still lands.",
+    );
+    expect(JSON.stringify(ability?.effect ?? null)).not.toContain("costTimes");
+  });
+});
+
 describe("an opponent's spell or ability causing you to discard", () => {
   const read = (type_line: string, oracle_text: string) =>
     parseFace({ name: "Card", type_line, oracle_text, power: "3", toughness: "3" }, { tokenFor: (d: string) => d });

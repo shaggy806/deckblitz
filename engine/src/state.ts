@@ -4071,6 +4071,9 @@ export type AwaitingDecision =
        * than the amount of life you lost this turn"). With `energyX`, the
        * most energy the chooser can pay (what they have, under `maxX`). */
       readonly maxX?: number;
+      /** `cost` is paid X times over, X from 1 — a `may`'s `costTimes`
+       * ("you may pay {1}{G} any number of times"). */
+      readonly costTimes?: true;
       /** X is an amount of energy, not mana — a `may`'s `costEnergyX`: from
        * 1 (`"one-or-more"`) or from 0 (`"any"`, where choosing no mode is
        * paying 0 and the mode still applies) up to `maxX`. */

@@ -319,6 +319,7 @@ import {
   coloredReductionOf,
   manaValue,
   parseManaCost,
+  repeatedManaCost,
   withGenericReducedBy,
   reduceManaCost,
 } from "./mana.js";
@@ -1944,8 +1945,11 @@ export class Game {
     this.decisionCtx = {
       state: this.state,
       registry: this.registry,
-      maxAffordableAbilityX: (player, cost, xColor) => {
+      maxAffordableAbilityX: (player, cost, xColor, times) => {
         const parsed = parseManaCost(cost);
+        if (times === true) {
+          return this.maxAffordableAbilityX(player, (n) => repeatedManaCost(parsed, n));
+        }
         return parsed.x === 0
           ? 0
           : this.maxAffordableAbilityX(player, (x) => concreteX(parsed, x, xColor), undefined, undefined, otherCostPurpose(cost));
@@ -6902,6 +6906,8 @@ export class Game {
       readonly maxX?: number;
       /** X paid in energy rather than mana — see `may`'s `costEnergyX`. */
       readonly energyX?: "one-or-more" | "any";
+      /** `cost` paid X times over — see `may`'s `costTimes`. */
+      readonly costTimes?: true;
       /** A vote's question (rule 701.38): never answered along with
        * identical triggers', and with `secret`, see the `choose-modes`
        * decision's `secret`. */
@@ -7028,6 +7034,7 @@ export class Game {
       ...(ability.costHasX === true ? { costHasX: true as const } : {}),
       ...(energyCap !== undefined ? { maxX: energyCap } : ability.maxX !== undefined ? { maxX: ability.maxX } : {}),
       ...(energyX !== undefined ? { energyX } : {}),
+      ...(ability.costTimes === true ? { costTimes: true as const } : {}),
       ...(key !== undefined ? { abilityKey: key } : {}),
       ...(onlyUnchosen ? { notChosenThisTurn: offered } : {}),
       ...(onlyUnchosen && ever ? { chosenEver: true as const } : {}),
@@ -7170,8 +7177,9 @@ export class Game {
     if (chosen.length > 0 && !this.canPayLifeAndEnergy(player, costLife, costEnergy)) chosen = [];
     if (cost !== undefined && chosen.length > 0) {
       const parsed = parseManaCost(cost);
-      chosenX = parsed.x > 0 ? Math.max(0, Math.floor(xValue ?? 0)) : 0;
-      const concrete = concreteX(parsed, chosenX, awaiting.xColor);
+      const times = awaiting.costTimes === true;
+      chosenX = parsed.x > 0 || times ? Math.max(0, Math.floor(xValue ?? 0)) : 0;
+      const concrete = times ? repeatedManaCost(parsed, chosenX) : concreteX(parsed, chosenX, awaiting.xColor);
       const payment = this.payMana(player, concrete, undefined, undefined, otherCostPurpose(cost, awaiting.costHasX === true));
       if (payment === null) chosen = [];
       else this.executePayment(player, payment);
@@ -33309,6 +33317,7 @@ export class Game {
             ...(otherCost?.energy !== undefined ? { costEnergy: otherCost.energy } : {}),
             ...(otherCost?.maxX !== undefined ? { maxX: otherCost.maxX } : {}),
             ...(otherCost?.energyX !== undefined ? { energyX: otherCost.energyX } : {}),
+            ...(otherCost?.costTimes === true ? { costTimes: true as const } : {}),
             ...(about !== undefined ? { about } : {}),
             ...(xColor !== undefined ? { xColor } : {}),
           },

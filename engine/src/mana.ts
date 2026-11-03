@@ -362,6 +362,25 @@ export function coloredReductionOf(text: string, coloredOnly: boolean, times = 1
   return { colors, coloredOnly };
 }
 
+/** `cost` paid `times` times over, as one payment — a `may`'s `costTimes`,
+ * "you may pay {1}{G} any number of times": every symbol of it, that many. */
+export function repeatedManaCost(cost: ManaCost, times: number): ManaCost {
+  return {
+    ...cost,
+    generic: cost.generic * times,
+    colored: {
+      W: cost.colored.W * times,
+      U: cost.colored.U * times,
+      B: cost.colored.B * times,
+      R: cost.colored.R * times,
+      G: cost.colored.G * times,
+    },
+    colorless: cost.colorless * times,
+    snow: cost.snow * times,
+    hybrid: Array.from({ length: times }, () => cost.hybrid).flat(),
+  };
+}
+
 /**
  * `cost` with cost reductions applied (rule 601.2f), none of which can take
  * it below nothing.

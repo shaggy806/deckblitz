@@ -199,7 +199,7 @@ export interface DecisionReadCtx {
    * candidate X until one fails. `choose-modes` needs it to advertise how
    * large an "you may pay {X}{R}" mode's X may be.
    */
-  readonly maxAffordableAbilityX: (player: PlayerId, manaString: string | null, xColor?: Color) => number;
+  readonly maxAffordableAbilityX: (player: PlayerId, manaString: string | null, xColor?: Color, times?: true) => number;
   /**
    * The {@link TargetSource} of the triggered ability parked in
    * `state.pendingTargetedTrigger`, or `undefined` when none is.

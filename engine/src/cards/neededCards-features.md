@@ -3552,6 +3552,14 @@ in `git log`.
   the chosen-colour Auras (`grant-protection.test.ts`). Gods Willing, Giver of
   Runes, Brave the Elements, Flickering Ward, Pippin and 57 more: 62 of the family's 72.
 
+- **A cost paid a chosen number of times** (`decision:pay-cost-up-to-n-times`,
+  2026-11-02) — `may.costTimes`, with `maxX` for "up to three times": no new
+  decision, the `choose-modes` offer's `xCost` from 1 naming the cost in `times`,
+  paid as one payment (`repeatedManaCost`), the number the X a `reflexive-trigger`
+  reads as its counters, `any-number` `max: "x"` or announced `modal` `maxModes:
+  "x"` (rule 603.12a; `pay-cost-times.test.ts`). Intrepid Adversary, Primal
+  Adversary, Tranquil Frillback.
+
 ## Completed: `neededCards.txt` passes (P0-P20)
 
 Two curated precon decks (a fixed-dual-land manabase deck, a

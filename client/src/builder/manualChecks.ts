@@ -9911,4 +9911,18 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{}],
     }),
   ),
+  preset(
+    'Intrepid Adversary: a cost paid any number of times',
+    board({
+      you: { bf: ['Plains*7'], hand: ['Intrepid Adversary'] },
+      opp: [{}],
+    }),
+  ),
+  preset(
+    'Tranquil Frillback: pay up to three times, choose up to that many, in a 4-player game',
+    board({
+      you: { bf: ['Forest*7'], hand: ['Tranquil Frillback'] },
+      opp: [{ bf: ['Sol Ring'], gy: ['Grizzly Bears'] }, {}, {}],
+    }),
+  ),
 ]

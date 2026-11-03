@@ -8163,6 +8163,21 @@ export type EffectSpec =
        * as the `may` applies. */
       readonly maxX?: EffectAmount;
       /**
+       * `cost` may be paid more than once, in one payment as the `may`
+       * applies — "you may pay {1}{G} **any number of times**. When you pay
+       * this cost one or more times, put that many +1/+1 counters on this
+       * creature" (Intrepid Adversary), and with `maxX`, "you may pay {G}
+       * **up to three times**" (Tranquil Frillback). The question is the
+       * `choose-modes` decision's, its offer's `xCost` naming the cost in
+       * `times`: how many times, from 1, and declining is paying none. Not
+       * offered when it can't be paid once. The number of times is the X
+       * `effect` reads ("that many"), carried into a `reflexive-trigger`
+       * there, which triggers once however many times it was paid (rule
+       * 603.12a), as `any-number`'s `max: "x"` or an announced `modal`'s
+       * `maxModes: "x"` too. No `{X}` in `cost`.
+       */
+      readonly costTimes?: true;
+      /**
        * Life to pay as part of that cost (with `cost`, or on its own) —
        * Zoraline, Cosmos Caller's "you may pay {W}{B} and 2 life", Tymna the
        * Weaver's "you may pay X life". Read as the `may` applies. Payable only
@@ -11385,6 +11400,8 @@ export interface EffectApi {
       readonly energy?: number;
       readonly maxX?: number;
       readonly energyX?: "one-or-more" | "any";
+      /** `cost` paid a chosen number of times — `may.costTimes`. */
+      readonly costTimes?: true;
     },
     /** The player the question is about — see `may`'s `aboutThatPlayer`. */
     about?: PlayerId,
@@ -17449,13 +17466,14 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         spec.cost,
         spec.oncePerTurn === true,
         spec.costLife === undefined && spec.costEnergy === undefined && spec.maxX === undefined &&
-          spec.costEnergyX === undefined
+          spec.costEnergyX === undefined && spec.costTimes === undefined
           ? undefined
           : {
               ...(spec.costLife !== undefined ? { life: amountValue(spec.costLife, ctx) } : {}),
               ...(spec.costEnergy !== undefined ? { energy: amountValue(spec.costEnergy, ctx) } : {}),
               ...(spec.maxX !== undefined ? { maxX: amountValue(spec.maxX, ctx) } : {}),
               ...(spec.costEnergyX !== undefined ? { energyX: spec.costEnergyX } : {}),
+              ...(spec.costTimes === true ? { costTimes: true as const } : {}),
             },
         spec.aboutThatPlayer === true ? effectPlayer("that-player", ctx) : undefined,
         spec.xColor,

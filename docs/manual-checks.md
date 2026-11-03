@@ -6573,3 +6573,12 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 - **Do:** Activate Lurking Evil, at 21 life.
 - **Expect:** You go to 10 life and it becomes a 4/4 flying Phyrexian Horror creature, no longer an enchantment.
+### Intrepid Adversary: a cost paid any number of times
+
+- **Do:** Cast Intrepid Adversary. At "Pay {1}{W} ×" set 2 and click Pay.
+- **Expect:** The box starts at 2, the most your five lands left can pay, and can't go below 1. Four Plains tap, a second ability goes on the stack, and when it resolves the Adversary has two valor counters and is 5/3.
+
+### Tranquil Frillback: pay up to three times, choose up to that many, in a 4-player game
+
+- **Do:** Cast Tranquil Frillback. At "Pay {G} ×" click Pay with 3, choose all three modes, then pick Sol Ring and Bob.
+- **Expect:** The box stops at 3 with four lands left. The next question asks you to choose 0–3, then the targets. As it resolves Sol Ring is destroyed, Bob's graveyard is exiled with it in, and you gain 4 life.

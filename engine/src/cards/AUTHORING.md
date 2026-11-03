@@ -2113,8 +2113,12 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
   and **not with `announced`**: a triggered ability that picks its mode at
   random as it goes on the stack, before its targets (Summon: Magus Sisters'
   chapters), isn't built. Logged as a `chosen-at-random` event.
-- **`may { effect, prompt, cost?, costLife?, costEnergy?, costEnergyX?, then?, else?, oncePerTurn? }`** — "You may [effect]". One
-  optional mode; same targeting rule as `modal`. `cost` is a mana cost to say
+- **`may { effect, prompt, cost?, costTimes?, costLife?, costEnergy?, costEnergyX?, then?, else?, oncePerTurn? }`** — "You may [effect]". One
+  optional mode; same targeting rule as `modal`. `costTimes: true` is "you may pay {1}{G} any number of
+  times" (`maxX: 3` for "up to three times"): how many times is asked from 1, it's paid all at once, and
+  that number is `"x"` to `effect`, normally a `reflexive-trigger` ("when you pay this cost one or more
+  times", once however many, rule 603.12a) whose `any-number` target `max: "x"` or announced `modal`'s
+  `maxModes: "x"` reads it too (Intrepid Adversary, Primal Adversary, Tranquil Frillback). `cost` is a mana cost to say
   yes ("you may pay {B}. If you do, draw a card" — Nihil Spellbomb): the
   choice is only *offered* when it's payable, so being unable to pay and
   declining both land on `else`, and the mana is spent as the choice is
