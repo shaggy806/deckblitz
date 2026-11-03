@@ -27,6 +27,7 @@ import {
   restrictionsOf,
   turnRuleCovers,
   canAttackDespiteDefender,
+  staticAffects,
   staticConditionMet,
   staticReaches,
 } from "../characteristics.js";
@@ -60,6 +61,29 @@ function landwalkIgnoredForBlocks(state: GameState, registry: CardRegistry): Set
     }
     return out;
   });
+}
+
+/** Whether a static says `blocker` can block landwalkers as though they didn't
+ * have landwalk (`StaticAbility.blocksDespiteLandwalk`, Street Savvy). Asked
+ * only about a blocker facing a landwalker. */
+export function blocksDespiteLandwalk(state: GameState, registry: CardRegistry, blocker: GameObject): boolean {
+  const sources = computedCacheMemo("blocks-despite-landwalk", () => {
+    const out: { readonly source: GameObject; readonly ability: StaticAbility }[] = [];
+    for (const id of state.zones.shared.battlefield) {
+      const source = state.objects[id];
+      if (source === undefined || state.players[source.controller]?.hasLost === true) continue;
+      if (hasLostAbilities(state, registry, source)) continue;
+      for (const ability of registry.get(rulesTextName(source)).static) {
+        if (ability.blocksDespiteLandwalk === true) out.push({ source, ability });
+      }
+    }
+    return out;
+  });
+  return sources.some(
+    ({ source, ability }) =>
+      staticAffects(state, registry, ability.affects, source, blocker) &&
+      (ability.condition === undefined || staticConditionMet(state, registry, source, ability.condition)),
+  );
 }
 
 /** The land types among the lands `player` controls — what a landwalker
@@ -542,7 +566,7 @@ function whyThisCannotBlock(
   // Landwalk (rule 702.14c): unblockable as long as the defending player —
   // the one declaring this block — controls a land of that type.
   const walked = LANDWALK.filter(([keyword]) => objHasKeyword(state, registry, attackerId, keyword));
-  if (walked.length > 0) {
+  if (walked.length > 0 && !blocksDespiteLandwalk(state, registry, blocker)) {
     // "…can be blocked as though they didn't have swampwalk" (Quagmire).
     const ignored = landwalkIgnoredForBlocks(state, registry);
     const counted = walked.filter(([keyword]) => !ignored.has(keyword));
@@ -555,7 +579,10 @@ function whyThisCannotBlock(
   }
   // Landwalk of another kind — nonbasic, artifact, a chosen land type other
   // than those six (rule 702.14a, c): its land as a filter.
-  if (landwalkStopsBlocksBy(state, registry, computeCharacteristics(state, registry, attackerId).landwalk, player)) {
+  if (
+    landwalkStopsBlocksBy(state, registry, computeCharacteristics(state, registry, attackerId).landwalk, player) &&
+    !blocksDespiteLandwalk(state, registry, blocker)
+  ) {
     const attackerDef = registry.get(printedCardName(attacker));
     return `${blockerDef.name} can't block ${attackerDef.name} (landwalk)`;
   }

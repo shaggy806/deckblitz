@@ -20,7 +20,7 @@
 import type { CardType, Keyword } from "../cards/define.js";
 import type { Color } from "../mana.js";
 import { combatDamageOf, computeCharacteristics, unblockedAssignmentOf, withComputedCache } from "../characteristics.js";
-import { landTypesControlledBy, landwalkStopsBlocksBy } from "../combat/eligibility.js";
+import { blocksDespiteLandwalk, landTypesControlledBy, landwalkStopsBlocksBy } from "../combat/eligibility.js";
 import type { CardRegistry } from "../cards.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
 import type { GameState } from "../state.js";
@@ -54,6 +54,9 @@ export interface CombatCreature {
    * here, only of a creature that has one. */
   readonly controller: PlayerId;
   readonly walkedPast?: ReadonlySet<PlayerId>;
+  /** It can block landwalkers as though they didn't have landwalk (Street
+   * Savvy, `blocksDespiteLandwalk`). */
+  readonly blocksLandwalkers?: boolean;
   /** It may (or must) assign its combat damage as though it weren't blocked
    * (Thorn Elemental): a block stops none of it. */
   readonly assignsPastBlockers?: boolean;
@@ -119,6 +122,7 @@ function combatCreaturesUncached(
             ),
           }
         : {}),
+      ...(blocksDespiteLandwalk(state, registry, object) ? { blocksLandwalkers: true } : {}),
       ...(unblockedAssignmentOf(state, registry, id) !== null ? { assignsPastBlockers: true } : {}),
     };
     const copies = Math.min(object.stackCount ?? 1, MAX_COPIES);
@@ -150,6 +154,7 @@ export function canBlock(blocker: CombatCreature, attacker: CombatCreature): boo
   if (a.has("shadow") !== blocker.keywords.has("shadow")) return false;
   // Horsemanship (rule 702.31b): only horsemanship blocks it.
   if (a.has("horsemanship") && !blocker.keywords.has("horsemanship")) return false;
+  if (blocker.blocksLandwalkers === true) return true;
   for (const [keyword, landType] of LANDWALK) {
     if (a.has(keyword) && blocker.controllerLands.has(landType)) return false;
   }

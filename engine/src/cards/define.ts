@@ -3290,6 +3290,10 @@ export interface StaticAbility {
    * creature's landwalk of these kinds is ignored when a block is declared,
    * whoever controls the creature or this. `affects` is ignored. */
   readonly blockableDespiteLandwalk?: readonly Keyword[];
+  /** "Can block creatures with landwalk abilities as though they didn't have
+   * those abilities" (Street Savvy — rule 702.14): the blocker's side of it,
+   * for what `affects` picks out and of every kind of landwalk. */
+  readonly blocksDespiteLandwalk?: true;
   /** Landwalk of a kind (rule 702.14) for the affected creatures, its land as
    * a filter: "nonbasic landwalk" is `{ type: "land", notSupertype: "basic" }`
    * (Dryad Sophisticate, Trailblazer's Boots), "artifact landwalk" `{ types:

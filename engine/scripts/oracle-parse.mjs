@@ -2483,6 +2483,14 @@ export function parseSentence(sentence, ctx) {
   const s = sentence.replace(/\s+/g, " ").trim();
   const emblem = emblemOf(s);
   if (emblem !== null) return emblem;
+  // Fall from Favor's enters trigger, the two things at once.
+  if (/^tap enchanted creature and you become the monarch\.$/i.test(s)) {
+    return { kind: "sequence", effects: [{ kind: "tap", target: "attached" }, { kind: "become-monarch" }] };
+  }
+  // Stasis Cell, Detainment Spell: the Aura moved.
+  if (/^attach ~ to target creature\.$/i.test(s)) {
+    return { kind: "attach", target: ctx.target("creature") };
+  }
   // Getaway Glamer: about the target as it resolves, a tie destroying it.
   if (/^destroy target creature if no other creature has greater power\.$/i.test(s)) {
     const target = ctx.target("creature");
@@ -12103,6 +12111,14 @@ const INTERVENING_IFS = {
   ...TURN_TALLY_IFS,
   // Murders at Karlov Manor (Sanguine Spy).
   "if there are five or more mana values among cards in your graveyard,": FIVE_MANA_VALUES,
+  // Amonkhet's Deserts (Desert's Hold, Unquenchable Thirst, Wretched Camel).
+  "if you control a desert or there is a desert card in your graveyard,": {
+    kind: "any",
+    of: [
+      { kind: "controls", filter: { subtype: "Desert" }, atLeast: 1 },
+      { kind: "cards-in-graveyard", atLeast: 1, filter: { subtype: "Desert" } },
+    ],
+  },
   // Historian's Wisdom, Might Makes Right: `greatestInZone` over the battlefield.
   "if enchanted permanent is a creature with the greatest power among creatures on the battlefield,": {
     kind: "source",
@@ -14019,6 +14035,37 @@ function parseStatic(line, text) {
   // (Ground Seal, Silent Gravestone — `graveyardCardsUntargetable`).
   if (line === "Cards in graveyards can't be the targets of spells or abilities.") {
     return { affects: { scope: "self" }, graveyardCardsUntargetable: {}, text };
+  }
+  // What an Aura says of its host: Fall from Favor (its controller, read at each
+  // untap step), Street Savvy (the blocker's side of rule 702.14), Power Artifact
+  // (rule 602.2b, the host's abilities alone), Demonic Torment.
+  if (line === "Enchanted creature doesn't untap during its controller's untap step unless that player is the monarch.") {
+    return {
+      affects: { scope: "attached" },
+      condition: { kind: "not", of: { kind: "source", filter: { attachedTo: { controlledBy: "monarch" } } } },
+      restrictions: ["doesnt-untap"],
+      text,
+    };
+  }
+  if (line === "Enchanted creature gets +0/+2 and can block creatures with landwalk abilities as though they didn't have those abilities.") {
+    return { affects: { scope: "attached" }, grantPt: [0, 2], blocksDespiteLandwalk: true, text };
+  }
+  m = /^Enchanted artifact's activated abilities cost \{(\d+)\} less to activate\. This effect can't reduce the mana in that cost to less than one mana\.$/.exec(line);
+  if (m !== null) {
+    return {
+      affects: { scope: "self" },
+      abilityCostModification: { applies: { hostOfSource: true }, reduceGeneric: Number(m[1]), leavesOneMana: true },
+      text,
+    };
+  }
+  if (line === "Enchanted creature can't attack.") {
+    return { affects: { scope: "attached" }, restrictions: ["cant-attack"], text };
+  }
+  if (line === "Prevent all combat damage that would be dealt by enchanted creature.") {
+    return { affects: { scope: "self" }, replacement: { event: "would-deal-damage", fromAttached: true, combat: true, prevent: true }, text };
+  }
+  if (line === "Enchanted creature's activated abilities can't be activated.") {
+    return { affects: { scope: "attached" }, prohibits: { who: "each-player", abilitiesOf: { hostOfSource: true } }, text };
   }
   // Favor of the Mighty: one comparison over every creature, ties all counted.
   if (line === "Each creature with the greatest mana value has protection from each color.") {

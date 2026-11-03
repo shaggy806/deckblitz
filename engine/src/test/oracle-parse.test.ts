@@ -11797,6 +11797,69 @@ describe("a tap cost on the host, and the creature a cost tapped", () => {
   });
 });
 
+describe("what an Aura says of the permanent it enchants", () => {
+  const read = (type_line: string, oracle_text: string) =>
+    parseFace({ name: "Test Card", type_line, oracle_text, mana_cost: "{1}", colors: [], cmc: 1 } as never) as unknown as {
+      complete: boolean;
+      static: Record<string, unknown>[];
+      triggered: Record<string, unknown>[];
+      activated: Record<string, unknown>[];
+    };
+  const aura = (line: string) => read("Enchantment — Aura", `Enchant creature\n${line}`);
+
+  it("its controller being the monarch", () => {
+    const line = "Enchanted creature doesn't untap during its controller's untap step unless that player is the monarch.";
+    const [ability] = aura(line).static;
+    expect(ability.condition).toEqual({ kind: "not", of: { kind: "source", filter: { attachedTo: { controlledBy: "monarch" } } } });
+    expect(ability.restrictions).toEqual(["doesnt-untap"]);
+    expect(aura("When this Aura enters, tap enchanted creature and you become the monarch.").triggered[0].effect).toEqual({
+      kind: "sequence",
+      effects: [{ kind: "tap", target: "attached" }, { kind: "become-monarch" }],
+    });
+  });
+
+  it("blocking landwalkers", () => {
+    const [ability] = aura(
+      "Enchanted creature gets +0/+2 and can block creatures with landwalk abilities as though they didn't have those abilities.",
+    ).static;
+    expect(ability.grantPt).toEqual([0, 2]);
+    expect(ability.blocksDespiteLandwalk).toBe(true);
+  });
+
+  it("its abilities: cheaper, stopped, and its damage prevented", () => {
+    const [cheaper] = read(
+      "Enchantment — Aura",
+      "Enchant artifact\nEnchanted artifact's activated abilities cost {2} less to activate. This effect can't reduce the mana in that cost to less than one mana.",
+    ).static;
+    expect(cheaper.abilityCostModification).toEqual({ applies: { hostOfSource: true }, reduceGeneric: 2, leavesOneMana: true });
+    expect(aura("Enchanted creature's activated abilities can't be activated.").static[0].prohibits).toEqual({
+      who: "each-player",
+      abilitiesOf: { hostOfSource: true },
+    });
+    expect(aura("Enchanted creature can't attack.").static[0].restrictions).toEqual(["cant-attack"]);
+    expect(aura("Prevent all combat damage that would be dealt by enchanted creature.").static[0].replacement).toEqual({
+      event: "would-deal-damage",
+      fromAttached: true,
+      combat: true,
+      prevent: true,
+    });
+  });
+
+  it("moving, and a Desert's intervening if", () => {
+    const moved = aura("{1}{W}: Attach this Aura to target creature.").activated[0];
+    expect(moved.targets).toEqual(["creature"]);
+    expect(moved.effect).toEqual({ kind: "attach", target: 0 });
+    const life = aura("When this Aura enters, if you control a Desert or there is a Desert card in your graveyard, you gain 3 life.");
+    expect(life.triggered[0].condition).toEqual({
+      kind: "any",
+      of: [
+        { kind: "controls", filter: { subtype: "Desert" }, atLeast: 1 },
+        { kind: "cards-in-graveyard", atLeast: 1, filter: { subtype: "Desert" } },
+      ],
+    });
+  });
+});
+
 describe("the greatest power among creatures on the battlefield", () => {
   const GREATEST = { type: "creature", greatestInZone: { of: "power", among: { type: "creature" } } };
   const read = (type_line: string, oracle_text: string) =>

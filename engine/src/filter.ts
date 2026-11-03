@@ -779,8 +779,10 @@ export interface CardFilter {
    * Hold); with no such source, nothing matches. `"chosen-player"`: the
    * filter's source's chosen player (`GameObject.chosenPlayer`, as it last
    * existed if it has left — rule 608.2h): Stalking Leonin's "if it's
-   * controlled by the chosen player". */
-  readonly controlledBy?: "you" | "opponent" | "active-player" | "chooser" | "enchanted-player" | "chosen-player";
+   * controlled by the chosen player". `"monarch"`: the monarch (rule 725),
+   * nobody's while there is none: Fall from Favor's "unless that player is the
+   * monarch", about the enchanted creature's controller. */
+  readonly controlledBy?: "you" | "opponent" | "active-player" | "chooser" | "enchanted-player" | "chosen-player" | "monarch";
   /** Controlled by one of these players — set by the engine, never authored:
    * a protection grant's "creatures **your opponents** control" fixed to the
    * players they were as it resolved (`grant-protection`). */
@@ -2227,6 +2229,7 @@ export function matchesFilter(
   if (filter.controlledBy === "you" && controller !== ctx.you) return false;
   if (filter.controlledBy === "opponent" && controller === ctx.you) return false;
   if (filter.controlledBy === "active-player" && controller !== activePlayerOf(state)) return false;
+  if (filter.controlledBy === "monarch" && controller !== state.monarch) return false;
   if (filter.controlledBy === "chooser" && (ctx.chooser === undefined || controller !== ctx.chooser)) return false;
   if (filter.controlledBy === "enchanted-player") {
     const aura = ctx.source === undefined ? undefined : state.objects[ctx.source];
