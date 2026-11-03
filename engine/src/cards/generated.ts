@@ -3996,6 +3996,7 @@ import _poolChromescaleDrake from "./pool/chromescale-drake.js";
 import _poolChromeshellCrab from "./pool/chromeshell-crab.js";
 import _poolChromiumTheMutable from "./pool/chromium-the-mutable.js";
 import _poolChromium from "./pool/chromium.js";
+import _poolChronatog from "./pool/chronatog.js";
 import _poolChronicFlooding from "./pool/chronic-flooding.js";
 import _poolChronicleOfVictory from "./pool/chronicle-of-victory.js";
 import _poolChroniclerOfHeroes from "./pool/chronicler-of-heroes.js";
@@ -7091,6 +7092,7 @@ import _poolEmberEyeWolf from "./pool/ember-eye-wolf.js";
 import _poolEmberFistZubera from "./pool/ember-fist-zubera.js";
 import _poolEmberGale from "./pool/ember-gale.js";
 import _poolEmberHauler from "./pool/ember-hauler.js";
+import _poolEmberIslandProduction from "./pool/ember-island-production.js";
 import _poolEmberShot from "./pool/ember-shot.js";
 import _poolEmberSwallower from "./pool/ember-swallower.js";
 import _poolEmberWeaver from "./pool/ember-weaver.js";
@@ -9239,6 +9241,7 @@ import _poolGerminateRecruits from "./pool/germinate-recruits.js";
 import _poolGerminatingWurm from "./pool/germinating-wurm.js";
 import _poolGerrardsBattleCry from "./pool/gerrards-battle-cry.js";
 import _poolGerrardsCommand from "./pool/gerrards-command.js";
+import _poolGerrardsHourglassPendant from "./pool/gerrards-hourglass-pendant.js";
 import _poolGerrardsIrregulars from "./pool/gerrards-irregulars.js";
 import _poolGerrardsVerdict from "./pool/gerrards-verdict.js";
 import _poolGerrardsWisdom from "./pool/gerrards-wisdom.js";
@@ -12818,6 +12821,7 @@ import _poolKindlyAncestor from "./pool/kindly-ancestor.js";
 import _poolKindlyCustomer from "./pool/kindly-customer.js";
 import _poolKindlyStranger from "./pool/kindly-stranger.js";
 import _poolKindredBoon from "./pool/kindred-boon.js";
+import _poolKindredCharge from "./pool/kindred-charge.js";
 import _poolKindredDominance from "./pool/kindred-dominance.js";
 import _poolKindredJudgment from "./pool/kindred-judgment.js";
 import _poolKineticAugur from "./pool/kinetic-augur.js";
@@ -14172,6 +14176,7 @@ import _poolMagnigothSentry from "./pool/magnigoth-sentry.js";
 import _poolMagnigothTreefolk from "./pool/magnigoth-treefolk.js";
 import _poolMagnivore from "./pool/magnivore.js";
 import _poolMagnusTheRed from "./pool/magnus-the-red.js";
+import _poolMagosiTheWaterveil from "./pool/magosi-the-waterveil.js";
 import _poolMagusLuceaKane from "./pool/magus-lucea-kane.js";
 import _poolMagusOfTheArena from "./pool/magus-of-the-arena.js";
 import _poolMagusOfTheBazaar from "./pool/magus-of-the-bazaar.js";
@@ -18654,6 +18659,7 @@ import _poolRebelliousStrike from "./pool/rebellious-strike.js";
 import _poolRebornHero from "./pool/reborn-hero.js";
 import _poolRebornHope from "./pool/reborn-hope.js";
 import _poolRebuffTheWicked from "./pool/rebuff-the-wicked.js";
+import _poolRebuildTheCity from "./pool/rebuild-the-city.js";
 import _poolRebuild from "./pool/rebuild.js";
 import _poolRebuke from "./pool/rebuke.js";
 import _poolRecalibrate from "./pool/recalibrate.js";
@@ -24670,6 +24676,7 @@ import _poolTimeSieve from "./pool/time-sieve.js";
 import _poolTimeStop from "./pool/time-stop.js";
 import _poolTimeStretch from "./pool/time-stretch.js";
 import _poolTimeToFeed from "./pool/time-to-feed.js";
+import _poolTimeVault from "./pool/time-vault.js";
 import _poolTimeWalk from "./pool/time-walk.js";
 import _poolTimeWarp from "./pool/time-warp.js";
 import _poolTimeWipe from "./pool/time-wipe.js";
@@ -32452,6 +32459,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolChromeshellCrab,
   _poolChromiumTheMutable,
   _poolChromium,
+  _poolChronatog,
   _poolChronicFlooding,
   _poolChronicleOfVictory,
   _poolChroniclerOfHeroes,
@@ -35547,6 +35555,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolEmberFistZubera,
   _poolEmberGale,
   _poolEmberHauler,
+  _poolEmberIslandProduction,
   _poolEmberShot,
   _poolEmberSwallower,
   _poolEmberWeaver,
@@ -37695,6 +37704,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGerminatingWurm,
   _poolGerrardsBattleCry,
   _poolGerrardsCommand,
+  _poolGerrardsHourglassPendant,
   _poolGerrardsIrregulars,
   _poolGerrardsVerdict,
   _poolGerrardsWisdom,
@@ -41274,6 +41284,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolKindlyCustomer,
   _poolKindlyStranger,
   _poolKindredBoon,
+  _poolKindredCharge,
   _poolKindredDominance,
   _poolKindredJudgment,
   _poolKineticAugur,
@@ -42628,6 +42639,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMagnigothTreefolk,
   _poolMagnivore,
   _poolMagnusTheRed,
+  _poolMagosiTheWaterveil,
   _poolMagusLuceaKane,
   _poolMagusOfTheArena,
   _poolMagusOfTheBazaar,
@@ -47110,6 +47122,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRebornHero,
   _poolRebornHope,
   _poolRebuffTheWicked,
+  _poolRebuildTheCity,
   _poolRebuild,
   _poolRebuke,
   _poolRecalibrate,
@@ -53126,6 +53139,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTimeStop,
   _poolTimeStretch,
   _poolTimeToFeed,
+  _poolTimeVault,
   _poolTimeWalk,
   _poolTimeWarp,
   _poolTimeWipe,
@@ -60921,6 +60935,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/chromeshell-crab": _poolChromeshellCrab,
   "pool/chromium-the-mutable": _poolChromiumTheMutable,
   "pool/chromium": _poolChromium,
+  "pool/chronatog": _poolChronatog,
   "pool/chronic-flooding": _poolChronicFlooding,
   "pool/chronicle-of-victory": _poolChronicleOfVictory,
   "pool/chronicler-of-heroes": _poolChroniclerOfHeroes,
@@ -64016,6 +64031,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/ember-fist-zubera": _poolEmberFistZubera,
   "pool/ember-gale": _poolEmberGale,
   "pool/ember-hauler": _poolEmberHauler,
+  "pool/ember-island-production": _poolEmberIslandProduction,
   "pool/ember-shot": _poolEmberShot,
   "pool/ember-swallower": _poolEmberSwallower,
   "pool/ember-weaver": _poolEmberWeaver,
@@ -66164,6 +66180,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/germinating-wurm": _poolGerminatingWurm,
   "pool/gerrards-battle-cry": _poolGerrardsBattleCry,
   "pool/gerrards-command": _poolGerrardsCommand,
+  "pool/gerrards-hourglass-pendant": _poolGerrardsHourglassPendant,
   "pool/gerrards-irregulars": _poolGerrardsIrregulars,
   "pool/gerrards-verdict": _poolGerrardsVerdict,
   "pool/gerrards-wisdom": _poolGerrardsWisdom,
@@ -69743,6 +69760,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/kindly-customer": _poolKindlyCustomer,
   "pool/kindly-stranger": _poolKindlyStranger,
   "pool/kindred-boon": _poolKindredBoon,
+  "pool/kindred-charge": _poolKindredCharge,
   "pool/kindred-dominance": _poolKindredDominance,
   "pool/kindred-judgment": _poolKindredJudgment,
   "pool/kinetic-augur": _poolKineticAugur,
@@ -71097,6 +71115,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/magnigoth-treefolk": _poolMagnigothTreefolk,
   "pool/magnivore": _poolMagnivore,
   "pool/magnus-the-red": _poolMagnusTheRed,
+  "pool/magosi-the-waterveil": _poolMagosiTheWaterveil,
   "pool/magus-lucea-kane": _poolMagusLuceaKane,
   "pool/magus-of-the-arena": _poolMagusOfTheArena,
   "pool/magus-of-the-bazaar": _poolMagusOfTheBazaar,
@@ -75579,6 +75598,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/reborn-hero": _poolRebornHero,
   "pool/reborn-hope": _poolRebornHope,
   "pool/rebuff-the-wicked": _poolRebuffTheWicked,
+  "pool/rebuild-the-city": _poolRebuildTheCity,
   "pool/rebuild": _poolRebuild,
   "pool/rebuke": _poolRebuke,
   "pool/recalibrate": _poolRecalibrate,
@@ -81595,6 +81615,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/time-stop": _poolTimeStop,
   "pool/time-stretch": _poolTimeStretch,
   "pool/time-to-feed": _poolTimeToFeed,
+  "pool/time-vault": _poolTimeVault,
   "pool/time-walk": _poolTimeWalk,
   "pool/time-warp": _poolTimeWarp,
   "pool/time-wipe": _poolTimeWipe,

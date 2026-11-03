@@ -756,6 +756,7 @@ import _poolThud from "../pool/thud.js";
 import _poolTianaShipsCaretaker from "../pool/tiana-ships-caretaker.js";
 import _poolTibaltsRager from "../pool/tibalts-rager.js";
 import _poolTidalForce from "../pool/tidal-force.js";
+import _poolTimeVault from "../pool/time-vault.js";
 import _poolTolariaWest from "../pool/tolaria-west.js";
 import _poolTonicPeddler from "../pool/tonic-peddler.js";
 import _poolTonyStark from "../pool/tony-stark.js";
@@ -1642,6 +1643,7 @@ const shard: CardShard = {
     _poolTianaShipsCaretaker,
     _poolTibaltsRager,
     _poolTidalForce,
+    _poolTimeVault,
     _poolTolariaWest,
     _poolTonicPeddler,
     _poolTonyStark,

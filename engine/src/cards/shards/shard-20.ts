@@ -251,6 +251,7 @@ import _poolEladamrisVineyard from "../pool/eladamris-vineyard.js";
 import _poolElderfangVenom from "../pool/elderfang-venom.js";
 import _poolElectrosBolt from "../pool/electros-bolt.js";
 import _poolEmancipationAngel from "../pool/emancipation-angel.js";
+import _poolEmberIslandProduction from "../pool/ember-island-production.js";
 import _poolEmberethShieldbreaker from "../pool/embereth-shieldbreaker.js";
 import _poolEmeriasCall from "../pool/emerias-call.js";
 import _poolEmrakulTheWorldAnew from "../pool/emrakul-the-world-anew.js";
@@ -1199,6 +1200,7 @@ const shard: CardShard = {
     _poolElderfangVenom,
     _poolElectrosBolt,
     _poolEmancipationAngel,
+    _poolEmberIslandProduction,
     _poolEmberethShieldbreaker,
     _poolEmeriasCall,
     _poolEmrakulTheWorldAnew,

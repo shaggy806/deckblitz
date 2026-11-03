@@ -591,6 +591,7 @@ import _poolRamunapRuins from "../pool/ramunap-ruins.js";
 import _poolRankleMasterOfPranks from "../pool/rankle-master-of-pranks.js";
 import _poolRashkaTheSlayer from "../pool/rashka-the-slayer.js";
 import _poolRatColony from "../pool/rat-colony.js";
+import _poolRebuildTheCity from "../pool/rebuild-the-city.js";
 import _poolRedScarab from "../pool/red-scarab.js";
 import _poolRedoubledStormsinger from "../pool/redoubled-stormsinger.js";
 import _poolReefWorm from "../pool/reef-worm.js";
@@ -1471,6 +1472,7 @@ const shard: CardShard = {
     _poolRankleMasterOfPranks,
     _poolRashkaTheSlayer,
     _poolRatColony,
+    _poolRebuildTheCity,
     _poolRedScarab,
     _poolRedoubledStormsinger,
     _poolReefWorm,

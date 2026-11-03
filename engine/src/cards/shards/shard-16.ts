@@ -303,6 +303,7 @@ import _poolGemstoneArray from "../pool/gemstone-array.js";
 import _poolGenghisFrog from "../pool/genghis-frog.js";
 import _poolGeomancersGambit from "../pool/geomancers-gambit.js";
 import _poolGeosurge from "../pool/geosurge.js";
+import _poolGerrardsHourglassPendant from "../pool/gerrards-hourglass-pendant.js";
 import _poolGhaveGuruOfSpores from "../pool/ghave-guru-of-spores.js";
 import _poolGhituSlinger from "../pool/ghitu-slinger.js";
 import _poolGhostTactician from "../pool/ghost-tactician.js";
@@ -1266,6 +1267,7 @@ const shard: CardShard = {
     _poolGenghisFrog,
     _poolGeomancersGambit,
     _poolGeosurge,
+    _poolGerrardsHourglassPendant,
     _poolGhaveGuruOfSpores,
     _poolGhituSlinger,
     _poolGhostTactician,

@@ -124,6 +124,7 @@ import _poolChiefOfTheScale from "../pool/chief-of-the-scale.js";
 import _poolChillingShade from "../pool/chilling-shade.js";
 import _poolChocoboRacetrack from "../pool/chocobo-racetrack.js";
 import _poolChromeDome from "../pool/chrome-dome.js";
+import _poolChronatog from "../pool/chronatog.js";
 import _poolChupacabraEcho from "../pool/chupacabra-echo.js";
 import _poolCircleOfDreamsDruid from "../pool/circle-of-dreams-druid.js";
 import _poolCirdanTheShipwright from "../pool/cirdan-the-shipwright.js";
@@ -1012,6 +1013,7 @@ const shard: CardShard = {
     _poolChillingShade,
     _poolChocoboRacetrack,
     _poolChromeDome,
+    _poolChronatog,
     _poolChupacabraEcho,
     _poolCircleOfDreamsDruid,
     _poolCirdanTheShipwright,

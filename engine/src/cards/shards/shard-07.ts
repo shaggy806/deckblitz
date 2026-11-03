@@ -446,6 +446,7 @@ import _poolMadProphet from "../pool/mad-prophet.js";
 import _poolMageHunter from "../pool/mage-hunter.js";
 import _poolMagicPot from "../pool/magic-pot.js";
 import _poolMagnificentEnd from "../pool/magnificent-end.js";
+import _poolMagosiTheWaterveil from "../pool/magosi-the-waterveil.js";
 import _poolMagusOfTheDisk from "../pool/magus-of-the-disk.js";
 import _poolMakindiGriffin from "../pool/makindi-griffin.js";
 import _poolManOWar from "../pool/man-o-war.js";
@@ -1353,6 +1354,7 @@ const shard: CardShard = {
     _poolMageHunter,
     _poolMagicPot,
     _poolMagnificentEnd,
+    _poolMagosiTheWaterveil,
     _poolMagusOfTheDisk,
     _poolMakindiGriffin,
     _poolManOWar,

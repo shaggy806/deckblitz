@@ -1211,6 +1211,7 @@ export const COMMANDER_BANNED: readonly string[] = [
   "Prophet of Kruphix",
   "Recurring Nightmare",
   "Rofellos, Llanowar Emissary",
+  "Time Vault",
   "Time Walk",
   "Tinker",
   "Tolarian Academy",
