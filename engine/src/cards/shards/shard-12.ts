@@ -237,6 +237,7 @@ import _poolElvishGuidance from "../pool/elvish-guidance.js";
 import _poolElvishHerder from "../pool/elvish-herder.js";
 import _poolEmberShot from "../pool/ember-shot.js";
 import _poolEmberethPaladin from "../pool/embereth-paladin.js";
+import _poolEmbodimentOfAgonies from "../pool/embodiment-of-agonies.js";
 import _poolEmpressGalina from "../pool/empress-galina.js";
 import _poolEnchantedBeing from "../pool/enchanted-being.js";
 import _poolEncroach from "../pool/encroach.js";
@@ -414,6 +415,7 @@ import _poolKayasGhostform from "../pool/kayas-ghostform.js";
 import _poolKazuulTyrantOfTheCliffs from "../pool/kazuul-tyrant-of-the-cliffs.js";
 import _poolKeensightMentor from "../pool/keensight-mentor.js";
 import _poolKeldonNecropolis from "../pool/keldon-necropolis.js";
+import _poolKeldonTwilight from "../pool/keldon-twilight.js";
 import _poolKillersMask from "../pool/killers-mask.js";
 import _poolKioraTheCrashingWave from "../pool/kiora-the-crashing-wave.js";
 import _poolKnightOfSorrows from "../pool/knight-of-sorrows.js";
@@ -760,6 +762,7 @@ import _poolTawnosTheToymaker from "../pool/tawnos-the-toymaker.js";
 import _poolTawnosUrzasApprentice from "../pool/tawnos-urzas-apprentice.js";
 import _poolTeemingDragonstorm from "../pool/teeming-dragonstorm.js";
 import _poolTempleOfAbandon from "../pool/temple-of-abandon.js";
+import _poolTerraformer from "../pool/terraformer.js";
 import _poolTerritorialBaloth from "../pool/territorial-baloth.js";
 import _poolTerritoryCuller from "../pool/territory-culler.js";
 import _poolTezzeretMasterOfMetal from "../pool/tezzeret-master-of-metal.js";
@@ -1127,6 +1130,7 @@ const shard: CardShard = {
     _poolElvishHerder,
     _poolEmberShot,
     _poolEmberethPaladin,
+    _poolEmbodimentOfAgonies,
     _poolEmpressGalina,
     _poolEnchantedBeing,
     _poolEncroach,
@@ -1304,6 +1308,7 @@ const shard: CardShard = {
     _poolKazuulTyrantOfTheCliffs,
     _poolKeensightMentor,
     _poolKeldonNecropolis,
+    _poolKeldonTwilight,
     _poolKillersMask,
     _poolKioraTheCrashingWave,
     _poolKnightOfSorrows,
@@ -1650,6 +1655,7 @@ const shard: CardShard = {
     _poolTawnosUrzasApprentice,
     _poolTeemingDragonstorm,
     _poolTempleOfAbandon,
+    _poolTerraformer,
     _poolTerritorialBaloth,
     _poolTerritoryCuller,
     _poolTezzeretMasterOfMetal,

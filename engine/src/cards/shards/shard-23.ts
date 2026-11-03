@@ -634,6 +634,7 @@ import _poolSageOfTheFalls from "../pool/sage-of-the-falls.js";
 import _poolSanctuaryRaptor from "../pool/sanctuary-raptor.js";
 import _poolSandStrangler from "../pool/sand-strangler.js";
 import _poolSandstoneNeedle from "../pool/sandstone-needle.js";
+import _poolSanguineSpy from "../pool/sanguine-spy.js";
 import _poolSarahJaneSmith from "../pool/sarah-jane-smith.js";
 import _poolSardianAvenger from "../pool/sardian-avenger.js";
 import _poolSarkhanFireblood from "../pool/sarkhan-fireblood.js";
@@ -1539,6 +1540,7 @@ const shard: CardShard = {
     _poolSanctuaryRaptor,
     _poolSandStrangler,
     _poolSandstoneNeedle,
+    _poolSanguineSpy,
     _poolSarahJaneSmith,
     _poolSardianAvenger,
     _poolSarkhanFireblood,
