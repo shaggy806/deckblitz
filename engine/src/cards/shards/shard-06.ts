@@ -732,6 +732,7 @@ import _poolSubwayTrain from "../pool/subway-train.js";
 import _poolSultaiEmissary from "../pool/sultai-emissary.js";
 import _poolSunbirdsInvocation from "../pool/sunbirds-invocation.js";
 import _poolSunderShaman from "../pool/sunder-shaman.js";
+import _poolSunderingTitan from "../pool/sundering-titan.js";
 import _poolSundownPass from "../pool/sundown-pass.js";
 import _poolSunkenRuins from "../pool/sunken-ruins.js";
 import _poolSuperiorSpiderMan from "../pool/superior-spider-man.js";
@@ -1624,6 +1625,7 @@ const shard: CardShard = {
     _poolSultaiEmissary,
     _poolSunbirdsInvocation,
     _poolSunderShaman,
+    _poolSunderingTitan,
     _poolSundownPass,
     _poolSunkenRuins,
     _poolSuperiorSpiderMan,

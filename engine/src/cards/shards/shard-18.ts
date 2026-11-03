@@ -164,6 +164,7 @@ import _poolDefenderEnVec from "../pool/defender-en-vec.js";
 import _poolDeposeDeploy from "../pool/depose-deploy.js";
 import _poolDesperateCharge from "../pool/desperate-charge.js";
 import _poolDestructiveRevelry from "../pool/destructive-revelry.js";
+import _poolDetritivore from "../pool/detritivore.js";
 import _poolDevotedDruid from "../pool/devoted-druid.js";
 import _poolDevoutChaplain from "../pool/devout-chaplain.js";
 import _poolDiligentExcavator from "../pool/diligent-excavator.js";
@@ -1062,6 +1063,7 @@ const shard: CardShard = {
     _poolDeposeDeploy,
     _poolDesperateCharge,
     _poolDestructiveRevelry,
+    _poolDetritivore,
     _poolDevotedDruid,
     _poolDevoutChaplain,
     _poolDiligentExcavator,

@@ -10,6 +10,7 @@ import _poolAdaptiveShimmerer from "../pool/adaptive-shimmerer.js";
 import _poolAdmiralsOrder from "../pool/admirals-order.js";
 import _poolAdvanceScout from "../pool/advance-scout.js";
 import _poolAdventuringGear from "../pool/adventuring-gear.js";
+import _poolAeonChronicler from "../pool/aeon-chronicler.js";
 import _poolAgentBishopManInBlack from "../pool/agent-bishop-man-in-black.js";
 import _poolAgentVenom from "../pool/agent-venom.js";
 import _poolAgonasaurRex from "../pool/agonasaur-rex.js";
@@ -929,6 +930,7 @@ const shard: CardShard = {
     _poolAdmiralsOrder,
     _poolAdvanceScout,
     _poolAdventuringGear,
+    _poolAeonChronicler,
     _poolAgentBishopManInBlack,
     _poolAgentVenom,
     _poolAgonasaurRex,

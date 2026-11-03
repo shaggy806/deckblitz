@@ -484,6 +484,7 @@ import _poolNoiseMarine from "../pool/noise-marine.js";
 import _poolNomadicElf from "../pool/nomadic-elf.js";
 import _poolNormanOsborn from "../pool/norman-osborn.js";
 import _poolNoviceDissector from "../pool/novice-dissector.js";
+import _poolNoxiousVapors from "../pool/noxious-vapors.js";
 import _poolNyxbornShieldmate from "../pool/nyxborn-shieldmate.js";
 import _poolOakenBoon from "../pool/oaken-boon.js";
 import _poolOgreSavant from "../pool/ogre-savant.js";
@@ -1355,6 +1356,7 @@ const shard: CardShard = {
     _poolNomadicElf,
     _poolNormanOsborn,
     _poolNoviceDissector,
+    _poolNoxiousVapors,
     _poolNyxbornShieldmate,
     _poolOakenBoon,
     _poolOgreSavant,
