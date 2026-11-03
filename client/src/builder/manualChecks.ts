@@ -9498,6 +9498,7 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     board({
       you: { bf: ['Swamp*3'], hand: ['The Creation of Avacyn'], lib: ['Grizzly Bears'] },
     }),
+  ),
 
   // --- Unattaching an Equipment as a cost (2026-11-02) ----------------------
   preset(
@@ -9596,6 +9597,7 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       },
       opp: [{ bf: ['Hill Giant'] }],
     }),
+  ),
 
   // --- Can't have a keyword, statics adding a supertype (2026-11-02) --------
   preset(
