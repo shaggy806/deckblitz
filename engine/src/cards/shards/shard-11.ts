@@ -728,6 +728,7 @@ import _poolStarseerMentor from "../pool/starseer-mentor.js";
 import _poolSteelLeafPaladin from "../pool/steel-leaf-paladin.js";
 import _poolSteelshapersGift from "../pool/steelshapers-gift.js";
 import _poolSterlingSupplier from "../pool/sterling-supplier.js";
+import _poolStiltManToweringTerror from "../pool/stilt-man-towering-terror.js";
 import _poolStoicSphinx from "../pool/stoic-sphinx.js";
 import _poolStomperCub from "../pool/stomper-cub.js";
 import _poolStoneBySunlight from "../pool/stone-by-sunlight.js";
@@ -1625,6 +1626,7 @@ const shard: CardShard = {
     _poolSteelLeafPaladin,
     _poolSteelshapersGift,
     _poolSterlingSupplier,
+    _poolStiltManToweringTerror,
     _poolStoicSphinx,
     _poolStomperCub,
     _poolStoneBySunlight,

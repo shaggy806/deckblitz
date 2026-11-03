@@ -536,6 +536,7 @@ import _poolMuddleTheMixture from "../pool/muddle-the-mixture.js";
 import _poolMuragandaRaceway from "../pool/muraganda-raceway.js";
 import _poolMushroomWatchdogs from "../pool/mushroom-watchdogs.js";
 import _poolMycoidShepherd from "../pool/mycoid-shepherd.js";
+import _poolMythRealized from "../pool/myth-realized.js";
 import _poolNagaFleshcrafter from "../pool/naga-fleshcrafter.js";
 import _poolNaktamunLorespinner from "../pool/naktamun-lorespinner.js";
 import _poolNanoformSentinel from "../pool/nanoform-sentinel.js";
@@ -1462,6 +1463,7 @@ const shard: CardShard = {
     _poolMuragandaRaceway,
     _poolMushroomWatchdogs,
     _poolMycoidShepherd,
+    _poolMythRealized,
     _poolNagaFleshcrafter,
     _poolNaktamunLorespinner,
     _poolNanoformSentinel,

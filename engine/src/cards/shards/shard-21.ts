@@ -483,6 +483,7 @@ import _poolNicolBolasTheDeceiver from "../pool/nicol-bolas-the-deceiver.js";
 import _poolNightmareShepherd from "../pool/nightmare-shepherd.js";
 import _poolNilsDisciplineEnforcer from "../pool/nils-discipline-enforcer.js";
 import _poolNimbleBrigand from "../pool/nimble-brigand.js";
+import _poolNivixAerieOfTheFiremind from "../pool/nivix-aerie-of-the-firemind.js";
 import _poolNobleQuarry from "../pool/noble-quarry.js";
 import _poolNovaChaser from "../pool/nova-chaser.js";
 import _poolNovaHellkite from "../pool/nova-hellkite.js";
@@ -1335,6 +1336,7 @@ const shard: CardShard = {
     _poolNightmareShepherd,
     _poolNilsDisciplineEnforcer,
     _poolNimbleBrigand,
+    _poolNivixAerieOfTheFiremind,
     _poolNobleQuarry,
     _poolNovaChaser,
     _poolNovaHellkite,

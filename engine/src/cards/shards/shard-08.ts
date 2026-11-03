@@ -166,6 +166,7 @@ import _poolCrystalRod from "../pool/crystal-rod.js";
 import _poolCurseOfConformity from "../pool/curse-of-conformity.js";
 import _poolCurseOfOblivion from "../pool/curse-of-oblivion.js";
 import _poolCursebreak from "../pool/cursebreak.js";
+import _poolCycleOfLife from "../pool/cycle-of-life.js";
 import _poolDaghatarTheAdamant from "../pool/daghatar-the-adamant.js";
 import _poolDainsCompany from "../pool/dains-company.js";
 import _poolDanithaSpearOfAgony from "../pool/danitha-spear-of-agony.js";
@@ -765,6 +766,7 @@ import _poolSulfurousMire from "../pool/sulfurous-mire.js";
 import _poolSumalaWoodshaper from "../pool/sumala-woodshaper.js";
 import _poolSummonChocoMog from "../pool/summon-choco-mog.js";
 import _poolSunbladeElf from "../pool/sunblade-elf.js";
+import _poolSvogthosTheRestlessTomb from "../pool/svogthos-the-restless-tomb.js";
 import _poolSwarmBeingOfBees from "../pool/swarm-being-of-bees.js";
 import _poolSweetGumRecluse from "../pool/sweet-gum-recluse.js";
 import _poolSylvanBasilisk from "../pool/sylvan-basilisk.js";
@@ -1092,6 +1094,7 @@ const shard: CardShard = {
     _poolCurseOfConformity,
     _poolCurseOfOblivion,
     _poolCursebreak,
+    _poolCycleOfLife,
     _poolDaghatarTheAdamant,
     _poolDainsCompany,
     _poolDanithaSpearOfAgony,
@@ -1691,6 +1694,7 @@ const shard: CardShard = {
     _poolSumalaWoodshaper,
     _poolSummonChocoMog,
     _poolSunbladeElf,
+    _poolSvogthosTheRestlessTomb,
     _poolSwarmBeingOfBees,
     _poolSweetGumRecluse,
     _poolSylvanBasilisk,

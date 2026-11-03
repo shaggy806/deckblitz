@@ -356,6 +356,7 @@ import _poolGrimRepriser from "../pool/grim-repriser.js";
 import _poolGripOfDesolation from "../pool/grip-of-desolation.js";
 import _poolGriselbrand from "../pool/griselbrand.js";
 import _poolGrislyRitual from "../pool/grisly-ritual.js";
+import _poolGristTheHungerTide from "../pool/grist-the-hunger-tide.js";
 import _poolGrozoth from "../pool/grozoth.js";
 import _poolGrumgullyTheGenerous from "../pool/grumgully-the-generous.js";
 import _poolGruulGuildgate from "../pool/gruul-guildgate.js";
@@ -1245,6 +1246,7 @@ const shard: CardShard = {
     _poolGripOfDesolation,
     _poolGriselbrand,
     _poolGrislyRitual,
+    _poolGristTheHungerTide,
     _poolGrozoth,
     _poolGrumgullyTheGenerous,
     _poolGruulGuildgate,

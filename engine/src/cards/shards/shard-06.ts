@@ -360,6 +360,7 @@ import _poolGuidelightOptimizer from "../pool/guidelight-optimizer.js";
 import _poolGutturalResponse from "../pool/guttural-response.js";
 import _poolGuulDrazAssassin from "../pool/guul-draz-assassin.js";
 import _poolHailOfArrows from "../pool/hail-of-arrows.js";
+import _poolHalfdane from "../pool/halfdane.js";
 import _poolHalimarExcavator from "../pool/halimar-excavator.js";
 import _poolHaltOrder from "../pool/halt-order.js";
 import _poolHarshJustice from "../pool/harsh-justice.js";
@@ -848,6 +849,7 @@ import _poolWolfkinOutcast from "../pool/wolfkin-outcast.js";
 import _poolWoodlandMystic from "../pool/woodland-mystic.js";
 import _poolWreakHavoc from "../pool/wreak-havoc.js";
 import _poolWreckingBallArm from "../pool/wrecking-ball-arm.js";
+import _poolXenicPoltergeist from "../pool/xenic-poltergeist.js";
 import _poolYunasWhistle from "../pool/yunas-whistle.js";
 import _poolZendikarResurgent from "../pool/zendikar-resurgent.js";
 import _poolZhalfirinVoid from "../pool/zhalfirin-void.js";
@@ -1241,6 +1243,7 @@ const shard: CardShard = {
     _poolGutturalResponse,
     _poolGuulDrazAssassin,
     _poolHailOfArrows,
+    _poolHalfdane,
     _poolHalimarExcavator,
     _poolHaltOrder,
     _poolHarshJustice,
@@ -1729,6 +1732,7 @@ const shard: CardShard = {
     _poolWoodlandMystic,
     _poolWreakHavoc,
     _poolWreckingBallArm,
+    _poolXenicPoltergeist,
     _poolYunasWhistle,
     _poolZendikarResurgent,
     _poolZhalfirinVoid,

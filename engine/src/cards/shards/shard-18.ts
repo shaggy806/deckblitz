@@ -511,6 +511,7 @@ import _poolOnwardVictory from "../pool/onward-victory.js";
 import _poolOpalineSliver from "../pool/opaline-sliver.js";
 import _poolOranRiefInvoker from "../pool/oran-rief-invoker.js";
 import _poolOrbsOfWarding from "../pool/orbs-of-warding.js";
+import _poolOrcishFarmer from "../pool/orcish-farmer.js";
 import _poolOrderedMigration from "../pool/ordered-migration.js";
 import _poolOtawaraSoaringCity from "../pool/otawara-soaring-city.js";
 import _poolOutlandLiberator from "../pool/outland-liberator.js";
@@ -1401,6 +1402,7 @@ const shard: CardShard = {
     _poolOpalineSliver,
     _poolOranRiefInvoker,
     _poolOrbsOfWarding,
+    _poolOrcishFarmer,
     _poolOrderedMigration,
     _poolOtawaraSoaringCity,
     _poolOutlandLiberator,

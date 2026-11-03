@@ -469,6 +469,7 @@ import _poolOfferingToAsha from "../pool/offering-to-asha.js";
 import _poolOgreResister from "../pool/ogre-resister.js";
 import _poolOketrasLastMercy from "../pool/oketras-last-mercy.js";
 import _poolOkoLorwynLiege from "../pool/oko-lorwyn-liege.js";
+import _poolOkoThiefOfCrowns from "../pool/oko-thief-of-crowns.js";
 import _poolOonasProwler from "../pool/oonas-prowler.js";
 import _poolOozeGarden from "../pool/ooze-garden.js";
 import _poolOracleOfMulDaya from "../pool/oracle-of-mul-daya.js";
@@ -1281,6 +1282,7 @@ const shard: CardShard = {
     _poolOgreResister,
     _poolOketrasLastMercy,
     _poolOkoLorwynLiege,
+    _poolOkoThiefOfCrowns,
     _poolOonasProwler,
     _poolOozeGarden,
     _poolOracleOfMulDaya,

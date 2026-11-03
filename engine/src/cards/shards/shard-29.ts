@@ -109,6 +109,7 @@ import _poolChargingBadger from "../pool/charging-badger.js";
 import _poolChariotOfTheSun from "../pool/chariot-of-the-sun.js";
 import _poolCharredGraverobber from "../pool/charred-graverobber.js";
 import _poolChasmGuide from "../pool/chasm-guide.js";
+import _poolChimericMass from "../pool/chimeric-mass.js";
 import _poolChooseYourWeapon from "../pool/choose-your-weapon.js";
 import _poolChoraleOfTheVoid from "../pool/chorale-of-the-void.js";
 import _poolCinderElemental from "../pool/cinder-elemental.js";
@@ -688,6 +689,7 @@ import _poolSoulSeparator from "../pool/soul-separator.js";
 import _poolSoulcipherBoard from "../pool/soulcipher-board.js";
 import _poolSoulcoilViper from "../pool/soulcoil-viper.js";
 import _poolSoulknifeSpy from "../pool/soulknife-spy.js";
+import _poolSparkshaperVisionary from "../pool/sparkshaper-visionary.js";
 import _poolSpeciesGorger from "../pool/species-gorger.js";
 import _poolSphereOfSafety from "../pool/sphere-of-safety.js";
 import _poolSphereOfTheSuns from "../pool/sphere-of-the-suns.js";
@@ -996,6 +998,7 @@ const shard: CardShard = {
     _poolChariotOfTheSun,
     _poolCharredGraverobber,
     _poolChasmGuide,
+    _poolChimericMass,
     _poolChooseYourWeapon,
     _poolChoraleOfTheVoid,
     _poolCinderElemental,
@@ -1575,6 +1578,7 @@ const shard: CardShard = {
     _poolSoulcipherBoard,
     _poolSoulcoilViper,
     _poolSoulknifeSpy,
+    _poolSparkshaperVisionary,
     _poolSpeciesGorger,
     _poolSphereOfSafety,
     _poolSphereOfTheSuns,

@@ -92,6 +92,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "8/8 Red Green White Beast Token",
   "9/9 Golem Token",
   "Ajani's Pridemate Token",
+  "Alien Angel Token",
   "Alien Salamander Token",
   "Alien Token",
   "Alien Token (Alien Invasion)",

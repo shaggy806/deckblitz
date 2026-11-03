@@ -476,6 +476,7 @@ import _poolMysticDecree from "../pool/mystic-decree.js";
 import _poolNarsetsRebuke from "../pool/narsets-rebuke.js";
 import _poolNarstadScrapper from "../pool/narstad-scrapper.js";
 import _poolNeedlebug from "../pool/needlebug.js";
+import _poolNeurokTransmuter from "../pool/neurok-transmuter.js";
 import _poolNezumiShadowWatcher from "../pool/nezumi-shadow-watcher.js";
 import _poolNibelheimAflame from "../pool/nibelheim-aflame.js";
 import _poolNicolBolasTheRavager from "../pool/nicol-bolas-the-ravager.js";
@@ -1363,6 +1364,7 @@ const shard: CardShard = {
     _poolNarsetsRebuke,
     _poolNarstadScrapper,
     _poolNeedlebug,
+    _poolNeurokTransmuter,
     _poolNezumiShadowWatcher,
     _poolNibelheimAflame,
     _poolNicolBolasTheRavager,

@@ -203,6 +203,7 @@ import _poolDread from "../pool/dread.js";
 import _poolDreadmalkin from "../pool/dreadmalkin.js";
 import _poolDreamdrinkerVampire from "../pool/dreamdrinker-vampire.js";
 import _poolDrillSkimmer from "../pool/drill-skimmer.js";
+import _poolDruidClass from "../pool/druid-class.js";
 import _poolDruidOfTheAnima from "../pool/druid-of-the-anima.js";
 import _poolDrunauCorpseTrawler from "../pool/drunau-corpse-trawler.js";
 import _poolDuergarAssailant from "../pool/duergar-assailant.js";
@@ -1111,6 +1112,7 @@ const shard: CardShard = {
     _poolDreadmalkin,
     _poolDreamdrinkerVampire,
     _poolDrillSkimmer,
+    _poolDruidClass,
     _poolDruidOfTheAnima,
     _poolDrunauCorpseTrawler,
     _poolDuergarAssailant,

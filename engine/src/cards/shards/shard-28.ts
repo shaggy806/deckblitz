@@ -342,6 +342,7 @@ import _poolHorrificAssault from "../pool/horrific-assault.js";
 import _poolHuangZhongShuGeneral from "../pool/huang-zhong-shu-general.js";
 import _poolHulkBrutalBrawler from "../pool/hulk-brutal-brawler.js";
 import _poolHungryGraffalon from "../pool/hungry-graffalon.js";
+import _poolHurlThroughHell from "../pool/hurl-through-hell.js";
 import _poolHydromorphGuardian from "../pool/hydromorph-guardian.js";
 import _poolHyperionSupremeHero from "../pool/hyperion-supreme-hero.js";
 import _poolHyperionsAtomicVision from "../pool/hyperions-atomic-vision.js";
@@ -1247,6 +1248,7 @@ const shard: CardShard = {
     _poolHuangZhongShuGeneral,
     _poolHulkBrutalBrawler,
     _poolHungryGraffalon,
+    _poolHurlThroughHell,
     _poolHydromorphGuardian,
     _poolHyperionSupremeHero,
     _poolHyperionsAtomicVision,

@@ -931,6 +931,7 @@ import _poolZagothCrystal from "../pool/zagoth-crystal.js";
 import _poolZellDincht from "../pool/zell-dincht.js";
 import _poolZephyrNet from "../pool/zephyr-net.js";
 import _poolZeriamGoldenWind from "../pool/zeriam-golden-wind.js";
+import _tokensAlienAngelToken from "../tokens/alien-angel-token.js";
 import _tokensAngelToken33 from "../tokens/angel-token-3-3.js";
 import _tokensAssassinTokenVraskaSwarmsEminence from "../tokens/assassin-token-vraska-swarms-eminence.js";
 import _tokensCursedRoleToken from "../tokens/cursed-role-token.js";
@@ -1882,6 +1883,7 @@ const shard: CardShard = {
     _poolZeriamGoldenWind,
   ],
   tokens: [
+    _tokensAlienAngelToken,
     _tokensAngelToken33,
     _tokensAssassinTokenVraskaSwarmsEminence,
     _tokensCursedRoleToken,

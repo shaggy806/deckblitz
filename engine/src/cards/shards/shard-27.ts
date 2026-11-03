@@ -703,6 +703,7 @@ import _poolSunCeYoungConquerer from "../pool/sun-ce-young-conquerer.js";
 import _poolSunderFromWithin from "../pool/sunder-from-within.js";
 import _poolSuperVillainLockup from "../pool/super-villain-lockup.js";
 import _poolSwashbucklersWhip from "../pool/swashbucklers-whip.js";
+import _poolSwornDefender from "../pool/sworn-defender.js";
 import _poolSwornGuardian from "../pool/sworn-guardian.js";
 import _poolSylvanBounty from "../pool/sylvan-bounty.js";
 import _poolSynapseNecromage from "../pool/synapse-necromage.js";
@@ -1571,6 +1572,7 @@ const shard: CardShard = {
     _poolSunderFromWithin,
     _poolSuperVillainLockup,
     _poolSwashbucklersWhip,
+    _poolSwornDefender,
     _poolSwornGuardian,
     _poolSylvanBounty,
     _poolSynapseNecromage,
