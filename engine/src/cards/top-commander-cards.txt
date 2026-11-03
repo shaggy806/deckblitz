@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4244 already implemented / 756 missing (marks refreshed 2026-11-03)
+4247 already implemented / 753 missing (marks refreshed 2026-11-03)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -2653,7 +2653,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2660  Molten Tributary                         {0}              Land — Island Mountain
 [ ]  2661  Ashiok, Dream Render                     {1}{U/B}{U/B}    Legendary Planeswalker — Ashiok
 [x]  2662  Teval, the Balanced Scale                {1}{B}{G}{U}     Legendary Creature — Spirit Dragon
-[ ]  2663  The Earth King                           {3}{G}           Legendary Creature — Human Noble Ally
+[x]  2663  The Earth King                           {3}{G}           Legendary Creature — Human Noble Ally
 [x]  2664  Mirri, Weatherlight Duelist              {1}{G}{W}        Legendary Creature — Cat Warrior
 [ ]  2665  Zack Fair                                {W}              Legendary Creature — Human Soldier
 [x]  2666  Volatile Fault                           {0}              Land — Cave
@@ -2967,7 +2967,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  2974  Lifestream's Blessing                    {4}{G}{G}        Instant
 [x]  2975  Uncivil Unrest                           {4}{R}           Enchantment
 [x]  2976  Jumbo Cactuar                            {5}{G}{G}        Creature — Plant
-[ ]  2977  Tamiyo, Field Researcher                 {1}{G}{W}{U}     Legendary Planeswalker — Tamiyo
+[x]  2977  Tamiyo, Field Researcher                 {1}{G}{W}{U}     Legendary Planeswalker — Tamiyo
 [x]  2978  Phyrexian Walker                         {0}              Artifact Creature — Phyrexian Construct
 [x]  2979  Zurgo Stormrender                        {R}{W}{B}        Legendary Creature — Orc Warrior
 [x]  2980  Galvanic Iteration                       {U}{R}           Instant
@@ -4306,7 +4306,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4313  Mirage Mesa                              {0}              Land — Desert
 [ ]  4314  Teferi, Mage of Zhalfir                  {2}{U}{U}{U}     Legendary Creature — Human Wizard
 [x]  4315  Kaya's Wrath                             {W}{W}{B}{B}     Sorcery
-[ ]  4316  Horn of the Mark                         {2}              Legendary Artifact
+[x]  4316  Horn of the Mark                         {2}              Legendary Artifact
 [x]  4317  Crystalline Sliver                       {W}{U}           Creature — Sliver
 [ ]  4318  Malevolent Hermit // Benevolent Geist    {2}              Creature — Human Wizard // Creature — Spirit Wizard
 [x]  4319  Phyrexian Rebirth                        {4}{W}{W}        Sorcery
