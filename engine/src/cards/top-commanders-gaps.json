@@ -1404,7 +1404,9 @@
   "effect:copy-spell-for-each-chosen-paid",
   "keyword:gravestorm",
   "static:cost-increase-colored",
-  "keyword:offering"
+  "keyword:offering",
+  "amount:count-distinct-mana-costs",
+  "condition:distinct-mana-values-in-graveyard"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

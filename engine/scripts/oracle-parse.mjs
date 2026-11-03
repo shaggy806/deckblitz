@@ -5440,6 +5440,15 @@ export function parseSentence(sentence, ctx) {
       otherwise: { kind: "counter", target: i },
     };
   }
+  // "Then discard a card unless you attacked this turn" (Chart a Course),
+  // "… unless there are five or more mana values among cards in your
+  // graveyard" (Tainted Indulgence): any condition the intervening-ifs read.
+  if ((m = /^(?:then )?discard a card unless (.+)\.$/i.exec(s))) {
+    const condition = INTERVENING_IFS[`if ${m[1].toLowerCase()},`];
+    if (condition !== undefined) {
+      return { kind: "conditional", condition: { kind: "not", of: condition }, then: { kind: "discard", target: "you", amount: 1 } };
+    }
+  }
   if ((m = /^(?:then )?discard a card at random unless you pay ((?:\{E\})+)\.$/i.exec(s))) {
     return {
       kind: "unless",
@@ -8415,6 +8424,13 @@ function exiledCardPickAt(sentences, i, ctx) {
   }
   const pay = /^you may pay ((?:\{[^}]+\})+) and (\d+) life\.$/i.exec(first);
   const done = /^if you do, (.+)$/i.exec(next);
+  // "You may pay 2 life. If you do, draw a card." (Sanguine Spy).
+  const payLife = /^you may pay (\d+) life\.$/i.exec(first);
+  if (payLife !== null && done !== null) {
+    const effect = parseSentence(`${done[1][0].toUpperCase()}${done[1].slice(1)}`, ctx);
+    if (effect === null || containsUndefined(effect)) return null;
+    return { effect: { kind: "may", prompt: `Pay ${payLife[1]} life?`, costLife: Number(payLife[1]), effect }, used: 2 };
+  }
   if (pay !== null && done !== null) {
     const effect = parseSentence(`${done[1][0].toUpperCase()}${done[1].slice(1)}`, ctx);
     if (effect === null || containsUndefined(effect)) return null;
@@ -11616,6 +11632,8 @@ const MELD_SENTENCE =
  * (Hidden Stockpile) and celebration (Pests of Honor). */
 const INTERVENING_IFS = {
   ...TURN_TALLY_IFS,
+  // Murders at Karlov Manor (Sanguine Spy).
+  "if there are five or more mana values among cards in your graveyard,": FIVE_MANA_VALUES,
   // Coven (Midnight Hunt) and day/night (rule 731.1).
   "if you control three or more creatures with different powers,": { kind: "coven" },
   "if it's night,": { kind: "day-night", is: "night" },
@@ -11717,6 +11735,8 @@ function flashIfOf(clause) {
     if (filter === null || Object.keys(filter).length === 0) return null;
     return { condition: { kind: "controls", filter, atLeast: 1 } };
   }
+  // Graveyard Shift.
+  if (clause === "there are five or more mana values among cards in your graveyard") return { condition: FIVE_MANA_VALUES };
   m = new RegExp(`^there are ${N} or more (.+) cards in your graveyard$`).exec(clause);
   if (m !== null) {
     const n = numberOf(m[1]);
@@ -13518,6 +13538,17 @@ function parseStatic(line, text) {
     const w = /^~ gets \+X\/\+(0|X), where X is (.+)\.$/.exec(line);
     const agg = w === null ? null : aggregatePhraseOf(w[2]);
     if (agg !== null) return { affects: { scope: "self" }, grantPtPerCount: { aggregate: agg, pt: [1, w[1] === "X" ? 1 : 0] }, text };
+  }
+  // Embodiment of Agonies: one counter for each different mana cost (or
+  // mana value) among some of your graveyard's cards.
+  {
+    const w = /^~ enters with a \+1\/\+1 counter on it for each different (mana cost|mana value) among (.+) cards in your graveyard\.$/.exec(line);
+    const filter = w === null ? null : parseTypePhrase(w[2], { cards: true });
+    if (filter !== null) {
+      const of = w[1] === "mana cost" ? "mana-cost" : "mana-value";
+      const amount = { aggregate: "distinct", of, filter: { ...filter, ownedBy: "you" }, in: "graveyards" };
+      return { affects: { scope: "self" }, replacement: { event: "enters-battlefield", counters: { kind: "+1/+1", amount } }, text };
+    }
   }
   {
     const w = /^~ enters with X \+1\/\+1 counters on it, where X is (.+)\.$/.exec(line);

@@ -5221,6 +5221,42 @@ describe("distinct values and Equipment attached to the source", () => {
     });
   });
 
+  it("reads the mana value threshold on a spell, a trigger and an unless, and 'each different mana cost' on an entry", () => {
+    const fiveValues = {
+      kind: "aggregate",
+      value: { aggregate: "distinct", of: "mana-value", filter: { ownedBy: "you" }, in: "graveyards" },
+      compare: { op: "gte", n: 5 },
+    };
+    const embodiment = face(
+      "Creature — Demon",
+      "This creature enters with a +1/+1 counter on it for each different mana cost among nonland cards in your graveyard. (For example, {2}{B} and {1}{B}{B} are different mana costs.)",
+    );
+    expect(embodiment.static[0].replacement.counters).toEqual({
+      kind: "+1/+1",
+      amount: { aggregate: "distinct", of: "mana-cost", filter: { notTypes: ["land"], ownedBy: "you" }, in: "graveyards" },
+    });
+    const shift = face(
+      "Sorcery",
+      "This spell has flash as long as there are five or more mana values among cards in your graveyard.\nReturn target creature card from your graveyard to the battlefield.",
+    );
+    expect(shift.flashIf).toEqual({ condition: fiveValues });
+    const spy = face(
+      "Creature — Vampire Rogue",
+      "At the beginning of your end step, if there are five or more mana values among cards in your graveyard, you may pay 2 life. If you do, draw a card.",
+    );
+    expect(spy.triggered[0].condition).toEqual(fiveValues);
+    expect(spy.triggered[0].effect).toEqual({ kind: "may", prompt: "Pay 2 life?", costLife: 2, effect: { kind: "draw", amount: 1 } });
+    const indulgence = face(
+      "Instant",
+      "Draw two cards. Then discard a card unless there are five or more mana values among cards in your graveyard.",
+    );
+    expect(indulgence.effect.effects[1]).toEqual({
+      kind: "conditional",
+      condition: { kind: "not", of: fiveValues },
+      then: { kind: "discard", target: "you", amount: 1 },
+    });
+  });
+
   it("reads 'five or more mana values among cards in your graveyard', differently named lands, and Equipment on it", () => {
     const aven = face(
       "Creature — Bird Assassin",

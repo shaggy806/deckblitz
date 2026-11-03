@@ -789,9 +789,11 @@ count; mana value off the printed cost with `{X}` as 0. A **sum counts a
 token stack once per token** — twenty 1/1 Goblins in one stack are 20 power.
 A max over no permanents is 0, and the amount is clamped at 0, rule 107.1b;
 `aggregate: "distinct"` counts the **different** values instead, each once —
-`of: "mana-value" | "power" | "name" | "color-pair" | "permanent-type" | {
-subtypesOf: "creature" | "planeswalker" }`: Lunar Insight's "each different
-mana value among nonland permanents you control", Golden Ratio's "each
+`of: "mana-value" | "mana-cost" | "power" | "name" | "color-pair" |
+"permanent-type" | { subtypesOf: "creature" | "planeswalker" }`: Lunar Insight's
+"each different mana value among nonland permanents you control", Embodiment of
+Agonies' "each different mana cost among nonland cards in your graveyard" (the
+symbols, not their total; no mana cost adds nothing, rule 202.1b), Golden Ratio's "each
 different power", Awakened Amalgam's "differently named lands" (as a CDA's
 `setBasePtFromCount.countOf`), Tam's "planeswalker types among planeswalkers
 you control", a changeling every creature type; `in: "graveyards"` reads the

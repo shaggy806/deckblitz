@@ -2913,6 +2913,11 @@ export function aggregateMatches(
  *
  * - `"mana-value"`: a land's is 0 and counts as one (rule 202.3a), `{X}` 0
  *   off the stack (202.3e).
+ * - `"mana-cost"`: the symbols of its mana cost, not their total — Embodiment
+ *   of Agonies' "each different mana cost": {2}{B} and {1}{B}{B} are two. A
+ *   card with no mana cost has none and adds nothing (rule 202.1b); a split
+ *   card's is its halves' combined (709.4b), a double-faced card's its front
+ *   face's off the battlefield (712.8a).
  * - `"power"`: its power now.
  * - `"name"` — "differently named lands" (Awakened Amalgam): a split card's
  *   two names together are one; a face-down permanent has none (rule
@@ -2931,6 +2936,7 @@ export function aggregateMatches(
  */
 export type DistinctOf =
   | "mana-value"
+  | "mana-cost"
   | "power"
   | "name"
   | "color-pair"
@@ -2966,6 +2972,10 @@ function distinctValuesOf(
   const object = state.objects[id];
   if (object === undefined) return [];
   if (of === "mana-value") return [aggregateValueOf(state, registry, id, "mana-value")];
+  if (of === "mana-cost") {
+    const cost = printedManaCost(registry, object);
+    return cost === null || cost === "" ? [] : [cost];
+  }
   if (of === "name") {
     const name = distinctNameOf(registry, object);
     return name === undefined ? [] : [name];
