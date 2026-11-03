@@ -9799,4 +9799,19 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       turn: 0,
     }),
   ),
+
+  preset(
+    'Stalwart Valkyrie: a cheaper cast that exiles a creature card from your graveyard',
+    board({
+      you: { bf: ['Plains*4'], hand: ['Stalwart Valkyrie'], gy: ['Grizzly Bears', 'Craw Wurm', 'Shock'] },
+      opp: [{}],
+    }),
+  ),
+  preset(
+    'Undergrowth: an extra cost you may pay as you cast it',
+    board({
+      you: { bf: ['Forest', 'Mountain*3'], hand: ['Undergrowth'] },
+      opp: [{}],
+    }),
+  ),
 ]

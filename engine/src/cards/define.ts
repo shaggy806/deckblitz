@@ -1676,6 +1676,12 @@ export type StaticCondition =
    * "If its prowl cost was paid" (Earwig Squad), "if this spell's prowl cost
    * was paid" (Morsel Theft); read like `self-spectacle-paid`. */
   | { readonly kind: "self-prowl-paid" }
+  /** Was this spell cast for its own alternative cost (rule 118.9)? "If the
+   * {2}{R}{R} cost was paid" (Fervent Mastery), not for one some other effect
+   * offered it (Jodah). With `madness`, "if this spell's madness cost was
+   * paid" (From Under the Floorboards, rule 702.35b). A copy has it too
+   * (707.10). Read on the spell itself, so while it's on the stack. */
+  | { readonly kind: "self-alternative-cost-paid"; readonly madness?: true }
   /**
    * Prowl's condition (rule 702.76a): a player was dealt combat damage this
    * turn by a source that, as it dealt it, was under your control and had
@@ -4208,8 +4214,13 @@ export interface CardDefinition {
      * pay {N} more** to cast it" (Rout, Harbinger of the Tides): `cost` is
      * `"{N}"`, with `flash: true`. It's a cost to begin it at that time (rule
      * 601.3c), not kicker: the spell isn't a kicked one to anything else.
+     *
+     * `"additional cost"` is the same choice with no keyword at all: "As an
+     * additional cost to cast this spell, you may pay {2}{R}" (Undergrowth,
+     * rule 118.8). "If this spell's additional cost was paid" is the spell
+     * being kicked, to itself alone, as for bargain.
      */
-    readonly keyword?: "offspring" | "gift" | "teamwork" | "blight" | "behold" | "waterbend" | "squad" | "collect-evidence" | "bargain" | "entwine" | "buyback" | "replicate" | "reveal" | "flash";
+    readonly keyword?: "offspring" | "gift" | "teamwork" | "blight" | "behold" | "waterbend" | "squad" | "collect-evidence" | "bargain" | "entwine" | "buyback" | "replicate" | "reveal" | "flash" | "additional cost";
     /**
      * "This spell costs {N} less to cast if it's bargained" (Ice Out,
      * Hamlet Glutton): N generic off the kicked variant's total cost, after
@@ -4463,6 +4474,12 @@ export interface CardDefinition {
      * who can't gain life can't pay it, one whose gain is replaced can
      * (rule 118.3 and Invigorate's rulings). */
     readonly othersGainLife?: { readonly amount: number; readonly who: "an-opponent" | "each-other-player" };
+    /** The rest of the cost, in the shape a keyword's non-mana cost has: "You
+     * may pay {1}{W} **and exile a creature card from your graveyard** rather
+     * than pay this spell's mana cost" (Stalwart Valkyrie). Paid in full as
+     * the spell's costs are (601.2h), and the cast isn't offered while it
+     * can't all be. */
+    readonly also?: KickerAlsoCost;
     readonly condition?: StaticCondition;
   } | null;
   /**
@@ -5537,7 +5554,7 @@ interface CardDraft {
     readonly cost: string;
     readonly targets?: readonly TargetSpec[];
     readonly effect?: EffectSpec;
-    readonly keyword?: "offspring" | "gift" | "teamwork" | "blight" | "behold" | "waterbend" | "squad" | "collect-evidence" | "bargain" | "entwine" | "buyback" | "replicate" | "reveal" | "flash";
+    readonly keyword?: "offspring" | "gift" | "teamwork" | "blight" | "behold" | "waterbend" | "squad" | "collect-evidence" | "bargain" | "entwine" | "buyback" | "replicate" | "reveal" | "flash" | "additional cost";
     readonly reduceGeneric?: number;
     readonly behold?: BeholdSpec;
     readonly orControls?: CardFilter;

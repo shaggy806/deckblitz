@@ -4242,3 +4242,11 @@ Gargoyle, Monstrous Hound, Branded Brawlers, Lurking Green Dragon, Crown-Hunter 
 too, so a granted "can't attack unless defending player …" binds, and `add-types`' `removeSubtypes` for "it isn't an Equipment". Keys:
 effect:animate-grants-conditional-static, effect:animate-grants-protection, effect:animate-grants-toxic, effect:animate-grants-triggered.
 Proving cards: Raging Ravine, Restless Spire, Veiled Serpent, Veiled Apparition, Opal Guardian, Monument to Perfection, Dancing Sword.
+**An alternative cost's other parts, and which cost was paid (2026-11-02).** `alternativeCost.also` is a `KickerAlsoCost`, paid with
+the keywords' and a splice's by the same code. `self-alternative-cost-paid` reads whether the spell was cast for its own alternative
+cost (`madness: true`: for its madness cost), kept by a copy. A `target` condition's filter reads `n: "x"`. `kicker.keyword: "additional
+cost"`: an optional additional cost with no keyword (rule 118.8), not a kicked spell to anything else. Keys:
+condition:alternative-cost-paid, cost:alternative-cost-exile-from-graveyard, cost:optional-additional-mana-cost (Chorus of the Conclave's
+half stays narrow). Found to need no code: cost:conditional-alternative-cost (`condition` took any `StaticCondition` already). Proving
+cards: Stalwart Valkyrie, Blasphemous Edict, Asmoranomardicadaistinaculdacar, Fervent Mastery, Ingenious Mastery, From Under the
+Floorboards, Welcome to the Fold, Undergrowth.

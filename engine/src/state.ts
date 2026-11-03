@@ -1151,6 +1151,10 @@ export interface GameObject {
    * `alternativeCost` with `keyword: "prowl"`), for "if its prowl cost was
    * paid" (`self-prowl-paid`). A copy has it too (707.10). */
   prowlPaid?: boolean;
+  /** This spell was cast for its own alternative cost (rule 118.9, the card's
+   * `alternativeCost`) or its madness cost (702.35b), for the
+   * `self-alternative-cost-paid` condition. A copy has it too (707.10). */
+  alternativeCostPaid?: "printed" | "madness";
   /** This spell was cast for its overload cost (rule 702.126 — Cyclonic
    * Rift): its overload cost was paid instead of its mana cost, with no
    * targets, so `resolveTopOfStack` applies `CardDefinition.overload.effect`.
@@ -1628,6 +1632,7 @@ export interface SpellSnapshot {
   readonly spectaclePaid?: boolean;
   readonly surgePaid?: boolean;
   readonly prowlPaid?: boolean;
+  readonly alternativeCostPaid?: "printed" | "madness";
   readonly offspringGrantPaid?: boolean;
   /** Who its gift was promised to — a copy's is promised to them too. */
   readonly giftTo?: PlayerId;

@@ -9475,6 +9475,30 @@ export function parseFace(face, ctx = {}) {
       };
       continue;
     }
+    // A mana alternative cost (rule 118.9), the rest a parameter: "You may pay
+    // {2}{R}{R} rather than pay this spell's mana cost" (Fervent Mastery), "and
+    // exile a creature card from your graveyard" (Stalwart Valkyrie), "if there
+    // are thirteen or more creatures on the battlefield" (Blasphemous Edict).
+    // "As long as you've discarded a card this turn, you may pay {B/R} to cast
+    // this spell" (Asmoranomardicadaistinaculdacar). What paying it changes
+    // ("if the {2}{R}{R} cost was paid") is the card's own.
+    if (!/Land/.test(face.type_line ?? "") && (m = /^You may pay ((?:\{[^}]+\})+)(?: and exile an? (creature|artifact|instant|sorcery|land|enchantment) card from your graveyard)? rather than pay (?:this spell's|~'s) mana cost(?: if there are (\w+) or more creatures on the battlefield)?\.$/.exec(line))) {
+      const atLeast = m[3] === undefined ? 1 : { two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, ten: 10, thirteen: 13 }[m[3]];
+      if (atLeast !== undefined) {
+        out.alternativeCost = {
+          mana: m[1],
+          ...(m[2] !== undefined
+            ? { also: { text: `exile a ${m[2]} card from your graveyard`.replace(/^exile a (?=[aeiou])/, "exile an "), exileFromGraveyard: { count: 1, filter: { type: m[2] } } } }
+            : {}),
+          ...(m[3] !== undefined ? { condition: { kind: "controls", filter: { type: "creature" }, atLeast, anyController: true } } : {}),
+        };
+        continue;
+      }
+    }
+    if (!/Land/.test(face.type_line ?? "") && (m = /^As long as you've discarded a card this turn, you may pay ((?:\{[^}]+\})+) to cast (?:this spell|~)\.$/.exec(line))) {
+      out.alternativeCost = { mana: m[1], condition: { kind: "turn-history", what: "discarded" } };
+      continue;
+    }
     // Mercadian Masques' free spells (rule 118.9): "you may sacrifice a
     // Mountain rather than pay this spell's mana cost" (Crash, Fireblast's
     // two), "you may return three Islands you control to their owner's hand
@@ -9769,6 +9793,12 @@ export function parseFace(face, ctx = {}) {
     // ("if this spell's additional cost was paid") is the card's own.
     if (isSpell && (m = /^As an additional cost to cast ~, you may blight (\d+)\.$/.exec(line))) {
       out.kicker = { cost: "", keyword: "blight", blight: Number(m[1]) };
+      continue;
+    }
+    // "You may pay {2}{R}" (Undergrowth, rule 118.8), the same: what paying it
+    // changes is the card's own.
+    if (!/Land/.test(face.type_line ?? "") && (m = /^As an additional cost to cast ~, you may pay ((?:\{[^}]+\})+)\.$/.exec(line))) {
+      out.kicker = { cost: m[1], keyword: "additional cost" };
       continue;
     }
     // "You may collect evidence N" (rule 701.59a), the same: "if evidence was collected" is the card's own.

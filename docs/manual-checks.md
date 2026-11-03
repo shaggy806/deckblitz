@@ -6491,3 +6491,12 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 - **Do:** As Bob, cast Lightning Bolt at Alice. As Alice, cast Summary Dismissal, with no target asked for.
 - **Expect:** Lightning Bolt goes to exile, not a graveyard, no damage is dealt, and Summary Dismissal goes to your graveyard.
+### Stalwart Valkyrie: a cheaper cast that exiles a creature card from your graveyard
+
+- **Do:** Click Stalwart Valkyrie in your hand and choose the cast that says "pay {1}{W}, exile a creature card from your graveyard". Pick Grizzly Bears when asked and press Confirm.
+- **Expect:** "Choose a card to exile" lets you pick Grizzly Bears or Craw Wurm, not Shock. Grizzly Bears goes to exile and only two of your Plains tap.
+
+### Undergrowth: an extra cost you may pay as you cast it
+
+- **Do:** Click Undergrowth in your hand and look at the casts offered. Choose the one with the extra cost.
+- **Expect:** One cast for {G}, and one that says "additional cost {2}{R}", which taps four lands. It doesn't say "kicked".

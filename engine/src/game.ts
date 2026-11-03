@@ -4632,6 +4632,7 @@ export class Game {
                 (def.alternativeCost?.sacrifice !== undefined ||
                   def.alternativeCost?.returnToHand !== undefined ||
                   def.alternativeCost?.discard !== undefined ||
+                  def.alternativeCost?.also !== undefined ||
                   def.alternativeCost?.revealHand === true)
               ? {
                   altCostText: [
@@ -4642,6 +4643,7 @@ export class Game {
                       : []),
                     ...(def.alternativeCost.discard !== undefined ? [`discard ${def.alternativeCost.discard.text}`] : []),
                     ...(def.alternativeCost.revealHand === true ? ["reveal your hand"] : []),
+                    ...(def.alternativeCost.also !== undefined ? [def.alternativeCost.also.text] : []),
                   ].join(", "),
                 }
               : altCost === true && alternative?.payEnergy !== undefined
@@ -15869,7 +15871,7 @@ export class Game {
     // A keyword's non-mana part (buyback's "Pay 4 life", "Sacrifice a land",
     // "Discard two cards"; squad's, each time over; a spliced card's): only
     // while it can all be paid.
-    const whyNotAlso = this.whyCannotPayAlso(player, cardId, def, this.castAlsoCosts(cardId, def, kicked ?? false));
+    const whyNotAlso = this.whyCannotPayAlso(player, cardId, def, this.castAlsoCosts(cardId, def, kicked ?? false, altCost), altCost);
     if (whyNotAlso !== null) return whyNotAlso;
     // "This spell costs 3 life more to cast for each target" (Phyrexian
     // Purge — rule 601.2f, the targets chosen first, 601.2c): life the
@@ -17657,6 +17659,15 @@ export class Game {
     // Read now: a grant "from your hand" no longer reaches it on the stack.
     const alternativeCost = altCost ? this.alternativeCostOf(cardId, def, via, player) : null;
     const prowled = alternativeCost?.keyword === "prowl";
+    // Which of its own alternative costs this is, for "if the {2}{R}{R} cost
+    // was paid" (rule 118.9) and "if this spell's madness cost was paid"
+    // (702.35b), while the offer that says so can still be read.
+    const paidCost: "printed" | "madness" | undefined =
+      altCost && def.alternativeCost !== null && this.ownAltCost(def) !== null
+        ? "printed"
+        : via === "effect" && this.castNowOffer(player, cardId)?.madness !== undefined
+          ? "madness"
+          : undefined;
     const alternativeTaps = this.spellTapCost(cardId, def, via, player, altCost, kicked);
     // "Pay life equal to its mana value" (Demon of Fate's Design, Inside
     // Information): the face cast, X 0 (rule 107.3b), paid with the rest below.
@@ -18019,6 +18030,7 @@ export class Game {
     if (flashSacrificeOwed) object.flashSacrificeOwed = true;
     if (alternativeCost?.keyword === "spectacle") object.spectaclePaid = true;
     if (alternativeCost?.keyword === "surge") object.surgePaid = true;
+    if (paidCost !== undefined) object.alternativeCostPaid = paidCost;
     // "Once during each of your turns" is spent as it's cast.
     if (alternativeCost?.spendsGrantOf !== undefined) {
       const granter = this.state.objects[alternativeCost.spendsGrantOf];
@@ -18234,7 +18246,7 @@ export class Game {
     // A keyword's non-mana part (buyback's "Pay 3 life, Discard a card at
     // random", squad's, a spliced card's): its sacrifice is among the parts
     // above, the rest asked in turn before anyone gets priority.
-    this.queueAlsoCosts(player, cardId, this.castAlsoCosts(cardId, def, kicked), via === "effect" ? this.activePlayer : player);
+    this.queueAlsoCosts(player, cardId, this.castAlsoCosts(cardId, def, kicked, altCost), via === "effect" ? this.activePlayer : player);
     // Jump-start's "by discarding a card" (rule 702.133a), paid the same way.
     const flashbackDiscard = via === "flashback" ? this.flashbackOf(cardId, graveyardGrant)?.discard : undefined;
     if (flashbackDiscard !== undefined) {
@@ -19078,7 +19090,7 @@ export class Game {
     if (kicked !== false && kicked !== 0 && def.kicker?.keyword === "bargain") {
       parts.push({ filter: BARGAIN_FILTER, count: 1 });
     }
-    for (const also of this.castAlsoCosts(cardId, def, kicked)) {
+    for (const also of this.castAlsoCosts(cardId, def, kicked, altCost)) {
       if (also.sacrifice !== undefined) parts.push({ filter: also.sacrifice.filter, count: also.sacrifice.count });
     }
     if (via === "flashback") {
@@ -29003,6 +29015,7 @@ export class Game {
       return matchesFilter(this.state, this.registry, id, filter, {
         you: controller,
         source,
+        x,
         ...(snapshot !== undefined ? { snapshot } : {}),
       });
     };
@@ -35307,7 +35320,8 @@ export class Game {
     altCost: boolean,
     kicked: boolean | number,
   ): { readonly count: number; readonly totalPower?: number; readonly filter: CardFilter } | undefined {
-    if (altCost) return this.alternativeCostOf(cardId, def, via, player)?.tapCreatures;
+    const altTap = altCost ? this.alternativeCostOf(cardId, def, via, player)?.tapCreatures : undefined;
+    if (altTap !== undefined) return altTap;
     if (kicked && def.kicker?.teamwork !== undefined) {
       return { count: 0, totalPower: def.kicker.teamwork, filter: { type: "creature" } };
     }
@@ -35315,19 +35329,28 @@ export class Game {
     // "Splice onto Arcane—Tap an untapped white creature you control"
     // (Hundred-Talon Strike), two copies of it two of them: one offer, so one
     // filter (`whyCannotCastSpell` refuses two).
-    const parts = this.castAlsoCosts(cardId, def, kicked).flatMap((also) => also.tapUntapped ?? []);
+    const parts = this.castAlsoCosts(cardId, def, kicked, altCost).flatMap((also) => also.tapUntapped ?? []);
     if (parts.length === 0) return undefined;
     return { filter: parts[0].filter, count: parts.reduce((n, part) => n + part.count, 0) };
   }
 
-  /** The non-mana costs this cast's kicker or squad, `kicked` times over, and
-   * the cards spliced onto it add. */
-  private castAlsoCosts(cardId: ObjectId, def: CardDefinition, kicked: boolean | number): readonly KickerAlsoCost[] {
+  /** The non-mana costs this cast's kicker or squad, `kicked` times over, the
+   * cards spliced onto it, and its own alternative cost's `also` add. */
+  private castAlsoCosts(
+    cardId: ObjectId,
+    def: CardDefinition,
+    kicked: boolean | number,
+    altCost: boolean,
+  ): readonly KickerAlsoCost[] {
     const kickerAlso = kicked !== false && kicked !== 0 ? def.kicker?.also : undefined;
     const spliced = this.activeSplice?.card === cardId ? this.activeSplice.also : [];
-    if (kickerAlso === undefined) return spliced;
+    const altAlso = altCost ? this.ownAltCost(def)?.also : undefined;
     const times = def.kicker?.multi === true && typeof kicked === "number" ? kicked : 1;
-    return [alsoTimes(kickerAlso, times), ...spliced];
+    return [
+      ...(kickerAlso !== undefined ? [alsoTimes(kickerAlso, times)] : []),
+      ...(altAlso !== undefined ? [altAlso] : []),
+      ...spliced,
+    ];
   }
 
   /** Why `costs` (see {@link castAlsoCosts}) can't all be paid, or null: the
@@ -35340,8 +35363,13 @@ export class Game {
     cardId: ObjectId,
     def: CardDefinition,
     costs: readonly KickerAlsoCost[],
+    altCost = false,
   ): string | null {
-    const keyword = this.activeSplice?.card === cardId ? "splice" : (def.kicker?.keyword ?? "kicker");
+    const keyword = altCost
+      ? "alternative"
+      : this.activeSplice?.card === cardId
+        ? "splice"
+        : (def.kicker?.keyword ?? "kicker");
     const sum = (read: (also: KickerAlsoCost) => number | undefined): number =>
       costs.reduce((n, also) => n + (read(also) ?? 0), 0);
     if (!this.canPayLife(player, sum((also) => also.payLife))) {
@@ -36787,6 +36815,7 @@ export class Game {
       ...(object.spectaclePaid === true ? { spectaclePaid: true } : {}),
       ...(object.surgePaid === true ? { surgePaid: true } : {}),
       ...(object.prowlPaid === true ? { prowlPaid: true } : {}),
+      ...(object.alternativeCostPaid !== undefined ? { alternativeCostPaid: object.alternativeCostPaid } : {}),
       ...(object.offspringGrantPaid === true ? { offspringGrantPaid: true } : {}),
       ...(object.giftTo !== undefined ? { giftTo: object.giftTo } : {}),
       ...(object.convokedBy !== undefined ? { convokedBy: [...object.convokedBy] } : {}),
@@ -36872,6 +36901,7 @@ export class Game {
       ...(spell.spectaclePaid === true ? { spectaclePaid: true } : {}),
       ...(spell.surgePaid === true ? { surgePaid: true } : {}),
       ...(spell.prowlPaid === true ? { prowlPaid: true } : {}),
+      ...(spell.alternativeCostPaid !== undefined ? { alternativeCostPaid: spell.alternativeCostPaid } : {}),
       ...(spell.offspringGrantPaid === true ? { offspringGrantPaid: true } : {}),
       // "If you copy a spell for which the gift was promised, the gift was
       // also promised to the same opponent for the copy" (the ruling).
@@ -49831,6 +49861,7 @@ export class Game {
     object.spectaclePaid = undefined;
     object.surgePaid = undefined;
     object.prowlPaid = undefined;
+    delete object.alternativeCostPaid;
     // "That spell can't be countered" was about this casting, so it ends when
     // the spell leaves the stack (Cavern of Souls). So does what the casting
     // sacrificed ("the sacrificed creature" — see `LastKnownRefs`).

@@ -3095,6 +3095,23 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     });
   });
 
+  it("a mana alternative cost and what goes with it (rule 118.9), and a keywordless optional additional cost (118.8)", () => {
+    expect(face("You may pay {2}{R}{R} rather than pay this spell's mana cost.", "Sorcery").alternativeCost).toEqual({ mana: "{2}{R}{R}" });
+    expect(face("You may pay {1}{W} and exile a creature card from your graveyard rather than pay this spell's mana cost.", "Creature — Angel Warrior").alternativeCost).toEqual({
+      mana: "{1}{W}",
+      also: { text: "exile a creature card from your graveyard", exileFromGraveyard: { count: 1, filter: { type: "creature" } } },
+    });
+    expect(face("You may pay {B} rather than pay this spell's mana cost if there are thirteen or more creatures on the battlefield.", "Sorcery").alternativeCost).toEqual({
+      mana: "{B}",
+      condition: { kind: "controls", filter: { type: "creature" }, atLeast: 13, anyController: true },
+    });
+    expect(face("As long as you've discarded a card this turn, you may pay {B/R} to cast this spell.", "Creature — Human Wizard").alternativeCost).toEqual({
+      mana: "{B/R}",
+      condition: { kind: "turn-history", what: "discarded" },
+    });
+    expect(face("As an additional cost to cast this spell, you may pay {2}{R}.", "Instant").kicker).toEqual({ cost: "{2}{R}", keyword: "additional cost" });
+  });
+
   it("a life change rather than pay (rule 118.9): Snuff Out, Invigorate, Reverent Silence, the Demon, the Bloodcaster", () => {
     const forest = { kind: "controls", filter: { subtype: "Forest" }, atLeast: 1 };
     expect(face("If you control a Swamp, you may pay 4 life rather than pay this spell's mana cost.", "Instant").alternativeCost).toEqual({
