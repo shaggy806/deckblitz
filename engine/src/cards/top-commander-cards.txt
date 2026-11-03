@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4256 already implemented / 744 missing (marks refreshed 2026-11-03)
+4257 already implemented / 743 missing (marks refreshed 2026-11-03)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -3977,7 +3977,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3984  Lilypad Village                          {0}              Land
 [ ]  3985  Encroaching Mycosynth                    {3}{U}           Artifact
 [x]  3986  Selfless Safewright                      {3}{G}{G}        Creature — Elf Warrior
-[ ]  3987  Unsettled Mariner                        {W}{U}           Creature — Shapeshifter
+[x]  3987  Unsettled Mariner                        {W}{U}           Creature — Shapeshifter
 [x]  3988  Muxus, Goblin Grandee                    {4}{R}{R}        Legendary Creature — Goblin Noble
 [x]  3989  Devastation Tide                         {3}{U}{U}        Sorcery
 [x]  3990  Swift Reconfiguration                    {W}              Enchantment — Aura
