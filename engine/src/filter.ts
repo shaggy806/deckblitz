@@ -413,8 +413,9 @@ export interface CardFilter {
    * `bindDynamicCompares`, never authored. */
   readonly bandedWith?: ObjectId;
   /**
-   * It's in a **blocking relation** with the permanent applying the filter, or
-   * with the permanent that one is attached to (`of: "host"`) — the partner:
+   * It's in a **blocking relation** with the permanent applying the filter,
+   * with the permanent that one is attached to (`of: "host"`), or with the
+   * object its trigger names (`of: "trigger-object"`) — the partner:
    * - `"blocking"`: it's blocking the partner (Goblin Javelineer's "target
    *   creature blocking it", Plasma Caster's "target creature that's blocking
    *   equipped creature", Battle-Scarred Goblin's "each creature blocking
@@ -436,9 +437,15 @@ export interface CardFilter {
    */
   readonly blockingRelation?: {
     readonly relation: "blocking" | "blocked-by" | "either";
-    /** Whose relation: the source itself (the default) or its host — the
-     * permanent it's attached to now, or was as it left. */
-    readonly of?: "source" | "host";
+    /** Whose relation: the source itself (the default), its host — the
+     * permanent it's attached to now, or was as it left — or the trigger
+     * object: Trailblazer's Torch's "whenever equipped creature becomes
+     * blocked, it deals 2 damage to each creature blocking it", Ib Halfheart's
+     * sacrificed Goblin (read as it last was, rule 608.2h), Labyrinth Raptor's
+     * "a creature of their choice that's blocking it". `"trigger-object"` is
+     * an effect's filter alone: only a resolving ability has a trigger object
+     * to bind, so anywhere else (a target slot's filter) it matches nothing. */
+    readonly of?: "source" | "host" | "trigger-object";
     /** The partner, bound by `bindDynamicCompares` — never authored. */
     readonly with?: ObjectId;
   };
@@ -1311,12 +1318,14 @@ function tappedForThisTurn(
 }
 
 /** The partner of a `blockingRelation` clause: `source` itself, or the
- * permanent it's attached to — now, or as it last was on the battlefield. */
+ * permanent it's attached to — now, or as it last was on the battlefield.
+ * Nothing for `"trigger-object"`, which only `bindDynamicCompares` can bind. */
 export function blockingPartnerOf(
   state: GameState,
-  of: "source" | "host",
+  of: "source" | "host" | "trigger-object",
   source: ObjectId | undefined,
 ): ObjectId | undefined {
+  if (of === "trigger-object") return undefined;
   if (source === undefined || of === "source") return source;
   const object = state.objects[source];
   if (object === undefined) return undefined;

@@ -4104,6 +4104,18 @@ attack-with-exactly, attack-with-total-power, attacks-player-at-least,
 attack-with-count-amount. Proving cards: Alluring Suitor, Desert Were-Worm, Horn
 of the Mark, Landroval, Horizon Witness, Grand Warlord Radha, The Earth King.
 
+### The creatures blocking a trigger's object — built 2026-11-03
+
+The need-keys Phase 2 key `filter:blocking-trigger-object`. `blockingRelation`
+gained `of: "trigger-object"`, bound as the effect applies, for an ability about
+a creature other than its own source: Trailblazer's Torch, Ib Halfheart and
+Labyrinth Raptor are the proving cards, with Plague Wight for `of: "source"`
+reaching `modify-pt-all`. A trigger object that has left is read as it last
+was, so Ib's sacrificed Goblin (a token too) still finds its blockers.
+`sacrifice-target` now checks `triggerObjectLost`, so a Goblin flickered in
+response isn't sacrificed (rule 400.7). The scaffolder reads `becomes-blocked`
+on anything but the source.
+
 ### Skipping a combat phase — built 2026-11-02
 
 The need-keys Phase 2 unit `effect:skip-next-combat-phase`. `skip-step` gained

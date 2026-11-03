@@ -13650,10 +13650,13 @@ export function bindDynamicCompares(spec: EffectSpec, ctx: ResolutionContext): E
       walked = { ...rest, bandedWith: ctx.source };
     }
     // "Each creature blocking it", "creatures blocking enchanted creature":
-    // the resolving ability's source, or its host — now, or as it left.
+    // the resolving ability's source, its host — now, or as it left — or the
+    // object its trigger names, whatever has happened to it since: only
+    // `inBlockingRelation`'s read of it decides what it's still in.
     const relation = walked["blockingRelation"] as CardFilter["blockingRelation"];
     if (relation !== undefined && relation.with === undefined) {
-      const partner = relation.of === "host" ? ctx.attachedHost() : ctx.source;
+      const partner =
+        relation.of === "host" ? ctx.attachedHost() : relation.of === "trigger-object" ? ctx.triggerObject : ctx.source;
       if (partner !== undefined) walked = { ...walked, blockingRelation: { relation: relation.relation, with: partner } };
     }
     // "That blocked or were blocked by it this turn": the objects it names.
@@ -15441,7 +15444,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         spec.target === "source"
           ? ({ kind: "object", object: ctx.source } as const)
           : spec.target === "trigger-object"
-            ? ctx.triggerObject === undefined
+            ? ctx.triggerObject === undefined || ctx.triggerObjectLost === true
               ? undefined
               : ({ kind: "object", object: ctx.triggerObject } as const)
             : spec.target === "attached" || spec.target === "chosen" || spec.target === "granter" || spec.target === "trigger-recipient"

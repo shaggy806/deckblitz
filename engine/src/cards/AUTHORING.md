@@ -2816,7 +2816,11 @@ creature this combat", a `trigger-object` condition; true as its attack
 trigger triggers, since enlist is paid before the attack is announced).
 `blockingRelation: { relation, of? }` is a creature in a blocking
 relation with the permanent applying the filter — or, `of: "host"`, with the
-creature it's attached to: `"blocking"` is "creature blocking it" (Goblin
+creature it's attached to, or, `of: "trigger-object"` in an effect's filter,
+with the object the trigger names (Trailblazer's Torch's and Ib Halfheart's
+"each creature blocking it", Labyrinth Raptor's "a creature of their choice
+that's blocking it"; a target slot has no trigger object to read and matches
+nothing): `"blocking"` is "creature blocking it" (Goblin
 Javelineer's target, Battle-Scarred Goblin's "each creature blocking it", Plasma
 Caster's "target creature that's blocking equipped creature"), `"blocked-by"`
 is "creature it's blocking" / "creatures blocked by this creature" (Tinder

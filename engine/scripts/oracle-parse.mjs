@@ -1202,15 +1202,18 @@ const TARGET = `(?:${TARGET_PHRASES.map(([p]) => escapeRe(p)).join("|")}|target 
  * with a `blockingRelation` to the source or its host. */
 const BLOCK_RELATION =
   "(?:non-[A-Z][a-z]+ )?creatures? (?:blocking or blocked by|blocked by|blocking) (?:it|~|this creature|enchanted creature|equipped creature)";
-function blockRelationFilterOf(phrase) {
+function blockRelationFilterOf(phrase, it) {
   const m = /^(?:non-([A-Z][a-z]+) )?creatures? (blocking or blocked by|blocked by|blocking) (it|~|this creature|enchanted creature|equipped creature)$/.exec(phrase);
   if (m === null) return undefined;
   const relation = { "blocking or blocked by": "either", "blocked by": "blocked-by", blocking: "blocking" }[m[2]];
   const host = /^(enchanted|equipped) creature$/.test(m[3]);
+  // "It" is the object the trigger names, when that's what the ability is
+  // about (Trailblazer's Torch, Ib Halfheart).
+  const trigger = m[3] === "it" && it === "trigger-object";
   return {
     type: "creature",
     ...(m[1] !== undefined ? { notSubtypes: [m[1]] } : {}),
-    blockingRelation: { relation, ...(host ? { of: "host" } : {}) },
+    blockingRelation: { relation, ...(host ? { of: "host" } : trigger ? { of: "trigger-object" } : {}) },
   };
 }
 
@@ -1669,6 +1672,21 @@ export function parseTrigger(clause) {
   if (/^Whenever ~ attacks?$/.test(c)) return self("attacks");
   if (/^Whenever ~ blocks$/.test(c)) return self("blocks");
   if (/^Whenever ~ becomes blocked$/.test(c)) return self("becomes-blocked");
+  // The attacker is the trigger object (`itOf`), whoever's it is: "equipped
+  // creature", "another Goblin you control", "a creature you control with
+  // menace", "a Beast".
+  if (/^Whenever (?:equipped|enchanted) creature becomes blocked$/.test(c)) return [{ on: "becomes-blocked", who: "attached" }];
+  if ((m = /^Whenever (another|an?) (.+?) you control( with [a-z]+)? becomes blocked$/.exec(c))) {
+    const type = parseTypePhrase(m[2]);
+    const keyword = m[3] === undefined ? undefined : KEYWORDS[m[3].slice(" with ".length)];
+    if (type === null || (m[3] !== undefined && keyword === undefined)) return null;
+    const filter = { ...type, ...(keyword !== undefined ? { keyword } : {}) };
+    return [{ on: "becomes-blocked", who: "you-control", filter, ...(m[1] === "another" ? { otherOnly: true } : {}) }];
+  }
+  if ((m = /^Whenever an? ([A-Z][a-z]+) becomes blocked$/.exec(c))) {
+    const filter = parseTypePhrase(m[1]);
+    return filter === null ? null : [{ on: "becomes-blocked", who: "any", filter }];
+  }
   // Rule 509.3g: as blockers are declared, with none declared for it.
   if (/^Whenever ~ attacks and isn't blocked$/.test(c)) return self("attacks-unblocked");
   // State triggers (rule 603.8): a state of ~'s counters, or of what you
@@ -5559,11 +5577,25 @@ export function parseSentence(sentence, ctx) {
     // A damage source is only the ability's own or the trigger's object
     // (`DamageFrom`): "enchanted creature deals …" has no shape.
     // "It deals 1 damage to each creature blocking it" (Battle-Scarred
-    // Goblin — `blockingRelation`).
-    if (it === "source" && (m = re(`it deals ${N} damage to each (${BLOCK_RELATION})`).exec(s))) {
-      const filter = blockRelationFilterOf(m[2]);
-      return filter === undefined ? null : { kind: "damage-all", amount: amount(m[1]), filter };
+    // Goblin — `blockingRelation`), and when "it" is the object the trigger
+    // names, it deals the damage too (Trailblazer's Torch).
+    if ((it === "source" || it === "trigger-object") && (m = re(`it deals ${N} damage to each (${BLOCK_RELATION})`).exec(s))) {
+      const filter = blockRelationFilterOf(m[2], it);
+      return filter === undefined ? null : { kind: "damage-all", amount: amount(m[1]), filter, ...(it === "source" ? {} : { from: it }) };
     }
+    // "Each creature blocking it gets -1/-1 until end of turn" (Plague Wight).
+    if ((it === "source" || it === "trigger-object") && (m = re(`each (${BLOCK_RELATION}) gets ([+-]\\d+)/([+-]\\d+) until end of turn`).exec(s))) {
+      const filter = blockRelationFilterOf(m[1], it);
+      return filter === undefined ? null : { kind: "modify-pt-all", filter, power: Number(m[2]), toughness: Number(m[3]), duration: "end-of-turn" };
+    }
+    // "Defending player sacrifices a creature of their choice that's blocking
+    // it" (Labyrinth Raptor), the player the attacker's blocked-trigger names.
+    if ((it === "source" || it === "trigger-object") && re("defending player sacrifices a creature of their choice that's blocking it").test(s)) {
+      return { kind: "sacrifice", who: "trigger-player", filter: blockRelationFilterOf("creature blocking it", it), count: 1 };
+    }
+    // "Sacrifice it" (Ib Halfheart), the object the trigger names: only while
+    // it's still that object and still yours (rules 400.7, 701.21a).
+    if (it === "trigger-object" && re("sacrifice it").test(s)) return { kind: "sacrifice-target", target: it };
     // "It deals 1 damage to each opponent" (Zhur-Taa Druid).
     if (it === "source" && (m = re(`it deals ${N} damage to each opponent`).exec(s))) {
       return { kind: "damage", amount: amount(m[1]), who: "each-opponent" };
@@ -7126,6 +7158,17 @@ export function parseEffect(text, outer) {
       }
     }
     const ifDid = /^if you do, (.+)$/i.exec(sentence);
+    // "Sacrifice it. If you do, it deals 4 damage to each creature blocking
+    // it" (Ib Halfheart): the object may be gone or no longer yours by then.
+    if (ifDid !== null && parsed.at(-1)?.kind === "sacrifice-target" && parsed.at(-1).target === "trigger-object") {
+      const then = parseSentence(`${ifDid[1][0].toUpperCase()}${ifDid[1].slice(1)}`, ctx);
+      if (then !== null && !containsUndefined(then)) {
+        const conditional = { kind: "conditional", condition: { kind: "this-way", what: "sacrificed" }, then };
+        parsed.push(conditional);
+        hints.push({ sentence, effect: conditional });
+        continue;
+      }
+    }
     const mayKind = parsed.at(-1)?.kind === "may" ? parsed.at(-1).effect.kind : undefined;
     if (ifDid !== null && (mayKind === "blight" || mayKind === "behold") && parsed.at(-1).then === undefined && !/\b(blighted|beheld|that)\b/i.test(sentence)) {
       const then = parseSentence(`${ifDid[1][0].toUpperCase()}${ifDid[1].slice(1)}`, ctx);
@@ -11923,6 +11966,8 @@ function itOf(triggers) {
   // The permanent a spell or ability targeted ("that creature" — Monk Gyatso).
   const othersEvents = [...objectEvents, "becomes-target"];
   if (triggers.every((t) => t.who !== "self" && t.filter !== undefined && othersEvents.includes(t.on))) return "trigger-object";
+  // "Whenever equipped creature becomes blocked, it …" (Trailblazer's Torch).
+  if (triggers.every((t) => t.who === "attached" && t.on === "becomes-blocked")) return "trigger-object";
   return undefined;
 }
 

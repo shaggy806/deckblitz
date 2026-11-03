@@ -6619,6 +6619,53 @@ describe("creatures in a blocking relation (blockingRelation)", () => {
     const nets = face("Wall of Nets", "Creature — Wall", "Defender\nAt end of combat, exile all creatures blocked by this creature.");
     expect(nets.complete).toBe(false);
   });
+
+  it("reads the creatures blocking the object a trigger names", () => {
+    const blockingIt = { type: "creature", blockingRelation: { relation: "blocking", of: "trigger-object" } };
+    const torch = face(
+      "Trailblazer's Torch",
+      "Artifact — Equipment",
+      "When this Equipment enters, you take the initiative.\nWhenever equipped creature becomes blocked, it deals 2 damage to each creature blocking it.\nEquip {1}",
+    );
+    expect(torch.complete).toBe(true);
+    expect(torch.triggered[1].trigger).toEqual({ on: "becomes-blocked", who: "attached" });
+    expect(torch.triggered[1].effect).toEqual({ kind: "damage-all", amount: 2, filter: blockingIt, from: "trigger-object" });
+    const ib = face(
+      "Ib Halfheart, Goblin Tactician",
+      "Legendary Creature — Goblin Advisor",
+      "Whenever another Goblin you control becomes blocked, sacrifice it. If you do, it deals 4 damage to each creature blocking it.",
+    );
+    expect(ib.complete).toBe(true);
+    expect(ib.triggered[0].trigger).toEqual({ on: "becomes-blocked", who: "you-control", filter: { subtype: "Goblin" }, otherOnly: true });
+    expect(ib.triggered[0].effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "sacrifice-target", target: "trigger-object" },
+        {
+          kind: "conditional",
+          condition: { kind: "this-way", what: "sacrificed" },
+          then: { kind: "damage-all", amount: 4, filter: blockingIt, from: "trigger-object" },
+        },
+      ],
+    });
+    const raptor = face(
+      "Labyrinth Raptor",
+      "Creature — Nightmare Dinosaur",
+      "Whenever a creature you control with menace becomes blocked, defending player sacrifices a creature of their choice that's blocking it.",
+    );
+    expect(raptor.complete).toBe(true);
+    expect(raptor.triggered[0].trigger).toEqual({ on: "becomes-blocked", who: "you-control", filter: { type: "creature", keyword: "menace" } });
+    expect(raptor.triggered[0].effect).toEqual({ kind: "sacrifice", who: "trigger-player", filter: blockingIt, count: 1 });
+    const wight = face("Plague Wight", "Creature — Zombie", "Whenever this creature becomes blocked, each creature blocking it gets -1/-1 until end of turn.");
+    expect(wight.complete).toBe(true);
+    expect(wight.triggered[0].effect).toEqual({
+      kind: "modify-pt-all",
+      filter: relation("blocking"),
+      power: -1,
+      toughness: -1,
+      duration: "end-of-turn",
+    });
+  });
 });
 
 describe("attack requirements narrowed (attack-requirement, rule 508.1d)", () => {
