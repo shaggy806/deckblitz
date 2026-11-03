@@ -6687,7 +6687,6 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 - **Do:** Play your Mountain. As the trigger resolves, click "Search your hand and library" and choose a Balefire Dragon.
 - **Expect:** Last Light goes to your graveyard first. Three choices are offered: "Search your hand and library", "Search your hand", "Search your library". The popup shows both Dragons, one from your hand and one from your library; the one you choose enters, and your library is shuffled.
-## Mana abilities away from the battlefield (2026-11-03)
 
 ### Simian Spirit Guide: exile it from your hand for {R}, then cast with the mana
 
