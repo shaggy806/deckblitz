@@ -4104,6 +4104,18 @@ attack-with-exactly, attack-with-total-power, attacks-player-at-least,
 attack-with-count-amount. Proving cards: Alluring Suitor, Desert Were-Worm, Horn
 of the Mark, Landroval, Horizon Witness, Grand Warlord Radha, The Earth King.
 
+### How many creatures are blocking it — built 2026-11-03
+
+The need-keys Phase 2 keys `amount:creatures-blocking-it`,
+`effect:amount-creatures-blocking-it` and, riding along,
+`condition:source-blocked-by-at-least-one`. `{ blockersOf }` names the source or
+the trigger object (Spined Sliver, General Marhault Elsdragon, She-Hulk), its
+count now `filter.ts`'s `creaturesBlocking`, and a new `CardFilter.blockerCount`
+asks the same of a `{ kind: "source" }` condition (Rampaging Cyclops, Grizzled
+Wolverine: blocking now, not `blocked`, rule 509.1h). "For each creature it's
+blocking" (Guardian of the Gateless) needed nothing new: `countOf` over
+`blockingRelation: "blocked-by"`.
+
 ### The creatures blocking a trigger's object — built 2026-11-03
 
 The need-keys Phase 2 key `filter:blocking-trigger-object`. `blockingRelation`

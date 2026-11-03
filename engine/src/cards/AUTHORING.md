@@ -2820,7 +2820,13 @@ creature it's attached to, or, `of: "trigger-object"` in an effect's filter,
 with the object the trigger names (Trailblazer's Torch's and Ib Halfheart's
 "each creature blocking it", Labyrinth Raptor's "a creature of their choice
 that's blocking it"; a target slot has no trigger object to read and matches
-nothing): `"blocking"` is "creature blocking it" (Goblin
+nothing). `blockerCount: { op, n }` is how many creatures are blocking it now —
+Rampaging Cyclops's "as long as two or more creatures are blocking it", Grizzled
+Wolverine's "only if at least one creature is blocking this creature", both as
+`{ kind: "source", filter }`; the amount `{ blockersOf: "source" | "trigger-object" }`
+is the same count ("for each creature blocking it"), and "for each creature it's
+blocking" is `{ countOf: { type: "creature", blockingRelation: { relation:
+"blocked-by" } } }` (Guardian of the Gateless). `"blocking"` is "creature blocking it" (Goblin
 Javelineer's target, Battle-Scarred Goblin's "each creature blocking it", Plasma
 Caster's "target creature that's blocking equipped creature"), `"blocked-by"`
 is "creature it's blocking" / "creatures blocked by this creature" (Tinder

@@ -6666,6 +6666,50 @@ describe("creatures in a blocking relation (blockingRelation)", () => {
       duration: "end-of-turn",
     });
   });
+
+  it("reads how many creatures are blocking it, or it's blocking", () => {
+    const pump = (each: unknown, n: number, target: string): unknown => ({
+      kind: "modify-pt",
+      target,
+      power: n === 1 ? each : { product: [n, each] },
+      toughness: n === 1 ? each : { product: [n, each] },
+      duration: "end-of-turn",
+    });
+    const blockers = { blockersOf: "trigger-object" };
+    const sliver = face("Spined Sliver", "Creature — Sliver", "Whenever a Sliver becomes blocked, that Sliver gets +1/+1 until end of turn for each creature blocking it.");
+    expect(sliver.complete).toBe(true);
+    expect(sliver.triggered[0].trigger).toEqual({ on: "becomes-blocked", who: "any", filter: { subtype: "Sliver" } });
+    expect(sliver.triggered[0].effect).toEqual(pump(blockers, 1, "trigger-object"));
+    const general = face(
+      "General Marhault Elsdragon",
+      "Legendary Creature — Elf Warrior",
+      "Whenever a creature you control becomes blocked, it gets +3/+3 until end of turn for each creature blocking it.",
+    );
+    expect(general.complete).toBe(true);
+    expect(general.triggered[0].effect).toEqual(pump(blockers, 3, "trigger-object"));
+    const elk = face("Gang of Elk", "Creature — Elk Beast", "Whenever this creature becomes blocked, it gets +2/+2 until end of turn for each creature blocking it.");
+    expect(elk.triggered[0].effect).toEqual(pump({ blockersOf: "source" }, 2, "source"));
+    const hulk = face("She-Hulk", "Legendary Creature — Gamma Hero", "Whenever a Hero you control becomes blocked, put a +1/+1 counter on that Hero for each creature blocking it.");
+    expect(hulk.complete).toBe(true);
+    expect(hulk.triggered[0].effect).toEqual({ kind: "add-counter", target: "trigger-object", counter: "+1/+1", amount: blockers });
+    const guardian = face("Guardian of the Gateless", "Creature — Angel", "Whenever this creature blocks, it gets +1/+1 until end of turn for each creature it's blocking.");
+    expect(guardian.complete).toBe(true);
+    expect(guardian.triggered[0].effect).toEqual(pump({ countOf: relation("blocked-by") }, 1, "source"));
+    const cyclops = face("Rampaging Cyclops", "Creature — Cyclops", "This creature gets -2/-0 as long as two or more creatures are blocking it.");
+    expect(cyclops.complete).toBe(true);
+    expect(cyclops.static[0].condition).toEqual({ kind: "source", filter: { blockerCount: { op: "gte", n: 2 } } });
+    const wolverine = face(
+      "Grizzled Wolverine",
+      "Creature — Wolverine",
+      "{R}: This creature gets +2/+0 until end of turn. Activate only during the declare blockers step, only if at least one creature is blocking this creature, and only once each turn.",
+    );
+    expect(wolverine.complete).toBe(true);
+    expect(wolverine.activated[0].oncePerTurn).toBe(true);
+    expect(wolverine.activated[0].condition).toEqual({
+      kind: "all",
+      of: [{ kind: "turn-structure", steps: ["declare-blockers"] }, { kind: "source", filter: { blockerCount: { op: "gte", n: 1 } } }],
+    });
+  });
 });
 
 describe("attack requirements narrowed (attack-requirement, rule 508.1d)", () => {

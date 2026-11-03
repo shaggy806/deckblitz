@@ -2710,7 +2710,13 @@ export function parseSentence(sentence, ctx) {
       };
     }
   }
-  if (/\bwhere X\b|\bfor each\b/i.test(s) && !/^add .*for each [\w+/-]+ counter removed this way\.$/i.test(s)) return null;
+  if (
+    /\bwhere X\b|\bfor each\b/i.test(s) &&
+    !/^add .*for each [\w+/-]+ counter removed this way\.$/i.test(s) &&
+    !/ for each creature (?:blocking it|it's blocking)\.$/i.test(s)
+  ) {
+    return null;
+  }
   // "Until end of turn, whenever …, …", "whenever … this turn, …" and "until
   // your next turn, whenever …, …" (rule 603.7c): a delayed triggered
   // ability with a duration. Its effect is read as a printed trigger's is —
@@ -5596,6 +5602,23 @@ export function parseSentence(sentence, ctx) {
     // "Sacrifice it" (Ib Halfheart), the object the trigger names: only while
     // it's still that object and still yours (rules 400.7, 701.21a).
     if (it === "trigger-object" && re("sacrifice it").test(s)) return { kind: "sacrifice-target", target: it };
+    // "It gets +1/+1 until end of turn for each creature blocking it" (Elvish
+    // Berserker, General Marhault Elsdragon), "that Sliver gets …" (Spined
+    // Sliver), "… for each creature it's blocking" (Guardian of the Gateless).
+    if ((it === "source" || it === "trigger-object") && (m = re(`(?:it|that [A-Z][a-z]+) gets ([+-]\\d+)/([+-]\\d+) until end of turn for each creature (blocking it|it's blocking)`).exec(s))) {
+      const each =
+        m[3] === "blocking it"
+          ? { blockersOf: it }
+          : { countOf: { type: "creature", blockingRelation: { relation: "blocked-by", ...(it === "source" ? {} : { of: it }) } } };
+      const times = (n) => (n === 0 ? 0 : n === 1 ? each : { product: [n, each] });
+      return { kind: "modify-pt", target: it, power: times(Number(m[1])), toughness: times(Number(m[2])), duration: "end-of-turn" };
+    }
+    // "Put a +1/+1 counter on that Hero for each creature blocking it"
+    // (She-Hulk, Wallbreaker).
+    if ((it === "source" || it === "trigger-object") && (m = re(`put ${N} ([+-]\\d+/[+-]\\d+|[a-z]+) counters? on (?:it|that [A-Z][a-z]+) for each creature blocking it`).exec(s))) {
+      const n = amount(m[1]);
+      return { kind: "add-counter", target: it, counter: m[2].toLowerCase(), amount: n === 1 ? { blockersOf: it } : { product: [n, { blockersOf: it }] } };
+    }
     // "It deals 1 damage to each opponent" (Zhur-Taa Druid).
     if (it === "source" && (m = re(`it deals ${N} damage to each opponent`).exec(s))) {
       return { kind: "damage", amount: amount(m[1]), who: "each-opponent" };
@@ -10801,6 +10824,16 @@ export function parseFace(face, ctx = {}) {
         ability.condition = { kind: "source", filter: { blockedThisTurn: { relation: "either", partner } } };
         return "";
       });
+      // Grizzled Wolverine: a creature still blocking it, not merely blocked
+      // (rule 509.1h), in that one step, once.
+      rest = rest.replace(/ Activate only during the declare blockers step, only if at least one creature is blocking ~, and only once each turn\.$/, () => {
+        ability.condition = {
+          kind: "all",
+          of: [{ kind: "turn-structure", steps: ["declare-blockers"] }, { kind: "source", filter: { blockerCount: { op: "gte", n: 1 } } }],
+        };
+        ability.oncePerTurn = true;
+        return "";
+      });
       if (/Activate only /.test(rest)) {
         ability.__todo = [`a restriction: "${rest.slice(rest.indexOf("Activate only "))}"`];
         rest = rest.slice(0, rest.indexOf(" Activate only "));
@@ -11399,6 +11432,8 @@ const STATIC_CONDITION_SUFFIXES = [
   // Ascend (rule 702.131 — Rivals of Ixalan): "~ gets +2/+2 as long as you
   // have the city's blessing" (Dusk Charger).
   [" as long as you have the city's blessing.", { kind: "citys-blessing" }],
+  // "… as long as two or more creatures are blocking it" (Rampaging Cyclops).
+  [" as long as two or more creatures are blocking it.", { kind: "source", filter: { blockerCount: { op: "gte", n: 2 } } }],
 ];
 /** The same, leading: "As long as you have the city's blessing, ~ has
  * hexproof" (Slippery Scoundrel). */

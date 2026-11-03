@@ -285,6 +285,7 @@ import {
   compareNum,
   fixChosenColor,
   manaValueOfObject,
+  creaturesBlocking,
   matchesFilter,
   ownerOnly,
   printedManaCost,
@@ -32959,15 +32960,7 @@ export class Game {
         if (object?.zone === "battlefield") return object.merged?.timesMutated ?? 0;
         return object?.lastKnown?.timesMutated ?? 0;
       },
-      blockersOfSource: () =>
-        permanentCount(
-          this.state,
-          this.state.zones.shared.battlefield.filter((id) => {
-            const o = this.state.objects[id];
-            // A blocker of the band it's in blocks it too (rule 702.22h).
-            return o?.blocking === source || o?.blockingAlso?.includes(source) === true;
-          }),
-        ),
+      creaturesBlocking: (object) => creaturesBlocking(this.state, object),
       opponentsControllingFewer: (filter) => {
         // What each player *controls* (read from their own side), whether or
         // not the filter says so — Voice of Many's `{ type: "creature" }`

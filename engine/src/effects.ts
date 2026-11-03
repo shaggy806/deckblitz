@@ -850,11 +850,15 @@ export type EffectAmount =
    * since it became this object (`GameObject.merged.timesMutated`), 0 for
    * one that never mutated; as it last existed if it has left. */
   | { readonly timesMutated: "source" }
-  /** How many creatures are blocking the source now — each token of a
-   * blocking stack counting (rampage's "for each creature blocking it beyond
-   * the first", rule 702.23, read as the trigger resolves, 702.23b; Rampaging
-   * Cyclops). 0 when nothing blocks it. */
-  | { readonly blockersOf: "source" }
+  /** How many creatures are blocking the source now, or the object its
+   * trigger names — each token of a blocking stack counting (rampage's "for
+   * each creature blocking it beyond the first", rule 702.23, read as the
+   * trigger resolves, 702.23b; General Marhault Elsdragon's "whenever a
+   * creature you control becomes blocked, it gets +3/+3 … for each creature
+   * blocking it", She-Hulk's counters). 0 when nothing blocks it. Read as it
+   * last was if it has left (`inBlockingRelation`). A static's condition asks
+   * the same through `CardFilter.blockerCount`. */
+  | { readonly blockersOf: "source" | "trigger-object" }
   /** How many creatures died under the effect controller's control this turn
    * — Liliana's Standard Bearer. Reads `PlayerState.creaturesDiedThisTurn`.
    * `anyController`: every creature that died this turn, whoever controlled
@@ -9888,8 +9892,8 @@ export interface EffectApi {
   partySize(): number;
   /** See the `{ timesMutated }` {@link EffectAmount}. */
   timesMutated(): number;
-  /** How many creatures are blocking the source — see `{ blockersOf }`. */
-  blockersOfSource(): number;
+  /** How many creatures are blocking `object` — see `{ blockersOf }`. */
+  creaturesBlocking(object: ObjectId): number;
   /** See the `{ opponentsControllingFewer }` {@link EffectAmount}. */
   opponentsControllingFewer(filter: CardFilter): number;
   /** See the `{ creaturesDiedThisTurn }` {@link EffectAmount}. */
@@ -13070,7 +13074,10 @@ function signedAmountValue(
   if ("basicLandTypes" in amount) return ctx.basicLandTypes();
   if ("partySize" in amount) return ctx.partySize();
   if ("timesMutated" in amount) return ctx.timesMutated();
-  if ("blockersOf" in amount) return ctx.blockersOfSource();
+  if ("blockersOf" in amount) {
+    const object = amount.blockersOf === "trigger-object" ? ctx.triggerObject : ctx.source;
+    return object === undefined ? 0 : ctx.creaturesBlocking(object);
+  }
   if ("creaturesDiedThisTurn" in amount) return ctx.creaturesDiedThisTurn(amount.anyController === true);
   if ("powerOf" in amount) {
     const ref = resolveAmountRef(amount.powerOf, ctx);

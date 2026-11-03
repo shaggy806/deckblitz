@@ -33,7 +33,7 @@ import { hasRingBearerDesignation, isRingBearer } from "./ring.js";
 import type { Color, ManaCost, ManaFromSpec } from "./mana.js";
 import { COLORS, manaOriginMatches, manaValue, parseManaCost } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
-import { LOCKED_ROOM, activePlayerOf, blockedAttackersOf, isTokenNow, manaCostOverride, nameOf, printedCardName, rulesTextName } from "./state.js";
+import { LOCKED_ROOM, activePlayerOf, blockedAttackersOf, isTokenNow, manaCostOverride, nameOf, permanentCount, printedCardName, rulesTextName } from "./state.js";
 import type { GameObject, GameState, LastKnownInfo, ZoneType } from "./state.js";
 import { CREATURE_TYPES } from "./creature-types.js";
 import { EVERY_CREATURE_TYPE, EVERY_LAND_TYPE, hasSubtype, isCreatureType, isLandType, isTypeMarker } from "./subtypes.js";
@@ -449,6 +449,14 @@ export interface CardFilter {
     /** The partner, bound by `bindDynamicCompares` — never authored. */
     readonly with?: ObjectId;
   };
+  /**
+   * How many creatures are **blocking it** now, each token of a blocking stack
+   * counting (`creaturesBlocking`) — Rampaging Cyclops's "as long as two or
+   * more creatures are blocking it", Grizzled Wolverine's "only if at least
+   * one creature is blocking this creature", as `{ kind: "source", filter }`.
+   * Not `blocked`, which stays true once its blockers have gone (rule 509.1h).
+   */
+  readonly blockerCount?: NumCompare;
   /**
    * It **blocked**, or **was blocked**, this turn (rules 509.1g-h) — the
    * look-back `blockingRelation` can't give, kept in
@@ -1366,6 +1374,18 @@ export function inBlockingRelation(
   return blocking() || blockedBy();
 }
 
+/**
+ * How many creatures are blocking `attacker`, each token of a stack counting,
+ * a blocker of the band it's in too (rule 702.22h), as it last was if it has
+ * left — `{ blockersOf }` and `CardFilter.blockerCount`.
+ */
+export function creaturesBlocking(state: GameState, attacker: ObjectId): number {
+  return permanentCount(
+    state,
+    state.zones.shared.battlefield.filter((id) => inBlockingRelation(state, state.objects[id], attacker, "blocking")),
+  );
+}
+
 /** Whether object `id`, in its stint `stint`, blocked or was blocked this turn
  * as `CardFilter.blockedThisTurn` asks, every player's `TurnHistory.blocks`
  * read. */
@@ -1990,6 +2010,9 @@ export function matchesFilter(
     const { relation, of, with: bound } = filter.blockingRelation;
     const partner = bound ?? blockingPartnerOf(state, of ?? "source", ctx.source);
     if (live === undefined || partner === undefined || !inBlockingRelation(state, live, partner, relation)) return false;
+  }
+  if (filter.blockerCount !== undefined) {
+    if (live === undefined || !compareNum(creaturesBlocking(state, id), filter.blockerCount, ctx.x)) return false;
   }
   if (filter.blockedThisTurn !== undefined) {
     const stint = live !== undefined ? (live.zoneChangeCount ?? 0) : lki!.zoneChangeCount;
