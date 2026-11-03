@@ -1311,6 +1311,19 @@ function kickerAlso(text) {
     if (filter === null || Object.keys(filter).length === 0) return null;
     return { text, tapUntapped: { filter, count: 1 } };
   }
+  // "Tap two untapped artifacts, creatures, and/or lands you control" (Warlord's Elite).
+  if ((m = new RegExp(`^Tap (${N.slice(1, -1)}) untapped (.+?) you control$`).exec(text))) {
+    const count = numberOf(m[1]);
+    const filter = parseTypePhrase(m[2]);
+    if (typeof count !== "number" || filter === null || Object.keys(filter).length === 0) return null;
+    return { text, tapUntapped: { filter, count } };
+  }
+  // "Tap any number of untapped creatures you control" (Burn at the Stake).
+  if ((m = /^Tap any number of untapped (.+?) you control$/.exec(text))) {
+    const filter = parseTypePhrase(m[1]);
+    if (filter === null || Object.keys(filter).length === 0) return null;
+    return { text, tapAnyNumber: { filter } };
+  }
   return null;
 }
 
@@ -9925,6 +9938,27 @@ export function parseFace(face, ctx = {}) {
       const count = { "a card": 1, "two cards": 2, "three cards": 3, "X cards": "x" }[m[1]];
       out.additionalCost = { discard: count, ...(m[2] ? { discardAtRandom: true } : {}) };
       continue;
+    }
+    // "Discard a land card" (Magmatic Insight), "discard X land cards"
+    // (Scorched Earth): `discardFilter`.
+    if (isSpell && (m = /^As an additional cost to cast ~, discard (an?|X) (.+?) cards?\.$/.exec(line))) {
+      const discardFilter = parseTypePhrase(m[2], { cards: true });
+      if (discardFilter !== null && Object.keys(discardFilter).length > 0) {
+        out.additionalCost = { discard: m[1] === "X" ? "x" : 1, discardFilter };
+        continue;
+      }
+    }
+    // "Tap two untapped creatures you control" (Shared Discovery), "return a
+    // land you control to its owner's hand" (Deprive): `also`, as a keyword's
+    // non-mana cost; "… or pay {1}" (Disruption Protocol) a branch of a choice.
+    if (isSpell && (m = /^As an additional cost to cast ~, ((?:tap|return) .+?)(?: or pay ((?:\{[^}]+\})+))?\.$/.exec(line))) {
+      const text = m[1].charAt(0).toUpperCase() + m[1].slice(1);
+      const also = kickerAlso(text);
+      if (also !== null) {
+        out.additionalCost =
+          m[2] === undefined ? { also } : { options: [{ text, also }, { text: `Pay ${m[2]}`, mana: m[2] }] };
+        continue;
+      }
     }
     // "Blight N or pay {M}" (rule 701.68a): a choice of whole costs.
     if (isSpell && (m = /^As an additional cost to cast ~, blight (\d+) or pay ((?:\{[^}]+\})+)\.$/.exec(line))) {

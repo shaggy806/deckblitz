@@ -2581,7 +2581,7 @@ function Table({
       // Exactly as much as the cost needs leaves nothing to choose. (Crew
       // always asks: which creatures crew is the player's call.)
       const every = allTapChoices(offer)
-      if (offer.totalPower === undefined && every.length === offer.count) {
+      if (offer.totalPower === undefined && offer.anyNumber !== true && every.length === offer.count) {
         game.dispatch({ ...action, tap: every })
         return
       }
@@ -3167,7 +3167,7 @@ function Table({
                 picks: cur.picks.includes(id)
                   ? cur.picks.filter((x) => x !== id)
                   : // Crew taps any number; a count-based cost swaps out its oldest pick.
-                    offer.totalPower === undefined && cur.picks.length >= offer.count
+                    offer.totalPower === undefined && offer.anyNumber !== true && cur.picks.length >= offer.count
                     ? [...cur.picks.slice(1), id]
                     : [...cur.picks, id],
               },
@@ -4812,13 +4812,21 @@ function Table({
     controls = (
       <div className="controls">
         <span>
-          {offer.totalPower !== undefined
-            ? `${what}: tap creatures with total power ${offer.totalPower} — power ${power}/${offer.totalPower}`
-            : `${what}: tap ${offer.count} — ${picks.length}/${offer.count} chosen`}
+          {offer.anyNumber === true
+            ? `${what}: tap any number — ${picks.length} chosen`
+            : offer.totalPower !== undefined
+              ? `${what}: tap creatures with total power ${offer.totalPower} — power ${power}/${offer.totalPower}`
+              : `${what}: tap ${offer.count} — ${picks.length}/${offer.count} chosen`}
         </span>
         <button
           type="button"
-          disabled={offer.totalPower !== undefined ? power < offer.totalPower : picks.length !== offer.count}
+          disabled={
+            offer.anyNumber === true
+              ? false
+              : offer.totalPower !== undefined
+                ? power < offer.totalPower
+                : picks.length !== offer.count
+          }
           onClick={() => {
             setPendingTap(null)
             game.dispatch({ ...action, tap: [...picks] } as Action)
@@ -6530,7 +6538,7 @@ function Table({
               verb: 'Tap',
               // Crew has no count: every token on offer could be tapped.
               count:
-                pendingTap.offer.totalPower !== undefined
+                pendingTap.offer.totalPower !== undefined || pendingTap.offer.anyNumber === true
                   ? allTapChoices(pendingTap.offer).length
                   : pendingTap.offer.count,
               of: pendingTap.offer.copies?.[stackMenu] ?? 1,

@@ -242,6 +242,9 @@ export interface TapCostOffer {
    * each choice's power now (one token's, for a stack). */
   readonly totalPower?: number;
   readonly power?: Readonly<Record<ObjectId, number>>;
+  /** "Tap any number of untapped creatures you control" (Burn at the Stake):
+   * instead of exactly `count` (then 0), any number of `choices`, none too. */
+  readonly anyNumber?: true;
   /** "That share a creature type" (Weight of Conscience): each choice's
    * subtypes, marker and all (`subtypes.ts`). The picks must have one creature
    * type in common; `choices` holds only those with enough others to do it. */
@@ -314,8 +317,11 @@ export function defaultTapPicks(offer: TapCostOffer, preferFirst: (id: ObjectId)
   const from = tapShareChoices(offer);
   const order = [...from.filter(preferFirst), ...from.filter((id) => !preferFirst(id))];
   const picked: ObjectId[] = [];
+  // "Any number" has no enough: a driver that doesn't choose taps them all.
   const enough = (): boolean =>
-    offer.totalPower !== undefined ? tapPicksPower(offer, picked) >= offer.totalPower : picked.length >= offer.count;
+    offer.anyNumber === true
+      ? false
+      : offer.totalPower !== undefined ? tapPicksPower(offer, picked) >= offer.totalPower : picked.length >= offer.count;
   for (const id of order) {
     for (let i = 0; i < (offer.copies?.[id] ?? 1) && !enough(); i += 1) {
       // Under crew, a creature with no power to give isn't worth tapping.

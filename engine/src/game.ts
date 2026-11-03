@@ -4535,7 +4535,7 @@ export class Game {
       const graveyardExileCost = def.additionalCost?.exileFromGraveyard;
       const discardX =
         xPlan === null && sacrificeX === undefined && def.additionalCost?.discard === "x"
-          ? this.state.zones.perPlayer[player].hand.filter((id) => id !== card).length
+          ? this.discardCandidates(player, def.additionalCost.discardFilter, card).length
           : xPlan === null && sacrificeX === undefined && graveyardExileCost?.count === "x"
             ? this.graveyardCostCandidates(player, graveyardExileCost.filter, card).length
             : undefined;
@@ -4700,9 +4700,12 @@ export class Game {
               return tapCost === null ? { altCost: true } : { altCost: true, tapCost };
             })()
           : (kicked === true && (def.kicker?.teamwork !== undefined || def.kicker?.also?.tapUntapped !== undefined)) ||
-              this.activeSplice?.also.some((also) => also.tapUntapped !== undefined) === true
+              this.activeSplice?.also.some((also) => also.tapUntapped !== undefined) === true ||
+              this.castAlsoCosts(card, def, false, false, costOption).some(
+                (also) => also.tapUntapped !== undefined || also.tapAnyNumber !== undefined,
+              )
             ? (() => {
-                const tapCost = this.altCostTapOffer(player, card, via, face ?? 0, kicked === true, true);
+                const tapCost = this.altCostTapOffer(player, card, via, face ?? 0, kicked === true, true, costOption);
                 return tapCost === null ? {} : { tapCost };
               })()
             : {}),
@@ -14781,6 +14784,11 @@ export class Game {
     const best = most > plan.maxX ? { maxX: most, convoke: [] } : plan;
     // "{X}{B}, exile X cards from your graveyard" (Skeletal Scrying): the one
     // X pays both, so no more than the cards there (rule 107.3a, 118.3).
+    // "Discard X land cards" (Scorched Earth) likewise.
+    if (def.additionalCost?.discard === "x") {
+      const cards = this.discardCandidates(player, def.additionalCost.discardFilter, cardId).length;
+      return { ...best, maxX: Math.min(best.maxX, cards) };
+    }
     const exileCost = def.additionalCost?.exileFromGraveyard;
     if (exileCost?.count !== "x") return best;
     return { ...best, maxX: Math.min(best.maxX, this.graveyardCostCandidates(player, exileCost.filter, cardId).length) };
@@ -15902,7 +15910,7 @@ export class Game {
     // A keyword's non-mana part (buyback's "Pay 4 life", "Sacrifice a land",
     // "Discard two cards"; squad's, each time over; a spliced card's): only
     // while it can all be paid.
-    const whyNotAlso = this.whyCannotPayAlso(player, cardId, def, this.castAlsoCosts(cardId, def, kicked ?? false, altCost), altCost);
+    const whyNotAlso = this.whyCannotPayAlso(player, cardId, def, this.castAlsoCosts(cardId, def, kicked ?? false, altCost, costOption), altCost);
     if (whyNotAlso !== null) return whyNotAlso;
     // "This spell costs 3 life more to cast for each target" (Phyrexian
     // Purge — rule 601.2f, the targets chosen first, 601.2c): life the
@@ -15993,7 +16001,7 @@ export class Game {
       if (discard !== undefined) {
         // The spell itself is still in hand while this is checked, and it
         // can't discard itself to pay its own cost (rule 601.2h).
-        const others = this.state.zones.perPlayer[player].hand.filter((id) => id !== cardId);
+        const others = this.discardCandidates(player, def.additionalCost.discardFilter, cardId);
         if (others.length < (discard === "x" ? Math.max(0, Math.floor(xValue)) : discard)) {
           return `${player} has too few cards in hand to cast ${def.name}`;
         }
@@ -16096,7 +16104,7 @@ export class Game {
     }
     const cost = convoked.length > 0 ? this.reduceCostByConvoke(delved, convoked) : delved;
     const purpose: ManaPurpose = { kind: "cast", card: cardId, face, ...bestowPurpose(def, overload), ...castPaying(via, costString) };
-    const alternativeTaps = this.spellTapCost(cardId, def, via, player, altCost, kicked);
+    const alternativeTaps = this.spellTapCost(cardId, def, via, player, altCost, kicked, costOption);
     if (alternativeTaps !== undefined) {
       // The tap half is checked against the same mana — see `tapCostOffer`.
       const offer = this.tapCostOffer(
@@ -16121,7 +16129,7 @@ export class Game {
     // A creature tapped to convoke is no longer untapped to tap for mana. A
     // sacrifice of several needs what it takes still there once the mana is
     // paid — what could pay it is tried last (`costSacrificeRemaining`).
-    const sacrificeParts = this.spellSacrificeParts(cardId, def, via, graveyardGrant, xValue, kicked, altCost);
+    const sacrificeParts = this.spellSacrificeParts(cardId, def, via, graveyardGrant, xValue, kicked, altCost, costOption);
     const sacrificeCandidates =
       sacrificeParts === null ? undefined : this.costSacrificeCandidates(player, sacrificeParts, undefined);
     // So is an artifact or creature tapped to waterbend (rule 701.67a), and
@@ -17699,7 +17707,7 @@ export class Game {
         : via === "effect" && this.castNowOffer(player, cardId)?.madness !== undefined
           ? "madness"
           : undefined;
-    const alternativeTaps = this.spellTapCost(cardId, def, via, player, altCost, kicked);
+    const alternativeTaps = this.spellTapCost(cardId, def, via, player, altCost, kicked, costOption);
     // "Pay life equal to its mana value" (Demon of Fate's Design, Inside
     // Information): the face cast, X 0 (rule 107.3b), paid with the rest below.
     const alternativeLife = alternativeCost?.payLifeManaValue === true ? this.castNowEnergyOf(cardId, face) : 0;
@@ -17740,7 +17748,7 @@ export class Game {
     // "Sacrifice X creatures", "Flashback—Sacrifice three creatures": chosen
     // once the spell is on the stack, below.
     // A bargain's artifact, enchantment or token too (rule 702.166a).
-    const severalSacrificed = this.spellSacrificeParts(cardId, def, via, graveyardGrant, chosenX, kicked, altCost);
+    const severalSacrificed = this.spellSacrificeParts(cardId, def, via, graveyardGrant, chosenX, kicked, altCost, costOption);
 
     if (def.castModal !== null && modes === undefined) {
       throw new Error(`${def.name} is a modal spell — choose modes to cast it`);
@@ -17987,7 +17995,8 @@ export class Game {
       object.modifiers.push(this.prototypeModifier(cardId, face));
       invalidateComputedCache();
     }
-    object.xValue = hasX ? chosenX : null;
+    // "The number of creatures tapped this way" (Burn at the Stake) is its X.
+    object.xValue = alternativeTaps?.anyNumber === true ? tapPicked.length : hasX ? chosenX : null;
     // Cascade's or suspend's own free cast, offered as a `cast-now`: cast that
     // way (rules 702.85a, 702.62a), and suspend's creature spell gains haste
     // until its controller loses control of it or the permanent it becomes.
@@ -18277,7 +18286,7 @@ export class Game {
     // A keyword's non-mana part (buyback's "Pay 3 life, Discard a card at
     // random", squad's, a spliced card's): its sacrifice is among the parts
     // above, the rest asked in turn before anyone gets priority.
-    this.queueAlsoCosts(player, cardId, this.castAlsoCosts(cardId, def, kicked, altCost), via === "effect" ? this.activePlayer : player);
+    this.queueAlsoCosts(player, cardId, this.castAlsoCosts(cardId, def, kicked, altCost, costOption), via === "effect" ? this.activePlayer : player);
     // Jump-start's "by discarding a card" (rule 702.133a), paid the same way.
     const flashbackDiscard = via === "flashback" ? this.flashbackOf(cardId, graveyardGrant)?.discard : undefined;
     if (flashbackDiscard !== undefined) {
@@ -18317,7 +18326,12 @@ export class Game {
       // `withDecisionSource` sets, and only around a *resolution*. Without
       // this wrap the prompt named whatever resolved last.
       this.payCostDiscard(cardId, cardId, () => {
-        this.discardByEffect({ kind: "player", player }, costDiscard, def.additionalCost?.discardAtRandom === true);
+        this.discardByEffect(
+          { kind: "player", player },
+          costDiscard,
+          def.additionalCost?.discardAtRandom === true,
+          def.additionalCost?.discardFilter,
+        );
       });
       this.costDiscardPriorityTo(via === "effect" ? this.activePlayer : player);
     }
@@ -19105,6 +19119,7 @@ export class Game {
     x: number,
     kicked: boolean | number = false,
     altCost = false,
+    costOption?: number,
   ): SacrificeCostPart[] | null {
     const parts: SacrificeCostPart[] = [];
     // "You may sacrifice a Mountain rather than pay this spell's mana cost"
@@ -19121,7 +19136,7 @@ export class Game {
     if (kicked !== false && kicked !== 0 && def.kicker?.keyword === "bargain") {
       parts.push({ filter: BARGAIN_FILTER, count: 1 });
     }
-    for (const also of this.castAlsoCosts(cardId, def, kicked, altCost)) {
+    for (const also of this.castAlsoCosts(cardId, def, kicked, altCost, costOption)) {
       if (also.sacrifice !== undefined) parts.push({ filter: also.sacrifice.filter, count: also.sacrifice.count });
     }
     if (via === "flashback") {
@@ -35470,38 +35485,48 @@ export class Game {
     player: PlayerId,
     altCost: boolean,
     kicked: boolean | number,
-  ): { readonly count: number; readonly totalPower?: number; readonly filter: CardFilter } | undefined {
-    const altTap = altCost ? this.alternativeCostOf(cardId, def, via, player)?.tapCreatures : undefined;
-    if (altTap !== undefined) return altTap;
+    costOption?: number,
+  ):
+    | { readonly count: number; readonly totalPower?: number; readonly anyNumber?: true; readonly filter: CardFilter }
+    | undefined {
+    if (altCost) {
+      const taps = this.alternativeCostOf(cardId, def, via, player)?.tapCreatures;
+      if (taps !== undefined) return taps;
+    }
     if (kicked && def.kicker?.teamwork !== undefined) {
       return { count: 0, totalPower: def.kicker.teamwork, filter: { type: "creature" } };
     }
-    // "Kicker—Tap an untapped Vampire you control" (Blood Tribute), and
+    // "Kicker—Tap an untapped Vampire you control" (Blood Tribute),
     // "Splice onto Arcane—Tap an untapped white creature you control"
-    // (Hundred-Talon Strike), two copies of it two of them: one offer, so one
-    // filter (`whyCannotCastSpell` refuses two).
-    const parts = this.castAlsoCosts(cardId, def, kicked, altCost).flatMap((also) => also.tapUntapped ?? []);
+    // (Hundred-Talon Strike), two copies of it two of them, and an additional
+    // cost's: one offer, so one filter (`whyCannotCastSpell` refuses two).
+    const costs = this.castAlsoCosts(cardId, def, kicked, altCost, costOption);
+    const any = costs.find((also) => also.tapAnyNumber !== undefined)?.tapAnyNumber;
+    if (any !== undefined) return { count: 0, anyNumber: true, filter: any.filter };
+    const parts = costs.flatMap((also) => also.tapUntapped ?? []);
     if (parts.length === 0) return undefined;
     return { filter: parts[0].filter, count: parts.reduce((n, part) => n + part.count, 0) };
   }
 
   /** The non-mana costs this cast's kicker or squad, `kicked` times over, the
-   * cards spliced onto it, and its own alternative cost's `also` add. */
+   * cards spliced onto it, its own alternative cost's `also`, and its additional
+   * cost (the chosen branch's too) add. */
   private castAlsoCosts(
     cardId: ObjectId,
     def: CardDefinition,
     kicked: boolean | number,
     altCost: boolean,
+    costOption?: number,
   ): readonly KickerAlsoCost[] {
     const kickerAlso = kicked !== false && kicked !== 0 ? def.kicker?.also : undefined;
     const spliced = this.activeSplice?.card === cardId ? this.activeSplice.also : [];
     const altAlso = altCost ? this.ownAltCost(def)?.also : undefined;
+    const own = def.additionalCost?.also;
+    const branch = costOption === undefined ? undefined : def.additionalCost?.options?.[costOption]?.also;
+    const additional = [...(own !== undefined ? [own] : []), ...(branch !== undefined ? [branch] : []), ...(altAlso !== undefined ? [altAlso] : [])];
+    if (kickerAlso === undefined) return additional.length === 0 ? spliced : [...additional, ...spliced];
     const times = def.kicker?.multi === true && typeof kicked === "number" ? kicked : 1;
-    return [
-      ...(kickerAlso !== undefined ? [alsoTimes(kickerAlso, times)] : []),
-      ...(altAlso !== undefined ? [altAlso] : []),
-      ...spliced,
-    ];
+    return [...additional, alsoTimes(kickerAlso, times), ...spliced];
   }
 
   /** Why `costs` (see {@link castAlsoCosts}) can't all be paid, or null: the
@@ -35636,6 +35661,7 @@ export class Game {
   /** Whether everything `offer` offers could pay it: `count` permanents, or
    * — crew — enough power, every token of a stack tapped. */
   private tapOfferPayable(offer: TapCostOffer): boolean {
+    if (offer.anyNumber === true) return true;
     if (offer.totalPower === undefined) return this.tapCapacity(offer.choices) >= offer.count;
     let power = 0;
     for (const id of offer.choices) power += Math.max(0, offer.power?.[id] ?? 0) * (offer.copies?.[id] ?? 1);
@@ -35655,6 +35681,7 @@ export class Game {
     spec: {
       readonly count: number;
       readonly totalPower?: number;
+      readonly anyNumber?: true;
       readonly filter: CardFilter;
       readonly includeSelf?: boolean;
       readonly shareCreatureType?: true;
@@ -35707,6 +35734,7 @@ export class Game {
       choices,
       ...(Object.keys(copies).length > 0 ? { copies } : {}),
       ...(spec.totalPower !== undefined ? { totalPower: spec.totalPower, power } : {}),
+      ...(spec.anyNumber === true ? { anyNumber: true as const } : {}),
       ...(creatureTypes !== undefined ? { creatureTypes } : {}),
     };
   }
@@ -35771,12 +35799,13 @@ export class Game {
     via: CastVia | undefined,
     face: number,
     teamwork = false,
-    /** Not an alternative cost's tap: a kicker's, as `teamwork` says, or a
-     * spliced card's. */
+    /** Not an alternative cost's tap: a kicker's, as `teamwork` says, a
+     * spliced card's, or an additional cost's. */
     notAlternative = teamwork,
+    costOption?: number,
   ): TapCostOffer | null {
     const def = this.faceDef(cardId, face);
-    const taps = this.spellTapCost(cardId, def, via, player, !notAlternative, teamwork);
+    const taps = this.spellTapCost(cardId, def, via, player, !notAlternative, teamwork, costOption);
     if (taps === undefined) return null;
     const cost = this.withFace(cardId, face, () =>
       this.castingCostOf(
@@ -35784,7 +35813,7 @@ export class Game {
         cardId,
         def,
         0,
-        this.castCostString(cardId, via, face, teamwork, false, false, !notAlternative, undefined, player),
+        this.castCostString(cardId, via, face, teamwork, false, false, !notAlternative, costOption, player),
       ),
     );
     return this.tapCostOffer(
@@ -35805,7 +35834,7 @@ export class Game {
     offer: TapCostOffer,
     tap: readonly ObjectId[],
   ): string | null {
-    if (offer.totalPower === undefined && tap.length !== offer.count) {
+    if (offer.anyNumber !== true && offer.totalPower === undefined && tap.length !== offer.count) {
       return `${what} taps ${offer.count} permanent(s), not ${tap.length}`;
     }
     if (offer.totalPower !== undefined && tapPicksPower(offer, tap) < offer.totalPower) {

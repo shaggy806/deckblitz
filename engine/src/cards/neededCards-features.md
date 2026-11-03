@@ -4311,3 +4311,9 @@ Bitter Ordeal.
 and it replaced `at: { dealsCombatDamage }`. `until: "game"` and `once` for a delayed "when" with no duration. Plague Reaver's return is
 `turnOf`, and "until your next turn, whenever" was built already. Keys: effect:delayed-trigger-rest-of-game, effect:delayed-trigger-target-deals-damage,
 effect:delayed-trigger-target-player-next-upkeep, effect:delayed-trigger-until-your-next-turn. Proving cards: Paladin of Prahv, Arcbond, Tamiyo, Field Researcher, Coffin Queen, Plague Reaver.
+
+**A spell's additional cost in a keyword cost's shape (2026-11-02).** `additionalCost.also` and an option's `also`: one `KickerAlsoCost`, read by `castAlsoCosts`, so
+a spell's additional cost pays whatever a kicker's can, and `tapUntapped` and `returnToHand` needed no code of their own (`additional-cost-also.test.ts`). New: `tapAnyNumber`
+(`TapCostOffer.anyNumber`, X the count, the client's tap prompt too) and `additionalCost.discardFilter`. Keys: cost:additional-cost-tap-permanents,
+cost:additional-cost-discard-filter, and cost:discard-x-cost, built already (Firestorm, Channeled Force). Proving cards: Warlord's Elite, Shared Discovery, Gaze of Justice,
+Burn at the Stake, Disruption Protocol, Deprive, Magmatic Insight, Scorched Earth.

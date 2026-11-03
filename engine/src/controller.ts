@@ -1470,9 +1470,11 @@ function randomTapPicks(offer: TapCostOffer, pickIndex: (n: number) => number): 
     for (let i = 0; i < (offer.copies?.[id] ?? 1); i += 1) pool.push(id);
   }
   const picked: ObjectId[] = [];
+  // "Any number": how many at random, drawn only for such an offer.
+  const count = offer.anyNumber === true ? pickIndex(pool.length + 1) : offer.count;
   // Crew: random creatures until their power is enough.
   const more = (): boolean =>
-    offer.totalPower !== undefined ? tapPicksPower(offer, picked) < offer.totalPower : picked.length < offer.count;
+    offer.totalPower !== undefined ? tapPicksPower(offer, picked) < offer.totalPower : picked.length < count;
   while (more() && pool.length > 0) {
     picked.push(pool.splice(pickIndex(pool.length), 1)[0]);
   }

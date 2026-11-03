@@ -10823,6 +10823,26 @@ describe("any number of … with different names or powers", () => {
     });
   });
 
+  it("reads an additional cost in a keyword cost's shape", () => {
+    const cost = (line: string) =>
+      (face("Card", "Sorcery", `As an additional cost to cast this spell, ${line}\nDraw a card.`) as { additionalCost?: unknown })
+        .additionalCost;
+    expect(cost("tap two untapped creatures and/or lands you control.")).toMatchObject({
+      also: { tapUntapped: { count: 2, filter: { typesAnyOf: ["creature", "land"] } } },
+    });
+    expect(cost("tap any number of untapped creatures you control.")).toMatchObject({
+      also: { tapAnyNumber: { filter: { type: "creature" } } },
+    });
+    expect(cost("return a land you control to its owner's hand.")).toMatchObject({
+      also: { returnToHand: { count: 1, filter: { type: "land" } } },
+    });
+    expect(cost("tap an untapped artifact you control or pay {1}.")).toMatchObject({
+      options: [{ also: { tapUntapped: { count: 1 } } }, { mana: "{1}" }],
+    });
+    expect(cost("discard a land card.")).toMatchObject({ discard: 1, discardFilter: { type: "land" } });
+    expect(cost("discard X land cards.")).toMatchObject({ discard: "x", discardFilter: { type: "land" } });
+  });
+
   it("reads a delayed trigger watching the ability's target", () => {
     const targets: unknown[] = [];
     const ctx = { spell: true, targets, target: (spec: unknown) => targets.push(spec) - 1 };

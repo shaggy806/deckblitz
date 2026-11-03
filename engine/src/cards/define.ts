@@ -222,6 +222,11 @@ export interface KickerAlsoCost {
    * as teamwork's creatures are. A creature with summoning sickness may be
    * tapped (rule 302.6 restricts only its own {T} abilities). */
   readonly tapUntapped?: { readonly filter: CardFilter; readonly count: number };
+  /** "Tap **any number of** untapped creatures you control" (Burn at the
+   * Stake): as `tapUntapped`, any number of them, none too. X is how many, as
+   * `ctx.x` reads it ("three times the number of creatures tapped this way"),
+   * without an `{X}` in its mana cost, so its mana value doesn't count it. */
+  readonly tapAnyNumber?: { readonly filter: CardFilter };
   /** "Squad—Exile four cards from your graveyard" (Ruthless Radrat), "Splice
    * onto Arcane—Exile four cards from your graveyard" (Horobi's Whisper):
    * `count` cards matching `filter` from the caster's graveyard, never the
@@ -253,6 +258,9 @@ export interface AdditionalCostOption {
    * one is chosen as the cost is paid, once the spell is on the stack, with
    * the `choose-from-zone` decision (601.2h) — see {@link BeholdSpec}. */
   readonly behold?: BeholdSpec;
+  /** "**Tap an untapped artifact you control** or pay {1}" (Disruption
+   * Protocol): any other part of a cost this way, as `additionalCost.also`. */
+  readonly also?: KickerAlsoCost;
 }
 
 export type Keyword =
@@ -4027,6 +4035,10 @@ export interface CardDefinition {
      * Burst: "As an additional cost to cast this spell, discard a card at
      * random") — nothing to ask, so it happens as the cost is paid. */
     readonly discardAtRandom?: boolean;
+    /** `discard`'s cards must match this: "discard a land card" (Magmatic
+     * Insight), "discard X land cards" (Scorched Earth), X capped by the
+     * matching cards. */
+    readonly discardFilter?: CardFilter;
     readonly payLife?: number;
     readonly payLifeX?: boolean;
     /**
@@ -4105,6 +4117,17 @@ export interface CardDefinition {
      * `AbilityCost.putFromExile`. Exactly `count`, never more (its ruling).
      */
     readonly putFromExile?: number;
+    /**
+     * Any other part of a cost, in the one shape every keyword's non-mana cost
+     * has ({@link KickerAlsoCost}), paid the way a kicker's is: "tap two
+     * untapped creatures and/or lands you control" (Fear of Exposure,
+     * `tapUntapped`, chosen on the `cast-spell` action's `tap` from the
+     * variant's `tapCost`), "tap any number of untapped creatures" (Burn at
+     * the Stake, `tapAnyNumber`), "return a land you control to its owner's
+     * hand" (Deprive, `returnToHand`). Additional costs are paid however the
+     * spell's cast, an alternative cost or flashback included (rule 118.9d).
+     */
+    readonly also?: KickerAlsoCost;
     /**
      * A **choice** between whole costs, of which the caster pays exactly one
      * (Bitter Triumph: "discard a card **or** pay 3 life").
@@ -5541,6 +5564,7 @@ interface CardDraft {
     readonly sacrificeReduces?: number;
     readonly discard?: number | "x";
     readonly discardAtRandom?: boolean;
+    readonly discardFilter?: CardFilter;
     readonly payLife?: number;
     readonly payLifeX?: boolean;
     readonly payLifePerTarget?: number;
@@ -5553,6 +5577,7 @@ interface CardDraft {
       readonly linked?: true;
     };
     readonly putFromExile?: number;
+    readonly also?: KickerAlsoCost;
     readonly options?: readonly AdditionalCostOption[];
   };
   splice?: { readonly onto: "arcane" | "instant-or-sorcery"; readonly cost: string; readonly also?: KickerAlsoCost };

@@ -6539,3 +6539,25 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 - **Do:** Cast Giant Growth on Feather, then pick one Grizzly Bears and Confirm.
 - **Expect:** The banner says "Choose any number to copy Giant Growth for, paying {2} for each". Your lands tap for the one you picked, and those Bears and Feather each get +3/+3, the other Bears nothing.
+
+## A spell's additional cost, tapping or returning (2026-11-02)
+
+### Warlord's Elite: tapping two permanents as it's cast
+
+- **Do:** Cast Warlord's Elite. Pick Grizzly Bears and the Ornithopter, and Confirm.
+- **Expect:** The banner reads "Warlord's Elite: tap 2 — 0/2 chosen", then 2/2. Both are tapped, the mana is paid with your lands, and Warlord's Elite enters.
+
+### Burn at the Stake: any number tapped, three damage for each
+
+- **Do:** Cast Burn at the Stake at Bob. Pick two of your three creatures and Confirm.
+- **Expect:** The banner reads "Burn at the Stake: tap any number — 0 chosen", and Confirm works at any count. Those two tap, the third stays untapped, and Bob loses 6 life.
+
+### Burn at the Stake: tapping any number in a 4-player game
+
+- **Do:** In this 4-player game, cast Burn at the Stake at Carol. Pick all three creatures and Confirm.
+- **Expect:** The prompt fits the banner, the three tap, and Carol loses 9 life. Nobody else does.
+
+### Disruption Protocol: tap an artifact, or pay {1}
+
+- **Do:** As Bob, cast Lightning Bolt at Alice. As Alice, cast Disruption Protocol on it, and choose "Tap an untapped artifact you control".
+- **Expect:** Two ways to cast it are offered. This one pays {U}{U}, taps Ornithopter, and Lightning Bolt is countered.

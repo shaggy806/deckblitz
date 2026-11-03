@@ -9775,6 +9775,35 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
 
+  // --- A spell's additional cost (2026-11-02) --------------------------------
+  preset(
+    "Warlord's Elite: tapping two permanents as it's cast",
+    board({
+      you: { bf: ['Plains*3', 'Grizzly Bears', 'Hill Giant', 'Ornithopter'], hand: ["Warlord's Elite"] },
+    }),
+  ),
+  preset(
+    'Burn at the Stake: any number tapped, three damage for each',
+    board({
+      you: { bf: ['Mountain*5', 'Grizzly Bears', 'Hill Giant', 'Llanowar Elves'], hand: ['Burn at the Stake'] },
+    }),
+  ),
+  preset(
+    'Burn at the Stake: tapping any number in a 4-player game',
+    board({
+      you: { bf: ['Mountain*5', 'Grizzly Bears', 'Hill Giant', 'Llanowar Elves'], hand: ['Burn at the Stake'] },
+      opp: [{}, {}, {}],
+    }),
+  ),
+  preset(
+    'Disruption Protocol: tap an artifact, or pay {1}',
+    board({
+      you: { bf: ['Island*3', 'Ornithopter'], hand: ['Disruption Protocol'] },
+      opp: { human: true, bf: ['Mountain'], hand: ['Lightning Bolt'] },
+      turn: 0,
+    }),
+  ),
+
   // --- Countering abilities (2026-11-02) ------------------------------------
   preset(
     "Tishana's Tidebinder: the countered ability's source loses its abilities while it stays",
