@@ -6640,11 +6640,20 @@ Delete an entry in the same commit as the feature that retires it.
     to cast nonartifact spells" (Karn, Legacy Reforged; a Powerstone) is `{
     notSpell: { notTypes: ["artifact"] } }` — it pays for anything but
     casting a matching spell, an ability, a ward cost and a cost paid as
-    something resolves included (Karn's ruling). `fromYourGraveyard: true`,
-    set alone, is Lord of the Forsaken's "Spend this mana only to cast a
-    spell from your graveyard": any spell, cast from the spender's own
-    graveyard (flashback, escape, a permission) — the spell's `castFrom` is
-    known as its costs are paid.
+    something resolves included (Karn's ruling); `notCastFrom: ["hand"]` is the
+    same for a zone (Heartwood Crafter's "can't be spent to cast spells from your
+    hand"). `castFrom: { zones?, notZones?, yours?, withFlashback? }`, alone or
+    beside `spell`, is where the spell's cast from: Lord of the Forsaken's "a
+    spell from your graveyard" (`zones: ["graveyard"], yours: true`),
+    Interdimensional Web Watch's "spells from exile", Mm'menon's "from anywhere
+    other than your hand" (`notZones`), Altar of the Lost's "spells with
+    flashback from a graveyard". `purposes: ["kicked-spell"]` is "to cast kicked
+    spells" (Elfhame Druid, Volshe Tideturner). A `spell` filter's `hasAbilities`
+    reads the spell as it's cast, what a static grants it included (Jasmine Boreal
+    of the Seven). On the spell's own card, `spendOnlyManaFrom: <ManaFromSpec>` is
+    "Spend only mana produced by creatures to cast this spell" (Myr Superion;
+    Imperiosaur's basic lands). `chooseCreatureTypeMenu` limits
+    `chooseCreatureTypeOnEnter` to a list (Eclipsed Realms).
   - `spellGains: { spell?, keywords }` — "If that mana is spent on a Dragon
     creature spell, it gains haste until end of turn" (Carnelian Orb of
     Dragonkind — rule 106.6): not a trigger, so nothing can respond and the

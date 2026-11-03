@@ -353,6 +353,7 @@ import _poolIncrementalBlight from "../pool/incremental-blight.js";
 import _poolInfernalPhantom from "../pool/infernal-phantom.js";
 import _poolInfuse from "../pool/infuse.js";
 import _poolInspiredTethermage from "../pool/inspired-tethermage.js";
+import _poolInterdimensionalWebWatch from "../pool/interdimensional-web-watch.js";
 import _poolInterpretTheSigns from "../pool/interpret-the-signs.js";
 import _poolInvadingManticore from "../pool/invading-manticore.js";
 import _poolIronLeagueSteed from "../pool/iron-league-steed.js";
@@ -1231,6 +1232,7 @@ const shard: CardShard = {
     _poolInfernalPhantom,
     _poolInfuse,
     _poolInspiredTethermage,
+    _poolInterdimensionalWebWatch,
     _poolInterpretTheSigns,
     _poolInvadingManticore,
     _poolIronLeagueSteed,

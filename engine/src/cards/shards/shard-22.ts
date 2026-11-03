@@ -7,6 +7,7 @@ import _poolAcademyRuins from "../pool/academy-ruins.js";
 import _poolAcolyteOfAffliction from "../pool/acolyte-of-affliction.js";
 import _poolAetherTunnel from "../pool/aether-tunnel.js";
 import _poolAetherspouts from "../pool/aetherspouts.js";
+import _poolAgathasSoulCauldron from "../pool/agathas-soul-cauldron.js";
 import _poolAjaniFellsTheGodsire from "../pool/ajani-fells-the-godsire.js";
 import _poolAjaniInspiringLeader from "../pool/ajani-inspiring-leader.js";
 import _poolAkoumWarrior from "../pool/akoum-warrior.js";
@@ -342,6 +343,7 @@ import _poolHydraOmnivore from "../pool/hydra-omnivore.js";
 import _poolHydraulicHelper from "../pool/hydraulic-helper.js";
 import _poolHypnoticCloud from "../pool/hypnotic-cloud.js";
 import _poolIconOfAncestry from "../pool/icon-of-ancestry.js";
+import _poolIdrisSoulOfTheTardis from "../pool/idris-soul-of-the-tardis.js";
 import _poolIgnorantBliss from "../pool/ignorant-bliss.js";
 import _poolIllnessInTheRanks from "../pool/illness-in-the-ranks.js";
 import _poolIllvoiLightJammer from "../pool/illvoi-light-jammer.js";
@@ -921,6 +923,7 @@ const shard: CardShard = {
     _poolAcolyteOfAffliction,
     _poolAetherTunnel,
     _poolAetherspouts,
+    _poolAgathasSoulCauldron,
     _poolAjaniFellsTheGodsire,
     _poolAjaniInspiringLeader,
     _poolAkoumWarrior,
@@ -1256,6 +1259,7 @@ const shard: CardShard = {
     _poolHydraulicHelper,
     _poolHypnoticCloud,
     _poolIconOfAncestry,
+    _poolIdrisSoulOfTheTardis,
     _poolIgnorantBliss,
     _poolIllnessInTheRanks,
     _poolIllvoiLightJammer,

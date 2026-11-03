@@ -27,7 +27,7 @@ import type {
 import type { AggregateOf, AggregateSpec, CardFilter, NumCompare } from "../filter.js";
 import type { CardNameChoice } from "../card-names.js";
 import type { CompanionCondition } from "../companion.js";
-import type { Color, ManaType, SpendAs } from "../mana.js";
+import type { Color, ManaFromSpec, ManaType, SpendAs } from "../mana.js";
 import type { ReplacementSpec } from "../replacements.js";
 import type { DelayedTriggerTiming, HeldPlayerCounter, PlayerCounterKind, TurnHistoryKind, ZoneType } from "../state.js";
 import type { TargetSpec } from "../target.js";
@@ -4891,6 +4891,15 @@ export interface CardDefinition {
    * P14). The permanent's `chosenCreatureType` is set once its controller
    * answers; a `costModification.matchesChosenCreatureType` reads it back. */
   readonly chooseCreatureTypeOnEnter: boolean;
+  /** With `chooseCreatureTypeOnEnter`: only these types are offered, "As this
+   * land enters, choose Elemental, Elf, Faerie, Giant, Goblin, Kithkin, Merfolk,
+   * or Treefolk" (Eclipsed Realms). `null` for every creature type. */
+  readonly chooseCreatureTypeMenu: readonly string[] | null;
+  /** "Spend only mana produced by creatures to cast this spell" (Myr Superion),
+   * "… by basic lands" (Imperiosaur): every unit that pays for casting this,
+   * floating mana too, was made by a source matching this as it made it
+   * (`ManaOrigin`). `null` for no such limit. */
+  readonly spendOnlyManaFrom: ManaFromSpec | null;
   /**
    * "As this enters, choose a card name" (rule 201.4, asked as it's about to
    * enter — 614.12): Pithing Needle, Meddling Mage, Runed Halo. The answer is
@@ -5587,6 +5596,8 @@ const PRINTED_ABILITY: {
   amplify: (def) => def.amplify !== null,
   tribute: (def) => def.tribute !== null,
   chooseCreatureTypeOnEnter: (def) => def.chooseCreatureTypeOnEnter,
+  chooseCreatureTypeMenu: (def) => def.chooseCreatureTypeMenu !== null,
+  spendOnlyManaFrom: (def) => def.spendOnlyManaFrom !== null,
   chooseCardNameOnEnter: (def) => def.chooseCardNameOnEnter !== null,
   chooseOnEnter: (def) => def.chooseOnEnter !== null,
   chooseOnEnterLook: (def) => def.chooseOnEnterLook !== null,
@@ -5842,6 +5853,8 @@ interface CardDraft {
   amplify?: number;
   tribute?: number;
   chooseCreatureTypeOnEnter?: boolean;
+  chooseCreatureTypeMenu?: readonly string[];
+  spendOnlyManaFrom?: ManaFromSpec;
   chooseCardNameOnEnter?: CardNameOnEnter;
   chooseOnEnter?: readonly string[];
   chooseOnEnterLook?: "opponent-hand";
@@ -6110,6 +6123,8 @@ export function defineCard(draft: CardDraft): CardDefinition {
     amplify: draft.amplify ?? null,
     tribute: draft.tribute ?? null,
     chooseCreatureTypeOnEnter: draft.chooseCreatureTypeOnEnter ?? false,
+    chooseCreatureTypeMenu: draft.chooseCreatureTypeMenu ?? null,
+    spendOnlyManaFrom: draft.spendOnlyManaFrom ?? null,
     chooseCardNameOnEnter: draft.chooseCardNameOnEnter ?? null,
     chooseOnEnter: draft.chooseOnEnter ?? readAheadChoices(draft),
     chooseOnEnterLook: draft.chooseOnEnterLook ?? null,

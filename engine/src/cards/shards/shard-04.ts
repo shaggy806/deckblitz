@@ -824,6 +824,7 @@ import _poolVivify from "../pool/vivify.js";
 import _poolVoiceOfTheProvinces from "../pool/voice-of-the-provinces.js";
 import _poolVoiceOfVictory from "../pool/voice-of-victory.js";
 import _poolVoidmageApprentice from "../pool/voidmage-apprentice.js";
+import _poolVolsheTideturner from "../pool/volshe-tideturner.js";
 import _poolVoltaicServant from "../pool/voltaic-servant.js";
 import _poolWakeTheReflections from "../pool/wake-the-reflections.js";
 import _poolWalkerOfTheGrove from "../pool/walker-of-the-grove.js";
@@ -1709,6 +1710,7 @@ const shard: CardShard = {
     _poolVoiceOfTheProvinces,
     _poolVoiceOfVictory,
     _poolVoidmageApprentice,
+    _poolVolsheTideturner,
     _poolVoltaicServant,
     _poolWakeTheReflections,
     _poolWalkerOfTheGrove,

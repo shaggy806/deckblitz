@@ -99,6 +99,33 @@ export interface ManaOption {
    * "Put a -0/-1 counter on this creature") — `AbilityCost.addCounter`, put
    * on when the payment uses it. */
   readonly counterCost?: { readonly kind: string; readonly count: number };
+  /** Extra units this payment can't spend, so not counted among the option's
+   * mana: they're still made as the source is tapped, and float. See
+   * {@link optionKeepingExtras}. */
+  readonly floating?: readonly ManaExtraUnit[];
+}
+
+/** `o` with only the extra units `keep` admits counted toward a payment; the rest
+ * still made, and left floating ("spend only mana produced by creatures": the
+ * extra {G} an Aura's trigger adds as a creature taps isn't that). */
+export function optionKeepingExtras(o: ManaOption, keep: (extra: ManaExtraUnit) => boolean): ManaOption {
+  const extras = o.extras ?? [];
+  const floating = extras.filter((extra) => !keep(extra));
+  if (floating.length === 0) return o;
+  const kept = extras.filter(keep);
+  const typed = extras.filter((extra) => extra.type !== undefined).length;
+  const { extras: _extras, ...rest } = o;
+  return {
+    ...rest,
+    fixed: [
+      ...o.fixed.slice(0, o.fixed.length - typed),
+      ...kept.flatMap((extra) => (extra.type === undefined ? [] : [extra.type])),
+    ],
+    anyColor:
+      o.anyColor - (extras.length - typed) + kept.filter((extra) => extra.type === undefined).length,
+    ...(kept.length > 0 ? { extras: kept } : {}),
+    floating,
+  };
 }
 
 /** One unit of a {@link ManaOption.extras}: whose it is, and its type when
@@ -187,6 +214,8 @@ export interface ManaPlanStep {
   readonly extraFrom?: readonly ObjectId[];
   /** See {@link ManaOption.counterCost}. */
   readonly counterCost?: { readonly kind: string; readonly count: number };
+  /** See {@link ManaOption.floating}. */
+  readonly floating?: readonly ManaExtraUnit[];
 }
 
 /** A fully-worked-out way to pay a cost: which sources to tap ({@link
@@ -231,8 +260,11 @@ export type ManaPurpose =
        * the Aura spell it is, not the creature card. */
       readonly bestow?: true;
       /** Cast for its disturb cost: "spend this mana only to pay a disturb
-       * cost" (`ManaSpendPurpose`). */
-      readonly via?: "disturb";
+       * cost" (`ManaSpendPurpose`); or for flashback, what "spells with
+       * flashback" reads whichever way it has it (`ManaCastFrom`). */
+      readonly via?: "disturb" | "flashback";
+      /** With its kicker paid (rule 702.33d): "to cast kicked spells". */
+      readonly kicked?: true;
       /** The total cost being paid has `{X}` in it — an alternative cost's or
        * a kicker's counts, and a mana cost's doesn't when an alternative cost
        * replaced it (Rosheen Meanderer's ruling). */
@@ -869,6 +901,7 @@ function planSnowPayment(
       ...(o.rider !== undefined ? { rider: o.rider } : {}),
       ...(extras.length > 0 ? { extraFrom: extras.map((e) => e.from) } : {}),
       ...(o.counterCost !== undefined ? { counterCost: o.counterCost } : {}),
+      ...(o.floating !== undefined ? { floating: o.floating } : {}),
     };
   };
   // What a chosen activation leaves floating once its one unit pays a pip:
@@ -1114,6 +1147,7 @@ function planManaPaymentOrdered(
     readonly oncePerTurn?: number;
     readonly rider?: EffectSpec;
     readonly counterCost?: { readonly kind: string; readonly count: number };
+    readonly floating?: readonly ManaExtraUnit[];
   }
   // Colours this cost still wants, for `coverGenericFrom`'s preference.
   const wantedColors = new Set<ManaType>(
@@ -1184,6 +1218,7 @@ function planManaPaymentOrdered(
       ...(opt.oncePerTurn !== undefined ? { oncePerTurn: opt.oncePerTurn } : {}),
       ...(opt.rider !== undefined ? { rider: opt.rider } : {}),
       ...(opt.counterCost !== undefined ? { counterCost: opt.counterCost } : {}),
+      ...(opt.floating !== undefined ? { floating: opt.floating } : {}),
     };
     tapped.push(t);
     return t;
@@ -1586,6 +1621,7 @@ function planManaPaymentOrdered(
       ...(t.rider !== undefined ? { rider: t.rider } : {}),
       ...(extra.length > 0 ? { extraFrom: extra.map((u) => u.extra as ObjectId) } : {}),
       ...(t.counterCost !== undefined ? { counterCost: t.counterCost } : {}),
+      ...(t.floating !== undefined ? { floating: t.floating } : {}),
     };
   });
 }

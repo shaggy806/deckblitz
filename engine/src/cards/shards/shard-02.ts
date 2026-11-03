@@ -231,6 +231,7 @@ import _poolEarthblighter from "../pool/earthblighter.js";
 import _poolEbondeathDracolich from "../pool/ebondeath-dracolich.js";
 import _poolEccentricApprentice from "../pool/eccentric-apprentice.js";
 import _poolEchoingReturn from "../pool/echoing-return.js";
+import _poolEclipsedRealms from "../pool/eclipsed-realms.js";
 import _poolEddytrailHawk from "../pool/eddytrail-hawk.js";
 import _poolEidolonOfBlossoms from "../pool/eidolon-of-blossoms.js";
 import _poolElderCathar from "../pool/elder-cathar.js";
@@ -598,6 +599,7 @@ import _poolResistanceSquad from "../pool/resistance-squad.js";
 import _poolRestorationAngel from "../pool/restoration-angel.js";
 import _poolReverberate from "../pool/reverberate.js";
 import _poolRevolutionist from "../pool/revolutionist.js";
+import _poolRexCyberHound from "../pool/rex-cyber-hound.js";
 import _poolRighteousCause from "../pool/righteous-cause.js";
 import _poolRigoStreetwiseMentor from "../pool/rigo-streetwise-mentor.js";
 import _poolRionyaFireDancer from "../pool/rionya-fire-dancer.js";
@@ -1111,6 +1113,7 @@ const shard: CardShard = {
     _poolEbondeathDracolich,
     _poolEccentricApprentice,
     _poolEchoingReturn,
+    _poolEclipsedRealms,
     _poolEddytrailHawk,
     _poolEidolonOfBlossoms,
     _poolElderCathar,
@@ -1478,6 +1481,7 @@ const shard: CardShard = {
     _poolRestorationAngel,
     _poolReverberate,
     _poolRevolutionist,
+    _poolRexCyberHound,
     _poolRighteousCause,
     _poolRigoStreetwiseMentor,
     _poolRionyaFireDancer,

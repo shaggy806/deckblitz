@@ -322,6 +322,7 @@ import _poolHaunterOfNightveil from "../pool/haunter-of-nightveil.js";
 import _poolHavenOfTheSpiritDragon from "../pool/haven-of-the-spirit-dragon.js";
 import _poolHavengulVampire from "../pool/havengul-vampire.js";
 import _poolHawkeyesBow from "../pool/hawkeyes-bow.js";
+import _poolHazelsBrewmaster from "../pool/hazels-brewmaster.js";
 import _poolHealersFlock from "../pool/healers-flock.js";
 import _poolHealingTechnique from "../pool/healing-technique.js";
 import _poolHeartfire from "../pool/heartfire.js";
@@ -1179,6 +1180,7 @@ const shard: CardShard = {
     _poolHavenOfTheSpiritDragon,
     _poolHavengulVampire,
     _poolHawkeyesBow,
+    _poolHazelsBrewmaster,
     _poolHealersFlock,
     _poolHealingTechnique,
     _poolHeartfire,

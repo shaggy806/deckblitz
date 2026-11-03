@@ -6627,6 +6627,20 @@ function reflexiveClause(clause) {
  * `spendOnly`. A list, not a grammar: the printed lines are few and worded
  * every way. */
 const MANA_SPEND_PURPOSE_LINES = {
+  "Spend this mana only to cast a spell from your graveyard.": { castFrom: { zones: ["graveyard"], yours: true } },
+  "Spend this mana only to cast spells from exile.": { castFrom: { zones: ["exile"] } },
+  "Spend this mana only to cast spells with flashback from a graveyard.": {
+    castFrom: { zones: ["graveyard"], withFlashback: true },
+  },
+  "Spend this mana only to cast a spell from anywhere other than your hand.": { castFrom: { notZones: ["hand"] } },
+  "Spend this mana only to cast kicked spells.": { purposes: ["kicked-spell"] },
+  "Spend this mana only to cast an instant or sorcery spell or a kicked spell.": {
+    spell: { typesAnyOf: ["instant", "sorcery"] },
+    purposes: ["kicked-spell"],
+  },
+  "Spend this mana only to cast creature spells with no abilities.": {
+    spell: { type: "creature", hasAbilities: false },
+  },
   "Spend this mana only to turn permanents face up.": { purposes: ["turn-face-up"] },
   "Spend this mana only to cast an enchantment spell, unlock a door, or turn a permanent face up.": {
     spell: { type: "enchantment" },
@@ -6796,6 +6810,15 @@ export function parseEffect(text, outer) {
   }
   // "Add … . Spend this mana only to …" naming a `ManaSpendPurpose` (rule
   // 106.6): the mana ability with its restriction, whole.
+  const spendDeny = /^(Add .+?\.) (This mana can't be spent to cast spells from your hand\.)$/.exec(text);
+  if (spendDeny !== null) {
+    const slots = ctx.targets.length;
+    const add = parseSentence(spendDeny[1], ctx);
+    if (add?.kind === "add-mana") {
+      return { effect: { ...add, spendOnly: { notCastFrom: ["hand"], text: spendDeny[2] } }, todo: [], hints: [] };
+    }
+    ctx.targets.length = slots;
+  }
   const spendOnly = /^(Add .+?\.) (Spend this mana only .+\.)$/.exec(text);
   const spendClause = spendOnly === null ? undefined : MANA_SPEND_PURPOSE_LINES[spendOnly[2]];
   if (spendClause !== undefined) {
@@ -11007,6 +11030,25 @@ function parseFaceAsWritten(face, ctx = {}) {
     // Littjara's "~ is the chosen type in addition to its other types."
     if (line === "As ~ enters, choose a creature type.") {
       out.chooseCreatureTypeOnEnter = true;
+      continue;
+    }
+    // "As this land enters, choose Elemental, Elf, … or Treefolk": a menu of
+    // creature types, the chosen one read the same way (Eclipsed Realms).
+    {
+      const menu = /^As ~ enters, choose ((?:[A-Z][a-z]+, )+)or ([A-Z][a-z]+)\.$/.exec(line);
+      if (menu !== null) {
+        out.chooseCreatureTypeOnEnter = true;
+        out.chooseCreatureTypeMenu = [...menu[1].split(", ").filter(Boolean), menu[2]];
+        continue;
+      }
+    }
+    // "Spend only mana produced by creatures to cast this spell" (Myr Superion).
+    if (line === "Spend only mana produced by creatures to cast ~." || line === "Spend only mana produced by creatures to cast this spell.") {
+      out.spendOnlyManaFrom = { type: "creature" };
+      continue;
+    }
+    if (line === "Spend only mana produced by basic lands to cast ~." || line === "Spend only mana produced by basic lands to cast this spell.") {
+      out.spendOnlyManaFrom = { type: "land", supertype: "basic" };
       continue;
     }
     // "You may have ~ enter as a copy of …" (rule 707.9): what it may copy, in

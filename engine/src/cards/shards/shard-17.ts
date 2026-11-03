@@ -381,6 +381,7 @@ import _poolHypochondria from "../pool/hypochondria.js";
 import _poolIllTemperedLoner from "../pool/ill-tempered-loner.js";
 import _poolImodaneThePyrohammer from "../pool/imodane-the-pyrohammer.js";
 import _poolImodanesRecruiter from "../pool/imodanes-recruiter.js";
+import _poolImperiosaur from "../pool/imperiosaur.js";
 import _poolImpsMischief from "../pool/imps-mischief.js";
 import _poolIncendiarySabotage from "../pool/incendiary-sabotage.js";
 import _poolIncinerate from "../pool/incinerate.js";
@@ -421,6 +422,7 @@ import _poolKickoffCelebrations from "../pool/kickoff-celebrations.js";
 import _poolKilnFiend from "../pool/kiln-fiend.js";
 import _poolKishlaSkimmer from "../pool/kishla-skimmer.js";
 import _poolKitsuneDiviner from "../pool/kitsune-diviner.js";
+import _poolKohTheFaceStealer from "../pool/koh-the-face-stealer.js";
 import _poolKorOutfitter from "../pool/kor-outfitter.js";
 import _poolKrarkClanEngineers from "../pool/krark-clan-engineers.js";
 import _poolKrarkClanGrunt from "../pool/krark-clan-grunt.js";
@@ -1284,6 +1286,7 @@ const shard: CardShard = {
     _poolIllTemperedLoner,
     _poolImodaneThePyrohammer,
     _poolImodanesRecruiter,
+    _poolImperiosaur,
     _poolImpsMischief,
     _poolIncendiarySabotage,
     _poolIncinerate,
@@ -1324,6 +1327,7 @@ const shard: CardShard = {
     _poolKilnFiend,
     _poolKishlaSkimmer,
     _poolKitsuneDiviner,
+    _poolKohTheFaceStealer,
     _poolKorOutfitter,
     _poolKrarkClanEngineers,
     _poolKrarkClanGrunt,

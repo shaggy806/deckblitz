@@ -1257,6 +1257,22 @@ condition counting its own permanent (Backstreet Bruiser), the per-player
 greatest discard (Scythe Specter, Cait), the
 power of creatures that died together or this turn.
 
+### Mana restrictions read at the cast — built 2026-11-03
+
+`cost:mana-restriction-at-cast`. `ManaRestriction.castFrom` (zones, not zones,
+yours, with flashback) replacing `fromYourGraveyard`, and the deny-list
+`notCastFrom`; `ManaPurpose.kicked` with the `"kicked-spell"` spend purpose;
+`spell`'s `hasAbilities` read of the spell as it's cast (rule 601.2a, a
+`grantsToSpells` cascade included); `CardDefinition.spendOnlyManaFrom`, with
+`ManaOption.floating` for the extra units it can't spend; and
+`chooseCreatureTypeMenu`. Keys: mana-restriction-at-cast,
+mana-restriction-cast-from-graveyard, mana-restriction-not-from-hand,
+spend-only-cast-from-exile, spend-only-kicked-spell, spend-only-creature-mana,
+spend-only-mana-from-basic-lands, chosen-type-menu-spend-restriction. Proving
+cards: Interdimensional Web Watch, Altar of the Lost, Mm'menon, the Right Hand,
+Heartwood Crafter, Elfhame Druid, Volshe Tideturner, Jasmine Boreal of the Seven,
+Myr Superion, Imperiosaur, Eclipsed Realms.
+
 ### "Has all activated and triggered abilities of the exiled card" — built 2026-11-03
 
 The rest of `static:gain-abilities-from-graveyard`. `grantsActivatedOf`'s new

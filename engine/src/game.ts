@@ -322,6 +322,7 @@ import {
   cheapestManaAmount,
   coloredReductionOf,
   manaCostReductions,
+  manaOriginMatches,
   manaValue,
   parseManaCost,
   repeatedManaCost,
@@ -333,6 +334,7 @@ import type {
   ManaCostReduction,
   ColoredReduction,
   ManaCost,
+  ManaFromSpec,
   ManaOrigin,
   ManaRestriction,
   ManaSpendPurpose,
@@ -345,6 +347,7 @@ import type {
 } from "./mana.js";
 import {
   isSnowMana,
+  optionKeepingExtras,
   manaCombinations,
   multipliedManaOption,
   planPayment,
@@ -905,7 +908,7 @@ interface GrantSource {
   readonly staticIndex: number;
   readonly abilities: readonly ActivatedAbility[];
   /** Where each of `abilities` comes from, when not the static's own list —
-   * a linked exiled card's (`grantsActivatedOfLinkedExile`). */
+   * a card a `grantsActivatedOf` static reads. */
   readonly refs?: readonly GrantedAbilityRef[];
 }
 
@@ -1243,7 +1246,9 @@ function manaPurposeIs(named: ManaSpendPurpose, purpose: Exclude<ManaPurpose, nu
     if (purpose.kind !== "ability") return purpose.xCost === true;
     return purpose.ability !== undefined && parseManaCost(purpose.ability.cost.mana).x > 0;
   }
-  if (purpose.kind === "cast") return named === "disturb" && purpose.via === "disturb";
+  if (purpose.kind === "cast") {
+    return (named === "disturb" && purpose.via === "disturb") || (named === "kicked-spell" && purpose.kicked === true);
+  }
   if (purpose.kind === "special") return named === purpose.action;
   const ability = purpose.ability;
   if (ability === undefined) return false;
@@ -1271,10 +1276,15 @@ function otherCostPurpose(cost: string | null, hasX = false): ManaPurpose {
  * contain {X}" (`ManaSpendPurpose`) read of a spell's cast: the way it's cast,
  * and the total cost's own string, not the card's mana cost (Rosheen
  * Meanderer's ruling: an alternative cost and a kicker count). */
-function castPaying(via: CastVia | undefined, costString: string | null): { readonly via?: "disturb"; readonly xCost?: true } {
+function castPaying(
+  via: CastVia | undefined,
+  costString: string | null,
+  kicked?: boolean | number,
+): { readonly via?: "disturb" | "flashback"; readonly xCost?: true; readonly kicked?: true } {
   return {
-    ...(via === "disturb" ? { via } : {}),
+    ...(via === "disturb" || via === "flashback" ? { via } : {}),
     ...(costString !== null && parseManaCost(costString).x > 0 ? { xCost: true as const } : {}),
+    ...(kicked !== undefined && kicked !== false && kicked !== 0 ? { kicked: true as const } : {}),
   };
 }
 
@@ -4641,7 +4651,7 @@ export class Game {
                 this.withFace(card, face ?? 0, () => this.castingCostOf(player, card, def, 0, cost, pricedAt)),
                 undefined,
                 undefined,
-                { kind: "cast", card, face: face ?? 0, ...bestowPurpose(def, overload), ...castPaying(via, cost) },
+                { kind: "cast", card, face: face ?? 0, ...bestowPurpose(def, overload), ...castPaying(via, cost, kicked) },
                 { last: candidates },
               );
               if (plan === null) return 0;
@@ -4975,7 +4985,7 @@ export class Game {
                       rest,
                       undefined,
                       undefined,
-                      { kind: "cast", card, face: face ?? 0, ...castPaying(via, variantCost) },
+                      { kind: "cast", card, face: face ?? 0, ...castPaying(via, variantCost, kicked) },
                       withheld.size > 0 ? { withheld } : undefined,
                     ) !== null,
                   xPlan === null ? undefined : xPlan.maxX,
@@ -12664,7 +12674,10 @@ export class Game {
       }
     }
     if (answered?.chosen === undefined) {
-      if (becoming.chooseCreatureTypeOnEnter) return { kind: "choose" };
+      if (becoming.chooseCreatureTypeOnEnter) {
+        const menu = becoming.chooseCreatureTypeMenu;
+        return menu === null ? { kind: "choose" } : { kind: "choose", options: menu };
+      }
       if (becoming.chooseOnEnter !== null) {
         return {
           kind: "choose",
@@ -16539,7 +16552,7 @@ export class Game {
       convoked = resolved;
     }
     const cost = convoked.length > 0 ? this.reduceCostByConvoke(delved, convoked) : delved;
-    const purpose: ManaPurpose = { kind: "cast", card: cardId, face, ...bestowPurpose(def, overload), ...castPaying(via, costString) };
+    const purpose: ManaPurpose = { kind: "cast", card: cardId, face, ...bestowPurpose(def, overload), ...castPaying(via, costString, kicked) };
     const alternativeTaps = this.spellTapCost(cardId, def, via, player, altCost, kicked, costOption);
     if (alternativeTaps !== undefined) {
       // The tap half is checked against the same mana — see `tapCostOffer`.
@@ -18319,7 +18332,7 @@ export class Game {
       const offer = this.tapCostOffer(player, cardId, spec, cost, undefined, undefined, {
         kind: "cast",
         card: cardId,
-        ...castPaying(via, costString),
+        ...castPaying(via, costString, kicked),
       });
       if (offer === null) throw new Error(`${player} cannot pay the cost of ${def.name}`);
       tapPicked = this.tapCostPicks(def.name, offer, tap);
@@ -18358,7 +18371,7 @@ export class Game {
             cost,
             this.spellWaterbend(def, kicked, chosenX),
             (rest, withheld) =>
-              this.payMana(player, rest, undefined, undefined, { kind: "cast", card: cardId, ...bestowPurpose(def, overload), ...castPaying(via, costString) }, withWaterbent(withheld)) !==
+              this.payMana(player, rest, undefined, undefined, { kind: "cast", card: cardId, ...bestowPurpose(def, overload), ...castPaying(via, costString, kicked) }, withWaterbent(withheld)) !==
               null,
           );
     if (typeof waterbent === "string") throw new Error(waterbent);
@@ -18368,7 +18381,7 @@ export class Game {
       { ...cost, generic: cost.generic - waterbent.length },
       undefined,
       undefined,
-      { kind: "cast", card: cardId, ...bestowPurpose(def, overload), ...castPaying(via, costString) },
+      { kind: "cast", card: cardId, ...bestowPurpose(def, overload), ...castPaying(via, costString, kicked) },
       manaArrangement,
     );
     if (payment === null) {
@@ -23306,7 +23319,24 @@ export class Game {
     purpose: ManaPurpose,
     arrange?: ManaSourceArrangement,
   ): ManaPlanningView {
-    const sources = this.manaSources(player);
+    // "Spend only mana produced by creatures to cast this spell" (Myr Superion):
+    // nothing else is reached for. Mana a triggered ability adds as a source is
+    // tapped (rule 605.1b) is that ability's source's: it floats, and pays only
+    // if that source qualifies too (`manaUnitCanPay` holds the floating units).
+    const onlyFrom = purpose?.kind === "cast" ? this.spendOnlyManaFromOf(purpose.card) : undefined;
+    const fits = (id: ObjectId): boolean => {
+      const origin = this.manaOriginOf(id);
+      return origin !== undefined && onlyFrom !== undefined && manaOriginMatches(origin, onlyFrom);
+    };
+    const sources =
+      onlyFrom === undefined
+        ? this.manaSources(player)
+        : this.manaSources(player)
+            .filter((source) => fits(source.id))
+            .map((source) => ({
+              ...source,
+              options: source.options.map((option) => optionKeepingExtras(option, (extra) => fits(extra.from))),
+            }));
     // Life a spell's cost already spends outside the mana (Liesa's commander
     // tax) isn't there for a painland or a Phyrexian pip to spend as well.
     const reserved = purpose?.kind === "cast" ? this.commanderTaxLife(player, purpose.card) : 0;
@@ -23545,6 +23575,9 @@ export class Game {
         ? this.addMana(player, m, 1, step.tag, originOf(step.source))
         : this.addMana(player, m, 1, undefined, originOf(extraFrom[i - own])),
     );
+    for (const extra of step.floating ?? []) {
+      this.addMana(player, extra.type ?? "any-color", 1, undefined, originOf(extra.from));
+    }
     if (step.oncePerTurn !== undefined) {
       this.markUsedThisTurn(object, step.oncePerTurn);
       // Not an event of its own, so nothing else is going to tell a cache
@@ -24008,7 +24041,13 @@ export class Game {
           this.manaUnitCanPay(player, unit, purpose),
       );
       if (restricted >= 0) return restricted;
-      return pool.findIndex((unit) => unit.type === type && ok(unit) && unit.restriction === undefined);
+      return pool.findIndex(
+        (unit) =>
+          unit.type === type &&
+          ok(unit) &&
+          unit.restriction === undefined &&
+          this.manaUnitCanPay(player, unit, purpose),
+      );
     };
     const indexOf = (type: ManaType): number => indexOfAmong(type, () => true);
 
@@ -24162,7 +24201,8 @@ export class Game {
         ...(abilityOf !== undefined ? { abilityOf } : {}),
         ...(spendOnly.abilityOfAnyZone === true ? { abilityOfAnyZone: true } : {}),
         ...(spendOnly.notSpell !== undefined ? { notSpell: spendOnly.notSpell } : {}),
-        ...(spendOnly.fromYourGraveyard === true ? { fromYourGraveyard: true } : {}),
+        ...(spendOnly.castFrom !== undefined ? { castFrom: spendOnly.castFrom } : {}),
+        ...(spendOnly.notCastFrom !== undefined ? { notCastFrom: spendOnly.notCastFrom } : {}),
         ...(spendOnly.purposes !== undefined ? { purposes: spendOnly.purposes } : {}),
         text: spendOnly.text,
       };
@@ -24209,7 +24249,46 @@ export class Game {
     return [...types];
   }
 
+  /** "Spend only mana produced by [these] to cast this spell": what `card`'s
+   * text asks of the mana that pays for it (`CardDefinition.spendOnlyManaFrom`). */
+  private spendOnlyManaFromOf(card: ObjectId): ManaFromSpec | undefined {
+    const object = this.state.objects[card];
+    if (object === undefined) return undefined;
+    return this.registry.get(printedCardName(object)).spendOnlyManaFrom ?? undefined;
+  }
+
+  /** The zone a spell being paid for is cast from: where the card still is, or
+   * where it came from once it's on the stack (rule 601.2a). */
+  private spellCastZone(card: GameObject): ZoneType | undefined {
+    return card.zone === "stack" ? card.castFrom : card.zone;
+  }
+
+  /** Reads `card` as the spell it's becoming: on the stack, under `player`'s
+   * control, with a cost still to pay (rule 601.2a). What a static grants a spell
+   * as it's cast (Abaddon the Despoiler's cascade) reaches only a spell. */
+  private asSpellBeingCast<T>(card: ObjectId, player: PlayerId, read: () => T): T {
+    const object = this.state.objects[card];
+    if (object === undefined || object.zone === "stack") return read();
+    const { zone, castFrom, controller } = object;
+    object.zone = "stack";
+    object.castFrom = zone;
+    object.controller = player;
+    invalidateComputedCache();
+    try {
+      return read();
+    } finally {
+      object.zone = zone;
+      object.castFrom = castFrom;
+      object.controller = controller;
+      invalidateComputedCache();
+    }
+  }
+
   private manaUnitCanPay(player: PlayerId, unit: ManaUnit, purpose: ManaPurpose): boolean {
+    if (purpose?.kind === "cast") {
+      const onlyFrom = this.spendOnlyManaFromOf(purpose.card);
+      if (onlyFrom !== undefined && (unit.from === undefined || !manaOriginMatches(unit.from, onlyFrom))) return false;
+    }
     const restriction = unit.restriction;
     if (restriction === undefined) return true;
     // A bestow cast is judged as the Aura spell it is (`bestowPurpose`),
@@ -24238,26 +24317,43 @@ export class Game {
       const face = purpose.face ?? this.state.objects[card]?.face ?? 0;
       return !this.withFace(card, face, () => matchesFilter(this.state, this.registry, card, denied, { you: player }));
     }
-    // "Spend this mana only to cast a spell from your graveyard" (Lord of
-    // the Forsaken): any spell, cast from its owner's graveyard — this
-    // player's. The card is still there as its cost is paid.
-    if (restriction.fromYourGraveyard === true) {
-      if (purpose?.kind !== "cast") return false;
+    // "This mana can't be spent to cast spells from your hand" (Heartwood
+    // Crafter): everything else may use it, an ability included.
+    if (restriction.notCastFrom !== undefined) {
+      if (purpose?.kind !== "cast") return true;
       const card = this.state.objects[purpose.card];
-      return (
-        card !== undefined &&
-        card.owner === player &&
-        (card.zone === "graveyard" || (card.zone === "stack" && card.castFrom === "graveyard"))
-      );
+      const zone = card === undefined ? undefined : this.spellCastZone(card);
+      return zone === undefined || !restriction.notCastFrom.includes(zone);
     }
     if (purpose === null) return false;
+    // "Spend this mana only to cast a spell from your graveyard" (Lord of the
+    // Forsaken), "spells from exile" (Interdimensional Web Watch), "from
+    // anywhere other than your hand" (Mm'menon, the Right Hand), and any
+    // `spell` filter on top. Only a spell: nothing else is cast from anywhere.
+    const from = restriction.castFrom;
+    if (from !== undefined) {
+      if (purpose.kind !== "cast") return false;
+      if (!this.castFromFits(from, purpose, player)) return false;
+    }
     if (restriction.purposes?.some((named) => manaPurposeIs(named, purpose)) === true) return true;
     if (purpose.kind === "special") return false;
     const [filter, subject] =
       purpose.kind === "cast"
         ? [restriction.spell, purpose.card]
         : [restriction.abilityOf, purpose.source];
-    if (filter === undefined) return false;
+    if (filter === undefined) return from !== undefined;
+    // "Creature spells with no abilities" (Jasmine Boreal of the Seven) asks of
+    // the spell, what a static gives it as it's cast included.
+    if (purpose.kind === "cast" && filter.hasAbilities !== undefined) {
+      const face = purpose.face ?? this.state.objects[subject]?.face ?? 0;
+      const spellGrantAmount = (source: GameObject): ((amount: EffectAmount) => number) =>
+        this.filterAmounts({ source: source.id, controller: source.controller });
+      return this.asSpellBeingCast(subject, player, () =>
+        this.withFace(subject, face, () =>
+          matchesFilter(this.state, this.registry, subject, filter, { you: player, spellGrantAmount }),
+        ),
+      );
+    }
     // The face being cast, as it will be on the stack (see `ManaPurpose`).
     if (purpose.kind === "cast" && purpose.face !== undefined) {
       const face = purpose.face;
@@ -24274,6 +24370,30 @@ export class Game {
       return false;
     }
     return matchesFilter(this.state, this.registry, subject, filter, { you: player });
+  }
+
+  /** Whether a cast is one a `ManaRestriction.castFrom` admits. */
+  private castFromFits(
+    from: NonNullable<ManaRestriction["castFrom"]>,
+    purpose: Extract<ManaPurpose, { kind: "cast" }>,
+    player: PlayerId,
+  ): boolean {
+    const card = this.state.objects[purpose.card];
+    if (card === undefined) return false;
+    const zone = this.spellCastZone(card);
+    if (zone === undefined) return false;
+    if (from.zones !== undefined && !from.zones.includes(zone)) return false;
+    if (from.notZones?.includes(zone) === true) return false;
+    if (from.yours === true && card.owner !== player) return false;
+    // "Spells with flashback" (Altar of the Lost): cast for it, which is a
+    // static's grant in the graveyard too (Lier), or a card that has it.
+    if (from.withFlashback === true) {
+      return (
+        purpose.via === "flashback" ||
+        matchesFilter(this.state, this.registry, purpose.card, { hasFlashback: true }, { you: player })
+      );
+    }
+    return true;
   }
 
   /**

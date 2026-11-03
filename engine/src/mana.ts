@@ -6,6 +6,7 @@ import type { CardType, Keyword, Supertype } from "./cards/define.js";
 import type { EffectSpec } from "./effects.js";
 import type { CardFilter } from "./filter.js";
 import type { ObjectId } from "./primitives.js";
+import type { ZoneType } from "./state.js";
 import { hasSubtype } from "./subtypes.js";
 
 export type Color = "W" | "U" | "B" | "R" | "G";
@@ -56,14 +57,33 @@ export interface ManaRestriction {
    * creature **source**" (Secluded Courtyard) names a source, not a
    * permanent (rule 109.2a). */
   readonly abilityOfAnyZone?: true;
-  /** "Spend this mana only to cast a spell from your graveyard" (Lord of the
-   * Forsaken): any spell, cast from its owner's graveyard — the player
-   * spending it. Set alone. */
-  readonly fromYourGraveyard?: true;
+  /** Only a spell cast from where this says, and matching `spell` if set — see
+   * {@link ManaCastFrom}. */
+  readonly castFrom?: ManaCastFrom;
+  /** "This mana can't be spent to cast spells from your hand" (Heartwood
+   * Crafter): a deny-list, as `notSpell` is. It pays for anything but casting a
+   * spell from these zones, an ability included. Set alone. */
+  readonly notCastFrom?: readonly ZoneType[];
   /** The other things this mana may pay for, beside `spell` and `abilityOf`
    * (or on their own): see {@link ManaSpendPurpose}. */
   readonly purposes?: readonly ManaSpendPurpose[];
   readonly text: string;
+}
+
+/**
+ * Where a spell must be cast from for this mana to pay for it (rule 106.6):
+ * "from your graveyard" (Lord of the Forsaken: `zones` with `yours`, the card's
+ * owner the player spending it), "from exile" (Interdimensional Web Watch),
+ * "from anywhere other than your hand" (Mm'menon, the Right Hand: `notZones`).
+ * `withFlashback` is "spells with flashback from a graveyard" (Altar of the
+ * Lost): any graveyard (the rulings), the flashback printed, given by an effect,
+ * or the one it's being cast for.
+ */
+export interface ManaCastFrom {
+  readonly zones?: readonly ZoneType[];
+  readonly notZones?: readonly ZoneType[];
+  readonly yours?: true;
+  readonly withFlashback?: true;
 }
 
 /**
@@ -82,6 +102,8 @@ export interface ManaRestriction {
  * - `"cost-with-x"`: "on costs that contain {X}" (Rosheen Meanderer's ruling:
  *   a spell's total cost, an activated ability's cost, a suspend cost, or a
  *   cost asked for as something resolves). All of that cost, not just its X.
+ * - `"kicked-spell"`: "to cast kicked spells" (Elfhame Druid; rule 702.33d), all
+ *   of the cost, cast with its kicker paid (Volshe Tideturner beside its `spell`).
  */
 export type ManaSpendPurpose =
   | "turn-face-up"
@@ -90,7 +112,8 @@ export type ManaSpendPurpose =
   | "equip-ability"
   | "power-up-ability"
   | "class-level"
-  | "cost-with-x";
+  | "cost-with-x"
+  | "kicked-spell";
 
 /**
  * How freely a payment may spend mana (rules 118.14, 609.4b): `"any-color"`

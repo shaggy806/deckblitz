@@ -1327,6 +1327,10 @@ export interface FilterContext {
    * whatever is applying the filter (its source, controller, triggering
    * object, {X}, targets). Absent ⇒ such a comparison fails closed. */
   readonly amount?: (amount: EffectAmount) => number;
+  /** For `hasAbilities` on a spell: `amount` as each `grantsToSpells` static reads
+   * it, from its own source (Abaddon the Despoiler's "mana value X or less").
+   * Absent ⇒ such a grant doesn't reach the spell here. */
+  readonly spellGrantAmount?: (source: GameObject) => (amount: EffectAmount) => number;
   /** The permanent whose trigger or ability is applying the filter — what
    * `putThereBySource` compares against. */
   readonly source?: ObjectId;
@@ -2612,7 +2616,9 @@ export function matchesFilter(
             live,
             layered !== undefined
               ? { inFold: true, types: layered.types, subtypes: layered.subtypes, supertypes: layered.supertypes, keywords: layered.keywords, hasProtection: layered.hasProtection }
-              : {},
+              : ctx.spellGrantAmount !== undefined
+                ? { spellGrantAmount: ctx.spellGrantAmount }
+                : {},
           )
         : lki!.hasAbilities;
     if (has !== filter.hasAbilities) return false;

@@ -5873,6 +5873,61 @@ describe("a spell's own conditional flash (flashIf)", () => {
   });
 });
 
+describe("mana restrictions on how a spell is cast", () => {
+  const face = (name: string, type_line: string, oracle_text: string) =>
+    parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });
+  const spendOnlyOf = (oracle_text: string): unknown => {
+    const card = face("Test", "Artifact", oracle_text);
+    const effect = card.activated[0].effect as { spendOnly?: unknown };
+    return effect.spendOnly;
+  };
+  it("reads the zone it's cast from", () => {
+    expect(spendOnlyOf("{T}: Add {C}. Spend this mana only to cast spells from exile.")).toEqual({
+      castFrom: { zones: ["exile"] },
+      text: "Spend this mana only to cast spells from exile.",
+    });
+    expect(spendOnlyOf("Pay 1 life: Add {C}. Spend this mana only to cast a spell from your graveyard.")).toEqual({
+      castFrom: { zones: ["graveyard"], yours: true },
+      text: "Spend this mana only to cast a spell from your graveyard.",
+    });
+    expect(spendOnlyOf("{T}: Add {C}. Spend this mana only to cast spells with flashback from a graveyard.")).toEqual({
+      castFrom: { zones: ["graveyard"], withFlashback: true },
+      text: "Spend this mana only to cast spells with flashback from a graveyard.",
+    });
+    expect(spendOnlyOf("{T}: Add {U}. Spend this mana only to cast a spell from anywhere other than your hand.")).toEqual({
+      castFrom: { notZones: ["hand"] },
+      text: "Spend this mana only to cast a spell from anywhere other than your hand.",
+    });
+    expect(spendOnlyOf("{T}: Add {C}. This mana can't be spent to cast spells from your hand.")).toEqual({
+      notCastFrom: ["hand"],
+      text: "This mana can't be spent to cast spells from your hand.",
+    });
+  });
+  it("reads kicked spells and spells with no abilities", () => {
+    expect(spendOnlyOf("{T}: Add {G}{G}. Spend this mana only to cast kicked spells.")).toEqual({
+      purposes: ["kicked-spell"],
+      text: "Spend this mana only to cast kicked spells.",
+    });
+    expect(spendOnlyOf("{T}: Add {G}{W}. Spend this mana only to cast creature spells with no abilities.")).toEqual({
+      spell: { type: "creature", hasAbilities: false },
+      text: "Spend this mana only to cast creature spells with no abilities.",
+    });
+  });
+  it("reads what must make a spell's mana, and a menu of types", () => {
+    const superion = face("Myr Superion", "Artifact Creature — Myr", "Spend only mana produced by creatures to cast this spell.");
+    expect(superion.spendOnlyManaFrom).toEqual({ type: "creature" });
+    const imperiosaur = face("Imperiosaur", "Creature — Dinosaur", "Spend only mana produced by basic lands to cast this spell.");
+    expect(imperiosaur.spendOnlyManaFrom).toEqual({ type: "land", supertype: "basic" });
+    const realms = face(
+      "Eclipsed Realms",
+      "Land",
+      "As this land enters, choose Elemental, Elf, Faerie, Giant, Goblin, Kithkin, Merfolk, or Treefolk.",
+    );
+    expect(realms.chooseCreatureTypeOnEnter).toBe(true);
+    expect(realms.chooseCreatureTypeMenu).toEqual(["Elemental", "Elf", "Faerie", "Giant", "Goblin", "Kithkin", "Merfolk", "Treefolk"]);
+  });
+});
+
 describe("has all activated abilities of … (grantsActivatedOf)", () => {
   const face = (name: string, type_line: string, oracle_text: string) =>
     parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });

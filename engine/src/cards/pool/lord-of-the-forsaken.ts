@@ -34,7 +34,7 @@ export default defineCard({
         kind: "add-mana",
         mana: "C",
         amount: 1,
-        spendOnly: { fromYourGraveyard: true, text: "Spend this mana only to cast a spell from your graveyard." },
+        spendOnly: { castFrom: { zones: ["graveyard"], yours: true }, text: "Spend this mana only to cast a spell from your graveyard." },
       },
       resolve: null,
       text: MANA_TEXT,

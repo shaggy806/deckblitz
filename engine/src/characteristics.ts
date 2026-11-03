@@ -3816,6 +3816,8 @@ function isPtScopedRestriction(ability: StaticAbility): boolean {
  * when the caller is partway through computing it.
  */
 export interface TargetView {
+  /** See `FilterContext.spellGrantAmount`. */
+  readonly spellGrantAmount?: (source: GameObject) => (amount: EffectAmount) => number;
   /** The target's types / subtypes as folded so far — a type-granting
    * static's scope, matched inside layer 4. Omitted: the current ones
    * (`effectiveTypes`). */
@@ -4363,7 +4365,7 @@ export function hasAnyAbility(
         const grant = ability.grantsToSpells;
         if (grant === undefined) continue;
         if ((grant.triggered?.length ?? 0) === 0 && grant.splitSecond !== true) continue;
-        if (spellGrantReaches(state, registry, source, ability, object)) return true;
+        if (spellGrantReaches(state, registry, source, ability, object, view.spellGrantAmount?.(source))) return true;
       }
     }
     return false;

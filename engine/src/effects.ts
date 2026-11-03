@@ -22,7 +22,7 @@ import type {
 } from "./cards.js";
 import type { AggregateSpec, CardFilter, ShareReference, SharedTypes } from "./filter.js";
 import type { CardNameAim, CardNameFilter } from "./card-names.js";
-import { manaOriginMatches, type Color, type ManaFromSpec, type ManaOrigin, type ManaSpendPurpose, type ManaType, type SpendAs } from "./mana.js";
+import { manaOriginMatches, type Color, type ManaCastFrom, type ManaFromSpec, type ManaOrigin, type ManaSpendPurpose, type ManaType, type SpendAs } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import { EVERY_CREATURE_TYPE, EVERY_LAND_TYPE, isCreatureType, isLandType } from "./subtypes.js";
 import { sameVoteChoice } from "./events.js";
@@ -409,9 +409,12 @@ export interface ManaSpendOnly {
   /** "…and that spell can't be countered" (Cavern of Souls, Delighted
    * Halfling). A property of the spell this mana pays for, not of the land. */
   readonly uncounterable?: boolean;
-  /** "Spend this mana only to cast a spell from your graveyard" (Lord of the
-   * Forsaken). Set alone. See `ManaRestriction.fromYourGraveyard`. */
-  readonly fromYourGraveyard?: true;
+  /** Only a spell cast from where this says: "from your graveyard" (Lord of the
+   * Forsaken), "from exile" (Interdimensional Web Watch). See `ManaCastFrom`. */
+  readonly castFrom?: ManaCastFrom;
+  /** "This mana can't be spent to cast spells from your hand" (Heartwood
+   * Crafter). Set alone. See `ManaRestriction.notCastFrom`. */
+  readonly notCastFrom?: readonly ZoneType[];
   /** What else it may pay for, beside `spell` and `abilityOf` or on their own:
    * "to turn permanents face up", "to pay a disturb cost", "on costs that
    * contain {X}". See `ManaSpendPurpose`. */

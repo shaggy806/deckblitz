@@ -501,6 +501,7 @@ import _poolMortalCombat from "../pool/mortal-combat.js";
 import _poolMrFoxglove from "../pool/mr-foxglove.js";
 import _poolMurderousCompulsion from "../pool/murderous-compulsion.js";
 import _poolMuxusGoblinGrandee from "../pool/muxus-goblin-grandee.js";
+import _poolMyrSuperion from "../pool/myr-superion.js";
 import _poolMyrWelder from "../pool/myr-welder.js";
 import _poolMyriadLandscape from "../pool/myriad-landscape.js";
 import _poolMyrsmith from "../pool/myrsmith.js";
@@ -1392,6 +1393,7 @@ const shard: CardShard = {
     _poolMrFoxglove,
     _poolMurderousCompulsion,
     _poolMuxusGoblinGrandee,
+    _poolMyrSuperion,
     _poolMyrWelder,
     _poolMyriadLandscape,
     _poolMyrsmith,

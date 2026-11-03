@@ -23,6 +23,7 @@ import _poolAllyEncampment from "../pool/ally-encampment.js";
 import _poolAlongTheCrookedWay from "../pool/along-the-crooked-way.js";
 import _poolAlphaMyr from "../pool/alpha-myr.js";
 import _poolAltanakTheThriceCalled from "../pool/altanak-the-thrice-called.js";
+import _poolAltarOfTheLost from "../pool/altar-of-the-lost.js";
 import _poolAmazingAcrobatics from "../pool/amazing-acrobatics.js";
 import _poolAmbushKrotiq from "../pool/ambush-krotiq.js";
 import _poolAncestralReminiscence from "../pool/ancestral-reminiscence.js";
@@ -379,6 +380,7 @@ import _poolHarbingerOfTheSeas from "../pool/harbinger-of-the-seas.js";
 import _poolHardCover from "../pool/hard-cover.js";
 import _poolHarmoniousArchon from "../pool/harmonious-archon.js";
 import _poolHeartflameSlash from "../pool/heartflame-slash.js";
+import _poolHeartwoodCrafter from "../pool/heartwood-crafter.js";
 import _poolHeartwoodStoryteller from "../pool/heartwood-storyteller.js";
 import _poolHedronArchive from "../pool/hedron-archive.js";
 import _poolHeirToTheNight from "../pool/heir-to-the-night.js";
@@ -976,6 +978,7 @@ const shard: CardShard = {
     _poolAlongTheCrookedWay,
     _poolAlphaMyr,
     _poolAltanakTheThriceCalled,
+    _poolAltarOfTheLost,
     _poolAmazingAcrobatics,
     _poolAmbushKrotiq,
     _poolAncestralReminiscence,
@@ -1332,6 +1335,7 @@ const shard: CardShard = {
     _poolHardCover,
     _poolHarmoniousArchon,
     _poolHeartflameSlash,
+    _poolHeartwoodCrafter,
     _poolHeartwoodStoryteller,
     _poolHedronArchive,
     _poolHeirToTheNight,

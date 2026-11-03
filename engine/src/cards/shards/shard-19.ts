@@ -242,6 +242,7 @@ import _poolEarthenArms from "../pool/earthen-arms.js";
 import _poolEchoingDeeps from "../pool/echoing-deeps.js";
 import _poolEldraziSkyspawner from "../pool/eldrazi-skyspawner.js";
 import _poolElectrozoa from "../pool/electrozoa.js";
+import _poolElfhameDruid from "../pool/elfhame-druid.js";
 import _poolElvenAmbush from "../pool/elven-ambush.js";
 import _poolElvenCache from "../pool/elven-cache.js";
 import _poolElvenRaftSteerer from "../pool/elven-raft-steerer.js";
@@ -1177,6 +1178,7 @@ const shard: CardShard = {
     _poolEchoingDeeps,
     _poolEldraziSkyspawner,
     _poolElectrozoa,
+    _poolElfhameDruid,
     _poolElvenAmbush,
     _poolElvenCache,
     _poolElvenRaftSteerer,
