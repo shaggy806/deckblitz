@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4235 already implemented / 765 missing (marks refreshed 2026-11-03)
+4240 already implemented / 760 missing (marks refreshed 2026-11-03)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -1532,7 +1532,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1539  Natural Order                            {2}{G}{G}        Sorcery
 [x]  1540  Utvara Hellkite                          {6}{R}{R}        Creature — Dragon
 [x]  1541  Rebuff the Wicked                        {W}              Instant
-[ ]  1542  Eerie Ultimatum                          {W}{W}{B}{B}{B}{G}{G} Sorcery
+[x]  1542  Eerie Ultimatum                          {W}{W}{B}{B}{B}{G}{G} Sorcery
 [x]  1543  Creeping Bloodsucker                     {1}{B}           Creature — Vampire
 [x]  1544  Pawn of Ulamog                           {1}{B}{B}        Creature — Vampire Shaman
 [x]  1545  Hydroid Krasis                           {X}{G}{U}        Creature — Jellyfish Hydra Beast
@@ -1813,7 +1813,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1820  Doomwake Giant                           {4}{B}           Enchantment Creature — Giant
 [x]  1821  Murmuring Mystic                         {3}{U}           Creature — Human Wizard
 [x]  1822  Song of the Dryads                       {2}{G}           Enchantment — Aura
-[ ]  1823  Disallow                                 {1}{U}{U}        Instant
+[x]  1823  Disallow                                 {1}{U}{U}        Instant
 [x]  1824  Great Hall of the Citadel                {0}              Land
 [x]  1825  Search for Tomorrow                      {2}{G}           Sorcery
 [x]  1826  Juri, Master of the Revue                {B}{R}           Legendary Creature — Human Shaman
@@ -2758,7 +2758,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2765  Quietus Spike                            {3}              Artifact — Equipment
 [x]  2766  Caesar, Legion's Emperor                 {1}{R}{W}{B}     Legendary Creature — Human Soldier
 [x]  2767  Champion of the Perished                 {B}              Creature — Zombie
-[ ]  2768  Raging Ravine                            {0}              Land
+[x]  2768  Raging Ravine                            {0}              Land
 [x]  2769  Inspired Tinkering                       {4}{R}           Sorcery
 [x]  2770  Alseid of Life's Bounty                  {W}              Enchantment Creature — Nymph
 [x]  2771  Greensleeves, Maro-Sorcerer              {3}{G}{G}        Legendary Creature — Elemental Sorcerer
@@ -2769,7 +2769,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2776  Troll of Khazad-dûm                      {5}{B}           Creature — Troll
 [x]  2777  Great Divide Guide                       {1}{G}           Creature — Human Scout Ally
 [ ]  2778  Aerial Extortionist                      {3}{W}{W}        Creature — Bird Soldier
-[ ]  2779  Tishana's Tidebinder                     {2}{U}           Creature — Merfolk Wizard
+[x]  2779  Tishana's Tidebinder                     {2}{U}           Creature — Merfolk Wizard
 [x]  2780  Nightshade Dryad                         {1}{G}           Creature — Dryad
 [x]  2781  Aetherspouts                             {3}{U}{U}        Instant
 [ ]  2782  Lurrus of the Dream-Den                  {1}{W/B}{W/B}    Legendary Creature — Cat Nightmare
@@ -4740,7 +4740,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4747  Outrageous Robbery                       {X}{B}{B}        Instant
 [x]  4748  Sea-Dasher Octopus                       {1}{U}{U}        Creature — Octopus
 [x]  4749  Ruric Thar, the Unbowed                  {4}{R}{G}        Legendary Creature — Ogre Warrior
-[ ]  4750  Restless Spire                           {0}              Land
+[x]  4750  Restless Spire                           {0}              Land
 [x]  4751  Heronblade Elite                         {2}{G}           Creature — Human Warrior
 [x]  4752  Swarm Intelligence                       {6}{U}           Enchantment
 [ ]  4753  Wulfgar of Icewind Dale                  {3}{R}{G}        Legendary Creature — Human Barbarian
