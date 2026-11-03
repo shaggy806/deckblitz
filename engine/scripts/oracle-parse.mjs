@@ -4706,6 +4706,45 @@ export function parseSentence(sentence, ctx) {
       duration: "end-of-turn",
     };
   }
+  // A mass change of types, P/T left alone: `add-types` over a
+  // `for-each-permanent`. "Become artifact creatures" keeps every type (rule
+  // 205.1b), and the Vehicle's printed P/T.
+  if (re("vehicles you control become artifact creatures until end of turn").test(s)) {
+    return {
+      kind: "for-each-permanent",
+      filter: { subtype: "Vehicle", controlledBy: "you" },
+      simultaneous: true,
+      effect: { kind: "add-types", target: 0, addTypes: ["artifact", "creature"], duration: "end-of-turn" },
+    };
+  }
+  if (re("lands you control gain all basic land types until end of turn").test(s)) {
+    return {
+      kind: "for-each-permanent",
+      filter: { type: "land", controlledBy: "you" },
+      simultaneous: true,
+      effect: {
+        kind: "add-types",
+        target: 0,
+        addSubtypes: ["Plains", "Island", "Swamp", "Mountain", "Forest"],
+        duration: "end-of-turn",
+      },
+    };
+  }
+  if ((m = re("until end of turn, creatures you control get ([+-]\\d+)/([+-]\\d+) and gain all creature types").exec(s))) {
+    const filter = { type: "creature", controlledBy: "you" };
+    return {
+      kind: "sequence",
+      effects: [
+        { kind: "modify-pt-all", filter, power: Number(m[1]), toughness: Number(m[2]), duration: "end-of-turn" },
+        {
+          kind: "for-each-permanent",
+          filter,
+          simultaneous: true,
+          effect: { kind: "add-types", target: 0, addSubtypes: ["(every creature type)"], duration: "end-of-turn" },
+        },
+      ],
+    };
+  }
   // The Mistforms: the type chosen as it resolves replaces its creature
   // types (rule 205.1a).
   if ((m = re(`(~|${TARGET}) becomes the creature type of your choice until end of turn`).exec(s))) {
@@ -5461,6 +5500,23 @@ export function parseSentence(sentence, ctx) {
       options: [{ pay: m[2], andLife: Number(m[3]), text: `Pay ${m[2]} and ${m[3]} life` }],
       otherwise: { kind: "counter", target: i },
     };
+  }
+  // Keldon Twilight's "that player": the one whose end step it is.
+  if (/^that player sacrifices a creature of their choice that they controlled since the beginning of the turn\.$/i.test(s)) {
+    return { kind: "sacrifice", who: "active-player", filter: { type: "creature", controlledContinuously: true }, count: 1 };
+  }
+  // Rocket Launcher, Crazed Armodon.
+  if (/^destroy ~ at the beginning of the next end step\.$/i.test(s)) {
+    return { kind: "delayed-trigger", at: "next-end-step", text: "Destroy ~.", effect: { kind: "destroy", target: "source" } };
+  }
+  // "Then discard a card unless you attacked this turn" (Chart a Course),
+  // "… unless there are five or more mana values among cards in your
+  // graveyard" (Tainted Indulgence): any condition the intervening-ifs read.
+  if ((m = /^(?:then )?discard a card unless (.+)\.$/i.exec(s))) {
+    const condition = INTERVENING_IFS[`if ${m[1].toLowerCase()},`];
+    if (condition !== undefined) {
+      return { kind: "conditional", condition: { kind: "not", of: condition }, then: { kind: "discard", target: "you", amount: 1 } };
+    }
   }
   if ((m = /^(?:then )?discard a card at random unless you pay ((?:\{E\})+)\.$/i.exec(s))) {
     return {
@@ -7078,6 +7134,13 @@ export function parseEffect(text, outer) {
     }
     // A card of those exiled with ~ chosen as this resolves (Muse Vessel, Bag
     // of Devouring), and paying for what follows (Purgatory).
+    const forced = forcedAttackAt(sentences, i, ctx);
+    if (forced !== null) {
+      parsed.push(forced.effect);
+      hints.push({ sentence, effect: forced.effect });
+      skip = forced.used - 1;
+      continue;
+    }
     const exiledPick = exiledCardPickAt(sentences, i, ctx);
     if (exiledPick !== null) {
       parsed.push(exiledPick.effect);
@@ -8411,6 +8474,43 @@ function searchOthersAt(sentences, i, ctx) {
  * - "You may pay {4} and 2 life. If you do, return a card exiled with ~ to the
  *   battlefield." (Purgatory): a `may` with its `cost` and `costLife`.
  */
+function forcedAttackAt(sentences, i, ctx) {
+  const m = /^choose target (?:non-([A-Z][a-z]+) )?creature the active player has controlled continuously since the beginning of the turn\.$/i.exec(sentences[i]);
+  if (
+    m === null ||
+    !/^that creature attacks this turn if able\.$/i.test(sentences[i + 1] ?? "") ||
+    !/^destroy it at the beginning of the next end step if it didn't attack this turn\.$/i.test(sentences[i + 2] ?? "")
+  ) {
+    return null;
+  }
+  const filter = {
+    type: "creature",
+    ...(m[1] !== undefined ? { notSubtypes: [m[1]] } : {}),
+    controlledBy: "active-player",
+    controlledContinuously: true,
+  };
+  const target = ctx.target({ kind: "permanent", filter });
+  return {
+    effect: {
+      kind: "sequence",
+      effects: [
+        { kind: "restrict", target, restrictions: ["must-attack"] },
+        {
+          kind: "delayed-trigger",
+          at: "next-end-step",
+          text: "Destroy it if it didn't attack this turn.",
+          effect: {
+            kind: "conditional",
+            condition: { kind: "target", index: target, filter: { attackedThisTurn: false } },
+            then: { kind: "destroy", target },
+          },
+        },
+      ],
+    },
+    used: 3,
+  };
+}
+
 function exiledCardPickAt(sentences, i, ctx) {
   const first = sentences[i];
   const next = sentences[i + 1] ?? "";
@@ -8437,6 +8537,13 @@ function exiledCardPickAt(sentences, i, ctx) {
   }
   const pay = /^you may pay ((?:\{[^}]+\})+) and (\d+) life\.$/i.exec(first);
   const done = /^if you do, (.+)$/i.exec(next);
+  // "You may pay 2 life. If you do, draw a card." (Sanguine Spy).
+  const payLife = /^you may pay (\d+) life\.$/i.exec(first);
+  if (payLife !== null && done !== null) {
+    const effect = parseSentence(`${done[1][0].toUpperCase()}${done[1].slice(1)}`, ctx);
+    if (effect === null || containsUndefined(effect)) return null;
+    return { effect: { kind: "may", prompt: `Pay ${payLife[1]} life?`, costLife: Number(payLife[1]), effect }, used: 2 };
+  }
   if (pay !== null && done !== null) {
     const effect = parseSentence(`${done[1][0].toUpperCase()}${done[1].slice(1)}`, ctx);
     if (effect === null || containsUndefined(effect)) return null;
@@ -9227,6 +9334,24 @@ function chosenValueAt(sentences, i, ctx) {
   const wrap = (value, then, extra = {}) => ({ kind: "choose-value", value, ...extra, then });
   const who = (phrase) => ctx.target(phrase.toLowerCase() === "target opponent" ? "opponent" : "player");
   let m;
+  // Terraformer, Elsewhere Flask: a word chosen as it resolves, replacing every
+  // land type (rule 305.7).
+  if (/^choose a basic land type\.$/i.test(s(0)) && /^each land you control becomes that type until end of turn\.$/i.test(s(1))) {
+    return {
+      effect: {
+        kind: "choose-creature-type",
+        options: ["Plains", "Island", "Swamp", "Mountain", "Forest"],
+        prompt: "Choose a basic land type",
+        then: {
+          kind: "for-each-permanent",
+          filter: { type: "land", controlledBy: "you" },
+          simultaneous: true,
+          effect: { kind: "add-types", target: 0, setSubtypes: ["$chosen"], duration: "end-of-turn" },
+        },
+      },
+      used: 2,
+    };
+  }
   if (/^choose a color\.$/i.test(s(0))) {
     m = /^(target player|target opponent) reveals their hand and discards all cards of (?:that|the chosen) color\.$/i.exec(s(1));
     if (m !== null) {
@@ -10861,6 +10986,28 @@ export function parseFace(face, ctx = {}) {
       if (restrictions.includes("as a sorcery")) ability.sorcerySpeed = true;
       if (restrictions.includes("once each turn")) ability.oncePerTurn = true;
       if (restrictions.includes("during your turn")) ability.condition = { kind: "your-turn" };
+      // Rocket Launcher: rule 302.6's test, of a permanent of any type.
+      rest = rest.replace(/ Activate only if you've controlled ~ continuously since the beginning of your most recent turn\.$/, () => {
+        ability.condition = { kind: "source", filter: { controlledContinuously: true } };
+        return "";
+      });
+      // Norritt's, Nettling Imp's and Talas Researcher's "before attackers
+      // are declared": the first combat's, so a main phase after it is too late.
+      rest = rest.replace(/ Activate only (during an opponent's turn, |during your turn, )?before attackers are declared\.$/, (whole, turn) => {
+        const before = {
+          kind: "any",
+          of: [
+            { kind: "turn-structure", steps: ["upkeep", "draw"] },
+            { kind: "turn-structure", mainPhase: 1 },
+            { kind: "turn-structure", steps: ["begin-combat"], combatPhase: 1 },
+          ],
+        };
+        ability.condition =
+          turn === undefined
+            ? before
+            : { kind: "all", of: [/your/.test(turn) ? { kind: "your-turn" } : { kind: "not", of: { kind: "your-turn" } }, before] };
+        return "";
+      });
       rest = rest.replace(/ Activate only during your upkeep\.$/, () => {
         ability.condition = { kind: "all", of: [{ kind: "your-turn" }, { kind: "turn-structure", steps: ["upkeep"] }] };
         return "";
@@ -11620,6 +11767,10 @@ const MELD_SENTENCE =
  * (Hidden Stockpile) and celebration (Pests of Honor). */
 const INTERVENING_IFS = {
   ...TURN_TALLY_IFS,
+  // Murders at Karlov Manor (Sanguine Spy).
+  "if there are five or more mana values among cards in your graveyard,": FIVE_MANA_VALUES,
+  // Keldon Twilight, Charging Cinderhorn: nobody's creatures, whoever's turn.
+  "if no creatures attacked this turn,": { kind: "not", of: { kind: "turn-stat", stat: "attacked", who: "any-player", atLeast: 1 } },
   // Coven (Midnight Hunt) and day/night (rule 731.1).
   "if you control three or more creatures with different powers,": { kind: "coven" },
   "if it's night,": { kind: "day-night", is: "night" },
@@ -11721,6 +11872,8 @@ function flashIfOf(clause) {
     if (filter === null || Object.keys(filter).length === 0) return null;
     return { condition: { kind: "controls", filter, atLeast: 1 } };
   }
+  // Graveyard Shift.
+  if (clause === "there are five or more mana values among cards in your graveyard") return { condition: FIVE_MANA_VALUES };
   m = new RegExp(`^there are ${N} or more (.+) cards in your graveyard$`).exec(clause);
   if (m !== null) {
     const n = numberOf(m[1]);
@@ -12938,9 +13091,69 @@ function tokenReplacementOf(line, text, tokenFor) {
   return null;
 }
 
+/**
+ * A permanent that's a creature on its own terms, in the planeswalkers' words:
+ * "During your turn, ~ is a 4/4 Human Soldier creature with indestructible
+ * that's still a planeswalker" (Gideon Blackblade), "As long as ~ has seven or
+ * more loyalty counters on him, he's a 7/7 Dragon God creature with flying and
+ * indestructible" (Grand Master of Flowers), "During your turn, as long as ~
+ * has one or more loyalty counters on him, he's a 3/4 Ninja creature and has
+ * hexproof" (Kaito). "Still a [type]" keeps its card types (rule 205.1b), and
+ * without those words the new type replaces them (205.1a).
+ */
+function selfCreatureWhileOf(line, text) {
+  const m =
+    /^(During your turn, )?(?:[Aa]s long as ~ has (\w+) or more (\w+) counters on (?:him|her|it), )?(?:~ is|he's|she's|it's) an? (\d+)\/(\d+) ((?:[A-Z][a-z]+ )+)creature(?:(?: with| and has) ([a-z ,]+?))?( that's still an? [a-z]+)?\.$/.exec(
+      line,
+    );
+  if (m === null || (m[1] === undefined && m[2] === undefined)) return null;
+  const keywords = [];
+  for (const word of (m[7] ?? "").split(/, and |, | and /).filter(Boolean)) {
+    const keyword = KEYWORDS[word];
+    if (keyword === undefined) return null;
+    keywords.push(keyword);
+  }
+  const counters =
+    m[2] === undefined
+      ? null
+      : { kind: "self-counters", counter: m[3], compare: { op: "gte", n: numberOf(m[2]) } };
+  const during = m[1] !== undefined ? { kind: "your-turn" } : null;
+  const condition = during !== null && counters !== null ? { kind: "all", of: [during, counters] } : (during ?? counters);
+  return {
+    affects: { scope: "self" },
+    condition,
+    ...(m[8] !== undefined ? { addTypes: ["creature"] } : { setTypes: ["creature"] }),
+    addSubtypes: m[6].trim().split(" "),
+    setBasePt: { power: Number(m[4]), toughness: Number(m[5]) },
+    ...(keywords.length > 0 ? { grantKeywords: keywords } : {}),
+    text,
+  };
+}
+
 function parseStatic(line, text) {
   const spellCost = spellCostStaticOf(line, text);
   if (spellCost !== null) return spellCost;
+  const creatureWhile = selfCreatureWhileOf(line, text);
+  if (creatureWhile !== null) return creatureWhile;
+  // Spark Rupture: every such planeswalker, each P/T its own count (layer 7b).
+  {
+    const m =
+      /^Each planeswalker with (\w+) or more loyalty counters on it loses all abilities and is a creature with power and toughness each equal to the number of loyalty counters on it\.$/.exec(
+        line,
+      );
+    if (m !== null) {
+      return {
+        affects: {
+          scope: "filter",
+          filter: { type: "planeswalker", counters: { kind: "loyalty", compare: { op: "gte", n: numberOf(m[1]) } } },
+        },
+        loseAllAbilities: true,
+        setTypes: ["creature"],
+        setBasePtFromAffectedCounters: "loyalty",
+        text,
+      };
+    }
+  }
   // A limit on how many creatures attack or block (`combat/limits.ts`): "No more
   // than two creatures can attack you each combat" (Crawlspace), "… attack each
   // combat", "… block each combat" (Silent Arbiter), "… attack ~" (The Eternal
@@ -13462,6 +13675,17 @@ function parseStatic(line, text) {
     const w = /^~ gets \+X\/\+(0|X), where X is (.+)\.$/.exec(line);
     const agg = w === null ? null : aggregatePhraseOf(w[2]);
     if (agg !== null) return { affects: { scope: "self" }, grantPtPerCount: { aggregate: agg, pt: [1, w[1] === "X" ? 1 : 0] }, text };
+  }
+  // Embodiment of Agonies: one counter for each different mana cost (or
+  // mana value) among some of your graveyard's cards.
+  {
+    const w = /^~ enters with a \+1\/\+1 counter on it for each different (mana cost|mana value) among (.+) cards in your graveyard\.$/.exec(line);
+    const filter = w === null ? null : parseTypePhrase(w[2], { cards: true });
+    if (filter !== null) {
+      const of = w[1] === "mana cost" ? "mana-cost" : "mana-value";
+      const amount = { aggregate: "distinct", of, filter: { ...filter, ownedBy: "you" }, in: "graveyards" };
+      return { affects: { scope: "self" }, replacement: { event: "enters-battlefield", counters: { kind: "+1/+1", amount } }, text };
+    }
   }
   {
     const w = /^~ enters with X \+1\/\+1 counters on it, where X is (.+)\.$/.exec(line);

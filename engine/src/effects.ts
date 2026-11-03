@@ -1474,6 +1474,10 @@ export type ZoneChoiceFilter = CardFilter;
  */
 export const CHOSEN_CREATURE_TYPE = "$chosen";
 
+/** The first of two nested choices' placeholder — see `choose-creature-type`'s
+ * `sentinel`. */
+export const FIRST_CHOSEN_TYPE = "$chosenFirst";
+
 /**
  * A copy of `spec` with every string exactly equal to `CHOSEN_CREATURE_TYPE`
  * replaced by `creatureType`. `EffectSpec` is plain data, so a structural walk
@@ -3435,6 +3439,12 @@ export type EffectSpec =
        * hidden as `GameObject.secretChoice` until a `revealChosen` cost shows
        * it. */
       readonly secret?: true;
+      /** The placeholder this answer goes into in `then`, in place of
+       * `CHOSEN_CREATURE_TYPE`: what lets a second choice nest inside the
+       * first — Vision Charm's "choose a land type and a basic land type.
+       * Each land of the first chosen type becomes the second chosen type"
+       * (`FIRST_CHOSEN_TYPE` here, `CHOSEN_CREATURE_TYPE` under it). */
+      readonly sentinel?: string;
     }
   | {
       /**
@@ -7629,6 +7639,10 @@ export type EffectSpec =
       /** What's attached, when it isn't the source — see {@link AttachRef}
        * (`"put-this-way"`: Stonehewer Giant's found Equipment). */
       readonly attachment?: AttachRef;
+      /** "Equip planeswalker" (rule 702.6e, Luxior, Giada's Gift): this
+       * Equipment goes on a planeswalker "as though that planeswalker were a
+       * creature". */
+      readonly planeswalkerToo?: true;
       readonly attachments?: CardFilter;
       /** `upTo`: at most that many — Vow to Erebor's "you may attach **an**
        * Equipment you control to it" is `upTo: 1`. */
@@ -10333,7 +10347,7 @@ export interface EffectApi {
   chooseCreatureType(
     then: EffectSpec,
     exclude?: readonly string[],
-    options?: { readonly options: readonly string[]; readonly prompt?: string },
+    options?: { readonly options: readonly string[]; readonly prompt?: string; readonly sentinel?: string },
     /** What to keep of the answer on the source, and whether it's secret. */
     keep?: { readonly remember?: "player" | "creature-type"; readonly secret?: true },
   ): void;
@@ -11307,7 +11321,7 @@ export interface EffectApi {
   conditionMet(condition: StaticCondition): boolean;
   /** Attach `attachment` (an Aura/Equipment) to `target` — `ctx.source`
    * when it's omitted. See the `"attach"` {@link EffectSpec}. */
-  attach(target: TargetRef, attachment?: TargetRef): void;
+  attach(target: TargetRef, attachment?: TargetRef, planeswalkerToo?: boolean): void;
   /** Unattach `target` — see the `"unattach"` {@link EffectSpec}. */
   unattach(target: TargetRef): void;
   /** The source becomes a Licid's Aura and is attached to `target` — see
@@ -15009,7 +15023,11 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         spec.exclude,
         spec.options === undefined
           ? undefined
-          : { options: spec.options, ...(spec.prompt !== undefined ? { prompt: spec.prompt } : {}) },
+          : {
+              options: spec.options,
+              ...(spec.prompt !== undefined ? { prompt: spec.prompt } : {}),
+              ...(spec.sentinel !== undefined ? { sentinel: spec.sentinel } : {}),
+            },
         {
           ...(spec.remember === true ? { remember: "creature-type" as const } : {}),
           ...(spec.secret === true ? { secret: true as const } : {}),
@@ -17198,7 +17216,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         // "Attach this …": not once the source has left and come back as a
         // new object (rule 400.7).
         if (ctx.sourceLost === true) return;
-        ctx.attach(target);
+        ctx.attach(target, undefined, spec.planeswalkerToo === true);
         return;
       }
       const attachment = resolveAttachRef(spec.attachment, ctx);

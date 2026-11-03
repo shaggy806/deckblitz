@@ -709,6 +709,7 @@ import _poolSorayaTheFalconer from "../pool/soraya-the-falconer.js";
 import _poolSorinRavenousNeonate from "../pool/sorin-ravenous-neonate.js";
 import _poolSoulOfInnistrad from "../pool/soul-of-innistrad.js";
 import _poolSowingMycospawn from "../pool/sowing-mycospawn.js";
+import _poolSparkRupture from "../pool/spark-rupture.js";
 import _poolSpectralInterference from "../pool/spectral-interference.js";
 import _poolSphinxOfFalseConclusions from "../pool/sphinx-of-false-conclusions.js";
 import _poolSpikeWeaver from "../pool/spike-weaver.js";
@@ -1611,6 +1612,7 @@ const shard: CardShard = {
     _poolSorinRavenousNeonate,
     _poolSoulOfInnistrad,
     _poolSowingMycospawn,
+    _poolSparkRupture,
     _poolSpectralInterference,
     _poolSphinxOfFalseConclusions,
     _poolSpikeWeaver,

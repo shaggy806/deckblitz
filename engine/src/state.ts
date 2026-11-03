@@ -361,7 +361,8 @@ export interface GameObject {
   /**
    * True while the creature has not been under its controller's control since
    * the start of that player's most recent turn (rule 302.6). Set on entering
-   * the battlefield, cleared in the controller's untap step.
+   * the battlefield, cleared in the controller's untap step. A permanent of
+   * any type has it, and `CardFilter.controlledContinuously` reads it.
    */
   summoningSick: boolean;
   /**
@@ -1363,6 +1364,12 @@ export interface GameObject {
   /** What this creature is attacking — a player, or an opponent's planeswalker
    * (rule 508.1) — or `null` if not attacking. */
   attacking: PlayerId | ObjectId | null;
+  /** The planeswalker or battle this creature is attacking stopped being one,
+   * and so was removed from combat (rule 506.4): it's still an attacking
+   * creature and may be blocked, but it attacks nothing and, unblocked, deals
+   * no combat damage (506.4c). It doesn't rejoin if the permanent becomes a
+   * planeswalker again. Gone when it leaves combat. */
+  attackingNothing?: true;
   /** The attacker this creature is blocking, or `null` if not blocking —
    * the one it was declared blocking. */
   blocking: ObjectId | null;
@@ -3675,6 +3682,10 @@ export type AwaitingDecision =
        * `CHOSEN_CARD_TYPE`, `CHOSEN_COUNTER`), and the whole resolution to
        * resume — `targets` and `x` above are left unset. */
       readonly value?: { readonly sentinel: string; readonly resume: ResolutionResume };
+      /** The placeholder the answer goes into in `then`, when it isn't
+       * `CHOSEN_CREATURE_TYPE`: a choice with a second nested inside it (Vision
+       * Charm). */
+      readonly sentinel?: string;
     }
   | ({
       /**
