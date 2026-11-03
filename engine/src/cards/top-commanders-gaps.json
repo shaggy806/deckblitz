@@ -1406,7 +1406,9 @@
   "static:cost-increase-colored",
   "keyword:offering",
   "amount:count-distinct-mana-costs",
-  "condition:distinct-mana-values-in-graveyard"
+  "condition:distinct-mana-values-in-graveyard",
+  "condition:controlled-since-turn-start",
+  "filter:controlled-continuously-since-turn-start"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

@@ -960,6 +960,15 @@ export interface CardFilter {
    * this turn", "a creature that didn't enter this turn". A card anywhere
    * but the battlefield hasn't; one that has left is asked as it last was. */
   readonly enteredThisTurn?: boolean;
+  /** Its controller has (or hasn't) controlled it continuously since their
+   * most recent turn began — rule 302.6's test, read of a permanent of any
+   * type and whether or not it has haste: Rocket Launcher's "you've
+   * controlled this artifact continuously since the beginning of your most
+   * recent turn". With `controlledBy: "active-player"` that turn is this one:
+   * Nettling Imp's "creature the active player has controlled continuously
+   * since the beginning of the turn". Battlefield only: off it (a last-known
+   * snapshot) nothing has been. */
+  readonly controlledContinuously?: boolean;
   /** Is (or isn't) renowned (rule 702.112b) — renown's "if it isn't
    * renowned", "as long as this creature is renowned" (Goblin Glory Chaser),
    * "if it's renowned" (Consul's Lieutenant). Asked like `monstrous`. */
@@ -2229,6 +2238,10 @@ export function matchesFilter(
   if (filter.enteredThisTurn !== undefined) {
     const turn = live !== undefined ? live.enteredBattlefieldOnTurn : (lki!.enteredOnTurn ?? null);
     if ((turn === state.turn.number) !== filter.enteredThisTurn) return false;
+  }
+  if (filter.controlledContinuously !== undefined) {
+    const held = live !== undefined && live.zone === "battlefield" && !live.summoningSick;
+    if (held !== filter.controlledContinuously) return false;
   }
   if (
     filter.cast !== undefined ||

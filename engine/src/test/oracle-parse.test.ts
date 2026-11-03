@@ -5221,6 +5221,49 @@ describe("distinct values and Equipment attached to the source", () => {
     });
   });
 
+  it("reads 'controlled continuously since the beginning of' a turn on a source, a target and a sacrifice", () => {
+    const launcher = face(
+      "Artifact",
+      "{2}: This artifact deals 1 damage to any target. Destroy this artifact at the beginning of the next end step. Activate only if you've controlled this artifact continuously since the beginning of your most recent turn.",
+    );
+    expect(launcher.activated[0].condition).toEqual({ kind: "source", filter: { controlledContinuously: true } });
+    expect(launcher.activated[0].effect.effects[1]).toMatchObject({
+      kind: "delayed-trigger",
+      at: "next-end-step",
+      effect: { kind: "destroy", target: "source" },
+    });
+    const imp = face(
+      "Creature — Imp",
+      "{T}: Choose target non-Wall creature the active player has controlled continuously since the beginning of the turn. That creature attacks this turn if able. Destroy it at the beginning of the next end step if it didn't attack this turn. Activate only during an opponent's turn, before attackers are declared.",
+    );
+    expect(imp.activated[0].targets).toEqual([
+      {
+        kind: "permanent",
+        filter: { type: "creature", notSubtypes: ["Wall"], controlledBy: "active-player", controlledContinuously: true },
+      },
+    ]);
+    expect(imp.activated[0].condition.of[0]).toEqual({ kind: "not", of: { kind: "your-turn" } });
+    expect(imp.activated[0].effect.effects[1].effect).toEqual({
+      kind: "conditional",
+      condition: { kind: "target", index: 0, filter: { attackedThisTurn: false } },
+      then: { kind: "destroy", target: 0 },
+    });
+    const twilight = face(
+      "Enchantment",
+      "At the beginning of each player's end step, if no creatures attacked this turn, that player sacrifices a creature of their choice that they controlled since the beginning of the turn.",
+    );
+    expect(twilight.triggered[0].condition).toEqual({
+      kind: "not",
+      of: { kind: "turn-stat", stat: "attacked", who: "any-player", atLeast: 1 },
+    });
+    expect(twilight.triggered[0].effect).toEqual({
+      kind: "sacrifice",
+      who: "active-player",
+      filter: { type: "creature", controlledContinuously: true },
+      count: 1,
+    });
+  });
+
   it("reads the mana value threshold on a spell, a trigger and an unless, and 'each different mana cost' on an entry", () => {
     const fiveValues = {
       kind: "aggregate",

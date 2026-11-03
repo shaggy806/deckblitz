@@ -5440,6 +5440,14 @@ export function parseSentence(sentence, ctx) {
       otherwise: { kind: "counter", target: i },
     };
   }
+  // Keldon Twilight's "that player": the one whose end step it is.
+  if (/^that player sacrifices a creature of their choice that they controlled since the beginning of the turn\.$/i.test(s)) {
+    return { kind: "sacrifice", who: "active-player", filter: { type: "creature", controlledContinuously: true }, count: 1 };
+  }
+  // Rocket Launcher, Crazed Armodon.
+  if (/^destroy ~ at the beginning of the next end step\.$/i.test(s)) {
+    return { kind: "delayed-trigger", at: "next-end-step", text: "Destroy ~.", effect: { kind: "destroy", target: "source" } };
+  }
   // "Then discard a card unless you attacked this turn" (Chart a Course),
   // "… unless there are five or more mana values among cards in your
   // graveyard" (Tainted Indulgence): any condition the intervening-ifs read.
@@ -7065,6 +7073,13 @@ export function parseEffect(text, outer) {
     }
     // A card of those exiled with ~ chosen as this resolves (Muse Vessel, Bag
     // of Devouring), and paying for what follows (Purgatory).
+    const forced = forcedAttackAt(sentences, i, ctx);
+    if (forced !== null) {
+      parsed.push(forced.effect);
+      hints.push({ sentence, effect: forced.effect });
+      skip = forced.used - 1;
+      continue;
+    }
     const exiledPick = exiledCardPickAt(sentences, i, ctx);
     if (exiledPick !== null) {
       parsed.push(exiledPick.effect);
@@ -8398,6 +8413,43 @@ function searchOthersAt(sentences, i, ctx) {
  * - "You may pay {4} and 2 life. If you do, return a card exiled with ~ to the
  *   battlefield." (Purgatory): a `may` with its `cost` and `costLife`.
  */
+function forcedAttackAt(sentences, i, ctx) {
+  const m = /^choose target (?:non-([A-Z][a-z]+) )?creature the active player has controlled continuously since the beginning of the turn\.$/i.exec(sentences[i]);
+  if (
+    m === null ||
+    !/^that creature attacks this turn if able\.$/i.test(sentences[i + 1] ?? "") ||
+    !/^destroy it at the beginning of the next end step if it didn't attack this turn\.$/i.test(sentences[i + 2] ?? "")
+  ) {
+    return null;
+  }
+  const filter = {
+    type: "creature",
+    ...(m[1] !== undefined ? { notSubtypes: [m[1]] } : {}),
+    controlledBy: "active-player",
+    controlledContinuously: true,
+  };
+  const target = ctx.target({ kind: "permanent", filter });
+  return {
+    effect: {
+      kind: "sequence",
+      effects: [
+        { kind: "restrict", target, restrictions: ["must-attack"] },
+        {
+          kind: "delayed-trigger",
+          at: "next-end-step",
+          text: "Destroy it if it didn't attack this turn.",
+          effect: {
+            kind: "conditional",
+            condition: { kind: "target", index: target, filter: { attackedThisTurn: false } },
+            then: { kind: "destroy", target },
+          },
+        },
+      ],
+    },
+    used: 3,
+  };
+}
+
 function exiledCardPickAt(sentences, i, ctx) {
   const first = sentences[i];
   const next = sentences[i + 1] ?? "";
@@ -10873,6 +10925,28 @@ export function parseFace(face, ctx = {}) {
       if (restrictions.includes("as a sorcery")) ability.sorcerySpeed = true;
       if (restrictions.includes("once each turn")) ability.oncePerTurn = true;
       if (restrictions.includes("during your turn")) ability.condition = { kind: "your-turn" };
+      // Rocket Launcher: rule 302.6's test, of a permanent of any type.
+      rest = rest.replace(/ Activate only if you've controlled ~ continuously since the beginning of your most recent turn\.$/, () => {
+        ability.condition = { kind: "source", filter: { controlledContinuously: true } };
+        return "";
+      });
+      // Norritt's, Nettling Imp's and Talas Researcher's "before attackers
+      // are declared": the first combat's, so a main phase after it is too late.
+      rest = rest.replace(/ Activate only (during an opponent's turn, |during your turn, )?before attackers are declared\.$/, (whole, turn) => {
+        const before = {
+          kind: "any",
+          of: [
+            { kind: "turn-structure", steps: ["upkeep", "draw"] },
+            { kind: "turn-structure", mainPhase: 1 },
+            { kind: "turn-structure", steps: ["begin-combat"], combatPhase: 1 },
+          ],
+        };
+        ability.condition =
+          turn === undefined
+            ? before
+            : { kind: "all", of: [/your/.test(turn) ? { kind: "your-turn" } : { kind: "not", of: { kind: "your-turn" } }, before] };
+        return "";
+      });
       rest = rest.replace(/ Activate only during your upkeep\.$/, () => {
         ability.condition = { kind: "all", of: [{ kind: "your-turn" }, { kind: "turn-structure", steps: ["upkeep"] }] };
         return "";
@@ -11634,6 +11708,8 @@ const INTERVENING_IFS = {
   ...TURN_TALLY_IFS,
   // Murders at Karlov Manor (Sanguine Spy).
   "if there are five or more mana values among cards in your graveyard,": FIVE_MANA_VALUES,
+  // Keldon Twilight, Charging Cinderhorn: nobody's creatures, whoever's turn.
+  "if no creatures attacked this turn,": { kind: "not", of: { kind: "turn-stat", stat: "attacked", who: "any-player", atLeast: 1 } },
   // Coven (Midnight Hunt) and day/night (rule 731.1).
   "if you control three or more creatures with different powers,": { kind: "coven" },
   "if it's night,": { kind: "day-night", is: "night" },

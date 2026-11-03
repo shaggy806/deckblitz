@@ -2706,7 +2706,7 @@ subtypes, supertype, notSupertype, name, notName, colors, notColors, colorless,
 manaValue, power, toughness, basePower, baseToughness, counters, controlledBy,
 ownedBy, keyword, notKeyword, tapped, token, isCommander, equipped, enchanted,
 modified, anyOf, manaSpent, manaFrom, putIntoGraveyardFromLibraryThisTurn, putIntoGraveyardThisTurn, blockedThisTurn,
-discardedThisTurn, enteredThisTurn, attackedThisTurn, damagedThisTurnBy, excessDamageThisTurn,
+discardedThisTurn, enteredThisTurn, controlledContinuously, attackedThisTurn, damagedThisTurnBy, excessDamageThisTurn,
 dealtDamageToCreatureThisTurn, dealtDamageThisTurn, cast, castBy, castFrom, castVia, enteredFrom,
 putThereBySource, sharesCardTypeWith, sharesPermanentTypeWith, sharesCreatureTypeWith, sharesLandTypeWith, sameNameWith, sameNameAsAnother, thisWay, attacking, blocking, blockingRelation, goaded, suspected, saddled, saddledSource, crewedSource, crewedBySource, enlistedThisCombat, monstrous, renowned, hasManaAbility, hasAbilities,
 xInManaCost, manaCost, coloredManaSymbols, cardTypeCount, nameDiffersFromEach,
@@ -2939,7 +2939,13 @@ shares…" needs no `anyOf`; write `exceptTarget`/`exceptSource` for a bare
 on either side shares a creature type with anything that has one, a creature
 with none shares nothing, and with no reference (gone, an illegal target)
 nothing shares. Unbound — a static's or a trigger's filter — it matches
-nothing. `enteredThisTurn` /
+nothing. `controlledContinuously` is rule 302.6's test on a permanent of any
+type, haste or no haste: its controller has had it since their most recent turn
+began — Rocket Launcher's `{ kind: "source", filter: {
+controlledContinuously: true } }` on an activated ability's `condition`, Nettling
+Imp's target with `controlledBy: "active-player"` ("the active player has
+controlled continuously since the beginning of the turn"), Keldon Twilight's
+sacrifice. `enteredThisTurn` /
 `attackedThisTurn` are a permanent's history this turn — "creatures that
 entered this turn", Kratos, God of War's "creatures that player controls that
 **didn't attack** this turn" (`attackedThisTurn: false`). A permanent that
@@ -5683,7 +5689,7 @@ clause (section 9):
   `mainPhases`, the phase under way included. Portal's "Activate only during
   your turn, before attackers are declared" is `BEFORE_ATTACKERS_DECLARED`
   from `helpers.ts` (upkeep, draw, the first main phase, the first beginning
-  of combat).
+  of combat), `BEFORE_ATTACKERS_ANY_TURN` without the "your turn" (Norritt).
 - `{ kind: "attacked-this-step" }` — Portal's "Cast this spell only during
   the declare attackers step and only if you've been attacked this step"
   (`castOnlyIf`; Just Fate, Harsh Justice): a declare attackers step in which
