@@ -2217,10 +2217,60 @@ function emblemOf(s) {
   };
 }
 
+/** A point in a later turn (`UntilPointDuration`) as Oracle text words it. */
+const LATER_POINTS = [
+  [/until your next upkeep/i, "until-your-next-upkeep"],
+  [/until the end of your next upkeep/i, "until-end-of-your-next-upkeep"],
+  [/until the end of your next turn/i, "until-end-of-your-next-turn"],
+  [/until its controller's next untap step/i, "until-its-controllers-next-untap-step"],
+];
+
+/** The effect kinds whose `duration` is a `PtDuration`. */
+const PT_DURATION_KINDS = new Set(
+  "add-types animate animate-all become-color block-additional cant-be-sacrificed change-text double-pt-all grant-activated grant-activated-all grant-keyword grant-keyword-all grant-protection grant-static grant-toxic grant-triggered grant-triggered-all lose-abilities lose-abilities-all lose-keywords modify-pt modify-pt-all switch-pt".split(
+    " ",
+  ),
+);
+
+/** `effect`, an "until end of turn" one, lasting `duration` instead, or `null`
+ * for anything that doesn't take one. */
+function lastingUntil(effect, duration) {
+  if (effect === null || typeof effect !== "object") return null;
+  if (effect.kind === "gain-control" && effect.untilEndOfTurn === true) {
+    return { ...effect, untilEndOfTurn: false, until: duration };
+  }
+  if (effect.kind === "sequence") {
+    const effects = effect.effects.map((e) => lastingUntil(e, duration));
+    return effects.includes(null) ? null : { ...effect, effects };
+  }
+  return PT_DURATION_KINDS.has(effect.kind) && effect.duration === "end-of-turn" ? { ...effect, duration } : null;
+}
+
+/** "Target land becomes a Swamp until its controller's next untap step": the
+ * sentence's "until end of turn" reading, lasting that long instead; `null`
+ * when it has no such reading, with nothing left in `ctx`. */
+function laterPointSentence(s, ctx) {
+  const later = LATER_POINTS.find(([words]) => words.test(s));
+  if (later === undefined) return null;
+  const slots = ctx.targets.length;
+  // "Until your next upkeep, target …" as "Target … until end of turn".
+  const leading = new RegExp(`^${later[0].source}, (.+?)\\.?$`, "i").exec(s);
+  const asThisTurn =
+    leading !== null
+      ? `${leading[1][0].toUpperCase()}${leading[1].slice(1)} until end of turn.`
+      : s.replace(later[0], "until end of turn");
+  const read = parseSentence(asThisTurn, ctx);
+  const effect = lastingUntil(read, later[1]);
+  if (effect === null) ctx.targets.length = slots;
+  return effect;
+}
+
 export function parseSentence(sentence, ctx) {
   const s = sentence.replace(/\s+/g, " ").trim();
   const emblem = emblemOf(s);
   if (emblem !== null) return emblem;
+  const atLaterPoint = laterPointSentence(s, ctx);
+  if (atLaterPoint !== null) return atLaterPoint;
   // "When you lose control of the creature, tap it" (Ray of Command), "… of
   // that Equipment, unattach it" (Ogre Geargrabber): a delayed ability about
   // the one target (rule 603.10d).
@@ -4419,6 +4469,23 @@ export function parseSentence(sentence, ctx) {
       },
     };
   }
+  // Rule 305.7: "becomes a Swamp" replaces its land types.
+  if ((m = re(`(${TARGET}) becomes an? (Plains|Island|Swamp|Mountain|Forest) until end of turn`).exec(s))) {
+    return { kind: "add-types", target: slot(m[1]), setSubtypes: [m[2]], duration: "end-of-turn" };
+  }
+  // Karn's Touch: its mana value read once, as the effect applies (rule 608.2h).
+  if ((m = re(`(${TARGET}) becomes an artifact creature with power and toughness each equal to its mana value until end of turn`).exec(s))) {
+    const target = slot(m[1]);
+    return {
+      kind: "animate",
+      target,
+      power: { manaValueOf: target },
+      toughness: { manaValueOf: target },
+      addTypes: ["artifact", "creature"],
+      addSubtypes: [],
+      duration: "end-of-turn",
+    };
+  }
   if ((m = re(`(~|${TARGET}) gains ${KW}(?: and ${KW})? until end of turn`).exec(s))) {
     const target = m[1] === "~" ? "source" : slot(m[1]);
     const kws = [m[2], m[3]].filter(Boolean).map((k) => KEYWORDS[k.toLowerCase()]);
@@ -5399,8 +5466,18 @@ function impulseWindowOf(sentence) {
   const words = [
     [`you may ${verb} ${it} this turn`, { duration: "end-of-turn" }],
     [`until end of turn, you may ${verb} ${it}`, { duration: "end-of-turn" }],
+    [`until your next turn, you may ${verb} ${it}`, { duration: "until-your-next-turn" }],
+    [`until the beginning of your next upkeep, you may ${verb} ${it}`, { duration: "until-your-next-upkeep" }],
+    [
+      `until your next turn, you may ${verb} ${it} if it's an instant or sorcery spell`,
+      { duration: "until-your-next-turn", filter: { typesAnyOf: ["instant", "sorcery"] } },
+    ],
     [`you may ${verb} ${it} until the end of your next turn`, { duration: "your-next-turn" }],
     [`until the end of your next turn, you may ${verb} ${it}`, { duration: "your-next-turn" }],
+    [
+      `until the end of your next turn, you may ${verb} ${it} and you may spend mana as though it were mana of any color to cast that spell`,
+      { duration: "your-next-turn", spendAs: "any-color" },
+    ],
     [`during your next turn, you may ${verb} ${it}`, { duration: "your-next-turn-only" }],
     [`until end of combat on your next turn, you may ${verb} ${it}`, { duration: "until-end-of-combat-your-next-turn" }],
     [`you may ${verb} ${it} until you exile another card with ~`, { duration: "until-next-exile" }],
@@ -5461,7 +5538,14 @@ function impulseWindowAt(sentences, i, ctx) {
   }
   // Only the windows new to `exile`: the plain "this turn" reads go on through
   // whatever else those lines say.
-  if (window.sourceDid !== undefined) return null;
+  if (window.sourceDid !== undefined || window.filter !== undefined) return null;
+  // "Exile target creature. Until the end of your next turn, you may cast that
+  // card and you may spend mana as though …" (Hurl Through Hell).
+  const permanent = window.spendAs !== undefined ? /^exile target ([a-z' ]+?)\.$/i.exec(sentences[i]) : null;
+  const onBattlefield = permanent === null ? undefined : targetOf(`target ${permanent[1]}`);
+  if (onBattlefield !== undefined) {
+    return { kind: "exile", target: ctx.target(onBattlefield), mayCast: { duration: when.duration, spendAs: when.spendAs } };
+  }
   const graveyard = /^exile (up to one )?target (?:(.+?) )?card from your graveyard\.$/i.exec(sentences[i]);
   if (graveyard === null) return null;
   const filter = graveyard[2] === undefined ? {} : parseTypePhrase(graveyard[2], { cards: true });
@@ -5470,7 +5554,11 @@ function impulseWindowAt(sentences, i, ctx) {
   return {
     kind: "exile",
     target: ctx.target(graveyard[1] !== undefined ? { kind: "optional", of: spec } : spec),
-    mayCast: { duration: when.duration, ...(play ? { play: true } : {}) },
+    mayCast: {
+      duration: when.duration,
+      ...(play ? { play: true } : {}),
+      ...(when.spendAs !== undefined ? { spendAs: when.spendAs } : {}),
+    },
   };
 }
 

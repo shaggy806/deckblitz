@@ -260,6 +260,7 @@ import type {
   PileFate,
   PlayerScope,
   PtDuration,
+  UntilPointDuration,
   ResolutionContext,
   ResolvedEnterAttacking,
   ReturnToHandZone,
@@ -302,6 +303,7 @@ import type {
   GameEvent,
   GameEventInput,
   GameEventType,
+  UntilPoint,
   RandomPick,
   Vote,
   WhileSource,
@@ -1659,18 +1661,34 @@ function lasting(
   ) {
     return { whileSource: source };
   }
-  return duration === "until-your-next-turn" ? { untilTurnOf: you } : duration;
+  if (typeof duration === "object" || duration === "end-of-turn" || duration === "permanent") return duration;
+  return duration === "until-your-next-turn" ? { untilTurnOf: you } : { untilPoint: untilPointOf(duration, you) };
+}
+
+/** The moment `duration` ends at, for the effect's controller `you`. */
+function untilPointOf(duration: UntilPointDuration, you: PlayerId): UntilPoint {
+  switch (duration) {
+    case "until-your-next-upkeep":
+      return { point: "upkeep-begins", player: you };
+    case "until-end-of-your-next-upkeep":
+      return { point: "upkeep-ends", player: you };
+    case "until-end-of-your-next-turn":
+      return { point: "turn-ends", player: you };
+    case "until-its-controllers-next-untap-step":
+      return { point: "controllers-untap-begins" };
+  }
 }
 
 /** A modifier's duration fields for `duration`. */
 function durationFields(
   duration: EffectDuration,
-): Pick<PtModifier, "untilEndOfTurn" | "untilTurnOf" | "whileCounter" | "whileSource"> {
+): Pick<PtModifier, "untilEndOfTurn" | "untilTurnOf" | "untilPoint" | "whileCounter" | "whileSource"> {
   if (duration === "end-of-turn") return { untilEndOfTurn: true };
   if (duration === "permanent") return { untilEndOfTurn: false };
   if ("whileSource" in duration) {
     return duration.whileSource === null ? { untilEndOfTurn: false } : { untilEndOfTurn: false, whileSource: duration.whileSource };
   }
+  if ("untilPoint" in duration) return { untilEndOfTurn: false, untilPoint: duration.untilPoint };
   return "untilTurnOf" in duration
     ? { untilEndOfTurn: false, untilTurnOf: duration.untilTurnOf }
     : { untilEndOfTurn: false, whileCounter: duration.whileCounter };
@@ -8163,7 +8181,24 @@ export class Game {
       ) {
         delete this.state.objects[id].impulse;
       }
+      // "Until your next turn" ends now; "until your next upkeep" with that
+      // upkeep (`enterStep`), but for a player who has left the game.
+      if (
+        impulse?.expiry.kind === "until-begins" &&
+        beginningFor.includes(impulse.expiry.player) &&
+        (impulse.expiry.at === "turn" || impulse.expiry.player !== this.activePlayer)
+      ) {
+        delete this.state.objects[id].impulse;
+      }
     }
+    // "Until the end of your next turn": this is that turn, so this turn's
+    // cleanup ends it. The other points are later in it, but for a player who
+    // has left the game (rule 800.4m).
+    this.passUntilPoints((point) => {
+      if (point.point === "controllers-untap-begins") return undefined;
+      if (point.player === this.activePlayer) return point.point === "turn-ends" ? "ends-this-turn" : undefined;
+      return beginningFor.includes(point.player) ? "ends" : undefined;
+    });
     // Day → night if the previous turn's player cast no spells (726.3);
     // night → day if they cast two or more (726.4). Only once it's day or night.
     // It's the untap step's (502.2), so a skipped untap step has none.
@@ -8194,6 +8229,50 @@ export class Game {
       if (permanent?.zone === "battlefield" && (permanent.zoneChangeCount ?? 0) === stint) this.untapUnlessStunned(object);
     }
     this.enterStep("untap");
+  }
+
+  /**
+   * Whatever lasts until an {@link UntilPoint}, modifiers and control effects
+   * alike, on every permanent, phased-out ones too (702.26f): `at` says of each
+   * whether it ends now, ends at this turn's cleanup, waits for another point,
+   * or (undefined) goes on as it is.
+   */
+  private passUntilPoints(
+    at: (point: UntilPoint, object: GameObject) => UntilPoint | "ends" | "ends-this-turn" | undefined,
+  ): void {
+    let changed = false;
+    let controlChanged = false;
+    for (const id of [...this.state.zones.shared.battlefield, ...phasedOutIds(this.state)]) {
+      const object = this.state.objects[id];
+      if (object === undefined) continue;
+      if (object.modifiers.some((m) => m.untilPoint !== undefined)) {
+        object.modifiers = object.modifiers.flatMap((m): PtModifier[] => {
+          if (m.untilPoint === undefined) return [m];
+          const next = at(m.untilPoint, object);
+          if (next === undefined) return [m];
+          changed = true;
+          if (next === "ends") return [];
+          const { untilPoint: _ended, ...rest } = m;
+          return [next === "ends-this-turn" ? { ...rest, untilEndOfTurn: true } : { ...rest, untilPoint: next }];
+        });
+      }
+      if (object.controlEffects?.some((e) => e.untilPoint !== undefined) === true) {
+        const left = object.controlEffects.flatMap((e): ControlEffect[] => {
+          if (e.untilPoint === undefined) return [e];
+          const next = at(e.untilPoint, object);
+          if (next === undefined) return [e];
+          controlChanged = true;
+          if (next === "ends") return [];
+          const { untilPoint: _ended, ...rest } = e;
+          return [next === "ends-this-turn" ? { ...rest, untilEndOfTurn: true } : { ...rest, untilPoint: next }];
+        });
+        if (left.length > 0) object.controlEffects = left;
+        else delete object.controlEffects;
+        object.controlEndsAtCleanup = left.some((e) => e.untilEndOfTurn);
+      }
+    }
+    if (changed || controlChanged) invalidateComputedCache();
+    if (controlChanged) this.recomputeControl();
   }
 
   private enterStep(step: Step): void {
@@ -8268,6 +8347,22 @@ export class Game {
       this.state.timestampSeq += 1;
       if (active.lastUpkeepSeq !== undefined) active.previousUpkeepSeq = active.lastUpkeepSeq;
       active.lastUpkeepSeq = this.state.timestampSeq;
+      // "Until your next upkeep" ends as it begins (rule 500.4), before
+      // anything triggers at its beginning. "Until the end of your next
+      // upkeep" is now this one's end, and one made during it waits for the
+      // next (Halfdane).
+      const whose = this.activePlayer;
+      this.passUntilPoints((point) => {
+        if (point.point === "controllers-untap-begins" || point.player !== whose) return undefined;
+        if (point.point === "upkeep-begins") return "ends";
+        return point.point === "upkeep-ends" ? { point: "this-upkeep-ends", player: whose } : undefined;
+      });
+      for (const id of this.state.zones.shared.exile) {
+        const impulse = this.state.objects[id]?.impulse;
+        if (impulse?.expiry.kind === "until-begins" && impulse.expiry.at === "upkeep" && impulse.expiry.player === whose) {
+          delete this.state.objects[id].impulse;
+        }
+      }
     }
     this.emit({ type: "step-began", step, phase: PHASE_OF_STEP[step] });
 
@@ -8515,6 +8610,11 @@ export class Game {
       this.prepareForPriority(this.state.awaiting?.player ?? this.activePlayer);
       return;
     }
+    // "Until the end of your next upkeep" (rule 500.5). A skipped upkeep has
+    // none of these: they wait for the next that isn't (`enterStep`).
+    if (this.state.turn.step === "upkeep") {
+      this.passUntilPoints((point) => (point.point === "this-upkeep-ends" ? "ends" : undefined));
+    }
     // The combat phase is over: nothing is in combat any more (rule 511.3).
     if (this.state.turn.step === "end-combat") this.removeAllFromCombat();
     // Phases added after the combat phase that just ended (rule 500.8), or
@@ -8688,6 +8788,13 @@ export class Game {
         else activeState.untapStepsToSkip = left;
       }
       this.emit({ type: "untap-step-skipped", player: active });
+    }
+    // "Until its controller's next untap step" ends as one begins (rule 500.4)
+    // and waits past a skipped one (614.10a).
+    if (!skipping) {
+      this.passUntilPoints((point, object) =>
+        point.point === "controllers-untap-begins" && object.controller === active ? "ends" : undefined,
+      );
     }
     // First, phasing (rule 502.1), before anything untaps.
     if (!skipping) this.phasingStep(active);
@@ -30709,7 +30816,11 @@ export class Game {
       },
       fight: (a, b, oneSided) => this.fightCreatures(a, b, oneSided),
       counterSpell: (target, into, lockSource) => this.counterSpellByEffect(target, into, lockSource === true),
-      gainControl: (target, untilEndOfTurn, player, whileSource, whileSourceTapped, whileYouControlSource) => {
+      gainControl: (target, untilEndOfTurn, player, whileSource, whileSourceTapped, whileYouControlSource, until) => {
+        if (until !== undefined) {
+          this.gainControlByEffect(player, target, false, false, { untilPoint: untilPointOf(until, controller) });
+          return;
+        }
         if (whileSource !== true && whileSourceTapped !== true && whileYouControlSource !== true) {
           this.gainControlByEffect(player, target, untilEndOfTurn);
           return;
@@ -34600,6 +34711,10 @@ export class Game {
     switch (duration) {
       case "end-of-turn":
         return { expiry: { kind: "end-of-turn", turn: this.state.turn.number } };
+      case "until-your-next-turn":
+        return { expiry: { kind: "until-begins", at: "turn", player: controller } };
+      case "until-your-next-upkeep":
+        return { expiry: { kind: "until-begins", at: "upkeep", player: controller } };
       case "your-next-turn":
         // It lapses as the player's next turn ends. Granted during one of
         // their own turns, that turn has to end first; granted on someone
@@ -43944,6 +44059,8 @@ export class Game {
       readonly timestamp?: number;
       /** "For as long as [that permanent] remains on the battlefield". */
       readonly whileSource?: { readonly id: ObjectId; readonly zoneChangeCount: number };
+      /** "Until the end of your next turn". */
+      readonly untilPoint?: UntilPoint;
     } = {},
   ): void {
     if (target.kind !== "object") return;
@@ -43964,12 +44081,18 @@ export class Game {
       madeAtSeq: this.state.eventSeq,
       ...(entered ? { entered: true } : {}),
       ...(whileSource !== undefined ? { whileSource } : {}),
+      ...(opts.untilPoint !== undefined ? { untilPoint: opts.untilPoint } : {}),
     };
     // What ends no later than this one, for the same player, is dropped:
     // anything when this one lasts for good; another until end of turn when
-    // this is one; another for as long as the same permanent remains. One
-    // that might outlast it stays, to apply again once this ends.
+    // this is one; another for as long as the same permanent remains; one
+    // until end of turn, or until this same point, when this lasts until a
+    // later turn's point. One that might outlast it stays, to apply again
+    // once this ends.
     const endsNoLater = (e: ControlEffect): boolean => {
+      if (opts.untilPoint !== undefined) {
+        return e.untilEndOfTurn || JSON.stringify(e.untilPoint) === JSON.stringify(opts.untilPoint);
+      }
       if (!untilEndOfTurn && whileSource === undefined) return true;
       if (untilEndOfTurn) return e.untilEndOfTurn;
       return e.whileSource !== undefined && e.whileSource.id === whileSource!.id;

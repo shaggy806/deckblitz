@@ -10410,6 +10410,78 @@ describe("can't have or gain a keyword", () => {
   });
 });
 
+describe("a duration to a point in a later turn", () => {
+  it("reads a sentence's until-end-of-turn form, lasting that long instead", () => {
+    expect(parseEffect("Target creature gets +2/+2 until your next upkeep.", ctx()).effect).toEqual({
+      kind: "modify-pt",
+      target: 0,
+      power: 2,
+      toughness: 2,
+      duration: "until-your-next-upkeep",
+    });
+    expect(parseEffect("~ gains flying until the end of your next upkeep.", ctx()).effect).toEqual({
+      kind: "grant-keyword",
+      target: "source",
+      keyword: "flying",
+      duration: "until-end-of-your-next-upkeep",
+    });
+    expect(parseEffect("Target land becomes a Swamp until its controller's next untap step.", ctx()).effect).toEqual({
+      kind: "add-types",
+      target: 0,
+      setSubtypes: ["Swamp"],
+      duration: "until-its-controllers-next-untap-step",
+    });
+    expect(parseEffect("Gain control of target creature until the end of your next turn.", ctx()).effect).toEqual({
+      kind: "gain-control",
+      target: 0,
+      untilEndOfTurn: false,
+      until: "until-end-of-your-next-turn",
+    });
+  });
+  it("reads it leading the sentence", () => {
+    const parsed = parseEffect(
+      "Until your next upkeep, target noncreature artifact becomes an artifact creature with power and toughness each equal to its mana value.",
+      ctx(),
+    );
+    expect(parsed.effect).toEqual({
+      kind: "animate",
+      target: 0,
+      power: { manaValueOf: 0 },
+      toughness: { manaValueOf: 0 },
+      addTypes: ["artifact", "creature"],
+      addSubtypes: [],
+      duration: "until-your-next-upkeep",
+    });
+  });
+  it("leaves what doesn't take one, with no target slot left behind", () => {
+    const c = ctx();
+    expect(parseEffect("Until your next upkeep, target player can't cast spells.", c).effect).toBeNull();
+    expect(c.targets).toEqual([]);
+  });
+  it("reads the permissions that end then", () => {
+    expect(parseEffect("Exile the top card of your library. Until the beginning of your next upkeep, you may play that card.", ctx()).effect).toEqual({
+      kind: "impulse-exile",
+      amount: 1,
+      duration: "until-your-next-upkeep",
+    });
+    expect(
+      parseEffect("Exile the top card of your library. Until your next turn, you may cast it if it's an instant or sorcery spell.", ctx()).effect,
+    ).toEqual({
+      kind: "impulse-exile",
+      amount: 1,
+      duration: "until-your-next-turn",
+      filter: { typesAnyOf: ["instant", "sorcery"] },
+      castOnly: true,
+    });
+    expect(
+      parseEffect(
+        "Exile target creature. Until the end of your next turn, you may cast that card and you may spend mana as though it were mana of any color to cast that spell.",
+        ctx(),
+      ).effect,
+    ).toEqual({ kind: "exile", target: 0, mayCast: { duration: "your-next-turn", spendAs: "any-color" } });
+  });
+});
+
 describe("an effect done by another player", () => {
   it("reads 'target player scries N' as as-player, on a player slot", () => {
     const parsed = parseEffect("Target player scries 2.", ctx());

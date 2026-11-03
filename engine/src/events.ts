@@ -49,11 +49,31 @@ export type EffectDuration =
   | "end-of-turn"
   | "permanent"
   | { readonly untilTurnOf: PlayerId }
+  | { readonly untilPoint: UntilPoint }
   | { readonly whileCounter: string }
   /** For as long as that permanent — the effect's source, in that stint —
    * remains on the battlefield; `null` when it had already left as the
    * effect would begin, so the effect doesn't (rule 611.2b). */
   | { readonly whileSource: WhileSource | null };
+
+/**
+ * The moment an effect lasts until, when it's a point in a later turn rather
+ * than that turn's beginning — the effect's `UntilPointDuration`, read for the
+ * player it names as the effect begins. Each waits for an occurrence that
+ * isn't skipped (rule 614.10a); one naming a player who leaves the game ends
+ * as their turn would have begun (rule 800.4m).
+ *
+ * - `upkeep-begins`, `upkeep-ends`: that player's next upkeep (rules 500.4, 500.5).
+ * - `this-upkeep-ends`: `upkeep-ends` once that upkeep has begun, so an effect
+ *   made during an upkeep waits for the next one.
+ * - `turn-ends`: the cleanup step of that player's next turn (rule 514.2).
+ * - `controllers-untap-begins`: the next untap step of whoever then controls
+ *   the permanent, read then, like "doesn't untap during its controller's
+ *   next untap step".
+ */
+export type UntilPoint =
+  | { readonly point: "upkeep-begins" | "upkeep-ends" | "this-upkeep-ends" | "turn-ends"; readonly player: PlayerId }
+  | { readonly point: "controllers-untap-begins" };
 
 /** The source an effect lasts "for as long as" (see `EffectDuration`): that
  * permanent in that stint, remaining on the battlefield — and, with

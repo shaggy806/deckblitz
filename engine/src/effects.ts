@@ -326,6 +326,7 @@ export type PtDuration =
   | "end-of-turn"
   | "permanent"
   | "until-your-next-turn"
+  | UntilPointDuration
   | { readonly whileCounter: string }
   /** "For as long as [this] remains on the battlefield" — the effect's own
    * source, in the stint the resolving ability refers to (Opportunistic
@@ -346,6 +347,26 @@ export type PtDuration =
   /** Both: "for as long as you control ~ and ~ remains tapped" (Rubinia
    * Soulsinger, Willow Satyr). */
   | "while-you-control-source-tapped";
+
+/**
+ * A duration ending at a point in a later turn, beyond that turn's beginning.
+ * `"you"` is the effect's controller. Each is a {@link PtDuration}, and
+ * `gain-control` takes them too.
+ *
+ * - `"until-your-next-upkeep"`: as it begins (Xenic Poltergeist).
+ * - `"until-end-of-your-next-upkeep"`: as it ends (Halfdane).
+ * - `"until-end-of-your-next-turn"`: its cleanup step (Stilt-Man, Towering
+ *   Terror).
+ * - `"until-its-controllers-next-untap-step"`: as the next untap step of the
+ *   permanent's controller then begins (Orcish Farmer). A skipped one doesn't
+ *   count (rule 614.10a), which is where it differs from "until your next
+ *   turn".
+ */
+export type UntilPointDuration =
+  | "until-your-next-upkeep"
+  | "until-end-of-your-next-upkeep"
+  | "until-end-of-your-next-turn"
+  | "until-its-controllers-next-untap-step";
 
 /**
  * A "spend this mana only to …" clause on a mana ability (rule 106.6b).
@@ -1915,9 +1936,15 @@ export type ResolvedEnterAttacking =
  * - `"while-you-control"`: "for as long as you control this" (Lightning,
  *   Security Sergeant), over for good once you don't (the ruling).
  * - `"while-exiled"`: "for as long as it remains exiled".
+ * - `"until-your-next-turn"`: "until your next turn", over as that turn begins
+ *   (Nivix, Aerie of the Firemind), where `"your-next-turn"` runs to its end.
+ * - `"until-your-next-upkeep"`: "until the beginning of your next upkeep"
+ *   (Elkin Bottle).
  */
 export type ImpulseDuration =
   | "end-of-turn"
+  | "until-your-next-turn"
+  | "until-your-next-upkeep"
   | "your-next-turn"
   | "your-next-turn-only"
   | "your-next-end-step"
@@ -3788,6 +3815,9 @@ export type EffectSpec =
        * leaves or changes hands — nothing if you don't control it as it
        * would begin. With `whileSourceTapped`, both (Rubinia Soulsinger). */
       readonly whileYouControlSource?: boolean;
+      /** "Gain control of that permanent **until the end of your next turn**"
+       * (Stilt-Man, Towering Terror). With `untilEndOfTurn: false`. */
+      readonly until?: UntilPointDuration;
     }
   | {
       /**
@@ -10238,6 +10268,7 @@ export interface EffectApi {
     whileSource?: boolean,
     whileSourceTapped?: boolean,
     whileYouControlSource?: boolean,
+    until?: UntilPointDuration,
   ): void;
   /** See the `"gain-control-all"` {@link EffectSpec}: `who` a player, or
    * each permanent's own owner; `controlledBy` keeps only what that player
@@ -14474,6 +14505,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           spec.whileSource === true,
           spec.whileSourceTapped === true,
           spec.whileYouControlSource === true,
+          spec.until,
         );
       }
       return;

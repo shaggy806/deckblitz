@@ -33,7 +33,7 @@ import type { CardFilter } from "./filter.js";
 import type { CardNameAim, CardNameFilter } from "./card-names.js";
 import type { Color, ManaOrigin, ManaType, ManaUnit, SpendAs } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
-import type { GameEvent, Vote, WhileSource } from "./events.js";
+import type { GameEvent, UntilPoint, Vote, WhileSource } from "./events.js";
 import type { ResolvedTargets, TargetRef, TargetSpec } from "./target.js";
 import type { Step } from "./turn.js";
 import { MERGED_PREFIX, MERGED_SEPARATOR } from "./cards/card-registry.js";
@@ -116,6 +116,9 @@ export interface ControlEffect {
    * (Opportunistic Dragon): it ends as that permanent, in that stint,
    * leaves. */
   readonly whileSource?: WhileSource;
+  /** "Until the end of your next turn" (Stilt-Man, Towering Terror): see
+   * `UntilPoint`. */
+  readonly untilPoint?: UntilPoint;
 }
 
 /**
@@ -621,6 +624,10 @@ export interface GameObject {
       | { readonly kind: "end-of-turn"; readonly turn: number }
       | { kind: "your-turns"; remaining: number }
       | { readonly kind: "end-step-of"; readonly player: PlayerId }
+      /** "Until your next turn" (`at: "turn"`, Nivix, Aerie of the Firemind)
+       * or "until the beginning of your next upkeep" (`at: "upkeep"`, Elkin
+       * Bottle): as that begins for that player. */
+      | { readonly kind: "until-begins"; readonly at: "turn" | "upkeep"; readonly player: PlayerId }
       /** `stint`: the source's `zoneChangeCount` as it granted this — one that
        * left and came back is a new object (rule 400.7), and the permission
        * ended when it left. `controlledBy`: "for as long as you control
@@ -1791,6 +1798,8 @@ export interface PtModifier {
   /** "Until your next turn": it ends as this player's next turn begins, or
    * as it would have begun once they've left the game (rule 800.4m). */
   untilTurnOf?: PlayerId;
+  /** "Until your next upkeep" and the like: see `UntilPoint`. */
+  untilPoint?: UntilPoint;
   /** "Until end of combat" / "this combat" (rules 500.5a, 511.2): it ends as
    * the combat phase does — Legion Warboss's token "attacks this combat if
    * able", which a later combat that turn doesn't bind. Set with

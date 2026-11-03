@@ -4183,3 +4183,13 @@ the face-down step `exile-from-library` has, `turnExiledFaceDown`), read by a de
 (rule 603.7d). The view leaves hidden cards out of a stack object's targets. Keys: effect:exile-hands-face-down-return-later,
 effect:delayed-trigger-next-turn-end-step. Proving cards: Memory Jar, Magus of the Jar, Ignorant Bliss, Suppress, Induced
 Amnesia, Bottled Cloister, Moonring Mirror, Kav Landseeker.
+**Durations to a point in a later turn (2026-11-02).** `UntilPointDuration`, values of `PtDuration` so every effect taking
+one has them, and of `gain-control`'s `until`: `"until-your-next-upkeep"`, `"until-end-of-your-next-upkeep"`,
+`"until-end-of-your-next-turn"`, `"until-its-controllers-next-untap-step"`. Stored as `UntilPoint` on a modifier or a control
+effect and passed by one `Game.passUntilPoints`: as a step begins (500.4), as it ends (500.5), at that turn's cleanup (514.2),
+past a skipped step (614.10a), and as the turn of a player who has left would have begun (800.4m). `ImpulseDuration` gains
+`"until-your-next-turn"` and `"until-your-next-upkeep"`. Keys: duration:until-your-next-upkeep,
+effect:until-controllers-next-untap-step-duration, effect:until-end-of-your-next-turn,
+zone:impulse-until-your-next-turn-begins. Found to need no code: effect:exile-may-cast-until-your-next-turn (`exile`'s `mayCast`).
+Proving cards: Xenic Poltergeist, Gabriel Angelfire, Halfdane, Elkin Bottle, Cycle of Life, Orcish Farmer, Stilt-Man, Towering
+Terror, Hurl Through Hell, Nivix, Aerie of the Firemind.

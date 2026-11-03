@@ -1328,7 +1328,12 @@
   "effect:exile-hands-face-down-return-later",
   "effect:delayed-trigger-next-turn-end-step",
   "effect:return-all-graveyards-under-owners-control",
-  "effect:return-from-all-graveyards-to-hand"
+  "effect:return-from-all-graveyards-to-hand",
+  "duration:until-your-next-upkeep",
+  "effect:exile-may-cast-until-your-next-turn",
+  "effect:until-controllers-next-untap-step-duration",
+  "effect:until-end-of-your-next-turn",
+  "zone:impulse-until-your-next-turn-begins"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {
