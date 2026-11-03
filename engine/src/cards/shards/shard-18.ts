@@ -339,6 +339,7 @@ import _poolHundredHandedOne from "../pool/hundred-handed-one.js";
 import _poolHuntersMark from "../pool/hunters-mark.js";
 import _poolHurskaSweetTooth from "../pool/hurska-sweet-tooth.js";
 import _poolHushwingGryff from "../pool/hushwing-gryff.js";
+import _poolIbHalfheartGoblinTactician from "../pool/ib-halfheart-goblin-tactician.js";
 import _poolIcetillExplorer from "../pool/icetill-explorer.js";
 import _poolIcewindStalwart from "../pool/icewind-stalwart.js";
 import _poolIllvoiInfiltrator from "../pool/illvoi-infiltrator.js";
@@ -1232,6 +1233,7 @@ const shard: CardShard = {
     _poolHuntersMark,
     _poolHurskaSweetTooth,
     _poolHushwingGryff,
+    _poolIbHalfheartGoblinTactician,
     _poolIcetillExplorer,
     _poolIcewindStalwart,
     _poolIllvoiInfiltrator,

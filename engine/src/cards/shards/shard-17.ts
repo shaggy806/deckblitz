@@ -779,6 +779,7 @@ import _poolTolarianEntrancer from "../pool/tolarian-entrancer.js";
 import _poolTombRobber from "../pool/tomb-robber.js";
 import _poolToriiWatchward from "../pool/torii-watchward.js";
 import _poolTragicLesson from "../pool/tragic-lesson.js";
+import _poolTrailblazersTorch from "../pool/trailblazers-torch.js";
 import _poolTransdimensionalBovine from "../pool/transdimensional-bovine.js";
 import _poolTreasonOfIsengard from "../pool/treason-of-isengard.js";
 import _poolTreefolkHarbinger from "../pool/treefolk-harbinger.js";
@@ -1678,6 +1679,7 @@ const shard: CardShard = {
     _poolTombRobber,
     _poolToriiWatchward,
     _poolTragicLesson,
+    _poolTrailblazersTorch,
     _poolTransdimensionalBovine,
     _poolTreasonOfIsengard,
     _poolTreefolkHarbinger,

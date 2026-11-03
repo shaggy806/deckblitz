@@ -648,6 +648,7 @@ import _poolShadewingLaureate from "../pool/shadewing-laureate.js";
 import _poolSharedDiscovery from "../pool/shared-discovery.js";
 import _poolSharuumTheHegemon from "../pool/sharuum-the-hegemon.js";
 import _poolShatteredEgo from "../pool/shattered-ego.js";
+import _poolSheHulkWallbreaker from "../pool/she-hulk-wallbreaker.js";
 import _poolShedWeakness from "../pool/shed-weakness.js";
 import _poolShelteredValley from "../pool/sheltered-valley.js";
 import _poolShepherdOfRot from "../pool/shepherd-of-rot.js";
@@ -1557,6 +1558,7 @@ const shard: CardShard = {
     _poolSharedDiscovery,
     _poolSharuumTheHegemon,
     _poolShatteredEgo,
+    _poolSheHulkWallbreaker,
     _poolShedWeakness,
     _poolShelteredValley,
     _poolShepherdOfRot,

@@ -297,6 +297,7 @@ import _poolGreatDivideGuide from "../pool/great-divide-guide.js";
 import _poolGrimJavelineer from "../pool/grim-javelineer.js";
 import _poolGrimclawBats from "../pool/grimclaw-bats.js";
 import _poolGrixisBattlemage from "../pool/grixis-battlemage.js";
+import _poolGrizzledWolverine from "../pool/grizzled-wolverine.js";
 import _poolGrondTheGatebreaker from "../pool/grond-the-gatebreaker.js";
 import _poolGuardianNaga from "../pool/guardian-naga.js";
 import _poolGuerrillaTactics from "../pool/guerrilla-tactics.js";
@@ -675,6 +676,7 @@ import _poolSpellbreakerBehemoth from "../pool/spellbreaker-behemoth.js";
 import _poolSphinxMindbreaker from "../pool/sphinx-mindbreaker.js";
 import _poolSpiderSense from "../pool/spider-sense.js";
 import _poolSpinalVillain from "../pool/spinal-villain.js";
+import _poolSpinedSliver from "../pool/spined-sliver.js";
 import _poolSpinerockKnoll from "../pool/spinerock-knoll.js";
 import _poolSpiritedCompanion from "../pool/spirited-companion.js";
 import _poolSporeCloud from "../pool/spore-cloud.js";
@@ -1169,6 +1171,7 @@ const shard: CardShard = {
     _poolGrimJavelineer,
     _poolGrimclawBats,
     _poolGrixisBattlemage,
+    _poolGrizzledWolverine,
     _poolGrondTheGatebreaker,
     _poolGuardianNaga,
     _poolGuerrillaTactics,
@@ -1547,6 +1550,7 @@ const shard: CardShard = {
     _poolSphinxMindbreaker,
     _poolSpiderSense,
     _poolSpinalVillain,
+    _poolSpinedSliver,
     _poolSpinerockKnoll,
     _poolSpiritedCompanion,
     _poolSporeCloud,

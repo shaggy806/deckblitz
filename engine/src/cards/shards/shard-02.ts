@@ -304,6 +304,7 @@ import _poolGallifreyFallsNoMore from "../pool/gallifrey-falls-no-more.js";
 import _poolGandalfWanderingWizard from "../pool/gandalf-wandering-wizard.js";
 import _poolGarruksUprising from "../pool/garruks-uprising.js";
 import _poolGeistHonoredMonk from "../pool/geist-honored-monk.js";
+import _poolGeneralMarhaultElsdragon from "../pool/general-marhault-elsdragon.js";
 import _poolGenerousSoul from "../pool/generous-soul.js";
 import _poolGeralfVisionaryStitcher from "../pool/geralf-visionary-stitcher.js";
 import _poolGerrardsIrregulars from "../pool/gerrards-irregulars.js";
@@ -331,6 +332,7 @@ import _poolGroveOfTheBurnwillows from "../pool/grove-of-the-burnwillows.js";
 import _poolGruulRagebeast from "../pool/gruul-ragebeast.js";
 import _poolGruulSignet from "../pool/gruul-signet.js";
 import _poolGuardianOfTheForgotten from "../pool/guardian-of-the-forgotten.js";
+import _poolGuardianOfTheGateless from "../pool/guardian-of-the-gateless.js";
 import _poolGwendlynDiCorci from "../pool/gwendlyn-di-corci.js";
 import _poolHalvarGodOfBattle from "../pool/halvar-god-of-battle.js";
 import _poolHangarScrounger from "../pool/hangar-scrounger.js";
@@ -543,6 +545,7 @@ import _poolPiratesPrize from "../pool/pirates-prize.js";
 import _poolPitRaptor from "../pool/pit-raptor.js";
 import _poolPitfallTrap from "../pool/pitfall-trap.js";
 import _poolPlacidRottentail from "../pool/placid-rottentail.js";
+import _poolPlagueWight from "../pool/plague-wight.js";
 import _poolPlaneswalkersFury from "../pool/planeswalkers-fury.js";
 import _poolPlasmaElemental from "../pool/plasma-elemental.js";
 import _poolPlatypusBear from "../pool/platypus-bear.js";
@@ -1174,6 +1177,7 @@ const shard: CardShard = {
     _poolGandalfWanderingWizard,
     _poolGarruksUprising,
     _poolGeistHonoredMonk,
+    _poolGeneralMarhaultElsdragon,
     _poolGenerousSoul,
     _poolGeralfVisionaryStitcher,
     _poolGerrardsIrregulars,
@@ -1201,6 +1205,7 @@ const shard: CardShard = {
     _poolGruulRagebeast,
     _poolGruulSignet,
     _poolGuardianOfTheForgotten,
+    _poolGuardianOfTheGateless,
     _poolGwendlynDiCorci,
     _poolHalvarGodOfBattle,
     _poolHangarScrounger,
@@ -1413,6 +1418,7 @@ const shard: CardShard = {
     _poolPitRaptor,
     _poolPitfallTrap,
     _poolPlacidRottentail,
+    _poolPlagueWight,
     _poolPlaneswalkersFury,
     _poolPlasmaElemental,
     _poolPlatypusBear,
