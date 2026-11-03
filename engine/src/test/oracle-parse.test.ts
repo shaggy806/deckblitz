@@ -4807,8 +4807,8 @@ describe("block limits, lost abilities and chosen types (B249)", () => {
 });
 
 describe("agreement with the hand-authored pool", () => {
-  // The whole pool parsed: ~35 s on a cloud session's 4 cores by 2026-11-03,
-  // past vitest's 30 s default, and it grows with every card.
+  // The whole pool, parsed: ~30 s on a 4-core cloud session by 2026-11-03,
+  // past the suite's default timeout, and growing with the pool.
   it("every ability the parser claims complete matches the authored one", { timeout: 180_000 }, () => {
     const { stats, mismatches } = checkPool(POOL_CARDS);
     expect(stats.claimed).toBeGreaterThan(400);
@@ -9625,6 +9625,67 @@ describe("a static acting on a player", () => {
     expect(opponents.static[0].replacement).toEqual({ event: "would-begin-turn", who: "opponent", extraOnly: true });
   });
 
+  it("reads a would-draw replacement: draw N, its exemptions, an effect instead (rule 614.11)", () => {
+    const insight = face(
+      "Legendary Enchantment",
+      "If you would draw a card except the first one you draw in each of your draw steps, draw two cards instead.",
+    );
+    expect(insight.complete).toBe(true);
+    expect(insight.static[0].replacement).toEqual({ event: "would-draw", who: "you", instead: { draws: 2 }, exceptFirstInDrawStep: true });
+    const reed = face(
+      "Legendary Creature",
+      "The first time you would draw a card each turn except the first card you draw during each of your draw steps, you draw four cards instead.",
+    );
+    expect(reed.complete).toBe(true);
+    expect(reed.static[0].replacement).toEqual({
+      event: "would-draw",
+      who: "you",
+      instead: { draws: 4 },
+      exceptFirstInDrawStep: true,
+      firstEachTurn: true,
+    });
+    const lich = face(
+      "Creature",
+      "If you would draw a card, instead look at the top three cards of your library, then put one into your hand and the rest into your graveyard.",
+    );
+    expect(lich.complete).toBe(true);
+    expect(lich.static[0].replacement).toEqual({
+      event: "would-draw",
+      who: "you",
+      instead: {
+        effect: { kind: "look-and-choose", zone: "library", count: 3, min: 1, max: 1, destination: "hand", leftover: "graveyard" },
+      },
+    });
+    const tomorrow = face(
+      "Legendary Creature",
+      "If you would draw a card, look at the top three cards of your library instead. Put one of those cards into your hand and the rest on the bottom of your library in any order.",
+    );
+    expect(tomorrow.complete).toBe(true);
+    expect(tomorrow.static[0].replacement).toEqual({
+      event: "would-draw",
+      who: "you",
+      instead: {
+        effect: { kind: "look-and-choose", zone: "library", count: 3, min: 1, max: 1, destination: "hand", leftover: "bottom-any-order" },
+      },
+    });
+  });
+
+  it("reads what happens to unspent mana as steps and phases end (rule 500.4)", () => {
+    const stone = face("Artifact", "If you would lose unspent mana, that mana becomes colorless instead.");
+    expect(stone.complete).toBe(true);
+    expect(stone.static[0].unspentManaBecomesColorless).toBe(true);
+    const omnath = face("Legendary Creature", "If you would lose unspent mana, that mana becomes black instead.");
+    expect(omnath.static[0].unspentManaBecomes).toBe("B");
+    const upwelling = face("Enchantment", "Players don't lose unspent mana as steps and phases end.");
+    expect(upwelling.complete).toBe(true);
+    expect(upwelling.static[0]).toMatchObject({ keepsUnspentMana: ["W", "U", "B", "R", "G", "C"], keepsUnspentManaEachPlayer: true });
+    const tyrant = face("Creature", "You don't lose unspent red mana as steps and phases end.");
+    expect(tyrant.static[0].keepsUnspentMana).toEqual(["R"]);
+    const yurlok = face("Legendary Creature", "A player losing unspent mana causes that player to lose that much life.");
+    expect(yurlok.complete).toBe(true);
+    expect(yurlok.static[0].manaLossCausesLifeLoss).toBe(true);
+  });
+
   it("reads Abyssal Persecutor's inverse pair", () => {
     const demon = face("Creature — Demon", "You can't win the game and your opponents can't lose the game.");
     expect(demon.complete).toBe(true);
@@ -10465,6 +10526,30 @@ describe("a target's namesakes off the battlefield", () => {
 });
 
 describe("a search of your own zones", () => {
+  it("reads \"and/or … up to N\" as a choice of zones whose count may find none anywhere", () => {
+    const doctors = parseEffect(
+      "Search your library and/or graveyard for up to five Doctor cards, reveal them, and put them into your hand. If you search your library this way, shuffle.",
+      ctx(),
+    );
+    expect(doctors.todo).toEqual([]);
+    const modal = doctors.effect.effects[0];
+    expect(modal.modes.map((mode: { text: string }) => mode.text)).toEqual([
+      "Search your library and graveyard",
+      "Search your library",
+      "Search your graveyard",
+    ]);
+    expect(modal.modes[2].effect).toEqual({
+      kind: "search-library",
+      filter: { subtype: "Doctor" },
+      destination: "hand",
+      min: 0,
+      max: 5,
+      upTo: true,
+      reveal: true,
+      zones: "graveyard",
+    });
+  });
+
   it("reads \"and/or\" as a choice of zones as it resolves, attached or not", () => {
     const giant = parseEffect(
       "You may search your graveyard, hand, and/or library for an Aura card and put it onto the battlefield attached to this creature. If you search your library this way, shuffle.",
@@ -11316,6 +11401,82 @@ describe("spells of a colour costing a coloured pip more", () => {
   });
 });
 
+describe("a may another player answers", () => {
+  const spell = (oracle_text: string) =>
+    parseFace({ name: "Card", type_line: "Sorcery", oracle_text }, { tokenFor: (d: string) => d }).effect;
+  const creature = (oracle_text: string) =>
+    parseFace({ name: "Card", type_line: "Creature — Devil", oracle_text }, { tokenFor: (d: string) => d });
+  it("reads its controller's search, theirs to decline", () => {
+    expect(
+      spell("Destroy target land. Its controller may search their library for a basic land card, put it onto the battlefield tapped, then shuffle."),
+    ).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "destroy", target: 0 },
+        {
+          kind: "each-player-may",
+          who: { controllerOfTarget: 0 },
+          prompt: "Search your library for a basic land card?",
+          effect: {
+            kind: "search-library",
+            filter: { supertype: "basic", type: "land" },
+            destination: "battlefield",
+            min: 0,
+            max: 1,
+            enterTapped: true,
+          },
+        },
+      ],
+    });
+  });
+  it("reads a target's controller sacrificing it, then that player's search", () => {
+    const { activated } = creature(
+      "{T}: Target artifact creature's controller sacrifices it. That player may search their library for a noncreature artifact card, put it onto the battlefield, then shuffle.",
+    );
+    expect(activated[0]).toMatchObject({
+      targets: [{ kind: "permanent", filter: { types: ["artifact", "creature"] } }],
+      effect: {
+        kind: "sequence",
+        effects: [
+          { kind: "sacrifice-target", target: 0, byItsController: true },
+          { kind: "each-player-may", who: { controllerOfTarget: 0 } },
+        ],
+      },
+    });
+  });
+  it("reads any opponent having you put the exiled card into your hand", () => {
+    expect(
+      spell(
+        "Search your library for a card, exile it, then shuffle. Any opponent may have you put that card into your hand. If no player does, you draw three cards.",
+      ),
+    ).toMatchObject({
+      kind: "sequence",
+      effects: [
+        { kind: "search-library", filter: {}, destination: "exile", min: 1, max: 1 },
+        {
+          kind: "unless",
+          chooser: { anyOf: "each-opponent" },
+          options: [{ doing: { kind: "move-exiled-this-way", to: "hand" } }],
+          otherwise: { kind: "draw", amount: 3 },
+        },
+      ],
+    });
+  });
+  it("reads any opponent having you put the revealed card into your graveyard", () => {
+    const { triggered } = creature(
+      "At the beginning of your upkeep, reveal the top card of your library. Any opponent may have you put that card into your graveyard. If a player does, this creature deals damage to that player equal to that card's mana value. Otherwise, put that card into your hand.",
+    );
+    expect(triggered[0].effect).toMatchObject({
+      kind: "reveal-top",
+      then: {
+        kind: "unless",
+        chooser: { anyOf: "each-opponent" },
+        otherwise: { kind: "return-to-hand", target: 0, from: "library" },
+      },
+    });
+  });
+});
+
 describe("offering", () => {
   const read = (oracle_text: string) =>
     parseFace({ name: "Card", type_line: "Legendary Creature — Spirit", oracle_text }, { tokenFor: (d: string) => d });
@@ -11332,6 +11493,70 @@ describe("offering", () => {
       flash: true,
       offering: { type: "artifact" },
     });
+  });
+  it("reads delayed triggers on a token just created", () => {
+    const effects = (line: string) =>
+      parseFace({ name: "Card", type_line: "Creature — Human", oracle_text: line }, { tokenFor: (d: string) => d }).triggered[0]
+        .effect.effects;
+    const LEAVING = ["graveyard", "exile", "hand", "library", "command"];
+    const twin = effects(
+      "When this creature enters, create a 1/1 white Soldier creature token. Exile that token when this creature leaves the battlefield. Sacrifice this creature when that token leaves the battlefield.",
+    );
+    expect(twin[1]).toMatchObject({
+      kind: "delayed-trigger",
+      at: { leaves: "source", to: LEAVING },
+      about: "created",
+      effect: { kind: "exile", target: 0 },
+    });
+    expect(twin[2]).toMatchObject({ at: { leaves: "created", to: LEAVING }, effect: { kind: "sacrifice-source" } });
+    const ugin = parseFace(
+      {
+        name: "Card",
+        type_line: "Legendary Planeswalker — Ugin",
+        loyalty: "4",
+        oracle_text:
+          "+1: Exile the top card of your library face down and look at it. Create a 1/1 white Soldier creature token. When that token leaves the battlefield, put the exiled card into your hand.",
+      },
+      { tokenFor: (d: string) => d },
+    ).activated[0].effect.effects;
+    expect(ugin[0]).toEqual({ kind: "exile-from-library", amount: 1, faceDown: "looked", linked: true });
+    expect(ugin[2]).toMatchObject({
+      at: { leaves: "created", to: LEAVING },
+      about: "exiled",
+      effect: { kind: "return-to-hand", target: 0, from: "exile" },
+    });
+  });
+  it("reads a batched dies trigger, and a once-a-turn one as a plain dies", () => {
+    const trigger = (line: string) =>
+      parseFace({ name: "Card", type_line: "Creature — Human", oracle_text: line }, { tokenFor: (d: string) => d })
+        .triggered[0].trigger;
+    expect(trigger("Whenever one or more other creatures you control die, put a +1/+1 counter on this creature.")).toEqual({
+      on: "dies",
+      who: "you-control",
+      filter: { type: "creature" },
+      otherOnly: true,
+      batched: true,
+    });
+    expect(trigger("Whenever one or more creatures die, put a +1/+1 counter on this creature.")).toEqual({
+      on: "dies",
+      who: "any",
+      filter: { type: "creature" },
+      batched: true,
+    });
+    expect(
+      trigger(
+        "Whenever one or more artifacts and/or creatures you control are put into a graveyard from the battlefield, surveil 1.",
+      ),
+    ).toEqual({ on: "dies", who: "you-control", filter: { typesAnyOf: ["artifact", "creature"] }, batched: true });
+    expect(trigger("Whenever one or more attacking creatures you control die, draw a card.")).toEqual({
+      on: "dies",
+      who: "you-control",
+      filter: { type: "creature", attacking: true },
+      batched: true,
+    });
+    expect(
+      trigger("Whenever one or more other creatures die, draw a card. This ability triggers only once each turn."),
+    ).toEqual({ on: "dies", who: "any", filter: { type: "creature" }, otherOnly: true });
   });
   it("reads a keyword granted to creatures attacking your opponents", () => {
     expect(read("Creatures attacking your opponents have double strike.").static[0]).toMatchObject({
@@ -11388,6 +11613,108 @@ describe("counters on what was manifested this way", () => {
     expect(spell("Manifest dread, then put three +1/+1 counters on that creature.").effect).toEqual({
       kind: "sequence",
       effects: [{ kind: "manifest-dread" }, onThem(3)],
+    });
+  });
+});
+
+describe("mana abilities from a hand, and paid by exiling from a graveyard", () => {
+  const read = (type_line: string, oracle_text: string) =>
+    (parseFace({ name: "Card", type_line, oracle_text, mana_cost: "{1}", colors: [], cmc: 1 } as never, { tokenFor: (d: string) => d }) as unknown as {
+      activated: Record<string, unknown>[];
+    }).activated;
+  it("Exile this card from your hand: exiled, not discarded", () => {
+    const [ability] = read("Creature — Ape", "Exile this card from your hand: Add {R}.");
+    expect(ability.zone).toBe("hand");
+    expect(ability.exilesFromHand).toBe(true);
+    expect(ability.effect).toEqual({ kind: "add-mana", mana: "R", amount: 1 });
+  });
+  it("Discard this card stays a discard", () => {
+    const [ability] = read("Creature — Ape", "Discard this card: Draw a card.");
+    expect(ability.zone).toBe("hand");
+    expect(ability.exilesFromHand).toBeUndefined();
+  });
+  it("Exile a card from your graveyard, and When you do: the reflexive rider", () => {
+    const [ability] = read(
+      "Creature — Dwarf",
+      "{T}, Exile a card from your graveyard: Add {R}. When you do, this creature deals 1 damage to each opponent.",
+    );
+    expect(ability.cost).toEqual({ mana: null, tap: true, exileFromGraveyard: { count: 1 } });
+    expect(ability.effect).toEqual({
+      kind: "add-mana",
+      mana: "R",
+      amount: 1,
+      also: {
+        kind: "reflexive-trigger",
+        targets: [],
+        effect: { kind: "damage", amount: 1, who: "each-opponent" },
+        text: "When you do, this creature deals 1 damage to each opponent.",
+      },
+    });
+  });
+  it("Collect evidence as a cost, and a counter riding the mana", () => {
+    const [ability] = read("Artifact", "{T}, Collect evidence 3: Add one mana of any color. Put an unlock counter on this artifact.");
+    expect(ability.cost).toEqual({ mana: null, tap: true, collectEvidence: 3 });
+    expect(ability.effect).toEqual({
+      kind: "add-mana",
+      mana: "any-color",
+      amount: 1,
+      also: { kind: "add-counter", target: "source", counter: "unlock", amount: 1 },
+    });
+  });
+  it("a spell's colours and no {X}, as a restriction on the mana", () => {
+    const [ability] = read(
+      "Enchantment",
+      "Exile a card from your graveyard: Add {C}. Spend this mana only to cast a spell that's one or more colors without {X} in its mana cost.",
+    );
+    expect(ability.effect).toEqual({
+      kind: "add-mana",
+      mana: "C",
+      amount: 1,
+      spendOnly: {
+        spell: { colorless: false, xInManaCost: false },
+        text: "Spend this mana only to cast a spell that's one or more colors without {X} in its mana cost.",
+      },
+    });
+  });
+});
+
+describe("a tap cost on the host, and the creature a cost tapped", () => {
+  const read = (type_line: string, oracle_text: string) =>
+    parseFace({ name: "Card", type_line, oracle_text, mana_cost: "{1}", colors: [], cmc: 1 } as never, { tokenFor: (d: string) => d }) as unknown as {
+      activated: { cost: { tapOthers?: unknown }; condition?: unknown; oncePerTurn?: boolean; effect: unknown; __todo?: string[] }[];
+      effect?: unknown;
+    };
+  const AURA = "Enchantment — Aura";
+  it("Tap enchanted land: the one permanent, and untapped says nothing more", () => {
+    const [ability] = read(AURA, "Enchant land you control\nTap enchanted land: Draw a card. Activate only if enchanted land is untapped.").activated;
+    expect(ability.cost.tapOthers).toEqual({ count: 1, filter: { hostOfSource: true } });
+    expect(ability.effect).toEqual({ kind: "draw", amount: 1 });
+    expect(ability.condition).toBeUndefined();
+  });
+  it("a colour in the restriction is a condition; once each turn the limit", () => {
+    const [ability] = read(
+      AURA,
+      "Enchant creature you control\nTap enchanted creature: Draw a card. Activate only if enchanted creature is white and untapped and only once each turn.",
+    ).activated;
+    expect(ability.condition).toEqual({ kind: "source", filter: { attachedTo: { colors: ["W"] } } });
+    expect(ability.oncePerTurn).toBe(true);
+    expect(ability.effect).toEqual({ kind: "draw", amount: 1 });
+  });
+  it("untapped isn't dropped from a cost that doesn't tap the host", () => {
+    const [ability] = read(AURA, "Enchant creature\n{1}: Draw a card. Activate only if enchanted creature is untapped.").activated;
+    expect(ability.__todo).toEqual(['a restriction: "Activate only if enchanted creature is untapped."']);
+  });
+  it("the creature tapped to pay this spell's additional cost", () => {
+    const spell = read(
+      "Sorcery",
+      "As an additional cost to cast this spell, tap an untapped creature you control.\nExile target tapped creature. Put a +1/+1 counter on the creature tapped to pay this spell's additional cost.",
+    );
+    expect(spell.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "exile", target: 0 },
+        { kind: "add-counter", target: "tapped", counter: "+1/+1", amount: 1 },
+      ],
     });
   });
 });

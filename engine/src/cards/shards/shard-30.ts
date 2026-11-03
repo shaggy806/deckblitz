@@ -36,6 +36,7 @@ import _poolAragornKingOfGondor from "../pool/aragorn-king-of-gondor.js";
 import _poolArcaneBombardment from "../pool/arcane-bombardment.js";
 import _poolArcboundCondor from "../pool/arcbound-condor.js";
 import _poolArchonOfTheTriumvirate from "../pool/archon-of-the-triumvirate.js";
+import _poolArcumDagsson from "../pool/arcum-dagsson.js";
 import _poolArgothianEnchantress from "../pool/argothian-enchantress.js";
 import _poolArmedDangerous from "../pool/armed-dangerous.js";
 import _poolArmoryGuard from "../pool/armory-guard.js";
@@ -757,6 +758,7 @@ import _poolTalonSliver from "../pool/talon-sliver.js";
 import _poolTangleMantis from "../pool/tangle-mantis.js";
 import _poolTectonicFiend from "../pool/tectonic-fiend.js";
 import _poolTeferiTemporalArchmage from "../pool/teferi-temporal-archmage.js";
+import _poolTeferisAgelessInsight from "../pool/teferis-ageless-insight.js";
 import _poolTeleport from "../pool/teleport.js";
 import _poolTempleOfMalice from "../pool/temple-of-malice.js";
 import _poolTemporalFirestorm from "../pool/temporal-firestorm.js";
@@ -936,6 +938,7 @@ const shard: CardShard = {
     _poolArcaneBombardment,
     _poolArcboundCondor,
     _poolArchonOfTheTriumvirate,
+    _poolArcumDagsson,
     _poolArgothianEnchantress,
     _poolArmedDangerous,
     _poolArmoryGuard,
@@ -1657,6 +1660,7 @@ const shard: CardShard = {
     _poolTangleMantis,
     _poolTectonicFiend,
     _poolTeferiTemporalArchmage,
+    _poolTeferisAgelessInsight,
     _poolTeleport,
     _poolTempleOfMalice,
     _poolTemporalFirestorm,

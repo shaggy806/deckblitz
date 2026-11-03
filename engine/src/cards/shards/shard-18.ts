@@ -361,6 +361,7 @@ import _poolIsolate from "../pool/isolate.js";
 import _poolIvyLaneDenizen from "../pool/ivy-lane-denizen.js";
 import _poolIxallisLorekeeper from "../pool/ixallis-lorekeeper.js";
 import _poolIzzetCharm from "../pool/izzet-charm.js";
+import _poolJackOLantern from "../pool/jack-o-lantern.js";
 import _poolJagwaspSwarm from "../pool/jagwasp-swarm.js";
 import _poolJamieMccrimmon from "../pool/jamie-mccrimmon.js";
 import _poolJaredCarthalionTrueHeir from "../pool/jared-carthalion-true-heir.js";
@@ -1257,6 +1258,7 @@ const shard: CardShard = {
     _poolIvyLaneDenizen,
     _poolIxallisLorekeeper,
     _poolIzzetCharm,
+    _poolJackOLantern,
     _poolJagwaspSwarm,
     _poolJamieMccrimmon,
     _poolJaredCarthalionTrueHeir,

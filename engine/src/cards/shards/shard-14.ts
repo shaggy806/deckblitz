@@ -58,6 +58,7 @@ import _poolBanishmentDecree from "../pool/banishment-decree.js";
 import _poolBantSojourners from "../pool/bant-sojourners.js";
 import _poolBarbarianOutcast from "../pool/barbarian-outcast.js";
 import _poolBardClass from "../pool/bard-class.js";
+import _poolBardKingOfDale from "../pool/bard-king-of-dale.js";
 import _poolBarkOfDoran from "../pool/bark-of-doran.js";
 import _poolBarrageOfBoulders from "../pool/barrage-of-boulders.js";
 import _poolBarrinsCodex from "../pool/barrins-codex.js";
@@ -829,6 +830,7 @@ import _poolVanguardOfTheRose from "../pool/vanguard-of-the-rose.js";
 import _poolVanguardsShield from "../pool/vanguards-shield.js";
 import _poolVeilOfSecrecy from "../pool/veil-of-secrecy.js";
 import _poolVengefulArchon from "../pool/vengeful-archon.js";
+import _poolVengefulTownsfolk from "../pool/vengeful-townsfolk.js";
 import _poolVengefulVillagers from "../pool/vengeful-villagers.js";
 import _poolVeteranArmorsmith from "../pool/veteran-armorsmith.js";
 import _poolVillageBellRinger from "../pool/village-bell-ringer.js";
@@ -954,6 +956,7 @@ const shard: CardShard = {
     _poolBantSojourners,
     _poolBarbarianOutcast,
     _poolBardClass,
+    _poolBardKingOfDale,
     _poolBarkOfDoran,
     _poolBarrageOfBoulders,
     _poolBarrinsCodex,
@@ -1725,6 +1728,7 @@ const shard: CardShard = {
     _poolVanguardsShield,
     _poolVeilOfSecrecy,
     _poolVengefulArchon,
+    _poolVengefulTownsfolk,
     _poolVengefulVillagers,
     _poolVeteranArmorsmith,
     _poolVillageBellRinger,

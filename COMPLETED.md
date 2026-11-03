@@ -18,6 +18,25 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 - **A card in exile as a target** (2026-11-03, `0ad1f5631`): `card-in-exile` (`whose`, `faceUp`, `linked`), the filter
   `hasFlashback`, `allow-cast-linked-exile`'s `spendAs`. Pull from Eternity, Gelatinous Cube, Runic Repetition, Clone
   Shell, Cemetery Protector, King Narfi's Betrayal.
+- **Unspent mana: another type, kept by every player, life lost** (2026-11-03, `679a2a9e9`): `unspentManaBecomes`,
+  `keepsUnspentManaEachPlayer`, `manaLossCausesLifeLoss` in the rule 500.4 emptying. Horizon Stone, Upwelling, Yurlok of
+  Scorch Thrash.
+- **A draw replaced by an effect, and draw-N exemptions** (2026-11-03, `6a50b3af9`): `would-draw`'s `instead: { effect }`
+  (rule 614.11) and `exceptFirstInDrawStep` / `firstEachTurn` on its replacements. Underrealm Lich, Tomorrow, Azami's
+  Familiar, Sages of the Anima, Teferi's Ageless Insight, Reed Richards, Smartest Man, Bard, King of Dale.
+- **Mana abilities from a hand or a graveyard** (2026-11-03, `ac127ad2b`, `fe36dd7f0`): `isManaAbility` no longer asks the zone,
+  and a mana ability's cost may exile from a graveyard or collect evidence; any-colour ones from another zone are offered per
+  colour. Both Spirit Guides, Molt Tender, Rubble Rouser, Cryptex, Jack-o'-Lantern, Titans' Nest.
+- **An Aura tapping its host as a cost** (2026-11-03, `6f047d8c7`): `tapOthers` of `{ hostOfSource: true }`, and a spell's text
+  naming the creature tapped for its cost (`"tapped"`). Earthlore, Krovikan Plague, Nature's Chosen, Swallow Whole.
+- **"Up to" in a searched public zone** (2026-11-03, `664e5fe63`): `search-library`'s `upTo`, and the hand-and/or-library key
+  marked built. The Five Doctors, Gate to the Afterlife, Last Light of Durin's Day, Ancient Vendetta.
+- **Tokens linked to an exiled card or their maker** (2026-11-03, `088e27f6a`): `DelayedLeaves.leaves: "created"` and
+  `link-exiled-to-created`. Ugin the Ineffable, Hofri Ghostforge, Timothar, Stangg, Tatsumasa.
+- **"Whenever one or more die"** (2026-11-03, `102409af3`): `dies`'s `batched`, once per simultaneous event. Vengeful Townsfolk,
+  Seer of Stolen Sight, Rinoa Heartilly, Angel Wing.
+- **A may another player answers** (2026-11-03, `6d8f94e0b`): any opponent's first yes or one named player's, with `mayBeDone`
+  (rule 608.2d). Sin Prodder, Distant Memories, Arcum Dagsson, Farrel's Mantle.
 - **Permanents controlled since the turn began** (2026-11-03, `a597195ef`): `CardFilter.controlledContinuously`, rule 302.6's
   test of any permanent, as a source condition, target or sacrifice. Rocket Launcher, Nettling Imp, Norritt, Keldon Twilight.
 - **A count of different mana costs** (2026-11-03, `257ed2665`): the `distinct` aggregate's `of: "mana-cost"`, and the mana

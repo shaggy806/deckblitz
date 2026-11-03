@@ -145,7 +145,9 @@ function effectRamps(effect: EffectSpec | null): boolean {
  * board. Lands aren't ramp; they're counted as themselves. */
 function isRamp(def: CardDefinition): boolean {
   if (def.types.includes("land")) return false;
-  if (def.activated.some(isManaAbility)) return true;
+  // One that works from another zone is no rock: a Spirit Guide exiles itself
+  // for one mana, once.
+  if (def.activated.some((a) => a.zone === undefined && isManaAbility(a))) return true;
   if (effectRamps(def.effect)) return true;
   return def.triggered.some((triggered) => effectRamps(triggered.effect));
 }

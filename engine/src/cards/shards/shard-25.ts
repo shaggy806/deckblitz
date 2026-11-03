@@ -459,6 +459,7 @@ import _poolMistveilPlains from "../pool/mistveil-plains.js";
 import _poolMoggInfestation from "../pool/mogg-infestation.js";
 import _poolMoggcatcher from "../pool/moggcatcher.js";
 import _poolMolderingGym from "../pool/moldering-gym.js";
+import _poolMoltTender from "../pool/molt-tender.js";
 import _poolMoltenCollapse from "../pool/molten-collapse.js";
 import _poolMoltenInfluence from "../pool/molten-influence.js";
 import _poolMomentOfSilence from "../pool/moment-of-silence.js";
@@ -616,6 +617,7 @@ import _poolRonaDiscipleOfGix from "../pool/rona-disciple-of-gix.js";
 import _poolRowdyResearch from "../pool/rowdy-research.js";
 import _poolRoyalAssassin from "../pool/royal-assassin.js";
 import _poolRoyalWarden from "../pool/royal-warden.js";
+import _poolRubbleRouser from "../pool/rubble-rouser.js";
 import _poolRuinousIntrusion from "../pool/ruinous-intrusion.js";
 import _poolRuinousMinotaur from "../pool/ruinous-minotaur.js";
 import _poolRumblingBaloth from "../pool/rumbling-baloth.js";
@@ -668,6 +670,7 @@ import _poolSidarJabari from "../pool/sidar-jabari.js";
 import _poolSilundiVision from "../pool/silundi-vision.js";
 import _poolSilverSeraph from "../pool/silver-seraph.js";
 import _poolSimicRagworm from "../pool/simic-ragworm.js";
+import _poolSinProdder from "../pool/sin-prodder.js";
 import _poolSinuousStriker from "../pool/sinuous-striker.js";
 import _poolSirensRuse from "../pool/sirens-ruse.js";
 import _poolSkirkCommando from "../pool/skirk-commando.js";
@@ -1322,6 +1325,7 @@ const shard: CardShard = {
     _poolMoggInfestation,
     _poolMoggcatcher,
     _poolMolderingGym,
+    _poolMoltTender,
     _poolMoltenCollapse,
     _poolMoltenInfluence,
     _poolMomentOfSilence,
@@ -1479,6 +1483,7 @@ const shard: CardShard = {
     _poolRowdyResearch,
     _poolRoyalAssassin,
     _poolRoyalWarden,
+    _poolRubbleRouser,
     _poolRuinousIntrusion,
     _poolRuinousMinotaur,
     _poolRumblingBaloth,
@@ -1531,6 +1536,7 @@ const shard: CardShard = {
     _poolSilundiVision,
     _poolSilverSeraph,
     _poolSimicRagworm,
+    _poolSinProdder,
     _poolSinuousStriker,
     _poolSirensRuse,
     _poolSkirkCommando,

@@ -431,14 +431,41 @@ export interface DrawRedirectReplacement {
    * even though no card could be drawn (rule 614.11), and replaces the draw
    * whether or not the player can win — one who can't (an opponent's
    * Platinum Angel) neither wins nor loses for it (the rulings). */
-  readonly instead: "you-draw" | { readonly draws: number } | "win-game";
+  readonly instead: "you-draw" | { readonly draws: number } | "win-game" | DrawReplacedByEffect;
   /** Only a draw while the drawing player's library has no cards in it. */
   readonly whileLibraryEmpty?: boolean;
   /** "…except the first one they draw in each of their draw steps" (Notion
-   * Thief): not the first card a player draws during their own turn's draw
-   * step, the turn-based draw or not — if that one was skipped, the next
-   * card they draw in the step is the first. */
+   * Thief; Teferi's Ageless Insight's and Bard, King of Dale's "draw two
+   * cards instead"): not the first card a player draws during their own
+   * turn's draw step, the turn-based draw or not — if that one was skipped,
+   * the next card they draw in the step is the first. With `who: "you"`
+   * (`draws` or `effect`) only. */
   readonly exceptFirstInDrawStep?: boolean;
+  /** "The first time you would draw a card each turn" (Reed Richards,
+   * Smartest Man; Scion of Halaster): only the player's first draw event of
+   * the turn — with `exceptFirstInDrawStep`, the first one that isn't
+   * exempted. Read from the turn's history
+   * (`PlayerState.wouldDrawThisTurn`), so a permanent that arrives after that
+   * draw doesn't apply until the next turn. With `who: "you"` only. */
+  readonly firstEachTurn?: boolean;
+}
+
+/** A `would-draw` replacement whose draw becomes an effect instead (rule
+ * 614.1a) — Underrealm Lich's "if you would draw a card, instead look at the
+ * top three cards of your library, then put one into your hand and the rest
+ * into your graveyard", Sages of the Anima's reveal-three, Tomorrow, Azami's
+ * Familiar's look-three-keep-one. `who: "you"`: the effect is its
+ * controller's ("you" in it is them — the drawing player). It applies though
+ * the library is empty (rule 614.11), and the card isn't drawn: no draw
+ * trigger, nothing counted as drawn. In a draw of several cards it's
+ * finished, any choice in it answered, before the next card is drawn (rule
+ * 614.11a). Applied in `Game.drawCard` instead of any `draws` multiplier on
+ * the same draw — of the orders the drawing player could pick (rule 616.1),
+ * the engine takes the effect first (AUTHORING §15, "Replacement ordering").
+ * The effect mustn't draw a card unless the replacement is `firstEachTurn`
+ * (which its own draw then can't meet again). */
+export interface DrawReplacedByEffect {
+  readonly effect: EffectSpec;
 }
 
 /**

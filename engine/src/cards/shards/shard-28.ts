@@ -593,6 +593,7 @@ import _poolRebellionOfTheFlamekin from "../pool/rebellion-of-the-flamekin.js";
 import _poolRecklessImpulse from "../pool/reckless-impulse.js";
 import _poolRedSunsZenith from "../pool/red-suns-zenith.js";
 import _poolRedcapThief from "../pool/redcap-thief.js";
+import _poolReedRichardsSmartestMan from "../pool/reed-richards-smartest-man.js";
 import _poolReefRoads from "../pool/reef-roads.js";
 import _poolRemorselessPunishment from "../pool/remorseless-punishment.js";
 import _poolRepelTheVile from "../pool/repel-the-vile.js";
@@ -1504,6 +1505,7 @@ const shard: CardShard = {
     _poolRecklessImpulse,
     _poolRedSunsZenith,
     _poolRedcapThief,
+    _poolReedRichardsSmartestMan,
     _poolReefRoads,
     _poolRemorselessPunishment,
     _poolRepelTheVile,

@@ -604,6 +604,7 @@ import _poolReverence from "../pool/reverence.js";
 import _poolRhysticSyphon from "../pool/rhystic-syphon.js";
 import _poolRiddlesmith from "../pool/riddlesmith.js";
 import _poolRilingDawnbreaker from "../pool/riling-dawnbreaker.js";
+import _poolRinoaAngelWing from "../pool/rinoa-angel-wing.js";
 import _poolRiotSpikes from "../pool/riot-spikes.js";
 import _poolRipjawRaptor from "../pool/ripjaw-raptor.js";
 import _poolRiptideSurvivor from "../pool/riptide-survivor.js";
@@ -886,6 +887,7 @@ import _poolYokedPlowbeast from "../pool/yoked-plowbeast.js";
 import _poolYotianFrontliner from "../pool/yotian-frontliner.js";
 import _poolYouHearSomethingOnWatch from "../pool/you-hear-something-on-watch.js";
 import _poolYuffieMateriaHunter from "../pool/yuffie-materia-hunter.js";
+import _poolYurlokOfScorchThrash from "../pool/yurlok-of-scorch-thrash.js";
 import _poolZadaHedronGrinder from "../pool/zada-hedron-grinder.js";
 import _poolZarichiTiger from "../pool/zarichi-tiger.js";
 import _poolZealousConscripts from "../pool/zealous-conscripts.js";
@@ -1511,6 +1513,7 @@ const shard: CardShard = {
     _poolRhysticSyphon,
     _poolRiddlesmith,
     _poolRilingDawnbreaker,
+    _poolRinoaAngelWing,
     _poolRiotSpikes,
     _poolRipjawRaptor,
     _poolRiptideSurvivor,
@@ -1793,6 +1796,7 @@ const shard: CardShard = {
     _poolYotianFrontliner,
     _poolYouHearSomethingOnWatch,
     _poolYuffieMateriaHunter,
+    _poolYurlokOfScorchThrash,
     _poolZadaHedronGrinder,
     _poolZarichiTiger,
     _poolZealousConscripts,

@@ -1320,6 +1320,15 @@ export interface GameObject {
    */
   exiledWith?: { readonly source: ObjectId; readonly zoneChangeCount: number };
   /**
+   * The cards this token's ability means by "the exiled card" (rule 607.2a —
+   * Hofri Ghostforge's Spirit, Timothar, Baron of Bats's Bat), each as the
+   * object it is in exile (rule 400.7): the `link-exiled-to-created` effect's
+   * record. On the token, not the card, so each of several tokens made
+   * together has it (their rulings: any of them returns the card) and a token
+   * split off a stack keeps it; a copy of the token doesn't (the rulings).
+   */
+  linkedExile?: readonly { readonly object: ObjectId; readonly zoneChangeCount: number }[];
+  /**
    * The cards encoded on this permanent (rule 702.99b — cipher), each with
    * the exile stint it was encoded in. One still exiled in that stint gives
    * it the cipher trigger (`Game.effectiveTriggeredEntries`), whoever
@@ -1670,6 +1679,10 @@ export interface SpellSnapshot {
    * (`LastKnownRefs.exiledCost`): a copy's "the exiled card" is the
    * original's, as `convokedBy` is (rule 707.10). */
   readonly exiledCost?: readonly ObjectId[];
+  /** The one permanent tapped to pay its cost (`LastKnownRefs.tapped`): a
+   * copy's "the creature tapped to pay this spell's additional cost" is the
+   * original's (rule 707.10, Swallow Whole's ruling). */
+  readonly tappedCost?: { readonly object: ObjectId; readonly zoneChangeCount: number };
   /** Its copiable modifiers (a prototyped spell's — rule 718.3c). */
   readonly modifiers: readonly PtModifier[];
   /** A copy without its epic ability (`GameObject.withoutEpic`). */
@@ -1996,6 +2009,9 @@ export type GrantedAbilityRef =
 export interface LastKnownInfo {
   /** How many times it had mutated (`GameObject.merged.timesMutated`). */
   readonly timesMutated?: number;
+  /** A token's `GameObject.linkedExile`: what its leaves-the-battlefield
+   * ability still means once it has ceased to exist. */
+  readonly linkedExile?: GameObject["linkedExile"];
   /** The permanent's `zoneChangeCount` while it was on the battlefield — which
    * of its stints there this describes. A reference to the permanent names
    * the stint it means the same way (see {@link LastKnownRefs}), so a card
@@ -2330,8 +2346,9 @@ export interface LastKnownRefs {
    * ability was activated or triggered (rule 201.5a) — the `"granter"`
    * reference. */
   readonly granter?: { readonly object: ObjectId; readonly zoneChangeCount: number };
-  /** "The tapped creature": the one permanent tapped to pay the ability's
-   * cost (`AbilityCost.tapOthers` — station's, rule 702.184a). */
+  /** "The tapped creature": the one permanent tapped to pay the spell's or
+   * ability's cost (`AbilityCost.tapOthers` — station's, rule 702.184a; an
+   * additional cost's `tapUntapped` — Swallow Whole's). */
   readonly tapped?: { readonly object: ObjectId; readonly zoneChangeCount: number };
   /**
    * What the triggering event was aimed at, for a trigger whose event has a
@@ -2675,6 +2692,15 @@ export interface PlayerState {
    * draw steps" (Xyris, the Writhing Storm; Orcish Bowmasters). Reset in
    * `beginTurn`. Optional so an older snapshot still loads. */
   drewInDrawStepThisTurn?: boolean;
+  /** How many times this player would have drawn a card this turn — each
+   * single draw event, before any replacement (rule 614.11), the
+   * turn-based draw included: `all` of them, and `exceptDrawStepFirst` those
+   * that weren't the first card they'd draw in their own draw step. What a
+   * `would-draw` replacement's "the first time you would draw a card each
+   * turn" reads (Reed Richards, Smartest Man; Scion of Halaster) — history,
+   * so one that arrives after the turn's first draw doesn't apply that turn.
+   * Reset in `beginTurn`. */
+  wouldDrawThisTurn?: { all: number; exceptDrawStepFirst: number };
   /** The spells this player has cast this turn, in order, each as it was
    * cast — see {@link CastSpellRecord}. What "your first enchantment spell
    * each turn" counts (Tuvasa: a cast trigger with a `filter` counts
@@ -6630,6 +6656,7 @@ export function tokenFoldKey(o: GameObject): string {
     o.chosenPlayer ?? null,
     o.secretChoice ?? null,
     o.chosenPermanent ?? null,
+    o.linkedExile ?? null,
     o.counters,
     o.counterTimestamps ?? null,
     o.modifiers,

@@ -1,5 +1,5 @@
 Top 500 Commander *commanders* by EDHREC deck count (fetched 2026-09-22)
-459 already implemented / 41 missing
+460 already implemented / 40 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -194,7 +194,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  188  The Mindskinner                                12796 decks  {U}{U}{U}        Legendary Enchantment Creature — Nightmare
 [x]  189  Tergrid, God of Fright                         12762 decks  {3}{B}{B}        Legendary Creature — God // Legendary Artifact
 [x]  190  Ardenn, Intrepid Archaeologist                 12745 decks  {2}{W}           Legendary Creature — Kor Scout
-[ ]  191  Yurlok of Scorch Thrash                        12641 decks  {1}{B}{R}{G}     Legendary Creature — Lizard Shaman
+[x]  191  Yurlok of Scorch Thrash                        12641 decks  {1}{B}{R}{G}     Legendary Creature — Lizard Shaman
 [x]  192  Golbez, Crystal Collector                      12618 decks  {U}{B}           Legendary Creature — Human Wizard
 [ ]  193  Hylda of the Icy Crown                         12582 decks  {2}{W}{U}        Legendary Creature — Human Warlock
 [x]  194  Disa the Restless                              12558 decks  {2}{B}{R}{G}     Legendary Creature — Human Scout

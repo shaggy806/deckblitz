@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4250 already implemented / 750 missing (marks refreshed 2026-11-03)
+4256 already implemented / 744 missing (marks refreshed 2026-11-03)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -428,7 +428,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   429  Mondrak, Glory Dominus                   {2}{W}{W}        Legendary Creature — Phyrexian Horror
 [x]   430  Shadowblood Ridge                        {0}              Land
 [x]   431  Snakeskin Veil                           {G}              Instant
-[ ]   432  Simian Spirit Guide                      {2}{R}           Creature — Ape Spirit
+[x]   432  Simian Spirit Guide                      {2}{R}           Creature — Ape Spirit
 [x]   433  Sungrass Prairie                         {0}              Land
 [x]   434  Taiga                                    {0}              Land — Mountain Forest
 [x]   435  Tainted Wood                             {0}              Land
@@ -585,7 +585,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   586  Darksteel Mutation                       {1}{W}           Enchantment — Aura
 [x]   587  Return the Favor                         {R}{R}           Instant
 [x]   588  Six                                      {2}{G}           Legendary Creature — Treefolk
-[ ]   589  Teferi's Ageless Insight                 {2}{U}{U}        Legendary Enchantment
+[x]   589  Teferi's Ageless Insight                 {2}{U}{U}        Legendary Enchantment
 [x]   590  Ghostly Flicker                          {2}{U}           Instant
 [x]   591  Talisman of Impulse                      {2}              Artifact
 [x]   592  Selfless Spirit                          {1}{W}           Creature — Spirit Cleric
@@ -742,7 +742,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   743  Kenrith's Transformation                 {1}{G}           Enchantment — Aura
 [x]   744  Champion's Helm                          {3}              Artifact — Equipment
 [x]   745  Leyline of Anticipation                  {2}{U}{U}        Enchantment
-[ ]   746  Elvish Spirit Guide                      {2}{G}           Creature — Elf Spirit
+[x]   746  Elvish Spirit Guide                      {2}{G}           Creature — Elf Spirit
 [x]   747  Thought Monitor                          {6}{U}           Artifact Creature — Construct
 [x]   748  Hellkite Tyrant                          {4}{R}{R}        Creature — Dragon
 [x]   749  Revitalizing Repast // Old-Growth Grove  {1}              Instant // Land
@@ -1089,7 +1089,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1093  Radiant Summit                           {0}              Land — Mountain Plains
 [x]  1094  Thornwood Falls                          {0}              Land
 [x]  1095  Anim Pakal, Thousandth Moon              {1}{R}{W}        Legendary Creature — Human Soldier
-[ ]  1096  Ugin, the Ineffable                      {6}              Legendary Planeswalker — Ugin
+[x]  1096  Ugin, the Ineffable                      {6}              Legendary Planeswalker — Ugin
 [x]  1097  Ethereal Armor                           {W}              Enchantment — Aura
 [x]  1098  Muldrotha, the Gravetide                 {3}{B}{G}{U}     Legendary Creature — Elemental Avatar
 [x]  1099  Tranquil Cove                            {0}              Land
@@ -2945,7 +2945,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2952  Dragonstorm Globe                        {3}              Artifact
 [x]  2953  Fated Firepower                          {X}{R}{R}{R}     Enchantment
 [x]  2954  Curious Altisaur                         {3}{G}           Creature — Dinosaur
-[ ]  2955  Underrealm Lich                          {3}{B}{G}        Creature — Zombie Elf Shaman
+[x]  2955  Underrealm Lich                          {3}{B}{G}        Creature — Zombie Elf Shaman
 [x]  2956  Eye of Ugin                              {0}              Legendary Land
 [ ]  2957  Yenna, Redtooth Regent                   {2}{G}{W}        Legendary Creature — Elf Noble
 [x]  2958  Crossroads Village                       {0}              Land — Town
@@ -4112,7 +4112,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4119  Sword of the Squeak                      {2}              Artifact — Equipment
 [x]  4120  Azure Beastbinder                        {1}{U}           Creature — Rat Rogue
 [x]  4121  Curse of Disturbance                     {2}{B}           Enchantment — Aura Curse
-[ ]  4122  Horizon Stone                            {5}              Artifact
+[x]  4122  Horizon Stone                            {5}              Artifact
 [x]  4123  Rogue's Gloves                           {2}              Artifact — Equipment
 [x]  4124  Inquisitor's Flail                       {2}              Artifact — Equipment
 [ ]  4125  Tinybones Joins Up                       {B}              Legendary Enchantment

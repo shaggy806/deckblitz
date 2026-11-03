@@ -642,6 +642,7 @@ import _poolStaffOfTheAges from "../pool/staff-of-the-ages.js";
 import _poolStalkingTiger from "../pool/stalking-tiger.js";
 import _poolStandTogether from "../pool/stand-together.js";
 import _poolStand from "../pool/stand.js";
+import _poolStangg from "../pool/stangg.js";
 import _poolStarlitAngel from "../pool/starlit-angel.js";
 import _poolStartledAwake from "../pool/startled-awake.js";
 import _poolStaunchCrewmate from "../pool/staunch-crewmate.js";
@@ -1458,6 +1459,7 @@ const shard: CardShard = {
     _poolStalkingTiger,
     _poolStandTogether,
     _poolStand,
+    _poolStangg,
     _poolStarlitAngel,
     _poolStartledAwake,
     _poolStaunchCrewmate,

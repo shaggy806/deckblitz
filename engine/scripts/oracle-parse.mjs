@@ -1534,6 +1534,10 @@ export function parseCost(text) {
       const { count, filter, noun } = handRevealOf(m[1]);
       cost.reveal = { count, filter, text: noun };
     } else if ((m = /^(\{E\})+$/.exec(part))) cost.payEnergy = part.length / 3;
+    // "Collect evidence 3" (rule 701.59a — Forensic Researcher, Cryptex).
+    else if ((m = /^Collect evidence (\d+)$/.exec(part))) cost.collectEvidence = Number(m[1]);
+    // "Tap enchanted land" (Earthlore): the one permanent the source is on.
+    else if (/^Tap (?:enchanted|equipped) (?:creature|land|permanent)$/.test(part)) cost.tapOthers = { count: 1, filter: { hostOfSource: true } };
     else if ((m = new RegExp(`^Tap ${N} untapped (.+?) you control$`, "i").exec(part))) {
       // "Tap X untapped artifacts you control": announced as it's activated.
       const count = numberOf(m[1]);
@@ -1546,7 +1550,10 @@ export function parseCost(text) {
       if (typeof count !== "number" || filter === null) return null;
       cost.tapOthers = { count, shareCreatureType: true, filter: { ...filter, controlledBy: "you" } };
     } else if (part === "Exile ~ from your graveyard") extra.zone = "graveyard";
-    else if (part === "Discard ~") extra.zone = "hand";
+    else if (part === "Exile ~ from your hand") {
+      extra.zone = "hand";
+      extra.exilesFromHand = true;
+    } else if (part === "Discard ~") extra.zone = "hand";
     else if (part === "Exile ~") cost.exileSelf = true;
     // The secret chosen for this permanent (`GameObject.secretChoice`).
     else if (part === "Reveal the player you chose" || part === "Reveal the creature type you chose") cost.revealChosen = true;
@@ -1607,7 +1614,9 @@ export function parseCost(text) {
   }
   // Without a {T} of its own, the source may be one of the creatures it taps
   // (Nullmage Shepherd).
-  if (cost.tapOthers !== undefined && !cost.tap) cost.tapOthers = { ...cost.tapOthers, includeSelf: true };
+  if (cost.tapOthers !== undefined && !cost.tap && cost.tapOthers.filter.hostOfSource !== true) {
+    cost.tapOthers = { ...cost.tapOthers, includeSelf: true };
+  }
   return { cost, extra };
 }
 
@@ -1935,6 +1944,29 @@ export function parseTrigger(clause) {
     // "Another permanent leaves the battlefield" is any of them: no filter.
     const any = on === "leaves-battlefield" && Object.keys(filter).length === 0;
     return [{ on, who, ...(any ? {} : { filter }), ...(m[1] === "another" ? { otherOnly: true } : {}) }];
+  }
+  // "Whenever one or more [other] creatures [you control] die": once per
+  // simultaneous event. (With "this ability triggers only once each turn" it's
+  // a plain `dies`, which `parseFace` makes of it.)
+  if (
+    (m =
+      /^Whenever one or more (other )?(.+?)(?: (you control|an opponent controls))? (die|are put into a graveyard from the battlefield)$/.exec(
+        c,
+      ))
+  ) {
+    const attacking = /^attacking (.+)$/.exec(m[2]);
+    const kind = attacking !== null ? attacking[1] : m[2];
+    const filter = kind === "artifacts and/or creatures" ? { typesAnyOf: ["artifact", "creature"] } : parseTypePhrase(kind);
+    if (filter !== null) {
+      if (attacking !== null) filter.attacking = true;
+      // Only a creature dies (rule 700.4).
+      if (m[4] === "die" && filter.type === undefined && filter.types === undefined && filter.typesAnyOf === undefined) {
+        filter.type = "creature";
+      }
+      if (m[3] === "an opponent controls") filter.controlledBy = "opponent";
+      const who = m[3] === "you control" ? "you-control" : "any";
+      return [{ on: "dies", who, filter, ...(m[1] !== undefined ? { otherOnly: true } : {}), batched: true }];
+    }
   }
   if ((m = /^Whenever (a|another) (.+?) you control deals combat damage to a player$/.exec(c))) {
     const filter = parseTypePhrase(m[2]);
@@ -2993,6 +3025,7 @@ export function parseSentence(sentence, ctx) {
     return faceDownExile(true, { whose: "each-player", amount: 1 });
   }
   if (re("look at the top card of your library, then exile it face down").test(s)) return faceDownExile("looked", { amount: 1 });
+  if (re("exile the top card of your library face down and look at it").test(s)) return faceDownExile("looked", { amount: 1 });
   if (re("look at the top card of each opponent's library and exile those cards face down").test(s)) {
     return faceDownExile("looked", { whose: "each-opponent", amount: 1 });
   }
@@ -3502,6 +3535,10 @@ export function parseSentence(sentence, ctx) {
     return { kind: "sequence", effects: [put, then] };
   }
   // Counters.
+  // "On the creature tapped to pay this spell's additional cost" (Swallow Whole).
+  if ((m = re(`put ${N} ([+-]\\d+/[+-]\\d+|[a-z]+) counters? on the creature tapped to pay ~'s additional cost`).exec(s))) {
+    return { kind: "add-counter", target: "tapped", counter: m[2].toLowerCase(), amount: amount(m[1]) };
+  }
   // Any named kind: +1/+1, oil (Phyrexia: All Will Be One), stun, shield.
   if ((m = re(`put ${N} ([+-]\\d+/[+-]\\d+|[a-z]+) counters? on (~|${TARGET}|each creature you control|each other creature you control)`).exec(s))) {
     const n = amount(m[1]);
@@ -4577,6 +4614,10 @@ export function parseSentence(sentence, ctx) {
       },
       then: { kind: "counter", target: "trigger-object" },
     };
+  }
+  // Distant Memories' any card, which it must find: a quantity, no quality (rule 701.23d).
+  if (/^search your library for a card, exile it, then shuffle\.$/i.test(s)) {
+    return { kind: "search-library", filter: {}, destination: "exile", min: 1, max: 1 };
   }
   // Strata Scythe's imprint: the exile is linked below, for "the exiled card".
   if ((m = /^search your library for an? (.+?) card, exile it, then shuffle\.$/i.exec(s))) {
@@ -6447,6 +6488,9 @@ const MANA_SPEND_PURPOSE_LINES = {
     purposes: ["class-level"],
   },
   "Spend this mana only on costs that contain {X}.": { purposes: ["cost-with-x"] },
+  "Spend this mana only to cast a spell that's one or more colors without {X} in its mana cost.": {
+    spell: { colorless: false, xInManaCost: false },
+  },
 };
 
 const COLOR_LETTER = { white: "W", blue: "U", black: "B", red: "R", green: "G" };
@@ -6581,6 +6625,24 @@ export function parseEffect(text, outer) {
     const add = parseSentence(spendOnly[1], ctx);
     if (add?.kind === "add-mana") {
       return { effect: { ...add, spendOnly: { ...spendClause, text: spendOnly[2] } }, todo: [], hints: [] };
+    }
+    ctx.targets.length = slots;
+  }
+  // "Add {R}. When you do, this creature deals 1 damage to each opponent"
+  // (Rubble Rouser): the mana ability off the stack, a reflexive ability on it
+  // (rule 603.12, its ruling), with no target for the mana ability to have.
+  const addThenDo = /^(Add .+?\.) When you do, (.+\.)$/.exec(text);
+  if (addThenDo !== null) {
+    const slots = ctx.targets.length;
+    const add = parseSentence(addThenDo[1], ctx);
+    const reflexive = add?.kind === "add-mana" ? parseSentence(`${addThenDo[2][0].toUpperCase()}${addThenDo[2].slice(1)}`, ctx) : null;
+    if (reflexive !== null && !containsUndefined(reflexive) && ctx.targets.length === slots) {
+      const said = addThenDo[2].replaceAll("~", "this creature");
+      return {
+        effect: { ...add, also: { kind: "reflexive-trigger", targets: [], effect: reflexive, text: `When you do, ${said}` } },
+        todo: [],
+        hints: [],
+      };
     }
     ctx.targets.length = slots;
   }
@@ -7653,6 +7715,34 @@ export function parseEffect(text, outer) {
         continue;
       }
     }
+    // "Target artifact creature's controller sacrifices it. That player may
+    // search their library for a noncreature artifact card, put it onto the
+    // battlefield, then shuffle" (Arcum Dagsson): its controller's to decline.
+    const sacrificesM = /^target (.+?)'s controller sacrifices it\.$/i.exec(sentence);
+    if (sacrificesM !== null && ctx.targets.length === 0) {
+      const types = parseTypePhrase(sacrificesM[1]);
+      const spec = targetOf(sacrificesM[1]) ?? (types === null ? null : { kind: "permanent", filter: types });
+      if (spec !== undefined && spec !== null) {
+        ctx.targets.push(spec);
+        const effect = { kind: "sacrifice-target", target: 0, byItsController: true };
+        parsed.push(effect);
+        hints.push({ sentence, effect });
+        continue;
+      }
+    }
+    const mayFor = controllerMaySearch(sentence, ctx, parsed);
+    if (mayFor !== null) {
+      parsed.push(mayFor);
+      hints.push({ sentence, effect: mayFor });
+      continue;
+    }
+    const anyOpponent = anyOpponentMayAt(sentences, i, parsed);
+    if (anyOpponent !== null) {
+      parsed.push(anyOpponent.effect);
+      hints.push({ sentence, effect: anyOpponent.effect });
+      skip = anyOpponent.used - 1;
+      continue;
+    }
     const before = ctx.targets.length;
     // The rhystic cards (Prophecy): "[effect] unless any player pays {2}." /
     // "Unless any player pays {2}, [effect]." — the effect behind an
@@ -8028,6 +8118,37 @@ function handsFaceDownAt(sentences, i, ctx) {
       used: 2,
     };
   }
+  // "Create … token. Exile that token when ~ leaves the battlefield. Sacrifice
+  // ~ when that token leaves the battlefield" (Stangg); "… When that token
+  // leaves the battlefield, put the exiled card into your hand" (Ugin, the
+  // Ineffable); "Return ~ to the battlefield under its owner's control when
+  // that token dies" (Tatsumasa, the Dragon's Fang).
+  const onLeaving = (at, effect, text, about) => ({
+    effects: [{ kind: "delayed-trigger", at, ...(about !== undefined ? { about } : {}), effect, text }],
+    used: 1,
+  });
+  const LEAVING = ["graveyard", "exile", "hand", "library", "command"];
+  if (/^exile that token when ~ leaves the battlefield\.$/i.test(first)) {
+    return onLeaving({ leaves: "source", to: LEAVING }, { kind: "exile", target: 0 }, "Exile that token when ~ leaves the battlefield.", "created");
+  }
+  if (/^sacrifice ~ when that token leaves the battlefield\.$/i.test(first)) {
+    return onLeaving({ leaves: "created", to: LEAVING }, { kind: "sacrifice-source" }, "Sacrifice ~ when that token leaves the battlefield.");
+  }
+  if (/^when that token leaves the battlefield, put the exiled card into your hand\.$/i.test(first)) {
+    return onLeaving(
+      { leaves: "created", to: LEAVING },
+      { kind: "return-to-hand", target: 0, from: "exile" },
+      "When that token leaves the battlefield, put the exiled card into your hand.",
+      "exiled",
+    );
+  }
+  if (/^return ~ to the battlefield under its owner's control when that token dies\.$/i.test(first)) {
+    return onLeaving(
+      { leaves: "created", to: ["graveyard"] },
+      { kind: "put-onto-battlefield", target: "source" },
+      "Return ~ to the battlefield under its owner's control when that token dies.",
+    );
+  }
   // "Create a Lander token. At the beginning of the end step on your next
   // turn, sacrifice that token" (Kav Landseeker).
   if (first === "at the beginning of the end step on your next turn, sacrifice that token.") {
@@ -8327,6 +8448,10 @@ function searchInsteadAt(sentences, i) {
  *   and put it onto the battlefield [attached to this creature]. If you search
  *   your library this way, shuffle." (Boonweaver Giant, Dark Supplicant): the
  *   zones chosen as it resolves (`searchZonesAndOr`);
+ * - "Search your library and/or graveyard for up to five Doctor cards, reveal
+ *   them, and put them into your hand. If you search your library this way,
+ *   shuffle." (The Five Doctors): the same, "up to" holding in a graveyard too
+ *   (`upTo`);
  * - "Search your library and graveyard for five cards and exile the rest. Put
  *   the chosen cards on top of your library in any order." (Doomsday).
  */
@@ -8346,6 +8471,27 @@ function searchZonesAt(sentences, i) {
         exileRest: true,
         inAnyOrder: true,
       },
+      used: 2,
+    };
+  }
+  const upTo =
+    /^search your ((?:graveyard|library|hand)(?:, (?:graveyard|library|hand),?| ) ?and\/or (?:graveyard|library|hand)) for up to (\w+) (.+?) cards, reveal them, and put them into your hand\.$/i.exec(
+      sentences[i] ?? "",
+    );
+  if (upTo !== null && /^if you search your library this way, shuffle\.$/i.test(sentences[i + 1] ?? "")) {
+    const max = numberOf(upTo[2]);
+    const filter = parseTypePhrase(upTo[3], { cards: true });
+    if (typeof max !== "number" || filter === null || filter === undefined) return null;
+    return {
+      effect: searchZonesAndOr(upTo[1].toLowerCase().match(/graveyard|library|hand/g), {
+        kind: "search-library",
+        filter,
+        destination: "hand",
+        min: 0,
+        max,
+        upTo: true,
+        reveal: true,
+      }),
       used: 2,
     };
   }
@@ -9155,6 +9301,86 @@ function opponentChoosesInGraveyardAt(sentences, i, ctx) {
  * read the card found, with the target they read chosen first (Erratic
  * Explosion, Erratic Mutation, Goblin Machinist). Auspicious Starrix's exile.
  */
+/**
+ * "Its controller / That player may search their library for a basic land
+ * card, put it onto the battlefield [tapped], then shuffle" after the one
+ * sentence that targeted (Path to Exile, Assassin's Trophy, Arcum Dagsson):
+ * theirs to decline, the target's controller as it last existed.
+ */
+function controllerMaySearch(sentence, ctx, parsed) {
+  if (ctx.targets.length !== 1 || parsed.length === 0) return null;
+  const m = /^(?:its controller|that player) may search their library for an? (.+?) card, put (?:it|that card) onto the battlefield( tapped)?, then shuffle\.$/i.exec(sentence);
+  if (m === null) return null;
+  const filter = parseTypePhrase(m[1], { cards: true });
+  if (filter === null) return null;
+  return {
+    kind: "each-player-may",
+    who: { controllerOfTarget: 0 },
+    prompt: `Search your library for a ${m[1]} card?`,
+    effect: { kind: "search-library", filter, destination: "battlefield", min: 0, max: 1, ...(m[2] ? { enterTapped: true } : {}) },
+  };
+}
+
+/**
+ * "Any opponent may have you put that card into your hand. If no player does,
+ * you draw three cards" after a search that exiled it (Distant Memories), and
+ * "Reveal the top card of your library. Any opponent may have you put that card
+ * into your graveyard. If a player does, ~ deals damage to that player equal to
+ * that card's mana value. Otherwise, put that card into your hand" (Sin Prodder):
+ * an `unless` over the opponents, each asked in turn until one says yes.
+ */
+function anyOpponentMayAt(sentences, i, parsed) {
+  const s = (n) => sentences[i + n] ?? "";
+  const anyOpponent = (doing, text, otherwise) => ({
+    kind: "unless",
+    chooser: { anyOf: "each-opponent" },
+    options: [{ doing, text }],
+    otherwise,
+  });
+  if (
+    /^any opponent may have you put that card into your hand\.$/i.test(s(0)) &&
+    parsed.at(-1)?.kind === "search-library" &&
+    parsed.at(-1).destination === "exile"
+  ) {
+    const draw = /^if no player does, you draw (\w+) cards?\.$/i.exec(s(1));
+    const amount = draw === null ? undefined : numberOf(draw[1]);
+    if (typeof amount !== "number") return null;
+    return {
+      effect: anyOpponent(
+        { kind: "move-exiled-this-way", to: "hand" },
+        "Have them put the exiled card into their hand",
+        { kind: "draw", amount },
+      ),
+      used: 2,
+    };
+  }
+  if (
+    /^reveal the top card of your library\.$/i.test(s(0)) &&
+    /^any opponent may have you put that card into your graveyard\.$/i.test(s(1)) &&
+    /^if a player does, ~ deals damage to that player equal to that card's mana value\.$/i.test(s(2)) &&
+    /^otherwise, put that card into your hand\.$/i.test(s(3))
+  ) {
+    return {
+      effect: {
+        kind: "reveal-top",
+        then: anyOpponent(
+          {
+            kind: "sequence",
+            effects: [
+              { kind: "put-into-graveyard", target: 0 },
+              { kind: "damage", amount: { manaValueOf: 0 }, who: "you" },
+            ],
+          },
+          "Have them put the revealed card into their graveyard, and be dealt damage equal to its mana value",
+          { kind: "return-to-hand", target: 0, from: "library" },
+        ),
+      },
+      used: 4,
+    };
+  }
+  return null;
+}
+
 function revealUntilAt(sentences, i, ctx) {
   const FROM_TOP = "reveal cards from the top of your library until you reveal";
   const REST = "on the bottom of your library in (any|a random) order";
@@ -10986,6 +11212,29 @@ export function parseFace(face, ctx = {}) {
       if (restrictions.includes("as a sorcery")) ability.sorcerySpeed = true;
       if (restrictions.includes("once each turn")) ability.oncePerTurn = true;
       if (restrictions.includes("during your turn")) ability.condition = { kind: "your-turn" };
+      // "Tap enchanted creature: … Activate only if enchanted creature is
+      // [white and] untapped [and only once each turn]" (Krovikan Plague,
+      // Nature's Chosen): being untapped is what the cost asks anyway (rule
+      // 118.3), so it's said only of a cost that taps the host.
+      if (ability.cost?.tapOthers?.filter?.hostOfSource === true) {
+        rest = rest.replace(
+          / Activate only if enchanted (?:creature|land|permanent) is (?:(white|blue|black|red|green) and )?untapped( and only once each turn)?\.$/,
+          (_x, color, once) => {
+            if (color !== undefined) {
+              const letter = { white: "W", blue: "U", black: "B", red: "R", green: "G" }[color];
+              ability.condition = { kind: "source", filter: { attachedTo: { colors: [letter] } } };
+            }
+            if (once !== undefined) ability.oncePerTurn = true;
+            return "";
+          },
+        );
+      }
+      // "Activate only during your turn and only once each turn" (Nature's Chosen).
+      rest = rest.replace(/ Activate only during your turn and only once each turn\.$/, () => {
+        ability.condition = { kind: "your-turn" };
+        ability.oncePerTurn = true;
+        return "";
+      });
       // Rocket Launcher: rule 302.6's test, of a permanent of any type.
       rest = rest.replace(/ Activate only if you've controlled ~ continuously since the beginning of your most recent turn\.$/, () => {
         ability.condition = { kind: "source", filter: { controlledContinuously: true } };
@@ -11164,7 +11413,15 @@ export function parseFace(face, ctx = {}) {
             }
           : {}),
       };
-      let triggers = parsedTriggers;
+      // "One or more … die. This ability triggers only once each turn": the
+      // first death triggers it, in that event or not, so a plain `dies`.
+      let triggers = oncePerTurn
+        ? parsedTriggers.map((t) => {
+            if (t.on !== "dies") return t;
+            const { batched: _batched, ...plain } = t;
+            return plain;
+          })
+        : parsedTriggers;
       const meldWhole = MELD_SENTENCE.exec(rest);
       if (meldWhole !== null) {
         // A meld trigger (Graf Rats, Gisela): its intervening if is the
@@ -13091,6 +13348,34 @@ function tokenReplacementOf(line, text, tokenFor) {
   return null;
 }
 
+/** A would-draw replacement's look or reveal at the top N cards, one (or
+ * every card of a type) into your hand and the rest into your graveyard or
+ * onto the bottom in any order: Underrealm Lich, Tomorrow, Azami's Familiar,
+ * Sages of the Anima. `null` for any other effect. */
+function drawInsteadLookOf(sentence) {
+  const m =
+    /^(Look at|Reveal) the top (\w+) cards of your library(?:, then|\.) [Pp]ut (one|all (.+?) cards revealed this way)(?: of (?:them|those cards))? into your hand and the rest (into your graveyard|on the bottom of your library in any order)\.$/.exec(
+      sentence,
+    );
+  if (m === null) return null;
+  const count = NUMBERS[m[2]];
+  if (count === undefined) return null;
+  const filter = m[4] !== undefined ? parseTypePhrase(m[4]) : undefined;
+  if (filter === null) return null;
+  const every = m[3].startsWith("all");
+  return {
+    kind: "look-and-choose",
+    zone: "library",
+    count,
+    ...(m[1] === "Reveal" ? { reveal: true } : {}),
+    min: every ? count : 1,
+    max: every ? count : 1,
+    ...(filter !== undefined ? { filter } : {}),
+    destination: "hand",
+    leftover: m[5] === "into your graveyard" ? "graveyard" : "bottom-any-order",
+  };
+}
+
 /**
  * A permanent that's a creature on its own terms, in the planeswalkers' words:
  * "During your turn, ~ is a 4/4 Human Soldier creature with indestructible
@@ -13418,6 +13703,67 @@ function parseStatic(line, text) {
       replacement: { event: "would-begin-turn", who: m[1] === "a player" ? "any" : "opponent", extraOnly: true },
       text,
     };
+  }
+  // Unspent mana as steps and phases end (rule 500.4): kept, of one colour
+  // (Leyline Tyrant) or by every player (Upwelling); turned into another type
+  // (Kruphix, Horizon Stone; Omnath, Locus of All); or costing life (Yurlok).
+  if ((m = /^You don't lose unspent (white|blue|black|red|green) mana as steps and phases end\.$/.exec(line))) {
+    return { affects: { scope: "self" }, keepsUnspentMana: [COLOR_WORD[m[1]]], text };
+  }
+  if (line === "Players don't lose unspent mana as steps and phases end.") {
+    return {
+      affects: { scope: "self" },
+      keepsUnspentMana: ["W", "U", "B", "R", "G", "C"],
+      keepsUnspentManaEachPlayer: true,
+      text,
+    };
+  }
+  if ((m = /^If you would lose unspent mana, that mana becomes (colorless|white|blue|black|red|green) instead\.$/.exec(line))) {
+    return m[1] === "colorless"
+      ? { affects: { scope: "self" }, unspentManaBecomesColorless: true, text }
+      : { affects: { scope: "self" }, unspentManaBecomes: COLOR_WORD[m[1]], text };
+  }
+  if (line === "A player losing unspent mana causes that player to lose that much life.") {
+    return { affects: { scope: "self" }, manaLossCausesLifeLoss: true, text };
+  }
+  // A would-draw replacement of your own (rule 614.1a, 614.11): "draw N cards
+  // instead" (Thought Reflection), "except the first one you draw in each of
+  // your draw steps" (Teferi's Ageless Insight), "the first time you would
+  // draw a card each turn" (Reed Richards, Smartest Man), or an effect
+  // instead of the draw (Underrealm Lich, Tomorrow, Azami's Familiar).
+  if (
+    (m =
+      /^(If you would draw a card|The first time you would draw a card each turn)( except the first (?:one|card) you draw (?:in|during) each of your draw steps)?, (?:you )?draw (two|three|four) cards instead\.$/.exec(
+        line,
+      ))
+  ) {
+    return {
+      affects: { scope: "self" },
+      replacement: {
+        event: "would-draw",
+        who: "you",
+        instead: { draws: NUMBERS[m[3]] },
+        ...(m[2] !== undefined ? { exceptFirstInDrawStep: true } : {}),
+        ...(m[1].startsWith("The first time") ? { firstEachTurn: true } : {}),
+      },
+      text,
+    };
+  }
+  if (
+    (m = /^If you would draw a card, instead (.+)$/.exec(line)) ??
+    (m = /^If you would draw a card, (.+?) instead\.( .+)?$/.exec(line))
+  ) {
+    const body = m[2] !== undefined ? `${m[1]}.${m[2]}` : m[1];
+    const sentence = body.charAt(0).toUpperCase() + body.slice(1);
+    const effect = drawInsteadLookOf(sentence) ?? parseEffect(sentence, { targets: [] });
+    const parsed = "kind" in effect ? { effect, todo: [] } : effect;
+    if (parsed.effect !== null && parsed.todo.length === 0) {
+      return {
+        affects: { scope: "self" },
+        replacement: { event: "would-draw", who: "you", instead: { effect: parsed.effect } },
+        text,
+      };
+    }
   }
   if (line === "Enchanted player can't gain life.") {
     return { affects: { scope: "self" }, replacement: { event: "would-gain-life", who: "enchanted-player", prevent: true }, text };

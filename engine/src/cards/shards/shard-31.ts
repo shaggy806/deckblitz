@@ -251,6 +251,7 @@ import _poolElendaTheDuskRose from "../pool/elenda-the-dusk-rose.js";
 import _poolElixirOfVitality from "../pool/elixir-of-vitality.js";
 import _poolElspethStormSlayer from "../pool/elspeth-storm-slayer.js";
 import _poolElvishLyrist from "../pool/elvish-lyrist.js";
+import _poolElvishSpiritGuide from "../pool/elvish-spirit-guide.js";
 import _poolEmeritusOfTruce from "../pool/emeritus-of-truce.js";
 import _poolEnchantedCarriage from "../pool/enchanted-carriage.js";
 import _poolEnergyRefractor from "../pool/energy-refractor.js";
@@ -833,6 +834,7 @@ import _poolTifaLockhart from "../pool/tifa-lockhart.js";
 import _poolTilonallisSkinshifter from "../pool/tilonallis-skinshifter.js";
 import _poolTimbercrownPathway from "../pool/timbercrown-pathway.js";
 import _poolTombstoneCareerCriminal from "../pool/tombstone-career-criminal.js";
+import _poolTomorrowAzamisFamiliar from "../pool/tomorrow-azamis-familiar.js";
 import _poolTooEvilToStayDead from "../pool/too-evil-to-stay-dead.js";
 import _poolToothAndClaw from "../pool/tooth-and-claw.js";
 import _poolTorchFiend from "../pool/torch-fiend.js";
@@ -946,6 +948,7 @@ import _tokensRedWhiteSoldierHasteToken from "../tokens/red-white-soldier-haste-
 import _tokensSkeletonToken from "../tokens/skeleton-token.js";
 import _tokensSliverToken from "../tokens/sliver-token.js";
 import _tokensSpiritTokenWhite33Flying from "../tokens/spirit-token-white-3-3-flying.js";
+import _tokensStanggTwin from "../tokens/stangg-twin.js";
 import _tokensVirtuousRoleToken from "../tokens/virtuous-role-token.js";
 import _tokensWarriorTokenValorsReachTagTeam from "../tokens/warrior-token-valors-reach-tag-team.js";
 import _tokensWolfTokenSoundTheCall from "../tokens/wolf-token-sound-the-call.js";
@@ -1200,6 +1203,7 @@ const shard: CardShard = {
     _poolElixirOfVitality,
     _poolElspethStormSlayer,
     _poolElvishLyrist,
+    _poolElvishSpiritGuide,
     _poolEmeritusOfTruce,
     _poolEnchantedCarriage,
     _poolEnergyRefractor,
@@ -1782,6 +1786,7 @@ const shard: CardShard = {
     _poolTilonallisSkinshifter,
     _poolTimbercrownPathway,
     _poolTombstoneCareerCriminal,
+    _poolTomorrowAzamisFamiliar,
     _poolTooEvilToStayDead,
     _poolToothAndClaw,
     _poolTorchFiend,
@@ -1897,6 +1902,7 @@ const shard: CardShard = {
     _tokensSkeletonToken,
     _tokensSliverToken,
     _tokensSpiritTokenWhite33Flying,
+    _tokensStanggTwin,
     _tokensVirtuousRoleToken,
     _tokensWarriorTokenValorsReachTagTeam,
     _tokensWolfTokenSoundTheCall,

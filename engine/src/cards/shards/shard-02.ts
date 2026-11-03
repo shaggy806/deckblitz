@@ -151,6 +151,7 @@ import _poolCripplingFatigue from "../pool/crippling-fatigue.js";
 import _poolCrownOfGondor from "../pool/crown-of-gondor.js";
 import _poolCruelReality from "../pool/cruel-reality.js";
 import _poolCryptAngel from "../pool/crypt-angel.js";
+import _poolCryptex from "../pool/cryptex.js";
 import _poolCryptwailing from "../pool/cryptwailing.js";
 import _poolCrystalChimes from "../pool/crystal-chimes.js";
 import _poolCudgelTroll from "../pool/cudgel-troll.js";
@@ -1026,6 +1027,7 @@ const shard: CardShard = {
     _poolCrownOfGondor,
     _poolCruelReality,
     _poolCryptAngel,
+    _poolCryptex,
     _poolCryptwailing,
     _poolCrystalChimes,
     _poolCudgelTroll,

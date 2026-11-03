@@ -39,6 +39,9 @@ describe("art pins", () => {
 // Tokens Scryfall has no printing of (checked 2026-10-18, a token search by
 // name): nothing to pin, so they draw as a text panel.
 const NO_TOKEN_PRINTING = new Set([
+  // Tatsumasa, the Dragon's Fang (CHK)'s 5/5 blue flying Dragon Spirit: no token
+  // printing in the Oracle snapshot.
+  "Dragon Spirit Token (Tatsumasa)",
   // Firecat Blitz (JUD)'s 1/1 red Elemental Cat with haste: no token printing in
   // the Oracle snapshot.
   "Elemental Cat Token",

@@ -436,6 +436,7 @@ import _poolKujaGenomeSorcerer from "../pool/kuja-genome-sorcerer.js";
 import _poolKurgadon from "../pool/kurgadon.js";
 import _poolLagoonBreach from "../pool/lagoon-breach.js";
 import _poolLaidToRest from "../pool/laid-to-rest.js";
+import _poolLastLightOfDurinsDay from "../pool/last-light-of-durins-day.js";
 import _poolLathlissDragonQueen from "../pool/lathliss-dragon-queen.js";
 import _poolLaunch from "../pool/launch.js";
 import _poolLavaHounds from "../pool/lava-hounds.js";
@@ -506,6 +507,7 @@ import _poolMyrsmith from "../pool/myrsmith.js";
 import _poolMysteriousTome from "../pool/mysterious-tome.js";
 import _poolMysticMelting from "../pool/mystic-melting.js";
 import _poolNaturalConnection from "../pool/natural-connection.js";
+import _poolNaturesChosen from "../pool/natures-chosen.js";
 import _poolNayaSojourners from "../pool/naya-sojourners.js";
 import _poolNecrogenRotpriest from "../pool/necrogen-rotpriest.js";
 import _poolNeedlepeakSpider from "../pool/needlepeak-spider.js";
@@ -1324,6 +1326,7 @@ const shard: CardShard = {
     _poolKurgadon,
     _poolLagoonBreach,
     _poolLaidToRest,
+    _poolLastLightOfDurinsDay,
     _poolLathlissDragonQueen,
     _poolLaunch,
     _poolLavaHounds,
@@ -1394,6 +1397,7 @@ const shard: CardShard = {
     _poolMysteriousTome,
     _poolMysticMelting,
     _poolNaturalConnection,
+    _poolNaturesChosen,
     _poolNayaSojourners,
     _poolNecrogenRotpriest,
     _poolNeedlepeakSpider,

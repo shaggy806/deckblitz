@@ -41,6 +41,7 @@ import _poolAmbushParatrooper from "../pool/ambush-paratrooper.js";
 import _poolAmpedRaptor from "../pool/amped-raptor.js";
 import _poolAnaraWolvidFamiliar from "../pool/anara-wolvid-familiar.js";
 import _poolAncientKavu from "../pool/ancient-kavu.js";
+import _poolAncientVendetta from "../pool/ancient-vendetta.js";
 import _poolAngelicQuartermaster from "../pool/angelic-quartermaster.js";
 import _poolAngrathsFury from "../pool/angraths-fury.js";
 import _poolAnnieFlashTheVeteran from "../pool/annie-flash-the-veteran.js";
@@ -447,6 +448,7 @@ import _poolKoboldDrillSergeant from "../pool/kobold-drill-sergeant.js";
 import _poolKomodoRhino from "../pool/komodo-rhino.js";
 import _poolKorHookmaster from "../pool/kor-hookmaster.js";
 import _poolKrakensEye from "../pool/krakens-eye.js";
+import _poolKrovikanPlague from "../pool/krovikan-plague.js";
 import _poolKrumarInitiate from "../pool/krumar-initiate.js";
 import _poolKuldothaFlamefiend from "../pool/kuldotha-flamefiend.js";
 import _poolKuonOgreAscendant from "../pool/kuon-ogre-ascendant.js";
@@ -976,6 +978,7 @@ const shard: CardShard = {
     _poolAmpedRaptor,
     _poolAnaraWolvidFamiliar,
     _poolAncientKavu,
+    _poolAncientVendetta,
     _poolAngelicQuartermaster,
     _poolAngrathsFury,
     _poolAnnieFlashTheVeteran,
@@ -1382,6 +1385,7 @@ const shard: CardShard = {
     _poolKomodoRhino,
     _poolKorHookmaster,
     _poolKrakensEye,
+    _poolKrovikanPlague,
     _poolKrumarInitiate,
     _poolKuldothaFlamefiend,
     _poolKuonOgreAscendant,

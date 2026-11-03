@@ -843,8 +843,19 @@ missing. Re-run `--greedy` for Phase 2's order.
   `keyword:offering`, `decision:secret-choice` with `effect:protection-from-player-for-permanent`,
   `static:planeswalker-becomes-creature`, `effect:add-types-all` with `effect:add-land-types-all`,
   `amount:count-distinct-mana-costs` with `condition:distinct-mana-values-in-graveyard`, and
-  `condition:controlled-since-turn-start` with `filter:controlled-continuously-since-turn-start`. Three cloud sessions took
-  six families each beside them.
+  `condition:controlled-since-turn-start` with `filter:controlled-continuously-since-turn-start`, then
+  `decision:any-opponent-may` with `decision:may-answered-by-other-player`, `trigger:dies-batch-trigger`,
+  `effect:linked-token-leaves` with `effect:token-trigger-returns-linked-exiled-card`, `decision:search-hand-and-library` with
+  `effect:search-up-to-public-zone`, `cost:tap-enchanted-permanent` with `cost:tap-untapped-creature-additional`, and
+  `effect:hand-mana-ability` with `effect:mana-ability-graveyard-exile-cost`. Three cloud sessions took six families each
+  beside them.
+- **2026-11-03: `replacement:new-event-replacements`, its draw units.** `would-draw`'s `instead: { effect }` and the
+  except-first and first-each-turn exemptions (`draw-replacement-look-and-choose`, `-except-first`, `-first-each-turn`);
+  Underrealm Lich, Tomorrow, Sages of the Anima, Teferi's Ageless Insight, Reed Richards, Bard. Left: the reveal key and
+  the family's graveyard-destination and counter-scope groups.
+- **2026-11-03: `replacement:mana-pool-emptying`.** Its key `replacement:mana-pool-emptying`: unspent mana turned into
+  another type, kept by every player, or costing life; Horizon Stone, Upwelling, Yurlok. Left:
+  `replacement:mana-persistence-color` (The Last Agni Kai).
 - **2026-11-03: one cloud session, six named families in order.** `effect:linked-exiled-card` with
   `effect:linked-face-down-exile-to-battlefield`, `target:card-in-exile` and `condition:filter-has-flashback`;
   `effect:manifested-this-way` with `effect:put-counters-of-created`.

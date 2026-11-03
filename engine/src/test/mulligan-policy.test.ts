@@ -66,6 +66,14 @@ describe("opening-hand scoring", () => {
     );
   });
 
+  it("doesn't count a Spirit Guide, one mana once from the hand, as ramp", () => {
+    const others = ["Forest", "Forest", "Craw Wurm", "Colossal Dreadmaw", "Craw Wurm", "Colossal Dreadmaw"];
+    // A creature of the same cost that makes no mana scores the same.
+    expect(scoreOpeningHand(hand(...others, "Elvish Spirit Guide"), registry)).toBe(
+      scoreOpeningHand(hand(...others, "Trained Armodon"), registry),
+    );
+  });
+
   it("sees a land-fetching sorcery as ramp", () => {
     const fetching = hand("Forest", "Forest", "Forest", "Cultivate", "Craw Wurm", "Craw Wurm", "Craw Wurm");
     const not = hand("Forest", "Forest", "Forest", "Read the Bones", "Craw Wurm", "Craw Wurm", "Craw Wurm");

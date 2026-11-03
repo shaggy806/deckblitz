@@ -658,6 +658,7 @@ import _poolRushedRebirth from "../pool/rushed-rebirth.js";
 import _poolRuthlessLawbringer from "../pool/ruthless-lawbringer.js";
 import _poolSabertoothOutrider from "../pool/sabertooth-outrider.js";
 import _poolSacredFoundry from "../pool/sacred-foundry.js";
+import _poolSagesOfTheAnima from "../pool/sages-of-the-anima.js";
 import _poolSallySparrow from "../pool/sally-sparrow.js";
 import _poolSalvageSlasher from "../pool/salvage-slasher.js";
 import _poolSamutTheDrivingForce from "../pool/samut-the-driving-force.js";
@@ -1628,6 +1629,7 @@ const shard: CardShard = {
     _poolRuthlessLawbringer,
     _poolSabertoothOutrider,
     _poolSacredFoundry,
+    _poolSagesOfTheAnima,
     _poolSallySparrow,
     _poolSalvageSlasher,
     _poolSamutTheDrivingForce,
