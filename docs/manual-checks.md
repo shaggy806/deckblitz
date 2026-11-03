@@ -6611,3 +6611,13 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 - **Do:** Cast Moment of Silence, target yourself, then pass priority until the turn ends.
 - **Expect:** The log reads "Alice skips their combat phase". You're never offered an attack with the Grizzly Bears, and Bob takes no damage.
+
+### Patron of the Akki: offering in your upkeep, sacrificing a Goblin
+
+- **Do:** It's your upkeep. Click Patron of the Akki in your hand: nothing should happen yet. Press its button.
+- **Expect:** The button reads "(offering sacrificing Goblin Piker: -{1}{R})". Goblin Piker goes to your graveyard, your four Mountains pay what's left of the {4}{R}{R}, and the Patron resolves.
+
+### Patron of the Akki: offering from the command zone names the Goblin
+
+- **Do:** It's your upkeep. Click Patron of the Akki in your command zone.
+- **Expect:** It isn't cast yet: a menu opens with one item, "Cast Patron of the Akki (offering sacrificing Goblin Piker: -{1}{R})". Choosing it sacrifices Goblin Piker and taps your four Mountains.

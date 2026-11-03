@@ -36,8 +36,10 @@ export interface ZoneViewerProps {
     /** When a card can be played from here more than one way (Muldrotha
      * offering an artifact creature as either type, a modal double-faced
      * card's two faces), a button per way, in place of the single one —
-     * the choice stays explicit, so a bare click on the card does nothing. */
-    readonly variants?: (id: ObjectId) => readonly { label: string; onChoose: () => void }[]
+     * the choice stays explicit, so a bare click on the card does nothing.
+     * `ownButton`: so even when it's the only way, as a cast that sacrifices a
+     * permanent must be. */
+    readonly variants?: (id: ObjectId) => readonly { label: string; ownButton?: boolean; onChoose: () => void }[]
   }
   /** Turns this into a forced "choose between min and max of these" decision
    * (a `choose-from-zone` effect, e.g. looking at the top of your library) —
@@ -221,6 +223,7 @@ export function ZoneViewer({
             const castHere =
               !selection && castable && castable.ids.includes(obj.id) ? castable : null
             const variants = castHere?.variants?.(obj.id) ?? []
+            const waysHaveButtons = variants.length > 1 || variants.some((v) => v.ownButton === true)
             const other = otherFaceOf(obj, lookup)
             const showOther = other !== null && flipped.has(obj.id)
             return (
@@ -246,7 +249,7 @@ export function ZoneViewer({
                   onClick={
                     selection && isEligible
                       ? () => toggle(obj.id)
-                      : castHere && variants.length <= 1
+                      : castHere && !waysHaveButtons
                         ? () => castHere.onCast(obj.id)
                         : undefined
                   }
@@ -263,7 +266,7 @@ export function ZoneViewer({
                     ⇄
                   </button>
                 ) : null}
-                {castHere && variants.length > 1
+                {castHere && waysHaveButtons
                   ? variants.map((v, i) => (
                       <button key={i} type="button" onClick={v.onChoose}>
                         {/* A way to cast can name its cost ("Cast kicked {R}"). */}
@@ -271,7 +274,7 @@ export function ZoneViewer({
                       </button>
                     ))
                   : null}
-                {castHere && variants.length <= 1 ? (
+                {castHere && !waysHaveButtons ? (
                   <button type="button" onClick={() => castHere.onCast(obj.id)}>
                     <Symbols text={castHere.label(obj.id)} />
                   </button>

@@ -9969,4 +9969,19 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{}],
     }),
   ),
+  preset(
+    'Patron of the Akki: offering in your upkeep, sacrificing a Goblin',
+    board({
+      you: { bf: ['Mountain*4', 'Goblin Piker'], hand: ['Patron of the Akki'] },
+      step: 'upkeep',
+    }),
+  ),
+  preset(
+    'Patron of the Akki: offering from the command zone names the Goblin',
+    board({
+      you: { bf: ['Mountain*4', 'Goblin Piker'], cmd: ['Patron of the Akki'] },
+      opp: [{}, {}, {}],
+      step: 'upkeep',
+    }),
+  ),
 ]

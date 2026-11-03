@@ -47,6 +47,7 @@ import { rematchOffer } from './net/rematch.ts'
 import type { RematchOffer } from './net/rematch.ts'
 import { stackShowsSomething } from './game/decisionSource.ts'
 import { fitWidth } from './game/boardFit.ts'
+import { needsOwnButton } from './game/castWay.ts'
 import { isWordChoice, waitingLabel } from './game/waitingLabel.ts'
 import { gameStats } from './game/gameStats.ts'
 import { cueLengthMs, playSound } from './game/sound.ts'
@@ -220,6 +221,7 @@ function graveyardVariantLabel(
   }
   if (a.kind === 'cast-spell') {
     if (a.via !== undefined && a.via !== 'graveyard-permission') parts.push(a.via === 'flashback' && a.altCostText !== undefined ? a.altCostText : a.via)
+    if (a.via === 'emerge' && a.emergeSacrifice) parts.push(`sacrificing ${a.emergeSacrifice.cardName}: −${a.emergeSacrifice.manaValue}`)
     if (a.kicked) parts.push(`${a.kickerKeyword ?? 'kicked'} ${a.kickerCost ?? ''}`.trim())
     if (a.xCost?.minX !== undefined && a.xCost.minX === a.xCost.maxX) parts.push(`X=${a.xCost.maxX}`)
     if (a.prototype) parts.push(`prototype ${a.prototypeCost ?? ''}`.trim())
@@ -235,6 +237,14 @@ function graveyardVariantLabel(
     if (a.otherChooser !== undefined) parts.push(`${playerLabel(a.otherChooser)} chooses`)
   }
   return parts.length > 0 ? `${verb} ${parts.join(', ')}` : verb
+}
+
+/** A menu item or button for one way of playing a card, naming the card too:
+ * "Cast Patron of the Akki (offering sacrificing Goblin Piker: -{1}{R})". */
+function castWayLabel(a: CastAction | LandAction, view: PlayerView): string {
+  const variant = graveyardVariantLabel(a, view, false)
+  const space = variant.indexOf(' ')
+  return `${a.kind === 'play-land' ? 'Play' : 'Cast'} ${a.cardName}${space < 0 ? '' : ` (${variant.slice(space + 1)})`}`
 }
 
 /** The "which variant of this cast" fields a `cast-spell` action carries all
@@ -3020,9 +3030,9 @@ function Table({
       const opts = playFacesByCard.get(id) ?? []
       // A multi-face card shows a button per face (below the tile) — a bare
       // click does nothing so the choice stays explicit.
-      // So does a lone cast that asks another player to help pay (assist):
-      // its button says so.
-      if (opts.length === 1 && !(opts[0].kind === 'cast-spell' && opts[0].assist !== undefined)) playFace(opts[0])
+      // So does a lone cast that sacrifices a permanent or asks another player
+      // to help pay: its button says so.
+      if (opts.length === 1 && !needsOwnButton(opts[0])) playFace(opts[0])
     },
     [bottomAction, discardAction, revealChoiceAction, mode, playFace, playFacesByCard],
   )
@@ -4076,11 +4086,13 @@ function Table({
   const commandZoneTile = (obj: VisibleObject, paired = false) => {
     const castable = mode === 'priority' && castByCard.has(obj.id)
     // An ability that works from the command zone (commander ninjutsu), or
-    // more than one way to cast it (dash, blitz, kicker): the tile opens its
-    // ability menu, with each cast in it.
+    // more than one way to cast it (dash, blitz, kicker), or one that must say
+    // what it costs (offering's sacrifice): the tile opens its ability menu,
+    // with each cast in it.
+    const ways = playFacesByCard.get(obj.id) ?? []
     const usable =
       mode === 'priority' &&
-      ((abilitiesBySource.get(obj.id)?.length ?? 0) > 0 || (playFacesByCard.get(obj.id)?.length ?? 0) > 1)
+      ((abilitiesBySource.get(obj.id)?.length ?? 0) > 0 || ways.length > 1 || ways.some(needsOwnButton))
     // What's still owed, from the engine: less than 2 per cast once a
     // reduction has outrun the printed generic part (affinity on a
     // commander), none for a tax paid in life.
@@ -4124,10 +4136,14 @@ function Table({
           onClick={() => clickHandCard(obj.id)}
           flipIn={flipIn}
         />
-        {faceOpts.length > 1
+        {faceOpts.length > 1 || faceOpts.some(needsOwnButton)
           ? faceOpts.map((a, i) => (
               <button key={i} type="button" onClick={() => playFace(a)}>
-                {a.kind === 'play-land' ? 'Play' : 'Cast'} {a.cardName}
+                {needsOwnButton(a) ? (
+                  <Symbols text={castWayLabel(a, view)} />
+                ) : (
+                  <>{a.kind === 'play-land' ? 'Play' : 'Cast'} {a.cardName}</>
+                )}
               </button>
             ))
           : null}
@@ -6422,6 +6438,7 @@ function Table({
   const selectedCast =
     selectedSource !== null && view.objects[selectedSource]?.zone === 'command' && castByCard.has(selectedSource)
   const selectedCastOpts = selectedCast ? (playFacesByCard.get(selectedSource) ?? []) : []
+  const selectedCastWays = selectedCastOpts.length > 1 || selectedCastOpts.some(needsOwnButton)
 
   const renderPlayerPanel = (pid: PlayerId) => (
     <PlayerPanel
@@ -6861,13 +6878,11 @@ function Table({
           const faceOpts =
             mode === 'priority' ? (playFacesByCard.get(id) ?? []) : []
           // More than one way to play this card: a multi-face card's sides,
-          // or a kickable spell's kicked / unkicked casts (P8). An emerge
-          // cast sacrifices a creature, so even alone it's a button that
-          // names it — never a click on the card that sacrifices silently.
+          // or a kickable spell's kicked / unkicked casts (P8). An emerge or
+          // offering cast sacrifices a permanent, so even alone it's a button
+          // that names it — never a click on the card that sacrifices silently.
           // So is a cast that asks another player to help pay (assist).
-          const multiFace =
-            faceOpts.length > 1 ||
-            faceOpts.some((a) => a.kind === 'cast-spell' && (a.emergeSacrifice !== undefined || a.assist !== undefined))
+          const multiFace = faceOpts.length > 1 || faceOpts.some(needsOwnButton)
           return (
             <div key={id} className="hand-card" data-obj-id={id} style={slotStyle}>
               <CardTile
@@ -7122,7 +7137,7 @@ function Table({
           sacrifice choice), so the menu closes either way. */}
       {selectedSource !== null &&
       (selectedAbilities.length > 0 ||
-        selectedCastOpts.length > 1 ||
+        selectedCastWays ||
         selectedFaceUp !== undefined ||
         selectedUnlocks.length > 0 ||
         selectedLicidEnd !== undefined ||
@@ -7131,21 +7146,18 @@ function Table({
           source={selectedSource}
           title={game.nameOf(selectedSource)}
           items={[
-            // More than one way to cast it: an item each, named as a
-            // graveyard card's ways are (`graveyardVariantLabel`).
-            ...(selectedCastOpts.length > 1
-              ? selectedCastOpts.map((a, i) => {
-                  const variant = graveyardVariantLabel(a, view, false)
-                  const space = variant.indexOf(' ')
-                  return {
-                    key: `cast:${i}`,
-                    label: `Cast ${a.cardName}${space < 0 ? '' : ` (${variant.slice(space + 1)})`}`,
-                    onSelect: () => {
-                      setSelectedSource(null)
-                      playFace(a)
-                    },
-                  }
-                })
+            // More than one way to cast it, or one that must say what it
+            // costs: an item each, named as a graveyard card's ways are
+            // (`castWayLabel`).
+            ...(selectedCastWays
+              ? selectedCastOpts.map((a, i) => ({
+                  key: `cast:${i}`,
+                  label: castWayLabel(a, view),
+                  onSelect: () => {
+                    setSelectedSource(null)
+                    playFace(a)
+                  },
+                }))
               : selectedCast
               ? [
                   {
@@ -7329,6 +7341,7 @@ function Table({
               const sources = new Set(ways.flatMap((a) => (a.graveyardGrant ? [a.graveyardGrant.source] : [])))
               return ways.map((a) => ({
                 label: graveyardVariantLabel(a, view, sources.size > 1),
+                ownButton: needsOwnButton(a),
                 onChoose: () => {
                   setZoneView(null)
                   playFace(a)

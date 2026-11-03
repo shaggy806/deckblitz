@@ -153,13 +153,13 @@ function print(label: string, s: Snapshot, shot: string): void {
 
 /** The id of the first object in one of the view's id lists named `name`
  * (a piece of the name will do). */
-function findId(page: Page, zone: 'hand' | 'battlefield', name: string): Promise<string | null> {
+function findId(page: Page, zone: 'hand' | 'battlefield' | 'command', name: string): Promise<string | null> {
   return page.evaluate(
     ([zone, name]) => {
-      const dv = (window as Window & { deckblitzView?: { view: { perspective?: string; objects: Record<string, { cardName: string; copyOf?: string | null }>; zones: { battlefield: string[]; hands: Record<string, string[]> } } | null; seat: string | null } }).deckblitzView
+      const dv = (window as Window & { deckblitzView?: { view: { perspective?: string; objects: Record<string, { cardName: string; copyOf?: string | null }>; zones: { battlefield: string[]; command: string[]; hands: Record<string, string[]> } } | null; seat: string | null } }).deckblitzView
       const view = dv?.view
       if (!view) return null
-      const ids = zone === 'hand' ? (view.zones.hands[view.perspective ?? dv?.seat ?? ''] ?? []) : view.zones.battlefield
+      const ids = zone === 'hand' ? (view.zones.hands[view.perspective ?? dv?.seat ?? ''] ?? []) : zone === 'command' ? view.zones.command : view.zones.battlefield
       const wanted = name.toLowerCase()
       const exact = ids.find((id) => view.objects[id]?.cardName.toLowerCase() === wanted)
       return exact ?? ids.find((id) => view.objects[id]?.cardName.toLowerCase().includes(wanted)) ?? null
@@ -191,7 +191,7 @@ async function runStep(page: Page, step: string): Promise<boolean> {
     }
     case 'card': {
       // A card in an open popup first (it's over the board), then the board,
-      // then the hand.
+      // then the hand, then the command zone.
       const inPopup = page.locator('.zone-viewer-card', { has: page.locator('.ct-name', { hasText: pattern(arg) }) })
       // The popup waits out a long animation (ten cards exiled), as `click:` does.
       for (const limit = Date.now() + 25_000; ; await page.waitForTimeout(250)) {
@@ -199,6 +199,8 @@ async function runStep(page: Page, step: string): Promise<boolean> {
         const id = await findId(page, 'battlefield', arg)
         if (id !== null) return visibleFirst(page.locator(`.board [data-obj-id="${id}"]`))
         if ((await findId(page, 'hand', arg)) !== null) return runStep(page, `hand:${arg}`)
+        const commander = await findId(page, 'command', arg)
+        if (commander !== null) return visibleFirst(page.locator(`.commander-tile-wrap[data-obj-id="${commander}"] .commander-tile`))
         if (Date.now() > limit) return false
       }
     }
