@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4248 already implemented / 752 missing (marks refreshed 2026-11-03)
+4250 already implemented / 750 missing (marks refreshed 2026-11-03)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -4422,7 +4422,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  4429  Dream Fracture                           {1}{U}{U}        Instant
 [ ]  4430  Jade Orb of Dragonkind                   {2}{G}           Artifact
 [x]  4431  Impervious Greatwurm                     {7}{G}{G}{G}     Creature — Wurm
-[ ]  4432  Luxior, Giada's Gift                     {1}              Legendary Artifact — Equipment
+[x]  4432  Luxior, Giada's Gift                     {1}              Legendary Artifact — Equipment
 [x]  4433  Captain N'ghathrod                       {3}{U}{B}        Legendary Creature — Horror Pirate
 [x]  4434  Light of Promise                         {2}{W}           Enchantment — Aura
 [x]  4435  Caldera Pyremaw                          {3}{R}{R}        Creature — Dragon
@@ -4794,7 +4794,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4801  Wand of Orcus                            {2}{B}           Legendary Artifact — Equipment
 [x]  4802  Into the North                           {1}{G}           Sorcery
 [x]  4803  Jori En, Ruin Diver                      {1}{U}{R}        Legendary Creature — Merfolk Wizard
-[ ]  4804  Kaito, Bane of Nightmares                {2}{U}{B}        Legendary Planeswalker — Kaito
+[x]  4804  Kaito, Bane of Nightmares                {2}{U}{B}        Legendary Planeswalker — Kaito
 [ ]  4805  Containment Priest                       {1}{W}           Creature — Human Cleric
 [x]  4806  Aminatou, the Fateshifter                {W}{U}{B}        Legendary Planeswalker — Aminatou
 [x]  4807  Lilysplash Mentor                        {2}{G}{U}        Creature — Frog Druid

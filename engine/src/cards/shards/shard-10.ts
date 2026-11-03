@@ -327,6 +327,7 @@ import _poolGoblinTownFlunkies from "../pool/goblin-town-flunkies.js";
 import _poolGoblinWarStrike from "../pool/goblin-war-strike.js";
 import _poolGolgariCluestone from "../pool/golgari-cluestone.js";
 import _poolGracefulAdept from "../pool/graceful-adept.js";
+import _poolGraveyardShift from "../pool/graveyard-shift.js";
 import _poolGraviticPunch from "../pool/gravitic-punch.js";
 import _poolGravitySphere from "../pool/gravity-sphere.js";
 import _poolGreaterGood from "../pool/greater-good.js";
@@ -840,6 +841,7 @@ import _poolVilisBrokerOfBlood from "../pool/vilis-broker-of-blood.js";
 import _poolVincentsLimitBreak from "../pool/vincents-limit-break.js";
 import _poolVindicate from "../pool/vindicate.js";
 import _poolViralDrake from "../pool/viral-drake.js";
+import _poolVisionCharm from "../pool/vision-charm.js";
 import _poolVoraciousBrood from "../pool/voracious-brood.js";
 import _poolVoraciousFellBeast from "../pool/voracious-fell-beast.js";
 import _poolVoyagerQuickwelder from "../pool/voyager-quickwelder.js";
@@ -1233,6 +1235,7 @@ const shard: CardShard = {
     _poolGoblinWarStrike,
     _poolGolgariCluestone,
     _poolGracefulAdept,
+    _poolGraveyardShift,
     _poolGraviticPunch,
     _poolGravitySphere,
     _poolGreaterGood,
@@ -1746,6 +1749,7 @@ const shard: CardShard = {
     _poolVincentsLimitBreak,
     _poolVindicate,
     _poolViralDrake,
+    _poolVisionCharm,
     _poolVoraciousBrood,
     _poolVoraciousFellBeast,
     _poolVoyagerQuickwelder,

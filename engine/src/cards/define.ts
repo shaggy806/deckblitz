@@ -1991,6 +1991,13 @@ export interface StaticAbility {
    */
   readonly setBasePt?: { readonly power?: number; readonly toughness?: number };
   /**
+   * Layer 7b, like `setBasePt` — each affected permanent's base power and
+   * toughness are each the number of counters of this kind on **it** (Spark
+   * Rupture's "is a creature with power and toughness each equal to the
+   * number of loyalty counters on it"), its own count, read live.
+   */
+  readonly setBasePtFromAffectedCounters?: string;
+  /**
    * A layer-7d bonus that *scales* with a live count — Skycat Sovereign's
    * "gets +1/+1 for each **other** creature you control with flying".
    *
@@ -2107,6 +2114,10 @@ export interface StaticAbility {
      * Emissary's "other Humans you control get +1/+1 for each counter on
      * Kyler". */
     readonly anyCountersOnSource?: true;
+    /** Every counter on **the affected permanent itself**, of any kind —
+     * Luxior, Giada's Gift's "equipped creature gets +1/+1 for each counter
+     * on it". */
+    readonly anyCountersOnAffected?: true;
     /** That player's running total for a turn stat — Knowledge Is Power's "+X/+X,
      * where X is the number of cards you've drawn this turn". */
     readonly turnStat?: TurnStat;

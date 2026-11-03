@@ -840,7 +840,11 @@ missing. Re-run `--greedy` for Phase 2's order.
   `effect:skip-next-combat-phase` (6). The user stopped new agents here, 2026-11-02.
 - **2026-11-03: overnight, three agents at once.** `filter:blocking-trigger-object`, `amount:creatures-blocking-it` with
   `effect:amount-creatures-blocking-it` and `condition:source-blocked-by-at-least-one`, `static:cost-increase-colored`,
-  `keyword:offering`, `decision:secret-choice` with `effect:protection-from-player-for-permanent`.
+  `keyword:offering`, `decision:secret-choice` with `effect:protection-from-player-for-permanent`,
+  `static:planeswalker-becomes-creature`, `effect:add-types-all` with `effect:add-land-types-all`,
+  `amount:count-distinct-mana-costs` with `condition:distinct-mana-values-in-graveyard`, and
+  `condition:controlled-since-turn-start` with `filter:controlled-continuously-since-turn-start`. Three cloud sessions took
+  six families each beside them.
 - **2026-11-03: `replacement:new-event-replacements`, its draw units.** `would-draw`'s `instead: { effect }` and the
   except-first and first-each-turn exemptions (`draw-replacement-look-and-choose`, `-except-first`, `-first-each-turn`);
   Underrealm Lich, Tomorrow, Sages of the Anima, Teferi's Ageless Insight, Reed Richards, Bard. Left: the reveal key and

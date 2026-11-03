@@ -5221,6 +5221,85 @@ describe("distinct values and Equipment attached to the source", () => {
     });
   });
 
+  it("reads 'controlled continuously since the beginning of' a turn on a source, a target and a sacrifice", () => {
+    const launcher = face(
+      "Artifact",
+      "{2}: This artifact deals 1 damage to any target. Destroy this artifact at the beginning of the next end step. Activate only if you've controlled this artifact continuously since the beginning of your most recent turn.",
+    );
+    expect(launcher.activated[0].condition).toEqual({ kind: "source", filter: { controlledContinuously: true } });
+    expect(launcher.activated[0].effect.effects[1]).toMatchObject({
+      kind: "delayed-trigger",
+      at: "next-end-step",
+      effect: { kind: "destroy", target: "source" },
+    });
+    const imp = face(
+      "Creature — Imp",
+      "{T}: Choose target non-Wall creature the active player has controlled continuously since the beginning of the turn. That creature attacks this turn if able. Destroy it at the beginning of the next end step if it didn't attack this turn. Activate only during an opponent's turn, before attackers are declared.",
+    );
+    expect(imp.activated[0].targets).toEqual([
+      {
+        kind: "permanent",
+        filter: { type: "creature", notSubtypes: ["Wall"], controlledBy: "active-player", controlledContinuously: true },
+      },
+    ]);
+    expect(imp.activated[0].condition.of[0]).toEqual({ kind: "not", of: { kind: "your-turn" } });
+    expect(imp.activated[0].effect.effects[1].effect).toEqual({
+      kind: "conditional",
+      condition: { kind: "target", index: 0, filter: { attackedThisTurn: false } },
+      then: { kind: "destroy", target: 0 },
+    });
+    const twilight = face(
+      "Enchantment",
+      "At the beginning of each player's end step, if no creatures attacked this turn, that player sacrifices a creature of their choice that they controlled since the beginning of the turn.",
+    );
+    expect(twilight.triggered[0].condition).toEqual({
+      kind: "not",
+      of: { kind: "turn-stat", stat: "attacked", who: "any-player", atLeast: 1 },
+    });
+    expect(twilight.triggered[0].effect).toEqual({
+      kind: "sacrifice",
+      who: "active-player",
+      filter: { type: "creature", controlledContinuously: true },
+      count: 1,
+    });
+  });
+
+  it("reads the mana value threshold on a spell, a trigger and an unless, and 'each different mana cost' on an entry", () => {
+    const fiveValues = {
+      kind: "aggregate",
+      value: { aggregate: "distinct", of: "mana-value", filter: { ownedBy: "you" }, in: "graveyards" },
+      compare: { op: "gte", n: 5 },
+    };
+    const embodiment = face(
+      "Creature — Demon",
+      "This creature enters with a +1/+1 counter on it for each different mana cost among nonland cards in your graveyard. (For example, {2}{B} and {1}{B}{B} are different mana costs.)",
+    );
+    expect(embodiment.static[0].replacement.counters).toEqual({
+      kind: "+1/+1",
+      amount: { aggregate: "distinct", of: "mana-cost", filter: { notTypes: ["land"], ownedBy: "you" }, in: "graveyards" },
+    });
+    const shift = face(
+      "Sorcery",
+      "This spell has flash as long as there are five or more mana values among cards in your graveyard.\nReturn target creature card from your graveyard to the battlefield.",
+    );
+    expect(shift.flashIf).toEqual({ condition: fiveValues });
+    const spy = face(
+      "Creature — Vampire Rogue",
+      "At the beginning of your end step, if there are five or more mana values among cards in your graveyard, you may pay 2 life. If you do, draw a card.",
+    );
+    expect(spy.triggered[0].condition).toEqual(fiveValues);
+    expect(spy.triggered[0].effect).toEqual({ kind: "may", prompt: "Pay 2 life?", costLife: 2, effect: { kind: "draw", amount: 1 } });
+    const indulgence = face(
+      "Instant",
+      "Draw two cards. Then discard a card unless there are five or more mana values among cards in your graveyard.",
+    );
+    expect(indulgence.effect.effects[1]).toEqual({
+      kind: "conditional",
+      condition: { kind: "not", of: fiveValues },
+      then: { kind: "discard", target: "you", amount: 1 },
+    });
+  });
+
   it("reads 'five or more mana values among cards in your graveyard', differently named lands, and Equipment on it", () => {
     const aven = face(
       "Creature — Bird Assassin",
@@ -11195,6 +11274,71 @@ describe("any number of … with different names or powers", () => {
       targets: ["creature"],
       effect: { kind: "delayed-trigger", at: { watching: 0 } },
     });
+  });
+
+  it("reads a mass change of types that leaves P/T alone", () => {
+    const spell = (oracle_text: string) =>
+      parseFace({ name: "Spell", type_line: "Instant", oracle_text }).effect;
+    expect(spell("Vehicles you control become artifact creatures until end of turn.")).toEqual({
+      kind: "for-each-permanent",
+      filter: { subtype: "Vehicle", controlledBy: "you" },
+      simultaneous: true,
+      effect: { kind: "add-types", target: 0, addTypes: ["artifact", "creature"], duration: "end-of-turn" },
+    });
+    expect(spell("Lands you control gain all basic land types until end of turn.")).toMatchObject({
+      kind: "for-each-permanent",
+      filter: { type: "land", controlledBy: "you" },
+      effect: { kind: "add-types", addSubtypes: ["Plains", "Island", "Swamp", "Mountain", "Forest"] },
+    });
+    expect(spell("Until end of turn, creatures you control get +2/+0 and gain all creature types.")).toMatchObject({
+      kind: "sequence",
+      effects: [
+        { kind: "modify-pt-all", power: 2, toughness: 0 },
+        { kind: "for-each-permanent", effect: { kind: "add-types", addSubtypes: ["(every creature type)"] } },
+      ],
+    });
+    expect(spell("Choose a basic land type. Each land you control becomes that type until end of turn.")).toMatchObject({
+      kind: "choose-creature-type",
+      then: {
+        kind: "for-each-permanent",
+        filter: { type: "land", controlledBy: "you" },
+        effect: { kind: "add-types", setSubtypes: ["$chosen"] },
+      },
+    });
+  });
+
+  it("reads a static making a planeswalker a creature, keeping its types only where it says so", () => {
+    const planeswalker = (oracle_text: string) =>
+      parseFace({ name: "Bob", type_line: "Legendary Planeswalker — Bob", oracle_text }).static[0];
+    expect(planeswalker("During your turn, Bob is a 4/4 Human Soldier creature with indestructible that's still a planeswalker.")).toMatchObject({
+      affects: { scope: "self" },
+      condition: { kind: "your-turn" },
+      addTypes: ["creature"],
+      addSubtypes: ["Human", "Soldier"],
+      setBasePt: { power: 4, toughness: 4 },
+      grantKeywords: ["indestructible"],
+    });
+    expect(planeswalker("As long as Bob has seven or more loyalty counters on him, he's a 7/7 Dragon God creature with flying and indestructible.")).toMatchObject({
+      condition: { kind: "self-counters", counter: "loyalty", compare: { op: "gte", n: 7 } },
+      setTypes: ["creature"],
+      grantKeywords: ["flying", "indestructible"],
+    });
+    expect(planeswalker("During your turn, as long as Bob has one or more loyalty counters on him, he's a 3/4 Ninja creature and has hexproof.")).toMatchObject({
+      condition: {
+        kind: "all",
+        of: [{ kind: "your-turn" }, { kind: "self-counters", counter: "loyalty", compare: { op: "gte", n: 1 } }],
+      },
+      setTypes: ["creature"],
+      addSubtypes: ["Ninja"],
+    });
+    expect(
+      parseFace({
+        name: "Rupture",
+        type_line: "Enchantment",
+        oracle_text:
+          "Each planeswalker with one or more loyalty counters on it loses all abilities and is a creature with power and toughness each equal to the number of loyalty counters on it.",
+      }).static[0],
+    ).toMatchObject({ loseAllAbilities: true, setTypes: ["creature"], setBasePtFromAffectedCounters: "loyalty" });
   });
 
   it("reads a search whose chosen finds are shuffled back in", () => {

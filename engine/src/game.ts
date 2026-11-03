@@ -6688,6 +6688,7 @@ export class Game {
       targets: ResolvedTargets;
       x: number;
       prompt?: string;
+      sentinel?: string;
       secret?: true;
       remember?: { readonly stint: number; readonly as: "player" | "creature-type" };
     },
@@ -6768,7 +6769,9 @@ export class Game {
               ...awaiting.then,
               choice: { option: Math.max(0, CREATURE_TYPES.indexOf(creatureType)), text: creatureType },
             }
-          : substituteChosenCreatureType(awaiting.then, creatureType);
+          : awaiting.sentinel !== undefined
+            ? substituteChosen(awaiting.then, awaiting.sentinel, creatureType)
+            : substituteChosenCreatureType(awaiting.then, creatureType);
       applyEffectSpec(
         then,
         this.makeResolutionContext(
@@ -11669,7 +11672,7 @@ export class Game {
             (chosenUnblocked.includes(attackerId) ||
               unblockedAssignmentOf(this.state, this.registry, attackerId) === "must");
           if (!attacker.blocked || asUnblocked) {
-            if (attacker.attacking !== null) {
+            if (attacker.attacking !== null && attacker.attackingNothing !== true) {
               // A counted attacking stack (`attackingStackPart`) is that
               // many unblocked attackers, each dealing its power.
               const tokens = attacker.stackCount ?? 1;
@@ -11703,7 +11706,7 @@ export class Game {
               }
             });
             const over = power - assignedTotal;
-            if (trample && over > 0 && attacker.attacking !== null) {
+            if (trample && over > 0 && attacker.attacking !== null && attacker.attackingNothing !== true) {
               assignments.push({
                 source: attackerId,
                 target: this.attackTargetRef(attacker.attacking),
@@ -11815,6 +11818,7 @@ export class Game {
     for (const id of this.state.zones.shared.battlefield) {
       const object = this.state.objects[id];
       object.attacking = null;
+      delete object.attackingNothing;
       object.blocking = null;
       object.blockedBy = [];
       object.blocked = false;
@@ -13312,11 +13316,15 @@ export class Game {
    * reconfigure may be attached while it's a creature (`attaching` — it stops
    * being one as it attaches, 702.151b); one still a creature once attached
    * (March of the Machines) becomes unattached (its rulings). */
-  private canEquip(equipment: ObjectId, host: ObjectId, attaching = false): boolean {
+  private canEquip(equipment: ObjectId, host: ObjectId, attaching = false, planeswalkerToo = false): boolean {
     if (host === equipment) return false;
     const target = this.state.objects[host];
     if (target === undefined || target.zone !== "battlefield" || !this.inGame(target)) return false;
-    if (!effectiveTypes(this.state, this.registry, target).includes("creature")) return false;
+    const hostTypes = effectiveTypes(this.state, this.registry, target);
+    // "Equip planeswalker": "as though that planeswalker were a creature"
+    // (rule 702.6e) — for the attaching alone. It falls off afterwards unless
+    // something makes the host a creature (704.5n).
+    if (!hostTypes.includes("creature") && !(planeswalkerToo && hostTypes.includes("planeswalker"))) return false;
     if (
       computeCharacteristics(this.state, this.registry, equipment).types.includes("creature") &&
       !(attaching && this.hasReconfigure(equipment))
@@ -30805,7 +30813,7 @@ export class Game {
             source,
             controller,
             fixed.options.filter((t) => !(exclude ?? []).includes(t)),
-            { then, targets, x, ...(fixed.prompt !== undefined ? { prompt: fixed.prompt } : {}), ...kept },
+            { then, targets, x, ...(fixed.prompt !== undefined ? { prompt: fixed.prompt } : {}), ...(fixed.sentinel !== undefined ? { sentinel: fixed.sentinel } : {}), ...kept },
             false,
           );
         } else {
@@ -33297,9 +33305,9 @@ export class Game {
         invalidateComputedCache();
         this.attachPermanent(source, target);
       },
-      attach: (target, attachment) => {
+      attach: (target, attachment, planeswalkerToo) => {
         if (attachment === undefined) {
-          this.attachPermanent(source, target);
+          this.attachPermanent(source, target, planeswalkerToo === true);
           return;
         }
         if (attachment.kind === "object") this.attachPermanent(attachment.object, target);
@@ -38203,7 +38211,7 @@ export class Game {
    * protection included (702.16c–d), or it doesn't move (701.3b). Nor does
    * anything else, or anything already attached there. A player is
    * enchanted only by an Aura that can enchant them (a Curse — 303.4). */
-  private attachPermanent(source: ObjectId, target: TargetRef): void {
+  private attachPermanent(source: ObjectId, target: TargetRef, planeswalkerToo = false): void {
     if (target.kind === "player") {
       const aura = this.state.objects[source];
       if (aura === undefined || aura.zone !== "battlefield" || aura.attachedToPlayer === target.player) return;
@@ -38234,7 +38242,7 @@ export class Game {
           : printed;
     const legal = def.subtypes.includes("Aura")
       ? this.canEnchant(source, targetId, sourceObject.controller, def)
-      : def.subtypes.includes("Equipment") && this.canEquip(source, targetId, true);
+      : def.subtypes.includes("Equipment") && this.canEquip(source, targetId, true, planeswalkerToo);
     if (!legal) return;
     // Attaching an Equipment with reconfigure stops it being a creature until
     // it's unattached from that creature (rule 702.151b) — however it was
@@ -41298,6 +41306,7 @@ export class Game {
     const object = this.state.objects[id];
     if (object.attacking === null && object.blocking === null) return;
     object.attacking = null;
+    delete object.attackingNothing;
     object.blocking = null;
     object.blocked = false;
     object.blockedBy = [];
@@ -47616,14 +47625,26 @@ export class Game {
   }
 
   /** Rule 506.4: every attacker or blocker that isn't a creature any more
-   * stops being in combat. Whether any did. */
+   * stops being in combat, and so does a planeswalker or battle being attacked
+   * that's now neither: what attacks it stays an attacking creature, attacking
+   * nothing (506.4c). Whether any did. */
   private removeNoncreaturesFromCombat(): boolean {
     let removed = false;
     for (const id of this.state.zones.shared.battlefield) {
       const object = this.state.objects[id];
       if (object === undefined || (object.attacking === null && object.blocking === null)) continue;
-      if (effectiveTypes(this.state, this.registry, object).includes("creature")) continue;
-      this.removeFromCombat(id);
+      if (!effectiveTypes(this.state, this.registry, object).includes("creature")) {
+        this.removeFromCombat(id);
+        removed = true;
+        continue;
+      }
+      if (object.attacking === null || object.attackingNothing === true) continue;
+      if (!isPlaneswalkerTarget(this.state, object.attacking)) continue;
+      const attacked = this.state.objects[object.attacking];
+      if (attacked.zone !== "battlefield") continue;
+      const types = effectiveTypes(this.state, this.registry, attacked);
+      if (types.includes("planeswalker") || types.includes("battle")) continue;
+      object.attackingNothing = true;
       removed = true;
     }
     if (removed) invalidateComputedCache();

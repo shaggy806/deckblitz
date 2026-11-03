@@ -540,6 +540,7 @@ import _poolNightbladeBrigade from "../pool/nightblade-brigade.js";
 import _poolNirkanaCutthroat from "../pool/nirkana-cutthroat.js";
 import _poolNobleHierarch from "../pool/noble-hierarch.js";
 import _poolNorinTheWary from "../pool/norin-the-wary.js";
+import _poolNorritt from "../pool/norritt.js";
 import _poolNovaCleric from "../pool/nova-cleric.js";
 import _poolNoviceOccultist from "../pool/novice-occultist.js";
 import _poolNurglesConscription from "../pool/nurgles-conscription.js";
@@ -768,6 +769,7 @@ import _poolTheGoldSaucer from "../pool/the-gold-saucer.js";
 import _poolTheHorusHeresy from "../pool/the-horus-heresy.js";
 import _poolTheLadyOfTheMountain from "../pool/the-lady-of-the-mountain.js";
 import _poolTheOzolith from "../pool/the-ozolith.js";
+import _poolTheThanosCopter from "../pool/the-thanos-copter.js";
 import _poolTheWaterCrystal from "../pool/the-water-crystal.js";
 import _poolThievesFortune from "../pool/thieves-fortune.js";
 import _poolThinkTank from "../pool/think-tank.js";
@@ -1423,6 +1425,7 @@ const shard: CardShard = {
     _poolNirkanaCutthroat,
     _poolNobleHierarch,
     _poolNorinTheWary,
+    _poolNorritt,
     _poolNovaCleric,
     _poolNoviceOccultist,
     _poolNurglesConscription,
@@ -1651,6 +1654,7 @@ const shard: CardShard = {
     _poolTheHorusHeresy,
     _poolTheLadyOfTheMountain,
     _poolTheOzolith,
+    _poolTheThanosCopter,
     _poolTheWaterCrystal,
     _poolThievesFortune,
     _poolThinkTank,

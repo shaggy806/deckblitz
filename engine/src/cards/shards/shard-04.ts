@@ -434,6 +434,7 @@ import _poolLordWindgrace from "../pool/lord-windgrace.js";
 import _poolLotlethTroll from "../pool/lotleth-troll.js";
 import _poolLotuslightDancers from "../pool/lotuslight-dancers.js";
 import _poolLoyalSubordinate from "../pool/loyal-subordinate.js";
+import _poolLuxiorGiadasGift from "../pool/luxior-giadas-gift.js";
 import _poolMacabreWaltz from "../pool/macabre-waltz.js";
 import _poolMagebaneArmor from "../pool/magebane-armor.js";
 import _poolMagnifyingGlass from "../pool/magnifying-glass.js";
@@ -730,6 +731,7 @@ import _poolSyphonMind from "../pool/syphon-mind.js";
 import _poolSyrArmontTheRedeemer from "../pool/syr-armont-the-redeemer.js";
 import _poolSzarekhTheSilentKing from "../pool/szarekh-the-silent-king.js";
 import _poolTahCropElite from "../pool/tah-crop-elite.js";
+import _poolTaintedIndulgence from "../pool/tainted-indulgence.js";
 import _poolTajNarSwordsmith from "../pool/taj-nar-swordsmith.js";
 import _poolTakePossession from "../pool/take-possession.js";
 import _poolTamiyoTheMoonSage from "../pool/tamiyo-the-moon-sage.js";
@@ -1315,6 +1317,7 @@ const shard: CardShard = {
     _poolLotlethTroll,
     _poolLotuslightDancers,
     _poolLoyalSubordinate,
+    _poolLuxiorGiadasGift,
     _poolMacabreWaltz,
     _poolMagebaneArmor,
     _poolMagnifyingGlass,
@@ -1611,6 +1614,7 @@ const shard: CardShard = {
     _poolSyrArmontTheRedeemer,
     _poolSzarekhTheSilentKing,
     _poolTahCropElite,
+    _poolTaintedIndulgence,
     _poolTajNarSwordsmith,
     _poolTakePossession,
     _poolTamiyoTheMoonSage,

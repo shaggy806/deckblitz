@@ -437,10 +437,13 @@ section keeps only what to do next.
   costs' non-mana parts, spells gaining abilities, one unless clause, copies per permanent, attack counts, "those
   creatures", watching delayed triggers, a spell's additional cost taking `KickerAlsoCost`, dynamic life costs, a cost paid
   N times, a look at another player's top card, random targets, skipped combat phases, the creatures blocking a trigger's object and counts of them, coloured cost
-  increases, offering and secret choices (234 proving cards; `--stale` 1,576 wait for `author-freed`). Next by `--greedy
-  --groups`: `static:planeswalker-becomes-creature` (6), `trigger:dies-batch-trigger` (6),
-  `amount:count-distinct-mana-costs` (6). Two cards a secret-choice pass left need narrow keys of their own: Stronghold
-  Gambit (a secret pick from hand) and The Toymaker's Trap (an unchosen number, an opponent's guess).
+  increases, offering, secret choices, a static making a planeswalker a creature, mass type changes, a count of different
+  mana costs and permanents controlled since the turn began (253 proving cards; `--stale` 1,581 wait for `author-freed`).
+  Next by `--greedy --groups`: `decision:choose-from-zone-extensions` (6), `mechanic:suspend-and-time-counters` (6),
+  `effect:look-at-opponent-hand-as-enters` (6). Narrow keys `author-freed` should give: Stronghold Gambit (a secret pick from
+  hand), The Toymaker's Trap (an unchosen number, an opponent's guess), Total War ("didn't attack" means that declaration, not
+  the turn), and Siren's Call (`condition:cast-timing-condition`); `replacement:others-enter-as-subtype` (Master Biomancer)
+  stays open.
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next

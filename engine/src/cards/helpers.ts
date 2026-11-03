@@ -14,10 +14,10 @@ import { defineCard, type CardDefinition, type Keyword, type StaticAbility, type
 /** The placeholder for "the chosen creature type" inside a
  * `choose-creature-type` effect's `then` — re-exported here because card files
  * import only from `define` and `helpers`. */
-export { CHOSEN_CREATURE_TYPE } from "../effects.js";
+export { CHOSEN_CREATURE_TYPE, FIRST_CHOSEN_TYPE } from "../effects.js";
 /** "Choose a basic land type": the five, for a `chooseOnEnter` or a
  * `choose-creature-type`'s `options`. */
-export { BASIC_LAND_TYPE_CHOICES } from "../subtypes.js";
+export { BASIC_LAND_TYPE_CHOICES, LAND_TYPES } from "../subtypes.js";
 
 /**
  * "Search your graveyard, hand, **and/or** library for …" (Boonweaver Giant,
@@ -143,26 +143,27 @@ export const CELEBRATION_CONDITION: StaticCondition = {
 };
 
 /**
- * Portal's "Activate only during your turn, before attackers are declared":
- * your upkeep and draw step, your first main phase, and the beginning of
- * combat step of your first combat phase — with several combat phases, only
- * before the first declare attackers step (the Capricious Sorcerer ruling).
- * Attackers are declared even when none are chosen (rule 508.1), so the
- * second main phase is after it whether or not anything attacked.
+ * "Before attackers are declared", on whichever turn: the upkeep and draw
+ * step, the first main phase, and the beginning of combat step of the first
+ * combat phase — with several combat phases, only before the first declare
+ * attackers step (the Capricious Sorcerer ruling). Attackers are declared
+ * even when none are chosen (rule 508.1), so the second main phase is after
+ * it whether or not anything attacked. Norritt's, as it stands; Nettling
+ * Imp's with "during an opponent's turn".
  */
+export const BEFORE_ATTACKERS_ANY_TURN: StaticCondition = {
+  kind: "any",
+  of: [
+    { kind: "turn-structure", steps: ["upkeep", "draw"] },
+    { kind: "turn-structure", mainPhase: 1 },
+    { kind: "turn-structure", steps: ["begin-combat"], combatPhase: 1 },
+  ],
+};
+
+/** Portal's "Activate only during your turn, before attackers are declared". */
 export const BEFORE_ATTACKERS_DECLARED: StaticCondition = {
   kind: "all",
-  of: [
-    { kind: "your-turn" },
-    {
-      kind: "any",
-      of: [
-        { kind: "turn-structure", steps: ["upkeep", "draw"] },
-        { kind: "turn-structure", mainPhase: 1 },
-        { kind: "turn-structure", steps: ["begin-combat"], combatPhase: 1 },
-      ],
-    },
-  ],
+  of: [{ kind: "your-turn" }, BEFORE_ATTACKERS_ANY_TURN],
 };
 
 /**
