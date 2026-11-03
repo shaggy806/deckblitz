@@ -1702,6 +1702,8 @@ export function parseTrigger(clause) {
   if (/^Whenever ~ deals combat damage to a player$|^Whenever ~ deals combat damage to an opponent$/.test(c)) {
     return self("deals-combat-damage-to-player");
   }
+  if (c === "Whenever ~ deals damage") return [{ on: "deals-damage", who: "self" }];
+  if (c === "Whenever ~ is dealt damage") return [{ on: "dealt-damage", who: "self" }];
   if (/^Whenever ~ deals combat damage to a player or battle$/.test(c)) {
     return [{ on: "deals-combat-damage-to-player", who: "self", orBattle: true }];
   }
@@ -2671,26 +2673,28 @@ export function parseSentence(sentence, ctx) {
     (m = /^()(Whenever [^,]+) this turn, (.+)\.$/.exec(s))
   ) {
     const clause = m[2].charAt(0).toUpperCase() + m[2].slice(1);
-    const triggers = parseTrigger(clause);
+    // "Whenever target creature deals damage this turn" (Paladin of Prahv): the
+    // creating ability's own target is `watching`, what "self" in the trigger
+    // reads as.
+    const named = /^Whenever target creature /.test(clause);
+    const triggers = parseTrigger(named ? clause.replace("target creature", "~") : clause);
     if (triggers === null || triggers.length !== 1) return null;
+    if (named && triggers[0].who !== "self") return null;
     const inner = { ...ctx, spell: false, targets: [], it: itOf(triggers), departed: departedOf(triggers) };
     inner.target = (spec) => inner.targets.push(spec) - 1;
     const effectText = `${m[3].charAt(0).toUpperCase()}${m[3].slice(1)}.`;
-    const effect = parseSentence(effectText, inner);
+    const effect =
+      named && effectText === "You gain that much life."
+        ? { kind: "gain-life", amount: { triggerValue: true } }
+        : parseSentence(effectText, inner);
     if (effect === null || containsUndefined(effect)) return null;
-    // "Whenever ~ deals combat damage to a player" this turn is the older
-    // `dealsCombatDamage` watch on the source (Lyra, Tolarian Archangel).
-    const ownCombatDamage =
-      triggers[0].on === "deals-combat-damage-to-player" && triggers[0].who === "self" && Object.keys(triggers[0]).length === 2;
-    if (ownCombatDamage && inner.targets.length === 0 && !/^until your next turn$/i.test(m[1])) {
-      return { kind: "delayed-trigger", at: { dealsCombatDamage: "source" }, effect, text: `${clause}${m[1] === "" ? " this turn" : ""}, ${m[3]}.` };
-    }
     return {
       kind: "delayed-trigger",
       at: {
         whenever: triggers[0],
         ...(/^until your next turn$/i.test(m[1]) ? { until: "your-next-turn" } : {}),
         ...(inner.targets.length > 0 ? { targets: inner.targets } : {}),
+        ...(named ? { watching: ctx.target("creature") } : {}),
       },
       effect,
       text: `${clause}${m[1] === "" ? " this turn" : ""}, ${m[3]}.`,

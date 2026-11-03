@@ -2,6 +2,10 @@
  "generated": "2026-09-22",
  "source": "Per-commander triage of every unimplemented top-commanders.txt entry (AI agents reading Oracle text + rulings against the engine), normalized onto one feature vocabulary. See neededCards-features.md, 'The commander gap'.",
  "built": [
+  "effect:delayed-trigger-rest-of-game",
+  "effect:delayed-trigger-target-deals-damage",
+  "effect:delayed-trigger-target-player-next-upkeep",
+  "effect:delayed-trigger-until-your-next-turn",
   "replacement:skip-extra-turns",
   "replacement:skip-turn",
   "bug:token-copy-skips-as-enters-choices",
@@ -1834,7 +1838,7 @@
   "effect:delayed-trigger-extensions": {
    "size": "medium",
    "ui": false,
-   "description": "Delayed triggers keyed to an event rather than a step, and delayed triggers that capture an object. Built: one keyed to a permanent dealing combat damage to a player this turn, firing each time (at: { dealsCombatDamage } — Captain Howler); one whose targets are what the creating resolution did something to this way, in place of its own (about — the token Satya just created: 'sacrifice that token'); one keyed to a permanent leaving the battlefield for given zones, optionally this turn, whose trigger object is that permanent (Kelsien, the Plague; earthbend's return); one keyed to the controller's next spell this turn matching a filter, whose trigger object is that spell (at: { nextSpell } — Yuna, Codie), with enters-with-counters for that spell and allow-cast-from-exile for a card it finds; and the creating ability's trigger object carried into the delayed ability while it's still that object, with a source-on-battlefield condition (Shirei, Shizo's Caretaker). Not covered (B237): DelayedWhenever handles single-object events only — not a batched-damage event per player (effect:delayed-whenever-batched-damage), a per-card graveyard arrival, a one-shot 'next attack', another player's or an extra turn's end step, or carrying X or 'that player' from the creating ability."
+   "description": "Delayed triggers keyed to an event rather than a step, and delayed triggers that capture an object. Built: one keyed to a permanent dealing combat damage to a player this turn, firing each time (at: { whenever, watching } — Captain Howler); one whose targets are what the creating resolution did something to this way, in place of its own (about — the token Satya just created: 'sacrifice that token'); one keyed to a permanent leaving the battlefield for given zones, optionally this turn, whose trigger object is that permanent (Kelsien, the Plague; earthbend's return); one keyed to the controller's next spell this turn matching a filter, whose trigger object is that spell (at: { nextSpell } — Yuna, Codie), with enters-with-counters for that spell and allow-cast-from-exile for a card it finds; and the creating ability's trigger object carried into the delayed ability while it's still that object, with a source-on-battlefield condition (Shirei, Shizo's Caretaker). Not covered (B237): DelayedWhenever handles single-object events only — not a batched-damage event per player (effect:delayed-whenever-batched-damage), a per-card graveyard arrival, a one-shot 'next attack', another player's or an extra turn's end step, or carrying X or 'that player' from the creating ability."
   },
   "effect:divide-among-targets": {
    "size": "medium",

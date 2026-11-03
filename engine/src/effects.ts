@@ -492,15 +492,6 @@ export interface DelayedNextSpell {
   readonly orNextAbility?: { readonly xInCost: true };
 }
 
-/** "Whenever **that creature** deals combat damage to a player this turn"
- * (Captain Howler, Sea Scourge) — a delayed trigger keyed to the permanent in
- * `dealsCombatDamage`'s slot, for this stint of it on the battlefield. A
- * "whenever": it fires each time (double strike twice), and lapses as the
- * turn ends. That permanent is its trigger object. */
-export interface DelayedCombatDamage {
-  readonly dealsCombatDamage: EffectTargetRef;
-}
-
 /** "This turn, when **target creature you control** attacks and isn't
  * blocked" (Delif's Cone, rule 509.3g) — keyed to the permanent in
  * `attacksUnblocked`'s slot, for this stint of it. With a stated duration it
@@ -531,16 +522,50 @@ export interface DelayedUnblocked {
  */
 export interface DelayedWhenever {
   readonly whenever: TriggerSpec;
-  /** `"your-next-turn"`: lasts until its controller's next turn begins, not
-   * just this turn. `"end-of-combat"`: "…this combat" (Love on the
-   * Battlefield), lapsing as this combat's end of combat step ends. */
-  readonly until?: "your-next-turn" | "end-of-combat";
+  /** How long it lasts, if not just this turn: `"your-next-turn"` until its
+   * controller's next turn begins; `"end-of-combat"` "…this combat" (Love on the
+   * Battlefield), lapsing as this combat's end of combat step ends; `"game"` for
+   * as long as the game does — "at the beginning of each of your upkeeps for the
+   * rest of the game", and a delayed "when" with no duration of its own (`once`,
+   * Coffin Queen). */
+  readonly until?: "your-next-turn" | "end-of-combat" | "game";
   readonly targets?: readonly TargetSpec[];
   /** "…deals combat damage to **that player** this turn" (Great Train
    * Heist): a target slot holding a player, fixed as this resolves; only
    * damage dealt to them fires it. */
   readonly toPlayer?: number;
+  /**
+   * "Whenever **target creature** deals damage this turn" (Paladin of Prahv),
+   * "whenever **either of those creatures** deals combat damage" (Tamiyo,
+   * Field Researcher): what `"self"` in `whenever` reads as, fixed as this
+   * resolves, instead of the object that set it up. Any trigger that can say
+   * "self" can be watched this way. A slot, `"source"` or `"trigger-object"`,
+   * or `"targets"` for every permanent among the creating ability's targets
+   * that's still legal. Each is watched for this stint on the battlefield
+   * (rule 400.7); with none on the battlefield there's nothing to watch, and
+   * no trigger is made. "You" is still this ability's controller, who needn't
+   * control them. A source that's left since is judged as it last existed.
+   */
+  readonly watching?: EffectTargetRef | "targets";
+  /** "**When** …" rather than "whenever": it triggers only once (rule 603.7b),
+   * however long it could have waited. */
+  readonly once?: true;
+  /**
+   * "When this creature becomes untapped **or you lose control of this
+   * creature**" (Coffin Queen): this permanent — a slot, `"source"` or
+   * `"trigger-object"`, on the battlefield as this resolves — leaving its
+   * controller's control fires it too (see {@link DelayedLosesControl}).
+   * With `once`, whichever comes first uses it up.
+   */
+  readonly orLosesControl?: EffectTargetRef;
 }
+
+/** A {@link DelayedWhenever} with what it names read as it's set up. */
+export type DelayedWheneverAt = Omit<DelayedWhenever, "watching" | "orLosesControl"> & {
+  readonly player?: PlayerId;
+  readonly watched?: readonly ObjectId[];
+  readonly orLosesControlOf?: ObjectId;
+};
 
 /** How a `flicker` returns what it exiled — the non-target half of its
  * {@link EffectSpec}. */
@@ -4132,7 +4157,6 @@ export type EffectSpec =
         | DelayedTriggerTiming
         | DelayedLeaves
         | DelayedNextSpell
-        | DelayedCombatDamage
         | DelayedUnblocked
         | DelayedWhenever
         | DelayedLosesControl;
@@ -10145,9 +10169,8 @@ export interface EffectApi {
           readonly thisTurn?: boolean;
         }
       | DelayedNextSpell
-      | { readonly dealsCombatDamage: ObjectId }
       | { readonly attacksUnblocked: ObjectId }
-      | (DelayedWhenever & { readonly player?: PlayerId })
+      | DelayedWheneverAt
       | { readonly losesControl: ObjectId; readonly thisTurn?: true; readonly onlyIf?: StaticCondition },
     effect: EffectSpec,
     text: string,
@@ -15172,12 +15195,6 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         if (who === undefined) return;
         controller = who;
       }
-      if (typeof spec.at === "object" && "dealsCombatDamage" in spec.at) {
-        const watched = resolveEffectTarget(spec.at.dealsCombatDamage, ctx);
-        if (watched?.kind !== "object") return;
-        ctx.delayTrigger({ dealsCombatDamage: watched.object }, spec.effect, spec.text, controller);
-        return;
-      }
       if (typeof spec.at === "object" && "attacksUnblocked" in spec.at) {
         const watched = resolveEffectTarget(spec.at.attacksUnblocked, ctx);
         if (watched?.kind !== "object") return;
@@ -15216,7 +15233,38 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           if (target?.kind !== "player") return;
           player = target.player;
         }
-        ctx.delayTrigger({ ...spec.at, ...(player !== undefined ? { player } : {}) }, spec.effect, spec.text, controller);
+        const { watching, orLosesControl, ...at } = spec.at;
+        // "Target creature", "those creatures": the permanents `"self"` reads
+        // as, fixed now. `delayTrigger` drops any no longer on the battlefield.
+        let watched: readonly ObjectId[] | undefined;
+        if (watching === "targets") {
+          watched = ctx.targets.flatMap((t, slot) =>
+            t?.kind === "object" && !illegalSlot(slot, ctx) ? [t.object] : [],
+          );
+        } else if (watching !== undefined) {
+          const one = illegalSlot(watching, ctx) ? undefined : resolveEffectTarget(watching, ctx);
+          watched = one?.kind === "object" ? [one.object] : [];
+        }
+        const losing = orLosesControl === undefined ? undefined : resolveEffectTarget(orLosesControl, ctx);
+        if (orLosesControl !== undefined && losing?.kind !== "object") return;
+        // "Exile that creature": what this resolution put there (Coffin Queen).
+        const about =
+          spec.about === undefined || spec.about === "attached"
+            ? undefined
+            : ctx.thisWay(spec.about).map((e) => ({ kind: "object", object: e.object }) as const);
+        if (about?.length === 0 && spec.orNone !== true) return;
+        ctx.delayTrigger(
+          {
+            ...at,
+            ...(player !== undefined ? { player } : {}),
+            ...(watched !== undefined ? { watched } : {}),
+            ...(losing?.kind === "object" ? { orLosesControlOf: losing.object } : {}),
+          },
+          spec.effect,
+          spec.text,
+          controller,
+          about,
+        );
         return;
       }
       if (typeof spec.at === "object" && "nextSpell" in spec.at) {

@@ -3283,9 +3283,9 @@ in `git log`.
   `effect:delayed-trigger-extensions`) — `delayed-trigger`'s `about`, with
   the `"created"` this-way kind: the delayed ability's targets are the
   tokens its resolution created (Satya, Aetherflux Genius;
-  `commanders-satya.test.ts`); and `at: { dealsCombatDamage }`, "whenever
-  that creature deals combat damage to a player this turn", firing each time
-  (Captain Howler, Sea Scourge; `commanders-doom-howler.test.ts`), which
+  `commanders-satya.test.ts`); and "whenever that creature deals combat
+  damage to a player this turn", firing each time (Captain Howler, Sea Scourge;
+  `commanders-doom-howler.test.ts`, now `at: { whenever, watching }`), which
   finishes the feature.
 - **Evoke** (`keyword:evoke`, rule 702.74) — `evoke: { cost }`, the cast's
   `evoke` variant, and the sacrifice trigger given as the permanent enters,
@@ -4305,3 +4305,9 @@ what can be paid for, `min` 0, each answer paying then copying). A `trigger-obje
 `turnHistory: "to-graveyard"`. Keys: effect:copy-spell-for-each-by-caster, effect:copy-spell-for-each-chosen-paid, keyword:gravestorm.
 Proving cards: Mirrorwing Dragon, Precursor Golem, Ink-Treader Nephilim, Feather, Radiant Arbiter, Ominous Harvest, Follow the Bodies,
 Bitter Ordeal.
+
+**A delayed trigger that watches named permanents (2026-11-02).** `delayed-trigger`'s `at: { whenever, watching, until, once, orLosesControl }`
+(`delayed-trigger-watching.test.ts`): `watching` is what `"self"` in the trigger reads as, so any trigger that says "self" can watch a target,
+and it replaced `at: { dealsCombatDamage }`. `until: "game"` and `once` for a delayed "when" with no duration. Plague Reaver's return is
+`turnOf`, and "until your next turn, whenever" was built already. Keys: effect:delayed-trigger-rest-of-game, effect:delayed-trigger-target-deals-damage,
+effect:delayed-trigger-target-player-next-upkeep, effect:delayed-trigger-until-your-next-turn. Proving cards: Paladin of Prahv, Arcbond, Tamiyo, Field Researcher, Coffin Queen, Plague Reaver.

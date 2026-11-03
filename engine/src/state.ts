@@ -4549,15 +4549,6 @@ export interface DelayedLeaveWatch {
 
 /** A delayed trigger waiting for its controller's next spell this turn
  * matching `nextSpell` — see `DelayedNextSpell`. */
-/** A delayed trigger waiting on a permanent's combat damage to a player this
- * turn — see `DelayedCombatDamage`. Fires each time; lapses with the turn. */
-export interface DelayedDamageWatch {
-  readonly dealsCombatDamage: ObjectId;
-  /** Which stint of it on the battlefield. */
-  readonly stint: number;
-  readonly turn: number;
-}
-
 /** A delayed trigger waiting on a permanent attacking and not being blocked
  * this turn — see `DelayedUnblocked`. Fires each time (a second combat);
  * lapses with the turn. */
@@ -4579,8 +4570,19 @@ export interface DelayedWheneverWatch {
   readonly untilYourNextTurn?: true;
   /** "…this combat": lapses as the end of combat step ends (rule 511.3). */
   readonly untilEndOfCombat?: true;
+  /** `DelayedWhenever.until: "game"`: no duration ends it. */
+  readonly forGame?: true;
   /** Only damage dealt to this player — `DelayedWhenever.toPlayer`. */
   readonly player?: PlayerId;
+  /** What `"self"` in `whenever` reads as, each in its stint on the
+   * battlefield, instead of the object that set it up —
+   * `DelayedWhenever.watching`. */
+  readonly watching?: readonly { readonly object: ObjectId; readonly stint: number }[];
+  /** Used up as it fires (rule 603.7b) — `DelayedWhenever.once`. */
+  readonly once?: true;
+  /** This permanent leaving its controller's control fires it too —
+   * `DelayedWhenever.orLosesControl`. */
+  readonly orLosesControl?: { readonly object: ObjectId; readonly stint: number };
   /** The turn it was made on. */
   readonly turn: number;
 }
@@ -4626,7 +4628,6 @@ export interface DelayedTrigger {
     | DelayedTriggerTiming
     | DelayedLeaveWatch
     | DelayedCastWatch
-    | DelayedDamageWatch
     | DelayedUnblockedWatch
     | DelayedWheneverWatch
     | DelayedLoseControlWatch;

@@ -41,7 +41,7 @@ export default defineCard({
                 prompt: "Choose a creature",
                 then: {
                   kind: "delayed-trigger",
-                  at: { dealsCombatDamage: 0 },
+                  at: { whenever: { on: "deals-combat-damage-to-player", who: "self" }, watching: 0 },
                   effect: { kind: "draw", amount: 2 },
                   text: "Whenever that creature deals combat damage to a player this turn, you draw two cards.",
                 },

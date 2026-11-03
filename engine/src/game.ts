@@ -242,7 +242,7 @@ import type {
   CastNowOptions,
   DamageFrom,
   DelayedNextSpell,
-  DelayedWhenever,
+  DelayedWheneverAt,
   EffectAmount,
   EffectSpec,
   RevealedCardsGo,
@@ -399,7 +399,6 @@ import type {
   CommanderReplacementZone,
   ControlEffect,
   DelayedCastWatch,
-  DelayedDamageWatch,
   DelayedLeaveWatch,
   DelayedLoseControlWatch,
   DelayedUnblockedWatch,
@@ -5264,8 +5263,11 @@ export class Game {
       for (const t of trigger.targets) if (t?.kind === "object") pinned.add(t.object);
       if (typeof trigger.at === "object" && "leaves" in trigger.at) pinned.add(trigger.at.leaves);
       if (typeof trigger.at === "object" && "losesControl" in trigger.at) pinned.add(trigger.at.losesControl);
-      if (typeof trigger.at === "object" && "dealsCombatDamage" in trigger.at) pinned.add(trigger.at.dealsCombatDamage);
       if (typeof trigger.at === "object" && "attacksUnblocked" in trigger.at) pinned.add(trigger.at.attacksUnblocked);
+      if (typeof trigger.at === "object" && "whenever" in trigger.at) {
+        for (const watched of trigger.at.watching ?? []) pinned.add(watched.object);
+        if (trigger.at.orLosesControl !== undefined) pinned.add(trigger.at.orLosesControl.object);
+      }
       if (trigger.triggerObject !== undefined) pinned.add(trigger.triggerObject);
     }
     for (const shield of this.state.preventionShields) {
@@ -7931,7 +7933,7 @@ export class Game {
         (typeof t.at !== "object" ||
           ("leaves" in t.at && t.at.thisTurn !== true) ||
           ("losesControl" in t.at && t.at.thisTurn !== true) ||
-          ("whenever" in t.at && t.at.untilYourNextTurn === true)),
+          ("whenever" in t.at && (t.at.untilYourNextTurn === true || t.at.forGame === true))),
     );
     // Nothing has attacked this turn yet — whoever controls it. (The untap
     // step only reaches the active player's permanents.)
@@ -8146,7 +8148,7 @@ export class Game {
     }
     // So does "until your next turn, whenever …" (Vraska the Unseen's +1).
     this.state.delayedTriggers = this.state.delayedTriggers.filter(
-      (t) => !(typeof t.at === "object" && "whenever" in t.at && beginningFor.includes(t.controller)),
+      (t) => !(typeof t.at === "object" && "whenever" in t.at && t.at.forGame !== true && beginningFor.includes(t.controller)),
     );
     // "At the beginning of the end step of that player's next turn": that turn
     // is known once it begins, and one whose end step never came (a Sundial of
@@ -25601,16 +25603,21 @@ export class Game {
    * stack; one without acts on the creating ability's.
    */
   private fireWheneverWatchers(event: GameEvent): void {
+    const usedUp: DelayedTrigger[] = [];
     for (const trigger of this.state.delayedTriggers) {
       const at = trigger.at;
       if (typeof at !== "object" || !("whenever" in at)) continue;
-      if (at.untilYourNextTurn !== true && at.turn !== this.state.turn.number) continue;
+      if (at.untilYourNextTurn !== true && at.forGame !== true && at.turn !== this.state.turn.number) continue;
       if (this.state.players[trigger.controller]?.hasLost !== false) continue;
       const source = this.state.objects[trigger.source];
       if (source === undefined) continue;
       const aboutSelf =
         ("who" in at.whenever && at.whenever.who === "self") || ("to" in at.whenever && at.whenever.to === "self");
-      if (aboutSelf && (source.zone !== "battlefield" || (source.zoneChangeCount ?? 0) !== trigger.sourceStint)) {
+      if (
+        at.watching === undefined &&
+        aboutSelf &&
+        (source.zone !== "battlefield" || (source.zoneChangeCount ?? 0) !== trigger.sourceStint)
+      ) {
         continue;
       }
       // "...deals combat damage to that player this turn" (Great Train
@@ -25621,8 +25628,12 @@ export class Game {
       ) {
         continue;
       }
-      const object = source.controller === trigger.controller ? source : { ...source, controller: trigger.controller };
+      const subject =
+        at.watching === undefined ? source : this.watchedSubject(at.watching, at.whenever, event, trigger.controller);
+      if (subject === undefined) continue;
+      const object = subject.controller === trigger.controller ? subject : { ...subject, controller: trigger.controller };
       if (!this.triggerMatches(at.whenever, event, object)) continue;
+      if (at.once === true) usedUp.push(trigger);
       const triggerObject = this.eventTriggerObject(at.whenever, event);
       const triggerValue = this.triggerValueOf(at.whenever, event, object);
       const refs = this.withAttackedTogether(this.refsAtTrigger(source, undefined, event, triggerObject), at.whenever, event, object);
@@ -25644,9 +25655,39 @@ export class Game {
           : { delayed: trigger }),
       };
       // A token stack in the event is a permanent per token (rule 603.2).
-      const times = Math.min(this.eventMultiplier(at.whenever, event, trigger.source), Game.MAX_EFFECT_INSTANCES);
+      const times =
+        at.once === true ? 1 : Math.min(this.eventMultiplier(at.whenever, event, trigger.source), Game.MAX_EFFECT_INSTANCES);
       for (let i = 0; i < times; i += 1) this.state.pendingTriggers.push(pending);
     }
+    if (usedUp.length > 0) {
+      this.state.delayedTriggers = this.state.delayedTriggers.filter((t) => !usedUp.includes(t));
+    }
+  }
+
+  /**
+   * The permanent among `watching` that `event` is about (`DelayedWhenever.
+   * watching`): the one `"self"` in `whenever` matches, as "you" controls it.
+   * One still on the battlefield in the stint it was watched for, or one
+   * that's left since, read as it last existed: a creature's own dies trigger
+   * dealing damage is still that creature dealing it (rule 608.2h).
+   */
+  private watchedSubject(
+    watching: readonly { readonly object: ObjectId; readonly stint: number }[],
+    whenever: TriggerSpec,
+    event: GameEvent,
+    controller: PlayerId,
+  ): GameObject | undefined {
+    for (const { object: id, stint } of watching) {
+      const object = this.state.objects[id];
+      if (object === undefined) continue;
+      const watched =
+        object.zone === "battlefield" ? (object.zoneChangeCount ?? 0) === stint : object.lastKnown?.zoneChangeCount === stint;
+      if (!watched) continue;
+      if (this.triggerMatches(whenever, event, object.controller === controller ? object : { ...object, controller })) {
+        return object;
+      }
+    }
+    return undefined;
   }
 
   /** Scan for triggered abilities that just fired and queue them. */
@@ -26208,7 +26249,6 @@ export class Game {
     if (event.type === "ability-activated" && event.onStack && event.ability !== undefined) {
       this.fireActivationWatchers(event.player, event.ability);
     }
-    if (event.type === "damage-dealt") this.fireDamageWatchers(event);
     if (event.type === "attacker-unblocked") this.fireUnblockedWatchers(event.attacker);
     // "Until end of turn, whenever …" — any event a trigger can name.
     if (this.state.delayedTriggers.length > 0) this.fireWheneverWatchers(event);
@@ -42785,9 +42825,8 @@ export class Game {
           readonly thisTurn?: boolean;
         }
       | DelayedNextSpell
-      | { readonly dealsCombatDamage: ObjectId }
       | { readonly attacksUnblocked: ObjectId }
-      | (DelayedWhenever & { readonly player?: PlayerId })
+      | DelayedWheneverAt
       | { readonly losesControl: ObjectId; readonly thisTurn?: true; readonly onlyIf?: StaticCondition },
     effect: EffectSpec,
     text: string,
@@ -42800,7 +42839,6 @@ export class Game {
       | DelayedTriggerTiming
       | DelayedLeaveWatch
       | DelayedCastWatch
-      | DelayedDamageWatch
       | DelayedUnblockedWatch
       | DelayedWheneverWatch
       | DelayedLoseControlWatch;
@@ -42809,26 +42847,31 @@ export class Game {
       if (watched?.zone !== "battlefield") return;
       when = { ...at, stint: watched.zoneChangeCount ?? 0 };
     } else if (typeof at === "object" && "whenever" in at) {
+      // Only what's on the battlefield now can be watched, each for this stint
+      // of it (rule 400.7). With nothing left to watch, nothing is set up.
+      const watching = at.watched?.flatMap((id) => {
+        const watched = this.state.objects[id];
+        return watched?.zone === "battlefield" ? [{ object: id, stint: watched.zoneChangeCount ?? 0 }] : [];
+      });
+      if (watching?.length === 0) return;
+      const losing = at.orLosesControlOf === undefined ? undefined : this.state.objects[at.orLosesControlOf];
+      if (at.orLosesControlOf !== undefined && losing?.zone !== "battlefield") return;
       when = {
         whenever: at.whenever,
         ...(at.targets !== undefined ? { targets: at.targets } : {}),
         ...(at.until === "your-next-turn" ? { untilYourNextTurn: true as const } : {}),
         ...(at.until === "end-of-combat" ? { untilEndOfCombat: true as const } : {}),
+        ...(at.until === "game" ? { forGame: true as const } : {}),
         ...(at.player !== undefined ? { player: at.player } : {}),
+        ...(watching !== undefined ? { watching } : {}),
+        ...(at.once === true ? { once: true as const } : {}),
+        ...(losing !== undefined ? { orLosesControl: { object: losing.id, stint: losing.zoneChangeCount ?? 0 } } : {}),
         turn: this.state.turn.number,
       };
     } else if (typeof at === "object" && "nextSpell" in at) {
       when = {
         nextSpell: at.nextSpell,
         ...(at.orNextAbility !== undefined ? { orNextAbility: at.orNextAbility } : {}),
-        turn: this.state.turn.number,
-      };
-    } else if (typeof at === "object" && "dealsCombatDamage" in at) {
-      const watched = this.state.objects[at.dealsCombatDamage];
-      if (watched?.zone !== "battlefield") return;
-      when = {
-        dealsCombatDamage: at.dealsCombatDamage,
-        stint: watched.zoneChangeCount ?? 0,
         turn: this.state.turn.number,
       };
     } else if (typeof at === "object" && "attacksUnblocked" in at) {
@@ -43116,7 +43159,14 @@ export class Game {
     const usedUp: DelayedTrigger[] = [];
     for (const trigger of this.state.delayedTriggers) {
       const at = trigger.at;
-      if (
+      if (typeof at === "object" && "whenever" in at && at.orLosesControl !== undefined) {
+        // "When this creature becomes untapped or you lose control of it"
+        // (Coffin Queen): whichever comes first.
+        if (at.orLosesControl.object !== event.object || at.orLosesControl.stint !== stint || trigger.controller !== from) {
+          continue;
+        }
+        if (at.once === true) usedUp.push(trigger);
+      } else if (
         typeof at !== "object" ||
         !("losesControl" in at) ||
         at.losesControl !== event.object ||
@@ -43126,15 +43176,17 @@ export class Game {
         continue;
       }
       // The intervening "if" (rule 603.4), about the creating effect's targets.
-      if (
-        at.onlyIf !== undefined &&
-        !this.makeResolutionContext(trigger.source, trigger.controller, trigger.targets, 0, 0, event.object).conditionMet(
-          at.onlyIf,
-        )
-      ) {
-        continue;
+      if ("losesControl" in at) {
+        if (
+          at.onlyIf !== undefined &&
+          !this.makeResolutionContext(trigger.source, trigger.controller, trigger.targets, 0, 0, event.object).conditionMet(
+            at.onlyIf,
+          )
+        ) {
+          continue;
+        }
+        if (at.thisTurn !== true) usedUp.push(trigger);
       }
-      if (at.thisTurn !== true) usedUp.push(trigger);
       this.state.pendingTriggers.push({
         sourceObjectId: trigger.source,
         cardName: trigger.sourceName,
@@ -43206,34 +43258,6 @@ export class Game {
         abilityIndex: 0,
         controller: trigger.controller,
         triggerObject: attacker,
-        lastKnownRefs: { triggerObject: stint },
-        delayed: trigger,
-      });
-    }
-  }
-
-  private fireDamageWatchers(event: Extract<GameEvent, { type: "damage-dealt" }>): void {
-    if (this.state.delayedTriggers.length === 0 || event.combat !== true || event.target.kind !== "player") return;
-    const object = this.state.objects[event.source];
-    if (object?.zone !== "battlefield") return;
-    const stint = object.zoneChangeCount ?? 0;
-    for (const trigger of this.state.delayedTriggers) {
-      if (
-        typeof trigger.at !== "object" ||
-        !("dealsCombatDamage" in trigger.at) ||
-        trigger.at.dealsCombatDamage !== event.source ||
-        trigger.at.stint !== stint ||
-        trigger.at.turn !== this.state.turn.number
-      ) {
-        continue;
-      }
-      // Not used up: "whenever" fires again on a second combat damage step.
-      this.state.pendingTriggers.push({
-        sourceObjectId: trigger.source,
-        cardName: trigger.sourceName,
-        abilityIndex: 0,
-        controller: trigger.controller,
-        triggerObject: event.source,
         lastKnownRefs: { triggerObject: stint },
         delayed: trigger,
       });

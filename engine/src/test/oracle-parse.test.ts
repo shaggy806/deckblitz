@@ -10823,6 +10823,27 @@ describe("any number of … with different names or powers", () => {
     });
   });
 
+  it("reads a delayed trigger watching the ability's target", () => {
+    const targets: unknown[] = [];
+    const ctx = { spell: true, targets, target: (spec: unknown) => targets.push(spec) - 1 };
+    expect(parseSentence("Whenever target creature deals damage this turn, you gain that much life.", ctx)).toMatchObject({
+      kind: "delayed-trigger",
+      at: { whenever: { on: "deals-damage", who: "self" }, watching: 0 },
+      effect: { kind: "gain-life", amount: { triggerValue: true } },
+    });
+    expect(targets).toEqual(["creature"]);
+    // Paladin of Prahv's forecast whole.
+    const paladin = face(
+      "Paladin of Prahv",
+      "Creature — Human Knight",
+      "Forecast — {1}{W}, Reveal this card from your hand: Whenever target creature deals damage this turn, you gain that much life. (Activate only during your upkeep and only once each turn.)",
+    );
+    expect((paladin as { activated: readonly unknown[] }).activated[0]).toMatchObject({
+      targets: ["creature"],
+      effect: { kind: "delayed-trigger", at: { watching: 0 } },
+    });
+  });
+
   it("reads a search whose chosen finds are shuffled back in", () => {
     const parsed = face(
       "Threats Undetected",

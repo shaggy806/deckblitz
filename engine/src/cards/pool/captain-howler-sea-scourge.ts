@@ -35,7 +35,7 @@ export default defineCard({
           },
           {
             kind: "delayed-trigger",
-            at: { dealsCombatDamage: 0 },
+            at: { whenever: { on: "deals-combat-damage-to-player", who: "self" }, watching: 0 },
             effect: { kind: "draw", amount: 1 },
             text: "Whenever that creature deals combat damage to a player this turn, you draw a card.",
           },

@@ -8,7 +8,7 @@ import type { GameState } from "../state.js";
 
 // Doctor Doom, King of Latveria (a filtered "one or more" discard trigger,
 // connive) and Captain Howler, Sea Scourge (`delayed-trigger` at
-// `{ dealsCombatDamage }`: "whenever that creature deals combat damage to a
+// `{ whenever, watching }`: "whenever that creature deals combat damage to a
 // player this turn").
 
 const A = asPlayerId("alice");

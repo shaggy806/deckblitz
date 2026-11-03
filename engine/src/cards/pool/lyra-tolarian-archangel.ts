@@ -40,7 +40,7 @@ export default defineCard({
       targets: [],
       effect: {
         kind: "delayed-trigger",
-        at: { dealsCombatDamage: "source" },
+        at: { whenever: { on: "deals-combat-damage-to-player", who: "self" } },
         effect: { kind: "draw", amount: 2 },
         text: "Whenever Lyra deals combat damage to a player this turn, draw two cards.",
       },
