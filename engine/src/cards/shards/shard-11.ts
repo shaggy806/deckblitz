@@ -200,6 +200,7 @@ import _poolDemystify from "../pool/demystify.js";
 import _poolDepartedSoulkeeper from "../pool/departed-soulkeeper.js";
 import _poolDepthChargeColossus from "../pool/depth-charge-colossus.js";
 import _poolDescendantOfSoramaro from "../pool/descendant-of-soramaro.js";
+import _poolDesecratorHag from "../pool/desecrator-hag.js";
 import _poolDespondency from "../pool/despondency.js";
 import _poolDevoteeOfStrength from "../pool/devotee-of-strength.js";
 import _poolDevourInShadow from "../pool/devour-in-shadow.js";
@@ -1103,6 +1104,7 @@ const shard: CardShard = {
     _poolDepartedSoulkeeper,
     _poolDepthChargeColossus,
     _poolDescendantOfSoramaro,
+    _poolDesecratorHag,
     _poolDespondency,
     _poolDevoteeOfStrength,
     _poolDevourInShadow,

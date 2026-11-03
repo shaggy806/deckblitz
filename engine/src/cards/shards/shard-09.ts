@@ -353,6 +353,7 @@ import _poolHellToPay from "../pool/hell-to-pay.js";
 import _poolHeraldOfTorment from "../pool/herald-of-torment.js";
 import _poolHeroOfBladehold from "../pool/hero-of-bladehold.js";
 import _poolHistorianOfZhalfir from "../pool/historian-of-zhalfir.js";
+import _poolHistoriansWisdom from "../pool/historians-wisdom.js";
 import _poolHitRun from "../pool/hit-run.js";
 import _poolHoardersGreed from "../pool/hoarders-greed.js";
 import _poolHogMonkey from "../pool/hog-monkey.js";
@@ -755,6 +756,7 @@ import _poolStormcarvedCoast from "../pool/stormcarved-coast.js";
 import _poolStormsplitter from "../pool/stormsplitter.js";
 import _poolStormwatchEagle from "../pool/stormwatch-eagle.js";
 import _poolStreamHopper from "../pool/stream-hopper.js";
+import _poolStreetSavvy from "../pool/street-savvy.js";
 import _poolStudiousFirstYear from "../pool/studious-first-year.js";
 import _poolSubterfuge from "../pool/subterfuge.js";
 import _poolSummonIxion from "../pool/summon-ixion.js";
@@ -1286,6 +1288,7 @@ const shard: CardShard = {
     _poolHeraldOfTorment,
     _poolHeroOfBladehold,
     _poolHistorianOfZhalfir,
+    _poolHistoriansWisdom,
     _poolHitRun,
     _poolHoardersGreed,
     _poolHogMonkey,
@@ -1688,6 +1691,7 @@ const shard: CardShard = {
     _poolStormsplitter,
     _poolStormwatchEagle,
     _poolStreamHopper,
+    _poolStreetSavvy,
     _poolStudiousFirstYear,
     _poolSubterfuge,
     _poolSummonIxion,

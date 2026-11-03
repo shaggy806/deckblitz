@@ -177,6 +177,7 @@ import _poolDeployToTheFront from "../pool/deploy-to-the-front.js";
 import _poolDereviEmpyrialTactician from "../pool/derevi-empyrial-tactician.js";
 import _poolDescendantOfStorms from "../pool/descendant-of-storms.js";
 import _poolDesecratedTomb from "../pool/desecrated-tomb.js";
+import _poolDesertsHold from "../pool/deserts-hold.js";
 import _poolDetentionChariot from "../pool/detention-chariot.js";
 import _poolDevoutMonk from "../pool/devout-monk.js";
 import _poolDevoutWitness from "../pool/devout-witness.js";
@@ -1052,6 +1053,7 @@ const shard: CardShard = {
     _poolDereviEmpyrialTactician,
     _poolDescendantOfStorms,
     _poolDesecratedTomb,
+    _poolDesertsHold,
     _poolDetentionChariot,
     _poolDevoutMonk,
     _poolDevoutWitness,

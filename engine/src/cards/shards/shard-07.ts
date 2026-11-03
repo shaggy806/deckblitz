@@ -786,6 +786,7 @@ import _poolTimeWipe from "../pool/time-wipe.js";
 import _poolTombFortress from "../pool/tomb-fortress.js";
 import _poolTomeShredder from "../pool/tome-shredder.js";
 import _poolToothyImaginaryFriend from "../pool/toothy-imaginary-friend.js";
+import _poolTopple from "../pool/topple.js";
 import _poolTorGiant from "../pool/tor-giant.js";
 import _poolTormentorsHelm from "../pool/tormentors-helm.js";
 import _poolTowerAbove from "../pool/tower-above.js";
@@ -1703,6 +1704,7 @@ const shard: CardShard = {
     _poolTombFortress,
     _poolTomeShredder,
     _poolToothyImaginaryFriend,
+    _poolTopple,
     _poolTorGiant,
     _poolTormentorsHelm,
     _poolTowerAbove,

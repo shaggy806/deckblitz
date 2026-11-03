@@ -263,6 +263,7 @@ import _poolExterminatus from "../pool/exterminatus.js";
 import _poolFadeFromMemory from "../pool/fade-from-memory.js";
 import _poolFaithsReward from "../pool/faiths-reward.js";
 import _poolFalkenrathReaver from "../pool/falkenrath-reaver.js";
+import _poolFallFromFavor from "../pool/fall-from-favor.js";
 import _poolFallOfTheHammer from "../pool/fall-of-the-hammer.js";
 import _poolFallenAskari from "../pool/fallen-askari.js";
 import _poolFanaticOfTheHarrowing from "../pool/fanatic-of-the-harrowing.js";
@@ -1158,6 +1159,7 @@ const shard: CardShard = {
     _poolFadeFromMemory,
     _poolFaithsReward,
     _poolFalkenrathReaver,
+    _poolFallFromFavor,
     _poolFallOfTheHammer,
     _poolFallenAskari,
     _poolFanaticOfTheHarrowing,

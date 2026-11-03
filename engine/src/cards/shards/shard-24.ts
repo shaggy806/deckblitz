@@ -201,6 +201,7 @@ import _poolDemonOfCatastrophes from "../pool/demon-of-catastrophes.js";
 import _poolDesertOfTheFervent from "../pool/desert-of-the-fervent.js";
 import _poolDespoticScepter from "../pool/despotic-scepter.js";
 import _poolDestructiveForce from "../pool/destructive-force.js";
+import _poolDetainmentSpell from "../pool/detainment-spell.js";
 import _poolDevilDinosaur from "../pool/devil-dinosaur.js";
 import _poolDevotedDuelist from "../pool/devoted-duelist.js";
 import _poolDiamondKaleidoscope from "../pool/diamond-kaleidoscope.js";
@@ -1094,6 +1095,7 @@ const shard: CardShard = {
     _poolDesertOfTheFervent,
     _poolDespoticScepter,
     _poolDestructiveForce,
+    _poolDetainmentSpell,
     _poolDevilDinosaur,
     _poolDevotedDuelist,
     _poolDiamondKaleidoscope,

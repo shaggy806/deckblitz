@@ -734,6 +734,7 @@ import _poolStormForceOfNature from "../pool/storm-force-of-nature.js";
 import _poolStormfrontPegasus from "../pool/stormfront-pegasus.js";
 import _poolStormkeldProwler from "../pool/stormkeld-prowler.js";
 import _poolStreetWraith from "../pool/street-wraith.js";
+import _poolStrengthTestingHammer from "../pool/strength-testing-hammer.js";
 import _poolSubterraneanShambler from "../pool/subterranean-shambler.js";
 import _poolSuccumbToTemptation from "../pool/succumb-to-temptation.js";
 import _poolSummonersPact from "../pool/summoners-pact.js";
@@ -1632,6 +1633,7 @@ const shard: CardShard = {
     _poolStormfrontPegasus,
     _poolStormkeldProwler,
     _poolStreetWraith,
+    _poolStrengthTestingHammer,
     _poolSubterraneanShambler,
     _poolSuccumbToTemptation,
     _poolSummonersPact,

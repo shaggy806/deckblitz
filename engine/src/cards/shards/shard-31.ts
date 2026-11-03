@@ -268,6 +268,7 @@ import _poolFallenShinobi from "../pool/fallen-shinobi.js";
 import _poolFalter from "../pool/falter.js";
 import _poolFatalPush from "../pool/fatal-push.js";
 import _poolFaultLine from "../pool/fault-line.js";
+import _poolFavorOfTheMighty from "../pool/favor-of-the-mighty.js";
 import _poolFearOfFalling from "../pool/fear-of-falling.js";
 import _poolFellwarStone from "../pool/fellwar-stone.js";
 import _poolFencerClique from "../pool/fencer-clique.js";
@@ -1220,6 +1221,7 @@ const shard: CardShard = {
     _poolFalter,
     _poolFatalPush,
     _poolFaultLine,
+    _poolFavorOfTheMighty,
     _poolFearOfFalling,
     _poolFellwarStone,
     _poolFencerClique,
