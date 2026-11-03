@@ -144,6 +144,7 @@ import _poolCloudchaserKestrel from "../pool/cloudchaser-kestrel.js";
 import _poolCloudcrownOak from "../pool/cloudcrown-oak.js";
 import _poolCloudseeder from "../pool/cloudseeder.js";
 import _poolCloudskate from "../pool/cloudskate.js";
+import _poolCoalbornEntity from "../pool/coalborn-entity.js";
 import _poolCogworkGrinder from "../pool/cogwork-grinder.js";
 import _poolCommencementOfFestivities from "../pool/commencement-of-festivities.js";
 import _poolConciliatorsDuelist from "../pool/conciliators-duelist.js";
@@ -871,6 +872,7 @@ import _poolWolfbat from "../pool/wolfbat.js";
 import _poolWolfridersSaddle from "../pool/wolfriders-saddle.js";
 import _poolWrapInFlames from "../pool/wrap-in-flames.js";
 import _poolWrathOfMaritLage from "../pool/wrath-of-marit-lage.js";
+import _poolWrathfulRedDragon from "../pool/wrathful-red-dragon.js";
 import _poolWreckingBeast from "../pool/wrecking-beast.js";
 import _poolWretchedDoll from "../pool/wretched-doll.js";
 import _poolWyrmsCrossingPatrol from "../pool/wyrms-crossing-patrol.js";
@@ -1040,6 +1042,7 @@ const shard: CardShard = {
     _poolCloudcrownOak,
     _poolCloudseeder,
     _poolCloudskate,
+    _poolCoalbornEntity,
     _poolCogworkGrinder,
     _poolCommencementOfFestivities,
     _poolConciliatorsDuelist,
@@ -1767,6 +1770,7 @@ const shard: CardShard = {
     _poolWolfridersSaddle,
     _poolWrapInFlames,
     _poolWrathOfMaritLage,
+    _poolWrathfulRedDragon,
     _poolWreckingBeast,
     _poolWretchedDoll,
     _poolWyrmsCrossingPatrol,

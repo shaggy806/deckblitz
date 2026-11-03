@@ -120,6 +120,7 @@ import _poolCallOfTheConclave from "../pool/call-of-the-conclave.js";
 import _poolCallOfTheNightwing from "../pool/call-of-the-nightwing.js";
 import _poolCanoptekScarabSwarm from "../pool/canoptek-scarab-swarm.js";
 import _poolCantankerousKeepers from "../pool/cantankerous-keepers.js";
+import _poolCaptainsManeuver from "../pool/captains-maneuver.js";
 import _poolCarnivalOfSouls from "../pool/carnival-of-souls.js";
 import _poolCarrierPigeons from "../pool/carrier-pigeons.js";
 import _poolCarrionCrow from "../pool/carrion-crow.js";
@@ -903,6 +904,7 @@ import _tokensElementalTokenWildfireAwakener from "../tokens/elemental-token-wil
 import _tokensElkToken from "../tokens/elk-token.js";
 import _tokensHumanMonkToken from "../tokens/human-monk-token.js";
 import _tokensIllusionToken22 from "../tokens/illusion-token-2-2.js";
+import _tokensIllusionVillainToken from "../tokens/illusion-villain-token.js";
 import _tokensKithkinToken from "../tokens/kithkin-token.js";
 import _tokensLotus from "../tokens/lotus.js";
 import _tokensPestTokenAttacks from "../tokens/pest-token-attacks.js";
@@ -1034,6 +1036,7 @@ const shard: CardShard = {
     _poolCallOfTheNightwing,
     _poolCanoptekScarabSwarm,
     _poolCantankerousKeepers,
+    _poolCaptainsManeuver,
     _poolCarnivalOfSouls,
     _poolCarrierPigeons,
     _poolCarrionCrow,
@@ -1819,6 +1822,7 @@ const shard: CardShard = {
     _tokensElkToken,
     _tokensHumanMonkToken,
     _tokensIllusionToken22,
+    _tokensIllusionVillainToken,
     _tokensKithkinToken,
     _tokensLotus,
     _tokensPestTokenAttacks,

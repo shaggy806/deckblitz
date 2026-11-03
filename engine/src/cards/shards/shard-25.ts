@@ -856,6 +856,7 @@ import _tokensKavuTokenJaredCarthalion from "../tokens/kavu-token-jared-carthali
 import _tokensLightningRagerToken from "../tokens/lightning-rager-token.js";
 import _tokensMinotaurToken from "../tokens/minotaur-token.js";
 import _tokensNinjaTurtleSpiritToken from "../tokens/ninja-turtle-spirit-token.js";
+import _tokensOozeTokenGutterGrime from "../tokens/ooze-token-gutter-grime.js";
 import _tokensPhyrexianWurmDeathtouch from "../tokens/phyrexian-wurm-deathtouch.js";
 import _tokensRobotTokenBigMotherMouser from "../tokens/robot-token-big-mother-mouser.js";
 import _tokensSculptureToken from "../tokens/sculpture-token.js";
@@ -1725,6 +1726,7 @@ const shard: CardShard = {
     _tokensLightningRagerToken,
     _tokensMinotaurToken,
     _tokensNinjaTurtleSpiritToken,
+    _tokensOozeTokenGutterGrime,
     _tokensPhyrexianWurmDeathtouch,
     _tokensRobotTokenBigMotherMouser,
     _tokensSculptureToken,

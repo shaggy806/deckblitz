@@ -441,6 +441,7 @@ import _poolLoneMissionary from "../pool/lone-missionary.js";
 import _poolLordSkittersBlessing from "../pool/lord-skitters-blessing.js";
 import _poolLotusBloom from "../pool/lotus-bloom.js";
 import _poolLounge from "../pool/lounge.js";
+import _poolLozhanDragonsLegacy from "../pool/lozhan-dragons-legacy.js";
 import _poolLure from "../pool/lure.js";
 import _poolLurkingArynx from "../pool/lurking-arynx.js";
 import _poolLurkingNightstalker from "../pool/lurking-nightstalker.js";
@@ -1359,6 +1360,7 @@ const shard: CardShard = {
     _poolLordSkittersBlessing,
     _poolLotusBloom,
     _poolLounge,
+    _poolLozhanDragonsLegacy,
     _poolLure,
     _poolLurkingArynx,
     _poolLurkingNightstalker,

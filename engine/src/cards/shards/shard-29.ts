@@ -100,6 +100,7 @@ import _poolCartoucheOfStrength from "../pool/cartouche-of-strength.js";
 import _poolCaseOfTheCrimsonPulse from "../pool/case-of-the-crimson-pulse.js";
 import _poolCateranEnforcer from "../pool/cateran-enforcer.js";
 import _poolCausticHound from "../pool/caustic-hound.js";
+import _poolCauterySliver from "../pool/cautery-sliver.js";
 import _poolCavernThoctar from "../pool/cavern-thoctar.js";
 import _poolCelestialAncient from "../pool/celestial-ancient.js";
 import _poolCentaurPeacemaker from "../pool/centaur-peacemaker.js";
@@ -896,6 +897,7 @@ import _tokensOgreWarriorToken from "../tokens/ogre-warrior-token.js";
 import _tokensPhyrexianHorrorTokenPhyrexianRebirth from "../tokens/phyrexian-horror-token-phyrexian-rebirth.js";
 import _tokensPhyrexianHydraTokenLifelink from "../tokens/phyrexian-hydra-token-lifelink.js";
 import _tokensRatToken from "../tokens/rat-token.js";
+import _tokensSaprolingTokenBurst from "../tokens/saproling-token-burst.js";
 import _tokensSaprolingToken from "../tokens/saproling-token.js";
 import _tokensSpawnToken from "../tokens/spawn-token.js";
 import _tokensWallTokenTheFantasticFour from "../tokens/wall-token-the-fantastic-four.js";
@@ -1001,6 +1003,7 @@ const shard: CardShard = {
     _poolCaseOfTheCrimsonPulse,
     _poolCateranEnforcer,
     _poolCausticHound,
+    _poolCauterySliver,
     _poolCavernThoctar,
     _poolCelestialAncient,
     _poolCentaurPeacemaker,
@@ -1799,6 +1802,7 @@ const shard: CardShard = {
     _tokensPhyrexianHorrorTokenPhyrexianRebirth,
     _tokensPhyrexianHydraTokenLifelink,
     _tokensRatToken,
+    _tokensSaprolingTokenBurst,
     _tokensSaprolingToken,
     _tokensSpawnToken,
     _tokensWallTokenTheFantasticFour,

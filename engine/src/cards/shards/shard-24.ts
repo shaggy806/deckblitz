@@ -254,6 +254,7 @@ import _poolExtinguishAllHope from "../pool/extinguish-all-hope.js";
 import _poolExtusOriqOverlord from "../pool/extus-oriq-overlord.js";
 import _poolEyeOfJace from "../pool/eye-of-jace.js";
 import _poolEzioBrashNovice from "../pool/ezio-brash-novice.js";
+import _poolFaerieArtisans from "../pool/faerie-artisans.js";
 import _poolFaerieTrickery from "../pool/faerie-trickery.js";
 import _poolFatedRetribution from "../pool/fated-retribution.js";
 import _poolFatefulTempest from "../pool/fateful-tempest.js";
@@ -1150,6 +1151,7 @@ const shard: CardShard = {
     _poolExtusOriqOverlord,
     _poolEyeOfJace,
     _poolEzioBrashNovice,
+    _poolFaerieArtisans,
     _poolFaerieTrickery,
     _poolFatedRetribution,
     _poolFatefulTempest,

@@ -34,6 +34,7 @@ import _poolAnointedPeacekeeper from "../pool/anointed-peacekeeper.js";
 import _poolArashinSovereign from "../pool/arashin-sovereign.js";
 import _poolArbalestEngineers from "../pool/arbalest-engineers.js";
 import _poolArcadeCabinet from "../pool/arcade-cabinet.js";
+import _poolArcaneArtisan from "../pool/arcane-artisan.js";
 import _poolArcaneLighthouse from "../pool/arcane-lighthouse.js";
 import _poolArcboundBruiser from "../pool/arcbound-bruiser.js";
 import _poolArchiveHaunt from "../pool/archive-haunt.js";
@@ -503,6 +504,7 @@ import _poolMoonlightHunt from "../pool/moonlight-hunt.js";
 import _poolMorningtidesLight from "../pool/morningtides-light.js";
 import _poolMossbridgeTroll from "../pool/mossbridge-troll.js";
 import _poolMountainValley from "../pool/mountain-valley.js";
+import _poolMysterioMasterOfIllusion from "../pool/mysterio-master-of-illusion.js";
 import _poolNardoleResourcefulCyborg from "../pool/nardole-resourceful-cyborg.js";
 import _poolNathOfTheGiltLeaf from "../pool/nath-of-the-gilt-leaf.js";
 import _poolNayaPanorama from "../pool/naya-panorama.js";
@@ -935,6 +937,7 @@ const shard: CardShard = {
     _poolArashinSovereign,
     _poolArbalestEngineers,
     _poolArcadeCabinet,
+    _poolArcaneArtisan,
     _poolArcaneLighthouse,
     _poolArcboundBruiser,
     _poolArchiveHaunt,
@@ -1404,6 +1407,7 @@ const shard: CardShard = {
     _poolMorningtidesLight,
     _poolMossbridgeTroll,
     _poolMountainValley,
+    _poolMysterioMasterOfIllusion,
     _poolNardoleResourcefulCyborg,
     _poolNathOfTheGiltLeaf,
     _poolNayaPanorama,

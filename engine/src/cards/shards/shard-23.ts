@@ -886,6 +886,7 @@ import _poolWithstand from "../pool/withstand.js";
 import _poolWoodbornBehemoth from "../pool/woodborn-behemoth.js";
 import _poolWoodwraithStrangler from "../pool/woodwraith-strangler.js";
 import _poolWrangle from "../pool/wrangle.js";
+import _poolWrathfulRaptors from "../pool/wrathful-raptors.js";
 import _poolYoshimaruBelovedCompanion from "../pool/yoshimaru-beloved-companion.js";
 import _poolYouCannotPass from "../pool/you-cannot-pass.js";
 import _poolZaffaiAndTheTempests from "../pool/zaffai-and-the-tempests.js";
@@ -1794,6 +1795,7 @@ const shard: CardShard = {
     _poolWoodbornBehemoth,
     _poolWoodwraithStrangler,
     _poolWrangle,
+    _poolWrathfulRaptors,
     _poolYoshimaruBelovedCompanion,
     _poolYouCannotPass,
     _poolZaffaiAndTheTempests,
