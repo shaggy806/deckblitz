@@ -563,6 +563,7 @@ import _poolRaucousEntertainer from "../pool/raucous-entertainer.js";
 import _poolRavenGuildMaster from "../pool/raven-guild-master.js";
 import _poolRavenousVampire from "../pool/ravenous-vampire.js";
 import _poolRazeTheEffigy from "../pool/raze-the-effigy.js";
+import _poolRealityTwist from "../pool/reality-twist.js";
 import _poolRecklessAmplimancer from "../pool/reckless-amplimancer.js";
 import _poolReckonersBargain from "../pool/reckoners-bargain.js";
 import _poolRedeemTheLost from "../pool/redeem-the-lost.js";
@@ -1446,6 +1447,7 @@ const shard: CardShard = {
     _poolRavenGuildMaster,
     _poolRavenousVampire,
     _poolRazeTheEffigy,
+    _poolRealityTwist,
     _poolRecklessAmplimancer,
     _poolReckonersBargain,
     _poolRedeemTheLost,

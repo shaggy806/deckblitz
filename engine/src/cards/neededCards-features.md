@@ -321,6 +321,14 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### A land tapped for mana producing another type — built 2026-11-03
+
+`replacement:tap-for-mana-produces-color-instead`: `StaticAbility.landManaInstead` (per land kind, whoever taps or
+only you) and the `player-effect` field `landManaInstead` (until end of turn), applied where a land's {T} mana
+ability makes mana, in the auto-payer's options and in the offered activations. Proving cards: Deep Water, Reality
+Twist, Infernal Darkness. Harvest Mage's "one mana of a color of your choice instead of any other type and amount"
+still needs the choice and the amount.
+
 ### Unspent mana as steps and phases end: another type, every player's kept, life lost — built 2026-11-03
 
 `replacement:mana-pool-emptying` (family `replacement:mana-pool-emptying`): `unspentManaBecomes` (Kruphix's

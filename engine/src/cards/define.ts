@@ -1835,6 +1835,17 @@ export interface CombatTax {
   readonly attacker?: CardFilter;
 }
 
+/** One entry of `StaticAbility.landManaInstead`: a land kind and the mana
+ * type it produces when tapped for mana. */
+export interface LandManaInstead {
+  /** Which lands — "Plains" (Reality Twist); absent for any land. */
+  readonly filter?: CardFilter;
+  readonly produces: ManaType;
+  /** Whose tap it changes: this permanent's controller's (`"you"` — "if you
+   * tap a land for mana") or anyone's (`"any"` — "if a land is tapped"). */
+  readonly tapper: "you" | "any";
+}
+
 export interface StaticAbility {
   readonly affects: AffectSpec;
   /**
@@ -2998,6 +3009,18 @@ export interface StaticAbility {
    * damage. Once per such permanent (a token stack is that many). Read off
    * the battlefield, whoever controls it. */
   readonly manaLossCausesLifeLoss?: true;
+  /** "If a land is tapped for mana, it produces {B} instead of any other
+   * type" (Infernal Darkness), "if tapped for mana, Plains produce {R},
+   * Swamps produce {G}, …" (Reality Twist): a replacement on the mana a
+   * land's {T} mana ability makes (rules 106.12, 614.1a) — every unit it
+   * would make is that type instead, the amount and any restriction kept.
+   * Each entry is one land kind (`filter`, absent for any land) and what it
+   * produces; `tapper: "you"` only when this permanent's controller taps it,
+   * `"any"` whoever does. Mana triggered abilities add on the tap isn't the
+   * land's and isn't changed. Where several would apply to one tap, one does
+   * (rule 616.1 — the tapping player's to choose; the engine takes the
+   * newest). Read off the battlefield. */
+  readonly landManaInstead?: readonly LandManaInstead[];
   /** "While voting, you may vote an additional time" (Tivit, Seller of
    * Secrets — rule 701.38d): as its controller votes, they may cast one more
    * vote for each of these they control, at the same time (the extra vote is

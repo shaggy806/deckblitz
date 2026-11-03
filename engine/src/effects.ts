@@ -5723,6 +5723,11 @@ export type EffectSpec =
        * your control, twice that many of those tokens are created instead"
        * (Kaya, Geist Hunter's −2) — `2`. Compounds with a Doubling Season. */
       readonly tokenMultiplier?: number;
+      /** "Until end of turn, if you tap a land you control for mana, it
+       * produces {U} instead of any other type" (Deep Water): the owner's
+       * taps of their lands make this type, as `StaticAbility.landManaInstead`
+       * does with `tapper: "you"`. */
+      readonly landManaInstead?: ManaType;
       /** "Your life total can't change" (Teferi's Protection — rules 119.7,
        * 119.8): no gain and no loss, from damage or an effect; no life paid
        * but 0; no exchange of life totals. */
@@ -16294,6 +16299,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
             }
           : {}),
         ...(spec.tokenMultiplier !== undefined ? { tokenMultiplier: spec.tokenMultiplier } : {}),
+        ...(spec.landManaInstead !== undefined ? { landManaInstead: spec.landManaInstead } : {}),
         ...(spec.lifeCantChange !== undefined ? { lifeCantChange: ctx.playersInScope(spec.lifeCantChange) } : {}),
         ...(spec.protectionFromEverything !== undefined
           ? { protectionFromEverything: ctx.playersInScope(spec.protectionFromEverything) }

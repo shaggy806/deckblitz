@@ -6028,6 +6028,19 @@ clause (section 9):
 - `{ event: "tap-for-mana", multiplier }` — "if you tap a permanent for mana,
   it produces twice as much of that mana instead" (Mana Reflection, Nyxbloom
   Ancient): see "Triggered mana abilities" in §8.
+- `landManaInstead: [{ filter?, produces, tapper }]` (a static field, not a
+  `replacement`) — a land tapped for mana producing another type instead
+  (rules 106.12, 614.1a): Infernal Darkness's "if a land is tapped for mana,
+  it produces {B} instead of any other type" is `[{ produces: "B", tapper:
+  "any" }]`; Reality Twist's "Plains produce {R}, Swamps produce {G}, …" is
+  an entry a land type (`filter: { subtype: "Plains" }`). `tapper: "you"` is
+  "if **you** tap a land". The amount is kept; mana a triggered mana ability
+  adds on the tap isn't the land's. Deep Water's turn-long "{U}: Until end of
+  turn, if you tap a land you control for mana, it produces {U} instead" is
+  the `player-effect` field `landManaInstead: "U"`. The auto-payer and the
+  offered activations see the new type. Of several, the newest applies
+  (rule 616.1). Not "one mana of a color of your choice instead of any other
+  type and amount" (Harvest Mage).
 - `{ event: "would-add-counter", multiplier?, plus?, counterKind?, filter?, other?, byEffectOnly? }` —
   Doubling Season (`multiplier: 2`). `filter` narrows which of your permanents
   it covers (Branching Evolution: `{ type: "creature" }`; Caradora's "a

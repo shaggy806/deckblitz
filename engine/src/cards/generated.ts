@@ -5621,6 +5621,7 @@ import _poolDeepSeaKraken from "./pool/deep-sea-kraken.js";
 import _poolDeepSeaTerror from "./pool/deep-sea-terror.js";
 import _poolDeepSight from "./pool/deep-sight.js";
 import _poolDeepSlumberTitan from "./pool/deep-slumber-titan.js";
+import _poolDeepWater from "./pool/deep-water.js";
 import _poolDeepWood from "./pool/deep-wood.js";
 import _poolDeepcavernImp from "./pool/deepcavern-imp.js";
 import _poolDeepchannelDuelist from "./pool/deepchannel-duelist.js";
@@ -11842,6 +11843,7 @@ import _poolInfectiousInquiry from "./pool/infectious-inquiry.js";
 import _poolInfernalCaptor from "./pool/infernal-captor.js";
 import _poolInfernalCaretaker from "./pool/infernal-caretaker.js";
 import _poolInfernalContract from "./pool/infernal-contract.js";
+import _poolInfernalDarkness from "./pool/infernal-darkness.js";
 import _poolInfernalGenesis from "./pool/infernal-genesis.js";
 import _poolInfernalGrasp from "./pool/infernal-grasp.js";
 import _poolInfernalIdol from "./pool/infernal-idol.js";
@@ -18742,6 +18744,7 @@ import _poolRealityShift from "./pool/reality-shift.js";
 import _poolRealitySmasher from "./pool/reality-smasher.js";
 import _poolRealitySpasm from "./pool/reality-spasm.js";
 import _poolRealityStrobe from "./pool/reality-strobe.js";
+import _poolRealityTwist from "./pool/reality-twist.js";
 import _poolReality from "./pool/reality.js";
 import _poolRealmCloakedGiant from "./pool/realm-cloaked-giant.js";
 import _poolRealmOfKoh from "./pool/realm-of-koh.js";
@@ -34267,6 +34270,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDeepSeaTerror,
   _poolDeepSight,
   _poolDeepSlumberTitan,
+  _poolDeepWater,
   _poolDeepWood,
   _poolDeepcavernImp,
   _poolDeepchannelDuelist,
@@ -40488,6 +40492,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolInfernalCaptor,
   _poolInfernalCaretaker,
   _poolInfernalContract,
+  _poolInfernalDarkness,
   _poolInfernalGenesis,
   _poolInfernalGrasp,
   _poolInfernalIdol,
@@ -47388,6 +47393,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRealitySmasher,
   _poolRealitySpasm,
   _poolRealityStrobe,
+  _poolRealityTwist,
   _poolReality,
   _poolRealmCloakedGiant,
   _poolRealmOfKoh,
@@ -62926,6 +62932,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/deep-sea-terror": _poolDeepSeaTerror,
   "pool/deep-sight": _poolDeepSight,
   "pool/deep-slumber-titan": _poolDeepSlumberTitan,
+  "pool/deep-water": _poolDeepWater,
   "pool/deep-wood": _poolDeepWood,
   "pool/deepcavern-imp": _poolDeepcavernImp,
   "pool/deepchannel-duelist": _poolDeepchannelDuelist,
@@ -69147,6 +69154,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/infernal-captor": _poolInfernalCaptor,
   "pool/infernal-caretaker": _poolInfernalCaretaker,
   "pool/infernal-contract": _poolInfernalContract,
+  "pool/infernal-darkness": _poolInfernalDarkness,
   "pool/infernal-genesis": _poolInfernalGenesis,
   "pool/infernal-grasp": _poolInfernalGrasp,
   "pool/infernal-idol": _poolInfernalIdol,
@@ -76047,6 +76055,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/reality-smasher": _poolRealitySmasher,
   "pool/reality-spasm": _poolRealitySpasm,
   "pool/reality-strobe": _poolRealityStrobe,
+  "pool/reality-twist": _poolRealityTwist,
   "pool/reality": _poolReality,
   "pool/realm-cloaked-giant": _poolRealmCloakedGiant,
   "pool/realm-of-koh": _poolRealmOfKoh,

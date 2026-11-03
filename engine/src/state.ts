@@ -5275,6 +5275,11 @@ export interface PlayerEffect {
    * Hunter's −2): multiplies every token creation under `owner`'s control,
    * alongside a Doubling Season's (rule 614 — they compound). */
   readonly tokenMultiplier?: number;
+  /** "Until end of turn, if you tap a land you control for mana, it produces
+   * {U} instead of any other type" (Deep Water): `owner`'s lands tapped for
+   * mana by them make this type (rules 106.12, 614.1a) — see
+   * `Game.landManaInsteadFor`. */
+  readonly landManaInstead?: ManaType;
   /** "Your life total can't change" (Teferi's Protection): these players can
    * neither gain nor lose life (rules 119.7, 119.8) — a gain or a loss, from
    * damage or an effect, does nothing; a cost that has them pay more than 0

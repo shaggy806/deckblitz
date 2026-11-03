@@ -2473,6 +2473,11 @@ export function parseSentence(sentence, ctx) {
   if (/^this turn, creatures can't attack unless their controller pays \{X\} for each attacking creature they control\.$/i.test(s)) {
     return { kind: "player-effect", duration: "end-of-turn", attackTax: { generic: "x", covers: "all" } };
   }
+  // "Until end of turn, if you tap a land you control for mana, it produces
+  // {U} instead of any other type" (Deep Water — rule 106.12).
+  if ((m = /^until end of turn, if you tap a land you control for mana, it produces \{([WUBRGC])\} instead of any other type\.$/i.exec(s))) {
+    return { kind: "player-effect", duration: "end-of-turn", landManaInstead: m[1] };
+  }
   // "Until your next turn, creatures can't attack you" (Chronomantic Escape):
   // a rule for a while, no cost.
   if (/^until your next turn, creatures can't attack you\.$/i.test(s)) {
@@ -13385,6 +13390,20 @@ function parseStatic(line, text) {
       replacement: { event: "would-begin-turn", who: m[1] === "a player" ? "any" : "opponent", extraOnly: true },
       text,
     };
+  }
+  // A land tapped for mana producing another type (rules 106.12, 614.1a):
+  // any land (Infernal Darkness), or by basic land type (Reality Twist).
+  if ((m = /^If a land is tapped for mana, it produces \{([WUBRGC])\} instead of any other type\.$/.exec(line))) {
+    return { affects: { scope: "self" }, landManaInstead: [{ produces: m[1], tapper: "any" }], text };
+  }
+  if ((m = /^If tapped for mana, (.+) instead of any other type\.$/.exec(line))) {
+    const entries = [];
+    for (const part of m[1].split(/, and |, /)) {
+      const e = /^(Plains|Islands|Swamps|Mountains|Forests) produce \{([WUBRGC])\}$/.exec(part);
+      if (e === null) return null;
+      entries.push({ filter: { subtype: e[1] === "Plains" ? "Plains" : e[1].slice(0, -1) }, produces: e[2], tapper: "any" });
+    }
+    return { affects: { scope: "self" }, landManaInstead: entries, text };
   }
   // Unspent mana as steps and phases end (rule 500.4): kept, of one colour
   // (Leyline Tyrant) or by every player (Upwelling); turned into another type

@@ -9670,6 +9670,26 @@ describe("a static acting on a player", () => {
     });
   });
 
+  it("reads a land tapped for mana producing another type (rules 106.12, 614.1a)", () => {
+    const darkness = face("Enchantment", "If a land is tapped for mana, it produces {B} instead of any other type.");
+    expect(darkness.complete).toBe(true);
+    expect(darkness.static[0].landManaInstead).toEqual([{ produces: "B", tapper: "any" }]);
+    const twist = face(
+      "Enchantment",
+      "If tapped for mana, Plains produce {R}, Swamps produce {G}, Mountains produce {W}, and Forests produce {B} instead of any other type.",
+    );
+    expect(twist.complete).toBe(true);
+    expect(twist.static[0].landManaInstead).toEqual([
+      { filter: { subtype: "Plains" }, produces: "R", tapper: "any" },
+      { filter: { subtype: "Swamp" }, produces: "G", tapper: "any" },
+      { filter: { subtype: "Mountain" }, produces: "W", tapper: "any" },
+      { filter: { subtype: "Forest" }, produces: "B", tapper: "any" },
+    ]);
+    const water = face("Enchantment", "{U}: Until end of turn, if you tap a land you control for mana, it produces {U} instead of any other type.");
+    expect(water.complete).toBe(true);
+    expect(water.activated[0].effect).toEqual({ kind: "player-effect", duration: "end-of-turn", landManaInstead: "U" });
+  });
+
   it("reads what happens to unspent mana as steps and phases end (rule 500.4)", () => {
     const stone = face("Artifact", "If you would lose unspent mana, that mana becomes colorless instead.");
     expect(stone.complete).toBe(true);

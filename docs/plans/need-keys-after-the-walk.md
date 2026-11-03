@@ -852,6 +852,9 @@ missing. Re-run `--greedy` for Phase 2's order.
 - **2026-11-03: `replacement:mana-pool-emptying`.** Its key `replacement:mana-pool-emptying`: unspent mana turned into
   another type, kept by every player, or costing life; Horizon Stone, Upwelling, Yurlok. Left:
   `replacement:mana-persistence-color` (The Last Agni Kai).
+- **2026-11-03: `replacement:tap-for-mana-produces-color-instead`.** A land's mana another type instead, as a static
+  or a turn-long player effect; Deep Water, Reality Twist, Infernal Darkness. Harvest Mage (a colour of your choice,
+  one mana) is left.
 
 ## Rough size
 
