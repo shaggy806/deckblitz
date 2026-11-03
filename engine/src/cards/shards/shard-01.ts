@@ -594,6 +594,7 @@ import _poolRootweaverDruid from "../pool/rootweaver-druid.js";
 import _poolRottingFensnake from "../pool/rotting-fensnake.js";
 import _poolRowansBattleguard from "../pool/rowans-battleguard.js";
 import _poolRummagingWizard from "../pool/rummaging-wizard.js";
+import _poolRunicRepetition from "../pool/runic-repetition.js";
 import _poolRusticClachan from "../pool/rustic-clachan.js";
 import _poolRustmouthOgre from "../pool/rustmouth-ogre.js";
 import _poolRuthlessDeathfang from "../pool/ruthless-deathfang.js";
@@ -1465,6 +1466,7 @@ const shard: CardShard = {
     _poolRottingFensnake,
     _poolRowansBattleguard,
     _poolRummagingWizard,
+    _poolRunicRepetition,
     _poolRusticClachan,
     _poolRustmouthOgre,
     _poolRuthlessDeathfang,

@@ -143,6 +143,7 @@ import _poolClayStatue from "../pool/clay-statue.js";
 import _poolClearAPath from "../pool/clear-a-path.js";
 import _poolCleaveShadows from "../pool/cleave-shadows.js";
 import _poolCliffThreader from "../pool/cliff-threader.js";
+import _poolCloneShell from "../pool/clone-shell.js";
 import _poolCloseQuarters from "../pool/close-quarters.js";
 import _poolCoalStoker from "../pool/coal-stoker.js";
 import _poolCoilingOracle from "../pool/coiling-oracle.js";
@@ -1034,6 +1035,7 @@ const shard: CardShard = {
     _poolClearAPath,
     _poolCleaveShadows,
     _poolCliffThreader,
+    _poolCloneShell,
     _poolCloseQuarters,
     _poolCoalStoker,
     _poolCoilingOracle,

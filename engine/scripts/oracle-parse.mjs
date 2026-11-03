@@ -1245,6 +1245,34 @@ function libraryPlacementSlot(phrase, ctx) {
   return quantifiedSlots(phrase, ctx)?.slots[0];
 }
 
+/** "Target face-up exiled card" (Pull from Eternity), "target exiled card
+ * with flashback you own" (Runic Repetition), "target card with flashback you
+ * own from exile" (Rootcoil Creeper), "target creature card with mana value X
+ * exiled with this creature" (Gelatinous Cube): a `card-in-exile` slot. */
+const EXILE_TARGET =
+  "target (?:face-up exiled card|exiled card(?: with flashback)?(?: you own)?|card(?: with flashback)? you own from exile|(?:[a-z]+ )?card(?: with mana value X)? exiled with (?:this [a-z]+|~))";
+
+function exileTargetOf(phrase) {
+  if (/^target face-up exiled card$/i.test(phrase)) return { kind: "card-in-exile", faceUp: true };
+  let m;
+  if ((m = /^target (?:exiled card( with flashback)?( you own)?|card( with flashback)? you own from exile)$/i.exec(phrase))) {
+    const flashback = m[1] !== undefined || m[3] !== undefined;
+    const own = m[2] !== undefined || m[3] !== undefined || /you own from exile$/i.test(phrase);
+    return {
+      kind: "card-in-exile",
+      ...(own ? { whose: "you" } : {}),
+      ...(flashback ? { filter: { hasFlashback: true } } : {}),
+    };
+  }
+  if ((m = /^target (?:([a-z]+) )?card( with mana value X)? exiled with (?:this [a-z]+|~)$/i.exec(phrase))) {
+    const parsed = m[1] === undefined ? {} : parseTypePhrase(m[1], { cards: true });
+    if (parsed === null) return undefined;
+    const filter = m[2] === undefined ? parsed : { ...parsed, manaValue: { op: "eq", n: "x" } };
+    return { kind: "card-in-exile", linked: true, ...(Object.keys(filter).length > 0 ? { filter } : {}) };
+  }
+  return undefined;
+}
+
 function graveyardTargetOf(phrase) {
   const m = /^target (?:(.+?) )?card( with mana value X)? from (your|a|an opponent's) graveyard$/i.exec(phrase);
   if (!m) return undefined;
@@ -2779,6 +2807,17 @@ export function parseSentence(sentence, ctx) {
     if ((m = re(`~ deals damage to (${TARGET}) equal to ${MV}`).exec(s))) {
       return { kind: "damage", amount: { manaValueOf: "discarded" }, target: slot(m[1]) };
     }
+  }
+
+  // A card in exile, targeted (rule 406): into its owner's graveyard, or back
+  // to a hand.
+  if ((m = re(`put (${EXILE_TARGET}) into its owner's graveyard`).exec(s))) {
+    const spec = exileTargetOf(m[1]);
+    if (spec !== undefined) return { kind: "put-into-graveyard", target: ctx.target(spec) };
+  }
+  if ((m = re(`return (${EXILE_TARGET}) to (?:your|its owner's) hand`).exec(s))) {
+    const spec = exileTargetOf(m[1]);
+    if (spec !== undefined) return { kind: "return-to-hand", target: ctx.target(spec), from: "exile" };
   }
 
   // Cards.

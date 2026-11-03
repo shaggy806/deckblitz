@@ -2575,6 +2575,27 @@ land comparison (Boreas Charger), "permanents they control but don't own"
 (Incite Rebellion), tapped/nonbasic counts the scaffolder can't phrase —
 `author-freed` narrows them.
 
+### A card in exile, and the card exiled with this — built 2026-11-03
+
+The need-keys Phase 2 family `effect:linked-exiled-card`'s top group:
+`effect:linked-exiled-card`, `effect:linked-face-down-exile-to-battlefield`,
+`target:card-in-exile`, and `condition:filter-has-flashback` riding along. The
+target spec `card-in-exile` (`whose` its owner, `faceUp`, `linked` — rule
+607.2a, the source's stint, exiled with it or until it leaves — and a filter a
+face-down card never matches, 406.3a); the filter `hasFlashback`;
+`allow-cast-linked-exile`'s `spendAs` (rule 609.4b). The rest was already
+there: `turn-exiled-face-up` then `return-exiled-by-source { linked:
+"battlefield", under: "you", filter }` is "turn the exiled card face up. If it's
+a creature card, put it onto the battlefield", and a `trigger-object` condition
+over `sharesCardTypeWith: "exiled-with-source"` is "if it shares a card type
+with the exiled card". `linked-exiled-card.test.ts`. Proving cards: Pull from
+Eternity, Gelatinous Cube, Runic Repetition, Clone Shell, Cemetery Protector,
+King Narfi's Betrayal. Still blocked under these keys: Summoner's Egg (a card
+exiled from hand face down, `effect:exile-from-hand-face-down-linked`),
+Rootcoil Creeper (mana spendable only on spells cast from a graveyard), Altar
+of the Lost; the family's one-card units (Diabolic Servitude, Dark Impostor,
+Hedonist's Trove) are left.
+
 ### A secret choice — built 2026-11-03
 
 The need-keys Phase 2 key `decision:secret-choice` (no new decision kind). A

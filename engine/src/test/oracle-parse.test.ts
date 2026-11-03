@@ -11194,3 +11194,29 @@ describe("offering", () => {
     });
   });
 });
+
+describe("a card in exile, targeted", () => {
+  const spell = (oracle_text: string) => parseFace({ name: "Card", type_line: "Instant", oracle_text });
+  it("reads a face-up exiled card put into its owner's graveyard", () => {
+    const pull = spell("Put target face-up exiled card into its owner's graveyard.");
+    expect(pull.complete).toBe(true);
+    expect(pull.targets).toEqual([{ kind: "card-in-exile", faceUp: true }]);
+    expect(pull.effect).toEqual({ kind: "put-into-graveyard", target: 0 });
+  });
+  it("reads an exiled card with flashback you own returned to your hand", () => {
+    const runic = spell("Return target exiled card with flashback you own to your hand.");
+    expect(runic.complete).toBe(true);
+    expect(runic.targets).toEqual([{ kind: "card-in-exile", whose: "you", filter: { hasFlashback: true } }]);
+    expect(runic.effect).toEqual({ kind: "return-to-hand", target: 0, from: "exile" });
+  });
+  it("reads a creature card with mana value X exiled with this creature", () => {
+    const cube = parseFace(
+      { name: "Card", type_line: "Creature — Ooze", oracle_text: "{X}{B}: Put target creature card with mana value X exiled with this creature into its owner's graveyard." },
+      { tokenFor: (d: string) => d },
+    ).activated[0];
+    expect(cube.targets).toEqual([
+      { kind: "card-in-exile", linked: true, filter: { type: "creature", manaValue: { op: "eq", n: "x" } } },
+    ]);
+    expect(cube.effect).toEqual({ kind: "put-into-graveyard", target: 0 });
+  });
+});

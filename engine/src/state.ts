@@ -731,6 +731,9 @@ export interface GameObject {
     readonly anyNumber?: true;
     /** "Spells you cast this way cost {N} less" (Urianger Augurelt). */
     readonly reduce?: number;
+    /** "…and you may spend mana as though it were mana of any color to cast
+     * those spells" (King Narfi's Betrayal, rule 609.4b). */
+    readonly spendAs?: SpendAs;
   }[];
   /**
    * Players this permanent has dealt combat damage to this turn — Steel

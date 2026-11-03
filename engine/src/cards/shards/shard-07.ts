@@ -113,6 +113,7 @@ import _poolCateranBrute from "../pool/cateran-brute.js";
 import _poolCateranSummons from "../pool/cateran-summons.js";
 import _poolCatharsis from "../pool/catharsis.js";
 import _poolCavernLampad from "../pool/cavern-lampad.js";
+import _poolCemeteryProtector from "../pool/cemetery-protector.js";
 import _poolChandrasEmberling from "../pool/chandras-emberling.js";
 import _poolChandrasFiremaw from "../pool/chandras-firemaw.js";
 import _poolChandrasPhoenix from "../pool/chandras-phoenix.js";
@@ -1026,6 +1027,7 @@ const shard: CardShard = {
     _poolCateranSummons,
     _poolCatharsis,
     _poolCavernLampad,
+    _poolCemeteryProtector,
     _poolChandrasEmberling,
     _poolChandrasFiremaw,
     _poolChandrasPhoenix,

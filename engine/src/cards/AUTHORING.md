@@ -608,7 +608,9 @@ excludeSelf: true, subtype: "Rat" }`); an effect does with `grant-toxic { target
 end of turn"; Plague Nurse's "each other creature you control with toxic gains
 toxic 1", over a filter as it resolves). "With toxic" / "if that creature has
 toxic" is the filter `hasToxic: true` (printed or granted; Slaughter Singer,
-Hexgold Slash). The layer fold sums every instance into
+Hexgold Slash). "With flashback" is `hasFlashback: true` (rule 702.34 — the
+printed flashback, or Snapcaster Mage's resolved grant where the card is; not a
+static's graveyard-only grant, so ask it of cards in exile: Runic Repetition). The layer fold sums every instance into
 `Characteristics.toxic`, the creature's total toxic value (702.164b; a
 creature that loses its abilities loses the printed one), and combat damage it
 deals a player gives that player that many poison counters on top of the
@@ -1608,7 +1610,7 @@ own object, so it reaches every one.
 | `surveil` | `amount`, `then?` | Consider. `amount` may be live, as `scry`'s. The cards kept on top are ordered as a scry's are (rule 701.25a). |
 | `allow-cast-from-exile` | `target`, `free?`, `laterTurns?` | "Until end of turn, you may cast that card [without paying its mana cost]" — a card in exile, usually a `reveal-until`'s find (Codie). Cast only, this turn, by the effect's controller; `free` permits only the free cast. `laterTurns` is warp's instead: the card's owner, from the next turn on, for as long as it stays exiled. `whileExiled` is "for as long as that card remains exiled, you may cast it" — the effect's controller, with no end but its leaving exile — and `undaunted` "that spell has undaunted" (rule 702.125: {1} less for each opponent, beside a printed undaunted): Durnan of the Yawning Portal, as a `look-and-choose`'s `then` on the card it exiled (`target: 0`). `spendAs` is "mana of any type can be spent to cast that spell", for that cast alone. |
 | `turn-exiled-face-up` | — | "Turn the exiled card / all cards exiled with this face up" (The Creation of Avacyn, Pyxis of Pandemonium): every card linked to this source, its characteristics back (rule 406.3a). An `exiled-with-source` condition's `filter` finds nothing in a card still face down. |
-| `allow-cast-linked-exile` | `spell?`, `free?`, `play?`, `anyNumber?`, `reduce?` | `play` is "you may **play** a card" (Raphael, Most Attitude), a land too, which spends it as a spell does; `anyNumber` is "cards", never spent (Kayla's Music Box, `spell: { ownedBy: "you" }` for "you own"); `reduce` is "spells you cast this way cost {2} less" (generic only). A face-down card only to a player who may look at it. Idol of Endurance's "until end of turn, you may cast a creature spell from among cards exiled with this artifact without paying its mana cost" (rule 607.2a): one spell per resolution, by the controller, keeping its timing; read over the linked cards live, `spell` judged as the face being cast. |
+| `allow-cast-linked-exile` | `spell?`, `free?`, `play?`, `anyNumber?`, `reduce?`, `spendAs?` | `spendAs: "any-color"` is "and you may spend mana as though it were mana of any color to cast those spells" (King Narfi's Betrayal, rule 609.4b), for its casts alone. `play` is "you may **play** a card" (Raphael, Most Attitude), a land too, which spends it as a spell does; `anyNumber` is "cards", never spent (Kayla's Music Box, `spell: { ownedBy: "you" }` for "you own"); `reduce` is "spells you cast this way cost {2} less" (generic only). A face-down card only to a player who may look at it. Idol of Endurance's "until end of turn, you may cast a creature spell from among cards exiled with this artifact without paying its mana cost" (rule 607.2a): one spell per resolution, by the controller, keeping its timing; read over the linked cards live, `spell` judged as the face being cast. |
 | `choose-exiled-to-play` | `filter?`, `linked?`, `free?` | `linked: true` chooses among the cards exiled with this source only (rule 607.2a), no `filter` needed: Muse Vessel's "choose a card exiled with this artifact. You may play that card this turn". Dauthi Voidwalker's "choose an exiled card an opponent owns with a void counter on it. You may play it this turn without paying its mana cost" (`filter: { ownedBy: "opponent", counters: { kind: "void", compare: { op: "gte", n: 1 } } }`, `free: true`): the effect's controller picks one face-up exiled card matching `filter` — not a target; asked only with more than one — and may play it this turn, a land as their land play and a spell at its normal timing; with `free`, only without paying its mana cost. |
 | `put-arrived-onto-battlefield` | `count` | Colossal Grave-Reaver's "whenever one or more creature cards are put into your graveyard from your library, **put one of them onto the battlefield**" (on a `batched` `put-into-graveyard` trigger, `count: 1`): of the cards that move put there that counted for the trigger, those still there as the same objects, onto the battlefield under the effect's controller's control — the controller picking which when more are left than `count`. |
 | `choose-opponent` | `then` | "You choose an opponent" as this resolves (not a target): `then` with `"that-player"` naming them — asked as a `choose-modes` with more than one opponent left. Tasigur, the Golden Fang's "return a nonland card of an opponent's choice from your graveyard to your hand" is a `choose-opponent` whose `then` is a `look-and-choose` with `chooser: "that-player"` (you choose the opponent, then they choose — the ruling). `random: true` is "choose an opponent **at random**" (Vial Smasher the Fierce): nobody is asked — the game picks on its seeded random stream, each equally likely; add `anyPlayer: true` for "choose a **player** at random" (Wildfire Devils), the effect's controller among them. Logged as a `chosen-at-random` event. `anyPlayer: true` without `random` is "choose a player" (the controller asked, themself among the options). `mostLife: true` narrows the candidates to those tied for the most life as it resolves (The Master, Gallifrey's End; The Black Gate's "a player with the most life or tied for most life"). `remember: true` keeps the one chosen as the source's chosen player (see "Choosing a player"). |
@@ -3460,6 +3462,17 @@ stopped covering:
   in **that player's** graveyard" is four `optional` slots, seats 0–3. `whose` defaults to `"any"`, and
 `filter` matches printed characteristics (layer effects don't reach a
 graveyard). `describeTargetSpec(spec)` renders any spec as a UI label.
+- `{ kind: "card-in-exile", whose?: "any" | "you" | "opponent", linked?: true, faceUp?: true, filter?: CardFilter }`
+  — a card in exile (rule 406), `whose` its owner: Pull from Eternity's
+  "target **face-up** exiled card" (`faceUp`), Runic Repetition's "target
+  exiled card with flashback you own" (`whose: "you"`, `filter: { hasFlashback:
+  true }`), Gelatinous Cube's "target creature card with mana value X **exiled
+  with this creature**" (`linked`: the cards linked to the source's
+  battlefield stint, rule 607.2a, or exiled until it leaves; `manaValue: { op:
+  "eq", n: "x" }`). A face-down exiled card has no characteristics (406.3a): no
+  `filter` matches it, and `faceUp` leaves it out with none. Pair it with
+  `put-into-graveyard`, or `return-to-hand { from: "exile" }`. The scaffolder
+  reads these phrases.
 
 Legality is checked at cast **and** again on resolution; a spell whose targets
 have all become illegal is countered by the game (fizzles).

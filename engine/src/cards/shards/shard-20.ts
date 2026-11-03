@@ -435,6 +435,7 @@ import _poolKazanduMammoth from "../pool/kazandu-mammoth.js";
 import _poolKembaKhaRegent from "../pool/kemba-kha-regent.js";
 import _poolKindlyCustomer from "../pool/kindly-customer.js";
 import _poolKingHaraldsRevenge from "../pool/king-haralds-revenge.js";
+import _poolKingNarfisBetrayal from "../pool/king-narfis-betrayal.js";
 import _poolKissOfTheAmesha from "../pool/kiss-of-the-amesha.js";
 import _poolKjeldoranSkycaptain from "../pool/kjeldoran-skycaptain.js";
 import _poolKolodinTriumphCaster from "../pool/kolodin-triumph-caster.js";
@@ -1389,6 +1390,7 @@ const shard: CardShard = {
     _poolKembaKhaRegent,
     _poolKindlyCustomer,
     _poolKingHaraldsRevenge,
+    _poolKingNarfisBetrayal,
     _poolKissOfTheAmesha,
     _poolKjeldoranSkycaptain,
     _poolKolodinTriumphCaster,

@@ -4521,7 +4521,9 @@ export type EffectSpec =
        * `{ ownedBy: "you" }` is its "cards you own". `reduce`: "spells you cast
        * this way cost {2} less" (generic only — Urianger Augurelt's ruling).
        * A face-down card (rule 406.3a) is reached only by a player who may
-       * look at it.
+       * look at it. `spendAs`: "and you may spend mana as though it were
+       * mana of any color to cast those spells" (King Narfi's Betrayal, rule
+       * 609.4b), for the casts this permission allows.
        */
       readonly kind: "allow-cast-linked-exile";
       readonly spell?: CardFilter;
@@ -4529,6 +4531,7 @@ export type EffectSpec =
       readonly play?: true;
       readonly anyNumber?: true;
       readonly reduce?: number;
+      readonly spendAs?: SpendAs;
     }
   | {
       /**
@@ -10265,7 +10268,7 @@ export interface EffectApi {
   allowCastLinkedExile(
     spell: CardFilter | undefined,
     free: boolean,
-    more?: { readonly play?: true; readonly anyNumber?: true; readonly reduce?: number },
+    more?: { readonly play?: true; readonly anyNumber?: true; readonly reduce?: number; readonly spendAs?: SpendAs },
   ): void;
   /** The cards this resolution has exiled so far from a library, a hand or
    * a graveyard, still in exile — a `cast-now`'s `"exiled-this-way"`. */
@@ -15419,6 +15422,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         ...(spec.play === true ? { play: true } : {}),
         ...(spec.anyNumber === true ? { anyNumber: true } : {}),
         ...(spec.reduce !== undefined ? { reduce: spec.reduce } : {}),
+        ...(spec.spendAs !== undefined ? { spendAs: spec.spendAs } : {}),
       });
       return;
     case "allow-cast-from-exile": {

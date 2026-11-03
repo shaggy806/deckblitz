@@ -555,6 +555,7 @@ import _poolProjektorInspector from "../pool/projektor-inspector.js";
 import _poolProtectionOfTheHekma from "../pool/protection-of-the-hekma.js";
 import _poolProtocolKnight from "../pool/protocol-knight.js";
 import _poolPsychosisCrawler from "../pool/psychosis-crawler.js";
+import _poolPullFromEternity from "../pool/pull-from-eternity.js";
 import _poolPutrefy from "../pool/putrefy.js";
 import _poolQuandrixPledgemage from "../pool/quandrix-pledgemage.js";
 import _poolQuarryColossus from "../pool/quarry-colossus.js";
@@ -1450,6 +1451,7 @@ const shard: CardShard = {
     _poolProtectionOfTheHekma,
     _poolProtocolKnight,
     _poolPsychosisCrawler,
+    _poolPullFromEternity,
     _poolPutrefy,
     _poolQuandrixPledgemage,
     _poolQuarryColossus,

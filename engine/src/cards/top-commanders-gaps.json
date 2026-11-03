@@ -1401,7 +1401,11 @@
   "effect:copy-spell-for-each-chosen-paid",
   "keyword:gravestorm",
   "static:cost-increase-colored",
-  "keyword:offering"
+  "keyword:offering",
+  "effect:linked-exiled-card",
+  "effect:linked-face-down-exile-to-battlefield",
+  "target:card-in-exile",
+  "condition:filter-has-flashback"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

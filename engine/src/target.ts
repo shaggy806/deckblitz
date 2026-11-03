@@ -200,6 +200,25 @@ export type TargetSpec =
       readonly filter?: CardFilter;
     }
   /**
+   * A card in exile (rule 406) — Pull from Eternity's "target **face-up**
+   * exiled card", Runic Repetition's "target exiled card with flashback **you
+   * own**" (`whose` is its owner), Gelatinous Cube's "target creature card
+   * with mana value X **exiled with this creature**" (`linked`: rule 607.2a,
+   * the cards linked to the source's battlefield stint — `exiledWith`, or
+   * exiled until it leaves, `exiledUntil`).
+   *
+   * A card exiled face down has no characteristics (rule 406.3a), so a
+   * `filter` never matches one, and `faceUp` leaves them out even with no
+   * filter. `filter` reads the card's printed characteristics.
+   */
+  | {
+      readonly kind: "card-in-exile";
+      readonly whose?: "any" | "you" | "opponent";
+      readonly linked?: true;
+      readonly faceUp?: true;
+      readonly filter?: CardFilter;
+    }
+  /**
    * A spell on the stack matching a filter — Red Elemental Blast's "counter
    * target **blue** spell", Mental Misstep's "target spell **with mana value
    * 1**". The filter reads the spell as it is on the stack: its printed
@@ -1274,6 +1293,12 @@ export function describeTargetSpec(spec: TargetSpec | string): string {
     if (spec.whose === "defending-player") return `${noun} defending player controls`;
     if (spec.orPlayer !== undefined) return `${noun} or ${spec.orPlayer === "opponent" ? "opponent" : "player"}`;
     return noun;
+  }
+  if (spec.kind === "card-in-exile") {
+    const what = spec.filter?.type === undefined ? "card" : `${spec.filter.type} card`;
+    const up = spec.faceUp === true ? "face-up " : "";
+    if (spec.linked === true) return `${up}${what} exiled with this`;
+    return `${up}exiled ${what}${spec.whose === "you" ? " you own" : spec.whose === "opponent" ? " an opponent owns" : ""}`;
   }
   const whose =
     typeof spec.whose === "object"
