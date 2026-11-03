@@ -606,6 +606,7 @@ import _poolRadicalIdea from "../pool/radical-idea.js";
 import _poolRageScarredBerserker from "../pool/rage-scarred-berserker.js";
 import _poolRagefireHellkite from "../pool/ragefire-hellkite.js";
 import _poolRagingCougar from "../pool/raging-cougar.js";
+import _poolRagingRavine from "../pool/raging-ravine.js";
 import _poolRainOfEmbers from "../pool/rain-of-embers.js";
 import _poolRaiseThePast from "../pool/raise-the-past.js";
 import _poolRaiyuuStormsEdge from "../pool/raiyuu-storms-edge.js";
@@ -1556,6 +1557,7 @@ const shard: CardShard = {
     _poolRageScarredBerserker,
     _poolRagefireHellkite,
     _poolRagingCougar,
+    _poolRagingRavine,
     _poolRainOfEmbers,
     _poolRaiseThePast,
     _poolRaiyuuStormsEdge,

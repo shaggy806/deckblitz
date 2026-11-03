@@ -573,6 +573,7 @@ import _poolRendmawCreakingNest from "../pool/rendmaw-creaking-nest.js";
 import _poolRenegadeRallier from "../pool/renegade-rallier.js";
 import _poolRepayInKind from "../pool/repay-in-kind.js";
 import _poolRepulsorBlast from "../pool/repulsor-blast.js";
+import _poolRestlessSpire from "../pool/restless-spire.js";
 import _poolRetroMutation from "../pool/retro-mutation.js";
 import _poolReveilleSquad from "../pool/reveille-squad.js";
 import _poolRevengeOfRavens from "../pool/revenge-of-ravens.js";
@@ -1426,6 +1427,7 @@ const shard: CardShard = {
     _poolRenegadeRallier,
     _poolRepayInKind,
     _poolRepulsorBlast,
+    _poolRestlessSpire,
     _poolRetroMutation,
     _poolReveilleSquad,
     _poolRevengeOfRavens,

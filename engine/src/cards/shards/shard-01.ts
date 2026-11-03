@@ -793,6 +793,7 @@ import _poolVampiricFeast from "../pool/vampiric-feast.js";
 import _poolVanquishTheHorde from "../pool/vanquish-the-horde.js";
 import _poolVaultGuardsman from "../pool/vault-guardsman.js";
 import _poolVedalkenEntrancer from "../pool/vedalken-entrancer.js";
+import _poolVeiledApparition from "../pool/veiled-apparition.js";
 import _poolVengefulDead from "../pool/vengeful-dead.js";
 import _poolVengefulPossession from "../pool/vengeful-possession.js";
 import _poolVentifactBottle from "../pool/ventifact-bottle.js";
@@ -1661,6 +1662,7 @@ const shard: CardShard = {
     _poolVanquishTheHorde,
     _poolVaultGuardsman,
     _poolVedalkenEntrancer,
+    _poolVeiledApparition,
     _poolVengefulDead,
     _poolVengefulPossession,
     _poolVentifactBottle,

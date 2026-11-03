@@ -91,6 +91,7 @@ import _poolBoilingRockPrison from "../pool/boiling-rock-prison.js";
 import _poolBoneDevourer from "../pool/bone-devourer.js";
 import _poolBoneSabres from "../pool/bone-sabres.js";
 import _poolBontuTheGlorified from "../pool/bontu-the-glorified.js";
+import _poolBrandedBrawlers from "../pool/branded-brawlers.js";
 import _poolBrauliosOfPheresBand from "../pool/braulios-of-pheres-band.js";
 import _poolBrawn from "../pool/brawn.js";
 import _poolBreathstealer from "../pool/breathstealer.js";
@@ -164,6 +165,7 @@ import _poolCreamOfTheCrop from "../pool/cream-of-the-crop.js";
 import _poolCrocanura from "../pool/crocanura.js";
 import _poolCrossroadsCandleguide from "../pool/crossroads-candleguide.js";
 import _poolCrowdOfCinders from "../pool/crowd-of-cinders.js";
+import _poolCrownHunterHireling from "../pool/crown-hunter-hireling.js";
 import _poolCruelRevival from "../pool/cruel-revival.js";
 import _poolCrushingDisappointment from "../pool/crushing-disappointment.js";
 import _poolCrypticCaves from "../pool/cryptic-caves.js";
@@ -957,6 +959,7 @@ const shard: CardShard = {
     _poolBoneDevourer,
     _poolBoneSabres,
     _poolBontuTheGlorified,
+    _poolBrandedBrawlers,
     _poolBrauliosOfPheresBand,
     _poolBrawn,
     _poolBreathstealer,
@@ -1030,6 +1033,7 @@ const shard: CardShard = {
     _poolCrocanura,
     _poolCrossroadsCandleguide,
     _poolCrowdOfCinders,
+    _poolCrownHunterHireling,
     _poolCruelRevival,
     _poolCrushingDisappointment,
     _poolCrypticCaves,

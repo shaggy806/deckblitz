@@ -827,8 +827,10 @@ import _poolUthrosTitanicGodcore from "../pool/uthros-titanic-godcore.js";
 import _poolUtterInsignificance from "../pool/utter-insignificance.js";
 import _poolUyoSilentProphet from "../pool/uyo-silent-prophet.js";
 import _poolVampiricEmbrace from "../pool/vampiric-embrace.js";
+import _poolVantressGargoyle from "../pool/vantress-gargoyle.js";
 import _poolVaultOfWhispers from "../pool/vault-of-whispers.js";
 import _poolVedalkenOutlander from "../pool/vedalken-outlander.js";
+import _poolVeiledSerpent from "../pool/veiled-serpent.js";
 import _poolVengeantEarth from "../pool/vengeant-earth.js";
 import _poolViashinoSlaughtermaster from "../pool/viashino-slaughtermaster.js";
 import _poolVincentVengefulAtoner from "../pool/vincent-vengeful-atoner.js";
@@ -1726,8 +1728,10 @@ const shard: CardShard = {
     _poolUtterInsignificance,
     _poolUyoSilentProphet,
     _poolVampiricEmbrace,
+    _poolVantressGargoyle,
     _poolVaultOfWhispers,
     _poolVedalkenOutlander,
+    _poolVeiledSerpent,
     _poolVengeantEarth,
     _poolViashinoSlaughtermaster,
     _poolVincentVengefulAtoner,

@@ -428,6 +428,7 @@ import _poolLostVale from "../pool/lost-vale.js";
 import _poolLothoCorruptShirriff from "../pool/lotho-corrupt-shirriff.js";
 import _poolLoyalInventor from "../pool/loyal-inventor.js";
 import _poolLunarFrenzy from "../pool/lunar-frenzy.js";
+import _poolLurkingGreenDragon from "../pool/lurking-green-dragon.js";
 import _poolLyevDecree from "../pool/lyev-decree.js";
 import _poolMadblindMountain from "../pool/madblind-mountain.js";
 import _poolMaelstromArtisan from "../pool/maelstrom-artisan.js";
@@ -1277,6 +1278,7 @@ const shard: CardShard = {
     _poolLothoCorruptShirriff,
     _poolLoyalInventor,
     _poolLunarFrenzy,
+    _poolLurkingGreenDragon,
     _poolLyevDecree,
     _poolMadblindMountain,
     _poolMaelstromArtisan,

@@ -12,6 +12,12 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **An animate that grants a whole ability** (2026-11-02, `9bd4a9cd3`): mostly composition; granted statics now bind in
+  `ownStatics`, and `add-types`' `removeSubtypes`; Raging Ravine, Restless Spire, Veiled Serpent, Veiled Apparition, Opal
+  Guardian, Monument to Perfection, Dancing Sword.
+- **A combat restriction's condition read as another player** (2026-11-02, `dafea0768`): one `PlayerTest.holds` replacing
+  the `monarch` and `poisoned` clauses; two of the three keys needed no code; Vantress Gargoyle, Monstrous Hound, Branded
+  Brawlers, Lurking Green Dragon, Crown-Hunter Hireling.
 - **Countering abilities** (2026-11-02, `10039292c`): `counter.thenSource`, the `for-each-on-stack` combinator, narrowed
   stack slots, and Skip on an optional slot over the stack; Disallow needed no code; Green Slime, Ouphe Vandals, Nimble
   Obstructionist, Tishana's Tidebinder, Teferi's Response, Kadena's Silencer, Summary Dismissal.

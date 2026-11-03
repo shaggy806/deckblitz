@@ -525,6 +525,7 @@ import _poolOminousAsylum from "../pool/ominous-asylum.js";
 import _poolOnakkeOathkeeper from "../pool/onakke-oathkeeper.js";
 import _poolOpalArchangel from "../pool/opal-archangel.js";
 import _poolOpalChampion from "../pool/opal-champion.js";
+import _poolOpalGuardian from "../pool/opal-guardian.js";
 import _poolOppressiveRays from "../pool/oppressive-rays.js";
 import _poolOracleOfNectars from "../pool/oracle-of-nectars.js";
 import _poolOracleOfTragedy from "../pool/oracle-of-tragedy.js";
@@ -1408,6 +1409,7 @@ const shard: CardShard = {
     _poolOnakkeOathkeeper,
     _poolOpalArchangel,
     _poolOpalChampion,
+    _poolOpalGuardian,
     _poolOppressiveRays,
     _poolOracleOfNectars,
     _poolOracleOfTragedy,

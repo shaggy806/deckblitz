@@ -167,6 +167,7 @@ import _poolCyclopsOfEternalFury from "../pool/cyclops-of-eternal-fury.js";
 import _poolDaiLiAgents from "../pool/dai-li-agents.js";
 import _poolDakmorLancer from "../pool/dakmor-lancer.js";
 import _poolDalakosCrafterOfWonders from "../pool/dalakos-crafter-of-wonders.js";
+import _poolDancingSword from "../pool/dancing-sword.js";
 import _poolDaringPiracy from "../pool/daring-piracy.js";
 import _poolDarkTriumph from "../pool/dark-triumph.js";
 import _poolDarkslickDrake from "../pool/darkslick-drake.js";
@@ -1058,6 +1059,7 @@ const shard: CardShard = {
     _poolDaiLiAgents,
     _poolDakmorLancer,
     _poolDalakosCrafterOfWonders,
+    _poolDancingSword,
     _poolDaringPiracy,
     _poolDarkTriumph,
     _poolDarkslickDrake,
