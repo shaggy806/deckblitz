@@ -1401,7 +1401,10 @@
   "effect:copy-spell-for-each-chosen-paid",
   "keyword:gravestorm",
   "static:cost-increase-colored",
-  "keyword:offering"
+  "keyword:offering",
+  "replacement:draw-replacement-look-and-choose",
+  "replacement:draw-replacement-except-first",
+  "replacement:draw-replacement-first-each-turn"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

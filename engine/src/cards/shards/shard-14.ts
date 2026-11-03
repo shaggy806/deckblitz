@@ -58,6 +58,7 @@ import _poolBanishmentDecree from "../pool/banishment-decree.js";
 import _poolBantSojourners from "../pool/bant-sojourners.js";
 import _poolBarbarianOutcast from "../pool/barbarian-outcast.js";
 import _poolBardClass from "../pool/bard-class.js";
+import _poolBardKingOfDale from "../pool/bard-king-of-dale.js";
 import _poolBarkOfDoran from "../pool/bark-of-doran.js";
 import _poolBarrageOfBoulders from "../pool/barrage-of-boulders.js";
 import _poolBarrinsCodex from "../pool/barrins-codex.js";
@@ -954,6 +955,7 @@ const shard: CardShard = {
     _poolBantSojourners,
     _poolBarbarianOutcast,
     _poolBardClass,
+    _poolBardKingOfDale,
     _poolBarkOfDoran,
     _poolBarrageOfBoulders,
     _poolBarrinsCodex,

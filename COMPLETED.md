@@ -12,6 +12,9 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **A draw replaced by an effect, and draw-N exemptions** (2026-11-03, `FAM1`): `would-draw`'s `instead: { effect }`
+  (rule 614.11) and `exceptFirstInDrawStep` / `firstEachTurn` on its replacements. Underrealm Lich, Tomorrow, Azami's
+  Familiar, Sages of the Anima, Teferi's Ageless Insight, Reed Richards, Smartest Man, Bard, King of Dale.
 - **Secret choices** (2026-11-03, `5b1a2ff17`): `GameObject.secretChoice`, made as a permanent enters or on resolution and
   hidden per seat until a `revealChosen` cost; also player protection from a player and a plain `onlyOnce`. Stalking Leonin,
   Guardian Archon, Emissary of Grudges, A Killer Among Us, Goblin Game.

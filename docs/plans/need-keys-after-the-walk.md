@@ -841,6 +841,10 @@ missing. Re-run `--greedy` for Phase 2's order.
 - **2026-11-03: overnight, three agents at once.** `filter:blocking-trigger-object`, `amount:creatures-blocking-it` with
   `effect:amount-creatures-blocking-it` and `condition:source-blocked-by-at-least-one`, `static:cost-increase-colored`,
   `keyword:offering`, `decision:secret-choice` with `effect:protection-from-player-for-permanent`.
+- **2026-11-03: `replacement:new-event-replacements`, its draw units.** `would-draw`'s `instead: { effect }` and the
+  except-first and first-each-turn exemptions (`draw-replacement-look-and-choose`, `-except-first`, `-first-each-turn`);
+  Underrealm Lich, Tomorrow, Sages of the Anima, Teferi's Ageless Insight, Reed Richards, Bard. Left: the reveal key and
+  the family's graveyard-destination and counter-scope groups.
 
 ## Rough size
 

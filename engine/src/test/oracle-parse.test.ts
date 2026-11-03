@@ -9544,6 +9544,51 @@ describe("a static acting on a player", () => {
     expect(opponents.static[0].replacement).toEqual({ event: "would-begin-turn", who: "opponent", extraOnly: true });
   });
 
+  it("reads a would-draw replacement: draw N, its exemptions, an effect instead (rule 614.11)", () => {
+    const insight = face(
+      "Legendary Enchantment",
+      "If you would draw a card except the first one you draw in each of your draw steps, draw two cards instead.",
+    );
+    expect(insight.complete).toBe(true);
+    expect(insight.static[0].replacement).toEqual({ event: "would-draw", who: "you", instead: { draws: 2 }, exceptFirstInDrawStep: true });
+    const reed = face(
+      "Legendary Creature",
+      "The first time you would draw a card each turn except the first card you draw during each of your draw steps, you draw four cards instead.",
+    );
+    expect(reed.complete).toBe(true);
+    expect(reed.static[0].replacement).toEqual({
+      event: "would-draw",
+      who: "you",
+      instead: { draws: 4 },
+      exceptFirstInDrawStep: true,
+      firstEachTurn: true,
+    });
+    const lich = face(
+      "Creature",
+      "If you would draw a card, instead look at the top three cards of your library, then put one into your hand and the rest into your graveyard.",
+    );
+    expect(lich.complete).toBe(true);
+    expect(lich.static[0].replacement).toEqual({
+      event: "would-draw",
+      who: "you",
+      instead: {
+        effect: { kind: "look-and-choose", zone: "library", count: 3, min: 1, max: 1, destination: "hand", leftover: "graveyard" },
+      },
+    });
+    const tomorrow = face(
+      "Legendary Creature",
+      "If you would draw a card, look at the top three cards of your library instead. Put one of those cards into your hand and the rest on the bottom of your library in any order.",
+    );
+    expect(tomorrow.complete).toBe(true);
+    expect(tomorrow.static[0].replacement).toEqual({
+      event: "would-draw",
+      who: "you",
+      instead: {
+        effect: { kind: "look-and-choose", zone: "library", count: 3, min: 1, max: 1, destination: "hand", leftover: "bottom-any-order" },
+      },
+    });
+  });
+
   it("reads Abyssal Persecutor's inverse pair", () => {
     const demon = face("Creature — Demon", "You can't win the game and your opponents can't lose the game.");
     expect(demon.complete).toBe(true);

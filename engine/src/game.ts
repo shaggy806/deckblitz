@@ -169,6 +169,7 @@ import { planTokenEvent } from "./token-replacements.js";
 import type { PlannedTokens, TokenKind, TokenReplacementInstance } from "./token-replacements.js";
 import type {
   DamageMultiplierReplacement,
+  DrawRedirectReplacement,
   EnterInstead,
   GraveyardExileReplacement,
   LifeGainReplacement,
@@ -796,6 +797,25 @@ function runDamageSteps(
     }
   }
   return { dealt: Math.max(0, total), ...rest() };
+}
+
+/** One draw event, as `Game.noteWouldDraw` saw it: whether it's the first
+ * card its player would draw in their own draw step, and their draw events
+ * this turn before it. */
+interface WouldDrawEvent {
+  readonly firstInDrawStep: boolean;
+  readonly before: { readonly all: number; readonly exceptDrawStepFirst: number };
+}
+
+/** Whether a `would-draw` replacement of the drawing player's reaches this
+ * draw `event`: not the first card of their draw step when it says "except
+ * the first one you draw in each of your draw steps", and only the turn's
+ * first (non-exempt) draw event when it says "the first time you would draw
+ * a card each turn". */
+function drawReplacementReaches(r: DrawRedirectReplacement, event: WouldDrawEvent): boolean {
+  if (r.exceptFirstInDrawStep === true && event.firstInDrawStep) return false;
+  if (r.firstEachTurn !== true) return true;
+  return (r.exceptFirstInDrawStep === true ? event.before.exceptDrawStepFirst : event.before.all) === 0;
 }
 
 /** How much damage a prevention shield can still take: a "next time" shield
@@ -8191,6 +8211,7 @@ export class Game {
       delete this.state.players[player].combatDamageCreatureTypesThisTurn;
       this.state.players[player].cardsDrawnThisTurn = 0;
       this.state.players[player].drewInDrawStepThisTurn = false;
+      delete this.state.players[player].wouldDrawThisTurn;
       this.state.players[player].spellsCastThisTurnAs = [];
       this.state.players[player].creaturesDiedThisTurn = 0;
       this.state.players[player].createdTokenThisTurn = false;
@@ -29834,9 +29855,17 @@ export class Game {
           // stack from emitting millions of identical events.
           const from = this.eventualDrawer(player);
           const empty = this.state.zones.perPlayer[from].library.length === 0;
+          const unasked = this.state.awaiting === null;
           this.drawCard(player);
           // A draw replaced by a win (Laboratory Maniac) ended the game.
           if (empty || this.state.result.over) break;
+          // A draw replaced by an effect that asks something (Underrealm
+          // Lich's look at three): it's answered before the next card is
+          // drawn (rule 614.11a), so the rest wait their turn.
+          if (unasked && this.state.awaiting !== null && i + 1 < count) {
+            (this.state.pendingDraws ??= []).push({ player, count: count - i - 1 });
+            return;
+          }
         }
       },
       playersInScope: (who) => scoped(who),
@@ -48443,6 +48472,9 @@ export class Game {
     // rulings). Applied before an opponent's redirect (Notion Thief), the
     // order the drawing player would pick (rule 616.1) whenever they can win.
     if (this.drawWonInstead(player)) return;
+    // The draw event itself, before anything replaces it: what "the first
+    // time you would draw a card each turn" reads.
+    const drawEvent = this.noteWouldDraw(player);
     // would-draw redirect (Notion Thief — rule 614 / ROADMAP Phase 11 EG-6):
     // "If an opponent would draw a card except the first one they draw in
     // each of their draw steps, instead that player skips that draw and you
@@ -48468,10 +48500,22 @@ export class Game {
       this.drawCardRaw(drawer);
       return;
     }
+    // "If you would draw a card, instead look at the top three cards of your
+    // library, then put one into your hand…" (Underrealm Lich): the draw
+    // becomes the effect, which applies though the library is empty (rule
+    // 614.11). Taken before a "draw N instead" on the same draw — one of the
+    // orders the drawing player could pick (616.1).
+    const replacing = this.drawEffectReplacementFor(player, drawEvent);
+    if (replacing !== null) {
+      const ctx = this.makeResolutionContext(replacing.source, player, []);
+      if (this.state.awaiting !== null) ctx.resumeAfterDecisions(replacing.effect);
+      else applyEffectSpec(replacing.effect, ctx);
+      return;
+    }
     // "If you would draw a card, draw N cards instead" — those N aren't
     // replaced again by it (rule 614.5), though one that finds the library
     // empty is Laboratory Maniac's to replace (616.2).
-    const draws = this.drawCountFor(player);
+    const draws = this.drawCountFor(player, drawEvent);
     for (let i = 0; i < draws && !this.state.result.over; i += 1) {
       if (!this.drawWonInstead(player)) this.drawCardRaw(player);
     }
@@ -48525,6 +48569,9 @@ export class Game {
     if (object === undefined || object.zone !== "graveyard" || object.owner !== player) return;
     const n = this.dredgeOf(card);
     if (n <= 0 || this.state.zones.perPlayer[player].library.length < n) return;
+    // Still a draw event, though replaced (the turn's "first time you would
+    // draw" was this one).
+    this.noteWouldDraw(player);
     this.millByEffect({ kind: "player", player }, n);
     if (this.state.objects[card]?.zone === "graveyard") this.moveObject(card, "hand");
   }
@@ -48545,20 +48592,70 @@ export class Game {
    * "four times the original number of cards"): each applies to every draw
    * the others make, though not again to its own (rule 614.5), so they
    * multiply, whatever order they're applied in. A token stack is that many
-   * effects. */
-  private drawCountFor(player: PlayerId): number {
+   * effects.
+   *
+   * One that says "except the first one you draw in each of your draw
+   * steps" (Teferi's Ageless Insight) passes that draw by. One for "the first
+   * time you would draw a card each turn" (Reed Richards, Smartest Man)
+   * applies to that draw event alone, so the draws it or another makes can't
+   * meet it again: at most one of those applies, the biggest — taken before
+   * the others, which then apply to each card it draws (rule 616.1: the
+   * order the drawing player would pick for the most cards). */
+  private drawCountFor(player: PlayerId, event: WouldDrawEvent): number {
     let draws = 1;
+    let firstEachTurn = 1;
     for (const id of this.state.zones.shared.battlefield) {
       const source = this.state.objects[id];
       if (hasLostAbilities(this.state, this.registry,source) || source.controller !== player) continue;
       for (const ability of this.registry.get(rulesTextName(source)).static) {
         const r = ability.replacement;
-        if (r?.event !== "would-draw" || r.who !== "you" || typeof r.instead !== "object") continue;
-        if (!this.staticActive(source, ability)) continue;
-        draws *= r.instead.draws ** (source.stackCount ?? 1);
+        if (r?.event !== "would-draw" || r.who !== "you" || typeof r.instead !== "object" || !("draws" in r.instead)) continue;
+        if (!drawReplacementReaches(r, event) || !this.staticActive(source, ability)) continue;
+        if (r.firstEachTurn === true) firstEachTurn = Math.max(firstEachTurn, r.instead.draws);
+        else draws *= r.instead.draws ** (source.stackCount ?? 1);
       }
     }
-    return draws;
+    return draws * firstEachTurn;
+  }
+
+  /** Counts a draw event of `player`'s in the turn's history
+   * (`PlayerState.wouldDrawThisTurn`), and says what it was: whether it's the
+   * first card they'd draw in their own draw step, and how many came before
+   * it this turn. Every draw event, replaced or not. */
+  private noteWouldDraw(player: PlayerId): WouldDrawEvent {
+    const seat = this.state.players[player];
+    const firstInDrawStep =
+      this.state.turn.step === "draw" && player === this.activePlayer && seat?.drewInDrawStepThisTurn !== true;
+    const before = seat?.wouldDrawThisTurn ?? { all: 0, exceptDrawStepFirst: 0 };
+    if (seat !== undefined) {
+      seat.wouldDrawThisTurn = {
+        all: before.all + 1,
+        exceptDrawStepFirst: before.exceptDrawStepFirst + (firstInDrawStep ? 0 : 1),
+      };
+    }
+    return { firstInDrawStep, before: { ...before } };
+  }
+
+  /** The `would-draw` effect replacement (`DrawReplacedByEffect` —
+   * Underrealm Lich) that replaces this draw `event` of `player`'s, with the
+   * permanent it's from: one of theirs, the first in battlefield order when
+   * several could (they're the drawing player's to order, rule 616.1), or
+   * `null`. */
+  private drawEffectReplacementFor(
+    player: PlayerId,
+    event: WouldDrawEvent,
+  ): { readonly source: ObjectId; readonly effect: EffectSpec } | null {
+    for (const id of this.state.zones.shared.battlefield) {
+      const source = this.state.objects[id];
+      if (source === undefined || source.controller !== player || hasLostAbilities(this.state, this.registry, source)) continue;
+      for (const ability of this.registry.get(rulesTextName(source)).static) {
+        const r = ability.replacement;
+        if (r?.event !== "would-draw" || r.who !== "you" || typeof r.instead !== "object" || !("effect" in r.instead)) continue;
+        if (!drawReplacementReaches(r, event) || !this.staticActive(source, ability)) continue;
+        return { source: id, effect: r.instead.effect };
+      }
+    }
+    return null;
   }
 
   /** The `would-mill` and `would-gain-life` replacements that reach

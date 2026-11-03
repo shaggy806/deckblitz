@@ -832,6 +832,7 @@ import _poolTifaLockhart from "../pool/tifa-lockhart.js";
 import _poolTilonallisSkinshifter from "../pool/tilonallis-skinshifter.js";
 import _poolTimbercrownPathway from "../pool/timbercrown-pathway.js";
 import _poolTombstoneCareerCriminal from "../pool/tombstone-career-criminal.js";
+import _poolTomorrowAzamisFamiliar from "../pool/tomorrow-azamis-familiar.js";
 import _poolTooEvilToStayDead from "../pool/too-evil-to-stay-dead.js";
 import _poolToothAndClaw from "../pool/tooth-and-claw.js";
 import _poolTorchFiend from "../pool/torch-fiend.js";
@@ -1780,6 +1781,7 @@ const shard: CardShard = {
     _poolTilonallisSkinshifter,
     _poolTimbercrownPathway,
     _poolTombstoneCareerCriminal,
+    _poolTomorrowAzamisFamiliar,
     _poolTooEvilToStayDead,
     _poolToothAndClaw,
     _poolTorchFiend,

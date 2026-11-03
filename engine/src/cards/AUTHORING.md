@@ -6068,6 +6068,22 @@ clause (section 9):
   and two against one leaves it with the two. `{ event: "would-draw", who: "you", instead: { draws: N } }` is "if
   you would draw a card, draw N cards instead" (gate it with the static's
   `condition`); neither applies again to the draws it makes (rule 614.5).
+  Several multiply (Thought Reflection twice is four). `exceptFirstInDrawStep:
+  true` on it passes by the first card you draw in each of your draw steps
+  (Teferi's Ageless Insight, Bard, King of Dale); `firstEachTurn: true` makes
+  it "the first time you would draw a card each turn" (Reed Richards,
+  Smartest Man, with both) — the turn's first draw event, read from the
+  turn's history (`PlayerState.wouldDrawThisTurn`), so one arriving after it
+  waits for the next turn, and at most one such applies to an event.
+  `{ event: "would-draw", who: "you", instead: { effect: <EffectSpec> } }` is a
+  draw replaced by an effect: Underrealm Lich's "instead look at the top three
+  cards of your library, then put one into your hand and the rest into your
+  graveyard" (a `look-and-choose`), Sages of the Anima's reveal-three,
+  Tomorrow, Azami's Familiar's. It applies though the library is empty (rule
+  614.11: no loss for it), the card isn't drawn (no draw trigger or count),
+  and each draw of several is finished, its choice answered, before the next
+  (614.11a). It takes the exemptions too, and is applied before a "draw N"
+  on the same draw. Its effect mustn't draw unless it's `firstEachTurn`.
   `{ event: "would-draw", who: "you", instead: "win-game", whileLibraryEmpty:
   true }` is Laboratory Maniac's "if you would draw a card while your library
   has no cards in it, you win the game instead" (rule 614.11: it applies

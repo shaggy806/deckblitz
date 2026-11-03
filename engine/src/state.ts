@@ -2665,6 +2665,15 @@ export interface PlayerState {
    * draw steps" (Xyris, the Writhing Storm; Orcish Bowmasters). Reset in
    * `beginTurn`. Optional so an older snapshot still loads. */
   drewInDrawStepThisTurn?: boolean;
+  /** How many times this player would have drawn a card this turn — each
+   * single draw event, before any replacement (rule 614.11), the
+   * turn-based draw included: `all` of them, and `exceptDrawStepFirst` those
+   * that weren't the first card they'd draw in their own draw step. What a
+   * `would-draw` replacement's "the first time you would draw a card each
+   * turn" reads (Reed Richards, Smartest Man; Scion of Halaster) — history,
+   * so one that arrives after the turn's first draw doesn't apply that turn.
+   * Reset in `beginTurn`. */
+  wouldDrawThisTurn?: { all: number; exceptDrawStepFirst: number };
   /** The spells this player has cast this turn, in order, each as it was
    * cast — see {@link CastSpellRecord}. What "your first enchantment spell
    * each turn" counts (Tuvasa: a cast trigger with a `filter` counts

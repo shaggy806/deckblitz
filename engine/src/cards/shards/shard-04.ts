@@ -792,6 +792,7 @@ import _poolUlvenwaldAbomination from "../pool/ulvenwald-abomination.js";
 import _poolUnburiedEarthcarver from "../pool/unburied-earthcarver.js";
 import _poolUncomfortableChill from "../pool/uncomfortable-chill.js";
 import _poolUnderfootUnderdogs from "../pool/underfoot-underdogs.js";
+import _poolUnderrealmLich from "../pool/underrealm-lich.js";
 import _poolUnflinchingHortimancer from "../pool/unflinching-hortimancer.js";
 import _poolUnimpededTrespasser from "../pool/unimpeded-trespasser.js";
 import _poolUnstableExperiment from "../pool/unstable-experiment.js";
@@ -1672,6 +1673,7 @@ const shard: CardShard = {
     _poolUnburiedEarthcarver,
     _poolUncomfortableChill,
     _poolUnderfootUnderdogs,
+    _poolUnderrealmLich,
     _poolUnflinchingHortimancer,
     _poolUnimpededTrespasser,
     _poolUnstableExperiment,
