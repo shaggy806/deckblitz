@@ -1488,6 +1488,11 @@ export type TriggerSpec =
        * player attacked by at least one of them, and `{ triggerValue: true }`
        * counts only them. */
       readonly filter?: CardFilter;
+      /** At least this many of them attack that player: Landroval, Horizon
+       * Witness's "whenever **two or more** creatures you control attack a
+       * player". Each player attacked is judged alone, so two creatures split
+       * across two players don't fire it. */
+      readonly atLeast?: number;
       /** How the attacked player's life total ranks — Breena's "if that
        * opponent has more life than another of your opponents". See
        * {@link DefenderLife}. */
@@ -1965,7 +1970,22 @@ export type TriggerSpec =
        */
       readonly on: "attack-with";
       readonly who: TriggerWho;
-      readonly atLeast: number;
+      /** How many must count; 1 when absent ("whenever you attack with
+       * creatures with total power 12 or greater"). */
+      readonly atLeast?: number;
+      /** Exactly this many, in place of `atLeast`: Alluring Suitor's "when you
+       * attack with **exactly two** creatures". */
+      readonly exactly?: number;
+      /** "Creatures with total power 12 or greater" (Desert Were-Worm): the
+       * whole declaration's total power as it was declared (rule 508.1k —
+       * `TurnHistory.attackedPower`), `filter` or none. `firstTimeEachTurn`:
+       * only if no earlier declaration this turn reached it, counting one
+       * made before this permanent arrived, or one that didn't fire it. */
+      readonly totalPower?: { readonly atLeast: number; readonly firstTimeEachTurn?: true };
+      /** This permanent is one of those counted: Creepy Puppeteer's "whenever
+       * **this creature** attacks, if you attacked with exactly one other
+       * creature this combat" is `exactly: 2` with this. */
+      readonly includingThis?: true;
       readonly filter?: CardFilter;
       /** Count only this permanent and your commanders — "whenever you
        * attack with this creature **and/or your commander**" (Ainok Strike

@@ -10423,7 +10423,7 @@ export class Game {
       const stillHere = live?.zone === "battlefield" && (live.zoneChangeCount ?? 0) === a.zoneChangeCount;
       return atYou(stillHere ? live.attacking : a.at);
     });
-    return counted.length >= trigger.atLeast;
+    return counted.length >= (trigger.atLeast ?? 1);
   }
 
   /**
@@ -10739,7 +10739,12 @@ export class Game {
     // trigger after this, and a creature put onto the battlefield attacking
     // was never declared (508.4). A counted stack is every token in it.
     invalidateComputedCache();
-    (this.state.players[player].turnHistory ??= {}).attackedPower = {
+    const turnHistory = (this.state.players[player].turnHistory ??= {});
+    const earlierPower = turnHistory.attackedPower;
+    turnHistory.attackedPower = {
+      ...(earlierPower !== undefined
+        ? { earlierMost: Math.max(earlierPower.power, earlierPower.earlierMost ?? earlierPower.power) }
+        : {}),
       combat: this.state.turn.combatPhases ?? 1,
       power: declaredNow.reduce(
         (total, { id }) =>
@@ -25616,7 +25621,7 @@ export class Game {
       if (!this.triggerMatches(at.whenever, event, object)) continue;
       const triggerObject = this.eventTriggerObject(at.whenever, event);
       const triggerValue = this.triggerValueOf(at.whenever, event, object);
-      const refs = this.refsAtTrigger(source, undefined, event, triggerObject);
+      const refs = this.withAttackedTogether(this.refsAtTrigger(source, undefined, event, triggerObject), at.whenever, event, object);
       const pending: PendingTrigger = {
         sourceObjectId: trigger.source,
         cardName: trigger.sourceName,
@@ -25950,20 +25955,7 @@ export class Game {
                 : // "Whenever players finish voting": that vote's votes.
                   ability.trigger.on === "players-finish-voting" && event.type === "votes-finished"
                   ? { ...(atTrigger ?? {}), votes: event.votes }
-                  : // "Among them": the attackers that counted for it.
-                    (ability.trigger.on === "attacks-batch" || ability.trigger.on === "attack-with") &&
-                      event.type === "attackers-declared"
-                    ? {
-                        ...(atTrigger ?? {}),
-                        attackedTogether: (ability.trigger.on === "attacks-batch"
-                          ? this.batchedAttackers(ability.trigger, event.attackers, object)
-                          : this.attackWithCounted(ability.trigger, event.attackers, object)
-                        ).map((attacker) => ({
-                          object: attacker,
-                          zoneChangeCount: this.state.objects[attacker]?.zoneChangeCount ?? 0,
-                        })),
-                      }
-                    : atTrigger;
+                  : this.withAttackedTogether(atTrigger, ability.trigger, event, object);
           // A printed ability its text box came with (rule 612.5) is that
           // card's, which it stays however this permanent changes.
           const textName = lastSeen !== undefined ? lastSeen.textName : textNameOf(object);
@@ -26645,6 +26637,54 @@ export class Game {
     });
   }
 
+  /** `refs` with "among them", "those creatures": the attackers that counted
+   * for this trigger, if it's one fired by attackers being declared. */
+  private withAttackedTogether(
+    refs: LastKnownRefs | undefined,
+    spec: TriggerSpec,
+    event: GameEvent,
+    self: GameObject,
+  ): LastKnownRefs | undefined {
+    const counted =
+      spec.on === "attacks-batch" && event.type === "attackers-declared"
+        ? this.batchedAttackers(spec, event.attackers, self)
+        : spec.on === "attack-with" && event.type === "attackers-declared"
+          ? this.attackWithCounted(spec, event.attackers, self)
+          : spec.on === "attacks-player" && event.type === "player-attacked"
+            ? this.batchedAttackers(spec, event.attackers, self)
+            : undefined;
+    if (counted === undefined) return refs;
+    return {
+      ...(refs ?? {}),
+      attackedTogether: counted.map((attacker) => ({
+        object: attacker,
+        zoneChangeCount: this.state.objects[attacker]?.zoneChangeCount ?? 0,
+      })),
+    };
+  }
+
+  /** Does this declaration satisfy an `attack-with` trigger: how many count,
+   * this permanent among them, the declaration's total power? */
+  private attackWithSatisfied(
+    spec: Extract<TriggerSpec, { on: "attack-with" }>,
+    player: PlayerId,
+    attackers: readonly ObjectId[],
+    self: GameObject,
+  ): boolean {
+    const counted = this.attackWithCounted(spec, attackers, self);
+    const n = this.creatureCount(counted);
+    if (spec.exactly !== undefined ? n !== spec.exactly : n < (spec.atLeast ?? 1)) return false;
+    if (spec.includingThis === true && !counted.includes(self.id)) return false;
+    if (spec.totalPower === undefined) return true;
+    const declared = this.state.players[player]?.turnHistory?.attackedPower;
+    if (declared === undefined || declared.power < spec.totalPower.atLeast) return false;
+    return (
+      spec.totalPower.firstTimeEachTurn !== true ||
+      declared.earlierMost === undefined ||
+      declared.earlierMost < spec.totalPower.atLeast
+    );
+  }
+
   private batchedAttackers(
     spec: Extract<TriggerSpec, { on: "attacks-batch" | "attacks-player" }>,
     attackers: readonly ObjectId[],
@@ -26944,7 +26984,7 @@ export class Game {
           event.type === "player-attacked" &&
           this.matchesWhoPlayer(spec.who, event.player, self) &&
           this.matchesWhoPlayer(spec.defender, event.defender, self) &&
-          this.batchedAttackers(spec, event.attackers, self).length > 0 &&
+          this.creatureCount(this.batchedAttackers(spec, event.attackers, self)) >= (spec.atLeast ?? 1) &&
           (spec.defenderHasInitiative !== true || this.state.initiative === event.defender) &&
           (spec.defenderLife === undefined ||
             this.defenderLifeRanks(spec.defenderLife, event.defender, self.controller))
@@ -27188,7 +27228,7 @@ export class Game {
         if (event.type !== "attackers-declared") return false;
         if (spec.who === "you" && event.player !== self.controller) return false;
         if (spec.who === "opponent" && event.player === self.controller) return false;
-        return this.attackWithCounted(spec, event.attackers, self).length >= spec.atLeast;
+        return this.attackWithSatisfied(spec, event.player, event.attackers, self);
       }
       case "fights":
         return (

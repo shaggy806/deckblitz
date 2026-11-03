@@ -2237,11 +2237,13 @@ export interface LastKnownRefs {
     readonly zoneChangeCount: number;
     readonly at: PlayerId | ObjectId | null;
   }[];
-  /** "Among them", "their total power" (Aloy, Savior of Meridian; Vulpine
-   * Harvester): the attackers that counted for the `attacks-batch` or
-   * `attack-with` trigger that fired — the ones its filter matched as they
-   * were declared — each with its battlefield stint. What an aggregate `in:
-   * "attackers"` reads as the ability resolves, whatever they've become
+  /** "Among them", "their total power", "those creatures" (Aloy, Savior of
+   * Meridian; Vulpine Harvester; Lightmine Field): the attackers that counted
+   * for the `attacks-batch`, `attack-with` or `attacks-player` trigger that
+   * fired — the ones its filter matched as they were declared, of
+   * `attacks-player` only those attacking that player — each with its
+   * battlefield stint. What an aggregate `in: "attackers"` and a filter's
+   * `triggerBatch` read as the ability resolves, whatever they've become
    * since (the rulings: "even if the creature is … no longer a Phyrexian"). */
   readonly attackedTogether?: readonly { readonly object: ObjectId; readonly zoneChangeCount: number }[];
   /** "One of them" (Colossal Grave-Reaver): the cards of the move a batched
@@ -4515,8 +4517,10 @@ export interface TurnHistory {
   /** The total power of the creatures this player last declared as attackers
    * this turn, read as they were declared, and which of the turn's combat
    * phases that was (`TurnState.combatPhases`) — `TurnStat`'s
-   * `"power-attacked-with-this-combat"`. */
-  attackedPower?: { readonly combat: number; readonly power: number };
+   * `"power-attacked-with-this-combat"`. `earlierMost` is the greatest such
+   * total of the turn's earlier declarations, for `attack-with`'s "for the
+   * first time each turn" (Desert Were-Worm). */
+  attackedPower?: { readonly combat: number; readonly power: number; readonly earlierMost?: number };
 }
 
 /** Where a permanent can go when it leaves the battlefield. */

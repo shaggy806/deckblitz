@@ -10688,6 +10688,30 @@ describe("an unless whose way out is an effect of its own", () => {
   });
 });
 
+describe("an attack read as one batch", () => {
+  const triggered = (text: string) =>
+    (parseFace({ name: "Thing", type_line: "Enchantment", oracle_text: text }) as unknown as {
+      triggered: { trigger: unknown; effect: unknown }[];
+    }).triggered[0];
+
+  it("reads exact counts, total power and per-player counts", () => {
+    expect(parseTrigger("Whenever you attack with two or more creatures")).toEqual([{ on: "attack-with", who: "you", atLeast: 2 }]);
+    expect(parseTrigger("When you attack with exactly two creatures")).toEqual([{ on: "attack-with", who: "you", exactly: 2 }]);
+    expect(parseTrigger("Whenever you attack with creatures with total power 12 or greater for the first time each turn")).toEqual([
+      { on: "attack-with", who: "you", totalPower: { atLeast: 12, firstTimeEachTurn: true } },
+    ]);
+    expect(parseTrigger("Whenever two or more creatures you control attack a player")).toEqual([
+      { on: "attacks-player", who: "you", defender: "any", atLeast: 2 },
+    ]);
+    expect(parseTrigger("Whenever one or more creatures attack you")).toEqual([{ on: "attacks-player", who: "any", defender: "you" }]);
+    expect(parseTrigger("Whenever one or more creatures attack")).toEqual([{ on: "attacks-batch", who: "any" }]);
+    expect(parseTrigger("Whenever one or more creatures you control with power 4 or greater attack")).toEqual([
+      { on: "attacks-batch", who: "you", filter: { type: "creature", power: { op: "gte", n: 4 } } },
+    ]);
+  });
+
+});
+
 describe("an effect done by another player", () => {
   it("reads 'target player scries N' as as-player, on a player slot", () => {
     const parsed = parseEffect("Target player scries 2.", ctx());

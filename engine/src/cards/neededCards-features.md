@@ -4077,6 +4077,19 @@ Palette, Sunglasses of Urza, Abstruse Appropriation. Left: "Spend only black man
 Atalya) needs its own narrow key; North Star's one-spell permission and Grell Philosopher stay on
 spend-mana-as-any-color.
 
+### Counts and total power on an attack — built 2026-11-02
+
+The need-keys Phase 2 family `trigger:combat-trigger-extensions`, its unit of
+attack counts, features only. `attack-with` takes `exactly`, `totalPower: {
+atLeast, firstTimeEachTurn? }` (the declaration's power as declared, off
+`TurnHistory.attackedPower`, whose `earlierMost` remembers the turn's earlier
+declarations) and `includingThis`, and its `atLeast` defaults to 1;
+`attacks-player` takes `atLeast`, each player attacked judged alone. "That many"
+ran already, as `{ triggerValue: true }` on `attacks-batch`. Keys:
+attack-with-exactly, attack-with-total-power, attacks-player-at-least,
+attack-with-count-amount. Proving cards: Alluring Suitor, Desert Were-Worm, Horn
+of the Mark, Landroval, Horizon Witness, Grand Warlord Radha, The Earth King.
+
 ### Damage replacements from another source, by a live amount, and for the turn — built 2026-11-02
 
 The need-keys Phase 2 family `replacement:damage-modification`, features only. A `would-deal-damage`

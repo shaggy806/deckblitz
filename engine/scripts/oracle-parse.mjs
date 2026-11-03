@@ -1758,6 +1758,34 @@ export function parseTrigger(clause) {
     return [{ on: "explores", who: "you", filter: { type: "creature" }, ...(m[1] ? { revealed: m[1] } : {}) }];
   }
   if (/^Whenever you attack$/.test(c)) return [{ on: "attack-with", who: "you", atLeast: 1 }];
+  // "Whenever you attack with two or more creatures", "with exactly two",
+  // "creatures with total power 12 or greater for the first time each turn".
+  if ((m = /^Whenever you attack with (two|three|four|five|six|seven|eight|nine|ten) or more creatures$/.exec(c))) {
+    return [{ on: "attack-with", who: "you", atLeast: NUMBERS[m[1]] }];
+  }
+  if ((m = /^When(?:ever)? you attack with exactly (two|three|four|five) creatures$/.exec(c))) {
+    return [{ on: "attack-with", who: "you", exactly: NUMBERS[m[1]] }];
+  }
+  if ((m = /^Whenever you attack with creatures with total power (\d+) or greater( for the first time each turn)?$/.exec(c))) {
+    const totalPower = { atLeast: Number(m[1]), ...(m[2] ? { firstTimeEachTurn: true } : {}) };
+    return [{ on: "attack-with", who: "you", totalPower }];
+  }
+  // "Whenever two or more creatures you control attack a player": each player
+  // attacked judged alone (Landroval, Horizon Witness).
+  if ((m = /^Whenever (two|three|four|five) or more creatures you control attack a player$/.exec(c))) {
+    return [{ on: "attacks-player", who: "you", defender: "any", atLeast: NUMBERS[m[1]] }];
+  }
+  // "Whenever one or more creatures attack you / one of your opponents": once
+  // per player attacked; `triggerBatch` is those attacking that player.
+  if (c === "Whenever one or more creatures attack you") return [{ on: "attacks-player", who: "any", defender: "you" }];
+  if (c === "Whenever one or more creatures attack one of your opponents") {
+    return [{ on: "attacks-player", who: "any", defender: "opponent" }];
+  }
+  if (c === "Whenever one or more creatures attack") return [{ on: "attacks-batch", who: "any" }];
+  if ((m = /^Whenever one or more creatures you control(?: with power (\d+) or greater)? attack$/.exec(c))) {
+    const filter = m[1] ? { filter: { type: "creature", power: { op: "gte", n: Number(m[1]) } } } : {};
+    return [{ on: "attacks-batch", who: "you", ...filter }];
+  }
   // "Whenever one or more Merfolk you control attack a player": once per
   // player, by the attackers that match (Attuma, Atlantean Warlord).
   if ((m = /^Whenever one or more (.+?) you control attack a player$/.exec(c))) {
