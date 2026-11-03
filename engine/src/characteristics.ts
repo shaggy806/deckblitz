@@ -4849,6 +4849,15 @@ function collectStaticEffects(
             ? (target.counters[per.countersOnAffected] ?? 0)
             : per.countersOnSource !== undefined
             ? (source.counters[per.countersOnSource] ?? 0)
+            : per.exiledWithSourceManaValue === true
+            ? state.zones.shared.exile.reduce((total, id) => {
+                const card = state.objects[id];
+                const stint = source.zoneChangeCount ?? 0;
+                const withIt = [card?.exiledWith, card?.exiledUntil].some(
+                  (link) => link?.source === source.id && link.zoneChangeCount === stint,
+                );
+                return withIt && card.exiledFaceDown === undefined ? total + manaValueOfObject(registry, card) : total;
+              }, 0)
             : per.exiled !== undefined
             ? exiledMatching(per.exiled)
             : per.inGraveyard !== undefined

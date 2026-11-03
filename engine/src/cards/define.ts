@@ -2066,6 +2066,10 @@ export interface StaticAbility {
      * "creatures you control of the chosen type get +1/+1 for each charge
      * counter on this artifact". */
     readonly countersOnSource?: string;
+    /** The total mana value of the face-up cards exiled with this permanent
+     * in this stint (rule 607.2a) — Idris, Soul of the TARDIS's "+X/+X, where
+     * X is the exiled card's mana value". */
+    readonly exiledWithSourceManaValue?: true;
     /** Cards in exile matching a filter — Umbris, Fear Manifest's "+1/+1 for
      * each card your opponents own in exile" is `{ ownedBy: "opponent" }`.
      * Face-down cards count; they're still cards. */
@@ -2573,19 +2577,6 @@ export interface StaticAbility {
    * them so printed-ability indices stay stable. */
   readonly grantsActivated?: readonly ActivatedAbility[];
   /**
-   * The activated abilities of every card exiled **with this permanent**
-   * (an `exile { linked }` — rule 607.2a), granted to every object it
-   * `affects` like `grantsActivated` — Steward of the Harvest's "creatures
-   * you control have all activated abilities of all land cards exiled with
-   * this creature". Read live: a card that leaves exile takes its abilities
-   * with it. Only abilities that work on the battlefield (none with a
-   * `zone`); a typed land's printed mana ability is its intrinsic one (rule
-   * 305.6), so a Forest card gives "{T}: Add {G}". An ability naming its card
-   * means the permanent that has it (the ruling) — `sacrifice: "self"`
-   * sacrifices the creature.
-   */
-  readonly grantsActivatedOfLinkedExile?: true;
-  /**
    * "[This] has all activated abilities of [each matching object in a zone]"
    * (rule 613.1f, layer 6), granted to every object it `affects` like
    * `grantsActivated` — read live, so an object that stops matching takes
@@ -2603,7 +2594,30 @@ export interface StaticAbility {
    *   as this creature" — `sameNameAsSource: false`), with all the abilities
    *   each has: its printed ones (unless it lost them), its basic land types'
    *   (rule 305.6) and those granted to it. Two such statics that read each
-   *   other apply in dependency order, a loop in timestamp order (rule 613.8).
+   *   other apply in dependency order, a loop in timestamp order (rule 613.8);
+   * - `zone: "exile"` — every face-up card in exile matching (Rex, Cyber-Hound's
+   *   "all cards in exile with brain counters on them", a `counters` filter;
+   *   Mairsil, the Pretender's "all cards you own" adds `ownedBy: "you"`);
+   * - `zone: "exiled-with"` — the face-up cards exiled **with this permanent**
+   *   in this stint (rule 607.2a: an `exile` `linked` or `untilSourceLeaves`),
+   *   matching: Steward of the Harvest's "creatures you control have all
+   *   activated abilities of all land cards exiled with this creature", Hazel's
+   *   Brewmaster's "Foods you control … all creature cards exiled with this
+   *   creature". A typed land's printed mana ability is its intrinsic one (rule
+   *   305.6), so a Forest card gives "{T}: Add {G}";
+   * - `zone: "chosen-exiled"` — the card this permanent last chose with
+   *   `choose-exiled-card`, while it stays in exile (Koh, the Face Stealer's
+   *   "the last chosen card").
+   *
+   * `withTriggered` takes the cards' triggered abilities too ("all activated
+   * and triggered abilities of the exiled card": Idris, Soul of the TARDIS),
+   * for any zone holding cards rather than permanents. A trigger that works
+   * only from another zone (`fromGraveyard`, `whileSuspended`,
+   * `fromCommandZone`) isn't granted (rule 113.6).
+   *
+   * `onceEach` is "You may activate each of those abilities only once each
+   * turn" (Mairsil): each card's ability has its own limit, kept per card so
+   * it holds however the list shifts (`GameObject.grantedUsedThisTurn`).
    *
    * The permanent applying it is never one of the objects read. A card's
    * abilities that work only from another zone (`zone` — unearth, channel)
@@ -2616,10 +2630,12 @@ export interface StaticAbility {
    * permanent per turn (rule 606.3), paid from this permanent's loyalty.
    */
   readonly grantsActivatedOf?: {
-    readonly zone: "battlefield" | "graveyard" | "library-top";
+    readonly zone: "battlefield" | "graveyard" | "library-top" | "exile" | "exiled-with" | "chosen-exiled";
     readonly filter: CardFilter;
     readonly except?: "mana" | "loyalty";
     readonly only?: "loyalty";
+    readonly withTriggered?: true;
+    readonly onceEach?: true;
   };
   /**
    * **Static** abilities this static grants to every object it `affects`
@@ -3497,6 +3513,10 @@ export interface StaticAbility {
     readonly as: SpendAs;
     readonly spell?: CardFilter;
     readonly activating?: "this" | "granted";
+    /** Only to activate abilities of the permanents matching this, from this
+     * permanent's controller's side — Agatha's Soul Cauldron's "to activate
+     * abilities of creatures you control". */
+    readonly activatingOf?: CardFilter;
   };
   /** Protection (rule 702.16) — the affected object can't be targeted,
    * blocked, enchanted/equipped, or damaged by a source whose colour or type

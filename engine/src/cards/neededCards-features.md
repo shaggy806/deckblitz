@@ -1257,6 +1257,23 @@ condition counting its own permanent (Backstreet Bruiser), the per-player
 greatest discard (Scythe Specter, Cait), the
 power of creatures that died together or this turn.
 
+### "Has all activated and triggered abilities of the exiled card" — built 2026-11-03
+
+The rest of `static:gain-abilities-from-graveyard`. `grantsActivatedOf`'s new
+zones: `"exile"` over a `counters` filter (Rex, Cyber-Hound; Mairsil, the
+Pretender), `"exiled-with"` (replacing `grantsActivatedOfLinkedExile`, with a
+filter and `exiledUntil` read too) and `"chosen-exiled"` (Koh, the Face Stealer,
+with the new `choose-exiled-card` effect); `withTriggered`, read through
+`card-triggered` refs so a look-back works (603.10a); `onceEach`, kept per card
+on `GameObject.grantedUsedThisTurn`; `grantPtPerCount.exiledWithSourceManaValue`
+(Idris, Soul of the TARDIS); `spendManaAs.activatingOf` (Agatha's Soul Cauldron);
+`return-from-graveyard`'s `destination: "exile"`. Keys:
+activated-abilities-of-exiled-with-counter, gains-abilities-of-exiled-card,
+grant-activated-abilities-of-exiled, has-abilities-of-chosen-exiled-card. Proving
+cards: those five and Hazel's Brewmaster. Still open:
+`static:gain-activated-abilities-of-card` (Havengul Lich), and Locus of
+Enlightenment needs craft's exiled materials read as "exiled with" it.
+
 ### "Has all activated abilities of …" — built 2026-10-31
 
 The need-keys Phase 2 family `static:gain-abilities-from-graveyard`, its top

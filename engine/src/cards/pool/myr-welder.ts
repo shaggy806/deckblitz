@@ -28,7 +28,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      grantsActivatedOfLinkedExile: true,
+      grantsActivatedOf: { zone: "exiled-with", filter: {} },
       text: GRANT_TEXT,
     },
   ],

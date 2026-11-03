@@ -14302,6 +14302,61 @@ function parseStatic(line, text) {
     if (top !== null && Object.keys(top).length > 0) {
       return { affects: { scope: "self" }, grantsActivatedOf: { zone: "library-top", filter: top }, text };
     }
+    // Cards in exile: with a counter (Rex, Cyber-Hound; Mairsil, the Pretender's
+    // limit), exiled with this permanent (Myr Welder, Territory Forge; Steward of
+    // the Harvest's group; Hazel's Brewmaster's Foods), its one exiled card or the
+    // last chosen with their triggered abilities too (Idris; Koh).
+    const counted =
+      /^~ has all activated abilities of all cards( you own)? in exile with (\w+) counters on them\.( You may activate each of those abilities only once each turn\.)?$/.exec(line);
+    if (counted !== null) {
+      return {
+        affects: { scope: "self" },
+        grantsActivatedOf: {
+          zone: "exile",
+          filter: {
+            ...(counted[1] !== undefined ? { ownedBy: "you" } : {}),
+            counters: { kind: counted[2], compare: { op: "gte", n: 1 } },
+          },
+          ...(counted[3] !== undefined ? { onceEach: true } : {}),
+        },
+        text,
+      };
+    }
+    const own = /^~ has all activated abilities of (?:all (?:(.+?) )?cards exiled with (?:it|~)|the exiled card)\.$/.exec(line);
+    const ownFilter = own === null ? null : own[1] === undefined ? {} : parseTypePhrase(own[1], { cards: true });
+    if (ownFilter !== null) {
+      return { affects: { scope: "self" }, grantsActivatedOf: { zone: "exiled-with", filter: ownFilter }, text };
+    }
+    const group =
+      /^(Creatures|Foods) you control( with \+1\/\+1 counters on them)? have all activated abilities of all (.+?) cards exiled with ~\.$/.exec(line);
+    const groupFilter = group === null ? null : parseTypePhrase(group[3], { cards: true });
+    if (groupFilter !== null) {
+      const counters = group[2] !== undefined ? { counters: { kind: "+1/+1", compare: { op: "gte", n: 1 } } } : {};
+      return {
+        affects:
+          group[1] === "Foods"
+            ? { scope: "filter", filter: { subtype: "Food", controlledBy: "you" } }
+            : group[2] !== undefined
+              ? { scope: "filter", filter: { type: "creature", controlledBy: "you", ...counters } }
+              : { scope: "creatures-you-control" },
+        grantsActivatedOf: { zone: "exiled-with", filter: groupFilter },
+        text,
+      };
+    }
+    const both =
+      /^~ has all activated and triggered abilities of the (exiled|last chosen) card( and gets \+X\/\+X, where X is the exiled card's mana value)?\.$/.exec(line);
+    if (both !== null) {
+      return {
+        affects: { scope: "self" },
+        grantsActivatedOf: {
+          zone: both[1] === "exiled" ? "exiled-with" : "chosen-exiled",
+          filter: {},
+          withTriggered: true,
+        },
+        ...(both[2] !== undefined ? { grantPtPerCount: { exiledWithSourceManaValue: true, pt: [1, 1] } } : {}),
+        text,
+      };
+    }
   }
   // "Mana of any type can be spent to activate ~'s abilities" (Sharkey,
   // Tyrant of the Shire) / "… as though it were mana of any color to pay the

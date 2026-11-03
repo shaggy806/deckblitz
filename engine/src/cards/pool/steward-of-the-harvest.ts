@@ -37,7 +37,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "creatures-you-control" },
-      grantsActivatedOfLinkedExile: true,
+      grantsActivatedOf: { zone: "exiled-with", filter: { type: "land" } },
       text: GRANT_TEXT,
     },
   ],

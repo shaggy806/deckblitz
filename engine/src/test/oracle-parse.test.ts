@@ -5929,7 +5929,70 @@ describe("has all activated abilities of … (grantsActivatedOf)", () => {
     expect(borrower.static[0].grantsActivatedOf).toEqual({ zone: "library-top", filter: { typesAnyOf: ["artifact", "creature"] } });
   });
 
-  it("leaves an exiled card's or a chosen permanent's abilities to a person", () => {
+  it("reads cards in exile with a counter, once each too", () => {
+    const rex = face(
+      "Rex, Cyber-Hound",
+      "Legendary Artifact Creature — Robot Dog",
+      "Rex has all activated abilities of all cards in exile with brain counters on them.",
+    );
+    expect(rex.static[0].grantsActivatedOf).toEqual({
+      zone: "exile",
+      filter: { counters: { kind: "brain", compare: { op: "gte", n: 1 } } },
+    });
+    const mairsil = face(
+      "Mairsil, the Pretender",
+      "Legendary Creature — Human Wizard",
+      "Mairsil has all activated abilities of all cards you own in exile with cage counters on them. You may activate each of those abilities only once each turn.",
+    );
+    expect(mairsil.static[0].grantsActivatedOf).toEqual({
+      zone: "exile",
+      filter: { ownedBy: "you", counters: { kind: "cage", compare: { op: "gte", n: 1 } } },
+      onceEach: true,
+    });
+  });
+
+  it("reads the cards exiled with it, for itself or a group", () => {
+    const crawler = face(
+      "Patchwork Crawler",
+      "Artifact Creature — Zombie Horror",
+      "This creature has all activated abilities of all creature cards exiled with it.",
+    );
+    expect(crawler.static[0].grantsActivatedOf).toEqual({ zone: "exiled-with", filter: { type: "creature" } });
+    const brewmaster = face(
+      "Hazel's Brewmaster",
+      "Creature — Squirrel Warlock",
+      "Foods you control have all activated abilities of all creature cards exiled with this creature.",
+    );
+    expect(brewmaster.static[0].affects).toEqual({ scope: "filter", filter: { subtype: "Food", controlledBy: "you" } });
+    expect(brewmaster.static[0].grantsActivatedOf).toEqual({ zone: "exiled-with", filter: { type: "creature" } });
+    const cauldron = face(
+      "Agatha's Soul Cauldron",
+      "Legendary Artifact",
+      "Creatures you control with +1/+1 counters on them have all activated abilities of all creature cards exiled with Agatha's Soul Cauldron.",
+    );
+    expect(cauldron.static[0].affects).toEqual({
+      scope: "filter",
+      filter: { type: "creature", controlledBy: "you", counters: { kind: "+1/+1", compare: { op: "gte", n: 1 } } },
+    });
+  });
+
+  it("reads activated and triggered abilities of the exiled card or the last chosen", () => {
+    const idris = face(
+      "Idris, Soul of the TARDIS",
+      "Legendary Creature — Human Incarnation",
+      "Idris has all activated and triggered abilities of the exiled card and gets +X/+X, where X is the exiled card's mana value.",
+    );
+    expect(idris.static[0].grantsActivatedOf).toEqual({ zone: "exiled-with", filter: {}, withTriggered: true });
+    expect(idris.static[0].grantPtPerCount).toEqual({ exiledWithSourceManaValue: true, pt: [1, 1] });
+    const koh = face(
+      "Koh, the Face Stealer",
+      "Legendary Creature — Shapeshifter Spirit",
+      "Koh has all activated and triggered abilities of the last chosen card.",
+    );
+    expect(koh.static[0].grantsActivatedOf).toEqual({ zone: "chosen-exiled", filter: {}, withTriggered: true });
+  });
+
+  it("leaves a chosen permanent's abilities to a person", () => {
     const fence = face(
       "Scheming Fence",
       "Creature — Human Citizen",

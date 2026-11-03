@@ -933,6 +933,22 @@ interface TriggeredGrantSource {
   /** A static a `grant-static` gave the source: no printed index, so each
    * granted ability is its own ref. */
   readonly granted?: true;
+  /** Where each of `abilities` comes from, when not the static's own list:
+   * a card it reads (`grantsActivatedOf`'s `withTriggered`). */
+  readonly refs?: readonly GrantedAbilityRef[];
+}
+
+/** "You may activate each of those abilities only once each turn" (a
+ * `grantsActivatedOf`'s `onceEach`): the printed ability with that limit, one
+ * object for each so a grant's list keeps its identity from read to read. */
+const ONCE_EACH_VERSIONS = new WeakMap<ActivatedAbility, ActivatedAbility>();
+function onceEachVersion(ability: ActivatedAbility): ActivatedAbility {
+  let version = ONCE_EACH_VERSIONS.get(ability);
+  if (version === undefined) {
+    version = { ...ability, oncePerTurn: true };
+    ONCE_EACH_VERSIONS.set(ability, version);
+  }
+  return version;
 }
 
 /** Combat damage from the same commander at or above this total is a loss (rule 903.10a). */
@@ -9020,6 +9036,7 @@ export class Game {
       // Wall of Roots used on its controller's turn makes mana again on the
       // next player's.
       object.abilitiesUsedThisTurn = [];
+      if (object.grantedUsedThisTurn !== undefined) object.grantedUsedThisTurn = undefined;
       // A loyalty ability may be activated again (rule 606.3) — "that turn"
       // is each turn, so one whose loyalty abilities may be activated on any
       // player's turn (Teferi, Master of Time) gets one on this turn too.
@@ -10110,6 +10127,10 @@ export class Game {
         }
         return;
       }
+      if (awaiting.rememberExiledOn !== undefined) {
+        this.rememberExiledCard(this.state.objects[awaiting.rememberExiledOn], id);
+        return;
+      }
       // Its owner put it into the command zone instead (rule 903.9b).
       if (toCommandZone.has(id)) {
         this.moveObject(id, "command");
@@ -10147,6 +10168,7 @@ export class Game {
           if (awaiting.exileUntil !== undefined) object.exiledUntil = awaiting.exileUntil;
           if (awaiting.impulseGrant !== undefined) object.impulse = { ...awaiting.impulseGrant };
           if (awaiting.costExileFor !== undefined) this.recordCostExile(awaiting.costExileFor, [id]);
+          this.putCountersOnExiled(id, awaiting.exileWithCounters);
         }
         return;
       }
@@ -19667,6 +19689,26 @@ export class Game {
         if (ability.grantsTriggered !== undefined) {
           out.push({ source, ability, staticIndex, abilities: ability.grantsTriggered });
         }
+        const copied = ability.grantsActivatedOf;
+        if (copied?.withTriggered === true) {
+          // "All activated and triggered abilities of the exiled card": each
+          // from its card, which may be gone by the time it resolves. A
+          // trigger working only from another zone does nothing here (rule 113.6).
+          const abilities: TriggeredAbility[] = [];
+          const refs: GrantedAbilityRef[] = [];
+          for (const cardId of this.cardsAGrantReads(source, copied)) {
+            const ctx = { you: source.controller, source: source.id };
+            if (!matchesFilter(this.state, this.registry, cardId, copied.filter, ctx)) continue;
+            const cardName = printedCardName(this.state.objects[cardId]);
+            if (!this.registry.has(cardName)) continue;
+            this.registry.get(cardName).triggered.forEach((granted, index) => {
+              if (granted.fromGraveyard === true || granted.whileSuspended === true || granted.fromCommandZone === true) return;
+              abilities.push(granted);
+              refs.push({ kind: "card-triggered", cardName, index });
+            });
+          }
+          if (abilities.length > 0) out.push({ source, ability, staticIndex, abilities, refs });
+        }
       });
       for (const ability of grantedStatics(this.state, this.registry, source)) {
         if (ability.grantsTriggered !== undefined) {
@@ -19775,7 +19817,7 @@ export class Game {
         ts: number;
         entries: { ability: TriggeredAbility; ref: GrantedAbilityRef }[];
       }[] = [];
-      for (const { source, ability, staticIndex, abilities, granted: viaGrant } of sources) {
+      for (const { source, ability, staticIndex, abilities, granted: viaGrant, refs } of sources) {
         if (!grantOutlastsLoss(lostAt, source.timestamp)) continue;
         const keywords = (): ReadonlySet<Keyword> => this.characteristics(target.id).keywords;
         if (!staticReaches(this.state, this.registry, source, ability, target, { keywords })) continue;
@@ -19785,7 +19827,7 @@ export class Game {
           ts: source.timestamp,
           entries: abilities.map((grantedAbility, index) => ({
             ability: grantedAbility,
-            ref: viaGrant
+            ref: refs?.[index] ?? (viaGrant
               ? { kind: "modifier", ability: grantedAbility }
               : {
                   kind: "static",
@@ -19796,7 +19838,7 @@ export class Game {
                   // The granting permanent, which the granted text may name (rule 201.5a).
                   granter: source.id,
                   granterStint: source.zoneChangeCount ?? 0,
-                },
+                }),
           })),
         });
       }
@@ -19875,26 +19917,6 @@ export class Game {
         if (lost && !hasLayerFourPart(ability)) return;
         if (ability.grantsActivated !== undefined) {
           out.push({ source, ability, staticIndex, abilities: ability.grantsActivated });
-        }
-        if (ability.grantsActivatedOfLinkedExile === true) {
-          // "All activated abilities of all land cards exiled with this
-          // creature" (Steward of the Harvest): the cards exiled with this
-          // stint (rule 607.2a), still there, read live.
-          const stint = source.zoneChangeCount ?? 0;
-          const abilities: ActivatedAbility[] = [];
-          const refs: GrantedAbilityRef[] = [];
-          for (const cardId of this.state.zones.shared.exile) {
-            const card = this.state.objects[cardId];
-            const link = card?.exiledWith;
-            if (link === undefined || link.source !== id || link.zoneChangeCount !== stint) continue;
-            const cardName = printedCardName(card);
-            this.registry.get(cardName).activated.forEach((granted, index) => {
-              if (granted.zone !== undefined) return;
-              abilities.push(granted);
-              refs.push({ kind: "card-activated", cardName, index });
-            });
-          }
-          if (abilities.length > 0) out.push({ source, ability, staticIndex, abilities, refs });
         }
         if (ability.grantsActivatedOf !== undefined) copies.push({ source, ability, staticIndex, spec: ability.grantsActivatedOf });
       });
@@ -19975,6 +19997,66 @@ export class Game {
     return out;
   }
 
+  /** The cards a `grantsActivatedOf` static over a zone of cards reads, before
+   * its filter: all a card outside the battlefield has is what's printed. A
+   * face-down card in exile has no abilities to read (rule 406.3a). */
+  private cardsAGrantReads(
+    source: GameObject,
+    spec: NonNullable<StaticAbility["grantsActivatedOf"]>,
+  ): readonly ObjectId[] {
+    const faceUpExile = (): readonly ObjectId[] =>
+      this.state.zones.shared.exile.filter((id) => this.state.objects[id]?.exiledFaceDown === undefined);
+    switch (spec.zone) {
+      case "graveyard":
+        return Object.values(this.state.zones.perPlayer).flatMap((zones) => zones.graveyard);
+      case "library-top": {
+        const top = this.state.zones.perPlayer[source.controller]?.library[0];
+        return top === undefined ? [] : [top];
+      }
+      case "exile":
+        return faceUpExile();
+      case "exiled-with": {
+        // Exiled with this stint (rule 607.2a), still there, read live.
+        const stint = source.zoneChangeCount ?? 0;
+        const linked = (link: { readonly source: ObjectId; readonly zoneChangeCount: number } | undefined): boolean =>
+          link !== undefined && link.source === source.id && link.zoneChangeCount === stint;
+        return faceUpExile().filter((id) => {
+          const card = this.state.objects[id];
+          return linked(card?.exiledWith) || linked(card?.exiledUntil);
+        });
+      }
+      case "chosen-exiled": {
+        const chosen = source.chosenExiledCard;
+        const card = chosen === undefined ? undefined : this.state.objects[chosen.card];
+        return card?.zone === "exile" && (card.zoneChangeCount ?? 0) === chosen!.stint ? [chosen!.card] : [];
+      }
+      case "battlefield":
+        return [];
+    }
+  }
+
+  /** The key `source`'s granted ability at `abilityIndex` keeps its limit under,
+   * when it has one apart from its index: an `onceEach` grant's. */
+  private onceEachKey(source: GameObject, abilityIndex: number): string | undefined {
+    const ref = this.activatedRefFor(source.id, abilityIndex);
+    return ref?.kind === "card-activated" && ref.from !== undefined ? `${ref.from}#${ref.index}` : undefined;
+  }
+
+  /** Whether `source` has used its "once each turn" ability this turn (rule 602.5b). */
+  private usedThisTurn(source: GameObject, abilityIndex: number): boolean {
+    const key = this.onceEachKey(source, abilityIndex);
+    return key !== undefined
+      ? (source.grantedUsedThisTurn ?? []).includes(key)
+      : (source.abilitiesUsedThisTurn ?? []).includes(abilityIndex);
+  }
+
+  /** Records one activation of an ability with a per-turn limit. */
+  private markUsedThisTurn(source: GameObject, abilityIndex: number): void {
+    const key = this.onceEachKey(source, abilityIndex);
+    if (key !== undefined) source.grantedUsedThisTurn = [...(source.grantedUsedThisTurn ?? []), key];
+    else source.abilitiesUsedThisTurn = [...(source.abilitiesUsedThisTurn ?? []), abilityIndex];
+  }
+
   /** What one `grantsActivatedOf` static grants now, on top of the grants
    * already `applied` (see {@link copiedActivatedGrants}). */
   private copiedActivatedEntries(copy: CopyGrant, applied: readonly GrantSource[]): CopiedEntries {
@@ -19982,7 +20064,8 @@ export class Game {
     const abilities: ActivatedAbility[] = [];
     const refs: GrantedAbilityRef[] = [];
     const seen = new Set<ActivatedAbility>();
-    const take = (ability: ActivatedAbility, ref: GrantedAbilityRef, instances = 1): void => {
+    const take = (printed: ActivatedAbility, ref: GrantedAbilityRef, instances = 1): void => {
+      const ability = spec.onceEach === true ? onceEachVersion(printed) : printed;
       // Abilities that work only from another zone do nothing here (rule
       // 113.6), so they aren't granted.
       if (ability.zone !== undefined) return;
@@ -20016,15 +20099,12 @@ export class Game {
       if (card === undefined || !matchesFilter(this.state, this.registry, cardId, spec.filter, ctx)) return;
       const cardName = printedCardName(card);
       if (!this.registry.has(cardName)) return;
-      this.registry.get(cardName).activated.forEach((ability, index) => take(ability, { kind: "card-activated", cardName, index }));
+      this.registry.get(cardName).activated.forEach((ability, index) =>
+        take(ability, { kind: "card-activated", cardName, index, ...(spec.onceEach === true ? { from: cardId } : {}) }),
+      );
     };
-    if (spec.zone === "graveyard") {
-      for (const zones of Object.values(this.state.zones.perPlayer)) {
-        for (const cardId of zones.graveyard) ofCard(cardId);
-      }
-    } else if (spec.zone === "library-top") {
-      const top = this.state.zones.perPlayer[source.controller]?.library[0];
-      if (top !== undefined) ofCard(top);
+    if (spec.zone !== "battlefield") {
+      for (const cardId of this.cardsAGrantReads(source, spec)) ofCard(cardId);
     } else {
       for (const id of this.state.zones.shared.battlefield) {
         if (id === source.id) continue;
@@ -20875,7 +20955,7 @@ export class Game {
     // Boast implies it.
     if (
       (ability.oncePerTurn === true || ability.boast === true) &&
-      (source.abilitiesUsedThisTurn ?? []).includes(abilityIndex)
+      this.usedThisTurn(source, abilityIndex)
     ) {
       return `${def.name}'s ability has already been activated this turn`;
     }
@@ -21548,10 +21628,7 @@ export class Game {
       // Rule 602.5g — recorded per ability index, so a permanent with two
       // once-each-turn abilities limits each of them separately; one entry
       // an activation, which `timesEachTurn` counts.
-      source.abilitiesUsedThisTurn = [
-        ...(source.abilitiesUsedThisTurn ?? []),
-        abilityIndex,
-      ];
+      this.markUsedThisTurn(source, abilityIndex);
     }
     if (ability.exhaust === true || ability.powerUp === true || ability.onlyOnce === true) {
       source.exhaustedAbilities = [...(source.exhaustedAbilities ?? []), abilityIndex];
@@ -22754,7 +22831,7 @@ export class Game {
         // earlier payment.
         if (
           ability.oncePerTurn === true &&
-          (object.abilitiesUsedThisTurn ?? []).includes(abilityIndex)
+          this.usedThisTurn(object, abilityIndex)
         ) {
           return;
         }
@@ -23357,6 +23434,14 @@ export class Game {
           if (!granted) continue;
         }
       }
+      if (rule.activatingOf !== undefined) {
+        if (
+          purpose?.kind !== "ability" ||
+          !matchesFilter(this.state, this.registry, purpose.source, rule.activatingOf, { you: player })
+        ) {
+          continue;
+        }
+      }
       allow(rule.as);
     }
     if (spellCard !== undefined) {
@@ -23461,7 +23546,7 @@ export class Game {
         : this.addMana(player, m, 1, undefined, originOf(extraFrom[i - own])),
     );
     if (step.oncePerTurn !== undefined) {
-      object.abilitiesUsedThisTurn = [...(object.abilitiesUsedThisTurn ?? []), step.oncePerTurn];
+      this.markUsedThisTurn(object, step.oncePerTurn);
       // Not an event of its own, so nothing else is going to tell a cache
       // region that this source has stopped being one.
       invalidateComputedCache();
@@ -31702,6 +31787,39 @@ export class Game {
           destination: "exile-playable",
           leftover: "stay",
           impulseGrant: grant,
+        };
+      },
+      chooseExiledCard: (filter, prompt, among) => {
+        // "Choose a creature card exiled with Koh": face up, linked to the
+        // stint the ability came from (rule 607.2a); not a target. It's that
+        // permanent that remembers, so with it gone nothing changes (400.7).
+        const object = this.state.objects[source];
+        if (object?.zone !== "battlefield") return;
+        if (refs.source !== undefined && refs.source !== (object.zoneChangeCount ?? 0)) return;
+        const eligible = among.filter((id) => {
+          const card = this.state.objects[id];
+          return (
+            card?.zone === "exile" &&
+            card.exiledFaceDown === undefined &&
+            (filter === undefined || matchesFilter(this.state, this.registry, id, filter, { you: controller }))
+          );
+        });
+        if (eligible.length === 0) return;
+        if (eligible.length === 1) {
+          this.rememberExiledCard(object, eligible[0]);
+          return;
+        }
+        this.state.awaiting = {
+          kind: "choose-from-zone",
+          player: controller,
+          ids: eligible,
+          eligible,
+          min: 1,
+          max: 1,
+          destination: "stay",
+          leftover: "stay",
+          prompt,
+          rememberExiledOn: object.id,
         };
       },
       fight: (a, b, oneSided) => this.fightCreatures(a, b, oneSided),
@@ -45769,7 +45887,7 @@ export class Game {
   private returnFromGraveyardByEffect(
     player: PlayerId,
     filter: CardFilter,
-    destination: "battlefield" | "hand",
+    destination: "battlefield" | "hand" | "exile",
     count: number | "all",
     enterTapped: boolean,
     withCounters?: { readonly kind: string; readonly amount: number },
@@ -45872,6 +45990,7 @@ export class Game {
               if (host !== undefined) this.attachEntered(id, host);
               this.emit({ type: "permanent-entered-battlefield", object: id });
             }
+            if (moved && destination === "exile") this.putCountersOnExiled(id, withCounters);
           }
         });
       });
@@ -45891,11 +46010,32 @@ export class Game {
       ...(withCounters !== undefined && destination === "battlefield"
         ? { enterWithCounters: withCounters }
         : {}),
+      ...(withCounters !== undefined && destination === "exile" ? { exileWithCounters: withCounters } : {}),
       ...(opts.allGraveyards === true && destination === "battlefield" ? { enterUnder: player } : {}),
       ...(enterAs !== undefined ? { enterAs } : {}),
       ...(opts.attachTo !== undefined && destination === "battlefield" ? { enterAttachedTo: opts.attachTo } : {}),
     };
     return false;
+  }
+
+  /** "…and put a cage counter on it": `id`, just exiled, if it stayed there. A
+   * card in exile isn't a permanent, so no event says so. */
+  private putCountersOnExiled(
+    id: ObjectId,
+    withCounters: { readonly kind: string; readonly amount: number } | undefined,
+  ): void {
+    const card = this.state.objects[id];
+    if (withCounters === undefined || card?.zone !== "exile" || withCounters.amount <= 0) return;
+    card.counters[withCounters.kind] = (card.counters[withCounters.kind] ?? 0) + withCounters.amount;
+    invalidateComputedCache();
+  }
+
+  /** The card `object` has now chosen (`GameObject.chosenExiledCard`). */
+  private rememberExiledCard(object: GameObject | undefined, card: ObjectId): void {
+    const chosen = this.state.objects[card];
+    if (object?.zone !== "battlefield" || chosen === undefined) return;
+    object.chosenExiledCard = { card, stint: chosen.zoneChangeCount ?? 0 };
+    invalidateComputedCache();
   }
 
   /** Put `withCounters` on `id`, just put onto the battlefield by `player`'s
@@ -51041,6 +51181,8 @@ export class Game {
     // Its once-a-turn and exhaust abilities: the permanent that comes back
     // is a new object that has used neither (rule 400.7).
     object.abilitiesUsedThisTurn = undefined;
+    object.grantedUsedThisTurn = undefined;
+    object.chosenExiledCard = undefined;
     object.exhaustedAbilities = undefined;
     object.overloaded = undefined;
     // A bestowed Aura spell becomes a bestowed Aura (rule 702.103b); any

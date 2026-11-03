@@ -4158,7 +4158,10 @@ export type EffectSpec =
        * there are more matches than that, the rest staying in the graveyard. */
       readonly kind: "return-from-graveyard";
       readonly filter: CardFilter;
-      readonly destination: "battlefield" | "hand";
+      /** `"exile"`: exiled face up, `withCounters` on it there — Mairsil, the
+       * Pretender's "exile an artifact or creature card from your hand or
+       * graveyard and put a cage counter on it". */
+      readonly destination: "battlefield" | "hand" | "exile";
       /** How many, read as it resolves — Worldsoul's Rage's "put **up to X**
        * land cards from your hand and/or graveyard" is `"x"` with `upTo`. */
       readonly count: EffectAmount | "all";
@@ -4526,6 +4529,17 @@ export type EffectSpec =
       readonly filter?: CardFilter;
       readonly linked?: true;
       readonly free?: boolean;
+    }
+  | {
+      /** "Choose a creature card **exiled with Koh**" (rule 607.2a): the
+       * effect's controller picks one face-up card exiled with this source
+       * matching `filter` — nothing is targeted — and this permanent remembers
+       * it (`GameObject.chosenExiledCard`), for a `grantsActivatedOf`'s
+       * `"chosen-exiled"`. With none to choose, or the source gone, the last
+       * choice stands. */
+      readonly kind: "choose-exiled-card";
+      readonly filter?: CardFilter;
+      readonly prompt: string;
     }
   | {
       /** "Until end of turn, you may cast that card" — a card in exile
@@ -10360,6 +10374,8 @@ export interface EffectApi {
   ): void;
   /** See the `"choose-exiled-to-play"` {@link EffectSpec}. */
   chooseExiledToPlay(filter: CardFilter | undefined, free: boolean, among?: readonly ObjectId[]): void;
+  /** See the `"choose-exiled-card"` {@link EffectSpec}. */
+  chooseExiledCard(filter: CardFilter | undefined, prompt: string, among: readonly ObjectId[]): void;
   /** See the `"cast-now"` {@link EffectSpec}: offer the effect's
    * controller the cast of one of `cards`, as a `cast-now` decision — or
    * nothing, when none of them can be cast. */
@@ -10691,7 +10707,7 @@ export interface EffectApi {
    * again once it's answered. */
   returnFromGraveyard(
     filter: CardFilter,
-    destination: "battlefield" | "hand",
+    destination: "battlefield" | "hand" | "exile",
     count: number | "all",
     enterTapped: boolean,
     withCounters?: { readonly kind: string; readonly amount: number },
@@ -15626,6 +15642,9 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     case "choose-exiled-to-play":
       ctx.chooseExiledToPlay(spec.filter, spec.free === true, spec.linked === true ? ctx.cardsExiledWithSource(true) : undefined);
+      return;
+    case "choose-exiled-card":
+      ctx.chooseExiledCard(spec.filter, spec.prompt, ctx.cardsExiledWithSource(true));
       return;
     case "allow-cast-linked-exile":
       ctx.allowCastLinkedExile(spec.spell, spec.free === true, {

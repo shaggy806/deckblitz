@@ -390,6 +390,15 @@ export interface GameObject {
    * activation, so the count of its index is how often it has been used.
    */
   abilitiesUsedThisTurn?: number[];
+  /** The `grantsActivatedOf` abilities with `onceEach` this object has used
+   * this turn, each `"<card>#<its ability index>"` (Mairsil, the Pretender):
+   * an index among this object's abilities shifts as the card list changes,
+   * and each card's ability has its own limit. */
+  grantedUsedThisTurn?: string[];
+  /** The card this permanent last chose with `choose-exiled-card`, in the stint
+   * it had then (Koh, the Face Stealer's "the last chosen card"). Not the same
+   * object once it leaves exile (rule 400.7). Cleared on any zone change. */
+  chosenExiledCard?: { readonly card: ObjectId; readonly stint: number };
   /** Indices of this object's exhaust abilities already activated — once
    * each for as long as the object exists (see `ActivatedAbility.exhaust`).
    * Cleared by any zone change. */
@@ -2007,9 +2016,10 @@ export type GrantedAbilityRef =
    * cycled — `cyclingAbility` of the card named. */
   | { readonly kind: "cycling"; readonly cardName: string }
   /** Another card's own printed activated ability, at `index` — granted by
-   * a `grantsActivatedOfLinkedExile` static (Steward of the Harvest gives a
-   * creature an exiled land card's abilities). */
-  | { readonly kind: "card-activated"; readonly cardName: string; readonly index: number }
+   * a `grantsActivatedOf` static (Steward of the Harvest gives a creature an
+   * exiled land card's abilities). `from`: under an `onceEach` grant, the card
+   * it was read from, whose ability it is for that limit (Mairsil). */
+  | { readonly kind: "card-activated"; readonly cardName: string; readonly index: number; readonly from?: ObjectId }
   /** Another card's own printed triggered ability, at `index`: a permanent
    * whose text box came from that card (`GameObject.textFrom`, rule 612.5),
    * so the trigger resolves as that text however its source changes. */
@@ -3389,6 +3399,12 @@ export type AwaitingDecision =
        * `"exile"` (imprint, face up): the permanent, in the stint it's in,
        * the chosen cards are exiled with (rule 607.2a — `GameObject.exiledWith`). */
       readonly exileLink?: { readonly source: ObjectId; readonly zoneChangeCount: number };
+      /** For a `choose-exiled-card`: nothing moves (`"stay"`); the card picked
+       * is what this permanent has now chosen (`GameObject.chosenExiledCard`). */
+      readonly rememberExiledOn?: ObjectId;
+      /** For `destination: "exile"`: counters the chosen card gets there —
+       * Mairsil, the Pretender's "and put a cage counter on it". */
+      readonly exileWithCounters?: { readonly kind: string; readonly amount: number };
       /** For `destination: "exile"`: "exile that card **until this creature
        * leaves the battlefield**" (Kitesail Freebooter) — `exiledUntil` for
        * the chosen card. */
