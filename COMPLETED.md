@@ -12,6 +12,19 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **An ability's life cost read as it's paid** (2026-11-02, `aada9c187`): `AbilityLifeCost` half rounded up, X and per-count;
+  Lurking Evil, Murderous Betrayal, Krumar Initiate, Tornado.
+- **A spell's additional cost in a keyword cost's shape** (2026-11-02, `10f0ee639`): `additionalCost.also` as a
+  `KickerAlsoCost`, `tapAnyNumber`, `discardFilter`; closes the seam the recheck named; 8 proving cards, among them Warlord's
+  Elite, Shared Discovery, Burn at the Stake and Disruption Protocol.
+- **A delayed trigger that watches named permanents** (2026-11-02, `f269dce4c`): `DelayedWhenever`'s `watching`,
+  `until: "game"`, `once`, `orLosesControl`, with `dealsCombatDamage` deleted; Paladin of Prahv, Arcbond, Tamiyo Field
+  Researcher, Coffin Queen, Plague Reaver.
+- **"Those creatures"** (2026-11-02, `b944f5908`): one `CardFilter.triggerBatch` over the batch a trigger fired on, and a
+  delayed trigger lasting this combat; Sabotage Strategist, Lightmine Field, Love on the Battlefield, Creepy Puppeteer, Garruk,
+  Curse Breaker.
+- **Attack counts** (2026-11-02, `05e346369`): `attack-with`'s `exactly` and `totalPower`, `attacks-player`'s `atLeast`;
+  Alluring Suitor, Desert Were-Worm, Horn of the Mark, Landroval, Grand Warlord Radha, The Earth King.
 - **A copy for each permanent a spell could target, by whoever makes it** (2026-11-02, `80ef4666f`): `forEachItCouldTarget`
   with `controller`, `chooseAndPayEach`; gravestorm as a helper and a template; Mirrorwing Dragon, Precursor Golem, Ink-Treader
   Nephilim, Feather, Ominous Harvest, Follow the Bodies, Bitter Ordeal.

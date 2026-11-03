@@ -20,6 +20,7 @@ import _poolAkroanConscriptor from "../pool/akroan-conscriptor.js";
 import _poolAkromasBlessing from "../pool/akromas-blessing.js";
 import _poolAkulTheUnrepentant from "../pool/akul-the-unrepentant.js";
 import _poolAlabornVeteran from "../pool/alaborn-veteran.js";
+import _poolAlluringSuitor from "../pool/alluring-suitor.js";
 import _poolAlphaStatus from "../pool/alpha-status.js";
 import _poolAltacBloodseeker from "../pool/altac-bloodseeker.js";
 import _poolAmphinMutineer from "../pool/amphin-mutineer.js";
@@ -475,6 +476,7 @@ import _poolLoranDiscipleOfHistory from "../pool/loran-disciple-of-history.js";
 import _poolLoreWeaver from "../pool/lore-weaver.js";
 import _poolLoreholdCharm from "../pool/lorehold-charm.js";
 import _poolLossarnachCaptain from "../pool/lossarnach-captain.js";
+import _poolLoveOnTheBattlefield from "../pool/love-on-the-battlefield.js";
 import _poolLovisaColdeyes from "../pool/lovisa-coldeyes.js";
 import _poolLoxodonBattlePriest from "../pool/loxodon-battle-priest.js";
 import _poolLumengridDrake from "../pool/lumengrid-drake.js";
@@ -947,6 +949,7 @@ const shard: CardShard = {
     _poolAkromasBlessing,
     _poolAkulTheUnrepentant,
     _poolAlabornVeteran,
+    _poolAlluringSuitor,
     _poolAlphaStatus,
     _poolAltacBloodseeker,
     _poolAmphinMutineer,
@@ -1402,6 +1405,7 @@ const shard: CardShard = {
     _poolLoreWeaver,
     _poolLoreholdCharm,
     _poolLossarnachCaptain,
+    _poolLoveOnTheBattlefield,
     _poolLovisaColdeyes,
     _poolLoxodonBattlePriest,
     _poolLumengridDrake,

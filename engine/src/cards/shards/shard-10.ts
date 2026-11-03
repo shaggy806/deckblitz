@@ -201,6 +201,7 @@ import _poolDeicide from "../pool/deicide.js";
 import _poolDelete from "../pool/delete.js";
 import _poolDeltaBloodflies from "../pool/delta-bloodflies.js";
 import _poolDenOfTheBugbear from "../pool/den-of-the-bugbear.js";
+import _poolDeprive from "../pool/deprive.js";
 import _poolDesertWarfare from "../pool/desert-warfare.js";
 import _poolDiamondMare from "../pool/diamond-mare.js";
 import _poolDictateOfErebos from "../pool/dictate-of-erebos.js";
@@ -450,6 +451,7 @@ import _poolLyraDawnbringer from "../pool/lyra-dawnbringer.js";
 import _poolMaddeningWind from "../pool/maddening-wind.js";
 import _poolMagistratesScepter from "../pool/magistrates-scepter.js";
 import _poolMagmaticChanneler from "../pool/magmatic-channeler.js";
+import _poolMagmaticInsight from "../pool/magmatic-insight.js";
 import _poolMajaBretagardProtector from "../pool/maja-bretagard-protector.js";
 import _poolMajesticMetamorphosis from "../pool/majestic-metamorphosis.js";
 import _poolMalametBattleGlyph from "../pool/malamet-battle-glyph.js";
@@ -799,6 +801,7 @@ import _poolTorbranThaneOfRedFell from "../pool/torbran-thane-of-red-fell.js";
 import _poolTorchSong from "../pool/torch-song.js";
 import _poolTormentOfVenom from "../pool/torment-of-venom.js";
 import _poolTormentedSoul from "../pool/tormented-soul.js";
+import _poolTornado from "../pool/tornado.js";
 import _poolToxrillTheCorrosive from "../pool/toxrill-the-corrosive.js";
 import _poolTranquilCove from "../pool/tranquil-cove.js";
 import _poolTranquilLandscape from "../pool/tranquil-landscape.js";
@@ -1102,6 +1105,7 @@ const shard: CardShard = {
     _poolDelete,
     _poolDeltaBloodflies,
     _poolDenOfTheBugbear,
+    _poolDeprive,
     _poolDesertWarfare,
     _poolDiamondMare,
     _poolDictateOfErebos,
@@ -1351,6 +1355,7 @@ const shard: CardShard = {
     _poolMaddeningWind,
     _poolMagistratesScepter,
     _poolMagmaticChanneler,
+    _poolMagmaticInsight,
     _poolMajaBretagardProtector,
     _poolMajesticMetamorphosis,
     _poolMalametBattleGlyph,
@@ -1700,6 +1705,7 @@ const shard: CardShard = {
     _poolTorchSong,
     _poolTormentOfVenom,
     _poolTormentedSoul,
+    _poolTornado,
     _poolToxrillTheCorrosive,
     _poolTranquilCove,
     _poolTranquilLandscape,

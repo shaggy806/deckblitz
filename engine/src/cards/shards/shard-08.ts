@@ -446,6 +446,7 @@ import _poolKoboldDrillSergeant from "../pool/kobold-drill-sergeant.js";
 import _poolKomodoRhino from "../pool/komodo-rhino.js";
 import _poolKorHookmaster from "../pool/kor-hookmaster.js";
 import _poolKrakensEye from "../pool/krakens-eye.js";
+import _poolKrumarInitiate from "../pool/krumar-initiate.js";
 import _poolKuldothaFlamefiend from "../pool/kuldotha-flamefiend.js";
 import _poolKuonOgreAscendant from "../pool/kuon-ogre-ascendant.js";
 import _poolKuroPitlord from "../pool/kuro-pitlord.js";
@@ -1378,6 +1379,7 @@ const shard: CardShard = {
     _poolKomodoRhino,
     _poolKorHookmaster,
     _poolKrakensEye,
+    _poolKrumarInitiate,
     _poolKuldothaFlamefiend,
     _poolKuonOgreAscendant,
     _poolKuroPitlord,

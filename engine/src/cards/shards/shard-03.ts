@@ -153,6 +153,7 @@ import _poolDementiaBat from "../pool/dementia-bat.js";
 import _poolDemonPossessedWitch from "../pool/demon-possessed-witch.js";
 import _poolDemonsHorn from "../pool/demons-horn.js";
 import _poolDenseFoliage from "../pool/dense-foliage.js";
+import _poolDesertWereWorm from "../pool/desert-were-worm.js";
 import _poolDesmondMiles from "../pool/desmond-miles.js";
 import _poolDespair from "../pool/despair.js";
 import _poolDestinedLead from "../pool/destined-lead.js";
@@ -967,6 +968,7 @@ const shard: CardShard = {
     _poolDemonPossessedWitch,
     _poolDemonsHorn,
     _poolDenseFoliage,
+    _poolDesertWereWorm,
     _poolDesmondMiles,
     _poolDespair,
     _poolDestinedLead,

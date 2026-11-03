@@ -749,6 +749,7 @@ import _poolTakeDown from "../pool/take-down.js";
 import _poolTakeItBack from "../pool/take-it-back.js";
 import _poolTakeTheFall from "../pool/take-the-fall.js";
 import _poolTalismanOfProgress from "../pool/talisman-of-progress.js";
+import _poolTamiyoFieldResearcher from "../pool/tamiyo-field-researcher.js";
 import _poolTamiyoMeetsTheStoryCircle from "../pool/tamiyo-meets-the-story-circle.js";
 import _poolTatsunariToadRider from "../pool/tatsunari-toad-rider.js";
 import _poolTawnossTinkering from "../pool/tawnoss-tinkering.js";
@@ -1647,6 +1648,7 @@ const shard: CardShard = {
     _poolTakeItBack,
     _poolTakeTheFall,
     _poolTalismanOfProgress,
+    _poolTamiyoFieldResearcher,
     _poolTamiyoMeetsTheStoryCircle,
     _poolTatsunariToadRider,
     _poolTawnossTinkering,

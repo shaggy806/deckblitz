@@ -29,6 +29,7 @@ import _poolApathy from "../pool/apathy.js";
 import _poolAppaLoyalSkyBison from "../pool/appa-loyal-sky-bison.js";
 import _poolAppeal from "../pool/appeal.js";
 import _poolAquastrandSpider from "../pool/aquastrand-spider.js";
+import _poolArcbond from "../pool/arcbond.js";
 import _poolArcboundJavelineer from "../pool/arcbound-javelineer.js";
 import _poolArchivist from "../pool/archivist.js";
 import _poolArchonOfValorsReach from "../pool/archon-of-valors-reach.js";
@@ -644,6 +645,7 @@ import _poolSentinelsOfGlenElendra from "../pool/sentinels-of-glen-elendra.js";
 import _poolSentryOfTheUnderworld from "../pool/sentry-of-the-underworld.js";
 import _poolSerumRaker from "../pool/serum-raker.js";
 import _poolShadewingLaureate from "../pool/shadewing-laureate.js";
+import _poolSharedDiscovery from "../pool/shared-discovery.js";
 import _poolSharuumTheHegemon from "../pool/sharuum-the-hegemon.js";
 import _poolShatteredEgo from "../pool/shattered-ego.js";
 import _poolShedWeakness from "../pool/shed-weakness.js";
@@ -936,6 +938,7 @@ const shard: CardShard = {
     _poolAppaLoyalSkyBison,
     _poolAppeal,
     _poolAquastrandSpider,
+    _poolArcbond,
     _poolArcboundJavelineer,
     _poolArchivist,
     _poolArchonOfValorsReach,
@@ -1551,6 +1554,7 @@ const shard: CardShard = {
     _poolSentryOfTheUnderworld,
     _poolSerumRaker,
     _poolShadewingLaureate,
+    _poolSharedDiscovery,
     _poolSharuumTheHegemon,
     _poolShatteredEgo,
     _poolShedWeakness,

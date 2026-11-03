@@ -204,6 +204,7 @@ import _poolDevotedDuelist from "../pool/devoted-duelist.js";
 import _poolDiamondKaleidoscope from "../pool/diamond-kaleidoscope.js";
 import _poolDimirInformant from "../pool/dimir-informant.js";
 import _poolDireStrainBrawler from "../pool/dire-strain-brawler.js";
+import _poolDisruptionProtocol from "../pool/disruption-protocol.js";
 import _poolDistortingLens from "../pool/distorting-lens.js";
 import _poolDivinersWand from "../pool/diviners-wand.js";
 import _poolDjinnOfTheFountain from "../pool/djinn-of-the-fountain.js";
@@ -306,6 +307,7 @@ import _poolGoldenScaleAeronaut from "../pool/golden-scale-aeronaut.js";
 import _poolGoliathPaladin from "../pool/goliath-paladin.js";
 import _poolGoreHouseChainwalker from "../pool/gore-house-chainwalker.js";
 import _poolGorgonRecluse from "../pool/gorgon-recluse.js";
+import _poolGrandWarlordRadha from "../pool/grand-warlord-radha.js";
 import _poolGrapeshotCatapult from "../pool/grapeshot-catapult.js";
 import _poolGravbladeHeavy from "../pool/gravblade-heavy.js";
 import _poolGravePeril from "../pool/grave-peril.js";
@@ -1092,6 +1094,7 @@ const shard: CardShard = {
     _poolDiamondKaleidoscope,
     _poolDimirInformant,
     _poolDireStrainBrawler,
+    _poolDisruptionProtocol,
     _poolDistortingLens,
     _poolDivinersWand,
     _poolDjinnOfTheFountain,
@@ -1194,6 +1197,7 @@ const shard: CardShard = {
     _poolGoliathPaladin,
     _poolGoreHouseChainwalker,
     _poolGorgonRecluse,
+    _poolGrandWarlordRadha,
     _poolGrapeshotCatapult,
     _poolGravbladeHeavy,
     _poolGravePeril,

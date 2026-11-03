@@ -181,6 +181,7 @@ import _poolDauntlessUnity from "../pool/dauntless-unity.js";
 import _poolDawnhartRejuvenator from "../pool/dawnhart-rejuvenator.js";
 import _poolDazzlingLights from "../pool/dazzling-lights.js";
 import _poolDeadlyCoverUp from "../pool/deadly-cover-up.js";
+import _poolDeadlyDancer from "../pool/deadly-dancer.js";
 import _poolDeadlyDesigns from "../pool/deadly-designs.js";
 import _poolDeadlyPlot from "../pool/deadly-plot.js";
 import _poolDeathStroke from "../pool/death-stroke.js";
@@ -445,6 +446,7 @@ import _poolLoxodonLifechanter from "../pool/loxodon-lifechanter.js";
 import _poolLuluLoyalHollyphant from "../pool/lulu-loyal-hollyphant.js";
 import _poolLumenClassFrigate from "../pool/lumen-class-frigate.js";
 import _poolLunarchMantle from "../pool/lunarch-mantle.js";
+import _poolLurkingEvil from "../pool/lurking-evil.js";
 import _poolMabelValleyHero from "../pool/mabel-valley-hero.js";
 import _poolMakeYourMark from "../pool/make-your-mark.js";
 import _poolMakindiOx from "../pool/makindi-ox.js";
@@ -1083,6 +1085,7 @@ const shard: CardShard = {
     _poolDawnhartRejuvenator,
     _poolDazzlingLights,
     _poolDeadlyCoverUp,
+    _poolDeadlyDancer,
     _poolDeadlyDesigns,
     _poolDeadlyPlot,
     _poolDeathStroke,
@@ -1347,6 +1350,7 @@ const shard: CardShard = {
     _poolLuluLoyalHollyphant,
     _poolLumenClassFrigate,
     _poolLunarchMantle,
+    _poolLurkingEvil,
     _poolMabelValleyHero,
     _poolMakeYourMark,
     _poolMakindiOx,

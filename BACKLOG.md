@@ -510,6 +510,7 @@ there and move this line to `COMPLETED.md`.
 - **A keyword's other cost counts the graveyard as the cast starts** (rule 601.2h, a splice set's costs in any order).
 - **A shield's `then` runs once per damage event** (Refraction Trap over a split sweep: two instances, right total).
 - **A token with riot is never asked** (it takes haste; blocks Spider-Punk's Spider tokens).
+- **A tap cost's choices leave out what the mana plan taps** (rule 601.2h: a Sol Ring can't pay the tap with lands paying the mana, unless its mana is floated).
 - **A copy of a spell loses its sacrificed, discarded and revealed cost references** — rule 707.10; exiled-as-cost now carries over, the others read nothing on a copy.
 - **Mulligans are declared at once, and two opening-hand rules are loose** — rule 103.5 has turn-order declarations but `beginMulligans` asks in parallel (a design call); `COMMANDER_RULES` gives the free mulligan at two players, while 103.5c names multiplayer and Brawl; a revealed opening-hand card isn't kept revealed until the first turn (103.6b).
 - **An opponent-caused discard's replacement beats the graveyard ones without asking** — `Game` puts Obstinate Baloth onto the battlefield rather than asking its controller (616.1) when Leyline of the Void also applies.

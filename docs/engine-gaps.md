@@ -411,6 +411,11 @@ in `game.ts`). Found 2026-11-02; not reported from play.
 (`entersBattlefieldReplacement`, `game.ts`), though rule 702.136a gives it the choice as it enters. Blocks Spider-Punk's
 Spider tokens; Spider-Punk isn't authored. Found 2026-11-02; not reported from play.
 
+**A tap cost's choices leave out what the mana plan taps.** `tapCostOffer` (`game.ts`) offers only what the mana payment
+doesn't use, so a Sol Ring can't be tapped for a tap cost while lands pay the mana, unless its mana is floated first. Rule
+601.2h pays costs in any order. Existing behaviour, more visible since lands can pay these costs. Found 2026-11-02; not
+reported from play.
+
 ## Latent
 
 The engine departs from the rules here, but no pool card reaches it yet: fix each when a card

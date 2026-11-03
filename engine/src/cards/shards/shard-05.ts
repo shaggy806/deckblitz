@@ -306,6 +306,7 @@ import _poolGaleForce from "../pool/gale-force.js";
 import _poolGaleSwooper from "../pool/gale-swooper.js";
 import _poolGalvanicRelay from "../pool/galvanic-relay.js";
 import _poolGalvanoth from "../pool/galvanoth.js";
+import _poolGarrukCurseBreaker from "../pool/garruk-curse-breaker.js";
 import _poolGarruksHorde from "../pool/garruks-horde.js";
 import _poolGarruksPackleader from "../pool/garruks-packleader.js";
 import _poolGateToPhyrexia from "../pool/gate-to-phyrexia.js";
@@ -1188,6 +1189,7 @@ const shard: CardShard = {
     _poolGaleSwooper,
     _poolGalvanicRelay,
     _poolGalvanoth,
+    _poolGarrukCurseBreaker,
     _poolGarruksHorde,
     _poolGarruksPackleader,
     _poolGateToPhyrexia,

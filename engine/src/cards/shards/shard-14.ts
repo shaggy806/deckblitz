@@ -134,6 +134,7 @@ import _poolClarionSpirit from "../pool/clarion-spirit.js";
 import _poolClingingAnemones from "../pool/clinging-anemones.js";
 import _poolCloudshredderSliver from "../pool/cloudshredder-sliver.js";
 import _poolCobaltGolem from "../pool/cobalt-golem.js";
+import _poolCoffinQueen from "../pool/coffin-queen.js";
 import _poolCollectiveInferno from "../pool/collective-inferno.js";
 import _poolCollectorsCage from "../pool/collectors-cage.js";
 import _poolCombatThresher from "../pool/combat-thresher.js";
@@ -1029,6 +1030,7 @@ const shard: CardShard = {
     _poolClingingAnemones,
     _poolCloudshredderSliver,
     _poolCobaltGolem,
+    _poolCoffinQueen,
     _poolCollectiveInferno,
     _poolCollectorsCage,
     _poolCombatThresher,

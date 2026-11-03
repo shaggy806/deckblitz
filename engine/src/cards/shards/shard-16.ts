@@ -298,6 +298,7 @@ import _poolFutureFlight from "../pool/future-flight.js";
 import _poolGalestrike from "../pool/galestrike.js";
 import _poolGalvanicJuggernaut from "../pool/galvanic-juggernaut.js";
 import _poolGatekeeperOfMalakir from "../pool/gatekeeper-of-malakir.js";
+import _poolGazeOfJustice from "../pool/gaze-of-justice.js";
 import _poolGearsmithGuardian from "../pool/gearsmith-guardian.js";
 import _poolGeminiEngine from "../pool/gemini-engine.js";
 import _poolGemstoneArray from "../pool/gemstone-array.js";
@@ -430,6 +431,7 @@ import _poolLayBareTheHeart from "../pool/lay-bare-the-heart.js";
 import _poolLibrary from "../pool/library.js";
 import _poolLidlessGaze from "../pool/lidless-gaze.js";
 import _poolLifecreedDuo from "../pool/lifecreed-duo.js";
+import _poolLightmineField from "../pool/lightmine-field.js";
 import _poolLightningProwess from "../pool/lightning-prowess.js";
 import _poolLilianasInfluence from "../pool/lilianas-influence.js";
 import _poolLiminalHold from "../pool/liminal-hold.js";
@@ -1264,6 +1266,7 @@ const shard: CardShard = {
     _poolGalestrike,
     _poolGalvanicJuggernaut,
     _poolGatekeeperOfMalakir,
+    _poolGazeOfJustice,
     _poolGearsmithGuardian,
     _poolGeminiEngine,
     _poolGemstoneArray,
@@ -1396,6 +1399,7 @@ const shard: CardShard = {
     _poolLibrary,
     _poolLidlessGaze,
     _poolLifecreedDuo,
+    _poolLightmineField,
     _poolLightningProwess,
     _poolLilianasInfluence,
     _poolLiminalHold,

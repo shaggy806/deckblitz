@@ -524,6 +524,7 @@ import _poolPhyrexianGremlins from "../pool/phyrexian-gremlins.js";
 import _poolPiaAetherAscetic from "../pool/pia-aether-ascetic.js";
 import _poolPillarTombsOfAku from "../pool/pillar-tombs-of-aku.js";
 import _poolPineBarrens from "../pool/pine-barrens.js";
+import _poolPlagueReaver from "../pool/plague-reaver.js";
 import _poolPlanarGate from "../pool/planar-gate.js";
 import _poolPlatedGeopede from "../pool/plated-geopede.js";
 import _poolPlatedSliver from "../pool/plated-sliver.js";
@@ -1403,6 +1404,7 @@ const shard: CardShard = {
     _poolPiaAetherAscetic,
     _poolPillarTombsOfAku,
     _poolPineBarrens,
+    _poolPlagueReaver,
     _poolPlanarGate,
     _poolPlatedGeopede,
     _poolPlatedSliver,

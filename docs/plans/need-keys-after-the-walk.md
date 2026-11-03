@@ -832,7 +832,10 @@ missing. Re-run `--greedy` for Phase 2's order.
   `duration:until-your-next-upkeep` (9), `static:self-type-changes` (11), `decision:choose-from-zone-extensions` (5),
   `effect:counter-ability` (8), `static:combat-restriction-extensions` top unit (5), `effect:animate-grants-*` (7),
   `cost:conditional-alternative-cost` (8), `static:grant-abilities-to-spells` (8), the unless-clause units of
-  `effect:choices-by-other-players` and `effect:unless-target-controller` (13), `effect:copy-spell-extensions` top unit (7).
+  `effect:choices-by-other-players` and `effect:unless-target-controller` (13), `effect:copy-spell-extensions` top unit (7),
+  `trigger:combat-trigger-extensions` attack-counts unit (6), `effect:attack-batch-those-creatures` (5),
+  `effect:delayed-trigger-rest-of-game` (5), `cost:choose-cards-as-cost` with a spell's additional cost taking
+  `KickerAlsoCost` (8), `cost:dynamic-life-cost` (4).
 
 ## Rough size
 

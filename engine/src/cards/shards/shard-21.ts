@@ -462,6 +462,7 @@ import _poolMonoistSentry from "../pool/monoist-sentry.js";
 import _poolMorkrutBanshee from "../pool/morkrut-banshee.js";
 import _poolMorphicPool from "../pool/morphic-pool.js";
 import _poolMsBumbleflower from "../pool/ms-bumbleflower.js";
+import _poolMurderousBetrayal from "../pool/murderous-betrayal.js";
 import _poolMurmuringPhantasm from "../pool/murmuring-phantasm.js";
 import _poolMuscleSliver from "../pool/muscle-sliver.js";
 import _poolMuseVortex from "../pool/muse-vortex.js";
@@ -594,6 +595,7 @@ import _poolRunOutOfTown from "../pool/run-out-of-town.js";
 import _poolRunawayBoulder from "../pool/runaway-boulder.js";
 import _poolRuricTharMagecrusher from "../pool/ruric-thar-magecrusher.js";
 import _poolRustwingFalcon from "../pool/rustwing-falcon.js";
+import _poolSabotageStrategist from "../pool/sabotage-strategist.js";
 import _poolSageOfEpityr from "../pool/sage-of-epityr.js";
 import _poolSalvagingStation from "../pool/salvaging-station.js";
 import _poolSandsteppeWarRiders from "../pool/sandsteppe-war-riders.js";
@@ -1318,6 +1320,7 @@ const shard: CardShard = {
     _poolMorkrutBanshee,
     _poolMorphicPool,
     _poolMsBumbleflower,
+    _poolMurderousBetrayal,
     _poolMurmuringPhantasm,
     _poolMuscleSliver,
     _poolMuseVortex,
@@ -1450,6 +1453,7 @@ const shard: CardShard = {
     _poolRunawayBoulder,
     _poolRuricTharMagecrusher,
     _poolRustwingFalcon,
+    _poolSabotageStrategist,
     _poolSageOfEpityr,
     _poolSalvagingStation,
     _poolSandsteppeWarRiders,

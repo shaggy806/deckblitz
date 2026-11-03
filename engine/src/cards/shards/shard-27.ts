@@ -334,6 +334,7 @@ import _poolHoodedKavu from "../pool/hooded-kavu.js";
 import _poolHopeAndGlory from "../pool/hope-and-glory.js";
 import _poolHormagauntHorde from "../pool/hormagaunt-horde.js";
 import _poolHornOfRamos from "../pool/horn-of-ramos.js";
+import _poolHornOfTheMark from "../pool/horn-of-the-mark.js";
 import _poolHorrorOfHorrors from "../pool/horror-of-horrors.js";
 import _poolHoundOfGriselbrand from "../pool/hound-of-griselbrand.js";
 import _poolHuatliTheSunsHeart from "../pool/huatli-the-suns-heart.js";
@@ -1204,6 +1205,7 @@ const shard: CardShard = {
     _poolHopeAndGlory,
     _poolHormagauntHorde,
     _poolHornOfRamos,
+    _poolHornOfTheMark,
     _poolHorrorOfHorrors,
     _poolHoundOfGriselbrand,
     _poolHuatliTheSunsHeart,
