@@ -829,7 +829,8 @@ missing. Re-run `--greedy` for Phase 2's order.
   `mechanic:face-down` top unit (6), `cost:unattach-cost` (4), `keyword:splice` (7), `static:cant-have-keyword` (4),
   `static:grant-types-to-others` top unit (7), `effect:delayed-trigger-extensions` (8), `effect:put-onto-battlefield-options`
   (6), `bug:as-enters-choices-any-entry` (3), `replacement:new-event-replacements` skip-turn unit (4),
-  `duration:until-your-next-upkeep` (9), `static:self-type-changes` (11).
+  `duration:until-your-next-upkeep` (9), `static:self-type-changes` (11), `decision:choose-from-zone-extensions` (5),
+  `effect:counter-ability` (8).
 
 ## Rough size
 

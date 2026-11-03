@@ -12,6 +12,12 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **Countering abilities** (2026-11-02, `10039292c`): `counter.thenSource`, the `for-each-on-stack` combinator, narrowed
+  stack slots, and Skip on an optional slot over the stack; Disallow needed no code; Green Slime, Ouphe Vandals, Nimble
+  Obstructionist, Tishana's Tidebinder, Teferi's Response, Kadena's Silencer, Summary Dismissal.
+- **Any number with different names or powers** (2026-11-02, `f01c0cb9f`): `together` on `choose-permanents`,
+  `distinctPowers`, a search's chosen shuffled in; Eerie Ultimatum, Battle for Bretagard, Sigarda's Vanguard, Rip Spawn
+  Hunter, Threats Undetected.
 - **An animate that sets creature characteristics** (2026-11-02, `108e72eee`): live P/T beside a `grant-static`,
   `add-types`' `removeTypes`, `StaticAbility.selfOutsideBattlefield`; 11 proving cards, among them Myth Realized,
   Chimeric Mass, Svogthos, Druid Class and Oko.
