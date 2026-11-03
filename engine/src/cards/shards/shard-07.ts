@@ -620,6 +620,7 @@ import _poolRingsOfBrighthearth from "../pool/rings-of-brighthearth.js";
 import _poolRingskipper from "../pool/ringskipper.js";
 import _poolRoadRuin from "../pool/road-ruin.js";
 import _poolRoarOfChallenge from "../pool/roar-of-challenge.js";
+import _poolRocketLauncher from "../pool/rocket-launcher.js";
 import _poolRoguesGloves from "../pool/rogues-gloves.js";
 import _poolRonasVortex from "../pool/ronas-vortex.js";
 import _poolRootCage from "../pool/root-cage.js";
@@ -1534,6 +1535,7 @@ const shard: CardShard = {
     _poolRingskipper,
     _poolRoadRuin,
     _poolRoarOfChallenge,
+    _poolRocketLauncher,
     _poolRoguesGloves,
     _poolRonasVortex,
     _poolRootCage,

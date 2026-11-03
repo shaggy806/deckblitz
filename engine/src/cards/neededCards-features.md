@@ -4445,4 +4445,18 @@ the life there is) and `{ each, per }` (`dynamic-life-cost.test.ts`). Key: cost:
 
 **A spell's cost raised by coloured pips (2026-11-03).** `costModification.increaseColored` adds coloured pips to matching spells' total cost before any reduction (rule 601.2f), to an alternative cost as well (118.9d); the shown cost adds them (`cost-increase-colored.test.ts`). Key: static:cost-increase-colored. Proving cards: Derelor, Sapphire Leech, Andradite Leech.
 
+**Controlled continuously since the turn began (2026-11-03).** `CardFilter.controlledContinuously` reads rule 302.6's test off `summoningSick`, on a permanent of any type, haste or no haste: the source's `condition`, a target with `controlledBy: "active-player"`, what a player sacrifices. Keys: condition:controlled-since-turn-start, filter:controlled-continuously-since-turn-start. Cards: Rocket Launcher, Nettling Imp, Norritt, Keldon Twilight (`controlled-continuously.test.ts`). Total War and Siren's Call each ask more: "didn't attack" of one declaration, not of the turn, and a cast timing condition. Arcum's Whistle's optional payment is unchecked.
+
+**Different mana costs and the mana value threshold (2026-11-03).** `of: "mana-cost"` on a `distinct` aggregate counts the symbols of a mana cost rather than their total, a card with none adding nothing (rule 202.1b); "five or more mana values among cards in your graveyard" was already an `aggregate` condition, now read by the scaffolder on `flashIf`, an intervening if and a spell's "unless" as well as a static. Keys: amount:count-distinct-mana-costs, condition:distinct-mana-values-in-graveyard. Cards: Embodiment of Agonies, Graveyard Shift, Sanguine Spy, Tainted Indulgence (`distinct-mana-costs.test.ts`).
+
 **Offering (2026-11-03).** Rule 702.48: `kicker: { cost: "", keyword: "offering", flash: true, offering: <quality> }`, one kicked offer per permanent of the quality, named as the cast's `sacrifice`, its total cost less that permanent's mana cost (`manaCostReductions`, `ownManaCostOf`; rule 702.48c), a twobrid half that matters its own offer by `costOption` (118.7e). No new decision; the client's buttons already read `emergeSacrifice` and `kickerCost`. Also the filter `attackingOpponent` (`offering.test.ts`). Key: keyword:offering. Proving cards: Patron of the Akki, Patron of the Kitsune, Blast-Furnace Hellkite.
+**A static making a planeswalker a creature (2026-11-03).** The type statics already said it: `addTypes` for "that's still a
+planeswalker" (rule 205.1b), `setTypes` where the words are missing (205.1a), under any `condition`. What it took: a planeswalker being
+attacked that stops being one is removed from combat, and what attacks it attacks nothing (506.4, 506.4c; `attackingNothing`, also for a
+battle); `setBasePtFromAffectedCounters` (each permanent's own count, layer 7b); `grantPtPerCount.anyCountersOnAffected`; `attach`'s
+`planeswalkerToo` for "Equip planeswalker" (702.6e). Key: static:planeswalker-becomes-creature. Proving cards: Gideon Blackblade, Grand
+Master of Flowers, Kaito, Bane of Nightmares, Spark Rupture, Luxior, Giada's Gift.
+
+**A mass change of types, P/T left alone (2026-11-03).** No new effect: `add-types` under `for-each-permanent`, as Nightcreep's. What it took:
+`choose-creature-type`'s `sentinel` (`FIRST_CHOSEN_TYPE`) nests a second choice inside the first. Keys: effect:add-types-all,
+effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter, Volatile Claws, Energybending, Terraformer, Vision Charm.

@@ -317,6 +317,7 @@ import _poolGolgariFindbroker from "../pool/golgari-findbroker.js";
 import _poolGoliathBeetle from "../pool/goliath-beetle.js";
 import _poolGossamerChains from "../pool/gossamer-chains.js";
 import _poolGrandBallGuest from "../pool/grand-ball-guest.js";
+import _poolGrandMasterOfFlowers from "../pool/grand-master-of-flowers.js";
 import _poolGrapplingHook from "../pool/grappling-hook.js";
 import _poolGraveVenerations from "../pool/grave-venerations.js";
 import _poolGravelgillDuo from "../pool/gravelgill-duo.js";
@@ -1219,6 +1220,7 @@ const shard: CardShard = {
     _poolGoliathBeetle,
     _poolGossamerChains,
     _poolGrandBallGuest,
+    _poolGrandMasterOfFlowers,
     _poolGrapplingHook,
     _poolGraveVenerations,
     _poolGravelgillDuo,

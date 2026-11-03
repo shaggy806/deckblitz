@@ -960,6 +960,15 @@ export interface CardFilter {
    * this turn", "a creature that didn't enter this turn". A card anywhere
    * but the battlefield hasn't; one that has left is asked as it last was. */
   readonly enteredThisTurn?: boolean;
+  /** Its controller has (or hasn't) controlled it continuously since their
+   * most recent turn began — rule 302.6's test, read of a permanent of any
+   * type and whether or not it has haste: Rocket Launcher's "you've
+   * controlled this artifact continuously since the beginning of your most
+   * recent turn". With `controlledBy: "active-player"` that turn is this one:
+   * Nettling Imp's "creature the active player has controlled continuously
+   * since the beginning of the turn". Battlefield only: off it (a last-known
+   * snapshot) nothing has been. */
+  readonly controlledContinuously?: boolean;
   /** Is (or isn't) renowned (rule 702.112b) — renown's "if it isn't
    * renowned", "as long as this creature is renowned" (Goblin Glory Chaser),
    * "if it's renowned" (Consul's Lieutenant). Asked like `monstrous`. */
@@ -2235,6 +2244,10 @@ export function matchesFilter(
     const turn = live !== undefined ? live.enteredBattlefieldOnTurn : (lki!.enteredOnTurn ?? null);
     if ((turn === state.turn.number) !== filter.enteredThisTurn) return false;
   }
+  if (filter.controlledContinuously !== undefined) {
+    const held = live !== undefined && live.zone === "battlefield" && !live.summoningSick;
+    if (held !== filter.controlledContinuously) return false;
+  }
   if (
     filter.cast !== undefined ||
     filter.castBy !== undefined ||
@@ -2925,6 +2938,11 @@ export function aggregateMatches(
  *
  * - `"mana-value"`: a land's is 0 and counts as one (rule 202.3a), `{X}` 0
  *   off the stack (202.3e).
+ * - `"mana-cost"`: the symbols of its mana cost, not their total — Embodiment
+ *   of Agonies' "each different mana cost": {2}{B} and {1}{B}{B} are two. A
+ *   card with no mana cost has none and adds nothing (rule 202.1b); a split
+ *   card's is its halves' combined (709.4b), a double-faced card's its front
+ *   face's off the battlefield (712.8a).
  * - `"power"`: its power now.
  * - `"name"` — "differently named lands" (Awakened Amalgam): a split card's
  *   two names together are one; a face-down permanent has none (rule
@@ -2943,6 +2961,7 @@ export function aggregateMatches(
  */
 export type DistinctOf =
   | "mana-value"
+  | "mana-cost"
   | "power"
   | "name"
   | "color-pair"
@@ -2978,6 +2997,10 @@ function distinctValuesOf(
   const object = state.objects[id];
   if (object === undefined) return [];
   if (of === "mana-value") return [aggregateValueOf(state, registry, id, "mana-value")];
+  if (of === "mana-cost") {
+    const cost = printedManaCost(registry, object);
+    return cost === null || cost === "" ? [] : [cost];
+  }
   if (of === "name") {
     const name = distinctNameOf(registry, object);
     return name === undefined ? [] : [name];

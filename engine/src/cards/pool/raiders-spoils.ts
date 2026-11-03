@@ -25,7 +25,7 @@ export default defineCard({
       trigger: {
         on: "deals-combat-damage-to-player",
         who: "you-control",
-        filter: { type: "creature", subtype: "Warrior" },
+        filter: { subtype: "Warrior" },
       },
       targets: [],
       effect: {
