@@ -10482,6 +10482,39 @@ describe("a duration to a point in a later turn", () => {
   });
 });
 
+describe("an animate that sets creature characteristics", () => {
+  it("reads a granted P/T, read live, with its counters", () => {
+    const parsed = parseEffect(
+      "Until end of turn, ~ becomes a Monk Avatar creature in addition to its other types and gains \"This creature's power and toughness are each equal to the number of lore counters on it.\"",
+      ctx(),
+    );
+    expect(parsed.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "animate", target: "source", addTypes: ["creature"], addSubtypes: ["Monk", "Avatar"], duration: "end-of-turn" },
+        {
+          kind: "grant-static",
+          target: "source",
+          ability: {
+            affects: { scope: "self" },
+            setBasePtFromCount: { countOf: { countersOnThis: "lore" }, plusPower: 0, plusToughness: 0 },
+            text: "This creature's power and toughness are each equal to the number of lore counters on it.",
+          },
+          duration: "end-of-turn",
+        },
+      ],
+    });
+  });
+  it("reads a card type taken away for the turn", () => {
+    expect(parseEffect("~ isn't a creature until end of turn.", ctx()).effect).toEqual({
+      kind: "add-types",
+      target: "source",
+      removeTypes: ["creature"],
+      duration: "end-of-turn",
+    });
+  });
+});
+
 describe("an effect done by another player", () => {
   it("reads 'target player scries N' as as-player, on a player slot", () => {
     const parsed = parseEffect("Target player scries 2.", ctx());

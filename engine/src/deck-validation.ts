@@ -87,6 +87,9 @@ export function canCommandAlone(def: CardDefinition): boolean {
   return (
     def.canBeCommander ||
     def.types.includes("creature") ||
+    // A creature card off the battlefield (Grist, the Hunger Tide) is a
+    // legendary creature in the command zone (rule 903.3).
+    def.static?.some((a) => a.selfOutsideBattlefield?.addTypes.includes("creature")) === true ||
     def.subtypes.includes("Vehicle") ||
     (def.subtypes.includes("Spacecraft") && def.power !== null)
   );

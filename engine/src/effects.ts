@@ -6788,8 +6788,11 @@ export type EffectSpec =
        * "this creature's base power becomes equal to target creature's
        * power" `power: { powerOf: 0 }` with `duration: "permanent"`, Chariot
        * of the Sun's "has base toughness 1" `toughness: 1`. With no
-       * `addTypes` nothing becomes a creature; it only sets the value. At
-       * least one of the two is given. */
+       * `addTypes` nothing becomes a creature; it only sets the value. With
+       * neither, its P/T is what it was, or what a `grant-static`'s
+       * `setBasePtFromCount` beside it says: "becomes a Monk Avatar creature
+       * … and gains 'This creature's power and toughness are each equal to
+       * the number of lore counters on it'" (Myth Realized), read live. */
       readonly power?: EffectAmount;
       readonly toughness?: EffectAmount;
       readonly addTypes: readonly CardType[];
@@ -6837,6 +6840,14 @@ export type EffectSpec =
        * too, its supertypes stay), applied before `addTypes`.
        */
       readonly setTypes?: readonly CardType[];
+      /**
+       * "**Isn't** a creature until end of turn" (Blink's Alien Angel), "isn't
+       * an artifact" (Neurok Transmuter): these card types go, its others stay,
+       * and a subtype that went only with them goes too (rule 205.1a's reading
+       * of a lost type, Weeping Angel's ruling). An attacker or blocker is
+       * removed from combat (rule 506.4).
+       */
+      readonly removeTypes?: readonly CardType[];
       /**
        * "Becomes a Coward" / "becomes the creature type of your choice"
        * (Boldwyr Intimidator, the Mistforms — `CHOSEN_CREATURE_TYPE` under a
@@ -10950,6 +10961,7 @@ export interface EffectApi {
     duration: PtDuration,
     set?: {
       readonly setTypes?: readonly CardType[];
+      readonly removeTypes?: readonly CardType[];
       readonly setSubtypes?: readonly string[];
       readonly addColors?: readonly Color[];
     },
@@ -16460,6 +16472,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       if (target !== undefined) {
         ctx.addTypes(target, spec.addTypes ?? [], spec.addSubtypes ?? [], spec.duration, {
           ...(spec.setTypes !== undefined ? { setTypes: spec.setTypes } : {}),
+          ...(spec.removeTypes !== undefined ? { removeTypes: spec.removeTypes } : {}),
           ...(spec.setSubtypes !== undefined ? { setSubtypes: spec.setSubtypes } : {}),
           ...(spec.addColors !== undefined ? { addColors: spec.addColors } : {}),
         });

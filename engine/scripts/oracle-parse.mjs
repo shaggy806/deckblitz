@@ -4473,6 +4473,40 @@ export function parseSentence(sentence, ctx) {
   if ((m = re(`(${TARGET}) becomes an? (Plains|Island|Swamp|Mountain|Forest) until end of turn`).exec(s))) {
     return { kind: "add-types", target: slot(m[1]), setSubtypes: [m[2]], duration: "end-of-turn" };
   }
+  // "This token isn't a creature until end of turn" (Blink's Alien Angel).
+  if ((m = re(`(~|${TARGET}) isn't an? (creature|artifact|enchantment|land) until end of turn`).exec(s))) {
+    return { kind: "add-types", target: m[1] === "~" ? "source" : slot(m[1]), removeTypes: [m[2]], duration: "end-of-turn" };
+  }
+  // Myth Realized, Chimeric Mass, Beorn's Hospitality: a granted P/T, read live
+  // (not a CDA once granted, rule 604.3a).
+  if ((m = /^(until end of turn, )?~ becomes an? (.+?) creature(?: in addition to its other types)? (?:and gains|with) "This creature's power and toughness are each equal to the number of (lore counters on it|charge counters on it|lands you control|creature cards in your graveyard)\."\.?$/i.exec(s))) {
+    const add = additionOf(`${m[2]} creature`);
+    const counted = {
+      "lore counters on it": { countersOnThis: "lore" },
+      "charge counters on it": { countersOnThis: "charge" },
+      "lands you control": { countOf: { type: "land", controlledBy: "you" } },
+      "creature cards in your graveyard": { countInGraveyard: { type: "creature", ownedBy: "you" } },
+    }[m[3]];
+    if (add !== null && add.basePt === undefined && add.keywords === undefined && add.addColors === undefined) {
+      const duration = m[1] !== undefined ? "end-of-turn" : "permanent";
+      return {
+        kind: "sequence",
+        effects: [
+          { kind: "animate", target: "source", addTypes: add.addTypes ?? [], addSubtypes: add.addSubtypes ?? [], duration },
+          {
+            kind: "grant-static",
+            target: "source",
+            ability: {
+              affects: { scope: "self" },
+              setBasePtFromCount: { countOf: counted, plusPower: 0, plusToughness: 0 },
+              text: `This creature's power and toughness are each equal to the number of ${m[3]}.`,
+            },
+            duration,
+          },
+        ],
+      };
+    }
+  }
   // Karn's Touch: its mana value read once, as the effect applies (rule 608.2h).
   if ((m = re(`(${TARGET}) becomes an artifact creature with power and toughness each equal to its mana value until end of turn`).exec(s))) {
     const target = slot(m[1]);

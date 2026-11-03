@@ -2924,6 +2924,17 @@ function outsideTypeSources(state: GameState, registry: CardRegistry): readonly 
 }
 const OUTSIDE_TYPE_SOURCES = "outside-type-sources";
 
+/** What this card's own text makes of it off the battlefield (see
+ * `StaticAbility.selfOutsideBattlefield`), if it says anything. */
+function selfOutsideBattlefield(
+  registry: CardRegistry,
+  object: GameObject,
+): StaticAbility["selfOutsideBattlefield"] {
+  if (object.kind !== "card" || object.zone === "battlefield" || object.zone === "phased-out") return undefined;
+  if (object.faceDown !== undefined || object.foretold === true || object.exiledFaceDown !== undefined) return undefined;
+  return staticsOf(registry, rulesTextName(object)).selfOutside[0]?.selfOutsideBattlefield;
+}
+
 /**
  * Layer 4 for an object off the battlefield: its own, then each
  * `typesOutsideBattlefield` static that reaches it, in timestamp order (rule
@@ -2933,7 +2944,12 @@ const OUTSIDE_TYPE_SOURCES = "outside-type-sources";
  * stack is no card or spell.
  */
 function outsideLayerFour(state: GameState, registry: CardRegistry, object: GameObject): LayerFour {
-  const own = ownLayerFour(registry, object);
+  const printed = ownLayerFour(registry, object);
+  const self = selfOutsideBattlefield(registry, object);
+  const own =
+    self === undefined
+      ? printed
+      : { ...printed, types: union(printed.types, self.addTypes), subtypes: union(printed.subtypes, self.addSubtypes) };
   const sources = outsideTypeSources(state, registry);
   if (sources.length === 0) return own;
   if (object.kind !== "card" || object.faceDown !== undefined || object.foretold === true) return own;
@@ -3536,6 +3552,21 @@ function countSide(state: GameState, object: GameObject, forChosenPlayer: true |
   return chosen !== undefined && state.players[chosen]?.hasLost !== true ? chosen : undefined;
 }
 
+/** A `setBasePtFromCount`'s count on `object`: the one permanent that knows
+ * which number it chose and which counters are "on it". */
+function basePtCount(
+  state: GameState,
+  registry: CardRegistry,
+  object: GameObject,
+  from: NonNullable<StaticAbility["setBasePtFromCount"]>,
+): number {
+  const of = from.countOf;
+  if (of === "chosen-number") return chosenNumberOf(object);
+  if (typeof of === "object" && "countersOnThis" in of) return object.counters[of.countersOnThis] ?? 0;
+  const side = countSide(state, object, from.forChosenPlayer);
+  return side === undefined ? 0 : countValue(of, state, registry, side);
+}
+
 /** The creature types `object` has, the every-type marker among them for a
  * changeling (rule 702.73a): what a filter's `subtypes` takes as "shares a
  * creature type with it" (`hasSubtype`). */
@@ -3598,6 +3629,8 @@ export function countValue(
     if ("playerCounters" in spec) {
       return state.players[controller]?.counters[spec.playerCounters] ?? 0;
     }
+    // Which permanent's is only known to a `setBasePtFromCount`.
+    if ("countersOnThis" in spec) return 0;
     if ("greatestManaValueOf" in spec) {
       let best = 0;
       for (const id of state.zones.shared.battlefield) {
@@ -4363,6 +4396,8 @@ interface StaticsInfo {
   readonly fromGraveyard: readonly StaticAbility[];
   /** What {@link typeGrantSources} takes (`hasLayerFourPart`). */
   readonly layer4: readonly StaticAbility[];
+  /** What {@link selfOutsideBattlefield} takes. */
+  readonly selfOutside: readonly StaticAbility[];
   /** What {@link outsideTypeSources} takes (`typesOutsideBattlefield`). */
   readonly outsideTypes: readonly StaticAbility[];
   /** What {@link colorSetSources} takes (a `setColors`). */
@@ -4396,6 +4431,7 @@ function staticsInfo(registry: CardRegistry, name: string): StaticsInfo | null {
     fromGraveyard: statics.filter((a) => a.fromGraveyard === true && contributesToCharacteristics(a)),
     layer4: statics.filter(hasLayerFourPart),
     outsideTypes: statics.filter((a) => a.typesOutsideBattlefield !== undefined),
+    selfOutside: statics.filter((a) => a.selfOutsideBattlefield !== undefined),
     layer5: statics.filter((a) => a.setColors !== undefined || a.addColors !== undefined || a.setsChosenColor === true),
     grants: statics.filter((a) => a.grantsActivated !== undefined || a.grantsTriggered !== undefined),
     loseAll: statics.filter((a) => a.loseAllAbilities === true),
@@ -4922,7 +4958,9 @@ function computeCharacteristicsUncached(
   // timestamp order: the object's own modifiers (a man-land's animation adds
   // `creature`) and type-granting statics.
   const layer4 =
-    onBattlefield || outsideTypeSources(state, registry).length > 0 ? layerFour(state, registry, object) : null;
+    onBattlefield || outsideTypeSources(state, registry).length > 0 || selfOutsideBattlefield(registry, object) !== undefined
+      ? layerFour(state, registry, object)
+      : null;
   const types: readonly CardType[] = layer4?.types ?? def.types;
   // Off the battlefield, changeling still applies (rule 604.3): a changeling
   // card in a library is a Goblin card to a tutor.
@@ -5124,13 +5162,7 @@ function computeCharacteristicsUncached(
       let n: number;
       cdaInProgress.add(object.id);
       try {
-        const side = countSide(state, object, ability.setBasePtFromCount.forChosenPlayer);
-        n =
-          ability.setBasePtFromCount.countOf === "chosen-number"
-            ? chosenNumberOf(object)
-            : side === undefined
-              ? 0
-              : countValue(ability.setBasePtFromCount.countOf, state, registry, side);
+        n = basePtCount(state, registry, object, ability.setBasePtFromCount);
       } finally {
         cdaInProgress.delete(object.id);
       }
@@ -5179,8 +5211,7 @@ function computeCharacteristicsUncached(
           let n: number;
           cdaInProgress.add(object.id);
           try {
-            const side = countSide(state, object, from.forChosenPlayer);
-            n = side === undefined ? 0 : countValue(from.countOf, state, registry, side);
+            n = basePtCount(state, registry, object, from);
           } finally {
             cdaInProgress.delete(object.id);
           }
@@ -5199,7 +5230,13 @@ function computeCharacteristicsUncached(
     }
   } else {
     // Off the battlefield only copiable values set it: a prototyped spell's
-    // "1/1" on the stack (rule 718.3b).
+    // "1/1" on the stack (rule 718.3b). And "as long as it isn't on the
+    // battlefield, it's a 1/1" (Grist).
+    const outside = selfOutsideBattlefield(registry, object);
+    if (outside !== undefined) {
+      power = outside.power;
+      toughness = outside.toughness;
+    }
     for (const modifier of object.modifiers) {
       if (modifier.copiable === true && modifier.setPt) [power, toughness] = modifier.setPt;
     }

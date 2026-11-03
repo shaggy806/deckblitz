@@ -1333,7 +1333,15 @@
   "effect:exile-may-cast-until-your-next-turn",
   "effect:until-controllers-next-untap-step-duration",
   "effect:until-end-of-your-next-turn",
-  "zone:impulse-until-your-next-turn-begins"
+  "zone:impulse-until-your-next-turn-begins",
+  "effect:animate-with-cda-pt",
+  "effect:animate-planeswalker-with-trigger",
+  "effect:set-pt-from-target",
+  "static:set-characteristics",
+  "effect:remove-card-type-until-eot",
+  "effect:stops-being-creature",
+  "effect:stops-being-creature-until-eot",
+  "static:self-type-changes"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

@@ -1732,9 +1732,9 @@ export interface PtModifier {
    * Applied before `addTypes`. */
   setTypes?: CardType[];
   /** Layer 4 — card types taken away, with every subtype that went only with
-   * them (rule 205.1a). Never stored: reconfigure's "while attached, this
-   * isn't a creature" is folded in as one at its attachment's timestamp
-   * (`reconfiguredModifier`). */
+   * them (rule 205.1a): `add-types`' `removeTypes`, and reconfigure's "while
+   * attached, this isn't a creature", folded in as one at its attachment's
+   * timestamp (`reconfiguredModifier`). */
   removeTypes?: CardType[];
   /** Layer 4 — subtypes this modifier adds (e.g. `["Blinkmoth"]`). */
   addSubtypes?: string[];

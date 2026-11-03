@@ -576,6 +576,10 @@ export type CountSpec =
    * has none — Shapeshifter's "the last chosen number". Only a
    * `setBasePtFromCount` knows which permanent that is. */
   | "chosen-number"
+  /** How many counters of a kind are on this permanent — "power and toughness
+   * are each equal to the number of lore counters on it" (Myth Realized, a
+   * granted one). Only a `setBasePtFromCount` knows which permanent that is. */
+  | { readonly countersOnThis: string }
   | "cards-in-all-graveyards"
   /** How many cards are in its controller's hand (Psychosis Crawler) — its
    * owner's, off the battlefield. */
@@ -2652,6 +2656,18 @@ export interface StaticAbility {
    * (rule 708.2). Beside a battlefield half's own `addsChosenCreatureType` /
    * `addSubtypes` / `addTypes`, or alone under `affects: { scope: "self" }`.
    */
+  /**
+   * "As long as [this] isn't on the battlefield, it's a 1/1 Insect creature in
+   * addition to its other types" (Grist, the Hunger Tide): this card's own
+   * layer 4 and base P/T everywhere but the battlefield (rule 113.6c), a card
+   * or a spell. A face-down one has no types to add to (rule 708.2).
+   */
+  readonly selfOutsideBattlefield?: {
+    readonly addTypes: readonly CardType[];
+    readonly addSubtypes: readonly string[];
+    readonly power: number;
+    readonly toughness: number;
+  };
   readonly typesOutsideBattlefield?: {
     readonly ofType: CardType;
     readonly zones?: readonly ("hand" | "library" | "graveyard" | "exile" | "command" | "stack")[];

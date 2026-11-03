@@ -4193,3 +4193,13 @@ effect:until-controllers-next-untap-step-duration, effect:until-end-of-your-next
 zone:impulse-until-your-next-turn-begins. Found to need no code: effect:exile-may-cast-until-your-next-turn (`exile`'s `mayCast`).
 Proving cards: Xenic Poltergeist, Gabriel Angelfire, Halfdane, Elkin Bottle, Cycle of Life, Orcish Farmer, Stilt-Man, Towering
 Terror, Hurl Through Hell, Nivix, Aerie of the Firemind.
+
+**An animate that sets creature characteristics (2026-11-02).** A live P/T on an animated permanent is `animate` (with no P/T of
+its own) beside a `grant-static`'s `setBasePtFromCount`, not a CDA once granted (rule 604.3a), with the new `CountSpec`
+`{ countersOnThis }`. `add-types`' `removeTypes`: "isn't a creature until end of turn", its subtypes going too and an attacker or
+blocker out of combat (506.4). `StaticAbility.selfOutsideBattlefield`: a card's own types and base P/T everywhere but the
+battlefield (113.6c). Keys: effect:animate-with-cda-pt (the counters half), effect:remove-card-type-until-eot,
+effect:stops-being-creature, effect:stops-being-creature-until-eot, static:self-type-changes (the off-the-battlefield half). Found
+to need no code: effect:animate-planeswalker-with-trigger, effect:set-pt-from-target, static:set-characteristics. Proving cards:
+Myth Realized, Chimeric Mass, Svogthos, the Restless Tomb, Beorn's Hospitality, Druid Class, Oko, Thief of Crowns, Sparkshaper
+Visionary, Sworn Defender, Neurok Transmuter, Blink, Grist, the Hunger Tide.

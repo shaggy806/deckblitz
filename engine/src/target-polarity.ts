@@ -681,7 +681,12 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   // says which: losing abilities or a tiny base (Multiply by Zero's 0/0) is
   // harm; keywords, a big base or becoming a creature is help. A middling
   // base on a creature (Fractalize's X+1) is still the board's call.
-  animate: (n, v) => v.touch(n.target, animatePolarity(n), MAJOR),
+  // A slot its P/T only reads ("equal to the power and toughness of target
+  // creature" — Halfdane) is the board's call.
+  animate: (n, v) => {
+    v.touch(n.target, animatePolarity(n), MAJOR);
+    for (const slot of slotsReadBy([n.power, n.toughness])) if (slot !== n.target) v.touch(slot, "either", MINOR);
+  },
   "add-types": (n, v) => v.touch(n.target, "either", MINOR),
   // A target player's creatures made small (Mass Diminish's 1/1s).
   "animate-all": (n, v) => {
@@ -1010,6 +1015,17 @@ function slotTouches(
  * granted ability helps. A Curse enchants the player it punishes, and an Aura
  * that steals what it enchants (Mind Control) is theft.
  */
+/** The target slots an amount reads a permanent's P/T or mana value from. */
+function slotsReadBy(amount: unknown): number[] {
+  if (Array.isArray(amount)) return amount.flatMap(slotsReadBy);
+  if (typeof amount !== "object" || amount === null) return [];
+  return Object.entries(amount).flatMap(([key, value]) =>
+    (key === "powerOf" || key === "toughnessOf" || key === "manaValueOf") && typeof value === "number"
+      ? [value]
+      : slotsReadBy(value),
+  );
+}
+
 /** Which way an `animate` points at its target — see the table's entry. */
 function animatePolarity(n: Extract<EffectSpec, { kind: "animate" }>): Polarity {
   if (n.loseAbilities === true) return "harm";
