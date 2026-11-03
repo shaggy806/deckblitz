@@ -24,6 +24,38 @@ import { parseEffect, parseFace, parseTrigger, parseCost, parseSentence, parseTy
 // @ts-expect-error — as above.
 import { checkPool } from "../../scripts/oracle-parse-check.mjs";
 
+describe("a cost removing all of a kind of counter, the number the X", () => {
+  const read = (oracle_text: string) =>
+    parseFace({ name: "Card", type_line: "Artifact", oracle_text }, { tokenFor: (d: string) => d }).activated[0];
+  it("damage equal to the number", () => {
+    const ability = read(
+      "{T}, Remove all +1/+1 counters from this artifact: It deals damage to any target equal to the number of +1/+1 counters removed this way.",
+    );
+    expect(ability.cost.removeCounter).toEqual({ kind: "+1/+1", count: "all" });
+    expect(ability.effect).toEqual({ kind: "damage", amount: "x", target: 0 });
+  });
+  it("2 life for each", () => {
+    expect(read("{T}, Remove all elixir counters from this artifact: You gain 2 life for each elixir counter removed this way.").effect).toEqual({
+      kind: "gain-life",
+      amount: { product: ["x", 2] },
+    });
+  });
+  it("-1/-1 for each", () => {
+    const ability = read("Remove all +1/+1 counters from this artifact: Target creature gets -1/-1 until end of turn for each +1/+1 counter removed this way.");
+    expect(ability.targets).toEqual(["creature"]);
+    expect(ability.effect).toEqual({
+      kind: "modify-pt",
+      target: 0,
+      power: { product: ["x", -1] },
+      toughness: { product: ["x", -1] },
+      duration: "end-of-turn",
+    });
+  });
+  it("isn't the X of a cost that doesn't remove them all", () => {
+    expect(read("{T}, Remove a charge counter from this artifact: You gain 2 life for each charge counter removed this way.").effect).toBeNull();
+  });
+});
+
 describe("a cost paid a chosen number of times", () => {
   const read = (oracle_text: string) =>
     parseFace({ name: "Card", type_line: "Creature — Human", oracle_text, power: "3", toughness: "1" }, { tokenFor: (d: string) => d }).triggered[0];

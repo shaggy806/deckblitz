@@ -10,6 +10,7 @@
   "effect:delayed-trigger-target-deals-damage",
   "effect:delayed-trigger-target-player-next-upkeep",
   "effect:delayed-trigger-until-your-next-turn",
+  "cost:remove-all-counters",
   "decision:pay-cost-up-to-n-times",
   "replacement:skip-extra-turns",
   "replacement:skip-turn",

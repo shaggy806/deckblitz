@@ -3560,6 +3560,12 @@ in `git log`.
   "x"` (rule 603.12a; `pay-cost-times.test.ts`). Intrepid Adversary, Primal
   Adversary, Tranquil Frillback.
 
+- **Remove all of a kind of counter as a cost** (`cost:remove-all-counters`,
+  2026-11-02) — no engine code: `removeCounter`'s `count: "all"` (Catti-brie of
+  Mithral Hall) already removes them as the cost is paid, the number the X its
+  effect reads (`remove-all-counters-cost.test.ts`). Molten Hydra, Essence Bottle,
+  Geometric Nexus. The scaffolder reads "2 life for each" and "-1/-1 for each" too.
+
 ## Completed: `neededCards.txt` passes (P0-P20)
 
 Two curated precon decks (a fixed-dual-land manabase deck, a

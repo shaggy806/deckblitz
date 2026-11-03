@@ -2574,6 +2574,15 @@ export function parseSentence(sentence, ctx) {
   // Parasite), "You draw cards and lose life equal to the number of counters
   // removed this way" (Eventide's Shadow).
   const removedThisWay = { thisWay: "counters-removed" };
+  // A "remove all … counters" cost's number is the ability's X.
+  if (ctx?.removedIsX === true && (m = /^you gain (\d+) life for each [\w+/-]+ counter removed this way\.$/i.exec(s))) {
+    return { kind: "gain-life", amount: { product: ["x", Number(m[1])] } };
+  }
+  if (ctx?.removedIsX === true && /^target creature gets -1\/-1 until end of turn for each [\w+/-]+ counter removed this way\.$/i.test(s)) {
+    const slot = ctx.target("creature");
+    const less = { product: ["x", -1] };
+    return { kind: "modify-pt", target: slot, power: less, toughness: less, duration: "end-of-turn" };
+  }
   if ((m = /^for each counter removed this way, ~ gets \+1\/\+(0|1) until end of turn\.$/i.exec(s))) {
     return {
       kind: "modify-pt",
@@ -10686,7 +10695,9 @@ export function parseFace(face, ctx = {}) {
       // X is the number of counters removed this way" reads it as X.
       // So do "damage … equal to the number of … counters removed this way"
       // (Molten Hydra, Torture Chamber) and "that much damage" (Relic Amulet).
-      if (ability.cost.removeCounter?.count === "all" && !/\bX\b/.test(rest.replace(/, where X is the number of (?:[\w+/-]+ )?counters removed this way\./, ""))) {
+      // As do "you gain 2 life for each … counter removed this way" and
+      // "-1/-1 … for each" (Essence Bottle, Vish Kal), through `removedIsX`.
+      if (ability.cost.removeCounter?.count === "all") {
         rest = rest
           .replace(/, where X is the number of (?:[\w+/-]+ )?counters removed this way\./, ".")
           .replace(/ deals damage to (.+?) equal to the number of (?:[\w+/-]+ )?counters removed this way\./, " deals X damage to $1.")
@@ -11943,6 +11954,8 @@ function fillEffect(ability, text, ctx, lines, i) {
     ...(ability.cost?.exileFromGraveyard?.count === 1 ? { costExiled: true } : {}),
     // A cost that reveals one card: "the revealed card" is that card.
     ...(ability.cost?.reveal?.count === 1 ? { costRevealed: true } : {}),
+    // A cost removing all of a kind of counter: how many is the X.
+    ...(ability.cost?.removeCounter?.count === "all" ? { removedIsX: true } : {}),
     ...(ctx.thatPlayer !== undefined ? { thatPlayer: ctx.thatPlayer } : {}),
     ...(ctx.attackBatch === true ? { attackBatch: true } : {}),
     ...(theirSlots !== undefined ? { opponentChoosesTargets: theirSlots } : {}),
