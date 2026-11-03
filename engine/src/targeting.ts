@@ -674,6 +674,22 @@ function isLegalTargetUncached(
     }
     return true;
   }
+  // A card in exile (rule 406): face down, it has no characteristics (406.3a).
+  if (typeof spec === "object" && spec.kind === "card-in-exile") {
+    if (ref.kind !== "object") return false;
+    const object = state.objects[ref.object];
+    if (object === undefined || object.zone !== "exile" || object.kind !== "card") return false;
+    const whose = spec.whose ?? "any";
+    if (whose === "you" && object.owner !== forPlayer) return false;
+    if (whose === "opponent" && object.owner === forPlayer) return false;
+    const faceDown = object.exiledFaceDown !== undefined;
+    if (faceDown && (spec.faceUp === true || spec.filter !== undefined)) return false;
+    if (spec.linked === true && !exiledWithTargetSource(state, object, source)) return false;
+    return (
+      spec.filter === undefined ||
+      matchesFilter(state, registry, ref.object, spec.filter, targetFilterContext(forPlayer, source))
+    );
+  }
   // The structured graveyard spec.
   if (typeof spec === "object") {
     if (ref.kind !== "object") return false;
@@ -1022,8 +1038,29 @@ function legalTargetsUncached(
         if (isLegalTarget(state, registry, spec, ref, forPlayer, source)) out.push(ref);
       }
     }
+  } else if (typeof spec === "object" && spec.kind === "card-in-exile") {
+    for (const id of state.zones.shared.exile) {
+      const ref: TargetRef = { kind: "object", object: id };
+      if (isLegalTarget(state, registry, spec, ref, forPlayer, source)) out.push(ref);
+    }
   }
   return out;
+}
+
+/**
+ * Is `card` (in exile) linked to the targeting source's battlefield stint —
+ * "exiled with this creature" (rule 607.2a: `exiledWith`, or exiled until it
+ * leaves, `exiledUntil`)? The stint is the source's current one, or the one
+ * it last had on the battlefield if it has left (an ability of it that's
+ * still on the stack, rule 608.2h). No source object, no link.
+ */
+function exiledWithTargetSource(state: GameState, card: GameObject, source: TargetSource | undefined): boolean {
+  const id = source?.object;
+  const holder = id === undefined ? undefined : state.objects[id];
+  if (holder === undefined) return false;
+  const stint = holder.zone === "battlefield" ? (holder.zoneChangeCount ?? 0) : holder.lastKnown?.zoneChangeCount;
+  if (stint === undefined) return false;
+  return [card.exiledWith, card.exiledUntil].some((l) => l !== undefined && l.source === holder.id && l.zoneChangeCount === stint);
 }
 
 /**

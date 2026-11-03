@@ -11644,6 +11644,57 @@ describe("offering", () => {
   });
 });
 
+describe("a card in exile, targeted", () => {
+  const spell = (oracle_text: string) => parseFace({ name: "Card", type_line: "Instant", oracle_text });
+  it("reads a face-up exiled card put into its owner's graveyard", () => {
+    const pull = spell("Put target face-up exiled card into its owner's graveyard.");
+    expect(pull.complete).toBe(true);
+    expect(pull.targets).toEqual([{ kind: "card-in-exile", faceUp: true }]);
+    expect(pull.effect).toEqual({ kind: "put-into-graveyard", target: 0 });
+  });
+  it("reads an exiled card with flashback you own returned to your hand", () => {
+    const runic = spell("Return target exiled card with flashback you own to your hand.");
+    expect(runic.complete).toBe(true);
+    expect(runic.targets).toEqual([{ kind: "card-in-exile", whose: "you", filter: { hasFlashback: true } }]);
+    expect(runic.effect).toEqual({ kind: "return-to-hand", target: 0, from: "exile" });
+  });
+  it("reads a creature card with mana value X exiled with this creature", () => {
+    const cube = parseFace(
+      { name: "Card", type_line: "Creature — Ooze", oracle_text: "{X}{B}: Put target creature card with mana value X exiled with this creature into its owner's graveyard." },
+      { tokenFor: (d: string) => d },
+    ).activated[0];
+    expect(cube.targets).toEqual([
+      { kind: "card-in-exile", linked: true, filter: { type: "creature", manaValue: { op: "eq", n: "x" } } },
+    ]);
+    expect(cube.effect).toEqual({ kind: "put-into-graveyard", target: 0 });
+  });
+});
+
+describe("counters on what was manifested this way", () => {
+  const spell = (oracle_text: string) => parseFace({ name: "Card", type_line: "Sorcery", oracle_text });
+  const onThem = (amount: number | "x") => ({
+    kind: "add-counter-all",
+    filter: { thisWay: "put-onto-battlefield" },
+    counter: "+1/+1",
+    amount,
+  });
+  it("reads manifest dread X times, then counters on each of those creatures", () => {
+    const read = spell("Manifest dread X times, then put X +1/+1 counters on each of those creatures.");
+    expect(read.complete).toBe(true);
+    expect(read.effect).toEqual({ kind: "sequence", effects: [{ kind: "manifest-dread", count: "x" }, onThem("x")] });
+  });
+  it("reads a manifest, then counters on it", () => {
+    expect(spell("Manifest the top card of your library, then put a +1/+1 counter on it.").effect).toEqual({
+      kind: "sequence",
+      effects: [{ kind: "manifest", who: "you" }, onThem(1)],
+    });
+    expect(spell("Manifest dread, then put three +1/+1 counters on that creature.").effect).toEqual({
+      kind: "sequence",
+      effects: [{ kind: "manifest-dread" }, onThem(3)],
+    });
+  });
+});
+
 describe("mana abilities from a hand, and paid by exiling from a graveyard", () => {
   const read = (type_line: string, oracle_text: string) =>
     (parseFace({ name: "Card", type_line, oracle_text, mana_cost: "{1}", colors: [], cmc: 1 } as never, { tokenFor: (d: string) => d }) as unknown as {

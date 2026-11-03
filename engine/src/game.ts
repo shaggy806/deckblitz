@@ -23304,6 +23304,7 @@ export class Game {
         for (const permission of this.exilePermissionsFor(player, spellCard, castFace)) {
           allow(permission.spendAs);
         }
+        allow(this.linkedCastGrantFor(player, spellCard, castFace)?.grant.spendAs);
       }
     }
     return { wide, units };

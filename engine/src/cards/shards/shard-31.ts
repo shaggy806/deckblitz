@@ -315,6 +315,7 @@ import _poolGatheringStone from "../pool/gathering-stone.js";
 import _poolGatstafArsonists from "../pool/gatstaf-arsonists.js";
 import _poolGauntletOfMight from "../pool/gauntlet-of-might.js";
 import _poolGeistflameReservoir from "../pool/geistflame-reservoir.js";
+import _poolGelatinousCube from "../pool/gelatinous-cube.js";
 import _poolGeneralKudroOfDrannith from "../pool/general-kudro-of-drannith.js";
 import _poolGenesisChamber from "../pool/genesis-chamber.js";
 import _poolGhastlyDiscovery from "../pool/ghastly-discovery.js";
@@ -1266,6 +1267,7 @@ const shard: CardShard = {
     _poolGatstafArsonists,
     _poolGauntletOfMight,
     _poolGeistflameReservoir,
+    _poolGelatinousCube,
     _poolGeneralKudroOfDrannith,
     _poolGenesisChamber,
     _poolGhastlyDiscovery,

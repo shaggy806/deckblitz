@@ -19,6 +19,12 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
   Mariner, Dormant Gomazoa, Loki, God of Mischief, Angelic Cub.
 - **A land tapped for mana producing another type** (2026-11-03, `71edd1918`): `landManaInstead`, a static (by land kind,
   anyone's taps) or a turn-long player effect. Deep Water, Reality Twist, Infernal Darkness.
+- **What a manifest or a create step put onto the battlefield** (2026-11-03, `3b79b62a8`): `manifest-dread`'s `count` an
+  amount, counters on the manifested cards through `thisWay: "put-onto-battlefield"`, `put-counters-of` onto `"created"`.
+  Valgavoth's Onslaught, Wildcall, Formless Nurturing, Ambitious Augmenter, Moldering Gym // Weight Room.
+- **A card in exile as a target** (2026-11-03, `0ad1f5631`): `card-in-exile` (`whose`, `faceUp`, `linked`), the filter
+  `hasFlashback`, `allow-cast-linked-exile`'s `spendAs`. Pull from Eternity, Gelatinous Cube, Runic Repetition, Clone
+  Shell, Cemetery Protector, King Narfi's Betrayal.
 - **Unspent mana: another type, kept by every player, life lost** (2026-11-03, `679a2a9e9`): `unspentManaBecomes`,
   `keepsUnspentManaEachPlayer`, `manaLossCausesLifeLoss` in the rule 500.4 emptying. Horizon Stone, Upwelling, Yurlok of
   Scorch Thrash.

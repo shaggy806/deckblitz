@@ -869,6 +869,9 @@ missing. Re-run `--greedy` for Phase 2's order.
   `condition:attacking-an-opponent-filter` with `trigger:attacks-your-opponent` and `trigger:player-attacks-not-you`.
 - **2026-11-03: `keyword:hexproof-from-abilities`.** Hexproof from activated and triggered abilities, and the printed
   "can't be the target of …" marked `notHexproof` so a loss of hexproof leaves it; Volatile Stormdrake, Shanna.
+- **2026-11-03: one cloud session, six named families in order.** `effect:linked-exiled-card` with
+  `effect:linked-face-down-exile-to-battlefield`, `target:card-in-exile` and `condition:filter-has-flashback`;
+  `effect:manifested-this-way` with `effect:put-counters-of-created`.
 
 ## Rough size
 

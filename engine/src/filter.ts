@@ -853,6 +853,14 @@ export interface CardFilter {
    * creature you control with toxic" (Slaughter Singer), "if that creature
    * has toxic" (Hexgold Slash). Read on the battlefield; not on a snapshot. */
   readonly hasToxic?: boolean;
+  /** Has (or hasn't) flashback (rule 702.34) — "target card with flashback
+   * you own from exile" (Rootcoil Creeper), "target exiled card with
+   * flashback" (Runic Repetition): the flashback its text prints, or one a
+   * resolved effect gave it where it is (`grantedFlashback`, Snapcaster
+   * Mage's, which ends with any move). Not a static ability's graveyard-only
+   * grant (Lier's "instant and sorcery cards in your graveyard have
+   * flashback"), so ask it of cards in exile, where no such grant reaches. */
+  readonly hasFlashback?: boolean;
   /** Has an Aura attached to it, whoever controls the Aura (rule 303.4). */
   readonly enchanted?: boolean;
   /** Is itself attached to a permanent matching this filter — an Aura or
@@ -2697,6 +2705,13 @@ export function matchesFilter(
           ? !hasLostAbilities(state, registry, live) && registry.get(rulesTextName(live)).toxic > 0
           : computeCharacteristics(state, registry, id).toxic > 0;
     if (has !== filter.hasToxic) return false;
+  }
+
+  if (filter.hasFlashback !== undefined) {
+    const has =
+      live !== undefined &&
+      (live.grantedFlashback != null || registry.get(rulesTextName(live)).flashback !== null);
+    if (has !== filter.hasFlashback) return false;
   }
 
   // "With the greatest power among creatures that player controls": none of

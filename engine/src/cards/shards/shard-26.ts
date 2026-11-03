@@ -22,6 +22,7 @@ import _poolAkoumTeeth from "../pool/akoum-teeth.js";
 import _poolAkromaAngelOfFury from "../pool/akroma-angel-of-fury.js";
 import _poolAkromaAngelOfWrath from "../pool/akroma-angel-of-wrath.js";
 import _poolAlquistProftMasterSleuth from "../pool/alquist-proft-master-sleuth.js";
+import _poolAmbitiousAugmenter from "../pool/ambitious-augmenter.js";
 import _poolAmbrosiaWhiteheart from "../pool/ambrosia-whiteheart.js";
 import _poolAmbuscadeShaman from "../pool/ambuscade-shaman.js";
 import _poolAnalyzeThePollen from "../pool/analyze-the-pollen.js";
@@ -478,6 +479,7 @@ import _poolMirageMockery from "../pool/mirage-mockery.js";
 import _poolMirrorMockery from "../pool/mirror-mockery.js";
 import _poolMirrorSigilSergeant from "../pool/mirror-sigil-sergeant.js";
 import _poolMistCloakedHerald from "../pool/mist-cloaked-herald.js";
+import _poolMolderingGymWeightRoom from "../pool/moldering-gym-weight-room.js";
 import _poolMomentumRumbler from "../pool/momentum-rumbler.js";
 import _poolMomirVigSimicVisionary from "../pool/momir-vig-simic-visionary.js";
 import _poolMoorlandInquisitor from "../pool/moorland-inquisitor.js";
@@ -925,6 +927,7 @@ const shard: CardShard = {
     _poolAkromaAngelOfFury,
     _poolAkromaAngelOfWrath,
     _poolAlquistProftMasterSleuth,
+    _poolAmbitiousAugmenter,
     _poolAmbrosiaWhiteheart,
     _poolAmbuscadeShaman,
     _poolAnalyzeThePollen,
@@ -1381,6 +1384,7 @@ const shard: CardShard = {
     _poolMirrorMockery,
     _poolMirrorSigilSergeant,
     _poolMistCloakedHerald,
+    _poolMolderingGymWeightRoom,
     _poolMomentumRumbler,
     _poolMomirVigSimicVisionary,
     _poolMoorlandInquisitor,

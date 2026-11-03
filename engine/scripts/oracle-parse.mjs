@@ -1245,6 +1245,34 @@ function libraryPlacementSlot(phrase, ctx) {
   return quantifiedSlots(phrase, ctx)?.slots[0];
 }
 
+/** "Target face-up exiled card" (Pull from Eternity), "target exiled card
+ * with flashback you own" (Runic Repetition), "target card with flashback you
+ * own from exile" (Rootcoil Creeper), "target creature card with mana value X
+ * exiled with this creature" (Gelatinous Cube): a `card-in-exile` slot. */
+const EXILE_TARGET =
+  "target (?:face-up exiled card|exiled card(?: with flashback)?(?: you own)?|card(?: with flashback)? you own from exile|(?:[a-z]+ )?card(?: with mana value X)? exiled with (?:this [a-z]+|~))";
+
+function exileTargetOf(phrase) {
+  if (/^target face-up exiled card$/i.test(phrase)) return { kind: "card-in-exile", faceUp: true };
+  let m;
+  if ((m = /^target (?:exiled card( with flashback)?( you own)?|card( with flashback)? you own from exile)$/i.exec(phrase))) {
+    const flashback = m[1] !== undefined || m[3] !== undefined;
+    const own = m[2] !== undefined || m[3] !== undefined || /you own from exile$/i.test(phrase);
+    return {
+      kind: "card-in-exile",
+      ...(own ? { whose: "you" } : {}),
+      ...(flashback ? { filter: { hasFlashback: true } } : {}),
+    };
+  }
+  if ((m = /^target (?:([a-z]+) )?card( with mana value X)? exiled with (?:this [a-z]+|~)$/i.exec(phrase))) {
+    const parsed = m[1] === undefined ? {} : parseTypePhrase(m[1], { cards: true });
+    if (parsed === null) return undefined;
+    const filter = m[2] === undefined ? parsed : { ...parsed, manaValue: { op: "eq", n: "x" } };
+    return { kind: "card-in-exile", linked: true, ...(Object.keys(filter).length > 0 ? { filter } : {}) };
+  }
+  return undefined;
+}
+
 function graveyardTargetOf(phrase) {
   const m = /^target (?:(.+?) )?card( with mana value X)? from (your|a|an opponent's) graveyard$/i.exec(phrase);
   if (!m) return undefined;
@@ -2852,6 +2880,17 @@ export function parseSentence(sentence, ctx) {
     }
   }
 
+  // A card in exile, targeted (rule 406): into its owner's graveyard, or back
+  // to a hand.
+  if ((m = re(`put (${EXILE_TARGET}) into its owner's graveyard`).exec(s))) {
+    const spec = exileTargetOf(m[1]);
+    if (spec !== undefined) return { kind: "put-into-graveyard", target: ctx.target(spec) };
+  }
+  if ((m = re(`return (${EXILE_TARGET}) to (?:your|its owner's) hand`).exec(s))) {
+    const spec = exileTargetOf(m[1]);
+    if (spec !== undefined) return { kind: "return-to-hand", target: ctx.target(spec), from: "exile" };
+  }
+
   // Cards.
   if ((m = re(`(?:you )?draw ${N} cards?`).exec(s))) return { kind: "draw", amount: amount(m[1]) };
   if ((m = re(`(target player|target opponent) draws ${N} cards?`).exec(s))) {
@@ -4070,6 +4109,28 @@ export function parseSentence(sentence, ctx) {
   // "(you) manifest the top card of that player's library" — another
   // player's library (Thieving Amalgam, Orochi Soul-Reaver), when the
   // trigger names that player.
+  // "…then put N +1/+1 counters on it / that creature / each of those
+  // creatures": the cards this resolution manifested, which were put onto
+  // the battlefield (rules 701.40a, 701.62a — Wildcall, Weight Room,
+  // Valgavoth's Onslaught). Manifest dread N times (`count`).
+  {
+    const onThem = (n) => ({
+      kind: "add-counter-all",
+      filter: { thisWay: "put-onto-battlefield" },
+      counter: "+1/+1",
+      amount: numberOf(n),
+    });
+    if ((m = re(`manifest the top card of your library, then put ${N} \\+1/\\+1 counters? on it`).exec(s))) {
+      return { kind: "sequence", effects: [{ kind: "manifest", who: "you" }, onThem(m[1])] };
+    }
+    if ((m = re(`manifest dread(?: ${N} times)?, then put ${N} \\+1/\\+1 counters? on (?:that creature|each of those creatures)`).exec(s))) {
+      const dread = m[1] === undefined ? { kind: "manifest-dread" } : { kind: "manifest-dread", count: numberOf(m[1]) };
+      return { kind: "sequence", effects: [dread, onThem(m[2])] };
+    }
+    if ((m = re(`manifest dread(?: ${N} times)?`).exec(s))) {
+      return m[1] === undefined ? { kind: "manifest-dread" } : { kind: "manifest-dread", count: numberOf(m[1]) };
+    }
+  }
   if (re("manifest the top card of your library").test(s)) return { kind: "manifest", who: "you" };
   if (ctx.thatPlayer !== undefined && re("(?:you )?manifest the top card of that player's library").test(s)) {
     return { kind: "manifest", who: "you", from: ctx.thatPlayer };

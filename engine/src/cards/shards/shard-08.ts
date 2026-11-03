@@ -853,6 +853,7 @@ import _poolUsherOfTheFallen from "../pool/usher-of-the-fallen.js";
 import _poolUtvaraHellkite from "../pool/utvara-hellkite.js";
 import _poolVagrantPlowbeasts from "../pool/vagrant-plowbeasts.js";
 import _poolValakutPredator from "../pool/valakut-predator.js";
+import _poolValgavothsOnslaught from "../pool/valgavoths-onslaught.js";
 import _poolValkyrieAerialUnit from "../pool/valkyrie-aerial-unit.js";
 import _poolVampireWarlord from "../pool/vampire-warlord.js";
 import _poolVantressTransmuter from "../pool/vantress-transmuter.js";
@@ -1790,6 +1791,7 @@ const shard: CardShard = {
     _poolUtvaraHellkite,
     _poolVagrantPlowbeasts,
     _poolValakutPredator,
+    _poolValgavothsOnslaught,
     _poolValkyrieAerialUnit,
     _poolVampireWarlord,
     _poolVantressTransmuter,
