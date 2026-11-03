@@ -1854,6 +1854,8 @@ export class Game {
 
   private leaveBatch: {
     readonly left: ObjectId[];
+    /** Those of `left` that went to a graveyard (rule 700.4). */
+    readonly died: ObjectId[];
     readonly deferred: ObjectId[];
     /** The event's victims as they were before any of them moved — see
      * {@link snapshotLeaving}. */
@@ -3694,7 +3696,17 @@ export class Game {
         if (onlySource !== undefined && card !== onlySource) continue;
         const def = this.registry.get(this.state.objects[card].cardName);
         this.effectiveActivated(card).forEach((ability, index) => {
-          if (ability.zone === zone) pushActivateAbility(card, def.name, ability, index);
+          if (ability.zone !== zone) return;
+          // A mana ability's outcomes one by one, as a permanent's are above
+          // (Jack-o'-Lantern's "one mana of any color").
+          const variants = this.standaloneManaVariants(card, ability, player);
+          if (variants === null) {
+            pushActivateAbility(card, def.name, ability, index);
+            return;
+          }
+          for (const variant of variants) {
+            pushActivateAbility(card, def.name, ability, index, variant.manaColors, variant.makes, variant.manaSplit);
+          }
         });
       }
     }
@@ -14918,6 +14930,14 @@ export class Game {
       }
     };
     const doubles = (d: NonNullable<StaticAbility["doubleTriggers"]>): boolean => {
+      // "One or more" died: any of them that's the doubler's kind caused it.
+      if (d.cause === "dies" && event.type === "permanents-died") {
+        return event.died.some(
+          (id) =>
+            d.filter === undefined ||
+            matchesFilter(this.state, this.registry, id, d.filter, { you: controller, lastKnown: true }),
+        );
+      }
       const who = subject(d.cause);
       if (who === undefined) return false;
       if (d.filter === undefined) return true;
@@ -14942,8 +14962,9 @@ export class Game {
     // at the rest of its batch that has already left, each as it last
     // existed there (rule 603.10a). Only an unconditional static, since its
     // condition can't be asked of a permanent that has gone.
-    if (isLeaveEvent(event)) {
-      for (const id of new Set([event.object, ...this.lookBackSources(event)])) {
+    if (isLeaveEvent(event) || event.type === "permanents-died") {
+      const lookingBack = this.lookBackSources(event);
+      for (const id of isLeaveEvent(event) ? new Set([event.object, ...lookingBack]) : lookingBack) {
         const was = this.state.objects[id];
         const last = was?.lastKnown;
         if (was === undefined || was.zone === "battlefield" || last === undefined) continue;
@@ -18461,8 +18482,16 @@ export class Game {
     // total cost, so paid alongside the mana; it isn't mana spent.
     if (taxLife > 0) this.changeLife(player, -taxLife);
     // Sephara's "tap four untapped creatures you control with flying" — the
-    // other half of its alternative cost, paid as the spell is cast.
-    this.payTapCost(tapPicked);
+    // other half of its alternative cost, paid as the spell is cast. One
+    // permanent tapped is remembered: "the creature tapped to pay this spell's
+    // additional cost" (Swallow Whole).
+    const tappedForCost = this.payTapCost(tapPicked);
+    if (tappedForCost.length === 1) {
+      object.lastKnownRefs = {
+        ...object.lastKnownRefs,
+        tapped: { object: tappedForCost[0], zoneChangeCount: this.state.objects[tappedForCost[0]].zoneChangeCount ?? 0 },
+      };
+    }
     // Sneak's "returning an unblocked creature you control to its owner's
     // hand" (rule 702.190a), the other half of that cost: what it was
     // attacking is what the permanent this spell becomes attacks (702.190b).
@@ -18528,7 +18557,7 @@ export class Game {
         this.emit({ type: "permanent-sacrificed", object: victim, player: sacrificer });
       }
       // What the spell's "the sacrificed creature" reads (rule 608.2h).
-      object.lastKnownRefs = { sacrificed: { object: victim, zoneChangeCount: stint } };
+      object.lastKnownRefs = { ...object.lastKnownRefs, sacrificed: { object: victim, zoneChangeCount: stint } };
     }
     // The costs are paid, so a target in a token stack can be peeled off it
     // (`lockInTargets`) without taking a token a cost above had named.
@@ -20944,9 +20973,8 @@ export class Game {
       }
     }
     if (ability.cost.exileFromGraveyard !== undefined) {
-      // Paid with a decision once the ability is on the stack, which a mana
-      // ability never is; and one cost asks one thing at a time.
-      if (isManaAbility(ability)) return `${def.name}'s mana ability can't exile cards from a graveyard yet`;
+      // Paid with a decision (a mana ability's waiting for it, rule 605.3b);
+      // and one cost asks one thing at a time.
       if (ability.cost.discard !== undefined || ability.cost.returnToHand !== undefined || sacrificeParts !== null) {
         return `${def.name}'s ability can't ask for two cost choices at once yet`;
       }
@@ -21078,10 +21106,10 @@ export class Game {
       if (!this.canBlight(player)) return `${player} controls no creature to blight for ${def.name}'s cost`;
     }
     if (ability.cost.collectEvidence !== undefined) {
-      // Chosen once the ability is on the stack, as a blight is — so never
-      // on a mana ability, nor beside another cost that asks.
+      // Chosen once the ability is on the stack, as a blight is (a mana
+      // ability's waiting for it, rule 605.3b) — never beside another cost
+      // that asks.
       if (
-        isManaAbility(ability) ||
         ability.cost.blight !== undefined ||
         sacrificeParts !== null ||
         ability.cost.discard !== undefined ||
@@ -21491,6 +21519,9 @@ export class Game {
       // — ninjutsu's (702.49a, b), Zareth San's: it stays in the hand,
       // revealed, until the ability leaves the stack.
       this.revealCards(player, [sourceId], "hand");
+    } else if (ability.zone === "hand" && ability.exilesFromHand === true) {
+      // "Exile this card from your hand" (Simian Spirit Guide): no discard.
+      this.moveObject(sourceId, "exile");
     } else if (ability.zone === "hand") {
       // Channel (rule 702.51a): discarding the source card is an implicit,
       // unconditional part of the cost, paid alongside the mana above.
@@ -21543,6 +21574,25 @@ export class Game {
           this.afterPlayerAction(player);
           return;
         }
+      }
+      // "Exile a card from your graveyard" (Molt Tender) and "Collect evidence
+      // 3" (Cryptex) wait the same way, where there's a choice to make.
+      const manaAfter = { source: sourceId, abilityIndex, x: chosenX, ...(manaColors !== undefined ? { manaColors } : {}) };
+      const graveyardExile = ability.cost.exileFromGraveyard;
+      if (graveyardExile !== undefined) {
+        this.withDecisionSource(sourceId, () =>
+          this.payGraveyardExileCost(player, sourceId, this.graveyardExileCostAt(player, graveyardExile, chosenX), player, undefined, manaAfter),
+        );
+      }
+      const evidence = ability.cost.collectEvidence;
+      if (evidence !== undefined) {
+        this.withDecisionSource(sourceId, () =>
+          this.beginCollectEvidence(player, sourceId, evidence, { x: chosenX, priorityTo: player, thenManaAbility: manaAfter }),
+        );
+      }
+      if (this.state.awaiting !== null) {
+        this.afterPlayerAction(player);
+        return;
       }
       this.resolveManaAbility(sourceId, player, ability, chosenX, manaColors, grantedAbility, sacrificedRef, tappedRef);
       return;
@@ -21632,25 +21682,8 @@ export class Game {
     // chosen).
     const costExile = ability.cost.exileFromGraveyard;
     if (costExile !== undefined) {
-      const count =
-        costExile.count === "x"
-          ? chosenX
-          : costExile.count === "opponents"
-            ? this.scopedPlayers(player, "each-opponent").length
-            : costExile.count;
       this.withDecisionSource(sourceId, () =>
-        this.payGraveyardExileCost(
-          player,
-          sourceId,
-          {
-            count,
-            ...(costExile.filter !== undefined ? { filter: costExile.filter } : {}),
-            ...(costExile.fromTop === true ? { fromTop: true as const } : {}),
-            ...(costExile.singleGraveyard === true ? { singleGraveyard: true as const } : {}),
-          },
-          player,
-          abilityId,
-        ),
+        this.payGraveyardExileCost(player, sourceId, this.graveyardExileCostAt(player, costExile, chosenX), player, abilityId),
       );
     }
     // "Exile a card from your hand", "exile a spell you control" likewise.
@@ -21986,6 +22019,22 @@ export class Game {
     );
   }
 
+  /** An ability's `exileFromGraveyard` at the X it was activated with: how
+   * many ("exile X", "equal to the number of opponents"), for
+   * {@link payGraveyardExileCost}. */
+  private graveyardExileCostAt(
+    player: PlayerId,
+    cost: NonNullable<AbilityCost["exileFromGraveyard"]>,
+    x: number,
+  ): { count: number; filter?: CardFilter; fromTop?: true; singleGraveyard?: true } {
+    return {
+      count: cost.count === "x" ? x : cost.count === "opponents" ? this.scopedPlayers(player, "each-opponent").length : cost.count,
+      ...(cost.filter !== undefined ? { filter: cost.filter } : {}),
+      ...(cost.fromTop === true ? { fromTop: true as const } : {}),
+      ...(cost.singleGraveyard === true ? { singleGraveyard: true as const } : {}),
+    };
+  }
+
   /**
    * Pay an activated ability's "exile N [kind of] cards from your graveyard"
    * (`AbilityCost.exileFromGraveyard`) as it goes on the stack (rule 602.2b,
@@ -21994,7 +22043,9 @@ export class Game {
    * it's paid (117.3c). No more matching cards than that is no choice: they
    * are all exiled at once. Either way they leave as one move. `optional`
    * ("you may exile") always asks, and none is an answer; `exileLink` links
-   * what's exiled to the permanent the spell becomes (rule 607.2a).
+   * what's exiled to the permanent the spell becomes (rule 607.2a). A mana
+   * ability's (`manaAbility`) adds its mana once a choice is answered, and
+   * nothing is on the stack (rule 605.3b).
    */
   private payGraveyardExileCost(
     player: PlayerId,
@@ -22011,6 +22062,7 @@ export class Game {
     /** The spell or ability on the stack this pays for, which remembers the
      * cards — its effect's "the exiled card". */
     forStackObject?: ObjectId,
+    manaAbility?: Extract<AwaitingDecision, { kind: "choose-from-zone" }>["thenManaAbility"],
   ): void {
     if (cost.count <= 0) return;
     // "From a single graveyard" (Night Soil): any player's that has enough, all
@@ -22040,6 +22092,7 @@ export class Game {
           text: "from a single graveyard",
         },
         ...(forStackObject !== undefined ? { costExileFor: forStackObject } : {}),
+        ...(manaAbility !== undefined ? { thenManaAbility: manaAbility } : {}),
       };
       return;
     }
@@ -22073,6 +22126,7 @@ export class Game {
       ...(cost.optional === true ? { prompt: "You may choose a card to exile" } : {}),
       ...(cost.exileLink !== undefined ? { exileLink: cost.exileLink } : {}),
       ...(forStackObject !== undefined ? { costExileFor: forStackObject } : {}),
+      ...(manaAbility !== undefined ? { thenManaAbility: manaAbility } : {}),
     };
   }
 
@@ -22591,6 +22645,9 @@ export class Game {
           abilityIndex < printedLost ||
           inactiveStandIn(this.state, this.registry, object, abilityIndex) ||
           !isManaAbility(ability) ||
+          // One that works from another zone is activated by hand (a permanent
+          // has no use of Elvish Spirit Guide's or Jack-o'-Lantern's here).
+          ability.zone !== undefined ||
           ability.effect === null ||
           ability.effect.kind !== "add-mana" ||
           // "Its activated abilities with {T} in their costs" (Serra
@@ -25906,6 +25963,12 @@ export class Game {
               : // How many cards were put into the graveyard.
                 trigger.on === "put-into-graveyard" && event.type === "cards-put-into-graveyard"
               ? this.graveyardArrivals(trigger, event.arrivals, object).length
+              : // How many permanents died, a stack as each of its tokens.
+                trigger.on === "dies" && event.type === "permanents-died"
+              ? this.diedBatchMatching(trigger, event, object).reduce(
+                  (n, id) => n + (this.state.objects[id]?.stackCount ?? 1),
+                  0,
+                )
               : trigger.on === "put-into-exile" && event.type === "cards-put-into-exile"
               ? this.exileArrivals(trigger, event.arrivals, object).length
               : // "…for each card discarded this way".
@@ -26240,7 +26303,7 @@ export class Game {
       candidates.add(id);
       suspendedOnly.add(id);
     }
-    const leaving = isLeaveEvent(event);
+    const leaving = isLeaveEvent(event) || event.type === "permanents-died";
     for (const id of candidates) {
       const live = this.state.objects[id];
       if (live === undefined) continue;
@@ -26419,6 +26482,18 @@ export class Game {
                       zoneChangeCount: this.state.objects[card]?.zoneChangeCount ?? 0,
                     })),
                   }
+                : // "Return one of them": the cards among what died. A token
+                  // is no card to return (rule 111.1).
+                  ability.trigger.on === "dies" && event.type === "permanents-died"
+                  ? {
+                      ...(atTrigger ?? {}),
+                      arrivedTogether: this.diedBatchMatching(ability.trigger, event, object)
+                        .filter((card) => this.state.objects[card]?.isToken !== true)
+                        .map((card) => ({
+                          object: card,
+                          zoneChangeCount: this.state.objects[card]?.zoneChangeCount ?? 0,
+                        })),
+                    }
                 : // "Whenever players finish voting": that vote's votes.
                   ability.trigger.on === "players-finish-voting" && event.type === "votes-finished"
                   ? { ...(atTrigger ?? {}), votes: event.votes }
@@ -26476,7 +26551,13 @@ export class Game {
               event.type === "permanent-entered-battlefield"
                 ? this.entryTriggerDoublers(object.controller, event.object)
                 : 0) +
-              this.causeTriggerDoublers(object.controller, event) +
+              this.causeTriggerDoublers(
+                object.controller,
+                // Only the deaths that caused this one (Teysa Karlov).
+                ability.trigger.on === "dies" && event.type === "permanents-died"
+                  ? { ...event, died: this.diedBatchMatching(ability.trigger, event, object) }
+                  : event,
+              ) +
               this.sourceTriggerDoublers(object.controller, id, lastSeen !== undefined);
           // "Triggers only once each turn": this firing is the one, whatever
           // the stack size or batch count would otherwise multiply it to.
@@ -26964,6 +27045,11 @@ export class Game {
    * was: its subject is the only departed object that sees it.
    */
   private lookBackSources(event: GameEvent): ReadonlySet<ObjectId> {
+    // "Whenever one or more creatures die" is announced once the event is
+    // done: everything that left in it sees it, its own deaths included.
+    if (event.type === "permanents-died") {
+      return new Set(event.left.filter((id) => (this.state.objects[id]?.zone ?? "battlefield") !== "battlefield"));
+    }
     const batch = this.leaveBatch;
     if (batch === null || !isLeaveEvent(event) || !batch.left.includes(event.object)) {
       return EMPTY_ID_SET;
@@ -27002,6 +27088,7 @@ export class Game {
         const object = this.state.objects[id];
         return object !== undefined && object.zone !== "battlefield";
       }),
+      died: [] as ObjectId[],
       deferred: [] as ObjectId[],
       snapshots: new Map<ObjectId, LastKnownInfo>(),
       endsWhileSource: [] as ObjectId[],
@@ -27011,6 +27098,7 @@ export class Game {
     try {
       // What goes to graveyards goes together too.
       this.withGraveyardEnterBatch(fn);
+      if (batch.died.length > 0) this.emit({ type: "permanents-died", died: batch.died, left: batch.left });
     } finally {
       this.leaveBatch = null;
     }
@@ -27204,6 +27292,49 @@ export class Game {
     return matching;
   }
 
+  /** The permanents of a `permanents-died` event a batched `dies` trigger
+   * counts, each read as it last existed (rule 603.10a). */
+  private diedBatchMatching(
+    spec: Extract<TriggerSpec, { on: "dies" }>,
+    event: Extract<GameEvent, { type: "permanents-died" }>,
+    self: GameObject,
+  ): ObjectId[] {
+    return event.died.filter(
+      (id) =>
+        !(spec.otherOnly === true && id === self.id) &&
+        this.matchesWho(spec.who, id, self, true) &&
+        this.triggerFilterOk(spec.filter, id, self, true),
+    );
+  }
+
+  /** What `source`, a token holding a `GameObject.linkedExile`, means by "the
+   * exiled card": those still in exile as the same objects (rule 400.7),
+   * though the token has left or ceased to exist. `undefined` for anything
+   * else, which finds its exiled cards the usual way. */
+  private exiledLinkedToToken(source: ObjectId): readonly ObjectId[] | undefined {
+    const object = this.state.objects[source];
+    const links =
+      object?.linkedExile ?? object?.lastKnown?.linkedExile ?? this.state.ceasedTokens?.[source]?.linkedExile;
+    if (links === undefined) return undefined;
+    return links
+      .filter(({ object: card, zoneChangeCount }) => {
+        const exiled = this.state.objects[card];
+        return exiled?.zone === "exile" && (exiled.zoneChangeCount ?? 0) === zoneChangeCount;
+      })
+      .map(({ object: card }) => card);
+  }
+
+  /** "One of them": those of a batched trigger's cards still in that graveyard
+   * as the same objects (rule 400.7). */
+  private arrivedStillThere(refs: LastKnownRefs): ObjectId[] {
+    return (refs.arrivedTogether ?? [])
+      .filter(({ object, zoneChangeCount }) => {
+        const card = this.state.objects[object];
+        return card?.zone === "graveyard" && (card.zoneChangeCount ?? 0) === zoneChangeCount;
+      })
+      .map(({ object }) => object);
+  }
+
   private triggerMatches(
     spec: TriggerSpec,
     event: GameEvent,
@@ -27220,6 +27351,10 @@ export class Game {
           this.triggerFilterOk(spec.filter, event.object, self)
         );
       case "dies":
+        // "Whenever one or more …": once, off the whole event.
+        if (spec.batched === true) {
+          return event.type === "permanents-died" && this.diedBatchMatching(spec, event, self).length > 0;
+        }
         // Rule 700.4: a permanent "dies" when it is put into a graveyard *from
         // the battlefield* — however it got there. Keying this off
         // `permanent-destroyed` missed every sacrifice (Ashnod's Altar,
@@ -29831,7 +29966,17 @@ export class Game {
               : {}),
           }
         : {}),
-      ...(refs.tapped !== undefined ? { tapped: refs.tapped.object } : {}),
+      // Read as it last existed once gone, acted on only while the same
+      // permanent (400.7).
+      ...(refs.tapped !== undefined
+        ? {
+            tapped: refs.tapped.object,
+            ...(this.state.objects[refs.tapped.object]?.zone !== "battlefield" ||
+            (this.state.objects[refs.tapped.object]?.zoneChangeCount ?? 0) !== refs.tapped.zoneChangeCount
+              ? { tappedLost: true }
+              : {}),
+          }
+        : {}),
       ...(refs.enteredTogether !== undefined
         ? { enteredTogether: refs.enteredTogether.map(({ object, count }) => ({ object, count })) }
         : {}),
@@ -31040,9 +31185,12 @@ export class Game {
         // has just exiled (Mirror of Life Trapping).
         const justExiled =
           options?.others === true ? new Set(thisWayEntries(this.state, "exiled").map((e) => e.object)) : undefined;
+        // A token's own "the exiled card" (`GameObject.linkedExile`).
+        const toToken = linked === true ? this.exiledLinkedToToken(source) : undefined;
         const returning = this.state.zones.shared.exile.filter((id) => {
           const object = this.state.objects[id];
           if (object === undefined || object.isToken) return false;
+          if (toToken !== undefined) return toToken.includes(id);
           if (linked !== true) return object.exiledBy === source;
           const link = object.exiledWith;
           if (stint === undefined || link === undefined || link.source !== source || link.zoneChangeCount !== stint) {
@@ -31064,7 +31212,12 @@ export class Game {
           for (const id of returning) {
             this.state.objects[id].exiledBy = undefined;
             const under = enterer(id);
-            if (this.moveObject(id, "battlefield", under !== this.state.objects[id].owner ? { under } : {})) {
+            if (
+              this.moveObject(id, "battlefield", {
+                ...(under !== this.state.objects[id].owner ? { under } : {}),
+                ...(options?.enterTapped === true ? { tapped: true } : {}),
+              })
+            ) {
               // Kept there by a control effect, as a reanimation "under your
               // control" is (see `putOntoBattlefieldByEffect`).
               const entered = this.state.objects[id];
@@ -31161,15 +31314,12 @@ export class Game {
           }
         });
       },
-      putArrivedOntoBattlefield: (count) => {
+      arrivedStillThere: () => this.arrivedStillThere(refs).length,
+      putArrivedOntoBattlefield: (spec) => {
         // "One of them": the cards the batched trigger fired on, still in
         // that graveyard as the same objects (rule 400.7).
-        const still = (refs.arrivedTogether ?? [])
-          .filter(({ object, zoneChangeCount }) => {
-            const card = this.state.objects[object];
-            return card?.zone === "graveyard" && (card.zoneChangeCount ?? 0) === zoneChangeCount;
-          })
-          .map(({ object }) => object);
+        const still = this.arrivedStillThere(refs);
+        const count = spec.count;
         if (still.length === 0 || count <= 0) return false;
         if (still.length > count) {
           this.state.awaiting = {
@@ -31181,7 +31331,9 @@ export class Game {
             max: count,
             destination: "battlefield",
             leftover: "stay",
-            enterUnder: controller,
+            ...(spec.underOwner === true ? {} : { enterUnder: controller }),
+            ...(spec.enterTapped === true ? { enterTapped: true } : {}),
+            ...(spec.withCounters !== undefined ? { enterWithCounters: spec.withCounters } : {}),
           };
           return false;
         }
@@ -31189,8 +31341,10 @@ export class Game {
         this.withGraveyardLeaveBatch(() =>
           this.withEnterBatch(() => {
             for (const id of still) {
-              const under = this.state.objects[id]?.owner === controller ? {} : { under: controller };
-              if (this.moveObject(id, "battlefield", under)) {
+              const under =
+                spec.underOwner === true || this.state.objects[id]?.owner === controller ? {} : { under: controller };
+              if (this.moveObject(id, "battlefield", { ...under, ...(spec.enterTapped === true ? { tapped: true } : {}) })) {
+                this.enterWithCounters(id, spec.withCounters, controller);
                 this.emit({ type: "permanent-entered-battlefield", object: id });
               }
             }
@@ -32810,7 +32964,28 @@ export class Game {
         this.state.objects[source]?.zone === "exile"
           ? [source]
           : [],
+      createdTokensApart: () =>
+        // One object per token: "that token" is each of them (Ugin, the
+        // Ineffable's ruling), and only what this made, of a stack it joined.
+        thisWayEntries(this.state, "created", since).flatMap((e) =>
+          e.departed || this.state.objects[e.object]?.zone !== "battlefield"
+            ? []
+            : this.materializeStack(e.object, e.count),
+        ),
+      linkExiledTo: (tokens) => {
+        const linked = thisWayEntries(this.state, "exiled", since)
+          .filter((e) => !e.departed && this.state.objects[e.object]?.zone === "exile")
+          .map((e) => ({ object: e.object, zoneChangeCount: this.state.objects[e.object].zoneChangeCount ?? 0 }));
+        for (const token of tokens) {
+          const object = this.state.objects[token];
+          if (object !== undefined) object.linkedExile = linked;
+        }
+      },
       cardsExiledWithSource: (orUntil) => {
+        // A token's "the exiled card" is the one made with it, whatever else
+        // the card that made it has exiled (Hofri Ghostforge's ruling).
+        const toToken = this.exiledLinkedToToken(source);
+        if (toToken !== undefined) return toToken;
         // The stint the resolving spell or ability refers to (rule 607.2a):
         // the one it came from, though the source may have left since.
         const object = this.state.objects[source];
@@ -34367,8 +34542,9 @@ export class Game {
     // Only a hidden zone lets a search fail to find (rule 701.23b): a match
     // in the graveyard, which everyone can see, must be found when the
     // graveyard alone is searched. A search that takes in the library too
-    // may find none (Nissa's Encouragement's ruling).
-    const least = zones === "graveyard" && inGraveyard.length > 0 ? Math.max(min, 1) : min;
+    // may find none (Nissa's Encouragement's ruling), and so may one that says
+    // "up to" (The Five Doctors).
+    const least = zones === "graveyard" && inGraveyard.length > 0 && more?.upTo !== true ? Math.max(min, 1) : min;
     const set = together === undefined ? undefined : this.searchTogether(together, eligible, player, x);
     // "A Forest card and a Plains card" finds one card per slot at most.
     const most = all
@@ -35927,7 +36103,8 @@ export class Game {
         // creature's *own* activation cost. "Tap an untapped creature you
         // control" can tap one that just arrived, the source included, which
         // is how Heritage Druid taps three Elves cast this turn.
-        matchesFilter(this.state, this.registry, id, spec.filter, { you: player })
+        // The source, for "Tap enchanted creature" (`hostOfSource`).
+        matchesFilter(this.state, this.registry, id, spec.filter, { you: player, source: sourceId })
       );
     });
   }
@@ -37466,6 +37643,7 @@ export class Game {
       ...(object.giftTo !== undefined ? { giftTo: object.giftTo } : {}),
       ...(object.convokedBy !== undefined ? { convokedBy: [...object.convokedBy] } : {}),
       ...(object.lastKnownRefs?.exiledCost !== undefined ? { exiledCost: [...object.lastKnownRefs.exiledCost] } : {}),
+      ...(object.lastKnownRefs?.tapped !== undefined ? { tappedCost: object.lastKnownRefs.tapped } : {}),
       modifiers: object.modifiers.filter((m) => m.copiable === true).map((m) => ({ ...m })),
       ...(object.withoutEpic === true ? { withoutEpic: true } : {}),
     };
@@ -37554,7 +37732,16 @@ export class Game {
       ...(spell.giftTo !== undefined ? { giftTo: spell.giftTo } : {}),
       // "Each creature that convoked this spell": the original's (707.10).
       ...(spell.convokedBy !== undefined ? { convokedBy: [...spell.convokedBy] } : {}),
-      ...(spell.exiledCost !== undefined ? { lastKnownRefs: { exiledCost: [...spell.exiledCost] } } : {}),
+      // "The creature tapped to pay this spell's additional cost": the
+      // original's (Swallow Whole's ruling).
+      ...(spell.exiledCost !== undefined || spell.tappedCost !== undefined
+        ? {
+            lastKnownRefs: {
+              ...(spell.exiledCost !== undefined ? { exiledCost: [...spell.exiledCost] } : {}),
+              ...(spell.tappedCost !== undefined ? { tapped: spell.tappedCost } : {}),
+            },
+          }
+        : {}),
       attacking: null,
       blocking: null,
       blockedBy: [],
@@ -40515,7 +40702,14 @@ export class Game {
     player: PlayerId,
     source: ObjectId,
     amount: number,
-    opts: { readonly optional?: boolean; readonly then?: EffectSpec; readonly x?: number; readonly priorityTo?: PlayerId } = {},
+    opts: {
+      readonly optional?: boolean;
+      readonly then?: EffectSpec;
+      readonly x?: number;
+      readonly priorityTo?: PlayerId;
+      /** A mana ability's cost (Cryptex): its mana, once this is answered. */
+      readonly thenManaAbility?: Extract<AwaitingDecision, { kind: "choose-from-zone" }>["thenManaAbility"];
+    } = {},
   ): void {
     if (this.state.players[player]?.hasLost !== false || !this.canCollectEvidence(player, amount)) return;
     const eligible = [...this.state.zones.perPlayer[player].graveyard];
@@ -40541,6 +40735,7 @@ export class Game {
       collectEvidence: amount,
       ...(opts.then !== undefined ? { then: opts.then, thenSource: source, thenX: opts.x ?? 0 } : {}),
       ...(opts.priorityTo !== undefined ? { priorityTo: opts.priorityTo } : {}),
+      ...(opts.thenManaAbility !== undefined ? { thenManaAbility: opts.thenManaAbility } : {}),
     };
   }
 
@@ -42298,7 +42493,7 @@ export class Game {
     // by `moveObject`, which returns `false` while that choice is pending.
     if (!this.moveObject(id, "hand")) return;
     // A flashed-back spell is exiled instead (rule 702.34a) — not a return.
-    if (this.state.objects[id]?.zone !== "hand") return;
+    if (from === "library" || this.state.objects[id]?.zone !== "hand") return;
     this.emit({ type: "permanent-returned-to-hand", object: id, owner, from });
   }
 
@@ -49586,6 +49781,7 @@ export class Game {
     return {
       zoneChangeCount: object.zoneChangeCount ?? 0,
       ...(object.classLevel !== undefined ? { classLevel: object.classLevel } : {}),
+      ...(object.linkedExile !== undefined ? { linkedExile: object.linkedExile } : {}),
       name,
       owner: object.owner,
       controller: object.controller,
@@ -50972,6 +51168,12 @@ export class Game {
         toZone: to,
         ...(fromStack !== undefined ? { stack: fromStack } : {}),
       });
+      // "Whenever one or more … die": when the whole event is done, or now
+      // for a death of its own.
+      if (to === "graveyard") {
+        if (this.leaveBatch !== null) this.leaveBatch.died.push(id);
+        else this.emit({ type: "permanents-died", died: [id], left: [id] });
+      }
       // "For as long as [this] remains on the battlefield" ends — once what
       // leaves with it has left, in a simultaneous event.
       if (this.state.whileSourceIds?.includes(id) === true) {
@@ -51662,7 +51864,8 @@ export class Game {
     const seq = this.state.eventSeq;
     this.state.eventSeq += 1;
     const full = { ...event, seq } as GameEvent;
-    this.state.eventLog.push(full);
+    // Each death has its own events: this one only asks the triggers.
+    if (full.type !== "permanents-died") this.state.eventLog.push(full);
     this.recordTurnHistory(full);
     // A token comes into being on the battlefield, and a copy of a spell on
     // the stack, rather than moving there, so no zone change opened a public

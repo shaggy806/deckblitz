@@ -36,6 +36,7 @@ import _poolAragornKingOfGondor from "../pool/aragorn-king-of-gondor.js";
 import _poolArcaneBombardment from "../pool/arcane-bombardment.js";
 import _poolArcboundCondor from "../pool/arcbound-condor.js";
 import _poolArchonOfTheTriumvirate from "../pool/archon-of-the-triumvirate.js";
+import _poolArcumDagsson from "../pool/arcum-dagsson.js";
 import _poolArgothianEnchantress from "../pool/argothian-enchantress.js";
 import _poolArmedDangerous from "../pool/armed-dangerous.js";
 import _poolArmoryGuard from "../pool/armory-guard.js";
@@ -936,6 +937,7 @@ const shard: CardShard = {
     _poolArcaneBombardment,
     _poolArcboundCondor,
     _poolArchonOfTheTriumvirate,
+    _poolArcumDagsson,
     _poolArgothianEnchantress,
     _poolArmedDangerous,
     _poolArmoryGuard,

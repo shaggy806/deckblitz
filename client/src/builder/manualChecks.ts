@@ -8624,6 +8624,47 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     // A four-player table: three opponents to choose among.
     board({ you: { bf: ['Wastes'], hand: ['Black Vise'] }, opp: [{}, {}, {}] }),
   ),
+  // --- A may another player answers (2026-11-03, build-family) ---
+  preset(
+    'Sin Prodder: each opponent is asked in turn, and the first yes ends it',
+    // Dave's end step, so your upkeep is one pass away; Dave, the bot, is never
+    // asked if Carol says yes.
+    board({
+      you: { bf: ['Sin Prodder'], lib: ['Grizzly Bears'] },
+      opp: [{ human: true }, { human: true }, {}],
+      turn: 2,
+      step: 'end',
+    }),
+  ),
+  preset(
+    'Distant Memories: the first opponent to say yes gives you the card',
+    board({
+      you: { bf: ['Island*4'], hand: ['Distant Memories'], lib: ['Sol Ring', 'Grizzly Bears'] },
+      opp: [{ human: true }, { human: true }, {}],
+    }),
+  ),
+  preset(
+    'Distant Memories: if no opponent says yes, you draw three',
+    board({
+      you: { bf: ['Island*4'], hand: ['Distant Memories'], lib: ['Sol Ring', 'Grizzly Bears', 'Forest*3'] },
+      opp: [{ human: true }, { human: true }],
+    }),
+  ),
+  preset(
+    "Arcum Dagsson: the sacrificed creature's controller decides on the search",
+    board({
+      you: { bf: ['Arcum Dagsson'] },
+      opp: [{ human: true, bf: ['Ornithopter'], lib: ['Sol Ring'] }, {}, {}],
+    }),
+  ),
+  preset(
+    "Farrel's Mantle: its controller targets, the creature's controller answers",
+    // Bob's Aura on your Bears: the ability is Bob's, the question yours.
+    board({
+      you: { bf: ['Grizzly Bears'] },
+      opp: [{ human: true, bf: [{ name: "Farrel's Mantle", attach: 'Grizzly Bears' }, 'Hill Giant'] }, { bf: ['Hill Giant'] }, {}],
+    }),
+  ),
   // --- A secret choice (2026-11-03, build-family) ---
   preset(
     'Guardian Archon: secretly choose an opponent, hidden from the others',
@@ -10006,5 +10047,55 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{}, {}, {}],
       step: 'upkeep',
     }),
+  ),
+  // --- Searches over several zones, and "up to" in a graveyard (2026-11-03, need-keys Phase 2) ---
+  preset(
+    "Ancient Vendetta: at four players, only the target's three zones are searched",
+    board({
+      you: { bf: ['Swamp*4'], hand: ['Ancient Vendetta'] },
+      opp: [
+        { hand: ['Grizzly Bears'] },
+        { hand: ['Grizzly Bears', 'Forest'], gy: ['Grizzly Bears'], lib: ['Grizzly Bears', 'Forest'] },
+        { gy: ['Grizzly Bears'] },
+      ],
+    }),
+  ),
+  preset(
+    'The Five Doctors: the graveyard alone may find none, at four players',
+    board({
+      you: {
+        bf: ['Forest*6'],
+        hand: ['The Five Doctors'],
+        gy: ['Cult Healer', 'Grizzly Bears'],
+        lib: ['Doctor Jane Foster', 'Forest'],
+      },
+      opp: [{}, {}, {}],
+    }),
+  ),
+  preset(
+    "Last Light of Durin's Day: the sixth Mountain asks your hand and/or library, at four players",
+    board({
+      you: {
+        bf: [{ name: "Last Light of Durin's Day", counters: { quest: 5 } }],
+        hand: ['Mountain', 'Balefire Dragon'],
+        lib: ['Balefire Dragon', 'Forest'],
+      },
+      opp: [{}, {}, {}],
+    }),
+  ),
+  preset(
+    'Simian Spirit Guide: exile it from your hand for {R}, then cast with the mana',
+    board({ you: { hand: ['Simian Spirit Guide', 'Raging Goblin'] } }),
+  ),
+  preset(
+    "Jack-o'-Lantern: exile it from your graveyard for one mana of any color",
+    board({
+      you: { bf: ['Wastes'], gy: ["Jack-o'-Lantern"], hand: ['Savannah Lions'] },
+      opp: [{}, {}, {}],
+    }),
+  ),
+  preset(
+    'Rubble Rouser: choose the card to exile, then the mana and the damage',
+    board({ you: { bf: ['Rubble Rouser'], gy: ['Grizzly Bears', 'Goblin Piker'] } }),
   ),
 ]

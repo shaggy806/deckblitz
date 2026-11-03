@@ -450,9 +450,9 @@ export interface AbilityCost {
    * 117.3c). With no more matching cards than that, they're all exiled
    * without asking. Either way they leave the graveyard as one move. The
    * source never counts, wherever it is. Gates activation on having enough
-   * such cards; not on a mana ability (there's nowhere for it to wait), nor
-   * beside a `discard`, a `returnToHand` or a sacrifice of several, which ask
-   * too. `count: "x"` is Necropolis Fiend's "{X}, {T}, Exile X cards from your
+   * such cards. A mana ability's (Molt Tender) waits for the answer and adds
+   * its mana then (rule 605.3b), as `exileFromHand`'s does. Not beside a
+   * `discard`, a `returnToHand` or a sacrifice of several, which ask too. `count: "x"` is Necropolis Fiend's "{X}, {T}, Exile X cards from your
    * graveyard": the same X as the mana's, capped at the cards there.
    *
    * `fromTop` is "exile **the top** [creature] card of your graveyard" (Alms,
@@ -548,6 +548,14 @@ export interface AbilityCost {
    * `shareCreatureType` is the total constraint "that share a creature type"
    * (Weight of Conscience): the offer's `creatureTypes` says what each choice
    * has, and a choice of creatures with no type in common is refused.
+   *
+   * A `filter` of `{ hostOfSource: true }` is an Aura's "Tap enchanted
+   * creature" (Krovikan Plague): the one permanent it's on, so no choice. It
+   * isn't the `{T}` of rule 302.6, so a creature that just arrived may be
+   * tapped, and only an untapped one: "activate only if enchanted creature is
+   * untapped" says nothing more. Every such Aura enchants something "you
+   * control", and leaves as a state-based action if its controller loses it
+   * (rule 704.5m), so the one tapped is always the activating player's.
    */
   readonly tapOthers?: {
     readonly count: number | "x";
@@ -593,7 +601,8 @@ export interface AbilityCost {
    * evidence 3: …"): exile any number of cards from your graveyard with
    * total mana value N or more, chosen as the cost is paid, once the ability
    * is on the stack (the `choose-from-zone` decision). Activatable only while
-   * your graveyard holds that much (701.59b). Not on a mana ability, nor
+   * your graveyard holds that much (701.59b). A mana ability's (Cryptex)
+   * waits for the answer and adds its mana then (rule 605.3b). Not
    * beside another cost that asks a question.
    */
   readonly collectEvidence?: number;
@@ -722,9 +731,10 @@ export interface ActivatedAbility {
    *   card stays where it is until the ability resolves.
    *
    * Only the card's owner may activate it (a card in a hand, graveyard or the
-   * command zone is controlled by nobody else). It is never a mana ability
-   * (`isManaAbility`): mana abilities stay battlefield-only, so auto-payment
-   * never reaches into another zone.
+   * command zone is controlled by nobody else). It may be a mana ability
+   * (rule 605.1a — Elvish Spirit Guide, Jack-o'-Lantern), which never uses the
+   * stack; auto-payment never reaches into another zone (`Game.manaSources`),
+   * so it's activated by hand, before the cast it pays for.
    *
    * An ability whose source stays put (`"command"`, or `staysInZone`) and
    * whose effect names `"source"` finds it only if it is still the same object
@@ -750,6 +760,9 @@ export interface ActivatedAbility {
    * (ninjutsu).
    */
   readonly staysInZone?: boolean;
+  /** A `zone: "hand"` ability whose cost **exiles** the card rather than
+   * discarding it: "Exile this card from your hand" (Simian Spirit Guide). */
+  readonly exilesFromHand?: true;
   /** A ninjutsu ability (rule 702.49), as the `ninjutsu()` helper writes it:
    * the card is revealed from the hand as it's activated (702.49b). What "a
    * ninjutsu ability" names. */
@@ -1147,6 +1160,17 @@ export type TriggerSpec =
       readonly who: TriggerWho;
       readonly filter?: CardFilter;
       readonly otherOnly?: boolean;
+      /** "Whenever **one or more** creatures die" (Great Fierce Bee, Seer of
+       * Stolen Sight, Rinoa, Angel Wing): once per simultaneous event, however
+       * many of its permanents match — off `permanents-died`, so it fires once
+       * the whole wrath or state-based sweep is done. Each is read as it last
+       * existed (rule 603.10a), and a permanent that left in that event sees
+       * it too (Rinoa's ruling). `{ triggerValue: true }` is how many matched,
+       * a token stack counting as each of its tokens, and
+       * `put-arrived-onto-battlefield` takes "one of them" from the cards among
+       * them. Without "this ability triggers only once each turn", which is a
+       * plain `dies` with `oncePerTurn`. */
+      readonly batched?: boolean;
     }
   | {
       /** "Whenever this Equipment becomes unattached from a permanent"
@@ -2569,9 +2593,8 @@ export function isManaAbility(ability: ActivatedAbility): boolean {
   return (
     // A loyalty ability uses the stack even if it adds mana (rule 606.3).
     ability.loyaltyCost === undefined &&
-    // Mana abilities are battlefield-only here: an ability activated from a
-    // hand, graveyard or the command zone always uses the stack.
-    ability.zone === undefined &&
+    // Wherever it works from: rule 605.1a doesn't ask. Elvish Spirit Guide's
+    // "Exile this card from your hand: Add {G}" never uses the stack (605.3b).
     // Rule 605.1a: a cost that moves a card from a library (Millikin's "Mill
     // a card") makes it an ordinary activated ability, on the stack.
     ability.cost.mill === undefined &&
@@ -2600,19 +2623,6 @@ function addsManaOnly(effect: EffectSpec): boolean {
       effect.effects.length > 0 &&
       effect.effects.every((step) => step.kind === "add-mana"))
   );
-}
-
-/**
- * Rule 605.1a's own test for an activated mana ability — no target, could add
- * mana, not a loyalty ability — wherever the ability functions from. The
- * difference from {@link isManaAbility} is only that: the engine runs an
- * ability that works from a hand, a graveyard or the command zone on the
- * stack, but a card still *has* such a mana ability (an Elvish Spirit Guide
- * on the battlefield has "Exile this card from your hand: Add {G}"), which is
- * what "a creature with a mana ability" asks.
- */
-export function isManaAbilityByRule(ability: ActivatedAbility): boolean {
-  return isManaAbility(ability.zone === undefined ? ability : { ...ability, zone: undefined });
 }
 
 /**

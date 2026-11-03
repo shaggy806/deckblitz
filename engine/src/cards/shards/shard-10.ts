@@ -604,6 +604,7 @@ import _poolReverence from "../pool/reverence.js";
 import _poolRhysticSyphon from "../pool/rhystic-syphon.js";
 import _poolRiddlesmith from "../pool/riddlesmith.js";
 import _poolRilingDawnbreaker from "../pool/riling-dawnbreaker.js";
+import _poolRinoaAngelWing from "../pool/rinoa-angel-wing.js";
 import _poolRiotSpikes from "../pool/riot-spikes.js";
 import _poolRipjawRaptor from "../pool/ripjaw-raptor.js";
 import _poolRiptideSurvivor from "../pool/riptide-survivor.js";
@@ -1512,6 +1513,7 @@ const shard: CardShard = {
     _poolRhysticSyphon,
     _poolRiddlesmith,
     _poolRilingDawnbreaker,
+    _poolRinoaAngelWing,
     _poolRiotSpikes,
     _poolRipjawRaptor,
     _poolRiptideSurvivor,

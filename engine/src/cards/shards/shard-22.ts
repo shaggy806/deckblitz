@@ -243,6 +243,7 @@ import _poolFallenAngel from "../pool/fallen-angel.js";
 import _poolFangDragon from "../pool/fang-dragon.js";
 import _poolFangrenHunter from "../pool/fangren-hunter.js";
 import _poolFantasticBounce from "../pool/fantastic-bounce.js";
+import _poolFarrelsMantle from "../pool/farrels-mantle.js";
 import _poolFarseek from "../pool/farseek.js";
 import _poolFarsightRitual from "../pool/farsight-ritual.js";
 import _poolFathomTrawl from "../pool/fathom-trawl.js";
@@ -748,6 +749,7 @@ import _poolTalismanOfUnity from "../pool/talisman-of-unity.js";
 import _poolTangleAsp from "../pool/tangle-asp.js";
 import _poolTangleclawWerewolf from "../pool/tangleclaw-werewolf.js";
 import _poolTangleroot from "../pool/tangleroot.js";
+import _poolTatsumasaTheDragonsFang from "../pool/tatsumasa-the-dragons-fang.js";
 import _poolTattermungeManiac from "../pool/tattermunge-maniac.js";
 import _poolTelJiladExile from "../pool/tel-jilad-exile.js";
 import _poolTemmetVizierOfNaktamun from "../pool/temmet-vizier-of-naktamun.js";
@@ -909,6 +911,7 @@ import _tokensRatTokenGenkuFutureShaper from "../tokens/rat-token-genku-future-s
 import _tokensRedMinotaurTokenHaste from "../tokens/red-minotaur-token-haste.js";
 import _tokensSnakeToken from "../tokens/snake-token.js";
 import _tokensSparkElementalToken from "../tokens/spark-elemental-token.js";
+import _tokensSpiritTokenUginTheIneffable from "../tokens/spirit-token-ugin-the-ineffable.js";
 import _tokensStoneBoulderToken from "../tokens/stone-boulder-token.js";
 import _tokensXXSpiritTokenBlack from "../tokens/x-x-spirit-token-black.js";
 
@@ -1154,6 +1157,7 @@ const shard: CardShard = {
     _poolFangDragon,
     _poolFangrenHunter,
     _poolFantasticBounce,
+    _poolFarrelsMantle,
     _poolFarseek,
     _poolFarsightRitual,
     _poolFathomTrawl,
@@ -1659,6 +1663,7 @@ const shard: CardShard = {
     _poolTangleAsp,
     _poolTangleclawWerewolf,
     _poolTangleroot,
+    _poolTatsumasaTheDragonsFang,
     _poolTattermungeManiac,
     _poolTelJiladExile,
     _poolTemmetVizierOfNaktamun,
@@ -1822,6 +1827,7 @@ const shard: CardShard = {
     _tokensRedMinotaurTokenHaste,
     _tokensSnakeToken,
     _tokensSparkElementalToken,
+    _tokensSpiritTokenUginTheIneffable,
     _tokensStoneBoulderToken,
     _tokensXXSpiritTokenBlack,
   ],

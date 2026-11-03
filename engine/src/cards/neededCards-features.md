@@ -4061,6 +4061,17 @@ Dust, The Stone Brain, Doomsday. Left: Kassandra still waits on `condition:equip
 and Kotose on `zone:choose-one-of-exiled`; Agency Outfitter's two names are a `together:
 oneEach` the scaffolder doesn't draft.
 
+### "Up to" in a public zone, and the hand and/or library — built 2026-11-03
+
+The need-keys Phase 2 family `decision:choose-from-zone-extensions`, its two search keys.
+`effect:search-up-to-public-zone` is `search-library`'s `upTo`: a graveyard searched alone must
+yield a match for "a card" (701.23b frees only a hidden zone), but "up to five" may find none.
+`decision:search-hand-and-library` was already `zones` and `searchZonesAndOr` from the family
+above, triaged before they landed; it needed its cards. No new decision: both are the
+`choose-from-zone` a search raises, whose popup labels each card with its zone, checked live at
+four players. Proving cards: The Five Doctors, Gate to the Afterlife, Last Light of Durin's Day,
+Ancient Vendetta.
+
 ### A target's namesakes off the battlefield, and tokens only — built 2026-11-02
 
 The need-keys Phase 2 family `condition:filter-card-property-clauses`, its keys
@@ -4461,6 +4472,9 @@ the life there is) and `{ each, per }` (`dynamic-life-cost.test.ts`). Key: cost:
 **Controlled continuously since the turn began (2026-11-03).** `CardFilter.controlledContinuously` reads rule 302.6's test off `summoningSick`, on a permanent of any type, haste or no haste: the source's `condition`, a target with `controlledBy: "active-player"`, what a player sacrifices. Keys: condition:controlled-since-turn-start, filter:controlled-continuously-since-turn-start. Cards: Rocket Launcher, Nettling Imp, Norritt, Keldon Twilight (`controlled-continuously.test.ts`). Total War and Siren's Call each ask more: "didn't attack" of one declaration, not of the turn, and a cast timing condition. Arcum's Whistle's optional payment is unchecked.
 
 **Different mana costs and the mana value threshold (2026-11-03).** `of: "mana-cost"` on a `distinct` aggregate counts the symbols of a mana cost rather than their total, a card with none adding nothing (rule 202.1b); "five or more mana values among cards in your graveyard" was already an `aggregate` condition, now read by the scaffolder on `flashIf`, an intervening if and a spell's "unless" as well as a static. Keys: amount:count-distinct-mana-costs, condition:distinct-mana-values-in-graveyard. Cards: Embodiment of Agonies, Graveyard Shift, Sanguine Spy, Tainted Indulgence (`distinct-mana-costs.test.ts`).
+**A token linked to what made it (2026-11-03).** `DelayedLeaves.leaves: "created"` is "when that token leaves": every token the resolution made, woken out of a stack and watched on its own (`createdTokensApart`), with `about` on a `leaves` watch now too (`about: "exiled"` for Ugin's "put the exiled card into your hand"; `leaves: "source"`, `about: "created"` for Stangg's "exile that token when Stangg leaves"). `link-exiled-to-created` makes each token hold the card it means by "the exiled card" (`GameObject.linkedExile`, in the fold key and `LastKnownInfo`), read by `return-exiled-by-source` of `linked`, which has `enterTapped` (`linked-token-leaves.test.ts`). Keys: effect:linked-token-leaves, effect:token-trigger-returns-linked-exiled-card. Proving cards: Ugin, the Ineffable, Hofri Ghostforge, Timothar, Baron of Bats, Stangg, Tatsumasa, the Dragon's Fang. Dance of Many waits on printed triggers naming its token, Gutter Grime on static:token-pt-from-creator-counters.
+
+**"Whenever one or more … die" (2026-11-03).** A `batched` `dies` trigger fires once per simultaneous event off `permanents-died`, emitted when `withLeaveBatch` finishes (or at once for a lone death), every permanent that left in that event looking back (rule 603.10a); the matches are `triggerValue`, a doubler counts only the deaths that caused the trigger, and `put-arrived-onto-battlefield` (now with `enterTapped`, `underOwner`, `withCounters`) takes "one of them" from the cards among them (`dies-batch-trigger.test.ts`). Key: trigger:dies-batch-trigger. Proving cards: Vengeful Townsfolk, Seer of Stolen Sight, Rinoa, Angel Wing.
 
 **Offering (2026-11-03).** Rule 702.48: `kicker: { cost: "", keyword: "offering", flash: true, offering: <quality> }`, one kicked offer per permanent of the quality, named as the cast's `sacrifice`, its total cost less that permanent's mana cost (`manaCostReductions`, `ownManaCostOf`; rule 702.48c), a twobrid half that matters its own offer by `costOption` (118.7e). No new decision; the client's buttons already read `emergeSacrifice` and `kickerCost`. Also the filter `attackingOpponent` (`offering.test.ts`). Key: keyword:offering. Proving cards: Patron of the Akki, Patron of the Kitsune, Blast-Furnace Hellkite.
 **A static making a planeswalker a creature (2026-11-03).** The type statics already said it: `addTypes` for "that's still a
@@ -4473,3 +4487,8 @@ Master of Flowers, Kaito, Bane of Nightmares, Spark Rupture, Luxior, Giada's Gif
 **A mass change of types, P/T left alone (2026-11-03).** No new effect: `add-types` under `for-each-permanent`, as Nightcreep's. What it took:
 `choose-creature-type`'s `sentinel` (`FIRST_CHOSEN_TYPE`) nests a second choice inside the first. Keys: effect:add-types-all,
 effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter, Volatile Claws, Energybending, Terraformer, Vision Charm.
+
+**A may another player answers (2026-11-03).** No new engine feature was the core of it: `unless { anyOf: "each-opponent" }` with a `{ doing }` option already asks each in turn (rule 101.4), stops at the first yes and runs `otherwise` if nobody did, and `each-player-may` of `who: { controllerOfTarget }` or `"trigger-controller"` already named one answerer. Added: `return-to-hand`'s `from: "library"`, `mayBeDone` on `put-into-graveyard` and `move-exiled-this-way` (rule 608.2d: an option that can't be done isn't offered), and effect worth reading `{ manaValueOf: slot }`, so the bots refuse a lethal yes (`any-opponent-may.test.ts`). Keys: decision:any-opponent-may, decision:may-answered-by-other-player. Proving: Sin Prodder, Distant Memories, Arcum Dagsson, Farrel's Mantle. The scaffolder reads "its controller / that player may search …", "target X's controller sacrifices it", and both any-opponent lines.
+**A tap cost on one permanent, referred back to (2026-11-03).** `tapOthers` of `{ hostOfSource: true }` is an Aura's "Tap enchanted creature" (the candidates now read their filter with the source), and the `EffectTargetRef` `"tapped"` is the one permanent a cost tapped, which a spell now remembers too and a copy inherits. Keys: cost:tap-enchanted-permanent, cost:tap-untapped-creature-additional. Proving cards: Earthlore, Krovikan Plague, Nature's Chosen, Swallow Whole.
+
+**Mana abilities from another zone, or exiling from a graveyard (2026-11-03).** `isManaAbility` no longer asks where an ability works from (rule 605.1a), `exilesFromHand` is the hand's exile, and `exileFromGraveyard` and `collectEvidence` wait on `thenManaAbility` as `exileFromHand` already did. Keys: effect:hand-mana-ability, effect:mana-ability-graveyard-exile-cost. Proving cards: Simian Spirit Guide, Elvish Spirit Guide, Molt Tender, Rubble Rouser, Cryptex, Jack-o'-Lantern, Titans' Nest.

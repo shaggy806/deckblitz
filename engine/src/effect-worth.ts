@@ -35,6 +35,7 @@ import type { CardDefinition } from "./cards/define.js";
 import { computeCharacteristics } from "./characteristics.js";
 import { polarityBias } from "./deck-bias.js";
 import type { EffectAmount, EffectSpec, EffectTargetRef, PlayerScope, ProtectionQualities } from "./effects.js";
+import { manaValueOfObject } from "./filter.js";
 import { manaValue, parseManaCost } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import type { GameState } from "./state.js";
@@ -81,6 +82,18 @@ export interface WorthContext {
 /** A plain number of an amount, or `fallback` for a live one. */
 function sizeOf(amount: EffectAmount | undefined, fallback = 1): number {
   return typeof amount === "number" ? Math.max(0, amount) : fallback;
+}
+
+/** {@link sizeOf}, reading the one amount a question can already answer: a
+ * card in a target slot's mana value — "damage to that player equal to that
+ * card's mana value" (Sin Prodder), where the yes can be lethal. */
+function sizeHere(amount: EffectAmount | undefined, fallback: number, ctx: WorthContext): number {
+  if (typeof amount === "object" && "manaValueOf" in amount && typeof amount.manaValueOf === "number") {
+    const target = ctx.targets[amount.manaValueOf];
+    const object = target?.kind === "object" ? ctx.state.objects[target.object] : undefined;
+    if (object !== undefined && ctx.cards !== undefined) return manaValueOfObject(ctx.cards, object);
+  }
+  return sizeOf(amount, fallback);
 }
 
 function opponentsOf(state: GameState, player: PlayerId): PlayerId[] {
@@ -306,11 +319,11 @@ function untargetedWorth(effect: EffectSpec, ctx: WorthContext): number {
       return onPlayers(playersIn(effect.who ?? "you", ctx), LIFE_POINT * sizeOf(effect.amount, 2), ctx);
     case "lose-life":
       if (effect.target !== undefined || effect.toControllerOfTarget !== undefined || typeof effect.who === "object") return 0;
-      return lifeLossTo(playersIn(effect.who ?? "you", ctx), sizeOf(effect.amount, 2), ctx);
+      return lifeLossTo(playersIn(effect.who ?? "you", ctx), sizeHere(effect.amount, 2, ctx), ctx);
     case "damage":
       if (effect.target !== undefined || effect.who === undefined || typeof effect.who === "object") return 0;
       if (effect.who === "attached-owner") return 0;
-      return lifeLossTo(playersIn(effect.who, ctx), sizeOf(effect.amount, 2), ctx);
+      return lifeLossTo(playersIn(effect.who, ctx), sizeHere(effect.amount, 2, ctx), ctx);
     case "discard":
       if (typeof effect.target !== "string") return 0;
       return onPlayers(playersIn(effect.target, ctx), -CARD * sizeOf(effect.amount), ctx);

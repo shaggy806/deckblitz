@@ -285,6 +285,7 @@ import _poolFylamarid from "../pool/fylamarid.js";
 import _poolGaeasCourser from "../pool/gaeas-courser.js";
 import _poolGalazethPrismari from "../pool/galazeth-prismari.js";
 import _poolGallowsAtWillowHill from "../pool/gallows-at-willow-hill.js";
+import _poolGateToTheAfterlife from "../pool/gate-to-the-afterlife.js";
 import _poolGatewayShade from "../pool/gateway-shade.js";
 import _poolGempalmIncinerator from "../pool/gempalm-incinerator.js";
 import _poolGhaltaPrimalHunger from "../pool/ghalta-primal-hunger.js";
@@ -786,6 +787,7 @@ import _poolTidusBlitzballStar from "../pool/tidus-blitzball-star.js";
 import _poolTilonallisKnight from "../pool/tilonallis-knight.js";
 import _poolTimberlandRuins from "../pool/timberland-ruins.js";
 import _poolTimelessDragon from "../pool/timeless-dragon.js";
+import _poolTimotharBaronOfBats from "../pool/timothar-baron-of-bats.js";
 import _poolTivashGloomSummoner from "../pool/tivash-gloom-summoner.js";
 import _poolTooGreedilyTooDeep from "../pool/too-greedily-too-deep.js";
 import _poolToothOfRamos from "../pool/tooth-of-ramos.js";
@@ -892,6 +894,7 @@ import _poolZurEternalSchemer from "../pool/zur-eternal-schemer.js";
 import _poolZurgoThundersDecree from "../pool/zurgo-thunders-decree.js";
 import _tokensDemonBerserkerToken from "../tokens/demon-berserker-token.js";
 import _tokensDinosaurDragonToken from "../tokens/dinosaur-dragon-token.js";
+import _tokensDragonSpiritTokenTatsumasa from "../tokens/dragon-spirit-token-tatsumasa.js";
 import _tokensDroneToken from "../tokens/drone-token.js";
 import _tokensElementalTokenLagomosHandOfHatred from "../tokens/elemental-token-lagomos-hand-of-hatred.js";
 import _tokensFirstMateRagavan from "../tokens/first-mate-ragavan.js";
@@ -1189,6 +1192,7 @@ const shard: CardShard = {
     _poolGaeasCourser,
     _poolGalazethPrismari,
     _poolGallowsAtWillowHill,
+    _poolGateToTheAfterlife,
     _poolGatewayShade,
     _poolGempalmIncinerator,
     _poolGhaltaPrimalHunger,
@@ -1690,6 +1694,7 @@ const shard: CardShard = {
     _poolTilonallisKnight,
     _poolTimberlandRuins,
     _poolTimelessDragon,
+    _poolTimotharBaronOfBats,
     _poolTivashGloomSummoner,
     _poolTooGreedilyTooDeep,
     _poolToothOfRamos,
@@ -1798,6 +1803,7 @@ const shard: CardShard = {
   tokens: [
     _tokensDemonBerserkerToken,
     _tokensDinosaurDragonToken,
+    _tokensDragonSpiritTokenTatsumasa,
     _tokensDroneToken,
     _tokensElementalTokenLagomosHandOfHatred,
     _tokensFirstMateRagavan,

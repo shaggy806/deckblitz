@@ -220,6 +220,7 @@ import _poolDuskwatchHunter from "../pool/duskwatch-hunter.js";
 import _poolEarthOriginYak from "../pool/earth-origin-yak.js";
 import _poolEarthRumbleWrestlers from "../pool/earth-rumble-wrestlers.js";
 import _poolEarth from "../pool/earth.js";
+import _poolEarthlore from "../pool/earthlore.js";
 import _poolEatenAlive from "../pool/eaten-alive.js";
 import _poolEbonyFly from "../pool/ebony-fly.js";
 import _poolEclipsedSteppe from "../pool/eclipsed-steppe.js";
@@ -1126,6 +1127,7 @@ const shard: CardShard = {
     _poolEarthOriginYak,
     _poolEarthRumbleWrestlers,
     _poolEarth,
+    _poolEarthlore,
     _poolEatenAlive,
     _poolEbonyFly,
     _poolEclipsedSteppe,

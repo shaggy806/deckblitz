@@ -6365,8 +6365,6 @@ These boards start before the first turn (the builder's `openingHands`), with th
 - **Do:** Activate Evolving Wilds.
 - **Expect:** The search offers Rogue's Passage, which isn't printed as basic, and not Grizzly Bears.
 - **Not a bug:** The builder fills the rest of the library with basic lands, so those are offered too.
-- **Do:** Cast Open the Vaults. As Bob, choose Grizzly Bears for Pacifism.
-- **Expect:** Sol Ring comes back under you, and Glorious Anthem and Pacifism under Bob. Pacifism enchants your Grizzly Bears.
 
 ## Whole hands exiled face down, and back later (2026-11-02)
 
@@ -6645,3 +6643,61 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 - **Do:** Cast Goblin Game and enter 3 when you're asked for a number.
 - **Expect:** It won't take less than 1. The log shows no count until both are in, then both together. You lose 3 life; whoever hid fewer then also loses half their life, rounded up.
+
+### Sin Prodder: each opponent is asked in turn, and the first yes ends it
+
+- **Do:** Pass priority to your upkeep. When Sin Prodder's ability resolves, answer no as Bob, then yes as Carol.
+- **Expect:** Grizzly Bears is shown as revealed. Bob is asked first, then Carol, and each sees the option to have you put it into your graveyard. After Carol's yes, the Bears are in your graveyard and Carol loses 2 life. Dave is never asked, and Bob loses nothing.
+
+### Distant Memories: the first opponent to say yes gives you the card
+
+- **Do:** Cast Distant Memories and choose Sol Ring. Answer yes as Bob.
+- **Expect:** Sol Ring is in exile while Bob is asked. On his yes it goes to your hand, and you draw nothing. Carol is never asked.
+
+### Distant Memories: if no opponent says yes, you draw three
+
+- **Do:** Cast Distant Memories and choose Sol Ring. Answer no as Bob, then no as Carol.
+- **Expect:** Bob is asked, then Carol. Sol Ring stays in exile and you draw three cards.
+
+### Arcum Dagsson: the sacrificed creature's controller decides on the search
+
+- **Do:** Tap Arcum Dagsson targeting Bob's Ornithopter. Answer yes as Bob and choose Sol Ring.
+- **Expect:** The Ornithopter is sacrificed. Bob, not you, is asked "Search your library for a noncreature artifact card?". Sol Ring enters under Bob's control.
+
+### Farrel's Mantle: its controller targets, the creature's controller answers
+
+- **Do:** Attack Bob with your Grizzly Bears. Bob doesn't block. As Bob, target Carol's Hill Giant; then answer yes as you.
+- **Expect:** Bob, who controls the Aura, chooses the target, and your Bears aren't offered. You, who control the Bears, are asked. On your yes, the Giant dies and the Bears deal Bob no combat damage.
+
+## Searches over several zones, and "up to" in a graveyard (2026-11-03)
+
+### Ancient Vendetta: at four players, only the target's three zones are searched
+
+- **Do:** Cast Ancient Vendetta targeting Carol and name Grizzly Bears.
+- **Expect:** The popup offers Carol's three Grizzly Bears (graveyard, hand, library), not Bob's or Dave's, with her Forests not among them. Each is labelled with its zone, and you may click **Exile none**, even with the graveyard's still there. Carol's library is shuffled either way.
+
+### The Five Doctors: the graveyard alone may find none, at four players
+
+- **Do:** Cast The Five Doctors. As it resolves, click "Search your graveyard", then click **Put none**.
+- **Expect:** Three choices are offered: "Search your library and graveyard", "Search your library", "Search your graveyard". This one offers Cult Healer, not Doctor Jane Foster or Grizzly Bears, and lets you find none. Your library is not shuffled.
+
+### Last Light of Durin's Day: the sixth Mountain asks your hand and/or library, at four players
+
+- **Do:** Play your Mountain. As the trigger resolves, click "Search your hand and library" and choose a Balefire Dragon.
+- **Expect:** Last Light goes to your graveyard first. Three choices are offered: "Search your hand and library", "Search your hand", "Search your library". The popup shows both Dragons, one from your hand and one from your library; the one you choose enters, and your library is shuffled.
+
+### Simian Spirit Guide: exile it from your hand for {R}, then cast with the mana
+
+- **Do:** Press "Exile this card from your hand" on Simian Spirit Guide in your hand. Cast Raging Goblin.
+- **Expect:** The Guide goes to exile, nothing goes on the stack and {R} is in your pool. Raging Goblin then casts with that mana.
+- **Not a bug:** Casting Raging Goblin first isn't offered: mana from your hand is never spent for you, so press the button first.
+
+### Jack-o'-Lantern: exile it from your graveyard for one mana of any color
+
+- **Do:** Open your graveyard, press "Activate" on Jack-o'-Lantern, and choose the white one of its five options. Cast Savannah Lions.
+- **Expect:** The menu offers each of the five colors. The Wastes taps, the Jack goes to exile, nothing goes on the stack and {W} is in your pool. Savannah Lions then casts with it.
+
+### Rubble Rouser: choose the card to exile, then the mana and the damage
+
+- **Do:** Click Rubble Rouser and press its "Exile a card from your graveyard" ability. Choose Goblin Piker.
+- **Expect:** You're asked which card before any mana comes. Goblin Piker goes to exile and Grizzly Bears stays. {R} is in your pool at once, then an ability on the stack deals 1 damage to Bob when it resolves.
