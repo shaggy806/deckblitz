@@ -444,7 +444,14 @@ export interface FlickerCounters {
  * effect's targets still ride along by slot. See `DelayedLeaveWatch`.
  */
 export interface DelayedLeaves {
-  readonly leaves: EffectTargetRef;
+  /** `"created"` is "**that token**": every token this resolution has made,
+   * each woken out of any stack and watched on its own (Ugin, the Ineffable's
+   * ruling: "the first time that either of the tokens leaves"). With `about`,
+   * the delayed ability's targets are what this resolution did that to
+   * instead: "put **the exiled card** into your hand" is `about: "exiled"` and
+   * a slot 0 that stays with the card; Stangg's "exile **that token** when
+   * Stangg leaves" is `leaves: "source"`, `about: "created"`. */
+  readonly leaves: EffectTargetRef | "created";
   /** `["graveyard"]` is "dies", `["graveyard", "exile"]` "dies or is
    * exiled". */
   readonly to: readonly LeaveDestination[];
@@ -3578,6 +3585,24 @@ export type EffectSpec =
        * Cloister's "all cards **you own** exiled with this artifact"), read in
        * exile. The rest stay exiled with it. */
       readonly filter?: CardFilter;
+      /** With `linked: "battlefield"`: they enter tapped (Timothar, Baron of
+       * Bats's Bat). */
+      readonly enterTapped?: true;
+    }
+  | {
+      /** "The exiled card" of a token's own ability (Hofri Ghostforge's "it
+       * has 'When this token leaves the battlefield, return the exiled card to
+       * its owner's graveyard'"; Timothar, Baron of Bats's "it gains …"): each
+       * token this resolution created holds what it exiled, in
+       * `GameObject.linkedExile`, and that token's `return-exiled-by-source`
+       * of `linked` then reaches those cards alone, however many others the
+       * card that made it has exiled (rule 607.2a). A copy of the token isn't
+       * linked (the rulings). Goes after the `exile` and the `create-token`.
+       * `gains` is abilities the tokens gain with no end, an effect on them
+       * and so not copiable (rule 707.2): Hofri's "it has" is a copy exception
+       * (`exceptions.triggered`) instead. */
+      readonly kind: "link-exiled-to-created";
+      readonly gains?: readonly TriggeredAbility[];
     }
   | {
       /**
@@ -10225,9 +10250,20 @@ export interface EffectApi {
    * again once it's answered. */
   returnExiledBySource(
     linked?: boolean,
-    /** The linked return's `under`, `others` and `filter`. */
-    options?: { readonly underYou?: boolean; readonly others?: boolean; readonly filter?: CardFilter },
+    /** The linked return's `under`, `others`, `filter` and `enterTapped`. */
+    options?: {
+      readonly underYou?: boolean;
+      readonly others?: boolean;
+      readonly filter?: CardFilter;
+      readonly enterTapped?: boolean;
+    },
   ): boolean;
+  /** The tokens this resolution has created, one object per token: a stack
+   * woken, and of a stack they joined only the ones made. */
+  createdTokensApart(): readonly ObjectId[];
+  /** `tokens` hold the cards this resolution has exiled — see
+   * `link-exiled-to-created`. */
+  linkExiledTo(tokens: readonly ObjectId[]): void;
   /** Sacrifice one named permanent — see the `"sacrifice-target"`
    * {@link EffectSpec}. */
   sacrificeTarget(target: TargetRef, byItsController?: boolean): void;
@@ -13900,6 +13936,9 @@ export function mayBeDone(effect: EffectSpec, ctx: ResolutionContext): boolean {
   // "You may return one of them": not with none of them left, and then it
   // hasn't been done this turn either (Rinoa, Angel Wing).
   if (action.kind === "put-arrived-onto-battlefield") return ctx.arrivedStillThere() > 0;
+  // "You may pay {1} and exile it": not once it has gone from where the
+  // trigger found it (Timothar, Baron of Bats's ruling).
+  if (action.kind === "exile" && action.target === "trigger-object" && ctx.triggerObjectLost === true) return false;
   // "You may move a counter": not when none could move (rule 122.5) — from
   // a permanent with none (of that kind) left, or with either end gone.
   if (action.kind === "move-counters" && !isMoveChooser(action.from) && !isMoveChooser(action.to)) {
@@ -15019,9 +15058,18 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
               ...(spec.under === "you" ? { underYou: true } : {}),
               ...(spec.others === true ? { others: true } : {}),
               ...(spec.filter !== undefined ? { filter: spec.filter } : {}),
+              ...(spec.enterTapped === true ? { enterTapped: true } : {}),
             }
           : undefined;
       if (ctx.returnExiledBySource(spec.linked === "battlefield", linkedOptions)) ctx.resumeAfterDecisions(spec, parked);
+      return;
+    }
+    case "link-exiled-to-created": {
+      const tokens = ctx.createdTokensApart();
+      ctx.linkExiledTo(tokens);
+      for (const object of tokens) {
+        for (const ability of spec.gains ?? []) ctx.grantTriggered({ kind: "object", object }, ability, "permanent");
+      }
       return;
     }
     case "choose-creature-type":
@@ -15403,20 +15451,33 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         return;
       }
       if (typeof spec.at === "object") {
+        // "Exile that token", "put the exiled card into your hand": what this
+        // resolution did that to, in place of the creating ability's targets.
+        const about =
+          spec.about === undefined || spec.about === "attached"
+            ? undefined
+            : spec.about === "created"
+              ? ctx.createdTokensApart().map((object) => ({ kind: "object", object }) as const)
+              : ctx.thisWay(spec.about).map((e) => ({ kind: "object", object: e.object }) as const);
+        if (about?.length === 0 && spec.orNone !== true) return;
+        const { leaves, to, thisTurn } = spec.at;
+        const watch = (object: ObjectId): void =>
+          ctx.delayTrigger(
+            { leaves: object, to, ...(thisTurn === true ? { thisTurn: true } : {}) },
+            spec.effect,
+            spec.text,
+            controller,
+            about,
+          );
+        if (leaves === "created") {
+          ctx.createdTokensApart().forEach(watch);
+          return;
+        }
         // "When it dies": only a permanent can die, so there must be one to
         // watch as this applies.
-        const watched = resolveEffectTarget(spec.at.leaves, ctx);
+        const watched = resolveEffectTarget(leaves, ctx);
         if (watched?.kind !== "object") return;
-        ctx.delayTrigger(
-          {
-            leaves: watched.object,
-            to: spec.at.to,
-            ...(spec.at.thisTurn === true ? { thisTurn: true } : {}),
-          },
-          spec.effect,
-          spec.text,
-          controller,
-        );
+        watch(watched.object);
         return;
       }
       // "At this turn's next end of combat, destroy all creatures that blocked

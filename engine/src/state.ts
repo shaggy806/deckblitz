@@ -1317,6 +1317,15 @@ export interface GameObject {
    */
   exiledWith?: { readonly source: ObjectId; readonly zoneChangeCount: number };
   /**
+   * The cards this token's ability means by "the exiled card" (rule 607.2a —
+   * Hofri Ghostforge's Spirit, Timothar, Baron of Bats's Bat), each as the
+   * object it is in exile (rule 400.7): the `link-exiled-to-created` effect's
+   * record. On the token, not the card, so each of several tokens made
+   * together has it (their rulings: any of them returns the card) and a token
+   * split off a stack keeps it; a copy of the token doesn't (the rulings).
+   */
+  linkedExile?: readonly { readonly object: ObjectId; readonly zoneChangeCount: number }[];
+  /**
    * The cards encoded on this permanent (rule 702.99b — cipher), each with
    * the exile stint it was encoded in. One still exiled in that stint gives
    * it the cipher trigger (`Game.effectiveTriggeredEntries`), whoever
@@ -1993,6 +2002,9 @@ export type GrantedAbilityRef =
 export interface LastKnownInfo {
   /** How many times it had mutated (`GameObject.merged.timesMutated`). */
   readonly timesMutated?: number;
+  /** A token's `GameObject.linkedExile`: what its leaves-the-battlefield
+   * ability still means once it has ceased to exist. */
+  readonly linkedExile?: GameObject["linkedExile"];
   /** The permanent's `zoneChangeCount` while it was on the battlefield — which
    * of its stints there this describes. A reference to the permanent names
    * the stint it means the same way (see {@link LastKnownRefs}), so a card
@@ -6627,6 +6639,7 @@ export function tokenFoldKey(o: GameObject): string {
     o.chosenPlayer ?? null,
     o.secretChoice ?? null,
     o.chosenPermanent ?? null,
+    o.linkedExile ?? null,
     o.counters,
     o.counterTimestamps ?? null,
     o.modifiers,

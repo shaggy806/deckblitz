@@ -2977,6 +2977,7 @@ export function parseSentence(sentence, ctx) {
     return faceDownExile(true, { whose: "each-player", amount: 1 });
   }
   if (re("look at the top card of your library, then exile it face down").test(s)) return faceDownExile("looked", { amount: 1 });
+  if (re("exile the top card of your library face down and look at it").test(s)) return faceDownExile("looked", { amount: 1 });
   if (re("look at the top card of each opponent's library and exile those cards face down").test(s)) {
     return faceDownExile("looked", { whose: "each-opponent", amount: 1 });
   }
@@ -8021,6 +8022,37 @@ function handsFaceDownAt(sentences, i, ctx) {
       ],
       used: 2,
     };
+  }
+  // "Create … token. Exile that token when ~ leaves the battlefield. Sacrifice
+  // ~ when that token leaves the battlefield" (Stangg); "… When that token
+  // leaves the battlefield, put the exiled card into your hand" (Ugin, the
+  // Ineffable); "Return ~ to the battlefield under its owner's control when
+  // that token dies" (Tatsumasa, the Dragon's Fang).
+  const onLeaving = (at, effect, text, about) => ({
+    effects: [{ kind: "delayed-trigger", at, ...(about !== undefined ? { about } : {}), effect, text }],
+    used: 1,
+  });
+  const LEAVING = ["graveyard", "exile", "hand", "library", "command"];
+  if (/^exile that token when ~ leaves the battlefield\.$/i.test(first)) {
+    return onLeaving({ leaves: "source", to: LEAVING }, { kind: "exile", target: 0 }, "Exile that token when ~ leaves the battlefield.", "created");
+  }
+  if (/^sacrifice ~ when that token leaves the battlefield\.$/i.test(first)) {
+    return onLeaving({ leaves: "created", to: LEAVING }, { kind: "sacrifice-source" }, "Sacrifice ~ when that token leaves the battlefield.");
+  }
+  if (/^when that token leaves the battlefield, put the exiled card into your hand\.$/i.test(first)) {
+    return onLeaving(
+      { leaves: "created", to: LEAVING },
+      { kind: "return-to-hand", target: 0, from: "exile" },
+      "When that token leaves the battlefield, put the exiled card into your hand.",
+      "exiled",
+    );
+  }
+  if (/^return ~ to the battlefield under its owner's control when that token dies\.$/i.test(first)) {
+    return onLeaving(
+      { leaves: "created", to: ["graveyard"] },
+      { kind: "put-onto-battlefield", target: "source" },
+      "Return ~ to the battlefield under its owner's control when that token dies.",
+    );
   }
   // "Create a Lander token. At the beginning of the end step on your next
   // turn, sacrifice that token" (Kav Landseeker).

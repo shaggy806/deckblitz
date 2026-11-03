@@ -27165,6 +27165,23 @@ export class Game {
     );
   }
 
+  /** What `source`, a token holding a `GameObject.linkedExile`, means by "the
+   * exiled card": those still in exile as the same objects (rule 400.7),
+   * though the token has left or ceased to exist. `undefined` for anything
+   * else, which finds its exiled cards the usual way. */
+  private exiledLinkedToToken(source: ObjectId): readonly ObjectId[] | undefined {
+    const object = this.state.objects[source];
+    const links =
+      object?.linkedExile ?? object?.lastKnown?.linkedExile ?? this.state.ceasedTokens?.[source]?.linkedExile;
+    if (links === undefined) return undefined;
+    return links
+      .filter(({ object: card, zoneChangeCount }) => {
+        const exiled = this.state.objects[card];
+        return exiled?.zone === "exile" && (exiled.zoneChangeCount ?? 0) === zoneChangeCount;
+      })
+      .map(({ object: card }) => card);
+  }
+
   /** "One of them": those of a batched trigger's cards still in that graveyard
    * as the same objects (rule 400.7). */
   private arrivedStillThere(refs: LastKnownRefs): ObjectId[] {
@@ -30990,9 +31007,12 @@ export class Game {
         // has just exiled (Mirror of Life Trapping).
         const justExiled =
           options?.others === true ? new Set(thisWayEntries(this.state, "exiled").map((e) => e.object)) : undefined;
+        // A token's own "the exiled card" (`GameObject.linkedExile`).
+        const toToken = linked === true ? this.exiledLinkedToToken(source) : undefined;
         const returning = this.state.zones.shared.exile.filter((id) => {
           const object = this.state.objects[id];
           if (object === undefined || object.isToken) return false;
+          if (toToken !== undefined) return toToken.includes(id);
           if (linked !== true) return object.exiledBy === source;
           const link = object.exiledWith;
           if (stint === undefined || link === undefined || link.source !== source || link.zoneChangeCount !== stint) {
@@ -31014,7 +31034,12 @@ export class Game {
           for (const id of returning) {
             this.state.objects[id].exiledBy = undefined;
             const under = enterer(id);
-            if (this.moveObject(id, "battlefield", under !== this.state.objects[id].owner ? { under } : {})) {
+            if (
+              this.moveObject(id, "battlefield", {
+                ...(under !== this.state.objects[id].owner ? { under } : {}),
+                ...(options?.enterTapped === true ? { tapped: true } : {}),
+              })
+            ) {
               // Kept there by a control effect, as a reanimation "under your
               // control" is (see `putOntoBattlefieldByEffect`).
               const entered = this.state.objects[id];
@@ -32761,7 +32786,28 @@ export class Game {
         this.state.objects[source]?.zone === "exile"
           ? [source]
           : [],
+      createdTokensApart: () =>
+        // One object per token: "that token" is each of them (Ugin, the
+        // Ineffable's ruling), and only what this made, of a stack it joined.
+        thisWayEntries(this.state, "created", since).flatMap((e) =>
+          e.departed || this.state.objects[e.object]?.zone !== "battlefield"
+            ? []
+            : this.materializeStack(e.object, e.count),
+        ),
+      linkExiledTo: (tokens) => {
+        const linked = thisWayEntries(this.state, "exiled", since)
+          .filter((e) => !e.departed && this.state.objects[e.object]?.zone === "exile")
+          .map((e) => ({ object: e.object, zoneChangeCount: this.state.objects[e.object].zoneChangeCount ?? 0 }));
+        for (const token of tokens) {
+          const object = this.state.objects[token];
+          if (object !== undefined) object.linkedExile = linked;
+        }
+      },
       cardsExiledWithSource: (orUntil) => {
+        // A token's "the exiled card" is the one made with it, whatever else
+        // the card that made it has exiled (Hofri Ghostforge's ruling).
+        const toToken = this.exiledLinkedToToken(source);
+        if (toToken !== undefined) return toToken;
         // The stint the resolving spell or ability refers to (rule 607.2a):
         // the one it came from, though the source may have left since.
         const object = this.state.objects[source];
@@ -49432,6 +49478,7 @@ export class Game {
     return {
       zoneChangeCount: object.zoneChangeCount ?? 0,
       ...(object.classLevel !== undefined ? { classLevel: object.classLevel } : {}),
+      ...(object.linkedExile !== undefined ? { linkedExile: object.linkedExile } : {}),
       name,
       owner: object.owner,
       controller: object.controller,

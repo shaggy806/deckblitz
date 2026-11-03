@@ -5,6 +5,8 @@
   "effect:add-land-types-all",
   "effect:add-types-all",
   "static:planeswalker-becomes-creature",
+  "effect:linked-token-leaves",
+  "effect:token-trigger-returns-linked-exiled-card",
   "trigger:dies-batch-trigger",
   "amount:creatures-blocking-it",
   "effect:amount-creatures-blocking-it",

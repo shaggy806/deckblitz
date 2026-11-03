@@ -11407,6 +11407,38 @@ describe("offering", () => {
       offering: { type: "artifact" },
     });
   });
+  it("reads delayed triggers on a token just created", () => {
+    const effects = (line: string) =>
+      parseFace({ name: "Card", type_line: "Creature — Human", oracle_text: line }, { tokenFor: (d: string) => d }).triggered[0]
+        .effect.effects;
+    const LEAVING = ["graveyard", "exile", "hand", "library", "command"];
+    const twin = effects(
+      "When this creature enters, create a 1/1 white Soldier creature token. Exile that token when this creature leaves the battlefield. Sacrifice this creature when that token leaves the battlefield.",
+    );
+    expect(twin[1]).toMatchObject({
+      kind: "delayed-trigger",
+      at: { leaves: "source", to: LEAVING },
+      about: "created",
+      effect: { kind: "exile", target: 0 },
+    });
+    expect(twin[2]).toMatchObject({ at: { leaves: "created", to: LEAVING }, effect: { kind: "sacrifice-source" } });
+    const ugin = parseFace(
+      {
+        name: "Card",
+        type_line: "Legendary Planeswalker — Ugin",
+        loyalty: "4",
+        oracle_text:
+          "+1: Exile the top card of your library face down and look at it. Create a 1/1 white Soldier creature token. When that token leaves the battlefield, put the exiled card into your hand.",
+      },
+      { tokenFor: (d: string) => d },
+    ).activated[0].effect.effects;
+    expect(ugin[0]).toEqual({ kind: "exile-from-library", amount: 1, faceDown: "looked", linked: true });
+    expect(ugin[2]).toMatchObject({
+      at: { leaves: "created", to: LEAVING },
+      about: "exiled",
+      effect: { kind: "return-to-hand", target: 0, from: "exile" },
+    });
+  });
   it("reads a batched dies trigger, and a once-a-turn one as a plain dies", () => {
     const trigger = (line: string) =>
       parseFace({ name: "Card", type_line: "Creature — Human", oracle_text: line }, { tokenFor: (d: string) => d })

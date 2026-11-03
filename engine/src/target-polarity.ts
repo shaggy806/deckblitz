@@ -856,6 +856,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "put-exiled-this-way-onto-battlefield": none,
   "move-exiled-this-way": none,
   "put-arrived-onto-battlefield": none,
+  "link-exiled-to-created": none,
   "reveal-until-count": (n, v) => v.touch(n.whose, "harm", MINOR),
   encore: none,
   goad: (n, v) => v.touch(n.target, "harm", MINOR),
