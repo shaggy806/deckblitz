@@ -172,6 +172,7 @@ import type {
   GraveyardExileReplacement,
   LifeGainReplacement,
   MillMultiplierReplacement,
+  TurnBeginReplacement,
 } from "./replacements.js";
 import { AutomaticController, standInFor } from "./controller.js";
 import type { ControllerView, PlayerController } from "./controller.js";
@@ -1121,6 +1122,12 @@ interface EnteringReplacement {
 
 /** Riot's two answers (rule 702.136a), as its `choose-creature-type` menu
  * offers them — see `Game.askEnterChoice`. */
+/** The answers to `Game.askTurnBegin`'s questions: a bot, and a seat with no
+ * opinion, takes each one's first. */
+const TAKE_THE_TURN = "Take this turn";
+const SKIP_THE_TURN = "Skip this turn";
+const USE_THE_OWED_SKIP = "Use the skipped turn I owe on it";
+const KEEP_THE_OWED_SKIP = "Keep owing it";
 const RIOT_COUNTER = "+1/+1 counter";
 const RIOT_OPTIONS: readonly string[] = [RIOT_COUNTER, "Haste"];
 /** Unleash's choice (rule 702.98a): the first option takes the counter. */
@@ -6590,6 +6597,10 @@ export class Game {
     });
     this.state.awaiting = null;
 
+    if (awaiting.turnSkip !== undefined) {
+      this.answerTurnBegin(awaiting, awaiting.turnSkip, creatureType);
+      return;
+    }
     if (awaiting.then !== undefined && awaiting.value !== undefined) {
       // A `choose-value` colour, card type or counter kind: the rest of the
       // resolution with the answer in its placeholder.
@@ -7685,7 +7696,171 @@ export class Game {
 
   // --- turn / step progression --------------------------------------
 
+  /**
+   * What effects skipping turns (rules 500.11, 614.10) would do to the next
+   * turn, read through without changing anything: the turns that would begin,
+   * in order, each either skipped or the one that begins. A player's choice
+   * among them stops it to ask (`turnSkip`), and it starts over with the
+   * answer. Choices first, then what happens anyway, so a "you may skip" is
+   * offered on a turn another effect would skip too: taking it applies it
+   * first, and declining leaves the other to apply (rule 616.1). Whether it
+   * asked.
+   */
+  private askTurnBegin(): boolean {
+    if (this.state.turn.number === 0 || !this.anyTurnBeginReplacement()) return false;
+    // Whoever controlled that player's turn doesn't answer for the next one.
+    this.endTurnsPlayerControl();
+    const owed = new Map<PlayerId, number>();
+    let occurrence = 0;
+    /** Whether this turn is skipped; `null` when a player is being asked. */
+    const skipped = (player: PlayerId, isExtra: boolean): boolean | null => {
+      const at = occurrence;
+      occurrence += 1;
+      const replacements = this.turnBeginReplacements(player, isExtra);
+      const answers = this.state.turnBeginAnswers;
+      for (const { source, spec } of replacements) {
+        // One taken already skips this turn: there's nothing left to replace.
+        if (spec.may !== true || answers?.owedAgainst.includes(at) === true) continue;
+        if (answers?.declined.includes(`${source}:${at}`) === true) continue;
+        this.state.awaiting = {
+          kind: "choose-creature-type",
+          player,
+          source,
+          options: [TAKE_THE_TURN, SKIP_THE_TURN],
+          catalog: false,
+          turnSkip: { occurrence: at },
+          prompt: "you may skip the turn you would begin",
+        };
+        return null;
+      }
+      const owes = owed.get(player) ?? this.state.players[player].turnsToSkip ?? 0;
+      const anyway = replacements.find(({ spec }) => spec.may !== true);
+      if (anyway !== undefined) {
+        if (owes > 0 && answers?.answered.includes(at) !== true) {
+          this.state.awaiting = {
+            kind: "choose-creature-type",
+            player,
+            source: anyway.source,
+            options: [USE_THE_OWED_SKIP, KEEP_THE_OWED_SKIP],
+            catalog: false,
+            turnSkip: { occurrence: at, owed: true },
+            prompt: "this skips the turn you would begin, and you owe a skipped turn too",
+          };
+          return null;
+        }
+        if (answers?.owedAgainst.includes(at) === true) owed.set(player, owes - 1);
+        return true;
+      }
+      if (owes > 0) {
+        owed.set(player, owes - 1);
+        return true;
+      }
+      return false;
+    };
+    const { extraTurns, turnOrder: order, players } = this.state;
+    for (let i = extraTurns.length - 1; i >= 0; i -= 1) {
+      const next = extraTurns[i];
+      if (!order.includes(next) || players[next].hasLost) continue;
+      const result = skipped(next, true);
+      if (result === null) return true;
+      if (!result) return false;
+    }
+    const turn = this.state.turn;
+    const rotation = turn.isExtra ? (turn.rotationIndex ?? turn.activePlayerIndex) : turn.activePlayerIndex;
+    let departedInARow = 0;
+    for (let seats = 1; departedInARow < order.length; seats += 1) {
+      const seat = order[(rotation + seats) % order.length];
+      if (players[seat].hasLost) {
+        departedInARow += 1;
+        continue;
+      }
+      departedInARow = 0;
+      const result = skipped(seat, false);
+      if (result === null) return true;
+      if (!result) return false;
+    }
+    return false;
+  }
+
+  /** The answer to {@link askTurnBegin}'s question: the turn may begin now, or
+   * the next question be asked. */
+  private answerTurnBegin(
+    awaiting: Extract<AwaitingDecision, { kind: "choose-creature-type" }>,
+    turnSkip: NonNullable<Extract<AwaitingDecision, { kind: "choose-creature-type" }>["turnSkip"]>,
+    answer: string,
+  ): void {
+    const answers = (this.state.turnBeginAnswers ??= { declined: [], answered: [], owedAgainst: [] });
+    if (turnSkip.owed === true) {
+      answers.answered.push(turnSkip.occurrence);
+      if (answer === USE_THE_OWED_SKIP) answers.owedAgainst.push(turnSkip.occurrence);
+    } else if (answer === TAKE_THE_TURN) {
+      answers.declined.push(`${awaiting.source}:${turnSkip.occurrence}`);
+    } else {
+      // One more turn owed: this one (rule 614.10a), the one the question
+      // was about, since any before it were passed already.
+      const player = this.state.players[awaiting.player];
+      player.turnsToSkip = (player.turnsToSkip ?? 0) + 1;
+      answers.answered.push(turnSkip.occurrence);
+      answers.owedAgainst.push(turnSkip.occurrence);
+      const source = this.state.objects[awaiting.source];
+      const spec = this.turnBeginReplacements(awaiting.player, false)
+        .concat(this.turnBeginReplacements(awaiting.player, true))
+        .find((r) => r.source === awaiting.source)?.spec;
+      if (spec?.thenUntapSource === true && source?.zone === "battlefield") {
+        this.state.untapAsNextTurnBegins = [
+          ...(this.state.untapAsNextTurnBegins ?? []),
+          { object: awaiting.source, stint: source.zoneChangeCount ?? 0 },
+        ];
+      }
+    }
+    this.beginTurn();
+  }
+
+  /** Whether anything on the battlefield says what happens as a turn would
+   * begin: nearly always not, which the next two needn't then work out. */
+  private anyTurnBeginReplacement(): boolean {
+    for (const id of this.state.zones.shared.battlefield) {
+      if (this.registry.get(rulesTextName(this.state.objects[id])).static.some((s) => s.replacement?.event === "would-begin-turn")) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  /** The effects on the turn of `player` that would begin (rule 614.10). */
+  private turnBeginReplacements(
+    player: PlayerId,
+    isExtra: boolean,
+  ): { readonly source: ObjectId; readonly spec: TurnBeginReplacement }[] {
+    const found: { source: ObjectId; spec: TurnBeginReplacement }[] = [];
+    for (const id of this.state.zones.shared.battlefield) {
+      const object = this.state.objects[id];
+      if (hasLostAbilities(this.state, this.registry, object)) continue;
+      for (const ability of this.registry.get(rulesTextName(object)).static) {
+        const spec = ability.replacement;
+        if (spec?.event !== "would-begin-turn" || !this.staticActive(object, ability)) continue;
+        if (spec.extraOnly === true && !isExtra) continue;
+        if (spec.who === "you" ? object.controller !== player : spec.who === "opponent" && object.controller === player) continue;
+        found.push({ source: id, spec });
+      }
+    }
+    return found;
+  }
+
+  /** Whether the turn of `player` about to begin is skipped: by an effect that
+   * says so of it, using up a skip owed only where they said it should
+   * (`askTurnBegin`), or by a skip owed. */
+  private skipsTurn(player: PlayerId, isExtra: boolean, occurrence: number): boolean {
+    const anyway =
+      this.anyTurnBeginReplacement() && this.turnBeginReplacements(player, isExtra).some(({ spec }) => spec.may !== true);
+    if (!anyway) return this.skipOwedTurn(player);
+    if (this.state.turnBeginAnswers?.owedAgainst.includes(occurrence) === true) return this.skipOwedTurn(player);
+    this.emit({ type: "turn-skipped", player });
+    return true;
+  }
+
   private beginTurn(): void {
+    if (this.askTurnBegin()) return;
     this.state.turn.number += 1;
     // Day/Night (rule 726.3/726.4) is checked as a turn begins, against the
     // spells the *previous* turn's active player cast that turn — captured now,
@@ -7777,6 +7952,7 @@ export class Game {
     // the game doesn't begin (800.4k).
     let extraFor: PlayerId | null = null;
     let extraRiders: readonly ExtraTurnRider[] = [];
+    let occurrence = 0;
     while (extraFor === null && this.state.extraTurns.length > 0) {
       const next = this.state.extraTurns.pop() as PlayerId;
       // "Skip the untap step of that turn" (Savor the Moment): queued at the
@@ -7797,7 +7973,7 @@ export class Game {
       }
       // A skip takes an extra turn as readily as any other (rule 614.10), and
       // what was scheduled for the turn goes with it (614.10a).
-      if (this.state.turnOrder.includes(next) && !this.state.players[next].hasLost && !this.skipOwedTurn(next)) {
+      if (this.state.turnOrder.includes(next) && !this.state.players[next].hasLost && !this.skipsTurn(next, true, occurrence++)) {
         extraFor = next;
         if (skipsUntap) {
           const player = this.state.players[next];
@@ -7832,7 +8008,7 @@ export class Game {
           if (this.state.players[seat].hasLost) {
             departedInARow += 1;
             if (!beginningFor.includes(seat)) beginningFor.push(seat);
-          } else if (this.skipOwedTurn(seat)) {
+          } else if (this.skipsTurn(seat, false, occurrence++)) {
             departedInARow = 0;
           } else {
             index = candidate;
@@ -7842,6 +8018,7 @@ export class Game {
         turn.activePlayerIndex = index;
       }
     }
+    delete this.state.turnBeginAnswers;
     // The round (`TurnState.round`): a turn in the normal rotation that
     // reaches or passes the starting player's seat again begins the next one.
     // Seats are compared by their distance after the starting seat, so a seat
@@ -8008,6 +8185,14 @@ export class Game {
       activePlayer: this.activePlayer,
       ...(this.state.turn.isExtra ? { extra: true } : {}),
     });
+    // "If you do, untap this artifact": before anything else happens in the
+    // next turn to actually occur (rule 614.10b, Time Vault's ruling).
+    const untapping = this.state.untapAsNextTurnBegins ?? [];
+    delete this.state.untapAsNextTurnBegins;
+    for (const { object, stint } of untapping) {
+      const permanent = this.state.objects[object];
+      if (permanent?.zone === "battlefield" && (permanent.zoneChangeCount ?? 0) === stint) this.untapUnlessStunned(object);
+    }
     this.enterStep("untap");
   }
 

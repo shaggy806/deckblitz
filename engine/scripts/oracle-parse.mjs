@@ -12321,6 +12321,15 @@ function parseStatic(line, text) {
   if (line === "You can't win the game and your opponents can't lose the game.") {
     return { affects: { scope: "self" }, cantWinGame: true, opponentsCantLoseGame: true, text };
   }
+  // "If [a player] would begin an extra turn, that player skips that turn instead"
+  // (rule 614.10).
+  if ((m = /^If (a player|an opponent) would begin an extra turn, that player skips that turn instead\.$/.exec(line))) {
+    return {
+      affects: { scope: "self" },
+      replacement: { event: "would-begin-turn", who: m[1] === "a player" ? "any" : "opponent", extraOnly: true },
+      text,
+    };
+  }
   if (line === "Enchanted player can't gain life.") {
     return { affects: { scope: "self" }, replacement: { event: "would-gain-life", who: "enchanted-player", prevent: true }, text };
   }

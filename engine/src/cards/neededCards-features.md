@@ -3211,6 +3211,10 @@ in `git log`.
   a token copy settles them off the battlefield, each token for itself, then all of one
   instruction's enter together through `moveObject` (`token-copy-as-enters.test.ts`): Rebuild the
   City, Kindred Charge, Ember Island Production.
+- **Skipping a turn as it would begin** (`replacement:skip-extra-turns`, `replacement:skip-turn`, 2026-11-02) —
+  the `would-begin-turn` replacement, by whose turn and whether extra, with a "you may" asked as it would
+  begin (`skip-turn-replacement.test.ts`): Time Vault, Gerrard's Hourglass Pendant; Chronatog and Magosi, the
+  Waterveil needed no code.
 - **Curses** (`mechanic:curses`, 2026-10-05, TDC6) — an Aura that enchants a
   player (`GameObject.attachedToPlayer`, rule 303.4, with the 303.4f choice of
   player), "whenever enchanted player is attacked" (`curseWhenAttacked`) and

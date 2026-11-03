@@ -5833,6 +5833,12 @@ clause (section 9):
   `mayPayLife: N` is a shock land (a `pay-life-for-untapped` decision, via the
   `shockLand` helper); `painIfUntapped: N` deals damage if it *did* end up
   entering untapped (Rockfall Vale).
+- `{ event: "would-begin-turn", who: "you" | "opponent" | "any", extraOnly?, may?, thenUntapSource? }` —
+  "if [a player] would begin [a turn], that player skips that turn instead" (rules 500.11, 614.10), whose
+  read from this permanent's controller; `extraOnly` is "an extra turn" (Gerrard's Hourglass Pendant,
+  Stranglehold). `may` asks that player as the turn would begin, and `thenUntapSource` is "if you do, untap
+  this", the first thing in the next turn to occur (rule 614.10b); a static's `condition` is "while this
+  is tapped" (Time Vault). "You skip your next turn" is the `skip-turn` effect (Chronatog, Magosi).
 - `{ event: "others-enter-battlefield", filter, tapped?, untapped?,
   counters?: { kind, amount } }` — how **other** permanents enter. `filter`
   picks which, read from this permanent's controller's side against each one

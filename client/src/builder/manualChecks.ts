@@ -9679,4 +9679,32 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{}, { bf: ['Serra Angel'] }, {}],
     }),
   ),
+  preset(
+    'Time Vault: you\'re asked as your turn would begin, and skipping untaps it',
+    board({
+      you: { bf: [{ name: 'Time Vault', tapped: true }] },
+      opp: [{}],
+    }),
+  ),
+  preset(
+    'Time Vault: taking the turn leaves it tapped',
+    board({
+      you: { bf: [{ name: 'Time Vault', tapped: true }] },
+      opp: [{}],
+    }),
+  ),
+  preset(
+    'Gerrard\'s Hourglass Pendant: an extra turn is skipped, for whoever\'s it is',
+    board({
+      you: { bf: ['Island*5'], hand: ['Capture of Jingzhou'] },
+      opp: [{ bf: ['Gerrard\'s Hourglass Pendant'] }],
+    }),
+  ),
+  preset(
+    'Gerrard\'s Hourglass Pendant: a turn you owe can go on the skipped one',
+    board({
+      you: { bf: ['Chronatog', 'Island*5'], hand: ['Capture of Jingzhou'] },
+      opp: [{ bf: ['Gerrard\'s Hourglass Pendant'] }],
+    }),
+  ),
 ]

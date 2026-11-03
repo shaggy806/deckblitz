@@ -6413,3 +6413,27 @@ These boards start before the first turn (the builder's `openingHands`), with th
 - **Do:** Cast Replication Technique on your Pacifism, and don't copy the spell. Pick Carol's Serra Angel when asked.
 - **Expect:** You're asked what the new Pacifism enchants, picking on the board among every creature at the table. It enters attached to the Serra Angel, and your Grizzly Bears stay under the first Pacifism.
 - **Not a bug:** This isn't targeting, so a creature with hexproof could be picked.
+
+
+## Skipping a turn as it would begin (2026-11-02)
+
+### Time Vault: you're asked as your turn would begin, and skipping untaps it
+
+- **Do:** Pass priority until Bob's turn ends, and choose "Skip this turn" when asked.
+- **Expect:** You're asked once, naming Time Vault, with "Take this turn" and "Skip this turn", before your turn starts. Your turn doesn't happen: Bob's next turn begins, and Time Vault is untapped at its very start.
+
+### Time Vault: taking the turn leaves it tapped
+
+- **Do:** Pass priority until Bob's turn ends, and choose "Take this turn" when asked.
+- **Expect:** Your turn begins as usual, and Time Vault stays tapped through your untap step.
+
+### Gerrard's Hourglass Pendant: an extra turn is skipped, for whoever's it is
+
+- **Do:** Cast Capture of Jingzhou, then pass priority until your turn ends.
+- **Expect:** Nothing asks you anything. There's no extra turn: Bob's turn begins next.
+
+### Gerrard's Hourglass Pendant: a turn you owe can go on the skipped one
+
+- **Do:** Cast Capture of Jingzhou, activate Chronatog once, then choose "No attacks". Choose "Use the skipped turn I owe on it" when asked.
+- **Expect:** You're asked as the extra turn would begin. It's skipped, Bob takes his turn, and your turn after that happens as usual: the skip you owed is spent.
+- **Not a bug:** Choosing "Keep owing it" instead skips your next turn as well.

@@ -9165,6 +9165,15 @@ describe("a static acting on a player", () => {
     expect(wound.triggered[0].effect).toEqual({ kind: "lose-life", who: "trigger-player", amount: { half: { lifeTotal: "each" }, round: "up" } });
   });
 
+  it("reads an extra turn skipped as it would begin (rule 614.10)", () => {
+    const pendant = face("Artifact", "If a player would begin an extra turn, that player skips that turn instead.");
+    expect(pendant.complete).toBe(true);
+    expect(pendant.static[0].replacement).toEqual({ event: "would-begin-turn", who: "any", extraOnly: true });
+    const opponents = face("Enchantment", "If an opponent would begin an extra turn, that player skips that turn instead.");
+    expect(opponents.complete).toBe(true);
+    expect(opponents.static[0].replacement).toEqual({ event: "would-begin-turn", who: "opponent", extraOnly: true });
+  });
+
   it("reads Abyssal Persecutor's inverse pair", () => {
     const demon = face("Creature — Demon", "You can't win the game and your opponents can't lose the game.");
     expect(demon.complete).toBe(true);

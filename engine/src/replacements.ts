@@ -37,6 +37,7 @@ import type { CardType } from "./cards.js";
 
 /** A single replacement clause on a `StaticAbility`. Discriminated by `event`. */
 export type ReplacementSpec =
+  | TurnBeginReplacement
   | EntersBattlefieldReplacement
   | OthersEnterReplacement
   | TokenMultiplierReplacement
@@ -464,6 +465,26 @@ export interface MillMultiplierReplacement {
  * the same event, lifelink's included). Every `plus` adds up; one `prevent`
  * wins over all of them.
  */
+export interface TurnBeginReplacement {
+  /**
+   * "If [a player] would begin [a turn], that player skips that turn instead"
+   * (rules 500.11, 614.1b, 614.10): the turn passes as though it didn't exist,
+   * and what waits for "their next turn" goes on waiting (614.10a). Whose it
+   * is, read from this permanent's controller: `who`. `extraOnly` is "an extra
+   * turn" (Stranglehold). A static's `condition` is "while this artifact is
+   * tapped" (Time Vault).
+   */
+  readonly event: "would-begin-turn";
+  readonly who: "you" | "opponent" | "any";
+  readonly extraOnly?: true;
+  /** "…you may skip that turn instead", asked of that player as it would
+   * begin. */
+  readonly may?: true;
+  /** "If you do, untap this artifact": the first thing that happens in the
+   * next turn to actually occur (rule 614.10b, Time Vault's ruling). */
+  readonly thenUntapSource?: true;
+}
+
 export interface LifeGainReplacement {
   readonly event: "would-gain-life";
   readonly who: "opponent" | "you" | "any-player" | "enchanted-player";

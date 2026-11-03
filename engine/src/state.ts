@@ -3605,6 +3605,12 @@ export type AwaitingDecision =
        * (`CardDefinition.choosePlayerOnEnter`) — `options` are the players
        * who may be chosen, recorded as `enterChoice.chosenPlayer`. */
       readonly choosePlayer?: true;
+      /** What a turn about to begin comes to (rule 614.10 — `Game.askTurnBegin`):
+       * this source's "you may skip that turn" (Time Vault), the first option
+       * taking the turn; or, with `owed`, whether the skip this player owes is
+       * used on a turn this source skips anyway (rule 616.1), the first option
+       * using it. `occurrence` counts the turns that would begin from now. */
+      readonly turnSkip?: { readonly occurrence: number; readonly owed?: true };
       /** What the choice is, in words, for a menu that needs saying. */
       readonly prompt?: string;
       readonly then?: EffectSpec;
@@ -6033,6 +6039,20 @@ export interface GameState {
    * index in `extraTurns` its turn was queued at, which a stack's push and
    * pop keep. Absent with none. */
   extraTurnsSkippingUntap?: number[];
+  /** The answers given about the turn that would begin next (rule 614.10 —
+   * `Game.askTurnBegin`), until one does. `declined` is `source:occurrence` for
+   * a "you may skip" turned down, `owedAgainst` the occurrences a skip owed is
+   * used on though another effect skips them anyway; `answered` every
+   * occurrence asked that of. Absent with none. */
+  turnBeginAnswers?: {
+    declined: string[];
+    answered: number[];
+    owedAgainst: number[];
+  };
+  /** Permanents to untap as the next turn to actually occur begins, the first
+   * thing that happens in it (rule 614.10b — Time Vault), each in the stint it
+   * was skipped for. Absent with none. */
+  untapAsNextTurnBegins?: { readonly object: ObjectId; readonly stint: number }[];
   /** What the effect that queued an extra turn said about that turn ("during
    * that turn, …", "at the beginning of that turn's end step, …"): each with
    * the index in `extraTurns` its turn was queued at, as
