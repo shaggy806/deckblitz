@@ -5,6 +5,9 @@ and the cleanups found along the way. `BACKLOG.md` keeps one line per item under
 title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLETED.md`. The animation follow-ups are in
 `docs/plans/legibility-of-play.md`, "Follow-ups".
 
+- **The log names a hidden card by its id** (found 2026-11-03): after Distant Memories' yes, other seats read "Alice takes
+  obj-161", because `client/src/format.ts`'s `cards-chosen-from-zone` line names each object and that card is now in a hidden
+  hand. It should read "a card" to a seat that can't see it. Not checked yet: which other log lines do the same.
 - **Which seat you see while controlling another player** (open 2026-11-02, the user will decide after
   playing it; the Mindslaver checks in `docs/manual-checks.md` show it). Rule 723.4 only says what the
   controller may see, so this is a UI call.
