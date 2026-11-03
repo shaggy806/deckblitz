@@ -284,7 +284,7 @@ for (const size of SIZES) {
     // The end: a card of its own, the lesson recorded as done, and on to a game.
     const end = await expectCard(page, 'lesson-complete', size)
     await expect(end.getByRole('heading')).toHaveText('You did it!')
-    await expect(end.getByRole('button', { name: 'Play again' })).toBeVisible()
+    await expect(end.getByRole('button', { name: "Commander's rules" })).toBeVisible()
     await expect
       .poll(() => page.evaluate(() => JSON.parse(window.localStorage.getItem('mtg.tutorials') ?? '{}').lessons))
       .toEqual({ 'learn-commander': 'done' })

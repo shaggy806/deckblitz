@@ -93,7 +93,7 @@ import { setShare } from './game/divideShares.ts'
 import { StableLabel } from './ui/StableLabel.tsx'
 import { usePlayback } from './game/usePlayback.ts'
 import { AnimationBus } from './game/animationBus.ts'
-import { describeEvent, isDetailOnlyEvent, logName, playerLabel, seatClassOf, withNames } from './format.ts'
+import { describeEvent, isDetailOnlyEvent, logName, playerLabel, possessive, seatClassOf, withNames } from './format.ts'
 import { PhaseTrack } from './ui/PhaseTrack.tsx'
 import { TurnBanner } from './ui/TurnBanner.tsx'
 import { AnimationLayer } from './ui/AnimationLayer.tsx'
@@ -2262,6 +2262,11 @@ function Table({
   const canPassTurn = canPass && seat === view.activePlayer && lesson?.allows.passTurn !== false
   // A lesson's card can ask for a declaration with someone in it.
   const declareAtLeast = lesson?.allows.declareAtLeast ?? 0
+  // And for each attacker to go at the player it names.
+  const attackAtWrong = Object.entries(attackAssignments).some(([id, defender]) => {
+    const wanted = lesson?.allows.attackAt[view.objects[id as ObjectId]?.cardName ?? '']
+    return wanted !== undefined && wanted !== defender
+  })
 
   const mode:
     | 'discard'
@@ -5388,6 +5393,7 @@ function Table({
         </button>
         <button
           type="button"
+          disabled={lesson?.allows.leaveCommander === false}
           onClick={() =>
             game.dispatch({ type: 'commander-replacement', player: seat, toCommandZone: false })
           }
@@ -5792,6 +5798,7 @@ function Table({
           {unmetMusts.length > 0 && enterAttackingAction === undefined
             ? ` · ${unmetMusts.map((id) => game.nameOf(id)).join(', ')} must attack`
             : ''}
+          {attackAtWrong ? ' · not whom the lesson asked: press Clear to start again' : ''}
           {attackTax.mana > 0 || attackTax.life > 0 ? (
             <>
               {' '}
@@ -5894,10 +5901,18 @@ function Table({
             {unpicked.length > 0 && unpicked.some((id) => defendersFor(id).length !== 1) ? 'Select all' : 'All attack'}
           </StableLabel>
         </button>
-        <button type="button" disabled={attackPicks.length === 0} onClick={() => setAttackPicks([])}>
+        <button
+          type="button"
+          disabled={attackPicks.length === 0 && assignedCount === 0}
+          onClick={() => {
+            setAttackPicks([])
+            setAttackAssignments({})
+            setAttackBands([])
+          }}
+        >
           Clear
         </button>
-        <button type="button" disabled={unmetMusts.length > 0 || assignedCount < declareAtLeast} onClick={confirmAttackers}>
+        <button type="button" disabled={unmetMusts.length > 0 || assignedCount < declareAtLeast || attackAtWrong} onClick={confirmAttackers}>
           {enterAttackingAction !== undefined ? (
             'Confirm'
           ) : (
@@ -6424,19 +6439,19 @@ function Table({
         const cards = view.emblems.flatMap((e, i) => (e.owner === pid ? [emblemToVisible(e, i)] : []))
         const byId = new Map(cards.map((c) => [c.id, c]))
         setZoneView({
-          title: `${playerLabel(pid, game.seats)}'s emblems`,
+          title: `${possessive(playerLabel(pid, game.seats))} emblems`,
           ids: cards.map((c) => c.id),
           resolve: (id) => byId.get(id),
         })
       }}
       onOpenGraveyard={() =>
-        openZone(`${playerLabel(pid, game.seats)}'s graveyard`, view.zones.graveyards[pid] ?? [])
+        openZone(`${possessive(playerLabel(pid, game.seats))} graveyard`, view.zones.graveyards[pid] ?? [])
       }
-      onOpenExile={() => openZone(`${playerLabel(pid, game.seats)}'s exile`, exileOf(pid))}
+      onOpenExile={() => openZone(`${possessive(playerLabel(pid, game.seats))} exile`, exileOf(pid))}
       onOpenSideboard={pid === seat ? () => openZone('Your sideboard', view.zones.sideboard) : undefined}
       onOpenCompanion={() => {
         const card = view.players[pid].companion
-        if (card !== null) openZone(`${playerLabel(pid, game.seats)}'s companion`, [card])
+        if (card !== null) openZone(`${possessive(playerLabel(pid, game.seats))} companion`, [card])
       }}
       {...(view.players[pid].companion !== null
         ? { companionName: view.objects[view.players[pid].companion]?.cardName }
@@ -6450,7 +6465,7 @@ function Table({
       onOpenHand={
         pid === seat
           ? undefined
-          : () => openZone(`${playerLabel(pid, game.seats)}'s hand`, view.zones.hands[pid] ?? [])
+          : () => openZone(`${possessive(playerLabel(pid, game.seats))} hand`, view.zones.hands[pid] ?? [])
       }
       targetable={playerIsTargetable(pid)}
       selected={
@@ -6751,7 +6766,7 @@ function Table({
     return (
     <div className="hand">
       <h3>
-        {playerLabel(seat, game.seats)}'s hand ({handIds.length})
+        {possessive(playerLabel(seat, game.seats))} hand ({handIds.length})
         {!grid && handIds.length > HAND_GRID_THRESHOLD ? (
           <button
             type="button"
@@ -7512,7 +7527,7 @@ function Table({
       {dungeonViewOf !== null ? (
         <DungeonViewer
           kind="view"
-          title={`${playerLabel(dungeonViewOf, game.seats)}'s dungeon${
+          title={`${possessive(playerLabel(dungeonViewOf, game.seats))} dungeon${
             view.players[dungeonViewOf]?.dungeon ? ` — ${view.players[dungeonViewOf]?.dungeon?.name}` : ''
           }`}
           map={view.players[dungeonViewOf]?.dungeon?.map ?? null}

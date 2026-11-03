@@ -88,13 +88,13 @@ describe('a lesson anchor', () => {
   })
 
   it('points at the first tile the page draws, a stacked battlefield tile before a bare one', () => {
-    expect(objectSelectors('b2' as ObjectId)).toEqual(['[data-obj-ids~="b2"]', '[data-obj-id="b2"]'])
+    expect(objectSelectors('b2' as ObjectId)).toEqual(['[data-obj-ids~="b2"]', '[data-obj-id="b2"]', '.stack-entry[data-stack-id="b2"]'])
     // The Forest in hand has left (not drawn): the one on the battlefield,
     // drawn as part of a stacked tile.
     const root = fakeRoot({ '[data-obj-ids~="b2"]': 'my lands' })
     const find = lessonAnchor('card:Forest', () => VIEW, ME, () => root)
     expect(named(find?.())).toBe('my lands')
-    expect(root.asked.slice(0, 3)).toEqual(['[data-obj-ids~="h1"]', '[data-obj-id="h1"]', '[data-obj-ids~="b2"]'])
+    expect(root.asked.slice(0, 4)).toEqual(['[data-obj-ids~="h1"]', '[data-obj-id="h1"]', '.stack-entry[data-stack-id="h1"]', '[data-obj-ids~="b2"]'])
     // In hand: the hand card.
     const inHand = lessonAnchor('card:Forest', () => VIEW, ME, () => fakeRoot({ '[data-obj-id="h1"]': 'hand card' }))
     expect(named(inHand?.())).toBe('hand card')

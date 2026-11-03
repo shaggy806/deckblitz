@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { apply, coachPage, continueFrom, startTour, useCoach } from './coach.ts'
 import { markIntroSeen, setTourAt, useTutorialProgress } from './progress.ts'
 import { SITE_TOUR } from './tours/site.ts'
-import { BOARD_TOUR_LESSON, LEARN_COMMANDER_LESSON, lessonUrl } from './lesson.ts'
+import { BOARD_TOUR_LESSON, COMMANDER_RULES_LESSON, LEARN_COMMANDER_LESSON, lessonUrl } from './lesson.ts'
 import './coach.css'
 
 /**
@@ -63,6 +63,7 @@ export function HelpMenu({
         : `${SITE_TOUR.steps.length} stops`
   const lessonDone = progress.lessons[LEARN_COMMANDER_LESSON] === 'done'
   const boardDone = progress.lessons[BOARD_TOUR_LESSON] === 'done'
+  const rulesDone = progress.lessons[COMMANDER_RULES_LESSON] === 'done'
 
   const openLesson = (lesson: string) => {
     setOpen(false)
@@ -155,6 +156,12 @@ export function HelpMenu({
             <span>{lessonDone ? 'Learn Commander again' : 'Learn Commander'}</span>
             <span className={`help-item-note${lessonDone ? ' help-item-done' : ''}`}>
               {lessonDone ? 'Done ✓' : 'A guided game'}
+            </span>
+          </button>
+          <button type="button" role="menuitem" className="help-item" onClick={() => openLesson(COMMANDER_RULES_LESSON)}>
+            <span>{rulesDone ? "Commander's rules again" : "Commander's rules"}</span>
+            <span className={`help-item-note${rulesDone ? ' help-item-done' : ''}`}>
+              {rulesDone ? 'Done ✓' : 'A second game'}
             </span>
           </button>
         </div>

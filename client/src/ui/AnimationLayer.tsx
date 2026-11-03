@@ -18,7 +18,7 @@ import { closeStackGap } from './stackDepth.ts'
 import { diceStrikeMs, throwDice } from './diceRoll.ts'
 import { defToVisible } from './defToVisible.ts'
 import { loadCard, peekCard } from '../cards/cardData.ts'
-import { forYou, playerLabel, seatClassOf } from '../format.ts'
+import { forYou, playerLabel, possessive, seatClassOf } from '../format.ts'
 import type { SeatClass } from '../format.ts'
 import type { SeatStatus } from 'protocol'
 import {
@@ -2601,7 +2601,7 @@ export function AnimationLayer({
         enqueueBanner({
           key: `turn-${ev.seq}`,
           kind: 'turn',
-          text: `${playerLabel(ev.activePlayer, seatsRef.current)}'s Turn${ev.extra ? ' (extra)' : ''}`,
+          text: `${possessive(playerLabel(ev.activePlayer, seatsRef.current))} Turn${ev.extra ? ' (extra)' : ''}`,
           seatClass: seatClassOf(view.turnOrder, ev.activePlayer),
         })
       } else if (ev.type === 'step-began') {

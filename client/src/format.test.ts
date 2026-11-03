@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import type { GameEvent, ObjectId, PlayerId } from 'engine/client'
 import type { SeatStatus } from 'protocol'
-import { HIDDEN_CARD, describeEvent, logName, withNames } from './format.ts'
+import { HIDDEN_CARD, describeEvent, forYou, logName, possessive, withNames } from './format.ts'
 
 const p1 = 'p1' as PlayerId
 const p2 = 'p2' as PlayerId
@@ -84,5 +84,22 @@ describe('withNames', () => {
 
   it('leaves a seat id inside another word alone', () => {
     expect(withNames('p10 and xp1', seats, nameOf)).toBe('p10 and xp1')
+  })
+})
+
+describe('a seat named "You", as a lesson names its player', () => {
+  it('reads in the second person', () => {
+    expect(forYou('You plays Swamp')).toBe('You play Swamp')
+    expect(forYou('You casts Muck Rats')).toBe('You cast Muck Rats')
+    expect(forYou('You passes')).toBe('You pass')
+    expect(forYou('You has 3 life')).toBe('You have 3 life')
+    expect(forYou('You pass')).toBe('You pass')
+    expect(possessive('You')).toBe('Your')
+  })
+
+  it('leaves anyone else as they were', () => {
+    expect(forYou('Rowan plays Mountain')).toBe('Rowan plays Mountain')
+    expect(forYou('Younger plays Swamp')).toBe('Younger plays Swamp')
+    expect(possessive('Rowan')).toBe("Rowan's")
   })
 })

@@ -19,6 +19,10 @@ import type { Anchor, Step, StepButton, Tour } from './types.ts'
  * (`server/src/tutorials/learn-commander.ts`). */
 export const LEARN_COMMANDER_LESSON = 'learn-commander'
 
+/** Learn Commander's second game, Commander's own rules
+ * (`server/src/tutorials/commander-rules.ts`). */
+export const COMMANDER_RULES_LESSON = 'commander-rules'
+
 /** The board tour: the site tour's second half, on a practice table
  * (`server/src/tutorials/board-tour.ts`). */
 export const BOARD_TOUR_LESSON = 'board-tour'
@@ -60,6 +64,42 @@ export const lessonTourId = (lesson: string): string => `lesson:${lesson}`
  * the hand, the Pass buttons and the decision banner all stay clickable. */
 export const LESSON_GUARD = '.top-strip .ts-menu'
 
+const REAL_GAME_COPY =
+  'Ready for a real game? You get a starter deck against three bots. It opens by asking whether to keep your seven cards or draw a new hand.'
+
+/** A finished lesson's last card, which says where to go next: from the first
+ * game to the second, from the second to a real game. */
+function lastCard(lesson: string, controls: LessonControls): Pick<Step, 'title' | 'body' | 'buttons'> {
+  const menu: StepButton = { label: 'Back to menu', onClick: controls.exit, link: true }
+  const again: StepButton = { label: 'Play again', onClick: () => controls.again(lesson) }
+  const realGame: StepButton = { label: 'Play a real game', onClick: controls.realGame, primary: true }
+  if (lesson === LEARN_COMMANDER_LESSON) {
+    return {
+      title: 'You did it!',
+      body:
+        "You've just played a whole game: those are the moves every game is built from.\n\n" +
+        "Next is a short game on what makes Commander different: a bigger table, a commander coming back, and instants. Or go straight to a real game, with a starter deck against three bots.",
+      buttons: [
+        menu,
+        { label: 'Play a real game', onClick: controls.realGame },
+        { label: "Commander's rules", onClick: () => controls.again(COMMANDER_RULES_LESSON), primary: true },
+      ],
+    }
+  }
+  if (lesson === COMMANDER_RULES_LESSON) {
+    return {
+      title: "That's Commander",
+      body: `You know the rules that make Commander what it is. Real decks have far more kinds of card, so read each one as it comes.\n\n${REAL_GAME_COPY}`,
+      buttons: [menu, again, realGame],
+    }
+  }
+  return {
+    title: "That's the tour",
+    body: 'Play it again any time from the "?" menu, or head back and start a game of your own.',
+    buttons: [menu, { ...again, primary: true }],
+  }
+}
+
 /**
  * The tour for a lesson as `info` has it, or `null` when no card is up — a
  * lesson between chapters, while the game plays on to what opens the next.
@@ -91,20 +131,7 @@ export function lessonTour(
     keepOnEscape: true,
   } as const
   if (info.complete) {
-    const step: Step = {
-      id: 'lesson-complete',
-      page: 'game',
-      title: 'You did it!',
-      body:
-        "You've just played a whole game: those are the moves every game is built from. Real decks have far more kinds of card, so read each one as it comes.\n\n" +
-        'Ready for a real game? You get a starter deck against three bots. It opens by asking whether to keep your seven cards or draw a new hand.',
-      advance: 'next',
-      buttons: [
-        { label: 'Back to menu', onClick: controls.exit, link: true },
-        { label: 'Play again', onClick: () => controls.again(info.lesson) },
-        { label: 'Play a real game', onClick: controls.realGame, primary: true },
-      ],
-    }
+    const step: Step = { id: 'lesson-complete', page: 'game', advance: 'next', ...lastCard(info.lesson, controls) }
     return { ...base, counter: `${info.title} · complete`, steps: [step] }
   }
   const card = info.step

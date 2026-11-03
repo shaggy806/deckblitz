@@ -170,10 +170,11 @@ const attrValue = (v: string): string => v.replace(/["\\]/g, '\\$&')
 /** The selectors that find object `id`'s tile, best first: a battlefield
  * tile (which may stand for several identical permanents, `data-obj-ids`),
  * then any element carrying the id itself (a hand card, a command-zone
- * tile). */
+ * tile), then a spell's entry on the stack. */
 export const objectSelectors = (id: ObjectId): readonly string[] => [
   `[data-obj-ids~="${attrValue(id)}"]`,
   `[data-obj-id="${attrValue(id)}"]`,
+  `.stack-entry[data-stack-id="${attrValue(id)}"]`,
 ]
 
 /** The player a `player:` anchor names: `me`, `opponent` (the next seat

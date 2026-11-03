@@ -15,7 +15,7 @@ const INFO: TutorialInfo = {
   step: { id: 'welcome', title: 'Welcome!', body: 'Hello.\n\nOne step at a time.', advance: 'next' },
   goals: [],
   canRetry: true,
-  allows: { passTurn: false, autoPass: false, declareAtLeast: 0 },
+  allows: { passTurn: false, autoPass: false, declareAtLeast: 0, attackAt: {}, leaveCommander: false },
   complete: false,
 }
 
@@ -107,17 +107,33 @@ describe("a lesson's card on the overlay", () => {
     expect(lessonTour({ ...GOAL, step: null, goals: [] }, anchorFor, recorder().controls)).toBeNull()
   })
 
-  it('ends on a card of its own: on to a real game, round again, or back to the menu', () => {
+  it('ends each lesson on a card saying where to go next', () => {
     const { calls, controls } = recorder()
-    const tour = lessonTour({ ...INFO, step: null, goals: [], canRetry: false, complete: true }, anchorFor, controls)
-    expect(tour?.steps[0]).toMatchObject({ id: 'lesson-complete', page: 'game', title: 'You did it!', advance: 'next' })
-    expect(tour?.steps[0].anchor).toBeUndefined()
-    expect(labels(tour)).toEqual(['Back to menu', 'Play again', 'Play a real game'])
-    expect(tour?.steps[0].buttons?.find((b) => b.primary === true)?.label).toBe('Play a real game')
-    press(tour, 'Play a real game')
-    press(tour, 'Play again')
-    press(tour, 'Back to menu')
-    expect(calls).toEqual(['real game', 'again learn-commander', 'exit'])
+    const done = { ...INFO, step: null, goals: [], canRetry: false, complete: true }
+    const primary = (tour: ReturnType<typeof lessonTour>) => tour?.steps[0].buttons?.find((b) => b.primary === true)?.label
+
+    // The first game leads on to the second.
+    const first = lessonTour(done, anchorFor, controls)
+    expect(first?.steps[0]).toMatchObject({ id: 'lesson-complete', page: 'game', title: 'You did it!', advance: 'next' })
+    expect(first?.steps[0].anchor).toBeUndefined()
+    expect(labels(first)).toEqual(['Back to menu', 'Play a real game', "Commander's rules"])
+    expect(primary(first)).toBe("Commander's rules")
+    press(first, "Commander's rules")
+    press(first, 'Play a real game')
+    press(first, 'Back to menu')
+    expect(calls).toEqual(['again commander-rules', 'real game', 'exit'])
+
+    // The second leads on to a real game.
+    const second = lessonTour({ ...done, lesson: 'commander-rules' }, anchorFor, controls)
+    expect(second?.steps[0].title).toBe("That's Commander")
+    expect(labels(second)).toEqual(['Back to menu', 'Play again', 'Play a real game'])
+    expect(primary(second)).toBe('Play a real game')
+
+    // The board tour isn't a game, and doesn't say it was.
+    const tour = lessonTour({ ...done, lesson: 'board-tour' }, anchorFor, controls)
+    expect(tour?.steps[0].title).toBe("That's the tour")
+    expect(tour?.steps[0].body).not.toMatch(/whole game/)
+    expect(labels(tour)).toEqual(['Back to menu', 'Play again'])
   })
 
   it('offers Back when given a way back, and shows an earlier card in words alone', () => {
