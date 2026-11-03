@@ -523,6 +523,8 @@ function keywordPart(part, faceName, typeLine = "") {
     return { static: [...v.static], triggered: [...v.triggered] };
   }
   if ((m = new RegExp(`^suspend (\\d+)—${COST}$`, "i").exec(p))) return { card: { suspend: { n: Number(m[1]), cost: m[2] } } };
+  // Suspend X (every one of them says X can't be 0).
+  if ((m = new RegExp(`^suspend x—${COST}\\. x can't be 0\\.?$`, "i").exec(p))) return { card: { suspend: { n: "x", cost: m[1] } } };
   // Tribute N (rule 702.104a): the opponent's counters, asked as it enters.
   if ((m = /^tribute (\d+)$/i.exec(p))) return { card: { tribute: Number(m[1]) } };
   // Amplify N (rule 702.38a): the cards revealed as it enters.
@@ -6749,6 +6751,11 @@ export function parseEffect(text, outer) {
   const becomes = becomesWithAbilitiesOf(text);
   if (becomes !== null) return { effect: becomes, todo: [], hints: [] };
 
+  // A suspend cost as an alternative cost (The Face of Boe).
+  if (text === "You may cast a spell with suspend from your hand. If you do, pay its suspend cost rather than its mana cost.") {
+    return { effect: { kind: "cast-now", from: "hand", spell: { hasSuspend: true }, suspendCost: true }, todo: [], hints: [] };
+  }
+
   // A copy for each permanent the spell could target (rule 707.10d): Zada's,
   // Ink-Treader Nephilim's own, Mirrorwing Dragon's and Precursor Golem's made
   // by the caster, from whose side "they control" reads.
@@ -11647,7 +11654,13 @@ function parseFaceAsWritten(face, ctx = {}) {
       // stack, so the ability's condition, asked again, agrees.
       const duringMain = / during your main phase$/.test(clause);
       if (duringMain) clause = clause.replace(/ during your main phase$/, "");
-      const parsedTriggers = parseTrigger(clause);
+      // "Whenever a time counter is removed from this card while it's exiled"
+      // (Benalish Commander), or "when the last" one (Riftmarked Knight):
+      // these work while it's suspended.
+      const timeCounterOff = /^(Whenever a|When the last) time counter is removed from (?:this card|~) while it's exiled$/.exec(clause);
+      const parsedTriggers = timeCounterOff
+        ? [{ on: "counters-removed", who: "self", counter: "time", ...(timeCounterOff[1] === "When the last" ? { last: true } : {}) }]
+        : parseTrigger(clause);
       if (
         parsedTriggers === null ||
         (whileSaddled && !parsedTriggers.every((t) => t.on === "attacks" && t.who === "self")) ||
@@ -11679,6 +11692,7 @@ function parseFaceAsWritten(face, ctx = {}) {
         resolve: null,
         text: printed(raw),
         ...(oncePerTurn ? { oncePerTurn: true } : {}),
+        ...(timeCounterOff ? { whileSuspended: true } : {}),
         ...(whileSaddled ? { whileCondition: { kind: "source", filter: { saddled: true } } } : {}),
         ...(duringMain
           ? {

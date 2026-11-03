@@ -403,6 +403,9 @@ export type Action =
       readonly type: "suspend";
       readonly player: PlayerId;
       readonly card: ObjectId;
+      /** "Suspend X": the X announced (rule 107.3a), within the offer's
+       * `xCost`. Omitted, its least. */
+      readonly xValue?: number;
     }
   | {
       /** Foretell a card from hand (rule 702.143): a special action on your
@@ -1055,9 +1058,11 @@ export type LegalAction =
       readonly kind: "suspend";
       readonly card: ObjectId;
       readonly cardName: string;
-      /** Time counters it enters exile with, and the suspend cost. */
-      readonly n: number;
+      /** Time counters it enters exile with (`"x"`: Suspend X, one per X, with
+       * X in `xCost`), and the suspend cost. */
+      readonly n: number | "x";
       readonly cost: string;
+      readonly xCost?: { readonly maxX: number; readonly minX?: number };
     }
   | {
       readonly kind: "foretell";
@@ -2216,6 +2221,9 @@ export type LegalAction =
       readonly madness?: string;
       /** …for its miracle cost rather than its mana cost (rule 702.94a). */
       readonly miracle?: string;
+      /** …for each card's own suspend cost rather than its mana cost (The Face
+       * of Boe); the `casts` read as the words for it. */
+      readonly suspendCost?: true;
       readonly casts: readonly CastSpellOffer[];
       /** "You may **play**" (hideaway): each land card on offer, as the face
        * it'd be played as — played during the resolution, it uses a land

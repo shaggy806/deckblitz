@@ -1688,7 +1688,7 @@ function Table({
   // X spell (`CastAction`) or an X activated ability (`AbilityAction`, EG-3).
   const [pendingX, setPendingX] = useState<
     | ({
-        readonly action: CastAction | AbilityAction | TurnFaceUpAction
+        readonly action: CastAction | AbilityAction | TurnFaceUpAction | SuspendAction
         readonly value: number
       } & CastPicks)
     | null
@@ -2838,6 +2838,11 @@ function Table({
     setPendingX(null)
     if (action.kind === 'activate-ability') {
       startAbilityAtX(action, value)
+      return
+    }
+    // Suspend X (rule 702.62a): X time counters, for that much mana.
+    if (action.kind === 'suspend') {
+      game.dispatch({ type: 'suspend', player: seat, card: action.card, xValue: value })
       return
     }
     // A morph or disguise cost's {X} (Bane of the Living).
@@ -5481,6 +5486,7 @@ function Table({
           {castNowAction.miracle !== undefined && ways.length > 0 ? (
             <> for its miracle cost, <Symbols text={castNowAction.miracle} /></>
           ) : null}
+          {castNowAction.suspendCost === true && ways.length > 0 ? ' for its suspend cost' : null}
           {castNowAction.madness !== undefined && ways.length > 0 ? (
             <> for its madness cost, <Symbols text={castNowAction.madness} /></>
           ) : castNowAction.byDiscarding === true && ways.length > 0
@@ -5489,7 +5495,9 @@ function Table({
             ? <> by paying <Symbols text="{E}" /> equal to its mana value rather than its mana cost</>
             : castNowAction.free && ways.length > 0
               ? ' without paying its mana cost'
-              : ' now'}
+              : castNowAction.suspendCost === true && ways.length > 0
+                ? null
+                : ' now'}
           ?{castNowLimitText(castNowAction)}
         </span>
         {landWays.map((l, i) => (
@@ -5521,6 +5529,7 @@ function Table({
             {castNowAction.miracle !== undefined ? (
               <> (miracle <Symbols text={castNowAction.miracle} />)</>
             ) : null}
+            {castNowAction.suspendCost === true ? ' (suspend cost)' : null}
             {castNowAction.madness !== undefined ? (
               <> (madness <Symbols text={castNowAction.madness} />)</>
             ) : castNowAction.byDiscarding === true ? ' (discard a card)' : castNowAction.byPayingEnergy === true ? (
@@ -5772,7 +5781,9 @@ function Table({
         ? 'Activate'
         : pendingX.action.kind === 'turn-face-up'
           ? 'Turn face up'
-          : 'Cast'
+          : pendingX.action.kind === 'suspend'
+            ? 'Suspend'
+            : 'Cast'
     controls = (
       <div className="controls">
         <span>
@@ -6992,7 +7003,11 @@ function Table({
               {suspend ? (
                 <button
                   type="button"
-                  onClick={() => game.dispatch({ type: 'suspend', player: seat, card: id })}
+                  onClick={() =>
+                    suspend.xCost !== undefined
+                      ? setPendingX({ action: suspend, value: suspend.xCost.maxX })
+                      : game.dispatch({ type: 'suspend', player: seat, card: id })
+                  }
                 >
                   Suspend <Symbols text={suspend.cost} />
                 </button>

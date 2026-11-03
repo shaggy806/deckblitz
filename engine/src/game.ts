@@ -2337,7 +2337,7 @@ export class Game {
         this.playLand(action.player, action.card, action.face ?? 0, action.graveyardGrant);
         break;
       case "suspend":
-        this.suspendCard(action.player, action.card);
+        this.suspendCard(action.player, action.card, action.xValue);
         break;
       case "foretell":
         this.foretellCard(action.player, action.card);
@@ -2585,7 +2585,7 @@ export class Game {
           action.graveyardGrant,
         );
       case "suspend":
-        return this.whyCannotSuspend(action.player, action.card);
+        return this.whyCannotSuspend(action.player, action.card, action.xValue);
       case "foretell":
         return this.whyCannotForetell(action.player, action.card);
       case "plot":
@@ -2917,7 +2917,24 @@ export class Game {
       const def = ownDef;
       // Suspend (rule 702.62) — a special action, offered alongside the cast.
       if (def.suspend !== null && this.whyCannotSuspend(player, card) === null) {
-        out.push({ kind: "suspend", card, cardName, n: def.suspend.n, cost: def.suspend.cost });
+        const suspendCost = parseManaCost(def.suspend.cost);
+        const suspendX =
+          def.suspend.n === "x"
+            ? {
+                xCost: {
+                  // "X can't be 0."
+                  minX: 1,
+                  maxX: this.maxAffordableAbilityX(
+                    player,
+                    (x) => concreteX(suspendCost, x, undefined),
+                    undefined,
+                    undefined,
+                    otherCostPurpose(def.suspend.cost),
+                  ),
+                },
+              }
+            : {};
+        out.push({ kind: "suspend", card, cardName, n: def.suspend.n, cost: def.suspend.cost, ...suspendX });
       }
       // Foretell (rule 702.143) — a special action.
       if (this.whyCannotForetell(player, card) === null) {
@@ -4183,11 +4200,11 @@ export class Game {
       variants.push({ kicked: false, overload: false, free: true });
       if (def.kicker !== null) variants.push(...kickedVariants(true));
     }
-    // Madness's cast (rule 702.35a, b) and miracle's (702.94a): for that
-    // cost, an alternative cost and so the only one, with kicker on top if
-    // it has one.
+    // Madness's cast (rule 702.35a, b), miracle's (702.94a) and a suspend cost
+    // paid to cast it (The Face of Boe): for that cost, an alternative cost
+    // and so the only one, with kicker on top if it has one.
     const altOffer = via === "effect" ? this.castNowOffer(player, card) : null;
-    if (altOffer?.madness !== undefined || altOffer?.miracle !== undefined) {
+    if (altOffer?.madness !== undefined || altOffer?.miracle !== undefined || altOffer?.suspendCost === true) {
       variants.length = 0;
       variants.push({ kicked: false, overload: false, free: false });
       if (def.kicker !== null) variants.push(...kickedVariants(false));
@@ -4278,7 +4295,9 @@ export class Game {
       const undoSplice = this.enterSplice(card, face ?? 0, splice);
       try {
       const printedOrPrototype =
-        prototype === true && def.prototype !== null && costString === def.manaCost ? def.prototype.cost : costString;
+        altOffer?.suspendCost === true
+          ? (def.suspend?.cost ?? null)
+          : prototype === true && def.prototype !== null && costString === def.manaCost ? def.prototype.cost : costString;
       /** Whether this variant can be cast with `targetCount` distinct
        * targets, and whether mana alone pays for it. */
       // Delve (rule 702.66a): the cards it could exile  any in the caster's
@@ -4440,10 +4459,13 @@ export class Game {
       // (Glarb's "mana value 4 or greater" on an X spell needs an X that gets
       // it there — its ruling, rule 601.3e): the least X it allows is the
       // floor everything below is checked at, and the offer's `minX`.
+      // A Suspend X cost paid to cast it: "X can't be 0".
       const leastX =
         via === "library-top" && variantCost !== null && parseManaCost(variantCost).x > 0
           ? this.libraryTopMinX(player, card, face ?? 0, this.xPaymentCeiling(player))
-          : 0;
+          : altOffer?.suspendCost === true && def.suspend?.n === "x"
+            ? 1
+            : 0;
       if (leastX === null) continue;
       const xFloor: number = leastX;
       const xFilter =
@@ -13544,7 +13566,7 @@ export class Game {
   /** Why `player` cannot suspend `cardId` from hand right now (rule 702.62 —
    * ROADMAP Phase 6b). Suspend is a special action usable whenever the card
    * could be cast — sorcery speed unless it's an instant / has flash. */
-  private whyCannotSuspend(player: PlayerId, cardId: ObjectId): string | null {
+  private whyCannotSuspend(player: PlayerId, cardId: ObjectId, xValue?: number): string | null {
     const blocked = this.whyCannotAct(player);
     if (blocked !== null) return blocked;
     if (!this.state.zones.perPlayer[player].hand.includes(cardId)) {
@@ -13564,7 +13586,10 @@ export class Game {
       const timing = this.whyNotSorcerySpeed(player, `suspend ${def.name}`);
       if (timing !== null) return timing;
     }
-    if (this.payMana(player, parseManaCost(def.suspend.cost), undefined, undefined, otherCostPurpose(def.suspend.cost)) === null) {
+    // "Suspend X—… X can't be 0" (rule 107.3a: X is announced with the cost).
+    const x = def.suspend.n === "x" ? Math.floor(xValue ?? 1) : 0;
+    if (def.suspend.n === "x" && !(x >= 1)) return `${def.name}'s suspend X can't be 0`;
+    if (this.payMana(player, concreteX(parseManaCost(def.suspend.cost), x, undefined), undefined, undefined, otherCostPurpose(def.suspend.cost)) === null) {
       return `${player} cannot pay the suspend cost of ${def.name}`;
     }
     return null;
@@ -13659,26 +13684,28 @@ export class Game {
     this.afterPlayerAction(player);
   }
 
-  private suspendCard(player: PlayerId, cardId: ObjectId): void {
-    const why = this.whyCannotSuspend(player, cardId);
+  private suspendCard(player: PlayerId, cardId: ObjectId, xValue?: number): void {
+    const why = this.whyCannotSuspend(player, cardId, xValue);
     if (why !== null) throw new Error(why);
     const object = this.state.objects[cardId];
     const def = this.registry.get(object.cardName);
     const suspend = def.suspend;
     if (suspend === null) throw new Error(`${def.name} does not have suspend`);
 
-    const payment = this.payMana(player, parseManaCost(suspend.cost), undefined, undefined, otherCostPurpose(suspend.cost));
+    const x = suspend.n === "x" ? Math.floor(xValue ?? 1) : 0;
+    const timeCounters = suspend.n === "x" ? x : suspend.n;
+    const payment = this.payMana(player, concreteX(parseManaCost(suspend.cost), x, undefined), undefined, undefined, otherCostPurpose(suspend.cost));
     if (payment === null) throw new Error(`${player} cannot pay the suspend cost of ${def.name}`);
 
     this.moveObject(cardId, "exile");
     this.executePayment(player, payment);
     object.suspended = true;
-    object.counters.time = suspend.n;
+    object.counters.time = timeCounters;
     this.emit({
       type: "card-suspended",
       player,
       object: cardId,
-      timeCounters: suspend.n,
+      timeCounters,
     });
     this.afterPlayerAction(player);
   }
@@ -15563,7 +15590,7 @@ export class Game {
     // Madness's cast (rule 702.35a), miracle's (702.94a): that cost rather
     // than the mana cost.
     const altOffer = via === "effect" ? this.castNowOffer(caster ?? this.state.objects[cardId]?.owner, cardId) : null;
-    const madnessCost = altOffer?.madness ?? altOffer?.miracle;
+    const madnessCost = altOffer?.madness ?? altOffer?.miracle ?? (altOffer?.suspendCost === true ? def.suspend?.cost : undefined);
     const base = freeCast
       ? "{0}"
       : madnessCost !== undefined
@@ -15924,6 +15951,11 @@ export class Game {
       }
       if (offered.miracle !== undefined && (free || altCost || overload || evoke !== null)) {
         return `${def.name} may only be cast for its miracle cost`;
+      }
+      if (offered.suspendCost === true) {
+        if (free || altCost || overload || evoke !== null) return `${def.name} may only be cast for its suspend cost`;
+        if (def.suspend === null) return `${def.name} has no suspend cost`;
+        if (def.suspend.n === "x" && xValue < 1) return `${def.name}'s suspend X can't be 0`;
       }
       const spell = offered.spell;
       if (
@@ -17816,6 +17848,7 @@ export class Game {
             ...(awaiting.byPayingEnergy === true ? { byPayingEnergy: true as const } : {}),
             ...(awaiting.madness !== undefined ? { madness: awaiting.madness } : {}),
             ...(awaiting.miracle !== undefined ? { miracle: awaiting.miracle } : {}),
+            ...(awaiting.suspendCost === true ? { suspendCost: true as const } : {}),
             exileAfter: awaiting.exileAfter,
             ...(awaiting.spell !== undefined ? { spell: awaiting.spell } : {}),
             ...(awaiting.freeCastOf !== undefined ? { freeCastOf: awaiting.freeCastOf } : {}),
@@ -17860,6 +17893,7 @@ export class Game {
       ...(options.byPayingEnergy === true ? { byPayingEnergy: true as const } : {}),
       ...(madness !== undefined ? { madness } : {}),
       ...(miracle !== undefined ? { miracle } : {}),
+      ...(options.suspendCost === true ? { suspendCost: true as const } : {}),
       exileAfter: options.exileAfter,
       ...(options.spell !== undefined ? { spell: options.spell } : {}),
       ...(options.freeCastOf !== undefined ? { freeCastOf: options.freeCastOf } : {}),
@@ -17926,6 +17960,7 @@ export class Game {
       ...(options.byPayingEnergy === true ? { byPayingEnergy: true as const } : {}),
       ...(madness !== undefined ? { madness } : {}),
       ...(miracle !== undefined ? { miracle } : {}),
+      ...(options.suspendCost === true ? { suspendCost: true as const } : {}),
       ...(options.spell !== undefined ? { spell: options.spell } : {}),
       exileAfter: options.exileAfter,
       ...(options.freeCastOf !== undefined ? { freeCastOf: options.freeCastOf } : {}),
@@ -45121,7 +45156,7 @@ export class Game {
     if (via === "effect") {
       const asked = this.castNowOffer(caster, cardId);
       if (asked === null || asked.free || asked.madness !== undefined || asked.miracle !== undefined ||
-        asked.byDiscarding === true || asked.byPayingEnergy === true) {
+        asked.suspendCost === true || asked.byDiscarding === true || asked.byPayingEnergy === true) {
         return out;
       }
     }

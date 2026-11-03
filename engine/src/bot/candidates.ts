@@ -296,7 +296,9 @@ export function candidateActions(
     case "activate-ability":
       return abilityCandidates(legal, player);
     case "suspend":
-      return [{ type: "suspend", player, card: legal.card }];
+      // Suspend X: the most X there is, as a morph's below. A counter more is a
+      // turn later, but on all five cards a trigger more as well.
+      return [{ type: "suspend", player, card: legal.card, ...(legal.xCost !== undefined ? { xValue: legal.xCost.maxX } : {}) }];
     case "foretell":
       return [{ type: "foretell", player, card: legal.card }];
     case "plot":

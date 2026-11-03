@@ -5291,8 +5291,12 @@ export interface CardDefinition {
   /** Suspend (rule 702.62 — ROADMAP Phase 6b) — instead of casting this from
    * your hand you may pay `cost` to exile it with `n` time counters; one comes
    * off at each of your upkeeps, and at zero it's cast for free (with haste if
-   * it's a creature). `null` for a card without suspend. */
-  readonly suspend: { readonly n: number; readonly cost: string } | null;
+   * it's a creature). `null` for a card without suspend.
+   *
+   * `n: "x"` is "Suspend X—{X}{W}{W}. X can't be 0." (Benalish Commander): the
+   * player announces X with the action (rule 107.3a), at least 1, pays the
+   * cost at that X and exiles the card with X time counters. */
+  readonly suspend: { readonly n: number | "x"; readonly cost: string } | null;
   /** Cycling (rule 702.29a) — "`cost`, Discard this card: Draw a card", an
    * activated ability from the hand, any time you could cast an instant: the
    * cost paid and the card discarded as it's activated (a real discard, seen
@@ -5896,7 +5900,7 @@ interface CardDraft {
   prototype?: { readonly cost: string; readonly power: number; readonly toughness: number };
   morph?: MorphCost;
   asTurnedFaceUp?: { readonly counters: number };
-  suspend?: { readonly n: number; readonly cost: string };
+  suspend?: { readonly n: number | "x"; readonly cost: string };
   cycling?: CyclingAbility;
   escape?: {
     readonly cost: string;

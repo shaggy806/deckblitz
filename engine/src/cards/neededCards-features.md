@@ -4359,6 +4359,14 @@ Capricious Efreet needed no code: it's Wild Swing's random modal over chosen
 targets. Grip of Chaos is left: it also needs a trigger on anything going on the
 stack, `trigger:spell-or-ability-put-on-stack`.
 
+### Suspend X, and a suspend cost paid to cast — built 2026-11-03
+
+`mechanic:suspend-x`: `suspend: { n: "x", cost }`, the action's `xValue` at least 1
+(107.3a), the offer's `xCost`, and X time counters. `effect:cast-paying-suspend-cost`:
+`cast-now`'s `suspendCost` (118.9), with `CardFilter.hasSuspend`. Proving cards: Benalish
+Commander, Aeon Chronicler, Detritivore, The Face of Boe. Fungal Behemoth and Roiling
+Horror are left for `author-freed`.
+
 ### Protection outside your commander's color identity — built 2026-11-03
 
 The need-keys Phase 2 units `effect:protection-choice-and-dynamic` and

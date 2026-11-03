@@ -10167,4 +10167,12 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{ bf: ['Hill Giant'] }],
     }),
   ),
+  preset(
+    'Benalish Commander: Suspend X asks for X and sets that many time counters',
+    board({ you: { bf: ['Plains*5'], hand: ['Benalish Commander'] } }),
+  ),
+  preset(
+    'The Face of Boe: a spell with suspend, for its suspend cost',
+    board({ you: { bf: ['The Face of Boe', 'Island'], hand: ['Ancestral Vision', 'Divination'] } }),
+  ),
 ]

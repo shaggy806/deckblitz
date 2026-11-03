@@ -2149,6 +2149,9 @@ export interface CastNowOptions {
   /** Paying the card's miracle cost rather than its mana cost — see the
    * `cast-now` effect's `miracle`. */
   readonly miracle?: boolean;
+  /** Paying the card's suspend cost rather than its mana cost — see the
+   * `cast-now` effect's `suspendCost`. */
+  readonly suspendCost?: boolean;
   readonly exileAfter: boolean | "instants-and-sorceries";
   readonly spell?: CardFilter;
   /** The library cards the player looks at to choose among, shown to them
@@ -4472,6 +4475,13 @@ export type EffectSpec =
        * still in its owner's hand — the miracle trigger's cast
        * (`cards/miracle.ts`). */
       readonly miracle?: boolean;
+      /** "You may cast a spell with suspend from your hand. If you do, **pay
+       * its suspend cost rather than its mana cost**" (The Face of Boe): each
+       * card's own suspend cost as an alternative cost (rule 118.9), the only
+       * way offered, so a card with no mana cost can be cast too (118.6a,
+       * Ancestral Vision). A Suspend X cost's X is announced as the spell is
+       * cast (107.3a), and its "X can't be 0" holds. */
+      readonly suspendCost?: boolean;
       /** "If that spell would be put into your graveyard, exile it instead."
        * `"instants-and-sorceries"` is Scholar of the Lost Trove's "if an
        * instant or sorcery spell cast this way would be put into your
@@ -12838,6 +12848,7 @@ function offerCastNow(
       ...(spec.byPayingEnergy === true ? { byPayingEnergy: true } : {}),
       ...(spec.madness === true ? { madness: true } : {}),
       ...(spec.miracle === true ? { miracle: true } : {}),
+      ...(spec.suspendCost === true ? { suspendCost: true } : {}),
       exileAfter: spec.exileAfter ?? false,
       ...(spec.play === true ? { play: true } : {}),
       ...(spec.suspend === true ? { freeCastOf: "suspend" as const } : {}),

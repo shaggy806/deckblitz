@@ -1788,7 +1788,14 @@ export class RandomController extends AutomaticController {
           ...(legal.graveyardGrant !== undefined ? { graveyardGrant: legal.graveyardGrant } : {}),
         };
       case "suspend":
-        return { type: "suspend", player, card: legal.card };
+        return {
+          type: "suspend",
+          player,
+          card: legal.card,
+          ...(legal.xCost !== undefined
+            ? { xValue: (legal.xCost.minX ?? 0) + this.rng.pickIndex(legal.xCost.maxX - (legal.xCost.minX ?? 0) + 1) }
+            : {}),
+        };
       case "foretell":
         return { type: "foretell", player, card: legal.card };
       case "plot":

@@ -2977,6 +2977,9 @@ export interface CastNowAsk {
   readonly madness?: string;
   /** The miracle cost paid rather than the mana cost (rule 702.94a). */
   readonly miracle?: string;
+  /** Each card's own suspend cost paid rather than its mana cost — the
+   * `cast-now` effect's `suspendCost`. */
+  readonly suspendCost?: true;
   readonly exileAfter: boolean | "instants-and-sorceries";
   readonly spell?: CardFilter;
   readonly freeCastOf?: "cascade" | "suspend";
@@ -4322,6 +4325,8 @@ export type AwaitingDecision =
       readonly madness?: string;
       /** …for its miracle cost instead (rule 702.94a) — the cost. */
       readonly miracle?: string;
+      /** …for each card's own suspend cost instead — the effect's `suspendCost`. */
+      readonly suspendCost?: true;
       /** What the spell must be, matched as it's cast — see the effect's
        * `spell`, bound when it was raised. */
       readonly spell?: CardFilter;

@@ -12272,6 +12272,38 @@ describe("oracle-parse: Commander's Plate", () => {
   });
 });
 
+describe("oracle-parse: Suspend X and a suspend cost paid to cast", () => {
+  it("Suspend X, with its time-counter trigger", () => {
+    const card = parseFace({
+      name: "Benalish Commander",
+      mana_cost: "{3}{W}",
+      type_line: "Creature — Human Soldier",
+      oracle_text:
+        "Benalish Commander's power and toughness are each equal to the number of Soldiers you control.\nSuspend X—{X}{W}{W}. X can't be 0.\nWhenever a time counter is removed from this card while it's exiled, create a 1/1 white Soldier creature token.",
+    });
+    expect(card.suspend).toEqual({ n: "x", cost: "{X}{W}{W}" });
+    expect(card.triggered[0]).toMatchObject({ trigger: { on: "counters-removed", counter: "time" }, whileSuspended: true });
+  });
+
+  it("casting a spell with suspend for its suspend cost", () => {
+    const card = parseFace({
+      name: "The Face of Boe",
+      mana_cost: "{1}{U}{R}{W}",
+      type_line: "Legendary Creature — Alien Advisor",
+      power: "0",
+      toughness: "4",
+      oracle_text:
+        "{T}: You may cast a spell with suspend from your hand. If you do, pay its suspend cost rather than its mana cost. Activate only as a sorcery.",
+    });
+    expect(card.todo).toEqual([]);
+    expect(card.activated[0]).toMatchObject({
+      cost: { mana: null, tap: true },
+      effect: { kind: "cast-now", from: "hand", spell: { hasSuspend: true }, suspendCost: true },
+      sorcerySpeed: true,
+    });
+  });
+});
+
 describe("oracle-parse: looks at a hand and at another's library", () => {
   it("a hand looked at before a card type chosen as it enters, and spells of that type taxed", () => {
     const card = parseFace({

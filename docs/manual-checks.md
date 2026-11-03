@@ -6751,3 +6751,13 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 - **Do:** Cast Eldritch Immunity for its overload cost, then cast Lightning Bolt.
 - **Expect:** Casting asks for no target. Lightning Bolt can't target either of your creatures, and can target Bob's Hill Giant.
+
+### Benalish Commander: Suspend X asks for X and sets that many time counters
+
+- **Do:** Press Suspend on Benalish Commander in your hand. Set X to 2 and press Confirm.
+- **Expect:** The banner reads "Suspend Benalish Commander — choose X (max 3)", and X can't go below 1. It goes to exile with 2 time counters and four Plains tap.
+
+### The Face of Boe: a spell with suspend, for its suspend cost
+
+- **Do:** Tap The Face of Boe, then cast Ancestral Vision when asked, targeting yourself.
+- **Expect:** The prompt offers Ancestral Vision "for its suspend cost", and not Divination. Your Island taps and you draw three cards, with no time counters.

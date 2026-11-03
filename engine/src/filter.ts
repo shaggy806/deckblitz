@@ -862,6 +862,9 @@ export interface CardFilter {
    * 702.29e): "a card with a cycling ability" (Zenith Flare, Rooting
    * Moloch). Read off its rules text, in any zone. */
   readonly hasCycling?: boolean;
+  /** Has (or hasn't) suspend (rule 702.62): "a spell with suspend" (The Face of
+   * Boe). Read off its rules text, in any zone. */
+  readonly hasSuspend?: boolean;
   /** Has (or hasn't) mutate (rule 702.140) — "if it has mutate" (Pollywog
    * Symbiote). Read off its rules text, in any zone. */
   readonly hasMutate?: boolean;
@@ -2469,6 +2472,11 @@ export function matchesFilter(
     const name = live !== undefined ? rulesTextName(live) : lki?.name;
     const has = name !== undefined && registry.has(name) && registry.get(name).cycling !== null;
     if (has !== filter.hasCycling) return false;
+  }
+  if (filter.hasSuspend !== undefined) {
+    const name = live !== undefined ? rulesTextName(live) : lki?.name;
+    const has = name !== undefined && registry.has(name) && registry.get(name).suspend !== null;
+    if (has !== filter.hasSuspend) return false;
   }
   if (filter.hasMutate !== undefined) {
     const name = live !== undefined ? rulesTextName(live) : lki?.name;
