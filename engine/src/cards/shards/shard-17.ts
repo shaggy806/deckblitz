@@ -34,6 +34,7 @@ import _poolAnointedPeacekeeper from "../pool/anointed-peacekeeper.js";
 import _poolArashinSovereign from "../pool/arashin-sovereign.js";
 import _poolArbalestEngineers from "../pool/arbalest-engineers.js";
 import _poolArcadeCabinet from "../pool/arcade-cabinet.js";
+import _poolArcaneLighthouse from "../pool/arcane-lighthouse.js";
 import _poolArcboundBruiser from "../pool/arcbound-bruiser.js";
 import _poolArchiveHaunt from "../pool/archive-haunt.js";
 import _poolArchwayAngel from "../pool/archway-angel.js";
@@ -530,6 +531,7 @@ import _poolObyraDreamingDuelist from "../pool/obyra-dreaming-duelist.js";
 import _poolOgreSentry from "../pool/ogre-sentry.js";
 import _poolOjiTheExquisiteBlade from "../pool/oji-the-exquisite-blade.js";
 import _poolOldGnawbone from "../pool/old-gnawbone.js";
+import _poolOnSerrasWings from "../pool/on-serras-wings.js";
 import _poolOpalAcrolith from "../pool/opal-acrolith.js";
 import _poolOraclesInsight from "../pool/oracles-insight.js";
 import _poolOrahSkyclaveHierophant from "../pool/orah-skyclave-hierophant.js";
@@ -930,6 +932,7 @@ const shard: CardShard = {
     _poolArashinSovereign,
     _poolArbalestEngineers,
     _poolArcadeCabinet,
+    _poolArcaneLighthouse,
     _poolArcboundBruiser,
     _poolArchiveHaunt,
     _poolArchwayAngel,
@@ -1426,6 +1429,7 @@ const shard: CardShard = {
     _poolOgreSentry,
     _poolOjiTheExquisiteBlade,
     _poolOldGnawbone,
+    _poolOnSerrasWings,
     _poolOpalAcrolith,
     _poolOraclesInsight,
     _poolOrahSkyclaveHierophant,

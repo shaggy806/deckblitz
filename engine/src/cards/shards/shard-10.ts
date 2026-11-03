@@ -143,6 +143,7 @@ import _poolCircleOfProtectionRed from "../pool/circle-of-protection-red.js";
 import _poolCitanulHierophants from "../pool/citanul-hierophants.js";
 import _poolCivicWayfinder from "../pool/civic-wayfinder.js";
 import _poolCoastlineChimera from "../pool/coastline-chimera.js";
+import _poolColossusHammer from "../pool/colossus-hammer.js";
 import _poolCompellingArgument from "../pool/compelling-argument.js";
 import _poolConniveConcoct from "../pool/connive-concoct.js";
 import _poolContainmentConstruct from "../pool/containment-construct.js";
@@ -1041,6 +1042,7 @@ const shard: CardShard = {
     _poolCitanulHierophants,
     _poolCivicWayfinder,
     _poolCoastlineChimera,
+    _poolColossusHammer,
     _poolCompellingArgument,
     _poolConniveConcoct,
     _poolContainmentConstruct,

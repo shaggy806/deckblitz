@@ -12,6 +12,11 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **A static that adds a supertype** (2026-11-02, `85ebc8c39`): `addSupertypes` in layer 4, `effectiveSupertypes` as
+  the read everywhere, the 613.8a dependency on "nonbasic"; `static:static-add-chosen-type` needed no code; On Serra's
+  Wings, In Bolas's Clutches, Leyline of Singularity, Glittering Frost, Rimefeather Owl, Rootpath Purifier, Lifecraft Engine.
+- **Can't have or gain a keyword** (2026-11-02, `f059ac8f0`): over every timestamp, and a loss of hexproof takes
+  "hexproof from" (rule 702.11e); Archetype of Imagination, Archetype of Endurance, Arcane Lighthouse, Colossus Hammer.
 - **A keyword's cost that isn't mana** (2026-11-02, `8cd3310b2`): `KickerAlsoCost` on splice and squad, with
   exiling from a graveyard and an opponent gaining life; Horobi's Whisper, Hundred-Talon Strike, Roar of Jukai,
   Torrent of Stone, Veil of Secrecy, Ruthless Radrat, Thrill-Kill Disciple.

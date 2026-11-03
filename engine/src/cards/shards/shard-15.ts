@@ -411,6 +411,7 @@ import _poolLegionStronghold from "../pool/legion-stronghold.js";
 import _poolLeoninWarleader from "../pool/leonin-warleader.js";
 import _poolLierDiscipleOfTheDrowned from "../pool/lier-disciple-of-the-drowned.js";
 import _poolLifeInsurance from "../pool/life-insurance.js";
+import _poolLifecraftEngine from "../pool/lifecraft-engine.js";
 import _poolLightningDiadem from "../pool/lightning-diadem.js";
 import _poolLightningRigCrew from "../pool/lightning-rig-crew.js";
 import _poolLilianasScrounger from "../pool/lilianas-scrounger.js";
@@ -1259,6 +1260,7 @@ const shard: CardShard = {
     _poolLeoninWarleader,
     _poolLierDiscipleOfTheDrowned,
     _poolLifeInsurance,
+    _poolLifecraftEngine,
     _poolLightningDiadem,
     _poolLightningRigCrew,
     _poolLilianasScrounger,

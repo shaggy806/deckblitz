@@ -826,7 +826,8 @@ missing. Re-run `--greedy` for Phase 2's order.
 - **2026-11-02: fourth overnight round** (`/build-family overnight`, local agents, two related families each, told to
   try each key's card first) — `amount:damage-prevented-this-way` (6 proving cards), `effect:this-way-results` units 1–2
   (12 proving cards; 3 of 5 keys needed no code), `zone:impulse-permission-options` top three units plus Tier B (14),
-  `mechanic:face-down` top unit (6), `cost:unattach-cost` (4), `keyword:splice` (7).
+  `mechanic:face-down` top unit (6), `cost:unattach-cost` (4), `keyword:splice` (7), `static:cant-have-keyword` (4),
+  `static:grant-types-to-others` top unit (7).
 
 ## Rough size
 

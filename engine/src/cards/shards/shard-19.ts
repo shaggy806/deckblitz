@@ -654,6 +654,7 @@ import _poolRidgedKusite from "../pool/ridged-kusite.js";
 import _poolRiftmarkedKnight from "../pool/riftmarked-knight.js";
 import _poolRighteousCharge from "../pool/righteous-charge.js";
 import _poolRighteousIndignation from "../pool/righteous-indignation.js";
+import _poolRimefeatherOwl from "../pool/rimefeather-owl.js";
 import _poolRipClanCrasher from "../pool/rip-clan-crasher.js";
 import _poolRipplesOfPotential from "../pool/ripples-of-potential.js";
 import _poolRiteOfFlame from "../pool/rite-of-flame.js";
@@ -1578,6 +1579,7 @@ const shard: CardShard = {
     _poolRiftmarkedKnight,
     _poolRighteousCharge,
     _poolRighteousIndignation,
+    _poolRimefeatherOwl,
     _poolRipClanCrasher,
     _poolRipplesOfPotential,
     _poolRiteOfFlame,

@@ -502,6 +502,9 @@ One line each; the detail (rule numbers, code sites, the cards each blocks) is i
 **`docs/engine-gaps.md`**, under the same bold title. When a gap closes, delete its detail
 there and move this line to `COMPLETED.md`.
 
+- **A player can't play another player's face-down exiled card blind** (rule 406.3a; blocks Urianger Augurelt, Lobelia).
+- **A keyword's other cost counts the graveyard as the cast starts** (rule 601.2h, a splice set's costs in any order).
+- **A shield's `then` runs once per damage event** (Refraction Trap over a split sweep: two instances, right total).
 - **A copy of a spell loses its sacrificed, discarded and revealed cost references** — rule 707.10; exiled-as-cost now carries over, the others read nothing on a copy.
 - **Mulligans are declared at once, and two opening-hand rules are loose** — rule 103.5 has turn-order declarations but `beginMulligans` asks in parallel (a design call); `COMMANDER_RULES` gives the free mulligan at two players, while 103.5c names multiplayer and Brawl; a revealed opening-hand card isn't kept revealed until the first turn (103.6b).
 - **An opponent-caused discard's replacement beats the graveyard ones without asking** — `Game` puts Obstinate Baloth onto the battlefield rather than asking its controller (616.1) when Leyline of the Void also applies.

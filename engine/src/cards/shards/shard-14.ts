@@ -399,6 +399,7 @@ import _poolIllunaApexOfWishes from "../pool/illuna-apex-of-wishes.js";
 import _poolIllusion from "../pool/illusion.js";
 import _poolImpassionedOrator from "../pool/impassioned-orator.js";
 import _poolImposingVisage from "../pool/imposing-visage.js";
+import _poolInBolassClutches from "../pool/in-bolass-clutches.js";
 import _poolIncendiaryCommand from "../pool/incendiary-command.js";
 import _poolInkshield from "../pool/inkshield.js";
 import _poolInnerCalmOuterStrength from "../pool/inner-calm-outer-strength.js";
@@ -1286,6 +1287,7 @@ const shard: CardShard = {
     _poolIllusion,
     _poolImpassionedOrator,
     _poolImposingVisage,
+    _poolInBolassClutches,
     _poolIncendiaryCommand,
     _poolInkshield,
     _poolInnerCalmOuterStrength,
