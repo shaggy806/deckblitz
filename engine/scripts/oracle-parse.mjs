@@ -12877,9 +12877,69 @@ function tokenReplacementOf(line, text, tokenFor) {
   return null;
 }
 
+/**
+ * A permanent that's a creature on its own terms, in the planeswalkers' words:
+ * "During your turn, ~ is a 4/4 Human Soldier creature with indestructible
+ * that's still a planeswalker" (Gideon Blackblade), "As long as ~ has seven or
+ * more loyalty counters on him, he's a 7/7 Dragon God creature with flying and
+ * indestructible" (Grand Master of Flowers), "During your turn, as long as ~
+ * has one or more loyalty counters on him, he's a 3/4 Ninja creature and has
+ * hexproof" (Kaito). "Still a [type]" keeps its card types (rule 205.1b), and
+ * without those words the new type replaces them (205.1a).
+ */
+function selfCreatureWhileOf(line, text) {
+  const m =
+    /^(During your turn, )?(?:[Aa]s long as ~ has (\w+) or more (\w+) counters on (?:him|her|it), )?(?:~ is|he's|she's|it's) an? (\d+)\/(\d+) ((?:[A-Z][a-z]+ )+)creature(?:(?: with| and has) ([a-z ,]+?))?( that's still an? [a-z]+)?\.$/.exec(
+      line,
+    );
+  if (m === null || (m[1] === undefined && m[2] === undefined)) return null;
+  const keywords = [];
+  for (const word of (m[7] ?? "").split(/, and |, | and /).filter(Boolean)) {
+    const keyword = KEYWORDS[word];
+    if (keyword === undefined) return null;
+    keywords.push(keyword);
+  }
+  const counters =
+    m[2] === undefined
+      ? null
+      : { kind: "self-counters", counter: m[3], compare: { op: "gte", n: numberOf(m[2]) } };
+  const during = m[1] !== undefined ? { kind: "your-turn" } : null;
+  const condition = during !== null && counters !== null ? { kind: "all", of: [during, counters] } : (during ?? counters);
+  return {
+    affects: { scope: "self" },
+    condition,
+    ...(m[8] !== undefined ? { addTypes: ["creature"] } : { setTypes: ["creature"] }),
+    addSubtypes: m[6].trim().split(" "),
+    setBasePt: { power: Number(m[4]), toughness: Number(m[5]) },
+    ...(keywords.length > 0 ? { grantKeywords: keywords } : {}),
+    text,
+  };
+}
+
 function parseStatic(line, text) {
   const spellCost = spellCostStaticOf(line, text);
   if (spellCost !== null) return spellCost;
+  const creatureWhile = selfCreatureWhileOf(line, text);
+  if (creatureWhile !== null) return creatureWhile;
+  // Spark Rupture: every such planeswalker, each P/T its own count (layer 7b).
+  {
+    const m =
+      /^Each planeswalker with (\w+) or more loyalty counters on it loses all abilities and is a creature with power and toughness each equal to the number of loyalty counters on it\.$/.exec(
+        line,
+      );
+    if (m !== null) {
+      return {
+        affects: {
+          scope: "filter",
+          filter: { type: "planeswalker", counters: { kind: "loyalty", compare: { op: "gte", n: numberOf(m[1]) } } },
+        },
+        loseAllAbilities: true,
+        setTypes: ["creature"],
+        setBasePtFromAffectedCounters: "loyalty",
+        text,
+      };
+    }
+  }
   // A limit on how many creatures attack or block (`combat/limits.ts`): "No more
   // than two creatures can attack you each combat" (Crawlspace), "… attack each
   // combat", "… block each combat" (Silent Arbiter), "… attack ~" (The Eternal

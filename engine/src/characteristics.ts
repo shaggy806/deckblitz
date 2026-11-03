@@ -4512,7 +4512,8 @@ function contributesToCharacteristics(ability: StaticAbility): boolean {
     ability.protection !== undefined ||
     ability.hexproofFrom !== undefined ||
     ability.bandsWithOther !== undefined ||
-    ability.setBasePt !== undefined
+    ability.setBasePt !== undefined ||
+    ability.setBasePtFromAffectedCounters !== undefined
   );
 }
 
@@ -4750,6 +4751,8 @@ function collectStaticEffects(
           ? countersAmong(per.countersAmong)
           : per.anyCountersOnSource === true
           ? Object.values(source.counters).reduce((total, count) => total + (count ?? 0), 0)
+          : per.anyCountersOnAffected === true
+          ? Object.values(target.counters).reduce((total, count) => total + (count ?? 0), 0)
           : per.turnStat !== undefined
           ? turnStatOf(state, side, per.turnStat)
           : per.basicLandTypes === true
@@ -4823,7 +4826,13 @@ function collectStaticEffects(
       protection: staticProtection(state, registry, ability, source),
       hexproofFrom: ability.hexproofFrom ?? null,
       bandsWithOther: ability.bandsWithOther ?? null,
-      setBase: ability.setBasePt ?? null,
+      setBase:
+        ability.setBasePtFromAffectedCounters !== undefined
+          ? {
+              power: target.counters[ability.setBasePtFromAffectedCounters] ?? 0,
+              toughness: target.counters[ability.setBasePtFromAffectedCounters] ?? 0,
+            }
+          : (ability.setBasePt ?? null),
     };
   };
   let keywordScoped = false;

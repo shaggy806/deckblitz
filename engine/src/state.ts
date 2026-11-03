@@ -1360,6 +1360,12 @@ export interface GameObject {
   /** What this creature is attacking — a player, or an opponent's planeswalker
    * (rule 508.1) — or `null` if not attacking. */
   attacking: PlayerId | ObjectId | null;
+  /** The planeswalker or battle this creature is attacking stopped being one,
+   * and so was removed from combat (rule 506.4): it's still an attacking
+   * creature and may be blocked, but it attacks nothing and, unblocked, deals
+   * no combat damage (506.4c). It doesn't rejoin if the permanent becomes a
+   * planeswalker again. Gone when it leaves combat. */
+  attackingNothing?: true;
   /** The attacker this creature is blocking, or `null` if not blocking —
    * the one it was declared blocking. */
   blocking: ObjectId | null;

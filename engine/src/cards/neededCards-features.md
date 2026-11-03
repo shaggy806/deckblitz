@@ -4419,3 +4419,9 @@ the life there is) and `{ each, per }` (`dynamic-life-cost.test.ts`). Key: cost:
 **A spell's cost raised by coloured pips (2026-11-03).** `costModification.increaseColored` adds coloured pips to matching spells' total cost before any reduction (rule 601.2f), to an alternative cost as well (118.9d); the shown cost adds them (`cost-increase-colored.test.ts`). Key: static:cost-increase-colored. Proving cards: Derelor, Sapphire Leech, Andradite Leech.
 
 **Offering (2026-11-03).** Rule 702.48: `kicker: { cost: "", keyword: "offering", flash: true, offering: <quality> }`, one kicked offer per permanent of the quality, named as the cast's `sacrifice`, its total cost less that permanent's mana cost (`manaCostReductions`, `ownManaCostOf`; rule 702.48c), a twobrid half that matters its own offer by `costOption` (118.7e). No new decision; the client's buttons already read `emergeSacrifice` and `kickerCost`. Also the filter `attackingOpponent` (`offering.test.ts`). Key: keyword:offering. Proving cards: Patron of the Akki, Patron of the Kitsune, Blast-Furnace Hellkite.
+**A static making a planeswalker a creature (2026-11-03).** The type statics already said it: `addTypes` for "that's still a
+planeswalker" (rule 205.1b), `setTypes` where the words are missing (205.1a), under any `condition`. What it took: a planeswalker being
+attacked that stops being one is removed from combat, and what attacks it attacks nothing (506.4, 506.4c; `attackingNothing`, also for a
+battle); `setBasePtFromAffectedCounters` (each permanent's own count, layer 7b); `grantPtPerCount.anyCountersOnAffected`; `attach`'s
+`planeswalkerToo` for "Equip planeswalker" (702.6e). Key: static:planeswalker-becomes-creature. Proving cards: Gideon Blackblade, Grand
+Master of Flowers, Kaito, Bane of Nightmares, Spark Rupture, Luxior, Giada's Gift.

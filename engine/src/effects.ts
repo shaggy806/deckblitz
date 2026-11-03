@@ -7616,6 +7616,10 @@ export type EffectSpec =
       /** What's attached, when it isn't the source — see {@link AttachRef}
        * (`"put-this-way"`: Stonehewer Giant's found Equipment). */
       readonly attachment?: AttachRef;
+      /** "Equip planeswalker" (rule 702.6e, Luxior, Giada's Gift): this
+       * Equipment goes on a planeswalker "as though that planeswalker were a
+       * creature". */
+      readonly planeswalkerToo?: true;
       readonly attachments?: CardFilter;
       /** `upTo`: at most that many — Vow to Erebor's "you may attach **an**
        * Equipment you control to it" is `upTo: 1`. */
@@ -11294,7 +11298,7 @@ export interface EffectApi {
   conditionMet(condition: StaticCondition): boolean;
   /** Attach `attachment` (an Aura/Equipment) to `target` — `ctx.source`
    * when it's omitted. See the `"attach"` {@link EffectSpec}. */
-  attach(target: TargetRef, attachment?: TargetRef): void;
+  attach(target: TargetRef, attachment?: TargetRef, planeswalkerToo?: boolean): void;
   /** Unattach `target` — see the `"unattach"` {@link EffectSpec}. */
   unattach(target: TargetRef): void;
   /** The source becomes a Licid's Aura and is attached to `target` — see
@@ -17174,7 +17178,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         // "Attach this …": not once the source has left and come back as a
         // new object (rule 400.7).
         if (ctx.sourceLost === true) return;
-        ctx.attach(target);
+        ctx.attach(target, undefined, spec.planeswalkerToo === true);
         return;
       }
       const attachment = resolveAttachRef(spec.attachment, ctx);

@@ -11136,6 +11136,40 @@ describe("any number of … with different names or powers", () => {
     });
   });
 
+  it("reads a static making a planeswalker a creature, keeping its types only where it says so", () => {
+    const planeswalker = (oracle_text: string) =>
+      parseFace({ name: "Bob", type_line: "Legendary Planeswalker — Bob", oracle_text }).static[0];
+    expect(planeswalker("During your turn, Bob is a 4/4 Human Soldier creature with indestructible that's still a planeswalker.")).toMatchObject({
+      affects: { scope: "self" },
+      condition: { kind: "your-turn" },
+      addTypes: ["creature"],
+      addSubtypes: ["Human", "Soldier"],
+      setBasePt: { power: 4, toughness: 4 },
+      grantKeywords: ["indestructible"],
+    });
+    expect(planeswalker("As long as Bob has seven or more loyalty counters on him, he's a 7/7 Dragon God creature with flying and indestructible.")).toMatchObject({
+      condition: { kind: "self-counters", counter: "loyalty", compare: { op: "gte", n: 7 } },
+      setTypes: ["creature"],
+      grantKeywords: ["flying", "indestructible"],
+    });
+    expect(planeswalker("During your turn, as long as Bob has one or more loyalty counters on him, he's a 3/4 Ninja creature and has hexproof.")).toMatchObject({
+      condition: {
+        kind: "all",
+        of: [{ kind: "your-turn" }, { kind: "self-counters", counter: "loyalty", compare: { op: "gte", n: 1 } }],
+      },
+      setTypes: ["creature"],
+      addSubtypes: ["Ninja"],
+    });
+    expect(
+      parseFace({
+        name: "Rupture",
+        type_line: "Enchantment",
+        oracle_text:
+          "Each planeswalker with one or more loyalty counters on it loses all abilities and is a creature with power and toughness each equal to the number of loyalty counters on it.",
+      }).static[0],
+    ).toMatchObject({ loseAllAbilities: true, setTypes: ["creature"], setBasePtFromAffectedCounters: "loyalty" });
+  });
+
   it("reads a search whose chosen finds are shuffled back in", () => {
     const parsed = face(
       "Threats Undetected",
