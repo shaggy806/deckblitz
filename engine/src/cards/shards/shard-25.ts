@@ -458,6 +458,7 @@ import _poolMistsOfLorien from "../pool/mists-of-lorien.js";
 import _poolMistveilPlains from "../pool/mistveil-plains.js";
 import _poolMoggInfestation from "../pool/mogg-infestation.js";
 import _poolMoggcatcher from "../pool/moggcatcher.js";
+import _poolMolderingGym from "../pool/moldering-gym.js";
 import _poolMoltenCollapse from "../pool/molten-collapse.js";
 import _poolMoltenInfluence from "../pool/molten-influence.js";
 import _poolMomentOfSilence from "../pool/moment-of-silence.js";
@@ -817,6 +818,7 @@ import _poolWaywardDisciple from "../pool/wayward-disciple.js";
 import _poolWeaveFate from "../pool/weave-fate.js";
 import _poolWhipflare from "../pool/whipflare.js";
 import _poolWickedReward from "../pool/wicked-reward.js";
+import _poolWildcall from "../pool/wildcall.js";
 import _poolWildfireHowl from "../pool/wildfire-howl.js";
 import _poolWildsearScouringMaw from "../pool/wildsear-scouring-maw.js";
 import _poolWindcragSiege from "../pool/windcrag-siege.js";
@@ -1319,6 +1321,7 @@ const shard: CardShard = {
     _poolMistveilPlains,
     _poolMoggInfestation,
     _poolMoggcatcher,
+    _poolMolderingGym,
     _poolMoltenCollapse,
     _poolMoltenInfluence,
     _poolMomentOfSilence,
@@ -1678,6 +1681,7 @@ const shard: CardShard = {
     _poolWeaveFate,
     _poolWhipflare,
     _poolWickedReward,
+    _poolWildcall,
     _poolWildfireHowl,
     _poolWildsearScouringMaw,
     _poolWindcragSiege,

@@ -405,6 +405,8 @@ function untargetedWorth(effect: EffectSpec, ctx: WorthContext): number {
       if (typeof effect.target === "number") return 0;
       return onObjectRef(effect.target, HARMFUL_COUNTERS.has(effect.counter) ? -1 : 1, ctx);
     case "put-counters-of":
+      // Onto the tokens it just made: the controller's own.
+      if (effect.target === "created") return 1;
       return typeof effect.target === "number" ? 0 : onObjectRef(effect.target, 1, ctx);
     case "move-counters": {
       // The untargeted ends (graft's "from this onto it"): a counter is worth

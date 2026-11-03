@@ -2575,6 +2575,22 @@ land comparison (Boreas Charger), "permanents they control but don't own"
 (Incite Rebellion), tapped/nonbasic counts the scaffolder can't phrase —
 `author-freed` narrows them.
 
+### What a manifest or a create step put onto the battlefield — built 2026-11-03
+
+The need-keys Phase 2 family `effect:this-way-results`' top group:
+`effect:manifested-this-way` and `effect:put-counters-of-created`.
+`manifest-dread`'s `count` is an amount ("manifest dread X times"), "those
+creatures" / "that creature" / "it" after a manifest is `add-counter-all` over
+`{ thisWay: "put-onto-battlefield" }` (a manifested card is put onto the
+battlefield, rule 701.40a), and `put-counters-of`'s `target: "created"` is the
+tokens this resolution made. The scaffolder reads the manifest lines.
+`manifested-this-way.test.ts`. Proving cards: Valgavoth's Onslaught, Wildcall,
+Formless Nurturing, Ambitious Augmenter, Moldering Gym // Weight Room. Left:
+Experimental Lab // Staff Room (a trample counter, and Staff Room's "turn that
+creature face up or put a +1/+1 counter on it", a choice on resolution). The
+family's later units (the amassed Army, `effect:amassed-army-power`; the cards a
+cost exiled; last-known power of moved cards) need code of their own.
+
 ### A card in exile, and the card exiled with this — built 2026-11-03
 
 The need-keys Phase 2 family `effect:linked-exiled-card`'s top group:

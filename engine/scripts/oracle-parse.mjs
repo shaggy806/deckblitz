@@ -4033,6 +4033,28 @@ export function parseSentence(sentence, ctx) {
   // "(you) manifest the top card of that player's library" — another
   // player's library (Thieving Amalgam, Orochi Soul-Reaver), when the
   // trigger names that player.
+  // "…then put N +1/+1 counters on it / that creature / each of those
+  // creatures": the cards this resolution manifested, which were put onto
+  // the battlefield (rules 701.40a, 701.62a — Wildcall, Weight Room,
+  // Valgavoth's Onslaught). Manifest dread N times (`count`).
+  {
+    const onThem = (n) => ({
+      kind: "add-counter-all",
+      filter: { thisWay: "put-onto-battlefield" },
+      counter: "+1/+1",
+      amount: numberOf(n),
+    });
+    if ((m = re(`manifest the top card of your library, then put ${N} \\+1/\\+1 counters? on it`).exec(s))) {
+      return { kind: "sequence", effects: [{ kind: "manifest", who: "you" }, onThem(m[1])] };
+    }
+    if ((m = re(`manifest dread(?: ${N} times)?, then put ${N} \\+1/\\+1 counters? on (?:that creature|each of those creatures)`).exec(s))) {
+      const dread = m[1] === undefined ? { kind: "manifest-dread" } : { kind: "manifest-dread", count: numberOf(m[1]) };
+      return { kind: "sequence", effects: [dread, onThem(m[2])] };
+    }
+    if ((m = re(`manifest dread(?: ${N} times)?`).exec(s))) {
+      return m[1] === undefined ? { kind: "manifest-dread" } : { kind: "manifest-dread", count: numberOf(m[1]) };
+    }
+  }
   if (re("manifest the top card of your library").test(s)) return { kind: "manifest", who: "you" };
   if (ctx.thatPlayer !== undefined && re("(?:you )?manifest the top card of that player's library").test(s)) {
     return { kind: "manifest", who: "you", from: ctx.thatPlayer };

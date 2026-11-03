@@ -11220,3 +11220,28 @@ describe("a card in exile, targeted", () => {
     expect(cube.effect).toEqual({ kind: "put-into-graveyard", target: 0 });
   });
 });
+
+describe("counters on what was manifested this way", () => {
+  const spell = (oracle_text: string) => parseFace({ name: "Card", type_line: "Sorcery", oracle_text });
+  const onThem = (amount: number | "x") => ({
+    kind: "add-counter-all",
+    filter: { thisWay: "put-onto-battlefield" },
+    counter: "+1/+1",
+    amount,
+  });
+  it("reads manifest dread X times, then counters on each of those creatures", () => {
+    const read = spell("Manifest dread X times, then put X +1/+1 counters on each of those creatures.");
+    expect(read.complete).toBe(true);
+    expect(read.effect).toEqual({ kind: "sequence", effects: [{ kind: "manifest-dread", count: "x" }, onThem("x")] });
+  });
+  it("reads a manifest, then counters on it", () => {
+    expect(spell("Manifest the top card of your library, then put a +1/+1 counter on it.").effect).toEqual({
+      kind: "sequence",
+      effects: [{ kind: "manifest", who: "you" }, onThem(1)],
+    });
+    expect(spell("Manifest dread, then put three +1/+1 counters on that creature.").effect).toEqual({
+      kind: "sequence",
+      effects: [{ kind: "manifest-dread" }, onThem(3)],
+    });
+  });
+});

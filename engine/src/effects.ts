@@ -5282,10 +5282,16 @@ export type EffectSpec =
        * and two such abilities each put the full set (The Ozolith and a
        * dying Iron Apprentice). Each kind is put as `add-counter` puts it,
        * so a doubler applies, and -1/-1 counters go too (the rulings).
+       *
+       * `target: "created"` is each token an earlier step of this resolution
+       * created, still on the battlefield — Ambitious Augmenter's "create a
+       * 0/0 Fractal token, then put this creature's counters on that token"
+       * (every token, should a replacement make more: give the
+       * `create-token` `separate`, so each is its own object).
        */
       readonly kind: "put-counters-of";
       readonly of: AmountRef;
-      readonly target: EffectTargetRef;
+      readonly target: EffectTargetRef | "created";
     }
   | {
       /**
@@ -7153,10 +7159,14 @@ export type EffectSpec =
        * default) or a target's controller as it last existed — Unwanted
        * Remake's "its controller manifests dread" is `{ controllerOfTarget:
        * 0 }`. `count` manifests dread that many times, each finished before
-       * the next (They Came from the Pipes' "twice"). */
+       * the next (They Came from the Pipes' "twice"), an amount read once as
+       * it resolves (Valgavoth's Onslaught's "manifest dread X times"). Each
+       * creature it manifests is put onto the battlefield (rule 701.62a), so
+       * a later step's `{ thisWay: "put-onto-battlefield" }` filter is "those
+       * creatures" ("then put X +1/+1 counters on each of those creatures"). */
       readonly kind: "manifest-dread";
       readonly who?: "you" | { readonly controllerOfTarget: number };
-      readonly count?: number;
+      readonly count?: EffectAmount;
     }
   | {
       readonly kind: "create-token";
@@ -14886,7 +14896,8 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "manifest-dread": {
       // Several times: one after another, each choice made before the next
       // look — a sequence parks its later steps behind a pending choice.
-      const times = spec.count ?? 1;
+      const times = Math.min(MAX_COPY_COUNT, spec.count === undefined ? 1 : amountValue(spec.count, ctx));
+      if (times <= 0) return;
       if (times > 1) {
         applyEffectSpec({ kind: "sequence", effects: Array.from({ length: times }, () => ({ ...spec, count: 1 })) }, ctx);
         return;
@@ -16130,13 +16141,22 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       applyMoveCounters(spec, ctx);
       return;
     case "put-counters-of": {
-      const target = resolveEffectTarget(spec.target, ctx);
       const of = resolveAmountRef(spec.of, ctx);
-      if (target === undefined || of === undefined) return;
+      const onto: readonly TargetRef[] =
+        spec.target === "created"
+          ? ctx
+              .thisWay("created")
+              .filter((entry) => !entry.departed)
+              .map((entry): TargetRef => ({ kind: "object", object: entry.object }))
+          : [resolveEffectTarget(spec.target, ctx)].filter((t): t is TargetRef => t !== undefined);
+      if (of === undefined) return;
       // The same number of each kind it had (rule 122.8), each put as any
-      // counter is — a -1/-1 among them too.
-      for (const [kind, n] of Object.entries(ctx.counterKindsOf(of))) {
-        if (n > 0) ctx.addCounter(target, kind, n);
+      // counter is — a -1/-1 among them too. Read once, before any goes on.
+      const kinds = Object.entries(ctx.counterKindsOf(of));
+      for (const target of onto) {
+        for (const [kind, n] of kinds) {
+          if (n > 0) ctx.addCounter(target, kind, n);
+        }
       }
       return;
     }
