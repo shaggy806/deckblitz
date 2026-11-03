@@ -507,6 +507,8 @@ One line each; the detail (rule numbers, code sites, the cards each blocks) is i
 **`docs/engine-gaps.md`**, under the same bold title. When a gap closes, delete its detail
 there and move this line to `COMPLETED.md`.
 
+- **The auto-payer can find no plan for a payable cost** (Fellwar Stone and Silent Clearing, {W}{R}: the Stone goes on the {W}, and the spell isn't offered).
+- **The auto-payer can pay away a player's last life** (two painful sources at 2 life: each toll is checked alone).
 - **A player can't play another player's face-down exiled card blind** (rule 406.3a; blocks Urianger Augurelt, Lobelia).
 - **A keyword's other cost counts the graveyard as the cast starts** (rule 601.2h, a splice set's costs in any order).
 - **A shield's `then` runs once per damage event** (Refraction Trap over a split sweep: two instances, right total).

@@ -713,7 +713,20 @@ export function planManaPayment(
   // Mana that may be spent as though it were any colour (or type) pays a
   // coloured pip as freely as a generic one (rule 609.4b).
   const cost = costAsSpendable(rawCost, view.spendAs);
-  const plan = planManaPaymentOrdered(view, cost, avoid, exclude, "plain-first");
+  // Life is the dearest thing a payment can spend, so a board with a source
+  // costing it first tries paying without (`lifeLast`). The tries below that
+  // weigh it as before only run where that found nothing: a {W}{R} out of a
+  // painland's {W} and a Treasure needs the Treasure on the {R}, and a Treasure
+  // spent first on the {W} would leave no red.
+  const costsLife = view.sources.some((s) => s.options.some((o) => o.pain + o.lifeCost > 0));
+  const hasCosted = view.sources.some(hasCostedOption);
+  if (costsLife) {
+    const plan =
+      planManaPaymentOrdered(view, cost, avoid, exclude, "plain-first", true) ??
+      (hasCosted ? planManaPaymentOrdered(view, cost, avoid, exclude, "converters-first", true) : null);
+    if (plan !== null) return plan;
+  }
+  const plan = planManaPaymentOrdered(view, cost, avoid, exclude, "plain-first", false);
   if (plan !== null) return plan;
   // Reaching for a converter last can strand it: two Islands and an Izzet
   // Signet are three mana, but a `{3}` cost spends both Islands before it
@@ -724,12 +737,12 @@ export function planManaPayment(
   // free: a Plains spent on a {W} pip first leaves nothing for Mystic Gate's
   // `{W/U}`, and Glorious Anthem off a Gate, a Plains and a Swamp wants the
   // Plains on the gate (a bug report, 2026-10-13).
-  if (!view.sources.some(hasCostedOption)) return null;
+  if (!hasCosted) return null;
   return (
-    planManaPaymentOrdered(view, cost, avoid, exclude, "converters-first") ??
+    planManaPaymentOrdered(view, cost, avoid, exclude, "converters-first", false) ??
     // And a last try with a Treasure where it went before converters were put
     // ahead of it, so no payment that worked then fails now.
-    planManaPaymentOrdered(view, cost, avoid, exclude, "last-resort-early")
+    planManaPaymentOrdered(view, cost, avoid, exclude, "last-resort-early", false)
   );
 }
 
@@ -896,6 +909,16 @@ const gainful = (s: ManaSource): boolean => s.options.some(gainfulOption);
 const isLastResort = (s: ManaSource): boolean =>
   s.sacrificeSelf || s.options.some((o) => o.counterCost !== undefined);
 
+/** A last resort spent ahead of life: a permanent whose one job is one mana (a
+ * Treasure, Lotus Petal). Not a land or a creature sacrificed for its mana,
+ * which is worth more than a point of life, nor Black Lotus's three or Crystal
+ * Vein's two, most of it lost on the pip a point of life would have paid. */
+const spentBeforeLife = (s: ManaSource): boolean =>
+  s.sacrificeSelf &&
+  !s.isLand &&
+  s.isCreature !== true &&
+  s.options.every((o) => o.fixed.length + o.anyColor === 1 && o.counterCost === undefined);
+
 /**
  * The order a payment reaches for sources in:
  *
@@ -907,6 +930,12 @@ const isLastResort = (s: ManaSource): boolean =>
  *   colour, then the last resorts (see `planManaPayment`).
  * - `"last-resort-early"`: a last resort among the plain sources, converters
  *   last — the order before converters went ahead of Treasures.
+ *
+ * `lifeLast` moves whatever would cost life for the mana wanted behind every
+ * free source, a Treasure included (`spentBeforeLife`), and ahead of the other
+ * last resorts (a bug report, 2026-11-03: Boromir's {2}{W} took a life from
+ * Talisman of Hierarchy for the {W} and a Treasure for the {2}, where the
+ * Talisman's free {C} and the same Treasure paid it for none).
  */
 type SourceOrder = "plain-first" | "converters-first" | "last-resort-early";
 
@@ -916,6 +945,7 @@ function planManaPaymentOrdered(
   avoid: ObjectId | undefined,
   exclude: ObjectId | undefined,
   order: SourceOrder,
+  lifeLast: boolean,
 ): ManaPlanStep[] | null {
   // Floating mana this payment is actually allowed to use. Restricted
   // units `view.canPay` turns down are invisible here, so the planner
@@ -1002,16 +1032,23 @@ function planManaPaymentOrdered(
     if (s.reserved === true) return 3;
     const converter = isConverter(s);
     const last = !converter && isLastResort(s);
+    const lastGroup = lifeLast && !spentBeforeLife(s) ? 2.75 : 2;
     switch (order) {
       case "plain-first":
-        return converter ? 1 : last ? 2 : 0;
+        return converter ? 1 : last ? lastGroup : 0;
       case "converters-first":
         // Only one that makes more than it costs goes first; one that only
         // fixes a colour comes after the plain sources here too.
-        return gainful(s) ? 0 : converter ? 1.5 : last ? 2 : 1;
+        return gainful(s) ? 0 : converter ? 1.5 : last ? lastGroup : 1;
       case "last-resort-early":
         return converter ? 1 : 0;
     }
+  };
+  /** `groupOf`, for a source whose mana here would cost `toll` life: behind
+   * the Treasures when life is weighed last (`SourceOrder`). */
+  const groupAt = (s: ManaSource, toll: number): number => {
+    const group = groupOf(s);
+    return lifeLast && toll > 0 && group < 2 ? 2.5 : group;
   };
   // A stable sort: within a group, the order the sources came in.
   const sources = [...ordered].sort((a, b) => groupOf(a) - groupOf(b));
@@ -1264,11 +1301,12 @@ function planManaPaymentOrdered(
     // or Llanowar Elves pays {G} before Mana Confluence or a painland's {G}
     // (a bug report, 2026-10-15).
     const toll = (s: ManaSource): number => Math.min(...s.options.filter(makes).map(lifeToll));
-    const order = [...sources].sort(
-      (a, b) => groupOf(a) - groupOf(b) || Number(!freely(a)) - Number(!freely(b)) || toll(a) - toll(b),
+    const makers = sources.filter((s) => !isTapped(s.id) && canMake(s));
+    const order = makers.sort(
+      (a, b) =>
+        groupAt(a, toll(a)) - groupAt(b, toll(b)) || Number(!freely(a)) - Number(!freely(b)) || toll(a) - toll(b),
     );
     for (const next of order) {
-      if (isTapped(next.id) || !canMake(next)) continue;
       const t = openFunded(next, m);
       if (t !== null && payWith(t, m)) return true;
     }
@@ -1343,7 +1381,13 @@ function planManaPaymentOrdered(
       freeOptions(s).some((o) => of === null || of.some((m) => o.fixed.includes(m) || anyUnitMakes(o, m)));
     const free = sources.filter((s) => !isTapped(s.id) && s.id !== exclude && makesOne(s));
     const plainFree = free.filter((s) => !isLastResort(s) && s.reserved !== true);
-    const from = plainFree.length > 0 ? plainFree : free;
+    // Life weighed last: a toll-free source funds it, then a Treasure, then
+    // one that would cost life.
+    const paysToll = (s: ManaSource): boolean => Math.min(...freeOptions(s).map(lifeToll)) > 0;
+    const painless = lifeLast ? plainFree.filter((s) => !paysToll(s)) : plainFree;
+    const treasures = lifeLast ? free.filter(spentBeforeLife) : [];
+    const from =
+      painless.length > 0 ? painless : treasures.length > 0 ? treasures : plainFree.length > 0 ? plainFree : free;
     const next = from.find(dull) ?? from[0];
     if (next === undefined) return borrow();
     const want =
@@ -1430,15 +1474,18 @@ function planManaPaymentOrdered(
   // before two coloured lands do (a bug report, 2026-10-06: the lands went
   // first, in battlefield order, as `Game.manaSources` lists them).
   // The keep score is read afresh for each unit of generic, as sources go.
-  const ranked = sources.map((src, i) => ({
-    src,
-    i,
-    group: groupOf(src),
-    avoided: src.id === avoid ? 1 : 0,
-    toll: Math.min(...src.options.map(lifeToll)),
-    creature: src.isCreature === true ? 1 : 0,
-    colours: colourCount(src),
-  }));
+  const ranked = sources.map((src, i) => {
+    const toll = Math.min(...src.options.map(lifeToll));
+    return {
+      src,
+      i,
+      group: groupAt(src, toll),
+      avoided: src.id === avoid ? 1 : 0,
+      toll,
+      creature: src.isCreature === true ? 1 : 0,
+      colours: colourCount(src),
+    };
+  });
   const byKeep = (): ManaSource[] =>
     ranked
       .filter((e) => !isTapped(e.src.id))
@@ -1481,7 +1528,11 @@ function planManaPaymentOrdered(
   // first, then the converters in the order they were opened — one funded by
   // another's leftover was opened after it (`coverGenericFrom`), so the mana
   // is there when `useManaSource` runs. A stable sort keeps that order.
-  const steps = [...tapped].sort((a, b) => Number(a.spends.length > 0) - Number(b.spends.length > 0));
+  // A sacrificed source goes after the sources it isn't funding, so Spire of
+  // Industry's "only if you control an artifact" still holds when its one
+  // artifact is the Treasure paying beside it.
+  const stepRank = (t: Tapped): number => (t.spends.length > 0 ? 2 : t.src.sacrificeSelf ? 1 : 0);
+  const steps = [...tapped].sort((a, b) => stepRank(a) - stepRank(b));
   return steps.map((t) => {
     // Everything it makes, used or left floating — its own units first, then
     // the extra ones, which are `extraFrom`'s.

@@ -6,6 +6,22 @@ rule number, the code that does it today and the cards it blocks. `BACKLOG.md` k
 per gap under the same bold title; when a gap closes, delete it here and move its
 `BACKLOG.md` line to `COMPLETED.md`.
 
+- **The auto-payer can find no plan for a payable cost** (found 2026-11-03, older than the finding: it fails
+  with `lifeLast` switched off too). `coverSpecific` (`mana-payment.ts`) takes pips in WUBRG order, each from
+  the free source first, and never takes one back: Fellwar Stone (making {W} and {R} off an opponent's lands)
+  and Silent Clearing make {W}{R}, but the Stone goes on the {W} for free and nothing is left for the {R}, so
+  `payMana` returns null and the spell isn't offered. The retries only reorder groups of sources, and without
+  a converter they don't run. Outline: a last pass that takes the pips scarcest first (fewest sources making
+  them), or a small matching over the coloured pips; it runs only where every other pass found nothing, so it
+  can't change a payment that works. Risk: `payMana` is on the affordability path, so measure the cost of a
+  further pass on a payment that truly can't be paid.
+- **The auto-payer can pay away a player's last life** (found 2026-11-03). `affordableOptions`
+  (`mana-payment.ts`) checks each option's toll against the life total alone, so at 2 life Silent Clearing and
+  Caves of Koilos together pay {W}{W} for 2 and the player loses, though its comment says the auto-payer never
+  kills its payer. Outline: count the tolls already taken as `openFunded` opens a source, and treat a toll that
+  would reach 0 as unaffordable. A design call: rule 119.4 lets a player pay life down to 0 and a painland's
+  damage (rule 120.3a) isn't a payment at all, so this makes such a spell uncastable by auto-pay; the
+  alternative is to keep it castable and ask first, a new decision.
 - **Mulligans are declared at once, and two opening-hand rules are loose** (found 2026-11-01, all older
   than the finding). Rule 103.5 has each player declare in turn order; `beginMulligans` (`game.ts`) asks in
   parallel, and changing it is a design call. Rule 103.5c gives the free mulligan to multiplayer and
