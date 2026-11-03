@@ -1,5 +1,5 @@
 Top 500 Commander *commanders* by EDHREC deck count (fetched 2026-09-22)
-457 already implemented / 43 missing
+458 already implemented / 42 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -130,7 +130,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  124  Yoshimaru, Ever Faithful                       16385 decks  {W}              Legendary Creature — Dog
 [x]  125  Morophon, the Boundless                        16181 decks  {7}              Legendary Creature — Shapeshifter
 [x]  126  Fynn, the Fangbearer                           16177 decks  {1}{G}           Legendary Creature — Human Warrior
-[ ]  127  Captain America, First Avenger                 15988 decks  {R}{W}{U}        Legendary Creature — Human Soldier Hero
+[x]  127  Captain America, First Avenger                 15988 decks  {R}{W}{U}        Legendary Creature — Human Soldier Hero
 [x]  128  Kynaios and Tiro of Meletis                    15854 decks  {R}{G}{W}{U}     Legendary Creature — Human Soldier
 [x]  129  Tovolar, Dire Overlord                         15803 decks  {1}{R}{G}        Legendary Creature — Human Werewolf // Legendary Creature — Werewolf
 [ ]  130  Zimone, Mystery Unraveler                      15788 decks  {2}{G}{U}        Legendary Creature — Human Wizard

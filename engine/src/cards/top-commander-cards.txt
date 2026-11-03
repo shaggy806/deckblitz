@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4220 already implemented / 780 missing (marks refreshed 2026-11-02)
+4230 already implemented / 770 missing (marks refreshed 2026-11-03)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -814,7 +814,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   818  Gruul Signet                             {2}              Artifact
 [x]   819  Mesa Enchantress                         {1}{W}{W}        Creature — Human Druid
 [x]   820  Sunbillow Verge                          {0}              Land
-[ ]   821  Colossus Hammer                          {1}              Artifact — Equipment
+[x]   821  Colossus Hammer                          {1}              Artifact — Equipment
 [ ]   822  Aurelia, the Warleader                   {2}{R}{R}{W}{W}  Legendary Creature — Angel
 [x]   823  Sai, Master Thopterist                   {2}{U}           Legendary Creature — Human Artificer
 [x]   824  Tocasia's Welcome                        {2}{W}           Enchantment
@@ -1035,7 +1035,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1039  Wear // Tear                             {1}{R} // {W}    Instant // Instant
 [x]  1040  Oketra's Monument                        {3}              Legendary Artifact
 [x]  1041  Training Grounds                         {U}              Enchantment
-[ ]  1042  Arcane Lighthouse                        {0}              Land
+[x]  1042  Arcane Lighthouse                        {0}              Land
 [x]  1043  Spellseeker                              {2}{U}           Creature — Human Wizard
 [x]  1044  Apex Devastator                          {8}{G}{G}        Creature — Chimera Hydra
 [ ]  1045  Charismatic Conqueror                    {1}{W}           Creature — Vampire Soldier
@@ -1833,7 +1833,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1840  The Battle of Bywater                    {1}{W}{W}        Sorcery
 [x]  1841  Undead Augur                             {B}{B}           Creature — Zombie Wizard
 [ ]  1842  Firemane Commando                        {3}{W}           Creature — Angel Soldier
-[ ]  1843  Archetype of Imagination                 {4}{U}{U}        Enchantment Creature — Human Wizard
+[x]  1843  Archetype of Imagination                 {4}{U}{U}        Enchantment Creature — Human Wizard
 [x]  1844  Emrakul, the Promised End                {13}             Legendary Creature — Eldrazi
 [x]  1845  Wooded Ridgeline                         {0}              Land — Mountain Forest
 [x]  1846  Boros Guildgate                          {0}              Land — Gate
@@ -2011,7 +2011,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2018  Righteous Valkyrie                       {2}{W}           Creature — Angel Cleric
 [ ]  2019  Thirst for Knowledge                     {2}{U}           Instant
 [x]  2020  Wooded Bastion                           {0}              Land
-[ ]  2021  Sunforger                                {3}              Artifact — Equipment
+[x]  2021  Sunforger                                {3}              Artifact — Equipment
 [x]  2022  Nevinyrral's Disk                        {4}              Artifact
 [x]  2023  Sangromancer                             {2}{B}{B}        Creature — Vampire Shaman
 [x]  2024  Thunderfoot Baloth                       {4}{G}{G}        Creature — Beast
@@ -2030,7 +2030,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2037  Krenko's Command                         {1}{R}           Sorcery
 [x]  2038  Maelstrom of the Spirit Dragon           {0}              Land
 [x]  2039  White Sun's Twilight                     {X}{W}{W}        Sorcery
-[ ]  2040  Wake the Past                            {5}{R}{W}        Sorcery
+[x]  2040  Wake the Past                            {5}{R}{W}        Sorcery
 [x]  2041  Homunculus Horde                         {3}{U}           Creature — Homunculus
 [x]  2042  Rakdos Guildgate                         {0}              Land — Gate
 [ ]  2043  The Last Agni Kai                        {1}{R}           Instant
@@ -2064,7 +2064,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2071  Cancel                                   {1}{U}{U}        Instant
 [x]  2072  Alchemist's Talent                       {3}{R}           Enchantment — Class
 [x]  2073  Funeral Room // Awakening Hall           {2}{B} // {6}{B}{B} Enchantment — Room // Enchantment — Room
-[ ]  2074  Gonti, Lord of Luxury                    {2}{B}{B}        Legendary Creature — Aetherborn Rogue
+[x]  2074  Gonti, Lord of Luxury                    {2}{B}{B}        Legendary Creature — Aetherborn Rogue
 [x]  2075  Everybody Lives!                         {1}{W}           Instant
 [x]  2076  Selesnya Guildgate                       {0}              Land — Gate
 [x]  2077  Fallen Shinobi                           {3}{U}{B}        Creature — Zombie Ninja
@@ -2868,7 +2868,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2875  Mocking Sprite                           {2}{U}           Creature — Faerie Rogue
 [x]  2876  Finale of Glory                          {X}{W}{W}        Sorcery
 [x]  2877  Winter Moon                              {2}              Artifact
-[ ]  2878  Archetype of Endurance                   {6}{G}{G}        Enchantment Creature — Boar
+[x]  2878  Archetype of Endurance                   {6}{G}{G}        Enchantment Creature — Boar
 [x]  2879  Celestine, the Living Saint              {4}{W}           Legendary Creature — Human Warrior
 [x]  2880  Basilisk Gate                            {0}              Land — Gate
 [x]  2881  Silent-Blade Oni                         {3}{U}{U}{B}{B}  Creature — Demon Ninja
@@ -3369,7 +3369,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  3376  Inventory Management                     {R}{W}           Instant
 [x]  3377  Ensnared by the Mara                     {2}{R}{R}        Sorcery
 [ ]  3378  Stinging Study                           {4}{B}           Instant
-[ ]  3379  Court of Locthwain                       {2}{B}{B}        Enchantment
+[x]  3379  Court of Locthwain                       {2}{B}{B}        Enchantment
 [x]  3380  Lord of the Void                         {4}{B}{B}{B}     Creature — Demon
 [x]  3381  Quest for Renewal                        {1}{G}           Enchantment
 [x]  3382  Norn's Choirmaster                       {3}{W}{W}        Creature — Phyrexian Angel
@@ -3400,7 +3400,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3407  Prince Imrahil the Fair                  {W}{U}           Legendary Creature — Human Noble
 [x]  3408  Nylea, God of the Hunt                   {3}{G}           Legendary Enchantment Creature — God
 [x]  3409  Hearthhull, the Worldseed                {1}{B}{R}{G}     Legendary Artifact — Spacecraft
-[ ]  3410  Mob Rule                                 {4}{R}{R}        Sorcery
+[x]  3410  Mob Rule                                 {4}{R}{R}        Sorcery
 [x]  3411  Hermes, Overseer of Elpis                {3}{U}           Legendary Creature — Elder Wizard
 [x]  3412  Nyxborn Hydra                            {X}{G}           Enchantment Creature — Hydra
 [ ]  3413  Gogo, Master of Mimicry                  {2}{U}           Legendary Creature — Wizard
@@ -3795,7 +3795,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  3802  Fortune Teller's Talent                  {U}              Enchantment — Class
 [x]  3803  Sunfrill Imitator                        {2}{G}           Creature — Dinosaur
 [x]  3804  Secluded Starforge                       {0}              Land
-[ ]  3805  Yes Man, Personal Securitron             {2}{W}           Legendary Artifact Creature — Robot
+[x]  3805  Yes Man, Personal Securitron             {2}{W}           Legendary Artifact Creature — Robot
 [x]  3806  Akoum Refuge                             {0}              Land
 [x]  3807  Karazikar, the Eye Tyrant                {3}{B}{R}        Legendary Creature — Beholder
 [x]  3808  Whitemane Lion                           {1}{W}           Creature — Cat
