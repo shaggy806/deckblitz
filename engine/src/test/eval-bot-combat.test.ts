@@ -41,6 +41,7 @@ const creature = (
   canAttack: true,
   isCommander: false,
   controllerLands: new Set(),
+  controller: asPlayerId("p1"),
   ...extra,
 });
 

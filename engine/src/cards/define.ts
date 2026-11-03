@@ -401,6 +401,16 @@ export type Keyword =
   | "mountainwalk"
   | "forestwalk"
   | "desertwalk"
+  /** Landwalk of a kind none of those six names (rule 702.14a): "nonbasic
+   * landwalk", "artifact landwalk", landwalk of a chosen Gate (Dryad
+   * Sophisticate, Vectis Gloves, Traveler's Cloak). The kind is a `landwalk`
+   * static (`StaticAbility.landwalk`), read into `Characteristics.landwalk`;
+   * this keyword is what the fold adds while any instance survives, so a
+   * creature shows it, what `blockableDespiteLandwalk` names for "as though
+   * they didn't have those abilities" (Staff of the Ages), and what a
+   * `lose-keywords` names to take them (Hammerheim). Never granted on its
+   * own. */
+  | "landwalk"
   /** Daybound (rule 702.145 — ROADMAP Phase 10b): the front face of a modern
    * werewolf. As it becomes night, daybound permanents transform to their
    * nightbound back face; a daybound permanent enters transformed if it's
@@ -3280,6 +3290,18 @@ export interface StaticAbility {
    * creature's landwalk of these kinds is ignored when a block is declared,
    * whoever controls the creature or this. `affects` is ignored. */
   readonly blockableDespiteLandwalk?: readonly Keyword[];
+  /** Landwalk of a kind (rule 702.14) for the affected creatures, its land as
+   * a filter: "nonbasic landwalk" is `{ type: "land", notSupertype: "basic" }`
+   * (Dryad Sophisticate, Trailblazer's Boots), "artifact landwalk" `{ types:
+   * ["artifact", "land"] }` (Vectis Gloves); `"chosen-land-type"` is "landwalk
+   * of the chosen type", the land type chosen as this permanent entered
+   * (`chooseOnEnter` — Traveler's Cloak), nothing while none was. Unblockable
+   * while the defending player controls a land that matches; adds the
+   * `"landwalk"` keyword while it applies. A land type alone with a keyword
+   * of its own, chosen or written (`{ type: "land", subtype: "Island" }` —
+   * Illusionary Presence's `grant-static`), gives that keyword instead: it is
+   * islandwalk. */
+  readonly landwalk?: CardFilter | "chosen-land-type";
   /** "You may activate loyalty abilities of [this] on any player's turn any
    * time you could cast an instant" (Teferi, Master of Time): its loyalty
    * abilities aren't held to sorcery timing (rule 606.3) — still one per

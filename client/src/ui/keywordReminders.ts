@@ -105,6 +105,8 @@ export const KEYWORD_REMINDER: Record<Keyword, { readonly name: string; readonly
   },
   forestwalk: { name: 'Forestwalk', text: "Can't be blocked as long as defending player controls a Forest." },
   desertwalk: { name: 'Desertwalk', text: "Can't be blocked as long as defending player controls a Desert." },
+  // The kind is on the card granting it: nonbasic, artifact, a chosen Gate.
+  landwalk: { name: 'Landwalk', text: "Can't be blocked as long as defending player controls a land of the kind it walks." },
   daybound: {
     name: 'Daybound',
     text: 'If a player casts no spells during their own turn, it becomes night next turn.',

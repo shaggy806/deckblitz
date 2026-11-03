@@ -576,7 +576,17 @@ creature type with it (never itself) — a `choose-from-zone` with destination
 `mountainwalk`, `forestwalk`, `desertwalk` — can't be blocked as long as the
 defending player controls a land of that *type* (a Breeding Pool is a Forest).
 One keyword per land type a card prints; a new type is a new keyword, added to
-`LANDWALK` in `combat/eligibility.ts` and to the client's `KEYWORD_GLYPH`.
+`LANDWALK` in `subtypes.ts` and to the client's `KEYWORD_GLYPH`. **Any other
+kind** is a static's `landwalk`, its land as a filter: nonbasic landwalk is
+`landwalk: { type: "land", notSupertype: "basic" }` (Dryad Sophisticate,
+Trailblazer's Boots), artifact landwalk `{ types: ["artifact", "land"] }` (Vectis
+Gloves), and `"chosen-land-type"` reads `chooseOnEnter: LAND_TYPES` (Traveler's
+Cloak). A `grant-static` carries one until end of turn, its `subtype` the
+sentinel of a `choose-creature-type` (Illusionary Presence). A land type alone
+with a keyword of its own *gives* that keyword, so Quagmire and "a creature with
+islandwalk" see it; the rest show as the `landwalk` keyword, which is what
+`lose-keywords` (Hammerheim) and `blockableDespiteLandwalk` (Staff of the Ages)
+name for them. Never grant `landwalk` directly: it would walk nothing.
 
 **Day/Night:** `daybound` / `nightbound` — the two faces of a modern werewolf;
 `Game.setDayNight` transforms them with the cycle. Nothing else transforms
@@ -5347,6 +5357,8 @@ is "can't attack a player it has already attacked this turn" (Port Razer), by th
   legends (`affects: { scope: "filter", … }` — Cathedral of Serra); a token
   prints it on itself (Wolves of the Hunt, `{ type: "creature", name: "Wolves
   of the Hunt" }`). Adds the `bands-with-other` keyword; see **Banding**.
+- `landwalk: CardFilter | "chosen-land-type"` — landwalk of a kind no keyword
+  names (rule 702.14), the land as a filter; see **Landwalk**.
 - Ward is **not** a static — it's a triggered ability; see `ward(...)` in §9.
 - `costModification: { applies: CardFilter, reduceGeneric?, increaseGeneric? }`
   — Foundry Inspector, Thalia. `affects` is ignored — `applies` says what it

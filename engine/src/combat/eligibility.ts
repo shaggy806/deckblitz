@@ -39,21 +39,13 @@ import { goadersOf, sourceAmount } from "../goad.js";
 import { hasRingBearerDesignation } from "../ring.js";
 import { attackRequirementActive, printedCardName, rulesTextName } from "../state.js";
 import type { AttackRequirementRule, GameObject, GameState } from "../state.js";
+import { LANDWALK } from "../subtypes.js";
 import { permanentSource, protectionBlocks } from "../targeting.js";
 import { attackCovers } from "./tax.js";
 
-/** Each landwalk keyword and the land type it walks (rule 702.14). */
-export const LANDWALK: ReadonlyArray<readonly [Keyword, string]> = [
-  ["plainswalk", "Plains"],
-  ["islandwalk", "Island"],
-  ["swampwalk", "Swamp"],
-  ["mountainwalk", "Mountain"],
-  ["forestwalk", "Forest"],
-  ["desertwalk", "Desert"],
-];
-
 /** The landwalk keywords some permanent's static says creatures "can be
- * blocked as though they didn't have" (Quagmire, Lord Magnus). */
+ * blocked as though they didn't have" (Quagmire, Lord Magnus), `"landwalk"`
+ * for every kind no named keyword covers (Staff of the Ages). */
 function landwalkIgnoredForBlocks(state: GameState, registry: CardRegistry): Set<Keyword> {
   return computedCacheMemo("landwalk-ignored-for-blocks", () => {
     const out = new Set<Keyword>();
@@ -95,6 +87,27 @@ export function landTypesControlledBy(
     if (controls) types.add(landType);
   }
   return types;
+}
+
+/** Whether a landwalk of a kind no named keyword covers (`walks`, off
+ * `Characteristics.landwalk` — rule 702.14c) stops `player` blocking: they
+ * control a land one of them walks, and nothing says it can be blocked as
+ * though it didn't have it (Staff of the Ages). */
+export function landwalkStopsBlocksBy(
+  state: GameState,
+  registry: CardRegistry,
+  walks: readonly CardFilter[],
+  player: PlayerId,
+): boolean {
+  if (walks.length === 0 || landwalkIgnoredForBlocks(state, registry).has("landwalk")) return false;
+  return state.zones.shared.battlefield.some(
+    (id) =>
+      // Whose it is first, as in `landTypesControlledBy`.
+      state.objects[id]?.controller === player &&
+      walks.some((land) =>
+        matchesFilter(state, registry, id, { ...land, type: "land", controlledBy: "you" }, { you: player }),
+      ),
+  );
 }
 
 /** {@link legalDefendersUncached} inside a computed-value cache region (a pure read
@@ -539,6 +552,12 @@ function whyThisCannotBlock(
       const attackerDef = registry.get(printedCardName(attacker));
       return `${blockerDef.name} can't block ${attackerDef.name} (${walk[0]})`;
     }
+  }
+  // Landwalk of another kind — nonbasic, artifact, a chosen land type other
+  // than those six (rule 702.14a, c): its land as a filter.
+  if (landwalkStopsBlocksBy(state, registry, computeCharacteristics(state, registry, attackerId).landwalk, player)) {
+    const attackerDef = registry.get(printedCardName(attacker));
+    return `${blockerDef.name} can't block ${attackerDef.name} (landwalk)`;
   }
   if (
     objHasKeyword(state, registry, attackerId, "flying") &&

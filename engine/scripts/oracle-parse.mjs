@@ -11074,6 +11074,11 @@ export function parseFace(face, ctx = {}) {
       out.chooseOnEnter = ["W", "U", "B", "R", "G"];
       continue;
     }
+    // "As ~ enters, choose a land type." Any that exists (rule 205.3i).
+    if (line === "As ~ enters, choose a land type.") {
+      out.chooseOnEnter = ["Cave", "Desert", "Forest", "Gate", "Island", "Lair", "Locus", "Mine", "Mountain", "Plains", "Planet", "Power-Plant", "Sphere", "Swamp", "Tower", "Town", "Urza's"];
+      continue;
+    }
     // "As ~ enters, choose a number between 1 and 10" (Talion): the words of a
     // short menu, read back as `{ chosenNumber }`.
     if ((m = /^As ~ enters, choose a number between (\d+) and (\d+)\.$/.exec(line))) {
@@ -14171,6 +14176,24 @@ function parseStatic(line, text) {
   {
     const w = /^Creatures with (plainswalk|islandwalk|swampwalk|mountainwalk|forestwalk|desertwalk) can be blocked as though they didn't have \1\.$/.exec(line);
     if (w !== null) return { affects: { scope: "self" }, blockableDespiteLandwalk: [w[1]], text };
+  }
+  // Rule 702.14a: landwalk of a kind no keyword names, its land as a filter
+  // (`StaticAbility.landwalk`) — printed (Dryad Sophisticate), on what an
+  // Equipment or Aura is attached to (Trailblazer's Boots, Vectis Gloves), or
+  // of the type chosen as it entered (Traveler's Cloak).
+  {
+    const kinds = { nonbasic: { type: "land", notSupertype: "basic" }, artifact: { types: ["artifact", "land"] } };
+    const own = /^(Nonbasic|Artifact) landwalk$/.exec(line);
+    if (own !== null) return { affects: { scope: "self" }, landwalk: kinds[own[1].toLowerCase()], text };
+    const w = /^(?:Equipped|Enchanted) creature (?:gets ([+-]\d+)\/([+-]\d+) and )?has (nonbasic landwalk|artifact landwalk|landwalk of the chosen type)\.$/.exec(line);
+    if (w !== null) {
+      return {
+        affects: { scope: "attached" },
+        ...(w[1] !== undefined ? { grantPt: [Number(w[1]), Number(w[2])] } : {}),
+        landwalk: w[3] === "landwalk of the chosen type" ? "chosen-land-type" : kinds[w[3].split(" ")[0]],
+        text,
+      };
+    }
   }
   // Rule 502.3 (Antiquities): its controller's choice in the untap step.
   if (line === "You may choose not to untap ~ during your untap step.") {

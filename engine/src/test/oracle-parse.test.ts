@@ -11796,3 +11796,34 @@ describe("a tap cost on the host, and the creature a cost tapped", () => {
     });
   });
 });
+
+describe("landwalk of a kind no keyword names", () => {
+  const read = (type_line: string, oracle_text: string) =>
+    parseFace({ name: "Card", type_line, oracle_text, mana_cost: "{2}", colors: [], cmc: 2 } as never, { tokenFor: (d: string) => d }) as unknown as {
+      static: { affects: unknown; landwalk?: unknown; grantPt?: unknown; __todo?: string[] }[];
+      chooseOnEnter?: readonly string[];
+    };
+  it("printed nonbasic landwalk", () => {
+    const [ability] = read("Creature — Dryad", "Nonbasic landwalk (This creature can't be blocked as long as defending player controls a nonbasic land.)").static;
+    expect(ability.affects).toEqual({ scope: "self" });
+    expect(ability.landwalk).toEqual({ type: "land", notSupertype: "basic" });
+  });
+  it("on an Equipment, with a bonus", () => {
+    const [ability] = read(
+      "Artifact — Equipment",
+      "Equipped creature gets +2/+0 and has artifact landwalk. (It can't be blocked as long as defending player controls an artifact land.)\nEquip {2}",
+    ).static;
+    expect(ability.affects).toEqual({ scope: "attached" });
+    expect(ability.grantPt).toEqual([2, 0]);
+    expect(ability.landwalk).toEqual({ types: ["artifact", "land"] });
+  });
+  it("of the land type an Aura chose, any that exists", () => {
+    const card = read(
+      "Enchantment — Aura",
+      "Enchant creature\nAs this Aura enters, choose a land type.\nEnchanted creature has landwalk of the chosen type. (It can't be blocked as long as defending player controls a land of that type.)",
+    );
+    expect(card.chooseOnEnter).toContain("Urza's");
+    expect(card.chooseOnEnter).toHaveLength(17);
+    expect(card.static[0].landwalk).toBe("chosen-land-type");
+  });
+});

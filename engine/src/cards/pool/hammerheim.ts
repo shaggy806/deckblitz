@@ -1,8 +1,8 @@
 import { defineCard } from "../define.js";
 
-// EDHREC rank 9704. "All landwalk abilities" is every landwalk keyword the
-// engine has (rule 702.14 — the five basic types and Desert); no other kind
-// of landwalk exists in the pool.
+// EDHREC rank 9704. "All landwalk abilities" is every landwalk the engine has
+// (rule 702.14): the five basic types and Desert, and "landwalk" for the kinds
+// with no keyword of their own (nonbasic, artifact, a chosen Gate).
 
 export default defineCard({
   name: "Hammerheim",
@@ -24,7 +24,7 @@ export default defineCard({
       effect: {
         kind: "lose-keywords",
         target: 0,
-        keywords: ["plainswalk", "islandwalk", "swampwalk", "mountainwalk", "forestwalk", "desertwalk"],
+        keywords: ["plainswalk", "islandwalk", "swampwalk", "mountainwalk", "forestwalk", "desertwalk", "landwalk"],
         duration: "end-of-turn",
       },
       resolve: null,

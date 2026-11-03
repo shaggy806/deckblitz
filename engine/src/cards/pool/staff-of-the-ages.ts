@@ -15,8 +15,9 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      // Every landwalk the engine models (combat/eligibility.ts's LANDWALK).
-      blockableDespiteLandwalk: ["plainswalk", "islandwalk", "swampwalk", "mountainwalk", "forestwalk", "desertwalk"],
+      // Every landwalk: the keywords of subtypes.ts's LANDWALK, and "landwalk"
+      // for the kinds that have none (nonbasic, artifact, a chosen Gate).
+      blockableDespiteLandwalk: ["plainswalk", "islandwalk", "swampwalk", "mountainwalk", "forestwalk", "desertwalk", "landwalk"],
       text: "Creatures with landwalk abilities can be blocked as though they didn't have those abilities.",
     },
   ],

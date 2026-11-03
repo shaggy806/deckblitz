@@ -6701,3 +6701,13 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 - **Do:** Click Rubble Rouser and press its "Exile a card from your graveyard" ability. Choose Goblin Piker.
 - **Expect:** You're asked which card before any mana comes. Goblin Piker goes to exile and Grizzly Bears stays. {R} is in your pool at once, then an ability on the stack deals 1 damage to Bob when it resolves.
+
+### Traveler's Cloak: choose any land type, and the creature shows its landwalk
+
+- **Do:** Cast Traveler's Cloak on Grizzly Bears. Choose Gate. Hover the Bears' keyword icon.
+- **Expect:** The choice offers every land type, Urza's and Power-Plant among them. You draw a card. The Bears show one icon, reading "Landwalk". Choosing Island instead would show islandwalk's own icon.
+
+### Dryad Sophisticate: nonbasic landwalk shows, and gets past a nonbasic land
+
+- **Do:** Attack Bob with Dryad Sophisticate.
+- **Expect:** The Dryad shows a "Landwalk" icon. Bob, who controls Bazaar of Baghdad, can't block with his Grizzly Bears: he takes 2.

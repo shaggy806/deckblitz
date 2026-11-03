@@ -20,10 +20,11 @@
 import type { CardType, Keyword } from "../cards/define.js";
 import type { Color } from "../mana.js";
 import { combatDamageOf, computeCharacteristics, unblockedAssignmentOf, withComputedCache } from "../characteristics.js";
-import { LANDWALK, landTypesControlledBy } from "../combat/eligibility.js";
+import { landTypesControlledBy, landwalkStopsBlocksBy } from "../combat/eligibility.js";
 import type { CardRegistry } from "../cards.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
 import type { GameState } from "../state.js";
+import { LANDWALK } from "../subtypes.js";
 import { COMMANDER_DAMAGE_LETHAL } from "../view.js";
 
 /** A creature as combat arithmetic sees it. */
@@ -47,6 +48,12 @@ export interface CombatCreature {
   /** Land types its controller controls, which a landwalker attacking them
    * can't be blocked past (rule 702.14). */
   readonly controllerLands: ReadonlySet<string>;
+  /** Who controls it, and the players whose lands its landwalk of a kind no
+   * keyword names walks past (`Characteristics.landwalk`, rule 702.14c): a
+   * land filter isn't a word to look up in `controllerLands`, so it's asked
+   * here, only of a creature that has one. */
+  readonly controller: PlayerId;
+  readonly walkedPast?: ReadonlySet<PlayerId>;
   /** It may (or must) assign its combat damage as though it weren't blocked
    * (Thorn Elemental): a block stops none of it. */
   readonly assignsPastBlockers?: boolean;
@@ -102,6 +109,16 @@ function combatCreaturesUncached(
         combatDamageOf(c) > 0,
       isCommander: object.isCommander,
       controllerLands,
+      controller: player,
+      ...(c.landwalk.length > 0
+        ? {
+            walkedPast: new Set(
+              state.turnOrder.filter(
+                (other) => other !== player && landwalkStopsBlocksBy(state, registry, c.landwalk, other),
+              ),
+            ),
+          }
+        : {}),
       ...(unblockedAssignmentOf(state, registry, id) !== null ? { assignsPastBlockers: true } : {}),
     };
     const copies = Math.min(object.stackCount ?? 1, MAX_COPIES);
@@ -136,6 +153,7 @@ export function canBlock(blocker: CombatCreature, attacker: CombatCreature): boo
   for (const [keyword, landType] of LANDWALK) {
     if (a.has(keyword) && blocker.controllerLands.has(landType)) return false;
   }
+  if (attacker.walkedPast?.has(blocker.controller) === true) return false;
   return true;
 }
 

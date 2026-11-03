@@ -95,6 +95,9 @@ export const KEYWORD_GLYPH: Record<Keyword, string> = {
   mountainwalk: '', // ms-ability-mountainwalk
   forestwalk: '', // ms-ability-forestwalk
   desertwalk: '', // ms-ability-duels-unblockable
+  // The kinds with no keyword of their own (nonbasic, artifact, a chosen Gate):
+  // the same.
+  landwalk: '', // ms-ability-duels-unblockable
   // The sun and moon printed in a day/night card's own frame, which tell the
   // two faces apart; Arena's single daybound/nightbound icon doesn't.
   daybound: '', // ms-dfc-day

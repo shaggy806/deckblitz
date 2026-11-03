@@ -10098,4 +10098,15 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     'Rubble Rouser: choose the card to exile, then the mana and the damage',
     board({ you: { bf: ['Rubble Rouser'], gy: ['Grizzly Bears', 'Goblin Piker'] } }),
   ),
+  preset(
+    "Traveler's Cloak: choose any land type, and the creature shows its landwalk",
+    board({ you: { bf: ['Grizzly Bears', 'Island*3'], hand: ["Traveler's Cloak"] } }),
+  ),
+  preset(
+    'Dryad Sophisticate: nonbasic landwalk shows, and gets past a nonbasic land',
+    board({
+      you: { bf: ['Dryad Sophisticate'] },
+      opp: [{ bf: ['Bazaar of Baghdad', 'Grizzly Bears'] }],
+    }),
+  ),
 ]

@@ -23,7 +23,7 @@
  * changeling makes it just a Frog — Mistform Ultimus's ruling).
  */
 
-import type { CardType } from "./cards/define.js";
+import type { CardType, Keyword } from "./cards/define.js";
 import type { Color } from "./mana.js";
 import { CREATURE_TYPES } from "./creature-types.js";
 
@@ -56,6 +56,16 @@ export const LAND_TYPES: readonly string[] = [
   "Tower",
   "Town",
   "Urza's",
+];
+
+/** Each landwalk keyword and the land type it walks (rule 702.14). */
+export const LANDWALK: ReadonlyArray<readonly [Keyword, string]> = [
+  ["plainswalk", "Plains"],
+  ["islandwalk", "Island"],
+  ["swampwalk", "Swamp"],
+  ["mountainwalk", "Mountain"],
+  ["forestwalk", "Forest"],
+  ["desertwalk", "Desert"],
 ];
 
 /** The basic land types and the colour of the mana each one's intrinsic

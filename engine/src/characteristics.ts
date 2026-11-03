@@ -92,6 +92,7 @@ import {
   isBasicLandType,
   isCreatureType,
   isLandType,
+  LANDWALK,
   subtypeFitsTypes,
   subtypeKind,
 } from "./subtypes.js";
@@ -1496,6 +1497,11 @@ export interface Characteristics {
    * a filter — none lost to a later loss of banding or of "bands with
    * other" (Tolaria, Shelkin Brownie). Read by `combat/banding.ts`. */
   readonly bandsWithOther: readonly CardFilter[];
+  /** Each landwalk of a kind no named keyword covers (rule 702.14a), the
+   * land as a filter — "nonbasic landwalk", "artifact landwalk", "landwalk of
+   * the chosen type" (`StaticAbility.landwalk`), none lost to a later loss of
+   * landwalk. Read by `combat/eligibility.ts` as a block is declared. */
+  readonly landwalk: readonly CardFilter[];
 }
 
 /** Whether a "hexproof from" instance has to be judged alone rather than
@@ -4393,9 +4399,10 @@ interface AppliedEffect {
   readonly loseKeywords: readonly Keyword[];
   /** Keywords it forbids (`cantHaveKeywords`). */
   readonly cantHaveKeywords: readonly Keyword[];
-  /** When its `hexproofFrom` was given, against a loss of hexproof (rule
-   * 702.11e): `-Infinity` for the permanent's own. */
-  readonly hexproofFromAt: number;
+  /** When what it gives was given, against a loss of hexproof (a `hexproofFrom`
+   * — rule 702.11e) or of landwalk (rule 702.14): `-Infinity` for the
+   * permanent's own, which any such loss takes. */
+  readonly ownAt: number;
   /** Toxic N it grants (`grantToxic`), 0 for none. */
   readonly toxic: number;
   readonly restrictions: readonly CombatRestriction[];
@@ -4422,6 +4429,9 @@ interface AppliedEffect {
   readonly hexproofFrom: NonNullable<StaticAbility["hexproofFrom"]> | null;
   /** "Bands with other [quality]" it grants (rule 702.22b). */
   readonly bandsWithOther: CardFilter | null;
+  /** The landwalk it grants (rule 702.14), "the chosen type" read off its
+   * source; null while none was chosen. */
+  readonly landwalk: CardFilter | null;
   /** Layer 7b — a `setBasePt`. */
   readonly setBase: { readonly power?: number; readonly toughness?: number } | null;
 }
@@ -4496,6 +4506,33 @@ function staticsOf(registry: CardRegistry, name: string): StaticsInfo {
   return info as StaticsInfo;
 }
 
+const NO_LANDWALK = { keyword: null, land: null } as const;
+
+/**
+ * What a `StaticAbility.landwalk` gives: a land as a filter, or, when that's
+ * just a land type with a keyword of its own, that keyword. Landwalk of the
+ * chosen type with Island chosen *is* islandwalk (rule 702.14a): a Quagmire or
+ * Hammerheim names it, a "creature with islandwalk" sees it. Nothing while no
+ * type was chosen.
+ */
+function staticLandwalk(
+  ability: StaticAbility,
+  source: GameObject,
+): { readonly keyword: Keyword | null; readonly land: CardFilter | null } {
+  const spec = ability.landwalk;
+  if (spec === undefined) return NO_LANDWALK;
+  if (spec !== "chosen-land-type") {
+    // Only the land type alone: "snow swampwalk" isn't swampwalk.
+    const alone = Object.keys(spec).every((field) => field === "type" || field === "subtype");
+    const named = alone && spec.type === "land" ? LANDWALK.find(([, landType]) => landType === spec.subtype) : undefined;
+    return named !== undefined ? { keyword: named[0], land: null } : { keyword: null, land: spec };
+  }
+  const chosen = source.chosenOnEnter;
+  if (typeof chosen !== "string") return NO_LANDWALK;
+  const named = LANDWALK.find(([, landType]) => landType === chosen);
+  return named !== undefined ? { keyword: named[0], land: null } : { keyword: null, land: { type: "land", subtype: chosen } };
+}
+
 function contributesToCharacteristics(ability: StaticAbility): boolean {
   return (
     ability.grantPt !== undefined ||
@@ -4513,6 +4550,7 @@ function contributesToCharacteristics(ability: StaticAbility): boolean {
     ability.protection !== undefined ||
     ability.hexproofFrom !== undefined ||
     ability.bandsWithOther !== undefined ||
+    ability.landwalk !== undefined ||
     ability.setBasePt !== undefined ||
     ability.setBasePtFromAffectedCounters !== undefined
   );
@@ -4808,14 +4846,15 @@ function collectStaticEffects(
       scaledPower = n * per.pt[0];
       scaledToughness = n * per.pt[1];
     }
+    const walk = staticLandwalk(ability, source);
     return {
       timestamp,
       power: (ability.grantPt?.[0] ?? 0) + scaledPower,
       toughness: (ability.grantPt?.[1] ?? 0) + scaledToughness,
-      keywords: ability.grantKeywords ?? [],
+      keywords: walk.keyword !== null ? [...(ability.grantKeywords ?? []), walk.keyword] : (ability.grantKeywords ?? []),
       loseKeywords: ability.loseKeywords ?? [],
       cantHaveKeywords: ability.cantHaveKeywords ?? [],
-      hexproofFromAt: source.id === target.id && timestamp === source.timestamp ? -Infinity : timestamp,
+      ownAt: source.id === target.id && timestamp === source.timestamp ? -Infinity : timestamp,
       toxic: ability.grantToxic ?? 0,
       restrictions: ability.restrictions ?? [],
       combatDamageByToughness: ability.combatDamageByToughness,
@@ -4827,6 +4866,7 @@ function collectStaticEffects(
       protection: staticProtection(state, registry, ability, source),
       hexproofFrom: ability.hexproofFrom ?? null,
       bandsWithOther: ability.bandsWithOther ?? null,
+      landwalk: walk.land,
       setBase:
         ability.setBasePtFromAffectedCounters !== undefined
           ? {
@@ -4974,6 +5014,7 @@ function assertSameCharacteristics(
       hexFilters: c.hexproofFrom.filters.map((f) => JSON.stringify(f)).sort(),
       hexQualified: c.hexproofFrom.qualified.map((q) => JSON.stringify(q)).sort(),
       bandsWithOther: c.bandsWithOther.map((f) => JSON.stringify(f)).sort(),
+      landwalk: c.landwalk.map((f) => JSON.stringify(f)).sort(),
     });
   const a = show(cached);
   const b = show(fresh);
@@ -5054,6 +5095,7 @@ function computeCharacteristicsUncached(
   const hexFilters: CardFilter[] = [];
   const hexQualified: NonNullable<StaticAbility["hexproofFrom"]>[] = [];
   const bandsWithOther: CardFilter[] = [];
+  const landwalk: CardFilter[] = [];
   let byToughness: StaticAbility["combatDamageByToughness"];
   let assignsNoCombatDamage = false;
   let canAttackAsThoughNoDefender = false;
@@ -5116,7 +5158,7 @@ function computeCharacteristicsUncached(
     // A "can't be the target of …" that isn't the keyword (`notHexproof` —
     // Shanna, Sisay's Legacy) stays.
     const hexproofFromStays =
-      granted && (effect.hexproofFrom?.notHexproof === true || !lostAfter(losses, "hexproof", effect.hexproofFromAt));
+      granted && (effect.hexproofFrom?.notHexproof === true || !lostAfter(losses, "hexproof", effect.ownAt));
     if (effect.hexproofFrom && hexproofFromStays && isQualifiedHexproof(effect.hexproofFrom)) {
       hexQualified.push(effect.hexproofFrom);
     } else if (effect.hexproofFrom && hexproofFromStays) {
@@ -5133,6 +5175,11 @@ function computeCharacteristicsUncached(
       !lostAfter(losses, "banding", effect.timestamp)
     ) {
       bandsWithOther.push(effect.bandsWithOther);
+    }
+    // Landwalk goes with a later loss of it (rule 702.14; a creature's own, with
+    // any — Hammerheim).
+    if (effect.landwalk !== null && granted && !lostAfter(losses, "landwalk", effect.ownAt)) {
+      landwalk.push(effect.landwalk);
     }
   }
   // A spell's keywords from what grants them to spells (`grantsToSpells`).
@@ -5337,6 +5384,7 @@ function computeCharacteristicsUncached(
   if (keywords.has("decayed")) restrictions.add("cant-block");
   // What "bands with other" shows as, and what a loss of it names (702.22b).
   if (bandsWithOther.length > 0) keywords.add("bands-with-other");
+  if (landwalk.length > 0) keywords.add("landwalk");
   // Unleash's static half (rule 702.98a): "This permanent can't block as
   // long as it has a +1/+1 counter on it" — any +1/+1 counter, not only
   // the one unleash put there (the ruling).
@@ -5371,6 +5419,7 @@ function computeCharacteristicsUncached(
     },
     hexproofFrom: { colors: hexColors, types: hexTypes, filters: hexFilters, qualified: hexQualified },
     bandsWithOther,
+    landwalk,
   };
 }
 
