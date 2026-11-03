@@ -9668,8 +9668,8 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
   preset(
     'Rite of Replication: each copy of a Clone chooses what to copy',
     board({
-      you: { bf: ['Hulking Metamorph', 'Island*9'], hand: ['Rite of Replication'] },
-      opp: [{ bf: ['Hill Giant', 'Serra Angel'] }],
+      you: { bf: ['Hulking Metamorph', 'Hill Giant', 'Serra Angel', 'Island*9'], hand: ['Rite of Replication'] },
+      opp: [{ bf: ['Grizzly Bears'] }],
     }),
   ),
   preset(

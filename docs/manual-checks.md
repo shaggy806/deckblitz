@@ -6405,8 +6405,8 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 ### Rite of Replication: each copy of a Clone chooses what to copy
 
-- **Do:** Cast Rite of Replication, kicked, on your Hulking Metamorph. Choose Hill Giant for one token and Serra Angel for another, and whatever you like for the rest.
-- **Expect:** You're asked five times, and only creatures already on the battlefield can be picked, none of the new tokens. Each token is what you picked for it.
+- **Do:** Cast Rite of Replication, kicked, on your Hulking Metamorph. Pick your Hill Giant twice, your Serra Angel twice, and "Copy nothing" for the last.
+- **Expect:** You're asked five times, and only your own creatures already on the battlefield can be picked, none of the new tokens or Bob's Grizzly Bears. You end with two 7/7 artifact Hill Giants, two 7/7 artifact Serra Angels and one more Hulking Metamorph.
 
 ### Replication Technique: a copy of Pacifism asks what it enchants
 
