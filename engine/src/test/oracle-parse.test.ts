@@ -12304,6 +12304,43 @@ describe("oracle-parse: Suspend X and a suspend cost paid to cast", () => {
   });
 });
 
+describe("oracle-parse: one for each of several categories", () => {
+  const spell = (name: string, oracle_text: string) =>
+    parseFace({ name, mana_cost: "{1}", type_line: "Sorcery", oracle_text });
+
+  it("from your permanents, with the rest sacrificed", () => {
+    const cataclysm = spell(
+      "Cataclysm",
+      "Each player chooses from among the permanents they control an artifact, a creature, an enchantment, and a land, then sacrifices the rest.",
+    );
+    expect(cataclysm.todo).toEqual([]);
+    expect(cataclysm.effect).toMatchObject({ kind: "choose-one-of-each", slots: ["artifact", "creature", "enchantment", "land"], rest: "sacrifice" });
+    const ruin = spell("Global Ruin", "Each player chooses from the lands they control a land of each basic land type, then sacrifices the rest.");
+    expect(ruin.effect).toMatchObject({ kind: "choose-one-of-each", slots: "basic-land-types", filter: { type: "land" }, rest: "sacrifice" });
+  });
+
+  it("what's chosen returned, or destroyed from among everyone's", () => {
+    const overlay = spell("Planar Overlay", "Each player chooses a land they control of each basic land type. Return those lands to their owners' hands.");
+    expect(overlay.effect).toMatchObject({ kind: "choose-one-of-each", chosen: "return-to-hand" });
+    const titan = parseFace({
+      name: "Sundering Titan",
+      mana_cost: "{8}",
+      type_line: "Artifact Creature — Golem",
+      power: "7",
+      toughness: "10",
+      oracle_text: "When this creature enters or leaves the battlefield, choose a land of each basic land type, then destroy those lands.",
+    });
+    expect(titan.todo).toEqual([]);
+    expect(titan.triggered.map((t: { trigger: { on: string } }) => t.trigger.on)).toEqual(["enters-battlefield", "leaves-battlefield"]);
+    expect(titan.triggered[0].effect).toMatchObject({ kind: "choose-one-of-each", who: "you", anyController: true, chosen: "destroy" });
+  });
+
+  it("one card of each color from a revealed hand", () => {
+    const vapors = spell("Noxious Vapors", "Each player reveals their hand, chooses one card of each color from it, then discards all other nonland cards.");
+    expect(vapors.effect.effects[1]).toMatchObject({ kind: "choose-one-of-each", slots: "colors", fromHand: true, rest: { discard: { notTypes: ["land"] } } });
+  });
+});
+
 describe("oracle-parse: looks at a hand and at another's library", () => {
   it("a hand looked at before a card type chosen as it enters, and spells of that type taxed", () => {
     const card = parseFace({

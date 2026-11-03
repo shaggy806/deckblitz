@@ -4359,6 +4359,15 @@ Capricious Efreet needed no code: it's Wild Swing's random modal over chosen
 targets. Grip of Chaos is left: it also needs a trigger on anything going on the
 stack, `trigger:spell-or-ability-put-on-stack`.
 
+### One for each of several categories — built 2026-11-03
+
+`decision:choose-land-of-each-basic-type`, `decision:choose-one-of-each-type-sacrifice-rest`,
+`decision:keep-one-of-each-color-discard-rest`, `effect:choose-land-per-basic-type`: the
+`choose-one-of-each` effect, on the existing `choose-permanents` and `choose-from-zone`
+decisions with a new set rule, `"one-of-each"`. Proving cards: Cataclysm, Global Ruin, Planar
+Overlay, Sundering Titan, Noxious Vapors. Ajani, Nacatl Pariah keeps that second key but isn't
+this shape: its -4 is one permanent kept, and it needs its own read.
+
 ### Suspend X, and a suspend cost paid to cast — built 2026-11-03
 
 `mechanic:suspend-x`: `suspend: { n: "x", cost }`, the action's `xValue` at least 1

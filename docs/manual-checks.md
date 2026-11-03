@@ -6761,3 +6761,33 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 - **Do:** Tap The Face of Boe, then cast Ancestral Vision when asked, targeting yourself.
 - **Expect:** The prompt offers Ancestral Vision "for its suspend cost", and not Divination. Your Island taps and you draw three cards, with no time counters.
+
+### Global Ruin: a land of each basic land type, a dual standing for both
+
+- **Do:** Cast Global Ruin. Click Tundra and Swamp on your board, and press Confirm.
+- **Expect:** The banner lists "still to choose: Plains, Island, Swamp" and shortens as you click; Confirm stays off until it's empty. Tundra and Swamp stay; Plains, Island, Ghost Quarter and the Wastes are sacrificed.
+
+### Global Ruin: each player chooses in turn, at four players
+
+- **Do:** Cast Global Ruin. Click one Plains and press Confirm.
+- **Expect:** Your other Plains and Wastes go, and each bot is left with one of its two lands, all in one go after the last bot has chosen.
+
+### Cataclysm: an artifact creature as your artifact, your creature or both
+
+- **Do:** Cast Cataclysm. Click Ornithopter, Grizzly Bears, Glorious Anthem and a Plains, and press Confirm.
+- **Expect:** All four stay: Ornithopter is your artifact and Grizzly Bears your creature. Savannah Lions, Jace Beleren and your other Plains are sacrificed.
+
+### Planar Overlay: the lands chosen go back to hand
+
+- **Do:** Cast Planar Overlay. Click one Island and one Plains, and press Confirm.
+- **Expect:** Those two return to your hand, with one land of Bob's returning to his. Your other lands stay.
+
+### Sundering Titan: choosing from every player's lands
+
+- **Do:** Cast Sundering Titan. Click one of Bob's Islands and Bob's Plains, and press Confirm.
+- **Expect:** Your Plains and all Bob's lands can be clicked. The two chosen are destroyed together, and your Plains stays.
+
+### Noxious Vapors: one card of each color from your hand
+
+- **Do:** Cast Noxious Vapors. In the popup, click Shock and Grizzly Bears, and confirm.
+- **Expect:** The popup offers Lightning Bolt, Shock and Grizzly Bears alone, and clicking Lightning Bolt then Shock swaps one for the other. Lightning Bolt and Ornithopter are discarded; Shock, Grizzly Bears and Forest stay in your hand.

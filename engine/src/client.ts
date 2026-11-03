@@ -38,7 +38,7 @@ export { COMMANDER_BANNED, PINNED_ART, TOKEN_NAMES } from "./cards/generated-ind
 export { attackCompanyViolations, attackingViolations } from "./combat/attacking.js";
 export { blockCompanyViolations, blockingViolations } from "./combat/blocking.js";
 export { damageAssignmentViolations, defaultAssignment, standardAssignment } from "./combat/damage.js";
-export { fitsTogether } from "./zone-choice-together.js";
+export { fitsSoFar, fitsTogether, slotsLeft } from "./zone-choice-together.js";
 export { stackCopyKey } from "./stack-copies.js";
 export type { StackCopyFields } from "./stack-copies.js";
 export { defaultTapPicks, tapPicksPower, waterbendAt } from "./actions.js";

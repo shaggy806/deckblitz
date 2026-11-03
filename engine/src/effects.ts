@@ -8613,6 +8613,46 @@ export type EffectSpec =
     }
   | {
       /**
+       * One for each of several categories, no target: "each player chooses
+       * from among the permanents they control an artifact, a creature, an
+       * enchantment, and a land, then sacrifices the rest" (Cataclysm), "a land
+       * of each basic land type" (Global Ruin, Planar Overlay, Sundering
+       * Titan), "one card of each color" from a hand (Noxious Vapors).
+       *
+       * Each player in `who`, in turn order from the active player and knowing
+       * the choices before theirs, chooses one for each slot they have a
+       * candidate for; a slot with none is skipped, one with a candidate must
+       * be filled. One card may stand for several slots, or several for one
+       * apiece (the cards' rulings, `"one-of-each"` in
+       * `zone-choice-together.ts`). Then, once every player has chosen and all
+       * at once: `chosen` happens to what was chosen, and `rest` to what wasn't.
+       * `filter` is what can be chosen and, for `rest: "sacrifice"`, what's
+       * sacrificed, so a permanent of no slot goes too (a Cloudpost, a
+       * planeswalker for Cataclysm).
+       */
+      readonly kind: "choose-one-of-each";
+      readonly who: PlayerScope;
+      /** The categories: card types, or a word for the basic land types (in
+       * Plains, Island, Swamp, Mountain, Forest order) or the five colors. */
+      readonly slots: "basic-land-types" | "colors" | readonly CardType[];
+      readonly filter: CardFilter;
+      /** Chosen from the player's hand (already revealed, a `reveal-hand` going
+       * before it). By default from among the permanents they control. */
+      readonly fromHand?: true;
+      /** "Choose a land of each basic land type" with no "you control"
+       * (Sundering Titan): among every player's, read from the chooser's side. */
+      readonly anyController?: true;
+      readonly prompt: string;
+      readonly chosen?: "destroy" | "return-to-hand";
+      /** `{ discard }`: each player discards the cards in their hand matching
+       * this that weren't chosen ("all other nonland cards"). */
+      readonly rest?: "sacrifice" | { readonly discard: CardFilter };
+      /** Set only by the engine: the players still to choose, and what those
+       * before them chose. */
+      readonly progress?: { readonly toAsk: readonly PlayerId[]; readonly kept: readonly ObjectId[] };
+    }
+  | {
+      /**
        * "Each player chooses any number of creatures they control with total
        * power 4 or less, then sacrifices all other creatures they control"
        * (Slaughter the Strong): each player in `who`, in turn order from the
@@ -10826,6 +10866,13 @@ export interface EffectApi {
    * it asked; otherwise what's kept — all of them, when there's no choice —
    * is waiting for `takeKept`. */
   askKeep(player: PlayerId, filter: CardFilter, keep: number, upTo: boolean): boolean;
+  /** `choose-one-of-each`'s choice, with `askKeep`'s answer: `true` when it
+   * asked; otherwise what's chosen, when only one answer is legal, is waiting
+   * for `takeKept`. */
+  askOneOfEach(player: PlayerId, spec: Extract<EffectSpec, { kind: "choose-one-of-each" }>): boolean;
+  /** Each kept permanent as one object and its stint, a token stack kept in
+   * part having those members peeled off: what `amongObjects` asks. */
+  separateKept(kept: readonly ObjectId[]): readonly { readonly object: ObjectId; readonly stint: number }[];
   /** What the last `askKeepTotalPower` answer kept, taken (and cleared). */
   takeKept(): readonly ObjectId[];
   /** See the `"keep-total-power"` {@link EffectSpec}: each of `players`
@@ -17846,6 +17893,39 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         kept = [...kept, ...ctx.takeKept()];
       }
       ctx.sacrificeAllExcept(players, spec.filter, kept);
+      return;
+    }
+    case "choose-one-of-each": {
+      // One player at a time, as `sacrifice-all-but` asks; what follows waits
+      // for them all, and it all happens at once.
+      const below = ctx.parkedCount();
+      const players = ctx.playersInScope(spec.who);
+      let toAsk = spec.progress?.toAsk ?? ctx.apnap(players);
+      let kept = [...(spec.progress?.kept ?? []), ...ctx.takeKept()];
+      while (toAsk.length > 0) {
+        const player = toAsk[0];
+        toAsk = toAsk.slice(1);
+        if (ctx.askOneOfEach(player, spec)) {
+          ctx.resumeAfterDecisions({ ...spec, progress: { toAsk, kept } }, below);
+          return;
+        }
+        kept = [...kept, ...ctx.takeKept()];
+      }
+      if (spec.rest === "sacrifice") {
+        ctx.sacrificeAllExcept(players, spec.filter, kept);
+      } else if (spec.rest !== undefined) {
+        const spared = ctx.separateKept(kept);
+        for (const player of ctx.apnap(players)) {
+          ctx.discardHand(player, { ...spec.rest.discard, not: { amongObjects: spared } }, false);
+        }
+      }
+      if (spec.chosen !== undefined && kept.length > 0) {
+        const filter = { amongObjects: ctx.separateKept(kept) };
+        applyEffectSpec(
+          spec.chosen === "destroy" ? { kind: "destroy-all", filter } : { kind: "return-to-hand-all", filter },
+          ctx,
+        );
+      }
       return;
     }
     case "keep-total-power": {

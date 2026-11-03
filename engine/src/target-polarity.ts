@@ -838,6 +838,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     if (typeof n.who === "object" && "target" in n.who) v.touch(n.who.target, "harm", MAJOR);
   },
   "keep-total-power": none,
+  "choose-one-of-each": none,
   // Separating a targeted player's permanents (Liliana of the Veil) takes
   // from them; a targeted separator or chooser (Fortune's Favor's opponent)
   // is only asked.

@@ -10175,4 +10175,48 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     'The Face of Boe: a spell with suspend, for its suspend cost',
     board({ you: { bf: ['The Face of Boe', 'Island'], hand: ['Ancestral Vision', 'Divination'] } }),
   ),
+  preset(
+    'Global Ruin: a land of each basic land type, a dual standing for both',
+    board({
+      you: { bf: ['Tundra', 'Plains', 'Island', 'Swamp', 'Ghost Quarter', 'Wastes*5'], hand: ['Global Ruin'] },
+      opp: [{ bf: ['Forest*2', 'Mountain'] }],
+    }),
+  ),
+  preset(
+    'Global Ruin: each player chooses in turn, at four players',
+    board({
+      you: { bf: ['Plains*2', 'Wastes*5'], hand: ['Global Ruin'] },
+      opp: [{ bf: ['Forest*2'] }, { bf: ['Swamp*2'] }, { bf: ['Mountain*2'] }],
+    }),
+  ),
+  preset(
+    'Cataclysm: an artifact creature as your artifact, your creature or both',
+    board({
+      you: {
+        bf: ['Ornithopter', 'Grizzly Bears', 'Savannah Lions', 'Glorious Anthem', 'Plains*4', 'Jace Beleren'],
+        hand: ['Cataclysm'],
+      },
+      opp: [{ bf: ['Hill Giant', 'Mountain'] }],
+    }),
+  ),
+  preset(
+    'Planar Overlay: the lands chosen go back to hand',
+    board({
+      you: { bf: ['Island*3', 'Plains*2'], hand: ['Planar Overlay'] },
+      opp: [{ bf: ['Swamp*2'] }],
+    }),
+  ),
+  preset(
+    "Sundering Titan: choosing from every player's lands",
+    board({
+      you: { bf: ['Plains', 'Wastes*8'], hand: ['Sundering Titan'] },
+      opp: [{ bf: ['Plains', 'Island', 'Island'] }],
+    }),
+  ),
+  preset(
+    'Noxious Vapors: one card of each color from your hand',
+    board({
+      you: { bf: ['Swamp*3'], hand: ['Noxious Vapors', 'Lightning Bolt', 'Shock', 'Grizzly Bears', 'Ornithopter', 'Forest'] },
+    }),
+  ),
 ]

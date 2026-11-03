@@ -25,7 +25,9 @@ import {
   damageAssignmentViolations,
   describeTargetSpec,
   distinctTargetCount,
+  fitsSoFar,
   fitsTogether,
+  slotsLeft,
   groupBounds,
   groupPowerExceeded,
   isOptionalSpec,
@@ -3285,7 +3287,9 @@ function Table({
           // Under a set rule ("with different powers"), a click swaps out
           // whichever pick it can't sit beside.
           const together = choosePermanentsAction.together
-          const kept = together ? cur.filter((x) => fitsTogether(together, [x, id])) : cur
+          let kept = together ? cur.filter((x) => fitsSoFar(together, [x, id])) : cur
+          // One of each: the oldest pick gives way to one that can't join them all.
+          if (together) while (kept.length > 0 && !fitsSoFar(together, [...kept, id])) kept = kept.slice(1)
           return kept.length >= choosePermanentsAction.max ? [...kept.slice(1), id] : [...kept, id]
         })
         return
@@ -5355,6 +5359,12 @@ function Table({
     const totalPower =
       maxTotalPower === undefined ? 0 : permanentPicks.reduce((n, id) => n + (powers?.[id] ?? 0), 0)
     const overCap = maxTotalPower !== undefined && totalPower > maxTotalPower
+    // One of each: what's still wanted, by name, since which is which can't be
+    // seen on the board.
+    const pickTogether = choosePermanentsAction.together
+    const oneOfEach = pickTogether?.rule === 'one-of-each' ? pickTogether : undefined
+    const stillWanted = oneOfEach === undefined ? [] : slotsLeft(oneOfEach, permanentPicks)
+    const breaksTogether = pickTogether !== undefined && !fitsTogether(pickTogether, permanentPicks)
     controls = (
       <div className="controls">
         <span>
@@ -5362,7 +5372,11 @@ function Table({
           {choosePermanentsAction.prompt} —{' '}
           {maxTotalPower !== undefined
             ? `total power ${totalPower}/${maxTotalPower}`
-            : `${permanentPicks.length}/${max} chosen`}
+            : oneOfEach !== undefined
+              ? stillWanted.length > 0
+                ? `still to choose: ${stillWanted.join(', ')}`
+                : `${permanentPicks.length} chosen`
+              : `${permanentPicks.length}/${max} chosen`}
         </span>
         <button
           type="button"
@@ -5373,7 +5387,7 @@ function Table({
         </button>
         <button
           type="button"
-          disabled={permanentPicks.length < min || permanentPicks.length > max || overCap}
+          disabled={permanentPicks.length < min || permanentPicks.length > max || overCap || breaksTogether}
           onClick={() =>
             game.dispatch({ type: 'choose-permanents', player: seat, permanents: [...permanentPicks] })
           }
@@ -7467,7 +7481,10 @@ function Table({
             ...(zoneChoiceAction.together
               ? {
                   fits: (picked: readonly ObjectId[]) => fitsTogether(zoneChoiceAction.together!, picked),
-                  swaps: zoneChoiceAction.together.rule === 'distinct',
+                  swaps: zoneChoiceAction.together.rule === 'distinct' || zoneChoiceAction.together.rule === 'one-of-each',
+                  ...(zoneChoiceAction.together.rule === 'one-of-each'
+                    ? { sits: (picked: readonly ObjectId[]) => fitsSoFar(zoneChoiceAction.together!, picked) }
+                    : {}),
                 }
               : {}),
             ...((zoneChoiceAction.destination === 'library-top' || zoneChoiceAction.destination === 'library-bottom') &&

@@ -277,7 +277,7 @@ import type {
   GraveyardKeywordGrant,
   ZoneChoiceSplitCase,
 } from "./effects.js";
-import { EVERY_CARD_TYPE, largestOneEach, type ZoneChoiceTogether } from "./zone-choice-together.js";
+import { EVERY_CARD_TYPE, largestOneEach, oneOfEachSlots, type ZoneChoiceTogether } from "./zone-choice-together.js";
 import {
   aggregateMatches,
   aggregateOver,
@@ -32452,6 +32452,84 @@ export class Game {
         };
         return true;
       },
+      askOneOfEach: (player, spec) => {
+        if (this.state.players[player]?.hasLost !== false) return false;
+        const candidates =
+          spec.fromHand === true
+            ? this.state.zones.perPlayer[player].hand.filter((id) =>
+                matchesFilter(this.state, this.registry, id, spec.filter, { you: player }),
+              )
+            : this.battlefieldMatching(player, spec.filter).filter(
+                (id) => spec.anyController === true || this.state.objects[id]?.controller === player,
+              );
+        const tags: Record<string, readonly string[]> = {};
+        for (const id of candidates) {
+          const slots = this.oneOfEachSlotsOf(id, spec.slots);
+          if (slots.length > 0) tags[id] = slots;
+        }
+        const eligible = candidates.filter((id) => tags[id] !== undefined);
+        if (eligible.length === 0) return false;
+        const together: ZoneChoiceTogether = { rule: "one-of-each", tags, text: spec.prompt };
+        // Only one answer: each slot has one candidate, and a stack can't give
+        // two of itself. "If the only land of a certain type is one you
+        // control, you must choose it" (Sundering Titan's ruling).
+        const slots = oneOfEachSlots(together);
+        const unique = slots.every((slot) => eligible.filter((id) => tags[id].includes(slot)).length === 1);
+        if (unique && eligible.every((id) => (this.state.objects[id]?.stackCount ?? 1) === 1 || tags[id].length === 1)) {
+          this.state.keptByChoice = [...(this.state.keptByChoice ?? []), ...eligible];
+          return false;
+        }
+        // A stack of artifact creature tokens can fill both of its slots.
+        const units = eligible.flatMap((id) =>
+          Array<ObjectId>(Math.min(this.state.objects[id]?.stackCount ?? 1, tags[id].length)).fill(id),
+        );
+        const max = largestOneEach(together, units);
+        if (spec.fromHand === true) {
+          this.state.awaiting = {
+            kind: "choose-from-zone",
+            player,
+            ids: [...eligible],
+            eligible: [...eligible],
+            min: 1,
+            max,
+            destination: "stay",
+            leftover: "stay",
+            prompt: spec.prompt,
+            keepChoice: true,
+            together,
+          };
+          return true;
+        }
+        this.state.awaiting = {
+          kind: "choose-permanents",
+          player,
+          eligible,
+          min: 1,
+          max,
+          prompt: spec.prompt,
+          then: { kind: "sequence", effects: [] },
+          source,
+          x,
+          keepChoice: true,
+          together,
+        };
+        return true;
+      },
+      separateKept: (kept) => {
+        const counts = new Map<ObjectId, number>();
+        for (const id of kept) counts.set(id, (counts.get(id) ?? 0) + 1);
+        const out: { object: ObjectId; stint: number }[] = [];
+        const add = (id: ObjectId): void => {
+          out.push({ object: id, stint: this.state.objects[id]?.zoneChangeCount ?? 0 });
+        };
+        for (const [id, n] of counts) {
+          const object = this.state.objects[id];
+          if (object === undefined) continue;
+          if (object.zone !== "battlefield" || n >= (object.stackCount ?? 1)) add(id);
+          else for (let i = 0; i < n; i += 1) add(this.splitOneFromStack(id));
+        }
+        return out;
+      },
       askChoosePermanentsKept: (filter, max, prompt, side) => {
         if (this.state.players[controller]?.hasLost !== false) return false;
         // Untargeted (rule 608.2d): whatever matches now, a hexproof one too.
@@ -41500,6 +41578,32 @@ export class Game {
    * resolves. Nothing is asked when nothing matches; with fewer than `min`
    * to choose from, all of them are the only answer, and still asked.
    */
+  /** The slots of a `choose-one-of-each` that `id` can fill, as it is now. */
+  private oneOfEachSlotsOf(id: ObjectId, slots: "basic-land-types" | "colors" | readonly CardType[]): readonly string[] {
+    const object = this.state.objects[id];
+    if (object === undefined) return [];
+    if (slots === "basic-land-types") {
+      const subtypes = effectiveSubtypes(this.state, this.registry, object);
+      return (["Plains", "Island", "Swamp", "Mountain", "Forest"] as const).filter((type) => hasSubtype(subtypes, type));
+    }
+    if (slots === "colors") {
+      const colors = effectiveColors(this.state, this.registry, object);
+      return (
+        [
+          ["W", "white"],
+          ["U", "blue"],
+          ["B", "black"],
+          ["R", "red"],
+          ["G", "green"],
+        ] as const
+      )
+        .filter(([color]) => colors.has(color))
+        .map(([, word]) => word);
+    }
+    const types = effectiveTypes(this.state, this.registry, object);
+    return slots.filter((type) => types.includes(type));
+  }
+
   private beginChoosePermanents(
     source: ObjectId,
     player: PlayerId,

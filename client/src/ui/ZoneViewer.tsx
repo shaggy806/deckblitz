@@ -70,6 +70,9 @@ export interface ZoneViewerProps {
     /** The rule is pairwise ("with different powers"): a click takes the pick
      * off whatever it can't sit beside. */
     readonly swaps?: boolean
+    /** The rule is met only by the whole set ("one card of each color"), so
+     * this says whether picks can still become it; `fits` waits for the set. */
+    readonly sits?: (picked: readonly ObjectId[]) => boolean
     /** The answer isn't a card at all, only informed by these (a hand looked
      * at before a card type is chosen — Arachne, Psionic Weaver): a button per
      * answer in the footer, in place of Confirm. */
@@ -134,7 +137,12 @@ export function ZoneViewer({
     setPicked((cur) => {
       if (cur.includes(id)) return cur.filter((x) => x !== id)
       // "With different powers": a click swaps out the pick it can't sit beside.
-      const kept = selection.swaps === true ? cur.filter((x) => selection.fits?.([x, id]) ?? true) : cur
+      const sits = selection.sits ?? selection.fits
+      let kept = selection.swaps === true ? cur.filter((x) => sits?.([x, id]) ?? true) : cur
+      // One of each: the oldest pick gives way to one that can't join them all.
+      if (selection.sits !== undefined) {
+        while (kept.length > 0 && !selection.sits([...kept, id])) kept = kept.slice(1)
+      }
       if (kept.length >= selection.max) return cur
       return [...kept, id]
     })

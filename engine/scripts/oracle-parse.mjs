@@ -1704,6 +1704,10 @@ export function parseTrigger(clause) {
   const c = clause.replace(/\s+/g, " ").trim();
   let m;
   const self = (on) => [{ on, who: "self" }];
+  // Two triggers, as Aven Riftwatcher's and Sundering Titan's are written.
+  if (/^When (?:this creature|~) enters or leaves the battlefield$/.test(c)) {
+    return [...self("enters-battlefield"), ...self("leaves-battlefield")];
+  }
   // Once per tapping at the same time (`batched`), however many of them.
   if ((m = /^Whenever one or more (creatures|nontoken [A-Z][a-z]+|[A-Z][a-z]+) you control become tapped$/.exec(c))) {
     const filter =
@@ -6740,6 +6744,58 @@ function becomesWithAbilitiesOf(text) {
   };
 }
 
+/** Each line a `choose-one-of-each` is the whole of, with its prompt. */
+const ONE_OF_EACH_EFFECTS = {
+  "Each player chooses from among the permanents they control an artifact, a creature, an enchantment, and a land, then sacrifices the rest.": {
+    kind: "choose-one-of-each",
+    who: "each-player",
+    slots: ["artifact", "creature", "enchantment", "land"],
+    filter: {},
+    rest: "sacrifice",
+    prompt: "Choose an artifact, a creature, an enchantment, and a land to keep — the rest are sacrificed",
+  },
+  "Each player chooses from the lands they control a land of each basic land type, then sacrifices the rest.": {
+    kind: "choose-one-of-each",
+    who: "each-player",
+    slots: "basic-land-types",
+    filter: { type: "land" },
+    rest: "sacrifice",
+    prompt: "Choose a land of each basic land type to keep — the other lands are sacrificed",
+  },
+  "Each player chooses a land they control of each basic land type. Return those lands to their owners' hands.": {
+    kind: "choose-one-of-each",
+    who: "each-player",
+    slots: "basic-land-types",
+    filter: { type: "land" },
+    chosen: "return-to-hand",
+    prompt: "Choose a land of each basic land type to return to its owner's hand",
+  },
+  "Choose a land of each basic land type, then destroy those lands.": {
+    kind: "choose-one-of-each",
+    who: "you",
+    slots: "basic-land-types",
+    filter: { type: "land" },
+    anyController: true,
+    chosen: "destroy",
+    prompt: "Choose a land of each basic land type to destroy",
+  },
+  "Each player reveals their hand, chooses one card of each color from it, then discards all other nonland cards.": {
+    kind: "sequence",
+    effects: [
+      { kind: "reveal-hand", who: "each-player" },
+      {
+        kind: "choose-one-of-each",
+        who: "each-player",
+        slots: "colors",
+        filter: {},
+        fromHand: true,
+        rest: { discard: { notTypes: ["land"] } },
+        prompt: "Choose one card of each color — your other nonland cards are discarded",
+      },
+    ],
+  },
+};
+
 export function parseEffect(text, outer) {
   // Each target a sentence names takes the next slot of the ability's list.
   const ctx = { ...outer, target: (spec) => outer.targets.push(spec) - 1 };
@@ -6755,6 +6811,9 @@ export function parseEffect(text, outer) {
   if (text === "You may cast a spell with suspend from your hand. If you do, pay its suspend cost rather than its mana cost.") {
     return { effect: { kind: "cast-now", from: "hand", spell: { hasSuspend: true }, suspendCost: true }, todo: [], hints: [] };
   }
+  // One for each of several categories (`choose-one-of-each`).
+  const oneOfEach = ONE_OF_EACH_EFFECTS[text.charAt(0).toUpperCase() + text.slice(1)];
+  if (oneOfEach !== undefined) return { effect: oneOfEach, todo: [], hints: [] };
 
   // A copy for each permanent the spell could target (rule 707.10d): Zada's,
   // Ink-Treader Nephilim's own, Mirrorwing Dragon's and Precursor Golem's made

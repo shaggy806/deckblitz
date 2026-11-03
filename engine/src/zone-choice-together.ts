@@ -26,6 +26,12 @@
  *   more — Winter, Cynical Opportunist's "any number of cards … with four or
  *   more card types among them", a card's tags its card types. With
  *   `orNone`, choosing nothing passes too.
+ * - `"one-of-each"`: one chosen for each slot any eligible card can fill, and
+ *   a card may stand for several ("a land of each basic land type": Global
+ *   Ruin's ruling, a dual for both or either). So every slot with a candidate
+ *   is covered, and every chosen card is the one chosen for some slot of its
+ *   own — two Forests can't both be the Forest. `fitsSoFar` is the second half
+ *   alone, for a set still being built.
  *
  * The tags are worked out as the decision is raised, so checking a set is
  * pure and needs neither the registry nor the layer fold: the validator
@@ -37,9 +43,9 @@
 import type { ObjectId } from "./primitives.js";
 
 export interface ZoneChoiceTogether {
-  readonly rule: "share" | "one-each" | "total" | "distinct" | "variety";
+  readonly rule: "share" | "one-each" | "total" | "distinct" | "variety" | "one-of-each";
   /** Each eligible card's tags: its land types (`share`), or the slots it
-   * could fill (`one-each`). */
+   * could fill (`one-each`, `one-of-each`). */
   readonly tags: Readonly<Record<string, readonly string[]>>;
   /** What a client tells the chooser — "that share a land type", "a Forest
    * card and a Plains card". */
@@ -99,13 +105,34 @@ export function togetherViolation(
   chosen: readonly ObjectId[],
 ): string | null {
   if (fitsTogether(together, chosen)) return null;
+  if (together.rule === "one-of-each") return `the choice must be one for each of: ${oneOfEachSlots(together).join(", ")}`;
   if (together.rule === "total" || together.rule === "variety") return `the chosen cards must have ${together.text}`;
   return `the chosen cards must be ${together.rule === "share" || together.rule === "distinct" ? "cards " : ""}${together.text}`;
+}
+
+/** `"one-of-each"`: the slots some eligible card can fill, each to be covered. */
+export function oneOfEachSlots(together: ZoneChoiceTogether): string[] {
+  return [...new Set(Object.values(together.tags).flat())];
+}
+
+/** `"one-of-each"`: the slots `chosen` doesn't cover yet. */
+export function slotsLeft(together: ZoneChoiceTogether, chosen: readonly ObjectId[]): string[] {
+  const covered = new Set(chosen.flatMap((id) => together.tags[id] ?? []));
+  return oneOfEachSlots(together).filter((slot) => !covered.has(slot));
+}
+
+/** Whether `chosen` can still grow into an answer: under `"one-of-each"`, that
+ * each is the one chosen for a slot of its own, covered or not; under any other
+ * rule, that it obeys the rule. */
+export function fitsSoFar(together: ZoneChoiceTogether, chosen: readonly ObjectId[]): boolean {
+  if (together.rule !== "one-of-each") return fitsTogether(together, chosen);
+  return fitsTogether({ ...together, rule: "one-each" }, chosen);
 }
 
 /** Whether `chosen` obeys `together`. */
 export function fitsTogether(together: ZoneChoiceTogether, chosen: readonly ObjectId[]): boolean {
   const tagsOf = (id: ObjectId): readonly string[] => together.tags[id] ?? [];
+  if (together.rule === "one-of-each") return fitsSoFar(together, chosen) && slotsLeft(together, chosen).length === 0;
   if (together.rule === "total") {
     if (chosen.length === 0) return together.orNone === true;
     const total = totalOf(together, chosen);
@@ -161,6 +188,22 @@ export function completeTogether(
   min: number,
   max: number,
 ): ObjectId[] {
+  // One for each slot: the preferred cards that still fit, then the first card
+  // for each slot left. A slot left is free in any matching, so that card fits.
+  if (together.rule === "one-of-each") {
+    const kept: ObjectId[] = [];
+    // Named twice is a stack's two tokens (`stackSizes`).
+    for (const id of preferred) {
+      if (eligible.includes(id) && fitsSoFar(together, [...kept, id])) kept.push(id);
+    }
+    for (const slot of slotsLeft(together, kept)) {
+      if (slotsLeft(together, kept).includes(slot)) {
+        const card = eligible.find((id) => (together.tags[id] ?? []).includes(slot));
+        if (card !== undefined) kept.push(card);
+      }
+    }
+    return kept;
+  }
   // A sum to reach: the preferred cards first, then the rest in order, until
   // it is reached — nothing at all for a "you may" the chooser declined.
   // A cap to stay under: the preferred cards that still fit, in order, then

@@ -26,7 +26,7 @@
 import type { Action, LegalAction } from "../actions.js";
 import { computeCharacteristics } from "../characteristics.js";
 import type { ObjectId } from "../primitives.js";
-import { completeTogether, fitsTogether, togetherViolation, type ZoneChoiceTogether } from "../zone-choice-together.js";
+import { completeTogether, fitsSoFar, togetherViolation, type ZoneChoiceTogether } from "../zone-choice-together.js";
 import type { DecisionReadCtx } from "./contract.js";
 import { defineDecision } from "./define.js";
 import { subsetOf, withinCopies } from "./shared/picks.js";
@@ -40,6 +40,15 @@ function stackSizes(
   together?: ZoneChoiceTogether,
 ): Record<ObjectId, number> {
   const copies: Record<ObjectId, number> = {};
+  // "An artifact, a creature…": a stack of artifact creature tokens can give
+  // one for each slot its tokens fill.
+  if (together?.rule === "one-of-each") {
+    for (const id of eligible) {
+      const n = Math.min(ctx.state.objects[id]?.stackCount ?? 1, (together.tags[id] ?? []).length);
+      if (n > 1) copies[id] = n;
+    }
+    return copies;
+  }
   if (together !== undefined) return copies;
   for (const id of eligible) {
     const n = ctx.state.objects[id]?.stackCount ?? 1;
@@ -146,11 +155,14 @@ export const choosePermanents = defineDecision({
       const fold = (list: readonly ObjectId[]): ObjectId[] => {
         const kept: ObjectId[] = [];
         for (const id of list) {
-          if (kept.length < legal.max && fitsTogether(together, [...kept, id])) kept.push(id);
+          if (kept.length < legal.max && fitsSoFar(together, [...kept, id])) kept.push(id);
         }
         return completeTogether(together, kept, legal.eligible, legal.min, legal.max);
       };
       const answers = [fold(mine), fold([]), fold([...mine].reverse()), fold(ordered)];
+      // "Choose a land of each basic land type, then destroy those lands"
+      // (Sundering Titan): theirs wherever there's one of the type.
+      if (together.rule === "one-of-each") answers.push(fold(ordered.filter((id) => helpers.controllerOf(id) !== player)));
       const seen = new Set<string>();
       return answers
         .filter((picked) => {

@@ -2,6 +2,10 @@
  "generated": "2026-09-22",
  "source": "Per-commander triage of every unimplemented top-commanders.txt entry (AI agents reading Oracle text + rulings against the engine), normalized onto one feature vocabulary. See neededCards-features.md, 'The commander gap'.",
  "built": [
+  "decision:choose-land-of-each-basic-type",
+  "decision:choose-one-of-each-type-sacrifice-rest",
+  "decision:keep-one-of-each-color-discard-rest",
+  "effect:choose-land-per-basic-type",
   "mechanic:suspend-x",
   "effect:cast-paying-suspend-cost",
   "trigger:becomes-tapped-batch",
