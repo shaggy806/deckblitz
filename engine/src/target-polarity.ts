@@ -421,6 +421,11 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
       const back = n.effect.kind === "put-onto-battlefield" || n.effect.kind === "return-to-hand";
       if (back) v.touch(at.leaves, "help", MAJOR);
     }
+    // Watching a target ("whenever target creature deals damage this turn, you
+    // gain that much life") does nothing to it: whose to watch is the board's call.
+    if (typeof at === "object" && "watching" in at && at.watching !== undefined) {
+      v.touch(at.watching === "targets" ? EVERY_SLOT : at.watching, "either", MINOR);
+    }
     v.child(n.effect);
   },
   "enters-with-counters": (n, v) => v.touch(n.target, "help", MINOR),
