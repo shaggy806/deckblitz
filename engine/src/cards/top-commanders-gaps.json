@@ -1466,7 +1466,11 @@
   "effect:look-at-target-player-library",
   "effect:protection-choice-and-dynamic",
   "effect:protection-from-each-color-overload",
-  "keyword:hexproof-from-abilities"
+  "keyword:hexproof-from-abilities",
+  "keyword:hexproof-from-abilities",
+  "effect:tokens-created-with-source",
+  "static:token-pt-from-source-counters",
+  "static:token-pt-from-creator-counters"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

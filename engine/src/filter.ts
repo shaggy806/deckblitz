@@ -1158,6 +1158,19 @@ export interface CardFilter {
   /** `triggerBatch` bound — written by `bindDynamicCompares`, never authored. */
   readonly amongObjects?: readonly { readonly object: ObjectId; readonly stint: number }[];
   /**
+   * "Tokens **created with this**" (`GameObject.createdWith`): the effect's
+   * source, in the stint the resolving ability refers to, so a permanent that
+   * left and came back is a new object with none of the old one's tokens (rule
+   * 400.7), and two of a card each mean their own (Arcane Artisan's and Faerie
+   * Artisans's rulings). An effect's filter only: `bindDynamicCompares` binds it
+   * to `createdWith`, in a `delayed-trigger`'s effect as that's created, since
+   * "exile all tokens created with it at the beginning of the next end step"
+   * means the permanent that left. Unbound it matches nothing.
+   */
+  readonly createdWithSource?: true;
+  /** `createdWithSource` bound — written by `bindDynamicCompares`, never authored. */
+  readonly createdWith?: { readonly source: ObjectId; readonly stint: number };
+  /**
    * At least one of these filters must match, as well as every other clause
    * here — the "or" a flat clause list can't say: historic ("artifact,
    * legendary, or Saga"), "enchanted or equipped", "black and/or red".
@@ -1775,6 +1788,11 @@ export function matchesFilter(
     return false;
   }
   if (filter.triggerBatch !== undefined) return false;
+  if (filter.createdWithSource !== undefined) return false;
+  if (filter.createdWith !== undefined) {
+    const link = live?.createdWith;
+    if (link?.source !== filter.createdWith.source || link.zoneChangeCount !== filter.createdWith.stint) return false;
+  }
   if (filter.amongObjects !== undefined) {
     const stint = live !== undefined ? (live.zoneChangeCount ?? 0) : lki!.zoneChangeCount;
     if (!filter.amongObjects.some((one) => one.object === id && one.stint === stint)) return false;

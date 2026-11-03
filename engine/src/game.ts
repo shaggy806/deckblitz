@@ -427,6 +427,7 @@ import type {
   MulliganHandState,
   TurnHistory,
   EnteringTokenCopies,
+  TokenLink,
   PendingEntry,
   PendingTrigger,
   PhasedOutStatus,
@@ -1901,6 +1902,9 @@ export class Game {
    * with (rule 701.53a) — read by `enteringReplacementOf` for that token
    * only. Not game state: it spans the one `createTokens` call. */
   private incubating: number | null = null;
+  /** What the tokens being minted are created with (`GameObject.createdWith`).
+   * Not game state: it spans one effect's minting. */
+  private mintingLink: TokenLink | null = null;
   /** The `permanent-entered-battlefield` events of the entry under way,
    * held back until all of its permanents are on the battlefield — see
    * {@link withEnterBatch}. `null` outside one. */
@@ -29646,6 +29650,14 @@ export class Game {
       const now = this.state.objects[target.object];
       return now?.zone === "hand" && (now.zoneChangeCount ?? 0) === entry.zoneChangeCount ? undefined : entry;
     };
+    // "Tokens created with it" (`GameObject.createdWith`): this source, in the
+    // stint the resolving ability refers to, though it may have left since
+    // (Arcane Artisan's ruling). A spell's has none.
+    const tokenLinkToSource = (): TokenLink | null => {
+      const object = this.state.objects[source];
+      const stint = refs.source ?? (object?.zone === "battlefield" ? (object.zoneChangeCount ?? 0) : undefined);
+      return stint === undefined ? null : { source, zoneChangeCount: stint };
+    };
     const departedSource = (): LastKnownInfo | undefined =>
       refs.source === undefined ? undefined : this.lastKnownOfStint(source, refs.source);
     // What the source chose as it entered, in the stint this refers to: as it
@@ -33492,14 +33504,16 @@ export class Game {
       turnFaceDown: (target, as) => {
         if (target.kind === "object") this.turnFaceDown(target.object, as);
       },
-      createToken: (token, count, who, tapped, sacrificeAtEndStep, gainUntilEndOfTurn, goadedForGame, thenCounters, basePt, attacking, separate, exileAtEndStep, attacksThisCombat, gainKeywords, attachTo) => {
+      sourceStintNow: () => tokenLinkToSource()?.zoneChangeCount,
+      createToken: (token, count, who, tapped, sacrificeAtEndStep, gainUntilEndOfTurn, goadedForGame, thenCounters, basePt, attacking, separate, exileAtEndStep, attacksThisCombat, gainKeywords, attachTo, linkedToSource) => {
+        const link = linkedToSource === true ? tokenLinkToSource() : null;
         // "The tokens are goaded for the rest of the game": by this effect's
         // controller, whoever creates them (Rendmaw, Creaking Nest).
         const goadedBy = goadedForGame === true ? controller : undefined;
         // "…then put X +1/+1 counters on it": this effect's controller puts
         // them on each token it made (Zaxara, the Exemplary).
         const make = (p: PlayerId): void => {
-          const made = this.createTokens(
+          const made = this.withTokenLink(link, () => this.createTokens(
             p,
             token,
             count,
@@ -33513,7 +33527,7 @@ export class Game {
             attacksThisCombat === true,
             gainKeywords,
             attachTo,
-          );
+          ));
           // "Sacrifice / exile them at the beginning of the next end step":
           // a delayed triggered ability over these tokens (rule 603.7).
           if (sacrificeAtEndStep === true || exileAtEndStep === true) {
@@ -33607,11 +33621,16 @@ export class Game {
       // "a copy of that creature" of one that died — copies it as it last
       // existed there (rule 608.2h): its source, triggering object or a
       // target, by stint.
-      createTokenCopy: (of, count, opts) =>
+      createTokenCopy: (of, count, { linkedToSource, ...opts }) =>
         this.createTokenCopy(
           of,
           count,
-          { ...opts, source, effectController: controller },
+          {
+            ...opts,
+            source,
+            effectController: controller,
+            ...((link) => (link !== null ? { createdWith: link } : {}))(linkedToSource === true ? tokenLinkToSource() : null),
+          },
           opts.asCard === true
             ? undefined
             : of === source
@@ -37008,6 +37027,8 @@ export class Game {
       /** The effect making them, for a delayed trigger it sets up. */
       source?: ObjectId;
       effectController?: PlayerId;
+      /** What they're created with — see `GameObject.createdWith`. */
+      createdWith?: TokenLink;
     },
     /** `ofId` as it last existed where the effect refers to it, when it has
      * left there since: its copiable values are read off this (rule
@@ -37107,6 +37128,7 @@ export class Game {
       ...(opts.attacking !== undefined ? { attacking: opts.attacking } : {}),
       ...(opts.source !== undefined ? { source: opts.source } : {}),
       ...(opts.effectController !== undefined ? { effectController: opts.effectController } : {}),
+      ...(opts.createdWith !== undefined ? { createdWith: opts.createdWith } : {}),
     };
     if (this.heldTokenCopies !== null) this.heldTokenCopies.push(planned);
     else this.carryOutTokenCopies([planned]);
@@ -37143,7 +37165,7 @@ export class Game {
    * 400.11c) while its "as this enters" choices wait on it. `moveObject` takes
    * it from there, keeping what it was made as. */
   private mintEnteringToken(planned: PlannedTokenCopies): ObjectId {
-    const id = this.mintFreshTokenObject(
+    const id = this.withTokenLink(planned.createdWith, () => this.mintFreshTokenObject(
       planned.controller,
       planned.copyName,
       planned.copyName,
@@ -37153,7 +37175,7 @@ export class Game {
       true,
       false,
       planned.sacrificeAtEndStep,
-    );
+    ));
     const token = this.state.objects[id];
     token.zone = "outside";
     // What minting it applied is applied again as it enters, answers and all.
@@ -37217,7 +37239,7 @@ export class Game {
           this.emit({ type: "permanent-entered-battlefield", object: id });
           entered.push(id);
         }
-        return [...entered, ...this.mintReplacedTokenCopies(group)];
+        return [...entered, ...this.withTokenLink(group.createdWith, () => this.mintReplacedTokenCopies(group))];
       }),
     );
     entry.groups.forEach((group, i) => this.finishTokenCopies(group, made[i]));
@@ -37226,7 +37248,7 @@ export class Game {
   /** Mint token copies with nothing to settle as they enter: at once, as a
    * stack where they can be one. */
   private mintTokenCopies(planned: PlannedTokenCopies): void {
-    const made = this.withEnterBatch(() => [
+    const made = this.withTokenLink(planned.createdWith, () => this.withEnterBatch(() => [
       ...this.mintTokenBatch(
         planned.controller,
         planned.copyName,
@@ -37242,7 +37264,7 @@ export class Game {
         planned.exileAtEndStep || planned.sacrificeAtEndStep,
       ),
       ...this.mintReplacedTokenCopies(planned),
-    ]);
+    ]));
     this.finishTokenCopies(planned, made);
   }
 
@@ -37462,6 +37484,17 @@ export class Game {
    * as `total` separate ordinary objects, as is a batch made `separate`.
    * Returns the objects it made: one per token, or the stack it made them
    * into (or grew). */
+  /** Run `mint` with every token it makes created with `link`. */
+  private withTokenLink<T>(link: TokenLink | null | undefined, mint: () => T): T {
+    const before = this.mintingLink;
+    this.mintingLink = link ?? null;
+    try {
+      return mint();
+    } finally {
+      this.mintingLink = before;
+    }
+  }
+
   private mintTokenBatch(
     controller: PlayerId,
     cardName: string,
@@ -37520,8 +37553,12 @@ export class Game {
     // Tokens that enter *tapped* are never stacked: `findMergeableStack` has
     // no notion of tapped-ness, so they'd fold into an untapped stack and come
     // out untapped. Thirteen real objects (Army of the Damned) is well inside
-    // what the battlefield handles.
-    if (separate || tapped || !this.isStackableTokenName(printedName)) return mintIndividually();
+    // what the battlefield handles. Nor are tokens linked to their source:
+    // "then exile all other tokens created with this" tells them from the
+    // older ones by object.
+    if (separate || tapped || this.mintingLink !== null || !this.isStackableTokenName(printedName)) {
+      return mintIndividually();
+    }
     const repId = this.mintFreshTokenObject(
       controller,
       cardName,
@@ -37623,6 +37660,7 @@ export class Game {
       modifiers: modifiers.map((m) => ({ ...m })),
       timestamp: 0,
       isToken: true,
+      ...(this.mintingLink !== null ? { createdWith: this.mintingLink } : {}),
       ...(sacrificeAtEndStep ? { sacrificeAtEndStep: true } : {}),
       attachedTo: null,
       isCommander: false,

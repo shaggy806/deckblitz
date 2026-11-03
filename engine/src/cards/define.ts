@@ -612,6 +612,13 @@ export type CountSpec =
    * are each equal to the number of lore counters on it" (Myth Realized, a
    * granted one). Only a `setBasePtFromCount` knows which permanent that is. */
   | { readonly countersOnThis: string }
+  /** How many counters of a kind are on the permanent this token was created
+   * with, in the stint that made it (`GameObject.createdWith`) — "this token's
+   * power and toughness are each equal to the number of fade counters on
+   * Saproling Burst". None once that permanent has left, and none for a copy of
+   * the token, which wasn't created with it. Only a `setBasePtFromCount` knows
+   * which token that is. */
+  | { readonly countersOnMaker: string }
   | "cards-in-all-graveyards"
   /** How many cards are in its controller's hand (Psychosis Crawler) — its
    * owner's, off the battlefield. */

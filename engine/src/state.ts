@@ -1339,6 +1339,18 @@ export interface GameObject {
    */
   linkedExile?: readonly { readonly object: ObjectId; readonly zoneChangeCount: number }[];
   /**
+   * The permanent this token was created with, in the battlefield stint that
+   * created it (rule 400.7) — "exile all tokens created with it" (Arcane
+   * Artisan), "each token knows which Saproling Burst it came from" (its
+   * ruling). Set only by an effect that says so (`create-token`'s and
+   * `create-token-copy`'s `linkedToSource`), on every token that effect makes,
+   * a Doubling Season's extra ones and a replacement's Angels too. A token split
+   * off a stack keeps it; a copy of the token doesn't have it (Arcane Artisan's
+   * ruling). Read by the filter clause `createdWithSource` and the count
+   * `countersOnMaker`.
+   */
+  createdWith?: TokenLink;
+  /**
    * The cards encoded on this permanent (rule 702.99b — cipher), each with
    * the exile stint it was encoded in. One still exiled in that stint gives
    * it the cipher trigger (`Game.effectiveTriggeredEntries`), whoever
@@ -4972,8 +4984,16 @@ export type PendingEntry =
  * nothing in the game can see or affect them), then enter under `controller`.
  * The rest is what the effect still has to do with them.
  */
+/** A token's link to the permanent that made it: `GameObject.createdWith`. */
+export interface TokenLink {
+  readonly source: ObjectId;
+  readonly zoneChangeCount: number;
+}
+
 export interface EnteringTokenCopies {
   readonly tokens: readonly ObjectId[];
+  /** What they're created with — see `GameObject.createdWith`. */
+  readonly createdWith?: TokenLink;
   readonly controller: PlayerId;
   /** What a would-create-token replacement made instead of some of them
    * (Divine Visitation's Angels), with what the effect does to those. */
@@ -6690,6 +6710,7 @@ export function tokenFoldKey(o: GameObject): string {
     o.secretChoice ?? null,
     o.chosenPermanent ?? null,
     o.linkedExile ?? null,
+    o.createdWith ?? null,
     o.counters,
     o.counterTimestamps ?? null,
     o.modifiers,

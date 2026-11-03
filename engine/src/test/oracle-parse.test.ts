@@ -11926,6 +11926,53 @@ describe("the greatest power among creatures on the battlefield", () => {
   });
 });
 
+describe("tokens created with this", () => {
+  const read = (type_line: string, oracle_text: string) =>
+    parseFace({ name: "Card", type_line, oracle_text }, { tokenFor: (d: string) => d });
+  it("reads the sweep, and links what the card creates", () => {
+    const card = read(
+      "Creature",
+      "{T}: Create a 1/1 green Saproling creature token.\nWhen this creature leaves the battlefield, exile all tokens created with it.",
+    );
+    expect(card.todo).toEqual([]);
+    expect(card.activated[0].effect.linkedToSource).toBe(true);
+    expect(card.triggered[0].effect).toEqual({
+      kind: "exile-all",
+      filter: { token: true, createdWithSource: true },
+    });
+  });
+  it("says 'other' and 'destroy', with no regeneration", () => {
+    const other = read("Creature", "When this creature enters, exile all other tokens created with this creature.");
+    expect(other.triggered[0].effect).toEqual({
+      kind: "exile-all",
+      filter: { token: true, createdWithSource: true, notThisWay: "created" },
+    });
+    const card = read(
+      "Enchantment",
+      "When this enchantment leaves the battlefield, destroy all tokens created with this enchantment. They can't be regenerated.",
+    );
+    expect(card.todo).toEqual([]);
+    expect(card.triggered[0].effect).toEqual({
+      kind: "destroy-all",
+      filter: { token: true, createdWithSource: true },
+      cantBeRegenerated: true,
+    });
+  });
+  it("waits for the next end step, as a delayed trigger", () => {
+    const card = read(
+      "Creature",
+      "When this creature leaves the battlefield, exile all tokens created with it at the beginning of the next end step.",
+    );
+    expect(card.todo).toEqual([]);
+    expect(card.triggered[0].effect.kind).toBe("delayed-trigger");
+    expect(card.triggered[0].effect.at).toBe("next-end-step");
+  });
+  it("links nothing on a card that never says so", () => {
+    const card = read("Creature", "{T}: Create a 1/1 green Saproling creature token.");
+    expect(card.activated[0].effect.linkedToSource).toBeUndefined();
+  });
+});
+
 describe("landwalk of a kind no keyword names", () => {
   const read = (type_line: string, oracle_text: string) =>
     parseFace({ name: "Card", type_line, oracle_text, mana_cost: "{2}", colors: [], cmc: 2 } as never, { tokenFor: (d: string) => d }) as unknown as {

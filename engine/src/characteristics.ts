@@ -3629,6 +3629,12 @@ function basePtCount(
   const of = from.countOf;
   if (of === "chosen-number") return chosenNumberOf(object);
   if (typeof of === "object" && "countersOnThis" in of) return object.counters[of.countersOnThis] ?? 0;
+  if (typeof of === "object" && "countersOnMaker" in of) {
+    const link = object.createdWith;
+    const maker = link === undefined ? undefined : state.objects[link.source];
+    if (maker?.zone !== "battlefield" || (maker.zoneChangeCount ?? 0) !== link?.zoneChangeCount) return 0;
+    return maker.counters[of.countersOnMaker] ?? 0;
+  }
   const side = countSide(state, object, from.forChosenPlayer);
   return side === undefined ? 0 : countValue(of, state, registry, side);
 }
@@ -3696,7 +3702,7 @@ export function countValue(
       return state.players[controller]?.counters[spec.playerCounters] ?? 0;
     }
     // Which permanent's is only known to a `setBasePtFromCount`.
-    if ("countersOnThis" in spec) return 0;
+    if ("countersOnThis" in spec || "countersOnMaker" in spec) return 0;
     if ("greatestManaValueOf" in spec) {
       let best = 0;
       for (const id of state.zones.shared.battlefield) {

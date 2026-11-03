@@ -3894,6 +3894,25 @@ export function parseSentence(sentence, ctx) {
   if (/^destroy all other permanents except for lands and tokens\.$/i.test(s)) {
     return { kind: "destroy-all", filter: { notTypes: ["land"], token: false }, exceptSource: true };
   }
+  // "Exile all tokens created with it", "destroy all tokens created with this
+  // enchantment", "exile all other tokens created with this creature" (Faerie
+  // Artisans). `parseFace` links what the card creates (`linkedToSource`).
+  if ((m = re(`(destroy|exile) all (other )?tokens created with (?:~|it)`).exec(s))) {
+    return {
+      kind: m[1].toLowerCase() === "destroy" ? "destroy-all" : "exile-all",
+      filter: { token: true, createdWithSource: true, ...(m[2] !== undefined ? { notThisWay: "created" } : {}) },
+    };
+  }
+  // "… at the beginning of the next end step" (Arcane Artisan): the stint meant
+  // is the one that made them, bound as this delayed trigger is created.
+  if ((m = re(`exile all tokens created with (?:~|it) at the beginning of the next end step`).exec(s))) {
+    return {
+      kind: "delayed-trigger",
+      at: "next-end-step",
+      effect: { kind: "exile-all", filter: { token: true, createdWithSource: true } },
+      text: "Exile all tokens created with it.",
+    };
+  }
   if ((m = re(`destroy all (?:other (.+)|(.+) (?:other than|except for) ~)`).exec(s))) {
     const yours = /^(.+) you control$/i.exec(m[1] ?? m[2]);
     const phrase = yours?.[1] ?? m[1] ?? m[2];
@@ -10017,7 +10036,21 @@ const OPENING_REVEAL_AFTER = new RegExp(
   `^You may reveal (?:~|this card) from your opening hand\\. If you do, (.+) at the beginning of (${OPENING_REVEAL_WHEN})\\.$`,
 );
 
+/** `value` with every token-making effect marked as remembering its source —
+ * what a card that goes on to say "tokens created with this" needs of them. */
+function linkCreatedTokens(value) {
+  if (value === null || typeof value !== "object") return value;
+  if (Array.isArray(value)) return value.map(linkCreatedTokens);
+  const walked = Object.fromEntries(Object.entries(value).map(([k, v]) => [k, linkCreatedTokens(v)]));
+  return value.kind === "create-token" || value.kind === "create-token-copy" ? { ...walked, linkedToSource: true } : walked;
+}
+
 export function parseFace(face, ctx = {}) {
+  const out = parseFaceAsWritten(face, ctx);
+  return /\btokens created with\b/i.test(face.oracle_text ?? "") ? linkCreatedTokens(out) : out;
+}
+
+function parseFaceAsWritten(face, ctx = {}) {
   const out = { keywords: [], activated: [], triggered: [], static: [], todo: [] };
   const lines = (face.oracle_text ?? "").split("\n").filter(Boolean);
   const isSpell = /\b(Instant|Sorcery)\b/.test(face.type_line ?? "");

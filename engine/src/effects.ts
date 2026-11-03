@@ -7311,6 +7311,11 @@ export type EffectSpec =
        * destroy all **other** creatures" (`notThisWay: "created"`), where a
        * stack of Soldiers the new ones joined would be spared with them. */
       readonly separate?: boolean;
+      /** The tokens remember this effect's source, for text that goes on to
+       * speak of "tokens created with this" — see `GameObject.createdWith` and
+       * the filter clause `createdWithSource`. Each is made its own object, so
+       * an effect can tell them from older ones. */
+      readonly linkedToSource?: true;
       /** "That token gains haste until end of turn and **attacks this combat
        * if able**" (Legion Warboss): a requirement on the tokens made (rule
        * 508.1d) that ends with this combat (rule 500.5a), not the turn — a
@@ -7636,8 +7641,11 @@ export type EffectSpec =
       /** Who the token enters under. Default is the *copied* permanent's own
        * controller (Miirym copying your own Dragons); `"you"` puts it under
        * the effect's controller instead, which is what a card that copies
-       * something an opponent controls means (Hate Mirage). */
-      readonly who?: "you";
+       * something an opponent controls means (Hate Mirage). A
+       * {@link ChosenPlayerRef} is one player, "**that player** creates a token
+       * that's a copy of that card" (Arcane Artisan); nobody, and none is made,
+       * if that target has gone. */
+      readonly who?: "you" | ChosenPlayerRef;
       /** Override the copies' base power/toughness, as part of their copiable
        * values (rule 707.9b), so counters and anthems still apply: "except
        * it's 1/1", or Saw in Half's "except their power is half that
@@ -7653,6 +7661,9 @@ export type EffectSpec =
        * one it just exiled — "not of the creature as it last existed on the
        * battlefield" (its ruling). */
       readonly asCard?: boolean;
+      /** The tokens remember this effect's source — `create-token`'s
+       * `linkedToSource`. */
+      readonly linkedToSource?: true;
     }
   | {
       /** Attach an Aura or Equipment to a target permanent: the source (an
@@ -11372,7 +11383,13 @@ export interface EffectApi {
     /** Each new token is created attached to this permanent — see the
      * effect's `attachedTo`; `null` for nothing there (none is created). */
     attachTo?: ObjectId | null,
+    /** The new tokens remember this effect's source (`GameObject.createdWith`). */
+    linkedToSource?: boolean,
   ): void;
+  /** Which stint on the battlefield the resolving ability means by its source
+   * (rule 607.2a): the one it came from, though the source may have left since;
+   * none for a spell's. `createdWithSource` binds to it. */
+  sourceStintNow(): number | undefined;
   /** Create `count` token(s) that are copies of the permanent `of` — see the
    * `"create-token-copy"` {@link EffectSpec}. */
   createTokenCopy(
@@ -11402,6 +11419,8 @@ export interface EffectApi {
       exileAtEndOfCombat?: boolean;
       sacrificeAtEndOfCombat?: boolean;
       atYourNextEndStep?: boolean;
+      /** The tokens remember this effect's source (`GameObject.createdWith`). */
+      linkedToSource?: boolean;
     },
   ): void;
   /** True if `condition` holds from the effect source's controller's
@@ -13647,11 +13666,30 @@ function containsDynamicCompare(value: unknown): boolean {
       "sharesColorWithTarget" in value ||
       "attachedToTarget" in value ||
       "triggerBatch" in value ||
+      "createdWithSource" in value ||
+      ((value as Record<string, unknown>)["kind"] === "delayed-trigger" &&
+        mentionsCreatedWithSource((value as Record<string, unknown>)["effect"])) ||
       Object.entries(value).some(
         ([key, v]) => !NESTED_EFFECT_KEYS.has(key) && containsDynamicCompare(v),
       );
   dynamicCompareMemo.set(value, found);
   return found;
+}
+
+/** Does this delayed ability's effect speak of "tokens created with this"? */
+function mentionsCreatedWithSource(value: unknown): boolean {
+  if (value === null || typeof value !== "object") return false;
+  if (Array.isArray(value)) return value.some(mentionsCreatedWithSource);
+  return "createdWithSource" in value || Object.values(value).some(mentionsCreatedWithSource);
+}
+
+/** `value` with each `createdWithSource` written as the `createdWith` it means. */
+function bindCreatedWithSource(value: unknown, link: NonNullable<CardFilter["createdWith"]>): unknown {
+  if (value === null || typeof value !== "object") return value;
+  if (Array.isArray(value)) return value.map((v) => bindCreatedWithSource(v, link));
+  const { createdWithSource, ...rest } = value as Record<string, unknown>;
+  const walked = Object.fromEntries(Object.entries(rest).map(([k, v]) => [k, bindCreatedWithSource(v, link)]));
+  return createdWithSource === undefined ? walked : { ...walked, createdWith: link };
 }
 
 /** The permanent types (rule 110.4) — `sharesPermanentTypeWith`'s. */
@@ -13716,6 +13754,12 @@ function bindBlockPartners<T>(value: T, ctx: ResolutionContext): T {
 
 export function bindDynamicCompares(spec: EffectSpec, ctx: ResolutionContext): EffectSpec {
   if (!containsDynamicCompare(spec)) return spec;
+  // "Tokens created with this": this source, in the stint this resolution
+  // refers to. Nothing has the stint -1, as a spell has no stint to refer to.
+  const createdWithThis = (): NonNullable<CardFilter["createdWith"]> => ({
+    source: ctx.source,
+    stint: ctx.sourceStintNow() ?? -1,
+  });
   const walk = (value: unknown): unknown => {
     if (value === null || typeof value !== "object") return value;
     if (Array.isArray(value)) return value.map(walk);
@@ -13723,6 +13767,12 @@ export function bindDynamicCompares(spec: EffectSpec, ctx: ResolutionContext): E
     if (isAmountCompare(record)) {
       const operand = record["n"] as { readonly amount: EffectAmount };
       return { ...record, n: amountValue(operand.amount, ctx) };
+    }
+    // A delayed ability binds as it resolves, when its source may be a new
+    // object: "exile all tokens created with it at the beginning of the next
+    // end step" means the permanent that has just left (rule 400.7).
+    if (record["kind"] === "delayed-trigger" && mentionsCreatedWithSource(record["effect"])) {
+      return walk({ ...record, effect: bindCreatedWithSource(record["effect"], createdWithThis()) });
     }
     // A reflexive ability's targets are bound here, in the creating
     // resolution, but they're its own (rule 603.12): `{ triggerValue: true }`
@@ -13795,6 +13845,10 @@ export function bindDynamicCompares(spec: EffectSpec, ctx: ResolutionContext): E
       const { triggerBatch: _batch, ...rest } = walked;
       const amongObjects = (ctx.triggerBatch ?? []).map(({ object, zoneChangeCount }) => ({ object, stint: zoneChangeCount }));
       walked = { ...rest, amongObjects };
+    }
+    if (walked["createdWithSource"] === true) {
+      const { createdWithSource: _created, ...rest } = walked;
+      walked = { ...rest, createdWith: createdWithThis() };
     }
     // "Each creature that crewed it this turn" (rule 702.122c), likewise.
     if (walked["crewedSource"] === true) {
@@ -17050,6 +17104,8 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
               spec.exileAtEndStep === true,
               spec.attacksThisCombat === true,
               spec.gainKeywords,
+              undefined,
+              spec.linkedToSource === true,
             );
         }
         return;
@@ -17080,6 +17136,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           : illegalSlot(spec.attachedTo, ctx)
             ? null
             : ((host) => (host?.kind === "object" ? host.object : null))(resolveEffectTarget(spec.attachedTo, ctx)),
+        spec.linkedToSource === true,
       );
       return;
     case "vote":
@@ -17203,13 +17260,16 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         spec.of === "exiled-as-cost" ||
         spec.of === "exiled-this-way" ||
         (typeof spec.of === "object" && "eachExiled" in spec.of);
+      const named = typeof spec.who === "object" ? effectPlayer(spec.who, ctx) : undefined;
+      if (typeof spec.who === "object" && named === undefined) return;
       const copy = (of: ObjectId, count: number): void =>
         ctx.createTokenCopy(of, count, {
           gainsHaste: spec.gainsHaste ?? false,
           sacrificeAtEndStep: spec.sacrificeAtEndStep ?? false,
           exileAtEndStep: spec.exileAtEndStep ?? false,
           notLegendary: spec.notLegendary ?? false,
-          under: spec.who === "you" || ofCards ? ctx.controller : undefined,
+          under: named ?? (spec.who === "you" || ofCards ? ctx.controller : undefined),
+          ...(spec.linkedToSource === true ? { linkedToSource: true } : {}),
           ...(spec.basePt
             ? { basePt: [ptSetValue(spec.basePt[0], ctx), ptSetValue(spec.basePt[1], ctx)] as const }
             : {}),
