@@ -6668,6 +6668,7 @@ export class Game {
       targets: ResolvedTargets;
       x: number;
       prompt?: string;
+      sentinel?: string;
       secret?: true;
       remember?: { readonly stint: number; readonly as: "player" | "creature-type" };
     },
@@ -6748,7 +6749,9 @@ export class Game {
               ...awaiting.then,
               choice: { option: Math.max(0, CREATURE_TYPES.indexOf(creatureType)), text: creatureType },
             }
-          : substituteChosenCreatureType(awaiting.then, creatureType);
+          : awaiting.sentinel !== undefined
+            ? substituteChosen(awaiting.then, awaiting.sentinel, creatureType)
+            : substituteChosenCreatureType(awaiting.then, creatureType);
       applyEffectSpec(
         then,
         this.makeResolutionContext(
@@ -30742,7 +30745,7 @@ export class Game {
             source,
             controller,
             fixed.options.filter((t) => !(exclude ?? []).includes(t)),
-            { then, targets, x, ...(fixed.prompt !== undefined ? { prompt: fixed.prompt } : {}), ...kept },
+            { then, targets, x, ...(fixed.prompt !== undefined ? { prompt: fixed.prompt } : {}), ...(fixed.sentinel !== undefined ? { sentinel: fixed.sentinel } : {}), ...kept },
             false,
           );
         } else {

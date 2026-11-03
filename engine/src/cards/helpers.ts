@@ -14,10 +14,10 @@ import { defineCard, type CardDefinition, type Keyword, type StaticAbility, type
 /** The placeholder for "the chosen creature type" inside a
  * `choose-creature-type` effect's `then` — re-exported here because card files
  * import only from `define` and `helpers`. */
-export { CHOSEN_CREATURE_TYPE } from "../effects.js";
+export { CHOSEN_CREATURE_TYPE, FIRST_CHOSEN_TYPE } from "../effects.js";
 /** "Choose a basic land type": the five, for a `chooseOnEnter` or a
  * `choose-creature-type`'s `options`. */
-export { BASIC_LAND_TYPE_CHOICES } from "../subtypes.js";
+export { BASIC_LAND_TYPE_CHOICES, LAND_TYPES } from "../subtypes.js";
 
 /**
  * "Search your graveyard, hand, **and/or** library for …" (Boonweaver Giant,

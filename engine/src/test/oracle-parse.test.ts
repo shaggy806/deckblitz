@@ -11136,6 +11136,37 @@ describe("any number of … with different names or powers", () => {
     });
   });
 
+  it("reads a mass change of types that leaves P/T alone", () => {
+    const spell = (oracle_text: string) =>
+      parseFace({ name: "Spell", type_line: "Instant", oracle_text }).effect;
+    expect(spell("Vehicles you control become artifact creatures until end of turn.")).toEqual({
+      kind: "for-each-permanent",
+      filter: { subtype: "Vehicle", controlledBy: "you" },
+      simultaneous: true,
+      effect: { kind: "add-types", target: 0, addTypes: ["artifact", "creature"], duration: "end-of-turn" },
+    });
+    expect(spell("Lands you control gain all basic land types until end of turn.")).toMatchObject({
+      kind: "for-each-permanent",
+      filter: { type: "land", controlledBy: "you" },
+      effect: { kind: "add-types", addSubtypes: ["Plains", "Island", "Swamp", "Mountain", "Forest"] },
+    });
+    expect(spell("Until end of turn, creatures you control get +2/+0 and gain all creature types.")).toMatchObject({
+      kind: "sequence",
+      effects: [
+        { kind: "modify-pt-all", power: 2, toughness: 0 },
+        { kind: "for-each-permanent", effect: { kind: "add-types", addSubtypes: ["(every creature type)"] } },
+      ],
+    });
+    expect(spell("Choose a basic land type. Each land you control becomes that type until end of turn.")).toMatchObject({
+      kind: "choose-creature-type",
+      then: {
+        kind: "for-each-permanent",
+        filter: { type: "land", controlledBy: "you" },
+        effect: { kind: "add-types", setSubtypes: ["$chosen"] },
+      },
+    });
+  });
+
   it("reads a static making a planeswalker a creature, keeping its types only where it says so", () => {
     const planeswalker = (oracle_text: string) =>
       parseFace({ name: "Bob", type_line: "Legendary Planeswalker — Bob", oracle_text }).static[0];

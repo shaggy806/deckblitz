@@ -4645,6 +4645,45 @@ export function parseSentence(sentence, ctx) {
       duration: "end-of-turn",
     };
   }
+  // A mass change of types, P/T left alone: `add-types` over a
+  // `for-each-permanent`. "Become artifact creatures" keeps every type (rule
+  // 205.1b), and the Vehicle's printed P/T.
+  if (re("vehicles you control become artifact creatures until end of turn").test(s)) {
+    return {
+      kind: "for-each-permanent",
+      filter: { subtype: "Vehicle", controlledBy: "you" },
+      simultaneous: true,
+      effect: { kind: "add-types", target: 0, addTypes: ["artifact", "creature"], duration: "end-of-turn" },
+    };
+  }
+  if (re("lands you control gain all basic land types until end of turn").test(s)) {
+    return {
+      kind: "for-each-permanent",
+      filter: { type: "land", controlledBy: "you" },
+      simultaneous: true,
+      effect: {
+        kind: "add-types",
+        target: 0,
+        addSubtypes: ["Plains", "Island", "Swamp", "Mountain", "Forest"],
+        duration: "end-of-turn",
+      },
+    };
+  }
+  if ((m = re("until end of turn, creatures you control get ([+-]\\d+)/([+-]\\d+) and gain all creature types").exec(s))) {
+    const filter = { type: "creature", controlledBy: "you" };
+    return {
+      kind: "sequence",
+      effects: [
+        { kind: "modify-pt-all", filter, power: Number(m[1]), toughness: Number(m[2]), duration: "end-of-turn" },
+        {
+          kind: "for-each-permanent",
+          filter,
+          simultaneous: true,
+          effect: { kind: "add-types", target: 0, addSubtypes: ["(every creature type)"], duration: "end-of-turn" },
+        },
+      ],
+    };
+  }
   // The Mistforms: the type chosen as it resolves replaces its creature
   // types (rule 205.1a).
   if ((m = re(`(~|${TARGET}) becomes the creature type of your choice until end of turn`).exec(s))) {
@@ -9166,6 +9205,24 @@ function chosenValueAt(sentences, i, ctx) {
   const wrap = (value, then, extra = {}) => ({ kind: "choose-value", value, ...extra, then });
   const who = (phrase) => ctx.target(phrase.toLowerCase() === "target opponent" ? "opponent" : "player");
   let m;
+  // Terraformer, Elsewhere Flask: a word chosen as it resolves, replacing every
+  // land type (rule 305.7).
+  if (/^choose a basic land type\.$/i.test(s(0)) && /^each land you control becomes that type until end of turn\.$/i.test(s(1))) {
+    return {
+      effect: {
+        kind: "choose-creature-type",
+        options: ["Plains", "Island", "Swamp", "Mountain", "Forest"],
+        prompt: "Choose a basic land type",
+        then: {
+          kind: "for-each-permanent",
+          filter: { type: "land", controlledBy: "you" },
+          simultaneous: true,
+          effect: { kind: "add-types", target: 0, setSubtypes: ["$chosen"], duration: "end-of-turn" },
+        },
+      },
+      used: 2,
+    };
+  }
   if (/^choose a color\.$/i.test(s(0))) {
     m = /^(target player|target opponent) reveals their hand and discards all cards of (?:that|the chosen) color\.$/i.exec(s(1));
     if (m !== null) {

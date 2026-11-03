@@ -4425,3 +4425,7 @@ attacked that stops being one is removed from combat, and what attacks it attack
 battle); `setBasePtFromAffectedCounters` (each permanent's own count, layer 7b); `grantPtPerCount.anyCountersOnAffected`; `attach`'s
 `planeswalkerToo` for "Equip planeswalker" (702.6e). Key: static:planeswalker-becomes-creature. Proving cards: Gideon Blackblade, Grand
 Master of Flowers, Kaito, Bane of Nightmares, Spark Rupture, Luxior, Giada's Gift.
+
+**A mass change of types, P/T left alone (2026-11-03).** No new effect: `add-types` under `for-each-permanent`, as Nightcreep's. What it took:
+`choose-creature-type`'s `sentinel` (`FIRST_CHOSEN_TYPE`) nests a second choice inside the first. Keys: effect:add-types-all,
+effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter, Volatile Claws, Energybending, Terraformer, Vision Charm.

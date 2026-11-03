@@ -3678,6 +3678,10 @@ export type AwaitingDecision =
        * `CHOSEN_CARD_TYPE`, `CHOSEN_COUNTER`), and the whole resolution to
        * resume — `targets` and `x` above are left unset. */
       readonly value?: { readonly sentinel: string; readonly resume: ResolutionResume };
+      /** The placeholder the answer goes into in `then`, when it isn't
+       * `CHOSEN_CREATURE_TYPE`: a choice with a second nested inside it (Vision
+       * Charm). */
+      readonly sentinel?: string;
     }
   | ({
       /**

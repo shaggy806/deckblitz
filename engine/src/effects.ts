@@ -1474,6 +1474,10 @@ export type ZoneChoiceFilter = CardFilter;
  */
 export const CHOSEN_CREATURE_TYPE = "$chosen";
 
+/** The first of two nested choices' placeholder — see `choose-creature-type`'s
+ * `sentinel`. */
+export const FIRST_CHOSEN_TYPE = "$chosenFirst";
+
 /**
  * A copy of `spec` with every string exactly equal to `CHOSEN_CREATURE_TYPE`
  * replaced by `creatureType`. `EffectSpec` is plain data, so a structural walk
@@ -3435,6 +3439,12 @@ export type EffectSpec =
        * hidden as `GameObject.secretChoice` until a `revealChosen` cost shows
        * it. */
       readonly secret?: true;
+      /** The placeholder this answer goes into in `then`, in place of
+       * `CHOSEN_CREATURE_TYPE`: what lets a second choice nest inside the
+       * first — Vision Charm's "choose a land type and a basic land type.
+       * Each land of the first chosen type becomes the second chosen type"
+       * (`FIRST_CHOSEN_TYPE` here, `CHOSEN_CREATURE_TYPE` under it). */
+      readonly sentinel?: string;
     }
   | {
       /**
@@ -10324,7 +10334,7 @@ export interface EffectApi {
   chooseCreatureType(
     then: EffectSpec,
     exclude?: readonly string[],
-    options?: { readonly options: readonly string[]; readonly prompt?: string },
+    options?: { readonly options: readonly string[]; readonly prompt?: string; readonly sentinel?: string },
     /** What to keep of the answer on the source, and whether it's secret. */
     keep?: { readonly remember?: "player" | "creature-type"; readonly secret?: true },
   ): void;
@@ -14999,7 +15009,11 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         spec.exclude,
         spec.options === undefined
           ? undefined
-          : { options: spec.options, ...(spec.prompt !== undefined ? { prompt: spec.prompt } : {}) },
+          : {
+              options: spec.options,
+              ...(spec.prompt !== undefined ? { prompt: spec.prompt } : {}),
+              ...(spec.sentinel !== undefined ? { sentinel: spec.sentinel } : {}),
+            },
         {
           ...(spec.remember === true ? { remember: "creature-type" as const } : {}),
           ...(spec.secret === true ? { secret: true as const } : {}),
