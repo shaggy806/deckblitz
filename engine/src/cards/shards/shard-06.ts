@@ -109,6 +109,7 @@ import _poolBoonBringerValkyrie from "../pool/boon-bringer-valkyrie.js";
 import _poolBoonOfErebos from "../pool/boon-of-erebos.js";
 import _poolBottleCapBlast from "../pool/bottle-cap-blast.js";
 import _poolBottleGolems from "../pool/bottle-golems.js";
+import _poolBottledCloister from "../pool/bottled-cloister.js";
 import _poolBottomlessPit from "../pool/bottomless-pit.js";
 import _poolBountifulPromenade from "../pool/bountiful-promenade.js";
 import _poolBrazenUpstart from "../pool/brazen-upstart.js";
@@ -389,6 +390,7 @@ import _poolIllumination from "../pool/illumination.js";
 import _poolImmovableRod from "../pool/immovable-rod.js";
 import _poolImperialAerosaur from "../pool/imperial-aerosaur.js";
 import _poolImprovisedArmor from "../pool/improvised-armor.js";
+import _poolInfernalCaretaker from "../pool/infernal-caretaker.js";
 import _poolInfernoTitan from "../pool/inferno-titan.js";
 import _poolInfuriate from "../pool/infuriate.js";
 import _poolInitiatesCompanion from "../pool/initiates-companion.js";
@@ -987,6 +989,7 @@ const shard: CardShard = {
     _poolBoonOfErebos,
     _poolBottleCapBlast,
     _poolBottleGolems,
+    _poolBottledCloister,
     _poolBottomlessPit,
     _poolBountifulPromenade,
     _poolBrazenUpstart,
@@ -1267,6 +1270,7 @@ const shard: CardShard = {
     _poolImmovableRod,
     _poolImperialAerosaur,
     _poolImprovisedArmor,
+    _poolInfernalCaretaker,
     _poolInfernoTitan,
     _poolInfuriate,
     _poolInitiatesCompanion,

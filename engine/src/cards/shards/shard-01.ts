@@ -461,6 +461,7 @@ import _poolMirrodinBesieged from "../pool/mirrodin-besieged.js";
 import _poolMogMoogleWarrior from "../pool/mog-moogle-warrior.js";
 import _poolMonkGyatso from "../pool/monk-gyatso.js";
 import _poolMoonBlessedCleric from "../pool/moon-blessed-cleric.js";
+import _poolMoonringMirror from "../pool/moonring-mirror.js";
 import _poolMoonscarredWerewolf from "../pool/moonscarred-werewolf.js";
 import _poolMoorlandDrifter from "../pool/moorland-drifter.js";
 import _poolMorcantsEyes from "../pool/morcants-eyes.js";
@@ -1328,6 +1329,7 @@ const shard: CardShard = {
     _poolMogMoogleWarrior,
     _poolMonkGyatso,
     _poolMoonBlessedCleric,
+    _poolMoonringMirror,
     _poolMoonscarredWerewolf,
     _poolMoorlandDrifter,
     _poolMorcantsEyes,

@@ -460,6 +460,7 @@ import _poolLootTheKeyToEverything from "../pool/loot-the-key-to-everything.js";
 import _poolLorthosTheTidemaker from "../pool/lorthos-the-tidemaker.js";
 import _poolLysAlanaScarblade from "../pool/lys-alana-scarblade.js";
 import _poolMagmaGiant from "../pool/magma-giant.js";
+import _poolMagusOfTheJar from "../pool/magus-of-the-jar.js";
 import _poolMakeAWish from "../pool/make-a-wish.js";
 import _poolManaCylix from "../pool/mana-cylix.js";
 import _poolManaMatrix from "../pool/mana-matrix.js";
@@ -1356,6 +1357,7 @@ const shard: CardShard = {
     _poolLorthosTheTidemaker,
     _poolLysAlanaScarblade,
     _poolMagmaGiant,
+    _poolMagusOfTheJar,
     _poolMakeAWish,
     _poolManaCylix,
     _poolManaMatrix,

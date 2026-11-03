@@ -383,6 +383,7 @@ import _poolJwariDisruption from "../pool/jwari-disruption.js";
 import _poolKamahlsDesire from "../pool/kamahls-desire.js";
 import _poolKamahlsSledge from "../pool/kamahls-sledge.js";
 import _poolKamizObscuraOculus from "../pool/kamiz-obscura-oculus.js";
+import _poolKavLandseeker from "../pool/kav-landseeker.js";
 import _poolKazanduNectarpot from "../pool/kazandu-nectarpot.js";
 import _poolKazarovSengirPureblood from "../pool/kazarov-sengir-pureblood.js";
 import _poolKeldonOverseer from "../pool/keldon-overseer.js";
@@ -1269,6 +1270,7 @@ const shard: CardShard = {
     _poolKamahlsDesire,
     _poolKamahlsSledge,
     _poolKamizObscuraOculus,
+    _poolKavLandseeker,
     _poolKazanduNectarpot,
     _poolKazarovSengirPureblood,
     _poolKeldonOverseer,

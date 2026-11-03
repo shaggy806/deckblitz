@@ -340,6 +340,7 @@ import _poolHydraOmnivore from "../pool/hydra-omnivore.js";
 import _poolHydraulicHelper from "../pool/hydraulic-helper.js";
 import _poolHypnoticCloud from "../pool/hypnotic-cloud.js";
 import _poolIconOfAncestry from "../pool/icon-of-ancestry.js";
+import _poolIgnorantBliss from "../pool/ignorant-bliss.js";
 import _poolIllnessInTheRanks from "../pool/illness-in-the-ranks.js";
 import _poolIllvoiLightJammer from "../pool/illvoi-light-jammer.js";
 import _poolImpulsivePilferer from "../pool/impulsive-pilferer.js";
@@ -615,6 +616,7 @@ import _poolSacrifice from "../pool/sacrifice.js";
 import _poolSakashimasStudent from "../pool/sakashimas-student.js";
 import _poolSamwiseGamgee from "../pool/samwise-gamgee.js";
 import _poolSanguineStatuette from "../pool/sanguine-statuette.js";
+import _poolSaprazzanBailiff from "../pool/saprazzan-bailiff.js";
 import _poolSavageConception from "../pool/savage-conception.js";
 import _poolSavvyHunter from "../pool/savvy-hunter.js";
 import _poolSawItComing from "../pool/saw-it-coming.js";
@@ -722,6 +724,7 @@ import _poolSuChi from "../pool/su-chi.js";
 import _poolSumalaRumblers from "../pool/sumala-rumblers.js";
 import _poolSummonFatChocobo from "../pool/summon-fat-chocobo.js";
 import _poolSunsetRevelry from "../pool/sunset-revelry.js";
+import _poolSuppress from "../pool/suppress.js";
 import _poolSurlyBadgersaur from "../pool/surly-badgersaur.js";
 import _poolSurveillanceMonitor from "../pool/surveillance-monitor.js";
 import _poolSurvivorsBond from "../pool/survivors-bond.js";
@@ -1243,6 +1246,7 @@ const shard: CardShard = {
     _poolHydraulicHelper,
     _poolHypnoticCloud,
     _poolIconOfAncestry,
+    _poolIgnorantBliss,
     _poolIllnessInTheRanks,
     _poolIllvoiLightJammer,
     _poolImpulsivePilferer,
@@ -1518,6 +1522,7 @@ const shard: CardShard = {
     _poolSakashimasStudent,
     _poolSamwiseGamgee,
     _poolSanguineStatuette,
+    _poolSaprazzanBailiff,
     _poolSavageConception,
     _poolSavvyHunter,
     _poolSawItComing,
@@ -1625,6 +1630,7 @@ const shard: CardShard = {
     _poolSumalaRumblers,
     _poolSummonFatChocobo,
     _poolSunsetRevelry,
+    _poolSuppress,
     _poolSurlyBadgersaur,
     _poolSurveillanceMonitor,
     _poolSurvivorsBond,

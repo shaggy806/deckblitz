@@ -510,6 +510,7 @@ import _poolMayaelsAria from "../pool/mayaels-aria.js";
 import _poolMayorOfAvabruck from "../pool/mayor-of-avabruck.js";
 import _poolMazeSkullbomb from "../pool/maze-skullbomb.js";
 import _poolMelekIzzetParagon from "../pool/melek-izzet-paragon.js";
+import _poolMemoryJar from "../pool/memory-jar.js";
 import _poolMercilessExecutioner from "../pool/merciless-executioner.js";
 import _poolMerfolkSeastalkers from "../pool/merfolk-seastalkers.js";
 import _poolMetalspinnersPuzzleknot from "../pool/metalspinners-puzzleknot.js";
@@ -1435,6 +1436,7 @@ const shard: CardShard = {
     _poolMayorOfAvabruck,
     _poolMazeSkullbomb,
     _poolMelekIzzetParagon,
+    _poolMemoryJar,
     _poolMercilessExecutioner,
     _poolMerfolkSeastalkers,
     _poolMetalspinnersPuzzleknot,

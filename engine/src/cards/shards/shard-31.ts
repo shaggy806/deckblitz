@@ -584,6 +584,7 @@ import _poolOliviasDragoon from "../pool/olivias-dragoon.js";
 import _poolOltecMatterweaver from "../pool/oltec-matterweaver.js";
 import _poolOmenspeaker from "../pool/omenspeaker.js";
 import _poolOnduGreathorn from "../pool/ondu-greathorn.js";
+import _poolOpenTheVaults from "../pool/open-the-vaults.js";
 import _poolOracleOfBones from "../pool/oracle-of-bones.js";
 import _poolOranRiefOoze from "../pool/oran-rief-ooze.js";
 import _poolOrcishVandal from "../pool/orcish-vandal.js";
@@ -1528,6 +1529,7 @@ const shard: CardShard = {
     _poolOltecMatterweaver,
     _poolOmenspeaker,
     _poolOnduGreathorn,
+    _poolOpenTheVaults,
     _poolOracleOfBones,
     _poolOranRiefOoze,
     _poolOrcishVandal,

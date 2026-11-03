@@ -587,6 +587,7 @@ import _poolPuresteelPaladin from "../pool/puresteel-paladin.js";
 import _poolPutrefaction from "../pool/putrefaction.js";
 import _poolPutridPals from "../pool/putrid-pals.js";
 import _poolPyknite from "../pool/pyknite.js";
+import _poolPyrrhicRevival from "../pool/pyrrhic-revival.js";
 import _poolQuicksilverAmulet from "../pool/quicksilver-amulet.js";
 import _poolQuicksilverPietroMaximoff from "../pool/quicksilver-pietro-maximoff.js";
 import _poolRaccoonRallier from "../pool/raccoon-rallier.js";
@@ -1468,6 +1469,7 @@ const shard: CardShard = {
     _poolPutrefaction,
     _poolPutridPals,
     _poolPyknite,
+    _poolPyrrhicRevival,
     _poolQuicksilverAmulet,
     _poolQuicksilverPietroMaximoff,
     _poolRaccoonRallier,

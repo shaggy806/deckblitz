@@ -375,6 +375,7 @@ import _poolIllegitimateBusiness from "../pool/illegitimate-business.js";
 import _poolImmolatingGyre from "../pool/immolating-gyre.js";
 import _poolImprobableAlliance from "../pool/improbable-alliance.js";
 import _poolIncubation from "../pool/incubation.js";
+import _poolInducedAmnesia from "../pool/induced-amnesia.js";
 import _poolInfectiousInquiry from "../pool/infectious-inquiry.js";
 import _poolInfernalPlunge from "../pool/infernal-plunge.js";
 import _poolInkfathomWitch from "../pool/inkfathom-witch.js";
@@ -1303,6 +1304,7 @@ const shard: CardShard = {
     _poolImmolatingGyre,
     _poolImprobableAlliance,
     _poolIncubation,
+    _poolInducedAmnesia,
     _poolInfectiousInquiry,
     _poolInfernalPlunge,
     _poolInkfathomWitch,
