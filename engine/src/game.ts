@@ -217,6 +217,7 @@ import {
   amountValue,
   applyEffectSpec,
   isCountScalableEffect,
+  mayBeDone,
   opponentsVoting,
   protectionLabel,
   substituteChosen,
@@ -10187,6 +10188,10 @@ export class Game {
     if (this.state.blockRequirements?.some((r) => r.thisCombat === true) === true) {
       this.state.blockRequirements = this.state.blockRequirements.filter((r) => r.thisCombat !== true);
     }
+    // "They can't attack you this combat" (Champions of Minas Tirith).
+    if (this.state.playerEffects?.some((e) => e.expires.kind === "end-of-combat") === true) {
+      this.state.playerEffects = this.state.playerEffects.filter((e) => e.expires.kind !== "end-of-combat");
+    }
     // "During their next combat phase" (Secret of Bloodbending) is over.
     if (this.state.playerControl?.some((c) => c.during === "next-combat" && c.began !== undefined) === true) {
       this.state.playerControl = this.state.playerControl.filter((c) => c.during !== "next-combat" || c.began === undefined);
@@ -10213,7 +10218,9 @@ export class Game {
     // "until end of turn" effect — see `GameObject.impulse`.
     this.expireImpulsePermissions();
     if (this.state.playerEffects !== undefined) {
-      this.state.playerEffects = this.state.playerEffects.filter((e) => e.expires.kind !== "end-of-turn");
+      this.state.playerEffects = this.state.playerEffects.filter(
+        (e) => e.expires.kind !== "end-of-turn" && e.expires.kind !== "end-of-combat",
+      );
     }
     // "You gain hexproof until end of turn" ends here too (rule 514.2), not
     // as the next turn begins: a trigger in this cleanup step can target.
@@ -30170,6 +30177,12 @@ export class Game {
         const object = this.state.objects[id];
         if (object === undefined || object.zone !== "battlefield") return;
         const sacrificer = object.controller;
+        // Players still choosing in turn: it happens with the rest once the
+        // last has chosen (rule 101.4 — Tariff).
+        if (this.state.heldChoices !== undefined) {
+          this.state.pendingSacrificeVictims.push({ player: sacrificer, object: id });
+          return;
+        }
         this.moveObject(id, "graveyard");
         this.emit({ type: "permanent-sacrificed", object: id, player: sacrificer });
       },
@@ -31589,6 +31602,16 @@ export class Game {
           targetZones,
           triggerController: refs.triggerSpellController ?? triggerLastKnown()?.controller,
         }),
+      manaCostToPay: (ref) => {
+        const object = ref.kind === "object" ? this.state.objects[ref.object] : undefined;
+        if (object === undefined || object.faceDown !== undefined) return null;
+        const cost = printedManaCost(this.registry, object);
+        if (cost === null) return null;
+        // Rule 107.3h: a spell on the stack has the X chosen for it; anything
+        // else has 0.
+        const chosen = object.zone === "stack" ? (object.xValue ?? 0) : 0;
+        return cost.split("{X}").join(`{${chosen}}`);
+      },
       askEachPlayerMay: (player, spec, askOnly) =>
         this.askEachPlayerMay(
           source,
@@ -34147,7 +34170,7 @@ export class Game {
     x: number,
     targets: ResolvedTargets,
     triggerObject: ObjectId | undefined,
-    chooser: Extract<EffectSpec, { kind: "unless" }>["chooser"],
+    chooser: Parameters<ResolutionContext["unless"]>[0],
     options: readonly BoundUnlessOption[],
     otherwise: EffectSpec,
     /** What the resolving ability knew about the objects it refers to: its
@@ -34219,7 +34242,7 @@ export class Game {
     }
 
     // Only offer what they can actually take.
-    const offer = this.optionModes(decide, options, source, targets);
+    const offer = this.optionModes(decide, options, source, targets, x);
     if (offer === null) {
       applyOtherwise();
       return;
@@ -34258,7 +34281,12 @@ export class Game {
     options: readonly BoundUnlessOption[],
     source: ObjectId,
     targets: ResolvedTargets,
+    x: number,
   ): { readonly modes: ModeOption[]; readonly cost?: string; readonly costHasX?: true } | null {
+    const spared = (slot: number | undefined): ObjectId | undefined => {
+      const ref = slot === undefined ? undefined : targets[slot];
+      return ref?.kind === "object" ? ref.object : undefined;
+    };
     const hasPermanent = (filter: CardFilter): boolean =>
       this.state.zones.shared.battlefield.some((id) => matchesFilter(this.state, this.registry, id, filter, { you: player }));
     const available = options.filter((option) => {
@@ -34298,9 +34326,13 @@ export class Game {
         return this.state.zones.perPlayer[player].graveyard.length >= option.exileFromGraveyard;
       }
       if ("takeDamage" in option) return true;
+      if ("doing" in option) return mayBeDone(option.doing, this.makeResolutionContext(source, player, targets, x));
       return (
-        this.eligibleSacrifices(player, option.sacrifice, option.exceptSource === true ? source : undefined).length >=
-        (option.count ?? 1)
+        this.eligibleSacrifices(
+          player,
+          option.sacrifice,
+          option.exceptSource === true ? source : spared(option.exceptTarget),
+        ).length >= (option.count ?? 1)
       );
     });
     if (available.length === 0) return null;
@@ -34324,7 +34356,9 @@ export class Game {
         text: option.text,
         effect: withForage(
           option,
-          "exileFromGraveyard" in option
+          "doing" in option
+            ? option.doing
+            : "exileFromGraveyard" in option
             ? {
                 kind: "look-and-choose",
                 zone: "graveyard",
@@ -34354,6 +34388,7 @@ export class Game {
                   filter: option.sacrifice,
                   count: option.count ?? 1,
                   ...(option.exceptSource === true ? { exceptSource: true } : {}),
+                  ...(option.exceptTarget !== undefined ? { exceptTarget: option.exceptTarget } : {}),
                 }
               : "discard" in option
                 ? { kind: "discard", target: "you", amount: option.discard }
@@ -34431,7 +34466,7 @@ export class Game {
     }
     const offer =
       spec.options !== undefined
-        ? this.optionModes(player, spec.options, source, targets)
+        ? this.optionModes(player, spec.options, source, targets, x)
         : spec.effect !== undefined
           ? { modes: [{ text: spec.prompt ?? "Do it?", effect: spec.effect }] }
           : null;

@@ -1256,6 +1256,22 @@ export type UnlessOption =
    * (Esper Sentinel): that much generic mana, read as the effect applies —
    * `{X}` in `text` shows the amount. A mana option like `pay`. */
   | { readonly payGeneric: EffectAmount; readonly text: string }
+  /** "…unless they pay **that creature's mana cost**" (Tariff), "any other
+   * player may pay **that spell's mana cost**. If a player does, counter the
+   * spell" (Ice Cave, with `ifPaid`): the mana cost of the object this names,
+   * read as the effect applies, a mana option like `pay`. An {X} in it is the
+   * value chosen for a spell on the stack and 0 for anything else (rule
+   * 107.3h). No mana cost is an unpayable cost (rules 118.6, 202.1b), and
+   * isn't offered. `{X}` in `text` shows the cost. */
+  | { readonly payManaCostOf: EffectTargetRef; readonly text: string; readonly ifPaid?: EffectSpec }
+  /** Any effect, done by the chooser — "you" in it is them: "…unless its
+   * controller **exiles all cards from their graveyard**" (Grip of Amnesia),
+   * "**discards their hand**" (Perplex), "**discards a land card**" (Cursed
+   * Monstrosity), "**puts a card from their hand on top of their library**"
+   * (Tainted Specter). Offered as a `may` of it would be (`mayBeDone`): an
+   * instruction that can be done as far as it goes, with nothing to do
+   * included (exiling an empty graveyard), but not "a card" with none. */
+  | { readonly doing: EffectSpec; readonly text: string }
   | ({ readonly payLife: number; readonly text: string } & UnlessTimes)
   /** "…unless its controller pays life **equal to its toughness**" (Essence
    * Vortex): that much life, read as the effect applies — `{X}` in `text` shows
@@ -1290,6 +1306,9 @@ export type UnlessOption =
       readonly sacrifice: CardFilter;
       readonly count?: number;
       readonly exceptSource?: boolean;
+      /** "Its controller loses 3 life unless they sacrifice **another** nonland
+       * permanent" (Torment of Venom): never the object in this target slot. */
+      readonly exceptTarget?: number;
       /** One of forage's two ways (rule 701.61a) — see `forageOptions()`. */
       readonly forage?: true;
       readonly text: string;
@@ -1312,7 +1331,9 @@ export type UnlessOption =
  * engine offers. `"each-player-may"`'s options are these already. */
 export type BoundUnlessOption = Exclude<
   UnlessOption,
-  { readonly payGeneric: EffectAmount } | { readonly payLifeAmount: EffectAmount }
+  | { readonly payGeneric: EffectAmount }
+  | { readonly payLifeAmount: EffectAmount }
+  | { readonly payManaCostOf: EffectTargetRef }
 >;
 
 /**
@@ -3053,6 +3074,9 @@ export type EffectSpec =
       /** Exclude what the source is attached to, or was last — "a creature of
        * their choice **other than enchanted creature**" (Sporogenic Infection). */
       readonly exceptHost?: true;
+      /** Exclude the object in this target slot — "**another** nonland
+       * permanent" beside a target (Torment of Venom). */
+      readonly exceptTarget?: number;
       /** Exploit's sacrifice (rule 702.110 — the `exploit()` helper): the
        * effect's source "exploits" what's sacrificed (702.110b), which an
        * `exploits` trigger watches (`permanent-sacrificed`'s `exploitedBy`). */
@@ -5500,7 +5524,14 @@ export type EffectSpec =
        * instead" — `floor: 1`). Angel's Grace, Everybody Lives!.
        */
       readonly kind: "player-effect";
-      readonly duration: "end-of-turn" | "until-your-next-turn" | "until-end-of-your-next-turn" | "rest-of-game";
+      /** `"this-combat"`: gone as the combat phase ends (rule 500.5a, 506.1) —
+       * "they can't attack you this combat" (Champions of Minas Tirith). */
+      readonly duration:
+        | "end-of-turn"
+        | "this-combat"
+        | "until-your-next-turn"
+        | "until-end-of-your-next-turn"
+        | "rest-of-game";
       /** "You have no maximum hand size until your next turn" (Enter the
        * Infinite), "… for the rest of the game" (Praetor's Counsel). */
       readonly noMaxHandSize?: PlayerScope;
@@ -5650,8 +5681,15 @@ export type EffectSpec =
       readonly blockTax?: { readonly generic?: EffectAmount; readonly life?: EffectAmount };
       /** "Until your next turn, creatures can't attack you" (Chronomantic
        * Escape): every creature, entering later too; `"you-and-planeswalkers"`
-       * if the text also names planeswalkers. */
-      readonly cantAttack?: "you" | "you-and-planeswalkers";
+       * if the text also names planeswalkers; `"all"`: "creatures can't attack
+       * this combat" (Overencumbered); `{ planeswalkers }`: only planeswalkers
+       * matching this from the controller's side, "can't attack **Jaces you
+       * control**" (Jace, Multiverse Architect). */
+      readonly cantAttack?: "you" | "you-and-planeswalkers" | "all" | { readonly planeswalkers: CardFilter };
+      /** With `cantAttack`: only the creatures this player controls, whoever
+       * that is as the attack is declared — "**they** can't attack you this
+       * combat" (Champions of Minas Tirith). Naming nobody, nothing is made. */
+      readonly cantAttackBy?: EffectPlayerRef;
     }
   | {
       /**
@@ -8150,15 +8188,19 @@ export type EffectSpec =
        * each player still in the game is asked in turn order from the active
        * player (rule 101.4), the next only once the one before declines, and
        * `otherwise` happens only if none of them took an option.
+       * `{ anyOf }` is the same over a scope: "**any other player** may pay
+       * that spell's mana cost" (Ice Cave's `"opponents-of-trigger-controller"`).
+       * Any other {@link EffectPlayerRef} is one player named as this applies:
+       * "unless **that player** pays 3 life" in a `for-each-player` (Sivriss,
+       * Lim-Dûl's Hex), "**the chosen player**" (Energy Vortex). Naming nobody,
+       * `otherwise` happens.
        * `{ player }` is the engine's own, naming one of them as it asks in
        * turn — never authored. */
       readonly chooser:
         | number
-        | "trigger-controller"
-        | "trigger-player"
-        | "you"
-        | "active-player"
+        | EffectPlayerRef
         | "any-player"
+        | { readonly anyOf: PlayerScope }
         | { readonly player: PlayerId };
       /** What they may do to avoid `otherwise`. At most one mana option, since
        * the mana cost rides on the decision itself. */
@@ -10751,10 +10793,20 @@ export interface EffectApi {
   exchangeLifeTotals(first: PlayerId, second: PlayerId): void;
   /** See the `"unless"` {@link EffectSpec}. */
   unless(
-    chooser: Extract<EffectSpec, { kind: "unless" }>["chooser"],
+    chooser:
+      | number
+      | "trigger-controller"
+      | "trigger-player"
+      | "you"
+      | "active-player"
+      | "any-player"
+      | { readonly player: PlayerId },
     options: readonly BoundUnlessOption[],
     otherwise: EffectSpec,
   ): void;
+  /** The mana cost an effect telling a player to pay `ref`'s would have them
+   * pay (rule 107.3h), or `null` for an object with none (rule 118.6). */
+  manaCostToPay(ref: TargetRef): string | null;
   /** Ask `player` an `"each-player-may"`'s question: a `choose-modes`
    * decision of theirs, or nothing at all when there's nothing they could
    * take. */
@@ -13303,6 +13355,8 @@ const NESTED_EFFECT_KEYS: ReadonlySet<string> = new Set([
   // controller sacrificed in answer, which only exists by then.
   "ifDid",
   "ifDidnt",
+  // What an `unless` option has its chooser do: "you" in it is them.
+  "doing",
   // A `for-each-player`'s instruction to do before its players act.
   "before",
   // A granted ability (`grant-activated`, `grant-triggered`, their `-all`
@@ -13658,9 +13712,13 @@ function scopedOrTargetedPlayers(
  * (Rydia, Summoner of Mist). Only the action chosen is asked about, a
  * sequence's first step: "draw, then discard" is possible from an empty hand.
  */
-function mayBeDone(effect: EffectSpec, ctx: ResolutionContext): boolean {
+export function mayBeDone(effect: EffectSpec, ctx: ResolutionContext): boolean {
   const action = effect.kind === "sequence" ? effect.effects[0] : effect;
   if (action === undefined) return true;
+  // "You may put a card from your hand on top of your library": not with none.
+  if (action.kind === "look-and-choose" && action.zone === "hand" && action.player === undefined) {
+    return ctx.handSizeOf(ctx.controller, action.filter) >= amountValue(action.min, ctx);
+  }
   if (action.kind === "mill" || action.kind === "discard") {
     return scopedOrTargetedPlayers(action.target, ctx).every((ref) => {
       if (ref.kind !== "player") return true;
@@ -14525,7 +14583,14 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "sacrifice": {
-      const exceptId = spec.exceptSource ? ctx.source : spec.exceptHost === true ? ctx.attachedHost() : undefined;
+      const spared = spec.exceptTarget === undefined ? undefined : ctx.targets[spec.exceptTarget];
+      const exceptId = spec.exceptSource
+        ? ctx.source
+        : spec.exceptHost === true
+          ? ctx.attachedHost()
+          : spared?.kind === "object"
+            ? spared.object
+            : undefined;
       if (spec.who === "target") {
         const target = ctx.targets[0];
         if (target?.kind === "player") {
@@ -15932,12 +15997,16 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       }
       return;
     }
-    case "player-effect":
+    case "player-effect": {
+      const attackersOf = spec.cantAttackBy === undefined ? undefined : effectPlayer(spec.cantAttackBy, ctx);
+      if (spec.cantAttackBy !== undefined && attackersOf === undefined) return;
       ctx.addPlayerEffect({
         owner: ctx.controller,
         expires:
           spec.duration === "end-of-turn"
             ? { kind: "end-of-turn" }
+            : spec.duration === "this-combat"
+              ? { kind: "end-of-combat" }
             : spec.duration === "until-end-of-your-next-turn"
               ? { kind: "end-of-your-next-turn" }
               : spec.duration === "rest-of-game"
@@ -16054,8 +16123,10 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
             }
           : {}),
         ...(spec.cantAttack !== undefined ? { cantAttack: spec.cantAttack } : {}),
+        ...(attackersOf !== undefined ? { cantAttackBy: attackersOf } : {}),
       });
       return;
+    }
     case "win-game":
       ctx.winGame(ctx.controller);
       return;
@@ -17508,28 +17579,68 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       });
       return;
     }
-    case "unless":
-      ctx.unless(
-        spec.chooser,
-        // A generic amount is fixed as the effect applies.
-        spec.options.map((option): BoundUnlessOption => {
-          if ("payGeneric" in option) {
-            const n = amountValue(option.payGeneric, ctx);
-            return {
+    case "unless": {
+      // A generic amount, and the mana cost of an object, are fixed as the
+      // effect applies.
+      const options = spec.options.flatMap((option): BoundUnlessOption[] => {
+        if ("payGeneric" in option) {
+          const n = amountValue(option.payGeneric, ctx);
+          return [
+            {
               pay: `{${n}}`,
               text: option.text.split("{X}").join(`{${n}}`),
               ...(option.text.includes("{X}") ? { paysX: true as const } : {}),
-            };
-          }
-          if ("payLifeAmount" in option) {
-            const n = Math.max(0, amountValue(option.payLifeAmount, ctx));
-            return { payLife: n, text: option.text.split("{X}").join(`${n}`) };
-          }
-          return bindUnlessTimes(option, ctx);
-        }),
-        spec.otherwise,
-      );
+            },
+          ];
+        }
+        if ("payLifeAmount" in option) {
+          const n = Math.max(0, amountValue(option.payLifeAmount, ctx));
+          return [{ payLife: n, text: option.text.split("{X}").join(`${n}`) }];
+        }
+        if ("payManaCostOf" in option) {
+          const object = resolveEffectTarget(option.payManaCostOf, ctx);
+          const cost = object === undefined ? null : ctx.manaCostToPay(object);
+          return cost === null
+            ? []
+            : [
+                {
+                  pay: cost,
+                  text: option.text.split("{X}").join(cost),
+                  ...(option.ifPaid !== undefined ? { ifPaid: option.ifPaid } : {}),
+                },
+              ];
+        }
+        return [bindUnlessTimes(option, ctx)];
+      });
+      const chooser = spec.chooser;
+      if (typeof chooser === "object" && "anyOf" in chooser) {
+        // "Any other player": as `"any-player"`, each in turn order (rule
+        // 101.4), the next only once the one before has declined.
+        const [first, ...rest] = ctx.apnap(ctx.playersInScope(chooser.anyOf));
+        let otherwise = spec.otherwise;
+        for (const player of [...rest].reverse()) {
+          otherwise = { kind: "unless", chooser: { player }, options, otherwise };
+        }
+        ctx.unless(first === undefined ? -1 : { player: first }, options, otherwise);
+        return;
+      }
+      if (
+        typeof chooser === "number" ||
+        chooser === "any-player" ||
+        chooser === "you" ||
+        chooser === "active-player" ||
+        chooser === "trigger-controller" ||
+        chooser === "trigger-player" ||
+        (typeof chooser === "object" && "player" in chooser)
+      ) {
+        ctx.unless(chooser, options, spec.otherwise);
+        return;
+      }
+      // One player named as this applies. Nobody: `otherwise` happens.
+      const named = effectPlayer(chooser, ctx);
+      ctx.unless(named === undefined ? -1 : { player: named }, options, spec.otherwise);
       return;
+    }
     case "each-player-may":
       applyEachPlayerMay(spec, ctx);
       return;

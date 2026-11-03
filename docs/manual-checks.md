@@ -6520,3 +6520,17 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 - **Do:** Cast Divination. Pass until your next upkeep and cast it when offered.
 - **Expect:** Divination goes to exile as it resolves, not to your graveyard. At your upkeep you're offered it free, and it goes to your graveyard after that.
+### Ice Cave: another player may pay a spell's mana cost to counter it
+
+- **Do:** Cast Lightning Bolt at Bob, then pass priority. As Bob, choose "Yes" to pay.
+- **Expect:** Bob is asked about Ice Cave, "Pay {R}", Yes or No, and his Mountain taps for it. Lightning Bolt is countered, and you were never asked.
+
+### Tainted Specter: a card put on top of the library stops the discard
+
+- **Do:** Activate Tainted Specter on Bob. As Bob, choose "Yes" to "Put a card from your hand on top of your library", then pick Forest and Confirm.
+- **Expect:** Forest goes on top of Bob's library and Island stays in his hand. Nothing is discarded, and no one takes damage.
+
+### Jace, Multiverse Architect: a player who won't pay can't attack Jaces
+
+- **Do:** It's Bob's turn. As Bob, pass priority to go to combat, choose "No" to paying {2}, then pass until you declare attackers and pick Grizzly Bears.
+- **Expect:** The Bears can attack Alice or Chandra, but Jace isn't offered as what they attack.

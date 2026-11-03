@@ -4019,7 +4019,7 @@ export function parseSentence(sentence, ctx) {
     return i === undefined ? null : { kind: "become-saddled", target: i };
   }
   if (re("~ becomes saddled until end of turn").test(s)) return { kind: "become-saddled", target: "source" };
-  if ((m = re(`counter (${TARGET})`).exec(s))) {
+  if ((m = re(`counter (${TARGET})`).exec(s)) && !/ unless /i.test(m[1])) {
     const t = targetOf(m[1]);
     if (typeof t !== "string" || !/(spell|triggered-ability)$/.test(t)) return null;
     return { kind: "counter", target: slot(m[1]) };
@@ -5278,6 +5278,34 @@ export function parseSentence(sentence, ctx) {
         chooser: "you",
         options: [toHand ? { returnToHand: permanents, text } : { tapPermanent: permanents, text }],
         otherwise: { kind: "sacrifice-source" },
+      };
+    }
+  }
+  // An `unless` whose way out is an effect of its own (`doing`), "you" in it
+  // being its chooser: Grip of Amnesia, Perplex. Answered by "you", it's a
+  // `may` with an `else`: Hidden Horror, Cursed Monstrosity.
+  if ((m = /^counter target spell unless its controller (exiles all cards from their graveyard|discards their hand)\.$/i.exec(s))) {
+    const i = slot("target spell");
+    const exiles = m[1].startsWith("exiles");
+    return {
+      kind: "unless",
+      chooser: i,
+      options: [
+        exiles
+          ? { doing: { kind: "exile-graveyard", target: "you" }, text: "Exile all cards from your graveyard" }
+          : { doing: { kind: "discard", target: "you", amount: { cardsInHand: "you" } }, text: "Discard your hand" },
+      ],
+      otherwise: { kind: "counter", target: i },
+    };
+  }
+  if ((m = /^sacrifice (?:~|it) unless you discard an? (.+?) card\.$/i.exec(s))) {
+    const filter = parseTypePhrase(m[1]);
+    if (filter !== null) {
+      return {
+        kind: "may",
+        prompt: `Discard a ${m[1]} card?`,
+        effect: { kind: "discard", target: "you", amount: 1, filter },
+        else: { kind: "sacrifice-source" },
       };
     }
   }

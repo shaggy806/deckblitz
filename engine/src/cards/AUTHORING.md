@@ -1212,7 +1212,16 @@ a player who can do all of it: `{ pay, times?, andLife?, ifPaid?, text }` ("{1} 
 life" — Mundungu; "{G} for each wind counter on it. If you pay, …" — Cyclone,
 `ifPaid` being the chooser's effect like the payment), `{ payGeneric }`, `{ payLife }`,
 `{ payLifeAmount, text: "Pay {X} life" }` ("life equal to its toughness" — Essence
-Vortex), `{ payEnergy }` (Rush of Inspiration), `{ sacrifice }`, `{ putCounter, on }`,
+Vortex), `{ payManaCostOf, ifPaid?, text: "Pay {X}" }` (an object's mana cost, "that
+spell's mana cost" — Ice Cave, Tariff: X as chosen for a spell on the stack and 0
+otherwise, rule 107.3h; none, and it isn't offered, 118.6), `{ doing, text }` (**any
+effect, done by the chooser**, "you" in it being them: Grip of Amnesia's "exiles all
+cards from their graveyard", Perplex's "discards their hand", Tainted Specter's "puts a
+card from their hand on top of their library"; offered as a `may` of it would be, so
+not "a card" with none, while an empty graveyard can still be exiled. Reach for this
+before a new option kind; when the chooser is `"you"`, it's a `may` with an `else`
+instead: Hidden Horror), `{ payEnergy }` (Rush of Inspiration), `{ sacrifice, exceptTarget? }`
+(`exceptTarget`: "another" beside a target — Torment of Venom), `{ putCounter, on }`,
 `{ returnToHand }` (Karoo), `{ tapPermanent }` (Command Bridge; both filters say
 `tapped: false` and `controlledBy: "you"`, you being the chooser), `{ sacrificeThat }`
 ("sacrifices it" — Enchanter's Bane with a slot, Curse Artifact with `"attached"`,
@@ -2269,7 +2278,13 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
   controller** pays {2}" is `chooser: 0` with `otherwise: { kind: "counter",
   target: 0 }` — `"trigger-controller"` (the
   controller of the permanent whose event fired the trigger),
-  `"trigger-player"` (the player that event names), `"active-player"`, or
+  `"trigger-player"` (the player that event names), `"active-player"`, any
+  other `EffectPlayerRef` — `"that-player"` in a `for-each-player` (Sivriss,
+  Lim-Dûl's Hex, whose "{B} or {3}" is one `unless` nested in the other's
+  `otherwise`), `"chosen-player"` (Energy Vortex), `{ controllerOfTarget }`
+  (Torment of Venom) — `{ anyOf: <scope> }`, each of them in turn order until
+  one takes it ("**any other player** may pay": Ice Cave, whose `otherwise` is
+  empty and whose counter is the option's `ifPaid`), or
   `"you"` — The Gitrog Monster's "sacrifice ~ unless **you** sacrifice a
   land" (`otherwise: { kind: "sacrifice-source" }`), which unlike a `may`
   with an `else` isn't offered without a land to sacrifice. Each
@@ -4271,7 +4286,9 @@ another creature) needs a choice the declaration doesn't carry, so isn't here.
 (Reverence, Blazing Archon, Teferi's Moat: rule 508.1b), where `true` is "you or planeswalkers you
 control" (Vow of Duty); `affects` says which creatures, `condition` when (Queen Mother Ramonda's
 monarch). For a while: the `player-effect` effect's `cantAttack: "you"` (Chronomantic Escape), a
-rule that binds creatures arriving later. The restriction `"cant-attack-player-attacked-this-turn"`
+rule that binds creatures arriving later, or `"all"` (Overencumbered), or `{ planeswalkers: filter }`
+("Jaces you control"), with `cantAttackBy: <player ref>` for one player's creatures and `duration:
+"this-combat"` (Champions of Minas Tirith's "they can't attack you this combat"). The restriction `"cant-attack-player-attacked-this-turn"`
 is "can't attack a player it has already attacked this turn" (Port Razer), by the object's own
 `attackedPlayersThisTurn`; a planeswalker it attacked isn't the player.
 

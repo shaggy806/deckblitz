@@ -294,8 +294,14 @@ function whyCannotAttackUncached(
   }
   // "Until your next turn, creatures can't attack you" (Chronomantic Escape):
   // a player effect, binding creatures that weren't there when it began.
-  for (const { owner, cantAttack } of state.playerEffects ?? []) {
-    if (cantAttack !== undefined && attackCovers(state, registry, cantAttack, owner, target)) {
+  for (const { owner, cantAttack, cantAttackBy } of state.playerEffects ?? []) {
+    if (cantAttack === undefined || (cantAttackBy !== undefined && cantAttackBy !== object.controller)) continue;
+    if (
+      typeof cantAttack === "object"
+        ? isPlaneswalkerTarget(state, target) &&
+          matchesFilter(state, registry, target as ObjectId, cantAttack.planeswalkers, { you: owner })
+        : attackCovers(state, registry, cantAttack, owner, target)
+    ) {
       return `${def.name} can't attack ${defendingPlayer}`;
     }
   }

@@ -1059,6 +1059,11 @@ export interface CardFilter {
    * resolutions nothing matches.
    */
   readonly thisWay?: ThisWayKind;
+  /** It's in this zone now: "return that card **from your graveyard**"
+   * (Sivriss, Nightmare Speaker), where a milled card a replacement exiled
+   * instead (Rest in Peace) isn't to be found — unlike "from among the milled
+   * cards" (rule 701.17c), which finds it there. */
+  readonly inZone?: ZoneType;
   /**
    * None of the objects the resolving spell or ability has done this to —
    * Martial Coup's "create X 1/1 white Soldier creature tokens … destroy all
@@ -1654,6 +1659,7 @@ export function matchesFilter(
   ) {
     return false;
   }
+  if (filter.inZone !== undefined && state.objects[id]?.zone !== filter.inZone) return false;
   if (filter.thisWay !== undefined && !thisWayEntries(state, filter.thisWay).some((e) => e.object === id)) {
     return false;
   }

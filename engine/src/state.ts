@@ -5100,6 +5100,7 @@ export interface PlayerEffect {
    * cleanup of that turn (Single Combat's "until the end of your next turn"). */
   readonly expires:
     | { readonly kind: "end-of-turn" }
+    | { readonly kind: "end-of-combat" }
     | { readonly kind: "your-next-turn" }
     | { readonly kind: "end-of-your-next-turn" }
     | { readonly kind: "rest-of-game" };
@@ -5241,8 +5242,13 @@ export interface PlayerEffect {
   readonly blockTax?: { readonly generic: number; readonly life: number };
   /** "Until your next turn, creatures can't attack you" (Chronomantic Escape):
    * every creature, `owner` being "you", a planeswalker of theirs only under
-   * `"you-and-planeswalkers"` (rule 508.1b). */
-  readonly cantAttack?: "you" | "you-and-planeswalkers";
+   * `"you-and-planeswalkers"` (rule 508.1b); `"all"`, every attack on
+   * anything; `{ planeswalkers }`, attacks on planeswalkers matching this
+   * from `owner`'s side (Jace, Multiverse Architect's "Jaces you control"). */
+  readonly cantAttack?: "you" | "you-and-planeswalkers" | "all" | { readonly planeswalkers: CardFilter };
+  /** Only `cantAttack`s of creatures this player controls (Champions of Minas
+   * Tirith's "they can't attack you this combat"). */
+  readonly cantAttackBy?: PlayerId;
 }
 
 /**

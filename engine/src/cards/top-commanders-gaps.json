@@ -1360,7 +1360,18 @@
   "effect:animate-grants-conditional-static",
   "effect:animate-grants-protection",
   "effect:animate-grants-toxic",
-  "effect:animate-grants-triggered"
+  "effect:animate-grants-triggered",
+  "cost:unless-pay-generic-per-counter",
+  "effect:pay-or-cant-attack-you",
+  "effect:unless-exile-graveyard",
+  "effect:unless-put-card-from-hand-on-top",
+  "effect:unless-sacrifice-other-than-target",
+  "effect:other-player-may-pay-spell-mana-cost",
+  "effect:sacrifice-greatest-unless-pay-its-mana-cost",
+  "effect:unless-discard-filtered-card",
+  "effect:unless-target-controller",
+  "effect:unless-that-player",
+  "effect:unless-discard-hand"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

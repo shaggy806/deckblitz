@@ -10621,6 +10621,31 @@ describe("an animate that sets creature characteristics", () => {
   });
 });
 
+describe("an unless whose way out is an effect of its own", () => {
+  it("reads what a spell's controller may do instead of having it countered", () => {
+    expect(parseEffect("Counter target spell unless its controller exiles all cards from their graveyard.", ctx()).effect).toEqual({
+      kind: "unless",
+      chooser: 0,
+      options: [{ doing: { kind: "exile-graveyard", target: "you" }, text: "Exile all cards from your graveyard" }],
+      otherwise: { kind: "counter", target: 0 },
+    });
+    expect(parseEffect("Counter target spell unless its controller discards their hand.", ctx()).effect).toEqual({
+      kind: "unless",
+      chooser: 0,
+      options: [{ doing: { kind: "discard", target: "you", amount: { cardsInHand: "you" } }, text: "Discard your hand" }],
+      otherwise: { kind: "counter", target: 0 },
+    });
+  });
+  it("reads 'sacrifice it unless you discard a land card' as a may with an else", () => {
+    expect(parseEffect("Sacrifice it unless you discard a land card.", ctx()).effect).toEqual({
+      kind: "may",
+      prompt: "Discard a land card?",
+      effect: { kind: "discard", target: "you", amount: 1, filter: { type: "land" } },
+      else: { kind: "sacrifice-source" },
+    });
+  });
+});
+
 describe("an effect done by another player", () => {
   it("reads 'target player scries N' as as-player, on a player slot", () => {
     const parsed = parseEffect("Target player scries 2.", ctx());

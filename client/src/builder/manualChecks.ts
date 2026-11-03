@@ -9842,4 +9842,27 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{}],
     }),
   ),
+
+  preset(
+    'Ice Cave: another player may pay a spell\'s mana cost to counter it',
+    board({
+      you: { bf: ['Mountain'], hand: ['Lightning Bolt'] },
+      opp: [{ human: true, bf: ['Ice Cave', 'Mountain'] }],
+    }),
+  ),
+  preset(
+    'Tainted Specter: a card put on top of the library stops the discard',
+    board({
+      you: { bf: ['Tainted Specter', 'Swamp*3'] },
+      opp: [{ human: true, hand: ['Forest', 'Island'] }],
+    }),
+  ),
+  preset(
+    'Jace, Multiverse Architect: a player who won\'t pay can\'t attack Jaces',
+    board({
+      you: { bf: ['Jace, Multiverse Architect', 'Chandra, Torch of Defiance'] },
+      opp: [{ human: true, bf: ['Grizzly Bears', 'Mountain*2'] }],
+      turn: 0,
+    }),
+  ),
 ]

@@ -4258,3 +4258,14 @@ kept by the permanent it becomes (rule 400.7a). `"rebound"` is a `Keyword`, read
 effect:grant-ability-to-permanent-spell, effect:grant-rebound-to-spell, static:grant-riot. Found already built: static:grant-cascade,
 static:next-spell-uncounterable. Proving cards: Taigam, Ojutai Master; Cast Through Time; Bloodlord of Vaasgoth; Rhythm of the Wild; Uncivil
 Unrest; Domri, Chaos Bringer; Rivaz of the Claw; Thief of Existence.
+**One unless clause, whoever answers and whatever they do (2026-11-02).** `unless`'s `chooser` takes any `EffectPlayerRef`, read as
+the effect applies, and `{ anyOf: <scope> }` (each in turn order until one takes it); its options gain `{ doing }` (any effect, the
+chooser's own, offered as a `may` of it would be: `mayBeDone`, which now asks a hand for a `look-and-choose`), `{ payManaCostOf }`
+(rule 107.3h's X, 118.6's no cost) and a sacrifice's `exceptTarget`. `sacrifice-target` waits while choices are held (rule 101.4), as
+a chosen sacrifice does. `player-effect`'s `cantAttack` gains `"all"` and `{ planeswalkers }`, with `cantAttackBy` and `duration:
+"this-combat"`. `CardFilter.inZone`. Keys: cost:unless-pay-generic-per-counter, effect:pay-or-cant-attack-you, effect:unless-exile-graveyard,
+effect:unless-put-card-from-hand-on-top, effect:unless-sacrifice-other-than-target, effect:other-player-may-pay-spell-mana-cost,
+effect:sacrifice-greatest-unless-pay-its-mana-cost, effect:unless-target-controller, effect:unless-that-player, effect:unless-discard-hand.
+Found to need no code: effect:unless-discard-filtered-card (`may` with `else`: Hidden Horror's shape), and "{B} or {3}" (two `unless`es
+nested). Proving cards: Grip of Amnesia, Perplex, Tainted Specter, Cursed Monstrosity, Torment of Venom, Energy Vortex, Lim-Dûl's Hex,
+Sivriss, Nightmare Speaker, Ice Cave, Tariff, Champions of Minas Tirith, Jace, Multiverse Architect, Overencumbered.
