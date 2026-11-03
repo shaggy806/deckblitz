@@ -6637,6 +6637,7 @@ import _poolDryadArbor from "./pool/dryad-arbor.js";
 import _poolDryadGreenseeker from "./pool/dryad-greenseeker.js";
 import _poolDryadMilitant from "./pool/dryad-militant.js";
 import _poolDryadOfTheIlysianGrove from "./pool/dryad-of-the-ilysian-grove.js";
+import _poolDryadSophisticate from "./pool/dryad-sophisticate.js";
 import _poolDryadsCaress from "./pool/dryads-caress.js";
 import _poolDryadsFavor from "./pool/dryads-favor.js";
 import _poolDryadsRevival from "./pool/dryads-revival.js";
@@ -11667,6 +11668,7 @@ import _poolIllusion from "./pool/illusion.js";
 import _poolIllusionaryArmor from "./pool/illusionary-armor.js";
 import _poolIllusionaryForces from "./pool/illusionary-forces.js";
 import _poolIllusionaryInformant from "./pool/illusionary-informant.js";
+import _poolIllusionaryPresence from "./pool/illusionary-presence.js";
 import _poolIllusionaryServant from "./pool/illusionary-servant.js";
 import _poolIllusionaryWall from "./pool/illusionary-wall.js";
 import _poolIllusionistsBracers from "./pool/illusionists-bracers.js";
@@ -25167,6 +25169,7 @@ import _poolTrailOfCrumbs from "./pool/trail-of-crumbs.js";
 import _poolTrailOfEvidence from "./pool/trail-of-evidence.js";
 import _poolTrailOfMystery from "./pool/trail-of-mystery.js";
 import _poolTrailblazer from "./pool/trailblazer.js";
+import _poolTrailblazersBoots from "./pool/trailblazers-boots.js";
 import _poolTrailblazersTorch from "./pool/trailblazers-torch.js";
 import _poolTrailblazingHistorian from "./pool/trailblazing-historian.js";
 import _poolTrailtrackerScout from "./pool/trailtracker-scout.js";
@@ -25243,6 +25246,7 @@ import _poolTravelPreparations from "./pool/travel-preparations.js";
 import _poolTravelTheOverworld from "./pool/travel-the-overworld.js";
 import _poolTravelThroughCaradhras from "./pool/travel-through-caradhras.js";
 import _poolTravelersAmulet from "./pool/travelers-amulet.js";
+import _poolTravelersCloak from "./pool/travelers-cloak.js";
 import _poolTravelingBotanist from "./pool/traveling-botanist.js";
 import _poolTravelingMinister from "./pool/traveling-minister.js";
 import _poolTravelingPhilosopher from "./pool/traveling-philosopher.js";
@@ -26131,6 +26135,7 @@ import _poolVebulid from "./pool/vebulid.js";
 import _poolVecTownships from "./pool/vec-townships.js";
 import _poolVectisAgents from "./pool/vectis-agents.js";
 import _poolVectisDominator from "./pool/vectis-dominator.js";
+import _poolVectisGloves from "./pool/vectis-gloves.js";
 import _poolVectisSilencers from "./pool/vectis-silencers.js";
 import _poolVectorAsp from "./pool/vector-asp.js";
 import _poolVectorGlider from "./pool/vector-glider.js";
@@ -35340,6 +35345,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDryadGreenseeker,
   _poolDryadMilitant,
   _poolDryadOfTheIlysianGrove,
+  _poolDryadSophisticate,
   _poolDryadsCaress,
   _poolDryadsFavor,
   _poolDryadsRevival,
@@ -40370,6 +40376,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolIllusionaryArmor,
   _poolIllusionaryForces,
   _poolIllusionaryInformant,
+  _poolIllusionaryPresence,
   _poolIllusionaryServant,
   _poolIllusionaryWall,
   _poolIllusionistsBracers,
@@ -53870,6 +53877,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTrailOfEvidence,
   _poolTrailOfMystery,
   _poolTrailblazer,
+  _poolTrailblazersBoots,
   _poolTrailblazersTorch,
   _poolTrailblazingHistorian,
   _poolTrailtrackerScout,
@@ -53946,6 +53954,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTravelTheOverworld,
   _poolTravelThroughCaradhras,
   _poolTravelersAmulet,
+  _poolTravelersCloak,
   _poolTravelingBotanist,
   _poolTravelingMinister,
   _poolTravelingPhilosopher,
@@ -54834,6 +54843,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolVecTownships,
   _poolVectisAgents,
   _poolVectisDominator,
+  _poolVectisGloves,
   _poolVectisSilencers,
   _poolVectorAsp,
   _poolVectorGlider,
@@ -64056,6 +64066,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/dryad-greenseeker": _poolDryadGreenseeker,
   "pool/dryad-militant": _poolDryadMilitant,
   "pool/dryad-of-the-ilysian-grove": _poolDryadOfTheIlysianGrove,
+  "pool/dryad-sophisticate": _poolDryadSophisticate,
   "pool/dryads-caress": _poolDryadsCaress,
   "pool/dryads-favor": _poolDryadsFavor,
   "pool/dryads-revival": _poolDryadsRevival,
@@ -69086,6 +69097,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/illusionary-armor": _poolIllusionaryArmor,
   "pool/illusionary-forces": _poolIllusionaryForces,
   "pool/illusionary-informant": _poolIllusionaryInformant,
+  "pool/illusionary-presence": _poolIllusionaryPresence,
   "pool/illusionary-servant": _poolIllusionaryServant,
   "pool/illusionary-wall": _poolIllusionaryWall,
   "pool/illusionists-bracers": _poolIllusionistsBracers,
@@ -82586,6 +82598,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/trail-of-evidence": _poolTrailOfEvidence,
   "pool/trail-of-mystery": _poolTrailOfMystery,
   "pool/trailblazer": _poolTrailblazer,
+  "pool/trailblazers-boots": _poolTrailblazersBoots,
   "pool/trailblazers-torch": _poolTrailblazersTorch,
   "pool/trailblazing-historian": _poolTrailblazingHistorian,
   "pool/trailtracker-scout": _poolTrailtrackerScout,
@@ -82662,6 +82675,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/travel-the-overworld": _poolTravelTheOverworld,
   "pool/travel-through-caradhras": _poolTravelThroughCaradhras,
   "pool/travelers-amulet": _poolTravelersAmulet,
+  "pool/travelers-cloak": _poolTravelersCloak,
   "pool/traveling-botanist": _poolTravelingBotanist,
   "pool/traveling-minister": _poolTravelingMinister,
   "pool/traveling-philosopher": _poolTravelingPhilosopher,
@@ -83550,6 +83564,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/vec-townships": _poolVecTownships,
   "pool/vectis-agents": _poolVectisAgents,
   "pool/vectis-dominator": _poolVectisDominator,
+  "pool/vectis-gloves": _poolVectisGloves,
   "pool/vectis-silencers": _poolVectisSilencers,
   "pool/vector-asp": _poolVectorAsp,
   "pool/vector-glider": _poolVectorGlider,

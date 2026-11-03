@@ -333,6 +333,7 @@ import _poolIchthyomorphosis from "../pool/ichthyomorphosis.js";
 import _poolIconicShield from "../pool/iconic-shield.js";
 import _poolIgniteDisorder from "../pool/ignite-disorder.js";
 import _poolIgnobleHierarch from "../pool/ignoble-hierarch.js";
+import _poolIllusionaryPresence from "../pool/illusionary-presence.js";
 import _poolIllustriousHistorian from "../pool/illustrious-historian.js";
 import _poolInOketrasName from "../pool/in-oketras-name.js";
 import _poolInTheEyeOfChaos from "../pool/in-the-eye-of-chaos.js";
@@ -1206,6 +1207,7 @@ const shard: CardShard = {
     _poolIconicShield,
     _poolIgniteDisorder,
     _poolIgnobleHierarch,
+    _poolIllusionaryPresence,
     _poolIllustriousHistorian,
     _poolInOketrasName,
     _poolInTheEyeOfChaos,

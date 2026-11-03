@@ -798,6 +798,7 @@ import _poolTrainingCompound from "../pool/training-compound.js";
 import _poolTrainingRegimen from "../pool/training-regimen.js";
 import _poolTranquilGarden from "../pool/tranquil-garden.js";
 import _poolTravelTheOverworld from "../pool/travel-the-overworld.js";
+import _poolTravelersCloak from "../pool/travelers-cloak.js";
 import _poolTrevasAttendant from "../pool/trevas-attendant.js";
 import _poolTrickShot from "../pool/trick-shot.js";
 import _poolTriplicateSpirits from "../pool/triplicate-spirits.js";
@@ -1692,6 +1693,7 @@ const shard: CardShard = {
     _poolTrainingRegimen,
     _poolTranquilGarden,
     _poolTravelTheOverworld,
+    _poolTravelersCloak,
     _poolTrevasAttendant,
     _poolTrickShot,
     _poolTriplicateSpirits,

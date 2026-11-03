@@ -196,6 +196,7 @@ import _poolDrillworksMole from "../pool/drillworks-mole.js";
 import _poolDriven from "../pool/driven.js";
 import _poolDriverOfTheDead from "../pool/driver-of-the-dead.js";
 import _poolDrumhunter from "../pool/drumhunter.js";
+import _poolDryadSophisticate from "../pool/dryad-sophisticate.js";
 import _poolDuelingCoach from "../pool/dueling-coach.js";
 import _poolDukharaPeafowl from "../pool/dukhara-peafowl.js";
 import _poolDwarvenShortsword from "../pool/dwarven-shortsword.js";
@@ -1070,6 +1071,7 @@ const shard: CardShard = {
     _poolDriven,
     _poolDriverOfTheDead,
     _poolDrumhunter,
+    _poolDryadSophisticate,
     _poolDuelingCoach,
     _poolDukharaPeafowl,
     _poolDwarvenShortsword,

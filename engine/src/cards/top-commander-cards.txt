@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4257 already implemented / 743 missing (marks refreshed 2026-11-03)
+4259 already implemented / 741 missing (marks refreshed 2026-11-03)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -652,7 +652,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   653  Sheltered Thicket                        {0}              Land — Mountain Forest
 [x]   654  Ruinous Ultimatum                        {R}{R}{W}{W}{W}{B}{B} Sorcery
 [x]   655  Mentor of the Meek                       {2}{W}           Creature — Human Soldier
-[ ]   656  Trailblazer's Boots                      {2}              Artifact — Equipment
+[x]   656  Trailblazer's Boots                      {2}              Artifact — Equipment
 [x]   657  Fog                                      {G}              Instant
 [ ]   658  Sea Gate Restoration // Sea Gate, Reborn {7}              Sorcery // Land
 [x]   659  Consecrated Sphinx                       {4}{U}{U}        Creature — Sphinx
@@ -2034,7 +2034,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2041  Homunculus Horde                         {3}{U}           Creature — Homunculus
 [x]  2042  Rakdos Guildgate                         {0}              Land — Gate
 [ ]  2043  The Last Agni Kai                        {1}{R}           Instant
-[ ]  2044  Volatile Stormdrake                      {1}{U}           Creature — Drake
+[x]  2044  Volatile Stormdrake                      {1}{U}           Creature — Drake
 [x]  2045  Crippling Fear                           {2}{B}{B}        Sorcery
 [x]  2046  Trinket Mage                             {2}{U}           Creature — Human Wizard
 [x]  2047  Birthing Pod                             {3}{G/P}         Artifact

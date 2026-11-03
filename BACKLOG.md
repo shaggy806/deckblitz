@@ -438,12 +438,19 @@ section keeps only what to do next.
   creatures", watching delayed triggers, a spell's additional cost taking `KickerAlsoCost`, dynamic life costs, a cost paid
   N times, a look at another player's top card, random targets, skipped combat phases, the creatures blocking a trigger's object and counts of them, coloured cost
   increases, offering, secret choices, a static making a planeswalker a creature, mass type changes, a count of different
-  mana costs and permanents controlled since the turn began (253 proving cards; `--stale` 1,581 wait for `author-freed`).
-  Next by `--greedy --groups`: `decision:choose-from-zone-extensions` (6), `mechanic:suspend-and-time-counters` (6),
-  `effect:look-at-opponent-hand-as-enters` (6). Narrow keys `author-freed` should give: Stronghold Gambit (a secret pick from
-  hand), The Toymaker's Trap (an unchosen number, an opponent's guess), Total War ("didn't attack" means that declaration, not
-  the turn), and Siren's Call (`condition:cast-timing-condition`); `replacement:others-enter-as-subtype` (Master Biomancer)
-  stays open.
+  mana costs, permanents controlled since the turn began, a may another player answers, batched dies triggers, tokens linked to
+  an exiled card or their maker, "up to" in a searched public zone, an Aura tapping its host, mana abilities from a hand or a
+  graveyard, attacks on a battle or an opponent, landwalk of any kind, draw replacements, mana pools, lands tapped for other
+  mana, a player becoming a target, hexproof from abilities, cards in exile as targets and "this way" results (320 proving
+  cards; `--stale` 1,609 wait for `author-freed`). Next by `--greedy --groups`: `mechanic:suspend-and-time-counters` (6),
+  `effect:look-at-opponent-hand-as-enters` (6), `effect:tokens-created-with-source` (6); three cloud sessions stopped early
+  on 2026-11-03, so `condition:enchanted-controller-is-monarch`, `effect:protection-choice-and-dynamic`,
+  `static:combat-restriction-extensions`, `trigger:becomes-tapped-batch`, `condition:greatest-power-condition`,
+  `effect:target-spec-additions` and `static:gain-abilities-from-graveyard` are simply still open. Narrow keys `author-freed`
+  should give: Stronghold Gambit (a secret pick from hand), The Toymaker's Trap (an unchosen number, an opponent's guess),
+  Total War ("didn't attack" means that declaration, not the turn), Siren's Call (`condition:cast-timing-condition`), Tanglewalker
+  (not true landwalk), Veteran's Voice (`hostOfSource: false` would fizzle if the Aura moves onto the target) and Dance of Many
+  (its two leave abilities are printed); `replacement:others-enter-as-subtype` (Master Biomancer) stays open.
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next

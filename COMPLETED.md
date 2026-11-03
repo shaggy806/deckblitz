@@ -12,6 +12,9 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **Landwalk of any kind** (2026-11-03, `7b9ea10b7`): rule 702.14, a static's land filter or a chosen land type, with Staff of
+  the Ages, Hammerheim and the bots' block check reading it. Dryad Sophisticate, Trailblazer's Boots, Vectis Gloves, Traveler's
+  Cloak, Illusionary Presence.
 - **Hexproof from abilities, and "can't be the target" that isn't hexproof** (2026-11-03, `88f6dd490`): `hexproofFrom`'s
   `notHexproof`, kept through a loss of hexproof; the prose forms marked. Volatile Stormdrake, Shanna, Sisay's Legacy.
 - **A player becoming a target, and the first time by anyone** (2026-11-03, `711f1e44c`): `player-targeted`, and

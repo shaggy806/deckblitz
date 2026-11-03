@@ -848,7 +848,8 @@ missing. Re-run `--greedy` for Phase 2's order.
   `effect:linked-token-leaves` with `effect:token-trigger-returns-linked-exiled-card`, `decision:search-hand-and-library` with
   `effect:search-up-to-public-zone`, `cost:tap-enchanted-permanent` with `cost:tap-untapped-creature-additional`, and
   `effect:hand-mana-ability` with `effect:mana-ability-graveyard-exile-cost`. Three cloud sessions took six families each
-  beside them.
+  beside them and were stopped early, pushing to their own branches for this PC to verify and merge: nine built, one half built
+  and finished here (`keyword:landwalk`), and eight not started. The night's total: 25 families, 48 keys, 107 proving cards.
 - **2026-11-03: `replacement:new-event-replacements`, its draw units.** `would-draw`'s `instead: { effect }` and the
   except-first and first-each-turn exemptions (`draw-replacement-look-and-choose`, `-except-first`, `-first-each-turn`);
   Underrealm Lich, Tomorrow, Sages of the Anima, Teferi's Ageless Insight, Reed Richards, Bard. Left: the reveal key and
