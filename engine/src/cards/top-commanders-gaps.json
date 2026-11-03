@@ -1397,7 +1397,8 @@
   "effect:unless-discard-hand",
   "effect:copy-spell-for-each-by-caster",
   "effect:copy-spell-for-each-chosen-paid",
-  "keyword:gravestorm"
+  "keyword:gravestorm",
+  "static:cost-increase-colored"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

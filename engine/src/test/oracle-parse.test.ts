@@ -11125,3 +11125,19 @@ describe("any number of … with different names or powers", () => {
     });
   });
 });
+
+describe("spells of a colour costing a coloured pip more", () => {
+  const statics = (oracle_text: string) =>
+    parseFace({ name: "Card", type_line: "Creature", oracle_text }, { tokenFor: (d: string) => d }).static;
+  it("reads the colour and the pips", () => {
+    expect(statics("Black spells you cast cost {B} more to cast.")[0]).toMatchObject({
+      costModification: { applies: { colors: ["B"] }, caster: "you", increaseColored: "{B}" },
+    });
+    expect(statics("Blue spells you cast cost {U} more to cast.")[0]).toMatchObject({
+      costModification: { applies: { colors: ["U"] }, caster: "you", increaseColored: "{U}" },
+    });
+  });
+  it("leaves another shape alone", () => {
+    expect(statics("Black spells your opponents cast cost {B} more to cast.")).toEqual([]);
+  });
+});

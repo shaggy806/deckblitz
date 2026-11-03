@@ -12742,6 +12742,9 @@ function selfCostLine(line) {
 function spellCostStaticOf(line, text) {
   const made = (costModification) => ({ affects: { scope: "self" }, costModification, text });
   let m;
+  if ((m = /^(White|Blue|Black|Red|Green) spells you cast cost ((?:\{[WUBRG]\})+) more to cast\.$/.exec(line))) {
+    return made({ applies: { colors: [COLOR_WORD[m[1].toLowerCase()]] }, caster: "you", increaseColored: m[2] });
+  }
   if ((m = /^Spells you cast that target an? (.+?) cost \{(\d+)\} less to cast\.$/.exec(line))) {
     const targeting = parseTypePhrase(m[1]);
     if (targeting === null || Object.keys(targeting).length === 0) return null;

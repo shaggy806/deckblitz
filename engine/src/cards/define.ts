@@ -3506,6 +3506,12 @@ export interface StaticAbility {
      * greater" — needed-cards P16). */
     readonly reduceGeneric?: CostReductionAmount;
     readonly increaseGeneric?: number;
+    /** Coloured pips added to the cost ("Black spells you cast cost {B} more
+     * to cast" — Derelor), as a mana string of coloured symbols: an increase,
+     * so applied before any reduction (rule 601.2f), and to whatever cost the
+     * spell is being cast for, an alternative one included (118.9d). The
+     * spell's mana value is untouched: it reads the mana cost (rule 202.3). */
+    readonly increaseColored?: string;
     /** Also require the spell's subtype to match this permanent's own
      * `chosenCreatureType` (Urza's Incubator: "creature spells of the chosen
      * type" — needed-cards P14). No effect (matches nothing) before the

@@ -5244,6 +5244,10 @@ is "can't attack a player it has already attacked this turn" (Port Razer), by th
 - `costModification: { applies: CardFilter, reduceGeneric?, increaseGeneric? }`
   — Foundry Inspector, Thalia. `affects` is ignored — `applies` says what it
   hits. Optional refinements:
+  - `increaseColored: "{B}"` — "Black spells you cast cost {B} more to cast"
+    (Derelor, the Leeches): coloured pips added before any reduction (rule
+    601.2f), to an alternative cost as well (118.9d). The mirror of
+    `reduceColored`.
   - `caster: "you" | "opponent"` — "spells you cast" / "spells your
     opponents cast", judged against whoever is actually casting it (not the
     card's controller, so a card cast out of someone else's graveyard is the

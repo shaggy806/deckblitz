@@ -4395,3 +4395,5 @@ Burn at the Stake, Disruption Protocol, Deprive, Magmatic Insight, Scorched Eart
 **An ability's life cost read as it's paid (2026-11-02).** `AbilityLifeCost`, read only through `abilityLifeCost(state, player, cost, x, source)`, gains `"half-rounded-up"`, `"x"` (its X capped by
 the life there is) and `{ each, per }` (`dynamic-life-cost.test.ts`). Key: cost:dynamic-life-cost. Proving cards: Lurking Evil, Murderous Betrayal, Krumar Initiate, Tornado. Hand of Vecna's
 `per: "card-in-hand"` is built, but it waits on the Vecna token; Protection Racket's life is an effect's.
+
+**A spell's cost raised by coloured pips (2026-11-03).** `costModification.increaseColored` adds coloured pips to matching spells' total cost before any reduction (rule 601.2f), to an alternative cost as well (118.9d); the shown cost adds them (`cost-increase-colored.test.ts`). Key: static:cost-increase-colored. Proving cards: Derelor, Sapphire Leech, Andradite Leech.

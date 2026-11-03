@@ -13992,6 +13992,11 @@ export class Game {
       {
         ...base,
         generic: base.generic + tax + base.x * Math.max(0, xValue) + mods.increaseGeneric + targetTax + permissionTax,
+        // "Black spells you cast cost {B} more to cast" (Derelor): pips added
+        // before anything comes off (rule 601.2f).
+        colored: Object.fromEntries(
+          Object.entries(base.colored).map(([c, n]) => [c, n + mods.increaseColored[c as Color]]),
+        ) as Record<Color, number>,
         x: 0,
       },
       reduction,
@@ -14502,6 +14507,13 @@ export class Game {
       }
       out.push(token);
     }
+    // Pips an increase added (Derelor's {B}): beyond any the printed cost had.
+    for (const color of COLORS) {
+      for (let i = 0; i < colored[color]; i += 1) {
+        out.push(`{${color}}`);
+        changed = true;
+      }
+    }
     if (!changed) return null;
     if (!genericShown && generic > 0) out.unshift(`{${generic}}`);
     return out.length > 0 ? out.join("") : "{0}";
@@ -14509,8 +14521,9 @@ export class Game {
 
   /** What `costModification` statics on the battlefield (and Eminence's in
    * the command zone) do to `cardId`'s cost as `player` casts it with
-   * `targetCount` distinct targets: the generic mana they add, the generic
-   * mana they take off, and the coloured reductions (rule 601.2f). */
+   * `targetCount` distinct targets: the generic mana and coloured pips they
+   * add, the generic mana they take off, and the coloured reductions (rule
+   * 601.2f). */
   private costModificationFor(
     player: PlayerId,
     cardId: ObjectId,
@@ -14521,8 +14534,9 @@ export class Game {
     targets: readonly (TargetRef | null | undefined)[] | undefined,
     def: CardDefinition,
     xValue: number,
-  ): { increaseGeneric: number; reduceGeneric: number; colored: ColoredReduction[] } {
+  ): { increaseGeneric: number; increaseColored: Record<Color, number>; reduceGeneric: number; colored: ColoredReduction[] } {
     let increaseGeneric = 0;
+    const increaseColored: Record<Color, number> = { W: 0, U: 0, B: 0, R: 0, G: 0 };
     let reduceGeneric = 0;
     const colored: ColoredReduction[] = [];
     for (const { source, mod } of this.reachingCostModifications(player, cardId)) {
@@ -14549,6 +14563,10 @@ export class Game {
         reduceGeneric += times * this.costReductionAmount(mod.reduceGeneric, source.controller, source.id, cardId);
       }
       increaseGeneric += times * (mod.increaseGeneric ?? 0);
+      if (mod.increaseColored !== undefined) {
+        const pips = parseManaCost(mod.increaseColored).colored;
+        for (const color of COLORS) increaseColored[color] += times * pips[color];
+      }
       if (mod.reduceColored !== undefined) {
         const n =
           times *
@@ -14578,7 +14596,7 @@ export class Game {
       // Rule 702.41a: {1} less for each one its caster controls now, as it's cast.
       if (grant.affinityFor !== undefined) reduceGeneric += this.countBattlefieldMatching(player, grant.affinityFor);
     }
-    return { increaseGeneric, reduceGeneric, colored };
+    return { increaseGeneric, increaseColored, reduceGeneric, colored };
   }
 
   /** The `costModification` statics that reach `cardId` as `player` casts it,
