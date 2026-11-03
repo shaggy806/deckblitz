@@ -627,6 +627,7 @@ import _poolRiseFromTheGrave from "../pool/rise-from-the-grave.js";
 import _poolRiteOfBelzenlok from "../pool/rite-of-belzenlok.js";
 import _poolRiteOfReplication from "../pool/rite-of-replication.js";
 import _poolRoaleskApexHybrid from "../pool/roalesk-apex-hybrid.js";
+import _poolRoarOfJukai from "../pool/roar-of-jukai.js";
 import _poolRootwaterHunter from "../pool/rootwater-hunter.js";
 import _poolRoughshodDuo from "../pool/roughshod-duo.js";
 import _poolRoverBlades from "../pool/rover-blades.js";
@@ -1523,6 +1524,7 @@ const shard: CardShard = {
     _poolRiteOfBelzenlok,
     _poolRiteOfReplication,
     _poolRoaleskApexHybrid,
+    _poolRoarOfJukai,
     _poolRootwaterHunter,
     _poolRoughshodDuo,
     _poolRoverBlades,

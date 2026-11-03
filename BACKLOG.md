@@ -430,8 +430,10 @@ section keeps only what to do next.
   covered. **Before building a key, try writing its card from `card:find`:** 360 open keys' notes say the
   vocabulary lacks an option, and the 9 tried of those all ran as it stood (`docs/plans/need-keys-after-the-walk.md`, the
   over-count pilot and its recheck, which closed 44 more). Next seam: a spell's `additionalCost` taking
-  `AbilityCost`'s parts (about 15 cards). Next unclaimed: `amount:damage-prevented-this-way` (7), then
-  `bug:as-enters-choices-any-entry` (7) and `--greedy --groups` (control of a player, rule 723, landed 2026-11-01).
+  `AbilityCost`'s parts (about 15 cards). Fourth overnight round, 2026-11-02: damage prevented this way, this-way
+  results, permissions over exiled cards, linked face-down exile, unattach as a cost and a keyword's non-mana cost
+  (49 proving cards; `--stale` 1,514 wait for `author-freed`). Next by `--greedy --groups`:
+  `static:cant-have-keyword` (7), `decision:choose-from-zone-extensions` (7), `effect:counter-ability` (7).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next

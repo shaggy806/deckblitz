@@ -398,6 +398,18 @@ the copy reads the original's. `exiled-as-cost` now carries over to a copy
 and `revealed` refs of `AmountRef` don't, so a copy of such a spell reads nothing. Found building that
 family; not reported from play.
 
+**A player can't play another player's face-down exiled card blind.** Rule 406.3a lets the effect that exiled a
+card face down allow it to be played; the engine offers a linked grant only to a player who may look at the card
+(`linkedCastGrantFor`, `game.ts`). Blocks Urianger Augurelt and Lobelia. Found 2026-11-02; not reported from play.
+
+**A keyword's other cost counts the graveyard as the cast starts.** `whyCannotPayAlso` (`game.ts`) doesn't offer a
+splice set where one card's sacrifice would supply the cards another's exile needs, though rule 601.2h lets costs be
+paid in any order. Found 2026-11-02; not reported from play.
+
+**A shield's `then` runs once per damage event.** A simultaneous sweep split across Refraction Trap's 3 prevention
+deals its damage as two instances rather than one; the total is right (rule 615.5, the loop over `outcome.shields`
+in `game.ts`). Found 2026-11-02; not reported from play.
+
 ## Latent
 
 The engine departs from the rules here, but no pool card reaches it yet: fix each when a card

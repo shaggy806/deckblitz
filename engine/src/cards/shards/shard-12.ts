@@ -368,6 +368,7 @@ import _poolHornetSting from "../pool/hornet-sting.js";
 import _poolHowlpackAvenger from "../pool/howlpack-avenger.js";
 import _poolHulkBruceBanner from "../pool/hulk-bruce-banner.js";
 import _poolHundredTalonKami from "../pool/hundred-talon-kami.js";
+import _poolHundredTalonStrike from "../pool/hundred-talon-strike.js";
 import _poolHungerOfTheNim from "../pool/hunger-of-the-nim.js";
 import _poolHuntedGhoul from "../pool/hunted-ghoul.js";
 import _poolIcehideGolem from "../pool/icehide-golem.js";
@@ -1250,6 +1251,7 @@ const shard: CardShard = {
     _poolHowlpackAvenger,
     _poolHulkBruceBanner,
     _poolHundredTalonKami,
+    _poolHundredTalonStrike,
     _poolHungerOfTheNim,
     _poolHuntedGhoul,
     _poolIcehideGolem,

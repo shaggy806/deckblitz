@@ -147,9 +147,9 @@ test('a lesson opens in the page too, and its Next is answered there', async ({ 
   await page.locator('[data-tour="corner-help"]').click()
   await page.getByRole('menuitem', { name: /Learn Commander/ }).click()
   const card = page.locator('.coach-card')
-  await expect(card).toContainText('Welcome to the table', { timeout: 60_000 })
+  await expect(card).toContainText('Welcome!', { timeout: 60_000 })
   await card.getByRole('button', { name: 'Next' }).click()
-  await expect(card).toContainText('Play a land', { timeout: 20_000 })
+  await expect(card).toContainText('How you win', { timeout: 20_000 })
   expect(typesOf(sent)).toEqual([])
 })
 

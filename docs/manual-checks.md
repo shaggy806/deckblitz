@@ -6295,6 +6295,7 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 - **Do:** Cast The Creation of Avacyn and choose Grizzly Bears from your library. Pass to your next turn.
 - **Expect:** After chapter I the Bears are face down in your exile. After chapter II they're face up and you've lost 2 life.
+
 ## Unattaching an Equipment as a cost (2026-11-02)
 
 ### Leonin Bola: the creature pays by taking it off

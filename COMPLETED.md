@@ -12,6 +12,22 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **A keyword's cost that isn't mana** (2026-11-02, `8cd3310b2`): `KickerAlsoCost` on splice and squad, with
+  exiling from a graveyard and an opponent gaining life; Horobi's Whisper, Hundred-Talon Strike, Roar of Jukai,
+  Torrent of Stone, Veil of Secrecy, Ruthless Radrat, Thrill-Kill Disciple.
+- **An unattach as a cost** (2026-11-02, `8da768d55`): `AbilityCost.unattach`, this Equipment or a chosen one;
+  Leonin Bola, Razor Boomerang, Sunforger, Captain America, First Avenger.
+- **Exile face down, linked to the source** (2026-11-02, `fc6246430`): `exile-from-library.faceDown`,
+  `exiledFaceDown.lookersOnly`, `turn-exiled-face-up`; Bomat Courier, Knowledge Vault, Pyxis of Pandemonium,
+  Wall of Mourning, Kayla's Music Box, The Creation of Avacyn.
+- **Permissions over exiled cards** (2026-11-02, `4d6891f58`): one `ExilePermission` (its owner's, taxed, free,
+  lands entering tapped), static and timed over linked cards; 14 proving cards, among them Nightveil Specter,
+  Elite Spellbinder and Court of Locthwain.
+- **What an earlier step did** (2026-11-02, `de55e22f0`): `gained-control`, `control-effect`, `keptOnTopThisWay`,
+  a revealed card's mana value; 3 of the 5 keys needed no code; 12 proving cards.
+- **Damage prevented this way** (2026-11-02, `151429fe6`): `damagePreventedThisWay`, read in a delayed ability
+  too, and a chosen source's `then` reading the spell's own targets; Sacred Boon, Scars of the Veteran, Bone Mask,
+  Brace for Impact, Refraction Trap, Chant of Vitu-Ghazi.
 - **An effect done to each matching permanent** (`for-each-permanent`, 2026-11-02): one combinator instead
   of a new `-all` twin per effect; 19 keys and 10 proving cards (`neededCards-features.md`). The pilot behind
   it also marked 5 keys the vocabulary already covered, with 7 cards (`test/need-key-recheck.test.ts`).

@@ -633,6 +633,7 @@ import _poolRandomEncounter from "../pool/random-encounter.js";
 import _poolRaphaelNinjaDestroyer from "../pool/raphael-ninja-destroyer.js";
 import _poolRaptorHatchling from "../pool/raptor-hatchling.js";
 import _poolRassilonTheWarPresident from "../pool/rassilon-the-war-president.js";
+import _poolRazorBoomerang from "../pool/razor-boomerang.js";
 import _poolReality from "../pool/reality.js";
 import _poolReapingWillow from "../pool/reaping-willow.js";
 import _poolRecantation from "../pool/recantation.js";
@@ -1556,6 +1557,7 @@ const shard: CardShard = {
     _poolRaphaelNinjaDestroyer,
     _poolRaptorHatchling,
     _poolRassilonTheWarPresident,
+    _poolRazorBoomerang,
     _poolReality,
     _poolReapingWillow,
     _poolRecantation,

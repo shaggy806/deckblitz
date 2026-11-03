@@ -768,6 +768,7 @@ import _poolThoughtDevourer from "../pool/thought-devourer.js";
 import _poolThranLens from "../pool/thran-lens.js";
 import _poolThranTemporalGateway from "../pool/thran-temporal-gateway.js";
 import _poolThrashingMudspawn from "../pool/thrashing-mudspawn.js";
+import _poolThrillKillDisciple from "../pool/thrill-kill-disciple.js";
 import _poolThrissNantukoPrimus from "../pool/thriss-nantuko-primus.js";
 import _poolThrivingRats from "../pool/thriving-rats.js";
 import _poolThroneOfBone from "../pool/throne-of-bone.js";
@@ -1659,6 +1660,7 @@ const shard: CardShard = {
     _poolThranLens,
     _poolThranTemporalGateway,
     _poolThrashingMudspawn,
+    _poolThrillKillDisciple,
     _poolThrissNantukoPrimus,
     _poolThrivingRats,
     _poolThroneOfBone,

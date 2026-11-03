@@ -404,6 +404,7 @@ import _poolLegionExtruder from "../pool/legion-extruder.js";
 import _poolLegolasCounterOfKills from "../pool/legolas-counter-of-kills.js";
 import _poolLeonardoCuttingEdge from "../pool/leonardo-cutting-edge.js";
 import _poolLeoninBattlemage from "../pool/leonin-battlemage.js";
+import _poolLeoninBola from "../pool/leonin-bola.js";
 import _poolLeoninElder from "../pool/leonin-elder.js";
 import _poolLevitatingStatue from "../pool/levitating-statue.js";
 import _poolLiegeOfTheTangle from "../pool/liege-of-the-tangle.js";
@@ -1308,6 +1309,7 @@ const shard: CardShard = {
     _poolLegolasCounterOfKills,
     _poolLeonardoCuttingEdge,
     _poolLeoninBattlemage,
+    _poolLeoninBola,
     _poolLeoninElder,
     _poolLevitatingStatue,
     _poolLiegeOfTheTangle,

@@ -99,6 +99,7 @@ import _poolBurlfistOak from "../pool/burlfist-oak.js";
 import _poolBurrowingRazormaw from "../pool/burrowing-razormaw.js";
 import _poolCanopyCrawler from "../pool/canopy-crawler.js";
 import _poolCapennaExpress from "../pool/capenna-express.js";
+import _poolCaptainAmericaFirstAvenger from "../pool/captain-america-first-avenger.js";
 import _poolCarnageGladiator from "../pool/carnage-gladiator.js";
 import _poolCarnophage from "../pool/carnophage.js";
 import _poolCarrionLocust from "../pool/carrion-locust.js";
@@ -994,6 +995,7 @@ const shard: CardShard = {
     _poolBurrowingRazormaw,
     _poolCanopyCrawler,
     _poolCapennaExpress,
+    _poolCaptainAmericaFirstAvenger,
     _poolCarnageGladiator,
     _poolCarnophage,
     _poolCarrionLocust,

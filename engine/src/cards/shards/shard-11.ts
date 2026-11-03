@@ -791,6 +791,7 @@ import _poolTirelessHauler from "../pool/tireless-hauler.js";
 import _poolTombOfTheSpiritDragon from "../pool/tomb-of-the-spirit-dragon.js";
 import _poolTomeOfTheGuildpact from "../pool/tome-of-the-guildpact.js";
 import _poolTophGreatestEarthbender from "../pool/toph-greatest-earthbender.js";
+import _poolTorrentOfStone from "../pool/torrent-of-stone.js";
 import _poolTowerOfCalamities from "../pool/tower-of-calamities.js";
 import _poolTowerWinder from "../pool/tower-winder.js";
 import _poolTrainOfThought from "../pool/train-of-thought.js";
@@ -1685,6 +1686,7 @@ const shard: CardShard = {
     _poolTombOfTheSpiritDragon,
     _poolTomeOfTheGuildpact,
     _poolTophGreatestEarthbender,
+    _poolTorrentOfStone,
     _poolTowerOfCalamities,
     _poolTowerWinder,
     _poolTrainOfThought,

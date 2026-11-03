@@ -635,6 +635,7 @@ import _poolRumbleweed from "../pool/rumbleweed.js";
 import _poolRunedArch from "../pool/runed-arch.js";
 import _poolRuptureSpire from "../pool/rupture-spire.js";
 import _poolRustHarvester from "../pool/rust-harvester.js";
+import _poolRuthlessRadrat from "../pool/ruthless-radrat.js";
 import _poolSageOfTheFang from "../pool/sage-of-the-fang.js";
 import _poolSaltFlats from "../pool/salt-flats.js";
 import _poolSamutsSprint from "../pool/samuts-sprint.js";
@@ -1515,6 +1516,7 @@ const shard: CardShard = {
     _poolRunedArch,
     _poolRuptureSpire,
     _poolRustHarvester,
+    _poolRuthlessRadrat,
     _poolSageOfTheFang,
     _poolSaltFlats,
     _poolSamutsSprint,

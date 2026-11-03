@@ -707,6 +707,7 @@ import _poolStuffedBear from "../pool/stuffed-bear.js";
 import _poolSuffocatingFumes from "../pool/suffocating-fumes.js";
 import _poolSummonAlexander from "../pool/summon-alexander.js";
 import _poolSummonKujata from "../pool/summon-kujata.js";
+import _poolSunforger from "../pool/sunforger.js";
 import _poolSunhomeEnforcer from "../pool/sunhome-enforcer.js";
 import _poolSuqataLancer from "../pool/suqata-lancer.js";
 import _poolSureFootedInfiltrator from "../pool/sure-footed-infiltrator.js";
@@ -1595,6 +1596,7 @@ const shard: CardShard = {
     _poolSuffocatingFumes,
     _poolSummonAlexander,
     _poolSummonKujata,
+    _poolSunforger,
     _poolSunhomeEnforcer,
     _poolSuqataLancer,
     _poolSureFootedInfiltrator,
