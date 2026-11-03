@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4250 already implemented / 750 missing (marks refreshed 2026-11-03)
+4253 already implemented / 747 missing (marks refreshed 2026-11-03)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -585,7 +585,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   586  Darksteel Mutation                       {1}{W}           Enchantment — Aura
 [x]   587  Return the Favor                         {R}{R}           Instant
 [x]   588  Six                                      {2}{G}           Legendary Creature — Treefolk
-[ ]   589  Teferi's Ageless Insight                 {2}{U}{U}        Legendary Enchantment
+[x]   589  Teferi's Ageless Insight                 {2}{U}{U}        Legendary Enchantment
 [x]   590  Ghostly Flicker                          {2}{U}           Instant
 [x]   591  Talisman of Impulse                      {2}              Artifact
 [x]   592  Selfless Spirit                          {1}{W}           Creature — Spirit Cleric
@@ -2945,7 +2945,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2952  Dragonstorm Globe                        {3}              Artifact
 [x]  2953  Fated Firepower                          {X}{R}{R}{R}     Enchantment
 [x]  2954  Curious Altisaur                         {3}{G}           Creature — Dinosaur
-[ ]  2955  Underrealm Lich                          {3}{B}{G}        Creature — Zombie Elf Shaman
+[x]  2955  Underrealm Lich                          {3}{B}{G}        Creature — Zombie Elf Shaman
 [x]  2956  Eye of Ugin                              {0}              Legendary Land
 [ ]  2957  Yenna, Redtooth Regent                   {2}{G}{W}        Legendary Creature — Elf Noble
 [x]  2958  Crossroads Village                       {0}              Land — Town
@@ -4112,7 +4112,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4119  Sword of the Squeak                      {2}              Artifact — Equipment
 [x]  4120  Azure Beastbinder                        {1}{U}           Creature — Rat Rogue
 [x]  4121  Curse of Disturbance                     {2}{B}           Enchantment — Aura Curse
-[ ]  4122  Horizon Stone                            {5}              Artifact
+[x]  4122  Horizon Stone                            {5}              Artifact
 [x]  4123  Rogue's Gloves                           {2}              Artifact — Equipment
 [x]  4124  Inquisitor's Flail                       {2}              Artifact — Equipment
 [ ]  4125  Tinybones Joins Up                       {B}              Legendary Enchantment
