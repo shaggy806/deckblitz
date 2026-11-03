@@ -4140,3 +4140,9 @@ Experiment, Goblin Charbelcher, Kamahl's Summons, Naya Soulbeast, Psychic Spiral
 (rule 701.3d), unpayable with nothing attached; the chosen one is read back as `"sacrificed"`, and a `divided` total
 that reads it gets one offer per total. Keys: cost:unattach-cost, cost:unattach-equipment. Proving cards: Leonin Bola,
 Razor Boomerang, Sunforger, Captain America, First Avenger (`test/unattach-cost.test.ts`).
+
+**A keyword's cost that isn't mana (2026-11-02).** `KickerAlsoCost` on `splice.also` as well as `kicker.also`, with
+`exileFromGraveyard` and `opponentGainsLife` added, multiplied for squad's "any number of times" and bounding its
+offers; several spliced cards' costs paid in turn (`GameState.pendingAlsoCosts`). Keys: cost:splice-non-mana,
+keyword:squad-nonmana-cost. Proving cards: Horobi's Whisper, Hundred-Talon Strike, Roar of Jukai, Torrent of Stone,
+Veil of Secrecy, Ruthless Radrat, Thrill-Kill Disciple (`test/keyword-nonmana-cost.test.ts`).

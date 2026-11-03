@@ -9528,6 +9528,61 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{ bf: ['Hill Giant'] }, { bf: ['Grizzly Bears'] }, {}],
     }),
   ),
+  // --- Splice and squad costs that aren't mana (2026-11-02) ------------------
+  preset(
+    'Horobi\'s Whisper: spliced by exiling four cards from your graveyard',
+    board({
+      you: {
+        bf: ['Mountain*2', 'Swamp'],
+        hand: ['Glacial Ray', 'Horobi\'s Whisper'],
+        gy: ['Grizzly Bears', 'Hill Giant', 'Serra Angel', 'Coral Merfolk', 'Wind Drake'],
+      },
+      opp: [{ bf: ['Hill Giant'] }],
+    }),
+  ),
+  preset(
+    'Hundred-Talon Strike: spliced by tapping a white creature',
+    board({
+      you: { bf: ['Mountain*2', 'Savannah Lions', 'Grizzly Bears'], hand: ['Glacial Ray', 'Hundred-Talon Strike'] },
+      opp: [{}],
+    }),
+  ),
+  preset(
+    'Roar of Jukai: you pick the opponent who gains the life',
+    board({
+      you: { bf: ['Mountain*2'], hand: ['Glacial Ray', 'Roar of Jukai'] },
+      opp: [{}, {}, {}],
+    }),
+  ),
+  preset(
+    'Splice: two costs that aren\'t mana are paid one after the other',
+    board({
+      you: {
+        bf: ['Mountain*2', 'Coral Merfolk', 'Wind Drake', 'Grizzly Bears'],
+        hand: ['Glacial Ray', 'Veil of Secrecy', 'Horobi\'s Whisper'],
+        gy: ['Serra Angel', 'Hill Giant', 'Savannah Lions', 'Lightning Bolt', 'Counterspell'],
+      },
+      opp: [{ bf: ['Hill Giant'] }],
+    }),
+  ),
+  preset(
+    'Ruthless Radrat: squad is offered once for each four cards in your graveyard',
+    board({
+      you: {
+        bf: ['Swamp*3'],
+        hand: ['Ruthless Radrat'],
+        gy: ['Grizzly Bears', 'Hill Giant', 'Serra Angel', 'Coral Merfolk', 'Wind Drake', 'Savannah Lions', 'Lightning Bolt', 'Counterspell', 'Glacial Ray'],
+      },
+      opp: [{}],
+    }),
+  ),
+  preset(
+    'Thrill-Kill Disciple: squad takes a card and {1} each time',
+    board({
+      you: { bf: ['Mountain*5'], hand: ['Thrill-Kill Disciple', 'Grizzly Bears', 'Hill Giant', 'Serra Angel'] },
+      opp: [{}],
+    }),
+  ),
   preset(
     'Captain America: two Equipment of one mana value are picked on the board',
     board({

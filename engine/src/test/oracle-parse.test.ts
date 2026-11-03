@@ -1990,6 +1990,19 @@ describe("templates for features built since the parser began (2026-10-11)", () 
       "Squad {2} (As an additional cost to cast this spell, you may pay {2} any number of times. When this creature enters, create that many tokens that are copies of it.)",
     );
     expect(squad.kicker).toEqual({ cost: "{2}", multi: true, keyword: "squad" });
+    // A cost that isn't only mana: `kicker.also`, paid each time over.
+    expect(face("Squad—Exile four cards from your graveyard.").kicker).toEqual({
+      cost: "",
+      multi: true,
+      keyword: "squad",
+      also: { text: "Exile four cards from your graveyard", exileFromGraveyard: { count: 4 } },
+    });
+    expect(face("Squad—{1}, Discard a card.").kicker).toEqual({
+      cost: "{1}",
+      multi: true,
+      keyword: "squad",
+      also: { text: "{1}, Discard a card", discard: 1 },
+    });
     expect(squad.triggered[0].effect).toEqual({ kind: "create-token-copy", of: "source", count: 1, perTimeKicked: true });
     // Replicate (rule 702.56a): a multikicker the engine copies the spell for.
     expect(
@@ -3865,8 +3878,17 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     );
     expect(everdream.splice).toEqual({ onto: "instant-or-sorcery", cost: "{2}{U}" });
     expect(everdream.complete).toBe(true);
-    // A non-mana splice cost stays a person's.
-    expect(face("Draw a card.\nSplice onto Arcane—Exile four cards from your graveyard.", "Instant — Arcane").complete).toBe(false);
+    // A non-mana splice cost is `splice.also`; one the engine can't pay stays a person's.
+    expect(face("Draw a card.\nSplice onto Arcane—Exile four cards from your graveyard.", "Instant — Arcane").splice).toEqual({
+      onto: "arcane",
+      cost: "",
+      also: { text: "Exile four cards from your graveyard", exileFromGraveyard: { count: 4 } },
+    });
+    expect(face("Draw a card.\nSplice onto Arcane—An opponent gains 5 life.", "Instant — Arcane").splice?.also).toEqual({
+      text: "An opponent gains 5 life",
+      opponentGainsLife: 5,
+    });
+    expect(face("Draw a card.\nSplice onto Arcane—Mill a card.", "Instant — Arcane").complete).toBe(false);
   });
 
   it("buyback with a non-mana cost: kicker.also", () => {

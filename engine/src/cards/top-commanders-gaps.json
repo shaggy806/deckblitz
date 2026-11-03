@@ -1311,7 +1311,9 @@
   "effect:exile-top-face-down-linked",
   "effect:search-to-linked-exile-face-down",
   "cost:unattach-cost",
-  "cost:unattach-equipment"
+  "cost:unattach-equipment",
+  "cost:splice-non-mana",
+  "keyword:squad-nonmana-cost"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

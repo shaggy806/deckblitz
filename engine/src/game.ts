@@ -78,7 +78,7 @@ import { defaultRegistry } from "./cards/default-registry.js";
 import { EMBLEM_CARD } from "./cards/emblem.js";
 import { embalmAbility, encoreAbility, ninjutsu, unearth } from "./cards/helpers.js";
 import { bestowedDefinition, licidDefinition, readsGraveyardOrder } from "./cards/define.js";
-import type { CyclingAbility, MorphCost } from "./cards/define.js";
+import type { CyclingAbility, KickerAlsoCost, MorphCost } from "./cards/define.js";
 import { DUNGEONS } from "./cards/dungeons.js";
 import { MADNESS_EFFECT, MADNESS_TEXT } from "./cards/madness.js";
 import { MIRACLE_EFFECT, MIRACLE_TEXT } from "./cards/miracle.js";
@@ -1120,6 +1120,42 @@ const UNLEASH_OPTIONS: readonly string[] = [RIOT_COUNTER, "No counter"];
 function kickerCostPaid(kicker: NonNullable<CardDefinition["kicker"]>, n: number): string {
   if (kicker.second === undefined) return kicker.cost.repeat(n);
   return ((n & 1) !== 0 ? kicker.cost : "") + ((n & 2) !== 0 ? kicker.second : "");
+}
+
+/** A keyword's non-mana cost `n` times over: squad's, paid any number of times
+ * (rule 702.157a). */
+function alsoTimes(also: KickerAlsoCost, n: number): KickerAlsoCost {
+  if (n === 1) return also;
+  const times = <P extends { readonly count: number }>(part: P | undefined): P | undefined =>
+    part === undefined ? undefined : { ...part, count: part.count * n };
+  const sacrifice = times(also.sacrifice);
+  const returnToHand = times(also.returnToHand);
+  const tapUntapped = times(also.tapUntapped);
+  const exileFromGraveyard = times(also.exileFromGraveyard);
+  return {
+    ...also,
+    ...(also.payLife !== undefined ? { payLife: also.payLife * n } : {}),
+    ...(also.discard !== undefined ? { discard: also.discard * n } : {}),
+    ...(also.opponentGainsLife !== undefined ? { opponentGainsLife: also.opponentGainsLife * n } : {}),
+    ...(sacrifice !== undefined ? { sacrifice } : {}),
+    ...(returnToHand !== undefined ? { returnToHand } : {}),
+    ...(tapUntapped !== undefined ? { tapUntapped } : {}),
+    ...(exileFromGraveyard !== undefined ? { exileFromGraveyard } : {}),
+  };
+}
+
+/** The total owed of each filter among `parts`, for "are there enough?". */
+function countsByFilter(
+  parts: readonly { readonly count: number; readonly filter?: CardFilter }[],
+): readonly { readonly count: number; readonly filter?: CardFilter }[] {
+  const out = new Map<string, { count: number; filter?: CardFilter }>();
+  for (const { count, filter } of parts) {
+    const key = JSON.stringify(filter ?? null);
+    const seen = out.get(key);
+    if (seen !== undefined) seen.count += count;
+    else out.set(key, { count, ...(filter !== undefined ? { filter } : {}) });
+  }
+  return [...out.values()];
 }
 
 /** Whether `purpose` is what `named` names (rule 106.6 — `ManaSpendPurpose`). */
@@ -3875,11 +3911,18 @@ export class Game {
         return [1, 2, 3].map((kickCount) => ({ kicked: true, overload: false, free, kickCount }));
       }
       if (def.kicker?.multi !== true) return [{ kicked: true, overload: false, free }];
-      const per = Math.max(1, manaValue(parseManaCost(def.kicker.cost)));
+      const perMana = manaValue(parseManaCost(def.kicker.cost));
       const manaCap =
         this.manaSources(player).reduce((n, s) => n + Game.sourceCapacity(s), 0) +
         this.state.players[player].manaPool.length;
-      return Array.from({ length: Math.max(1, Math.floor(manaCap / per)) }, (_v, i) => ({
+      // What isn't mana bounds it too (Ruthless Radrat's four cards a time),
+      // and alone when that's all it costs.
+      const alsoCap = def.kicker.also === undefined ? Infinity : this.alsoCostCap(player, card, def.kicker.also);
+      const most = Math.min(
+        perMana > 0 || alsoCap === Infinity ? Math.floor(manaCap / Math.max(1, perMana)) : Infinity,
+        alsoCap,
+      );
+      return Array.from({ length: Math.max(1, most) }, (_v, i) => ({
         kicked: true,
         overload: false,
         free,
@@ -4494,7 +4537,10 @@ export class Game {
                   : (def.kicker.keyword === "behold" || def.kicker.keyword === "reveal") && def.kicker.behold !== undefined
                     ? def.kicker.behold.text
                     : def.kicker.also !== undefined
-                      ? def.kicker.also.text
+                      ? // Squad's, each number of times its own offer.
+                        (kickCount ?? 1) > 1
+                        ? `${def.kicker.also.text} ×${kickCount}`
+                        : def.kicker.also.text
                       : kickerCostPaid(def.kicker, kickCount ?? 1),
               ...(kickCount !== undefined ? { kickCount } : {}),
               ...(def.kicker.keyword !== undefined ? { kickerKeyword: def.kicker.keyword } : {}),
@@ -4504,7 +4550,13 @@ export class Game {
           ? {
               splice: splice.map((object) => {
                 const name = printedCardName(this.state.objects[object]);
-                return { object, cardName: name, cost: this.registry.get(name).splice?.cost ?? "" };
+                const spliced = this.registry.get(name).splice;
+                return {
+                  object,
+                  cardName: name,
+                  // The mana, and the words for what isn't.
+                  cost: [spliced?.cost ?? "", spliced?.also?.text ?? ""].filter((part) => part !== "").join(", "),
+                };
               }),
             }
           : {}),
@@ -4596,9 +4648,10 @@ export class Game {
               const tapCost = this.altCostTapOffer(player, card, via, face ?? 0);
               return tapCost === null ? { altCost: true } : { altCost: true, tapCost };
             })()
-          : kicked === true && (def.kicker?.teamwork !== undefined || def.kicker?.also?.tapUntapped !== undefined)
+          : (kicked === true && (def.kicker?.teamwork !== undefined || def.kicker?.also?.tapUntapped !== undefined)) ||
+              this.activeSplice?.also.some((also) => also.tapUntapped !== undefined) === true
             ? (() => {
-                const tapCost = this.altCostTapOffer(player, card, via, face ?? 0, true);
+                const tapCost = this.altCostTapOffer(player, card, via, face ?? 0, kicked === true, true);
                 return tapCost === null ? {} : { tapCost };
               })()
             : {}),
@@ -6952,7 +7005,7 @@ export class Game {
 
     // A gift's opponent, chosen as its cost is paid (rule 702.174a).
     if (awaiting.giftAsk !== undefined) {
-      this.applyGiftChoice(player, modeIndices, awaiting.giftAsk);
+      this.applyGiftChoice(modeIndices, awaiting.giftAsk);
       return;
     }
 
@@ -8073,6 +8126,12 @@ export class Game {
       // "Each opponent discards a card": the next player owed a choice.
       if (this.state.pendingDiscards.length > 0) {
         this.promptNextDiscard();
+        continue;
+      }
+      // A keyword's non-mana cost (squad's, a spliced card's): one part at a
+      // time, as the spell is cast, before anyone gets priority (rule 601.2h).
+      if ((this.state.pendingAlsoCosts?.length ?? 0) > 0) {
+        this.payNextAlsoCost();
         continue;
       }
       // A spell just cast with its gift promised: its opponent is chosen as
@@ -15464,37 +15523,11 @@ export class Game {
     if (kicked && def.kicker?.keyword === "bargain" && this.costSacrificeEligible(player, BARGAIN_FILTER, undefined).length === 0) {
       return `${player} has no artifact, enchantment or token to bargain for ${def.name}`;
     }
-    // A kicker's non-mana part (buyback's "Pay 4 life", "Sacrifice a land",
-    // "Discard two cards"): only while it can be paid — the life (rule
-    // 119.4), the cards in hand besides the spell itself (601.2h), and what
-    // to sacrifice (checked once the mana is paid too, `spellSacrificeParts`).
-    const kickerAlso = kicked ? def.kicker?.also : undefined;
-    if (kickerAlso !== undefined) {
-      if (kickerAlso.payLife !== undefined && !this.canPayLife(player, kickerAlso.payLife)) {
-        return `${player} has too little life to pay ${def.name}'s ${def.kicker?.keyword ?? "kicker"} cost`;
-      }
-      if (
-        kickerAlso.discard !== undefined &&
-        this.state.zones.perPlayer[player].hand.filter((id) => id !== cardId).length < kickerAlso.discard
-      ) {
-        return `${player} has too few cards in hand to pay ${def.name}'s ${def.kicker?.keyword ?? "kicker"} cost`;
-      }
-      if (
-        kickerAlso.sacrifice !== undefined &&
-        this.costSacrificeEligible(player, kickerAlso.sacrifice.filter, undefined).length < kickerAlso.sacrifice.count
-      ) {
-        return `${player} has too few permanents to sacrifice for ${def.name}'s ${def.kicker?.keyword ?? "kicker"} cost`;
-      }
-      // "Kicker—Return a creature you control to its owner's hand" (Arctic
-      // Merfolk): that many to return (rule 702.33a, 601.2h).
-      if (
-        kickerAlso.returnToHand !== undefined &&
-        permanentCount(this.state, this.battlefieldMatching(player, { ...kickerAlso.returnToHand.filter, controlledBy: "you" })) <
-          kickerAlso.returnToHand.count
-      ) {
-        return `${player} controls too few permanents to return for ${def.name}'s ${def.kicker?.keyword ?? "kicker"} cost`;
-      }
-    }
+    // A keyword's non-mana part (buyback's "Pay 4 life", "Sacrifice a land",
+    // "Discard two cards"; squad's, each time over; a spliced card's): only
+    // while it can all be paid.
+    const whyNotAlso = this.whyCannotPayAlso(player, cardId, def, this.castAlsoCosts(cardId, def, kicked ?? false));
+    if (whyNotAlso !== null) return whyNotAlso;
     // "This spell costs 3 life more to cast for each target" (Phyrexian
     // Purge — rule 601.2f, the targets chosen first, 601.2c): life the
     // caster can pay (119.4).
@@ -15687,7 +15720,7 @@ export class Game {
     }
     const cost = convoked.length > 0 ? this.reduceCostByConvoke(delved, convoked) : delved;
     const purpose: ManaPurpose = { kind: "cast", card: cardId, face, ...bestowPurpose(def, overload), ...castPaying(via, costString) };
-    const alternativeTaps = this.spellTapCost(cardId, def, via, player, altCost, kicked !== false && kicked !== 0);
+    const alternativeTaps = this.spellTapCost(cardId, def, via, player, altCost, kicked);
     if (alternativeTaps !== undefined) {
       // The tap half is checked against the same mana — see `tapCostOffer`.
       const offer = this.tapCostOffer(
@@ -16756,6 +16789,8 @@ export class Game {
     readonly card: ObjectId;
     readonly spellName: string;
     readonly cost: string;
+    /** The non-mana parts of their splice costs. */
+    readonly also: readonly KickerAlsoCost[];
     readonly specs: readonly TargetSpec[];
     readonly names: readonly string[];
     readonly objects: readonly ObjectId[];
@@ -16819,6 +16854,7 @@ export class Game {
       card,
       spellName: this.faceDef(card, face).name,
       cost: defs.map((d) => d.splice?.cost ?? "").join(""),
+      also: defs.flatMap((d) => d.splice?.also ?? []),
       specs: defs.flatMap((d) => d.targets),
       names: defs.map((d) => d.name),
       objects: [...splice],
@@ -17278,7 +17314,7 @@ export class Game {
     // Read now: a grant "from your hand" no longer reaches it on the stack.
     const alternativeCost = altCost ? this.alternativeCostOf(cardId, def, via, player) : null;
     const prowled = alternativeCost?.keyword === "prowl";
-    const alternativeTaps = this.spellTapCost(cardId, def, via, player, altCost, kicked !== false && kicked !== 0);
+    const alternativeTaps = this.spellTapCost(cardId, def, via, player, altCost, kicked);
     // "Pay life equal to its mana value" (Demon of Fate's Design, Inside
     // Information): the face cast, X 0 (rule 107.3b), paid with the rest below.
     const alternativeLife = alternativeCost?.payLifeManaValue === true ? this.castNowEnergyOf(cardId, face) : 0;
@@ -17852,16 +17888,10 @@ export class Game {
       });
       this.costDiscardPriorityTo(via === "effect" ? this.activePlayer : player);
     }
-    // A kicker's non-mana part (buyback's "Pay 3 life, Discard a card at
-    // random"), paid the same way; its sacrifice is among the parts above.
-    const kickerAlso = kicked !== false && kicked !== 0 ? def.kicker?.also : undefined;
-    if (kickerAlso?.payLife !== undefined) this.changeLife(player, -kickerAlso.payLife);
-    if (kickerAlso?.discard !== undefined) {
-      this.payCostDiscard(cardId, cardId, () => {
-        this.discardByEffect({ kind: "player", player }, kickerAlso.discard as number, kickerAlso.discardAtRandom === true);
-      });
-      this.costDiscardPriorityTo(via === "effect" ? this.activePlayer : player);
-    }
+    // A keyword's non-mana part (buyback's "Pay 3 life, Discard a card at
+    // random", squad's, a spliced card's): its sacrifice is among the parts
+    // above, the rest asked in turn before anyone gets priority.
+    this.queueAlsoCosts(player, cardId, this.castAlsoCosts(cardId, def, kicked), via === "effect" ? this.activePlayer : player);
     // Jump-start's "by discarding a card" (rule 702.133a), paid the same way.
     const flashbackDiscard = via === "flashback" ? this.flashbackOf(cardId, graveyardGrant)?.discard : undefined;
     if (flashbackDiscard !== undefined) {
@@ -17970,10 +18000,7 @@ export class Game {
     // "Return three Islands you control to their owner's hand rather than
     // pay" (Thwart): which, chosen now too, as an activated ability's
     // `returnToHand` cost is.
-    // A kicker's "return a creature you control to its owner's hand"
-    // (Arctic Merfolk — rule 702.33a) is paid the same way.
-    const kickReturn = kicked !== false && kicked !== 0 ? def.kicker?.also?.returnToHand : undefined;
-    const altReturn = altCost ? this.ownAltCost(def)?.returnToHand : kickReturn;
+    const altReturn = altCost ? this.ownAltCost(def)?.returnToHand : undefined;
     if (altReturn !== undefined) {
       this.payReturnToHandCost(player, cardId, { count: altReturn.count ?? 1, filter: altReturn.filter }, cardId);
       const awaiting = this.state.awaiting;
@@ -18092,7 +18119,7 @@ export class Game {
     const candidates = ask.candidates.filter((p) => this.state.players[p]?.hasLost === false);
     if (candidates.length === 0) return;
     if (candidates.length === 1) {
-      this.promiseGift(ask.spell, ask.player, candidates[0]);
+      this.answerGiftAsk(ask, candidates[0]);
       return;
     }
     this.state.awaiting = {
@@ -18102,13 +18129,20 @@ export class Game {
       minModes: 1,
       maxModes: 1,
       modes: candidates.map((to) => ({
-        text: `Promise the gift to ${to}`,
+        text: ask.gainLife !== undefined ? `Have ${to} gain ${ask.gainLife} life` : `Promise the gift to ${to}`,
         effect: { kind: "about-player", player: to, effect: { kind: "sequence", effects: [] } },
       })),
       x: 0,
       targets: [],
       giftAsk: { ...ask, candidates },
     };
+  }
+
+  /** `to` is the opponent asked for: the gift is promised to them, or they
+   * gain the life that's the cost (`GiftAsk.gainLife`). */
+  private answerGiftAsk(ask: GiftAsk, to: PlayerId): void {
+    if (ask.gainLife !== undefined) this.changeLife(to, ask.gainLife);
+    else this.promiseGift(ask.spell, ask.player, to);
   }
 
   /** The gift of `spellId` is promised to `to` (rule 702.174a). */
@@ -18122,10 +18156,10 @@ export class Game {
   /** Answers a gift's "which opponent?" (`promptNextGift`): the chosen
    * mode's candidate is promised it. Then `priorityTo` gets priority once
    * nothing else is owed. */
-  private applyGiftChoice(player: PlayerId, chosen: readonly number[], ask: GiftAsk): void {
+  private applyGiftChoice(chosen: readonly number[], ask: GiftAsk): void {
     this.state.awaiting = null;
     const to = ask.candidates[chosen[0] ?? 0];
-    if (to !== undefined) this.promiseGift(ask.spell, player, to);
+    if (to !== undefined) this.answerGiftAsk(ask, to);
     this.prepareForPriority(ask.priorityTo);
   }
 
@@ -18701,8 +18735,9 @@ export class Game {
     if (kicked !== false && kicked !== 0 && def.kicker?.keyword === "bargain") {
       parts.push({ filter: BARGAIN_FILTER, count: 1 });
     }
-    const kickerSacrifice = kicked !== false && kicked !== 0 ? def.kicker?.also?.sacrifice : undefined;
-    if (kickerSacrifice !== undefined) parts.push({ filter: kickerSacrifice.filter, count: kickerSacrifice.count });
+    for (const also of this.castAlsoCosts(cardId, def, kicked)) {
+      if (also.sacrifice !== undefined) parts.push({ filter: also.sacrifice.filter, count: also.sacrifice.count });
+    }
     if (via === "flashback") {
       const flashback = this.flashbackOf(cardId, grant)?.sacrifice;
       // "Flashback—{R}{R}, Sacrifice X Mountains" (Firecat Blitz).
@@ -34895,15 +34930,153 @@ export class Game {
     via: CastVia | undefined,
     player: PlayerId,
     altCost: boolean,
-    kicked: boolean,
+    kicked: boolean | number,
   ): { readonly count: number; readonly totalPower?: number; readonly filter: CardFilter } | undefined {
     if (altCost) return this.alternativeCostOf(cardId, def, via, player)?.tapCreatures;
     if (kicked && def.kicker?.teamwork !== undefined) {
       return { count: 0, totalPower: def.kicker.teamwork, filter: { type: "creature" } };
     }
-    // "Kicker—Tap an untapped Vampire you control" (Blood Tribute).
-    if (kicked && def.kicker?.also?.tapUntapped !== undefined) return def.kicker.also.tapUntapped;
-    return undefined;
+    // "Kicker—Tap an untapped Vampire you control" (Blood Tribute), and
+    // "Splice onto Arcane—Tap an untapped white creature you control"
+    // (Hundred-Talon Strike), two copies of it two of them: one offer, so one
+    // filter (`whyCannotCastSpell` refuses two).
+    const parts = this.castAlsoCosts(cardId, def, kicked).flatMap((also) => also.tapUntapped ?? []);
+    if (parts.length === 0) return undefined;
+    return { filter: parts[0].filter, count: parts.reduce((n, part) => n + part.count, 0) };
+  }
+
+  /** The non-mana costs this cast's kicker or squad, `kicked` times over, and
+   * the cards spliced onto it add. */
+  private castAlsoCosts(cardId: ObjectId, def: CardDefinition, kicked: boolean | number): readonly KickerAlsoCost[] {
+    const kickerAlso = kicked !== false && kicked !== 0 ? def.kicker?.also : undefined;
+    const spliced = this.activeSplice?.card === cardId ? this.activeSplice.also : [];
+    if (kickerAlso === undefined) return spliced;
+    const times = def.kicker?.multi === true && typeof kicked === "number" ? kicked : 1;
+    return [alsoTimes(kickerAlso, times), ...spliced];
+  }
+
+  /** Why `costs` (see {@link castAlsoCosts}) can't all be paid, or null: the
+   * life (rule 119.4), the cards in hand besides the spell itself and the
+   * graveyard's (601.2h), what there is to return, an opponent to gain life,
+   * and one filter of what's tapped. What to sacrifice and tap is checked with
+   * the mana (`spellSacrificeParts`, `spellTapCost`). */
+  private whyCannotPayAlso(
+    player: PlayerId,
+    cardId: ObjectId,
+    def: CardDefinition,
+    costs: readonly KickerAlsoCost[],
+  ): string | null {
+    const keyword = this.activeSplice?.card === cardId ? "splice" : (def.kicker?.keyword ?? "kicker");
+    const sum = (read: (also: KickerAlsoCost) => number | undefined): number =>
+      costs.reduce((n, also) => n + (read(also) ?? 0), 0);
+    if (!this.canPayLife(player, sum((also) => also.payLife))) {
+      return `${player} has too little life to pay ${def.name}'s ${keyword} cost`;
+    }
+    if (this.state.zones.perPlayer[player].hand.filter((id) => id !== cardId).length < sum((also) => also.discard)) {
+      return `${player} has too few cards in hand to pay ${def.name}'s ${keyword} cost`;
+    }
+    for (const { filter, count } of countsByFilter(costs.flatMap((also) => also.sacrifice ?? []))) {
+      if (this.costSacrificeEligible(player, filter as CardFilter, undefined).length < count) {
+        return `${player} has too few permanents to sacrifice for ${def.name}'s ${keyword} cost`;
+      }
+    }
+    // "Kicker—Return a creature you control to its owner's hand" (Arctic
+    // Merfolk): that many to return (rule 702.33a, 601.2h).
+    for (const { filter, count } of countsByFilter(costs.flatMap((also) => also.returnToHand ?? []))) {
+      if (permanentCount(this.state, this.battlefieldMatching(player, { ...filter, controlledBy: "you" })) < count) {
+        return `${player} controls too few permanents to return for ${def.name}'s ${keyword} cost`;
+      }
+    }
+    for (const { filter, count } of countsByFilter(costs.flatMap((also) => also.exileFromGraveyard ?? []))) {
+      if (this.graveyardCostCandidates(player, filter, cardId).length < count) {
+        return `${player} has too few cards in their graveyard to pay ${def.name}'s ${keyword} cost`;
+      }
+    }
+    if (sum((also) => also.opponentGainsLife) > 0 && !this.giftCandidates(player).some((p) => !this.playerCantGainLife(p))) {
+      return `${player} has no opponent who can gain life for ${def.name}'s ${keyword} cost`;
+    }
+    if (countsByFilter(costs.flatMap((also) => also.tapUntapped ?? [])).length > 1) {
+      return `${def.name} can't tap for two different ${keyword} costs at once`;
+    }
+    return null;
+  }
+
+  /** How many times over `also` could be paid at most, by what's there and
+   * whatever else the cast pays; `Infinity` when nothing in it runs out. */
+  private alsoCostCap(player: PlayerId, cardId: ObjectId, also: KickerAlsoCost): number {
+    const hand = this.state.zones.perPlayer[player].hand.filter((id) => id !== cardId).length;
+    const caps = [
+      also.payLife === undefined ? Infinity : Math.floor(this.state.players[player].life / Math.max(1, also.payLife)),
+      also.discard === undefined ? Infinity : Math.floor(hand / Math.max(1, also.discard)),
+      also.exileFromGraveyard === undefined
+        ? Infinity
+        : Math.floor(
+            this.graveyardCostCandidates(player, also.exileFromGraveyard.filter, cardId).length /
+              Math.max(1, also.exileFromGraveyard.count),
+          ),
+      also.sacrifice === undefined
+        ? Infinity
+        : Math.floor(
+            this.costSacrificeEligible(player, also.sacrifice.filter, undefined).length / Math.max(1, also.sacrifice.count),
+          ),
+      also.returnToHand === undefined
+        ? Infinity
+        : Math.floor(
+            permanentCount(this.state, this.battlefieldMatching(player, { ...also.returnToHand.filter, controlledBy: "you" })) /
+              Math.max(1, also.returnToHand.count),
+          ),
+    ];
+    return Math.min(...caps);
+  }
+
+  /** Queue what `costs` (see {@link castAlsoCosts}) leave to be chosen, each
+   * asked in turn before anyone gets priority (see {@link AlsoCostAsk}); the
+   * life is paid at once. What's sacrificed or tapped was paid with the rest. */
+  private queueAlsoCosts(player: PlayerId, spell: ObjectId, costs: readonly KickerAlsoCost[], priorityTo: PlayerId): void {
+    for (const also of costs) {
+      if (also.payLife !== undefined) this.changeLife(player, -also.payLife);
+      const queue = (this.state.pendingAlsoCosts ??= []);
+      if (also.discard !== undefined) {
+        queue.push({ spell, player, priorityTo, discard: { count: also.discard, atRandom: also.discardAtRandom === true } });
+      }
+      if (also.returnToHand !== undefined) queue.push({ spell, player, priorityTo, returnToHand: also.returnToHand });
+      if (also.exileFromGraveyard !== undefined) {
+        queue.push({ spell, player, priorityTo, exileFromGraveyard: also.exileFromGraveyard });
+      }
+      if (queue.length === 0) delete this.state.pendingAlsoCosts;
+      if (also.opponentGainsLife !== undefined) {
+        const candidates = this.giftCandidates(player).filter((p) => !this.playerCantGainLife(p));
+        (this.state.pendingGifts ??= []).push({ spell, player, candidates, priorityTo, gainLife: also.opponentGainsLife });
+      }
+    }
+  }
+
+  /** Pay the next part queued by {@link queueAlsoCosts}: at once when there's
+   * no choice, else by the decision each raises as a spell's own cost does. */
+  private payNextAlsoCost(): void {
+    const [ask, ...queue] = this.state.pendingAlsoCosts ?? [];
+    if (queue.length > 0) this.state.pendingAlsoCosts = queue;
+    else delete this.state.pendingAlsoCosts;
+    if (ask === undefined) return;
+    const { spell, player, priorityTo, discard, returnToHand, exileFromGraveyard } = ask;
+    if (discard !== undefined) {
+      this.payCostDiscard(spell, spell, () => {
+        this.discardByEffect({ kind: "player", player }, discard.count, discard.atRandom === true);
+      });
+      this.costDiscardPriorityTo(priorityTo);
+    }
+    if (returnToHand !== undefined) {
+      this.payReturnToHandCost(player, spell, returnToHand, spell);
+      const awaiting = this.state.awaiting;
+      if (awaiting?.kind === "choose-permanents" && awaiting.player === player) {
+        this.state.awaiting = { ...awaiting, priorityTo };
+      }
+    }
+    if (exileFromGraveyard !== undefined) {
+      this.withDecisionSource(spell, () =>
+        this.payGraveyardExileCost(player, spell, exileFromGraveyard, priorityTo, spell),
+      );
+    }
   }
 
   /** Whether everything `offer` offers could pay it: `count` permanents, or
@@ -35044,9 +35217,12 @@ export class Game {
     via: CastVia | undefined,
     face: number,
     teamwork = false,
+    /** Not an alternative cost's tap: a kicker's, as `teamwork` says, or a
+     * spliced card's. */
+    notAlternative = teamwork,
   ): TapCostOffer | null {
     const def = this.faceDef(cardId, face);
-    const taps = this.spellTapCost(cardId, def, via, player, !teamwork, teamwork);
+    const taps = this.spellTapCost(cardId, def, via, player, !notAlternative, teamwork);
     if (taps === undefined) return null;
     const cost = this.withFace(cardId, face, () =>
       this.castingCostOf(
@@ -35054,7 +35230,7 @@ export class Game {
         cardId,
         def,
         0,
-        this.castCostString(cardId, via, face, teamwork, false, false, !teamwork, undefined, player),
+        this.castCostString(cardId, via, face, teamwork, false, false, !notAlternative, undefined, player),
       ),
     );
     return this.tapCostOffer(

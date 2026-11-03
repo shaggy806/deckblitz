@@ -6316,3 +6316,35 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 - **Do:** Click Captain America and activate his Throw ability.
 - **Expect:** The banner reads "Captain America, First Avenger — choose an Equipment to unattach", with both Bonesplitters highlighted. Click one, target Bob: Bob loses 1 life and only that Bonesplitter comes off.
+
+## Splice and squad costs that aren't mana (2026-11-02)
+
+### Horobi's Whisper: spliced by exiling four cards from your graveyard
+
+- **Do:** Click Glacial Ray and choose the offer "splicing Horobi's Whisper". Target Bob, then his Hill Giant. Choose four cards from your graveyard when asked.
+- **Expect:** The offer reads "(splicing Horobi's Whisper Exile four cards from your graveyard)". The four you chose go to exile and the fifth stays. Bob loses 2 life and the Giant is destroyed. Horobi's Whisper stays in your hand.
+
+### Hundred-Talon Strike: spliced by tapping a white creature
+
+- **Do:** Click Glacial Ray and choose the offer "splicing Hundred-Talon Strike". Target Bob and your Grizzly Bears, then tap Savannah Lions when asked.
+- **Expect:** Only Savannah Lions can be picked to tap. The Bears get +1/+0 and first strike, and Bob loses 2 life.
+
+### Roar of Jukai: you pick the opponent who gains the life
+
+- **Do:** Click Glacial Ray and choose the offer "splicing Roar of Jukai". Target Bob.
+- **Expect:** You're asked who gains the life, with one choice for each opponent. Whoever you pick gains 5 life, and Bob loses 2.
+
+### Splice: two costs that aren't mana are paid one after the other
+
+- **Do:** Click Glacial Ray and choose the offer splicing both Veil of Secrecy and Horobi's Whisper. Target Bob, Grizzly Bears and Bob's Hill Giant. Answer each question.
+- **Expect:** You're asked which blue creature to return, and then, in a separate question, which four cards to exile. Both are paid before anyone can respond, and the spell then resolves.
+
+### Ruthless Radrat: squad is offered once for each four cards in your graveyard
+
+- **Do:** Click Ruthless Radrat in your hand and choose the offer paying squad twice. Choose eight cards when asked.
+- **Expect:** There are offers for no squad, once and twice, and no more, with nine cards in your graveyard. Eight go to exile, and you end with three Ruthless Radrats, two of them tokens.
+
+### Thrill-Kill Disciple: squad takes a card and {1} each time
+
+- **Do:** Click Thrill-Kill Disciple in your hand and choose the offer paying squad twice. Discard two cards when asked.
+- **Expect:** Twice is the most offered with five Mountains, though you hold three more cards. You pay all five mana, discard the two you pick, and end with three Disciples, two of them tokens.

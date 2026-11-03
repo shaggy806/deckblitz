@@ -1245,6 +1245,13 @@ function buybackAlso(text) {
  * hand" and "Tap an untapped Vampire you control". One part only. */
 function kickerAlso(text) {
   let m;
+  // "Exile four cards from your graveyard" (Horobi's Whisper, Ruthless Radrat).
+  if ((m = new RegExp(`^Exile ${N} cards from your graveyard$`).exec(text))) {
+    const count = numberOf(m[1]);
+    return typeof count === "number" ? { text, exileFromGraveyard: { count } } : null;
+  }
+  // "An opponent gains 5 life" (Roar of Jukai).
+  if ((m = /^An opponent gains (\d+) life$/.exec(text))) return { text, opponentGainsLife: Number(m[1]) };
   if ((m = new RegExp(`^Sacrifice (an?|${N.slice(1, -1)}) (.+)$`).exec(text))) {
     const count = /^an?$/.test(m[1]) ? 1 : numberOf(m[1]);
     const filter = parseTypePhrase(m[2]);
@@ -9093,10 +9100,17 @@ export function parseFace(face, ctx = {}) {
     }
     // Splice onto Arcane / instant or sorcery [mana cost] (rule 702.47a): the
     // card's own effect and targets are what's spliced. A non-mana splice
-    // cost ("Splice onto Arcane—Exile four cards …") stays a person's.
+    // cost ("Splice onto Arcane—Exile four cards …") is `splice.also`.
     if (isSpell && (m = /^Splice onto (Arcane|instant or sorcery) ((?:\{[^}]+\})+)$/.exec(line))) {
       out.splice = { onto: m[1] === "Arcane" ? "arcane" : "instant-or-sorcery", cost: m[2] };
       continue;
+    }
+    if (isSpell && (m = /^Splice onto (Arcane|instant or sorcery)—(.+?)\.$/.exec(line))) {
+      const also = kickerAlso(m[2]);
+      if (also !== null) {
+        out.splice = { onto: m[1] === "Arcane" ? "arcane" : "instant-or-sorcery", cost: "", also };
+        continue;
+      }
     }
     // Teamwork N (rule 702.194): a kicker that taps creatures — what "cast using teamwork" changes is the card's own.
     if (isSpell && (m = /^Teamwork (\d+)$/.exec(line))) { out.kicker = { cost: "", keyword: "teamwork", teamwork: Number(m[1]) }; continue; }
@@ -9161,8 +9175,21 @@ export function parseFace(face, ctx = {}) {
       continue;
     }
     // Squad [cost] (rule 702.157a): a multikicker by another name, and its enters trigger (`squadTrigger`).
-    if ((m = /^Squad ((?:\{[^}]+\})+)$/.exec(line))) {
-      out.kicker = { cost: m[1], multi: true, keyword: "squad" };
+    // "Squad—Exile four cards from your graveyard", "Squad—{1}, Discard a
+    // card": what isn't mana is `kicker.also`.
+    const squadAlso = (m = /^Squad—(?:((?:\{[^}]+\})+), )?(.+?)\.$/.exec(line))
+      ? (m[1] === undefined ? kickerAlso(m[2]) : buybackAlso(m[2]))
+      : null;
+    if (squadAlso !== null || (m = /^Squad ((?:\{[^}]+\})+)$/.exec(line))) {
+      out.kicker =
+        squadAlso !== null
+          ? {
+              cost: m[1] ?? "",
+              multi: true,
+              keyword: "squad",
+              also: { ...squadAlso, text: m[1] === undefined ? m[2] : `${m[1]}, ${m[2]}` },
+            }
+          : { cost: m[1], multi: true, keyword: "squad" };
       out.triggered.push({
         trigger: { on: "enters-battlefield", who: "self" },
         condition: { kind: "self-kicked" },

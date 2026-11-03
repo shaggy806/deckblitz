@@ -2817,6 +2817,27 @@ export interface GiftAsk {
    * a raised decision's modes, in this order. */
   readonly candidates: readonly PlayerId[];
   readonly priorityTo: PlayerId;
+  /** Not a gift but the same question, "which opponent?": "An opponent gains
+   * 5 life" as a cost (Roar of Jukai's splice — `KickerAlsoCost`). That much
+   * for whoever is picked. */
+  readonly gainLife?: number;
+}
+
+/**
+ * One non-mana part of a keyword's cost still to be paid as its spell is cast
+ * (rule 601.2h): a kicker's or squad's `also`, a spliced card's. Queued in
+ * `GameState.pendingAlsoCosts`, since several spliced cards can each owe one,
+ * and paid one at a time before anyone gets priority, the spell on the stack.
+ * Exactly one part is set.
+ */
+export interface AlsoCostAsk {
+  readonly spell: ObjectId;
+  /** The caster, who pays. */
+  readonly player: PlayerId;
+  readonly priorityTo: PlayerId;
+  readonly discard?: { readonly count: number; readonly atRandom?: boolean };
+  readonly returnToHand?: { readonly count: number; readonly filter: CardFilter };
+  readonly exileFromGraveyard?: { readonly count: number; readonly filter?: CardFilter };
 }
 
 /**
@@ -5915,6 +5936,9 @@ export interface GameState {
   /** Spells just cast with their gift promised whose opponent is still to
    * be chosen — see {@link GiftAsk}. Absent when there are none. */
   pendingGifts?: GiftAsk[];
+  /** Non-mana parts of a keyword's cost still to be paid — see
+   * {@link AlsoCostAsk}. Absent when there are none. */
+  pendingAlsoCosts?: AlsoCostAsk[];
   /** Additional main phases owed after the postcombat main phase under way
    * (a `withMain` combat's). Turn-scoped. */
   extraMainPhases?: number;

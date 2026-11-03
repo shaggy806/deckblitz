@@ -222,6 +222,17 @@ export interface KickerAlsoCost {
    * as teamwork's creatures are. A creature with summoning sickness may be
    * tapped (rule 302.6 restricts only its own {T} abilities). */
   readonly tapUntapped?: { readonly filter: CardFilter; readonly count: number };
+  /** "Squad—Exile four cards from your graveyard" (Ruthless Radrat), "Splice
+   * onto Arcane—Exile four cards from your graveyard" (Horobi's Whisper):
+   * `count` cards matching `filter` from the caster's graveyard, never the
+   * spell itself, chosen as the cost is paid (601.2h, `choose-from-zone`),
+   * as `additionalCost.exileFromGraveyard` is. */
+  readonly exileFromGraveyard?: { readonly count: number; readonly filter?: CardFilter };
+  /** "Splice onto Arcane—An opponent gains 5 life" (Roar of Jukai): an
+   * opponent the caster picks as it's paid gains that much. Payable only if
+   * one of them can gain life, though one whose gain is replaced with nothing
+   * still can (rule 118.3, Invigorate's rulings). */
+  readonly opponentGainsLife?: number;
 }
 
 export interface AdditionalCostOption {
@@ -4063,13 +4074,17 @@ export interface CardDefinition {
    * pay `cost` as an additional cost; the spell gains this card's text — its
    * `targets` (chosen with the spell's, after its own — 702.47d) and its
    * `effect`, followed after the spell's own instructions (702.47b). `onto`:
-   * `"arcane"` (an Arcane spell) or `"instant-or-sorcery"`. `cost` is mana.
+   * `"arcane"` (an Arcane spell) or `"instant-or-sorcery"`. `cost` is mana
+   * (`""` for none), `also` the part that isn't: "Splice onto Arcane—Sacrifice
+   * two Mountains" (Torrent of Stone), paid as a kicker's `also` is, its `text`
+   * what the offer shows.
    * The card's own `effect` and `targets` are what is spliced: write them as
    * for any instant. `null` for none.
    */
   readonly splice: {
     readonly onto: "arcane" | "instant-or-sorcery";
     readonly cost: string;
+    readonly also?: KickerAlsoCost;
   } | null;
   /**
    * Kicker (rule 702.33 — needed-cards P8): an **optional** additional cost
@@ -4113,7 +4128,9 @@ export interface CardDefinition {
      * `"squad"` (rule 702.157a) is "as an additional cost to cast this
      * spell, you may pay [cost] any number of times": with `multi: true`,
      * multikicker under another name; its enters trigger is the
-     * `squadTrigger` helper's.
+     * `squadTrigger` helper's. A cost that isn't only mana goes in `also`
+     * (Ruthless Radrat's `cost: ""`, Thrill-Kill Disciple's `{1}` and a
+     * discard), paid each time over.
      *
      * `"bargain"` (rule 702.166a) is "as an additional cost to cast this
      * spell, you may sacrifice an artifact, enchantment, or token": `cost`
@@ -5474,7 +5491,7 @@ interface CardDraft {
     readonly putFromExile?: number;
     readonly options?: readonly AdditionalCostOption[];
   };
-  splice?: { readonly onto: "arcane" | "instant-or-sorcery"; readonly cost: string };
+  splice?: { readonly onto: "arcane" | "instant-or-sorcery"; readonly cost: string; readonly also?: KickerAlsoCost };
   kicker?: {
     readonly cost: string;
     readonly targets?: readonly TargetSpec[];
