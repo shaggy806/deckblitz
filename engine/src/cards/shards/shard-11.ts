@@ -244,6 +244,7 @@ import _poolEnergyChamber from "../pool/energy-chamber.js";
 import _poolEnervate from "../pool/enervate.js";
 import _poolEpicureOfBlood from "../pool/epicure-of-blood.js";
 import _poolEpistolaryLibrarian from "../pool/epistolary-librarian.js";
+import _poolEssenceBottle from "../pool/essence-bottle.js";
 import _poolEther from "../pool/ether.js";
 import _poolEverglades from "../pool/everglades.js";
 import _poolExaltedAngel from "../pool/exalted-angel.js";
@@ -1145,6 +1146,7 @@ const shard: CardShard = {
     _poolEnervate,
     _poolEpicureOfBlood,
     _poolEpistolaryLibrarian,
+    _poolEssenceBottle,
     _poolEther,
     _poolEverglades,
     _poolExaltedAngel,

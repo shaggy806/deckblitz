@@ -284,6 +284,7 @@ import _poolGarrukCallerOfBeasts from "../pool/garruk-caller-of-beasts.js";
 import _poolGauntletsOfLight from "../pool/gauntlets-of-light.js";
 import _poolGelectrode from "../pool/gelectrode.js";
 import _poolGenerousVisitor from "../pool/generous-visitor.js";
+import _poolGeometricNexus from "../pool/geometric-nexus.js";
 import _poolGetALegUp from "../pool/get-a-leg-up.js";
 import _poolGhorClanRampager from "../pool/ghor-clan-rampager.js";
 import _poolGhostlySentinel from "../pool/ghostly-sentinel.js";
@@ -1174,6 +1175,7 @@ const shard: CardShard = {
     _poolGauntletsOfLight,
     _poolGelectrode,
     _poolGenerousVisitor,
+    _poolGeometricNexus,
     _poolGetALegUp,
     _poolGhorClanRampager,
     _poolGhostlySentinel,

@@ -485,6 +485,7 @@ import _poolMnemonicNexus from "../pool/mnemonic-nexus.js";
 import _poolMobilize from "../pool/mobilize.js";
 import _poolMockingbird from "../pool/mockingbird.js";
 import _poolMoldervineCloak from "../pool/moldervine-cloak.js";
+import _poolMoltenHydra from "../pool/molten-hydra.js";
 import _poolMonkClass from "../pool/monk-class.js";
 import _poolMonumentToPerfection from "../pool/monument-to-perfection.js";
 import _poolMoonHeron from "../pool/moon-heron.js";
@@ -1389,6 +1390,7 @@ const shard: CardShard = {
     _poolMobilize,
     _poolMockingbird,
     _poolMoldervineCloak,
+    _poolMoltenHydra,
     _poolMonkClass,
     _poolMonumentToPerfection,
     _poolMoonHeron,

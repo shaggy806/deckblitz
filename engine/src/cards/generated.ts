@@ -7448,6 +7448,7 @@ import _poolEsperzoa from "./pool/esperzoa.js";
 import _poolEsquireOfTheKing from "./pool/esquire-of-the-king.js";
 import _poolEssenceAnchor from "./pool/essence-anchor.js";
 import _poolEssenceBacklash from "./pool/essence-backlash.js";
+import _poolEssenceBottle from "./pool/essence-bottle.js";
 import _poolEssenceBurn from "./pool/essence-burn.js";
 import _poolEssenceCapture from "./pool/essence-capture.js";
 import _poolEssenceChanneler from "./pool/essence-channeler.js";
@@ -9266,6 +9267,7 @@ import _poolGeologicalAppraiser from "./pool/geological-appraiser.js";
 import _poolGeologyEnthusiast from "./pool/geology-enthusiast.js";
 import _poolGeomancersGambit from "./pool/geomancers-gambit.js";
 import _poolGeometersArthropod from "./pool/geometers-arthropod.js";
+import _poolGeometricNexus from "./pool/geometric-nexus.js";
 import _poolGeosurge from "./pool/geosurge.js";
 import _poolGeothermalBog from "./pool/geothermal-bog.js";
 import _poolGeothermalCrevice from "./pool/geothermal-crevice.js";
@@ -12008,6 +12010,7 @@ import _poolIntoTheVoid from "./pool/into-the-void.js";
 import _poolIntoTheWilds from "./pool/into-the-wilds.js";
 import _poolIntoThinAir from "./pool/into-thin-air.js";
 import _poolIntrepidAce from "./pool/intrepid-ace.js";
+import _poolIntrepidAdversary from "./pool/intrepid-adversary.js";
 import _poolIntrepidHero from "./pool/intrepid-hero.js";
 import _poolIntrepidProvisioner from "./pool/intrepid-provisioner.js";
 import _poolIntrepidRabbit from "./pool/intrepid-rabbit.js";
@@ -15294,6 +15297,7 @@ import _poolMoltenExhale from "./pool/molten-exhale.js";
 import _poolMoltenFirebird from "./pool/molten-firebird.js";
 import _poolMoltenFrame from "./pool/molten-frame.js";
 import _poolMoltenGatekeeper from "./pool/molten-gatekeeper.js";
+import _poolMoltenHydra from "./pool/molten-hydra.js";
 import _poolMoltenInfluence from "./pool/molten-influence.js";
 import _poolMoltenLavamancer from "./pool/molten-lavamancer.js";
 import _poolMoltenManInfernoIncarnate from "./pool/molten-man-inferno-incarnate.js";
@@ -17801,6 +17805,7 @@ import _poolPriestOfTitania from "./pool/priest-of-titania.js";
 import _poolPriestOfUrabrask from "./pool/priest-of-urabrask.js";
 import _poolPriestOfYawgmoth from "./pool/priest-of-yawgmoth.js";
 import _poolPriestsOfNorn from "./pool/priests-of-norn.js";
+import _poolPrimalAdversary from "./pool/primal-adversary.js";
 import _poolPrimalAmulet from "./pool/primal-amulet.js";
 import _poolPrimalBellow from "./pool/primal-bellow.js";
 import _poolPrimalBeyond from "./pool/primal-beyond.js";
@@ -25085,6 +25090,7 @@ import _poolTranceKujaFateDefied from "./pool/trance-kuja-fate-defied.js";
 import _poolTranquilCove from "./pool/tranquil-cove.js";
 import _poolTranquilDomain from "./pool/tranquil-domain.js";
 import _poolTranquilExpanse from "./pool/tranquil-expanse.js";
+import _poolTranquilFrillback from "./pool/tranquil-frillback.js";
 import _poolTranquilGarden from "./pool/tranquil-garden.js";
 import _poolTranquilGrove from "./pool/tranquil-grove.js";
 import _poolTranquilLandscape from "./pool/tranquil-landscape.js";
@@ -36022,6 +36028,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolEsquireOfTheKing,
   _poolEssenceAnchor,
   _poolEssenceBacklash,
+  _poolEssenceBottle,
   _poolEssenceBurn,
   _poolEssenceCapture,
   _poolEssenceChanneler,
@@ -37840,6 +37847,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGeologyEnthusiast,
   _poolGeomancersGambit,
   _poolGeometersArthropod,
+  _poolGeometricNexus,
   _poolGeosurge,
   _poolGeothermalBog,
   _poolGeothermalCrevice,
@@ -40582,6 +40590,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolIntoTheWilds,
   _poolIntoThinAir,
   _poolIntrepidAce,
+  _poolIntrepidAdversary,
   _poolIntrepidHero,
   _poolIntrepidProvisioner,
   _poolIntrepidRabbit,
@@ -43868,6 +43877,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMoltenFirebird,
   _poolMoltenFrame,
   _poolMoltenGatekeeper,
+  _poolMoltenHydra,
   _poolMoltenInfluence,
   _poolMoltenLavamancer,
   _poolMoltenManInfernoIncarnate,
@@ -46375,6 +46385,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPriestOfUrabrask,
   _poolPriestOfYawgmoth,
   _poolPriestsOfNorn,
+  _poolPrimalAdversary,
   _poolPrimalAmulet,
   _poolPrimalBellow,
   _poolPrimalBeyond,
@@ -53659,6 +53670,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTranquilCove,
   _poolTranquilDomain,
   _poolTranquilExpanse,
+  _poolTranquilFrillback,
   _poolTranquilGarden,
   _poolTranquilGrove,
   _poolTranquilLandscape,
@@ -64609,6 +64621,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/esquire-of-the-king": _poolEsquireOfTheKing,
   "pool/essence-anchor": _poolEssenceAnchor,
   "pool/essence-backlash": _poolEssenceBacklash,
+  "pool/essence-bottle": _poolEssenceBottle,
   "pool/essence-burn": _poolEssenceBurn,
   "pool/essence-capture": _poolEssenceCapture,
   "pool/essence-channeler": _poolEssenceChanneler,
@@ -66427,6 +66440,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/geology-enthusiast": _poolGeologyEnthusiast,
   "pool/geomancers-gambit": _poolGeomancersGambit,
   "pool/geometers-arthropod": _poolGeometersArthropod,
+  "pool/geometric-nexus": _poolGeometricNexus,
   "pool/geosurge": _poolGeosurge,
   "pool/geothermal-bog": _poolGeothermalBog,
   "pool/geothermal-crevice": _poolGeothermalCrevice,
@@ -69169,6 +69183,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/into-the-wilds": _poolIntoTheWilds,
   "pool/into-thin-air": _poolIntoThinAir,
   "pool/intrepid-ace": _poolIntrepidAce,
+  "pool/intrepid-adversary": _poolIntrepidAdversary,
   "pool/intrepid-hero": _poolIntrepidHero,
   "pool/intrepid-provisioner": _poolIntrepidProvisioner,
   "pool/intrepid-rabbit": _poolIntrepidRabbit,
@@ -72455,6 +72470,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/molten-firebird": _poolMoltenFirebird,
   "pool/molten-frame": _poolMoltenFrame,
   "pool/molten-gatekeeper": _poolMoltenGatekeeper,
+  "pool/molten-hydra": _poolMoltenHydra,
   "pool/molten-influence": _poolMoltenInfluence,
   "pool/molten-lavamancer": _poolMoltenLavamancer,
   "pool/molten-man-inferno-incarnate": _poolMoltenManInfernoIncarnate,
@@ -74962,6 +74978,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/priest-of-urabrask": _poolPriestOfUrabrask,
   "pool/priest-of-yawgmoth": _poolPriestOfYawgmoth,
   "pool/priests-of-norn": _poolPriestsOfNorn,
+  "pool/primal-adversary": _poolPrimalAdversary,
   "pool/primal-amulet": _poolPrimalAmulet,
   "pool/primal-bellow": _poolPrimalBellow,
   "pool/primal-beyond": _poolPrimalBeyond,
@@ -82246,6 +82263,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/tranquil-cove": _poolTranquilCove,
   "pool/tranquil-domain": _poolTranquilDomain,
   "pool/tranquil-expanse": _poolTranquilExpanse,
+  "pool/tranquil-frillback": _poolTranquilFrillback,
   "pool/tranquil-garden": _poolTranquilGarden,
   "pool/tranquil-grove": _poolTranquilGrove,
   "pool/tranquil-landscape": _poolTranquilLandscape,

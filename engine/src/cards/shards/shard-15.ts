@@ -548,6 +548,7 @@ import _poolPossessionEngine from "../pool/possession-engine.js";
 import _poolPounce from "../pool/pounce.js";
 import _poolPreposterousProportions from "../pool/preposterous-proportions.js";
 import _poolPriestOfFellRites from "../pool/priest-of-fell-rites.js";
+import _poolPrimalAdversary from "../pool/primal-adversary.js";
 import _poolPrimalBellow from "../pool/primal-bellow.js";
 import _poolPrismArray from "../pool/prism-array.js";
 import _poolPrismaticWard from "../pool/prismatic-ward.js";
@@ -1400,6 +1401,7 @@ const shard: CardShard = {
     _poolPounce,
     _poolPreposterousProportions,
     _poolPriestOfFellRites,
+    _poolPrimalAdversary,
     _poolPrimalBellow,
     _poolPrismArray,
     _poolPrismaticWard,

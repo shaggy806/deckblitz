@@ -417,6 +417,7 @@ import _poolInspiritFlagshipVessel from "../pool/inspirit-flagship-vessel.js";
 import _poolIntangibleVirtue from "../pool/intangible-virtue.js";
 import _poolIntellectualOffering from "../pool/intellectual-offering.js";
 import _poolIntrepidAce from "../pool/intrepid-ace.js";
+import _poolIntrepidAdversary from "../pool/intrepid-adversary.js";
 import _poolInvertTheSkies from "../pool/invert-the-skies.js";
 import _poolInvisibleForceField from "../pool/invisible-force-field.js";
 import _poolInvoluntaryCooldown from "../pool/involuntary-cooldown.js";
@@ -821,6 +822,7 @@ import _poolTopanAscetic from "../pool/topan-ascetic.js";
 import _poolTowerDrake from "../pool/tower-drake.js";
 import _poolTradeRouteEnvoy from "../pool/trade-route-envoy.js";
 import _poolTradewindRider from "../pool/tradewind-rider.js";
+import _poolTranquilFrillback from "../pool/tranquil-frillback.js";
 import _poolTransluminant from "../pool/transluminant.js";
 import _poolTransmogrifyingLicid from "../pool/transmogrifying-licid.js";
 import _poolTrashForTreasure from "../pool/trash-for-treasure.js";
@@ -1346,6 +1348,7 @@ const shard: CardShard = {
     _poolIntangibleVirtue,
     _poolIntellectualOffering,
     _poolIntrepidAce,
+    _poolIntrepidAdversary,
     _poolInvertTheSkies,
     _poolInvisibleForceField,
     _poolInvoluntaryCooldown,
@@ -1750,6 +1753,7 @@ const shard: CardShard = {
     _poolTowerDrake,
     _poolTradeRouteEnvoy,
     _poolTradewindRider,
+    _poolTranquilFrillback,
     _poolTransluminant,
     _poolTransmogrifyingLicid,
     _poolTrashForTreasure,
