@@ -12,7 +12,7 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
-- **A player becoming a target, and the first time by anyone** (2026-11-03, `FAM4`): `player-targeted`, and
+- **A player becoming a target, and the first time by anyone** (2026-11-03, `711f1e44c`): `player-targeted`, and
   `becomes-target`'s `player`, `playerOnly`, `abilityOnly`, `firstTimeEachTurnByAnyone`. Amulet of Safekeeping, Unsettled
   Mariner, Dormant Gomazoa, Loki, God of Mischief, Angelic Cub.
 - **A land tapped for mana producing another type** (2026-11-03, `71edd1918`): `landManaInstead`, a static (by land kind,
