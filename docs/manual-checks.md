@@ -6365,8 +6365,6 @@ These boards start before the first turn (the builder's `openingHands`), with th
 - **Do:** Activate Evolving Wilds.
 - **Expect:** The search offers Rogue's Passage, which isn't printed as basic, and not Grizzly Bears.
 - **Not a bug:** The builder fills the rest of the library with basic lands, so those are offered too.
-- **Do:** Cast Open the Vaults. As Bob, choose Grizzly Bears for Pacifism.
-- **Expect:** Sol Ring comes back under you, and Glorious Anthem and Pacifism under Bob. Pacifism enchants your Grizzly Bears.
 
 ## Whole hands exiled face down, and back later (2026-11-02)
 

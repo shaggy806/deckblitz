@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4250 already implemented / 750 missing (marks refreshed 2026-11-03)
+4253 already implemented / 747 missing (marks refreshed 2026-11-03)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -428,7 +428,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   429  Mondrak, Glory Dominus                   {2}{W}{W}        Legendary Creature — Phyrexian Horror
 [x]   430  Shadowblood Ridge                        {0}              Land
 [x]   431  Snakeskin Veil                           {G}              Instant
-[ ]   432  Simian Spirit Guide                      {2}{R}           Creature — Ape Spirit
+[x]   432  Simian Spirit Guide                      {2}{R}           Creature — Ape Spirit
 [x]   433  Sungrass Prairie                         {0}              Land
 [x]   434  Taiga                                    {0}              Land — Mountain Forest
 [x]   435  Tainted Wood                             {0}              Land
@@ -742,7 +742,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   743  Kenrith's Transformation                 {1}{G}           Enchantment — Aura
 [x]   744  Champion's Helm                          {3}              Artifact — Equipment
 [x]   745  Leyline of Anticipation                  {2}{U}{U}        Enchantment
-[ ]   746  Elvish Spirit Guide                      {2}{G}           Creature — Elf Spirit
+[x]   746  Elvish Spirit Guide                      {2}{G}           Creature — Elf Spirit
 [x]   747  Thought Monitor                          {6}{U}           Artifact Creature — Construct
 [x]   748  Hellkite Tyrant                          {4}{R}{R}        Creature — Dragon
 [x]   749  Revitalizing Repast // Old-Growth Grove  {1}              Instant // Land
@@ -1089,7 +1089,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1093  Radiant Summit                           {0}              Land — Mountain Plains
 [x]  1094  Thornwood Falls                          {0}              Land
 [x]  1095  Anim Pakal, Thousandth Moon              {1}{R}{W}        Legendary Creature — Human Soldier
-[ ]  1096  Ugin, the Ineffable                      {6}              Legendary Planeswalker — Ugin
+[x]  1096  Ugin, the Ineffable                      {6}              Legendary Planeswalker — Ugin
 [x]  1097  Ethereal Armor                           {W}              Enchantment — Aura
 [x]  1098  Muldrotha, the Gravetide                 {3}{B}{G}{U}     Legendary Creature — Elemental Avatar
 [x]  1099  Tranquil Cove                            {0}              Land
