@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4240 already implemented / 760 missing (marks refreshed 2026-11-03)
+4244 already implemented / 756 missing (marks refreshed 2026-11-03)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -217,7 +217,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   218  Opt                                      {U}              Instant
 [x]   219  Secluded Courtyard                       {0}              Land
 [x]   220  Ornithopter of Paradise                  {2}              Artifact Creature — Thopter
-[ ]   221  Rhythm of the Wild                       {1}{R}{G}        Enchantment
+[x]   221  Rhythm of the Wild                       {1}{R}{G}        Enchantment
 [x]   222  Karplusan Forest                         {0}              Land
 [ ]   223  Animate Dead                             {1}{B}           Enchantment — Aura
 [x]   224  Terminate                                {B}{R}           Instant
@@ -513,7 +513,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   514  Valakut Awakening // Valakut Stoneforge  {3}              Instant // Land
 [x]   515  Felidar Retreat                          {3}{W}           Enchantment
 [x]   516  Exquisite Blood                          {4}{B}           Enchantment
-[ ]   517  Blasphemous Edict                        {3}{B}{B}        Sorcery
+[x]   517  Blasphemous Edict                        {3}{B}{B}        Sorcery
 [x]   518  Terror of the Peaks                      {3}{R}{R}        Creature — Dragon
 [x]   519  Tainted Isle                             {0}              Land
 [ ]   520  Wishclaw Talisman                        {1}{B}           Artifact
@@ -2965,14 +2965,14 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  2972  Doppelgang                               {X}{X}{X}{G}{U}  Sorcery
 [x]  2973  Fatal Push                               {B}              Instant
 [ ]  2974  Lifestream's Blessing                    {4}{G}{G}        Instant
-[ ]  2975  Uncivil Unrest                           {4}{R}           Enchantment
+[x]  2975  Uncivil Unrest                           {4}{R}           Enchantment
 [x]  2976  Jumbo Cactuar                            {5}{G}{G}        Creature — Plant
 [ ]  2977  Tamiyo, Field Researcher                 {1}{G}{W}{U}     Legendary Planeswalker — Tamiyo
 [x]  2978  Phyrexian Walker                         {0}              Artifact Creature — Phyrexian Construct
 [x]  2979  Zurgo Stormrender                        {R}{W}{B}        Legendary Creature — Orc Warrior
 [x]  2980  Galvanic Iteration                       {U}{R}           Instant
 [x]  2981  Ancestral Vision                         {0}              Sorcery
-[ ]  2982  Rivaz of the Claw                        {1}{B}{R}        Legendary Creature — Lizard Warlock
+[x]  2982  Rivaz of the Claw                        {1}{B}{R}        Legendary Creature — Lizard Warlock
 [ ]  2983  Rottenmouth Viper                        {5}{B}           Creature — Elemental Snake
 [ ]  2984  Biophagus                                {1}{G}           Creature — Human Tyranid Wizard
 [x]  2985  Abraded Bluffs                           {0}              Land — Desert

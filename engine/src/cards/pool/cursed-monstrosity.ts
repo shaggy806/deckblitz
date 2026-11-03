@@ -11,8 +11,8 @@ export default defineCard({
   colors: ["B"],
   types: ["creature"],
   subtypes: ["Horror"],
-  power: 5,
-  toughness: 5,
+  power: 4,
+  toughness: 3,
   keywords: ["flying"],
   text: `Flying\n${TEXT}`,
   triggered: [
