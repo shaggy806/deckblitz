@@ -153,7 +153,8 @@ test('EMRGE: emerge is offered per creature it makes affordable, and sacrifices 
   await shots(page, 'EMRGE-menu')
   // The only way to cast it, but a click on the card doesn't sacrifice: only
   // the button that says so does.
-  await card.locator('.card-tile').click({ force: true })
+  // (A forced click lands wherever the hand's fan puts it, sometimes on a neighbour.)
+  await card.locator('.card-tile').dispatchEvent('click')
   await expect(card.getByRole('button', { name: /emerge, sacrificing Hill Giant/ })).toBeVisible()
   const unmoved = await control<RoomState>(request, { op: 'state', room: 'EMRGE' })
   expect(linesOf(unmoved, 'alice', 'Hill Giant')).toHaveLength(1)

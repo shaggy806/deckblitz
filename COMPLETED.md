@@ -12,6 +12,18 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **Secret choices** (2026-11-03, `5b1a2ff17`): `GameObject.secretChoice`, made as a permanent enters or on resolution and
+  hidden per seat until a `revealChosen` cost; also player protection from a player and a plain `onlyOnce`. Stalking Leonin,
+  Guardian Archon, Emissary of Grudges, A Killer Among Us, Goblin Game.
+- **Offering** (2026-11-03, `aed151729`, `8b609d1d1`): rule 702.48 as `kicker.offering`, one offer per permanent; a cast that
+  sacrifices a permanent always has a labelled button. Patron of the Akki, Patron of the Kitsune, Blast-Furnace Hellkite.
+- **A spell's cost raised by coloured pips** (2026-11-03, `3aaf4bd6c`): `costModification.increaseColored`, the shown cost
+  too. Derelor, Sapphire Leech, Andradite Leech.
+- **Counting the creatures blocking a named object** (2026-11-03, `c531a96cc`): `{ blockersOf }` for the source or trigger
+  object, and `CardFilter.blockerCount`. Spined Sliver, General Marhault Elsdragon, She-Hulk, Guardian of the Gateless,
+  Rampaging Cyclops, Grizzled Wolverine.
+- **The creatures blocking a trigger's object** (2026-11-03, `726989193`): `blockingRelation`'s `of: "trigger-object"`.
+  Trailblazer's Torch, Ib Halfheart, Labyrinth Raptor, Plague Wight.
 - **Skipping a combat phase** (2026-11-02, `6bff2b9d2`): `skip-step`'s `step: "combat"`, `thisTurn` and `allOfNextTurn`;
   Stonehorn Dignitary, Blinding Angel, Revenant Patriarch, Moment of Silence, False Peace, Empty City Ruse.
 - **A target chosen at random** (2026-11-02, `26319a038`): `targetsAtRandom`, real targets picked by the seeded RNG; Witch

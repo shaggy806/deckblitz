@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4247 already implemented / 753 missing (marks refreshed 2026-11-03)
+4248 already implemented / 752 missing (marks refreshed 2026-11-03)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -4170,7 +4170,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4177  Protection Magic                         {1}{W}           Instant
 [x]  4178  The Queen of Dale                        {1}{W}           Legendary Creature — Human Noble
 [x]  4179  Omnath, Locus of Creation                {R}{G}{W}{U}     Legendary Creature — Elemental
-[ ]  4180  Blast-Furnace Hellkite                   {7}{R}{R}        Creature — Dragon
+[x]  4180  Blast-Furnace Hellkite                   {7}{R}{R}        Creature — Dragon
 [x]  4181  Snowfield Sinkhole                       {0}              Snow Land — Plains Swamp
 [x]  4182  Galadriel, Light of Valinor              {2}{G}{W}{U}     Legendary Creature — Elf Noble
 [x]  4183  Faldorn, Dread Wolf Herald               {1}{R}{G}        Legendary Creature — Human Druid

@@ -838,6 +838,9 @@ missing. Re-run `--greedy` for Phase 2's order.
   `KickerAlsoCost` (8), `cost:dynamic-life-cost` (4), `decision:pay-cost-up-to-n-times` (3), `cost:remove-all-counters` (3),
   `effect:look-at-top-of-target-players-library` (5), `effect:random-target` (6, one needing no code),
   `effect:skip-next-combat-phase` (6). The user stopped new agents here, 2026-11-02.
+- **2026-11-03: overnight, three agents at once.** `filter:blocking-trigger-object`, `amount:creatures-blocking-it` with
+  `effect:amount-creatures-blocking-it` and `condition:source-blocked-by-at-least-one`, `static:cost-increase-colored`,
+  `keyword:offering`, `decision:secret-choice` with `effect:protection-from-player-for-permanent`.
 
 ## Rough size
 
