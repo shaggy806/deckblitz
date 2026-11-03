@@ -389,6 +389,7 @@ import _poolHiddenVolcano from "../pool/hidden-volcano.js";
 import _poolHieroglyphicIllumination from "../pool/hieroglyphic-illumination.js";
 import _poolHighMarket from "../pool/high-market.js";
 import _poolHinterlandDrake from "../pool/hinterland-drake.js";
+import _poolHofriGhostforge from "../pool/hofri-ghostforge.js";
 import _poolHollowheadSliver from "../pool/hollowhead-sliver.js";
 import _poolHondenOfInfiniteRage from "../pool/honden-of-infinite-rage.js";
 import _poolHorobiDeathsWail from "../pool/horobi-deaths-wail.js";
@@ -702,6 +703,7 @@ import _poolSearingBarb from "../pool/searing-barb.js";
 import _poolSecludedSteppe from "../pool/secluded-steppe.js";
 import _poolSeekerOfSunlight from "../pool/seeker-of-sunlight.js";
 import _poolSeekersSquire from "../pool/seekers-squire.js";
+import _poolSeerOfStolenSight from "../pool/seer-of-stolen-sight.js";
 import _poolSelesnyaSanctuary from "../pool/selesnya-sanctuary.js";
 import _poolSelfInflictedWound from "../pool/self-inflicted-wound.js";
 import _poolSensationGorger from "../pool/sensation-gorger.js";
@@ -792,6 +794,7 @@ import _poolSupportiveParents from "../pool/supportive-parents.js";
 import _poolSurgingAether from "../pool/surging-aether.js";
 import _poolSurgingSentinels from "../pool/surging-sentinels.js";
 import _poolSurrakarMarauder from "../pool/surrakar-marauder.js";
+import _poolSwallowWhole from "../pool/swallow-whole.js";
 import _poolSweetOblivion from "../pool/sweet-oblivion.js";
 import _poolSwordOfSinewAndSteel from "../pool/sword-of-sinew-and-steel.js";
 import _poolSynapseSliver from "../pool/synapse-sliver.js";
@@ -834,6 +837,7 @@ import _poolTumbleweedRising from "../pool/tumbleweed-rising.js";
 import _poolTundraTank from "../pool/tundra-tank.js";
 import _poolTurnIntoAPumpkin from "../pool/turn-into-a-pumpkin.js";
 import _poolTurnabout from "../pool/turnabout.js";
+import _poolUginTheIneffable from "../pool/ugin-the-ineffable.js";
 import _poolUlamogsDreadsire from "../pool/ulamogs-dreadsire.js";
 import _poolUltimatePrice from "../pool/ultimate-price.js";
 import _poolUltronTheAnnihilator from "../pool/ultron-the-annihilator.js";
@@ -1320,6 +1324,7 @@ const shard: CardShard = {
     _poolHieroglyphicIllumination,
     _poolHighMarket,
     _poolHinterlandDrake,
+    _poolHofriGhostforge,
     _poolHollowheadSliver,
     _poolHondenOfInfiniteRage,
     _poolHorobiDeathsWail,
@@ -1633,6 +1638,7 @@ const shard: CardShard = {
     _poolSecludedSteppe,
     _poolSeekerOfSunlight,
     _poolSeekersSquire,
+    _poolSeerOfStolenSight,
     _poolSelesnyaSanctuary,
     _poolSelfInflictedWound,
     _poolSensationGorger,
@@ -1723,6 +1729,7 @@ const shard: CardShard = {
     _poolSurgingAether,
     _poolSurgingSentinels,
     _poolSurrakarMarauder,
+    _poolSwallowWhole,
     _poolSweetOblivion,
     _poolSwordOfSinewAndSteel,
     _poolSynapseSliver,
@@ -1765,6 +1772,7 @@ const shard: CardShard = {
     _poolTundraTank,
     _poolTurnIntoAPumpkin,
     _poolTurnabout,
+    _poolUginTheIneffable,
     _poolUlamogsDreadsire,
     _poolUltimatePrice,
     _poolUltronTheAnnihilator,

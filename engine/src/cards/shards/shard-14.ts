@@ -829,6 +829,7 @@ import _poolVanguardOfTheRose from "../pool/vanguard-of-the-rose.js";
 import _poolVanguardsShield from "../pool/vanguards-shield.js";
 import _poolVeilOfSecrecy from "../pool/veil-of-secrecy.js";
 import _poolVengefulArchon from "../pool/vengeful-archon.js";
+import _poolVengefulTownsfolk from "../pool/vengeful-townsfolk.js";
 import _poolVengefulVillagers from "../pool/vengeful-villagers.js";
 import _poolVeteranArmorsmith from "../pool/veteran-armorsmith.js";
 import _poolVillageBellRinger from "../pool/village-bell-ringer.js";
@@ -1725,6 +1726,7 @@ const shard: CardShard = {
     _poolVanguardsShield,
     _poolVeilOfSecrecy,
     _poolVengefulArchon,
+    _poolVengefulTownsfolk,
     _poolVengefulVillagers,
     _poolVeteranArmorsmith,
     _poolVillageBellRinger,
