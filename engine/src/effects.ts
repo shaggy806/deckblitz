@@ -75,8 +75,12 @@ import type { ResolvedTargets, TargetRef, TargetSpec } from "./target.js";
  * makes carries it ("destroy that creature at end of combat", 603.7c). Acted
  * on only while it's still the same permanent (rule 400.7); read as it last
  * existed once it has left (608.2h). Nothing on a trigger whose event has no
- * recipient. Not a target. */
-export type EffectTargetRef = number | "source" | "trigger-object" | "attached" | "chosen" | "granter" | "trigger-recipient";
+ * recipient. Not a target. `"tapped"` is the one permanent tapped to pay the
+ * spell's or ability's cost (`LastKnownRefs.tapped`): "put a +1/+1 counter on
+ * the creature tapped to pay this spell's additional cost" (Swallow Whole),
+ * still the same one on a copy. Acted on only while it's still that permanent
+ * (rule 400.7). Nothing when no one permanent was tapped. Not a target. */
+export type EffectTargetRef = number | "source" | "trigger-object" | "attached" | "chosen" | "granter" | "trigger-recipient" | "tapped";
 /**
  * What a card put onto the battlefield "attached to" something enters
  * attached to — an effect's `attachedTo`:
@@ -11753,6 +11757,9 @@ export interface ResolutionContext extends EffectApi {
   /** The one permanent tapped to pay this ability's cost — what an
    * {@link AmountRef} `"tapped"` reads. Absent when nothing was. */
   readonly tapped?: ObjectId;
+  /** That permanent has left the battlefield, or left and come back, since
+   * (rule 400.7): it's read as it last existed but not acted on. */
+  readonly tappedLost?: boolean;
   /** Which ability of which object is resolving, as the per-turn records
    * key it (`resolved-this-turn`, a `may`'s `oncePerTurn`): the source, the
    * timestamp it had when the ability went on the stack, and which of its
@@ -13484,6 +13491,9 @@ function resolveEffectTarget(
     return ctx.granter !== undefined && ctx.granterLost !== true ? { kind: "object", object: ctx.granter } : undefined;
   }
   if (ref === "trigger-recipient") return ctx.triggerRecipient();
+  if (ref === "tapped") {
+    return ctx.tapped !== undefined && ctx.tappedLost !== true ? { kind: "object", object: ctx.tapped } : undefined;
+  }
   return ctx.targets[ref];
 }
 
@@ -15611,7 +15621,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
             ? ctx.triggerObject === undefined || ctx.triggerObjectLost === true
               ? undefined
               : ({ kind: "object", object: ctx.triggerObject } as const)
-            : spec.target === "attached" || spec.target === "chosen" || spec.target === "granter" || spec.target === "trigger-recipient"
+            : typeof spec.target !== "number"
               ? resolveEffectTarget(spec.target, ctx)
               : ctx.targets[spec.target];
       if (target !== undefined) ctx.sacrificeTarget(target, spec.byItsController);

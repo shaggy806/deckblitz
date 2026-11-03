@@ -1506,6 +1506,8 @@ export function parseCost(text) {
       const { count, filter, noun } = handRevealOf(m[1]);
       cost.reveal = { count, filter, text: noun };
     } else if ((m = /^(\{E\})+$/.exec(part))) cost.payEnergy = part.length / 3;
+    // "Tap enchanted land" (Earthlore): the one permanent the source is on.
+    else if (/^Tap (?:enchanted|equipped) (?:creature|land|permanent)$/.test(part)) cost.tapOthers = { count: 1, filter: { hostOfSource: true } };
     else if ((m = new RegExp(`^Tap ${N} untapped (.+?) you control$`, "i").exec(part))) {
       // "Tap X untapped artifacts you control": announced as it's activated.
       const count = numberOf(m[1]);
@@ -1579,7 +1581,9 @@ export function parseCost(text) {
   }
   // Without a {T} of its own, the source may be one of the creatures it taps
   // (Nullmage Shepherd).
-  if (cost.tapOthers !== undefined && !cost.tap) cost.tapOthers = { ...cost.tapOthers, includeSelf: true };
+  if (cost.tapOthers !== undefined && !cost.tap && cost.tapOthers.filter.hostOfSource !== true) {
+    cost.tapOthers = { ...cost.tapOthers, includeSelf: true };
+  }
   return { cost, extra };
 }
 
@@ -3487,6 +3491,10 @@ export function parseSentence(sentence, ctx) {
     return { kind: "sequence", effects: [put, then] };
   }
   // Counters.
+  // "On the creature tapped to pay this spell's additional cost" (Swallow Whole).
+  if ((m = re(`put ${N} ([+-]\\d+/[+-]\\d+|[a-z]+) counters? on the creature tapped to pay ~'s additional cost`).exec(s))) {
+    return { kind: "add-counter", target: "tapped", counter: m[2].toLowerCase(), amount: amount(m[1]) };
+  }
   // Any named kind: +1/+1, oil (Phyrexia: All Will Be One), stun, shield.
   if ((m = re(`put ${N} ([+-]\\d+/[+-]\\d+|[a-z]+) counters? on (~|${TARGET}|each creature you control|each other creature you control)`).exec(s))) {
     const n = amount(m[1]);
@@ -11117,6 +11125,29 @@ export function parseFace(face, ctx = {}) {
       if (restrictions.includes("as a sorcery")) ability.sorcerySpeed = true;
       if (restrictions.includes("once each turn")) ability.oncePerTurn = true;
       if (restrictions.includes("during your turn")) ability.condition = { kind: "your-turn" };
+      // "Tap enchanted creature: … Activate only if enchanted creature is
+      // [white and] untapped [and only once each turn]" (Krovikan Plague,
+      // Nature's Chosen): being untapped is what the cost asks anyway (rule
+      // 118.3), so it's said only of a cost that taps the host.
+      if (ability.cost?.tapOthers?.filter?.hostOfSource === true) {
+        rest = rest.replace(
+          / Activate only if enchanted (?:creature|land|permanent) is (?:(white|blue|black|red|green) and )?untapped( and only once each turn)?\.$/,
+          (_x, color, once) => {
+            if (color !== undefined) {
+              const letter = { white: "W", blue: "U", black: "B", red: "R", green: "G" }[color];
+              ability.condition = { kind: "source", filter: { attachedTo: { colors: [letter] } } };
+            }
+            if (once !== undefined) ability.oncePerTurn = true;
+            return "";
+          },
+        );
+      }
+      // "Activate only during your turn and only once each turn" (Nature's Chosen).
+      rest = rest.replace(/ Activate only during your turn and only once each turn\.$/, () => {
+        ability.condition = { kind: "your-turn" };
+        ability.oncePerTurn = true;
+        return "";
+      });
       // Rocket Launcher: rule 302.6's test, of a permanent of any type.
       rest = rest.replace(/ Activate only if you've controlled ~ continuously since the beginning of your most recent turn\.$/, () => {
         ability.condition = { kind: "source", filter: { controlledContinuously: true } };

@@ -3529,6 +3529,14 @@ activated: [
 removeCounter?, addCounter?, payEnergy?, mill?, discardHand?, discard?,
 tapOthers?, untap? }`.
 
+- `tapOthers: { count: 1, filter: { hostOfSource: true } }` — **"Tap enchanted
+  creature"** (Krovikan Plague, Earthlore): the one permanent the Aura is on,
+  so no choice. Not the {T} of rule 302.6, so a creature that just arrived may
+  be tapped; "activate only if enchanted creature is untapped" is what the cost
+  asks already (rule 118.3), so it isn't written. `"tapped"` names the one
+  permanent a cost tapped, as an `EffectTargetRef` too: an additional cost's
+  `also.tapUntapped` of one, "the creature tapped to pay this spell's additional
+  cost" (Swallow Whole), a copy's the original's (rule 707.10).
 - `untap: true` — **{Q}**, the untap symbol (rule 107.6 — Patrol Signaler,
   Hateflayer): payable only while the source is tapped, and a creature's
   only past summoning sickness (302.6); refused while it has a stun counter.

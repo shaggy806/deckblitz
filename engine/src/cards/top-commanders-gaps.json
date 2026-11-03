@@ -1415,7 +1415,9 @@
   "amount:count-distinct-mana-costs",
   "condition:distinct-mana-values-in-graveyard",
   "condition:controlled-since-turn-start",
-  "filter:controlled-continuously-since-turn-start"
+  "filter:controlled-continuously-since-turn-start",
+  "cost:tap-enchanted-permanent",
+  "cost:tap-untapped-creature-additional"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

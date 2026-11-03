@@ -11502,3 +11502,44 @@ describe("offering", () => {
     });
   });
 });
+
+describe("a tap cost on the host, and the creature a cost tapped", () => {
+  const read = (type_line: string, oracle_text: string) =>
+    parseFace({ name: "Card", type_line, oracle_text, mana_cost: "{1}", colors: [], cmc: 1 } as never, { tokenFor: (d: string) => d }) as unknown as {
+      activated: { cost: { tapOthers?: unknown }; condition?: unknown; oncePerTurn?: boolean; effect: unknown; __todo?: string[] }[];
+      effect?: unknown;
+    };
+  const AURA = "Enchantment — Aura";
+  it("Tap enchanted land: the one permanent, and untapped says nothing more", () => {
+    const [ability] = read(AURA, "Enchant land you control\nTap enchanted land: Draw a card. Activate only if enchanted land is untapped.").activated;
+    expect(ability.cost.tapOthers).toEqual({ count: 1, filter: { hostOfSource: true } });
+    expect(ability.effect).toEqual({ kind: "draw", amount: 1 });
+    expect(ability.condition).toBeUndefined();
+  });
+  it("a colour in the restriction is a condition; once each turn the limit", () => {
+    const [ability] = read(
+      AURA,
+      "Enchant creature you control\nTap enchanted creature: Draw a card. Activate only if enchanted creature is white and untapped and only once each turn.",
+    ).activated;
+    expect(ability.condition).toEqual({ kind: "source", filter: { attachedTo: { colors: ["W"] } } });
+    expect(ability.oncePerTurn).toBe(true);
+    expect(ability.effect).toEqual({ kind: "draw", amount: 1 });
+  });
+  it("untapped isn't dropped from a cost that doesn't tap the host", () => {
+    const [ability] = read(AURA, "Enchant creature\n{1}: Draw a card. Activate only if enchanted creature is untapped.").activated;
+    expect(ability.__todo).toEqual(['a restriction: "Activate only if enchanted creature is untapped."']);
+  });
+  it("the creature tapped to pay this spell's additional cost", () => {
+    const spell = read(
+      "Sorcery",
+      "As an additional cost to cast this spell, tap an untapped creature you control.\nExile target tapped creature. Put a +1/+1 counter on the creature tapped to pay this spell's additional cost.",
+    );
+    expect(spell.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "exile", target: 0 },
+        { kind: "add-counter", target: "tapped", counter: "+1/+1", amount: 1 },
+      ],
+    });
+  });
+});

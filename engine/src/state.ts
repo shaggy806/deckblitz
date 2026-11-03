@@ -1676,6 +1676,10 @@ export interface SpellSnapshot {
    * (`LastKnownRefs.exiledCost`): a copy's "the exiled card" is the
    * original's, as `convokedBy` is (rule 707.10). */
   readonly exiledCost?: readonly ObjectId[];
+  /** The one permanent tapped to pay its cost (`LastKnownRefs.tapped`): a
+   * copy's "the creature tapped to pay this spell's additional cost" is the
+   * original's (rule 707.10, Swallow Whole's ruling). */
+  readonly tappedCost?: { readonly object: ObjectId; readonly zoneChangeCount: number };
   /** Its copiable modifiers (a prototyped spell's — rule 718.3c). */
   readonly modifiers: readonly PtModifier[];
   /** A copy without its epic ability (`GameObject.withoutEpic`). */
@@ -2339,8 +2343,9 @@ export interface LastKnownRefs {
    * ability was activated or triggered (rule 201.5a) — the `"granter"`
    * reference. */
   readonly granter?: { readonly object: ObjectId; readonly zoneChangeCount: number };
-  /** "The tapped creature": the one permanent tapped to pay the ability's
-   * cost (`AbilityCost.tapOthers` — station's, rule 702.184a). */
+  /** "The tapped creature": the one permanent tapped to pay the spell's or
+   * ability's cost (`AbilityCost.tapOthers` — station's, rule 702.184a; an
+   * additional cost's `tapUntapped` — Swallow Whole's). */
   readonly tapped?: { readonly object: ObjectId; readonly zoneChangeCount: number };
   /**
    * What the triggering event was aimed at, for a trigger whose event has a

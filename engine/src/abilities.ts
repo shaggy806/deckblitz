@@ -548,6 +548,14 @@ export interface AbilityCost {
    * `shareCreatureType` is the total constraint "that share a creature type"
    * (Weight of Conscience): the offer's `creatureTypes` says what each choice
    * has, and a choice of creatures with no type in common is refused.
+   *
+   * A `filter` of `{ hostOfSource: true }` is an Aura's "Tap enchanted
+   * creature" (Krovikan Plague): the one permanent it's on, so no choice. It
+   * isn't the `{T}` of rule 302.6, so a creature that just arrived may be
+   * tapped, and only an untapped one: "activate only if enchanted creature is
+   * untapped" says nothing more. Every such Aura enchants something "you
+   * control", and leaves as a state-based action if its controller loses it
+   * (rule 704.5m), so the one tapped is always the activating player's.
    */
   readonly tapOthers?: {
     readonly count: number | "x";

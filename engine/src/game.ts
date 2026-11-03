@@ -18404,8 +18404,16 @@ export class Game {
     // total cost, so paid alongside the mana; it isn't mana spent.
     if (taxLife > 0) this.changeLife(player, -taxLife);
     // Sephara's "tap four untapped creatures you control with flying" — the
-    // other half of its alternative cost, paid as the spell is cast.
-    this.payTapCost(tapPicked);
+    // other half of its alternative cost, paid as the spell is cast. One
+    // permanent tapped is remembered: "the creature tapped to pay this spell's
+    // additional cost" (Swallow Whole).
+    const tappedForCost = this.payTapCost(tapPicked);
+    if (tappedForCost.length === 1) {
+      object.lastKnownRefs = {
+        ...object.lastKnownRefs,
+        tapped: { object: tappedForCost[0], zoneChangeCount: this.state.objects[tappedForCost[0]].zoneChangeCount ?? 0 },
+      };
+    }
     // Sneak's "returning an unblocked creature you control to its owner's
     // hand" (rule 702.190a), the other half of that cost: what it was
     // attacking is what the permanent this spell becomes attacks (702.190b).
@@ -18471,7 +18479,7 @@ export class Game {
         this.emit({ type: "permanent-sacrificed", object: victim, player: sacrificer });
       }
       // What the spell's "the sacrificed creature" reads (rule 608.2h).
-      object.lastKnownRefs = { sacrificed: { object: victim, zoneChangeCount: stint } };
+      object.lastKnownRefs = { ...object.lastKnownRefs, sacrificed: { object: victim, zoneChangeCount: stint } };
     }
     // The costs are paid, so a target in a token stack can be peeled off it
     // (`lockInTargets`) without taking a token a cost above had named.
@@ -29806,7 +29814,17 @@ export class Game {
               : {}),
           }
         : {}),
-      ...(refs.tapped !== undefined ? { tapped: refs.tapped.object } : {}),
+      // Read as it last existed once gone, acted on only while the same
+      // permanent (400.7).
+      ...(refs.tapped !== undefined
+        ? {
+            tapped: refs.tapped.object,
+            ...(this.state.objects[refs.tapped.object]?.zone !== "battlefield" ||
+            (this.state.objects[refs.tapped.object]?.zoneChangeCount ?? 0) !== refs.tapped.zoneChangeCount
+              ? { tappedLost: true }
+              : {}),
+          }
+        : {}),
       ...(refs.enteredTogether !== undefined
         ? { enteredTogether: refs.enteredTogether.map(({ object, count }) => ({ object, count })) }
         : {}),
@@ -35925,7 +35943,8 @@ export class Game {
         // creature's *own* activation cost. "Tap an untapped creature you
         // control" can tap one that just arrived, the source included, which
         // is how Heritage Druid taps three Elves cast this turn.
-        matchesFilter(this.state, this.registry, id, spec.filter, { you: player })
+        // The source, for "Tap enchanted creature" (`hostOfSource`).
+        matchesFilter(this.state, this.registry, id, spec.filter, { you: player, source: sourceId })
       );
     });
   }
@@ -37464,6 +37483,7 @@ export class Game {
       ...(object.giftTo !== undefined ? { giftTo: object.giftTo } : {}),
       ...(object.convokedBy !== undefined ? { convokedBy: [...object.convokedBy] } : {}),
       ...(object.lastKnownRefs?.exiledCost !== undefined ? { exiledCost: [...object.lastKnownRefs.exiledCost] } : {}),
+      ...(object.lastKnownRefs?.tapped !== undefined ? { tappedCost: object.lastKnownRefs.tapped } : {}),
       modifiers: object.modifiers.filter((m) => m.copiable === true).map((m) => ({ ...m })),
       ...(object.withoutEpic === true ? { withoutEpic: true } : {}),
     };
@@ -37552,7 +37572,16 @@ export class Game {
       ...(spell.giftTo !== undefined ? { giftTo: spell.giftTo } : {}),
       // "Each creature that convoked this spell": the original's (707.10).
       ...(spell.convokedBy !== undefined ? { convokedBy: [...spell.convokedBy] } : {}),
-      ...(spell.exiledCost !== undefined ? { lastKnownRefs: { exiledCost: [...spell.exiledCost] } } : {}),
+      // "The creature tapped to pay this spell's additional cost": the
+      // original's (Swallow Whole's ruling).
+      ...(spell.exiledCost !== undefined || spell.tappedCost !== undefined
+        ? {
+            lastKnownRefs: {
+              ...(spell.exiledCost !== undefined ? { exiledCost: [...spell.exiledCost] } : {}),
+              ...(spell.tappedCost !== undefined ? { tapped: spell.tappedCost } : {}),
+            },
+          }
+        : {}),
       attacking: null,
       blocking: null,
       blockedBy: [],
