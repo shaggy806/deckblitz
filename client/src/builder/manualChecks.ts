@@ -9596,5 +9596,26 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       },
       opp: [{ bf: ['Hill Giant'] }],
     }),
+
+  // --- Can't have a keyword, statics adding a supertype (2026-11-02) --------
+  preset(
+    'Archetype of Imagination: an opponent\'s creature can\'t gain flying',
+    board({
+      you: { bf: ['Archetype of Imagination', 'Island*2'], hand: ['Jump'] },
+      opp: { bf: ['Grizzly Bears'] },
+    }),
+  ),
+  preset(
+    'Leyline of Singularity: the legend rule asks about two of the same permanent',
+    board({
+      you: { bf: ['Sol Ring*2', 'Island*4'], hand: ['Leyline of Singularity'] },
+      opp: { bf: ['Sol Ring'] },
+    }),
+  ),
+  preset(
+    'Rootpath Purifier: a search for a basic land can find any land',
+    board({
+      you: { bf: ['Rootpath Purifier', 'Evolving Wilds'], lib: ["Rogue's Passage", 'Grizzly Bears'] },
+    }),
   ),
 ]

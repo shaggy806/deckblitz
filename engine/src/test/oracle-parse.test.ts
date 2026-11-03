@@ -10224,6 +10224,71 @@ describe("exiled face down and linked to the source", () => {
   });
 });
 
+describe("a static that adds a supertype", () => {
+  const statics = (oracle_text: string, type_line = "Enchantment"): unknown =>
+    parseFace({ name: "Card", type_line, oracle_text }, { tokenFor: () => null }).static;
+
+  it("reads the Auras' lines", () => {
+    const snow = "Enchanted land is snow.";
+    expect(statics(snow)).toEqual([{ affects: { scope: "attached" }, addSupertypes: ["snow"], text: snow }]);
+    const wings = "Enchanted creature is legendary, gets +1/+1, and has flying, vigilance, and lifelink.";
+    expect(statics(wings)).toEqual([
+      {
+        affects: { scope: "attached" },
+        addSupertypes: ["legendary"],
+        grantPt: [1, 1],
+        grantKeywords: ["flying", "vigilance", "lifelink"],
+        text: wings,
+      },
+    ]);
+  });
+
+  it("reads the filtered lines", () => {
+    const leyline = "All nonland permanents are legendary.";
+    expect(statics(leyline)).toEqual([
+      { affects: { scope: "filter", filter: { notTypes: ["land"] } }, addSupertypes: ["legendary"], text: leyline },
+    ]);
+    const ice = "Permanents with ice counters on them are snow.";
+    expect(statics(ice)).toEqual([
+      {
+        affects: { scope: "filter", filter: { counters: { kind: "ice", compare: { op: "gte", n: 1 } } } },
+        addSupertypes: ["snow"],
+        text: ice,
+      },
+    ]);
+  });
+
+  it("reads Rootpath Purifier's two halves", () => {
+    const text = "Lands you control and land cards in your library are basic.";
+    expect(statics(text)).toEqual([
+      {
+        affects: { scope: "filter", filter: { type: "land", controlledBy: "you" } },
+        addSupertypes: ["basic"],
+        typesOutsideBattlefield: { ofType: "land", zones: ["library"], addSupertypes: ["basic"] },
+        text,
+      },
+    ]);
+  });
+
+  it("reads Lifecraft Engine's chosen type lines", () => {
+    const type = "Vehicle creatures you control are the chosen creature type in addition to their other types.";
+    const pump = "Each creature you control of the chosen type other than this Vehicle gets +1/+1.";
+    const parsed = statics(`As this Vehicle enters, choose a creature type.\n${type}\n${pump}`, "Artifact — Vehicle");
+    expect(parsed).toEqual([
+      {
+        affects: { scope: "filter", filter: { type: "creature", subtype: "Vehicle", controlledBy: "you" } },
+        addsChosenCreatureType: true,
+        text: type,
+      },
+      {
+        affects: { scope: "filter", filter: { type: "creature", controlledBy: "you", ofChosenType: true }, excludeSelf: true },
+        grantPt: [1, 1],
+        text: pump,
+      },
+    ]);
+  });
+});
+
 describe("can't have or gain a keyword", () => {
   it("reads an Archetype's line, and only when it names one keyword twice", () => {
     const statics = (oracle_text: string): unknown =>

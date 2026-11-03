@@ -9783,6 +9783,24 @@ export function parseFace(face, ctx = {}) {
       out.static.push({ affects: { scope: "self" }, playerProtection: { filter: { chosenName: true } }, text: printed(raw) });
       continue;
     }
+    // Lifecraft Engine: "Vehicle creatures you control are the chosen creature
+    // type in addition to their other types."
+    if (out.chooseCreatureTypeOnEnter === true && (m = /^([A-Z]\w+) creatures you control are the chosen creature type in addition to their other types\.$/.exec(line))) {
+      out.static.push({
+        affects: { scope: "filter", filter: { type: "creature", subtype: m[1], controlledBy: "you" } },
+        addsChosenCreatureType: true,
+        text: printed(raw),
+      });
+      continue;
+    }
+    if (out.chooseCreatureTypeOnEnter === true && (m = /^Each creature you control of the chosen type other than ~ gets \+(\d+)\/\+(\d+)\.$/.exec(line))) {
+      out.static.push({
+        affects: { scope: "filter", filter: { type: "creature", controlledBy: "you", ofChosenType: true }, excludeSelf: true },
+        grantPt: [Number(m[1]), Number(m[2])],
+        text: printed(raw),
+      });
+      continue;
+    }
     if (out.chooseCreatureTypeOnEnter === true && line === "~ is the chosen type in addition to its other types.") {
       out.static.push({ affects: { scope: "self" }, addsChosenCreatureType: true, text: printed(raw) });
       continue;
@@ -12712,6 +12730,40 @@ function parseStatic(line, text) {
   if ((m = /^Nonbasic lands are (Plains|Islands|Swamps|Mountains|Forests)\.$/.exec(line))) {
     const type = m[1] === "Plains" ? "Plains" : m[1].slice(0, -1);
     return { affects: { scope: "filter", filter: { type: "land", notSupertype: "basic" } }, setSubtypes: [type], text };
+  }
+  // A supertype in addition (layer 4, rule 613.1d): "enchanted creature is
+  // legendary", "all nonland permanents are legendary", "permanents with ice
+  // counters on them are snow", "lands you control and land cards in your
+  // library are basic".
+  if ((m = /^Enchanted (?:creature|land|permanent) is (legendary|snow)\.$/.exec(line))) {
+    return { affects: { scope: "attached" }, addSupertypes: [m[1]], text };
+  }
+  if ((m = new RegExp(`^Enchanted creature is (legendary|snow), gets \\+(\\d+)/\\+(\\d+), and has ${KW}, ${KW}, and ${KW}\\.$`, "i").exec(line))) {
+    return {
+      affects: { scope: "attached" },
+      addSupertypes: [m[1].toLowerCase()],
+      grantPt: [Number(m[2]), Number(m[3])],
+      grantKeywords: [m[4], m[5], m[6]].map((k) => KEYWORDS[k.toLowerCase()]),
+      text,
+    };
+  }
+  if ((m = /^All nonland permanents are (legendary|snow)\.$/.exec(line))) {
+    return { affects: { scope: "filter", filter: { notTypes: ["land"] } }, addSupertypes: [m[1]], text };
+  }
+  if ((m = /^Permanents with (\w+) counters on them are (legendary|snow)\.$/.exec(line))) {
+    return {
+      affects: { scope: "filter", filter: { counters: { kind: m[1], compare: { op: "gte", n: 1 } } } },
+      addSupertypes: [m[2]],
+      text,
+    };
+  }
+  if (line === "Lands you control and land cards in your library are basic.") {
+    return {
+      affects: { scope: "filter", filter: { type: "land", controlledBy: "you" } },
+      addSupertypes: ["basic"],
+      typesOutsideBattlefield: { ofType: "land", zones: ["library"], addSupertypes: ["basic"] },
+      text,
+    };
   }
   if ((m = /^Enchanted land is an? (Plains|Island|Swamp|Mountain|Forest)\.$/.exec(line))) {
     return { affects: { scope: "attached" }, setSubtypes: [m[1]], text };

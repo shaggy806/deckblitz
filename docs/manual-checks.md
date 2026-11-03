@@ -6349,3 +6349,19 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 - **Do:** Click Thrill-Kill Disciple in your hand and choose the offer paying squad twice. Discard two cards when asked.
 - **Expect:** Twice is the most offered with five Mountains, though you hold three more cards. You pay all five mana, discard the two you pick, and end with three Disciples, two of them tokens.
+### Archetype of Imagination: an opponent's creature can't gain flying
+
+- **Do:** Cast Jump on Bob's Grizzly Bears.
+- **Expect:** Jump resolves and the Bears show no flying.
+- **Not a bug:** Archetype of Imagination flies, though it has no flying of its own: "Creatures you control have flying."
+
+### Leyline of Singularity: the legend rule asks about two of the same permanent
+
+- **Do:** Cast Leyline of Singularity, then click the Sol Ring you want to keep.
+- **Expect:** The game waits for you to "choose which legend to keep". The other Sol Ring goes to the graveyard, and Bob's one Sol Ring stays.
+
+### Rootpath Purifier: a search for a basic land can find any land
+
+- **Do:** Activate Evolving Wilds.
+- **Expect:** The search offers Rogue's Passage, which isn't printed as basic, and not Grizzly Bears.
+- **Not a bug:** The builder fills the rest of the library with basic lands, so those are offered too.

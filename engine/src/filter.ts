@@ -18,6 +18,7 @@ import {
   computeCharacteristics,
   effectiveColors,
   effectiveSubtypes,
+  effectiveSupertypes,
   effectiveTypes,
   hasAnyAbility,
   hasLostAbilities,
@@ -1226,6 +1227,7 @@ export interface FilterContext {
   readonly layered?: {
     readonly types?: readonly CardType[] | undefined;
     readonly subtypes?: readonly string[] | undefined;
+    readonly supertypes?: readonly Supertype[] | undefined;
     readonly keywords?: (() => ReadonlySet<Keyword>) | undefined;
     readonly hasProtection?: (() => boolean) | undefined;
   };
@@ -1727,7 +1729,8 @@ export function matchesFilter(
   }
   const name = live !== undefined ? printedCardName(live) : lki!.name;
   if (filter.supertype !== undefined || filter.notSupertype !== undefined) {
-    const supertypes = live !== undefined ? supertypesOf(registry, live) : lki!.supertypes;
+    const supertypes =
+      live !== undefined ? (layered?.supertypes ?? effectiveSupertypes(state, registry, live)) : lki!.supertypes;
     if (filter.supertype !== undefined && !supertypes.includes(filter.supertype)) return false;
     if (filter.notSupertype !== undefined && supertypes.includes(filter.notSupertype)) {
       return false;
@@ -1989,7 +1992,7 @@ export function matchesFilter(
             id,
             layered === undefined
               ? {}
-              : { inFold: true, types: layered.types, subtypes: layered.subtypes, keywords: layered.keywords },
+              : { inFold: true, types: layered.types, subtypes: layered.subtypes, supertypes: layered.supertypes, keywords: layered.keywords },
           )
         : (lki!.goaders?.length ?? 0) > 0;
     if (goaded !== filter.goaded) return false;
@@ -2408,7 +2411,7 @@ export function matchesFilter(
             registry,
             live,
             layered !== undefined
-              ? { inFold: true, types: layered.types, subtypes: layered.subtypes, keywords: layered.keywords }
+              ? { inFold: true, types: layered.types, subtypes: layered.subtypes, supertypes: layered.supertypes, keywords: layered.keywords }
               : {},
           )
         : lki!.hasManaAbility;
@@ -2426,7 +2429,7 @@ export function matchesFilter(
             registry,
             live,
             layered !== undefined
-              ? { inFold: true, types: layered.types, subtypes: layered.subtypes, keywords: layered.keywords, hasProtection: layered.hasProtection }
+              ? { inFold: true, types: layered.types, subtypes: layered.subtypes, supertypes: layered.supertypes, keywords: layered.keywords, hasProtection: layered.hasProtection }
               : {},
           )
         : lki!.hasAbilities;

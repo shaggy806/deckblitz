@@ -6,6 +6,7 @@ import {
   chosenProtectionQualities,
   computeCharacteristics,
   effectiveSubtypes,
+  effectiveSupertypes,
   effectiveTypes,
   grantedStatics,
   hasLostAbilities,
@@ -844,10 +845,9 @@ function isLegalTargetUncached(
       if (object === undefined || object.zone !== "battlefield" || object.controller === forPlayer) {
         return false;
       }
-      const def = registry.get(printedCardName(object));
       const types = effectiveTypes(state, registry, object);
       if (types.includes("artifact") || types.includes("enchantment")) return true;
-      return types.includes("land") && !def.supertypes.includes("basic");
+      return types.includes("land") && !effectiveSupertypes(state, registry, object).includes("basic");
     }
     case "spell":
       return ref.kind === "object" && isSpellOnStack(state, ref.object);

@@ -39,6 +39,7 @@ import type {
   LifeFromStarting,
   StaticAbility,
   StaticCondition,
+  Supertype,
   TurnStat,
 } from "./cards.js";
 import { bestowedDefinition, printedHasAbility } from "./cards/define.js";
@@ -51,6 +52,7 @@ import {
   manaValueOfObject,
   matchesFilter,
   printedManaCost,
+  supertypesOf,
   weightedMatches,
 } from "./filter.js";
 import type { EffectAmount } from "./effects.js";
@@ -2740,6 +2742,8 @@ export function withChangeling(
 export interface LayerFour {
   readonly types: readonly CardType[];
   readonly subtypes: readonly string[];
+  /** The supertypes statics add, over `supertypesOf`'s: {@link effectiveSupertypes}. */
+  readonly addedSupertypes: readonly Supertype[];
   /**
    * The statics with a layer-4 part (`addTypes` / `addSubtypes`) that
    * applied to this permanent. Rule 613.6: an effect keeps applying to the
@@ -2751,6 +2755,7 @@ export interface LayerFour {
 }
 
 const NO_STATICS: readonly ContributingStatic[] = [];
+const NO_SUPERTYPES: readonly Supertype[] = [];
 
 /** One layer-4 step: an object's own modifier, or an external static. */
 type LayerFourStep =
@@ -2934,6 +2939,7 @@ function outsideLayerFour(state: GameState, registry: CardRegistry, object: Game
   if (object.kind !== "card" || object.faceDown !== undefined || object.foretold === true) return own;
   if (object.exiledFaceDown !== undefined) return own;
   let { types, subtypes } = own;
+  let addedSupertypes = NO_SUPERTYPES;
   const ordered = sources.length === 1 ? sources : [...sources].sort((a, b) => a.source.timestamp - b.source.timestamp);
   for (const { source, ability } of ordered) {
     const grant = ability.typesOutsideBattlefield!;
@@ -2943,6 +2949,7 @@ function outsideLayerFour(state: GameState, registry: CardRegistry, object: Game
     if (ability.condition !== undefined && !staticConditionMet(state, registry, source, ability.condition)) continue;
     if (grant.addTypes !== undefined) types = union(types, grant.addTypes);
     if (grant.addSubtypes !== undefined) subtypes = union(subtypes, grant.addSubtypes);
+    if (grant.addSupertypes !== undefined) addedSupertypes = union(addedSupertypes, grant.addSupertypes);
     const chosen = source.chosenCreatureType;
     if (typeof chosen !== "string" || !isCreatureType(chosen)) continue;
     if (grant.addsChosenCreatureType === true) subtypes = union(subtypes, [chosen]);
@@ -2950,7 +2957,7 @@ function outsideLayerFour(state: GameState, registry: CardRegistry, object: Game
       subtypes = [...subtypes.filter((s) => subtypeKind(s) !== "creature"), chosen];
     }
   }
-  return { types, subtypes, applied: NO_STATICS };
+  return { types, subtypes, addedSupertypes, applied: NO_STATICS };
 }
 
 /** Layer 4 from the object's own modifiers alone — everything there was
@@ -2962,7 +2969,7 @@ function ownLayerFour(registry: CardRegistry, object: GameObject): LayerFour {
   for (const modifier of typeModifiers(object)) {
     ({ types, subtypes } = applyModifierTypes(modifier, types, subtypes));
   }
-  return { types, subtypes, applied: NO_STATICS };
+  return { types, subtypes, addedSupertypes: NO_SUPERTYPES, applied: NO_STATICS };
 }
 
 /**
@@ -2975,7 +2982,19 @@ function ownLayerFour(registry: CardRegistry, object: GameObject): LayerFour {
  * pass added, until which statics apply stops changing — the dependency
  * order for additive effects. A pair that depend on each other (a loop,
  * 613.8k) settles in timestamp order, and the pass count is bounded.
+ *
+ * Supertypes are read differently. A scope can ask for what *lacks* one (Blood
+ * Moon's "nonbasic lands"), and an effect that adds it changes what such a
+ * scope applies to (Rootpath Purifier's ruling), so it depends on that effect
+ * whatever their timestamps (rule 613.8a). So after the first pass every scope
+ * sees the supertypes the pass before ended with, rather than those so far.
  */
+interface LayerFourSeen {
+  readonly types: readonly CardType[];
+  readonly subtypes: readonly string[];
+  readonly supertypes: readonly Supertype[];
+}
+
 function foldLayerFour(
   state: GameState,
   registry: CardRegistry,
@@ -2994,7 +3013,11 @@ function foldLayerFour(
       // dependent setter's own change can hide what it depended on (Glaciers
       // made a Mountain a Plains), which would undo it on the next pass.
       const next = foldLayerFourOnce(state, registry, object, steps, seen);
-      seen = { types: union(seen.types, next.seen.types), subtypes: union(seen.subtypes, next.seen.subtypes) };
+      seen = {
+        types: union(seen.types, next.seen.types),
+        subtypes: union(seen.subtypes, next.seen.subtypes),
+        supertypes: next.seen.supertypes,
+      };
       const settled =
         next.four.applied.length === result.applied.length &&
         next.four.applied.every((a, i) => a === result.applied[i]);
@@ -3012,13 +3035,16 @@ function foldLayerFourOnce(
   registry: CardRegistry,
   object: GameObject,
   steps: readonly LayerFourStep[],
-  /** Every type and subtype earlier passes had at any point. */
-  previous: { readonly types: readonly CardType[]; readonly subtypes: readonly string[] } | null,
-): { four: LayerFour; seen: { types: readonly CardType[]; subtypes: readonly string[] } } {
+  /** Every type and subtype earlier passes had at any point, and the
+   * supertypes the last pass ended with. */
+  previous: LayerFourSeen | null,
+): { four: LayerFour; seen: LayerFourSeen } {
   let types: readonly CardType[] = printedDefinition(registry, object).types;
   let subtypes = printedSubtypes(registry, object);
   let seenTypes = types;
   let seenSubtypes = subtypes;
+  const baseSupertypes = supertypesOf(registry, object);
+  let addedSupertypes = NO_SUPERTYPES;
   const applied: ContributingStatic[] = [];
   // Statics that reach `object` only through what a later step gives it
   // (Glaciers' "all Mountains are Plains" over a Forest a later effect made a
@@ -3064,6 +3090,7 @@ function foldLayerFourOnce(
       subtypes = [...subtypes.filter((s) => s !== EVERY_LAND_TYPE && !isLandType(s)), chosen];
     }
     if (ability.addSubtypes !== undefined) subtypes = union(subtypes, ability.addSubtypes);
+    if (ability.addSupertypes !== undefined) addedSupertypes = union(addedSupertypes, ability.addSupertypes);
     if (ability.addsChosenCreatureType === true) {
       // Titan of Littjara's "is the chosen type in addition": its source's
       // choice, a creature type (`chooseCreatureTypeOnEnter`).
@@ -3083,6 +3110,8 @@ function foldLayerFourOnce(
     seenTypes = union(seenTypes, types);
     seenSubtypes = union(seenSubtypes, subtypes);
   };
+  const supertypesSeen = (): readonly Supertype[] =>
+    previous !== null ? previous.supertypes : union(baseSupertypes, addedSupertypes);
   for (const step of steps) {
     if ("modifier" in step) {
       ({ types, subtypes } = applyModifierTypes(step.modifier, types, subtypes));
@@ -3090,7 +3119,7 @@ function foldLayerFourOnce(
       continue;
     }
     const { source, ability } = step.grant;
-    const now = { types, subtypes, inFold: true };
+    const now = { types, subtypes, supertypes: supertypesSeen(), inFold: true };
     if (staticAffects(state, registry, ability.affects, source, object, now)) {
       apply(step.grant);
       see();
@@ -3100,17 +3129,22 @@ function foldLayerFourOnce(
     const later = {
       types: union(types, previous.types),
       subtypes: union(subtypes, previous.subtypes),
+      supertypes: supertypesSeen(),
       inFold: true,
     };
     if (staticAffects(state, registry, ability.affects, source, object, later)) deferred.push(step.grant);
   }
   for (const grant of deferred) {
-    if (staticAffects(state, registry, grant.ability.affects, grant.source, object, { types, subtypes, inFold: true })) {
+    const view = { types, subtypes, supertypes: supertypesSeen(), inFold: true };
+    if (staticAffects(state, registry, grant.ability.affects, grant.source, object, view)) {
       apply(grant);
       see();
     }
   }
-  return { four: { types, subtypes, applied }, seen: { types: seenTypes, subtypes: seenSubtypes } };
+  return {
+    four: { types, subtypes, addedSupertypes, applied },
+    seen: { types: seenTypes, subtypes: seenSubtypes, supertypes: union(baseSupertypes, addedSupertypes) },
+  };
 }
 
 /** Throw if a cached {@link LayerFour} diverges from a fresh fold — the
@@ -3120,6 +3154,7 @@ function assertSameLayerFour(cached: LayerFour, fresh: LayerFour, id: ObjectId):
     JSON.stringify({
       types: [...l.types].sort(),
       subtypes: [...l.subtypes].sort(),
+      addedSupertypes: [...l.addedSupertypes].sort(),
       applied: l.applied.map((a) => `${a.source.id}:${a.ability.text}`),
     });
   const a = show(cached);
@@ -3137,6 +3172,7 @@ export function hasLayerFourPart(ability: StaticAbility): boolean {
   return (
     ability.addTypes !== undefined ||
     ability.addSubtypes !== undefined ||
+    ability.addSupertypes !== undefined ||
     ability.setSubtypes !== undefined ||
     ability.setTypes !== undefined ||
     ability.removeTypes !== undefined ||
@@ -3205,7 +3241,16 @@ function withoutTextLostSources(
     const known = textLost.get(source.id);
     if (known !== undefined) return known;
     const own = ownLayerFour(registry, source);
-    const view = { types: own.types, subtypes: own.subtypes, inFold: true };
+    let view: TargetView = { types: own.types, subtypes: own.subtypes, supertypes: supertypesOf(registry, source), inFold: true };
+    // Asked before any static applies, but a nonbasic land a static makes
+    // basic is out of a "nonbasic lands" setter's reach (rule 613.8a): Rootpath
+    // Purifier's ruling, and its lands keep their text under Blood Moon.
+    for (const grant of sources) {
+      if (grant.ability.addSupertypes === undefined) continue;
+      if (!staticAffects(state, registry, grant.ability.affects, grant.source, source, view)) continue;
+      if (grant.ability.condition !== undefined && !staticConditionMet(state, registry, grant.source, grant.ability.condition)) continue;
+      view = { ...view, supertypes: union(view.supertypes ?? NO_SUPERTYPES, grant.ability.addSupertypes) };
+    }
     const value =
       (own.types.includes("land") && source.modifiers.some(modifierSetsBasicLandType)) ||
       setters.some(
@@ -3249,6 +3294,22 @@ export function effectiveTypes(
   object: GameObject,
 ): readonly CardType[] {
   return layerFour(state, registry, object).types;
+}
+
+/**
+ * An object's current supertypes: {@link supertypesOf} (printed, and what a
+ * copy makes of them) and what layer 4's statics add (rule 613.1d). Adding
+ * one leaves its others alone (rule 205.4b), and a static adds nothing to a
+ * copy of the permanent, not being a copiable value.
+ */
+export function effectiveSupertypes(
+  state: GameState,
+  registry: CardRegistry,
+  object: GameObject,
+): readonly Supertype[] {
+  const base = supertypesOf(registry, object);
+  const added = layerFour(state, registry, object).addedSupertypes;
+  return added.length === 0 ? base : union(base, added);
 }
 
 /** Objects whose layer 5 is being folded — a colour static's scope or
@@ -3653,6 +3714,9 @@ export interface TargetView {
    * (`effectiveTypes`). */
   readonly types?: readonly CardType[];
   readonly subtypes?: readonly string[];
+  /** Its supertypes as layer 4 has them so far. Omitted: the current ones
+   * (`effectiveSupertypes`). */
+  readonly supertypes?: readonly Supertype[];
   /**
    * The target's *current* keywords, for a keyword clause — flying from an
    * Aura or an anthem counts, and a creature that lost its abilities has
@@ -3727,7 +3791,7 @@ export function staticAffects(
       // What `ofChosenType` ("of the chosen type") reads the choice off.
       source: source.id,
       ...(view.inFold === true
-        ? { layered: { types: view.types, subtypes: view.subtypes, keywords: view.keywords, hasProtection: view.hasProtection } }
+        ? { layered: { types: view.types, subtypes: view.subtypes, supertypes: view.supertypes, keywords: view.keywords, hasProtection: view.hasProtection } }
         : {}),
       ...(view.amount !== undefined ? { amount: view.amount } : {}),
     });

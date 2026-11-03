@@ -11,7 +11,6 @@
  */
 
 import type { CardRegistry, CardType, CombatRestriction, Keyword, Supertype } from "./cards.js";
-import { supertypesOf } from "./filter.js";
 import {
   abilitiesLostAt,
   computeCharacteristics,
@@ -23,6 +22,7 @@ import {
   modifierGrantApplies,
   pairedPartner,
   restrictionsOf,
+  effectiveSupertypes,
   staticConditionMet,
   withComputedCache,
 } from "./characteristics.js";
@@ -216,7 +216,8 @@ export interface VisibleObject {
   readonly text: string;
   readonly types: readonly CardType[];
   /** "Legendary", "Basic", "Snow", "World" as they apply now (rule 205.4):
-   * a copy made "not legendary" isn't (`supertypesOf`). */
+   * a copy made "not legendary" isn't, and one a static makes legendary is
+   * (`effectiveSupertypes`). */
   readonly supertypes: readonly Supertype[];
   readonly subtypes: readonly string[];
   /** Computed power/toughness; `null` for objects that are not creatures. */
@@ -715,7 +716,7 @@ function visible(
     manaCost: manaCostOverride(object) !== undefined ? (manaCostOverride(object) ?? null) : def.manaCost,
     text,
     types: computed.types,
-    supertypes: supertypesOf(registry, object),
+    supertypes: effectiveSupertypes(state, registry, object),
     // The subtypes a type line shows: a changeling's "every creature type"
     // is an engine marker (`subtypes.ts`), not a word on the card — its
     // changeling keyword says so instead.

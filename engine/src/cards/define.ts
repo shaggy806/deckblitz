@@ -2434,6 +2434,14 @@ export interface StaticAbility {
    * or granted earlier — and a grant after it gives the keyword back. */
   readonly loseKeywords?: readonly Keyword[];
   /**
+   * Layer 4 (rule 613.1d): supertypes the affected permanents have in addition
+   * to their others — "enchanted creature is legendary" (On Serra's Wings),
+   * "all nonland permanents are legendary" (Leyline of Singularity), "enchanted
+   * land is snow" (Glittering Frost). Read through `effectiveSupertypes`, as
+   * every filter, the legend and world rules, snow mana and the view do.
+   */
+  readonly addSupertypes?: readonly Supertype[];
+  /**
    * Keywords the affected objects **can't have** — "creatures your opponents
    * control lose flying and can't have or gain flying" (the Archetypes). No
    * timestamp beats it: whatever would give the keyword, printed, granted
@@ -2649,6 +2657,8 @@ export interface StaticAbility {
     readonly zones?: readonly ("hand" | "library" | "graveyard" | "exile" | "command" | "stack")[];
     readonly addTypes?: readonly CardType[];
     readonly addSubtypes?: readonly string[];
+    /** Supertypes too: Rootpath Purifier's "land cards in your library are basic". */
+    readonly addSupertypes?: readonly Supertype[];
     readonly addsChosenCreatureType?: true;
     /** "Are the chosen type" with no "in addition" (Conspiracy): every other
      * creature type goes (rule 205.1a). */

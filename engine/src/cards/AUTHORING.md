@@ -4771,6 +4771,12 @@ is "can't attack a player it has already attacked this turn" (Port Razer), by th
   layer-6 grants go against the loss in timestamp order, like any (Goddric,
   Cloaked Reveler's ruling: "still a Dragon creature with base power and
   toughness 4/4").
+- `addSupertypes: Supertype[]` — layer 4 (rule 613.1d): supertypes in addition
+  to their others. "Enchanted creature is legendary" (On Serra's Wings, beside
+  its `grantPt` and `grantKeywords` on one static), "all nonland permanents are
+  legendary" (Leyline of Singularity), "permanents with ice counters on them are
+  snow" (Rimefeather Owl). `typesOutsideBattlefield` takes it too (Rootpath
+  Purifier's "land cards in your library are basic").
 - `setSubtypes: string[]` — layer 4: the affected permanents' subtypes of the
   same kind are **replaced** by these (rule 205.1a), the rest staying —
   Goddric, Cloaked Reveler's "is a Dragon … (He loses all other creature

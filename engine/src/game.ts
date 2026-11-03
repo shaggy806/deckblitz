@@ -112,6 +112,7 @@ import {
   restrictionsOf,
   colorsAmongPermanents,
   computeCharacteristics,
+  effectiveSupertypes,
   grantableKeywords,
   computedCacheMemo,
   effectiveColors,
@@ -282,7 +283,6 @@ import {
   matchesFilter,
   ownerOnly,
   printedManaCost,
-  supertypesOf,
   weightedMatches,
 } from "./filter.js";
 import type { AggregateReads, AggregateSpec, CardFilter } from "./filter.js";
@@ -22084,7 +22084,7 @@ export class Game {
         sacrificeSelf,
         // Its mana is snow mana (rule 107.4h), the supertype `manaOriginOf`
         // stamps on what it makes.
-        ...(supertypesOf(this.registry, object).includes("snow") ? { snow: true } : {}),
+        ...(effectiveSupertypes(this.state, this.registry, object).includes("snow") ? { snow: true } : {}),
         ...(this.holdsFreeSpell(id) ? { reserved: true } : {}),
       });
     }
@@ -22917,7 +22917,7 @@ export class Game {
     return {
       types: [...effectiveTypes(this.state, this.registry, object)],
       subtypes: [...effectiveSubtypes(this.state, this.registry, object)],
-      supertypes: [...supertypesOf(this.registry, object)],
+      supertypes: [...effectiveSupertypes(this.state, this.registry, object)],
       object: id,
       stint: object.zoneChangeCount ?? 0,
     };
@@ -47184,7 +47184,7 @@ export class Game {
     // one that has been a world permanent the shortest time go — the newest
     // timestamp, no supertype ever being granted — and a tie for newest sends
     // them all.
-    const worlds = battlefield.filter((id) => supertypesOf(this.registry, this.state.objects[id]).includes("world"));
+    const worlds = battlefield.filter((id) => effectiveSupertypes(this.state, this.registry, this.state.objects[id]).includes("world"));
     if (worlds.length >= 2) {
       const newest = Math.max(...worlds.map((id) => this.state.objects[id].timestamp));
       const atNewest = worlds.filter((id) => this.state.objects[id].timestamp === newest);
@@ -47210,7 +47210,7 @@ export class Game {
     for (const id of battlefield) {
       if (moving.has(id)) continue;
       const object = this.state.objects[id];
-      if (!supertypesOf(this.registry, object).includes("legendary")) continue;
+      if (!effectiveSupertypes(this.state, this.registry, object).includes("legendary")) continue;
       // The name it has — a copy exception's, if one renamed it.
       const key = `${object.controller} ${nameOf(object)}`;
       const group = legendaryGroups.get(key);
@@ -48207,7 +48207,7 @@ export class Game {
       baseToughness: c.baseToughness,
       types: [...c.types],
       subtypes: [...c.subtypes],
-      supertypes: [...supertypesOf(this.registry, object)],
+      supertypes: [...effectiveSupertypes(this.state, this.registry, object)],
       colors: [...c.colors],
       keywords: [...c.keywords],
       hasManaAbility: hasManaAbility(this.state, this.registry, object),
@@ -50039,7 +50039,7 @@ export class Game {
         const c = computeCharacteristics(this.state, this.registry, id);
         if (
           c.types.includes("artifact") ||
-          supertypesOf(this.registry, object).includes("legendary") ||
+          effectiveSupertypes(this.state, this.registry, object).includes("legendary") ||
           c.subtypes.includes("Saga")
         ) {
           story += object.stackCount ?? 1;

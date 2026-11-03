@@ -4153,3 +4153,11 @@ keyword counter stays but gives nothing. `grantableKeywords` drops the keyword f
 meanwhile, which the rulings say isn't created. A loss of hexproof now takes every "hexproof from" (702.11e), which
 Shadowspear's had missed. Key: static:cant-have-keyword. Proving cards: Archetype of Imagination, Archetype of Endurance,
 Arcane Lighthouse; Colossus Hammer needed no code (`loseKeywords`).
+
+**A static that adds a supertype (2026-11-02).** `StaticAbility.addSupertypes`, also `typesOutsideBattlefield.addSupertypes`:
+layer 4 (613.1d), folded with the types and read through `effectiveSupertypes` by every filter, the legend and world rules,
+snow mana, last-known information and the view. After the fold's first pass a scope sees the supertypes the last pass ended
+with, so an effect adding "basic" comes before a "nonbasic lands" one whatever their timestamps (613.8a). Keys:
+static:static-grant-supertype, static:characteristics-of-library-cards (the "land cards in your library" half). Found to
+need no code: static:static-add-chosen-type (`addsChosenCreatureType`). Proving cards: On Serra's Wings, In Bolas's Clutches,
+Leyline of Singularity, Glittering Frost, Rimefeather Owl, Rootpath Purifier, Lifecraft Engine.
