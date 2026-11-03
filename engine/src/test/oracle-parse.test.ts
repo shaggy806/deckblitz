@@ -10710,6 +10710,25 @@ describe("an attack read as one batch", () => {
     ]);
   });
 
+  it("reads 'those creatures' only on such a trigger", () => {
+    expect(triggered("Whenever one or more creatures attack you, those creatures get -1/-0 until end of turn.").effect).toEqual({
+      kind: "modify-pt-all",
+      filter: { triggerBatch: true },
+      power: -1,
+      toughness: 0,
+      duration: "end-of-turn",
+    });
+    expect(triggered("Whenever you attack with two or more creatures, put a +1/+1 counter on each of those creatures.").effect).toEqual({
+      kind: "add-counter-all",
+      filter: { triggerBatch: true },
+      counter: "+1/+1",
+      amount: 1,
+    });
+    expect(
+      triggered("Whenever one or more creatures attack, ~ deals damage to each of those creatures equal to the number of attacking creatures.").effect,
+    ).toEqual({ kind: "damage-all", filter: { triggerBatch: true }, amount: { countOf: { type: "creature", attacking: true } } });
+    expect(parseEffect("Those creatures get -1/-0 until end of turn.", ctx()).effect).toBeNull();
+  });
 });
 
 describe("an effect done by another player", () => {

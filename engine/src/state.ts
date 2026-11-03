@@ -4577,6 +4577,8 @@ export interface DelayedWheneverWatch {
    * creating ability's. */
   readonly targets?: readonly TargetSpec[];
   readonly untilYourNextTurn?: true;
+  /** "…this combat": lapses as the end of combat step ends (rule 511.3). */
+  readonly untilEndOfCombat?: true;
   /** Only damage dealt to this player — `DelayedWhenever.toPlayer`. */
   readonly player?: PlayerId;
   /** The turn it was made on. */

@@ -1034,6 +1034,20 @@ and toughness, `add-mana`'s and `gain-life`'s amount; Phabine's "for each
 land card" is `PARLEY_LAND`. The scaffolder reads the three sentences when X
 is one unit of a sentence it reads.
 
+**"Those creatures" of a batch trigger.** The filter clause `triggerBatch: true`
+is one of the objects the resolving trigger fired on: the attackers that counted
+for an `attacks-batch`, `attack-with` or `attacks-player` trigger (of
+`attacks-player`, those attacking that player), the permanents of a batched
+entry, the cards of a batched arrival in a graveyard. Each is the object it was
+then (rule 400.7), whatever it has become: one removed from combat is still one
+of them. Any effect with a filter takes it: Sabotage Strategist's `modify-pt-all`,
+Lightmine Field's `damage-all`, `add-counter-all`, `for-each-permanent` for "that
+creature" (with `isSource: false`, Creepy Puppeteer). A `delayed-trigger`'s `at`
+binds it as it's set up, so "whenever either of those creatures deals combat
+damage to a player **this combat**" keeps them (Love on the Battlefield, with
+`until: "end-of-combat"`); its `effect` reads the batch its own trigger fires on
+(Garruk, Curse Breaker's −4). It matches nothing outside such a resolution.
+
 **"Those creatures", "they gained control of this way".** `thisWay:
 "control-effect"` (a filter clause or an amount) is every permanent a control
 effect of this resolution applied to, already yours or not: "Untap them. They

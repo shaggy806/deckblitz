@@ -4278,6 +4278,24 @@ export function parseSentence(sentence, ctx) {
   if ((m = re(`~ deals ${N} damage to enchanted (?:artifact|creature|land|permanent)'s controller`).exec(s))) {
     return { kind: "damage", amount: amount(m[1]), who: "attached-controller" };
   }
+  // "Those creatures", "each of them", of an attack read as one batch: a
+  // filter's `triggerBatch`.
+  if (ctx.attackBatch === true) {
+    const THOSE = "(?:those creatures|them)";
+    if ((m = re(`those creatures get ([+-]\\d+)/([+-]\\d+) until end of turn`).exec(s))) {
+      // `+ 0`: "-0" is plain 0.
+      return { kind: "modify-pt-all", filter: { triggerBatch: true }, power: Number(m[1]) + 0, toughness: Number(m[2]) + 0, duration: "end-of-turn" };
+    }
+    if ((m = re(`(?:those creatures|they) gain ${KW} until end of turn`).exec(s))) {
+      return { kind: "grant-keyword-all", filter: { triggerBatch: true }, keyword: KEYWORDS[m[1].toLowerCase()], duration: "end-of-turn" };
+    }
+    if ((m = re(`put ${N} ([+-]\\d+/[+-]\\d+|[a-z]+) counters? on each of ${THOSE}`).exec(s))) {
+      return { kind: "add-counter-all", filter: { triggerBatch: true }, counter: m[2].toLowerCase(), amount: amount(m[1]) };
+    }
+    if (re(`~ deals damage to each of those creatures equal to the number of attacking creatures`).test(s)) {
+      return { kind: "damage-all", filter: { triggerBatch: true }, amount: { countOf: { type: "creature", attacking: true } } };
+    }
+  }
   // "Creatures defending player controls get -1/-1 until end of turn"
   // (Silumgar, the Drifting Death).
   if (ctx.thatPlayer === "trigger-player" && (m = re("creatures defending player controls get ([+-]\\d+)/([+-]\\d+) until end of turn").exec(s))) {
@@ -10702,6 +10720,10 @@ export function parseFace(face, ctx = {}) {
           // "Copy it" in a cast trigger: the spell cast (`"trigger-spell"`).
           ...(triggers.every((t) => t.on === "cast-spell") ? { castSpell: true } : {}),
           ...(thatPlayerOf(triggers) !== undefined ? { thatPlayer: thatPlayerOf(triggers) } : {}),
+          // "Those creatures": the attackers of an attack read as one batch.
+          ...(triggers.every((t) => t.on === "attacks-batch" || t.on === "attack-with" || t.on === "attacks-player")
+            ? { attackBatch: true }
+            : {}),
         },
         lines,
         i,
@@ -11836,6 +11858,7 @@ function fillEffect(ability, text, ctx, lines, i) {
     // A cost that reveals one card: "the revealed card" is that card.
     ...(ability.cost?.reveal?.count === 1 ? { costRevealed: true } : {}),
     ...(ctx.thatPlayer !== undefined ? { thatPlayer: ctx.thatPlayer } : {}),
+    ...(ctx.attackBatch === true ? { attackBatch: true } : {}),
     ...(theirSlots !== undefined ? { opponentChoosesTargets: theirSlots } : {}),
   });
   if (r.effect !== null && theirSlots !== undefined && theirSlots.length > 0) ability.opponentChoosesTargets = theirSlots;

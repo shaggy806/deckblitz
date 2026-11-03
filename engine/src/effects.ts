@@ -531,8 +531,10 @@ export interface DelayedUnblocked {
  */
 export interface DelayedWhenever {
   readonly whenever: TriggerSpec;
-  /** Lasts until its controller's next turn begins, not just this turn. */
-  readonly until?: "your-next-turn";
+  /** `"your-next-turn"`: lasts until its controller's next turn begins, not
+   * just this turn. `"end-of-combat"`: "…this combat" (Love on the
+   * Battlefield), lapsing as this combat's end of combat step ends. */
+  readonly until?: "your-next-turn" | "end-of-combat";
   readonly targets?: readonly TargetSpec[];
   /** "…deals combat damage to **that player** this turn" (Great Train
    * Heist): a target slot holding a player, fixed as this resolves; only
@@ -11546,6 +11548,9 @@ export interface ResolutionContext extends EffectApi {
   /** See `LastKnownRefs.enteredTogether`: the permanents a batched entry
    * trigger fired on, and how many tokens each stood for. */
   readonly enteredTogether?: readonly { readonly object: ObjectId; readonly count: number }[];
+  /** The objects of the batch the resolving trigger fired on ("those
+   * creatures") — what a filter's `triggerBatch` binds to. */
+  readonly triggerBatch?: readonly { readonly object: ObjectId; readonly zoneChangeCount: number }[];
   /** How many real, independent firings this resolution stands for — see
    * `GameObject.stackMultiplier`. `1` outside a scaled resolution. Only
    * `create-token` / `create-token-copy` read it (the only effect kinds
@@ -13432,6 +13437,7 @@ function containsDynamicCompare(value: unknown): boolean {
       "sameNameAsThisWay" in value ||
       "sharesColorWithTarget" in value ||
       "attachedToTarget" in value ||
+      "triggerBatch" in value ||
       Object.entries(value).some(
         ([key, v]) => !NESTED_EFFECT_KEYS.has(key) && containsDynamicCompare(v),
       );
@@ -13573,6 +13579,13 @@ export function bindDynamicCompares(spec: EffectSpec, ctx: ResolutionContext): E
     if (walked["saddledSource"] === true) {
       const { saddledSource: _saddled, ...rest } = walked;
       walked = { ...rest, saddledBy: ctx.source };
+    }
+    // "Those creatures", "each of them": the batch the resolving trigger fired
+    // on, each in the stint it was in then (rule 400.7).
+    if (walked["triggerBatch"] === true) {
+      const { triggerBatch: _batch, ...rest } = walked;
+      const amongObjects = (ctx.triggerBatch ?? []).map(({ object, zoneChangeCount }) => ({ object, stint: zoneChangeCount }));
+      walked = { ...rest, amongObjects };
     }
     // "Each creature that crewed it this turn" (rule 702.122c), likewise.
     if (walked["crewedSource"] === true) {

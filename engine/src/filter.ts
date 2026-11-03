@@ -1073,6 +1073,22 @@ export interface CardFilter {
    */
   readonly notThisWay?: ThisWayKind;
   /**
+   * One of the objects of the batch the trigger now resolving fired on —
+   * "those creatures", "each of them": the attackers that counted for an
+   * `attacks-batch`, `attack-with` or `attacks-player` trigger (Sabotage
+   * Strategist's "those creatures get -1/-0 until end of turn"), the permanents
+   * of a batched entry, the cards of a batched arrival in a graveyard. Each in
+   * the stint it was in then (rule 400.7), whatever it has become since: one
+   * no longer attacking is still one of them, one that left isn't. An
+   * effect's filter only, `delayed-trigger`'s `at` included, so that one keeps
+   * the objects meant ("whenever either of those creatures deals combat
+   * damage"): `bindDynamicCompares` binds it to `amongObjects`. Unbound it
+   * matches nothing.
+   */
+  readonly triggerBatch?: true;
+  /** `triggerBatch` bound — written by `bindDynamicCompares`, never authored. */
+  readonly amongObjects?: readonly { readonly object: ObjectId; readonly stint: number }[];
+  /**
    * At least one of these filters must match, as well as every other clause
    * here — the "or" a flat clause list can't say: historic ("artifact,
    * legendary, or Saga"), "enchanted or equipped", "black and/or red".
@@ -1665,6 +1681,11 @@ export function matchesFilter(
   }
   if (filter.notThisWay !== undefined && thisWayEntries(state, filter.notThisWay).some((e) => e.object === id)) {
     return false;
+  }
+  if (filter.triggerBatch !== undefined) return false;
+  if (filter.amongObjects !== undefined) {
+    const stint = live !== undefined ? (live.zoneChangeCount ?? 0) : lki!.zoneChangeCount;
+    if (!filter.amongObjects.some((one) => one.object === id && one.stint === stint)) return false;
   }
 
   // Types, subtypes and colours are self-contained (layers 4 / 3 / 5 come only
@@ -2661,8 +2682,8 @@ export type AggregateOf = "power" | "toughness" | "mana-value" | "counters" | { 
  *   down has no characteristics (rule 406.3a), so it matches only a filter
  *   that asks about nothing but its owner — Kaya, Orzhov Usurper's "the
  *   number of cards that player owns in exile" counts it.
- * - `"attackers"`: the attackers that counted for the `attacks-batch` or
- *   `attack-with` trigger whose ability is resolving — the ones its filter
+ * - `"attackers"`: the attackers that counted for the `attacks-batch`,
+ *   `attack-with` or `attacks-player` trigger whose ability is resolving — the ones its filter
  *   matched as they were declared (`LastKnownRefs.attackedTogether`):
  *   Aloy, Savior of Meridian's "the greatest power **among them**", Vulpine
  *   Harvester's "**their** total power". Read as it resolves (rule

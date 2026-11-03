@@ -4090,6 +4090,20 @@ attack-with-exactly, attack-with-total-power, attacks-player-at-least,
 attack-with-count-amount. Proving cards: Alluring Suitor, Desert Were-Worm, Horn
 of the Mark, Landroval, Horizon Witness, Grand Warlord Radha, The Earth King.
 
+### "Those creatures": the batch a trigger fired on — built 2026-11-02
+
+The need-keys Phase 2 family `effect:attack-batch-those-creatures`, features
+only. One filter clause, `triggerBatch`, bound by `bindDynamicCompares` to
+`amongObjects` from the trigger's `attackedTogether`, `enteredTogether` or
+`arrivedTogether`, so every effect with a filter names them and no effect kind
+needed an option. `attacks-player` and a `whenever` delayed trigger now record
+`attackedTogether` too (one helper, `withAttackedTogether`), and `DelayedWhenever`
+gains `until: "end-of-combat"`. Keys: attack-batch-those-creatures,
+attack-batch-per-defender-those-creatures. Proving cards: Sabotage Strategist,
+Lightmine Field, Love on the Battlefield, Creepy Puppeteer, Garruk, Curse
+Breaker. Still open: Frontier Warmonger's "or a planeswalker they control" and
+Squall's intervening if over those creatures.
+
 ### Damage replacements from another source, by a live amount, and for the turn — built 2026-11-02
 
 The need-keys Phase 2 family `replacement:damage-modification`, features only. A `would-deal-damage`

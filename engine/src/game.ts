@@ -11577,6 +11577,10 @@ export class Game {
    * as that step ends, before the next phase (or an additional combat)
    * begins. */
   private removeAllFromCombat(): void {
+    // "Whenever either of those creatures deals combat damage … this combat."
+    this.state.delayedTriggers = this.state.delayedTriggers.filter(
+      (t) => !(typeof t.at === "object" && "whenever" in t.at && t.at.untilEndOfCombat === true),
+    );
     for (const id of this.state.zones.shared.battlefield) {
       const object = this.state.objects[id];
       object.attacking = null;
@@ -29335,6 +29339,10 @@ export class Game {
       ...(refs.enteredTogether !== undefined
         ? { enteredTogether: refs.enteredTogether.map(({ object, count }) => ({ object, count })) }
         : {}),
+      // "Those creatures": whichever batch this trigger fired on.
+      ...((refs.attackedTogether ?? refs.enteredTogether ?? refs.arrivedTogether) !== undefined
+        ? { triggerBatch: refs.attackedTogether ?? refs.enteredTogether ?? refs.arrivedTogether }
+        : {}),
       decisionPending: () => this.decisionOutstanding(),
       parkedCount: () => this.state.suspendedResolutions.length,
       resumeAfterDecisions: (rest, below) => {
@@ -42805,6 +42813,7 @@ export class Game {
         whenever: at.whenever,
         ...(at.targets !== undefined ? { targets: at.targets } : {}),
         ...(at.until === "your-next-turn" ? { untilYourNextTurn: true as const } : {}),
+        ...(at.until === "end-of-combat" ? { untilEndOfCombat: true as const } : {}),
         ...(at.player !== undefined ? { player: at.player } : {}),
         turn: this.state.turn.number,
       };

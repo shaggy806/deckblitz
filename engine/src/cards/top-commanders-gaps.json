@@ -55,6 +55,8 @@
   "trigger:attack-with-exactly",
   "trigger:attack-with-total-power",
   "trigger:attacks-player-at-least",
+  "effect:attack-batch-those-creatures",
+  "trigger:attack-batch-per-defender-those-creatures",
   "trigger:creature-attacks-enchanted-player",
   "effect:reflexive-refers-to-creating-objects",
   "effect:reflexive-refers-to-parent-target",
