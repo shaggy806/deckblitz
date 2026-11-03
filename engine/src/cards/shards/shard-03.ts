@@ -477,6 +477,7 @@ import _poolOrazcaFrillback from "../pool/orazca-frillback.js";
 import _poolOrcristGoblinCleaver from "../pool/orcrist-goblin-cleaver.js";
 import _poolOrderChaos from "../pool/order-chaos.js";
 import _poolOrosTheAvenger from "../pool/oros-the-avenger.js";
+import _poolOupheVandals from "../pool/ouphe-vandals.js";
 import _poolOvercome from "../pool/overcome.js";
 import _poolPackGuardian from "../pool/pack-guardian.js";
 import _poolPalianoVanguard from "../pool/paliano-vanguard.js";
@@ -1290,6 +1291,7 @@ const shard: CardShard = {
     _poolOrcristGoblinCleaver,
     _poolOrderChaos,
     _poolOrosTheAvenger,
+    _poolOupheVandals,
     _poolOvercome,
     _poolPackGuardian,
     _poolPalianoVanguard,

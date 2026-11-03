@@ -245,6 +245,7 @@ import _poolEastWindAvatar from "../pool/east-wind-avatar.js";
 import _poolEchoPerceptiveProdigy from "../pool/echo-perceptive-prodigy.js";
 import _poolEclipsedElf from "../pool/eclipsed-elf.js";
 import _poolEerieInterlude from "../pool/eerie-interlude.js";
+import _poolEerieUltimatum from "../pool/eerie-ultimatum.js";
 import _poolElegantParlor from "../pool/elegant-parlor.js";
 import _poolElendaTheDuskRose from "../pool/elenda-the-dusk-rose.js";
 import _poolElixirOfVitality from "../pool/elixir-of-vitality.js";
@@ -798,6 +799,7 @@ import _poolTamiyosCompleation from "../pool/tamiyos-compleation.js";
 import _poolTatteredMummy from "../pool/tattered-mummy.js";
 import _poolTazriBeaconOfUnity from "../pool/tazri-beacon-of-unity.js";
 import _poolTeferiTimebender from "../pool/teferi-timebender.js";
+import _poolTeferisResponse from "../pool/teferis-response.js";
 import _poolTeferisTutelage from "../pool/teferis-tutelage.js";
 import _poolTemurBattlecrier from "../pool/temur-battlecrier.js";
 import _poolTerrapactIntimidator from "../pool/terrapact-intimidator.js";
@@ -1190,6 +1192,7 @@ const shard: CardShard = {
     _poolEchoPerceptiveProdigy,
     _poolEclipsedElf,
     _poolEerieInterlude,
+    _poolEerieUltimatum,
     _poolElegantParlor,
     _poolElendaTheDuskRose,
     _poolElixirOfVitality,
@@ -1743,6 +1746,7 @@ const shard: CardShard = {
     _poolTatteredMummy,
     _poolTazriBeaconOfUnity,
     _poolTeferiTimebender,
+    _poolTeferisResponse,
     _poolTeferisTutelage,
     _poolTemurBattlecrier,
     _poolTerrapactIntimidator,

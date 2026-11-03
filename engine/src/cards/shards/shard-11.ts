@@ -620,6 +620,7 @@ import _poolRevengeOfTheRats from "../pool/revenge-of-the-rats.js";
 import _poolRewardsOfDiversity from "../pool/rewards-of-diversity.js";
 import _poolRibCageSpider from "../pool/rib-cage-spider.js";
 import _poolRimewindTaskmage from "../pool/rimewind-taskmage.js";
+import _poolRipSpawnHunter from "../pool/rip-spawn-hunter.js";
 import _poolRiseToTheChallenge from "../pool/rise-to-the-challenge.js";
 import _poolRitualOfRejuvenation from "../pool/ritual-of-rejuvenation.js";
 import _poolRiverKaijin from "../pool/river-kaijin.js";
@@ -1518,6 +1519,7 @@ const shard: CardShard = {
     _poolRewardsOfDiversity,
     _poolRibCageSpider,
     _poolRimewindTaskmage,
+    _poolRipSpawnHunter,
     _poolRiseToTheChallenge,
     _poolRitualOfRejuvenation,
     _poolRiverKaijin,

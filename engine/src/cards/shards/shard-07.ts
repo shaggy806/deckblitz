@@ -769,6 +769,7 @@ import _poolThornglintBridge from "../pool/thornglint-bridge.js";
 import _poolThornscapeFamiliar from "../pool/thornscape-familiar.js";
 import _poolThorntoothWitch from "../pool/thorntooth-witch.js";
 import _poolThousandMoonsCrackshot from "../pool/thousand-moons-crackshot.js";
+import _poolThreatsUndetected from "../pool/threats-undetected.js";
 import _poolThunderWall from "../pool/thunder-wall.js";
 import _poolThunderbladeCharge from "../pool/thunderblade-charge.js";
 import _poolThundertrapTrainer from "../pool/thundertrap-trainer.js";
@@ -1678,6 +1679,7 @@ const shard: CardShard = {
     _poolThornscapeFamiliar,
     _poolThorntoothWitch,
     _poolThousandMoonsCrackshot,
+    _poolThreatsUndetected,
     _poolThunderWall,
     _poolThunderbladeCharge,
     _poolThundertrapTrainer,

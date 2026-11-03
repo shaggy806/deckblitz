@@ -207,6 +207,7 @@ import _poolDinaSoulSteeper from "../pool/dina-soul-steeper.js";
 import _poolDingusEgg from "../pool/dingus-egg.js";
 import _poolDireDowndraft from "../pool/dire-downdraft.js";
 import _poolDiresight from "../pool/diresight.js";
+import _poolDisallow from "../pool/disallow.js";
 import _poolDiscerningFinancier from "../pool/discerning-financier.js";
 import _poolDiscipleOfTheVault from "../pool/disciple-of-the-vault.js";
 import _poolDiversionUnit from "../pool/diversion-unit.js";
@@ -1108,6 +1109,7 @@ const shard: CardShard = {
     _poolDingusEgg,
     _poolDireDowndraft,
     _poolDiresight,
+    _poolDisallow,
     _poolDiscerningFinancier,
     _poolDiscipleOfTheVault,
     _poolDiversionUnit,

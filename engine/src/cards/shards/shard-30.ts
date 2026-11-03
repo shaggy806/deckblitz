@@ -521,6 +521,7 @@ import _poolNickValentinePrivateEye from "../pool/nick-valentine-private-eye.js"
 import _poolNightMarketGuard from "../pool/night-market-guard.js";
 import _poolNightcreep from "../pool/nightcreep.js";
 import _poolNimbleInnovator from "../pool/nimble-innovator.js";
+import _poolNimbleObstructionist from "../pool/nimble-obstructionist.js";
 import _poolNimbleThopterist from "../pool/nimble-thopterist.js";
 import _poolNimbusChampion from "../pool/nimbus-champion.js";
 import _poolNishobaBrawler from "../pool/nishoba-brawler.js";
@@ -1418,6 +1419,7 @@ const shard: CardShard = {
     _poolNightMarketGuard,
     _poolNightcreep,
     _poolNimbleInnovator,
+    _poolNimbleObstructionist,
     _poolNimbleThopterist,
     _poolNimbusChampion,
     _poolNishobaBrawler,

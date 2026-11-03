@@ -670,6 +670,7 @@ import _poolShrapnelSlinger from "../pool/shrapnel-slinger.js";
 import _poolShuriWakandanInventor from "../pool/shuri-wakandan-inventor.js";
 import _poolSidequestPlayBlitzball from "../pool/sidequest-play-blitzball.js";
 import _poolSidewinderSliver from "../pool/sidewinder-sliver.js";
+import _poolSigardasVanguard from "../pool/sigardas-vanguard.js";
 import _poolSignatureSlam from "../pool/signature-slam.js";
 import _poolSilumgarButcher from "../pool/silumgar-butcher.js";
 import _poolSilverErne from "../pool/silver-erne.js";
@@ -1562,6 +1563,7 @@ const shard: CardShard = {
     _poolShuriWakandanInventor,
     _poolSidequestPlayBlitzball,
     _poolSidewinderSliver,
+    _poolSigardasVanguard,
     _poolSignatureSlam,
     _poolSilumgarButcher,
     _poolSilverErne,

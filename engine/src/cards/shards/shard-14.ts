@@ -65,6 +65,7 @@ import _poolBartizanBats from "../pool/bartizan-bats.js";
 import _poolBastPantherGoddess from "../pool/bast-panther-goddess.js";
 import _poolBatteredGolem from "../pool/battered-golem.js";
 import _poolBattery from "../pool/battery.js";
+import _poolBattleForBretagard from "../pool/battle-for-bretagard.js";
 import _poolBattleMastery from "../pool/battle-mastery.js";
 import _poolBattleRampart from "../pool/battle-rampart.js";
 import _poolBearTrap from "../pool/bear-trap.js";
@@ -955,6 +956,7 @@ const shard: CardShard = {
     _poolBastPantherGoddess,
     _poolBatteredGolem,
     _poolBattery,
+    _poolBattleForBretagard,
     _poolBattleMastery,
     _poolBattleRampart,
     _poolBearTrap,

@@ -308,6 +308,7 @@ import _poolGoblinWarPaint from "../pool/goblin-war-paint.js";
 import _poolGoblinWarWagon from "../pool/goblin-war-wagon.js";
 import _poolGodEternalRhonas from "../pool/god-eternal-rhonas.js";
 import _poolGodsire from "../pool/godsire.js";
+import _poolGreenSlime from "../pool/green-slime.js";
 import _poolGreenSunsZenith from "../pool/green-suns-zenith.js";
 import _poolGreenbeltGuardian from "../pool/greenbelt-guardian.js";
 import _poolGrendelSpawnOfKnull from "../pool/grendel-spawn-of-knull.js";
@@ -381,6 +382,7 @@ import _poolJovensFerrets from "../pool/jovens-ferrets.js";
 import _poolJudithTheScourgeDiva from "../pool/judith-the-scourge-diva.js";
 import _poolJuneBountyHunter from "../pool/june-bounty-hunter.js";
 import _poolJusticeStrike from "../pool/justice-strike.js";
+import _poolKadenasSilencer from "../pool/kadenas-silencer.js";
 import _poolKaheeraTheOrphanguard from "../pool/kaheera-the-orphanguard.js";
 import _poolKalonianTusker from "../pool/kalonian-tusker.js";
 import _poolKamiOfAncientLaw from "../pool/kami-of-ancient-law.js";
@@ -1214,6 +1216,7 @@ const shard: CardShard = {
     _poolGoblinWarWagon,
     _poolGodEternalRhonas,
     _poolGodsire,
+    _poolGreenSlime,
     _poolGreenSunsZenith,
     _poolGreenbeltGuardian,
     _poolGrendelSpawnOfKnull,
@@ -1287,6 +1290,7 @@ const shard: CardShard = {
     _poolJudithTheScourgeDiva,
     _poolJuneBountyHunter,
     _poolJusticeStrike,
+    _poolKadenasSilencer,
     _poolKaheeraTheOrphanguard,
     _poolKalonianTusker,
     _poolKamiOfAncientLaw,

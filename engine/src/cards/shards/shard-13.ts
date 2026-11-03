@@ -750,6 +750,7 @@ import _poolThranTurbine from "../pool/thran-turbine.js";
 import _poolTickingGnomes from "../pool/ticking-gnomes.js";
 import _poolTidalSurge from "../pool/tidal-surge.js";
 import _poolTimidDrake from "../pool/timid-drake.js";
+import _poolTishanasTidebinder from "../pool/tishanas-tidebinder.js";
 import _poolTitaniasChosen from "../pool/titanias-chosen.js";
 import _poolTitanothRex from "../pool/titanoth-rex.js";
 import _poolTogetherAsOne from "../pool/together-as-one.js";
@@ -1615,6 +1616,7 @@ const shard: CardShard = {
     _poolTickingGnomes,
     _poolTidalSurge,
     _poolTimidDrake,
+    _poolTishanasTidebinder,
     _poolTitaniasChosen,
     _poolTitanothRex,
     _poolTogetherAsOne,
