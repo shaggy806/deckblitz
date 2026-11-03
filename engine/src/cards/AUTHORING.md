@@ -2740,8 +2740,18 @@ discardedThisTurn, enteredThisTurn, controlledContinuously, attackedThisTurn, at
 dealtDamageToCreatureThisTurn, dealtDamageThisTurn, cast, castBy, castFrom, castVia, enteredFrom,
 putThereBySource, sharesCardTypeWith, sharesPermanentTypeWith, sharesCreatureTypeWith, sharesLandTypeWith, sameNameWith, sameNameAsAnother, thisWay, attacking, blocking, blockingRelation, goaded, suspected, saddled, saddledSource, crewedSource, crewedBySource, enlistedThisCombat, monstrous, renowned, hasManaAbility, hasAbilities,
 xInManaCost, manaCost, coloredManaSymbols, cardTypeCount, nameDiffersFromEach,
-nameUnlike, sameNameAsTarget, sameNameAsTriggerObject, sharesColorWithTarget, ofChosenType, targets, greatestAmongItsController }`,
-every present clause ANDed. `greatestAmongItsController: { of, among }` is "with
+nameUnlike, sameNameAsTarget, sameNameAsTriggerObject, sharesColorWithTarget, ofChosenType, targets, greatestAmongItsController, greatestInZone }`,
+every present clause ANDed. `greatestInZone: { of, among }` is one comparison over
+everything in the object's zone that matches `among`, ties all counted: over every
+permanent, whoever controls it, on the battlefield — Topple's "target creature with the
+greatest power among creatures on the battlefield", Getaway Glamer's "if no other creature
+has greater power" (a `target` condition), Strength-Testing Hammer's (`trigger-object`),
+Historian's Wisdom's (`source`, through `attachedTo`), Might Makes Right's "you control each
+creature with the greatest power" (`not` of `opponent-controls` matching it) — and over
+that graveyard in a graveyard (Desecrator Hag's `return-from-graveyard`, a tie the
+controller's). The object needn't match `among`, so say what it is beside it; another zone
+never matches. Inside the layer fold only mana value and counters compare (Favor of the
+Mighty's static scope): `power` and `toughness` don't match there. `greatestAmongItsController: { of, among }` is "with
 the greatest power among creatures **that player** controls" — a maximum per
 controller, read live of each permanent against its own controller's others
 matching `among` (ties all match, the controller choosing): Crackling Doom's

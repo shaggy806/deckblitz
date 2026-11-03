@@ -383,6 +383,14 @@ export interface ConditionOptions {
    */
   readonly notYetHere?: ReadonlySet<ObjectId>;
   /**
+   * The condition of a triggered ability or a resolving effect, which the
+   * layer fold never re-enters, so it takes no re-entrancy guard
+   * (`conditionInProgress`): the source's own statics still apply to what it
+   * reads. Historian's Wisdom's "if enchanted permanent is a creature with the
+   * greatest power" sees the host with the Aura's +2/+1.
+   */
+  readonly outsideFold?: boolean;
+  /**
    * The object whose event fired the triggered ability asking, for a
    * `controls` condition's `excludeTriggerObject`. Passed by the
    * intervening-if checks, as it triggers and as it resolves.
@@ -558,6 +566,7 @@ export function staticConditionMet(
   condition: StaticCondition,
   opts: ConditionOptions = {},
 ): boolean {
+  if (opts.outsideFold === true) return evalStaticCondition(state, registry, source, condition, opts);
   if (conditionInProgress.has(source.id)) return false;
   conditionInProgress.add(source.id);
   try {
@@ -3770,6 +3779,8 @@ function filterReadsPt(filter: CardFilter): boolean {
   return (
     filter.power !== undefined ||
     filter.toughness !== undefined ||
+    filter.greatestInZone?.of === "power" ||
+    filter.greatestInZone?.of === "toughness" ||
     (filter.anyOf?.some(filterReadsPt) ?? false) ||
     (filter.not !== undefined && filterReadsPt(filter.not))
   );

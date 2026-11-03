@@ -634,6 +634,25 @@ export interface CardFilter {
    * never matches.
    */
   readonly greatestAmongItsController?: { readonly of: AggregateOf; readonly among: CardFilter };
+  /**
+   * It has the greatest `of` of everything in **its zone** that matches
+   * `among`, ties all counted: no other has more. On the battlefield that's
+   * one comparison over every permanent, whoever controls it — Topple's
+   * "target creature with the greatest power among creatures on the
+   * battlefield", Getaway Glamer's "if no other creature has greater power",
+   * Favor of the Mighty's "each creature with the greatest mana value" — and
+   * in a graveyard, over that graveyard — Desecrator Hag's "the creature card
+   * in your graveyard with the greatest power". The object itself needn't
+   * match `among`, so say what it is beside this clause; anything in another
+   * zone never matches.
+   *
+   * Something that has left the battlefield is read as it last existed there
+   * (rule 608.2h) against the battlefield as it is now. Inside the layer fold
+   * only mana value and counters can be compared: P/T isn't known there, so
+   * `power` and `toughness` don't match, and a static needs a condition or an
+   * effect's filter for those.
+   */
+  readonly greatestInZone?: { readonly of: AggregateOf; readonly among: CardFilter };
   readonly power?: NumCompare;
   readonly toughness?: NumCompare;
   /**
@@ -2725,6 +2744,29 @@ export function matchesFilter(
       if (other === id || state.objects[other]?.controller !== live.controller) continue;
       if (!matchesFilter(state, registry, other, greatest.among, { you: live.controller })) continue;
       if (aggregateValueOf(state, registry, other, greatest.of) > mine) return false;
+    }
+  }
+
+  // "With the greatest power among creatures on the battlefield": nothing else
+  // in its zone that matches has more, whoever controls it.
+  const greatestInZone = filter.greatestInZone;
+  if (greatestInZone !== undefined) {
+    const { of, among } = greatestInZone;
+    if (layered !== undefined && (of === "power" || of === "toughness")) return false;
+    const zone =
+      live === undefined || live.zone === "battlefield"
+        ? state.zones.shared.battlefield
+        : live.zone === "graveyard"
+          ? state.zones.perPlayer[live.owner]?.graveyard
+          : undefined;
+    if (zone === undefined) return false;
+    const mine =
+      live !== undefined
+        ? aggregateValueOf(state, registry, id, of)
+        : matchValueOf(state, registry, { id, weight: 1, lastKnown: lki }, of);
+    for (const other of zone) {
+      if (other === id || !matchesFilter(state, registry, other, among, { you: ctx.you })) continue;
+      if (aggregateValueOf(state, registry, other, of) > mine) return false;
     }
   }
 

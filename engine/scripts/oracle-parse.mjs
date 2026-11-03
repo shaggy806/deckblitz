@@ -957,6 +957,10 @@ function revealedCardEffectOf(s, ctx) {
 // --------------------------------------------------------------- targets
 
 /** Target phrases, longest first, as the engine's target specs. */
+/** "The creature with the greatest power", ties counted: among creatures on the
+ * battlefield whoever controls them, or in a graveyard among that graveyard's. */
+const GREATEST_POWER_HERE = { type: "creature", greatestInZone: { of: "power", among: { type: "creature" } } };
+
 const TARGET_PHRASES = [
   ["target multicolored creature", { kind: "permanent", whose: "any", filter: { type: "creature", multicolored: true } }],
   // What it has dealt damage to this turn (`dealtDamageThisTurn`).
@@ -998,6 +1002,8 @@ const TARGET_PHRASES = [
   ["target artifact you don't control", "artifact-an-opponent-controls"],
   ["target creature you control other than enchanted creature", { kind: "permanent", whose: "you", filter: { type: "creature", hostOfSource: false } }],
   ["target creature other than enchanted creature", { kind: "permanent", whose: "any", filter: { type: "creature", hostOfSource: false } }],
+  // Topple: one comparison over every creature on the battlefield.
+  ["target creature with the greatest power among creatures on the battlefield", { kind: "permanent", whose: "any", filter: GREATEST_POWER_HERE }],
   ["target creature you control", "creature-you-control"],
   ["target land you control", "land-you-control"],
   ["target artifact or enchantment", "artifact-or-enchantment"],
@@ -2477,6 +2483,15 @@ export function parseSentence(sentence, ctx) {
   const s = sentence.replace(/\s+/g, " ").trim();
   const emblem = emblemOf(s);
   if (emblem !== null) return emblem;
+  // Getaway Glamer: about the target as it resolves, a tie destroying it.
+  if (/^destroy target creature if no other creature has greater power\.$/i.test(s)) {
+    const target = ctx.target("creature");
+    return {
+      kind: "conditional",
+      condition: { kind: "target", index: target, filter: { greatestInZone: GREATEST_POWER_HERE.greatestInZone } },
+      then: { kind: "destroy", target },
+    };
+  }
   const atLaterPoint = laterPointSentence(s, ctx);
   if (atLaterPoint !== null) return atLaterPoint;
   // "When you lose control of the creature, tap it" (Ray of Command), "… of
@@ -6629,6 +6644,18 @@ export function parseEffect(text, outer) {
           other: golem ? "targeted" : true,
         },
       },
+      todo: [],
+      hints: [],
+    };
+  }
+  // Desecrator Hag: untargeted, read as it resolves; a tie is the controller's
+  // choice among the tied (`greatestInZone` in that graveyard).
+  if (
+    text ===
+    "Return to your hand the creature card in your graveyard with the greatest power. If two or more cards are tied for greatest power, you choose one of them."
+  ) {
+    return {
+      effect: { kind: "return-from-graveyard", filter: GREATEST_POWER_HERE, destination: "hand", count: 1 },
       todo: [],
       hints: [],
     };
@@ -12076,6 +12103,15 @@ const INTERVENING_IFS = {
   ...TURN_TALLY_IFS,
   // Murders at Karlov Manor (Sanguine Spy).
   "if there are five or more mana values among cards in your graveyard,": FIVE_MANA_VALUES,
+  // Historian's Wisdom, Might Makes Right: `greatestInZone` over the battlefield.
+  "if enchanted permanent is a creature with the greatest power among creatures on the battlefield,": {
+    kind: "source",
+    filter: { attachedTo: GREATEST_POWER_HERE },
+  },
+  "if you control each creature on the battlefield with the greatest power,": {
+    kind: "not",
+    of: { kind: "opponent-controls", atLeast: 1, filter: GREATEST_POWER_HERE },
+  },
   // Keldon Twilight, Charging Cinderhorn: nobody's creatures, whoever's turn.
   "if no creatures attacked this turn,": { kind: "not", of: { kind: "turn-stat", stat: "attacked", who: "any-player", atLeast: 1 } },
   // Coven (Midnight Hunt) and day/night (rule 731.1).
@@ -13983,6 +14019,17 @@ function parseStatic(line, text) {
   // (Ground Seal, Silent Gravestone — `graveyardCardsUntargetable`).
   if (line === "Cards in graveyards can't be the targets of spells or abilities.") {
     return { affects: { scope: "self" }, graveyardCardsUntargetable: {}, text };
+  }
+  // Favor of the Mighty: one comparison over every creature, ties all counted.
+  if (line === "Each creature with the greatest mana value has protection from each color.") {
+    return {
+      affects: {
+        scope: "filter",
+        filter: { type: "creature", greatestInZone: { of: "mana-value", among: { type: "creature" } } },
+      },
+      protection: { colors: ["W", "U", "B", "R", "G"] },
+      text,
+    };
   }
   // The Runes: "As long as enchanted permanent is a creature, it gets +1/+1
   // and has trample" / "… is an Equipment, it has 'Equipped creature gets

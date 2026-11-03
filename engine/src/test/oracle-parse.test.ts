@@ -11797,6 +11797,72 @@ describe("a tap cost on the host, and the creature a cost tapped", () => {
   });
 });
 
+describe("the greatest power among creatures on the battlefield", () => {
+  const GREATEST = { type: "creature", greatestInZone: { of: "power", among: { type: "creature" } } };
+  const read = (type_line: string, oracle_text: string) =>
+    parseFace({ name: "Test Card", type_line, oracle_text, mana_cost: "{1}", colors: [], cmc: 1 } as never) as unknown as {
+      targets: unknown[];
+      effect: unknown;
+      complete: boolean;
+      static: Record<string, unknown>[];
+      triggered: Record<string, unknown>[];
+    };
+
+  it("as a target", () => {
+    const card = read("Sorcery", "Exile target creature with the greatest power among creatures on the battlefield.");
+    expect(card.targets).toEqual([{ kind: "permanent", whose: "any", filter: GREATEST }]);
+    expect(card.effect).toEqual({ kind: "exile", target: 0 });
+  });
+
+  it("as a static's scope, over mana value", () => {
+    const [ability] = read("Enchantment", "Each creature with the greatest mana value has protection from each color.").static;
+    expect(ability.affects).toEqual({
+      scope: "filter",
+      filter: { type: "creature", greatestInZone: { of: "mana-value", among: { type: "creature" } } },
+    });
+    expect(ability.protection).toEqual({ colors: ["W", "U", "B", "R", "G"] });
+  });
+
+  it("as an intervening if: the Aura's host, and each one being yours", () => {
+    const wisdom = read(
+      "Enchantment — Aura",
+      "Enchant creature\nWhen this Aura enters, if enchanted permanent is a creature with the greatest power among creatures on the battlefield, draw a card.",
+    );
+    expect(wisdom.triggered[0].condition).toEqual({ kind: "source", filter: { attachedTo: GREATEST } });
+    const might = read(
+      "Enchantment",
+      "At the beginning of combat on your turn, if you control each creature on the battlefield with the greatest power, draw a card.",
+    );
+    expect(might.triggered[0].condition).toEqual({
+      kind: "not",
+      of: { kind: "opponent-controls", atLeast: 1, filter: GREATEST },
+    });
+  });
+
+  it("as a condition on the target as it resolves", () => {
+    const card = read("Instant", "Destroy target creature if no other creature has greater power.");
+    expect(card.targets).toEqual(["creature"]);
+    expect(card.effect).toEqual({
+      kind: "conditional",
+      condition: { kind: "target", index: 0, filter: { greatestInZone: GREATEST.greatestInZone } },
+      then: { kind: "destroy", target: 0 },
+    });
+  });
+
+  it("as what a graveyard hands back, a tie the controller's", () => {
+    const card = read(
+      "Creature — Hag",
+      "When this creature enters, return to your hand the creature card in your graveyard with the greatest power. If two or more cards are tied for greatest power, you choose one of them.",
+    );
+    expect(card.triggered[0].effect).toEqual({
+      kind: "return-from-graveyard",
+      filter: GREATEST,
+      destination: "hand",
+      count: 1,
+    });
+  });
+});
+
 describe("landwalk of a kind no keyword names", () => {
   const read = (type_line: string, oracle_text: string) =>
     parseFace({ name: "Card", type_line, oracle_text, mana_cost: "{2}", colors: [], cmc: 2 } as never, { tokenFor: (d: string) => d }) as unknown as {

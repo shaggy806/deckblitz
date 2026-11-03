@@ -28135,6 +28135,7 @@ export class Game {
     if (condition === undefined) return true;
     return staticConditionMet(this.state, this.registry, source, condition, {
       includeSelf: true,
+      outsideFold: true,
       ...(thatPlayer !== undefined ? { thatPlayer } : {}),
       ...(sourceTimestamp !== undefined ? { sourceTimestamp } : {}),
       ...(sourceLastKnown !== undefined ? { sourceLastKnown } : {}),
@@ -29942,6 +29943,7 @@ export class Game {
         src !== undefined &&
         staticConditionMet(this.state, this.registry, src, condition, {
           includeSelf: true,
+          outsideFold: true,
           targets,
           // "If that player has 10 or less life" (Ezio Auditore da Firenze),
           // "each opponent who has three or more poison counters" (Ixhel),
