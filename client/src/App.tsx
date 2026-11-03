@@ -419,6 +419,9 @@ function zoneChoiceTitle(
   // What the choice is for, when the engine says (a choice among a spell's
   // targets — Wake to Slaughter).
   if (action.prompt !== undefined) return action.prompt
+  // A look with nothing to take: Brutal Deceiver's, or Wand of Denial's when
+  // the top card is a land.
+  if (action.max === 0 && action.destination !== 'discard') return 'Looking at these cards: none can be chosen'
   const n = action.max === action.min ? `${action.max}` : `up to ${action.max}`
   const together = action.together
   // A rule over the set says what to pick: "up to 2 cards that share a land

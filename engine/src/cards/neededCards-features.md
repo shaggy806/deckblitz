@@ -4104,6 +4104,18 @@ attack-with-exactly, attack-with-total-power, attacks-player-at-least,
 attack-with-count-amount. Proving cards: Alluring Suitor, Desert Were-Worm, Horn
 of the Mark, Landroval, Horizon Witness, Grand Warlord Radha, The Earth King.
 
+### Looking at the top of another player's library — built 2026-11-02
+
+The need-keys Phase 2 unit `effect:look-at-top-of-target-players-library`. Its
+note said only `look-and-choose` in a `for-each-player` reached another player's
+library, but `from` has done that since Architects of Will: Rootwater Mystic,
+Lurking Informant, Coral Fighters and Precognition ran unchanged. Two small
+changes: `put-into-graveyard` also takes a card in a library, so a `stay` choice's
+`then` can move it once paid for (Wand of Denial), and `look-at-library-top` says
+in its own prompt that it's a library, which the client titled "hand". Medomai's
+Prophecy wasn't taken: chapter III's "for the first time this turn" needs a
+ruling no local source has (a spell of that name cast earlier that turn).
+
 ### "Those creatures": the batch a trigger fired on — built 2026-11-02
 
 The need-keys Phase 2 family `effect:attack-batch-those-creatures`, features

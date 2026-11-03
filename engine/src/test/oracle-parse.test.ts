@@ -9036,6 +9036,42 @@ describe("the turn's blocks", () => {
     const observer = face("Creature — Merfolk Rogue", "When this creature enters, look at the top card of target player's library.");
     expect(observer.complete).toBe(true);
     expect(observer.triggered[0].effect).toEqual({ kind: "look-at-library-top", target: 0 });
+    const look = { kind: "look-and-choose", zone: "library", count: 1, min: 0, max: 1, leftover: "stay" };
+    const coral = face(
+      "Creature — Merfolk Soldier",
+      "Whenever this creature attacks and isn't blocked, look at the top card of defending player's library. You may put that card on the bottom of that player's library.",
+    );
+    expect(coral.complete).toBe(true);
+    expect(coral.triggered[0].effect).toEqual({ ...look, from: "trigger-player", destination: "library-bottom" });
+    const informant = face(
+      "Creature — Human Rogue",
+      "{2}, {T}: Look at the top card of target player's library. You may put that card into that player's graveyard.",
+    );
+    expect(informant.complete).toBe(true);
+    expect(informant.activated[0].effect).toEqual({ ...look, from: { target: 0 }, destination: "graveyard" });
+    const precognition = face(
+      "Enchantment",
+      "At the beginning of your upkeep, you may look at the top card of target opponent's library. If you do, you may put that card on the bottom of that player's library.",
+    );
+    expect(precognition.complete).toBe(true);
+    expect(precognition.triggered[0].targets).toEqual(["opponent"]);
+    expect(precognition.triggered[0].effect).toEqual({
+      kind: "may",
+      prompt: "Look at the top card of that opponent's library?",
+      effect: { ...look, from: { target: 0 }, destination: "library-bottom" },
+    });
+    const wand = face(
+      "Artifact",
+      "{T}: Look at the top card of target player's library. If it's a nonland card, you may pay 2 life. If you do, put it into that player's graveyard.",
+    );
+    expect(wand.complete).toBe(true);
+    expect(wand.activated[0].effect).toMatchObject({
+      kind: "look-and-choose",
+      from: { target: 0 },
+      filter: { notTypes: ["land"] },
+      destination: "stay",
+      then: { kind: "may", costLife: 2, effect: { kind: "put-into-graveyard", target: 0 } },
+    });
   });
 
   it("reads a trigger's recipient: that creature, and the player or planeswalker it's attacking", () => {

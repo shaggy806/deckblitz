@@ -6582,3 +6582,17 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 - **Do:** Cast Tranquil Frillback. At "Pay {G} ×" click Pay with 3, choose all three modes, then pick Sol Ring and Bob.
 - **Expect:** The box stops at 3 with four lands left. The next question asks you to choose 0–3, then the targets. As it resolves Sol Ring is destroyed, Bob's graveyard is exiled with it in, and you gain 4 life.
+### Rootwater Mystic: a look at another player's top card
+
+- **Do:** Activate Rootwater Mystic, target Bob, then press Done.
+- **Expect:** A popup titled "Looking at the top card of that player's library" shows Grizzly Bears, with nothing to pick. Done leaves it on top of Bob's library.
+
+### Wand of Denial: 2 life for a nonland top card
+
+- **Do:** Activate Wand of Denial, target Bob, pick Grizzly Bears and Confirm, then choose Yes.
+- **Expect:** You're asked "Pay 2 life to put that card into its owner's graveyard?". You lose 2 life and Grizzly Bears is in Bob's graveyard.
+
+### Wand of Denial: a land is only looked at
+
+- **Do:** Activate Wand of Denial, target Bob, then press Done.
+- **Expect:** A popup titled "Looking at these cards: none can be chosen" shows Island. Done asks for no payment, and Island stays on top of Bob's library.

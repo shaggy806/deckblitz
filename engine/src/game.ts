@@ -29754,6 +29754,8 @@ export class Game {
           kind: "choose-from-zone",
           player: controller,
           ...(controller !== owner ? { forPlayer: owner } : {}),
+          // A client's own title for this shape says "hand".
+          prompt: `Looking at the top card of ${controller === owner ? "your" : "that player's"} library`,
           ids: [top],
           eligible: [],
           min: 0,
@@ -45258,10 +45260,11 @@ export class Game {
     }
   }
 
-  /** `card`, still in exile, into its owner's graveyard (rule 702.35a —
-   * the madness card not cast). */
+  /** `card`, still in exile (rule 702.35a — the madness card not cast) or a
+   * library (Wand of Denial's looked-at card), into its owner's graveyard. */
   private putExiledIntoGraveyard(card: ObjectId): void {
-    if (this.state.objects[card]?.zone !== "exile") return;
+    const zone = this.state.objects[card]?.zone;
+    if (zone !== "exile" && zone !== "library") return;
     this.withGraveyardEnterBatch(() => this.moveObject(card, "graveyard"));
   }
 

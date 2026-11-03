@@ -9925,4 +9925,25 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{ bf: ['Sol Ring'], gy: ['Grizzly Bears'] }, {}, {}],
     }),
   ),
+
+    "Rootwater Mystic: a look at another player's top card",
+    board({
+      you: { bf: ['Rootwater Mystic', 'Island*2'] },
+      opp: [{ lib: ['Grizzly Bears'] }],
+    }),
+  ),
+  preset(
+    'Wand of Denial: 2 life for a nonland top card',
+    board({
+      you: { bf: ['Wand of Denial'] },
+      opp: [{ lib: ['Grizzly Bears'] }],
+    }),
+  ),
+  preset(
+    'Wand of Denial: a land is only looked at',
+    board({
+      you: { bf: ['Wand of Denial'] },
+      opp: [{ lib: ['Island'] }],
+    }),
+  ),
 ]

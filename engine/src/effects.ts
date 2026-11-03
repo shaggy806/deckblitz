@@ -3133,7 +3133,10 @@ export type EffectSpec =
        * "They put this card into their graveyard" (rule 702.35a — the
        * madness trigger's card, not cast): `target`, a card in exile, is put
        * into its owner's graveyard — only while it's still the object the
-       * ability refers to (rule 400.7), never a permanent or a spell.
+       * ability refers to (rule 400.7), never a permanent or a spell. Or a
+       * card in a library, as a `look-and-choose`'s `then` has it with
+       * `destination: "stay"`: "if it's a nonland card, you may pay 2 life.
+       * If you do, **put it into that player's graveyard**" (Wand of Denial).
        */
       readonly kind: "put-into-graveyard";
       readonly target: EffectTargetRef;

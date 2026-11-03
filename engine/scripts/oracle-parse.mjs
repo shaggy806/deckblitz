@@ -5928,6 +5928,56 @@ function paidAndBid(text, ctx) {
  * `choose-value` of a number read as `"x"`. Each is one card's wording, its parts
  * too interlinked to read a sentence at a time.
  */
+/**
+ * A private look at another player's top card with something to do to it: "you
+ * may put that card into their graveyard" (Draugr Thought-Thief), "on the bottom
+ * of that player's library" (Coral Fighters), a "you may look" around it
+ * (Precognition), or a payment for it (Wand of Denial: nothing moves until it's
+ * paid, so `destination: "stay"` and a `then`).
+ */
+function looksAtAnothersTop(text, ctx) {
+  const m =
+    /^(You may look|Look) at the top card of (target player|target opponent|defending player)'s library\. (?:If you do, you may put that card (on the bottom of that player's library|into (?:that player's|their) graveyard)|You may put that card (on the bottom of that player's library|into (?:that player's|their) graveyard)|If it's a nonland card, you may pay (\d+) life\. If you do, put it into that player's graveyard)\.$/i.exec(
+      text,
+    );
+  if (m === null) return null;
+  const optional = /^you may/i.test(m[1]);
+  // "If you do, you may…" is only ever after a "you may look".
+  if (optional !== (m[3] !== undefined)) return null;
+  const from = m[2] === "defending player" ? "trigger-player" : { target: ctx.target(targetOf(m[2])) };
+  const where = m[3] ?? m[4];
+  const look =
+    where !== undefined
+      ? {
+          kind: "look-and-choose",
+          from,
+          zone: "library",
+          count: 1,
+          min: 0,
+          max: 1,
+          destination: where.startsWith("on the bottom") ? "library-bottom" : "graveyard",
+          leftover: "stay",
+        }
+      : {
+          kind: "look-and-choose",
+          from,
+          zone: "library",
+          count: 1,
+          min: 1,
+          max: 1,
+          filter: { notTypes: ["land"] },
+          destination: "stay",
+          leftover: "stay",
+          then: {
+            kind: "may",
+            prompt: `Pay ${m[5]} life to put that card into its owner's graveyard?`,
+            costLife: Number(m[5]),
+            effect: { kind: "put-into-graveyard", target: 0 },
+          },
+        };
+  return optional ? { kind: "may", prompt: "Look at the top card of that opponent's library?", effect: look } : look;
+}
+
 function chosenNumbers(text, ctx) {
   if (/^Target opponent chooses a number\. You may have that player lose that much life\. If you don't, that player sacrifices all but that many permanents of their choice\.$/.test(text)) {
     const opponent = ctx.target(targetOf("target opponent"));
@@ -6361,6 +6411,8 @@ export function parseEffect(text, outer) {
       };
     }
   }
+  const looks = looksAtAnothersTop(text, ctx);
+  if (looks !== null) return { effect: looks, todo: [], hints: [] };
   const chosen = paidAndBid(text, ctx) ?? chosenNumbers(text, ctx) ?? chosenAndTheRest(text) ?? lifeExchanges(text, ctx);
   if (chosen !== null) return { effect: chosen, todo: [], hints: [] };
   for (const [i, sentence] of sentences.entries()) {
