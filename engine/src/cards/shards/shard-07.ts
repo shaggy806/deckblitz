@@ -81,6 +81,7 @@ import _poolBonePicker from "../pool/bone-picker.js";
 import _poolBoonOfBoseiju from "../pool/boon-of-boseiju.js";
 import _poolBoulderfall from "../pool/boulderfall.js";
 import _poolBountyAgent from "../pool/bounty-agent.js";
+import _poolBraceForImpact from "../pool/brace-for-impact.js";
 import _poolBrawl from "../pool/brawl.js";
 import _poolBreakOfDay from "../pool/break-of-day.js";
 import _poolBreyasApprentice from "../pool/breyas-apprentice.js";
@@ -985,6 +986,7 @@ const shard: CardShard = {
     _poolBoonOfBoseiju,
     _poolBoulderfall,
     _poolBountyAgent,
+    _poolBraceForImpact,
     _poolBrawl,
     _poolBreakOfDay,
     _poolBreyasApprentice,

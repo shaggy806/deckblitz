@@ -397,6 +397,7 @@ import _poolJolraelVoiceOfZhalfir from "../pool/jolrael-voice-of-zhalfir.js";
 import _poolJorKadeenThePrevailer from "../pool/jor-kadeen-the-prevailer.js";
 import _poolJunglebornPioneer from "../pool/jungleborn-pioneer.js";
 import _poolKaldraCompleat from "../pool/kaldra-compleat.js";
+import _poolKamahlsSummons from "../pool/kamahls-summons.js";
 import _poolKamisFlare from "../pool/kamis-flare.js";
 import _poolKarlovWatchdog from "../pool/karlov-watchdog.js";
 import _poolKayasWrath from "../pool/kayas-wrath.js";
@@ -1324,6 +1325,7 @@ const shard: CardShard = {
     _poolJorKadeenThePrevailer,
     _poolJunglebornPioneer,
     _poolKaldraCompleat,
+    _poolKamahlsSummons,
     _poolKamisFlare,
     _poolKarlovWatchdog,
     _poolKayasWrath,

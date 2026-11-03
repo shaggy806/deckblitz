@@ -413,6 +413,7 @@ import _poolLotusPathDjinn from "../pool/lotus-path-djinn.js";
 import _poolLowlandOaf from "../pool/lowland-oaf.js";
 import _poolLumengridAugur from "../pool/lumengrid-augur.js";
 import _poolLureboundScarecrow from "../pool/lurebound-scarecrow.js";
+import _poolMadcapExperiment from "../pool/madcap-experiment.js";
 import _poolMaestrosGift from "../pool/maestros-gift.js";
 import _poolMaggotCarrier from "../pool/maggot-carrier.js";
 import _poolMagicalHack from "../pool/magical-hack.js";
@@ -698,6 +699,7 @@ import _poolSquelch from "../pool/squelch.js";
 import _poolStaggershock from "../pool/staggershock.js";
 import _poolStamina from "../pool/stamina.js";
 import _poolStarkIndustriesExecutive from "../pool/stark-industries-executive.js";
+import _poolStarvingRevenant from "../pool/starving-revenant.js";
 import _poolSteadfastSentinel from "../pool/steadfast-sentinel.js";
 import _poolSterlingGrove from "../pool/sterling-grove.js";
 import _poolSternScolding from "../pool/stern-scolding.js";
@@ -1313,6 +1315,7 @@ const shard: CardShard = {
     _poolLowlandOaf,
     _poolLumengridAugur,
     _poolLureboundScarecrow,
+    _poolMadcapExperiment,
     _poolMaestrosGift,
     _poolMaggotCarrier,
     _poolMagicalHack,
@@ -1598,6 +1601,7 @@ const shard: CardShard = {
     _poolStaggershock,
     _poolStamina,
     _poolStarkIndustriesExecutive,
+    _poolStarvingRevenant,
     _poolSteadfastSentinel,
     _poolSterlingGrove,
     _poolSternScolding,

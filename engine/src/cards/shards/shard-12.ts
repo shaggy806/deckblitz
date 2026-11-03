@@ -151,6 +151,7 @@ import _poolConsumingAetherborn from "../pool/consuming-aetherborn.js";
 import _poolCopperTablet from "../pool/copper-tablet.js";
 import _poolCoralAtoll from "../pool/coral-atoll.js";
 import _poolCorruptedGrafstone from "../pool/corrupted-grafstone.js";
+import _poolCovetedFalcon from "../pool/coveted-falcon.js";
 import _poolCrackdownConstruct from "../pool/crackdown-construct.js";
 import _poolCrashingTide from "../pool/crashing-tide.js";
 import _poolCratersClaws from "../pool/craters-claws.js";
@@ -494,6 +495,7 @@ import _poolNantukoHusk from "../pool/nantuko-husk.js";
 import _poolNantukoVigilante from "../pool/nantuko-vigilante.js";
 import _poolNarciFableSinger from "../pool/narci-fable-singer.js";
 import _poolNayaHushblade from "../pool/naya-hushblade.js";
+import _poolNayaSoulbeast from "../pool/naya-soulbeast.js";
 import _poolNecromanticSelection from "../pool/necromantic-selection.js";
 import _poolNecronMonolith from "../pool/necron-monolith.js";
 import _poolNecropolisRegent from "../pool/necropolis-regent.js";
@@ -1031,6 +1033,7 @@ const shard: CardShard = {
     _poolCopperTablet,
     _poolCoralAtoll,
     _poolCorruptedGrafstone,
+    _poolCovetedFalcon,
     _poolCrackdownConstruct,
     _poolCrashingTide,
     _poolCratersClaws,
@@ -1374,6 +1377,7 @@ const shard: CardShard = {
     _poolNantukoVigilante,
     _poolNarciFableSinger,
     _poolNayaHushblade,
+    _poolNayaSoulbeast,
     _poolNecromanticSelection,
     _poolNecronMonolith,
     _poolNecropolisRegent,

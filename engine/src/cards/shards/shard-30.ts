@@ -650,6 +650,7 @@ import _poolSavageLands from "../pool/savage-lands.js";
 import _poolSavageSwipe from "../pool/savage-swipe.js";
 import _poolSavageThallid from "../pool/savage-thallid.js";
 import _poolScarredVinebreeder from "../pool/scarred-vinebreeder.js";
+import _poolScarsOfTheVeteran from "../pool/scars-of-the-veteran.js";
 import _poolSearingBlaze from "../pool/searing-blaze.js";
 import _poolSeasClaim from "../pool/seas-claim.js";
 import _poolSeedsOfRenewal from "../pool/seeds-of-renewal.js";
@@ -876,6 +877,7 @@ import _poolWoodripper from "../pool/woodripper.js";
 import _poolWordsOfWisdom from "../pool/words-of-wisdom.js";
 import _poolWrennAndSix from "../pool/wrenn-and-six.js";
 import _poolYathanRoadwatcher from "../pool/yathan-roadwatcher.js";
+import _poolYesManPersonalSecuritron from "../pool/yes-man-personal-securitron.js";
 import _poolZahidDjinnOfTheLamp from "../pool/zahid-djinn-of-the-lamp.js";
 import _poolZahurGlorysPast from "../pool/zahur-glorys-past.js";
 import _poolZephyrBoots from "../pool/zephyr-boots.js";
@@ -1544,6 +1546,7 @@ const shard: CardShard = {
     _poolSavageSwipe,
     _poolSavageThallid,
     _poolScarredVinebreeder,
+    _poolScarsOfTheVeteran,
     _poolSearingBlaze,
     _poolSeasClaim,
     _poolSeedsOfRenewal,
@@ -1770,6 +1773,7 @@ const shard: CardShard = {
     _poolWordsOfWisdom,
     _poolWrennAndSix,
     _poolYathanRoadwatcher,
+    _poolYesManPersonalSecuritron,
     _poolZahidDjinnOfTheLamp,
     _poolZahurGlorysPast,
     _poolZephyrBoots,

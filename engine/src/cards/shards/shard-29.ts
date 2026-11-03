@@ -576,6 +576,7 @@ import _poolRavenousBloodseeker from "../pool/ravenous-bloodseeker.js";
 import _poolRecalibrate from "../pool/recalibrate.js";
 import _poolReconnaissance from "../pool/reconnaissance.js";
 import _poolRedshiftRocketeerChief from "../pool/redshift-rocketeer-chief.js";
+import _poolRefractionTrap from "../pool/refraction-trap.js";
 import _poolReignOfThePit from "../pool/reign-of-the-pit.js";
 import _poolReleaseTheAnts from "../pool/release-the-ants.js";
 import _poolRelicOfSauron from "../pool/relic-of-sauron.js";
@@ -1460,6 +1461,7 @@ const shard: CardShard = {
     _poolRecalibrate,
     _poolReconnaissance,
     _poolRedshiftRocketeerChief,
+    _poolRefractionTrap,
     _poolReignOfThePit,
     _poolReleaseTheAnts,
     _poolRelicOfSauron,

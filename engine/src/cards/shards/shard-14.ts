@@ -426,6 +426,7 @@ import _poolJoragaWarcaller from "../pool/joraga-warcaller.js";
 import _poolJourneyOfDiscovery from "../pool/journey-of-discovery.js";
 import _poolJourneyToNowhere from "../pool/journey-to-nowhere.js";
 import _poolJoustingDummy from "../pool/jousting-dummy.js";
+import _poolKainTraitorousDragoon from "../pool/kain-traitorous-dragoon.js";
 import _poolKaitoShizuki from "../pool/kaito-shizuki.js";
 import _poolKamiOfIndustry from "../pool/kami-of-industry.js";
 import _poolKamiOfRestlessShadows from "../pool/kami-of-restless-shadows.js";
@@ -830,6 +831,7 @@ import _poolVoidGrafter from "../pool/void-grafter.js";
 import _poolVoldarenEstate from "../pool/voldaren-estate.js";
 import _poolVoraciousTomeSkimmer from "../pool/voracious-tome-skimmer.js";
 import _poolVultureSchemingScavenger from "../pool/vulture-scheming-scavenger.js";
+import _poolWakeThePast from "../pool/wake-the-past.js";
 import _poolWakestoneGargoyle from "../pool/wakestone-gargoyle.js";
 import _poolWalkingBallista from "../pool/walking-ballista.js";
 import _poolWallOfSouls from "../pool/wall-of-souls.js";
@@ -1310,6 +1312,7 @@ const shard: CardShard = {
     _poolJourneyOfDiscovery,
     _poolJourneyToNowhere,
     _poolJoustingDummy,
+    _poolKainTraitorousDragoon,
     _poolKaitoShizuki,
     _poolKamiOfIndustry,
     _poolKamiOfRestlessShadows,
@@ -1714,6 +1717,7 @@ const shard: CardShard = {
     _poolVoldarenEstate,
     _poolVoraciousTomeSkimmer,
     _poolVultureSchemingScavenger,
+    _poolWakeThePast,
     _poolWakestoneGargoyle,
     _poolWalkingBallista,
     _poolWallOfSouls,

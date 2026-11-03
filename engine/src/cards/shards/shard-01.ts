@@ -69,6 +69,7 @@ import _poolBloodtracker from "../pool/bloodtracker.js";
 import _poolBloomwielderDryads from "../pool/bloomwielder-dryads.js";
 import _poolBoilingEarth from "../pool/boiling-earth.js";
 import _poolBondOfAgony from "../pool/bond-of-agony.js";
+import _poolBoneMask from "../pool/bone-mask.js";
 import _poolBontusLastReckoning from "../pool/bontus-last-reckoning.js";
 import _poolBoobyTrap from "../pool/booby-trap.js";
 import _poolBorealGriffin from "../pool/boreal-griffin.js";
@@ -270,6 +271,7 @@ import _poolGlareOfSubdual from "../pool/glare-of-subdual.js";
 import _poolGleamingBastion from "../pool/gleaming-bastion.js";
 import _poolGluttonousGuest from "../pool/gluttonous-guest.js";
 import _poolGoblinBattleJester from "../pool/goblin-battle-jester.js";
+import _poolGoblinCharbelcher from "../pool/goblin-charbelcher.js";
 import _poolGoblinMasons from "../pool/goblin-masons.js";
 import _poolGoblinPsychopath from "../pool/goblin-psychopath.js";
 import _poolGoblinRaider from "../pool/goblin-raider.js";
@@ -592,6 +594,7 @@ import _poolRusticClachan from "../pool/rustic-clachan.js";
 import _poolRustmouthOgre from "../pool/rustmouth-ogre.js";
 import _poolRuthlessDeathfang from "../pool/ruthless-deathfang.js";
 import _poolRuxaPatientProfessor from "../pool/ruxa-patient-professor.js";
+import _poolSacredBoon from "../pool/sacred-boon.js";
 import _poolSacredCat from "../pool/sacred-cat.js";
 import _poolSakashimaOfAThousandFaces from "../pool/sakashima-of-a-thousand-faces.js";
 import _poolSaltRoadPackbeast from "../pool/salt-road-packbeast.js";
@@ -932,6 +935,7 @@ const shard: CardShard = {
     _poolBloomwielderDryads,
     _poolBoilingEarth,
     _poolBondOfAgony,
+    _poolBoneMask,
     _poolBontusLastReckoning,
     _poolBoobyTrap,
     _poolBorealGriffin,
@@ -1133,6 +1137,7 @@ const shard: CardShard = {
     _poolGleamingBastion,
     _poolGluttonousGuest,
     _poolGoblinBattleJester,
+    _poolGoblinCharbelcher,
     _poolGoblinMasons,
     _poolGoblinPsychopath,
     _poolGoblinRaider,
@@ -1455,6 +1460,7 @@ const shard: CardShard = {
     _poolRustmouthOgre,
     _poolRuthlessDeathfang,
     _poolRuxaPatientProfessor,
+    _poolSacredBoon,
     _poolSacredCat,
     _poolSakashimaOfAThousandFaces,
     _poolSaltRoadPackbeast,

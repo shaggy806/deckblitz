@@ -489,6 +489,7 @@ import _poolMisdirection from "../pool/misdirection.js";
 import _poolMistgatePathway from "../pool/mistgate-pathway.js";
 import _poolMistsOfLittjara from "../pool/mists-of-littjara.js";
 import _poolMistwaySpy from "../pool/mistway-spy.js";
+import _poolMobRule from "../pool/mob-rule.js";
 import _poolMobileHomestead from "../pool/mobile-homestead.js";
 import _poolMoggMob from "../pool/mogg-mob.js";
 import _poolMollyHayesRunaway from "../pool/molly-hayes-runaway.js";
@@ -1383,6 +1384,7 @@ const shard: CardShard = {
     _poolMistgatePathway,
     _poolMistsOfLittjara,
     _poolMistwaySpy,
+    _poolMobRule,
     _poolMobileHomestead,
     _poolMoggMob,
     _poolMollyHayesRunaway,
