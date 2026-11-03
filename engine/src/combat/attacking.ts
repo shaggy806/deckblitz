@@ -34,9 +34,30 @@ export function attackingViolations(
   offer: AttackOffer,
 ): AttackingViolation[] {
   const attacking = new Set(declared.map((d) => d.attacker));
-  return offer.mustAttack
-    .filter((id) => !attacking.has(id))
+  return [...offer.mustAttack, ...conditionalAttackers(declared, offer)]
+    .filter((id, i, all) => !attacking.has(id) && all.indexOf(id) === i && fitsBeside(id, declared, offer))
     .map((attacker) => ({ kind: "must-attack", attacker }));
+}
+
+/** The creatures this declaration binds to attack (`offer.attackIf` — "if a
+ * creature you control attacks, this creature also attacks if able"). */
+function conditionalAttackers(declared: readonly AttackerDeclaration[], offer: AttackOffer): ObjectId[] {
+  if (offer.attackIf === undefined) return [];
+  const attacking = new Set(declared.map((d) => d.attacker));
+  return offer.attackIf.filter((rule) => rule.when.some((id) => attacking.has(id))).map((rule) => rule.attacker);
+}
+
+/** Whether a creature bound by {@link conditionalAttackers} could join
+ * `declared` without breaking a restriction keyed to the others: a requirement
+ * never forces breaking one (rule 508.1d). `mustAttack` already asked. */
+function fitsBeside(id: ObjectId, declared: readonly AttackerDeclaration[], offer: AttackOffer): boolean {
+  if (offer.company === undefined || offer.mustAttack.includes(id)) return true;
+  return (offer.defendersFor[id] ?? []).some(
+    (defender) =>
+      !attackCompanyViolations([...declared, { attacker: id, defender }], offer).some(
+        (v) => v.kind === "too-many" || v.kind === "attacks-alone",
+      ),
+  );
 }
 
 /**
@@ -49,15 +70,28 @@ export function withRequiredAttackers(
   declared: readonly AttackerDeclaration[],
   offer: AttackOffer,
 ): AttackerDeclaration[] {
-  const out = [...declared];
-  for (const { attacker } of attackingViolations(declared, offer)) {
-    // A defender that costs nothing to attack first: the requirement never
-    // obliges paying a cost (rule 508.1d).
-    const options = offer.defendersFor[attacker] ?? [];
-    const defender = options.find((d) => attackIsFree(offer, attacker, d)) ?? options[0];
-    if (defender !== undefined) out.push({ attacker, defender });
+  const send = (from: readonly AttackerDeclaration[]): AttackerDeclaration[] => {
+    const out = [...from];
+    // One sent can bind another (`attackIf`), until nothing more is bound.
+    for (let left = attackingViolations(out, offer); left.length > 0; left = attackingViolations(out, offer)) {
+      const before = out.length;
+      for (const { attacker } of left) {
+        // A defender that costs nothing to attack first: the requirement never
+        // obliges paying a cost (rule 508.1d).
+        const options = offer.defendersFor[attacker] ?? [];
+        const defender = options.find((d) => attackIsFree(offer, attacker, d)) ?? options[0];
+        if (defender !== undefined) out.push({ attacker, defender });
+      }
+      if (out.length === before) break;
+    }
+    return withinAttackCompany(withinAttackTax(out, offer), offer);
+  };
+  let out = send(declared);
+  // Cutting to what a tax or a limit allows can leave a binding behind.
+  if (offer.attackIf !== undefined) {
+    for (let pass = 0; pass < 3 && attackingViolations(out, offer).length > 0; pass += 1) out = send(out);
   }
-  return withinAttackCompany(withinAttackTax(out, offer), offer);
+  return out;
 }
 
 /** A rule keyed to the other attackers (`combat/company.ts`) a declaration
@@ -348,6 +382,7 @@ export function withinAttackTax(
   const out = [...declared];
   let total = out.reduce((n, d) => n + costOf(d), 0);
   let life = out.reduce((n, d) => n + lifeOf(d), 0);
+  const bound = conditionalAttackers(declared, offer);
   // The optional attackers first, latest declared first.
   for (const required of [false, true]) {
     for (let i = out.length - 1; i >= 0 && (total > tax.budget || life > lifeLimit); i -= 1) {
@@ -355,7 +390,7 @@ export function withinAttackTax(
       // Only one paying for what's over: a creature costing life stays when
       // only the mana is short.
       const helps = (total > tax.budget && costOf(d) > 0) || (life > lifeLimit && lifeOf(d) > 0);
-      if (!helps || offer.mustAttack.includes(d.attacker) !== required) continue;
+      if (!helps || (offer.mustAttack.includes(d.attacker) || bound.includes(d.attacker)) !== required) continue;
       total -= costOf(d);
       life -= lifeOf(d);
       const free = required

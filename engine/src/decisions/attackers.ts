@@ -16,7 +16,7 @@
  * refused.
  */
 
-import type { Action, LegalAction } from "../actions.js";
+import type { Action, AttackerDeclaration, LegalAction } from "../actions.js";
 import { restrictionsOf } from "../characteristics.js";
 import {
   attackCompanyViolations,
@@ -33,6 +33,7 @@ import type { CombatCompany } from "../combat/company.js";
 import {
   attackRequirementsForbid,
   attackRequirementsReason,
+  attacksIfOthersAttack,
   creatureDef,
   defendersForAttacker,
   legalDefenders,
@@ -157,6 +158,15 @@ function attackersOffer(ctx: DecisionReadCtx, player: PlayerId): AttackOffer {
       })
     : [];
   const most = mostRequirementsObeyed(units, caps ?? undefined);
+  // "If a creature you control attacks, this creature also attacks if able"
+  // (rule 508.1d): only the whole declaration can say. Paying to obey it is
+  // never obliged, so only one it costs nothing to send.
+  const attackIf = attacksIfOthersAttack(
+    ctx.state,
+    ctx.registry,
+    eligible.filter((id) => (defendersFor[id] ?? []).some((d) => attackIsFree(ctx, id, d))),
+    eligible,
+  );
   const stacks: Record<ObjectId, number> = {};
   for (const id of [...eligible, ...(Object.keys(limits) as ObjectId[])]) {
     if (tokensOf(id) > 1) stacks[id] = tokensOf(id);
@@ -176,6 +186,7 @@ function attackersOffer(ctx: DecisionReadCtx, player: PlayerId): AttackOffer {
     mustAttack: inCompany
       ? required.filter((id) => mostRequirementsObeyed(units.filter((u) => u.id !== id), caps ?? undefined) < most)
       : required,
+    ...(attackIf.length > 0 ? { attackIf } : {}),
     ...(inCompany ? { company: { limits, tokens: stacks, required, ...(caps !== null ? { caps } : {}) } } : {}),
     ...(taxed && !naming
       ? {
@@ -193,6 +204,21 @@ function attackersOffer(ctx: DecisionReadCtx, player: PlayerId): AttackOffer {
 }
 
 const nameOf = (ctx: DecisionReadCtx, id: ObjectId): string => creatureDef(ctx.state, ctx.registry, id)?.name ?? id;
+
+/** Who this declaration binds to attack (the offer's `attackIf`), without
+ * building the offer on the board with no such static, nearly every board. */
+function boundByDeclaration(
+  ctx: DecisionReadCtx,
+  player: PlayerId,
+  declared: readonly AttackerDeclaration[],
+): readonly ObjectId[] {
+  const able = ctx.state.zones.shared.battlefield.filter((id) => ctx.state.objects[id]?.controller === player);
+  if (attacksIfOthersAttack(ctx.state, ctx.registry, able, able).length === 0) return [];
+  const attacking = new Set(declared.map((d) => d.attacker));
+  return (attackersOffer(ctx, player).attackIf ?? [])
+    .filter((rule) => rule.when.some((id) => attacking.has(id)))
+    .map((rule) => rule.attacker);
+}
 
 export const attackers = defineDecision({
   kind: "attackers",
@@ -276,11 +302,14 @@ export const attackers = defineDecision({
     // building the whole offer again (`attackingViolations` is that check
     // against the offer, for the client). A token stack that must attack
     // attacks whole: a count holding some of it back leaves those out.
+    // "If a creature you control attacks, this creature also attacks if able"
+    // has to see who's declared, so it does ask the offer.
+    const bound = inCompany ? [] : boundByDeclaration(ctx, player, action.attackers);
     const missing = inCompany ? [] : ctx.state.zones.shared.battlefield.filter(
       (id) =>
         (declared.get(id) ?? 0) < tokensIn(id) &&
         ctx.state.objects[id]?.controller === player &&
-        (sending?.includes(id) === true || mustAttack(ctx.state, ctx.registry, id)) &&
+        (sending?.includes(id) === true || bound.includes(id) || mustAttack(ctx.state, ctx.registry, id)) &&
         // Not one it could attack only by paying for it (rule 508.1d).
         defendersForAttacker(ctx.state, ctx.registry, player, id).some((d) => attackIsFree(ctx, id, d)),
     );
@@ -342,9 +371,7 @@ export const attackers = defineDecision({
   // combinatorial trap and the useful cuts are structural rather than
   // arbitrary.
 
-  randomAnswer: (legal, player, rng): Action => ({
-    type: "declare-attackers",
-    player,
+  randomAnswer: (legal, player, rng): Action => {
     // The `filter` runs to completion before the `flatMap` starts, so every
     // eligible creature's coin flip is drawn before any defender is picked.
     // Fusing the two into one pass would interleave those draws and re-point
@@ -353,7 +380,7 @@ export const attackers = defineDecision({
     // Then cut to what its attack tax surely pays (Ghostly Prison), then to
     // what its restrictions on company allow (Mogg Flunkies) — no draws, so
     // a game without either replays exactly as before.
-    attackers: withinAttackCompany(
+    const attackers = withinAttackCompany(
       withinAttackTax(
         legal.eligible
           .filter((attacker) => rng.random() < 0.6 || legal.mustAttack.includes(attacker))
@@ -367,6 +394,12 @@ export const attackers = defineDecision({
         legal,
       ),
       legal,
-    ),
-  }),
+    );
+    return {
+      type: "declare-attackers",
+      player,
+      // Whoever those bring along (Viashino Bey), no draws either.
+      attackers: legal.attackIf === undefined ? attackers : withRequiredAttackers(attackers, legal),
+    };
+  },
 });

@@ -1585,6 +1585,13 @@ export type LegalAction =
        */
       readonly mustAttack: readonly ObjectId[];
       /**
+       * Creatures that must attack if able only when one of `when` is declared
+       * attacking (`attacksIfAttacks` — Viashino Bey, rule 508.1d):
+       * `attackingViolations` asks once the declaration is known. Only ones it
+       * would cost nothing to send. Absent when there are none.
+       */
+      readonly attackIf?: readonly { readonly attacker: ObjectId; readonly when: readonly ObjectId[] }[];
+      /**
        * What attacking costs (rule 508.1h — Ghostly Prison, Propaganda):
        * `perCreature` is the generic mana each creature attacking that defender
        * costs, for every taxed defender, a player or a planeswalker (Baird);
@@ -1708,6 +1715,14 @@ export type LegalAction =
        * works out how many of them can be at once. Absent when there are
        * none. */
       readonly mustBeBlockedIfAble?: readonly ObjectId[];
+      /** Those of `mustBeBlockedIfAble` that only certain creatures can obey
+       * (Slayer's Cleaver's "by an Eldrazi"): the attacker, and which of this
+       * defender's it needs among its blockers. Absent when there are none. */
+      readonly mustBeBlockedByOneOf?: Readonly<Record<ObjectId, readonly ObjectId[]>>;
+      /** Those of `mustBeBlockedIfAble` that "must be blocked by exactly one
+       * creature if able" (Nacatl War-Pride): two on it obey it no more than
+       * none. Absent when there are none. */
+      readonly mustBeBlockedByExactlyOne?: readonly ObjectId[];
       /** Creatures of this defender's that have to block if able — any
        * attacker, or `attacker` (provoke, rule 702.39a) — from the
        * `block-if-able` effect (`GameState.blockRequirements`). Only the

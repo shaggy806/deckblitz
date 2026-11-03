@@ -580,9 +580,15 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   },
   detain: (n, v) => v.touch(n.target, "harm", MINOR),
   // Bound to block: a provoked creature is usually walked into a bad block.
-  "block-if-able": (n, v) => v.touch(n.target, "harm", MINOR),
+  "block-if-able": (n, v) => {
+    if (n.target !== undefined) v.touch(n.target, "harm", MINOR);
+  },
   restrict: (n, v) => {
-    const lure = (r: string): boolean => r === "must-be-blocked" || r === "must-be-blocked-if-able";
+    const lure = (r: string): boolean =>
+      r === "must-be-blocked" ||
+      r === "must-be-blocked-if-able" ||
+      r === "must-be-blocked-by-exactly-one" ||
+      r === "blocked-by-at-most-one";
     const helps = n.restrictions.some(lure) || n.cantBeBlockedBy !== undefined;
     const hurts = n.restrictions.some((r) => !lure(r));
     v.touch(n.target, helps && hurts ? "either" : helps ? "help" : "harm", MINOR);
@@ -602,7 +608,11 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   // unless it ties the creature down ("doesn't untap", "loses flying").
   "grant-static": (n, v) => {
     const a = n.ability;
-    const lure = (r: string): boolean => r === "must-be-blocked" || r === "must-be-blocked-if-able";
+    const lure = (r: string): boolean =>
+      r === "must-be-blocked" ||
+      r === "must-be-blocked-if-able" ||
+      r === "must-be-blocked-by-exactly-one" ||
+      r === "blocked-by-at-most-one";
     const harms =
       (a.restrictions ?? []).some((r) => !lure(r)) ||
       (a.loseKeywords ?? []).length > 0 ||
@@ -1097,7 +1107,14 @@ export function auraPolarity(def: CardDefinition): Polarity {
     // pump is the point, the lost block its price.
     const pumped = ability.grantPt !== undefined && ability.grantPt[0] + ability.grantPt[1] > 0;
     for (const restriction of ability.restrictions ?? []) {
-      if (restriction === "must-be-blocked" || restriction === "must-be-blocked-if-able") help = true;
+      if (
+        restriction === "must-be-blocked" ||
+        restriction === "must-be-blocked-if-able" ||
+        restriction === "must-be-blocked-by-exactly-one" ||
+        restriction === "blocked-by-at-most-one"
+      ) {
+        help = true;
+      }
       else if (!(restriction === "cant-block" && pumped)) harm = true;
     }
     if (ability.grantPt !== undefined) {

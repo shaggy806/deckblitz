@@ -4258,6 +4258,27 @@ Wolverine: blocking now, not `blocked`, rule 509.1h). "For each creature it's
 blocking" (Guardian of the Gateless) needed nothing new: `countOf` over
 `blockingRelation: "blocked-by"`.
 
+### Combat requirements only a whole declaration answers — built 2026-11-03
+
+The need-keys Phase 2 family `static:combat-restriction-extensions`' first units.
+`StaticAbility.mustBeBlockedBy` is "must be blocked by [filter] if able" (one of
+them: Slayer's Cleaver) or, with `all`, "all [filter] able to block this creature
+do so" (Talruum Piper, Marble Priest); the restriction
+`must-be-blocked-by-exactly-one` is Nacatl War-Pride's, one blocker obeying it and
+none or two not; `blocked-by-at-most-one` is the static's restriction for a `restrict`.
+`block-if-able` takes a `filter`, a rule for the turn binding what matches later
+(rule 611.2c): with `attacker`, Magnetic Web; without, Predatory Rampage. A token
+stack under a requirement each token answers for wakes as blockers are asked for
+(`Game.wakeStacksBoundToBlock`). `StaticAbility.attacksIfAttacks` is "if [a creature]
+attacks, this attacks if able" (Viashino Bey, Ekundu Cyclops, Magnetic Web's first
+line), the offer's `attackIf`, `attackingViolations` asking once the declaration is
+known (rule 508.1d). "Cowards can't block Warriors" (Boldwyr Intimidator) and Gogo's
+target "attacks this turn if able" needed no code: `cantBeBlockedBy` over a filter
+scope, and `attack-requirement`'s `target`. Still open in the family: a requirement
+aimed at a chosen player (`static:must-attack-specific-player`), a player's "must
+attack with at least one creature", and an illegal attacker slot, blank in `targets`
+by rule 608.2b, which a requirement staying on it would need read back.
+
 ### The creatures blocking a trigger's object — built 2026-11-03
 
 The need-keys Phase 2 key `filter:blocking-trigger-object`. `blockingRelation`

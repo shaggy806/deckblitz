@@ -6097,9 +6097,18 @@ export type EffectSpec =
        * an `untap` (`provoke()` in `cards/helpers.ts`); Hunt Down's "target
        * creature blocks target creature" is `attacker: 1`. `thisCombat`:
        * "this combat" (Avalanche Tusker) — ends with the combat phase.
+       *
+       * With `filter` instead of `target`: every creature matching it from the
+       * controller's side blocks `attacker` this turn if able, a rule for the
+       * turn that binds one matching only later (rule 611.2c) — Magnetic Web's
+       * "all creatures with magnet counters on them block that creature this
+       * turn if able", You Look Upon the Tarrasque's "all creatures your
+       * opponents control able to block that creature this turn do so". With
+       * neither `target` nor `attacker`, `restrict`'s `must-block` says it.
        */
       readonly kind: "block-if-able";
-      readonly target: EffectTargetRef;
+      readonly target?: EffectTargetRef;
+      readonly filter?: CardFilter;
       readonly attacker?: EffectTargetRef;
       readonly thisCombat?: boolean;
     }
@@ -10963,8 +10972,14 @@ export interface EffectApi {
     /** The one attacker `target` can't block (`cantBlockAttacker`). */
     cantBlock?: TargetRef,
     /** A `filter`'s scope: read from `scopeTo`'s side (`controlledByTarget`),
-     * leaving out `except` (`exceptTarget`), or fixed `asItResolves`. */
-    scope?: { readonly scopeTo?: PlayerId; readonly except?: ObjectId; readonly asItResolves?: boolean },
+     * leaving out `except` (`exceptTarget`), or fixed `asItResolves`; `blocks`,
+     * the attacker those creatures have to block if able. */
+    scope?: {
+      readonly scopeTo?: PlayerId;
+      readonly except?: ObjectId;
+      readonly asItResolves?: boolean;
+      readonly blocks?: ObjectId;
+    },
   ): void;
   /** See the `"grant-static"` {@link EffectSpec}: `target`, or with `filter`
    * every permanent matching it now. */
@@ -16571,8 +16586,6 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "block-if-able": {
-      const target = resolveEffectTarget(spec.target, ctx);
-      if (target === undefined || illegalSlot(spec.target, ctx)) return;
       let attacker: TargetRef | undefined;
       if (spec.attacker !== undefined) {
         attacker = resolveEffectTarget(spec.attacker, ctx);
@@ -16580,6 +16593,15 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         // requirement is left to impose.
         if (attacker === undefined || illegalSlot(spec.attacker, ctx)) return;
       }
+      if (spec.filter !== undefined) {
+        ctx.restrict(undefined, spec.filter, attacker === undefined ? ["must-block"] : [], undefined, undefined, undefined, {
+          ...(attacker?.kind === "object" ? { blocks: attacker.object } : {}),
+        });
+        return;
+      }
+      if (spec.target === undefined) return;
+      const target = resolveEffectTarget(spec.target, ctx);
+      if (target === undefined || illegalSlot(spec.target, ctx)) return;
       ctx.blockIfAble(target, attacker, spec.thisCombat === true);
       return;
     }

@@ -297,7 +297,8 @@ import type { AggregateReads, AggregateSpec, CardFilter } from "./filter.js";
 import { goadersOf } from "./goad.js";
 import { answeringPlayer, attackChooser, decidingPlayer } from "./player-control.js";
 import type { PlayerControl } from "./state.js";
-import { defendersForAttacker } from "./combat/eligibility.js";
+import { blockersRequiredBy, defendersForAttacker } from "./combat/eligibility.js";
+import { turnRuleCovers } from "./characteristics.js";
 import { bandingAbilitiesOf } from "./combat/banding.js";
 import { isRingBearer, RING_EMBLEM_TRIGGERS, ringEmblemText } from "./ring.js";
 import { colorIdentityOf } from "./identity.js";
@@ -10860,10 +10861,38 @@ export class Game {
             attackers.some((attacker) => this.whyCannotBlock(defender, id, attacker) === null),
         );
       if (hasEligibleBlocker) {
+        this.wakeStacksBoundToBlock(defender, attackers);
         this.state.awaiting = { kind: "blockers", player: defender };
         return;
       }
       this.state.pendingBlockerDeclarations = this.state.pendingBlockerDeclarations.slice(1);
+    }
+  }
+
+  /**
+   * A token stack of `defender`'s under a requirement each token answers for
+   * itself wakes as blockers are asked for: "each creature blocks this turn if
+   * able" binds every token of it, and "must be blocked by exactly one creature
+   * if able" (rule 509.1c) wants them one to an attacker, which a stack, offered
+   * as one entry, can't say. A stack changes no result (`materializeStack`).
+   */
+  private wakeStacksBoundToBlock(defender: PlayerId, attackers: readonly ObjectId[]): void {
+    const stacks = this.state.zones.shared.battlefield.filter(
+      (id) => this.state.objects[id].controller === defender && (this.state.objects[id].stackCount ?? 1) > 1,
+    );
+    if (stacks.length === 0) return;
+    const allOfThem = attackers.some((a) => restrictionsOf(this.state, this.registry, a).has("must-be-blocked-by-exactly-one"));
+    const named = (this.state.turnRestrictions ?? []).filter((rule) => rule.blocks !== undefined);
+    const wanted = attackers.flatMap((a) => blockersRequiredBy(this.state, this.registry, a, stacks).filter((w) => w.all));
+    for (const id of stacks) {
+      if (
+        allOfThem ||
+        restrictionsOf(this.state, this.registry, id).has("must-block") ||
+        named.some((rule) => turnRuleCovers(this.state, this.registry, id, rule)) ||
+        wanted.some((w) => w.by.includes(id))
+      ) {
+        this.materializeStack(id, undefined, Game.MAX_BLOCKERS_WOKEN);
+      }
     }
   }
 
@@ -39188,14 +39217,22 @@ export class Game {
     duration: EffectDuration = "end-of-turn",
     cantBeBlockedBy?: CardFilter,
     cantBlock?: TargetRef,
-    scope: { readonly scopeTo?: PlayerId; readonly except?: ObjectId; readonly asItResolves?: boolean } = {},
+    scope: {
+      readonly scopeTo?: PlayerId;
+      readonly except?: ObjectId;
+      readonly asItResolves?: boolean;
+      readonly blocks?: ObjectId;
+    } = {},
   ): void {
     // "Can't block this creature": the attacker as it is now (rule 400.7).
     const attacker =
       cantBlock?.kind === "object" && this.state.objects[cantBlock.object]?.zone === "battlefield"
         ? { object: cantBlock.object, zoneChangeCount: this.state.objects[cantBlock.object].zoneChangeCount ?? 0 }
         : undefined;
-    if (restrictions.length === 0 && cantBeBlockedBy === undefined && attacker === undefined) return;
+    // "They block that creature this turn if able": the same, as it is now.
+    const named = scope.blocks === undefined ? undefined : this.state.objects[scope.blocks];
+    if (scope.blocks !== undefined && named?.zone !== "battlefield") return;
+    if (restrictions.length === 0 && cantBeBlockedBy === undefined && attacker === undefined && named === undefined) return;
     if (filter !== undefined) {
       // Read from the side of a target player, or a target's controller
       // (`controlledByTarget`); the one permanent left out by its stint.
@@ -39230,8 +39267,14 @@ export class Game {
         restrictions: [...restrictions],
         ...(cantBeBlockedBy !== undefined ? { cantBeBlockedBy } : {}),
         ...(except !== undefined ? { except } : {}),
+        ...(named !== undefined ? { blocks: { object: named.id, zoneChangeCount: named.zoneChangeCount ?? 0 } } : {}),
       });
-      this.emit({ type: "restrictions-imposed", player: controller, restrictions: [...restrictions] });
+      this.emit({
+        type: "restrictions-imposed",
+        player: controller,
+        restrictions: named !== undefined ? ["must-block"] : [...restrictions],
+      });
+      invalidateComputedCache();
       return;
     }
     if (target?.kind !== "object") return;

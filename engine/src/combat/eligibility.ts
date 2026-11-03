@@ -662,7 +662,9 @@ function blockFilterSources(
           ability.canBlockOnly !== undefined ||
           ability.blockedByAtMostOne === true ||
           ability.blockedByAtLeast !== undefined ||
-          ability.blockedOnlyByAll === true
+          ability.blockedOnlyByAll === true ||
+          ability.mustBeBlockedBy !== undefined ||
+          ability.attacksIfAttacks !== undefined
         ) {
           out.push({ source, ability });
         }
@@ -724,6 +726,7 @@ function blockFilters(
 export function blockedByAtMostOne(state: GameState, registry: CardRegistry, attacker: ObjectId): boolean {
   const object = state.objects[attacker];
   if (object === undefined) return false;
+  if (restrictionsOf(state, registry, attacker).has("blocked-by-at-most-one")) return true;
   for (const { source, ability } of blockFilterSources(state, registry)) {
     if (ability.blockedByAtMostOne !== true) continue;
     if (!staticReaches(state, registry, source, ability, object)) continue;
@@ -764,6 +767,64 @@ export function blockedOnlyByAll(state: GameState, registry: CardRegistry, attac
     return true;
   }
   return false;
+}
+
+/**
+ * Who `attacker` must be blocked by (`mustBeBlockedBy` — rule 509.1c) out of
+ * `blockers`, read as blocks are declared: each static that reaches it, with
+ * those of `blockers` matching its filter.
+ */
+export function blockersRequiredBy(
+  state: GameState,
+  registry: CardRegistry,
+  attacker: ObjectId,
+  blockers: readonly ObjectId[],
+): readonly { readonly all: boolean; readonly by: readonly ObjectId[] }[] {
+  const object = state.objects[attacker];
+  if (object === undefined) return [];
+  const out: { all: boolean; by: ObjectId[] }[] = [];
+  for (const { source, ability } of blockFilterSources(state, registry)) {
+    const wanted = ability.mustBeBlockedBy;
+    if (wanted === undefined) continue;
+    if (!staticReaches(state, registry, source, ability, object)) continue;
+    if (ability.condition !== undefined && !staticConditionMet(state, registry, source, ability.condition)) continue;
+    const amount = sourceAmount(state, registry, source);
+    out.push({
+      all: wanted.all === true,
+      by: blockers.filter((id) => matchesFilter(state, registry, id, wanted.by, { you: source.controller, amount })),
+    });
+  }
+  return out;
+}
+
+/**
+ * "If [a creature matching it] attacks, this attacks if able" (`attacksIfAttacks`
+ * — rule 508.1d): for each of `able` such a static reaches, the creatures of
+ * `eligible` whose attacking would bind it. Empty almost always.
+ */
+export function attacksIfOthersAttack(
+  state: GameState,
+  registry: CardRegistry,
+  able: readonly ObjectId[],
+  eligible: readonly ObjectId[],
+): readonly { readonly attacker: ObjectId; readonly when: readonly ObjectId[] }[] {
+  const out: { attacker: ObjectId; when: ObjectId[] }[] = [];
+  for (const { source, ability } of blockFilterSources(state, registry)) {
+    const filter = ability.attacksIfAttacks;
+    if (filter === undefined) continue;
+    if (ability.condition !== undefined && !staticConditionMet(state, registry, source, ability.condition)) continue;
+    const when = eligible.filter((id) =>
+      matchesFilter(state, registry, id, filter, { you: source.controller, source: source.id }),
+    );
+    if (when.length === 0) continue;
+    for (const attacker of able) {
+      if (!staticReaches(state, registry, source, ability, state.objects[attacker])) continue;
+      const rule = out.find((r) => r.attacker === attacker);
+      if (rule === undefined) out.push({ attacker, when });
+      else rule.when = [...new Set([...rule.when, ...when])];
+    }
+  }
+  return out;
 }
 
 /** One of {@link blockFilters}: the filter, whose side it's read from, and

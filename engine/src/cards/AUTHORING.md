@@ -565,7 +565,12 @@ declared (`combat/blocking.ts`). The same effect is "target creature blocks
 this turn if able" (no `attacker`), "blocks it/this creature this turn if
 able" (`attacker: "source"`), "blocks target creature" (`attacker: 1`), and
 "this combat" (`thisCombat: true`). A creature that can't block (that
-attacker) is simply under no requirement. `amplify-provoke.test.ts`.
+attacker) is simply under no requirement. `amplify-provoke.test.ts`. With
+`filter` in place of `target` it's a rule for the turn over whatever matches,
+later arrivals too (rule 611.2c): "each creature your opponents control blocks
+this turn if able" (Predatory Rampage), "all creatures with magnet counters on
+them block that creature this turn if able" (`attacker: "trigger-object"`,
+Magnetic Web). `combat-requirements-by-filter.test.ts`.
 
 **Amplify N** (rule 702.38): `amplify: N` on the card. As it's about to
 enter, its controller reveals any number of cards from their hand sharing a
@@ -4887,6 +4892,18 @@ is "can't attack a player it has already attacked this turn" (Port Razer), by th
   blockers offer lists them (`singleBlockerAttackers`); a Lured one among
   them needs only one blocker (509.1c), so it's offered as "must be blocked
   if able".
+- `mustBeBlockedBy: { by: CardFilter, all?: true }` — the affected creatures
+  "must be blocked by [filter] if able" (Slayer's Cleaver's Eldrazi: one is
+  enough, and nothing's asked with none able), or with `all` "all [filter] able
+  to block this creature do so" (Talruum Piper, Marble Priest). Requirements
+  (rule 509.1c), matched from this permanent's controller's side as blocks are
+  declared.
+- `attacksIfAttacks: CardFilter` — the affected creatures attack if able when a
+  creature matching it is declared attacking (rule 508.1d): Ekundu Cyclops's "if
+  a creature you control attacks, this creature also attacks if able", Viashino
+  Bey's "if this creature attacks, all creatures you control attack if able"
+  (`{ isSource: true }`), Magnetic Web's. The offer's `attackIf`; a limit on
+  attackers bends it, and it never obliges paying a cost.
 - `blockedByAtLeast: N` — "can't be blocked except by N or more creatures"
   (Troll of Khazad-dûm's 3; Sonorous Howlbonder's "each creature you control
   with menace", a `filter` scope): menace's restriction with a larger N
@@ -5188,7 +5205,10 @@ is "can't attack a player it has already attacked this turn" (Port Razer), by th
   `lurePlan`). `"must-be-blocked-if-able"` asks only for **one** blocker (two
   with menace) whenever the defender has one to spare — also a rule 509.1c
   requirement, weighed as the declaration is checked (`ifAblePlan`; the
-  creatures Lure needs stay with Lure). `"cant-attack-owner"` keeps a stolen
+  creatures Lure needs stay with Lure). `"must-be-blocked-by-exactly-one"` is
+  Nacatl War-Pride's: one blocker obeys it, none or two don't, and menace makes
+  it ask nothing. `"blocked-by-at-most-one"` is `blockedByAtMostOne` for a
+  `restrict` (Glorfindel, Dauntless Rescuer). `"cant-attack-owner"` keeps a stolen
   creature off its owner — the player only, so it may still attack their
   planeswalkers (Alexios, Deimos of Kosmos's ruling; Xantcha's "or
   planeswalkers its owner controls" would need a restriction of its own).

@@ -30,13 +30,14 @@ import { ableInCompany, blockCompanyOf } from "../combat/company.js";
 import {
   blockedByAtMostOne,
   blockedOnlyByAll,
+  blockersRequiredBy,
   creatureDef,
   currentAttackers,
   defendingPlayerOf,
   minimumBlockers,
   whyCannotBlock,
 } from "../combat/eligibility.js";
-import { blockLimitOf, restrictionsOf } from "../characteristics.js";
+import { blockLimitOf, restrictionsOf, turnRuleCovers } from "../characteristics.js";
 import { whyCountsInvalid } from "../combat/stack-counts.js";
 import { tooManyBlockers, whyMembersInvalid } from "../combat/blocking.js";
 import { blockersLeft } from "../combat/limits.js";
@@ -109,16 +110,56 @@ function blockersOffer(
   // be without breaking a restriction), so it's "blocked if able" instead.
   const lured = attacking.filter((id) => restrictionsOf(ctx.state, ctx.registry, id).has("must-be-blocked"));
   const mustBlock = lured.filter((id) => !singleBlockerAttackers.includes(id));
-  // Attackers that need only *one* blocker if one can manage (Anzrag).
+  // Attackers that need only *one* blocker if one can manage (Anzrag), or one
+  // and no more (Nacatl War-Pride), or one of certain creatures (Slayer's
+  // Cleaver): the last only while one of those creatures can block it at all,
+  // a requirement no block could obey asking nothing (rule 509.1c).
+  const eligibleIds = eligible.map((e) => e.blocker);
+  const exactlyOne = attacking.filter((id) =>
+    restrictionsOf(ctx.state, ctx.registry, id).has("must-be-blocked-by-exactly-one"),
+  );
+  const required = new Map(
+    attacking.map((id) => [id, blockersRequiredBy(ctx.state, ctx.registry, id, eligibleIds)] as const),
+  );
+  const mustBeBlockedByOneOf: Record<ObjectId, readonly ObjectId[]> = {};
+  for (const [attacker, wanted] of required) {
+    const by = wanted
+      .filter((w) => !w.all)
+      .flatMap((w) => w.by)
+      .filter((blocker) => eligible.find((e) => e.blocker === blocker)?.canBlock.includes(attacker) === true);
+    if (by.length > 0) mustBeBlockedByOneOf[attacker] = [...new Set(by)];
+  }
   const mustBeBlockedIfAble = attacking.filter(
     (id) =>
       restrictionsOf(ctx.state, ctx.registry, id).has("must-be-blocked-if-able") ||
+      exactlyOne.includes(id) ||
+      mustBeBlockedByOneOf[id] !== undefined ||
       (lured.includes(id) && singleBlockerAttackers.includes(id)),
   );
   // Creatures that have to block if able (provoke: that attacker), each the
   // same object it was when the requirement was made (rule 400.7), and only
   // while it's able to.
   const blockRequirements: { blocker: ObjectId; attacker?: ObjectId }[] = [];
+  // "All Walls able to block this creature do so" (Marble Priest): each its own
+  // requirement to block that attacker.
+  for (const [attacker, wanted] of required) {
+    for (const blocker of wanted.filter((w) => w.all).flatMap((w) => w.by)) {
+      const entry = eligible.find((e) => e.blocker === blocker);
+      if (entry?.canBlock.includes(attacker) === true) blockRequirements.push({ blocker, attacker });
+    }
+  }
+  // "All creatures with magnet counters on them block that creature this turn
+  // if able" (Magnetic Web), a rule over the turn (rule 611.2c): whichever match
+  // now, and that attacker the same object still (rule 400.7).
+  for (const rule of ctx.state.turnRestrictions ?? []) {
+    const named = rule.blocks;
+    if (named === undefined || (ctx.state.objects[named.object]?.zoneChangeCount ?? 0) !== named.zoneChangeCount) continue;
+    for (const entry of eligible) {
+      if (entry.canBlock.includes(named.object) && turnRuleCovers(ctx.state, ctx.registry, entry.blocker, rule)) {
+        blockRequirements.push({ blocker: entry.blocker, attacker: named.object });
+      }
+    }
+  }
   for (const r of ctx.state.blockRequirements ?? []) {
     const entry = eligible.find((e) => e.blocker === r.blocker);
     if (entry === undefined || (ctx.state.objects[r.blocker]?.zoneChangeCount ?? 0) !== r.zoneChangeCount) continue;
@@ -160,6 +201,8 @@ function blockersOffer(
     ...(singleBlockerAttackers.length > 0 ? { singleBlockerAttackers } : {}),
     mustBlock,
     ...(mustBeBlockedIfAble.length > 0 ? { mustBeBlockedIfAble } : {}),
+    ...(Object.keys(mustBeBlockedByOneOf).length > 0 ? { mustBeBlockedByOneOf } : {}),
+    ...(exactlyOne.length > 0 ? { mustBeBlockedByExactlyOne: exactlyOne } : {}),
     ...(blockRequirements.length > 0 ? { blockRequirements } : {}),
     ...(Object.keys(attackerTokens).length > 0 ? { attackerTokens } : {}),
     ...(Object.keys(blockCompany).length > 0 ? { blockCompany } : {}),

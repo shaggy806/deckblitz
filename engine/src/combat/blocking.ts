@@ -321,7 +321,14 @@ export function blockingViolations(
     // Blocked enough: on one creature of it, for an attacking stack.
     const most = (attacker: ObjectId): number =>
       Math.max(0, ...[...perAttacker.values()].filter((v) => v.attacker === attacker).map((v) => v.count));
-    const obeyed = ifAble.filter((a) => most(a) >= need(a));
+    const obeyed = ifAble.filter((a) => {
+      // "Exactly one": two on it obey it no more than none.
+      if (offer.mustBeBlockedByExactlyOne?.includes(a) === true) return most(a) === 1;
+      // "By an Eldrazi": one of those among however many block it.
+      const by = offer.mustBeBlockedByOneOf?.[a];
+      if (by !== undefined && !blocks.some((b) => b.attacker === a && by.includes(b.blocker))) return false;
+      return most(a) >= need(a);
+    });
     if (obeyed.length < plan.required) {
       const planned = new Set(plan.assignment.values());
       for (const attacker of ifAble) {
@@ -388,7 +395,8 @@ function blockObeysRequirement(
 ): boolean {
   return (
     offer.mustBlock.includes(block.attacker) ||
-    (offer.mustBeBlockedIfAble ?? []).includes(block.attacker) ||
+    ((offer.mustBeBlockedIfAble ?? []).includes(block.attacker) &&
+      offer.mustBeBlockedByOneOf?.[block.attacker]?.includes(block.blocker) !== false) ||
     obeysOwnRequirement(block.blocker, blocks, offer)
   );
 }
@@ -551,13 +559,21 @@ export function ifAblePlan(offer: BlockOffer): LurePlan {
   const ways = attackers.map((attacker) => {
     const able = free.filter((e) => e.canBlock.includes(attacker) && blockIsFree(offer, e.blocker, attacker));
     const need = leastBlockers(offer, attacker);
-    if (need === 1) return able.map((e) => [e.blocker]);
+    const by = offer.mustBeBlockedByOneOf?.[attacker];
+    // "Exactly one" under menace can't be obeyed at all (rule 509.1c).
+    if (need > 1 && offer.mustBeBlockedByExactlyOne?.includes(attacker) === true) return [];
+    if (need === 1) return able.filter((e) => by === undefined || by.includes(e.blocker)).map((e) => [e.blocker]);
     const out: ObjectId[][] = [];
     const group: (typeof able)[number][] = [];
     const grow = (from: number, total: number): void => {
       if (out.length >= LURE_SEARCH_LIMIT) return;
       if (total >= need) {
-        if (group.every((g) => total - (g.copies ?? 1) < need)) out.push(group.map((g) => g.blocker));
+        if (
+          group.every((g) => total - (g.copies ?? 1) < need) &&
+          (by === undefined || group.some((g) => by.includes(g.blocker)))
+        ) {
+          out.push(group.map((g) => g.blocker));
+        }
         return;
       }
       for (let i = from; i < able.length; i += 1) {
@@ -644,9 +660,13 @@ export function obeyingLure(
       load += helper.copies ?? 1;
     }
   }
+  // "Exactly one": the plan's, and nothing else on it.
+  const planned = new Set(assignment.values());
+  const alone = (attacker: ObjectId): boolean =>
+    planned.has(attacker) && offer.mustBeBlockedByExactlyOne?.includes(attacker) === true;
   const moved: BlockerDeclaration[] = [
     ...required.map(([blocker, attacker]) => ({ blocker, attacker })),
-    ...blocks.filter((b) => !assignment.has(b.blocker) && !taken.has(b.blocker)),
+    ...blocks.filter((b) => !assignment.has(b.blocker) && !taken.has(b.blocker) && !alone(b.attacker)),
     ...[...assignment].map(([blocker, attacker]) => ({ blocker, attacker })),
   ];
   const copies = new Map(offer.eligible.map((e) => [e.blocker, e.copies ?? 1]));

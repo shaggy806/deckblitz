@@ -6050,6 +6050,10 @@ export interface GameState {
     /** The one permanent left out — Mark for Death's "**other** creatures
      * that player controls" — held by its stint (rule 400.7). */
     readonly except?: { readonly object: ObjectId; readonly zoneChangeCount: number };
+    /** They have to block this attacker this turn if able (Magnetic Web — the
+     * `block-if-able` effect's `filter` form), held by its stint (rule 400.7);
+     * read into the blockers offer's `blockRequirements`. */
+    readonly blocks?: { readonly object: ObjectId; readonly zoneChangeCount: number };
   }[];
   /** Blocking requirements on one creature each (rule 509.1c) — "target
    * creature blocks this turn if able", or blocks `attacker` if able

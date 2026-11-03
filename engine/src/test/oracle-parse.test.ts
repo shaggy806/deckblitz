@@ -11956,3 +11956,68 @@ describe("landwalk of a kind no keyword names", () => {
     expect(card.static[0].landwalk).toBe("chosen-land-type");
   });
 });
+
+describe("requirements a whole declaration answers", () => {
+  const staticOf = (type_line: string, oracle_text: string): Record<string, unknown> => {
+    const { text: _text, ...rest } = (
+      parseFace({ name: "Test Card", type_line, oracle_text, mana_cost: "{7}", colors: [], cmc: 7 } as never) as unknown as {
+        static: Record<string, unknown>[];
+      }
+    ).static[0];
+    return rest;
+  };
+
+  it.each([
+    [
+      "Creature — Cat",
+      "This creature must be blocked by exactly one creature if able.",
+      { affects: { scope: "self" }, restrictions: ["must-be-blocked-by-exactly-one"] },
+    ],
+    [
+      "Artifact — Equipment",
+      "Equipped creature gets +3/+1 and must be blocked by an Eldrazi if able.",
+      { affects: { scope: "attached" }, grantPt: [3, 1], mustBeBlockedBy: { by: { type: "creature", subtype: "Eldrazi" } } },
+    ],
+    [
+      "Creature — Minotaur",
+      "All creatures with flying able to block this creature do so.",
+      { affects: { scope: "self" }, mustBeBlockedBy: { by: { type: "creature", keyword: "flying" }, all: true } },
+    ],
+    [
+      "Creature — Cleric",
+      "All Walls able to block this creature do so.",
+      { affects: { scope: "self" }, mustBeBlockedBy: { by: { type: "creature", subtype: "Wall" }, all: true } },
+    ],
+    [
+      "Creature — Lizard",
+      "If this creature attacks, all creatures you control attack if able.",
+      { affects: { scope: "creatures-you-control" }, attacksIfAttacks: { isSource: true } },
+    ],
+    [
+      "Creature — Cyclops",
+      "If a creature you control attacks, this creature also attacks if able.",
+      { affects: { scope: "self" }, attacksIfAttacks: { type: "creature", controlledBy: "you" } },
+    ],
+    [
+      "Creature — Giant",
+      "Cowards can't block Warriors.",
+      {
+        affects: { scope: "filter", filter: { type: "creature", subtype: "Warrior" } },
+        cantBeBlockedBy: { subtype: "Coward" },
+      },
+    ],
+  ])("%s: %s", (type, text, expected) => {
+    expect(staticOf(type, text)).toEqual(expected);
+  });
+
+  it("reads 'each creature blocks this turn if able' as a rule for the turn", () => {
+    expect(parseEffect("Each creature your opponents control blocks this turn if able.", ctx()).effect).toEqual({
+      kind: "block-if-able",
+      filter: { type: "creature", controlledBy: "opponent" },
+    });
+    expect(parseEffect("Each creature blocks this turn if able.", ctx()).effect).toEqual({
+      kind: "block-if-able",
+      filter: { type: "creature" },
+    });
+  });
+});

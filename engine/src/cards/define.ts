@@ -548,6 +548,14 @@ export type CombatRestriction =
    * when they can — a requirement (rule 509.1c), weighed against the rest
    * as the declaration is checked. */
   | "must-be-blocked-if-able"
+  /** "Must be blocked by exactly one creature if able" (Nacatl War-Pride): a
+   * requirement (rule 509.1c) one blocker obeys and none or two don't. Menace
+   * or the like makes it impossible to obey, and so asks nothing. */
+  | "must-be-blocked-by-exactly-one"
+  /** "Can't be blocked by more than one creature" as a `restrict` gives it for
+   * the turn (Glorfindel, Dauntless Rescuer) — a restriction (rule 509.1b), the
+   * static form's `blockedByAtMostOne`. */
+  | "blocked-by-at-most-one"
   /** "Can't attack its owner" — the player only: a planeswalker its owner
    * controls may still be attacked (Alexios, Deimos of Kosmos's ruling;
    * rule 508.1b — a creature attacks a player *or* a planeswalker).
@@ -2235,6 +2243,23 @@ export interface StaticAbility {
    * it unblockable, and a declaration blocking it with only some is
    * illegal. */
   readonly blockedOnlyByAll?: boolean;
+  /** The affected creatures must be blocked by creatures matching `by`, a
+   * requirement (rule 509.1c) read as blocks are declared, the blocker matched
+   * from this permanent's controller's side. By one if able — Slayer's
+   * Cleaver's "must be blocked by an Eldrazi if able" (only one of them has
+   * to, and nothing's asked with none able) — or, with `all`, by every one
+   * able: Marble Priest's "all Walls able to block this creature do so". */
+  readonly mustBeBlockedBy?: { readonly by: CardFilter; readonly all?: true };
+  /** The affected creatures "attack if able" when a creature matching this is
+   * declared attacking beside them (rule 508.1d), so a requirement only the
+   * whole declaration can answer: Ekundu Cyclops's "if a creature you control
+   * attacks, this creature also attacks if able", Viashino Bey's "if this
+   * creature attacks, all creatures you control attack if able" (`{ isSource:
+   * true }`), War's Toll's "if a creature an opponent controls attacks, all
+   * creatures that opponent controls attack if able". Read from this
+   * permanent's controller's side. Only one player declares at a time, so the
+   * affected creatures and the one that attacks are always that player's. */
+  readonly attacksIfAttacks?: CardFilter;
   /**
    * A prohibition on casting and activating ("can't" beats "can" — rule
    * 101.2): `who` — `"opponents"`, `"you"` or `"each-player"`, from this

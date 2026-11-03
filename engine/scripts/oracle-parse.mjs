@@ -2984,6 +2984,17 @@ export function parseSentence(sentence, ctx) {
   if (re(`creatures your opponents control block this turn if able, and you choose how those creatures block`).test(s)) {
     return { kind: "choose-combat", blocks: "opponents", blockIfAble: true };
   }
+  // A rule for the turn over the blockers (rule 611.2c), not over who's there now.
+  if ((m = re(`each creature( your opponents control)? blocks this turn if able`).exec(s))) {
+    return { kind: "block-if-able", filter: { type: "creature", ...(m[1] !== undefined ? { controlledBy: "opponent" } : {}) } };
+  }
+  if ((m = re(`all creatures your opponents control able to block (~|${TARGET}) this turn do so`).exec(s))) {
+    return {
+      kind: "block-if-able",
+      filter: { type: "creature", controlledBy: "opponent" },
+      attacker: m[1] === "~" ? "source" : slot(m[1]),
+    };
+  }
   // "Skips their next untap step" (rule 614.10): the whole step.
   if (re(`you skip your next untap step`).test(s)) return { kind: "skip-untap-step", who: "you" };
   if (re(`each opponent skips their next untap step`).test(s)) return { kind: "skip-untap-step", who: "each-opponent" };
@@ -14499,6 +14510,38 @@ function parseStatic(line, text) {
     return { affects: { scope: "self" }, restrictions: ["must-attack", "must-block"], text };
   }
   if (line === "All creatures block each combat if able.") return { affects: { scope: "all-creatures" }, restrictions: ["must-block"], text };
+  // Requirements only the whole declaration can answer (rules 508.1d, 509.1c).
+  if (line === "~ must be blocked by exactly one creature if able.") {
+    return { affects: { scope: "self" }, restrictions: ["must-be-blocked-by-exactly-one"], text };
+  }
+  if ((m = /^(~|Equipped creature)(?: gets ([+-]\d+)\/([+-]\d+) and)? must be blocked by an? ([A-Z][a-z]+) if able\.$/.exec(line))) {
+    return {
+      affects: { scope: m[1] === "~" ? "self" : "attached" },
+      ...(m[2] !== undefined ? { grantPt: [Number(m[2]), Number(m[3])] } : {}),
+      mustBeBlockedBy: { by: { type: "creature", subtype: m[4] } },
+      text,
+    };
+  }
+  if ((m = /^All creatures with (flying|reach|defender) able to block ~ do so\.$/.exec(line))) {
+    return { affects: { scope: "self" }, mustBeBlockedBy: { by: { type: "creature", keyword: m[1] }, all: true }, text };
+  }
+  if ((m = /^All ([A-Z][a-z]+)s able to block ~ do so\.$/.exec(line))) {
+    return { affects: { scope: "self" }, mustBeBlockedBy: { by: { type: "creature", subtype: m[1] }, all: true }, text };
+  }
+  if (line === "If ~ attacks, all creatures you control attack if able.") {
+    return { affects: { scope: "creatures-you-control" }, attacksIfAttacks: { isSource: true }, text };
+  }
+  if (line === "If a creature you control attacks, ~ also attacks if able.") {
+    return { affects: { scope: "self" }, attacksIfAttacks: { type: "creature", controlledBy: "you" }, text };
+  }
+  // Boldwyr Intimidator: a rule over the two types, whoever controls them.
+  if ((m = /^([A-Z][a-z]+)s can't block ([A-Z][a-z]+)s\.$/.exec(line))) {
+    return {
+      affects: { scope: "filter", filter: { type: "creature", subtype: m[2] } },
+      cantBeBlockedBy: { subtype: m[1] },
+      text,
+    };
+  }
   // Menace's restriction with a larger N (rules 702.111b, 509.1b).
   if ((m = /^(~|Each creature you control with menace) can't be blocked except by (two|three|four|five|six) or more creatures\.$/.exec(line))) {
     const n = { two: 2, three: 3, four: 4, five: 5, six: 6 }[m[2]];
