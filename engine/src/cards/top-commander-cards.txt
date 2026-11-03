@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4230 already implemented / 770 missing (marks refreshed 2026-11-03)
+4235 already implemented / 765 missing (marks refreshed 2026-11-03)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -1630,7 +1630,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  1637  The Skullspore Nexus                     {6}{G}{G}        Legendary Artifact
 [x]  1638  Twenty-Toed Toad                         {3}{U}           Creature — Frog Wizard
 [x]  1639  Soul of the Harvest                      {4}{G}{G}        Creature — Elemental
-[ ]  1640  Druid Class                              {1}{G}           Enchantment — Class
+[x]  1640  Druid Class                              {1}{G}           Enchantment — Class
 [x]  1641  Traverse the Outlands                    {4}{G}           Sorcery
 [x]  1642  Felidar Sovereign                        {4}{W}{W}        Creature — Cat Beast
 [x]  1643  Trumpeting Carnosaur                     {4}{R}{R}        Creature — Dinosaur
@@ -1982,7 +1982,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1989  Ogre Slumlord                            {3}{B}{B}        Creature — Ogre Rogue
 [x]  1990  Thassa, God of the Sea                   {2}{U}           Legendary Enchantment Creature — God
 [x]  1991  Strength of the Harvest // Haven of the Harvest {3}              Enchantment — Aura // Land
-[ ]  1992  Grist, the Hunger Tide                   {1}{B}{G}        Legendary Planeswalker — Grist
+[x]  1992  Grist, the Hunger Tide                   {1}{B}{G}        Legendary Planeswalker — Grist
 [ ]  1993  Taunt from the Rampart                   {3}{R}{W}        Sorcery
 [x]  1994  Goldvein Pick                            {2}              Artifact — Equipment
 [x]  1995  Virtue of Persistence // Locthwain Scorn {5}{B}{B} // {1}{B} Enchantment // Sorcery — Adventure
@@ -2106,7 +2106,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2113  Psychic Frog                             {U}{B}           Creature — Frog
 [x]  2114  Cityscape Leveler                        {8}              Artifact Creature — Construct
 [ ]  2115  Kozilek's Command                        {X}{C}{C}        Kindred Instant — Eldrazi
-[ ]  2116  Oko, Thief of Crowns                     {1}{G}{U}        Legendary Planeswalker — Oko
+[x]  2116  Oko, Thief of Crowns                     {1}{G}{U}        Legendary Planeswalker — Oko
 [x]  2117  Perplexing Test                          {3}{U}{U}        Instant
 [x]  2118  Balmor, Battlemage Captain               {U}{R}           Legendary Creature — Bird Wizard
 [x]  2119  Basking Broodscale                       {1}{G}           Creature — Eldrazi Lizard
@@ -4014,7 +4014,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  4021  Solitary Confinement                     {2}{W}           Enchantment
 [x]  4022  Mana Echoes                              {2}{R}{R}        Enchantment
 [x]  4023  Akki Battle Squad                        {5}{R}           Creature — Goblin Samurai
-[ ]  4024  Open the Vaults                          {4}{W}{W}        Sorcery
+[x]  4024  Open the Vaults                          {4}{W}{W}        Sorcery
 [x]  4025  Selvala's Stampede                       {4}{G}{G}        Sorcery
 [ ]  4026  Tarrian's Journal // The Tomb of Aclazotz {2}              Legendary Artifact — Book // Legendary Land — Cave
 [x]  4027  Contaminant Grafter                      {4}{G}           Creature — Phyrexian Druid
@@ -4768,7 +4768,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4775  Sylvan Offering                          {X}{G}           Sorcery
 [ ]  4776  Faramir, Prince of Ithilien              {2}{W}{U}        Legendary Creature — Human Noble
 [x]  4777  Path of Annihilation                     {3}{G}           Enchantment
-[ ]  4778  Bringer of the Last Gift                 {6}{B}{B}        Creature — Vampire Demon
+[x]  4778  Bringer of the Last Gift                 {6}{B}{B}        Creature — Vampire Demon
 [x]  4779  Towering Titan                           {4}{G}{G}        Creature — Giant
 [x]  4780  Wojek Investigator                       {2}{W}           Creature — Angel Detective
 [ ]  4781  With Great Power . . .                   {3}{W}           Enchantment — Aura
