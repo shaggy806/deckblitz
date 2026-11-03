@@ -4464,6 +4464,16 @@ is "can't attack a player it has already attacked this turn" (Port Razer), by th
   would lose unspent mana, that mana becomes colorless instead": every unit
   that would empty stays as `{C}`, its restrictions and riders kept (the
   rulings).
+- `unspentManaBecomes: "B"` — Omnath, Locus of All's "that mana becomes black
+  instead" (Ozai's red): the same replacement to another type. Where several
+  would apply, one does (rule 616.1; the engine takes the newest).
+- `keepsUnspentManaEachPlayer: true` beside `keepsUnspentMana` — Upwelling's
+  "Players don't lose unspent mana as steps and phases end" (every type,
+  every player).
+- `manaLossCausesLifeLoss: true` — Yurlok of Scorch Thrash's "A player losing
+  unspent mana causes that player to lose that much life": as each step and
+  phase ends, every player loses 1 life per mana actually emptied (none for
+  what a keep or a "becomes" saved). Not damage.
 - `revealsFirstDrawEachTurn: true` — Keranos, God of Storms' "Reveal the first
   card you draw on each of your turns" (rule 701.16): shown to every player
   as it's drawn. Its "whenever you reveal a land card this way" is a `draws`
@@ -6126,6 +6136,22 @@ clause (section 9):
   and two against one leaves it with the two. `{ event: "would-draw", who: "you", instead: { draws: N } }` is "if
   you would draw a card, draw N cards instead" (gate it with the static's
   `condition`); neither applies again to the draws it makes (rule 614.5).
+  Several multiply (Thought Reflection twice is four). `exceptFirstInDrawStep:
+  true` on it passes by the first card you draw in each of your draw steps
+  (Teferi's Ageless Insight, Bard, King of Dale); `firstEachTurn: true` makes
+  it "the first time you would draw a card each turn" (Reed Richards,
+  Smartest Man, with both) — the turn's first draw event, read from the
+  turn's history (`PlayerState.wouldDrawThisTurn`), so one arriving after it
+  waits for the next turn, and at most one such applies to an event.
+  `{ event: "would-draw", who: "you", instead: { effect: <EffectSpec> } }` is a
+  draw replaced by an effect: Underrealm Lich's "instead look at the top three
+  cards of your library, then put one into your hand and the rest into your
+  graveyard" (a `look-and-choose`), Sages of the Anima's reveal-three,
+  Tomorrow, Azami's Familiar's. It applies though the library is empty (rule
+  614.11: no loss for it), the card isn't drawn (no draw trigger or count),
+  and each draw of several is finished, its choice answered, before the next
+  (614.11a). It takes the exemptions too, and is applied before a "draw N"
+  on the same draw. Its effect mustn't draw unless it's `firstEachTurn`.
   `{ event: "would-draw", who: "you", instead: "win-game", whileLibraryEmpty:
   true }` is Laboratory Maniac's "if you would draw a card while your library
   has no cards in it, you win the game instead" (rule 614.11: it applies

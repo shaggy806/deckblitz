@@ -12,6 +12,12 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **Unspent mana: another type, kept by every player, life lost** (2026-11-03, `679a2a9e9`): `unspentManaBecomes`,
+  `keepsUnspentManaEachPlayer`, `manaLossCausesLifeLoss` in the rule 500.4 emptying. Horizon Stone, Upwelling, Yurlok of
+  Scorch Thrash.
+- **A draw replaced by an effect, and draw-N exemptions** (2026-11-03, `6a50b3af9`): `would-draw`'s `instead: { effect }`
+  (rule 614.11) and `exceptFirstInDrawStep` / `firstEachTurn` on its replacements. Underrealm Lich, Tomorrow, Azami's
+  Familiar, Sages of the Anima, Teferi's Ageless Insight, Reed Richards, Smartest Man, Bard, King of Dale.
 - **Permanents controlled since the turn began** (2026-11-03, `a597195ef`): `CardFilter.controlledContinuously`, rule 302.6's
   test of any permanent, as a source condition, target or sacrifice. Rocket Launcher, Nettling Imp, Norritt, Keldon Twilight.
 - **A count of different mana costs** (2026-11-03, `257ed2665`): the `distinct` aggregate's `of: "mana-cost"`, and the mana

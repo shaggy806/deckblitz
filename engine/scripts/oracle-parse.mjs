@@ -13287,6 +13287,34 @@ function tokenReplacementOf(line, text, tokenFor) {
   return null;
 }
 
+/** A would-draw replacement's look or reveal at the top N cards, one (or
+ * every card of a type) into your hand and the rest into your graveyard or
+ * onto the bottom in any order: Underrealm Lich, Tomorrow, Azami's Familiar,
+ * Sages of the Anima. `null` for any other effect. */
+function drawInsteadLookOf(sentence) {
+  const m =
+    /^(Look at|Reveal) the top (\w+) cards of your library(?:, then|\.) [Pp]ut (one|all (.+?) cards revealed this way)(?: of (?:them|those cards))? into your hand and the rest (into your graveyard|on the bottom of your library in any order)\.$/.exec(
+      sentence,
+    );
+  if (m === null) return null;
+  const count = NUMBERS[m[2]];
+  if (count === undefined) return null;
+  const filter = m[4] !== undefined ? parseTypePhrase(m[4]) : undefined;
+  if (filter === null) return null;
+  const every = m[3].startsWith("all");
+  return {
+    kind: "look-and-choose",
+    zone: "library",
+    count,
+    ...(m[1] === "Reveal" ? { reveal: true } : {}),
+    min: every ? count : 1,
+    max: every ? count : 1,
+    ...(filter !== undefined ? { filter } : {}),
+    destination: "hand",
+    leftover: m[5] === "into your graveyard" ? "graveyard" : "bottom-any-order",
+  };
+}
+
 /**
  * A permanent that's a creature on its own terms, in the planeswalkers' words:
  * "During your turn, ~ is a 4/4 Human Soldier creature with indestructible
@@ -13614,6 +13642,67 @@ function parseStatic(line, text) {
       replacement: { event: "would-begin-turn", who: m[1] === "a player" ? "any" : "opponent", extraOnly: true },
       text,
     };
+  }
+  // Unspent mana as steps and phases end (rule 500.4): kept, of one colour
+  // (Leyline Tyrant) or by every player (Upwelling); turned into another type
+  // (Kruphix, Horizon Stone; Omnath, Locus of All); or costing life (Yurlok).
+  if ((m = /^You don't lose unspent (white|blue|black|red|green) mana as steps and phases end\.$/.exec(line))) {
+    return { affects: { scope: "self" }, keepsUnspentMana: [COLOR_WORD[m[1]]], text };
+  }
+  if (line === "Players don't lose unspent mana as steps and phases end.") {
+    return {
+      affects: { scope: "self" },
+      keepsUnspentMana: ["W", "U", "B", "R", "G", "C"],
+      keepsUnspentManaEachPlayer: true,
+      text,
+    };
+  }
+  if ((m = /^If you would lose unspent mana, that mana becomes (colorless|white|blue|black|red|green) instead\.$/.exec(line))) {
+    return m[1] === "colorless"
+      ? { affects: { scope: "self" }, unspentManaBecomesColorless: true, text }
+      : { affects: { scope: "self" }, unspentManaBecomes: COLOR_WORD[m[1]], text };
+  }
+  if (line === "A player losing unspent mana causes that player to lose that much life.") {
+    return { affects: { scope: "self" }, manaLossCausesLifeLoss: true, text };
+  }
+  // A would-draw replacement of your own (rule 614.1a, 614.11): "draw N cards
+  // instead" (Thought Reflection), "except the first one you draw in each of
+  // your draw steps" (Teferi's Ageless Insight), "the first time you would
+  // draw a card each turn" (Reed Richards, Smartest Man), or an effect
+  // instead of the draw (Underrealm Lich, Tomorrow, Azami's Familiar).
+  if (
+    (m =
+      /^(If you would draw a card|The first time you would draw a card each turn)( except the first (?:one|card) you draw (?:in|during) each of your draw steps)?, (?:you )?draw (two|three|four) cards instead\.$/.exec(
+        line,
+      ))
+  ) {
+    return {
+      affects: { scope: "self" },
+      replacement: {
+        event: "would-draw",
+        who: "you",
+        instead: { draws: NUMBERS[m[3]] },
+        ...(m[2] !== undefined ? { exceptFirstInDrawStep: true } : {}),
+        ...(m[1].startsWith("The first time") ? { firstEachTurn: true } : {}),
+      },
+      text,
+    };
+  }
+  if (
+    (m = /^If you would draw a card, instead (.+)$/.exec(line)) ??
+    (m = /^If you would draw a card, (.+?) instead\.( .+)?$/.exec(line))
+  ) {
+    const body = m[2] !== undefined ? `${m[1]}.${m[2]}` : m[1];
+    const sentence = body.charAt(0).toUpperCase() + body.slice(1);
+    const effect = drawInsteadLookOf(sentence) ?? parseEffect(sentence, { targets: [] });
+    const parsed = "kind" in effect ? { effect, todo: [] } : effect;
+    if (parsed.effect !== null && parsed.todo.length === 0) {
+      return {
+        affects: { scope: "self" },
+        replacement: { event: "would-draw", who: "you", instead: { effect: parsed.effect } },
+        text,
+      };
+    }
   }
   if (line === "Enchanted player can't gain life.") {
     return { affects: { scope: "self" }, replacement: { event: "would-gain-life", who: "enchanted-player", prevent: true }, text };

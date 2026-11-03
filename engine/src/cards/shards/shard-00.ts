@@ -819,6 +819,7 @@ import _poolUnstableObelisk from "../pool/unstable-obelisk.js";
 import _poolUnstoppableSlasher from "../pool/unstoppable-slasher.js";
 import _poolUnwillingRecruit from "../pool/unwilling-recruit.js";
 import _poolUnwindHistory from "../pool/unwind-history.js";
+import _poolUpwelling from "../pool/upwelling.js";
 import _poolUrDrago from "../pool/ur-drago.js";
 import _poolUreniOfTheUnwritten from "../pool/ureni-of-the-unwritten.js";
 import _poolUthdenTroll from "../pool/uthden-troll.js";
@@ -1725,6 +1726,7 @@ const shard: CardShard = {
     _poolUnstoppableSlasher,
     _poolUnwillingRecruit,
     _poolUnwindHistory,
+    _poolUpwelling,
     _poolUrDrago,
     _poolUreniOfTheUnwritten,
     _poolUthdenTroll,

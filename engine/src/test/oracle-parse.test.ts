@@ -4807,7 +4807,9 @@ describe("block limits, lost abilities and chosen types (B249)", () => {
 });
 
 describe("agreement with the hand-authored pool", () => {
-  it("every ability the parser claims complete matches the authored one", () => {
+  // The whole pool, parsed: ~30 s on a 4-core cloud session by 2026-11-03,
+  // past the suite's default timeout, and growing with the pool.
+  it("every ability the parser claims complete matches the authored one", { timeout: 180_000 }, () => {
     const { stats, mismatches } = checkPool(POOL_CARDS);
     expect(stats.claimed).toBeGreaterThan(400);
     expect(mismatches.map((m: { card: string; text: string }) => `${m.card}: ${m.text}`)).toEqual([]);
@@ -9621,6 +9623,67 @@ describe("a static acting on a player", () => {
     const opponents = face("Enchantment", "If an opponent would begin an extra turn, that player skips that turn instead.");
     expect(opponents.complete).toBe(true);
     expect(opponents.static[0].replacement).toEqual({ event: "would-begin-turn", who: "opponent", extraOnly: true });
+  });
+
+  it("reads a would-draw replacement: draw N, its exemptions, an effect instead (rule 614.11)", () => {
+    const insight = face(
+      "Legendary Enchantment",
+      "If you would draw a card except the first one you draw in each of your draw steps, draw two cards instead.",
+    );
+    expect(insight.complete).toBe(true);
+    expect(insight.static[0].replacement).toEqual({ event: "would-draw", who: "you", instead: { draws: 2 }, exceptFirstInDrawStep: true });
+    const reed = face(
+      "Legendary Creature",
+      "The first time you would draw a card each turn except the first card you draw during each of your draw steps, you draw four cards instead.",
+    );
+    expect(reed.complete).toBe(true);
+    expect(reed.static[0].replacement).toEqual({
+      event: "would-draw",
+      who: "you",
+      instead: { draws: 4 },
+      exceptFirstInDrawStep: true,
+      firstEachTurn: true,
+    });
+    const lich = face(
+      "Creature",
+      "If you would draw a card, instead look at the top three cards of your library, then put one into your hand and the rest into your graveyard.",
+    );
+    expect(lich.complete).toBe(true);
+    expect(lich.static[0].replacement).toEqual({
+      event: "would-draw",
+      who: "you",
+      instead: {
+        effect: { kind: "look-and-choose", zone: "library", count: 3, min: 1, max: 1, destination: "hand", leftover: "graveyard" },
+      },
+    });
+    const tomorrow = face(
+      "Legendary Creature",
+      "If you would draw a card, look at the top three cards of your library instead. Put one of those cards into your hand and the rest on the bottom of your library in any order.",
+    );
+    expect(tomorrow.complete).toBe(true);
+    expect(tomorrow.static[0].replacement).toEqual({
+      event: "would-draw",
+      who: "you",
+      instead: {
+        effect: { kind: "look-and-choose", zone: "library", count: 3, min: 1, max: 1, destination: "hand", leftover: "bottom-any-order" },
+      },
+    });
+  });
+
+  it("reads what happens to unspent mana as steps and phases end (rule 500.4)", () => {
+    const stone = face("Artifact", "If you would lose unspent mana, that mana becomes colorless instead.");
+    expect(stone.complete).toBe(true);
+    expect(stone.static[0].unspentManaBecomesColorless).toBe(true);
+    const omnath = face("Legendary Creature", "If you would lose unspent mana, that mana becomes black instead.");
+    expect(omnath.static[0].unspentManaBecomes).toBe("B");
+    const upwelling = face("Enchantment", "Players don't lose unspent mana as steps and phases end.");
+    expect(upwelling.complete).toBe(true);
+    expect(upwelling.static[0]).toMatchObject({ keepsUnspentMana: ["W", "U", "B", "R", "G", "C"], keepsUnspentManaEachPlayer: true });
+    const tyrant = face("Creature", "You don't lose unspent red mana as steps and phases end.");
+    expect(tyrant.static[0].keepsUnspentMana).toEqual(["R"]);
+    const yurlok = face("Legendary Creature", "A player losing unspent mana causes that player to lose that much life.");
+    expect(yurlok.complete).toBe(true);
+    expect(yurlok.static[0].manaLossCausesLifeLoss).toBe(true);
   });
 
   it("reads Abyssal Persecutor's inverse pair", () => {

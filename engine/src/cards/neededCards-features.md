@@ -321,6 +321,28 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Unspent mana as steps and phases end: another type, every player's kept, life lost — built 2026-11-03
+
+`replacement:mana-pool-emptying` (family `replacement:mana-pool-emptying`): `unspentManaBecomes` (Kruphix's
+replacement to a colour — Omnath, Locus of All, Ozai), `keepsUnspentManaEachPlayer` (Upwelling) and
+`manaLossCausesLifeLoss` (Yurlok of Scorch Thrash), in the rule 500.4 pool emptying. Proving cards: Horizon Stone,
+Upwelling, Yurlok of Scorch Thrash. Still open: `replacement:mana-persistence-color` (The Last Agni Kai's one-shot
+"until end of turn, you don't lose unspent red mana" beside its excess-fight-damage mana).
+
+### A draw replaced by an effect, and draw-N exemptions — built 2026-11-03
+
+`replacement:draw-replacement-look-and-choose`, `replacement:draw-replacement-except-first`,
+`replacement:draw-replacement-first-each-turn` (family `replacement:new-event-replacements`).
+`would-draw`'s `instead: { effect }` (rule 614.11, 614.11a: each draw of several replaced and
+answered before the next, applied on an empty library), and `exceptFirstInDrawStep` /
+`firstEachTurn` on `draws` and `effect` replacements, the turn's draw events kept in
+`PlayerState.wouldDrawThisTurn`. Proving cards: Underrealm Lich, Tomorrow, Azami's Familiar,
+Sages of the Anima, Teferi's Ageless Insight, Reed Richards, Smartest Man, Bard, King of Dale.
+Still open in the group: `replacement:draw-replacement-reveal` (Abundance's optional
+land-or-nonland reveal, Breathstealer's Crypt's draw-and-reveal, the play-with-hand-revealed
+pair). Scion of Halaster needs its replacement granted to commander creatures; Aladdin's Lamp a
+one-shot "the next time you would draw" shield.
+
 ### An exile's end as a parameter — built 2026-11-01
 
 The need-keys group `effect:exile-from-hand-until-source-leaves` +

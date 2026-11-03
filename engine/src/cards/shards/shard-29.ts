@@ -342,6 +342,7 @@ import _poolHinterlandHermit from "../pool/hinterland-hermit.js";
 import _poolHithlainKnots from "../pool/hithlain-knots.js";
 import _poolHobbitHole from "../pool/hobbit-hole.js";
 import _poolHorizonSeed from "../pool/horizon-seed.js";
+import _poolHorizonStone from "../pool/horizon-stone.js";
 import _poolHowToStartARiot from "../pool/how-to-start-a-riot.js";
 import _poolHowlersHeavy from "../pool/howlers-heavy.js";
 import _poolHulkingBugbear from "../pool/hulking-bugbear.js";
@@ -1238,6 +1239,7 @@ const shard: CardShard = {
     _poolHithlainKnots,
     _poolHobbitHole,
     _poolHorizonSeed,
+    _poolHorizonStone,
     _poolHowToStartARiot,
     _poolHowlersHeavy,
     _poolHulkingBugbear,
