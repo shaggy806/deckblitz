@@ -96,7 +96,8 @@ export function scryAway(
       continue;
     }
     const name = rulesTextName(state.objects[id]);
-    if (registry.has(name) && (registry.get(name).activated ?? []).some(isManaAbility)) manaRocks += 1;
+    // Only what it makes from here: a Spirit Guide's works from the hand.
+    if (registry.has(name) && (registry.get(name).activated ?? []).some((a) => a.zone === undefined && isManaAbility(a))) manaRocks += 1;
   }
   // Lands in hand count as made: toward the lands wanted, and for the
   // colours they'll make once played.

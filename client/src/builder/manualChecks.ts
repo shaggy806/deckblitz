@@ -10069,6 +10069,14 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
         gy: ['Cult Healer', 'Grizzly Bears'],
         lib: ['Doctor Jane Foster', 'Forest'],
       },
+  preset(
+    'Simian Spirit Guide: exile it from your hand for {R}, then cast with the mana',
+    board({ you: { hand: ['Simian Spirit Guide', 'Raging Goblin'] } }),
+  ),
+  preset(
+    "Jack-o'-Lantern: exile it from your graveyard for one mana of any color",
+    board({
+      you: { bf: ['Wastes'], gy: ["Jack-o'-Lantern"], hand: ['Savannah Lions'] },
       opp: [{}, {}, {}],
     }),
   ),
@@ -10082,5 +10090,7 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       },
       opp: [{}, {}, {}],
     }),
+    'Rubble Rouser: choose the card to exile, then the mana and the damage',
+    board({ you: { bf: ['Rubble Rouser'], gy: ['Grizzly Bears', 'Goblin Piker'] } }),
   ),
 ]

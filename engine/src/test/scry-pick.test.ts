@@ -45,6 +45,18 @@ describe("scry and surveil picks", () => {
     expect(away(game, [titan])).toEqual([titan]);
   });
 
+  it("counts a mana creature toward reaching a spell, not a Spirit Guide's mana from the hand", () => {
+    const guided = board(3);
+    guided.debugSpawn("Elvish Spirit Guide", A, "battlefield");
+    const titan = guided.debugSpawn("Avenger of Zendikar", A, "library");
+    expect(away(guided, [titan])).toEqual([titan]);
+
+    const elves = board(3);
+    elves.debugSpawn("Llanowar Elves", A, "battlefield");
+    const reached = elves.debugSpawn("Avenger of Zendikar", A, "library");
+    expect(away(elves, [reached])).toEqual([]);
+  });
+
   it("sends a colour it can't make away sooner, unless a land for it is in hand", () => {
     const game = board(3, ["U", "G"]);
     const sphinx = game.debugSpawn("Windreader Sphinx", A, "library");

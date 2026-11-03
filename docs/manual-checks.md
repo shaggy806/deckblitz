@@ -6687,3 +6687,20 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 - **Do:** Play your Mountain. As the trigger resolves, click "Search your hand and library" and choose a Balefire Dragon.
 - **Expect:** Last Light goes to your graveyard first. Three choices are offered: "Search your hand and library", "Search your hand", "Search your library". The popup shows both Dragons, one from your hand and one from your library; the one you choose enters, and your library is shuffled.
+## Mana abilities away from the battlefield (2026-11-03)
+
+### Simian Spirit Guide: exile it from your hand for {R}, then cast with the mana
+
+- **Do:** Press "Exile this card from your hand" on Simian Spirit Guide in your hand. Cast Raging Goblin.
+- **Expect:** The Guide goes to exile, nothing goes on the stack and {R} is in your pool. Raging Goblin then casts with that mana.
+- **Not a bug:** Casting Raging Goblin first isn't offered: mana from your hand is never spent for you, so press the button first.
+
+### Jack-o'-Lantern: exile it from your graveyard for one mana of any color
+
+- **Do:** Open your graveyard, press "Activate" on Jack-o'-Lantern, and choose the white one of its five options. Cast Savannah Lions.
+- **Expect:** The menu offers each of the five colors. The Wastes taps, the Jack goes to exile, nothing goes on the stack and {W} is in your pool. Savannah Lions then casts with it.
+
+### Rubble Rouser: choose the card to exile, then the mana and the damage
+
+- **Do:** Click Rubble Rouser and press its "Exile a card from your graveyard" ability. Choose Goblin Piker.
+- **Expect:** You're asked which card before any mana comes. Goblin Piker goes to exile and Grizzly Bears stays. {R} is in your pool at once, then an ability on the stack deals 1 damage to Bob when it resolves.

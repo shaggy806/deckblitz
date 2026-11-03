@@ -113,6 +113,8 @@ describe("a mana ability from the graveyard", () => {
     const jack = toGraveyard(game, "Jack-o'-Lantern");
     const offered = offers(game, jack, 1);
     expect(offered.every((o) => o.manaAbility === true)).toBe(true);
+    // Offered once per colour: the choice is the player's (the live check found this).
+    expect(offered.map((o) => o.manaColors)).toEqual([["W"], ["U"], ["B"], ["R"], ["G"]]);
     game.dispatch({ type: "activate-ability", player: A, source: jack, abilityIndex: 1, targets: [], manaColors: ["U"] });
     settle(game);
     expect(zone(game, jack)).toBe("exile");

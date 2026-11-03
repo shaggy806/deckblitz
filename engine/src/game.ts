@@ -3668,7 +3668,17 @@ export class Game {
         if (onlySource !== undefined && card !== onlySource) continue;
         const def = this.registry.get(this.state.objects[card].cardName);
         this.effectiveActivated(card).forEach((ability, index) => {
-          if (ability.zone === zone) pushActivateAbility(card, def.name, ability, index);
+          if (ability.zone !== zone) return;
+          // A mana ability's outcomes one by one, as a permanent's are above
+          // (Jack-o'-Lantern's "one mana of any color").
+          const variants = this.standaloneManaVariants(card, ability, player);
+          if (variants === null) {
+            pushActivateAbility(card, def.name, ability, index);
+            return;
+          }
+          for (const variant of variants) {
+            pushActivateAbility(card, def.name, ability, index, variant.manaColors, variant.makes, variant.manaSplit);
+          }
         });
       }
     }
