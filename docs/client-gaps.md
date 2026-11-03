@@ -209,17 +209,6 @@ title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLET
   forced-layout call stacks) on a `vite preview` build, mapped through a `vite build
   --sourcemap` copy (trace call frames are 1-based). The laptop's own Chrome can be driven
   through Claude in Chrome (it's "Browser 2" there) with an in-page probe, no build needed.
-- **Two tutorials: how to play Commander, and how to use the site** (the user, 2026-10-11/12).
-  The plan is `docs/plans/tutorials.md`: a coach-mark overlay (`client/src/tutorial/`, `data-tour`
-  anchors, progress in `localStorage`, a "?" button in the corner toolbar), and a production-safe
-  tutorial room (games held on the server by id, a scripted name-based opponent promoted from
-  dev-rooms' `ScriptedBot`, goals checked from the event log). The user's decisions (2026-10-13):
-  one or two seeded games with lessons as chapters, custom decks, blocking clicks, a first-visit
-  callout, a friendly voice. **Built 2026-10-13** (plan phases 1-2): the overlay and site tour,
-  the tutorial room (`server/src/tutorial-session.ts`, `server/src/tutorials/`,
-  `server/src/scripted-bot.ts`), and Learn Commander's first game (2026-11-02,
-  `server/src/tutorials/learn-commander.ts`). Left: game 2, Commander's own rules (a commander
-  dying and being recast with tax, commander damage, instants and the stack, a table of three).
 
 **A cast copy logs as "a card"**
 

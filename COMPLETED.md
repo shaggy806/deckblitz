@@ -2684,7 +2684,11 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
   has never played, won on turn 7 (`learn-commander`, replacing the proof lesson), which can't be
   soft-locked (a scripted lesson offers only what its card asks for) and holds still under a card
   being read, with Back, the hand raised for cards about it, a seat reading "You", and a first real
-  game on a starter deck at the end. Game 2, Commander's own rules, is still open.
+  game on a starter deck at the end.
+- **Learn Commander's second game, Commander's own rules** (2026-11-03: 1df847d6, 45445909): a game joined on turn 9 at
+  a table of three, won on turn 15 (`commander-rules`): whom to attack, a commander dying and coming
+  back with tax, an instant in response on the stack, and 21 commander damage with life left. The
+  attack banner's Clear now clears an attack already pointed at someone, in every game.
 - **An opponent's whole board takes the attack click** (2026-11-02): not only their panel, once attackers
   wait for a defender. A legal planeswalker or battle is still attacked itself, and one those attackers can't
   attack is no click on its controller (`e2e/attack-board-click.spec.ts`).

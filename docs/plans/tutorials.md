@@ -1,10 +1,10 @@
 # Tutorials
 
-Status: **in progress** (planned 2026-10-12; the user's answers 2026-10-13). Build order
+Status: **built** (planned 2026-10-12; the user's answers 2026-10-13; finished 2026-11-03). Build order
 phases 1 and 2 are built (2026-10-13): the overlay with the site tour, and the tutorial room.
 Phase 3's in-game stops were built as the board tour (2026-10-13), when the site tour was cut down
 to the front page. Phase 4's first game is built (2026-11-02): `learn-commander`, whose as-built
-notes are below, replacing the proof lesson. Next: game 2, Commander's own rules. The user's decisions
+notes are below, replacing the proof lesson, and so is game 2, `commander-rules`. The user's decisions
 are recorded at the end and shape everything above them; "As built" below records where the
 build departed from this plan.
 
@@ -262,6 +262,23 @@ detail):
   pointed at may have moved on.
 - **The way on** is a real game on a starter deck against the plain precons, not a blitz's upgraded
   ones, for someone with no decklist.
+
+## As built: the second game (2026-11-03)
+
+- **A game joined on turn 9, at a table of three**, won on turn 15 in six chapters
+  (`server/src/tutorials/commander-rules.ts`). It starts partway through because 21 commander damage
+  from nothing is three hits and a recast is a death: played from turn 1, it would be a long game
+  about the wrong things. The commander's 7 power makes 21 exactly three hits, and Rowan goes out on
+  16 life, which is the point.
+- **Choosing a defender stays a choice**: narrowing the offer to the right player would have the
+  client send attackers there unasked. So the offer stays whole, and the banner's button only
+  confirms the right answer (`TutorialAllows.attackAt`), saying so when it's wrong.
+- **What the walk found**: the attack banner's Clear only cleared creatures still waiting for a
+  defender, so an attack sent at the wrong player had no obvious undo (it now clears the attack, in
+  every game); a spell on the stack couldn't be pointed at (stack entries carry `data-stack-id`, so
+  `objectSelectors` looks there too); and a card beside the first creature can cover the next, so an
+  attack's card sits beside the last on the board, which moves once a commander has come back.
+- **The first game's last card leads here**, and this one's leads to a real game.
 
 ## The user's decisions (2026-10-13)
 
