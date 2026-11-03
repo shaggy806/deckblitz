@@ -771,6 +771,7 @@ import _poolTenaciousDead from "../pool/tenacious-dead.js";
 import _poolTendershootDryad from "../pool/tendershoot-dryad.js";
 import _poolTerritoryForge from "../pool/territory-forge.js";
 import _poolTheBloodskyMassacre from "../pool/the-bloodsky-massacre.js";
+import _poolTheCreationOfAvacyn from "../pool/the-creation-of-avacyn.js";
 import _poolTheDestinedThief from "../pool/the-destined-thief.js";
 import _poolTheMastersOfEvil from "../pool/the-masters-of-evil.js";
 import _poolTheMindskinner from "../pool/the-mindskinner.js";
@@ -1668,6 +1669,7 @@ const shard: CardShard = {
     _poolTendershootDryad,
     _poolTerritoryForge,
     _poolTheBloodskyMassacre,
+    _poolTheCreationOfAvacyn,
     _poolTheDestinedThief,
     _poolTheMastersOfEvil,
     _poolTheMindskinner,

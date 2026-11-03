@@ -94,6 +94,7 @@ import _poolBloodthornTaunter from "../pool/bloodthorn-taunter.js";
 import _poolBloodthroneVampire from "../pool/bloodthrone-vampire.js";
 import _poolBogRaiders from "../pool/bog-raiders.js";
 import _poolBoggartMob from "../pool/boggart-mob.js";
+import _poolBomatCourier from "../pool/bomat-courier.js";
 import _poolBoonOfTheSpiritRealm from "../pool/boon-of-the-spirit-realm.js";
 import _poolBornToDrive from "../pool/born-to-drive.js";
 import _poolBottomlessPool from "../pool/bottomless-pool.js";
@@ -447,6 +448,7 @@ import _poolKarplusanForest from "../pool/karplusan-forest.js";
 import _poolKathariScreecher from "../pool/kathari-screecher.js";
 import _poolKavuAggressor from "../pool/kavu-aggressor.js";
 import _poolKavuPredator from "../pool/kavu-predator.js";
+import _poolKaylasMusicBox from "../pool/kaylas-music-box.js";
 import _poolKazanduRefuge from "../pool/kazandu-refuge.js";
 import _poolKazanduStomper from "../pool/kazandu-stomper.js";
 import _poolKellansLightblades from "../pool/kellans-lightblades.js";
@@ -1036,6 +1038,7 @@ const shard: CardShard = {
     _poolBloodthroneVampire,
     _poolBogRaiders,
     _poolBoggartMob,
+    _poolBomatCourier,
     _poolBoonOfTheSpiritRealm,
     _poolBornToDrive,
     _poolBottomlessPool,
@@ -1389,6 +1392,7 @@ const shard: CardShard = {
     _poolKathariScreecher,
     _poolKavuAggressor,
     _poolKavuPredator,
+    _poolKaylasMusicBox,
     _poolKazanduRefuge,
     _poolKazanduStomper,
     _poolKellansLightblades,

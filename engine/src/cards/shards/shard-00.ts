@@ -434,6 +434,7 @@ import _poolLiftedByClouds from "../pool/lifted-by-clouds.js";
 import _poolLightningAngel from "../pool/lightning-angel.js";
 import _poolLightningMare from "../pool/lightning-mare.js";
 import _poolLightningRift from "../pool/lightning-rift.js";
+import _poolLightstallInquisitor from "../pool/lightstall-inquisitor.js";
 import _poolLlanowarEmpath from "../pool/llanowar-empath.js";
 import _poolLluwenExchangeStudent from "../pool/lluwen-exchange-student.js";
 import _poolLoseFocus from "../pool/lose-focus.js";
@@ -558,6 +559,7 @@ import _poolPurgatory from "../pool/purgatory.js";
 import _poolPurgeTheProfane from "../pool/purge-the-profane.js";
 import _poolPushPull from "../pool/push-pull.js";
 import _poolPutridCyclops from "../pool/putrid-cyclops.js";
+import _poolPyxisOfPandemonium from "../pool/pyxis-of-pandemonium.js";
 import _poolQuakestriderCeratops from "../pool/quakestrider-ceratops.js";
 import _poolQuickeningLicid from "../pool/quickening-licid.js";
 import _poolQuietPurity from "../pool/quiet-purity.js";
@@ -1332,6 +1334,7 @@ const shard: CardShard = {
     _poolLightningAngel,
     _poolLightningMare,
     _poolLightningRift,
+    _poolLightstallInquisitor,
     _poolLlanowarEmpath,
     _poolLluwenExchangeStudent,
     _poolLoseFocus,
@@ -1456,6 +1459,7 @@ const shard: CardShard = {
     _poolPurgeTheProfane,
     _poolPushPull,
     _poolPutridCyclops,
+    _poolPyxisOfPandemonium,
     _poolQuakestriderCeratops,
     _poolQuickeningLicid,
     _poolQuietPurity,

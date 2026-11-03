@@ -456,6 +456,7 @@ import _poolKnightOfDawnsLight from "../pool/knight-of-dawns-light.js";
 import _poolKnightOfInfamy from "../pool/knight-of-infamy.js";
 import _poolKnightOfTheKeep from "../pool/knight-of-the-keep.js";
 import _poolKnightsOfThorn from "../pool/knights-of-thorn.js";
+import _poolKnowledgeVault from "../pool/knowledge-vault.js";
 import _poolKothophedSoulHoarder from "../pool/kothophed-soul-hoarder.js";
 import _poolKrovikanFetish from "../pool/krovikan-fetish.js";
 import _poolKykarWindsFury from "../pool/kykar-winds-fury.js";
@@ -551,6 +552,7 @@ import _poolNetworkTerminal from "../pool/network-terminal.js";
 import _poolNewBenalia from "../pool/new-benalia.js";
 import _poolNezumiRonin from "../pool/nezumi-ronin.js";
 import _poolNighthawkDarkDefender from "../pool/nighthawk-dark-defender.js";
+import _poolNightveilSpecter from "../pool/nightveil-specter.js";
 import _poolNightwingShade from "../pool/nightwing-shade.js";
 import _poolNihilSpellbomb from "../pool/nihil-spellbomb.js";
 import _poolNimbleTrapfinder from "../pool/nimble-trapfinder.js";
@@ -1377,6 +1379,7 @@ const shard: CardShard = {
     _poolKnightOfInfamy,
     _poolKnightOfTheKeep,
     _poolKnightsOfThorn,
+    _poolKnowledgeVault,
     _poolKothophedSoulHoarder,
     _poolKrovikanFetish,
     _poolKykarWindsFury,
@@ -1472,6 +1475,7 @@ const shard: CardShard = {
     _poolNewBenalia,
     _poolNezumiRonin,
     _poolNighthawkDarkDefender,
+    _poolNightveilSpecter,
     _poolNightwingShade,
     _poolNihilSpellbomb,
     _poolNimbleTrapfinder,

@@ -159,6 +159,7 @@ import _poolCouncilOfReeds from "../pool/council-of-reeds.js";
 import _poolCounselOfTheSoratami from "../pool/counsel-of-the-soratami.js";
 import _poolCoursersAccord from "../pool/coursers-accord.js";
 import _poolCourtArchers from "../pool/court-archers.js";
+import _poolCourtOfLocthwain from "../pool/court-of-locthwain.js";
 import _poolCowardKiller from "../pool/coward-killer.js";
 import _poolCowerInFear from "../pool/cower-in-fear.js";
 import _poolCragsmasherYeti from "../pool/cragsmasher-yeti.js";
@@ -1062,6 +1063,7 @@ const shard: CardShard = {
     _poolCounselOfTheSoratami,
     _poolCoursersAccord,
     _poolCourtArchers,
+    _poolCourtOfLocthwain,
     _poolCowardKiller,
     _poolCowerInFear,
     _poolCragsmasherYeti,

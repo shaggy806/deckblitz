@@ -581,6 +581,7 @@ import _poolRedHulk from "../pool/red-hulk.js";
 import _poolRedManaBattery from "../pool/red-mana-battery.js";
 import _poolRegalBunnicorn from "../pool/regal-bunnicorn.js";
 import _poolRegalImperiosaur from "../pool/regal-imperiosaur.js";
+import _poolReleaseToTheWind from "../pool/release-to-the-wind.js";
 import _poolRelentlessHunter from "../pool/relentless-hunter.js";
 import _poolRelicsRoar from "../pool/relics-roar.js";
 import _poolRepeatingBarrage from "../pool/repeating-barrage.js";
@@ -1468,6 +1469,7 @@ const shard: CardShard = {
     _poolRedManaBattery,
     _poolRegalBunnicorn,
     _poolRegalImperiosaur,
+    _poolReleaseToTheWind,
     _poolRelentlessHunter,
     _poolRelicsRoar,
     _poolRepeatingBarrage,

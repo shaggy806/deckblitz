@@ -727,6 +727,7 @@ import _poolSokkasHaiku from "../pool/sokkas-haiku.js";
 import _poolSoldierOfThePantheon from "../pool/soldier-of-the-pantheon.js";
 import _poolSolidFooting from "../pool/solid-footing.js";
 import _poolSoulOfTheros from "../pool/soul-of-theros.js";
+import _poolSoulPartition from "../pool/soul-partition.js";
 import _poolSoulShred from "../pool/soul-shred.js";
 import _poolSparringRegimen from "../pool/sparring-regimen.js";
 import _poolSpawningGrounds from "../pool/spawning-grounds.js";
@@ -1651,6 +1652,7 @@ const shard: CardShard = {
     _poolSoldierOfThePantheon,
     _poolSolidFooting,
     _poolSoulOfTheros,
+    _poolSoulPartition,
     _poolSoulShred,
     _poolSparringRegimen,
     _poolSpawningGrounds,

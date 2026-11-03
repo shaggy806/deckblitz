@@ -607,6 +607,7 @@ import _poolRogueClass from "../pool/rogue-class.js";
 import _poolRoilingDragonstorm from "../pool/roiling-dragonstorm.js";
 import _poolRollingHamsphere from "../pool/rolling-hamsphere.js";
 import _poolRomanticRendezvous from "../pool/romantic-rendezvous.js";
+import _poolRonaDiscipleOfGix from "../pool/rona-disciple-of-gix.js";
 import _poolRowdyResearch from "../pool/rowdy-research.js";
 import _poolRoyalAssassin from "../pool/royal-assassin.js";
 import _poolRoyalWarden from "../pool/royal-warden.js";
@@ -718,6 +719,7 @@ import _poolSunderingVitae from "../pool/sundering-vitae.js";
 import _poolSunkenField from "../pool/sunken-field.js";
 import _poolSupremeInquisitor from "../pool/supreme-inquisitor.js";
 import _poolSurgingMight from "../pool/surging-might.js";
+import _poolSuspendAggression from "../pool/suspend-aggression.js";
 import _poolSuspiciousStowaway from "../pool/suspicious-stowaway.js";
 import _poolSweepTheSkies from "../pool/sweep-the-skies.js";
 import _poolSynthInfiltrator from "../pool/synth-infiltrator.js";
@@ -1462,6 +1464,7 @@ const shard: CardShard = {
     _poolRoilingDragonstorm,
     _poolRollingHamsphere,
     _poolRomanticRendezvous,
+    _poolRonaDiscipleOfGix,
     _poolRowdyResearch,
     _poolRoyalAssassin,
     _poolRoyalWarden,
@@ -1573,6 +1576,7 @@ const shard: CardShard = {
     _poolSunkenField,
     _poolSupremeInquisitor,
     _poolSurgingMight,
+    _poolSuspendAggression,
     _poolSuspiciousStowaway,
     _poolSweepTheSkies,
     _poolSynthInfiltrator,

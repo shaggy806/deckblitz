@@ -343,6 +343,7 @@ import _poolInsatiableHarpy from "../pool/insatiable-harpy.js";
 import _poolInspiringVeteran from "../pool/inspiring-veteran.js";
 import _poolInsubordination from "../pool/insubordination.js";
 import _poolInsufferableBalladeer from "../pool/insufferable-balladeer.js";
+import _poolIntellectDevourer from "../pool/intellect-devourer.js";
 import _poolInundate from "../pool/inundate.js";
 import _poolInvasionOfZendikar from "../pool/invasion-of-zendikar.js";
 import _poolInvokeDespair from "../pool/invoke-despair.js";
@@ -1209,6 +1210,7 @@ const shard: CardShard = {
     _poolInspiringVeteran,
     _poolInsubordination,
     _poolInsufferableBalladeer,
+    _poolIntellectDevourer,
     _poolInundate,
     _poolInvasionOfZendikar,
     _poolInvokeDespair,

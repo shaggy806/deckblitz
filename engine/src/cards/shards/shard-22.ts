@@ -211,6 +211,7 @@ import _poolEject from "../pool/eject.js";
 import _poolElectryte from "../pool/electryte.js";
 import _poolElementalMasterpiece from "../pool/elemental-masterpiece.js";
 import _poolElephantGrass from "../pool/elephant-grass.js";
+import _poolEliteSpellbinder from "../pool/elite-spellbinder.js";
 import _poolElvishFury from "../pool/elvish-fury.js";
 import _poolEmbargo from "../pool/embargo.js";
 import _poolEmeriaShatteredSkyclave from "../pool/emeria-shattered-skyclave.js";
@@ -1113,6 +1114,7 @@ const shard: CardShard = {
     _poolElectryte,
     _poolElementalMasterpiece,
     _poolElephantGrass,
+    _poolEliteSpellbinder,
     _poolElvishFury,
     _poolEmbargo,
     _poolEmeriaShatteredSkyclave,

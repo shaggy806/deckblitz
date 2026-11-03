@@ -313,6 +313,7 @@ import _poolGodsHallGuardian from "../pool/gods-hall-guardian.js";
 import _poolGokaTheUnjust from "../pool/goka-the-unjust.js";
 import _poolGoldenDemise from "../pool/golden-demise.js";
 import _poolGoldmeadowDodger from "../pool/goldmeadow-dodger.js";
+import _poolGontiLordOfLuxury from "../pool/gonti-lord-of-luxury.js";
 import _poolGormaTheGullet from "../pool/gorma-the-gullet.js";
 import _poolGoroGoroDiscipleOfRyusei from "../pool/goro-goro-disciple-of-ryusei.js";
 import _poolGraniteShard from "../pool/granite-shard.js";
@@ -1164,6 +1165,7 @@ const shard: CardShard = {
     _poolGokaTheUnjust,
     _poolGoldenDemise,
     _poolGoldmeadowDodger,
+    _poolGontiLordOfLuxury,
     _poolGormaTheGullet,
     _poolGoroGoroDiscipleOfRyusei,
     _poolGraniteShard,

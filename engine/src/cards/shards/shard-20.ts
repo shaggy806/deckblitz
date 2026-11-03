@@ -535,6 +535,7 @@ import _poolNissasTriumph from "../pool/nissas-triumph.js";
 import _poolNivixBarrier from "../pool/nivix-barrier.js";
 import _poolNoDachi from "../pool/no-dachi.js";
 import _poolNocturnalHunger from "../pool/nocturnal-hunger.js";
+import _poolNorinSwiftSurvivalist from "../pool/norin-swift-survivalist.js";
 import _poolNotOnMyWatch from "../pool/not-on-my-watch.js";
 import _poolNulldrifter from "../pool/nulldrifter.js";
 import _poolNurturingPixie from "../pool/nurturing-pixie.js";
@@ -1481,6 +1482,7 @@ const shard: CardShard = {
     _poolNivixBarrier,
     _poolNoDachi,
     _poolNocturnalHunger,
+    _poolNorinSwiftSurvivalist,
     _poolNotOnMyWatch,
     _poolNulldrifter,
     _poolNurturingPixie,
