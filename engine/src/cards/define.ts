@@ -2434,6 +2434,17 @@ export interface StaticAbility {
    * or granted earlier — and a grant after it gives the keyword back. */
   readonly loseKeywords?: readonly Keyword[];
   /**
+   * Keywords the affected objects **can't have** — "creatures your opponents
+   * control lose flying and can't have or gain flying" (the Archetypes). No
+   * timestamp beats it: whatever would give the keyword, printed, granted
+   * before or after, or a keyword counter, gives nothing while this applies,
+   * so it already covers the "lose". A static grant comes back once this
+   * stops applying; a grant made by a resolving spell or ability while it
+   * applied never existed, and doesn't (the Archetypes' rulings). "Can't have
+   * hexproof" takes every "hexproof from" too (rule 702.11e).
+   */
+  readonly cantHaveKeywords?: readonly Keyword[];
+  /**
    * Layer 6 — the affected permanents **lose all abilities** (rule 613.1f):
    * Humility's "All creatures lose all abilities", an Aura's "Enchanted
    * creature loses all abilities" (Lignify, Darksteel Mutation, Kenrith's

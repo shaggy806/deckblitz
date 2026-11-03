@@ -10224,6 +10224,40 @@ describe("exiled face down and linked to the source", () => {
   });
 });
 
+describe("can't have or gain a keyword", () => {
+  it("reads an Archetype's line, and only when it names one keyword twice", () => {
+    const statics = (oracle_text: string): unknown =>
+      parseFace(
+        { name: "Card", type_line: "Enchantment", oracle_text },
+        { tokenFor: () => null },
+      ).static;
+    const text = "Creatures your opponents control lose flying and can't have or gain flying.";
+    expect(statics(text)).toEqual([
+      {
+        affects: { scope: "filter", filter: { type: "creature", controlledBy: "opponent" } },
+        cantHaveKeywords: ["flying"],
+        text,
+      },
+    ]);
+    const mixed = statics("Creatures your opponents control lose flying and can't have or gain trample.");
+    expect(JSON.stringify(mixed)).not.toContain("cantHaveKeywords");
+  });
+
+  it("reads Arcane Lighthouse's effect", () => {
+    const parsed = parseEffect(
+      "Until end of turn, creatures your opponents control lose hexproof and shroud and can't have hexproof or shroud.",
+      ctx(),
+    );
+    expect(parsed.effect).toEqual({
+      kind: "lose-keywords",
+      filter: { type: "creature", controlledBy: "opponent" },
+      keywords: ["hexproof", "shroud"],
+      cantHave: true,
+      duration: "end-of-turn",
+    });
+  });
+});
+
 describe("an effect done by another player", () => {
   it("reads 'target player scries N' as as-player, on a player slot", () => {
     const parsed = parseEffect("Target player scries 2.", ctx());

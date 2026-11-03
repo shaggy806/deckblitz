@@ -4391,6 +4391,20 @@ export function parseSentence(sentence, ctx) {
     const one = (keyword) => ({ kind: "grant-keyword", target, keyword, duration: "end-of-turn" });
     return kws.length === 1 ? one(kws[0]) : { kind: "sequence", effects: kws.map(one) };
   }
+  // Arcane Lighthouse's "lose hexproof and shroud and can't have hexproof or
+  // shroud": the creatures there as it resolves (rule 611.2c).
+  if ((m = re(`until end of turn, creatures your opponents control lose ${KW} and ${KW} and can't have ${KW} or ${KW}`).exec(s))) {
+    const lost = [m[1], m[2]].map((k) => k.toLowerCase());
+    if (lost[0] === m[3].toLowerCase() && lost[1] === m[4].toLowerCase()) {
+      return {
+        kind: "lose-keywords",
+        filter: { type: "creature", controlledBy: "opponent" },
+        keywords: lost.map((k) => KEYWORDS[k]),
+        cantHave: true,
+        duration: "end-of-turn",
+      };
+    }
+  }
   // Losing "bands with other" (rule 702.22b) — Shelkin Brownie — and with
   // banding, which takes them too (Tolaria).
   if ((m = re(`(${TARGET}) loses (banding and )?all "bands with other" abilities until end of turn`).exec(s))) {
@@ -13004,6 +13018,18 @@ function parseStatic(line, text) {
     return {
       affects: { scope: "self" },
       doubleTriggersOf: { filter: { type: "creature", controlledBy: "you", ofChosenType: true }, others: true },
+      text,
+    };
+  }
+  // "Creatures your opponents control lose flying and can't have or gain
+  // flying" (the Archetypes): `cantHaveKeywords` already covers the "lose".
+  if (
+    (m = new RegExp(`^creatures your opponents control lose ${KW} and can't have or gain ${KW}\\.$`, "i").exec(line)) &&
+    m[1].toLowerCase() === m[2].toLowerCase()
+  ) {
+    return {
+      affects: { scope: "filter", filter: { type: "creature", controlledBy: "opponent" } },
+      cantHaveKeywords: [KEYWORDS[m[1].toLowerCase()]],
       text,
     };
   }

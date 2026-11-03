@@ -1313,7 +1313,8 @@
   "cost:unattach-cost",
   "cost:unattach-equipment",
   "cost:splice-non-mana",
-  "keyword:squad-nonmana-cost"
+  "keyword:squad-nonmana-cost",
+  "static:cant-have-keyword"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

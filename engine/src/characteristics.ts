@@ -2514,6 +2514,35 @@ function keywordLosses(effects: readonly AppliedEffect[], object: GameObject): r
   return out;
 }
 
+/** The keywords `object` can't have ("can't have or gain flying"), from the
+ * statics that reach it (`effects`) and its own modifiers. Usually none. */
+function keywordsForbiddenBy(effects: readonly AppliedEffect[], object: GameObject): ReadonlySet<Keyword> | null {
+  let out: Set<Keyword> | null = null;
+  for (const effect of effects) for (const keyword of effect.cantHaveKeywords) (out ??= new Set()).add(keyword);
+  for (const modifier of object.modifiers) {
+    for (const keyword of modifier.cantHaveKeywords ?? []) (out ??= new Set()).add(keyword);
+  }
+  return out;
+}
+
+/**
+ * Of `keywords`, those a continuous effect created now by a resolving spell
+ * or ability can give `object`. One that would give a keyword it can't have
+ * isn't created, so it doesn't come back when what forbids it ends; a static
+ * grant does (the Archetypes' and Arcane Lighthouse's rulings).
+ */
+export function grantableKeywords(
+  state: GameState,
+  registry: CardRegistry,
+  object: GameObject,
+  keywords: readonly Keyword[],
+): readonly Keyword[] {
+  if (keywords.length === 0) return keywords;
+  const effects = object.zone === "battlefield" ? collectStaticEffects(state, registry, object) : [];
+  const forbidden = keywordsForbiddenBy(effects, object);
+  return forbidden === null ? keywords : keywords.filter((keyword) => !forbidden.has(keyword));
+}
+
 /** Whether a keyword given at `timestamp` (printed: `-Infinity`) is taken
  * away by a loss after it (rule 613.7 — timestamp order within layer 6). */
 function lostAfter(losses: readonly KeywordLoss[], keyword: Keyword, timestamp: number | undefined): boolean {
@@ -4219,6 +4248,11 @@ interface AppliedEffect {
   readonly keywords: readonly Keyword[];
   /** Keywords it takes away (`loseKeywords`). */
   readonly loseKeywords: readonly Keyword[];
+  /** Keywords it forbids (`cantHaveKeywords`). */
+  readonly cantHaveKeywords: readonly Keyword[];
+  /** When its `hexproofFrom` was given, against a loss of hexproof (rule
+   * 702.11e): `-Infinity` for the permanent's own. */
+  readonly hexproofFromAt: number;
   /** Toxic N it grants (`grantToxic`), 0 for none. */
   readonly toxic: number;
   readonly restrictions: readonly CombatRestriction[];
@@ -4322,6 +4356,7 @@ function contributesToCharacteristics(ability: StaticAbility): boolean {
     ability.grantPtPerCount !== undefined ||
     ability.grantKeywords !== undefined ||
     ability.loseKeywords !== undefined ||
+    ability.cantHaveKeywords !== undefined ||
     ability.grantToxic !== undefined ||
     ability.restrictions !== undefined ||
     ability.combatDamageByToughness !== undefined ||
@@ -4630,6 +4665,8 @@ function collectStaticEffects(
       toughness: (ability.grantPt?.[1] ?? 0) + scaledToughness,
       keywords: ability.grantKeywords ?? [],
       loseKeywords: ability.loseKeywords ?? [],
+      cantHaveKeywords: ability.cantHaveKeywords ?? [],
+      hexproofFromAt: source.id === target.id && timestamp === source.timestamp ? -Infinity : timestamp,
       toxic: ability.grantToxic ?? 0,
       restrictions: ability.restrictions ?? [],
       combatDamageByToughness: ability.combatDamageByToughness,
@@ -4679,6 +4716,7 @@ function collectStaticEffects(
           if (grantOutlastsLoss(lostAt, at) && !lostAfter(losses, k, at)) keywords.add(k);
         }
         if (suspectedGrantsApply(state, registry, target) && !lostAfter(losses, "menace", -Infinity)) keywords.add("menace");
+        for (const keyword of keywordsForbiddenBy(out, target) ?? []) keywords.delete(keyword);
       }
       return keywords;
     };
@@ -4917,9 +4955,11 @@ function computeCharacteristicsUncached(
       }
       for (const p of effect.protection.players ?? []) protPlayers.add(p);
     }
-    if (effect.hexproofFrom && granted && isQualifiedHexproof(effect.hexproofFrom)) {
+    // A loss of hexproof takes every "hexproof from" with it (rule 702.11e).
+    const hexproofFromStays = granted && !lostAfter(losses, "hexproof", effect.hexproofFromAt);
+    if (effect.hexproofFrom && hexproofFromStays && isQualifiedHexproof(effect.hexproofFrom)) {
       hexQualified.push(effect.hexproofFrom);
-    } else if (effect.hexproofFrom && granted) {
+    } else if (effect.hexproofFrom && hexproofFromStays) {
       for (const c of effect.hexproofFrom.colors ?? []) hexColors.add(c);
       for (const t of effect.hexproofFrom.types ?? []) hexTypes.add(t);
       if (effect.hexproofFrom.filter !== undefined) hexFilters.push(effect.hexproofFrom.filter);
@@ -4987,6 +5027,18 @@ function computeCharacteristicsUncached(
   if (onBattlefield && suspectedGrantsApply(state, registry, object)) {
     if (!lostAfter(losses, "menace", -Infinity)) keywords.add("menace");
     restrictions.add("cant-block");
+  }
+  // "Can't have or gain flying": no timestamp beats it. Everything above that
+  // gives a keyword has had its turn, so this comes last.
+  const forbidden = keywordsForbiddenBy(staticEffects, object);
+  if (forbidden !== null) {
+    for (const keyword of forbidden) keywords.delete(keyword);
+    if (forbidden.has("hexproof")) {
+      hexColors.clear();
+      hexTypes.clear();
+      hexFilters.length = 0;
+      hexQualified.length = 0;
+    }
   }
 
   // Layer 7b — base P/T set by this object's own characteristic-defining

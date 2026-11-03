@@ -5366,6 +5366,10 @@ export type EffectSpec =
       readonly controlledByTarget?: number;
       readonly keywords: readonly Keyword[];
       readonly duration: PtDuration;
+      /** "… and can't have hexproof or shroud" (Arcane Lighthouse): for the
+       * duration, what it reached can't have these at all, whatever gives
+       * them and whatever the timestamps (`PtModifier.cantHaveKeywords`). */
+      readonly cantHave?: boolean;
     }
   | {
       /**
@@ -10705,6 +10709,7 @@ export interface EffectApi {
     keywords: readonly Keyword[],
     duration: PtDuration,
     scopeTo?: PlayerId,
+    cantHave?: boolean,
   ): void;
   /** See the `"grant-triggered"` {@link EffectSpec}. */
   grantTriggered(
@@ -15506,11 +15511,11 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       if (spec.filter !== undefined) {
         const scopeTo = scopedController(spec.controlledByTarget, ctx);
         if (spec.controlledByTarget !== undefined && scopeTo === undefined) return;
-        ctx.loseKeywords(spec.filter, spec.keywords, spec.duration, scopeTo);
+        ctx.loseKeywords(spec.filter, spec.keywords, spec.duration, scopeTo, spec.cantHave);
         return;
       }
       const target = spec.target === undefined ? undefined : resolveEffectTarget(spec.target, ctx);
-      if (target !== undefined) ctx.loseKeywords(target, spec.keywords, spec.duration);
+      if (target !== undefined) ctx.loseKeywords(target, spec.keywords, spec.duration, undefined, spec.cantHave);
       return;
     }
     case "connive": {

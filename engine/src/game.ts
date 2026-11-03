@@ -112,6 +112,7 @@ import {
   restrictionsOf,
   colorsAmongPermanents,
   computeCharacteristics,
+  grantableKeywords,
   computedCacheMemo,
   effectiveColors,
   devotionOf,
@@ -31398,16 +31399,16 @@ export class Game {
         invalidateComputedCache();
         this.emit({ type: "removed-from-combat", object: target.object });
       },
-      loseKeywords: (on, keywords, duration, scopeTo) => {
+      loseKeywords: (on, keywords, duration, scopeTo, cantHave) => {
         const lasting = lastingHere(duration);
         if ("kind" in on && (on.kind === "object" || on.kind === "player")) {
-          this.loseKeywords(on, keywords, lasting);
+          this.loseKeywords(on, keywords, lasting, true, undefined, cantHave);
           return;
         }
         // One effect, one timestamp (rule 613.7b), however many it reaches.
         const timestamp = this.freshTimestamp();
         for (const id of this.battlefieldMatching(scopeTo ?? controller, on as CardFilter)) {
-          this.loseKeywords({ kind: "object", object: id }, keywords, lasting, false, timestamp);
+          this.loseKeywords({ kind: "object", object: id }, keywords, lasting, false, timestamp, cantHave);
         }
       },
       restrict: (target, filter, restrictions, duration, cantBeBlockedBy, cantBlock, scope) =>
@@ -37153,6 +37154,8 @@ export class Game {
     if (object === undefined) return;
     if (object.zone !== "battlefield" && !(object.zone === "stack" && object.kind === "card")) return;
     if (!durationBegins(object, duration)) return;
+    // One it can't have now isn't created at all (`grantableKeywords`).
+    if (grantableKeywords(this.state, this.registry, object, [keyword]).length === 0) return;
     object.modifiers.push({
       timestamp: timestamp ?? this.freshTimestamp(),
       power: 0,
@@ -37176,6 +37179,7 @@ export class Game {
     duration: EffectDuration,
     split = true,
     timestamp?: number,
+    cantHave?: boolean,
   ): void {
     if (target.kind !== "object") return;
     const id = split ? this.splitOneFromStack(target.object) : target.object;
@@ -37187,6 +37191,7 @@ export class Game {
       toughness: 0,
       keywords: [],
       loseKeywords: [...keywords],
+      ...(cantHave === true ? { cantHaveKeywords: [...keywords] } : {}),
       ...durationFields(duration),
     });
     this.emit({ type: "keywords-lost", object: id, keywords: [...keywords], duration });
@@ -38242,7 +38247,7 @@ export class Game {
       timestamp: timestamp ?? this.freshTimestamp(),
       power: 0,
       toughness: 0,
-      keywords: [...opts.keywords],
+      keywords: [...grantableKeywords(this.state, this.registry, object, opts.keywords)],
       addTypes: [...opts.addTypes],
       ...(opts.setTypes ? { setTypes: [...opts.setTypes] } : {}),
       addSubtypes: [...opts.addSubtypes],

@@ -4146,3 +4146,10 @@ Razor Boomerang, Sunforger, Captain America, First Avenger (`test/unattach-cost.
 offers; several spliced cards' costs paid in turn (`GameState.pendingAlsoCosts`). Keys: cost:splice-non-mana,
 keyword:squad-nonmana-cost. Proving cards: Horobi's Whisper, Hundred-Talon Strike, Roar of Jukai, Torrent of Stone,
 Veil of Secrecy, Ruthless Radrat, Thrill-Kill Disciple (`test/keyword-nonmana-cost.test.ts`).
+
+**Can't have or gain a keyword (2026-11-02).** `StaticAbility.cantHaveKeywords` and `lose-keywords`'s `cantHave`
+(`PtModifier.cantHaveKeywords`): removed after everything else in the keyword fold, so no timestamp beats it, and a
+keyword counter stays but gives nothing. `grantableKeywords` drops the keyword from a `grant-keyword` or `animate` made
+meanwhile, which the rulings say isn't created. A loss of hexproof now takes every "hexproof from" (702.11e), which
+Shadowspear's had missed. Key: static:cant-have-keyword. Proving cards: Archetype of Imagination, Archetype of Endurance,
+Arcane Lighthouse; Colossus Hammer needed no code (`loseKeywords`).

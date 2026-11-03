@@ -597,7 +597,10 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     const a = n.ability;
     const lure = (r: string): boolean => r === "must-be-blocked" || r === "must-be-blocked-if-able";
     const harms =
-      (a.restrictions ?? []).some((r) => !lure(r)) || (a.loseKeywords ?? []).length > 0 || a.doesntUntap === true;
+      (a.restrictions ?? []).some((r) => !lure(r)) ||
+      (a.loseKeywords ?? []).length > 0 ||
+      (a.cantHaveKeywords ?? []).length > 0 ||
+      a.doesntUntap === true;
     v.touch(n.target, harms ? "harm" : "help", MAJOR);
   },
   "grant-activated-all": none,
@@ -1083,7 +1086,7 @@ export function auraPolarity(def: CardDefinition): Polarity {
       else help = true;
     }
     // "Enchanted creature loses flying" (Grounded).
-    if ((ability.loseKeywords ?? []).length > 0) harm = true;
+    if ((ability.loseKeywords ?? []).length > 0 || (ability.cantHaveKeywords ?? []).length > 0) harm = true;
     // A granted "untap this permanent" is the way out of the Aura's own lock
     // (Psychic Overload's "discard two artifact cards: untap this"), not a gift.
     const escapes = (ability.grantsActivated ?? []).every(
