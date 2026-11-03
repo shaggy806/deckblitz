@@ -4811,7 +4811,9 @@ describe("agreement with the hand-authored pool", () => {
     const { stats, mismatches } = checkPool(POOL_CARDS);
     expect(stats.claimed).toBeGreaterThan(400);
     expect(mismatches.map((m: { card: string; text: string }) => `${m.card}: ${m.text}`)).toEqual([]);
-  });
+    // The whole pool through the parser: ~30 s alone on a cloud session's
+    // four cores, past the suite's 30 s default as the pool grows.
+  }, 120_000);
 });
 
 describe("land-type setting statics (rule 305.7)", () => {
