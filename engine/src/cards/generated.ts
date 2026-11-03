@@ -11271,6 +11271,7 @@ import _poolHorizonScholar from "./pool/horizon-scholar.js";
 import _poolHorizonSeed from "./pool/horizon-seed.js";
 import _poolHorizonSeeker from "./pool/horizon-seeker.js";
 import _poolHorizonSpellbomb from "./pool/horizon-spellbomb.js";
+import _poolHorizonStone from "./pool/horizon-stone.js";
 import _poolHormagauntHorde from "./pool/hormagaunt-horde.js";
 import _poolHornOfGondor from "./pool/horn-of-gondor.js";
 import _poolHornOfGreed from "./pool/horn-of-greed.js";
@@ -25835,6 +25836,7 @@ import _poolUpdraft from "./pool/updraft.js";
 import _poolUpheaval from "./pool/upheaval.js";
 import _poolUpriserRenegade from "./pool/upriser-renegade.js";
 import _poolUproot from "./pool/uproot.js";
+import _poolUpwelling from "./pool/upwelling.js";
 import _poolUrDrago from "./pool/ur-drago.js";
 import _poolUrGolemsEye from "./pool/ur-golems-eye.js";
 import _poolUrabraskTheHidden from "./pool/urabrask-the-hidden.js";
@@ -27784,6 +27786,7 @@ import _poolYunaHopeOfSpira from "./pool/yuna-hope-of-spira.js";
 import _poolYunasWhistle from "./pool/yunas-whistle.js";
 import _poolYurikoHopeFromTheShadows from "./pool/yuriko-hope-from-the-shadows.js";
 import _poolYurikoTheTigersShadow from "./pool/yuriko-the-tigers-shadow.js";
+import _poolYurlokOfScorchThrash from "./pool/yurlok-of-scorch-thrash.js";
 import _poolYusriFortunesFlame from "./pool/yusri-fortunes-flame.js";
 import _poolYuyanArchers from "./pool/yuyan-archers.js";
 import _poolZacamaPrimalCalamity from "./pool/zacama-primal-calamity.js";
@@ -39895,6 +39898,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolHorizonSeed,
   _poolHorizonSeeker,
   _poolHorizonSpellbomb,
+  _poolHorizonStone,
   _poolHormagauntHorde,
   _poolHornOfGondor,
   _poolHornOfGreed,
@@ -54459,6 +54463,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolUpheaval,
   _poolUpriserRenegade,
   _poolUproot,
+  _poolUpwelling,
   _poolUrDrago,
   _poolUrGolemsEye,
   _poolUrabraskTheHidden,
@@ -56408,6 +56413,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolYunasWhistle,
   _poolYurikoHopeFromTheShadows,
   _poolYurikoTheTigersShadow,
+  _poolYurlokOfScorchThrash,
   _poolYusriFortunesFlame,
   _poolYuyanArchers,
   _poolZacamaPrimalCalamity,
@@ -68532,6 +68538,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/horizon-seed": _poolHorizonSeed,
   "pool/horizon-seeker": _poolHorizonSeeker,
   "pool/horizon-spellbomb": _poolHorizonSpellbomb,
+  "pool/horizon-stone": _poolHorizonStone,
   "pool/hormagaunt-horde": _poolHormagauntHorde,
   "pool/horn-of-gondor": _poolHornOfGondor,
   "pool/horn-of-greed": _poolHornOfGreed,
@@ -83096,6 +83103,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/upheaval": _poolUpheaval,
   "pool/upriser-renegade": _poolUpriserRenegade,
   "pool/uproot": _poolUproot,
+  "pool/upwelling": _poolUpwelling,
   "pool/ur-drago": _poolUrDrago,
   "pool/ur-golems-eye": _poolUrGolemsEye,
   "pool/urabrask-the-hidden": _poolUrabraskTheHidden,
@@ -85045,6 +85053,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/yunas-whistle": _poolYunasWhistle,
   "pool/yuriko-hope-from-the-shadows": _poolYurikoHopeFromTheShadows,
   "pool/yuriko-the-tigers-shadow": _poolYurikoTheTigersShadow,
+  "pool/yurlok-of-scorch-thrash": _poolYurlokOfScorchThrash,
   "pool/yusri-fortunes-flame": _poolYusriFortunesFlame,
   "pool/yuyan-archers": _poolYuyanArchers,
   "pool/zacama-primal-calamity": _poolZacamaPrimalCalamity,

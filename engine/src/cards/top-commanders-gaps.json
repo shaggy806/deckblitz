@@ -1404,7 +1404,8 @@
   "keyword:offering",
   "replacement:draw-replacement-look-and-choose",
   "replacement:draw-replacement-except-first",
-  "replacement:draw-replacement-first-each-turn"
+  "replacement:draw-replacement-first-each-turn",
+  "replacement:mana-pool-emptying"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

@@ -4419,6 +4419,16 @@ is "can't attack a player it has already attacked this turn" (Port Razer), by th
   would lose unspent mana, that mana becomes colorless instead": every unit
   that would empty stays as `{C}`, its restrictions and riders kept (the
   rulings).
+- `unspentManaBecomes: "B"` — Omnath, Locus of All's "that mana becomes black
+  instead" (Ozai's red): the same replacement to another type. Where several
+  would apply, one does (rule 616.1; the engine takes the newest).
+- `keepsUnspentManaEachPlayer: true` beside `keepsUnspentMana` — Upwelling's
+  "Players don't lose unspent mana as steps and phases end" (every type,
+  every player).
+- `manaLossCausesLifeLoss: true` — Yurlok of Scorch Thrash's "A player losing
+  unspent mana causes that player to lose that much life": as each step and
+  phase ends, every player loses 1 life per mana actually emptied (none for
+  what a keep or a "becomes" saved). Not damage.
 - `revealsFirstDrawEachTurn: true` — Keranos, God of Storms' "Reveal the first
   card you draw on each of your turns" (rule 701.16): shown to every player
   as it's drawn. Its "whenever you reveal a land card this way" is a `draws`

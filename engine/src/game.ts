@@ -8470,6 +8470,7 @@ export class Game {
       step === "declare-blockers" ||
       step === "combat-damage" ||
       step === "end-combat";
+    const lostMana: { readonly player: PlayerId; readonly amount: number }[] = [];
     for (const player of this.state.turnOrder) {
       const pool = this.state.players[player].manaPool;
       // Leyline Tyrant's "you don't lose unspent red mana": every step, cleanup
@@ -8480,11 +8481,26 @@ export class Game {
         (keepPersistent && (unit.persists === true || (stillCombat && unit.untilEndOfCombat === true)));
       const kept = pool.filter(keeps);
       if (kept.length !== pool.length) {
-        // Kruphix's "that mana becomes colorless instead": what would be
-        // lost stays, colorless, restrictions and all (its rulings).
-        this.state.players[player].manaPool = this.losesManaAsColorless(player)
-          ? pool.map((unit) => (keeps(unit) || unit.type === "C" ? unit : { ...unit, type: "C" }))
-          : kept;
+        // Kruphix's "that mana becomes colorless instead" (Omnath, Locus of
+        // All's black): what would be lost stays, that type, restrictions
+        // and all (its rulings).
+        const becomes = this.unspentManaBecomesFor(player);
+        if (becomes !== null) {
+          this.state.players[player].manaPool = pool.map((unit) =>
+            keeps(unit) || unit.type === becomes ? unit : { ...unit, type: becomes },
+          );
+        } else {
+          this.state.players[player].manaPool = kept;
+          lostMana.push({ player, amount: pool.length - kept.length });
+        }
+      }
+    }
+    // Yurlok of Scorch Thrash's "a player losing unspent mana causes that
+    // player to lose that much life": for the mana actually emptied.
+    if (lostMana.length > 0) {
+      const times = this.manaLossLifeLossCount();
+      for (const { player, amount } of lostMana) {
+        for (let i = 0; i < times && !this.state.result.over; i += 1) this.changeLife(player, -amount);
       }
     }
     // "Until end of combat" effects end with the combat phase (rule 500.5a).
@@ -9352,28 +9368,51 @@ export class Game {
    * maximum" wins, and the other way round (the Twenty-Toed Toad ruling).
    * Never below 0.
    */
-  /** Whether mana `player` would lose as a step or phase ends becomes
-   * colorless instead (`unspentManaBecomesColorless` — Kruphix). */
-  private losesManaAsColorless(player: PlayerId): boolean {
+  /** The type mana `player` would lose as a step or phase ends becomes
+   * instead, or `null` — `unspentManaBecomesColorless` (Kruphix) or
+   * `unspentManaBecomes` (Omnath, Locus of All's black). Of several, one
+   * applies (rule 616.1): the newest permanent's. */
+  private unspentManaBecomesFor(player: PlayerId): ManaType | null {
+    let found: { readonly type: ManaType; readonly timestamp: number } | null = null;
     for (const id of this.state.zones.shared.battlefield) {
       const source = this.state.objects[id];
       if (source === undefined || source.controller !== player || hasLostAbilities(this.state, this.registry,source)) continue;
       for (const ability of this.registry.get(rulesTextName(source)).static) {
-        if (ability.unspentManaBecomesColorless === true && this.staticActive(source, ability)) return true;
+        const type = ability.unspentManaBecomesColorless === true ? "C" : ability.unspentManaBecomes;
+        if (type === undefined || !this.staticActive(source, ability)) continue;
+        if (found === null || source.timestamp > found.timestamp) found = { type, timestamp: source.timestamp };
       }
     }
-    return false;
+    return found?.type ?? null;
+  }
+
+  /** How many times a player loses life for the mana emptied from their
+   * pool (`manaLossCausesLifeLoss` — Yurlok of Scorch Thrash): once for each
+   * such permanent on the battlefield, whoever controls it. */
+  private manaLossLifeLossCount(): number {
+    let times = 0;
+    for (const id of this.state.zones.shared.battlefield) {
+      const source = this.state.objects[id];
+      if (source === undefined || hasLostAbilities(this.state, this.registry, source)) continue;
+      if (this.state.players[source.controller]?.hasLost === true) continue;
+      for (const ability of this.registry.get(rulesTextName(source)).static) {
+        if (ability.manaLossCausesLifeLoss === true && this.staticActive(source, ability)) times += source.stackCount ?? 1;
+      }
+    }
+    return times;
   }
 
   /** The mana types `player` keeps as steps and phases end: those a static
-   * of a permanent they control names (`keepsUnspentMana` — Leyline Tyrant). */
+   * of a permanent they control names (`keepsUnspentMana` — Leyline Tyrant),
+   * or any permanent's with `keepsUnspentManaEachPlayer` (Upwelling). */
   private keptManaTypes(player: PlayerId): Set<ManaType> {
     const out = new Set<ManaType>();
     for (const id of this.state.zones.shared.battlefield) {
       const source = this.state.objects[id];
-      if (source === undefined || source.controller !== player || hasLostAbilities(this.state, this.registry,source)) continue;
+      if (source === undefined || hasLostAbilities(this.state, this.registry,source)) continue;
       for (const ability of this.registry.get(rulesTextName(source)).static) {
         if (ability.keepsUnspentMana === undefined || !this.staticActive(source, ability)) continue;
+        if (source.controller !== player && ability.keepsUnspentManaEachPlayer !== true) continue;
         for (const type of ability.keepsUnspentMana) out.add(type);
       }
     }

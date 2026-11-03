@@ -13,7 +13,7 @@
  *
  * - a colour word is a colour in a field that names one in the text:
  *   `colors`, `notColors`, `setColors`, `addColors`, `devotionTo`,
- *   `keepsUnspentMana` — "nonblack creature", "protection from red",
+ *   `keepsUnspentMana`, `unspentManaBecomes` — "nonblack creature", "protection from red",
  *   "becomes white", "devotion to black", "unspent green mana". A mana
  *   symbol is no word (`mana`, `oneOf`, `all`, `xColor`, every cost string),
  *   and neither is a choice's list of options (`chooseOnEnter`) or a chosen
@@ -131,6 +131,8 @@ export const COLOR_WORD_KEYS: ReadonlySet<string> = new Set([
   "addColors",
   "devotionTo",
   "keepsUnspentMana",
+  // Omnath, Locus of All's "that mana becomes black instead".
+  "unspentManaBecomes",
 ]);
 
 /** Fields holding a name or a choice's options, never changed (612.2). */

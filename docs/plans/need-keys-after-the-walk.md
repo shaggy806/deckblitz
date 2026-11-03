@@ -845,6 +845,9 @@ missing. Re-run `--greedy` for Phase 2's order.
   except-first and first-each-turn exemptions (`draw-replacement-look-and-choose`, `-except-first`, `-first-each-turn`);
   Underrealm Lich, Tomorrow, Sages of the Anima, Teferi's Ageless Insight, Reed Richards, Bard. Left: the reveal key and
   the family's graveyard-destination and counter-scope groups.
+- **2026-11-03: `replacement:mana-pool-emptying`.** Its key `replacement:mana-pool-emptying`: unspent mana turned into
+  another type, kept by every player, or costing life; Horizon Stone, Upwelling, Yurlok. Left:
+  `replacement:mana-persistence-color` (The Last Agni Kai).
 
 ## Rough size
 

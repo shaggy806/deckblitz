@@ -2968,6 +2968,25 @@ export interface StaticAbility {
    * mana is lost as the step or phase it left in ends. Like `noMaxHandSize`,
    * a property of the player, read off the battlefield. */
   readonly keepsUnspentMana?: readonly ManaType[];
+  /** With `keepsUnspentMana`: **every** player keeps that mana, not just this
+   * permanent's controller — Upwelling's "players don't lose unspent mana as
+   * steps and phases end" (every type). */
+  readonly keepsUnspentManaEachPlayer?: true;
+  /** "If you would lose unspent mana, that mana becomes **black** instead"
+   * (Omnath, Locus of All; Ozai, the Phoenix King's red) — Kruphix's
+   * replacement (`unspentManaBecomesColorless`) to another type: every unit
+   * its controller would lose as a step or phase ends stays, that type, its
+   * restrictions and riders kept. Where several would apply to the same
+   * mana, one does (rule 616.1 — the controller's to choose; the engine takes
+   * the newest). Read off the battlefield like `keepsUnspentMana`. */
+  readonly unspentManaBecomes?: ManaType;
+  /** "A player losing unspent mana causes that player to lose that much
+   * life" (Yurlok of Scorch Thrash): as each step and phase ends (rule
+   * 500.4), every player loses 1 life for each mana actually emptied from
+   * their pool — none for mana a keep or a "becomes" replacement saved. Not
+   * damage. Once per such permanent (a token stack is that many). Read off
+   * the battlefield, whoever controls it. */
+  readonly manaLossCausesLifeLoss?: true;
   /** "While voting, you may vote an additional time" (Tivit, Seller of
    * Secrets — rule 701.38d): as its controller votes, they may cast one more
    * vote for each of these they control, at the same time (the extra vote is

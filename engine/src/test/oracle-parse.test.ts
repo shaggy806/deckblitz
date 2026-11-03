@@ -9589,6 +9589,22 @@ describe("a static acting on a player", () => {
     });
   });
 
+  it("reads what happens to unspent mana as steps and phases end (rule 500.4)", () => {
+    const stone = face("Artifact", "If you would lose unspent mana, that mana becomes colorless instead.");
+    expect(stone.complete).toBe(true);
+    expect(stone.static[0].unspentManaBecomesColorless).toBe(true);
+    const omnath = face("Legendary Creature", "If you would lose unspent mana, that mana becomes black instead.");
+    expect(omnath.static[0].unspentManaBecomes).toBe("B");
+    const upwelling = face("Enchantment", "Players don't lose unspent mana as steps and phases end.");
+    expect(upwelling.complete).toBe(true);
+    expect(upwelling.static[0]).toMatchObject({ keepsUnspentMana: ["W", "U", "B", "R", "G", "C"], keepsUnspentManaEachPlayer: true });
+    const tyrant = face("Creature", "You don't lose unspent red mana as steps and phases end.");
+    expect(tyrant.static[0].keepsUnspentMana).toEqual(["R"]);
+    const yurlok = face("Legendary Creature", "A player losing unspent mana causes that player to lose that much life.");
+    expect(yurlok.complete).toBe(true);
+    expect(yurlok.static[0].manaLossCausesLifeLoss).toBe(true);
+  });
+
   it("reads Abyssal Persecutor's inverse pair", () => {
     const demon = face("Creature — Demon", "You can't win the game and your opponents can't lose the game.");
     expect(demon.complete).toBe(true);

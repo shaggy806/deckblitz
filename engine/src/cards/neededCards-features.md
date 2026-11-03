@@ -321,6 +321,14 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Unspent mana as steps and phases end: another type, every player's kept, life lost — built 2026-11-03
+
+`replacement:mana-pool-emptying` (family `replacement:mana-pool-emptying`): `unspentManaBecomes` (Kruphix's
+replacement to a colour — Omnath, Locus of All, Ozai), `keepsUnspentManaEachPlayer` (Upwelling) and
+`manaLossCausesLifeLoss` (Yurlok of Scorch Thrash), in the rule 500.4 pool emptying. Proving cards: Horizon Stone,
+Upwelling, Yurlok of Scorch Thrash. Still open: `replacement:mana-persistence-color` (The Last Agni Kai's one-shot
+"until end of turn, you don't lose unspent red mana" beside its excess-fight-damage mana).
+
 ### A draw replaced by an effect, and draw-N exemptions — built 2026-11-03
 
 `replacement:draw-replacement-look-and-choose`, `replacement:draw-replacement-except-first`,

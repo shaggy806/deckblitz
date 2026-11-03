@@ -13173,6 +13173,28 @@ function parseStatic(line, text) {
       text,
     };
   }
+  // Unspent mana as steps and phases end (rule 500.4): kept, of one colour
+  // (Leyline Tyrant) or by every player (Upwelling); turned into another type
+  // (Kruphix, Horizon Stone; Omnath, Locus of All); or costing life (Yurlok).
+  if ((m = /^You don't lose unspent (white|blue|black|red|green) mana as steps and phases end\.$/.exec(line))) {
+    return { affects: { scope: "self" }, keepsUnspentMana: [COLOR_WORD[m[1]]], text };
+  }
+  if (line === "Players don't lose unspent mana as steps and phases end.") {
+    return {
+      affects: { scope: "self" },
+      keepsUnspentMana: ["W", "U", "B", "R", "G", "C"],
+      keepsUnspentManaEachPlayer: true,
+      text,
+    };
+  }
+  if ((m = /^If you would lose unspent mana, that mana becomes (colorless|white|blue|black|red|green) instead\.$/.exec(line))) {
+    return m[1] === "colorless"
+      ? { affects: { scope: "self" }, unspentManaBecomesColorless: true, text }
+      : { affects: { scope: "self" }, unspentManaBecomes: COLOR_WORD[m[1]], text };
+  }
+  if (line === "A player losing unspent mana causes that player to lose that much life.") {
+    return { affects: { scope: "self" }, manaLossCausesLifeLoss: true, text };
+  }
   // A would-draw replacement of your own (rule 614.1a, 614.11): "draw N cards
   // instead" (Thought Reflection), "except the first one you draw in each of
   // your draw steps" (Teferi's Ageless Insight), "the first time you would
