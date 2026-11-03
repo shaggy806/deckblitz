@@ -11141,3 +11141,28 @@ describe("spells of a colour costing a coloured pip more", () => {
     expect(statics("Black spells your opponents cast cost {B} more to cast.")).toEqual([]);
   });
 });
+
+describe("offering", () => {
+  const read = (oracle_text: string) =>
+    parseFace({ name: "Card", type_line: "Legendary Creature — Spirit", oracle_text }, { tokenFor: (d: string) => d });
+  it("reads a subtype's and a card type's", () => {
+    expect(read("Fox offering (You may cast this spell any time you could cast an instant by sacrificing a Fox.)").kicker).toEqual({
+      cost: "",
+      keyword: "offering",
+      flash: true,
+      offering: { subtype: "Fox" },
+    });
+    expect(read("Artifact offering (You may cast this spell as though it had flash by sacrificing an artifact.)").kicker).toEqual({
+      cost: "",
+      keyword: "offering",
+      flash: true,
+      offering: { type: "artifact" },
+    });
+  });
+  it("reads a keyword granted to creatures attacking your opponents", () => {
+    expect(read("Creatures attacking your opponents have double strike.").static[0]).toMatchObject({
+      affects: { scope: "filter", filter: { type: "creature", attackingOpponent: true } },
+      grantKeywords: ["double-strike"],
+    });
+  });
+});

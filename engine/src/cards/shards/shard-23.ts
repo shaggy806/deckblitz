@@ -539,6 +539,7 @@ import _poolPainfulQuandary from "../pool/painful-quandary.js";
 import _poolPalisadeGiant from "../pool/palisade-giant.js";
 import _poolParkHeightsMaverick from "../pool/park-heights-maverick.js";
 import _poolPassengerFerry from "../pool/passenger-ferry.js";
+import _poolPatronOfTheAkki from "../pool/patron-of-the-akki.js";
 import _poolPatronOfTheWild from "../pool/patron-of-the-wild.js";
 import _poolPerigeeBeckoner from "../pool/perigee-beckoner.js";
 import _poolPermeatingMass from "../pool/permeating-mass.js";
@@ -1443,6 +1444,7 @@ const shard: CardShard = {
     _poolPalisadeGiant,
     _poolParkHeightsMaverick,
     _poolPassengerFerry,
+    _poolPatronOfTheAkki,
     _poolPatronOfTheWild,
     _poolPerigeeBeckoner,
     _poolPermeatingMass,

@@ -721,6 +721,7 @@ import _poolAncientStoneIdol from "./pool/ancient-stone-idol.js";
 import _poolAncientTomb from "./pool/ancient-tomb.js";
 import _poolAncientZiggurat from "./pool/ancient-ziggurat.js";
 import _poolAndTheyShallKnowNoFear from "./pool/and-they-shall-know-no-fear.js";
+import _poolAndraditeLeech from "./pool/andradite-leech.js";
 import _poolAndurilFlameOfTheWest from "./pool/anduril-flame-of-the-west.js";
 import _poolAndurilNarsilReforged from "./pool/anduril-narsil-reforged.js";
 import _poolAnepVizierOfHazoret from "./pool/anep-vizier-of-hazoret.js";
@@ -2270,6 +2271,7 @@ import _poolBlaringCaptain from "./pool/blaring-captain.js";
 import _poolBlaringRecruiter from "./pool/blaring-recruiter.js";
 import _poolBlasphemousAct from "./pool/blasphemous-act.js";
 import _poolBlasphemousEdict from "./pool/blasphemous-edict.js";
+import _poolBlastFurnaceHellkite from "./pool/blast-furnace-hellkite.js";
 import _poolBlastOfGenius from "./pool/blast-of-genius.js";
 import _poolBlastZone from "./pool/blast-zone.js";
 import _poolBlastedLandscape from "./pool/blasted-landscape.js";
@@ -5805,6 +5807,7 @@ import _poolDerangedOutcast from "./pool/deranged-outcast.js";
 import _poolDerangedWhelp from "./pool/deranged-whelp.js";
 import _poolDerelictAtticWidowsWalk from "./pool/derelict-attic-widows-walk.js";
 import _poolDerelictAttic from "./pool/derelict-attic.js";
+import _poolDerelor from "./pool/derelor.js";
 import _poolDereviEmpyrialTactician from "./pool/derevi-empyrial-tactician.js";
 import _poolDescendUponTheSinful from "./pool/descend-upon-the-sinful.js";
 import _poolDescendantOfSoramaro from "./pool/descendant-of-soramaro.js";
@@ -17127,7 +17130,9 @@ import _poolPatriotYoungAvenger from "./pool/patriot-young-avenger.js";
 import _poolPatrolHound from "./pool/patrol-hound.js";
 import _poolPatrolSignaler from "./pool/patrol-signaler.js";
 import _poolPatrollingPeacemaker from "./pool/patrolling-peacemaker.js";
+import _poolPatronOfTheAkki from "./pool/patron-of-the-akki.js";
 import _poolPatronOfTheArts from "./pool/patron-of-the-arts.js";
+import _poolPatronOfTheKitsune from "./pool/patron-of-the-kitsune.js";
 import _poolPatronOfTheValiant from "./pool/patron-of-the-valiant.js";
 import _poolPatronOfTheVein from "./pool/patron-of-the-vein.js";
 import _poolPatronOfTheWild from "./pool/patron-of-the-wild.js";
@@ -20134,6 +20139,7 @@ import _poolSaplingOfColfenor from "./pool/sapling-of-colfenor.js";
 import _poolSapphireCharm from "./pool/sapphire-charm.js";
 import _poolSapphireDragon from "./pool/sapphire-dragon.js";
 import _poolSapphireDrake from "./pool/sapphire-drake.js";
+import _poolSapphireLeech from "./pool/sapphire-leech.js";
 import _poolSapphireMedallion from "./pool/sapphire-medallion.js";
 import _poolSaprazzanBailiff from "./pool/saprazzan-bailiff.js";
 import _poolSaprazzanBreaker from "./pool/saprazzan-breaker.js";
@@ -29328,6 +29334,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAncientTomb,
   _poolAncientZiggurat,
   _poolAndTheyShallKnowNoFear,
+  _poolAndraditeLeech,
   _poolAndurilFlameOfTheWest,
   _poolAndurilNarsilReforged,
   _poolAnepVizierOfHazoret,
@@ -30877,6 +30884,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBlaringRecruiter,
   _poolBlasphemousAct,
   _poolBlasphemousEdict,
+  _poolBlastFurnaceHellkite,
   _poolBlastOfGenius,
   _poolBlastZone,
   _poolBlastedLandscape,
@@ -34412,6 +34420,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDerangedWhelp,
   _poolDerelictAtticWidowsWalk,
   _poolDerelictAttic,
+  _poolDerelor,
   _poolDereviEmpyrialTactician,
   _poolDescendUponTheSinful,
   _poolDescendantOfSoramaro,
@@ -45734,7 +45743,9 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPatrolHound,
   _poolPatrolSignaler,
   _poolPatrollingPeacemaker,
+  _poolPatronOfTheAkki,
   _poolPatronOfTheArts,
+  _poolPatronOfTheKitsune,
   _poolPatronOfTheValiant,
   _poolPatronOfTheVein,
   _poolPatronOfTheWild,
@@ -48741,6 +48752,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSapphireCharm,
   _poolSapphireDragon,
   _poolSapphireDrake,
+  _poolSapphireLeech,
   _poolSapphireMedallion,
   _poolSaprazzanBailiff,
   _poolSaprazzanBreaker,
@@ -57948,6 +57960,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/ancient-tomb": _poolAncientTomb,
   "pool/ancient-ziggurat": _poolAncientZiggurat,
   "pool/and-they-shall-know-no-fear": _poolAndTheyShallKnowNoFear,
+  "pool/andradite-leech": _poolAndraditeLeech,
   "pool/anduril-flame-of-the-west": _poolAndurilFlameOfTheWest,
   "pool/anduril-narsil-reforged": _poolAndurilNarsilReforged,
   "pool/anep-vizier-of-hazoret": _poolAnepVizierOfHazoret,
@@ -59497,6 +59510,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/blaring-recruiter": _poolBlaringRecruiter,
   "pool/blasphemous-act": _poolBlasphemousAct,
   "pool/blasphemous-edict": _poolBlasphemousEdict,
+  "pool/blast-furnace-hellkite": _poolBlastFurnaceHellkite,
   "pool/blast-of-genius": _poolBlastOfGenius,
   "pool/blast-zone": _poolBlastZone,
   "pool/blasted-landscape": _poolBlastedLandscape,
@@ -63032,6 +63046,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/deranged-whelp": _poolDerangedWhelp,
   "pool/derelict-attic-widows-walk": _poolDerelictAtticWidowsWalk,
   "pool/derelict-attic": _poolDerelictAttic,
+  "pool/derelor": _poolDerelor,
   "pool/derevi-empyrial-tactician": _poolDereviEmpyrialTactician,
   "pool/descend-upon-the-sinful": _poolDescendUponTheSinful,
   "pool/descendant-of-soramaro": _poolDescendantOfSoramaro,
@@ -74354,7 +74369,9 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/patrol-hound": _poolPatrolHound,
   "pool/patrol-signaler": _poolPatrolSignaler,
   "pool/patrolling-peacemaker": _poolPatrollingPeacemaker,
+  "pool/patron-of-the-akki": _poolPatronOfTheAkki,
   "pool/patron-of-the-arts": _poolPatronOfTheArts,
+  "pool/patron-of-the-kitsune": _poolPatronOfTheKitsune,
   "pool/patron-of-the-valiant": _poolPatronOfTheValiant,
   "pool/patron-of-the-vein": _poolPatronOfTheVein,
   "pool/patron-of-the-wild": _poolPatronOfTheWild,
@@ -77361,6 +77378,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/sapphire-charm": _poolSapphireCharm,
   "pool/sapphire-dragon": _poolSapphireDragon,
   "pool/sapphire-drake": _poolSapphireDrake,
+  "pool/sapphire-leech": _poolSapphireLeech,
   "pool/sapphire-medallion": _poolSapphireMedallion,
   "pool/saprazzan-bailiff": _poolSaprazzanBailiff,
   "pool/saprazzan-breaker": _poolSaprazzanBreaker,

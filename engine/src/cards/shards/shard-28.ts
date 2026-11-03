@@ -78,6 +78,7 @@ import _poolBiomassMutation from "../pool/biomass-mutation.js";
 import _poolBitingTether from "../pool/biting-tether.js";
 import _poolBlackMarket from "../pool/black-market.js";
 import _poolBlackPantherHopeEnduring from "../pool/black-panther-hope-enduring.js";
+import _poolBlastFurnaceHellkite from "../pool/blast-furnace-hellkite.js";
 import _poolBlightbeetle from "../pool/blightbeetle.js";
 import _poolBloatedProcessor from "../pool/bloated-processor.js";
 import _poolBlockadeRunner from "../pool/blockade-runner.js";
@@ -987,6 +988,7 @@ const shard: CardShard = {
     _poolBitingTether,
     _poolBlackMarket,
     _poolBlackPantherHopeEnduring,
+    _poolBlastFurnaceHellkite,
     _poolBlightbeetle,
     _poolBloatedProcessor,
     _poolBlockadeRunner,

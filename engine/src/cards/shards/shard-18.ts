@@ -23,6 +23,7 @@ import _poolAnOfferYouCantRefuse from "../pool/an-offer-you-cant-refuse.js";
 import _poolAnarchist from "../pool/anarchist.js";
 import _poolAncientCornucopia from "../pool/ancient-cornucopia.js";
 import _poolAncientRunes from "../pool/ancient-runes.js";
+import _poolAndraditeLeech from "../pool/andradite-leech.js";
 import _poolAppliedGeometry from "../pool/applied-geometry.js";
 import _poolArchaicsAgony from "../pool/archaics-agony.js";
 import _poolArchfiendOfDespair from "../pool/archfiend-of-despair.js";
@@ -917,6 +918,7 @@ const shard: CardShard = {
     _poolAnarchist,
     _poolAncientCornucopia,
     _poolAncientRunes,
+    _poolAndraditeLeech,
     _poolAppliedGeometry,
     _poolArchaicsAgony,
     _poolArchfiendOfDespair,

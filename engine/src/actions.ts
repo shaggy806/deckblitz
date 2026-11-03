@@ -1167,10 +1167,12 @@ export type LegalAction =
        * one offer per creature that could be, echoed back as
        * `webSlingingReturn`. */
       readonly webSlingingReturn?: { readonly object: ObjectId; readonly cardName: string };
-      /** An emerge variant's creature to sacrifice (rule 702.119a): one offer
-       * per creature that could be, priced with its mana value off and
-       * echoed back as the cast's `sacrifice` (the offer's `sacrifice`
-       * choices are just it). */
+      /** An emerge variant's creature to sacrifice (rule 702.119a), or an
+       * offering variant's permanent (702.48a): one offer per permanent that
+       * could be, priced with its mana value (an offering's: its mana cost)
+       * off and echoed back as the cast's `sacrifice` (the offer's `sacrifice`
+       * choices are just it). A driver names it on a button of its own, never
+       * a click on the card that sacrifices silently. */
       readonly emergeSacrifice?: { readonly object: ObjectId; readonly cardName: string; readonly manaValue: number };
       /** Set for a *targeted modal* spell (rule 700.2 — ROADMAP Phase 11 EG-2):
        * the driver picks `minModes..maxModes` of `modes` (each a text label +
@@ -1313,8 +1315,10 @@ export type LegalAction =
        * with `kickerCost` what — "a Dragon"), `"waterbend"` (701.67a: the
        * variant that waterbends, with `kickerCost` its `{N}`), `"bargain"`
        * (702.166a: the variant that sacrifices an artifact, enchantment or
-       * token — which, asked once it's cast; `kickerCost` empty). */
-      readonly kickerKeyword?: "offspring" | "gift" | "teamwork" | "blight" | "behold" | "waterbend" | "squad" | "collect-evidence" | "bargain" | "entwine" | "buyback" | "replicate" | "reveal" | "flash" | "additional cost";
+       * token — which, asked once it's cast; `kickerCost` empty), `"offering"`
+       * (702.48a: the variant that sacrifices the permanent `kickerCost` names,
+       * and what comes off for it). */
+      readonly kickerKeyword?: "offspring" | "gift" | "teamwork" | "blight" | "behold" | "waterbend" | "squad" | "collect-evidence" | "bargain" | "entwine" | "buyback" | "replicate" | "reveal" | "flash" | "additional cost" | "offering";
       /** A variant that pays a granted offspring cost as well (Zinnia) —
        * echoed back as the action's `offspring`; `offspringCost` for
        * labelling. */

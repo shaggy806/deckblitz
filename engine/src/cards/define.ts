@@ -4255,7 +4255,7 @@ export interface CardDefinition {
      * rule 118.8). "If this spell's additional cost was paid" is the spell
      * being kicked, to itself alone, as for bargain.
      */
-    readonly keyword?: "offspring" | "gift" | "teamwork" | "blight" | "behold" | "waterbend" | "squad" | "collect-evidence" | "bargain" | "entwine" | "buyback" | "replicate" | "reveal" | "flash" | "additional cost";
+    readonly keyword?: "offspring" | "gift" | "teamwork" | "blight" | "behold" | "waterbend" | "squad" | "collect-evidence" | "bargain" | "entwine" | "buyback" | "replicate" | "reveal" | "flash" | "additional cost" | "offering";
     /**
      * "This spell costs {N} less to cast if it's bargained" (Ice Out,
      * Hamlet Glutton): N generic off the kicked variant's total cost, after
@@ -4294,6 +4294,16 @@ export interface CardDefinition {
      * begun as though it had flash, the additional cost then paid).
      */
     readonly flash?: boolean;
+    /**
+     * With `keyword: "offering"`, `cost: ""` and `flash: true` (rule 702.48a,
+     * "as an additional cost to cast this spell, you may sacrifice a [quality]
+     * permanent"): that quality, Patron of the Kitsune's `{ subtype: "Fox" }`.
+     * The kicked variant is offered once a permanent, chosen as the spell is
+     * cast (702.48b) and named as the action's `sacrifice`, with its total
+     * cost less that permanent's mana cost (702.48c), so one that can't make
+     * it affordable isn't offered.
+     */
+    readonly offering?: CardFilter;
     /**
      * With `keyword: "blight"` and `cost: ""`: "As an additional cost to
      * cast this spell, you may blight N" (rule 701.68a — Burning
@@ -5591,11 +5601,12 @@ interface CardDraft {
     readonly cost: string;
     readonly targets?: readonly TargetSpec[];
     readonly effect?: EffectSpec;
-    readonly keyword?: "offspring" | "gift" | "teamwork" | "blight" | "behold" | "waterbend" | "squad" | "collect-evidence" | "bargain" | "entwine" | "buyback" | "replicate" | "reveal" | "flash" | "additional cost";
+    readonly keyword?: "offspring" | "gift" | "teamwork" | "blight" | "behold" | "waterbend" | "squad" | "collect-evidence" | "bargain" | "entwine" | "buyback" | "replicate" | "reveal" | "flash" | "additional cost" | "offering";
     readonly reduceGeneric?: number;
     readonly behold?: BeholdSpec;
     readonly orControls?: CardFilter;
     readonly flash?: boolean;
+    readonly offering?: CardFilter;
     readonly blight?: number;
     readonly collectEvidence?: number;
     readonly also?: KickerAlsoCost;

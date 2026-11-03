@@ -308,6 +308,10 @@ export interface CardFilter {
    * battle of theirs (Blessed Reversal's "each creature **attacking you**").
    * Off the battlefield nothing is attacking anyone. */
   readonly attackingYou?: boolean;
+  /** Attacking an opponent of the filtering player — the player, not a
+   * planeswalker or battle of theirs: Blast-Furnace Hellkite's "creatures
+   * **attacking your opponents** have double strike", whoever controls them. */
+  readonly attackingOpponent?: true;
   /** Attacking the filtering source's **chosen player** (`GameObject.
    * chosenPlayer`) — the player, not a planeswalker or battle of theirs:
    * Triarch Stalker's "creatures attacking **the last chosen player** have
@@ -1496,6 +1500,15 @@ export function printedManaCost(registry: CardRegistry, object: GameObject): str
   return def.manaCost;
 }
 
+/** A permanent's mana cost itself, which an offering's reduction reads (rule
+ * 702.48a): a token's or a face-down permanent's none, a copy's what it copies,
+ * and, unlike {@link printedManaCost}, a transformed back face's or a melded
+ * permanent's none, whatever its mana value (rules 712.8e, 712.8g). */
+export function ownManaCostOf(registry: CardRegistry, object: GameObject): string | null {
+  const override = manaCostOverride(object);
+  return override !== undefined ? override : registry.get(printedCardName(object)).manaCost;
+}
+
 /** The mana cost the face named `name` prints — what "{X} in its mana cost"
  * and "colored mana symbols in its mana cost" read. Unlike
  * {@link printedManaCost}, which is for mana value, a transformed back face's
@@ -1944,6 +1957,10 @@ export function matchesFilter(
   if (filter.attackingYou !== undefined) {
     const attackingYou = live?.zone === "battlefield" && live.attacking === ctx.you;
     if (attackingYou !== filter.attackingYou) return false;
+  }
+  if (filter.attackingOpponent === true) {
+    const attacked = live?.zone === "battlefield" ? live.attacking : null;
+    if (attacked === null || attacked === ctx.you || state.players[attacked as PlayerId] === undefined) return false;
   }
   if (filter.attackingChosenPlayer === true) {
     const from = ctx.source === undefined ? undefined : state.objects[ctx.source];

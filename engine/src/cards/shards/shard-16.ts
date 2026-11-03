@@ -178,6 +178,7 @@ import _poolDelifsCube from "../pool/delifs-cube.js";
 import _poolDelightedHalfling from "../pool/delighted-halfling.js";
 import _poolDemonicDread from "../pool/demonic-dread.js";
 import _poolDerangedHermit from "../pool/deranged-hermit.js";
+import _poolDerelor from "../pool/derelor.js";
 import _poolDesolateLighthouse from "../pool/desolate-lighthouse.js";
 import _poolDevouringStrossus from "../pool/devouring-strossus.js";
 import _poolDiscipleOfMalice from "../pool/disciple-of-malice.js";
@@ -1147,6 +1148,7 @@ const shard: CardShard = {
     _poolDelightedHalfling,
     _poolDemonicDread,
     _poolDerangedHermit,
+    _poolDerelor,
     _poolDesolateLighthouse,
     _poolDevouringStrossus,
     _poolDiscipleOfMalice,

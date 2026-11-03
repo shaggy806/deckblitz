@@ -286,6 +286,7 @@ import {
   fixChosenColor,
   manaValueOfObject,
   creaturesBlocking,
+  ownManaCostOf,
   matchesFilter,
   ownerOnly,
   printedManaCost,
@@ -318,6 +319,7 @@ import {
   MANA_TYPES,
   cheapestManaAmount,
   coloredReductionOf,
+  manaCostReductions,
   manaValue,
   parseManaCost,
   repeatedManaCost,
@@ -326,6 +328,7 @@ import {
 } from "./mana.js";
 import type {
   Color,
+  ManaCostReduction,
   ColoredReduction,
   ManaCost,
   ManaOrigin,
@@ -3933,8 +3936,53 @@ export class Game {
    * and `face` already use, so a driver just offers both buttons.
    *
    * The caster's own offers; `castSpellActions` adds the assisted ones.
+   *
+   * Offering (rule 702.48a) is an optional additional cost, so it goes with
+   * any of them: the kicked variant once per permanent it could sacrifice and
+   * way of reducing by that permanent's mana cost (rule 118.7e), each priced
+   * so, the permanent named on the offer (702.48b).
    */
   private castSpellActionsAlone(
+    player: PlayerId,
+    card: ObjectId,
+    cardName: string,
+    def: CardDefinition,
+    opts: {
+      via?: CastVia;
+      face?: number;
+      costString: string | null;
+      graveyardGrant?: GraveyardGrant;
+    },
+  ): LegalAction[] {
+    const offers = this.castSpellVariants(player, card, cardName, def, opts);
+    const offering = def.kicker?.offering;
+    if (offering === undefined) return offers;
+    for (const victim of this.eligibleSacrifices(player, offering)) {
+      const object = this.state.objects[victim];
+      const name = printedCardName(object);
+      const reductions = this.offeringReductions(victim, def);
+      reductions.forEach((reduction, index) => {
+        const priced = this.withOffering({ card, reduction }, () =>
+          this.castSpellVariants(player, card, cardName, def, opts),
+        );
+        for (const offer of priced) {
+          if (offer.kind !== "cast-spell" || offer.kicked !== true) continue;
+          offers.push({
+            ...offer,
+            sacrifice: { choices: [victim] },
+            emergeSacrifice: { object: victim, cardName: name, manaValue: manaValueOfObject(this.registry, object) },
+            kickerCost: reduction.text === "" ? `sacrificing ${name}` : `sacrificing ${name}: -${reduction.text}`,
+            ...(reductions.length > 1 ? { costOption: index } : {}),
+          });
+        }
+      });
+    }
+    return offers;
+  }
+
+  /** {@link castSpellActionsAlone}'s offers, an offering's only as priced by the
+   * caller's probe. */
+  private castSpellVariants(
     player: PlayerId,
     card: ObjectId,
     cardName: string,
@@ -13912,6 +13960,11 @@ export class Game {
             ) as Record<Color, number>,
           };
     const tax = this.isCastableCommander(player, cardId) ? this.commanderTax(player, cardId) : 0;
+    // Offering (rule 702.48c): the sacrificed permanent's mana cost, probed by
+    // the caller. Its coloured and colorless symbols take mana of their type,
+    // any excess then generic.
+    const offering = this.offeringProbe?.card === cardId ? this.offeringProbe.reduction : null;
+    const offeringColorless = offering === null ? 0 : Math.min(base.colorless, offering.colorless);
     const mods = this.costModificationFor(player, cardId, targetCount, targets, def, xValue);
     const colored: ColoredReduction[] = [...mods.colored];
     // Harmonize's tapped creature (rule 702.180a), probed by the caller.
@@ -13922,6 +13975,10 @@ export class Game {
       this.harmonizePower +
       this.emergeManaValue +
       (this.kickedCostReduction?.card === cardId ? this.kickedCostReduction.generic : 0);
+    if (offering !== null) {
+      reduction += offering.generic + offering.colorless - offeringColorless;
+      colored.push({ colors: offering.colors, coloredOnly: false });
+    }
     // What the spell prints on itself: each one judged alone (Assassin's Ink).
     for (const self of def.selfCostReduction === null ? [] : [def.selfCostReduction].flat()) {
       if (self.thisWay === "flashback" && costString !== def.flashback?.cost) continue;
@@ -13997,6 +14054,7 @@ export class Game {
         colored: Object.fromEntries(
           Object.entries(base.colored).map(([c, n]) => [c, n + mods.increaseColored[c as Color]]),
         ) as Record<Color, number>,
+        colorless: base.colorless - offeringColorless,
         x: 0,
       },
       reduction,
@@ -15377,6 +15435,7 @@ export class Game {
     via: CastVia | undefined,
     grant: GraveyardGrant | undefined,
   ): CardFilter | undefined {
+    if (this.offeringProbe?.card === card) return this.faceDef(card, face).kicker?.offering;
     if (via === "emerge") {
       const emerge = this.faceDef(card, face).emerge;
       return emerge === null ? undefined : Game.emergeFilter(emerge);
@@ -15471,6 +15530,20 @@ export class Game {
      * from them (rule 601.2f), as the cast itself will be. */
     targets?: readonly (TargetRef | null | undefined)[],
   ): string | null {
+    // Offering (rule 702.48): the permanent named, asked again with its mana
+    // cost off the total. Which one is chosen as the spell is cast (702.48b).
+    if (kicked && this.state.objects[cardId] !== undefined && this.offeringProbe?.card !== cardId) {
+      const offering = this.faceDef(cardId, face).kicker?.offering;
+      if (offering !== undefined) {
+        const probe = sacrifice === undefined ? null : this.offeringProbeFor(player, cardId, face, sacrifice, costOption);
+        if (probe === null) return `that isn't a permanent ${this.faceDef(cardId, face).name}'s offering can sacrifice`;
+        return this.withOffering(probe, () =>
+          this.whyCannotCastSpell(player, cardId, via, face, modes, kicked, sacrifice, overload, free, convoke,
+            altCost, undefined, tap, graveyardGrant, xValue, targetCount, escapeExile, prototype, offspring, evoke, delve,
+            targets),
+        );
+      }
+    }
     // Prototyped (rule 718): judged as the prototyped spell it would be —
     // its prototype cost, colors and size (the rulings) — so asked again
     // with those applied.
@@ -17248,6 +17321,45 @@ export class Game {
    * otherwise. */
   private emergeProbed: ObjectId | null = null;
 
+  /** The offering cast {@link withOffering} is pricing: the spell, and what its
+   * sacrificed permanent takes off its total cost (rule 702.48c). `null`
+   * otherwise. Read by `castingCostOf` and `castRouteSacrifice`. */
+  private offeringProbe: { readonly card: ObjectId; readonly reduction: ManaCostReduction } | null = null;
+
+  /** Price what `fn` prices as this offering cast. Restores the probe after. */
+  private withOffering<T>(probe: NonNullable<Game["offeringProbe"]>, fn: () => T): T {
+    const before = this.offeringProbe;
+    this.offeringProbe = probe;
+    try {
+      return fn();
+    } finally {
+      this.offeringProbe = before;
+    }
+  }
+
+  /** The reductions sacrificing `victim` could make to casting `def`, one per
+   * way of choosing its hybrid halves that matters (rule 118.7e). */
+  private offeringReductions(victim: ObjectId, def: CardDefinition): readonly ManaCostReduction[] {
+    return manaCostReductions(ownManaCostOf(this.registry, this.state.objects[victim]), parseManaCost(def.manaCost));
+  }
+
+  /** The offering cast of `card` sacrificing `victim`, the action's `costOption`
+   * saying which of its {@link offeringReductions}; `null` if there's no such
+   * cast. */
+  private offeringProbeFor(
+    player: PlayerId,
+    card: ObjectId,
+    face: number,
+    victim: ObjectId,
+    option: number | undefined,
+  ): NonNullable<Game["offeringProbe"]> | null {
+    const def = this.faceDef(card, face);
+    const offering = def.kicker?.offering;
+    if (offering === undefined || !this.eligibleSacrifices(player, offering).includes(victim)) return null;
+    const reduction = this.offeringReductions(victim, def)[option ?? 0];
+    return reduction === undefined ? null : { card, reduction };
+  }
+
   /** Price what `fn` prices as an emerge cast sacrificing `victim`: its mana
    * value as it is now. Restores the probe after. */
   private withEmergeSacrifice<T>(victim: ObjectId, fn: () => T): T {
@@ -17689,6 +17801,17 @@ export class Game {
       this.withCastGrantScope(cardId, graveyardGrant, () =>
         this.castSpell(player, cardId, targets, xValue, via, face, modes, kicked, sacrifice, overload, free,
           convoke, altCost, costOption, tap, graveyardGrant, escapeExile, prototype, offspring, evoke, division, delve),
+      );
+      return;
+    }
+    // Offering (rule 702.48): every cost below is priced with the named
+    // permanent's mana cost off, and it's sacrificed as they're paid (702.48b).
+    if (kicked && this.offeringProbe?.card !== cardId && this.faceDef(cardId, face).kicker?.offering !== undefined) {
+      const probe = sacrifice === undefined ? null : this.offeringProbeFor(player, cardId, face, sacrifice, costOption);
+      if (probe === null) throw new Error(`that isn't a permanent ${this.faceDef(cardId, face).name}'s offering can sacrifice`);
+      this.withOffering(probe, () =>
+        this.castSpell(player, cardId, targets, xValue, via, face, modes, kicked, sacrifice, overload, free,
+          convoke, altCost, undefined, tap, graveyardGrant, escapeExile, prototype, offspring, evoke, division, delve),
       );
       return;
     }

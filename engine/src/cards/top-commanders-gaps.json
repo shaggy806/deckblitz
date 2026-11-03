@@ -1398,7 +1398,8 @@
   "effect:copy-spell-for-each-by-caster",
   "effect:copy-spell-for-each-chosen-paid",
   "keyword:gravestorm",
-  "static:cost-increase-colored"
+  "static:cost-increase-colored",
+  "keyword:offering"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

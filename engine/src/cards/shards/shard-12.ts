@@ -544,6 +544,7 @@ import _poolPaperfinRascal from "../pool/paperfin-rascal.js";
 import _poolPatagiaGolem from "../pool/patagia-golem.js";
 import _poolPathToTheFestival from "../pool/path-to-the-festival.js";
 import _poolPathbreakerIbex from "../pool/pathbreaker-ibex.js";
+import _poolPatronOfTheKitsune from "../pool/patron-of-the-kitsune.js";
 import _poolPatternOfRebirth from "../pool/pattern-of-rebirth.js";
 import _poolPemminsAura from "../pool/pemmins-aura.js";
 import _poolPendrellDrake from "../pool/pendrell-drake.js";
@@ -1433,6 +1434,7 @@ const shard: CardShard = {
     _poolPatagiaGolem,
     _poolPathToTheFestival,
     _poolPathbreakerIbex,
+    _poolPatronOfTheKitsune,
     _poolPatternOfRebirth,
     _poolPemminsAura,
     _poolPendrellDrake,

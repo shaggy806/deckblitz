@@ -9951,6 +9951,15 @@ export function parseFace(face, ctx = {}) {
       out.emerge = { cost: m[2], ...(m[1] !== undefined ? { from: { type: m[1] } } : {}) };
       continue;
     }
+    // "[Quality] offering" (rule 702.48a): an additional cost sacrificing a permanent of that quality, its
+    // mana cost off, the spell then castable any time an instant could be.
+    if (isSpell === false && (m = /^(\S+) offering$/.exec(line))) {
+      const offering = parseTypePhrase(m[1].toLowerCase() === "artifact" ? "artifact" : m[1]);
+      if (offering !== null && Object.keys(offering).length > 0) {
+        out.kicker = { cost: "", keyword: "offering", flash: true, offering };
+        continue;
+      }
+    }
     // Dash [cost] (rule 702.109a): an alternative cost — haste, and back to its owner's hand at the next end step.
     if ((m = /^Dash ((?:\{[^}]+\})+)$/.exec(line))) { out.dash = { cost: m[1] }; continue; }
     // Freerunning [mana cost] (rule 702.173a): an alternative cost once an Assassin or commander of yours dealt combat damage to a player this turn.
@@ -13051,6 +13060,13 @@ function parseStatic(line, text) {
         text,
       };
     }
+  }
+  if ((m = /^Creatures attacking your opponents have (first strike|double strike)\.$/.exec(line))) {
+    return {
+      affects: { scope: "filter", filter: { type: "creature", attackingOpponent: true } },
+      grantKeywords: [m[1].replace(" ", "-")],
+      text,
+    };
   }
   const outside = outsideBattlefieldStaticOf(line, text);
   if (outside !== null) return outside;

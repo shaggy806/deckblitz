@@ -623,6 +623,7 @@ import _poolSamutVizierOfNaktamun from "../pool/samut-vizier-of-naktamun.js";
 import _poolSandskin from "../pool/sandskin.js";
 import _poolSandstoneWarrior from "../pool/sandstone-warrior.js";
 import _poolSangriteSurge from "../pool/sangrite-surge.js";
+import _poolSapphireLeech from "../pool/sapphire-leech.js";
 import _poolSapphireMedallion from "../pool/sapphire-medallion.js";
 import _poolSatyrPiper from "../pool/satyr-piper.js";
 import _poolSavaiThundermane from "../pool/savai-thundermane.js";
@@ -1496,6 +1497,7 @@ const shard: CardShard = {
     _poolSandskin,
     _poolSandstoneWarrior,
     _poolSangriteSurge,
+    _poolSapphireLeech,
     _poolSapphireMedallion,
     _poolSatyrPiper,
     _poolSavaiThundermane,

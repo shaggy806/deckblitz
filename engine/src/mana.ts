@@ -445,6 +445,82 @@ export function reduceManaCost(
   };
 }
 
+/**
+ * A cost reduction by the mana symbols of a mana cost (rule 702.48c, offering's
+ * "reduced by the sacrificed permanent's mana cost"), each hybrid pip's half
+ * chosen: `text` the symbols it takes off, `""` for none.
+ */
+export interface ManaCostReduction {
+  readonly generic: number;
+  readonly colors: Readonly<Record<Color, number>>;
+  readonly colorless: number;
+  readonly text: string;
+}
+
+/** `cost` less a {@link ManaCostReduction}: its coloured and colorless symbols
+ * first take mana of their type, any excess then generic (rules 118.7b-d). */
+export function reducedBy(cost: ManaCost, by: ManaCostReduction): ManaCost {
+  const colorless = Math.min(cost.colorless, by.colorless);
+  return reduceManaCost(
+    { ...cost, colorless: cost.colorless - colorless },
+    by.generic + by.colorless - colorless,
+    [{ colors: by.colors, coloredOnly: false }],
+  );
+}
+
+/**
+ * The reductions the mana cost `symbols` could make to `spell`, one per way of
+ * choosing its hybrid pips' halves that's worth choosing (rule 118.7e): a way
+ * leaving the same cost as another, or one whatever pays another would pay, is
+ * dropped. The choice left is twobrid's: {2/R} against a {R} of the spell's is
+ * {2} less, or the {R}. A Phyrexian pip is its colour (118.7f), a snow pip
+ * generic (118.7g), and an {X} 0 (202.3e). No mana cost is one reduction of
+ * nothing.
+ */
+export function manaCostReductions(symbols: string | null, spell: ManaCost): readonly ManaCostReduction[] {
+  const cost = parseManaCost(symbols);
+  type Half = { readonly color: Color } | { readonly generic: number };
+  const ways = cost.hybrid.reduce<(readonly Half[])[]>(
+    (sofar, pip) =>
+      sofar.flatMap((way) =>
+        pip.flatMap((option): (readonly Half[])[] =>
+          option.kind === "color"
+            ? [[...way, { color: option.color }]]
+            : option.kind === "generic"
+              ? [[...way, { generic: option.amount }]]
+              : [],
+        ),
+      ),
+    [[]],
+  );
+  const reductions = ways.map((way): ManaCostReduction => {
+    const colors = { ...cost.colored };
+    let generic = cost.generic + cost.snow;
+    for (const half of way) {
+      if ("color" in half) colors[half.color] += 1;
+      else generic += half.generic;
+    }
+    const text = [
+      generic > 0 ? `{${generic}}` : "",
+      "{C}".repeat(cost.colorless),
+      ...COLORS.map((color) => `{${color}}`.repeat(colors[color])),
+    ].join("");
+    return { generic, colors, colorless: cost.colorless, text };
+  });
+  const left = reductions.map((reduction) => reducedBy(spell, reduction));
+  /** Whatever pays `a` pays `b`: `b` asks no more of any type, nor more mana. */
+  const paysFor = (a: ManaCost, b: ManaCost): boolean =>
+    a.colorless >= b.colorless &&
+    COLORS.every((color) => a.colored[color] >= b.colored[color]) &&
+    cheapestManaAmount(a) >= cheapestManaAmount(b) &&
+    JSON.stringify(a.hybrid) === JSON.stringify(b.hybrid) &&
+    (a.twobridReduction ?? 0) <= (b.twobridReduction ?? 0);
+  return reductions.filter(
+    (_reduction, i) =>
+      !left.some((other, j) => j !== i && paysFor(left[i], other) && (!paysFor(other, left[i]) || j < i)),
+  );
+}
+
 /** The least mana `cost` could be paid with, each hybrid pip at its cheapest
  * half — for comparing two versions of one cost, not for paying either. */
 export function cheapestManaAmount(cost: ManaCost): number {
