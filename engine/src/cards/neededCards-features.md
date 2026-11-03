@@ -321,6 +321,16 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### A player becoming a target, an ability's targets, the first time by anyone — built 2026-11-03
+
+`trigger:player-becomes-target`, `trigger:becomes-target-by-your-ability`, `trigger:becomes-target-first-time-by-anyone`
+(family `trigger:becomes-target-fixes`): the `player-targeted` event (once per player a spell or ability targets),
+`becomes-target`'s `player`, `playerOnly`, `abilityOnly` and `firstTimeEachTurnByAnyone`. Proving cards: Amulet of
+Safekeeping, Unsettled Mariner, Dormant Gomazoa, Loki, God of Mischief, Angelic Cub. Still needing more: Leyline of
+Combustion ("you and/or at least one permanent you control" — once per spell or ability), Rayne's "if enchanted",
+Parnesse's copy, Skophos Maze-Warden's land named Labyrinth of Skophos, Kira's granted "counter that spell or
+ability"; `trigger:becomes-target-spell-on-stack` (Surrak) and `-of-ability-targeting-only-it` (Agrus Kos) open.
+
 ### A land tapped for mana producing another type — built 2026-11-03
 
 `replacement:tap-for-mana-produces-color-instead`: `StaticAbility.landManaInstead` (per land kind, whoever taps or

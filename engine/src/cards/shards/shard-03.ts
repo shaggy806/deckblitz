@@ -732,6 +732,7 @@ import _poolTwinferno from "../pool/twinferno.js";
 import _poolTwoHeadedGiantOfForiys from "../pool/two-headed-giant-of-foriys.js";
 import _poolUndercityDireRat from "../pool/undercity-dire-rat.js";
 import _poolUnderworldCoinsmith from "../pool/underworld-coinsmith.js";
+import _poolUnsettledMariner from "../pool/unsettled-mariner.js";
 import _poolUntaidakeTheCloudKeeper from "../pool/untaidake-the-cloud-keeper.js";
 import _poolUpdraft from "../pool/updraft.js";
 import _poolUrbanDaggertooth from "../pool/urban-daggertooth.js";
@@ -1548,6 +1549,7 @@ const shard: CardShard = {
     _poolTwoHeadedGiantOfForiys,
     _poolUndercityDireRat,
     _poolUnderworldCoinsmith,
+    _poolUnsettledMariner,
     _poolUntaidakeTheCloudKeeper,
     _poolUpdraft,
     _poolUrbanDaggertooth,

@@ -23,6 +23,7 @@ import _poolAmbassadorLaquatus from "../pool/ambassador-laquatus.js";
 import _poolAmblingStormshell from "../pool/ambling-stormshell.js";
 import _poolAmbulatoryEdifice from "../pool/ambulatory-edifice.js";
 import _poolAmuletOfKroog from "../pool/amulet-of-kroog.js";
+import _poolAmuletOfSafekeeping from "../pool/amulet-of-safekeeping.js";
 import _poolAnaDisciple from "../pool/ana-disciple.js";
 import _poolAncestralMask from "../pool/ancestral-mask.js";
 import _poolAncestralVision from "../pool/ancestral-vision.js";
@@ -934,6 +935,7 @@ const shard: CardShard = {
     _poolAmblingStormshell,
     _poolAmbulatoryEdifice,
     _poolAmuletOfKroog,
+    _poolAmuletOfSafekeeping,
     _poolAnaDisciple,
     _poolAncestralMask,
     _poolAncestralVision,

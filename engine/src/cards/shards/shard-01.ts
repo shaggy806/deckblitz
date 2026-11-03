@@ -412,6 +412,7 @@ import _poolLittleBear from "../pool/little-bear.js";
 import _poolLoamDweller from "../pool/loam-dweller.js";
 import _poolLockAndLoad from "../pool/lock-and-load.js";
 import _poolLocketOfYesterdays from "../pool/locket-of-yesterdays.js";
+import _poolLokiGodOfMischief from "../pool/loki-god-of-mischief.js";
 import _poolLordSkitterSewerKing from "../pool/lord-skitter-sewer-king.js";
 import _poolLoreholdCampus from "../pool/lorehold-campus.js";
 import _poolLoxodonWayfarer from "../pool/loxodon-wayfarer.js";
@@ -1283,6 +1284,7 @@ const shard: CardShard = {
     _poolLoamDweller,
     _poolLockAndLoad,
     _poolLocketOfYesterdays,
+    _poolLokiGodOfMischief,
     _poolLordSkitterSewerKing,
     _poolLoreholdCampus,
     _poolLoxodonWayfarer,

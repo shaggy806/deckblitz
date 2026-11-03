@@ -22347,9 +22347,9 @@ export class Game {
    * are chosen and locked in (601.2c / 602.2b / 603.3d), not when it
    * resolves — the trigger fires even if the spell is later countered or
    * fizzles. A triggered ability announces too (`mintTriggerAbility`), so
-   * ward and Thunderbreak Regent see one. Player targets aren't announced:
-   * nothing in the pool triggers on a *player* being targeted, and the
-   * events would be pure noise in the log.
+   * ward and Thunderbreak Regent see one. A player target is announced as
+   * `player-targeted`, once per player (Amulet of Safekeeping's "whenever
+   * you become the target").
    *
    * Once per *object*, not per target slot: a spell that names the same
    * creature in two slots makes it "become the target" once (rule 115.7 /
@@ -22368,10 +22368,17 @@ export class Game {
     autoSlots: readonly number[] = [],
   ): void {
     const announced = new Set<ObjectId>();
+    const announcedPlayers = new Set<PlayerId>();
     let slot = -1;
     for (const target of targets) {
       slot += 1;
       if (autoSlots.includes(slot)) continue;
+      if (target?.kind === "player") {
+        if (announcedPlayers.has(target.player) || this.state.players[target.player]?.hasLost !== false) continue;
+        announcedPlayers.add(target.player);
+        this.emit({ type: "player-targeted", player: target.player, by, source, stackObject, bySpell });
+        continue;
+      }
       if (target === undefined || target.kind !== "object") continue;
       if (announced.has(target.object)) continue;
       announced.add(target.object);
@@ -22392,6 +22399,7 @@ export class Game {
         stackObject,
         bySpell,
         ...(first ? { firstByPlayerThisTurn: true as const } : {}),
+        ...(current.length === 0 ? { firstThisTurn: true as const } : {}),
       });
       if (first && this.state.objects[target.object] !== undefined) {
         this.state.objects[target.object].targetedThisTurn = { turn, stint, by: [...current, by] };
@@ -26354,7 +26362,7 @@ export class Game {
           const autoCandidate: TargetRef | undefined =
             ability.trigger.on === "becomes-target" &&
             ability.trigger.targeterNotTarget !== true &&
-            event.type === "object-targeted"
+            (event.type === "object-targeted" || event.type === "player-targeted")
               ? { kind: "player" as const, player: event.by }
               : undefined;
           // Only hand the event-determined player to slot 0 if that slot can
@@ -26427,7 +26435,8 @@ export class Game {
             ...(triggerValue !== undefined ? { triggerValue } : {}),
             ...(triggerObject !== undefined ? { triggerObject } : {}),
             // Ward's "counter that spell or ability unless that player pays".
-            ...(ability.trigger.on === "becomes-target" && event.type === "object-targeted"
+            ...(ability.trigger.on === "becomes-target" &&
+            (event.type === "object-targeted" || event.type === "player-targeted")
               ? {
                   targetedBy: {
                     object: event.stackObject,
@@ -26857,7 +26866,7 @@ export class Game {
         player = this.defendingPlayerOf(attacking);
         recipient = this.attackedRecipient(attacking);
       }
-    } else if (event.type === "object-targeted") {
+    } else if (event.type === "object-targeted" || event.type === "player-targeted") {
       // Whoever controls the targeting spell or ability — "that player" of a
       // becomes-target trigger (Black Bolt, Inhuman King: "destroy target
       // nonland permanent that player controls").
@@ -27385,20 +27394,38 @@ export class Game {
           this.matchesWho(spec.who, event.object, self, true) &&
           this.triggerFilterOk(spec.filter, event.object, self, true)
         );
-      case "becomes-target":
+      case "becomes-target": {
+        if (event.type !== "object-targeted" && event.type !== "player-targeted") return false;
+        // "… an opponent controls" — relative to whoever controls the
+        // permanent that's watching, not to what was targeted.
+        const by =
+          (spec.byOpponentOnly !== true || event.by !== self.controller) &&
+          (spec.byControllerOnly !== true || event.by === self.controller) &&
+          // "… becomes the target of a spell" — not an ability, or the
+          // other way round (Loki).
+          (spec.spellOnly !== true || event.bySpell) &&
+          (spec.abilityOnly !== true || !event.bySpell);
+        if (event.type === "player-targeted") {
+          // "Whenever you become the target" (Amulet of Safekeeping), "a
+          // player or permanent" (Loki).
+          return (
+            by &&
+            spec.player !== undefined &&
+            (spec.player === "any" || event.player === self.controller) &&
+            spec.firstTimeEachTurn !== true &&
+            spec.firstTimeEachTurnByAnyone !== true
+          );
+        }
         return (
-          event.type === "object-targeted" &&
+          by &&
+          spec.playerOnly !== true &&
           !(spec.otherOnly === true && event.object === self.id) &&
           this.matchesWho(spec.who, event.object, self) &&
           this.triggerFilterOk(spec.filter, event.object, self) &&
-          // "… an opponent controls" — relative to whoever controls the
-          // permanent that's watching, not to the targeted object.
-          (spec.byOpponentOnly !== true || event.by !== self.controller) &&
-          (spec.byControllerOnly !== true || event.by === self.controller) &&
           (spec.firstTimeEachTurn !== true || event.firstByPlayerThisTurn === true) &&
-          // "… becomes the target of a spell" — not an ability.
-          (spec.spellOnly !== true || event.bySpell)
+          (spec.firstTimeEachTurnByAnyone !== true || event.firstThisTurn === true)
         );
+      }
       case "attacks":
         return (
           event.type === "attacker-declared" &&

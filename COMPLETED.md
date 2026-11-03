@@ -12,7 +12,10 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
-- **A land tapped for mana producing another type** (2026-11-03, `FAM3`): `landManaInstead`, a static (by land kind,
+- **A player becoming a target, and the first time by anyone** (2026-11-03, `FAM4`): `player-targeted`, and
+  `becomes-target`'s `player`, `playerOnly`, `abilityOnly`, `firstTimeEachTurnByAnyone`. Amulet of Safekeeping, Unsettled
+  Mariner, Dormant Gomazoa, Loki, God of Mischief, Angelic Cub.
+- **A land tapped for mana producing another type** (2026-11-03, `71edd1918`): `landManaInstead`, a static (by land kind,
   anyone's taps) or a turn-long player effect. Deep Water, Reality Twist, Infernal Darkness.
 - **Unspent mana: another type, kept by every player, life lost** (2026-11-03, `679a2a9e9`): `unspentManaBecomes`,
   `keepsUnspentManaEachPlayer`, `manaLossCausesLifeLoss` in the rule 500.4 emptying. Horizon Stone, Upwelling, Yurlok of

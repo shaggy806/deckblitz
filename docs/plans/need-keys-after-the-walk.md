@@ -855,6 +855,10 @@ missing. Re-run `--greedy` for Phase 2's order.
 - **2026-11-03: `replacement:tap-for-mana-produces-color-instead`.** A land's mana another type instead, as a static
   or a turn-long player effect; Deep Water, Reality Twist, Infernal Darkness. Harvest Mage (a colour of your choice,
   one mana) is left.
+- **2026-11-03: `trigger:becomes-target-fixes`.** Players announced as targets (`player-targeted`), the trigger's
+  `player`/`playerOnly`/`abilityOnly`/`firstTimeEachTurnByAnyone` (`player-becomes-target`, `becomes-target-by-your-ability`,
+  `becomes-target-first-time-by-anyone`); Amulet of Safekeeping, Unsettled Mariner, Dormant Gomazoa, Loki, Angelic Cub.
+  Left: the spell-on-stack and targets-only-it keys.
 
 ## Rough size
 

@@ -782,6 +782,27 @@ export type GameEvent =
        * targeted this permanent (this battlefield stint) — valiant's "for
        * the first time each turn". */
       readonly firstByPlayerThisTurn?: true;
+      /** The first time this turn any spell or ability, anyone's, has
+       * targeted this permanent (this battlefield stint) — Angelic Cub's "for
+       * the first time each turn". */
+      readonly firstThisTurn?: true;
+    })
+  | (Base & {
+      /**
+       * A player became the target of a spell or ability (rule 115.7 /
+       * 603.2) — once per player a spell or ability names, as it's put on
+       * the stack: "whenever **you** become the target of a spell or ability
+       * an opponent controls" (Amulet of Safekeeping), "whenever you or a
+       * permanent you control becomes the target" (Unsettled Mariner), "a
+       * player or permanent" (Loki, God of Mischief). The fields are
+       * `object-targeted`'s.
+       */
+      readonly type: "player-targeted";
+      readonly player: PlayerId;
+      readonly by: PlayerId;
+      readonly source: ObjectId;
+      readonly stackObject: ObjectId;
+      readonly bySpell: boolean;
     })
   | (Base & {
       readonly type: "ability-resolved";

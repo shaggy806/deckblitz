@@ -41,6 +41,7 @@ import _poolAmbushParatrooper from "../pool/ambush-paratrooper.js";
 import _poolAmpedRaptor from "../pool/amped-raptor.js";
 import _poolAnaraWolvidFamiliar from "../pool/anara-wolvid-familiar.js";
 import _poolAncientKavu from "../pool/ancient-kavu.js";
+import _poolAngelicCub from "../pool/angelic-cub.js";
 import _poolAngelicQuartermaster from "../pool/angelic-quartermaster.js";
 import _poolAngrathsFury from "../pool/angraths-fury.js";
 import _poolAnnieFlashTheVeteran from "../pool/annie-flash-the-veteran.js";
@@ -975,6 +976,7 @@ const shard: CardShard = {
     _poolAmpedRaptor,
     _poolAnaraWolvidFamiliar,
     _poolAncientKavu,
+    _poolAngelicCub,
     _poolAngelicQuartermaster,
     _poolAngrathsFury,
     _poolAnnieFlashTheVeteran,

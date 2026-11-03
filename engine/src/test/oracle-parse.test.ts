@@ -9670,6 +9670,33 @@ describe("a static acting on a player", () => {
     });
   });
 
+  it("reads a player becoming a target, and the first time each turn by anyone (rule 115.7)", () => {
+    const amulet = face(
+      "Artifact",
+      "Whenever you become the target of a spell or ability an opponent controls, counter that spell or ability unless its controller pays {1}.",
+    );
+    expect(amulet.complete).toBe(true);
+    expect(amulet.triggered[0].trigger).toEqual({ on: "becomes-target", who: "self", player: "you", playerOnly: true, byOpponentOnly: true });
+    expect(amulet.triggered[0].effect).toEqual({ kind: "ward", cost: { mana: "{1}" } });
+    const mariner = face(
+      "Creature",
+      "Whenever you or a permanent you control becomes the target of a spell or ability an opponent controls, counter that spell or ability unless its controller pays {1}.",
+    );
+    expect(mariner.triggered[0].trigger).toEqual({ on: "becomes-target", who: "you-control", player: "you", byOpponentOnly: true });
+    const loki = face(
+      "Legendary Creature",
+      "Whenever a player or permanent becomes the target of an ability you control, draw a card. This ability triggers only once each turn.",
+    );
+    expect(loki.triggered[0].trigger).toEqual({ on: "becomes-target", who: "any", player: "any", byControllerOnly: true, abilityOnly: true });
+    const gomazoa = face("Creature", "Whenever you become the target of a spell, you may untap this creature.");
+    expect(gomazoa.triggered[0].trigger).toEqual({ on: "becomes-target", who: "self", player: "you", playerOnly: true, spellOnly: true });
+    const cub = face(
+      "Creature",
+      "Whenever this creature becomes the target of a spell or ability for the first time each turn, put a +1/+1 counter on it.",
+    );
+    expect(cub.triggered[0].trigger).toEqual({ on: "becomes-target", who: "self", firstTimeEachTurnByAnyone: true });
+  });
+
   it("reads a land tapped for mana producing another type (rules 106.12, 614.1a)", () => {
     const darkness = face("Enchantment", "If a land is tapped for mana, it produces {B} instead of any other type.");
     expect(darkness.complete).toBe(true);

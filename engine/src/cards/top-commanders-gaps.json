@@ -1413,7 +1413,10 @@
   "condition:distinct-mana-values-in-graveyard",
   "condition:controlled-since-turn-start",
   "filter:controlled-continuously-since-turn-start",
-  "replacement:tap-for-mana-produces-color-instead"
+  "replacement:tap-for-mana-produces-color-instead",
+  "trigger:player-becomes-target",
+  "trigger:becomes-target-by-your-ability",
+  "trigger:becomes-target-first-time-by-anyone"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

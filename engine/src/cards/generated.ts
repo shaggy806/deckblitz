@@ -643,6 +643,7 @@ import _poolAmrouScout from "./pool/amrou-scout.js";
 import _poolAmrouSeekers from "./pool/amrou-seekers.js";
 import _poolAmugaba from "./pool/amugaba.js";
 import _poolAmuletOfKroog from "./pool/amulet-of-kroog.js";
+import _poolAmuletOfSafekeeping from "./pool/amulet-of-safekeeping.js";
 import _poolAmuletOfUnmaking from "./pool/amulet-of-unmaking.js";
 import _poolAmuletOfVigor from "./pool/amulet-of-vigor.js";
 import _poolAmyRose from "./pool/amy-rose.js";
@@ -758,6 +759,7 @@ import _poolAngelicBenediction from "./pool/angelic-benediction.js";
 import _poolAngelicBlessing from "./pool/angelic-blessing.js";
 import _poolAngelicCaptain from "./pool/angelic-captain.js";
 import _poolAngelicChorus from "./pool/angelic-chorus.js";
+import _poolAngelicCub from "./pool/angelic-cub.js";
 import _poolAngelicCurator from "./pool/angelic-curator.js";
 import _poolAngelicDestiny from "./pool/angelic-destiny.js";
 import _poolAngelicEdict from "./pool/angelic-edict.js";
@@ -6277,6 +6279,7 @@ import _poolDoraMilajeElite from "./pool/dora-milaje-elite.js";
 import _poolDoranBesiegedByTime from "./pool/doran-besieged-by-time.js";
 import _poolDoranTheSiegeTower from "./pool/doran-the-siege-tower.js";
 import _poolDoriBearerOfFriends from "./pool/dori-bearer-of-friends.js";
+import _poolDormantGomazoa from "./pool/dormant-gomazoa.js";
 import _poolDormantGrove from "./pool/dormant-grove.js";
 import _poolDormantSliver from "./pool/dormant-sliver.js";
 import _poolDormantVolcano from "./pool/dormant-volcano.js";
@@ -13888,6 +13891,7 @@ import _poolLoftyDenial from "./pool/lofty-denial.js";
 import _poolLoftyDreams from "./pool/lofty-dreams.js";
 import _poolLogicKnot from "./pool/logic-knot.js";
 import _poolLokhustHeavyDestroyer from "./pool/lokhust-heavy-destroyer.js";
+import _poolLokiGodOfMischief from "./pool/loki-god-of-mischief.js";
 import _poolLokiLordOfMisrule from "./pool/loki-lord-of-misrule.js";
 import _poolLokiTheDeceiver from "./pool/loki-the-deceiver.js";
 import _poolLokisScepter from "./pool/lokis-scepter.js";
@@ -25809,6 +25813,7 @@ import _poolUnrulyMob from "./pool/unruly-mob.js";
 import _poolUnscrupulousContractor from "./pool/unscrupulous-contractor.js";
 import _poolUnsealTheNecropolis from "./pool/unseal-the-necropolis.js";
 import _poolUnseenWalker from "./pool/unseen-walker.js";
+import _poolUnsettledMariner from "./pool/unsettled-mariner.js";
 import _poolUnsettlingTwins from "./pool/unsettling-twins.js";
 import _poolUnshakableTail from "./pool/unshakable-tail.js";
 import _poolUnsparingBoltcaster from "./pool/unsparing-boltcaster.js";
@@ -29292,6 +29297,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAmrouSeekers,
   _poolAmugaba,
   _poolAmuletOfKroog,
+  _poolAmuletOfSafekeeping,
   _poolAmuletOfUnmaking,
   _poolAmuletOfVigor,
   _poolAmyRose,
@@ -29407,6 +29413,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAngelicBlessing,
   _poolAngelicCaptain,
   _poolAngelicChorus,
+  _poolAngelicCub,
   _poolAngelicCurator,
   _poolAngelicDestiny,
   _poolAngelicEdict,
@@ -34926,6 +34933,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDoranBesiegedByTime,
   _poolDoranTheSiegeTower,
   _poolDoriBearerOfFriends,
+  _poolDormantGomazoa,
   _poolDormantGrove,
   _poolDormantSliver,
   _poolDormantVolcano,
@@ -42537,6 +42545,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLoftyDreams,
   _poolLogicKnot,
   _poolLokhustHeavyDestroyer,
+  _poolLokiGodOfMischief,
   _poolLokiLordOfMisrule,
   _poolLokiTheDeceiver,
   _poolLokisScepter,
@@ -54458,6 +54467,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolUnscrupulousContractor,
   _poolUnsealTheNecropolis,
   _poolUnseenWalker,
+  _poolUnsettledMariner,
   _poolUnsettlingTwins,
   _poolUnshakableTail,
   _poolUnsparingBoltcaster,
@@ -57954,6 +57964,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/amrou-seekers": _poolAmrouSeekers,
   "pool/amugaba": _poolAmugaba,
   "pool/amulet-of-kroog": _poolAmuletOfKroog,
+  "pool/amulet-of-safekeeping": _poolAmuletOfSafekeeping,
   "pool/amulet-of-unmaking": _poolAmuletOfUnmaking,
   "pool/amulet-of-vigor": _poolAmuletOfVigor,
   "pool/amy-rose": _poolAmyRose,
@@ -58069,6 +58080,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/angelic-blessing": _poolAngelicBlessing,
   "pool/angelic-captain": _poolAngelicCaptain,
   "pool/angelic-chorus": _poolAngelicChorus,
+  "pool/angelic-cub": _poolAngelicCub,
   "pool/angelic-curator": _poolAngelicCurator,
   "pool/angelic-destiny": _poolAngelicDestiny,
   "pool/angelic-edict": _poolAngelicEdict,
@@ -63588,6 +63600,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/doran-besieged-by-time": _poolDoranBesiegedByTime,
   "pool/doran-the-siege-tower": _poolDoranTheSiegeTower,
   "pool/dori-bearer-of-friends": _poolDoriBearerOfFriends,
+  "pool/dormant-gomazoa": _poolDormantGomazoa,
   "pool/dormant-grove": _poolDormantGrove,
   "pool/dormant-sliver": _poolDormantSliver,
   "pool/dormant-volcano": _poolDormantVolcano,
@@ -71199,6 +71212,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/lofty-dreams": _poolLoftyDreams,
   "pool/logic-knot": _poolLogicKnot,
   "pool/lokhust-heavy-destroyer": _poolLokhustHeavyDestroyer,
+  "pool/loki-god-of-mischief": _poolLokiGodOfMischief,
   "pool/loki-lord-of-misrule": _poolLokiLordOfMisrule,
   "pool/loki-the-deceiver": _poolLokiTheDeceiver,
   "pool/lokis-scepter": _poolLokisScepter,
@@ -83120,6 +83134,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/unscrupulous-contractor": _poolUnscrupulousContractor,
   "pool/unseal-the-necropolis": _poolUnsealTheNecropolis,
   "pool/unseen-walker": _poolUnseenWalker,
+  "pool/unsettled-mariner": _poolUnsettledMariner,
   "pool/unsettling-twins": _poolUnsettlingTwins,
   "pool/unshakable-tail": _poolUnshakableTail,
   "pool/unsparing-boltcaster": _poolUnsparingBoltcaster,

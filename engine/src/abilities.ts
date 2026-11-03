@@ -1365,6 +1365,23 @@ export type TriggerSpec =
        * "target opponent gets a poison counter" may name any opponent, not
        * only the one whose spell it was. */
       readonly targeterNotTarget?: boolean;
+      /** Players count too: "whenever **you** or a permanent you control
+       * becomes the target" (Unsettled Mariner — `"you"`, this permanent's
+       * controller), "whenever a **player** or permanent becomes the target"
+       * (Loki, God of Mischief — `"any"`). Once per player a spell or ability
+       * targets, beside once per permanent; `who` and `filter` are about
+       * permanents only. */
+      readonly player?: "you" | "any";
+      /** With `player`: players alone, no permanent — "whenever you become
+       * the target of a spell" (Dormant Gomazoa, Amulet of Safekeeping). */
+      readonly playerOnly?: true;
+      /** Only an *ability* targeting it, not a spell — "becomes the target of
+       * an ability you control" (Loki, God of Mischief). */
+      readonly abilityOnly?: true;
+      /** "For the first time each turn" counted over every player's spells
+       * and abilities (Angelic Cub) — not valiant's per-player
+       * `firstTimeEachTurn`. Whether or not this ability triggered then. */
+      readonly firstTimeEachTurnByAnyone?: true;
     }
   | {
       /**

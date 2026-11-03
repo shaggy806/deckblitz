@@ -80,6 +80,7 @@ const NOISY_EVENTS: ReadonlySet<GameEvent['type']> = new Set([
   // "becomes the target of" triggers, and the spell's own line already
   // names its targets.
   'object-targeted',
+  'player-targeted',
   // The whole-declaration summary, for "whenever you attack with N or more
   // creatures" — every attacker already has its own `attacker-declared` line.
   'attackers-declared',
@@ -403,6 +404,8 @@ function eventText(event: GameEvent, nameOf: NameOf, seats: readonly SeatStatus[
       return `${name(event.source)}'s ability resolves`
     case 'object-targeted':
       return `${name(event.object)} becomes the target of ${name(event.source)} (${event.by})`
+    case 'player-targeted':
+      return `${who(event.player)} becomes the target of ${name(event.source)} (${event.by})`
     case 'ability-triggered':
       return `${name(event.source)}'s trigger goes on the stack (${who(event.controller)})`
     case 'delayed-trigger-created':

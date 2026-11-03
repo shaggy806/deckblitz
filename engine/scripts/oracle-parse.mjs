@@ -1779,6 +1779,24 @@ export function parseTrigger(clause) {
     if (filter === null || filter.type === undefined) return null;
     return [{ on: "becomes-target", who: "you-control", filter, ...(m[1] === "another" ? { otherOnly: true } : {}) }];
   }
+  // A player becoming a target (rule 115.7): "whenever you become the target
+  // of a spell[ or ability][ an opponent controls]" (Amulet of Safekeeping,
+  // Dormant Gomazoa), "whenever you or a permanent you control becomes …"
+  // (Unsettled Mariner), "whenever a player or permanent becomes the target
+  // of an ability you control" (Loki).
+  if ((m = /^Whenever (you become|you or a permanent you control becomes|a player or permanent becomes) the target of (a spell or ability|a spell|an ability)( an opponent controls| you control)?$/.exec(c))) {
+    const by = m[3] === " an opponent controls" ? { byOpponentOnly: true } : m[3] === " you control" ? { byControllerOnly: true } : {};
+    const kind = m[2] === "a spell" ? { spellOnly: true } : m[2] === "an ability" ? { abilityOnly: true } : {};
+    const whose =
+      m[1] === "you become"
+        ? { who: "self", player: "you", playerOnly: true }
+        : m[1].startsWith("you or") ? { who: "you-control", player: "you" } : { who: "any", player: "any" };
+    return [{ on: "becomes-target", ...whose, ...by, ...kind }];
+  }
+  // "For the first time each turn", by anyone's spell or ability (Angelic Cub).
+  if (/^Whenever ~ becomes the target of a spell or ability for the first time each turn$/.test(c)) {
+    return [{ on: "becomes-target", who: "self", firstTimeEachTurnByAnyone: true }];
+  }
   if (/^When you cast (?:~|this spell)$/.test(c)) return [{ on: "this-cast" }];
   // Plot (rule 702.170): it triggers from exile, for this card alone.
   if (/^When (?:~|this card) becomes plotted$/.test(c)) return [{ on: "this-plotted" }];
@@ -2472,6 +2490,12 @@ export function parseSentence(sentence, ctx) {
   }
   if (/^this turn, creatures can't attack unless their controller pays \{X\} for each attacking creature they control\.$/i.test(s)) {
     return { kind: "player-effect", duration: "end-of-turn", attackTax: { generic: "x", covers: "all" } };
+  }
+  // A becomes-target trigger's "counter that spell or ability unless its
+  // controller pays {N}" (Frost Titan, Unsettled Mariner): ward's counter of
+  // the targeting spell or ability (rule 702.21a's shape).
+  if ((m = /^counter that spell or ability unless its controller pays (\{\d+\})\.$/i.exec(s))) {
+    return { kind: "ward", cost: { mana: m[1] } };
   }
   // "Until end of turn, if you tap a land you control for mana, it produces
   // {U} instead of any other type" (Deep Water — rule 106.12).

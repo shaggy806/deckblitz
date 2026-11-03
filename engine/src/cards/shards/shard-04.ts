@@ -174,6 +174,7 @@ import _poolDiscoveryDispersal from "../pool/discovery-dispersal.js";
 import _poolDistemperOfTheBlood from "../pool/distemper-of-the-blood.js";
 import _poolDistortedCuriosity from "../pool/distorted-curiosity.js";
 import _poolDoomsServoGuards from "../pool/dooms-servo-guards.js";
+import _poolDormantGomazoa from "../pool/dormant-gomazoa.js";
 import _poolDoseOfDawnglow from "../pool/dose-of-dawnglow.js";
 import _poolDoubleDown from "../pool/double-down.js";
 import _poolDoubleJump from "../pool/double-jump.js";
@@ -1058,6 +1059,7 @@ const shard: CardShard = {
     _poolDistemperOfTheBlood,
     _poolDistortedCuriosity,
     _poolDoomsServoGuards,
+    _poolDormantGomazoa,
     _poolDoseOfDawnglow,
     _poolDoubleDown,
     _poolDoubleJump,
