@@ -1470,7 +1470,12 @@
   "keyword:hexproof-from-abilities",
   "effect:tokens-created-with-source",
   "static:token-pt-from-source-counters",
-  "static:token-pt-from-creator-counters"
+  "static:token-pt-from-creator-counters",
+  "effect:any-target-filter",
+  "target:creature-planeswalker-or-player",
+  "target:creature-token-player-or-planeswalker",
+  "target:player-planeswalker-or-filtered-creature",
+  "target:opponent-or-creature-or-planeswalker-an-opponent-controls"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

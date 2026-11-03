@@ -11926,6 +11926,59 @@ describe("the greatest power among creatures on the battlefield", () => {
   });
 });
 
+describe("one target slot over players and permanents", () => {
+  const targetOfLine = (oracle_text: string) => {
+    const card = parseFace({ name: "Card", type_line: "Creature", oracle_text }, { tokenFor: (d: string) => d });
+    expect(card.todo).toEqual([]);
+    return card.activated[0].targets[0];
+  };
+  it("any target that isn't a subtype or a commander", () => {
+    expect(targetOfLine("{T}: This creature deals 1 damage to any target that isn't a Dragon.")).toEqual({
+      kind: "permanent",
+      filter: { typesAnyOf: ["creature", "planeswalker", "battle"], notSubtypes: ["Dragon"] },
+      orPlayer: "any",
+    });
+    expect(targetOfLine("{T}: This creature deals 1 damage to any target that isn't a commander.").filter.isCommander).toBe(false);
+  });
+  it("a creature token, a player or a planeswalker", () => {
+    expect(targetOfLine("{2}{R}: This creature deals 1 damage to target creature token, player, or planeswalker.")).toEqual({
+      kind: "permanent",
+      filter: { anyOf: [{ type: "creature", token: true }, { type: "planeswalker" }] },
+      orPlayer: "any",
+    });
+  });
+  it("a creature, a planeswalker or a player", () => {
+    expect(targetOfLine("{T}: This creature deals 1 damage to target creature, planeswalker, or player.").orPlayer).toBe("any");
+  });
+  it("an opponent, or what an opponent controls", () => {
+    expect(
+      targetOfLine("{T}: This creature deals 7 damage to target opponent, creature an opponent controls, or planeswalker an opponent controls."),
+    ).toEqual({
+      kind: "permanent",
+      whose: "opponent",
+      filter: { typesAnyOf: ["creature", "planeswalker"] },
+      orPlayer: "opponent",
+    });
+  });
+  it("a player, a planeswalker or a creature of one type", () => {
+    expect(
+      targetOfLine("{1}: Prevent the next 1 damage that would be dealt to target player, planeswalker, or Sliver creature this turn."),
+    ).toEqual({
+      kind: "permanent",
+      filter: { anyOf: [{ type: "planeswalker" }, { type: "creature", subtype: "Sliver" }] },
+      orPlayer: "any",
+    });
+  });
+  it("leaves a line it can't read to the author", () => {
+    const card = parseFace(
+      { name: "Card", type_line: "Creature", oracle_text: "{T}: This creature deals 1 damage to any target that was dealt damage this turn." },
+      { tokenFor: (d: string) => d },
+    );
+    expect(card.complete).toBe(false);
+    expect(card.activated[0].effect).toBeNull();
+  });
+});
+
 describe("tokens created with this", () => {
   const read = (type_line: string, oracle_text: string) =>
     parseFace({ name: "Card", type_line, oracle_text }, { tokenFor: (d: string) => d });

@@ -3482,7 +3482,14 @@ stopped covering:
   seats 1–3, since a game seats at most four. Exactly the printed card: a
   target that has come under anyone else's control is illegal as it
   resolves, as "that player's" would be (unlike `differentController`, which
-  only asks the targets' controllers to differ). `orPlayer: "opponent"`
+  only asks the targets' controllers to differ). `whose` and `filter` are only
+  the permanent's, so with `orPlayer` each part has its own: "any target that
+  isn't a Dragon" is `typesAnyOf: ["creature", "planeswalker", "battle"]` with
+  `notSubtypes` and `orPlayer: "any"` (rule 115.4; `isCommander: false` for
+  Lozhan), "target creature token, player, or planeswalker" a `filter.anyOf`
+  (Coalborn Entity, Cautery Sliver), "target opponent, creature an opponent
+  controls, or planeswalker an opponent controls" `whose: "opponent"` with
+  `orPlayer: "opponent"`. `orPlayer: "opponent"`
   (or `"any"`) lets a player fill the slot too — "target artifact,
   creature, planeswalker, **or opponent**" (Price of Betrayal), "another
   target permanent or opponent" (Etched Slith); `whose` and `filter` are

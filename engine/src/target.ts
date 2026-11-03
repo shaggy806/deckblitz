@@ -148,7 +148,13 @@ export type TargetSpec =
        * of this slot too — Price of Betrayal's "target artifact, creature,
        * planeswalker, or opponent", Etched Slith's "another target permanent
        * or opponent" (`"opponent"`: a player other than the one choosing;
-       * `"any"`: any player). `whose` and `filter` are only the permanent's. */
+       * `"any"`: any player). `whose` and `filter` are only the permanent's, so
+       * each part has its own: "any target that isn't a Dragon" (rule 115.4) is
+       * `typesAnyOf` of creature, planeswalker and battle with `notSubtypes`,
+       * every player still legal; "target creature token, player, or
+       * planeswalker" (Coalborn Entity) is a `filter.anyOf`; "target opponent,
+       * creature an opponent controls, or planeswalker an opponent controls"
+       * (Nicol Bolas, God-Pharaoh) is `whose: "opponent"` with `"opponent"`. */
       readonly orPlayer?: "opponent" | "any";
     }
   /**
@@ -1283,16 +1289,29 @@ export function describeTargetSpec(spec: TargetSpec | string): string {
     return `${colour}${type}spell${withMv}`;
   }
   if (spec.kind === "permanent") {
-    const noun =
-      spec.filter.type ?? spec.filter.subtype ?? spec.filter.typesAnyOf?.join(" or ") ?? "permanent";
-    if (typeof spec.whose === "object") {
-      return spec.whose.seat === 0 ? `${noun} you control` : `${noun} ${seatWords(spec.whose.seat, false)} controls`;
-    }
-    if (spec.whose === "you") return `${noun} you control`;
-    if (spec.whose === "opponent") return `${noun} an opponent controls`;
-    if (spec.whose === "defending-player") return `${noun} defending player controls`;
-    if (spec.orPlayer !== undefined) return `${noun} or ${spec.orPlayer === "opponent" ? "opponent" : "player"}`;
-    return noun;
+    const nounOf = (filter: CardFilter): string =>
+      filter.subtype !== undefined && filter.type !== undefined
+        ? `${filter.subtype} ${filter.type}`
+        : (filter.type ??
+          filter.subtype ??
+          filter.typesAnyOf?.join(" or ") ??
+          filter.anyOf?.map(nounOf).join(" or ") ??
+          "permanent");
+    const noun = nounOf(spec.filter);
+    const owned =
+      typeof spec.whose === "object"
+        ? spec.whose.seat === 0
+          ? `${noun} you control`
+          : `${noun} ${seatWords(spec.whose.seat, false)} controls`
+        : spec.whose === "you"
+          ? `${noun} you control`
+          : spec.whose === "opponent"
+            ? `${noun} an opponent controls`
+            : spec.whose === "defending-player"
+              ? `${noun} defending player controls`
+              : noun;
+    // "…, or opponent" / "…, or player", whichever permanents those are.
+    return spec.orPlayer === undefined ? owned : `${owned} or ${spec.orPlayer === "opponent" ? "opponent" : "player"}`;
   }
   if (spec.kind === "card-in-exile") {
     const what = spec.filter?.type === undefined ? "card" : `${spec.filter.type} card`;

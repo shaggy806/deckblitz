@@ -1039,6 +1039,20 @@ const TARGET_PHRASES = [
   ["target opponent or planeswalker", "opponent-or-planeswalker"],
   ["target player", "player"],
   ["target opponent", "opponent"],
+  // One slot over players and permanents, each part with its own filter
+  // (`permanent`'s `orPlayer`, rule 115.4 for "any target").
+  [
+    "target creature, planeswalker, or player",
+    { kind: "permanent", filter: { typesAnyOf: ["creature", "planeswalker"] }, orPlayer: "any" },
+  ],
+  [
+    "target creature token, player, or planeswalker",
+    { kind: "permanent", filter: { anyOf: [{ type: "creature", token: true }, { type: "planeswalker" }] }, orPlayer: "any" },
+  ],
+  [
+    "target opponent, creature an opponent controls, or planeswalker an opponent controls",
+    { kind: "permanent", whose: "opponent", filter: { typesAnyOf: ["creature", "planeswalker"] }, orPlayer: "opponent" },
+  ],
   ["any target", "any-target"],
 ];
 /**
@@ -1089,8 +1103,36 @@ function modifiedTargetOf(phrase) {
   const whose = m[2] === undefined ? undefined : m[2].toLowerCase() === "you control" ? "you" : "opponent";
   return { kind: "permanent", ...(whose !== undefined ? { whose } : {}), filter };
 }
+/** "Any target that isn't a Dragon" (Wrathful Red Dragon), "… a commander"
+ * (Lozhan), every player included (rule 115.4, Lozhan's ruling); "target player,
+ * planeswalker, or Sliver creature" (Cautery Sliver). */
+function partedTargetOf(phrase) {
+  const capital = (word) => word[0].toUpperCase() + word.slice(1);
+  const isnt = /^any target that isn't an? ([a-z]+)$/.exec(phrase);
+  if (isnt !== null) {
+    return {
+      kind: "permanent",
+      filter: {
+        typesAnyOf: ["creature", "planeswalker", "battle"],
+        ...(isnt[1] === "commander" ? { isCommander: false } : { notSubtypes: [capital(isnt[1])] }),
+      },
+      orPlayer: "any",
+    };
+  }
+  const creature = /^target player, planeswalker, or ([a-z]+) creature$/.exec(phrase);
+  if (creature !== null) {
+    return {
+      kind: "permanent",
+      filter: { anyOf: [{ type: "planeswalker" }, { type: "creature", subtype: capital(creature[1]) }] },
+      orPlayer: "any",
+    };
+  }
+  return undefined;
+}
 const targetOf = (phrase) =>
-  TARGET_PHRASES.find(([p]) => p === phrase.toLowerCase())?.[1] ?? modifiedTargetOf(phrase.toLowerCase());
+  TARGET_PHRASES.find(([p]) => p === phrase.toLowerCase())?.[1] ??
+  partedTargetOf(phrase.toLowerCase()) ??
+  modifiedTargetOf(phrase.toLowerCase());
 
 /** "nonland permanents you control" → "nonland permanent you control". */
 const singularTarget = (phrase) => phrase.replace(/s( you control| an opponent controls| you don't control)?$/i, "$1");
@@ -1201,7 +1243,7 @@ function quantifiedSlots(phrase, ctx) {
 // Non-capturing: a template wraps it in its own group where it wants the match,
 // so a nested group never shifts the numbering of the ones after it. After the
 // fixed phrases, a "target …" one `modifiedTargetOf` reads or rejects.
-const TARGET = `(?:${TARGET_PHRASES.map(([p]) => escapeRe(p)).join("|")}|target [a-z' ]+?(?: with (?:flying|reach|(?:power|toughness|mana value) \\d+ or (?:greater|less)))?)`;
+const TARGET = `(?:any target that isn't an? [a-z]+|target player, planeswalker, or [a-z]+ creature|${TARGET_PHRASES.map(([p]) => escapeRe(p)).join("|")}|target [a-z' ]+?(?: with (?:flying|reach|(?:power|toughness|mana value) \\d+ or (?:greater|less)))?)`;
 
 /** "(non-Wall) creature(s) blocking or blocked by this creature", "creatures
  * it's blocking", "creatures blocking enchanted creature": a creature filter
