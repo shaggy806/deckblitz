@@ -11407,6 +11407,38 @@ describe("offering", () => {
       offering: { type: "artifact" },
     });
   });
+  it("reads a batched dies trigger, and a once-a-turn one as a plain dies", () => {
+    const trigger = (line: string) =>
+      parseFace({ name: "Card", type_line: "Creature — Human", oracle_text: line }, { tokenFor: (d: string) => d })
+        .triggered[0].trigger;
+    expect(trigger("Whenever one or more other creatures you control die, put a +1/+1 counter on this creature.")).toEqual({
+      on: "dies",
+      who: "you-control",
+      filter: { type: "creature" },
+      otherOnly: true,
+      batched: true,
+    });
+    expect(trigger("Whenever one or more creatures die, put a +1/+1 counter on this creature.")).toEqual({
+      on: "dies",
+      who: "any",
+      filter: { type: "creature" },
+      batched: true,
+    });
+    expect(
+      trigger(
+        "Whenever one or more artifacts and/or creatures you control are put into a graveyard from the battlefield, surveil 1.",
+      ),
+    ).toEqual({ on: "dies", who: "you-control", filter: { typesAnyOf: ["artifact", "creature"] }, batched: true });
+    expect(trigger("Whenever one or more attacking creatures you control die, draw a card.")).toEqual({
+      on: "dies",
+      who: "you-control",
+      filter: { type: "creature", attacking: true },
+      batched: true,
+    });
+    expect(
+      trigger("Whenever one or more other creatures die, draw a card. This ability triggers only once each turn."),
+    ).toEqual({ on: "dies", who: "any", filter: { type: "creature" }, otherOnly: true });
+  });
   it("reads a keyword granted to creatures attacking your opponents", () => {
     expect(read("Creatures attacking your opponents have double strike.").static[0]).toMatchObject({
       affects: { scope: "filter", filter: { type: "creature", attackingOpponent: true } },

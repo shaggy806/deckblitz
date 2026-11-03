@@ -5,6 +5,7 @@
   "effect:add-land-types-all",
   "effect:add-types-all",
   "static:planeswalker-becomes-creature",
+  "trigger:dies-batch-trigger",
   "amount:creatures-blocking-it",
   "effect:amount-creatures-blocking-it",
   "condition:source-blocked-by-at-least-one",

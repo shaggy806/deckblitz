@@ -1147,6 +1147,17 @@ export type TriggerSpec =
       readonly who: TriggerWho;
       readonly filter?: CardFilter;
       readonly otherOnly?: boolean;
+      /** "Whenever **one or more** creatures die" (Great Fierce Bee, Seer of
+       * Stolen Sight, Rinoa, Angel Wing): once per simultaneous event, however
+       * many of its permanents match — off `permanents-died`, so it fires once
+       * the whole wrath or state-based sweep is done. Each is read as it last
+       * existed (rule 603.10a), and a permanent that left in that event sees
+       * it too (Rinoa's ruling). `{ triggerValue: true }` is how many matched,
+       * a token stack counting as each of its tokens, and
+       * `put-arrived-onto-battlefield` takes "one of them" from the cards among
+       * them. Without "this ability triggers only once each turn", which is a
+       * plain `dies` with `oncePerTurn`. */
+      readonly batched?: boolean;
     }
   | {
       /** "Whenever this Equipment becomes unattached from a permanent"

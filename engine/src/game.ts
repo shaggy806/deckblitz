@@ -1826,6 +1826,8 @@ export class Game {
 
   private leaveBatch: {
     readonly left: ObjectId[];
+    /** Those of `left` that went to a graveyard (rule 700.4). */
+    readonly died: ObjectId[];
     readonly deferred: ObjectId[];
     /** The event's victims as they were before any of them moved — see
      * {@link snapshotLeaving}. */
@@ -14850,6 +14852,14 @@ export class Game {
       }
     };
     const doubles = (d: NonNullable<StaticAbility["doubleTriggers"]>): boolean => {
+      // "One or more" died: any of them that's the doubler's kind caused it.
+      if (d.cause === "dies" && event.type === "permanents-died") {
+        return event.died.some(
+          (id) =>
+            d.filter === undefined ||
+            matchesFilter(this.state, this.registry, id, d.filter, { you: controller, lastKnown: true }),
+        );
+      }
       const who = subject(d.cause);
       if (who === undefined) return false;
       if (d.filter === undefined) return true;
@@ -14874,8 +14884,9 @@ export class Game {
     // at the rest of its batch that has already left, each as it last
     // existed there (rule 603.10a). Only an unconditional static, since its
     // condition can't be asked of a permanent that has gone.
-    if (isLeaveEvent(event)) {
-      for (const id of new Set([event.object, ...this.lookBackSources(event)])) {
+    if (isLeaveEvent(event) || event.type === "permanents-died") {
+      const lookingBack = this.lookBackSources(event);
+      for (const id of isLeaveEvent(event) ? new Set([event.object, ...lookingBack]) : lookingBack) {
         const was = this.state.objects[id];
         const last = was?.lastKnown;
         if (was === undefined || was.zone === "battlefield" || last === undefined) continue;
@@ -25811,6 +25822,12 @@ export class Game {
               : // How many cards were put into the graveyard.
                 trigger.on === "put-into-graveyard" && event.type === "cards-put-into-graveyard"
               ? this.graveyardArrivals(trigger, event.arrivals, object).length
+              : // How many permanents died, a stack as each of its tokens.
+                trigger.on === "dies" && event.type === "permanents-died"
+              ? this.diedBatchMatching(trigger, event, object).reduce(
+                  (n, id) => n + (this.state.objects[id]?.stackCount ?? 1),
+                  0,
+                )
               : trigger.on === "put-into-exile" && event.type === "cards-put-into-exile"
               ? this.exileArrivals(trigger, event.arrivals, object).length
               : // "…for each card discarded this way".
@@ -26145,7 +26162,7 @@ export class Game {
       candidates.add(id);
       suspendedOnly.add(id);
     }
-    const leaving = isLeaveEvent(event);
+    const leaving = isLeaveEvent(event) || event.type === "permanents-died";
     for (const id of candidates) {
       const live = this.state.objects[id];
       if (live === undefined) continue;
@@ -26324,6 +26341,18 @@ export class Game {
                       zoneChangeCount: this.state.objects[card]?.zoneChangeCount ?? 0,
                     })),
                   }
+                : // "Return one of them": the cards among what died. A token
+                  // is no card to return (rule 111.1).
+                  ability.trigger.on === "dies" && event.type === "permanents-died"
+                  ? {
+                      ...(atTrigger ?? {}),
+                      arrivedTogether: this.diedBatchMatching(ability.trigger, event, object)
+                        .filter((card) => this.state.objects[card]?.isToken !== true)
+                        .map((card) => ({
+                          object: card,
+                          zoneChangeCount: this.state.objects[card]?.zoneChangeCount ?? 0,
+                        })),
+                    }
                 : // "Whenever players finish voting": that vote's votes.
                   ability.trigger.on === "players-finish-voting" && event.type === "votes-finished"
                   ? { ...(atTrigger ?? {}), votes: event.votes }
@@ -26380,7 +26409,13 @@ export class Game {
               event.type === "permanent-entered-battlefield"
                 ? this.entryTriggerDoublers(object.controller, event.object)
                 : 0) +
-              this.causeTriggerDoublers(object.controller, event) +
+              this.causeTriggerDoublers(
+                object.controller,
+                // Only the deaths that caused this one (Teysa Karlov).
+                ability.trigger.on === "dies" && event.type === "permanents-died"
+                  ? { ...event, died: this.diedBatchMatching(ability.trigger, event, object) }
+                  : event,
+              ) +
               this.sourceTriggerDoublers(object.controller, id, lastSeen !== undefined);
           // "Triggers only once each turn": this firing is the one, whatever
           // the stack size or batch count would otherwise multiply it to.
@@ -26868,6 +26903,11 @@ export class Game {
    * was: its subject is the only departed object that sees it.
    */
   private lookBackSources(event: GameEvent): ReadonlySet<ObjectId> {
+    // "Whenever one or more creatures die" is announced once the event is
+    // done: everything that left in it sees it, its own deaths included.
+    if (event.type === "permanents-died") {
+      return new Set(event.left.filter((id) => (this.state.objects[id]?.zone ?? "battlefield") !== "battlefield"));
+    }
     const batch = this.leaveBatch;
     if (batch === null || !isLeaveEvent(event) || !batch.left.includes(event.object)) {
       return EMPTY_ID_SET;
@@ -26906,6 +26946,7 @@ export class Game {
         const object = this.state.objects[id];
         return object !== undefined && object.zone !== "battlefield";
       }),
+      died: [] as ObjectId[],
       deferred: [] as ObjectId[],
       snapshots: new Map<ObjectId, LastKnownInfo>(),
       endsWhileSource: [] as ObjectId[],
@@ -26915,6 +26956,7 @@ export class Game {
     try {
       // What goes to graveyards goes together too.
       this.withGraveyardEnterBatch(fn);
+      if (batch.died.length > 0) this.emit({ type: "permanents-died", died: batch.died, left: batch.left });
     } finally {
       this.leaveBatch = null;
     }
@@ -27108,6 +27150,32 @@ export class Game {
     return matching;
   }
 
+  /** The permanents of a `permanents-died` event a batched `dies` trigger
+   * counts, each read as it last existed (rule 603.10a). */
+  private diedBatchMatching(
+    spec: Extract<TriggerSpec, { on: "dies" }>,
+    event: Extract<GameEvent, { type: "permanents-died" }>,
+    self: GameObject,
+  ): ObjectId[] {
+    return event.died.filter(
+      (id) =>
+        !(spec.otherOnly === true && id === self.id) &&
+        this.matchesWho(spec.who, id, self, true) &&
+        this.triggerFilterOk(spec.filter, id, self, true),
+    );
+  }
+
+  /** "One of them": those of a batched trigger's cards still in that graveyard
+   * as the same objects (rule 400.7). */
+  private arrivedStillThere(refs: LastKnownRefs): ObjectId[] {
+    return (refs.arrivedTogether ?? [])
+      .filter(({ object, zoneChangeCount }) => {
+        const card = this.state.objects[object];
+        return card?.zone === "graveyard" && (card.zoneChangeCount ?? 0) === zoneChangeCount;
+      })
+      .map(({ object }) => object);
+  }
+
   private triggerMatches(
     spec: TriggerSpec,
     event: GameEvent,
@@ -27124,6 +27192,10 @@ export class Game {
           this.triggerFilterOk(spec.filter, event.object, self)
         );
       case "dies":
+        // "Whenever one or more …": once, off the whole event.
+        if (spec.batched === true) {
+          return event.type === "permanents-died" && this.diedBatchMatching(spec, event, self).length > 0;
+        }
         // Rule 700.4: a permanent "dies" when it is put into a graveyard *from
         // the battlefield* — however it got there. Keying this off
         // `permanent-destroyed` missed every sacrifice (Ashnod's Altar,
@@ -31039,15 +31111,12 @@ export class Game {
           }
         });
       },
-      putArrivedOntoBattlefield: (count) => {
+      arrivedStillThere: () => this.arrivedStillThere(refs).length,
+      putArrivedOntoBattlefield: (spec) => {
         // "One of them": the cards the batched trigger fired on, still in
         // that graveyard as the same objects (rule 400.7).
-        const still = (refs.arrivedTogether ?? [])
-          .filter(({ object, zoneChangeCount }) => {
-            const card = this.state.objects[object];
-            return card?.zone === "graveyard" && (card.zoneChangeCount ?? 0) === zoneChangeCount;
-          })
-          .map(({ object }) => object);
+        const still = this.arrivedStillThere(refs);
+        const count = spec.count;
         if (still.length === 0 || count <= 0) return false;
         if (still.length > count) {
           this.state.awaiting = {
@@ -31059,7 +31128,9 @@ export class Game {
             max: count,
             destination: "battlefield",
             leftover: "stay",
-            enterUnder: controller,
+            ...(spec.underOwner === true ? {} : { enterUnder: controller }),
+            ...(spec.enterTapped === true ? { enterTapped: true } : {}),
+            ...(spec.withCounters !== undefined ? { enterWithCounters: spec.withCounters } : {}),
           };
           return false;
         }
@@ -31067,8 +31138,10 @@ export class Game {
         this.withGraveyardLeaveBatch(() =>
           this.withEnterBatch(() => {
             for (const id of still) {
-              const under = this.state.objects[id]?.owner === controller ? {} : { under: controller };
-              if (this.moveObject(id, "battlefield", under)) {
+              const under =
+                spec.underOwner === true || this.state.objects[id]?.owner === controller ? {} : { under: controller };
+              if (this.moveObject(id, "battlefield", { ...under, ...(spec.enterTapped === true ? { tapped: true } : {}) })) {
+                this.enterWithCounters(id, spec.withCounters, controller);
                 this.emit({ type: "permanent-entered-battlefield", object: id });
               }
             }
@@ -50745,6 +50818,12 @@ export class Game {
         toZone: to,
         ...(fromStack !== undefined ? { stack: fromStack } : {}),
       });
+      // "Whenever one or more … die": when the whole event is done, or now
+      // for a death of its own.
+      if (to === "graveyard") {
+        if (this.leaveBatch !== null) this.leaveBatch.died.push(id);
+        else this.emit({ type: "permanents-died", died: [id], left: [id] });
+      }
       // "For as long as [this] remains on the battlefield" ends — once what
       // leaves with it has left, in a simultaneous event.
       if (this.state.whileSourceIds?.includes(id) === true) {
@@ -51435,7 +51514,8 @@ export class Game {
     const seq = this.state.eventSeq;
     this.state.eventSeq += 1;
     const full = { ...event, seq } as GameEvent;
-    this.state.eventLog.push(full);
+    // Each death has its own events: this one only asks the triggers.
+    if (full.type !== "permanents-died") this.state.eventLog.push(full);
     this.recordTurnHistory(full);
     // A token comes into being on the battlefield, and a copy of a spell on
     // the stack, rather than moving there, so no zone change opened a public

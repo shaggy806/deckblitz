@@ -1908,6 +1908,29 @@ export function parseTrigger(clause) {
     const any = on === "leaves-battlefield" && Object.keys(filter).length === 0;
     return [{ on, who, ...(any ? {} : { filter }), ...(m[1] === "another" ? { otherOnly: true } : {}) }];
   }
+  // "Whenever one or more [other] creatures [you control] die": once per
+  // simultaneous event. (With "this ability triggers only once each turn" it's
+  // a plain `dies`, which `parseFace` makes of it.)
+  if (
+    (m =
+      /^Whenever one or more (other )?(.+?)(?: (you control|an opponent controls))? (die|are put into a graveyard from the battlefield)$/.exec(
+        c,
+      ))
+  ) {
+    const attacking = /^attacking (.+)$/.exec(m[2]);
+    const kind = attacking !== null ? attacking[1] : m[2];
+    const filter = kind === "artifacts and/or creatures" ? { typesAnyOf: ["artifact", "creature"] } : parseTypePhrase(kind);
+    if (filter !== null) {
+      if (attacking !== null) filter.attacking = true;
+      // Only a creature dies (rule 700.4).
+      if (m[4] === "die" && filter.type === undefined && filter.types === undefined && filter.typesAnyOf === undefined) {
+        filter.type = "creature";
+      }
+      if (m[3] === "an opponent controls") filter.controlledBy = "opponent";
+      const who = m[3] === "you control" ? "you-control" : "any";
+      return [{ on: "dies", who, filter, ...(m[1] !== undefined ? { otherOnly: true } : {}), batched: true }];
+    }
+  }
   if ((m = /^Whenever (a|another) (.+?) you control deals combat damage to a player$/.exec(c))) {
     const filter = parseTypePhrase(m[2]);
     if (filter === null) return null;
@@ -11215,7 +11238,15 @@ export function parseFace(face, ctx = {}) {
             }
           : {}),
       };
-      let triggers = parsedTriggers;
+      // "One or more … die. This ability triggers only once each turn": the
+      // first death triggers it, in that event or not, so a plain `dies`.
+      let triggers = oncePerTurn
+        ? parsedTriggers.map((t) => {
+            if (t.on !== "dies") return t;
+            const { batched: _batched, ...plain } = t;
+            return plain;
+          })
+        : parsedTriggers;
       const meldWhole = MELD_SENTENCE.exec(rest);
       if (meldWhole !== null) {
         // A meld trigger (Graf Rats, Gisela): its intervening if is the

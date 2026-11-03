@@ -3753,9 +3753,16 @@ export type EffectSpec =
        * cards are put into your graveyard from your library, **put one of
        * them onto the battlefield**". Only those still in that graveyard as
        * the same objects (rule 400.7); the controller chooses which when
-       * more are left than it takes, and must take that many. */
+       * more are left than it takes, and must take that many. A batched
+       * `dies` trigger's cards work the same: Rinoa, Angel Wing's "return one
+       * of them to the battlefield **tapped under its owner's control with a
+       * flying counter on it**" (`enterTapped`, `underOwner`, `withCounters`).
+       * A `may` over it isn't offered with none left. */
       readonly kind: "put-arrived-onto-battlefield";
       readonly count: number;
+      readonly enterTapped?: true;
+      readonly underOwner?: true;
+      readonly withCounters?: { readonly kind: string; readonly amount: number };
     }
   | {
       /** Put every card this resolution has exiled so far — from anywhere
@@ -10379,7 +10386,10 @@ export interface EffectApi {
   moveExiledThisWay(to: Extract<EffectSpec, { kind: "move-exiled-this-way" }>["to"], filter?: CardFilter): void;
   /** See the `"put-arrived-onto-battlefield"` {@link EffectSpec}. `true`
    * when it stopped first to ask an "as this enters" choice. */
-  putArrivedOntoBattlefield(count: number): boolean;
+  putArrivedOntoBattlefield(spec: Extract<EffectSpec, { kind: "put-arrived-onto-battlefield" }>): boolean;
+  /** How many of those cards are still in that graveyard as the same objects
+   * (rule 400.7). */
+  arrivedStillThere(): number;
   /** Carry out `fn` as one simultaneous event: the cards it takes out of
    * graveyards leave together (one `cards-left-graveyard`), the permanents
    * it takes off the battlefield leave together (rule 603.10a), and the ones
@@ -13887,6 +13897,9 @@ export function mayBeDone(effect: EffectSpec, ctx: ResolutionContext): boolean {
   if (action.kind === "blight") return blightingPlayers(action.who, ctx).every((player) => ctx.canBlight(player));
   // "You may behold a Dragon" (rule 701.4a): only with one to behold.
   if (action.kind === "behold") return ctx.canBehold(action);
+  // "You may return one of them": not with none of them left, and then it
+  // hasn't been done this turn either (Rinoa, Angel Wing).
+  if (action.kind === "put-arrived-onto-battlefield") return ctx.arrivedStillThere() > 0;
   // "You may move a counter": not when none could move (rule 122.5) — from
   // a permanent with none (of that kind) left, or with either end gone.
   if (action.kind === "move-counters" && !isMoveChooser(action.from) && !isMoveChooser(action.to)) {
@@ -15121,7 +15134,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     case "put-arrived-onto-battlefield": {
       const parked = ctx.parkedCount();
-      if (ctx.putArrivedOntoBattlefield(spec.count)) ctx.resumeAfterDecisions(spec, parked);
+      if (ctx.putArrivedOntoBattlefield(spec)) ctx.resumeAfterDecisions(spec, parked);
       return;
     }
     case "reveal-until-count": {

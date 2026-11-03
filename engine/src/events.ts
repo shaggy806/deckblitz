@@ -1489,6 +1489,19 @@ export type GameEvent =
       readonly arrivals: readonly { readonly object: ObjectId; readonly from: ZoneType }[];
     })
   | (Base & {
+      /** Permanents went from the battlefield to graveyards (rule 700.4), once
+       * per simultaneous event (a wrath, one state-based sweep, an edict each
+       * player has answered); a death of its own is its own. Tokens count, as
+       * `cards-put-into-graveyard` can't say. The hook for batched `dies`
+       * triggers ("whenever one or more creatures die"). `left` is everything
+       * that left the battlefield in that event, for any destination: those
+       * look back and see it (rule 603.10a). Never in the event log: each
+       * death has its own events there, and this only asks the triggers. */
+      readonly type: "permanents-died";
+      readonly died: readonly ObjectId[];
+      readonly left: readonly ObjectId[];
+    })
+  | (Base & {
       readonly type: "cards-milled";
       readonly player: PlayerId;
       readonly objects: readonly ObjectId[];
