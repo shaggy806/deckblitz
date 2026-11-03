@@ -223,6 +223,7 @@ import _poolElvishArchers from "../pool/elvish-archers.js";
 import _poolElvishReclaimer from "../pool/elvish-reclaimer.js";
 import _poolEmergencyWeld from "../pool/emergency-weld.js";
 import _poolEmergentWoodwurm from "../pool/emergent-woodwurm.js";
+import _poolEmissaryOfGrudges from "../pool/emissary-of-grudges.js";
 import _poolEncaseInIce from "../pool/encase-in-ice.js";
 import _poolEnduringCuriosity from "../pool/enduring-curiosity.js";
 import _poolEnforcerGriffin from "../pool/enforcer-griffin.js";
@@ -1123,6 +1124,7 @@ const shard: CardShard = {
     _poolElvishReclaimer,
     _poolEmergencyWeld,
     _poolEmergentWoodwurm,
+    _poolEmissaryOfGrudges,
     _poolEncaseInIce,
     _poolEnduringCuriosity,
     _poolEnforcerGriffin,

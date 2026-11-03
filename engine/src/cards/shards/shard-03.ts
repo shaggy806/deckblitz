@@ -297,6 +297,7 @@ import _poolGrimServant from "../pool/grim-servant.js";
 import _poolGrislySurvivor from "../pool/grisly-survivor.js";
 import _poolGrizzledAngler from "../pool/grizzled-angler.js";
 import _poolGruesomeSlaughter from "../pool/gruesome-slaughter.js";
+import _poolGuardianArchon from "../pool/guardian-archon.js";
 import _poolGuardianKirin from "../pool/guardian-kirin.js";
 import _poolGuardianSunmare from "../pool/guardian-sunmare.js";
 import _poolGuildscornWard from "../pool/guildscorn-ward.js";
@@ -1112,6 +1113,7 @@ const shard: CardShard = {
     _poolGrislySurvivor,
     _poolGrizzledAngler,
     _poolGruesomeSlaughter,
+    _poolGuardianArchon,
     _poolGuardianKirin,
     _poolGuardianSunmare,
     _poolGuildscornWard,

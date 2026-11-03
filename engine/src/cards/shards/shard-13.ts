@@ -682,6 +682,7 @@ import _poolSpringmantleCleric from "../pool/springmantle-cleric.js";
 import _poolSquadCaptain from "../pool/squad-captain.js";
 import _poolStagecoachSecurity from "../pool/stagecoach-security.js";
 import _poolStaggeringSize from "../pool/staggering-size.js";
+import _poolStalkingLeonin from "../pool/stalking-leonin.js";
 import _poolStalkingYeti from "../pool/stalking-yeti.js";
 import _poolStallOut from "../pool/stall-out.js";
 import _poolStampedingRhino from "../pool/stampeding-rhino.js";
@@ -1551,6 +1552,7 @@ const shard: CardShard = {
     _poolSquadCaptain,
     _poolStagecoachSecurity,
     _poolStaggeringSize,
+    _poolStalkingLeonin,
     _poolStalkingYeti,
     _poolStallOut,
     _poolStampedingRhino,

@@ -3,6 +3,7 @@
 
 import type { CardShard } from "../card-shards.js";
 
+import _poolAKillerAmongUs from "../pool/a-killer-among-us.js";
 import _poolAbhorrentOverlord from "../pool/abhorrent-overlord.js";
 import _poolAbidingGrace from "../pool/abiding-grace.js";
 import _poolAbominableTreefolk from "../pool/abominable-treefolk.js";
@@ -863,6 +864,7 @@ import _tokensWurmToken from "../tokens/wurm-token.js";
 
 const shard: CardShard = {
   pool: [
+    _poolAKillerAmongUs,
     _poolAbhorrentOverlord,
     _poolAbidingGrace,
     _poolAbominableTreefolk,

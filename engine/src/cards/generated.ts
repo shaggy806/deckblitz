@@ -8,6 +8,7 @@ import _poolAIMBot from "./pool/a-i-m-bot.js";
 import _poolAIMLabs from "./pool/a-i-m-labs.js";
 import _poolAIMScientists from "./pool/a-i-m-scientists.js";
 import _poolAIMSynthoids from "./pool/a-i-m-synthoids.js";
+import _poolAKillerAmongUs from "./pool/a-killer-among-us.js";
 import _poolALittleChat from "./pool/a-little-chat.js";
 import _poolARealmReborn from "./pool/a-realm-reborn.js";
 import _poolATaleForTheAges from "./pool/a-tale-for-the-ages.js";
@@ -7185,6 +7186,7 @@ import _poolEmeritusOfWoe from "./pool/emeritus-of-woe.js";
 import _poolEmielTheBlessed from "./pool/emiel-the-blessed.js";
 import _poolEmissaryEscort from "./pool/emissary-escort.js";
 import _poolEmissaryGreen from "./pool/emissary-green.js";
+import _poolEmissaryOfGrudges from "./pool/emissary-of-grudges.js";
 import _poolEmissaryOfHope from "./pool/emissary-of-hope.js";
 import _poolEmissaryOfSunrise from "./pool/emissary-of-sunrise.js";
 import _poolEmissaryOfTheSleepless from "./pool/emissary-of-the-sleepless.js";
@@ -9788,6 +9790,7 @@ import _poolGoblinFirestarter from "./pool/goblin-firestarter.js";
 import _poolGoblinFlectomancer from "./pool/goblin-flectomancer.js";
 import _poolGoblinFreerunner from "./pool/goblin-freerunner.js";
 import _poolGoblinFurrier from "./pool/goblin-furrier.js";
+import _poolGoblinGame from "./pool/goblin-game.js";
 import _poolGoblinGangLeader from "./pool/goblin-gang-leader.js";
 import _poolGoblinGardener from "./pool/goblin-gardener.js";
 import _poolGoblinGathering from "./pool/goblin-gathering.js";
@@ -10397,6 +10400,7 @@ import _poolGuardChange from "./pool/guard-change.js";
 import _poolGuardDuty from "./pool/guard-duty.js";
 import _poolGuardGomazoa from "./pool/guard-gomazoa.js";
 import _poolGuardedHeir from "./pool/guarded-heir.js";
+import _poolGuardianArchon from "./pool/guardian-archon.js";
 import _poolGuardianAugmenter from "./pool/guardian-augmenter.js";
 import _poolGuardianAutomaton from "./pool/guardian-automaton.js";
 import _poolGuardianGladewalker from "./pool/guardian-gladewalker.js";
@@ -22697,6 +22701,7 @@ import _poolStalkerHag from "./pool/stalker-hag.js";
 import _poolStalkingAssassin from "./pool/stalking-assassin.js";
 import _poolStalkingBloodsucker from "./pool/stalking-bloodsucker.js";
 import _poolStalkingDrone from "./pool/stalking-drone.js";
+import _poolStalkingLeonin from "./pool/stalking-leonin.js";
 import _poolStalkingPredator from "./pool/stalking-predator.js";
 import _poolStalkingStones from "./pool/stalking-stones.js";
 import _poolStalkingTiger from "./pool/stalking-tiger.js";
@@ -28621,6 +28626,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAIMLabs,
   _poolAIMScientists,
   _poolAIMSynthoids,
+  _poolAKillerAmongUs,
   _poolALittleChat,
   _poolARealmReborn,
   _poolATaleForTheAges,
@@ -35798,6 +35804,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolEmielTheBlessed,
   _poolEmissaryEscort,
   _poolEmissaryGreen,
+  _poolEmissaryOfGrudges,
   _poolEmissaryOfHope,
   _poolEmissaryOfSunrise,
   _poolEmissaryOfTheSleepless,
@@ -38401,6 +38408,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGoblinFlectomancer,
   _poolGoblinFreerunner,
   _poolGoblinFurrier,
+  _poolGoblinGame,
   _poolGoblinGangLeader,
   _poolGoblinGardener,
   _poolGoblinGathering,
@@ -39010,6 +39018,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGuardDuty,
   _poolGuardGomazoa,
   _poolGuardedHeir,
+  _poolGuardianArchon,
   _poolGuardianAugmenter,
   _poolGuardianAutomaton,
   _poolGuardianGladewalker,
@@ -51310,6 +51319,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolStalkingAssassin,
   _poolStalkingBloodsucker,
   _poolStalkingDrone,
+  _poolStalkingLeonin,
   _poolStalkingPredator,
   _poolStalkingStones,
   _poolStalkingTiger,
@@ -57247,6 +57257,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/a-i-m-labs": _poolAIMLabs,
   "pool/a-i-m-scientists": _poolAIMScientists,
   "pool/a-i-m-synthoids": _poolAIMSynthoids,
+  "pool/a-killer-among-us": _poolAKillerAmongUs,
   "pool/a-little-chat": _poolALittleChat,
   "pool/a-realm-reborn": _poolARealmReborn,
   "pool/a-tale-for-the-ages": _poolATaleForTheAges,
@@ -64424,6 +64435,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/emiel-the-blessed": _poolEmielTheBlessed,
   "pool/emissary-escort": _poolEmissaryEscort,
   "pool/emissary-green": _poolEmissaryGreen,
+  "pool/emissary-of-grudges": _poolEmissaryOfGrudges,
   "pool/emissary-of-hope": _poolEmissaryOfHope,
   "pool/emissary-of-sunrise": _poolEmissaryOfSunrise,
   "pool/emissary-of-the-sleepless": _poolEmissaryOfTheSleepless,
@@ -67027,6 +67039,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/goblin-flectomancer": _poolGoblinFlectomancer,
   "pool/goblin-freerunner": _poolGoblinFreerunner,
   "pool/goblin-furrier": _poolGoblinFurrier,
+  "pool/goblin-game": _poolGoblinGame,
   "pool/goblin-gang-leader": _poolGoblinGangLeader,
   "pool/goblin-gardener": _poolGoblinGardener,
   "pool/goblin-gathering": _poolGoblinGathering,
@@ -67636,6 +67649,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/guard-duty": _poolGuardDuty,
   "pool/guard-gomazoa": _poolGuardGomazoa,
   "pool/guarded-heir": _poolGuardedHeir,
+  "pool/guardian-archon": _poolGuardianArchon,
   "pool/guardian-augmenter": _poolGuardianAugmenter,
   "pool/guardian-automaton": _poolGuardianAutomaton,
   "pool/guardian-gladewalker": _poolGuardianGladewalker,
@@ -79936,6 +79950,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/stalking-assassin": _poolStalkingAssassin,
   "pool/stalking-bloodsucker": _poolStalkingBloodsucker,
   "pool/stalking-drone": _poolStalkingDrone,
+  "pool/stalking-leonin": _poolStalkingLeonin,
   "pool/stalking-predator": _poolStalkingPredator,
   "pool/stalking-stones": _poolStalkingStones,
   "pool/stalking-tiger": _poolStalkingTiger,

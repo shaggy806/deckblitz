@@ -303,6 +303,7 @@ import _poolGnawToTheBone from "../pool/gnaw-to-the-bone.js";
 import _poolGoForth from "../pool/go-forth.js";
 import _poolGoatnapper from "../pool/goatnapper.js";
 import _poolGoblinAssailant from "../pool/goblin-assailant.js";
+import _poolGoblinGame from "../pool/goblin-game.js";
 import _poolGoldenScaleAeronaut from "../pool/golden-scale-aeronaut.js";
 import _poolGoliathPaladin from "../pool/goliath-paladin.js";
 import _poolGoreHouseChainwalker from "../pool/gore-house-chainwalker.js";
@@ -1193,6 +1194,7 @@ const shard: CardShard = {
     _poolGoForth,
     _poolGoatnapper,
     _poolGoblinAssailant,
+    _poolGoblinGame,
     _poolGoldenScaleAeronaut,
     _poolGoliathPaladin,
     _poolGoreHouseChainwalker,
