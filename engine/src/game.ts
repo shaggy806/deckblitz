@@ -227,6 +227,7 @@ import {
   SEARCHED_ZONES,
 } from "./effects.js";
 import type {
+  ExilePermission,
   ImpulseDuration,
   BeholdSpec,
   BoardManaList,
@@ -11498,6 +11499,12 @@ export class Game {
         if (permission === undefined || !this.staticActive(source, ability)) continue;
         if (permission.yourTurnOnly === true && this.activePlayer !== player) continue;
         if (permission.exiledByYou === true && card.exiledByPlayer !== player) continue;
+        // "Cards exiled with this creature" (rule 607.2a): only this stint's.
+        if (permission.linked === true) {
+          const stint = source.zoneChangeCount ?? 0;
+          const linkedHere = [card.exiledWith, card.exiledUntil].some((l) => l?.source === id && l.zoneChangeCount === stint);
+          if (!linkedHere) continue;
+        }
         const fits = this.withFace(cardId, face, () => {
           if (!matchesFilter(this.state, this.registry, cardId, permission.filter, { you: player, source: id })) return false;
           if (this.faceDef(cardId, face).types.includes("land")) return permission.castOnly !== true;
@@ -11536,7 +11543,7 @@ export class Game {
       const land = this.faceDef(cardId, face).types.includes("land");
       if (!land || object.impulse?.castOnly !== true) return true;
     }
-    if (this.linkedCastGrantFor(player, cardId, face) !== null && !this.faceDef(cardId, face).types.includes("land")) return true;
+    if (this.linkedCastGrantFor(player, cardId, face) !== null) return true;
     return this.exilePermissionsFor(player, cardId, face).length > 0;
   }
 
@@ -11544,9 +11551,10 @@ export class Game {
    * The resolved permission to cast `cardId` from among the cards exiled with
    * a permanent (`GameObject.linkedCastGrants` — Idol of Endurance), for
    * `player` this turn: which permanent's and which of them. With `face`, it
-   * must also take the spell the card would be as that face. Rule 607.2a: only
-   * the stint that exiled it; it goes on after that permanent has left (rule
-   * 113.7a), for a card left in exile.
+   * must also take the spell the card would be as that face, and a land face
+   * must be one it plays (`play`). Rule 607.2a: only the stint that exiled it;
+   * it goes on after that permanent has left (rule 113.7a), for a card left in
+   * exile. A face-down card, only to a player who may look at it (rule 406.3).
    */
   private linkedCastGrantFor(
     player: PlayerId,
@@ -11554,13 +11562,15 @@ export class Game {
     face?: number,
   ): { readonly source: ObjectId; readonly grant: NonNullable<GameObject["linkedCastGrants"]>[number] } | null {
     const card = this.state.objects[cardId];
-    if (card === undefined || card.zone !== "exile" || card.exiledFaceDown !== undefined) return null;
+    if (card === undefined || card.zone !== "exile") return null;
+    if (card.exiledFaceDown !== undefined && !card.exiledFaceDown.lookers.includes(player)) return null;
     for (const link of [card.exiledWith, card.exiledUntil]) {
       if (link === undefined) continue;
       const grants = this.state.objects[link.source]?.linkedCastGrants;
       if (grants === undefined) continue;
       for (const grant of grants) {
         if (grant.player !== player || grant.turn !== this.state.turn.number || grant.stint !== link.zoneChangeCount) continue;
+        if (face !== undefined && grant.play !== true && this.faceDef(cardId, face).types.includes("land")) continue;
         if (
           face !== undefined &&
           grant.spell !== undefined &&
@@ -11572,6 +11582,23 @@ export class Game {
       }
     }
     return null;
+  }
+
+  /** `player` is casting or playing `cardId` from exile as `face`: the "a card
+   * exiled with this" permission it's the one play of, if it's under one and
+   * under nothing that costs nothing to use, is spent (`anyNumber` never is).
+   * `free`: cast without paying its mana cost, which only that permission may
+   * allow (Court of Locthwain, whose card also has one of its own to be paid
+   * for). Read before the card moves. */
+  private spendLinkedCastGrant(player: PlayerId, cardId: ObjectId, face: number, free = false): void {
+    const used = this.linkedCastGrantFor(player, cardId, face);
+    if (used === null || used.grant.anyNumber === true) return;
+    const freeHere = free && used.grant.free && this.state.objects[cardId]?.impulse?.free === undefined;
+    if (!freeHere && (this.impulsePlayable(player, cardId) || this.exilePermissionsFor(player, cardId, face).length > 0)) return;
+    const holder = this.state.objects[used.source];
+    const left = [...(holder.linkedCastGrants ?? [])];
+    left.splice(left.indexOf(used.grant), 1);
+    holder.linkedCastGrants = left;
   }
 
   /** The players whose hands `player` may play from right now (Sen Triplets —
@@ -11737,9 +11764,16 @@ export class Game {
     }
 
     const from = this.state.objects[cardId].zone;
+    // From exile: the "a card exiled with this" it's the one play of (Raphael,
+    // Most Attitude), and what the permission on the card says of a land.
+    let tapped = false;
+    if (from === "exile") {
+      tapped = this.state.objects[cardId].impulse?.landsEnterTapped === true && this.impulsePlayable(player, cardId);
+      this.spendLinkedCastGrant(player, cardId, face);
+    }
     this.state.objects[cardId].face = face;
     playerState.landsPlayedThisTurn += 1;
-    this.finishLandPlay({ kind: "land", object: cardId, player, from });
+    this.finishLandPlay({ kind: "land", object: cardId, player, from, ...(tapped ? { tapped: true as const } : {}) });
     this.afterPlayerAction(player);
   }
 
@@ -11759,7 +11793,10 @@ export class Game {
     // don't own too (played off an opponent's exiled card).
     const owner = this.state.objects[cardId]?.owner;
     const under = owner !== undefined && owner !== player ? player : undefined;
-    const entered = this.moveObject(cardId, "battlefield", under !== undefined ? { under } : {});
+    const entered = this.moveObject(cardId, "battlefield", {
+      ...(under !== undefined ? { under } : {}),
+      ...(entry.tapped === true ? { tapped: true } : {}),
+    });
     if (under !== undefined && this.state.objects[cardId]?.zone === "battlefield" && this.state.objects[cardId].controller !== under) {
       this.gainControlByEffect(under, { kind: "object", object: cardId }, false, true, { split: false });
     }
@@ -13339,6 +13376,22 @@ export class Game {
     if (exiled?.zone === "exile" && exiled.impulse?.undaunted === true && this.impulsePlayable(player, cardId)) {
       reduction += this.costReductionAmount({ opponents: true }, player, cardId);
     }
+    // "Spells you cast this way cost {2} less to cast" (Urianger Augurelt):
+    // generic only, its ruling, so an ordinary reduction.
+    const linkedGrant = exiled?.zone === "exile" ? this.linkedCastGrantFor(player, cardId) : null;
+    if (linkedGrant?.grant.reduce !== undefined && !this.impulsePlayable(player, cardId)) {
+      reduction += linkedGrant.grant.reduce;
+    }
+    // "A spell cast this way costs {2} more to cast" (Elite Spellbinder), of
+    // the permission it's cast under: an increase, before any reduction (rule
+    // 601.2f). Not its `exempt` player's (Soul Partition's "by an opponent").
+    const permissionTax =
+      exiled?.zone === "exile" &&
+      exiled.impulse?.tax !== undefined &&
+      exiled.impulse.tax.exempt !== player &&
+      this.impulsePlayable(player, cardId)
+        ? exiled.impulse.tax.generic
+        : 0;
     // "This spell costs {N} less to cast if it targets …" (Price of Fame).
     // Among the targets it has at this X: a filter can read X (Lullmage's
     // Domination's "with mana value X").
@@ -13375,7 +13428,7 @@ export class Game {
     return reduceManaCost(
       {
         ...base,
-        generic: base.generic + tax + base.x * Math.max(0, xValue) + mods.increaseGeneric + targetTax,
+        generic: base.generic + tax + base.x * Math.max(0, xValue) + mods.increaseGeneric + targetTax + permissionTax,
         x: 0,
       },
       reduction,
@@ -17440,16 +17493,7 @@ export class Game {
       via === "impulse" && this.exilePermissionsFor(player, cardId, face).length === 0 ? object.impulse : undefined;
     // "A creature spell from among cards exiled with this artifact" (Idol of
     // Endurance): this cast is the one that permission allowed.
-    const linkedGrantUsed =
-      via === "impulse" && !this.impulsePlayable(player, cardId) && this.exilePermissionsFor(player, cardId, face).length === 0
-        ? this.linkedCastGrantFor(player, cardId, face)
-        : null;
-    if (linkedGrantUsed !== null) {
-      const holder = this.state.objects[linkedGrantUsed.source];
-      const left = [...(holder.linkedCastGrants ?? [])];
-      left.splice(left.indexOf(linkedGrantUsed.grant), 1);
-      holder.linkedCastGrants = left;
-    }
+    if (via === "impulse") this.spendLinkedCastGrant(player, cardId, face, free);
     // Cast from the top of the library: whether the permission gives the
     // spell haste (Thundermane Dragon) — read while it's still on top.
     const hasteFromTop =
@@ -29684,12 +29728,7 @@ export class Game {
           !exiled.isToken
         ) {
           if (target.kind === "object") this.endUntilNextExile(mayCast.duration, source, [target.object]);
-          exiled.impulse = {
-            player: controller,
-            ...this.impulseWindow(mayCast.duration, controller, source),
-            ...(mayCast.play === true ? {} : { castOnly: true }),
-            ...(mayCast.spendAs !== undefined ? { spendAs: mayCast.spendAs } : {}),
-          };
+          exiled.impulse = this.exilePermissionGrant(mayCast, controller, source, exiled.owner, mayCast.play === true);
         }
         // Airbend (rule 701.65a): its owner may cast the card this exiled for
         // {2} — a card, a token having ceased to exist (111.7).
@@ -29705,9 +29744,7 @@ export class Game {
           if (src !== undefined && stint !== undefined) {
             // Each card a merged or melded permanent became (730.3c).
             const cards = [exiled.id, ...(exiled.leftWith ?? [])].filter((card) => this.state.objects[card]?.zone === "exile");
-            for (const card of cards) this.state.objects[card].exiledWith = { source, zoneChangeCount: stint };
-            const sofar = src.exiledWithCount?.stint === stint ? src.exiledWithCount.count : 0;
-            src.exiledWithCount = { stint, count: sofar + cards.length };
+            this.linkExiledToSource(cards, source, stint);
           }
         }
       },
@@ -30240,6 +30277,7 @@ export class Game {
               castOnly: true,
               ...(free ? { free: { only: true } } : {}),
               ...(opts?.undaunted === true ? { undaunted: true as const } : {}),
+              ...(opts?.spendAs !== undefined ? { spendAs: opts.spendAs } : {}),
             };
       },
       chooseExiledToPlay: (filter, free, among) => {
@@ -30342,8 +30380,14 @@ export class Game {
         }
         state.stepsToSkip = { ...state.stepsToSkip, [step]: (state.stepsToSkip?.[step] ?? 0) + 1 };
       },
-      exileFromLibrary: (target, count, withCounters) =>
-        this.exileFromLibraryByEffect(target, count, controller, withCounters),
+      exileFromLibrary: (target, count, withCounters, linked) => {
+        const exiled = this.exileFromLibraryByEffect(target, count, controller, withCounters);
+        if (linked === true) {
+          const src = this.state.objects[source];
+          const stint = refs.source ?? (src?.zone === "battlefield" ? (src.zoneChangeCount ?? 0) : undefined);
+          if (stint !== undefined) this.linkExiledToSource(exiled, source, stint);
+        }
+      },
       countMatching: (filter, except, you) => this.countBattlefieldMatching(you ?? controller, filter, except, source),
       // "Among them": the attackers of the declaration that fired this
       // trigger, as `AggregateZone` "attackers" reads them.
@@ -30381,12 +30425,14 @@ export class Game {
         const grant: GameObject["impulse"] =
           mayCast === undefined
             ? undefined
-            : {
-                player: controller,
-                ...this.impulseWindow(mayCast.duration, controller, source),
-                ...(mayCast.play === true ? {} : { castOnly: true }),
-                ...(mayCast.spendAs !== undefined ? { spendAs: mayCast.spendAs } : {}),
-              };
+            : this.exilePermissionGrant(
+                mayCast,
+                controller,
+                source,
+                // The hand's owner owns what's in it (rule 400.3).
+                target.kind === "player" ? target.player : controller,
+                mayCast.play === true,
+              );
         // "Exile that card until this creature leaves the battlefield" (rule
         // 610.3): back to the hand it came from. With the source gone already
         // the hand is still shown, and nothing is chosen (610.3b).
@@ -30953,8 +30999,14 @@ export class Game {
         ];
         invalidateComputedCache();
       },
-      impulseExile: (amount, duration, castOnly, opts) =>
-        this.impulseExile(controller, source, amount, duration, castOnly, opts),
+      impulseExile: (amount, duration, castOnly, opts) => {
+        const src = this.state.objects[source];
+        const stint = refs.source ?? (src?.zone === "battlefield" ? (src.zoneChangeCount ?? 0) : undefined);
+        this.impulseExile(controller, source, amount, duration, castOnly, {
+          ...opts,
+          ...(opts?.linked === true && stint !== undefined ? { linkStint: stint } : {}),
+        });
+      },
       // Only a resolving ward trigger knows what it counters; `resolveAbility`
       // supplies the real one.
       ward: () => {},
@@ -31548,13 +31600,13 @@ export class Game {
         (this.state.zones.perPlayer[player]?.library ?? []).filter(
           (id) => this.registry.get(this.state.objects[id].cardName).castWhileSearchingLibrary === true,
         ),
-      allowCastLinkedExile: (spell, free) => {
+      allowCastLinkedExile: (spell, free, more) => {
         const holder = this.state.objects[source];
         const stint = refs.source ?? (holder?.zone === "battlefield" ? (holder.zoneChangeCount ?? 0) : undefined);
         if (holder === undefined || stint === undefined) return;
         holder.linkedCastGrants = [
           ...(holder.linkedCastGrants ?? []).filter((g) => g.turn === this.state.turn.number),
-          { player: controller, turn: this.state.turn.number, stint, free, ...(spell !== undefined ? { spell } : {}) },
+          { player: controller, turn: this.state.turn.number, stint, free, ...(spell !== undefined ? { spell } : {}), ...more },
         ];
       },
       putExiledIntoGraveyard: (card) => this.putExiledIntoGraveyard(card),
@@ -32657,14 +32709,7 @@ export class Game {
           // they came from (Black Cat's "target opponent's library").
           playable === undefined
             ? undefined
-            : {
-                player: controller,
-                expiry:
-                  playable.duration === "end-of-turn"
-                    ? { kind: "end-of-turn", turn: this.state.turn.number }
-                    : { kind: "while-exiled" },
-                ...(playable.spendAs !== undefined ? { spendAs: playable.spendAs } : {}),
-              },
+            : this.exilePermissionGrant(playable, controller, source, chooser ?? controller, playable.castOnly !== true),
           together === undefined ? undefined : { together, x },
           split,
           more?.anOpponent === true,
@@ -34039,6 +34084,8 @@ export class Game {
       readonly faceDown?: boolean;
       readonly spendAs?: SpendAs;
       readonly sourceDid?: "attacked" | "lore-counter";
+      /** Linked to this stint of the source (rule 607.2a). */
+      readonly linkStint?: number;
     } = {},
   ): void {
     if (amount <= 0) return;
@@ -34058,6 +34105,13 @@ export class Game {
     this.withGraveyardEnterBatch(() => {
       for (const id of taken) this.moveObject(id, "exile");
     });
+    if (opts.linkStint !== undefined) {
+      this.linkExiledToSource(
+        taken.filter((id) => this.state.objects[id]?.zone === "exile"),
+        source,
+        opts.linkStint,
+      );
+    }
     // "Look at the top card …, then exile it face down" (rule 406.3): the
     // controller looked, so they may go on looking; nobody else knows what
     // it is — its owner included.
@@ -34105,6 +34159,32 @@ export class Game {
       // "Each player may play the card they exiled": its owner's.
       if (object !== undefined) object.impulse = { ...grant, ...(opts.ownerPlays ? { player: object.owner } : {}) };
     }
+  }
+
+  /** The permission `permission` puts on a card `owner` owns, by `controller`'s
+   * effect from `source`: theirs, or with `byOwner` its owner's, with the
+   * window read from that player's side ("until the end of **their** next
+   * turn"). `plays`: lands too. */
+  private exilePermissionGrant(
+    permission: ExilePermission,
+    controller: PlayerId,
+    source: ObjectId,
+    owner: PlayerId,
+    plays: boolean,
+  ): NonNullable<GameObject["impulse"]> {
+    const player = permission.byOwner === true ? owner : controller;
+    const tax = permission.tax;
+    return {
+      player,
+      ...this.impulseWindow(permission.duration, player, source),
+      ...(plays ? {} : { castOnly: true }),
+      ...(permission.spendAs !== undefined ? { spendAs: permission.spendAs } : {}),
+      ...(permission.free === true ? { free: { only: true } } : {}),
+      ...(tax !== undefined
+        ? { tax: { generic: tax.generic, ...(tax.opponentsOnly === true ? { exempt: controller } : {}) } }
+        : {}),
+      ...(permission.landsEnterTapped === true ? { landsEnterTapped: true as const } : {}),
+    };
   }
 
   /** When a permission of `duration`, granted now by `source`'s effect to
@@ -34491,9 +34571,11 @@ export class Game {
    * isn't allowed — Narset), or `null`. */
   private impulseFreeCast(cardId: ObjectId, player?: PlayerId, face?: number): "may" | "only" | null {
     const impulse = this.state.objects[cardId]?.impulse;
-    // Idol of Endurance's: "only" as the card has no other way to be cast.
-    if (impulse === undefined && player !== undefined && this.linkedCastGrantFor(player, cardId, face)?.grant.free === true) {
-      return "only";
+    // Idol of Endurance's: "only" as the card has no other way to be cast —
+    // "may" if it has: Court of Locthwain's, whose card may also be paid for
+    // under its own permission.
+    if (impulse?.free === undefined && player !== undefined && this.linkedCastGrantFor(player, cardId, face)?.grant.free === true) {
+      return this.impulsePlayable(player, cardId) ? "may" : "only";
     }
     if (impulse?.free === undefined) return null;
     const { filter, only } = impulse.free;
@@ -43712,20 +43794,34 @@ export class Game {
     count: { readonly top: number } | { readonly allBut: number },
     controller: PlayerId,
     withCounters?: { readonly kind: string; readonly amount: number },
-  ): void {
-    if (target.kind !== "player" || this.state.players[target.player] === undefined) return;
+  ): readonly ObjectId[] {
+    if (target.kind !== "player" || this.state.players[target.player] === undefined) return [];
     const library = this.state.zones.perPlayer[target.player].library;
     const n = "top" in count ? Math.max(0, count.top) : Math.max(0, library.length - count.allBut);
+    const out: ObjectId[] = [];
     for (const id of library.slice(0, n)) {
       this.moveObject(id, "exile");
       // "…and put a fetch counter on each of them": there.
       const exiled = this.state.objects[id];
+      if (exiled?.zone === "exile") out.push(id);
       // "Cards you exiled" (Haldan, of Pako's): this effect's controller's.
       if (exiled?.zone === "exile") exiled.exiledByPlayer = controller;
       if (withCounters !== undefined && withCounters.amount > 0 && exiled?.zone === "exile") {
         exiled.counters[withCounters.kind] = (exiled.counters[withCounters.kind] ?? 0) + withCounters.amount;
       }
     }
+    return out;
+  }
+
+  /** "Exile it with this" (rule 607.2a): `cards`, just exiled, are linked to
+   * `source`'s stint, and counted by it for good (the Colfenor's Urn ruling:
+   * "over the course of the entire game"). */
+  private linkExiledToSource(cards: readonly ObjectId[], source: ObjectId, stint: number): void {
+    const src = this.state.objects[source];
+    if (src === undefined) return;
+    for (const card of cards) this.state.objects[card].exiledWith = { source, zoneChangeCount: stint };
+    const sofar = src.exiledWithCount?.stint === stint ? src.exiledWithCount.count : 0;
+    src.exiledWithCount = { stint, count: sofar + cards.length };
   }
 
   /** See the `"return-from-graveyard"` {@link EffectSpec}. Returns cards from

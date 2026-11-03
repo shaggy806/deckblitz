@@ -1298,7 +1298,16 @@
   "effect:no-max-hand-size-until-your-next-turn",
   "static:granted-no-max-hand-size",
   "effect:random-permanent",
-  "condition:opponent-hand-size"
+  "condition:opponent-hand-size",
+  "zone:exiled-with-source-play",
+  "zone:exile-owner-may-play",
+  "zone:exiled-from-hand-play-permission-taxed",
+  "zone:exile-owner-may-cast-now",
+  "zone:exile-trigger-object-play-this-turn",
+  "zone:cast-from-linked-exile",
+  "zone:cast-linked-exiled-card-gated",
+  "zone:court-free-cast-from-linked-exile",
+  "zone:allow-cast-from-exile-spend-any-type"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

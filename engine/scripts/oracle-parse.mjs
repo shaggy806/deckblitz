@@ -2699,6 +2699,12 @@ export function parseSentence(sentence, ctx) {
   // with no permission to play them — what a following sentence says of
   // them reads `thisWay: "exiled"`.
   if ((m = re(`exile the top ${N} cards of your library`).exec(s))) return { kind: "exile-from-library", amount: amount(m[1]) };
+  // The top card of a player the effect names; `linkedExile` below links it if
+  // the card says "exiled with" it (Nightveil Specter).
+  if ((m = re("(that player|each opponent|each player) exiles the top card of their library").exec(s))) {
+    const whose = { "that player": "trigger-player", "each opponent": "each-opponent", "each player": "each-player" }[m[1].toLowerCase()];
+    return { kind: "exile-from-library", whose, amount: 1 };
+  }
   // "Exile the top seven cards of that player's library, then put a creature
   // card from among them onto the battlefield under your control" (Lord of
   // the Void): the player a combat damage trigger names; the put isn't
@@ -4158,9 +4164,23 @@ export function parseSentence(sentence, ctx) {
   }
   // "Until end of turn, you may cast a creature spell from among cards exiled
   // with ~ without paying its mana cost" (Idol of Endurance — rule 607.2a).
-  if ((m = re("until end of turn, you may cast an? (.+?) spell from among cards exiled with ~ without paying its mana cost").exec(s))) {
+  if ((m = re("until end of turn, you may cast an? (.+?) spell from among cards exiled with ~( without paying its mana cost)?").exec(s))) {
     const spell = parseTypePhrase(m[1]);
-    if (spell !== null && Object.keys(spell).length > 0) return { kind: "allow-cast-linked-exile", spell, free: true };
+    if (spell !== null && Object.keys(spell).length > 0) {
+      return { kind: "allow-cast-linked-exile", spell, ...(m[2] !== undefined ? { free: true } : {}) };
+    }
+  }
+  // "Until end of turn, you may play a card exiled with ~ [without paying its
+  // mana cost]" (Raphael, Lobelia), "… play cards [you own] exiled with ~"
+  // (Urianger Augurelt, Kayla's Music Box): rule 611.2c, read live.
+  if ((m = re("until end of turn, you may play (a card|cards you own|cards) exiled with ~( without paying its mana cost)?").exec(s))) {
+    return {
+      kind: "allow-cast-linked-exile",
+      ...(m[1].toLowerCase() === "cards you own" ? { spell: { ownedBy: "you" } } : {}),
+      ...(m[2] !== undefined ? { free: true } : {}),
+      play: true,
+      ...(m[1].toLowerCase() !== "a card" ? { anyNumber: true } : {}),
+    };
   }
   // Bazaar of Wonders: asked as it resolves (rule 608.2c), of the spell.
   if (re("counter it if a card with the same name is in a graveyard or a nontoken permanent with the same name is on the battlefield").test(s)) {
@@ -5299,6 +5319,38 @@ function impulseWindowOf(sentence) {
   return null;
 }
 
+/** "Exile target nonland permanent. For as long as that card remains exiled,
+ * its owner may play it[. A spell cast (by an opponent) this way costs {N} more
+ * to cast]." (Soul Partition), "… may cast it without paying its mana cost"
+ * (Release to the Wind): `exile`'s `mayCast` with `byOwner`, and how many
+ * sentences it took — or `null`. */
+function ownerPermissionAt(sentences, i, ctx) {
+  const exile = /^exile (up to one )?target ([a-z' ]+?)\.$/i.exec(sentences[i]);
+  const said = /^for as long as that card remains exiled, its owner may (play|cast) it( without paying its mana cost)?\.$/i.exec(
+    sentences[i + 1] ?? "",
+  );
+  if (exile === null || said === null) return null;
+  const spec = targetOf(`target ${exile[2]}`);
+  if (spec === undefined) return null;
+  const tax = /^a spell cast( by an opponent)? this way costs \{(\d+)\} more to cast\.$/i.exec(sentences[i + 2] ?? "");
+  return {
+    effect: {
+      kind: "exile",
+      target: ctx.target(exile[1] !== undefined ? { kind: "optional", of: spec } : spec),
+      mayCast: {
+        duration: "while-exiled",
+        ...(said[1].toLowerCase() === "play" ? { play: true } : {}),
+        byOwner: true,
+        ...(said[2] !== undefined ? { free: true } : {}),
+        ...(tax !== null
+          ? { tax: { generic: Number(tax[2]), ...(tax[1] !== undefined ? { opponentsOnly: true } : {}) } }
+          : {}),
+      },
+    },
+    used: tax !== null ? 3 : 2,
+  };
+}
+
 /** The impulse sentence pair at `i`, or `null`: the top card exiled with its
  * permission (`impulse-exile`), or a targeted card exiled from your graveyard
  * with one (`exile`'s `mayCast`; `sourceDid` isn't something that says). */
@@ -5810,6 +5862,15 @@ export function parseEffect(text, outer) {
       parsed.push(impulse);
       hints.push({ sentence, effect: impulse });
       skip = 1;
+      continue;
+    }
+    // "Exile target nonland permanent. For as long as that card remains exiled,
+    // its owner may play it."
+    const ownerPermission = ownerPermissionAt(sentences, i, ctx);
+    if (ownerPermission !== null) {
+      parsed.push(ownerPermission.effect);
+      hints.push({ sentence, effect: ownerPermission.effect });
+      skip = ownerPermission.used - 1;
       continue;
     }
     // "Create a … token. When you do, attach it to target creature you
@@ -10129,6 +10190,18 @@ export function parseFace(face, ctx = {}) {
   };
   out.activated.forEach((a, i) => nameThisAbility(a.effect, { activated: i }));
   out.triggered.forEach((a, i) => nameThisAbility(a.effect, { triggered: i }));
+  // "Cards exiled with ~" elsewhere on the card: its abilities that exile the
+  // top of a library are the other half of the link (rule 607.2a).
+  if (/\bexiled with\b/i.test(face.oracle_text ?? "")) {
+    const linkedExile = (node) => {
+      if (Array.isArray(node)) node.forEach(linkedExile);
+      else if (node !== null && typeof node === "object") {
+        if (node.kind === "exile-from-library") node.linked = true;
+        Object.values(node).forEach(linkedExile);
+      }
+    };
+    [...out.activated, ...out.triggered].forEach((a) => linkedExile(a.effect));
+  }
   // A card with bestow can be an Aura: its own "dies" leave-triggers read as
   // their rules do, "put into a graveyard from the battlefield" (afterlife,
   // rule 702.135a), so they trigger as an Aura too (Indebted Spirit).
@@ -11772,6 +11845,23 @@ function parseStatic(line, text) {
   }[line];
   if (fixed !== undefined) return { affects: { scope: "self" }, ...fixed, text };
   let m;
+  // "You may play lands and cast spells from among cards exiled with ~ [. If you
+  // cast a spell this way, you may spend mana as though it were mana of any
+  // color to cast it.]" (Nightveil Specter, Intellect Devourer), "You may cast
+  // spells from among cards exiled with ~." (Rona): rule 607.2a, the ability of
+  // whoever controls it, for this stint's cards.
+  if ((m = /^You may (play lands and )?cast spells from among cards exiled with ~\.( If you cast a spell this way, you may spend mana as though it were mana of any color to cast it\.)?$/.exec(line))) {
+    return {
+      affects: { scope: "self" },
+      playFromExile: {
+        filter: {},
+        linked: true,
+        ...(m[1] === undefined ? { castOnly: true } : {}),
+        ...(m[2] !== undefined ? { spendAs: "any-color" } : {}),
+      },
+      text,
+    };
+  }
   // A cycling cost's alternative (rule 702.29f has typecycling's a cycling
   // cost too): Gavi, Nest Warden, New Perspectives.
   if (line === "You may pay {0} rather than pay the cycling cost of the first card you cycle each turn.") {

@@ -3288,6 +3288,11 @@ export interface StaticAbility {
     readonly castOnly?: boolean;
     readonly yourTurnOnly?: boolean;
     readonly spendAs?: SpendAs;
+    /** "From among **cards exiled with this creature**" (Nightveil Specter,
+     * rule 607.2a): only cards linked to this permanent's present stint
+     * (`GameObject.exiledWith`, or `exiledUntil` — Intellect Devourer's). The
+     * ability stops with it, and a thief who gains control may use it. */
+    readonly linked?: true;
   };
   /**
    * "You may spend mana as though it were mana of any color" (Chromatic

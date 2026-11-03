@@ -10071,6 +10071,78 @@ describe("what an earlier step did, read by a later one", () => {
   });
 });
 
+describe("permissions over exiled cards", () => {
+  const face = (oracle_text: string) =>
+    parseFace({ name: "Test Card", type_line: "Creature", oracle_text, mana_cost: "{7}", colors: [], cmc: 7 } as never) as unknown as {
+      static?: Record<string, unknown>[];
+    };
+  it("reads a resolved permission over the source's linked exile, of one card or of cards", () => {
+    expect(parseEffect("Until end of turn, you may play a card exiled with ~ without paying its mana cost.", ctx()).effect).toEqual({
+      kind: "allow-cast-linked-exile",
+      free: true,
+      play: true,
+    });
+    expect(parseEffect("Until end of turn, you may play cards you own exiled with ~.", ctx()).effect).toEqual({
+      kind: "allow-cast-linked-exile",
+      spell: { ownedBy: "you" },
+      play: true,
+      anyNumber: true,
+    });
+    expect(parseEffect("Until end of turn, you may cast a creature spell from among cards exiled with ~.", ctx()).effect).toEqual({
+      kind: "allow-cast-linked-exile",
+      spell: { type: "creature" },
+    });
+  });
+  it("reads the static one, its lands and its spending rule", () => {
+    expect(face("You may play lands and cast spells from among cards exiled with this creature.").static?.[0]?.playFromExile).toEqual({
+      filter: {},
+      linked: true,
+    });
+    expect(face("You may cast spells from among cards exiled with this creature.").static?.[0]?.playFromExile).toEqual({
+      filter: {},
+      linked: true,
+      castOnly: true,
+    });
+    expect(
+      face(
+        "You may play lands and cast spells from among cards exiled with this creature. If you cast a spell this way, you may spend mana as though it were mana of any color to cast it.",
+      ).static?.[0]?.playFromExile,
+    ).toEqual({ filter: {}, linked: true, spendAs: "any-color" });
+  });
+  it("links a library's top card to the source when the card says 'exiled with' it", () => {
+    const triggered = (oracle_text: string) =>
+      (face(oracle_text) as unknown as { triggered: { effect: unknown }[] }).triggered[0].effect;
+    expect(
+      triggered(
+        "Whenever this creature deals combat damage to a player, that player exiles the top card of their library.\nYou may play lands and cast spells from among cards exiled with this creature.",
+      ),
+    ).toEqual({ kind: "exile-from-library", whose: "trigger-player", amount: 1, linked: true });
+    expect(triggered("Whenever this creature deals combat damage to a player, that player exiles the top card of their library.")).toEqual({
+      kind: "exile-from-library",
+      whose: "trigger-player",
+      amount: 1,
+    });
+  });
+  it("reads its owner's permission over an exiled permanent, taxed or free", () => {
+    expect(
+      parseEffect(
+        "Exile target nonland permanent. For as long as that card remains exiled, its owner may play it. A spell cast by an opponent this way costs {2} more to cast.",
+        ctx(),
+      ).effect,
+    ).toEqual({
+      kind: "exile",
+      target: 0,
+      mayCast: { duration: "while-exiled", play: true, byOwner: true, tax: { generic: 2, opponentsOnly: true } },
+    });
+    expect(
+      parseEffect(
+        "Exile target nonland permanent. For as long as that card remains exiled, its owner may cast it without paying its mana cost.",
+        ctx(),
+      ).effect,
+    ).toEqual({ kind: "exile", target: 0, mayCast: { duration: "while-exiled", byOwner: true, free: true } });
+  });
+});
+
 describe("an effect done by another player", () => {
   it("reads 'target player scries N' as as-player, on a player slot", () => {
     const parsed = parseEffect("Target player scries 2.", ctx());

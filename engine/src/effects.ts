@@ -1927,6 +1927,40 @@ export type ImpulseDuration =
   | "while-you-control"
   | "while-exiled";
 
+/**
+ * A permission over a card an effect has just put into exile — `exile`'s and
+ * `discard-chosen`'s `mayCast`, `look-and-choose`'s `playable`. It rides on
+ * the card (`GameObject.impulse`) and ends with any move.
+ *
+ * - `duration`: how long, see {@link ImpulseDuration}, read from the side of
+ *   the player it's given to ("until the end of **their** next turn").
+ * - `spendAs`: the spending rule for that cast alone (rule 118.14).
+ * - `play`: on `mayCast`, "you may **play** it", a land too (rule 305.1), not
+ *   only cast it. A `playable` plays unless `castOnly`: "you may **cast** that
+ *   card" (Gonti, Lord of Luxury), a land staying where it is.
+ * - `byOwner`: "**its owner** may play it" (Soul Partition, Elite Spellbinder),
+ *   not the effect's controller. On a `look-and-choose`, the chooser, who owns
+ *   what's in their own hand (rule 400.3).
+ * - `free`: "… may cast it **without paying its mana cost**" (Release to the
+ *   Wind), and only that way.
+ * - `tax`: "a spell cast this way costs {N} more to cast" (Elite Spellbinder),
+ *   an increase, so before any reduction (rule 601.2f); `opponentsOnly`: "a
+ *   spell cast **by an opponent** this way" (Soul Partition), of the effect's
+ *   controller.
+ * - `landsEnterTapped`: "each land played this way enters tapped" (Lightstall
+ *   Inquisitor).
+ */
+export interface ExilePermission {
+  readonly duration: ImpulseDuration;
+  readonly spendAs?: SpendAs;
+  readonly play?: true;
+  readonly castOnly?: true;
+  readonly byOwner?: true;
+  readonly free?: true;
+  readonly tax?: { readonly generic: number; readonly opponentsOnly?: true };
+  readonly landsEnterTapped?: true;
+}
+
 /** One row of a die roll's results table (rule 706.3a): a result from `min`
  * to `max` (any result from `min` up, without one) gets `effect`. */
 export interface DieResultRow {
@@ -3220,9 +3254,10 @@ export type EffectSpec =
        * your next turn" — with `spendAs` for that cast alone (rule 118.14).
        * `play`: "you may **play** it" — a land too (rule 305.1), Victor
        * Mancha's. A token exiled ceases to exist (rule 111.7), so there's
-       * nothing to cast.
+       * nothing to cast. The rest is {@link ExilePermission}: `byOwner`,
+       * `free`, `tax` and `landsEnterTapped`.
        */
-      readonly mayCast?: { readonly duration: ImpulseDuration; readonly spendAs?: SpendAs; readonly play?: true };
+      readonly mayCast?: ExilePermission;
       /** The card is in a hand, a `choose-random-card`'s find there: "reveals
        * a card at random from their hand … exile it" (Planeswalker's
        * Mischief). Only with this does `exile` reach a hand, so a target that
@@ -3873,6 +3908,10 @@ export type EffectSpec =
       /** "…and put a fetch counter on each of them" (Pako, Arcane
        * Retriever): counters each card gets in exile. */
       readonly withCounters?: { readonly kind: string; readonly amount: number };
+      /** Exiled **with this source** (rule 607.2a — `GameObject.exiledWith`),
+       * as `exile`'s `linked`, for its "cards exiled with this": Nightveil
+       * Specter's "that player exiles the top card of their library". */
+      readonly linked?: true;
     }
   | {
       /** Return every card matching `filter` from the effect's controller's
@@ -4257,6 +4296,9 @@ export type EffectSpec =
       /** "That spell has **undaunted**" (rule 702.125 — Durnan): cast this
        * way, it costs {1} less for each of its caster's opponents. */
       readonly undaunted?: true;
+      /** "…and mana of any type can be spent to cast that spell" (Black Widow,
+       * Super Spy): for that cast alone (rule 118.14). */
+      readonly spendAs?: SpendAs;
     }
   | {
       /**
@@ -4268,10 +4310,24 @@ export type EffectSpec =
        * exiled later this turn counts. `spell` is the spell it may be, judged
        * as the face being cast (an adventure's instant half isn't a creature
        * spell). `free` permits only the free cast.
+       *
+       * The rest are the same permission's other printings, rule 611.2c's
+       * "modifies the rules of the game" all of them, so all read live:
+       * `play`: "you may **play** a card" (Raphael, Most Attitude), a land as
+       * well, at a land's timing and with a land drop (the rulings), and it
+       * spends the permission as a spell would. `anyNumber`: "you may play
+       * **cards**" (Kayla's Music Box), which nothing spends — `spell`'s
+       * `{ ownedBy: "you" }` is its "cards you own". `reduce`: "spells you cast
+       * this way cost {2} less" (generic only — Urianger Augurelt's ruling).
+       * A face-down card (rule 406.3a) is reached only by a player who may
+       * look at it.
        */
       readonly kind: "allow-cast-linked-exile";
       readonly spell?: CardFilter;
       readonly free?: true;
+      readonly play?: true;
+      readonly anyNumber?: true;
+      readonly reduce?: number;
     }
   | {
       /**
@@ -4574,9 +4630,11 @@ export type EffectSpec =
        * cast that card for as long as it remains exiled, and you may spend
        * mana as though it were mana of any color to cast that spell"
        * (`{ duration: "while-exiled", spendAs: "any-color" }`). Not with
-       * `reveals`.
+       * `reveals`. Elite Spellbinder's "its owner may play it. A spell cast
+       * this way costs {2} more" is `{ duration: "while-exiled", play: true,
+       * byOwner: true, tax: { generic: 2 } }`.
        */
-      readonly mayCast?: { readonly duration: ImpulseDuration; readonly spendAs?: SpendAs; readonly play?: true };
+      readonly mayCast?: ExilePermission;
     }
   | {
       /**
@@ -8448,6 +8506,11 @@ export type EffectSpec =
        * `"any-color"`) — only for a spell cast under this permission (rule
        * 118.14). */
       readonly spendAs?: SpendAs;
+      /** The cards are also exiled **with this source** (rule 607.2a), for an
+       * `allow-cast-linked-exile` of its: Court of Locthwain's "You may play
+       * that card … you may cast a spell from among cards exiled with this
+       * enchantment". */
+      readonly linked?: true;
     }
   | {
       /** Scry `amount` (rule 701.18) — look at the top N, put any number on
@@ -8960,8 +9023,12 @@ export type EffectSpec =
        * remain exiled (Black Cat, Cunning Thief). `spendAs` is "mana of any
        * type can be spent to cast spells this way" (rule 118.14). The
        * permission rides on the card (`GameObject.impulse`) and ends with any
-       * move. */
-      readonly playable?: { readonly duration: "end-of-turn" | "while-exiled"; readonly spendAs?: SpendAs };
+       * move. Lightstall Inquisitor's "each opponent exiles a card from their
+       * hand and may play that card for as long as it remains exiled. Each
+       * spell cast this way costs {1} more to cast. Each land played this way
+       * enters tapped" is a `for-each-player`'s look-and-choose with `byOwner`,
+       * `tax` and `landsEnterTapped` ({@link ExilePermission}). */
+      readonly playable?: ExilePermission;
       /**
        * A leftover destination that depends on how things stand once the
        * chosen cards are where they're going — Nine-Fingers Keene's "you may
@@ -9828,7 +9895,7 @@ export interface EffectApi {
     target: TargetRef,
     untilSourceLeaves?: boolean,
     withCounters?: { readonly kind: string; readonly amount: number },
-    mayCast?: { readonly duration: ImpulseDuration; readonly spendAs?: SpendAs; readonly play?: true },
+    mayCast?: ExilePermission,
     linked?: boolean,
     /** Airbend it (rule 701.65a) — see the `exile` effect's `airbend`. */
     airbend?: boolean,
@@ -9882,7 +9949,7 @@ export interface EffectApi {
     target: TargetRef,
     free: boolean,
     laterTurns?: boolean,
-    opts?: { readonly whileExiled?: boolean; readonly undaunted?: boolean },
+    opts?: { readonly whileExiled?: boolean; readonly undaunted?: boolean; readonly spendAs?: SpendAs },
   ): void;
   /** See the `"choose-exiled-to-play"` {@link EffectSpec}. */
   chooseExiledToPlay(filter: CardFilter | undefined, free: boolean, among?: readonly ObjectId[]): void;
@@ -9905,7 +9972,11 @@ export interface EffectApi {
    * (`CardDefinition.castWhileSearchingLibrary`). */
   castableWhileSearching(player: PlayerId): readonly ObjectId[];
   /** See the `"allow-cast-linked-exile"` {@link EffectSpec}. */
-  allowCastLinkedExile(spell: CardFilter | undefined, free: boolean): void;
+  allowCastLinkedExile(
+    spell: CardFilter | undefined,
+    free: boolean,
+    more?: { readonly play?: true; readonly anyNumber?: true; readonly reduce?: number },
+  ): void;
   /** The cards this resolution has exiled so far from a library, a hand or
    * a graveyard, still in exile — a `cast-now`'s `"exiled-this-way"`. */
   cardsExiledThisWay(): readonly ObjectId[];
@@ -10175,6 +10246,7 @@ export interface EffectApi {
     target: TargetRef,
     count: { readonly top: number } | { readonly allBut: number },
     withCounters?: { readonly kind: string; readonly amount: number },
+    linked?: boolean,
   ): void;
   /** Number of battlefield permanents matching `filter`, evaluated with the
    * effect's controller as "you" (for an `EffectAmount` `{ countOf }`) —
@@ -10239,7 +10311,7 @@ export interface EffectApi {
       readonly alsoFrom?:
         | { readonly zone: "graveyard"; readonly filter?: CardFilter }
         | { readonly zone: "library-top" };
-      readonly mayCast?: { readonly duration: ImpulseDuration; readonly spendAs?: SpendAs; readonly play?: true };
+      readonly mayCast?: ExilePermission;
       /** See the effect's `reveals` and `picks`, read as it resolves. */
       readonly reveals?: { readonly count: number; readonly picks: number };
     },
@@ -10431,6 +10503,8 @@ export interface EffectApi {
       /** Exiled face down, for the controller's eyes only (rule 406.3). */
       readonly faceDown?: boolean;
       readonly spendAs?: SpendAs;
+      /** See the effect's `linked`. */
+      readonly linked?: boolean;
     },
   ): void;
   /** See the `"ward"` {@link EffectSpec}. */
@@ -14792,7 +14866,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
               },
       }));
       ctx.simultaneously(() => {
-        for (const { target, count } of plan) ctx.exileFromLibrary(target, count, spec.withCounters);
+        for (const { target, count } of plan) ctx.exileFromLibrary(target, count, spec.withCounters, spec.linked === true);
       });
       return;
     }
@@ -14915,7 +14989,11 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       ctx.chooseExiledToPlay(spec.filter, spec.free === true, spec.linked === true ? ctx.cardsExiledWithSource(true) : undefined);
       return;
     case "allow-cast-linked-exile":
-      ctx.allowCastLinkedExile(spec.spell, spec.free === true);
+      ctx.allowCastLinkedExile(spec.spell, spec.free === true, {
+        ...(spec.play === true ? { play: true } : {}),
+        ...(spec.anyNumber === true ? { anyNumber: true } : {}),
+        ...(spec.reduce !== undefined ? { reduce: spec.reduce } : {}),
+      });
       return;
     case "allow-cast-from-exile": {
       const target = resolveEffectTarget(spec.target, ctx);
@@ -14923,6 +15001,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         ctx.allowCastFromExile(target, spec.free === true, spec.laterTurns === true, {
           whileExiled: spec.whileExiled === true,
           undaunted: spec.undaunted === true,
+          ...(spec.spendAs !== undefined ? { spendAs: spec.spendAs } : {}),
         });
       }
       return;
@@ -17237,6 +17316,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         ...(spec.payLifeManaValue === true ? { payLifeManaValue: true as const } : {}),
         ...(spec.spendAs !== undefined ? { spendAs: spec.spendAs } : {}),
         ...(spec.sourceDid !== undefined ? { sourceDid: spec.sourceDid } : {}),
+        ...(spec.linked === true ? { linked: true } : {}),
       });
       return;
     }

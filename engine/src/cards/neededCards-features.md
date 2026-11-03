@@ -4099,6 +4099,17 @@ note had gone stale or a composition hadn't been tried. Keys: effect:search-libr
 Foresight, Lantern of Insight, Natural Selection, Vizkopa Guildmage, Merrow Bonegnawer, Signal Pest
 (`test/need-key-recheck.test.ts`).
 
+**Permissions over exiled cards (2026-11-02).** One `ExilePermission` is `exile`'s and `discard-chosen`'s `mayCast` and
+`look-and-choose`'s `playable`: `byOwner`, `free`, `tax`, `landsEnterTapped`, `castOnly`. Over the source's linked
+cards: `playFromExile.linked` (static) and `allow-cast-linked-exile`'s `play`, `anyNumber`, `reduce` (resolved, rule
+611.2c, live); `exile-from-library`'s and `impulse-exile`'s `linked`; `allow-cast-from-exile`'s `spendAs`. Keys:
+zone:exiled-with-source-play, zone:exile-owner-may-play, zone:exiled-from-hand-play-permission-taxed,
+zone:exile-owner-may-cast-now, zone:exile-trigger-object-play-this-turn (no code), zone:cast-from-linked-exile,
+zone:cast-linked-exiled-card-gated, zone:court-free-cast-from-linked-exile, zone:allow-cast-from-exile-spend-any-type.
+Proving cards: Nightveil Specter, Intellect Devourer, Raphael, Most Attitude, Soul Partition, Release to the Wind,
+Suspend Aggression, Elite Spellbinder, Lightstall Inquisitor, Rona, Disciple of Gix, Serpent's Soul-Jar, Null Summoner,
+Court of Locthwain, Gonti, Lord of Luxury, Norin, Swift Survivalist (`test/exile-permission-options.test.ts`).
+
 **An effect done by another player (2026-11-02).** `as-player`: `who` (any `EffectPlayerRef`, with the new
 `"source-owner"`), `effect`; inside it "you" is them, what it asks is theirs and what it makes is theirs. Replaces a
 `who` per effect. Keys: effect:target-player-scries, effect:incubate-for-player, effect:discard-hand-target-players, effect:owner-of-source-player-ref, effect:discover-by-other-player, effect:sacrifice-controller-of-target. Proving cards: Excise the Imperfect, Wheel and Deal, Gandalf, Wandering Wizard.

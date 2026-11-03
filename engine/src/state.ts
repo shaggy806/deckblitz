@@ -655,6 +655,12 @@ export interface GameObject {
      * than pay its mana cost" (Inside Information): the only way to cast it
      * (rule 118.9b); a land card is played as ever. */
     readonly payLifeManaValue?: true;
+    /** "A spell cast this way costs {N} more to cast" (Elite Spellbinder), for
+     * every caster but `exempt`: "a spell cast **by an opponent** this way"
+     * (Soul Partition), of the player whose effect it was. */
+    readonly tax?: { readonly generic: number; readonly exempt?: PlayerId };
+    /** "Each land played this way enters tapped" (Lightstall Inquisitor). */
+    readonly landsEnterTapped?: true;
     /** Extra gates on *using* the permission, as opposed to when it lapses —
      * Theater of Horrors' "**During your turn, if an opponent lost life this
      * turn**, you may play …". Evaluated live, so the cards become playable
@@ -712,6 +718,12 @@ export interface GameObject {
     readonly stint: number;
     readonly spell?: CardFilter;
     readonly free: boolean;
+    /** "You may **play** …": a land too (Raphael, Most Attitude). */
+    readonly play?: true;
+    /** "… cards" (Kayla's Music Box): nothing spends it. */
+    readonly anyNumber?: true;
+    /** "Spells you cast this way cost {N} less" (Urianger Augurelt). */
+    readonly reduce?: number;
   }[];
   /**
    * Players this permanent has dealt combat damage to this turn — Steel
@@ -4746,6 +4758,9 @@ export type PendingEntry =
       readonly object: ObjectId;
       readonly player: PlayerId;
       readonly from: ZoneType;
+      /** "Each land played this way enters tapped" — the permission it's
+       * played under (`GameObject.impulse`), read before anything moved. */
+      readonly tapped?: true;
     }
   | {
       /** The answer to a `choose-from-zone` decision, not yet carried out
