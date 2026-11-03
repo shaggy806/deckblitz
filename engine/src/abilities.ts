@@ -2083,6 +2083,16 @@ export type TriggerSpec =
        * control**". Not a battle, whether they control it or protect it. */
       readonly attackingYou?: boolean;
       /**
+       * "Whenever a player attacks, **if they aren't attacking you**"
+       * (Mirkwood Trapper): no creature of the declaration attacks this
+       * permanent's controller — the player; attacking a planeswalker they
+       * control or a battle they protect still fires it (the ruling). An
+       * intervening if (rule 603.4), so it's asked again as the ability
+       * resolves: by then no creature the attacking player controls may be
+       * attacking you, one put onto the battlefield attacking included.
+       */
+      readonly notAttackingYou?: true;
+      /**
        * The count is an intervening if in the present tense — Mangara, the
        * Diplomat's "if two or more of those creatures **are** attacking you
        * and/or planeswalkers you control" — so it's asked again as the

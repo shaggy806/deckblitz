@@ -8093,6 +8093,7 @@ export class Game {
       const object = this.state.objects[id];
       if (object.attackedThisTurn === true) object.attackedThisTurn = false;
       delete object.attackedPlayersThisTurn;
+      delete object.attackedBattleThisTurn;
       if (object.dealtDamage?.thisTurn !== undefined) object.dealtDamage = { combat: object.dealtDamage.combat };
     }
     this.state.extraCombats = 0;
@@ -10617,6 +10618,20 @@ export class Game {
   private attackConditionsStillHold(ability: StackAbility, object: GameObject): boolean {
     // A delayed or reflexive trigger carries no `trigger` of its own.
     const trigger = (ability as Partial<TriggeredAbility>).trigger;
+    if (trigger?.on === "attack-with" && trigger.notAttackingYou === true) {
+      // "If they aren't attacking you", asked again: no creature of the
+      // attacking player's attacks this ability's controller now.
+      const you = object.controller;
+      const attacker = activePlayerOf(this.state);
+      if (
+        this.state.zones.shared.battlefield.some((id) => {
+          const o = this.state.objects[id];
+          return o.attacking === you && o.controller === attacker;
+        })
+      ) {
+        return false;
+      }
+    }
     if (trigger?.on === "attack-with" && trigger.stillAttacking === true) {
       return this.stillAttackingWith(trigger, object);
     }
@@ -10959,6 +10974,13 @@ export class Game {
         };
         if (object.lastAttack.player !== null) {
           object.attackedPlayersThisTurn = [...(object.attackedPlayersThisTurn ?? []), object.lastAttack.player];
+        } else if (
+          this.state.objects[defender as ObjectId]?.zone === "battlefield" &&
+          computeCharacteristics(this.state, this.registry, defender as ObjectId).types.includes("battle")
+        ) {
+          // Attacking a battle (rule 506.3): War Historian's "attacked a
+          // battle this turn" holds from here on, whatever becomes of it.
+          object.attackedBattleThisTurn = true;
         }
         // Melee's "each opponent you attacked this combat" (702.121a) — kept
         // past the attacker leaving combat.
@@ -27226,6 +27248,9 @@ export class Game {
     attackers: readonly ObjectId[],
     self: GameObject,
   ): boolean {
+    if (spec.notAttackingYou === true && attackers.some((id) => this.state.objects[id]?.attacking === self.controller)) {
+      return false;
+    }
     const counted = this.attackWithCounted(spec, attackers, self);
     const n = this.creatureCount(counted);
     if (spec.exactly !== undefined ? n !== spec.exactly : n < (spec.atLeast ?? 1)) return false;
@@ -49825,6 +49850,7 @@ export class Game {
       ...(object.renowned === true ? { renowned: true as const } : {}),
       ...(object.entry !== undefined ? { entry: object.entry } : {}),
       ...(object.attackedThisTurn === true ? { attackedOnTurn: this.state.turn.number } : {}),
+      ...(object.attackedBattleThisTurn === true ? { attackedBattleOnTurn: this.state.turn.number } : {}),
       ...(object.damageThisTurn !== undefined ? { damageThisTurn: object.damageThisTurn } : {}),
       ...(object.dealtDamageToCreatureOnTurn !== undefined
         ? { dealtDamageToCreatureOnTurn: object.dealtDamageToCreatureOnTurn }
@@ -50601,6 +50627,7 @@ export class Game {
     delete object.altCostGrantOnTurn;
     delete object.attackedThisTurn;
     delete object.attackedPlayersThisTurn;
+    delete object.attackedBattleThisTurn;
     delete object.lastAttack;
     delete object.mustAttackPlayer;
     delete object.mustAttackPlayerThisCombat;

@@ -703,6 +703,7 @@ import _poolSonarStrike from "../pool/sonar-strike.js";
 import _poolSoulReap from "../pool/soul-reap.js";
 import _poolSoulSummons from "../pool/soul-summons.js";
 import _poolSoulSwallower from "../pool/soul-swallower.js";
+import _poolSoulbladeCorrupter from "../pool/soulblade-corrupter.js";
 import _poolSoulboundGuardians from "../pool/soulbound-guardians.js";
 import _poolSpareDagger from "../pool/spare-dagger.js";
 import _poolSpectralGateguards from "../pool/spectral-gateguards.js";
@@ -1593,6 +1594,7 @@ const shard: CardShard = {
     _poolSoulReap,
     _poolSoulSummons,
     _poolSoulSwallower,
+    _poolSoulbladeCorrupter,
     _poolSoulboundGuardians,
     _poolSpareDagger,
     _poolSpectralGateguards,

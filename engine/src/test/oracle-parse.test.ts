@@ -4813,7 +4813,9 @@ describe("agreement with the hand-authored pool", () => {
     const { stats, mismatches } = checkPool(POOL_CARDS);
     expect(stats.claimed).toBeGreaterThan(400);
     expect(mismatches.map((m: { card: string; text: string }) => `${m.card}: ${m.text}`)).toEqual([]);
-  });
+    // The whole pool through the parser: ~30 s alone on a cloud session's
+    // four cores, past the suite's 30 s default as the pool grows.
+  }, 120_000);
 });
 
 describe("land-type setting statics (rule 305.7)", () => {
@@ -6807,6 +6809,16 @@ describe("creatures in a blocking relation (blockingRelation)", () => {
     const cyclops = face("Rampaging Cyclops", "Creature — Cyclops", "This creature gets -2/-0 as long as two or more creatures are blocking it.");
     expect(cyclops.complete).toBe(true);
     expect(cyclops.static[0].condition).toEqual({ kind: "source", filter: { blockerCount: { op: "gte", n: 2 } } });
+    // The turn's attack history (rule 506.3 — War Historian).
+    const historian = face("War Historian", "Creature — Human Monk", "Reach\nThis creature has indestructible as long as it attacked a battle this turn.");
+    expect(historian.complete).toBe(true);
+    expect(historian.static[0]).toMatchObject({
+      affects: { scope: "self" },
+      grantKeywords: ["indestructible"],
+      condition: { kind: "source", filter: { attackedBattleThisTurn: true } },
+    });
+    const horrigan = face("Agent Frank Horrigan", "Legendary Creature — Mutant", "~ has indestructible as long as it attacked this turn.");
+    expect(horrigan.static[0].condition).toEqual({ kind: "source", filter: { attackedThisTurn: true } });
     const wolverine = face(
       "Grizzled Wolverine",
       "Creature — Wolverine",
@@ -10343,6 +10355,21 @@ describe("exchanges with a life total", () => {
     ]);
     expect(parseTrigger("Whenever a creature attacks enchanted player")).toEqual([
       { on: "attacks", who: "any", attackedPlayer: "attached" },
+    ]);
+    // "Attacks one of your opponents": the player, whoever's creature it is.
+    const opponent = { attackingOpponent: true };
+    expect(parseTrigger("Whenever a creature with a counter on it attacks one of your opponents")).toEqual([
+      { on: "attacks", who: "any", filter: { type: "creature", counters: { compare: { op: "gte", n: 1 } }, ...opponent } },
+    ]);
+    expect(parseTrigger("Whenever a creature with a +1/+1 counter on it attacks one of your opponents")).toEqual([
+      {
+        on: "attacks",
+        who: "any",
+        filter: { type: "creature", counters: { kind: "+1/+1", compare: { op: "gte", n: 1 } }, ...opponent },
+      },
+    ]);
+    expect(parseTrigger("Whenever an enchanted creature attacks one of your opponents")).toEqual([
+      { on: "attacks", who: "any", filter: { type: "creature", enchanted: true, ...opponent } },
     ]);
   });
 

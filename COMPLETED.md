@@ -36,6 +36,11 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
   Seer of Stolen Sight, Rinoa Heartilly, Angel Wing.
 - **A may another player answers** (2026-11-03, `6d8f94e0b`): any opponent's first yes or one named player's, with `mayBeDone`
   (rule 608.2d). Sin Prodder, Distant Memories, Arcum Dagsson, Farrel's Mantle.
+- **Attacking one of your opponents, and not attacking you** (2026-11-03, `d1cb9309c`): `attack-with`'s `notAttackingYou`
+  (an intervening if); the scaffolder reads "attacks one of your opponents". Skyboon Evangelist, Soulblade Corrupter,
+  Mirkwood Trapper.
+- **Attacked a battle this turn** (2026-11-03, `0c76c397f`): `GameObject.attackedBattleThisTurn` and its filter clause.
+  War Historian.
 - **Permanents controlled since the turn began** (2026-11-03, `a597195ef`): `CardFilter.controlledContinuously`, rule 302.6's
   test of any permanent, as a source condition, target or sacrifice. Rocket Launcher, Nettling Imp, Norritt, Keldon Twilight.
 - **A count of different mana costs** (2026-11-03, `257ed2665`): the `distinct` aggregate's `of: "mana-cost"`, and the mana

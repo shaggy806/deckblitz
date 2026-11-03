@@ -1958,6 +1958,16 @@ export function parseTrigger(clause) {
       return [{ on: "dies", who, filter, ...(m[1] !== undefined ? { otherOnly: true } : {}), batched: true }];
     }
   }
+  // "Whenever a creature with a counter on it attacks one of your opponents"
+  // (Skyboon Evangelist, Soulblade Corrupter): whoever controls it, attacking
+  // the player — not a planeswalker or battle of theirs (rule 508.3a).
+  if ((m = /^Whenever (a|an) (enchanted )?(.+?)( with an? (?:(\+1\/\+1|[a-z]+) )?counter on it)? attacks one of your opponents$/.exec(c))) {
+    const filter = parseTypePhrase(m[3]);
+    if (filter === null) return null;
+    const counters = m[4] ? { counters: { ...(m[5] ? { kind: m[5] } : {}), compare: { op: "gte", n: 1 } } } : {};
+    const enchanted = m[2] ? { enchanted: true } : {};
+    return [{ on: "attacks", who: "any", filter: { ...filter, ...enchanted, ...counters, attackingOpponent: true } }];
+  }
   if ((m = /^Whenever (a|another) (.+?) you control deals combat damage to a player$/.exec(c))) {
     const filter = parseTypePhrase(m[2]);
     if (filter === null) return null;
@@ -11909,6 +11919,12 @@ const STATIC_CONDITION_SUFFIXES = [
   [" as long as you have the city's blessing.", { kind: "citys-blessing" }],
   // "… as long as two or more creatures are blocking it" (Rampaging Cyclops).
   [" as long as two or more creatures are blocking it.", { kind: "source", filter: { blockerCount: { op: "gte", n: 2 } } }],
+  // The turn's attack history: "… as long as it attacked this turn" (Agent
+  // Frank Horrigan), "… as long as it attacked a battle this turn" (War
+  // Historian, rule 506.3), "… as long as it entered this turn" (Crew Captain).
+  [" as long as it attacked this turn.", { kind: "source", filter: { attackedThisTurn: true } }],
+  [" as long as it attacked a battle this turn.", { kind: "source", filter: { attackedBattleThisTurn: true } }],
+  [" as long as it entered this turn.", { kind: "source", filter: { enteredThisTurn: true } }],
 ];
 /** The same, leading: "As long as you have the city's blessing, ~ has
  * hexproof" (Slippery Scoundrel). */

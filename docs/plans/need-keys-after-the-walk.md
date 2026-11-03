@@ -863,6 +863,10 @@ missing. Re-run `--greedy` for Phase 2's order.
   `player`/`playerOnly`/`abilityOnly`/`firstTimeEachTurnByAnyone` (`player-becomes-target`, `becomes-target-by-your-ability`,
   `becomes-target-first-time-by-anyone`); Amulet of Safekeeping, Unsettled Mariner, Dormant Gomazoa, Loki, Angelic Cub.
   Left: the spell-on-stack and targets-only-it keys.
+  `condition:controlled-since-turn-start` with `filter:controlled-continuously-since-turn-start`. Three cloud sessions took
+  six families each beside them.
+- **2026-11-03: one session, six families in series.** `condition:attacked-battle-this-turn`;
+  `condition:attacking-an-opponent-filter` with `trigger:attacks-your-opponent` and `trigger:player-attacks-not-you`.
 
 ## Rough size
 

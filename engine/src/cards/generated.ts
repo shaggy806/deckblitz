@@ -15129,6 +15129,7 @@ import _poolMirkwoodMeditator from "./pool/mirkwood-meditator.js";
 import _poolMirkwoodNurturer from "./pool/mirkwood-nurturer.js";
 import _poolMirkwoodPathmaker from "./pool/mirkwood-pathmaker.js";
 import _poolMirkwoodSpider from "./pool/mirkwood-spider.js";
+import _poolMirkwoodTrapper from "./pool/mirkwood-trapper.js";
 import _poolMirkwood from "./pool/mirkwood.js";
 import _poolMirozel from "./pool/mirozel.js";
 import _poolMirranBanesplitter from "./pool/mirran-banesplitter.js";
@@ -21703,6 +21704,7 @@ import _poolSkybind from "./pool/skybind.js";
 import _poolSkybladeOfTheLegion from "./pool/skyblade-of-the-legion.js";
 import _poolSkybladesBoon from "./pool/skyblades-boon.js";
 import _poolSkyblinderStaff from "./pool/skyblinder-staff.js";
+import _poolSkyboonEvangelist from "./pool/skyboon-evangelist.js";
 import _poolSkyboxFerry from "./pool/skybox-ferry.js";
 import _poolSkybridgeTowers from "./pool/skybridge-towers.js";
 import _poolSkycatSovereign from "./pool/skycat-sovereign.js";
@@ -22214,6 +22216,7 @@ import _poolSoulTether from "./pool/soul-tether.js";
 import _poolSoulTithe from "./pool/soul-tithe.js";
 import _poolSoulTransfer from "./pool/soul-transfer.js";
 import _poolSoulWarden from "./pool/soul-warden.js";
+import _poolSoulbladeCorrupter from "./pool/soulblade-corrupter.js";
 import _poolSoulbladeDjinn from "./pool/soulblade-djinn.js";
 import _poolSoulbladeRenewer from "./pool/soulblade-renewer.js";
 import _poolSoulboundGuardians from "./pool/soulbound-guardians.js";
@@ -26858,6 +26861,7 @@ import _poolWarElemental from "./pool/war-elemental.js";
 import _poolWarElephant from "./pool/war-elephant.js";
 import _poolWarFalcon from "./pool/war-falcon.js";
 import _poolWarFlare from "./pool/war-flare.js";
+import _poolWarHistorian from "./pool/war-historian.js";
 import _poolWarHorn from "./pool/war-horn.js";
 import _poolWarMachineAvengingArsenal from "./pool/war-machine-avenging-arsenal.js";
 import _poolWarMachineJamesRhodes from "./pool/war-machine-james-rhodes.js";
@@ -43813,6 +43817,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMirkwoodNurturer,
   _poolMirkwoodPathmaker,
   _poolMirkwoodSpider,
+  _poolMirkwoodTrapper,
   _poolMirkwood,
   _poolMirozel,
   _poolMirranBanesplitter,
@@ -50387,6 +50392,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSkybladeOfTheLegion,
   _poolSkybladesBoon,
   _poolSkyblinderStaff,
+  _poolSkyboonEvangelist,
   _poolSkyboxFerry,
   _poolSkybridgeTowers,
   _poolSkycatSovereign,
@@ -50898,6 +50904,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSoulTithe,
   _poolSoulTransfer,
   _poolSoulWarden,
+  _poolSoulbladeCorrupter,
   _poolSoulbladeDjinn,
   _poolSoulbladeRenewer,
   _poolSoulboundGuardians,
@@ -55542,6 +55549,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolWarElephant,
   _poolWarFalcon,
   _poolWarFlare,
+  _poolWarHistorian,
   _poolWarHorn,
   _poolWarMachineAvengingArsenal,
   _poolWarMachineJamesRhodes,
@@ -72510,6 +72518,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/mirkwood-nurturer": _poolMirkwoodNurturer,
   "pool/mirkwood-pathmaker": _poolMirkwoodPathmaker,
   "pool/mirkwood-spider": _poolMirkwoodSpider,
+  "pool/mirkwood-trapper": _poolMirkwoodTrapper,
   "pool/mirkwood": _poolMirkwood,
   "pool/mirozel": _poolMirozel,
   "pool/mirran-banesplitter": _poolMirranBanesplitter,
@@ -79084,6 +79093,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/skyblade-of-the-legion": _poolSkybladeOfTheLegion,
   "pool/skyblades-boon": _poolSkybladesBoon,
   "pool/skyblinder-staff": _poolSkyblinderStaff,
+  "pool/skyboon-evangelist": _poolSkyboonEvangelist,
   "pool/skybox-ferry": _poolSkyboxFerry,
   "pool/skybridge-towers": _poolSkybridgeTowers,
   "pool/skycat-sovereign": _poolSkycatSovereign,
@@ -79595,6 +79605,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/soul-tithe": _poolSoulTithe,
   "pool/soul-transfer": _poolSoulTransfer,
   "pool/soul-warden": _poolSoulWarden,
+  "pool/soulblade-corrupter": _poolSoulbladeCorrupter,
   "pool/soulblade-djinn": _poolSoulbladeDjinn,
   "pool/soulblade-renewer": _poolSoulbladeRenewer,
   "pool/soulbound-guardians": _poolSoulboundGuardians,
@@ -84239,6 +84250,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/war-elephant": _poolWarElephant,
   "pool/war-falcon": _poolWarFalcon,
   "pool/war-flare": _poolWarFlare,
+  "pool/war-historian": _poolWarHistorian,
   "pool/war-horn": _poolWarHorn,
   "pool/war-machine-avenging-arsenal": _poolWarMachineAvengingArsenal,
   "pool/war-machine-james-rhodes": _poolWarMachineJamesRhodes,

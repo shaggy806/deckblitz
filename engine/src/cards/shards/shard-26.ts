@@ -858,6 +858,7 @@ import _poolWallOfLight from "../pool/wall-of-light.js";
 import _poolWallop from "../pool/wallop.js";
 import _poolWanderersTwig from "../pool/wanderers-twig.js";
 import _poolWarFalcon from "../pool/war-falcon.js";
+import _poolWarHistorian from "../pool/war-historian.js";
 import _poolWarSpikeChangeling from "../pool/war-spike-changeling.js";
 import _poolWarpingWail from "../pool/warping-wail.js";
 import _poolWarriorsOfWakanda from "../pool/warriors-of-wakanda.js";
@@ -1760,6 +1761,7 @@ const shard: CardShard = {
     _poolWallop,
     _poolWanderersTwig,
     _poolWarFalcon,
+    _poolWarHistorian,
     _poolWarSpikeChangeling,
     _poolWarpingWail,
     _poolWarriorsOfWakanda,
