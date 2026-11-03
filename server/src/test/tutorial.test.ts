@@ -289,7 +289,7 @@ describe("Learn Commander", () => {
     // Passing early was the soft-lock: the turn went by, and the card waiting
     // for it was waiting for a turn already gone. Nothing but the land now.
     expect(info().step?.id).toBe("first-land");
-    expect(info().allows).toEqual({ passTurn: false, autoPass: false, declareAtLeast: 0 });
+    expect(info().allows).toMatchObject({ passTurn: false, autoPass: false, declareAtLeast: 0 });
     expect(offered()).toEqual(["play-land"]);
     expect(() => session.room.requestPassTurn(connection)).toThrow(/waiting for something else/);
     expect(() => session.room.requestAutoPass(connection)).toThrow(/waiting for something else/);
@@ -416,6 +416,167 @@ describe("Learn Commander", () => {
     m.land();
     m.cast("Muck Rats");
     expect(info().step?.id).toBe("tapped");
+  });
+});
+
+describe("Commander's rules", () => {
+  const COMMANDER = "Kalakscion, Hunger Tyrant";
+  const MIRA = asPlayerId("carol");
+
+  /** A room on the lesson, as far as the first attack's card. */
+  function opened() {
+    const lesson = openLesson("commander-rules");
+    const { session } = lesson;
+    const m = coachedMoves(lesson);
+    const attackAt = (at: Readonly<Record<string, typeof ALICE>>) =>
+      session.room.dispatch(connection, {
+        type: "declare-attackers",
+        player: ALICE,
+        attackers: Object.entries(at).map(([name, defender]) => ({ attacker: m.named(name), defender })),
+      });
+    const zone = () => session.room.dispatch(connection, { type: "commander-replacement", player: ALICE, toCommandZone: true });
+    for (const id of ["welcome", "everyone-for-themselves", "damage-chip"]) session.next(id);
+    m.pass();
+    const firstAttack = { [COMMANDER]: BOB, "Cabal Evangel": MIRA, "Muck Rats": MIRA };
+    return { ...lesson, m, attackAt, zone, firstAttack };
+  }
+
+  it("plays through with the right answers to a win over both opponents on turn 15", () => {
+    const { session, info, m, attackAt, zone, firstAttack } = opened();
+    const players = () => m.state().players;
+    expect(m.state().turnOrder).toEqual([ALICE, BOB, MIRA]);
+    expect(session.room.seatStatuses().find((s) => s.player === MIRA)).toMatchObject({ isBot: true, displayName: "Mira" });
+    const chipOf = (): number => Object.values(players()[BOB].commanderDamageTaken ?? {})[0] ?? 0;
+    expect(chipOf()).toBe(7);
+
+    // Whom to attack: the card leaves the choice on the board.
+    expect(info()).toMatchObject({ chapter: "whom-to-attack", step: { id: "first-attack" } });
+    expect(info().allows.declareAtLeast).toBe(3);
+    expect(info().allows.attackAt).toEqual({ [COMMANDER]: BOB, "Cabal Evangel": MIRA, "Muck Rats": MIRA });
+    attackAt(firstAttack);
+    expect(info().step?.id).toBe("first-hit");
+    expect(players()[BOB].life).toBe(23);
+    expect(players()[MIRA].life).toBe(6);
+    expect(chipOf()).toBe(14);
+    session.next("first-hit");
+    expect(info().step?.id).toBe("first-pass");
+    session.room.requestPassTurn(connection);
+
+    // Rowan's Shock: held on the stack for its card, then the commander's choice.
+    expect(info()).toMatchObject({ chapter: "commander-dies", step: { id: "shocked" } });
+    expect(m.state().zones.shared.stack).toHaveLength(1);
+    session.next("shocked");
+    expect(info().step?.id).toBe("back-to-command-zone");
+    expect(m.state().awaiting?.kind).toBe("commander-replacement");
+    expect(info().allows.leaveCommander).toBe(false);
+    zone();
+    expect(info().step?.id).toBe("commander-tax");
+    expect(idNamed(m.state(), COMMANDER, "command")).toBeDefined();
+    // The damage stays with the commander through the zone change (rule 903.10a).
+    expect(chipOf()).toBe(14);
+    session.next("commander-tax");
+
+    // Mira's Giant Growth, and Disfigure in response.
+    expect(info()).toMatchObject({ chapter: "stack", step: { id: "on-the-stack" } });
+    expect(m.state().turn.number).toBe(11);
+    session.next("on-the-stack");
+    expect(info().step?.id).toBe("respond");
+    const offer = session.room.actionsFor(ALICE);
+    expect(offer.map((a) => a.kind)).toEqual(["cast-spell"]);
+    const bears = m.state().zones.shared.battlefield.find((id) => m.state().objects[id].cardName === "Grizzly Bears")!;
+    session.room.dispatch(connection, {
+      type: "cast-spell",
+      player: ALICE,
+      card: idNamed(m.state(), "Disfigure", "hand"),
+      targets: [{ kind: "object", object: bears }],
+    });
+    // Last in, first out: Disfigure has gone, Giant Growth is still there.
+    expect(info().step?.id).toBe("last-in-first-out");
+    expect(m.state().zones.shared.stack.map((id) => m.state().objects[id].cardName)).toEqual(["Giant Growth"]);
+    expect(m.state().objects[bears].zone).not.toBe("battlefield");
+    session.next("last-in-first-out");
+
+    // Back again, at 5 mana: every Swamp taps.
+    expect(info()).toMatchObject({ chapter: "again", step: { id: "recast" } });
+    expect(m.state().turn.number).toBe(12);
+    expect(players()[ALICE].life).toBe(31);
+    m.cast(COMMANDER, "command");
+    const swamps = m.state().zones.shared.battlefield.filter((id) => m.state().objects[id].cardName === "Swamp");
+    expect(swamps.filter((id) => m.state().objects[id].tapped)).toHaveLength(5);
+    expect(info().step?.id).toBe("second-to-combat");
+    m.pass();
+    attackAt({ "Cabal Evangel": MIRA, "Muck Rats": MIRA });
+    expect(players()[MIRA].life).toBe(3);
+    expect(info().step?.id).toBe("second-pass");
+    session.room.requestPassTurn(connection);
+
+    // Both at once.
+    expect(info()).toMatchObject({ chapter: "both-at-once", step: { id: "the-sums" } });
+    expect(m.state().turn.number).toBe(15);
+    session.next("the-sums");
+    m.pass();
+    attackAt(firstAttack);
+    expect(info().step?.id).toBe("won");
+    expect(m.state().result.over).toBe(true);
+    // Out to commander damage alone, with life left.
+    expect(players()[BOB].life).toBe(16);
+    expect(chipOf()).toBe(21);
+    expect(players()[MIRA].life).toBe(0);
+    session.next("won");
+    expect(info()).toMatchObject({ complete: true, step: null });
+  });
+
+  it("can't be left waiting: wrong targets, a commander left behind, and a spell let through are refused", () => {
+    const { session, info, m, attackAt, zone, firstAttack } = opened();
+    const closed = /waiting for something else/;
+
+    // Anyone at the wrong player.
+    expect(() => attackAt({ ...firstAttack, [COMMANDER]: MIRA })).toThrow(closed);
+    expect(() => attackAt({ [COMMANDER]: BOB })).toThrow(closed);
+    attackAt(firstAttack);
+    session.next("first-hit");
+    session.room.requestPassTurn(connection);
+    session.next("shocked");
+
+    // A commander left in the graveyard could never be cast again.
+    expect(() => session.room.dispatch(connection, { type: "commander-replacement", player: ALICE, toCommandZone: false })).toThrow(closed);
+    zone();
+    session.next("commander-tax");
+    session.next("on-the-stack");
+
+    // Passing would let Giant Growth through, and the card could never finish.
+    expect(info().step?.id).toBe("respond");
+    expect(() => m.pass()).toThrow(closed);
+    const disfigure = idNamed(m.state(), "Disfigure", "hand");
+    const evangel = m.named("Cabal Evangel");
+    // Only the Bears are offered as its target, and another is refused.
+    const offer = session.room.actionsFor(ALICE).find((a) => a.kind === "cast-spell");
+    if (offer?.kind !== "cast-spell") throw new Error("no cast offered");
+    expect(offer.targetOptions[0].map((t) => (t.kind === "object" ? m.state().objects[t.object].cardName : t.kind))).toEqual(["Grizzly Bears"]);
+    expect(() =>
+      session.room.dispatch(connection, { type: "cast-spell", player: ALICE, card: disfigure, targets: [{ kind: "object", object: evangel }] }),
+    ).toThrow(closed);
+    expect(info().step?.id).toBe("respond");
+  });
+
+  it("waits for a response whatever the seat's settings would pass", () => {
+    const { session, info, m, attackAt, zone, firstAttack } = opened();
+    session.room.setPassSettings(connection, {
+      passThroughCombat: true,
+      passToMain: true,
+      skipManaOnly: true,
+      stops: { mine: [], theirs: [] },
+    });
+    attackAt(firstAttack);
+    session.next("first-hit");
+    session.room.requestPassTurn(connection);
+    session.next("shocked");
+    zone();
+    session.next("commander-tax");
+    session.next("on-the-stack");
+    expect(info().step?.id).toBe("respond");
+    expect(m.state().zones.shared.stack).toHaveLength(1);
+    expect(m.state().priority.holder).toBe(ALICE);
   });
 });
 

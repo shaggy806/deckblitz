@@ -17,6 +17,7 @@ import type { GameEvent, GameState, ObjectId, PlayerId, Step } from "engine/loca
  * - `spell-resolved`: a spell named `card` finished resolving, so a creature
  *   spell is on the battlefield.
  * - `combat-damage`: combat damage was dealt.
+ * - `commander-to-command-zone`: a commander's owner chose the command zone.
  * - `attackers-declared`: `player` attacked with at least `atLeast` (1)
  *   creatures.
  * - `blocker-declared`: a creature `player` controls, named `card`, blocked.
@@ -29,6 +30,7 @@ export type TutorialCondition =
   | { readonly event: "spell-cast"; readonly player?: PlayerId; readonly card?: string }
   | { readonly event: "spell-resolved"; readonly card?: string }
   | { readonly event: "combat-damage" }
+  | { readonly event: "commander-to-command-zone" }
   | { readonly event: "ability-activated"; readonly player?: PlayerId; readonly card?: string }
   | { readonly event: "attackers-declared"; readonly player?: PlayerId; readonly atLeast?: number }
   | { readonly event: "blocker-declared"; readonly player?: PlayerId; readonly card?: string }
@@ -74,6 +76,10 @@ export function metAt(state: GameState, from: number, condition: TutorialConditi
     if (event.type === "turn-began") active = event.activePlayer;
     if (condition.event === "combat-damage") {
       if (event.type === "damage-dealt" && event.combat) return i + 1;
+      continue;
+    }
+    if (condition.event === "commander-to-command-zone") {
+      if (event.type === "commander-zone-decision" && event.toCommandZone) return i + 1;
       continue;
     }
     if (event.type !== condition.event) continue;

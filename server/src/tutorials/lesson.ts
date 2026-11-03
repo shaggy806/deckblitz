@@ -38,12 +38,22 @@ import type { TutorialCondition } from "./conditions.js";
  * to those cards. `pass` is the Pass button, `pass-turn` the Pass Turn button
  * (which needs a window to pass, so Pass stays open with it). A card that opens
  * `attack` or `block` wants a declaration of at least `atLeast` creatures: its
- * goal could never be met after one with fewer.
+ * goal could never be met after one with fewer. An attack's `at` says whom each
+ * card must attack, by card name, where more than one player could be attacked:
+ * the choice is left on the board to make, and only the right one confirms. A
+ * cast's `target` names the permanent it has to aim at.
  */
 export type LessonMove =
-  | { readonly do: "play-land" | "cast"; readonly card?: string }
+  | { readonly do: "play-land"; readonly card?: string }
+  | { readonly do: "cast"; readonly card?: string; readonly target?: string }
   | { readonly do: "pass" | "pass-turn" }
-  | { readonly do: "attack" | "block"; readonly card?: readonly string[]; readonly atLeast: number };
+  | { readonly do: "block"; readonly card?: readonly string[]; readonly atLeast: number }
+  | {
+      readonly do: "attack";
+      readonly card?: readonly string[];
+      readonly atLeast: number;
+      readonly at?: Readonly<Record<string, PlayerId>>;
+    };
 
 export interface LessonGoal {
   /** Unique within the lesson. */

@@ -4,10 +4,13 @@
  */
 
 import { BOARD_TOUR } from "./board-tour.js";
+import { COMMANDER_RULES } from "./commander-rules.js";
 import { LEARN_COMMANDER } from "./learn-commander.js";
 import type { Lesson } from "./lesson.js";
 
-export const LESSONS: ReadonlyMap<string, Lesson> = new Map([LEARN_COMMANDER, BOARD_TOUR].map((lesson) => [lesson.id, lesson]));
+export const LESSONS: ReadonlyMap<string, Lesson> = new Map(
+  [LEARN_COMMANDER, COMMANDER_RULES, BOARD_TOUR].map((lesson) => [lesson.id, lesson]),
+);
 
 /** The lesson `id` names, or a refusal. Takes anything off the wire. */
 export function lessonById(id: unknown): Lesson {

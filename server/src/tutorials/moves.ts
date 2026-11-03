@@ -28,15 +28,27 @@ export function openActions(state: GameState, moves: readonly LessonMove[], lega
   for (const action of legal) {
     switch (action.kind) {
       case "pass-priority":
-        // Passing lets a spell on the stack resolve, whatever the card is about.
-        if (state.zones.shared.stack.length > 0 || moves.some((m) => m.do === "pass" || m.do === "pass-turn")) open.push(action);
+        if (moves.some((m) => m.do === "pass" || m.do === "pass-turn")) open.push(action);
         break;
       case "play-land":
         if (moves.some((m) => m.do === "play-land" && named(m.card, action.cardName))) open.push(action);
         break;
-      case "cast-spell":
-        if (moves.some((m) => m.do === "cast" && named(m.card, action.cardName))) open.push(action);
+      case "cast-spell": {
+        const move = moves.find((m) => m.do === "cast" && named(m.card, action.cardName));
+        if (move?.do !== "cast") break;
+        const aimed = move.target;
+        open.push(
+          aimed === undefined
+            ? action
+            : {
+                ...action,
+                targetOptions: action.targetOptions.map((slot) =>
+                  slot.filter((o) => o.kind === "object" && nameOf(o.object) === aimed),
+                ),
+              },
+        );
         break;
+      }
       case "declare-attackers": {
         const move = moves.find((m) => m.do === "attack");
         open.push(
@@ -80,12 +92,23 @@ export function refusal(
       return open.some((a) => a.kind === "pass-priority") ? null : closed;
     case "play-land":
       return open.some((a) => a.kind === "play-land" && a.card === action.card) ? null : closed;
-    case "cast-spell":
-      return open.some((a) => a.kind === "cast-spell" && a.card === action.card) ? null : closed;
+    case "cast-spell": {
+      if (!open.some((a) => a.kind === "cast-spell" && a.card === action.card)) return closed;
+      const move = moves.find((m) => m.do === "cast" && named(m.card, state.objects[action.card]?.cardName ?? ""));
+      if (move?.do !== "cast" || move.target === undefined) return null;
+      const aimed = (action.targets ?? []).every((t) => t?.kind === "object" && state.objects[t.object]?.cardName === move.target);
+      return aimed ? null : closed;
+    }
+    case "commander-replacement":
+      // A commander left in the graveyard couldn't be cast again: no card
+      // waiting on it could ever be met.
+      return action.toCommandZone ? null : closed;
     case "declare-attackers": {
       const offer = open.find((a) => a.kind === "declare-attackers");
       if (offer?.kind !== "declare-attackers") return closed;
       if (action.attackers.some((d) => !offer.eligible.includes(d.attacker))) return closed;
+      const at = allowsOf(moves).attackAt;
+      if (action.attackers.some((d) => at[state.objects[d.attacker]?.cardName ?? ""] !== undefined && at[state.objects[d.attacker]?.cardName ?? ""] !== d.defender)) return closed;
       return declaring(action.attackers.length);
     }
     case "declare-blockers": {
@@ -106,5 +129,7 @@ export function allowsOf(moves: readonly LessonMove[]): TutorialAllows {
     passTurn: moves.some((m) => m.do === "pass-turn"),
     autoPass: false,
     declareAtLeast: declaring !== undefined && "atLeast" in declaring ? declaring.atLeast : 0,
+    attackAt: declaring?.do === "attack" ? (declaring.at ?? {}) : {},
+    leaveCommander: false,
   };
 }

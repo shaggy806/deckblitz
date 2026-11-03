@@ -56,6 +56,10 @@ export interface TutorialAllows {
   readonly autoPass: boolean;
   /** How few attackers or blockers a declaration may have. */
   readonly declareAtLeast: number;
+  /** Whom a creature must attack, by card name, for the declaration to go. */
+  readonly attackAt: Readonly<Record<string, string>>;
+  /** Declining to move a commander to the command zone. */
+  readonly leaveCommander: boolean;
 }
 
 /** Something the player is asked to do on the current coach card. */

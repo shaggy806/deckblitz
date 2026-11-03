@@ -49,7 +49,7 @@ interface Checkpoint {
 const ADVANCE_LIMIT = 200;
 
 /** What a lesson that isn't scripted leaves open. */
-const EVERYTHING: TutorialAllows = { passTurn: true, autoPass: true, declareAtLeast: 0 };
+const EVERYTHING: TutorialAllows = { passTurn: true, autoPass: true, declareAtLeast: 0, attackAt: {}, leaveCommander: true };
 
 export class TutorialSession {
   readonly id: string;
