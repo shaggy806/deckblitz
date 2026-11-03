@@ -1462,6 +1462,8 @@
   "cost:tap-untapped-creature-additional",
   "effect:hand-mana-ability",
   "effect:mana-ability-graveyard-exile-cost",
+  "effect:look-at-opponent-hand-as-enters",
+  "effect:look-at-target-player-library",
   "keyword:hexproof-from-abilities"
  ],
  "features": {

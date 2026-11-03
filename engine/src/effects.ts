@@ -4904,12 +4904,16 @@ export type EffectSpec =
     }
   | {
       /** "**Look at the top card of target player's library**" (Mishra's
-       * Bauble, Merfolk Observer): the effect's controller sees it, and it
-       * stays where it is, hidden from everyone else (rule 401.2). Asked as
-       * `look-at-hand` is, a `choose-from-zone` with nothing to pick. An empty
-       * library shows nothing and asks nothing. */
+       * Bauble, Merfolk Observer), or the top `count` (default 1 — Orcish
+       * Spy's "top three cards", as many as there are): the effect's controller
+       * sees them, and they stay where they are, in that order, hidden from
+       * everyone else (rule 401.2). Asked as `look-at-hand` is, a
+       * `choose-from-zone` with nothing to pick. An empty library shows nothing
+       * and asks nothing. Anything done with what's seen is `look-and-choose`,
+       * whose `from: { target: 0 }` is this library. */
       readonly kind: "look-at-library-top";
       readonly target: number;
+      readonly count?: number;
     }
   | {
       /** Target player discards `amount` cards (their choice, unless it's the
@@ -10252,9 +10256,9 @@ export interface EffectApi {
    * `"reveal"` to every player (rule 701.20a), `"look"` to the effect's
    * controller alone — a look they close, as `look-at-hand`'s is. */
   showCardFromHand(owner: PlayerId, card: ObjectId, how: "reveal" | "look"): void;
-  /** The effect's controller looks at the top card of `owner`'s library — a
-   * look they close, as `look-at-hand`'s is. */
-  lookAtLibraryTop(owner: PlayerId): void;
+  /** The effect's controller looks at the top `count` cards of `owner`'s
+   * library (as many as there are) — a look they close, as `look-at-hand`'s is. */
+  lookAtLibraryTop(owner: PlayerId, count: number): void;
   /** The cards in `owner`'s graveyard matching `filter`, read from the
    * effect's controller's side, in graveyard order. */
   graveyardMatching(owner: PlayerId, filter: CardFilter): readonly ObjectId[];
@@ -15823,7 +15827,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     }
     case "look-at-library-top": {
       const target = ctx.targets[spec.target];
-      if (target?.kind === "player") ctx.lookAtLibraryTop(target.player);
+      if (target?.kind === "player") ctx.lookAtLibraryTop(target.player, spec.count ?? 1);
       return;
     }
     case "discard": {

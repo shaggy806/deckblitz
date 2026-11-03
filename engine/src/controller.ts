@@ -2555,6 +2555,26 @@ export class HeuristicBotController extends AutomaticController {
       }
       if (best !== undefined) return best;
     }
+    // "Look at an opponent's hand, then choose a card type" (Arachne, Psionic
+    // Weaver, whose choice taxes spells of it): the type most of that hand is,
+    // and of those, the fewest of ours. A land is never cast.
+    const awaiting = view.state.awaiting;
+    if (awaiting?.kind === "choose-creature-type" && awaiting.looked !== undefined) {
+      const typesIn = (ids: readonly ObjectId[], type: string): number =>
+        ids.filter((id) => (this.registry.get(printedCardName(view.state.objects[id])).types as readonly string[]).includes(type)).length;
+      const own = view.state.zones.perPlayer[this.playerId]?.hand ?? [];
+      let best: string | undefined;
+      let bestScore = -Infinity;
+      for (const type of options) {
+        if (type === "land") continue;
+        const score = typesIn(awaiting.looked, type) * 10 - typesIn(own, type);
+        if (score > bestScore) {
+          best = type;
+          bestScore = score;
+        }
+      }
+      if (best !== undefined) return best;
+    }
     return super.chooseCreatureType(view, source, options, suggested);
   }
 

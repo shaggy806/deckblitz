@@ -6711,3 +6711,23 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 - **Do:** Attack Bob with Dryad Sophisticate.
 - **Expect:** The Dryad shows a "Landwalk" icon. Bob, who controls Bazaar of Baghdad, can't block with his Grizzly Bears: he takes 2.
+
+### Arachne, Psionic Weaver: look at the one opponent's hand, then choose a card type
+
+- **Do:** Cast Arachne, Psionic Weaver, then choose sorcery.
+- **Expect:** A popup "Arachne, Psionic Weaver — the hand you're looking at" shows Bob's Lightning Bolt and Divination, with a button for each card type but creature. After sorcery, the Divination in your own hand costs {3}{U}.
+
+### Arachne, Psionic Weaver: which opponent's hand first, at four players
+
+- **Do:** Cast Arachne, Psionic Weaver, choose Carol, then choose instant.
+- **Expect:** First a choice among Bob, Carol and Dave, then the popup with Carol's Lightning Bolt alone, not Bob's Divination or Dave's Grizzly Bears. After instant, Arachne is on the battlefield.
+
+### Orcish Spy: look at the top three of target player's library, at four players
+
+- **Do:** Activate Orcish Spy targeting Carol, then press Done.
+- **Expect:** A popup "Looking at the top 3 cards of that player's library" shows Sol Ring, Forest and Grizzly Bears to you alone, in that order. Nothing moves: Carol's library count stays the same.
+
+### Dimir Charm: look at the top three of target player's library, one back and the rest in their graveyard
+
+- **Do:** Cast Dimir Charm, choose its third mode, target Bob, and put Forest back.
+- **Expect:** A popup offers Sol Ring, Forest and Grizzly Bears, choose 1. Forest stays on Bob's library, and Sol Ring and Grizzly Bears go to Bob's graveyard, not yours.

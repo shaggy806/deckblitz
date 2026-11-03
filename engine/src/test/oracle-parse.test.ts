@@ -12028,5 +12028,34 @@ describe("requirements a whole declaration answers", () => {
       kind: "block-if-able",
       filter: { type: "creature" },
     });
+describe("oracle-parse: looks at a hand and at another's library", () => {
+  it("a hand looked at before a card type chosen as it enters, and spells of that type taxed", () => {
+    const card = parseFace({
+      name: "Arachne, Psionic Weaver",
+      type_line: "Legendary Creature — Spider Human Hero",
+      oracle_text:
+        "As Arachne enters, look at an opponent's hand, then choose a card type other than creature.\nSpells of the chosen type cost {1} more to cast.",
+    });
+    expect(card.chooseOnEnterLook).toBe("opponent-hand");
+    expect(card.chooseOnEnter).not.toContain("creature");
+    expect(card.chooseOnEnter).toContain("sorcery");
+    expect(card.static).toHaveLength(card.chooseOnEnter.length);
+    expect(card.static[0]).toMatchObject({
+      condition: { kind: "chosen-on-enter", value: "artifact" },
+      costModification: { applies: { type: "artifact" }, increaseGeneric: 1 },
+    });
+  });
+  it("a look at the top three of target player's library, alone or with one put back", () => {
+    expect(parseEffect("Look at the top three cards of target player's library.", { targets: [] }).effect).toEqual({
+      kind: "look-at-library-top",
+      target: 0,
+      count: 3,
+    });
+    expect(
+      parseEffect(
+        "Look at the top three cards of target player's library. Put one back and the rest into that player's graveyard.",
+        { targets: [] },
+      ).effect,
+    ).toMatchObject({ kind: "look-and-choose", from: { target: 0 }, count: 3, min: 1, max: 1, destination: "library-top", leftover: "graveyard" });
   });
 });

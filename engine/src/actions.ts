@@ -1952,6 +1952,9 @@ export type LegalAction =
       readonly catalog: boolean;
       /** What the choice is, in words (tribute's), when set. */
       readonly prompt?: string;
+      /** The hand looked at for this choice (Arachne, Psionic Weaver), shown
+       * beside the options: `AwaitingDecision`'s, for the chooser alone. */
+      readonly looked?: readonly ObjectId[];
       /** A resolving spell's or ability's choice (a `choose-value` colour or
        * card type, Tideshaper Mystic's land type): what it does next hangs on
        * the answer, so a bot searches the options. */

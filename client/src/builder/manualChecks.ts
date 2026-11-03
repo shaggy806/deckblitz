@@ -10109,4 +10109,32 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{ bf: ['Bazaar of Baghdad', 'Grizzly Bears'] }],
     }),
   ),
+  preset(
+    "Arachne, Psionic Weaver: look at the one opponent's hand, then choose a card type",
+    board({
+      you: { bf: ['Plains*3'], hand: ['Arachne, Psionic Weaver', 'Divination'] },
+      opp: [{ hand: ['Lightning Bolt', 'Divination'] }],
+    }),
+  ),
+  preset(
+    "Arachne, Psionic Weaver: which opponent's hand first, at four players",
+    board({
+      you: { bf: ['Plains*3'], hand: ['Arachne, Psionic Weaver'] },
+      opp: [{ hand: ['Divination'] }, { hand: ['Lightning Bolt'] }, { hand: ['Grizzly Bears'] }],
+    }),
+  ),
+  preset(
+    "Orcish Spy: look at the top three of target player's library, at four players",
+    board({
+      you: { bf: ['Orcish Spy'] },
+      opp: [{}, { lib: ['Sol Ring', 'Forest', 'Grizzly Bears', 'Island'] }, {}],
+    }),
+  ),
+  preset(
+    "Dimir Charm: look at the top three of target player's library, one back and the rest in their graveyard",
+    board({
+      you: { bf: ['Underground Sea*2'], hand: ['Dimir Charm'] },
+      opp: [{ lib: ['Sol Ring', 'Forest', 'Grizzly Bears', 'Island'] }],
+    }),
+  ),
 ]

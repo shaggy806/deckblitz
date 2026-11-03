@@ -3669,6 +3669,11 @@ export type AwaitingDecision =
       readonly source: ObjectId;
       readonly options: readonly string[];
       readonly catalog: boolean;
+      /** The hand the chooser looked at for this choice (Arachne, Psionic
+       * Weaver's "look at an opponent's hand, then choose a card type" —
+       * `CardDefinition.chooseOnEnterLook`): visible to them alone, like a
+       * `choose-card-name`'s. */
+      readonly looked?: readonly ObjectId[];
       /** Riot's "+1/+1 counter or haste" as `source` is about to enter (rule
        * 702.136a): the answer is recorded as its riot choice rather than as
        * a chosen word. */
@@ -6271,8 +6276,15 @@ export interface GameState {
 export function sideboardOf(state: GameState, player: PlayerId): readonly ObjectId[] {
   const outside = state.outside?.[player] ?? [];
   if (outside.length === 0) return outside;
-  const hasCommander = Object.values(state.objects).some((o) => o.owner === player && o.isCommander === true);
-  return hasCommander ? [] : outside;
+  return hasCommander(state, player) ? [] : outside;
+}
+
+/** Whether `player` has a commander (rule 903.3). `PlayerState.commanderIdentity`
+ * can't tell: it's empty both with none and with a colourless one, and rule
+ * 903.4f makes those two different ("that quality is undefined if that player
+ * doesn't have a commander"). */
+export function hasCommander(state: GameState, player: PlayerId): boolean {
+  return Object.values(state.objects).some((o) => o.owner === player && o.isCommander === true);
 }
 
 /** A player's revealed companion while it's still outside the game, or `null`:

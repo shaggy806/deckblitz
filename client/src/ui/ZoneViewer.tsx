@@ -70,6 +70,10 @@ export interface ZoneViewerProps {
     /** The rule is pairwise ("with different powers"): a click takes the pick
      * off whatever it can't sit beside. */
     readonly swaps?: boolean
+    /** The answer isn't a card at all, only informed by these (a hand looked
+     * at before a card type is chosen — Arachne, Psionic Weaver): a button per
+     * answer in the footer, in place of Confirm. */
+    readonly answers?: readonly { readonly label: string; readonly onChoose: () => void }[]
   }
   /** Selection mode only: hidden so the board can be seen ("View board").
    * The component stays mounted, so picks made so far survive; the owner
@@ -284,7 +288,15 @@ export function ZoneViewer({
           })}
           {ids.length === 0 ? <span className="muted">empty</span> : null}
         </div>
-        {selection ? (
+        {selection?.answers ? (
+          <div className="zone-viewer-footer">
+            {selection.answers.map((answer) => (
+              <button key={answer.label} type="button" onClick={answer.onChoose}>
+                {answer.label}
+              </button>
+            ))}
+          </div>
+        ) : selection ? (
           <div className="zone-viewer-footer">
             <button
               type="button"

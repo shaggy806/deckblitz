@@ -467,6 +467,8 @@ function zoneChoiceTitle(
     case 'graveyard':
       return `Choose ${cards} to put into ${whose} graveyard`
     case 'library-top':
+      // Only some of what's looked at goes back (Dimir Charm's "put one back").
+      if (action.max < action.ids.length) return `Choose ${cards} to put back on top of ${whose} library`
       return 'Put them back on top in the order you pick: the first you pick goes on top'
     case 'library-bottom':
       // The order picked is the order they go: the last one picked ends up
@@ -4538,6 +4540,19 @@ function Table({
         ) : null}
       </div>
     )
+  } else if (mode === 'choose-creature-type' && creatureTypeChoiceAction?.looked) {
+    // A hand looked at before the choice (Arachne, Psionic Weaver): hand and
+    // answers are one popup, rendered below.
+    controls = (
+      <div className="controls">
+        <span>{game.nameOf(creatureTypeChoiceAction.source)} — looking at a hand, then choosing</span>
+        {decisionCollapsed ? (
+          <button type="button" onClick={() => setDecisionCollapsed(false)}>
+            Show choices
+          </button>
+        ) : null}
+      </div>
+    )
   } else if (mode === 'choose-creature-type' && creatureTypeChoiceAction) {
     // A short fixed menu reusing the same decision (Heraldic Banner's colours,
     // Frontier Siege's Khans/Dragons) — plain buttons still fit.
@@ -7577,6 +7592,27 @@ function Table({
           marker={view.players[dungeonViewOf]?.dungeon?.room ?? null}
           completed={view.players[dungeonViewOf]?.completedDungeons ?? []}
           onClose={() => setDungeonViewOf(null)}
+        />
+      ) : null}
+
+      {mode === 'choose-creature-type' && creatureTypeChoiceAction?.looked ? (
+        <ZoneViewer
+          key={creatureTypeChoiceAction.source}
+          title={`${game.nameOf(creatureTypeChoiceAction.source)} — the hand you're looking at`}
+          ids={creatureTypeChoiceAction.looked}
+          resolve={(id) => view.objects[id]}
+          selection={{
+            min: 0,
+            max: 0,
+            eligible: [],
+            onConfirm: () => {},
+            answers: creatureTypeChoiceAction.options.map((option) => ({
+              label: option,
+              onChoose: () => game.dispatch({ type: 'choose-creature-type', player: seat, creatureType: option }),
+            })),
+          }}
+          collapsed={decisionCollapsed}
+          onCollapse={() => setDecisionCollapsed(true)}
         />
       ) : null}
 

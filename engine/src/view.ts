@@ -1134,6 +1134,10 @@ function viewForUncached(
   if (state.awaiting?.kind === "choose-card-name" && state.awaiting.player === viewer) {
     visibleIds.push(...(state.awaiting.looked ?? []));
   }
+  // Or before choosing anything else as it enters (Arachne, Psionic Weaver).
+  if (state.awaiting?.kind === "choose-creature-type" && state.awaiting.player === viewer) {
+    visibleIds.push(...(state.awaiting.looked ?? []));
+  }
   // A real reveal (rule 701.16) is to *everyone*, which is the whole point —
   // this is the only path that puts a card another player owns, and that is
   // sitting in a hidden zone, into your view. Turn-scoped, so it stops being
@@ -1288,6 +1292,8 @@ function viewForUncached(
     // kind of card each is: only the player asked sees it.
     awaiting:
       state.awaiting?.kind === "choose-card-name" && state.awaiting.looked !== undefined && state.awaiting.player !== viewer
+        ? (({ looked: _looked, ...rest }) => rest)(state.awaiting)
+        : state.awaiting?.kind === "choose-creature-type" && state.awaiting.looked !== undefined && state.awaiting.player !== viewer
         ? (({ looked: _looked, ...rest }) => rest)(state.awaiting)
         : state.awaiting?.kind === "discard" && state.awaiting.eligible !== undefined && state.awaiting.player !== viewer
         ? (({ eligible: _hidden, ...rest }) => rest)(state.awaiting)

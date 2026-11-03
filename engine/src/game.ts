@@ -12590,7 +12590,7 @@ export class Game {
     under?: PlayerId,
   ):
     | { readonly kind: "copy" }
-    | { readonly kind: "choose"; readonly options?: readonly string[]; readonly prompt?: string }
+    | { readonly kind: "choose"; readonly options?: readonly string[]; readonly prompt?: string; readonly look?: true }
     | { readonly kind: "flip-form"; readonly heads: string; readonly tails: string }
     | { readonly kind: "instead"; readonly spec: EnterInstead }
     | { readonly kind: "enchant"; readonly as: CardDefinition }
@@ -12639,7 +12639,13 @@ export class Game {
     }
     if (answered?.chosen === undefined) {
       if (becoming.chooseCreatureTypeOnEnter) return { kind: "choose" };
-      if (becoming.chooseOnEnter !== null) return { kind: "choose", options: becoming.chooseOnEnter };
+      if (becoming.chooseOnEnter !== null) {
+        return {
+          kind: "choose",
+          options: becoming.chooseOnEnter,
+          ...(becoming.chooseOnEnterLook !== null ? { look: true as const } : {}),
+        };
+      }
       // "It becomes your choice of …" (Primal Clay) — printed, or a copy's,
       // which chooses again over what it copied (the rulings) — or the flip
       // of a coin (Molten Sentry).
@@ -12773,21 +12779,9 @@ export class Game {
     }
     let looked: readonly ObjectId[] | undefined;
     if (spec.look === "opponent-hand") {
-      // "Look at an opponent's hand": which opponent first, among two or more.
-      if (object.enterChoice?.lookAt === undefined && opponents.length > 1) {
-        this.state.awaiting = {
-          kind: "choose-creature-type",
-          player: chooser,
-          source: id,
-          options: opponents,
-          catalog: false,
-          lookAt: true,
-          prompt: "Choose an opponent whose hand to look at",
-        };
-        return true;
-      }
-      const at = object.enterChoice?.lookAt ?? opponents[0];
-      if (at !== undefined) looked = [...this.state.zones.perPlayer[at].hand];
+      const hand = this.lookAtOpponentHandOnEnter(id, chooser);
+      if (hand === "asked") return true;
+      looked = hand;
     }
     this.beginCardNameChoice({
       player: chooser,
@@ -12798,6 +12792,32 @@ export class Game {
       onEnter: true,
     });
     return true;
+  }
+
+  /**
+   * "As this enters, look at an opponent's hand" for the card `id`, about to
+   * enter under `chooser`: which opponent first, among two or more (`"asked"`,
+   * with that decision up), then the cards of that hand, for the choice that
+   * follows to show `chooser` alone. `undefined` with no opponent left to look
+   * at (rule 609.3: as much as it can).
+   */
+  private lookAtOpponentHandOnEnter(id: ObjectId, chooser: PlayerId): readonly ObjectId[] | "asked" | undefined {
+    const opponents = this.state.turnOrder.filter((p) => p !== chooser && this.state.players[p]?.hasLost === false);
+    const object = this.state.objects[id];
+    if (object.enterChoice?.lookAt === undefined && opponents.length > 1) {
+      this.state.awaiting = {
+        kind: "choose-creature-type",
+        player: chooser,
+        source: id,
+        options: opponents,
+        catalog: false,
+        lookAt: true,
+        prompt: "Choose an opponent whose hand to look at",
+      };
+      return "asked";
+    }
+    const at = object.enterChoice?.lookAt ?? opponents[0];
+    return at === undefined ? undefined : [...this.state.zones.perPlayer[at].hand];
   }
 
   /**
@@ -12916,10 +12936,16 @@ export class Game {
     if (object === undefined) return false;
     for (let next = this.nextEnterChoice(id, chooser); next !== null; next = this.nextEnterChoice(id, chooser)) {
       if (next.kind === "choose") {
+        const looked = next.look === true ? this.lookAtOpponentHandOnEnter(id, chooser) : undefined;
+        if (looked === "asked") return true;
         this.beginCreatureTypeChoice(id, chooser, next.options);
         const asked = this.state.awaiting as AwaitingDecision | null;
-        if (next.prompt !== undefined && asked?.kind === "choose-creature-type") {
-          this.state.awaiting = { ...asked, prompt: next.prompt };
+        if (asked?.kind === "choose-creature-type" && (next.prompt !== undefined || looked !== undefined)) {
+          this.state.awaiting = {
+            ...asked,
+            ...(next.prompt !== undefined ? { prompt: next.prompt } : {}),
+            ...(looked !== undefined ? { looked } : {}),
+          };
         }
         return true;
       }
@@ -30402,16 +30428,16 @@ export class Game {
           leftover: "stay",
         };
       },
-      lookAtLibraryTop: (owner) => {
-        const top = this.state.zones.perPlayer[owner]?.library[0];
-        if (top === undefined || this.state.players[owner]?.hasLost !== false) return;
+      lookAtLibraryTop: (owner, count) => {
+        const top = (this.state.zones.perPlayer[owner]?.library ?? []).slice(0, count);
+        if (top.length === 0 || this.state.players[owner]?.hasLost !== false) return;
         this.state.awaiting = {
           kind: "choose-from-zone",
           player: controller,
           ...(controller !== owner ? { forPlayer: owner } : {}),
           // A client's own title for this shape says "hand".
-          prompt: `Looking at the top card of ${controller === owner ? "your" : "that player's"} library`,
-          ids: [top],
+          prompt: `Looking at the top ${count === 1 ? "card" : `${count} cards`} of ${controller === owner ? "your" : "that player's"} library`,
+          ids: top,
           eligible: [],
           min: 0,
           max: 0,

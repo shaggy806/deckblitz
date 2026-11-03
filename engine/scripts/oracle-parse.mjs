@@ -3189,10 +3189,14 @@ export function parseSentence(sentence, ctx) {
   if ((m = re(`look at (target player|target opponent)'s hand`).exec(s))) {
     return { kind: "look-at-hand", target: slot(m[1]) };
   }
-  // "Look at the top card of target player's library" (Mishra's Bauble): a
-  // look alone.
+  // "Look at the top card of target player's library" (Mishra's Bauble), or
+  // the top three (Orcish Spy): a look alone.
   if ((m = re(`look at the top card of (target player|target opponent)'s library`).exec(s))) {
     return { kind: "look-at-library-top", target: slot(m[1]) };
+  }
+  if ((m = re(`look at the top ${N} cards of (target player|target opponent)'s library`).exec(s))) {
+    const count = amount(m[1]);
+    if (typeof count === "number") return { kind: "look-at-library-top", target: slot(m[2]), count };
   }
   // "Look at a card at random in target player's hand" (Urza's Bauble): the
   // controller alone sees the one card picked.
@@ -6253,6 +6257,24 @@ function paidAndBid(text, ctx) {
  * paid, so `destination: "stay"` and a `then`).
  */
 function looksAtAnothersTop(text, ctx) {
+  // "Look at the top three cards of target player's library. Put one back and
+  // the rest into that player's graveyard." (Dimir Charm).
+  const putBack =
+    /^Look at the top (two|three|four|five) cards of (target player|target opponent)'s library\. Put one back and the rest into that player's graveyard\.$/.exec(
+      text,
+    );
+  if (putBack !== null) {
+    return {
+      kind: "look-and-choose",
+      from: { target: ctx.target(targetOf(putBack[2])) },
+      zone: "library",
+      count: { two: 2, three: 3, four: 4, five: 5 }[putBack[1]],
+      min: 1,
+      max: 1,
+      destination: "library-top",
+      leftover: "graveyard",
+    };
+  }
   const m =
     /^(You may look|Look) at the top card of (target player|target opponent|defending player)'s library\. (?:If you do, you may put that card (on the bottom of that player's library|into (?:that player's|their) graveyard)|You may put that card (on the bottom of that player's library|into (?:that player's|their) graveyard)|If it's a nonland card, you may pay (\d+) life\. If you do, put it into that player's graveyard)\.$/i.exec(
       text,
@@ -11150,6 +11172,30 @@ export function parseFace(face, ctx = {}) {
     if (line === "As ~ enters, choose a card type.") {
       // Rule 205.2a's, as `CARD_TYPE_CHOICES` lists them.
       out.chooseOnEnter = ["artifact", "battle", "creature", "enchantment", "instant", "kindred", "land", "planeswalker", "sorcery"];
+      continue;
+    }
+    // "As Arachne enters, look at an opponent's hand, then choose a card type
+    // other than creature": the same word, with the look first
+    // (`chooseOnEnterLook`), and what it's for one static per type (Archon of
+    // Valor's Reach's shape), each live only for the type chosen.
+    if (line === "As ~ enters, look at an opponent's hand, then choose a card type other than creature.") {
+      out.chooseOnEnter = ["artifact", "battle", "enchantment", "instant", "kindred", "land", "planeswalker", "sorcery"];
+      out.chooseOnEnterLook = "opponent-hand";
+      continue;
+    }
+    if (
+      out.chooseOnEnter?.includes("artifact") === true &&
+      (m = /^Spells of the chosen type cost \{(\d+)\} (more|less) to cast\.$/.exec(line))
+    ) {
+      const n = Number(m[1]);
+      for (const type of out.chooseOnEnter) {
+        out.static.push({
+          affects: { scope: "self" },
+          condition: { kind: "chosen-on-enter", value: type },
+          costModification: { applies: { type }, ...(m[2] === "more" ? { increaseGeneric: n } : { reduceGeneric: n }) },
+          text: printed(raw),
+        });
+      }
       continue;
     }
     // "You (and creatures you control) have protection from the chosen card

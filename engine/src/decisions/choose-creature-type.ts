@@ -81,6 +81,7 @@ export const chooseCreatureType = defineDecision({
       options: [...awaiting.options],
       catalog: awaiting.catalog,
       ...(awaiting.prompt !== undefined ? { prompt: awaiting.prompt } : {}),
+      ...(awaiting.looked !== undefined ? { looked: [...awaiting.looked] } : {}),
       ...(awaiting.then !== undefined && !awaiting.catalog ? { resolving: true as const } : {}),
       // Only a catalog choice needs suggestions; a short fixed list is
       // already its own menu. Never one it leaves out ("other than Wall" —

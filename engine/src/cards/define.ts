@@ -4885,6 +4885,14 @@ export interface CardDefinition {
    */
   readonly chooseOnEnter: readonly string[] | null;
   /**
+   * "As this permanent enters, **look at an opponent's hand, then** choose …"
+   * (Arachne, Psionic Weaver), before its `chooseOnEnter`: the opponent is
+   * chosen first among two or more (`chooseCardNameOnEnter`'s `look` asks the
+   * same way), and the hand is shown to the chooser alone, beside the options
+   * (`looked` on the `choose-creature-type`). `null` for none.
+   */
+  readonly chooseOnEnterLook: "opponent-hand" | null;
+  /**
    * "As this permanent enters, choose a player" (rule 614.1c — Saskia the
    * Unyielding, Stuffy Doll) or "choose an opponent" (Black Vise, Cursed
    * Rack): asked of its controller among the players still in the game —
@@ -5548,6 +5556,7 @@ const PRINTED_ABILITY: {
   chooseCreatureTypeOnEnter: (def) => def.chooseCreatureTypeOnEnter,
   chooseCardNameOnEnter: (def) => def.chooseCardNameOnEnter !== null,
   chooseOnEnter: (def) => def.chooseOnEnter !== null,
+  chooseOnEnterLook: (def) => def.chooseOnEnterLook !== null,
   choosePlayerOnEnter: (def) => def.choosePlayerOnEnter !== null,
   secretChoiceOnEnter: false,
   choosePermanentOnEnter: (def) => def.choosePermanentOnEnter !== null,
@@ -5802,6 +5811,7 @@ interface CardDraft {
   chooseCreatureTypeOnEnter?: boolean;
   chooseCardNameOnEnter?: CardNameOnEnter;
   chooseOnEnter?: readonly string[];
+  chooseOnEnterLook?: "opponent-hand";
   choosePlayerOnEnter?: "player" | "opponent";
   secretChoiceOnEnter?: true;
   choosePermanentOnEnter?: PermanentOnEnter;
@@ -6069,6 +6079,7 @@ export function defineCard(draft: CardDraft): CardDefinition {
     chooseCreatureTypeOnEnter: draft.chooseCreatureTypeOnEnter ?? false,
     chooseCardNameOnEnter: draft.chooseCardNameOnEnter ?? null,
     chooseOnEnter: draft.chooseOnEnter ?? readAheadChoices(draft),
+    chooseOnEnterLook: draft.chooseOnEnterLook ?? null,
     choosePlayerOnEnter: draft.choosePlayerOnEnter ?? null,
     ...(draft.secretChoiceOnEnter === true ? { secretChoiceOnEnter: true as const } : {}),
     choosePermanentOnEnter: draft.choosePermanentOnEnter ?? null,

@@ -4326,6 +4326,17 @@ Capricious Efreet needed no code: it's Wild Swing's random modal over chosen
 targets. Grip of Chaos is left: it also needs a trigger on anything going on the
 stack, `trigger:spell-or-ability-put-on-stack`.
 
+### Looking at a hand as it enters, and more of another's library — built 2026-11-03
+
+The need-keys Phase 2 units `effect:look-at-opponent-hand-as-enters` and
+`effect:look-at-target-player-library`. `chooseOnEnterLook` puts Sorcerous
+Spyglass's look (`lookAtOpponentHandOnEnter`, now shared) before a `chooseOnEnter`,
+and the `choose-creature-type` carries the hand as `looked`, stripped from every
+other seat's view as a `choose-card-name`'s is. No filter for "the chosen type":
+Archon of Valor's Reach's one static per word covers it. `look-at-library-top`
+takes a `count` (Orcish Spy); Dimir Charm ran on `look-and-choose`'s `from` and
+needed nothing. Eye Spy, Elemental Augury and Moonring Island are the same shapes.
+
 ### Looking at the top of another player's library — built 2026-11-02
 
 The need-keys Phase 2 unit `effect:look-at-top-of-target-players-library`. Its
