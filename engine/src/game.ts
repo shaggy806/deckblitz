@@ -463,6 +463,7 @@ import {
 import { distinctTargetCount, targetCountBounds } from "./target-count.js";
 import {
   damageDealtSince,
+  damagePreventedBy,
   eventsSince as eventLogSince,
   excessDamageSince,
   lifeLostSince,
@@ -29083,6 +29084,7 @@ export class Game {
       playerCountersRemovedThisWay: (players) => playerCountersRemovedSince(this.state, since, players),
       excessDamageThisWay: (to) => excessDamageSince(this.state, since, to),
       damageDealtThisWay: (to) => damageDealtSince(this.state, since, to),
+      damagePreventedThisWay: () => damagePreventedBy(this.state, refs?.madeIn ?? since),
       exileDamagedThisWayIfTheyDie: (creaturesOnly) => {
         // Every permanent this resolution has dealt damage to so far — damage
         // prevented was never dealt (rule 615.1) — or only the creatures
@@ -32321,6 +32323,7 @@ export class Game {
               }
             : {}),
           amount: typeof rule.amount === "number" ? rule.amount : 0,
+          madeIn: since,
           combatOnly: rule.combat === true,
           ...(rule.combat === false ? { noncombatOnly: true as const } : {}),
           ...(rule.amount === "all" ? { all: true as const } : {}),
@@ -32375,11 +32378,11 @@ export class Game {
           return;
         }
         if (amount === "all") {
-          this.state.preventionShields.push({ target, amount: 0, combatOnly, all: true, ...stint });
+          this.state.preventionShields.push({ target, amount: 0, combatOnly, all: true, ...stint, madeIn: since });
           this.emit({ type: "prevention-shield-created", target, amount: 0, all: true });
           return;
         }
-        this.state.preventionShields.push({ target, amount, combatOnly, ...stint });
+        this.state.preventionShields.push({ target, amount, combatOnly, ...stint, madeIn: since });
         this.emit({ type: "prevention-shield-created", target, amount });
       },
       chooseDamageSource: (filter, then) => {
@@ -32438,8 +32441,9 @@ export class Game {
           ...(amount === "all" ? { all: true as const } : {}),
           ...(more?.redirectToSource !== undefined ? { redirectToSource: more.redirectToSource } : {}),
           ...(more?.then !== undefined
-            ? { then: { spec: more.then, by: source, controller, targets: targets.map((t) => t ?? null) } }
+            ? { then: { spec: more.then, by: source, controller, targets: more.thenTargets ?? targets.map((t) => t ?? null) } }
             : {}),
+          madeIn: since,
           combatOnly: false,
           ...stint,
           from: {
@@ -41767,6 +41771,7 @@ export class Game {
         ? { sourceStint: this.delayedSourceStint(object, creator.refs) }
         : {}),
       createdAtSeq: this.state.eventSeq,
+      ...(this.state.resolutionSince !== undefined ? { madeIn: this.state.resolutionSince } : {}),
       effect,
       text,
     });
@@ -41871,7 +41876,6 @@ export class Game {
       // What `stackAbilityOf` resolves from: the ability has no index into any
       // card's `triggered` list, because it isn't an ability of a card.
       this.state.objects[id].delayedTrigger = trigger;
-      this.carryDelayedIdentity(id, trigger);
       // "That card" is still that card only if it hasn't changed zones since
       // (rule 400.7) — and is read as it last existed where it was.
       if (trigger.triggerObject !== undefined && trigger.triggerObjectStint !== undefined) {
@@ -41886,6 +41890,7 @@ export class Game {
           recipient: trigger.recipient,
         };
       }
+      this.carryDelayedIdentity(id, trigger);
       this.emit({
         type: "ability-triggered",
         source: trigger.source,
@@ -41903,6 +41908,7 @@ export class Game {
     if (trigger.targetZones !== undefined) object.targetZones = [...trigger.targetZones];
     if (trigger.targetStints !== undefined) object.targetStints = [...trigger.targetStints];
     if (trigger.sourceStint !== undefined) object.sourceZoneChangeCount = trigger.sourceStint;
+    if (trigger.madeIn !== undefined) object.lastKnownRefs = { ...object.lastKnownRefs, madeIn: trigger.madeIn };
   }
 
   /**
@@ -45082,7 +45088,13 @@ export class Game {
           // redirected damage no more (614.5).
           redirected.push({ to, amount: prevented, applied: { ...applied, shields: [...applied.shields, shield] } });
         } else {
-          this.emit({ type: "damage-prevented", source, target, amount: prevented });
+          this.emit({
+            type: "damage-prevented",
+            source,
+            target,
+            amount: prevented,
+            ...(shield.madeIn !== undefined ? { shieldMadeIn: shield.madeIn } : {}),
+          });
         }
       }
       if (outcome.redirected !== undefined) {

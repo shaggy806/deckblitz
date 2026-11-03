@@ -4102,3 +4102,10 @@ Foresight, Lantern of Insight, Natural Selection, Vizkopa Guildmage, Merrow Bone
 **An effect done by another player (2026-11-02).** `as-player`: `who` (any `EffectPlayerRef`, with the new
 `"source-owner"`), `effect`; inside it "you" is them, what it asks is theirs and what it makes is theirs. Replaces a
 `who` per effect. Keys: effect:target-player-scries, effect:incubate-for-player, effect:discard-hand-target-players, effect:owner-of-source-player-ref, effect:discover-by-other-player, effect:sacrifice-controller-of-target. Proving cards: Excise the Imperfect, Wheel and Deal, Gandalf, Wandering Wizard.
+
+**Damage prevented this way (2026-11-02).** The `damagePreventedThisWay` amount: what the shields of this
+effect's resolution have prevented so far, read off `damage-prevented` events that name it (`shieldMadeIn`),
+in a delayed ability it set up too (`LastKnownRefs.madeIn`). A chosen source's `then` now reads the spell's own
+targets, not the source chosen (`ownTargets`). Key: amount:damage-prevented-this-way. Found to need nothing:
+effect:prevent-all-damage-by-filter (`damage-rule`'s `by.filter`). Proving cards: Sacred Boon, Scars of the
+Veteran, Bone Mask, Brace for Impact, Refraction Trap, Chant of Vitu-Ghazi.

@@ -1031,6 +1031,15 @@ and toughness, `add-mana`'s and `gain-life`'s amount; Phabine's "for each
 land card" is `PARLEY_LAND`. The scaffolder reads the three sentences when X
 is one unit of a sentence it reads.
 
+**"The damage prevented this way."** Right after each hit it's the shield's
+`then` with `"x"` (rule 615.5 — Temper, Brace for Impact, Bone Mask, Refraction
+Trap; a `prevent-damage-from-chosen-source`'s `then` reads the spell's own
+targets, not the source chosen), or `gainLifePrevented`. Read later,
+`{ damagePreventedThisWay: true }` is what the shields of this effect's
+resolution have prevented so far, in a delayed ability it set up too: Sacred
+Boon's `sequence` of a `prevent-damage` and a `delayed-trigger` whose
+`add-counter` amount is this, read as that ability resolves.
+
 **"The damage dealt this way."** `{ damageDealtThisWay: true, to? }` is all
 the damage the resolution under way has dealt, after prevention — a prevented
 hit was never dealt (rule 615.1): Creeping Bloodsucker's "you gain life equal

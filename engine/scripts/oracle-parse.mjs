@@ -915,6 +915,7 @@ function revealedCardEffectOf(s, ctx) {
 
 /** Target phrases, longest first, as the engine's target specs. */
 const TARGET_PHRASES = [
+  ["target multicolored creature", { kind: "permanent", whose: "any", filter: { type: "creature", multicolored: true } }],
   // What it has dealt damage to this turn (`dealtDamageThisTurn`).
   ["target creature that dealt damage to you this turn", { kind: "permanent", whose: "any", filter: { type: "creature", dealtDamageThisTurn: { to: "you" } } }],
   ["target creature an opponent controls that dealt damage this turn", { kind: "permanent", whose: "opponent", filter: { type: "creature", dealtDamageThisTurn: true } }],
@@ -4469,6 +4470,9 @@ export function parseSentence(sentence, ctx) {
   if ((m = re(`prevent the next ${N} damage that would be dealt (?:this turn to (${TARGET})|to (${TARGET}) this turn)`).exec(s))) {
     return { kind: "prevent-damage", target: slot(m[2] ?? m[3]), amount: amount(m[1]) };
   }
+  if ((m = re(`prevent all damage that would be dealt (?:this turn to (${TARGET})|to (${TARGET}) this turn)`).exec(s))) {
+    return { kind: "prevent-damage", target: slot(m[1] ?? m[2]), amount: "all" };
+  }
   // A redirection (rule 614.9): the en-Kor creatures, Daughter of Autumn.
   if ((m = re(`the next ${N} damage that would be dealt (?:to (~|${TARGET}) this turn|this turn to (~|${TARGET})) is dealt to (~|${TARGET}) instead`).exec(s))) {
     const from = m[2] ?? m[3];
@@ -6502,6 +6506,48 @@ export function parseEffect(text, outer) {
       };
       parsed.push(...both.effects);
       hints.push({ sentence, effect: both });
+      continue;
+    }
+    // "For each 1 damage prevented this way, put a +1/+1 counter on that
+    // creature." right after each hit (rule 615.5 — Brace for Impact): the
+    // shield on target 0 gets a `then`.
+    const shieldBefore = parsed.at(-1);
+    const onTargetZero = shieldBefore?.kind === "prevent-damage" ? shieldBefore.target === 0 : shieldBefore?.kind === "damage-rule" && shieldBefore.to?.target === 0;
+    const perPrevented = /^for each 1 damage prevented this way, put a (\+\d+\/\+\d+) counter on (?:that creature|it)\.$/i.exec(sentence);
+    if (perPrevented !== null && onTargetZero) {
+      const { kind: _kind, target: _target, ...rest } = shieldBefore;
+      parsed[parsed.length - 1] = {
+        ...(rest.amount === "all" ? (({ amount: _all, ...more }) => more)(rest) : rest),
+        kind: "damage-rule",
+        to: { target: 0 },
+        then: { kind: "add-counter", target: 0, counter: perPrevented[1], amount: "x" },
+      };
+      continue;
+    }
+    // … and read later, by a delayed ability the same resolution sets up
+    // (Sacred Boon; Scars of the Veteran's "if it's a creature", asked now).
+    const laterPrevented =
+      /^at the beginning of the next end step, put a (\+\d+\/\+\d+) counter on that creature for each 1 damage prevented this way\.$/i.exec(sentence) ??
+      /^if it's a creature, put a (\+\d+\/\+\d+) counter on it for each 1 damage prevented this way at the beginning of the next end step\.$/i.exec(sentence);
+    if (laterPrevented !== null && onTargetZero) {
+      const conditionally = /^if it's a creature/i.test(sentence);
+      const delayed = {
+        kind: "delayed-trigger",
+        at: "next-end-step",
+        text: `Put a ${laterPrevented[1]} counter on ${conditionally ? "it" : "that creature"} for each 1 damage prevented this way.`,
+        effect: { kind: "add-counter", target: 0, counter: laterPrevented[1], amount: { damagePreventedThisWay: true } },
+      };
+      const later = conditionally
+        ? { kind: "conditional", condition: { kind: "target", index: 0, filter: { type: "creature" } }, then: delayed }
+        : delayed;
+      parsed.push(later);
+      hints.push({ sentence, effect: later });
+      continue;
+    }
+    // "Exile cards from the top of your library equal to the damage prevented
+    // this way." after a source of your choice (Bone Mask).
+    if (/^exile cards from the top of your library equal to the damage prevented this way\.$/i.test(sentence) && shieldBefore?.kind === "prevent-damage-from-chosen-source") {
+      parsed[parsed.length - 1] = { ...shieldBefore, then: { kind: "exile-from-library", amount: "x" } };
       continue;
     }
     // "You gain life equal to the damage prevented this way." after a damage

@@ -9975,6 +9975,53 @@ describe("an effect done to each other permanent", () => {
   });
 });
 
+describe("damage prevented this way", () => {
+  const spell = (oracle_text: string) =>
+    (parseFace({ name: "Card", type_line: "Instant", oracle_text }, { tokenFor: () => null }) as unknown as { effect: unknown }).effect;
+  const later = (on: string) => ({
+    kind: "delayed-trigger",
+    at: "next-end-step",
+    text: `Put a +0/+1 counter on ${on} for each 1 damage prevented this way.`,
+    effect: { kind: "add-counter", target: 0, counter: "+0/+1", amount: { damagePreventedThisWay: true } },
+  });
+
+  it("reads counters right after the hit as the shield's then", () => {
+    expect(
+      spell("Prevent all damage that would be dealt to target multicolored creature this turn. For each 1 damage prevented this way, put a +1/+1 counter on that creature."),
+    ).toEqual({
+      kind: "damage-rule",
+      to: { target: 0 },
+      then: { kind: "add-counter", target: 0, counter: "+1/+1", amount: "x" },
+    });
+  });
+
+  it("reads counters at the next end step as a delayed ability over the amount", () => {
+    expect(
+      spell("Prevent the next 3 damage that would be dealt to target creature this turn. At the beginning of the next end step, put a +0/+1 counter on that creature for each 1 damage prevented this way."),
+    ).toEqual({ kind: "sequence", effects: [{ kind: "prevent-damage", target: 0, amount: 3 }, later("that creature")] });
+    expect(
+      spell("Prevent the next 7 damage that would be dealt to any target this turn. If it's a creature, put a +0/+1 counter on it for each 1 damage prevented this way at the beginning of the next end step."),
+    ).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "prevent-damage", target: 0, amount: 7 },
+        { kind: "conditional", condition: { kind: "target", index: 0, filter: { type: "creature" } }, then: later("it") },
+      ],
+    });
+  });
+
+  it("reads Bone Mask's exile as what a chosen source's shield does next", () => {
+    expect(
+      spell("The next time a source of your choice would deal damage to you this turn, prevent that damage. Exile cards from the top of your library equal to the damage prevented this way."),
+    ).toEqual({
+      kind: "prevent-damage-from-chosen-source",
+      to: "you",
+      amount: "next-time",
+      then: { kind: "exile-from-library", amount: "x" },
+    });
+  });
+});
+
 describe("an effect done by another player", () => {
   it("reads 'target player scries N' as as-player, on a player slot", () => {
     const parsed = parseEffect("Target player scries 2.", ctx());

@@ -850,6 +850,13 @@ export type EffectAmount =
    * prevented was never dealt, so it doesn't count. `to` counts only what was
    * dealt to that target slot's player or object. */
   | { readonly damageDealtThisWay: true; readonly to?: number }
+  /** The damage prevented so far by the shields this effect's resolution made
+   * — read in the delayed ability it set up too, whose text is the same
+   * sentence: Sacred Boon's "at the beginning of the next end step, put a
+   * +0/+1 counter on that creature for each 1 damage prevented this way", read
+   * as that ability resolves. Prevention's immediate additional effect (rule
+   * 615.5 — Temper, right after each hit) is a `then` with `"x"` instead. */
+  | { readonly damagePreventedThisWay: true }
   /**
    * A per-player running total for this turn ({@link TurnStat}), summed over
    * the players `who` names (default `"you"`) — Kydele's "{C} for each card
@@ -7701,6 +7708,10 @@ export type EffectSpec =
       readonly protect?: TargetRef | "your-side" | "your-side-creatures" | "any";
       /** Set by the engine beside `protect`: where `redirectTo` sends it. */
       readonly redirect?: TargetRef;
+      /** Set by the engine beside `protect`: the spell's own targets, which
+       * `then` reads (Refraction Trap's "deals that much damage to any
+       * target") — the answer's copy has the source chosen as target 0. */
+      readonly ownTargets?: readonly (TargetRef | null)[];
     }
   | {
       /** "Target spell or permanent becomes black" (Deathlace — rule 613.1e,
@@ -9458,6 +9469,8 @@ export interface EffectApi {
   /** See the `damageDealtThisWay` {@link EffectAmount}: dealt to `to` only,
    * when given. */
   damageDealtThisWay(to?: TargetRef): number;
+  /** See the `damagePreventedThisWay` {@link EffectAmount}. */
+  damagePreventedThisWay(): number;
   /** Announce that the effect's controller foraged — see the `foraged`
    * {@link EffectSpec}. */
   foraged(): void;
@@ -10979,6 +10992,8 @@ export interface EffectApi {
     redirectTo?: TargetRef,
     more?: {
       readonly then?: EffectSpec;
+      /** What `then` reads as its targets: the spell's own. */
+      readonly thenTargets?: readonly (TargetRef | null)[];
       readonly redirectToSource?: "itself" | "controller";
       readonly gainLifeFrom?: CardFilter;
     },
@@ -12617,6 +12632,7 @@ function signedAmountValue(
     const ref = ctx.targets[amount.to];
     return ref === undefined ? 0 : ctx.damageDealtThisWay(ref);
   }
+  if ("damagePreventedThisWay" in amount) return ctx.damagePreventedThisWay();
   if ("turnStat" in amount) {
     if (amount.target !== undefined) {
       const ref = ctx.targets[amount.target];
@@ -16854,6 +16870,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
             spec.redirect,
             {
               ...(spec.then !== undefined ? { then: spec.then } : {}),
+              ...(spec.ownTargets !== undefined ? { thenTargets: spec.ownTargets } : {}),
               ...(spec.redirectToSource !== undefined ? { redirectToSource: spec.redirectToSource } : {}),
               ...(spec.gainLifeFrom !== undefined ? { gainLifeFrom: spec.gainLifeFrom } : {}),
             },
@@ -16870,7 +16887,12 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       if (protect === undefined) return;
       const redirect = spec.redirectTo === undefined ? undefined : redirectRef(spec.redirectTo, ctx);
       if (spec.redirectTo !== undefined && redirect === undefined) return;
-      ctx.chooseDamageSource(spec.filter ?? {}, { ...spec, protect, ...(redirect !== undefined ? { redirect } : {}) });
+      ctx.chooseDamageSource(spec.filter ?? {}, {
+        ...spec,
+        protect,
+        ...(redirect !== undefined ? { redirect } : {}),
+        ...(spec.then !== undefined ? { ownTargets: ctx.targets.map((t) => t ?? null) } : {}),
+      });
       return;
     }
     case "become-color": {

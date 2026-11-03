@@ -2166,6 +2166,9 @@ export interface CastSpellRecord {
 export interface LastKnownRefs {
   readonly source?: number;
   readonly triggerObject?: number;
+  /** For a fired delayed ability: the resolution that set it up
+   * (`DelayedTrigger.madeIn`). */
+  readonly madeIn?: number;
   /** For an activated ability whose cost returned an attacking creature to
    * its owner's hand (`AbilityCost.returnToHand`): what that creature was
    * attacking as the cost was paid — the player, planeswalker or battle a
@@ -4600,6 +4603,9 @@ export interface DelayedTrigger {
   /** The `eventSeq` it was created at: it transforms its source only if the
    * source hasn't transformed since (rule 701.28f). */
   readonly createdAtSeq?: number;
+  /** The resolution that set it up (its `resolutionSince`) — what its own
+   * "damage prevented this way" means (`LastKnownRefs.madeIn`). */
+  readonly madeIn?: number;
   readonly effect: EffectSpec;
   readonly text: string;
 }
@@ -4925,6 +4931,10 @@ export interface PreventionShield {
     readonly controller: PlayerId;
     readonly targets: readonly (TargetRef | null)[];
   };
+  /** The resolution that made it (its `resolutionSince`), which its
+   * `damage-prevented` events name — the `damagePreventedThisWay` amount's
+   * read. */
+  readonly madeIn?: number;
 }
 
 /**

@@ -1276,6 +1276,9 @@ export type GameEvent =
       readonly source: ObjectId;
       readonly target: TargetRef;
       readonly amount: number;
+      /** A one-shot or turn-long shield's: the resolution that made it
+       * (`PreventionShield.madeIn`) — "damage prevented this way". */
+      readonly shieldMadeIn?: number;
     })
   | (Base & {
       /** Damage that would have been dealt to `from` is dealt to `to`

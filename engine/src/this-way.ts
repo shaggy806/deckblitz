@@ -120,6 +120,17 @@ export function damageDealtSince(
   return dealt;
 }
 
+/** The damage prevented by the shields the resolution that began at event
+ * `madeIn` made, up to now — see the `damagePreventedThisWay` amount. Those
+ * shields can only have worked since. */
+export function damagePreventedBy(state: GameState, madeIn: number): number {
+  let prevented = 0;
+  for (const event of eventsSince(state, madeIn)) {
+    if (event.type === "damage-prevented" && event.shieldMadeIn === madeIn) prevented += event.amount;
+  }
+  return prevented;
+}
+
 /**
  * What the resolution that began at event `since` — by default the one under
  * way, and nothing between resolutions — has done `what` to, each object
