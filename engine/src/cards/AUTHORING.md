@@ -3577,6 +3577,10 @@ tapOthers?, untap? }`.
   number of colors in your commanders' color identity" (`AbilityLifeCost`, read
   off `PlayerState.commanderIdentity` as it's activated): 0 for a colourless
   commander, and not activatable at all without a commander (the rulings).
+  `"half-rounded-up"` is "Pay half your life, rounded up" (Lurking Evil, Murderous
+  Betrayal), nothing at 0 or less. `"x"` is "Pay X life" (Krumar Initiate), its X
+  capped by the life there is. `{ each: 3, per: { countersOnSource: "velocity" } }`
+  is Tornado's, `{ each: 1, per: "card-in-hand" }` Hand of Vecna's equip.
 - `unattach`: an unattach as a cost (rule 701.3d), unpayable with nothing
   attached. `"self"` is Sunforger's "Unattach this Equipment"; `"granter"` a
   granted "{T}, Unattach Leonin Bola", whoever controls it, its effects reading

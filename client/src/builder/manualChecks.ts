@@ -9775,6 +9775,16 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
 
+  // --- An ability's life cost (2026-11-02) -----------------------------------
+  preset(
+    'Krumar Initiate: X stops at the life you have',
+    board({ you: { life: 3, bf: ['Swamp*6', 'Krumar Initiate'] } }),
+  ),
+  preset(
+    'Lurking Evil: half your life, rounded up',
+    board({ you: { life: 21, bf: ['Lurking Evil'] } }),
+  ),
+
   // --- A spell's additional cost (2026-11-02) --------------------------------
   preset(
     "Warlord's Elite: tapping two permanents as it's cast",

@@ -6561,3 +6561,15 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 - **Do:** As Bob, cast Lightning Bolt at Alice. As Alice, cast Disruption Protocol on it, and choose "Tap an untapped artifact you control".
 - **Expect:** Two ways to cast it are offered. This one pays {U}{U}, taps Ornithopter, and Lightning Bolt is countered.
+
+## An ability's life cost, read as it's paid (2026-11-02)
+
+### Krumar Initiate: X stops at the life you have
+
+- **Do:** At 3 life, with six Swamps out, activate Krumar Initiate. Try to choose X.
+- **Expect:** X goes no higher than 3, though the mana reaches 5. With X at 2, you go to 1 life and choose between two +1/+1 counters and a 2/2 Spirit.
+
+### Lurking Evil: half your life, rounded up
+
+- **Do:** Activate Lurking Evil, at 21 life.
+- **Expect:** You go to 10 life and it becomes a 4/4 flying Phyrexian Horror creature, no longer an enchantment.

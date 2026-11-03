@@ -10823,6 +10823,14 @@ describe("any number of … with different names or powers", () => {
     });
   });
 
+  it("reads a life cost that's read as it's paid", () => {
+    expect(parseCost("Pay half your life, rounded up")).toMatchObject({ cost: { payLife: "half-rounded-up" } });
+    expect(parseCost("{X}{B}, {T}, Pay X life")).toMatchObject({ cost: { payLife: "x" } });
+    expect(parseCost("{2}{G}, Pay 3 life for each velocity counter on ~")).toMatchObject({
+      cost: { payLife: { each: 3, per: { countersOnSource: "velocity" } } },
+    });
+  });
+
   it("reads an additional cost in a keyword cost's shape", () => {
     const cost = (line: string) =>
       (face("Card", "Sorcery", `As an additional cost to cast this spell, ${line}\nDraw a card.`) as { additionalCost?: unknown })

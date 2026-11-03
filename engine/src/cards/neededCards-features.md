@@ -4317,3 +4317,7 @@ a spell's additional cost pays whatever a kicker's can, and `tapUntapped` and `r
 (`TapCostOffer.anyNumber`, X the count, the client's tap prompt too) and `additionalCost.discardFilter`. Keys: cost:additional-cost-tap-permanents,
 cost:additional-cost-discard-filter, and cost:discard-x-cost, built already (Firestorm, Channeled Force). Proving cards: Warlord's Elite, Shared Discovery, Gaze of Justice,
 Burn at the Stake, Disruption Protocol, Deprive, Magmatic Insight, Scorched Earth.
+
+**An ability's life cost read as it's paid (2026-11-02).** `AbilityLifeCost`, read only through `abilityLifeCost(state, player, cost, x, source)`, gains `"half-rounded-up"`, `"x"` (its X capped by
+the life there is) and `{ each, per }` (`dynamic-life-cost.test.ts`). Key: cost:dynamic-life-cost. Proving cards: Lurking Evil, Murderous Betrayal, Krumar Initiate, Tornado. Hand of Vecna's
+`per: "card-in-hand"` is built, but it waits on the Vecna token; Protection Racket's life is an effect's.

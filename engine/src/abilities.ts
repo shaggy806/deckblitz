@@ -155,7 +155,8 @@ export function costAnnouncesX(cost: AbilityCost): boolean {
     cost.discard?.count === "x" ||
     cost.exileFromGraveyard?.count === "x" ||
     cost.reveal?.count === "x" ||
-    cost.removeCounter?.count === "x"
+    cost.removeCounter?.count === "x" ||
+    cost.payLife === "x"
   );
 }
 
@@ -215,21 +216,45 @@ export function sacrificeCostFilters(sacrifice: Exclude<SacrificeCost, "self" | 
  * both commanders' for a pair). A player with no commander can't pay it at
  * all (War Room's ruling), while a colourless commander makes it 0.
  */
-export type AbilityLifeCost = number | "commander-identity-colors";
+export type AbilityLifeCost =
+  | number
+  | "commander-identity-colors"
+  /** "Pay half your life, rounded up" (Lurking Evil): nothing at 0 or less
+   * life (its ruling). */
+  | "half-rounded-up"
+  /** "Pay X life" (Krumar Initiate): the X announced, up to their life. */
+  | "x"
+  /** "Pay 3 life for each velocity counter on this enchantment" (Tornado),
+   * "pay 1 life for each card in your hand" (Hand of Vecna). */
+  | { readonly each: number; readonly per: { readonly countersOnSource: string } | "card-in-hand" };
 
 /**
  * The life `cost` pays when `player` activates it now: `0` for none, `null`
  * when it can't be paid at all (a commander-identity cost with no commander).
- * Rule 118.4's "can't pay more life than you have" is the caller's check.
+ * Read as the cost is paid (rule 602.2b), with the X announced and the ability's
+ * source. Rule 118.4's "can't pay more life than you have" is the caller's check.
  */
 export function abilityLifeCost(
   state: GameState,
   player: PlayerId,
   cost: AbilityCost,
+  x?: number,
+  source?: ObjectId,
 ): number | null {
   const life = cost.payLife;
   if (life === undefined) return 0;
   if (typeof life === "number") return life;
+  if (life === "x") return x ?? 0;
+  if (life === "half-rounded-up") return Math.max(0, Math.ceil((state.players[player]?.life ?? 0) / 2));
+  if (typeof life === "object") {
+    const count =
+      life.per === "card-in-hand"
+        ? (state.zones.perPlayer[player]?.hand.length ?? 0)
+        : source === undefined
+          ? 0
+          : (state.objects[source]?.counters[life.per.countersOnSource] ?? 0);
+    return life.each * count;
+  }
   const hasCommander = Object.values(state.objects).some(
     (o) => o.isCommander && o.owner === player,
   );
@@ -239,9 +264,13 @@ export function abilityLifeCost(
 
 /** The printed form of an ability's life cost ("Pay 2 life"). */
 export function abilityLifeCostText(life: AbilityLifeCost): string {
-  return typeof life === "number"
-    ? `Pay ${life} life`
-    : "Pay life equal to the number of colors in your commanders' color identity";
+  if (typeof life === "number") return `Pay ${life} life`;
+  if (life === "x") return "Pay X life";
+  if (life === "half-rounded-up") return "Pay half your life, rounded up";
+  if (typeof life === "object") {
+    return `Pay ${life.each} life for each ${life.per === "card-in-hand" ? "card in your hand" : `${life.per.countersOnSource} counter on this permanent`}`;
+  }
+  return "Pay life equal to the number of colors in your commanders' color identity";
 }
 
 /**

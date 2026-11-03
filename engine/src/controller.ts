@@ -3656,7 +3656,7 @@ export class HeuristicBotController extends AutomaticController {
     });
     if (legal.sacrifice !== undefined) worth -= 2;
     if (ability.cost.payLife !== undefined) {
-      const life = abilityLifeCost(state, this.playerId, ability.cost);
+      const life = abilityLifeCost(state, this.playerId, ability.cost, undefined, legal.source);
       if (life === null || life >= state.players[this.playerId].life) return null;
       if (life > 0) worth += costWorth(state, this.playerId, { life });
     }

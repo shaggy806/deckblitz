@@ -1396,7 +1396,8 @@ export function sourceSacrificeOf(part) {
 export function parseCost(text) {
   const cost = { mana: null, tap: false };
   const extra = {};
-  for (const part of text.split(/,\s*/)) {
+  // "Pay half your life, rounded up" is one part, its comma aside.
+  for (const part of text.replace("Pay half your life, rounded up", "Pay half your life").split(/,\s*/)) {
     let m;
     if (MANA.test(part)) cost.mana = part;
     else if (part === "{T}") cost.tap = true;
@@ -1444,6 +1445,13 @@ export function parseCost(text) {
       cost.sacrifice = { filter, count, ...(m[3] !== undefined ? { differentNames: true } : {}) };
       if (word === "one or more") extra.minX = 1;
     } else if ((m = /^Pay (\d+) life$/.exec(part))) cost.payLife = Number(m[1]);
+    else if (part === "Pay half your life") cost.payLife = "half-rounded-up";
+    else if (part === "Pay X life") cost.payLife = "x";
+    else if ((m = /^Pay (\d+) life for each ([\w+/-]+) counter on ~$/.exec(part))) {
+      cost.payLife = { each: Number(m[1]), per: { countersOnSource: m[2] } };
+    } else if ((m = /^Pay (\d+) life for each card in your hand$/.exec(part))) {
+      cost.payLife = { each: Number(m[1]), per: "card-in-hand" };
+    }
     else if (part === "Discard your hand") cost.discardHand = true;
     // "Discard a card at random" (Mage il-Vec): nothing to choose.
     else if (part === "Discard a card at random") cost.discard = { count: 1, random: true };

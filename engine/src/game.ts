@@ -3409,7 +3409,14 @@ export class Game {
         ability.loyaltyCost === "-x"
           ? (this.state.objects[source]?.counters.loyalty ?? 0) + this.loyaltyCostIncrease(player, source, ability)
           : undefined;
-      const caps = [manaX, sacrificeX, tapOthersX, exileX, discardX, revealX, counterX, loyaltyX].filter(
+      // "Pay X life": as much as they have (rule 119.4), none while they can't.
+      const lifeX =
+        ability.cost.payLife === "x"
+          ? this.canPayLife(player, 1)
+            ? Math.max(0, this.state.players[player].life)
+            : 0
+          : undefined;
+      const caps = [manaX, sacrificeX, tapOthersX, exileX, discardX, revealX, counterX, loyaltyX, lifeX].filter(
         (n): n is number => n !== undefined,
       );
       const maxX = caps.length === 0 ? undefined : Math.min(...caps);
@@ -20573,7 +20580,7 @@ export class Game {
     }
     if (ability.cost.payLife !== undefined) {
       // War Room: no commander, no way to pay (its ruling).
-      const life = abilityLifeCost(this.state, player, ability.cost);
+      const life = abilityLifeCost(this.state, player, ability.cost, x, sourceId);
       if (life === null) return `${player} has no commander to pay ${def.name}'s life cost by`;
       if (!this.canPayLife(player, life)) {
         return `${player} does not have ${life} life to pay`;
@@ -21001,7 +21008,7 @@ export class Game {
         ? { object: tapped[0], zoneChangeCount: this.state.objects[tapped[0]].zoneChangeCount ?? 0 }
         : undefined;
     this.executePayment(player, payment);
-    const lifeCost = abilityLifeCost(this.state, player, ability.cost) ?? 0;
+    const lifeCost = abilityLifeCost(this.state, player, ability.cost, chosenX, sourceId) ?? 0;
     if (lifeCost > 0) this.changeLife(player, -lifeCost);
     if (ability.cost.removeCounter !== undefined && !chosenCounterCost(ability.cost)) {
       const { kind } = ability.cost.removeCounter;
