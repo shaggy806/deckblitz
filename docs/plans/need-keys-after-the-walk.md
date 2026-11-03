@@ -841,6 +841,8 @@ missing. Re-run `--greedy` for Phase 2's order.
 - **2026-11-03: overnight, three agents at once.** `filter:blocking-trigger-object`, `amount:creatures-blocking-it` with
   `effect:amount-creatures-blocking-it` and `condition:source-blocked-by-at-least-one`, `static:cost-increase-colored`,
   `keyword:offering`, `decision:secret-choice` with `effect:protection-from-player-for-permanent`.
+- **2026-11-03: one session, six families in series.** `condition:attacked-battle-this-turn`;
+  `condition:attacking-an-opponent-filter` with `trigger:attacks-your-opponent` and `trigger:player-attacks-not-you`.
 
 ## Rough size
 

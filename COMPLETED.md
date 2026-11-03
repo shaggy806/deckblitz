@@ -12,6 +12,11 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **Attacking one of your opponents, and not attacking you** (2026-11-03, `d1cb9309c`): `attack-with`'s `notAttackingYou`
+  (an intervening if); the scaffolder reads "attacks one of your opponents". Skyboon Evangelist, Soulblade Corrupter,
+  Mirkwood Trapper.
+- **Attacked a battle this turn** (2026-11-03, `0c76c397f`): `GameObject.attackedBattleThisTurn` and its filter clause.
+  War Historian.
 - **Secret choices** (2026-11-03, `5b1a2ff17`): `GameObject.secretChoice`, made as a permanent enters or on resolution and
   hidden per seat until a `revealChosen` cost; also player protection from a player and a plain `onlyOnce`. Stalking Leonin,
   Guardian Archon, Emissary of Grudges, A Killer Among Us, Goblin Game.
