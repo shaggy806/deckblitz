@@ -280,6 +280,10 @@ export interface ManaPlanningView {
    * option is taken. A painland's damage is still fine — it's dealt, and
    * simply changes nothing. */
   readonly cantPayLife?: boolean;
+  /** The payer is at a quarter of the game's starting life or less (10 in
+   * Commander): a Treasure goes before a point of life, where above that the
+   * point of life goes first. Absent reads as not. */
+  readonly lowLife?: boolean;
   /** How many Phyrexian pips the payer chose to pay with 2 life each (rule
    * 107.4f — the action's `phyrexianLife`), taken before any mana is
    * tried for them; as many as their life allows. Absent: life pays a
@@ -713,19 +717,43 @@ export function planManaPayment(
   // Mana that may be spent as though it were any colour (or type) pays a
   // coloured pip as freely as a generic one (rule 609.4b).
   const cost = costAsSpendable(rawCost, view.spendAs);
-  // Life is the dearest thing a payment can spend, so a board with a source
-  // costing it first tries paying without (`lifeLast`). The tries below that
-  // weigh it as before only run where that found nothing: a {W}{R} out of a
-  // painland's {W} and a Treasure needs the Treasure on the {R}, and a Treasure
-  // spent first on the {W} would leave no red.
-  const costsLife = view.sources.some((s) => s.options.some((o) => o.pain + o.lifeCost > 0));
   const hasCosted = view.sources.some(hasCostedOption);
-  if (costsLife) {
-    const plan =
-      planManaPaymentOrdered(view, cost, avoid, exclude, "plain-first", true) ??
-      (hasCosted ? planManaPaymentOrdered(view, cost, avoid, exclude, "converters-first", true) : null);
-    if (plan !== null) return plan;
-  }
+  const weighingLife = (): ManaPlanStep[] | null => planWeighingLife(view, cost, avoid, exclude, hasCosted);
+  if (!view.sources.some((s) => s.options.some((o) => o.pain + o.lifeCost > 0))) return weighingLife();
+  const lifeLast = (): ManaPlanStep[] | null =>
+    planManaPaymentOrdered(view, cost, avoid, exclude, "plain-first", true) ??
+    (hasCosted ? planManaPaymentOrdered(view, cost, avoid, exclude, "converters-first", true) : null);
+  // At low life, life is the dearest thing a payment can spend. Weighing it as
+  // before is only for what that can't find: a {W}{R} out of a painland's {W}
+  // and a Treasure needs the Treasure on the {R}, and a Treasure spent first on
+  // the {W} would leave no red.
+  if (view.lowLife === true) return lifeLast() ?? weighingLife();
+  // Otherwise a point of life is worth less than a Treasure, so a plan paying
+  // less life is taken only if it spends nothing more for it: Boromir's {2}{W}
+  // paying its {W} from the Treasure already paying its {2} (a bug report,
+  // 2026-11-03).
+  const plan = weighingLife();
+  if (plan === null) return lifeLast();
+  if (planToll(plan) === 0) return plan;
+  const spared = lifeLast();
+  return spared !== null && planToll(spared) < planToll(plan) && planSpends(spared) <= planSpends(plan) ? spared : plan;
+}
+
+/** The life a plan's mana costs. */
+const planToll = (steps: readonly ManaPlanStep[]): number => steps.reduce((n, s) => n + s.pain + s.lifeCost, 0);
+
+/** How many of a plan's sources are used up or marked by using them. */
+const planSpends = (steps: readonly ManaPlanStep[]): number =>
+  steps.filter((s) => s.sacrifice || s.counterCost !== undefined).length;
+
+/** {@link planManaPayment} with life weighed as any other source's cost. */
+function planWeighingLife(
+  view: ManaPlanningView,
+  cost: ManaCost,
+  avoid: ObjectId | undefined,
+  exclude: ObjectId | undefined,
+  hasCosted: boolean,
+): ManaPlanStep[] | null {
   const plan = planManaPaymentOrdered(view, cost, avoid, exclude, "plain-first", false);
   if (plan !== null) return plan;
   // Reaching for a converter last can strand it: two Islands and an Izzet
@@ -933,9 +961,7 @@ const spentBeforeLife = (s: ManaSource): boolean =>
  *
  * `lifeLast` moves whatever would cost life for the mana wanted behind every
  * free source, a Treasure included (`spentBeforeLife`), and ahead of the other
- * last resorts (a bug report, 2026-11-03: Boromir's {2}{W} took a life from
- * Talisman of Hierarchy for the {W} and a Treasure for the {2}, where the
- * Talisman's free {C} and the same Treasure paid it for none).
+ * last resorts (`planManaPayment` says when).
  */
 type SourceOrder = "plain-first" | "converters-first" | "last-resort-early";
 

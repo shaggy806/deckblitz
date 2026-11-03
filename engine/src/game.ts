@@ -22788,6 +22788,7 @@ export class Game {
       pool: this.state.players[player].manaPool,
       life: this.state.players[player].life - reserved,
       ...(playerCantLoseLife(this.state, player) ? { cantPayLife: true } : {}),
+      ...(this.state.players[player].life - reserved <= this.state.rules.startingLife / 4 ? { lowLife: true } : {}),
       ...(this.phyrexianLifeChoice !== undefined && purpose !== null ? { phyrexianLife: this.phyrexianLifeChoice } : {}),
       sources: arrange === undefined ? sources : arrangeManaSources(sources, arrange),
       canPay: (unit) => this.manaUnitCanPay(player, unit, purpose),
