@@ -9926,6 +9926,8 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
 
+  // --- Looking at another player's top card (2026-11-02) --------------------
+  preset(
     "Rootwater Mystic: a look at another player's top card",
     board({
       you: { bf: ['Rootwater Mystic', 'Island*2'] },

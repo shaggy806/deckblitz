@@ -258,6 +258,7 @@ import _poolExitSpecialist from "../pool/exit-specialist.js";
 import _poolExplosiveGetaway from "../pool/explosive-getaway.js";
 import _poolFaerieGuidemother from "../pool/faerie-guidemother.js";
 import _poolFaithfulMending from "../pool/faithful-mending.js";
+import _poolFalsePeace from "../pool/false-peace.js";
 import _poolFangDruidSummoner from "../pool/fang-druid-summoner.js";
 import _poolFangedFlames from "../pool/fanged-flames.js";
 import _poolFangkeepersFamiliar from "../pool/fangkeepers-familiar.js";
@@ -622,6 +623,7 @@ import _poolSangriteSurge from "../pool/sangrite-surge.js";
 import _poolSapphireMedallion from "../pool/sapphire-medallion.js";
 import _poolSatyrPiper from "../pool/satyr-piper.js";
 import _poolSavaiThundermane from "../pool/savai-thundermane.js";
+import _poolScabClanGiant from "../pool/scab-clan-giant.js";
 import _poolScalpelexis from "../pool/scalpelexis.js";
 import _poolScavengedWeaponry from "../pool/scavenged-weaponry.js";
 import _poolSchemaThief from "../pool/schema-thief.js";
@@ -1126,6 +1128,7 @@ const shard: CardShard = {
     _poolExplosiveGetaway,
     _poolFaerieGuidemother,
     _poolFaithfulMending,
+    _poolFalsePeace,
     _poolFangDruidSummoner,
     _poolFangedFlames,
     _poolFangkeepersFamiliar,
@@ -1490,6 +1493,7 @@ const shard: CardShard = {
     _poolSapphireMedallion,
     _poolSatyrPiper,
     _poolSavaiThundermane,
+    _poolScabClanGiant,
     _poolScalpelexis,
     _poolScavengedWeaponry,
     _poolSchemaThief,

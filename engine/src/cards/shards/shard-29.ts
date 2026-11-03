@@ -69,6 +69,7 @@ import _poolBlacksmithsTalent from "../pool/blacksmiths-talent.js";
 import _poolBlaringRecruiter from "../pool/blaring-recruiter.js";
 import _poolBlessedReversal from "../pool/blessed-reversal.js";
 import _poolBlightedBat from "../pool/blighted-bat.js";
+import _poolBlindingAngel from "../pool/blinding-angel.js";
 import _poolBlisterBeetle from "../pool/blister-beetle.js";
 import _poolBloodHound from "../pool/blood-hound.js";
 import _poolBloodcrusherOfKhorne from "../pool/bloodcrusher-of-khorne.js";
@@ -606,6 +607,7 @@ import _poolRiverSneak from "../pool/river-sneak.js";
 import _poolRobeOfStars from "../pool/robe-of-stars.js";
 import _poolRoguesGallery from "../pool/rogues-gallery.js";
 import _poolRomanaIi from "../pool/romana-ii.js";
+import _poolRootwaterMystic from "../pool/rootwater-mystic.js";
 import _poolRotwidowPack from "../pool/rotwidow-pack.js";
 import _poolRubblehulk from "../pool/rubblehulk.js";
 import _poolRuinsOfTrokair from "../pool/ruins-of-trokair.js";
@@ -852,6 +854,7 @@ import _poolWildRide from "../pool/wild-ride.js";
 import _poolWingsOfTheCosmos from "../pool/wings-of-the-cosmos.js";
 import _poolWireflyHive from "../pool/wirefly-hive.js";
 import _poolWispdrinkerVampire from "../pool/wispdrinker-vampire.js";
+import _poolWitchHunt from "../pool/witch-hunt.js";
 import _poolWithstandDeath from "../pool/withstand-death.js";
 import _poolWoodcallerAutomaton from "../pool/woodcaller-automaton.js";
 import _poolWoodenStake from "../pool/wooden-stake.js";
@@ -960,6 +963,7 @@ const shard: CardShard = {
     _poolBlaringRecruiter,
     _poolBlessedReversal,
     _poolBlightedBat,
+    _poolBlindingAngel,
     _poolBlisterBeetle,
     _poolBloodHound,
     _poolBloodcrusherOfKhorne,
@@ -1497,6 +1501,7 @@ const shard: CardShard = {
     _poolRobeOfStars,
     _poolRoguesGallery,
     _poolRomanaIi,
+    _poolRootwaterMystic,
     _poolRotwidowPack,
     _poolRubblehulk,
     _poolRuinsOfTrokair,
@@ -1743,6 +1748,7 @@ const shard: CardShard = {
     _poolWingsOfTheCosmos,
     _poolWireflyHive,
     _poolWispdrinkerVampire,
+    _poolWitchHunt,
     _poolWithstandDeath,
     _poolWoodcallerAutomaton,
     _poolWoodenStake,

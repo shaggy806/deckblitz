@@ -747,6 +747,7 @@ import _poolStoicRebuttal from "../pool/stoic-rebuttal.js";
 import _poolStolenVitality from "../pool/stolen-vitality.js";
 import _poolStoneHavenMedic from "../pool/stone-haven-medic.js";
 import _poolStoneRetrievalUnit from "../pool/stone-retrieval-unit.js";
+import _poolStonehornDignitary from "../pool/stonehorn-dignitary.js";
 import _poolStonesplitterBolt from "../pool/stonesplitter-bolt.js";
 import _poolStonybrookAngler from "../pool/stonybrook-angler.js";
 import _poolStormFleetAerialist from "../pool/storm-fleet-aerialist.js";
@@ -1715,6 +1716,7 @@ const shard: CardShard = {
     _poolStolenVitality,
     _poolStoneHavenMedic,
     _poolStoneRetrievalUnit,
+    _poolStonehornDignitary,
     _poolStonesplitterBolt,
     _poolStonybrookAngler,
     _poolStormFleetAerialist,

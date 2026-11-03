@@ -418,6 +418,7 @@ import _poolLoxodonWayfarer from "../pool/loxodon-wayfarer.js";
 import _poolLuminousBonds from "../pool/luminous-bonds.js";
 import _poolLuminousWake from "../pool/luminous-wake.js";
 import _poolLunarAvenger from "../pool/lunar-avenger.js";
+import _poolLurkingInformant from "../pool/lurking-informant.js";
 import _poolMach1SwoopingScoundrel from "../pool/mach-1-swooping-scoundrel.js";
 import _poolMagmaMine from "../pool/magma-mine.js";
 import _poolMagmaPhoenix from "../pool/magma-phoenix.js";
@@ -1288,6 +1289,7 @@ const shard: CardShard = {
     _poolLuminousBonds,
     _poolLuminousWake,
     _poolLunarAvenger,
+    _poolLurkingInformant,
     _poolMach1SwoopingScoundrel,
     _poolMagmaMine,
     _poolMagmaPhoenix,

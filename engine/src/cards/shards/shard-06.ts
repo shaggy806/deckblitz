@@ -133,6 +133,7 @@ import _poolCallToMind from "../pool/call-to-mind.js";
 import _poolCanopySpider from "../pool/canopy-spider.js";
 import _poolCaoCaoLordOfWei from "../pool/cao-cao-lord-of-wei.js";
 import _poolCapitalCity from "../pool/capital-city.js";
+import _poolCapriciousEfreet from "../pool/capricious-efreet.js";
 import _poolCapriciousSliver from "../pool/capricious-sliver.js";
 import _poolCaptureOfJingzhou from "../pool/capture-of-jingzhou.js";
 import _poolCaradoraHeartOfAlacria from "../pool/caradora-heart-of-alacria.js";
@@ -254,6 +255,7 @@ import _poolElrondMasterOfHealing from "../pool/elrond-master-of-healing.js";
 import _poolElvishEulogist from "../pool/elvish-eulogist.js";
 import _poolEmberstrikeDuo from "../pool/emberstrike-duo.js";
 import _poolEmeriaTheSkyRuin from "../pool/emeria-the-sky-ruin.js";
+import _poolEmptyCityRuse from "../pool/empty-city-ruse.js";
 import _poolEmpyreanEagle from "../pool/empyrean-eagle.js";
 import _poolEnclaveElite from "../pool/enclave-elite.js";
 import _poolEntrustTheSpark from "../pool/entrust-the-spark.js";
@@ -1018,6 +1020,7 @@ const shard: CardShard = {
     _poolCanopySpider,
     _poolCaoCaoLordOfWei,
     _poolCapitalCity,
+    _poolCapriciousEfreet,
     _poolCapriciousSliver,
     _poolCaptureOfJingzhou,
     _poolCaradoraHeartOfAlacria,
@@ -1139,6 +1142,7 @@ const shard: CardShard = {
     _poolElvishEulogist,
     _poolEmberstrikeDuo,
     _poolEmeriaTheSkyRuin,
+    _poolEmptyCityRuse,
     _poolEmpyreanEagle,
     _poolEnclaveElite,
     _poolEntrustTheSpark,

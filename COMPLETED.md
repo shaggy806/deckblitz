@@ -12,6 +12,16 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **Skipping a combat phase** (2026-11-02, `6bff2b9d2`): `skip-step`'s `step: "combat"`, `thisTurn` and `allOfNextTurn`;
+  Stonehorn Dignitary, Blinding Angel, Revenant Patriarch, Moment of Silence, False Peace, Empty City Ruse.
+- **A target chosen at random** (2026-11-02, `26319a038`): `targetsAtRandom`, real targets picked by the seeded RNG; Witch
+  Hunt, Knight Rampager, Scab-Clan Giant, Goblin Test Pilot, Power Pack; Capricious Efreet needed no code.
+- **Looking at another player's top card** (2026-11-02, `abdb13efa`): `put-into-graveyard` takes a library card, and the look's
+  own prompt; Rootwater Mystic, Lurking Informant, Coral Fighters, Precognition, Wand of Denial.
+- **Remove all of a kind of counter as a cost** (2026-11-02, `3db7e4ab9`): needed no code; Molten Hydra, Essence Bottle,
+  Geometric Nexus.
+- **A cost paid a chosen number of times** (2026-11-02, `3b4a4c919`): `may.costTimes`, one question and one payment, no new
+  decision kind; Intrepid Adversary, Primal Adversary, Tranquil Frillback.
 - **An ability's life cost read as it's paid** (2026-11-02, `aada9c187`): `AbilityLifeCost` half rounded up, X and per-count;
   Lurking Evil, Murderous Betrayal, Krumar Initiate, Tornado.
 - **A spell's additional cost in a keyword cost's shape** (2026-11-02, `10f0ee639`): `additionalCost.also` as a

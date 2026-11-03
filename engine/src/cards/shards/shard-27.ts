@@ -509,6 +509,7 @@ import _poolPitilessVizier from "../pool/pitiless-vizier.js";
 import _poolPlagueSpores from "../pool/plague-spores.js";
 import _poolPlowThroughReito from "../pool/plow-through-reito.js";
 import _poolPoisedPractitioner from "../pool/poised-practitioner.js";
+import _poolPowerPack from "../pool/power-pack.js";
 import _poolPreordain from "../pool/preordain.js";
 import _poolPreyUpon from "../pool/prey-upon.js";
 import _poolPriestOfTitania from "../pool/priest-of-titania.js";
@@ -1380,6 +1381,7 @@ const shard: CardShard = {
     _poolPlagueSpores,
     _poolPlowThroughReito,
     _poolPoisedPractitioner,
+    _poolPowerPack,
     _poolPreordain,
     _poolPreyUpon,
     _poolPriestOfTitania,

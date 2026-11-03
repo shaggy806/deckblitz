@@ -152,6 +152,7 @@ import _poolConsignToDream from "../pool/consign-to-dream.js";
 import _poolConsumingAetherborn from "../pool/consuming-aetherborn.js";
 import _poolCopperTablet from "../pool/copper-tablet.js";
 import _poolCoralAtoll from "../pool/coral-atoll.js";
+import _poolCoralFighters from "../pool/coral-fighters.js";
 import _poolCorruptedGrafstone from "../pool/corrupted-grafstone.js";
 import _poolCovetedFalcon from "../pool/coveted-falcon.js";
 import _poolCrackdownConstruct from "../pool/crackdown-construct.js";
@@ -335,6 +336,7 @@ import _poolGoShintaiOfSharedPurpose from "../pool/go-shintai-of-shared-purpose.
 import _poolGoblinBangchuckers from "../pool/goblin-bangchuckers.js";
 import _poolGoblinCaves from "../pool/goblin-caves.js";
 import _poolGoblinCommando from "../pool/goblin-commando.js";
+import _poolGoblinTestPilot from "../pool/goblin-test-pilot.js";
 import _poolGodsEyeGateToTheReikai from "../pool/gods-eye-gate-to-the-reikai.js";
 import _poolGoldForgedThopteryx from "../pool/gold-forged-thopteryx.js";
 import _poolGoliathTruck from "../pool/goliath-truck.js";
@@ -1039,6 +1041,7 @@ const shard: CardShard = {
     _poolConsumingAetherborn,
     _poolCopperTablet,
     _poolCoralAtoll,
+    _poolCoralFighters,
     _poolCorruptedGrafstone,
     _poolCovetedFalcon,
     _poolCrackdownConstruct,
@@ -1222,6 +1225,7 @@ const shard: CardShard = {
     _poolGoblinBangchuckers,
     _poolGoblinCaves,
     _poolGoblinCommando,
+    _poolGoblinTestPilot,
     _poolGodsEyeGateToTheReikai,
     _poolGoldForgedThopteryx,
     _poolGoliathTruck,

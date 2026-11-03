@@ -544,6 +544,7 @@ import _poolPlowThrough from "../pool/plow-through.js";
 import _poolPossibilityTechnician from "../pool/possibility-technician.js";
 import _poolPouncingCheetah from "../pool/pouncing-cheetah.js";
 import _poolPrecognitionField from "../pool/precognition-field.js";
+import _poolPrecognition from "../pool/precognition.js";
 import _poolPredatorsHowl from "../pool/predators-howl.js";
 import _poolPredatoryWurm from "../pool/predatory-wurm.js";
 import _poolPrimalAmulet from "../pool/primal-amulet.js";
@@ -588,6 +589,7 @@ import _poolRelicsRoar from "../pool/relics-roar.js";
 import _poolRepeatingBarrage from "../pool/repeating-barrage.js";
 import _poolResoluteRider from "../pool/resolute-rider.js";
 import _poolResoundingSilence from "../pool/resounding-silence.js";
+import _poolRevenantPatriarch from "../pool/revenant-patriarch.js";
 import _poolRiftSower from "../pool/rift-sower.js";
 import _poolRingOfThune from "../pool/ring-of-thune.js";
 import _poolRipApart from "../pool/rip-apart.js";
@@ -1435,6 +1437,7 @@ const shard: CardShard = {
     _poolPossibilityTechnician,
     _poolPouncingCheetah,
     _poolPrecognitionField,
+    _poolPrecognition,
     _poolPredatorsHowl,
     _poolPredatoryWurm,
     _poolPrimalAmulet,
@@ -1479,6 +1482,7 @@ const shard: CardShard = {
     _poolRepeatingBarrage,
     _poolResoluteRider,
     _poolResoundingSilence,
+    _poolRevenantPatriarch,
     _poolRiftSower,
     _poolRingOfThune,
     _poolRipApart,

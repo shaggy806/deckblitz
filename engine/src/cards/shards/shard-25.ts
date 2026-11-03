@@ -459,6 +459,7 @@ import _poolMoggInfestation from "../pool/mogg-infestation.js";
 import _poolMoggcatcher from "../pool/moggcatcher.js";
 import _poolMoltenCollapse from "../pool/molten-collapse.js";
 import _poolMoltenInfluence from "../pool/molten-influence.js";
+import _poolMomentOfSilence from "../pool/moment-of-silence.js";
 import _poolMonkOfTheOpenHand from "../pool/monk-of-the-open-hand.js";
 import _poolMonoskelion from "../pool/monoskelion.js";
 import _poolMoonbowIllusionist from "../pool/moonbow-illusionist.js";
@@ -1318,6 +1319,7 @@ const shard: CardShard = {
     _poolMoggcatcher,
     _poolMoltenCollapse,
     _poolMoltenInfluence,
+    _poolMomentOfSilence,
     _poolMonkOfTheOpenHand,
     _poolMonoskelion,
     _poolMoonbowIllusionist,

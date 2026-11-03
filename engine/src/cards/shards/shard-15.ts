@@ -393,6 +393,7 @@ import _poolKjeldoranGargoyle from "../pool/kjeldoran-gargoyle.js";
 import _poolKjeldoranOutpost from "../pool/kjeldoran-outpost.js";
 import _poolKjeldoranWarrior from "../pool/kjeldoran-warrior.js";
 import _poolKnightOfWundagore from "../pool/knight-of-wundagore.js";
+import _poolKnightRampager from "../pool/knight-rampager.js";
 import _poolKrallenhordeHowler from "../pool/krallenhorde-howler.js";
 import _poolKrovikanRot from "../pool/krovikan-rot.js";
 import _poolKyoshiIslandPlaza from "../pool/kyoshi-island-plaza.js";
@@ -794,6 +795,7 @@ import _poolVoraciousVermin from "../pool/voracious-vermin.js";
 import _poolVorapede from "../pool/vorapede.js";
 import _poolVraskasFinalMercy from "../pool/vraskas-final-mercy.js";
 import _poolWalkThePlank from "../pool/walk-the-plank.js";
+import _poolWandOfDenial from "../pool/wand-of-denial.js";
 import _poolWanderingGraybeard from "../pool/wandering-graybeard.js";
 import _poolWardenOfTheEye from "../pool/warden-of-the-eye.js";
 import _poolWarning from "../pool/warning.js";
@@ -1246,6 +1248,7 @@ const shard: CardShard = {
     _poolKjeldoranOutpost,
     _poolKjeldoranWarrior,
     _poolKnightOfWundagore,
+    _poolKnightRampager,
     _poolKrallenhordeHowler,
     _poolKrovikanRot,
     _poolKyoshiIslandPlaza,
@@ -1647,6 +1650,7 @@ const shard: CardShard = {
     _poolVorapede,
     _poolVraskasFinalMercy,
     _poolWalkThePlank,
+    _poolWandOfDenial,
     _poolWanderingGraybeard,
     _poolWardenOfTheEye,
     _poolWarning,

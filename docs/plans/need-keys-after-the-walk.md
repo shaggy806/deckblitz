@@ -835,7 +835,9 @@ missing. Re-run `--greedy` for Phase 2's order.
   `effect:choices-by-other-players` and `effect:unless-target-controller` (13), `effect:copy-spell-extensions` top unit (7),
   `trigger:combat-trigger-extensions` attack-counts unit (6), `effect:attack-batch-those-creatures` (5),
   `effect:delayed-trigger-rest-of-game` (5), `cost:choose-cards-as-cost` with a spell's additional cost taking
-  `KickerAlsoCost` (8), `cost:dynamic-life-cost` (4).
+  `KickerAlsoCost` (8), `cost:dynamic-life-cost` (4), `decision:pay-cost-up-to-n-times` (3), `cost:remove-all-counters` (3),
+  `effect:look-at-top-of-target-players-library` (5), `effect:random-target` (6, one needing no code),
+  `effect:skip-next-combat-phase` (6). The user stopped new agents here, 2026-11-02.
 
 ## Rough size
 
