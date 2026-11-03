@@ -9620,4 +9620,25 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       you: { bf: ['Rootpath Purifier', 'Evolving Wilds'], lib: ["Rogue's Passage", 'Grizzly Bears'] },
     }),
   ),
+  // --- Whole hands exiled face down, and back later (2026-11-02) ---
+  preset(
+    'Memory Jar: every hand is away until the end step',
+    board({
+      you: { bf: ['Memory Jar'], hand: ['Lightning Bolt'] },
+      opp: [{ hand: ['Grizzly Bears'] }, { hand: ['Forest'] }, {}],
+    }),
+  ),
+  preset(
+    'Suppress: the hand comes back at the end of that player\'s next turn',
+    board({
+      you: { bf: ['Swamp*3'], hand: ['Suppress'] },
+      opp: { hand: ['Grizzly Bears'] },
+    }),
+  ),
+  preset(
+    'Moonring Mirror: your upkeep swaps your hand for the hidden cards',
+    board({
+      you: { bf: ['Moonring Mirror', 'Island*3'], hand: ['Divination', 'Lightning Bolt'], lib: ['Grizzly Bears', 'Forest', 'Sol Ring', 'Ornithopter'] },
+    }),
+  ),
 ]

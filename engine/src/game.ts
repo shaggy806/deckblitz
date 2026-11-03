@@ -7924,6 +7924,16 @@ export class Game {
     this.state.delayedTriggers = this.state.delayedTriggers.filter(
       (t) => !(typeof t.at === "object" && "whenever" in t.at && beginningFor.includes(t.controller)),
     );
+    // "At the beginning of the end step of that player's next turn": that turn
+    // is known once it begins, and one whose end step never came (a Sundial of
+    // the Infinite) lets it lapse, unfired.
+    this.state.delayedTriggers = this.state.delayedTriggers
+      .filter((t) => !(t.at === "your-next-turn-end-step" && t.turnBegan === true))
+      .map((t) =>
+        t.at === "your-next-turn-end-step" && beginningFor.includes(t.turnOf ?? t.controller)
+          ? { ...t, turnBegan: true as const }
+          : t,
+      );
     // So do attack-requirement rules (Kardur, Doomscourge's "until your next
     // turn, creatures your opponents control attack each combat …").
     // A "this turn" one ends with its turn, a "during that player's next
@@ -30138,8 +30148,9 @@ export class Game {
       exileFromHand: (card) => {
         if (this.state.objects[card]?.zone === "hand") this.moveObject(card, "exile");
       },
-      exileGraveyard: (target, filter, linked, fromHand, untilSourceLeaves) => {
+      exileGraveyard: (target, filter, linked, fromHand, untilSourceLeaves, faceDown) => {
         if (target.kind !== "player") return;
+        const since = this.state.eventSeq;
         // Rule 610.3b: exiled "until" something that has already happened —
         // its source gone, or back as a new object (400.7) — it isn't exiled.
         if (untilSourceLeaves === true && !sourceStillOn()) return;
@@ -30179,6 +30190,7 @@ export class Game {
             src.exiledWithCount = { stint, count: sofar + exiled.length };
           }
         }
+        if (faceDown === true) this.turnExiledFaceDown(exiled, [], since);
       },
       sacrificeAll: (players, filter) => {
         // Every one at once, nobody choosing (rule 603.10a — each one's dies
@@ -30385,7 +30397,7 @@ export class Game {
         target.kind === "object" && this.state.objects[target.object]?.zone === "battlefield"
           ? { kind: "object", object: this.splitOneFromStack(target.object) }
           : target,
-      delayTrigger: (at, effect, text, delayedController, own) =>
+      delayTrigger: (at, effect, text, delayedController, own, turnOf) =>
         this.createDelayedTrigger(
           source,
           delayedController,
@@ -30399,6 +30411,7 @@ export class Game {
           {
             ...(triggerObject !== undefined ? { triggerObject } : {}),
             refs,
+            ...(turnOf !== undefined ? { turnOf } : {}),
           },
         ),
       entersWithCounters: (target, counter, given) => {
@@ -30547,18 +30560,7 @@ export class Game {
           const stint = refs.source ?? (src?.zone === "battlefield" ? (src.zoneChangeCount ?? 0) : undefined);
           if (stint !== undefined) this.linkExiledToSource(exiled, source, stint);
         }
-        // Rule 406.3: nobody may look, or the player told to look first. It
-        // comes with no look for a linked source's next controller.
-        if (faceDown !== undefined) {
-          for (const id of exiled) {
-            this.state.objects[id].exiledFaceDown = {
-              lookers: faceDown === "looked" ? [controller] : [],
-              group: since,
-              lookersOnly: true,
-            };
-          }
-          this.forgetStints(exiled, since);
-        }
+        if (faceDown !== undefined) this.turnExiledFaceDown(exiled, faceDown === "looked" ? [controller] : [], since);
       },
       turnExiledFaceUp: () => {
         const src = this.state.objects[source];
@@ -42068,7 +42070,7 @@ export class Game {
     targets: ResolvedTargets,
     targetZones: readonly (ZoneType | null)[] = [],
     /** The creating ability's trigger object, and how it knew it. */
-    creator: { readonly triggerObject?: ObjectId; readonly refs?: LastKnownRefs } = {},
+    creator: { readonly triggerObject?: ObjectId; readonly refs?: LastKnownRefs; readonly turnOf?: PlayerId } = {},
   ): void {
     let when:
       | DelayedTriggerTiming
@@ -42159,6 +42161,7 @@ export class Game {
       id: `delayed-${this.state.nextObjectSeq++}`,
       controller,
       at: when,
+      ...(creator.turnOf !== undefined ? { turnOf: creator.turnOf } : {}),
       createdOnTurn: this.state.turn.number,
       createdDuringEndStep:
         this.state.turn.step === "end" || this.state.turn.step === "cleanup",
@@ -42199,6 +42202,7 @@ export class Game {
     // A leave-keyed trigger waits on its permanent, not on a step.
     if (typeof trigger.at === "object") return false;
     const active = this.activePlayer;
+    const whose = trigger.turnOf ?? trigger.controller;
     const laterTurn = this.state.turn.number > trigger.createdOnTurn;
     // This turn's end step still counts, unless the trigger was created
     // during it (or in cleanup) — then "the next end step" is next turn's.
@@ -42207,7 +42211,9 @@ export class Game {
       case "next-end-step":
         return step === "end" && endStepOk;
       case "your-next-end-step":
-        return step === "end" && endStepOk && active === trigger.controller;
+        return step === "end" && endStepOk && active === whose;
+      case "your-next-turn-end-step":
+        return step === "end" && trigger.turnBegan === true;
       // A turn's own upkeep is over by the time anything could create one of
       // these, so the next `enterStep("upkeep")` is a later turn's — or an
       // additional upkeep step this turn (Obeka, Splitter of Seconds), which
@@ -42218,7 +42224,7 @@ export class Game {
         return (
           step === "upkeep" &&
           (laterTurn || this.state.turn.addedUpkeep === true) &&
-          active === trigger.controller
+          active === whose
         );
       // Made during this combat's end of combat step, it waits for the next
       // one: this step began before it existed.
@@ -42243,7 +42249,7 @@ export class Game {
         // ruling).
         return (
           (step === "precombat-main" || step === "postcombat-main") &&
-          active === trigger.controller
+          active === whose
         );
     }
   }
@@ -48440,6 +48446,18 @@ export class Game {
         card.exiledFaceDown = { ...faceDown, lookers: [...faceDown.lookers, controller] };
       }
     }
+  }
+
+  /**
+   * Cards an effect has just exiled are face down (rule 406.3): only `lookers`
+   * may look, whoever comes to control a source they're linked to, and what
+   * the log knew of them since `since` is forgotten.
+   */
+  private turnExiledFaceDown(exiled: readonly ObjectId[], lookers: readonly PlayerId[], since: number): void {
+    for (const id of exiled) {
+      this.state.objects[id].exiledFaceDown = { lookers: [...lookers], group: since, lookersOnly: true };
+    }
+    this.forgetStints(exiled, since);
   }
 
   private forgetStints(ids: readonly ObjectId[], since?: number): void {

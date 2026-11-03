@@ -1318,7 +1318,11 @@
   "static:cant-have-keyword",
   "static:static-add-chosen-type",
   "static:static-grant-supertype",
-  "static:characteristics-of-library-cards"
+  "static:characteristics-of-library-cards",
+  "effect:return-all-graveyards-under-owners-control",
+  "effect:return-from-all-graveyards-to-hand",
+  "effect:exile-hands-face-down-return-later",
+  "effect:delayed-trigger-next-turn-end-step"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

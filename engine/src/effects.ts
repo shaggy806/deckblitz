@@ -3424,15 +3424,16 @@ export type EffectSpec =
        * the player putting them there, the effect's controller (rule
        * 110.2a), not their owners' as a "return" is (610.3c). */
       readonly under?: "you";
-      /** With `linked: "battlefield"`: only the **other** cards exiled with
+      /** With `linked`: only the **other** cards exiled with
        * it — not the ones this resolution has just exiled (Mirror of Life
        * Trapping's "exile it, then return all other permanent cards exiled
        * with this artifact", Mysterious Limousine's "return each other card
-       * exiled with this Vehicle"). */
+       * exiled with this Vehicle", Moonring Mirror's into a hand). */
       readonly others?: true;
-      /** With `linked: "battlefield"`: only the linked cards this takes
-       * ("all other **permanent** cards" — rule 110.4b), read in exile. The
-       * rest stay exiled with it. */
+      /** With `linked: "battlefield"` or `"hand"`: only the linked cards this
+       * takes ("all other **permanent** cards" — rule 110.4b; Bottled
+       * Cloister's "all cards **you own** exiled with this artifact"), read in
+       * exile. The rest stay exiled with it. */
       readonly filter?: CardFilter;
     }
   | {
@@ -3549,6 +3550,12 @@ export type EffectSpec =
        * cards from it" (Hour of Glory). A hand holds no public cards, so a
        * `reveal-hand` goes before it. Every match goes: no search, no choice. */
       readonly fromHand?: "also" | "only";
+      /** With `fromHand`: **face down** (rule 406.3), nobody may look, their
+       * owner included: "target player exiles all cards from their hand face
+       * down" (Suppress). `linked` is "the exiled cards" of Induced Amnesia's
+       * other ability; a `delayed-trigger`'s `about: "exiled"` is "those
+       * cards" (Ignorant Bliss). They have no characteristics there (406.3a). */
+      readonly faceDown?: true;
       /** "…**until this artifact leaves the battlefield**" (Idol of Endurance
        * — rule 610.3): nothing is exiled if the source has already left
        * (610.3b); when it leaves, each card goes back to its owner's graveyard,
@@ -4024,6 +4031,14 @@ export type EffectSpec =
        * Wings of Hubris's "sacrifice **it** at the beginning of the next end
        * step", the creature it equipped. */
       readonly about?: ThisWayKind | "attached";
+      /** With `about`: set up with nothing done too, for an ability with more
+       * to do than act on those cards: Ignorant Bliss's "return those cards to
+       * your hand, **then draw a card**" with an empty hand. */
+      readonly orNone?: true;
+      /** With a `"your-…"` step timing: **that player's** turn, not the
+       * controller's, whose ability it stays (rule 603.7d): Suppress's "the end
+       * step of that player's next turn". Fixed as this resolves. */
+      readonly turnOf?: ChosenPlayerRef;
     }
   | {
       /** "That creature enters with two additional +1/+1 counters on it"
@@ -9959,6 +9974,8 @@ export interface EffectApi {
     controller: PlayerId,
     /** Its targets, in place of the creating ability's (`about`). */
     targets?: readonly TargetRef[],
+    /** Whose turn a `"your-…"` timing waits for, if not `controller`'s. */
+    turnOf?: PlayerId,
   ): void;
   /** See the `"enters-with-counters"` {@link EffectSpec}. */
   entersWithCounters(target: TargetRef, counter: string, amount: number): void;
@@ -10074,7 +10091,7 @@ export interface EffectApi {
   ): void;
   /** Exile every card in `target`'s graveyard (a player — Bojuka Bog), as
    * one move. */
-  exileGraveyard(target: TargetRef, filter?: CardFilter, linked?: boolean, fromHand?: "also" | "only", untilSourceLeaves?: boolean): void;
+  exileGraveyard(target: TargetRef, filter?: CardFilter, linked?: boolean, fromHand?: "also" | "only", untilSourceLeaves?: boolean, faceDown?: true): void;
   /** See `exile`'s `fromHand`. */
   exileFromHand(card: ObjectId): void;
   /** Each of `players` sacrifices every permanent matching `filter` they
@@ -14594,7 +14611,11 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     }
     case "return-exiled-by-source": {
       if (spec.linked === "hand") {
-        for (const card of ctx.cardsExiledWithSource()) ctx.returnToHand({ kind: "object", object: card }, "exile");
+        const justExiled = spec.others === true ? ctx.cardsExiledThisWay() : [];
+        for (const card of ctx.cardsExiledWithSource()) {
+          if (justExiled.includes(card) || (spec.filter !== undefined && !ctx.cardMatches(card, spec.filter))) continue;
+          ctx.returnToHand({ kind: "object", object: card }, "exile");
+        }
         return;
       }
       if (spec.linked === "graveyard") {
@@ -14691,7 +14712,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         const scope = spec.target;
         ctx.simultaneously(() => {
           for (const player of ctx.playersInScope(scope)) {
-            ctx.exileGraveyard({ kind: "player", player }, spec.filter, spec.linked === true, spec.fromHand);
+            ctx.exileGraveyard({ kind: "player", player }, spec.filter, spec.linked === true, spec.fromHand, undefined, spec.faceDown);
           }
         });
         return;
@@ -14705,7 +14726,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       } else {
         target = ctx.targets[spec.target];
       }
-      if (target !== undefined) ctx.exileGraveyard(target, spec.filter, spec.linked === true, spec.fromHand, spec.untilSourceLeaves === true);
+      if (target !== undefined) ctx.exileGraveyard(target, spec.filter, spec.linked === true, spec.fromHand, spec.untilSourceLeaves === true, spec.faceDown);
       return;
     }
     case "sacrifice-all":
@@ -14994,12 +15015,14 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         if (host !== undefined) ctx.delayTrigger(spec.at, spec.effect, spec.text, controller, [host]);
         return;
       }
+      const turnOf = spec.turnOf === undefined ? undefined : effectPlayer(spec.turnOf, ctx);
+      if (spec.turnOf !== undefined && turnOf === undefined) return;
       if (spec.about !== undefined) {
         const done = ctx.thisWay(spec.about).map((e) => ({ kind: "object", object: e.object }) as const);
-        if (done.length > 0) ctx.delayTrigger(spec.at, spec.effect, spec.text, controller, done);
+        if (done.length > 0 || spec.orNone === true) ctx.delayTrigger(spec.at, spec.effect, spec.text, controller, done, turnOf);
         return;
       }
-      ctx.delayTrigger(spec.at, spec.effect, spec.text, controller);
+      ctx.delayTrigger(spec.at, spec.effect, spec.text, controller, undefined, turnOf);
       return;
     }
     case "enters-with-counters": {

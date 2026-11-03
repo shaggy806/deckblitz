@@ -6365,3 +6365,22 @@ These boards start before the first turn (the builder's `openingHands`), with th
 - **Do:** Activate Evolving Wilds.
 - **Expect:** The search offers Rogue's Passage, which isn't printed as basic, and not Grizzly Bears.
 - **Not a bug:** The builder fills the rest of the library with basic lands, so those are offered too.
+- **Do:** Cast Open the Vaults. As Bob, choose Grizzly Bears for Pacifism.
+- **Expect:** Sol Ring comes back under you, and Glorious Anthem and Pacifism under Bob. Pacifism enchants your Grizzly Bears.
+
+## Whole hands exiled face down, and back later (2026-11-02)
+
+### Memory Jar: every hand is away until the end step
+
+- **Do:** Activate Memory Jar. Pass to the end step.
+- **Expect:** After activating, every player has seven new cards, and what they held is a card back in exile that nobody can read, you included. At the end step those seven go to the graveyards, and you have Lightning Bolt back.
+
+### Suppress: the hand comes back at the end of that player's next turn
+
+- **Do:** Cast Suppress on Bob. Pass until Bob's turn ends.
+- **Expect:** Bob's hand stays exiled through your end step. It returns at the end step of Bob's turn.
+
+### Moonring Mirror: your upkeep swaps your hand for the hidden cards
+
+- **Do:** Cast Divination. Pass to your next upkeep and answer yes.
+- **Expect:** Divination draws two, and two more cards go face down into exile. At your upkeep those two come to your hand, and the rest of your hand goes face down.

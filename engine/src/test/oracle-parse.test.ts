@@ -8422,6 +8422,83 @@ describe("a sweep of the cards put into a graveyard from the battlefield this tu
     });
   });
 
+
+  it("reads a whole hand exiled face down, only with the delayed ability about it", () => {
+    const back = { kind: "for-each-target", from: 0, simultaneous: true, effect: { kind: "return-to-hand", target: 0, from: "exile" } };
+    const exile = (target: unknown) => ({ kind: "exile-graveyard", target, fromHand: "only", faceDown: true });
+    const jar = spell(
+      "Each player exiles all cards from their hand face down and draws seven cards. At the beginning of the next end step, each player discards their hand and returns to their hand each card they exiled this way.",
+    );
+    expect(jar.complete).toBe(true);
+    expect(jar.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        exile("each-player"),
+        { kind: "draw", amount: 7, who: "each-player" },
+        {
+          kind: "delayed-trigger",
+          at: "next-end-step",
+          about: "exiled",
+          orNone: true,
+          effect: { kind: "sequence", effects: [{ kind: "discard-hand", who: "each-player" }, back] },
+          text: "Each player discards their hand and returns to their hand each card they exiled this way.",
+        },
+      ],
+    });
+    const suppress = spell(
+      "Target player exiles all cards from their hand face down. At the beginning of the end step of that player's next turn, that player returns those cards to their hand.",
+    );
+    expect(suppress.complete).toBe(true);
+    expect(suppress.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        exile(0),
+        {
+          kind: "delayed-trigger",
+          at: "your-next-turn-end-step",
+          turnOf: { target: 0 },
+          about: "exiled",
+          effect: back,
+          text: "That player returns those cards to their hand.",
+        },
+      ],
+    });
+    // Alone it may be linked to another ability of its card, which it can't see.
+    expect(spell("Exile all cards from your hand face down.").complete).toBe(false);
+  });
+
+  it("reads a sweep of every graveyard, under each owner or to each owner's hand", () => {
+    const base = { kind: "return-from-graveyard", count: "all" };
+    expect(spell("Return all artifact and enchantment cards from all graveyards to the battlefield under their owners' control.").effect).toEqual({
+      ...base,
+      from: "each-graveyard",
+      filter: { typesAnyOf: ["artifact", "enchantment"] },
+      destination: "battlefield",
+    });
+    expect(spell("Return all basic land cards from all graveyards to the battlefield tapped under their owners' control.").effect).toEqual({
+      ...base,
+      from: "each-graveyard",
+      filter: { supertype: "basic", type: "land" },
+      destination: "battlefield",
+      enterTapped: true,
+    });
+    expect(spell("Return all Zombie cards from all graveyards to their owners' hands.").effect).toEqual({
+      ...base,
+      from: "all-graveyards",
+      filter: { subtype: "Zombie" },
+      destination: "hand",
+    });
+    expect(spell("Each player returns each creature card from their graveyard to the battlefield with an additional -1/-1 counter on it.").effect).toEqual({
+      ...base,
+      from: "each-graveyard",
+      filter: { type: "creature" },
+      destination: "battlefield",
+      withCounters: { kind: "-1/-1", amount: 1 },
+    });
+    // Two colours aren't a type list: left for hand authoring.
+    expect(spell("Each player returns all black and all red creature cards from their graveyard to the battlefield.").complete).toBe(false);
+  });
+
   it("leaves a graveyard and a verb that don't go together unread", () => {
     // Another player's card under its owner's control isn't "return".
     const odd = spell("Return to the battlefield all creature cards in their graveyard that were put there from the battlefield this turn.");

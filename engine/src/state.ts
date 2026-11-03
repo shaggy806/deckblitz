@@ -4265,6 +4265,11 @@ export type DelayedTriggerTiming =
   | "your-next-upkeep"
   | "your-next-end-step"
   | "your-next-main-phase"
+  /** The end step of your next **turn**: never the turn it was made in, though
+   * `"your-next-end-step"` would be that turn's (Kav Landseeker; with
+   * `turnOf`, Suppress's "the end step of that player's next turn"). A next
+   * turn whose end step never comes lets it lapse, unfired. */
+  | "your-next-turn-end-step"
   /** "At end of combat" — the beginning of the next end of combat step
    * (rule 511.2): myriad's "exile the tokens at end of combat". */
   | "end-of-combat"
@@ -4592,6 +4597,11 @@ export interface DelayedTrigger {
     | DelayedUnblockedWatch
     | DelayedWheneverWatch
     | DelayedLoseControlWatch;
+  /** The player whose turn a `"your-…"` timing waits for, when it isn't its
+   * controller's (rule 603.7d: the ability stays its creator's) — Suppress. */
+  readonly turnOf?: PlayerId;
+  /** `"your-next-turn-end-step"`: that turn has begun, and is this one. */
+  readonly turnBegan?: true;
   /** The creating ability's trigger object, and its `zoneChangeCount` then
    * — "return **that card** to the battlefield" (Shirei, Shizo's Caretaker).
    * It's the delayed ability's trigger object too, as long as it's still that

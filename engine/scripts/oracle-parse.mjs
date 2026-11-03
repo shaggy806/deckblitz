@@ -6311,6 +6311,15 @@ export function parseEffect(text, outer) {
       skip = extraTurn.used - 1;
       continue;
     }
+    const handsAway = handsFaceDownAt(sentences, i, ctx);
+    if (handsAway !== null) {
+      for (const effect of handsAway.effects) {
+        parsed.push(effect);
+        hints.push({ sentence, effect });
+      }
+      skip = handsAway.used - 1;
+      continue;
+    }
     const blocks = blocksAtEndOfCombatAt(sentences, i, ctx);
     if (blocks !== null) {
       parsed.push(blocks.effect);
@@ -7186,6 +7195,106 @@ function extraTurnScopeAt(sentences, i) {
   if (used === 1) return null;
   if (Object.keys(thatTurn).length > 0) effect.thatTurn = thatTurn;
   return { effect, used };
+}
+
+/**
+ * Whole hands exiled face down, and the delayed ability about them: "each
+ * player exiles all cards from their hand face down and draws seven cards. At
+ * the beginning of the next end step, each player discards their hand and
+ * returns to their hand each card they exiled this way" (Memory Jar), "exile
+ * all cards from your hand face down. At the beginning of the next end step,
+ * return those cards to your hand, then draw a card" (Ignorant Bliss), "target
+ * player exiles all cards from their hand face down. At the beginning of the
+ * end step of that player's next turn, that player returns those cards to
+ * their hand" (Suppress). A sentence alone might be linked to another ability
+ * of its card, which it can't see, so only the pairs are read.
+ */
+function handsFaceDownAt(sentences, i, ctx) {
+  const first = (sentences[i] ?? "").toLowerCase();
+  const next = (sentences[i + 1] ?? "").toLowerCase();
+  const back = {
+    kind: "for-each-target",
+    from: 0,
+    simultaneous: true,
+    effect: { kind: "return-to-hand", target: 0, from: "exile" },
+  };
+  const exile = (target) => ({ kind: "exile-graveyard", target, fromHand: "only", faceDown: true });
+  if (
+    first === "each player exiles all cards from their hand face down and draws seven cards." &&
+    next === "at the beginning of the next end step, each player discards their hand and returns to their hand each card they exiled this way."
+  ) {
+    return {
+      effects: [
+        exile("each-player"),
+        { kind: "draw", amount: 7, who: "each-player" },
+        {
+          kind: "delayed-trigger",
+          at: "next-end-step",
+          about: "exiled",
+          orNone: true,
+          effect: { kind: "sequence", effects: [{ kind: "discard-hand", who: "each-player" }, back] },
+          text: "Each player discards their hand and returns to their hand each card they exiled this way.",
+        },
+      ],
+      used: 2,
+    };
+  }
+  if (
+    first === "exile all cards from your hand face down." &&
+    next === "at the beginning of the next end step, return those cards to your hand, then draw a card."
+  ) {
+    return {
+      effects: [
+        exile("you"),
+        {
+          kind: "delayed-trigger",
+          at: "next-end-step",
+          about: "exiled",
+          orNone: true,
+          effect: { kind: "sequence", effects: [back, { kind: "draw", amount: 1 }] },
+          text: "Return those cards to your hand, then draw a card.",
+        },
+      ],
+      used: 2,
+    };
+  }
+  if (
+    first === "target player exiles all cards from their hand face down." &&
+    next === "at the beginning of the end step of that player's next turn, that player returns those cards to their hand."
+  ) {
+    const target = ctx.target("player");
+    return {
+      effects: [
+        exile(target),
+        {
+          kind: "delayed-trigger",
+          at: "your-next-turn-end-step",
+          turnOf: { target },
+          about: "exiled",
+          effect: back,
+          text: "That player returns those cards to their hand.",
+        },
+      ],
+      used: 2,
+    };
+  }
+  // "Create a Lander token. At the beginning of the end step on your next
+  // turn, sacrifice that token" (Kav Landseeker).
+  if (first === "at the beginning of the end step on your next turn, sacrifice that token.") {
+    return {
+      effects: [
+        {
+          kind: "delayed-trigger",
+          at: "your-next-turn-end-step",
+          about: "created",
+          effect: { kind: "sacrifice-target", target: 0 },
+          text: "Sacrifice that token.",
+        },
+      ],
+      used: 1,
+    };
+  }
+  return null;
 }
 
 function blocksAtEndOfCombatAt(sentences, i, ctx) {

@@ -960,6 +960,11 @@ export function handsPlayedRevealed(state: GameState, registry: CardRegistry, vi
   return sightOf(state, registry, viewer).hands;
 }
 
+/** A target that is a card exiled face down the viewer isn't shown. */
+function isHiddenExile(state: GameState, shown: Readonly<Record<ObjectId, VisibleObject>>, target: TargetRef): boolean {
+  return target.kind === "object" && shown[target.object] === undefined && state.objects[target.object]?.exiledFaceDown !== undefined;
+}
+
 export function viewFor(
   state: GameState,
   registry: CardRegistry,
@@ -1227,6 +1232,15 @@ function viewForUncached(
       const withHeld = held === undefined ? base : { ...base, holding: held };
       const withCost = cost === null ? withHeld : { ...withHeld, effectiveManaCost: cost };
       objects[id] = tax === null ? withCost : { ...withCost, commanderTax: tax };
+    }
+  }
+  // "Return those cards": what an ability on the stack acts on is shown as its
+  // targets, but a card exiled face down isn't this viewer's to know of by that
+  // (rule 406.3) — it's a face-down back in exile, not a name on the stack.
+  for (const id of state.zones.shared.stack) {
+    const object = objects[id];
+    if (object?.targets?.some((t) => isHiddenExile(state, objects, t))) {
+      objects[id] = { ...object, targets: object.targets.filter((t) => !isHiddenExile(state, objects, t)) };
     }
   }
 

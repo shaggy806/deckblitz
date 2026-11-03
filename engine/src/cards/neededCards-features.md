@@ -4161,3 +4161,16 @@ with, so an effect adding "basic" comes before a "nonbasic lands" one whatever t
 static:static-grant-supertype, static:characteristics-of-library-cards (the "land cards in your library" half). Found to
 need no code: static:static-add-chosen-type (`addsChosenCreatureType`). Proving cards: On Serra's Wings, In Bolas's Clutches,
 Leyline of Singularity, Glittering Frost, Rimefeather Owl, Rootpath Purifier, Lifecraft Engine.
+**Every graveyard at once (2026-11-02).** No new vocabulary: `return-from-graveyard`'s `from: "each-graveyard"` (each card
+under its owner's control, `enterTapped`, `withCounters`) and `from: "all-graveyards"` with `destination: "hand"` (each to its
+owner's) already ran these, and the scaffolder now reads them. `sacrifice-all`'s filter now sees its source, for "all other
+creatures". Keys: effect:return-all-graveyards-under-owners-control, effect:return-from-all-graveyards-to-hand. Proving cards:
+Open the Vaults, Planar Birth, Pyrrhic Revival, Bringer of the Last Gift, Infernal Caretaker, Saprazzan Bailiff.
+
+**Whole hands exiled face down, and back later (2026-11-02).** `exile-graveyard`'s `faceDown` with `fromHand: "only"` (through
+the face-down step `exile-from-library` has, `turnExiledFaceDown`), read by a delayed ability's `about: "exiled"`, whose new
+`orNone` sets it up with nothing done, or by a linked ability: `return-exiled-by-source`'s `linked: "hand"` now takes `filter`
+("cards you own") and `others`. Timing `your-next-turn-end-step`, and `turnOf` for a `your-…` timing on another player's turn
+(rule 603.7d). The view leaves hidden cards out of a stack object's targets. Keys: effect:exile-hands-face-down-return-later,
+effect:delayed-trigger-next-turn-end-step. Proving cards: Memory Jar, Magus of the Jar, Ignorant Bliss, Suppress, Induced
+Amnesia, Bottled Cloister, Moonring Mirror, Kav Landseeker.
