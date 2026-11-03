@@ -4831,7 +4831,39 @@ export type PendingEntry =
       readonly under?: Readonly<Record<string, PlayerId>>;
       /** Counters a card enters with (a discarded Dodecapod's). */
       readonly withCounters?: Readonly<Record<string, { readonly kind: string; readonly amount: number }>>;
+    }
+  | {
+      /** Token copies an effect is creating, not on the battlefield yet,
+       * until each has made its "as this enters" choices (rule 614.12a —
+       * `Game.createTokenCopy`). One group per copied object, all of them
+       * entering together. */
+      readonly kind: "token-copies";
+      readonly groups: readonly EnteringTokenCopies[];
     };
+
+/**
+ * One copied object's tokens on their way onto the battlefield: `tokens`
+ * exist only as answers wait on them (`zone: "outside"`, in no zone's list, so
+ * nothing in the game can see or affect them), then enter under `controller`.
+ * The rest is what the effect still has to do with them.
+ */
+export interface EnteringTokenCopies {
+  readonly tokens: readonly ObjectId[];
+  readonly controller: PlayerId;
+  /** What a would-create-token replacement made instead of some of them
+   * (Divine Visitation's Angels), with what the effect does to those. */
+  readonly replaced: readonly { readonly name: string; readonly count: number }[];
+  readonly riders: readonly PtModifier[];
+  readonly tapped: boolean;
+  readonly exileAtEndStep: boolean;
+  readonly sacrificeAtEndStep: boolean;
+  readonly atYourNextEndStep: boolean;
+  readonly exileAtEndOfCombat: boolean;
+  readonly sacrificeAtEndOfCombat: boolean;
+  readonly attacking?: ResolvedEnterAttacking;
+  readonly source?: ObjectId;
+  readonly effectController?: PlayerId;
+}
 
 /**
  * The steps of a resolution still to apply, with everything its resolution

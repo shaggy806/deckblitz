@@ -9650,4 +9650,33 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { human: true, gy: ['Pacifism', 'Glorious Anthem'] },
     }),
   ),
+
+  preset(
+    'Rebuild the City: each copy of Cavern of Souls names its own creature type',
+    board({
+      you: { bf: ['Cavern of Souls', 'Swamp*2', 'Mountain*2', 'Forest*2'], hand: ['Rebuild the City'] },
+      opp: [{}],
+    }),
+  ),
+  preset(
+    'Rebuild the City: each copy of a shock land offers the life',
+    board({
+      you: { bf: ['Stomping Ground', 'Swamp*2', 'Mountain*2', 'Forest*2'], hand: ['Rebuild the City'] },
+      opp: [{}],
+    }),
+  ),
+  preset(
+    'Rite of Replication: each copy of a Clone chooses what to copy',
+    board({
+      you: { bf: ['Hulking Metamorph', 'Island*9'], hand: ['Rite of Replication'] },
+      opp: [{ bf: ['Hill Giant', 'Serra Angel'] }],
+    }),
+  ),
+  preset(
+    'Replication Technique: a copy of Pacifism asks what it enchants',
+    board({
+      you: { bf: ['Island*5', 'Grizzly Bears', { name: 'Pacifism', attach: 'Grizzly Bears' }], hand: ['Replication Technique'] },
+      opp: [{}, { bf: ['Serra Angel'] }, {}],
+    }),
+  ),
 ]

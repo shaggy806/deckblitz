@@ -3207,6 +3207,10 @@ in `git log`.
   graveyard move".
 - **E2** — every invented placeholder card replaced with a real printing.
 - **E3** — five more cycles and the text-structure audit (`card:verify --text`).
+- **Token copies' "as this enters" choices** (`bug:token-copy-skips-as-enters-choices`, `bug:token-copy-aura-attach-choice`, 2026-11-02) —
+  a token copy settles them off the battlefield, each token for itself, then all of one
+  instruction's enter together through `moveObject` (`token-copy-as-enters.test.ts`): Rebuild the
+  City, Kindred Charge, Ember Island Production.
 - **Curses** (`mechanic:curses`, 2026-10-05, TDC6) — an Aura that enchants a
   player (`GameObject.attachedToPlayer`, rule 303.4, with the 303.4f choice of
   player), "whenever enchanted player is attacked" (`curseWhenAttacked`) and

@@ -228,9 +228,10 @@ describe("changeling — every creature type (rule 702.73a)", () => {
 
   it("is copied with the rest of the card — a token copy is every creature type", () => {
     const game = makeGame();
-    const morophon = spawn(game, MOROPHON);
+    // Not Morophon: a copy of it would stop to choose a creature type.
+    const automaton = spawn(game, "Universal Automaton");
     const before = new Set(game.battlefield);
-    on(game, morophon, { kind: "create-token-copy", of: 0, count: 1, notLegendary: true });
+    on(game, automaton, { kind: "create-token-copy", of: 0, count: 1, notLegendary: true });
     const copy = game.battlefield.find((id) => !before.has(id))!;
     expect(game.state.objects[copy].isToken).toBe(true);
     expect(matches(game, copy, { subtype: "Goblin" })).toBe(true);

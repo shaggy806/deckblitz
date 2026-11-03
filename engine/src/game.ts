@@ -414,6 +414,7 @@ import type {
   LeaveDestination,
   MulliganHandState,
   TurnHistory,
+  EnteringTokenCopies,
   PendingEntry,
   PendingTrigger,
   PhasedOutStatus,
@@ -997,6 +998,19 @@ function cipherTrigger(card: ObjectId, zoneChangeCount: number, name: string): T
  * rather than applied after the move, so a replacement can still override
  * it (The Wandering Minstrel's "lands you control enter untapped" beats a
  * "put it onto the battlefield tapped"). */
+/**
+ * Token copies an effect is about to create, the would-create-token
+ * replacements already applied (`Game.createTokenCopy`): how many of the copy
+ * there are and what they're made as, and the rest of an
+ * {@link EnteringTokenCopies}.
+ */
+interface PlannedTokenCopies extends Omit<EnteringTokenCopies, "tokens"> {
+  readonly copyName: string;
+  readonly total: number;
+  readonly modifiers: PtModifier[];
+  readonly notLegendary: boolean;
+}
+
 interface EnterOptions {
   /** "…onto the battlefield tapped". */
   readonly tapped?: boolean;
@@ -1847,6 +1861,11 @@ export class Game {
    * makes several kinds of token: see {@link withTokenEvent}. Not game state:
    * it only ever spans one synchronous call. */
   private tokenEventUsed: Set<string> | null = null;
+  /** Token copies one instruction is making of several permanents, planned
+   * and not yet made, so they settle their "as this enters" choices and enter
+   * together: see {@link withTokenCopyEvent}. Not game state: it only ever
+   * spans one synchronous call. */
+  private heldTokenCopies: PlannedTokenCopies[] | null = null;
   /** The player whose leaving the game (`leaveGame`) is under way. While it
    * is, their own cards may still move — off the stack, as they leave — and
    * nothing triggers on it: those cards left the game rather than going
@@ -12625,14 +12644,31 @@ export class Game {
     const spec = def.targets[0];
     if (spec === undefined) return false;
     const onBattlefield = this.state.objects[aura]?.zone === "battlefield";
-    const types = onBattlefield ? computeCharacteristics(this.state, this.registry, aura).types : def.types;
-    if (types.includes("creature")) return false;
+    if (this.enteringAuraTypes(aura, def).includes("creature")) return false;
     const ref: TargetRef = { kind: "object", object: host };
     if (!isLegalTarget(this.state, this.registry, spec, ref, controller, undefined, { notTargeted: true })) {
       return false;
     }
     const source = onBattlefield ? this.permanentSource(aura) : this.enteringSource(def, aura);
     return !protectionBlocks(this.state, this.registry, host, source, aura, controller);
+  }
+
+  /** The card types of the Aura `aura`, as `def`: as they are on the
+   * battlefield; for a token copy about to enter, `def`'s under the copy's
+   * exceptions ("except they're 3/3 Dragon creatures" — Astral Dragon's
+   * ruling: a creature can enchant nothing, so no token); otherwise `def`'s. */
+  private enteringAuraTypes(aura: ObjectId, def: CardDefinition): readonly CardType[] {
+    const object = this.state.objects[aura];
+    if (object?.zone === "battlefield") return computeCharacteristics(this.state, this.registry, aura).types;
+    let types = def.types;
+    if (object?.isToken === true && object.zone === "outside" && (object.enterChoice?.copyOf ?? null) === null) {
+      for (const m of object.modifiers) {
+        if (m.copiable !== true) continue;
+        if (m.setTypes !== undefined) types = m.setTypes;
+        if (m.addTypes !== undefined) types = [...types, ...m.addTypes];
+      }
+    }
+    return types;
   }
 
   /** `cardSource`, of a card put onto the battlefield rather than cast — an
@@ -12691,8 +12727,7 @@ export class Game {
     ) {
       return false;
     }
-    const types = onBattlefield ? computeCharacteristics(this.state, this.registry, aura).types : def.types;
-    if (types.includes("creature")) return false;
+    if (this.enteringAuraTypes(aura, def).includes("creature")) return false;
     return isLegalTarget(this.state, this.registry, spec, { kind: "player", player }, controller, undefined, {
       notTargeted: true,
     });
@@ -23810,6 +23845,7 @@ export class Game {
     else if (entry.kind === "land") this.finishLandPlay(entry);
     else if (entry.kind === "exiled-return") this.returnExiledCards(entry.objects);
     else if (entry.kind === "held-entries") this.enterHeldEntries(entry.objects, entry.under, entry.withCounters);
+    else if (entry.kind === "token-copies") this.enterTokenCopies(entry);
     else this.finishZoneChoice(entry);
   }
 
@@ -30304,7 +30340,7 @@ export class Game {
             this.withEnterBatch(() => this.withDamageBatch(() => this.withTokenEvent(fn))),
           ),
         ),
-      oneTokenEvent: (fn) => this.withTokenEvent(fn),
+      oneTokenEvent: (fn) => this.withTokenCopyEvent(fn),
       flicker: (flickered, options) => this.flickerByEffect(source, controller, flickered, options),
       meld: (self, partnerFilter, into, partner) => this.meldByEffect(controller, x, self, partnerFilter, into, partner),
       returnFlickered: (link, thenCounters, underYourControl, transformed, tapped) =>
@@ -35587,6 +35623,30 @@ export class Game {
   }
 
   /**
+   * {@link withTokenEvent} for one instruction copying several permanents
+   * ("for each creature you control of the chosen type, create a token that's
+   * a copy of that creature"): every copy `fn` asks for is planned, and made
+   * only once all of them are, so a copy that stops to choose as it enters
+   * finds none of the others on the battlefield (`carryOutTokenCopies`).
+   */
+  private withTokenCopyEvent(fn: () => void): void {
+    this.withTokenEvent(() => {
+      if (this.heldTokenCopies !== null) {
+        fn();
+        return;
+      }
+      const held: PlannedTokenCopies[] = [];
+      this.heldTokenCopies = held;
+      try {
+        fn();
+      } finally {
+        this.heldTokenCopies = null;
+      }
+      this.carryOutTokenCopies(held);
+    });
+  }
+
+  /**
    * What `count` tokens of `kind` come to under `controller`'s
    * would-create-token replacements (`token-replacements.ts`): `null` for
    * the tokens themselves, anything else by name. Each token of a stack is
@@ -35741,69 +35801,209 @@ export class Game {
       if (m.addSubtypes !== undefined) copiedSubtypes = [...copiedSubtypes, ...m.addSubtypes];
     }
     const plan = this.tokenEventPlan(controller, { types: copiedTypes, subtypes: copiedSubtypes }, count);
-    const total = plan.find((t) => t.name === null)?.count ?? 0;
-    // Tokens removed at the end step are each their own object, so the
-    // delayed trigger over them reaches every one (`endStepTokenRemoval`).
-    const removedAtEnd = opts.exileAtEndStep || opts.sacrificeAtEndStep === true;
+    const planned: PlannedTokenCopies = {
+      controller,
+      copyName,
+      total: plan.find((t) => t.name === null)?.count ?? 0,
+      replaced: plan.flatMap((t) => (t.name === null ? [] : [{ name: t.name, count: t.count }])),
+      modifiers,
+      riders: modifiers.filter((m) => m.copiable !== true),
+      notLegendary: opts.notLegendary || (departed !== undefined ? departed.notLegendary === true : of!.notLegendary === true),
+      tapped: opts.tapped === true,
+      exileAtEndStep: opts.exileAtEndStep,
+      sacrificeAtEndStep: opts.sacrificeAtEndStep === true,
+      atYourNextEndStep: opts.atYourNextEndStep === true,
+      exileAtEndOfCombat: opts.exileAtEndOfCombat === true,
+      sacrificeAtEndOfCombat: opts.sacrificeAtEndOfCombat === true,
+      ...(opts.attacking !== undefined ? { attacking: opts.attacking } : {}),
+      ...(opts.source !== undefined ? { source: opts.source } : {}),
+      ...(opts.effectController !== undefined ? { effectController: opts.effectController } : {}),
+    };
+    if (this.heldTokenCopies !== null) this.heldTokenCopies.push(planned);
+    else this.carryOutTokenCopies([planned]);
+  }
+
+  /**
+   * Create token copies already planned, one instruction's worth. Most are
+   * simply minted. But if any has something to settle as it enters (rule
+   * 614.12: a Clone's copy, a chosen word, what an Aura enchants, a shock
+   * land's life) they all wait, off the battlefield: the choice is made
+   * before the permanent enters (614.12a), and they enter at once, so none of
+   * them is there to be chosen by another. How many there are is settled
+   * first, then each chooses for itself (the Bard, King of Dale ruling).
+   */
+  private carryOutTokenCopies(plans: readonly PlannedTokenCopies[]): void {
+    if (!plans.some((p) => this.tokenCopySettlesAsItEnters(p))) {
+      for (const p of plans) this.mintTokenCopies(p);
+      return;
+    }
+    const groups = plans.map((p): EnteringTokenCopies => {
+      const tokens: ObjectId[] = [];
+      for (let i = 0; i < Math.min(p.total, Game.MAX_EFFECT_INSTANCES); i += 1) tokens.push(this.mintEnteringToken(p));
+      const { copyName: _name, total: _total, modifiers: _modifiers, notLegendary: _legendary, ...rest } = p;
+      return { ...rest, tokens };
+    });
+    const entry = { kind: "token-copies", groups } as const;
+    // Something else is being asked: it's answered first.
+    if (this.state.awaiting !== null) this.state.suspendedResolutions.push({ effect: null, enter: entry });
+    else this.enterTokenCopies(entry);
+  }
+
+  /** A token of `planned`, not on the battlefield yet: `zone: "outside"`, in
+   * no zone's list, so nothing in the game can see or affect it (rule
+   * 400.11c) while its "as this enters" choices wait on it. `moveObject` takes
+   * it from there, keeping what it was made as. */
+  private mintEnteringToken(planned: PlannedTokenCopies): ObjectId {
+    const id = this.mintFreshTokenObject(
+      planned.controller,
+      planned.copyName,
+      planned.copyName,
+      planned.modifiers,
+      planned.exileAtEndStep,
+      planned.notLegendary,
+      true,
+      false,
+      planned.sacrificeAtEndStep,
+    );
+    const token = this.state.objects[id];
+    token.zone = "outside";
+    // What minting it applied is applied again as it enters, answers and all.
+    token.counters = {};
+    token.tapped = false;
+    delete token.tributeUnpaid;
+    return id;
+  }
+
+  /** Whether a token copy has anything to settle as it enters that minting
+   * doesn't: an "as this enters" choice, or a land's life or damage for
+   * entering untapped (rule 614.12). A copy of a Clone that copied something
+   * copies what it copied, so that card's are the ones asked of. */
+  private tokenCopySettlesAsItEnters(planned: PlannedTokenCopies): boolean {
+    if (planned.total <= 0) return false;
+    const probe = this.mintEnteringToken(planned);
+    const settles = this.nextEnterChoice(probe) !== null;
+    delete this.state.objects[probe];
+    if (settles) return true;
+    const def = this.registry.get(planned.copyName);
+    return (
+      def.becomesDayAsEnters ||
+      def.static.some(
+        (s) =>
+          s.replacement?.event === "enters-battlefield" &&
+          (s.replacement.mayPayLife !== undefined || s.replacement.painIfUntapped !== undefined),
+      )
+    );
+  }
+
+  /**
+   * The token copies of `entry` enter the battlefield, together — once each
+   * has made its "as this enters" choices (rule 614.12a), which it stops to
+   * ask first, parking the entry (`PendingEntry`) and the rest of the
+   * resolution beneath it until they're answered. One that can't enter was
+   * never created (303.4g: an Aura token with nothing to enchant).
+   */
+  private enterTokenCopies(entry: Extract<PendingEntry, { kind: "token-copies" }>): void {
+    for (const group of entry.groups) {
+      for (const id of group.tokens) {
+        if (this.askEnterChoice(id, group.controller)) {
+          this.state.suspendedResolutions.push({ effect: null, enter: entry });
+          return;
+        }
+      }
+    }
+    const made = this.withEnterBatch(() =>
+      entry.groups.map((group) => {
+        const entered: ObjectId[] = [];
+        for (const id of group.tokens) {
+          const token = this.state.objects[id];
+          if (token === undefined) continue;
+          const copyName = printedCardName(token);
+          const copiedAgain = token.enterChoice?.copyOf !== undefined && token.enterChoice.copyOf !== null;
+          if (!this.moveObject(id, "battlefield", group.tapped ? { tapped: true } : {})) {
+            delete this.state.objects[id];
+            continue;
+          }
+          this.state.players[group.controller].createdTokenThisTurn = true;
+          if (!copiedAgain) this.emit({ type: "permanent-copied", object: id, copyOf: copyName });
+          this.emit({ type: "permanent-entered-battlefield", object: id });
+          entered.push(id);
+        }
+        return [...entered, ...this.mintReplacedTokenCopies(group)];
+      }),
+    );
+    entry.groups.forEach((group, i) => this.finishTokenCopies(group, made[i]));
+  }
+
+  /** Mint token copies with nothing to settle as they enter: at once, as a
+   * stack where they can be one. */
+  private mintTokenCopies(planned: PlannedTokenCopies): void {
     const made = this.withEnterBatch(() => [
       ...this.mintTokenBatch(
-        controller,
-        copyName,
-        copyName,
-        total,
-        modifiers,
-        opts.exileAtEndStep,
-        opts.notLegendary || (departed !== undefined ? departed.notLegendary === true : of!.notLegendary === true),
+        planned.controller,
+        planned.copyName,
+        planned.copyName,
+        planned.total,
+        planned.modifiers,
+        planned.exileAtEndStep,
+        planned.notLegendary,
         true,
-        opts.tapped === true,
-        opts.sacrificeAtEndStep === true,
+        planned.tapped,
+        planned.sacrificeAtEndStep,
         undefined,
-        removedAtEnd,
+        planned.exileAtEndStep || planned.sacrificeAtEndStep,
       ),
-      // Chatterfang's Squirrels and Divine Visitation's Angels: nothing of
-      // what was copied, only what the effect does to the tokens (the
-      // ruling).
-      ...plan.flatMap((t) =>
-        t.name === null
-          ? []
-          : this.mintTokenBatch(
-              controller,
-              t.name,
-              null,
-              t.count,
-              [...this.tokenNameModifier(t.name), ...modifiers.filter((m) => m.copiable !== true)],
-              opts.exileAtEndStep,
-              false,
-              false,
-              opts.tapped === true,
-              opts.sacrificeAtEndStep === true,
-              undefined,
-              removedAtEnd,
-            ),
-      ),
+      ...this.mintReplacedTokenCopies(planned),
     ]);
+    this.finishTokenCopies(planned, made);
+  }
+
+  /** Chatterfang's Squirrels and Divine Visitation's Angels: nothing of what
+   * was copied, only what the effect does to the tokens (the ruling). */
+  private mintReplacedTokenCopies(group: PlannedTokenCopies | EnteringTokenCopies): readonly ObjectId[] {
+    return group.replaced.flatMap((t) =>
+      this.mintTokenBatch(
+        group.controller,
+        t.name,
+        null,
+        t.count,
+        [...this.tokenNameModifier(t.name), ...group.riders.map((m) => ({ ...m }))],
+        group.exileAtEndStep,
+        false,
+        false,
+        group.tapped,
+        group.sacrificeAtEndStep,
+        undefined,
+        group.exileAtEndStep || group.sacrificeAtEndStep,
+      ),
+    );
+  }
+
+  /** What an effect does with the token copies it made, once they're there. */
+  private finishTokenCopies(group: PlannedTokenCopies | EnteringTokenCopies, made: readonly ObjectId[]): void {
+    const { controller, source, effectController, attacking } = group;
+    // Tokens removed at the end step are each their own object, so the
+    // delayed trigger over them reaches every one (`endStepTokenRemoval`).
     // "Exile / sacrifice them at the beginning of the next end step": one
     // delayed triggered ability over every copy made (rule 603.7).
-    if (removedAtEnd && opts.source !== undefined) {
+    if ((group.exileAtEndStep || group.sacrificeAtEndStep) && source !== undefined) {
       this.endStepTokenRemoval(
-        opts.source,
-        opts.effectController ?? controller,
+        source,
+        effectController ?? controller,
         made,
-        opts.sacrificeAtEndStep === true ? "sacrifice" : "exile",
-        opts.atYourNextEndStep === true ? "your-next-end-step" : "next-end-step",
+        group.sacrificeAtEndStep ? "sacrifice" : "exile",
+        group.atYourNextEndStep ? "your-next-end-step" : "next-end-step",
       );
     }
     // "…that's tapped and attacking" (rule 508.4).
-    if (opts.attacking !== undefined) this.putIntoAttack(made, controller, opts.attacking);
+    if (attacking !== undefined) this.putIntoAttack(made, controller, attacking);
     // "Exile the tokens at end of combat": one delayed triggered ability over
     // every copy made (rule 603.7), which leaves alone any that has left the
     // battlefield by then (rule 400.7).
-    const atEndOfCombat =
-      opts.exileAtEndOfCombat === true ? "Exile" : opts.sacrificeAtEndOfCombat === true ? "Sacrifice" : undefined;
-    if (atEndOfCombat !== undefined && made.length > 0 && opts.source !== undefined) {
+    const atEndOfCombat = group.exileAtEndOfCombat ? "Exile" : group.sacrificeAtEndOfCombat ? "Sacrifice" : undefined;
+    if (atEndOfCombat !== undefined && made.length > 0 && source !== undefined) {
       this.createDelayedTrigger(
-        opts.source,
-        opts.effectController ?? controller,
+        source,
+        effectController ?? controller,
         "end-of-combat",
         {
           kind: "for-each-target",
@@ -48572,9 +48772,13 @@ export class Game {
     // A token that has left the battlefield can't move to another zone or
     // come back onto it (rule 111.8): it stays where it is until state-based
     // actions end it (111.7). Tokens are minted straight onto the battlefield,
-    // never through here; a copy of a permanent spell is a token on the stack
-    // that has never been on the battlefield, and resolves onto it (707.10f).
-    if (object.isToken && object.zone !== "battlefield" && object.zone !== "stack") return false;
+    // never through here, but for two that have never been on it: a copy of a
+    // permanent spell, a token on the stack that resolves onto it (707.10f),
+    // and a token copy that had "as this enters" choices to make first, not
+    // created yet (`mintEnteringToken`, rule 614.12a), which keeps what it was
+    // made as.
+    const enteringToken = object.isToken === true && object.zone === "outside" && to === "battlefield";
+    if (object.isToken && object.zone !== "battlefield" && object.zone !== "stack" && !enteringToken) return false;
     // An instant or sorcery card that would enter the battlefield stays where
     // it was (rule 400.4a) — unless it enters face down, as a 2/2 creature
     // with no other characteristics (rules 701.40a, 708.2a): manifested,
@@ -48889,8 +49093,9 @@ export class Game {
     // spell's copy becoming a token (608.3f, by now `isToken`) keeps its
     // copiable values too: "except the copy isn't legendary" (707.9b,
     // 707.10f).
-    const keptPrototype =
-      object.zone === "stack" && to === "battlefield"
+    const keptPrototype = enteringToken
+      ? object.modifiers
+      : object.zone === "stack" && to === "battlefield"
         ? object.modifiers.filter(
             (m) => m.prototype === true || m.castRider === true || (object.isToken && m.copiable === true),
           )
@@ -49077,7 +49282,7 @@ export class Game {
     object.controller = object.owner;
     // A copy effect ends when the object changes zones (rule 707.2) — a Clone
     // that dies and returns is a Clone again.
-    object.copyOf = null;
+    if (!enteringToken) object.copyOf = null;
     delete object.temporaryCopies;
     delete object.copyBase;
     // So does an exchange of text boxes (rule 612.5): a new object has its
@@ -49125,6 +49330,13 @@ export class Game {
           this.setCopiableValues(object, { copyOf: enterChoice.copyOf, modifiers: copied }, "end-of-turn");
         } else {
           object.copyOf = enterChoice.copyOf;
+          // A token already a copy (of a Clone) copies something else now,
+          // and what it copies replaces its copiable values, the exceptions
+          // of the first copy too (rule 707.3, layer 1's order — 613.7).
+          if (object.isToken) {
+            object.modifiers = object.modifiers.filter((m) => m.copiable !== true);
+            delete object.notLegendary;
+          }
           object.modifiers.push(...copied);
         }
         this.emit({ type: "permanent-copied", object: id, copyOf: enterChoice.copyOf });
@@ -49216,7 +49428,7 @@ export class Game {
     delete object.grantedGraveyardKeywords;
     delete object.foretoldCost;
     object.suspended = false;
-    object.exileAtEndStep = false;
+    if (!enteringToken) object.exileAtEndStep = false;
     object.foretold = false;
     object.foretoldOnTurn = null;
     // A plotted card stops being one as it leaves exile (rule 702.170).

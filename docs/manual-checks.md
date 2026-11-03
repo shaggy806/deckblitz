@@ -6390,3 +6390,26 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 - **Do:** Cast Open the Vaults. As Bob, choose Grizzly Bears for Pacifism.
 - **Expect:** Sol Ring comes back under you, and Glorious Anthem and Pacifism under Bob. Pacifism enchants your Grizzly Bears.
+
+## A token copy's choices as it enters (2026-11-02)
+
+### Rebuild the City: each copy of Cavern of Souls names its own creature type
+
+- **Do:** Cast Rebuild the City on your Cavern of Souls. Answer each question with a different creature type.
+- **Expect:** You're asked to choose a creature type three times, before any token is on the battlefield. Then three 3/3 Cavern of Souls land creature tokens enter with vigilance and menace, each showing the type you gave it.
+
+### Rebuild the City: each copy of a shock land offers the life
+
+- **Do:** Cast Rebuild the City on your Stomping Ground. Pay 2 life for the first token and decline for the others.
+- **Expect:** You're asked three times. You lose 2 life once, and of the three tokens one is untapped and two are tapped.
+
+### Rite of Replication: each copy of a Clone chooses what to copy
+
+- **Do:** Cast Rite of Replication, kicked, on your Hulking Metamorph. Choose Hill Giant for one token and Serra Angel for another, and whatever you like for the rest.
+- **Expect:** You're asked five times, and only creatures already on the battlefield can be picked, none of the new tokens. Each token is what you picked for it.
+
+### Replication Technique: a copy of Pacifism asks what it enchants
+
+- **Do:** Cast Replication Technique on your Pacifism, and don't copy the spell. Pick Carol's Serra Angel when asked.
+- **Expect:** You're asked what the new Pacifism enchants, picking on the board among every creature at the table. It enters attached to the Serra Angel, and your Grizzly Bears stay under the first Pacifism.
+- **Not a bug:** This isn't targeting, so a creature with hexproof could be picked.

@@ -156,7 +156,7 @@ describe("copy exceptions", () => {
   it("set types: only what they say, and the subtypes that went with the rest go too (rule 205.1a)", () => {
     const { game } = setUp();
     // A changeling card: every creature type, as long as it's a creature.
-    const morophon = game.debugSpawn("Morophon, the Boundless", A, "graveyard");
+    const morophon = game.debugSpawn("Universal Automaton", A, "graveyard");
     expect(hasSubtype(game.characteristics(morophon).subtypes, "Goblin")).toBe(true);
     const token = copyOf(game, morophon, { setTypes: ["enchantment"] });
     const c = game.characteristics(token);

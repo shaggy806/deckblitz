@@ -1200,6 +1200,12 @@ function viewForUncached(
     const companion = revealedCompanion(state, player);
     if (companion !== null) visibleIds.push(companion);
   }
+  // Token copies waiting on their "as this enters" choices: what's being
+  // created is public, so the choices made for them can be named.
+  for (const parked of state.suspendedResolutions) {
+    if (parked.effect !== null || parked.enter?.kind !== "token-copies") continue;
+    for (const group of parked.enter.groups) visibleIds.push(...group.tokens);
+  }
 
   const holdings = exileHoldings(state);
   const objects: Record<ObjectId, VisibleObject> = {};
