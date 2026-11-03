@@ -3518,6 +3518,12 @@ tapOthers?, untap? }`.
   number of colors in your commanders' color identity" (`AbilityLifeCost`, read
   off `PlayerState.commanderIdentity` as it's activated): 0 for a colourless
   commander, and not activatable at all without a commander (the rulings).
+- `unattach`: an unattach as a cost (rule 701.3d), unpayable with nothing
+  attached. `"self"` is Sunforger's "Unattach this Equipment"; `"granter"` a
+  granted "{T}, Unattach Leonin Bola", whoever controls it, its effects reading
+  `"granter"` (`from: "granter"`, `return-to-hand`); `{ filter }` the player's
+  choice of what's attached to the source, read back as `"sacrificed"` (Captain
+  America's `divided: { total: { manaValueOf: "sacrificed" }, slot: 0 }`).
 - `payLife: 2`, `payEnergy: 3`, `removeCounter: { kind: "+1/+1", count: 1 }`,
   `discardHand: true`, `exileSelf: true`, `returnSelfToHand: true`,
   `exertSelf: true` — all paid automatically (no decision). `exertSelf` is

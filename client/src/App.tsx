@@ -5665,12 +5665,15 @@ function Table({
     // cost to cast (rule 601.2f — Harrow "sacrifice a land"). P8.
     // The choices are picked on the board, where each one is highlighted —
     // a list of names can't tell two Forests apart.
-    const noun = sacrificeNoun(pendingSac, view, pendingSac.sacrifice.choices)
+    // Or "Unattach an Equipment from Captain America" (rule 701.3d), offered
+    // the same way.
+    const unattach = pendingSac.sacrifice.unattach === true
+    const noun = unattach ? 'Equipment' : sacrificeNoun(pendingSac, view, pendingSac.sacrifice.choices)
     controls = (
       <div className="controls">
         <span>
           {pendingSac.cardName} — choose {/^[aeiou]/i.test(noun) ? 'an' : 'a'} {noun} to{' '}
-          {pendingSac.sacrifice.exile === true ? 'exile' : 'sacrifice'}
+          {unattach ? 'unattach' : pendingSac.sacrifice.exile === true ? 'exile' : 'sacrifice'}
         </span>
         <button type="button" onClick={() => setPendingSac(null)}>
           Cancel
@@ -7185,7 +7188,7 @@ function Table({
             // apart, so they belong in the key too.
             // So is a modal ability, once per mode.
             // And one naming each opponent who may choose its targets.
-            key: `${ab.abilityIndex}:${ab.manaColors?.join('') ?? ''}:${ab.modes?.join(',') ?? ''}:${ab.otherChooser ?? ''}`,
+            key: `${ab.abilityIndex}:${ab.manaColors?.join('') ?? ''}:${ab.modes?.join(',') ?? ''}:${ab.otherChooser ?? ''}:${ab.divide?.total ?? ''}`,
             label:
               (ab.text || `Ability ${ab.abilityIndex + 1}`) +
               (ab.otherChooser !== undefined ? ` (${playerLabel(ab.otherChooser, game.seats)} chooses)` : ''),

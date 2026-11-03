@@ -6295,3 +6295,24 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 - **Do:** Cast The Creation of Avacyn and choose Grizzly Bears from your library. Pass to your next turn.
 - **Expect:** After chapter I the Bears are face down in your exile. After chapter II they're face up and you've lost 2 life.
+## Unattaching an Equipment as a cost (2026-11-02)
+
+### Leonin Bola: the creature pays by taking it off
+
+- **Do:** Click Grizzly Bears and activate the ability it has from Leonin Bola, targeting Bob's Hill Giant.
+- **Expect:** The Bears tap, Leonin Bola moves off them onto your board by itself, and the Hill Giant taps. The Bears no longer offer the ability.
+
+### Sunforger: nothing to unattach while it's off
+
+- **Do:** Click Sunforger, then equip it to Grizzly Bears and click it again.
+- **Expect:** The first time only Equip is offered. Once it's on the Bears, the "Unattach this Equipment" search is offered too.
+
+### Captain America: each Equipment throws for its own mana value
+
+- **Do:** Click Captain America. Choose the "(2 to divide)" offer, then target Bob and Carol's Grizzly Bears, one damage each.
+- **Expect:** The menu has both "(1 to divide)" and "(2 to divide)". Vulshok Morningstar comes off, Bonesplitter stays on, Bob loses 1 life and the Bears take 1 damage.
+
+### Captain America: two Equipment of one mana value are picked on the board
+
+- **Do:** Click Captain America and activate his Throw ability.
+- **Expect:** The banner reads "Captain America, First Avenger — choose an Equipment to unattach", with both Bonesplitters highlighted. Click one, target Bob: Bob loses 1 life and only that Bonesplitter comes off.

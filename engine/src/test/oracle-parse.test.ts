@@ -6957,6 +6957,26 @@ describe("the card discarded to pay a cost", () => {
         { kind: "return-to-hand", target: "granter" },
       ],
     });
+    // "Unattach [it]" (rule 701.3d) is the granter's too, alone or beside {T}.
+    const bola = face(
+      "Leonin Bola",
+      "Artifact — Equipment",
+      "Equipped creature has \"{T}, Unattach Leonin Bola: Tap target creature.\"\nEquip {1}",
+    );
+    expect(bola.complete).toBe(true);
+    expect(bola.static[0].grantsActivated[0].cost).toEqual({ mana: null, tap: true, unattach: "granter" });
+    const powder = face(
+      "Bare Powder",
+      "Artifact — Equipment",
+      "Equipped creature has \"Unattach Bare Powder: Tap target creature.\"\nEquip {2}",
+    );
+    expect(powder.static[0].grantsActivated[0].cost).toEqual({ mana: null, tap: false, unattach: "granter" });
+    const sunforger = face(
+      "Sunforger",
+      "Artifact — Equipment",
+      "{R}{W}, Unattach this Equipment: Draw a card.",
+    );
+    expect(sunforger.activated[0].cost).toEqual({ mana: "{R}{W}", tap: false, unattach: "self" });
     // A granter named any other way is left to a person.
     const pole = face(
       "Fishing Pole",

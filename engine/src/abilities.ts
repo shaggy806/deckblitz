@@ -363,6 +363,24 @@ export interface AbilityCost {
    * hand: …"). Paid as the ability is activated, so nothing can answer it;
    * the ability resolves without its source, read as it last existed. */
   readonly returnSelfToHand?: boolean;
+  /**
+   * Unattach an Equipment as part of the cost (rule 701.3d): it stays on the
+   * battlefield, attached to nothing, and it becomes unattached as the cost
+   * is paid. Unpayable unless it's attached (Sunforger's ruling; rule 118.3).
+   *
+   * - `"self"`: the source itself — Sunforger's "Unattach this Equipment".
+   * - `"granter"`: the Equipment that grants this ability, from the creature
+   *   holding it — Leonin Bola's "{T}, Unattach Leonin Bola". Who controls the
+   *   Equipment doesn't matter (its ruling); the creature's controller
+   *   activates. Effects read it as `"granter"`, after the grant has gone.
+   * - `{ filter }`: one attached to the source that the player chooses,
+   *   Captain America's "Unattach an Equipment from Captain America". Offered
+   *   and named on the action as a sacrifice is (the offer's `sacrifice`, with
+   *   `unattach`), and read back as `"sacrificed"` for "that Equipment's mana
+   *   value". A `divided` total that reads it gets one offer per total, since
+   *   the division is announced with the cost's choice (rule 601.2d).
+   */
+  readonly unattach?: "self" | "granter" | { readonly filter: CardFilter };
   /** Exert the source as part of the cost (rule 701.43 — Oasis Ritualist's
    * "{T}, Exert this creature: Add two mana of any one color"): it won't
    * untap during its controller's next untap step. Payable tapped or not, and

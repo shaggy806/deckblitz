@@ -628,6 +628,11 @@ const COST_READ_CARD_TYPES: readonly CardType[] = [
 ];
 
 /** Whether a `costModification` applies only to a spell with certain targets. */
+/** Whether an amount reads the permanent a cost names (`"sacrificed"`). */
+function amountReadsSacrificed(amount: EffectAmount): boolean {
+  return JSON.stringify(amount).includes('"sacrificed"');
+}
+
 function isTargetKeyed(mod: NonNullable<StaticAbility["costModification"]>): boolean {
   return mod.targeting !== undefined || mod.targetingSource === true;
 }
@@ -2534,6 +2539,15 @@ export class Game {
         ) {
           return "the ability requires sacrificing a permanent you control";
         }
+        // The one Equipment a chosen unattach names (rule 701.3d).
+        if (
+          ability !== undefined &&
+          typeof ability.cost.unattach === "object" &&
+          (action.sacrifice === undefined ||
+            !this.unattachCandidates(action.player, action.source, ability.cost.unattach, undefined).includes(action.sacrifice))
+        ) {
+          return "the ability requires unattaching an Equipment from it";
+        }
         // The chosen targets, judged as `activateAbility` judges them — not
         // only that each slot has some legal option (Hotfoot Gnome's "another
         // target creature" aimed at itself, Pirate Hat's Equip Pirate at a
@@ -3318,6 +3332,12 @@ export class Game {
       const minX = ability.minX ?? 0;
       if (maxX !== undefined && maxX < minX) return;
       const plainMana = plainTapMana(ability, makes);
+      // "Unattach an Equipment from Captain America" (rule 701.3d): what this
+      // offer's cost may unattach, named on the action as a sacrifice is.
+      let unattachChoices: readonly ObjectId[] | undefined =
+        typeof ability.cost.unattach === "object"
+          ? this.unattachCandidates(player, source, ability.cost.unattach, undefined)
+          : undefined;
       const push = (
         targetOptions: readonly (readonly TargetRef[])[],
         xCost?: { readonly maxX: number; readonly minX?: number },
@@ -3329,7 +3349,7 @@ export class Game {
         const divide =
           ability.divided === undefined
             ? undefined
-            : this.dividedNow(ability.divided, source, player, xCost?.minX === xCost?.maxX ? xCost?.maxX : undefined);
+            : this.dividedNow(ability.divided, source, player, xCost?.minX === xCost?.maxX ? xCost?.maxX : undefined, unattachChoices?.[0]);
         const targetSpecs =
           divide === undefined ? specsAsActivated : specsCappedByDivision(specsAsActivated, divide);
         const modal = ability.effect?.kind === "modal" ? ability.effect : undefined;
@@ -3352,7 +3372,12 @@ export class Game {
           source,
           abilityIndex: index,
           cardName,
-          text: xCost?.minX !== undefined && xCost.minX === xCost.maxX ? `${label} (X=${xCost.minX})` : label,
+          text:
+            xCost?.minX !== undefined && xCost.minX === xCost.maxX
+              ? `${label} (X=${xCost.minX})`
+              : unattachChoices !== undefined && divide !== undefined
+                ? `${label} (${divide.total} to divide)`
+                : label,
           ...(manaColors !== undefined ? { manaColors } : {}),
           ...(manaSplit !== undefined ? { manaSplit } : {}),
           targetSpecs,
@@ -3371,6 +3396,7 @@ export class Game {
                 },
               }
             : {}),
+          ...(unattachChoices !== undefined ? { sacrifice: { choices: unattachChoices, unattach: true as const } } : {}),
           ...(() => {
             const tapCost = this.abilityTapCostOffer(
               player,
@@ -3467,6 +3493,23 @@ export class Game {
         (targets) => this.whyCannotActivateAbility(player, source, index, undefined, undefined, targets) === null,
       );
       if (taxed && !targetsFillable(activatedSpecs, offeredTargets, [], 0, stateTargetFacts(this.state, this.registry))) return;
+      // "That Equipment's mana value divided as you choose": how much there is
+      // to divide hangs on the cost's choice, announced together (rule
+      // 601.2d), so the ability is offered once per total. Nothing to divide
+      // leaves no legal division: each target must receive at least one.
+      const divided = ability.divided;
+      if (unattachChoices !== undefined && divided !== undefined && amountReadsSacrificed(divided.total)) {
+        const byTotal = new Map<number, ObjectId[]>();
+        for (const id of unattachChoices) {
+          const { total } = this.dividedNow(divided, source, player, undefined, id);
+          if (total > 0) byTotal.set(total, [...(byTotal.get(total) ?? []), id]);
+        }
+        for (const choices of byTotal.values()) {
+          unattachChoices = choices;
+          push(offeredTargets, undefined, activatedSpecs);
+        }
+        return;
+      }
       push(offeredTargets, maxX !== undefined ? { maxX, ...(minX > 0 ? { minX } : {}) } : undefined, activatedSpecs);
     };
 
@@ -18466,6 +18509,38 @@ export class Game {
     });
   }
 
+  /** What an {@link AbilityCost.unattach} could unattach (rule 701.3d): `[]`
+   * when nothing is attached, which leaves the cost unpayable (rule 118.3).
+   * No word of who controls it: "It doesn't matter who controls Leonin Bola". */
+  private unattachCandidates(
+    player: PlayerId,
+    sourceId: ObjectId,
+    unattach: NonNullable<AbilityCost["unattach"]>,
+    /** The ability's granter, for a `"granter"` cost (see `granterNow`). */
+    granter: ObjectId | undefined,
+  ): readonly ObjectId[] {
+    if (unattach === "self") return (this.state.objects[sourceId]?.attachedTo ?? null) === null ? [] : [sourceId];
+    if (unattach === "granter") {
+      return granter !== undefined && this.state.objects[granter]?.attachedTo === sourceId ? [granter] : [];
+    }
+    return this.state.zones.shared.battlefield.filter(
+      (id) =>
+        this.state.objects[id]?.attachedTo === sourceId &&
+        matchesFilter(this.state, this.registry, id, unattach.filter, { you: player, source: sourceId }),
+    );
+  }
+
+  /** Unattach `id` (rule 701.3d): on the battlefield, attached to nothing, and
+   * it has become unattached. An effect's or an {@link AbilityCost.unattach}. */
+  private unattachNow(id: ObjectId): void {
+    const object = this.state.objects[id];
+    const from = object?.attachedTo ?? null;
+    if (from === null) return;
+    object.attachedTo = null;
+    invalidateComputedCache();
+    this.emit({ type: "permanent-unattached", object: id, from });
+  }
+
   /** The permanents `player` could sacrifice for one part of a cost of
    * several (see `sacrificeCostParts`): theirs, matching `filter`, not the
    * source when the cost says "another", and able to be sacrificed (rule
@@ -20047,6 +20122,19 @@ export class Game {
     ) {
       return `${player} has nothing to sacrifice for ${def.name}'s ability`;
     }
+    // "Unattach this Equipment" (rule 701.3d): only while it's attached
+    // (Sunforger's ruling).
+    if (
+      ability.cost.unattach !== undefined &&
+      this.unattachCandidates(
+        player,
+        sourceId,
+        ability.cost.unattach,
+        ability.cost.unattach === "granter" ? this.granterNow(this.activatedRefFor(sourceId, abilityIndex)) : undefined,
+      ).length === 0
+    ) {
+      return `${player} has nothing to unattach for ${def.name}'s ability`;
+    }
     if (ability.cost.payLife !== undefined) {
       // War Room: no commander, no way to pay (its ruling).
       const life = abilityLifeCost(this.state, player, ability.cost);
@@ -20308,7 +20396,11 @@ export class Game {
       const shares =
         ability.divided === undefined
           ? undefined
-          : spellDivision(this.dividedNow(ability.divided, sourceId, player, xValue), targets, division);
+          : spellDivision(
+              this.dividedNow(ability.divided, sourceId, player, xValue, typeof ability.cost.unattach === "object" ? sacrifice : undefined),
+              targets,
+              division,
+            );
       if (typeof shares === "string") throw new Error(`${def.name}'s ability: ${shares}`);
       if (ability.divided === undefined && division !== undefined && division.length > 0) {
         throw new Error(`${def.name}'s ability divides nothing`);
@@ -20335,6 +20427,20 @@ export class Game {
           sacrificeVictim = sacrifice;
         }
       }
+      // What the cost unattaches (rule 701.3d): checked payable above, and a
+      // chosen one is the player's to name.
+      const unattachCandidates =
+        ability.cost.unattach === undefined
+          ? []
+          : this.unattachCandidates(player, sourceId, ability.cost.unattach, this.granterNow(grantedAbility));
+      if (ability.cost.unattach !== undefined && unattachCandidates.length === 0) {
+        throw new Error(`${def.name}'s ability has nothing to unattach`);
+      }
+      const unattachChosen = typeof ability.cost.unattach === "object";
+      if (unattachChosen && (sacrifice === undefined || !unattachCandidates.includes(sacrifice))) {
+        throw new Error(`${def.name}'s ability requires unattaching an Equipment from it`);
+      }
+      const unattachVictim = unattachChosen ? (sacrifice as ObjectId) : unattachCandidates[0];
 
       // `{X}` in the cost (rule 107.3 — ROADMAP Phase 11 EG-3): fold the chosen
       // value into the generic portion before paying, and stamp it on the
@@ -20417,11 +20523,13 @@ export class Game {
       return {
         source, def, ability, grantedAbility, sourceStint,
         sacrificeVictim, sacrificeParts, chosenX, tapPicked, payment, shares, waterbent, modeOffer,
+        unattachVictim, unattachChosen,
       };
     });
     const {
       source, def, ability, grantedAbility, sourceStint,
       sacrificeVictim, sacrificeParts, tapPicked, payment, shares, waterbent, modeOffer,
+      unattachVictim, unattachChosen,
     } = planned;
     // The X announced — or, for a "remove all" cost, the counters it removed
     // (set as the cost is paid, below).
@@ -20554,6 +20662,15 @@ export class Game {
       }
       // "The sacrificed creature", as it last existed (Dina, Soul Steeper).
       sacrificedRef = { object: victim, zoneChangeCount: stint };
+    }
+    // "Unattach this Equipment" (rule 701.3d): off what it's on, and a grant
+    // that needed it there ends, the ability already activated.
+    if (unattachVictim !== undefined) {
+      this.unattachNow(unattachVictim);
+      // "That Equipment's mana value" (Captain America).
+      if (unattachChosen) {
+        sacrificedRef = { object: unattachVictim, zoneChangeCount: this.state.objects[unattachVictim].zoneChangeCount ?? 0 };
+      }
     }
 
     if (ability.zone === "hand" && ability.staysInZone === true) {
@@ -27902,11 +28019,17 @@ export class Game {
     source: ObjectId,
     controller: PlayerId,
     x: number | undefined,
+    /** The permanent the cost names, for a total that reads `"sacrificed"`
+     * (Captain America's "that Equipment's mana value"). */
+    sacrificed?: ObjectId,
   ): Omit<D, "total"> & { readonly total: number } {
     if (divided.x === true) return { ...divided, total: x ?? 0 };
     if (typeof divided.total === "number") return { ...divided, total: divided.total };
     const ctx = this.makeResolutionContext(source, controller, [], x ?? 0);
-    return { ...divided, total: Math.max(0, amountValue(divided.total, ctx)) };
+    return {
+      ...divided,
+      total: Math.max(0, amountValue(divided.total, sacrificed === undefined ? ctx : { ...ctx, sacrificed })),
+    };
   }
 
   /** A triggered ability's `divided`, its total read as it's put on the
@@ -32194,11 +32317,8 @@ export class Game {
       unattach: (target) => {
         if (target.kind !== "object") return;
         const object = this.state.objects[target.object];
-        if (object === undefined || object.zone !== "battlefield" || object.attachedTo === null) return;
-        const from = object.attachedTo;
-        object.attachedTo = null;
-        invalidateComputedCache();
-        this.emit({ type: "permanent-unattached", object: target.object, from });
+        if (object === undefined || object.zone !== "battlefield") return;
+        this.unattachNow(target.object);
       },
       becomeLicidAura: (target, endCost) => {
         const object = this.state.objects[source];

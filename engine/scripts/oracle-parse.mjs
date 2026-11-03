@@ -1491,6 +1491,8 @@ export function parseCost(text) {
     else if (part === "Put a card an opponent owns from exile into that player's graveyard") cost.putFromExile = 1;
     // "Exert this creature" as a cost (rule 701.43 — Steward of Solidarity).
     else if (part === "Exert ~") cost.exertSelf = true;
+    // "Unattach this Equipment" (rule 701.3d — Sunforger).
+    else if (part === "Unattach ~") cost.unattach = "self";
     // Blight N (rule 701.68a), chosen as it's paid.
     else if ((m = /^Blight (\d+)$/.exec(part))) cost.blight = Number(m[1]);
     // Waterbend {N} (rule 701.67a): the mana, some of it maybe paid by tapping.
@@ -10339,7 +10341,10 @@ function granterNamingGrant(face, raw, ctx) {
   if (colon < 0 || /^(When|Whenever|At )/.test(s)) return null;
   const parts = s.slice(0, colon).split(", ");
   const sacrificeGranter = parts.includes(`Sacrifice ${G}`);
-  const cost = parts.filter((p) => p !== `Sacrifice ${G}`).join(", ");
+  // "{T}, Unattach Leonin Bola" (rule 701.3d): nothing else to pay is fine.
+  const unattachGranter = parts.includes(`Unattach ${G}`);
+  const costParts = parts.filter((p) => p !== `Sacrifice ${G}` && p !== `Unattach ${G}`);
+  const cost = costParts.join(", ");
   // Each sentence naming the granter, read as the bearer's and then
   // pointed at the granter: "[it] deals …" (the damage's source) and
   // "Return [it] to its owner's hand".
@@ -10347,7 +10352,8 @@ function granterNamingGrant(face, raw, ctx) {
   const fromGranter = new Set();
   const returnGranter = new Set();
   const rewritten = sentences.map((sentence, i) => {
-    const deals = new RegExp(`^${G} deals (.+)$`).exec(sentence);
+    // "It deals" is the granter too (Razor Boomerang's ruling).
+    const deals = new RegExp(`^(?:${G}|It) deals (.+)$`).exec(sentence);
     if (deals !== null) {
       fromGranter.add(i);
       return `This creature deals ${deals[1]}`;
@@ -10358,8 +10364,9 @@ function granterNamingGrant(face, raw, ctx) {
     }
     return sentence;
   });
-  if (cost === "" || cost.includes(G) || rewritten.some((r) => r.includes(G))) return null;
-  const read = parseFace({ name: "Granted Bearer", type_line: "Creature", oracle_text: `${cost}: ${rewritten.join(" ")}` }, ctx);
+  if ((cost === "" && !unattachGranter) || cost.includes(G) || rewritten.some((r) => r.includes(G))) return null;
+  // Blinding Powder's cost is the unattach alone: read with a stand-in.
+  const read = parseFace({ name: "Granted Bearer", type_line: "Creature", oracle_text: `${cost === "" ? "{0}" : cost}: ${rewritten.join(" ")}` }, ctx);
   if (!read.complete || read.activated.length !== 1 || read.static.length + read.triggered.length + read.keywords.length > 0) return null;
   const known = new Set(["keywords", "activated", "triggered", "static", "todo", "complete"]);
   if (Object.keys(read).some((k) => !known.has(k))) return null;
@@ -10380,7 +10387,17 @@ function granterNamingGrant(face, raw, ctx) {
   return {
     affects: { scope: "attached" },
     grantsActivated: [
-      { ...ability, cost: sacrificeGranter ? { ...ability.cost, sacrifice: "granter" } : ability.cost, effect, text: inner },
+      {
+        ...ability,
+        cost: {
+          ...ability.cost,
+          ...(cost === "" ? { mana: null } : {}),
+          ...(sacrificeGranter ? { sacrifice: "granter" } : {}),
+          ...(unattachGranter ? { unattach: "granter" } : {}),
+        },
+        effect,
+        text: inner,
+      },
     ],
     text: printed(raw),
   };

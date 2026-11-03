@@ -4136,3 +4136,7 @@ Keys: effect:this-way-gained-control, effect:surveil-kept-on-top-count. Found to
 (`put-onto-battlefield`), amount:cards-revealed-this-way (`reveal-until` already reports them), amount:cards-shuffled-this-way
 (`shuffled-into-library`). Proving cards: Broadcast Takeover, Mob Rule, Wake the Past, Coveted Falcon, Kain, Yes Man, Madcap
 Experiment, Goblin Charbelcher, Kamahl's Summons, Naya Soulbeast, Psychic Spiral, Starving Revenant.
+**An unattach as a cost (2026-11-02).** `AbilityCost.unattach`: `"self"`, `"granter"` or a chosen `{ filter }`
+(rule 701.3d), unpayable with nothing attached; the chosen one is read back as `"sacrificed"`, and a `divided` total
+that reads it gets one offer per total. Keys: cost:unattach-cost, cost:unattach-equipment. Proving cards: Leonin Bola,
+Razor Boomerang, Sunforger, Captain America, First Avenger (`test/unattach-cost.test.ts`).

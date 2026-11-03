@@ -9498,5 +9498,48 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     board({
       you: { bf: ['Swamp*3'], hand: ['The Creation of Avacyn'], lib: ['Grizzly Bears'] },
     }),
+
+  // --- Unattaching an Equipment as a cost (2026-11-02) ----------------------
+  preset(
+    'Leonin Bola: the creature pays by taking it off',
+    board({
+      you: { bf: ['Grizzly Bears', { name: 'Leonin Bola', attach: 'Grizzly Bears' }] },
+      opp: [{ bf: ['Hill Giant'] }],
+    }),
+  ),
+  preset(
+    'Sunforger: nothing to unattach while it\'s off',
+    board({
+      you: { bf: ['Sunforger', 'Plateau*5', 'Grizzly Bears'], lib: ['Lightning Bolt'] },
+      opp: [{}],
+    }),
+  ),
+  preset(
+    'Captain America: each Equipment throws for its own mana value',
+    board({
+      you: {
+        bf: [
+          'Captain America, First Avenger',
+          'Wastes*3',
+          { name: 'Bonesplitter', attach: 'Captain America, First Avenger' },
+          { name: 'Vulshok Morningstar', attach: 'Captain America, First Avenger' },
+        ],
+      },
+      opp: [{ bf: ['Hill Giant'] }, { bf: ['Grizzly Bears'] }, {}],
+    }),
+  ),
+  preset(
+    'Captain America: two Equipment of one mana value are picked on the board',
+    board({
+      you: {
+        bf: [
+          'Captain America, First Avenger',
+          'Wastes*3',
+          { name: 'Bonesplitter', attach: 'Captain America, First Avenger' },
+          { name: 'Bonesplitter', attach: 'Captain America, First Avenger' },
+        ],
+      },
+      opp: [{ bf: ['Hill Giant'] }],
+    }),
   ),
 ]

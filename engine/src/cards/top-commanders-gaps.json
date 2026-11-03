@@ -1309,7 +1309,9 @@
   "zone:court-free-cast-from-linked-exile",
   "zone:allow-cast-from-exile-spend-any-type",
   "effect:exile-top-face-down-linked",
-  "effect:search-to-linked-exile-face-down"
+  "effect:search-to-linked-exile-face-down",
+  "cost:unattach-cost",
+  "cost:unattach-equipment"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {
