@@ -827,7 +827,9 @@ missing. Re-run `--greedy` for Phase 2's order.
   try each key's card first) — `amount:damage-prevented-this-way` (6 proving cards), `effect:this-way-results` units 1–2
   (12 proving cards; 3 of 5 keys needed no code), `zone:impulse-permission-options` top three units plus Tier B (14),
   `mechanic:face-down` top unit (6), `cost:unattach-cost` (4), `keyword:splice` (7), `static:cant-have-keyword` (4),
-  `static:grant-types-to-others` top unit (7).
+  `static:grant-types-to-others` top unit (7), `effect:delayed-trigger-extensions` (8), `effect:put-onto-battlefield-options`
+  (6), `bug:as-enters-choices-any-entry` (3), `replacement:new-event-replacements` skip-turn unit (4),
+  `duration:until-your-next-upkeep` (9), `static:self-type-changes` (11).
 
 ## Rough size
 

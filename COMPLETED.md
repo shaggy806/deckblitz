@@ -12,6 +12,19 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **An animate that sets creature characteristics** (2026-11-02, `108e72eee`): live P/T beside a `grant-static`,
+  `add-types`' `removeTypes`, `StaticAbility.selfOutsideBattlefield`; 11 proving cards, among them Myth Realized,
+  Chimeric Mass, Svogthos, Druid Class and Oko.
+- **Durations to a point in a later turn** (2026-11-02, `53f8117aa`): `UntilPointDuration`, four new `PtDuration` values
+  with one expiry, and two more `ImpulseDuration`s; 9 proving cards, among them Xenic Poltergeist, Elkin Bottle and Nivix.
+- **A turn skipped as it would begin** (2026-11-02, `2345527e5`): the `would-begin-turn` replacement, asked through the
+  upcoming turns; Chronatog and Magosi needed no code; Time Vault, Gerrard's Hourglass Pendant.
+- **Token copies make their "as this enters" choices** (2026-11-02, `5ae491a7e`, rule 614.12a): each token for itself,
+  entering together; Rebuild the City, Kindred Charge, Ember Island Production. Closes the engine-gaps line.
+- **Return from every graveyard at once** (2026-11-02, `765a87d29`): almost no new code; Open the Vaults, Planar Birth,
+  Pyrrhic Revival, Bringer of the Last Gift, Infernal Caretaker, Saprazzan Bailiff.
+- **Whole hands exiled face down and returned later** (2026-11-02, `aa372e7d7`), and the end step of a player's next turn;
+  Memory Jar, Magus of the Jar, Ignorant Bliss, Suppress, Induced Amnesia, Bottled Cloister, Moonring Mirror, Kav Landseeker.
 - **A static that adds a supertype** (2026-11-02, `85ebc8c39`): `addSupertypes` in layer 4, `effectiveSupertypes` as
   the read everywhere, the 613.8a dependency on "nonbasic"; `static:static-add-chosen-type` needed no code; On Serra's
   Wings, In Bolas's Clutches, Leyline of Singularity, Glittering Frost, Rimefeather Owl, Rootpath Purifier, Lifecraft Engine.

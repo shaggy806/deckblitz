@@ -360,9 +360,6 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   a conceding player's own pending decision is answered by the server first. Not yet: a choice an
   effect would ask of a player who has already left (800.4g–h: the object's controller picks
   another player, or the next in turn order makes it) — the engine skips that player instead.
-- **A token copy isn't asked its "as this enters" choice** (a token copy of Clone, Morophon or
-  Urza's Incubator), though the gaps list marks `bug:as-enters-choices-any-entry` built. See
-  AUTHORING §15.
 - **Proliferate over a token stack.** A stack is one proliferate entry and every member gets the
   counter; choosing some of them isn't built. See `docs/plans/token-stack-choices.md`.
 - **Distinct targets in one token stack.** An "another target" relation (`distinctTargets`, an

@@ -648,7 +648,20 @@ function visible(
       // Protection granted for a while (`grant-protection`), in words.
       if (m.protection !== undefined) {
         const label = protectionLabel(m.protection);
-        const until = m.untilTurnOf !== undefined ? " until your next turn" : m.untilEndOfTurn ? " until end of turn" : "";
+        const until =
+          m.untilPoint !== undefined
+            ? {
+                "upkeep-begins": " until your next upkeep",
+                "upkeep-ends": " until the end of your next upkeep",
+                "this-upkeep-ends": " until the end of this upkeep",
+                "turn-ends": " until the end of your next turn",
+                "controllers-untap-begins": " until its controller's next untap step",
+              }[m.untilPoint.point]
+            : m.untilTurnOf !== undefined
+              ? " until your next turn"
+              : m.untilEndOfTurn
+                ? " until end of turn"
+                : "";
         const line = `${label.charAt(0).toUpperCase()}${label.slice(1)}${until}`;
         text = text.length > 0 ? `${text}\n${line}` : line;
       }

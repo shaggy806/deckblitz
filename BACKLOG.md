@@ -431,9 +431,11 @@ section keeps only what to do next.
   vocabulary lacks an option, and the 9 tried of those all ran as it stood (`docs/plans/need-keys-after-the-walk.md`, the
   over-count pilot and its recheck, which closed 44 more). Next seam: a spell's `additionalCost` taking
   `AbilityCost`'s parts (about 15 cards). Fourth overnight round, 2026-11-02: damage prevented this way, this-way
-  results, permissions over exiled cards, linked face-down exile, unattach as a cost and a keyword's non-mana cost
-  (49 proving cards; `--stale` 1,514 wait for `author-freed`). Next by `--greedy --groups`:
-  `static:cant-have-keyword` (7), `decision:choose-from-zone-extensions` (7), `effect:counter-ability` (7).
+  results, permissions over exiled cards, linked face-down exile, unattach as a cost, a keyword's non-mana cost,
+  can't-have keywords, added supertypes, whole hands exiled face down, returns from every graveyard, token copies'
+  as-enters choices, turn skips, durations to a later turn's point and animates setting characteristics (101 proving
+  cards; `--stale` 1,530 wait for `author-freed`). Next by `--greedy --groups`: `cost:dynamic-life-cost` (6),
+  `cost:choose-cards-as-cost` (6), `effect:animate-grants-conditional-static` (7).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next
@@ -563,7 +565,6 @@ there and move this line to `COMPLETED.md`.
 - **"Each player may" with a choice inside it** (101.4): a search is done before the next player is asked (Tempt with Discovery, Innocent Traveler).
 - **Static-effect dependency ordering** (613.8) beyond layer 4's type grants.
 - **The rest of leaving the game** (800.4g–h): a choice asked of a player who has left is skipped, not handed to another player.
-- **A token copy isn't asked its "as this enters" choice.**
 - **Proliferate over a token stack** gives every member a counter.
 - **Distinct targets in one token stack** can't take two tokens of one stack.
 
