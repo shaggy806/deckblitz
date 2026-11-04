@@ -3973,9 +3973,13 @@ export type EffectSpec =
       /** Each player in `who` sacrifices every permanent matching `filter`
        * they control — Living Death's "then sacrifices all creatures they
        * control": nobody chooses anything, and they all go at once (one
-       * event, rule 603.10a). One that can't be sacrificed stays. */
+       * event, rule 603.10a). One that can't be sacrificed stays. A
+       * {@link ChosenPlayerRef} is one player: Winnowing's "each player
+       * sacrifices all other creatures they control that don't share a
+       * creature type with the chosen creature they control" is this for each
+       * chosen creature, `{ controllerOfTarget: 0 }`, inside a `for-each-voted`. */
       readonly kind: "sacrifice-all";
-      readonly who: PlayerScope;
+      readonly who: PlayerScope | ChosenPlayerRef;
       readonly filter: CardFilter;
     }
   | {
@@ -7846,6 +7850,14 @@ export type EffectSpec =
              * player may put two +1/+1 counters on a creature **they**
              * control" (`controlledBy: "you"` is the chooser). */
             readonly own?: true;
+            /** Only with `choose`: "**for each player, you choose** a creature
+             * that player controls" (Winnowing), "for each opponent, choose an
+             * artifact or land that player controls" (Ultimate Magic: Meteor) —
+             * the effect's controller alone, one question per player in this
+             * scope, starting with them, of `permanent` among what that player
+             * controls. A player with nothing that matches isn't asked about.
+             * Not targets: `for-each-voted` acts on them. */
+            readonly about?: PlayerScope;
             /** Only with `choose`: what's chosen is what's spared ("each
              * player chooses a creature they control. Destroy the rest" —
              * Divine Reckoning; the next step's filter says `notThisWay:
@@ -12870,7 +12882,7 @@ function applyVote(spec: Extract<EffectSpec, { kind: "vote" }>, ctx: ResolutionC
             : ctx.apnap(fromYou);
     toAsk = order.map((player) => ({ player, extra: false }));
     // "For each player, choose …": the one chooser, a question per player.
-    const about = "options" in spec.for ? spec.for.about : undefined;
+    const about = "options" in spec.for || "permanent" in spec.for ? spec.for.about : undefined;
     if (about !== undefined) {
       toAsk = eachPlayerMayAsks(about, ctx, true).map((player) => ({ player: ctx.controller, extra: false, about: player }));
     }
@@ -16052,6 +16064,11 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "sacrifice-all":
+      if (typeof spec.who === "object") {
+        const player = effectPlayer(spec.who, ctx);
+        if (player !== undefined) ctx.sacrificeAll([player], spec.filter);
+        return;
+      }
       ctx.sacrificeAll(ctx.playersInScope(spec.who), spec.filter);
       return;
     case "put-exiled-this-way-onto-battlefield": {

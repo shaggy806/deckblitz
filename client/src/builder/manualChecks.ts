@@ -10579,4 +10579,32 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{ bf: ['Grizzly Bears'] }],
     }),
   ),
+  preset(
+    'Winnowing: you choose a creature for each player',
+    board({
+      you: { bf: ['Plains*6', 'Llanowar Elves', 'Grizzly Bears'], hand: ['Winnowing'] },
+      opp: [{ bf: ['Hill Giant', 'Grizzly Bears'] }],
+    }),
+  ),
+  preset(
+    'Winnowing: four players, a question for each, naming whose',
+    board({
+      you: { bf: ['Plains*6', 'Llanowar Elves', 'Grizzly Bears'], hand: ['Winnowing'] },
+      opp: [{ bf: ['Hill Giant', 'Grizzly Bears'] }, { bf: ['Serra Angel', 'Grizzly Bears'] }, { bf: ['Forest'] }],
+    }),
+  ),
+  preset(
+    "Ghouls' Night Out: four players, one creature card from each graveyard",
+    board({
+      you: { bf: ['Swamp*5'], hand: ["Ghouls' Night Out"], gy: ['Grizzly Bears'] },
+      opp: [{ gy: ['Hill Giant', 'Forest'] }, { gy: ['Serra Angel'] }, { gy: ['Forest'] }],
+    }),
+  ),
+  preset(
+    'Jetsam: one spell from each opponent, in the order you pick',
+    board({
+      you: { bf: ['Island*6'], hand: ['Flotsam // Jetsam'] },
+      opp: [{ gy: ['Divination', 'Grizzly Bears'] }, { gy: ['Hill Giant'] }],
+    }),
+  ),
 ]

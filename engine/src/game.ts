@@ -10053,13 +10053,18 @@ export class Game {
       awaiting.enterTapped !== true &&
       awaiting.enterWithCounters === undefined &&
       awaiting.enterAttacking === undefined &&
-      awaiting.enterAs === undefined
+      awaiting.enterAs?.faceDown === undefined
     ) {
       this.state.heldChoices = {
         ...held,
         entries: [
           ...(held.entries ?? []),
-          { player, objects: [...chosen], ...(awaiting.enterUnder !== undefined ? { under: awaiting.enterUnder } : {}) },
+          {
+            player,
+            objects: [...chosen],
+            ...(awaiting.enterUnder !== undefined ? { under: awaiting.enterUnder } : {}),
+            ...(awaiting.enterAs !== undefined ? { enterAs: awaiting.enterAs } : {}),
+          },
         ],
       };
       this.emit({ type: "cards-chosen-from-zone", player, objects: [...chosen] });
@@ -25826,7 +25831,7 @@ export class Game {
     if (entry.kind === "spell") this.enterPermanentSpell(entry.object);
     else if (entry.kind === "land") this.finishLandPlay(entry);
     else if (entry.kind === "exiled-return") this.returnExiledCards(entry.objects);
-    else if (entry.kind === "held-entries") this.enterHeldEntries(entry.objects, entry.under, entry.withCounters);
+    else if (entry.kind === "held-entries") this.enterHeldEntries(entry.objects, entry.under, entry.withCounters, entry.enterAs);
     else if (entry.kind === "token-copies") this.enterTokenCopies(entry);
     else this.finishZoneChoice(entry);
   }
@@ -37168,7 +37173,9 @@ export class Game {
       return;
     }
     if ("permanent" in what) {
-      const eligible = this.battlefieldMatching(what.own === true ? player : controller, what.permanent);
+      const eligible = this.battlefieldMatching(what.own === true ? player : controller, what.permanent).filter(
+        (id) => about === undefined || this.state.objects[id]?.controller === about,
+      );
       if (eligible.length === 0) return;
       const keep = what.keep === true;
       const units = (id: ObjectId): number => this.state.objects[id]?.stackCount ?? 1;
@@ -37186,6 +37193,11 @@ export class Game {
       const power = (id: ObjectId): number => computeCharacteristics(this.state, this.registry, id).power;
       const count = what.upTo ?? what.count ?? 1;
       const noun = count === 1 ? "a permanent" : `${count} permanents`;
+      const asked = what.prompt !== undefined
+        ? what.prompt
+        : extra
+        ? "Vote an additional time (or choose none)"
+        : `${verb} ${what.upTo !== undefined ? "up to " : ""}${what.upTo === 1 ? "one permanent" : noun}${keep ? " to keep" : ""}`;
       this.state.awaiting = {
         kind: "choose-permanents",
         player,
@@ -37193,11 +37205,8 @@ export class Game {
         eligible: keep ? [...eligible].sort((a, b) => power(b) - power(a)) : eligible,
         min: mayChooseFewer ? 0 : most,
         max: most,
-        prompt: what.prompt !== undefined
-          ? what.prompt
-          : extra
-          ? "Vote an additional time (or choose none)"
-          : `${verb} ${what.upTo !== undefined ? "up to " : ""}${what.upTo === 1 ? "one permanent" : noun}${keep ? " to keep" : ""}`,
+        // "For each player": which one this question is about.
+        prompt: about === undefined ? asked : `${asked} — ${about.charAt(0).toUpperCase()}${about.slice(1)}'s`,
         then: { kind: "cast-vote", voter: player, choice: "target", ...(keep ? { keep: true } : {}) },
         source,
         x,
@@ -48220,7 +48229,11 @@ export class Game {
     for (const entry of held.entries ?? []) {
       if (entry.under !== undefined) for (const id of entry.objects) under[id] = entry.under;
     }
-    if (entering.length > 0) this.enterHeldEntries(entering, under);
+    const enterAs: Record<string, EnterTypes> = {};
+    for (const entry of held.entries ?? []) {
+      if (entry.enterAs !== undefined) for (const id of entry.objects) enterAs[id] = entry.enterAs;
+    }
+    if (entering.length > 0) this.enterHeldEntries(entering, under, {}, enterAs);
   }
 
   /**
@@ -48237,6 +48250,8 @@ export class Game {
     ids: readonly ObjectId[],
     under: Readonly<Record<string, PlayerId>> = {},
     withCounters: Readonly<Record<string, { readonly kind: string; readonly amount: number }>> = {},
+    /** What a card enters as (Ghouls' Night Out's "they're black Zombies"). */
+    enterAs: Readonly<Record<string, EnterTypes>> = {},
   ): void {
     const entering = ids.filter((id) => this.state.objects[id]?.zone === "hand" || this.state.objects[id]?.zone === "graveyard");
     for (const id of entering) {
@@ -48248,6 +48263,7 @@ export class Game {
             objects: entering,
             ...(Object.keys(under).length > 0 ? { under } : {}),
             ...(Object.keys(withCounters).length > 0 ? { withCounters } : {}),
+            ...(Object.keys(enterAs).length > 0 ? { enterAs } : {}),
           },
         });
         return;
@@ -48257,7 +48273,7 @@ export class Game {
     // one or more cards leave a graveyard" sees it once.
     this.withGraveyardLeaveBatch(() => {
       this.withEnterBatch(() => {
-        for (const id of entering) this.enterHeldEntry(id, under[id], withCounters[id]);
+        for (const id of entering) this.enterHeldEntry(id, under[id], withCounters[id], enterAs[id]);
       });
     });
   }
@@ -48269,9 +48285,10 @@ export class Game {
     id: ObjectId,
     to?: PlayerId,
     counters?: { readonly kind: string; readonly amount: number },
+    enterAs?: EnterTypes,
   ): void {
     const under = to !== undefined && to !== this.state.objects[id]?.owner ? to : undefined;
-    if (!this.moveObject(id, "battlefield", under !== undefined ? { under } : {})) return;
+    if (!this.moveObject(id, "battlefield", { ...(under !== undefined ? { under } : {}), ...enterTypesEntry(enterAs) })) return;
     // Kept there by a control effect, as a reanimation "under your control"
     // is (see `putOntoBattlefieldByEffect`).
     const entered = this.state.objects[id];

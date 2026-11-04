@@ -1628,7 +1628,11 @@
   "decision:choose-from-opponent-graveyard-untargeted",
   "decision:choose-face-up-exiled-card",
   "effect:return-exiled-card-named",
-  "effect:choose-half-of-permanents"
+  "effect:choose-half-of-permanents",
+  "effect:choose-per-opponent-then-destroy",
+  "effect:choose-per-player-untargeted",
+  "effect:each-opponent-chooses-permanent",
+  "effect:sacrifice-unless-shares-type-with-chosen"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

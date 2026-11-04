@@ -8458,6 +8458,8 @@ export function parseEffect(text, outer) {
       counterAbilityAt(sentences, i, ctx) ??
       opponentChoosesInGraveyardAt(sentences, i, ctx) ??
       youChooseInEachGraveyardAt(sentences, i) ??
+      youChoosePerPlayerAt(sentences, i) ??
+      eachOpponentChoosesToGoadAt(sentences, i) ??
       eachPlayerPutsAt(sentences, i) ??
       exileThenSearchBothEnterAt(sentences, i, ctx);
     if (oneEach !== null) {
@@ -10786,6 +10788,73 @@ function youChooseInEachGraveyardAt(sentences, i) {
         destination: "battlefield",
         leftover: "stay",
       },
+    },
+    used: 2,
+  };
+}
+
+/** You choose, one permanent a player, none a target, and they're destroyed
+ * together: "For each opponent, choose an artifact or land that player
+ * controls. Destroy the chosen permanents." (Ultimate Magic: Meteor's shape.) */
+function youChoosePerPlayerAt(sentences, i) {
+  const m = /^for each (player|opponent), (?:you )?choose (an? (.+?)) that player controls\.$/i.exec(sentences[i]);
+  if (m === null) return null;
+  if (!/^destroy the chosen (?:permanents|creatures|lands|artifacts)\.$/i.test(sentences[i + 1] ?? "")) return null;
+  const filter = parseTypePhrase(m[3]);
+  if (filter === null) return null;
+  return {
+    effect: {
+      kind: "sequence",
+      effects: [
+        {
+          kind: "vote",
+          choose: true,
+          who: "you",
+          for: {
+            permanent: filter,
+            about: m[1].toLowerCase() === "player" ? "each-player" : "each-opponent",
+            prompt: `Choose ${m[2]} to destroy`,
+          },
+        },
+        { kind: "for-each-voted", which: "voted", simultaneous: true, effect: { kind: "destroy", target: 0 } },
+      ],
+    },
+    used: 2,
+  };
+}
+
+/** Each opponent chooses their own, in turn: "Each opponent chooses a creature
+ * they control. Tap and goad the chosen creatures." (Fell Beast's Shriek.) */
+function eachOpponentChoosesToGoadAt(sentences, i) {
+  if (!/^each opponent chooses a creature they control\.$/i.test(sentences[i])) return null;
+  if (!/^tap and goad the chosen creatures\.$/i.test(sentences[i + 1] ?? "")) return null;
+  return {
+    effect: {
+      kind: "sequence",
+      effects: [
+        {
+          kind: "vote",
+          choose: true,
+          who: "each-opponent",
+          for: {
+            permanent: { type: "creature", controlledBy: "you" },
+            own: true,
+            prompt: "Choose a creature you control to be tapped and goaded",
+          },
+        },
+        {
+          kind: "for-each-voted",
+          which: "voted",
+          simultaneous: true,
+          effect: {
+            kind: "sequence",
+            effects: [
+              { kind: "tap", target: 0 },
+              { kind: "goad", target: 0 },
+            ],
+          },
+        },
+      ],
     },
     used: 2,
   };

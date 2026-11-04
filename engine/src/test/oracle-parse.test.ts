@@ -8300,6 +8300,39 @@ describe("a choice drawn from several zones, or one card a slot", () => {
         destination: "battlefield",
       },
     });
+    // You choose, one permanent a player, none a target, destroyed together.
+    const fall = face(
+      "Test Fall",
+      "Sorcery",
+      "For each opponent, choose an artifact or land that player controls. Destroy the chosen permanents.",
+    );
+    expect(fall.complete).toBe(true);
+    expect(fall.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        {
+          kind: "vote",
+          choose: true,
+          who: "you",
+          for: {
+            permanent: { typesAnyOf: ["artifact", "land"] },
+            about: "each-opponent",
+            prompt: "Choose an artifact or land to destroy",
+          },
+        },
+        { kind: "for-each-voted", which: "voted", simultaneous: true, effect: { kind: "destroy", target: 0 } },
+      ],
+    });
+    // Each opponent chooses their own.
+    const shriek = face(
+      "Test Shriek",
+      "Sorcery",
+      "Each opponent chooses a creature they control. Tap and goad the chosen creatures.",
+    );
+    expect(shriek.complete).toBe(true);
+    expect(shriek.effect).toMatchObject({
+      effects: [{ kind: "vote", who: "each-opponent", for: { own: true } }, { kind: "for-each-voted", which: "voted" }],
+    });
     // Any graveyard's, chosen as it resolves.
     const keeper = face("Test Keeper", "Creature — Human", "When this creature enters, exile a card from a graveyard.");
     expect(keeper.triggered[0].effect).toEqual({

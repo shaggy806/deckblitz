@@ -5148,6 +5148,8 @@ export type PendingEntry =
       readonly under?: Readonly<Record<string, PlayerId>>;
       /** Counters a card enters with (a discarded Dodecapod's). */
       readonly withCounters?: Readonly<Record<string, { readonly kind: string; readonly amount: number }>>;
+      /** What a card enters as (Ghouls' Night Out's "they're black Zombies"). */
+      readonly enterAs?: Readonly<Record<string, EnterTypes>>;
     }
   | {
       /** Token copies an effect is creating, not on the battlefield yet,
@@ -6103,7 +6105,12 @@ export interface GameState {
     /** `cause`: who controlled the spell or ability that made them choose
      * — the discard's cause once it happens (`cards-discarded`). */
     readonly discards: readonly { readonly player: PlayerId; readonly objects: readonly ObjectId[]; readonly cause?: PlayerId }[];
-    readonly entries?: readonly { readonly player: PlayerId; readonly objects: readonly ObjectId[]; readonly under?: PlayerId }[];
+    readonly entries?: readonly {
+      readonly player: PlayerId;
+      readonly objects: readonly ObjectId[];
+      readonly under?: PlayerId;
+      readonly enterAs?: EnterTypes;
+    }[];
   };
   /**
    * A sacrifice *cost* of several permanents being paid (rules 601.2h, 602.2b

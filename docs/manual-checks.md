@@ -7050,3 +7050,23 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 - **Do:** Attack Bob with Hill Giant and Serra Angel. As Bob, block Hill Giant with Grizzly Bears. As Alice, cast False Orders on Grizzly Bears and click Serra Angel.
 - **Expect:** Grizzly Bears now blocks Serra Angel, though it flies, and dies. Hill Giant is no longer blocked: Bob loses 3 life.
+
+### Winnowing: you choose a creature for each player
+
+- **Do:** Cast Winnowing, clicking Pay with mana. Click Llanowar Elves and Confirm, then Hill Giant and Confirm for Bob's.
+- **Expect:** The banner says "Choose a creature: only what shares a creature type with it stays" and whose it is ("Alice's", then "Bob's"). Only that player's creatures can be clicked. Then your Grizzly Bears and Bob's Grizzly Bears are sacrificed, the chosen ones stay.
+
+### Winnowing: four players, a question for each, naming whose
+
+- **Do:** Cast Winnowing, clicking Pay with mana, and click a creature and Confirm for each question.
+- **Expect:** Three questions, naming Alice's, Bob's and Carol's, one player's creatures clickable at a time. Dave has no creature and no question.
+
+### Ghouls' Night Out: four players, one creature card from each graveyard
+
+- **Do:** Cast Ghouls' Night Out, then take a card and Confirm in each popup.
+- **Expect:** Your one card is taken for you, then a popup for Bob's graveyard (Hill Giant can be taken, Forest can't) and one for Carol's. Dave's has no creature card and nothing is asked. After the last, all three enter under your control together, black Zombies with decayed.
+
+### Jetsam: one spell from each opponent, in the order you pick
+
+- **Do:** Cast Flotsam // Jetsam, clicking Jetsam. When offered, cast Hill Giant and Confirm.
+- **Expect:** The first popup offers Divination, Grizzly Bears and Hill Giant (each opponent has had three cards milled). After Hill Giant, only Bob's two are offered: Carol's graveyard has had its turn. Hill Giant ends up yours.
