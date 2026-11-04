@@ -946,6 +946,12 @@ export type CostReductionAmount =
    * opponent you have". Players who have left the game don't count
    * (702.125b). */
   | { readonly opponents: true }
+  /** The most permanents matching `filter` that any one opponent controls, not
+   * the sum (0 with no opponent; players who've left don't count) — Cavern-Hoard
+   * Dragon's "where X is the greatest number of artifacts an opponent controls",
+   * `{ greatestOpponentCount: { type: "artifact" } }`. A token stack counts as
+   * every token in it. */
+  | { readonly greatestOpponentCount: CardFilter }
   /** Devotion (rule 700.5) — {1} less for each mana symbol of the colors among
    * the mana costs of permanents its controller controls — Drag to the
    * Underworld's "This spell costs {X} less to cast, where X is your devotion

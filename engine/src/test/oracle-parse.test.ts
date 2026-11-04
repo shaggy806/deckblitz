@@ -24,6 +24,28 @@ import { parseEffect, parseFace, parseTrigger, parseCost, parseSentence, parseTy
 // @ts-expect-error — as above.
 import { checkPool } from "../../scripts/oracle-parse-check.mjs";
 
+describe("a cost reduced by the most any one opponent controls", () => {
+  it("Cavern-Hoard Dragon's line, and its Treasures for that player's artifacts", () => {
+    const parsed = parseFace(
+      {
+        name: "Test Card",
+        type_line: "Creature — Dragon",
+        oracle_text:
+          "This spell costs {X} less to cast, where X is the greatest number of artifacts an opponent controls.\nWhenever this creature deals combat damage to a player, you create a Treasure token for each artifact that player controls.",
+        mana_cost: "{7}{R}{R}",
+        colors: ["R"],
+      },
+      { tokenFor: () => "Treasure Token" },
+    );
+    expect(parsed.selfCostReduction.reduceGeneric).toEqual({ greatestOpponentCount: { type: "artifact" } });
+    expect(parsed.triggered[0].effect).toEqual({
+      kind: "create-token",
+      token: "Treasure Token",
+      count: { countOf: { type: "artifact", controlledBy: "you" }, forPlayer: "trigger-player" },
+    });
+  });
+});
+
 describe("a library search by several players together (rule 101.4)", () => {
   const LAND = { type: "land", supertype: "basic" };
   const read = (oracle_text: string) =>

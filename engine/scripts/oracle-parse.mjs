@@ -2851,6 +2851,15 @@ export function parseSentence(sentence, ctx) {
       return { kind: "create-token", token, count: { countOf: { type: "creature", controlledBy: "opponent" } }, tapped: true };
     }
   }
+  // Cavern-Hoard Dragon's "you create a Treasure token for each artifact that
+  // player controls", that player's own, counted as it resolves.
+  if (ctx?.thatPlayer === "trigger-player" && (M = /^create an? (.+?) token for each (.+?) that player controls\.$/i.exec(s))) {
+    const base = parseSentence(`Create a ${M[1]} token.`, ctx);
+    const filter = parseTypePhrase(M[2]);
+    if (base?.kind === "create-token" && base.count === 1 && filter !== null) {
+      return { ...base, count: { countOf: { ...filter, controlledBy: "you" }, forPlayer: "trigger-player" } };
+    }
+  }
   // "Return any number of other creature cards with total power X or less from
   // your graveyard to the battlefield, where X is this creature's power"
   // (Moorland Rescuer): not targets, so chosen as it resolves.
@@ -13427,6 +13436,14 @@ function parseFaceAsWritten(face, ctx = {}) {
       const color = { white: "W", blue: "U", black: "B", red: "R", green: "G" }[m[1]];
       out.selfCostReduction = { condition: { kind: "controls", filter: {}, atLeast: 0 }, reduceGeneric: { devotionTo: [color] } };
       continue;
+    }
+    // The most any one opponent has, not the sum: Cavern-Hoard Dragon.
+    if ((m = /^~ costs \{X\} less to cast, where X is the greatest number of (.+?) an opponent controls\.$/.exec(line))) {
+      const filter = parseTypePhrase(m[1]);
+      if (filter !== null) {
+        out.selfCostReduction = { condition: { kind: "controls", filter: {}, atLeast: 0 }, reduceGeneric: { greatestOpponentCount: filter } };
+        continue;
+      }
     }
     // "~ is also a Cleric, Rogue, Warrior, and Wizard" — a CDA adding
     // creature types in every zone (rule 604.3), the card's `alsoSubtypes`.

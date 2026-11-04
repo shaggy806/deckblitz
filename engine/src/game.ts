@@ -42911,6 +42911,10 @@ export class Game {
     if ("basicLandTypes" in amount) return basicLandTypesAmong(this.state, this.registry, player);
     if ("partySize" in amount) return partySizeOf(this.state, this.registry, player);
     if ("opponents" in amount) return this.scopedPlayers(player, "each-opponent").length;
+    if ("greatestOpponentCount" in amount) {
+      const filter: CardFilter = { ...amount.greatestOpponentCount, controlledBy: "you" };
+      return Math.max(0, ...this.scopedPlayers(player, "each-opponent").map((p) => this.countBattlefieldMatching(p, filter)));
+    }
     if ("devotionTo" in amount) return devotionOf(this.state, this.registry, player, amount.devotionTo);
     if ("turnHistory" in amount) {
       const players = amount.who === "any-player" ? this.state.turnOrder : [player];
