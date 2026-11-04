@@ -85,6 +85,7 @@ import _poolBlightedBurgeoning from "../pool/blighted-burgeoning.js";
 import _poolBlinkmothNexus from "../pool/blinkmoth-nexus.js";
 import _poolBlisterspitGremlin from "../pool/blisterspit-gremlin.js";
 import _poolBloodchiefsThirst from "../pool/bloodchiefs-thirst.js";
+import _poolBloodletterOfAclazotz from "../pool/bloodletter-of-aclazotz.js";
 import _poolBloodstokeHowler from "../pool/bloodstoke-howler.js";
 import _poolBloodthirstyConqueror from "../pool/bloodthirsty-conqueror.js";
 import _poolBlossomDryad from "../pool/blossom-dryad.js";
@@ -606,6 +607,7 @@ import _poolPsychicOverload from "../pool/psychic-overload.js";
 import _poolPublicThoroughfare from "../pool/public-thoroughfare.js";
 import _poolPuppetMasterStringPuller from "../pool/puppet-master-string-puller.js";
 import _poolPymParticles from "../pool/pym-particles.js";
+import _poolPyreRhymer from "../pool/pyre-rhymer.js";
 import _poolQuagVampires from "../pool/quag-vampires.js";
 import _poolQuagmireLamprey from "../pool/quagmire-lamprey.js";
 import _poolQuandrixApprentice from "../pool/quandrix-apprentice.js";
@@ -996,6 +998,7 @@ const shard: CardShard = {
     _poolBlinkmothNexus,
     _poolBlisterspitGremlin,
     _poolBloodchiefsThirst,
+    _poolBloodletterOfAclazotz,
     _poolBloodstokeHowler,
     _poolBloodthirstyConqueror,
     _poolBlossomDryad,
@@ -1517,6 +1520,7 @@ const shard: CardShard = {
     _poolPublicThoroughfare,
     _poolPuppetMasterStringPuller,
     _poolPymParticles,
+    _poolPyreRhymer,
     _poolQuagVampires,
     _poolQuagmireLamprey,
     _poolQuandrixApprentice,

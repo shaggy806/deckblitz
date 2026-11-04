@@ -494,6 +494,7 @@ import _poolLeoninDenGuard from "../pool/leonin-den-guard.js";
 import _poolLeoninLightbringer from "../pool/leonin-lightbringer.js";
 import _poolLeylineAxe from "../pool/leyline-axe.js";
 import _poolLeylineOfTheVoid from "../pool/leyline-of-the-void.js";
+import _poolLilianaDreadhordeGeneral from "../pool/liliana-dreadhorde-general.js";
 import _poolLilianasSpoils from "../pool/lilianas-spoils.js";
 import _poolLilysplashMentor from "../pool/lilysplash-mentor.js";
 import _poolLithomanticBarrage from "../pool/lithomantic-barrage.js";
@@ -1465,6 +1466,7 @@ const shard: CardShard = {
     _poolLeoninLightbringer,
     _poolLeylineAxe,
     _poolLeylineOfTheVoid,
+    _poolLilianaDreadhordeGeneral,
     _poolLilianasSpoils,
     _poolLilysplashMentor,
     _poolLithomanticBarrage,

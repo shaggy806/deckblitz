@@ -26,7 +26,9 @@ const ENTRY = path.join(ROOT, "dist", "local.js");
 /** Whether `dist/` was built from the sources this bundle is made of. */
 function distIsFresh(): boolean {
   if (!existsSync(ENTRY)) return false;
-  const built = statSync(ENTRY).mtimeMs;
+  // An incremental build leaves an unchanged `local.js` alone, but writes its build info.
+  const info = path.join(ROOT, "dist", ".tsbuildinfo");
+  const built = Math.max(statSync(ENTRY).mtimeMs, existsSync(info) ? statSync(info).mtimeMs : 0);
   return ["src", "src/bot", "src/cards", "src/decisions", "src/combat"].every((dir) =>
     readdirSync(path.join(ROOT, dir)).every(
       (f) => !f.endsWith(".ts") || f.endsWith(".test.ts") || statSync(path.join(ROOT, dir, f)).mtimeMs <= built,

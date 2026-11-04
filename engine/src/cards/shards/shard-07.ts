@@ -726,6 +726,7 @@ import _poolSquadCommander from "../pool/squad-commander.js";
 import _poolSqueeze from "../pool/squeeze.js";
 import _poolStaffOfCompleation from "../pool/staff-of-compleation.js";
 import _poolStarscapeCleric from "../pool/starscape-cleric.js";
+import _poolStartingTown from "../pool/starting-town.js";
 import _poolStarvedRusalka from "../pool/starved-rusalka.js";
 import _poolStonebindersFamiliar from "../pool/stonebinders-familiar.js";
 import _poolStormcallersBoon from "../pool/stormcallers-boon.js";
@@ -1661,6 +1662,7 @@ const shard: CardShard = {
     _poolSqueeze,
     _poolStaffOfCompleation,
     _poolStarscapeCleric,
+    _poolStartingTown,
     _poolStarvedRusalka,
     _poolStonebindersFamiliar,
     _poolStormcallersBoon,

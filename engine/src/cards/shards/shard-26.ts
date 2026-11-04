@@ -485,6 +485,7 @@ import _poolMirrorMockery from "../pool/mirror-mockery.js";
 import _poolMirrorSigilSergeant from "../pool/mirror-sigil-sergeant.js";
 import _poolMistCloakedHerald from "../pool/mist-cloaked-herald.js";
 import _poolMolderingGymWeightRoom from "../pool/moldering-gym-weight-room.js";
+import _poolMoltenTide from "../pool/molten-tide.js";
 import _poolMomentumRumbler from "../pool/momentum-rumbler.js";
 import _poolMomirVigSimicVisionary from "../pool/momir-vig-simic-visionary.js";
 import _poolMoorlandInquisitor from "../pool/moorland-inquisitor.js";
@@ -1401,6 +1402,7 @@ const shard: CardShard = {
     _poolMirrorSigilSergeant,
     _poolMistCloakedHerald,
     _poolMolderingGymWeightRoom,
+    _poolMoltenTide,
     _poolMomentumRumbler,
     _poolMomirVigSimicVisionary,
     _poolMoorlandInquisitor,

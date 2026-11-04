@@ -126,6 +126,7 @@ import _poolCaptainAmericaSuperSoldier from "../pool/captain-america-super-soldi
 import _poolCaptivatingUnicorn from "../pool/captivating-unicorn.js";
 import _poolCaressOfPhyrexia from "../pool/caress-of-phyrexia.js";
 import _poolCastle from "../pool/castle.js";
+import _poolCataclysmicGearhulk from "../pool/cataclysmic-gearhulk.js";
 import _poolCaterwaulingBoggart from "../pool/caterwauling-boggart.js";
 import _poolCavalryPegasus from "../pool/cavalry-pegasus.js";
 import _poolCeaselessConflict from "../pool/ceaseless-conflict.js";
@@ -1013,6 +1014,7 @@ const shard: CardShard = {
     _poolCaptivatingUnicorn,
     _poolCaressOfPhyrexia,
     _poolCastle,
+    _poolCataclysmicGearhulk,
     _poolCaterwaulingBoggart,
     _poolCavalryPegasus,
     _poolCeaselessConflict,

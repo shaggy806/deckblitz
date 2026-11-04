@@ -508,6 +508,7 @@ import _poolMysticFamiliar from "../pool/mystic-familiar.js";
 import _poolMysticMight from "../pool/mystic-might.js";
 import _poolMysticPeak from "../pool/mystic-peak.js";
 import _poolMysticSkyfish from "../pool/mystic-skyfish.js";
+import _poolMythosOfSnapdax from "../pool/mythos-of-snapdax.js";
 import _poolNacreTalisman from "../pool/nacre-talisman.js";
 import _poolNantukoElder from "../pool/nantuko-elder.js";
 import _poolNarnamCobra from "../pool/narnam-cobra.js";
@@ -1426,6 +1427,7 @@ const shard: CardShard = {
     _poolMysticMight,
     _poolMysticPeak,
     _poolMysticSkyfish,
+    _poolMythosOfSnapdax,
     _poolNacreTalisman,
     _poolNantukoElder,
     _poolNarnamCobra,

@@ -81,6 +81,7 @@ import _poolBrineSeer from "../pool/brine-seer.js";
 import _poolBringToLight from "../pool/bring-to-light.js";
 import _poolBristlingBackwoods from "../pool/bristling-backwoods.js";
 import _poolBruteStrength from "../pool/brute-strength.js";
+import _poolBubblingMuck from "../pool/bubbling-muck.js";
 import _poolBucolicRanch from "../pool/bucolic-ranch.js";
 import _poolBuiltToSmash from "../pool/built-to-smash.js";
 import _poolBurnTrail from "../pool/burn-trail.js";
@@ -979,6 +980,7 @@ const shard: CardShard = {
     _poolBringToLight,
     _poolBristlingBackwoods,
     _poolBruteStrength,
+    _poolBubblingMuck,
     _poolBucolicRanch,
     _poolBuiltToSmash,
     _poolBurnTrail,

@@ -366,6 +366,7 @@ import _poolHeroicCharge from "../pool/heroic-charge.js";
 import _poolHexhavenDuelingArena from "../pool/hexhaven-dueling-arena.js";
 import _poolHiddenHorror from "../pool/hidden-horror.js";
 import _poolHideSeek from "../pool/hide-seek.js";
+import _poolHighTide from "../pool/high-tide.js";
 import _poolHissingIguanar from "../pool/hissing-iguanar.js";
 import _poolHitchclawRecluse from "../pool/hitchclaw-recluse.js";
 import _poolHoardRobber from "../pool/hoard-robber.js";
@@ -1286,6 +1287,7 @@ const shard: CardShard = {
     _poolHexhavenDuelingArena,
     _poolHiddenHorror,
     _poolHideSeek,
+    _poolHighTide,
     _poolHissingIguanar,
     _poolHitchclawRecluse,
     _poolHoardRobber,
