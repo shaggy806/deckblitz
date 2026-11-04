@@ -378,6 +378,7 @@ import _poolHarvestPyre from "../pool/harvest-pyre.js";
 import _poolHateMirage from "../pool/hate-mirage.js";
 import _poolHawkeyeTrickShot from "../pool/hawkeye-trick-shot.js";
 import _poolHaythamKenway from "../pool/haytham-kenway.js";
+import _poolHeadOfTheHunt from "../pool/head-of-the-hunt.js";
 import _poolHeartlessPillage from "../pool/heartless-pillage.js";
 import _poolHeavenEarth from "../pool/heaven-earth.js";
 import _poolHeliodTheRadiantDawn from "../pool/heliod-the-radiant-dawn.js";
@@ -480,6 +481,8 @@ import _poolLumberingMegasloth from "../pool/lumbering-megasloth.js";
 import _poolLushOasis from "../pool/lush-oasis.js";
 import _poolMaceOfTheValiant from "../pool/mace-of-the-valiant.js";
 import _poolMaelstromPulse from "../pool/maelstrom-pulse.js";
+import _poolMagmaticGalleon from "../pool/magmatic-galleon.js";
+import _poolMaliciousEclipse from "../pool/malicious-eclipse.js";
 import _poolManaDrain from "../pool/mana-drain.js";
 import _poolManagorgerHydra from "../pool/managorger-hydra.js";
 import _poolMarkovWaltzer from "../pool/markov-waltzer.js";
@@ -1341,6 +1344,7 @@ const shard: CardShard = {
     _poolHateMirage,
     _poolHawkeyeTrickShot,
     _poolHaythamKenway,
+    _poolHeadOfTheHunt,
     _poolHeartlessPillage,
     _poolHeavenEarth,
     _poolHeliodTheRadiantDawn,
@@ -1443,6 +1447,8 @@ const shard: CardShard = {
     _poolLushOasis,
     _poolMaceOfTheValiant,
     _poolMaelstromPulse,
+    _poolMagmaticGalleon,
+    _poolMaliciousEclipse,
     _poolManaDrain,
     _poolManagorgerHydra,
     _poolMarkovWaltzer,

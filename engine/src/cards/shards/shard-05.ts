@@ -523,6 +523,7 @@ import _poolMoltenPrimordial from "../pool/molten-primordial.js";
 import _poolMonsterManual from "../pool/monster-manual.js";
 import _poolMoonwingMoth from "../pool/moonwing-moth.js";
 import _poolMoorlandHaunt from "../pool/moorland-haunt.js";
+import _poolMornsongAria from "../pool/mornsong-aria.js";
 import _poolMortiphobia from "../pool/mortiphobia.js";
 import _poolMossMonster from "../pool/moss-monster.js";
 import _poolMostWanted from "../pool/most-wanted.js";
@@ -718,6 +719,7 @@ import _poolSpellshock from "../pool/spellshock.js";
 import _poolSpellskite from "../pool/spellskite.js";
 import _poolSpikeCannibal from "../pool/spike-cannibal.js";
 import _poolSpinewoodsArmadillo from "../pool/spinewoods-armadillo.js";
+import _poolSpiritOfTheLabyrinth from "../pool/spirit-of-the-labyrinth.js";
 import _poolSpiritSummoning from "../pool/spirit-summoning.js";
 import _poolSpiteMalice from "../pool/spite-malice.js";
 import _poolSpitefulBully from "../pool/spiteful-bully.js";
@@ -1412,6 +1414,7 @@ const shard: CardShard = {
     _poolMonsterManual,
     _poolMoonwingMoth,
     _poolMoorlandHaunt,
+    _poolMornsongAria,
     _poolMortiphobia,
     _poolMossMonster,
     _poolMostWanted,
@@ -1607,6 +1610,7 @@ const shard: CardShard = {
     _poolSpellskite,
     _poolSpikeCannibal,
     _poolSpinewoodsArmadillo,
+    _poolSpiritOfTheLabyrinth,
     _poolSpiritSummoning,
     _poolSpiteMalice,
     _poolSpitefulBully,

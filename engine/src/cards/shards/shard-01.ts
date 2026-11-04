@@ -14,6 +14,7 @@ import _poolAgitatorAnt from "../pool/agitator-ant.js";
 import _poolAgrusKosWojekVeteran from "../pool/agrus-kos-wojek-veteran.js";
 import _poolAinokTracker from "../pool/ainok-tracker.js";
 import _poolAjanisPridemate from "../pool/ajanis-pridemate.js";
+import _poolAkimTheSoaringWind from "../pool/akim-the-soaring-wind.js";
 import _poolAlabasterPotion from "../pool/alabaster-potion.js";
 import _poolAlabornGrenadier from "../pool/alaborn-grenadier.js";
 import _poolAlchemistsGift from "../pool/alchemists-gift.js";
@@ -898,6 +899,7 @@ const shard: CardShard = {
     _poolAgrusKosWojekVeteran,
     _poolAinokTracker,
     _poolAjanisPridemate,
+    _poolAkimTheSoaringWind,
     _poolAlabasterPotion,
     _poolAlabornGrenadier,
     _poolAlchemistsGift,

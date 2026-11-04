@@ -181,6 +181,7 @@ import _poolDescendantOfStorms from "../pool/descendant-of-storms.js";
 import _poolDesecratedTomb from "../pool/desecrated-tomb.js";
 import _poolDesertsHold from "../pool/deserts-hold.js";
 import _poolDetentionChariot from "../pool/detention-chariot.js";
+import _poolDeusOfCalamity from "../pool/deus-of-calamity.js";
 import _poolDevoutMonk from "../pool/devout-monk.js";
 import _poolDevoutWitness from "../pool/devout-witness.js";
 import _poolDigThroughTime from "../pool/dig-through-time.js";
@@ -275,6 +276,7 @@ import _poolFrostTitan from "../pool/frost-titan.js";
 import _poolFumeSpitter from "../pool/fume-spitter.js";
 import _poolFurorOfTheBitten from "../pool/furor-of-the-bitten.js";
 import _poolFuturistSentinel from "../pool/futurist-sentinel.js";
+import _poolGaeasWill from "../pool/gaeas-will.js";
 import _poolGaladrielElvenQueen from "../pool/galadriel-elven-queen.js";
 import _poolGangUp from "../pool/gang-up.js";
 import _poolGarrukCursedHuntsman from "../pool/garruk-cursed-huntsman.js";
@@ -1066,6 +1068,7 @@ const shard: CardShard = {
     _poolDesecratedTomb,
     _poolDesertsHold,
     _poolDetentionChariot,
+    _poolDeusOfCalamity,
     _poolDevoutMonk,
     _poolDevoutWitness,
     _poolDigThroughTime,
@@ -1160,6 +1163,7 @@ const shard: CardShard = {
     _poolFumeSpitter,
     _poolFurorOfTheBitten,
     _poolFuturistSentinel,
+    _poolGaeasWill,
     _poolGaladrielElvenQueen,
     _poolGangUp,
     _poolGarrukCursedHuntsman,

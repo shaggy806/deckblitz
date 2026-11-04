@@ -342,6 +342,7 @@ import _poolImperiousPerfect from "../pool/imperious-perfect.js";
 import _poolImposterMech from "../pool/imposter-mech.js";
 import _poolIndenturedOaf from "../pool/indentured-oaf.js";
 import _poolInfiniteGuidelineStation from "../pool/infinite-guideline-station.js";
+import _poolInnocentBystander from "../pool/innocent-bystander.js";
 import _poolInsolence from "../pool/insolence.js";
 import _poolInsomniaCrownCity from "../pool/insomnia-crown-city.js";
 import _poolIntoTheFloodMaw from "../pool/into-the-flood-maw.js";
@@ -387,6 +388,7 @@ import _poolKozilekButcherOfTruth from "../pool/kozilek-butcher-of-truth.js";
 import _poolKrarkClanStoker from "../pool/krark-clan-stoker.js";
 import _poolKraulForagers from "../pool/kraul-foragers.js";
 import _poolKravensCats from "../pool/kravens-cats.js";
+import _poolKumanosBlessing from "../pool/kumanos-blessing.js";
 import _poolKumanosPupils from "../pool/kumanos-pupils.js";
 import _poolKurkeshOnakkeAncient from "../pool/kurkesh-onakke-ancient.js";
 import _poolKytheonsIrregulars from "../pool/kytheons-irregulars.js";
@@ -791,6 +793,7 @@ import _poolWizardMentor from "../pool/wizard-mentor.js";
 import _poolWoeStrider from "../pool/woe-strider.js";
 import _poolWondrousCrucible from "../pool/wondrous-crucible.js";
 import _poolWoodlandChasm from "../pool/woodland-chasm.js";
+import _poolWordsOfWilding from "../pool/words-of-wilding.js";
 import _poolWorldlyCounsel from "../pool/worldly-counsel.js";
 import _poolWorldspineWurm from "../pool/worldspine-wurm.js";
 import _poolWornPowerstone from "../pool/worn-powerstone.js";
@@ -1167,6 +1170,7 @@ const shard: CardShard = {
     _poolImposterMech,
     _poolIndenturedOaf,
     _poolInfiniteGuidelineStation,
+    _poolInnocentBystander,
     _poolInsolence,
     _poolInsomniaCrownCity,
     _poolIntoTheFloodMaw,
@@ -1212,6 +1216,7 @@ const shard: CardShard = {
     _poolKrarkClanStoker,
     _poolKraulForagers,
     _poolKravensCats,
+    _poolKumanosBlessing,
     _poolKumanosPupils,
     _poolKurkeshOnakkeAncient,
     _poolKytheonsIrregulars,
@@ -1616,6 +1621,7 @@ const shard: CardShard = {
     _poolWoeStrider,
     _poolWondrousCrucible,
     _poolWoodlandChasm,
+    _poolWordsOfWilding,
     _poolWorldlyCounsel,
     _poolWorldspineWurm,
     _poolWornPowerstone,

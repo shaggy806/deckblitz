@@ -81,6 +81,7 @@ import _poolBlessedSanctuary from "../pool/blessed-sanctuary.js";
 import _poolBlightsowerThallid from "../pool/blightsower-thallid.js";
 import _poolBlightsteelColossus from "../pool/blightsteel-colossus.js";
 import _poolBlindWithAnger from "../pool/blind-with-anger.js";
+import _poolBloodcrazedHoplite from "../pool/bloodcrazed-hoplite.js";
 import _poolBloodshotTrainee from "../pool/bloodshot-trainee.js";
 import _poolBloomvineRegent from "../pool/bloomvine-regent.js";
 import _poolBlurSliver from "../pool/blur-sliver.js";
@@ -168,6 +169,7 @@ import _poolCourierGriffin from "../pool/courier-griffin.js";
 import _poolCourtlyProvocateur from "../pool/courtly-provocateur.js";
 import _poolCovetedPrize from "../pool/coveted-prize.js";
 import _poolCowlProwler from "../pool/cowl-prowler.js";
+import _poolCraftyCutpurse from "../pool/crafty-cutpurse.js";
 import _poolCrashLanding from "../pool/crash-landing.js";
 import _poolCrawlingBarrens from "../pool/crawling-barrens.js";
 import _poolCreakwoodGhoul from "../pool/creakwood-ghoul.js";
@@ -504,6 +506,7 @@ import _poolMakeYourMove from "../pool/make-your-move.js";
 import _poolMakeshiftMauler from "../pool/makeshift-mauler.js";
 import _poolMakindiSliderunner from "../pool/makindi-sliderunner.js";
 import _poolMaliciousAdvice from "../pool/malicious-advice.js";
+import _poolMaliciousMalfunction from "../pool/malicious-malfunction.js";
 import _poolMandateOfAbaddon from "../pool/mandate-of-abaddon.js";
 import _poolManicVandal from "../pool/manic-vandal.js";
 import _poolMarcusMutantMayor from "../pool/marcus-mutant-mayor.js";
@@ -1022,6 +1025,7 @@ const shard: CardShard = {
     _poolBlightsowerThallid,
     _poolBlightsteelColossus,
     _poolBlindWithAnger,
+    _poolBloodcrazedHoplite,
     _poolBloodshotTrainee,
     _poolBloomvineRegent,
     _poolBlurSliver,
@@ -1109,6 +1113,7 @@ const shard: CardShard = {
     _poolCourtlyProvocateur,
     _poolCovetedPrize,
     _poolCowlProwler,
+    _poolCraftyCutpurse,
     _poolCrashLanding,
     _poolCrawlingBarrens,
     _poolCreakwoodGhoul,
@@ -1445,6 +1450,7 @@ const shard: CardShard = {
     _poolMakeshiftMauler,
     _poolMakindiSliderunner,
     _poolMaliciousAdvice,
+    _poolMaliciousMalfunction,
     _poolMandateOfAbaddon,
     _poolManicVandal,
     _poolMarcusMutantMayor,

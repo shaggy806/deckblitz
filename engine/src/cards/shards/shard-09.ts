@@ -904,6 +904,7 @@ import _poolWitnessOfTomorrows from "../pool/witness-of-tomorrows.js";
 import _poolWolverineRiders from "../pool/wolverine-riders.js";
 import _poolWoodElves from "../pool/wood-elves.js";
 import _poolWoodedFoothills from "../pool/wooded-foothills.js";
+import _poolWordsOfWorship from "../pool/words-of-worship.js";
 import _poolWreckHunter from "../pool/wreck-hunter.js";
 import _poolWrigglingGrub from "../pool/wriggling-grub.js";
 import _poolWriteIntoBeing from "../pool/write-into-being.js";
@@ -1847,6 +1848,7 @@ const shard: CardShard = {
     _poolWolverineRiders,
     _poolWoodElves,
     _poolWoodedFoothills,
+    _poolWordsOfWorship,
     _poolWreckHunter,
     _poolWrigglingGrub,
     _poolWriteIntoBeing,

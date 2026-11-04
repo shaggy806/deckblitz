@@ -403,6 +403,7 @@ import _poolJointExploration from "../pool/joint-exploration.js";
 import _poolJudithCarnageConnoisseur from "../pool/judith-carnage-connoisseur.js";
 import _poolJundSojourners from "../pool/jund-sojourners.js";
 import _poolKalakscionHungerTyrant from "../pool/kalakscion-hunger-tyrant.js";
+import _poolKalitasTraitorOfGhet from "../pool/kalitas-traitor-of-ghet.js";
 import _poolKarametrasBlessing from "../pool/karametras-blessing.js";
 import _poolKarnLegacyReforged from "../pool/karn-legacy-reforged.js";
 import _poolKathariRemnant from "../pool/kathari-remnant.js";
@@ -1313,6 +1314,7 @@ const shard: CardShard = {
     _poolJudithCarnageConnoisseur,
     _poolJundSojourners,
     _poolKalakscionHungerTyrant,
+    _poolKalitasTraitorOfGhet,
     _poolKarametrasBlessing,
     _poolKarnLegacyReforged,
     _poolKathariRemnant,

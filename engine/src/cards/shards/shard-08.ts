@@ -530,6 +530,7 @@ import _poolMysticRetrieval from "../pool/mystic-retrieval.js";
 import _poolMythicProportions from "../pool/mythic-proportions.js";
 import _poolNahirisMachinations from "../pool/nahiris-machinations.js";
 import _poolNamorScourgeOfTheSeas from "../pool/namor-scourge-of-the-seas.js";
+import _poolNarsetParterOfVeils from "../pool/narset-parter-of-veils.js";
 import _poolNaturesClaim from "../pool/natures-claim.js";
 import _poolNavigatorsCompass from "../pool/navigators-compass.js";
 import _poolNecroduality from "../pool/necroduality.js";
@@ -568,6 +569,7 @@ import _poolOverflowingBasin from "../pool/overflowing-basin.js";
 import _poolOverlaidTerrain from "../pool/overlaid-terrain.js";
 import _poolOverrun from "../pool/overrun.js";
 import _poolOxiddaDaredevil from "../pool/oxidda-daredevil.js";
+import _poolPainMagnification from "../pool/pain-magnification.js";
 import _poolPainSuffering from "../pool/pain-suffering.js";
 import _poolPalaceJailer from "../pool/palace-jailer.js";
 import _poolParadigmShift from "../pool/paradigm-shift.js";
@@ -900,6 +902,7 @@ import _poolWildOx from "../pool/wild-ox.js";
 import _poolWildfireElemental from "../pool/wildfire-elemental.js";
 import _poolWildfireEmissary from "../pool/wildfire-emissary.js";
 import _poolWildfireWickerfolk from "../pool/wildfire-wickerfolk.js";
+import _poolWildwoodEscort from "../pool/wildwood-escort.js";
 import _poolWindSpirit from "../pool/wind-spirit.js";
 import _poolWingnutBatOnTheBelfry from "../pool/wingnut-bat-on-the-belfry.js";
 import _poolWipeAway from "../pool/wipe-away.js";
@@ -1473,6 +1476,7 @@ const shard: CardShard = {
     _poolMythicProportions,
     _poolNahirisMachinations,
     _poolNamorScourgeOfTheSeas,
+    _poolNarsetParterOfVeils,
     _poolNaturesClaim,
     _poolNavigatorsCompass,
     _poolNecroduality,
@@ -1511,6 +1515,7 @@ const shard: CardShard = {
     _poolOverlaidTerrain,
     _poolOverrun,
     _poolOxiddaDaredevil,
+    _poolPainMagnification,
     _poolPainSuffering,
     _poolPalaceJailer,
     _poolParadigmShift,
@@ -1843,6 +1848,7 @@ const shard: CardShard = {
     _poolWildfireElemental,
     _poolWildfireEmissary,
     _poolWildfireWickerfolk,
+    _poolWildwoodEscort,
     _poolWindSpirit,
     _poolWingnutBatOnTheBelfry,
     _poolWipeAway,

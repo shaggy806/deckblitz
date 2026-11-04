@@ -158,6 +158,7 @@ import _poolConcordWithTheKami from "../pool/concord-with-the-kami.js";
 import _poolContestOfClaws from "../pool/contest-of-claws.js";
 import _poolCoralColony from "../pool/coral-colony.js";
 import _poolCorpseAppraiser from "../pool/corpse-appraiser.js";
+import _poolCosmicIntervention from "../pool/cosmic-intervention.js";
 import _poolCouncilOfReeds from "../pool/council-of-reeds.js";
 import _poolCounselOfTheSoratami from "../pool/counsel-of-the-soratami.js";
 import _poolCoursersAccord from "../pool/coursers-accord.js";
@@ -368,6 +369,7 @@ import _poolIntegrity from "../pool/integrity.js";
 import _poolIntervention from "../pool/intervention.js";
 import _poolIntoTheFire from "../pool/into-the-fire.js";
 import _poolIntrepidRabbit from "../pool/intrepid-rabbit.js";
+import _poolInvisibleWomanSueStorm from "../pool/invisible-woman-sue-storm.js";
 import _poolInvulnerability from "../pool/invulnerability.js";
 import _poolIridescentVinelasher from "../pool/iridescent-vinelasher.js";
 import _poolIrohsDemonstration from "../pool/irohs-demonstration.js";
@@ -584,6 +586,7 @@ import _poolRainbowEfreet from "../pool/rainbow-efreet.js";
 import _poolRakdosRagemutt from "../pool/rakdos-ragemutt.js";
 import _poolRakshaGoldenCub from "../pool/raksha-golden-cub.js";
 import _poolRamunapExcavator from "../pool/ramunap-excavator.js";
+import _poolRangersRefueler from "../pool/rangers-refueler.js";
 import _poolRapaciousGuest from "../pool/rapacious-guest.js";
 import _poolRapierWit from "../pool/rapier-wit.js";
 import _poolRappellingScouts from "../pool/rappelling-scouts.js";
@@ -1078,6 +1081,7 @@ const shard: CardShard = {
     _poolContestOfClaws,
     _poolCoralColony,
     _poolCorpseAppraiser,
+    _poolCosmicIntervention,
     _poolCouncilOfReeds,
     _poolCounselOfTheSoratami,
     _poolCoursersAccord,
@@ -1288,6 +1292,7 @@ const shard: CardShard = {
     _poolIntervention,
     _poolIntoTheFire,
     _poolIntrepidRabbit,
+    _poolInvisibleWomanSueStorm,
     _poolInvulnerability,
     _poolIridescentVinelasher,
     _poolIrohsDemonstration,
@@ -1504,6 +1509,7 @@ const shard: CardShard = {
     _poolRakdosRagemutt,
     _poolRakshaGoldenCub,
     _poolRamunapExcavator,
+    _poolRangersRefueler,
     _poolRapaciousGuest,
     _poolRapierWit,
     _poolRappellingScouts,

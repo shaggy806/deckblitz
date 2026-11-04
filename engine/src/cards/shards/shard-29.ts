@@ -872,6 +872,7 @@ import _poolWitchHunt from "../pool/witch-hunt.js";
 import _poolWithstandDeath from "../pool/withstand-death.js";
 import _poolWoodcallerAutomaton from "../pool/woodcaller-automaton.js";
 import _poolWoodenStake from "../pool/wooden-stake.js";
+import _poolWordsOfWar from "../pool/words-of-war.js";
 import _poolWorldsoulColossus from "../pool/worldsoul-colossus.js";
 import _poolWortBoggartAuntie from "../pool/wort-boggart-auntie.js";
 import _poolXunYuWeiAdvisor from "../pool/xun-yu-wei-advisor.js";
@@ -1781,6 +1782,7 @@ const shard: CardShard = {
     _poolWithstandDeath,
     _poolWoodcallerAutomaton,
     _poolWoodenStake,
+    _poolWordsOfWar,
     _poolWorldsoulColossus,
     _poolWortBoggartAuntie,
     _poolXunYuWeiAdvisor,

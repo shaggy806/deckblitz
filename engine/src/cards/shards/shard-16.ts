@@ -278,6 +278,7 @@ import _poolFleetingImage from "../pool/fleeting-image.js";
 import _poolFleetingMemories from "../pool/fleeting-memories.js";
 import _poolFlickerwisp from "../pool/flickerwisp.js";
 import _poolFloodwaterDam from "../pool/floodwater-dam.js";
+import _poolFlourishingDefenses from "../pool/flourishing-defenses.js";
 import _poolFocusTheMind from "../pool/focus-the-mind.js";
 import _poolFodderLaunch from "../pool/fodder-launch.js";
 import _poolFolkOfThePines from "../pool/folk-of-the-pines.js";
@@ -1253,6 +1254,7 @@ const shard: CardShard = {
     _poolFleetingMemories,
     _poolFlickerwisp,
     _poolFloodwaterDam,
+    _poolFlourishingDefenses,
     _poolFocusTheMind,
     _poolFodderLaunch,
     _poolFolkOfThePines,

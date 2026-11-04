@@ -847,6 +847,7 @@ import _poolWizardsRockets from "../pool/wizards-rockets.js";
 import _poolWolfhuntersQuiver from "../pool/wolfhunters-quiver.js";
 import _poolWolfirSilverheart from "../pool/wolfir-silverheart.js";
 import _poolWoodlandPatrol from "../pool/woodland-patrol.js";
+import _poolWordsOfWaste from "../pool/words-of-waste.js";
 import _poolWorthyCause from "../pool/worthy-cause.js";
 import _poolYaroksFenlurker from "../pool/yaroks-fenlurker.js";
 import _poolYewSpirit from "../pool/yew-spirit.js";
@@ -1726,6 +1727,7 @@ const shard: CardShard = {
     _poolWolfhuntersQuiver,
     _poolWolfirSilverheart,
     _poolWoodlandPatrol,
+    _poolWordsOfWaste,
     _poolWorthyCause,
     _poolYaroksFenlurker,
     _poolYewSpirit,

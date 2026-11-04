@@ -456,6 +456,7 @@ import _poolMadrushCyclops from "../pool/madrush-cyclops.js";
 import _poolMaesterSeymour from "../pool/maester-seymour.js";
 import _poolMaestrosInitiate from "../pool/maestros-initiate.js";
 import _poolMagdaTheHoardmaster from "../pool/magda-the-hoardmaster.js";
+import _poolMagusOfTheWill from "../pool/magus-of-the-will.js";
 import _poolMalevolentWitchkite from "../pool/malevolent-witchkite.js";
 import _poolManaSkimmer from "../pool/mana-skimmer.js";
 import _poolManorGargoyle from "../pool/manor-gargoyle.js";
@@ -1344,6 +1345,7 @@ const shard: CardShard = {
     _poolMaesterSeymour,
     _poolMaestrosInitiate,
     _poolMagdaTheHoardmaster,
+    _poolMagusOfTheWill,
     _poolMalevolentWitchkite,
     _poolManaSkimmer,
     _poolManorGargoyle,

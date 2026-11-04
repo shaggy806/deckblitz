@@ -471,6 +471,7 @@ import _poolMajorTeroh from "../pool/major-teroh.js";
 import _poolMammothHarness from "../pool/mammoth-harness.js";
 import _poolManaCrypt from "../pool/mana-crypt.js";
 import _poolManifoldMouse from "../pool/manifold-mouse.js";
+import _poolMaralenOfTheMornsong from "../pool/maralen-of-the-mornsong.js";
 import _poolMaraudingKnight from "../pool/marauding-knight.js";
 import _poolMaraudingLooter from "../pool/marauding-looter.js";
 import _poolMarduBanner from "../pool/mardu-banner.js";
@@ -1370,6 +1371,7 @@ const shard: CardShard = {
     _poolMammothHarness,
     _poolManaCrypt,
     _poolManifoldMouse,
+    _poolMaralenOfTheMornsong,
     _poolMaraudingKnight,
     _poolMaraudingLooter,
     _poolMarduBanner,

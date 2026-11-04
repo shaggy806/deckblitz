@@ -487,6 +487,7 @@ import _poolMeticulousCommons from "../pool/meticulous-commons.js";
 import _poolMinasMorgulDarkFortress from "../pool/minas-morgul-dark-fortress.js";
 import _poolMindDrain from "../pool/mind-drain.js";
 import _poolMindwrackLiege from "../pool/mindwrack-liege.js";
+import _poolMirkwoodBats from "../pool/mirkwood-bats.js";
 import _poolMirrorImage from "../pool/mirror-image.js";
 import _poolMirrorShield from "../pool/mirror-shield.js";
 import _poolMistcutterHydra from "../pool/mistcutter-hydra.js";
@@ -718,6 +719,7 @@ import _poolSpectralInterference from "../pool/spectral-interference.js";
 import _poolSphinxOfFalseConclusions from "../pool/sphinx-of-false-conclusions.js";
 import _poolSpikeWeaver from "../pool/spike-weaver.js";
 import _poolSpinnerOfSouls from "../pool/spinner-of-souls.js";
+import _poolSpinneretAndSpiderling from "../pool/spinneret-and-spiderling.js";
 import _poolSpireSerpent from "../pool/spire-serpent.js";
 import _poolSpiritMantle from "../pool/spirit-mantle.js";
 import _poolSpiritMirror from "../pool/spirit-mirror.js";
@@ -1397,6 +1399,7 @@ const shard: CardShard = {
     _poolMinasMorgulDarkFortress,
     _poolMindDrain,
     _poolMindwrackLiege,
+    _poolMirkwoodBats,
     _poolMirrorImage,
     _poolMirrorShield,
     _poolMistcutterHydra,
@@ -1628,6 +1631,7 @@ const shard: CardShard = {
     _poolSphinxOfFalseConclusions,
     _poolSpikeWeaver,
     _poolSpinnerOfSouls,
+    _poolSpinneretAndSpiderling,
     _poolSpireSerpent,
     _poolSpiritMantle,
     _poolSpiritMirror,

@@ -11,6 +11,7 @@ import _poolAbominationTerrifyingTitan from "../pool/abomination-terrifying-tita
 import _poolAbunaAcolyte from "../pool/abuna-acolyte.js";
 import _poolAbundantCountryside from "../pool/abundant-countryside.js";
 import _poolAchillesDavenport from "../pool/achilles-davenport.js";
+import _poolAdrenalineJockey from "../pool/adrenaline-jockey.js";
 import _poolAerialCaravan from "../pool/aerial-caravan.js";
 import _poolAethergeodeMiner from "../pool/aethergeode-miner.js";
 import _poolAetherstormRoc from "../pool/aetherstorm-roc.js";
@@ -79,6 +80,7 @@ import _poolBerserkersOnslaught from "../pool/berserkers-onslaught.js";
 import _poolBetrayalAtTheVault from "../pool/betrayal-at-the-vault.js";
 import _poolBigGameHunter from "../pool/big-game-hunter.js";
 import _poolBindingMummy from "../pool/binding-mummy.js";
+import _poolBioessenceHydra from "../pool/bioessence-hydra.js";
 import _poolBiogenicUpgrade from "../pool/biogenic-upgrade.js";
 import _poolBirthingPod from "../pool/birthing-pod.js";
 import _poolBitterChill from "../pool/bitter-chill.js";
@@ -441,6 +443,7 @@ import _poolMantisRider from "../pool/mantis-rider.js";
 import _poolMaraudingBoneslasher from "../pool/marauding-boneslasher.js";
 import _poolMaritLagesSlumber from "../pool/marit-lages-slumber.js";
 import _poolMarthaJones from "../pool/martha-jones.js";
+import _poolMarvelBoyNohVarr from "../pool/marvel-boy-noh-varr.js";
 import _poolMaryReadAndAnneBonny from "../pool/mary-read-and-anne-bonny.js";
 import _poolMaskedAdmirers from "../pool/masked-admirers.js";
 import _poolMasterOfEtherium from "../pool/master-of-etherium.js";
@@ -886,6 +889,7 @@ const shard: CardShard = {
     _poolAbunaAcolyte,
     _poolAbundantCountryside,
     _poolAchillesDavenport,
+    _poolAdrenalineJockey,
     _poolAerialCaravan,
     _poolAethergeodeMiner,
     _poolAetherstormRoc,
@@ -954,6 +958,7 @@ const shard: CardShard = {
     _poolBetrayalAtTheVault,
     _poolBigGameHunter,
     _poolBindingMummy,
+    _poolBioessenceHydra,
     _poolBiogenicUpgrade,
     _poolBirthingPod,
     _poolBitterChill,
@@ -1316,6 +1321,7 @@ const shard: CardShard = {
     _poolMaraudingBoneslasher,
     _poolMaritLagesSlumber,
     _poolMarthaJones,
+    _poolMarvelBoyNohVarr,
     _poolMaryReadAndAnneBonny,
     _poolMaskedAdmirers,
     _poolMasterOfEtherium,

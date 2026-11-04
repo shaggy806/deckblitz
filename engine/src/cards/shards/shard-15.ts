@@ -221,6 +221,7 @@ import _poolExtirpate from "../pool/extirpate.js";
 import _poolEyesOfTheWisent from "../pool/eyes-of-the-wisent.js";
 import _poolEzuriClawOfProgress from "../pool/ezuri-claw-of-progress.js";
 import _poolEzzarootChanneler from "../pool/ezzaroot-channeler.js";
+import _poolFallOfCairAndros from "../pool/fall-of-cair-andros.js";
 import _poolFancyFootwork from "../pool/fancy-footwork.js";
 import _poolFangornTreeShepherd from "../pool/fangorn-tree-shepherd.js";
 import _poolFarmMarket from "../pool/farm-market.js";
@@ -1079,6 +1080,7 @@ const shard: CardShard = {
     _poolEyesOfTheWisent,
     _poolEzuriClawOfProgress,
     _poolEzzarootChanneler,
+    _poolFallOfCairAndros,
     _poolFancyFootwork,
     _poolFangornTreeShepherd,
     _poolFarmMarket,

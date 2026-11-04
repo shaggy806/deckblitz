@@ -239,6 +239,7 @@ import _poolFalseProphet from "../pool/false-prophet.js";
 import _poolFangsOfKalonia from "../pool/fangs-of-kalonia.js";
 import _poolFarmsteadGleaner from "../pool/farmstead-gleaner.js";
 import _poolFascination from "../pool/fascination.js";
+import _poolFathomMage from "../pool/fathom-mage.js";
 import _poolFeastOfTheUnicorn from "../pool/feast-of-the-unicorn.js";
 import _poolFellSpecter from "../pool/fell-specter.js";
 import _poolFenStalker from "../pool/fen-stalker.js";
@@ -1141,6 +1142,7 @@ const shard: CardShard = {
     _poolFangsOfKalonia,
     _poolFarmsteadGleaner,
     _poolFascination,
+    _poolFathomMage,
     _poolFeastOfTheUnicorn,
     _poolFellSpecter,
     _poolFenStalker,
