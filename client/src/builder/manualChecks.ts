@@ -10221,6 +10221,35 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'Misleading Signpost: sending your own attacker at another player',
+    board({
+      you: { bf: ['Hill Giant', 'Island*3'], hand: ['Misleading Signpost'] },
+      opp: [{ bf: ['Plains'] }, { bf: ['Plains'] }],
+    }),
+  ),
+  preset(
+    'Misleading Signpost: turning an attacker from you onto another player, four at the table',
+    board({
+      turn: 0,
+      you: { bf: ['Island*3'], hand: ['Misleading Signpost'] },
+      opp: [{ human: true, bf: ['Hill Giant'] }, { bf: ['Plains'] }, { bf: ['Plains'] }],
+    }),
+  ),
+  preset(
+    "Capricopian: the player it's attacking pays and sends it on",
+    board({
+      you: { bf: [{ name: 'Capricopian', counters: { '+1/+1': 2 } }] },
+      opp: [{ human: true, bf: ['Island*2'] }, { bf: ['Plains'] }],
+    }),
+  ),
+  preset(
+    "Fog Patch: an attacker that can't be blocked is stopped anyway",
+    board({
+      you: { bf: ['Phantom Warrior'] },
+      opp: { human: true, bf: ['Forest*2'], hand: ['Fog Patch'] },
+    }),
+  ),
+  preset(
     'Noxious Vapors: one card of each color from your hand',
     board({
       you: { bf: ['Swamp*3'], hand: ['Noxious Vapors', 'Lightning Bolt', 'Shock', 'Grizzly Bears', 'Ornithopter', 'Forest'] },

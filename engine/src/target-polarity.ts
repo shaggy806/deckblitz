@@ -555,6 +555,11 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "become-blocked": (n, v) => {
     if (n.target !== undefined) v.touch(n.target, "harm", MAJOR);
   },
+  // An attacker sent elsewhere: an opponent's, away from us, or our own at
+  // whoever's open. The board's call.
+  "reselect-attack": (n, v) => {
+    if (n.target !== undefined) v.touch(n.target, "either", MAJOR);
+  },
   // Losing a keyword hurts — but losing defender helps (Jaded Analyst).
   "lose-keywords": (n, v) => {
     const side = n.keywords.every((k) => k === "defender") ? "help" : "harm";

@@ -5786,6 +5786,25 @@ export type EffectSpec =
     }
   | {
       /**
+       * "You may reselect which player or permanent target attacking creature
+       * is attacking" (rule 508.7 — Misleading Signpost): this effect's
+       * controller, whoever controls the creature, answers the
+       * `enter-attacking` decision, among what its controller could attack
+       * (508.7c) with what it's attacking now first, which is the "may": it
+       * stays. It isn't declared again, so no "attacks" trigger sees it and it
+       * still counts as having attacked what it was declared at (508.7a);
+       * requirements and restrictions don't apply (508.7b). `target` is one
+       * creature, `filter` each permanent matching it as this resolves
+       * (Windshaper Planetar's "for each attacking creature"). `onlyPlayers`:
+       * "which player" and no permanent (Capricopian).
+       */
+      readonly kind: "reselect-attack";
+      readonly target?: EffectTargetRef;
+      readonly filter?: CardFilter;
+      readonly onlyPlayers?: true;
+    }
+  | {
+      /**
        * "Target creature **loses flying** until end of turn" (Emerald Charm):
        * the keywords are taken away in layer 6 at this effect's timestamp
        * (rule 613.7) — from what had them before, printed or granted earlier;
@@ -11382,6 +11401,9 @@ export interface EffectApi {
   /** See the `"become-blocked"` {@link EffectSpec}: one creature, or every
    * attacker matching `filter`. */
   becomeBlocked(on: TargetRef | CardFilter): void;
+  /** See the `"reselect-attack"` {@link EffectSpec}: one creature, or every
+   * attacker matching `filter`. */
+  reselectAttack(on: TargetRef | CardFilter, onlyPlayers: boolean): void;
   /** See the `"lose-keywords"` {@link EffectSpec}: one permanent, or every
    * one matching `filter`. */
   loseKeywords(
@@ -16465,6 +16487,15 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       }
       const target = spec.target === undefined ? undefined : resolveEffectTarget(spec.target, ctx);
       if (target !== undefined) ctx.becomeBlocked(target);
+      return;
+    }
+    case "reselect-attack": {
+      if (spec.filter !== undefined) {
+        ctx.reselectAttack(spec.filter, spec.onlyPlayers === true);
+        return;
+      }
+      const target = spec.target === undefined ? undefined : resolveEffectTarget(spec.target, ctx);
+      if (target !== undefined) ctx.reselectAttack(target, spec.onlyPlayers === true);
       return;
     }
     case "lose-keywords": {

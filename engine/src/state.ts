@@ -3167,6 +3167,9 @@ export interface MulliganHandState {
 export interface EnterAttackingChoice {
   readonly object: ObjectId;
   readonly options: readonly (PlayerId | ObjectId)[];
+  /** It's already attacking `options[0]`, and this is a reselection of what it
+   * attacks (rule 508.7), not a creature entering attacking. */
+  readonly reselect?: true;
 }
 
 /** A resolving spell or ability paused on a choice made partway through

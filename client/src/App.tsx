@@ -3679,7 +3679,6 @@ function Table({
 
   const tileFor = (
     obj: VisibleObject,
-    ownerSeat: PlayerId,
     ids: readonly ObjectId[] = [obj.id],
     opts: { stackCount?: number; mini?: boolean } = {},
   ) => {
@@ -3866,7 +3865,9 @@ function Table({
       const picked = proliferatePicks.some((t) => t.kind === 'object' && t.object === id)
       highlight = eligibleToProliferate(proliferateAction, id) && !picked
       selected = picked
-    } else if (mode === 'priority' && ownerSeat === seat) {
+    } else if (mode === 'priority') {
+      // On another player's board too: an ability anyone may activate (Excavation,
+      // Capricopian), which only comes in the offers when this seat may.
       activatable = ids.some(
         (i) =>
           abilitiesBySource.has(i) ||
@@ -4012,7 +4013,7 @@ function Table({
             // cancels the pointer stream this drag runs on.
             onDragStart={own ? (e) => e.preventDefault() : undefined}
           >
-            {tileFor(entry.sample, pid, entry.ids, {
+            {tileFor(entry.sample, entry.ids, {
               // Identical permanents folded here in the client, each of which
               // may itself be one of the engine's compacted token stacks —
               // see `BoardEntry.count`.
@@ -4034,7 +4035,7 @@ function Table({
                       { '--att-z': entry.attachments.length - i } as CSSProperties
                     }
                   >
-                    {tileFor(a, pid, [a.id], { mini: true })}
+                    {tileFor(a, [a.id], { mini: true })}
                   </div>
                 ))}
               </div>

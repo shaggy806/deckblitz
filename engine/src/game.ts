@@ -33266,6 +33266,15 @@ export class Game {
             : this.battlefieldMatching(controller, on as CardFilter);
         for (const id of ids) this.becomeBlocked(id);
       },
+      reselectAttack: (on, onlyPlayers) => {
+        const ids =
+          "kind" in on && (on.kind === "object" || on.kind === "player")
+            ? on.kind === "object"
+              ? [on.object]
+              : []
+            : this.battlefieldMatching(controller, on as CardFilter);
+        this.reselectAttack(ids, controller, onlyPlayers);
+      },
       loseKeywords: (on, keywords, duration, scopeTo, cantHave) => {
         const lasting = lastingHere(duration);
         if ("kind" in on && (on.kind === "object" || on.kind === "player")) {
@@ -42038,6 +42047,31 @@ export class Game {
     }
   }
 
+  /**
+   * `chooser` may reselect what these attackers are attacking (rule 508.7), the
+   * `enter-attacking` decision: what each one's controller could attack
+   * (508.7c), with what it's attacking now first, so that staying is an answer.
+   */
+  private reselectAttack(ids: readonly ObjectId[], chooser: PlayerId, onlyPlayers: boolean): void {
+    const choosing: EnterAttackingChoice[] = [];
+    for (const id of ids) {
+      const object = this.state.objects[id];
+      if (object?.zone !== "battlefield" || object.attacking === null) continue;
+      const current = object.attacking;
+      const others = this.legalDefenders(object.controller).filter(
+        (d) => d !== current && (!onlyPlayers || this.state.players[d as PlayerId] !== undefined),
+      );
+      if (others.length > 0) choosing.push({ object: id, options: [current, ...others], reselect: true });
+    }
+    if (choosing.length === 0) return;
+    const source = this.state.decisionSource ?? undefined;
+    (this.state.pendingEnterAttacking ??= []).push({
+      player: chooser,
+      creatures: choosing,
+      ...(source !== undefined ? { source } : {}),
+    });
+  }
+
   /** Ask the next player queued in `pendingEnterAttacking` what their
    * creatures attack — every batch of theirs at once, and only the creatures
    * still on the battlefield attacking. */
@@ -42072,10 +42106,20 @@ export class Game {
       player,
     );
     if (why !== null) throw new Error(why);
+    const asked = this.state.awaiting?.kind === "enter-attacking" ? this.state.awaiting.creatures : [];
     this.state.awaiting = null;
     for (const { object: id, target } of assignments) {
       const object = this.state.objects[id];
       if (object?.zone !== "battlefield" || object.attacking === null) continue;
+      if (asked.find((c) => c.object === id)?.reselect === true) {
+        // Rule 508.7a: still in combat, never declared again. Staying is no event.
+        if (object.attacking === target) continue;
+        object.attacking = target;
+        delete object.attackingNothing;
+        invalidateComputedCache();
+        this.emit({ type: "attack-reselected", object: id, defender: target });
+        continue;
+      }
       object.attacking = target;
       this.emit({ type: "entered-attacking", object: id, defender: target });
     }

@@ -977,6 +977,13 @@ export type GameEvent =
       readonly defender: PlayerId | ObjectId;
     })
   | (Base & {
+      /** What an attacker is attacking was reselected (rule 508.7). It wasn't
+       * declared again, so no attack trigger reads this (508.7a). */
+      readonly type: "attack-reselected";
+      readonly object: ObjectId;
+      readonly defender: PlayerId | ObjectId;
+    })
+  | (Base & {
       /** The whole attack declaration, once it's known — for "whenever you
        * attack with N or more creatures" (Overwhelming Instinct, Tide
        * Skimmer), which can't be read off the per-attacker events. Emitted

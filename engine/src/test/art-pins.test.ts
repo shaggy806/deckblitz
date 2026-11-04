@@ -132,6 +132,9 @@ const NO_TOKEN_PRINTING = new Set([
   // card lists a token in the Oracle snapshot's `all_parts` (checked 2026-10-28).
   "Knight Token (banding)",
   "Wolves of the Hunt",
+  // Kjeldoran Home Guard's 0/1 white Deserter: the card lists no token in the Oracle
+  // snapshot's `all_parts`, and the snapshot holds none of that name (checked 2026-11-03).
+  "Deserter Token",
 ]);
 
 describe("token art", () => {

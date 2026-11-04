@@ -2949,6 +2949,9 @@ export function parseSentence(sentence, ctx) {
   // "For each attacking creature, its owner puts it on their choice of the
   // top or bottom of their library" (Aetherspouts): no amount — the owners'
   // choices, then the moves together (`put-on-libraries`, rule 401.4).
+  if (/^for each attacking creature, you may reselect which player or permanent that creature is attacking\.$/i.test(s)) {
+    return { kind: "reselect-attack", filter: { type: "creature", attacking: true } };
+  }
   if (/^for each attacking creature, its owner puts it on their choice of the top or bottom of their library\.$/i.test(s)) {
     return { kind: "put-on-libraries", what: { all: { type: "creature", attacking: true } }, position: "owner-chooses" };
   }
@@ -5666,6 +5669,11 @@ export function parseSentence(sentence, ctx) {
     if (re(`it loses all abilities until end of turn`).test(s)) {
       return { kind: "lose-abilities", target: "trigger-object", duration: "end-of-turn" };
     }
+  }
+  // Rule 508.7: the `enter-attacking` decision, staying being an answer, so
+  // the "may" is in the effect.
+  if ((m = re(`you may reselect which player or permanent (${TARGET}) is attacking`).exec(s))) {
+    return { kind: "reselect-attack", target: slot(m[1]) };
   }
   // An effect saying attackers become blocked (rule 509.1h): one (Curtain of
   // Light), X of them (Choking Vines), or all (Fog Patch).
@@ -12409,6 +12417,10 @@ function parseFaceAsWritten(face, ctx = {}) {
       // declared (509.3f) and not again, so part of the trigger condition.
       const blocksWith = /^Whenever ~ blocks a creature with ([a-z]+)$/.exec(clause);
       const blockedKeyword = blocksWith === null ? undefined : KEYWORDS[blocksWith[1]];
+      // "When ~ enters during the declare attackers step" (Misleading
+      // Signpost): part of the trigger condition, asked as it enters (603.1).
+      const duringAttackers = /^When ~ enters during the declare attackers step$/.test(clause);
+      if (duringAttackers) clause = "When ~ enters";
       // "Whenever you tap a land for mana while you're the monarch" (Regal
       // Behemoth): a triggered mana ability, its condition read as it's made.
       const whileMonarch = /^Whenever .+ for mana while you're the monarch$/.test(clause);
@@ -12465,6 +12477,7 @@ function parseFaceAsWritten(face, ctx = {}) {
         ...(timeCounterOff ? { whileSuspended: true } : {}),
         ...(whileSaddled ? { whileCondition: { kind: "source", filter: { saddled: true } } } : {}),
         ...(blockedKeyword !== undefined ? { whileCondition: { kind: "trigger-object", filter: { keyword: blockedKeyword } } } : {}),
+        ...(duringAttackers ? { whileCondition: { kind: "turn-structure", steps: ["declare-attackers"] } } : {}),
         ...(whileMonarch ? { condition: { kind: "monarch", who: "you" } } : {}),
         ...(duringMain
           ? {

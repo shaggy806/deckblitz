@@ -490,6 +490,8 @@ function eventText(event: GameEvent, nameOf: NameOf, seats: readonly SeatStatus[
       return `${name(event.attacker)} attacks ${defender(event.defender)}`
     case 'entered-attacking':
       return `${name(event.object)} enters attacking ${defender(event.defender)}`
+    case 'attack-reselected':
+      return `${name(event.object)} is now attacking ${defender(event.defender)}`
     case 'attackers-declared':
       return `${who(event.player)} attacks with ${event.attackers.length}`
     case 'attacked-alone':

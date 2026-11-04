@@ -6839,3 +6839,27 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 - **Do:** Cast Crush Underfoot on Bob's Colossal Dreadmaw. When asked, click Stone Giant and confirm.
 - **Expect:** Only Hill Giant and Stone Giant can be clicked, not Grizzly Bears. The Dreadmaw has 3 damage.
+
+## Reselecting what an attacker attacks, and blocks by an effect (2026-11-03)
+
+### Misleading Signpost: sending your own attacker at another player
+
+- **Do:** Attack Bob with Hill Giant. In the declare attackers step, cast Misleading Signpost and target Hill Giant.
+- **Expect:** The banner reads "Misleading Signpost: choose what each attacks". Pick Hill Giant, then Carol: it attacks Carol, and the log says "is now attacking". Bob is no longer asked to block it.
+- **Not a bug:** Picking Bob again is how you say no: it stays where it is.
+
+### Misleading Signpost: turning an attacker from you onto another player, four at the table
+
+- **Do:** As Bob, attack Alice with Hill Giant. As Alice, in the declare attackers step, cast Misleading Signpost and target Hill Giant.
+- **Expect:** You're asked what Bob's Hill Giant attacks: Alice, Carol or Dave, never Bob. Pick Carol and it attacks her.
+
+### Capricopian: the player it's attacking pays and sends it on
+
+- **Do:** Attack Bob with Capricopian. As Bob, in the declare attackers step, activate it for {2}.
+- **Expect:** It gets a +1/+1 counter, and Bob is asked what it attacks: Bob or Carol, never Alice. Pick Carol and it attacks her.
+- **Not a bug:** Alice can't activate it, and neither could Carol while it's attacking Bob.
+
+### Fog Patch: an attacker that can't be blocked is stopped anyway
+
+- **Do:** Attack Bob with Phantom Warrior. As Bob, in the declare blockers step, cast Fog Patch.
+- **Expect:** Bob takes no damage: Phantom Warrior is blocked with nothing blocking it.

@@ -6990,6 +6990,16 @@ describe("creatures in a blocking relation (blockingRelation)", () => {
       { on: "blocked-by", who: "attached" },
     ]);
     expect(blade.triggered[0].effect).toMatchObject({ target: "trigger-object" });
+    // Reselecting what an attacker attacks (rule 508.7).
+    const signpost = face("Misleading Signpost", "Artifact", "Flash\nWhen this artifact enters during the declare attackers step, you may reselect which player or permanent target attacking creature is attacking. (It can't attack its controller or their permanents.)\n{T}: Add {U}.");
+    expect(signpost.complete).toBe(true);
+    expect(signpost.triggered[0]).toMatchObject({
+      whileCondition: { kind: "turn-structure", steps: ["declare-attackers"] },
+      effect: { kind: "reselect-attack", target: 0 },
+    });
+    const planetar = face("Windshaper Planetar", "Creature — Angel", "Flash\nFlying\nWhen this creature enters during the declare attackers step, for each attacking creature, you may reselect which player or permanent that creature is attacking. (It can't attack its controller or their permanents.)");
+    expect(planetar.complete).toBe(true);
+    expect(planetar.triggered[0].effect).toEqual({ kind: "reselect-attack", filter: { type: "creature", attacking: true } });
     // A creature's record of combat, and what's attacking you.
     const clockwork = "At end of combat, if this creature attacked or blocked this combat, remove a +1/+0 counter from it.";
     const swarm = face("Clockwork", "Artifact Creature — Insect", clockwork);
