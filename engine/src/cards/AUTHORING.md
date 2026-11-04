@@ -5820,6 +5820,10 @@ is "can't attack a player it has already attacked this turn" (Port Razer), by th
   cards, rule 607.2a, whoever controls it now.
   `affects` is ignored. `play-from-exile-permission.test.ts`,
   `exile-permission-options.test.ts`.
+- `replacement: { event: "would-proliferate", times }` — "If you would
+  proliferate, proliferate twice instead" (Tekuthal, Inquiry Dominus): this
+  permanent's controller, each time its own question (rule 701.34a); several
+  multiply (rule 614.5).
 - `payLifeForPips: Color` — "For each {B} in a cost, you may pay 2 life rather
   than pay that mana" (K'rrik, Son of Yawgmoth): every mana cost this permanent's
   controller pays — a spell's, an activation's, a special action's, a "you may

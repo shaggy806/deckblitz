@@ -7355,3 +7355,10 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 - **Do:** Activate Viscera Seer, sacrificing Grizzly Bears. When Kels's trigger asks you to pay {U/B}, say yes, then pick "1 with life (2 life)".
 - **Expect:** You pay 2 life, the Swamp stays untapped, and you draw a card.
+
+## Proliferating twice (2026-11-04)
+
+### Tekuthal: proliferate twice instead
+
+- **Do:** Cast Volt Charge at Bob. Choose the Grizzly Bears when asked to proliferate, then the Hill Giant when asked again.
+- **Expect:** Two proliferate questions, one after the other. The Bears end with two +1/+1 counters and the Giant with two -1/-1 counters.

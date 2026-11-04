@@ -15140,6 +15140,23 @@ describe("mana that adds counters to what it casts", () => {
     expect(attendant.activated[0].effect.spellEntersWith).toEqual({ spell: { type: "creature", notSubtypes: ["Human"] }, counter: "+1/+1", amount: 1 });
   });
 
+  it("Tekuthal, Inquiry Dominus", () => {
+    const face = read(
+      "Legendary Creature — Phyrexian Horror",
+      "Flying\nIf you would proliferate, proliferate twice instead.\n{1}{U/P}{U/P}, Remove three counters from among other artifacts, creatures, and planeswalkers you control: Put an indestructible counter on ~. ({U/P} can be paid with either {U} or 2 life.)",
+    );
+    expect(face.complete).toBe(true);
+    expect(face.static[0].replacement).toEqual({ event: "would-proliferate", times: 2 });
+    expect(face.activated[0].cost.removeCounter).toEqual({
+      kind: "any",
+      count: 3,
+      from: { typesAnyOf: ["artifact", "creature", "planeswalker"] },
+      excludeSource: true,
+      among: true,
+    });
+    expect(face.activated[0].effect).toEqual({ kind: "add-counter", target: "source", counter: "indestructible", amount: 1 });
+  });
+
   it("Grasp of Fate", () => {
     const face = read(
       "Enchantment",

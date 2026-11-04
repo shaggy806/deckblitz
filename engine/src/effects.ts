@@ -6088,10 +6088,11 @@ export type EffectSpec =
     }
   | {
       /**
-       * Proliferate (rule 701.27): choose any number of permanents and/or
+       * Proliferate (rule 701.34): choose any number of permanents and/or
        * players with counters on them, then give each another counter of each
        * kind already there. Raises a `proliferate` decision — the choice is
-       * the card, and choosing nothing is legal.
+       * the card, and choosing nothing is legal. A `would-proliferate`
+       * replacement makes it several (Tekuthal, Inquiry Dominus).
        */
       readonly kind: "proliferate";
       /** Applied once the choice is answered — Contentious Plan's

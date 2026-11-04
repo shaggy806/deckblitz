@@ -11,6 +11,7 @@
   "effect:each-player-may-feasibility",
   "cost:pay-life-for-pips",
   "effect:target-per-opponent",
+  "replacement:proliferate-replacement",
   "trigger:linked-exile-each-upkeep-return-one",
   "replacement:dies-to-library-top",
   "replacement:discard-to-library-replacement",

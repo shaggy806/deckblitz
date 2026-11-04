@@ -1507,7 +1507,10 @@ export function parseCost(text) {
   const cost = { mana: null, tap: false };
   const extra = {};
   // "Pay half your life, rounded up" is one part, its comma aside.
-  for (const part of text.replace("Pay half your life, rounded up", "Pay half your life").split(/,\s*/)) {
+  for (const part of text
+    .replace("Pay half your life, rounded up", "Pay half your life")
+    .replace("artifacts, creatures, and planeswalkers", "artifacts creatures and planeswalkers")
+    .split(/,\s*/)) {
     let m;
     if (MANA.test(part)) cost.mana = part;
     else if (part === "{T}") cost.tap = true;
@@ -1589,19 +1592,24 @@ export function parseCost(text) {
       if (typeof count !== "number") return null;
       cost.removeCounter = { kind: "any", count };
     } else if (
-      (m = new RegExp(`^Remove ${N} (?:([+-]\\d+/[+-]\\d+|\\w+) counters?|counters?) from (a|an|another|among) (.+?) you control$`, "i").exec(part))
+      (m = new RegExp(`^Remove ${N} (?:([+-]\\d+/[+-]\\d+|\\w+) counters?|counters?) from (a|an|another|among(?: other)?) (.+?) you control$`, "i").exec(part))
     ) {
       // "Remove a +1/+1 counter from a creature you control", "… from among
-      // creatures you control" (rules 602.2b, 601.2h — chosen as it's paid).
+      // creatures you control" (rules 602.2b, 601.2h — chosen as it's paid);
+      // "from among other artifacts, creatures, and planeswalkers" (Tekuthal).
       const count = numberOf(m[1]);
-      const filter = parseTypePhrase(m[4]);
+      const filter =
+        m[4] === "artifacts creatures and planeswalkers"
+          ? { typesAnyOf: ["artifact", "creature", "planeswalker"] }
+          : parseTypePhrase(m[4]);
       if (count === undefined || filter === null) return null;
+      const where = m[3].toLowerCase();
       cost.removeCounter = {
         kind: m[2] ?? "any",
         count,
         ...(Object.keys(filter).length > 0 ? { from: filter } : { from: {} }),
-        ...(m[3].toLowerCase() === "another" ? { excludeSource: true } : {}),
-        ...(m[3].toLowerCase() === "among" ? { among: true } : {}),
+        ...(where === "another" || where === "among other" ? { excludeSource: true } : {}),
+        ...(where.startsWith("among") ? { among: true } : {}),
       };
     } else if ((m = /^Reveal (two|three) cards from your hand that share a color$/.exec(part))) {
       // Illuminated Folio: chosen as it's paid, among the cards that share a
@@ -17833,6 +17841,10 @@ function parseStatic(line, text) {
       spendManaAs: { as: { unit: symbol[spendUnit[1]], as: symbol[spendUnit[2]] } },
       text,
     };
+  }
+  // Tekuthal, Inquiry Dominus (rules 701.34, 614.5).
+  if (line === "If you would proliferate, proliferate twice instead.") {
+    return { affects: { scope: "self" }, replacement: { event: "would-proliferate", times: 2 }, text };
   }
   // K'rrik, Son of Yawgmoth: how every mana cost may be paid.
   const lifeForPip = /^For each \{([WUBRG])\} in a cost, you may pay 2 life rather than pay that mana\.$/.exec(line);

@@ -4157,6 +4157,9 @@ export type AwaitingDecision =
       readonly kind: "proliferate";
       readonly player: PlayerId;
       readonly eligible: readonly TargetRef[];
+      /** How many more times they proliferate after this one (Tekuthal's
+       * `would-proliferate`), `then` waiting until the last. */
+      readonly more?: number;
       /** Applied once answered — Contentious Plan's "Proliferate. Draw a
        * card." `source`/`x` rebuild the resolution context, exactly as
        * `scry`'s `then` does, because the spell that set this up has finished

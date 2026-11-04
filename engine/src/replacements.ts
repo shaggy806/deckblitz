@@ -50,7 +50,20 @@ export type ReplacementSpec =
   | MillMultiplierReplacement
   | LifeGainReplacement
   | LifeLossReplacement
-  | TapManaMultiplierReplacement;
+  | TapManaMultiplierReplacement
+  | ProliferateReplacement;
+
+/**
+ * "If you would proliferate, proliferate twice instead" (Tekuthal, Inquiry
+ * Dominus): this permanent's controller proliferates `times` times rather than
+ * once, each its own choice over the board as the last one left it and its own
+ * "whenever you proliferate" (rule 701.34). Several multiply, each applying to
+ * what the others made of it (rule 614.5). Applied by `Game.beginProliferate`.
+ */
+export interface ProliferateReplacement {
+  readonly event: "would-proliferate";
+  readonly times: number;
+}
 
 /**
  * "If you tap a permanent for mana, it produces twice as much of that mana

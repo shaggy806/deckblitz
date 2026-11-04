@@ -11017,4 +11017,14 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       you: { bf: ["K'rrik, Son of Yawgmoth", 'Kels, Fight Fixer', 'Viscera Seer', 'Grizzly Bears', 'Swamp'] },
     }),
   ),
+  preset(
+    'Tekuthal: proliferate twice instead',
+    board({
+      you: {
+        bf: ['Tekuthal, Inquiry Dominus', { name: 'Grizzly Bears', counters: { '+1/+1': 1 } }, 'Mountain*3'],
+        hand: ['Volt Charge'],
+      },
+      opp: { bf: [{ name: 'Hill Giant', counters: { '-1/-1': 1 } }] },
+    }),
+  ),
 ]

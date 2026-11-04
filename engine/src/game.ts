@@ -43369,16 +43369,46 @@ export class Game {
    *
    * Nothing eligible means no choice worth asking about, so `then` runs
    * straight away — the same shortcut `beginScry` takes on an empty library.
+   * They've still proliferated: "whenever you proliferate" triggers though
+   * they chose nothing (the rulings).
+   *
+   * `times`: how many times over, `would-proliferate` having replaced the one
+   * (Tekuthal); each is its own question over the board as the last left it.
    */
-  private beginProliferate(source: ObjectId, player: PlayerId, x: number, then: EffectSpec | null): void {
-    const eligible = this.proliferateTargets();
-    if (eligible.length === 0) {
-      if (then !== null) {
-        applyEffectSpec(then, this.makeResolutionContext(source, player, [], x));
+  private beginProliferate(
+    source: ObjectId,
+    player: PlayerId,
+    x: number,
+    then: EffectSpec | null,
+    times = this.proliferateTimes(player),
+  ): void {
+    for (let left = times; left > 0; left -= 1) {
+      const eligible = this.proliferateTargets();
+      if (eligible.length > 0) {
+        this.state.awaiting = { kind: "proliferate", player, eligible, then, source, x, ...(left > 1 ? { more: left - 1 } : {}) };
+        return;
       }
-      return;
+      this.emit({ type: "proliferated", player, count: 0 });
     }
-    this.state.awaiting = { kind: "proliferate", player, eligible, then, source, x };
+    if (then !== null) {
+      applyEffectSpec(then, this.makeResolutionContext(source, player, [], x));
+    }
+  }
+
+  /** How many times `player` proliferates when they would once: each of their
+   * `would-proliferate` permanents multiplies it (rule 614.5). */
+  private proliferateTimes(player: PlayerId): number {
+    let times = 1;
+    for (const id of this.state.zones.shared.battlefield) {
+      const source = this.state.objects[id];
+      if (source.controller !== player || hasLostAbilities(this.state, this.registry, source)) continue;
+      for (const ability of this.registry.get(rulesTextName(source)).static) {
+        if (ability.replacement?.event === "would-proliferate" && this.staticActive(source, ability)) {
+          times = Math.min(times * ability.replacement.times, Game.MAX_EFFECT_INSTANCES);
+        }
+      }
+    }
+    return times;
   }
 
   /** One more counter of each kind already on `target` (rule 701.34a's step,
@@ -43414,7 +43444,7 @@ export class Game {
     if (awaiting === null || awaiting.kind !== "proliferate") {
       throw new Error("unreachable: whyCannotProliferate should have caught this");
     }
-    const { then, source, x } = awaiting;
+    const { then, source, x, more } = awaiting;
     this.state.awaiting = null;
 
     this.withCounterBatch(() => {
@@ -43422,7 +43452,9 @@ export class Game {
     });
     this.emit({ type: "proliferated", player, count: chosen.length });
 
-    if (then !== null) {
+    if (more !== undefined) {
+      this.beginProliferate(source, player, x, then, more);
+    } else if (then !== null) {
       applyEffectSpec(then, this.makeResolutionContext(source, player, [], x));
     }
     if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
