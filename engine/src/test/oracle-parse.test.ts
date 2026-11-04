@@ -7319,6 +7319,26 @@ describe("creatures in a blocking relation (blockingRelation)", () => {
     blockingRelation: { relation: rel, ...(of !== undefined ? { of } : {}) },
   });
 
+  it("reads a static on its host blocking or blocked by a creature of a type (Sting, the Glinting Dagger)", () => {
+    const sting = face(
+      "Sting, the Glinting Dagger",
+      "Legendary Artifact — Equipment",
+      "Equipped creature gets +1/+1 and has haste.\nAt the beginning of each combat, untap equipped creature.\nEquipped creature has first strike as long as it's blocking or blocked by a Goblin or Orc.\nEquip {2}",
+    );
+    expect(sting.complete).toBe(true);
+    expect(sting.static[1]).toMatchObject({
+      affects: { scope: "attached" },
+      grantKeywords: ["first-strike"],
+      condition: {
+        kind: "controls",
+        filter: { type: "creature", subtypes: ["Goblin", "Orc"], blockingRelation: { relation: "either", of: "host" } },
+        atLeast: 1,
+        anyController: true,
+      },
+    });
+    expect(sting.triggered[0].effect).toEqual({ kind: "untap", target: "attached" });
+  });
+
   it("reads a target creature blocking, or blocked by, the source or its host", () => {
     const javelineer = face(
       "Goblin Javelineer",

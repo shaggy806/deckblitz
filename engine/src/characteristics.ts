@@ -965,7 +965,9 @@ function evalStaticCondition(
         condition.atLeast,
         (id) =>
           (condition.anyController === true || state.objects[id].controller === you) &&
-          matchesFilter(state, registry, id, condition.filter, { you }),
+          // With the source, for a clause read against it: Sting, the Glinting
+          // Dagger's "blocking or blocked by a Goblin" (`blockingRelation`).
+          matchesFilter(state, registry, id, condition.filter, { you, source: source.id }),
         except,
         condition.countsSelf === true,
       );

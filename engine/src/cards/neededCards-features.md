@@ -5068,6 +5068,8 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 
 **One amount against another (2026-11-04).** `condition:intervening-if-amounts`: the `amounts` condition (`left`, `op`, `right`), answered by `ConditionOptions.amounts` from `Game.interveningIfMet` and a resolving `conditional`, read unclamped (`signedAmountValue`). Liberator, Urza's Battlethopter; ED-E, Lonesome Eyebot.
 
+**Blocking or blocked by a creature of a type (2026-11-04).** `static:blocking-subtype-condition`: a `controls` condition's filter is now read with its source, so `blockingRelation` works there; `anyController` and `of: "host"` make it Sting, the Glinting Dagger.
+
 **A spell's target count from an amount (2026-11-04).** `decision:spell-target-count-amount`: `Game.effectiveTargetSpecs` reads a spell's `any-number` bounds other than `"x"` for that cast (`spellSpecsWithAmounts`), the kick count already known (rules 601.2b–c), so each multikicker offer has its own count. Comet Storm, Strength of the Tajuru, Aether Burst. Reap waits on `decision:target-count-from-other-target`.
 
 **The cards just exiled, looked at and put back (2026-11-04).** `effect:exile-from-hand-any-number-swap`: `look-and-choose`'s `zone: "exiled-this-way"`, a face-down card picked itself rather than by its group (rule 406.3), in order (rule 401.4). Scroll Rack.

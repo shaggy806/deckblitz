@@ -3067,7 +3067,10 @@ combat (rule 702.154c — Aradesh, the Founder's intervening "if it enlisted a
 creature this combat", a `trigger-object` condition; true as its attack
 trigger triggers, since enlist is paid before the attack is announced).
 `blockingRelation: { relation, of? }` is a creature in a blocking
-relation with the permanent applying the filter — or, `of: "host"`, with the
+relation (as a board condition too — Sting, the Glinting Dagger's "as long as
+it's blocking or blocked by a Goblin or Orc" is `controls`, `anyController`,
+over `subtypes` and `{ relation: "either", of: "host" }`, a `controls` filter
+being read with its source) with the permanent applying the filter — or, `of: "host"`, with the
 creature it's attached to, or, `of: "trigger-object"` in an effect's filter,
 with the object the trigger names (Trailblazer's Torch's and Ib Halfheart's
 "each creature blocking it", Labyrinth Raptor's "a creature of their choice

@@ -19137,6 +19137,25 @@ function parseStatic(line, text) {
       };
     }
   }
+  // Sting, the Glinting Dagger: any creature in the block counts, whoever
+  // controls it, and only while it's in that relation with the host.
+  if ((m = new RegExp(`^(?:Equipped|Enchanted) creature has ${KW} as long as it's blocking or blocked by an? ([A-Z][a-z]+)(?: or ([A-Z][a-z]+))?\\.$`).exec(line))) {
+    return {
+      affects: { scope: "attached" },
+      grantKeywords: [KEYWORDS[m[1].toLowerCase()]],
+      condition: {
+        kind: "controls",
+        filter: {
+          type: "creature",
+          subtypes: [m[2], m[3]].filter(Boolean),
+          blockingRelation: { relation: "either", of: "host" },
+        },
+        atLeast: 1,
+        anyController: true,
+      },
+      text,
+    };
+  }
   // Predator's Gambit: the enchanted creature's controller, not the Aura's.
   if ((m = new RegExp(`^Enchanted creature has ${KW} as long as its controller controls no other creatures\\.$`, "i").exec(line))) {
     return {
