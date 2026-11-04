@@ -307,6 +307,7 @@ import _poolGoblinGrappler from "../pool/goblin-grappler.js";
 import _poolGoblinKing from "../pool/goblin-king.js";
 import _poolGoblinLackey from "../pool/goblin-lackey.js";
 import _poolGoblinMedics from "../pool/goblin-medics.js";
+import _poolGoblinPlateMail from "../pool/goblin-plate-mail.js";
 import _poolGoblinShrine from "../pool/goblin-shrine.js";
 import _poolGoblinSurprise from "../pool/goblin-surprise.js";
 import _poolGoblinWarchief from "../pool/goblin-warchief.js";
@@ -823,6 +824,7 @@ import _poolWeldfastMonitor from "../pool/weldfast-monitor.js";
 import _poolWhirlpoolRider from "../pool/whirlpool-rider.js";
 import _poolWhiskerquillScribe from "../pool/whiskerquill-scribe.js";
 import _poolWhiteDragon from "../pool/white-dragon.js";
+import _poolWildEndeavor from "../pool/wild-endeavor.js";
 import _poolWillOfTheSultai from "../pool/will-of-the-sultai.js";
 import _poolWillbender from "../pool/willbender.js";
 import _poolWinterMoon from "../pool/winter-moon.js";
@@ -1171,6 +1173,7 @@ const shard: CardShard = {
     _poolGoblinKing,
     _poolGoblinLackey,
     _poolGoblinMedics,
+    _poolGoblinPlateMail,
     _poolGoblinShrine,
     _poolGoblinSurprise,
     _poolGoblinWarchief,
@@ -1687,6 +1690,7 @@ const shard: CardShard = {
     _poolWhirlpoolRider,
     _poolWhiskerquillScribe,
     _poolWhiteDragon,
+    _poolWildEndeavor,
     _poolWillOfTheSultai,
     _poolWillbender,
     _poolWinterMoon,

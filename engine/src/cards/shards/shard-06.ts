@@ -297,6 +297,7 @@ import _poolFlycatcherGiraffid from "../pool/flycatcher-giraffid.js";
 import _poolFlyingOctobot from "../pool/flying-octobot.js";
 import _poolFoggySwampSpiritKeeper from "../pool/foggy-swamp-spirit-keeper.js";
 import _poolFolioOfFancies from "../pool/folio-of-fancies.js";
+import _poolForayOfOrcs from "../pool/foray-of-orcs.js";
 import _poolForceOfRage from "../pool/force-of-rage.js";
 import _poolForgottenCreation from "../pool/forgotten-creation.js";
 import _poolForkedBranchGarami from "../pool/forked-branch-garami.js";
@@ -543,6 +544,7 @@ import _poolOwlbearShepherd from "../pool/owlbear-shepherd.js";
 import _poolPacksFavor from "../pool/packs-favor.js";
 import _poolPaladinOfPrahv from "../pool/paladin-of-prahv.js";
 import _poolPaladinOfTheBloodstained from "../pool/paladin-of-the-bloodstained.js";
+import _poolPaleMoon from "../pool/pale-moon.js";
 import _poolParagonOfTheAmesha from "../pool/paragon-of-the-amesha.js";
 import _poolPardicWanderer from "../pool/pardic-wanderer.js";
 import _poolPartingThoughts from "../pool/parting-thoughts.js";
@@ -731,6 +733,7 @@ import _poolStupor from "../pool/stupor.js";
 import _poolSuChiCaveGuard from "../pool/su-chi-cave-guard.js";
 import _poolSubwayTrain from "../pool/subway-train.js";
 import _poolSultaiEmissary from "../pool/sultai-emissary.js";
+import _poolSummonMagusSisters from "../pool/summon-magus-sisters.js";
 import _poolSunbirdsInvocation from "../pool/sunbirds-invocation.js";
 import _poolSunderShaman from "../pool/sunder-shaman.js";
 import _poolSunderingTitan from "../pool/sundering-titan.js";
@@ -1193,6 +1196,7 @@ const shard: CardShard = {
     _poolFlyingOctobot,
     _poolFoggySwampSpiritKeeper,
     _poolFolioOfFancies,
+    _poolForayOfOrcs,
     _poolForceOfRage,
     _poolForgottenCreation,
     _poolForkedBranchGarami,
@@ -1439,6 +1443,7 @@ const shard: CardShard = {
     _poolPacksFavor,
     _poolPaladinOfPrahv,
     _poolPaladinOfTheBloodstained,
+    _poolPaleMoon,
     _poolParagonOfTheAmesha,
     _poolPardicWanderer,
     _poolPartingThoughts,
@@ -1627,6 +1632,7 @@ const shard: CardShard = {
     _poolSuChiCaveGuard,
     _poolSubwayTrain,
     _poolSultaiEmissary,
+    _poolSummonMagusSisters,
     _poolSunbirdsInvocation,
     _poolSunderShaman,
     _poolSunderingTitan,

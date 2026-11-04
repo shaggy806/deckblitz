@@ -305,6 +305,7 @@ import _poolGoldMyr from "../pool/gold-myr.js";
 import _poolGoldenRatio from "../pool/golden-ratio.js";
 import _poolGoldhound from "../pool/goldhound.js";
 import _poolGoldmaneGriffin from "../pool/goldmane-griffin.js";
+import _poolGollumRiddleMaster from "../pool/gollum-riddle-master.js";
 import _poolGollumsBite from "../pool/gollums-bite.js";
 import _poolGothmogMorgulLieutenant from "../pool/gothmog-morgul-lieutenant.js";
 import _poolGraveDefiler from "../pool/grave-defiler.js";
@@ -1231,6 +1232,7 @@ const shard: CardShard = {
     _poolGoldenRatio,
     _poolGoldhound,
     _poolGoldmaneGriffin,
+    _poolGollumRiddleMaster,
     _poolGollumsBite,
     _poolGothmogMorgulLieutenant,
     _poolGraveDefiler,

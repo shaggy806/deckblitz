@@ -333,6 +333,7 @@ import _poolGreaterForgeling from "../pool/greater-forgeling.js";
 import _poolGreenWard from "../pool/green-ward.js";
 import _poolGrenzosRuffians from "../pool/grenzos-ruffians.js";
 import _poolGridlock from "../pool/gridlock.js";
+import _poolGrishnakhBrashInstigator from "../pool/grishnakh-brash-instigator.js";
 import _poolGrixisCharm from "../pool/grixis-charm.js";
 import _poolGrubStoriedMatriarch from "../pool/grub-storied-matriarch.js";
 import _poolGruesomeEncore from "../pool/gruesome-encore.js";
@@ -820,6 +821,7 @@ import _poolUnholyHeat from "../pool/unholy-heat.js";
 import _poolUnifiedFront from "../pool/unified-front.js";
 import _poolUniversityCampus from "../pool/university-campus.js";
 import _poolUnnaturalEndurance from "../pool/unnatural-endurance.js";
+import _poolValiantEndeavor from "../pool/valiant-endeavor.js";
 import _poolValleyFlamecaller from "../pool/valley-flamecaller.js";
 import _poolVampireLacerator from "../pool/vampire-lacerator.js";
 import _poolVampiricFury from "../pool/vampiric-fury.js";
@@ -1239,6 +1241,7 @@ const shard: CardShard = {
     _poolGreenWard,
     _poolGrenzosRuffians,
     _poolGridlock,
+    _poolGrishnakhBrashInstigator,
     _poolGrixisCharm,
     _poolGrubStoriedMatriarch,
     _poolGruesomeEncore,
@@ -1726,6 +1729,7 @@ const shard: CardShard = {
     _poolUnifiedFront,
     _poolUniversityCampus,
     _poolUnnaturalEndurance,
+    _poolValiantEndeavor,
     _poolValleyFlamecaller,
     _poolVampireLacerator,
     _poolVampiricFury,

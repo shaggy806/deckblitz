@@ -592,6 +592,7 @@ import _poolOliviasDragoon from "../pool/olivias-dragoon.js";
 import _poolOltecMatterweaver from "../pool/oltec-matterweaver.js";
 import _poolOmenspeaker from "../pool/omenspeaker.js";
 import _poolOnduGreathorn from "../pool/ondu-greathorn.js";
+import _poolOpenTheOmenpaths from "../pool/open-the-omenpaths.js";
 import _poolOpenTheVaults from "../pool/open-the-vaults.js";
 import _poolOracleOfBones from "../pool/oracle-of-bones.js";
 import _poolOranRiefOoze from "../pool/oran-rief-ooze.js";
@@ -929,6 +930,7 @@ import _poolYavimayaSapherd from "../pool/yavimaya-sapherd.js";
 import _poolYusriFortunesFlame from "../pool/yusri-fortunes-flame.js";
 import _poolZebraUnicorn from "../pool/zebra-unicorn.js";
 import _poolZedruuTheGreathearted from "../pool/zedruu-the-greathearted.js";
+import _poolZimonesHypothesis from "../pool/zimones-hypothesis.js";
 import _poolZulaportChainmage from "../pool/zulaport-chainmage.js";
 import _poolZurTheEnchanter from "../pool/zur-the-enchanter.js";
 import _poolZuranEnchanter from "../pool/zuran-enchanter.js";
@@ -1551,6 +1553,7 @@ const shard: CardShard = {
     _poolOltecMatterweaver,
     _poolOmenspeaker,
     _poolOnduGreathorn,
+    _poolOpenTheOmenpaths,
     _poolOpenTheVaults,
     _poolOracleOfBones,
     _poolOranRiefOoze,
@@ -1888,6 +1891,7 @@ const shard: CardShard = {
     _poolYusriFortunesFlame,
     _poolZebraUnicorn,
     _poolZedruuTheGreathearted,
+    _poolZimonesHypothesis,
     _poolZulaportChainmage,
     _poolZurTheEnchanter,
     _poolZuranEnchanter,

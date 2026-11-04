@@ -233,6 +233,7 @@ import _poolFinalPayment from "../pool/final-payment.js";
 import _poolFireNationEngineer from "../pool/fire-nation-engineer.js";
 import _poolFireOfOrthanc from "../pool/fire-of-orthanc.js";
 import _poolFirefrightMage from "../pool/firefright-mage.js";
+import _poolFiremindVessel from "../pool/firemind-vessel.js";
 import _poolFiresOfVictory from "../pool/fires-of-victory.js";
 import _poolFlailingManticore from "../pool/flailing-manticore.js";
 import _poolFlameblastDragon from "../pool/flameblast-dragon.js";
@@ -844,6 +845,7 @@ import _poolWhereAncientsTread from "../pool/where-ancients-tread.js";
 import _poolWhirlwind from "../pool/whirlwind.js";
 import _poolWhirlwingStormbrood from "../pool/whirlwing-stormbrood.js";
 import _poolWhitemaneLion from "../pool/whitemane-lion.js";
+import _poolWidespreadBrutality from "../pool/widespread-brutality.js";
 import _poolWildHypothesis from "../pool/wild-hypothesis.js";
 import _poolWildgrowthArchaic from "../pool/wildgrowth-archaic.js";
 import _poolWildwoodMentor from "../pool/wildwood-mentor.js";
@@ -1113,6 +1115,7 @@ const shard: CardShard = {
     _poolFireNationEngineer,
     _poolFireOfOrthanc,
     _poolFirefrightMage,
+    _poolFiremindVessel,
     _poolFiresOfVictory,
     _poolFlailingManticore,
     _poolFlameblastDragon,
@@ -1724,6 +1727,7 @@ const shard: CardShard = {
     _poolWhirlwind,
     _poolWhirlwingStormbrood,
     _poolWhitemaneLion,
+    _poolWidespreadBrutality,
     _poolWildHypothesis,
     _poolWildgrowthArchaic,
     _poolWildwoodMentor,

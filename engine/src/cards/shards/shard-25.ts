@@ -326,6 +326,7 @@ import _poolGreaterStoneSpirit from "../pool/greater-stone-spirit.js";
 import _poolGrimFlayer from "../pool/grim-flayer.js";
 import _poolGuardiansOfOboro from "../pool/guardians-of-oboro.js";
 import _poolHaazdaExonerator from "../pool/haazda-exonerator.js";
+import _poolHallOfGemstone from "../pool/hall-of-gemstone.js";
 import _poolHallOfHeliodsGenerosity from "../pool/hall-of-heliods-generosity.js";
 import _poolHamletGlutton from "../pool/hamlet-glutton.js";
 import _poolHarnessedSnubhorn from "../pool/harnessed-snubhorn.js";
@@ -1197,6 +1198,7 @@ const shard: CardShard = {
     _poolGrimFlayer,
     _poolGuardiansOfOboro,
     _poolHaazdaExonerator,
+    _poolHallOfGemstone,
     _poolHallOfHeliodsGenerosity,
     _poolHamletGlutton,
     _poolHarnessedSnubhorn,

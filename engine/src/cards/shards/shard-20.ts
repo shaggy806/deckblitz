@@ -436,6 +436,7 @@ import _poolKastralTheWindcrested from "../pool/kastral-the-windcrested.js";
 import _poolKataraBendingProdigy from "../pool/katara-bending-prodigy.js";
 import _poolKazanduMammoth from "../pool/kazandu-mammoth.js";
 import _poolKembaKhaRegent from "../pool/kemba-kha-regent.js";
+import _poolKianneCorruptedMemory from "../pool/kianne-corrupted-memory.js";
 import _poolKindlyCustomer from "../pool/kindly-customer.js";
 import _poolKingHaraldsRevenge from "../pool/king-haralds-revenge.js";
 import _poolKingNarfisBetrayal from "../pool/king-narfis-betrayal.js";
@@ -1397,6 +1398,7 @@ const shard: CardShard = {
     _poolKataraBendingProdigy,
     _poolKazanduMammoth,
     _poolKembaKhaRegent,
+    _poolKianneCorruptedMemory,
     _poolKindlyCustomer,
     _poolKingHaraldsRevenge,
     _poolKingNarfisBetrayal,

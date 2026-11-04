@@ -805,6 +805,7 @@ import _poolTurtlePower from "../pool/turtle-power.js";
 import _poolTwinbladeAssassins from "../pool/twinblade-assassins.js";
 import _poolTymaretChosenFromDeath from "../pool/tymaret-chosen-from-death.js";
 import _poolTymnaTheWeaver from "../pool/tymna-the-weaver.js";
+import _poolTyphoidMaryFractured from "../pool/typhoid-mary-fractured.js";
 import _poolUSAgentJohnWalker from "../pool/u-s-agent-john-walker.js";
 import _poolUginsConstruct from "../pool/ugins-construct.js";
 import _poolUlrichsKindred from "../pool/ulrichs-kindred.js";
@@ -1713,6 +1714,7 @@ const shard: CardShard = {
     _poolTwinbladeAssassins,
     _poolTymaretChosenFromDeath,
     _poolTymnaTheWeaver,
+    _poolTyphoidMaryFractured,
     _poolUSAgentJohnWalker,
     _poolUginsConstruct,
     _poolUlrichsKindred,

@@ -260,6 +260,7 @@ import _poolExertInfluence from "../pool/exert-influence.js";
 import _poolExiledBoggart from "../pool/exiled-boggart.js";
 import _poolExitSpecialist from "../pool/exit-specialist.js";
 import _poolExplosiveGetaway from "../pool/explosive-getaway.js";
+import _poolExtinctionEvent from "../pool/extinction-event.js";
 import _poolFaerieGuidemother from "../pool/faerie-guidemother.js";
 import _poolFaithfulMending from "../pool/faithful-mending.js";
 import _poolFalsePeace from "../pool/false-peace.js";
@@ -732,6 +733,7 @@ import _poolSummonEsperRamuh from "../pool/summon-esper-ramuh.js";
 import _poolSunmanePegasus from "../pool/sunmane-pegasus.js";
 import _poolSunpearlKirin from "../pool/sunpearl-kirin.js";
 import _poolSurrakarSpellblade from "../pool/surrakar-spellblade.js";
+import _poolSurroundedByOrcs from "../pool/surrounded-by-orcs.js";
 import _poolSurtlandFrostpyre from "../pool/surtland-frostpyre.js";
 import _poolSvellaIceShaper from "../pool/svella-ice-shaper.js";
 import _poolSvyelunitePriest from "../pool/svyelunite-priest.js";
@@ -1146,6 +1148,7 @@ const shard: CardShard = {
     _poolExiledBoggart,
     _poolExitSpecialist,
     _poolExplosiveGetaway,
+    _poolExtinctionEvent,
     _poolFaerieGuidemother,
     _poolFaithfulMending,
     _poolFalsePeace,
@@ -1618,6 +1621,7 @@ const shard: CardShard = {
     _poolSunmanePegasus,
     _poolSunpearlKirin,
     _poolSurrakarSpellblade,
+    _poolSurroundedByOrcs,
     _poolSurtlandFrostpyre,
     _poolSvellaIceShaper,
     _poolSvyelunitePriest,

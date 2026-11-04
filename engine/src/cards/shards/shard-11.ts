@@ -397,6 +397,7 @@ import _poolInquisitionOfKozilek from "../pool/inquisition-of-kozilek.js";
 import _poolInsideInformation from "../pool/inside-information.js";
 import _poolInsight from "../pool/insight.js";
 import _poolInspiringOverseer from "../pool/inspiring-overseer.js";
+import _poolInterplanarBeacon from "../pool/interplanar-beacon.js";
 import _poolIntoTheNorth from "../pool/into-the-north.js";
 import _poolIntrudingSoulrager from "../pool/intruding-soulrager.js";
 import _poolInvasionOfInnistrad from "../pool/invasion-of-innistrad.js";
@@ -1306,6 +1307,7 @@ const shard: CardShard = {
     _poolInsideInformation,
     _poolInsight,
     _poolInspiringOverseer,
+    _poolInterplanarBeacon,
     _poolIntoTheNorth,
     _poolIntrudingSoulrager,
     _poolInvasionOfInnistrad,

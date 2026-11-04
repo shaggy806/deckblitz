@@ -529,6 +529,7 @@ import _poolRayOfDissolution from "../pool/ray-of-dissolution.js";
 import _poolReachOfBranches from "../pool/reach-of-branches.js";
 import _poolReadTheTides from "../pool/read-the-tides.js";
 import _poolRealityShift from "../pool/reality-shift.js";
+import _poolRecklessEndeavor from "../pool/reckless-endeavor.js";
 import _poolRegalForce from "../pool/regal-force.js";
 import _poolRejuvenatingSprings from "../pool/rejuvenating-springs.js";
 import _poolRelentlessAssault from "../pool/relentless-assault.js";
@@ -1353,6 +1354,7 @@ const shard: CardShard = {
     _poolReachOfBranches,
     _poolReadTheTides,
     _poolRealityShift,
+    _poolRecklessEndeavor,
     _poolRegalForce,
     _poolRejuvenatingSprings,
     _poolRelentlessAssault,

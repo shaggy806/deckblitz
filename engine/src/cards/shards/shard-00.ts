@@ -347,6 +347,7 @@ import _poolHarbingerOfNight from "../pool/harbinger-of-night.js";
 import _poolHarbingerOfTheTides from "../pool/harbinger-of-the-tides.js";
 import _poolHarmonizedCrescendo from "../pool/harmonized-crescendo.js";
 import _poolHarrowingJourney from "../pool/harrowing-journey.js";
+import _poolHarvestMage from "../pool/harvest-mage.js";
 import _poolHaughtyDjinn from "../pool/haughty-djinn.js";
 import _poolHeadlessSpecter from "../pool/headless-specter.js";
 import _poolHealingSalve from "../pool/healing-salve.js";
@@ -818,6 +819,7 @@ import _poolUchbenbakTheGreatMistake from "../pool/uchbenbak-the-great-mistake.j
 import _poolUglukOfTheWhiteHand from "../pool/ugluk-of-the-white-hand.js";
 import _poolUktabiWildcats from "../pool/uktabi-wildcats.js";
 import _poolUltramarinesHonourGuard from "../pool/ultramarines-honour-guard.js";
+import _poolUmaroRagingYeti from "../pool/umaro-raging-yeti.js";
 import _poolUnspeakableSymbol from "../pool/unspeakable-symbol.js";
 import _poolUnstableObelisk from "../pool/unstable-obelisk.js";
 import _poolUnstoppableSlasher from "../pool/unstoppable-slasher.js";
@@ -849,6 +851,7 @@ import _poolVitalityCharm from "../pool/vitality-charm.js";
 import _poolVizierOfTheTrue from "../pool/vizier-of-the-true.js";
 import _poolVodalianIllusionist from "../pool/vodalian-illusionist.js";
 import _poolVodalianWaveKnight from "../pool/vodalian-wave-knight.js";
+import _poolVoidWinnower from "../pool/void-winnower.js";
 import _poolVolitionReins from "../pool/volition-reins.js";
 import _poolVolunteerMilitia from "../pool/volunteer-militia.js";
 import _poolVrock from "../pool/vrock.js";
@@ -1258,6 +1261,7 @@ const shard: CardShard = {
     _poolHarbingerOfTheTides,
     _poolHarmonizedCrescendo,
     _poolHarrowingJourney,
+    _poolHarvestMage,
     _poolHaughtyDjinn,
     _poolHeadlessSpecter,
     _poolHealingSalve,
@@ -1729,6 +1733,7 @@ const shard: CardShard = {
     _poolUglukOfTheWhiteHand,
     _poolUktabiWildcats,
     _poolUltramarinesHonourGuard,
+    _poolUmaroRagingYeti,
     _poolUnspeakableSymbol,
     _poolUnstableObelisk,
     _poolUnstoppableSlasher,
@@ -1760,6 +1765,7 @@ const shard: CardShard = {
     _poolVizierOfTheTrue,
     _poolVodalianIllusionist,
     _poolVodalianWaveKnight,
+    _poolVoidWinnower,
     _poolVolitionReins,
     _poolVolunteerMilitia,
     _poolVrock,

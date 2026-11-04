@@ -166,6 +166,7 @@ import _poolConsulateCrackdown from "../pool/consulate-crackdown.js";
 import _poolConsulateSkygate from "../pool/consulate-skygate.js";
 import _poolContagiousNim from "../pool/contagious-nim.js";
 import _poolContaminatedBond from "../pool/contaminated-bond.js";
+import _poolContamination from "../pool/contamination.js";
 import _poolContentiousPlan from "../pool/contentious-plan.js";
 import _poolConversion from "../pool/conversion.js";
 import _poolCorpsejackMenace from "../pool/corpsejack-menace.js";
@@ -1054,6 +1055,7 @@ const shard: CardShard = {
     _poolConsulateSkygate,
     _poolContagiousNim,
     _poolContaminatedBond,
+    _poolContamination,
     _poolContentiousPlan,
     _poolConversion,
     _poolCorpsejackMenace,

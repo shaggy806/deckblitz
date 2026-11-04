@@ -51,6 +51,7 @@ import _poolAsgardianCitadel from "../pool/asgardian-citadel.js";
 import _poolAsgardianInspiration from "../pool/asgardian-inspiration.js";
 import _poolAshenPowder from "../pool/ashen-powder.js";
 import _poolAshlingRekindled from "../pool/ashling-rekindled.js";
+import _poolAshlingsPrerogative from "../pool/ashlings-prerogative.js";
 import _poolAspiringAeronaut from "../pool/aspiring-aeronaut.js";
 import _poolAttackInTheBox from "../pool/attack-in-the-box.js";
 import _poolAugurOfBolas from "../pool/augur-of-bolas.js";
@@ -990,6 +991,7 @@ const shard: CardShard = {
     _poolAsgardianInspiration,
     _poolAshenPowder,
     _poolAshlingRekindled,
+    _poolAshlingsPrerogative,
     _poolAspiringAeronaut,
     _poolAttackInTheBox,
     _poolAugurOfBolas,

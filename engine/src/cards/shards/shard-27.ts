@@ -531,6 +531,7 @@ import _poolProvoke from "../pool/provoke.js";
 import _poolPryingQuestions from "../pool/prying-questions.js";
 import _poolPsychicPurge from "../pool/psychic-purge.js";
 import _poolPsychoticHaze from "../pool/psychotic-haze.js";
+import _poolPulseOfLlanowar from "../pool/pulse-of-llanowar.js";
 import _poolPuppetMaster from "../pool/puppet-master.js";
 import _poolPurpleDragonPunks from "../pool/purple-dragon-punks.js";
 import _poolPyreticPrankster from "../pool/pyretic-prankster.js";
@@ -1413,6 +1414,7 @@ const shard: CardShard = {
     _poolPryingQuestions,
     _poolPsychicPurge,
     _poolPsychoticHaze,
+    _poolPulseOfLlanowar,
     _poolPuppetMaster,
     _poolPurpleDragonPunks,
     _poolPyreticPrankster,
