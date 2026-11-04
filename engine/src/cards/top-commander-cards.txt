@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4322 already implemented / 678 missing (marks refreshed 2026-11-04)
+4331 already implemented / 669 missing (marks refreshed 2026-11-04)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -409,7 +409,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]   410  Selvala, Heart of the Wilds              {1}{G}{G}        Legendary Creature — Elf Scout
 [x]   411  Orzhov Basilica                          {0}              Land
 [x]   412  Gilded Lotus                             {5}              Artifact
-[ ]   413  Minas Tirith                             {0}              Legendary Land
+[x]   413  Minas Tirith                             {0}              Legendary Land
 [x]   414  Despark                                  {W}{B}           Instant
 [x]   415  Demand Answers                           {1}{R}           Instant
 [x]   416  Mystic Forge                             {4}              Artifact
@@ -815,7 +815,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   819  Mesa Enchantress                         {1}{W}{W}        Creature — Human Druid
 [x]   820  Sunbillow Verge                          {0}              Land
 [x]   821  Colossus Hammer                          {1}              Artifact — Equipment
-[ ]   822  Aurelia, the Warleader                   {2}{R}{R}{W}{W}  Legendary Creature — Angel
+[x]   822  Aurelia, the Warleader                   {2}{R}{R}{W}{W}  Legendary Creature — Angel
 [x]   823  Sai, Master Thopterist                   {2}{U}           Legendary Creature — Human Artificer
 [x]   824  Tocasia's Welcome                        {2}{W}           Enchantment
 [x]   825  Soul's Attendant                         {W}              Creature — Human Cleric
@@ -1832,7 +1832,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1839  Insurrection                             {5}{R}{R}{R}     Sorcery
 [x]  1840  The Battle of Bywater                    {1}{W}{W}        Sorcery
 [x]  1841  Undead Augur                             {B}{B}           Creature — Zombie Wizard
-[ ]  1842  Firemane Commando                        {3}{W}           Creature — Angel Soldier
+[x]  1842  Firemane Commando                        {3}{W}           Creature — Angel Soldier
 [x]  1843  Archetype of Imagination                 {4}{U}{U}        Enchantment Creature — Human Wizard
 [x]  1844  Emrakul, the Promised End                {13}             Legendary Creature — Eldrazi
 [x]  1845  Wooded Ridgeline                         {0}              Land — Mountain Forest
@@ -2185,7 +2185,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2192  Teferi, Master of Time                   {2}{U}{U}        Legendary Planeswalker — Teferi
 [x]  2193  Giggling Skitterspike                    {4}              Artifact Creature — Toy
 [x]  2194  Summon: Knights of Round                 {6}{W}{W}        Enchantment Creature — Saga Knight
-[ ]  2195  Delay                                    {1}{U}           Instant
+[x]  2195  Delay                                    {1}{U}           Instant
 [x]  2196  Scourge of Fleets                        {5}{U}{U}        Creature — Kraken
 [x]  2197  Overlord of the Balemurk                 {3}{B}{B}        Enchantment Creature — Avatar Horror
 [x]  2198  Forge of Heroes                          {0}              Land
@@ -2987,7 +2987,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  2994  Twilight Diviner                         {2}{B}           Creature — Elf Cleric
 [x]  2995  Summoner's Pact                          {0}              Instant
 [x]  2996  Hall of the Bandit Lord                  {0}              Legendary Land
-[ ]  2997  Library of Leng                          {1}              Artifact
+[x]  2997  Library of Leng                          {1}              Artifact
 [x]  2998  World Map                                {1}              Artifact
 [x]  2999  Beseech the Queen                        {2/B}{2/B}{2/B}  Sorcery
 [x]  3000  Holdout Settlement                       {0}              Land
@@ -3209,7 +3209,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3216  Promising Vein                           {0}              Land — Cave
 [x]  3217  Keeper of Fables                         {3}{G}{G}        Creature — Cat
 [ ]  3218  Thief of Sanity                          {1}{U}{B}        Creature — Specter
-[ ]  3219  Memory Lapse                             {1}{U}           Instant
+[x]  3219  Memory Lapse                             {1}{U}           Instant
 [x]  3220  Pippin, Guard of the Citadel             {W}{U}           Legendary Creature — Halfling Soldier
 [x]  3221  Shambling Ghast                          {B}              Creature — Zombie
 [x]  3222  Octopus Form                             {U}              Instant — Lesson
@@ -3438,7 +3438,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3445  Charming Scoundrel                       {1}{R}           Creature — Human Rogue
 [x]  3446  Restless Cottage                         {0}              Land
 [ ]  3447  Ardyn, the Usurper                       {5}{B}{B}{B}     Legendary Creature — Elder Human Noble
-[ ]  3448  Neyali, Suns' Vanguard                   {2}{R}{W}        Legendary Creature — Human Rebel
+[x]  3448  Neyali, Suns' Vanguard                   {2}{R}{W}        Legendary Creature — Human Rebel
 [x]  3449  Rule of Law                              {2}{W}           Enchantment
 [ ]  3450  Thryx, the Sudden Storm                  {3}{U}{U}        Legendary Creature — Elemental Giant
 [x]  3451  Prowler's Helm                           {2}              Artifact — Equipment
@@ -3653,7 +3653,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3660  Saruman, the White Hand                  {1}{U}{B}{R}     Legendary Creature — Avatar Wizard
 [x]  3661  Markov Baron                             {2}{B}           Creature — Vampire Noble
 [x]  3662  Sakashima's Student                      {2}{U}{U}        Creature — Human Ninja
-[ ]  3663  Hobgoblin Bandit Lord                    {1}{R}{R}        Creature — Goblin Rogue
+[x]  3663  Hobgoblin Bandit Lord                    {1}{R}{R}        Creature — Goblin Rogue
 [x]  3664  Prizefight                               {1}{G}           Instant
 [x]  3665  Hidden Nursery                           {0}              Land — Cave
 [x]  3666  Polluted Bonds                           {3}{B}{B}        Enchantment
@@ -4059,7 +4059,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4066  Season of the Burrow                     {3}{W}{W}        Sorcery
 [ ]  4067  Shay Cormac                              {W}{B}           Legendary Creature — Human Knight Rogue
 [x]  4068  Shield Sphere                            {0}              Artifact Creature — Wall
-[ ]  4069  Bronzebeak Foragers                      {3}{W}           Creature — Dinosaur
+[x]  4069  Bronzebeak Foragers                      {3}{W}           Creature — Dinosaur
 [x]  4070  Hide on the Ceiling                      {X}{U}           Instant
 [x]  4071  Golbez, Crystal Collector                {U}{B}           Legendary Creature — Human Wizard
 [x]  4072  Blossoming Bogbeast                      {4}{G}           Creature — Beast

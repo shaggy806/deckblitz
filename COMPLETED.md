@@ -12,6 +12,20 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **Combat triggers: defender clauses, attacker sets, blocker counts, a batched become-blocked; a delayed ability's player fixed as it's
+  set up** (2026-11-04, `25ed5c499`, `7f6ea994e`): Genestealer Locus, Gahiji, M'Baku, The Spear of Bashenga, Yuriko, Jiang Yanggu,
+  Fearless Swashbuckler, Everett K. Ross, Firemane Commando, Aurelia, Seifer, Serra Inquisitors, Hezrou // Demonic Stench.
+- **Turn tallies: attackers as declared, turned face up, regenerated, surveilled, library searched, cards exiled** (2026-11-04,
+  `920406aed`): Deepway Navigator, Avengers Assemble!, Thaumaton Torpedo, Minas Tirith, Neyali, Hobgoblin Bandit Lord, Oblivious
+  Bookworm, Kaust, Suspicious Detonation, Darkblade Agent, Archive Trap, Ennis, Ellyn Harbreeze, Spiny Starfish.
+- **Facts fixed as a spell is cast (`asCast`, rule 601.2i)** (2026-11-04, `c7ca2a2e4`): Steer Clear, Faerie Fencing, Flame Discharge,
+  Lethal Exploit, Siren's Call, Gnarlid Colony, Voidpouncer.
+- **Exile with its own way back: any number until this leaves, one group per opponent, one back each upkeep** (2026-11-04, `3f22cf961`):
+  Dimensional Breach, Glorious Protector, Bronzebeak Foragers.
+- **Graveyard destinations and a discard put back: a creature's death to the top of its library, `notCycled`, a `would-discard`
+  replacement** (2026-11-04, `da8519bd1`): Gravebane Zombie, Library of Leng, Nephalia Academy, Abandoned Sarcophagus.
+- **A countered spell's destination and a counter replaced: library top or bottom, exile with time counters, `ifCountered`** (2026-11-04,
+  `89b9e6f1e`, `e62f34e89`): Memory Lapse, Spell Crumple, Hinder, Delay, Guile; Transcendent Dragon's cast now reads it.
 - **Become-copy for a duration read as a condition, of what's sacrificed or chosen on resolution; a becomes-attached trigger**
   (2026-11-04, `9401b2f06`): Zygon Infiltrator, Secret Invasion, Blade of Shared Souls, Taskmaster, The Animus, Cytoshape, Polymorphous
   Rush, The Ever-Changing 'Dane.

@@ -465,6 +465,12 @@ section keeps only what to do next.
   `author-freed` should give: Mirror of Fate (`look-and-choose`'s `then` doesn't run with nothing chosen, and its library exile must),
   The Day of the Doctor (chapters I-III need a while-source play permission from `reveal-until`), Assimilation Aegis (try
   `effect:choose-card-exiled-with-source`), Metamorphic Alteration (a static copy that follows the Aura), Shapeshifter's Marrow.
+  Then: a countered spell's destination (1 freed, 5 proving cards), graveyard destinations and a discard put back (4 proving cards;
+  `replacement:graveyard-to-library-top-optional`, Pulmonic Sliver, stays open: a "you may" that can wait on every way to a graveyard),
+  exile with its own way back (1 freed, 3 proving cards; `effect:exile-until-source-untaps-with-auras`, Tawnos's Coffin, stays open),
+  facts fixed as a spell is cast (7 proving cards), turn tallies (1 freed, 14 proving cards), combat trigger clauses (13 proving cards).
+  More narrow keys for `author-freed`: Valki ("revealed this way" and its copy ability), Rapid Fire (`effect:grant-rampage-if-lacking`),
+  Maddening Imp (`effect:destroy-those-that-didnt-attack`).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next
