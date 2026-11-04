@@ -12,6 +12,28 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **Boast twice** (2026-11-04, `c74a5af69`): Birgi // Harnfel. Rule numbers for boast corrected to 702.142.
+- **Different names as an intervening if** (2026-11-04, `727e7a2ad`): Field of the Dead, Liliana's Contract.
+- **Every graveyard onto the battlefield** (2026-11-04, `3a5a8e748`): Rise of the Dark Realms, Roar of Reclamation, Myr Servitor.
+- **Mana in any combination, the player's split however it's made** (2026-11-04, `942ac6630`): Selvala, Heart of the Wilds, Cascading
+  Cataracts, Market Festival.
+- **The next spell of any kind can't be countered, from a land** (2026-11-04, `ab9553d7d`): Mistrise Village.
+- **Mana that gives what it's spent on something** (2026-11-04, `f9f4a5f7e`): Arena of Glory, Jade Orb of Dragonkind.
+- **Cards drawn this turn, and a question per card that names it** (2026-11-04, `dd02d97dd`): Sylvan Library.
+- **Beginning the game on the battlefield with a counter and an exile from hand, if you're not the starting player** (2026-11-04,
+  `1e29a9504`, `b2a548ce6`): Gemstone Caverns.
+- **A modifier granting activated abilities: until a card is cast from exile, all those of a target** (2026-11-04, `e23004bd5`): Glamorous
+  Outlaw, Masked Bandits, Shattered Seraph, Quicksilver Elemental, Jiang Yanggu, Leyline Immersion.
+- **Escape as a grant, escape's riders, a free cast from a graveyard** (2026-11-04, `d9a16c8ff`): Desdemona, The Grim Captain's Locker,
+  Confession Dial, Tizerus Charger, Skyway Robber, Sins of the Past, Case of the Uneaten Feast, Jace's Mindseeker.
+- **A cast as something resolves on its own terms: cost terms, zones, "if able"** (2026-11-04, `340e6c33e`, `7ad140ae1`): Blue Mage's Cane,
+  Bismuth Mindrender, Anrakyr the Traveller, Ogre Battlecaster, Tinybones the Pickpocket, Quistis Trepe, Sorcerous Squall, Zethi, Omen
+  Machine, Spelltwine.
+- **For each object, pay or else, asked per object** (2026-11-04, `d2715957f`, `ebc788950`): Killing Wave, Fade Away, Cut the Tethers,
+  Sirocco, Sword-Point Diplomacy, Moonlight Bargain.
+- **Discard-chosen with an exact count and one card per filter** (2026-11-04, `183dfbcd1`): Mind Warp, Abandon Hope, Gruesome Discovery,
+  Last Rites, Distended Mindbender.
+- **Return X permanents as an additional cost** (2026-11-04, `53b4ed4df`): Infernal Harvest.
 - **Combat triggers: defender clauses, attacker sets, blocker counts, a batched become-blocked; a delayed ability's player fixed as it's
   set up** (2026-11-04, `25ed5c499`, `7f6ea994e`): Genestealer Locus, Gahiji, M'Baku, The Spear of Bashenga, Yuriko, Jiang Yanggu,
   Fearless Swashbuckler, Everett K. Ross, Firemane Commando, Aurelia, Seifer, Serra Inquisitors, Hezrou // Demonic Stench.

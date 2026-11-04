@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4331 already implemented / 669 missing (marks refreshed 2026-11-04)
+4343 already implemented / 657 missing (marks refreshed 2026-11-04)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -175,7 +175,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   176  Undergrowth Stadium                      {0}              Land
 [x]   177  Three Tree City                          {0}              Legendary Land
 [x]   178  Return of the Wildspeaker                {4}{G}           Instant
-[ ]   179  Gemstone Caverns                         {0}              Legendary Land
+[x]   179  Gemstone Caverns                         {0}              Legendary Land
 [x]   180  Boros Charm                              {R}{W}           Instant
 [x]   181  Flawless Maneuver                        {2}{W}           Instant
 [x]   182  Night's Whisper                          {1}{B}           Sorcery
@@ -255,7 +255,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   256  Viscera Seer                             {B}              Creature — Vampire Wizard
 [x]   257  Bloom Tender                             {1}{G}           Creature — Elf Druid
 [x]   258  Orcish Bowmasters                        {1}{B}           Creature — Orc Archer
-[ ]   259  Sylvan Library                           {1}{G}           Enchantment
+[x]   259  Sylvan Library                           {1}{G}           Enchantment
 [x]   260  Syr Konrad, the Grim                     {3}{B}{B}        Legendary Creature — Human Knight
 [x]   261  Infernal Grasp                           {1}{B}           Instant
 [x]   262  Academy Manufactor                       {3}              Artifact Creature — Assembly-Worker
@@ -368,7 +368,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   369  Goldspan Dragon                          {3}{R}{R}        Creature — Dragon
 [x]   370  Aetherflux Reservoir                     {4}              Artifact
 [x]   371  Consider                                 {U}              Instant
-[ ]   372  Arena of Glory                           {0}              Land
+[x]   372  Arena of Glory                           {0}              Land
 [x]   373  Branching Evolution                      {2}{G}           Enchantment
 [x]   374  Dimir Aqueduct                           {0}              Land
 [x]   375  Mystic Monastery                         {0}              Land
@@ -382,7 +382,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]   383  Vanquisher's Banner                      {5}              Artifact
 [x]   384  Opulent Palace                           {0}              Land
 [x]   385  Toski, Bearer of Secrets                 {3}{G}           Legendary Creature — Squirrel
-[ ]   386  Mistrise Village                         {0}              Land
+[x]   386  Mistrise Village                         {0}              Land
 [x]   387  Scrubland                                {0}              Land — Plains Swamp
 [x]   388  Damnation                                {2}{B}{B}        Sorcery
 [x]   389  Underworld Breach                        {1}{R}           Enchantment
@@ -406,7 +406,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   407  Fanatic of Rhonas                        {1}{G}           Creature — Snake Druid
 [x]   408  Lotho, Corrupt Shirriff                  {W}{B}           Legendary Creature — Halfling Rogue
 [x]   409  Parallel Lives                           {3}{G}           Enchantment
-[ ]   410  Selvala, Heart of the Wilds              {1}{G}{G}        Legendary Creature — Elf Scout
+[x]   410  Selvala, Heart of the Wilds              {1}{G}{G}        Legendary Creature — Elf Scout
 [x]   411  Orzhov Basilica                          {0}              Land
 [x]   412  Gilded Lotus                             {5}              Artifact
 [x]   413  Minas Tirith                             {0}              Legendary Land
@@ -484,14 +484,14 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   485  Diabolic Tutor                           {2}{B}{B}        Sorcery
 [x]   486  Read the Bones                           {2}{B}           Sorcery
 [x]   487  Ramunap Excavator                        {2}{G}           Creature — Snake Cleric
-[ ]   488  Field of the Dead                        {0}              Land
+[x]   488  Field of the Dead                        {0}              Land
 [x]   489  Ancient Den                              {0}              Artifact Land
 [x]   490  Maskwood Nexus                           {4}              Artifact
 [x]   491  Adeline, Resplendent Cathar              {1}{W}{W}        Legendary Creature — Human Knight
 [x]   492  Vito, Thorn of the Dusk Rose             {2}{B}           Legendary Creature — Vampire Cleric
-[ ]   493  Birgi, God of Storytelling // Harnfel, Horn of Bounty {3}              Legendary Creature — God // Legendary Artifact
+[x]   493  Birgi, God of Storytelling // Harnfel, Horn of Bounty {3}              Legendary Creature — God // Legendary Artifact
 [x]   494  Tainted Peak                             {0}              Land
-[ ]   495  Rise of the Dark Realms                  {7}{B}{B}        Sorcery
+[x]   495  Rise of the Dark Realms                  {7}{B}{B}        Sorcery
 [x]   496  Savai Triome                             {0}              Land — Mountain Plains Swamp
 [x]   497  Burnished Hart                           {3}              Artifact Creature — Elk
 [x]   498  Talisman of Resilience                   {2}              Artifact
@@ -1211,7 +1211,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1216  Lórien Revealed                          {3}{U}{U}        Sorcery
 [x]  1217  Legion Leadership // Legion Stronghold   {2}              Instant // Land
 [x]  1218  Glaring Fleshraker                       {2}{C}           Creature — Eldrazi Drone
-[ ]  1219  Cascading Cataracts                      {0}              Land
+[x]  1219  Cascading Cataracts                      {0}              Land
 [x]  1220  Midgar, City of Mako // Reactor Raid     {2}{B}           Land — Town // Sorcery — Adventure
 [x]  1221  Thriving Moor                            {0}              Land
 [x]  1222  Sterling Grove                           {G}{W}           Enchantment
@@ -2539,7 +2539,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2546  Rampaging Ferocidon                      {2}{R}           Creature — Dinosaur
 [x]  2547  Ajani's Welcome                          {W}              Enchantment
 [x]  2548  Blossoming Defense                       {G}              Instant
-[ ]  2549  Tinybones, the Pickpocket                {B}              Legendary Creature — Skeleton Rogue
+[x]  2549  Tinybones, the Pickpocket                {B}              Legendary Creature — Skeleton Rogue
 [x]  2550  Zhalfirin Void                           {0}              Land
 [x]  2551  Sea Gate                                 {0}              Land — Gate
 [x]  2552  Merchant Scroll                          {1}{U}           Sorcery
@@ -4095,7 +4095,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4102  Felothar the Steadfast                   {1}{W}{B}{G}     Legendary Creature — Human Warrior
 [ ]  4103  Mirrorhall Mimic // Ghastly Mimicry      {4}              Creature — Spirit // Enchantment — Aura
 [x]  4104  Stargaze                                 {X}{B}{B}        Sorcery
-[ ]  4105  Liliana's Contract                       {3}{B}{B}        Enchantment
+[x]  4105  Liliana's Contract                       {3}{B}{B}        Enchantment
 [x]  4106  Restless Reef                            {0}              Land
 [x]  4107  Vincent, Vengeful Atoner                 {2}{R}           Legendary Creature — Assassin
 [x]  4108  Smaug the Magnificent                    {2}{R}{R}        Legendary Creature — Dragon
@@ -4420,7 +4420,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4427  Titan's Strength                         {R}              Instant
 [ ]  4428  The Golden Throne                        {4}              Legendary Artifact
 [ ]  4429  Dream Fracture                           {1}{U}{U}        Instant
-[ ]  4430  Jade Orb of Dragonkind                   {2}{G}           Artifact
+[x]  4430  Jade Orb of Dragonkind                   {2}{G}           Artifact
 [x]  4431  Impervious Greatwurm                     {7}{G}{G}{G}     Creature — Wurm
 [x]  4432  Luxior, Giada's Gift                     {1}              Legendary Artifact — Equipment
 [x]  4433  Captain N'ghathrod                       {3}{U}{B}        Legendary Creature — Horror Pirate

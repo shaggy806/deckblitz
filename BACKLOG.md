@@ -471,6 +471,13 @@ section keeps only what to do next.
   facts fixed as a spell is cast (7 proving cards), turn tallies (1 freed, 14 proving cards), combat trigger clauses (13 proving cards).
   More narrow keys for `author-freed`: Valki ("revealed this way" and its copy ability), Rapid Fire (`effect:grant-rampage-if-lacking`),
   Maddening Imp (`effect:destroy-those-that-didnt-attack`).
+  Then: return costs (1 proving card), discard-chosen counts (5), pay or else per object (6; `effect:choices-by-other-players` has 37 units
+  left, next `each-player-returns-own-permanent` and the opponent-chooses group), cast-now's terms (10), escape as a grant (8), a modifier
+  granting activated abilities (6). `--stale` about 1,728. Narrow keys: Locke and The Ur-Sphinx (a cast until end of turn from among those
+  cards), Tazri (`granted-mana-ability-own-colors-gated`), Dawn's Reflection authors as Market Festival does.
+  **By best EDHREC card, from here (`cards:needs -- --by-rank`):** Gemstone Caverns, Sylvan Library, Arena of Glory, Mistrise Village, Selvala,
+  Rise of the Dark Realms, Field of the Dead, Birgi. Their records overstated the work more than once (Arena of Glory, Mistrise Village,
+  Rise and Field needed no engine code): try the card first.
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next
@@ -627,6 +634,8 @@ live games for" (wraths since `threat`, pumping an opponent's attacker, the `"ac
 big boards and deep stacks under count budgets, deck biases, 1/1 tokens since `smallTokens`,
 Shiko or the other spell, and haste enablers in the crackback).
 
+- **Sylvan Library's bots** (probed 2026-11-04): v2, with Lightning Bolt, Craw Wurm and Sol Ring on top, declines "draw two additional
+  cards?" at every life total tried, 10 to 1000, though it pays for a land draw at 40 or more; v1 draws but never pays 4 life, even at 1000. Why not yet looked into.
 - **A bot answers "as this enters, choose odd or even" with the first option** (Ashling's Prerogative, Gollum): `decisions/choose-creature-type.ts`'s candidates skip as-enters menus, so it's legal but unaimed.
 - **v1's `chooseFromZone` returns its minimum** (`controller.ts`), so that controller exiles nothing for Sutured Ghoul, which dies; not checked how v2 answers.
 - **A bot sacrifices at most down to three of a kind for an attack cost** (`SACRIFICE_KEEPS` in `combat/attacking.ts`): a heuristic, not measured.
