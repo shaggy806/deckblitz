@@ -296,6 +296,10 @@ export interface CraftMaterials {
 export interface AbilityCost {
   /** Mana portion of the cost, e.g. `"{2}"`; `null` for no mana. */
   readonly mana: string | null;
+  /** "Spend only mana of the chosen color to activate this ability" (Throne of
+   * Eldraine): the color its permanent's controller chose as it entered
+   * (`chooseOnEnter`). With none chosen, no mana can pay. */
+  readonly spendOnlyChosenColor?: true;
   /** Whether `{T}` (tap this permanent) is part of the cost. */
   readonly tap: boolean;
   /** Whether `{Q}` (untap this permanent — rule 107.6) is part of the cost:
@@ -1791,6 +1795,12 @@ export type TriggerSpec =
        * however much. `"chosen"` is "of the chosen color" (Gauntlet of Power,
        * `GameObject.chosenOnEnter`): with none chosen, it never triggers. */
       readonly producing?: "C" | "chosen";
+      /** "Whenever a land's **ability causes you to add** one or more mana of
+       * the chosen color" (Caged Sun): whichever ability of the permanent made
+       * it — one with no {T} in its cost, or a trigger's on the stack
+       * (Crumbling Vestige) — rather than its being tapped for mana. Only as
+       * a triggered mana ability: `add-mana` and nothing else. */
+      readonly anyAbility?: true;
     }
   | {
       /** A Saga's chapter ability resolved — `finalOnly` is "whenever the

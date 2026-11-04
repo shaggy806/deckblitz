@@ -4193,7 +4193,11 @@ trigger and that effect is one for the turn (High Tide, Bubbling Muck, Molten
 Tide); Roxanne, Starfall Savant's "…add one mana of any type
 that artifact token produced" is `mana: "produced"` (meaningless anywhere
 else). They never go on the stack: the extra mana is made with the rest, and
-the auto-payer counts it — a Swamp under Crypt Ghast is a `{B}{B}` source.
+the auto-payer counts it — a Swamp under Crypt Ghast is a `{B}{B}` source. Its
+`anyAbility: true` is "whenever a land's **ability causes you to add** mana"
+(Caged Sun, with `producing: "chosen"`), whichever ability did it: one with no
+`{T}` in its cost (a storage land's) or a trigger on the stack (Crumbling
+Vestige's), tapped or not.
 Everything else the ability does is part of it too (rule 605.4a), so it's the
 `add-mana`'s `also`, never a `sequence` (that would use the stack, and
 `pool.test` refuses it), with `"trigger-object"` the tapped permanent,
@@ -6960,7 +6964,11 @@ Delete an entry in the same commit as the feature that retires it.
     that contains {C}", the same way: Cultivator Drone). `chosenType` folds in the
     type named as the permanent entered, and `orSpell` is a second filter it
     doesn't touch ("…of the chosen type or a legendary creature spell": The
-    Ringhart Crest);
+    Ringhart Crest). `chosenColor` folds in the color chosen as it entered
+    (`chooseOnEnter`): Throne of Eldraine's "only to cast monocolored spells of
+    that color" is `spell: { multicolored: false }, chosenColor: true`. The cost's
+    own `spendOnlyChosenColor` is its "spend only mana of the chosen color to
+    activate this ability";
     `abilityOf` adds the "…or activate an ability of" half — of a
     permanent on the battlefield ("abilities of creatures" means creature
     permanents: Castle Garenbrig's ruling), unless `abilityOfAnyZone: true`

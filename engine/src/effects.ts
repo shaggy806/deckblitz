@@ -460,6 +460,10 @@ export interface ManaSpendOnly {
    * than a permanent (rule 109.2a). */
   readonly abilityOfAnyZone?: true;
   readonly chosenType?: boolean;
+  /** `spell` is of the color its source's controller chose as it entered:
+   * Throne of Eldraine's "only to cast monocolored spells of that color"
+   * (`spell: { multicolored: false }`). With none chosen, no spell. */
+  readonly chosenColor?: true;
   /** "…and that spell can't be countered" (Cavern of Souls, Delighted
    * Halfling). A property of the spell this mana pays for, not of the land. */
   readonly uncounterable?: boolean;
@@ -12263,6 +12267,10 @@ export interface EffectApi {
   releaseHeldChoices(): void;
   /** See the `"shuffle-library"` {@link EffectSpec}'s `searchers`. */
   shuffleSearchers(): void;
+  /** Add the mana of an `add-mana` that isn't a mana ability's (Crumbling
+   * Vestige's "when this land enters"), then what a `tapped-for-mana` trigger
+   * of `anyAbility` adds for it, as a triggered mana ability (rule 605.1b). */
+  withLandManaExtras(add: () => void): void;
   /** Whether `player` took what an `"each-player-may"` that began at event
    * `since` offered them — their first answer for this source since. */
   tookEachPlayerMay(player: PlayerId, since: number): boolean;
@@ -16253,30 +16261,35 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           return;
         }
       }
-      // "Each player adds …" (`who`) — the controller otherwise.
-      for (const player of spec.who === undefined ? [ctx.controller] : ctx.playersInScope(spec.who)) {
-        // "Any color in your commander's color identity" — nothing at all
-        // with no colour there (no commander, or a colourless one).
-        if (spec.mana === "commander-identity") {
-          const colors = ctx.commanderColors();
-          if (colors.length > 0) ctx.addMana(player, { oneOf: colors }, amountValue(spec.amount, ctx), spec);
-        } else if (typeof spec.mana === "object" && "all" in spec.mana) {
-          const times = amountValue(spec.amount, ctx);
-          for (const type of spec.mana.all) ctx.addMana(player, type, times, spec);
-        } else if (typeof spec.mana === "object" && "eachColorAmong" in spec.mana) {
-          // One of each colour among them, `amount` times over.
-          const times = amountValue(spec.amount, ctx);
-          for (const type of ctx.manaTypesOf(spec.mana)) ctx.addMana(player, type, times, spec);
-        } else ctx.addMana(
-          player,
-          // "The chosen color" — resolved against the source permanent; falls
-          // back to the payer's choice if the label isn't a colour (it always
-          // is on the cards that use this).
-          spec.mana === "chosen" ? (ctx.chosenColorOfSource() ?? "any-color") : spec.mana,
-          amountValue(spec.amount, ctx),
-          spec,
-        );
-      }
+      const mana = spec.mana;
+      const add = (): void => {
+        // "Each player adds …" (`who`) — the controller otherwise.
+        for (const player of spec.who === undefined ? [ctx.controller] : ctx.playersInScope(spec.who)) {
+          // "Any color in your commander's color identity" — nothing at all
+          // with no colour there (no commander, or a colourless one).
+          if (mana === "commander-identity") {
+            const colors = ctx.commanderColors();
+            if (colors.length > 0) ctx.addMana(player, { oneOf: colors }, amountValue(spec.amount, ctx), spec);
+          } else if (typeof mana === "object" && "all" in mana) {
+            const times = amountValue(spec.amount, ctx);
+            for (const type of mana.all) ctx.addMana(player, type, times, spec);
+          } else if (typeof mana === "object" && "eachColorAmong" in mana) {
+            // One of each colour among them, `amount` times over.
+            const times = amountValue(spec.amount, ctx);
+            for (const type of ctx.manaTypesOf(mana)) ctx.addMana(player, type, times, spec);
+          } else ctx.addMana(
+            player,
+            // "The chosen color" — resolved against the source permanent; falls
+            // back to the payer's choice if the label isn't a colour (it always
+            // is on the cards that use this).
+            mana === "chosen" ? (ctx.chosenColorOfSource() ?? "any-color") : mana,
+            amountValue(spec.amount, ctx),
+            spec,
+          );
+        }
+      };
+      if (ctx.manaAbility === true) add();
+      else ctx.withLandManaExtras(add);
       if (spec.painToController !== undefined && spec.painToController > 0) {
         ctx.dealDamage(
           { kind: "player", player: ctx.controller },

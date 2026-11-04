@@ -10970,4 +10970,27 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     'Tainted Pact: a second card of the same name ends it',
     board({ you: { bf: ['Swamp*2'], hand: ['Tainted Pact'], lib: ['Shock', 'Grizzly Bears', 'Shock', 'Hill Giant'] } }),
   ),
+  preset(
+    'Throne of Eldraine: its four mana buys a monocolored spell of that color',
+    board({
+      you: {
+        bf: ['Forest*5'],
+        hand: ['Throne of Eldraine', 'Grizzly Bears', 'Hill Giant', 'Kitchen Finks', 'Sol Ring'],
+      },
+    }),
+  ),
+  preset(
+    'Throne of Eldraine: its draw takes only mana of that color',
+    board({ you: { bf: ['Forest*8', 'Mountain*8'], hand: ['Throne of Eldraine'] } }),
+  ),
+  preset(
+    'Caged Sun: a land making that color makes one more',
+    board({
+      you: {
+        bf: ['Swamp*6', 'Forest', 'Mountain', 'Grizzly Bears', 'Hill Giant', 'Llanowar Elves'],
+        hand: ['Caged Sun', 'Crumbling Vestige'],
+      },
+      opp: { bf: ['Grizzly Bears'] },
+    }),
+  ),
 ]

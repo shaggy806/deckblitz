@@ -23175,6 +23175,16 @@ export class Game {
       this.noteTappedForMana(source, player);
       // What triggers on the tap and uses the stack (rule 106.12a).
       if (produced.length > 0) this.emit({ type: "permanent-tapped-for-mana", object: sourceId, player, produced });
+    } else if (source !== undefined) {
+      // No {T}: not tapped for mana, but "a land's ability causes you to add"
+      // (Caged Sun, on a storage land's "{1}, Remove X storage counters").
+      const produced = pool.slice(poolBefore).map((unit) => unit.type);
+      for (const out of this.extraManaOutputs(source, produced, player, true)) {
+        const origin = this.manaOriginOf(out.holder);
+        if ("units" in out) {
+          for (const type of out.units) this.addMana(player, type, 1, out.tag, origin);
+        } else this.addMana(player, out.choices[0], out.amount, out.tag, origin);
+      }
     }
     this.emit({
       type: "ability-activated",
@@ -24225,7 +24235,7 @@ export class Game {
         // Triggered mana abilities (rule 605.1b) — the extra mana tapping
         // this permanent for mana makes — are part of what it's worth to a
         // payment, and `useManaSource` makes them along with the rest.
-        const extras = ability.cost.tap ? this.tappedForManaExtras(object) : [];
+        const extras = this.tappedForManaExtras(object, !ability.cost.tap);
         const withExtras = extras.reduce(
           (options, extra) => options.flatMap((option) => this.withManaExtra(option, extra, player)),
           multiplied,
@@ -24463,6 +24473,7 @@ export class Game {
     const spendable = (extra: ManaExtraUnit): boolean =>
       extra.tag?.restriction === undefined ||
       this.manaUnitCanPay(player, { type: extra.type ?? "C", ...extra.tag }, purpose);
+    const onlyType = this.spendOnlyManaTypeFor(purpose);
     const sources = this.manaSources(player)
       .filter((source) => onlyFrom === undefined || fits(source.id))
       .map((source) =>
@@ -24471,10 +24482,36 @@ export class Game {
           : {
               ...source,
               options: source.options.map((option) =>
-                optionKeepingExtras(option, (extra) => (onlyFrom === undefined || fits(extra.from)) && spendable(extra)),
+                optionKeepingExtras(
+                  option,
+                  (extra) =>
+                    (onlyFrom === undefined || fits(extra.from)) &&
+                    spendable(extra) &&
+                    (onlyType === undefined || extra.type === onlyType),
+                ),
               ),
             },
-      );
+      )
+      // "Spend only mana of the chosen color to activate this ability": only an
+      // option making nothing else is planned with. A source that makes two
+      // types at once can still be tapped by hand, and the right one spent.
+      .map((source) =>
+        onlyType === undefined
+          ? source
+          : {
+              ...source,
+              options: source.options.flatMap((option) =>
+                onlyType === "none" ||
+                option.fixed.some((type) => type !== onlyType) ||
+                (option.anyColor > 0 && option.anyColorOf !== undefined && !option.anyColorOf.includes(onlyType))
+                  ? []
+                  : option.anyColor > 0
+                    ? [{ ...option, anyColorOf: [onlyType] }]
+                    : [option],
+              ),
+            },
+      )
+      .filter((source) => onlyType === undefined || source.options.length > 0);
     // Life a spell's cost already spends outside the mana (Liesa's commander
     // tax) isn't there for a painland or a Phyrexian pip to spend as well.
     const reserved = purpose?.kind === "cast" ? this.commanderTaxLife(player, purpose.card) : 0;
@@ -24932,12 +24969,12 @@ export class Game {
     const withSplit = (split: ManaSplitOffer | undefined) => (split !== undefined ? { manaSplit: split } : {});
     const asIs = own === null ? null : own.map((v) => ({ manaColors: v.picks, makes: v.makes, ...withSplit(v.split) }));
     const object = this.state.objects[sourceId];
-    if (!ability.cost.tap || object === undefined) return asIs;
-    const extras = this.tappedForManaExtras(object);
-    const multiplier = this.tapManaMultiplier(player);
+    if (object === undefined) return asIs;
+    const extras = this.tappedForManaExtras(object, !ability.cost.tap);
+    const multiplier = ability.cost.tap ? this.tapManaMultiplier(player) : 1;
     // A land whose mana is another type instead (Deep Water): as many units,
     // that type — a pick still names how many, where it decides that.
-    const instead = this.landManaInsteadFor(player, object);
+    const instead = ability.cost.tap ? this.landManaInsteadFor(player, object) : null;
     if (extras.length === 0 && multiplier === 1 && instead === null) return asIs;
     let base = own;
     if (base === null) {
@@ -24971,7 +25008,7 @@ export class Game {
     for (const variant of base) {
       const made = variant.makes.flatMap((t) => Array<ManaType>(multiplier).fill(t));
       let combos: StandaloneManaVariant[] = [{ manaColors: variant.picks, makes: made, ...withSplit(variant.split) }];
-      for (const extra of this.extraManaOutputs(object, made, player)) {
+      for (const extra of this.extraManaOutputs(object, made, player, !ability.cost.tap)) {
         combos =
           "units" in extra
             ? extra.may === true
@@ -25047,6 +25084,8 @@ export class Game {
     tapped: GameObject,
     produced: readonly ManaType[],
     player: PlayerId,
+    /** Made with no {T}: only what an `anyAbility` trigger adds. */
+    untapped = false,
   ): ManaExtraOutput[] {
     const out: ManaExtraOutput[] = [];
     // "Whenever … is tapped for mana" triggers only as the mana ability
@@ -25054,7 +25093,7 @@ export class Game {
     // Reflecting Pool with nothing to reflect, a Chrome Mox with nothing
     // imprinted — sets none of them off.
     if (produced.length === 0) return out;
-    for (const extra of this.tappedForManaExtras(tapped)) {
+    for (const extra of this.tappedForManaExtras(tapped, untapped)) {
       if (extra.producing !== undefined && !produced.includes(extra.producing)) continue;
       const tag = extra.tag !== undefined ? { tag: extra.tag } : {};
       const fixed = (types: readonly ManaType[]): void => {
@@ -25093,8 +25132,10 @@ export class Game {
    * mana (rule 605.1b — a `tapped-for-mana` trigger): each matching one's
    * `add-mana`, from the side of the permanent that has it. Read by the
    * auto-payer's option list and by a mana ability activated by hand.
+   * `untapped`: its ability made mana with no {T}, which only a trigger of
+   * `anyAbility` sees (Caged Sun).
    */
-  private tappedForManaExtras(tapped: GameObject): ManaExtra[] {
+  private tappedForManaExtras(tapped: GameObject, untapped = false): ManaExtra[] {
     const out: ManaExtra[] = [];
     // Only the permanents with such a trigger are worth a look — read once
     // per cache region, since every mana source and hand-activation offer
@@ -25115,12 +25156,15 @@ export class Game {
       for (const ability of this.registry.get(rulesTextName(holder)).triggered) {
         const trigger = ability.trigger;
         if (trigger.on !== "tapped-for-mana") continue;
+        if (untapped && trigger.anyAbility !== true) continue;
         const effect = ability.effect;
         // Only an `add-mana` (pool.test holds every card to that); anything
         // else uses the stack, or a target makes it no mana ability (rule
         // 605.1b — `permanent-tapped-for-mana`).
         if (effect === null || effect.kind !== "add-mana" || !isTriggeredManaAbility(ability)) continue;
-        if (!this.matchesWho(trigger.who, tapped.id, holder)) continue;
+        // One that has left is asked as it last was: an ability on the stack
+        // whose land has gone, a land sacrificed for its mana (rule 608.2h).
+        if (!this.matchesWho(trigger.who, tapped.id, holder, tapped.zone !== "battlefield")) continue;
         if (
           trigger.filter !== undefined &&
           !matchesFilter(this.state, this.registry, tapped.id, trigger.filter, { you: holder.controller, source: holder.id })
@@ -25553,6 +25597,14 @@ export class Game {
         if (spell !== undefined) spell = { ...spell, subtype: chosen };
         if (abilityOf !== undefined) abilityOf = { ...abilityOf, subtype: chosen };
       }
+      if (spendOnly.chosenColor === true) {
+        // "…of that color" (Throne of Eldraine). No color chosen, no spell.
+        const chosen = chosenManaType(object);
+        spell =
+          chosen === undefined || chosen === "C"
+            ? { ...spell, colors: ["W"], notColors: ["W"] }
+            : { ...spell, colors: [chosen] };
+      }
       if (spendOnly.orSpell !== undefined) {
         spell = spell === undefined ? spendOnly.orSpell : { anyOf: [spell, spendOnly.orSpell] };
       }
@@ -25645,7 +25697,19 @@ export class Game {
     }
   }
 
+  /** The one type of mana that may pay for `purpose`, when its ability says
+   * so: "spend only mana of the chosen color to activate this ability" (Throne
+   * of Eldraine — `AbilityCost.spendOnlyChosenColor`). With no color chosen,
+   * nothing can: `"none"` stands for a type no mana has. */
+  private spendOnlyManaTypeFor(purpose: ManaPurpose): ManaType | "none" | undefined {
+    if (purpose?.kind !== "ability" || purpose.ability?.cost.spendOnlyChosenColor !== true) return undefined;
+    const source = this.state.objects[purpose.source];
+    return (source === undefined ? undefined : chosenManaType(source)) ?? "none";
+  }
+
   private manaUnitCanPay(player: PlayerId, unit: ManaUnit, purpose: ManaPurpose): boolean {
+    const onlyType = this.spendOnlyManaTypeFor(purpose);
+    if (onlyType !== undefined && unit.type !== onlyType) return false;
     if (purpose?.kind === "cast") {
       const onlyFrom = this.spendOnlyManaFromOf(purpose.card);
       if (onlyFrom !== undefined && (unit.from === undefined || !manaOriginMatches(unit.from, onlyFrom))) return false;
@@ -34778,6 +34842,20 @@ export class Game {
       },
       choicesHeld: () => this.state.heldChoices !== undefined,
       releaseHeldChoices: () => this.releaseHeldChoices(),
+      withLandManaExtras: (add) => {
+        const pool = this.state.players[controller].manaPool;
+        const before = pool.length;
+        add();
+        const land = this.state.objects[source];
+        if (land === undefined) return;
+        const produced = pool.slice(before).map((unit) => unit.type);
+        for (const out of this.extraManaOutputs(land, produced, controller, true)) {
+          const origin = this.manaOriginOf(out.holder);
+          if ("units" in out) {
+            for (const type of out.units) this.addMana(controller, type, 1, out.tag, origin);
+          } else this.addMana(controller, out.choices[0], out.amount, out.tag, origin);
+        }
+      },
       shuffleSearchers: () => {
         const owed = this.state.searchShufflesOwed ?? [];
         delete this.state.searchShufflesOwed;

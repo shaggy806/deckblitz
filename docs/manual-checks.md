@@ -7319,3 +7319,18 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 - **Do:** Cast it. Say no to the first card, and no to the second.
 - **Expect:** Shock, then Grizzly Bears, are exiled and offered. The next Shock is exiled with no question, and the spell is done, with Hill Giant still on your library.
+
+### Throne of Eldraine: its four mana buys a monocolored spell of that color
+
+- **Do:** Cast it and choose green. Tap it for mana.
+- **Expect:** Four green mana, and of your hand only Grizzly Bears can be cast: not Hill Giant, Kitchen Finks or Sol Ring.
+
+### Throne of Eldraine: its draw takes only mana of that color
+
+- **Do:** Cast it and choose green. Activate its draw.
+- **Expect:** You draw two, paying with three Forests and leaving the Mountains untapped.
+
+### Caged Sun: a land making that color makes one more
+
+- **Do:** Cast it and choose green. Tap the Forest for mana, then the Mountain, then Llanowar Elves. Play Crumbling Vestige and take green.
+- **Expect:** Grizzly Bears is 3/3; yours only. The Forest makes two green, the Mountain one red, the Elves one green; Crumbling Vestige makes two green.
