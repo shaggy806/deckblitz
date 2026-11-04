@@ -3475,6 +3475,10 @@ export type AwaitingDecision =
        * opponent picking the card from your graveyard that goes to your hand
        * (Tasigur, the Golden Fang). Only what the chooser is told. */
       readonly forPlayer?: PlayerId;
+      /** A search whose finds an Opposition Agent exiles: the rest of the
+       * instruction can't see them there, and goes on (`then` with nothing
+       * found, `GameState.unseenFinds`). */
+      readonly findsUnseen?: true;
       /** A search whose finds are being exiled for several players, each of
        * whom might be the one to play them (Opposition Agent, of two players):
        * once they're in exile, `chooser` says which for each (rule 616.1, the
@@ -6622,6 +6626,11 @@ export interface GameState {
    * no permanent to hang it on. Cleared as each turn begins.
    */
   hexproofPlayers: PlayerId[];
+  /** What an Opposition Agent has just exiled from a search: no "this way" read
+   * begun by event `at` or before sees these cards (`thisWayEntries`; its ruling:
+   * the spell's other effects can't see them in exile). Ends with the turn at
+   * the latest. Absent when empty. */
+  unseenFinds?: { readonly at: number; readonly objects: readonly ObjectId[] };
   /** Players with hexproof from a quality until end of turn (rule 702.11d —
    * Veil of Summer: "**You** and permanents you control gain hexproof from
    * blue and from black"), one entry per grant. Ends with `hexproofPlayers`.

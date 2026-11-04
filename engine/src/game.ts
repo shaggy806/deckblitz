@@ -10806,15 +10806,20 @@ export class Game {
         else applyEffectSpec(spec, ctx);
       }
     }
+    // What an Opposition Agent exiled, the rest of the resolution can't see:
+    // "this way" counts none of it.
+    const unseen = awaiting.findsUnseen === true;
+    if (unseen) this.state.unseenFinds = { at: this.state.eventSeq, objects: [...chosen] };
     // "…, then that creature gains haste" — applied with the chosen cards as
     // its targets, since they were never targets of the spell itself. Nothing
-    // chosen means nothing to say it about.
+    // chosen means nothing to say it about. Unseen finds are nothing found, and
+    // it runs: what it says of them does nothing, and the rest still happens.
     const then = awaiting.then;
-    if (then !== undefined && chosen.length > 0) {
+    if (then !== undefined && (chosen.length > 0 || unseen)) {
       const ctx = this.makeResolutionContext(
         awaiting.thenSource ?? asObjectId("choose-from-zone-source"),
         player,
-        chosen.map((id) => ({ kind: "object", object: id }) as const),
+        unseen ? [] : chosen.map((id) => ({ kind: "object", object: id }) as const),
         awaiting.thenX ?? 0,
         0,
         undefined,
@@ -11000,6 +11005,7 @@ export class Game {
     // as the next turn begins: a trigger in this cleanup step can target.
     this.state.hexproofPlayers = [];
     delete this.state.hexproofFromPlayers;
+    delete this.state.unseenFinds;
     delete this.state.spellGrantsThisTurn;
     // "Until end of turn" control effects (Act of Treason) end — control
     // falls to whichever control effect is now the latest (rule 613.7), else
@@ -12929,7 +12935,7 @@ export class Game {
     face: number,
   ): NonNullable<StaticAbility["playFromExile"]>[] {
     const card = this.state.objects[cardId];
-    if (card === undefined || card.zone !== "exile") return [];
+    if (card === undefined || card.zone !== "exile" || this.state.players[card.owner]?.hasLost === true) return [];
     const lookers = card.exiledFaceDown?.lookers;
     if (lookers !== undefined && !lookers.includes(player)) return [];
     const out: NonNullable<StaticAbility["playFromExile"]>[] = [];
@@ -13004,7 +13010,7 @@ export class Game {
     face?: number,
   ): { readonly source: ObjectId; readonly grant: NonNullable<GameObject["linkedCastGrants"]>[number] } | null {
     const card = this.state.objects[cardId];
-    if (card === undefined || card.zone !== "exile") return null;
+    if (card === undefined || card.zone !== "exile" || this.state.players[card.owner]?.hasLost === true) return null;
     if (card.exiledFaceDown !== undefined && !card.exiledFaceDown.lookers.includes(player)) return null;
     for (const link of [card.exiledWith, card.exiledUntil]) {
       if (link === undefined) continue;
@@ -37290,9 +37296,11 @@ export class Game {
       // "Exile them" with this source (rule 607.2a), in the stint the
       // resolving ability refers to.
       ...(exiled && more?.linked === true ? this.searchExileLink(more.source, more.sourceStint) : {}),
-      // In exile, what's found can't be seen by the rest of the instruction
-      // (Opposition Agent's ruling), so there's nothing for `then` to say.
-      ...(more?.then !== undefined && exileFor.length === 0
+      // In exile, what's found can't be seen by the rest of the instruction, which
+      // goes on all the same (Opposition Agent's ruling): `then` runs with nothing
+      // found (`applyChooseFromZoneThen`).
+      ...(exileFor.length > 0 ? { findsUnseen: true as const } : {}),
+      ...(more?.then !== undefined
         ? {
             then: more.then,
             thenSource: more.source,
@@ -38736,6 +38744,9 @@ export class Game {
 
   private impulsePlayable(player: PlayerId, card: ObjectId): boolean {
     const object = this.state.objects[card];
+    // What a player who has left the game owned left with them (rule 800.4a),
+    // whoever had leave to play it.
+    if (object !== undefined && this.state.players[object.owner]?.hasLost === true) return false;
     const impulse = object?.impulse;
     // The card's own "you may cast this card from your graveyard or from
     // exile" (Squee, the Immortal — rule 113.6f: it functions there), for

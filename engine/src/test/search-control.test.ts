@@ -11,6 +11,7 @@ import { answeringPlayer, controlOf } from "../player-control.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
 import {
   A,
+  activate,
   B,
   C,
   cast,
@@ -19,6 +20,7 @@ import {
   graveyard,
   hand,
   lands,
+  life,
   nextTurn,
   pickFromZone,
   pickModes,
@@ -235,6 +237,164 @@ describe("Opposition Agent: they exile each card they find, and you may play the
     answerSearchAs(game, a, B, () => [inGraveyard]);
     cast(game, toHand(game, "Nissa's Encouragement", B), { player: B });
     expect(zone(game, inGraveyard)).toBe("exile");
+  });
+});
+
+describe("Opposition Agent's rulings", () => {
+  it("can't have them find what the search didn't ask for", () => {
+    const { game, a } = table({ deck: "Grizzly Bears" });
+    spawn(game, "Opposition Agent");
+    const [forest, giant] = bobsTurn(game, "Forest", "Hill Giant");
+    lands(game, "Forest", 2, B);
+    const seen = answerSearchAs(game, a, B, () => [forest]);
+    cast(game, toHand(game, "Rampant Growth", B), { player: B });
+    expect(seen.offered).toEqual([forest]);
+    expect(seen.offered).not.toContain(giant);
+  });
+
+  it("may find nothing when a quality is stated, and the library is shuffled all the same", () => {
+    const { game, a } = table();
+    spawn(game, "Opposition Agent");
+    const [forest] = bobsTurn(game, "Forest");
+    lands(game, "Forest", 2, B);
+    const seen = answerSearchAs(game, a, B, () => []);
+    cast(game, toHand(game, "Rampant Growth", B), { player: B });
+    expect(seen.min).toBe(0);
+    expect(zone(game, forest)).toBe("library");
+    expect(game.state.playerControl).toBeUndefined();
+  });
+
+  it("the search's other effects still happen: Grim Tutor's life loss", () => {
+    const { game, a } = table();
+    spawn(game, "Opposition Agent");
+    const [giant] = bobsTurn(game, "Hill Giant");
+    lands(game, "Swamp", 3, B);
+    answerSearchAs(game, a, B, () => [giant]);
+    cast(game, toHand(game, "Grim Tutor", B), { player: B });
+    expect(zone(game, giant)).toBe("exile");
+    expect(hand(game, B)).not.toContain(giant);
+    expect(life(game, B)).toBe(17);
+  });
+
+  it("what refers to the finds can't see them in exile, and the rest goes on: Test of Talents", () => {
+    const talents = (withAgent: boolean): { readonly drawn: number; readonly copy: string } => {
+      const { game, a, b } = table();
+      if (withAgent) spawn(game, "Opposition Agent");
+      nextTurn(game);
+      for (let i = 0; i < 3; i++) toLibrary(game, "Wastes", B);
+      lands(game, "Island", 5, B);
+      const copy = toHand(game, "Divination", B);
+      const spell = toHand(game, "Divination", B);
+      cast(game, spell, { player: B, settle: false });
+      const pick = (eligible: readonly ObjectId[]): readonly ObjectId[] => eligible.filter((id) => id === copy);
+      if (withAgent) answerSearchAs(game, a, B, pick);
+      else b.chooseFromZoneFn = (_view, eligible) => pick(eligible);
+      const before = hand(game, B).length;
+      cast(game, toHand(game, "Test of Talents", B), { player: B, targets: [ref(spell)] });
+      return { drawn: hand(game, B).length - (before - 1), copy: zone(game, copy) };
+    };
+    // Its controller's own spell: "That player shuffles, then draws a card for
+    // each card exiled from their hand this way." Without an Agent, one.
+    expect(talents(false)).toEqual({ drawn: 1, copy: "exile" });
+    // The Agent exiled it, not the spell: none to draw for.
+    expect(talents(true)).toEqual({ drawn: 0, copy: "exile" });
+  });
+
+  it("an instruction about the find does nothing, and asks nothing: Stonehewer Giant's attach", () => {
+    const { game, a } = table();
+    spawn(game, "Opposition Agent");
+    const [sword] = bobsTurn(game, "Leonin Scimitar");
+    const giant = spawn(game, "Stonehewer Giant", B);
+    lands(game, "Plains", 2, B);
+    answerSearchAs(game, a, B, () => [sword]);
+    activate(game, giant, 0, { player: B });
+    expect(zone(game, sword)).toBe("exile");
+    expect(game.state.objects[sword].attachedTo ?? null).toBeNull();
+    expect(game.state.awaiting).toBeNull();
+    expect(game.state.objects[sword].impulse?.player).toBe(A);
+  });
+
+  it("an instruction to cast the find offers nothing: Sunforger's free cast", () => {
+    const { game, a, b } = table();
+    spawn(game, "Opposition Agent");
+    const [bolt] = bobsTurn(game, "Lightning Bolt");
+    const bears = spawn(game, "Grizzly Bears", B);
+    const sunforger = spawn(game, "Sunforger", B);
+    game.state.objects[sunforger].attachedTo = bears;
+    lands(game, "Plateau", 2, B);
+    answerSearchAs(game, a, B, () => [bolt]);
+    let offered = false;
+    b.chooseCastNowFn = () => {
+      offered = true;
+      return null;
+    };
+    activate(game, sunforger, 0, { player: B });
+    expect(offered).toBe(false);
+    expect(zone(game, bolt)).toBe("exile");
+    expect(game.state.objects[bolt].impulse?.player).toBe(A);
+  });
+
+  it("you still pay for it, and may not cast it without the mana", () => {
+    const { game, a } = table();
+    spawn(game, "Opposition Agent");
+    const [bears] = bobsTurn(game, "Grizzly Bears");
+    lands(game, "Swamp", 2, B);
+    answerSearchAs(game, a, B, () => [bears]);
+    cast(game, toHand(game, "Demonic Tutor", B), { player: B });
+    nextTurn(game);
+    expect(() => cast(game, bears, { via: "impulse" })).toThrow();
+    expect(zone(game, bears)).toBe("exile");
+  });
+
+  it("keeps normal timing: a creature card or a land only when you could play one", () => {
+    const { game, a } = table();
+    spawn(game, "Opposition Agent");
+    lands(game, "Swamp", 2);
+    const [bears, forest] = bobsTurn(game, "Grizzly Bears", "Forest");
+    lands(game, "Swamp", 3, B);
+    answerSearchAs(game, a, B, () => [bears]);
+    cast(game, toHand(game, "Demonic Tutor", B), { player: B });
+    answerSearchAs(game, a, B, () => [forest]);
+    lands(game, "Forest", 2, B);
+    cast(game, toHand(game, "Rampant Growth", B), { player: B });
+    // Bob's turn, Alice holding priority with an empty stack.
+    game.dispatch({ type: "pass-priority", player: B });
+    expect(game.state.priority.holder).toBe(A);
+    expect(game.canDispatch({ type: "cast-spell", player: A, card: bears, targets: [], via: "impulse" })).not.toBeNull();
+    expect(game.canDispatch({ type: "play-land", player: A, card: forest })).not.toBeNull();
+    nextTurn(game);
+    expect(game.canDispatch({ type: "cast-spell", player: A, card: bears, targets: [], via: "impulse" })).toBeNull();
+    expect(game.canDispatch({ type: "play-land", player: A, card: forest })).toBeNull();
+  });
+
+  it("a card whose owner leaves the game leaves with them", () => {
+    const { game, a } = table({ players: 3 });
+    spawn(game, "Opposition Agent");
+    const [bears] = bobsTurn(game, "Grizzly Bears");
+    lands(game, "Swamp", 2, B);
+    answerSearchAs(game, a, B, () => [bears]);
+    cast(game, toHand(game, "Demonic Tutor", B), { player: B });
+    expect(zone(game, bears)).toBe("exile");
+    lands(game, "Swamp", 2);
+    nextTurn(game);
+    game.concede(B);
+    nextTurn(game);
+    expect(game.state.priority.holder).toBe(A);
+    // It stays on the board to be seen, and is out of the game (rule 800.4a).
+    expect(game.canDispatch({ type: "cast-spell", player: A, card: bears, targets: [], via: "impulse" })).not.toBeNull();
+    expect(game.legalActions(A).some((o) => o.kind === "cast-spell" && o.card === bears)).toBe(false);
+  });
+
+  it("controls them for the search and nothing else: their next choice is their own", () => {
+    const { game, a, b } = table();
+    spawn(game, "Opposition Agent");
+    const [giant] = bobsTurn(game, "Hill Giant");
+    lands(game, "Swamp", 3, B);
+    answerSearchAs(game, a, B, () => [giant]);
+    cast(game, toHand(game, "Grim Tutor", B), { player: B });
+    expect(controlOf(game.state, B)).toBeUndefined();
+    expect(answeringPlayer(game.state, B)).toBe(B);
+    expect(b.playerId).toBe(B);
   });
 });
 

@@ -377,5 +377,8 @@ export function thisWayEntries(
         break;
     }
   }
-  return out;
+  // Opposition Agent's exile: the instruction that searched can't see its finds
+  // there (its ruling). A read begun since is about a later move of them.
+  const unseen = state.unseenFinds;
+  return unseen !== undefined && since <= unseen.at ? out.filter((entry) => !unseen.objects.includes(entry.object)) : out;
 }
