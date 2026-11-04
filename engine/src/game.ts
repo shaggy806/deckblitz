@@ -28756,6 +28756,26 @@ export class Game {
             }
             return;
           }
+          // A permanent's likewise (rule 603.2c): proliferating its two kinds,
+          // two creatures with wither blocked by it. Once per permanent still,
+          // and a batch entering onto a stack names its own count.
+          if (
+            ability.trigger.on === "counters-put" &&
+            ability.trigger.perCounter !== true &&
+            ability.trigger.nth === undefined &&
+            event.type === "counter-added" &&
+            event.count === undefined &&
+            this.counterBatch !== null
+          ) {
+            const key = `${id}#${index}@${event.object}`;
+            const owed = this.counterBatch.get(key);
+            if (owed === undefined) {
+              this.counterBatch.set(key, { ability, trigger: base, multiplier });
+            } else {
+              owed.trigger = { ...owed.trigger, triggerValue: (owed.trigger.triggerValue ?? 0) + event.amount };
+            }
+            return;
+          }
           const damageBatch = this.damageBatch;
           // "Whenever one or more … deal damage to a player": once per player
           // (or per event) for the whole simultaneous event, settled with it.

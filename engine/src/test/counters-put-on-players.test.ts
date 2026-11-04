@@ -105,6 +105,28 @@ describe("All Will Be One", () => {
     expect(life(game, B)).toBe(18);
   });
 
+  it("proliferating a permanent's two kinds at once is one trigger of 2, and two permanents two", () => {
+    const { game, a } = table();
+    const one = spawn(game, "Grizzly Bears");
+    const other = spawn(game, "Grizzly Bears");
+    for (const id of [one, other]) {
+      game.debugApplyEffect(B, { kind: "add-counter", target: 0, counter: "+1/+1", amount: 1 }, [ref(id)]);
+    }
+    game.debugApplyEffect(B, { kind: "add-counter", target: 0, counter: "charge", amount: 1 }, [ref(one)]);
+    settle(game);
+    const { asked } = allWillBeOne(game, a);
+    a.chooseProliferateFn = () => [ref(one)];
+    game.debugApplyEffect(A, { kind: "proliferate" }, []);
+    settle(game);
+    expect(asked()).toBe(1);
+    expect(life(game, B)).toBe(18);
+    a.chooseProliferateFn = () => [ref(one), ref(other)];
+    game.debugApplyEffect(A, { kind: "proliferate" }, []);
+    settle(game);
+    expect(asked()).toBe(3);
+    expect(life(game, B)).toBe(15);
+  });
+
   it("a planeswalker entering with loyalty", () => {
     const { game, a } = table();
     allWillBeOne(game, a);
