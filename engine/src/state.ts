@@ -5457,6 +5457,8 @@ export interface EnteringTokenCopies {
   readonly replaced: readonly { readonly name: string; readonly count: number }[];
   readonly riders: readonly PtModifier[];
   readonly tapped: boolean;
+  /** "The tokens are goaded for the rest of the game", by this player. */
+  readonly goadedForGameBy?: PlayerId;
   readonly exileAtEndStep: boolean;
   readonly sacrificeAtEndStep: boolean;
   readonly atYourNextEndStep: boolean;

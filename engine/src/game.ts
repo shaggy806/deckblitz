@@ -28578,7 +28578,9 @@ export class Game {
               : this.refsAtTrigger(live, lastSeen, event, this.eventTriggerObject(ability.trigger, event))?.player,
           ) &&
           // "Whenever … while …" — part of the trigger condition, asked only
-          // now (rule 603.1), never again as it resolves.
+          // now (rule 603.1), never again as it resolves. "That player" is the
+          // one the event named: Wedding Ring's "an opponent who controls an
+          // artifact named Wedding Ring draws a card during their turn".
           this.interveningIfMet(
             ability.whileCondition,
             object,
@@ -28586,6 +28588,10 @@ export class Game {
             lastSeen,
             this.conditionTriggerObject(ability.trigger, event),
             this.triggerCastX(ability.trigger, event, object) ?? 0,
+            undefined,
+            ability.whileCondition === undefined
+              ? undefined
+              : this.refsAtTrigger(live, lastSeen, event, this.eventTriggerObject(ability.trigger, event))?.player,
           ) &&
           // Elesh Norn, Mother of Machines / Torpor Orb: an entering
           // permanent causes none of this controller's triggers.
@@ -29185,6 +29191,10 @@ export class Game {
     } else if (event.type === "life-changed") {
       // "That player" of a life-gain or life-loss trigger — the one whose
       // life changed (Mindcrank: "that player mills that many cards").
+      player = event.player;
+    } else if (event.type === "card-drawn") {
+      // The player who drew it (Wedding Ring's "an opponent who controls …
+      // draws a card during their turn").
       player = event.player;
     } else if (event.type === "permanent-sacrificed") {
       // The player who sacrificed it (Bloodroot Apothecary: "whenever an
@@ -40502,6 +40512,8 @@ export class Game {
       exileAtEndOfCombat?: boolean;
       sacrificeAtEndOfCombat?: boolean;
       atYourNextEndStep?: boolean;
+      /** "The tokens are goaded for the rest of the game", by this player. */
+      goadedForGameBy?: PlayerId;
       /** The effect making them, for a delayed trigger it sets up. */
       source?: ObjectId;
       effectController?: PlayerId;
@@ -40610,6 +40622,7 @@ export class Game {
       atYourNextEndStep: opts.atYourNextEndStep === true,
       exileAtEndOfCombat: opts.exileAtEndOfCombat === true,
       sacrificeAtEndOfCombat: opts.sacrificeAtEndOfCombat === true,
+      ...(opts.goadedForGameBy !== undefined ? { goadedForGameBy: opts.goadedForGameBy } : {}),
       ...(opts.attacking !== undefined ? { attacking: opts.attacking } : {}),
       ...(opts.source !== undefined ? { source: opts.source } : {}),
       ...(opts.effectController !== undefined ? { effectController: opts.effectController } : {}),
@@ -40719,6 +40732,7 @@ export class Game {
             delete this.state.objects[id];
             continue;
           }
+          if (group.goadedForGameBy !== undefined) this.state.objects[id].goadedForGameBy = [group.goadedForGameBy];
           this.noteTokensCreated(group.controller);
           if (!copiedAgain) this.emit({ type: "permanent-copied", object: id, copyOf: copyName });
           this.emit({ type: "permanent-entered-battlefield", object: id });
@@ -40745,7 +40759,7 @@ export class Game {
         true,
         planned.tapped,
         planned.sacrificeAtEndStep,
-        undefined,
+        planned.goadedForGameBy,
         planned.exileAtEndStep || planned.sacrificeAtEndStep,
       ),
       ...this.mintReplacedTokenCopies(planned),
@@ -40768,7 +40782,7 @@ export class Game {
         false,
         group.tapped,
         group.sacrificeAtEndStep,
-        undefined,
+        group.goadedForGameBy,
         group.exileAtEndStep || group.sacrificeAtEndStep,
       ),
     );

@@ -8199,6 +8199,10 @@ export type EffectSpec =
        * sacrifices two lands": a tied player still sacrifices after the first
        * has). */
       readonly whoIf?: StaticCondition;
+      /** "Each player **other than** …": everyone in `who` but this player,
+       * found as it begins — Fractured Identity's "each player other than its
+       * controller", the controller it had as it was exiled. */
+      readonly except?: ChosenPlayerRef;
       /** With `whoIf`: the instruction those players are found **before** —
        * "each opponent discards a card. **Each opponent who can't** loses 3
        * life" (Entropic Battlecruiser), "for each opponent who can't, you gain
@@ -8511,8 +8515,13 @@ export type EffectSpec =
        * something an opponent controls means (Hate Mirage). A
        * {@link ChosenPlayerRef} is one player, "**that player** creates a token
        * that's a copy of that card" (Arcane Artisan); nobody, and none is made,
-       * if that target has gone. */
-      readonly who?: "you" | ChosenPlayerRef;
+       * if that target has gone. `"that-player"` is the player a
+       * `for-each-player` is on: "each opponent creates a token that's a copy
+       * of it" (Life of the Party). */
+      readonly who?: "you" | "that-player" | ChosenPlayerRef;
+      /** "**The tokens are goaded for the rest of the game**" (Life of the
+       * Party), by this effect's controller — `create-token`'s. */
+      readonly goadedForGame?: boolean;
       /** Override the copies' base power/toughness, as part of their copiable
        * values (rule 707.9b), so counters and anthems still apply: "except
        * it's 1/1", or Saw in Half's "except their power is half that
@@ -12740,6 +12749,8 @@ export interface EffectApi {
     opts: {
       /** Controller for the new token; defaults to the copied permanent's. */
       readonly under?: PlayerId;
+      /** "The tokens are goaded for the rest of the game", by this player. */
+      goadedForGameBy?: PlayerId;
       gainsHaste: boolean;
       exileAtEndStep: boolean;
       /** "Sacrifice it at the beginning of the next end step" (Kiki-Jiki) —
@@ -19185,10 +19196,15 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
             : ctx.playersInScope(spec.who));
       // "Each player who …": fixed now, before anyone acts (`remaining` was).
       const whoIf = spec.whoIf;
-      const players =
+      const excepted =
+        spec.remaining === undefined && spec.found === undefined && spec.except !== undefined
+          ? effectPlayer(spec.except, ctx)
+          : undefined;
+      const players = (
         spec.remaining !== undefined || spec.found !== undefined || whoIf === undefined
           ? scope
-          : scope.filter((p) => ctx.aboutPlayer(p).conditionMet(whoIf));
+          : scope.filter((p) => ctx.aboutPlayer(p).conditionMet(whoIf))
+      ).filter((p) => p !== excepted);
       // "Each player who can't": found already, and the instruction done first.
       if (spec.before !== undefined) {
         const { before, ...rest } = spec;
@@ -19196,9 +19212,14 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         return;
       }
       if (spec.simultaneous === true) {
-        ctx.simultaneously(() => {
-          for (const player of players) applyEffectSpec(spec.effect, ctx.aboutPlayer(player));
-        });
+        // One token event too: token copies made this way enter together, and
+        // any choice one has as it enters is made before any of them does
+        // (`carryOutTokenCopies`).
+        ctx.simultaneously(() =>
+          ctx.oneTokenEvent(() => {
+            for (const player of players) applyEffectSpec(spec.effect, ctx.aboutPlayer(player));
+          }),
+        );
         return;
       }
       const pendingBefore = ctx.decisionPending();
@@ -19229,10 +19250,12 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         spec.of === "exiled-as-cost" ||
         spec.of === "exiled-this-way" ||
         (typeof spec.of === "object" && "eachExiled" in spec.of);
-      const named = typeof spec.who === "object" ? effectPlayer(spec.who, ctx) : undefined;
-      if (typeof spec.who === "object" && named === undefined) return;
+      const handedTo = spec.who === undefined || spec.who === "you" ? undefined : spec.who;
+      const named = handedTo === undefined ? undefined : effectPlayer(handedTo, ctx);
+      if (handedTo !== undefined && named === undefined) return;
       const copy = (of: ObjectId, count: number): void =>
         ctx.createTokenCopy(of, count, {
+          ...(spec.goadedForGame === true ? { goadedForGameBy: ctx.controller } : {}),
           gainsHaste: spec.gainsHaste ?? false,
           sacrificeAtEndStep: spec.sacrificeAtEndStep ?? false,
           exileAtEndStep: spec.exileAtEndStep ?? false,

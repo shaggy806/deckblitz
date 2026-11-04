@@ -786,8 +786,12 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "turn-face-up": (n, v) => v.touch(n.target, "help", MINOR),
   "create-token": (n, v) => v.touch(n.who === "target-controller" ? 0 : undefined, "help", MINOR),
   // A copy goes to the copied permanent's controller unless the card says
-  // it's yours (Hate Mirage).
-  "create-token-copy": (n, v) => v.touch(n.of, n.who === "you" ? "take" : "help", MAJOR),
+  // it's yours (Hate Mirage), or hands it to the player in a slot (Wedding
+  // Ring, Arcane Artisan).
+  "create-token-copy": (n, v) => {
+    v.touch(n.of, n.who === "you" ? "take" : "help", MAJOR);
+    if (typeof n.who === "object" && "target" in n.who) v.touch(n.who.target, "help", MAJOR);
+  },
   // The Aura or Equipment moved is put to work for whoever it ends up on
   // (Swordsman, Sharp Scoundrel's "attach target Equipment you control").
   attach: (n, v) => {

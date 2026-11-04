@@ -405,7 +405,9 @@ function untargetedWorth(effect: EffectSpec, ctx: WorthContext): number {
       // us — is a token's worth like any other: a myriad copy attacking another
       // opponent included, which v1 declined while this read as 0, so the
       // copies never swung at the rest of the table. A copy that enters under
-      // the copied permanent's controller isn't read.
+      // the copied permanent's controller isn't read, nor one a card hands to
+      // another player (Wedding Ring).
+      if (effect.who !== undefined && effect.who !== "you") return 0;
       if (
         effect.who !== "you" &&
         effect.of !== "source" &&

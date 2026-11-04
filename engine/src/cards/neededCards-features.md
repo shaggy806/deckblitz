@@ -5127,3 +5127,5 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 **Two target players search (2026-11-04).** `effect:two-players-search`, no engine code: `for-each-target` over `search-library` of `who: { controllerOfTarget: 0 }`, which orders target players by APNAP (rule 101.4). Scheming Symmetry.
 
 **A counter on each creature target player controls (2026-11-04).** `effect:add-counter-all-target-player`, no engine code: `add-counter-all` with `controlledByTarget` (Requisition Raid's shape); the scaffolder now reads the line and "proliferate twice". Contagion Engine.
+
+**A token copy handed to another player, and a trigger about the player its event named (2026-11-04).** `effect:opponent-token-copy`: `create-token-copy`'s `who` takes `"that-player"` under a `for-each-player`, with `goadedForGame`, and `for-each-player` an `except`, its `simultaneous` one token event; `condition:named-artifact-condition`: `whileCondition` reads `"that-player"`, and a draw names its player. Wedding Ring, Fractured Identity, Life of the Party.

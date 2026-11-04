@@ -1823,7 +1823,10 @@
   "replacement:copy-spell-additional-time",
   "static:pt-per-same-name-as-affected",
   "static:all-colors-static",
-  "effect:add-counter-all-target-player"
+  "effect:add-counter-all-target-player",
+  "effect:add-counter-all-target-player",
+  "effect:opponent-token-copy",
+  "condition:named-artifact-condition"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {
