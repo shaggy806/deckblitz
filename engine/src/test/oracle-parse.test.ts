@@ -14350,6 +14350,52 @@ describe("hexproof from a quality for a while, and spells that can't be countere
   });
 });
 
+describe("addendum", () => {
+  const read = (oracle_text: string) => parseFace({ name: "Test Card", type_line: "Instant", oracle_text, mana_cost: "{1}", colors: [] });
+  const addendum = {
+    kind: "all",
+    of: [
+      { kind: "source", filter: { cast: true } },
+      { kind: "your-turn" },
+      { kind: "turn-structure", steps: ["precombat-main", "postcombat-main"] },
+    ],
+  };
+  it("reads 'each of those creatures' as the sentence before's", () => {
+    const face = read(
+      "Creatures you control gain indestructible until end of turn.\nAddendum — If you cast this spell during your main phase, put a +1/+1 counter on each of those creatures and they gain vigilance until end of turn.",
+    );
+    const creatures = { type: "creature", controlledBy: "you" };
+    expect(face.todo).toEqual([]);
+    expect(face.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "grant-keyword-all", filter: creatures, keyword: "indestructible", duration: "end-of-turn" },
+        {
+          kind: "conditional",
+          condition: addendum,
+          then: {
+            kind: "sequence",
+            effects: [
+              { kind: "add-counter-all", filter: creatures, counter: "+1/+1", amount: 1 },
+              { kind: "grant-keyword-all", filter: creatures, keyword: "vigilance", duration: "end-of-turn" },
+            ],
+          },
+        },
+      ],
+    });
+  });
+  it("reads a bonus that stands alone", () => {
+    const face = read("Draw two cards.\nAddendum — If you cast this spell during your main phase, you gain 2 life.");
+    expect(face.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "draw", amount: 2 },
+        { kind: "conditional", condition: addendum, then: { kind: "gain-life", amount: 2 } },
+      ],
+    });
+  });
+});
+
 describe("facts fixed as a spell is cast (rule 601.2i), and what a kick brings as it enters", () => {
   const read = (type_line: string, oracle_text: string) =>
     parseFace({ name: "Test Card", type_line, oracle_text, mana_cost: "{1}", colors: [] });

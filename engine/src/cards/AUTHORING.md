@@ -2183,6 +2183,11 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
 
 ### Combinators
 
+- **Addendum** ("if you cast this spell during your main phase") is a
+  `conditional` on `all` of `{ kind: "source", filter: { cast: true } }`,
+  `{ kind: "your-turn" }` and `{ kind: "turn-structure", steps:
+  ["precombat-main", "postcombat-main"] }`: a copy wasn't cast, so it gets no
+  bonus (Unbreakable Formation, Sphinx's Insight).
 - **`sequence { effects: [...] }`** — apply several effects in order, sharing
   the same `targets` and `x` (Blightning: damage a player *and* they discard).
   `simultaneous: true` marks the steps as **one instruction** written one step

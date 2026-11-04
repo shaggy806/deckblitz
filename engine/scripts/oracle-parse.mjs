@@ -4224,6 +4224,18 @@ export function parseSentence(sentence, ctx) {
     return { kind: "add-counter", target: "tapped", counter: m[2].toLowerCase(), amount: amount(m[1]) };
   }
   // Any named kind: +1/+1, oil (Phyrexia: All Will Be One), stun, shield.
+  // "Put a +1/+1 counter on each creature you control and they gain vigilance
+  // until end of turn" (Unbreakable Formation's addendum, Overseer of Vault 76).
+  if ((m = re(`put ${N} ([+-]\\d+/[+-]\\d+) counters? on each creature you control and they gain ${KW} until end of turn`).exec(s))) {
+    const filter = { type: "creature", controlledBy: "you" };
+    return {
+      kind: "sequence",
+      effects: [
+        { kind: "add-counter-all", filter, counter: m[2].toLowerCase(), amount: amount(m[1]) },
+        { kind: "grant-keyword-all", filter, keyword: KEYWORDS[m[3].toLowerCase()], duration: "end-of-turn" },
+      ],
+    };
+  }
   if ((m = re(`put ${N} ([+-]\\d+/[+-]\\d+|[a-z]+) counters? on (~|${TARGET}|each creature you control|each other creature you control)`).exec(s))) {
     const n = amount(m[1]);
     const counter = m[2].toLowerCase();
@@ -9261,6 +9273,37 @@ export function parseEffect(text, outer) {
         const effect = {
           kind: "conditional",
           condition: { kind: "cast-this-turn", who: "opponent", filter: colors.length === 1 ? colors[0] : { anyOf: colors } },
+          then,
+        };
+        parsed.push(effect);
+        hints.push({ sentence, effect });
+        continue;
+      }
+    }
+    // Addendum (Unbreakable Formation, Sphinx's Insight): "it was cast and it's
+    // now your main phase", a copy never having been cast (the rulings).
+    const addendumM = /^if you cast ~ during your main phase, (.+)$/i.exec(sentence);
+    if (addendumM !== null) {
+      // "Those creatures" are the ones the sentence before just named.
+      const last = parsed.at(-1);
+      const said = addendumM[1].replace(
+        /each of those creatures/i,
+        last?.kind === "grant-keyword-all" && last.filter?.type === "creature" && last.filter.controlledBy === "you" && Object.keys(last.filter).length === 2
+          ? "each creature you control"
+          : "$&",
+      );
+      const then = parseSentence(`${said[0].toUpperCase()}${said.slice(1)}`, ctx);
+      if (then !== null && !containsUndefined(then)) {
+        const effect = {
+          kind: "conditional",
+          condition: {
+            kind: "all",
+            of: [
+              { kind: "source", filter: { cast: true } },
+              { kind: "your-turn" },
+              { kind: "turn-structure", steps: ["precombat-main", "postcombat-main"] },
+            ],
+          },
           then,
         };
         parsed.push(effect);

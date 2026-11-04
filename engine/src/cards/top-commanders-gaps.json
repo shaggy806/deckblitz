@@ -1746,7 +1746,9 @@
   "stat:mana-spent-replacement",
   "replacement:counter-replacement-players",
   "trigger:search-trigger",
-  "static:spells-cant-be-countered"
+  "static:spells-cant-be-countered",
+  "static:spells-cant-be-countered",
+  "keyword:addendum"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {
