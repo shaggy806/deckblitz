@@ -41452,8 +41452,16 @@ export class Game {
    * everything it exiled that's still in exile — the card found too, if it
    * wasn't cast — goes on the bottom of the library in a random order. */
   private finishCascade(finish: CascadeFinish): void {
-    const toBottom = finish.exiled.filter((id) => this.state.objects[id]?.zone === "exile");
-    for (const id of shuffle(toBottom, this.rng)) this.moveObject(id, "library");
+    this.exiledToBottomRandomly(finish.exiled.filter((id) => this.state.objects[id]?.zone === "exile"));
+  }
+
+  /** Cards in exile go on the bottom of their owner's library in a random
+   * order. A commander's owner answers rule 903.9b after the rest have moved,
+   * so one who declines still lands at random among them, not last. */
+  private exiledToBottomRandomly(cards: readonly ObjectId[]): void {
+    for (const id of shuffle(cards, this.rng)) {
+      this.moveObject(id, "library", { libraryPlacement: { randomlyAmong: cards } });
+    }
     this.state.rngState = this.rng.seed;
   }
 
@@ -41484,9 +41492,7 @@ export class Game {
    * has discovered (701.57b). */
   private finishDiscover(player: PlayerId, found: DiscoverFound): void {
     if (found.hit !== null && this.state.objects[found.hit]?.zone === "exile") this.moveObject(found.hit, "hand");
-    const toBottom = found.exiled.filter((id) => id !== found.hit && this.state.objects[id]?.zone === "exile");
-    for (const id of shuffle(toBottom, this.rng)) this.moveObject(id, "library");
-    this.state.rngState = this.rng.seed;
+    this.exiledToBottomRandomly(found.exiled.filter((id) => id !== found.hit && this.state.objects[id]?.zone === "exile"));
     this.emit({ type: "discovered", player, amount: found.amount, hit: found.hit });
   }
 
@@ -41610,12 +41616,12 @@ export class Game {
         });
         return;
       case "bottom-random": {
-        const order = shuffle(still, this.rng);
-        this.state.rngState = this.rng.seed;
         if (exiled) {
-          for (const id of order) this.moveObject(id, "library");
+          this.exiledToBottomRandomly(still);
           return;
         }
+        const order = shuffle(still, this.rng);
+        this.state.rngState = this.rng.seed;
         const library = this.state.zones.perPlayer[owner].library;
         const moving = new Set(order);
         const kept = library.filter((id) => !moving.has(id));
