@@ -868,6 +868,7 @@ import _poolWhirlwindAdept from "../pool/whirlwind-adept.js";
 import _poolWhiteWidowYelenaBelova from "../pool/white-widow-yelena-belova.js";
 import _poolWildRide from "../pool/wild-ride.js";
 import _poolWingsOfTheCosmos from "../pool/wings-of-the-cosmos.js";
+import _poolWinnowing from "../pool/winnowing.js";
 import _poolWireflyHive from "../pool/wirefly-hive.js";
 import _poolWispdrinkerVampire from "../pool/wispdrinker-vampire.js";
 import _poolWitchHunt from "../pool/witch-hunt.js";
@@ -1780,6 +1781,7 @@ const shard: CardShard = {
     _poolWhiteWidowYelenaBelova,
     _poolWildRide,
     _poolWingsOfTheCosmos,
+    _poolWinnowing,
     _poolWireflyHive,
     _poolWispdrinkerVampire,
     _poolWitchHunt,

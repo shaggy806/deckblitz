@@ -262,6 +262,8 @@ import _poolFiveAlarmFire from "../pool/five-alarm-fire.js";
 import _poolFlameFusillade from "../pool/flame-fusillade.js";
 import _poolFlood from "../pool/flood.js";
 import _poolFloodwaters from "../pool/floodwaters.js";
+import _poolFlotsamJetsam from "../pool/flotsam-jetsam.js";
+import _poolFlotsam from "../pool/flotsam.js";
 import _poolFlowstoneWyvern from "../pool/flowstone-wyvern.js";
 import _poolFlusterstorm from "../pool/flusterstorm.js";
 import _poolForceOfSavagery from "../pool/force-of-savagery.js";
@@ -1150,6 +1152,8 @@ const shard: CardShard = {
     _poolFlameFusillade,
     _poolFlood,
     _poolFloodwaters,
+    _poolFlotsamJetsam,
+    _poolFlotsam,
     _poolFlowstoneWyvern,
     _poolFlusterstorm,
     _poolForceOfSavagery,

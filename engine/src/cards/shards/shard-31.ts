@@ -866,6 +866,7 @@ import _poolTurncoatKunoichi from "../pool/turncoat-kunoichi.js";
 import _poolTurtleDuck from "../pool/turtle-duck.js";
 import _poolTuvasaTheSunlit from "../pool/tuvasa-the-sunlit.js";
 import _poolTweeze from "../pool/tweeze.js";
+import _poolUltimateMagicMeteor from "../pool/ultimate-magic-meteor.js";
 import _poolUlvenwaldMystics from "../pool/ulvenwald-mystics.js";
 import _poolUmbralJuke from "../pool/umbral-juke.js";
 import _poolUndercityShade from "../pool/undercity-shade.js";
@@ -1831,6 +1832,7 @@ const shard: CardShard = {
     _poolTurtleDuck,
     _poolTuvasaTheSunlit,
     _poolTweeze,
+    _poolUltimateMagicMeteor,
     _poolUlvenwaldMystics,
     _poolUmbralJuke,
     _poolUndercityShade,

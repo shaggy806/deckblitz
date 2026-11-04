@@ -131,6 +131,7 @@ import _poolCastleArdenvale from "../pool/castle-ardenvale.js";
 import _poolCatharticParting from "../pool/cathartic-parting.js";
 import _poolCavalryMaster from "../pool/cavalry-master.js";
 import _poolCelestusSanctifier from "../pool/celestus-sanctifier.js";
+import _poolCemeteryDesecrator from "../pool/cemetery-desecrator.js";
 import _poolCentaurVinecrasher from "../pool/centaur-vinecrasher.js";
 import _poolCeremonialGroundbreaker from "../pool/ceremonial-groundbreaker.js";
 import _poolCeruleanWyvern from "../pool/cerulean-wyvern.js";
@@ -282,6 +283,7 @@ import _poolFateUnraveler from "../pool/fate-unraveler.js";
 import _poolFeastOrFamine from "../pool/feast-or-famine.js";
 import _poolFeasterOfFools from "../pool/feaster-of-fools.js";
 import _poolFeed from "../pool/feed.js";
+import _poolFellBeastsShriek from "../pool/fell-beasts-shriek.js";
 import _poolFeralInstinct from "../pool/feral-instinct.js";
 import _poolFightOn from "../pool/fight-on.js";
 import _poolFiligreeSages from "../pool/filigree-sages.js";
@@ -1025,6 +1027,7 @@ const shard: CardShard = {
     _poolCatharticParting,
     _poolCavalryMaster,
     _poolCelestusSanctifier,
+    _poolCemeteryDesecrator,
     _poolCentaurVinecrasher,
     _poolCeremonialGroundbreaker,
     _poolCeruleanWyvern,
@@ -1176,6 +1179,7 @@ const shard: CardShard = {
     _poolFeastOrFamine,
     _poolFeasterOfFools,
     _poolFeed,
+    _poolFellBeastsShriek,
     _poolFeralInstinct,
     _poolFightOn,
     _poolFiligreeSages,

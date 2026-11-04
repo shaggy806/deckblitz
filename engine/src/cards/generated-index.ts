@@ -120,6 +120,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Banana Token",
   "Bat Token",
   "Bat Token (Greed's Gambit)",
+  "Bat Token (Sengir Nosferatu)",
   "Bear Token",
   "Bear Token (Green 4/4)",
   "Beast Token",

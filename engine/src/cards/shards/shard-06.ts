@@ -139,6 +139,7 @@ import _poolCaptureOfJingzhou from "../pool/capture-of-jingzhou.js";
 import _poolCaradoraHeartOfAlacria from "../pool/caradora-heart-of-alacria.js";
 import _poolCasualtiesOfWar from "../pool/casualties-of-war.js";
 import _poolCazurRuthlessStalker from "../pool/cazur-ruthless-stalker.js";
+import _poolCemeteryGatekeeper from "../pool/cemetery-gatekeeper.js";
 import _poolCennsEnlistment from "../pool/cenns-enlistment.js";
 import _poolCentaurHealer from "../pool/centaur-healer.js";
 import _poolChampionsVictory from "../pool/champions-victory.js";
@@ -764,6 +765,7 @@ import _poolTenuredOilcaster from "../pool/tenured-oilcaster.js";
 import _poolTheBlackArrow from "../pool/the-black-arrow.js";
 import _poolTheBoulderReadyToRumble from "../pool/the-boulder-ready-to-rumble.js";
 import _poolTheDeathOfGwenStacy from "../pool/the-death-of-gwen-stacy.js";
+import _poolTheDeckOfManyThings from "../pool/the-deck-of-many-things.js";
 import _poolTheEndstone from "../pool/the-endstone.js";
 import _poolTheFallOfLordKonda from "../pool/the-fall-of-lord-konda.js";
 import _poolTheGooseMother from "../pool/the-goose-mother.js";
@@ -1041,6 +1043,7 @@ const shard: CardShard = {
     _poolCaradoraHeartOfAlacria,
     _poolCasualtiesOfWar,
     _poolCazurRuthlessStalker,
+    _poolCemeteryGatekeeper,
     _poolCennsEnlistment,
     _poolCentaurHealer,
     _poolChampionsVictory,
@@ -1666,6 +1669,7 @@ const shard: CardShard = {
     _poolTheBlackArrow,
     _poolTheBoulderReadyToRumble,
     _poolTheDeathOfGwenStacy,
+    _poolTheDeckOfManyThings,
     _poolTheEndstone,
     _poolTheFallOfLordKonda,
     _poolTheGooseMother,

@@ -731,6 +731,7 @@ import _poolSpellgyre from "../pool/spellgyre.js";
 import _poolSpiderFood from "../pool/spider-food.js";
 import _poolSpireMangler from "../pool/spire-mangler.js";
 import _poolSpitefulReturned from "../pool/spiteful-returned.js";
+import _poolSplitTheParty from "../pool/split-the-party.js";
 import _poolSpring from "../pool/spring.js";
 import _poolSquirrelWrangler from "../pool/squirrel-wrangler.js";
 import _poolStampedingWildebeests from "../pool/stampeding-wildebeests.js";
@@ -1635,6 +1636,7 @@ const shard: CardShard = {
     _poolSpiderFood,
     _poolSpireMangler,
     _poolSpitefulReturned,
+    _poolSplitTheParty,
     _poolSpring,
     _poolSquirrelWrangler,
     _poolStampedingWildebeests,

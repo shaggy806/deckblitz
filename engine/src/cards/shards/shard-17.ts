@@ -894,6 +894,7 @@ import _poolZombify from "../pool/zombify.js";
 import _poolZoologist from "../pool/zoologist.js";
 import _tokensAngelToken33White from "../tokens/angel-token-3-3-white.js";
 import _tokensAvatarTokenAwakenTheBloodAvatar from "../tokens/avatar-token-awaken-the-blood-avatar.js";
+import _tokensBatTokenSengirNosferatu from "../tokens/bat-token-sengir-nosferatu.js";
 import _tokensBeastToken from "../tokens/beast-token.js";
 import _tokensBlackGreenEnchantmentSnakeToken from "../tokens/black-green-enchantment-snake-token.js";
 import _tokensCatBeastToken from "../tokens/cat-beast-token.js";
@@ -1814,6 +1815,7 @@ const shard: CardShard = {
   tokens: [
     _tokensAngelToken33White,
     _tokensAvatarTokenAwakenTheBloodAvatar,
+    _tokensBatTokenSengirNosferatu,
     _tokensBeastToken,
     _tokensBlackGreenEnchantmentSnakeToken,
     _tokensCatBeastToken,

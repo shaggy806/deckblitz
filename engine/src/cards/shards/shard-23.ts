@@ -78,6 +78,7 @@ import _poolBigScore from "../pool/big-score.js";
 import _poolBilboBagginsBurglar from "../pool/bilbo-baggins-burglar.js";
 import _poolBilliardRoom from "../pool/billiard-room.js";
 import _poolBindToLife from "../pool/bind-to-life.js";
+import _poolBindingNegotiation from "../pool/binding-negotiation.js";
 import _poolBirchloreRangers from "../pool/birchlore-rangers.js";
 import _poolBirthdayEscape from "../pool/birthday-escape.js";
 import _poolBiteOfTheBlackRose from "../pool/bite-of-the-black-rose.js";
@@ -992,6 +993,7 @@ const shard: CardShard = {
     _poolBilboBagginsBurglar,
     _poolBilliardRoom,
     _poolBindToLife,
+    _poolBindingNegotiation,
     _poolBirchloreRangers,
     _poolBirthdayEscape,
     _poolBiteOfTheBlackRose,

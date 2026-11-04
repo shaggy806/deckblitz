@@ -657,6 +657,7 @@ import _poolSear from "../pool/sear.js";
 import _poolSeedSuture from "../pool/seed-suture.js";
 import _poolSelesnyaCharm from "../pool/selesnya-charm.js";
 import _poolSenateGuildmage from "../pool/senate-guildmage.js";
+import _poolSengirNosferatu from "../pool/sengir-nosferatu.js";
 import _poolSenseiGoldenTail from "../pool/sensei-golden-tail.js";
 import _poolSequenceEngine from "../pool/sequence-engine.js";
 import _poolSequesteredStash from "../pool/sequestered-stash.js";
@@ -1568,6 +1569,7 @@ const shard: CardShard = {
     _poolSeedSuture,
     _poolSelesnyaCharm,
     _poolSenateGuildmage,
+    _poolSengirNosferatu,
     _poolSenseiGoldenTail,
     _poolSequenceEngine,
     _poolSequesteredStash,
