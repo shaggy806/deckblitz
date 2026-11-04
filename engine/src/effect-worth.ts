@@ -121,6 +121,17 @@ function playersIn(scope: PlayerScope, ctx: WorthContext): readonly PlayerId[] |
     case "you-and-opponents-who-voted-with-you":
       // Not known until the votes are in.
       return null;
+    case "player-to-your-left":
+    case "player-to-your-right": {
+      const players = state.turnOrder.filter((p) => p === controller || !state.players[p].hasLost);
+      const at = players.indexOf(controller);
+      if (at < 0 || players.length < 2) return [];
+      return [players[(at + (scope === "player-to-your-left" ? 1 : players.length - 1)) % players.length]];
+    }
+    case "source-controller": {
+      const held = ctx.source !== undefined ? state.objects[ctx.source]?.controller : undefined;
+      return held !== undefined ? [held] : null;
+    }
     case "you-and-opponents-attacking-trigger-player":
       // Who'll be attacking isn't known until the attack: the controller's
       // share is the part that's ours for sure.

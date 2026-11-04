@@ -358,6 +358,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   // "Gain control of all creatures target player controls" (Call for Aid).
   "gain-control-all": (n, v) => v.touch(n.controlledByTarget, "harm", DECISIVE),
   "rotate-control": none,
+  "distribute-control": none,
   // Each one leaves its controller, as `gain-control`'s target does: the
   // permanent of yours you give up and the one of theirs you take.
   "exchange-control": (n, v) => {

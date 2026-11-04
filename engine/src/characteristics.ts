@@ -951,6 +951,13 @@ function evalStaticCondition(
             evalStaticCondition(state, registry, source, condition.condition, { ...opts, asPlayer: p }),
         );
       }
+      if (condition.player === "a-player") {
+        return state.turnOrder.some(
+          (p) =>
+            state.players[p]?.hasLost !== true &&
+            evalStaticCondition(state, registry, source, condition.condition, { ...opts, asPlayer: p }),
+        );
+      }
       const player = conditionPlayerOf(state, condition.player, opts, source);
       return (
         player !== undefined && evalStaticCondition(state, registry, source, condition.condition, { ...opts, asPlayer: player })

@@ -284,6 +284,13 @@ function whyCannotAttackUncached(
     return `${def.name} can't attack its owner`;
   }
   if (
+    restrictions.has("cant-attack-owner-planeswalkers") &&
+    isPlaneswalkerTarget(state, target) &&
+    state.objects[target as ObjectId]?.controller === object.owner
+  ) {
+    return `${def.name} can't attack a planeswalker its owner controls`;
+  }
+  if (
     restrictions.has("cant-attack-player-attacked-this-turn") &&
     object.attackedPlayersThisTurn?.includes(target as PlayerId) === true
   ) {

@@ -4349,6 +4349,27 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(face("As this creature enters, choose two players.", "Creature — Demon").choosePlayerOnEnter).toBeUndefined();
   });
 
+  it("a control change computed as it happens (effect:control-change-extensions)", () => {
+    const pendant = face("This artifact enters under the control of an opponent of your choice.", "Artifact");
+    expect(pendant.choosePlayerOnEnter).toBe("opponent");
+    expect(pendant.entersUnderChosenPlayer).toBe(true);
+    expect(parseEffect("The player to your right gains control of ~.", { targets: [] }).effect).toEqual({
+      kind: "gain-control",
+      target: "source",
+      who: "player-to-your-right",
+      untilEndOfTurn: false,
+    });
+    expect(parseEffect("Exile ~, then return it to the battlefield under an opponent's control.", { targets: [] }).effect).toEqual({
+      kind: "choose-opponent",
+      then: { kind: "flicker", target: "source", under: "that-player" },
+    });
+    expect(parseEffect("~'s controller loses 2 life.", { targets: [] }).effect).toEqual({
+      kind: "lose-life",
+      amount: 2,
+      who: "source-controller",
+    });
+  });
+
   it("a choice made secretly, and the cost that reveals it (decision:secret-choice)", () => {
     const archon = face("As this creature enters, secretly choose an opponent.", "Creature — Archon");
     expect(archon.choosePlayerOnEnter).toBe("opponent");

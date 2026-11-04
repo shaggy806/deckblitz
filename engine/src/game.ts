@@ -481,6 +481,7 @@ import {
   resolvingTargetSpec,
   sameTargetRef,
   targetsFillable,
+  playerAtSeat,
 } from "./target.js";
 import { distinctTargetCount, targetCountBounds } from "./target-count.js";
 import {
@@ -29397,7 +29398,9 @@ export class Game {
     )[] = [];
     // "Up to X target …, where X is …": the group's amounts are read now, as
     // its targets are chosen (rule 603.3d), and fixed from here on.
-    const specs = this.triggerSpecsWithAmounts(trigger, triggerTargetSpecs(ability as TriggeredAbility, trigger.modes));
+    const specs = this.triggerSpecsWithAmounts(trigger, triggerTargetSpecs(ability as TriggeredAbility, trigger.modes)).map(
+      (spec) => this.emptySeatOptional(spec, trigger.controller),
+    );
     for (let i = 0; i < specs.length; i += 1) {
       const spec = specs[i];
       if (auto[i] !== undefined) {
@@ -29578,6 +29581,18 @@ export class Game {
         : {}),
     };
     return "paused";
+  }
+
+  /** "For each player, … target land that player controls" (Turf War) has one
+   * slot for each seat a game could have. A seat past the table, or whose
+   * player has left the game, is no player, so the text defines no target for
+   * it (rule 601.2c): the ability needs none there. A player still in the game
+   * with nothing to target is another matter: no legal choice, so the ability
+   * is removed (rule 603.3d). */
+  private emptySeatOptional(spec: TargetSpec, controller: PlayerId): TargetSpec {
+    if (typeof spec !== "object" || spec.kind !== "permanent" || typeof spec.whose !== "object") return spec;
+    const seated = playerAtSeat(this.state.turnOrder, controller, spec.whose.seat);
+    return seated !== undefined && this.state.players[seated]?.hasLost === false ? spec : { kind: "optional", of: spec };
   }
 
   /** Who answers a triggered ability's target choice when its
@@ -30130,6 +30145,12 @@ export class Game {
       return held ?? refs.votes ?? [];
     };
     const scoped = (who: PlayerScope): PlayerId[] => {
+      if (who === "source-controller") {
+        // Whoever controls it now, or last did (608.2h).
+        const departed = departedSource();
+        const p = departed !== undefined ? departed.controller : this.state.objects[source]?.controller;
+        return p === undefined || this.state.players[p]?.hasLost !== false ? [] : [p];
+      }
       if (who === "chosen-player") {
         // The source's chosen player, in the stint this refers to (608.2h).
         const departed = departedSource();
@@ -31959,11 +31980,11 @@ export class Game {
       oneTokenEvent: (fn) => this.withTokenCopyEvent(fn),
       flicker: (flickered, options) => this.flickerByEffect(source, controller, flickered, options),
       meld: (self, partnerFilter, into, partner) => this.meldByEffect(controller, x, self, partnerFilter, into, partner),
-      returnFlickered: (link, thenCounters, underYourControl, transformed, tapped) =>
+      returnFlickered: (link, thenCounters, underYourControl, transformed, tapped, under) =>
         this.returnFlickeredByEffect(
           link,
           thenCounters,
-          underYourControl ? controller : undefined,
+          under ?? (underYourControl ? controller : undefined),
           transformed,
           tapped,
         ),
@@ -32231,6 +32252,7 @@ export class Game {
         ),
       rotateControl: (filter, direction, exceptSource) =>
         this.rotateControlByEffect(controller, filter, direction, exceptSource ? source : undefined),
+      giveControlTogether: (moves) => this.giveControlTogether(moves),
       exchangeControl: (first, second) => this.exchangeControl(first, second),
       exchangeControlAll: (filter, other, untilEndOfTurn) =>
         this.exchangeControlAll(controller, filter, other, untilEndOfTurn),
@@ -34639,7 +34661,9 @@ export class Game {
           },
         ),
       changeLifeScoped: (who, delta) =>
-        this.changeLifeScoped(controller, who, delta, triggerObject, triggerLastKnown(), refs.player, refs.triggerSpellController),
+        who === "source-controller"
+          ? scoped(who).forEach((player) => this.changeLife(player, delta))
+          : this.changeLifeScoped(controller, who, delta, triggerObject, triggerLastKnown(), refs.player, refs.triggerSpellController),
       searchLibrary: (
         player,
         filter,
@@ -43935,7 +43959,7 @@ export class Game {
     targets: readonly TargetRef[],
     options: FlickerOptions,
   ): EffectSpec | null {
-    const returnUnder = options.underYourControl === true ? controller : undefined;
+    const returnUnder = options.returnUnder ?? (options.underYourControl === true ? controller : undefined);
     const delayed = options.returnAt;
     // Minted only once something is actually exiled: a trigger that finds
     // nothing to exile leaves no trace.
@@ -44003,7 +44027,7 @@ export class Game {
           kind: "return-flickered",
           link: returnLink,
           ...(options.thenCounters !== undefined ? { thenCounters: options.thenCounters } : {}),
-          ...(returnUnder !== undefined ? { underYourControl: true } : {}),
+          ...(returnUnder !== undefined ? { underPlayer: returnUnder } : {}),
           ...(options.transformed === true ? { transformed: true } : {}),
           ...(options.tapped === true ? { tapped: true } : {}),
         };
@@ -44027,7 +44051,7 @@ export class Game {
         kind: "return-flickered",
         link,
         ...(options.thenCounters !== undefined ? { thenCounters: options.thenCounters } : {}),
-        ...(returnUnder !== undefined ? { underYourControl: true } : {}),
+        ...(returnUnder !== undefined ? { underPlayer: returnUnder } : {}),
         ...(options.transformed === true ? { transformed: true } : {}),
         ...(options.tapped === true ? { tapped: true } : {}),
       },
@@ -45771,6 +45795,17 @@ export class Game {
     const id = opts.split === false ? target.object : this.splitOneFromStack(target.object);
     const object = this.state.objects[id];
     if (object === undefined || object.zone !== "battlefield") return;
+    // Put onto the battlefield "under your control", but it enters under the
+    // control of an opponent of your choice instead (rule 614.1d), and already
+    // has: the effect that put it there has nothing to add.
+    if (
+      entered &&
+      object.chosenPlayer !== undefined &&
+      object.chosenPlayer !== player &&
+      this.registry.get(rulesTextName(object)).entersUnderChosenPlayer === true
+    ) {
+      return;
+    }
     let timestamp = opts.timestamp;
     if (timestamp === undefined) {
       this.state.timestampSeq += 1;
@@ -45902,6 +45937,20 @@ export class Game {
         if (this.state.objects[id]?.controller === from) moves.push({ player, object: id });
       }
     });
+    if (moves.length === 0) return;
+    this.state.timestampSeq += 1;
+    const timestamp = this.state.timestampSeq;
+    this.withControlBatch(() => {
+      for (const { player, object } of moves) {
+        this.gainControlByEffect(player, { kind: "object", object }, false, false, { split: false, timestamp });
+      }
+    });
+  }
+
+  /** See the `"distribute-control"` {@link EffectSpec}: each permanent to the
+   * player chosen for it, at once, as one lasting effect with one timestamp
+   * (rule 613.7b). What has left the battlefield stays out of it. */
+  private giveControlTogether(moves: readonly { readonly object: ObjectId; readonly player: PlayerId }[]): void {
     if (moves.length === 0) return;
     this.state.timestampSeq += 1;
     const timestamp = this.state.timestampSeq;
@@ -48232,9 +48281,19 @@ export class Game {
       who === "opponents-who-voted-with-you" ||
       who === "you-and-opponents-who-voted-with-you" ||
       who === "chosen-player" ||
-      who === "attached-controller"
+      who === "attached-controller" ||
+      who === "source-controller"
     ) {
       return [];
+    }
+    // "The player to your left / right": the next player in turn order, or
+    // the one before, among those still in the game (rule 101.4).
+    if (who === "player-to-your-left" || who === "player-to-your-right") {
+      const players = this.state.turnOrder.filter((p) => p === controller || !this.state.players[p].hasLost);
+      const at = players.indexOf(controller);
+      if (at < 0 || players.length < 2) return [];
+      const step = who === "player-to-your-left" ? 1 : players.length - 1;
+      return [players[(at + step) % players.length]];
     }
     // "Each of that player's opponents": of whoever cast the spell, or last
     // controlled the permanent, the trigger is about.
@@ -51764,7 +51823,15 @@ export class Game {
       // is that player's. Its replacements judge it as theirs (rule 614.12),
       // and so does every trigger the entry sets off: Shalai and Hallar sees
       // the counters Giada puts on an Angel reanimated under your control.
-      const enteringController = enter.under ?? object.controller;
+      // "Enters under the control of an opponent of your choice" replaces all
+      // of that: the player chosen as it was about to enter (rule 614.12).
+      const chosenUnder =
+        enterChoice?.chosenPlayer != null &&
+        this.registry.get(rulesTextName(object)).entersUnderChosenPlayer === true &&
+        this.state.players[enterChoice.chosenPlayer]?.hasLost === false
+          ? enterChoice.chosenPlayer
+          : undefined;
+      const enteringController = chosenUnder ?? enter.under ?? object.controller;
       object.controller = enteringController;
       // "…When you do, …" (rules 603.11, 707.9g): it copied something, so the
       // linked ability triggers, and goes on the stack as a player would next
@@ -51922,6 +51989,9 @@ export class Game {
         this.emit({ type: "door-unlocked", object: id, door, player: enteringController, fully: false });
       }
       object.controller = object.owner;
+      if (chosenUnder !== undefined) {
+        this.gainControlByEffect(chosenUnder, { kind: "object", object: id }, false, true, { split: false });
+      }
     } else {
       object.tapped = false;
       object.damageMarked = 0;

@@ -42,6 +42,7 @@ const RESTRICTION_TEXT: Record<CombatRestriction, string> = {
   'must-be-blocked-by-exactly-one': 'must be blocked by exactly one creature if able',
   'blocked-by-at-most-one': "can't be blocked by more than one creature",
   'cant-attack-owner': "can't attack its owner",
+  'cant-attack-owner-planeswalkers': "can't attack planeswalkers its owner controls",
   'cant-attack-player-attacked-this-turn': "can't attack a player it has already attacked this turn",
   'doesnt-untap': "doesn't untap during its controller's untap step",
   'cant-be-blocked': "can't be blocked",

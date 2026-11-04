@@ -3603,6 +3603,19 @@ export function parseSentence(sentence, ctx) {
   if ((m = re(`(target opponent|target player) gains control of ~`).exec(s))) {
     return { kind: "gain-control", target: "source", who: { target: slot(m[1]) }, untilEndOfTurn: false };
   }
+  // "The player to your right gains control of this artifact" (Hithlain Rope).
+  if ((m = re(`the player to your (left|right) gains control of ~`).exec(s))) {
+    return { kind: "gain-control", target: "source", who: `player-to-your-${m[1]}`, untilEndOfTurn: false };
+  }
+  // "Xantcha's controller loses 2 life".
+  if ((m = re(`~'s controller loses (\\d+) life`).exec(s))) {
+    return { kind: "lose-life", amount: Number(m[1]), who: "source-controller" };
+  }
+  // "Exile Sol'Kanar, then return it to the battlefield under an opponent's
+  // control": the opponent chosen as it resolves.
+  if (re(`exile ~, then return (?:it|him|her|them) to the battlefield under an opponent's control`).test(s)) {
+    return { kind: "choose-opponent", then: { kind: "flicker", target: "source", under: "that-player" } };
+  }
   // Every permanent of a kind its own source (`each-deals-damage`): "each
   // creature deals damage to itself equal to its power" (Solar Blaze), "each
   // other Bird you control deals damage equal to its power to target creature
@@ -11495,6 +11508,13 @@ function parseFaceAsWritten(face, ctx = {}) {
         out.becomesOnEnter = { flip: true, forms };
         continue;
       }
+    }
+    // "~ enters under the control of an opponent of your choice." (Xantcha,
+    // Sleeper Agent; Captive Audience): the choice, and who it's for.
+    if (/^~ enters under the control of an opponent of your choice\.$/.test(line)) {
+      out.choosePlayerOnEnter = "opponent";
+      out.entersUnderChosenPlayer = true;
+      continue;
     }
     // "As ~ enters, choose an opponent and a card name other than a basic
     // land card name." (Booby Trap): both choices, the name to guess a card

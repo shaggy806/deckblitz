@@ -562,9 +562,12 @@ export type CombatRestriction =
   /** "Can't attack its owner" — the player only: a planeswalker its owner
    * controls may still be attacked (Alexios, Deimos of Kosmos's ruling;
    * rule 508.1b — a creature attacks a player *or* a planeswalker).
-   * Xantcha's "can't attack its owner or planeswalkers its owner controls"
-   * would be a restriction of its own. */
+   * With `cant-attack-owner-planeswalkers`, Xantcha's "can't attack its owner
+   * or planeswalkers its owner controls". */
   | "cant-attack-owner"
+  /** "Can't attack … planeswalkers its owner controls" (Xantcha, Sleeper
+   * Agent). */
+  | "cant-attack-owner-planeswalkers"
   /** "Can't attack a player it has already attacked this turn" (Port Razer,
    * Bloodthirster): the player only, as above, by this object's own
    * `attackedPlayersThisTurn` (rule 400.7: a new object starts afresh). */
@@ -1165,8 +1168,11 @@ export type StaticCondition =
   | {
       readonly kind: "of-player";
       /** `"an-opponent"`: it holds for at least one opponent still in the game
-       * — Guul Draz Specter's "as long as an opponent has no cards in hand". */
-      readonly player: ConditionPlayer | "an-opponent";
+       * — Guul Draz Specter's "as long as an opponent has no cards in hand".
+       * `"a-player"`: for at least one player still in the game, you included
+       * — Thoughtbound Primoc's "if a player controls more Wizards than each
+       * other player". */
+      readonly player: ConditionPlayer | "an-opponent" | "a-player";
       readonly condition: StaticCondition;
     }
   /**
@@ -4967,6 +4973,17 @@ export interface CardDefinition {
    */
   readonly secretChoiceOnEnter?: true;
   /**
+   * "This enters **under the control of an opponent of your choice**" (Xantcha,
+   * Sleeper Agent; Captive Audience), with `choosePlayerOnEnter: "opponent"`: a
+   * replacement (rule 614.1d), so no player gets to act while it's yours. Asked
+   * as it's about to enter (614.12), of the player it would otherwise enter
+   * under, and it enters under the one chosen: their default control (rule
+   * 110.2), so every trigger of the entry sees them as its controller, and it's
+   * exiled if they leave the game (800.4a). With nobody to choose, it enters
+   * as usual.
+   */
+  readonly entersUnderChosenPlayer?: true;
+  /**
    * "As this enters, choose another creature you control" (rule 614.1c —
    * Tyrannical Pitlord, Dauntless Bodyguard): asked of its controller among
    * the permanents matching the filter — not targeted — and kept as
@@ -5622,6 +5639,7 @@ const PRINTED_ABILITY: {
   chooseOnEnterLook: (def) => def.chooseOnEnterLook !== null,
   choosePlayerOnEnter: (def) => def.choosePlayerOnEnter !== null,
   secretChoiceOnEnter: false,
+  entersUnderChosenPlayer: false,
   choosePermanentOnEnter: (def) => def.choosePermanentOnEnter !== null,
   loyalty: false,
   defense: false,
@@ -5879,6 +5897,7 @@ interface CardDraft {
   chooseOnEnterLook?: "opponent-hand";
   choosePlayerOnEnter?: "player" | "opponent";
   secretChoiceOnEnter?: true;
+  entersUnderChosenPlayer?: true;
   choosePermanentOnEnter?: PermanentOnEnter;
   loyalty?: number;
   /** Compleated (rule 702.150a): it enters with two fewer loyalty counters
@@ -6149,6 +6168,7 @@ export function defineCard(draft: CardDraft): CardDefinition {
     chooseOnEnterLook: draft.chooseOnEnterLook ?? null,
     choosePlayerOnEnter: draft.choosePlayerOnEnter ?? null,
     ...(draft.secretChoiceOnEnter === true ? { secretChoiceOnEnter: true as const } : {}),
+    ...(draft.entersUnderChosenPlayer === true ? { entersUnderChosenPlayer: true as const } : {}),
     choosePermanentOnEnter: draft.choosePermanentOnEnter ?? null,
     loyalty,
     defense,

@@ -591,6 +591,8 @@ export type DelayedWheneverAt = Omit<DelayedWhenever, "watching" | "orLosesContr
 export interface FlickerOptions {
   readonly thenCounters?: FlickerCounters;
   readonly underYourControl?: boolean;
+  /** It returns under this player's control — see `flicker`'s `under`. */
+  readonly returnUnder?: PlayerId;
   /** It returns transformed (Clive, Ifrit's Dominant). */
   readonly transformed?: boolean;
   /** It returns tapped (Nezahal, Primal Tide). */
@@ -1977,6 +1979,19 @@ export type PlayerScope =
    * controller is one of them unless they're that player. Nobody when the
    * trigger is about no one. Not a target. */
   | "opponents-of-trigger-controller"
+  /** "**The player to your left**" / "**to your right**" (Hithlain Rope,
+   * Bucknard's Everfull Purse): the next player in turn order from the
+   * effect's controller, or the one before, skipping anyone who has left the
+   * game (as `rotate-control` reads its direction; rule 101.4). In a
+   * two-player game the other player is both (Hithlain Rope's ruling). Not a
+   * target. */
+  | "player-to-your-left"
+  | "player-to-your-right"
+  /** "**Xantcha's controller**": whoever controls the effect's source as this
+   * resolves, or last did once it has left (rule 608.2h) — not the ability's
+   * controller, when another player activated it. Not a target. Only a
+   * resolution knows its source, so elsewhere it names nobody. */
+  | "source-controller"
   /** "That player" in an `"each-player-may"`'s `ifDid` / `ifDidnt`: the
    * player the follow-up is about. Elsewhere, the same as
    * `"trigger-player"`. Not a target. */
@@ -2008,6 +2023,10 @@ export type EffectPlayerRef =
   /** The controller of what the source is attached to — see the
    * `"attached-controller"` {@link PlayerScope}. */
   | "attached-controller"
+  /** The seats and the source's controller — see those {@link PlayerScope}s. */
+  | "player-to-your-left"
+  | "player-to-your-right"
+  | "source-controller"
   | { readonly target: number }
   /** The controller of the permanent in this target slot, as it last existed
    * on the battlefield if it has left — "**its controller** exiles cards …,
@@ -2391,6 +2410,12 @@ export type EffectSpec =
        * stack's tokens share both, so one of a stack at most; a permanent with
        * no name can't be chosen for different names (rule 201.2b). */
       readonly together?: { readonly distinctNames: true } | { readonly distinctPowers: true };
+      /** Only what this one player controls — "that creature's controller
+       * gains control of **one of those lands** of their choice", the lands
+       * of the player it dealt damage to (Turf War's `"trigger-player"`). A
+       * `CardFilter`'s own `controlledBy` can't name one seat at a 3-4 player
+       * table. Nobody named, and nothing happens. */
+      readonly controlledByPlayer?: EffectPlayerRef;
     }
   | {
       /**
@@ -3837,6 +3862,15 @@ export type EffectSpec =
       readonly exile?: boolean;
       readonly put?: "battlefield" | "hand" | "with-rest";
       readonly tapped?: boolean;
+      /** With `put: "battlefield"`: done, once the rest have gone, to each of
+       * those that entered, as target 0 — "they're goaded for the rest of the
+       * game" (Dack Fayden, Helping Hand). Shouldn't itself stop to ask. */
+      readonly thenEach?: EffectSpec;
+      /** With `put: "battlefield"`, last of all: "for each of those
+       * permanents, choose a different opponent. Each opponent gains control
+       * of the permanent for which they were chosen" — a `distribute-control`
+       * of those that entered. */
+      readonly thenToDifferentOpponents?: true;
       /** Set only on the copy parked across an "as this enters" choice. */
       readonly progress?: {
         readonly owner: PlayerId;
@@ -3916,6 +3950,11 @@ export type EffectSpec =
       /** Return under the effect's controller's control rather than the
        * owner's (Ghostly Flicker's "under your control"). */
       readonly underYourControl?: boolean;
+      /** Return under another player's control: "exile Sol'Kanar, then return
+       * it to the battlefield **under an opponent's control**" is a
+       * `choose-opponent` of this with `"that-player"`. Their default control
+       * (rule 110.2 — it's exiled if they leave the game, 800.4a). */
+      readonly under?: EffectPlayerRef;
       /**
        * Return later rather than at once: a delayed triggered ability (rule
        * 603.7) at this step — Norin's "at the beginning of the next end
@@ -3946,6 +3985,9 @@ export type EffectSpec =
       readonly link: string;
       readonly thenCounters?: FlickerCounters;
       readonly underYourControl?: boolean;
+      /** The player it returns under, fixed as it was exiled (`flicker`'s
+       * `underYourControl` or `under`). */
+      readonly underPlayer?: PlayerId;
       readonly transformed?: boolean;
       readonly tapped?: boolean;
     }
@@ -4104,6 +4146,19 @@ export type EffectSpec =
       readonly filter: CardFilter;
       readonly with: EffectPlayerRef;
       readonly untilEndOfTurn: boolean;
+    }
+  | {
+      /** "For each of those permanents, choose a different opponent. Each
+       * opponent gains control of the permanent for which they were chosen"
+       * (Dack Fayden, Helping Hand). The effect's controller chooses as this
+       * resolves, not a target, one permanent at a time, a `choose-modes` for
+       * each with more than one opponent left to choose; then they all change
+       * hands at once, as one effect with one timestamp (rule 613.7b). Built
+       * by the engine — a `reveal-until-count`'s `thenToDifferentOpponents` —
+       * never authored. */
+      readonly kind: "distribute-control";
+      readonly objects: readonly ObjectId[];
+      readonly chosen: readonly { readonly object: ObjectId; readonly player: PlayerId }[];
     }
   | {
       /** Every battlefield permanent matching `filter` (read from the
@@ -7428,7 +7483,7 @@ export type EffectSpec =
        * A {@link ChosenPlayerRef} is one player — "**target opponent** exiles
        * a card from their hand" (Skullcap Snail): a `look-and-choose` with
        * `player: "that-player"` inside is theirs to choose. */
-      readonly who: PlayerScope | "owners-of-exiled-with-source" | ChosenPlayerRef;
+      readonly who: PlayerScope | "owners-of-exiled-with-source" | "source-owner" | ChosenPlayerRef;
       readonly effect: EffectSpec;
       /** "Each player **who** …": only the players in `who` for whom this
        * holds, read with that player as `"that-player"` (an `of-player`) —
@@ -10715,6 +10770,7 @@ export interface EffectApi {
     underYourControl: boolean,
     transformed: boolean,
     tapped: boolean,
+    under?: PlayerId,
   ): boolean;
   /** See the `"meld"` {@link EffectSpec}: `partner` is the counterpart
    * already chosen (`null`: chosen, and gone since), else it's found (and
@@ -10774,6 +10830,10 @@ export interface EffectApi {
   ): void;
   /** See the `"rotate-control"` {@link EffectSpec}. */
   rotateControl(filter: CardFilter, direction: "left" | "right", exceptSource: boolean): void;
+  /** See the `"distribute-control"` {@link EffectSpec}. */
+  giveControlTogether(
+    moves: readonly { readonly object: ObjectId; readonly player: PlayerId }[],
+  ): void;
   /** See the `"exchange-control"` {@link EffectSpec}: whether they were
    * exchanged. */
   exchangeControl(first: TargetRef, second: TargetRef): boolean;
@@ -14686,8 +14746,19 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "choose-permanents": {
       const chooser = spec.chooser === undefined ? ctx.controller : effectPlayer(spec.chooser, ctx);
       if (chooser === undefined) return;
-      const except =
+      let except: readonly ObjectId[] =
         spec.exceptTriggerObject === true && ctx.triggerObject !== undefined ? [ctx.triggerObject] : [];
+      if (spec.controlledByPlayer !== undefined) {
+        const whose = effectPlayer(spec.controlledByPlayer, ctx);
+        if (whose === undefined) return;
+        except = [
+          ...except,
+          ...ctx
+            .eachPermanentMatching(spec.filter, false, [], undefined)
+            .filter(({ object }) => ctx.controllerOf({ kind: "object", object }) !== whose)
+            .map(({ object }) => object),
+        ];
+      }
       if (spec.random === true) {
         // Nobody is asked: the game picks, each with an equal chance.
         const among = ctx.eachPermanentMatching(spec.filter, spec.exceptSource === true, except, undefined);
@@ -15492,6 +15563,46 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         spec.rest,
         exiled,
       );
+      if (put !== "battlefield") return;
+      const entered = progress.found.filter((id) => ctx.onBattlefield(id));
+      if (spec.thenEach !== undefined) {
+        for (const id of entered) applyEffectSpec(spec.thenEach, ctx.withFoundAt(0, id));
+      }
+      if (spec.thenToDifferentOpponents === true) {
+        applyEffectSpec({ kind: "distribute-control", objects: entered, chosen: [] }, ctx);
+      }
+      return;
+    }
+    case "distribute-control": {
+      // One object at a time, among the opponents not yet chosen; with one
+      // left there's nothing to ask. Nothing changes hands until every choice
+      // is made (the sentence after "choose" is what gives control).
+      const next = spec.objects[spec.chosen.length];
+      const among = ctx
+        .playersInScope("each-opponent")
+        .filter((p) => !spec.chosen.some((c) => c.player === p));
+      if (next === undefined || among.length === 0) {
+        ctx.giveControlTogether(spec.chosen);
+        return;
+      }
+      const choosing = (player: PlayerId): EffectSpec => ({
+        kind: "distribute-control",
+        objects: spec.objects,
+        chosen: [...spec.chosen, { object: next, player }],
+      });
+      if (among.length === 1) {
+        applyEffectSpec(choosing(among[0]), ctx);
+        return;
+      }
+      const name = ctx.objectName(next);
+      ctx.chooseModes(
+        1,
+        1,
+        among.map((player) => ({
+          text: `${player.charAt(0).toUpperCase()}${player.slice(1)} gains control of ${name}`,
+          effect: choosing(player),
+        })),
+      );
       return;
     }
     case "flicker": {
@@ -15508,9 +15619,11 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         if (target !== undefined) targets.push(target);
       }
       const parked = ctx.parkedCount();
+      const returnUnder = spec.under === undefined ? undefined : effectPlayer(spec.under, ctx);
       const returning = ctx.flicker(targets, {
         ...(spec.thenCounters !== undefined ? { thenCounters: spec.thenCounters } : {}),
         ...(spec.underYourControl === true ? { underYourControl: true } : {}),
+        ...(returnUnder !== undefined ? { returnUnder } : {}),
         ...(spec.returnAt !== undefined ? { returnAt: spec.returnAt } : {}),
         ...(spec.returnText !== undefined ? { returnText: spec.returnText } : {}),
         ...(spec.transformed === true ? { transformed: true } : {}),
@@ -15528,6 +15641,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         spec.underYourControl === true,
         spec.transformed === true,
         spec.tapped === true,
+        spec.underPlayer,
       );
       if (asked) ctx.resumeAfterDecisions(spec, parked);
       return;
@@ -17377,7 +17491,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           ? ((owners) => ctx.playersInScope("each-player").filter((p) => owners.has(p)))(
               new Set(ctx.cardsExiledWithSource().map((id) => ctx.ownerOf({ kind: "object", object: id }))),
             )
-          : typeof spec.who === "object"
+          : typeof spec.who === "object" || spec.who === "source-owner"
             ? ((player) => (player === undefined ? [] : [player]))(effectPlayer(spec.who, ctx))
             : ctx.playersInScope(spec.who));
       // "Each player who …": fixed now, before anyone acts (`remaining` was).
