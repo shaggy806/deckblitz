@@ -806,7 +806,7 @@ export type EffectAmount =
    * from the command zone this game", whose ruling adds both of a pair's
    * casts. 0 for a player with no commander.
    */
-  | { readonly commanderCasts: "you" }
+  | { readonly commanderCasts: "you" | number }
   /** The last die roll this effect's controller made (rule 706 — a
    * `roll-dice`'s `then` or table row): `"total"`, the result (natural
    * results plus the roll's modifier); `"odd"` / `"even"`, how many dice came
@@ -3044,6 +3044,18 @@ export type EffectSpec =
         readonly keywords: readonly Keyword[];
         /** "It gains riot" (Domri, Chaos Bringer): with no end. */
         readonly lasting?: true;
+      };
+      /** "If that mana is spent to cast a [filter] spell, that creature enters
+       * with an additional +1/+1 counter on it" (Guildmages' Forum, Animal
+       * Attendant): an additional effect of the mana (rule 106.6), so no
+       * trigger, and a replacement of how the permanent enters (rule 614.1c).
+       * Each unit spent adds its own (Opal Palace's second ruling). `amount`
+       * is read as it enters, with that spell as the source, so Opal Palace's
+       * `{ commanderCastsOf: "source" }` counts the cast that spent it. */
+      readonly spellEntersWith?: {
+        readonly spell?: CardFilter;
+        readonly counter: string;
+        readonly amount: EffectAmount;
       };
       /** "When that mana is spent to cast …, [effect]" — Path of Ancestry's
        * scry. Rides on each unit produced and fires as it is spent. */
@@ -14559,7 +14571,13 @@ function signedAmountValue(
   }
   if ("convokers" in amount) return ctx.convokerCount();
   if ("phyrexianPaidWithLife" in amount) return ctx.phyrexianPaidWithLife();
-  if ("commanderCasts" in amount) return ctx.commanderCastsBy(ctx.controller);
+  if ("commanderCasts" in amount) {
+    if (amount.commanderCasts === "you") return ctx.commanderCastsBy(ctx.controller);
+    // "For each time **they've** cast a commander" (Commander's Insight): the
+    // player in that target slot, 0 once they're no longer a legal target.
+    const ref = ctx.targets[amount.commanderCasts];
+    return ref?.kind === "player" ? ctx.commanderCastsBy(ref.player) : 0;
+  }
   if ("roll" in amount) {
     const last = ctx.lastRoll();
     if (last === undefined) return 0;

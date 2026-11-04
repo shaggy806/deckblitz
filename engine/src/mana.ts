@@ -3,7 +3,7 @@
 // Type-only, so nothing here participates in a runtime cycle — `filter.ts`
 // and `effects.ts` both import this module for real.
 import type { CardType, Keyword, Supertype } from "./cards/define.js";
-import type { EffectSpec } from "./effects.js";
+import type { EffectAmount, EffectSpec } from "./effects.js";
 import type { CardFilter } from "./filter.js";
 import type { ObjectId } from "./primitives.js";
 import type { ZoneType } from "./state.js";
@@ -231,6 +231,10 @@ export interface ManaUnit {
    * end of turn" (Carnelian Orb of Dragonkind — rule 106.6): what the spell
    * this unit pays for gets, as `add-mana`'s `spellGains` says. */
   readonly spellGains?: { readonly spell?: CardFilter; readonly keywords: readonly Keyword[]; readonly lasting?: true };
+  /** "If that mana is spent to cast a [filter] spell, that creature enters
+   * with an additional +1/+1 counter on it" (rule 106.6), as `add-mana`'s
+   * `spellEntersWith` says. */
+  readonly spellEntersWith?: { readonly spell?: CardFilter; readonly counter: string; readonly amount: EffectAmount };
   /** Fires when this unit is spent — Path of Ancestry's "When that mana is
    * spent to cast a creature spell that shares a creature type with your
    * commander, scry 1". Carried as plain data so it survives a snapshot. */

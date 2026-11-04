@@ -19,6 +19,7 @@ import type {
   Supertype,
 } from "./cards.js";
 import type {
+  EffectAmount,
   EffectSpec,
   EnterTypes,
   LookAndChooseLeftoverIf,
@@ -1545,8 +1546,14 @@ export interface GameObject {
   targetStints?: (number | null)[];
   /** A spell's counters to enter the battlefield with — the
    * `enters-with-counters` effect. Cleared by any zone change but its own
-   * resolution onto the battlefield. */
-  entersWithCounters?: { readonly kind: string; readonly amount: number; readonly condition?: StaticCondition }[];
+   * resolution onto the battlefield. `amountAsItEnters` (mana spent on it —
+   * `add-mana`'s `spellEntersWith`) is read then, in place of `amount`. */
+  entersWithCounters?: {
+    readonly kind: string;
+    readonly amount: number;
+    readonly condition?: StaticCondition;
+    readonly amountAsItEnters?: EffectAmount;
+  }[];
   /** A card's mana value as it last existed on the stack, {X} included (rule
    * 202.3e), set each time it leaves the stack. Read only through a target
    * that was a spell — see `targetZones` — so it needn't be cleared when the

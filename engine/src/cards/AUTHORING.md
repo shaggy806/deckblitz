@@ -750,7 +750,8 @@ times it's been cast from the command zone" is `{ commanderCastsOf: 0 }`
 `{ commanderCasts: "you" }` — every cast of the effect's controller's own
 commanders from the command zone this game, added up (Thunderclap Drake's
 "for each time you've cast your commander from the command zone this game",
-a partner pair's both counted — its ruling);
+a partner pair's both counted — its ruling), or `{ commanderCasts: 0 }`, the
+player in a target slot's (Commander's Insight);
 `{ manaValueOf: ref }` — the mana value of whatever a target slot (or
 `"source"` / `"trigger-object"` / `"sacrificed"`) points at, as it last
 existed on the battlefield if it has left since (rule 608.2h, last known
@@ -6958,6 +6959,12 @@ Delete an entry in the same commit as the feature that retires it.
     mana's own text makes a trigger of ("When you spend this mana…, it enters
     with an additional +1/+1 counter on it and gains hexproof until your next
     turn" — Jade Orb of Dragonkind), `whenSpent` with target 0, the spell.
+  - `spellEntersWith: { spell?, counter, amount }` — "If that mana is spent on
+    a multicolored creature spell, that creature enters with an additional
+    +1/+1 counter on it" (Guildmages' Forum, Animal Attendant — rules 106.6,
+    614.1c): no trigger; each unit spent adds its own; spent ahead of plain mana
+    when it reaches the spell. `amount` is read as it enters with that spell as
+    the source (Opal Palace's `{ commanderCastsOf: "source" }`).
   - `whenSpent: { spell?, effect, text }` — "When that mana is spent to cast
     …" (Path of Ancestry). `spell: "shares-type-with-commander"` resolves
     against the controller's commanders at activation time. It fires as a

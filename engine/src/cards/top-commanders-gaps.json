@@ -1740,7 +1740,10 @@
   "effect:time-counters-on-all-suspended",
   "static:set-name",
   "effect:animate-add-supertype",
-  "static:anthem-per-counter-on-source"
+  "static:anthem-per-counter-on-source",
+  "static:anthem-per-counter-on-source",
+  "effect:commander-cast-count-amount",
+  "stat:mana-spent-replacement"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

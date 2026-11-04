@@ -2907,6 +2907,11 @@ export function parseSentence(sentence, ctx) {
       return { kind: "conditional", condition: { kind: "most-common-color", sharedBy: { target: 0 } }, then };
     }
   }
+  // Commander's Insight: the target's own casts, added to X.
+  if (/^target player draws X cards plus an additional card for each time they've cast a commander from the command zone this game\.$/i.test(s)) {
+    const target = ctx.target("player");
+    return { kind: "draw", amount: { sum: ["x", { commanderCasts: target }] }, target };
+  }
   // "…, where X is the number of …" / "for each …" define an amount by a rule
   // of their own; no template reads one, and matching the rest would take the
   // X for a cast-time X.
@@ -3385,6 +3390,11 @@ export function parseSentence(sentence, ctx) {
   if ((m = re(`return (${EXILE_TARGET}) to (?:your|its owner's) hand`).exec(s))) {
     const spec = exileTargetOf(m[1]);
     if (spec !== undefined) return { kind: "return-to-hand", target: ctx.target(spec), from: "exile" };
+  }
+
+  // Command Tower, Arcane Signet, Opal Palace.
+  if (re("add one mana of any color in your commander's color identity").test(s)) {
+    return { kind: "add-mana", mana: "commander-identity", amount: 1 };
   }
 
   // Cards.
@@ -8441,6 +8451,40 @@ export function parseEffect(text, outer) {
             keywords: [spellGains[3].toLowerCase()],
             ...(spellGains[4] === undefined ? { lasting: true } : {}),
           },
+        },
+        todo: [],
+        hints: [],
+      };
+    }
+    ctx.targets.length = slots;
+  }
+  // "If that mana is spent on a multicolored creature spell, that creature
+  // enters with an additional +1/+1 counter on it" (Guildmages' Forum, Animal
+  // Attendant); "if you spend this mana to cast your commander, it enters with
+  // a number of additional +1/+1 counters …" (Opal Palace).
+  const spellEnters = /^(Add .+?\.) If (?:that|this) mana is spent (?:on|to cast) an? (.+) spell, that creature enters with an additional \+1\/\+1 counter on it\.$/.exec(text);
+  const commanderEnters = /^(Add .+?\.) If you spend this mana to cast your commander, it enters with a number of additional \+1\/\+1 counters on it equal to the number of times it's been cast from the command zone this game\.$/.exec(text);
+  if (spellEnters !== null || commanderEnters !== null) {
+    const slots = ctx.targets.length;
+    const add = parseSentence((spellEnters ?? commanderEnters)[1], ctx);
+    // A quality the type reader doesn't take, then the types.
+    const quality = spellEnters === null ? null : /^(?:(multicolored)|non-([A-Z][a-z]+)) (.+)$/.exec(spellEnters[2]);
+    const typed = spellEnters === null ? null : parseTypePhrase(quality?.[3] ?? spellEnters[2]);
+    const spell =
+      spellEnters === null
+        ? { isCommander: true, ownedBy: "you" }
+        : typed === null
+          ? null
+          : {
+              ...typed,
+              ...(quality?.[1] !== undefined ? { multicolored: true } : {}),
+              ...(quality?.[2] !== undefined ? { notSubtypes: [quality[2]] } : {}),
+            };
+    if (add?.kind === "add-mana" && spell !== null) {
+      return {
+        effect: {
+          ...add,
+          spellEntersWith: { spell, counter: "+1/+1", amount: spellEnters !== null ? 1 : { commanderCastsOf: "source" } },
         },
         todo: [],
         hints: [],

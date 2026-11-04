@@ -14794,3 +14794,48 @@ describe("a choice of creature type, the counters counted with it (Banner of Kin
     });
   });
 });
+
+describe("mana that adds counters to what it casts", () => {
+  const read = (type_line: string, oracle_text: string) =>
+    parseFace({ name: "Test Card", type_line, oracle_text, mana_cost: "{1}", colors: [] });
+
+  it("Opal Palace", () => {
+    const face = read(
+      "Land",
+      "{T}: Add {C}.\n{1}, {T}: Add one mana of any color in your commander's color identity. If you spend this mana to cast your commander, it enters with a number of additional +1/+1 counters on it equal to the number of times it's been cast from the command zone this game.",
+    );
+    expect(face.complete).toBe(true);
+    expect(face.activated[1].effect).toMatchObject({
+      kind: "add-mana",
+      mana: "commander-identity",
+      spellEntersWith: { spell: { isCommander: true, ownedBy: "you" }, counter: "+1/+1", amount: { commanderCastsOf: "source" } },
+    });
+  });
+
+  it("Guildmages' Forum and Animal Attendant", () => {
+    const forum = read(
+      "Land",
+      "{T}: Add {C}.\n{1}, {T}: Add one mana of any color. If that mana is spent on a multicolored creature spell, that creature enters with an additional +1/+1 counter on it.",
+    );
+    expect(forum.complete).toBe(true);
+    expect(forum.activated[1].effect.spellEntersWith).toEqual({ spell: { type: "creature", multicolored: true }, counter: "+1/+1", amount: 1 });
+    const attendant = read(
+      "Creature — Human Citizen",
+      "{T}: Add one mana of any color. If that mana is spent to cast a non-Human creature spell, that creature enters with an additional +1/+1 counter on it.",
+    );
+    expect(attendant.complete).toBe(true);
+    expect(attendant.activated[0].effect.spellEntersWith).toEqual({ spell: { type: "creature", notSubtypes: ["Human"] }, counter: "+1/+1", amount: 1 });
+  });
+
+  it("Commander's Insight", () => {
+    const face = parseFace({
+      name: "Commander's Insight",
+      type_line: "Instant",
+      mana_cost: "{X}{U}{U}{U}",
+      colors: ["U"],
+      oracle_text: "Target player draws X cards plus an additional card for each time they've cast a commander from the command zone this game.",
+    });
+    expect(face.complete).toBe(true);
+    expect(face.effect).toEqual({ kind: "draw", amount: { sum: ["x", { commanderCasts: 0 }] }, target: 0 });
+  });
+});

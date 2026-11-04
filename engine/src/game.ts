@@ -25214,24 +25214,35 @@ export class Game {
     const pool = this.state.players[player].manaPool;
     const spent: ManaUnit[] = [];
 
-    /** Whether a restricted unit of `type` may pay for `purpose` right now. */
+    /** Whether `unit`'s "that creature enters with …" reaches this spell. */
+    const entersWithReaches = (unit: ManaUnit): boolean =>
+      purpose?.kind === "cast" &&
+      unit.spellEntersWith !== undefined &&
+      (unit.spellEntersWith.spell === undefined ||
+        matchesFilter(this.state, this.registry, purpose.card, unit.spellEntersWith.spell, { you: player }));
+    /** Spent before plain mana: restricted mana, which may have no other use,
+     * and mana that's about to add counters to this spell, which the player
+     * floated for exactly that. */
+    const spentFirst = (unit: ManaUnit): boolean => unit.restriction !== undefined || entersWithReaches(unit);
+
+    /** Whether a unit of `type` to spend first may pay for `purpose` right now. */
     const hasUsableRestricted = (type: ManaType): boolean =>
       pool.some(
         (unit) =>
           unit.type === type &&
-          unit.restriction !== undefined &&
+          spentFirst(unit) &&
           this.manaUnitCanPay(player, unit, purpose),
       );
 
-    /** Index of a unit of `type` this payment may spend, restricted first, or
-     * `-1`. Restricted mana that can't pay for `purpose` is not a candidate
-     * at all — it is simply not available to this payment. */
+    /** Index of a unit of `type` this payment may spend, those to spend first
+     * first, or `-1`. Restricted mana that can't pay for `purpose` is not a
+     * candidate at all — it is simply not available to this payment. */
     const indexOfAmong = (type: ManaType, ok: (unit: ManaUnit) => boolean): number => {
       const restricted = pool.findIndex(
         (unit) =>
           unit.type === type &&
           ok(unit) &&
-          unit.restriction !== undefined &&
+          spentFirst(unit) &&
           this.manaUnitCanPay(player, unit, purpose),
       );
       if (restricted >= 0) return restricted;
@@ -25239,7 +25250,7 @@ export class Game {
         (unit) =>
           unit.type === type &&
           ok(unit) &&
-          unit.restriction === undefined &&
+          !spentFirst(unit) &&
           this.manaUnitCanPay(player, unit, purpose),
       );
     };
@@ -25313,6 +25324,17 @@ export class Game {
         });
         invalidateComputedCache();
       }
+      // "If that mana is spent to cast a creature spell, that creature enters
+      // with an additional +1/+1 counter on it": each unit its own, read as it
+      // enters (Opal Palace's casts, this one included — its ruling).
+      for (const unit of spent) {
+        const enters = unit.spellEntersWith;
+        if (spell === undefined || enters === undefined || !entersWithReaches(unit)) continue;
+        spell.entersWithCounters = [
+          ...(spell.entersWithCounters ?? []),
+          { kind: enters.counter, amount: 0, amountAsItEnters: enters.amount },
+        ];
+      }
     }
     // Where the mana that cast it came from ("if mana from an artifact was
     // spent to cast it"). Paid for only once, so this is all of it — or,
@@ -25359,11 +25381,12 @@ export class Game {
     object: GameObject,
     effect: Extract<EffectSpec, { kind: "add-mana" }>,
   ): Omit<ManaUnit, "type"> | undefined {
-    const { spendOnly, whenSpent, persists, untilEndOfCombat, spellGains } = effect;
+    const { spendOnly, whenSpent, persists, untilEndOfCombat, spellGains, spellEntersWith } = effect;
     if (
       spendOnly === undefined &&
       whenSpent === undefined &&
       spellGains === undefined &&
+      spellEntersWith === undefined &&
       persists !== true &&
       untilEndOfCombat !== true
     ) {
@@ -25374,6 +25397,7 @@ export class Game {
       restriction?: ManaRestriction;
       onSpend?: ManaSpendRider;
       spellGains?: Extract<EffectSpec, { kind: "add-mana" }>["spellGains"];
+      spellEntersWith?: Extract<EffectSpec, { kind: "add-mana" }>["spellEntersWith"];
       persists?: boolean;
       untilEndOfCombat?: boolean;
       uncounterable?: boolean;
@@ -25421,6 +25445,7 @@ export class Game {
     }
 
     if (spellGains !== undefined) tag.spellGains = spellGains;
+    if (spellEntersWith !== undefined) tag.spellEntersWith = spellEntersWith;
     if (persists === true) tag.persists = true;
     if (untilEndOfCombat === true) tag.untilEndOfCombat = true;
     return tag;
@@ -26060,7 +26085,11 @@ export class Game {
         // A granted sunburst (Solar Array — rule 702.44a): +1/+1 counters if
         // it entered as a creature by its copiable types, else charge.
         const kind = c.kind === "sunburst" ? (def.types.includes("creature") ? "+1/+1" : "charge") : c.kind;
-        this.addCounter({ kind: "object", object: id }, kind, c.amount);
+        const amount =
+          c.amountAsItEnters !== undefined
+            ? this.enteringCounterAmount(id, this.state.objects[id].controller, id, c.amountAsItEnters)
+            : c.amount;
+        if (amount > 0) this.addCounter({ kind: "object", object: id }, kind, amount);
       }
     }
     // "This creature escapes with a +1/+1 counter on it" — before the
