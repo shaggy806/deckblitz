@@ -350,6 +350,9 @@ export function thisWayEntries(
           }
         }
         break;
+      case "amassed":
+        if (event.type === "amassed") add(event.object, event.player, false);
+        break;
       case "put-onto-battlefield":
         // Moved there from a zone — not a token created, nor a permanent
         // spell resolving.

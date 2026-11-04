@@ -2864,6 +2864,10 @@ export function parseSentence(sentence, ctx) {
   // Calculations).
   const discardedDraw = { kind: "draw", amount: { turnHistory: "discarded" } };
   if (/^(?:then )?draw a card for each card you've discarded this turn\.$/i.test(s)) return discardedDraw;
+  // A wheel of one's own hand (Dangerous Wager, Umaro, Raging Yeti).
+  if ((m = /^discard your hand, then draw (two|three|four|five|six|seven) cards\.$/i.exec(s))) {
+    return { kind: "sequence", effects: [{ kind: "discard-hand", who: "you" }, { kind: "draw", amount: NUMBERS[m[1].toLowerCase()] }] };
+  }
   if (/^discard your hand, then draw a card for each card you've discarded this turn\.$/i.test(s)) {
     return { kind: "sequence", effects: [{ kind: "discard-hand", who: "you" }, discardedDraw] };
   }
@@ -7339,6 +7343,34 @@ export function parseEffect(text, outer) {
   let skip = 0;
   const becomes = becomesWithAbilitiesOf(text);
   if (becomes !== null) return { effect: becomes, todo: [], hints: [] };
+
+  // "The amassed Army" (rule 701.47a): read at once, or by a reflexive ability.
+  const amassThen = /^amass ([A-Z][a-z]+) (\d+)(, then|\. When you do,) (.+?)(?: \(To amass .*\))?$/i.exec(text);
+  if (amassThen !== null) {
+    const plural = amassThen[1];
+    const creatureType = /ves$/.test(plural) ? plural.replace(/ves$/, "f") : plural.replace(/s$/, "");
+    const amass = { kind: "amass", amount: Number(amassThen[2]), creatureType };
+    const rest = amassThen[4];
+    const reflexive = amassThen[3] !== ", then";
+    const X = "X is the amassed Army's power";
+    let then = null;
+    if (!reflexive && new RegExp(`^target player mills X cards, where ${X}\\.$`).test(rest)) {
+      then = { kind: "mill", target: ctx.target("player"), amount: { powerOf: "amassed" } };
+    } else if (!reflexive && /^the Army you amassed deals damage equal to its power to each non-Army creature\.$/.test(rest)) {
+      then = { kind: "damage-all", filter: { type: "creature", notSubtypes: ["Army"] }, amount: { powerOf: "amassed" }, from: "amassed" };
+    } else if (!reflexive && /^attach (?:~|this Equipment) to the amassed Army\.$/.test(rest)) {
+      then = { kind: "attach", target: "amassed" };
+    } else if (reflexive && new RegExp(`^~ deals X damage to target creature an opponent controls, where ${X}\\.$`).test(rest)) {
+      then = {
+        kind: "reflexive-trigger",
+        about: "amassed",
+        targets: ["creature-an-opponent-controls"],
+        effect: { kind: "damage", amount: { powerOf: "trigger-object" }, target: 0 },
+        text: `When you do, ${rest}`,
+      };
+    }
+    if (then !== null) return { effect: { kind: "sequence", effects: [amass, then] }, todo: [], hints: [] };
+  }
 
   // Every land for the turn, the active player's colour (Hall of Gemstone).
   if (/^that player chooses a color\. Until end of turn, lands tapped for mana produce mana of the chosen color instead of any other color\.$/i.test(text)) {
@@ -13784,7 +13816,10 @@ function manaAbilityExtras(ability) {
 }
 
 function fillEffect(ability, text, ctx, lines, i) {
-  const modalHead = /^Choose (one|two|one or both|one or more)( that hasn't been chosen( this turn)?)? —$/.exec(text.trim());
+  // "Choose one at random —" (Umaro, Raging Yeti): the mode is the game's, as it
+  // goes on the stack; "you choose one instead" (Typhoid Mary, Fractured).
+  const randomHead = /^Choose one at random(?: —|\. (If you discarded a card this turn), you choose one instead\.)$/.exec(text.trim());
+  const modalHead = randomHead !== null ? ["", "one"] : /^Choose (one|two|one or both|one or more)( that hasn't been chosen( this turn)?)? —$/.exec(text.trim());
   if (modalHead) {
     let j = i + 1;
     const bullets = [];
@@ -13804,7 +13839,11 @@ function fillEffect(ability, text, ctx, lines, i) {
     // "That hasn't been chosen" is this object's whole stint; "this turn",
     // this turn's.
     const unchosen = modalHead[2] === undefined ? {} : modalHead[3] !== undefined ? { notChosenThisTurn: true } : { notChosenBefore: true };
-    if (ok) ability.effect = { kind: "modal", announced: true, ...unchosen, minModes: min, maxModes: max, modes };
+    const randomly =
+      randomHead === null
+        ? {}
+        : { random: true, ...(randomHead[1] !== undefined ? { chooseIf: { kind: "turn-history", what: "discarded" } } : {}) };
+    if (ok) ability.effect = { kind: "modal", announced: true, ...randomly, ...unchosen, minModes: min, maxModes: max, modes };
     else ability.__todo = [...(ability.__todo ?? []), `the modes: ${bullets.join(" / ")}`];
     return j - 1;
   }

@@ -952,6 +952,13 @@ export type GameEvent =
       readonly chosen: RandomPick;
     })
   | (Base & {
+      /** `player` amassed, choosing the Army `object` (rule 701.47) — the
+       * `"amassed"` this-way kind's record of "the amassed Army". */
+      readonly type: "amassed";
+      readonly player: PlayerId;
+      readonly object: ObjectId;
+    })
+  | (Base & {
       /** `player`'s effect picked `chosen` at random for `object` — the
        * opponent Territorial Hellkite must attack this combat. */
       readonly type: "random-player-chosen";

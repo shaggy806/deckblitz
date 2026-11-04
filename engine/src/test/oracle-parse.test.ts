@@ -9982,6 +9982,42 @@ describe("a static acting on a player", () => {
     expect(hall.triggered[0].effect.kind).toBe("as-player");
   });
 
+  it("reads a mode picked at random as the ability goes on the stack (rules 603.3c, 700.2b)", () => {
+    const umaro = face(
+      "Legendary Creature",
+      "At the beginning of combat on your turn, choose one at random —\n• Discard your hand, then draw four cards.\n• ~ deals 5 damage to any target.",
+    );
+    expect(umaro.triggered[0].effect).toMatchObject({ kind: "modal", announced: true, random: true, minModes: 1, maxModes: 1 });
+    expect(umaro.triggered[0].effect.modes[1].targets).toEqual(["any-target"]);
+    const mary = face(
+      "Legendary Creature",
+      "Whenever this creature attacks, choose one at random. If you discarded a card this turn, you choose one instead.\n• You gain 2 life.\n• Draw a card.",
+    );
+    expect(mary.triggered[0].effect).toMatchObject({
+      kind: "modal",
+      random: true,
+      chooseIf: { kind: "turn-history", what: "discarded" },
+    });
+  });
+
+  it("reads the amassed Army (rule 701.47a)", () => {
+    const orcs = face("Sorcery", "Amass Orcs 3, then target player mills X cards, where X is the amassed Army's power.");
+    expect(orcs.targets).toEqual(["player"]);
+    expect(orcs.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "amass", amount: 3, creatureType: "Orc" },
+        { kind: "mill", target: 0, amount: { powerOf: "amassed" } },
+      ],
+    });
+    const brutal = face("Sorcery", "Amass Zombies 2, then the Army you amassed deals damage equal to its power to each non-Army creature.");
+    expect(brutal.effect.effects[1]).toMatchObject({ kind: "damage-all", from: "amassed" });
+    const mail = face("Artifact", "When this Equipment enters, amass Goblins 1, then attach this Equipment to the amassed Army.");
+    expect(mail.triggered[0].effect.effects[1]).toEqual({ kind: "attach", target: "amassed" });
+    const foray = face("Sorcery", "Amass Orcs 2. When you do, ~ deals X damage to target creature an opponent controls, where X is the amassed Army's power.");
+    expect(foray.effect.effects[1]).toMatchObject({ kind: "reflexive-trigger", about: "amassed" });
+  });
+
   it("reads two mana of different colors, and two of one colour and two of another", () => {
     const vessel = face("Artifact", "{T}: Add two mana of different colors.");
     expect(vessel.complete).toBe(true);

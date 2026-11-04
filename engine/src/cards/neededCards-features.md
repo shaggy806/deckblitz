@@ -350,6 +350,18 @@ Twist, Infernal Darkness.
 Harvest Mage), and a player effect's own entry (every player's nonbasic lands — Pale Moon). A land its own cost
 sacrificed is read as it last was, and "could produce" reads the replacement (rule 106.7).
 
+### A mode picked at random as an ability goes on the stack — built 2026-11-03
+
+`effect:random-mode-announced`: `modal`'s `announced` with `random`, on a triggered or chapter ability (a chapter can
+now announce at all), among the modes it could have; `chooseIf` for "you choose one instead". Proving cards: Umaro,
+Raging Yeti, Cult of Skaro, Typhoid Mary, Fractured, Summon: Magus Sisters.
+
+### The amassed Army — built 2026-11-03
+
+`effect:amassed-army-power`: an `amassed` event, this-way kind and ref (`AttachRef`, `AmountRef`, `DamageFrom`). A
+reflexive ability `about` an object now reads its own compares instead of being bound by the creating resolution.
+Proving cards: Foray of Orcs, Grishnákh, Brash Instigator, Goblin Plate Mail, Surrounded by Orcs, Widespread Brutality.
+
 ### Two mana of different colors — built 2026-11-03
 
 `effect:add-mana-two-different-colors`: `add-mana`'s `{ oneOf, different }` — an offer per pairing by hand, an option

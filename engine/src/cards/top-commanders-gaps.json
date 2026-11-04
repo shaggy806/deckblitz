@@ -11,6 +11,8 @@
   "filter:attacked-you-this-turn",
   "effect:becomes-blocked",
   "trigger:blocks-creature-trigger",
+  "effect:random-mode-announced",
+  "effect:amassed-army-power",
   "effect:add-mana-two-different-colors",
   "replacement:land-mana-type-replacement",
   "amount:chroma-of-cards",

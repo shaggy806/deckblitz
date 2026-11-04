@@ -115,9 +115,12 @@ export type AttachHostRef = EffectTargetRef | { readonly among: CardFilter };
  *   attach this Equipment to **it**", Stonehewer Giant's "search your library
  *   for an Equipment card, put it onto the battlefield, attach **it** to a
  *   creature you control". The first of them still on the battlefield, as
- *   the same object (rule 400.7).
+ *   the same object (rule 400.7);
+ * - `"amassed"`: the Army an earlier `amass` step of this resolution chose,
+ *   counters or none (rule 701.47a) — Goblin Plate Mail's "attach this
+ *   Equipment to the amassed Army", Foray of Orcs' `about`.
  */
-export type AttachRef = EffectTargetRef | "created" | "put-this-way";
+export type AttachRef = EffectTargetRef | "created" | "put-this-way" | "amassed";
 /** A `look-and-choose`'s zone as `ResolutionContext.lookAndChoose` takes it:
  * its `"targets"` resolved to `{ cards }`, its `"exiled-with-source"` to the
  * linked cards in exile, `{ exiled }`. */
@@ -328,14 +331,16 @@ export interface ZoneChoiceSplitCase {
  * in the hand while it's still there and as it last existed there once it
  * has left (the rulings) — and `"exiled-as-cost"`, the one card exiled from a
  * graveyard to pay it ("damage equal to the exiled card's power" — Corpse
- * Explosion). Nothing sacrificed, tapped, discarded, revealed or exiled reads 0.
+ * Explosion) — and `"amassed"`, the Army an earlier step of this resolution
+ * amassed ("where X is the amassed Army's power" — Surrounded by Orcs).
+ * Nothing sacrificed, tapped, discarded, revealed or exiled reads 0.
  *
  * An object that was a permanent when the spell or ability referred to it
  * and has left the battlefield since is read as it last existed there (rule
  * 608.2h — see `LastKnownRefs`): "When Juri dies, it deals damage equal to
  * its power" counts the counters Juri died with.
  */
-export type AmountRef = EffectTargetRef | "sacrificed" | "tapped" | "discarded" | "revealed" | "exiled-as-cost";
+export type AmountRef = EffectTargetRef | "sacrificed" | "tapped" | "discarded" | "revealed" | "exiled-as-cost" | "amassed";
 /** Where a `return-to-hand` effect takes its object from. */
 export type ReturnToHandZone = "battlefield" | "graveyard" | "exile" | "stack" | "library";
 /**
@@ -1757,7 +1762,7 @@ export type GiftKind = "food" | "card" | "tapped-fish" | "extra-turn" | "treasur
  * — Ninja's Kunai's granted "Sacrifice Ninja's Kunai: Ninja's Kunai deals 3
  * damage to any target", dealt by the Equipment as it last existed.
  */
-export type DamageFrom = "trigger-object" | "granter" | "attached" | { readonly target: number };
+export type DamageFrom = "trigger-object" | "granter" | "attached" | "amassed" | { readonly target: number };
 
 /**
  * A one-shot prevention or redirection effect over a set of damage events
@@ -1846,6 +1851,8 @@ export type ThisWayKind =
   | "destroyed"
   /** Destroyed and put into a graveyard: "if that creature dies this way". */
   | "died"
+  /** The Army chosen by an `amass` step (rule 701.47a): "the amassed Army". */
+  | "amassed"
   | "exiled"
   /** Cards it exiled from a hand — Lost Legacy's "that player shuffles, then
    * draws a card **for each card exiled from their hand this way**" after a
@@ -8470,12 +8477,18 @@ export type EffectSpec =
        * likely, among the modes whose `onlyIf` holds ("choose a kind of
        * counter at random that this creature doesn't have on it" —
        * Crystalline Giant). With none eligible, nothing happens. Only with
-       * `minModes` and `maxModes` 1, and not with `announced`: an ability
-       * that picks its mode at random as it goes on the stack, before its
-       * targets (Summon: Magus Sisters), isn't built. Announced as a
+       * `minModes` and `maxModes` 1. With `announced`, the printed "Choose one
+       * at random —" of a triggered or chapter ability: picked as it goes on
+       * the stack, before its targets, among the modes it could have (rules
+       * 603.3c, 700.2b — "players can respond to the ability knowing which
+       * mode was chosen", Umaro, Raging Yeti's ruling). Announced as a
        * `chosen-at-random` event.
        */
       readonly random?: true;
+      /** With `random` and `announced`: "If you discarded a card this turn,
+       * you choose one instead" (Typhoid Mary, Fractured): read as it goes on
+       * the stack, and then it's a choice like any other. */
+      readonly chooseIf?: StaticCondition;
     }
   | {
       /** Apply `then` if `condition` holds at resolution, otherwise `else`
@@ -13686,10 +13699,18 @@ function putThisWay(ctx: ResolutionContext): TargetRef | undefined {
   return put === undefined ? undefined : { kind: "object", object: put.object };
 }
 
+/** The Army this resolution last amassed (rule 701.47a), wherever it is now:
+ * what reads it, reads it as it last existed. */
+function amassedThisWay(ctx: ResolutionContext): TargetRef | undefined {
+  const army = ctx.thisWay("amassed").at(-1);
+  return army === undefined ? undefined : { kind: "object", object: army.object };
+}
+
 /** What an {@link AttachRef} names now. */
 function resolveAttachRef(ref: AttachRef, ctx: ResolutionContext): TargetRef | undefined {
   if (ref === "created") return createdThisWay(ctx);
   if (ref === "put-this-way") return putThisWay(ctx);
+  if (ref === "amassed") return amassedThisWay(ctx);
   return resolveEffectTarget(ref, ctx);
 }
 
@@ -13697,6 +13718,7 @@ function resolveAttachRef(ref: AttachRef, ctx: ResolutionContext): TargetRef | u
 export type SpellResolver = (ctx: ResolutionContext) => void;
 
 function resolveAmountRef(ref: AmountRef, ctx: ResolutionContext): TargetRef | undefined {
+  if (ref === "amassed") return amassedThisWay(ctx);
   if (ref === "sacrificed") {
     return ctx.sacrificed === undefined ? undefined : { kind: "object", object: ctx.sacrificed };
   }
@@ -14087,6 +14109,12 @@ export function bindDynamicCompares(spec: EffectSpec, ctx: ResolutionContext): E
     if (record["kind"] === "delayed-trigger" && mentionsCreatedWithSource(record["effect"])) {
       return walk({ ...record, effect: bindCreatedWithSource(record["effect"], createdWithThis()) });
     }
+    // A reflexive ability `about` an object: `"trigger-object"` in it means
+    // that object, which the creating resolution's context doesn't know, so
+    // it's left to read it itself — its targets as they're chosen and rechecked
+    // (Grishnákh's "power less than or equal to the amassed Army's power"), its
+    // effect as it resolves.
+    if (record["kind"] === "reflexive-trigger" && record["about"] !== undefined) return record;
     // A reflexive ability's targets are bound here, in the creating
     // resolution, but they're its own (rule 603.12): `{ triggerValue: true }`
     // in one reads the value it triggers with (`value`), not the creating

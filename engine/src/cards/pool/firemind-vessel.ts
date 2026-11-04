@@ -1,6 +1,6 @@
 import { defineCard } from "../define.js";
 
-// Commander Masters. "Two mana of different colors" is `add-mana`'s `different`: an offer per
+// "Two mana of different colors" is `add-mana`'s `different`: an offer per
 // pairing by hand, an option per pairing to the payer, never two of one colour.
 
 const TAP = "{T}: Add two mana of different colors.";

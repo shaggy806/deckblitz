@@ -29124,13 +29124,15 @@ export class Game {
   /** A fired trigger's `modal` effect, if it's a modal ability that
    * announces its modes as it goes on the stack (the effect's `announced`). */
   private announcedModal(trigger: PendingTrigger): Extract<EffectSpec, { kind: "modal" }> | undefined {
-    if (trigger.delayed !== undefined || trigger.chapter === true) return undefined;
+    if (trigger.delayed !== undefined) return undefined;
     const ability =
-      trigger.reflexive ??
-      (trigger.grantedAbility !== undefined
-        ? (this.abilityFromRef(trigger.grantedAbility) as TriggeredAbility | undefined)
-        : (this.triggeredOfSource(trigger.sourceObjectId, trigger.lastKnownRefs?.source)?.[trigger.abilityIndex] ??
-          this.registry.get(trigger.cardName).triggered[trigger.abilityIndex]));
+      trigger.chapter === true
+        ? this.registry.get(trigger.cardName).chapters?.[trigger.abilityIndex]
+        : (trigger.reflexive ??
+          (trigger.grantedAbility !== undefined
+            ? (this.abilityFromRef(trigger.grantedAbility) as TriggeredAbility | undefined)
+            : (this.triggeredOfSource(trigger.sourceObjectId, trigger.lastKnownRefs?.source)?.[trigger.abilityIndex] ??
+              this.registry.get(trigger.cardName).triggered[trigger.abilityIndex])));
     const effect = ability?.effect;
     return effect !== undefined && effect !== null && effect.kind === "modal" && effect.announced === true
       ? effect
@@ -29500,6 +29502,16 @@ export class Game {
       if (maxModes <= 0 || (modal.optional === true && maxModes < modal.minModes)) {
         this.emit({ type: "trigger-removed", source: trigger.sourceObjectId, reason: "no modes chosen" });
         return "done";
+      }
+      // "Choose one at random —": nobody asked, among the modes it could have
+      // (Umaro, Raging Yeti's ruling), each equally likely — unless "you choose
+      // one instead" (Typhoid Mary, Fractured).
+      if (modal.random === true && (modal.chooseIf === undefined || !ctx.conditionMet(modal.chooseIf))) {
+        const picked = this.pickAtRandom(trigger.controller, trigger.sourceObjectId, offered.length, (i) => ({
+          kind: "mode",
+          text: modal.modes[offered[i]].text,
+        }));
+        return this.placeTriggerOnStack({ ...trigger, modes: [offered[picked]] });
       }
       this.state.pendingModalTrigger = { ...trigger };
       this.state.awaiting = {
@@ -30383,6 +30395,11 @@ export class Game {
       // What the source is or last was attached to: "enchanted creature deals
       // 1 damage" (Enslave). Attached to nothing, nothing's dealt.
       if (from === "attached") return attachedKnown();
+      // "The Army you amassed deals damage" (Widespread Brutality).
+      if (from === "amassed") {
+        const army = thisWayEntries(this.state, "amassed", since).at(-1)?.object;
+        return army === undefined ? undefined : { id: army, lastKnown: undefined };
+      }
       if (from !== undefined && from !== "trigger-object") {
         const ref = targets[from.target];
         return ref?.kind === "object" ? { id: ref.object, lastKnown: lastKnownOf(ref) } : undefined;
@@ -35777,6 +35794,8 @@ export class Game {
       });
     }
     if (amount > 0) this.addCounter({ kind: "object", object: army }, "+1/+1", amount, true, controller);
+    // "The amassed Army": the one chosen, counters or none (the rulings).
+    this.emit({ type: "amassed", player: controller, object: army });
   }
 
   /**

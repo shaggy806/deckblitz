@@ -1,7 +1,5 @@
 import { defineCard } from "../define.js";
 
-// Commander Masters.
-//
 // Rulings:
 //   [2019-05-03] Both mana produced by the last ability may be spent on the same planeswalker
 //     spell, or each may be spent on different planeswalker spells.

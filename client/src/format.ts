@@ -67,6 +67,8 @@ const NOISY_EVENTS: ReadonlySet<GameEvent['type']> = new Set([
   'permanent-tapped-for-mana',
   // Bookkeeping for expend's "whenever you expend N" — the spend's own lines say it.
   'mana-expended',
+  // Bookkeeping for "the amassed Army" — the token and its counters have lines of their own.
+  'amassed',
   'permanent-tapped',
   'permanent-untapped',
   'damage-cleared',
