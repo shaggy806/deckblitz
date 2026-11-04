@@ -8621,6 +8621,26 @@ export function parseEffect(text, outer) {
       hints.push({ sentence, effect: instead });
       continue;
     }
+    // "The next time you would draw a card this turn, you gain 5 life instead."
+    // (the Words cycle — `player-effect`'s `nextDrawInstead`): whatever one
+    // sentence the replacement does, its targets the ability's own (rule 115.1b).
+    const nextDrawM = /^the next time you would draw a card this turn, (.+) instead\.$/i.exec(sentence);
+    if (nextDrawM !== null) {
+      const clause = `${nextDrawM[1].charAt(0).toUpperCase()}${nextDrawM[1].slice(1)}`;
+      const slots = ctx.targets.length;
+      const inner = parseSentence(`${clause}.`, ctx);
+      if (inner !== null && inner !== undefined) {
+        const made = {
+          kind: "player-effect",
+          duration: "end-of-turn",
+          nextDrawInstead: { effect: inner, text: `${clause} instead.` },
+        };
+        parsed.push(made);
+        hints.push({ sentence, effect: made });
+        continue;
+      }
+      ctx.targets.length = slots;
+    }
     // A graveyard replacement a resolving spell makes for the turn (`player-effect`'s
     // `graveyardExile`, rule 614.1a): "If a creature [an opponent controls]
     // would die this turn, exile it instead." (Malicious Eclipse), "If a card
@@ -15927,6 +15947,29 @@ function parseStatic(line, text) {
     }
   }
   if (line === "~ can't block.") return { affects: { scope: "self" }, restrictions: ["cant-block"], text };
+  // A limit on drawing (`prohibits`'s `drawsPerTurn`): "Each opponent can't draw
+  // more than one card each turn." (Narset, Parter of Veils), "Each player …"
+  // (Spirit of the Labyrinth), "Players can't draw cards." (Maralen of the
+  // Mornsong), "… or gain life." (Mornsong Aria).
+  {
+    const limit = /^Each (opponent|player) can't draw more than one card each turn\.$/.exec(line);
+    if (limit !== null) {
+      return {
+        affects: { scope: "self" },
+        prohibits: { who: limit[1] === "opponent" ? "opponents" : "each-player", drawsPerTurn: 1 },
+        text,
+      };
+    }
+    const none = /^Players can't draw cards( or gain life)?\.$/.exec(line);
+    if (none !== null) {
+      return {
+        affects: { scope: "self" },
+        prohibits: { who: "each-player", drawsPerTurn: 0 },
+        ...(none[1] === undefined ? {} : { replacement: { event: "would-gain-life", who: "any-player", prevent: true } }),
+        text,
+      };
+    }
+  }
   // "If this creature would die, exile it instead" (Wildwood Escort, rule 700.4).
   if (line === "If ~ would die, exile it instead.") {
     return {

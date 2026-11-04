@@ -3516,6 +3516,26 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     });
   });
 
+  it("a limit on drawing, and the next draw replaced (rule 614.1a)", () => {
+    const prohibits = (line: string): unknown => face(line, "Enchantment").static[0].prohibits;
+    expect(prohibits("Each opponent can't draw more than one card each turn.")).toEqual({ who: "opponents", drawsPerTurn: 1 });
+    expect(prohibits("Each player can't draw more than one card each turn.")).toEqual({ who: "each-player", drawsPerTurn: 1 });
+    expect(prohibits("Players can't draw cards.")).toEqual({ who: "each-player", drawsPerTurn: 0 });
+    const aria = face("Players can't draw cards or gain life.", "Enchantment").static[0];
+    expect(aria.prohibits).toEqual({ who: "each-player", drawsPerTurn: 0 });
+    expect(aria.replacement).toEqual({ event: "would-gain-life", who: "any-player", prevent: true });
+
+    const worship = face("{1}: The next time you would draw a card this turn, you gain 5 life instead.", "Enchantment");
+    expect(worship.activated[0].effect).toEqual({
+      kind: "player-effect",
+      duration: "end-of-turn",
+      nextDrawInstead: { effect: { kind: "gain-life", amount: 5 }, text: "You gain 5 life instead." },
+    });
+    const war = face("{1}: The next time you would draw a card this turn, this enchantment deals 2 damage to any target instead.", "Enchantment");
+    expect(war.activated[0].targets).toEqual(["any-target"]);
+    expect(war.activated[0].effect).toMatchObject({ nextDrawInstead: { effect: { kind: "damage", amount: 2, target: 0 } } });
+  });
+
   it("what reads who created a token (rule 111.2), and a redirect of who does", () => {
     expect(parseTrigger("Whenever you create one or more tokens for the first time each turn")).toEqual([
       { on: "enters-battlefield", who: "you-control", filter: { token: true }, batched: true, firstCreationEachTurn: true },

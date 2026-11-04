@@ -2364,6 +2364,17 @@ export interface StaticAbility {
      * neither counts nor is barred. A copy of a spell isn't cast (rule 707.10),
      * and a land isn't a spell. */
     readonly castLimit?: number;
+    /** "Each opponent can't draw more than **one** card each turn" (Narset,
+     * Parter of Veils; Spirit of the Labyrinth's `who: "each-player"`), "players
+     * can't draw cards" (Maralen of the Mornsong — `0`): once they've drawn this
+     * many this turn, cards drawn before this permanent arrived among them, a
+     * draw doesn't happen — as an effect, as a cost or in the draw step (the
+     * rulings; rule 101.2). So nothing can replace it (Spirit of the Labyrinth's
+     * ruling), no empty library loses the game to it, and a draw some other
+     * replacement took the place of was never drawn, so doesn't count (Narset's
+     * ruling). "You may draw" that can't be done in full isn't offered (`may`).
+     * See `Game.cantDrawMore`. */
+    readonly drawsPerTurn?: number;
     readonly abilitiesOf?: CardFilter;
     /** "…can't be activated **unless they're mana abilities**" (Pithing
      * Needle): `abilitiesOf` leaves mana abilities alone. */

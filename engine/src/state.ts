@@ -4153,6 +4153,15 @@ export type AwaitingDecision =
        * instead. Answered by the engine itself; the modes' effects are
        * unused. */
       readonly dredgeFor?: { readonly cards: readonly ObjectId[] };
+      /** Which replacement applies to a draw of `player`'s (rule 616.1, the
+       * Words cycle): mode i is `effects[i]`, an index into `playerEffects`
+       * (a `nextDrawInstead`), or `null` for their printed "if you would draw"
+       * (Underrealm Lich). `event` is the draw. Answered by the engine itself;
+       * the modes' effects are unused. */
+      readonly nextDrawFor?: {
+        readonly effects: readonly (number | null)[];
+        readonly event: { readonly firstInDrawStep: boolean; readonly before: { readonly all: number; readonly exceptDrawStepFirst: number } };
+      };
       /** Storage Matrix's question in the untap step (rule 502.3 —
        * `untapOnlyChosenType`): mode i keeps only `types[i]` among `untapping`,
        * the permanents about to untap, and the step carries on with `asked`

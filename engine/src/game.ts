@@ -7458,6 +7458,13 @@ export class Game {
       if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
       return;
     }
+    // Which replacement applies to a draw (rule 616.1 — the Words cycle).
+    if (awaiting.nextDrawFor !== undefined) {
+      this.state.awaiting = null;
+      this.applyNextDrawReplacement(player, awaiting.nextDrawFor.effects[modeIndices[0] ?? 0] ?? null, awaiting.nextDrawFor.event);
+      if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
+      return;
+    }
     // Storage Matrix's question (rule 502.3): only that type goes on untapping
     // — a permanent with several, if any is it (the rulings) — and the step
     // carries on with no priority (502.4).
@@ -31053,12 +31060,18 @@ export class Game {
             (this.state.pendingDraws ??= []).push({ player, count: count - i });
             return;
           }
+          // A draw `player` can't make: nor can they the rest (Narset's "subsequent
+          // card draws during that turn are ignored").
+          if (this.cantDrawMore(player)) return;
           // Once a draw finds the library empty, every later one in the same
           // effect is the same failed draw again (rule 704.5b only needs one).
           // Stopping keeps "draw a card for each creature" over a big token
-          // stack from emitting millions of identical events.
+          // stack from emitting millions of identical events. Not while a
+          // "next time you would draw" could take this one instead.
           const from = this.eventualDrawer(player);
-          const empty = this.state.zones.perPlayer[from].library.length === 0;
+          const empty =
+            this.state.zones.perPlayer[from].library.length === 0 &&
+            !(this.state.playerEffects ?? []).some((e) => e.nextDrawInstead !== undefined && (e.owner === from || e.owner === player));
           const unasked = this.state.awaiting === null;
           this.drawCard(player);
           // A draw replaced by a win (Laboratory Maniac) ended the game.
@@ -31072,6 +31085,7 @@ export class Game {
           }
         }
       },
+      cantDrawMore: (player, more) => this.cantDrawMore(player, more),
       playersInScope: (who) => scoped(who),
       playersCountedInScope: (who) =>
         this.scopedPlayers(controller, who, triggerObject, triggerLastKnown(), refs.player, true, refs.triggerSpellController),
@@ -50297,6 +50311,9 @@ export class Game {
 
   private drawCard(player: PlayerId, noDredge = false): void {
     if (this.state.result.over) return;
+    // A draw `player` can't make isn't one anything could replace (Spirit of
+    // the Labyrinth's and Maralen of the Mornsong's rulings).
+    if (this.cantDrawMore(player)) return;
     // Dredge (rule 702.52): a card in `player`'s graveyard may replace this
     // draw — asked first, one draw at a time, by the player whose draw it
     // is (rule 616.1); declined, the draw goes on as below. Not for the
@@ -50338,6 +50355,10 @@ export class Game {
     // The draw event itself, before anything replaces it: what "the first
     // time you would draw a card each turn" reads.
     const drawEvent = this.noteWouldDraw(player);
+    // "The next time you would draw a card this turn, … instead" (the Words
+    // cycle): set up on purpose, so taken before a Notion Thief's — one of the
+    // orders the drawing player could pick (rule 616.1; AUTHORING §15).
+    if (this.nextDrawReplaced(player, drawEvent)) return;
     // would-draw redirect (Notion Thief — rule 614 / ROADMAP Phase 11 EG-6):
     // "If an opponent would draw a card except the first one they draw in
     // each of their draw steps, instead that player skips that draw and you
@@ -50360,7 +50381,8 @@ export class Game {
       if (this.drawWonInstead(drawer)) return;
     }
     if (redirected) {
-      this.drawCardRaw(drawer);
+      // The draw is the Thief's controller's now, and theirs to replace.
+      if (!this.nextDrawReplaced(drawer, drawEvent)) this.drawCardRaw(drawer);
       return;
     }
     // "If you would draw a card, instead look at the top three cards of your
@@ -50384,6 +50406,96 @@ export class Game {
     }
   }
 
+  /** Whether a `prohibits`'s `drawsPerTurn` stops `player` drawing another card
+   * now, with `more` of them about to be drawn: read from the turn's real draws
+   * (`cardsDrawnThisTurn`), those before the permanent arrived included. */
+  private cantDrawMore(player: PlayerId, more = 1): boolean {
+    const drawn = this.state.players[player]?.cardsDrawnThisTurn ?? 0;
+    return this.prohibitionsOn(player).some(
+      ({ prohibits }) => prohibits.drawsPerTurn !== undefined && drawn + more > prohibits.drawsPerTurn,
+    );
+  }
+
+  /**
+   * Replaces a draw of `player`'s with one of their `nextDrawInstead`s, if they
+   * have one, and says so. Several that differ, or one beside an "if you would
+   * draw a card, instead" of their own (Underrealm Lich): the player chooses
+   * which applies (rule 616.1, the Words ruling), by a `choose-modes` question;
+   * identical ones are nothing to choose between.
+   */
+  private nextDrawReplaced(player: PlayerId, event: WouldDrawEvent): boolean {
+    const effects = this.state.playerEffects ?? [];
+    const options: { readonly index: number | null; readonly text: string; readonly source: ObjectId }[] = [];
+    const seen = new Set<string>();
+    effects.forEach((effect, index) => {
+      const instead = effect.nextDrawInstead;
+      if (effect.owner !== player || instead === undefined) return;
+      const key = JSON.stringify([instead.effect, instead.targets]);
+      if (seen.has(key)) return;
+      seen.add(key);
+      options.push({ index, text: this.nextDrawText(instead.text, instead.source), source: instead.source });
+    });
+    if (options.length === 0) return false;
+    const printed = this.drawEffectReplacementFor(player, event);
+    if (printed !== null) {
+      options.push({ index: null, text: `${printedCardName(this.state.objects[printed.source])}'s replacement`, source: printed.source });
+    }
+    const asked = options.find((o) => this.state.objects[o.source] !== undefined);
+    if (options.length === 1 || asked === undefined) {
+      this.applyNextDrawReplacement(player, options[0].index, event);
+      return true;
+    }
+    this.state.awaiting = {
+      kind: "choose-modes",
+      player,
+      source: asked.source,
+      minModes: 1,
+      maxModes: 1,
+      modes: options.map((o) => ({ text: o.text, effect: { kind: "sequence", effects: [] } as EffectSpec })),
+      x: 0,
+      targets: [],
+      nextDrawFor: { effects: options.map((o) => o.index), event },
+    };
+    return true;
+  }
+
+  /** A `nextDrawInstead`'s words, for the player choosing it: its source named. */
+  private nextDrawText(text: string, source: ObjectId): string {
+    const object = this.state.objects[source];
+    return object === undefined ? text : text.replace(/~/g, printedCardName(object));
+  }
+
+  /**
+   * Applies the `nextDrawInstead` at `index` of `state.playerEffects` (spent as
+   * it does), or, for `null`, the `player`'s printed effect replacement. An
+   * object target that has changed zones since the ability resolved is gone
+   * (rule 400.7); any choice in the effect is answered before the next card is
+   * drawn (rule 614.11a).
+   */
+  private applyNextDrawReplacement(player: PlayerId, index: number | null, event: WouldDrawEvent): void {
+    let source: ObjectId;
+    let effect: EffectSpec;
+    let targets: ResolvedTargets = [];
+    if (index === null) {
+      const printed = this.drawEffectReplacementFor(player, event);
+      if (printed === null) return;
+      ({ source, effect } = printed);
+    } else {
+      const instead = this.state.playerEffects?.[index]?.nextDrawInstead;
+      if (instead === undefined) return;
+      this.state.playerEffects = this.state.playerEffects?.filter((_, i) => i !== index);
+      ({ source, effect } = instead);
+      targets = instead.targets.map((target, i) =>
+        target?.kind === "object" && (this.state.objects[target.object]?.zoneChangeCount ?? -1) !== instead.targetStints[i]
+          ? undefined
+          : target,
+      );
+    }
+    const ctx = this.makeResolutionContext(source, player, targets);
+    if (this.state.awaiting !== null) ctx.resumeAfterDecisions(effect);
+    else applyEffectSpec(effect, ctx);
+  }
+
   /** The cards in `player`'s graveyard whose dredge could replace a draw
    * now: dredge N with at least N cards in their library (702.52b). */
   private dredgeCards(player: PlayerId): ObjectId[] {
@@ -50401,7 +50513,9 @@ export class Game {
     const awaiting = this.state.awaiting;
     return (
       (this.state.pendingDraws?.length ?? 0) > 0 ||
-      (awaiting !== null && awaiting.kind === "choose-modes" && awaiting.dredgeFor !== undefined)
+      (awaiting !== null &&
+        awaiting.kind === "choose-modes" &&
+        (awaiting.dredgeFor !== undefined || awaiting.nextDrawFor !== undefined))
     );
   }
 
@@ -50617,6 +50731,9 @@ export class Game {
   }
 
   private drawCardRaw(player: PlayerId): void {
+    // Each card of "draw two cards instead", and the draw a Notion Thief hands
+    // on, is a draw of its own that may be one too many.
+    if (this.cantDrawMore(player)) return;
     const library = this.state.zones.perPlayer[player].library;
     if (library.length === 0) {
       this.state.players[player].attemptedDrawFromEmptyLibrary = true;

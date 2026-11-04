@@ -10193,6 +10193,9 @@ export interface EffectApi {
   handSizeOf(player: PlayerId, filter?: CardFilter): number;
   /** How many cards are in `player`'s library. */
   librarySizeOf(player: PlayerId): number;
+  /** Whether a "can't draw more than" stops `player` drawing `more` cards now
+   * (`prohibits`'s `drawsPerTurn`). */
+  cantDrawMore(player: PlayerId, more: number): boolean;
   /** How many cards are in `player`'s graveyard — see `{ graveyardSize }`. */
   graveyardSizeOf(player: PlayerId): number;
   /** See the `"double-counters"` {@link EffectSpec}. */
@@ -14487,6 +14490,18 @@ export function mayBeDone(effect: EffectSpec, ctx: ResolutionContext): boolean {
   // An amount is "all of them", which none satisfies (Manabond).
   if (action.kind === "look-and-choose" && action.zone === "hand" && action.player === undefined && typeof action.min === "number") {
     return ctx.handSizeOf(ctx.controller, action.filter) >= action.min;
+  }
+  // "You may draw a card" by a player who can't: not offered, and "if the draws
+  // are optional, the player can't choose to draw" even one of several (Narset,
+  // Parter of Veils's ruling).
+  if (action.kind === "draw") {
+    const players =
+      action.target !== undefined
+        ? ((ref) => (ref?.kind === "player" ? [ref.player] : []))(ctx.targets[action.target])
+        : typeof action.who === "object"
+          ? ((player) => (player === undefined ? [] : [player]))(effectPlayer(action.who, ctx))
+          : ctx.playersInScope(action.who ?? "you");
+    return players.every((player) => !ctx.cantDrawMore(player, amountValue(action.amount, ctx, player)));
   }
   if (action.kind === "mill" || action.kind === "discard") {
     return scopedOrTargetedPlayers(action.target, ctx).every((ref) => {
