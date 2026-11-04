@@ -5008,6 +5008,8 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 
 **A creature's own count of attacks, and additional combats placed where they say (2026-11-04).** `grantPtPerCount.ofAffected: "times-attacked-this-turn"` on `GameObject.attacksThisTurn`; `additional-combat`'s `atBeginning` (a delayed ability on that one phase, `{ thatCombat: mark }`) and `afterSecondMain`. One made in the precombat main now comes before the turn's own combat, and combats owed go ahead of a main phase owed (rule 500.8). Moraug, Fury of Akoum; World at War; the parser reads both. `test/additional-combat-that-combat.test.ts`.
 
+**A win on eight with one name (2026-11-04).** Already there: `win-game` behind `controls`' `sharingAName`, and `create-token-copy`'s `of: "enchanted"`. Mechanized Production; the parser reads the whole card, Followed Footsteps' copy too. Halo Fountain's win is there as well, waiting on its `cost:untap-cost`. `test/win-game-same-name.test.ts`.
+
 **A player searching their own library, as a trigger (2026-11-04).** `{ on: "searches-library", who }` on the new `library-searched` event, `"trigger-player"` who searched. Archivist of Oghma, Wan Shi Tong, Librarian, Ob Nixilis, Unshackled. River Song still wants `replacement:draw-from-bottom`. `test/search-trigger.test.ts`.
 
 **A player's own turns of the game (2026-11-04).** `condition:own-turn-count`: `PlayerState.turnsTaken`, the `turns-taken` condition, `FIRST_THREE_TURNS` with `your-turn`. Starting Town, Serra Avenger; Spider-Man 2099 and Jace Reawakened read the same line.

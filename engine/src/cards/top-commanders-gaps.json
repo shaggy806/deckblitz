@@ -1759,7 +1759,8 @@
   "condition:dynamic-operand-in-intervening-if",
   "mechanic:vow-counters",
   "stat:attack-count-this-turn",
-  "effect:additional-combat-after-main"
+  "effect:additional-combat-after-main",
+  "effect:win-game"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

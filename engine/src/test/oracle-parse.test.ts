@@ -15177,3 +15177,29 @@ describe("additional combats, at the beginning of that combat, and a creature's 
     });
   });
 });
+
+describe("a copy of the enchanted artifact, then a win on eight with one name", () => {
+  it("reads Mechanized Production's", () => {
+    const face = parseFace({
+      name: "Test Card",
+      type_line: "Enchantment — Aura",
+      mana_cost: "{2}{U}{U}",
+      colors: ["U"],
+      oracle_text:
+        "Enchant artifact you control\nAt the beginning of your upkeep, create a token that's a copy of enchanted artifact. Then if you control eight or more artifacts with the same name as one another, you win the game.",
+    });
+    expect(face.complete).toBe(true);
+    expect(face.enchant).toEqual({ kind: "permanent", whose: "you", filter: { type: "artifact" } });
+    expect(face.triggered[0].effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "create-token-copy", of: "enchanted", count: 1, who: "you" },
+        {
+          kind: "conditional",
+          condition: { kind: "controls", filter: { type: "artifact" }, atLeast: 8, sharingAName: true },
+          then: { kind: "win-game" },
+        },
+      ],
+    });
+  });
+});

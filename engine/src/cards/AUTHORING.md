@@ -5890,7 +5890,8 @@ clause (section 9):
   only the most of them with one name in common (rule 201.2a) — Endless Atlas's
   "three or more lands with the same name", Chrome Replicator's "two or more
   nonland, nontoken permanents with the same name as one another" (a trigger's
-  count, its own permanent in it). `sharingACreatureType: true`
+  count, its own permanent in it), Mechanized Production's eight artifacts, a
+  `conditional` step after its token. `sharingACreatureType: true`
   counts only the most of them with one creature type in common —
   Graxiplon's "three or more creatures that share a creature type", a
   changeling counting toward every type. The opposite switch,

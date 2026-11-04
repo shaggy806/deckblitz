@@ -6526,6 +6526,18 @@ export function parseSentence(sentence, ctx) {
   if (/^that player sacrifices a creature of their choice that they controlled since the beginning of the turn\.$/i.test(s)) {
     return { kind: "sacrifice", who: "active-player", filter: { type: "creature", controlledContinuously: true }, count: 1 };
   }
+  // Followed Footsteps, Mechanized Production: read as the trigger resolves.
+  if (/^create a token that's a copy of enchanted (?:creature|artifact)\.$/i.test(s)) {
+    return { kind: "create-token-copy", of: "enchanted", count: 1, who: "you" };
+  }
+  // Mechanized Production: read after the sentence before it, so a step of its own.
+  if ((m = /^then if you control (\w+) or more (.+?) with the same name as one another, you win the game\.$/i.exec(s))) {
+    const atLeast = numberOf(m[1].toLowerCase());
+    const filter = parseTypePhrase(m[2]);
+    if (typeof atLeast === "number" && filter !== null) {
+      return { kind: "conditional", condition: { kind: "controls", filter, atLeast, sharingAName: true }, then: { kind: "win-game" } };
+    }
+  }
   // Rocket Launcher, Crazed Armodon.
   if (/^destroy ~ at the beginning of the next end step\.$/i.test(s)) {
     return { kind: "delayed-trigger", at: "next-end-step", text: "Destroy ~.", effect: { kind: "destroy", target: "source" } };
@@ -13064,7 +13076,7 @@ function parseFaceAsWritten(face, ctx = {}) {
     if ((m = /^Ward—Pay (\d+) life\.$/.exec(line))) { out.triggered.push(wardAbility({ payLife: Number(m[1]) })); continue; }
 
     // Card-level lines.
-    if ((m = /^Enchant (creature|land|artifact|enchantment|permanent|player|creature you control|creature or planeswalker)$/.exec(line))) {
+    if ((m = /^Enchant (creature|land|artifact|enchantment|permanent|player|creature you control|artifact you control|creature or planeswalker)$/.exec(line))) {
       out.enchant = targetOf(`target ${m[1]}`);
       continue;
     }
