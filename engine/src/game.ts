@@ -4914,6 +4914,10 @@ export class Game {
             ? this.state.zones.perPlayer[player].hand.length
           : xPlan === null && sacrificeX === undefined && graveyardExileCost?.count === "x"
             ? this.graveyardCostCandidates(player, graveyardExileCost.filter, card).length
+          // "Return X Swamps you control" (Infernal Harvest): as many as there
+          // are, lands tapped for the spell's mana among them.
+          : xPlan === null && sacrificeX === undefined && def.additionalCost?.returnToHandX !== undefined
+            ? permanentCount(this.state, this.battlefieldMatching(player, { ...def.additionalCost.returnToHandX, controlledBy: "you" }))
             : undefined;
       const payableX = xPlan?.maxX ?? sacrificeX ?? discardX;
       const xGroup =
@@ -15905,6 +15909,11 @@ export class Game {
       const cards = this.discardCandidates(player, def.additionalCost.discardFilter, cardId).length;
       return { ...best, maxX: Math.min(best.maxX, cards) };
     }
+    const returnsX = def.additionalCost?.returnToHandX;
+    if (returnsX !== undefined) {
+      const permanents = permanentCount(this.state, this.battlefieldMatching(player, { ...returnsX, controlledBy: "you" }));
+      return { ...best, maxX: Math.min(best.maxX, permanents) };
+    }
     const exileCost = def.additionalCost?.exileFromGraveyard;
     if (exileCost?.count !== "x") return best;
     return { ...best, maxX: Math.min(best.maxX, this.graveyardCostCandidates(player, exileCost.filter, cardId).length) };
@@ -17149,6 +17158,15 @@ export class Game {
         if (others.length < (discard === "x" ? Math.max(0, Math.floor(xValue)) : discard)) {
           return `${player} has too few cards in hand to cast ${def.name}`;
         }
+      }
+      // "Return X Swamps" (Infernal Harvest): as many as the X announced (rule 118.3).
+      const returnsX = def.additionalCost.returnToHandX;
+      if (
+        returnsX !== undefined &&
+        permanentCount(this.state, this.battlefieldMatching(player, { ...returnsX, controlledBy: "you" })) <
+          Math.max(0, Math.floor(xValue))
+      ) {
+        return `${player} controls too few permanents to return for ${def.name}'s additional cost`;
       }
       // "You may exile" (Redemptor Dreadnought) asks for nothing to be there;
       // "exile X" (Harvest Pyre) for as many as the X announced (rule 118.3).
@@ -18940,6 +18958,7 @@ export class Game {
       (via === "flashback" && this.flashbackOf(cardId, graveyardGrant)?.discard === "x") ||
       def.additionalCost?.discard === "x" ||
       def.additionalCost?.exileFromGraveyard?.count === "x" ||
+      def.additionalCost?.returnToHandX !== undefined ||
       // The Shoals' "exile a … card with mana value X" (rule 107.3a).
       (altCost && this.ownAltCost(def)?.exileFromHand?.manaValueX === true);
     const chosenX = hasX ? Math.max(0, Math.floor(xValue)) : 0;
@@ -19503,7 +19522,17 @@ export class Game {
     // A keyword's non-mana part (buyback's "Pay 3 life, Discard a card at
     // random", squad's, a spliced card's): its sacrifice is among the parts
     // above, the rest asked in turn before anyone gets priority.
-    this.queueAlsoCosts(player, cardId, this.castAlsoCosts(cardId, def, kicked, altCost, costOption), via === "effect" ? this.activePlayer : player);
+    // "Return X Swamps" (Infernal Harvest) asks the same way, once X is known.
+    const returnsX = def.additionalCost?.returnToHandX;
+    this.queueAlsoCosts(
+      player,
+      cardId,
+      [
+        ...this.castAlsoCosts(cardId, def, kicked, altCost, costOption),
+        ...(returnsX !== undefined && chosenX > 0 ? [{ text: "", returnToHand: { filter: returnsX, count: chosenX } }] : []),
+      ],
+      via === "effect" ? this.activePlayer : player,
+    );
     // Jump-start's "by discarding a card" (rule 702.133a), paid the same way.
     const flashbackDiscards = via === "flashback" ? this.flashbackOf(cardId, graveyardGrant)?.discard : undefined;
     const flashbackDiscard = flashbackDiscards === "x" ? chosenX : flashbackDiscards;

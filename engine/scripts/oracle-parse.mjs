@@ -12828,6 +12828,14 @@ function parseFaceAsWritten(face, ctx = {}) {
         continue;
       }
     }
+    // "Return X Swamps you control to their owner's hand" (Infernal Harvest).
+    if (isSpell && (m = /^As an additional cost to cast ~, return X (.+?) you control to their owner's hand\.$/.exec(line))) {
+      const returnToHandX = parseTypePhrase(m[1]);
+      if (returnToHandX !== null && Object.keys(returnToHandX).length > 0) {
+        out.additionalCost = { returnToHandX };
+        continue;
+      }
+    }
     // "Tap two untapped creatures you control" (Shared Discovery), "return a
     // land you control to its owner's hand" (Deprive): `also`, as a keyword's
     // non-mana cost; "… or pay {1}" (Disruption Protocol) a branch of a choice.

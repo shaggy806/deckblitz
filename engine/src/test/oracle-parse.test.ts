@@ -2813,6 +2813,10 @@ describe("templates for features built since the parser began (2026-10-11)", () 
       {},
     );
     expect(pyre.additionalCost).toEqual({ exileFromGraveyard: { count: "x" } });
+    // Infernal Harvest's X: as many as are returned.
+    expect(
+      face("As an additional cost to cast this spell, return X Swamps you control to their owner's hand.", "Sorcery", {}).additionalCost,
+    ).toEqual({ returnToHandX: { type: "land", subtype: "Swamp" } });
     const explosion = face(
       "As an additional cost to cast this spell, exile a creature card from your graveyard.\nThis spell deals damage equal to the exiled card's power to each creature and each planeswalker.",
       "Sorcery",

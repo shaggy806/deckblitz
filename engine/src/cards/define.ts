@@ -4448,6 +4448,18 @@ export interface CardDefinition {
      */
     readonly putFromExile?: number;
     /**
+     * "As an additional cost to cast this spell, **return X Swamps** you
+     * control to their owner's hand" (Infernal Harvest): it makes the spell an
+     * `{X}` spell the way `payLifeX` does, X announced as it's cast (rule
+     * 601.2b) and capped by what there is to return (rule 118.3), `ctx.x`
+     * reading it. Which ones is chosen as the cost is paid (601.2h), once the
+     * spell is on the stack, with `also.returnToHand`'s `choose-permanents` —
+     * asked only when there's a choice. Lands tapped for the spell's own mana
+     * may be among them. Not an {X} in its mana cost, so its mana value
+     * doesn't count it. A fixed number is `also.returnToHand`.
+     */
+    readonly returnToHandX?: CardFilter;
+    /**
      * Any other part of a cost, in the one shape every keyword's non-mana cost
      * has ({@link KickerAlsoCost}), paid the way a kicker's is: "tap two
      * untapped creatures and/or lands you control" (Fear of Exposure,
@@ -5983,6 +5995,7 @@ interface CardDraft {
       readonly linked?: true;
     };
     readonly putFromExile?: number;
+    readonly returnToHandX?: CardFilter;
     readonly also?: KickerAlsoCost;
     readonly options?: readonly AdditionalCostOption[];
   };
