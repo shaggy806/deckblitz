@@ -15667,14 +15667,16 @@ export function mayBeDone(effect: EffectSpec, ctx: ResolutionContext): boolean {
   if (action.kind === "exile" && action.target === "trigger-object" && ctx.triggerObjectLost === true) return false;
   // "They may tap that permanent": only untapped permanents can be tapped
   // (rule 701.26a), so not one already tapped or gone — Charismatic
-  // Conqueror's ruling. Untapping likewise (701.26b). A tap that also holds
-  // the permanent down is more than the tap, and stays offered.
-  if (action.kind === "tap" && action.doesntUntapNext !== true) {
-    const target = resolveEffectTarget(action.target, ctx);
+  // Conqueror's ruling. Untapping likewise (701.26b). Only when that's all the
+  // effect is: one that does more can still be done as far as it goes (rule
+  // 609.3 — provoke's "untap … and it blocks", Bringer of the Red Dawn's "untap
+  // and gain control"), and a tap that also holds the permanent down is more.
+  if (effect.kind === "tap" && effect.doesntUntapNext !== true) {
+    const target = resolveEffectTarget(effect.target, ctx);
     return target !== undefined && ctx.tappedNow(target) === false;
   }
-  if (action.kind === "untap") {
-    const target = resolveEffectTarget(action.target, ctx);
+  if (effect.kind === "untap") {
+    const target = resolveEffectTarget(effect.target, ctx);
     return target !== undefined && ctx.tappedNow(target) === true;
   }
   // "You may move a counter": not when none could move (rule 122.5) — from
