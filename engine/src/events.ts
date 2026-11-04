@@ -94,6 +94,9 @@ export interface WhileSource {
   /** "For as long as **you control** ~": it ends as ~ stops being this
    * player's, too. */
   readonly controller?: PlayerId;
+  /** "For as long as this Equipment **remains attached to it**" (Blade of
+   * Shared Souls): it ends as ~ comes off this permanent, too. */
+  readonly attachedTo?: ObjectId;
 }
 
 /** What a random choice picked — the `chosen-at-random` event: a player, a

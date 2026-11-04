@@ -1192,6 +1192,14 @@ export type TriggerSpec =
       readonly who: "self";
     }
   | {
+      /** "Whenever this Equipment becomes attached to a creature" (Blade of
+       * Shared Souls, Assimilation Aegis): moved from one to another counts,
+       * on the one it's moved to. Its trigger object is what it's attached to. */
+      readonly on: "becomes-attached";
+      readonly who: "self";
+      readonly filter?: CardFilter;
+    }
+  | {
       /** A permanent left the battlefield — for any destination (graveyard,
        * exile, hand, library, command zone). Broader than `"dies"`, which
        * only fires for a move to a graveyard. Rule 603.6d / 700.4. */

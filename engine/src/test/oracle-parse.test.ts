@@ -13873,3 +13873,44 @@ describe("a goad whose end is a condition", () => {
     expect(alibi.static[0]).toMatchObject({ grantPt: [2, 2], cantBecomeSuspected: true });
   });
 });
+
+describe("a copy for a duration read as a condition", () => {
+  const read = (type_line: string, oracle_text: string, mana_cost = "{1}") =>
+    parseFace({ name: "Test Card", type_line, mana_cost, oracle_text }, { tokenFor: () => null });
+
+  it("for as long as that creature remains tapped", () => {
+    const zygon = read(
+      "Creature \u2014 Alien",
+      "{2}{U}: Tap another target creature and put a stun counter on it. This creature becomes a copy of that creature for as long as that creature remains tapped. Activate only as a sorcery.",
+    );
+    expect(zygon.activated[0].targets).toEqual([{ kind: "other", of: "creature" }]);
+    expect(zygon.activated[0].effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "tap", target: 0 },
+        { kind: "add-counter", target: 0, counter: "stun", amount: 1 },
+        { kind: "become-copy", target: "source", of: 0, until: { whileTapped: 0 } },
+      ],
+    });
+  });
+
+  it("chosen as it resolves, and for as long as an Equipment stays attached", () => {
+    const shape = read("Instant", "Choose a nonlegendary creature on the battlefield. Target creature becomes a copy of that creature until end of turn.");
+    expect(shape.targets).toEqual(["creature"]);
+    expect(shape.effect).toMatchObject({
+      kind: "choose-permanents",
+      filter: { type: "creature", notSupertype: "legendary" },
+      keepTargets: true,
+      then: { kind: "become-copy", target: 1, of: 0, until: "end-of-turn" },
+    });
+    const blade = read(
+      "Artifact \u2014 Equipment",
+      "Whenever this Equipment becomes attached to a creature, for as long as this Equipment remains attached to it, you may have that creature become a copy of another target creature you control.",
+    );
+    expect(blade.triggered[0].trigger).toEqual({ on: "becomes-attached", who: "self", filter: { type: "creature" } });
+    expect(blade.triggered[0].effect).toMatchObject({
+      kind: "may",
+      effect: { kind: "become-copy", target: "trigger-object", of: 0, until: "while-source-attached" },
+    });
+  });
+});

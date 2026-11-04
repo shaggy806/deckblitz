@@ -407,6 +407,16 @@ export type PtDuration =
  *   count (rule 614.10a), which is where it differs from "until your next
  *   turn".
  */
+/** How long a `become-copy` lasts, when it isn't for as long as it's that
+ * object — see that effect. */
+export type CopyUntil =
+  | "end-of-turn"
+  | "next-end-step"
+  | "your-next-turn"
+  | "while-source"
+  | "while-source-attached"
+  | { readonly whileTapped: EffectTargetRef };
+
 export type UntilPointDuration =
   | "until-your-next-upkeep"
   | "until-end-of-your-next-upkeep"
@@ -8271,15 +8281,29 @@ export type EffectSpec =
        * `"your-next-turn"` (as the effect's controller's next turn begins —
        * Taskmaster), or, absent, for as long as it is that object (rule
        * 611.2a — Thespian's Stage, Mirrorform). Then it is what it was before
-       * again — see `GameObject.temporaryCopies`.
+       * again — see `GameObject.temporaryCopies`. Or a condition (rule 611.2b,
+       * nothing at all if it couldn't begin): `"while-source"`, as the effect's
+       * source leaves (Secret Invasion's "until this Aura leaves the
+       * battlefield"); `"while-source-attached"`, as it comes off the permanent
+       * becoming the copy too (Blade of Shared Souls); `{ whileTapped }`, as the
+       * permanent there untaps or leaves (Zygon Infiltrator's "for as long as
+       * that creature remains tapped").
+       *
+       * `of` may be `"sacrificed"` (The Ever-Changing 'Dane's "the sacrificed
+       * creature", as it last existed). "Choose a creature on the battlefield,
+       * target creature becomes a copy of it" is this inside a `choose-permanents`'
+       * `then` with `keepTargets`: `of: 0`, the target at slot 1 (Cytoshape).
+       * `ofCard: "when-a-card"` is `ofCard` only while `of` isn't on the
+       * battlefield: a slot that may hold either (Taskmaster's "target creature
+       * on the battlefield or creature card in a graveyard").
        */
       readonly kind: "become-copy";
       readonly target?: EffectTargetRef;
       readonly filter?: CardFilter;
       readonly exceptOf?: true;
-      readonly of: EffectTargetRef;
-      readonly ofCard?: true;
-      readonly until?: "end-of-turn" | "next-end-step" | "your-next-turn";
+      readonly of: AmountRef;
+      readonly ofCard?: true | "when-a-card";
+      readonly until?: CopyUntil;
       readonly exceptions?: CopyExceptions;
     }
   | {
@@ -12084,7 +12108,7 @@ export interface EffectApi {
     of: ObjectId,
     opts: {
       readonly ofCard?: boolean;
-      readonly until?: "end-of-turn" | "next-end-step" | "your-next-turn";
+      readonly until?: Exclude<CopyUntil, { readonly whileTapped: EffectTargetRef }> | { readonly whileTapped: ObjectId };
       readonly exceptions?: CopyExceptions;
     },
   ): void;
@@ -18378,6 +18402,18 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       // existed (rule 608.2h).
       const of = resolveAmountRef(spec.of, ctx);
       if (of?.kind !== "object") return;
+      // A card no longer there can't be copied as one (The Animus's ruling:
+      // nothing happens); a permanent that left is read as it last existed.
+      if (spec.ofCard !== undefined && typeof spec.of === "number" && illegalSlot(spec.of, ctx)) return;
+      const ofCard = spec.ofCard === true || (spec.ofCard === "when-a-card" && !ctx.onBattlefield(of.object));
+      let until: Parameters<ResolutionContext["becomeCopy"]>[2]["until"];
+      if (typeof spec.until === "object") {
+        const tapped = resolveEffectTarget(spec.until.whileTapped, ctx);
+        if (tapped?.kind !== "object") return;
+        until = { whileTapped: tapped.object };
+      } else {
+        until = spec.until;
+      }
       let targets: readonly ObjectId[];
       if (spec.filter !== undefined) {
         targets = ctx
@@ -18390,8 +18426,8 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       }
       if (targets.length === 0) return;
       ctx.becomeCopy(targets, of.object, {
-        ...(spec.ofCard === true ? { ofCard: true } : {}),
-        ...(spec.until !== undefined ? { until: spec.until } : {}),
+        ...(ofCard ? { ofCard: true } : {}),
+        ...(until !== undefined ? { until } : {}),
         ...(spec.exceptions !== undefined ? { exceptions: spec.exceptions } : {}),
       });
       return;

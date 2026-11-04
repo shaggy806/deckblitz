@@ -8643,7 +8643,7 @@ export class Game {
       // A copy "until your next turn" (Taskmaster, Mercenary Mimic).
       if (
         object?.temporaryCopies !== undefined &&
-        this.endTemporaryCopies(object, (ends) => typeof ends === "object" && beginningFor.includes(ends.turnOf))
+        this.endTemporaryCopies(object, (ends) => typeof ends === "object" && "turnOf" in ends && beginningFor.includes(ends.turnOf))
       ) {
         invalidateComputedCache();
       }
@@ -9633,6 +9633,9 @@ export class Game {
       if (object.modifiers.some((m) => over(m.whileSource))) {
         object.modifiers = object.modifiers.filter((m) => !over(m.whileSource));
         expired.push(other);
+      }
+      if (this.endTemporaryCopies(object, (e) => typeof e === "object" && "whileSource" in e && over(e.whileSource))) {
+        invalidateComputedCache();
       }
       if (object.controlEffects?.some((e) => over(e.whileSource))) {
         const left = object.controlEffects.filter((e) => !over(e.whileSource));
@@ -28808,6 +28811,8 @@ export class Game {
         // The card played: the land on the battlefield, the spell on the stack.
         return this.triggerFilterOk(spec.filter, event.object, self);
       }
+      case "becomes-attached":
+        return event.type === "permanent-attached" && event.source === self.id && this.triggerFilterOk(spec.filter, event.target, self);
       case "becomes-unattached":
         // Its own leaving while attached is becoming unattached too (as it
         // last existed — 603.10a).
@@ -29451,6 +29456,10 @@ export class Game {
    * an intervening-if is asked about as the ability triggers (rule 603.4) —
    * the same object it's asked about again on resolution. */
   private eventTriggerObject(trigger: TriggerSpec, event: GameEvent): ObjectId | undefined {
+    // "That creature": what the Equipment is now attached to.
+    if (trigger.on === "becomes-attached") {
+      return event.type === "permanent-attached" ? event.target : undefined;
+    }
     // "That permanent": what the Equipment was attached to.
     if (trigger.on === "becomes-unattached") {
       return event.type === "permanent-unattached"
@@ -31707,14 +31716,31 @@ export class Game {
         }
         return names.size;
       },
-      becomeCopy: (targets, of, opts) =>
-        this.becomeCopy(
-          targets,
-          of,
-          opts,
-          controller,
-          opts.ofCard === true ? undefined : lastKnownOf({ kind: "object", object: of }),
-        ),
+      becomeCopy: (targets, of, opts) => {
+        // A copy for as long as a condition holds: `null`, it doesn't begin
+        // (rule 611.2b). The source in the stint the ability refers to.
+        const endsFor = (id: ObjectId): CopyEnds | null | undefined => {
+          const until = opts.until;
+          if (until === undefined) return undefined;
+          if (until === "your-next-turn") return { turnOf: controller };
+          if (until === "end-of-turn" || until === "next-end-step") return until;
+          const named = typeof until === "object" ? this.state.objects[until.whileTapped] : this.state.objects[source];
+          const stint = named?.zoneChangeCount ?? 0;
+          if (named?.zone !== "battlefield") return null;
+          if (typeof until === "object") {
+            if (!named.tapped) return null;
+            this.noteWhileSource(named.id);
+            return { whileSource: { id: named.id, zoneChangeCount: stint, tapped: true } };
+          }
+          if (refs.source !== undefined && refs.source !== stint) return null;
+          if (until === "while-source-attached" && named.attachedTo !== id) return null;
+          this.noteWhileSource(source);
+          return {
+            whileSource: { id: source, zoneChangeCount: stint, ...(until === "while-source-attached" ? { attachedTo: id } : {}) },
+          };
+        };
+        this.becomeCopy(targets, of, opts.ofCard === true, opts.exceptions, endsFor, opts.ofCard === true ? undefined : lastKnownOf({ kind: "object", object: of }));
+      },
       attackRandomOpponent: (target, notAttackedLastCombat) =>
         this.attackRandomOpponent(controller, target, notAttackedLastCombat),
       pickAtRandom: (count, pick) => this.pickAtRandom(controller, source, count, pick),
@@ -39191,26 +39217,25 @@ export class Game {
   private becomeCopy(
     ids: readonly ObjectId[],
     ofId: ObjectId,
-    opts: {
-      readonly ofCard?: boolean;
-      readonly until?: "end-of-turn" | "next-end-step" | "your-next-turn";
-      readonly exceptions?: CopyExceptions;
-    },
-    controller: PlayerId,
+    ofCard: boolean,
+    exceptions: CopyExceptions | undefined,
+    /** When each one's copy ends — `undefined`, with the object; `null`, it
+     * doesn't begin at all. */
+    endsFor: (id: ObjectId) => CopyEnds | null | undefined,
     departed: LastKnownInfo | undefined,
   ): void {
-    const source = this.copiableValuesOf(ofId, opts.ofCard === true, departed);
+    const source = this.copiableValuesOf(ofId, ofCard, departed);
     if (source === undefined) return;
     const copied: PtModifier[] = [
       ...source.modifiers,
-      ...(opts.exceptions !== undefined ? [copyExceptionModifier(opts.exceptions, this.registry)] : []),
+      ...(exceptions !== undefined ? [copyExceptionModifier(exceptions, this.registry)] : []),
     ].map((m) => ({ ...m, timestamp: -2 }));
-    const ends: CopyEnds | undefined =
-      opts.until === undefined ? undefined : opts.until === "your-next-turn" ? { turnOf: controller } : opts.until;
     const changed: ObjectId[] = [];
     for (const id of ids) {
       const object = this.state.objects[id];
       if (object?.zone !== "battlefield") continue;
+      const ends = endsFor(id);
+      if (ends === null) continue;
       this.setCopiableValues(object, { copyOf: source.copyOf, modifiers: copied.map((m) => ({ ...m })) }, ends);
       changed.push(id);
     }
@@ -54552,6 +54577,9 @@ export class Game {
         object.modifiers = object.modifiers.filter((m) => !over(m.whileSource));
         expired.push(id);
       }
+      if (this.endTemporaryCopies(object, (e) => typeof e === "object" && "whileSource" in e && over(e.whileSource))) {
+        invalidateComputedCache();
+      }
       if (object.controlEffects?.some((e) => over(e.whileSource))) {
         const left = object.controlEffects.filter((e) => !over(e.whileSource));
         if (left.length > 0) object.controlEffects = left;
@@ -54628,6 +54656,11 @@ export class Game {
     }
     // "For as long as you control ~" ends as ~ changes hands (rule 611.2b).
     if (full.type === "control-changed") this.endWhileControlledEffects(full.object);
+    // "For as long as this Equipment remains attached to it" ends as it comes
+    // off (Blade of Shared Souls).
+    if (full.type === "permanent-unattached") {
+      this.endWhileSourceCondition(full.object, (w) => w.attachedTo === full.from);
+    }
     // A state trigger triggers as soon as its state is true (rule 603.8),
     // mid-resolution too: these are what change the states cards name.
     if (

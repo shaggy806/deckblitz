@@ -3,6 +3,13 @@
  "source": "Per-commander triage of every unimplemented top-commanders.txt entry (AI agents reading Oracle text + rulings against the engine), normalized onto one feature vocabulary. See neededCards-features.md, 'The commander gap'.",
  "built": [
   "effect:emblem-grants-activated",
+  "effect:become-copy-until-your-next-turn",
+  "effect:become-copy-while-source",
+  "effect:become-copy-while-target-tapped",
+  "effect:become-copy-of-card",
+  "effect:become-copy-of-sacrificed",
+  "effect:become-copy-of-chosen-permanent",
+  "trigger:becomes-attached",
   "effect:goad-extensions",
   "effect:goad-while-controlled-by-player",
   "effect:goad-while-counter",

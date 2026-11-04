@@ -1775,8 +1775,15 @@ export interface CopyValues {
 /** When a copy effect with a duration ends: in the cleanup step ("until end
  * of turn", rule 514.2), as the next end step begins ("until the next end
  * step"), or as `turnOf`'s next turn begins ("until your next turn" — or as
- * it would have, once they've left the game, rule 800.4m). */
-export type CopyEnds = "end-of-turn" | "next-end-step" | { readonly turnOf: PlayerId };
+ * it would have, once they've left the game, rule 800.4m); or, with
+ * `whileSource`, as a "for as long as" stops being true (rule 611.2b): a
+ * permanent leaving (Secret Invasion), untapping (Zygon Infiltrator), or
+ * coming off what it was attached to (Blade of Shared Souls). */
+export type CopyEnds =
+  | "end-of-turn"
+  | "next-end-step"
+  | { readonly turnOf: PlayerId }
+  | { readonly whileSource: WhileSource };
 
 /** One of `GameObject.temporaryCopies`: the values that copy effect gives it,
  * and when it ends. */

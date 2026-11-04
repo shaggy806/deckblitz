@@ -2075,6 +2075,11 @@ export function parseTrigger(clause) {
   }
   if (c === "Whenever you activate an exhaust ability") return [{ on: "activates-ability", who: "you", exhaust: true }];
   if (c === "Whenever you activate a power-up ability") return [{ on: "activates-ability", who: "you", powerUp: true }];
+  // "Whenever this Equipment becomes attached to a creature" (Blade of Shared
+  // Souls): "that creature" the trigger object.
+  if (c === "Whenever ~ becomes attached to a creature") {
+    return [{ on: "becomes-attached", who: "self", filter: { type: "creature" } }];
+  }
   // "Whenever you put one or more counters on a creature you don't control"
   // (Kros, Defense Contractor): "that creature" the trigger object.
   if (c === "Whenever you put one or more counters on a creature you don't control") {
@@ -7669,6 +7674,61 @@ export function parseEffect(text, outer) {
           text: word[0].toUpperCase() + word.slice(1),
           effect: { kind: "grant-keyword-all", filter, keyword: word.replace(" ", "-"), duration: "end-of-turn" },
         })),
+      },
+      todo: [],
+      hints: [],
+    };
+  }
+  // A copy for a duration read as a condition (rule 611.2b): Zygon Infiltrator's
+  // "for as long as that creature remains tapped".
+  if (/^Tap another target creature and put a stun counter on it\. ~ becomes a copy of that creature for as long as that creature remains tapped\.$/i.test(text)) {
+    const target = ctx.target({ kind: "other", of: "creature" });
+    return {
+      effect: {
+        kind: "sequence",
+        effects: [
+          { kind: "tap", target },
+          { kind: "add-counter", target, counter: "stun", amount: 1 },
+          { kind: "become-copy", target: "source", of: target, until: { whileTapped: target } },
+        ],
+      },
+      todo: [],
+      hints: [],
+    };
+  }
+  // "Choose a nonlegendary creature on the battlefield. Target creature becomes
+  // a copy of that creature until end of turn" (Cytoshape): chosen as it
+  // resolves, the target at slot 1 (`keepTargets`).
+  const chooseThenCopy = /^Choose a (nonlegendary )?creature on the battlefield\. Target creature becomes a copy of that creature until end of turn\.$/i.exec(text);
+  if (chooseThenCopy !== null) {
+    ctx.target("creature");
+    return {
+      effect: {
+        kind: "choose-permanents",
+        filter: chooseThenCopy[1] !== undefined ? { type: "creature", notSupertype: "legendary" } : { type: "creature" },
+        min: 1,
+        upTo: 1,
+        keepTargets: true,
+        then: { kind: "become-copy", target: 1, of: 0, until: "end-of-turn" },
+        prompt: `Choose a ${chooseThenCopy[1] ?? ""}creature on the battlefield.`,
+      },
+      todo: [],
+      hints: [],
+    };
+  }
+  // "For as long as this Equipment remains attached to it, you may have that
+  // creature become a copy of another target creature you control" (Blade of
+  // Shared Souls).
+  if (
+    outer.it === "trigger-object" &&
+    /^For as long as ~ remains attached to it, you may have that creature become a copy of another target creature you control\.$/i.test(text)
+  ) {
+    const of = ctx.target({ kind: "permanent", filter: { type: "creature", controlledBy: "you", not: { attachments: { filter: { isSource: true } } } } });
+    return {
+      effect: {
+        kind: "may",
+        prompt: "Have that creature become a copy of the target creature for as long as this Equipment remains attached to it?",
+        effect: { kind: "become-copy", target: "trigger-object", of, until: "while-source-attached" },
       },
       todo: [],
       hints: [],
@@ -14730,6 +14790,8 @@ function itOf(triggers) {
   if (triggers.every((t) => t.on === "deals-damage" && t.to === "creature")) return "trigger-recipient";
   // "That creature": the one it blocks or that blocks it.
   if (triggers.every((t) => (t.on === "blocks" && t.object === "blocked") || t.on === "blocked-by")) return "trigger-object";
+  // "That creature" this Equipment became attached to (Blade of Shared Souls).
+  if (triggers.every((t) => t.on === "becomes-attached")) return "trigger-object";
   // "That creature" a counter went on (Kros, Defense Contractor).
   if (triggers.every((t) => t.on === "counters-put" && t.byYou === true && t.who === "any")) return "trigger-object";
   // "Whenever Ma Chao attacks alone, it …".
