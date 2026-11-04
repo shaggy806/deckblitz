@@ -5098,3 +5098,5 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 **You may roll again (2026-11-04).** `effect:roll-again`: a `roll-dice` table row's `mayRollAgain` (rule 706.3c), a `may` of the same roll after the row, with the number of dice held; `effect-worth` reads a roll as its rows' average, so a bot rolls again for tokens. Delina, Wild Mage.
 
 **A CDA over devotion (2026-11-04).** `bug:cda-devotion`, no engine code: `setBasePtFromCount` reads `{ devotionTo }` in every zone already (Tymaret's shape). Daxos, Blessed by the Sun.
+
+**Each opponent chooses fame or fortune (2026-11-04).** `effect:fame-or-fortune`, no engine code: a `vote` with `choose` over named options, `for-each-vote` per option, and `choose-permanents` of `controlledByPlayer: "that-player"` for what isn't targeted. Seize the Spotlight.
