@@ -10,7 +10,8 @@ import { ScriptedController } from "../controller.js";
 import type { EffectSpec } from "../effects.js";
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
-import { A, cast, keywords, lands, named, nextTurn, spawn, table, toGraveyard, toHand, toLibrary, tokensNamed } from "./harness.js";
+import type { TargetRef } from "../target.js";
+import { A, B, cast, keywords, lands, named, nextTurn, ref, spawn, table, toGraveyard, toHand, toLibrary, tokensNamed } from "./harness.js";
 
 const ELF = "Elf Warrior Token";
 const ROBOT = "Robot Warrior Token";
@@ -140,6 +141,67 @@ describe("a delayed trigger about the tokens made this way", () => {
     nextTurn(game);
     nextTurn(game, "draw");
     expect(tokensNamed(game, "3/1 Red Elemental Token", A)).toBe(1);
+  });
+});
+
+describe("token copies", () => {
+  /** Alice's tokens `has` says yes to, a stack as every token in it. */
+  const copiesWhere = (game: Game, has: (id: ObjectId) => boolean): number =>
+    game.battlefield
+      .filter((id) => game.state.objects[id].isToken && game.state.objects[id].controller === A && has(id))
+      .reduce((n, id) => n + (game.state.objects[id].stackCount ?? 1), 0);
+  /** Applied Geometry's copy, with nothing read after it. */
+  const fractal = (bears: ObjectId): [EffectSpec, TargetRef[]] => [
+    { kind: "create-token-copy", of: 0, count: 1, who: "you", exceptions: { basePt: [0, 0], addTypes: ["creature"], addSubtypes: ["Fractal"] } },
+    [ref(bears)],
+  ];
+
+  it("folds an older identical copy with a new one when nothing reads the new one", () => {
+    // What the next test stands on: without it, that one passes for nothing.
+    const { game } = table();
+    spawn(game, "Glorious Anthem");
+    const bears = spawn(game, "Grizzly Bears");
+    game.debugApplyEffect(A, ...fractal(bears));
+    game.debugApplyEffect(A, ...fractal(bears));
+    expect(game.battlefield.filter((id) => game.state.objects[id].isToken)).toHaveLength(1);
+    expect(copiesWhere(game, () => true)).toBe(2);
+  });
+
+  it("Applied Geometry's counters go on the copy it made, not an older identical one", () => {
+    const { game } = table();
+    spawn(game, "Glorious Anthem"); // keeps the older 0/0 alive
+    const bears = spawn(game, "Grizzly Bears");
+    game.debugApplyEffect(A, ...fractal(bears));
+    lands(game, "Forest", 2);
+    lands(game, "Island", 2);
+    cast(game, toHand(game, "Applied Geometry"), { targets: [ref(bears)] });
+    expect(copiesWhere(game, () => true)).toBe(2);
+    expect(copiesWhere(game, (id) => (game.state.objects[id].counters["+1/+1"] ?? 0) === 6)).toBe(1);
+    expect(copiesWhere(game, (id) => (game.state.objects[id].counters["+1/+1"] ?? 0) === 0)).toBe(1);
+  });
+
+  it("Hate Mirage's haste reaches the copy it made: an end-step copy never folds", () => {
+    const { game } = table();
+    const bears = spawn(game, "Grizzly Bears", B);
+    game.debugApplyEffect(A, { kind: "create-token-copy", of: 0, count: 1, who: "you", exileAtEndStep: true }, [ref(bears)]);
+    lands(game, "Mountain", 4);
+    cast(game, toHand(game, "Hate Mirage"), { targets: [ref(bears), null] });
+    expect(copiesWhere(game, () => true)).toBe(2);
+    expect(copiesWhere(game, (id) => keywords(game, id).has("haste"))).toBe(1);
+  });
+});
+
+describe("a token from an earlier turn", () => {
+  it("never folds with a new one: the turn it entered is part of the fold key", () => {
+    const { game } = table();
+    older(game, ROBOT);
+    nextTurn(game);
+    nextTurn(game);
+    older(game, ROBOT);
+    expect(named(game, ROBOT, A)).toHaveLength(2);
+    nextTurn(game);
+    nextTurn(game);
+    expect(named(game, ROBOT, A)).toHaveLength(2);
   });
 });
 
