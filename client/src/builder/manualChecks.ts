@@ -10944,6 +10944,7 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     board({
       you: { bf: ['Forest*6'], hand: ['Awakening of Vitu-Ghazi'] },
     }),
+  ),
   preset(
     'The Soul Stone: harnessed, it returns a creature each upkeep',
     board({ you: { bf: ['The Soul Stone', 'Grizzly Bears', 'Swamp*7'], gy: ['Hill Giant'] } }),
