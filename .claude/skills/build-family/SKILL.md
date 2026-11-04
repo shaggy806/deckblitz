@@ -385,6 +385,17 @@ in its own worktree (`isolation: "worktree"`), integrated by cherry-pick.
   subshells. Most pick conflicts are mechanical (the `built` array, `neededCards-features.md`, one
   long line of `engine.md`), so a small helper script for those saves a lot of context. After a
   merge, run Playwright once: verify doesn't, and client work from several agents has only met there.
+- **Measured on 2026-11-03 (the user's settings from then on):** local agents only, no cloud
+  sessions: they keep re-verifying as `main` moves. **Verify alongside the builds, every 4-6
+  families.** 15 families that way took about 13 minutes a family; 12 with one verify at the end took
+  about 18, because a verify overlaps the agents' work and an end-of-run one overlaps nothing. **Four
+  agents at once**, a trial: three have been the norm, and agent time is what sets the pace (engine
+  pairs 32-52 minutes, client pairs 68-73). **Playwright once a round, by the coordinator**, also a
+  trial: tell client agents to rely on `run-check` and skip `test:e2e`, which cost each about 18
+  minutes. Say in the report what the trial changed, and use `--full` at least once a night: verify
+  counts card batches, so a run of families alone stays quick and skips the plain fuzzer.
+- **`pick.sh <commit>...`, beside this file,** picks agent commits and resolves the routine
+  conflicts by keeping both sides (`pickfix.py`). Its header says what to check afterwards.
 - **Clean up** each worktree: unlink every junction by absolute path
   (`[IO.Directory]::Delete("<path>", $false)`), sweep for any other
   (`Get-ChildItem -Recurse -Attributes ReparsePoint`), confirm none is left,
