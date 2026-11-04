@@ -1561,6 +1561,11 @@ export function specSide(spec: TargetSpec): SpecSide {
       case "other":
       case "any-number":
         return specSide(spec.of);
+      case "one-of": {
+        // Parts on one side are that side's; a mix could be either's.
+        const sides = new Set(spec.of.map(specSide));
+        return sides.size === 1 ? spec.of.map(specSide)[0] : "any";
+      }
       case "permanent":
         // A seat-bound slot (Dismantling Wave): seat 0 is you, the rest
         // opponents.
@@ -1579,7 +1584,11 @@ export function specSide(spec: TargetSpec): SpecSide {
       case "spell-or-permanent":
         return spec.whose === "you" ? "you" : spec.whose === "opponent" ? "opponent" : "any";
       case "card-in-exile":
-        return spec.whose === "you" ? "you" : spec.whose === "opponent" ? "opponent" : "any";
+        return spec.whose === "you"
+          ? "you"
+          : spec.whose === "opponent" || spec.whose === "trigger-player"
+            ? "opponent"
+            : "any";
       case "card-in-graveyard":
         if (typeof spec.whose === "object") return spec.whose.seat === 0 ? "you" : "opponent";
         return spec.whose === "you"

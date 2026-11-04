@@ -321,6 +321,25 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### One target slot over several kinds of object, and exiled cards as targets — built 2026-11-03
+
+The need-keys family `effect:target-spec-additions`' next two groups, features
+and proving cards. New target spec **`one-of`** (`of: TargetSpec[]`, legal when
+any part accepts, candidates each part's, an object two accept once): spell or
+creature (Unsubstantiate), abilities and a filtered spell (Tale's End), a
+graveyard or exile (Sorceress's Schemes), and Daretti's and Shivan Sand-Mage's
+slots. `SpellTargetsFilter`'s `player` with `permanent` now reads as either:
+"that targets you or a creature you control" (Siren Stormtamer). `card-in-exile`
+gains `whose: "trigger-player"` (Time Reaper) and `thisWay: "exiled"` on a
+reflexive ability's slot, fixed to `among` as it triggers, since it chooses
+targets after the resolution is done (rule 603.12 — Espers to Magicite).
+`shuffle-into-library` takes a card from exile (Riftsweeper). Voidslime and Not
+of This World needed only the record corrected. Keys:
+effect:target-spell-or-ability, effect:target-spell-or-creature,
+effect:target-card-in-exile, effect:target-card-exiled-this-way,
+target:card-in-graveyard-or-permanent, target:stack-spell-filter,
+target:card-exiled-with-source.
+
 ### Hexproof from abilities, and a "can't be the target" that isn't hexproof — built 2026-11-03
 
 `keyword:hexproof-from-abilities`: Volatile Stormdrake's keyword is `hexproofFrom: { abilitiesOnly: true }` (lost with

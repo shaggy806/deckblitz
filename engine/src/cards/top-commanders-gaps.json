@@ -2,6 +2,13 @@
  "generated": "2026-09-22",
  "source": "Per-commander triage of every unimplemented top-commanders.txt entry (AI agents reading Oracle text + rulings against the engine), normalized onto one feature vocabulary. See neededCards-features.md, 'The commander gap'.",
  "built": [
+  "effect:target-spell-or-ability",
+  "effect:target-spell-or-creature",
+  "effect:target-card-in-exile",
+  "effect:target-card-exiled-this-way",
+  "target:card-in-graveyard-or-permanent",
+  "target:stack-spell-filter",
+  "target:card-exiled-with-source",
   "keyword:multiple-typecycling",
   "cost:flashback-discard-cost",
   "cost:flashback-tap-creatures-cost",

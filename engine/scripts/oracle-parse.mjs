@@ -4648,6 +4648,34 @@ export function parseSentence(sentence, ctx) {
       };
     }
   }
+  // One slot over a spell or a creature (`one-of`), one over a graveyard or
+  // exile: of the returns, only the one from the zone it's in does anything.
+  if (re("return target spell or creature to its owner's hand").test(s)) {
+    const target = ctx.target({ kind: "one-of", of: ["spell", "creature"] });
+    return {
+      kind: "sequence",
+      effects: [{ kind: "return-to-hand", target, from: "stack" }, { kind: "return-to-hand", target }],
+    };
+  }
+  if ((m = re("return target (.+?) card from your graveyard or exiled card with flashback you own to your hand").exec(s))) {
+    const filter = parseTypePhrase(m[1], { cards: true });
+    if (filter !== null) {
+      const target = ctx.target({
+        kind: "one-of",
+        of: [
+          { kind: "card-in-graveyard", whose: "you", filter },
+          { kind: "card-in-exile", whose: "you", filter: { hasFlashback: true } },
+        ],
+      });
+      return {
+        kind: "sequence",
+        effects: [
+          { kind: "return-to-hand", target, from: "graveyard" },
+          { kind: "return-to-hand", target, from: "exile" },
+        ],
+      };
+    }
+  }
   if ((m = re(`return (${TARGET}) to its owner's hand`).exec(s))) {
     // A spell is on the stack: "return target spell to its owner's hand"
     // (Unsubstantiate, Take It Back) takes it from there. Without `from`,
@@ -10365,6 +10393,26 @@ function counterAbilityAt(sentences, i, ctx) {
       },
       used: 1,
     };
+  }
+  // A spell by a filter, and abilities: one slot, each with its own (`one-of`).
+  const withSpell = /^counter target (activated ability, triggered ability|triggered ability), or ([a-z]+) spell\.$/i.exec(sentences[i]);
+  const spellFilter = withSpell === null ? null : parseTypePhrase(withSpell[2]);
+  if (withSpell !== null && spellFilter !== null) {
+    const ability = /^activated/i.test(withSpell[1]) ? { kind: "ability" } : { kind: "ability", abilityKind: "triggered" };
+    const target = ctx.target({ kind: "one-of", of: [ability, { kind: "spell", filter: spellFilter }] });
+    return { effect: { kind: "counter", target }, used: 1 };
+  }
+  // "… that targets you or a creature you control" (Siren Stormtamer).
+  const aimed = /^counter target spell or ability that targets (you or )?an? (creature|permanent) you control\.$/i.exec(sentences[i]);
+  if (aimed !== null) {
+    const permanent = aimed[2].toLowerCase() === "creature" ? { type: "creature", controlledBy: "you" } : { controlledBy: "you" };
+    const target = ctx.target({
+      kind: "stack",
+      spells: "any",
+      abilities: true,
+      targeting: { ...(aimed[1] !== undefined ? { player: "you" } : {}), permanent },
+    });
+    return { effect: { kind: "counter", target }, used: 1 };
   }
   const m = /^counter target (spell, activated ability, or triggered ability|activated or triggered ability|activated ability|triggered ability)( you don't control)?(?: from an? ([a-z]+)(?: or ([a-z]+))? source)?( and destroy that (?:artifact|enchantment) if it's on the battlefield)?\.$/i.exec(sentences[i]);
   if (m === null) return null;

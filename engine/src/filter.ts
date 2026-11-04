@@ -1272,7 +1272,9 @@ export interface SpellTargetsFilter {
   readonly source?: boolean;
   /** A target is a player: `"you"`, the filter's side — "a spell that
    * targets you" (Dawn Charm); `"opponent"`, one of the filter's side's
-   * opponents — "a spell that targets an opponent" (Danitha, Spear of Agony). */
+   * opponents — "a spell that targets an opponent" (Danitha, Spear of Agony).
+   * With `permanent`, a target may be either: "a spell or ability that targets
+   * **you or a creature you control**" (Siren Stormtamer). */
   readonly player?: "you" | "opponent" | "any";
 }
 
@@ -1330,10 +1332,11 @@ export function stackObjectTargetsMatch(
   const suchAOne = (t: (typeof targets)[number]): boolean => {
     if (t.kind === "gone") return false;
     if (t.kind === "player") {
-      if (clause.player === undefined || clause.permanent !== undefined || clause.source === true) return false;
+      if (clause.player === undefined || clause.source === true) return false;
       return clause.player === "any" || (t.player === ctx.you) === (clause.player === "you");
     }
-    if (clause.player !== undefined) return false;
+    // `player` alone is about a player; with `permanent`, either will do.
+    if (clause.player !== undefined && clause.permanent === undefined) return false;
     const object = state.objects[t.object];
     if (object === undefined || object.zone !== "battlefield") return false;
     if (clause.source !== undefined && (t.object === ctx.source) !== clause.source) return false;

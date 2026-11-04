@@ -23247,6 +23247,16 @@ export class Game {
     this.prepareForPriority(player);
   }
 
+  /** A reflexive ability's slot over "cards exiled this way" (Espers to
+   * Magicite), fixed to the cards the resolution exiled while it's still under
+   * way: the ability chooses its targets after it has finished (rule 603.12). */
+  private bindExiledThisWay(spec: TargetSpec): TargetSpec {
+    if (typeof spec !== "object") return spec;
+    if (spec.kind === "optional") return { ...spec, of: this.bindExiledThisWay(spec.of) };
+    if (spec.kind !== "card-in-exile" || spec.thisWay === undefined) return spec;
+    return { ...spec, among: thisWayEntries(this.state, spec.thisWay).map((entry) => entry.object) };
+  }
+
   // --- mana ------------------------------------------------------
 
   /**
@@ -32309,7 +32319,12 @@ export class Game {
                 ...(triggerObject !== undefined ? { triggerObject } : {}),
                 ...(Object.keys(refs).length > 0 ? { lastKnownRefs: refs } : {}),
               }),
-          reflexive: { targets: [...specs], effect, text, ...(divided !== undefined ? { divided } : {}) },
+          reflexive: {
+            targets: specs.map((spec) => this.bindExiledThisWay(spec)),
+            effect,
+            text,
+            ...(divided !== undefined ? { divided } : {}),
+          },
         });
       },
       returnExiledBySource: (linked, options) => {
@@ -32596,8 +32611,11 @@ export class Game {
           return;
         }
         // A permanent, or a card in a graveyard: Worldspine Wurm's "shuffle
-        // it into its owner's library" as it's put there.
-        if (object === undefined || (object.zone !== "battlefield" && object.zone !== "graveyard")) return;
+        // it into its owner's library" as it's put there. Or a card in exile:
+        // Riftsweeper's "its owner shuffles it into their library".
+        if (object === undefined || (object.zone !== "battlefield" && object.zone !== "graveyard" && object.zone !== "exile")) {
+          return;
+        }
         // Its owner shuffles it into their library (rule 701.24a): put there,
         // then that library shuffled — even when a token ceased to exist on
         // the way or a replacement sent it elsewhere (Chaos Warp's ruling).

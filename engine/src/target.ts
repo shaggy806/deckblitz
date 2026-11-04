@@ -227,10 +227,23 @@ export type TargetSpec =
    */
   | {
       readonly kind: "card-in-exile";
-      readonly whose?: "any" | "you" | "opponent";
+      /** Its owner, as `card-in-graveyard` reads it: `"trigger-player"` is
+       * "target face-up card **they own** in exile" of a trigger naming a
+       * player (Time Reaper). */
+      readonly whose?: "any" | "you" | "opponent" | "trigger-player";
       readonly linked?: true;
       readonly faceUp?: true;
       readonly filter?: CardFilter;
+      /**
+       * On a `reflexive-trigger`'s slot: "when you do, choose up to one target
+       * creature card **exiled this way**" (Espers to Magicite). The cards a
+       * resolution exiled are known only while it resolves and the reflexive
+       * ability chooses its targets after it's done (rule 603.12), so they're
+       * read as it triggers and the slot is rewritten with `among`.
+       */
+      readonly thisWay?: "exiled";
+      /** Never authored: the cards `thisWay` named as the ability triggered. */
+      readonly among?: readonly ObjectId[];
     }
   /**
    * A spell on the stack matching a filter — Red Elemental Blast's "counter
@@ -322,6 +335,20 @@ export type TargetSpec =
    * which is what an effect reading `ctx.targets[i]` already checks for.
    */
   | { readonly kind: "optional"; readonly of: TargetSpec }
+  /**
+   * One slot over several kinds of object, each part with its own filter and
+   * zone — "return target **spell or creature** to its owner's hand"
+   * (Unsubstantiate), "target instant or sorcery card **from your graveyard or
+   * exiled card with flashback you own**" (Sorceress's Schemes), "target
+   * artifact card **in a graveyard or artifact on the battlefield**" (Daretti,
+   * Ingenious Iconoclast), "target permanent **or suspended card**" (Shivan
+   * Sand-Mage). A target is legal when any part accepts it. A part is a plain
+   * spec: `optional`, `other` and `any-number` wrap the whole slot, not a part.
+   * An effect on such a slot says what happens in each zone, as with
+   * `spell-or-permanent`: a `sequence` of a return from each zone, of which
+   * only the one from the zone the target is in does anything.
+   */
+  | { readonly kind: "one-of"; readonly of: readonly TargetSpec[] }
   /**
    * "**another** target …" / "target … **other than** …": whatever `of`
    * accepts, less one object or player — see {@link OtherThan}. Ezuri, Claw
@@ -1228,6 +1255,7 @@ export function describeTargetSpec(spec: TargetSpec | string): string {
   // A named spec reads as words: "any target", "creature you control".
   if (typeof spec === "string") return spec.replace(/-/g, " ");
   if (spec.kind === "optional") return `${describeTargetSpec(spec.of)} (optional)`;
+  if (spec.kind === "one-of") return spec.of.map((part) => describeTargetSpec(part)).join(" or ");
   if (spec.kind === "any-number") {
     // Fireball's "any number of targets", not "any number of any target".
     const many =

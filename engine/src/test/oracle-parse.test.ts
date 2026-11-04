@@ -12275,6 +12275,54 @@ describe("offering", () => {
   });
 });
 
+describe("one target slot over several kinds of object", () => {
+  const spell = (oracle_text: string) => parseFace({ name: "Card", type_line: "Instant", oracle_text });
+  it("reads a spell or creature returned to its owner's hand, a return from each zone", () => {
+    const face = spell("Return target spell or creature to its owner's hand.");
+    expect(face.complete).toBe(true);
+    expect(face.targets).toEqual([{ kind: "one-of", of: ["spell", "creature"] }]);
+    expect(face.effect).toEqual({
+      kind: "sequence",
+      effects: [{ kind: "return-to-hand", target: 0, from: "stack" }, { kind: "return-to-hand", target: 0 }],
+    });
+  });
+  it("reads a card from your graveyard or an exiled card with flashback", () => {
+    const face = spell(
+      "Return target instant or sorcery card from your graveyard or exiled card with flashback you own to your hand.",
+    );
+    expect(face.complete).toBe(true);
+    expect(face.targets).toEqual([
+      {
+        kind: "one-of",
+        of: [
+          { kind: "card-in-graveyard", whose: "you", filter: { typesAnyOf: ["instant", "sorcery"] } },
+          { kind: "card-in-exile", whose: "you", filter: { hasFlashback: true } },
+        ],
+      },
+    ]);
+  });
+  it("reads abilities and a filtered spell countered", () => {
+    const face = spell("Counter target activated ability, triggered ability, or legendary spell.");
+    expect(face.complete).toBe(true);
+    expect(face.targets).toEqual([
+      { kind: "one-of", of: [{ kind: "ability" }, { kind: "spell", filter: { supertype: "legendary" } }] },
+    ]);
+    expect(face.effect).toEqual({ kind: "counter", target: 0 });
+  });
+  it("reads a spell or ability that targets you or a creature you control countered", () => {
+    const face = spell("Counter target spell or ability that targets you or a creature you control.");
+    expect(face.complete).toBe(true);
+    expect(face.targets).toEqual([
+      {
+        kind: "stack",
+        spells: "any",
+        abilities: true,
+        targeting: { player: "you", permanent: { type: "creature", controlledBy: "you" } },
+      },
+    ]);
+  });
+});
+
 describe("a card in exile, targeted", () => {
   const spell = (oracle_text: string) => parseFace({ name: "Card", type_line: "Instant", oracle_text });
   it("reads a face-up exiled card put into its owner's graveyard", () => {

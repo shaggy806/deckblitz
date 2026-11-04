@@ -3604,8 +3604,21 @@ stopped covering:
   in **that player's** graveyard" is four `optional` slots, seats 0–3. `whose` defaults to `"any"`, and
 `filter` matches printed characteristics (layer effects don't reach a
 graveyard). `describeTargetSpec(spec)` renders any spec as a UI label.
-- `{ kind: "card-in-exile", whose?: "any" | "you" | "opponent", linked?: true, faceUp?: true, filter?: CardFilter }`
-  — a card in exile (rule 406), `whose` its owner: Pull from Eternity's
+- `{ kind: "one-of", of: TargetSpec[] }` — one slot over several kinds of
+  object, each part with its own filter and zone, legal when any part accepts:
+  Unsubstantiate's "target spell or creature" (`of: ["spell", "creature"]`),
+  Tale's End's "target activated ability, triggered ability, or legendary spell"
+  (`{ kind: "ability" }` and `{ kind: "spell", filter: { supertype: "legendary" } }`),
+  Sorceress's Schemes's "target instant or sorcery card from your graveyard or
+  exiled card with flashback you own". The effect says what happens in each zone:
+  a `sequence` of a `return-to-hand` from each, of which only the one from the
+  zone the target is in does anything. `optional` wraps the whole slot.
+- `{ kind: "card-in-exile", whose?: "any" | "you" | "opponent" | "trigger-player", linked?: true, faceUp?: true, filter?: CardFilter, thisWay?: "exiled" }`
+  — `"trigger-player"` is "target face-up card **they own** in exile" of a trigger
+  naming a player (Time Reaper). `thisWay` on a `reflexive-trigger`'s slot is
+  "when you do, choose up to one target creature card **exiled this way**"
+  (Espers to Magicite): fixed to what the resolution exiled as it triggers.
+  A card in exile (rule 406), `whose` its owner: Pull from Eternity's
   "target **face-up** exiled card" (`faceUp`), Runic Repetition's "target
   exiled card with flashback you own" (`whose: "you"`, `filter: { hasFlashback:
   true }`), Gelatinous Cube's "target creature card with mana value X **exiled

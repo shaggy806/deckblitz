@@ -99,6 +99,7 @@ export function targetSpecReadsX(spec: TargetSpec): boolean {
   if (spec.kind === "optional" || spec.kind === "other" || spec.kind === "any-number") {
     return targetSpecReadsX(spec.of);
   }
+  if (spec.kind === "one-of") return spec.of.some(targetSpecReadsX);
   if (spec.kind === "ability" || spec.kind === "stack" || spec.kind === "opponent-compared") return false;
   return spec.filter !== undefined && filterReadsX(spec.filter);
 }
@@ -561,6 +562,10 @@ function isLegalTargetUncached(
   if (typeof spec === "object" && (spec.kind === "optional" || spec.kind === "any-number")) {
     return isLegalTarget(state, registry, spec.of, ref, forPlayer, source, opts);
   }
+  // One slot over several kinds of object: whichever part accepts it.
+  if (typeof spec === "object" && spec.kind === "one-of") {
+    return spec.of.some((part) => isLegalTarget(state, registry, part, ref, forPlayer, source, opts));
+  }
   // "Another target …": the inner spec, less what it has to differ from.
   if (typeof spec === "object" && spec.kind === "other") {
     if (excludedAsOther(state, spec.than ?? "source", ref, source)) return false;
@@ -683,9 +688,15 @@ function isLegalTargetUncached(
     const whose = spec.whose ?? "any";
     if (whose === "you" && object.owner !== forPlayer) return false;
     if (whose === "opponent" && object.owner === forPlayer) return false;
+    if (whose === "trigger-player" && (source?.triggerPlayer === undefined || object.owner !== source.triggerPlayer)) {
+      return false;
+    }
     const faceDown = object.exiledFaceDown !== undefined;
     if (faceDown && (spec.faceUp === true || spec.filter !== undefined)) return false;
     if (spec.linked === true && !exiledWithTargetSource(state, object, source)) return false;
+    // `thisWay` is rewritten to `among` as the reflexive ability triggers.
+    if (spec.thisWay !== undefined && spec.among === undefined) return false;
+    if (spec.among !== undefined && !spec.among.includes(ref.object)) return false;
     return (
       spec.filter === undefined ||
       matchesFilter(state, registry, ref.object, spec.filter, targetFilterContext(forPlayer, source))
@@ -995,6 +1006,18 @@ function legalTargetsUncached(
   // "any number of target …" group offers what each member may be.
   if (typeof spec === "object" && (spec.kind === "optional" || spec.kind === "any-number")) {
     return legalTargets(state, registry, spec.of, forPlayer, source);
+  }
+  // Each part's candidates, an object two parts accept once.
+  if (typeof spec === "object" && spec.kind === "one-of") {
+    const seen = new Set<string>();
+    return spec.of.flatMap((part) =>
+      legalTargets(state, registry, part, forPlayer, source).filter((ref) => {
+        const key = ref.kind === "player" ? `p:${ref.player}` : `o:${ref.object}`;
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      }),
+    );
   }
   if (typeof spec === "object" && spec.kind === "other") {
     const than = spec.than ?? "source";
