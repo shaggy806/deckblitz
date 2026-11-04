@@ -686,6 +686,12 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "exile-spell-as-it-resolves": none,
   // A plotted card is its owner's to cast free: always one's own card.
   "become-plotted": (n, v) => v.touch(n.target, "help", MINOR),
+  // Its owner's to cast later, and never aimed: a card just exiled.
+  "become-foretold": none,
+  // A look at what an opponent's hiding, as `look-at-hand` is.
+  "look-at-face-down": (n, v) => {
+    if (n.target !== undefined) v.touch(n.target, "harm", MINOR);
+  },
   // Its `then` names the exiled cards, never a target.
   "collect-evidence": none,
   solve: none,

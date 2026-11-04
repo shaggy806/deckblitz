@@ -3098,14 +3098,31 @@ export class Game {
       if (object === undefined || !object.foretold || object.owner !== player) continue;
       const cardName = object.cardName;
       const def = this.registry.get(cardName);
-      const cost = object.foretoldCost ?? def.foretell?.cost ?? null;
-      if (cost === null) continue;
-      out.push(
-        ...this.castSpellActions(player, card, cardName, def, {
-          via: "foretell",
-          costString: cost,
-        }),
-      );
+      const printed = def.foretell?.cost ?? null;
+      if (printed !== null) {
+        out.push(
+          ...this.castSpellActions(player, card, cardName, def, {
+            via: "foretell",
+            costString: printed,
+          }),
+        );
+      }
+      // A cost it was given (702.143d): either face of a modal card, for that
+      // face's mana cost, never a land face (Dream Devourer's and Ethereal
+      // Valkyrie's rulings) — beside any printed one, which it may be cast for
+      // instead (Ethereal Valkyrie's), unless they're the same cost.
+      for (const face of this.modalFaces(card)) {
+        const faceDef = this.faceDef(card, face ?? 0);
+        const given = this.givenForetellCost(object, faceDef);
+        if (given === null || faceDef.types.includes("land") || given === printed) continue;
+        out.push(
+          ...this.castSpellActions(player, card, faceDef.name, faceDef, {
+            via: printed === null ? "foretell" : "foretell-given",
+            ...(face !== undefined ? { face } : {}),
+            costString: given,
+          }),
+        );
+      }
     }
 
     // Plot (rule 702.170d) — a card of this player's plotted on an earlier
@@ -5034,7 +5051,9 @@ export class Game {
           ? { altCostText: "jump-start, discarding a card" }
           : via === "retrace"
             ? { altCostText: "retrace, discarding a land card" }
-            : {}),
+            : via === "foretell-given"
+              ? { altCostText: `foretell, for the ${this.givenForetellCost(this.state.objects[card], def) ?? ""} it was given` }
+              : {}),
         ...(free ? { free: true } : {}),
         ...(harmonizeTap !== undefined
           ? {
@@ -10430,7 +10449,10 @@ export class Game {
         const since = this.state.eventSeq;
         if (this.moveObject(id, "exile")) {
           const object = this.state.objects[id];
-          object.exiledFaceDown = { lookers: [player], group: faceDownGroup };
+          object.exiledFaceDown =
+            awaiting.faceDownLooks === undefined
+              ? { lookers: [player], group: faceDownGroup }
+              : { lookers: awaiting.faceDownLooks === "chooser" ? [player] : [], group: faceDownGroup, lookersOnly: true };
           if (awaiting.exileLink !== undefined) object.exiledWith = awaiting.exileLink;
           // "You may play that card for as long as it remains exiled"
           // (Praetor's Grasp): a permission dies with any move, so after it.
@@ -14489,7 +14511,7 @@ export class Game {
       return `${player} does not have that card in hand`;
     }
     const def = this.registry.get(this.state.objects[cardId].cardName);
-    if (def.foretell === null && this.grantedForetellCost(this.state.objects[cardId]) === null) {
+    if (def.foretell === null && this.grantedForetellReduction(this.state.objects[cardId]) === null) {
       return `${def.name} does not have foretell`;
     }
     if (this.payMana(player, parseManaCost(Game.FORETELL_COST), undefined, undefined, FORETELL_PURPOSE) === null) {
@@ -14498,19 +14520,27 @@ export class Game {
     return null;
   }
 
-  /** The foretell cost a `grantsForetellInHand` static of a permanent its
-   * owner controls gives `card` in hand, or `null`: its mana cost less the
-   * reduction (rule 118.7a), and none for a card with no mana cost. */
-  private grantedForetellCost(card: GameObject): string | null {
-    const manaCost = this.registry.get(card.cardName).manaCost;
-    if (manaCost === null) return null;
+  /** How far a `grantsForetellInHand` static of a permanent its owner
+   * controls reduces the mana cost of `card` in hand for its foretell cost
+   * (`GameObject.foretoldReducedBy`), or `null`: none for a card with no mana
+   * cost. */
+  private grantedForetellReduction(card: GameObject): number | null {
+    if (this.registry.get(card.cardName).manaCost === null) return null;
     for (const { ability } of this.activeStaticsOf(card.owner, (a) => a.grantsForetellInHand !== undefined)) {
       const grant = ability.grantsForetellInHand!;
       if (matchesFilter(this.state, this.registry, card.id, grant.filter, { you: card.owner })) {
-        return withGenericReducedBy(manaCost, grant.reducedBy);
+        return grant.reducedBy;
       }
     }
     return null;
+  }
+
+  /** The foretell cost a foretold card was given (rule 702.143d), of the face
+   * `def` being cast: its mana cost less the reduction, generic mana only
+   * (rule 118.7a), and none for a face with no mana cost. */
+  private givenForetellCost(card: GameObject, def: CardDefinition): string | null {
+    if (card.foretoldReducedBy === undefined || def.manaCost === null) return null;
+    return withGenericReducedBy(def.manaCost, card.foretoldReducedBy);
   }
 
   private foretellCard(player: PlayerId, cardId: ObjectId): void {
@@ -14523,14 +14553,14 @@ export class Game {
 
     // Foretold through a grant, it keeps the cost the grant gave it, whatever
     // becomes of the grant (Dream Devourer). Read in the hand, where it's granted.
-    const grantedCost =
-      this.registry.get(object.cardName).foretell === null ? this.grantedForetellCost(object) : null;
+    const grantedReduction =
+      this.registry.get(object.cardName).foretell === null ? this.grantedForetellReduction(object) : null;
     const since = this.state.eventSeq;
     this.moveObject(cardId, "exile");
     this.executePayment(player, payment);
     object.foretold = true;
     object.foretoldOnTurn = this.state.turn.number;
-    if (grantedCost !== null) object.foretoldCost = grantedCost;
+    if (grantedReduction !== null) object.foretoldReducedBy = grantedReduction;
     // Face down in exile: nobody else knows what it is any more.
     this.forgetStints([cardId], since);
     this.emit({ type: "card-foretold", player, object: cardId });
@@ -16030,8 +16060,8 @@ export class Game {
           ? Game.AIRBEND_COST
         : via === "escape"
           ? (this.escapeOf(cardId, face, graveyardGrant)?.cost ?? null)
-          : via === "foretell"
-            ? (this.state.objects[cardId]?.foretoldCost ?? def.foretell?.cost ?? null)
+          : via === "foretell" || via === "foretell-given"
+            ? ((via === "foretell" ? def.foretell?.cost : undefined) ?? this.givenForetellCost(this.state.objects[cardId], def))
             : via === "warp"
               ? this.warpCostOfCaster(cardId, def, caster)
               : via === "blitz"
@@ -16451,9 +16481,10 @@ export class Game {
         const wrong = this.whyEscapeExileIsWrong(player, cardId, def.name, escape.exileCount, escapeExile);
         if (wrong !== null) return wrong;
       }
-    } else if (via === "foretell") {
+    } else if (via === "foretell" || via === "foretell-given") {
       const object = this.state.objects[cardId];
-      if ((def.foretell === null && object.foretoldCost === undefined) || !object.foretold) {
+      const printed = via === "foretell" && def.foretell !== null;
+      if ((!printed && this.givenForetellCost(object, def) === null) || !object.foretold) {
         return `${def.name} is not foretold`;
       }
       if (object.owner !== player || object.zone !== "exile") {
@@ -34346,9 +34377,9 @@ export class Game {
         const object = this.state.objects[card];
         return object?.zone === "exile" && (object.zoneChangeCount ?? 0) === zoneChangeCount ? [card] : [];
       },
-      cardsExiledThisWay: () =>
+      cardsExiledThisWay: (fromBattlefieldToo) =>
         thisWayEntries(this.state, "exiled", since)
-          .filter((e) => !e.departed)
+          .filter((e) => fromBattlefieldToo === true || !e.departed)
           .map((e) => e.object)
           .filter((id) => this.state.objects[id]?.zone === "exile"),
       cardsDrawnThisWay: () =>
@@ -34691,6 +34722,44 @@ export class Game {
         const object = this.state.objects[card];
         if (object?.zone !== "exile" || object.isToken || object.plottedOnTurn !== undefined) return;
         this.markPlotted(controller, card);
+      },
+      becomeForetold: (card, costReducedBy) => {
+        const object = this.state.objects[card];
+        if (object?.zone !== "exile" || object.isToken) return;
+        // A foretold card, not one foretold (702.143c-d): no `card-foretold`
+        // event, and from here its owner is who may look at it, whoever's
+        // effect this was.
+        const since = this.state.eventSeq;
+        object.exiledFaceDown = undefined;
+        object.foretold = true;
+        object.foretoldOnTurn = this.state.turn.number;
+        if (costReducedBy !== undefined) object.foretoldReducedBy = costReducedBy;
+        this.forgetStints([card], since);
+      },
+      lookAtFaceDown: (objects, controlledBy) => {
+        const ids = objects.filter((id) => {
+          const object = this.state.objects[id];
+          return (
+            object?.zone === "battlefield" &&
+            object.faceDown !== undefined &&
+            (controlledBy === undefined || object.controller === controlledBy) &&
+            // Their own they may look at any time (708.5).
+            object.controller !== controller
+          );
+        });
+        if (ids.length === 0) return;
+        this.state.awaiting = {
+          kind: "choose-from-zone",
+          player: controller,
+          prompt: `Looking at ${ids.length === 1 ? "a face-down creature" : "face-down creatures"}`,
+          ids,
+          eligible: [],
+          min: 0,
+          max: 0,
+          destination: "discard",
+          leftover: "stay",
+          looksAtFaceDown: true,
+        };
       },
       exileTriggerSpellAsItResolves: (returnAtNextEndStep, plotted) => {
         // "That card" — the spell that fired this, still that spell on the
@@ -35513,6 +35582,7 @@ export class Game {
           split,
           more?.anOpponent === true,
           more?.underOwners === true,
+          more?.faceDownLooks,
         );
       },
     };
@@ -35582,6 +35652,8 @@ export class Game {
     /** A linked card "returned": under its owner's control, not the
      * chooser's — see `look-and-choose`'s `under`. */
     underOwners = false,
+    /** See `look-and-choose`'s `faceDownLooks`. */
+    faceDownLooks?: "chooser" | "nobody",
   ): void {
     // The exile zone (a processor, Oblivion Sower): only what may be
     // chosen is shown — the cards `player` owns when someone else is
@@ -35750,6 +35822,7 @@ export class Game {
       ...(leftoverIf !== undefined ? { leftoverIf } : {}),
       ...(secondPick !== undefined ? { secondPick } : {}),
       ...(exileLink !== undefined ? { exileLink } : {}),
+      ...(faceDownLooks !== undefined ? { faceDownLooks } : {}),
       // "You may play the exiled card this turn" (Florian, Voldaren Scion).
       ...(impulseGrant !== undefined && (destination === "exile" || destination === "exile-face-down")
         ? { impulseGrant }
@@ -52897,7 +52970,7 @@ export class Game {
     // Snapcaster grant, a suspend / foretell exile state.
     object.grantedFlashback = null;
     delete object.grantedGraveyardKeywords;
-    delete object.foretoldCost;
+    delete object.foretoldReducedBy;
     object.suspended = false;
     if (!enteringToken) object.exileAtEndStep = false;
     object.foretold = false;

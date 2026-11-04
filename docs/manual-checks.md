@@ -6992,3 +6992,22 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 - **Do:** Activate Soulfire Grand Master's ability. Cast Lightning Bolt at Carol, pass, and choose "Apply Soulfire Grand Master's replacement first: put it into your hand".
 - **Expect:** Only you are asked, while the other players wait. Carol loses 3 life and Lightning Bolt is back in your hand.
+### Smoke Teller: a look at a face-down creature, then it is hidden again
+
+- **Do:** Cast Cyber Conversion on Bob's Grizzly Bears. Then click Smoke Teller, use its ability and pick that creature.
+- **Expect:** A popup says "Looking at a face-down creature" and names it Grizzly Bears, with a Done button. After Done, the creature on Bob's side is a plain face-down creature again.
+
+### Smoke Teller: four players, the look is yours alone
+
+- **Do:** Cast Cyber Conversion on Bob's Grizzly Bears, then use Smoke Teller's ability on it and press Done.
+- **Expect:** The popup names Grizzly Bears for you. The log says nothing of what it is, and the creature stays unnamed on the board.
+
+### Gustha's Scepter: the exiled card is yours to see and no one else's
+
+- **Do:** Tap Gustha's Scepter with its first ability and exile Grizzly Bears from your hand. Open the exile pile.
+- **Expect:** You see Grizzly Bears in exile. Switch to Bob: his view of exile doesn't show it. On your next turn its second ability brings it back to your hand.
+
+### Ethereal Valkyrie: a card with its own foretell cost has two
+
+- **Do:** Cast Ethereal Valkyrie and exile Poison the Cup when asked. Pass to your next turn and open the exile pile.
+- **Expect:** Poison the Cup is there, and clicking it offers "foretell" and "foretell, for the {B}{B} it was given". The second taps two Swamps, and you scry as it resolves.

@@ -425,7 +425,7 @@ describe("grantsForetellInHand", () => {
     destroy(game, devourer);
     nextTurn(game);
     nextTurn(game);
-    expect(game.state.objects[giant].foretoldCost).toBe("{1}{R}");
+    expect(game.state.objects[giant].foretoldReducedBy).toBe(2);
     expect(castOffers(game, giant, "foretell").length).toBeGreaterThan(0);
     cast(game, giant, { via: "foretell" });
     expect(zone(game, giant)).toBe("battlefield");
@@ -444,7 +444,7 @@ describe("grantsForetellInHand", () => {
     const printed = toHand(game, "Doomskar");
     game.dispatch({ type: "foretell", player: A, card: printed });
     settle(game);
-    expect(game.state.objects[printed].foretoldCost).toBeUndefined();
+    expect(game.state.objects[printed].foretoldReducedBy).toBeUndefined();
   });
 });
 

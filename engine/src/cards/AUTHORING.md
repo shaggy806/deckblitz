@@ -1820,6 +1820,35 @@ exile or a token does nothing. "Exile target spell. It becomes plotted" (Aven In
 enters trigger) is an `exile` of the spell (it leaves the stack uncountered) then a
 `become-plotted` of the same slot.
 
+`become-foretold { target, costReducedBy? }` is "it becomes foretold" (rule 702.143d): a card an
+instruction just exiled is a foretold card, face down, its owner's to look at and to cast for any
+foretell cost it has after this turn, even with the source gone or under another's control. Not
+foretelling it: `card-foretold` isn't emitted. `target` is the `then` of an exiling
+`look-and-choose`'s target 0 (Ethereal Valkyrie: `zone: "hand"`, `destination: "exile-face-down"`,
+`unlinked`), or `"exiled-this-way"` after an `exile` (The Foretold Soldier's "exile it face down").
+`costReducedBy: 2` is "its foretell cost is its mana cost reduced by {2}", generic mana only, on the
+mana cost of the face cast, a land face never: a card that has its own foretell cost has both
+(`via: "foretell"` the printed, `via: "foretell-given"` this, offered unless they're equal). No
+mana cost, no cost given. Dream Devourer's `grantsForetellInHand` gives one the same way
+(`GameObject.foretoldReducedBy`).
+
+**A card from a hand, face down**: a `look-and-choose` with `zone: "hand"`, `destination:
+"exile-face-down"`, `leftover: "stay"`, linked to the source (rule 607.2a). **`faceDownLooks`** says
+who may look at it (406.3). Left out, as hideaway: the chooser and whoever comes to control the source
+(Bane Alley Broker's "you may look at cards exiled with this creature"). `"chooser"`: the chooser
+alone (Gustha's Scepter's "you may look at it for as long as it remains exiled"). `"nobody"`: no more
+said (Summoner's Egg). Getting one back is a `look-and-choose` from `zone: "exiled-with-source"`, or
+`return-exiled-by-source`; `turn-exiled-face-up` shows them all.
+
+`look-at-face-down { target? | filter? }` is a one-time look at face-down permanents the effect's
+controller doesn't control (rule 708.5), in a look they close, as `look-at-hand`'s is, and not later
+(Smoke Teller's ruling), nobody else learning anything. `target` is a slot holding the permanent
+("look at target face-down creature": a `{ kind: "permanent", filter: { type: "creature", faceDown:
+true } }` slot) or a player ("any face-down creatures they control", Spy Network); `filter` every one
+it matches (Revealing Wind's "each face-down creature that's attacking or blocking"). None to look at
+asks nothing. "Any time" is a static's `visibility` (Keeper of the Lens), or a `grant-static` of it
+for a turn (Lumbering Laundry).
+
 `end-the-turn` is "End the turn" (rule 724.1: Time Stop, Ultima, Glorious End)
 and `end-the-combat-phase` "End the combat phase" (724.2: Mandate of Peace, the
 one card), neither with a field. Every trigger waiting ceases to exist and the

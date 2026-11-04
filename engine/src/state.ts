@@ -1244,10 +1244,13 @@ export interface GameObject {
    * which has none) and the effect's source. Ends on any zone change and in
    * cleanup, as `grantedFlashback` does. */
   grantedGraveyardKeywords?: readonly { keyword: GraveyardKeyword; cost: string; by: ObjectId }[];
-  /** The foretell cost a card foretold through a grant keeps
-   * (`grantsForetellInHand` — Dream Devourer): read before the card's own,
-   * which it has none of. Ends on any zone change. */
-  foretoldCost?: string;
+  /** A foretell cost the card was given besides any printed on it (rule
+   * 702.143d): its mana cost, of the face being cast, reduced by this much
+   * generic mana — "its foretell cost is its mana cost reduced by {2}"
+   * (`grantsForetellInHand`, Dream Devourer; `become-foretold`, Ethereal
+   * Valkyrie). It keeps it whatever becomes of what gave it. Ends on any zone
+   * change. */
+  foretoldReducedBy?: number;
   /** True while this card is suspended — exiled with time counters (rule
    * 702.62 — ROADMAP Phase 6b). A turn-based action removes one time counter
    * at the owner's upkeep; at zero it's cast for free. Cleared on any zone
@@ -3452,6 +3455,14 @@ export type AwaitingDecision =
        * `"exile"` (imprint, face up): the permanent, in the stint it's in,
        * the chosen cards are exiled with (rule 607.2a — `GameObject.exiledWith`). */
       readonly exileLink?: { readonly source: ObjectId; readonly zoneChangeCount: number };
+      /** For `destination: "exile-face-down"`: see `look-and-choose`'s
+       * `faceDownLooks`. */
+      readonly faceDownLooks?: "chooser" | "nobody";
+      /** A look they close at face-down permanents (`ids`, nothing to pick —
+       * the `look-at-face-down` effect): the chooser is shown what they are
+       * until they close it, and only then (rule 708.5; Smoke Teller's ruling:
+       * "it doesn't let you look at it later"). */
+      readonly looksAtFaceDown?: true;
       /** For a `choose-exiled-card`: nothing moves (`"stay"`); the card picked
        * is what this permanent has now chosen (`GameObject.chosenExiledCard`). */
       readonly rememberExiledOn?: ObjectId;

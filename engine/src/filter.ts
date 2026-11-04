@@ -2406,7 +2406,8 @@ export function matchesFilter(
     if (filter.cast !== undefined && (cast !== undefined) !== filter.cast) return false;
     if (filter.castBy === "you" && cast?.by !== ctx.you) return false;
     if (filter.castFrom !== undefined && cast?.from !== filter.castFrom) return false;
-    if (filter.castVia !== undefined && cast?.via !== filter.castVia) return false;
+    // A foretold card cast for a cost it was given was foretold all the same (702.143c).
+    if (filter.castVia !== undefined && (cast?.via === "foretell-given" ? "foretell" : cast?.via) !== filter.castVia) return false;
     if (filter.enteredFrom !== undefined && entry?.from !== filter.enteredFrom) return false;
     if (filter.putThereBySource !== undefined) {
       const by = entry?.by;

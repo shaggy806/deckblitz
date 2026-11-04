@@ -3504,6 +3504,40 @@ export type EffectSpec =
       readonly target: EffectTargetRef;
     }
   | {
+      /** "**It becomes foretold**" (rule 702.143d): a card an instruction just
+       * exiled is a foretold card, face down, and its owner may look at it and
+       * may cast it for any foretell cost it has after this turn has ended
+       * — even with the source gone and whoever controlled it. Not foretelling
+       * it (702.143c): "whenever you foretell a card" doesn't trigger (Ethereal
+       * Valkyrie's ruling). The `then` of a `look-and-choose` that exiles, whose
+       * chosen card is its target 0 (Ethereal Valkyrie), or `"exiled-this-way"`
+       * after an `exile` (The Foretold Soldier's "exile it face down"). A
+       * printed foretell cost stays, a copy's or a card's without one has no
+       * cost to cast it for (The Foretold Soldier's ruling). `costReducedBy`:
+       * "its foretell cost is its mana cost reduced by {2}", generic mana only
+       * and the face cast's mana cost, a second cost for a card with its own
+       * (Ethereal Valkyrie's rulings). Nothing for a token or a card no longer
+       * in exile. */
+      readonly kind: "become-foretold";
+      readonly target: EffectTargetRef | "exiled-this-way";
+      readonly costReducedBy?: number;
+    }
+  | {
+      /** The effect's controller **looks at** face-down permanents they don't
+       * control, once (rule 708.5): shown them in a look they close, as
+       * `look-at-hand` is, and not later (Smoke Teller's ruling), nobody else
+       * learning anything. One of: `target`, a slot holding a face-down permanent
+       * ("look at target face-down creature", Smoke Teller) or a player ("any
+       * face-down creatures they control", Spy Network); or `filter`, every
+       * permanent it matches (Revealing Wind's "each face-down creature that's
+       * attacking or blocking"). None to look at asks nothing. The "any time"
+       * form is a static's `visibility` (Keeper of the Lens), or a `grant-static`
+       * of it (Lumbering Laundry). */
+      readonly kind: "look-at-face-down";
+      readonly target?: number;
+      readonly filter?: CardFilter;
+    }
+  | {
       /** Put a target permanent into exile — or, with `"trigger-object"`,
        * the card a dies trigger is about, only while it's still that object
        * in the graveyard it went to (rule 400.7 — "you may exile it", Myrkul,
@@ -9747,6 +9781,14 @@ export type EffectSpec =
        * creature card from among them", which no "the exiled card" of its
        * (or of a creature it copies) refers to. */
       readonly unlinked?: true;
+      /** With `destination: "exile-face-down"`: who may look at the card once
+       * it's exiled (rule 406.3). Left out, as a hideaway's: the chooser and
+       * whoever comes to control the source (Bane Alley Broker's "you may look
+       * at cards exiled with this creature"). `"chooser"`: the chooser alone,
+       * for as long as it remains exiled (Gustha's Scepter's "you may look at
+       * it"). `"nobody"`: "exile a card from your hand face down", no more
+       * said (Summoner's Egg's ruling: you can't look once it's imprinted). */
+      readonly faceDownLooks?: "chooser" | "nobody";
       /** Chosen cards bound for the battlefield enter **tapped** (Terrain
        * Generator). */
       readonly enterTapped?: boolean;
@@ -10797,7 +10839,7 @@ export interface EffectApi {
   ): void;
   /** The cards this resolution has exiled so far from a library, a hand or
    * a graveyard, still in exile — a `cast-now`'s `"exiled-this-way"`. */
-  cardsExiledThisWay(): readonly ObjectId[];
+  cardsExiledThisWay(fromBattlefieldToo?: boolean): readonly ObjectId[];
   /** `card`, if it's still in exile in the stint `zoneChangeCount` names —
    * a `cast-now`'s `encoded` card (rule 702.99c). */
   stillExiled(card: ObjectId, zoneChangeCount: number): readonly ObjectId[];
@@ -11681,6 +11723,12 @@ export interface EffectApi {
   collectEvidence(amount: number, then: EffectSpec | undefined): void;
   /** The source, a Case, becomes solved — see the `solve` effect. */
   solveSource(): void;
+  /** A card in exile becomes foretold — see the `become-foretold` effect. */
+  becomeForetold(card: ObjectId, costReducedBy?: number): void;
+  /** The effect's controller looks at these, those of them face down
+   * permanents (`controlledBy`'s alone, given) — see the `look-at-face-down`
+   * effect. */
+  lookAtFaceDown(objects: readonly ObjectId[], controlledBy?: PlayerId): void;
   /** A card in exile becomes plotted — see the `become-plotted` effect. */
   becomePlotted(card: ObjectId): void;
   /** How many times the source's spell paid its multikicker or squad cost
@@ -12142,8 +12190,13 @@ export interface EffectApi {
     together?: ResolvedSearchTogether,
     /** See `look-and-choose`'s `split`. */
     split?: readonly ZoneChoiceSplitCase[],
-    /** Its `chooser: "an-opponent"` and `under: "you"`. */
-    more?: { readonly anOpponent?: true; readonly underYou?: true; readonly underOwners?: true },
+    /** Its `chooser: "an-opponent"`, `under: "you"` and `faceDownLooks`. */
+    more?: {
+      readonly anOpponent?: true;
+      readonly underYou?: true;
+      readonly underOwners?: true;
+      readonly faceDownLooks?: "chooser" | "nobody";
+    },
   ): void;
   /** A `choose-from-zone` an `offer-zone-choice` carries: ask it now. */
   offerZoneChoice(decision: Extract<AwaitingDecision, { kind: "choose-from-zone" }>): void;
@@ -15742,6 +15795,22 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       if (target !== undefined && target.kind === "object") ctx.becomePlotted(target.object);
       return;
     }
+    case "become-foretold": {
+      if (spec.target === "exiled-this-way") {
+        for (const card of ctx.cardsExiledThisWay(true)) ctx.becomeForetold(card, spec.costReducedBy);
+        return;
+      }
+      const target = resolveEffectTarget(spec.target, ctx);
+      if (target?.kind === "object") ctx.becomeForetold(target.object, spec.costReducedBy);
+      return;
+    }
+    case "look-at-face-down": {
+      const target = spec.target === undefined ? undefined : ctx.targets[spec.target];
+      if (target?.kind === "object") ctx.lookAtFaceDown([target.object]);
+      else if (target?.kind === "player") ctx.lookAtFaceDown(ctx.permanentsMatching({ faceDown: true }).map((p) => p.object), target.player);
+      else if (spec.filter !== undefined) ctx.lookAtFaceDown(ctx.permanentsMatching({ ...spec.filter, faceDown: true }).map((p) => p.object));
+      return;
+    }
     case "return-exiled-by-source": {
       if (spec.linked === "hand") {
         const justExiled = spec.others === true ? ctx.cardsExiledThisWay() : [];
@@ -18983,6 +19052,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           ...(spec.chooser === "an-opponent" ? { anOpponent: true as const } : {}),
           ...(spec.under === "you" ? { underYou: true as const } : {}),
           ...(spec.under === "owners" ? { underOwners: true as const } : {}),
+          ...(spec.faceDownLooks !== undefined ? { faceDownLooks: spec.faceDownLooks } : {}),
         },
       );
       return;

@@ -13516,4 +13516,66 @@ describe("how one player's state compares with another's", () => {
       where: { kind: "player-compare", stat: { controls: { type: "creature" } }, compare: "fewer", than: "that-player" },
     });
   });
+
+  it("a card from a hand exiled face down, who may look, and becoming foretold", () => {
+    const fromHand = { kind: "look-and-choose", zone: "hand", max: 1, destination: "exile-face-down", leftover: "stay" };
+    const scepter = read(
+      "Artifact",
+      "{T}: Exile a card from your hand face down. You may look at it for as long as it remains exiled.\n{T}: Return a card you own exiled with this artifact to your hand.\nWhen you lose control of this artifact, put all cards exiled with this artifact into their owner's graveyard.",
+    );
+    expect(scepter.complete).toBe(true);
+    expect(scepter.activated[0].effect).toEqual({ ...fromHand, min: 1, faceDownLooks: "chooser" });
+    expect(scepter.activated[1].effect.filter).toEqual({ ownedBy: "you" });
+    expect(scepter.triggered[0].trigger).toEqual({ on: "loses-control", who: "self" });
+    const egg = read(
+      "Artifact Creature — Egg",
+      "Imprint — When this creature enters, you may exile a card from your hand face down.\nWhen this creature dies, turn the exiled card face up. If it's a creature card, put it onto the battlefield under your control.",
+    );
+    expect(egg.complete).toBe(true);
+    expect(egg.triggered[0].effect).toEqual({ ...fromHand, min: 0, faceDownLooks: "nobody" });
+    expect(egg.triggered[1].effect.effects[1]).toEqual({ kind: "return-exiled-by-source", linked: "battlefield", under: "you", filter: { type: "creature" } });
+    // The other line of the card says who may look: the default.
+    const broker = read(
+      "Creature — Human Rogue",
+      "{T}: Draw a card, then exile a card from your hand face down.\nYou may look at cards exiled with this creature.\n{U}{B}, {T}: Return a card exiled with this creature to its owner's hand.",
+    );
+    expect(broker.activated[0].effect).toEqual({ kind: "sequence", effects: [{ kind: "draw", amount: 1 }, { ...fromHand, min: 1 }] });
+    const valkyrie = read(
+      "Creature — Spirit Angel",
+      "Whenever this creature attacks, draw a card, then exile a card from your hand face down. It becomes foretold. Its foretell cost is its mana cost reduced by {2}. (On a later turn, you may cast it for its foretell cost, even if this creature has left the battlefield.)",
+    );
+    expect(valkyrie.triggered[0].effect.effects[1]).toEqual({
+      ...fromHand,
+      min: 1,
+      unlinked: true,
+      then: { kind: "become-foretold", target: 0, costReducedBy: 2 },
+    });
+    expect(read("Creature — Zombie", "Whenever this creature deals damage, exile it face down. It becomes foretold.").triggered[0].effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "exile", target: "source" },
+        { kind: "become-foretold", target: "exiled-this-way" },
+      ],
+    });
+  });
+
+  it("a look at face-down creatures", () => {
+    const teller = read("Creature — Human Shaman", "{1}{U}: Look at target face-down creature.");
+    expect(teller.complete).toBe(true);
+    expect(teller.activated[0].targets).toEqual([{ kind: "permanent", filter: { type: "creature", faceDown: true } }]);
+    expect(teller.activated[0].effect).toEqual({ kind: "look-at-face-down", target: 0 });
+    const wind = read("Instant", "Prevent all combat damage that would be dealt this turn. You may look at each face-down creature that's attacking or blocking.");
+    expect(wind.complete).toBe(true);
+    expect(wind.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "prevent-all-combat-damage" },
+        { kind: "look-at-face-down", filter: { type: "creature", anyOf: [{ attacking: true }, { blocking: true }] } },
+      ],
+    });
+    const net = read("Instant", "Look at target player's hand, the top card of that player's library, and any face-down creatures they control. Look at the top four cards of your library, then put them back in any order.");
+    expect(net.complete).toBe(true);
+    expect(net.targets).toEqual(["player"]);
+    expect(JSON.stringify(net.effect)).toContain('"look-at-face-down"');
+  });
 });

@@ -1605,7 +1605,10 @@
   "trigger:counters-put-batch",
   "trigger:counters-put-each-counter",
   "trigger:activates-exhaust",
-  "trigger:activates-power-up"
+  "trigger:activates-power-up",
+  "effect:exile-becomes-foretold",
+  "effect:exile-from-hand-face-down-linked",
+  "effect:look-at-face-down-permanents"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

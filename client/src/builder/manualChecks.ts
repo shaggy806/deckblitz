@@ -10489,4 +10489,32 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{ bf: ['Grizzly Bears'] }, { bf: ['Llanowar Elves'] }, { bf: ['Savannah Lions'] }],
     }),
   ),
+  preset(
+    'Smoke Teller: a look at a face-down creature, then it is hidden again',
+    board({
+      you: { bf: ['Smoke Teller', 'Island*5'], hand: ['Cyber Conversion'] },
+      opp: [{ bf: ['Grizzly Bears'] }],
+    }),
+  ),
+  preset(
+    'Smoke Teller: four players, the look is yours alone',
+    board({
+      you: { bf: ['Smoke Teller', 'Island*5'], hand: ['Cyber Conversion'] },
+      opp: [{ bf: ['Grizzly Bears'] }, { bf: ['Llanowar Elves'] }, { bf: ['Colossal Dreadmaw'] }],
+    }),
+  ),
+  preset(
+    "Gustha's Scepter: the exiled card is yours to see and no one else's",
+    board({
+      you: { bf: ["Gustha's Scepter"], hand: ['Grizzly Bears', 'Lightning Bolt'] },
+      opp: [{ bf: ['Forest'] }],
+    }),
+  ),
+  preset(
+    'Ethereal Valkyrie: a card with its own foretell cost has two',
+    board({
+      you: { bf: ['Plains*2', 'Island*2', 'Swamp*2'], hand: ['Ethereal Valkyrie', 'Poison the Cup'] },
+      opp: [{ bf: ['Grizzly Bears'] }],
+    }),
+  ),
 ]

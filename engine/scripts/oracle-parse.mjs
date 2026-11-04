@@ -3534,6 +3534,30 @@ export function parseSentence(sentence, ctx) {
       };
     }
   }
+  // A look at face-down permanents (rule 708.5): "look at target face-down
+  // creature" (Smoke Teller), "you may look at each face-down creature that's
+  // attacking or blocking" (Revealing Wind), and Spy Network's run of looks.
+  if (re(`look at target face-down creature`).test(s)) {
+    return { kind: "look-at-face-down", target: ctx.target({ kind: "permanent", filter: { type: "creature", faceDown: true } }) };
+  }
+  // "Prevent all combat damage that would be dealt this turn" (Darkness).
+  if (re(`prevent all combat damage that would be dealt this turn`).test(s)) {
+    return { kind: "prevent-all-combat-damage" };
+  }
+  if (re(`you may look at each face-down creature that's attacking or blocking`).test(s)) {
+    return { kind: "look-at-face-down", filter: { type: "creature", anyOf: [{ attacking: true }, { blocking: true }] } };
+  }
+  if ((m = re(`look at (target player)'s hand, the top card of that player's library, and any face-down creatures they control`).exec(s))) {
+    const target = slot(m[1]);
+    return {
+      kind: "sequence",
+      effects: [
+        { kind: "look-at-hand", target },
+        { kind: "look-at-library-top", target },
+        { kind: "look-at-face-down", target },
+      ],
+    };
+  }
   // "Look at target player's hand" (Glasses of Urza): a look alone.
   if ((m = re(`look at (target player|target opponent)'s hand`).exec(s))) {
     return { kind: "look-at-hand", target: slot(m[1]) };
@@ -3607,6 +3631,10 @@ export function parseSentence(sentence, ctx) {
   // On): one of them, chosen as this resolves.
   if (re(`(?:return|put) a card exiled with ~ (?:to|into) its owner's hand`).test(s)) {
     return { kind: "look-and-choose", zone: "exiled-with-source", min: 1, max: 1, destination: "hand", leftover: "stay" };
+  }
+  // "Return a card you own exiled with ~ to your hand" (Gustha's Scepter).
+  if (re(`return a card you own exiled with ~ to your hand`).test(s)) {
+    return { kind: "look-and-choose", zone: "exiled-with-source", min: 1, max: 1, filter: { ownedBy: "you" }, destination: "hand", leftover: "stay" };
   }
   // "Return a card exiled with ~ to the battlefield" (Purgatory): a return is
   // under its owner's control (rule 610.3c), not the chooser's.
@@ -7522,6 +7550,7 @@ export function parseEffect(text, outer) {
   const becomes = becomesWithAbilitiesOf(text);
   if (becomes !== null) return { effect: becomes, todo: [], hints: [] };
 
+<<<<<<< HEAD
   // "For each player, choose friend or foe. Each friend …. Each foe …": a
   // sentence about each player, then that player's scope put in its place.
   const friendOrFoe = /^For each player, choose friend or foe\. (Each friend .+)\. ((?:Each foe|.+ to each foe) .+)\.$/.exec(text);
@@ -7540,6 +7569,66 @@ export function parseEffect(text, outer) {
       const choose = { kind: "vote", choose: true, who: "you", for: { options: ["friend", "foe"], about: "each-player" } };
       return { effect: { kind: "sequence", effects: [choose, friend, foe] }, todo: [], hints: [] };
     }
+=======
+  // A card from a hand, face down (rule 406.3): with no more said nobody may
+  // look at it (Summoner's Egg), "you may look at it…" its chooser alone
+  // (Gustha's Scepter), or "It becomes foretold" (702.143d — Ethereal Valkyrie).
+  // A "you may look at cards exiled with" line elsewhere on the card takes
+  // `faceDownLooks` off, below.
+  const fromHandFaceDown =
+    /^(draw a card, then )?(you may )?exile a card from your hand face down\.(?: (You may look at it for as long as it remains exiled\.))?(?: (It becomes foretold\.)(?: Its foretell cost is its mana cost reduced by \{(\d+)\}\.)?)?$/i.exec(text);
+  if (fromHandFaceDown !== null) {
+    const foretold = fromHandFaceDown[4] !== undefined;
+    const reducedBy = fromHandFaceDown[5];
+    const exile = {
+      kind: "look-and-choose",
+      zone: "hand",
+      min: fromHandFaceDown[2] !== undefined ? 0 : 1,
+      max: 1,
+      destination: "exile-face-down",
+      leftover: "stay",
+      ...(foretold
+        ? {
+            unlinked: true,
+            then: { kind: "become-foretold", target: 0, ...(reducedBy !== undefined ? { costReducedBy: Number(reducedBy) } : {}) },
+          }
+        : { faceDownLooks: fromHandFaceDown[3] !== undefined ? "chooser" : "nobody" }),
+    };
+    return {
+      effect: fromHandFaceDown[1] !== undefined ? { kind: "sequence", effects: [{ kind: "draw", amount: 1 }, exile] } : exile,
+      todo: [],
+      hints: [],
+    };
+  }
+  // "Exile it face down. It becomes foretold" (The Foretold Soldier).
+  if (/^exile (?:it|~) face down\. It becomes foretold\.$/i.test(text)) {
+    return {
+      effect: {
+        kind: "sequence",
+        effects: [
+          { kind: "exile", target: "source" },
+          { kind: "become-foretold", target: "exiled-this-way" },
+        ],
+      },
+      todo: [],
+      hints: [],
+    };
+  }
+  // "Turn the exiled card face up. If it's a creature card, put it onto the
+  // battlefield under your control" (Summoner's Egg).
+  if (/^turn the exiled card face up\. If it's a creature card, put it onto the battlefield under your control\.$/i.test(text)) {
+    return {
+      effect: {
+        kind: "sequence",
+        effects: [
+          { kind: "turn-exiled-face-up" },
+          { kind: "return-exiled-by-source", linked: "battlefield", under: "you", filter: { type: "creature" } },
+        ],
+      },
+      todo: [],
+      hints: [],
+    };
+>>>>>>> 931aff891 (Engine, Cards: a card exiled face down from a hand, who may look at it, becoming foretold with a cost of its own, and a one-time look at face-down creatures — Gustha's Scepter, Bane Alley Broker, Summoner's Egg, The Foretold Soldier, Ethereal Valkyrie, Smoke Teller, Revealing Wind, Spy Network)
   }
 
   // "The amassed Army" (rule 701.47a): read at once, or by a reflexive ability.
@@ -13337,6 +13426,9 @@ function parseFaceAsWritten(face, ctx = {}) {
       if (Array.isArray(node)) node.forEach(linkedExile);
       else if (node !== null && typeof node === "object") {
         if (node.kind === "exile-from-library") node.linked = true;
+        // "You may look at cards exiled with this creature" (Bane Alley
+        // Broker): the chooser and whoever comes to control it.
+        if (node.kind === "look-and-choose" && /\byou may look at cards exiled with\b/i.test(face.oracle_text ?? "")) delete node.faceDownLooks;
         Object.values(node).forEach(linkedExile);
       }
     };

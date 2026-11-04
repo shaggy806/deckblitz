@@ -727,6 +727,11 @@ function visible(
             // (Keeper of the Lens — not a spell, the rulings).
             ...(viewer === object.controller ||
             state.result.over ||
+            // A look at it they haven't closed (`look-at-face-down`).
+            (state.awaiting?.kind === "choose-from-zone" &&
+              state.awaiting.looksAtFaceDown === true &&
+              state.awaiting.player === viewer &&
+              state.awaiting.ids.includes(object.id)) ||
             (looksAtFaceDownCreatures && object.zone === "battlefield" && computed.types.includes("creature"))
               ? { card: object.cardName }
               : {}),

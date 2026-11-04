@@ -44,6 +44,10 @@ export type CastVia =
   | "flashback"
   | "escape"
   | "foretell"
+  /** A foretold card that has a printed foretell cost and was given another
+   * (rule 702.143d — Ethereal Valkyrie's ruling), for the one it was given:
+   * `"foretell"` is the printed one then. */
+  | "foretell-given"
   | "disturb"
   | "adventure"
   /** A prepared permanent's copy of its prepare spell (rule 722.3c), cast
