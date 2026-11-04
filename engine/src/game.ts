@@ -1919,6 +1919,18 @@ interface AssistChoice {
   seen?: { readonly generic: number; readonly amount: number };
 }
 
+/** One instruction to copy a spell under way (`Game.withSpellCopyEvent`): how
+ * its first copy was made, and the copies that couldn't take new targets. */
+interface SpellCopyEvent {
+  instruction?: {
+    readonly spell: SpellSnapshot;
+    readonly originalId: ObjectId;
+    readonly controller: PlayerId;
+    readonly change?: SpellCopyChange;
+  };
+  readonly fixed: ObjectId[];
+}
+
 /** Whether an effect lasting `duration` on `object` begins at all: one
  * "for as long as it has a [kind] counter on it" does nothing if it has none
  * as it would begin, and one "for as long as [its source] remains on the
@@ -2056,6 +2068,10 @@ export class Game {
    * See {@link withEnterBatch}. Not game state: it only ever spans one
    * synchronous call. */
   private enterBatch: Set<ObjectId> | null = null;
+  /** The instruction to copy a spell under way. See
+   * {@link withSpellCopyEvent}. Not game state: it only ever spans one
+   * synchronous call. */
+  private spellCopyEvent: SpellCopyEvent | null = null;
   /** The players whose first tokens of the turn are in the entry under way.
    * Not game state: it spans one outermost `withEnterBatch`. */
   private readonly firstTokenCreators = new Set<PlayerId>();
@@ -7359,6 +7375,12 @@ export class Game {
       this.resumeAssistedCast(player, awaiting.assist, number);
       return;
     }
+    // Where an additional copy goes among the others (Twinning Staff).
+    if (awaiting.placeCopy !== undefined) {
+      this.placeSpellCopy(awaiting.source, awaiting.placeCopy.among, number);
+      this.prepareForPriority(this.activePlayer);
+      return;
+    }
     // Shapeshifter's "the last chosen number", on the permanent of that stint
     // alone (rule 400.7).
     if (awaiting.remember !== undefined) {
@@ -9176,6 +9198,12 @@ export class Game {
       // Copies still waiting to be asked about their new targets (storm).
       if ((this.state.copyTargetsQueue?.length ?? 0) > 0) {
         this.promptNextCopyTargets();
+        continue;
+      }
+      // Additional copies, their targets chosen, still to be placed among the
+      // others (Twinning Staff).
+      if ((this.state.spellCopyPlacements?.length ?? 0) > 0) {
+        this.promptNextSpellCopyPlacement();
         continue;
       }
       // Attackers whose "you may exert this creature as it attacks" is still
@@ -36273,9 +36301,10 @@ export class Game {
           if (payment === null) return false;
           this.executePayment(copier, payment);
         }
-        this.copySpellFrom(copy, original, copier, copyOpts.newTargets, copyOpts.change);
+        this.copySpellFrom(copy, original, copier, copyOpts.newTargets, copyOpts.change, spell);
         return true;
       },
+      spellCopyEvent: (act) => this.withSpellCopyEvent(act),
       copyTriggerSpellForEach: (spell, each, copier) => {
         if (triggerObject === undefined) return;
         // "Could target" is the spell's, as its caster cast it.
@@ -41278,6 +41307,10 @@ export class Game {
    * modifier, part of its copiable values, 707.9b) and what it gains (an
    * effect on it that goes on applying to the permanent it becomes, 400.7a —
    * `castRider`, so `moveObject` keeps it onto the battlefield).
+   *
+   * `unaimed` is the spell as it is before an effect aimed this copy (rules
+   * 707.10d–e), which is what an additional copy copies: it has the targets of
+   * the spell it's copying unless its controller chooses new ones.
    */
   private copySpellFrom(
     spell: SpellSnapshot,
@@ -41285,8 +41318,14 @@ export class Game {
     controller: PlayerId,
     newTargets: boolean,
     change?: SpellCopyChange,
+    unaimed: SpellSnapshot = spell,
   ): ObjectId {
     const id = this.mintObjectId();
+    const event = this.spellCopyEvent;
+    if (event !== null) {
+      event.instruction ??= { spell: unaimed, originalId, controller, ...(change !== undefined ? { change } : {}) };
+      if (!newTargets) event.fixed.push(id);
+    }
     this.state.objects[id] = {
       id,
       cardName: spell.cardName,
@@ -41395,6 +41434,112 @@ export class Game {
   }
 
   /**
+   * Run one instruction to copy a spell, however many copies `act` makes, then
+   * replace it (rule 614.1a) with that many plus the additional ones its
+   * controller's `would-copy-spell` permanents add (Twinning Staff) — none if
+   * it made none, and only the once for the instruction (rule 614.5). Each is
+   * made as the instruction made its first, except that its controller may
+   * choose new targets for it. A copy of a copy made here is its own
+   * instruction's business, so nesting joins the event already open.
+   *
+   * Their controller also chooses where each goes among the others (the
+   * rulings), which matters only against copies that couldn't take new targets
+   * themselves: where all could, any targets can already reach any place on
+   * the stack, so nothing is asked (`promptNextSpellCopyPlacement`).
+   */
+  private withSpellCopyEvent(act: () => void): void {
+    if (this.spellCopyEvent !== null) {
+      act();
+      return;
+    }
+    const event: SpellCopyEvent = { fixed: [] };
+    this.spellCopyEvent = event;
+    try {
+      act();
+    } finally {
+      this.spellCopyEvent = null;
+    }
+    const made = event.instruction;
+    if (made === undefined) return;
+    const among = [...event.fixed];
+    const additional = this.additionalSpellCopies(made.controller);
+    for (let i = 0; i < additional; i += 1) {
+      const copy = this.copySpellFrom(made.spell, made.originalId, made.controller, true, made.change);
+      if (event.fixed.length === 0) continue;
+      this.state.spellCopyPlacements = [...(this.state.spellCopyPlacements ?? []), { copy, among: [...among] }];
+      among.push(copy);
+    }
+  }
+
+  /** How many more times `player` copies a spell than an instruction says:
+   * each of their `would-copy-spell` permanents' (the Twinning Staff ruling). */
+  private additionalSpellCopies(player: PlayerId): number {
+    let additional = 0;
+    for (const id of this.state.zones.shared.battlefield) {
+      const source = this.state.objects[id];
+      if (source.controller !== player || hasLostAbilities(this.state, this.registry, source)) continue;
+      for (const ability of this.registry.get(rulesTextName(source)).static) {
+        if (ability.replacement?.event === "would-copy-spell" && this.staticActive(source, ability)) {
+          additional += ability.replacement.additional;
+        }
+      }
+    }
+    return Math.min(additional, Game.MAX_EFFECT_INSTANCES);
+  }
+
+  /**
+   * Ask where the next additional copy goes among the others (the Twinning
+   * Staff rulings), once its new targets are chosen: as how many of them it
+   * goes under. A copy with the same targets as every one of them is the same
+   * wherever it goes, so nothing is asked.
+   */
+  private promptNextSpellCopyPlacement(): void {
+    const next = this.state.spellCopyPlacements?.shift();
+    if (this.state.spellCopyPlacements?.length === 0) delete this.state.spellCopyPlacements;
+    if (next === undefined) return;
+    const copy = this.state.objects[next.copy];
+    if (copy?.zone !== "stack") return;
+    const among = next.among.filter((id) => this.state.objects[id]?.zone === "stack");
+    const mine = copy.targets ?? [];
+    const same = (id: ObjectId): boolean => {
+      const theirs = this.state.objects[id].targets ?? [];
+      return (
+        theirs.length === mine.length &&
+        theirs.every((t, i) => {
+          const m = mine[i];
+          return t === m || (t !== undefined && m !== undefined && sameTargetRef(t, m));
+        })
+      );
+    };
+    if (among.every(same)) return;
+    this.state.awaiting = {
+      kind: "choose-number",
+      player: copy.controller,
+      source: next.copy,
+      min: 0,
+      max: among.length,
+      prompt: "How many of the other copies should resolve before this additional copy?",
+      placeCopy: { among },
+    };
+  }
+
+  /** Put the additional copy `copyId` under `above` of the copies `among`, all
+   * of them and it on the stack, nothing else moving. */
+  private placeSpellCopy(copyId: ObjectId, among: readonly ObjectId[], above: number): void {
+    const stack = this.state.zones.shared.stack;
+    if (this.state.objects[copyId]?.zone !== "stack") return;
+    stack.splice(stack.indexOf(copyId), 1);
+    const others = stack.flatMap((id, i) => (among.includes(id) ? [i] : []));
+    if (others.length === 0) {
+      stack.push(copyId);
+      return;
+    }
+    // Stack's last resolves first: under `above` of them, or over them all.
+    const lowest = Math.min(above, others.length);
+    stack.splice(lowest === 0 ? others[others.length - 1] + 1 : others[others.length - lowest], 0, copyId);
+  }
+
+  /**
    * `spell` with every one of its targets `to` instead (rules 707.10d–e: "the
    * copy targets Ivy", "each copy targets a different one of those
    * creatures") — or `null` when `to` isn't a legal target for each of them,
@@ -41481,7 +41626,7 @@ export class Game {
       if (affordable === 0) return;
     } else if (aims.length === 1) {
       const aimed = this.retargetedSnapshot(spell, { kind: "object", object: aims[0] }, caster, original);
-      if (aimed !== null) this.copySpellFrom(aimed, original, controller, false);
+      if (aimed !== null) this.copySpellFrom(aimed, original, controller, false, undefined, spell);
       return;
     }
     // Each answer is copied with that permanent as target 0 — the spell
@@ -41725,7 +41870,9 @@ export class Game {
     const spell =
       source.zone === "stack" && source.kind === "card" ? this.spellSnapshot(source) : source.lastOnStack;
     if (spell === undefined) return;
-    for (let i = 0; i < n; i += 1) this.copySpellFrom(spell, sourceId, source.controller, true);
+    this.withSpellCopyEvent(() => {
+      for (let i = 0; i < n; i += 1) this.copySpellFrom(spell, sourceId, source.controller, true);
+    });
   }
 
   /** Cascade (rule 702.85a): exile off the top of `controller`'s library until
@@ -45301,7 +45448,12 @@ export class Game {
     // One instruction acting on each permanent chosen (rule 608.2c), so one
     // event: God-Eternal Bontu's "sacrifice any number of other permanents"
     // sacrifices them all at once, and a "whenever one or more" sees one batch.
-    this.withLeaveBatch(() =>
+    // So too Zada's copies, ordered here: one instruction to copy.
+    const asOneInstruction = (act: () => void): void => {
+      if (then.kind === "copy-spell") this.withSpellCopyEvent(act);
+      else act();
+    };
+    asOneInstruction(() => this.withLeaveBatch(() =>
       this.withEnterBatch(() => {
         for (const id of chosen) {
           // Re-checked rather than trusted: something may have left since.
@@ -45328,7 +45480,7 @@ export class Game {
           );
         }
       }),
-    );
+    ));
     if (this.state.awaiting === null) this.prepareForPriority(priorityTo ?? this.activePlayer);
   }
 

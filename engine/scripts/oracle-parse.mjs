@@ -18034,6 +18034,10 @@ function parseStatic(line, text) {
   if (line === "If you would proliferate, proliferate twice instead.") {
     return { affects: { scope: "self" }, replacement: { event: "would-proliferate", times: 2 }, text };
   }
+  // Twinning Staff (rule 614.1a).
+  if (line === "If you would copy a spell one or more times, instead copy it that many times plus an additional time. You may choose new targets for the additional copy.") {
+    return { affects: { scope: "self" }, replacement: { event: "would-copy-spell", additional: 1 }, text };
+  }
   // K'rrik, Son of Yawgmoth: how every mana cost may be paid.
   const lifeForPip = /^For each \{([WUBRG])\} in a cost, you may pay 2 life rather than pay that mana\.$/.exec(line);
   if (lifeForPip !== null) return { affects: { scope: "self" }, payLifeForPips: lifeForPip[1], text };

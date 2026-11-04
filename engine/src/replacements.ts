@@ -51,7 +51,23 @@ export type ReplacementSpec =
   | LifeGainReplacement
   | LifeLossReplacement
   | TapManaMultiplierReplacement
-  | ProliferateReplacement;
+  | ProliferateReplacement
+  | SpellCopyReplacement;
+
+/**
+ * "If you would copy a spell one or more times, instead copy it that many
+ * times plus an additional time. You may choose new targets for the additional
+ * copy" (Twinning Staff, rule 614.1a): one instruction to copy, however many
+ * copies it makes, makes `additional` more under this permanent's controller,
+ * with whatever exceptions and gains the instruction gave its copies. An
+ * instruction that copies nothing makes none. Several each add theirs (the
+ * ruling). Only spells: an ability's copy, and a copy of a card, are neither.
+ * Applied by `Game.withSpellCopyEvent`.
+ */
+export interface SpellCopyReplacement {
+  readonly event: "would-copy-spell";
+  readonly additional: number;
+}
 
 /**
  * "If you would proliferate, proliferate twice instead" (Tekuthal, Inquiry

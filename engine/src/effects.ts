@@ -12519,6 +12519,10 @@ export interface EffectApi {
   /** Copy the spell at `TargetRef` on the stack — see the `copy-spell`
    * {@link EffectSpec}. */
   copySpell(target: TargetRef, newTargets: boolean, controller?: PlayerId, change?: SpellCopyChange): void;
+  /** Run one instruction to copy a spell, however many copies it makes: a
+   * `would-copy-spell` replacement applies to the instruction, not to each
+   * copy (Twinning Staff). */
+  spellCopyEvent(act: () => void): void;
   /** Change the targets of the spell or ability at `TargetRef` on the stack,
    * this effect's controller choosing — see the `change-targets`
    * {@link EffectSpec}. */
@@ -18828,41 +18832,43 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
             }
           : undefined;
       let copied = false;
-      if (spec.target === "trigger-spell" || spec.spell !== undefined) {
-        const spell = spec.spell?.snapshot ?? ctx.triggerSpell();
-        if (spell !== null && (spec.ifTargets === undefined || targetsPermanentOrPlayer(spell))) {
-          if (spec.forEachItCouldTarget !== undefined) {
-            ctx.copyTriggerSpellForEach(spell, spec.forEachItCouldTarget, copier ?? ctx.controller);
-            copied = true;
-          } else {
-            const retargetTo = spec.retargetTo === undefined ? undefined : resolveEffectTarget(spec.retargetTo, ctx);
-            // A slot whose target has gone, or a source that has left, has
-            // nothing to aim the copy at.
-            if (spec.retargetTo === undefined || retargetTo !== undefined) {
-              for (let i = 0; i < times; i += 1) {
-                const made = ctx.copyTriggerSpell(spell, {
-                  newTargets,
-                  ...(copier !== undefined ? { controller: copier } : {}),
-                  ...(retargetTo !== undefined ? { retargetTo } : {}),
-                  ...(spec.spell !== undefined ? { original: spec.spell.original } : {}),
-                  ...(spec.spell?.caster !== undefined ? { caster: spec.spell.caster } : {}),
-                  ...(spec.spell?.payEach !== undefined ? { payEach: spec.spell.payEach } : {}),
-                  ...(change !== undefined ? { change } : {}),
-                });
-                copied = copied || made;
+      ctx.spellCopyEvent(() => {
+        if (spec.target === "trigger-spell" || spec.spell !== undefined) {
+          const spell = spec.spell?.snapshot ?? ctx.triggerSpell();
+          if (spell !== null && (spec.ifTargets === undefined || targetsPermanentOrPlayer(spell))) {
+            if (spec.forEachItCouldTarget !== undefined) {
+              ctx.copyTriggerSpellForEach(spell, spec.forEachItCouldTarget, copier ?? ctx.controller);
+              copied = true;
+            } else {
+              const retargetTo = spec.retargetTo === undefined ? undefined : resolveEffectTarget(spec.retargetTo, ctx);
+              // A slot whose target has gone, or a source that has left, has
+              // nothing to aim the copy at.
+              if (spec.retargetTo === undefined || retargetTo !== undefined) {
+                for (let i = 0; i < times; i += 1) {
+                  const made = ctx.copyTriggerSpell(spell, {
+                    newTargets,
+                    ...(copier !== undefined ? { controller: copier } : {}),
+                    ...(retargetTo !== undefined ? { retargetTo } : {}),
+                    ...(spec.spell !== undefined ? { original: spec.spell.original } : {}),
+                    ...(spec.spell?.caster !== undefined ? { caster: spec.spell.caster } : {}),
+                    ...(spec.spell?.payEach !== undefined ? { payEach: spec.spell.payEach } : {}),
+                    ...(change !== undefined ? { change } : {}),
+                  });
+                  copied = copied || made;
+                }
               }
             }
           }
+        } else {
+          // "Copy this spell" — the spell now resolving, still on the stack.
+          const target =
+            spec.target === "source" ? ({ kind: "object", object: ctx.source } as const) : ctx.targets[spec.target];
+          if (target !== undefined) {
+            for (let i = 0; i < times; i += 1) ctx.copySpell(target, newTargets, copier, change);
+            copied = times > 0;
+          }
         }
-      } else {
-        // "Copy this spell" — the spell now resolving, still on the stack.
-        const target =
-          spec.target === "source" ? ({ kind: "object", object: ctx.source } as const) : ctx.targets[spec.target];
-        if (target !== undefined) {
-          for (let i = 0; i < times; i += 1) ctx.copySpell(target, newTargets, copier, change);
-          copied = times > 0;
-        }
-      }
+      });
       if (!copied && spec.otherwise !== undefined) applyEffectSpec(spec.otherwise, ctx);
       return;
     }

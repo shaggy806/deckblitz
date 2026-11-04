@@ -5860,6 +5860,12 @@ is "can't attack a player it has already attacked this turn" (Port Razer), by th
   proliferate, proliferate twice instead" (Tekuthal, Inquiry Dominus): this
   permanent's controller, each time its own question (rule 701.34a); several
   multiply (rule 614.5).
+- `replacement: { event: "would-copy-spell", additional }` — "If you would copy
+  a spell one or more times, instead copy it that many times plus an additional
+  time. You may choose new targets for the additional copy" (Twinning Staff):
+  this permanent's controller, once per instruction to copy, with new targets
+  always offered on the additional copy. Spells only: not an ability's copy,
+  and not a copy of a card.
 - `payLifeForPips: Color` — "For each {B} in a cost, you may pay 2 life rather
   than pay that mana" (K'rrik, Son of Yawgmoth): every mana cost this permanent's
   controller pays — a spell's, an activation's, a special action's, a "you may

@@ -11141,4 +11141,30 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: [{ name: 'Hill Giant', counters: { '-1/-1': 1 } }] },
     }),
   ),
+  preset(
+    'Twinning Staff: Swarm Intelligence makes two copies, each with new targets',
+    board({
+      you: { bf: ['Twinning Staff', 'Swarm Intelligence', 'Mountain'], hand: ['Lightning Bolt'] },
+      opp: { bf: ['Hill Giant'] },
+    }),
+  ),
+  preset(
+    "Twinning Staff: placing the additional copy among Zada's",
+    board({
+      you: {
+        bf: ['Twinning Staff', 'Zada, Hedron Grinder', 'Grizzly Bears', 'Hill Giant', 'Forest'],
+        hand: ['Giant Growth'],
+      },
+    }),
+  ),
+  preset(
+    "Twinning Staff: placing the additional copy at a four-player table",
+    board({
+      you: {
+        bf: ['Twinning Staff', 'Zada, Hedron Grinder', 'Grizzly Bears', 'Hill Giant', 'Forest'],
+        hand: ['Giant Growth'],
+      },
+      opp: [{}, {}, {}],
+    }),
+  ),
 ]

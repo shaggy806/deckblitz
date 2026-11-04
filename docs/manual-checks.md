@@ -7433,3 +7433,20 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 - **Do:** Cast Volt Charge at Bob. Choose the Grizzly Bears when asked to proliferate, then the Hill Giant when asked again.
 - **Expect:** Two proliferate questions, one after the other. The Bears end with two +1/+1 counters and the Giant with two -1/-1 counters.
+
+## Copying a spell an additional time (2026-11-04)
+
+### Twinning Staff: Swarm Intelligence makes two copies, each with new targets
+
+- **Do:** Cast Lightning Bolt at Bob and copy it when Swarm Intelligence asks. Keep Bob for the first copy, and choose the Hill Giant for the second.
+- **Expect:** Two target questions, one for each copy, and no question about the order. Bob loses 6 life and the Giant dies.
+
+### Twinning Staff: placing the additional copy among Zada's
+
+- **Do:** Cast Giant Growth on Zada. Order Zada's copies when asked, keep Zada as the additional copy's target, then answer 1 to "How many of the other copies should resolve before this additional copy?".
+- **Expect:** The question offers 0 to 2. On the stack the additional copy sits under one of Zada's copies. Zada ends 9/9, the Bears 5/5 and the Giant 6/7.
+
+### Twinning Staff: placing the additional copy at a four-player table
+
+- **Do:** Cast Giant Growth on Zada. Order Zada's copies when asked, keep Zada as the additional copy's target, then answer 2.
+- **Expect:** The additional copy goes under both of Zada's copies and resolves last of the three, before the Giant Growth itself. Zada ends 9/9, the Bears 5/5 and the Giant 6/7.

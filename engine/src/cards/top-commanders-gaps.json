@@ -1814,7 +1814,9 @@
   "bug:cda-devotion",
   "effect:fame-or-fortune",
   "static:is-chosen-type",
-  "effect:tokens-entered-this-turn-copies"
+  "effect:tokens-entered-this-turn-copies",
+  "effect:tokens-entered-this-turn-copies",
+  "replacement:copy-spell-additional-time"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

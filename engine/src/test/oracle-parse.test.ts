@@ -15678,3 +15678,18 @@ describe("a token copy of each token you control", () => {
     });
   });
 });
+
+describe("copying a spell an additional time", () => {
+  it("reads Twinning Staff's", () => {
+    const face = parseFace({
+      name: "Test Card",
+      type_line: "Artifact",
+      mana_cost: "{3}",
+      oracle_text:
+        "If you would copy a spell one or more times, instead copy it that many times plus an additional time. You may choose new targets for the additional copy.\n{7}, {T}: Copy target instant or sorcery spell you control. You may choose new targets for the copy.",
+    });
+    expect(face.complete).toBe(true);
+    expect(face.static[0].replacement).toEqual({ event: "would-copy-spell", additional: 1 });
+    expect(face.activated[0].effect).toEqual({ kind: "copy-spell", target: 0, newTargets: true });
+  });
+});

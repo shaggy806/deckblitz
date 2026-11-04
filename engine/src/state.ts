@@ -4062,6 +4062,11 @@ export type AwaitingDecision =
        * Or, with `assist`, how much of a spell's generic mana the player its
        * caster chose pays (rule 702.132a): `source` is the spell, from 0 up
        * to `max`, and the cast goes on with that much paid for its caster.
+       *
+       * Or, with `placeCopy`, where an additional copy of a spell goes among
+       * the others its instruction made (the Twinning Staff rulings): `source`
+       * is the additional copy, and the answer is how many of them it goes
+       * under.
        */
       readonly kind: "choose-number";
       readonly player: PlayerId;
@@ -4074,12 +4079,22 @@ export type AwaitingDecision =
           readonly then: EffectSpec;
           readonly resume: ResolutionResume;
           readonly assist?: undefined;
+          readonly placeCopy?: undefined;
           /** Keep the answer on `source` too, while it's still the permanent
            * of this stint (`GameObject.chosenOnEnter`) — Shapeshifter. */
           readonly remember?: { readonly stint: number };
         }
       | {
           readonly assist: AssistAsk;
+          readonly then?: undefined;
+          readonly resume?: undefined;
+          readonly placeCopy?: undefined;
+          readonly remember?: undefined;
+        }
+      | {
+          /** The other copies, still on the stack as this is asked. */
+          readonly placeCopy: { readonly among: readonly ObjectId[] };
+          readonly assist?: undefined;
           readonly then?: undefined;
           readonly resume?: undefined;
           readonly remember?: undefined;
@@ -6195,6 +6210,12 @@ export interface GameState {
    * to be asked about their new targets, oldest first. Drained one at a time
    * in the `prepareForPriority` fixpoint. Absent when empty. */
   copyTargetsQueue?: ObjectId[];
+  /** Additional copies of a spell (`would-copy-spell`), once their new targets
+   * are chosen, whose controller may place them among the copies `among` that
+   * couldn't take new targets (the Twinning Staff rulings), oldest first.
+   * Drained one at a time in the `prepareForPriority` fixpoint, after
+   * `copyTargetsQueue`. Absent when empty. */
+  spellCopyPlacements?: { readonly copy: ObjectId; readonly among: readonly ObjectId[] }[];
   /** Ability objects that left the stack while a triggered ability waiting
    * on it named one as its trigger object, as they last were there — what
    * Illusionist's Bracers' "copy that ability" copies once the ability has
