@@ -4694,7 +4694,8 @@ is "can't attack a player it has already attacked this turn" (Port Razer), by th
   the counters on **each affected permanent itself** (Toxrill, the
   Corrosive's "creatures your opponents control get -1/-1 for each slime
   counter on them"); `countersOnSource: "charge"` counts the counters on **the
-  permanent with this static** (Door of Destinies' "+1/+1 for each charge
+  permanent with this static** (Banner of Kinship, whose "enters with" counts with
+  `ofChosenType`, the type already chosen; Door of Destinies' "+1/+1 for each charge
   counter on this artifact"); `exiled: CardFilter` counts cards in exile (Umbris, Fear
   Manifest's "each card your opponents own in exile" is `{ ownedBy:
   "opponent" }`); `inGraveyard: CardFilter` counts cards in graveyards (Wight of

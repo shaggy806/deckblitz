@@ -13602,6 +13602,23 @@ function parseFaceAsWritten(face, ctx = {}) {
       out.chooseCreatureTypeOnEnter = true;
       continue;
     }
+    // "… ~ enters with a fellowship counter on it for each creature you
+    // control of the chosen type" (Banner of Kinship): chosen, then counted.
+    {
+      const counted = /^As ~ enters, choose a creature type\. (~ enters with an? ([+-]\d+\/[+-]\d+|[a-z]+) counter on it for each creature you control of the chosen type\.)$/.exec(line);
+      if (counted !== null) {
+        out.chooseCreatureTypeOnEnter = true;
+        out.static.push({
+          affects: { scope: "self" },
+          replacement: {
+            event: "enters-battlefield",
+            counters: { kind: counted[2], amount: { countOf: { type: "creature", controlledBy: "you", ofChosenType: true } } },
+          },
+          text: printed(counted[1]),
+        });
+        continue;
+      }
+    }
     // "As this land enters, choose Elemental, Elf, … or Treefolk": a menu of
     // creature types, the chosen one read the same way (Eclipsed Realms).
     {
@@ -18417,6 +18434,15 @@ function parseStatic(line, text) {
         ...(m[1] === "Other c" ? { excludeSelf: true } : {}),
       },
       grantPt: [Number(m[2]), Number(m[3])],
+      text,
+    };
+  }
+  // "… get +1/+1 for each fellowship counter on this artifact" (Banner of
+  // Kinship, Door of Destinies): the counters of that kind on the source.
+  if ((m = /^Creatures you control of the chosen type get ([+-]\d+)\/([+-]\d+) for each ([a-z]+) counter on ~\.$/.exec(line))) {
+    return {
+      affects: { scope: "filter", filter: { type: "creature", controlledBy: "you", ofChosenType: true } },
+      grantPtPerCount: { countersOnSource: m[3], pt: [Number(m[1]), Number(m[2])] },
       text,
     };
   }

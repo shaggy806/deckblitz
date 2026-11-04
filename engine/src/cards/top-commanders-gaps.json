@@ -1739,7 +1739,8 @@
   "effect:exile-spell-as-it-resolves-suspended",
   "effect:time-counters-on-all-suspended",
   "static:set-name",
-  "effect:animate-add-supertype"
+  "effect:animate-add-supertype",
+  "static:anthem-per-counter-on-source"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

@@ -14772,6 +14772,25 @@ describe("an effect that names a permanent", () => {
           duration: "permanent",
         },
       ],
+describe("a choice of creature type, the counters counted with it (Banner of Kinship)", () => {
+  it("reads the whole card", () => {
+    const face = parseFace({
+      name: "Banner of Kinship",
+      type_line: "Artifact",
+      mana_cost: "{5}",
+      colors: [],
+      oracle_text:
+        "As this artifact enters, choose a creature type. This artifact enters with a fellowship counter on it for each creature you control of the chosen type.\nCreatures you control of the chosen type get +1/+1 for each fellowship counter on this artifact.",
+    });
+    expect(face.complete).toBe(true);
+    expect(face.chooseCreatureTypeOnEnter).toBe(true);
+    expect(face.static[0].replacement.counters).toEqual({
+      kind: "fellowship",
+      amount: { countOf: { type: "creature", controlledBy: "you", ofChosenType: true } },
+    });
+    expect(face.static[1]).toMatchObject({
+      affects: { scope: "filter", filter: { type: "creature", controlledBy: "you", ofChosenType: true } },
+      grantPtPerCount: { countersOnSource: "fellowship", pt: [1, 1] },
     });
   });
 });
