@@ -10101,8 +10101,10 @@ export type EffectSpec =
        * it"). `"nobody"`: "exile a card from your hand face down", no more
        * said (Summoner's Egg's ruling: you can't look once it's imprinted). */
       readonly faceDownLooks?: "chooser" | "nobody";
-      /** What the chooser is told, when the zone and destination wouldn't say
-       * it: Moonlight Bargain's price for each card kept. */
+      /** What the chooser is told, shown instead of what `destination` says:
+       * Moonlight Bargain's price for each card kept; "choose two cards in your
+       * hand drawn this turn" (Sylvan Library), where `"stay"` leaves `then` to
+       * say it. */
       readonly prompt?: string;
       /** Chosen cards bound for the battlefield enter **tapped** (Terrain
        * Generator). */
@@ -10227,10 +10229,6 @@ export type EffectSpec =
        * Skipped entirely when nothing was chosen.
        */
       readonly then?: EffectSpec;
-      /** What the choice is for, shown instead of what `destination` says —
-       * "choose two cards in your hand drawn this turn" (Sylvan Library),
-       * where `"stay"` leaves `then` to say it. */
-      readonly prompt?: string;
       /** The cards picked are what's at stake, not what's gained: `then` may
        * take them away (Sylvan Library), so a bot picks its worst. */
       readonly givesUp?: true;
