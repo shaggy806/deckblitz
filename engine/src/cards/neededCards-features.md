@@ -5121,3 +5121,5 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 **An instruction, if that player leads each other player (2026-11-04).** `condition:compare-each-other-player`, no engine code: a `conditional` on `of-player` `that-player` over `player-compare` `than: "each-opponent"`, and the scaffolder reads the trailing "X if that player has more … than each other player." under a trigger that names the player. Battle Angels of Tyr.
 
 **A planeswalker that's an Equipment, and "can't be attacked" (2026-11-04).** `mechanic:planeswalker-equipment`: the `cant-be-attacked` `CombatRestriction`, read by `whyCannotAttack` and `canBeAttacked` for the attackers offer, and not by `legalDefenders`, so one already attacked stays and one entering attacking may choose it (rule 508.4c). The rest was there: `attach` from a loyalty ability, a conditional `grantsTriggered`. The Aetherspark.
+
+**A repeated search with one shuffle (2026-11-04).** `effect:repeated-search-one-shuffle`, no engine code: `search-library`'s `shufflesLater` on each, in a `may`, the second in a `conditional`, and a closing `shuffle-library` of `searchers`. Claim Jumper.
