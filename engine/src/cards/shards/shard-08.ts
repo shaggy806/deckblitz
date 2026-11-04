@@ -937,6 +937,7 @@ import _poolZodiacDragon from "../pool/zodiac-dragon.js";
 import _poolZodiacOx from "../pool/zodiac-ox.js";
 import _poolZoralineCosmosCaller from "../pool/zoraline-cosmos-caller.js";
 import _poolZuranOrb from "../pool/zuran-orb.js";
+import _tokens21BlackSkeletonToken from "../tokens/2-1-black-skeleton-token.js";
 import _tokensAshayaTheAwokenWorld from "../tokens/ashaya-the-awoken-world.js";
 import _tokensCatWarriorToken from "../tokens/cat-warrior-token.js";
 import _tokensElfWarriorTokenRhysTheRedeemed from "../tokens/elf-warrior-token-rhys-the-redeemed.js";
@@ -1898,6 +1899,7 @@ const shard: CardShard = {
     _poolZuranOrb,
   ],
   tokens: [
+    _tokens21BlackSkeletonToken,
     _tokensAshayaTheAwokenWorld,
     _tokensCatWarriorToken,
     _tokensElfWarriorTokenRhysTheRedeemed,

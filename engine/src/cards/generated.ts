@@ -3601,9 +3601,11 @@ import _poolCascadingCataracts from "./pool/cascading-cataracts.js";
 import _poolCaseOfTheCrimsonPulse from "./pool/case-of-the-crimson-pulse.js";
 import _poolCaseOfTheFilchedFalcon from "./pool/case-of-the-filched-falcon.js";
 import _poolCaseOfTheGorgonsKiss from "./pool/case-of-the-gorgons-kiss.js";
+import _poolCaseOfTheLockedHothouse from "./pool/case-of-the-locked-hothouse.js";
 import _poolCaseOfTheRansackedLab from "./pool/case-of-the-ransacked-lab.js";
 import _poolCaseOfTheShatteredPact from "./pool/case-of-the-shattered-pact.js";
 import _poolCaseOfTheShiftingVisage from "./pool/case-of-the-shifting-visage.js";
+import _poolCaseOfTheStashedSkeleton from "./pool/case-of-the-stashed-skeleton.js";
 import _poolCaseOfTheTrampledGarden from "./pool/case-of-the-trampled-garden.js";
 import _poolCaseOfTheUneatenFeast from "./pool/case-of-the-uneaten-feast.js";
 import _poolCaseyJonesBackAlleyBrute from "./pool/casey-jones-back-alley-brute.js";
@@ -3708,6 +3710,7 @@ import _poolCaveSense from "./pool/cave-sense.js";
 import _poolCaveTiger from "./pool/cave-tiger.js";
 import _poolCavernCrawler from "./pool/cavern-crawler.js";
 import _poolCavernHarpy from "./pool/cavern-harpy.js";
+import _poolCavernHoardDragon from "./pool/cavern-hoard-dragon.js";
 import _poolCavernLampad from "./pool/cavern-lampad.js";
 import _poolCavernOfSouls from "./pool/cavern-of-souls.js";
 import _poolCavernStomper from "./pool/cavern-stomper.js";
@@ -6727,6 +6730,7 @@ import _poolDrownInFilth from "./pool/drown-in-filth.js";
 import _poolDrownInIchor from "./pool/drown-in-ichor.js";
 import _poolDrownInShapelessness from "./pool/drown-in-shapelessness.js";
 import _poolDrownInSorrow from "./pool/drown-in-sorrow.js";
+import _poolDrownInTheLoch from "./pool/drown-in-the-loch.js";
 import _poolDrownedCatacomb from "./pool/drowned-catacomb.js";
 import _poolDrownedDiner from "./pool/drowned-diner.js";
 import _poolDrownedRusalka from "./pool/drowned-rusalka.js";
@@ -8223,6 +8227,7 @@ import _poolFeelingOfDread from "./pool/feeling-of-dread.js";
 import _poolFeignDeath from "./pool/feign-death.js";
 import _poolFeistySpikeling from "./pool/feisty-spikeling.js";
 import _poolFeiyiSnake from "./pool/feiyi-snake.js";
+import _poolFeldonOfTheThirdPath from "./pool/feldon-of-the-third-path.js";
 import _poolFeldonRonomExcavator from "./pool/feldon-ronom-excavator.js";
 import _poolFeldonsCane from "./pool/feldons-cane.js";
 import _poolFelhideBrawler from "./pool/felhide-brawler.js";
@@ -18972,6 +18977,7 @@ import _poolRancor from "./pool/rancor.js";
 import _poolRancorousArchaic from "./pool/rancorous-archaic.js";
 import _poolRandomEncounter from "./pool/random-encounter.js";
 import _poolRangerCaptainOfEos from "./pool/ranger-captain-of-eos.js";
+import _poolRangerClass from "./pool/ranger-class.js";
 import _poolRangerEnVec from "./pool/ranger-en-vec.js";
 import _poolRangerOfEos from "./pool/ranger-of-eos.js";
 import _poolRangersFirebrand from "./pool/rangers-firebrand.js";
@@ -28590,6 +28596,7 @@ import _tokens11BlackBirdTokenTheRavenMan from "./tokens/1-1-black-bird-token-th
 import _tokens11BlueBirdToken from "./tokens/1-1-blue-bird-token.js";
 import _tokens11OozeToken from "./tokens/1-1-ooze-token.js";
 import _tokens11ThrullToken from "./tokens/1-1-thrull-token.js";
+import _tokens21BlackSkeletonToken from "./tokens/2-1-black-skeleton-token.js";
 import _tokens22BlackBirdToken from "./tokens/2-2-black-bird-token.js";
 import _tokens22GreenLizardToken from "./tokens/2-2-green-lizard-token.js";
 import _tokens22RedDwarfToken from "./tokens/2-2-red-dwarf-token.js";
@@ -32881,9 +32888,11 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCaseOfTheCrimsonPulse,
   _poolCaseOfTheFilchedFalcon,
   _poolCaseOfTheGorgonsKiss,
+  _poolCaseOfTheLockedHothouse,
   _poolCaseOfTheRansackedLab,
   _poolCaseOfTheShatteredPact,
   _poolCaseOfTheShiftingVisage,
+  _poolCaseOfTheStashedSkeleton,
   _poolCaseOfTheTrampledGarden,
   _poolCaseOfTheUneatenFeast,
   _poolCaseyJonesBackAlleyBrute,
@@ -32988,6 +32997,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCaveTiger,
   _poolCavernCrawler,
   _poolCavernHarpy,
+  _poolCavernHoardDragon,
   _poolCavernLampad,
   _poolCavernOfSouls,
   _poolCavernStomper,
@@ -36007,6 +36017,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDrownInIchor,
   _poolDrownInShapelessness,
   _poolDrownInSorrow,
+  _poolDrownInTheLoch,
   _poolDrownedCatacomb,
   _poolDrownedDiner,
   _poolDrownedRusalka,
@@ -37503,6 +37514,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFeignDeath,
   _poolFeistySpikeling,
   _poolFeiyiSnake,
+  _poolFeldonOfTheThirdPath,
   _poolFeldonRonomExcavator,
   _poolFeldonsCane,
   _poolFelhideBrawler,
@@ -48252,6 +48264,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRancorousArchaic,
   _poolRandomEncounter,
   _poolRangerCaptainOfEos,
+  _poolRangerClass,
   _poolRangerEnVec,
   _poolRangerOfEos,
   _poolRangersFirebrand,
@@ -57876,6 +57889,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokens11BlueBirdToken,
   _tokens11OozeToken,
   _tokens11ThrullToken,
+  _tokens21BlackSkeletonToken,
   _tokens22BlackBirdToken,
   _tokens22GreenLizardToken,
   _tokens22RedDwarfToken,
@@ -62174,9 +62188,11 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/case-of-the-crimson-pulse": _poolCaseOfTheCrimsonPulse,
   "pool/case-of-the-filched-falcon": _poolCaseOfTheFilchedFalcon,
   "pool/case-of-the-gorgons-kiss": _poolCaseOfTheGorgonsKiss,
+  "pool/case-of-the-locked-hothouse": _poolCaseOfTheLockedHothouse,
   "pool/case-of-the-ransacked-lab": _poolCaseOfTheRansackedLab,
   "pool/case-of-the-shattered-pact": _poolCaseOfTheShatteredPact,
   "pool/case-of-the-shifting-visage": _poolCaseOfTheShiftingVisage,
+  "pool/case-of-the-stashed-skeleton": _poolCaseOfTheStashedSkeleton,
   "pool/case-of-the-trampled-garden": _poolCaseOfTheTrampledGarden,
   "pool/case-of-the-uneaten-feast": _poolCaseOfTheUneatenFeast,
   "pool/casey-jones-back-alley-brute": _poolCaseyJonesBackAlleyBrute,
@@ -62281,6 +62297,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/cave-tiger": _poolCaveTiger,
   "pool/cavern-crawler": _poolCavernCrawler,
   "pool/cavern-harpy": _poolCavernHarpy,
+  "pool/cavern-hoard-dragon": _poolCavernHoardDragon,
   "pool/cavern-lampad": _poolCavernLampad,
   "pool/cavern-of-souls": _poolCavernOfSouls,
   "pool/cavern-stomper": _poolCavernStomper,
@@ -65300,6 +65317,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/drown-in-ichor": _poolDrownInIchor,
   "pool/drown-in-shapelessness": _poolDrownInShapelessness,
   "pool/drown-in-sorrow": _poolDrownInSorrow,
+  "pool/drown-in-the-loch": _poolDrownInTheLoch,
   "pool/drowned-catacomb": _poolDrownedCatacomb,
   "pool/drowned-diner": _poolDrownedDiner,
   "pool/drowned-rusalka": _poolDrownedRusalka,
@@ -66796,6 +66814,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/feign-death": _poolFeignDeath,
   "pool/feisty-spikeling": _poolFeistySpikeling,
   "pool/feiyi-snake": _poolFeiyiSnake,
+  "pool/feldon-of-the-third-path": _poolFeldonOfTheThirdPath,
   "pool/feldon-ronom-excavator": _poolFeldonRonomExcavator,
   "pool/feldons-cane": _poolFeldonsCane,
   "pool/felhide-brawler": _poolFelhideBrawler,
@@ -77545,6 +77564,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/rancorous-archaic": _poolRancorousArchaic,
   "pool/random-encounter": _poolRandomEncounter,
   "pool/ranger-captain-of-eos": _poolRangerCaptainOfEos,
+  "pool/ranger-class": _poolRangerClass,
   "pool/ranger-en-vec": _poolRangerEnVec,
   "pool/ranger-of-eos": _poolRangerOfEos,
   "pool/rangers-firebrand": _poolRangersFirebrand,
@@ -87163,6 +87183,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/1-1-blue-bird-token": _tokens11BlueBirdToken,
   "tokens/1-1-ooze-token": _tokens11OozeToken,
   "tokens/1-1-thrull-token": _tokens11ThrullToken,
+  "tokens/2-1-black-skeleton-token": _tokens21BlackSkeletonToken,
   "tokens/2-2-black-bird-token": _tokens22BlackBirdToken,
   "tokens/2-2-green-lizard-token": _tokens22GreenLizardToken,
   "tokens/2-2-red-dwarf-token": _tokens22RedDwarfToken,

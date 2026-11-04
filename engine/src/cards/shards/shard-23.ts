@@ -212,6 +212,7 @@ import _poolDragonlordSilumgar from "../pool/dragonlord-silumgar.js";
 import _poolDragonrage from "../pool/dragonrage.js";
 import _poolDrivnodCarnageDominus from "../pool/drivnod-carnage-dominus.js";
 import _poolDroveOfElves from "../pool/drove-of-elves.js";
+import _poolDrownInTheLoch from "../pool/drown-in-the-loch.js";
 import _poolDrownedRusalka from "../pool/drowned-rusalka.js";
 import _poolDrownyardAmalgam from "../pool/drownyard-amalgam.js";
 import _poolDualStrike from "../pool/dual-strike.js";
@@ -1132,6 +1133,7 @@ const shard: CardShard = {
     _poolDragonrage,
     _poolDrivnodCarnageDominus,
     _poolDroveOfElves,
+    _poolDrownInTheLoch,
     _poolDrownedRusalka,
     _poolDrownyardAmalgam,
     _poolDualStrike,

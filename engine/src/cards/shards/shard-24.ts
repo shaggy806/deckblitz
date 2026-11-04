@@ -577,6 +577,7 @@ import _poolRamosianLieutenant from "../pool/ramosian-lieutenant.js";
 import _poolRampagingFerocidon from "../pool/rampaging-ferocidon.js";
 import _poolRampagingWarMammoth from "../pool/rampaging-war-mammoth.js";
 import _poolRampagingWerewolf from "../pool/rampaging-werewolf.js";
+import _poolRangerClass from "../pool/ranger-class.js";
 import _poolRankRat from "../pool/rank-rat.js";
 import _poolRapaciousOne from "../pool/rapacious-one.js";
 import _poolRazorBarrier from "../pool/razor-barrier.js";
@@ -1495,6 +1496,7 @@ const shard: CardShard = {
     _poolRampagingFerocidon,
     _poolRampagingWarMammoth,
     _poolRampagingWerewolf,
+    _poolRangerClass,
     _poolRankRat,
     _poolRapaciousOne,
     _poolRazorBarrier,

@@ -107,6 +107,7 @@ import _poolCatacombSlug from "../pool/catacomb-slug.js";
 import _poolCattiBrieOfMithralHall from "../pool/catti-brie-of-mithral-hall.js";
 import _poolCausticBronco from "../pool/caustic-bronco.js";
 import _poolCautiousSurvivor from "../pool/cautious-survivor.js";
+import _poolCavernHoardDragon from "../pool/cavern-hoard-dragon.js";
 import _poolCavernousMaw from "../pool/cavernous-maw.js";
 import _poolCelebornTheWise from "../pool/celeborn-the-wise.js";
 import _poolCephalidBroker from "../pool/cephalid-broker.js";
@@ -1004,6 +1005,7 @@ const shard: CardShard = {
     _poolCattiBrieOfMithralHall,
     _poolCausticBronco,
     _poolCautiousSurvivor,
+    _poolCavernHoardDragon,
     _poolCavernousMaw,
     _poolCelebornTheWise,
     _poolCephalidBroker,

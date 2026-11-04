@@ -132,6 +132,7 @@ import _poolCaptainAmericaWingsOfFreedom from "../pool/captain-america-wings-of-
 import _poolCaptainOfTheWatch from "../pool/captain-of-the-watch.js";
 import _poolCartoucheOfSolidarity from "../pool/cartouche-of-solidarity.js";
 import _poolCascadeSeer from "../pool/cascade-seer.js";
+import _poolCaseOfTheStashedSkeleton from "../pool/case-of-the-stashed-skeleton.js";
 import _poolCastleGarenbrig from "../pool/castle-garenbrig.js";
 import _poolCataclysm from "../pool/cataclysm.js";
 import _poolCaveOfTemptation from "../pool/cave-of-temptation.js";
@@ -1054,6 +1055,7 @@ const shard: CardShard = {
     _poolCaptainOfTheWatch,
     _poolCartoucheOfSolidarity,
     _poolCascadeSeer,
+    _poolCaseOfTheStashedSkeleton,
     _poolCastleGarenbrig,
     _poolCataclysm,
     _poolCaveOfTemptation,

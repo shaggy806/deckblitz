@@ -27,6 +27,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "1/3 Green Enchantment Spider Token (Reach)",
   "2/1 Black Cat Token",
   "2/1 Black Green Spider Token (Menace, Reach)",
+  "2/1 Black Skeleton Token",
   "2/1 Black Spider Token (Menace, Reach)",
   "2/1 Green Spider Token (Reach)",
   "2/2 Beast Token",

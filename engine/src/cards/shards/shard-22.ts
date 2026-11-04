@@ -115,6 +115,7 @@ import _poolCaptainAmericaSteveRogers from "../pool/captain-america-steve-rogers
 import _poolCaptainAmericasMotorcycle from "../pool/captain-americas-motorcycle.js";
 import _poolCareeningMineCart from "../pool/careening-mine-cart.js";
 import _poolCartographersHawk from "../pool/cartographers-hawk.js";
+import _poolCaseOfTheLockedHothouse from "../pool/case-of-the-locked-hothouse.js";
 import _poolCaseOfTheUneatenFeast from "../pool/case-of-the-uneaten-feast.js";
 import _poolCatharticReunion from "../pool/cathartic-reunion.js";
 import _poolCentaurVeteran from "../pool/centaur-veteran.js";
@@ -1043,6 +1044,7 @@ const shard: CardShard = {
     _poolCaptainAmericasMotorcycle,
     _poolCareeningMineCart,
     _poolCartographersHawk,
+    _poolCaseOfTheLockedHothouse,
     _poolCaseOfTheUneatenFeast,
     _poolCatharticReunion,
     _poolCentaurVeteran,
