@@ -26003,6 +26003,7 @@ export class Game {
   private endResolutionIfDone(): void {
     if (this.state.suspendedResolutions.length === 0) {
       delete this.state.resolutionSince;
+      delete this.state.repeatSince;
       delete this.state.resolvingSource;
       delete this.state.resolvingController;
     }
@@ -31878,6 +31879,7 @@ export class Game {
           condition.what,
           condition.who === undefined ? undefined : scoped(condition.who),
           condition.filter,
+          condition.acrossPasses === true ? this.state.repeatSince : undefined,
         )
           // "If **another** Desert was returned this way": not the source
           // itself, which keeps its id as it changes zones.
@@ -31900,7 +31902,7 @@ export class Game {
           }
           done = Math.max(0, ...groups.values());
         }
-        const atLeast = condition.atLeast ?? (condition.atMost === undefined ? 1 : 0);
+        const atLeast = condition.atLeast === "x" ? x : (condition.atLeast ?? (condition.atMost === undefined ? 1 : 0));
         return done >= atLeast && (condition.atMost === undefined || done <= condition.atMost);
       }
       // What the firing declaration aimed at you, each attacker where it was
@@ -34797,6 +34799,12 @@ export class Game {
       },
       nextEventSeq: () => this.state.eventSeq,
       thisWaySince: () => since,
+      scopeRepeat: (at) => {
+        const was = this.state.repeatSince;
+        if (at === undefined) delete this.state.repeatSince;
+        else this.state.repeatSince = at;
+        return was;
+      },
       scopeThisWay: (at) => {
         this.state.resolutionSince = at;
         return this.makeResolutionContext(

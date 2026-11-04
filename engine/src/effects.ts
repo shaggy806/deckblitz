@@ -6560,9 +6560,9 @@ export type EffectSpec =
        * order, again): `effect` once, then again as long as `times`,
        * `again` and `mayAgain` allow, each pass its own "this way" — so
        * "if an Insect card was milled this way" asks about this pass's mill
-       * only. A pass that stops to ask something is answered before the
-       * next begins. At most `MAX_REPEATS` passes, a guard: a library runs
-       * out long before.
+       * only, unless the `this-way` condition says `acrossPasses`. A pass that
+       * stops to ask something is answered before the next begins. At most
+       * `MAX_REPEATS` passes, a guard: a library runs out long before.
        */
       readonly kind: "repeat";
       /** The process — one pass of it. */
@@ -6589,10 +6589,12 @@ export type EffectSpec =
        * "this way" start (restored once the last pass is done, so what
        * follows reads every pass — Demonlord Belzenlok's "for each card put
        * into your hand this way"), the pass count fixed from `times`, and
-       * whether the pass just done has been judged. */
+       * whether the pass just done has been judged. `outerRepeat`: the
+       * `GameState.repeatSince` to restore once it's done. */
       readonly progress?: {
         readonly round: number;
         readonly outer: number;
+        readonly outerRepeat?: number;
         readonly total?: number;
         readonly stop?: true;
         readonly judged?: true;
@@ -12278,6 +12280,9 @@ export interface EffectApi {
    * from here on, a resumed one too, reads) — and this context, reading
    * from there. */
   scopeThisWay(at: number): ResolutionContext;
+  /** `GameState.repeatSince`, which a `repeat` sets as it begins, and restores
+   * once its last pass is done; this returns what it was. */
+  scopeRepeat(at: number | undefined): number | undefined;
   /** See the `"populate"` {@link EffectSpec}. */
   populate(): void;
   /** See the `"amass"` {@link EffectSpec}. `onto`: the Army already
@@ -13809,17 +13814,24 @@ function distributeCounters(spec: Extract<EffectSpec, { kind: "counters-distribu
 
 function applyRepeat(spec: Extract<EffectSpec, { kind: "repeat" }>, ctx: ResolutionContext): void {
   let progress = spec.progress;
-  const finish = (outer: number): void => {
-    ctx.scopeThisWay(outer);
+  const finish = (done: { readonly outer: number; readonly outerRepeat?: number }): void => {
+    ctx.scopeThisWay(done.outer);
+    ctx.scopeRepeat(done.outerRepeat);
   };
   if (progress?.stop === true) {
-    finish(progress.outer);
+    finish(progress);
     return;
   }
   if (progress === undefined) {
     const total = spec.times === undefined ? undefined : Math.max(0, amountValue(spec.times, ctx));
-    progress = { round: 0, outer: ctx.thisWaySince(), ...(total !== undefined ? { total } : {}) };
     if (total === 0) return;
+    const outerRepeat = ctx.scopeRepeat(ctx.nextEventSeq());
+    progress = {
+      round: 0,
+      outer: ctx.thisWaySince(),
+      ...(outerRepeat !== undefined ? { outerRepeat } : {}),
+      ...(total !== undefined ? { total } : {}),
+    };
   }
   // Resumed after a pass that stopped to ask, `ctx` reads that pass's "this
   // way" already: the resolution's start is still the pass's.
@@ -13834,7 +13846,7 @@ function applyRepeat(spec: Extract<EffectSpec, { kind: "repeat" }>, ctx: Resolut
         (spec.again === undefined || judge.conditionMet(spec.again)) &&
         (spec.again !== undefined || spec.mayAgain !== undefined || progress.total !== undefined);
       if (!more) {
-        finish(progress.outer);
+        finish(progress);
         return;
       }
       if (spec.mayAgain !== undefined) {
@@ -13860,7 +13872,12 @@ function applyRepeat(spec: Extract<EffectSpec, { kind: "repeat" }>, ctx: Resolut
     const parked = pass.parkedCount();
     const pendingBefore = pass.decisionPending();
     applyEffectSpec(spec.effect, pass);
-    progress = { round, outer: progress.outer, ...(progress.total !== undefined ? { total: progress.total } : {}) };
+    progress = {
+      round,
+      outer: progress.outer,
+      ...(progress.outerRepeat !== undefined ? { outerRepeat: progress.outerRepeat } : {}),
+      ...(progress.total !== undefined ? { total: progress.total } : {}),
+    };
     if (!pendingBefore && pass.decisionPending()) {
       pass.resumeAfterDecisions({ ...spec, progress }, parked);
       return;

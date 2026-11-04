@@ -6532,6 +6532,12 @@ export interface GameState {
    * and everything it parked have finished; absent between resolutions.
    */
   resolutionSince?: number;
+  /**
+   * The `eventSeq` the `repeat` now under way began at (each of its passes
+   * moves `resolutionSince` to its own start): what a `this-way` condition's
+   * `acrossPasses` reads. Absent outside a `repeat`.
+   */
+  repeatSince?: number;
   /** While an ability resolves (across the decisions it waits on, like
    * `resolutionSince`): its source and that source's timestamp then — what
    * a permanent it puts onto the battlefield records as `entry.by`. Absent

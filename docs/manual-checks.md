@@ -7314,3 +7314,8 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 - **Do:** Activate it on Bob's Command Tower. Find a basic land as yourself, then as Bob.
 - **Expect:** Command Tower and Field of Ruin are in graveyards. Neither player is asked whether to search; only basic lands are offered, and each finds one.
+
+### Tainted Pact: a second card of the same name ends it
+
+- **Do:** Cast it. Say no to the first card, and no to the second.
+- **Expect:** Shock, then Grizzly Bears, are exiled and offered. The next Shock is exiled with no question, and the spell is done, with Hill Giant still on your library.

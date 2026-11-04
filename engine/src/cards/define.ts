@@ -1669,9 +1669,18 @@ export type StaticCondition =
       readonly what: ThisWayKind;
       readonly who?: PlayerScope;
       readonly filter?: CardFilter;
-      readonly atLeast?: number;
+      /** `"x"`: the X of the resolving spell or ability — Helm of Obedience's
+       * "until a creature card or **X cards** have been put into their
+       * graveyard this way". */
+      readonly atLeast?: number | "x";
       readonly atMost?: number;
       readonly other?: boolean;
+      /** Inside a `repeat`, over **every pass so far** rather than the pass
+       * under way, which is what "this way" otherwise means there: Tainted
+       * Pact's "the same name as another card exiled this way", Helm of
+       * Obedience's "until a creature card … put into their graveyard this
+       * way". Outside one, as ever. */
+      readonly acrossPasses?: true;
       /** "If **two cards that share a color** were milled this way"
        * (Grindstone), "…that share a card type" (The Tale of Tamiyo), "if
        * two or more of those cards have **the same name**" (Scalpelexis):

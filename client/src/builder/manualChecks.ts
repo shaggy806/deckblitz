@@ -10966,4 +10966,8 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { human: true, bf: ['Command Tower'], lib: ['Island'] },
     }),
   ),
+  preset(
+    'Tainted Pact: a second card of the same name ends it',
+    board({ you: { bf: ['Swamp*2'], hand: ['Tainted Pact'], lib: ['Shock', 'Grizzly Bears', 'Shock', 'Hill Giant'] } }),
+  ),
 ]

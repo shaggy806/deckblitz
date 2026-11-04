@@ -414,6 +414,7 @@
   "mechanic:harness-infinity",
   "effect:each-player-may-held-search",
   "effect:each-player-search",
+  "condition:this-way-across-repeat-passes",
   "stat:mana-color-spent-condition",
   "static:doesnt-untap-filter",
   "static:doesnt-untap-attached",
