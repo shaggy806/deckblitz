@@ -16632,7 +16632,8 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "created-tokens-fight":
-      ctx.createdTokensFight(spec.among, spec.asked, ctx.targets);
+      // Its targets are an answer only once it has asked.
+      ctx.createdTokensFight(spec.among, spec.asked, spec.asked === undefined ? [] : ctx.targets);
       return;
     case "counter": {
       const target = resolveEffectTarget(spec.target, ctx);
