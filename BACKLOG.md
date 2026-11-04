@@ -482,7 +482,7 @@ section keeps only what to do next.
   Arcum's Weathervane and Thermal Flux (snow).
   **By best EDHREC card, from here (`cards:needs -- --by-rank`):** Gemstone Caverns, Sylvan Library, Arena of Glory, Mistrise Village, Selvala,
   Rise of the Dark Realms, Field of the Dead, Birgi. Their records overstated the work more than once (Arena of Glory, Mistrise Village,
-  Rise and Field needed no engine code): try the card first.
+  Rise and Field needed no engine code): try the card first. Then Banner of Kinship, Opal Palace, Innkeeper's Talent, Archivist of Oghma.
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next
@@ -551,6 +551,7 @@ One line each; the detail (rule numbers, code sites, the cards each blocks) is i
 **`docs/engine-gaps.md`**, under the same bold title. When a gap closes, delete its detail
 there and move this line to `COMPLETED.md`.
 
+- **Panglacial Wurm under Opposition Agent** (the cast-while-searching offer comes before the search control begins, so the searcher answers it).
 - **A shuffled face-down pile keeps its object ids** (Become Anonymous, Expose the Culprit: a client reading the wire can tell which face-down card is which; needs a design call).
 - **A self-replacement beside an exile: no 616.1 choice** (Gravebane Zombie's and Blightsteel's own "instead" always beat Rest in Peace or a finality counter).
 - **Two different "must be blocked by" filters on one attacker merge into one requirement** (lenient, rule 509.1c).

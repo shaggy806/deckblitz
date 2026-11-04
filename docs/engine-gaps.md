@@ -409,6 +409,11 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   slots are alike, as here), and a skipped optional first slot still needs the cast refused or the
   random controller kept from skipping it. Found 2026-10-23, batch 151's checks.
 
+**Panglacial Wurm under Opposition Agent.** The Agent's controller makes every decision while the player searches, but in `effects.ts`,
+`case "search-library"` offers `cast-now` (`from: "while-searching"`) before `ctx.searchLibrary`, and `Game.beginSearchControl` only starts
+in `beginLibrarySearch`, so the searcher answers. Fix: begin the control before the offer and end it when the search's `choose-from-zone`
+is answered. Blocks no card; only this interaction is wrong. Found 2026-11-04.
+
 **A shuffled face-down pile keeps its object ids.** Become Anonymous and Expose the Culprit (`Game.cloakExiledPile`) exile cards face up,
 shuffle them and cloak one, but an object keeps its id through the exile, so a client reading the wire or animating by id can tell which
 face-down card is which, where rule 406.3 and the shuffle (rule 701.24) mean nobody should. Rules-wise the cards run; what's seen is the

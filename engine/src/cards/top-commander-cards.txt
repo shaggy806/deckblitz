@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4343 already implemented / 657 missing (marks refreshed 2026-11-04)
+4353 already implemented / 647 missing (marks refreshed 2026-11-04)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -617,7 +617,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   618  Shizo, Death's Storehouse                {0}              Legendary Land
 [x]   619  Stitcher's Supplier                      {B}              Creature — Zombie
 [ ]   620  Archdruid's Charm                        {G}{G}{G}        Instant
-[ ]   621  Banner of Kinship                        {5}              Artifact
+[x]   621  Banner of Kinship                        {5}              Artifact
 [x]   622  Torment of Hailfire                      {X}{B}{B}        Sorcery
 [x]   623  Icetill Explorer                         {2}{G}{G}        Creature — Insect Scout
 [x]   624  Dig Through Time                         {6}{U}{U}        Instant
@@ -672,7 +672,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   673  Wrath of God                             {2}{W}{W}        Sorcery
 [x]   674  Gravecrawler                             {B}              Creature — Zombie
 [x]   675  Changeling Outcast                       {B}              Creature — Shapeshifter
-[ ]   676  Opal Palace                              {0}              Land
+[x]   676  Opal Palace                              {0}              Land
 [x]   677  Cryptolith Rite                          {1}{G}           Enchantment
 [x]   678  Hushwood Verge                           {0}              Land
 [x]   679  Bontu's Monument                         {3}              Legendary Artifact
@@ -684,10 +684,10 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   685  Meticulous Archive                       {0}              Land — Plains Island
 [x]   686  Purphoros, God of the Forge              {3}{R}           Legendary Enchantment Creature — God
 [x]   687  Imperial Recruiter                       {2}{R}           Creature — Human Advisor
-[ ]   688  Innkeeper's Talent                       {1}{G}           Enchantment — Class
+[x]   688  Innkeeper's Talent                       {1}{G}           Enchantment — Class
 [x]   689  Into the Flood Maw                       {U}              Instant
 [x]   690  Reflections of Littjara                  {4}{U}           Enchantment
-[ ]   691  Archivist of Oghma                       {1}{W}           Creature — Halfling Cleric
+[x]   691  Archivist of Oghma                       {1}{W}           Creature — Halfling Cleric
 [x]   692  Ancient Greenwarden                      {4}{G}{G}        Creature — Elemental
 [x]   693  Vernal Fen                               {0}              Land — Swamp Forest
 [x]   694  Aggravated Assault                       {2}{R}           Enchantment
@@ -1240,13 +1240,13 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1246  Topiary Stomper                          {1}{G}{G}        Creature — Plant Dinosaur
 [x]  1247  Shark Typhoon                            {5}{U}           Enchantment
 [ ]  1248  Liberator, Urza's Battlethopter          {3}              Legendary Artifact Creature — Thopter
-[ ]  1249  Vorinclex, Monstrous Raider              {4}{G}{G}        Legendary Creature — Phyrexian Praetor
+[x]  1249  Vorinclex, Monstrous Raider              {4}{G}{G}        Legendary Creature — Phyrexian Praetor
 [x]  1250  Chromatic Orrery                         {7}              Legendary Artifact
 [x]  1251  Slayers' Stronghold                      {0}              Land
 [x]  1252  Summon: Bahamut                          {9}              Enchantment Creature — Saga Dragon
 [x]  1253  Fracture                                 {W}{B}           Instant
 [x]  1254  Silver Myr                               {2}              Artifact Creature — Myr
-[ ]  1255  Wan Shi Tong, Librarian                  {X}{U}{U}        Legendary Creature — Bird Spirit
+[x]  1255  Wan Shi Tong, Librarian                  {X}{U}{U}        Legendary Creature — Bird Spirit
 [x]  1256  Kiki-Jiki, Mirror Breaker                {2}{R}{R}{R}     Legendary Creature — Goblin Shaman
 [ ]  1257  Rosie Cotton of South Lane               {2}{W}           Legendary Creature — Halfling Peasant
 [x]  1258  Bushwhack                                {G}              Sorcery
@@ -1467,7 +1467,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1474  In Garruk's Wake                         {7}{B}{B}        Sorcery
 [x]  1475  Thalia, Heretic Cathar                   {2}{W}           Legendary Creature — Human Soldier
 [x]  1476  Cover of Darkness                        {1}{B}           Enchantment
-[ ]  1477  Lae'zel, Vlaakith's Champion             {2}{W}           Legendary Creature — Gith Warrior
+[x]  1477  Lae'zel, Vlaakith's Champion             {2}{W}           Legendary Creature — Gith Warrior
 [x]  1478  Fell the Mighty                          {4}{W}           Sorcery
 [x]  1479  Kessig Flamebreather                     {1}{R}           Creature — Human Shaman
 [x]  1480  Prosperous Innkeeper                     {1}{G}           Creature — Halfling Citizen
@@ -1946,7 +1946,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1953  Bitterthorn, Nissa's Animus              {3}              Legendary Artifact — Equipment
 [x]  1954  Dragon Fodder                            {1}{R}           Sorcery
 [x]  1955  Ob Nixilis, the Fallen                   {3}{B}{B}        Legendary Creature — Demon
-[ ]  1956  Witness Protection                       {U}              Enchantment — Aura
+[x]  1956  Witness Protection                       {U}              Enchantment — Aura
 [x]  1957  Seething Landscape                       {0}              Land
 [x]  1958  Angel's Grace                            {W}              Instant
 [x]  1959  Hulking Raptor                           {2}{G}{G}        Creature — Dinosaur
@@ -3960,7 +3960,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3967  Arctic Treeline                          {0}              Snow Land — Forest Plains
 [x]  3968  Pariah's Shield                          {5}              Artifact — Equipment
 [x]  3969  Annoyed Altisaur                         {5}{G}{G}        Creature — Dinosaur
-[ ]  3970  Ob Nixilis, Unshackled                   {4}{B}{B}        Legendary Creature — Demon
+[x]  3970  Ob Nixilis, Unshackled                   {4}{B}{B}        Legendary Creature — Demon
 [ ]  3971  Vesuvan Duplimancy                       {3}{U}           Enchantment
 [x]  3972  Elementalist's Palette                   {3}              Artifact
 [ ]  3973  Hushbringer                              {1}{W}           Creature — Faerie
@@ -4032,7 +4032,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4039  Titania's Command                        {4}{G}{G}        Sorcery
 [x]  4040  Bottle-Cap Blast                         {4}{R}           Instant
 [x]  4041  Spell Stutter                            {1}{U}           Instant
-[ ]  4042  Scroll of Fate                           {3}              Artifact
+[x]  4042  Scroll of Fate                           {3}              Artifact
 [x]  4043  Desolation Twin                          {10}             Creature — Eldrazi
 [x]  4044  Colossification                          {5}{G}{G}        Enchantment — Aura
 [ ]  4045  Kefka, Dancing Mad                       {5}{B}{R}        Legendary Creature — Human Wizard

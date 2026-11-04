@@ -12,6 +12,19 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **A player searching a library as a trigger** (2026-11-04, `1eda5bee4`): Archivist of Oghma, Wan Shi Tong, Ob Nixilis, Unshackled.
+- **Counter replacements by who puts them, on permanents or players** (2026-11-04, `78d94c642`): Innkeeper's Talent, Vorinclex, Monstrous
+  Raider, Lae'zel, Vlaakith's Champion.
+- **Mana that adds counters to the spell it casts** (2026-11-04, `cb00544c3`): Opal Palace, Guildmages' Forum, Animal Attendant,
+  Commander's Insight.
+- **An anthem per counter on its source** (2026-11-04, `9616bd428`): Banner of Kinship; the machinery was already there.
+- **A name an effect gives a permanent, statically or for good** (2026-11-04, `45640bafc`): Witness Protection, Honest Work, Awakening of
+  Vitu-Ghazi.
+- **Time counters reaching suspended cards, exiling with time counters as a spell resolves** (2026-11-04, `f1f19a5eb`): Shivan Sand-Mage,
+  Jhoira's Timebug, Pardic Dragon, Curse of the Cabal, Dust of Moments, Charnel Serenade, Gandalf of the Secret Fire, Alaundo the Seer.
+- **Manifest or cloak from a chosen source, piles in exile, a return face down** (2026-11-04, `aab39bd9b`): Scroll of Fate, Vannifar, Hide
+  in Plain Sight, Become Anonymous, Expose the Culprit, Hostile Negotiations, Abstract Performance, Shorecrasher Elemental, Deathmist
+  Raptor, Yarus.
 - **Boast twice** (2026-11-04, `c74a5af69`): Birgi // Harnfel. Rule numbers for boast corrected to 702.142.
 - **Different names as an intervening if** (2026-11-04, `727e7a2ad`): Field of the Dead, Liliana's Contract.
 - **Every graveyard onto the battlefield** (2026-11-04, `3a5a8e748`): Rise of the Dark Realms, Roar of Reclamation, Myr Servitor.
