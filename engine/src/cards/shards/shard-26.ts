@@ -779,6 +779,7 @@ import _poolTerminalCriticism from "../pool/terminal-criticism.js";
 import _poolTerrianWorldTyrant from "../pool/terrian-world-tyrant.js";
 import _poolTerritorialBruntar from "../pool/territorial-bruntar.js";
 import _poolThassaGodOfTheSea from "../pool/thassa-god-of-the-sea.js";
+import _poolTheAetherspark from "../pool/the-aetherspark.js";
 import _poolTheEchoverseFulcrum from "../pool/the-echoverse-fulcrum.js";
 import _poolTheFireCrystal from "../pool/the-fire-crystal.js";
 import _poolTheGreatHenge from "../pool/the-great-henge.js";
@@ -1701,6 +1702,7 @@ const shard: CardShard = {
     _poolTerrianWorldTyrant,
     _poolTerritorialBruntar,
     _poolThassaGodOfTheSea,
+    _poolTheAetherspark,
     _poolTheEchoverseFulcrum,
     _poolTheFireCrystal,
     _poolTheGreatHenge,

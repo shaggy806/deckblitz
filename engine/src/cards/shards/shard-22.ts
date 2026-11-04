@@ -129,6 +129,7 @@ import _poolChompingChangeling from "../pool/chomping-changeling.js";
 import _poolCircleOfTheMoonDruid from "../pool/circle-of-the-moon-druid.js";
 import _poolCircularLogic from "../pool/circular-logic.js";
 import _poolCitizensArrest from "../pool/citizens-arrest.js";
+import _poolClaimJumper from "../pool/claim-jumper.js";
 import _poolClashOfTitans from "../pool/clash-of-titans.js";
 import _poolClericOfChillDepths from "../pool/cleric-of-chill-depths.js";
 import _poolCloudgoatRanger from "../pool/cloudgoat-ranger.js";
@@ -1060,6 +1061,7 @@ const shard: CardShard = {
     _poolCircleOfTheMoonDruid,
     _poolCircularLogic,
     _poolCitizensArrest,
+    _poolClaimJumper,
     _poolClashOfTitans,
     _poolClericOfChillDepths,
     _poolCloudgoatRanger,

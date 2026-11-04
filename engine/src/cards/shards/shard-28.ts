@@ -420,6 +420,7 @@ import _poolLeoninBattlemage from "../pool/leonin-battlemage.js";
 import _poolLeoninBola from "../pool/leonin-bola.js";
 import _poolLeoninElder from "../pool/leonin-elder.js";
 import _poolLevitatingStatue from "../pool/levitating-statue.js";
+import _poolLeylineOfTheGuildpact from "../pool/leyline-of-the-guildpact.js";
 import _poolLiegeOfTheTangle from "../pool/liege-of-the-tangle.js";
 import _poolLifespinner from "../pool/lifespinner.js";
 import _poolLightningCloud from "../pool/lightning-cloud.js";
@@ -1352,6 +1353,7 @@ const shard: CardShard = {
     _poolLeoninBola,
     _poolLeoninElder,
     _poolLevitatingStatue,
+    _poolLeylineOfTheGuildpact,
     _poolLiegeOfTheTangle,
     _poolLifespinner,
     _poolLightningCloud,

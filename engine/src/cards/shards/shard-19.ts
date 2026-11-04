@@ -58,6 +58,7 @@ import _poolBanishingSlash from "../pool/banishing-slash.js";
 import _poolBarbarianHorde from "../pool/barbarian-horde.js";
 import _poolBarteredCow from "../pool/bartered-cow.js";
 import _poolBasalSliver from "../pool/basal-sliver.js";
+import _poolBattleAngelsOfTyr from "../pool/battle-angels-of-tyr.js";
 import _poolBedheadBeastie from "../pool/bedhead-beastie.js";
 import _poolBelbesPortal from "../pool/belbes-portal.js";
 import _poolBelleOfTheBrawl from "../pool/belle-of-the-brawl.js";
@@ -548,6 +549,7 @@ import _poolMinotaurExplorer from "../pool/minotaur-explorer.js";
 import _poolMirarisWake from "../pool/miraris-wake.js";
 import _poolMiresGrasp from "../pool/mires-grasp.js";
 import _poolMirozel from "../pool/mirozel.js";
+import _poolMirrorBox from "../pool/mirror-box.js";
 import _poolMitoticManipulation from "../pool/mitotic-manipulation.js";
 import _poolMoldervineReclamation from "../pool/moldervine-reclamation.js";
 import _poolMoltenBirth from "../pool/molten-birth.js";
@@ -1026,6 +1028,7 @@ const shard: CardShard = {
     _poolBarbarianHorde,
     _poolBarteredCow,
     _poolBasalSliver,
+    _poolBattleAngelsOfTyr,
     _poolBedheadBeastie,
     _poolBelbesPortal,
     _poolBelleOfTheBrawl,
@@ -1516,6 +1519,7 @@ const shard: CardShard = {
     _poolMirarisWake,
     _poolMiresGrasp,
     _poolMirozel,
+    _poolMirrorBox,
     _poolMitoticManipulation,
     _poolMoldervineReclamation,
     _poolMoltenBirth,

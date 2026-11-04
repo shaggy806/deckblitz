@@ -1915,6 +1915,7 @@ import _poolBattershieldWarrior from "./pool/battershield-warrior.js";
 import _poolBatterskull from "./pool/batterskull.js";
 import _poolBatteryBearer from "./pool/battery-bearer.js";
 import _poolBattery from "./pool/battery.js";
+import _poolBattleAngelsOfTyr from "./pool/battle-angels-of-tyr.js";
 import _poolBattleAtTheBridge from "./pool/battle-at-the-bridge.js";
 import _poolBattleBrawler from "./pool/battle-brawler.js";
 import _poolBattleCryGoblin from "./pool/battle-cry-goblin.js";
@@ -4203,6 +4204,7 @@ import _poolCivilizedScholar from "./pool/civilized-scholar.js";
 import _poolClachanFestival from "./pool/clachan-festival.js";
 import _poolClackbridgeTroll from "./pool/clackbridge-troll.js";
 import _poolClaimFame from "./pool/claim-fame.js";
+import _poolClaimJumper from "./pool/claim-jumper.js";
 import _poolClaimOfErebos from "./pool/claim-of-erebos.js";
 import _poolClaimTerritory from "./pool/claim-territory.js";
 import _poolClaimTheFirstborn from "./pool/claim-the-firstborn.js";
@@ -13916,6 +13918,7 @@ import _poolLeylineOfLightning from "./pool/leyline-of-lightning.js";
 import _poolLeylineOfPunishment from "./pool/leyline-of-punishment.js";
 import _poolLeylineOfSanctity from "./pool/leyline-of-sanctity.js";
 import _poolLeylineOfSingularity from "./pool/leyline-of-singularity.js";
+import _poolLeylineOfTheGuildpact from "./pool/leyline-of-the-guildpact.js";
 import _poolLeylineOfTheMeek from "./pool/leyline-of-the-meek.js";
 import _poolLeylineOfTheVoid from "./pool/leyline-of-the-void.js";
 import _poolLeylineOfVitality from "./pool/leyline-of-vitality.js";
@@ -15489,6 +15492,7 @@ import _poolMirrisGuile from "./pool/mirris-guile.js";
 import _poolMirrodinAvenged from "./pool/mirrodin-avenged.js";
 import _poolMirrodinBesieged from "./pool/mirrodin-besieged.js";
 import _poolMirrodinsCore from "./pool/mirrodins-core.js";
+import _poolMirrorBox from "./pool/mirror-box.js";
 import _poolMirrorEntity from "./pool/mirror-entity.js";
 import _poolMirrorGallery from "./pool/mirror-gallery.js";
 import _poolMirrorGolem from "./pool/mirror-golem.js";
@@ -19477,6 +19481,7 @@ import _poolRenegadeWheelsmith from "./pool/renegade-wheelsmith.js";
 import _poolRenegadesGetaway from "./pool/renegades-getaway.js";
 import _poolRenewal from "./pool/renewal.js";
 import _poolRenewedFaith from "./pool/renewed-faith.js";
+import _poolRenewedSolidarity from "./pool/renewed-solidarity.js";
 import _poolRenewingDawn from "./pool/renewing-dawn.js";
 import _poolRenewingTouch from "./pool/renewing-touch.js";
 import _poolRenounceTheGuilds from "./pool/renounce-the-guilds.js";
@@ -20836,6 +20841,7 @@ import _poolScepterOfInsight from "./pool/scepter-of-insight.js";
 import _poolSceptreOfEternalGlory from "./pool/sceptre-of-eternal-glory.js";
 import _poolSchemaThief from "./pool/schema-thief.js";
 import _poolSchemingSilvertongue from "./pool/scheming-silvertongue.js";
+import _poolSchemingSymmetry from "./pool/scheming-symmetry.js";
 import _poolSchismotivate from "./pool/schismotivate.js";
 import _poolScholarOfAthreos from "./pool/scholar-of-athreos.js";
 import _poolScholarOfCombustion from "./pool/scholar-of-combustion.js";
@@ -24777,6 +24783,7 @@ import _poolThaumaturgesFamiliar from "./pool/thaumaturges-familiar.js";
 import _poolThawbringer from "./pool/thawbringer.js";
 import _poolThawingGlaciers from "./pool/thawing-glaciers.js";
 import _poolTheAesirEscapeValhalla from "./pool/the-aesir-escape-valhalla.js";
+import _poolTheAetherspark from "./pool/the-aetherspark.js";
 import _poolTheAncientOne from "./pool/the-ancient-one.js";
 import _poolTheAnimus from "./pool/the-animus.js";
 import _poolTheAntiquitiesWar from "./pool/the-antiquities-war.js";
@@ -26080,6 +26087,7 @@ import _poolTwinflame from "./pool/twinflame.js";
 import _poolTwiningTwins from "./pool/twining-twins.js";
 import _poolTwinmawStormbrood from "./pool/twinmaw-stormbrood.js";
 import _poolTwinnedVision from "./pool/twinned-vision.js";
+import _poolTwinningStaff from "./pool/twinning-staff.js";
 import _poolTwinsOfMaurerEstate from "./pool/twins-of-maurer-estate.js";
 import _poolTwinscrollShaman from "./pool/twinscroll-shaman.js";
 import _poolTwinshotSniper from "./pool/twinshot-sniper.js";
@@ -31238,6 +31246,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBatterskull,
   _poolBatteryBearer,
   _poolBattery,
+  _poolBattleAngelsOfTyr,
   _poolBattleAtTheBridge,
   _poolBattleBrawler,
   _poolBattleCryGoblin,
@@ -33526,6 +33535,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolClachanFestival,
   _poolClackbridgeTroll,
   _poolClaimFame,
+  _poolClaimJumper,
   _poolClaimOfErebos,
   _poolClaimTerritory,
   _poolClaimTheFirstborn,
@@ -43239,6 +43249,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLeylineOfPunishment,
   _poolLeylineOfSanctity,
   _poolLeylineOfSingularity,
+  _poolLeylineOfTheGuildpact,
   _poolLeylineOfTheMeek,
   _poolLeylineOfTheVoid,
   _poolLeylineOfVitality,
@@ -44812,6 +44823,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMirrodinAvenged,
   _poolMirrodinBesieged,
   _poolMirrodinsCore,
+  _poolMirrorBox,
   _poolMirrorEntity,
   _poolMirrorGallery,
   _poolMirrorGolem,
@@ -48800,6 +48812,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRenegadesGetaway,
   _poolRenewal,
   _poolRenewedFaith,
+  _poolRenewedSolidarity,
   _poolRenewingDawn,
   _poolRenewingTouch,
   _poolRenounceTheGuilds,
@@ -50159,6 +50172,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSceptreOfEternalGlory,
   _poolSchemaThief,
   _poolSchemingSilvertongue,
+  _poolSchemingSymmetry,
   _poolSchismotivate,
   _poolScholarOfAthreos,
   _poolScholarOfCombustion,
@@ -54100,6 +54114,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolThawbringer,
   _poolThawingGlaciers,
   _poolTheAesirEscapeValhalla,
+  _poolTheAetherspark,
   _poolTheAncientOne,
   _poolTheAnimus,
   _poolTheAntiquitiesWar,
@@ -55403,6 +55418,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTwiningTwins,
   _poolTwinmawStormbrood,
   _poolTwinnedVision,
+  _poolTwinningStaff,
   _poolTwinsOfMaurerEstate,
   _poolTwinscrollShaman,
   _poolTwinshotSniper,
@@ -60574,6 +60590,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/batterskull": _poolBatterskull,
   "pool/battery-bearer": _poolBatteryBearer,
   "pool/battery": _poolBattery,
+  "pool/battle-angels-of-tyr": _poolBattleAngelsOfTyr,
   "pool/battle-at-the-bridge": _poolBattleAtTheBridge,
   "pool/battle-brawler": _poolBattleBrawler,
   "pool/battle-cry-goblin": _poolBattleCryGoblin,
@@ -62862,6 +62879,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/clachan-festival": _poolClachanFestival,
   "pool/clackbridge-troll": _poolClackbridgeTroll,
   "pool/claim-fame": _poolClaimFame,
+  "pool/claim-jumper": _poolClaimJumper,
   "pool/claim-of-erebos": _poolClaimOfErebos,
   "pool/claim-territory": _poolClaimTerritory,
   "pool/claim-the-firstborn": _poolClaimTheFirstborn,
@@ -72575,6 +72593,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/leyline-of-punishment": _poolLeylineOfPunishment,
   "pool/leyline-of-sanctity": _poolLeylineOfSanctity,
   "pool/leyline-of-singularity": _poolLeylineOfSingularity,
+  "pool/leyline-of-the-guildpact": _poolLeylineOfTheGuildpact,
   "pool/leyline-of-the-meek": _poolLeylineOfTheMeek,
   "pool/leyline-of-the-void": _poolLeylineOfTheVoid,
   "pool/leyline-of-vitality": _poolLeylineOfVitality,
@@ -74148,6 +74167,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/mirrodin-avenged": _poolMirrodinAvenged,
   "pool/mirrodin-besieged": _poolMirrodinBesieged,
   "pool/mirrodins-core": _poolMirrodinsCore,
+  "pool/mirror-box": _poolMirrorBox,
   "pool/mirror-entity": _poolMirrorEntity,
   "pool/mirror-gallery": _poolMirrorGallery,
   "pool/mirror-golem": _poolMirrorGolem,
@@ -78136,6 +78156,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/renegades-getaway": _poolRenegadesGetaway,
   "pool/renewal": _poolRenewal,
   "pool/renewed-faith": _poolRenewedFaith,
+  "pool/renewed-solidarity": _poolRenewedSolidarity,
   "pool/renewing-dawn": _poolRenewingDawn,
   "pool/renewing-touch": _poolRenewingTouch,
   "pool/renounce-the-guilds": _poolRenounceTheGuilds,
@@ -79495,6 +79516,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/sceptre-of-eternal-glory": _poolSceptreOfEternalGlory,
   "pool/schema-thief": _poolSchemaThief,
   "pool/scheming-silvertongue": _poolSchemingSilvertongue,
+  "pool/scheming-symmetry": _poolSchemingSymmetry,
   "pool/schismotivate": _poolSchismotivate,
   "pool/scholar-of-athreos": _poolScholarOfAthreos,
   "pool/scholar-of-combustion": _poolScholarOfCombustion,
@@ -83436,6 +83458,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/thawbringer": _poolThawbringer,
   "pool/thawing-glaciers": _poolThawingGlaciers,
   "pool/the-aesir-escape-valhalla": _poolTheAesirEscapeValhalla,
+  "pool/the-aetherspark": _poolTheAetherspark,
   "pool/the-ancient-one": _poolTheAncientOne,
   "pool/the-animus": _poolTheAnimus,
   "pool/the-antiquities-war": _poolTheAntiquitiesWar,
@@ -84739,6 +84762,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/twining-twins": _poolTwiningTwins,
   "pool/twinmaw-stormbrood": _poolTwinmawStormbrood,
   "pool/twinned-vision": _poolTwinnedVision,
+  "pool/twinning-staff": _poolTwinningStaff,
   "pool/twins-of-maurer-estate": _poolTwinsOfMaurerEstate,
   "pool/twinscroll-shaman": _poolTwinscrollShaman,
   "pool/twinshot-sniper": _poolTwinshotSniper,

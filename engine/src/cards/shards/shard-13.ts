@@ -621,6 +621,7 @@ import _poolSavorTheMoment from "../pool/savor-the-moment.js";
 import _poolSawtoothThresher from "../pool/sawtooth-thresher.js";
 import _poolSawtuskDemolisher from "../pool/sawtusk-demolisher.js";
 import _poolScarwoodGoblins from "../pool/scarwood-goblins.js";
+import _poolSchemingSymmetry from "../pool/scheming-symmetry.js";
 import _poolScionSummoner from "../pool/scion-summoner.js";
 import _poolScorchingShot from "../pool/scorching-shot.js";
 import _poolScourgeDevil from "../pool/scourge-devil.js";
@@ -1509,6 +1510,7 @@ const shard: CardShard = {
     _poolSawtoothThresher,
     _poolSawtuskDemolisher,
     _poolScarwoodGoblins,
+    _poolSchemingSymmetry,
     _poolScionSummoner,
     _poolScorchingShot,
     _poolScourgeDevil,

@@ -588,6 +588,7 @@ import _poolRedwoodTreefolk from "../pool/redwood-treefolk.js";
 import _poolRegentsAuthority from "../pool/regents-authority.js";
 import _poolRejectImperfection from "../pool/reject-imperfection.js";
 import _poolRemnantElemental from "../pool/remnant-elemental.js";
+import _poolRenewedSolidarity from "../pool/renewed-solidarity.js";
 import _poolRenounceTheGuilds from "../pool/renounce-the-guilds.js";
 import _poolReparations from "../pool/reparations.js";
 import _poolRepercussion from "../pool/repercussion.js";
@@ -1482,6 +1483,7 @@ const shard: CardShard = {
     _poolRegentsAuthority,
     _poolRejectImperfection,
     _poolRemnantElemental,
+    _poolRenewedSolidarity,
     _poolRenounceTheGuilds,
     _poolReparations,
     _poolRepercussion,
