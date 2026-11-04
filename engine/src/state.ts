@@ -1919,6 +1919,20 @@ export interface PtModifier {
   untilTurnOf?: PlayerId;
   /** "Until your next upkeep" and the like: see `UntilPoint`. */
   untilPoint?: UntilPoint;
+  /** Goaded by this player for as long as this modifier lasts (rule 701.15):
+   * "for as long as this Saga remains on the battlefield" (The War Games),
+   * "for as long as they control it" (Vislor Turlough), "for as long as it has
+   * a duty counter" (Immortal Obligation) — a goad whose end is one of the
+   * durations a modifier already has. Not an ability, so a loss of abilities
+   * leaves it; `goadersOf` reads it. */
+  goadedBy?: PlayerId;
+  /** "Can't attack you or a permanent you control" (Immortal Obligation):
+   * this player, and any permanent they control (rule 508.1b). Not an
+   * ability. */
+  cantAttackYou?: PlayerId;
+  /** "Can't block creatures you control" (Immortal Obligation): any attacker
+   * this player controls (rule 509.1b). Not an ability. */
+  cantBlockCreaturesOf?: PlayerId;
   /** Combat restrictions that apply only during this player's next turn
    * (Wall of Dust's "can't attack during its controller's next turn"): this
    * modifier does nothing until that turn begins, then becomes one with those

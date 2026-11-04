@@ -876,7 +876,8 @@ largest, 700.8b — Malakir Blood-Priest; the same form is a
 Iona; `grantPtPerCount: { partySize: true }` is Ravager's Mace's "+1/+0 for
 each creature in your party"; "if you have a full party" (700.8c) is the
 condition `{ kind: "full-party" }`, Linvala, Shield of Sea Gate's
-intervening if), **undaunted** (rule 702.125a — Coastal Breach, Curtains'
+intervening if; "if two or more players have lost the game" is `{ kind:
+"players-lost", atLeast: 2 }`, Hot Pursuit's), **undaunted** (rule 702.125a — Coastal Breach, Curtains'
 Call: "costs {1} less to cast for each opponent you have") is the
 `selfCostReduction` amount `{ opponents: true }` under the always-true gate
 `{ kind: "controls", filter: {}, atLeast: 0 }`, the opponents still in the
@@ -2316,7 +2317,16 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
   (Marisi's `"trigger-player"`); `filter` is every creature matching it,
   whoever controls it (Nelly Borca's "goad all suspected creatures" — `{
   type: "creature", suspected: true }`). `forGame: true` is "it's goaded for
-  the rest of the game" (Jon Irenicus). A player goading a creature twice adds
+  the rest of the game" (Jon Irenicus). **`duration`** is a goad whose end is a
+  condition, any `PtDuration`: `"while-source"` (Hot Pursuit; The War Games, its
+  `filter` `{ thisWay: "created" }` after a `separate` `create-token`), `{
+  whileCounter: "duty" }` (Immortal Obligation, `filter: { thisWay:
+  "put-onto-battlefield" }`, beside a `restrict` with `cantAttackYou`,
+  `cantBlockYours` and the same duration), `"while-its-controller-controls-source"`
+  (Vislor Turlough, after a `gain-control`): nothing if it couldn't begin (rule
+  611.2b). `target` may be `"source"` or `"trigger-object"` (Kros, Defense
+  Contractor). **`ungoad { filter }`** ends every one-shot goad on what matches
+  (Serene Sleuth); a static goad goes on applying. A player goading a creature twice adds
   nothing (701.15d), so "for each creature goaded this way" counts first, with
   the filter `goadedByYou: false` (Kaima, the Fractured Calm — a creature under
   your goad Aura isn't goaded again). Which defenders a goaded creature may then be sent at is
@@ -5036,9 +5046,12 @@ is "can't attack a player it has already attacked this turn" (Port Razer), by th
   static's own `condition` over `restrictions` (Branded Brawlers' "can't block if
   you control an untapped land"). The scaffolder reads these.
   `attack-restriction-defending-player.test.ts`, `attack-restriction-player-condition.test.ts`.
+- `cantBecomeSuspected: true` — the affected creatures can't become suspected
+  (Airtight Alibi); one already suspected stays so.
 - `goads: true` — the affected creatures **are goaded** (rule 701.15b), with
   this permanent's controller as the goader, for exactly as long as the
-  static applies: Baeloth Barrityl, Entertainer's "creatures your opponents
+  static applies, also as a copy exception's `static` (Mocking Doppelganger's
+  `{ sameNameAsSource: true, isSource: false }`): Baeloth Barrityl, Entertainer's "creatures your opponents
   control with power less than Baeloth Barrityl's power are goaded" (a
   `filter` scope with `controlledBy: "opponent"` and `power: { op: "lt", n: {
   amount: { powerOf: "source" } } }`), an Aura's "enchanted creature … is

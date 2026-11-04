@@ -1827,7 +1827,8 @@ function lasting(
     duration === "while-source" ||
     duration === "while-source-tapped" ||
     duration === "while-you-control-source" ||
-    duration === "while-you-control-source-tapped"
+    duration === "while-you-control-source-tapped" ||
+    duration === "while-its-controller-controls-source"
   ) {
     return { whileSource: source };
   }
@@ -30943,7 +30944,8 @@ export class Game {
         duration === "while-source" ||
         duration === "while-source-tapped" ||
         duration === "while-you-control-source" ||
-        duration === "while-you-control-source-tapped"
+        duration === "while-you-control-source-tapped" ||
+        duration === "while-its-controller-controls-source"
       ) {
         const object = this.state.objects[source];
         const stint = object?.zoneChangeCount ?? 0;
@@ -30952,6 +30954,7 @@ export class Game {
         // nothing (rule 611.2b).
         const tapped = duration === "while-source-tapped" || duration === "while-you-control-source-tapped";
         const yours = duration === "while-you-control-source" || duration === "while-you-control-source-tapped";
+        const theirs = duration === "while-its-controller-controls-source";
         if (
           object?.zone === "battlefield" &&
           (refs.source === undefined || refs.source === stint) &&
@@ -30963,6 +30966,7 @@ export class Game {
             zoneChangeCount: stint,
             ...(tapped ? { tapped: true as const } : {}),
             ...(yours ? { controller } : {}),
+            ...(theirs ? { controller: object.controller } : {}),
           };
           this.noteWhileSource(source);
         }
@@ -33885,22 +33889,25 @@ export class Game {
         });
       },
       apnap: (players) => this.apnapOrder().filter((p) => players.includes(p)),
-      goadCreaturesOf: (player, forGame) => {
+      goadCreaturesOf: (player, forGame, duration) => {
+        const lastingFor = duration === undefined ? undefined : lastingHere(duration);
         for (const id of this.state.zones.shared.battlefield) {
           if (this.state.objects[id]?.controller !== player) continue;
-          this.goad(id, controller, forGame);
+          this.goad(id, controller, forGame, lastingFor);
         }
       },
-      goadCreature: (target, forGame) => {
-        if (target.kind === "object") this.goad(target.object, controller, forGame);
+      goadCreature: (target, forGame, duration) => {
+        if (target.kind === "object") this.goad(target.object, controller, forGame, duration === undefined ? undefined : lastingHere(duration));
       },
-      goadMatching: (filter, forGame) => {
+      goadMatching: (filter, forGame, duration) => {
+        const lastingFor = duration === undefined ? undefined : lastingHere(duration);
         // "With a name chosen for this enchantment" (Day of the Moon) reads
         // the source's names (`chosenName`).
         for (const id of this.battlefieldMatching(controller, filter, undefined, source)) {
-          this.goad(id, controller, forGame);
+          this.goad(id, controller, forGame, lastingFor);
         }
       },
+      ungoad: (filter) => this.ungoad(controller, filter, source),
       suspect: (target) => {
         if (target.kind === "object") this.suspect(target.object);
       },
@@ -41148,12 +41155,20 @@ export class Game {
     cantBeBlockedBy?: CardFilter,
     cantBlock?: TargetRef,
     scope: {
+      readonly cantAttackYou?: boolean;
+      readonly cantBlockYours?: boolean;
       readonly scopeTo?: PlayerId;
       readonly except?: ObjectId;
       readonly asItResolves?: boolean;
       readonly blocks?: ObjectId;
     } = {},
   ): void {
+    // "Can't attack you or a permanent you control", "can't block creatures
+    // you control" (Immortal Obligation), "you" being this effect's controller.
+    const towardYou: Pick<PtModifier, "cantAttackYou" | "cantBlockCreaturesOf"> = {
+      ...(scope.cantAttackYou === true ? { cantAttackYou: controller } : {}),
+      ...(scope.cantBlockYours === true ? { cantBlockCreaturesOf: controller } : {}),
+    };
     // "Can't block this creature": the attacker as it is now (rule 400.7).
     const attacker =
       cantBlock?.kind === "object" && this.state.objects[cantBlock.object]?.zone === "battlefield"
@@ -41162,7 +41177,16 @@ export class Game {
     // "They block that creature this turn if able": the same, as it is now.
     const named = scope.blocks === undefined ? undefined : this.state.objects[scope.blocks];
     if (scope.blocks !== undefined && named?.zone !== "battlefield") return;
-    if (restrictions.length === 0 && cantBeBlockedBy === undefined && attacker === undefined && named === undefined) return;
+    if (
+      restrictions.length === 0 &&
+      cantBeBlockedBy === undefined &&
+      attacker === undefined &&
+      named === undefined &&
+      scope.cantAttackYou !== true &&
+      scope.cantBlockYours !== true
+    ) {
+      return;
+    }
     if (filter !== undefined) {
       // Read from the side of a target player, or a target's controller
       // (`controlledByTarget`); the one permanent left out by its stint.
@@ -41178,12 +41202,14 @@ export class Game {
         for (const id of this.battlefieldMatching(you, filter)) {
           if (id === except?.object) continue;
           const object = this.state.objects[id];
+          if (!durationBegins(object, duration)) continue;
           object.modifiers.push({
             power: 0,
             toughness: 0,
             keywords: [],
             ...(restrictions.length > 0 ? { restrictions: [...restrictions] } : {}),
             ...(cantBeBlockedBy !== undefined ? { cantBeBlockedBy: [{ filter: cantBeBlockedBy, you: controller }] } : {}),
+            ...towardYou,
             ...durationFields(duration),
           });
           this.emit({ type: "restrictions-imposed", object: id, player: controller, restrictions: [...restrictions] });
@@ -41218,6 +41244,7 @@ export class Game {
       ...(restrictions.length > 0 ? { restrictions: [...restrictions] } : {}),
       ...(cantBeBlockedBy !== undefined ? { cantBeBlockedBy: [{ filter: cantBeBlockedBy, you: controller }] } : {}),
       ...(attacker !== undefined ? { cantBlock: [attacker] } : {}),
+      ...towardYou,
       ...durationFields(duration),
     });
     this.emit({
@@ -41378,10 +41405,18 @@ export class Game {
    * (701.15d). A token stack is goaded whole, every token in it; a targeted
    * token was split off as it was targeted.
    */
-  private goad(id: ObjectId, goader: PlayerId, forGame: boolean): void {
+  private goad(id: ObjectId, goader: PlayerId, forGame: boolean, duration?: EffectDuration): void {
     const object = this.state.objects[id];
     if (object === undefined || object.zone !== "battlefield") return;
     if (!computeCharacteristics(this.state, this.registry, id).types.includes("creature")) return;
+    // For as long as a condition holds: a modifier carrying the goad, its end
+    // the modifier's own (rule 611.2b's "for as long as").
+    if (duration !== undefined) {
+      if (!durationBegins(object, duration)) return;
+      object.modifiers.push({ power: 0, toughness: 0, keywords: [], goadedBy: goader, ...durationFields(duration) });
+      invalidateComputedCache();
+      return;
+    }
     const field = forGame ? "goadedForGameBy" : "goadedBy";
     const by = object[field] ?? [];
     if (by.includes(goader)) return;
@@ -41389,12 +41424,47 @@ export class Game {
     invalidateComputedCache();
   }
 
-  /** `id` becomes suspected (rule 701.60a) — unless it already is (701.60d).
+  /** Every one-shot goad on the permanents `filter` matches from `controller`'s
+   * side ends — "each creature you control is no longer goaded" (Serene
+   * Sleuth). A static goad goes on applying (`goadersOf` still reads it). */
+  private ungoad(controller: PlayerId, filter: CardFilter, source: ObjectId): void {
+    for (const id of this.battlefieldMatching(controller, filter, undefined, source)) {
+      const object = this.state.objects[id];
+      delete object.goadedBy;
+      delete object.goadedForGameBy;
+      if (object.modifiers.some((m) => m.goadedBy !== undefined)) {
+        object.modifiers = object.modifiers.flatMap((m) => {
+          if (m.goadedBy === undefined) return [m];
+          const { goadedBy: _ended, ...rest } = m;
+          return [rest];
+        });
+      }
+    }
+    invalidateComputedCache();
+  }
+
+  /** Whether a battlefield static says `object` can't become suspected
+   * (Airtight Alibi's `cantBecomeSuspected`). */
+  private cantBecomeSuspected(object: GameObject): boolean {
+    for (const id of this.state.zones.shared.battlefield) {
+      const source = this.state.objects[id];
+      if (source === undefined || hasLostAbilities(this.state, this.registry, source)) continue;
+      for (const ability of this.registry.get(rulesTextName(source)).static) {
+        if (ability.cantBecomeSuspected !== true || !this.staticActive(source, ability)) continue;
+        if (staticReaches(this.state, this.registry, source, ability, object)) return true;
+      }
+    }
+    return false;
+  }
+
+  /** `id` becomes suspected (rule 701.60a) — unless it already is (701.60d),
+   * or a static says it can't (Airtight Alibi).
    * Its menace and "can't block" take their timestamp from now (see
    * `GameObject.suspectedAt`). */
   private suspect(id: ObjectId): void {
     const object = this.state.objects[id];
     if (object === undefined || object.zone !== "battlefield" || object.suspectedAt !== undefined) return;
+    if (this.cantBecomeSuspected(object)) return;
     this.state.timestampSeq += 1;
     object.suspectedAt = this.state.timestampSeq;
     invalidateComputedCache();

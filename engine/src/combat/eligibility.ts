@@ -345,6 +345,14 @@ function whyCannotAttackUncached(
       return `${def.name} can't attack ${defendingPlayer}`;
     }
   }
+  // "Can't attack you or a permanent you control" (Immortal Obligation): on
+  // this creature, however long the modifier lasts.
+  for (const { cantAttackYou } of object.modifiers) {
+    if (cantAttackYou === undefined) continue;
+    if (target === cantAttackYou || state.objects[target as ObjectId]?.controller === cantAttackYou) {
+      return `${def.name} can't attack ${defendingPlayer}`;
+    }
+  }
   // "Until your next turn, creatures can't attack you" (Chronomantic Escape):
   // a player effect, binding creatures that weren't there when it began.
   for (const { owner, cantAttack, cantAttackBy } of state.playerEffects ?? []) {
@@ -503,10 +511,13 @@ function whyThisCannotBlock(
     }
   }
   // "Target creature can't block this creature this turn" (Kozilek's
-  // Pathfinder): this attacker, the object it was then (rule 400.7).
+  // Pathfinder): this attacker, the object it was then (rule 400.7). And "can't
+  // block creatures you control" (Immortal Obligation).
   if (
-    blocker.modifiers.some((m) =>
-      m.cantBlock?.some((c) => c.object === attackerId && c.zoneChangeCount === (attacker.zoneChangeCount ?? 0)),
+    blocker.modifiers.some(
+      (m) =>
+        m.cantBlockCreaturesOf === attacker.controller ||
+        m.cantBlock?.some((c) => c.object === attackerId && c.zoneChangeCount === (attacker.zoneChangeCount ?? 0)),
     )
   ) {
     const attackerDef = registry.get(printedCardName(attacker));

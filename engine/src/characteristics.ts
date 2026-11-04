@@ -881,6 +881,8 @@ function evalStaticCondition(
     case "full-party":
       // Rule 700.8c: a party of four.
       return partySizeOf(state, registry, you) === 4;
+    case "players-lost":
+      return state.turnOrder.filter((player) => state.players[player].hasLost === true).length >= condition.atLeast;
     case "metalcraft":
       // "You control three or more artifacts" counts the source itself when
       // it's one (Chrome Steed, Rusted Relic): a static's scan puts it back,

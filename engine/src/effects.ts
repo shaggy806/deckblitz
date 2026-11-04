@@ -386,7 +386,12 @@ export type PtDuration =
   | "while-you-control-source"
   /** Both: "for as long as you control ~ and ~ remains tapped" (Rubinia
    * Soulsinger, Willow Satyr). */
-  | "while-you-control-source-tapped";
+  | "while-you-control-source-tapped"
+  /** "For as long as **they** control it" of the source, said just after
+   * someone else gained control of it (Vislor Turlough): whoever controls the
+   * source as this begins, in that stint — it ends as the source leaves or
+   * changes hands again, and regaining it doesn't bring it back (rule 611.2b). */
+  | "while-its-controller-controls-source";
 
 /**
  * A duration ending at a point in a later turn, beyond that turn's beginning.
@@ -6501,6 +6506,13 @@ export type EffectSpec =
        * then (Wall of Dust's "can't attack during its controller's next
        * turn"). */
       readonly duration?: PtDuration | "its-controllers-next-turn";
+      /** "Can't attack **you or a permanent you control**" (Immortal
+       * Obligation): `PtModifier.cantAttackYou`, "you" this effect's
+       * controller. `restrictions` may then be empty. */
+      readonly cantAttackYou?: true;
+      /** "Can't block **creatures you control**" (Immortal Obligation):
+       * `PtModifier.cantBlockCreaturesOf`. `restrictions` may then be empty. */
+      readonly cantBlockYours?: true;
     }
   | {
       /**
@@ -9232,10 +9244,32 @@ export type EffectSpec =
        * outlasts one that was until their next turn.
        */
       readonly kind: "goad";
-      readonly target?: number;
+      /** A slot (a player in it: "goad each creature target player controls"),
+       * or `"source"` / `"trigger-object"` — Kros's "tap that creature and
+       * goad it". */
+      readonly target?: EffectTargetRef;
       readonly who?: PlayerScope;
       readonly filter?: CardFilter;
       readonly forGame?: boolean;
+      /** A goad that lasts as a modifier does, not until the goader's next
+       * turn (rule 701.15a's default): `"while-source"` is The War Games's
+       * "the tokens are goaded for as long as this Saga remains on the
+       * battlefield" and Hot Pursuit's; `{ whileCounter }` Immortal
+       * Obligation's; `"while-its-controller-controls-source"` Vislor
+       * Turlough's. Nothing happens if the duration could not begin (rule
+       * 611.2b — Hot Pursuit's ruling). */
+      readonly duration?: PtDuration;
+    }
+  | {
+      /**
+       * "Each creature you control is **no longer goaded**" (Serene Sleuth):
+       * every one-shot goad on the permanents `filter` matches from the
+       * controller's side ends, however long it would have lasted, whoever
+       * goaded them. A static goad isn't a record that can end — the static
+       * goes on applying, so they're still goaded by it.
+       */
+      readonly kind: "ungoad";
+      readonly filter: CardFilter;
     }
   | {
       /**
@@ -11459,13 +11493,15 @@ export interface EffectApi {
   commanderColors(): readonly ManaType[];
   /** See the `"goad"` {@link EffectSpec}: goad each creature `player`
    * controls. */
-  goadCreaturesOf(player: PlayerId, forGame: boolean): void;
+  goadCreaturesOf(player: PlayerId, forGame: boolean, duration?: PtDuration): void;
   /** See the `"goad"` {@link EffectSpec}: goad one creature — nothing, if
    * `target` isn't a creature on the battlefield. */
-  goadCreature(target: TargetRef, forGame: boolean): void;
+  goadCreature(target: TargetRef, forGame: boolean, duration?: PtDuration): void;
   /** See the `"goad"` {@link EffectSpec}: goad every creature matching
    * `filter`, from the effect's controller's side. */
-  goadMatching(filter: CardFilter, forGame: boolean): void;
+  goadMatching(filter: CardFilter, forGame: boolean, duration?: PtDuration): void;
+  /** See the `"ungoad"` {@link EffectSpec}. */
+  ungoad(filter: CardFilter): void;
   /** See the `"suspect"` {@link EffectSpec}. */
   suspect(target: TargetRef): void;
   /** See the `"unsuspect"` {@link EffectSpec}: `target`, or every permanent
@@ -11563,6 +11599,8 @@ export interface EffectApi {
      * leaving out `except` (`exceptTarget`), or fixed `asItResolves`; `blocks`,
      * the attacker those creatures have to block if able. */
     scope?: {
+      readonly cantAttackYou?: boolean;
+      readonly cantBlockYours?: boolean;
       readonly scopeTo?: PlayerId;
       readonly except?: ObjectId;
       readonly asItResolves?: boolean;
@@ -17511,13 +17549,18 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           ...(scopeTo !== undefined ? { scopeTo } : {}),
           ...(spared?.kind === "object" ? { except: spared.object } : {}),
           ...(spec.asItResolves === true ? { asItResolves: true } : {}),
+          ...(spec.cantAttackYou === true ? { cantAttackYou: true } : {}),
+          ...(spec.cantBlockYours === true ? { cantBlockYours: true } : {}),
         });
         return;
       }
       const target = spec.target === undefined ? undefined : resolveEffectTarget(spec.target, ctx);
       const cantBlock = spec.cantBlockAttacker === undefined ? undefined : resolveEffectTarget(spec.cantBlockAttacker, ctx);
       if (target !== undefined) {
-        ctx.restrict(target, undefined, spec.restrictions, spec.duration, spec.cantBeBlockedBy, cantBlock);
+        ctx.restrict(target, undefined, spec.restrictions, spec.duration, spec.cantBeBlockedBy, cantBlock, {
+          ...(spec.cantAttackYou === true ? { cantAttackYou: true } : {}),
+          ...(spec.cantBlockYours === true ? { cantBlockYours: true } : {}),
+        });
       }
       return;
     }
@@ -18853,18 +18896,22 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "goad": {
       const forGame = spec.forGame === true;
       if (spec.who !== undefined) {
-        for (const player of ctx.playersInScope(spec.who)) ctx.goadCreaturesOf(player, forGame);
+        for (const player of ctx.playersInScope(spec.who)) ctx.goadCreaturesOf(player, forGame, spec.duration);
         return;
       }
       if (spec.filter !== undefined) {
-        ctx.goadMatching(spec.filter, forGame);
+        ctx.goadMatching(spec.filter, forGame, spec.duration);
         return;
       }
-      const ref = spec.target === undefined ? undefined : ctx.targets[spec.target];
-      if (ref?.kind === "player") ctx.goadCreaturesOf(ref.player, forGame);
-      else if (ref?.kind === "object") ctx.goadCreature(ref, forGame);
+      const ref =
+        spec.target === undefined ? undefined : typeof spec.target === "number" ? ctx.targets[spec.target] : resolveEffectTarget(spec.target, ctx);
+      if (ref?.kind === "player") ctx.goadCreaturesOf(ref.player, forGame, spec.duration);
+      else if (ref?.kind === "object") ctx.goadCreature(ref, forGame, spec.duration);
       return;
     }
+    case "ungoad":
+      ctx.ungoad(spec.filter);
+      return;
     case "suspect": {
       const target = resolveEffectTarget(spec.target, ctx);
       if (target !== undefined) ctx.suspect(target);

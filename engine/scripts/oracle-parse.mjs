@@ -2075,6 +2075,11 @@ export function parseTrigger(clause) {
   }
   if (c === "Whenever you activate an exhaust ability") return [{ on: "activates-ability", who: "you", exhaust: true }];
   if (c === "Whenever you activate a power-up ability") return [{ on: "activates-ability", who: "you", powerUp: true }];
+  // "Whenever you put one or more counters on a creature you don't control"
+  // (Kros, Defense Contractor): "that creature" the trigger object.
+  if (c === "Whenever you put one or more counters on a creature you don't control") {
+    return [{ on: "counters-put", who: "any", filter: { type: "creature", controlledBy: "opponent" }, byYou: true }];
+  }
   // "Whenever a +1/+1 counter is put on ~" (Fathom Mage): once per counter.
   if ((m = /^Whenever an? (\S+) counter is put on (~|a creature|a permanent)$/.exec(c))) {
     return [{
@@ -2777,6 +2782,10 @@ export function parseSentence(sentence, ctx) {
   // Stasis Cell, Detainment Spell: the Aura moved.
   if (/^attach ~ to target creature\.$/i.test(s)) {
     return { kind: "attach", target: ctx.target("creature") };
+  }
+  // Bloodthirsty Blade: the Equipment moved onto an opponent's creature.
+  if (/^attach ~ to target creature an opponent controls\.$/i.test(s)) {
+    return { kind: "attach", target: ctx.target("creature-an-opponent-controls") };
   }
   // Getaway Glamer: about the target as it resolves, a tie destroying it.
   if (/^destroy target creature if no other creature has greater power\.$/i.test(s)) {
@@ -7660,6 +7669,73 @@ export function parseEffect(text, outer) {
           text: word[0].toUpperCase() + word.slice(1),
           effect: { kind: "grant-keyword-all", filter, keyword: word.replace(" ", "-"), duration: "end-of-turn" },
         })),
+      },
+      todo: [],
+      hints: [],
+    };
+  }
+  // A goad whose end is a condition (rule 701.15, `goad`'s `duration`): Hot
+  // Pursuit's source remaining, Vislor Turlough's new controller keeping it.
+  const suspectAndGoad = /^Suspect (target [^.]+)\. As long as ~ remains on the battlefield, that creature is also goaded\.$/i.exec(text);
+  if (suspectAndGoad !== null) {
+    const spec = targetOf(suspectAndGoad[1]);
+    if (spec !== undefined) {
+      const target = ctx.target(spec);
+      return {
+        effect: { kind: "sequence", effects: [{ kind: "suspect", target }, { kind: "goad", target, duration: "while-source" }] },
+        todo: [],
+        hints: [],
+      };
+    }
+  }
+  if (outer.it === "source" && /^You may have an opponent gain control of it\. If you do, it's goaded for as long as they control it\.$/i.test(text)) {
+    return {
+      effect: {
+        kind: "may",
+        prompt: "Have an opponent gain control of this? It's goaded for as long as they control it.",
+        effect: {
+          kind: "choose-opponent",
+          then: {
+            kind: "sequence",
+            effects: [
+              { kind: "gain-control", target: "source", who: "that-player", untilEndOfTurn: false },
+              { kind: "goad", target: "source", duration: "while-its-controller-controls-source" },
+            ],
+          },
+        },
+      },
+      todo: [],
+      hints: [],
+    };
+  }
+  // "Tap that creature and goad it. It gains trample until your next turn"
+  // (Kros, Defense Contractor): the trigger object.
+  const tapAndGoad = /^Tap that creature and goad it\. It gains (flying|haste|trample) until your next turn\.$/i.exec(text);
+  if (tapAndGoad !== null && outer.it === "trigger-object") {
+    return {
+      effect: {
+        kind: "sequence",
+        effects: [
+          { kind: "tap", target: "trigger-object" },
+          { kind: "goad", target: "trigger-object" },
+          { kind: "grant-keyword", target: "trigger-object", keyword: tapAndGoad[1].toLowerCase(), duration: "until-your-next-turn" },
+        ],
+      },
+      todo: [],
+      hints: [],
+    };
+  }
+  // "Investigate for each goaded creature you control. Then each creature you
+  // control is no longer goaded" (Serene Sleuth).
+  if (/^Investigate for each goaded creature you control\. Then each creature you control is no longer goaded\.$/i.test(text)) {
+    const yours = { type: "creature", controlledBy: "you" };
+    return {
+      effect: {
+        kind: "sequence",
+        effects: [
+          { kind: "create-token", token: "Clue Token", count: { countOf: { ...yours, goaded: true } } },
+          { kind: "ungoad", filter: yours },
+        ],
       },
       todo: [],
       hints: [],
@@ -14654,6 +14730,8 @@ function itOf(triggers) {
   if (triggers.every((t) => t.on === "deals-damage" && t.to === "creature")) return "trigger-recipient";
   // "That creature": the one it blocks or that blocks it.
   if (triggers.every((t) => (t.on === "blocks" && t.object === "blocked") || t.on === "blocked-by")) return "trigger-object";
+  // "That creature" a counter went on (Kros, Defense Contractor).
+  if (triggers.every((t) => t.on === "counters-put" && t.byYou === true && t.who === "any")) return "trigger-object";
   // "Whenever Ma Chao attacks alone, it …".
   if (triggers.every((t) => t.on === "attacks-alone" && t.who === "self")) return "source";
   const objectEvents = ["enters-battlefield", "dies", "attacks", "blocks", "becomes-blocked", "deals-combat-damage-to-player", "tapped-for-mana"];
@@ -16209,6 +16287,16 @@ function parseStatic(line, text) {
   }
   if (line === "Prevent all combat damage that would be dealt by enchanted creature.") {
     return { affects: { scope: "self" }, replacement: { event: "would-deal-damage", fromAttached: true, combat: true, prevent: true }, text };
+  }
+  // "Equipped creature gets +2/+0 and is goaded" (Bloodthirsty Blade),
+  // "Enchanted creature gets +2/+2 and can't become suspected" (Airtight Alibi).
+  if ((m = /^(?:Enchanted|Equipped) creature gets ([+-]\d+)\/([+-]\d+) and (is goaded|can't become suspected)\.$/.exec(line))) {
+    return {
+      affects: { scope: "attached" },
+      grantPt: [Number(m[1]), Number(m[2])],
+      ...(m[3] === "is goaded" ? { goads: true } : { cantBecomeSuspected: true }),
+      text,
+    };
   }
   if (line === "Enchanted creature's activated abilities can't be activated.") {
     return { affects: { scope: "attached" }, prohibits: { who: "each-player", abilitiesOf: { hostOfSource: true } }, text };

@@ -1272,6 +1272,8 @@ export type StaticCondition =
    * Wizard among the creatures you control, each a different creature (a
    * changeling fills any one role). `characteristics.ts`'s `partySizeOf`. */
   | { readonly kind: "full-party" }
+  /** "If two or more players have lost the game" (Hot Pursuit). */
+  | { readonly kind: "players-lost"; readonly atLeast: number }
   /** Metalcraft — you control three or more artifacts, the source among
    * them when it is one (a static counts its own permanent here). */
   | { readonly kind: "metalcraft" }
@@ -3552,6 +3554,10 @@ export interface StaticAbility {
    * filter's "you" is this permanent's controller. `affects` is ignored.
    */
   readonly untapsDuringOthersUntap?: "self" | CardFilter;
+  /** "Enchanted creature … **can't become suspected**" (Airtight Alibi): the
+   * affected objects aren't suspected by a `suspect` (rule 701.60); one already
+   * suspected stays so. */
+  readonly cantBecomeSuspected?: true;
   /** Combat restrictions imposed on the affected objects (Pacifism, Juggernaut). */
   readonly restrictions?: readonly CombatRestriction[];
   /** A permission (rule 305.9 / 118.9) — while this permanent is on the

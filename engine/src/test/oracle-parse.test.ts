@@ -13820,3 +13820,56 @@ describe("restrictions for a duration", () => {
     });
   });
 });
+
+describe("a goad whose end is a condition", () => {
+  const read = (type_line: string, oracle_text: string, mana_cost = "{1}") =>
+    parseFace({ name: "Test Card", type_line, mana_cost, oracle_text }, { tokenFor: () => null });
+
+  it("a goad for as long as the source remains, or a new controller keeps it", () => {
+    const pursuit = read(
+      "Enchantment",
+      "When this enchantment enters, suspect target creature an opponent controls. As long as this enchantment remains on the battlefield, that creature is also goaded.",
+    );
+    expect(pursuit.triggered[0].targets).toEqual(["creature-an-opponent-controls"]);
+    expect(pursuit.triggered[0].effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "suspect", target: 0 },
+        { kind: "goad", target: 0, duration: "while-source" },
+      ],
+    });
+    const vislor = read(
+      "Creature \u2014 Rogue",
+      "When this creature enters, you may have an opponent gain control of it. If you do, it's goaded for as long as they control it.",
+    );
+    expect(vislor.triggered[0].effect).toMatchObject({
+      kind: "may",
+      effect: { kind: "choose-opponent", then: { effects: [{ kind: "gain-control", who: "that-player" }, { kind: "goad", duration: "while-its-controller-controls-source" }] } },
+    });
+  });
+
+  it("the trigger object goaded, goads ended, and the statics", () => {
+    const kros = read(
+      "Creature \u2014 Cat",
+      "Whenever you put one or more counters on a creature you don't control, tap that creature and goad it. It gains trample until your next turn.",
+    );
+    expect(kros.triggered[0].trigger).toEqual({ on: "counters-put", who: "any", filter: { type: "creature", controlledBy: "opponent" }, byYou: true });
+    expect(kros.triggered[0].effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "tap", target: "trigger-object" },
+        { kind: "goad", target: "trigger-object" },
+        { kind: "grant-keyword", target: "trigger-object", keyword: "trample", duration: "until-your-next-turn" },
+      ],
+    });
+    const sleuth = read(
+      "Creature \u2014 Human",
+      "At the beginning of combat on your turn, investigate for each goaded creature you control. Then each creature you control is no longer goaded.",
+    );
+    expect(sleuth.triggered[0].effect).toMatchObject({ effects: [{ kind: "create-token" }, { kind: "ungoad", filter: { type: "creature", controlledBy: "you" } }] });
+    const blade = read("Artifact \u2014 Equipment", "Equipped creature gets +2/+0 and is goaded.");
+    expect(blade.static[0]).toMatchObject({ affects: { scope: "attached" }, grantPt: [2, 0], goads: true });
+    const alibi = read("Enchantment \u2014 Aura", "Enchant creature\nEnchanted creature gets +2/+2 and can't become suspected.");
+    expect(alibi.static[0]).toMatchObject({ grantPt: [2, 2], cantBecomeSuspected: true });
+  });
+});

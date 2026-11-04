@@ -3,6 +3,13 @@
  "source": "Per-commander triage of every unimplemented top-commanders.txt entry (AI agents reading Oracle text + rulings against the engine), normalized onto one feature vocabulary. See neededCards-features.md, 'The commander gap'.",
  "built": [
   "effect:emblem-grants-activated",
+  "effect:goad-extensions",
+  "effect:goad-while-controlled-by-player",
+  "effect:goad-while-counter",
+  "effect:goad-while-source-remains",
+  "effect:ungoad",
+  "mechanic:static-goad",
+  "static:cant-become-suspected",
   "effect:prohibit-abilities-until-your-next-turn",
   "effect:restrict-until-your-next-turn",
   "effect:restrict-during-controllers-next-turn",

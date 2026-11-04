@@ -9,6 +9,10 @@
  *   `GameObject.goadedBy`;
  * - a one-shot goad **for the rest of the game** (Jon Irenicus, the tokens
  *   Rendmaw, Creaking Nest makes): `GameObject.goadedForGameBy`;
+ * - a one-shot goad **for as long as a condition holds** — its source remains
+ *   (The War Games, Hot Pursuit), a player controls it (Vislor Turlough), it
+ *   has a counter (Immortal Obligation) — `PtModifier.goadedBy`, its end the
+ *   modifier's own duration;
  * - a static goad (`StaticAbility.goads` — Baeloth Barrityl, Entertainer; an
  *   Aura's "enchanted creature … is goaded"), for exactly as long as the
  *   static applies. Its source's controller is the goader: 701.15b's "the
@@ -24,6 +28,7 @@ import type { CardRegistry, StaticAbility } from "./cards.js";
 import {
   computeCharacteristics,
   computedCacheMemo,
+  grantedStatics,
   hasLostAbilities,
   staticConditionMet,
   staticReaches,
@@ -54,10 +59,18 @@ function goadingStatics(state: GameState, registry: CardRegistry): readonly Goad
     const out: GoadingStatic[] = [];
     for (const id of state.zones.shared.battlefield) {
       const source = state.objects[id];
-      if (source === undefined || hasLostAbilities(state, registry, source)) continue;
-      if (state.players[source.controller]?.hasLost === true) continue;
-      for (const ability of registry.get(rulesTextName(source)).static) {
-        if (ability.goads === true) out.push({ source, ability });
+      if (source === undefined || state.players[source.controller]?.hasLost === true) continue;
+      if (!hasLostAbilities(state, registry, source)) {
+        for (const ability of registry.get(rulesTextName(source)).static) {
+          if (ability.goads === true) out.push({ source, ability });
+        }
+      }
+      // A copy's "except it has 'Other creatures with the same name as this
+      // creature are goaded'" (Mocking Doppelganger).
+      if (source.modifiers.some((m) => m.grantsStatic !== undefined)) {
+        for (const ability of grantedStatics(state, registry, source, (a) => a.goads === true)) {
+          out.push({ source, ability });
+        }
       }
     }
     return out;
@@ -132,6 +145,7 @@ export function goadersOf(
   };
   for (const player of object.goadedBy ?? []) add(player);
   for (const player of object.goadedForGameBy ?? []) add(player);
+  for (const modifier of object.modifiers) if (modifier.goadedBy !== undefined) add(modifier.goadedBy);
   if (inProgress.has(id)) return out;
   const statics = goadingStatics(state, registry);
   if (statics.length === 0) return out;

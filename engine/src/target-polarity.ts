@@ -915,6 +915,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   // Menace and can't block: a drawback on a blocker, a boon on an attacker.
   suspect: (n, v) => v.touch(n.target, "either", MINOR),
   unsuspect: (n, v) => v.touch(n.target, "either", MINOR),
+  ungoad: () => {},
   // Saddled only switches on its own Mount's "while saddled" abilities.
   "become-saddled": (n, v) => v.touch(n.target, "help", MINOR),
   // Forced to attack (and at whom), as a goad is: a drawback on its creature
