@@ -5002,6 +5002,8 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 
 **Counters by who puts them, on permanents or players (2026-11-04).** `would-add-counter`'s `whoPuts`, `onPlayers` and `halved` (`counterTotalInBestOrder`, rule 616.1's order worked out); `addCounter`'s `by` read, and given to player counters and energy (infect and toxic: the source's controller; a loyalty plus cost reaches it, Doubling Season's "an effect" still not). Innkeeper's Talent, Vorinclex, Monstrous Raider, Lae'zel, Vlaakith's Champion. `test/counter-replacement-players.test.ts`.
 
+**A live maximum in an intervening if (2026-11-04).** Already there: `controls-greatest` on a trigger's `condition`, asked again on resolution (rule 603.4). Padeem, Consul of Innovation; the parser reads the clause. `test/controls-greatest-intervening.test.ts`.
+
 **A player searching their own library, as a trigger (2026-11-04).** `{ on: "searches-library", who }` on the new `library-searched` event, `"trigger-player"` who searched. Archivist of Oghma, Wan Shi Tong, Librarian, Ob Nixilis, Unshackled. River Song still wants `replacement:draw-from-bottom`. `test/search-trigger.test.ts`.
 
 **A player's own turns of the game (2026-11-04).** `condition:own-turn-count`: `PlayerState.turnsTaken`, the `turns-taken` condition, `FIRST_THREE_TURNS` with `your-turn`. Starting Town, Serra Avenger; Spider-Man 2099 and Jace Reawakened read the same line.

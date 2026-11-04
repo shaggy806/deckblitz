@@ -1754,7 +1754,8 @@
   "static:spells-cant-be-countered",
   "keyword:addendum",
   "mechanic:search-library-control",
-  "effect:cast-now-other-player"
+  "effect:cast-now-other-player",
+  "condition:dynamic-operand-in-intervening-if"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

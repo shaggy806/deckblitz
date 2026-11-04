@@ -15099,3 +15099,18 @@ describe("mana that adds counters to what it casts", () => {
     expect(face.effect).toEqual({ kind: "draw", amount: { sum: ["x", { commanderCasts: 0 }] }, target: 0 });
   });
 });
+
+describe("the greatest of something, as an intervening if", () => {
+  it("reads Padeem, Consul of Innovation's", () => {
+    const face = parseFace({
+      name: "Test Card",
+      type_line: "Creature — Vedalken",
+      mana_cost: "{3}{U}",
+      colors: ["U"],
+      oracle_text:
+        "At the beginning of your upkeep, if you control the artifact with the greatest mana value or tied for the greatest mana value, draw a card.",
+    });
+    expect(face.complete).toBe(true);
+    expect(face.triggered[0].condition).toEqual({ kind: "controls-greatest", of: "mana-value", filter: { type: "artifact" } });
+  });
+});

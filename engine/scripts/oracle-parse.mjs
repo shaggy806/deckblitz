@@ -14710,7 +14710,8 @@ function parseFaceAsWritten(face, ctx = {}) {
           kickedWithIf(clause, out.kicker) ??
           attackedWithOf(clause.slice(3, -1)) ??
           playerStateIf(clause, triggers) ??
-          distinctNamesIf(clause);
+          distinctNamesIf(clause) ??
+          controlsGreatestIf(clause);
         if (condition !== undefined) base.condition = condition;
         else if (clause.toLowerCase() === "if it had counters on it," && departedOf(triggers) !== undefined) {
           // A permanent that left, read as it last existed: its own counters
@@ -15566,6 +15567,17 @@ function distinctNamesIf(clause) {
   const filter = m === null ? null : parseTypePhrase(m[2]);
   if (typeof atLeast !== "number" || filter === null) return undefined;
   return { kind: "controls", filter, atLeast, distinctNames: true, countsSelf: true };
+}
+
+/** "If you control the artifact with the greatest mana value or tied for the
+ * greatest mana value," (Padeem, Consul of Innovation): a live maximum over
+ * every matching permanent, whoever controls it, asked again on resolution
+ * (rule 603.4). */
+function controlsGreatestIf(clause) {
+  const m = /^if you control the (.+?) with the greatest (power|toughness|mana value) or tied for the greatest \2,$/i.exec(clause);
+  const filter = m === null ? null : parseTypePhrase(m[1]);
+  if (filter === null) return undefined;
+  return { kind: "controls-greatest", of: m[2].toLowerCase().replace(" ", "-"), filter };
 }
 
 function playerStateIf(clause, triggers) {

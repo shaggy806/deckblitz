@@ -5934,7 +5934,9 @@ clause (section 9):
   matching `filter` with the greatest power / toughness / mana value, or one
   tied for it, among every matching permanent whoever controls it (Thickest
   in the Thicket: `{ of: "power", filter: { type: "creature" } }`). False
-  when you control none; leave `controlledBy` out of `filter`.
+  when you control none; leave `controlledBy` out of `filter`. On a trigger's
+  `condition` it's an intervening if, asked again on resolution (rule 603.4 —
+  Padeem, Consul of Innovation: `of: "mana-value"`, `{ type: "artifact" }`).
 - `{ kind: "opponent-controls", filter: CardFilter, atLeast: number }` — *one*
   opponent must meet the count on their own (Defense of the Heart: "if an
   opponent controls three or more creatures").
