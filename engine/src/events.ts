@@ -339,6 +339,8 @@ export type GameEvent =
       readonly player: PlayerId;
       readonly delta: number;
       readonly energy: number;
+      /** Who put them on, when they were put on rather than paid. */
+      readonly by?: PlayerId;
     })
   | (Base & {
       /** A player's count of some other kind of counter changed (rule 122.1
@@ -349,6 +351,8 @@ export type GameEvent =
       readonly counter: PlayerCounterKind;
       readonly delta: number;
       readonly total: number;
+      /** Who put them on, when they were put on rather than taken off. */
+      readonly by?: PlayerId;
     })
   | (Base & {
       /** A player got an emblem (rule 114 — ROADMAP Phase 10). */

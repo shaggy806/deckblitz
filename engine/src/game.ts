@@ -28015,6 +28015,8 @@ export class Game {
                 : trigger.batched === true
                   ? event.amount * (event.count ?? this.state.objects[event.object]?.stackCount ?? 1)
                   : event.amount
+              : trigger.on === "counters-put" && (event.type === "player-counters-changed" || event.type === "energy-changed")
+              ? event.delta
               : trigger.on === "counters-removed" && event.type === "counter-removed"
               ? event.amount
               : // "The number of cards looked at while scrying this way".
@@ -28734,6 +28736,23 @@ export class Game {
               this.counterBatch.set(key, { ability, trigger, multiplier });
             } else {
               owed.trigger = { ...owed.trigger, triggerValue: (owed.trigger.triggerValue ?? 0) + amount };
+            }
+            return;
+          }
+          // A player's counters in one simultaneous placement are one event
+          // for that player, whatever their kinds or sources: two toxic
+          // creatures connecting at once (All Will Be One's ruling).
+          if (
+            ability.trigger.on === "counters-put" &&
+            (event.type === "player-counters-changed" || event.type === "energy-changed") &&
+            this.counterBatch !== null
+          ) {
+            const key = `${id}#${index}@${event.player}`;
+            const owed = this.counterBatch.get(key);
+            if (owed === undefined) {
+              this.counterBatch.set(key, { ability, trigger: base, multiplier });
+            } else {
+              owed.trigger = { ...owed.trigger, triggerValue: (owed.trigger.triggerValue ?? 0) + event.delta };
             }
             return;
           }
@@ -29543,6 +29562,15 @@ export class Game {
               this.state.players[event.player].lifeLostThisTurn === -event.delta))
         );
       case "counters-put":
+        // "… or player": a player's counters, energy among them (rule 107.14).
+        if (event.type === "player-counters-changed" || event.type === "energy-changed") {
+          return (
+            spec.orPlayer === true &&
+            event.delta > 0 &&
+            (spec.counter === undefined || spec.counter === (event.type === "energy-changed" ? "energy" : event.counter)) &&
+            (spec.byYou !== true || event.by === self.controller)
+          );
+        }
         return (
           event.type === "counter-added" &&
           event.amount > 0 &&
@@ -51938,7 +51966,7 @@ export class Game {
       ps.radAbility = object;
       this.openStint(object);
     }
-    this.emit({ type: "player-counters-changed", player, counter, delta: total - before, total });
+    this.emit({ type: "player-counters-changed", player, counter, delta: total - before, total, ...(by !== undefined ? { by } : {}) });
   }
 
   /** Add (or spend, when negative) energy counters for `player` — rule 122. */
@@ -51950,7 +51978,7 @@ export class Game {
     if (put === 0) return;
     const ps = this.state.players[player];
     ps.energy = Math.max(0, ps.energy + put);
-    this.emit({ type: "energy-changed", player, delta: put, energy: ps.energy });
+    this.emit({ type: "energy-changed", player, delta: put, energy: ps.energy, ...(by !== undefined ? { by } : {}) });
   }
 
   /** Make `player` the monarch (rule 725). No-op if they already are. The

@@ -1332,6 +1332,12 @@ export type TriggerSpec =
       readonly batched?: true;
       /** "… on **another** / **other** [permanent]": not this one. */
       readonly otherOnly?: true;
+      /** "… on a permanent **or player**" (All Will Be One): a player's
+       * counters fire it too (rule 122.1), energy included (rule 107.14), once
+       * per player for a simultaneous placement, with `{ triggerValue: true }`
+       * how many (toxic's ruling); `who` and `filter` ask only of a permanent.
+       * There's no trigger object for a player's. */
+      readonly orPlayer?: true;
     }
   | {
       /**

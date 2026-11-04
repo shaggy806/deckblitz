@@ -5052,6 +5052,8 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 **A target filter read against its object's controller (2026-11-04).** `effect:target-filter-relative-to-controller`: a `DynamicOperand`'s `forItsController`, the amount's `"each"` read as the matched object's controller. Drown in the Loch.
 
 **A cost reduced by the most any one opponent controls (2026-11-04).** `cost:cost-reduction-greatest-opponent-count`: the `{ greatestOpponentCount: CardFilter }` `CostReductionAmount`. Cavern-Hoard Dragon.
+**Counters put on a player as a trigger (2026-11-04).** `trigger:counters-put-on-players`: `counters-put`'s `orPlayer`, a player's counters and energy too, once per player for a simultaneous placement (toxic's ruling), `by` now on `player-counters-changed` and `energy-changed`. All Will Be One.
+
 **A spell being countered as a trigger (2026-11-04).** `trigger:counters-a-spell-trigger`: `counters-spell` (who controls what countered it, ward included) and `spell-countered` (who cast it, so never a copy); neither for an ability countered, a spell that can't be, or one that fizzles. Baral, Chief of Compliance; Lullmage Mentor; Multani's Presence.
 
 **A static prevention's follow-up on its recipient (2026-11-04).** `replacement:prevention-follow-up-on-recipient`: a `would-deal-damage` `prevent`'s `then` reads the damage's recipient as `"trigger-recipient"`. Vigor.

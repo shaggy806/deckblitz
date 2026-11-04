@@ -2132,6 +2132,10 @@ export function parseTrigger(clause) {
   if (c === "Whenever you put one or more counters on a creature you don't control") {
     return [{ on: "counters-put", who: "any", filter: { type: "creature", controlledBy: "opponent" }, byYou: true }];
   }
+  // "… on a permanent or player" (All Will Be One).
+  if (c === "Whenever you put one or more counters on a permanent or player") {
+    return [{ on: "counters-put", who: "any", byYou: true, orPlayer: true }];
+  }
   // "Whenever a +1/+1 counter is put on ~" (Fathom Mage): once per counter.
   if ((m = /^Whenever an? (\S+) counter is put on (~|a creature|a permanent)$/.exec(c))) {
     return [{
