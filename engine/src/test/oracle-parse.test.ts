@@ -14427,6 +14427,31 @@ describe("a cast as this resolves, on its own terms", () => {
     });
   });
 
+  it("reads a land's ability until this card is cast from exile", () => {
+    const outlaw = read(
+      "Creature — Vampire Rogue",
+      '{2}, Exile this card from your hand: Target land gains "{T}: Add {U}, {B}, or {R}" until this card is cast from exile. You may cast this card for as long as it remains exiled.',
+    );
+    expect(outlaw.complete).toBe(true);
+    expect(outlaw.activated[0]).toMatchObject({
+      zone: "hand",
+      exilesFromHand: true,
+      targets: ["land"],
+      effect: {
+        kind: "sequence",
+        effects: [
+          {
+            kind: "grant-activated",
+            target: 0,
+            ability: { effect: { kind: "add-mana", mana: { oneOf: ["U", "B", "R"] }, amount: 1 } },
+            duration: "until-source-cast",
+          },
+          { kind: "allow-cast-from-exile", target: "source", whileExiled: true },
+        ],
+      },
+    });
+  });
+
   it("reads \"if able\" as a cast that can't be declined", () => {
     const omen = read(
       "Artifact",

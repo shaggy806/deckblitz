@@ -645,6 +645,8 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "lose-abilities-all": none,
   gift: none,
   "grant-activated": (n, v) => v.touch(n.target, "help", MAJOR),
+  // Only reads its target, whose abilities it may want whoever's it is.
+  "grant-activated-of": (n, v) => v.touch(n.of, "either", MINOR),
   // A gained static is a gift ("can't be blocked by more than one creature")
   // unless it ties the creature down ("doesn't untap", "loses flying").
   "grant-static": (n, v) => {

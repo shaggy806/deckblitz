@@ -1714,7 +1714,11 @@
   "zone:cast-from-milled-cards",
   "effect:grant-graveyard-cast-free",
   "zone:graveyard-cast-exile-replacement",
-  "effect:grant-graveyard-cast-all"
+  "effect:grant-graveyard-cast-all",
+  "effect:grant-until-exiled-card-cast",
+  "effect:grant-mana-ability-to-countered-creatures",
+  "effect:aura-grants-restricted-mana-ability",
+  "effect:gain-activated-abilities-of-target"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

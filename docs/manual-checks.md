@@ -7181,3 +7181,13 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 - **Do:** Cast Sins of the Past, choosing Divination. Then open your graveyard and cast Divination.
 - **Expect:** No mana is asked for Divination (your Swamps were all used on Sins of the Past). You draw two cards. Sins of the Past and Divination both end in exile.
+
+### Glamorous Outlaw: a land taps for its colours until it is cast from exile
+
+- **Do:** Click Glamorous Outlaw in your hand and take its "Exile this card from your hand" ability, choosing your Forest. Open exile and cast Glamorous Outlaw.
+- **Expect:** It goes to exile for {2}. It can be cast from exile though you have no blue source but the Forest, which taps for the {U}. Once it's on the stack the Forest no longer has that ability. Bob loses 2 when the Outlaw enters.
+
+### Quicksilver Elemental: gaining another creature's ability
+
+- **Do:** Activate Quicksilver Elemental's ability on Bob's Looming Shade, paying with an Island. Then activate the "{B}: gets +1/+1" it has gained, paying with your other Island.
+- **Expect:** The Elemental becomes a 4/5 until end of turn, blue mana paying for {B}. Looming Shade stays as it was.

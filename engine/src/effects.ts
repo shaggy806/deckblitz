@@ -360,6 +360,11 @@ export type ReturnToHandZone = "battlefield" | "graveyard" | "exile" | "stack" |
 export type PtDuration =
   | "end-of-turn"
   | "permanent"
+  /** "**Until this card is cast from exile**" (Glamorous Outlaw): lasts until the
+   * effect's source, in the exile stint it's in as the effect begins, has been
+   * cast, its mana payable with what this gave (601.2g, the ruling). A card that
+   * leaves exile any other way ends nothing, and the effect goes on (the ruling). */
+  | "until-source-cast"
   | "until-your-next-turn"
   /** "This combat" / "until end of combat" (rules 500.5a, 511.2): it ends as
    * the combat phase under way or next to come does (Ma Chao's "can't be
@@ -6954,6 +6959,19 @@ export type EffectSpec =
     }
   | {
       /**
+       * "This creature **gains all activated abilities of target creature** until
+       * end of turn" (Quicksilver Elemental): those `of` has as this resolves, a
+       * keyword's activated ability included, as if printed on `target` ("this
+       * permanent" is `target` — the ruling). Each activation gathers more; a
+       * card's abilities that work from another zone aren't among them.
+       */
+      readonly kind: "grant-activated-of";
+      readonly target: EffectTargetRef;
+      readonly of: EffectTargetRef;
+      readonly duration: PtDuration;
+    }
+  | {
+      /**
        * Give a permanent a static ability: "it gains 'This creature attacks
        * each combat if able'" (Carnage, Crimson Chaos — `duration:
        * "permanent"`), Earthbind's "this Aura gains 'Enchanted creature
@@ -12092,6 +12110,8 @@ export interface EffectApi {
   grantTriggeredAll(filter: CardFilter, ability: TriggeredAbility, duration: PtDuration): void;
   /** See the `"grant-activated"` {@link EffectSpec}. */
   grantActivated(target: TargetRef, ability: ActivatedAbility, duration: PtDuration): void;
+  /** See the `"grant-activated-of"` {@link EffectSpec}. */
+  grantActivatedOf(target: TargetRef, of: TargetRef, duration: PtDuration): void;
   /** See the `"lose-abilities"` {@link EffectSpec}. */
   loseAbilities(
     target: TargetRef,
@@ -18133,6 +18153,12 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "grant-activated": {
       const target = resolveEffectTarget(spec.target, ctx);
       if (target !== undefined) ctx.grantActivated(target, spec.ability, spec.duration);
+      return;
+    }
+    case "grant-activated-of": {
+      const target = resolveEffectTarget(spec.target, ctx);
+      const of = resolveEffectTarget(spec.of, ctx);
+      if (target !== undefined && of !== undefined) ctx.grantActivatedOf(target, of, spec.duration);
       return;
     }
     case "grant-activated-all":

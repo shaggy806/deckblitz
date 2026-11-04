@@ -536,6 +536,7 @@ export function onlyUntilEndOfTurn(effect: EffectSpec | null | undefined): boole
     case "grant-keyword":
     case "grant-keyword-all":
     case "grant-protection":
+    case "grant-activated-of":
     case "animate":
       return effect.duration === "end-of-turn";
     // "Until end of turn, you may cast …" (Idol of Endurance).

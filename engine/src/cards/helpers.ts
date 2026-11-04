@@ -2129,6 +2129,45 @@ export const regenerateSelfAbility = (mana: string, text: string): ActivatedAbil
 });
 
 /**
+ * "{2}, Exile this card from your hand: Target land gains "{T}: Add {U}, {B}, or
+ * {R}" until this card is cast from exile. You may cast this card for as long as
+ * it remains exiled." (Glamorous Outlaw's cycle.) The mana is payable while the
+ * card is being cast, and a card that leaves exile uncast leaves the land its
+ * ability (the rulings). With no land to target the ability doesn't resolve (rule
+ * 608.2b), and the card stays exiled with no way to cast it.
+ */
+export const landUntilCastFromExile = (colors: readonly [ManaType, ManaType, ManaType]): ActivatedAbility => {
+  const [a, b, c] = colors;
+  const mana = `{T}: Add {${a}}, {${b}}, or {${c}}`;
+  return {
+    cost: { mana: "{2}", tap: false },
+    zone: "hand",
+    exilesFromHand: true,
+    targets: ["land"],
+    effect: {
+      kind: "sequence",
+      effects: [
+        {
+          kind: "grant-activated",
+          target: 0,
+          ability: {
+            cost: { mana: null, tap: true },
+            targets: [],
+            effect: { kind: "add-mana", mana: { oneOf: [a, b, c] }, amount: 1 },
+            resolve: null,
+            text: `${mana}.`,
+          },
+          duration: "until-source-cast",
+        },
+        { kind: "allow-cast-from-exile", target: "source", whileExiled: true },
+      ],
+    },
+    resolve: null,
+    text: `{2}, Exile this card from your hand: Target land gains "${mana}" until this card is cast from exile. You may cast this card for as long as it remains exiled.`,
+  };
+};
+
+/**
  * A `{T}: Add …` mana ability for a rock or utility land — `mana` may be a
  * concrete type or `"any-color"` (Arcane Signet, Command Tower, Treasure),
  * `amount` defaults to 1, and `sacrifice: "self"` makes it a Treasure-style

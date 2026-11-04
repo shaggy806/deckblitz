@@ -10786,4 +10786,17 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       you: { bf: ['Swamp*6'], hand: ['Sins of the Past'], gy: ['Divination'] },
     }),
   ),
+  preset(
+    'Glamorous Outlaw: a land taps for its colours until it is cast from exile',
+    board({
+      you: { bf: ['Forest', 'Wastes*5', 'Swamp', 'Mountain'], hand: ['Glamorous Outlaw'] },
+    }),
+  ),
+  preset(
+    'Quicksilver Elemental: gaining another creature\'s ability',
+    board({
+      you: { bf: ['Island*2', 'Quicksilver Elemental'] },
+      opp: { bf: ['Looming Shade'] },
+    }),
+  ),
 ]

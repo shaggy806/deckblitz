@@ -1832,6 +1832,8 @@ function lasting(
   ) {
     return { whileSource: source };
   }
+  // Read off the effect's source (`lastingHere`) where it's known.
+  if (duration === "until-source-cast") return "permanent";
   if (typeof duration === "object" || duration === "end-of-turn" || duration === "permanent") return duration;
   if (duration === "until-end-of-combat") return { untilEndOfCombat: true };
   return duration === "until-your-next-turn" ? { untilTurnOf: you } : { untilPoint: untilPointOf(duration, you) };
@@ -1854,10 +1856,11 @@ function untilPointOf(duration: UntilPointDuration, you: PlayerId): UntilPoint {
 /** A modifier's duration fields for `duration`. */
 function durationFields(
   duration: EffectDuration,
-): Pick<PtModifier, "untilEndOfTurn" | "untilEndOfCombat" | "untilTurnOf" | "untilPoint" | "whileCounter" | "whileSource"> {
+): Pick<PtModifier, "untilEndOfTurn" | "untilEndOfCombat" | "untilTurnOf" | "untilPoint" | "whileCounter" | "whileSource" | "untilCast"> {
   if (duration === "end-of-turn") return { untilEndOfTurn: true };
   if (duration === "permanent") return { untilEndOfTurn: false };
   if ("untilEndOfCombat" in duration) return { untilEndOfTurn: true, untilEndOfCombat: true };
+  if ("untilCast" in duration) return { untilEndOfTurn: false, untilCast: duration.untilCast };
   if ("whileSource" in duration) {
     return duration.whileSource === null ? { untilEndOfTurn: false } : { untilEndOfTurn: false, whileSource: duration.whileSource };
   }
@@ -19004,6 +19007,8 @@ export class Game {
     // Where it's cast from, before anything moves it (601.2a) — see the
     // `spell-cast` event's `from`.
     const castFrom = object.zone;
+    // The stint an "until this card is cast from exile" waits on.
+    const exiledStint = castFrom === "exile" ? (object.zoneChangeCount ?? 0) : undefined;
     // A prepare spell's copy (rule 722.3c): the permanent it belongs to, read
     // before the move to the stack ends the link.
     const preparedBy = via === "prepared" ? object.preparedFor?.permanent : undefined;
@@ -19572,6 +19577,7 @@ export class Game {
       ...(via !== undefined ? { via: freeCastOf ?? via } : {}),
       from: castFrom,
     });
+    if (exiledStint !== undefined) this.endUntilCastEffects(cardId, exiledStint);
     this.announceTargeted(chosen, player, cardId, true);
     this.commitCrimeIfAny(chosen, player, cardId);
     if (sortedModes !== undefined) {
@@ -21421,6 +21427,20 @@ export class Game {
       : ref.list === "spell-triggered"
         ? granting?.grantsToSpells?.triggered?.[ref.index]
         : granting?.grantsTriggered?.[ref.index];
+  }
+
+  /** "Until this card is cast from exile" is over: it has been cast, its costs
+   * paid with what the effect gave if need be (rule 601.2g-i, Glamorous Outlaw's
+   * ruling). A stint it isn't in, it isn't the same card (rule 400.7). */
+  private endUntilCastEffects(card: ObjectId, stint: number): void {
+    let ended = false;
+    for (const id of this.state.zones.shared.battlefield) {
+      const object = this.state.objects[id];
+      if (object === undefined || !object.modifiers.some((m) => m.untilCast?.card === card && m.untilCast.stint === stint)) continue;
+      object.modifiers = object.modifiers.filter((m) => !(m.untilCast?.card === card && m.untilCast.stint === stint));
+      ended = true;
+    }
+    if (ended) invalidateComputedCache();
   }
 
   /** `objectId`'s printed `activated` abilities plus any currently granted to
@@ -31245,6 +31265,9 @@ export class Game {
       );
     };
     const lastingHere = (duration: PtDuration): EffectDuration => {
+      if (duration === "until-source-cast") {
+        return { untilCast: { card: source, stint: this.state.objects[source]?.zoneChangeCount ?? 0 } };
+      }
       let here: WhileSource | null = null;
       if (
         duration === "while-source" ||
@@ -34821,6 +34844,27 @@ export class Game {
           grantsActivated: [ability],
           ...durationFields(kept),
         });
+      },
+      grantActivatedOf: (target, of, duration) => {
+        if (target.kind !== "object" || of.kind !== "object") return;
+        const id = this.splitOneFromStack(target.object);
+        const object = this.state.objects[id];
+        const from = this.state.objects[of.object];
+        const kept = lastingHere(duration);
+        if (object === undefined || object.zone !== "battlefield" || from === undefined || !durationBegins(object, kept)) return;
+        // As `of` has them as this resolves, the ones that work from the
+        // battlefield.
+        const abilities = this.effectiveActivated(of.object).filter((a) => a.zone === undefined);
+        if (abilities.length === 0) return;
+        object.modifiers.push({
+          timestamp: this.freshTimestamp(),
+          power: 0,
+          toughness: 0,
+          keywords: [],
+          grantsActivated: [...abilities],
+          ...durationFields(kept),
+        });
+        invalidateComputedCache();
       },
       grantActivatedAll: (filter, ability, duration) => {
         // One effect, one timestamp (rule 613.7b), however many it reaches.
@@ -54305,6 +54349,7 @@ export class Game {
     // (rule 400.7), with no permission and a fresh set of allowances (the
     // Karador and Muldrotha rulings).
     object.graveyardCastPermission = undefined;
+    object.escapeExiled = undefined;
     object.graveyardCastUsedThisTurn = undefined;
     object.graveyardCastTypesUsedThisTurn = undefined;
     object.exileIfWouldGoToGraveyard = undefined;

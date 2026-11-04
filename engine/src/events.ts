@@ -62,7 +62,16 @@ export type EffectDuration =
   /** For as long as that permanent — the effect's source, in that stint —
    * remains on the battlefield; `null` when it had already left as the
    * effect would begin, so the effect doesn't (rule 611.2b). */
-  | { readonly whileSource: WhileSource | null };
+  | { readonly whileSource: WhileSource | null }
+  /** Until that card, in that stint, is cast — see `PtDuration`'s
+   * `"until-source-cast"`. */
+  | { readonly untilCast: UntilCast };
+
+/** The card a `"until-source-cast"` effect waits on, in its exile stint. */
+export interface UntilCast {
+  readonly card: ObjectId;
+  readonly stint: number;
+}
 
 /**
  * The moment an effect lasts until, when it's a point in a later turn rather

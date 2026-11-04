@@ -34,7 +34,7 @@ import type { CardFilter } from "./filter.js";
 import type { CardNameAim, CardNameFilter } from "./card-names.js";
 import type { Color, LandManaInstead, ManaOrigin, ManaType, ManaUnit, SpendAs } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
-import type { GameEvent, UntilPoint, Vote, WhileSource } from "./events.js";
+import type { GameEvent, UntilCast, UntilPoint, Vote, WhileSource } from "./events.js";
 import type { ResolvedTargets, TargetRef, TargetSpec } from "./target.js";
 import type { Step } from "./turn.js";
 import { MERGED_PREFIX, MERGED_SEPARATOR } from "./cards/card-registry.js";
@@ -1992,6 +1992,9 @@ export interface PtModifier {
    * leaves — once everything leaving with it has left, so what it took away
    * stays away for that event's look back (rule 603.10a). */
   whileSource?: WhileSource;
+  /** "Until this card is cast from exile" (Glamorous Outlaw): ends when that
+   * card, in that stint, has been cast. */
+  untilCast?: UntilCast;
   /** It can attack as though it didn't have defender (the
    * `attack-despite-defender` effect). A rule about it, not an ability it
    * has, so a loss of abilities doesn't end it. */

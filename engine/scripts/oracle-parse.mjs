@@ -11454,6 +11454,35 @@ function castNowTermsAt(sentences, i, ctx) {
     if (spell === null) return null;
     return followed({ kind: "cast-now", from: { zones: ["hand", "graveyard"] }, spell, ...castNowTerms(fromZones[2]) }, 1);
   }
+  // "Target land gains "{T}: Add {U}, {B}, or {R}" until this card is cast from
+  // exile. You may cast this card for as long as it remains exiled." (Glamorous
+  // Outlaw's cycle, after "{2}, Exile this card from your hand:".)
+  const landUntilCast =
+    /^target land gains "\{T\}: Add \{([WUBRG])\}, \{([WUBRG])\}, or \{([WUBRG])\}" until (?:this card|~) is cast from exile\.$/i.exec(sentences[i]);
+  if (landUntilCast !== null && /^you may cast (?:this card|~) for as long as it remains exiled\.$/i.test(sentences[i + 1] ?? "")) {
+    const mana = [landUntilCast[1], landUntilCast[2], landUntilCast[3]];
+    return {
+      effect: {
+        kind: "sequence",
+        effects: [
+          {
+            kind: "grant-activated",
+            target: ctx.target("land"),
+            ability: {
+              cost: { mana: null, tap: true },
+              targets: [],
+              effect: { kind: "add-mana", mana: { oneOf: mana }, amount: 1 },
+              resolve: null,
+              text: `{T}: Add {${mana[0]}}, {${mana[1]}}, or {${mana[2]}}.`,
+            },
+            duration: "until-source-cast",
+          },
+          { kind: "allow-cast-from-exile", target: "source", whileExiled: true },
+        ],
+      },
+      used: 2,
+    };
+  }
   // "Target opponent mills five cards. You may cast an instant or sorcery spell
   // from among them without paying its mana cost." (Jace's Mindseeker.)
   const millFirst = /^target opponent mills (\w+) cards?\.$/i.exec(sentences[i]);
