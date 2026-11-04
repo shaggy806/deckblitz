@@ -130,6 +130,9 @@ export const COLOR_WORD_KEYS: ReadonlySet<string> = new Set([
   "setColors",
   "addColors",
   "devotionTo",
+  // Chroma's "each white mana symbol": the word names the colour (Light from
+  // Within), though a symbol in a cost is no word.
+  "manaSymbols",
   "keepsUnspentMana",
   // Omnath, Locus of All's "that mana becomes black instead".
   "unspentManaBecomes",

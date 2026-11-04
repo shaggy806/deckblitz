@@ -342,6 +342,18 @@ function hybridPipValue(pip: HybridPip): number {
   );
 }
 
+/** How many mana symbols of these colours a cost has (rule 107.4): a hybrid or
+ * Phyrexian symbol counts once if it's any of them, as devotion (rule 700.5)
+ * and the chroma ability word read it. */
+export function colorSymbols(cost: ManaCost, colors: readonly Color[]): number {
+  let symbols = 0;
+  for (const color of colors) symbols += cost.colored[color];
+  for (const pip of cost.hybrid) {
+    if (pip.some((o) => o.kind === "color" && colors.includes(o.color))) symbols += 1;
+  }
+  return symbols;
+}
+
 /** Mana value (converted mana cost). `{X}` counts as 0 (rule 202.3f). */
 export function manaValue(cost: ManaCost): number {
   return (

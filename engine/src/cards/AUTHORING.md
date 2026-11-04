@@ -778,7 +778,8 @@ The rest of the shapes: `{ countOf: CardFilter, times?, excludeSelf?,
 excludeTarget?, forTarget? }` (a battlefield count, optionally multiplied — Shamanic
 Revelation's "4 life **for each**"; `excludeSelf` is "for each **other**
 creature you control", `excludeTarget: i` is "other than **that** creature",
-leaving out whatever target slot `i` names. Both leave out one *permanent*:
+leaving out whatever target slot `i` names, `excludeTriggerObject` the permanent that
+fired the trigger (Shared Animosity). All leave out one *permanent*:
 a source that is a member of a token stack leaves the rest of its stack
 counted. `forTarget: i` reads the filter from the side of the player in
 slot `i` — Will of the Mardu's "the number of creatures **target player**
@@ -826,6 +827,17 @@ narrowed them: Shriekwood Devourer's "the greatest power among those
 creatures", Vulpine Harvester's "their total power"); a list is a union, and
 `plus: [{ filter, in? }]` adds a set with a filter of its own (Ambitious
 Dragonborn's "creatures you control and creature cards in your graveyard");
+`aggregate: "greatest-shared-creature-type"` is how many of them share the type most
+of them have, a changeling in every group (Skemfar Shadowsage, Basalt Ravager, White
+Lotus Tile; a `kind: "aggregate"` condition of `{ op: "gte", n: 2 }` is Synchronized
+Eviction's "at least two creatures that share a creature type"). `of: { manaSymbols:
+"B" }` is chroma, that colour's symbols in the costs, a hybrid one counting once (Umbra
+Stalker); of one object, `{ manaSymbolsOf: ref, color }` (Fiery Bombardment), of a
+this-way set, `sumOf: { manaSymbols }` (Phosphorescent Feast), of the creature a static
+affects, `ofAffected: { manaSymbols }` (Light from Within). What a permanent devoured
+(rule 702.82b): `{ devoured: "source", filter? }` (Marrow Chomper; Voracious Dragon's
+Goblins, as they last were) and the condition `{ kind: "self-devoured" }` (Hellkite
+Hatchling).
 `aggregate: "count"` counts them (Crackling Drake's "instant and sorcery cards
 you own in exile and in your graveyard" — `in: ["graveyards", "exile"]`);
 `of: "counters"` sums every counter of every kind (Maester Seymour); an
@@ -866,9 +878,12 @@ Call: "costs {1} less to cast for each opponent you have") is the
 `selfCostReduction` amount `{ opponents: true }` under the always-true gate
 `{ kind: "controls", filter: {}, atLeast: 0 }`, the opponents still in the
 game (702.125b); the scaffolder reads the keyword line,
-`{ greatestCommanderManaValue: true }`
+`{ greatestCommanderManaValue: true, onBattlefieldOrInCommandZone? }`
 (the greatest mana value among your commanders, wherever they are — Cactus
-Preserve's X/X), `{ creaturesDiedThisTurn: true }`
+Preserve's X/X — or only there — Cloudkill; `each-player-may` asks of each player's own,
+Imposing Grandeur. "**A** commander you own there" is a `choose-value` of `value:
+"commander-mana-value"`, `then` reading it as `"x"`: Stinging Study, asked only when
+their mana values differ), `{ creaturesDiedThisTurn: true }`
 (per *player*, unlike `GameState`'s global counter — Liliana's Standard
 Bearer; with `anyController: true`, the global one — Spymaster's Vault's
 "the number of creatures that died this turn"), `{ countPlayers: PlayerScope }` (Inspired Sphinx; counts living

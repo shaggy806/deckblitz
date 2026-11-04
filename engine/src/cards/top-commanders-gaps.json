@@ -2,6 +2,12 @@
  "generated": "2026-09-22",
  "source": "Per-commander triage of every unimplemented top-commanders.txt entry (AI agents reading Oracle text + rulings against the engine), normalized onto one feature vocabulary. See neededCards-features.md, 'The commander gap'.",
  "built": [
+  "amount:chroma-of-cards",
+  "amount:creatures-devoured",
+  "effect:amount-commander-mana-value-battlefield-or-command-zone",
+  "effect:choose-commander-for-x",
+  "effect:amount-greatest-shared-creature-type",
+  "effect:count-sharing-creature-type",
   "amount:cards-in-hand-matching-filter",
   "amount:most-cards-in-hand-among-players",
   "effect:amount-greatest-count-among-players",

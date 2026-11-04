@@ -820,6 +820,9 @@ function dealersOf(phrase, power) {
   return { filter: { ...kind, ...filter }, ...(exceptSource ? { exceptSource: true } : {}) };
 }
 
+/** The greatest group sharing a creature type (rule 205.3m), among your creatures. */
+const SHARED_CREATURE_TYPE = { aggregate: "greatest-shared-creature-type", filter: { type: "creature", controlledBy: "you" } };
+
 /**
  * "the greatest power among creatures you control and creature cards in your
  * graveyard", "the total mana value of instant and sorcery cards in your
@@ -829,6 +832,9 @@ function dealersOf(phrase, power) {
  * whole first set are a `plus`.
  */
 export function aggregatePhraseOf(phrase) {
+  if (phrase === "the greatest number of creatures you control that have a creature type in common") {
+    return SHARED_CREATURE_TYPE;
+  }
   let m;
   const STAT = { power: "power", toughness: "toughness", "mana value": "mana-value" };
   let head;
@@ -2678,6 +2684,61 @@ export function parseSentence(sentence, ctx) {
   // Township." (rule 701.42 — the `meld` effect, which makes the test).
   if ((m = MELD_SENTENCE.exec(s))) {
     return { kind: "meld", partner: { name: m[2], type: m[1].toLowerCase() }, into: m[3] };
+  }
+  // What it devoured (rule 702.82b): "you gain 2 life for each creature it
+  // devoured", "draw a card for each", "target player discards a card for
+  // each", "twice the number of Goblins it devoured".
+  if ((m = /^you gain (\d+) life for each creature it devoured\.$/i.exec(s))) {
+    return { kind: "gain-life", amount: { product: [Number(m[1]), { devoured: "source" }] } };
+  }
+  if (/^draw a card for each creature it devoured\.$/i.test(s)) return { kind: "draw", amount: { devoured: "source" } };
+  if (/^target player discards a card for each creature it devoured\.$/i.test(s)) {
+    return { kind: "discard", target: ctx.target("player"), amount: { devoured: "source" } };
+  }
+  // The greatest group sharing a creature type, as a named X.
+  {
+    const SHARED_X = ", where X is the greatest number of creatures you control that have a creature type in common.";
+    if (s.endsWith(SHARED_X)) {
+      const head = s.slice(0, -SHARED_X.length).toLowerCase();
+      if (head === "it deals x damage to any target") {
+        return { kind: "damage", target: ctx.target("any-target"), amount: SHARED_CREATURE_TYPE };
+      }
+      if (head === "each opponent loses x life") return { kind: "lose-life", who: "each-opponent", amount: SHARED_CREATURE_TYPE };
+      if (head === "you gain x life") return { kind: "gain-life", amount: SHARED_CREATURE_TYPE };
+      if (head === "add x mana of any one color") return { kind: "add-mana", mana: "any-color", amount: SHARED_CREATURE_TYPE };
+    }
+  }
+  if (/^put target nonland permanent into its owner's library second from the top\.$/i.test(s)) {
+    return {
+      kind: "put-on-library",
+      target: ctx.target({ kind: "permanent", whose: "any", filter: { notTypes: ["land"] } }),
+      position: { fromTop: 2 },
+    };
+  }
+  if (/^put a \+1\/\+1 counter on target creature, then double the number of \+1\/\+1 counters on it\.$/i.test(s)) {
+    const target = ctx.target("creature");
+    return {
+      kind: "sequence",
+      effects: [
+        { kind: "add-counter", target, counter: "+1/+1", amount: 1 },
+        { kind: "double-counters", target, counter: "+1/+1" },
+      ],
+    };
+  }
+  if ((m = /^it deals damage to any target equal to twice the number of ([a-z]+)s it devoured\.$/i.exec(s))) {
+    return {
+      kind: "damage",
+      target: ctx.target("any-target"),
+      amount: { product: [2, { devoured: "source", filter: { subtype: m[1] } }] },
+    };
+  }
+  // Chroma (an ability word, rule 207.2c): one object's symbols.
+  if ((m = /^~ deals damage to any target equal to the number of (white|blue|black|red|green) mana symbols in the sacrificed creature's mana cost\.$/.exec(s))) {
+    return {
+      kind: "damage",
+      target: ctx.target("any-target"),
+      amount: { manaSymbolsOf: "sacrificed", color: COLOR_WORD[m[1]] },
+    };
   }
   // "Draw a card for each different mana value among nonland permanents you
   // control" (Lunar Insight), "… different power among creatures you
@@ -6797,10 +6858,53 @@ const ONE_OF_EACH_EFFECTS = {
 };
 
 /** Whole effects read off one printed sentence: the greatest of an amount
- * among players (`greatestAmongPlayers`), "the player with the most", and
- * Isperia's named card among a revealed hand. */
+ * among players (`greatestAmongPlayers`), "the player with the most",
+ * Isperia's named card among a revealed hand, a commander's mana value on the
+ * battlefield or in the command zone, and Shared Animosity's "other attacking
+ * creature that shares a creature type with it". */
 const LANDS_THEY_CONTROL = { type: "land", controlledBy: "you" };
+const COMMANDER_HERE = { greatestCommanderManaValue: true, onBattlefieldOrInCommandZone: true };
 const AMONG_PLAYERS_EFFECTS = {
+  "All creatures get -X/-X until end of turn, where X is the greatest mana value of a commander you own on the battlefield or in the command zone.": {
+    kind: "modify-pt-all",
+    filter: { type: "creature" },
+    power: { product: [COMMANDER_HERE, -1] },
+    toughness: { product: [COMMANDER_HERE, -1] },
+    duration: "end-of-turn",
+  },
+  "Each player may discard their hand and draw cards equal to the greatest mana value of a commander they own on the battlefield or in the command zone.": {
+    kind: "each-player-may",
+    who: "each-player",
+    prompt: "Discard your hand and draw cards equal to your commander's mana value?",
+    effect: {
+      kind: "sequence",
+      effects: [
+        { kind: "discard-hand", who: "you" },
+        { kind: "draw", amount: COMMANDER_HERE },
+      ],
+    },
+  },
+  "You draw X cards and you lose X life, where X is the mana value of a commander you own on the battlefield or in the command zone.": {
+    kind: "choose-value",
+    value: "commander-mana-value",
+    then: {
+      kind: "sequence",
+      effects: [
+        { kind: "draw", amount: "x" },
+        { kind: "lose-life", amount: "x" },
+      ],
+    },
+  },
+  "It gets +1/+0 until end of turn for each other attacking creature that shares a creature type with it.": {
+    kind: "modify-pt",
+    target: "trigger-object",
+    power: {
+      countOf: { type: "creature", attacking: true, sharesCreatureTypeWith: "trigger-object" },
+      excludeTriggerObject: true,
+    },
+    toughness: 0,
+    duration: "end-of-turn",
+  },
   "Each player with fewer cards in hand than the player with the most cards in hand draws cards equal to the difference.": {
     kind: "draw",
     who: "each-player",
@@ -6882,6 +6986,28 @@ export function parseEffect(text, outer) {
   if (oneOfEach !== undefined) return { effect: oneOfEach, todo: [], hints: [] };
   const amongPlayers = AMONG_PLAYERS_EFFECTS[text.charAt(0).toUpperCase() + text.slice(1)];
   if (amongPlayers !== undefined) return { effect: amongPlayers, todo: [], hints: [] };
+
+  // Chroma over what a player chose to show: Phosphorescent Feast.
+  const revealedSymbols =
+    /^Reveal any number of cards in your hand\. You gain 2 life for each (white|blue|black|red|green) mana symbol in those cards' mana costs\.$/.exec(
+      text,
+    );
+  if (revealedSymbols !== null) {
+    return {
+      effect: {
+        kind: "sequence",
+        effects: [
+          { kind: "look-and-choose", zone: "hand", min: 0, max: { cardsInHand: "you" }, destination: "reveal", leftover: "stay" },
+          {
+            kind: "gain-life",
+            amount: { product: [2, { thisWay: "revealed", who: "you", sumOf: { manaSymbols: COLOR_WORD[revealedSymbols[1]] } }] },
+          },
+        ],
+      },
+      todo: [],
+      hints: [],
+    };
+  }
 
   // A revealed hand counted through a filter: Inquisition's "the number of
   // white cards in their hand", Baleful Stare's "each Mountain and red card
@@ -13693,6 +13819,9 @@ function costLessParts(cost) {
 function costIfCondition(phrase) {
   const count = (word) => NUMBERS[word];
   let m;
+  if (phrase === "you control at least two creatures that share a creature type") {
+    return { kind: "aggregate", value: SHARED_CREATURE_TYPE, compare: { op: "gte", n: 2 } };
+  }
   if ((m = /^you control an? (.+)$/.exec(phrase))) {
     const filter = parseTypePhrase(m[1]);
     if (filter === null || Object.keys(filter).length === 0) return null;
@@ -14674,6 +14803,36 @@ function parseStatic(line, text) {
       const amount = { aggregate: "distinct", of, filter: { ...filter, ownedBy: "you" }, in: "graveyards" };
       return { affects: { scope: "self" }, replacement: { event: "enters-battlefield", counters: { kind: "+1/+1", amount } }, text };
     }
+  }
+  // Chroma (an ability word, rule 207.2c): each creature's own symbols, and a
+  // characteristic-defining count over a graveyard.
+  {
+    const w = /^Each creature you control gets \+1\/\+1 for each (white|blue|black|red|green) mana symbol in its mana cost\.$/.exec(line);
+    if (w !== null) {
+      return {
+        affects: { scope: "creatures-you-control" },
+        grantPtPerCount: { ofAffected: { manaSymbols: COLOR_WORD[w[1]] }, pt: [1, 1] },
+        text,
+      };
+    }
+  }
+  {
+    const w = /^~'s power and toughness are each equal to the number of (white|blue|black|red|green) mana symbols in the mana costs of cards in your graveyard\.$/.exec(line);
+    if (w !== null) {
+      return {
+        affects: { scope: "self" },
+        setBasePtFromCount: {
+          countOf: { aggregate: "sum", of: { manaSymbols: COLOR_WORD[w[1]] }, filter: { ownedBy: "you" }, in: "graveyards" },
+          plusPower: 0,
+          plusToughness: 0,
+        },
+        text,
+      };
+    }
+  }
+  // Rule 702.82b.
+  if (line === "~ has flying and trample if it devoured a creature.") {
+    return { affects: { scope: "self" }, condition: { kind: "self-devoured" }, grantKeywords: ["flying", "trample"], text };
   }
   // The greatest of a count among players (`greatestAmongPlayers`).
   {

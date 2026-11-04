@@ -1710,6 +1710,10 @@ export type StaticCondition =
    * 702.137)? — Rafter Demon's "When this creature enters, **if its
    * spectacle cost was paid**, …"; read like `self-kicked`. */
   | { readonly kind: "self-spectacle-paid" }
+  /** Did the ability's own source devour anything as it entered (rule
+   * 702.82b)? — Hellkite Hatchling's "has flying and trample if it devoured a
+   * creature". */
+  | { readonly kind: "self-devoured" }
   /** Was the ability's own source cast for its surge cost (rule 702.117a)?
    * "If its surge cost was paid" (Reckless Bushwhacker, Crush of Tentacles);
    * read like `self-spectacle-paid`. */
@@ -2143,8 +2147,10 @@ export interface StaticAbility {
      * value (Hedron Matrix's "+X/+X, where X is its mana value"), its colors
      * (Civic Saber's "+1/+0 for each of its colors"), or its creature types
      * (Diligent Zookeeper's, with `max`). Those are read from layers 4 and 5
-     * and no layer-7 value, so the fold doesn't recurse. */
-    readonly ofAffected?: "mana-value" | "colors" | "creature-types";
+     * and no layer-7 value, so the fold doesn't recurse. `{ manaSymbols }`: that
+     * colour's symbols in its mana cost — Light from Within's "+1/+1 for each
+     * white mana symbol in its mana cost". */
+    readonly ofAffected?: "mana-value" | "colors" | "creature-types" | { readonly manaSymbols: Color };
     /** Counters of a kind among the permanents matching `filter` — Gleam of
      * Authority's "+1/+1 for each +1/+1 counter on other creatures you control"
      * (with `relativeToAffected` and `excludeSelf`). */

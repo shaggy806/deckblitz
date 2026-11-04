@@ -118,6 +118,7 @@ import {
   effectiveColors,
   devotionOf,
   withDevotionUnseen,
+  commandersOnBattlefieldOrInCommandZone,
   greatestCommanderManaValue,
   objHasKeyword,
   effectiveSubtypes,
@@ -323,6 +324,7 @@ import {
   coloredReductionOf,
   manaCostReductions,
   manaOriginMatches,
+  colorSymbols,
   manaValue,
   parseManaCost,
   repeatedManaCost,
@@ -6834,10 +6836,11 @@ export class Game {
     if (awaiting.then !== undefined && awaiting.value !== undefined) {
       // A `choose-value` colour, card type or counter kind: the rest of the
       // resolution with the answer in its placeholder.
+      const xByOption = awaiting.value.xByOption;
       this.resumeResolution(
-        substituteChosen(awaiting.then, awaiting.value.sentinel, creatureType),
+        xByOption !== undefined ? awaiting.then : substituteChosen(awaiting.then, awaiting.value.sentinel, creatureType),
         awaiting.source,
-        awaiting.value.resume,
+        xByOption !== undefined ? { ...awaiting.value.resume, x: xByOption[creatureType] ?? 0 } : awaiting.value.resume,
       );
     } else if (awaiting.then !== undefined) {
       // A resolving spell or ability ("choose a creature type, then …"):
@@ -30554,6 +30557,14 @@ export class Game {
       powerAmong: (entries, of = "power") =>
         entries.reduce((n, { object: id, departed, count, revealed }) => {
           const object = this.state.objects[id];
+          if (typeof of === "object") {
+            // "The mana symbols in those cards' mana costs": read as "mana-value"
+            // below reads each, hidden cards unknown unless they were shown.
+            const known = object === undefined ? this.state.ceasedTokens?.[id] : departed ? object.lastKnown : undefined;
+            if (known !== undefined) return n + colorSymbols(parseManaCost(known.manaCost ?? null), [of.manaSymbols]) * count;
+            if (object === undefined || (revealed !== true && (object.zone === "library" || object.zone === "hand"))) return n;
+            return n + colorSymbols(parseManaCost(printedManaCost(this.registry, object)), [of.manaSymbols]) * count;
+          }
           if (of === "mana-value") {
             // "The total mana value of those cards": each found where it
             // went, if that's a public zone (rule 701.17c) or it was shown
@@ -31434,6 +31445,29 @@ export class Game {
             ...(spec.remember === true && remembered?.zone === "battlefield"
               ? { remember: { stint: remembered.zoneChangeCount ?? 0 } }
               : {}),
+          };
+          return;
+        }
+        if (spec.value === "commander-mana-value") {
+          const xByOption: Record<string, number> = {};
+          for (const id of commandersOnBattlefieldOrInCommandZone(this.state, controller)) {
+            xByOption[nameOf(this.state.objects[id])] = manaValueOfObject(this.registry, this.state.objects[id]);
+          }
+          const values = new Set(Object.values(xByOption));
+          // One mana value among them, or none: nothing to choose between.
+          if (values.size <= 1) {
+            this.resumeResolution(spec.then, source, { ...resume, x: [...values][0] ?? 0 });
+            return;
+          }
+          this.state.awaiting = {
+            kind: "choose-creature-type",
+            player: controller,
+            source,
+            options: Object.keys(xByOption),
+            catalog: false,
+            prompt: "Choose a commander you own",
+            then: spec.then,
+            value: { sentinel: "", resume, xByOption },
           };
           return;
         }
@@ -33714,6 +33748,25 @@ export class Game {
       },
       collectEvidence: (amount, then) =>
         this.beginCollectEvidence(controller, source, amount, { optional: true, x, ...(then !== undefined ? { then } : {}) }),
+      devouredBySource: (filter) => {
+        // In the stint this refers to, as it last existed once it has left
+        // (rule 608.2h): "for each creature it devoured" holds though it's gone.
+        const departed = departedSource();
+        const devoured = departed !== undefined ? departed.enteredDevoured : this.state.objects[source]?.enteredDevoured;
+        if (devoured === undefined) return 0;
+        if (filter === undefined) return devoured.length;
+        return devoured.filter((snapshot) =>
+          matchesFilter(this.state, this.registry, source, filter, { you: controller, snapshot }),
+        ).length;
+      },
+      manaSymbolsOf: (target, color) => {
+        if (target.kind !== "object") return 0;
+        const gone = lastKnownOf(target);
+        if (gone !== undefined) return colorSymbols(parseManaCost(gone.manaCost ?? null), [color]);
+        const object = this.state.objects[target.object];
+        if (object === undefined || !this.registry.has(printedCardName(object))) return 0;
+        return colorSymbols(parseManaCost(printedManaCost(this.registry, object)), [color]);
+      },
       sourceTimesKicked: () => {
         const live = this.state.objects[source];
         if (live?.zone === "battlefield") return live.enteredTimesKicked ?? 0;
@@ -33941,7 +33994,10 @@ export class Game {
         return lastKnownOf(ref)?.controller ?? object?.controller;
       },
       devotionTo: (colors) => devotionOf(this.state, this.registry, controller, colors),
-      greatestCommanderManaValue: () => greatestCommanderManaValue(this.state, this.registry, controller),
+      greatestCommanderManaValue: (onBattlefieldOrInCommandZone) =>
+        onBattlefieldOrInCommandZone
+          ? Math.max(0, ...commandersOnBattlefieldOrInCommandZone(this.state, controller).map((id) => manaValueOfObject(this.registry, this.state.objects[id])))
+          : greatestCommanderManaValue(this.state, this.registry, controller),
       basicLandTypes: () => basicLandTypesAmong(this.state, this.registry, controller),
       partySize: () => partySizeOf(this.state, this.registry, controller),
       timesMutated: () => {
@@ -39993,13 +40049,12 @@ export class Game {
       return Math.max(0, computeCharacteristics(this.state, this.registry, of).power);
     }
     if ("commanderManaValue" in amount) {
-      let best = 0;
-      for (const id of [...this.state.zones.shared.battlefield, ...this.state.zones.shared.command]) {
-        const object = this.state.objects[id];
-        if (object?.isCommander !== true || object.owner !== player) continue;
-        best = Math.max(best, manaValueOfObject(this.registry, object));
-      }
-      return best;
+      return Math.max(
+        0,
+        ...commandersOnBattlefieldOrInCommandZone(this.state, player).map((id) =>
+          manaValueOfObject(this.registry, this.state.objects[id]),
+        ),
+      );
     }
     if ("cardTypesInGraveyard" in amount) {
       return cardTypesInGraveyards(this.state, this.registry, player, amount.cardTypesInGraveyard);
@@ -41808,6 +41863,7 @@ export class Game {
     if (awaiting.devour === true) {
       const entering = this.state.objects[awaiting.source];
       let devoured = 0;
+      const devouredWhat: LastKnownInfo[] = [];
       this.withLeaveBatch(() => {
         for (const picked of chosen) {
           if (this.state.objects[picked]?.zone !== "battlefield") continue;
@@ -41817,9 +41873,13 @@ export class Game {
           this.moveObject(one, "graveyard");
           this.emit({ type: "permanent-sacrificed", object: one, player: sacrificer });
           devoured += 1;
+          // As it last existed (rule 702.82b): a token has ceased to exist by
+          // now, its snapshot kept among the ceased tokens.
+          const gone = this.state.objects[one]?.lastKnown ?? this.state.ceasedTokens?.[one];
+          if (gone !== undefined) devouredWhat.push(gone);
         }
       });
-      entering.enterChoice = { ...entering.enterChoice, devoured };
+      entering.enterChoice = { ...entering.enterChoice, devoured, devouredWhat };
       this.state.awaiting = null;
       this.prepareForPriority(this.activePlayer);
       return;
@@ -50353,6 +50413,7 @@ export class Game {
       // Read before the move ends a copy effect (rule 707.2): a Clone that
       // entered as a Craw Wurm and died was a mana value 6 creature.
       manaValue: manaValue(parseManaCost(printedManaCost(this.registry, object))),
+      manaCost: printedManaCost(this.registry, object),
       ...(object.manaSpent !== undefined ? { manaSpent: object.manaSpent } : {}),
       ...(object.manaSpentFrom !== undefined ? { manaSpentFrom: [...object.manaSpentFrom] } : {}),
       ...(object.manaSpentColors !== undefined ? { manaSpentColors: [...object.manaSpentColors] } : {}),
@@ -50366,6 +50427,7 @@ export class Game {
       ...(object.enteredProwl === true ? { enteredProwl: true } : {}),
       ...(object.tributeUnpaid === true ? { tributeUnpaid: true as const } : {}),
       ...(object.enteredTimesKicked !== undefined ? { enteredTimesKicked: object.enteredTimesKicked } : {}),
+      ...(object.enteredDevoured !== undefined ? { enteredDevoured: object.enteredDevoured } : {}),
       ...(object.enteredKickedWith !== undefined ? { enteredKickedWith: object.enteredKickedWith } : {}),
       ...(object.enteredGiftTo !== undefined ? { enteredGiftTo: object.enteredGiftTo } : {}),
       ...(object.chosenCreatureType != null ? { chosenCreatureType: object.chosenCreatureType } : {}),
@@ -51415,6 +51477,7 @@ export class Game {
     else delete object.enteredProwl;
     delete object.tributeUnpaid;
     object.enteredTimesKicked = enteringTimesKicked;
+    object.enteredDevoured = to === "battlefield" ? enterChoice?.devouredWhat : undefined;
     object.enteredKickedWith = enteringKickedWith;
     object.enteredConvokedBy = enteringConvokedBy;
     object.enteredPhyrexianPaidWithLife = enteringPhyrexianLife;

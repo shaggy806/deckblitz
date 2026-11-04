@@ -184,6 +184,12 @@ export interface GameObject {
    * the way `enteredKicked` is, for "enters with a charge counter on it for
    * each time it was kicked" (Everflowing Chalice). */
   enteredTimesKicked?: number;
+  /** The permanents it devoured as it entered this stint, each as it last
+   * existed on the battlefield (rule 702.82b: "it devoured" means sacrificed
+   * for its devour ability as it entered) — the `{ devoured }` amount and the
+   * `self-devoured` condition. Gone with its next move; a copy of it devoured
+   * nothing. */
+  enteredDevoured?: readonly LastKnownInfo[];
   /** Which of its two kicker costs its spell was kicked with (`kickedWith`),
    * carried across the stack-to-battlefield move the way `enteredTimesKicked`
    * is — "if it was kicked with its {1}{U} kicker" (Anavolver). */
@@ -1010,6 +1016,9 @@ export interface GameObject {
      * 702.82a — `CardDefinition.devour`): sacrificed then, and counted for
      * its +1/+1 counters as it enters. */
     readonly devoured?: number;
+    /** What it devoured, each as it last existed on the battlefield: becomes
+     * `enteredDevoured` as it enters. */
+    readonly devouredWhat?: readonly LastKnownInfo[];
     /** Whether what an `EnterInstead` asks of it was done as it was about to
      * enter: `false`, and it goes to its owner's graveyard instead
      * (`moveObject`). */
@@ -2082,6 +2091,9 @@ export interface LastKnownInfo {
   /** Printed mana value of what it was (a copy effect's, a transformed card's
    * front face's); `{X}` is 0 off the stack (rule 202.3e). */
   readonly manaValue: number;
+  /** Its mana cost (`printedManaCost`): what the chroma reads count the symbols
+   * of, once it has gone. Absent or `null`, none. */
+  readonly manaCost?: string | null;
   /** The mana spent to cast it, if it was cast (`GameObject.manaSpent`). */
   readonly manaSpent?: number;
   /** Where that mana came from (`GameObject.manaSpentFrom`). */
@@ -2108,6 +2120,9 @@ export interface LastKnownInfo {
    * `enteredTimesKicked`, so squad's copies are still made once it has left
    * (rule 702.157a). */
   readonly enteredTimesKicked?: number;
+  /** `GameObject.enteredDevoured`: "for each creature it devoured" read after
+   * it has left. */
+  readonly enteredDevoured?: readonly LastKnownInfo[];
   /** `enteredKickedWith`, so "if it was kicked with its [A] kicker" still
    * answers once it has left. */
   readonly enteredKickedWith?: number;
@@ -3755,7 +3770,14 @@ export type AwaitingDecision =
        * placeholder the answer replaces in `then` (`CHOSEN_COLOR`,
        * `CHOSEN_CARD_TYPE`, `CHOSEN_COUNTER`), and the whole resolution to
        * resume — `targets` and `x` above are left unset. */
-      readonly value?: { readonly sentinel: string; readonly resume: ResolutionResume };
+      readonly value?: {
+        readonly sentinel: string;
+        readonly resume: ResolutionResume;
+        /** The number each option stands for, which `then` reads as its `"x"`
+         * rather than through `sentinel` (`choose-value`'s
+         * `"commander-mana-value"`). */
+        readonly xByOption?: Readonly<Record<string, number>>;
+      };
       /** The placeholder the answer goes into in `then`, when it isn't
        * `CHOSEN_CREATURE_TYPE`: a choice with a second nested inside it (Vision
        * Charm). */

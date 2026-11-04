@@ -57,7 +57,7 @@ import {
 } from "./filter.js";
 import type { EffectAmount } from "./effects.js";
 import type { AggregateSpec, CardFilter } from "./filter.js";
-import { COLORS, manaValue, parseManaCost } from "./mana.js";
+import { COLORS, colorSymbols, manaValue, parseManaCost } from "./mana.js";
 import type { Color, ManaType } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import {
@@ -537,13 +537,7 @@ export function devotionOf(
     const override = manaCostOverride(object);
     const manaCost = override !== undefined ? override : registry.get(printedCardName(object)).manaCost;
     if (manaCost === null) continue;
-    const cost = parseManaCost(manaCost);
-    let symbols = 0;
-    for (const color of colors) symbols += cost.colored[color];
-    for (const pip of cost.hybrid) {
-      if (pip.some((o) => o.kind === "color" && colors.includes(o.color))) symbols += 1;
-    }
-    total += symbols * copies;
+    total += colorSymbols(parseManaCost(manaCost), colors) * copies;
   }
   return total;
 }
@@ -1125,6 +1119,8 @@ function evalStaticCondition(
           ? opts.sourceLastKnown.chosenOnEnter
           : source.chosenOnEnter) === condition.value
       );
+    case "self-devoured":
+      return (source.enteredDevoured ?? opts.sourceLastKnown?.enteredDevoured ?? []).length > 0;
     case "self-spectacle-paid":
       return (
         source.enteredSpectacle === true ||
@@ -3489,6 +3485,18 @@ export function greatestCommanderManaValue(state: GameState, registry: CardRegis
 }
 
 /**
+ * The commanders `player` owns on the battlefield or in the command zone — "a
+ * commander you own on the battlefield or in the command zone" (Cloudkill, the
+ * Visions cycle), not one in a graveyard, a hand or exile.
+ */
+export function commandersOnBattlefieldOrInCommandZone(state: GameState, player: PlayerId): ObjectId[] {
+  return [...state.zones.shared.battlefield, ...state.zones.shared.command].filter((id) => {
+    const object = state.objects[id];
+    return object?.isCommander === true && object.owner === player;
+  });
+}
+
+/**
  * How many colours there are among the battlefield permanents matching
  * `filter` from `you`'s perspective, each colour once — the `colorsAmong`
  * amount and P/T count. `except` leaves one permanent apiece out, as
@@ -3652,8 +3660,9 @@ function affectedCharacteristicCount(
   state: GameState,
   registry: CardRegistry,
   object: GameObject,
-  what: "mana-value" | "colors" | "creature-types",
+  what: "mana-value" | "colors" | "creature-types" | { readonly manaSymbols: Color },
 ): number {
+  if (typeof what === "object") return colorSymbols(parseManaCost(printedManaCost(registry, object)), [what.manaSymbols]);
   if (what === "mana-value") return manaValueOfObject(registry, object);
   if (what === "colors") return effectiveColors(state, registry, object).size;
   const creatureTypes = creatureTypesOf(state, registry, object);

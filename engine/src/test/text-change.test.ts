@@ -185,6 +185,20 @@ describe("Mind Bend and Crystal Spray — either kind of word", () => {
   });
 });
 
+describe("chroma's colour word", () => {
+  it("Sleight of Mind on Light from Within counts the new colour's symbols", () => {
+    const { game, a } = table();
+    const light = spawn(game, "Light from Within");
+    const angel = spawn(game, "Serra Angel");
+    const elves = spawn(game, "Llanowar Elves");
+    lands(game, "Island", 2);
+    answer(a, "white", "green");
+    cast(game, toHand(game, "Sleight of Mind"), { targets: [ref(light)] });
+    expect(pt(game, angel)).toEqual({ power: 4, toughness: 4 });
+    expect(pt(game, elves)).toEqual({ power: 2, toughness: 2 });
+  });
+});
+
 describe("the pool's text holds no colour word the change can't reach", () => {
   // A colour letter outside these fields is a mana symbol, a choice's
   // option or value, or a printed characteristic — none of them a word.

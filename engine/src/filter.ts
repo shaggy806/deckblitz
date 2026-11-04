@@ -31,7 +31,7 @@ import type { EffectAmount, ThisWayKind } from "./effects.js";
 import { goadersOf, isGoaded } from "./goad.js";
 import { hasRingBearerDesignation, isRingBearer } from "./ring.js";
 import type { Color, ManaCost, ManaFromSpec } from "./mana.js";
-import { COLORS, manaOriginMatches, manaValue, parseManaCost } from "./mana.js";
+import { COLORS, colorSymbols, manaOriginMatches, manaValue, parseManaCost } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import { LOCKED_ROOM, activePlayerOf, blockedAttackersOf, isTokenNow, manaCostOverride, nameOf, permanentCount, printedCardName, rulesTextName } from "./state.js";
 import type { GameObject, GameState, LastKnownInfo, ZoneType } from "./state.js";
@@ -2852,7 +2852,17 @@ export function weightedMatches(
  * on it — Hydra Trainer's "the number of **counters** on permanents you
  * control", Backstreet Bruiser's "two or more counters among creatures you
  * control" (rule 122.1: each counter is one, whatever its kind). */
-export type AggregateOf = "power" | "toughness" | "mana-value" | "counters" | { readonly counters: string };
+export type AggregateOf =
+  | "power"
+  | "toughness"
+  | "mana-value"
+  | "counters"
+  | { readonly counters: string }
+  /** The chroma read (an ability word, rule 207.2c): that colour's mana symbols
+   * in the object's mana cost, a hybrid or Phyrexian one counting once
+   * (`colorSymbols`) — Umbra Stalker's "the number of black mana symbols in the
+   * mana costs of cards in your graveyard". */
+  | { readonly manaSymbols: Color };
 
 /**
  * Where an aggregate's set of objects comes from:
@@ -2931,7 +2941,14 @@ export interface AggregateSource {
 export type AggregateSpec =
   | (AggregateBase & { readonly aggregate: "sum" | "max"; readonly of: AggregateOf })
   | (AggregateBase & { readonly aggregate: "distinct"; readonly of: DistinctOf })
-  | (AggregateBase & { readonly aggregate: "count"; readonly of?: undefined });
+  | (AggregateBase & { readonly aggregate: "count"; readonly of?: undefined })
+  /** How many of them share the creature type most of them have (rule 205.3m)
+   * — Skemfar Shadowsage's "the greatest number of creatures you control that
+   * have a creature type in common". A changeling (702.73a) is in every group;
+   * an object with no creature type is in none, so a lone one reads 0. As a
+   * `kind: "aggregate"` condition, Synchronized Eviction's "at least two
+   * creatures that share a creature type". */
+  | (AggregateBase & { readonly aggregate: "greatest-shared-creature-type"; readonly of?: undefined });
 
 interface AggregateBase {
   readonly filter: CardFilter;
@@ -3135,6 +3152,10 @@ export function aggregateValueOf(
   id: ObjectId,
   of: AggregateOf,
 ): number {
+  if (typeof of === "object" && "manaSymbols" in of) {
+    const object = state.objects[id];
+    return object === undefined ? 0 : colorSymbols(parseManaCost(printedManaCost(registry, object)), [of.manaSymbols]);
+  }
   if (typeof of === "object") return state.objects[id]?.counters[of.counters] ?? 0;
   if (of === "counters") return totalCounters(state.objects[id]?.counters);
   if (of === "mana-value") {
@@ -3157,6 +3178,9 @@ function totalCounters(counters: Readonly<Record<string, number>> | undefined): 
 function matchValueOf(state: GameState, registry: CardRegistry, m: WeightedMatch, of: AggregateOf): number {
   const known = m.lastKnown;
   if (known === undefined) return aggregateValueOf(state, registry, m.id, of);
+  if (typeof of === "object" && "manaSymbols" in of) {
+    return colorSymbols(parseManaCost(known.manaCost ?? null), [of.manaSymbols]);
+  }
   if (typeof of === "object") return known.counters[of.counters] ?? 0;
   if (of === "counters") return totalCounters(known.counters);
   if (of === "mana-value") return known.manaValue;
@@ -3179,6 +3203,19 @@ export function aggregateOver(
     return seen.size;
   }
   if (spec.aggregate === "count") return matches.reduce((n, m) => n + m.weight, 0);
+  if (spec.aggregate === "greatest-shared-creature-type") {
+    let everyType = 0;
+    const groups = new Map<string, number>();
+    for (const m of matches) {
+      const subtypes = m.lastKnown?.subtypes ?? computeCharacteristics(state, registry, m.id).subtypes;
+      if (subtypes.includes(EVERY_CREATURE_TYPE)) {
+        everyType += m.weight;
+        continue;
+      }
+      for (const s of subtypes) if (isCreatureType(s)) groups.set(s, (groups.get(s) ?? 0) + m.weight);
+    }
+    return everyType + Math.max(0, ...groups.values());
+  }
   const of = spec.of;
   if (spec.aggregate === "sum") {
     return matches.reduce((n, m) => n + matchValueOf(state, registry, m, of) * m.weight, 0);

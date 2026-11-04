@@ -4368,6 +4368,22 @@ decisions with a new set rule, `"one-of-each"`. Proving cards: Cataclysm, Global
 Overlay, Sundering Titan, Noxious Vapors. Ajani, Nacatl Pariah keeps that second key but isn't
 this shape: its -4 is one permanent kept, and it needs its own read.
 
+### Chroma, what a permanent devoured, a commander's mana value here, a shared creature type — built 2026-11-03
+
+`amount:chroma-of-cards`: `colorSymbols` (mana.ts), as `{ manaSymbolsOf, color }`, an
+aggregate's and `ofAffected`'s `{ manaSymbols }`, and a this-way `sumOf`. `amount:creatures-devoured`:
+`GameObject.enteredDevoured`, each as it last existed, `{ devoured: "source", filter? }`,
+`self-devoured`. `effect:amount-commander-mana-value-battlefield-or-command-zone`,
+`effect:choose-commander-for-x`: `greatestCommanderManaValue`'s `onBattlefieldOrInCommandZone`,
+`choose-value`'s `"commander-mana-value"` on the existing menu decision.
+`effect:amount-greatest-shared-creature-type`, `effect:count-sharing-creature-type`: the
+aggregate `"greatest-shared-creature-type"`, `countOf`'s `excludeTriggerObject`. Proving cards:
+Fiery Bombardment, Light from Within, Umbra Stalker, Phosphorescent Feast, Marrow Chomper,
+Skullmulcher, Hellkite Hatchling, Voracious Dragon, Tar Fiend, Cloudkill, Imposing Grandeur,
+Stinging Study, Visions of Dominance, Skemfar Shadowsage, Basalt Ravager, White Lotus Tile,
+Synchronized Eviction, Shared Animosity. Left: Sanity Grinding (its ten cards stay on top until
+after the mill, which `look-and-choose` can't), Visions of Dread.
+
 ### The greatest of an amount among players, and a hand counted through a filter — built 2026-11-03
 
 `effect:amount-greatest-count-among-players`, `amount:most-cards-in-hand-among-players`:

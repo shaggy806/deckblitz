@@ -619,6 +619,10 @@ export type EffectAmount =
       /** Leave out whatever target slot `excludeTarget` names — "for each
        * creature you control **other than that creature**". */
       readonly excludeTarget?: number;
+      /** Leave out the permanent that fired the trigger — "**other** attacking
+       * creature that shares a creature type with **it**" (Shared Animosity,
+       * whose `sharesCreatureTypeWith: "trigger-object"` matches it itself). */
+      readonly excludeTriggerObject?: true;
       /** Read the filter from the side of the player in this target slot
        * rather than the effect's controller's — "the number of creatures
        * **target player** controls" (Will of the Mardu) is `{ countOf: {
@@ -674,6 +678,22 @@ export type EffectAmount =
    * player target or an object that no longer exists at all.
    */
   | { readonly manaValueOf: AmountRef }
+  /**
+   * That colour's mana symbols in one object's mana cost, a hybrid or Phyrexian
+   * one counting once — chroma (an ability word, rule 207.2c): Fiery
+   * Bombardment's "the number of red mana symbols in the sacrificed creature's
+   * mana cost". As it last existed if it has left (rule 608.2h). Over a set of
+   * objects it's an aggregate's `of: { manaSymbols }`, or a `thisWay`'s `sumOf`.
+   */
+  | { readonly manaSymbolsOf: AmountRef; readonly color: Color }
+  /**
+   * How many permanents this effect's source devoured as it entered (rule
+   * 702.82b), each as it last existed on the battlefield; `filter` narrows them
+   * — Marrow Chomper's "for each creature it devoured", Voracious Dragon's "the
+   * number of Goblins it devoured". Holds after it has left (rule 608.2h). The
+   * printed number of counters plays no part: it's how many were sacrificed.
+   */
+  | { readonly devoured: "source"; readonly filter?: CardFilter }
   /**
    * How much mana was actually spent to cast the object (Prossh, Skyraider of
    * Kher: "where X is the amount of mana spent to cast it"). Commander tax,
@@ -846,7 +866,13 @@ export type EffectAmount =
    * wherever each one is, as it is now (Cactus Preserve's "an X/X … where X
    * is the greatest mana value among your commanders" — its ruling); 0 with
    * none. `characteristics.ts`'s `greatestCommanderManaValue`. */
-  | { readonly greatestCommanderManaValue: true }
+  | {
+      readonly greatestCommanderManaValue: true;
+      /** Only a commander on the battlefield or in the command zone — "the
+       * greatest mana value of a commander you own on the battlefield or in the
+       * command zone" (Cloudkill). 0 with none there. */
+      readonly onBattlefieldOrInCommandZone?: true;
+    }
   /** Domain (an ability word, rule 207.2c): the number of basic land types
    * among lands the effect's controller controls, 0 to 5, as it resolves —
    * Meria's Outrider, Herd Migration, Shadow Prophecy's "look at the top X
@@ -1160,8 +1186,10 @@ export type EffectAmount =
        * negative), and a token stack that went whole counts once per
        * token. `"mana-value"` is Combustible Gearhulk's "the **total mana
        * value** of those cards" (milled): a card read where it went, if
-       * that's a public zone (rule 701.17c), {X} counting 0 (rule 202.3e). */
-      readonly sumOf?: "power" | "toughness" | "mana-value";
+       * that's a public zone (rule 701.17c), {X} counting 0 (rule 202.3e).
+       * `{ manaSymbols }` is chroma's "each green mana symbol in those cards'
+       * mana costs" (Phosphorescent Feast), read the same way. */
+      readonly sumOf?: "power" | "toughness" | "mana-value" | { readonly manaSymbols: Color };
       /** The **greatest** of this characteristic among the objects instead
        * of their total, read as `sumOf` reads each — Heretic's Punishment's
        * "the greatest mana value among the milled cards", Ill-Timed
@@ -3547,7 +3575,12 @@ export type EffectSpec =
        * ability's targets and X carry across.
        */
       readonly kind: "choose-value";
-      readonly value: "color" | "card-type" | "counter-kind" | "number" | "text-word";
+      /** `"commander-mana-value"`: "X is the mana value of **a commander you
+       * own** on the battlefield or in the command zone" (Stinging Study): the
+       * controller chooses among them when their mana values differ, as the
+       * `choose-creature-type` menu of their names; `then` reads it as `"x"`, 0
+       * with none. */
+      readonly value: "color" | "card-type" | "counter-kind" | "number" | "text-word" | "commander-mana-value";
       readonly then: EffectSpec;
       /** With `"text-word"` (a `change-text`'s words, `CHOSEN_TEXT_WORD` in
        * `then`): the colour words, the basic land types, or both
@@ -10076,7 +10109,14 @@ export interface EffectApi {
    * signed — each as it last existed on the battlefield if `departed`, else
    * as it is now, a stack that went whole once per token. See the `thisWay`
    * amount's `sumOf`. */
-  powerAmong(entries: readonly ThisWayEntry[], of?: "power" | "toughness" | "mana-value"): number;
+  powerAmong(
+    entries: readonly ThisWayEntry[],
+    of?: "power" | "toughness" | "mana-value" | { readonly manaSymbols: Color },
+  ): number;
+  /** See the `{ devoured }` {@link EffectAmount}. */
+  devouredBySource(filter?: CardFilter): number;
+  /** See the `{ manaSymbolsOf }` {@link EffectAmount}. */
+  manaSymbolsOf(target: TargetRef, color: Color): number;
   /**
    * Who controls what `ref` points at — the player itself for a player ref,
    * else the object's controller.
@@ -10094,7 +10134,7 @@ export interface EffectApi {
   /** See the `{ devotionTo }` {@link EffectAmount}. */
   devotionTo(colors: readonly Color[]): number;
   /** See the `{ greatestCommanderManaValue }` {@link EffectAmount}. */
-  greatestCommanderManaValue(): number;
+  greatestCommanderManaValue(onBattlefieldOrInCommandZone: boolean): number;
   /** See the `{ basicLandTypes }` {@link EffectAmount}. */
   basicLandTypes(): number;
   /** See the `{ partySize }` {@link EffectAmount}. */
@@ -13327,7 +13367,9 @@ function signedAmountValue(
     const color = amount.devotionTo === "that-color" ? ctx.manaColor : amount.devotionTo;
     return color === undefined || color === "C" ? 0 : ctx.devotionTo([color as Color]);
   }
-  if ("greatestCommanderManaValue" in amount) return ctx.greatestCommanderManaValue();
+  if ("greatestCommanderManaValue" in amount) {
+    return ctx.greatestCommanderManaValue(amount.onBattlefieldOrInCommandZone === true);
+  }
   if ("basicLandTypes" in amount) return ctx.basicLandTypes();
   if ("partySize" in amount) return ctx.partySize();
   if ("timesMutated" in amount) return ctx.timesMutated();
@@ -13352,6 +13394,11 @@ function signedAmountValue(
     const ref = resolveAmountRef(amount.manaValueOf, ctx);
     return ref === undefined ? 0 : ctx.manaValueOf(ref);
   }
+  if ("manaSymbolsOf" in amount) {
+    const ref = resolveAmountRef(amount.manaSymbolsOf, ctx);
+    return ref === undefined ? 0 : ctx.manaSymbolsOf(ref, amount.color);
+  }
+  if ("devoured" in amount) return ctx.devouredBySource(amount.filter);
   if ("manaSpentOf" in amount) {
     const ref = resolveAmountRef(amount.manaSpentOf, ctx);
     if (ref === undefined) return 0;
@@ -13400,6 +13447,7 @@ function signedAmountValue(
     const ref = ctx.targets[amount.excludeTarget];
     if (ref?.kind === "object") except.push(ref.object);
   }
+  if (amount.excludeTriggerObject === true && ctx.triggerObject !== undefined) except.push(ctx.triggerObject);
   if (amount.forTarget !== undefined) {
     const ref = ctx.targets[amount.forTarget];
     if (ref?.kind !== "player" || illegalSlot(amount.forTarget, ctx)) return 0;

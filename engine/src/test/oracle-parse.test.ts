@@ -12418,3 +12418,50 @@ describe("the greatest of an amount among players, and a revealed hand counted",
     ).toMatchObject({ setBasePtFromCount: { countOf: "cards-in-largest-opponent-hand" } });
   });
 });
+
+describe("chroma, what it devoured, a commander here, a shared creature type", () => {
+  const sentence = (s: string) => parseEffect(s, { targets: [] }).effect;
+  it("what it devoured", () => {
+    expect(sentence("You gain 2 life for each creature it devoured.")).toEqual({
+      kind: "gain-life",
+      amount: { product: [2, { devoured: "source" }] },
+    });
+    expect(sentence("It deals damage to any target equal to twice the number of Goblins it devoured.")).toEqual({
+      kind: "damage",
+      target: 0,
+      amount: { product: [2, { devoured: "source", filter: { subtype: "Goblin" } }] },
+    });
+  });
+  it("a sacrificed creature's symbols, and what was shown", () => {
+    expect(
+      sentence("~ deals damage to any target equal to the number of red mana symbols in the sacrificed creature's mana cost."),
+    ).toEqual({ kind: "damage", target: 0, amount: { manaSymbolsOf: "sacrificed", color: "R" } });
+    expect(
+      sentence("Reveal any number of cards in your hand. You gain 2 life for each green mana symbol in those cards' mana costs."),
+    ).toMatchObject({ effects: [{}, { amount: { product: [2, { sumOf: { manaSymbols: "G" } }] } }] });
+  });
+  it("a commander on the battlefield or in the command zone", () => {
+    expect(
+      sentence("You draw X cards and you lose X life, where X is the mana value of a commander you own on the battlefield or in the command zone."),
+    ).toMatchObject({ kind: "choose-value", value: "commander-mana-value" });
+  });
+  it("the greatest group sharing a creature type, as a named X", () => {
+    const shared = { aggregate: "greatest-shared-creature-type", filter: { type: "creature", controlledBy: "you" } };
+    expect(
+      sentence("You gain X life, where X is the greatest number of creatures you control that have a creature type in common."),
+    ).toEqual({ kind: "gain-life", amount: shared });
+    expect(
+      sentence("Add X mana of any one color, where X is the greatest number of creatures you control that have a creature type in common."),
+    ).toEqual({ kind: "add-mana", mana: "any-color", amount: shared });
+  });
+  it("static reads", () => {
+    const read = (oracle_text: string) =>
+      parseFace({ name: "Card", type_line: "Enchantment", oracle_text }, { tokenFor: (d: string) => d }).static[0];
+    expect(read("Each creature you control gets +1/+1 for each white mana symbol in its mana cost.")).toMatchObject({
+      grantPtPerCount: { ofAffected: { manaSymbols: "W" }, pt: [1, 1] },
+    });
+    expect(read("Card has flying and trample if it devoured a creature.")).toMatchObject({
+      condition: { kind: "self-devoured" },
+    });
+  });
+});
