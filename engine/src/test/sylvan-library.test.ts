@@ -73,6 +73,8 @@ describe("Sylvan Library", () => {
     answer(game, true);
     const [first, second] = zoneChoice(game).eligible;
     game.dispatch({ type: "choose-from-zone", player: A, chosen: [first, second] });
+    // Chosen, not moved: the log says so, in the same event a move's "takes" reads.
+    expect(game.eventsOfType("cards-chosen-from-zone").at(-1)).toMatchObject({ objects: [first, second], chosenOnly: true });
 
     expect(game.state.awaiting).toMatchObject({ kind: "choose-modes", player: A, aboutCard: first });
     expect(game.legalActions(A)).toMatchObject([{ kind: "choose-modes", aboutCard: first }]);

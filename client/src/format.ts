@@ -303,6 +303,14 @@ function eventText(event: GameEvent, nameOf: NameOf, seats: readonly SeatStatus[
     case 'permanent-turned-face-up':
       return `${who(event.player)} turns ${name(event.object)} face up`
     case 'cards-chosen-from-zone':
+      // Chosen and not moved (a `stay` choice — Sylvan Library's two cards):
+      // what's done with them comes next. Named as any other: a hand card is
+      // only named to who may see it.
+      if (event.chosenOnly === true) {
+        return event.objects.length > 0
+          ? `${who(event.player)} chooses ${event.objects.map(name).join(', ')}`
+          : `${who(event.player)} chooses nothing`
+      }
       return event.objects.length > 0
         ? `${who(event.player)} takes ${event.objects.map(name).join(', ')}`
         : `${who(event.player)} takes nothing`

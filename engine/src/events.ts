@@ -548,6 +548,9 @@ export type GameEvent =
       readonly type: "cards-chosen-from-zone";
       readonly player: PlayerId;
       readonly objects: readonly ObjectId[];
+      /** Chosen and not moved (a `destination: "stay"` choice — Sylvan
+       * Library's two cards): what's done with them comes next. */
+      readonly chosenOnly?: true;
     })
   | (Base & {
       /** A player shuffled their library (after a search / tutor). */

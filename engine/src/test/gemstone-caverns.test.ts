@@ -146,6 +146,73 @@ describe("Gemstone Caverns: beginning the game on the battlefield, with more to 
     expect(game.state.turn.number).toBe(1);
   });
 
+  describe("a commander exiled from the opening hand (rule 903.9a)", () => {
+    /** Alice has begun with the Caverns and exiled a commander with it: the
+     * state-based check that owes her the choice is the first one, once every
+     * opening-hand question is answered and turn 1 has begun (rule 704.3). */
+    function exileCommander(decks: Record<string, string[]>, starting: PlayerId): { game: Game; krenko: ObjectId } {
+      const game = newGame(decks, starting);
+      const [krenko] = inHand(game, A, "Krenko, Mob Boss");
+      game.state.objects[krenko].isCommander = true;
+      game.dispatch({ type: "choose-from-zone", player: A, chosen: inHand(game, A, "Gemstone Caverns") });
+      game.dispatch({ type: "choose-from-zone", player: A, chosen: [krenko] });
+      return { game, krenko };
+    }
+
+    it("is asked as turn 1 begins: to the command zone, and the game goes on", () => {
+      const { game, krenko } = exileCommander({ alice: deck("Gemstone Caverns", "Krenko, Mob Boss"), bob: deck() }, B);
+      expect(game.state.objects[krenko].zone).toBe("exile");
+      expect(game.state.turn.number).toBe(1);
+      expect(game.state.awaiting).toMatchObject({ kind: "commander-replacement", player: A, commander: krenko });
+      game.dispatch({ type: "commander-replacement", player: A, toCommandZone: true });
+      expect(game.state.objects[krenko].zone).toBe("command");
+      expect(game.state.zones.shared.command).toContain(krenko);
+      expect(game.state.awaiting).toBeNull();
+      expect(game.state.priority.holder).toBe(B);
+      // The game goes on as one with no commander in it does.
+      game.dispatch({ type: "pass-priority", player: B });
+      game.dispatch({ type: "pass-priority", player: A });
+      expect(game.state.turn.step).toBe("upkeep");
+      expect(game.state.awaiting).toBeNull();
+    });
+
+    it("choosing exile leaves it there, and doesn't ask again", () => {
+      const { game, krenko } = exileCommander({ alice: deck("Gemstone Caverns", "Krenko, Mob Boss"), bob: deck() }, B);
+      game.dispatch({ type: "commander-replacement", player: A, toCommandZone: false });
+      expect(game.state.objects[krenko].zone).toBe("exile");
+      expect(game.state.awaiting).toBeNull();
+      expect(game.state.priority.holder).toBe(B);
+      game.dispatch({ type: "pass-priority", player: B });
+      expect(game.state.awaiting?.kind).not.toBe("commander-replacement");
+      expect(game.state.objects[krenko].zone).toBe("exile");
+    });
+
+    it("the opening-hand questions still to come are asked first, whoever they're for", () => {
+      const { game, krenko } = exileCommander(
+        {
+          alice: deck("Gemstone Caverns", "Krenko, Mob Boss", "Chancellor of the Tangle"),
+          bob: deck("Gemstone Caverns"),
+          carol: deck(),
+          dave: deck(),
+        },
+        D,
+      );
+      // Her own reveal, then bob's Caverns: neither lost to the owed choice.
+      expect(zoneChoice(game).destination).toBe("reveal");
+      expect(zoneChoice(game).player).toBe(A);
+      game.dispatch({ type: "choose-from-zone", player: A, chosen: [] });
+      const bob = zoneChoice(game);
+      expect([bob.player, bob.destination]).toEqual([B, "battlefield"]);
+      expect(game.state.objects[krenko].zone).toBe("exile");
+      expect(game.state.turn.number).toBe(0);
+      game.dispatch({ type: "choose-from-zone", player: B, chosen: [] });
+      expect(game.state.turn.number).toBe(1);
+      expect(game.state.awaiting).toMatchObject({ kind: "commander-replacement", player: A, commander: krenko });
+      game.dispatch({ type: "commander-replacement", player: A, toCommandZone: true });
+      expect(game.state.objects[krenko].zone).toBe("command");
+    });
+  });
+
   it("v1 takes it, and gives up what a mulligan would have it bottom first (its dearest spell)", () => {
     const game = newGame({ alice: deck("Gemstone Caverns", "Craw Wurm"), bob: deck() }, B);
     const view = { player: A, state: game.state, legalActions: () => game.legalActions(A) };

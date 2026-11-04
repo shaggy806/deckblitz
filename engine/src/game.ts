@@ -10258,7 +10258,12 @@ export class Game {
     // An order takes nothing: it only says where each card goes. A search's
     // second choice, of where its finds go, took them already.
     if (awaiting.order !== true && awaiting.searchRest === undefined && awaiting.discardToLibrary === undefined) {
-      this.emit({ type: "cards-chosen-from-zone", player, objects: [...chosen] });
+      this.emit({
+        type: "cards-chosen-from-zone",
+        player,
+        objects: [...chosen],
+        ...(awaiting.destination === "stay" ? { chosenOnly: true as const } : {}),
+      });
     }
     // Collect evidence (rule 701.59a): "whenever you collect evidence" sees
     // it before "if you do" runs.
