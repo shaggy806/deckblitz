@@ -10573,6 +10573,13 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'Dimensional Breach: your upkeep returns one of your exiled cards, your choice',
+    board({
+      you: { bf: ['Plains*7', 'Grizzly Bears'], hand: ['Dimensional Breach'] },
+      opp: [{ bf: ['Forest', 'Llanowar Elves'] }],
+    }),
+  ),
+  preset(
     'Library of Leng: discarded cards can go back on top, in the order you pick',
     board({
       you: { bf: ['Library of Leng', 'Mountain*3'], hand: ['Wheel of Fortune', 'Grizzly Bears', 'Llanowar Elves'] },

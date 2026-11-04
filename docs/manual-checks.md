@@ -7055,6 +7055,10 @@ These boards start before the first turn (the builder's `openingHands`), with th
 - **Do:** It's Bob's turn. As Bob, cast Mind Rot at Alice.
 - **Expect:** Alice discards her two cards and is asked "Nephalia Academy: you may reveal and put discarded cards on top of your library…". Pick one and confirm: it's revealed, it's on top of her library, and the other is in her graveyard.
 
+### Dimensional Breach: your upkeep returns one of your exiled cards, your choice
+- **Do:** Cast Dimensional Breach, then pass until your next upkeep.
+- **Expect:** Everything is exiled. On your upkeep you pick one of your own exiled cards (not Bob's) and it returns; the rest stay exiled for later upkeeps.
+
 ### False Orders: unblocking the attacker and blocking another
 
 - **Do:** Attack Bob with Hill Giant and Serra Angel. As Bob, block Hill Giant with Grizzly Bears. As Alice, cast False Orders on Grizzly Bears and click Serra Angel.

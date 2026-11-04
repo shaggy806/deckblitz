@@ -8703,6 +8703,7 @@ export function parseEffect(text, outer) {
       opponentDividesFindsAt(sentences, i, ctx) ??
       distinctSetAt(sentences, i) ??
       counterIntoAt(sentences, i, ctx) ??
+      exiledUntilOrWhileAt(sentences, i) ??
       counterAbilityAt(sentences, i, ctx) ??
       opponentChoosesInGraveyardAt(sentences, i, ctx) ??
       youChooseInEachGraveyardAt(sentences, i) ??
@@ -10777,6 +10778,65 @@ function opponentDividesFindsAt(sentences, i, ctx) {
     },
     used: closed ? 3 : 4,
   };
+}
+
+/** Exile with its own way back: "you may exile any number of non-Angel creatures
+ * you control until ~ leaves the battlefield" (Glorious Protector), and "Exile all
+ * permanents." + "For as long as any of those cards remain exiled, at the beginning
+ * of each player's upkeep, that player returns one of the exiled cards they own to
+ * the battlefield." (Dimensional Breach). */
+function exiledUntilOrWhileAt(sentences, i) {
+  const chosen = /^you may exile any number of non-([a-z]+) creatures you control until ~ leaves the battlefield\.$/i.exec(sentences[i]);
+  if (chosen !== null) {
+    const word = chosen[1];
+    const subtype = word[0].toUpperCase() + word.slice(1).toLowerCase();
+    const filter = { type: "creature", notSubtypes: [subtype], controlledBy: "you" };
+    return {
+      effect: {
+        kind: "conditional",
+        condition: { kind: "source-on-battlefield" },
+        then: {
+          kind: "choose-permanents",
+          filter,
+          upTo: { countOf: filter },
+          then: { kind: "exile", target: 0, untilSourceLeaves: true },
+          prompt: `Exile any number of non-${subtype} creatures you control until this creature leaves the battlefield`,
+        },
+      },
+      used: 1,
+    };
+  }
+  const text = "For as long as any of those cards remain exiled, at the beginning of each player's upkeep, that player returns one of the exiled cards they own to the battlefield.";
+  if (/^exile all permanents\.$/i.test(sentences[i]) && sentences[i + 1] === text) {
+    return {
+      effect: {
+        kind: "sequence",
+        effects: [
+          { kind: "exile-all", filter: {} },
+          {
+            kind: "delayed-trigger",
+            about: "exiled",
+            at: { whenever: { on: "step-begins", step: "upkeep", who: "any" }, until: "game", whileAnyExiled: true },
+            effect: {
+              kind: "look-and-choose",
+              zone: "targets",
+              exiledThatCanEnter: true,
+              player: "active-player",
+              min: 1,
+              max: 1,
+              filter: { ownedBy: "you" },
+              destination: "battlefield",
+              leftover: "stay",
+              under: "owners",
+            },
+            text,
+          },
+        ],
+      },
+      used: 2,
+    };
+  }
+  return null;
 }
 
 /** A spell countered to somewhere else: "Counter target spell. If that spell is

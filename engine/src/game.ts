@@ -14009,6 +14009,18 @@ export class Game {
    * nothing at all while the Aura is a creature (303.4d). A player is
    * `canEnchantPlayer`'s question.
    */
+  /** See `ResolutionContext.couldEnterBattlefield`. */
+  private couldEnterBattlefield(card: ObjectId): boolean {
+    const object = this.state.objects[card];
+    if (object === undefined) return false;
+    const def = this.registry.get(printedCardName(object));
+    if (!def.subtypes.includes("Aura")) return true;
+    return (
+      this.state.zones.shared.battlefield.some((host) => this.canEnchant(card, host, object.owner, def)) ||
+      this.state.turnOrder.some((player) => this.canEnchantPlayer(card, player, object.owner, def))
+    );
+  }
+
   private canEnchant(aura: ObjectId, host: ObjectId, controller: PlayerId, def: CardDefinition): boolean {
     if (host === aura) return false;
     const target = this.state.objects[host];
@@ -27410,6 +27422,19 @@ export class Game {
       if (subject === undefined) continue;
       const object = subject.controller === trigger.controller ? subject : { ...subject, controller: trigger.controller };
       if (!this.triggerMatches(at.whenever, event, object)) continue;
+      if (at.whileAnyExiled === true) {
+        const stints = trigger.targetStints ?? [];
+        const anyLeft = trigger.targets.some(
+          (t, slot) =>
+            t?.kind === "object" &&
+            this.state.objects[t.object]?.zone === "exile" &&
+            (this.state.objects[t.object].zoneChangeCount ?? 0) === stints[slot],
+        );
+        if (!anyLeft) {
+          usedUp.push(trigger);
+          continue;
+        }
+      }
       if (at.once === true) usedUp.push(trigger);
       const triggerObject = this.eventTriggerObject(at.whenever, event);
       const triggerValue = this.triggerValueOf(at.whenever, event, object);
@@ -33206,6 +33231,7 @@ export class Game {
         };
       },
       fight: (a, b, oneSided) => this.fightCreatures(a, b, oneSided),
+      couldEnterBattlefield: (card) => this.couldEnterBattlefield(card),
       counterSpell: (target, into, lockSource, timeCounters) =>
         this.counterSpellByEffect(target, into, lockSource === true, controller, timeCounters),
       onTheStack: (spells, abilities, whose) => {
@@ -45938,6 +45964,7 @@ export class Game {
         ...(at.until === "your-next-turn" ? { untilYourNextTurn: true as const } : {}),
         ...(at.until === "end-of-combat" ? { untilEndOfCombat: true as const } : {}),
         ...(at.until === "game" ? { forGame: true as const } : {}),
+        ...(at.whileAnyExiled === true ? { whileAnyExiled: true as const } : {}),
         ...(at.player !== undefined ? { player: at.player } : {}),
         ...(watching !== undefined ? { watching } : {}),
         ...(at.once === true ? { once: true as const } : {}),

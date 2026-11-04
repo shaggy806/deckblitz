@@ -333,6 +333,20 @@ fails to pay. An emblem's own activated ability (Ob Nixilis of the Black Oath) i
 not built: nothing offers an ability of an object in the command zone that isn't
 its card's. Keys: effect:emblem-grants-activated, effect:emblem-grants-to-spells.
 
+### Exile with its own way back — built 2026-11-04
+
+The need-keys family `effect:exile-any-number-until-leaves`' top unit. Glorious
+Protector and Bronzebeak Foragers needed no new code (`choose-permanents` with
+`exile { untilSourceLeaves }`, one optional slot a seat, `card-in-exile`'s `linked`).
+Dimensional Breach: `DelayedWhenever.whileAnyExiled` (used up, untriggered, once none
+of its `about` cards is still exiled as the object it was), `look-and-choose`'s
+`player: "active-player"` and `exiledThatCanEnter` (its targets still in exile, no Aura
+with nothing to enchant, rule 303.4g). Keys: effect:exile-any-number-until-leaves,
+effect:exile-until-leaves-per-opponent (Valki waits on its own "revealed this way" and
+its copy ability), trigger:linked-exile-each-upkeep-return-one. Left:
+effect:exile-until-source-untaps-with-auras (Tawnos's Coffin: its Auras exiled with it,
+counters noted and returned, "becomes untapped or leaves", the Auras returning attached).
+
 ### Where a card goes instead of a graveyard, and a discard put back — built 2026-11-04
 
 The need-keys family `replacement:new-event-replacements`' top unit, but for its

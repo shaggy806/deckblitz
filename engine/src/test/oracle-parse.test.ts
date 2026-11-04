@@ -13912,6 +13912,44 @@ describe("a copy for a duration read as a condition", () => {
       kind: "may",
       effect: { kind: "become-copy", target: "trigger-object", of: 0, until: "while-source-attached" },
     });
+describe("exile with its own way back", () => {
+  it("reads any number of a type's others until this leaves", () => {
+    const face = parseFace({
+      name: "Test Card",
+      type_line: "Creature — Angel",
+      oracle_text: "When this creature enters, you may exile any number of non-Angel creatures you control until this creature leaves the battlefield.",
+      mana_cost: "{1}",
+      colors: [],
+      power: "1",
+      toughness: "1",
+    });
+    expect(face.triggered[0].effect).toMatchObject({
+      kind: "conditional",
+      then: {
+        kind: "choose-permanents",
+        filter: { type: "creature", notSubtypes: ["Angel"], controlledBy: "you" },
+        then: { kind: "exile", target: 0, untilSourceLeaves: true },
+      },
+    });
+  });
+  it("reads all permanents exiled, and one back each upkeep while any remain", () => {
+    const face = parseFace({
+      name: "Test Card",
+      type_line: "Sorcery",
+      oracle_text: "Exile all permanents. For as long as any of those cards remain exiled, at the beginning of each player's upkeep, that player returns one of the exiled cards they own to the battlefield.",
+      mana_cost: "{1}",
+      colors: [],
+    });
+    expect(face.effect).toMatchObject({
+      kind: "sequence",
+      effects: [
+        { kind: "exile-all", filter: {} },
+        { kind: "delayed-trigger", about: "exiled", at: { until: "game", whileAnyExiled: true }, effect: { kind: "look-and-choose", player: "active-player" } },
+      ],
+    });
+  });
+});
+
 describe("what would go to a graveyard going elsewhere", () => {
   const statics = (oracle_text: string) =>
     parseFace({ name: "Test Card", type_line: "Artifact", oracle_text, mana_cost: "{1}", colors: [] }).static[0];

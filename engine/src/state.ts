@@ -4883,6 +4883,8 @@ export interface DelayedWheneverWatch {
   readonly untilEndOfCombat?: true;
   /** `DelayedWhenever.until: "game"`: no duration ends it. */
   readonly forGame?: true;
+  /** `DelayedWhenever.whileAnyExiled`: until none of its targets is still exiled. */
+  readonly whileAnyExiled?: true;
   /** Only damage dealt to this player — `DelayedWhenever.toPlayer`. */
   readonly player?: PlayerId;
   /** What `"self"` in `whenever` reads as, each in its stint on the

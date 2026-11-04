@@ -590,6 +590,11 @@ export interface DelayedWhenever {
    * rest of the game", and a delayed "when" with no duration of its own (`once`,
    * Coffin Queen). */
   readonly until?: "your-next-turn" | "end-of-combat" | "game";
+  /** "**For as long as any of those cards remain exiled**, at the beginning of
+   * each player's upkeep" (Dimensional Breach), with `about`: used up, and not
+   * triggering, once none of the cards it's about is still in exile as the
+   * object it was (rule 400.7). */
+  readonly whileAnyExiled?: true;
   readonly targets?: readonly TargetSpec[];
   /** "…deals combat damage to **that player** this turn" (Great Train
    * Heist): a target slot holding a player, fixed as this resolves; only
@@ -9788,9 +9793,10 @@ export type EffectSpec =
       /** Whose zone, who looks and who chooses: `"that-player"` is the
        * player a `for-each-player` is about — "each player looks at the top
        * five cards of **their** library and may reveal …" (Explore the
-       * Vastlands); the cards they take are theirs. Default: the effect's
-       * controller. */
-      readonly player?: "that-player";
+       * Vastlands); the cards they take are theirs. `"active-player"`: the
+       * player whose turn it is, for a step trigger's "that player" (Dimensional
+       * Breach). Default: the effect's controller. */
+      readonly player?: "that-player" | "active-player";
       /** Someone else makes the choice from that zone: `"that-player"` is
        * the opponent a `choose-opponent` chose — Tasigur, the Golden Fang's
        * "return a nonland card **of an opponent's choice** from your
@@ -9873,6 +9879,11 @@ export type EffectSpec =
        * until end of turn"). Under the chooser's control (rule 110.2a), as
        * `"exile"`'s are. */
       readonly zone: "library" | "graveyard" | "hand" | "graveyards" | "command" | "targets" | "exile" | "exiled-with-source";
+      /** With `zone: "targets"`: the ones still in exile as the objects they
+       * were (rule 400.7), that could return: "you can't pick a card that can't
+       * legally be returned to the battlefield" (Dimensional Breach's ruling), so
+       * not an Aura with nothing it could enchant under its owner (rule 303.4g). */
+      readonly exiledThatCanEnter?: true;
       /** All of `min` or nothing: with fewer than `min` cards that may be
        * chosen, nothing is asked and nothing moves — a cost can't be paid in
        * part (rule 118.3), so "you may put **two** cards your opponents own
@@ -10947,6 +10958,9 @@ export interface EffectApi {
   putOnLibrary(target: TargetRef, position: LibraryPosition): void;
   /** Set up a delayed triggered ability — see the `"delayed-trigger"`
    * {@link EffectSpec}. `controller` is who will control it when it fires. */
+  /** Whether this card, returned under its owner's control, could stay on the
+   * battlefield: an Aura needs something to enchant (rule 303.4g). */
+  couldEnterBattlefield(card: ObjectId): boolean;
   delayTrigger(
     at:
       | DelayedTriggerTiming
@@ -19262,8 +19276,13 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       const owner = spec.from === undefined ? undefined : effectPlayer(spec.from, ctx);
       if (spec.from !== undefined && (owner === undefined || !ctx.playersInScope("each-player").includes(owner))) return;
       const chooser =
-        owner ?? (spec.player === "that-player" ? ctx.playersInScope("that-player")[0] : undefined);
-      if (spec.player === "that-player" && chooser === undefined) return;
+        owner ??
+        (spec.player === "that-player"
+          ? ctx.playersInScope("that-player")[0]
+          : spec.player === "active-player"
+            ? effectPlayer("active-player", ctx)
+            : undefined);
+      if (spec.player !== undefined && chooser === undefined) return;
       // "…of an opponent's choice" (Tasigur): they pick from your zone.
       const picker =
         owner !== undefined
@@ -19276,7 +19295,13 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       // (an illegal one's slot is blank — rule 608.2b).
       const zone =
         spec.zone === "targets"
-          ? { cards: ctx.targets.flatMap((t) => (t?.kind === "object" ? [t.object] : [])) }
+          ? spec.exiledThatCanEnter === true
+            ? {
+                exiled: ctx.targets.flatMap((t, slot) =>
+                  t?.kind === "object" && !illegalSlot(slot, ctx) && ctx.couldEnterBattlefield(t.object) ? [t.object] : [],
+                ),
+              }
+            : { cards: ctx.targets.flatMap((t) => (t?.kind === "object" ? [t.object] : [])) }
           : spec.zone === "exiled-with-source"
             ? // Rule 607.2a: only what the linked ability exiled.
               { exiled: ctx.cardsExiledWithSource(true) }
