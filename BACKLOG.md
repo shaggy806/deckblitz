@@ -491,8 +491,8 @@ section keeps only what to do next.
   Ozai). Narrow keys: Ludevic and Curse of Leeches (a choice while transforming, `replacement:as-transforms`'s field can't ask), Defilers of
   Vigor and Faith (an optional additional cost), Geth's Summons (`condition:per-opponent-target-slot-condition`), Valki, Halo Fountain
   (`cost:untap-cost`), Full Throttle, Final Fortune, Endurance, Cavern-Hoard Dragon, Drown in the Loch, Case of the Locked Hothouse, Feldon of the
-  Third Path, Scroll Rack, Comet Storm. **Next by rank: Baral, All Will Be One, Echoes of Eternity, Dour Port-Mage, Kozilek.** `--stale` 1,754
-  (the sweep's queue); top-5000 4398/5000, commanders 465/500; the greedy order's best unit now frees 4.
+  Third Path, Scroll Rack, Comet Storm, Baral, All Will Be One, Dour Port-Mage, Echoes of Eternity. **Next by rank: Kozilek, Ulamog, Ashling,
+  Phelia, Brass's Tunnel-Grinder.** `--stale` 1,755 (the sweep's queue); top-5000 4402/5000, commanders 465/500; the greedy order's best unit now frees 4.
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next
@@ -742,7 +742,7 @@ delete its detail there and move this line to `COMPLETED.md`.
 - **A resolved copy's and a crime's log lines name an object id** ("obj-168"; "commits a crime with obj-88"), and a closed look says "takes nothing".
 - **A countered ability's log line names its object id** ("obj-87 is countered").
 
-- **The log names a hidden card by its id** ("Alice takes obj-161", to seats that can't see that hand).
+- **A target group's prompt doesn't pluralise its noun** ("choose 3 creature", "any number of creature you control").
 
 - **The die rolling animation needs adjusting** — with the loss of gradients, the vertical bounces look like the shape is just growing and shrinking (`client/src/App.css`'s `die-land`).
 

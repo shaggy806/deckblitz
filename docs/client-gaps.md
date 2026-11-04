@@ -8,9 +8,9 @@ title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLET
 - **A resolved copy's and a crime's log lines name an object id** (found 2026-11-04): after a cast copy resolves the log prints its
   id ("obj-168", seen on paradigm's copy), and `client/src/format.ts:399` prints "commits a crime with obj-88" once an ability has
   resolved. `format.ts:303` says "takes nothing" on a look the player closes, where nothing was offered to take.
-- **The log names a hidden card by its id** (found 2026-11-03): after Distant Memories' yes, other seats read "Alice takes
-  obj-161", because `client/src/format.ts`'s `cards-chosen-from-zone` line names each object and that card is now in a hidden
-  hand. It should read "a card" to a seat that can't see it. Not checked yet: which other log lines do the same.
+- **A target group's prompt doesn't pluralise its noun** (found 2026-11-04): "choose 3 creature" (Strength of the Tajuru), "any number
+  of creature you control" (Eerie Interlude). `describeTargetSpec` in `engine/src/target.ts` pluralises only "target"; this needs a
+  pluraliser over every spec label, the structured ones included.
 - **Which seat you see while controlling another player** (open 2026-11-02, the user will decide after
   playing it; the Mindslaver checks in `docs/manual-checks.md` show it). Rule 723.4 only says what the
   controller may see, so this is a UI call.

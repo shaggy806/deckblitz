@@ -12,6 +12,12 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **A spell's own triggers doubled** (2026-11-04), `doubleTriggersOf`'s `spells`: Echoes of Eternity.
+- **One or more leaving, once per event** (2026-11-04), `leaves-battlefield`'s `batched`, a commander's 903.9b move part of it: Dour Port-Mage, Nefarious Imp.
+- **Counters put on one permanent at once fire `counters-put` once** (2026-11-04), a bug: proliferating two kinds, or two wither sources, fired it per kind or source.
+- **Counters put on players as a trigger** (2026-11-04), `counters-put`'s `orPlayer`: All Will Be One.
+- **A spell being countered as a trigger** (2026-11-04), `counters-spell` and `spell-countered`: Baral, Lullmage Mentor, Multani's Presence.
+- **Tokens made this way stay out of older stacks while the effect reads them** (2026-11-04), a bug in `thisWay: "created"` and `about: "created"` with an identical token made earlier the same turn: Retrieve the Esper, Gilt-Leaf Ambush and Force of Rage among those it hit (`readsCreatedTokens`).
 - **A spell's target count read from an amount as it's cast** (2026-11-04): Comet Storm, Strength of the Tajuru, Aether Burst.
 - **`look-and-choose`'s `exiled-this-way`** (2026-11-04), a commander asked 903.9b before anything moves: Scroll Rack.
 - **The tokens an effect just created, referred to again** (2026-11-04), no engine code: Feldon of the Third Path, Case of the Stashed Skeleton.
@@ -3039,6 +3045,7 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Client / UI
 
+- **The log names a hidden card by its id** (2026-11-04): the compact log and the event log now share `logNameAt`, so a card gone somewhere hidden reads as hidden, not "obj-161". The target banner's "choose 1 target" reads singular too.
 - **Learn Commander's first game** (2026-11-02: f1322a3f, 3658a8f8): a whole game for someone who
   has never played, won on turn 7 (`learn-commander`, replacing the proof lesson), which can't be
   soft-locked (a scripted lesson offers only what its card asks for) and holds still under a card

@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4398 already implemented / 602 missing (marks refreshed 2026-11-04)
+4402 already implemented / 598 missing (marks refreshed 2026-11-04)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -1326,7 +1326,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1333  Vraska, Betrayal's Sting                 {4}{B}{B/P}      Legendary Planeswalker — Vraska
 [x]  1334  Conqueror's Flail                        {2}              Artifact — Equipment
 [x]  1335  Sword of Fire and Ice                    {3}              Artifact — Equipment
-[ ]  1336  Baral, Chief of Compliance               {1}{U}           Legendary Creature — Human Wizard
+[x]  1336  Baral, Chief of Compliance               {1}{U}           Legendary Creature — Human Wizard
 [x]  1337  Secret Tunnel                            {0}              Land — Cave
 [x]  1338  Jadar, Ghoulcaller of Nephalia           {1}{B}           Legendary Creature — Human Wizard
 [x]  1339  Shimmer Myr                              {3}              Artifact Creature — Myr
@@ -1385,7 +1385,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1392  Waterlogged Teachings // Inundated Archive {4}              Instant // Land
 [x]  1393  Skull Prophet                            {B}{G}           Creature — Human Druid
 [x]  1394  Forensic Gadgeteer                       {2}{U}           Creature — Vedalken Artificer Detective
-[ ]  1395  All Will Be One                          {3}{R}{R}        Enchantment
+[x]  1395  All Will Be One                          {3}{R}{R}        Enchantment
 [x]  1396  Martial Coup                             {X}{W}{W}        Sorcery
 [x]  1397  Razorverge Thicket                       {0}              Land
 [x]  1398  Rankle, Master of Pranks                 {2}{B}{B}        Legendary Creature — Faerie Rogue
@@ -1480,7 +1480,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1487  Twitching Doll                           {1}{G}           Artifact Creature — Spider Toy
 [x]  1488  Apex Altisaur                            {7}{G}{G}        Creature — Dinosaur
 [x]  1489  Rain of Riches                           {3}{R}{R}        Enchantment
-[ ]  1490  Echoes of Eternity                       {3}{C}{C}{C}     Kindred Enchantment — Eldrazi
+[x]  1490  Echoes of Eternity                       {3}{C}{C}{C}     Kindred Enchantment — Eldrazi
 [x]  1491  Planar Genesis                           {G}{U}           Instant
 [x]  1492  Crystal Vein                             {0}              Land
 [x]  1493  Odric, Lunarch Marshal                   {3}{W}           Legendary Creature — Human Soldier
@@ -1509,7 +1509,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1516  Metastatic Evangel                       {1}{W}           Creature — Phyrexian Human Cleric
 [x]  1517  Unnatural Restoration                    {1}{G}           Sorcery
 [x]  1518  Disciple of Bolas                        {3}{B}           Creature — Human Wizard
-[ ]  1519  Dour Port-Mage                           {1}{U}           Creature — Frog Wizard
+[x]  1519  Dour Port-Mage                           {1}{U}           Creature — Frog Wizard
 [x]  1520  Rites of Flourishing                     {2}{G}           Enchantment
 [x]  1521  Lavaspur Boots                           {1}              Artifact — Equipment
 [x]  1522  Final Fortune                            {R}{R}           Instant

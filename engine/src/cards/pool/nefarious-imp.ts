@@ -4,7 +4,7 @@ const SCRY = "Whenever one or more permanents you control leave the battlefield,
 
 export default defineCard({
   name: "Nefarious Imp",
-  manaCost: "{1}{B}",
+  manaCost: "{2}{B}",
   colors: ["B"],
   types: ["creature"],
   subtypes: ["Imp"],
