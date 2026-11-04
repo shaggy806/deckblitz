@@ -7723,6 +7723,21 @@ describe("counters put or removed this way", () => {
     });
   });
 
+  it("reads the damage dealt to it this turn, a dies trigger's intervening if", () => {
+    const zubera = face(
+      "Rushing-Tide Zubera",
+      "Creature — Zubera Spirit",
+      "When this creature dies, if 4 or more damage was dealt to it this turn, draw three cards.",
+    );
+    expect(zubera.triggered[0].condition).toEqual({
+      kind: "damage-dealt-this-turn",
+      who: "any-player",
+      toSelf: true,
+      atLeast: 4,
+    });
+    expect(zubera.triggered[0].effect).toMatchObject({ kind: "draw", amount: 3 });
+  });
+
   it("reads what's exiled or returned as it enters, and the counters that come of it", () => {
     const replacementOf = (name: string, line: string) => face(name, "Creature — Horror", line).static[0].replacement;
     expect(

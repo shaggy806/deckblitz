@@ -13795,6 +13795,13 @@ const DISCARDED_THIS_TURN = { kind: "turn-history", what: "discarded" };
  * intervening "if" of a trigger (Ichor Shade, Mysterio's Mirage), a spell's
  * "If …, draw a card." (Recalibrate). */
 const TURN_TALLY_IFS = {
+  // The Zuberas': to this permanent in its stint, by anyone's sources.
+  "if 4 or more damage was dealt to it this turn,": {
+    kind: "damage-dealt-this-turn",
+    who: "any-player",
+    toSelf: true,
+    atLeast: 4,
+  },
   // Dragon Whelp's: activations of this ability so far this turn, resolved
   // or not.
   "if this ability has been activated four or more times this turn,": { kind: "activated-this-turn", atLeast: 4 },

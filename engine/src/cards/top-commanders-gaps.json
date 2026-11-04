@@ -1617,7 +1617,10 @@
   "bug:mixed-simultaneous-entry",
   "effect:modal-modes-one-instruction",
   "replacement:as-enters-exile-from-graveyard",
-  "replacement:as-enters-return-permanent"
+  "replacement:as-enters-return-permanent",
+  "amount:damage-dealt-by-spell-this-turn",
+  "amount:damage-dealt-to-source-this-turn-by-filter",
+  "amount:damage-taken-from-filtered-sources"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

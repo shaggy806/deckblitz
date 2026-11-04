@@ -4758,12 +4758,18 @@ export interface TurnHistory {
   /** Damage dealt by sources this player controlled, to anything — each
    * with its source's colours as it dealt it: "if red sources you controlled
    * dealt 4 or more noncombat damage this turn" (Ojer Axonil's Temple of
-   * Power). */
+   * Power). What it was as it dealt it, and what to: "the damage dealt to you
+   * so far this turn by artifacts" (Reverse Polarity), "if 4 or more damage was
+   * dealt to it this turn" (the Zuberas, `toStint` the stint it was in). */
   damageDealt?: {
     readonly source: ObjectId;
     readonly amount: number;
     readonly combat: boolean;
     readonly colors: readonly Color[];
+    readonly name?: string;
+    readonly types?: readonly CardType[];
+    readonly to?: TargetRef;
+    readonly toStint?: number;
   }[];
   /** This player declared one or more attackers (raid). */
   attacked?: boolean;

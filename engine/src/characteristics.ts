@@ -57,7 +57,7 @@ import {
   weightedMatches,
 } from "./filter.js";
 import type { EffectAmount } from "./effects.js";
-import type { AggregateSpec, CardFilter } from "./filter.js";
+import type { AggregateSpec, CardFilter, DamageSourceClause } from "./filter.js";
 import { COLORS, colorSymbols, manaValue, parseManaCost } from "./mana.js";
 import type { Color, ManaType } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
@@ -1294,7 +1294,20 @@ function evalStaticCondition(
           : condition.who === "opponent"
             ? state.turnOrder.filter((p) => p !== you)
             : state.turnOrder;
-      return damageDealtThisTurn(state, seats, condition.combat, condition.colors) >= condition.atLeast;
+      // "Dealt to it this turn": this permanent in its stint, as it last
+      // existed once it has left (a dies trigger's intervening if — 603.10).
+      const stint =
+        opts.sourceLastKnown?.zoneChangeCount ??
+        (source.zone === "battlefield" ? (source.zoneChangeCount ?? 0) : source.lastKnown?.zoneChangeCount);
+      return (
+        damageDealtThisTurn(
+          state,
+          seats,
+          condition.combat,
+          condition.colors,
+          condition.toSelf === true ? { to: { kind: "object", object: source.id }, toStint: stint } : {},
+        ) >= condition.atLeast
+      );
     }
     case "turn-history": {
       const seats =
@@ -1795,12 +1808,32 @@ export function damageDealtThisTurn(
   players: readonly PlayerId[],
   combat: boolean | undefined,
   colors: readonly Color[] | undefined,
+  read: {
+    readonly to?: TargetRef;
+    /** With a permanent `to`: which of its stints (rule 400.7). */
+    readonly toStint?: number;
+    readonly by?: DamageSourceClause;
+    /** Who "other" is, with `by.other`. */
+    readonly source?: ObjectId;
+  } = {},
 ): number {
   let n = 0;
   for (const player of players) {
     for (const dealt of state.players[player]?.turnHistory?.damageDealt ?? []) {
       if (combat !== undefined && dealt.combat !== combat) continue;
       if (colors !== undefined && !dealt.colors.some((c) => colors.includes(c))) continue;
+      const to = read.to;
+      if (to?.kind === "player" && (dealt.to?.kind !== "player" || dealt.to.player !== to.player)) continue;
+      if (
+        to?.kind === "object" &&
+        (dealt.to?.kind !== "object" || dealt.to.object !== to.object || dealt.toStint !== read.toStint)
+      ) {
+        continue;
+      }
+      const by = read.by;
+      if (by?.type !== undefined && dealt.types?.includes(by.type) !== true) continue;
+      if (by?.name !== undefined && dealt.name !== by.name) continue;
+      if (by?.other === true && dealt.source === read.source) continue;
       n += dealt.amount;
     }
   }

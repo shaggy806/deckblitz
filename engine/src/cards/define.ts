@@ -1349,6 +1349,9 @@ export type StaticCondition =
       readonly who?: "you" | "opponent" | "any-player";
       readonly combat?: boolean;
       readonly colors?: readonly Color[];
+      /** Only what was dealt to this permanent, in its stint: "if 4 or more
+       * damage was dealt to it this turn" (the Zuberas, `who: "any-player"`). */
+      readonly toSelf?: true;
       readonly atLeast: number;
     }
   | {

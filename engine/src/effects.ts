@@ -20,7 +20,7 @@ import type {
   CountersPutSpec,
   TurnStat,
 } from "./cards.js";
-import type { AggregateSpec, CardFilter, ShareReference, SharedTypes } from "./filter.js";
+import type { AggregateSpec, CardFilter, DamageSourceClause, ShareReference, SharedTypes } from "./filter.js";
 import type { CardNameAim, CardNameFilter } from "./card-names.js";
 import { differentManaSplits, manaOriginMatches, type Color, type LandManaInstead, type ManaCastFrom, type ManaFromSpec, type ManaOrigin, type ManaSpendPurpose, type ManaType, type SpendAs } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
@@ -1192,6 +1192,13 @@ export type EffectAmount =
       readonly who?: PlayerScope;
       readonly combat?: boolean;
       readonly colors?: readonly Color[];
+      /** Only what was dealt to the effect's controller ("to you so far this
+       * turn" — Reverse Polarity) or its source, in the stint this refers to
+       * ("to this creature this turn" — Blazing Effigy). Whoever controlled what
+       * dealt it is `who`: `"each-player"` is all of it. */
+      readonly to?: "you" | "source";
+      /** Only by these sources, as they were as they dealt it. */
+      readonly by?: DamageSourceClause;
     }
   | {
       readonly thisWay: ThisWayKind;
@@ -2650,6 +2657,10 @@ export type EffectSpec =
        */
       readonly kind: "choose-opponent";
       readonly then: EffectSpec;
+      /** "Choose a player **who cast one or more sorcery spells this turn**"
+       * (Backdraft): only those for whom this holds, read with that player as
+       * `"that-player"` (an `of-player`). */
+      readonly whoIf?: StaticCondition;
       /** "Choose an opponent **at random**" (Vial Smasher the Fierce): nobody
        * is asked — the game picks among them with its seeded randomness,
        * announced as a `chosen-at-random` event. */
@@ -3735,7 +3746,20 @@ export type EffectSpec =
        * last roll's natural results (rule 706.2), asked only when they differ,
        * as the same menu of the numbers. `then` reads that one as `"x"`, and
        * "the other result" as `{ roll: "other" }`. */
-      readonly value: "color" | "card-type" | "counter-kind" | "number" | "text-word" | "commander-mana-value" | "roll-result";
+      /* `"spell-damage"`: "one of those sorcery spells" (Backdraft), a
+       * `choose-opponent`'s `then`: the controller chooses among the spells that
+       * player cast this turn matching `among`, asked only when the damage each
+       * dealt differs (nothing else about them matters to it), as a menu of them;
+       * `then` reads the damage it dealt this turn as `"x"`. */
+      readonly value:
+        | "color"
+        | "card-type"
+        | "counter-kind"
+        | "number"
+        | "text-word"
+        | "commander-mana-value"
+        | "roll-result"
+        | "spell-damage";
       readonly then: EffectSpec;
       /** With `"text-word"` (a `change-text`'s words, `CHOSEN_TEXT_WORD` in
        * `then`): the colour words, the basic land types, or both
@@ -10430,7 +10454,12 @@ export interface EffectApi {
    * attacking `player` (not their planeswalkers), a stack as its tokens. */
   creaturesAttacking(player: PlayerId): number;
   /** See the `{ damageDealtThisTurn }` {@link EffectAmount}. */
-  damageDealtThisTurn(players: readonly PlayerId[], combat?: boolean, colors?: readonly Color[]): number;
+  damageDealtThisTurn(
+    players: readonly PlayerId[],
+    combat?: boolean,
+    colors?: readonly Color[],
+    read?: { readonly to?: "you" | "source"; readonly by?: DamageSourceClause },
+  ): number;
   /** See the `{ turnHistory }` {@link EffectAmount}. */
   turnHistoryCount(
     what: TurnHistoryKind,
@@ -10917,7 +10946,7 @@ export interface EffectApi {
   chooseValue(
     spec: Extract<EffectSpec, { kind: "choose-value" }>,
     /** A number's `max` and `who`, read as the effect applies. */
-    asked?: { readonly max?: number; readonly chooser?: PlayerId },
+    asked?: { readonly max?: number; readonly chooser?: PlayerId; readonly thatPlayer?: PlayerId },
   ): void;
   /** Trigger a reflexive ability — see the `"reflexive-trigger"`
    * {@link EffectSpec}. */
@@ -13658,7 +13687,10 @@ function signedAmountValue(
   if ("opponentsAttacked" in amount) return ctx.opponentsAttacked();
   if ("attackingPlayer" in amount) return ctx.creaturesAttacking(each ?? ctx.controller);
   if ("damageDealtThisTurn" in amount) {
-    return ctx.damageDealtThisTurn(ctx.playersInScope(amount.who ?? "you"), amount.combat, amount.colors);
+    return ctx.damageDealtThisTurn(ctx.playersInScope(amount.who ?? "you"), amount.combat, amount.colors, {
+      ...(amount.to !== undefined ? { to: amount.to } : {}),
+      ...(amount.by !== undefined ? { by: amount.by } : {}),
+    });
   }
   if ("turnHistory" in amount) {
     if (amount.target !== undefined) {
@@ -15037,6 +15069,8 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         const most = Math.max(...among.map((p) => ctx.lifeTotalOf(p)));
         among = among.filter((p) => ctx.lifeTotalOf(p) === most);
       }
+      const whoIf = spec.whoIf;
+      if (whoIf !== undefined) among = among.filter((p) => ctx.aboutPlayer(p).conditionMet(whoIf));
       if (among.length === 0) return;
       const about = (player: PlayerId): EffectSpec => ({
         kind: "about-player",
@@ -15894,9 +15928,11 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "choose-value": {
       const chooser = spec.who === undefined ? undefined : effectPlayer(spec.who, ctx);
       if (spec.who !== undefined && chooser === undefined) return;
+      const thatPlayer = spec.value === "spell-damage" ? effectPlayer("that-player", ctx) : undefined;
       ctx.chooseValue(spec, {
         ...(spec.max !== undefined ? { max: amountValue(spec.max, ctx) } : {}),
         ...(chooser !== undefined ? { chooser } : {}),
+        ...(thatPlayer !== undefined ? { thatPlayer } : {}),
       });
       return;
     }

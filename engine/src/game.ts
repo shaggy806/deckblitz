@@ -31849,7 +31849,17 @@ export class Game {
           revealed: result.revealed,
           land: result.land,
         }),
-      damageDealtThisTurn: (players, combat, colors) => damageDealtThisTurn(this.state, players, combat, colors),
+      damageDealtThisTurn: (players, combat, colors, read) => {
+        // "To it": this source in the stint this refers to (rule 400.7), as it
+        // last existed once it has left.
+        const stint =
+          refs.source ?? departedSource()?.zoneChangeCount ?? this.state.objects[source]?.zoneChangeCount ?? 0;
+        return damageDealtThisTurn(this.state, players, combat, colors, {
+          ...(read?.to === "you" ? { to: { kind: "player" as const, player: controller } } : {}),
+          ...(read?.to === "source" ? { to: { kind: "object" as const, object: source }, toStint: stint } : {}),
+          ...(read?.by !== undefined ? { by: read.by, source } : {}),
+        });
+      },
       // The opponents attacked as attackers were declared this combat
       // (rule 702.121a), whether or not those creatures still attack (the
       // melee rulings) — none outside the combat it was declared in.
@@ -32492,6 +32502,45 @@ export class Game {
             options: Object.keys(xByOption),
             catalog: false,
             prompt: "Choose a commander you own",
+            then: spec.then,
+            value: { sentinel: "", resume, xByOption },
+          };
+          return;
+        }
+        if (spec.value === "spell-damage") {
+          // Each spell that player cast this turn matching `among`, by what it
+          // dealt: the same amount is the same answer, so it's asked once.
+          const xByOption: Record<string, number> = {};
+          const caster = asked?.thatPlayer;
+          for (const { id, spell } of caster === undefined ? [] : (this.state.players[caster]?.spellsCastThisTurnAs ?? [])) {
+            if (
+              spec.among !== undefined &&
+              !matchesFilter(this.state, this.registry, id, spec.among, { you: controller, snapshot: spell })
+            ) {
+              continue;
+            }
+            const dealt = this.state.turnOrder.reduce(
+              (total, player) =>
+                total +
+                (this.state.players[player]?.turnHistory?.damageDealt ?? [])
+                  .filter((entry) => entry.source === id)
+                  .reduce((n, entry) => n + entry.amount, 0),
+              0,
+            );
+            xByOption[`${nameOf(this.state.objects[id])}: ${dealt} damage`] = dealt;
+          }
+          const values = new Set(Object.values(xByOption));
+          if (values.size <= 1) {
+            this.resumeResolution(spec.then, source, { ...resume, x: [...values][0] ?? 0 });
+            return;
+          }
+          this.state.awaiting = {
+            kind: "choose-creature-type",
+            player: chooser,
+            source,
+            options: Object.keys(xByOption),
+            catalog: false,
+            prompt: spec.prompt ?? "Choose one of those spells",
             then: spec.then,
             value: { sentinel: "", resume, xByOption },
           };
@@ -46252,11 +46301,22 @@ export class Game {
               : source !== undefined
                 ? suspendComputedCache(() => [...computeCharacteristics(this.state, this.registry, source.id).colors])
                 : [];
+          const types =
+            departed !== undefined
+              ? departed.types
+              : source !== undefined
+                ? suspendComputedCache(() => [...computeCharacteristics(this.state, this.registry, source.id).types])
+                : [];
+          const hit = event.target.kind === "object" ? this.state.objects[event.target.object] : undefined;
           (dealt.damageDealt ??= []).push({
             source: event.source,
             amount: event.amount,
             combat: event.combat,
             colors,
+            ...(source !== undefined ? { name: printedCardName(source) } : {}),
+            types,
+            to: event.target,
+            ...(hit !== undefined ? { toStint: hit.zoneChangeCount ?? 0 } : {}),
           });
         }
         if (event.target.kind !== "player") return;

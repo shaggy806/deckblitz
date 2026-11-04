@@ -257,6 +257,15 @@ export interface SharedTypes {
   readonly types: readonly string[];
 }
 
+/** Which sources of damage dealt this turn count, as they were as they dealt it
+ * (`{ damageDealtThisTurn }`'s `by`): "by artifacts" (Reverse Polarity), "by other
+ * sources named Blazing Effigy" (`other`: not the effect's own source). */
+export interface DamageSourceClause {
+  readonly type?: CardType;
+  readonly name?: string;
+  readonly other?: true;
+}
+
 export interface CardFilter {
   /** Must have ALL of these card types. */
   readonly types?: readonly CardType[];

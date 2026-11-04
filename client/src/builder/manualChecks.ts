@@ -10409,6 +10409,12 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'Backdraft: choosing which sorcery spell',
+    board({
+      you: { bf: ['Mountain*4', 'Swamp*2'], hand: ['Flame Rift', 'Sign in Blood', 'Backdraft'] },
+    }),
+  ),
+  preset(
     'Sutured Ghoul: choosing what to exile as it enters',
     board({
       you: { bf: ['Swamp*7'], hand: ['Sutured Ghoul'], gy: ['Hill Giant', 'Grizzly Bears', 'Llanowar Elves'] },

@@ -7035,3 +7035,8 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 - **Do:** Attack Bob with Grizzly Bears. When the Sword's ability goes on the stack, target Rampaging Baloths, let it resolve and choose Forest from your library.
 - **Expect:** Rampaging Baloths is exiled and comes back with Forest, and its landfall makes a 4/4 Beast. Bob loses 4 life.
+
+### Backdraft: choosing which sorcery spell
+
+- **Do:** Cast Flame Rift, then Sign in Blood at Bob, then Backdraft, and choose "Flame Rift: 8 damage".
+- **Expect:** You aren't asked for a player, as only you cast a sorcery. The menu lists both spells with the damage each dealt. Backdraft deals you 4.
