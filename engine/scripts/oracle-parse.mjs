@@ -6756,6 +6756,21 @@ const MANA_SPEND_PURPOSE_LINES = {
     spell: { type: "creature", hasAbilities: false },
   },
   "Spend this mana only to turn permanents face up.": { purposes: ["turn-face-up"] },
+  "Spend this mana only to foretell a card from your hand or cast an instant or sorcery spell.": {
+    spell: { typesAnyOf: ["instant", "sorcery"] },
+    purposes: ["foretell"],
+  },
+  "Spend this mana only to pay cumulative upkeep costs.": { purposes: ["cumulative-upkeep"] },
+  "Spend this mana only to cast a colorless spell, activate an ability of a colorless permanent, or pay a cost that contains {C}.": {
+    spell: { colorless: true },
+    abilityOf: { colorless: true },
+    purposes: ["cost-with-c"],
+  },
+  "Spend this mana only to cast a creature spell of the chosen type or a legendary creature spell.": {
+    spell: { type: "creature" },
+    chosenType: true,
+    orSpell: { type: "creature", supertype: "legendary" },
+  },
   "Spend this mana only to cast an enchantment spell, unlock a door, or turn a permanent face up.": {
     spell: { type: "enchantment" },
     purposes: ["unlock-door", "turn-face-up"],

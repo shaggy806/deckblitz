@@ -4208,6 +4208,8 @@ export type AwaitingDecision =
        * "pays {X}": what "spend this mana only on costs that contain {X}"
        * reads (Rosheen Meanderer's ruling). */
       readonly costHasX?: true;
+      /** What "spend this mana only to …" reads `cost` as: `UnlessOption.paysFor`. */
+      readonly costFor?: "cumulative-upkeep";
       /** The most `cost`'s X may be — a `may`'s `maxX` ("X can't be greater
        * than the amount of life you lost this turn"). With `energyX`, the
        * most energy the chooser can pay (what they have, under `maxX`). */

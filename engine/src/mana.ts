@@ -104,6 +104,13 @@ export interface ManaCastFrom {
  *   cost asked for as something resolves). All of that cost, not just its X.
  * - `"kicked-spell"`: "to cast kicked spells" (Elfhame Druid; rule 702.33d), all
  *   of the cost, cast with its kicker paid (Volshe Tideturner beside its `spell`).
+ * - `"cost-with-c"`: "a cost that contains {C}" (Cultivator Drone): as
+ *   `"cost-with-x"`, a spell's total cost, an activated ability's cost, or a cost
+ *   asked for otherwise. All of that cost, not just its {C}.
+ * - `"foretell"`: "to foretell a card from your hand" (Karfell Harbinger), the
+ *   special action's {2} (rule 702.143a).
+ * - `"cumulative-upkeep"`: "to pay cumulative upkeep costs" (Adarkar Unicorn, rule
+ *   702.24a; `UnlessOption.paysFor`).
  */
 export type ManaSpendPurpose =
   | "turn-face-up"
@@ -113,7 +120,10 @@ export type ManaSpendPurpose =
   | "power-up-ability"
   | "class-level"
   | "cost-with-x"
-  | "kicked-spell";
+  | "cost-with-c"
+  | "kicked-spell"
+  | "foretell"
+  | "cumulative-upkeep";
 
 /**
  * How freely a payment may spend mana (rules 118.14, 609.4b): `"any-color"`

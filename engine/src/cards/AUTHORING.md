@@ -4026,6 +4026,9 @@ Behemoth's "while you're the monarch", Barbflare's "if this creature is tapped".
 A trigger that adds mana on anything else isn't a mana ability, whatever it does
 (rule 605.5a): Crime Novelist's "whenever you sacrifice an artifact, put a +1/+1
 counter on this creature and add {R}" is a plain `sequence`, on the stack.
+The `add-mana` can carry its own `spendOnly`, and `mayAdd: true` for a fixed type
+is "may add" (Snowfall): tapped by hand, one offer with the mana and one without;
+paying a cost, it's taken when that payment can spend it and declined when not.
 The extra mana is the trigger's source's and carries **none** of the tapped
 permanent's restrictions or riders (the Mirari's Wake, Kinnan and Mana Flare
 rulings) — the auto-payer included. A choice in it is the player's: "any type
@@ -6662,9 +6665,15 @@ Delete an entry in the same commit as the feature that retires it.
     (Cavern of Souls, Unclaimed Territory, Secluded Courtyard, Ancient
     Ziggurat). `purposes` names what a filter can't, beside `spell` or alone:
     `"turn-face-up"`, `"unlock-door"`, `"disturb"`, `"equip-ability"`,
-    `"power-up-ability"`, `"class-level"` and `"cost-with-x"` ("on costs that
-    contain {X}": the total cost being paid, an ability's, a suspend cost, or
-    one asked for as something resolves). `chosenType` folds in the type named as the permanent entered;
+    `"power-up-ability"`, `"class-level"`, `"foretell"` (Karfell Harbinger),
+    `"cumulative-upkeep"` (Adarkar Unicorn; any `unless` paying `times` the source's
+    age counters, which is what `cumulativeUpkeep` writes), `"cost-with-x"` ("on
+    costs that contain {X}": the total cost being paid, an ability's, a suspend
+    cost, or one asked for as something resolves) and `"cost-with-c"` ("a cost
+    that contains {C}", the same way: Cultivator Drone). `chosenType` folds in the
+    type named as the permanent entered, and `orSpell` is a second filter it
+    doesn't touch ("…of the chosen type or a legendary creature spell": The
+    Ringhart Crest);
     `abilityOf` adds the "…or activate an ability of" half — of a
     permanent on the battlefield ("abilities of creatures" means creature
     permanents: Castle Garenbrig's ruling), unless `abilityOfAnyZone: true`

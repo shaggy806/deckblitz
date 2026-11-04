@@ -358,6 +358,7 @@ import {
   widerSpendAs,
 } from "./mana-payment.js";
 import type {
+  ManaExtraUnit,
   ManaOption,
   ManaPayment,
   ManaPlanStep,
@@ -808,6 +809,21 @@ function runDamageSteps(
 
 /** A mana option of a land whose mana is another type instead (Deep Water —
  * `Game.landManaInsteadFor`): as many units, every one `type`, no choice. */
+/** What one triggered mana ability adds as a permanent is tapped for mana by
+ * hand — see `Game.extraManaOutputs`. */
+type ManaExtraOutput = {
+  readonly holder: ObjectId;
+  readonly tag?: Omit<ManaUnit, "type">;
+} & (
+  | { readonly units: readonly ManaType[]; readonly may?: true }
+  | { readonly amount: number; readonly choices: readonly ManaType[] }
+);
+
+/** A pick declining a "may add" of `units` — see `Game.standaloneManaVariants`. */
+function declineManaPick(units: readonly ManaType[]): ManaType {
+  return MANA_TYPES.find((type) => !units.includes(type)) as ManaType;
+}
+
 /** The colour `holder`'s controller named as it entered, if one was (a
  * `chosenOnEnter` can be something else). */
 function chosenManaType(holder: GameObject): ManaType | undefined {
@@ -1255,6 +1271,10 @@ function manaPurposeIs(named: ManaSpendPurpose, purpose: Exclude<ManaPurpose, nu
     if (purpose.kind !== "ability") return purpose.xCost === true;
     return purpose.ability !== undefined && parseManaCost(purpose.ability.cost.mana).x > 0;
   }
+  if (named === "cost-with-c") {
+    if (purpose.kind !== "ability") return purpose.cCost === true;
+    return purpose.ability !== undefined && parseManaCost(purpose.ability.cost.mana).colorless > 0;
+  }
   if (purpose.kind === "cast") {
     return (named === "disturb" && purpose.via === "disturb") || (named === "kicked-spell" && purpose.kicked === true);
   }
@@ -1266,18 +1286,35 @@ function manaPurposeIs(named: ManaSpendPurpose, purpose: Exclude<ManaPurpose, nu
   return named === "class-level" && ability.effect?.kind === "gain-class-level";
 }
 
+/** Foretelling a card (rule 702.143a), a special action. */
+const FORETELL_PURPOSE: ManaPurpose = { kind: "special", action: "foretell" };
+
 /** Turning a permanent face up for `cost` (rule 116.2b), a special action. */
 function turnFaceUpPurpose(cost: string): ManaPurpose {
-  return { kind: "special", action: "turn-face-up", ...(parseManaCost(cost).x > 0 ? { xCost: true as const } : {}) };
+  const parsed = parseManaCost(cost);
+  return {
+    kind: "special",
+    action: "turn-face-up",
+    ...(parsed.x > 0 ? { xCost: true as const } : {}),
+    ...(parsed.colorless > 0 ? { cCost: true as const } : {}),
+  };
 }
 
 /** A cost that's neither a spell's nor an ability's (a suspend cost, one asked
  * for as something resolves): nothing a restriction can name, unless it has
  * `{X}` in it (`hasX`, for one whose X is already a number by now — Condescend's
- * "pays {X}"). */
-function otherCostPurpose(cost: string | null, hasX = false): ManaPurpose {
-  return hasX || (cost !== null && parseManaCost(cost).x > 0)
-    ? { kind: "special", action: "other", xCost: true }
+ * "pays {X}") or `{C}`, or `named` says what it is (cumulative upkeep's). */
+function otherCostPurpose(cost: string | null, hasX = false, named?: "cumulative-upkeep"): ManaPurpose {
+  const parsed = cost === null ? null : parseManaCost(cost);
+  const x = hasX || (parsed !== null && parsed.x > 0);
+  const c = parsed !== null && parsed.colorless > 0;
+  return x || c || named !== undefined
+    ? {
+        kind: "special",
+        action: named ?? "other",
+        ...(x ? { xCost: true as const } : {}),
+        ...(c ? { cCost: true as const } : {}),
+      }
     : null;
 }
 
@@ -1289,10 +1326,11 @@ function castPaying(
   via: CastVia | undefined,
   costString: string | null,
   kicked?: boolean | number,
-): { readonly via?: "disturb" | "flashback"; readonly xCost?: true; readonly kicked?: true } {
+): { readonly via?: "disturb" | "flashback"; readonly xCost?: true; readonly cCost?: true; readonly kicked?: true } {
   return {
     ...(via === "disturb" || via === "flashback" ? { via } : {}),
     ...(costString !== null && parseManaCost(costString).x > 0 ? { xCost: true as const } : {}),
+    ...(costString !== null && parseManaCost(costString).colorless > 0 ? { cCost: true as const } : {}),
     ...(kicked !== undefined && kicked !== false && kicked !== 0 ? { kicked: true as const } : {}),
   };
 }
@@ -1700,6 +1738,10 @@ type ManaExtra = {
   /** What else the ability does, as part of it (`add-mana`'s `also`) — "and
    * this enchantment deals 1 damage to the player" (Overabundance). */
   readonly also?: EffectSpec;
+  /** Its own "spend this mana only to …" and the like (Snowfall). */
+  readonly tag?: Omit<ManaUnit, "type">;
+  /** "May add" (`add-mana`'s `mayAdd`). */
+  readonly may?: true;
 };
 
 
@@ -7110,6 +7152,8 @@ export class Game {
       readonly xColor?: Color;
       /** See the `choose-modes` decision's `costHasX`. */
       readonly costHasX?: true;
+      /** See the `choose-modes` decision's `costFor`. */
+      readonly costFor?: "cumulative-upkeep";
       /** The most that X may be — see `may`'s `maxX`. */
       readonly maxX?: number;
       /** X paid in energy rather than mana — see `may`'s `costEnergyX`. */
@@ -7170,7 +7214,7 @@ export class Game {
       costParsed === null
         ? null
         : { ...costParsed, generic: costParsed.generic, x: 0 };
-    if (baseline !== null && this.payMana(controller, baseline, undefined, undefined, otherCostPurpose(cost ?? null, ability.costHasX === true)) === null) {
+    if (baseline !== null && this.payMana(controller, baseline, undefined, undefined, otherCostPurpose(cost ?? null, ability.costHasX === true, ability.costFor)) === null) {
       decline();
       return;
     }
@@ -7240,6 +7284,7 @@ export class Game {
       ...(cost !== undefined ? { cost } : {}),
       ...(ability.xColor !== undefined ? { xColor: ability.xColor } : {}),
       ...(ability.costHasX === true ? { costHasX: true as const } : {}),
+      ...(ability.costFor !== undefined ? { costFor: ability.costFor } : {}),
       ...(energyCap !== undefined ? { maxX: energyCap } : ability.maxX !== undefined ? { maxX: ability.maxX } : {}),
       ...(energyX !== undefined ? { energyX } : {}),
       ...(ability.costTimes === true ? { costTimes: true as const } : {}),
@@ -7388,7 +7433,7 @@ export class Game {
       const times = awaiting.costTimes === true;
       chosenX = parsed.x > 0 || times ? Math.max(0, Math.floor(xValue ?? 0)) : 0;
       const concrete = times ? repeatedManaCost(parsed, chosenX) : concreteX(parsed, chosenX, awaiting.xColor);
-      const payment = this.payMana(player, concrete, undefined, undefined, otherCostPurpose(cost, awaiting.costHasX === true));
+      const payment = this.payMana(player, concrete, undefined, undefined, otherCostPurpose(cost, awaiting.costHasX === true, awaiting.costFor));
       if (payment === null) chosen = [];
       else this.executePayment(player, payment);
     }
@@ -14094,7 +14139,7 @@ export class Game {
     if (def.foretell === null && this.grantedForetellCost(this.state.objects[cardId]) === null) {
       return `${def.name} does not have foretell`;
     }
-    if (this.payMana(player, parseManaCost(Game.FORETELL_COST)) === null) {
+    if (this.payMana(player, parseManaCost(Game.FORETELL_COST), undefined, undefined, FORETELL_PURPOSE) === null) {
       return `${player} cannot pay the foretell cost`;
     }
     return null;
@@ -14120,7 +14165,7 @@ export class Game {
     if (why !== null) throw new Error(why);
     const object = this.state.objects[cardId];
 
-    const payment = this.payMana(player, parseManaCost(Game.FORETELL_COST));
+    const payment = this.payMana(player, parseManaCost(Game.FORETELL_COST), undefined, undefined, FORETELL_PURPOSE);
     if (payment === null) throw new Error(`${player} cannot pay the foretell cost`);
 
     // Foretold through a grant, it keeps the cost the grant gave it, whatever
@@ -22109,13 +22154,19 @@ export class Game {
       for (const out of this.extraManaOutputs(source, produced, player)) {
         const origin = this.manaOriginOf(out.holder);
         if ("units" in out) {
-          for (const type of out.units) this.addMana(player, type, 1, undefined, origin);
+          // "May add": a pick of another type declines it, and no pick takes it.
+          if (out.may === true) {
+            const pick = manaColors?.[picked];
+            picked += 1;
+            if (pick !== undefined && !out.units.includes(pick)) continue;
+          }
+          for (const type of out.units) this.addMana(player, type, 1, out.tag, origin);
           continue;
         }
         const pick = manaColors?.[picked];
         picked += 1;
         const type = pick !== undefined && out.choices.includes(pick) ? pick : out.choices[0];
-        this.addMana(player, type, out.amount, undefined, origin);
+        this.addMana(player, type, out.amount, out.tag, origin);
       }
       this.applyManaExtraRiders(this.manaExtraRiders(source, produced), sourceId, player);
       this.noteTappedForMana(source, player);
@@ -23378,15 +23429,23 @@ export class Game {
       const origin = this.manaOriginOf(id);
       return origin !== undefined && onlyFrom !== undefined && manaOriginMatches(origin, onlyFrom);
     };
-    const sources =
-      onlyFrom === undefined
-        ? this.manaSources(player)
-        : this.manaSources(player)
-            .filter((source) => fits(source.id))
-            .map((source) => ({
+    // An extra with its own restriction (Snowfall's "spend this mana only to pay
+    // cumulative upkeep costs") pays only what that lets it: `optionKeepingExtras`.
+    const spendable = (extra: ManaExtraUnit): boolean =>
+      extra.tag?.restriction === undefined ||
+      this.manaUnitCanPay(player, { type: extra.type ?? "C", ...extra.tag }, purpose);
+    const sources = this.manaSources(player)
+      .filter((source) => onlyFrom === undefined || fits(source.id))
+      .map((source) =>
+        source.options.every((option) => option.extras === undefined)
+          ? source
+          : {
               ...source,
-              options: source.options.map((option) => optionKeepingExtras(option, (extra) => fits(extra.from))),
-            }));
+              options: source.options.map((option) =>
+                optionKeepingExtras(option, (extra) => (onlyFrom === undefined || fits(extra.from)) && spendable(extra)),
+              ),
+            },
+      );
     // Life a spell's cost already spends outside the mana (Liesa's commander
     // tax) isn't there for a painland or a Phyrexian pip to spend as well.
     const reserved = purpose?.kind === "cast" ? this.commanderTaxLife(player, purpose.card) : 0;
@@ -23623,10 +23682,10 @@ export class Game {
     step.mana.forEach((m, i) =>
       i < own
         ? this.addMana(player, m, 1, step.tag, originOf(step.source))
-        : this.addMana(player, m, 1, undefined, originOf(extraFrom[i - own])),
+        : this.addMana(player, m, 1, step.extraTagOf?.[extraFrom[i - own]], originOf(extraFrom[i - own])),
     );
     for (const extra of step.floating ?? []) {
-      this.addMana(player, extra.type ?? "any-color", 1, undefined, originOf(extra.from));
+      this.addMana(player, extra.type ?? "any-color", 1, extra.tag, originOf(extra.from));
     }
     // Read before the source moves: a land sacrificed for its mana was still
     // a land as it was tapped (rule 608.2h).
@@ -23703,10 +23762,15 @@ export class Game {
       return [option, ...this.withManaExtra(asType, extra, player)];
     }
     // The extra units are the triggered ability's source's (see `ManaOrigin`).
+    const own = {
+      from: extra.holder,
+      ...(extra.tag !== undefined ? { tag: extra.tag } : {}),
+      ...(extra.may === true ? { may: true as const } : {}),
+    };
     const plus = (type: ManaType): ManaOption => ({
       ...option,
       fixed: [...option.fixed, ...Array<ManaType>(extra.amount).fill(type)],
-      extras: [...extras, ...Array.from({ length: extra.amount }, () => ({ from: extra.holder, type }))],
+      extras: [...extras, ...Array.from({ length: extra.amount }, () => ({ ...own, type }))],
     });
     const mana = extra.mana;
     if (mana === "chosen") {
@@ -23720,7 +23784,7 @@ export class Game {
             {
               ...option,
               anyColor: option.anyColor + extra.amount,
-              extras: [...extras, ...Array.from({ length: extra.amount }, () => ({ from: extra.holder }))],
+              extras: [...extras, ...Array.from({ length: extra.amount }, () => ({ ...own }))],
             },
           ]
         : COLORS.map((c) => plus(c));
@@ -23732,7 +23796,7 @@ export class Game {
         {
           ...option,
           fixed: [...option.fixed, ...made],
-          extras: [...extras, ...made.map((type) => ({ from: extra.holder, type }))],
+          extras: [...extras, ...made.map((type) => ({ ...own, type }))],
         },
       ];
     }
@@ -23763,7 +23827,7 @@ export class Game {
           anyColor: extraAny,
           extras: [
             ...extras.filter((e) => e.type !== undefined),
-            ...Array.from({ length: extra.amount }, () => ({ from: extra.holder, type: c })),
+            ...Array.from({ length: extra.amount }, () => ({ ...own, type: c })),
             ...extras.filter((e) => e.type === undefined),
           ],
         });
@@ -23857,7 +23921,14 @@ export class Game {
       for (const extra of this.extraManaOutputs(object, made, player)) {
         combos =
           "units" in extra
-            ? combos.map((c) => ({ ...c, makes: [...c.makes, ...extra.units] }))
+            ? extra.may === true
+              ? // "May add" (Snowfall): one offer taking it, one not. Its pick is
+                // its type to take it, any other to decline it.
+                combos.flatMap((c) => [
+                  { ...c, manaColors: [...c.manaColors, extra.units[0]], makes: [...c.makes, ...extra.units] },
+                  { ...c, manaColors: [...c.manaColors, declineManaPick(extra.units)] },
+                ])
+              : combos.map((c) => ({ ...c, makes: [...c.makes, ...extra.units] }))
             : combos.flatMap((c) =>
                 extra.choices.map((t) => ({
                   ...c,
@@ -23915,14 +23986,8 @@ export class Game {
     tapped: GameObject,
     produced: readonly ManaType[],
     player: PlayerId,
-  ): (
-    | { readonly holder: ObjectId; readonly units: readonly ManaType[] }
-    | { readonly holder: ObjectId; readonly amount: number; readonly choices: readonly ManaType[] }
-  )[] {
-    const out: (
-      | { readonly holder: ObjectId; readonly units: readonly ManaType[] }
-      | { readonly holder: ObjectId; readonly amount: number; readonly choices: readonly ManaType[] }
-    )[] = [];
+  ): ManaExtraOutput[] {
+    const out: ManaExtraOutput[] = [];
     // "Whenever … is tapped for mana" triggers only as the mana ability
     // resolves and produces mana (rule 106.12a): one that made none — a
     // Reflecting Pool with nothing to reflect, a Chrome Mox with nothing
@@ -23930,13 +23995,14 @@ export class Game {
     if (produced.length === 0) return out;
     for (const extra of this.tappedForManaExtras(tapped)) {
       if (extra.producing !== undefined && !produced.includes(extra.producing)) continue;
+      const tag = extra.tag !== undefined ? { tag: extra.tag } : {};
       const fixed = (types: readonly ManaType[]): void => {
         const units = Array.from({ length: extra.amount }, () => types).flat();
-        if (units.length > 0) out.push({ holder: extra.holder, units });
+        if (units.length > 0) out.push({ holder: extra.holder, units, ...tag, ...(extra.may === true ? { may: true as const } : {}) });
       };
       const choose = (choices: readonly ManaType[]): void => {
         if (choices.length === 1) fixed(choices);
-        else if (choices.length > 1) out.push({ holder: extra.holder, amount: extra.amount, choices });
+        else if (choices.length > 1) out.push({ holder: extra.holder, amount: extra.amount, choices, ...tag });
       };
       const m = extra.mana;
       if (m === "produced") choose(MANA_TYPES.filter((t) => produced.includes(t)));
@@ -24004,6 +24070,7 @@ export class Game {
         ) {
           continue;
         }
+        const tag = this.manaTagFor(holder, effect);
         out.push({
           mana: effect.mana,
           // A counted amount — "an additional {G} for each Elf on the
@@ -24016,6 +24083,8 @@ export class Game {
           holder: holder.id,
           ...(producing !== undefined ? { producing } : {}),
           ...(effect.also !== undefined ? { also: effect.also } : {}),
+          ...(tag !== undefined ? { tag } : {}),
+          ...(effect.mayAdd === true ? { may: true as const } : {}),
         });
       }
     }
@@ -24321,6 +24390,9 @@ export class Game {
         const chosen = object.chosenCreatureType ?? " none";
         if (spell !== undefined) spell = { ...spell, subtype: chosen };
         if (abilityOf !== undefined) abilityOf = { ...abilityOf, subtype: chosen };
+      }
+      if (spendOnly.orSpell !== undefined) {
+        spell = spell === undefined ? spendOnly.orSpell : { anyOf: [spell, spendOnly.orSpell] };
       }
       tag.restriction = {
         ...(spell !== undefined ? { spell } : {}),
@@ -35639,7 +35711,10 @@ export class Game {
       controller,
       known.lastKnownRefs,
       known.targetZones,
-      offer.costHasX === true ? { costHasX: true } : {},
+      {
+        ...(offer.costHasX === true ? { costHasX: true as const } : {}),
+        ...(offer.costFor !== undefined ? { costFor: offer.costFor } : {}),
+      },
     );
   }
 
@@ -35656,7 +35731,12 @@ export class Game {
     source: ObjectId,
     targets: ResolvedTargets,
     x: number,
-  ): { readonly modes: ModeOption[]; readonly cost?: string; readonly costHasX?: true } | null {
+  ): {
+    readonly modes: ModeOption[];
+    readonly cost?: string;
+    readonly costHasX?: true;
+    readonly costFor?: "cumulative-upkeep";
+  } | null {
     const spared = (slot: number | undefined): ObjectId | undefined => {
       const ref = slot === undefined ? undefined : targets[slot];
       return ref?.kind === "object" ? ref.object : undefined;
@@ -35665,7 +35745,7 @@ export class Game {
       this.state.zones.shared.battlefield.some((id) => matchesFilter(this.state, this.registry, id, filter, { you: player }));
     const available = options.filter((option) => {
       if ("pay" in option) {
-        const payment = this.payMana(player, parseManaCost(option.pay), undefined, undefined, otherCostPurpose(option.pay, option.paysX === true));
+        const payment = this.payMana(player, parseManaCost(option.pay), undefined, undefined, otherCostPurpose(option.pay, option.paysX === true, option.paysFor));
         return payment !== null && this.canPayLife(player, payment.life + (option.andLife ?? 0));
       }
       if ("payLife" in option) return this.canPayLife(player, option.payLife);
@@ -35794,6 +35874,7 @@ export class Game {
       modes,
       ...(mana !== undefined ? { cost: mana.pay } : {}),
       ...(mana?.paysX === true ? { costHasX: true as const } : {}),
+      ...(mana?.paysFor !== undefined ? { costFor: mana.paysFor } : {}),
     };
   }
 

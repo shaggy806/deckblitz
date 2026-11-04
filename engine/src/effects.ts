@@ -393,6 +393,9 @@ export type UntilPointDuration =
  */
 export interface ManaSpendOnly {
   readonly spell?: CardFilter;
+  /** "…or a legendary creature spell" (The Ringhart Crest): spells this also
+   * pays for, with no chosen type folded in, beside a `spell` that has one. */
+  readonly orSpell?: CardFilter;
   /** "This mana can't be spent to cast [these] spells" — Karn, Legacy
    * Reforged's `{ notTypes: ["artifact"] }`: anything else may use it,
    * abilities and ward costs included. Set alone. See `ManaRestriction`. */
@@ -1333,6 +1336,10 @@ export type UnlessOption =
        * costs that contain {X}" pays it, though the X is a number by now
        * (Rosheen Meanderer's ruling). Never authored. */
       readonly paysX?: true;
+      /** What "spend this mana only to …" reads this as: cumulative upkeep's,
+       * which `times` of the source's age counters is (rule 702.24a;
+       * `ManaSpendPurpose`). Never authored. */
+      readonly paysFor?: "cumulative-upkeep";
       /** "…unless its controller pays {1} **and 1 life**" (Mundungu): life as
        * part of the same payment, all of it or none (rule 118.3). */
       readonly andLife?: number;
@@ -2856,6 +2863,11 @@ export type EffectSpec =
       /** "You don't lose this mana as steps and phases end" (Savage
        * Ventmaw). Still emptied at cleanup. */
       readonly persists?: boolean;
+      /** "May add" on a `tapped-for-mana` triggered mana ability, of a fixed
+       * type (Snowfall): tapped by hand it's an offer with and one without
+       * (`Game.standaloneManaVariants`), and paying a cost it's taken if this
+       * payment can spend it. */
+      readonly mayAdd?: true;
       /** "This mana lasts until end of combat" — firebending's (the
        * `firebending` helper). */
       readonly untilEndOfCombat?: boolean;
@@ -12269,6 +12281,9 @@ function bindUnlessTimes(option: BoundUnlessOption, ctx: ResolutionContext): Bou
       text: `Pay ${pay}`,
       ...(option.andLife !== undefined ? { andLife: option.andLife * n } : {}),
       ...(option.ifPaid !== undefined ? { ifPaid: option.ifPaid } : {}),
+      ...(typeof option.times === "object" && "counter" in option.times && option.times.counter === "age"
+        ? { paysFor: "cumulative-upkeep" as const }
+        : {}),
     };
   }
   if ("payLife" in option) return { payLife: option.payLife * n, text: `Pay ${option.payLife * n} life` };

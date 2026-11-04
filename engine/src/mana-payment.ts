@@ -107,11 +107,14 @@ export interface ManaOption {
 
 /** `o` with only the extra units `keep` admits counted toward a payment; the rest
  * still made, and left floating ("spend only mana produced by creatures": the
- * extra {G} an Aura's trigger adds as a creature taps isn't that). */
+ * extra {G} an Aura's trigger adds as a creature taps isn't that) — unless they
+ * were the player's to decline ({@link ManaExtraUnit.may}), since mana this
+ * payment can't spend is no reason to take them. */
 export function optionKeepingExtras(o: ManaOption, keep: (extra: ManaExtraUnit) => boolean): ManaOption {
   const extras = o.extras ?? [];
-  const floating = extras.filter((extra) => !keep(extra));
-  if (floating.length === 0) return o;
+  const left = extras.filter((extra) => !keep(extra));
+  if (left.length === 0) return o;
+  const floating = left.filter((extra) => extra.may !== true);
   const kept = extras.filter(keep);
   const typed = extras.filter((extra) => extra.type !== undefined).length;
   const { extras: _extras, ...rest } = o;
@@ -124,7 +127,7 @@ export function optionKeepingExtras(o: ManaOption, keep: (extra: ManaExtraUnit) 
     anyColor:
       o.anyColor - (extras.length - typed) + kept.filter((extra) => extra.type === undefined).length,
     ...(kept.length > 0 ? { extras: kept } : {}),
-    floating,
+    ...(floating.length > 0 ? { floating } : {}),
   };
 }
 
@@ -133,6 +136,17 @@ export function optionKeepingExtras(o: ManaOption, keep: (extra: ManaExtraUnit) 
 export interface ManaExtraUnit {
   readonly from: ObjectId;
   readonly type?: ManaType;
+  /** The extra's own "spend this mana only to …" (Snowfall) and the like, as
+   * {@link ManaOption.tag} is the source's. */
+  readonly tag?: Omit<ManaUnit, "type">;
+  /** "May add": the player's to decline (Snowfall). */
+  readonly may?: true;
+}
+
+/** {@link ManaPlanStep.extraTagOf} for these extras, spreadable. */
+function extraTagsOf(extras: readonly ManaExtraUnit[]): { readonly extraTagOf?: Record<ObjectId, Omit<ManaUnit, "type">> } {
+  const tagged = extras.filter((e) => e.tag !== undefined);
+  return tagged.length === 0 ? {} : { extraTagOf: Object.fromEntries(tagged.map((e) => [e.from, e.tag])) as Record<ObjectId, Omit<ManaUnit, "type">> };
 }
 
 /** Whether one of `o`'s flexible units can be `m`. */
@@ -210,8 +224,12 @@ export interface ManaPlanStep {
   readonly rider?: EffectSpec;
   /** Whose the extra units are (see {@link ManaOption.extras}): the last
    * `extraFrom.length` units of `mana` are theirs, one id per unit, and
-   * carry no `tag`. */
+   * carry no `tag` of this source's. */
   readonly extraFrom?: readonly ObjectId[];
+  /** The {@link ManaExtraUnit.tag} of the extra units of each id in `extraFrom`
+   * that has one (one permanent's extras from one tap are all alike: Snowfall's
+   * two abilities never both trigger). */
+  readonly extraTagOf?: Readonly<Record<ObjectId, Omit<ManaUnit, "type">>>;
   /** See {@link ManaOption.counterCost}. */
   readonly counterCost?: { readonly kind: string; readonly count: number };
   /** See {@link ManaOption.floating}. */
@@ -269,6 +287,8 @@ export type ManaPurpose =
        * a kicker's counts, and a mana cost's doesn't when an alternative cost
        * replaced it (Rosheen Meanderer's ruling). */
       readonly xCost?: true;
+      /** The total cost being paid has `{C}` in it (`"cost-with-c"`). */
+      readonly cCost?: true;
     }
   /** An activated ability of `source` being paid for. */
   | {
@@ -279,14 +299,15 @@ export type ManaPurpose =
        * abilities"). */
       readonly ability?: ActivatedAbility;
     }
-  /** Neither: a special action a restriction names (`"turn-face-up"`,
-   * `"unlock-door"`), or a cost with `{X}` in it that's neither a spell's nor
-   * an ability's (`"other"` — a suspend cost, one asked for as something
-   * resolves). `xCost` as a cast's. */
+  /** Neither: something a restriction names (`"turn-face-up"`, `"unlock-door"`,
+   * `"foretell"`, `"cumulative-upkeep"`), or a cost with `{X}` or `{C}` in it
+   * that's neither a spell's nor an ability's (`"other"` — a suspend cost, one
+   * asked for as something resolves). `xCost` and `cCost` as a cast's. */
   | {
       readonly kind: "special";
-      readonly action: "turn-face-up" | "unlock-door" | "other";
+      readonly action: "turn-face-up" | "unlock-door" | "foretell" | "cumulative-upkeep" | "other";
       readonly xCost?: true;
+      readonly cCost?: true;
     }
   | null;
 
@@ -900,6 +921,7 @@ function planSnowPayment(
       ...(o.oncePerTurn !== undefined ? { oncePerTurn: o.oncePerTurn } : {}),
       ...(o.rider !== undefined ? { rider: o.rider } : {}),
       ...(extras.length > 0 ? { extraFrom: extras.map((e) => e.from) } : {}),
+      ...extraTagsOf(extras),
       ...(o.counterCost !== undefined ? { counterCost: o.counterCost } : {}),
       ...(o.floating !== undefined ? { floating: o.floating } : {}),
     };
@@ -1148,6 +1170,7 @@ function planManaPaymentOrdered(
     readonly rider?: EffectSpec;
     readonly counterCost?: { readonly kind: string; readonly count: number };
     readonly floating?: readonly ManaExtraUnit[];
+    readonly extraTagOf?: Readonly<Record<ObjectId, Omit<ManaUnit, "type">>>;
   }
   // Colours this cost still wants, for `coverGenericFrom`'s preference.
   const wantedColors = new Set<ManaType>(
@@ -1219,6 +1242,7 @@ function planManaPaymentOrdered(
       ...(opt.rider !== undefined ? { rider: opt.rider } : {}),
       ...(opt.counterCost !== undefined ? { counterCost: opt.counterCost } : {}),
       ...(opt.floating !== undefined ? { floating: opt.floating } : {}),
+      ...extraTagsOf(opt.extras ?? []),
     };
     tapped.push(t);
     return t;
@@ -1620,6 +1644,7 @@ function planManaPaymentOrdered(
       ...(t.oncePerTurn !== undefined ? { oncePerTurn: t.oncePerTurn } : {}),
       ...(t.rider !== undefined ? { rider: t.rider } : {}),
       ...(extra.length > 0 ? { extraFrom: extra.map((u) => u.extra as ObjectId) } : {}),
+      ...(t.extraTagOf !== undefined ? { extraTagOf: t.extraTagOf } : {}),
       ...(t.counterCost !== undefined ? { counterCost: t.counterCost } : {}),
       ...(t.floating !== undefined ? { floating: t.floating } : {}),
     };

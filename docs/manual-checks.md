@@ -6791,3 +6791,11 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 - **Do:** Cast Noxious Vapors. In the popup, click Shock and Grizzly Bears, and confirm.
 - **Expect:** The popup offers Lightning Bolt, Shock and Grizzly Bears alone, and clicking Lightning Bolt then Shock swaps one for the other. Lightning Bolt and Ornithopter are discarded; Shock, Grizzly Bears and Forest stay in your hand.
+
+## Mana a trigger adds, and what it's for (2026-11-03)
+
+### Snowfall: tapping an Island by hand asks whether to take the extra mana
+
+- **Do:** Click your Island.
+- **Expect:** A menu offers two ways to tap it, one ending "(add {U}{U})" and one "(add {U})". Choose "(add {U}{U})": your pool shows two blue.
+- **Not a bug:** Tapped to pay for a spell it doesn't ask: that extra {U} only pays cumulative upkeep, so it isn't taken.

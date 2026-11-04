@@ -1509,7 +1509,12 @@
   "effect:tapped-for-mana-land-deals-damage",
   "effect:triggered-mana-ability-rider",
   "effect:tapped-for-mana-chosen-color-any-player",
-  "effect:mana-spell-gains-permanent-keyword"
+  "effect:mana-spell-gains-permanent-keyword",
+  "cost:spend-only-chosen-type-or-filter",
+  "cost:spend-only-foretell",
+  "mana:spend-only-colorless-or-c-cost",
+  "mana:spend-only-cumulative-upkeep",
+  "mana:spend-only-kicked-spells"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

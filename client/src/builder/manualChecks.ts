@@ -10214,6 +10214,13 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'Snowfall: tapping an Island by hand asks whether to take the extra mana',
+    board({
+      you: { bf: ['Snowfall', 'Island'], hand: ['Merfolk of the Pearl Trident'] },
+      opp: [{ bf: ['Plains'] }],
+    }),
+  ),
+  preset(
     'Noxious Vapors: one card of each color from your hand',
     board({
       you: { bf: ['Swamp*3'], hand: ['Noxious Vapors', 'Lightning Bolt', 'Shock', 'Grizzly Bears', 'Ornithopter', 'Forest'] },

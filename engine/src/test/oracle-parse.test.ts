@@ -12554,3 +12554,32 @@ describe("a triggered mana ability that does more than add mana", () => {
     });
   });
 });
+
+describe("more to spend mana only on", () => {
+  const spendOnlyOf = (oracle_text: string): unknown => {
+    const card = parseFace({ name: "Test", type_line: "Artifact", oracle_text }, { tokenFor: () => null });
+    return (card.activated[0].effect as { spendOnly?: unknown }).spendOnly;
+  };
+
+  it("reads a foretell, a {C} cost, cumulative upkeep and a chosen type or another filter", () => {
+    expect(spendOnlyOf("{T}: Add {U}. Spend this mana only to foretell a card from your hand or cast an instant or sorcery spell.")).toMatchObject({
+      spell: { typesAnyOf: ["instant", "sorcery"] },
+      purposes: ["foretell"],
+    });
+    expect(
+      spendOnlyOf(
+        "{T}: Add {C}. Spend this mana only to cast a colorless spell, activate an ability of a colorless permanent, or pay a cost that contains {C}.",
+      ),
+    ).toMatchObject({ spell: { colorless: true }, abilityOf: { colorless: true }, purposes: ["cost-with-c"] });
+    expect(spendOnlyOf("{T}: Add {U}. Spend this mana only to pay cumulative upkeep costs.")).toMatchObject({
+      purposes: ["cumulative-upkeep"],
+    });
+    expect(
+      spendOnlyOf("{T}: Add {G}. Spend this mana only to cast a creature spell of the chosen type or a legendary creature spell."),
+    ).toMatchObject({
+      spell: { type: "creature" },
+      chosenType: true,
+      orSpell: { type: "creature", supertype: "legendary" },
+    });
+  });
+});
