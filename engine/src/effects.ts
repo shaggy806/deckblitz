@@ -5891,9 +5891,27 @@ export type EffectSpec =
        * 506.4 — Labyrinth of Skophos): it stops being an attacking,
        * blocking, blocked or unblocked creature; a creature it was blocking
        * stays blocked (509.1h). Nothing for one not in combat.
+       *
+       * `unblockSoleBlocked`: "Creatures it was blocking that had become
+       * blocked by only that creature this combat become unblocked" (False
+       * Orders), so one that another creature also blocked this combat, even
+       * one gone since, stays blocked. `thenMayBlock`: "You may have it block an
+       * attacking creature of your choice": the effect's controller picks up to
+       * one attacker, any at all (no requirement or restriction on declaring
+       * blockers applies to an effect's block, as rule 509.4b has it for one put
+       * onto the battlefield blocking), and it blocks that (`"block-attacker"`).
        */
       readonly kind: "remove-from-combat";
       readonly target: EffectTargetRef;
+      readonly unblockSoleBlocked?: true;
+      readonly thenMayBlock?: true;
+    }
+  | {
+      /** One creature blocks the attacker in slot 0, by an effect (rules
+       * 509.3a-d: it's as though it was declared, for what triggers). Built by
+       * the engine for `remove-from-combat`'s `thenMayBlock`, never authored. */
+      readonly kind: "block-attacker";
+      readonly blocker: ObjectId;
     }
   | {
       /**
@@ -7150,6 +7168,12 @@ export type EffectSpec =
       readonly kind: "additional-combat";
       readonly afterThisPhase?: boolean;
       readonly withMain?: boolean;
+      /** With `afterThisPhase`: "Each of those creatures attacks that combat if
+       * able. They can't attack you or planeswalkers you control that combat"
+       * (Illusionist's Gambit): the permanents matching `filter` as this is
+       * done, in that stint, are bound for that combat phase alone, whatever
+       * other phases come first (rule 500.8). */
+      readonly forcedAttackers?: { readonly filter: CardFilter; readonly cantAttackYou?: true };
     }
   | {
       /**
@@ -11637,7 +11661,9 @@ export interface EffectApi {
   /** See the `"incubate"` {@link EffectSpec}. */
   incubate(amount: number): void;
   /** See the `"remove-from-combat"` {@link EffectSpec}. */
-  removeFromCombat(target: TargetRef): void;
+  removeFromCombat(target: TargetRef, unblockSoleBlocked?: boolean): void;
+  /** See the `"block-attacker"` {@link EffectSpec}. */
+  blockAttacker(blocker: ObjectId, attacker: ObjectId): void;
   /** See the `"become-blocked"` {@link EffectSpec}: one creature, or every
    * attacker matching `filter`. */
   becomeBlocked(on: TargetRef | CardFilter): void;
@@ -11789,7 +11815,10 @@ export interface EffectApi {
   readonly division: readonly number[];
   /** Queue an additional combat + main phase after this main phase (Aggravated
    * Assault). */
-  additionalCombat(afterThisPhase?: { readonly withMain: boolean }): void;
+  additionalCombat(afterThisPhase?: {
+    readonly withMain: boolean;
+    readonly forcedAttackers?: { readonly filter: CardFilter; readonly cantAttackYou?: true };
+  }): void;
   /** See the `end-the-turn` {@link EffectSpec}. */
   endTurnOrCombat(what: "turn" | "combat"): void;
   /** See the `limit-blockers` {@link EffectSpec}. */
@@ -16882,7 +16911,25 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     case "remove-from-combat": {
       const target = resolveEffectTarget(spec.target, ctx);
-      if (target !== undefined) ctx.removeFromCombat(target);
+      if (target === undefined) return;
+      ctx.removeFromCombat(target, spec.unblockSoleBlocked === true);
+      if (spec.thenMayBlock === true && target.kind === "object") {
+        applyEffectSpec(
+          {
+            kind: "choose-permanents",
+            filter: { type: "creature", attacking: true },
+            upTo: 1,
+            prompt: "You may have it block an attacking creature of your choice",
+            then: { kind: "block-attacker", blocker: target.object },
+          },
+          ctx,
+        );
+      }
+      return;
+    }
+    case "block-attacker": {
+      const attacker = ctx.targets[0];
+      if (attacker?.kind === "object") ctx.blockAttacker(spec.blocker, attacker.object);
       return;
     }
     case "become-blocked": {
@@ -17729,7 +17776,12 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     }
     case "additional-combat":
       ctx.additionalCombat(
-        spec.afterThisPhase === true ? { withMain: spec.withMain === true } : undefined,
+        spec.afterThisPhase === true
+          ? {
+              withMain: spec.withMain === true,
+              ...(spec.forcedAttackers !== undefined ? { forcedAttackers: spec.forcedAttackers } : {}),
+            }
+          : undefined,
       );
       return;
     case "end-the-turn":

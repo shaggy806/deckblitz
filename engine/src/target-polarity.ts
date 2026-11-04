@@ -565,7 +565,11 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   incubate: none,
   // Out of combat: an opponent's attacker or blocker, or one's own attacker
   // saved from a block — the board's call, or the card's own `whose`.
-  "remove-from-combat": none,
+  // Having it block something else is the board's call (False Orders).
+  "remove-from-combat": (n, v) => {
+    if (n.thenMayBlock === true) v.touch(n.target, "either", MINOR);
+  },
+  "block-attacker": none,
   // Its damage kept from what it's attacking: an opponent's attacker's harm.
   "become-blocked": (n, v) => {
     if (n.target !== undefined) v.touch(n.target, "harm", MAJOR);

@@ -80,6 +80,7 @@ describe("Rescuer Sphinx: you may return a permanent as it enters", () => {
     const { game, a } = table();
     lands(game, "Island", 4);
     const token = spawn(game, "Goblin Token", A);
+    game.state.objects[token].isToken = true;
     pickPermanents(a, token);
     const sphinx = toHand(game, "Rescuer Sphinx");
     cast(game, sphinx);

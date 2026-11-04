@@ -459,6 +459,14 @@ export interface GameObject {
   /** `mustAttackPlayer` lasts only this combat (rule 500.5a) — Territorial
    * Hellkite's "attacks that player this combat if able". */
   mustAttackPlayerThisCombat?: true;
+  /** It attacks this combat phase if able (rule 508.1d), and not `avoid` or a
+   * planeswalker they control (Illusionist's Gambit). Set as the phase begins,
+   * gone as it ends and with any zone change. */
+  boundThisCombat?: { readonly avoid?: PlayerId };
+  /** The combat phase (`TurnState.combatPhases`) of a turn in which a creature
+   * that was blocking it was removed from combat: False Orders' "blocked by only
+   * that creature this combat" reads it, as `blockedBy` no longer holds it. */
+  lostBlockerIn?: { readonly turn: number; readonly combat: number };
   /** What damaged this permanent this turn — see {@link DamageHistory}.
    * Only this stint's (a zone change makes a new object, rule 400.7), and
    * only this turn's: a record from an earlier turn is stale. */
@@ -3107,7 +3115,16 @@ export interface ConspireAsk {
 /** A phase an effect added straight after the combat phase under way — see
  * `GameState.phasesAfterThisCombat`. */
 export type AddedPhase =
-  | { readonly kind: "combat"; readonly withMain: boolean }
+  | {
+      readonly kind: "combat";
+      readonly withMain: boolean;
+      /** What must attack in this combat phase, each in the stint it was in, and
+       * who it can't attack (`"additional-combat"`'s `forcedAttackers`). */
+      readonly forced?: {
+        readonly objects: readonly { readonly object: ObjectId; readonly zoneChangeCount: number }[];
+        readonly avoid?: PlayerId;
+      };
+    }
   | { readonly kind: "upkeep" };
 
 export interface TurnState {

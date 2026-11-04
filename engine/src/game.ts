@@ -309,7 +309,7 @@ import {
 import type { AggregateReads, AggregateSpec, CardFilter } from "./filter.js";
 import { goadersOf } from "./goad.js";
 import { answeringPlayer, attackChooser, decidingPlayer } from "./player-control.js";
-import type { PlayerControl } from "./state.js";
+import type { AddedPhase, PlayerControl } from "./state.js";
 import { blockersRequiredBy, defendersForAttacker } from "./combat/eligibility.js";
 import { turnRuleCovers } from "./characteristics.js";
 import { bandingAbilitiesOf } from "./combat/banding.js";
@@ -9173,6 +9173,8 @@ export class Game {
       if (next.withMain) this.state.extraMainPhases = (this.state.extraMainPhases ?? 0) + 1;
       this.emit({ type: "additional-combat-phase" });
       this.enterStep("begin-combat");
+      // Past the end of the last combat's bindings, which entering the step ended.
+      this.bindForcedAttackers(next);
       return;
     }
     // An additional combat phase made in the main phase after combat ("if
@@ -9190,6 +9192,7 @@ export class Game {
       if (next.kind === "combat" && !next.withMain) this.state.turn.endsAfterAddedCombat = true;
       this.emit({ type: "additional-combat-phase" });
       this.enterStep("begin-combat");
+      if (next.kind === "combat") this.bindForcedAttackers(next);
       return;
     }
     if (this.state.turn.step === "end-combat" && this.state.turn.endsAfterAddedCombat === true) {
@@ -10824,6 +10827,7 @@ export class Game {
         delete object.mustAttackPlayer;
         delete object.mustAttackPlayerThisCombat;
       }
+      delete object.boundThisCombat;
       if (!object.modifiers.some((m) => m.untilEndOfCombat === true)) continue;
       object.modifiers = object.modifiers.filter((m) => m.untilEndOfCombat !== true);
       expired.push(id);
@@ -34148,14 +34152,30 @@ export class Game {
           this.incubating = null;
         }
       },
-      removeFromCombat: (target) => {
+      removeFromCombat: (target, unblockSoleBlocked) => {
         if (target.kind !== "object") return;
         const object = this.state.objects[target.object];
         if (object?.zone !== "battlefield" || (object.attacking === null && object.blocking === null)) return;
+        // Asked before it goes: blocked by it alone, in all this combat.
+        const combat = this.state.turn.combatPhases ?? 0;
+        const soleBlocked =
+          unblockSoleBlocked === true
+            ? this.state.zones.shared.battlefield.filter((id) => {
+                const attacker = this.state.objects[id];
+                const lost = attacker.lostBlockerIn;
+                return (
+                  attacker.blockedBy.length === 1 &&
+                  attacker.blockedBy[0] === target.object &&
+                  !(lost?.turn === this.state.turn.number && lost.combat === combat)
+                );
+              })
+            : [];
         this.removeFromCombat(target.object);
+        for (const id of soleBlocked) this.state.objects[id].blocked = false;
         invalidateComputedCache();
         this.emit({ type: "removed-from-combat", object: target.object });
       },
+      blockAttacker: (blocker, attacker) => this.blockAttackerByEffect(blocker, attacker),
       becomeBlocked: (on) => {
         const ids =
           "kind" in on && (on.kind === "object" || on.kind === "player")
@@ -34996,7 +35016,22 @@ export class Game {
         // Directly after this phase, so ahead of any added after it before
         // (rule 500.8).
         else {
-          (this.state.phasesAfterThisCombat ??= []).unshift({ kind: "combat", withMain: afterThisPhase.withMain });
+          const bound = afterThisPhase.forcedAttackers;
+          (this.state.phasesAfterThisCombat ??= []).unshift({
+            kind: "combat",
+            withMain: afterThisPhase.withMain,
+            ...(bound !== undefined
+              ? {
+                  forced: {
+                    objects: this.battlefieldMatching(controller, bound.filter).map((object) => ({
+                      object,
+                      zoneChangeCount: this.state.objects[object].zoneChangeCount ?? 0,
+                    })),
+                    ...(bound.cantAttackYou === true ? { avoid: controller } : {}),
+                  },
+                }
+              : {}),
+          });
         }
         this.emit({ type: "additional-combat-queued", player: controller });
       },
@@ -43590,6 +43625,54 @@ export class Game {
     this.emit({ type: "attacker-blocked", attacker: id, blockers: [...attacker.blockedBy] });
   }
 
+  /** The combat phase an `"additional-combat"`'s `forcedAttackers` was for has
+   * come: those still the same objects are bound for it. */
+  private bindForcedAttackers(phase: Extract<AddedPhase, { kind: "combat" }>): void {
+    const forced = phase.forced;
+    if (forced === undefined) return;
+    for (const { object: id, zoneChangeCount } of forced.objects) {
+      const object = this.state.objects[id];
+      if (object?.zone !== "battlefield" || (object.zoneChangeCount ?? 0) !== zoneChangeCount) continue;
+      object.boundThisCombat = forced.avoid !== undefined ? { avoid: forced.avoid } : {};
+    }
+    invalidateComputedCache();
+  }
+
+  /**
+   * `blocker` blocks `attacker`, by an effect (`"block-attacker"`, rules
+   * 509.3a-d): no requirement or restriction on declaring blockers applies, and
+   * what triggers on a block does, as it wasn't blocking it already. Blocking
+   * one in a band blocks them all (702.22h). Blocking something, it isn't
+   * blocking anything else: it was removed from combat first.
+   */
+  private blockAttackerByEffect(blockerId: ObjectId, attackerId: ObjectId): void {
+    const blocker = this.state.objects[blockerId];
+    if (blocker?.zone !== "battlefield" || blocker.blocking !== null) return;
+    if (this.state.objects[attackerId]?.attacking === null) return;
+    // One token of an attacking stack is what's blocked.
+    const one = (this.state.objects[attackerId]?.stackCount ?? 1) > 1 ? this.splitOneFromStack(attackerId) : attackerId;
+    blocker.blocking = one;
+    const attacker = this.state.objects[one];
+    attacker.blockedBy.push(blockerId);
+    attacker.blocked = true;
+    const blocked = [one];
+    for (const mateId of bandMatesOf(this.state, one)) {
+      const mate = this.state.objects[mateId];
+      if (mate.blockedBy.includes(blockerId)) continue;
+      mate.blockedBy.push(blockerId);
+      mate.blocked = true;
+      blocker.blockingAlso = [...(blocker.blockingAlso ?? []), mateId];
+      blocked.push(mateId);
+    }
+    invalidateComputedCache();
+    for (const [i, id] of blocked.entries()) {
+      this.emit({ type: "blocker-declared", blocker: blockerId, attacker: id, ...(i > 0 ? { alsoBlocked: true } : {}) });
+    }
+    for (const id of blocked) {
+      this.emit({ type: "attacker-blocked", attacker: id, blockers: [...this.state.objects[id].blockedBy] });
+    }
+  }
+
   private removeFromCombat(id: ObjectId): void {
     const object = this.state.objects[id];
     if (object.attacking === null && object.blocking === null) return;
@@ -43603,7 +43686,10 @@ export class Game {
     delete object.band;
     for (const other of this.state.zones.shared.battlefield) {
       const o = this.state.objects[other];
-      if (o.blockedBy.includes(id)) o.blockedBy = o.blockedBy.filter((b) => b !== id);
+      if (o.blockedBy.includes(id)) {
+        o.blockedBy = o.blockedBy.filter((b) => b !== id);
+        o.lostBlockerIn = { turn: this.state.turn.number, combat: this.state.turn.combatPhases ?? 0 };
+      }
     }
   }
 
@@ -53063,6 +53149,8 @@ export class Game {
     delete object.lastAttack;
     delete object.mustAttackPlayer;
     delete object.mustAttackPlayerThisCombat;
+    delete object.boundThisCombat;
+    delete object.lostBlockerIn;
     delete object.damageThisTurn;
     delete object.dealtDamageToCreatureOnTurn;
     delete object.dealtDamage;

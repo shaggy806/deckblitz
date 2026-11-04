@@ -276,6 +276,15 @@ function whyCannotAttackUncached(
       ? `${def.name} can't attack that planeswalker`
       : "attackers can only attack an opponent who hasn't already lost";
   }
+  // "They can't attack you or planeswalkers you control that combat"
+  // (Illusionist's Gambit): a battle you protect isn't either.
+  const avoid = object.boundThisCombat?.avoid;
+  if (
+    avoid !== undefined &&
+    (target === avoid || (isPlaneswalkerTarget(state, target) && state.objects[target as ObjectId]?.controller === avoid))
+  ) {
+    return `${def.name} can't attack that player or their planeswalkers this combat`;
+  }
   const defendingPlayer = defendingPlayerOf(state, target);
   // The owner, not their planeswalkers: a creature attacks a player or a
   // planeswalker (rule 508.1b), and "can't attack its owner" names only the
@@ -1049,6 +1058,7 @@ function mustAttackUncached(state: GameState, registry: CardRegistry, attacker: 
   const object = state.objects[attacker];
   if (object === undefined) return false;
   if (
+    object.boundThisCombat !== undefined ||
     goadersOf(state, registry, attacker).length > 0 ||
     attackRequirementRulesOf(state, registry, attacker).some((rule) => rule.attacks === undefined) ||
     restrictionsOf(state, registry, attacker).has("must-attack")

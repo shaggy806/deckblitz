@@ -7040,3 +7040,13 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 - **Do:** Cast Flame Rift, then Sign in Blood at Bob, then Backdraft, and choose "Flame Rift: 8 damage".
 - **Expect:** You aren't asked for a player, as only you cast a sorcery. The menu lists both spells with the damage each dealt. Backdraft deals you 4.
+
+### Illusionist's Gambit: four players, the same creatures must attack someone else
+
+- **Do:** As Bob, attack Alice with Hill Giant. In the declare blockers step, as Alice, cast Illusionist's Gambit. Then as Bob declare attackers in the new combat.
+- **Expect:** Hill Giant leaves combat, untapped, and deals no damage. A second combat begins, and Hill Giant has to attack: Carol or Dave, never Alice.
+
+### False Orders: unblocking the attacker and blocking another
+
+- **Do:** Attack Bob with Hill Giant and Serra Angel. As Bob, block Hill Giant with Grizzly Bears. As Alice, cast False Orders on Grizzly Bears and click Serra Angel.
+- **Expect:** Grizzly Bears now blocks Serra Angel, though it flies, and dies. Hill Giant is no longer blocked: Bob loses 3 life.

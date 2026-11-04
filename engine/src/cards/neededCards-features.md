@@ -4890,3 +4890,5 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 **Done as it enters: exile from a graveyard, return a permanent (2026-11-03).** `AsEntersAction` (`Game.askAsEnters`): chosen before it moves on any entry, the cards linked to it as it enters (rule 607.2a), `"done-as-enters"` counters, `counterForEach`, `{ exiledWithThis }`. Rescuer Sphinx, Living Lore, Sutured Ghoul, Dermotaxi, Mimeoplasm, Revered One, Frankenstein's Monster.
 
 **Damage dealt this turn by what and to what (2026-11-03).** The turn's `damageDealt` records the source's name and types and the recipient and its stint; `{ damageDealtThisTurn }`'s `to` and `by`, the condition's `toSelf`, `choose-value`'s `"spell-damage"`, `choose-opponent`'s `whoIf`. Burning-Eye Zubera, Rushing-Tide Zubera, Blazing Effigy, Reverse Polarity, Backdraft.
+
+**Removed from combat, and what comes of it (2026-11-03).** `additional-combat`'s `forcedAttackers` (`AddedPhase.forced`, `boundThisCombat`); `remove-from-combat`'s `unblockSoleBlocked` (`lostBlockerIn`) and `thenMayBlock` (`block-attacker`); the filter clause `controlledByDefendingPlayer`. Illusionist's Gambit, False Orders.

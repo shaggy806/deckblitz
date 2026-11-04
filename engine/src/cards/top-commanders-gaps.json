@@ -1620,7 +1620,9 @@
   "replacement:as-enters-return-permanent",
   "amount:damage-dealt-by-spell-this-turn",
   "amount:damage-dealt-to-source-this-turn-by-filter",
-  "amount:damage-taken-from-filtered-sources"
+  "amount:damage-taken-from-filtered-sources",
+  "effect:remove-attackers-and-forced-recombat",
+  "effect:remove-blocker-unblock-and-reblock"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

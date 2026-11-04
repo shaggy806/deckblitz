@@ -341,6 +341,11 @@ export interface CardFilter {
   /** Currently attacking (Kangee's Lieutenant: "attacking creatures with
    * flying get +1/+1"). */
   readonly attacking?: boolean;
+  /** Controlled by a defending player, for a spell with no attacker to read one
+   * from (False Orders' "target creature defending player controls"): any player
+   * an attacker is attacking, or whose planeswalker or battle it is; a player
+   * chooses among several (rule 802.2a). */
+  readonly controlledByDefendingPlayer?: true;
   /** Attacking a battle (Rampaging Geoderm's "if it's **attacking a
    * battle**"). */
   readonly attackingBattle?: boolean;
@@ -2102,6 +2107,17 @@ export function matchesFilter(
     // a snapshot still knows (Kardur's "whenever an attacking creature dies").
     const attacking = live !== undefined ? live.attacking !== null : lki!.attacking;
     if (attacking !== filter.attacking) return false;
+  }
+  if (filter.controlledByDefendingPlayer === true) {
+    const controller = live?.controller;
+    const defending = state.zones.shared.battlefield.some((id) => {
+      const attacked = state.objects[id]?.attacking;
+      if (attacked === null || attacked === undefined) return false;
+      if (state.players[attacked as PlayerId] !== undefined) return attacked === controller;
+      const defender = state.objects[attacked as ObjectId];
+      return (defender?.protector ?? defender?.controller) === controller;
+    });
+    if (controller === undefined || !defending) return false;
   }
   if (filter.attackingBattle !== undefined) {
     // Only a battle has a protector (rule 310.8).

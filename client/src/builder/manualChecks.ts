@@ -10409,6 +10409,23 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    "Illusionist's Gambit: four players, the same creatures must attack someone else",
+    board({
+      you: { bf: ['Island*4'], hand: ["Illusionist's Gambit"] },
+      opp: [{ human: true, bf: ['Hill Giant'] }, {}, {}],
+      turn: 0,
+      step: 'begin-combat',
+    }),
+  ),
+  preset(
+    'False Orders: unblocking the attacker and blocking another',
+    board({
+      you: { bf: ['Mountain', 'Hill Giant', 'Serra Angel'], hand: ['False Orders'] },
+      opp: { human: true, bf: ['Grizzly Bears'] },
+      step: 'begin-combat',
+    }),
+  ),
+  preset(
     'Backdraft: choosing which sorcery spell',
     board({
       you: { bf: ['Mountain*4', 'Swamp*2'], hand: ['Flame Rift', 'Sign in Blood', 'Backdraft'] },

@@ -299,6 +299,41 @@ describe("Sword of Hearth and Home: both cards enter together", () => {
     expect(zone(game, land)).toBe("battlefield");
   });
 
+  it("a target gone illegal: the ability does nothing, no search (the ruling)", () => {
+    const { game, a } = table();
+    const carrier = equipped(game);
+    const buddy = spawn(game, "Llanowar Elves", A);
+    const land = toLibrary(game, "Forest", A);
+    a.chooseTargetsFn = () => [ref(buddy)];
+    let searched = 0;
+    a.chooseFromZoneFn = () => {
+      searched += 1;
+      return [land];
+    };
+    // Gone in response, with the trigger on the stack.
+    game.advanceUntil((s) => s.turn.step === "declare-attackers");
+    a.declareAttackersFn = () => [{ attacker: carrier, defender: B }];
+    game.advanceUntil(() => game.state.zones.shared.stack.length > 0);
+    game.debugMove(buddy, "graveyard");
+    game.advanceUntil((s) => s.turn.step === "postcombat-main");
+    expect(zone(game, buddy)).toBe("graveyard");
+    expect(searched).toBe(0);
+    expect(zone(game, land)).toBe("library");
+  });
+
+  it("a token exiled stays gone; the land still enters (the ruling)", () => {
+    const { game, a } = table();
+    const carrier = equipped(game);
+    const token = spawn(game, "Goblin Token", A);
+    game.state.objects[token].isToken = true;
+    const land = toLibrary(game, "Forest", A);
+    pickTargets(a, token);
+    pickFromZone(a, land);
+    attack(game, a, [carrier]);
+    expect(zone(game, land)).toBe("battlefield");
+    expect(game.state.objects[token]?.zone === "battlefield").toBe(false);
+  });
+
   it("asks an exiled Clone what it copies before either card moves", () => {
     const { game, a } = table();
     const carrier = equipped(game);
