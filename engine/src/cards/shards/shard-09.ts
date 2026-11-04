@@ -812,6 +812,7 @@ import _poolTheElderDragonWar from "../pool/the-elder-dragon-war.js";
 import _poolTheEnd from "../pool/the-end.js";
 import _poolTheLadyOfOtaria from "../pool/the-lady-of-otaria.js";
 import _poolTheLunarWhale from "../pool/the-lunar-whale.js";
+import _poolTheMindStone from "../pool/the-mind-stone.js";
 import _poolTheStoneBrain from "../pool/the-stone-brain.js";
 import _poolThermalNavigator from "../pool/thermal-navigator.js";
 import _poolThirst from "../pool/thirst.js";
@@ -1762,6 +1763,7 @@ const shard: CardShard = {
     _poolTheEnd,
     _poolTheLadyOfOtaria,
     _poolTheLunarWhale,
+    _poolTheMindStone,
     _poolTheStoneBrain,
     _poolThermalNavigator,
     _poolThirst,

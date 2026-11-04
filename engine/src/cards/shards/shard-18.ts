@@ -246,6 +246,7 @@ import _poolFellSpecter from "../pool/fell-specter.js";
 import _poolFenStalker from "../pool/fen-stalker.js";
 import _poolFeralMaaka from "../pool/feral-maaka.js";
 import _poolFeverCharm from "../pool/fever-charm.js";
+import _poolFieldOfRuin from "../pool/field-of-ruin.js";
 import _poolFierceRetribution from "../pool/fierce-retribution.js";
 import _poolFinaleOfGlory from "../pool/finale-of-glory.js";
 import _poolFinish from "../pool/finish.js";
@@ -322,6 +323,7 @@ import _poolHearthbornBattler from "../pool/hearthborn-battler.js";
 import _poolHedronMatrix from "../pool/hedron-matrix.js";
 import _poolHellkiteOverlord from "../pool/hellkite-overlord.js";
 import _poolHelmOfChatzuk from "../pool/helm-of-chatzuk.js";
+import _poolHelmOfObedience from "../pool/helm-of-obedience.js";
 import _poolHengeWalker from "../pool/henge-walker.js";
 import _poolHeraldsHorn from "../pool/heralds-horn.js";
 import _poolHeraldsOfTzeentch from "../pool/heralds-of-tzeentch.js";
@@ -738,6 +740,7 @@ import _poolSwordOfTheChosen from "../pool/sword-of-the-chosen.js";
 import _poolSymbioteSpawn from "../pool/symbiote-spawn.js";
 import _poolSyrKonradTheGrim from "../pool/syr-konrad-the-grim.js";
 import _poolTaekoThePatientAvalanche from "../pool/taeko-the-patient-avalanche.js";
+import _poolTaintedPact from "../pool/tainted-pact.js";
 import _poolTalismanOfCuriosity from "../pool/talisman-of-curiosity.js";
 import _poolTarFiend from "../pool/tar-fiend.js";
 import _poolTarnationVista from "../pool/tarnation-vista.js";
@@ -1156,6 +1159,7 @@ const shard: CardShard = {
     _poolFenStalker,
     _poolFeralMaaka,
     _poolFeverCharm,
+    _poolFieldOfRuin,
     _poolFierceRetribution,
     _poolFinaleOfGlory,
     _poolFinish,
@@ -1232,6 +1236,7 @@ const shard: CardShard = {
     _poolHedronMatrix,
     _poolHellkiteOverlord,
     _poolHelmOfChatzuk,
+    _poolHelmOfObedience,
     _poolHengeWalker,
     _poolHeraldsHorn,
     _poolHeraldsOfTzeentch,
@@ -1648,6 +1653,7 @@ const shard: CardShard = {
     _poolSymbioteSpawn,
     _poolSyrKonradTheGrim,
     _poolTaekoThePatientAvalanche,
+    _poolTaintedPact,
     _poolTalismanOfCuriosity,
     _poolTarFiend,
     _poolTarnationVista,

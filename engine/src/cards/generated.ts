@@ -3354,6 +3354,7 @@ import _poolCadricSoulKindler from "./pool/cadric-soul-kindler.js";
 import _poolCaelornaCoralTyrant from "./pool/caelorna-coral-tyrant.js";
 import _poolCaesarLegionsEmperor from "./pool/caesar-legions-emperor.js";
 import _poolCageOfHands from "./pool/cage-of-hands.js";
+import _poolCagedSun from "./pool/caged-sun.js";
 import _poolCagedZombie from "./pool/caged-zombie.js";
 import _poolCagemail from "./pool/cagemail.js";
 import _poolCaitSithFortuneTeller from "./pool/cait-sith-fortune-teller.js";
@@ -8344,6 +8345,7 @@ import _poolFiddleheadKami from "./pool/fiddlehead-kami.js";
 import _poolFieldCreeper from "./pool/field-creeper.js";
 import _poolFieldMarshal from "./pool/field-marshal.js";
 import _poolFieldOfReality from "./pool/field-of-reality.js";
+import _poolFieldOfRuin from "./pool/field-of-ruin.js";
 import _poolFieldOfSouls from "./pool/field-of-souls.js";
 import _poolFieldOfTheDead from "./pool/field-of-the-dead.js";
 import _poolFieldResearch from "./pool/field-research.js";
@@ -11151,6 +11153,7 @@ import _poolHellspurPosseBoss from "./pool/hellspur-posse-boss.js";
 import _poolHelmOfAwakening from "./pool/helm-of-awakening.js";
 import _poolHelmOfChatzuk from "./pool/helm-of-chatzuk.js";
 import _poolHelmOfKaldra from "./pool/helm-of-kaldra.js";
+import _poolHelmOfObedience from "./pool/helm-of-obedience.js";
 import _poolHelmOfPossession from "./pool/helm-of-possession.js";
 import _poolHelmOfTheGhastlord from "./pool/helm-of-the-ghastlord.js";
 import _poolHelmOfTheGods from "./pool/helm-of-the-gods.js";
@@ -24201,6 +24204,7 @@ import _poolTaintedField from "./pool/tainted-field.js";
 import _poolTaintedIndulgence from "./pool/tainted-indulgence.js";
 import _poolTaintedIsle from "./pool/tainted-isle.js";
 import _poolTaintedObserver from "./pool/tainted-observer.js";
+import _poolTaintedPact from "./pool/tainted-pact.js";
 import _poolTaintedPeak from "./pool/tainted-peak.js";
 import _poolTaintedRemedy from "./pool/tainted-remedy.js";
 import _poolTaintedSigil from "./pool/tainted-sigil.js";
@@ -24524,6 +24528,7 @@ import _poolTemporalTrespass from "./pool/temporal-trespass.js";
 import _poolTemporaryInsanity from "./pool/temporary-insanity.js";
 import _poolTemporaryLockdown from "./pool/temporary-lockdown.js";
 import _poolTemporaryTruce from "./pool/temporary-truce.js";
+import _poolTemptWithDiscovery from "./pool/tempt-with-discovery.js";
 import _poolTemptWithGlory from "./pool/tempt-with-glory.js";
 import _poolTemptWithImmortality from "./pool/tempt-with-immortality.js";
 import _poolTemptWithMayhem from "./pool/tempt-with-mayhem.js";
@@ -24847,6 +24852,7 @@ import _poolTheMechanistAerialArtisan from "./pool/the-mechanist-aerial-artisan.
 import _poolTheMendingOfDominaria from "./pool/the-mending-of-dominaria.js";
 import _poolTheMightstoneAndWeakstone from "./pool/the-mightstone-and-weakstone.js";
 import _poolTheMightyThorJaneFoster from "./pool/the-mighty-thor-jane-foster.js";
+import _poolTheMindStone from "./pool/the-mind-stone.js";
 import _poolTheMindskinner from "./pool/the-mindskinner.js";
 import _poolTheMirariConjecture from "./pool/the-mirari-conjecture.js";
 import _poolTheMistyMountainsCold from "./pool/the-misty-mountains-cold.js";
@@ -24895,6 +24901,7 @@ import _poolTheSeriema from "./pool/the-seriema.js";
 import _poolTheShatteredStatesEra from "./pool/the-shattered-states-era.js";
 import _poolTheShire from "./pool/the-shire.js";
 import _poolTheSibsigCeremony from "./pool/the-sibsig-ceremony.js";
+import _poolTheSoulStone from "./pool/the-soul-stone.js";
 import _poolTheSpearOfBashenga from "./pool/the-spear-of-bashenga.js";
 import _poolTheSpearOfLeonidas from "./pool/the-spear-of-leonidas.js";
 import _poolTheSpeedDemon from "./pool/the-speed-demon.js";
@@ -25170,6 +25177,7 @@ import _poolThroatseeker from "./pool/throatseeker.js";
 import _poolThroesOfChaos from "./pool/throes-of-chaos.js";
 import _poolThroneOfBone from "./pool/throne-of-bone.js";
 import _poolThroneOfDeath from "./pool/throne-of-death.js";
+import _poolThroneOfEldraine from "./pool/throne-of-eldraine.js";
 import _poolThroneOfEmpires from "./pool/throne-of-empires.js";
 import _poolThroneOfGeth from "./pool/throne-of-geth.js";
 import _poolThroneOfMakindi from "./pool/throne-of-makindi.js";
@@ -26771,6 +26779,7 @@ import _poolVeteranBodyguard from "./pool/veteran-bodyguard.js";
 import _poolVeteranCathar from "./pool/veteran-cathar.js";
 import _poolVeteranCavalier from "./pool/veteran-cavalier.js";
 import _poolVeteranDungeoneer from "./pool/veteran-dungeoneer.js";
+import _poolVeteranExplorer from "./pool/veteran-explorer.js";
 import _poolVeteranGuardmouse from "./pool/veteran-guardmouse.js";
 import _poolVeteranIceClimber from "./pool/veteran-ice-climber.js";
 import _poolVeteranMotorist from "./pool/veteran-motorist.js";
@@ -32601,6 +32610,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCaelornaCoralTyrant,
   _poolCaesarLegionsEmperor,
   _poolCageOfHands,
+  _poolCagedSun,
   _poolCagedZombie,
   _poolCagemail,
   _poolCaitSithFortuneTeller,
@@ -37591,6 +37601,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFieldCreeper,
   _poolFieldMarshal,
   _poolFieldOfReality,
+  _poolFieldOfRuin,
   _poolFieldOfSouls,
   _poolFieldOfTheDead,
   _poolFieldResearch,
@@ -40398,6 +40409,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolHelmOfAwakening,
   _poolHelmOfChatzuk,
   _poolHelmOfKaldra,
+  _poolHelmOfObedience,
   _poolHelmOfPossession,
   _poolHelmOfTheGhastlord,
   _poolHelmOfTheGods,
@@ -53448,6 +53460,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTaintedIndulgence,
   _poolTaintedIsle,
   _poolTaintedObserver,
+  _poolTaintedPact,
   _poolTaintedPeak,
   _poolTaintedRemedy,
   _poolTaintedSigil,
@@ -53771,6 +53784,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTemporaryInsanity,
   _poolTemporaryLockdown,
   _poolTemporaryTruce,
+  _poolTemptWithDiscovery,
   _poolTemptWithGlory,
   _poolTemptWithImmortality,
   _poolTemptWithMayhem,
@@ -54094,6 +54108,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTheMendingOfDominaria,
   _poolTheMightstoneAndWeakstone,
   _poolTheMightyThorJaneFoster,
+  _poolTheMindStone,
   _poolTheMindskinner,
   _poolTheMirariConjecture,
   _poolTheMistyMountainsCold,
@@ -54142,6 +54157,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTheShatteredStatesEra,
   _poolTheShire,
   _poolTheSibsigCeremony,
+  _poolTheSoulStone,
   _poolTheSpearOfBashenga,
   _poolTheSpearOfLeonidas,
   _poolTheSpeedDemon,
@@ -54417,6 +54433,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolThroesOfChaos,
   _poolThroneOfBone,
   _poolThroneOfDeath,
+  _poolThroneOfEldraine,
   _poolThroneOfEmpires,
   _poolThroneOfGeth,
   _poolThroneOfMakindi,
@@ -56018,6 +56035,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolVeteranCathar,
   _poolVeteranCavalier,
   _poolVeteranDungeoneer,
+  _poolVeteranExplorer,
   _poolVeteranGuardmouse,
   _poolVeteranIceClimber,
   _poolVeteranMotorist,
@@ -61861,6 +61879,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/caelorna-coral-tyrant": _poolCaelornaCoralTyrant,
   "pool/caesar-legions-emperor": _poolCaesarLegionsEmperor,
   "pool/cage-of-hands": _poolCageOfHands,
+  "pool/caged-sun": _poolCagedSun,
   "pool/caged-zombie": _poolCagedZombie,
   "pool/cagemail": _poolCagemail,
   "pool/cait-sith-fortune-teller": _poolCaitSithFortuneTeller,
@@ -66851,6 +66870,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/field-creeper": _poolFieldCreeper,
   "pool/field-marshal": _poolFieldMarshal,
   "pool/field-of-reality": _poolFieldOfReality,
+  "pool/field-of-ruin": _poolFieldOfRuin,
   "pool/field-of-souls": _poolFieldOfSouls,
   "pool/field-of-the-dead": _poolFieldOfTheDead,
   "pool/field-research": _poolFieldResearch,
@@ -69658,6 +69678,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/helm-of-awakening": _poolHelmOfAwakening,
   "pool/helm-of-chatzuk": _poolHelmOfChatzuk,
   "pool/helm-of-kaldra": _poolHelmOfKaldra,
+  "pool/helm-of-obedience": _poolHelmOfObedience,
   "pool/helm-of-possession": _poolHelmOfPossession,
   "pool/helm-of-the-ghastlord": _poolHelmOfTheGhastlord,
   "pool/helm-of-the-gods": _poolHelmOfTheGods,
@@ -82708,6 +82729,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/tainted-indulgence": _poolTaintedIndulgence,
   "pool/tainted-isle": _poolTaintedIsle,
   "pool/tainted-observer": _poolTaintedObserver,
+  "pool/tainted-pact": _poolTaintedPact,
   "pool/tainted-peak": _poolTaintedPeak,
   "pool/tainted-remedy": _poolTaintedRemedy,
   "pool/tainted-sigil": _poolTaintedSigil,
@@ -83031,6 +83053,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/temporary-insanity": _poolTemporaryInsanity,
   "pool/temporary-lockdown": _poolTemporaryLockdown,
   "pool/temporary-truce": _poolTemporaryTruce,
+  "pool/tempt-with-discovery": _poolTemptWithDiscovery,
   "pool/tempt-with-glory": _poolTemptWithGlory,
   "pool/tempt-with-immortality": _poolTemptWithImmortality,
   "pool/tempt-with-mayhem": _poolTemptWithMayhem,
@@ -83354,6 +83377,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/the-mending-of-dominaria": _poolTheMendingOfDominaria,
   "pool/the-mightstone-and-weakstone": _poolTheMightstoneAndWeakstone,
   "pool/the-mighty-thor-jane-foster": _poolTheMightyThorJaneFoster,
+  "pool/the-mind-stone": _poolTheMindStone,
   "pool/the-mindskinner": _poolTheMindskinner,
   "pool/the-mirari-conjecture": _poolTheMirariConjecture,
   "pool/the-misty-mountains-cold": _poolTheMistyMountainsCold,
@@ -83402,6 +83426,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/the-shattered-states-era": _poolTheShatteredStatesEra,
   "pool/the-shire": _poolTheShire,
   "pool/the-sibsig-ceremony": _poolTheSibsigCeremony,
+  "pool/the-soul-stone": _poolTheSoulStone,
   "pool/the-spear-of-bashenga": _poolTheSpearOfBashenga,
   "pool/the-spear-of-leonidas": _poolTheSpearOfLeonidas,
   "pool/the-speed-demon": _poolTheSpeedDemon,
@@ -83677,6 +83702,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/throes-of-chaos": _poolThroesOfChaos,
   "pool/throne-of-bone": _poolThroneOfBone,
   "pool/throne-of-death": _poolThroneOfDeath,
+  "pool/throne-of-eldraine": _poolThroneOfEldraine,
   "pool/throne-of-empires": _poolThroneOfEmpires,
   "pool/throne-of-geth": _poolThroneOfGeth,
   "pool/throne-of-makindi": _poolThroneOfMakindi,
@@ -85278,6 +85304,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/veteran-cathar": _poolVeteranCathar,
   "pool/veteran-cavalier": _poolVeteranCavalier,
   "pool/veteran-dungeoneer": _poolVeteranDungeoneer,
+  "pool/veteran-explorer": _poolVeteranExplorer,
   "pool/veteran-guardmouse": _poolVeteranGuardmouse,
   "pool/veteran-ice-climber": _poolVeteranIceClimber,
   "pool/veteran-motorist": _poolVeteranMotorist,

@@ -105,6 +105,7 @@ import _poolBuyYourSilence from "../pool/buy-your-silence.js";
 import _poolCacheRaiders from "../pool/cache-raiders.js";
 import _poolCacklingFiend from "../pool/cackling-fiend.js";
 import _poolCadricSoulKindler from "../pool/cadric-soul-kindler.js";
+import _poolCagedSun from "../pool/caged-sun.js";
 import _poolCallOfTheDeathDweller from "../pool/call-of-the-death-dweller.js";
 import _poolCallToArms from "../pool/call-to-arms.js";
 import _poolCallToServe from "../pool/call-to-serve.js";
@@ -977,6 +978,7 @@ const shard: CardShard = {
     _poolCacheRaiders,
     _poolCacklingFiend,
     _poolCadricSoulKindler,
+    _poolCagedSun,
     _poolCallOfTheDeathDweller,
     _poolCallToArms,
     _poolCallToServe,

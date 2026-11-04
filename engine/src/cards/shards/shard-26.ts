@@ -783,6 +783,7 @@ import _poolTheGreatHenge from "../pool/the-great-henge.js";
 import _poolTheMagicMirror from "../pool/the-magic-mirror.js";
 import _poolTheRavenMan from "../pool/the-raven-man.js";
 import _poolTheSeedcore from "../pool/the-seedcore.js";
+import _poolTheSoulStone from "../pool/the-soul-stone.js";
 import _poolTheWorldSpell from "../pool/the-world-spell.js";
 import _poolTheodenKingOfRohan from "../pool/theoden-king-of-rohan.js";
 import _poolTheoreticalNecromancer from "../pool/theoretical-necromancer.js";
@@ -1701,6 +1702,7 @@ const shard: CardShard = {
     _poolTheMagicMirror,
     _poolTheRavenMan,
     _poolTheSeedcore,
+    _poolTheSoulStone,
     _poolTheWorldSpell,
     _poolTheodenKingOfRohan,
     _poolTheoreticalNecromancer,

@@ -798,6 +798,7 @@ import _poolThornplateIntimidator from "../pool/thornplate-intimidator.js";
 import _poolThornspireVerge from "../pool/thornspire-verge.js";
 import _poolThrasiosTritonHero from "../pool/thrasios-triton-hero.js";
 import _poolThreeTreeMascot from "../pool/three-tree-mascot.js";
+import _poolThroneOfEldraine from "../pool/throne-of-eldraine.js";
 import _poolThunderDragon from "../pool/thunder-dragon.js";
 import _poolThunderheadSquadron from "../pool/thunderhead-squadron.js";
 import _poolThunderscapeApprentice from "../pool/thunderscape-apprentice.js";
@@ -1709,6 +1710,7 @@ const shard: CardShard = {
     _poolThornspireVerge,
     _poolThrasiosTritonHero,
     _poolThreeTreeMascot,
+    _poolThroneOfEldraine,
     _poolThunderDragon,
     _poolThunderheadSquadron,
     _poolThunderscapeApprentice,
