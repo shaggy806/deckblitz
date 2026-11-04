@@ -8,9 +8,10 @@
  * is in `attacking.ts` and `blocking.ts`; `Game` pays.
  */
 
-import type { BlockTaxRates, BlockerTax, CombatCost } from "../actions.js";
-import type { CardRegistry, CombatTax, StaticAbility } from "../cards.js";
+import type { AttackCost, AttackPermanentCost, BlockTaxRates, BlockerTax, CombatCost } from "../actions.js";
+import type { CardRegistry, CombatPermanentTax, CombatTax, StaticAbility } from "../cards.js";
 import {
+  cantBeSacrificed,
   computeCharacteristics,
   countValue,
   hasLostAbilities,
@@ -88,14 +89,14 @@ export function creatureAttackTaxes(
   state: GameState,
   registry: CardRegistry,
   defendersFor: Readonly<Record<ObjectId, readonly (PlayerId | ObjectId)[]>>,
-): Record<ObjectId, Record<string, CombatCost>> {
-  const out: Record<ObjectId, Record<string, CombatCost>> = {};
+): Record<ObjectId, Record<string, AttackCost>> {
+  const out: Record<ObjectId, Record<string, AttackCost>> = {};
   const sources = taxSources(state, registry, "attack");
   if (sources.length === 0) return out;
   for (const attacker of Object.keys(defendersFor) as ObjectId[]) {
     for (const defender of defendersFor[attacker]) {
       const cost = creatureAttackTaxFrom(state, registry, sources, attacker, defender);
-      if (cost.generic > 0 || cost.life > 0) (out[attacker] ??= {})[defender] = cost;
+      if (cost.generic > 0 || cost.life > 0 || cost.permanents !== undefined) (out[attacker] ??= {})[defender] = cost;
     }
   }
   return out;
@@ -107,7 +108,7 @@ export function creatureAttackTax(
   registry: CardRegistry,
   attacker: ObjectId,
   defender: PlayerId | ObjectId,
-): CombatCost {
+): AttackCost {
   return creatureAttackTaxFrom(state, registry, taxSources(state, registry, "attack"), attacker, defender);
 }
 
@@ -117,20 +118,77 @@ function creatureAttackTaxFrom(
   sources: readonly TaxSource[],
   attacker: ObjectId,
   defender: PlayerId | ObjectId,
-): CombatCost {
+): AttackCost {
   const object = state.objects[attacker];
   let generic = 0;
   let life = 0;
   if (object === undefined) return { generic, life };
-  for (const entry of sources) {
-    const { source, ability, tax } = entry;
-    if (tax.covers !== undefined && !attackCovers(state, registry, tax.covers, source.controller, defender)) continue;
-    if (!staticReaches(state, registry, source, ability, object)) continue;
+  const permanents: AttackPermanentCost[] = [];
+  for (const entry of reachingTaxes(state, registry, sources, object, defender)) {
     const cost = costOf(state, registry, entry, object);
     generic += cost.generic;
     life += cost.life;
+    const owed = entry.tax.permanents;
+    if (owed !== undefined) {
+      permanents.push({
+        do: owed.do,
+        count: owed.count ?? 1,
+        noun: owed.noun,
+        among: attackCostAmong(state, registry, object.controller, owed, entry.source.id),
+      });
+    }
   }
-  return { generic, life };
+  return { generic, life, ...(permanents.length > 0 ? { permanents } : {}) };
+}
+
+/** The taxes among `sources` that reach `attacker` attacking `defender`. */
+function reachingTaxes(
+  state: GameState,
+  registry: CardRegistry,
+  sources: readonly TaxSource[],
+  attacker: GameObject,
+  defender: PlayerId | ObjectId,
+): TaxSource[] {
+  return sources.filter(
+    ({ source, ability, tax }) =>
+      (tax.covers === undefined || attackCovers(state, registry, tax.covers, source.controller, defender)) &&
+      staticReaches(state, registry, source, ability, attacker),
+  );
+}
+
+/** What `player` could pay `tax` with now: their own permanents matching its
+ * filter, each one that can be sacrificed if that's the cost (rule 701.21a). */
+export function attackCostAmong(
+  state: GameState,
+  registry: CardRegistry,
+  player: PlayerId,
+  tax: CombatPermanentTax,
+  source: ObjectId,
+): ObjectId[] {
+  return state.zones.shared.battlefield.filter((id) => {
+    const object = state.objects[id];
+    return (
+      object !== undefined &&
+      object.controller === player &&
+      matchesFilter(state, registry, id, tax.filter, { you: player, source }) &&
+      (tax.do !== "sacrifice" || !cantBeSacrificed(state, registry, id))
+    );
+  });
+}
+
+/** One creature's costs to attack in permanents: `tax` to pay, and the
+ * permanent whose static asks it, naming it in the prompt. */
+export function creatureAttackPermanentTaxes(
+  state: GameState,
+  registry: CardRegistry,
+  attacker: ObjectId,
+  defender: PlayerId | ObjectId,
+): readonly { readonly tax: CombatPermanentTax; readonly source: ObjectId }[] {
+  const object = state.objects[attacker];
+  if (object === undefined) return [];
+  return reachingTaxes(state, registry, taxSources(state, registry, "attack"), object, defender).flatMap(
+    ({ source, tax }) => (tax.permanents === undefined ? [] : [{ tax: tax.permanents, source: source.id }]),
+  );
 }
 
 /**

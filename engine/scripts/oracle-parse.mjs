@@ -11047,6 +11047,27 @@ function parseFaceAsWritten(face, ctx = {}) {
       } else out.todo.push(printed(raw));
       continue;
     }
+    // "Whenever you activate an ability of an artifact or creature that isn't
+    // a mana ability, if one or more permanents were sacrificed to activate it,
+    // you may copy that ability" (Ashnod the Uncaring): what's sacrificed by
+    // the ability's own cost, part of when it triggers.
+    if (
+      printed(raw) ===
+      "Whenever you activate an ability of an artifact or creature that isn't a mana ability, if one or more permanents were sacrificed to activate it, you may copy that ability. You may choose new targets for the copy."
+    ) {
+      out.triggered.push({
+        trigger: { on: "activates-ability", who: "you", source: { typesAnyOf: ["artifact", "creature"] }, sacrificedToActivate: true },
+        targets: [],
+        effect: {
+          kind: "may",
+          prompt: "Copy that ability?",
+          effect: { kind: "copy-ability", target: "trigger-ability", newTargets: true },
+        },
+        resolve: null,
+        text: raw,
+      });
+      continue;
+    }
     // A Background's "Commander creatures you own have 'Whenever this creature
     // attacks a player, if …'": the quoted trigger read as a line of its own,
     // left to a person when anything else comes with it.
@@ -15880,6 +15901,38 @@ function parseStatic(line, text) {
       combatTax: { on: ["block"], generic: Number(m[2]), attacker: { power: { op: "gte", n: Number(m[1]) } } },
       text,
     };
+  }
+  // A cost to attack paid in permanents (rule 508.1h, `combatTax.permanents`):
+  // "~ can't attack unless you sacrifice a land" (Exalted Dragon), "… two
+  // Islands" (Leviathan), "… return an enchantment you control to its owner's
+  // hand" (Floodtide Serpent).
+  if ((m = /^~ can't attack unless you sacrifice (a|an|two|three) (land|artifact|creature|enchantment|Plains|Island|Swamp|Mountain|Forest)s?\.$/.exec(line))) {
+    const count = { two: 2, three: 3 }[m[1]];
+    const filter = /^[A-Z]/.test(m[2]) ? { subtype: m[2] } : { type: m[2] };
+    return {
+      affects: { scope: "self" },
+      combatTax: { on: ["attack"], permanents: { do: "sacrifice", filter, ...(count === undefined ? {} : { count }), noun: m[2] } },
+      text,
+    };
+  }
+  if (line === "~ can't attack unless you return an enchantment you control to its owner's hand.") {
+    return {
+      affects: { scope: "self" },
+      combatTax: { on: ["attack"], permanents: { do: "return", filter: { type: "enchantment" }, noun: "enchantment" } },
+      text,
+    };
+  }
+  // "Black creatures can't attack unless their controller sacrifices a land of
+  // their choice for each black creature they control that's attacking"
+  // (Reclamation, Flooded Woodlands).
+  if ((m = /^(White|Blue|Black|Red|Green) creatures can't attack unless their controller sacrifices a land of their choice for each (white|blue|black|red|green) creature they control that's attacking\.$/.exec(line))) {
+    if (m[1].toLowerCase() === m[2]) {
+      return {
+        affects: { scope: "filter", filter: { type: "creature", colors: [COLOR_WORD[m[2]]] } },
+        combatTax: { on: ["attack"], permanents: { do: "sacrifice", filter: { type: "land" }, noun: "land" } },
+        text,
+      };
+    }
   }
   // "Enchanted creature can't be blocked unless defending player pays {3} for
   // each creature they control that's blocking it" (Awesome Presence).

@@ -8859,6 +8859,46 @@ describe("a cost on a creature to attack or block", () => {
     });
   });
 
+  it("reads a cost in permanents, with its reminder text", () => {
+    const reminder = " (This cost is paid as attackers are declared.)";
+    expect(own(`This creature can't attack unless you sacrifice a land.${reminder}`)).toMatchObject({
+      affects: { scope: "self" },
+      combatTax: { on: ["attack"], permanents: { do: "sacrifice", filter: { type: "land" }, noun: "land" } },
+    });
+    expect(own(`This creature can't attack unless you sacrifice two Islands.${reminder}`)).toMatchObject({
+      combatTax: { on: ["attack"], permanents: { do: "sacrifice", filter: { subtype: "Island" }, count: 2, noun: "Island" } },
+    });
+    expect(own(`This creature can't attack unless you return an enchantment you control to its owner's hand.${reminder}`)).toMatchObject({
+      combatTax: { on: ["attack"], permanents: { do: "return", filter: { type: "enchantment" }, noun: "enchantment" } },
+    });
+    expect(
+      read(
+        "Enchantment",
+        `Green creatures can't attack unless their controller sacrifices a land of their choice for each green creature they control that's attacking.${reminder}`,
+      ),
+    ).toMatchObject({
+      affects: { scope: "filter", filter: { type: "creature", colors: ["G"] } },
+      combatTax: { on: ["attack"], permanents: { do: "sacrifice", filter: { type: "land" }, noun: "land" } },
+    });
+  });
+
+  it("reads Ashnod's trigger, narrowed to what was sacrificed to activate it", () => {
+    const card = parseFace(
+      {
+        name: "Test Ashnod",
+        type_line: "Creature — Human",
+        oracle_text:
+          "Whenever you activate an ability of an artifact or creature that isn't a mana ability, if one or more permanents were sacrificed to activate it, you may copy that ability. You may choose new targets for the copy. (Sacrificing an artifact for mana to activate an ability doesn't count.)",
+      },
+      { tokenFor: () => null },
+    );
+    expect(card.complete).toBe(true);
+    expect(card.triggered[0]).toMatchObject({
+      trigger: { on: "activates-ability", who: "you", source: { typesAnyOf: ["artifact", "creature"] }, sacrificedToActivate: true },
+      effect: { kind: "may", effect: { kind: "copy-ability", target: "trigger-ability", newTargets: true } },
+    });
+  });
+
   it("reads Nils's, per counter on the attacker", () => {
     expect(
       read(

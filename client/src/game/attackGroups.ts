@@ -12,7 +12,7 @@
  * the engine's `attackingViolations` still decides the must-attacks.
  */
 
-import type { ObjectId, PlayerId } from 'engine/client'
+import type { AttackCost, ObjectId, PlayerId } from 'engine/client'
 
 export type Defender = PlayerId | ObjectId
 /** Attacker id → the defender it attacks. */
@@ -24,24 +24,53 @@ export interface AttackTaxRates {
   readonly budget: number
   readonly lifePerCreature?: Readonly<Record<string, number>>
   readonly lifeBudget?: number
+  readonly perAttacker?: Readonly<Record<string, Readonly<Record<string, AttackCost>>>>
 }
 
 /** What the attack as assigned so far costs (rule 508.1h): each creature sent
  * at a taxed defender, a player or a planeswalker (Baird), at that defender's
- * rate, in mana and in life (Sivitri). `overBudget`: more than the attacker
- * can surely pay. Past the mana budget the engine checks exactly, so this
- * warns rather than blocks. */
+ * rate, in mana and in life (Sivitri), and what the creature costs on its own
+ * (Brainwash), which can be in permanents (Exalted Dragon's "sacrifice a land":
+ * `permanents`, one phrase a kind). `overBudget`: more than the attacker can
+ * surely pay. Past the mana budget the engine checks exactly, so this warns
+ * rather than blocks. */
 export function attackTaxCost(
   assign: AttackAssign,
   tax: AttackTaxRates | undefined,
-): { readonly mana: number; readonly life: number; readonly overBudget: boolean } {
+): {
+  readonly mana: number
+  readonly life: number
+  readonly permanents: readonly string[]
+  readonly overBudget: boolean
+} {
   let mana = 0
   let life = 0
-  for (const defender of Object.values(assign)) {
-    mana += tax?.perCreature[defender] ?? 0
-    life += tax?.lifePerCreature?.[defender] ?? 0
+  const owed = new Map<string, { verb: string; noun: string; count: number; among: number }>()
+  for (const [attacker, defender] of Object.entries(assign)) {
+    const own = tax?.perAttacker?.[attacker]?.[defender]
+    mana += (tax?.perCreature[defender] ?? 0) + (own?.generic ?? 0)
+    life += (tax?.lifePerCreature?.[defender] ?? 0) + (own?.life ?? 0)
+    for (const cost of own?.permanents ?? []) {
+      const key = `${cost.do} ${cost.noun}`
+      const before = owed.get(key)
+      owed.set(key, {
+        verb: cost.do,
+        noun: cost.noun,
+        count: (before?.count ?? 0) + cost.count,
+        among: cost.among.length,
+      })
+    }
   }
-  return { mana, life, overBudget: mana > (tax?.budget ?? 0) || life > (tax?.lifeBudget ?? 0) }
+  const short = [...owed.values()].some((p) => p.count > p.among)
+  return {
+    mana,
+    life,
+    permanents: [...owed.values()].map((p) => {
+      const one = `${/^[aeiou]/i.test(p.noun) ? 'an' : 'a'} ${p.noun}`
+      return `${p.verb} ${p.count === 1 ? one : `${p.count} ${p.noun}s`}`
+    }),
+    overBudget: short || mana > (tax?.budget ?? 0) || life > (tax?.lifeBudget ?? 0),
+  }
 }
 
 /** A planeswalker or battle is a defender in its own right (rule 508.1b), so

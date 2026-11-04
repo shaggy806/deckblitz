@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
 import { attackTaxCost, isOwnDefender } from './attackGroups.ts'
+import type { ObjectId } from 'engine/client'
 import type { AttackAssign } from './attackGroups.ts'
 
 const assign = (entries: Record<string, string>): AttackAssign => entries as unknown as AttackAssign
@@ -17,7 +18,7 @@ describe('isOwnDefender', () => {
 
 describe('attackTaxCost', () => {
   it('is nothing without a tax', () => {
-    expect(attackTaxCost(assign({ a: 'bob' }), undefined)).toEqual({ mana: 0, life: 0, overBudget: false })
+    expect(attackTaxCost(assign({ a: 'bob' }), undefined)).toEqual({ mana: 0, life: 0, permanents: [], overBudget: false })
   })
 
   it('reads a planeswalker defender at its own rate', () => {
@@ -25,13 +26,37 @@ describe('attackTaxCost', () => {
     expect(attackTaxCost(assign({ a: 'bob', b: 'walker', c: 'carol' }), tax)).toEqual({
       mana: 4,
       life: 0,
+      permanents: [],
       overBudget: false,
     })
   })
 
+  it('adds what a creature costs on its own, permanents included', () => {
+    const among = ['x', 'y'] as unknown as readonly ObjectId[]
+    const land = { do: 'sacrifice', count: 1, noun: 'land', among } as const
+    const tax = {
+      perCreature: {},
+      budget: 1,
+      perAttacker: {
+        a: { bob: { generic: 1, life: 0 } },
+        b: { bob: { generic: 0, life: 0, permanents: [land] } },
+        c: { bob: { generic: 0, life: 0, permanents: [land] } },
+        d: { bob: { generic: 0, life: 0, permanents: [land] } },
+      },
+    }
+    expect(attackTaxCost(assign({ a: 'bob', b: 'bob', c: 'bob' }), tax)).toEqual({
+      mana: 1,
+      life: 0,
+      permanents: ['sacrifice 2 lands'],
+      overBudget: false,
+    })
+    // One more than there are lands to pay with.
+    expect(attackTaxCost(assign({ b: 'bob', c: 'bob', d: 'bob' }), tax).overBudget).toBe(true)
+  })
+
   it('adds a tax in life beside the mana', () => {
     const tax = { perCreature: { bob: 2 }, budget: 2, lifePerCreature: { bob: 2, walker: 2 }, lifeBudget: 20 }
-    expect(attackTaxCost(assign({ a: 'bob', b: 'walker' }), tax)).toEqual({ mana: 2, life: 4, overBudget: false })
+    expect(attackTaxCost(assign({ a: 'bob', b: 'walker' }), tax)).toEqual({ mana: 2, life: 4, permanents: [], overBudget: false })
   })
 
   it('warns past either budget', () => {

@@ -15,7 +15,7 @@
  * client's Confirm button run the same check and can't disagree.
  */
 
-import type { AttackerDeclaration, LegalAction } from "../actions.js";
+import type { AttackPermanentCost, AttackerDeclaration, LegalAction } from "../actions.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
 import { fitsCompany, tokensFitting } from "./company.js";
 import type { CompanyUnit } from "./company.js";
@@ -354,9 +354,36 @@ function lifeTaxOn(offer: AttackOffer, attacker: ObjectId, defender: string): nu
   return (tax?.lifePerCreature?.[defender] ?? 0) + (tax?.perAttacker?.[attacker]?.[defender]?.life ?? 0);
 }
 
+/** What `attacker` attacking `defender` costs in permanents under `offer`. */
+function permanentsTaxOn(offer: AttackOffer, attacker: ObjectId, defender: string): readonly AttackPermanentCost[] {
+  return offer.attackTax?.perAttacker?.[attacker]?.[defender]?.permanents ?? [];
+}
+
 /** Whether `attacker` attacking `defender` costs nothing at all under `offer`. */
 function attackIsFree(offer: AttackOffer, attacker: ObjectId, defender: string): boolean {
-  return taxOn(offer, attacker, defender) === 0 && lifeTaxOn(offer, attacker, defender) === 0;
+  return (
+    taxOn(offer, attacker, defender) === 0 &&
+    lifeTaxOn(offer, attacker, defender) === 0 &&
+    permanentsTaxOn(offer, attacker, defender).length === 0
+  );
+}
+
+/** How many of a kind a driver that doesn't weigh the cost keeps: it won't
+ * sacrifice its lands down past these to send a creature. */
+const SACRIFICE_KEEPS = 3;
+
+/** Whether `costs` can surely all be paid, one permanent never paying two
+ * (the fewest options first, which is exact when one's options contain
+ * another's and errs towards "no" otherwise), a sacrifice leaving
+ * {@link SACRIFICE_KEEPS} of what it may take. A return loses nothing for good. */
+function permanentCostsFit(costs: readonly AttackPermanentCost[]): boolean {
+  const used = new Set<ObjectId>();
+  for (const cost of [...costs].sort((a, b) => a.among.length - b.among.length)) {
+    const left = cost.among.filter((id) => !used.has(id));
+    if (left.length - (cost.do === "sacrifice" ? SACRIFICE_KEEPS : 0) < cost.count) return false;
+    for (const id of left.slice(0, cost.count)) used.add(id);
+  }
+  return true;
 }
 
 /**
@@ -393,6 +420,24 @@ export function withinAttackTax(
       if (!helps || (offer.mustAttack.includes(d.attacker) || bound.includes(d.attacker)) !== required) continue;
       total -= costOf(d);
       life -= lifeOf(d);
+      const free = required
+        ? (offer.defendersFor[d.attacker] ?? []).find((x) => attackIsFree(offer, d.attacker, x))
+        : undefined;
+      if (free !== undefined) out[i] = { ...d, defender: free };
+      else out.splice(i, 1);
+    }
+  }
+  // What's paid in permanents (Exalted Dragon), the same way round: only a
+  // creature that costs some comes out.
+  const permanentsOf = (list: readonly AttackerDeclaration[]): AttackPermanentCost[] =>
+    list.flatMap((d) =>
+      permanentsTaxOn(offer, d.attacker, d.defender).map((cost) => ({ ...cost, count: cost.count * tokensOf(d) })),
+    );
+  for (const required of [false, true]) {
+    for (let i = out.length - 1; i >= 0 && !permanentCostsFit(permanentsOf(out)); i -= 1) {
+      const d = out[i];
+      if (permanentsTaxOn(offer, d.attacker, d.defender).length === 0) continue;
+      if ((offer.mustAttack.includes(d.attacker) || bound.includes(d.attacker)) !== required) continue;
       const free = required
         ? (offer.defendersFor[d.attacker] ?? []).find((x) => attackIsFree(offer, d.attacker, x))
         : undefined;

@@ -3024,9 +3024,8 @@ the `player-effect` effect's `blockTax` (War Cadence). The `declare-attackers`
 offer's `attackTax.perAttacker` and the `declare-blockers` offer's `blockTax`
 carry the rates; a requirement never obliges paying. Proving cards: Brainwash,
 Phyrexian Marauder, Nils, Cowed by Wisdom, Qal Sisma Behemoth, Hipparion, Awesome
-Presence, War Cadence, Archangel of Tithes. Still open: a cost that isn't mana or
-life (Hollow Warrior's tap, a `declare-attackers` choice), and the client's running
-cost line doesn't add `perAttacker` or show a block's yet (the engine refuses what
+Presence, War Cadence, Archangel of Tithes. Still open: Hollow Warrior's tap, and
+the client's running cost line doesn't show a block's yet (the engine refuses what
 can't be paid).
 
 ### A can't-attack restriction scoped to the defender — built 2026-11-01
@@ -4788,3 +4787,6 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 **Libraries that can't be searched, and a floor under a life total as a static (2026-11-03).** `StaticAbility.cantSearchLibraries` and `player-effect`'s, read by `playerCantSearchLibrary` in `beginLibrarySearch`, the one way into a search; the `ignore-static-effect` special action (rule 116.2d) with a menu item in the client; `GameState.resolvingController`, for who caused a search. `StaticAbility.damageLifeFloor`, read with the effect's by `playerDamageLifeFloor`. Mindlock Orb, Stranglehold, Ashiok, Dream Render, Shadow of Doubt, Leonin Arbiter; Ali from Cairo, Worship, Elderscale Wurm.
 
 **"This effect doesn't remove" with colours and for every Aura (2026-11-03).** `protection`'s `doesntRemoveSource` read colours already; `doesntRemoveAuras` (rule 702.16n's "all Auras", a `sparing` instance of `aura: "all"`) and `colorsAmong` (layer 5's colours of a filter's permanents, read by protection in layer 6) are new. White Ward, Spectra Ward, Pledge of Loyalty, Cho-Manno's Blessing.
+**A cost to attack paid in permanents (2026-11-03).** `combatTax.permanents` (`CombatPermanentTax`, rule 508.1h): sacrifice or return `count` of what matches `filter`, a creature at a time, added up per kind. The `declare-attackers` offer carries each in `attackTax.perAttacker[…].permanents`, `withinAttackTax` keeps a driver from sacrificing its last three, `GameState.pendingAttackCost` holds the choices (the existing `sacrifice` and `choose-permanents` decisions), and all of it is paid after the mana (508.1j). Keys: `cost:attack-cost-sacrifice`, `cost:attack-cost-return-permanent`. Proving cards: Exalted Dragon, Leviathan, Reclamation, Floodtide Serpent.
+
+**A sacrifice attributed to its ability (2026-11-03).** The `activates-ability` trigger's `sacrificedToActivate`, read off the `ability-activated` event: the ability's own cost, so never a Treasure sacrificed for the mana. `sacrifice: "granter"` from a token's grant needed nothing new. Keys: `condition:trigger-ability-sacrificed-to-activate`, `cost:sacrifice-granting-source`. Proving cards: Ashnod the Uncaring, Toggo, Goblin Weaponsmith (the Rock token).

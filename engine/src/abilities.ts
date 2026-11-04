@@ -2340,13 +2340,17 @@ export type TriggerSpec =
        * any zone — cycling's too (rule 702.29a), whose draw goes on the stack
        * sourced from the cycled card. Never a mana ability: one activated to
        * pay a cost isn't announced, so a trigger that counts them (Elrond,
-       * Moon-Reader) can't be written.
+       * Moon-Reader) can't be written. `sacrificedToActivate`: "if one or more
+       * permanents were sacrificed to activate it" (Ashnod the Uncaring): by
+       * the ability's own cost, whenever in paying it they're chosen, and
+       * never by a mana ability that helped pay it (the ruling).
        */
       readonly on: "activates-ability";
       readonly who: "attached" | "you" | "opponent";
       readonly ninjutsu?: true;
       readonly loyalty?: true;
       readonly source?: CardFilter;
+      readonly sacrificedToActivate?: true;
     }
   | {
       /** *This* spell (the one carrying the ability) was cast — a triggered

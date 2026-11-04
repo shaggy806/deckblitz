@@ -60,7 +60,13 @@ import {
 } from "./combat/damage.js";
 import { bandMatesOf, blockedAttackersOf } from "./combat/banding.js";
 import { blockTaxTotal } from "./combat/blocking.js";
-import { attackCovers, blockTaxRates, creatureAttackTax } from "./combat/tax.js";
+import {
+  attackCostAmong,
+  attackCovers,
+  blockTaxRates,
+  creatureAttackPermanentTaxes,
+  creatureAttackTax,
+} from "./combat/tax.js";
 import { ableInCompany, attackCompanyOf } from "./combat/company.js";
 import { attackCaps, blockersLeft } from "./combat/limits.js";
 import {
@@ -408,6 +414,7 @@ import type {
   RevealedHandChoice,
   CasualtyAsk,
   ConspireAsk,
+  AttackCostPart,
   DeclaredAttacker,
   EnterAttachHost,
   FaceDownAs,
@@ -2128,6 +2135,11 @@ export class Game {
       attackTaxBudget: (player, attackers) => this.attackTaxBudget(player, attackers),
       attackTaxLifeBudget: (player) => (this.canPayLife(player, 1) ? this.state.players[player].life : 0),
       whyCannotPayAttackTax: (player, declarations) => {
+        const owed = this.attackCostParts(declarations);
+        if (!this.attackCostPartsPayable(player, owed)) {
+          const { tax, count } = owed[0];
+          return `${player} can't ${tax.do} the ${count === 1 ? tax.noun : `${count} ${tax.noun}s`} it costs to attack`;
+        }
         const { generic, life } = this.attackTaxTotal(declarations);
         if (generic === 0 && life === 0) return null;
         const payment = generic === 0 ? null : this.attackTaxPayment(player, declarations, generic);
@@ -7716,6 +7728,38 @@ export class Game {
     return total;
   }
 
+  /** What `declarations` cost to attack in permanents (rule 508.1h —
+   * `CombatPermanentTax`), a token stack's per token: taxes asking for the same
+   * kind of permanent the same way added up, so Reclamation's "a land for each"
+   * is one question, however many creatures attack. */
+  private attackCostParts(declarations: readonly AttackerDeclaration[]): AttackCostPart[] {
+    const parts: AttackCostPart[] = [];
+    for (const { attacker, defender, count } of declarations) {
+      const creatures = count ?? this.state.objects[attacker]?.stackCount ?? 1;
+      for (const { tax, source } of creatureAttackPermanentTaxes(this.state, this.registry, attacker, defender)) {
+        const owed = (tax.count ?? 1) * creatures;
+        const key = JSON.stringify([tax.do, tax.filter]);
+        const same = parts.findIndex((p) => JSON.stringify([p.tax.do, p.tax.filter]) === key);
+        if (same >= 0) parts[same] = { ...parts[same], count: parts[same].count + owed };
+        else parts.push({ tax, count: owed, source });
+      }
+    }
+    return parts;
+  }
+
+  /** Whether `player` has the permanents for every one of `parts` at once, one
+   * permanent never paying two. */
+  private attackCostPartsPayable(player: PlayerId, parts: readonly AttackCostPart[]): boolean {
+    if (parts.length === 0) return true;
+    const eligible = parts.map((p) => ({
+      eligible: attackCostAmong(this.state, this.registry, player, p.tax, p.source),
+      count: p.count,
+    }));
+    const capacity = new Map<ObjectId, number>();
+    for (const part of eligible) for (const id of part.eligible) capacity.set(id, this.state.objects[id].stackCount ?? 1);
+    return sacrificePartsFillable(eligible, capacity);
+  }
+
   /** How `player` would pay `total` to attack with `declarations` — with
    * every declared attacker that taps (no vigilance) out of the mana sources,
    * since it's tapped before the cost is paid (rule 508.1f) — or `null`. */
@@ -11162,6 +11206,7 @@ export class Game {
     // taps (rule 508.1h) and paid once the attackers have tapped (508.1f,
     // 508.1j) — so an attacker can't tap for its own tax.
     const tax = this.attackTaxTotal(declarations);
+    const owedPermanents = this.attackCostParts(declarations);
 
     // The whole declaration is made before any of it is announced: it is one
     // action (rule 508.1), and abilities that trigger on it trigger once it's
@@ -11259,11 +11304,149 @@ export class Game {
       this.executePayment(player, payment);
     }
     if (tax.life > 0) this.changeLife(player, -tax.life);
-    // Enlist (rule 702.154b): an optional cost to attack, chosen and paid
-    // (508.1g-j) before any attacker becomes attacking (508.1k) — so the
-    // declaration is announced, and its attack triggers trigger, only once
-    // every enlist has been asked. Aradesh's "if it enlisted a creature
-    // this combat" sees it as its attack trigger triggers.
+    // What's paid in permanents (Exalted Dragon), after the mana so a land can
+    // tap for that first (508.1i) and be sacrificed for this.
+    if (owedPermanents.length > 0) {
+      this.state.pendingAttackCost = { player, parts: owedPermanents, sacrificed: [], returned: [], declared: declaredNow };
+      this.state.awaiting = null;
+      this.continueAttackCosts();
+      return;
+    }
+    this.askEnlistsThenAnnounce(player, declaredNow);
+  }
+
+  /**
+   * The next part of `GameState.pendingAttackCost`: what may pay it is what the
+   * player controls that matches, isn't chosen for another, and leaves the
+   * parts after it payable. Asked if that's more than the part takes, and once
+   * nothing is left to choose, all of it is paid (`payAttackCosts`).
+   */
+  private continueAttackCosts(): void {
+    for (;;) {
+      const pending = this.state.pendingAttackCost;
+      if (pending === undefined) return;
+      if (pending.parts.length === 0) {
+        this.payAttackCosts();
+        return;
+      }
+      const [part, ...rest] = pending.parts;
+      const picked = new Set([...pending.sacrificed, ...pending.returned]);
+      const amongFor = (p: AttackCostPart): ObjectId[] =>
+        attackCostAmong(this.state, this.registry, pending.player, p.tax, p.source).filter((id) => !picked.has(id));
+      const capacity = new Map<ObjectId, number>();
+      for (const p of pending.parts) {
+        for (const id of amongFor(p)) capacity.set(id, this.state.objects[id].stackCount ?? 1);
+      }
+      const restParts = rest.map((p) => ({ eligible: amongFor(p), count: p.count }));
+      const eligible = amongFor(part).filter((id) => {
+        if (rest.length === 0) return true;
+        const left = new Map(capacity);
+        left.set(id, (left.get(id) ?? 1) - 1);
+        return sacrificePartsFillable(restParts, left);
+      });
+      const total = eligible.reduce((n, id) => n + (capacity.get(id) ?? 1), 0);
+      if (total <= part.count) {
+        // No choice: every one of them, a stack's every token.
+        const taken = eligible.flatMap((id) =>
+          Array.from({ length: capacity.get(id) ?? 1 }, () => this.splitOneFromStack(id)),
+        );
+        this.attackCostPicked(pending.player, taken, part);
+        continue;
+      }
+      const object = this.state.objects[part.source];
+      this.state.decisionSource =
+        object === undefined ? null : { object: part.source, cardName: printedCardName(object) };
+      if (part.tax.do === "sacrifice") {
+        this.state.awaiting = { kind: "sacrifice", player: pending.player, count: part.count, eligible };
+      } else {
+        const article = /^[aeiou]/i.test(part.tax.noun) ? "an" : "a";
+        const what = part.count === 1 ? `${article} ${part.tax.noun}` : `${part.count} ${part.tax.noun}s`;
+        this.state.awaiting = {
+          kind: "choose-permanents",
+          player: pending.player,
+          eligible,
+          min: part.count,
+          max: part.count,
+          prompt: `To attack, return ${what} to ${part.count === 1 ? "its owner's hand" : "their owners' hands"}`,
+          then: { kind: "sequence", effects: [] },
+          source: part.source,
+          x: 0,
+          attackCost: true,
+        };
+      }
+      return;
+    }
+  }
+
+  /** `chosen` pays the first of `pendingAttackCost`'s parts, `part`. */
+  private attackCostPicked(player: PlayerId, chosen: readonly ObjectId[], part: AttackCostPart): void {
+    const pending = this.state.pendingAttackCost;
+    if (pending === undefined) return;
+    this.state.pendingAttackCost = {
+      ...pending,
+      player,
+      parts: pending.parts.slice(1),
+      ...(part.tax.do === "sacrifice"
+        ? { sacrificed: [...pending.sacrificed, ...chosen] }
+        : { returned: [...pending.returned, ...chosen] }),
+    };
+  }
+
+  /** An answer to `pendingAttackCost`'s question: each pick singles one out,
+   * and the next part is asked. */
+  private applyAttackCostChoice(player: PlayerId, chosen: readonly ObjectId[]): void {
+    const part = this.state.pendingAttackCost?.parts[0];
+    this.state.awaiting = null;
+    this.state.decisionSource = null;
+    if (part !== undefined) this.attackCostPicked(player, chosen.map((id) => this.splitOneFromStack(id)), part);
+    this.continueAttackCosts();
+  }
+
+  /**
+   * Everything a declaration owes in permanents is chosen, so it's paid
+   * (rule 508.1j): what's sacrificed as one event, each one's dies trigger seeing
+   * the others go (603.10a), and what's returned. A creature that paid for an
+   * attack with itself is no longer among those that become attacking
+   * (508.1k).
+   */
+  private payAttackCosts(): void {
+    const pending = this.state.pendingAttackCost;
+    if (pending === undefined) return;
+    delete this.state.pendingAttackCost;
+    this.state.decisionSource = null;
+    const { player, sacrificed, returned, declared } = pending;
+    this.withLeaveBatch(() => {
+      this.snapshotLeaving(sacrificed);
+      for (const id of sacrificed) {
+        this.moveObject(id, "graveyard");
+        this.emit({ type: "permanent-sacrificed", object: id, player });
+      }
+    });
+    for (const id of returned) this.returnToHandByEffect({ kind: "object", object: id });
+    const still = declared.filter((d) => this.state.objects[d.id]?.zone === "battlefield");
+    if (still.length < declared.length) {
+      const history = this.state.players[player].turnHistory;
+      if (history?.attackedPower !== undefined) {
+        invalidateComputedCache();
+        history.attackedPower = {
+          ...history.attackedPower,
+          power: still.reduce(
+            (total, { id }) =>
+              total + computeCharacteristics(this.state, this.registry, id).power * (this.state.objects[id].stackCount ?? 1),
+            0,
+          ),
+        };
+      }
+    }
+    this.askEnlistsThenAnnounce(player, still);
+  }
+
+  /** Enlist (rule 702.154b): an optional cost to attack, chosen and paid
+   * (508.1g-j) before any attacker becomes attacking (508.1k) — so the
+   * declaration is announced, and its attack triggers trigger, only once
+   * every enlist has been asked. Aradesh's "if it enlisted a creature
+   * this combat" sees it as its attack trigger triggers. */
+  private askEnlistsThenAnnounce(player: PlayerId, declaredNow: readonly DeclaredAttacker[]): void {
     const enlisting = declaredNow.map((d) => d.id).filter((id) => this.hasEnlist(id));
     if (enlisting.length > 0) {
       this.state.pendingEnlist = { player, queue: enlisting, declared: declaredNow };
@@ -22016,6 +22199,12 @@ export class Game {
       onStack: true,
       ability: abilityId,
       ...(ability.zone === undefined ? { ofPermanent: true as const } : {}),
+      // What the cost sacrifices (rule 701.21a): the one already gone, or the
+      // several chosen just below, which is the same payment (602.2b).
+      ...(ability.cost.exilesSacrifice !== true &&
+      (sacrificeVictim !== null || sacrificeParts?.some((part) => part.count > 0) === true)
+        ? { sacrificedToActivate: true as const }
+        : {}),
     });
     this.announceTargeted(chosen, player, sourceId, false, abilityId);
     this.commitCrimeIfAny(chosen, player, abilityId);
@@ -28549,6 +28738,7 @@ export class Game {
         // an Equipment that was, equips nothing by then (the Illusionist's
         // Bracers rulings), unlike a dies trigger's look back.
         if (event.type !== "ability-activated" || !event.onStack || event.ability === undefined) return false;
+        if (spec.sacrificedToActivate === true && event.sacrificedToActivate !== true) return false;
         if (spec.who !== "attached") {
           if (self.zone !== "battlefield") return false;
           if ((spec.who === "you") !== (event.player === self.controller)) return false;
@@ -42350,6 +42540,10 @@ export class Game {
       this.applyEnlist(player, chosen, awaiting.source);
       return;
     }
+    if (awaiting.attackCost === true) {
+      this.applyAttackCostChoice(player, chosen);
+      return;
+    }
     // The untap step's "you may choose not to untap" (rule 502.3): what's
     // picked stays tapped, and the step carries on with no priority (502.4).
     if (awaiting.untapStep !== undefined) {
@@ -43510,6 +43704,10 @@ export class Game {
     const asked = this.state.awaiting;
     const exploitedBy = asked?.kind === "sacrifice" ? asked.exploitedBy : undefined;
     this.state.awaiting = null;
+    if (this.state.pendingAttackCost !== undefined) {
+      this.applyAttackCostChoice(player, permanents);
+      return;
+    }
     const cost = this.state.pendingCostSacrifice;
     if (cost !== undefined) {
       // A part of a sacrifice cost: each pick singles out one permanent — a

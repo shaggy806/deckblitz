@@ -4536,8 +4536,15 @@ attackers matching a filter, "you" being this permanent's controller (Hipparion)
 turns it on and off (Archangel of Tithes). No requirement obliges paying (508.1d, 509.1c: the
 offers' `mustAttack` and `lurePlan` leave a taxed creature out); bots and the fuzzer cut to the
 budget (`withinAttackTax`, `withinBlockTax`). For a turn: the `player-effect` effect's `blockTax`
-(War Cadence), every block by anyone. A cost that isn't mana or life (Hollow Warrior's tapping
-another creature) needs a choice the declaration doesn't carry, so isn't here.
+(War Cadence), every block by anyone. `permanents: { do, filter, count, noun }`, on an attack, is
+a cost in the attacker's controller's own permanents, for each creature reached: `do: "sacrifice"`
+is "can't attack unless you sacrifice a land" (Exalted Dragon; `count: 2` Leviathan; Reclamation's
+"a land of their choice for each black creature"), `do: "return"` "… return an enchantment you
+control to its owner's hand" (Floodtide Serpent); `noun` names one in the prompts ("land"). The
+declaration is refused without enough of them, one permanent never paying two. Which ones is asked
+once it's made (a `sacrifice` or `choose-permanents` decision, none if there's no choice), after
+the mana is paid, so a land can tap for that first, and what paid with itself doesn't attack (rule
+508.1k). Tapping another creature (Hollow Warrior) isn't here yet.
 
 `cantAttackController: "player"` is "creatures can't attack you" with no planeswalkers named
 (Reverence, Blazing Archon, Teferi's Moat: rule 508.1b), where `true` is "you or planeswalkers you

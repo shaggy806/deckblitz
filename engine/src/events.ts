@@ -772,6 +772,10 @@ export type GameEvent =
        * fetchland, a Clue), which a trigger then reads as it last existed
        * there. Absent for one from a hand, graveyard or the command zone. */
       readonly ofPermanent?: true;
+      /** Its own cost sacrifices one or more permanents (Ashnod the Uncaring).
+       * A Treasure sacrificed for the mana that paid it is another ability's
+       * cost (the ruling), and doesn't count. */
+      readonly sacrificedToActivate?: true;
     })
   | (Base & {
       /**

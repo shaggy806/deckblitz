@@ -11,6 +11,7 @@ import type { ActivatedAbility, TriggeredAbility, TriggerSpec } from "./abilitie
 import type {
   AffectSpec,
   CardType,
+  CombatPermanentTax,
   CombatRestriction,
   Keyword,
   StaticAbility,
@@ -4069,6 +4070,10 @@ export type AwaitingDecision =
        * attacks (rule 702.154a — see `GameState.pendingEnlist`): `source`
        * is the attacker. `then` is unused. */
       readonly enlist?: true;
+      /** Set when the choice is what a cost to attack returns to its owner's
+       * hand (rule 508.1h — see `GameState.pendingAttackCost`). `then` is
+       * unused. */
+      readonly attackCost?: true;
       /** Set when the choice pays an activated ability's cost (its
        * `returnToHand`), not an effect resolving: the player who activated
        * it, who gets priority once it's made (rule 117.3c). */
@@ -4502,6 +4507,15 @@ export interface DeclaredAttacker {
   readonly defender: PlayerId | ObjectId;
   readonly taps: boolean;
   readonly first: boolean;
+}
+
+/** `count` of one kind of permanent a declaration owes to attack, the taxes
+ * asking for the same kind added up — see `GameState.pendingAttackCost`.
+ * `source` is the permanent whose static first asked it. */
+export interface AttackCostPart {
+  readonly tax: CombatPermanentTax;
+  readonly count: number;
+  readonly source: ObjectId;
 }
 
 /** One placement of counters in {@link TurnHistory}'s `countersPut`: `count`
@@ -5868,6 +5882,22 @@ export interface GameState {
   pendingEnlist?: {
     readonly player: PlayerId;
     readonly queue: readonly ObjectId[];
+    readonly declared: readonly DeclaredAttacker[];
+  };
+  /**
+   * A declaration's costs to attack paid in permanents (rule 508.1h —
+   * `CombatPermanentTax`, Exalted Dragon), its mana and life paid and the
+   * attackers tapped (508.1f): `parts` is what's still to choose, one kind at a
+   * time (`Game.continueAttackCosts`), and `sacrificed` and `returned` what's
+   * been chosen. All of it is paid together once the last is chosen
+   * (508.1j), and only then is the attack announced (508.1k). Optional so a
+   * snapshot saved before it existed still loads.
+   */
+  pendingAttackCost?: {
+    readonly player: PlayerId;
+    readonly parts: readonly AttackCostPart[];
+    readonly sacrificed: readonly ObjectId[];
+    readonly returned: readonly ObjectId[];
     readonly declared: readonly DeclaredAttacker[];
   };
   /**

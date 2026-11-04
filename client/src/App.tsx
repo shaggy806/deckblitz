@@ -5903,12 +5903,17 @@ function Table({
             ? ` · ${unmetMusts.map((id) => game.nameOf(id)).join(', ')} must attack`
             : ''}
           {attackAtWrong ? ' · not whom the lesson asked: press Clear to start again' : ''}
-          {attackTax.mana > 0 || attackTax.life > 0 ? (
+          {attackTax.mana > 0 || attackTax.life > 0 || attackTax.permanents.length > 0 ? (
             <>
               {' '}
-              · costs {attackTax.mana > 0 ? <Symbols text={`{${attackTax.mana}}`} /> : null}
+              · {attackTax.mana > 0 || attackTax.life > 0 ? 'costs ' : ''}
+              {attackTax.mana > 0 ? <Symbols text={`{${attackTax.mana}}`} /> : null}
               {attackTax.mana > 0 && attackTax.life > 0 ? ' and ' : ''}
-              {attackTax.life > 0 ? `${attackTax.life} life` : ''} to attack
+              {attackTax.life > 0 ? `${attackTax.life} life` : ''}
+              {attackTax.permanents.length > 0
+                ? `${attackTax.mana > 0 || attackTax.life > 0 ? ' and ' : ''}${attackTax.permanents.join(' and ')}`
+                : ''}{' '}
+              to attack
               {attackTax.overBudget ? ' — more than you can surely pay' : ''}
             </>
           ) : null}

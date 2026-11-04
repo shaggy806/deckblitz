@@ -5926,6 +5926,26 @@ engine terms. A second thing to check is a second test.
 - **Expect:** The second popup says "Choose one to put into your hand — the other goes into your graveyard" and offers just the two finds. Llanowar Elves goes to your hand, Grizzly Bears to your graveyard, and your library is shuffled once.
 
 
+## Costs to attack paid in permanents (2026-11-03, need-keys Phase 2: build-family, features only)
+
+### Exalted Dragon: choose the land it costs to attack
+- **Do:** Go to combat and pick Exalted Dragon. Read the attack bar, press "Attack with 1", then choose the Forest.
+- **Expect:** The bar reads "sacrifice a land to attack". Confirming asks you to sacrifice one, offering the three lands. Only the Forest goes to the graveyard, and the Dragon attacks.
+
+### Reclamation: one land for each black attacker, four players
+- **Do:** Go to combat and send both Vampire Nighthawks and Grizzly Bears at Bob. Press "Attack with 3", then choose the Swamp and the Island.
+- **Expect:** The bar reads "sacrifice 2 lands to attack": the Bears cost nothing. One question asks for two lands. The Swamp and the Island go, the Mountain stays, and all three creatures attack.
+
+### Floodtide Serpent: return an enchantment to attack
+- **Do:** Go to combat and pick Floodtide Serpent. Press "Attack with 1", then choose Ghostly Prison.
+- **Expect:** You're asked "To attack, return an enchantment to its owner's hand", offered Propaganda and Ghostly Prison. Ghostly Prison goes to your hand, Propaganda stays, and the Serpent attacks.
+
+## Ashnod the Uncaring (2026-11-03, need-keys Phase 2: build-family, features only)
+
+### Ashnod the Uncaring: copy an ability that sacrificed a permanent
+- **Do:** Activate Mogg Fanatic, aiming at Bob. Press Yes to "Copy that ability?", then "Keep Bob".
+- **Expect:** Ashnod's trigger asks "Copy that ability?" with Mogg Fanatic's ability under it. Bob loses 2 life in all.
+
 ## Enlist (2026-10-31, need-keys Phase 2: build-family, features only)
 
 ### Coalition Warbrute: enlist a creature as it attacks

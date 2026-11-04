@@ -189,6 +189,26 @@ export interface CombatCost {
   readonly life: number;
 }
 
+/**
+ * What a creature costs on its own to attack (rule 508.1h): the mana and life,
+ * and any cost paid in permanents (Exalted Dragon's "sacrifice a land", Floodtide
+ * Serpent's "return an enchantment you control") — `among` is what can pay each
+ * as the offer was read. Which ones is asked once the declaration is made.
+ */
+export interface AttackCost extends CombatCost {
+  readonly permanents?: readonly AttackPermanentCost[];
+}
+
+/** One cost to attack paid in permanents, for one creature: `count` of `among`,
+ * sacrificed or returned to their owners' hands. `noun` names one for the
+ * prompt and the client's running cost ("land", "Island"). */
+export interface AttackPermanentCost {
+  readonly do: "sacrifice" | "return";
+  readonly count: number;
+  readonly noun: string;
+  readonly among: readonly ObjectId[];
+}
+
 /** One tax on one creature blocking: paid once for it, however many attackers
  * it blocks, if it blocks any of `attackers` (absent: any at all). */
 export interface BlockerTax extends CombatCost {
@@ -1628,11 +1648,12 @@ export type LegalAction =
        * an entry without a `count` sends all of it. `perAttacker` is what a
        * creature costs on its own, on top of its defender's rate (Brainwash,
        * Nils — `StaticAbility.combatTax`): per attacker, per defender, only
-       * the pairs that cost something. Absent when nothing is taxed.
+       * the pairs that cost something, permanents included (Exalted Dragon).
+       * Absent when nothing is taxed.
        */
       readonly attackTax?: {
         readonly perCreature: Readonly<Record<string, number>>;
-        readonly perAttacker?: Readonly<Record<ObjectId, Readonly<Record<string, CombatCost>>>>;
+        readonly perAttacker?: Readonly<Record<ObjectId, Readonly<Record<string, AttackCost>>>>;
         readonly budget: number;
         readonly lifePerCreature?: Readonly<Record<string, number>>;
         readonly lifeBudget?: number;

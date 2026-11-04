@@ -8940,6 +8940,27 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       you: { bf: ['Swamp*2', 'Forest*2'], hand: ["Jarad's Orders"], lib: ['Grizzly Bears', 'Llanowar Elves'] },
     }),
   ),
+  // --- Costs to attack paid in permanents (2026-11-03, need-keys Phase 2) ------------
+  preset(
+    'Exalted Dragon: choose the land it costs to attack',
+    board({ you: { bf: ['Exalted Dragon', 'Plains', 'Forest', 'Swamp'] } }),
+  ),
+  preset(
+    'Reclamation: one land for each black attacker, four players',
+    board({
+      you: { bf: ['Vampire Nighthawk', 'Vampire Nighthawk', 'Grizzly Bears', 'Swamp', 'Island', 'Mountain'] },
+      opp: [{ bf: ['Reclamation'] }, {}, {}],
+    }),
+  ),
+  preset(
+    'Floodtide Serpent: return an enchantment to attack',
+    board({ you: { bf: ['Floodtide Serpent', 'Propaganda', 'Ghostly Prison'] } }),
+  ),
+  // --- Ashnod the Uncaring (2026-11-03, need-keys Phase 2) ----------------------------
+  preset(
+    'Ashnod the Uncaring: copy an ability that sacrificed a permanent',
+    board({ you: { bf: ['Ashnod the Uncaring', 'Mogg Fanatic'] } }),
+  ),
   // --- Enlist (2026-10-31, need-keys Phase 2) ---------------------------------------
   preset(
     'Coalition Warbrute: enlist a creature as it attacks',

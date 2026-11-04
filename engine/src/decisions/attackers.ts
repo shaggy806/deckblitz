@@ -55,7 +55,7 @@ function attackIsFree(ctx: DecisionReadCtx, attacker: ObjectId, defender: Player
   const { generic, life } = ctx.attackTaxOf(defender);
   if (generic !== 0 || life !== 0) return false;
   const own = creatureAttackTax(ctx.state, ctx.registry, attacker, defender);
-  return own.generic === 0 && own.life === 0;
+  return own.generic === 0 && own.life === 0 && own.permanents === undefined;
 }
 
 /**

@@ -1911,6 +1911,26 @@ export interface CombatTax {
   readonly perCounter?: string;
   readonly covers?: "you" | "you-and-planeswalkers" | "planeswalkers";
   readonly attacker?: CardFilter;
+  /** Attack only: a cost paid in the attacking creature's controller's own
+   * permanents — see {@link CombatPermanentTax}. */
+  readonly permanents?: CombatPermanentTax;
+}
+
+/**
+ * A cost to attack paid in permanents (rule 508.1h), a creature at a time:
+ * "this creature can't attack unless you sacrifice a land" (Exalted Dragon),
+ * "black creatures can't attack unless their controller sacrifices a land of
+ * their choice for each black creature they control that's attacking"
+ * (Reclamation), "… unless you return an enchantment you control to its owner's
+ * hand" (Floodtide Serpent). `count` of what matches `filter`, among that
+ * player's own permanents, chosen once the declaration is made (`noun` names
+ * one in the prompt: "land"); `do` says what becomes of them.
+ */
+export interface CombatPermanentTax {
+  readonly do: "sacrifice" | "return";
+  readonly filter: CardFilter;
+  readonly count?: number;
+  readonly noun: string;
 }
 
 export interface StaticAbility {
@@ -3303,6 +3323,9 @@ export interface StaticAbility {
    * - `attacker`: only blocking an attacker matching this, "you" being this
    *   permanent's controller (Hipparion's "creatures with power 3 or
    *   greater", Heat Wave's "creatures you control").
+   * - `permanents`: on an attack, a cost in the attacker's controller's own
+   *   permanents (Exalted Dragon's "sacrifice a land"), for each creature
+   *   reached; see {@link CombatPermanentTax}.
    */
   readonly combatTax?: CombatTax;
   /**
