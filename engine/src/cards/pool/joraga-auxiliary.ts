@@ -18,7 +18,7 @@ export default defineCard({
       // Support on a permanent (rule 701.41a): "other" target creatures.
       targets: distinctTargets(2, { kind: "other", of: "creature" }, { optional: true }),
       effect: {
-        kind: "sequence",
+        kind: "sequence", together: true,
         effects: [
           { kind: "add-counter", target: 0, counter: "+1/+1", amount: 1 },
           { kind: "add-counter", target: 1, counter: "+1/+1", amount: 1 },

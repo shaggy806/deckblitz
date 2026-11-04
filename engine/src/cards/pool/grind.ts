@@ -12,7 +12,7 @@ export default defineCard({
   // Two different creatures, one counter each (the ruling).
   targets: [{ kind: "optional", of: "creature" }, { kind: "optional", of: { kind: "other", of: "creature", than: { slots: [0] } } }],
   effect: {
-    kind: "sequence",
+    kind: "sequence", together: true,
     effects: [
       { kind: "add-counter", target: 0, counter: "-1/-1", amount: 1 },
       { kind: "add-counter", target: 1, counter: "-1/-1", amount: 1 },

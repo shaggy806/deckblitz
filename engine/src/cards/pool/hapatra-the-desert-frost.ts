@@ -38,7 +38,7 @@ export default defineCard({
       trigger: { on: "enters-battlefield", who: "self" },
       targets: [perOpponent(1), perOpponent(2), perOpponent(3)],
       effect: {
-        kind: "sequence",
+        kind: "sequence", together: true,
         effects: [
           { kind: "tap", target: 0 },
           { kind: "tap", target: 1 },

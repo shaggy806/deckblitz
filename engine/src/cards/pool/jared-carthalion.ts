@@ -30,7 +30,7 @@ export default defineCard({
       cost: { mana: null, tap: false },
       targets: distinctTargets(2, "creature", { optional: true }),
       effect: {
-        kind: "sequence",
+        kind: "sequence", together: true,
         effects: [
           { kind: "add-counter", target: 0, counter: "+1/+1", amount: { colorsOf: 0 } },
           { kind: "add-counter", target: 1, counter: "+1/+1", amount: { colorsOf: 1 } },

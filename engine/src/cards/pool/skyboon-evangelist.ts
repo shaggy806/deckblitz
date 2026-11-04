@@ -27,7 +27,7 @@ export default defineCard({
       trigger: { on: "enters-battlefield", who: "self" },
       targets: distinctTargets(6, { kind: "other", of: "creature" }, { optional: true }),
       effect: {
-        kind: "sequence",
+        kind: "sequence", together: true,
         effects: [0, 1, 2, 3, 4, 5].map((target) => ({
           kind: "add-counter" as const,
           target,

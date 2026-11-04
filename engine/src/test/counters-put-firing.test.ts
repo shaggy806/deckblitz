@@ -9,7 +9,7 @@ import { describe, expect, it } from "vitest";
 
 import type { Game } from "../game.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
-import { A, B, cast, counters, hand, lands, pickModes, pickTargets, ref, settle, spawn, table, toHand, tokensNamed } from "./harness.js";
+import { A, B, cast, counters, hand, lands, pickModes, pickTargets, ref, settle, spawn, table, toGraveyard, toHand, tokensNamed } from "./harness.js";
 
 const put = (game: Game, player: PlayerId, to: ObjectId, counter: string, amount: number): void => {
   game.debugApplyEffect(player, { kind: "add-counter", target: 0, counter, amount }, [ref(to)]);
@@ -96,39 +96,69 @@ describe("batched", () => {
     const sue = spawn(game, "Invisible Woman, Sue Storm");
     put(game, A, sue, "+1/+1", 1);
     expect(tokensNamed(game, "Wall Token (The Fantastic Four)", A)).toBe(0);
-    spawn(game, "Spinneret and Spiderling");
-    spawn(game, "Spinneret and Spiderling");
+    spawn(game, "Brave Brawler");
+    spawn(game, "Brave Brawler");
     game.debugApplyEffect(A, { kind: "add-counter-all", filter: { subtype: "Hero", controlledBy: "you" }, counter: "+1/+1", amount: 1 });
     settle(game);
     expect(tokensNamed(game, "Wall Token (The Fantastic Four)", A)).toBe(1);
   });
 
-  it("Invisible Woman: a step for each target slot is one placement too", () => {
+  const heroesAndMana = (game: Game): readonly [ObjectId, ObjectId] => {
+    spawn(game, "Invisible Woman, Sue Storm");
+    lands(game, "Forest", 2, A);
+    lands(game, "Plains", 2, A);
+    return [spawn(game, "Brave Brawler"), spawn(game, "Brave Brawler")];
+  };
+
+  it("one instruction: Gird for Battle's 'each of up to two' is one placement", () => {
     const { game, a } = table();
     pickModes(a, 0);
+    const [one, two] = heroesAndMana(game);
+    cast(game, toHand(game, "Gird for Battle"), { targets: [ref(one), ref(two)] });
+    expect(counters(game, one)).toBe(1);
+    expect(counters(game, two)).toBe(1);
+    expect(tokensNamed(game, "Wall Token (The Fantastic Four)", A)).toBe(1);
+  });
+
+  it("two sentences: Common Bond's two counters are two placements, and fire twice", () => {
+    const { game, a } = table();
+    pickModes(a, 0);
+    const [one, two] = heroesAndMana(game);
+    cast(game, toHand(game, "Common Bond"), { targets: [ref(one), ref(two)] });
+    expect(counters(game, one)).toBe(1);
+    expect(counters(game, two)).toBe(1);
+    expect(tokensNamed(game, "Wall Token (The Fantastic Four)", A)).toBe(2);
+  });
+
+  it("an unmarked sequence stays separate; a marked one's other steps stay in order", () => {
+    const { game, a } = table({ deck: "Mountain" });
+    pickModes(a, 0);
     spawn(game, "Invisible Woman, Sue Storm");
-    const one = spawn(game, "Spinneret and Spiderling");
-    const two = spawn(game, "Spinneret and Spiderling");
+    const one = spawn(game, "Brave Brawler");
+    const two = spawn(game, "Brave Brawler");
+    const steps = [
+      { kind: "add-counter", target: 0, counter: "+1/+1", amount: 1 },
+      { kind: "add-counter", target: 1, counter: "+1/+1", amount: 1 },
+    ] as const;
+    game.debugApplyEffect(A, { kind: "sequence", effects: [...steps] }, [ref(one), ref(two)]);
+    settle(game);
+    expect(tokensNamed(game, "Wall Token (The Fantastic Four)", A)).toBe(2);
+    const before = hand(game, A).length;
     game.debugApplyEffect(
       A,
-      {
-        kind: "sequence",
-        effects: [
-          { kind: "add-counter", target: 0, counter: "+1/+1", amount: 1 },
-          { kind: "add-counter", target: 1, counter: "+1/+1", amount: 1 },
-        ],
-      },
+      { kind: "sequence", together: true, effects: [...steps, { kind: "draw", amount: 1 }] },
       [ref(one), ref(two)],
     );
     settle(game);
-    expect(tokensNamed(game, "Wall Token (The Fantastic Four)", A)).toBe(1);
+    expect(tokensNamed(game, "Wall Token (The Fantastic Four)", A)).toBe(3);
+    expect(hand(game, A).length).toBe(before + 1);
   });
 
   it("Invisible Woman: only the counters you put, and only +1/+1", () => {
     const { game, a } = table();
     pickModes(a, 0);
     spawn(game, "Invisible Woman, Sue Storm");
-    const hero = spawn(game, "Spinneret and Spiderling");
+    const hero = spawn(game, "Brave Brawler");
     put(game, B, hero, "+1/+1", 1);
     put(game, A, hero, "charge", 1);
     expect(tokensNamed(game, "Wall Token (The Fantastic Four)", A)).toBe(0);
@@ -158,6 +188,42 @@ describe("batched", () => {
     put(game, B, spawn(game, "Jace Beleren", B), "loyalty", 2);
     put(game, A, walker, "charge", 2);
     expect(counters(game, hydra!)).toBe(loyalty + 5);
+  });
+
+  const returnPlaneswalkersAndHydras = {
+    kind: "return-from-graveyard",
+    filter: { anyOf: [{ type: "planeswalker" }, { name: "Bioessence Hydra" }] },
+    destination: "battlefield",
+    count: "all",
+  } as const;
+  const loyaltyOf = (game: Game, id: ObjectId): number => game.state.objects[id].counters.loyalty ?? 0;
+
+  it("permanents entering together: one trigger, for all the counters they entered with", () => {
+    const { game } = table();
+    const hydra = spawn(game, "Bioessence Hydra");
+    const start = counters(game, hydra);
+    const walkers = [toGraveyard(game, "Liliana of the Veil"), toGraveyard(game, "Jace Beleren")];
+    game.debugApplyEffect(A, returnPlaneswalkersAndHydras);
+    expect(game.state.pendingTriggers.length + game.state.zones.shared.stack.length).toBe(1);
+    settle(game);
+    const total = walkers.reduce((n, id) => n + loyaltyOf(game, id), 0);
+    expect(total).toBeGreaterThan(0);
+    expect(counters(game, hydra)).toBe(start + total);
+  });
+
+  // The ruling: a planeswalker entering with the Hydra isn't counted as it
+  // enters, and does trigger it, whichever the engine happens to move first.
+  it.each([
+    ["the Hydra first", ["Bioessence Hydra", "Jace Beleren"]],
+    ["the planeswalker first", ["Jace Beleren", "Bioessence Hydra"]],
+  ])("a planeswalker entering with the Hydra, %s", (_order, cards) => {
+    const { game } = table();
+    const ids = cards.map((name) => toGraveyard(game, name));
+    game.debugApplyEffect(A, returnPlaneswalkersAndHydras);
+    settle(game);
+    const hydra = ids[cards.indexOf("Bioessence Hydra")];
+    const walker = ids[cards.indexOf("Jace Beleren")];
+    expect(counters(game, hydra)).toBe(loyaltyOf(game, walker));
   });
 
   it("Bioessence Hydra: a proliferate over two planeswalkers is one trigger", () => {

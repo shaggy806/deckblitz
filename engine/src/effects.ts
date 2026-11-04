@@ -2370,6 +2370,14 @@ export type EffectSpec =
        * your hand."), which really are separate events.
        */
       readonly simultaneous?: boolean;
+      /** Its consecutive `add-counter`s are one instruction: "put a +1/+1
+       * counter on **each of** up to two target creatures", support, "distribute",
+       * "… on target creature **and** … on another target creature". They go on
+       * at once (`Game.withCounterBatch`, which a `batched` `counters-put` trigger
+       * reads), and the other steps stay in order, free to ask. Say it only where
+       * the Oracle text is one instruction: Common Bond's two sentences are two
+       * placements. */
+      readonly together?: true;
     }
   | {
       /**
@@ -12219,27 +12227,11 @@ export function isCountScalableEffect(effect: EffectSpec): boolean {
   }
 }
 
-/** How many steps from `from` are one "put a [kind] counter on each of these
- * targets": `add-counter`s to different target slots, of one kind and amount. */
+/** How many steps from `from` in a `together` sequence are its one instruction
+ * of `add-counter`s. */
 function counterRunLength(steps: readonly EffectSpec[], from: number): number {
-  const first = steps[from];
-  if (first.kind !== "add-counter" || typeof first.target !== "number" || typeof first.amount !== "number") return 1;
-  const slots = new Set<number>([first.target]);
-  let end = from + 1;
-  for (; end < steps.length; end += 1) {
-    const step = steps[end];
-    if (
-      step.kind !== "add-counter" ||
-      typeof step.target !== "number" ||
-      slots.has(step.target) ||
-      step.counter !== first.counter ||
-      step.amount !== first.amount ||
-      step.by !== first.by
-    ) {
-      break;
-    }
-    slots.add(step.target);
-  }
+  let end = from;
+  while (end < steps.length && steps[end].kind === "add-counter") end += 1;
   return end - from;
 }
 
@@ -14781,9 +14773,9 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       const steps = spec.effects;
       for (let i = 0; i < steps.length; i += 1) {
         const parked = ctx.parkedCount();
-        // "A +1/+1 counter on each of two targets" is one instruction, authored
-        // a step a slot: the counters go on at once (`withCounterBatch`).
-        const run = counterRunLength(steps, i);
+        // `together`: "a +1/+1 counter on each of two targets" is one
+        // instruction, authored a step a slot, and goes on at once.
+        const run = spec.together === true ? counterRunLength(steps, i) : 1;
         if (run > 1) {
           const first = i;
           ctx.simultaneously(() => {
@@ -14798,7 +14790,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           // Beneath whatever the step parked of its own — a nested sequence's
           // remainder is still that step, which finishes first.
           ctx.resumeAfterDecisions(
-            rest.length === 1 ? rest[0] : { kind: "sequence", effects: rest },
+            rest.length === 1 ? rest[0] : { kind: "sequence", ...(spec.together === true ? { together: true } : {}), effects: rest },
             parked,
           );
           return;

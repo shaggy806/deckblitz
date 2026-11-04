@@ -16,7 +16,7 @@ export default defineCard({
   text: "Put a +1/+1 counter on target creature and a +1/+1 counter on up to one target Merfolk.",
   targets: ["creature", { kind: "optional", of: { kind: "permanent", filter: { subtype: "Merfolk" } } }],
   effect: {
-    kind: "sequence",
+    kind: "sequence", together: true,
     effects: [
       { kind: "add-counter", target: 0, counter: "+1/+1", amount: 1 },
       { kind: "add-counter", target: 1, counter: "+1/+1", amount: 1 },

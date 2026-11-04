@@ -26,7 +26,7 @@ export default defineCard({
     kind: "conditional",
     condition: { kind: "target-chosen", index: 1 },
     then: {
-      kind: "sequence",
+      kind: "sequence", together: true,
       effects: [
         { kind: "add-counter", target: 0, counter: "+1/+1", amount: 1 },
         { kind: "add-counter", target: 1, counter: "+1/+1", amount: 1 },

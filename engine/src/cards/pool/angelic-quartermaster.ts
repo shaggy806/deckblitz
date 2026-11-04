@@ -20,7 +20,7 @@ export default defineCard({
         { kind: "optional", of: { kind: "other", of: { kind: "other", of: "creature" }, than: { slots: [0] } } },
       ],
       effect: {
-        kind: "sequence",
+        kind: "sequence", together: true,
         effects: [
           { kind: "add-counter", target: 0, counter: "+1/+1", amount: 1 },
           { kind: "add-counter", target: 1, counter: "+1/+1", amount: 1 },

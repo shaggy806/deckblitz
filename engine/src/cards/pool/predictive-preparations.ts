@@ -15,7 +15,7 @@ export default defineCard({
   text: "Put a +1/+1 counter on each of one or two target creatures.\nFlashback {3}{W} (You may cast this card from your graveyard for its flashback cost. Then exile it.)",
   targets: ["creature", { kind: "optional", of: { kind: "other", of: "creature", than: { slot: 0 } } }],
   effect: {
-    kind: "sequence",
+    kind: "sequence", together: true,
     effects: [
       { kind: "add-counter", target: 0, counter: "+1/+1", amount: 1 },
       { kind: "add-counter", target: 1, counter: "+1/+1", amount: 1 },

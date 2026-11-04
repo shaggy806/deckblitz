@@ -13,7 +13,7 @@ export default defineCard({
   text: "Support 2. (Put a +1/+1 counter on each of up to two target creatures.)\nUntap each creature you control with a +1/+1 counter on it.",
   targets: distinctTargets(2, "creature", { optional: true }),
   effect: {
-    kind: "sequence",
+    kind: "sequence", together: true,
     effects: [
       { kind: "add-counter", target: 0, counter: "+1/+1", amount: 1 },
       { kind: "add-counter", target: 1, counter: "+1/+1", amount: 1 },

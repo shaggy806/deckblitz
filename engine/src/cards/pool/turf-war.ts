@@ -25,7 +25,7 @@ export default defineCard({
       trigger: { on: "enters-battlefield", who: "self" },
       targets: [landAtSeat(0), landAtSeat(1), landAtSeat(2), landAtSeat(3)],
       effect: {
-        kind: "sequence",
+        kind: "sequence", together: true,
         effects: [0, 1, 2, 3].map((slot) => ({
           kind: "add-counter" as const,
           target: slot,

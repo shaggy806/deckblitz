@@ -24,7 +24,7 @@ export default defineCard({
   kicker: {
     cost: "{1}{U}",
     effect: {
-      kind: "sequence",
+      kind: "sequence", together: true,
       effects: [
         { kind: "tap", target: 0 },
         { kind: "tap", target: 1 },

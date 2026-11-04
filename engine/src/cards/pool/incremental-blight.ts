@@ -15,7 +15,7 @@ export default defineCard({
   text: "Put a -1/-1 counter on target creature, two -1/-1 counters on another target creature, and three -1/-1 counters on a third target creature.",
   targets: distinctTargets(3, "creature"),
   effect: {
-    kind: "sequence",
+    kind: "sequence", together: true,
     effects: [
       { kind: "add-counter", target: 0, counter: "-1/-1", amount: 1 },
       { kind: "add-counter", target: 1, counter: "-1/-1", amount: 2 },

@@ -28104,7 +28104,9 @@ export class Game {
     this.enterBatchFired = new Set();
     this.enterBatchEvents = entered;
     try {
-      for (const event of entered) this.emit(event);
+      this.withCounterBatch(() => {
+        for (const event of entered) this.emit(event);
+      });
     } finally {
       [this.enterBatchFired, this.enterBatchEvents] = outer;
       this.firstTokenCreators.clear();
@@ -52985,15 +52987,19 @@ export class Game {
       // Counters it entered with were *put* on it (rule 122.6), so a
       // "whenever counters are put on" trigger sees them. Announced last, once
       // the permanent is fully itself (face, tapped state) on the battlefield.
+      // Permanents entering together see each other's (rule 603.6a), whichever
+      // the engine moved first: Bioessence Hydra's ruling.
       for (const c of entering.counters) {
-        this.emit({
+        const put: GameEventInput = {
           type: "counter-added",
           object: id,
           counter: c.kind,
           amount: c.amount,
           by: enteringController,
           after: object.counters[c.kind],
-        });
+        };
+        if (this.enterAnnouncements !== null) this.enterAnnouncements.push(put);
+        else this.emit(put);
       }
       // It enters prepared (rule 722.3a): the designation, and its prepare
       // spell's copy in exile, are there before anything sees it arrive.

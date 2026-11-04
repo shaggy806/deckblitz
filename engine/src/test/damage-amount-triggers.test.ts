@@ -138,6 +138,35 @@ describe("deals-damage atLeast", () => {
   });
 });
 
+describe("Guul Draz Specter's discard, as printed", () => {
+  it("the player it dealt combat damage to discards a card of their choice", () => {
+    const { game, a, b } = table();
+    const specter = spawn(game, "Guul Draz Specter");
+    const kept = toHand(game, "Wastes", B);
+    const chosen = toHand(game, "Mountain", B);
+    const mine = hand(game, A).length;
+    let offered: readonly ObjectId[] = [];
+    b.chooseDiscardsFn = (cards) => {
+      offered = cards.map((card) => card.id);
+      return [chosen];
+    };
+    attack(game, a, [specter]);
+    settle(game);
+    expect(offered).toEqual(expect.arrayContaining([kept, chosen]));
+    expect(zone(game, chosen)).toBe("graveyard");
+    expect(zone(game, kept)).toBe("hand");
+    expect(hand(game, A).length).toBe(mine);
+  });
+
+  it("noncombat damage doesn't make them discard", () => {
+    const { game } = table();
+    const specter = spawn(game, "Guul Draz Specter");
+    const held = toHand(game, "Wastes", B);
+    burn(game, A, specter, B, 2);
+    expect(zone(game, held)).toBe("hand");
+  });
+});
+
 describe("dealt-damage excess", () => {
   it("Fall of Cair Andros: amasses the excess alone, for noncombat damage to an opponent's creature", () => {
     const { game } = table();

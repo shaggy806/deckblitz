@@ -17,7 +17,7 @@ export default defineCard({
     { kind: "optional", of: { kind: "other", of: "creature-an-opponent-controls", than: { slot: 0 } } },
   ],
   effect: {
-    kind: "sequence",
+    kind: "sequence", together: true,
     effects: [
       { kind: "tap", target: 0 },
       { kind: "tap", target: 1 },

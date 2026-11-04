@@ -21,7 +21,7 @@ const TARGETS: readonly TargetSpec[] = [
   { kind: "optional", of: { kind: "other", of: "creature", than: { slot: 0 } } },
 ];
 const COUNTERS = {
-  kind: "sequence",
+  kind: "sequence", together: true,
   effects: [
     { kind: "add-counter", target: 0, counter: "everything", amount: 1 },
     { kind: "add-counter", target: 1, counter: "everything", amount: 1 },
