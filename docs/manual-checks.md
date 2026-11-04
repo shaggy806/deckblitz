@@ -7444,9 +7444,9 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Twinning Staff: placing the additional copy among Zada's
 
 - **Do:** Cast Giant Growth on Zada. Order Zada's copies when asked, keep Zada as the additional copy's target, then answer 1 to "How many of the other copies should resolve before this additional copy?".
-- **Expect:** The question offers 0 to 2. On the stack the additional copy sits under one of Zada's copies. Zada ends 9/9, the Bears 5/5 and the Giant 6/7.
+- **Expect:** The question offers 0 to 2. On the stack the additional copy sits under one of Zada's copies. Zada ends 9/9, the Bears 5/5 and the Giant 6/6.
 
 ### Twinning Staff: placing the additional copy at a four-player table
 
 - **Do:** Cast Giant Growth on Zada. Order Zada's copies when asked, keep Zada as the additional copy's target, then answer 2.
-- **Expect:** The additional copy goes under both of Zada's copies and resolves last of the three, before the Giant Growth itself. Zada ends 9/9, the Bears 5/5 and the Giant 6/7.
+- **Expect:** The additional copy goes under both of Zada's copies and resolves last of the three, before the Giant Growth itself. Zada ends 9/9, the Bears 5/5 and the Giant 6/6.

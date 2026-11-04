@@ -194,6 +194,22 @@ describe("the additional copy of an aimed copy", () => {
     expect(pt(game, second)).toEqual({ power: 5, toughness: 5 });
   });
 
+  it("plays out the manual check's board: each creature gets its copy's +3/+3, and Zada the additional one's", () => {
+    const { game, a } = table();
+    spawn(game, "Twinning Staff");
+    lands(game, "Forest", 1);
+    const zada = spawn(game, "Zada, Hedron Grinder");
+    const bears = spawn(game, "Grizzly Bears");
+    const giant = spawn(game, "Hill Giant");
+    pickPermanents(a, giant, bears);
+    watchTargets(a, () => [zada]);
+    a.chooseNumberFn = () => 1;
+    cast(game, toHand(game, "Giant Growth"), { targets: [ref(zada)] });
+    expect(pt(game, zada)).toEqual({ power: 9, toughness: 9 });
+    expect(pt(game, bears)).toEqual({ power: 5, toughness: 5 });
+    expect(pt(game, giant)).toEqual({ power: 6, toughness: 6 });
+  });
+
   it("can go under all of them or stay over them all, and no further", () => {
     for (const [answer, expected] of [
       [0, "top"],

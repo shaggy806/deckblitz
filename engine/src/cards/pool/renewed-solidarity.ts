@@ -3,8 +3,8 @@ import { defineCard } from "../define.js";
 // EDHREC rank 1703. The tokens copied are fixed as the end step's ability
 // resolves (`create-token-copy`'s `{ each }`, rule 608.2h), so a copy made
 // here isn't copied too, and each token entered this turn on its own count
-// (a stack once per token). Each is copied as the effect that made it said,
-// a copy of a copy as what it copied (rule 707.2, the rulings). A source
+// (a stack once per token). Each is copied as the effect that made it said
+// (rule 111.3), a copy of a copy as what it copied (rule 707.2). A source
 // that has left reads its last choice, as `ofChosenType` does everywhere.
 
 const CHOOSE = "As this enchantment enters, choose a creature type.";
