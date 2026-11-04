@@ -2124,6 +2124,9 @@ export function parseTrigger(clause) {
   if (c === "Whenever ~ becomes attached to a creature") {
     return [{ on: "becomes-attached", who: "self", filter: { type: "creature" } }];
   }
+  // A spell countered, seen from what countered it (Baral) or who cast it (Multani's Presence).
+  if (c === "Whenever a spell or ability you control counters a spell") return [{ on: "counters-spell", who: "you" }];
+  if (c === "Whenever a spell you've cast is countered") return [{ on: "spell-countered", who: "you" }];
   // "Whenever you put one or more counters on a creature you don't control"
   // (Kros, Defense Contractor): "that creature" the trigger object.
   if (c === "Whenever you put one or more counters on a creature you don't control") {

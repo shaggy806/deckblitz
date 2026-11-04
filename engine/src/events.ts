@@ -1140,6 +1140,13 @@ export type GameEvent =
       readonly object: ObjectId;
       /** Who controlled it: a copy or an ability is gone by now. */
       readonly controller: PlayerId;
+      /** Who controls the spell or ability that countered it. */
+      readonly by: PlayerId;
+      /** What was countered was an ability, not a spell (rule 701.6a counters
+       * either): "counters a spell" asks. */
+      readonly ability?: true;
+      /** Who cast it, if it was cast: not a copy (rule 707.10) or an ability. */
+      readonly castBy?: PlayerId;
     })
   | (Base & {
       /** A spell was exiled from the stack — not countered (Mindbreak

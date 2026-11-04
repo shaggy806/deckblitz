@@ -277,6 +277,15 @@ describe("an opponent's spell or ability causing you to discard", () => {
       read("Enchantment", "Whenever a spell or ability an opponent controls causes you to discard a card, you gain 2 life.").triggered[0].trigger,
     ).toEqual({ on: "discards", who: "you", byOpponent: true, perCard: true });
   });
+  it("whenever a spell is countered, from what countered it or who cast it", () => {
+    expect(
+      read("Enchantment", "Whenever a spell or ability you control counters a spell, you may draw a card. If you do, discard a card.").triggered[0].trigger,
+    ).toEqual({ on: "counters-spell", who: "you" });
+    expect(read("Enchantment", "Whenever a spell you've cast is countered, draw a card.").triggered[0].trigger).toEqual({
+      on: "spell-countered",
+      who: "you",
+    });
+  });
 });
 
 describe("each player paying or bidding an amount of their choosing", () => {

@@ -29823,6 +29823,10 @@ export class Game {
           spec.as.includes(event.as) &&
           this.matchesWho(spec.who, event.creature, self)
         );
+      case "counters-spell":
+        return event.type === "spell-countered" && event.ability !== true && this.matchesWhoPlayer(spec.who, event.by, self);
+      case "spell-countered":
+        return event.type === "spell-countered" && event.castBy !== undefined && this.matchesWhoPlayer(spec.who, event.castBy, self);
       case "becomes-monstrous":
         return (
           event.type === "became-monstrous" &&
@@ -49409,7 +49413,7 @@ export class Game {
     }
     const sourceId = ability?.kind === "ability" ? ability.sourceObjectId : null;
     const stint = ability?.lastKnownRefs?.source;
-    const countered = this.counterObject(target.object, into ?? "graveyard");
+    const countered = this.counterObject(target.object, controller, into ?? "graveyard");
     if (countered && timeCounters !== undefined) this.suspendExiledCard(target.object, timeCounters);
     if (sourceId === null || sourceId === undefined || stint === undefined) return { countered };
     const source = this.state.objects[sourceId];
@@ -49436,6 +49440,7 @@ export class Game {
    */
   private counterObject(
     id: ObjectId,
+    by: PlayerId,
     into: "graveyard" | "hand" | "exile" | "library-top" | "library-bottom" = "graveyard",
   ): boolean {
     const object = this.state.objects[id];
@@ -49453,7 +49458,7 @@ export class Game {
     if (object.kind === "ability") {
       const controller = object.controller;
       this.removeOneAbilityCopy(id);
-      this.emit({ type: "spell-countered", object: id, controller });
+      this.emit({ type: "spell-countered", object: id, controller, by, ability: true });
       return true;
     }
     if (object.isCopy) {
@@ -49466,7 +49471,7 @@ export class Game {
       if (index >= 0) stack.splice(index, 1);
       const controller = object.controller;
       delete this.state.objects[id];
-      this.emit({ type: "spell-countered", object: id, controller });
+      this.emit({ type: "spell-countered", object: id, controller, by });
       return true;
     }
     // `xValue` is left for `moveObject`, which records the spell's last-known
@@ -49474,12 +49479,15 @@ export class Game {
     // A commander headed for a hand waits on the stack for its owner's 903.9b
     // answer (`moveObject` returns `false`); it's countered all the same.
     const controller = object.controller;
+    // Cast, it has a `castFrom` until this move. Nothing changes a spell's
+    // controller yet, so its controller is who cast it.
+    const cast = object.castFrom !== undefined;
     if (into === "library-top" || into === "library-bottom") {
       this.putOnLibrary(id, into === "library-top" ? "top" : "bottom");
     } else {
       this.moveObject(id, into);
     }
-    this.emit({ type: "spell-countered", object: id, controller });
+    this.emit({ type: "spell-countered", object: id, controller, by, ...(cast ? { castBy: controller } : {}) });
     return true;
   }
 

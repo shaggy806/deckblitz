@@ -2095,6 +2095,22 @@ export type TriggerSpec =
       readonly who: TriggerWho;
     }
   | {
+      /** A spell was countered (rule 701.6a), not an ability, and not a spell
+       * that merely failed to resolve: "whenever a spell or ability you control
+       * counters a spell" (Baral, Chief of Compliance; Lullmage Mentor) is
+       * `who: "you"`, `who` being who controls what countered it. Once per spell
+       * countered; ward's counter is an ability like any other. */
+      readonly on: "counters-spell";
+      readonly who: TriggerWho;
+    }
+  | {
+      /** A spell the player cast was countered (rule 701.6a), a copy not
+       * being cast (rule 707.10): "whenever a spell you've cast is countered"
+       * (Multani's Presence) is `who: "you"`. */
+      readonly on: "spell-countered";
+      readonly who: TriggerWho;
+    }
+  | {
       /** A player clashed (rule 701.30) — "whenever you clash" (Rebellion
        * of the Flamekin, Entangling Trap), "whenever you clash and win"
        * (Sylvan Echoes: `won: true`). Either clashing player clashes,
