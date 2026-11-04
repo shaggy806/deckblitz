@@ -16,16 +16,16 @@ import { describe, expect, it } from "vitest";
 
 import { BUILTIN_CARDS } from "../cards/generated.js";
 import { createDefaultRegistry } from "../cards/registry.js";
-import { ScriptedController } from "../controller.js";
+import { RandomController, ScriptedController } from "../controller.js";
 import { Game } from "../game.js";
 import type { GameRules } from "../state.js";
 import { asPlayerId } from "../primitives.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
 import type { GameState } from "../state.js";
 import { targetCombos } from "../decisions/shared/target-combos.js";
-import { anyNumberSlot, concreteTargetSpecs, slotOptions } from "../target.js";
+import { anyNumberSlot, concreteTargetSpecs, slotOptions, targetsFillable } from "../target.js";
 import type { TargetRef, TargetSpec } from "../target.js";
-import { invalidTargetReason } from "../targeting.js";
+import { invalidTargetReason, stateTargetFacts } from "../targeting.js";
 
 const A = asPlayerId("alice");
 const B = asPlayerId("bob");
@@ -117,6 +117,71 @@ describe("concreteTargetSpecs", () => {
     expect(check([player(B), obj(island)])).toMatch(/illegal target/);
     // The fixed slot before the group still has to be filled.
     expect(check([])).toMatch(/takes 1 target/);
+  });
+});
+
+// The situation fuzzer's find: Graceful Takedown's "any number of target
+// enchanted creatures you control and up to one other target creature you
+// control" is a group `other` than slot 0, and its offer ignored the relation.
+describe("a group other than an earlier slot", () => {
+  const group = (min?: number): TargetSpec => ({
+    kind: "any-number",
+    of: { kind: "other", of: "creature-you-control", than: { slot: 0 } },
+    ...(min === undefined ? {} : { min }),
+  });
+  const x = obj("x" as ObjectId);
+  const y = obj("y" as ObjectId);
+  const z = obj("z" as ObjectId);
+
+  it("offers no member that slot named, and every candidate when the slot is blank", () => {
+    const specs: TargetSpec[] = [{ kind: "optional", of: "creature-you-control" }, "player", group()];
+    const options = [[x, y], [player(B)], [x, y, z]];
+    expect(slotOptions(specs, options, 2, [x, player(B)])).toEqual([y, z]);
+    expect(slotOptions(specs, options, 3, [x, player(B), y])).toEqual([z]);
+    expect(slotOptions(specs, options, 2, [null, player(B)])).toEqual([x, y, z]);
+  });
+
+  it("refuses that slot's target as any member, not only the first", () => {
+    const { game } = setUp();
+    const bears = spawn(game, "Grizzly Bears");
+    const elves = spawn(game, "Llanowar Elves");
+    const specs: TargetSpec[] = ["creature-you-control", "player", group()];
+    const check = (chosen: readonly TargetRef[]) =>
+      invalidTargetReason(game.state, registry, specs, chosen, A, "test");
+    expect(check([obj(bears), player(B), obj(elves)])).toBeNull();
+    expect(check([obj(bears), player(B), obj(bears)])).toMatch(/another than/);
+    expect(check([obj(bears), player(B), obj(elves), obj(bears)])).toMatch(/another than/);
+  });
+
+  it("counts the relation against a group's floor (rule 601.2c)", () => {
+    const { game } = setUp();
+    const facts = stateTargetFacts(game.state, registry);
+    const specs: TargetSpec[] = ["creature-you-control", group(2)];
+    const options = [[x], [x, y]];
+    // x in slot 0 leaves the group one candidate, short of its two.
+    expect(targetsFillable(specs, options, [], 0, facts)).toBe(false);
+    expect(targetsFillable(specs, [[x], [x, y, z]], [], 0, facts)).toBe(true);
+  });
+
+  it("Graceful Takedown: the fuzzer's controller never names slot 0's creature in the group", () => {
+    for (let trial = 0; trial < 40; trial += 1) {
+      const { game } = setUp();
+      for (let i = 0; i < 2; i += 1) spawn(game, "Forest");
+      const bears = spawn(game, "Grizzly Bears");
+      game.state.objects[spawn(game, "Pacifism", B)].attachedTo = bears;
+      spawn(game, "Hill Giant", B);
+      const takedown = game.debugSpawn("Graceful Takedown", A, "hand");
+      const offers = game.legalActions(A).filter((a) => a.kind === "cast-spell" && a.card === takedown);
+      expect(offers).toHaveLength(1);
+      let state = trial * 7919 + 1;
+      const random = (): number => {
+        state = (state * 48271) % 2147483647;
+        return state / 2147483647;
+      };
+      const view = { player: A, state: game.state, legalActions: () => offers } as never;
+      expect(() => game.dispatch(new RandomController(A, random).act(view))).not.toThrow();
+      expect(zoneOf(game, takedown)).toBe("stack");
+    }
   });
 });
 

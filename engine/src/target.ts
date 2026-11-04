@@ -739,9 +739,14 @@ export function concreteTargetSpecs(specs: readonly TargetSpec[], count: number)
   // before it — and, tied to a slot, with that slot's.
   const same = spec.sameController;
   const anchor = typeof same === "object" ? [same.slot] : [];
+  // A group `other` than an earlier slot ("…and up to one other target
+  // creature", Graceful Takedown): every member differs from that slot too,
+  // in the one `than` a slot's relation is read from.
+  const tiedTo = otherThan(spec.of);
+  const tied = typeof tiedTo === "object" ? otherThanSlots(tiedTo) : [];
   for (let member = 0; member < Math.max(0, count - group); member += 1) {
     const before = Array.from({ length: member }, (_unused, i) => group + i);
-    const than = [...anchor, ...before];
+    const than = [...anchor, ...(anchor.length + before.length > 0 ? tied : []), ...before];
     out.push(
       than.length === 0
         ? spec.of
@@ -1018,6 +1023,11 @@ export function slotOptions(
       return [];
     }
     let left = (options[group] ?? []).filter((ref) => !taken.some((t) => sameTarget(ref, t)));
+    // A group `other` than an earlier slot offers nothing that slot named
+    // (rule 601.2c): its member's spec, judged as a plain slot over what's left.
+    if (typeof spec === "object" && spec.kind === "any-number" && typeof otherThan(spec.of) === "object") {
+      left = [...slotOptions([...specs.slice(0, group), spec.of], [...options.slice(0, group), left], group, picked, facts)];
+    }
     if (facts === undefined) return left;
     // "From a single graveyard": the player of the first member (or of the
     // slot the group is tied to) is every member's.
@@ -1116,10 +1126,11 @@ export function targetsFillable(
   facts?: TargetFacts,
 ): boolean {
   const group = anyNumberSlot(specs);
-  // Partway through an "any number of" group with a floor: the members so far
-  // and what's still offered must reach it — "two target cards from an
-  // opponent's graveyard" with one picked from a graveyard holding no other.
-  if (group >= 0 && from > group && facts !== undefined) {
+  // At or partway through an "any number of" group with a floor: the members
+  // so far and what's still offered must reach it — "two target cards from an
+  // opponent's graveyard" with one picked from a graveyard holding no other,
+  // or a group `other` than a slot that just took one of its few candidates.
+  if (group >= 0 && from >= group && facts !== undefined) {
     const spec = specs[group];
     const { min } = spec === undefined ? { min: 0 } : groupBounds(spec);
     const taken = picked.slice(group).filter((ref) => ref !== null).length;
@@ -1155,7 +1166,9 @@ export function targetsFillable(
       }
     }
   }
-  if (!specs.some((s, i) => i >= from && typeof otherThan(s) === "object")) return true;
+  const related = (s: TargetSpec): boolean =>
+    typeof otherThan(typeof s === "object" && s.kind === "any-number" ? s.of : s) === "object";
+  if (!specs.some((s, i) => i >= from && related(s))) return true;
   const chosen = [...picked.slice(0, from)];
   for (const ref of slotOptions(specs, options, from, chosen, facts)) {
     if (targetsFillable(specs, options, [...chosen, ref], from + 1, facts)) return true;
