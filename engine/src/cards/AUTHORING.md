@@ -5722,6 +5722,8 @@ is "can't attack a player it has already attacked this turn" (Port Razer), by th
     opponents cast", judged against whoever is actually casting it (not the
     card's controller, so a card cast out of someone else's graveyard is the
     caster's spell). Prefer this over `applies.controlledBy` for new cards.
+  - `exceptOnCastersTurn: true` — "except during its controller's turn"
+    (Defense Grid): nothing during the turn of the player casting the spell.
   - `castFrom: ZoneType` — only spells cast from that zone: Green Goblin's
     "spells you cast from your graveyard cost {2} less to cast" is `{ applies:
     {}, caster: "you", castFrom: "graveyard", reduceGeneric: 2 }`.

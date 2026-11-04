@@ -15971,6 +15971,8 @@ export class Game {
         if (mod.caster === "you" && player !== source.controller) continue;
         if (mod.caster === "opponent" && player === source.controller) continue;
         if (mod.caster === "enchanted-player" && player !== source.attachedToPlayer) continue;
+        // "Except during its controller's turn" (Defense Grid).
+        if (mod.exceptOnCastersTurn === true && player === this.activePlayer) continue;
         // "Spells you cast from your graveyard" (Green Goblin): where the card
         // is cast from — where it is now, or, already on the stack, where it
         // came from.

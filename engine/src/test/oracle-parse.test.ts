@@ -12935,6 +12935,17 @@ describe("mana abilities from a hand, and paid by exiling from a graveyard", () 
       },
     });
   });
+  it("a cost increase except on its caster's turn", () => {
+    const parsed = parseFace({
+      name: "Test Card",
+      type_line: "Artifact",
+      oracle_text: "Each spell costs {3} more to cast except during its controller's turn.",
+      mana_cost: "{2}",
+      colors: [],
+    });
+    expect(parsed.complete).toBe(true);
+    expect(parsed.static[0].costModification).toEqual({ applies: {}, exceptOnCastersTurn: true, increaseGeneric: 3 });
+  });
   it("a manland with all creature types, not a changeling", () => {
     const [, animate] = read(
       "Land",

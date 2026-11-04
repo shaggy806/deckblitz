@@ -17155,6 +17155,9 @@ function spellCostStaticOf(line, text) {
   if ((m = /^Spells you cast from your graveyard cost \{(\d+)\} less to cast\.$/.exec(line))) {
     return made({ applies: {}, caster: "you", castFrom: "graveyard", reduceGeneric: Number(m[1]) });
   }
+  if ((m = /^Each spell costs \{(\d+)\} more to cast except during its controller's turn\.$/.exec(line))) {
+    return made({ applies: {}, exceptOnCastersTurn: true, increaseGeneric: Number(m[1]) });
+  }
   if ((m = /^Spells your opponents cast from graveyards or from exile cost \{(\d+)\} more to cast\.$/.exec(line))) {
     return made({ applies: {}, caster: "opponent", castFrom: ["graveyard", "exile"], castFromAnyones: true, increaseGeneric: Number(m[1]) });
   }

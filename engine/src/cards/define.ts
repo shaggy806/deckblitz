@@ -3943,6 +3943,9 @@ export interface StaticAbility {
      * `"enchanted-player"`: the player this Aura enchants (Curse of
      * Silence's "spells with the chosen name enchanted player casts"). */
     readonly caster?: "you" | "opponent" | "enchanted-player";
+    /** "…except during its controller's turn" (Defense Grid): nothing during
+     * the turn of the player casting it, whoever controls this permanent. */
+    readonly exceptOnCastersTurn?: true;
     /** Only spells cast from this zone — Green Goblin's "spells you cast
      * from your graveyard cost {2} less": the zone the card is cast from (its
      * zone as the cost is worked out, rule 601.2f's card on its way). A
