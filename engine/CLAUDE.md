@@ -42,6 +42,9 @@ Read a file's entry before changing that file; you don't need the rest.
 - **Computed-value cache** (`characteristics.ts`): wrap new read-only hot paths in
   `withComputedCache`, and never let a region span a mutation without `invalidateComputedCache()`.
   `MTG_CACHE_CHECK=1` on the fuzzer verifies it.
+- **`defineCard`'s object literal stays under 128 entries.** At 128 every definition silently gets
+  a hidden class of its own: the pool imports 4x slower and play 40% slower. A new field most
+  cards don't set goes in `rareCardFields` (`test/card-definition-shape.test.ts`).
 - **Every P/T, type or keyword read goes through `computeCharacteristics`** (the layer fold) or
   its cheaper layer-4 reads (`effectiveTypes`/`effectiveSubtypes`). Subtype questions use
   `subtypes.ts`'s `hasSubtype`, never `includes` (changeling).

@@ -493,9 +493,10 @@ section keeps only what to do next.
   (`cost:untap-cost`), Full Throttle, Final Fortune, Endurance, Cavern-Hoard Dragon, Drown in the Loch, Case of the Locked Hothouse, Feldon of the
   Third Path, Scroll Rack, Comet Storm, Baral, All Will Be One, Dour Port-Mage, Echoes of Eternity, Kozilek, Ulamog, Ashling, Phelia, Sting, The Skullspore Nexus, Ondu Spiritdancer, Open the Way, Delina, Daxos, Seize the Spotlight,
   Adaptive Automaton, Brass's Tunnel-Grinder, Valakut Exploration, March of Swirling Mist, Chainer, Renewed Solidarity, Twinning Staff, Mirror Box, Leyline of the
-  Guildpact, Battle Angels of Tyr, The Aetherspark, Claim Jumper, Scheming Symmetry. **Next: the freed cards, with `author-freed`, batch by batch from a fresh
-  session; the remaining keys come after that queue is empty (the user's call, 2026-11-04).** `--stale` 1,758; top-5000 4426/5000, commanders 465/500. When
-  key building resumes, the order is `--by-rank`.
+  Guildpact, Battle Angels of Tyr, The Aetherspark, Claim Jumper, Scheming Symmetry, Contagion Engine, Wedding Ring, Lazotep Quarry, Traveling Chocobo, Urabrask,
+  Sheoldred, Commandeer, Jace's Archivist, Halo Fountain, Mutavault, Defense Grid, Anticausal Vestige. **Next: the freed cards, with `author-freed`, batch by batch
+  from a fresh session; the remaining keys come after that queue is empty (the user's call, 2026-11-04).** `--stale` 1,761; top-5000 4439/5000, commanders 465/500.
+  When key building resumes, the order is `--by-rank`, from Abundance, Temur Sabertooth, Inti, Skrelv's Hive, Tempt with Bunnies.
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next

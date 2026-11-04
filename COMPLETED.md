@@ -12,6 +12,12 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **Card definitions share a hidden class again** (2026-11-04), a regression from that morning: `defineCard`'s literal reached 128 entries, so the pool's import went from 1.2 s to 5.5 s and a fuzzer game cost 40-45% more per event. Its rare fields moved to `rareCardFields` (import 0.85 s), pinned by `card-definition-shape.test.ts`.
+- **Stealing a spell** (2026-11-04), `gain-control-spell`, `putOnStackBy` and `spellCaster` read by what asks who cast it, seat targets rebound to the new controller (a bug for another player's copy too): Commandeer, Aethersnatch.
+- **Exile, then return it transformed** (2026-11-04), no engine code: Urabrask, Sheoldred. **The greatest among discarded cards**, no engine code: Jace's Archivist, Scythe Specter, Ill-Timed Explosion.
+- **A cost of untapping others** (2026-11-04), `untapOthers`: Halo Fountain, Crackleburr. **A cost increase except on the caster's turn**, `exceptOnCastersTurn`: Defense Grid. No engine code: Mutavault, Anticausal Vestige.
+- **A token copy handed to another player** (2026-11-04), `create-token-copy`'s `who` and `goadedForGame`, `whileCondition` reading "that player": Wedding Ring, Fractured Identity, Life of the Party.
+- **A doubled trigger by a player drawing** (2026-11-04), `doubleTriggers`' `"draws"`: Krang, the All-Powerful. No engine code: Traveling Chocobo, Contagion Engine, Lazotep Quarry.
 - **An any-number group "other" than an earlier slot offers nothing that slot took** (2026-11-04), a bug since the card landed: Graceful Takedown could be offered, or silently cast with, an illegal target.
 - **Two players searching, each in turn** (2026-11-04), `for-each-target` over `search-library`, the bots' polarity reading every member: Scheming Symmetry.
 - **Repeated searches with one shuffle** (2026-11-04), no engine code: Claim Jumper.
