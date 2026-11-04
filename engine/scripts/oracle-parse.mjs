@@ -1790,6 +1790,8 @@ export function parseTrigger(clause) {
   }
   // "Whenever Don & Raph attack": a plural name.
   if (/^Whenever ~ attacks?$/.test(c)) return self("attacks");
+  // A creature attacking a planeswalker or battle isn't attacking a player (rule 508.3a).
+  if (/^Whenever ~ attacks a player$/.test(c)) return self("attacks").map((t) => ({ ...t, defender: "player" }));
   if (/^Whenever ~ blocks$/.test(c)) return self("blocks");
   if (/^Whenever ~ becomes blocked$/.test(c)) return self("becomes-blocked");
   // The attacker is the trigger object (`itOf`), whoever's it is: "equipped
@@ -2422,6 +2424,39 @@ function turnTallyEffect(s, ctx) {
     const base = parseSentence(`Create a ${m[1]} token${m[2] ?? ""}.`, ctx);
     return base?.kind === "create-token" && base.count === 1 ? { ...base, count: { turnStat: "opponents-attacked" } } : null;
   }
+  // Heidegger, Shinra Executive: each opponent compared on their own.
+  m = /^create a number of (.+?) tokens?( with .+?)? equal to the number of opponents who control more (lands|creatures|artifacts|enchantments) than you\.$/i.exec(s);
+  if (m !== null) {
+    const base = parseSentence(`Create a ${m[1]} token${m[2] ?? ""}.`, ctx);
+    const where = { kind: "player-compare", stat: { controls: { type: singular(m[3].toLowerCase()) } }, compare: "fewer", than: "that-player" };
+    return base?.kind === "create-token" && base.count === 1 ? { ...base, count: { countPlayers: "each-opponent", where } } : null;
+  }
+  // Unified Will: asked only as it resolves (the ruling), of the spell's controller.
+  m = /^counter target spell if you control more (lands|creatures|artifacts|enchantments) than that spell's controller\.$/i.exec(s);
+  if (m !== null) {
+    const target = ctx.target("spell");
+    return {
+      kind: "conditional",
+      condition: { kind: "player-compare", stat: { controls: { type: singular(m[1].toLowerCase()) } }, compare: "more", than: { controllerOfTarget: target } },
+      then: { kind: "counter", target },
+    };
+  }
+  // Skulking Killer: the instruction about a target, on its controller having
+  // no other creature as it resolves (the ruling).
+  m = /^(target creature an opponent controls .+) if that opponent controls no other creatures\.$/i.exec(s);
+  if (m !== null) {
+    const then = parseSentence(`${m[1]}.`, ctx);
+    if (then === null || typeof then.target !== "number") return null;
+    return {
+      kind: "conditional",
+      condition: {
+        kind: "of-player",
+        player: { controllerOfTarget: then.target },
+        condition: { kind: "not", of: { kind: "controls", filter: { type: "creature" }, atLeast: 1, excludeTarget: then.target } },
+      },
+      then,
+    };
+  }
   m = /^draw cards equal to the number of cards (target opponent|target player) discarded this turn\.$/i.exec(s);
   if (m !== null) {
     return { kind: "draw", amount: { turnHistory: "discarded", target: ctx.target(m[1].toLowerCase() === "target opponent" ? "opponent" : "player") } };
@@ -2556,6 +2591,8 @@ function laterPointSentence(s, ctx) {
 
 export function parseSentence(sentence, ctx) {
   const s = sentence.replace(/\s+/g, " ").trim();
+  // "You create two Treasure tokens" (Guild Artisan) says what "Create …" does.
+  if (/^you create /i.test(s)) return parseSentence(s.replace(/^you create /i, "Create "), ctx);
   const emblem = emblemOf(s);
   if (emblem !== null) return emblem;
   let M;
@@ -4571,6 +4608,12 @@ export function parseSentence(sentence, ctx) {
       ],
     };
   }
+  // "You may put a land card from your hand onto the battlefield" (Burgeoning).
+  if ((m = /^you may put an? (.+?) card from your hand onto the battlefield\.$/i.exec(s))) {
+    const filter = parseTypePhrase(m[1], { cards: true });
+    if (filter === null) return null;
+    return { kind: "look-and-choose", zone: "hand", min: 0, max: 1, destination: "battlefield", leftover: "stay", filter };
+  }
   // "You may put an Aura card from your hand onto the battlefield attached to
   // ~" (Academy Researchers).
   if ((m = /^you may put an? (.+?) card from your hand onto the battlefield attached to (.+?)\.$/i.exec(s))) {
@@ -4992,6 +5035,12 @@ export function parseSentence(sentence, ctx) {
     const filter = parseTypePhrase(m[1], { cards: true });
     if (filter === null) return null;
     return { kind: "search-library", filter, destination: "hand", min: 0, max: 1, reveal: true };
+  }
+  // Archaeomancer's Map: "… for up to two basic Plains cards, …".
+  if ((m = /^search your library for up to two (basic [A-Z]\w+) cards, reveal them, put them into your hand, then shuffle\.$/.exec(s))) {
+    const filter = parseTypePhrase(m[1], { cards: true });
+    if (filter === null) return null;
+    return { kind: "search-library", filter, destination: "hand", reveal: true, min: 0, max: 2 };
   }
   // "…put it into your hand or graveyard" (Dina's Guidance): the searcher's
   // choice once it's revealed (`instead`, `pick: "any"`).
@@ -10351,6 +10400,25 @@ function chosenValueAt(sentences, i, ctx) {
   const wrap = (value, then, extra = {}) => ({ kind: "choose-value", value, ...extra, then });
   const who = (phrase) => ctx.target(phrase.toLowerCase() === "target opponent" ? "opponent" : "player");
   let m;
+  // Peer Pressure: strictly ahead of each other player in creatures of the
+  // type chosen as it resolves.
+  if (
+    /^choose a creature type\.$/i.test(s(0)) &&
+    /^if you control more creatures of that type than each other player, you gain control of all creatures of that type\.$/i.test(s(1))
+  ) {
+    const ofType = { type: "creature", subtype: "$chosen" };
+    return {
+      effect: {
+        kind: "choose-creature-type",
+        then: {
+          kind: "conditional",
+          condition: { kind: "player-compare", stat: { controls: ofType }, compare: "more", than: "each-opponent" },
+          then: { kind: "gain-control-all", filter: ofType, untilEndOfTurn: false },
+        },
+      },
+      used: 2,
+    };
+  }
   // Terraformer, Elsewhere Flask: a word chosen as it resolves, replacing every
   // land type (rule 305.7).
   if (/^choose a basic land type\.$/i.test(s(0)) && /^each land you control becomes that type until end of turn\.$/i.test(s(1))) {
@@ -10764,6 +10832,21 @@ function parseFaceAsWritten(face, ctx = {}) {
         out.triggered.push(kinship(r.effect, said));
       } else out.todo.push(printed(raw));
       continue;
+    }
+    // A Background's "Commander creatures you own have 'Whenever this creature
+    // attacks a player, if …'": the quoted trigger read as a line of its own,
+    // left to a person when anything else comes with it.
+    const grantedTrigger = /^Commander creatures you own have "((?:When|Whenever|At) [^"]+\.)"$/.exec(printed(raw));
+    if (grantedTrigger !== null) {
+      const read = parseFace({ ...face, type_line: "Creature", oracle_text: grantedTrigger[1] }, ctx);
+      if (read.complete && read.triggered.length === 1 && read.activated.length + read.static.length + read.keywords.length === 0) {
+        out.static.push({
+          affects: { scope: "filter", filter: { type: "creature", isCommander: true, ownedBy: "you" } },
+          grantsTriggered: read.triggered,
+          text: printed(raw),
+        });
+        continue;
+      }
     }
     // "Max speed — [ability]" (rule 702.178a): the ability, had only while
     // its controller's speed is 4 — the line read on its own, then given
@@ -13138,12 +13221,34 @@ function playerStateIf(clause, triggers) {
   if (/^if (that player|defending player) is poisoned,$/.test(c)) {
     return ofThat({ kind: "player-counters", counter: "poison", who: "you", atLeast: 1 });
   }
+  // "If no opponent has more life than that player," (the Baldur's Gate
+  // Backgrounds): the attacker's opponents against the one attacked, the
+  // attacker's own life left out (the rulings), which `each-opponent` under
+  // `of-player` would count.
+  if (c === "if no opponent has more life than that player," && that === "that-player") {
+    return {
+      kind: "not",
+      of: {
+        kind: "of-player",
+        player: "an-opponent",
+        condition: { kind: "player-compare", stat: "life", compare: "more", than: "that-player" },
+      },
+    };
+  }
   const STATS = { "cards in hand": "hand", life: "life" };
   m = /^if (you have|you control|that player has|that player controls) more (cards in hand|life|lands|creatures|artifacts|enchantments) than each (?:opponent|other player),$/.exec(c);
   if (m !== null) {
     const stat = STATS[m[2]] ?? { controls: { type: singular(m[2]) } };
     const compare = { kind: "player-compare", stat, compare: "more", than: "each-opponent" };
     return m[1].startsWith("you") ? compare : ofThat(compare);
+  }
+  // Archaeomancer's Map: the player the land entered under, or the player attacked.
+  m = /^if that player controls more (lands|creatures|artifacts|enchantments) than you,$/.exec(c);
+  if (m !== null) {
+    const namesThem = (t) =>
+      t.on === "attacks" || (t.on === "enters-battlefield" && t.who === "any" && t.filter?.controlledBy === "opponent");
+    if (!triggers.every(namesThem)) return undefined;
+    return { kind: "player-compare", stat: { controls: { type: singular(m[1]) } }, compare: "fewer", than: "that-player" };
   }
   m = /^if (an opponent|defending player) has more (cards in hand|life) than you,$/.exec(c);
   if (m !== null) {
@@ -15956,6 +16061,19 @@ function parseStatic(line, text) {
         text,
       };
     }
+  }
+  // Predator's Gambit: the enchanted creature's controller, not the Aura's.
+  if ((m = new RegExp(`^Enchanted creature has ${KW} as long as its controller controls no other creatures\\.$`, "i").exec(line))) {
+    return {
+      affects: { scope: "attached" },
+      grantKeywords: [KEYWORDS[m[1].toLowerCase()]],
+      condition: {
+        kind: "of-player",
+        player: "host-controller",
+        condition: { kind: "not", of: { kind: "controls", filter: { type: "creature" }, atLeast: 1, excludeHost: true, countsSelf: true } },
+      },
+      text,
+    };
   }
   if ((m = new RegExp(`^(?:Equipped|Enchanted) creature has ${KW}(?: and ${KW})?\\.$`, "i").exec(line))) {
     return { affects: { scope: "attached" }, grantKeywords: [m[1], m[2]].filter(Boolean).map((k) => KEYWORDS[k.toLowerCase()]), text };

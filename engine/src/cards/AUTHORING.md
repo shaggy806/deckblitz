@@ -5815,7 +5815,8 @@ clause (section 9):
   `cantAttackUnlessDefender` instead, asked per attack declared). Works
   as an intervening-if (asked with the trigger's "that player" as it
   triggers and resolves), a `conditional`, an activation condition; on a
-  static, only `"active-player"` and targets mean anything. Prefer it over a
+  static, only `"active-player"`, `"defending-player"` and `"host-controller"`
+  (the controller of the permanent this one is attached to) mean anything. Prefer it over a
   kind's own `who: "that-player"`.
 - `{ kind: "player-compare", stat, compare, than }` — one number of yours
   against other players' (2026-10-30). `stat` is `"life"`, `"hand"` or `{
@@ -5833,6 +5834,21 @@ clause (section 9):
   Under `of-player` it's that player's number (Rivalry's "if that player controls
   more lands than each other player"). `countPlayers`' `where` counts with it:
   Wojek Investigator's "for each opponent who has more cards in hand than you".
+  **Compose these before asking for an option** (2026-11-03). The Backgrounds'
+  "if no opponent has more life than that player" is `{ kind: "not", of: { kind:
+  "of-player", player: "an-opponent", condition: { kind: "player-compare", stat:
+  "life", compare: "more", than: "that-player" } } }` — the attacker's opponents
+  only (the ruling), which `each-opponent` under an `of-player` of that player
+  wouldn't say, since the attacker is one of theirs. Archaeomancer's Map's "if
+  that player controls more lands than you": an `enters-battlefield` trigger's
+  "that player" is who it entered under, so `compare: "fewer", than:
+  "that-player"`. Unified Will's "more creatures than that spell's controller":
+  `than: { controllerOfTarget: 0 }`. Peer Pressure's "more creatures of that type
+  than each other player": `stat: { controls: { type: "creature", subtype:
+  "$chosen" } }` inside its `choose-creature-type`. "Its controller controls no
+  other creatures": `of-player` over `not` `controls`, `"host-controller"` with
+  `excludeHost` (Predator's Gambit, `countsSelf` too), `{ controllerOfTarget: 0
+  }` with `excludeTarget: 0` (Skulking Killer).
 - `for-each-player`'s **`whoIf`** — "each player **who** …": only the players
   for whom the condition holds, read with each as `"that-player"` and all
   found before any acts. Depopulate's "each player who controls a

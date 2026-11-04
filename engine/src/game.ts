@@ -27410,6 +27410,11 @@ export class Game {
           player = hit.controller;
         }
       }
+    } else if (event.type === "permanent-entered-battlefield") {
+      // "Whenever a land an opponent controls enters, if that player controls
+      // more lands than you" (Archaeomancer's Map): who it entered under,
+      // whoever controls it by the time the ability resolves.
+      player = this.state.objects[event.object]?.controller;
     } else if (event.type === "attacker-declared") {
       player = this.defendingPlayerOf(event.defender);
       recipient = this.attackedRecipient(event.defender);

@@ -1529,7 +1529,12 @@
   "effect:each-player-keeps-one-exile-rest",
   "effect:sacrifice-all-but-up-to-n",
   "decision:choose-among-targets",
-  "decision:choose-permanents-keeps-targets"
+  "decision:choose-permanents-keeps-targets",
+  "condition:defender-no-opponent-more-life",
+  "condition:that-player-controls-more",
+  "condition:controls-more-than-each-other-player",
+  "condition:enchanted-controller-controls-no-other-creatures",
+  "condition:target-controller-controls-no-other-creatures"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

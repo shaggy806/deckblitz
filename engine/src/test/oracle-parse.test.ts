@@ -12713,3 +12713,77 @@ describe("more to spend mana only on", () => {
     });
   });
 });
+
+describe("how one player's state compares with another's", () => {
+  const read = (type_line: string, oracle_text: string) =>
+    parseFace({ name: "Card", type_line, oracle_text }, { tokenFor: (d: string) => d });
+
+  it("a Background's quoted trigger, attacking a player, no opponent with more life", () => {
+    const line = "Whenever this creature attacks a player, if no opponent has more life than that player, you create two Treasure tokens.";
+    const face = read("Legendary Enchantment — Background", `Commander creatures you own have "${line}"`);
+    expect(face.complete).toBe(true);
+    expect(face.static[0].affects).toEqual({ scope: "filter", filter: { type: "creature", isCommander: true, ownedBy: "you" } });
+    expect(face.static[0].grantsTriggered[0]).toMatchObject({
+      trigger: { on: "attacks", who: "self", defender: "player" },
+      condition: {
+        kind: "not",
+        of: {
+          kind: "of-player",
+          player: "an-opponent",
+          condition: { kind: "player-compare", stat: "life", compare: "more", than: "that-player" },
+        },
+      },
+      effect: { kind: "create-token", count: 2 },
+    });
+  });
+
+  it("that player, a land entered under them", () => {
+    const face = read(
+      "Artifact",
+      "Whenever a land an opponent controls enters, if that player controls more lands than you, you may put a land card from your hand onto the battlefield.",
+    );
+    expect(face.complete).toBe(true);
+    expect(face.triggered[0].condition).toEqual({ kind: "player-compare", stat: { controls: { type: "land" } }, compare: "fewer", than: "that-player" });
+    expect(face.triggered[0].effect).toMatchObject({ kind: "look-and-choose", zone: "hand", destination: "battlefield", min: 0, max: 1 });
+  });
+
+  it("leaves a 'that player' no trigger names to a person", () => {
+    const face = read("Creature", "Whenever a land you control enters, if that player controls more lands than you, draw a card.");
+    expect(face.complete).toBe(false);
+  });
+
+  it("that spell's controller", () => {
+    expect(read("Instant", "Counter target spell if you control more creatures than that spell's controller.").effect).toEqual({
+      kind: "conditional",
+      condition: { kind: "player-compare", stat: { controls: { type: "creature" } }, compare: "more", than: { controllerOfTarget: 0 } },
+      then: { kind: "counter", target: 0 },
+    });
+  });
+
+  it("more of the chosen type than each other player", () => {
+    const face = read("Sorcery", "Choose a creature type. If you control more creatures of that type than each other player, you gain control of all creatures of that type.");
+    expect(face.effect).toMatchObject({
+      kind: "choose-creature-type",
+      then: { kind: "conditional", condition: { compare: "more", than: "each-opponent" }, then: { kind: "gain-control-all" } },
+    });
+  });
+
+  it("an enchanted creature's controller, and a target's", () => {
+    const aura = read("Enchantment — Aura", "Enchant creature\nEnchanted creature has intimidate as long as its controller controls no other creatures.");
+    expect(aura.static[0].condition).toMatchObject({ kind: "of-player", player: "host-controller", condition: { kind: "not", of: { excludeHost: true } } });
+    const killer = read("Creature", "When this creature enters, target creature an opponent controls gets -2/-2 until end of turn if that opponent controls no other creatures.");
+    expect(killer.triggered[0].effect).toMatchObject({
+      kind: "conditional",
+      condition: { kind: "of-player", player: { controllerOfTarget: 0 }, condition: { kind: "not", of: { excludeTarget: 0 } } },
+      then: { kind: "modify-pt", target: 0, power: -2 },
+    });
+  });
+
+  it("the number of opponents who control more", () => {
+    const face = read("Creature", "At the beginning of your end step, create a number of 1/1 white Soldier creature tokens equal to the number of opponents who control more creatures than you.");
+    expect(face.triggered[0].effect.count).toEqual({
+      countPlayers: "each-opponent",
+      where: { kind: "player-compare", stat: { controls: { type: "creature" } }, compare: "fewer", than: "that-player" },
+    });
+  });
+});
