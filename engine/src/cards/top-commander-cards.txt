@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4385 already implemented / 615 missing (marks refreshed 2026-11-04)
+4388 already implemented / 612 missing (marks refreshed 2026-11-04)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -1239,7 +1239,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1245  Waste Not                                {1}{B}           Enchantment
 [x]  1246  Topiary Stomper                          {1}{G}{G}        Creature — Plant Dinosaur
 [x]  1247  Shark Typhoon                            {5}{U}           Enchantment
-[ ]  1248  Liberator, Urza's Battlethopter          {3}              Legendary Artifact Creature — Thopter
+[x]  1248  Liberator, Urza's Battlethopter          {3}              Legendary Artifact Creature — Thopter
 [x]  1249  Vorinclex, Monstrous Raider              {4}{G}{G}        Legendary Creature — Phyrexian Praetor
 [x]  1250  Chromatic Orrery                         {7}              Legendary Artifact
 [x]  1251  Slayers' Stronghold                      {0}              Land
@@ -1253,8 +1253,8 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1259  Hedge Shredder                           {2}{G}{G}        Artifact — Vehicle
 [x]  1260  Twinflame                                {1}{R}           Sorcery
 [x]  1261  Saryth, the Viper's Fang                 {2}{G}{G}        Legendary Creature — Human Warlock
-[ ]  1262  Coveted Jewel                            {6}              Artifact
-[ ]  1263  Sephiroth, Fabled SOLDIER // Sephiroth, One-Winged Angel {3}              Legendary Creature — Human Avatar Soldier // Legendary Creature — Angel Nightmare Avatar
+[x]  1262  Coveted Jewel                            {6}              Artifact
+[x]  1263  Sephiroth, Fabled SOLDIER // Sephiroth, One-Winged Angel {3}              Legendary Creature — Human Avatar Soldier // Legendary Creature — Angel Nightmare Avatar
 [x]  1264  Stock Up                                 {2}{U}           Sorcery
 [x]  1265  Wight of the Reliquary                   {B}{G}           Creature — Zombie Knight
 [x]  1266  Elenda, the Dusk Rose                    {2}{W}{B}        Legendary Creature — Vampire Knight

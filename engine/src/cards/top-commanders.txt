@@ -1,5 +1,5 @@
 Top 500 Commander *commanders* by EDHREC deck count (fetched 2026-09-22)
-464 already implemented / 36 missing
+465 already implemented / 35 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -32,7 +32,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   26  Kefka, Court Mage                              31209 decks  {2}{U}{B}{R}     Legendary Creature — Human Wizard // Legendary Creature — Avatar Wizard
 [x]   27  Valgavoth, Harrower of Souls                   30711 decks  {2}{B}{R}        Legendary Creature — Elder Demon
 [x]   28  Isshin, Two Heavens as One                     30593 decks  {R}{W}{B}        Legendary Creature — Human Samurai
-[ ]   29  Sephiroth, Fabled SOLDIER                      30424 decks  {2}{B}           Legendary Creature — Human Avatar Soldier // Legendary Creature — Angel Nightmare Avatar
+[x]   29  Sephiroth, Fabled SOLDIER                      30424 decks  {2}{B}           Legendary Creature — Human Avatar Soldier // Legendary Creature — Angel Nightmare Avatar
 [x]   30  Baylen, the Haymaker                           29839 decks  {R}{G}{W}        Legendary Creature — Rabbit Warrior
 [x]   31  Miirym, Sentinel Wyrm                          28532 decks  {3}{G}{U}{R}     Legendary Creature — Dragon Spirit
 [x]   32  Chatterfang, Squirrel General                  27793 decks  {2}{G}           Legendary Creature — Squirrel Warrior
