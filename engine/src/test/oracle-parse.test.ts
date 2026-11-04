@@ -15660,3 +15660,21 @@ describe("a permission for one creature spell from your graveyard", () => {
     expect(face.activated[0].oncePerTurn).toBe(true);
   });
 });
+
+describe("a token copy of each token you control", () => {
+  it("reads Renewed Solidarity's, of the chosen type and entered this turn", () => {
+    const face = parseFace({
+      name: "Test Card",
+      type_line: "Enchantment",
+      mana_cost: "{2}{W}",
+      oracle_text:
+        "As this enchantment enters, choose a creature type.\nCreatures you control of the chosen type get +1/+0.\nAt the beginning of your end step, for each token you control of the chosen type that entered this turn, create a token that's a copy of it.",
+    });
+    expect(face.complete).toBe(true);
+    expect(face.triggered[0].effect).toEqual({
+      kind: "create-token-copy",
+      of: { each: { token: true, controlledBy: "you", enteredThisTurn: true, ofChosenType: true } },
+      count: 1,
+    });
+  });
+});

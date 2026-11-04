@@ -4223,6 +4223,22 @@ export function parseSentence(sentence, ctx) {
       ...except,
     };
   }
+  // "For each token you control [of the chosen type] [that entered this turn],
+  // create a token that's a copy of it" (Renewed Solidarity, Second Harvest).
+  if ((m = re("for each token you control( of the chosen type)?( that entered this turn)?, create a token that's a copy of (?:it|that permanent)").exec(s))) {
+    return {
+      kind: "create-token-copy",
+      of: {
+        each: {
+          token: true,
+          controlledBy: "you",
+          ...(m[2] !== undefined ? { enteredThisTurn: true } : {}),
+          ...(m[1] !== undefined ? { ofChosenType: true } : {}),
+        },
+      },
+      count: 1,
+    };
+  }
   if (re("investigate").test(s)) return { kind: "create-token", token: "Clue Token", count: 1 };
   // Learn (rule 701.48a): the rummage, or else a Lesson from the sideboard
   // (`learn()` in helpers.ts).

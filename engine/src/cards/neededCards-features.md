@@ -5086,6 +5086,8 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 
 **A spell's target count from an amount (2026-11-04).** `decision:spell-target-count-amount`: `Game.effectiveTargetSpecs` reads a spell's `any-number` bounds other than `"x"` for that cast (`spellSpecsWithAmounts`), the kick count already known (rules 601.2b–c), so each multikicker offer has its own count. Comet Storm, Strength of the Tajuru, Aether Burst. Reap waits on `decision:target-count-from-other-target`.
 
+**Copies of the chosen type's tokens that entered this turn (2026-11-04).** `effect:tokens-entered-this-turn-copies`: no engine code, `create-token-copy`'s `{ each }` over `token`, `enteredThisTurn` and `ofChosenType`. Renewed Solidarity, and a parser template for the line.
+
 **The cards just exiled, looked at and put back (2026-11-04).** `effect:exile-from-hand-any-number-swap`: `look-and-choose`'s `zone: "exiled-this-way"`, a face-down card picked itself rather than by its group (rule 406.3), in order (rule 401.4). Scroll Rack.
 
 **Attack you and aren't blocked (2026-11-04).** `trigger:attacks-you-unblocked-batch`: `attacks-player` with `unblocked`, off a `player-attacked-unblocked` event per player attacked directly, as blockers are declared. Coveted Jewel.

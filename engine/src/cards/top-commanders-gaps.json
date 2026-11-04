@@ -1813,7 +1813,8 @@
   "effect:roll-again",
   "bug:cda-devotion",
   "effect:fame-or-fortune",
-  "static:is-chosen-type"
+  "static:is-chosen-type",
+  "effect:tokens-entered-this-turn-copies"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {
