@@ -4,6 +4,7 @@
  "built": [
   "condition:own-turn-count",
   "effect:keep-one-of-each-permanent-type",
+  "effect:turn-scoped-mana-trigger",
   "effect:exile-any-number-until-leaves",
   "effect:exile-until-leaves-per-opponent",
   "trigger:linked-exile-each-upkeep-return-one",

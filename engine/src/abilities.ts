@@ -2791,3 +2791,17 @@ export function isTriggeredManaAbility(ability: TriggeredAbility): boolean {
     addsManaOnly(ability.effect)
   );
 }
+
+/**
+ * The same for a delayed one (rules 603.7, 605.1b): "until end of turn, whenever
+ * a player taps an Island for mana, that player adds an additional {U}" (High
+ * Tide) is a triggered mana ability with a duration, and doesn't use the stack
+ * either. Its effect is the `add-mana` `Game.tappedForManaExtras` reads.
+ */
+export function isDelayedManaAbility(
+  whenever: TriggerSpec,
+  targets: readonly unknown[] | undefined,
+  effect: EffectSpec,
+): boolean {
+  return whenever.on === "tapped-for-mana" && (targets === undefined || targets.length === 0) && effect.kind === "add-mana";
+}

@@ -4182,7 +4182,9 @@ own `add-mana` is scoped to someone else is never an auto-payer source.
 (§9) with an `add-mana` effect: Crypt Ghast's "whenever you tap a Swamp for
 mana, add an additional {B}" is `trigger: { on: "tapped-for-mana", who:
 "you-control", filter: { subtype: "Swamp" } }`, `effect: { kind: "add-mana",
-mana: "B", amount: 1 }`; Roxanne, Starfall Savant's "…add one mana of any type
+mana: "B", amount: 1 }`; a `delayed-trigger`'s `at: { whenever }` with that
+trigger and that effect is one for the turn (High Tide, Bubbling Muck, Molten
+Tide); Roxanne, Starfall Savant's "…add one mana of any type
 that artifact token produced" is `mana: "produced"` (meaningless anywhere
 else). They never go on the stack: the extra mana is made with the rest, and
 the auto-payer counts it — a Swamp under Crypt Ghast is a `{B}{B}` source.

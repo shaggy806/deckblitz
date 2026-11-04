@@ -7713,6 +7713,22 @@ const NONLAND_KEEP = {
   rest: "sacrifice",
   prompt: NONLAND_KEEP_PROMPT,
 };
+const SNAPDAX_LINE =
+  "Each player chooses an artifact, a creature, an enchantment, and a planeswalker from among the nonland permanents they control, then sacrifices the rest. If {B}{R} was spent to cast ~, you choose the permanents for each player instead.";
+const SNAPDAX_EFFECT = {
+  kind: "conditional",
+  condition: { kind: "source", filter: { manaSpentOfColors: { B: 1, R: 1 } } },
+  then: {
+    kind: "choose-one-of-each",
+    who: "each-player",
+    slots: ["artifact", "creature", "enchantment", "planeswalker"],
+    filter: { notTypes: ["land"] },
+    rest: "sacrifice",
+    chosenBy: "you",
+    prompt: "Choose an artifact, a creature, an enchantment, and a planeswalker for this player to keep — their other nonland permanents are sacrificed",
+  },
+  else: NONLAND_KEEP,
+};
 const ONE_OF_EACH_EFFECTS = {
   "Each opponent chooses a permanent they control of each permanent type and sacrifices the rest.": {
     kind: "choose-one-of-each",
@@ -7723,12 +7739,6 @@ const ONE_OF_EACH_EFFECTS = {
     prompt: "Choose a permanent of each permanent type to keep — the rest are sacrificed",
   },
   "Each player chooses an artifact, a creature, an enchantment, and a planeswalker from among the nonland permanents they control, then sacrifices the rest.": NONLAND_KEEP,
-  "Each player chooses an artifact, a creature, an enchantment, and a planeswalker from among the nonland permanents they control, then sacrifices the rest. If {B}{R} was spent to cast this spell, you choose the permanents for each player instead.": {
-    kind: "conditional",
-    condition: { kind: "source", filter: { manaSpentOfColors: { B: 1, R: 1 } } },
-    then: { ...NONLAND_KEEP, chosenBy: "you", prompt: "Choose an artifact, a creature, an enchantment, and a planeswalker for this player to keep — their other nonland permanents are sacrificed" },
-    else: NONLAND_KEEP,
-  },
   "Each player chooses from among the permanents they control an artifact, a creature, an enchantment, and a land, then sacrifices the rest.": {
     kind: "choose-one-of-each",
     who: "each-player",
@@ -7992,6 +8002,8 @@ export function parseEffect(text, outer) {
   let skip = 0;
   const becomes = becomesWithAbilitiesOf(text);
   if (becomes !== null) return { effect: becomes, todo: [], hints: [] };
+  // Mythos of Snapdax's two sentences: the second rewrites who chooses.
+  if (text === SNAPDAX_LINE) return { effect: SNAPDAX_EFFECT, todo: [], hints: [] };
 
   // "Choose target nonland permanent an opponent controls. Until your next
   // turn, it can't attack or block, and its activated abilities can't be
@@ -8300,6 +8312,21 @@ export function parseEffect(text, outer) {
   // A suspend cost as an alternative cost (The Face of Boe).
   if (text === "You may cast a spell with suspend from your hand. If you do, pay its suspend cost rather than its mana cost.") {
     return { effect: { kind: "cast-now", from: "hand", spell: { hasSuspend: true }, suspendCost: true }, todo: [], hints: [] };
+  }
+  // A delayed triggered mana ability (rule 605.1b): High Tide, Molten Tide.
+  const tide = /^until end of turn, whenever (a player taps|you tap) an? ([A-Z][a-z]+) for mana, (?:that player adds|add) an additional \{([WUBRGC])\}\.$/i.exec(text);
+  if (tide !== null && (tide[1].startsWith("a") ? /that player adds/ : /, add /).test(text)) {
+    const clause = text.replace(/^until end of turn, /i, "");
+    return {
+      effect: {
+        kind: "delayed-trigger",
+        at: { whenever: { on: "tapped-for-mana", who: tide[1].startsWith("a") ? "any" : "you-control", filter: { subtype: tide[2] } } },
+        effect: { kind: "add-mana", mana: tide[3], amount: 1 },
+        text: clause.charAt(0).toUpperCase() + clause.slice(1),
+      },
+      todo: [],
+      hints: [],
+    };
   }
   // One for each of several categories (`choose-one-of-each`).
   const oneOfEach = ONE_OF_EACH_EFFECTS[text.charAt(0).toUpperCase() + text.slice(1)];

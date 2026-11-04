@@ -14653,7 +14653,12 @@ describe("a cast as this resolves, on its own terms", () => {
   });
 
   it("reads a permanent of each type, all six or the nonland four, and a caster choosing for each player", () => {
-    const liliana = read("Legendary Planeswalker — Liliana", "−9: Each opponent chooses a permanent they control of each permanent type and sacrifices the rest.");
+    const liliana = parseFace({
+      name: "Test Card",
+      type_line: "Legendary Planeswalker — Liliana",
+      oracle_text: "−9: Each opponent chooses a permanent they control of each permanent type and sacrifices the rest.",
+      loyalty: "6",
+    });
     expect(liliana.complete).toBe(true);
     expect(liliana.activated[0].effect).toMatchObject({
       kind: "choose-one-of-each",
@@ -14678,6 +14683,24 @@ describe("a cast as this resolves, on its own terms", () => {
       then: { chosenBy: "you" },
       else: { kind: "choose-one-of-each" },
     });
+  });
+
+  it("reads a turn's triggered mana ability, a player's or only yours", () => {
+    const tide = read("Instant", "Until end of turn, whenever a player taps an Island for mana, that player adds an additional {U}.");
+    expect(tide.complete).toBe(true);
+    expect(tide.effect).toEqual({
+      kind: "delayed-trigger",
+      at: { whenever: { on: "tapped-for-mana", who: "any", filter: { subtype: "Island" } } },
+      effect: { kind: "add-mana", mana: "U", amount: 1 },
+      text: "Whenever a player taps an Island for mana, that player adds an additional {U}.",
+    });
+    const molten = read("Instant", "Until end of turn, whenever you tap a Mountain for mana, add an additional {R}.");
+    expect(molten.effect).toMatchObject({
+      at: { whenever: { who: "you-control", filter: { subtype: "Mountain" } } },
+      effect: { mana: "R" },
+    });
+    // Half a sentence isn't read: "you tap ... that player adds".
+    expect(read("Instant", "Until end of turn, whenever you tap a Mountain for mana, that player adds an additional {R}.").complete).toBe(false);
   });
 
   it("reads your first three turns of the game: a land's entry, a cast", () => {

@@ -14,6 +14,7 @@ import {
   costAnnouncesX,
   isEquipAbility,
   isManaAbility,
+  isDelayedManaAbility,
   isTriggeredManaAbility,
   loyaltyDelta,
   sacrificeCostFilters,
@@ -1789,8 +1790,12 @@ type EscapeOption = {
 type ManaExtra = {
   readonly mana: Extract<EffectSpec, { kind: "add-mana" }>["mana"];
   readonly amount: number;
-  /** The permanent whose triggered ability it is: the mana is from it. */
+  /** The permanent whose triggered ability it is: the mana is from it. For a
+   * delayed one, the object that set it up. */
   readonly holder: ObjectId;
+  /** A delayed one's controller (`DelayedTrigger.controller`); otherwise the
+   * holder's. */
+  readonly controller?: PlayerId;
   /** Only when the tapping made this type ("for {C}", "of the chosen color"). */
   readonly producing?: ManaType;
   /** What else the ability does, as part of it (`add-mana`'s `also`) — "and
@@ -25150,6 +25155,55 @@ export class Game {
         });
       }
     }
+    // Delayed ones, which belong to no permanent (rule 603.7): High Tide's "until
+    // end of turn, whenever a player taps an Island for mana". The object that
+    // set it up has moved on and the ability hasn't: its controller is "you".
+    for (const delayed of this.state.delayedTriggers) {
+      const at = delayed.at;
+      if (typeof at !== "object" || !("whenever" in at)) continue;
+      const trigger = at.whenever;
+      const effect = delayed.effect;
+      if (trigger.on !== "tapped-for-mana" || effect.kind !== "add-mana" || !isDelayedManaAbility(trigger, at.targets, effect)) continue;
+      if (at.untilYourNextTurn !== true && at.forGame !== true && at.turn !== this.state.turn.number) continue;
+      if (this.state.players[delayed.controller]?.hasLost !== false) continue;
+      // A copy of a spell has ceased to exist by now (rule 707.10a — Molten
+      // Tide, always a copy), and its ability goes on; there's no one else's
+      // side to read, so a `who` about the source itself doesn't match.
+      const source = this.state.objects[delayed.source];
+      const holder =
+        source === undefined || source.controller === delayed.controller ? source : { ...source, controller: delayed.controller };
+      const matches =
+        trigger.who === "any" ||
+        (trigger.who === "you-control"
+          ? tapped.controller === delayed.controller
+          : trigger.who === "opponent"
+            ? tapped.controller !== delayed.controller
+            : holder !== undefined && this.matchesWho(trigger.who, tapped.id, holder));
+      if (!matches) continue;
+      if (
+        trigger.filter !== undefined &&
+        !matchesFilter(this.state, this.registry, tapped.id, trigger.filter, { you: delayed.controller, source: delayed.source })
+      ) {
+        continue;
+      }
+      const producing =
+        trigger.producing === "chosen" ? (holder !== undefined ? chosenManaType(holder) : undefined) : trigger.producing;
+      if (trigger.producing !== undefined && producing === undefined) continue;
+      const tag = holder !== undefined ? this.manaTagFor(holder, effect) : undefined;
+      out.push({
+        mana: effect.mana,
+        amount:
+          typeof effect.amount === "number"
+            ? effect.amount
+            : this.liveManaAmount(delayed.source, delayed.controller, effect.amount),
+        holder: delayed.source,
+        controller: delayed.controller,
+        ...(producing !== undefined ? { producing } : {}),
+        ...(effect.also !== undefined ? { also: effect.also } : {}),
+        ...(tag !== undefined ? { tag } : {}),
+        ...(effect.mayAdd === true ? { may: true as const } : {}),
+      });
+    }
     return out;
   }
 
@@ -25186,7 +25240,7 @@ export class Game {
       if (holder === undefined || extra.also === undefined) continue;
       applyEffectSpec(
         extra.also,
-        this.makeResolutionContext(extra.holder, holder.controller, [], 0, 0, tapped, 1, 0, [], {
+        this.makeResolutionContext(extra.holder, extra.controller ?? holder.controller, [], 0, 0, tapped, 1, 0, [], {
           player,
           ...(stint !== undefined ? { triggerObject: stint } : {}),
         }),
@@ -27804,6 +27858,9 @@ export class Game {
       if (typeof at !== "object" || !("whenever" in at)) continue;
       if (at.untilYourNextTurn !== true && at.forGame !== true && at.turn !== this.state.turn.number) continue;
       if (this.state.players[trigger.controller]?.hasLost !== false) continue;
+      // A triggered mana ability (rule 605.1b) doesn't use the stack:
+      // `tappedForManaExtras` made its mana with the rest.
+      if (isDelayedManaAbility(at.whenever, at.targets, trigger.effect)) continue;
       const source = this.state.objects[trigger.source];
       if (source === undefined) continue;
       const aboutSelf =
