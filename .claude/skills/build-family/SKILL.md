@@ -394,7 +394,7 @@ in its own worktree (`isolation: "worktree"`), integrated by cherry-pick.
   trial: tell client agents to rely on `run-check` and skip `test:e2e`, which cost each about 18
   minutes. Say in the report what the trial changed, and use `--full` at least once a night: verify
   counts card batches, so a run of families alone stays quick and skips the plain fuzzer.
-- **`pick.sh <commit>...`, beside this file,** picks agent commits and resolves the routine
+- **`python .claude/skills/build-family/pick.py <commit>...`** picks agent commits and resolves the routine
   conflicts by keeping both sides (`pickfix.py`). Its header says what to check afterwards.
 - **Clean up** each worktree: unlink every junction by absolute path
   (`[IO.Directory]::Delete("<path>", $false)`), sweep for any other
