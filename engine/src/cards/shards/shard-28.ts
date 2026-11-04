@@ -395,6 +395,7 @@ import _poolKamiOfOldStone from "../pool/kami-of-old-stone.js";
 import _poolKeepOut from "../pool/keep-out.js";
 import _poolKessigProwler from "../pool/kessig-prowler.js";
 import _poolKhenraCharioteer from "../pool/khenra-charioteer.js";
+import _poolKhorvathsFury from "../pool/khorvaths-fury.js";
 import _poolKingCrab from "../pool/king-crab.js";
 import _poolKinjallisSunwing from "../pool/kinjallis-sunwing.js";
 import _poolKithkinSpellduster from "../pool/kithkin-spellduster.js";
@@ -666,6 +667,7 @@ import _poolScreamreachBrawler from "../pool/screamreach-brawler.js";
 import _poolScribeOfTheMindful from "../pool/scribe-of-the-mindful.js";
 import _poolScrollOfGriselbrand from "../pool/scroll-of-griselbrand.js";
 import _poolScuttlingButler from "../pool/scuttling-butler.js";
+import _poolSeasonOfLoss from "../pool/season-of-loss.js";
 import _poolSecuritronSquadron from "../pool/securitron-squadron.js";
 import _poolSeedcradleWitch from "../pool/seedcradle-witch.js";
 import _poolSelectiveMemory from "../pool/selective-memory.js";
@@ -1318,6 +1320,7 @@ const shard: CardShard = {
     _poolKeepOut,
     _poolKessigProwler,
     _poolKhenraCharioteer,
+    _poolKhorvathsFury,
     _poolKingCrab,
     _poolKinjallisSunwing,
     _poolKithkinSpellduster,
@@ -1589,6 +1592,7 @@ const shard: CardShard = {
     _poolScribeOfTheMindful,
     _poolScrollOfGriselbrand,
     _poolScuttlingButler,
+    _poolSeasonOfLoss,
     _poolSecuritronSquadron,
     _poolSeedcradleWitch,
     _poolSelectiveMemory,

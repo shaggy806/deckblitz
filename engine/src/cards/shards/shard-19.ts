@@ -874,6 +874,7 @@ import _poolVillageElder from "../pool/village-elder.js";
 import _poolViridianCorrupter from "../pool/viridian-corrupter.js";
 import _poolViridianLorebearers from "../pool/viridian-lorebearers.js";
 import _poolVirtueOfLoyalty from "../pool/virtue-of-loyalty.js";
+import _poolVirtussManeuver from "../pool/virtuss-maneuver.js";
 import _poolVisceridArmor from "../pool/viscerid-armor.js";
 import _poolVoidStalker from "../pool/void-stalker.js";
 import _poolVolcanicDragon from "../pool/volcanic-dragon.js";
@@ -1818,6 +1819,7 @@ const shard: CardShard = {
     _poolViridianCorrupter,
     _poolViridianLorebearers,
     _poolVirtueOfLoyalty,
+    _poolVirtussManeuver,
     _poolVisceridArmor,
     _poolVoidStalker,
     _poolVolcanicDragon,

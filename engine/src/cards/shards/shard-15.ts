@@ -152,6 +152,7 @@ import _poolDauntlessBodyguard from "../pool/dauntless-bodyguard.js";
 import _poolDauntlessOnslaught from "../pool/dauntless-onslaught.js";
 import _poolDeathBomb from "../pool/death-bomb.js";
 import _poolDeathTyrant from "../pool/death-tyrant.js";
+import _poolDecorumDissertation from "../pool/decorum-dissertation.js";
 import _poolDefiantBloodlord from "../pool/defiant-bloodlord.js";
 import _poolDelugeOfDoom from "../pool/deluge-of-doom.js";
 import _poolDemonicCounsel from "../pool/demonic-counsel.js";
@@ -1011,6 +1012,7 @@ const shard: CardShard = {
     _poolDauntlessOnslaught,
     _poolDeathBomb,
     _poolDeathTyrant,
+    _poolDecorumDissertation,
     _poolDefiantBloodlord,
     _poolDelugeOfDoom,
     _poolDemonicCounsel,

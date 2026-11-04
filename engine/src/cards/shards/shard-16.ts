@@ -459,6 +459,7 @@ import _poolMaalfeldTwins from "../pool/maalfeld-twins.js";
 import _poolMachineGodsEffigy from "../pool/machine-gods-effigy.js";
 import _poolMachineManModelX51 from "../pool/machine-man-model-x-51.js";
 import _poolMageRingBully from "../pool/mage-ring-bully.js";
+import _poolMageSiege from "../pool/mage-siege.js";
 import _poolMagmaBurst from "../pool/magma-burst.js";
 import _poolMagmaVein from "../pool/magma-vein.js";
 import _poolMakeshiftBinding from "../pool/makeshift-binding.js";
@@ -1435,6 +1436,7 @@ const shard: CardShard = {
     _poolMachineGodsEffigy,
     _poolMachineManModelX51,
     _poolMageRingBully,
+    _poolMageSiege,
     _poolMagmaBurst,
     _poolMagmaVein,
     _poolMakeshiftBinding,

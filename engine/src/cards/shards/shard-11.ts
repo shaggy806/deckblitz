@@ -613,6 +613,7 @@ import _poolRavineRaider from "../pool/ravine-raider.js";
 import _poolRaziasPurification from "../pool/razias-purification.js";
 import _poolRazorSwine from "../pool/razor-swine.js";
 import _poolRazorjawOni from "../pool/razorjaw-oni.js";
+import _poolReactorRaid from "../pool/reactor-raid.js";
 import _poolReapAndSow from "../pool/reap-and-sow.js";
 import _poolRecumbentBliss from "../pool/recumbent-bliss.js";
 import _poolReflectDamage from "../pool/reflect-damage.js";
@@ -1525,6 +1526,7 @@ const shard: CardShard = {
     _poolRaziasPurification,
     _poolRazorSwine,
     _poolRazorjawOni,
+    _poolReactorRaid,
     _poolReapAndSow,
     _poolRecumbentBliss,
     _poolReflectDamage,

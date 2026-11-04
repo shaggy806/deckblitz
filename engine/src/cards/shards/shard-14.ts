@@ -466,6 +466,7 @@ import _poolLeylinePhantom from "../pool/leyline-phantom.js";
 import _poolLightningCoreExcavator from "../pool/lightning-core-excavator.js";
 import _poolLightningSerpent from "../pool/lightning-serpent.js";
 import _poolLimDulsHighGuard from "../pool/lim-duls-high-guard.js";
+import _poolLindblumIndustrialRegency from "../pool/lindblum-industrial-regency.js";
 import _poolLingeringSouls from "../pool/lingering-souls.js";
 import _poolLlanowarElves from "../pool/llanowar-elves.js";
 import _poolLocthwainGargoyle from "../pool/locthwain-gargoyle.js";
@@ -1370,6 +1371,7 @@ const shard: CardShard = {
     _poolLightningCoreExcavator,
     _poolLightningSerpent,
     _poolLimDulsHighGuard,
+    _poolLindblumIndustrialRegency,
     _poolLingeringSouls,
     _poolLlanowarElves,
     _poolLocthwainGargoyle,

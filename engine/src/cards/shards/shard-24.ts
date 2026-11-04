@@ -580,6 +580,7 @@ import _poolReknit from "../pool/reknit.js";
 import _poolRelicVial from "../pool/relic-vial.js";
 import _poolRenegadeMap from "../pool/renegade-map.js";
 import _poolRepudiate from "../pool/repudiate.js";
+import _poolRestorationSeminar from "../pool/restoration-seminar.js";
 import _poolRethink from "../pool/rethink.js";
 import _poolRhetCropSpearmaster from "../pool/rhet-crop-spearmaster.js";
 import _poolRhoxBrute from "../pool/rhox-brute.js";
@@ -1488,6 +1489,7 @@ const shard: CardShard = {
     _poolRelicVial,
     _poolRenegadeMap,
     _poolRepudiate,
+    _poolRestorationSeminar,
     _poolRethink,
     _poolRhetCropSpearmaster,
     _poolRhoxBrute,

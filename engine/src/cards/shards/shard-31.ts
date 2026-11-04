@@ -630,6 +630,7 @@ import _poolPhyrexianNegator from "../pool/phyrexian-negator.js";
 import _poolPiercingRays from "../pool/piercing-rays.js";
 import _poolPilgrimOfVirtue from "../pool/pilgrim-of-virtue.js";
 import _poolPinnacleOfRage from "../pool/pinnacle-of-rage.js";
+import _poolPirsWhim from "../pool/pirs-whim.js";
 import _poolPonderingMage from "../pool/pondering-mage.js";
 import _poolPowerMatrix from "../pool/power-matrix.js";
 import _poolPriestsOfNorn from "../pool/priests-of-norn.js";
@@ -1591,6 +1592,7 @@ const shard: CardShard = {
     _poolPiercingRays,
     _poolPilgrimOfVirtue,
     _poolPinnacleOfRage,
+    _poolPirsWhim,
     _poolPonderingMage,
     _poolPowerMatrix,
     _poolPriestsOfNorn,

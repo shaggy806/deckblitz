@@ -491,6 +491,7 @@ import _poolMerfolkRaiders from "../pool/merfolk-raiders.js";
 import _poolMeriasOutrider from "../pool/merias-outrider.js";
 import _poolMessengerHawk from "../pool/messenger-hawk.js";
 import _poolMiasmicMummy from "../pool/miasmic-mummy.js";
+import _poolMidgarCityOfMako from "../pool/midgar-city-of-mako.js";
 import _poolMidnightEntourage from "../pool/midnight-entourage.js";
 import _poolMidnightMangler from "../pool/midnight-mangler.js";
 import _poolMilitaryIntelligence from "../pool/military-intelligence.js";
@@ -1406,6 +1407,7 @@ const shard: CardShard = {
     _poolMeriasOutrider,
     _poolMessengerHawk,
     _poolMiasmicMummy,
+    _poolMidgarCityOfMako,
     _poolMidnightEntourage,
     _poolMidnightMangler,
     _poolMilitaryIntelligence,

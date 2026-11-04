@@ -318,6 +318,7 @@ import _poolGatecreeperVine from "../pool/gatecreeper-vine.js";
 import _poolGeneralsRegalia from "../pool/generals-regalia.js";
 import _poolGeologicalAppraiser from "../pool/geological-appraiser.js";
 import _poolGeralfsMindcrusher from "../pool/geralfs-mindcrusher.js";
+import _poolGerminationPracticum from "../pool/germination-practicum.js";
 import _poolGhirapurAetherGrid from "../pool/ghirapur-aether-grid.js";
 import _poolGhituEncampment from "../pool/ghitu-encampment.js";
 import _poolGhituJourneymage from "../pool/ghitu-journeymage.js";
@@ -1220,6 +1221,7 @@ const shard: CardShard = {
     _poolGeneralsRegalia,
     _poolGeologicalAppraiser,
     _poolGeralfsMindcrusher,
+    _poolGerminationPracticum,
     _poolGhirapurAetherGrid,
     _poolGhituEncampment,
     _poolGhituJourneymage,
