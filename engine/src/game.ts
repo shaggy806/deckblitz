@@ -22580,6 +22580,37 @@ export class Game {
         return `${player} controls too few permanents to return for ${def.name}'s cost`;
       }
     }
+    if (ability.cost.untapOthers !== undefined) {
+      // The choice waits on the stack (see `activateAbility`), as a returned
+      // permanent's does: never on a mana ability, nor beside another that asks.
+      if (
+        isManaAbility(ability) ||
+        sacrificeParts !== null ||
+        ability.cost.discard !== undefined ||
+        ability.cost.exileFromGraveyard !== undefined ||
+        ability.cost.reveal !== undefined ||
+        costReturn !== undefined ||
+        ability.cost.blight !== undefined ||
+        ability.cost.collectEvidence !== undefined ||
+        ability.cost.craft !== undefined ||
+        ability.cost.putFromExile !== undefined ||
+        chosenCounterCost(ability.cost)
+      ) {
+        return `${def.name}'s ability can't untap permanents as part of that cost`;
+      }
+      // A {Q} source is untapped by its {Q}, and can't untap twice; a {T}
+      // source will be tapped by the time this is paid (rule 601.2h).
+      const { count, filter } = ability.cost.untapOthers;
+      const others = this.untapCostCandidates(player, filter).filter((id) => ability.cost.untap !== true || id !== sourceId);
+      const ownTap =
+        ability.cost.tap &&
+        !source.tapped &&
+        (source.counters.stun ?? 0) === 0 &&
+        this.battlefieldMatching(player, { ...filter, controlledBy: "you" }).includes(sourceId);
+      if (permanentCount(this.state, others) + (ownTap ? 1 : 0) < count) {
+        return `${player} controls too few tapped permanents to untap for ${def.name}'s cost`;
+      }
+    }
     if (ability.cost.blight !== undefined) {
       // Chosen once the ability is on the stack (see `activateAbility`),
       // which a mana ability never is; and one cost asks one thing at a time.
@@ -23236,6 +23267,9 @@ export class Game {
     // too (rules 602.2b, 601.2h).
     const costReturn = ability.cost.returnToHand;
     if (costReturn !== undefined) this.payReturnToHandCost(player, sourceId, costReturn, abilityId);
+    // "Untap two tapped creatures you control": which, asked now too, so a
+    // creature tapped for this ability's mana can be one of them.
+    if (ability.cost.untapOthers !== undefined) this.payUntapOthersCost(player, sourceId, ability.cost.untapOthers);
     // "Remove a +1/+1 counter from a creature you control": which, chosen
     // now too (rules 602.2b, 601.2h).
     const removal = ability.cost.removeCounter;
@@ -23963,6 +23997,48 @@ export class Game {
     }
   }
 
+  /** The tapped permanents `player` controls that can pay an `untapOthers`
+   * cost: a stun counter would replace the untap (rule 122.1d), leaving the
+   * cost unpaid, so such a permanent can't, as for `{Q}`. */
+  private untapCostCandidates(player: PlayerId, filter: CardFilter): ObjectId[] {
+    return this.battlefieldMatching(player, { ...filter, tapped: true, controlledBy: "you" }).filter(
+      (id) => (this.state.objects[id]?.counters.stun ?? 0) === 0,
+    );
+  }
+
+  /** Pay an activated ability's `untapOthers` cost: every permanent that can
+   * pay it when that's no more than it takes, else the ones `player` chooses
+   * with the `choose-permanents` decision, after which they get priority
+   * again (rule 117.3c). */
+  private payUntapOthersCost(player: PlayerId, source: ObjectId, cost: NonNullable<AbilityCost["untapOthers"]>): void {
+    const eligible = this.untapCostCandidates(player, cost.filter);
+    if (permanentCount(this.state, eligible) <= cost.count) {
+      for (const id of eligible) {
+        const n = this.state.objects[id]?.stackCount ?? 1;
+        for (let i = 0; i < n; i += 1) this.setTapped({ kind: "object", object: id }, false);
+      }
+      return;
+    }
+    this.beginChoosePermanents(
+      source,
+      player,
+      0,
+      { ...cost.filter, tapped: true, controlledBy: "you" },
+      cost.count,
+      cost.count,
+      { kind: "untap", target: 0 },
+      cost.count === 1 ? "Choose one to untap" : `Choose ${cost.count} to untap`,
+      false,
+      this.battlefieldMatching(player, { ...cost.filter, tapped: true, controlledBy: "you" }).filter(
+        (id) => !eligible.includes(id),
+      ),
+    );
+    const awaiting = this.state.awaiting;
+    if (awaiting?.kind === "choose-permanents" && awaiting.player === player) {
+      this.state.awaiting = { ...awaiting, priorityTo: player };
+    }
+  }
+
   /**
    * Announce each *object* a spell or ability just targeted, for a
    * "becomes the target of" trigger (rule 115.7 — Thunderbreak Regent).
@@ -24248,8 +24324,9 @@ export class Game {
         // the planner spends a source once a payment and can't keep the
         // count, so such an ability is activated by hand.
         if (ability.timesEachTurn !== undefined) return;
-        // {Q} isn't paid by a mana payment (`AbilityCost.untap`).
-        if (ability.cost.untap === true) return;
+        // {Q} isn't paid by a mana payment (`AbilityCost.untap`), nor is
+        // untapping anything else.
+        if (ability.cost.untap === true || ability.cost.untapOthers !== undefined) return;
         if (ability.cost.tap) {
           if (!canTap) return;
         } else if (ability.oncePerTurn !== true && (ability.cost.mana === null || ability.cost.sacrifice !== undefined)) {

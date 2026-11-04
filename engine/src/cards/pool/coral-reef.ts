@@ -25,7 +25,7 @@ export default defineCard({
       cost: {
         mana: "{U}",
         tap: false,
-        tapOthers: { count: 1, filter: { type: "creature", colors: ["U"], controlledBy: "you" } },
+        tapOthers: { count: 1, filter: { type: "creature", colors: ["U"], controlledBy: "you" }, includeSelf: true },
         removeCounter: { kind: "polyp", count: 1 },
       },
       targets: ["creature"],

@@ -7471,3 +7471,14 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 - **Do:** You're Bob, declaring attackers. Click the Hill Giant, then The Aetherspark, then "Attack with 1".
 - **Expect:** The badge reads "⚔ The Aetherspark". The Giant's 3 damage takes it from 4 loyalty to 1, and Alice's life doesn't change.
+
+### Halo Fountain: you choose which two creatures untap
+
+- **Do:** Click Halo Fountain and choose its "Draw a card" ability. Click the Grizzly Bears and the Hill Giant, then confirm.
+- **Expect:** The banner says "Choose 2 to untap" before anyone can respond. Those two untap, the Savannah Lions stay tapped, and you draw a card once the ability resolves.
+
+### Halo Fountain: a creature tapped for mana can be the one it untaps
+
+- **Do:** Click Avacyn's Pilgrim and choose its mana ability. Then click Halo Fountain and choose its Citizen ability.
+- **Expect:** The Pilgrim untaps again, since it's the only tapped creature, and a Citizen token appears.
+- **Not a bug:** With nothing tapped, the Fountain's ability isn't offered until the Pilgrim is tapped.

@@ -1506,6 +1506,14 @@ export function sourceSacrificeOf(part) {
   return null;
 }
 
+/** A cost's type phrase with a colour in front of it: "red creatures". */
+function colorTypePhrase(phrase) {
+  const colored = /^(white|blue|black|red|green) (.+)$/i.exec(phrase);
+  if (colored === null) return parseTypePhrase(phrase);
+  const filter = parseTypePhrase(colored[2]);
+  return filter === null ? null : { ...filter, colors: [COLOR_WORDS[colored[1].toLowerCase()]] };
+}
+
 export function parseCost(text) {
   const cost = { mana: null, tap: false };
   const extra = {};
@@ -1634,9 +1642,15 @@ export function parseCost(text) {
     else if ((m = new RegExp(`^Tap ${N} untapped (.+?) you control$`, "i").exec(part))) {
       // "Tap X untapped artifacts you control": announced as it's activated.
       const count = numberOf(m[1]);
-      const filter = parseTypePhrase(m[2]);
+      const filter = colorTypePhrase(m[2]);
       if (count === undefined || filter === null) return null;
       cost.tapOthers = { count, filter: { ...filter, controlledBy: "you" } };
+    } else if ((m = /^Untap (a|an|one|two|three|four|five|six|seven|eight|nine|ten|fifteen|\d+) tapped (.+?) you control$/i.exec(part))) {
+      // "Untap two tapped creatures you control" (Halo Fountain, Crackleburr).
+      const count = m[1].toLowerCase() === "fifteen" ? 15 : numberOf(m[1]);
+      const filter = colorTypePhrase(m[2]);
+      if (typeof count !== "number" || filter === null) return null;
+      cost.untapOthers = { count, filter: { ...filter, controlledBy: "you" } };
     } else if ((m = new RegExp(`^Tap ${N} untapped (.+?) you control that share a creature type$`, "i").exec(part))) {
       const count = numberOf(m[1]);
       const filter = parseTypePhrase(m[2]);

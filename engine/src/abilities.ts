@@ -611,6 +611,22 @@ export interface AbilityCost {
    */
   readonly returnToHand?: { readonly count: number; readonly filter: CardFilter };
   /**
+   * Untap `count` tapped permanents you control matching `filter` as part of
+   * the cost (rule 701.26b: only a tapped permanent can be untapped) — Halo
+   * Fountain's "Untap two tapped creatures you control". Which ones is chosen
+   * as the cost is paid (rules 602.2b, 601.2h), once the ability is on the
+   * stack, its mana paid and its `{T}` tapped, and before anyone gets
+   * priority, with the `choose-permanents` decision — asked only when there's
+   * a choice. So a creature tapped for this ability's own mana may be among
+   * them (Halo Fountain's ruling). What's offered waits on the tapped
+   * permanents there are as it's activated, its own `{T}` counted, so a
+   * creature that would be tapped for the mana is tapped for it first, with
+   * the mana floating. A permanent with a stun counter can't pay: the counter
+   * would replace the untap (rule 122.1d), as for `{Q}`. Not on a mana
+   * ability, nor beside another cost that asks a question.
+   */
+  readonly untapOthers?: { readonly count: number; readonly filter: CardFilter };
+  /**
    * "Blight N" as a cost (rule 701.68a — Gristle Glutton's "{T}, Blight 1:
    * …"): put N -1/-1 counters on a creature you control. The creature is
    * chosen as the cost is paid — once the ability is on the stack and its

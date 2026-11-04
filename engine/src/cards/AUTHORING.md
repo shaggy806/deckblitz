@@ -4051,6 +4051,14 @@ tapOthers?, untap? }`.
   of them. Gates activation on controlling `count`. Not on a mana ability, and
   not beside a `sacrifice` of several or a `discard` (each asks its own
   question).
+- `untapOthers: { count, filter }` — untap tapped permanents you control (Halo
+  Fountain's "Untap two tapped creatures you control", Crackleburr's with `{Q}`
+  beside it). Chosen as the cost is paid, as `returnToHand` is, so a creature
+  tapped for the same ability's mana may be one of them; activation gates on
+  the tapped permanents there are then (its own `{T}` counted, its own `{Q}`
+  not), so a creature to be tapped for mana is tapped first, the mana floating.
+  A permanent with a stun counter can't pay (rule 122.1d), as for `{Q}`. Not on
+  a mana ability, and not beside another cost that asks a question.
 - `blight: N` — "Blight N" (rule 701.68a — Gristle Glutton's "{T}, Blight 1:
   …"): put N -1/-1 counters on a creature you control, chosen as the cost is
   paid, once the ability is on the stack, with the `choose-permanents`

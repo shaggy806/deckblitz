@@ -11198,4 +11198,26 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       turn: 0,
     }),
   ),
+  preset(
+    'Halo Fountain: you choose which two creatures untap',
+    board({
+      you: {
+        bf: [
+          'Halo Fountain',
+          'Plains',
+          'Plains',
+          { name: 'Grizzly Bears', tapped: true },
+          { name: 'Hill Giant', tapped: true },
+          { name: 'Savannah Lions', tapped: true },
+        ],
+        lib: ['Plains'],
+      },
+    }),
+  ),
+  preset(
+    'Halo Fountain: a creature tapped for mana can be the one it untaps',
+    board({
+      you: { bf: ['Halo Fountain', "Avacyn's Pilgrim"] },
+    }),
+  ),
 ]

@@ -12935,6 +12935,28 @@ describe("mana abilities from a hand, and paid by exiling from a graveyard", () 
       },
     });
   });
+  it("untapping tapped creatures as a cost, and a coloured tap cost", () => {
+    const [make, , win] = read(
+      "Artifact",
+      "{W}, {T}, Untap a tapped creature you control: Create a 1/1 green and white Citizen creature token.\n{W}{W}, {T}, Untap two tapped creatures you control: Draw a card.\n{W}{W}{W}{W}{W}, {T}, Untap fifteen tapped creatures you control: You win the game.",
+    );
+    expect(make.cost).toEqual({ mana: "{W}", tap: true, untapOthers: { count: 1, filter: { type: "creature", controlledBy: "you" } } });
+    expect(win.cost).toEqual({
+      mana: "{W}{W}{W}{W}{W}",
+      tap: true,
+      untapOthers: { count: 15, filter: { type: "creature", controlledBy: "you" } },
+    });
+    const [, bounce] = read(
+      "Creature — Elemental",
+      "{U/R}{U/R}, {T}, Tap two untapped red creatures you control: This creature deals 3 damage to any target.\n{U/R}{U/R}, {Q}, Untap two tapped blue creatures you control: Return target creature to its owner's hand.",
+    );
+    expect(bounce.cost).toEqual({
+      mana: "{U/R}{U/R}",
+      tap: false,
+      untap: true,
+      untapOthers: { count: 2, filter: { type: "creature", colors: ["U"], controlledBy: "you" } },
+    });
+  });
   it("Collect evidence as a cost, and a counter riding the mana", () => {
     const [ability] = read("Artifact", "{T}, Collect evidence 3: Add one mana of any color. Put an unlock counter on this artifact.");
     expect(ability.cost).toEqual({ mana: null, tap: true, collectEvidence: 3 });
