@@ -497,6 +497,10 @@ section keeps only what to do next.
   Sheoldred, Commandeer, Jace's Archivist, Halo Fountain, Mutavault, Defense Grid, Anticausal Vestige. **Next: the freed cards, with `author-freed`, batch by batch
   from a fresh session; the remaining keys come after that queue is empty (the user's call, 2026-11-04).** `--stale` 1,761; top-5000 4439/5000, commanders 465/500.
   When key building resumes, the order is `--by-rank`, from Abundance, Temur Sabertooth, Inti, Skrelv's Hive, Tempt with Bunnies.
+  Narrow keys `author-freed` should give, from that last run's reports: Liberated Livestock (Auras onto each token), Splintering Wind (its token's cumulative upkeep and
+  leave trigger), Cait, Cage Brawler (two simultaneous discards; no scope names "you and defending player"), The Last Agni Kai ("until end of turn" mana keeping), Curse of
+  Shaken Faith (other needs), Sudden Substitution (an exchange), Chef's Kiss (a random retarget), March of Burgeoning Life and March of Reckless Joy (their own effects). To
+  check, likely authorable: Invert Polarity, Foreboding Steamboat, Last Chance, Aang, Airbending Master (airbend and upkeep lines unread).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next
