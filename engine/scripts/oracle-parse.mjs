@@ -13524,6 +13524,8 @@ function parseFaceAsWritten(face, ctx = {}) {
     if (isSpell && line === "Cipher") { out.cipher = true; continue; }
     // Retrace (rule 702.81a): cast from the graveyard, discarding a land card.
     if (isSpell && line === "Retrace") { out.retrace = true; continue; }
+    // Rule 401.5's look, always on: the card-level flag.
+    if (line === "You may look at the top card of your library any time.") { out.looksAtOwnLibraryTop = true; continue; }
     // Conspire (rule 702.78a): tap two creatures sharing its colour to copy it.
     if (isSpell && line === "Conspire") { out.conspire = true; continue; }
     // Day and night (rule 731.1): Midnight Hunt's non-daybound day/night cards.

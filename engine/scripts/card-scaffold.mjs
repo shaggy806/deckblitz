@@ -220,6 +220,7 @@ function faceSource(face, ctx) {
     overload: parsed.overload,
     mayhem: parsed.mayhem,
     rebound: parsed.rebound,
+    looksAtOwnLibraryTop: parsed.looksAtOwnLibraryTop,
     cipher: parsed.cipher,
     retrace: parsed.retrace,
     conspire: parsed.conspire,

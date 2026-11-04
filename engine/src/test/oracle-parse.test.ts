@@ -24,6 +24,19 @@ import { parseEffect, parseFace, parseTrigger, parseCost, parseSentence, parseTy
 // @ts-expect-error — as above.
 import { checkPool } from "../../scripts/oracle-parse-check.mjs";
 
+describe("the top card of your library, any time", () => {
+  it("is the card-level flag", () => {
+    const parsed = parseFace({
+      name: "Test Card",
+      type_line: "Creature — Human",
+      oracle_text: "You may look at the top card of your library any time.",
+      mana_cost: "{1}",
+      colors: [],
+    });
+    expect(parsed.looksAtOwnLibraryTop).toBe(true);
+  });
+});
+
 describe("a target filter read against its object's controller", () => {
   it("Drown in the Loch's modes", () => {
     const parsed = parseFace({

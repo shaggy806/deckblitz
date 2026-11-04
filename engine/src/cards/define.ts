@@ -3535,7 +3535,9 @@ export interface StaticAbility {
    *   alone, never a face-down spell (the rulings).
    * - `looksAtOwnLibraryTop`: "you may look at the top card of your library
    *   any time" as a static, for a permanent that has it by a grant (Glowcap
-   *   Lantern) — the card's own `looksAtOwnLibraryTop` is the printed form.
+   *   Lantern) or only under a `condition` (Case of the Locked Hothouse's
+   *   "Solved —", Ranger Class's level 3) — the card's own
+   *   `looksAtOwnLibraryTop` is the unconditional printed form.
    */
   readonly visibility?: {
     readonly handsRevealed?: "you" | "opponents" | "each-player";
