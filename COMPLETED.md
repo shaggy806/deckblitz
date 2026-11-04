@@ -12,6 +12,14 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **A spell's own ceiling on X** (2026-11-04), `maxX` and `{ playersInGame: true }`: Open the Way.
+- **"Do this only once each turn"** (2026-11-04), no engine code: Ondu Spiritdancer.
+- **The total power of the creatures that died together** (2026-11-04), a batched `dies`'s `batchValue`, and a token's base P/T unclamped (rule 107.1b): The Skullspore Nexus.
+- **A board condition read against its source** (2026-11-04), so `controls` reads `blockingRelation`: Sting, the Glinting Dagger.
+- **What a flicker's delayed return does once the card's back** (2026-11-04), `flicker.returnThen`: Phelia, Obzedat, Hallowed Respite.
+- **A spell's copy as a trigger, and mana kept by colour** (2026-11-04), no engine code: Ashling, Flame Dancer.
+- **Annihilator X, and a card entering from exile seeing itself there** (2026-11-04), `annihilator(amount, text)`, `stillInExile`: Ulamog, the Defiler.
+- **A discard cost of mana value X** (2026-11-04), `cost.discard.manaValueX`: Kozilek, the Great Distortion; Knollspine Invocation.
 - **A spell's own triggers doubled** (2026-11-04), `doubleTriggersOf`'s `spells`: Echoes of Eternity.
 - **One or more leaving, once per event** (2026-11-04), `leaves-battlefield`'s `batched`, a commander's 903.9b move part of it: Dour Port-Mage, Nefarious Imp.
 - **Counters put on one permanent at once fire `counters-put` once** (2026-11-04), a bug: proliferating two kinds, or two wither sources, fired it per kind or source.

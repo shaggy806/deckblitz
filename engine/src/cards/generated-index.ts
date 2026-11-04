@@ -267,6 +267,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Fractal Token",
   "Frog Lizard Token",
   "Fungus Beast Token",
+  "Fungus Dinosaur Token",
   "Fungus Token (Can't Block)",
   "Galactus",
   "Gargoyle Token",

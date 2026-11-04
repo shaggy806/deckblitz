@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4402 already implemented / 598 missing (marks refreshed 2026-11-04)
+4410 already implemented / 590 missing (marks refreshed 2026-11-04)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -1548,7 +1548,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1555  Simic Guildgate                          {0}              Land — Gate
 [x]  1556  Artist's Talent                          {1}{R}           Enchantment — Class
 [x]  1557  Marionette Master                        {4}{B}{B}        Creature — Human Artificer
-[ ]  1558  Ashling, Flame Dancer                    {2}{R}{R}        Legendary Creature — Elemental Shaman
+[x]  1558  Ashling, Flame Dancer                    {2}{R}{R}        Legendary Creature — Elemental Shaman
 [x]  1559  Radiant Fountain                         {0}              Land
 [x]  1560  Corpsejack Menace                        {2}{B}{G}        Creature — Fungus
 [x]  1561  Monastery Mentor                         {2}{W}           Creature — Human Monk
@@ -1557,16 +1557,16 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1564  Gifts Ungiven                            {3}{U}           Instant
 [x]  1565  Null Elemental Blast                     {C}              Instant
 [ ]  1566  Malcolm, Alluring Scoundrel              {1}{U}           Legendary Creature — Siren Pirate
-[ ]  1567  Kozilek, the Great Distortion            {8}{C}{C}        Legendary Creature — Eldrazi
+[x]  1567  Kozilek, the Great Distortion            {8}{C}{C}        Legendary Creature — Eldrazi
 [x]  1568  Freed from the Real                      {2}{U}           Enchantment — Aura
-[ ]  1569  Ulamog, the Defiler                      {10}             Legendary Creature — Eldrazi
+[x]  1569  Ulamog, the Defiler                      {10}             Legendary Creature — Eldrazi
 [x]  1570  Mazirek, Kraul Death Priest              {3}{B}{G}        Legendary Creature — Insect Shaman
 [x]  1571  Tergrid, God of Fright // Tergrid's Lantern {5}              Legendary Creature — God // Legendary Artifact
 [x]  1572  Crux of Fate                             {3}{B}{B}        Sorcery
 [x]  1573  Morophon, the Boundless                  {7}              Legendary Creature — Shapeshifter
 [x]  1574  Spirebluff Canal                         {0}              Land
 [x]  1575  Smuggler's Surprise                      {G}              Instant
-[ ]  1576  Phelia, Exuberant Shepherd               {1}{W}           Legendary Creature — Dog
+[x]  1576  Phelia, Exuberant Shepherd               {1}{W}           Legendary Creature — Dog
 [x]  1577  Archfiend of Depravity                   {3}{B}{B}        Creature — Demon
 [x]  1578  Overprotect                              {1}{G}           Instant
 [x]  1579  Cloud, Midgar Mercenary                  {W}{W}           Legendary Creature — Human Soldier Mercenary
@@ -1607,7 +1607,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1614  Unmarked Grave                           {1}{B}           Sorcery
 [x]  1615  Golgari Charm                            {B}{G}           Instant
 [ ]  1616  Ugin, the Spirit Dragon                  {8}              Legendary Planeswalker — Ugin
-[ ]  1617  Ondu Spiritdancer                        {4}{W}           Creature — Kor Cleric
+[x]  1617  Ondu Spiritdancer                        {4}{W}           Creature — Kor Cleric
 [ ]  1618  Replicating Ring                         {3}              Snow Artifact
 [x]  1619  Masterwork of Ingenuity                  {1}              Artifact — Equipment
 [x]  1620  Stitch Together                          {B}{B}           Sorcery
@@ -1619,7 +1619,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1626  Golgari Guildgate                        {0}              Land — Gate
 [ ]  1627  Call the Coppercoats                     {2}{W}           Instant
 [x]  1628  The Eternity Elevator                    {5}              Legendary Artifact — Spacecraft
-[ ]  1629  Sting, the Glinting Dagger               {2}              Legendary Artifact — Equipment
+[x]  1629  Sting, the Glinting Dagger               {2}              Legendary Artifact — Equipment
 [x]  1630  Maddening Cacophony                      {1}{U}           Sorcery
 [x]  1631  Illusionist's Bracers                    {2}              Artifact — Equipment
 [x]  1632  Frostcliff Siege                         {1}{U}{R}        Enchantment
@@ -1627,7 +1627,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1634  Pirate's Pillage                         {3}{R}           Sorcery
 [x]  1635  Unleash Fury                             {1}{R}           Instant
 [ ]  1636  Adagia, Windswept Bastion                {0}              Land — Planet
-[ ]  1637  The Skullspore Nexus                     {6}{G}{G}        Legendary Artifact
+[x]  1637  The Skullspore Nexus                     {6}{G}{G}        Legendary Artifact
 [x]  1638  Twenty-Toed Toad                         {3}{U}           Creature — Frog Wizard
 [x]  1639  Soul of the Harvest                      {4}{G}{G}        Creature — Elemental
 [x]  1640  Druid Class                              {1}{G}           Enchantment — Class
@@ -1668,7 +1668,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1675  Gingerbrute                              {1}              Artifact Creature — Food Golem
 [x]  1676  Savage Ventmaw                           {4}{R}{G}        Creature — Dragon
 [x]  1677  Valgavoth's Lair                         {0}              Enchantment Land
-[ ]  1678  Open the Way                             {X}{G}{G}        Sorcery
+[x]  1678  Open the Way                             {X}{G}{G}        Sorcery
 [x]  1679  Run Away Together                        {1}{U}           Instant
 [x]  1680  Horizon Canopy                           {0}              Land
 [x]  1681  Smuggler's Share                         {2}{W}           Enchantment
