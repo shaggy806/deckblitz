@@ -959,6 +959,8 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     // creature" (Mask of the Mimic): your own deck holds your own creature's
     // namesakes.
     if (whose === undefined) v.touch(n.filter.sameNameAsTarget, "help", MINOR);
+    // Yavimaya Dryad's Forest under target player's control.
+    if (typeof n.enterUnder === "object" && "target" in n.enterUnder) v.touch(n.enterUnder.target, "help", MINOR);
     if (typeof whose !== "object") return;
     v.touch("target" in whose ? whose.target : "controllerOfTarget" in whose ? whose.controllerOfTarget : whose.ownerOfTarget, "harm", MINOR);
   },
