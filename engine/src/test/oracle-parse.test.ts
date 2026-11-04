@@ -1560,12 +1560,27 @@ describe("costs and triggers", () => {
       kind: "add-mana",
       mana: {
         ifCondition: { kind: "self-counters", counter: "luck", compare: { op: "gte", n: 1 } },
-        then: ["W", "U", "B", "R", "G"],
-        else: ["C"],
+        thenOneOf: ["W", "U", "B", "R", "G"],
+        elseOneOf: ["C"],
       },
       amount: 1,
     });
     expect(caverns.complete).toBe(true);
+  });
+
+  it("reads a check land's enter line and the next spell can't be countered (Mistrise Village)", () => {
+    const village = parseFace({
+      name: "Mistrise Village",
+      type_line: "Land",
+      oracle_text:
+        "This land enters tapped unless you control a Mountain or a Forest.\n{T}: Add {U}.\n{U}, {T}: The next spell you cast this turn can't be countered.",
+    });
+    expect(village.static[0].replacement).toEqual({
+      event: "enters-battlefield",
+      tappedUnless: { kind: "controls", filter: { subtypes: ["Mountain", "Forest"] }, atLeast: 1 },
+    });
+    expect(village.activated[1].effect).toEqual({ kind: "grant-spells-this-turn", next: true, cantBeCountered: true });
+    expect(village.complete).toBe(true);
   });
 
   it("reads Arena of Glory's mana, spent on a creature spell", () => {
