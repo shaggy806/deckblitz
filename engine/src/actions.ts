@@ -602,8 +602,10 @@ export type Action =
       readonly waterbend?: readonly ObjectId[];
       /** Cards in the caster's graveyard exiled for delve (rule 702.66a),
        * each paying {1} of the total cost's generic mana, picked from the
-       * variant's `delve` offer. Only for a card with `CardDefinition.delve`;
-       * omitted, nothing is exiled. */
+       * variant's `delve` offer — and a March's matching cards from hand
+       * (`additionalCost.exileFromHandReduces`), each taking its amount off.
+       * Only for a card with `CardDefinition.delve` or that cost; omitted,
+       * nothing is exiled. */
       readonly delve?: readonly ObjectId[];
       /** What an `altCost` cast taps (Sephara's "tap four untapped creatures
        * you control with flying"), picked from the variant's `tapCost` offer.
@@ -1480,6 +1482,12 @@ export type LegalAction =
          * counts it): `minCards` and `maxCards` at each X from 0 to
          * `xCost.maxX`, the driver reading the X it chose. */
         readonly byX?: readonly { readonly minCards: number; readonly maxCards: number }[];
+        /** A March's "you may exile any number of blue cards from your hand,
+         * {2} less for each" (`additionalCost.exileFromHandReduces`): the first
+         * `count` of `choices` are those cards in hand, each taking `each`
+         * generic off; `maxCards` lets all of them go, past what lowers the
+         * cost further (the rulings). */
+        readonly fromHand?: { readonly count: number; readonly each: number };
       };
       /** One branch of a choice of additional costs (Bitter Triumph's
        * "discard a card or pay 3 life"). The card is enumerated once per
@@ -2392,7 +2400,9 @@ export type PlayLandOffer = Extract<LegalAction, { kind: "play-land" }>;
  * X it casts for: `"most"` exiles as many as the cost allows, oldest cards
  * first (the bots — the mana saved buys another play); `"fewest"` only
  * what mana can't pay, newest first (the fuzzer, so both ends are walked).
- * `undefined` when that's none.
+ * `undefined` when that's none. An offer with cards from hand (`fromHand` — a
+ * March) is always only what mana can't pay, from the start of its list: a card
+ * in hand is worth more than the mana it would save.
  */
 export function delvePicks(
   offer: NonNullable<Extract<LegalAction, { kind: "cast-spell" }>["delve"]>,
@@ -2400,6 +2410,7 @@ export function delvePicks(
   take: "most" | "fewest",
 ): ObjectId[] | undefined {
   const range = offer.byX?.[Math.max(0, Math.min(xValue, offer.byX.length - 1))] ?? offer;
+  if (offer.fromHand !== undefined) return range.minCards <= 0 ? undefined : offer.choices.slice(0, range.minCards);
   const n = take === "most" ? range.maxCards : range.minCards;
   if (n <= 0) return undefined;
   return take === "most" ? offer.choices.slice(0, n) : offer.choices.slice(offer.choices.length - n);

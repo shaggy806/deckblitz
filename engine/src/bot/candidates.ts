@@ -112,12 +112,19 @@ function xValueOf(
   targets: readonly (TargetRef | null)[],
 ): { xValue?: number; delve?: ObjectId[] } {
   // A sacrifice count (Dargo): the fewest that pay.
-  const xValue =
+  let xValue =
     legal.xCost === undefined
       ? undefined
       : legal.xCost.sacrifice === true
         ? (legal.xCost.minX ?? 0)
         : maxXForTargets(legal.xCost, legal.targetCount, targets);
+  // A March's cards from hand are worth more than X: the largest X mana alone
+  // pays, or failing that the least it takes to do anything.
+  const byX = legal.delve?.fromHand !== undefined ? legal.delve.byX : undefined;
+  if (xValue !== undefined && byX !== undefined) {
+    const least = Math.max(1, legal.xCost?.minX ?? 0);
+    while (xValue > least && (byX[xValue]?.minCards ?? 0) > 0) xValue -= 1;
+  }
   // Delve as much as the cost at that X allows (`delvePicks`).
   const delve = legal.delve === undefined ? undefined : delvePicks(legal.delve, xValue ?? 0, "most");
   return { ...(xValue !== undefined ? { xValue } : {}), ...(delve !== undefined ? { delve } : {}) };

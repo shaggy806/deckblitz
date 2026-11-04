@@ -2721,6 +2721,28 @@ function Table({
         setPendingX({ action: cast, value: cast.xCost.maxX, ...picks })
         return
       }
+      // With X fixed by the offer, nothing else asks its delve range (March of
+      // Otherworldly Light): as `confirmX` does, at that X.
+      const fixedRange = fixedX === undefined || picks.delve !== undefined ? undefined : delve?.byX?.[fixedX]
+      let fixedDelve: readonly ObjectId[] | undefined
+      if (delve !== undefined && fixedRange !== undefined && fixedRange.maxCards > 0) {
+        const { choices, fromHand } = delve
+        if (fixedRange.minCards !== fixedRange.maxCards || choices.length !== fixedRange.maxCards) {
+          setPendingDelve({
+            cast,
+            offer: {
+              choices,
+              minCards: fixedRange.minCards,
+              maxCards: fixedRange.maxCards,
+              ...(fromHand !== undefined ? { fromHand } : {}),
+            },
+            xValue: fixedX,
+            ...paid,
+          })
+          return
+        }
+        fixedDelve = choices
+      }
       beginTargeting({
         kind: 'cast',
         source: cast.card,
@@ -2731,6 +2753,7 @@ function Table({
         ...(fixedX !== undefined ? { xValue: fixedX } : {}),
         ...castExtras(cast),
         ...picks,
+        ...(fixedDelve !== undefined ? { delve: fixedDelve } : {}),
       })
     },
     [beginTargeting],
@@ -2903,14 +2926,14 @@ function Table({
     // Delve on an {X} spell (rule 702.66a): its range at this X, asked now.
     const range = action.delve?.byX?.[value]
     if (action.delve !== undefined && range !== undefined && picks.delve === undefined && range.maxCards > 0) {
-      const { choices } = action.delve
+      const { choices, fromHand } = action.delve
       if (range.minCards === range.maxCards && choices.length === range.maxCards) {
         castAtX(action, value, { ...picks, delve: choices })
         return
       }
       setPendingDelve({
         cast: action,
-        offer: { choices, minCards: range.minCards, maxCards: range.maxCards },
+        offer: { choices, minCards: range.minCards, maxCards: range.maxCards, ...(fromHand !== undefined ? { fromHand } : {}) },
         xValue: value,
         ...picks,
       })
@@ -5876,13 +5899,24 @@ function Table({
     )
   } else if (mode === 'choose-delve' && pendingDelve) {
     // The choice itself is the ZoneViewer popup below.
-    const { minCards, maxCards } = pendingDelve.offer
+    const { minCards, maxCards, fromHand } = pendingDelve.offer
     controls = (
       <div className="controls">
         <span className="muted">
-          Delve {pendingDelve.cast.cardName} — exile{' '}
+          {fromHand !== undefined ? pendingDelve.cast.cardName : `Delve ${pendingDelve.cast.cardName}`} — exile{' '}
           {minCards === maxCards ? maxCards : `${minCards}–${maxCards}`} card
-          {maxCards === 1 ? '' : 's'} from your graveyard, each paying <Symbols text="{1}" />
+          {maxCards === 1 ? '' : 's'}
+          {fromHand !== undefined ? (
+            <>
+              {' '}
+              from your hand, each taking <Symbols text={`{${fromHand.each}}`} /> off
+            </>
+          ) : (
+            <>
+              {' '}
+              from your graveyard, each paying <Symbols text="{1}" />
+            </>
+          )}
         </span>
         <button type="button" onClick={() => setPendingDelve(null)}>
           Cancel
@@ -7721,9 +7755,13 @@ function Table({
 
       {mode === 'choose-delve' && pendingDelve ? (
         <ZoneViewer
-          title={`Delve ${pendingDelve.cast.cardName}: exile up to ${pendingDelve.offer.maxCards}${
+          title={`${pendingDelve.offer.fromHand !== undefined ? '' : 'Delve '}${pendingDelve.cast.cardName}: exile up to ${pendingDelve.offer.maxCards}${
             pendingDelve.offer.minCards > 0 ? ` (at least ${pendingDelve.offer.minCards})` : ''
-          }, each paying one generic mana`}
+          }${
+            pendingDelve.offer.fromHand !== undefined
+              ? ` from your hand, each taking ${pendingDelve.offer.fromHand.each} generic mana off`
+              : ', each paying one generic mana'
+          }`}
           ids={pendingDelve.offer.choices}
           resolve={(id) => view.objects[id]}
           selection={{

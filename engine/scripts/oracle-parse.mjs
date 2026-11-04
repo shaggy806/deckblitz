@@ -13838,6 +13838,14 @@ function parseFaceAsWritten(face, ctx = {}) {
       out.additionalCost = { chooseNumber: { min: Number(m[1]), max: Number(m[2]) } };
       continue;
     }
+    // The March cycle: cards from hand named as it's cast, each taking this off.
+    if (
+      isSpell &&
+      (m = /^As an additional cost to cast ~, you may exile any number of (white|blue|black|red|green) cards from your hand\. ~ costs \{(\d+)\} less to cast for each card exiled this way\.$/.exec(line))
+    ) {
+      out.additionalCost = { exileFromHandReduces: { filter: { colors: [COLOR_WORD[m[1]]] }, each: Number(m[2]) } };
+      continue;
+    }
     if (isSpell && line === "As an additional cost to cast ~, sacrifice a creature.") {
       out.additionalCost = { sacrifice: { type: "creature", controlledBy: "you" } };
       continue;

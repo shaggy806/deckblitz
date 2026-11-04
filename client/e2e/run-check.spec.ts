@@ -239,6 +239,13 @@ async function runStep(page: Page, step: string): Promise<boolean> {
       return visibleFirst(page.getByRole('button', { name: /^Pass/ }))
     case 'wait':
       return true
+    case 'x': {
+      // The choose-X box: its default is the most, which may leave no choice to see.
+      const box = page.locator('.controls input[type="number"]').filter({ visible: true }).first()
+      if ((await box.count()) === 0) return false
+      await box.fill(arg)
+      return true
+    }
     case 'unfollow': {
       // Stay in this seat while another of yours must act, to see what it sees.
       // The toggle is on the builder's panel, hidden as the run starts.

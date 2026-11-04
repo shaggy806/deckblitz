@@ -15628,3 +15628,17 @@ describe("the cards exiled with it, to their graveyards", () => {
     expect(face.triggered[1].effect).toEqual({ kind: "return-exiled-by-source", linked: "graveyard" });
   });
 });
+
+describe("cards from hand taking {2} off", () => {
+  it("reads March of Wretched Sorrow's cost", () => {
+    const face = parseFace({
+      name: "March of Wretched Sorrow",
+      type_line: "Instant",
+      mana_cost: "{X}{B}",
+      colors: ["B"],
+      oracle_text:
+        "As an additional cost to cast this spell, you may exile any number of black cards from your hand. This spell costs {2} less to cast for each card exiled this way.\nMarch of Wretched Sorrow deals X damage to target creature or planeswalker and you gain X life.",
+    });
+    expect(face.additionalCost).toEqual({ exileFromHandReduces: { filter: { colors: ["B"] }, each: 2 } });
+  });
+});

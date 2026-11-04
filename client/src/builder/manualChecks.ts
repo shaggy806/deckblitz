@@ -3342,6 +3342,28 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'March of Swirling Mist: exiled blue cards take {2} off for each',
+    board({
+      you: {
+        bf: ['Island'],
+        hand: ['March of Swirling Mist', 'Opt*2', 'Grizzly Bears'],
+      },
+      opp: {
+        bf: ['Hill Giant', 'Savannah Lions'],
+      },
+    }),
+  ),
+  preset(
+    'March of Otherworldly Light: four players, X only as far as the white cards reach',
+    board({
+      you: {
+        bf: ['Plains'],
+        hand: ['March of Otherworldly Light', 'Savannah Lions', 'Savannah Lions'],
+      },
+      opp: [{ bf: ['Hill Giant'] }, {}, {}],
+    }),
+  ),
+  preset(
     'Dig Through Time: delved cards are exiled as you cast it',
     board({
       you: {

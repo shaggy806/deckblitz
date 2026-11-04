@@ -4557,9 +4557,8 @@ export class Game {
        * targets, and whether mana alone pays for it. */
       // Delve (rule 702.66a): the cards it could exile  any in the caster's
       // graveyard but itself.
-      const delvePool = this.hasDelve(player, def)
-        ? this.state.zones.perPlayer[player].graveyard.filter((id) => id !== card)
-        : [];
+      // The March cycle's matching cards in hand come first (`delvePoolFor`).
+      const delvePool = this.delvePoolFor(player, def, card);
       /** Whether this variant can be cast with `targetCount` distinct
        * targets and `delve` exiled, mana paying the rest. */
       const castsWith = (targetCount: number, delve?: readonly ObjectId[], x = xFloor): boolean =>
@@ -4586,13 +4585,21 @@ export class Game {
           evoke ?? null,
           delve,
         ) === null;
+      /** Whether mana pays for this variant at `x`, with no targets counted,
+       * or with the most delve can do at that X. */
+      const castsAtX = (x: number): boolean => {
+        if (castsWith(0, undefined, x)) return true;
+        const generic = this.withFace(card, face ?? 0, () => this.castingCostOf(player, card, def, x, variantCost, 0)).generic;
+        const most = this.delveReach(delvePool, generic, def);
+        return most > 0 && castsWith(0, delvePool.slice(0, most), x);
+      };
       /** The fewest cards delve must exile for this variant to be castable
        * with `targetCount` targets, or `null` if no number of them does. */
       const fewestDelved = (targetCount: number): number | null => {
         const generic = this.withFace(card, face ?? 0, () =>
           this.castingCostOf(player, card, def, 0, variantCost, targetCount),
         ).generic;
-        const most = Math.min(delvePool.length, generic);
+        const most = this.delveReach(delvePool, generic, def);
         if (most === 0 || !castsWith(targetCount, delvePool.slice(0, most))) return null;
         let fewest = most;
         while (fewest > 1 && castsWith(targetCount, delvePool.slice(0, fewest - 1))) fewest -= 1;
@@ -4771,7 +4778,9 @@ export class Game {
         // "Target creature with mana value X" (Stolen by the Fae): what may
         // be targeted depends on X, so the spell is offered once per X that
         // is payable and has a legal set of targets, each with that X fixed
-        // and that X's options (as for Rydia's ability). Mana alone pays.
+        // and that X's options (as for Rydia's ability). Mana pays, or the
+        // most delve can do at that X and mana the rest (March of Otherworldly
+        // Light).
         let most = 0;
         if (variantCost !== null && parseManaCost(variantCost).x > 0) {
           this.targetCostReductionAssumed = this.spellPricedByTargets(def, player, card);
@@ -4782,7 +4791,7 @@ export class Game {
           }
         }
         const xs: number[] = [];
-        for (let x = 0; x <= most; x += 1) if (castsWith(0, undefined, x)) xs.push(x);
+        for (let x = 0; x <= most; x += 1) if (castsAtX(x)) xs.push(x);
         if (xs.length === 0) continue;
         perX = xs;
         manaAffordable = true;
@@ -5200,20 +5209,32 @@ export class Game {
               // The total cost (702.66a): a chosen additional cost's mana
               // too (Bayou Groff's "or pay {3}"), as `fewestDelved` prices it.
               const generic = this.castingCostOf(player, card, def, 0, variantCost, pricedAt).generic;
-              const maxCards = Math.min(delvePool.length, generic);
+              const maxCards = this.delveMaxCards(delvePool, generic, def);
               // An {X} spell may have nothing generic at X=0 ({X}{R}) and
               // still delve for X: its ranges per X decide.
               if (maxCards === 0 && xPlan === null) return {};
               const minCards = manaAffordable ? 0 : (fewestDelved(pricedAt) ?? maxCards);
-              if (xPlan === null) return { delve: { choices: delvePool, minCards, maxCards } };
+              // The March cycle's cards in hand (`delvePoolFor`).
+              const reduces = def.additionalCost?.exileFromHandReduces;
+              const fromHand =
+                reduces === undefined
+                  ? {}
+                  : {
+                      fromHand: {
+                        count: delvePool.filter((id) => this.state.objects[id]?.zone === "hand").length,
+                        each: reduces.each,
+                      },
+                    };
+              if (xPlan === null) return { delve: { choices: delvePool, minCards, maxCards, ...fromHand } };
               // At each X: the fewest it needs never falls as X rises, so
               // one pass walks it up.
               const byX: { minCards: number; maxCards: number }[] = [];
               let fewest = minCards;
               for (let x = 0; x <= xPlan.maxX; x += 1) {
-                const most = Math.min(
-                  delvePool.length,
+                const most = this.delveMaxCards(
+                  delvePool,
                   this.castingCostOf(player, card, def, x, variantCost, pricedAt).generic,
+                  def,
                 );
                 // Below a permission's least X (Glarb) nothing is castable:
                 // that X isn't on offer, so it mustn't raise the count.
@@ -5225,7 +5246,7 @@ export class Game {
                 byX.push({ minCards: Math.min(fewest, most), maxCards: most });
               }
               if (byX.every((r) => r.maxCards === 0)) return {};
-              return { delve: { choices: delvePool, minCards, maxCards, byX } };
+              return { delve: { choices: delvePool, minCards, maxCards, byX, ...fromHand } };
             })()
           : {}),
         ...(this.tapsToPay(def, card, player)
@@ -5391,7 +5412,7 @@ export class Game {
           // This X's price decides which of this X's targets can be offered:
           // the ones a tax leaves affordable, and the ones that earn a
           // reduction the spell can't do without.
-          const castable = (): boolean => castsWith(0, undefined, x);
+          const castable = (): boolean => castsAtX(x);
           const xTax = this.targetTaxOffer(def, player, card, x, castable, kicked === true, overload);
           const xOptions = this.targetReductionOptions(
             def,
@@ -16297,14 +16318,13 @@ export class Game {
     targetCount: number,
     floor: number,
   ): number {
-    if (!this.hasDelve(player, def)) return floor;
-    const pool = this.state.zones.perPlayer[player].graveyard.filter((id) => id !== cardId);
+    const pool = this.delvePoolFor(player, def, cardId);
     if (pool.length === 0) return floor;
     return this.withFace(cardId, face, () => {
       const purpose: ManaPurpose = { kind: "cast", card: cardId, ...castPaying(undefined, costString) };
       const payable = (k: number): boolean => {
         const cost = this.castingCostOf(player, cardId, def, k, costString, targetCount);
-        const rest = this.reduceCostByDelve(cost, pool.slice(0, Math.min(pool.length, cost.generic)));
+        const rest = this.reduceCostByDelve(cost, pool.slice(0, this.delveReach(pool, cost.generic, def)), def);
         return this.payMana(player, rest, undefined, undefined, purpose) !== null;
       };
       let lo = floor;
@@ -16313,7 +16333,7 @@ export class Game {
       const manaCap =
         this.manaSources(player).reduce((n, s) => n + Game.sourceCapacity(s), 0) +
         this.state.players[player].manaPool.length;
-      let hi = Math.max(lo, manaCap + pool.length);
+      let hi = Math.max(lo, manaCap + pool.length * Math.max(1, def.additionalCost?.exileFromHandReduces?.each ?? 1));
       while (lo < hi) {
         const mid = Math.ceil((lo + hi) / 2);
         if (payable(mid)) lo = mid;
@@ -17577,13 +17597,13 @@ export class Game {
     const assisted = this.assistChoice?.for === cardId ? this.judgeAssist(player, cardId, def, totalCost.generic, via) : 0;
     if (typeof assisted === "string") return assisted;
     const baseCost = assisted > 0 ? { ...totalCost, generic: totalCost.generic - assisted } : totalCost;
-    // Delve (rule 702.66): each card exiled pays {1} of the total cost.
+    // Delve (rule 702.66): each card exiled pays {1} of the total cost; a March's
+    // card from hand takes its {2} off.
     if (delve !== undefined && delve.length > 0) {
-      if (!this.hasDelve(player, def)) return `${def.name} does not have delve`;
-      const wrong = this.whyDelveIsWrong(player, cardId, def.name, delve, baseCost);
+      const wrong = this.whyDelveIsWrong(player, cardId, def, delve, baseCost);
       if (wrong !== null) return wrong;
     }
-    const delved = this.reduceCostByDelve(baseCost, delve);
+    const delved = this.reduceCostByDelve(baseCost, delve, def);
     let convoked: PaidConvoke[] = [];
     if (convoke !== undefined && convoke.length > 0) {
       if (!this.tapsToPay(def, cardId, player)) return `${def.name} does not have convoke or improvise`;
@@ -19413,6 +19433,7 @@ export class Game {
     const fullCost = this.reduceCostByDelve(
       assist === undefined ? totalCost : { ...totalCost, generic: totalCost.generic - assist.amount },
       delve,
+      def,
     );
     let convoked: PaidConvoke[] = [];
     if (convoke !== undefined && convoke.length > 0) {
@@ -19531,7 +19552,8 @@ export class Game {
     }
 
     // Delve (rule 702.66a): the chosen cards are exiled as the cost is paid,
-    // one graveyard leave like escape's.
+    // one graveyard leave like escape's. A March's from hand go the same way
+    // (rule 601.2h), exiled for good even if the spell is countered.
     if (delve !== undefined && delve.length > 0) {
       this.withGraveyardLeaveBatch(() => {
         for (const id of delve) this.moveObject(id, "exile");
@@ -39959,29 +39981,77 @@ export class Game {
 
   /** Why `delve` can't pay toward `cost` (rule 702.66a): distinct cards
    * in `player`'s graveyard other than the spell itself, no more of them
-   * than the total cost has generic mana. */
+   * than the total cost has generic mana. A March's matching cards in hand
+   * (`additionalCost.exileFromHandReduces`) may be named too, any number of
+   * them (its ruling), and what they take off leaves delve less to pay. */
   private whyDelveIsWrong(
     player: PlayerId,
     cardId: ObjectId,
-    name: string,
+    def: CardDefinition,
     delve: readonly ObjectId[],
     cost: ManaCost,
   ): string | null {
+    const name = def.name;
+    const reduces = def.additionalCost?.exileFromHandReduces;
+    const hasDelve = this.hasDelve(player, def);
+    if (reduces === undefined && !hasDelve) return `${name} does not have delve`;
     if (new Set(delve).size !== delve.length) return `${name}'s delve can't exile the same card twice`;
-    if (delve.length > cost.generic) {
-      return `${name}'s delve can exile at most ${cost.generic} cards, one per generic mana`;
-    }
+    const fromHand = reduces === undefined ? [] : this.discardCandidates(player, reduces.filter, cardId);
     const graveyard = this.state.zones.perPlayer[player].graveyard;
+    let handCards = 0;
     for (const id of delve) {
       if (id === cardId) return `${name} can't exile itself for its own delve`;
-      if (!graveyard.includes(id)) {
+      if (fromHand.includes(id)) {
+        handCards += 1;
+        continue;
+      }
+      if (!hasDelve || !graveyard.includes(id)) {
         const object = this.state.objects[id];
         return object === undefined
           ? `there is no card ${id} to exile for ${name}'s delve`
-          : `${printedCardName(object)} is not in ${player}'s graveyard`;
+          : `${printedCardName(object)} can't be exiled for ${name}: it's not ${hasDelve ? `in ${player}'s graveyard` : "a card in hand it can exile"}`;
       }
     }
+    const room = Math.max(0, cost.generic - handCards * (reduces?.each ?? 0));
+    if (delve.length - handCards > room) {
+      return `${name}'s delve can exile at most ${room} cards, one per generic mana`;
+    }
     return null;
+  }
+
+  /** The cards a cast of `def` could exile to pay less, in the order a driver
+   * takes them: its `additionalCost.exileFromHandReduces` matches in hand (the
+   * March cycle), then the graveyard if it has delve (rule 702.66a). The spell
+   * itself is never one. */
+  private delvePoolFor(player: PlayerId, def: CardDefinition, card: ObjectId): readonly ObjectId[] {
+    const reduces = def.additionalCost?.exileFromHandReduces;
+    return [
+      ...(reduces === undefined ? [] : this.discardCandidates(player, reduces.filter, card)),
+      ...(this.hasDelve(player, def) ? this.state.zones.perPlayer[player].graveyard.filter((id) => id !== card) : []),
+    ];
+  }
+
+  /** How many of `pool` (`delvePoolFor`'s, its cards in hand first) can go at
+   * once at this much generic, taking from its start: every card in hand (any
+   * number may, past what lowers the cost — the March rulings), then one
+   * graveyard card per generic left. */
+  private delveReach(pool: readonly ObjectId[], generic: number, def: CardDefinition): number {
+    const each = def.additionalCost?.exileFromHandReduces?.each ?? 0;
+    const hand = pool.filter((id) => this.state.objects[id]?.zone === "hand").length;
+    return hand + Math.min(pool.length - hand, Math.max(0, generic - hand * each));
+  }
+
+  /** The most of `pool` a player may name at this much generic: as
+   * `delveReach`, but fewer cards from hand can leave room for more from the
+   * graveyard (a March under Teval, Arbiter of Virtue). */
+  private delveMaxCards(pool: readonly ObjectId[], generic: number, def: CardDefinition): number {
+    const each = def.additionalCost?.exileFromHandReduces?.each ?? 0;
+    const hand = pool.filter((id) => this.state.objects[id]?.zone === "hand").length;
+    let most = 0;
+    for (let n = 0; n <= hand; n += 1) {
+      most = Math.max(most, n + Math.min(pool.length - hand, Math.max(0, generic - n * each)));
+    }
+    return most;
   }
 
   /** Whether a spell `player` casts with definition `def` has delve:
@@ -39999,10 +40069,14 @@ export class Game {
     return false;
   }
 
-  /** `cost` less one generic mana per card exiled for delve. */
-  private reduceCostByDelve(cost: ManaCost, delve: readonly ObjectId[] | undefined): ManaCost {
-    const n = delve?.length ?? 0;
-    return n === 0 ? cost : { ...cost, generic: Math.max(0, cost.generic - n) };
+  /** `cost` less one generic mana per card exiled for delve, and a March's
+   * amount per card named from hand, generic only (rule 601.2f; the rulings). */
+  private reduceCostByDelve(cost: ManaCost, delve: readonly ObjectId[] | undefined, def: CardDefinition): ManaCost {
+    if (delve === undefined || delve.length === 0) return cost;
+    const each = def.additionalCost?.exileFromHandReduces?.each ?? 1;
+    let off = 0;
+    for (const id of delve) off += this.state.objects[id]?.zone === "hand" ? each : 1;
+    return { ...cost, generic: Math.max(0, cost.generic - off) };
   }
 
   /**

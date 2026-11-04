@@ -2221,6 +2221,14 @@ engine terms. A second thing to check is a second test.
 - **Do:** Cast Stock Up, take two cards, then order the rest.
 - **Expect:** First an unnumbered pick for your hand. Then 'Put them on the bottom in the order you pick: the last you pick goes on the very bottom', numbered, needing all three leftovers. The library bottom matches your order.
 
+### March of Swirling Mist: exiled blue cards take {2} off for each
+- **Do:** Cast March of Swirling Mist with X 2, choose one Opt in the popup and confirm, then target both of the opponent's creatures.
+- **Expect:** The popup offers only the two Opts, reading "from your hand, each taking 2 generic mana off", and Grizzly Bears isn't in it. Your one Island pays. The chosen Opt goes to exile as you cast it, the other stays in hand, and both creatures phase out.
+
+### March of Otherworldly Light: four players, X only as far as the white cards reach
+- **Do:** Cast March of Otherworldly Light, then target Hill Giant.
+- **Expect:** X is 4 with no choice to make, since only that reaches the Giant, and no popup asks for cards: both Savannah Lions are needed. They go to exile as you cast it, your one Plains pays {W}, and Hill Giant is exiled.
+
 ### Dig Through Time: delved cards are exiled as you cast it
 - **Do:** Cast Dig Through Time, paying {U}{U} with the Islands and delving all six graveyard cards. Take two.
 - **Expect:** The six graveyard cards are exiled as you cast it. Only the five leftover cards are ordered.

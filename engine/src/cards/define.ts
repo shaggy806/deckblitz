@@ -4471,6 +4471,18 @@ export interface CardDefinition {
     readonly exilesSacrifice?: true;
     readonly sacrificeCount?: number | "x";
     readonly sacrificeReduces?: number;
+    /**
+     * "As an additional cost to cast this spell, you may **exile any number of
+     * blue cards from your hand. This spell costs {2} less to cast for each
+     * card exiled this way**" (the March cycle — Kamigawa: Neon Dynasty): named
+     * as the spell is cast, on the `cast-spell` action's `delve` from its
+     * offer (`delve.fromHand`), which is delve's shape (rule 601.2f): `each`
+     * generic off the total cost, never its colored part, and any number may
+     * go past what lowers it further (the rulings). Unlike
+     * `sacrificeReduces` it leaves X alone, so a real {X} is still announced.
+     * Exiled as the cost is paid (601.2h), for good even if it's countered.
+     */
+    readonly exileFromHandReduces?: { readonly filter: CardFilter; readonly each: number };
     readonly discard?: number | "x";
     /** `discard`'s cards are discarded at random rather than chosen (Sonic
      * Burst: "As an additional cost to cast this spell, discard a card at
@@ -6131,6 +6143,7 @@ interface CardDraft {
     readonly exilesSacrifice?: true;
     readonly sacrificeCount?: number | "x";
     readonly sacrificeReduces?: number;
+    readonly exileFromHandReduces?: { readonly filter: CardFilter; readonly each: number };
     readonly discard?: number | "x";
     readonly discardAtRandom?: boolean;
     readonly discardFilter?: CardFilter;
