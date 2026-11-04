@@ -1568,6 +1568,23 @@ describe("costs and triggers", () => {
     expect(caverns.complete).toBe(true);
   });
 
+  it("reads Arena of Glory's mana, spent on a creature spell", () => {
+    const arena = parseFace({
+      name: "Arena of Glory",
+      type_line: "Land",
+      oracle_text:
+        "This land enters tapped unless you control a Mountain.\n{T}: Add {R}.\n{R}, {T}, Exert this land: Add {R}{R}. If any of that mana is spent on a creature spell, it gains haste until end of turn. (An exerted permanent won't untap during your next untap step.)",
+    });
+    expect(arena.activated[1].cost).toMatchObject({ mana: "{R}", tap: true, exertSelf: true });
+    expect(arena.activated[1].effect).toEqual({
+      kind: "add-mana",
+      mana: "R",
+      amount: 2,
+      spellGains: { spell: { type: "creature" }, keywords: ["haste"] },
+    });
+    expect(arena.complete).toBe(true);
+  });
+
   it("reads Sylvan Library's draws at stake", () => {
     const library = parseFace({
       name: "Sylvan Library",

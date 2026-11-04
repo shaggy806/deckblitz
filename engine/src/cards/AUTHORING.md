@@ -6933,7 +6933,12 @@ Delete an entry in the same commit as the feature that retires it.
     creature spell, it gains haste until end of turn" (Carnelian Orb of
     Dragonkind — rule 106.6): not a trigger, so nothing can respond and the
     source needn't be around; the spell, and the permanent it becomes, gains
-    the keywords until end of turn (a `castRider`).
+    the keywords until end of turn (a `castRider`). It rides on each unit, so
+    "if **any of** that mana" (Arena of Glory, its `amount: 2`) is this too,
+    each spell a unit went on gaining them. For a duration or a counter the
+    mana's own text makes a trigger of ("When you spend this mana…, it enters
+    with an additional +1/+1 counter on it and gains hexproof until your next
+    turn" — Jade Orb of Dragonkind), `whenSpent` with target 0, the spell.
   - `whenSpent: { spell?, effect, text }` — "When that mana is spent to cast
     …" (Path of Ancestry). `spell: "shares-type-with-commander"` resolves
     against the controller's commanders at activation time. It fires as a

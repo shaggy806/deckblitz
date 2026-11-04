@@ -13,6 +13,7 @@
   "effect:counter-into-library-bottom",
   "effect:counter-to-library-top",
   "effect:counter-to-library-top-or-bottom",
+  "stat:mana-spent-grants-haste",
   "stat:drawn-this-turn-choice",
   "mechanic:opening-hand-not-starting-player",
   "effect:emblem-grants-activated",

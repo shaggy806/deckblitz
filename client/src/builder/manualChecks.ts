@@ -9402,6 +9402,12 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'Arena of Glory: exerted, its mana gives a creature spell haste',
+    board({
+      you: { bf: ['Mountain', 'Arena of Glory'], hand: ['Goblin Piker'] },
+    }),
+  ),
+  preset(
     'Harvest Pyre: X is announced, and exiles that many cards from your graveyard',
     board({
       you: { bf: ['Mountain*2'], hand: ['Harvest Pyre'], gy: ['Island*3'] },

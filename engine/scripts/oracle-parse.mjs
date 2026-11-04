@@ -8330,15 +8330,24 @@ export function parseEffect(text, outer) {
     ctx.targets.length = slots;
   }
   // "If that mana is spent on a creature spell, it gains haste" (Hall of the
-  // Bandit Lord): with no duration named, for good (its ruling).
-  const spellGains = /^(Add .+?\.) If that mana is spent on an? (.+) spell, it gains (\w+)\.$/.exec(text);
+  // Bandit Lord): with no duration named, for good (its ruling). "If any of
+  // that mana is spent …, it gains haste until end of turn" (Arena of Glory,
+  // Carnelian Orb's "that mana"): rides on each unit all the same.
+  const spellGains = /^(Add .+?\.) If (?:any of )?that mana is spent on an? (.+) spell, it gains (\w+)( until end of turn)?\.$/.exec(text);
   if (spellGains !== null) {
     const slots = ctx.targets.length;
     const add = parseSentence(spellGains[1], ctx);
     const spell = parseTypePhrase(spellGains[2]);
     if (add?.kind === "add-mana" && spell !== null) {
       return {
-        effect: { ...add, spellGains: { spell, keywords: [spellGains[3].toLowerCase()], lasting: true } },
+        effect: {
+          ...add,
+          spellGains: {
+            spell,
+            keywords: [spellGains[3].toLowerCase()],
+            ...(spellGains[4] === undefined ? { lasting: true } : {}),
+          },
+        },
         todo: [],
         hints: [],
       };
@@ -13624,6 +13633,23 @@ function parseFaceAsWritten(face, ctx = {}) {
       out.static.push({
         affects: { scope: "self" },
         replacement: { event: "enters-battlefield", tappedUnlessBehold: beholdOf(m[1]) },
+        text: printed(raw),
+      });
+      continue;
+    }
+    // "This land enters tapped unless you control a Mountain or a Forest":
+    // a check land, the land types read as it's about to enter.
+    if ((m = /^~ enters tapped unless you control an? ([A-Z]\w+)(?: or an? ([A-Z]\w+))?\.$/.exec(line))) {
+      out.static.push({
+        affects: { scope: "self" },
+        replacement: {
+          event: "enters-battlefield",
+          tappedUnless: {
+            kind: "controls",
+            filter: m[2] === undefined ? { subtype: m[1] } : { subtypes: [m[1], m[2]] },
+            atLeast: 1,
+          },
+        },
         text: printed(raw),
       });
       continue;

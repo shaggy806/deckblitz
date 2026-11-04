@@ -6198,6 +6198,10 @@ These boards start before the first turn (the builder's `openingHands`), with th
 - **Do:** The board opens on the ability. Say yes to "Draw two additional cards?". In the popup click Forest, then Island, then Confirm. Say no to both "Pay 4 life?" questions, and wait for the bots.
 - **Expect:** Your life stays 40 and your hand holds just the Bears. Nobody else was asked. On your next turn the card you draw is Island, the second you picked, and the Library asks again.
 
+### Arena of Glory: exerted, its mana gives a creature spell haste
+- **Do:** Click Arena of Glory and choose its second ability, "{R}, {T}, Exert this land". Cast Goblin Piker with the {R}{R}.
+- **Expect:** The Mountain and Arena are tapped and the Piker has haste this turn: it can attack. Arena stays tapped through your next untap step.
+
 ### Boonweaver Giant: choose which of your graveyard, hand and library to search
 - **Do:** Cast Boonweaver Giant. As its ability resolves, say yes to the search, then click "Search your graveyard and hand".
 - **Expect:** Seven choices are offered, from "Search your graveyard, hand, and library" down to "Search your library". This one offers Rancor and Pacifism, not Holy Strength. The Aura you pick enters attached to the Giant, and your library isn't shuffled.
