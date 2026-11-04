@@ -952,8 +952,9 @@ export type GameEvent =
       readonly chosen: RandomPick;
     })
   | (Base & {
-      /** `player` amassed, choosing the Army `object` (rule 701.47) — the
-       * `"amassed"` this-way kind's record of "the amassed Army". */
+      /** `player` amassed, choosing the Army `object` (rule 701.47c) — the
+       * `"amassed"` this-way kind's record of "the amassed Army". Not emitted
+       * when no Army could be chosen: there's none to record. */
       readonly type: "amassed";
       readonly player: PlayerId;
       readonly object: ObjectId;

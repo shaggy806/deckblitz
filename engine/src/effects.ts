@@ -117,8 +117,10 @@ export type AttachHostRef = EffectTargetRef | { readonly among: CardFilter };
  *   creature you control". The first of them still on the battlefield, as
  *   the same object (rule 400.7);
  * - `"amassed"`: the Army an earlier `amass` step of this resolution chose,
- *   counters or none (rule 701.47a) — Goblin Plate Mail's "attach this
- *   Equipment to the amassed Army", Foray of Orcs' `about`.
+ *   counters or none (rules 701.47a, 701.47c) — Goblin Plate Mail's "attach
+ *   this Equipment to the amassed Army", Foray of Orcs' `about`. Nothing when
+ *   none could be chosen; a `reflexive-trigger` `about` it triggers all the
+ *   same (rule 701.47b), since an `amass` step before it has always happened.
  */
 export type AttachRef = EffectTargetRef | "created" | "put-this-way" | "amassed";
 /** A `look-and-choose`'s zone as `ResolutionContext.lookAndChoose` takes it:
@@ -10750,7 +10752,9 @@ export interface EffectApi {
     text: string,
     value?: number,
     divided?: TriggeredAbility["divided"],
-    about?: ObjectId,
+    /** What `"trigger-object"` names in it; `null` is nothing at all, not the
+     * creating ability's trigger object — an amass that could choose no Army. */
+    about?: ObjectId | null,
   ): void;
   /** Exile every card in `target`'s graveyard (a player — Bojuka Bog), as
    * one move. */
@@ -18535,14 +18539,19 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         spec.about === undefined || (typeof spec.about === "number" && illegalSlot(spec.about, ctx))
           ? undefined
           : resolveAttachRef(spec.about, ctx);
-      if (spec.about !== undefined && about?.kind !== "object") return;
+      // But a player has amassed even when no Army could be chosen (rule
+      // 701.47b — Divine Visitation's Angel made instead): "when you do" still
+      // triggers, about nothing, and the Army's power can't be determined, so
+      // it's 0 (rule 107.2).
+      const noArmy = spec.about === "amassed" && about?.kind !== "object";
+      if (spec.about !== undefined && about?.kind !== "object" && !noArmy) return;
       ctx.reflexiveTrigger(
         spec.targets,
         spec.effect,
         spec.text,
         spec.value === undefined ? undefined : amountValue(spec.value, ctx),
         spec.divided,
-        about?.kind === "object" ? about.object : undefined,
+        about?.kind === "object" ? about.object : noArmy ? null : undefined,
       );
       return;
     }

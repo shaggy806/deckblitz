@@ -29,6 +29,7 @@ import {
   settle,
   spawn,
   table,
+  toGraveyard,
   toHand,
   watchTargets,
   zone,
@@ -230,5 +231,97 @@ describe("Grishnákh, Brash Instigator", () => {
     game.debugApplyEffect(B, { kind: "modify-pt", target: 0, power: -1, toughness: 0, duration: "end-of-turn" }, [ref(goblin)]);
     settle(game);
     expect(controller(game, bears)).toBe(B);
+  });
+});
+
+describe("amassed with no Army to choose (rules 701.47b, 107.2)", () => {
+  it("Divine Visitation's Angel made instead: Foray of Orcs still triggers, its target chosen, for 0", () => {
+    const { game, a } = table();
+    spawn(game, "Divine Visitation");
+    lands(game, "Mountain", 4);
+    const bears = spawn(game, "Grizzly Bears", B);
+    const other = spawn(game, "Grizzly Bears", B);
+    const seen = watchTargets(a, () => [bears]);
+    const start = game.state.eventLog.length;
+    cast(game, toHand(game, "Foray of Orcs"));
+    const log = game.state.eventLog.slice(start);
+    expect(named(game, "Army Token", A)).toHaveLength(0);
+    expect(seen.asked).toBe(1);
+    expect(log.some((e) => e.type === "object-targeted" && e.object === bears)).toBe(true);
+    expect(log.some((e) => e.type === "amassed")).toBe(false);
+    expect(game.state.objects[bears].damageMarked).toBe(0);
+    expect(zone(game, other)).toBe("battlefield");
+  });
+
+  it("Grishnákh: the Army's power is 0, not the power of Grishnákh, the creating ability's trigger object", () => {
+    const { game, a } = table();
+    spawn(game, "Divine Visitation");
+    const elves = spawn(game, "Llanowar Elves", B);
+    const ornithopter = spawn(game, "Ornithopter", B);
+    const seen = watchTargets(a, (offered) => [offered[0][0] as ObjectId]);
+    enter(game, "Grishnákh, Brash Instigator");
+    // The only legal one is taken with nothing to ask.
+    expect(seen.asked).toBe(0);
+    expect(controller(game, ornithopter)).toBe(A);
+    expect(controller(game, elves)).toBe(B);
+  });
+
+  it("Grishnákh with nothing of power 0: the reflexive ability is removed", () => {
+    const { game } = table();
+    spawn(game, "Divine Visitation");
+    const elves = spawn(game, "Llanowar Elves", B);
+    const start = game.state.eventLog.length;
+    enter(game, "Grishnákh, Brash Instigator");
+    expect(controller(game, elves)).toBe(B);
+    expect(game.state.eventLog.slice(start).some((e) => e.type === "trigger-removed")).toBe(true);
+  });
+
+  it("Surrounded by Orcs mills 0, Widespread Brutality has no source and deals nothing, Goblin Plate Mail stays unattached", () => {
+    const { game } = table();
+    spawn(game, "Divine Visitation");
+    lands(game, "Swamp", 4);
+    lands(game, "Mountain", 4);
+    lands(game, "Island", 4);
+    const bears = spawn(game, "Grizzly Bears", B);
+    cast(game, toHand(game, "Surrounded by Orcs"), { targets: [ref(B)] });
+    expect(graveyard(game, B)).toHaveLength(0);
+    cast(game, toHand(game, "Widespread Brutality"));
+    expect(game.state.objects[bears].damageMarked).toBe(0);
+    const mail = enter(game, "Goblin Plate Mail");
+    expect(game.state.objects[mail].attachedTo ?? null).toBeNull();
+  });
+});
+
+describe("a compare in a triggered ability's own targets: Thunderkin Awakener", () => {
+  it("only an Elemental of lesser toughness than it, read off the Awakener, not bound by anything", () => {
+    const { game, a } = table();
+    const awakener = spawn(game, "Thunderkin Awakener");
+    const spark = toGraveyard(game, "Spark Elemental");
+    const air = toGraveyard(game, "Air Elemental");
+    const twin = toGraveyard(game, "Thunderkin Awakener");
+    attack(game, a, [awakener]);
+    expect(zone(game, spark)).toBe("battlefield");
+    expect(zone(game, air)).toBe("graveyard");
+    expect(zone(game, twin)).toBe("graveyard");
+  });
+
+  it("its toughness as it attacks: pumped past the Air Elemental's, that's legal too", () => {
+    const { game, a } = table();
+    const awakener = spawn(game, "Thunderkin Awakener");
+    const air = toGraveyard(game, "Air Elemental");
+    game.debugApplyEffect(A, { kind: "modify-pt", target: 0, power: 0, toughness: 3, duration: "end-of-turn" }, [ref(awakener)]);
+    attack(game, a, [awakener]);
+    expect(zone(game, air)).toBe("battlefield");
+  });
+
+  it("and again as it resolves: shrunk in response, the target is illegal (the ruling)", () => {
+    const { game, a } = table();
+    const awakener = spawn(game, "Thunderkin Awakener");
+    const spark = toGraveyard(game, "Spark Elemental");
+    a.declareAttackersFn = () => [{ attacker: awakener, defender: B }];
+    game.advanceUntil((s) => s.zones.shared.stack.length === 1);
+    game.debugApplyEffect(B, { kind: "modify-pt", target: 0, power: 0, toughness: -1, duration: "end-of-turn" }, [ref(awakener)]);
+    settle(game);
+    expect(zone(game, spark)).toBe("graveyard");
   });
 });

@@ -31886,7 +31886,10 @@ export class Game {
           ...((value ?? triggerValue) !== 0 ? { triggerValue: value ?? triggerValue } : {}),
           // What the spec's `about` names takes the trigger object's place,
           // and is followed from this stint (rule 400.7).
-          ...(about !== undefined
+          ...(about === null
+            ? // About nothing: not the creating ability's trigger object either.
+              { lastKnownRefs: { ...refs, triggerObjectAfterLeaving: undefined, triggerObject: undefined } }
+            : about !== undefined
             ? {
                 triggerObject: about,
                 lastKnownRefs: {
