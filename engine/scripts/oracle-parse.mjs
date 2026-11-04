@@ -2354,6 +2354,17 @@ export function parseTrigger(clause) {
   if (/^Whenever you cast (?:a|another) spell that has convoke$/.test(c)) {
     return [{ on: "cast-spell", who: "you", filter: { hasConvoke: true } }];
   }
+  // "Using mana produced by Tecutlan" (Barracks of the Thousand): this very
+  // permanent's mana, `manaFrom.fromSource`. A permanent spell is any of the
+  // permanent types.
+  if ((m = /^Whenever you cast an? (.+?) spell using mana produced by ~$/.exec(c))) {
+    const filter =
+      m[1] === "permanent"
+        ? { typesAnyOf: ["artifact", "creature", "enchantment", "land", "planeswalker", "battle"] }
+        : parseTypePhrase(m[1]);
+    if (filter === null) return null;
+    return [{ on: "cast-spell", who: "you", filter: { ...filter, manaFrom: { fromSource: true } } }];
+  }
   if (/^Whenever you cast or copy an instant or sorcery spell$/.test(c)) {
     return [{ on: "cast-spell", who: "you", orCopy: true, filter: { typesAnyOf: ["instant", "sorcery"] } }];
   }
@@ -2977,6 +2988,11 @@ export function parseSentence(sentence, ctx) {
   // excess `dealt-damage` trigger's value is the excess.
   if ((m = sentenceRe(`amass ([A-Z][a-z]+) X, where X is that excess damage`).exec(s))) {
     return { kind: "amass", amount: { triggerValue: true }, creatureType: m[1].replace(/ves$/, "f").replace(/s$/, "") };
+  }
+  // "Discover X, where X is that spell's mana value" (Tecutlan): the spell a
+  // cast trigger saw.
+  if (sentenceRe(`discover X, where X is that spell's mana value`).test(s)) {
+    return { kind: "discover", amount: { manaValueOf: "trigger-object" } };
   }
   // "… to target player or planeswalker and each creature that player or that
   // planeswalker's controller controls" (Bonfire of the Damned, Lavalanche),

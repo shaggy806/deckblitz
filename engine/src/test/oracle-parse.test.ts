@@ -15569,3 +15569,25 @@ describe("you may … do this only once each turn", () => {
     });
   });
 });
+
+describe("a cast trigger keyed to this permanent's own mana", () => {
+  it("reads Tecutlan's, its discover the spell's mana value", () => {
+    const face = parseFace({
+      name: "Tecutlan, the Searing Rift",
+      type_line: "Legendary Land — Cave",
+      colors: [],
+      oracle_text:
+        "Whenever you cast a permanent spell using mana produced by Tecutlan, discover X, where X is that spell's mana value.",
+    });
+    expect(face.complete).toBe(true);
+    expect(face.triggered[0].trigger).toEqual({
+      on: "cast-spell",
+      who: "you",
+      filter: {
+        typesAnyOf: ["artifact", "creature", "enchantment", "land", "planeswalker", "battle"],
+        manaFrom: { fromSource: true },
+      },
+    });
+    expect(face.triggered[0].effect).toEqual({ kind: "discover", amount: { manaValueOf: "trigger-object" } });
+  });
+});
