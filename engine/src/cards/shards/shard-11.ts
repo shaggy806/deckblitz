@@ -474,6 +474,7 @@ import _poolManaCylix from "../pool/mana-cylix.js";
 import _poolManaMatrix from "../pool/mana-matrix.js";
 import _poolManifestationSage from "../pool/manifestation-sage.js";
 import _poolMaraudingMako from "../pool/marauding-mako.js";
+import _poolMarchOfSwirlingMist from "../pool/march-of-swirling-mist.js";
 import _poolMaskOfLawAndGrace from "../pool/mask-of-law-and-grace.js";
 import _poolMasterOfWinds from "../pool/master-of-winds.js";
 import _poolMasterPakku from "../pool/master-pakku.js";
@@ -1398,6 +1399,7 @@ const shard: CardShard = {
     _poolManaMatrix,
     _poolManifestationSage,
     _poolMaraudingMako,
+    _poolMarchOfSwirlingMist,
     _poolMaskOfLawAndGrace,
     _poolMasterOfWinds,
     _poolMasterPakku,

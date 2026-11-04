@@ -308,6 +308,7 @@ import _poolGraftedButcher from "../pool/grafted-butcher.js";
 import _poolGraniteGargoyle from "../pool/granite-gargoyle.js";
 import _poolGrapplerSpider from "../pool/grappler-spider.js";
 import _poolGratuitousViolence from "../pool/gratuitous-violence.js";
+import _poolGravegouger from "../pool/gravegouger.js";
 import _poolGreaterHarvester from "../pool/greater-harvester.js";
 import _poolGreensideWatcher from "../pool/greenside-watcher.js";
 import _poolGrimoireOfTheDead from "../pool/grimoire-of-the-dead.js";
@@ -1174,6 +1175,7 @@ const shard: CardShard = {
     _poolGraniteGargoyle,
     _poolGrapplerSpider,
     _poolGratuitousViolence,
+    _poolGravegouger,
     _poolGreaterHarvester,
     _poolGreensideWatcher,
     _poolGrimoireOfTheDead,

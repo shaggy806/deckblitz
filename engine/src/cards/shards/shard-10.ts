@@ -670,6 +670,7 @@ import _poolSedrisTheTraitorKing from "../pool/sedris-the-traitor-king.js";
 import _poolSeeTheTruth from "../pool/see-the-truth.js";
 import _poolSeeker from "../pool/seeker.js";
 import _poolSeismicStrike from "../pool/seismic-strike.js";
+import _poolSeizeTheSpotlight from "../pool/seize-the-spotlight.js";
 import _poolSejiriSteppe from "../pool/sejiri-steppe.js";
 import _poolSepharaSkysBlade from "../pool/sephara-skys-blade.js";
 import _poolSerraAvenger from "../pool/serra-avenger.js";
@@ -1585,6 +1586,7 @@ const shard: CardShard = {
     _poolSeeTheTruth,
     _poolSeeker,
     _poolSeismicStrike,
+    _poolSeizeTheSpotlight,
     _poolSejiriSteppe,
     _poolSepharaSkysBlade,
     _poolSerraAvenger,

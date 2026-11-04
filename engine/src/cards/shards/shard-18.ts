@@ -105,6 +105,7 @@ import _poolCauldronFamiliar from "../pool/cauldron-familiar.js";
 import _poolCavalcadeOfCalamity from "../pool/cavalcade-of-calamity.js";
 import _poolCelestialArmor from "../pool/celestial-armor.js";
 import _poolCelestialRegulator from "../pool/celestial-regulator.js";
+import _poolChainerNightmareAdept from "../pool/chainer-nightmare-adept.js";
 import _poolChaliceOfTheVoid from "../pool/chalice-of-the-void.js";
 import _poolChameleonBlur from "../pool/chameleon-blur.js";
 import _poolChampionsOfThePerfect from "../pool/champions-of-the-perfect.js";
@@ -1019,6 +1020,7 @@ const shard: CardShard = {
     _poolCavalcadeOfCalamity,
     _poolCelestialArmor,
     _poolCelestialRegulator,
+    _poolChainerNightmareAdept,
     _poolChaliceOfTheVoid,
     _poolChameleonBlur,
     _poolChampionsOfThePerfect,

@@ -87,6 +87,7 @@ import _poolBountyOfSkemfar from "../pool/bounty-of-skemfar.js";
 import _poolBrambleCreeper from "../pool/bramble-creeper.js";
 import _poolBranchingEvolution from "../pool/branching-evolution.js";
 import _poolBrassMan from "../pool/brass-man.js";
+import _poolBrasssTunnelGrinder from "../pool/brasss-tunnel-grinder.js";
 import _poolBringToLife from "../pool/bring-to-life.js";
 import _poolBrotherhoodVertibird from "../pool/brotherhood-vertibird.js";
 import _poolBruceBanner from "../pool/bruce-banner.js";
@@ -189,6 +190,7 @@ import _poolDeepwoodLegate from "../pool/deepwood-legate.js";
 import _poolDeerDog from "../pool/deer-dog.js";
 import _poolDefiantStrike from "../pool/defiant-strike.js";
 import _poolDefiantSurvivor from "../pool/defiant-survivor.js";
+import _poolDelinaWildMage from "../pool/delina-wild-mage.js";
 import _poolDenProtector from "../pool/den-protector.js";
 import _poolDesertOfTheTrue from "../pool/desert-of-the-true.js";
 import _poolDesertersQuarters from "../pool/deserters-quarters.js";
@@ -985,6 +987,7 @@ const shard: CardShard = {
     _poolBrambleCreeper,
     _poolBranchingEvolution,
     _poolBrassMan,
+    _poolBrasssTunnelGrinder,
     _poolBringToLife,
     _poolBrotherhoodVertibird,
     _poolBruceBanner,
@@ -1087,6 +1090,7 @@ const shard: CardShard = {
     _poolDeerDog,
     _poolDefiantStrike,
     _poolDefiantSurvivor,
+    _poolDelinaWildMage,
     _poolDenProtector,
     _poolDesertOfTheTrue,
     _poolDesertersQuarters,

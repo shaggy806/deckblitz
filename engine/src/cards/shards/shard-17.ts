@@ -7,6 +7,7 @@ import _poolAangTheLastAirbender from "../pool/aang-the-last-airbender.js";
 import _poolAbandonedOutpost from "../pool/abandoned-outpost.js";
 import _poolAbstractPerformance from "../pool/abstract-performance.js";
 import _poolAccursedCentaur from "../pool/accursed-centaur.js";
+import _poolAdaptiveAutomaton from "../pool/adaptive-automaton.js";
 import _poolAdeptWatershaper from "../pool/adept-watershaper.js";
 import _poolAdewaleBreakerOfChains from "../pool/adewale-breaker-of-chains.js";
 import _poolAegarTheFreezingFlame from "../pool/aegar-the-freezing-flame.js";
@@ -932,6 +933,7 @@ const shard: CardShard = {
     _poolAbandonedOutpost,
     _poolAbstractPerformance,
     _poolAccursedCentaur,
+    _poolAdaptiveAutomaton,
     _poolAdeptWatershaper,
     _poolAdewaleBreakerOfChains,
     _poolAegarTheFreezingFlame,

@@ -426,6 +426,7 @@ import _poolMalevolentAwakening from "../pool/malevolent-awakening.js";
 import _poolMammothUmbra from "../pool/mammoth-umbra.js";
 import _poolMandibularKite from "../pool/mandibular-kite.js";
 import _poolMapTheFrontier from "../pool/map-the-frontier.js";
+import _poolMarchOfWretchedSorrow from "../pool/march-of-wretched-sorrow.js";
 import _poolMarduBlazebringer from "../pool/mardu-blazebringer.js";
 import _poolMartonStromgald from "../pool/marton-stromgald.js";
 import _poolMassMutiny from "../pool/mass-mutiny.js";
@@ -1264,6 +1265,7 @@ const shard: CardShard = {
     _poolMammothUmbra,
     _poolMandibularKite,
     _poolMapTheFrontier,
+    _poolMarchOfWretchedSorrow,
     _poolMarduBlazebringer,
     _poolMartonStromgald,
     _poolMassMutiny,

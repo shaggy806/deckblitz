@@ -171,6 +171,7 @@ import _poolDaringDiscovery from "../pool/daring-discovery.js";
 import _poolDauthiTrapper from "../pool/dauthi-trapper.js";
 import _poolDawnbringerCleric from "../pool/dawnbringer-cleric.js";
 import _poolDawnfeatherEagle from "../pool/dawnfeather-eagle.js";
+import _poolDaxosBlessedByTheSun from "../pool/daxos-blessed-by-the-sun.js";
 import _poolDayOfJudgment from "../pool/day-of-judgment.js";
 import _poolDeadbridgeGoliath from "../pool/deadbridge-goliath.js";
 import _poolDeathlace from "../pool/deathlace.js";
@@ -1092,6 +1093,7 @@ const shard: CardShard = {
     _poolDauthiTrapper,
     _poolDawnbringerCleric,
     _poolDawnfeatherEagle,
+    _poolDaxosBlessedByTheSun,
     _poolDayOfJudgment,
     _poolDeadbridgeGoliath,
     _poolDeathlace,

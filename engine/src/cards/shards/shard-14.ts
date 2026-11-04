@@ -496,6 +496,7 @@ import _poolMagneticFlux from "../pool/magnetic-flux.js";
 import _poolMakeObsolete from "../pool/make-obsolete.js";
 import _poolMakindiPatrol from "../pool/makindi-patrol.js";
 import _poolManaFlare from "../pool/mana-flare.js";
+import _poolMarchOfOtherworldlyLight from "../pool/march-of-otherworldly-light.js";
 import _poolMasterOfBarbs from "../pool/master-of-barbs.js";
 import _poolMaximumCarnage from "../pool/maximum-carnage.js";
 import _poolMedusaInhumanQueen from "../pool/medusa-inhuman-queen.js";
@@ -1411,6 +1412,7 @@ const shard: CardShard = {
     _poolMakeObsolete,
     _poolMakindiPatrol,
     _poolManaFlare,
+    _poolMarchOfOtherworldlyLight,
     _poolMasterOfBarbs,
     _poolMaximumCarnage,
     _poolMedusaInhumanQueen,

@@ -521,6 +521,7 @@ import _poolPetrifiedWoodKin from "../pool/petrified-wood-kin.js";
 import _poolPheresBandTromper from "../pool/pheres-band-tromper.js";
 import _poolPhyrexianMissionary from "../pool/phyrexian-missionary.js";
 import _poolPhyrexianTriniform from "../pool/phyrexian-triniform.js";
+import _poolPinnacleStarcage from "../pool/pinnacle-starcage.js";
 import _poolPitilessVizier from "../pool/pitiless-vizier.js";
 import _poolPlagueSpores from "../pool/plague-spores.js";
 import _poolPlowThroughReito from "../pool/plow-through-reito.js";
@@ -1419,6 +1420,7 @@ const shard: CardShard = {
     _poolPheresBandTromper,
     _poolPhyrexianMissionary,
     _poolPhyrexianTriniform,
+    _poolPinnacleStarcage,
     _poolPitilessVizier,
     _poolPlagueSpores,
     _poolPlowThroughReito,
