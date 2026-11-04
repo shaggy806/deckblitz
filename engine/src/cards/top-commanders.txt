@@ -1,5 +1,5 @@
 Top 500 Commander *commanders* by EDHREC deck count (fetched 2026-09-22)
-463 already implemented / 37 missing
+464 already implemented / 36 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -77,7 +77,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]   71  Urza, Lord High Artificer                      20594 decks  {2}{U}{U}        Legendary Creature — Human Artificer
 [x]   72  Felothar the Steadfast                         20517 decks  {1}{W}{B}{G}     Legendary Creature — Human Warrior
 [x]   73  Queen Marchesa                                 20464 decks  {1}{R}{W}{B}     Legendary Creature — Human Assassin
-[ ]   74  K'rrik, Son of Yawgmoth                        20441 decks  {4}{B/P}{B/P}{B/P} Legendary Creature — Phyrexian Horror Minion
+[x]   74  K'rrik, Son of Yawgmoth                        20441 decks  {4}{B/P}{B/P}{B/P} Legendary Creature — Phyrexian Horror Minion
 [x]   75  The Wandering Minstrel                         20422 decks  {G}{U}           Legendary Creature — Human Bard
 [x]   76  Malcolm, Keen-Eyed Navigator                   20313 decks  {2}{U}           Legendary Creature — Siren Pirate
 [ ]   77  Avatar Aang                                    20168 decks  {R}{G}{W}{U}     Legendary Creature — Human Avatar Ally // Legendary Creature — Avatar Ally

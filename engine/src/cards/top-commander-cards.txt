@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4375 already implemented / 625 missing (marks refreshed 2026-11-04)
+4385 already implemented / 615 missing (marks refreshed 2026-11-04)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -897,7 +897,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   901  Burgeoning                               {G}              Enchantment
 [x]   902  Blade of Selves                          {2}              Artifact — Equipment
 [x]   903  Sword of Hearth and Home                 {3}              Artifact — Equipment
-[ ]   904  Ojer Taq, Deepest Foundation // Temple of Civilization {6}              Legendary Creature — God // Land
+[x]   904  Ojer Taq, Deepest Foundation // Temple of Civilization {6}              Legendary Creature — God // Land
 [x]   905  Spell Pierce                             {U}              Instant
 [x]   906  Field of Ruin                            {0}              Land
 [x]   907  The Gitrog Monster                       {3}{B}{G}        Legendary Creature — Frog Horror
@@ -1038,7 +1038,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1042  Arcane Lighthouse                        {0}              Land
 [x]  1043  Spellseeker                              {2}{U}           Creature — Human Wizard
 [x]  1044  Apex Devastator                          {8}{G}{G}        Creature — Chimera Hydra
-[ ]  1045  Charismatic Conqueror                    {1}{W}           Creature — Vampire Soldier
+[x]  1045  Charismatic Conqueror                    {1}{W}           Creature — Vampire Soldier
 [x]  1046  Wayward Swordtooth                       {2}{G}           Creature — Dinosaur
 [x]  1047  Chatterfang, Squirrel General            {2}{G}           Legendary Creature — Squirrel Warrior
 [x]  1048  Willowrush Verge                         {0}              Land
@@ -1068,7 +1068,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1072  Jhoira, Weatherlight Captain             {2}{U}{R}        Legendary Creature — Human Artificer
 [x]  1073  Pest Infestation                         {X}{X}{G}        Sorcery
 [x]  1074  Ghalta, Stampede Tyrant                  {5}{G}{G}{G}     Legendary Creature — Elder Dinosaur
-[ ]  1075  K'rrik, Son of Yawgmoth                  {4}{B/P}{B/P}{B/P} Legendary Creature — Phyrexian Horror Minion
+[x]  1075  K'rrik, Son of Yawgmoth                  {4}{B/P}{B/P}{B/P} Legendary Creature — Phyrexian Horror Minion
 [x]  1076  Three Steps Ahead                        {U}              Instant
 [x]  1077  Lathliss, Dragon Queen                   {4}{R}{R}        Legendary Creature — Dragon
 [x]  1078  Fertile Ground                           {1}{G}           Enchantment — Aura
@@ -1143,7 +1143,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1148  Mirrormade                               {1}{U}{U}        Enchantment
 [x]  1149  Sheoldred's Edict                        {1}{B}           Instant
 [x]  1150  Nightscape Familiar                      {1}{B}           Creature — Zombie
-[ ]  1151  Grasp of Fate                            {1}{W}{W}        Enchantment
+[x]  1151  Grasp of Fate                            {1}{W}{W}        Enchantment
 [ ]  1152  Plumb the Forbidden                      {1}{B}           Instant
 [x]  1153  Recruiter of the Guard                   {2}{W}           Creature — Human Soldier
 [x]  1154  Magus of the Wheel                       {2}{R}           Creature — Human Wizard
@@ -1189,7 +1189,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1194  Insatiable Avarice                       {B}              Sorcery
 [x]  1195  Marwyn, the Nurturer                     {2}{G}           Legendary Creature — Elf Druid
 [x]  1196  Homeward Path                            {0}              Land
-[ ]  1197  Ezuri's Predation                        {5}{G}{G}{G}     Sorcery
+[x]  1197  Ezuri's Predation                        {5}{G}{G}{G}     Sorcery
 [x]  1198  Dragon's Hoard                           {3}              Artifact
 [x]  1199  Dreamtide Whale                          {2}{U}           Creature — Whale
 [x]  1200  Notion Thief                             {2}{U}{B}        Creature — Human Rogue
@@ -1202,7 +1202,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1207  Millikin                                 {2}              Artifact Creature — Construct
 [x]  1208  Wasteland                                {0}              Land
 [x]  1209  Xenagos, God of Revels                   {3}{R}{G}        Legendary Enchantment Creature — God
-[ ]  1210  Forge Anew                               {2}{W}           Enchantment
+[x]  1210  Forge Anew                               {2}{W}           Enchantment
 [x]  1211  Akroma's Memorial                        {7}              Legendary Artifact
 [x]  1212  Exemplar of Light                        {2}{W}{W}        Creature — Angel
 [x]  1213  Migration Path                           {3}{G}           Sorcery
@@ -1217,8 +1217,8 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1222  Sterling Grove                           {G}{W}           Enchantment
 [x]  1223  Tezzeret, Cruel Captain                  {3}              Legendary Planeswalker — Tezzeret
 [x]  1224  Requisition Raid                         {W}              Sorcery
-[ ]  1225  Primal Vigor                             {4}{G}           Enchantment
-[ ]  1226  Tekuthal, Inquiry Dominus                {2}{U}{U}        Legendary Creature — Phyrexian Horror
+[x]  1225  Primal Vigor                             {4}{G}           Enchantment
+[x]  1226  Tekuthal, Inquiry Dominus                {2}{U}{U}        Legendary Creature — Phyrexian Horror
 [x]  1227  Kogla, the Titan Ape                     {3}{G}{G}{G}     Legendary Creature — Ape
 [x]  1228  Shrine of the Forsaken Gods              {0}              Land
 [x]  1229  Magda, Brazen Outlaw                     {1}{R}           Legendary Creature — Dwarf Berserker
@@ -1250,7 +1250,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1256  Kiki-Jiki, Mirror Breaker                {2}{R}{R}{R}     Legendary Creature — Goblin Shaman
 [ ]  1257  Rosie Cotton of South Lane               {2}{W}           Legendary Creature — Halfling Peasant
 [x]  1258  Bushwhack                                {G}              Sorcery
-[ ]  1259  Hedge Shredder                           {2}{G}{G}        Artifact — Vehicle
+[x]  1259  Hedge Shredder                           {2}{G}{G}        Artifact — Vehicle
 [x]  1260  Twinflame                                {1}{R}           Sorcery
 [x]  1261  Saryth, the Viper's Fang                 {2}{G}{G}        Legendary Creature — Human Warlock
 [ ]  1262  Coveted Jewel                            {6}              Artifact
@@ -1323,7 +1323,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1330  Laelia, the Blade Reforged               {2}{R}           Legendary Creature — Spirit Warrior
 [x]  1331  Jukai Naturalist                         {G}{W}           Enchantment Creature — Human Monk
 [ ]  1332  Endurance                                {1}{G}{G}        Creature — Elemental Incarnation
-[ ]  1333  Vraska, Betrayal's Sting                 {4}{B}{B/P}      Legendary Planeswalker — Vraska
+[x]  1333  Vraska, Betrayal's Sting                 {4}{B}{B/P}      Legendary Planeswalker — Vraska
 [x]  1334  Conqueror's Flail                        {2}              Artifact — Equipment
 [x]  1335  Sword of Fire and Ice                    {3}              Artifact — Equipment
 [ ]  1336  Baral, Chief of Compliance               {1}{U}           Legendary Creature — Human Wizard
