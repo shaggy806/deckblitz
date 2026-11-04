@@ -14685,6 +14685,15 @@ describe("a cast as this resolves, on its own terms", () => {
     });
   });
 
+  it("reads a doubled loss of life", () => {
+    const letter = read("Creature — Vampire Demon", "If an opponent would lose life during your turn, they lose twice that much life instead. (Damage causes loss of life.)");
+    expect(letter.complete).toBe(true);
+    expect(letter.static[0]).toMatchObject({
+      condition: { kind: "your-turn" },
+      replacement: { event: "would-lose-life", who: "opponent", multiplier: 2 },
+    });
+  });
+
   it("reads a turn's triggered mana ability, a player's or only yours", () => {
     const tide = read("Instant", "Until end of turn, whenever a player taps an Island for mana, that player adds an additional {U}.");
     expect(tide.complete).toBe(true);

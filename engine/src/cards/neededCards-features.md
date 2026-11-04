@@ -5009,3 +5009,5 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 **A permanent of each permanent type (2026-11-04).** `effect:keep-one-of-each-permanent-type`: Cataclysm's `choose-one-of-each` already was it, with all six types and `who: "each-opponent"` (Liliana, Dreadhorde General) or the nonland four (Cataclysmic Gearhulk); new is `chosenBy: "you"`, the caster answering for each player (Mythos of Snapdax).
 
 **A turn's triggered mana ability (2026-11-04).** `effect:turn-scoped-mana-trigger`: a `delayed-trigger` with `whenever: { on: "tapped-for-mana" }` and an `add-mana` effect is a triggered mana ability (rule 605.1b): `Game.tappedForManaExtras` reads it with the permanents', and the watchers leave it alone. High Tide, Bubbling Muck, Pyre Rhymer with Molten Tide.
+
+**A loss of life replaced (2026-11-04).** `replacement:would-lose-life`: `LifeLossReplacement` (`who`, `multiplier`), asked of every loss in `Game.changeLife`, damage's before its floor. Bloodletter of Aclazotz.

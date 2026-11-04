@@ -6580,6 +6580,11 @@ clause (section 9):
   Water Crystal's "…they mill that many cards plus four instead" (`plus: 4`).
   Several multiply, then every `plus` adds, as damage's do; a mill of none is
   never replaced.
+- `{ event: "would-lose-life", who, multiplier }` — Bloodletter of Aclazotz's
+  "if an opponent would lose life during your turn, they lose twice that much
+  life instead", with a `your-turn` `condition`. Every loss, damage's and a life
+  payment's included (rule 119); the damage itself doesn't change, so lifelink
+  doesn't either.
 - `{ event: "would-gain-life", who, plus?, multiplier?, prevent?, becomesLoss? }` — Bilbo, Birthday
   Celebrant's "if you would gain life, you gain that much life plus 1
   instead" (`who: "you"`, `plus: 1`), or "your opponents can't gain life"

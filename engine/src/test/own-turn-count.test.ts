@@ -111,4 +111,16 @@ describe("Serra Avenger", () => {
     cast(game, avenger);
     expect(game.state.objects[avenger].zone).toBe("battlefield");
   });
+
+  it("can be cast on another player's early turns, with something to let it (the ruling)", () => {
+    const { game } = table();
+    lands(game, "Plains", 2);
+    spawn(game, "Vedalken Orrery", A);
+    const avenger = toHand(game, "Serra Avenger");
+    expect(() => cast(game, avenger)).toThrow(); // A's first
+    nextTurn(game); // B's first
+    game.dispatch({ type: "pass-priority", player: B });
+    cast(game, avenger);
+    expect(game.state.objects[avenger].zone).toBe("battlefield");
+  });
 });

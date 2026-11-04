@@ -49,6 +49,7 @@ export type ReplacementSpec =
   | DamageMultiplierReplacement
   | MillMultiplierReplacement
   | LifeGainReplacement
+  | LifeLossReplacement
   | TapManaMultiplierReplacement;
 
 /**
@@ -683,6 +684,21 @@ export interface LifeGainReplacement {
    * order best for them: a `prevent` first (nothing happens), else this
    * first — so no `plus` or `multiplier` changes the gain it becomes. */
   readonly becomesLoss?: true;
+}
+
+/**
+ * Life about to be lost, changed (rule 614.1a) — "if an opponent would lose life
+ * during your turn, they lose twice that much life instead" (Bloodletter of
+ * Aclazotz: a `your-turn` static `condition`). Every loss is one: from an
+ * effect, from damage (rule 119.2, though the damage dealt doesn't change:
+ * lifelink reads what was dealt, the card's ruling), a life payment (rule 119.4,
+ * and they need only have the amount paid), a life total set lower (119.5), an
+ * exchange (701.12c).
+ */
+export interface LifeLossReplacement {
+  readonly event: "would-lose-life";
+  readonly who: "opponent" | "you" | "any-player" | "enchanted-player";
+  readonly multiplier: number;
 }
 
 /**

@@ -17318,6 +17318,14 @@ function parseStatic(line, text) {
       };
     }
   }
+  if (line === "If an opponent would lose life during your turn, they lose twice that much life instead.") {
+    return {
+      affects: { scope: "self" },
+      condition: { kind: "your-turn" },
+      replacement: { event: "would-lose-life", who: "opponent", multiplier: 2 },
+      text,
+    };
+  }
   if (line === "Enchanted player can't gain life.") {
     return { affects: { scope: "self" }, replacement: { event: "would-gain-life", who: "enchanted-player", prevent: true }, text };
   }

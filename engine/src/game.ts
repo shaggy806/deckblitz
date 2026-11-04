@@ -192,6 +192,7 @@ import type {
   EnterInstead,
   GraveyardExileReplacement,
   LifeGainReplacement,
+  LifeLossReplacement,
   MillMultiplierReplacement,
   TurnBeginReplacement,
 } from "./replacements.js";
@@ -50785,8 +50786,10 @@ export class Game {
       if (this.sourceHasDamageKeyword(source, "infect", sourceLastKnown)) {
         this.changePlayerCounters(target.player, "poison", amount, giver);
       } else {
-        const loss = this.lifeLossFromDamage(target.player, amount);
-        if (loss > 0) this.changeLife(target.player, -loss);
+        // A doubling first, then the floor: the order the player losing would
+        // take among the replacements (rule 616.1).
+        const loss = this.lifeLossFromDamage(target.player, this.lifeLossReplaced(target.player, amount));
+        if (loss > 0) this.changeLife(target.player, -loss, true);
       }
       this.applyLifelink(source, amount, sourceLastKnown);
       // Toxic (rules 120.3g, 702.164c): combat damage dealt to a player by a
@@ -51102,10 +51105,23 @@ export class Game {
     return state !== undefined && state.life >= amount && !playerCantLoseLife(this.state, player);
   }
 
-  private changeLife(player: PlayerId, delta: number): void {
+  /** `amount` life `player` would lose, changed: "…they lose twice that much
+   * life instead" (Bloodletter of Aclazotz, each one doubling it again). */
+  private lifeLossReplaced(player: PlayerId, amount: number): number {
+    let loss = amount;
+    for (const r of this.playerEventReplacements(player)) {
+      if (r.event === "would-lose-life") loss *= r.multiplier;
+    }
+    return loss;
+  }
+
+  private changeLife(player: PlayerId, delta: number, lossReplaced = false): void {
     // "Players can't lose life this turn" (rule 119.8): a loss, from damage
     // or an effect, doesn't happen.
     if (delta < 0 && playerCantLoseLife(this.state, player)) return;
+    // Every loss comes through here: an effect's, damage's (having asked for
+    // itself, for the floor beside it), a cost's, a set or exchanged total's.
+    if (delta < 0 && !lossReplaced) delta = -this.lifeLossReplaced(player, -delta);
     // "Your life total can't change" (rule 119.7): no gain either — and so
     // nothing that would replace one applies (the Teferi's Protection
     // rulings).
@@ -52866,14 +52882,14 @@ export class Game {
    * `player`'s event — each one's `who` read from its controller's side. */
   private playerEventReplacements(
     player: PlayerId,
-  ): (MillMultiplierReplacement | LifeGainReplacement)[] {
-    const out: (MillMultiplierReplacement | LifeGainReplacement)[] = [];
+  ): (MillMultiplierReplacement | LifeGainReplacement | LifeLossReplacement)[] {
+    const out: (MillMultiplierReplacement | LifeGainReplacement | LifeLossReplacement)[] = [];
     for (const id of this.state.zones.shared.battlefield) {
       const source = this.state.objects[id];
       if (hasLostAbilities(this.state, this.registry,source) || this.state.players[source.controller]?.hasLost === true) continue;
       for (const ability of this.registry.get(rulesTextName(source)).static) {
         const r = ability.replacement;
-        if (r === undefined || (r.event !== "would-mill" && r.event !== "would-gain-life")) continue;
+        if (r === undefined || (r.event !== "would-mill" && r.event !== "would-gain-life" && r.event !== "would-lose-life")) continue;
         const reaches =
           r.who === "any-player" ||
           (r.who === "enchanted-player"

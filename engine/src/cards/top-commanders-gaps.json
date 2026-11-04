@@ -5,6 +5,7 @@
   "condition:own-turn-count",
   "effect:keep-one-of-each-permanent-type",
   "effect:turn-scoped-mana-trigger",
+  "replacement:would-lose-life",
   "effect:exile-any-number-until-leaves",
   "effect:exile-until-leaves-per-opponent",
   "trigger:linked-exile-each-upkeep-return-one",
