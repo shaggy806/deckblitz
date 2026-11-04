@@ -296,10 +296,15 @@ Fill in the family and the skip list; keep the rest as written.
 > `client/e2e/run-check.mjs` (a 4-player one too) and `npm run test:e2e -w
 > client`.
 >
-> Check with `npm run typecheck -w engine`, your test files, the engine suite
-> (`npx vitest run --maxWorkers=8` from `engine/`) and `card:parse-check`.
-> Skip the fuzzer and `card:verify`: the coordinator's verify runs both on
-> your cards. Search the card pool (~27,000 files) with the Grep tool, never
+> Check with `npm run typecheck -w engine`, `card:parse-check` and, once at the
+> end, your test files with the tests a new card or effect is likeliest to
+> trip: `npx vitest run --maxWorkers=8 <your test files> src/cards/pool.test.ts
+> src/test/needs-vocabulary.test.ts src/test/sample-decks.test.ts
+> src/test/precon-standins.test.ts src/test/local-bundle.test.ts
+> src/test/target-polarity.test.ts src/test/art-pins.test.ts
+> src/test/oracle-parse.test.ts` from `engine/`. Skip the whole engine suite,
+> the fuzzer and `card:verify`: the coordinator's verify runs all three on your
+> work, and sends you back anything they find. Search the card pool (~27,000 files) with the Grep tool, never
 > a shell `grep … *.ts` in `cards/pool/` (a minute or two each); keep
 > `grep -a` for `game.ts` alone. Batch reads: several `sed -n` ranges or
 > greps in one call, not one call each.
@@ -340,10 +345,10 @@ in its own worktree (`isolation: "worktree"`), integrated by cherry-pick.
   > `client/node_modules/{engine,protocol}`, `server/node_modules/{engine,protocol}`,
   > `protocol/node_modules/engine` to your worktree's own); never delete
   > through a junction or remove the worktree. Run every typecheck, build and
-  > the engine suite through the machine gate: `node scripts/typecheck-turn.mjs
-  > npm run typecheck -w engine`, and the suite once, at the end, as `node
-  > ../scripts/typecheck-turn.mjs npx vitest run --maxWorkers=4` from
-  > `engine/`. **Don't edit** `BACKLOG.md`, `COMPLETED.md`, the plan,
+  > test run through the machine gate: `node scripts/typecheck-turn.mjs npm run
+  > typecheck -w engine`, and the end-of-work tests as `node
+  > ../scripts/typecheck-turn.mjs npx vitest run --maxWorkers=4 <those files>`
+  > from `engine/`. **Don't edit** `BACKLOG.md`, `COMPLETED.md`, the plan,
   > `docs/engine-gaps.md` or `docs/client-gaps.md`: put the lines you'd have
   > written there in your report. Leave `cards/generated.ts`,
   > `generated-index.ts` and `cards/shards/` out of your commit.
@@ -401,6 +406,9 @@ in its own worktree (`isolation: "worktree"`), integrated by cherry-pick.
   skill's merge helper stops on `manualChecks.ts`, `client.md` and a long-line doc whose word merge conflicts; those are mechanical too.
   An agent's reports need reading as work: four of the 16 went back with `SendMessage` for a real fix (a test that claimed too much,
   rule 701.47b, a batching guess, a prompt nobody had played).
+- **The user's call, 2026-11-04:** agents no longer run the whole engine suite, which repeated verify's. Its failures now reach the
+  coordinator, so keep each agent's worktree and branch until a verify has passed on its commits, and send a failure back with
+  `SendMessage` while the agent still has its context. `text-change.test.ts` is the one failure last night's list wouldn't catch.
 - **`python .claude/skills/build-family/pick.py <commit>...`** picks agent commits and resolves the routine
   conflicts by keeping both sides (`pickfix.py`). Its header says what to check afterwards.
 - **Clean up** each worktree: unlink every junction by absolute path
