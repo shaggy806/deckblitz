@@ -1173,14 +1173,22 @@ export const transmute = (cost: string, manaValue: number, text: string): Activa
  * attacks, or the controller of the planeswalker it attacks. A triggered
  * ability, so a static can grant it (`grantsTriggered`); each instance
  * triggers on its own. Put the printed line in the card's `text` as well.
+ *
+ * `n` may be an amount, with the printed line as `text`: Ulamog, the Defiler's
+ * "annihilator X, where X is the number of +1/+1 counters on it", read as the
+ * trigger resolves (its ruling).
  */
-export const annihilator = (n: number): TriggeredAbility => ({
-  trigger: { on: "attacks", who: "self" },
-  targets: [],
-  effect: { kind: "sacrifice", who: "trigger-player", filter: {}, count: n },
-  resolve: null,
-  text: `Annihilator ${n}`,
-});
+export function annihilator(n: number): TriggeredAbility;
+export function annihilator(n: EffectAmount, text: string): TriggeredAbility;
+export function annihilator(n: EffectAmount, text = `Annihilator ${String(n)}`): TriggeredAbility {
+  return {
+    trigger: { on: "attacks", who: "self" },
+    targets: [],
+    effect: { kind: "sacrifice", who: "trigger-player", filter: {}, count: n },
+    resolve: null,
+    text,
+  };
+}
 
 /**
  * Level up [cost] (rule 702.87a): "[Cost]: Put a level counter on this

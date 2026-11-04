@@ -54147,6 +54147,10 @@ export class Game {
       const object = this.state.objects[id];
       return object?.zone === "battlefield" && object.entry?.from === "graveyard" && !object.isToken;
     });
+    const fromExile = notYet.filter((id) => {
+      const object = this.state.objects[id];
+      return object?.zone === "battlefield" && object.entry?.from === "exile" && !object.isToken;
+    });
     // An `ifCondition` in the amount ("if you control five or more untapped
     // lands, it enters with …" — Dust Animus) asks about what's already
     // there too, as `tappedUnless` does: not this permanent or anything
@@ -54175,9 +54179,10 @@ export class Game {
           .length,
       countMatching: (filter, except = [], you) => ctx.countMatching(filter, [...except, ...notYet], you),
       // A graveyard's half still has what is entering from it (rule 614.12,
-      // as `countInGraveyard` above); the battlefield's leaves it out.
+      // as `countInGraveyard` above), and exile's too (Ulamog, the Defiler's
+      // ruling); the battlefield's leaves it out.
       aggregate: (spec, except = [], you = controller) =>
-        this.aggregateBattlefield(you, spec, [...except, ...notYet], { stillInGraveyard: fromGraveyard }),
+        this.aggregateBattlefield(you, spec, [...except, ...notYet], { stillInGraveyard: fromGraveyard, stillInExile: fromExile }),
       colorsAmong: (filter, except = []) => ctx.colorsAmong(filter, [...except, ...notYet]),
     });
     return Math.max(0, n);

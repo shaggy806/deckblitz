@@ -12,6 +12,8 @@
   "trigger:leaves-batch-trigger",
   "trigger:counters-put-on-players",
   "trigger:counters-a-spell-trigger",
+  "keyword:annihilator-x",
+  "decision:ward-blight",
   "cost:discard-mana-value-x",
   "replacement:prevention-follow-up-on-recipient",
   "condition:own-turn-count",

@@ -3193,6 +3193,9 @@ export interface AggregateReads {
   readonly except?: readonly ObjectId[];
   readonly attackers?: readonly { readonly object: ObjectId; readonly zoneChangeCount: number }[];
   readonly stillInGraveyard?: readonly ObjectId[];
+  /** The same from exile: Ulamog, the Defiler's "among cards in exile" sees
+   * itself as it enters directly from there (its ruling). */
+  readonly stillInExile?: readonly ObjectId[];
   /** Inside the layer fold: battlefield objects are matched by this
    * instead (the fold's own guard against reading itself). */
   readonly battlefieldMatch?: (id: ObjectId, filter: CardFilter) => boolean;
@@ -3243,6 +3246,11 @@ export function aggregateMatches(
           const object = state.objects[id];
           if (object === undefined || object.isToken) continue;
           if (object.exiledFaceDown !== undefined && !ownerOnly(filter)) continue;
+          if (matchesFilter(state, registry, id, filter, { you })) push({ id, weight: 1 });
+        }
+        for (const id of reads.stillInExile ?? []) {
+          const object = state.objects[id];
+          if (object === undefined || object.isToken) continue;
           if (matchesFilter(state, registry, id, filter, { you })) push({ id, weight: 1 });
         }
       } else {

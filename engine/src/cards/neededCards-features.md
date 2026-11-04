@@ -5081,3 +5081,5 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 **A graveyard to the bottom, in a random order (2026-11-04).** `effect:graveyard-to-library-bottom-random`: `put-on-libraries`' `what: { graveyardOf }` and `position: "bottom-random"`, with the placement `randomlyAmong` so a commander's deferred move lands at random too. Endurance.
 
 **A discard cost of mana value X (2026-11-04).** `cost:discard-mana-value-x`: `cost.discard.manaValueX`, X announced as it's activated with no `{X}` needed, the ability offered once per X with a card to pay it. Kozilek, the Great Distortion; Knollspine Invocation.
+
+**Annihilator X, and a ward of two sacrificed permanents (2026-11-04).** `keyword:annihilator-x`: `annihilator(amount, text)`. `decision:ward-blight`, no engine code: `ward`'s `sacrifice.count` was there. An entering permanent's "among cards in exile" sees itself coming from exile (`AggregateReads.stillInExile`, as the graveyard's). Ulamog, the Defiler.
