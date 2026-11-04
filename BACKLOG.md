@@ -490,8 +490,9 @@ section keeps only what to do next.
   bound for a hand isn't held (Jungle Wayfinder, Weird Harvest). Left of `decision:manual-payment-choices`: paying from sources (Mr. House,
   Ozai). Narrow keys: Ludevic and Curse of Leeches (a choice while transforming, `replacement:as-transforms`'s field can't ask), Defilers of
   Vigor and Faith (an optional additional cost), Geth's Summons (`condition:per-opponent-target-slot-condition`), Valki, Halo Fountain
-  (`cost:untap-cost`). **Next by rank: Full Throttle (a draft that has never run, on this PC only: `engine/.cache/full-throttle-wip.patch`), Baral, Endurance, Cavern-Hoard Dragon, Scroll Rack, All Will Be One.** `--stale` 1,751
-  (the sweep's queue); top-5000 4388/5000, commanders 465/500; the greedy order's best unit now frees 4.
+  (`cost:untap-cost`), Full Throttle, Final Fortune, Endurance, Cavern-Hoard Dragon, Drown in the Loch, Case of the Locked Hothouse, Feldon of the
+  Third Path, Scroll Rack, Comet Storm. **Next by rank: Baral, All Will Be One, Echoes of Eternity, Dour Port-Mage, Kozilek.** `--stale` 1,754
+  (the sweep's queue); top-5000 4398/5000, commanders 465/500; the greedy order's best unit now frees 4.
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next

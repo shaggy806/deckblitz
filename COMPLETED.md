@@ -12,6 +12,16 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **A spell's target count read from an amount as it's cast** (2026-11-04): Comet Storm, Strength of the Tajuru, Aether Burst.
+- **`look-and-choose`'s `exiled-this-way`** (2026-11-04), a commander asked 903.9b before anything moves: Scroll Rack.
+- **The tokens an effect just created, referred to again** (2026-11-04), no engine code: Feldon of the Third Path, Case of the Stashed Skeleton.
+- **A conditional look at the top card** (2026-11-04), no engine code: Case of the Locked Hothouse, Ranger Class.
+- **A target filter read against its object's controller** (2026-11-04), `forItsController`: Drown in the Loch.
+- **A cost reduced by the most any one opponent controls** (2026-11-04): Cavern-Hoard Dragon.
+- **A commander declining 903.9b lands in the random order** (2026-11-04), a bug in cascade, discover and `reveal-until`'s exile: it always landed last.
+- **A whole graveyard onto the bottom of a library in a random order** (2026-11-04), `put-on-libraries`' `graveyardOf` and `bottom-random`: Endurance.
+- **An extra turn's end-step loss from another player's turn** (2026-11-04), no engine code: Final Fortune.
+- **A delayed ability on each combat this turn** (2026-11-04), no engine code: Full Throttle.
 - **A static prevention's follow-up on its recipient** (2026-11-04): Vigor.
 - **One or more creatures attack you and aren't blocked** (2026-11-04): Coveted Jewel.
 - **An intervening-if comparing two amounts** (2026-11-04): Liberator, Urza's Battlethopter; ED-E, Lonesome Eyebot.

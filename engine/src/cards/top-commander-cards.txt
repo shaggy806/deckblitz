@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4389 already implemented / 611 missing (marks refreshed 2026-11-04)
+4398 already implemented / 602 missing (marks refreshed 2026-11-04)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -1322,7 +1322,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1329  Asceticism                               {3}{G}{G}        Enchantment
 [x]  1330  Laelia, the Blade Reforged               {2}{R}           Legendary Creature — Spirit Warrior
 [x]  1331  Jukai Naturalist                         {G}{W}           Enchantment Creature — Human Monk
-[ ]  1332  Endurance                                {1}{G}{G}        Creature — Elemental Incarnation
+[x]  1332  Endurance                                {1}{G}{G}        Creature — Elemental Incarnation
 [x]  1333  Vraska, Betrayal's Sting                 {4}{B}{B/P}      Legendary Planeswalker — Vraska
 [x]  1334  Conqueror's Flail                        {2}              Artifact — Equipment
 [x]  1335  Sword of Fire and Ice                    {3}              Artifact — Equipment
@@ -1338,7 +1338,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1345  Dolmen Gate                              {2}              Artifact
 [x]  1346  Brass's Bounty                           {6}{R}           Sorcery
 [x]  1347  Sodden Verdure                           {0}              Land — Forest Island
-[ ]  1348  Full Throttle                            {4}{R}{R}        Sorcery
+[x]  1348  Full Throttle                            {4}{R}{R}        Sorcery
 [x]  1349  Persist                                  {1}{B}           Sorcery
 [x]  1350  Archangel of Thune                       {3}{W}{W}        Creature — Angel
 [x]  1351  Dragonlord's Servant                     {1}{R}           Creature — Goblin Shaman
@@ -1358,12 +1358,12 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1365  Embercleave                              {4}{R}{R}        Legendary Artifact — Equipment
 [x]  1366  Third Path Iconoclast                    {U}{R}           Creature — Human Monk
 [x]  1367  Genesis Wave                             {X}{G}{G}{G}     Sorcery
-[ ]  1368  Cavern-Hoard Dragon                      {7}{R}{R}        Creature — Dragon
+[x]  1368  Cavern-Hoard Dragon                      {7}{R}{R}        Creature — Dragon
 [x]  1369  Grisly Salvage                           {B}{G}           Instant
 [x]  1370  Atsushi, the Blazing Sky                 {2}{R}{R}        Legendary Creature — Dragon Spirit
 [x]  1371  Butcher of Malakir                       {5}{B}{B}        Creature — Vampire Warrior
 [x]  1372  Coiling Oracle                           {G}{U}           Creature — Snake Elf Druid
-[ ]  1373  Scroll Rack                              {2}              Artifact
+[x]  1373  Scroll Rack                              {2}              Artifact
 [x]  1374  Agatha's Soul Cauldron                   {2}              Legendary Artifact
 [ ]  1375  Glissa Sunslayer                         {1}{B}{G}        Legendary Creature — Phyrexian Zombie Elf
 [x]  1376  Enthusiastic Mechanaut                   {U}{R}           Artifact Creature — Goblin Artificer
@@ -1435,9 +1435,9 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  1442  Ancient Silver Dragon                    {6}{U}{U}        Creature — Elder Dragon
 [x]  1443  Elixir of Immortality                    {1}              Artifact
 [ ]  1444  Ishgard, the Holy See // Faith & Grief   {3}{W}{W}        Land — Town // Sorcery — Adventure
-[ ]  1445  Comet Storm                              {X}{R}{R}        Instant
+[x]  1445  Comet Storm                              {X}{R}{R}        Instant
 [x]  1446  Underworld Dreams                        {B}{B}{B}        Enchantment
-[ ]  1447  Drown in the Loch                        {U}{B}           Instant
+[x]  1447  Drown in the Loch                        {U}{B}           Instant
 [x]  1448  Deep Analysis                            {3}{U}           Sorcery
 [x]  1449  Dreadhorde Invasion                      {1}{B}           Enchantment
 [x]  1450  Cleric Class                             {W}              Enchantment — Class
@@ -1499,7 +1499,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1506  Meren of Clan Nel Toth                   {2}{B}{G}        Legendary Creature — Human Shaman
 [x]  1507  Patriarch's Bidding                      {3}{B}{B}        Sorcery
 [x]  1508  Copperline Gorge                         {0}              Land
-[ ]  1509  Case of the Locked Hothouse              {3}{G}           Enchantment — Case
+[x]  1509  Case of the Locked Hothouse              {3}{G}           Enchantment — Case
 [x]  1510  Haliya, Guided by Light                  {2}{W}           Legendary Creature — Human Soldier
 [x]  1511  Blood Moon                               {2}{R}           Enchantment
 [x]  1512  Misdirection                             {3}{U}{U}        Instant
@@ -1512,7 +1512,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  1519  Dour Port-Mage                           {1}{U}           Creature — Frog Wizard
 [x]  1520  Rites of Flourishing                     {2}{G}           Enchantment
 [x]  1521  Lavaspur Boots                           {1}              Artifact — Equipment
-[ ]  1522  Final Fortune                            {R}{R}           Instant
+[x]  1522  Final Fortune                            {R}{R}           Instant
 [x]  1523  Adventurer's Inn                         {0}              Land — Town
 [x]  1524  Hangarback Walker                        {X}{X}           Artifact Creature — Construct
 [x]  1525  Horizon of Progress                      {0}              Land
@@ -1528,7 +1528,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1535  Ojer Axonil, Deepest Might // Temple of Power {4}              Legendary Creature — God // Land
 [x]  1536  Codsworth, Handy Helper                  {2}{W}           Legendary Artifact Creature — Robot
 [x]  1537  The Water Crystal                        {2}{U}{U}        Legendary Artifact
-[ ]  1538  Feldon of the Third Path                 {1}{R}{R}        Legendary Creature — Human Artificer
+[x]  1538  Feldon of the Third Path                 {1}{R}{R}        Legendary Creature — Human Artificer
 [x]  1539  Natural Order                            {2}{G}{G}        Sorcery
 [x]  1540  Utvara Hellkite                          {6}{R}{R}        Creature — Dragon
 [x]  1541  Rebuff the Wicked                        {W}              Instant
