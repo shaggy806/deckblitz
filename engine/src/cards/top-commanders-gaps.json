@@ -12,6 +12,7 @@
   "trigger:leaves-batch-trigger",
   "trigger:counters-put-on-players",
   "trigger:counters-a-spell-trigger",
+  "effect:flicker-return-then",
   "trigger:copy-spell-trigger",
   "replacement:mana-persistence-color",
   "keyword:annihilator-x",

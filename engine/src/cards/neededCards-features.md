@@ -5085,3 +5085,5 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 **Annihilator X, and a ward of two sacrificed permanents (2026-11-04).** `keyword:annihilator-x`: `annihilator(amount, text)`. `decision:ward-blight`, no engine code: `ward`'s `sacrifice.count` was there. An entering permanent's "among cards in exile" sees itself coming from exile (`AggregateReads.stillInExile`, as the graveyard's). Ulamog, the Defiler.
 
 **Magecraft and a colour of mana kept (2026-11-04).** `trigger:copy-spell-trigger` and `replacement:mana-persistence-color`, no engine code: `orCopy`, `keepsUnspentMana` and `resolved-this-turn` were there. Ashling, Flame Dancer. The Last Agni Kai's "until end of turn" keeping is still open.
+
+**What a flicker does once it's back (2026-11-04).** `effect:flicker-return-then`: `flicker`'s `returnThen`, run by the delayed return and reading it through `this-way`'s `"put-onto-battlefield"`. Phelia, Exuberant Shepherd; Obzedat, Ghost Council; Hallowed Respite (a plain `sequence`).

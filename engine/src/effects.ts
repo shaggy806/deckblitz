@@ -666,6 +666,8 @@ export interface FlickerOptions {
   readonly faceDown?: boolean;
   readonly returnAt?: DelayedTriggerTiming;
   readonly returnText?: string;
+  /** See `flicker`'s `returnThen`. */
+  readonly returnThen?: EffectSpec;
   /** The effect named its own source (`target: "source"`). */
   readonly fromSource?: boolean;
 }
@@ -4283,6 +4285,14 @@ export type EffectSpec =
       readonly tapped?: boolean;
       /** The delayed return's text, for the log and the stack. */
       readonly returnText?: string;
+      /** With `returnAt`: what that delayed ability goes on to do as it returns
+       * the card, part of the same resolution, so `this-way`'s
+       * `"put-onto-battlefield"` reads the return. Phelia, Exuberant Shepherd's
+       * "if it entered under your control, put a +1/+1 counter on Phelia",
+       * Obzedat, Ghost Council's "it gains haste". With nothing exiled there is
+       * no delayed ability to do it. (An immediate return needs none: a
+       * `sequence` after the flicker reads it the same way, Hallowed Respite.) */
+      readonly returnThen?: EffectSpec;
     }
   | {
       /**
@@ -17170,6 +17180,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         ...(returnUnder !== undefined ? { returnUnder } : {}),
         ...(spec.returnAt !== undefined ? { returnAt: spec.returnAt } : {}),
         ...(spec.returnText !== undefined ? { returnText: spec.returnText } : {}),
+        ...(spec.returnThen !== undefined ? { returnThen: spec.returnThen } : {}),
         ...(spec.transformed === true ? { transformed: true } : {}),
         ...(spec.tapped === true ? { tapped: true } : {}),
         ...(spec.faceDown === true ? { faceDown: true } : {}),

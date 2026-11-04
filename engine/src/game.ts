@@ -47260,18 +47260,19 @@ export class Game {
     }
     // No link means nothing was exiled (or is waiting to be): no return.
     if (link === undefined) return null;
+    const returns: EffectSpec = {
+      kind: "return-flickered",
+      link,
+      ...(options.thenCounters !== undefined ? { thenCounters: options.thenCounters } : {}),
+      ...(returnUnder !== undefined ? { underPlayer: returnUnder } : {}),
+      ...(options.transformed === true ? { transformed: true } : {}),
+      ...(options.tapped === true ? { tapped: true } : {}),
+    };
     this.createDelayedTrigger(
       source,
       controller,
       delayed,
-      {
-        kind: "return-flickered",
-        link,
-        ...(options.thenCounters !== undefined ? { thenCounters: options.thenCounters } : {}),
-        ...(returnUnder !== undefined ? { underPlayer: returnUnder } : {}),
-        ...(options.transformed === true ? { transformed: true } : {}),
-        ...(options.tapped === true ? { tapped: true } : {}),
-      },
+      options.returnThen === undefined ? returns : { kind: "sequence", effects: [returns, options.returnThen] },
       options.returnText ?? "Return the exiled card to the battlefield.",
       [],
     );
