@@ -4368,6 +4368,19 @@ decisions with a new set rule, `"one-of-each"`. Proving cards: Cataclysm, Global
 Overlay, Sundering Titan, Noxious Vapors. Ajani, Nacatl Pariah keeps that second key but isn't
 this shape: its -4 is one permanent kept, and it needs its own read.
 
+### The greatest of an amount among players, and a hand counted through a filter — built 2026-11-03
+
+`effect:amount-greatest-count-among-players`, `amount:most-cards-in-hand-among-players`:
+`{ greatestAmongPlayers, who?, includingLeft? }`, any amount read per player, inside
+`difference` "the player with the most"; the `CountSpec` `"cards-in-largest-opponent-hand"`;
+a scoped `draw` reads every number before anyone draws (608.2h).
+`amount:cards-in-hand-matching-filter` needed no code: `reveal-hand` then `{ thisWay:
+"revealed", filter }`, and the `this-way` condition for a named card.
+`effect:gain-control-to-player-with-most-cards-in-hand` neither: `for-each-player`'s `whoIf`.
+Proving cards: Inquisition, Baleful Stare, Withering Gaze, Darigaaz, Isperia, Adamaro,
+Investigator's Journal, Thought Sponge, Tales of the Ancestors, Scholarship Sponsor, Sokenzan
+Renegade.
+
 ### Suspend X, and a suspend cost paid to cast — built 2026-11-03
 
 `mechanic:suspend-x`: `suspend: { n: "x", cost }`, the action's `xValue` at least 1

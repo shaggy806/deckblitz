@@ -980,7 +980,15 @@ Stormbreath Dragon's "damage to each opponent equal to the number of cards in
 that player's hand" is a `damage` to `who: "each-opponent"` of `{ cardsInHand:
 "each" }`; `{ target: n }` is the player in target slot `n`, for an effect
 that doesn't act on them — Jeska's Will's "add {R} for each card in target
-opponent's hand"), `{ attackingPlayer: "each" }` (the creatures attacking the player
+opponent's hand"), `{ greatestAmongPlayers: amount, who?: scope, includingLeft?: true }` (the greatest of
+`amount` read once per player in `who`, default every player, the amount's `"each"`
+being that player — Investigator's Journal's "the greatest number of creatures a player
+controls" over `{ countOf: …, forEachPlayer: true }`, Thought Sponge's "an opponent has
+drawn" over `{ turnStat: "cards-drawn", who: "each" }` with `who: "each-opponent"` and
+`includingLeft`; inside `difference`, "the player with the most": Tales of the Ancestors,
+Scholarship Sponsor. A count of a hand through a filter is `reveal-hand` then `{ thisWay:
+"revealed", filter }`: Inquisition, Baleful Stare, Darigaaz, the Igniter),
+`{ attackingPlayer: "each" }` (the creatures attacking the player
 a per-player effect is acting on — that player, not their planeswalkers;
 Within Range's "each opponent loses life equal to the number of creatures
 attacking them"), `{ colorsOf: ref }` (how many colours one object has —
@@ -5177,7 +5185,7 @@ is "can't attack a player it has already attacked this turn" (Port Razer), by th
   - `{ countInGraveyard: CardFilter }` — cards in **all** graveyards matching
     the filter (Mortivore: `{ type: "creature" }`); add `ownedBy: "you"` for
     "in your graveyard".
-  - `"cards-in-all-graveyards"` (Lord of Extinction), `"cards-in-all-hands"` (Werewolf of Ancient Hunger), `"cards-in-your-hand"`
+  - `"cards-in-largest-opponent-hand"` (Adamaro, First to Desire), `"cards-in-all-graveyards"` (Lord of Extinction), `"cards-in-all-hands"` (Werewolf of Ancient Hunger), `"cards-in-your-hand"`
     (Psychosis Crawler), `"your-life-total"` (Serra Avatar's "power and
     toughness are each equal to your life total" — negative at negative life,
     rule 107.1b).

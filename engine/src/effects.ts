@@ -1012,6 +1012,20 @@ export type EffectAmount =
    * effect that doesn't act on them — Jeska's Will's "add {R} for each card
    * in target opponent's hand" (nothing, with that target illegal). */
   | { readonly cardsInHand: PlayerScope | "each" | { readonly target: number } }
+  /** The **greatest** of an amount read once for each player in `who`
+   * (default every player still in the game; `who: "each-opponent"`, "an
+   * opponent") — the amount's `"each"` is that player: Investigator's
+   * Journal's "the greatest number of creatures a player controls" is `{
+   * greatestAmongPlayers: { countOf: { type: "creature", controlledBy: "you"
+   * }, forEachPlayer: true } }`, Thought Sponge's "the greatest number of
+   * cards an opponent has drawn this turn" a `{ turnStat: "cards-drawn", who:
+   * "each" }` of `who: "each-opponent"`. Inside `difference`, with the same
+   * count read for the player an effect acts on, it's "the player with the
+   * most": Tales of the Ancestors. 0 with nobody in `who`. `includingLeft`:
+   * players who have left the game are asked too, for what stays so after
+   * they've gone (Thought Sponge's ruling: "even opponents who have left the
+   * game"). */
+  | { readonly greatestAmongPlayers: EffectAmount; readonly who?: PlayerScope; readonly includingLeft?: true }
   /** How many cards are in a library or graveyard — yours, or with
    * `"each"` the player a per-player effect is acting on: "any number of
    * target players each mill half **their** library" (Singularity Rupture)
@@ -13173,6 +13187,11 @@ function signedAmountValue(
     }
     return ctx.playersInScope(amount.cardsInHand).reduce((n, p) => n + ctx.handSizeOf(p), 0);
   }
+  if ("greatestAmongPlayers" in amount) {
+    const who = amount.who ?? "each-player";
+    const players = amount.includingLeft === true ? ctx.playersCountedInScope(who) : ctx.playersInScope(who);
+    return Math.max(0, ...players.map((p) => amountValue(amount.greatestAmongPlayers, ctx, p)));
+  }
   if ("colorsOf" in amount) {
     const ref = resolveAmountRef(amount.colorsOf, ctx);
     return ref === undefined ? 0 : ctx.colorsOf(ref).length;
@@ -14784,9 +14803,11 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         typeof spec.who === "object"
           ? ((p) => (p === undefined ? [] : [p]))(effectPlayer(spec.who, ctx))
           : ctx.playersInScope(spec.who ?? "you");
-      for (const player of drawers) {
-        ctx.draw(player, amountValue(spec.amount, ctx, player));
-      }
+      // Each player's number is read before anyone draws (rule 608.2h: Tales
+      // of the Ancestors' "the difference" is fixed as it resolves, whatever a
+      // replacement makes of the first player's draw).
+      const drawn = drawers.map((player) => [player, amountValue(spec.amount, ctx, player)] as const);
+      for (const [player, count] of drawn) ctx.draw(player, count);
       return;
     }
     case "discard-hand":

@@ -632,6 +632,9 @@ export type CountSpec =
   /** How many cards are in all players' hands together (Werewolf of
    * Ancient Hunger). */
   | "cards-in-all-hands"
+  /** How many cards are in the hand of the opponent with the most (Adamaro,
+   * First to Desire). */
+  | "cards-in-largest-opponent-hand"
   /** Battlefield permanents matching a filter, a token stack counting as
    * every token in it (`permanentCount`) — Beanstalk Giant's "the number of
    * lands you control" is `{ countOf: { type: "land", controlledBy: "you" } }`.

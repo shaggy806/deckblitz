@@ -3736,6 +3736,15 @@ export function countValue(
       return state.players[controller]?.life ?? 0;
     case "cards-in-all-hands":
       return Object.values(state.zones.perPlayer).reduce((n, zones) => n + zones.hand.length, 0);
+    case "cards-in-largest-opponent-hand":
+      // A player who has left the game has no hand to count (rule 800.4a).
+      return state.turnOrder.reduce(
+        (best, p) =>
+          p === controller || state.players[p]?.hasLost === true
+            ? best
+            : Math.max(best, state.zones.perPlayer[p]?.hand.length ?? 0),
+        0,
+      );
     default:
       return 0;
   }

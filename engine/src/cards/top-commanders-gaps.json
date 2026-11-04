@@ -2,6 +2,10 @@
  "generated": "2026-09-22",
  "source": "Per-commander triage of every unimplemented top-commanders.txt entry (AI agents reading Oracle text + rulings against the engine), normalized onto one feature vocabulary. See neededCards-features.md, 'The commander gap'.",
  "built": [
+  "amount:cards-in-hand-matching-filter",
+  "amount:most-cards-in-hand-among-players",
+  "effect:amount-greatest-count-among-players",
+  "effect:gain-control-to-player-with-most-cards-in-hand",
   "decision:choose-land-of-each-basic-type",
   "decision:choose-one-of-each-type-sacrifice-rest",
   "decision:keep-one-of-each-color-discard-rest",

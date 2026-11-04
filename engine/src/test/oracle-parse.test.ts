@@ -12372,3 +12372,49 @@ describe("oracle-parse: looks at a hand and at another's library", () => {
     ).toMatchObject({ kind: "look-and-choose", from: { target: 0 }, count: 3, min: 1, max: 1, destination: "library-top", leftover: "graveyard" });
   });
 });
+
+describe("the greatest of an amount among players, and a revealed hand counted", () => {
+  it("a hand counted through a color, and through a land type or a color", () => {
+    expect(
+      parseEffect(
+        "Target player reveals their hand. ~ deals damage to that player equal to the number of white cards in their hand.",
+        { targets: [] },
+      ).effect,
+    ).toMatchObject({
+      kind: "sequence",
+      effects: [
+        { kind: "reveal-hand", who: 0 },
+        { kind: "damage", target: 0, amount: { thisWay: "revealed", filter: { colors: ["W"] } } },
+      ],
+    });
+    expect(
+      parseEffect("Target opponent reveals their hand. You draw a card for each Mountain and red card in it.", {
+        targets: [],
+      }).effect,
+    ).toMatchObject({
+      effects: [{}, { kind: "draw", amount: { filter: { anyOf: [{ subtype: "Mountain" }, { colors: ["R"] }] } } }],
+    });
+  });
+  it("the difference from the player with the most", () => {
+    expect(
+      parseEffect(
+        "Each player with fewer cards in hand than the player with the most cards in hand draws cards equal to the difference.",
+        { targets: [] },
+      ).effect,
+    ).toEqual({
+      kind: "draw",
+      who: "each-player",
+      amount: { difference: [{ greatestAmongPlayers: { cardsInHand: "each" } }, { cardsInHand: "each" }] },
+    });
+  });
+  it("counters and a P/T read off the greatest among players", () => {
+    const read = (oracle_text: string, type_line: string) =>
+      parseFace({ name: "Card", type_line, oracle_text }, { tokenFor: (d: string) => d }).static[0];
+    expect(
+      read("Card enters with a number of suspect counters on it equal to the greatest number of creatures a player controls.", "Artifact"),
+    ).toMatchObject({ replacement: { counters: { kind: "suspect", amount: { greatestAmongPlayers: { forEachPlayer: true } } } } });
+    expect(
+      read("Card's power and toughness are each equal to the number of cards in the hand of the opponent with the most cards in hand.", "Creature — Spirit"),
+    ).toMatchObject({ setBasePtFromCount: { countOf: "cards-in-largest-opponent-hand" } });
+  });
+});

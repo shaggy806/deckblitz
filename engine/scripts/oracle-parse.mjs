@@ -6796,6 +6796,72 @@ const ONE_OF_EACH_EFFECTS = {
   },
 };
 
+/** Whole effects read off one printed sentence: the greatest of an amount
+ * among players (`greatestAmongPlayers`), "the player with the most", and
+ * Isperia's named card among a revealed hand. */
+const LANDS_THEY_CONTROL = { type: "land", controlledBy: "you" };
+const AMONG_PLAYERS_EFFECTS = {
+  "Each player with fewer cards in hand than the player with the most cards in hand draws cards equal to the difference.": {
+    kind: "draw",
+    who: "each-player",
+    amount: { difference: [{ greatestAmongPlayers: { cardsInHand: "each" } }, { cardsInHand: "each" }] },
+  },
+  "Each player who controls fewer lands than the player who controls the most lands searches their library for a number of basic land cards less than or equal to the difference, puts those cards onto the battlefield tapped, then shuffles.": {
+    kind: "for-each-player",
+    who: "each-player",
+    whoIf: {
+      kind: "of-player",
+      player: "that-player",
+      condition: { kind: "player-compare", stat: { controls: { type: "land" } }, compare: "fewer", than: "an-opponent" },
+    },
+    effect: {
+      kind: "search-library",
+      who: "that-player",
+      filter: { supertype: "basic", type: "land" },
+      destination: "battlefield",
+      enterTapped: true,
+      min: 0,
+      max: {
+        difference: [
+          { greatestAmongPlayers: { countOf: LANDS_THEY_CONTROL, forEachPlayer: true } },
+          { countOf: LANDS_THEY_CONTROL, forPlayer: "that-player" },
+        ],
+      },
+    },
+  },
+  "The player who has the most cards in hand gains control of ~.": {
+    kind: "for-each-player",
+    who: "each-player",
+    whoIf: {
+      kind: "of-player",
+      player: "that-player",
+      condition: { kind: "player-compare", stat: "hand", compare: "more", than: "each-opponent" },
+    },
+    effect: { kind: "gain-control", target: "source", untilEndOfTurn: false, who: "that-player" },
+  },
+  "Choose a card name. That player reveals their hand. If a card with the chosen name is revealed this way, search your library for a creature card with flying, reveal it, put it into your hand, then shuffle.": {
+    kind: "choose-card-name",
+    then: {
+      kind: "sequence",
+      effects: [
+        { kind: "reveal-hand", who: "trigger-player" },
+        {
+          kind: "conditional",
+          condition: { kind: "this-way", what: "revealed", filter: { hasName: CHOSEN_CARD_NAME } },
+          then: {
+            kind: "search-library",
+            filter: { type: "creature", keyword: "flying" },
+            destination: "hand",
+            min: 0,
+            max: 1,
+            reveal: true,
+          },
+        },
+      ],
+    },
+  },
+};
+
 export function parseEffect(text, outer) {
   // Each target a sentence names takes the next slot of the ability's list.
   const ctx = { ...outer, target: (spec) => outer.targets.push(spec) - 1 };
@@ -6814,6 +6880,83 @@ export function parseEffect(text, outer) {
   // One for each of several categories (`choose-one-of-each`).
   const oneOfEach = ONE_OF_EACH_EFFECTS[text.charAt(0).toUpperCase() + text.slice(1)];
   if (oneOfEach !== undefined) return { effect: oneOfEach, todo: [], hints: [] };
+  const amongPlayers = AMONG_PLAYERS_EFFECTS[text.charAt(0).toUpperCase() + text.slice(1)];
+  if (amongPlayers !== undefined) return { effect: amongPlayers, todo: [], hints: [] };
+
+  // A revealed hand counted through a filter: Inquisition's "the number of
+  // white cards in their hand", Baleful Stare's "each Mountain and red card
+  // in it", one per card that's either.
+  const handDamage =
+    /^Target (player|opponent) reveals their hand\. ~ deals damage to that player equal to the number of (white|blue|black|red|green) cards in their hand\.$/.exec(
+      text,
+    );
+  if (handDamage !== null) {
+    const who = ctx.target(handDamage[1]);
+    const filter = { colors: [COLOR_WORD[handDamage[2]]] };
+    return {
+      effect: {
+        kind: "sequence",
+        effects: [
+          { kind: "reveal-hand", who },
+          { kind: "damage", target: who, amount: { thisWay: "revealed", filter } },
+        ],
+      },
+      todo: [],
+      hints: [],
+    };
+  }
+  const handDraw =
+    /^Target opponent reveals their hand\. You draw a card for each (Plains|Island|Swamp|Mountain|Forest) and (white|blue|black|red|green) card in it\.$/.exec(
+      text,
+    );
+  if (handDraw !== null) {
+    const who = ctx.target("opponent");
+    const filter = { anyOf: [{ subtype: handDraw[1] }, { colors: [COLOR_WORD[handDraw[2]]] }] };
+    return {
+      effect: {
+        kind: "sequence",
+        effects: [
+          { kind: "reveal-hand", who },
+          { kind: "draw", amount: { thisWay: "revealed", filter } },
+        ],
+      },
+      todo: [],
+      hints: [],
+    };
+  }
+  // "You may pay …. If you do, choose a color, then that player reveals their
+  // hand and ~ deals damage to the player equal to the number of cards of
+  // that color revealed this way." (Darigaaz, the Igniter.)
+  const paidHand =
+    /^You may pay ((?:\{[^}]+\})+)\. If you do, choose a color, then that player reveals their hand and ~ deals damage to the player equal to the number of cards of that color revealed this way\.$/.exec(
+      text,
+    );
+  if (paidHand !== null) {
+    return {
+      effect: {
+        kind: "may",
+        prompt: `Pay ${paidHand[1]} to choose a color and have that player reveal their hand?`,
+        cost: paidHand[1],
+        effect: {
+          kind: "choose-value",
+          value: "color",
+          then: {
+            kind: "sequence",
+            effects: [
+              { kind: "reveal-hand", who: "trigger-player" },
+              {
+                kind: "damage",
+                who: "trigger-player",
+                amount: { thisWay: "revealed", filter: { colors: [CHOSEN_COLOR] } },
+              },
+            ],
+          },
+        },
+      },
+      todo: [],
+      hints: [],
+    };
+  }
 
   // A copy for each permanent the spell could target (rule 707.10d): Zada's,
   // Ink-Treader Nephilim's own, Mirrorwing Dragon's and Precursor Golem's made
@@ -12389,6 +12532,18 @@ const INTERVENING_IFS = {
       { kind: "cards-in-graveyard", atLeast: 1, filter: { subtype: "Desert" } },
     ],
   },
+  // Sokenzan Renegade: you, or one of your opponents, ahead of everyone else.
+  "if a player has more cards in hand than each other player,": {
+    kind: "any",
+    of: [
+      { kind: "player-compare", stat: "hand", compare: "more", than: "each-opponent" },
+      {
+        kind: "of-player",
+        player: "an-opponent",
+        condition: { kind: "player-compare", stat: "hand", compare: "more", than: "each-opponent" },
+      },
+    ],
+  },
   // Historian's Wisdom, Might Makes Right: `greatestInZone` over the battlefield.
   "if enchanted permanent is a creature with the greatest power among creatures on the battlefield,": {
     kind: "source",
@@ -14519,6 +14674,24 @@ function parseStatic(line, text) {
       const amount = { aggregate: "distinct", of, filter: { ...filter, ownedBy: "you" }, in: "graveyards" };
       return { affects: { scope: "self" }, replacement: { event: "enters-battlefield", counters: { kind: "+1/+1", amount } }, text };
     }
+  }
+  // The greatest of a count among players (`greatestAmongPlayers`).
+  {
+    const w = /^~ enters with a number of ([+-]\d+\/[+-]\d+|[a-z]+) counters on it equal to the greatest number of (creatures a player controls|cards an opponent has drawn this turn)\.$/.exec(line);
+    if (w !== null) {
+      const amount =
+        w[2] === "creatures a player controls"
+          ? { greatestAmongPlayers: { countOf: { type: "creature", controlledBy: "you" }, forEachPlayer: true } }
+          : { greatestAmongPlayers: { turnStat: "cards-drawn", who: "each" }, who: "each-opponent", includingLeft: true };
+      return { affects: { scope: "self" }, replacement: { event: "enters-battlefield", counters: { kind: w[1], amount } }, text };
+    }
+  }
+  if (line === "~'s power and toughness are each equal to the number of cards in the hand of the opponent with the most cards in hand.") {
+    return {
+      affects: { scope: "self" },
+      setBasePtFromCount: { countOf: "cards-in-largest-opponent-hand", plusPower: 0, plusToughness: 0 },
+      text,
+    };
   }
   {
     const w = /^~ enters with X \+1\/\+1 counters on it, where X is (.+)\.$/.exec(line);
