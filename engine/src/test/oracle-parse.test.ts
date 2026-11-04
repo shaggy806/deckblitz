@@ -14024,6 +14024,9 @@ describe("a countered spell's destination, and a counter replaced", () => {
       toughness: "1",
     });
     expect(face.static[0].replacement).toEqual({ event: "would-counter-spell" });
+  });
+});
+
 describe("combat triggers: which defender, how many, once for the lot", () => {
   const triggerOf = (clause: string) => parseTrigger(clause);
 
