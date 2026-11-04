@@ -5039,6 +5039,8 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 
 **A permanent of each permanent type (2026-11-04).** `effect:keep-one-of-each-permanent-type`: Cataclysm's `choose-one-of-each` already was it, with all six types and `who: "each-opponent"` (Liliana, Dreadhorde General) or the nonland four (Cataclysmic Gearhulk); new is `chosenBy: "you"`, the caster answering for each player (Mythos of Snapdax).
 
+**A target player's counters as an amount (2026-11-04).** `amount:target-player-counters`: `playerCounters`'s `forTarget` reads the player in a target slot. Vraska, Betrayal's Sting.
+
 **"Put them onto the battlefield" (2026-11-04).** `effect:put-arrived-all-tapped`: `put-arrived-onto-battlefield`'s `count: "all"` takes every card a batched trigger fired on still there, with no choice. Hedge Shredder.
 
 **A turn's triggered mana ability (2026-11-04).** `effect:turn-scoped-mana-trigger`: a `delayed-trigger` with `whenever: { on: "tapped-for-mana" }` and an `add-mana` effect is a triggered mana ability (rule 605.1b): `Game.tappedForManaExtras` reads it with the permanents', and the watchers leave it alone. High Tide, Bubbling Muck, Pyre Rhymer with Molten Tide.

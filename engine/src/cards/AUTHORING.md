@@ -996,9 +996,11 @@ a graveyard as it is now. See `PlayerState.turnHistory`),
 sources the scope's players controlled dealt this turn, to anything — only
 combat or only noncombat damage if `combat` says, only from sources that were
 one of `colors` as they dealt it; see the `damage-dealt-this-turn` condition),
-`{ playerCounters: "poison" | "experience", who?: PlayerScope }` (the counters
-of that kind the scope's players have, summed, default `"you"` — Ezuri, Claw
-of Progress's "where X is the number of experience counters you have"),
+`{ playerCounters: "poison" | "experience", who?: PlayerScope, forTarget?: number }`
+(the counters of that kind the scope's players have, summed, default `"you"` —
+Ezuri, Claw of Progress's "where X is the number of experience counters you
+have"; `forTarget`, the player in that target slot — Vraska, Betrayal's Sting's
+"the difference"),
 `{ opponentsControllingFewer: CardFilter }` (Voice of Many — a comparison per
 player, which no single filter can express),
 `{ cardsInHand: PlayerScope | "each" | { target: n } }` (the hand sizes of the scope's players, summed —

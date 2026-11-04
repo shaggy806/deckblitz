@@ -1082,8 +1082,12 @@ export type EffectAmount =
    * How many counters of one kind the players `who` names have, summed —
    * "where X is the number of **experience counters you have**" (Ezuri, Claw
    * of Progress). `who` defaults to `"you"`. See `PlayerState.counters`.
+   * `forTarget` reads the player in that target slot instead — "the difference"
+   * from **target player's** poison counters (Vraska, Betrayal's Sting: `{
+   * difference: [9, { playerCounters: "poison", forTarget: 0 }] }`). 0 when
+   * the slot holds no player, or one gone illegal.
    */
-  | { readonly playerCounters: HeldPlayerCounter; readonly who?: PlayerScope }
+  | { readonly playerCounters: HeldPlayerCounter; readonly who?: PlayerScope; readonly forTarget?: number }
   /**
    * The effect's controller's speed (rule 702.179) — "where X is your
    * speed" (The Speed Demon, Point the Way, Momentum Breaker's "life equal
@@ -14695,6 +14699,11 @@ function signedAmountValue(
   }
   if ("countersPutThisTurn" in amount) return ctx.countersPutThisTurn(amount.countersPutThisTurn);
   if ("playerCounters" in amount) {
+    if (amount.forTarget !== undefined) {
+      const ref = ctx.targets[amount.forTarget];
+      if (ref?.kind !== "player" || illegalSlot(amount.forTarget, ctx)) return 0;
+      return ctx.playerCountersOf(ref.player, amount.playerCounters);
+    }
     return ctx
       .playersInScope(amount.who ?? "you")
       .reduce((n, p) => n + ctx.playerCountersOf(p, amount.playerCounters), 0);

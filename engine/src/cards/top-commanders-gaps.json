@@ -1776,7 +1776,8 @@
   "stat:attack-count-this-turn",
   "effect:additional-combat-after-main",
   "effect:win-game",
-  "effect:put-arrived-all-tapped"
+  "effect:put-arrived-all-tapped",
+  "amount:target-player-counters"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

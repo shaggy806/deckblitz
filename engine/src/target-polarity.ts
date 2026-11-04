@@ -646,7 +646,9 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "lose-abilities": (n, v) => v.touch(n.target, "harm", MAJOR),
   "lose-abilities-all": none,
   gift: none,
-  "grant-activated": (n, v) => v.touch(n.target, "help", MAJOR),
+  // An ability that sacrifices the permanent is little consolation beside
+  // what a `sequence` did to it first (Vraska, Betrayal's Sting's Treasure).
+  "grant-activated": (n, v) => v.touch(n.target, "help", n.ability.cost.sacrifice === "self" ? MINOR : MAJOR),
   // Only reads its target, whose abilities it may want whoever's it is.
   "grant-activated-of": (n, v) => v.touch(n.of, "either", MINOR),
   // A gained static is a gift ("can't be blocked by more than one creature")
