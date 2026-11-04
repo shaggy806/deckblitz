@@ -20,7 +20,7 @@ import { filterReadsX, manaValueOfObject, matchesFilter, stackObjectTargetsMatch
 import type { CardFilter } from "./filter.js";
 import type { Color } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
-import { nameOf, printedCardName, rulesTextName } from "./state.js";
+import { activePlayerOf, nameOf, printedCardName, rulesTextName } from "./state.js";
 import type { GameObject, GameState, LastKnownInfo } from "./state.js";
 import { EVERY_CREATURE_TYPE, hasSubtype, isCreatureType } from "./subtypes.js";
 import {
@@ -653,8 +653,9 @@ function isLegalTargetUncached(
   }
   // "Target opponent who has more life than you do" (the Keepers).
   if (typeof spec === "object" && spec.kind === "opponent-compared") {
-    if (!isLivingPlayer(state, ref) || ref.kind !== "player" || ref.player === forPlayer) return false;
-    return playerStat(state, registry, ref.player, spec.stat) - playerStat(state, registry, forPlayer, spec.stat) >= spec.by;
+    const base = spec.comparedTo === "active-player" ? activePlayerOf(state) : forPlayer;
+    if (!isLivingPlayer(state, ref) || ref.kind !== "player" || ref.player === base) return false;
+    return playerStat(state, registry, ref.player, spec.stat) - playerStat(state, registry, base, spec.stat) >= spec.by;
   }
   // A narrowed activated or triggered ability on the stack.
   if (typeof spec === "object" && spec.kind === "ability") {

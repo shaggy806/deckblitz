@@ -4349,6 +4349,26 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(face("As this creature enters, choose two players.", "Creature — Demon").choosePlayerOnEnter).toBeUndefined();
   });
 
+  it("a targeted player's own choice from hand (effect:target-player-puts-cards-from-hand-on-library)", () => {
+    expect(
+      parseEffect("Target player chooses three cards from their hand and puts them on top of their library in any order.", {
+        targets: [],
+      }).effect,
+    ).toEqual({
+      kind: "for-each-player",
+      who: { target: 0 },
+      effect: {
+        kind: "look-and-choose",
+        zone: "hand",
+        player: "that-player",
+        min: 3,
+        max: 3,
+        destination: "library-top",
+        leftover: "stay",
+      },
+    });
+  });
+
   it("a control change computed as it happens (effect:control-change-extensions)", () => {
     const pendant = face("This artifact enters under the control of an opponent of your choice.", "Artifact");
     expect(pendant.choosePlayerOnEnter).toBe("opponent");

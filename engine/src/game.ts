@@ -51990,6 +51990,8 @@ export class Game {
       }
       object.controller = object.owner;
       if (chosenUnder !== undefined) {
+        // It entered theirs: nothing changed hands, so no `control-changed`.
+        object.controller = chosenUnder;
         this.gainControlByEffect(chosenUnder, { kind: "object", object: id }, false, true, { split: false });
       }
     } else {

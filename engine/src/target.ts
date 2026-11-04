@@ -173,6 +173,14 @@ export type TargetSpec =
       readonly kind: "opponent-compared";
       readonly stat: PlayerStat;
       readonly by: number;
+      /** The Oaths' "that player chooses target player who controls more
+       * creatures than they do and is their opponent", at each player's
+       * upkeep (with `targetsChosenBy: "active-player"`): the active player's
+       * own is what's compared, and the target is their opponent, its
+       * ability's controller possibly among them. Part of the targeting
+       * requirement, not "as you activate": as it resolves, a target for whom
+       * it's no longer true is illegal (rule 608.2b; the Oaths' rulings). */
+      readonly comparedTo?: "active-player";
     }
   /**
    * A card in a graveyard — the general form for a graveyard the way
@@ -722,7 +730,7 @@ export interface TargetSeat {
  * same, except that an `opponent-compared` slot's comparison was only "as
  * you activate this ability" — then any opponent will do. */
 export function resolvingTargetSpec(spec: TargetSpec): TargetSpec {
-  return typeof spec === "object" && spec.kind === "opponent-compared" ? "opponent" : spec;
+  return typeof spec === "object" && spec.kind === "opponent-compared" && spec.comparedTo === undefined ? "opponent" : spec;
 }
 
 export function playerAtSeat(
@@ -1261,6 +1269,9 @@ export function describeTargetSpec(spec: TargetSpec | string): string {
     }[spec.stat];
     const more = spec.by < 0 ? "fewer" : "more";
     const n = Math.abs(spec.by);
+    if (spec.comparedTo === "active-player") {
+      return `opponent of the active player with ${n > 1 ? `at least ${n} ` : ""}${more} ${what} than them`;
+    }
     return `opponent with ${n > 1 ? `at least ${n} ` : ""}${more} ${what} than you`;
   }
   if (spec.kind === "spell-or-permanent") {

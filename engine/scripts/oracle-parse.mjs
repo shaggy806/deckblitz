@@ -3603,6 +3603,25 @@ export function parseSentence(sentence, ctx) {
   if ((m = re(`(target opponent|target player) gains control of ~`).exec(s))) {
     return { kind: "gain-control", target: "source", who: { target: slot(m[1]) }, untilEndOfTurn: false };
   }
+  // "Target player chooses three cards from their hand and puts them on top of
+  // their library in any order" (Stunted Growth): theirs to choose, the picks
+  // their order.
+  if ((m = re(`(target opponent|target player) chooses ${N} cards? from their hand and puts (?:it|them) on top of their library(?: in any order)?`).exec(s))) {
+    const count = numberOf(m[2]);
+    return {
+      kind: "for-each-player",
+      who: { target: slot(m[1]) },
+      effect: {
+        kind: "look-and-choose",
+        zone: "hand",
+        player: "that-player",
+        min: count,
+        max: count,
+        destination: "library-top",
+        leftover: "stay",
+      },
+    };
+  }
   // "The player to your right gains control of this artifact" (Hithlain Rope).
   if ((m = re(`the player to your (left|right) gains control of ~`).exec(s))) {
     return { kind: "gain-control", target: "source", who: `player-to-your-${m[1]}`, untilEndOfTurn: false };

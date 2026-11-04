@@ -280,6 +280,8 @@ describe("enters under the control of an opponent of your choice", () => {
     expect(controller(game, xantcha)).toBe(C);
     expect(game.state.objects[xantcha].owner).toBe(A);
     expect(game.state.objects[xantcha].controlEffects?.at(-1)?.entered).toBe(true);
+    // It entered theirs: nothing changed hands.
+    expect(game.events.some((e) => e.type === "control-changed" && e.object === xantcha)).toBe(false);
   });
 
   it("Xantcha must attack, and can't attack its owner or a planeswalker its owner controls", () => {
