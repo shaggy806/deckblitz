@@ -41,5 +41,5 @@ export { damageAssignmentViolations, defaultAssignment, standardAssignment } fro
 export { fitsSoFar, fitsTogether, slotsLeft } from "./zone-choice-together.js";
 export { stackCopyKey } from "./stack-copies.js";
 export type { StackCopyFields } from "./stack-copies.js";
-export { defaultTapPicks, tapPicksPower, waterbendAt } from "./actions.js";
+export { defaultTapPicks, delvePicksFit, tapPicksPower, waterbendAt } from "./actions.js";
 export type { ZoneChoiceTogether } from "./zone-choice-together.js";

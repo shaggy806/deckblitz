@@ -37,6 +37,7 @@ import {
   slotOptions,
   specsAtX,
   defaultAssignment,
+  delvePicksFit,
   tapPicksPower,
   targetCountAtX,
   waterbendAt,
@@ -2730,12 +2731,7 @@ function Table({
         if (fixedRange.minCards !== fixedRange.maxCards || choices.length !== fixedRange.maxCards) {
           setPendingDelve({
             cast,
-            offer: {
-              choices,
-              minCards: fixedRange.minCards,
-              maxCards: fixedRange.maxCards,
-              ...(fromHand !== undefined ? { fromHand } : {}),
-            },
+            offer: { choices, ...fixedRange, ...(fromHand !== undefined ? { fromHand } : {}) },
             xValue: fixedX,
             ...paid,
           })
@@ -2933,7 +2929,7 @@ function Table({
       }
       setPendingDelve({
         cast: action,
-        offer: { choices, minCards: range.minCards, maxCards: range.maxCards, ...(fromHand !== undefined ? { fromHand } : {}) },
+        offer: { choices, ...range, ...(fromHand !== undefined ? { fromHand } : {}) },
         xValue: value,
         ...picks,
       })
@@ -5910,6 +5906,11 @@ function Table({
             <>
               {' '}
               from your hand, each taking <Symbols text={`{${fromHand.each}}`} /> off
+              {fromHand.count < pendingDelve.offer.choices.length ? (
+                <>
+                  , or from your graveyard, each paying <Symbols text="{1}" /> of what those leave
+                </>
+              ) : null}
             </>
           ) : (
             <>
@@ -7759,7 +7760,11 @@ function Table({
             pendingDelve.offer.minCards > 0 ? ` (at least ${pendingDelve.offer.minCards})` : ''
           }${
             pendingDelve.offer.fromHand !== undefined
-              ? ` from your hand, each taking ${pendingDelve.offer.fromHand.each} generic mana off`
+              ? ` from your hand, each taking ${pendingDelve.offer.fromHand.each} generic mana off${
+                  pendingDelve.offer.fromHand.count < pendingDelve.offer.choices.length
+                    ? ', or from your graveyard (after the hand cards), each paying one of what those leave'
+                    : ''
+                }`
               : ', each paying one generic mana'
           }`}
           ids={pendingDelve.offer.choices}
@@ -7768,6 +7773,8 @@ function Table({
             min: pendingDelve.offer.minCards,
             max: pendingDelve.offer.maxCards,
             eligible: pendingDelve.offer.choices,
+            // Cards from both zones: the mix decides, not just how many.
+            fits: (picked) => delvePicksFit(pendingDelve.offer, pendingDelve.offer, picked),
             onConfirm: confirmDelve,
             // Nothing exiled: mana pays it all.
             noneLabel: 'Exile none',

@@ -1481,7 +1481,17 @@ export type LegalAction =
         /** For a spell with `{X}` (delve pays X too, and `xCost.maxX`
          * counts it): `minCards` and `maxCards` at each X from 0 to
          * `xCost.maxX`, the driver reading the X it chose. */
-        readonly byX?: readonly { readonly minCards: number; readonly maxCards: number }[];
+        readonly byX?: readonly {
+          readonly minCards: number;
+          readonly maxCards: number;
+          readonly generic?: number;
+          readonly needed?: number;
+        }[];
+        /** With cards from both zones on offer (a March under Teval, `fromHand`
+         * beside delve), counts don't settle it: the total cost's generic mana
+         * and the least of it that must come off, for `delvePicksFit`. */
+        readonly generic?: number;
+        readonly needed?: number;
         /** A March's "you may exile any number of blue cards from your hand,
          * {2} less for each" (`additionalCost.exileFromHandReduces`): the first
          * `count` of `choices` are those cards in hand, each taking `each`
@@ -2394,6 +2404,28 @@ export type CastSpellOffer = Extract<LegalAction, { kind: "cast-spell" }>;
 /** A `play-land` offer — what a `cast-now` decision that lets its player
  * *play* the card lists as its `lands`. */
 export type PlayLandOffer = Extract<LegalAction, { kind: "play-land" }>;
+
+/**
+ * Whether these picks are a legal mix, with cards from hand and from the
+ * graveyard both on offer. The cards from hand are a cost reduction, part of
+ * the total cost (rule 601.2f); delve applies only after that's determined
+ * (702.66b) and pays only generic mana in it (702.66a). So the graveyard cards
+ * must fit what the hand's left, and together they must take off what mana can't
+ * pay. Always true for an offer with no such `generic` and `needed`, whose
+ * `minCards` and `maxCards` say it all. `range` is the offer, or its `byX` entry.
+ */
+export function delvePicksFit(
+  offer: NonNullable<Extract<LegalAction, { kind: "cast-spell" }>["delve"]>,
+  range: { readonly generic?: number; readonly needed?: number },
+  picked: readonly ObjectId[],
+): boolean {
+  if (offer.fromHand === undefined || range.generic === undefined || range.needed === undefined) return true;
+  const fromHand = offer.choices.slice(0, offer.fromHand.count);
+  const hand = picked.filter((id) => fromHand.includes(id)).length;
+  const left = Math.max(0, range.generic - hand * offer.fromHand.each);
+  const graveyard = picked.length - hand;
+  return graveyard <= left && range.generic - left + graveyard >= range.needed;
+}
 
 /**
  * A driver's delve picks from a cast offer's `delve` (rule 702.66a), at the

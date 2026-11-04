@@ -5216,19 +5216,18 @@ export class Game {
               const minCards = manaAffordable ? 0 : (fewestDelved(pricedAt) ?? maxCards);
               // The March cycle's cards in hand (`delvePoolFor`).
               const reduces = def.additionalCost?.exileFromHandReduces;
-              const fromHand =
-                reduces === undefined
+              const handCount = delvePool.filter((id) => this.state.objects[id]?.zone === "hand").length;
+              const fromHand = reduces === undefined ? {} : { fromHand: { count: handCount, each: reduces.each } };
+              // Cards from both zones (a March under Teval): what a set of picks
+              // must obey beyond its size (`delvePicksFit`).
+              const fitAt = (x: number): { generic?: number; needed?: number } =>
+                reduces === undefined || handCount === delvePool.length
                   ? {}
-                  : {
-                      fromHand: {
-                        count: delvePool.filter((id) => this.state.objects[id]?.zone === "hand").length,
-                        each: reduces.each,
-                      },
-                    };
-              if (xPlan === null) return { delve: { choices: delvePool, minCards, maxCards, ...fromHand } };
+                  : this.delveFit(player, card, def, variantCost, face ?? 0, via, x, pricedAt);
+              if (xPlan === null) return { delve: { choices: delvePool, minCards, maxCards, ...fromHand, ...fitAt(0) } };
               // At each X: the fewest it needs never falls as X rises, so
               // one pass walks it up.
-              const byX: { minCards: number; maxCards: number }[] = [];
+              const byX: { minCards: number; maxCards: number; generic?: number; needed?: number }[] = [];
               let fewest = minCards;
               for (let x = 0; x <= xPlan.maxX; x += 1) {
                 const most = this.delveMaxCards(
@@ -5239,11 +5238,11 @@ export class Game {
                 // Below a permission's least X (Glarb) nothing is castable:
                 // that X isn't on offer, so it mustn't raise the count.
                 if (x < xFloor) {
-                  byX.push({ minCards: Math.min(fewest, most), maxCards: most });
+                  byX.push({ minCards: Math.min(fewest, most), maxCards: most, ...fitAt(x) });
                   continue;
                 }
                 while (fewest < most && !castsWith(pricedAt, delvePool.slice(0, fewest), x)) fewest += 1;
-                byX.push({ minCards: Math.min(fewest, most), maxCards: most });
+                byX.push({ minCards: Math.min(fewest, most), maxCards: most, ...fitAt(x) });
               }
               if (byX.every((r) => r.maxCards === 0)) return {};
               return { delve: { choices: delvePool, minCards, maxCards, byX, ...fromHand } };
@@ -40041,9 +40040,37 @@ export class Game {
     return hand + Math.min(pool.length - hand, Math.max(0, generic - hand * each));
   }
 
+  /** A cast's total generic at `x`, and the least of it that must come off for
+   * mana to pay the rest: `delvePicksFit`'s numbers. */
+  private delveFit(
+    player: PlayerId,
+    card: ObjectId,
+    def: CardDefinition,
+    costString: string | null,
+    face: number,
+    via: CastVia | undefined,
+    x: number,
+    targetCount: number,
+  ): { generic: number; needed: number } {
+    return this.withFace(card, face, () => {
+      const cost = this.castingCostOf(player, card, def, x, costString, targetCount);
+      const purpose: ManaPurpose = { kind: "cast", card, ...castPaying(via, costString) };
+      for (let off = 0; off < cost.generic; off += 1) {
+        const rest = { ...cost, generic: cost.generic - off };
+        if (this.payMana(player, rest, undefined, undefined, purpose) !== null) {
+          return { generic: cost.generic, needed: off };
+        }
+      }
+      return { generic: cost.generic, needed: cost.generic };
+    });
+  }
+
   /** The most of `pool` a player may name at this much generic: as
    * `delveReach`, but fewer cards from hand can leave room for more from the
-   * graveyard (a March under Teval, Arbiter of Virtue). */
+   * graveyard (a March under Teval, Arbiter of Virtue). The picks' mix still
+   * has to obey `whyDelveIsWrong`: delve applies only after the total cost is
+   * determined (rule 702.66b), so it pays only the generic the cards from hand,
+   * a cost reduction (601.2f), leave. */
   private delveMaxCards(pool: readonly ObjectId[], generic: number, def: CardDefinition): number {
     const each = def.additionalCost?.exileFromHandReduces?.each ?? 0;
     const hand = pool.filter((id) => this.state.objects[id]?.zone === "hand").length;

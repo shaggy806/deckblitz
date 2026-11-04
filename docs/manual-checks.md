@@ -2221,6 +2221,10 @@ engine terms. A second thing to check is a second test.
 - **Do:** Cast Stock Up, take two cards, then order the rest.
 - **Expect:** First an unnumbered pick for your hand. Then 'Put them on the bottom in the order you pick: the last you pick goes on the very bottom', numbered, needing all three leftovers. The library bottom matches your order.
 
+### March of Wretched Sorrow under Teval: delve only pays what the hand cards leave
+- **Do:** Cast March of Wretched Sorrow with X 4. In the popup pick Dark Ritual, Doom Blade and Forest, and try to confirm. Then swap Doom Blade for Plains and confirm, and target Hill Giant.
+- **Expect:** The first three can't be confirmed: the two hand cards take all four generic off, leaving delve nothing to pay. Dark Ritual, Forest and Plains can. They go to exile, Doom Blade stays in hand, and Hill Giant dies.
+
 ### March of Swirling Mist: exiled blue cards take {2} off for each
 - **Do:** Cast March of Swirling Mist with X 2, choose one Opt in the popup and confirm, then target both of the opponent's creatures.
 - **Expect:** The popup offers only the two Opts, reading "from your hand, each taking 2 generic mana off", and Grizzly Bears isn't in it. Your one Island pays. The chosen Opt goes to exile as you cast it, the other stays in hand, and both creatures phase out.

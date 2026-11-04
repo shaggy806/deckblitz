@@ -3342,6 +3342,17 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'March of Wretched Sorrow under Teval: delve only pays what the hand cards leave',
+    board({
+      you: {
+        bf: ['Teval, Arbiter of Virtue', 'Swamp'],
+        hand: ['March of Wretched Sorrow', 'Dark Ritual', 'Doom Blade'],
+        gy: ['Forest', 'Plains', 'Island'],
+      },
+      opp: { bf: ['Hill Giant'] },
+    }),
+  ),
+  preset(
     'March of Swirling Mist: exiled blue cards take {2} off for each',
     board({
       you: {

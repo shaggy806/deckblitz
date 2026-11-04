@@ -8,7 +8,7 @@
  */
 import { describe, expect, it } from "vitest";
 
-import { delvePicks } from "../actions.js";
+import { delvePicks, delvePicksFit } from "../actions.js";
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
 
@@ -142,6 +142,44 @@ describe("March of Wretched Sorrow", () => {
     expect(zone(game, fromHand)).toBe("exile");
     expect(zone(game, buried[2])).toBe("graveyard");
     expect(zone(game, giant)).toBe("graveyard");
+  });
+
+  it("beside delve: the reduction comes first (rules 601.2f, 702.66b), so its picks are judged as a mix", () => {
+    const { game } = table();
+    spawn(game, "Teval, Arbiter of Virtue");
+    lands(game, "Swamp", 1);
+    const giant = spawn(game, "Hill Giant", B);
+    const hand1 = toHand(game, "Dark Ritual");
+    const hand2 = toHand(game, "Dark Ritual");
+    const buried = [toGraveyard(game, "Forest"), toGraveyard(game, "Forest"), toGraveyard(game, "Forest")];
+    const march = toHand(game, "March of Wretched Sorrow");
+    const offer = castOffers(game, march)[0].delve!;
+    const range = offer.byX![4];
+    // X 4: the Swamp pays {B}, so all four generic must come off.
+    expect(range).toMatchObject({ generic: 4, needed: 4, maxCards: 3 });
+    const fit = (...picks: readonly ObjectId[]): boolean => delvePicksFit(offer, range, picks);
+    expect(fit(hand1, hand2)).toBe(true);
+    expect(fit(hand1, buried[0], buried[1])).toBe(true);
+    // Three cards, within the count, but the hand's {4} leaves nothing for delve.
+    expect(fit(hand1, hand2, buried[0])).toBe(false);
+    expect(dispatchRefusal(game, march, { targets: [ref(giant)], x: 4, delve: [hand1, hand2, buried[0]] })).toMatch(/at most 0/);
+    // Enough cards for the count, too little off for the mana.
+    expect(fit(buried[0], buried[1])).toBe(false);
+    expect(fit(buried[0], buried[1], buried[2])).toBe(false);
+    expect(dispatchRefusal(game, march, { targets: [ref(giant)], x: 4, delve: [buried[0], buried[1], buried[2]] })).not.toBe("");
+    cast(game, march, { targets: [ref(giant)], x: 4, delve: [hand1, buried[0], buried[1]] });
+    expect(zone(game, giant)).toBe("graveyard");
+    expect(zone(game, hand2)).toBe("hand");
+  });
+
+  it("with cards from hand alone, the offer's counts say it all", () => {
+    const { game } = table();
+    lands(game, "Swamp", 1);
+    spawn(game, "Grizzly Bears", B);
+    const card = toHand(game, "Dark Ritual");
+    const offer = castOffers(game, toHand(game, "March of Wretched Sorrow"))[0].delve!;
+    expect(offer.byX![2].generic).toBeUndefined();
+    expect(delvePicksFit(offer, offer.byX![2], [card])).toBe(true);
   });
 });
 
