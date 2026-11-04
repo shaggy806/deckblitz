@@ -4195,9 +4195,18 @@ export type EffectSpec =
        * "exile it instead of putting it into its owner's graveyard"
        * (Transcendent Dragon, whose `cast-now` of the same slot then finds it
        * there — a spell that wasn't countered is still on the stack, where
-       * nothing is cast from).
+       * nothing is cast from). `"library-top"` / `"library-bottom"`: "put it
+       * on top of / on the bottom of its owner's library instead of into that
+       * player's graveyard" (Memory Lapse, Spell Crumple; Hinder's "your choice
+       * of the top or bottom" is an `each-player-may` of the two). A commander
+       * sent to a library may still go to the command zone (rule 903.9b).
        */
-      readonly into?: "hand" | "exile";
+      readonly into?: "hand" | "exile" | "library-top" | "library-bottom";
+      /** With `into: "exile"`: "exile it **with three time counters on it**
+       * … If it doesn't have suspend, it gains suspend" (Delay — rule
+       * 702.62b). Only when the spell was countered, and it is the card that
+       * reached exile: a copy ceases to exist instead (rule 707.10a). */
+      readonly withTimeCounters?: number;
       /** "If a permanent's ability is countered this way, activated
        * abilities of that permanent can't be activated this turn"
        * (Trickbind, Interdict): an ability countered by this effect locks its
@@ -11223,13 +11232,18 @@ export interface EffectApi {
    * of their graveyard with `into: "hand"`. */
   counterSpell(
     target: TargetRef,
-    into?: "hand" | "exile",
+    into?: "hand" | "exile" | "library-top" | "library-bottom",
     lockSource?: boolean,
+    timeCounters?: number,
   ): {
     readonly countered: boolean;
     /** The ability's source, still the permanent it was as the ability went
      * on the stack (rule 400.7). */
     readonly sourcePermanent?: ObjectId;
+    /** "If a spell or ability you control would counter a spell, instead
+     * exile that spell and you may play that card" (Guile): the card, in
+     * exile, and `countered` false — it was never countered (its ruling). */
+    readonly exiledInstead?: ObjectId;
   };
   /** What a `for-each-on-stack` goes over, bottom to top: an object once per
    * copy it stands for, what's resolving left out. */
@@ -15812,7 +15826,18 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "counter": {
       const target = resolveEffectTarget(spec.target, ctx);
       if (target === undefined) return;
-      const { countered, sourcePermanent } = ctx.counterSpell(target, spec.into, spec.lockSource === true);
+      const { countered, sourcePermanent, exiledInstead } = ctx.counterSpell(
+        target,
+        spec.into,
+        spec.lockSource === true,
+        spec.withTimeCounters,
+      );
+      if (exiledInstead !== undefined) {
+        // Guile's "you may play that card without paying its mana cost", this
+        // resolution's own instruction: declined, it stays exiled for good.
+        applyEffectSpec({ kind: "cast-now", target: 0, free: true, play: true }, ctx.withFoundAt(0, exiledInstead));
+        return;
+      }
       const then = spec.thenSource;
       if (then === undefined || sourcePermanent === undefined) return;
       if (!countered && then.evenIfNotCountered !== true) return;

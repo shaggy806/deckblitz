@@ -43,6 +43,7 @@ export type ReplacementSpec =
   | TokenMultiplierReplacement
   | CounterMultiplierReplacement
   | GraveyardExileReplacement
+  | CounterExileReplacement
   | DrawRedirectReplacement
   | DamageMultiplierReplacement
   | MillMultiplierReplacement
@@ -459,6 +460,16 @@ export interface GraveyardExileReplacement {
    * instead" (Wildwood Escort — rule 700.4): countered or discarded, it goes
    * to its graveyard. */
   readonly self?: true;
+}
+
+/** "If a spell or ability you control would counter a spell, instead exile that
+ * spell and you may play that card without paying its mana cost" (Guile). This
+ * permanent's controller's `counter` effects, on a spell that could be countered
+ * (one that can't wouldn't be, its ruling); never an ability. The spell was never
+ * countered, so what a counterspell does "if countered this way" doesn't happen.
+ * Applied by `Game.counterSpellByEffect`; the offer is the `counter` effect's. */
+export interface CounterExileReplacement {
+  readonly event: "would-counter-spell";
 }
 
 /** "If a player [who] would draw a card, [this permanent's controller] draws a

@@ -33181,7 +33181,8 @@ export class Game {
         };
       },
       fight: (a, b, oneSided) => this.fightCreatures(a, b, oneSided),
-      counterSpell: (target, into, lockSource) => this.counterSpellByEffect(target, into, lockSource === true),
+      counterSpell: (target, into, lockSource, timeCounters) =>
+        this.counterSpellByEffect(target, into, lockSource === true, controller, timeCounters),
       onTheStack: (spells, abilities, whose) => {
         const stack = this.state.zones.shared.stack;
         // What's resolving stays on the stack until it's done (rule 608.2n):
@@ -42698,12 +42699,18 @@ export class Game {
       if (object === undefined || object.zone !== "exile") continue;
       const def = this.registry.get(printedCardName(object));
       if (options.onlyWithSuspend === true && def.suspend === null) continue;
-      const n = counters === "mana-value" ? manaValueOfObject(this.registry, object) : counters;
-      if (n <= 0) continue;
-      object.counters.time = (object.counters.time ?? 0) + n;
-      object.suspended = true;
-      this.emit({ type: "card-suspended", player: object.owner, object: id, timeCounters: object.counters.time });
+      this.suspendExiledCard(id, counters === "mana-value" ? manaValueOfObject(this.registry, object) : counters);
     }
+  }
+
+  /** `n` time counters on a card in exile, which is then suspended (rule
+   * 702.62b). None — a mana value of 0 — and it's an ordinary exiled card. */
+  private suspendExiledCard(id: ObjectId, n: number): void {
+    const object = this.state.objects[id];
+    if (object === undefined || object.zone !== "exile" || n <= 0) return;
+    object.counters.time = (object.counters.time ?? 0) + n;
+    object.suspended = true;
+    this.emit({ type: "card-suspended", player: object.owner, object: id, timeCounters: object.counters.time });
   }
 
 
@@ -47666,7 +47673,8 @@ export class Game {
     const spellRef: TargetRef = { kind: "object", object: targetedBy.object };
     if (!this.canPayWardCost(payer, cost)) {
       this.emit({ type: "ward-unpaid", object: warded, player: payer, spell: targetedBy.object });
-      this.counterObject(targetedBy.object);
+      // The ward ability's own effect (Guile reads whose it is).
+      applyEffectSpec({ kind: "counter", target: 0 }, this.makeResolutionContext(warded, controller, [spellRef]));
       return;
     }
     const parts: EffectSpec[] = [];
@@ -47782,16 +47790,32 @@ export class Game {
 
   private counterSpellByEffect(
     target: TargetRef,
-    into: "hand" | "exile" | undefined,
-    lockSource = false,
-  ): { readonly countered: boolean; readonly sourcePermanent?: ObjectId } {
+    into: "hand" | "exile" | "library-top" | "library-bottom" | undefined,
+    lockSource: boolean,
+    controller: PlayerId,
+    timeCounters?: number,
+  ): { readonly countered: boolean; readonly sourcePermanent?: ObjectId; readonly exiledInstead?: ObjectId } {
     if (target.kind !== "object") return { countered: false };
     // Trickbind's "that permanent": the ability's source as it was put on
     // the stack — a permanent then, and still that permanent (rule 400.7).
     const ability = this.state.objects[target.object];
+    // Guile (rule 614.1a): a spell it couldn't counter wouldn't be countered,
+    // so nothing is replaced and the spell resolves (its ruling).
+    if (
+      ability?.kind === "card" &&
+      ability.zone === "stack" &&
+      !this.cantBeCountered(ability) &&
+      this.exilesWhatItWouldCounter(controller)
+    ) {
+      this.exileSpell(target.object);
+      return this.state.objects[target.object]?.zone === "exile"
+        ? { countered: false, exiledInstead: target.object }
+        : { countered: false };
+    }
     const sourceId = ability?.kind === "ability" ? ability.sourceObjectId : null;
     const stint = ability?.lastKnownRefs?.source;
     const countered = this.counterObject(target.object, into ?? "graveyard");
+    if (countered && timeCounters !== undefined) this.suspendExiledCard(target.object, timeCounters);
     if (sourceId === null || sourceId === undefined || stint === undefined) return { countered };
     const source = this.state.objects[sourceId];
     if (source === undefined || source.zone !== "battlefield" || (source.zoneChangeCount ?? 0) !== stint) return { countered };
@@ -47815,10 +47839,13 @@ export class Game {
    * commander sent to hand may go to the command zone (rule 903.9b). A copy
    * of a spell goes to neither — it ceases to exist (rule 707.10a).
    */
-  private counterObject(id: ObjectId, into: "graveyard" | "hand" | "exile" = "graveyard"): boolean {
+  private counterObject(
+    id: ObjectId,
+    into: "graveyard" | "hand" | "exile" | "library-top" | "library-bottom" = "graveyard",
+  ): boolean {
     const object = this.state.objects[id];
     if (object === undefined || object.zone !== "stack") return false;
-    if (object.uncounterable === true || spellCantBeCountered(this.state, this.registry, object)) {
+    if (this.cantBeCountered(object)) {
       this.emit({ type: "counter-failed", object: id });
       return false;
     }
@@ -47852,9 +47879,33 @@ export class Game {
     // A commander headed for a hand waits on the stack for its owner's 903.9b
     // answer (`moveObject` returns `false`); it's countered all the same.
     const controller = object.controller;
-    this.moveObject(id, into);
+    if (into === "library-top" || into === "library-bottom") {
+      this.putOnLibrary(id, into === "library-top" ? "top" : "bottom");
+    } else {
+      this.moveObject(id, into);
+    }
     this.emit({ type: "spell-countered", object: id, controller });
     return true;
+  }
+
+  /** "Can't be countered" (rule 701.5f): printed, granted by a permanent, or
+   * from how it was paid for. */
+  private cantBeCountered(object: GameObject): boolean {
+    return object.uncounterable === true || spellCantBeCountered(this.state, this.registry, object);
+  }
+
+  /** Whether a static of a permanent `player` controls says "if a spell or
+   * ability you control would counter a spell, instead exile that spell and
+   * you may play that card" (Guile, {@link CounterExileReplacement}). */
+  private exilesWhatItWouldCounter(player: PlayerId): boolean {
+    for (const id of this.state.zones.shared.battlefield) {
+      const object = this.state.objects[id];
+      if (object === undefined || object.controller !== player || hasLostAbilities(this.state, this.registry, object)) continue;
+      for (const ability of this.registry.get(rulesTextName(object)).static) {
+        if (ability.replacement?.event === "would-counter-spell" && this.staticActive(object, ability)) return true;
+      }
+    }
+    return false;
   }
 
   /** Two creatures fight (rule 701.12): each deals damage equal to its power to

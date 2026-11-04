@@ -13912,5 +13912,45 @@ describe("a copy for a duration read as a condition", () => {
       kind: "may",
       effect: { kind: "become-copy", target: "trigger-object", of: 0, until: "while-source-attached" },
     });
+describe("a countered spell's destination, and a counter replaced", () => {
+  const spell = (oracle_text: string) => parseFace({ name: "Test Card", type_line: "Instant", oracle_text, mana_cost: "{1}", colors: [] });
+  const counter = "Counter target spell.";
+  it("reads top, bottom and your choice of a library", () => {
+    const rider = (where: string) => `If that spell is countered this way, put it on ${where} its owner's library instead of into that player's graveyard.`;
+    expect(spell(`${counter} ${rider("top of")}`).effect).toEqual({ kind: "counter", target: 0, into: "library-top" });
+    expect(spell(`${counter} ${rider("the bottom of")} Put Test Card on the bottom of its owner's library.`).effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "counter", target: 0, into: "library-bottom" },
+        { kind: "put-on-library", target: "source", position: "bottom" },
+      ],
+    });
+    expect(spell(`${counter} ${rider("your choice of the top or bottom of")}`).effect).toMatchObject({
+      kind: "each-player-may",
+      who: "you",
+      choices: [{ effect: { into: "library-top" } }, { effect: { into: "library-bottom" } }],
+    });
+  });
+  it("reads exile with time counters only with its suspend sentence", () => {
+    const rider = "If the spell is countered this way, exile it with three time counters on it instead of putting it into its owner's graveyard.";
+    expect(spell(`${counter} ${rider} If it doesn't have suspend, it gains suspend.`).effect).toEqual({
+      kind: "counter",
+      target: 0,
+      into: "exile",
+      withTimeCounters: 3,
+    });
+    expect(spell(`${counter} ${rider}`).effect).not.toEqual(expect.objectContaining({ withTimeCounters: 3 }));
+  });
+  it("reads Guile's replacement", () => {
+    const face = parseFace({
+      name: "Test Card",
+      type_line: "Creature — Elemental",
+      oracle_text: "If a spell or ability you control would counter a spell, instead exile that spell and you may play that card without paying its mana cost.",
+      mana_cost: "{1}",
+      colors: [],
+      power: "1",
+      toughness: "1",
+    });
+    expect(face.static[0].replacement).toEqual({ event: "would-counter-spell" });
   });
 });

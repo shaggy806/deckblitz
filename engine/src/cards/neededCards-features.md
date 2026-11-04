@@ -333,6 +333,20 @@ fails to pay. An emblem's own activated ability (Ob Nixilis of the Black Oath) i
 not built: nothing offers an ability of an object in the command zone that isn't
 its card's. Keys: effect:emblem-grants-activated, effect:emblem-grants-to-spells.
 
+### A countered spell's destination, and a counter replaced — built 2026-11-04
+
+The need-keys family `effect:counter-exile-instead`. `counter`'s `into` takes
+`"library-top"` and `"library-bottom"` (Memory Lapse, Lapse of Certainty, Spell
+Crumple; Hinder's "your choice" is an `each-player-may` of the two, its controller's
+answer), `withTimeCounters` with `into: "exile"` (Delay, rule 702.62b: only when it
+was countered, and only a card that reached exile), and a replacement
+`would-counter-spell` (Guile: the `counter` effect's controller's permanents, on a
+spell that could be countered; exiled, never countered, so no "this way" rider, and
+`cast-now` with `free` and `play` offered; a ward no one can pay runs the same
+effect). Keys: effect:counter-exile-instead, effect:counter-into-exile-suspend,
+effect:counter-into-library-bottom, effect:counter-to-library-top,
+effect:counter-to-library-top-or-bottom.
+
 ### Spells countered all at once, and spells going to a hand as they resolve — built 2026-11-03
 
 The need-keys families `effect:counter-all-spells` and

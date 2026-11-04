@@ -8702,6 +8702,7 @@ export function parseEffect(text, outer) {
       revealUntilAt(sentences, i, ctx) ??
       opponentDividesFindsAt(sentences, i, ctx) ??
       distinctSetAt(sentences, i) ??
+      counterIntoAt(sentences, i, ctx) ??
       counterAbilityAt(sentences, i, ctx) ??
       opponentChoosesInGraveyardAt(sentences, i, ctx) ??
       youChooseInEachGraveyardAt(sentences, i) ??
@@ -10776,6 +10777,50 @@ function opponentDividesFindsAt(sentences, i, ctx) {
     },
     used: closed ? 3 : 4,
   };
+}
+
+/** A spell countered to somewhere else: "Counter target spell. If that spell is
+ * countered this way, put it on top of its owner's library instead of into that
+ * player's graveyard." (Memory Lapse), "… on the bottom …" + "Put ~ on the bottom
+ * of its owner's library." (Spell Crumple), "… on your choice of the top or bottom
+ * …" (Hinder), "… exile it with three time counters on it …" + "If it doesn't have
+ * suspend, it gains suspend." (Delay). */
+function counterIntoAt(sentences, i, ctx) {
+  if (!/^counter target spell\.$/i.test(sentences[i])) return null;
+  const rider = sentences[i + 1] ?? "";
+  const counter = (into, more = {}) => (target) => ({ kind: "counter", target, into, ...more });
+  const library = /^if that spell is countered this way, put (?:it|that card) on (top of|the bottom of|your choice of the top or bottom of) its owner's library instead of into that player's graveyard\.$/i.exec(rider);
+  if (library !== null) {
+    const where = library[1].toLowerCase();
+    if (where.startsWith("your choice")) {
+      const target = ctx.target("spell");
+      return {
+        effect: {
+          kind: "each-player-may",
+          who: "you",
+          choices: [
+            { text: "Put it on top of its owner's library.", effect: counter("library-top")(target) },
+            { text: "Put it on the bottom of its owner's library.", effect: counter("library-bottom")(target) },
+          ],
+        },
+        used: 2,
+      };
+    }
+    const effect = counter(where === "top of" ? "library-top" : "library-bottom")(ctx.target("spell"));
+    if (/^put ~ on the bottom of its owner's library\.$/i.test(sentences[i + 2] ?? "")) {
+      return {
+        effect: { kind: "sequence", effects: [effect, { kind: "put-on-library", target: "source", position: "bottom" }] },
+        used: 3,
+      };
+    }
+    return { effect, used: 2 };
+  }
+  const suspended = /^if the spell is countered this way, exile it with (\w+) time counters on it instead of putting it into its owner's graveyard\.$/i.exec(rider);
+  const counters = suspended === null ? undefined : NUMBERS[suspended[1].toLowerCase()];
+  if (counters !== undefined && /^if it doesn't have suspend, it gains suspend\.$/i.test(sentences[i + 2] ?? "")) {
+    return { effect: counter("exile", { withTimeCounters: counters })(ctx.target("spell")), used: 3 };
+  }
+  return null;
 }
 
 /** An ability on the stack countered: "Counter target spell, activated ability,
@@ -16801,6 +16846,10 @@ function parseStatic(line, text) {
         text,
       };
     }
+  }
+  // Guile's would-counter replacement.
+  if (line === "If a spell or ability you control would counter a spell, instead exile that spell and you may play that card without paying its mana cost.") {
+    return { affects: { scope: "self" }, replacement: { event: "would-counter-spell" }, text };
   }
   // "If this creature would die, exile it instead" (Wildwood Escort, rule 700.4).
   if (line === "If ~ would die, exile it instead.") {
