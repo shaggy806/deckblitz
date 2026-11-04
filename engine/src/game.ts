@@ -84,7 +84,7 @@ import { defaultRegistry } from "./cards/default-registry.js";
 import { EMBLEM_CARD } from "./cards/emblem.js";
 import { embalmAbility, encoreAbility, ninjutsu, unearth } from "./cards/helpers.js";
 import { bestowedDefinition, licidDefinition, readsGraveyardOrder } from "./cards/define.js";
-import type { CyclingAbility, KickerAlsoCost, MorphCost } from "./cards/define.js";
+import type { CyclingAbility, KickerAlsoCost, MorphCost, Supertype } from "./cards/define.js";
 import { DUNGEONS } from "./cards/dungeons.js";
 import { MADNESS_EFFECT, MADNESS_TEXT } from "./cards/madness.js";
 import { MIRACLE_EFFECT, MIRACLE_TEXT } from "./cards/miracle.js";
@@ -42422,6 +42422,8 @@ export class Game {
       readonly setColors?: readonly Color[];
       readonly addColors?: readonly Color[];
       readonly loseAbilities?: boolean;
+      readonly addSupertypes?: readonly Supertype[];
+      readonly setName?: string;
       readonly keywords: readonly Keyword[];
       readonly duration: EffectDuration;
     },
@@ -42446,6 +42448,8 @@ export class Game {
       ...(opts.setColors ? { setColors: [...opts.setColors] } : {}),
       ...(opts.addColors ? { addColors: [...opts.addColors] } : {}),
       ...(opts.loseAbilities ? { loseAbilities: true } : {}),
+      ...(opts.addSupertypes ? { addSupertypes: [...opts.addSupertypes] } : {}),
+      ...(opts.setName !== undefined ? { setName: opts.setName } : {}),
       ...(opts.power !== undefined && opts.toughness !== undefined
         ? { setPt: [opts.power, opts.toughness] as [number, number] }
         : opts.power !== undefined
@@ -51410,6 +51414,35 @@ export class Game {
     if (unpaired) invalidateComputedCache();
   }
 
+  /** What statics name (`StaticAbility.setName` — Witness Protection, Honest
+   * Work): each permanent's `staticName`, the latest ability's that's attached
+   * to it and hasn't lost its abilities, so a legend rule or "named" read by
+   * anyone next sees it. */
+  private refreshStaticNames(): void {
+    const battlefield = this.state.zones.shared.battlefield;
+    let names: Map<ObjectId, { readonly name: string; readonly timestamp: number }> | null = null;
+    for (const id of battlefield) {
+      const object = this.state.objects[id];
+      if (object.attachedTo === null) continue;
+      const def = this.registry.get(rulesTextName(object));
+      const setting = def.static.findLast((ability) => ability.setName !== undefined);
+      if (setting?.setName === undefined || hasLostAbilities(this.state, this.registry, object)) continue;
+      const already = names?.get(object.attachedTo);
+      if (already === undefined || object.timestamp > already.timestamp) {
+        (names ??= new Map()).set(object.attachedTo, { name: setting.setName, timestamp: object.timestamp });
+      }
+    }
+    for (const id of battlefield) {
+      const object = this.state.objects[id];
+      const next = names?.get(id);
+      if (object.staticName === undefined && next === undefined) continue;
+      if (object.staticName?.name === next?.name && object.staticName?.timestamp === next?.timestamp) continue;
+      if (next === undefined) delete object.staticName;
+      else object.staticName = next;
+      invalidateComputedCache();
+    }
+  }
+
   private runStateBasedActionsUncached(): void {
     let changed = true;
     while (changed) {
@@ -51418,6 +51451,7 @@ export class Game {
       // own `apply…`) resumes the sweep.
       if (this.state.awaiting !== null) return;
       changed = false;
+      this.refreshStaticNames();
 
       // Rule 903.9a: a commander put into a graveyard or exile since the last
       // check may go to the command zone. Its owner is asked once this check
@@ -54535,6 +54569,7 @@ export class Game {
     delete object.foretoldReducedBy;
     object.suspended = false;
     object.timeCast = undefined;
+    object.staticName = undefined;
     if (!enteringToken) object.exileAtEndStep = false;
     object.foretold = false;
     object.foretoldOnTurn = null;

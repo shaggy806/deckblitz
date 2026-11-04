@@ -1318,6 +1318,12 @@ export interface GameObject {
    * counters off, and it isn't suspended (rule 702.62b). Cleared on any zone
    * change. */
   timeCast?: boolean;
+  /** The name a static ability gives this permanent — Witness Protection's
+   * "named Legitimate Businessperson" — and that ability's timestamp. Layer 1
+   * has the copy effects' names on `modifiers`; this one, like who controls a
+   * permanent (layer 2), is a stored field, kept right by `refreshStaticNames`
+   * at each state-based check, and it's read through {@link nameOf}. */
+  staticName?: { readonly name: string; readonly timestamp: number };
   /** True on a permanent cast from suspend (or another "has haste until it
    * leaves" grant) — `hasSummoningSickness` returns false for it. Cleared on
    * any zone change. */
@@ -2038,8 +2044,10 @@ export interface PtModifier {
    * to its other types"). Anything that copies this object copies these
    * too — a token copy, a Clone. Timestamped under every other effect. */
   copiable?: true;
-  /** Its name — a copy exception's "except its name is Mishra's Warform".
-   * Read through {@link nameOf}. */
+  /** Its name — a copy exception's "except its name is Mishra's Warform", or,
+   * not `copiable`, an effect's "it becomes … named Vitu-Ghazi" (Awakening of
+   * Vitu-Ghazi: a copy of it doesn't have that name). Read through
+   * {@link nameOf}. */
   setName?: string;
   /** It isn't legendary — a copy exception's "and it isn't legendary"
    * (Spark Double). Read through `supertypesOf`. */
@@ -6995,6 +7003,17 @@ export const manaCostOverride = (object: GameObject): string | null | undefined 
 };
 
 export const nameOf = (object: GameObject): string => {
+  // An effect that names it (Awakening of Vitu-Ghazi, Witness Protection) beats
+  // anything its copiable values say, even face down: the latest wins (613.7).
+  let named = object.staticName;
+  for (let i = object.modifiers.length - 1; i >= 0; i -= 1) {
+    const m = object.modifiers[i];
+    if (m.copiable === true || m.setName === undefined) continue;
+    const timestamp = m.timestamp ?? 0;
+    if (named === undefined || timestamp > named.timestamp) named = { name: m.setName, timestamp };
+    break;
+  }
+  if (named !== undefined) return named.name;
   // A face-down permanent has no name at all (rule 708.2a), whatever a copy
   // effect's exception would have named it: its registry key stands in. So
   // does a Room with both doors locked (709.5).

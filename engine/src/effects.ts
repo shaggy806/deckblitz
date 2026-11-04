@@ -7770,6 +7770,12 @@ export type EffectSpec =
       /** The permanent loses all of its own abilities (Turn to Frog). */
       readonly loseAbilities?: boolean;
       readonly keywords?: readonly Keyword[];
+      /** "It becomes **a legendary** 0/0 Elemental creature" (Awakening of
+       * Vitu-Ghazi), in addition to its supertypes (rule 205.4b). */
+      readonly addSupertypes?: readonly Supertype[];
+      /** "…**named Vitu-Ghazi**": its only name for as long as this lasts, a
+       * copy of it not having it. */
+      readonly setName?: string;
       readonly duration: PtDuration;
     }
   | {
@@ -12436,6 +12442,8 @@ export interface EffectApi {
       readonly addColors?: readonly Color[];
       readonly loseAbilities?: boolean;
       readonly keywords: readonly Keyword[];
+      readonly addSupertypes?: readonly Supertype[];
+      readonly setName?: string;
       readonly duration: PtDuration;
     },
   ): void;
@@ -18649,6 +18657,8 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           ...(spec.addColors !== undefined ? { addColors: spec.addColors } : {}),
           loseAbilities: spec.loseAbilities,
           keywords: spec.keywords ?? [],
+          ...(spec.addSupertypes !== undefined ? { addSupertypes: spec.addSupertypes } : {}),
+          ...(spec.setName !== undefined ? { setName: spec.setName } : {}),
           duration: spec.duration,
         });
       }

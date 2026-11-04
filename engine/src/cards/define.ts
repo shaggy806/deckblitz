@@ -2685,6 +2685,10 @@ export interface StaticAbility {
    * effect.
    */
   readonly loseAllAbilities?: true;
+  /** "…named Legitimate Businessperson" (Witness Protection): the name of what
+   * this reaches, with `affects: { scope: "attached" }`, its only name for as
+   * long as this applies. A copy of it isn't named that (rule 707.2). */
+  readonly setName?: string;
   /**
    * Toxic N granted in layer 6 (rule 702.164) — Karumonix, the Rat King's
    * "Other Rats you control have toxic 1". One more instance of toxic on each

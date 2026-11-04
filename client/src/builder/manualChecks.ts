@@ -10900,4 +10900,18 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       you: { bf: ['Alaundo the Seer'], hand: ['Llanowar Elves', 'Forest'], lib: ['Island*20'] },
     }),
   ),
+  // --- A name an effect gives a permanent (2026-11-04) --------
+  preset(
+    'Witness Protection: the creature has a new name',
+    board({
+      you: { bf: ['Island'], hand: ['Witness Protection'] },
+      opp: { bf: ['Serra Angel'] },
+    }),
+  ),
+  preset(
+    'Awakening of Vitu-Ghazi: a land with a name',
+    board({
+      you: { bf: ['Forest*6'], hand: ['Awakening of Vitu-Ghazi'] },
+    }),
+  ),
 ]

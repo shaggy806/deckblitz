@@ -12199,7 +12199,36 @@ function pilesAt(sentences, i, ctx) {
   const s = (k) => sentences[i + k] ?? "";
   const handGraveyard = { chosen: "hand", rest: "graveyard" };
   const opponentChooses = (inner) => ({ kind: "choose-opponent", then: inner });
-  // Not piles, but two sentences that make one effect: Gandalf's "Exile that
+  // Not piles, but sentences that make one effect: Awakening of Vitu-Ghazi's "Put
+  // N +1/+1 counters on target land you control. It becomes a legendary 0/0
+  // Elemental creature with haste named Vitu-Ghazi. It's still a land."
+  const landCounters = new RegExp(`^put ${N} \\+1/\\+1 counters on target land you control\\.$`, "i").exec(s(0));
+  const named = /^it becomes a legendary (\d+)\/(\d+) ([A-Z][a-z]+) creature with ([a-z]+) named ([^.]+)\.$/i.exec(s(1));
+  if (landCounters !== null && named !== null && /^it's still a land\.$/i.test(s(2)) && KEYWORDS[named[4].toLowerCase()] !== undefined) {
+    const target = ctx.target("land-you-control");
+    return {
+      effect: {
+        kind: "sequence",
+        effects: [
+          { kind: "add-counter", target, counter: "+1/+1", amount: numberOf(landCounters[1]) },
+          {
+            kind: "animate",
+            target,
+            power: Number(named[1]),
+            toughness: Number(named[2]),
+            addTypes: ["creature"],
+            addSubtypes: [named[3]],
+            addSupertypes: ["legendary"],
+            keywords: [KEYWORDS[named[4].toLowerCase()]],
+            setName: named[5],
+            duration: "permanent",
+          },
+        ],
+      },
+      used: 3,
+    };
+  }
+  // Two sentences that make one effect: Gandalf's "Exile that
   // card with N time counters on it instead of putting it into your graveyard
   // as it resolves. Then if the exiled card doesn't have suspend, it gains
   // suspend."
@@ -17624,6 +17653,30 @@ function parseStatic(line, text) {
         w[1] === "~" ? { scope: "self" } : w[1] === "Each creature you control" ? { scope: "creatures-you-control" } : { scope: "attached" };
       const blockAdditional = w[2].startsWith("any") ? "any" : w[3] !== undefined ? words[w[3]] : 1;
       return { affects, blockAdditional, text };
+    }
+  }
+  // An Aura that names the creature, its abilities gone, with its new base P/T
+  // (`setName` — Witness Protection, Honest Work).
+  {
+    const w =
+      /^Enchanted creature loses all abilities and is an? ((?:(?:white|blue|black|red|green)(?: and (?:white|blue|black|red|green))?) )?([A-Z][a-z]+)( creature)? with base power and toughness (\d+)\/(\d+)( and "\{T\}: Add \{C\}\.?")? named ([^.]+)\.$/.exec(
+        line,
+      );
+    if (w !== null) {
+      const colorLetter = { white: "W", blue: "U", black: "B", red: "R", green: "G" };
+      return {
+        affects: { scope: "attached" },
+        loseAllAbilities: true,
+        ...(w[3] !== undefined ? { setTypes: ["creature"] } : {}),
+        setSubtypes: [w[2]],
+        ...(w[1] !== undefined ? { setColors: w[1].trim().split(" and ").map((c) => colorLetter[c]) } : {}),
+        setBasePt: { power: Number(w[4]), toughness: Number(w[5]) },
+        ...(w[6] !== undefined
+          ? { grantsActivated: [{ cost: { mana: null, tap: true }, targets: [], effect: { kind: "add-mana", mana: "C", amount: 1 }, resolve: null, text: "{T}: Add {C}." }] }
+          : {}),
+        setName: w[7],
+        text,
+      };
     }
   }
   // Layer 6 (`loseAllAbilities`): Humility's cousins, and the Auras that

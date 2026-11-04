@@ -7176,6 +7176,16 @@ These boards start before the first turn (the builder's `openingHands`), with th
 - **Do:** Activate Alaundo the Seer, choosing Llanowar Elves in the popup. Pass to your next turn and activate it again, choosing Forest. When offered, cast Llanowar Elves.
 - **Expect:** Llanowar Elves waits in exile with one time counter, and your upkeep doesn't take it off. The second activation takes it off and offers the free cast; the Elves have haste this turn.
 
+### Witness Protection: the creature has a new name
+
+- **Do:** Cast Witness Protection on Bob's Serra Angel.
+- **Expect:** Its tile now reads "Legitimate Businessperson", a 1/1 green and white Citizen with no flying. Destroy the Aura and it would be a Serra Angel again.
+
+### Awakening of Vitu-Ghazi: a land with a name
+
+- **Do:** Cast Awakening of Vitu-Ghazi on your Forest.
+- **Expect:** The Forest now reads "Vitu-Ghazi", a 9/9 legendary Elemental land with haste, nine counters on it, that still taps for {G}.
+
 ### Jetsam: one spell from each opponent, in the order you pick
 
 - **Do:** Cast Flotsam // Jetsam, clicking Jetsam. When offered, cast Hill Giant and Confirm.

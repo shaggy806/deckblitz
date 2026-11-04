@@ -3343,7 +3343,7 @@ function foldLayerFourOnce(
   let subtypes = printedSubtypes(registry, object);
   let seenTypes = types;
   let seenSubtypes = subtypes;
-  const baseSupertypes = supertypesOf(registry, object);
+  const baseSupertypes = supertypesWithEffects(registry, object);
   let addedSupertypes = NO_SUPERTYPES;
   const applied: ContributingStatic[] = [];
   // Statics that reach `object` only through what a later step gives it
@@ -3607,9 +3607,19 @@ export function effectiveSupertypes(
   registry: CardRegistry,
   object: GameObject,
 ): readonly Supertype[] {
-  const base = supertypesOf(registry, object);
+  const base = supertypesWithEffects(registry, object);
   const added = layerFour(state, registry, object).addedSupertypes;
   return added.length === 0 ? base : union(base, added);
+}
+
+/** `supertypesOf`, and an effect's "it becomes a legendary …" (Awakening of
+ * Vitu-Ghazi), which isn't copiable. */
+function supertypesWithEffects(registry: CardRegistry, object: GameObject): readonly Supertype[] {
+  let out = supertypesOf(registry, object);
+  for (const m of object.modifiers) {
+    if (m.copiable !== true && m.addSupertypes !== undefined) out = union(out, m.addSupertypes);
+  }
+  return out;
 }
 
 /** Objects whose layer 5 is being folded — a colour static's scope or

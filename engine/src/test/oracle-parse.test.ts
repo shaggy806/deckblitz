@@ -14710,3 +14710,63 @@ describe("time counters that reach a suspended card", () => {
     expect(gandalf.effect).toEqual({ kind: "exile-spell-as-it-resolves", timeCounters: 3 });
   });
 });
+
+describe("an effect that names a permanent", () => {
+  const read = (type_line: string, oracle_text: string) =>
+    parseFace({ name: "Test Card", type_line, oracle_text, mana_cost: "{7}", colors: [], cmc: 7 } as never) as unknown as {
+      effect?: unknown;
+      targets?: unknown;
+      static: Record<string, unknown>[];
+    };
+
+  it("reads an Aura's name, its abilities gone", () => {
+    const witness = read(
+      "Enchantment — Aura",
+      "Enchant creature\nEnchanted creature loses all abilities and is a green and white Citizen creature with base power and toughness 1/1 named Legitimate Businessperson.",
+    ).static[0];
+    expect(witness).toMatchObject({
+      affects: { scope: "attached" },
+      loseAllAbilities: true,
+      setTypes: ["creature"],
+      setSubtypes: ["Citizen"],
+      setColors: ["G", "W"],
+      setBasePt: { power: 1, toughness: 1 },
+      setName: "Legitimate Businessperson",
+    });
+    const honest = read(
+      "Enchantment — Aura",
+      'Enchant creature\nEnchanted creature loses all abilities and is a Citizen with base power and toughness 1/1 and "{T}: Add {C}" named Humble Merchant.',
+    ).static[0];
+    expect(honest.setTypes).toBeUndefined();
+    expect(honest.setName).toBe("Humble Merchant");
+    expect(honest.grantsActivated).toEqual([
+      { cost: { mana: null, tap: true }, targets: [], effect: { kind: "add-mana", mana: "C", amount: 1 }, resolve: null, text: "{T}: Add {C}." },
+    ]);
+  });
+
+  it("reads a land becoming a legendary creature with a name", () => {
+    const awakening = read(
+      "Instant",
+      "Put nine +1/+1 counters on target land you control. It becomes a legendary 0/0 Elemental creature with haste named Vitu-Ghazi. It's still a land.",
+    );
+    expect(awakening.targets).toEqual(["land-you-control"]);
+    expect(awakening.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "add-counter", target: 0, counter: "+1/+1", amount: 9 },
+        {
+          kind: "animate",
+          target: 0,
+          power: 0,
+          toughness: 0,
+          addTypes: ["creature"],
+          addSubtypes: ["Elemental"],
+          addSupertypes: ["legendary"],
+          keywords: ["haste"],
+          setName: "Vitu-Ghazi",
+          duration: "permanent",
+        },
+      ],
+    });
+  });
+});

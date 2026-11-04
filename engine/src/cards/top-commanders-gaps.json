@@ -1737,7 +1737,9 @@
   "effect:exile-from-hand-with-time-counters-grant-cast",
   "effect:exile-self-with-time-counters",
   "effect:exile-spell-as-it-resolves-suspended",
-  "effect:time-counters-on-all-suspended"
+  "effect:time-counters-on-all-suspended",
+  "static:set-name",
+  "effect:animate-add-supertype"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {
