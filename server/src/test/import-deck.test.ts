@@ -415,7 +415,8 @@ describe("evaluateDecklist", () => {
       (c) => (JSON.parse((c[1] as { body: string }).body) as { identifiers: unknown[] }).identifiers.length,
     );
     expect(sizes).toEqual([75, 5]);
-  });
+    // 80 names read against the whole pool take ~4 s alone, more on a busy machine.
+  }, 30_000);
 
   it("reports progress: local cards first, then each lookup batch", async () => {
     const names = Array.from({ length: 80 }, (_, i) => `Progress Filler ${i}`);
@@ -434,7 +435,7 @@ describe("evaluateDecklist", () => {
       { done: 81, total: 81, name: "Progress Filler 79" },
       { done: 81, total: 81, name: null },
     ]);
-  });
+  }, 30_000);
 
   it("still reaches 100% when every name is already cached", async () => {
     stubCollection({ "Twice Imported": { name: "Twice Imported", type_line: "Artifact" } });
