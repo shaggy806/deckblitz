@@ -7299,3 +7299,8 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 - **Do:** Cast the card from your hand as Harnfel. Activate it, discarding Grizzly Bears.
 - **Expect:** A choice of the two faces, Harnfel costing {4}{R}. The top two cards of your library are exiled and can be played this turn.
+
+### The Soul Stone: harnessed, it returns a creature each upkeep
+
+- **Do:** Activate the Stone's harness ability, exiling Grizzly Bears. Pass until your next upkeep.
+- **Expect:** The Stone carries a "harnessed" chip. At your upkeep its trigger goes on the stack and Hill Giant, the only creature card in your graveyard, comes back.

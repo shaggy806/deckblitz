@@ -333,6 +333,8 @@ export interface VisibleObject {
   readonly saddled: boolean;
   /** A Case with the solved designation (rule 719.3b). Absent when not. */
   readonly solved?: true;
+  /** Harnessed (rule 701.64b): its ∞ abilities work. Absent when not. */
+  readonly harnessed?: true;
   /** Its controller's Ring-bearer (rule 701.54) — a designation; the Ring
    * emblem says what that gives it. */
   readonly ringBearer: boolean;
@@ -807,6 +809,7 @@ function visible(
     suspected: zone === "battlefield" && object.suspectedAt !== undefined,
     saddled: zone === "battlefield" && object.saddled === true,
     ...(zone === "battlefield" && object.solved === true ? { solved: true as const } : {}),
+    ...(zone === "battlefield" && object.harnessed === true ? { harnessed: true as const } : {}),
     ringBearer: hasRingBearerDesignation(object),
     ...(pairedPartner(state, object) !== undefined ? { pairedWith: pairedPartner(state, object)!.id } : {}),
     ...(zone === "battlefield" && object.prepared !== undefined ? { preparedSpell: object.prepared.copy } : {}),

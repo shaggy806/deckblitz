@@ -126,7 +126,7 @@ const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 const KINSHIP =
   /^Kinship — At the beginning of your upkeep, you may look at the top card of your library\. If it shares a creature type with ~, you may reveal it\. If you do, (.+\.)$/;
 
-const MEANINGFUL_LABEL = /^(Power-up|Max speed|Solved|To solve|Companion|Visit|[IVX]+(?:, [IVX]+)*) — /;
+const MEANINGFUL_LABEL = /^(Power-up|Max speed|∞|Solved|To solve|Companion|Visit|[IVX]+(?:, [IVX]+)*) — /;
 
 /** A companion's condition (rule 702.139, `companion.ts`), or `null` for a
  * wording no template reads. */
@@ -4253,6 +4253,8 @@ export function parseSentence(sentence, ctx) {
     return { kind: "add-counter", target: slot(m[3]), counter, amount: n };
   }
   if (re("proliferate").test(s)) return { kind: "proliferate" };
+  // "Harness ~" (rule 701.64a): the designation an "∞ — " line reads.
+  if (re("harness ~").test(s)) return { kind: "harness" };
   // "Double the number of each kind of counter on target creature" (Vorel of
   // the Hull Clade).
   if ((m = re(`double the number of each kind of counter on (${TARGET})`).exec(s))) {
@@ -12923,8 +12925,10 @@ function parseFaceAsWritten(face, ctx = {}) {
     // the condition: a static on the card itself carrying it (`maxSpeed()`),
     // or, for an ability that works from the graveyard (702.178b), that
     // ability with the condition, "you" its owner.
-    if (/^Max speed — /.test(whole)) {
-      const maxed = maxSpeedLine(face, raw.replace(/^Max speed — /, ""), printed(raw), ctx);
+    // "∞ — [ability]" (rule 702.186b) is the same shape, while it's harnessed.
+    if (/^(?:Max speed|∞) — /.test(whole)) {
+      const gate = /^∞/.test(whole) ? HARNESSED : MAX_SPEED;
+      const maxed = maxSpeedLine(face, raw.replace(/^(?:Max speed|∞) — /, ""), printed(raw), ctx, gate);
       if (maxed === null) out.todo.push(printed(raw));
       else {
         out.activated.push(...maxed.activated);
@@ -15117,6 +15121,10 @@ const THIS_ABILITY = "this ability";
  * `maxSpeed()` helper's condition. */
 const MAX_SPEED = { kind: "speed", atLeast: 4 };
 
+/** "As long as this permanent is harnessed" (rule 702.186b) — the `infinity()`
+ * helper's condition. */
+const HARNESSED = { kind: "source", filter: { harnessed: true } };
+
 /**
  * "Equipped creature has '…'" / "Enchanted creature has '…'" naming the
  * granting permanent by name (rule 201.5a): a granted activated ability whose
@@ -15211,11 +15219,12 @@ function granterNamingGrant(face, raw, ctx) {
  * one that works from the graveyard (702.178b), which keeps its place with
  * the condition, and "You may cast this card from your graveyard", the
  * card's `castFromGraveyardIf`. `null` for anything else, or anything the
- * line's own reading left to a person.
+ * line's own reading left to a person. `gate` is the condition: `MAX_SPEED`,
+ * or `HARNESSED` for an "∞ — [ability]" line (rule 702.186b).
  */
-function maxSpeedLine(face, inner, text, ctx) {
+function maxSpeedLine(face, inner, text, ctx, gate = MAX_SPEED) {
   if (normalize(inner, face.name) === "You may cast ~ from your graveyard.") {
-    return { activated: [], static: [], card: { castFromGraveyardIf: MAX_SPEED } };
+    return gate === MAX_SPEED ? { activated: [], static: [], card: { castFromGraveyardIf: gate } } : null;
   }
   const read = parseFace({ ...face, oracle_text: inner }, ctx);
   if (!read.complete || read.keywords.length > 0 || read.effect !== undefined) return null;
@@ -15225,13 +15234,13 @@ function maxSpeedLine(face, inner, text, ctx) {
   const statics = [];
   const grantsActivated = [];
   for (const ability of read.activated) {
-    if (ability.zone === "graveyard" && ability.condition === undefined) activated.push({ ...ability, condition: MAX_SPEED, text });
+    if (gate === MAX_SPEED && ability.zone === "graveyard" && ability.condition === undefined) activated.push({ ...ability, condition: gate, text });
     else if (ability.zone === undefined) grantsActivated.push(ability);
     else return null;
   }
   for (const st of read.static) {
     if (st.affects?.scope !== "self" || st.condition !== undefined || st.fromGraveyard !== undefined) return null;
-    statics.push({ ...st, condition: MAX_SPEED, text });
+    statics.push({ ...st, condition: gate, text });
   }
   if (grantsActivated.length > 0 || read.triggered.length > 0) {
     if (statics.length > 0) return null;
@@ -15239,7 +15248,7 @@ function maxSpeedLine(face, inner, text, ctx) {
       affects: { scope: "self" },
       ...(grantsActivated.length > 0 ? { grantsActivated } : {}),
       ...(read.triggered.length > 0 ? { grantsTriggered: read.triggered } : {}),
-      condition: MAX_SPEED,
+      condition: gate,
       text,
     });
   }

@@ -24,6 +24,29 @@ import { parseEffect, parseFace, parseTrigger, parseCost, parseSentence, parseTy
 // @ts-expect-error — as above.
 import { checkPool } from "../../scripts/oracle-parse-check.mjs";
 
+describe("harness and ∞ (rules 701.64, 702.186)", () => {
+  const read = (oracle_text: string) =>
+    parseFace({ name: "The Test Stone", type_line: "Legendary Artifact — Infinity Stone", oracle_text, mana_cost: "{1}", colors: [] });
+  it("reads 'Harness ~' as an activated ability's effect", () => {
+    const stone = read("{5}{W}, {T}: Harness The Test Stone. (Once harnessed, its ∞ ability is active.)");
+    expect(stone.complete).toBe(true);
+    expect(stone.activated[0].effect).toEqual({ kind: "harness" });
+  });
+  it("reads an '∞ — ' line as a static granting the ability while harnessed", () => {
+    const line = "∞ — At the beginning of your upkeep, you gain 1 life.";
+    const stone = read(line);
+    expect(stone.complete).toBe(true);
+    expect(stone.triggered).toEqual([]);
+    expect(stone.static[0].affects).toEqual({ scope: "self" });
+    expect(stone.static[0].condition).toEqual({ kind: "source", filter: { harnessed: true } });
+    expect(stone.static[0].grantsTriggered).toHaveLength(1);
+    expect(stone.static[0].text).toBe(line);
+  });
+  it("leaves an '∞ — ' line it can't read whole to a person", () => {
+    expect(read("∞ — You may cast this card from your graveyard.").complete).toBe(false);
+  });
+});
+
 describe("players who can't search libraries, and a floor under a life total", () => {
   const read = (type_line: string, oracle_text: string) =>
     parseFace({ name: "Test Card", type_line, oracle_text, mana_cost: "{1}", colors: [] });

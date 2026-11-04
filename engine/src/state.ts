@@ -543,6 +543,15 @@ export interface GameObject {
    */
   monstrous?: true;
   /**
+   * The permanent is **harnessed** (rule 701.64b): a designation the `harness`
+   * effect gives it, which an Infinity card's "∞ — [ability]" reads (rule
+   * 702.186b — a static's `condition: { kind: "source", filter: { harnessed:
+   * true } }`). Neither an ability nor a copiable value, so a copy of a
+   * harnessed permanent isn't harnessed; it lasts until the permanent leaves
+   * the battlefield (`moveObject` clears it).
+   */
+  harnessed?: true;
+  /**
    * The permanent is **renowned** (rule 702.112b): a designation the `renown`
    * effect gives it, which renown's own trigger reads ("if it isn't
    * renowned"), "as long as this creature is renowned" statics read (the
@@ -2270,6 +2279,8 @@ export interface LastKnownInfo {
   readonly turnedFaceUpOnTurn?: number;
   /** It was monstrous (rule 701.37b) — the `monstrous` filter clause. */
   readonly monstrous?: true;
+  /** It was harnessed (rule 701.64b) — the `harnessed` filter clause. */
+  readonly harnessed?: true;
   /** It was renowned (rule 702.112b) — the `renowned` filter clause. */
   readonly renowned?: true;
   /** How it had entered — `GameObject.entry`. */
@@ -7214,6 +7225,7 @@ export function tokenFoldKey(o: GameObject): string {
     o.goadedForGameBy ?? [],
     o.suspectedAt ?? null,
     o.monstrous ?? false,
+    o.harnessed ?? false,
     o.renowned ?? false,
     o.saddled ?? false,
     o.saddledThisTurn ?? null,

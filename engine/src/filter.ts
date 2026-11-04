@@ -409,6 +409,10 @@ export interface CardFilter {
    * `condition: { kind: "source", filter: { monstrous: true } }`). One that
    * has left the battlefield is asked as it last was. */
   readonly monstrous?: boolean;
+  /** Is (or isn't) **harnessed** (rule 701.64b — `GameObject.harnessed`):
+   * "∞ — [ability]" (rule 702.186b, the `infinity` helper's condition). One
+   * that has left the battlefield is asked as it last was. */
+  readonly harnessed?: boolean;
   /**
    * It **saddled** the permanent applying the filter this turn (rule
    * 702.171c — `GameObject.saddledThisTurn`): Giant Beaver's "target
@@ -2197,6 +2201,10 @@ export function matchesFilter(
   if (filter.monstrous !== undefined) {
     const monstrous = live !== undefined ? live.zone === "battlefield" && live.monstrous === true : lki!.monstrous === true;
     if (monstrous !== filter.monstrous) return false;
+  }
+  if (filter.harnessed !== undefined) {
+    const harnessed = live !== undefined ? live.zone === "battlefield" && live.harnessed === true : lki!.harnessed === true;
+    if (harnessed !== filter.harnessed) return false;
   }
   if (filter.enlistedThisCombat !== undefined) {
     // Rule 702.154c, in the combat under way: the mark is the combat's. A

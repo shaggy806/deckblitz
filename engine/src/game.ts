@@ -34091,6 +34091,17 @@ export class Game {
         object.monstrous = true;
         this.emit({ type: "became-monstrous", object: source, amount });
       },
+      harness: () => {
+        // Rule 701.64a: "if this permanent isn't harnessed" — its own source,
+        // still the same permanent (rule 400.7). One that has left, or is
+        // harnessed already, has nothing happen to it.
+        const object = this.state.objects[source];
+        if (opts.sourceLost === true || object === undefined || object.zone !== "battlefield") return;
+        if (refs.source !== undefined && (object.zoneChangeCount ?? 0) !== refs.source) return;
+        if (object.harnessed === true) return;
+        object.harnessed = true;
+        this.emit({ type: "became-harnessed", object: source });
+      },
       renown: (amount) => {
         // Rule 702.112a: "if it isn't renowned" — monstrosity's shape. A
         // second instance of renown resolving finds it renowned (702.112c).
@@ -53937,6 +53948,7 @@ export class Game {
       ...(object.saddled === true ? { saddled: true } : {}),
       ...(object.enlistedIn !== undefined ? { enlistedIn: object.enlistedIn } : {}),
       ...(object.monstrous === true ? { monstrous: true } : {}),
+      ...(object.harnessed === true ? { harnessed: true } : {}),
       lostAbilities,
       ...(renamed !== name ? { renamed } : {}),
       ...(textNameOf(object) !== undefined ? { textName: textNameOf(object) } : {}),
@@ -54746,6 +54758,8 @@ export class Game {
     // Monstrous lasts until the permanent leaves the battlefield (701.37b);
     // being exerted, until it's a new object.
     delete object.monstrous;
+    // So does harnessed (701.64b).
+    delete object.harnessed;
     // So does renowned (702.112b).
     delete object.renowned;
     // So does saddled (702.171b); what it saddled was the old object's (400.7).

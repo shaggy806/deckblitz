@@ -267,6 +267,12 @@ export type GameEvent =
       readonly amount: number;
     })
   | (Base & {
+      /** A permanent became harnessed (rule 701.64a — the `harness` effect).
+       * Not emitted for one already harnessed, which nothing happens to. */
+      readonly type: "became-harnessed";
+      readonly object: ObjectId;
+    })
+  | (Base & {
       /** A permanent became saddled (rule 702.171b — the `become-saddled`
        * effect). `first` when it wasn't saddled already: "becomes saddled for
        * the first time each turn" (Stubborn Burrowfiend). */

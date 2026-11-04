@@ -1428,6 +1428,19 @@ export const maxSpeed = (
 });
 
 /**
+ * ∞ (Infinity, rule 702.186b): "∞ — [Ability]" means "As long as this
+ * permanent is harnessed, it has [Ability]" — a static ability on the card
+ * itself, holding what the ability is (`grantsTriggered`, `grantsActivated`,
+ * `grantKeywords`…). The `harness` effect is what switches it on. `text` is
+ * the printed line, "∞ — " and all.
+ */
+export const infinity = (band: Omit<StaticAbility, "affects" | "condition">): StaticAbility => ({
+  ...band,
+  affects: { scope: "self" },
+  condition: { kind: "source", filter: { harnessed: true } },
+});
+
+/**
  * Affinity for [something] (rule 702.41a): "This spell costs {1} less to
  * cast for each [something] you control" — the card's `selfCostReduction`.
  * `filter` is the something, and is counted among the caster's permanents

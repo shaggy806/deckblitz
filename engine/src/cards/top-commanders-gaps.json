@@ -411,6 +411,7 @@
   "keyword:fuse",
   "keyword:emerge",
   "condition:source-monstrous",
+  "mechanic:harness-infinity",
   "stat:mana-color-spent-condition",
   "static:doesnt-untap-filter",
   "static:doesnt-untap-attached",

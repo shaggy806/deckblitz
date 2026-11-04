@@ -3036,6 +3036,9 @@
 .card-flag.solved {
   background: #8fd0b0;
 }
+.card-flag.harnessed {
+  background: #e0c95f;
+}
 .card-flag.holding {
   background: #9fc3e8;
 }

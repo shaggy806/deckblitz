@@ -201,6 +201,8 @@ function eventText(event: GameEvent, nameOf: NameOf, seats: readonly SeatStatus[
       return `${name(event.object)} flips`
     case 'became-monstrous':
       return `${name(event.object)} becomes monstrous`
+    case 'became-harnessed':
+      return `${name(event.object)} becomes harnessed`
     case 'became-renowned':
       return `${name(event.object)} becomes renowned`
     case 'became-saddled':

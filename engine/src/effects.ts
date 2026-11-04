@@ -6058,6 +6058,16 @@ export type EffectSpec =
     }
   | {
       /**
+       * Harness [this permanent] (rule 701.64a): "If this permanent isn't
+       * harnessed, it becomes harnessed." Always about the ability's own
+       * source, and only while it's the same object on the battlefield (rule
+       * 400.7). The designation is what an "∞ — [ability]" line reads (rule
+       * 702.186b, the `infinity` helper).
+       */
+      readonly kind: "harness";
+    }
+  | {
+      /**
        * Renown N's effect (rule 702.112a): "if it isn't renowned, put N +1/+1
        * counters on it and it becomes renowned." Always about the ability's
        * own source, and only while it's the same object on the battlefield
@@ -12244,6 +12254,8 @@ export interface EffectApi {
   amass(amount: number, creatureType: string, onto?: ObjectId, player?: PlayerId): void;
   /** See the `"monstrosity"` {@link EffectSpec}. */
   monstrosity(amount: number): void;
+  /** See the `"harness"` {@link EffectSpec}. */
+  harness(): void;
   /** See the `"renown"` {@link EffectSpec}. */
   renown(amount: number): void;
   /** See the `"add-counter-all"` {@link EffectSpec}. */
@@ -17616,6 +17628,9 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     }
     case "monstrosity":
       ctx.monstrosity(amountValue(spec.amount, ctx));
+      return;
+    case "harness":
+      ctx.harness();
       return;
     case "renown":
       ctx.renown(amountValue(spec.amount, ctx));
