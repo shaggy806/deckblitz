@@ -831,7 +831,7 @@ type ManaExtraOutput = {
   readonly tag?: Omit<ManaUnit, "type">;
 } & (
   | { readonly units: readonly ManaType[]; readonly may?: true }
-  | { readonly amount: number; readonly choices: readonly ManaType[] }
+  | { readonly amount: number; readonly choices: readonly ManaType[]; readonly combination?: true }
 );
 
 /** A pick declining a "may add" of `units` — see `Game.standaloneManaVariants`. */
@@ -1794,6 +1794,9 @@ type ManaExtra = {
   readonly tag?: Omit<ManaUnit, "type">;
   /** "May add" (`add-mana`'s `mayAdd`). */
   readonly may?: true;
+  /** A further unit of one "N mana in any combination" — one `ManaExtra` a
+   * unit, each its own pick, and the order of the picks decides nothing. */
+  readonly combination?: true;
 };
 
 
@@ -24053,9 +24056,11 @@ export class Game {
                   ...tag,
                 }))
             : typeof mana === "object"
-              ? typeof ability.effect.amount !== "number"
-                ? // "X mana in any combination of …" with a live X: one
-                  // compressed option rather than X+1 enumerated splits.
+              ? typeof ability.effect.amount !== "number" ||
+                (manaAmount > 4 && !("different" in mana && typeof mana.different === "number"))
+                ? // "X mana in any combination of …" with a live X, or a
+                  // printed number past a handful (Cascading Cataracts' 126
+                  // splits): one compressed option rather than every split.
                   oneOf.length === 0
                   ? []
                   : [
@@ -24850,11 +24855,19 @@ export class Game {
                 ])
               : combos.map((c) => ({ ...c, makes: [...c.makes, ...extra.units] }))
             : combos.flatMap((c) =>
-                extra.choices.map((t) => ({
-                  ...c,
-                  manaColors: [...c.manaColors, t],
-                  makes: [...c.makes, ...Array<ManaType>(extra.amount).fill(t)],
-                })),
+                extra.choices
+                  // A further unit of one combination: {W}{U} is {U}{W}, so
+                  // its picks are offered in one order only.
+                  .filter(
+                    (t) =>
+                      extra.combination !== true ||
+                      extra.choices.indexOf(t) >= extra.choices.indexOf(c.manaColors[c.manaColors.length - 1]),
+                  )
+                  .map((t) => ({
+                    ...c,
+                    manaColors: [...c.manaColors, t],
+                    makes: [...c.makes, ...Array<ManaType>(extra.amount).fill(t)],
+                  })),
               );
       }
       out.push(...combos);
@@ -24922,7 +24935,15 @@ export class Game {
       };
       const choose = (choices: readonly ManaType[]): void => {
         if (choices.length === 1) fixed(choices);
-        else if (choices.length > 1) out.push({ holder: extra.holder, amount: extra.amount, choices, ...tag });
+        else if (choices.length > 1) {
+          out.push({
+            holder: extra.holder,
+            amount: extra.amount,
+            choices,
+            ...tag,
+            ...(extra.combination === true ? { combination: true as const } : {}),
+          });
+        }
       };
       const m = extra.mana;
       if (m === "produced") choose(MANA_TYPES.filter((t) => produced.includes(t)));
@@ -24991,6 +25012,35 @@ export class Game {
           continue;
         }
         const tag = this.manaTagFor(holder, effect);
+        // "An additional two mana in any combination of colors" (Market
+        // Festival): one unit at a time, each its own pick — of any colour
+        // when the list is all five, as Fertile Ground's "one mana of any
+        // color" twice over.
+        const combination =
+          typeof effect.mana === "object" &&
+          "oneOf" in effect.mana &&
+          effect.mana.same !== true &&
+          effect.mana.different === undefined &&
+          effect.mayAdd !== true &&
+          typeof effect.amount === "number" &&
+          effect.amount > 1
+            ? effect.mana.oneOf
+            : null;
+        if (combination !== null) {
+          const mana = COLORS.every((c) => combination.includes(c)) ? ("any-color" as const) : { oneOf: combination };
+          for (let unit = 0; unit < (effect.amount as number); unit += 1) {
+            out.push({
+              mana,
+              amount: 1,
+              holder: holder.id,
+              ...(producing !== undefined ? { producing } : {}),
+              ...(unit === 0 && effect.also !== undefined ? { also: effect.also } : {}),
+              ...(tag !== undefined ? { tag } : {}),
+              ...(unit > 0 ? { combination: true as const } : {}),
+            });
+          }
+          continue;
+        }
         out.push({
           mana: effect.mana,
           // A counted amount — "an additional {G} for each Elf on the

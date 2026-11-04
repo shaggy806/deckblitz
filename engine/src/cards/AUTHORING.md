@@ -2898,7 +2898,8 @@ putThereBySource, sharesCardTypeWith, sharesPermanentTypeWith, sharesCreatureTyp
 xInManaCost, manaCost, coloredManaSymbols, cardTypeCount, nameDiffersFromEach,
 nameUnlike, sameNameAsTarget, sameNameAsTriggerObject, sharesColorWithTarget, ofChosenType, targets, greatestAmongItsController, greatestInZone }`,
 every present clause ANDed. `greatestInZone: { of, among }` is one comparison over
-everything in the object's zone that matches `among`, ties all counted: over every
+everything in the object's zone that matches `among`, ties all counted (`strictly`: none,
+Selvala, Heart of the Wilds' "greater than each other creature's power"): over every
 permanent, whoever controls it, on the battlefield — Topple's "target creature with the
 greatest power among creatures on the battlefield", Getaway Glamer's "if no other creature
 has greater power" (a `target` condition), Strength-Testing Hammer's (`trigger-object`),
@@ -4062,7 +4063,11 @@ ability activated by hand is offered once per outcome (the action's
 (rule 608.2d) — "one mana of any color" as a `choose-modes` over the five, "N
 mana in any combination of" as one choice of split while there are at most 35
 of them (Culling Ritual's "{B} or {G} for each", Burnt Offering), otherwise
-each unit's colour in turn (Klauth's X over five colours). So a triggered or
+each unit's colour in turn (Klauth's X over five colours). By hand, past what a
+list holds (a live X, or Cascading Cataracts' five over five colours), it's all of
+one colour each and one offer whose split the player picks (`manaSplit`: Selvala,
+Heart of the Wilds). On a `tapped-for-mana` trigger each unit is its own pick
+(Market Festival's "two mana in any combination of colors"). So a triggered or
 targeted ability that adds "one mana of any color" is just that `add-mana`
 (Deathrite Shaman, Klauth) — no hand-built `modal` over the colours needed.
 "Add {W}{U}" (a Signet, a Karoo land) is `{ all: ["W", "U"] }` with

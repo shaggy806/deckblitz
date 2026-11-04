@@ -697,7 +697,13 @@ export interface CardFilter {
    * `power` and `toughness` don't match, and a static needs a condition or an
    * effect's filter for those.
    */
-  readonly greatestInZone?: { readonly of: AggregateOf; readonly among: CardFilter };
+  readonly greatestInZone?: {
+    readonly of: AggregateOf;
+    readonly among: CardFilter;
+    /** "Greater than each other creature's power" (Selvala, Heart of the
+     * Wilds): a tie doesn't count, nor does another token of its stack. */
+    readonly strictly?: true;
+  };
   readonly power?: NumCompare;
   readonly toughness?: NumCompare;
   /**
@@ -2970,8 +2976,9 @@ export function matchesFilter(
   // in its zone that matches has more, whoever controls it.
   const greatestInZone = filter.greatestInZone;
   if (greatestInZone !== undefined) {
-    const { of, among } = greatestInZone;
+    const { of, among, strictly } = greatestInZone;
     if (layered !== undefined && (of === "power" || of === "toughness")) return false;
+    if (strictly === true && live?.zone === "battlefield" && (live.stackCount ?? 1) > 1) return false;
     const zone =
       live === undefined || live.zone === "battlefield"
         ? state.zones.shared.battlefield
@@ -2985,7 +2992,8 @@ export function matchesFilter(
         : matchValueOf(state, registry, { id, weight: 1, lastKnown: lki }, of);
     for (const other of zone) {
       if (other === id || !matchesFilter(state, registry, other, among, { you: ctx.you })) continue;
-      if (aggregateValueOf(state, registry, other, of) > mine) return false;
+      const theirs = aggregateValueOf(state, registry, other, of);
+      if (strictly === true ? theirs >= mine : theirs > mine) return false;
     }
   }
 

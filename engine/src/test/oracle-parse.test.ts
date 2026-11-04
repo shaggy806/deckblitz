@@ -14221,6 +14221,42 @@ describe("the turn's lists and counts: attackers, sacrifices, exile, surveils", 
   });
 });
 
+describe("mana in any combination of colors", () => {
+  const WUBRG = ["W", "U", "B", "R", "G"];
+  const read = (type_line: string, oracle_text: string) =>
+    parseFace({ name: "Test Card", type_line, oracle_text, mana_cost: "{1}", colors: [] });
+
+  it("a printed number, a cast-time X and a live X", () => {
+    expect(read("Land", "{5}, {T}: Add five mana in any combination of colors.").activated[0].effect).toEqual({
+      kind: "add-mana",
+      mana: { oneOf: WUBRG },
+      amount: 5,
+    });
+    expect(read("Artifact", "{X}, {T}, Sacrifice this artifact: Add X mana in any combination of colors.").activated[0].effect).toEqual({
+      kind: "add-mana",
+      mana: { oneOf: WUBRG },
+      amount: "x",
+    });
+    expect(
+      read("Creature — Elf", "{G}, {T}: Add X mana in any combination of colors, where X is the greatest power among creatures you control.")
+        .activated[0].effect,
+    ).toEqual({
+      kind: "add-mana",
+      mana: { oneOf: WUBRG },
+      amount: { aggregate: "max", of: "power", filter: { type: "creature", controlledBy: "you" } },
+    });
+  });
+
+  it("an enchanted land's additional two", () => {
+    const ability = read(
+      "Enchantment — Aura",
+      "Enchant land\nWhenever enchanted land is tapped for mana, its controller adds an additional two mana in any combination of colors.",
+    ).triggered[0];
+    expect(ability.trigger).toEqual({ on: "tapped-for-mana", who: "attached" });
+    expect(ability.effect).toEqual({ kind: "add-mana", mana: { oneOf: WUBRG }, amount: 2 });
+  });
+});
+
 describe("facts fixed as a spell is cast (rule 601.2i), and what a kick brings as it enters", () => {
   const read = (type_line: string, oracle_text: string) =>
     parseFace({ name: "Test Card", type_line, oracle_text, mana_cost: "{1}", colors: [] });

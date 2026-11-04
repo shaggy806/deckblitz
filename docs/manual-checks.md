@@ -7191,3 +7191,22 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 - **Do:** Activate Quicksilver Elemental's ability on Bob's Looming Shade, paying with an Island. Then activate the "{B}: gets +1/+1" it has gained, paying with your other Island.
 - **Expect:** The Elemental becomes a 4/5 until end of turn, blue mana paying for {B}. Looming Shade stays as it was.
+### Selvala: six mana in any combination
+
+- **Do:** Click Selvala's mana ability and choose the split offer. Put 2 in one colour and 1 in each other, then Add mana.
+- **Expect:** The popup lists six of one colour for each colour, plus an offer to pick the split, whose rows add up to 6 (Colossal Dreadmaw's power). The pool holds what you picked.
+
+### Selvala: the biggest creature's controller may draw
+
+- **Do:** Cast Hill Giant, then answer Selvala's question as it resolves.
+- **Expect:** You're asked whether to draw, since Hill Giant's 3 power beats every other creature's. Nothing asks if you cast Grizzly Bears instead.
+
+### Cascading Cataracts: five mana in any combination
+
+- **Do:** Click Cascading Cataracts and choose its {5} ability's split offer. Pick five mana across colours, then Add mana.
+- **Expect:** Five Wastes tap for the {5}. The rows add up to 5, and the pool holds what you picked.
+
+### Market Festival: two more mana, each its own pick
+
+- **Do:** Click the Forest enchanted with Market Festival, and take {G}, {W} and {U}.
+- **Expect:** A popup with one offer per combination, fifteen in all and no {W}{U} beside {U}{W}. The pool ends with {G}{W}{U}.

@@ -7337,7 +7337,8 @@ function Table({
             // apart, so they belong in the key too.
             // So is a modal ability, once per mode.
             // And one naming each opponent who may choose its targets.
-            key: `${ab.abilityIndex}:${ab.manaColors?.join('') ?? ''}:${ab.modes?.join(',') ?? ''}:${ab.otherChooser ?? ''}:${ab.divide?.total ?? ''}`,
+            // A split's stand-in picks are all of one colour, as that colour's own offer is.
+            key: `${ab.abilityIndex}:${ab.manaColors?.join('') ?? ''}:${ab.modes?.join(',') ?? ''}:${ab.otherChooser ?? ''}:${ab.divide?.total ?? ''}:${ab.manaSplit !== undefined ? 'split' : ''}`,
             label:
               (ab.text || `Ability ${ab.abilityIndex + 1}`) +
               (ab.otherChooser !== undefined ? ` (${playerLabel(ab.otherChooser, game.seats)} chooses)` : ''),

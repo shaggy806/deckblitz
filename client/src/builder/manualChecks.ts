@@ -10799,4 +10799,20 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: ['Looming Shade'] },
     }),
   ),
+  preset(
+    'Selvala: six mana in any combination',
+    board({ you: { bf: ['Selvala, Heart of the Wilds', 'Colossal Dreadmaw', 'Forest'] } }),
+  ),
+  preset(
+    'Selvala: the biggest creature\'s controller may draw',
+    board({ you: { bf: ['Selvala, Heart of the Wilds', 'Mountain*4'], hand: ['Hill Giant', 'Grizzly Bears'] } }),
+  ),
+  preset(
+    'Cascading Cataracts: five mana in any combination',
+    board({ you: { bf: ['Cascading Cataracts', 'Wastes*5'] } }),
+  ),
+  preset(
+    'Market Festival: two more mana, each its own pick',
+    board({ you: { bf: ['Forest', { name: 'Market Festival', attach: 'Forest' }] } }),
+  ),
 ]

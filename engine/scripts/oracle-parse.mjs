@@ -1794,6 +1794,8 @@ export function parseTrigger(clause) {
   // tapped for mana" (Storm Cauldron), "whenever you tap ~ for mana" (Zhur-Taa
   // Druid): rule 106.12a, as the mana ability resolves and produces mana.
   if (/^Whenever you tap ~ for mana$/.test(c)) return [{ on: "tapped-for-mana", who: "self" }];
+  // An Aura's land (Fertile Ground, Market Festival).
+  if (/^Whenever enchanted land is tapped for mana$/.test(c)) return [{ on: "tapped-for-mana", who: "attached" }];
   // A filter's name read off the card linked to this one (rule 607.2a, the
   // exile linked below by "same name as the exiled card"): Extraplanar Lens,
   // Invader Parasite.
@@ -3278,6 +3280,13 @@ export function parseSentence(sentence, ctx) {
         ...(eachKind[2] !== undefined ? { orRemove: true } : {}),
       };
     }
+  }
+  // "Add X mana in any combination of colors, where X is the greatest power
+  // among creatures you control" (Selvala, Heart of the Wilds): each unit the
+  // player's pick, X read as it's made (rule 605.3a).
+  if (!ctx?.onStack && (m = /^add X mana in any combination of colors, where X is (.+)\.$/i.exec(s))) {
+    const total = dividedTotalOf(m[1]);
+    if (total !== null) return { kind: "add-mana", mana: { oneOf: ["W", "U", "B", "R", "G"] }, amount: total };
   }
   if (
     /\bwhere X\b|\bfor each\b/i.test(s) &&
@@ -5249,6 +5258,11 @@ export function parseSentence(sentence, ctx) {
     if (re("(?:add|its controller adds) an additional one mana of any color").test(s)) {
       return { kind: "add-mana", mana: "any-color", amount: 1 };
     }
+    // Market Festival: each unit its own pick (`Game.tappedForManaExtras`).
+    if ((m = re(`(?:add|its controller adds) an additional ${N} mana in any combination of colors`).exec(s))) {
+      const n = amount(m[1]);
+      if (typeof n === "number") return { kind: "add-mana", mana: { oneOf: ["W", "U", "B", "R", "G"] }, amount: n };
+    }
     if (re("its controller adds an additional one mana of that color").test(s)) {
       return { kind: "add-mana", mana: "chosen", amount: 1 };
     }
@@ -5726,6 +5740,13 @@ export function parseSentence(sentence, ctx) {
   // "Two mana of different colors" (Firemind Vessel), and "two mana of any one
   // color and two mana of any other color" (Open the Omenpaths): a pairing,
   // chosen as it's added.
+  // "Add five mana in any combination of colors" (Cascading Cataracts): each
+  // unit the player's pick (`oneOf`). On the stack a card spells the picks out,
+  // or `addManaChoice` asks.
+  if (!ctx?.onStack && (m = new RegExp(`^add ${N} mana in any combination of colors\\.$`, "i").exec(s))) {
+    const n = amount(m[1]);
+    if (n !== null && n !== undefined) return { kind: "add-mana", mana: { oneOf: WUBRG }, amount: n };
+  }
   if (/^add two mana of different colors\.$/i.test(s)) {
     return { kind: "add-mana", mana: { oneOf: WUBRG, different: 1 }, amount: 2 };
   }

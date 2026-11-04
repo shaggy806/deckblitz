@@ -1718,7 +1718,8 @@
   "effect:grant-until-exiled-card-cast",
   "effect:grant-mana-ability-to-countered-creatures",
   "effect:aura-grants-restricted-mana-ability",
-  "effect:gain-activated-abilities-of-target"
+  "effect:gain-activated-abilities-of-target",
+  "effect:mana-any-combination-choice"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

@@ -511,7 +511,14 @@ export function standaloneManaChoices(
   if ("same" in mana && mana.same === true) {
     return oneOf(mana).map((c) => Array<ManaType>(effect.amount as number).fill(c));
   }
-  return manaCombinations(oneOf(mana), effect.amount);
+  // The same budget as a live amount's: Cascading Cataracts' "five mana in any
+  // combination of colors" is 126 splits, so all of one type per type, and
+  // `standaloneManaSplit` asks for the rest.
+  const colors = oneOf(mana);
+  if (splitCount(colors.length, effect.amount) * effect.amount > MAX_STANDALONE_UNITS) {
+    return colors.map((c) => Array<ManaType>(effect.amount as number).fill(c));
+  }
+  return manaCombinations(colors, effect.amount);
 }
 
 /**
@@ -541,8 +548,9 @@ export function multipliedManaOption(option: ManaOption, times: number): ManaOpt
 
 /**
  * The split a player picks for themselves when {@link standaloneManaChoices}
- * has too many to list — "X mana in any combination of …" with a live X past
- * {@link MAX_STANDALONE_UNITS}, offered there as all of one type per type —
+ * has too many to list — "X mana in any combination of …" with a live X, or
+ * Cascading Cataracts' five, past {@link MAX_STANDALONE_UNITS}, offered there
+ * as all of one type per type —
  * or `null` when the list has every split (or there's no split to pick). A
  * client asks how many of each and activates with those picks
  * (`activate-ability`'s `manaColors`, one per unit), which the engine takes
@@ -554,11 +562,12 @@ export function standaloneManaSplit(
   liveAmount: () => number | null,
 ): { readonly colors: readonly ManaType[]; readonly amount: number } | null {
   const effect = ability.effect;
-  if (effect === null || effect.kind !== "add-mana" || typeof effect.amount === "number") return null;
+  if (effect === null || effect.kind !== "add-mana") return null;
   const mana = effect.mana;
   if (typeof mana !== "object" || "all" in mana || "eachColorAmong" in mana) return null;
   if ("same" in mana && mana.same === true) return null;
-  const amount = liveAmount();
+  if ("different" in mana && mana.different !== undefined) return null;
+  const amount = typeof effect.amount === "number" ? effect.amount : liveAmount();
   if (amount === null || amount < 1) return null;
   const colors = oneOf(mana);
   if (colors.length < 2 || splitCount(colors.length, amount) * amount <= MAX_STANDALONE_UNITS) return null;
