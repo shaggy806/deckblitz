@@ -4979,3 +4979,5 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 **Mana in any combination, the player's split every way it's made (2026-11-04).** `effect:mana-any-combination-choice`: a printed amount past the list's budget gets `manaSplit` as a live one has (Cascading Cataracts); a `tapped-for-mana` `oneOf` over 1 is one pick a unit, offered once a combination (Market Festival, and Dawn's Reflection when authored); `greatestInZone`'s `strictly` for Selvala, Heart of the Wilds' draw. `test/mana-any-combination.test.ts`.
 
 **Every graveyard onto the battlefield (2026-11-04).** `effect:mass-graveyard-to-battlefield` was already `return-from-graveyard`'s `all-graveyards` and `each-graveyard`, so no engine change: Rise of the Dark Realms, Roar of Reclamation, Myr Servitor (`hasName`, an intervening `source-zone`). `test/mass-graveyard-to-battlefield.test.ts`.
+
+**Different names as an intervening if (2026-11-04).** `condition:distinct-names-condition` was already `controls`' `distinctNames`, so no engine change: Field of the Dead, Liliana's Contract. `test/distinct-names-condition.test.ts`.

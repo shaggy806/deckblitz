@@ -1721,7 +1721,8 @@
   "effect:gain-activated-abilities-of-target",
   "effect:mana-any-combination-choice",
   "effect:mana-any-combination-choice",
-  "effect:mass-graveyard-to-battlefield"
+  "effect:mass-graveyard-to-battlefield",
+  "condition:distinct-names-condition"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

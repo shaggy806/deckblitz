@@ -14221,6 +14221,42 @@ describe("the turn's lists and counts: attackers, sacrifices, exile, surveils", 
   });
 });
 
+describe("an intervening if over different names, and this land or another", () => {
+  it("Field of the Dead's two triggers, each with the condition", () => {
+    const face = parseFace({
+      name: "Test Card",
+      type_line: "Land",
+      oracle_text:
+        "Whenever this land or another land you control enters, if you control seven or more lands with different names, you gain 1 life.",
+      colors: [],
+    });
+    const condition = { kind: "controls", filter: { type: "land" }, atLeast: 7, distinctNames: true, countsSelf: true };
+    expect(face.triggered.map((t: { trigger: unknown }) => t.trigger)).toEqual([
+      { on: "enters-battlefield", who: "self" },
+      { on: "enters-battlefield", who: "you-control", filter: { type: "land" }, otherOnly: true },
+    ]);
+    expect(face.triggered[0].condition).toEqual(condition);
+    expect(face.triggered[1].condition).toEqual(condition);
+  });
+
+  it("Liliana's Contract's Demons", () => {
+    const face = parseFace({
+      name: "Test Card",
+      type_line: "Enchantment",
+      oracle_text: "At the beginning of your upkeep, if you control four or more Demons with different names, you win the game.",
+      mana_cost: "{1}",
+      colors: [],
+    });
+    expect(face.triggered[0].condition).toEqual({
+      kind: "controls",
+      filter: { subtype: "Demon" },
+      atLeast: 4,
+      distinctNames: true,
+      countsSelf: true,
+    });
+  });
+});
+
 describe("every graveyard onto the battlefield", () => {
   it("put all creature cards from all graveyards under your control", () => {
     const face = parseFace({

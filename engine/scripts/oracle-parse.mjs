@@ -2143,6 +2143,12 @@ export function parseTrigger(clause) {
   // "Whenever ~ or another creature you control dies": the two triggers it is
   // (`thisOrAnother`) — the source itself, whatever it is by then, and every
   // other one matching.
+  if (/^Whenever ~ or another land you control enters$/.test(c)) {
+    return [
+      { on: "enters-battlefield", who: "self" },
+      { on: "enters-battlefield", who: "you-control", filter: { type: "land" }, otherOnly: true },
+    ];
+  }
   if ((m = /^Whenever ~ or another (.+?) you control (dies|leaves the battlefield)$/.exec(c))) {
     const filter = parseTypePhrase(m[1]);
     // A type to stand on ("another Zombie" is a creature — a person's call).
@@ -14271,7 +14277,8 @@ function parseFaceAsWritten(face, ctx = {}) {
           devotionIf(clause) ??
           kickedWithIf(clause, out.kicker) ??
           attackedWithOf(clause.slice(3, -1)) ??
-          playerStateIf(clause, triggers);
+          playerStateIf(clause, triggers) ??
+          distinctNamesIf(clause);
         if (condition !== undefined) base.condition = condition;
         else if (clause.toLowerCase() === "if it had counters on it," && departedOf(triggers) !== undefined) {
           // A permanent that left, read as it last existed: its own counters
@@ -15119,6 +15126,16 @@ function combatDamagedBy(clause) {
  * step trigger and the defending player of an attack trigger; `undefined`
  * for any other clause, or a "that player" no trigger here names.
  */
+/** "If you control seven or more lands with different names," (Field of the
+ * Dead, Liliana's Contract): each name once (rule 201.2), itself among them. */
+function distinctNamesIf(clause) {
+  const m = /^if you control (\w+) or more (.+) with different names,$/i.exec(clause);
+  const atLeast = m === null ? undefined : numberOf(m[1].toLowerCase());
+  const filter = m === null ? null : parseTypePhrase(m[2]);
+  if (typeof atLeast !== "number" || filter === null) return undefined;
+  return { kind: "controls", filter, atLeast, distinctNames: true, countsSelf: true };
+}
+
 function playerStateIf(clause, triggers) {
   const c = clause.toLowerCase();
   const that = triggers.every((t) => t.on === "step-begins" && t.who !== "you")

@@ -5859,7 +5859,8 @@ clause (section 9):
   inside a `conditional` effect, where there are targets. `distinctNames: true`
   counts names, not permanents — The Necrobloom's "seven or more lands with
   different names" (`{ filter: { type: "land" }, atLeast: 7, distinctNames:
-  true }`), Maze's End's ten Gates; a face-down permanent has no name, and a Room
+  true }`), Field of the Dead's as an intervening if (with `countsSelf`, since it's
+  one of the lands), Maze's End's ten Gates; a face-down permanent has no name, and a Room
   has one for each unlocked door (Promising Stairs). `sharingAName: true` counts
   only the most of them with one name in common (rule 201.2a) — Endless Atlas's
   "three or more lands with the same name", Chrome Replicator's "two or more
