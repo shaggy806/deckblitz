@@ -3024,6 +3024,7 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Code health
 
+- **The Playwright suite split into a quick set and a full one** (2026-11-04): 18 minutes to about 11 on a push, so the E2E workflow finishes inside its 20-minute limit, which it had been hitting since 2026-11-02; the whole suite runs daily on GitHub, and `build-family`'s agents leave `test:e2e` to the coordinator.
 - **`canDispatch` refuses a cast with an illegal target**, as `dispatch` does (`whyCastTargetsInvalid`: the chosen face's specs under its modes, kicker, overload and X) — a Lightning Bolt at a player with protection from everything (2026-10-16).
 - **Solo games in the player's browser**, `docs/plans/local-rooms.md` steps 1-7: blitz and
   lessons in a Web Worker (e21848ab), lobbies on the server, a local game surviving a reload

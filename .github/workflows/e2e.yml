@@ -4,15 +4,21 @@ on:
   push:
     branches: [main]
   pull_request:
+  # The whole suite, tutorials and larger screens included: a push runs the
+  # quick set, which leaves those out (client/package.json).
+  schedule:
+    - cron: '0 10 * * *'
+  workflow_dispatch:
 
+# By event, so a push never cancels a scheduled run of the whole suite.
 concurrency:
-  group: e2e-${{ github.ref }}
+  group: e2e-${{ github.event_name }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
   smoke:
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: ${{ (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') && 45 || 20 }}
     # dev-rooms' rooms on the main thread (0) and on a worker thread (1), as
     # the server's --shards runs them (docs/plans/room-shards.md).
     strategy:
@@ -32,7 +38,7 @@ jobs:
       - run: npx playwright install --with-deps chromium
         working-directory: client
       # Starts dev-rooms and the Vite dev server itself (client/playwright.config.ts).
-      - run: npm run test:e2e -w client
+      - run: npm run ${{ (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') && 'test:e2e:full' || 'test:e2e' }} -w client
         env:
           DEV_ROOMS_SHARDS: ${{ matrix.shards }}
       - uses: actions/upload-artifact@v4

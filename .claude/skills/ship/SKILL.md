@@ -35,7 +35,8 @@ clobbered). If the build rewrote `generated.ts` or `shards/`, commit them.
   1 and must stay all-pass. A change in
   strength wants `ab-bench` or `decision-diff`; say which was run, or that
   neither was and why.
-- **Anything UI-visible**: `npm run test:e2e -w client`, and a look in the
+- **Anything UI-visible**: `npm run test:e2e -w client` (`test:e2e:full` too
+  when it touches a tutorial, a tour or a larger screen), and a look in the
   browser at a 2- and a 4-player table at ~768px tall (`dev-up`, then
   `dev-down` after). `client/CLAUDE.md`'s standing UI rules apply.
 - New test: break the code it covers and watch it fail, where a silent pass

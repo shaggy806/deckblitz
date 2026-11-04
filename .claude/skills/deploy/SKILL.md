@@ -33,6 +33,17 @@ curl -s "https://api.github.com/repos/shaggy806/deckblitz/actions/runs?head_sha=
 re-checking every minute, up to 25 minutes) and say so; CI `completed failure` — there is no
 bundle, so say what failed (the run's page, github.com/shaggy806/deckblitz/actions) and stop.
 
+**And the whole Playwright suite should have passed.** A push runs only the quick set; the tutorials
+and the larger screens run in `test:e2e:full`, daily on GitHub. See the last scheduled run:
+
+```bash
+gh run list --workflow=e2e.yml --event schedule --limit 1 --json conclusion,headSha,createdAt
+```
+
+If `client/` changed since that run's commit, or it didn't pass, run `npm run test:e2e:full -w client`
+before deploying (about 18 minutes; build `engine`, `protocol` and `server` first). A failure stops
+the deploy unless it's a load timeout that passes when re-run alone.
+
 ## 2. Reach the box, and see who's playing
 
 ```bash

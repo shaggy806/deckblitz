@@ -161,7 +161,8 @@ pane by hand:
 the banner, popups by pile, badges and every player's counts after each
 step (steps: `cast:`, `card:`, `click:`, `player:`, `pass`, `wait`; see the
 file's header). Open a step's screenshot only when the text can't settle it.
-Then `npm run test:e2e -w client`. `decision:choose-card-name`
+Then `npm run test:e2e -w client` (the quick set; an overnight agent leaves it
+to the coordinator). `decision:choose-card-name`
 (46 cards) is one of these. A feature that reuses an existing decision
 (`for-each-player` handing a look-and-choose to a targeted player) needs
 none: check the client already reads that decision's answer from the engine
@@ -293,8 +294,8 @@ Fill in the family and the skip list; keep the rest as written.
 > AUTHORING's vocabulary, `neededCards-features.md`). A new player decision
 > means the client too, by `docs/plans/decision-registry.md`'s checklist,
 > with manual checks and their boards, each played with
-> `client/e2e/run-check.mjs` (a 4-player one too) and `npm run test:e2e -w
-> client`.
+> `client/e2e/run-check.mjs` (a 4-player one too). Skip `test:e2e`: the
+> coordinator runs it.
 >
 > Check with `npm run typecheck -w engine`, `card:parse-check` and, once at the
 > end, your test files with the tests a new card or effect is likeliest to
@@ -409,6 +410,10 @@ in its own worktree (`isolation: "worktree"`), integrated by cherry-pick.
 - **The user's call, 2026-11-04:** agents no longer run the whole engine suite, which repeated verify's. Its failures now reach the
   coordinator, so keep each agent's worktree and branch until a verify has passed on its commits, and send a failure back with
   `SendMessage` while the agent still has its context. `text-change.test.ts` is the one failure last night's list wouldn't catch.
+- **The user's call, 2026-11-04, on Playwright:** agents never run `test:e2e`. The coordinator runs the quick set (`npm run test:e2e -w
+  client`, about 11 minutes) only when a pick changed `client/`, `protocol/` or `engine/src/view.ts` since its last pass (`git diff
+  --name-only <last pass>..HEAD -- client protocol engine/src/view.ts`). Tutorials and the larger screens are in `test:e2e:full`, which
+  GitHub runs daily. The suite can't simply go parallel: 4 workers took 7.2 minutes with 19 failures, mostly different tests from run to run.
 - **`python .claude/skills/build-family/pick.py <commit>...`** picks agent commits and resolves the routine
   conflicts by keeping both sides (`pickfix.py`). Its header says what to check afterwards.
 - **Clean up** each worktree: unlink every junction by absolute path

@@ -28,7 +28,7 @@ that file. The board-overhaul record is `BOARD_REDESIGN_PLAN.md`.
   `useLayoutEffect` or a callback ref, never a plain `useEffect`.
 - **`data-tour="…"` attributes are the tutorials' contract** (`tutorial/anchors.ts` lists them):
   a tour points at a control through it, never through a class name, and
-  `e2e/site-tour.spec.ts` fails when one goes missing. Keep the attribute when you restyle or
+  `e2e/site-tour.spec.ts` (in `test:e2e:full`) fails when one goes missing. Keep the attribute when you restyle or
   move a control it's on.
 - **Art URLs go through `ui/art.ts`'s `resolveArtUrl`** (host-checked against
   `ALLOWED_ART_HOSTS`), and into CSS through `cssUrl()`, always.
@@ -55,5 +55,5 @@ The full text of each rule, with the bug that prompted it, is in `docs/architect
 ## Commands
 
 (From the repo root with `-w client`.) `dev` (needs a room server on `ws://<host>:4000`: use the
-`dev-up` skill), `build`, `lint` (oxlint), `test` (vitest unit tests, `src/**/*.test.ts`), `test:e2e` (build `engine`, `protocol` and `server`
-first).
+`dev-up` skill), `build`, `lint` (oxlint), `test` (vitest unit tests, `src/**/*.test.ts`), `test:e2e` (the quick set, about 11 minutes: no tutorials or site tour, 1366x768 only; build `engine`, `protocol` and `server`
+first), `test:e2e:full` (everything, about 18 minutes; GitHub runs it daily).
