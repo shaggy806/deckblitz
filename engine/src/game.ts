@@ -28867,7 +28867,9 @@ export class Game {
               return false;
             }
           }
-          if (spec.ninjutsu !== true && spec.loyalty !== true) return true;
+          if (spec.ninjutsu !== true && spec.loyalty !== true && spec.exhaust !== true && spec.powerUp !== true) {
+            return true;
+          }
           // The ability as it was activated — a granted ninjutsu (Satoru
           // Umezawa's) included, through the stack object's grant.
           const activated = this.state.objects[event.ability];
@@ -28875,6 +28877,8 @@ export class Game {
           const ability = this.stackAbilityOf(activated) as Partial<ActivatedAbility>;
           return (
             (spec.ninjutsu !== true || ability.ninjutsu === true) &&
+            (spec.exhaust !== true || ability.exhaust === true) &&
+            (spec.powerUp !== true || ability.powerUp === true) &&
             (spec.loyalty !== true || ability.loyaltyCost !== undefined)
           );
         }

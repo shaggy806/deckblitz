@@ -13266,6 +13266,20 @@ describe("how one player's state compares with another's", () => {
     });
   });
 
+  it("activates-ability narrowed to exhaust and power-up abilities", () => {
+    const trigger = (line: string) => read("Creature", line).triggered[0].trigger;
+    expect(trigger("Whenever you activate an exhaust ability, draw a card.")).toEqual({
+      on: "activates-ability",
+      who: "you",
+      exhaust: true,
+    });
+    expect(trigger("Whenever you activate a power-up ability, draw a card.")).toEqual({
+      on: "activates-ability",
+      who: "you",
+      powerUp: true,
+    });
+  });
+
   it("counters-put firing: per counter, and once for a placement", () => {
     const trigger = (line: string) => read("Creature", line).triggered[0].trigger;
     expect(trigger("Whenever a +1/+1 counter is put on ~, draw a card.")).toEqual({

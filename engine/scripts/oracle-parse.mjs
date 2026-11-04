@@ -2065,6 +2065,8 @@ export function parseTrigger(clause) {
   if ((m = /^Whenever (day becomes night|night becomes day)$/.exec(c))) {
     return [{ on: "day-night-changes", becomes: m[1] === "day becomes night" ? "night" : "day" }];
   }
+  if (c === "Whenever you activate an exhaust ability") return [{ on: "activates-ability", who: "you", exhaust: true }];
+  if (c === "Whenever you activate a power-up ability") return [{ on: "activates-ability", who: "you", powerUp: true }];
   // "Whenever a +1/+1 counter is put on ~" (Fathom Mage): once per counter.
   if ((m = /^Whenever an? (\S+) counter is put on (~|a creature|a permanent)$/.exec(c))) {
     return [{

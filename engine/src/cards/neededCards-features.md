@@ -328,6 +328,14 @@ hexproof, 702.11e); the printed "can't be the target of …" statics take `notHe
 hexproof (Shanna, Sisay's Legacy against Shadowspear — and Dense Foliage, Fiendslayer Paladin, Mercenary Informer,
 Thrun, marked the same). Proving cards: Volatile Stormdrake, Shanna, Sisay's Legacy.
 
+### Activating an exhaust or a power-up ability, as a trigger — built 2026-11-03
+
+The need-keys Phase 2 family `trigger:activates-ability`, its first unit, features only.
+`trigger:activates-exhaust` and `trigger:activates-power-up`: `exhaust` and `powerUp` on
+`activates-ability`, read off the ability as activated, as `ninjutsu` and `loyalty` are. Proving
+cards: Rangers' Refueler, Adrenaline Jockey, Marvel Boy, Noh-Varr. Afterburner Expert triggers from
+its graveyard, which this trigger doesn't watch (`trigger:activates-ability-from-graveyard`).
+
 ### Counters-put firing counts: per counter, and once for a placement — built 2026-11-03
 
 The need-keys Phase 2 family `trigger:counters-put`, features only. `trigger:counters-put-each-counter`:

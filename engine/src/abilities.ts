@@ -2392,6 +2392,12 @@ export type TriggerSpec =
       readonly who: "attached" | "you" | "opponent";
       readonly ninjutsu?: true;
       readonly loyalty?: true;
+      /** An exhaust ability (rule 702.177 — Rangers' Refueler, Adrenaline
+       * Jockey), a granted one included. "Activate only once" alone isn't one
+       * (`ActivatedAbility.onlyOnce`). */
+      readonly exhaust?: true;
+      /** A power-up ability (rule 702.193 — Marvel Boy, Noh-Varr). */
+      readonly powerUp?: true;
       readonly source?: CardFilter;
       readonly sacrificedToActivate?: true;
     }
