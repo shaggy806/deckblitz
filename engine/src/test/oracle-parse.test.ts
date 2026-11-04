@@ -14024,6 +14024,59 @@ describe("a countered spell's destination, and a counter replaced", () => {
       toughness: "1",
     });
     expect(face.static[0].replacement).toEqual({ event: "would-counter-spell" });
+describe("combat triggers: which defender, how many, once for the lot", () => {
+  const triggerOf = (clause: string) => parseTrigger(clause);
+
+  it("reads the defender clauses", () => {
+    expect(triggerOf("Whenever a creature you control attacks a player alone")).toEqual([
+      { on: "attacks-alone", who: "you-control", defender: "player" },
+    ]);
+    expect(triggerOf("Whenever a creature attacks one of your opponents or a planeswalker an opponent controls")).toEqual([
+      { on: "attacks", who: "any", attackedPlayerOrPlaneswalker: "opponent", filter: { type: "creature" } },
+    ]);
+    expect(triggerOf("Whenever equipped creature attacks the monarch")).toEqual([
+      { on: "attacks", who: "attached", attackedMonarch: true },
+    ]);
+  });
+
+  it("reads how many, aimed where", () => {
+    expect(triggerOf("Whenever an opponent attacks you with two or more creatures")).toEqual([
+      { on: "attack-with", who: "opponent", atLeast: 2, attackingYouDirectly: true },
+    ]);
+    expect(triggerOf("Whenever another player attacks with two or more creatures")).toEqual([
+      { on: "attack-with", who: "opponent", atLeast: 2 },
+    ]);
+  });
+
+  it("reads blocks: by how many, by what, once for the lot", () => {
+    expect(triggerOf("Whenever a creature attacking one of your opponents becomes blocked by two or more creatures")).toEqual([
+      { on: "becomes-blocked", who: "any", filter: { type: "creature" }, attackedPlayer: "opponent", blockers: { atLeast: 2 } },
+    ]);
+    expect(triggerOf("Whenever one or more creatures you control become blocked")).toEqual([
+      { on: "become-blocked-batch", who: "you-control", filter: { type: "creature" } },
+    ]);
+    expect(triggerOf("Whenever ~ blocks or becomes blocked by one or more black creatures")).toEqual([
+      { on: "blocks", who: "self", blocking: { colors: ["B"] } },
+      { on: "becomes-blocked", who: "self", blockers: { filter: { colors: ["B"] } } },
+    ]);
+  });
+
+  it("'if that player is the monarch' on an attack trigger", () => {
+    const face = parseFace({
+      name: "Test Card",
+      type_line: "Creature — Human",
+      oracle_text: "Whenever a creature attacks one of your opponents, if that player is the monarch, draw a card.",
+      mana_cost: "{1}",
+      colors: [],
+    });
+    expect(face.triggered[0].condition).toEqual({
+      kind: "of-player",
+      player: "that-player",
+      condition: { kind: "monarch", who: "you" },
+    });
+  });
+});
+
 describe("the turn's lists and counts: attackers, sacrifices, exile, surveils", () => {
   const read = (type_line: string, oracle_text: string) =>
     parseFace({ name: "Test Card", type_line, oracle_text, mana_cost: "{1}", colors: [] });

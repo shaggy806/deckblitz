@@ -1677,7 +1677,16 @@
   "stat:searched-library-this-turn",
   "stat:cards-exiled-this-turn",
   "stat:tokens-created-this-turn",
-  "amount:times-regenerated-this-turn"
+  "amount:times-regenerated-this-turn",
+  "trigger:attacks-alone-player",
+  "trigger:attacks-the-monarch",
+  "trigger:attacks-your-opponent-per-creature",
+  "trigger:attack-with-each-of-filters",
+  "trigger:attack-with-not-attacking-you",
+  "trigger:opponent-attacks-you-player-only",
+  "trigger:attacks-first-time-each-turn",
+  "trigger:becomes-blocked-by-two-or-more",
+  "trigger:one-or-more-become-blocked-batch"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

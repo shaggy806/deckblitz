@@ -4855,7 +4855,7 @@ export interface TurnHistory {
   /** Times this player searched their own library (rule 701.23). */
   ownLibrarySearched?: number;
   /** Cards this player owns put into exile, from any zone, by anyone: not a
-   * token or a copy of a spell, which aren't cards (rules 108.2, 707.2). */
+   * token, which isn't a card (rules 108.2, 111.1). */
   cardsPutIntoExile?: number;
   /** The total power of the creatures this player last declared as attackers
    * this turn, read as they were declared, and which of the turn's combat

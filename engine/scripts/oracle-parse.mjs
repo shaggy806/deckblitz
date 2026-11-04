@@ -2068,6 +2068,32 @@ export function parseTrigger(clause) {
   if (c === "Whenever a creature attacks enchanted player") {
     return [{ on: "attacks", who: "any", attackedPlayer: "attached" }];
   }
+  // Which defender (rule 508.3a), how many and once for the lot.
+  if (c === "Whenever a creature you control attacks a player alone") {
+    return [{ on: "attacks-alone", who: "you-control", defender: "player" }];
+  }
+  if (c === "Whenever a creature attacks one of your opponents or a planeswalker an opponent controls") {
+    return [{ on: "attacks", who: "any", attackedPlayerOrPlaneswalker: "opponent", filter: { type: "creature" } }];
+  }
+  if (c === "Whenever equipped creature attacks the monarch") return [{ on: "attacks", who: "attached", attackedMonarch: true }];
+  if ((m = /^Whenever an opponent attacks you with (two|three|four|five) or more creatures$/.exec(c))) {
+    return [{ on: "attack-with", who: "opponent", atLeast: NUMBERS[m[1]], attackingYouDirectly: true }];
+  }
+  if ((m = /^Whenever another player attacks with (two|three|four|five) or more creatures$/.exec(c))) {
+    return [{ on: "attack-with", who: "opponent", atLeast: NUMBERS[m[1]] }];
+  }
+  if ((m = /^Whenever a creature attacking one of your opponents becomes blocked by (two|three|four|five) or more creatures$/.exec(c))) {
+    return [
+      { on: "becomes-blocked", who: "any", filter: { type: "creature" }, attackedPlayer: "opponent", blockers: { atLeast: NUMBERS[m[1]] } },
+    ];
+  }
+  if (c === "Whenever one or more creatures you control become blocked") {
+    return [{ on: "become-blocked-batch", who: "you-control", filter: { type: "creature" } }];
+  }
+  if ((m = /^Whenever ~ blocks or becomes blocked by one or more (white|blue|black|red|green) creatures$/.exec(c))) {
+    const filter = { colors: [COLOR_WORD[m[1]]] };
+    return [{ on: "blocks", who: "self", blocking: filter }, { on: "becomes-blocked", who: "self", blockers: { filter } }];
+  }
   // Day and night (rule 731.1a).
   if (/^Whenever day becomes night or night becomes day$/.test(c)) return [{ on: "day-night-changes" }];
   if ((m = /^Whenever (day becomes night|night becomes day)$/.exec(c))) {
@@ -14528,6 +14554,7 @@ const INTERVENING_IFS = {
   "if it's day,": { kind: "day-night", is: "day" },
   "if you attacked this turn,": { kind: "turn-stat", stat: "attacked", who: "you", atLeast: 1 },
   "if one or more cards were put into exile this turn,": { kind: "turn-stat", stat: "cards-put-into-exile", who: "any-player", atLeast: 1 },
+  "if that player is the monarch,": { kind: "of-player", player: "that-player", condition: { kind: "monarch", who: "you" } },
   // Pack tactics: the attackers' total power, as they were declared.
   "if you attacked with creatures with total power 6 or greater this combat,": {
     kind: "turn-stat",

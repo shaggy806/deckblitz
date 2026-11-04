@@ -93,6 +93,7 @@ const NOISY_EVENTS: ReadonlySet<GameEvent['type']> = new Set([
   'player-attacked',
   // Every blocker already has its own `blocker-declared` line.
   'attacker-blocked',
+  'attackers-blocked',
   // The dying, milling or discarding that put them there has its own line.
   'cards-put-into-graveyard',
   'cards-put-into-exile',
@@ -514,6 +515,8 @@ function eventText(event: GameEvent, nameOf: NameOf, seats: readonly SeatStatus[
       return `${name(event.attacker)} attacked alone`
     case 'attacker-unblocked':
       return `${name(event.attacker)} isn't blocked`
+    case 'attackers-blocked':
+      return `${event.attackers.map(name).join(', ')} blocked`
     case 'cards-put-into-graveyard':
       return `${event.arrivals.map((a) => name(a.object)).join(', ')} put into a graveyard`
     case 'dice-rolled':

@@ -11230,11 +11230,15 @@ export class Game {
    * "whenever ~ attacks and isn't blocked" (509.3g). Its triggers wait for
    * the active player's priority with every other declare-blockers trigger. */
   private announceUnblockedAttackers(): void {
+    const blocked: ObjectId[] = [];
     for (const attacker of this.currentAttackers()) {
       if (this.state.objects[attacker]?.blocked === false) {
         this.emit({ type: "attacker-unblocked", attacker });
+      } else if (this.state.objects[attacker]?.blocked === true) {
+        blocked.push(attacker);
       }
     }
+    if (blocked.length > 0) this.emit({ type: "attackers-blocked", attackers: blocked });
   }
 
   /**
@@ -28284,6 +28288,8 @@ export class Game {
       // Greed): who played it, under whomever's control it entered.
       player = event.player;
     } else if (event.type === "attackers-declared") {
+      // The attacking player (Firemane Commando's "they draw a card").
+      player = event.player;
       attackers = event.attackers.map((id) => ({
         object: id,
         zoneChangeCount: this.state.objects[id]?.zoneChangeCount ?? 0,
@@ -28556,11 +28562,34 @@ export class Game {
         const attacker = this.state.objects[id];
         if (attacker?.isCommander !== true || attacker.owner !== self.controller) return false;
       }
+      if (spec.attackingYouDirectly === true && this.state.objects[id]?.attacking !== self.controller) return false;
       if (spec.attackingYou !== true) return true;
       const at = this.state.objects[id]?.attacking;
       if (at === null || at === undefined) return false;
       return this.attacksYouOrYourPlaneswalker(at, self.controller);
     });
+  }
+
+  /** The kind of thing `attacker` is attacking is this. */
+  private attacksDefenderKind(attacker: ObjectId, kind: "player" | "planeswalker" | "battle"): boolean {
+    const at = this.state.objects[attacker]?.attacking;
+    return at !== null && at !== undefined && this.defenderKind(at) === kind;
+  }
+
+  /** `attacker` attacks a player `who` picks out, not a planeswalker of theirs. */
+  private attackedPlayerIs(attacker: ObjectId, who: TriggerWho, self: GameObject): boolean {
+    const at = this.state.objects[attacker]?.attacking;
+    return (
+      at !== null && at !== undefined && this.defenderKind(at) === "player" && this.matchesWhoPlayer(who, at as PlayerId, self)
+    );
+  }
+
+  /** `blocker` blocks at least one creature matching `filter` (rule 509.3a's
+   * "blocks", once however many), every block of the declaration made. */
+  private blocksAMatch(blocker: ObjectId, filter: CardFilter, self: GameObject): boolean {
+    const object = this.state.objects[blocker];
+    const blocked = [object?.blocking, ...(object?.blockingAlso ?? [])];
+    return blocked.some((id) => id !== null && id !== undefined && this.triggerFilterOk(filter, id, self));
   }
 
   /** `refs` with "among them", "those creatures": the attackers that counted
@@ -28598,6 +28627,9 @@ export class Game {
     self: GameObject,
   ): boolean {
     if (spec.notAttackingYou === true && attackers.some((id) => this.state.objects[id]?.attacking === self.controller)) {
+      return false;
+    }
+    if (spec.eachOf !== undefined && !spec.eachOf.every((filter) => attackers.some((id) => this.triggerFilterOk(filter, id, self)))) {
       return false;
     }
     const counted = this.attackWithCounted(spec, attackers, self);
@@ -28952,6 +28984,11 @@ export class Game {
           (spec.attackedPlayer === undefined ||
             (this.defenderKind(event.defender) === "player" &&
               this.matchesWhoPlayer(spec.attackedPlayer, event.defender as PlayerId, self))) &&
+          (spec.attackedPlayerOrPlaneswalker === undefined ||
+            (this.defenderKind(event.defender) !== "battle" &&
+              this.matchesWhoPlayer(spec.attackedPlayerOrPlaneswalker, this.defendingPlayerOf(event.defender), self))) &&
+          (spec.attackedMonarch !== true ||
+            (this.defenderKind(event.defender) === "player" && this.state.monarch === event.defender)) &&
           (spec.aloneAgainstDefender !== true || this.attackingAlone(event.attacker, event.defender)) &&
           (spec.firstTimeEachTurn !== true || event.firstThisTurn === true) &&
           (spec.withGreaterPower !== true || this.attacksWithGreaterPower(event.attacker)) &&
@@ -28998,7 +29035,8 @@ export class Game {
         return (
           event.type === "attacked-alone" &&
           this.matchesWho(spec.who, event.attacker, self) &&
-          this.triggerFilterOk(spec.filter, event.attacker, self)
+          this.triggerFilterOk(spec.filter, event.attacker, self) &&
+          (spec.defender === undefined || this.attacksDefenderKind(event.attacker, spec.defender))
         );
       case "sacrifice":
         // The permanent is read as it last existed on the battlefield: a
@@ -29141,7 +29179,15 @@ export class Game {
           (event.alsoBlocked !== true || spec.object === "blocked") &&
           this.matchesWho(spec.who, event.blocker, self) &&
           !(spec.otherOnly === true && event.blocker === self.id) &&
-          this.triggerFilterOk(spec.filter, event.blocker, self)
+          this.triggerFilterOk(spec.filter, event.blocker, self) &&
+          (spec.blocking === undefined || this.blocksAMatch(event.blocker, spec.blocking, self))
+        );
+      case "become-blocked-batch":
+        return (
+          event.type === "attackers-blocked" &&
+          event.attackers.some(
+            (attacker) => this.matchesWho(spec.who, attacker, self) && this.triggerFilterOk(spec.filter, attacker, self),
+          )
         );
       case "blocked-by":
         // Once per blocker (flanking — rule 702.25a), the blocker asked about
@@ -29157,7 +29203,11 @@ export class Game {
           event.type === "attacker-blocked" &&
           this.matchesWho(spec.who, event.attacker, self) &&
           !(spec.otherOnly === true && event.attacker === self.id) &&
-          this.triggerFilterOk(spec.filter, event.attacker, self)
+          this.triggerFilterOk(spec.filter, event.attacker, self) &&
+          (spec.blockers?.atLeast === undefined || this.creatureCount(event.blockers) >= spec.blockers.atLeast) &&
+          (spec.blockers?.filter === undefined ||
+            event.blockers.some((blocker) => this.triggerFilterOk(spec.blockers?.filter, blocker, self))) &&
+          (spec.attackedPlayer === undefined || this.attackedPlayerIs(event.attacker, spec.attackedPlayer, self))
         );
       case "state":
         // Not an event's: `checkStateTriggers` looks for it (rule 603.8).
@@ -31392,6 +31442,7 @@ export class Game {
           // "each opponent who has three or more poison counters" (Ixhel),
           // an `of-player`: the player this effect is about.
           ...(refs.player !== undefined ? { thatPlayer: refs.player } : {}),
+          ...(refs.attackedTogether !== undefined ? { attackedTogether: refs.attackedTogether } : {}),
           ...(sourceLastKnown !== undefined ? { sourceLastKnown } : {}),
         })
       );

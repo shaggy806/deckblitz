@@ -1518,6 +1518,16 @@ export type TriggerSpec =
        */
       readonly attackedPlayer?: TriggerWho;
       /**
+       * Which player it must be attacking, or whose planeswalker: Gahiji,
+       * Honored One's "attacks one of your opponents **or a planeswalker an
+       * opponent controls**" is `"opponent"`. Never a battle.
+       */
+      readonly attackedPlayerOrPlaneswalker?: TriggerWho;
+      /** "Whenever equipped creature attacks **the monarch**" (The Spear of
+       * Bashenga): the player who is the monarch as it's declared, never a
+       * planeswalker of theirs (rule 508.3a). */
+      readonly attackedMonarch?: true;
+      /**
        * "…, **if no other creatures are attacking that player**" — an
        * intervening-if (rule 603.4) over the declaration: no other creature
        * is attacking the player or planeswalker this one attacks. Checked
@@ -1631,6 +1641,10 @@ export type TriggerSpec =
       readonly on: "attacks-alone";
       readonly who: TriggerWho;
       readonly filter?: CardFilter;
+      /** `"player"`: "attacks **a player** alone" (Yuriko, Blade of the
+       * Mighty): a lone attack on a planeswalker or a battle doesn't fire it
+       * (rule 508.3a). */
+      readonly defender?: "player";
     }
   | {
       /** A player sacrificed a permanent (Korvold, Mayhem Devil — rule 701.21).
@@ -1869,6 +1883,21 @@ export type TriggerSpec =
        * creature**" (Wall of Frost, Wall of Tears) — the trigger object is
        * the creature it blocks, not the blocker. */
       readonly object?: "blocked";
+      /** "Whenever this creature blocks **one or more black creatures**"
+       * (Serra Inquisitors): once however many it blocks (rule 509.3a), if at
+       * least one of them matches. */
+      readonly blocking?: CardFilter;
+    }
+  | {
+      /**
+       * "Whenever one or more creatures you control **become blocked**"
+       * (Hezrou): once per combat as the last defending player's declaration
+       * completes, if any creature matching `who` and `filter` became blocked,
+       * off `attackers-blocked` — never once for each (rule 603.2c).
+       */
+      readonly on: "become-blocked-batch";
+      readonly who: TriggerWho;
+      readonly filter?: CardFilter;
     }
   | {
       /**
@@ -1885,6 +1914,15 @@ export type TriggerSpec =
       readonly who: TriggerWho;
       readonly filter?: CardFilter;
       readonly otherOnly?: boolean;
+      /** Becomes blocked **by** so many creatures, or by at least one matching
+       * `filter`: Seifer, Balamb Rival's "by two or more creatures" (`atLeast:
+       * 2`), Serra Inquisitors' "by one or more black creatures" (`filter`).
+       * Read as the declaration completes, every blocker in. */
+      readonly blockers?: { readonly atLeast?: number; readonly filter?: CardFilter };
+      /** The player the attacker must be attacking, relative to this permanent
+       * — Seifer's "a creature attacking **one of your opponents**". Never a
+       * creature attacking that player's planeswalker (rule 508.3a). */
+      readonly attackedPlayer?: TriggerWho;
     }
   | {
       /**
@@ -2119,6 +2157,15 @@ export type TriggerSpec =
        * opponent attacks, **if they attacked you and/or a planeswalker you
        * control**". Not a battle, whether they control it or protect it. */
       readonly attackingYou?: boolean;
+      /** Only count attackers aimed at *this* permanent's controller, the
+       * player: Everett K. Ross's "whenever an opponent attacks **you** with
+       * two or more creatures" — one attacking your planeswalker attacks that
+       * planeswalker (rule 508.3a). */
+      readonly attackingYouDirectly?: true;
+      /** The declaration holds at least one attacker matching each of these,
+       * the same creature allowed: Fearless Swashbuckler's "if a Pirate **and**
+       * a Vehicle attacked this combat". */
+      readonly eachOf?: readonly CardFilter[];
       /**
        * "Whenever a player attacks, **if they aren't attacking you**"
        * (Mirkwood Trapper): no creature of the declaration attacks this

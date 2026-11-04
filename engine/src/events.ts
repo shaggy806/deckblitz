@@ -1078,6 +1078,14 @@ export type GameEvent =
       readonly blockers: readonly ObjectId[];
     })
   | (Base & {
+      /** The attackers that became blocked this combat, all of them, as the
+       * last defending player's declaration completes: "whenever one or more
+       * creatures you control become blocked" (Hezrou). Not announced when
+       * nothing is blocked. */
+      readonly type: "attackers-blocked";
+      readonly attackers: readonly ObjectId[];
+    })
+  | (Base & {
       /** An attacking creature had no creatures declared as blockers for it
        * (rule 509.1h) — once per attacker, as the last defending player's
        * declaration completes (or is skipped): "whenever ~ attacks and isn't

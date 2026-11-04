@@ -213,6 +213,8 @@ export const makeFormatter = (game) => {
         return `${name(e.blocker)} blocks ${name(e.attacker)}`;
       case "attacker-blocked":
         return `${name(e.attacker)} is blocked by ${e.blockers.length}`;
+      case "attackers-blocked":
+        return `${e.attackers.map(name).join(", ")} blocked`;
       case "spell-fizzled":
         return `${name(e.object)} fizzles — ${e.reason}`;
       case "spell-countered":

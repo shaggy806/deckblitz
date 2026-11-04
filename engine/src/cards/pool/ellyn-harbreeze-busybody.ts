@@ -2,7 +2,7 @@ import { defineCard } from "../define.js";
 
 // "Tokens you created": whoever creates a token owns it and has it enter under
 // their control (rule 111.2), so the `entered` list's tokens are the ones they
-// created, each of a stack counted (rule 111.1's "token" is a permanent).
+// created, a stack counted whole.
 
 export default defineCard({
   name: "Ellyn Harbreeze, Busybody",
