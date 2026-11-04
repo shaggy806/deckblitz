@@ -1111,6 +1111,7 @@ export type LegalAction =
       readonly xCost?: { readonly maxX: number; readonly minX?: number };
       /** See `phyrexianPips` on `cast-spell`. */
       readonly phyrexianPips?: number;
+      readonly phyrexianLifeAtLeast?: number;
     }
   | {
       readonly kind: "foretell";
@@ -1125,6 +1126,7 @@ export type LegalAction =
       readonly cost: string;
       /** See `phyrexianPips` on `cast-spell`. */
       readonly phyrexianPips?: number;
+      readonly phyrexianLifeAtLeast?: number;
     }
   | {
       /** One of your face-down permanents can be turned face up — its card
@@ -1141,6 +1143,7 @@ export type LegalAction =
       readonly xCost?: { readonly maxX: number; readonly minX?: number };
       /** See `phyrexianPips` on `cast-spell`. */
       readonly phyrexianPips?: number;
+      readonly phyrexianLifeAtLeast?: number;
     }
   | {
       /** A locked door of one of your Rooms can be unlocked (rule 709.5e):
@@ -1153,6 +1156,7 @@ export type LegalAction =
       readonly cost: string;
       /** See `phyrexianPips` on `cast-spell`. */
       readonly phyrexianPips?: number;
+      readonly phyrexianLifeAtLeast?: number;
     }
   | {
       /** Your revealed companion can go into your hand for `cost` (rule
@@ -1170,6 +1174,7 @@ export type LegalAction =
       readonly cost: string;
       /** See `phyrexianPips` on `cast-spell`. */
       readonly phyrexianPips?: number;
+      readonly phyrexianLifeAtLeast?: number;
     }
   | {
       /** A permanent's static effect you may ignore until end of turn (rule
@@ -1187,6 +1192,7 @@ export type LegalAction =
       readonly cost: string;
       /** See `phyrexianPips` on `cast-spell`. */
       readonly phyrexianPips?: number;
+      readonly phyrexianLifeAtLeast?: number;
     }
   | {
       readonly kind: "cast-spell";
@@ -1200,6 +1206,9 @@ export type LegalAction =
        * `phyrexianLife` up to this. Absent when there are none or the player
        * can't pay life. */
       readonly phyrexianPips?: number;
+      /** Offered only by `Game.offersFor`: mana can't pay it, and life only by
+       * going to 0 (rule 119.4), so this many must be named. Bots never see it. */
+      readonly phyrexianLifeAtLeast?: number;
       /** An assist variant (rule 702.132a): cast asking this other player to
        * help pay, echoed back as the cast's `assist`. Listed when the caster
        * could pay the rest with `assistMax` — the most of the total cost's
@@ -1557,6 +1566,9 @@ export type LegalAction =
        * `phyrexianLife` up to this. Absent when there are none or the player
        * can't pay life. */
       readonly phyrexianPips?: number;
+      /** Offered only by `Game.offersFor`: mana can't pay it, and life only by
+       * going to 0 (rule 119.4), so this many must be named. Bots never see it. */
+      readonly phyrexianLifeAtLeast?: number;
       readonly source: ObjectId;
       readonly abilityIndex: number;
       readonly cardName: string;
@@ -2129,6 +2141,7 @@ export type LegalAction =
       readonly about?: PlayerId;
       /** See `phyrexianPips` on `cast-spell`: of the decision's own cost. */
       readonly phyrexianPips?: number;
+      readonly phyrexianLifeAtLeast?: number;
       /** The permanent the question is about, when there's one per permanent
        * (`for-each-unless` — Killing Wave): a driver points at it, the name
        * in the mode's text not saying which of two with the same name. */

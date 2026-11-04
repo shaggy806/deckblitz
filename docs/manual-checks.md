@@ -7356,6 +7356,11 @@ These boards start before the first turn (the builder's `openingHands`), with th
 - **Do:** Activate Viscera Seer, sacrificing Grizzly Bears. When Kels's trigger asks you to pay {U/B}, say yes, then pick "1 with life (2 life)".
 - **Expect:** You pay 2 life, the Swamp stays untapped, and you draw a card.
 
+### K'rrik: your last 2 life pays a {B}, if you say so
+
+- **Do:** Cast Duress at Bob. Pick "1 with life (2 life)", the only way offered.
+- **Expect:** The prompt reads "Mana can't pay this: pay all your life?", with no Mana button. You go to 0 life and lose.
+
 ## Proliferating twice (2026-11-04)
 
 ### Tekuthal: proliferate twice instead

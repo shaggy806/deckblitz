@@ -2730,6 +2730,10 @@ export class Game {
 
   /** Why `action` cannot be dispatched right now, or `null` if it can. */
   canDispatch(action: Action): string | null {
+    // Judged as it would be paid: life by the player's choice may go to 0.
+    if ("phyrexianLife" in action && action.phyrexianLife !== undefined && this.phyrexianLifeChoice !== action.phyrexianLife) {
+      return this.withLifeChoice(action.phyrexianLife, () => this.canDispatch(action));
+    }
     const decision = decisionForAction(action);
     if (decision !== undefined) {
       return decision.whyCannot(this.decisionCtx, action, actionPlayer(action));
@@ -4027,7 +4031,7 @@ export class Game {
    */
   isDeadForMana(player: PlayerId): boolean {
     if (this.state.priority.holder !== player) return false;
-    return this.legalActions(player).every((action) => {
+    return this.offersFor(player).every((action) => {
       if (action.kind === "pass-priority") return true;
       if (action.kind !== "activate-ability") return false;
       const ability = this.effectiveActivated(action.source)[action.abilityIndex];
@@ -7458,7 +7462,9 @@ export class Game {
       costParsed === null
         ? null
         : { ...costParsed, generic: costParsed.generic, x: 0 };
-    if (baseline !== null && this.payMana(controller, baseline, undefined, undefined, otherCostPurpose(cost ?? null, ability.costHasX === true, ability.costFor)) === null) {
+    // Asked if the player could pay it naming their life (rule 119.4); a bot
+    // that says yes without naming it declines as it pays (`applyModesChoice`).
+    if (baseline !== null && this.withLifeChoice(Number.MAX_SAFE_INTEGER, () => this.payMana(controller, baseline, undefined, undefined, otherCostPurpose(cost ?? null, ability.costHasX === true, ability.costFor))) === null) {
       decline();
       return;
     }
@@ -12947,13 +12953,51 @@ export class Game {
   }
 
   /** Do `run` with `phyrexianLife` the player's answer to its payment. */
-  private withLifeChoice(phyrexianLife: number | undefined, run: () => void): void {
+  private withLifeChoice<T>(phyrexianLife: number | undefined, run: () => T): T {
+    const before = this.phyrexianLifeChoice;
     this.phyrexianLifeChoice = phyrexianLife;
     try {
-      run();
+      return run();
     } finally {
-      this.phyrexianLifeChoice = undefined;
+      this.phyrexianLifeChoice = before;
     }
+  }
+
+  /**
+   * What a driver that answers `phyrexianPips` may do: `legalActions`, and what
+   * life can pay only by taking the player to 0. A player whose life is at
+   * least the amount can pay it (rule 119.4), but the auto-payer never goes
+   * below 1 on its own, so bots and `legalActions` don't see these. Such an
+   * offer's `phyrexianLifeAtLeast` says how many pips must be named.
+   */
+  offersFor(player: PlayerId): LegalAction[] {
+    const plain = this.legalActions(player);
+    // It takes exactly all of their life, 2 a pip: an even total, and no cost
+    // has more than ten such pips. Most boards are spared a second enumeration.
+    const life = this.state.players[player]?.life ?? 0;
+    if (life < 2 || life > 20 || life % 2 !== 0) return plain;
+    const allOfIt = life / 2;
+    const toZero = (offer: LegalAction): LegalAction =>
+      "phyrexianPips" in offer ? { ...offer, phyrexianPips: allOfIt, phyrexianLifeAtLeast: allOfIt } : offer;
+    const awaiting = this.state.awaiting;
+    if (awaiting !== null) {
+      // The question is the same either way (`optionModes`, the `may` raise):
+      // only its answers differ, when mana can't pay what it costs.
+      const unpayable =
+        awaiting.kind === "choose-modes" &&
+        awaiting.cost !== undefined &&
+        parseManaCost(awaiting.cost).x === 0 &&
+        this.payMana(player, parseManaCost(awaiting.cost)) === null;
+      return unpayable ? plain.map(toZero) : plain;
+    }
+    // An {X} may reach further with the life, which `plain`'s offer says
+    // nothing of: the same offer but for that isn't a new one.
+    const key = (offer: LegalAction): string => JSON.stringify({ ...offer, xCost: undefined });
+    const known = new Set(plain.map(key));
+    const extra = this.withLifeChoice(Number.MAX_SAFE_INTEGER, () => this.legalActions(player)).filter(
+      (offer) => "phyrexianPips" in offer && offer.phyrexianPips !== undefined && !known.has(key(offer)),
+    );
+    return extra.length === 0 ? plain : [...plain, ...extra.map(toZero)];
   }
 
   /** An offer's `phyrexianPips`: the Phyrexian pips in `cost` the player
@@ -38024,7 +38068,11 @@ export class Game {
       this.state.zones.shared.battlefield.some((id) => matchesFilter(this.state, this.registry, id, filter, { you: player }));
     const available = options.filter((option) => {
       if ("pay" in option) {
-        const payment = this.payMana(player, parseManaCost(option.pay), undefined, undefined, otherCostPurpose(option.pay, option.paysX === true, option.paysFor));
+        const payment =
+          this.payMana(player, parseManaCost(option.pay), undefined, undefined, otherCostPurpose(option.pay, option.paysX === true, option.paysFor)) ??
+          this.withLifeChoice(Number.MAX_SAFE_INTEGER, () =>
+            this.payMana(player, parseManaCost(option.pay), undefined, undefined, otherCostPurpose(option.pay, option.paysX === true, option.paysFor)),
+          );
         return payment !== null && this.canPayLife(player, payment.life + (option.andLife ?? 0));
       }
       if ("payLife" in option) return this.canPayLife(player, option.payLife);

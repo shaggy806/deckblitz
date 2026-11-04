@@ -281,6 +281,7 @@ const castExtras = (cast: CastAction) => ({
   // "4 damage divided as you choose" (Magma Opus): asked once the targets are in.
   ...(cast.divide !== undefined ? { divide: cast.divide } : {}),
   ...(cast.phyrexianPips !== undefined ? { phyrexianPips: cast.phyrexianPips } : {}),
+  ...(cast.phyrexianLifeAtLeast !== undefined ? { phyrexianLifeAtLeast: cast.phyrexianLifeAtLeast } : {}),
   // An assist variant (rule 702.132a): the player asked to help pay.
   ...(cast.assist !== undefined ? { assist: cast.assist } : {}),
   // The opponent named to choose some of its targets or its modes (rules
@@ -545,6 +546,8 @@ interface Targeting {
   /** How many of its cost's Phyrexian pips could be paid with 2 life each
    * (rule 107.4f): asked once the targets are in, before it goes out. */
   readonly phyrexianPips?: number
+  /** How many must be: it takes all their life, mana being unable to. */
+  readonly phyrexianLifeAtLeast?: number
   /** The other player asked to help pay (assist, rule 702.132a) — echoed
    * back like `kicked`. */
   readonly assist?: PlayerId
@@ -1862,6 +1865,7 @@ function Table({
   // Phyrexian pips the player pays with life (rule 107.4f).
   const [pendingPhyrexian, setPendingPhyrexian] = useState<{
     readonly pips: number
+    readonly atLeast: number
     readonly resume: (life: number) => void
   } | null>(null)
   const [pendingConvoke, setPendingConvoke] = useState<{
@@ -2454,11 +2458,18 @@ function Table({
   // A payment with pips life could pay (rule 107.4f; K'rrik): how many, the
   // payer's call, then `send` with the answer.
   const askLifeThen = (
-    pips: number | undefined,
+    offer: { readonly phyrexianPips?: number; readonly phyrexianLifeAtLeast?: number },
     send: (life: { readonly phyrexianLife?: number }) => void,
   ): void => {
+    const pips = offer.phyrexianPips
     if (pips === undefined || pips === 0) send({})
-    else setPendingPhyrexian({ pips, resume: (n) => send(n > 0 ? { phyrexianLife: n } : {}) })
+    else {
+      setPendingPhyrexian({
+        pips,
+        atLeast: offer.phyrexianLifeAtLeast ?? 0,
+        resume: (n) => send(n > 0 ? { phyrexianLife: n } : {}),
+      })
+    }
   }
 
   const finishTargets = useCallback(
@@ -2498,6 +2509,7 @@ function Table({
         | 'waterbendOffer'
         | 'divide'
         | 'phyrexianPips'
+        | 'phyrexianLifeAtLeast'
         | 'assist'
         | 'otherChooser'
       >,
@@ -2592,6 +2604,7 @@ function Table({
       ) {
         setPendingPhyrexian({
           pips: t.phyrexianPips,
+          atLeast: t.phyrexianLifeAtLeast ?? 0,
           resume: (n) => finish(t, targets, division, n),
         })
         return
@@ -2856,6 +2869,7 @@ function Table({
           : {}),
         ...(action.divide !== undefined ? { divide: action.divide } : {}),
         ...(action.phyrexianPips !== undefined ? { phyrexianPips: action.phyrexianPips } : {}),
+        ...(action.phyrexianLifeAtLeast !== undefined ? { phyrexianLifeAtLeast: action.phyrexianLifeAtLeast } : {}),
       })
     },
     [beginTargeting],
@@ -2871,14 +2885,14 @@ function Table({
     }
     // Suspend X (rule 702.62a): X time counters, for that much mana.
     if (action.kind === 'suspend') {
-      askLifeThen(action.phyrexianPips, (life) =>
+      askLifeThen(action,(life) =>
         game.dispatch({ type: 'suspend', player: seat, card: action.card, xValue: value, ...life }),
       )
       return
     }
     // A morph or disguise cost's {X} (Bane of the Living).
     if (action.kind === 'turn-face-up') {
-      askLifeThen(action.phyrexianPips, (life) =>
+      askLifeThen(action,(life) =>
         game.dispatch({ type: 'turn-face-up', player: seat, permanent: action.permanent, morph: true, xValue: value, ...life }),
       )
       return
@@ -2921,6 +2935,7 @@ function Table({
         ...(ab.waterbend !== undefined && ab.waterbend.choices.length > 0 ? { waterbendOffer: ab.waterbend } : {}),
         ...(ab.divide !== undefined ? { divide: ab.divide } : {}),
         ...(ab.phyrexianPips !== undefined ? { phyrexianPips: ab.phyrexianPips } : {}),
+        ...(ab.phyrexianLifeAtLeast !== undefined ? { phyrexianLifeAtLeast: ab.phyrexianLifeAtLeast } : {}),
       })
     },
     [beginTargeting],
@@ -4713,7 +4728,7 @@ function Table({
               type="button"
               onClick={() => {
                 setModeX(null)
-                askLifeThen(modesChoiceAction.phyrexianPips, (life) =>
+                askLifeThen(modesChoiceAction,(life) =>
                   game.dispatch({ type: 'choose-modes', player: seat, modes: [0], ...withX, ...life }),
                 )
               }}
@@ -4738,7 +4753,7 @@ function Table({
                   title={`The same answer for this trigger and the ${sameForAll} identical ${sameForAll === 1 ? 'one' : 'ones'} under it on the stack`}
                   onClick={() => {
                     setModeX(null)
-                    askLifeThen(modesChoiceAction.phyrexianPips, (life) =>
+                    askLifeThen(modesChoiceAction,(life) =>
                       game.dispatch({ type: 'choose-modes', player: seat, modes: [0], forAll: true, ...withX, ...life }),
                     )
                   }}
@@ -4765,7 +4780,7 @@ function Table({
                 key={i}
                 type="button"
                 onClick={() =>
-                  askLifeThen(modesChoiceAction.phyrexianPips, (life) =>
+                  askLifeThen(modesChoiceAction,(life) =>
                     game.dispatch({ type: 'choose-modes', player: seat, modes: [i], ...life }),
                   )
                 }
@@ -4799,7 +4814,7 @@ function Table({
               type="button"
               disabled={modePicks.length < minModes || modePicks.length > maxModes}
               onClick={() =>
-                askLifeThen(modesChoiceAction.phyrexianPips, (life) =>
+                askLifeThen(modesChoiceAction,(life) =>
                   game.dispatch({ type: 'choose-modes', player: seat, modes: [...modePicks], ...life }),
                 )
               }
@@ -5223,11 +5238,11 @@ function Table({
     // Each Phyrexian pip, or a pip K'rrik lets you pay in life: its colour, or
     // 2 life (rule 107.4f). Paying with mana still pays life for a pip mana
     // can't cover.
-    const { pips, resume } = pendingPhyrexian
+    const { pips, atLeast, resume } = pendingPhyrexian
     controls = (
       <div className="controls">
-        <span>Pay with life rather than mana?</span>
-        {Array.from({ length: pips + 1 }, (_unused, n) => (
+        <span>{atLeast > 0 ? 'Mana can’t pay this: pay all your life?' : 'Pay with life rather than mana?'}</span>
+        {Array.from({ length: pips + 1 }, (_unused, n) => n).filter((n) => n >= atLeast).map((n) => (
           <button
             key={n}
             type="button"
@@ -7110,7 +7125,7 @@ function Table({
                   onClick={() =>
                     suspend.xCost !== undefined
                       ? setPendingX({ action: suspend, value: suspend.xCost.maxX })
-                      : askLifeThen(suspend.phyrexianPips, (life) =>
+                      : askLifeThen(suspend,(life) =>
                           game.dispatch({ type: 'suspend', player: seat, card: id, ...life }),
                         )
                   }
@@ -7130,7 +7145,7 @@ function Table({
                 <button
                   type="button"
                   onClick={() =>
-                    askLifeThen(plot.phyrexianPips, (life) => game.dispatch({ type: 'plot', player: seat, card: id, ...life }))
+                    askLifeThen(plot,(life) => game.dispatch({ type: 'plot', player: seat, card: id, ...life }))
                   }
                 >
                   Plot <Symbols text={plot.cost} />
@@ -7140,7 +7155,7 @@ function Table({
                 <button
                   type="button"
                   onClick={() =>
-                    askLifeThen(cycle.phyrexianPips, (life) => game.dispatch({ type: 'cycle', player: seat, card: id, ...life }))
+                    askLifeThen(cycle,(life) => game.dispatch({ type: 'cycle', player: seat, card: id, ...life }))
                   }
                 >
                   Cycle <Symbols text={cycle.cost} />
@@ -7326,7 +7341,7 @@ function Table({
               label: `Unlock ${u.doorName} — pay ${u.cost}`,
               onSelect: () => {
                 setSelectedSource(null)
-                askLifeThen(u.phyrexianPips, (life) =>
+                askLifeThen(u,(life) =>
                   game.dispatch({ type: 'unlock-door', player: seat, permanent: u.permanent, door: u.door, ...life }),
                 )
               },
@@ -7338,7 +7353,7 @@ function Table({
                     label: `End the effect — pay ${selectedLicidEnd.cost}`,
                     onSelect: () => {
                       setSelectedSource(null)
-                      askLifeThen(selectedLicidEnd.phyrexianPips, (life) =>
+                      askLifeThen(selectedLicidEnd,(life) =>
                         game.dispatch({ type: 'end-licid-effect', player: seat, permanent: selectedLicidEnd.permanent, ...life }),
                       )
                     },
@@ -7366,7 +7381,7 @@ function Table({
                   setPendingX({ action: up, value: up.xCost.maxX })
                   return
                 }
-                askLifeThen(up.phyrexianPips, (life) =>
+                askLifeThen(up,(life) =>
                   game.dispatch({
                     type: 'turn-face-up',
                     player: seat,

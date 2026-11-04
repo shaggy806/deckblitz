@@ -1106,9 +1106,9 @@ export class Room {
     const asked = askedPlayer(this.game.state);
     const legal =
       asked === null
-        ? this.game.legalActions(seat)
+        ? this.game.offersFor(seat)
         : answeringPlayer(this.game.state, asked) === seat
-          ? this.game.legalActions(asked)
+          ? this.game.offersFor(asked)
           : [];
     return this.guide === null ? legal : this.guide.offers(this, seat, legal);
   }
@@ -1264,7 +1264,8 @@ export class Room {
     const wasActive = this.autoPassRunning(seat);
     const justCleared = this.clearAutoPassIfDone(seat, s);
 
-    const legal = this.game.legalActions(holder);
+    // What a person could do: a bot is never offered paying its last life.
+    const legal = this.bots.has(seat.player) ? this.game.legalActions(holder) : this.game.offersFor(holder);
     // A tutorial asking the player to pass keeps an empty-stack window for
     // them even with nothing in it (`RoomOptions.holdsPriority`).
     const kept =

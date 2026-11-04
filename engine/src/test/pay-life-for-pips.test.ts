@@ -215,3 +215,86 @@ describe("K'rrik: every other cost that pays {B} (the ruling)", () => {
     expect(hand(game).length).toBe(before + 1);
   });
 });
+
+describe("exactly enough life to pay (rule 119.4): a choice, never the auto-payer's", () => {
+  const atTwo = () => table({ life: 2 });
+
+  it("K'rrik: {B} at 2 life with no mana is offered to a player, and goes to 0 if they name it", () => {
+    const t = atTwo();
+    spawn(t.game, "K'rrik, Son of Yawgmoth");
+    const duress = toHand(t.game, "Duress");
+    const plain = { type: "cast-spell", player: A, card: duress, targets: [ref(B)] } as const;
+    expect(t.game.legalActions(A).some((o) => o.kind === "cast-spell" && o.card === duress)).toBe(false);
+    const offer = t.game.offersFor(A).find((o) => o.kind === "cast-spell" && o.card === duress);
+    expect(offer?.kind === "cast-spell" && offer.phyrexianLifeAtLeast).toBe(1);
+    expect(t.game.canDispatch(plain)).not.toBeNull();
+    expect(t.game.canDispatch({ ...plain, phyrexianLife: 1 })).toBeNull();
+    t.game.dispatch({ ...plain, phyrexianLife: 1 });
+    expect(life(t.game, A)).toBe(0);
+  });
+
+  it("a Phyrexian pip the same, with no K'rrik", () => {
+    const t = atTwo();
+    const bears = spawn(t.game, "Grizzly Bears");
+    const growth = toHand(t.game, "Mutagenic Growth");
+    const plain = { type: "cast-spell", player: A, card: growth, targets: [ref(bears)] } as const;
+    expect(t.game.legalActions(A).some((o) => o.kind === "cast-spell" && o.card === growth)).toBe(false);
+    const offer = t.game.offersFor(A).find((o) => o.kind === "cast-spell" && o.card === growth);
+    expect(offer?.kind === "cast-spell" && offer.phyrexianLifeAtLeast).toBe(1);
+    expect(t.game.canDispatch(plain)).not.toBeNull();
+    t.game.dispatch({ ...plain, phyrexianLife: 1 });
+    expect(life(t.game, A)).toBe(0);
+  });
+
+  it("not with less than it costs: 1 life can't pay 2", () => {
+    const t = table({ life: 1 });
+    const bears = spawn(t.game, "Grizzly Bears");
+    const growth = toHand(t.game, "Mutagenic Growth");
+    expect(t.game.offersFor(A).some((o) => o.kind === "cast-spell" && o.card === growth)).toBe(false);
+    expect(t.game.canDispatch({ type: "cast-spell", player: A, card: growth, targets: [ref(bears)], phyrexianLife: 1 })).not.toBeNull();
+  });
+
+  it("with mana to pay it, nothing new: the same offer, no minimum", () => {
+    const t = atTwo();
+    spawn(t.game, "K'rrik, Son of Yawgmoth");
+    lands(t.game, "Swamp", 1);
+    const duress = toHand(t.game, "Duress");
+    const offer = t.game.offersFor(A).find((o) => o.kind === "cast-spell" && o.card === duress);
+    expect(offer?.kind === "cast-spell" && offer.phyrexianPips).toBe(1);
+    expect(offer?.kind === "cast-spell" && offer.phyrexianLifeAtLeast).toBeUndefined();
+  });
+
+  it("at 3 life the auto-payer may still pay it, down to 1", () => {
+    const t = table({ life: 3 });
+    spawn(t.game, "K'rrik, Son of Yawgmoth");
+    const duress = toHand(t.game, "Duress");
+    expect(t.game.legalActions(A).some((o) => o.kind === "cast-spell" && o.card === duress)).toBe(true);
+    cast(t.game, duress, { targets: [ref(B)] });
+    expect(life(t.game, A)).toBe(1);
+  });
+
+  it('a "you may pay": asked, and paid only if named; a plain yes declines', () => {
+    const ask = () => {
+      const t = atTwo();
+      spawn(t.game, "K'rrik, Son of Yawgmoth");
+      spawn(t.game, "Kels, Fight Fixer");
+      const bears = spawn(t.game, "Grizzly Bears");
+      t.game.dispatch({ type: "activate-ability", player: A, source: spawn(t.game, "Viscera Seer"), abilityIndex: 0, targets: [], sacrifice: bears });
+      t.game.advanceUntil((s) => s.awaiting?.kind === "choose-modes");
+      return t;
+    };
+    const named = ask();
+    const offer = named.game.offersFor(A).find((o) => o.kind === "choose-modes");
+    expect(offer?.kind === "choose-modes" && offer.phyrexianLifeAtLeast).toBe(1);
+    const before = hand(named.game).length;
+    named.game.dispatch({ type: "choose-modes", player: A, modes: [0], phyrexianLife: 1 });
+    expect(life(named.game, A)).toBe(0);
+    expect(hand(named.game).length).toBe(before + 1);
+
+    const plain = ask();
+    const had = hand(plain.game).length;
+    plain.game.dispatch({ type: "choose-modes", player: A, modes: [0] });
+    expect(life(plain.game, A)).toBe(2);
+    expect(hand(plain.game).length).toBe(had);
+  });
+});

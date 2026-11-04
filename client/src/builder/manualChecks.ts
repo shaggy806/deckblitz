@@ -11018,6 +11018,13 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    "K'rrik: your last 2 life pays a {B}, if you say so",
+    board({
+      you: { bf: ["K'rrik, Son of Yawgmoth"], hand: ['Duress'], life: 2 },
+      opp: { hand: ['Grizzly Bears'] },
+    }),
+  ),
+  preset(
     'Tekuthal: proliferate twice instead',
     board({
       you: {
