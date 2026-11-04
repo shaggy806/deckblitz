@@ -7166,6 +7166,16 @@ These boards start before the first turn (the builder's `openingHands`), with th
 - **Do:** Activate Scroll of Fate on Grizzly Bears. Switch to Bob and cast Lightning Bolt on the face-down creature.
 - **Expect:** It dies, Yarus triggers, and Grizzly Bears comes back face up, under Alice's control, a 2/2 with haste.
 
+### Jhoira's Timebug: a suspended card you own can be targeted
+
+- **Do:** Suspend Pardic Dragon from your hand. Activate Jhoira's Timebug, open your exile and click Pardic Dragon as the target, then choose "Put another time counter on it".
+- **Expect:** Bob's Grizzly Bears can't be picked. Pardic Dragon goes from two time counters to three, still in exile.
+
+### Alaundo the Seer: the exiled card comes back when its last time counter goes
+
+- **Do:** Activate Alaundo the Seer, choosing Llanowar Elves in the popup. Pass to your next turn and activate it again, choosing Forest. When offered, cast Llanowar Elves.
+- **Expect:** Llanowar Elves waits in exile with one time counter, and your upkeep doesn't take it off. The second activation takes it off and offers the free cast; the Elves have haste this turn.
+
 ### Jetsam: one spell from each opponent, in the order you pick
 
 - **Do:** Cast Flotsam // Jetsam, clicking Jetsam. When offered, cast Hill Giant and Confirm.

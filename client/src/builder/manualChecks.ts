@@ -10886,4 +10886,18 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: ['Mountain', 'Island'], hand: ['Lightning Bolt'], human: true },
     }),
   ),
+  // --- Time counters that reach a suspended card (2026-11-04) --------
+  preset(
+    "Jhoira's Timebug: a suspended card you own can be targeted",
+    board({
+      you: { bf: ["Jhoira's Timebug", 'Mountain*2'], hand: ['Pardic Dragon'] },
+      opp: { bf: ['Grizzly Bears'] },
+    }),
+  ),
+  preset(
+    'Alaundo the Seer: the exiled card comes back when its last time counter goes',
+    board({
+      you: { bf: ['Alaundo the Seer'], hand: ['Llanowar Elves', 'Forest'], lib: ['Island*20'] },
+    }),
+  ),
 ]

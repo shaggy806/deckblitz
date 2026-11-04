@@ -909,6 +909,10 @@ export interface CardFilter {
    * creatures you control with disguise". Read off its rules text
    * (`rulesTextName`), so `faceDown: false` goes with it for "face-up". */
   readonly hasDisguise?: boolean;
+  /** Is (or isn't) a suspended card (rule 702.62b: in exile, with suspend, with
+   * a time counter on it) — Shivan Sand-Mage's "target permanent or suspended
+   * card", Amy Pond's "a suspended card you own". */
+  readonly suspended?: boolean;
   /** Is (or isn't) a spell: on the stack as a card or a copy, or being cast
    * (`FilterContext.asSpell`). A protection's "from instant spells" (rule
    * 702.16a — Devoted Caretaker) is not "from instants": a permanent, even
@@ -2666,6 +2670,10 @@ export function matchesFilter(
     const name = live !== undefined ? rulesTextName(live) : lki?.name;
     const has = name !== undefined && registry.has(name) && registry.get(name).overload?.keyword === "mutate";
     if (has !== filter.hasMutate) return false;
+  }
+  if (filter.suspended !== undefined) {
+    const suspended = live !== undefined && live.zone === "exile" && live.suspended === true && (live.counters.time ?? 0) > 0;
+    if (suspended !== filter.suspended) return false;
   }
   if (filter.hasDisguise !== undefined) {
     const name = live !== undefined ? rulesTextName(live) : lki?.name;

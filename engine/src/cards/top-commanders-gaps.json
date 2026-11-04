@@ -1729,7 +1729,15 @@
   "effect:manifest-from-hand",
   "mechanic:face-down-piles-opponent-chooses",
   "effect:flicker-return-face-down",
-  "effect:return-face-up-or-down"
+  "effect:return-face-up-or-down",
+  "effect:add-time-counters-suspended-card",
+  "effect:remove-time-counter-each-exiled-card",
+  "effect:remove-time-counters-chosen-suspended",
+  "target:permanent-or-suspended-card",
+  "effect:exile-from-hand-with-time-counters-grant-cast",
+  "effect:exile-self-with-time-counters",
+  "effect:exile-spell-as-it-resolves-suspended",
+  "effect:time-counters-on-all-suspended"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

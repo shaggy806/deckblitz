@@ -2348,6 +2348,8 @@ export interface CastNowOptions {
    * suspend's creature spell gains haste (`hastyUntilItLeaves`). A suspended
    * card not cast stays exiled, no longer suspended. */
   readonly freeCastOf?: "cascade" | "suspend";
+  /** The `cast-now` effect's `gainsHaste`. */
+  readonly gainsHaste?: true;
   /** Cast it **transformed** — a transforming double-faced card with its back
    * face up on the stack (rule 712.11a); see the `cast-now` effect's
    * `transformed`. */
@@ -4841,6 +4843,10 @@ export type EffectSpec =
        * exiled, no longer suspended. Not for card definitions.
        */
       readonly suspend?: true;
+      /** "If you cast a creature spell this way, it gains haste until end of
+       * turn" (what Alaundo the Seer's card gains): on the spell and the
+       * permanent it becomes (rule 400.7h). */
+      readonly gainsHaste?: true;
       /**
        * What the spell cast must be — "an instant or sorcery spell with mana
        * value 4 or less", "if that spell's mana value is 8 or less" —
@@ -5732,6 +5738,8 @@ export type EffectSpec =
       readonly filter: CardFilter;
       readonly counter: string;
       readonly amount: EffectAmount | "all";
+      /** "…and each suspended card" (Dust of Moments), `counter` being time. */
+      readonly andSuspended?: true;
     }
   | {
       /**
@@ -5866,6 +5874,8 @@ export type EffectSpec =
       readonly kind: "add-counter-all";
       readonly filter: CardFilter;
       readonly counter: string;
+      /** "…and each suspended card" (Dust of Moments), `counter` being time. */
+      readonly andSuspended?: true;
       /** `"own-toughness"`: each permanent gets as many as its own
        * toughness — Canopy Gargantuan's "a number of +1/+1 counters on each
        * other creature you control equal to **that creature's** toughness".
@@ -6083,6 +6093,24 @@ export type EffectSpec =
       readonly target?: EffectTargetRef;
       readonly filter?: CardFilter;
       readonly onlyWithSuspend?: true;
+      /** Not suspend but only its last line: "It gains 'When the last time
+       * counter is removed from this card, if it's exiled, you may cast it
+       * without paying its mana cost. If you cast a creature spell this way,
+       * it gains haste until end of turn'" (Alaundo the Seer). No upkeep takes
+       * its counters off, and it isn't suspended (rule 702.62b) unless it has
+       * suspend of its own. */
+      readonly timeCast?: true;
+    }
+  | {
+      /**
+       * "Remove a time counter from **each other card you own in exile**"
+       * (Alaundo the Seer): `amount` off each that has one, the last off a
+       * suspended card triggering its cast (rule 702.62a).
+       * `exceptExiledThisWay`: "other" than what this resolution exiled.
+       */
+      readonly kind: "remove-time-counters-in-exile";
+      readonly amount: EffectAmount;
+      readonly exceptExiledThisWay?: true;
     }
   | {
       readonly kind: "grant-keyword";
@@ -7407,6 +7435,10 @@ export type EffectSpec =
       /** "If you do, it becomes plotted" (rule 702.170 — Lilah, Undefeated
        * Slickshot): the card this exiles is plotted. */
       readonly plotted?: true;
+      /** "Exile that card with three time counters on it … Then if the exiled
+       * card doesn't have suspend, it gains suspend" (rule 702.62b — Gandalf
+       * of the Secret Fire). */
+      readonly timeCounters?: number;
       /** Only the engine sets this: the answer to that rule 616.1 choice,
        * applied to the spell `spell` that has just resolved — `true` to
        * apply this replacement first, `false` to let the other. */
@@ -12180,8 +12212,13 @@ export interface EffectApi {
    * `target` names, resolved; absent for the "exiled this way" form. */
   giveSuspend?(
     counters: number | "mana-value",
-    options: { readonly filter?: CardFilter; readonly onlyWithSuspend?: true; readonly target?: TargetRef },
+    options: { readonly filter?: CardFilter; readonly onlyWithSuspend?: true; readonly target?: TargetRef; readonly timeCast?: true },
   ): void;
+  /** See the `"remove-time-counters-in-exile"` {@link EffectSpec}. */
+  removeTimeCountersInExile(amount: number, exceptExiledThisWay: boolean): void;
+  /** `amount` time counters on (negative: off) each suspended card — an
+   * `add-counter-all`'s or `remove-counter-all`'s `andSuspended`. */
+  timeCountersOnSuspended(amount: number): void;
   /** "N mana in any combination of …" with too many splits to list as
    * modes: the controller says how many of each colour, as one decision
    * (`addManaChoice`). Absent on a bare context, which asks unit by unit. */
@@ -12317,7 +12354,7 @@ export interface EffectApi {
   copyTriggerSpellForEach(spell: SpellSnapshot, each: CopyForEach, copier: PlayerId): void;
   /** See the `exile-spell-as-it-resolves` {@link EffectSpec}: mark the
    * trigger's spell. */
-  exileTriggerSpellAsItResolves(returnAtNextEndStep: boolean, plotted: boolean): void;
+  exileTriggerSpellAsItResolves(returnAtNextEndStep: boolean, plotted: boolean, timeCounters?: number): void;
   /** The controller may collect evidence `amount` — see the
    * `collect-evidence` effect. */
   collectEvidence(amount: number, then: EffectSpec | undefined): void;
@@ -14022,6 +14059,7 @@ function offerCastNow(
       exileAfter: spec.exileAfter ?? false,
       ...(spec.play === true ? { play: true } : {}),
       ...(spec.suspend === true ? { freeCastOf: "suspend" as const } : {}),
+      ...(spec.gainsHaste === true ? { gainsHaste: true as const } : {}),
       ...(spell !== undefined ? { spell } : {}),
       ...(castsLeft !== undefined ? { castsLeft } : {}),
       ...(manaValueLeft !== undefined ? { manaValueLeft } : {}),
@@ -17523,6 +17561,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         spec.putByTarget === true ? scopeTo : undefined,
         spared?.kind === "object" ? spared.object : undefined,
       );
+      if (spec.andSuspended === true && spec.amount !== "own-toughness") ctx.timeCountersOnSuspended(amountValue(spec.amount, ctx));
       return;
     }
     case "double-counters-all":
@@ -17826,9 +17865,12 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       if (target !== undefined) ctx.removeCounter(target, spec.counter, spec.amount === "all" ? "all" : amountValue(spec.amount, ctx));
       return;
     }
-    case "remove-counter-all":
-      ctx.removeCounterAll(spec.filter, spec.counter, spec.amount === "all" ? "all" : amountValue(spec.amount, ctx));
+    case "remove-counter-all": {
+      const amount = spec.amount === "all" ? "all" : amountValue(spec.amount, ctx);
+      ctx.removeCounterAll(spec.filter, spec.counter, amount);
+      if (spec.andSuspended === true && amount !== "all") ctx.timeCountersOnSuspended(-amount);
       return;
+    }
     case "remove-counters": {
       if (spec.playerProgress !== undefined) {
         applyPlayerCounterRemoval(spec, spec.playerProgress, ctx);
@@ -17909,6 +17951,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       const options = {
         ...(spec.filter !== undefined ? { filter: spec.filter } : {}),
         ...(spec.onlyWithSuspend === true ? { onlyWithSuspend: true as const } : {}),
+        ...(spec.timeCast === true ? { timeCast: true as const } : {}),
       };
       if (spec.target === undefined) {
         ctx.giveSuspend?.(counters, options);
@@ -17918,6 +17961,9 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       if (target !== undefined) ctx.giveSuspend?.(counters, { ...options, target });
       return;
     }
+    case "remove-time-counters-in-exile":
+      ctx.removeTimeCountersInExile(amountValue(spec.amount, ctx), spec.exceptExiledThisWay === true);
+      return;
     case "proliferate":
       ctx.proliferate(spec.then ?? null);
       return;
@@ -18418,7 +18464,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       if (spec.applyFirst !== undefined) {
         ctx.finishExiledAsItResolves(spec.applyFirst.spell, spec.applyFirst.feather, spec.applyFirst.intoHand);
       }
-      else ctx.exileTriggerSpellAsItResolves(spec.returnAtNextEndStep === true, spec.plotted === true);
+      else ctx.exileTriggerSpellAsItResolves(spec.returnAtNextEndStep === true, spec.plotted === true, spec.timeCounters);
       return;
     case "copy-spell": {
       const newTargets = spec.newTargets === true;

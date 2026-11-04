@@ -4161,6 +4161,33 @@ export function parseSentence(sentence, ctx) {
   }
   // Counters.
   // "On the creature tapped to pay this spell's additional cost" (Swallow Whole).
+  // Time counters that reach a suspended card (rule 702.62b): a target (Shivan
+  // Sand-Mage), each of them (Dust of Moments), and a spell exiling itself with
+  // them (Charnel Serenade).
+  {
+    const suspendedCard = { kind: "card-in-exile", filter: { suspended: true } };
+    const withTime = { counters: { kind: "time", compare: { op: "gte", n: 1 } } };
+    if ((m = re(`remove ${N} time counters? from target permanent or suspended card`).exec(s))) {
+      return { kind: "remove-counter", target: ctx.target({ kind: "one-of", of: ["permanent", suspendedCard] }), counter: "time", amount: numberOf(m[1]) };
+    }
+    if ((m = re(`put ${N} time counters? on target permanent with a time counter on it or suspended card`).exec(s))) {
+      return {
+        kind: "add-counter",
+        target: ctx.target({ kind: "one-of", of: [{ kind: "permanent", filter: withTime }, suspendedCard] }),
+        counter: "time",
+        amount: numberOf(m[1]),
+      };
+    }
+    if ((m = re(`remove ${N} time counters? from each permanent and each suspended card`).exec(s))) {
+      return { kind: "remove-counter-all", filter: {}, counter: "time", amount: numberOf(m[1]), andSuspended: true };
+    }
+    if ((m = re(`put ${N} time counters? on each permanent with a time counter on it and each suspended card`).exec(s))) {
+      return { kind: "add-counter-all", filter: withTime, counter: "time", amount: numberOf(m[1]), andSuspended: true };
+    }
+    if ((m = re(`exile ~ with ${N} time counters? on it`).exec(s))) {
+      return { kind: "give-suspend", target: "source", timeCounters: numberOf(m[1]) };
+    }
+  }
   if ((m = re(`put ${N} ([+-]\\d+/[+-]\\d+|[a-z]+) counters? on the creature tapped to pay ~'s additional cost`).exec(s))) {
     return { kind: "add-counter", target: "tapped", counter: m[2].toLowerCase(), amount: amount(m[1]) };
   }
@@ -12172,6 +12199,15 @@ function pilesAt(sentences, i, ctx) {
   const s = (k) => sentences[i + k] ?? "";
   const handGraveyard = { chosen: "hand", rest: "graveyard" };
   const opponentChooses = (inner) => ({ kind: "choose-opponent", then: inner });
+  // Not piles, but two sentences that make one effect: Gandalf's "Exile that
+  // card with N time counters on it instead of putting it into your graveyard
+  // as it resolves. Then if the exiled card doesn't have suspend, it gains
+  // suspend."
+  const asItResolves = new RegExp(`^exile that card with ${N} time counters on it instead of putting it into your graveyard as it resolves\\.$`, "i").exec(s(0));
+  if (asItResolves !== null && /^then if the exiled card doesn't have suspend, it gains suspend\.$/i.test(s(1))) {
+    const timeCounters = numberOf(asItResolves[1]);
+    return typeof timeCounters === "number" ? { effect: { kind: "exile-spell-as-it-resolves", timeCounters }, used: 2 } : null;
+  }
   // Piles made in exile (`exile-into-piles`): "Exile the top N … in a face-down
   // pile, then exile the top M … in another face-down pile. Look at the cards in
   // each pile, then turn a pile of your choice face up. An opponent chooses one

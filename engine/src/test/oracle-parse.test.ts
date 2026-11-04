@@ -14651,3 +14651,62 @@ describe("manifest or cloak with a choosable source, piles in exile, a return fa
     });
   });
 });
+
+describe("time counters that reach a suspended card", () => {
+  const read = (type_line: string, oracle_text: string) =>
+    parseFace({ name: "Test Card", type_line, oracle_text, mana_cost: "{7}", colors: [], cmc: 7 } as never) as unknown as {
+      effect?: unknown;
+      targets?: unknown;
+    };
+  const suspendedCard = { kind: "card-in-exile", filter: { suspended: true } };
+  const withTime = { counters: { kind: "time", compare: { op: "gte", n: 1 } } };
+
+  it("reads a target permanent or suspended card", () => {
+    const remove = read("Instant", "Remove two time counters from target permanent or suspended card.");
+    expect(remove.targets).toEqual([{ kind: "one-of", of: ["permanent", suspendedCard] }]);
+    expect(remove.effect).toEqual({ kind: "remove-counter", target: 0, counter: "time", amount: 2 });
+    const put = read("Instant", "Put two time counters on target permanent with a time counter on it or suspended card.");
+    expect(put.targets).toEqual([{ kind: "one-of", of: [{ kind: "permanent", filter: withTime }, suspendedCard] }]);
+    expect(put.effect).toEqual({ kind: "add-counter", target: 0, counter: "time", amount: 2 });
+  });
+
+  it("reads each suspended card", () => {
+    expect(read("Instant", "Remove two time counters from each permanent and each suspended card.").effect).toEqual({
+      kind: "remove-counter-all",
+      filter: {},
+      counter: "time",
+      amount: 2,
+      andSuspended: true,
+    });
+    expect(read("Instant", "Put two time counters on each permanent with a time counter on it and each suspended card.").effect).toEqual({
+      kind: "add-counter-all",
+      filter: withTime,
+      counter: "time",
+      amount: 2,
+      andSuspended: true,
+    });
+  });
+
+  it("reads a spell exiling itself with time counters, and Gandalf's instead", () => {
+    const serenade = parseFace({
+      name: "Serenade",
+      type_line: "Sorcery",
+      oracle_text: "Draw a card. Exile Serenade with three time counters on it.",
+      mana_cost: "{7}",
+      colors: [],
+      cmc: 7,
+    } as never) as unknown as { effect: unknown };
+    expect(serenade.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "draw", amount: 1 },
+        { kind: "give-suspend", target: "source", timeCounters: 3 },
+      ],
+    });
+    const gandalf = read(
+      "Instant",
+      "Exile that card with three time counters on it instead of putting it into your graveyard as it resolves. Then if the exiled card doesn't have suspend, it gains suspend.",
+    );
+    expect(gandalf.effect).toEqual({ kind: "exile-spell-as-it-resolves", timeCounters: 3 });
+  });
+});

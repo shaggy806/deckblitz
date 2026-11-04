@@ -317,6 +317,9 @@ export interface GameObject {
     readonly returnAtNextEndStep?: true;
     /** The exiled card becomes plotted (rule 702.170 — Lilah). */
     readonly plotted?: true;
+    /** It's exiled with this many time counters, and has suspend (Gandalf of
+     * the Secret Fire). */
+    readonly timeCounters?: number;
   };
   /** This spell is to be put into its owner's hand instead of `player`'s
    * graveyard as it resolves — Soulfire Grand Master (`source`), a
@@ -1309,6 +1312,12 @@ export interface GameObject {
    * at the owner's upkeep; at zero it's cast for free. Cleared on any zone
    * change. */
   suspended?: boolean;
+  /** True on a card in exile that gained "When the last time counter is removed
+   * from this card, if it's exiled, you may cast it without paying its mana
+   * cost" with no suspend of its own (Alaundo the Seer): no upkeep takes its
+   * counters off, and it isn't suspended (rule 702.62b). Cleared on any zone
+   * change. */
+  timeCast?: boolean;
   /** True on a permanent cast from suspend (or another "has haste until it
    * leaves" grant) — `hasSummoningSickness` returns false for it. Cleared on
    * any zone change. */
@@ -3122,6 +3131,8 @@ export interface CastNowAsk {
   readonly exileAfter: boolean | "instants-and-sorceries";
   readonly spell?: CardFilter;
   readonly freeCastOf?: "cascade" | "suspend";
+  /** The `cast-now` effect's `gainsHaste`. */
+  readonly gainsHaste?: true;
 }
 
 /**
@@ -4572,6 +4583,8 @@ export type AwaitingDecision =
       readonly exileAfter: boolean | "instants-and-sorceries";
       /** Cascade's or suspend's own free cast — see `CastNowOptions`. */
       readonly freeCastOf?: "cascade" | "suspend";
+      /** The `cast-now` effect's `gainsHaste`. */
+      readonly gainsHaste?: true;
       /** "Up to N": how many more spells this may be, this one included. */
       readonly castsLeft?: number;
       /** "Total mana value N or less": how much is left. `spell` already

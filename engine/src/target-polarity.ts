@@ -562,6 +562,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   // Its card is never a target: a card found, the spell itself, or the
   // cards exiled this way.
   "give-suspend": none,
+  "remove-time-counters-in-exile": none,
   "grant-keyword": (n, v) =>
     n.keyword === "defender"
       ? v.touch(n.target, "harm", MINOR)

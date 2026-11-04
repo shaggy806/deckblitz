@@ -14777,6 +14777,7 @@ export class Game {
     const object = this.state.objects[cardId];
     if (object === undefined) return;
     object.suspended = false;
+    object.timeCast = undefined;
     this.emit({ type: "spell-fizzled", object: cardId, reason });
   }
 
@@ -18613,6 +18614,7 @@ export class Game {
             exileAfter: awaiting.exileAfter,
             ...(awaiting.spell !== undefined ? { spell: awaiting.spell } : {}),
             ...(awaiting.freeCastOf !== undefined ? { freeCastOf: awaiting.freeCastOf } : {}),
+            ...(awaiting.gainsHaste === true ? { gainsHaste: true as const } : {}),
           }
         : this.castNowProbe;
     return asked !== null && asked.player === player && asked.cards.includes(cardId) ? asked : null;
@@ -18662,6 +18664,7 @@ export class Game {
       exileAfter: options.exileAfter,
       ...(options.spell !== undefined ? { spell: options.spell } : {}),
       ...(options.freeCastOf !== undefined ? { freeCastOf: options.freeCastOf } : {}),
+      ...(options.gainsHaste === true ? { gainsHaste: true as const } : {}),
     };
     const offers: CastSpellOffer[] = [];
     const lands: PlayLandOffer[] = [];
@@ -18736,6 +18739,7 @@ export class Game {
       ...(options.spell !== undefined ? { spell: options.spell } : {}),
       exileAfter: options.exileAfter,
       ...(options.freeCastOf !== undefined ? { freeCastOf: options.freeCastOf } : {}),
+      ...(options.gainsHaste === true ? { gainsHaste: true as const } : {}),
       ...(options.castsLeft !== undefined ? { castsLeft: options.castsLeft } : {}),
       ...(options.manaValueLeft !== undefined ? { manaValueLeft: options.manaValueLeft } : {}),
     };
@@ -19361,7 +19365,8 @@ export class Game {
     // (rule 400.7h), and so the permanent it becomes, for as long as the
     // effect says even once Thundermane is gone (400.7b, 611.3d; the modifier
     // is a `castRider`, which `moveObject` carries onto the battlefield).
-    if (hasteFromTop && effectiveTypes(this.state, this.registry, object).includes("creature")) {
+    const hasteFromEffect = via === "effect" && this.castNowProbe?.gainsHaste === true;
+    if ((hasteFromTop || hasteFromEffect) && effectiveTypes(this.state, this.registry, object).includes("creature")) {
       object.modifiers.push({
         timestamp: this.freshTimestamp(),
         power: 0,
@@ -26782,6 +26787,13 @@ export class Game {
     this.emit({ type: "graveyard-replaced-with-exile", object: id });
     // "If you do, it becomes plotted" (Lilah, Undefeated Slickshot).
     if (mark.plotted === true) this.makePlotted(mark.player, id, before);
+    // "…with three time counters on it. Then if the exiled card doesn't have
+    // suspend, it gains suspend" (Gandalf of the Secret Fire): `give-suspend`'s.
+    if (mark.timeCounters !== undefined) {
+      object.counters.time = (object.counters.time ?? 0) + mark.timeCounters;
+      object.suspended = true;
+      this.emit({ type: "card-suspended", player: object.owner, object: id, timeCounters: object.counters.time });
+    }
     if (mark.returnAtNextEndStep !== true) return;
     this.createDelayedTrigger(
       mark.source,
@@ -33459,7 +33471,11 @@ export class Game {
         const before = this.state.objects[target.object];
         // A suspended card's time counter (rule 702.62a — suspend's own
         // upkeep trigger, or an effect): its last one triggers the cast.
-        if (before?.zone === "exile" && before.suspended === true && (counter === "time" || (counter === "any" && amount === "all"))) {
+        if (
+          before?.zone === "exile" &&
+          (before.suspended === true || before.timeCast === true) &&
+          (counter === "time" || (counter === "any" && amount === "all"))
+        ) {
           this.removeTimeCounter(target.object, amount === "all" ? (before.counters.time ?? 0) : amount);
           return;
         }
@@ -34696,6 +34712,13 @@ export class Game {
           return object?.owner === controller && object.suspended === true && (object.counters.time ?? 0) > 0;
         }).length,
       giveSuspend: (counters, options) => this.giveSuspend(controller, counters, options),
+      removeTimeCountersInExile: (amount, exceptExiledThisWay) =>
+        this.removeTimeCountersInExile(
+          controller,
+          amount,
+          exceptExiledThisWay ? thisWayEntries(this.state, "exiled").map((entry) => entry.object) : [],
+        ),
+      timeCountersOnSuspended: (amount) => this.timeCountersOnSuspended(amount),
       choosePermanents: (filter, min, max, then, prompt, exceptSource, except, chooser, together, thenTargets, thenTogether) =>
         this.beginChoosePermanents(source, chooser ?? controller, x, filter, min, max, then, prompt, exceptSource === true, except, together, thenTargets, thenTogether),
       blight: (player, amount, then) => this.beginBlight(player, source, amount, { x, ...(then !== undefined ? { then } : {}) }),
@@ -35585,7 +35608,7 @@ export class Game {
           looksAtFaceDown: true,
         };
       },
-      exileTriggerSpellAsItResolves: (returnAtNextEndStep, plotted) => {
+      exileTriggerSpellAsItResolves: (returnAtNextEndStep, plotted, timeCounters) => {
         // "That card" — the spell that fired this, still that spell on the
         // stack (rule 400.7).
         if (triggerObject === undefined || refs.triggerSpell === undefined) return;
@@ -35604,6 +35627,7 @@ export class Game {
           source,
           ...(returnAtNextEndStep ? { returnAtNextEndStep: true as const } : {}),
           ...(plotted ? { plotted: true as const } : {}),
+          ...(timeCounters !== undefined ? { timeCounters } : {}),
         };
       },
       finishExiledAsItResolves: (spell, feather, intoHand) =>
@@ -42777,6 +42801,10 @@ export class Game {
     // Zero counters is no counters (a "for each" that came to none): nothing
     // is put, nothing is announced, and no token is split off a stack for it.
     if (target.kind !== "object" || amount <= 0) return;
+    // A time counter on a suspended card (rule 702.62b — Pardic Dragon, Curse
+    // of the Cabal): not a permanent, so what acts on a permanent's counters
+    // doesn't apply.
+    if (counter === "time" && this.addTimeCounterInExile(target.object, amount)) return;
     // "Counters can't be put on" it (Solemnity): none are, and nothing else
     // happens for them.
     if (this.countersPrevented({ object: target.object }, counter)) return;
@@ -43180,9 +43208,8 @@ export class Game {
       if (object === undefined) continue;
       if (object.zone === "battlefield") {
         this.addCounter({ kind: "object", object: id }, "time", 1, false, player);
-      } else if (object.zone === "exile" && object.suspended === true) {
-        object.counters.time = (object.counters.time ?? 0) + 1;
-        this.emit({ type: "time-counter-added", object: id, now: object.counters.time });
+      } else {
+        this.addTimeCounterInExile(id, 1);
       }
     }
     for (const id of remove) this.removeTimeCounter(id, 1);
@@ -43259,10 +43286,42 @@ export class Game {
     else delete object.counters.time;
     if (object.zone === "battlefield") {
       this.emit({ type: "counter-removed", object: id, counter: "time", amount: n, after });
-    } else if (object.zone === "exile" && object.suspended === true) {
+    } else if (object.zone === "exile" && (object.suspended === true || object.timeCast === true)) {
       this.emit({ type: "time-counter-removed", object: id, remaining: after });
-      if (after === 0) this.suspendTrigger(id, "cast");
+      if (after === 0 && object.suspended === true) this.suspendTrigger(id, "cast");
+      if (after === 0 && object.timeCast === true) this.timeCastTrigger(id);
     }
+  }
+
+  /** A time counter or more on the exiled card `id` that's suspended, or that
+   * gained "when the last time counter is removed" (Alaundo the Seer): whether
+   * it was one, so the counters went on. */
+  private addTimeCounterInExile(id: ObjectId, amount: number): boolean {
+    const object = this.state.objects[id];
+    if (object?.zone !== "exile" || (object.suspended !== true && object.timeCast !== true)) return false;
+    object.counters.time = (object.counters.time ?? 0) + amount;
+    this.emit({ type: "time-counter-added", object: id, now: object.counters.time });
+    return true;
+  }
+
+  /** What Alaundo the Seer's card gained: "When the last time counter is removed
+   * from this card, if it's exiled, you may cast it without paying its mana
+   * cost. If you cast a creature spell this way, it gains haste until end of
+   * turn." A triggered ability of the card, controlled by its owner. */
+  private timeCastTrigger(cardId: ObjectId): void {
+    const object = this.state.objects[cardId];
+    if (object === undefined) return;
+    this.state.pendingTriggers.push({
+      sourceObjectId: cardId,
+      cardName: printedCardName(object),
+      abilityIndex: 0,
+      controller: object.owner,
+      reflexive: {
+        targets: [],
+        effect: { kind: "cast-now", target: "source", free: true, gainsHaste: true },
+        text: "When the last time counter is removed from this card, if it's exiled, you may cast it without paying its mana cost. If you cast a creature spell this way, it gains haste until end of turn.",
+      },
+    });
   }
 
   /**
@@ -43275,7 +43334,7 @@ export class Game {
   private giveSuspend(
     controller: PlayerId,
     counters: number | "mana-value",
-    options: { readonly filter?: CardFilter; readonly onlyWithSuspend?: true; readonly target?: TargetRef },
+    options: { readonly filter?: CardFilter; readonly onlyWithSuspend?: true; readonly target?: TargetRef; readonly timeCast?: true },
   ): void {
     let cards: ObjectId[];
     if (options.target !== undefined) {
@@ -43307,7 +43366,18 @@ export class Game {
       if (object === undefined || object.zone !== "exile") continue;
       const def = this.registry.get(printedCardName(object));
       if (options.onlyWithSuspend === true && def.suspend === null) continue;
-      this.suspendExiledCard(id, counters === "mana-value" ? manaValueOfObject(this.registry, object) : counters);
+      const n = counters === "mana-value" ? manaValueOfObject(this.registry, object) : counters;
+      if (n <= 0) continue;
+      // Alaundo the Seer's card has only the ability it gained: suspended only
+      // if it has suspend of its own (rule 702.62b).
+      if (options.timeCast === true) {
+        object.counters.time = (object.counters.time ?? 0) + n;
+        object.timeCast = true;
+        if (def.suspend !== null) object.suspended = true;
+        this.emit({ type: "time-counter-added", object: id, now: object.counters.time });
+        continue;
+      }
+      this.suspendExiledCard(id, n);
     }
   }
 
@@ -43319,6 +43389,25 @@ export class Game {
     object.counters.time = (object.counters.time ?? 0) + n;
     object.suspended = true;
     this.emit({ type: "card-suspended", player: object.owner, object: id, timeCounters: object.counters.time });
+  }
+
+  /** Each other card `owner` owns in exile: a time counter off each that has
+   * one (Alaundo the Seer). */
+  private removeTimeCountersInExile(owner: PlayerId, amount: number, except: readonly ObjectId[]): void {
+    for (const id of [...this.state.zones.shared.exile]) {
+      const object = this.state.objects[id];
+      if (object?.owner === owner && !except.includes(id)) this.removeTimeCounter(id, amount);
+    }
+  }
+
+  /** `amount` time counters on (or, negative, off) each suspended card in exile
+   * — Dust of Moments' "and each suspended card". */
+  private timeCountersOnSuspended(amount: number): void {
+    for (const id of [...this.state.zones.shared.exile]) {
+      if (!this.isSuspended(id)) continue;
+      if (amount > 0) this.addTimeCounterInExile(id, amount);
+      else this.removeTimeCounter(id, -amount);
+    }
   }
 
 
@@ -54445,6 +54534,7 @@ export class Game {
     delete object.grantedGraveyardKeywords;
     delete object.foretoldReducedBy;
     object.suspended = false;
+    object.timeCast = undefined;
     if (!enteringToken) object.exileAtEndStep = false;
     object.foretold = false;
     object.foretoldOnTurn = null;
