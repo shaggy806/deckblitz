@@ -148,6 +148,17 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "for-each-player": (n, v) => {
     v.child(n.before);
     v.child(n.effect);
+    // "Target player puts cards from their hand on their library" (Stunted
+    // Growth): what they'd have played, drawn again.
+    if (
+      typeof n.who === "object" &&
+      "target" in n.who &&
+      n.effect.kind === "look-and-choose" &&
+      n.effect.zone === "hand" &&
+      n.effect.destination.startsWith("library")
+    ) {
+      v.touch(n.who.target, "harm", MINOR);
+    }
   },
   // A vote names no target; a `for-each-voted`'s slot 0 is a permanent voted
   // for, not the spell's target 0.
@@ -193,7 +204,11 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "choose-opponent": (n, v) => v.child(n.then),
   "about-player": (n, v) => v.child(n.effect),
   "offer-zone-choice": none,
-  "choose-permanents": none,
+  // `keepTargets`: `then` reads the chosen permanent at 0 and the targets from
+  // slot 1 (Crush Underfoot).
+  "choose-permanents": (n, v) => {
+    if (n.keepTargets === true) v.childAfterFound(n.then);
+  },
   // Its `then` reads the blighted creature as target 0. "Target opponent
   // blights 2" harms the player in that slot.
   blight: (n, v) => {

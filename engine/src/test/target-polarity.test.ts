@@ -235,6 +235,12 @@ describe("slot polarity", () => {
     expect(unrated.length / slots, unrated.slice(0, 40).join("; ")).toBeLessThan(0.0076);
   });
 
+  it("rates a slot read past a chosen permanent, and a hand put back on a library", () => {
+    const strength = (effect: Parameters<typeof slotStrengths>[0]) => slotStrengths(effect, 1)[0];
+    expect(strength(registry.get("Crush Underfoot").effect)?.polarity).toBe("harm");
+    expect(strength(registry.get("Stunted Growth").effect)?.polarity).toBe("harm");
+  });
+
   it("tells a slot rated either way from one nothing rates", () => {
     const strength = (effect: Parameters<typeof slotStrengths>[0]) => slotStrengths(effect, 1)[0];
     // "Target player shuffles": looked at, and it's the board's call.
