@@ -2011,6 +2011,18 @@ export class Game {
    * See {@link withEnterBatch}. Not game state: it only ever spans one
    * synchronous call. */
   private enterBatch: Set<ObjectId> | null = null;
+  /** The players whose first tokens of the turn are in the entry under way.
+   * Not game state: it spans one outermost `withEnterBatch`. */
+  private readonly firstTokenCreators = new Set<PlayerId>();
+  /** A permanent on its way to exile that comes back at the next end step, for
+   * the span of its `moveObject` — see `returnAtNextEndStep`. */
+  private readonly exiledToReturn = new Map<ObjectId, { readonly source: ObjectId; readonly controller: PlayerId }>();
+  /** A permanent on its way to exile by a replacement that does something
+   * else too, for the span of its `moveObject` — `GraveyardExileReplacement.then`. */
+  private readonly exiledThen = new Map<
+    ObjectId,
+    { readonly effect: EffectSpec; readonly source: ObjectId; readonly controller: PlayerId; readonly times: number }
+  >();
   /** While one simultaneous damage event is dealt source by source (a combat
    * damage step — rule 510.2), the permanents whose shield counter already
    * went: the counter's prevention is one replacement on the event (rules
@@ -12482,6 +12494,13 @@ export class Game {
     // A land with cost-less mayhem its owner discarded this turn (rule
     // 702.187c — Oscorp Industries).
     if (this.mayhemCastable(player, cardId) && this.registry.get(this.state.objects[cardId].cardName).types.includes("land")) {
+      return true;
+    }
+    // A resolved "you may play lands … from your graveyard" (Gaea's Will).
+    if (
+      (this.state.playerEffects ?? []).some((e) => e.owner === player && e.playLandsFromGraveyard === true) &&
+      this.withFace(cardId, face, () => matchesFilter(this.state, this.registry, cardId, { type: "land" }, { you: player }))
+    ) {
       return true;
     }
     return this.playPermissionFrom(player, cardId, face, (ability) => ability.playFromGraveyard);
@@ -28035,6 +28054,7 @@ export class Game {
       for (const event of entered) this.emit(event);
     } finally {
       [this.enterBatchFired, this.enterBatchEvents] = outer;
+      this.firstTokenCreators.clear();
     }
     return result;
   }
@@ -28232,7 +28252,8 @@ export class Game {
           event.type === "permanent-entered-battlefield" &&
           !(spec.otherOnly === true && event.object === self.id) &&
           this.matchesWho(spec.who, event.object, self) &&
-          this.triggerFilterOk(spec.filter, event.object, self)
+          this.triggerFilterOk(spec.filter, event.object, self) &&
+          (spec.firstCreationEachTurn !== true || this.firstTokenCreators.has(self.controller))
         );
       case "dies":
         // "Whenever one or more …": once, off the whole event.
@@ -33794,6 +33815,11 @@ export class Game {
           const { ofChosenType: _chosen, ...rest } = flash.filter;
           effect = { ...effect, castAsThoughFlash: { ...flash, filter: { ...rest, subtype: chosen } } };
         }
+        // "The next time you would draw": which objects its targets are now.
+        const instead = effect.nextDrawInstead;
+        if (instead !== undefined) {
+          effect = { ...effect, nextDrawInstead: { ...instead, targetStints: this.stintsOfTargets(instead.targets) } };
+        }
         (this.state.playerEffects ??= []).push(
           effect.noMaxHandSize === undefined ? effect : { ...effect, timestamp: this.freshTimestamp() },
         );
@@ -34572,8 +34598,16 @@ export class Game {
               this.addCounter({ kind: "object", object: id }, thenCounters.kind, thenCounters.amount, false, controller);
             }
           }
-          // "…that are tapped and attacking" (rule 508.4).
-          if (attacking !== undefined) this.putIntoAttack(made, p, attacking);
+          // "…that are tapped and attacking" (rule 508.4). One created under
+          // another player's control instead is tapped, but not attacking
+          // (Crafty Cutpurse's ruling).
+          if (attacking !== undefined) {
+            this.putIntoAttack(made.filter((id) => this.state.objects[id]?.controller === p), p, attacking);
+            for (const id of made) {
+              const object = this.state.objects[id];
+              if (object !== undefined && object.controller !== p) object.tapped = true;
+            }
+          }
         };
         // "Each opponent creates a Treasure token": each of them, APNAP.
         if (who !== undefined && who !== "you" && who !== "target-controller") {
@@ -37904,6 +37938,7 @@ export class Game {
     attachTo?: ObjectId | null,
   ): readonly ObjectId[] {
     const def = this.registry.get(tokenName); // validate the token is a known definition
+    controller = this.tokenCreatorAfterRedirects(controller);
     if (attachTo !== undefined) {
       if (attachTo === null || !this.canCreateAttached(def, attachTo, controller)) return [];
       // One token of a compacted stack is the one it goes on, as an attach
@@ -38005,6 +38040,48 @@ export class Game {
             ),
       ),
     ]);
+  }
+
+  /**
+   * Who creates a token that would be created under `controller`'s control,
+   * once "each token that would be created under an opponent's control this
+   * turn is created under your control instead" (Crafty Cutpurse) has applied:
+   * before every other replacement on the event (its ruling), each effect once
+   * (rule 614.5), so with one on each side of a duel it ends where it began.
+   * A token enters under the control of the player who creates it (rule 111.2).
+   * When two opponents' could apply, the would-be controller would choose (the
+   * ruling): that isn't asked — the opponent first in turn order after them goes
+   * first (AUTHORING §15, "Replacement ordering"), as a Notion Thief does.
+   */
+  private tokenCreatorAfterRedirects(controller: PlayerId): PlayerId {
+    const effects = this.state.playerEffects;
+    if (effects === undefined || !effects.some((e) => e.tokensComeToOwner === true)) return controller;
+    const order = this.state.turnOrder;
+    const left = effects.flatMap((e, index) =>
+      e.tokensComeToOwner === true && this.state.players[e.owner]?.hasLost !== true ? [{ index, owner: e.owner }] : [],
+    );
+    let creator = controller;
+    for (;;) {
+      const after = (p: PlayerId): number => (order.indexOf(p) - order.indexOf(creator) + order.length) % order.length;
+      const next = left
+        .filter((e) => e.owner !== creator)
+        .reduce<{ readonly index: number; readonly owner: PlayerId } | undefined>(
+          (best, e) => (best === undefined || after(e.owner) < after(best.owner) ? e : best),
+          undefined,
+        );
+      if (next === undefined) return creator;
+      left.splice(left.indexOf(next), 1);
+      creator = next.owner;
+    }
+  }
+
+  /** `player` creates tokens, as part of the entry under way: the first of the
+   * turn makes this entry their "first time each turn" (Akim, the Soaring
+   * Wind — `firstCreationEachTurn`). */
+  private noteTokensCreated(player: PlayerId): void {
+    const seat = this.state.players[player];
+    if (!seat.createdTokenThisTurn) this.firstTokenCreators.add(player);
+    seat.createdTokenThisTurn = true;
   }
 
   /** A token named after a real card carries its name as a copiable value
@@ -38160,7 +38237,14 @@ export class Game {
     // The copy defaults to the copied permanent's controller (Miirym), but a
     // card that copies something an *opponent* controls means "under your
     // control" (Hate Mirage).
-    const controller = opts.under ?? departed?.controller ?? of!.controller;
+    const wouldControl = opts.under ?? departed?.controller ?? of!.controller;
+    const controller = this.tokenCreatorAfterRedirects(wouldControl);
+    // A token no longer its attacking player's: tapped, but not attacking
+    // (Crafty Cutpurse's ruling).
+    if (controller !== wouldControl && opts.attacking !== undefined) {
+      const { attacking: _attacking, ...rest } = opts;
+      opts = { ...rest, tapped: true };
+    }
     // A copy exception is part of the copiable values (rule 707.9b): every
     // other effect applies over it, and a copy of this copy has it too. So
     // the copied object's own exceptions come first (a copy of an Anikthea
@@ -38347,7 +38431,7 @@ export class Game {
             delete this.state.objects[id];
             continue;
           }
-          this.state.players[group.controller].createdTokenThisTurn = true;
+          this.noteTokensCreated(group.controller);
           if (!copiedAgain) this.emit({ type: "permanent-copied", object: id, copyOf: copyName });
           this.emit({ type: "permanent-entered-battlefield", object: id });
           entered.push(id);
@@ -38626,7 +38710,7 @@ export class Game {
     attachTo?: ObjectId,
   ): readonly ObjectId[] {
     if (total <= 0) return [];
-    this.state.players[controller].createdTokenThisTurn = true;
+    this.noteTokensCreated(controller);
     const printedName = copyOf ?? cardName;
     const made: ObjectId[] = [];
     // The whole batch enters at once — one simultaneous entry, however many
@@ -44669,6 +44753,25 @@ export class Game {
       [],
     );
     return null;
+  }
+
+  /** A permanent just exiled by a replacement that also says "return it to the
+   * battlefield under its owner's control at the beginning of the next end
+   * step": a delayed triggered ability of its own (Cosmic Intervention's
+   * ruling), over every card it became (730.3c). */
+  private returnAtNextEndStep(id: ObjectId, source: ObjectId, controller: PlayerId): void {
+    const link = `flicker-${this.state.nextObjectSeq++}`;
+    for (const card of [id, ...(this.state.objects[id].leftWith ?? [])]) {
+      if (this.state.objects[card]?.zone === "exile") this.state.objects[card].flickerLink = link;
+    }
+    this.createDelayedTrigger(
+      source,
+      controller,
+      "next-end-step",
+      { kind: "return-flickered", link },
+      "Return it to the battlefield under its owner's control.",
+      [],
+    );
   }
 
   /** The delayed return of a `flicker` with `returnAt`: every card still in
@@ -51090,13 +51193,26 @@ export class Game {
   /** Every replacement {@link graveyardIsReplacedWithExile} finds (only the
    * first with `firstOnly`), each with the controller of the permanent it's
    * from — for what one says beyond "exile it instead" (Dauthi Voidwalker's
-   * void counter), and who would want it (see `exileCountersChosen`). */
+   * void counter), and who would want it (see `exileReplacementChosen`). */
   private graveyardExileReplacements(
     cardId: ObjectId,
     fromBattlefield: boolean,
     firstOnly = false,
-  ): { readonly replacement: GraveyardExileReplacement; readonly controller: PlayerId }[] {
-    const found: { readonly replacement: GraveyardExileReplacement; readonly controller: PlayerId }[] = [];
+  ): {
+    readonly replacement: GraveyardExileReplacement;
+    readonly controller: PlayerId;
+    /** The permanent it's from, when it's a static's. */
+    readonly source?: ObjectId;
+    /** "Return it … at the beginning of the next end step": the effect's
+     * source (Cosmic Intervention). */
+    readonly returnsFrom?: ObjectId;
+  }[] {
+    const found: {
+      readonly replacement: GraveyardExileReplacement;
+      readonly controller: PlayerId;
+      readonly source?: ObjectId;
+      readonly returnsFrom?: ObjectId;
+    }[] = [];
     for (const id of this.state.zones.shared.battlefield) {
       const object = this.state.objects[id];
       if (hasLostAbilities(this.state, this.registry,object)) continue;
@@ -51120,7 +51236,7 @@ export class Game {
         ) {
           continue;
         }
-        found.push({ replacement: r, controller: object.controller });
+        found.push({ replacement: r, controller: object.controller, source: id });
         if (firstOnly) return found;
       }
     }
@@ -51146,10 +51262,27 @@ export class Game {
           ) {
             continue;
           }
-          found.push({ replacement: r, controller: last.controller });
+          found.push({ replacement: r, controller: last.controller, source: id });
           if (firstOnly) return found;
         }
       }
+    }
+    // One a resolved spell made for a while (Malicious Eclipse, Gaea's Will).
+    for (const effect of this.state.playerEffects ?? []) {
+      const made = effect.graveyardExile;
+      if (made === undefined || (made.from === "battlefield" && !fromBattlefield)) continue;
+      if (
+        made.filter !== undefined &&
+        !matchesFilter(this.state, this.registry, cardId, made.filter, { you: effect.owner, source: made.source })
+      ) {
+        continue;
+      }
+      found.push({
+        replacement: { event: "would-be-put-into-graveyard", instead: "exile" },
+        controller: effect.owner,
+        ...(made.returnAtEndStep === true ? { returnsFrom: made.source } : {}),
+      });
+      if (firstOnly) return found;
     }
     return found;
   }
@@ -51164,7 +51297,15 @@ export class Game {
     if (hasLostAbilities(this.state, this.registry,object)) return false;
     return this.registry.get(rulesTextName(object)).static.some((ability) => {
       const r = ability.replacement;
-      return r?.event === "would-be-put-into-graveyard" && r.instead === "exile" && r.self === true;
+      return (
+        r?.event === "would-be-put-into-graveyard" &&
+        r.instead === "exile" &&
+        r.self === true &&
+        // "If this creature would die" (Wildwood Escort): only from the
+        // battlefield (rule 700.4), so a countered or discarded one goes to
+        // its graveyard.
+        (r.from !== "battlefield" || object.zone === "battlefield")
+      );
     });
   }
 
@@ -51204,18 +51345,21 @@ export class Game {
    * void card is played by an opponent of its owner, with Dauthi
    * Voidwalker's ability). So the chooser takes the counter when one of
    * those is theirs, and none otherwise — an opponent's flashback spell is
-   * exiled by flashback, with no void counter on it.
+   * exiled by flashback, with no void counter on it. So too for what one does
+   * beside the exile (`GraveyardExileReplacement.then`): Head of the Hunt's Wolf
+   * doesn't come when Rest in Peace could exile the creature instead.
+   *
+   * Returns the replacement that says more than "exile it", if that's the one
+   * picked.
    */
-  private exileCountersChosen(
-    object: GameObject,
-    statics: readonly { readonly replacement: GraveyardExileReplacement; readonly controller: PlayerId }[],
-    otherExile: boolean,
-  ): { readonly kind: string; readonly amount: number } | undefined {
-    const counting = statics.filter((s) => s.replacement.withCounters !== undefined);
-    if (counting.length === 0) return undefined;
-    if (!otherExile && counting.length === statics.length) return counting[0].replacement.withCounters;
+  private exileReplacementChosen<
+    S extends { readonly replacement: GraveyardExileReplacement; readonly controller: PlayerId },
+  >(object: GameObject, statics: readonly S[], otherExile: boolean): S | undefined {
+    const saying = statics.filter((s) => s.replacement.withCounters !== undefined || s.replacement.then !== undefined);
+    if (saying.length === 0) return undefined;
+    if (!otherExile && saying.length === statics.length) return saying[0];
     const chooser = object.zone === "battlefield" || object.zone === "stack" ? object.controller : object.owner;
-    return counting.find((s) => s.controller === chooser)?.replacement.withCounters;
+    return saying.find((s) => s.controller === chooser);
   }
 
   /**
@@ -51412,6 +51556,22 @@ export class Game {
     // the way out). See `suspendComputedCache`.
     const moved = suspendComputedCache(() => this.moveObjectUncached(id, to, enter));
     const now = this.state.objects[id]?.zone;
+    const toReturn = this.exiledToReturn.get(id);
+    if (toReturn !== undefined) {
+      this.exiledToReturn.delete(id);
+      if (now === "exile") this.returnAtNextEndStep(id, toReturn.source, toReturn.controller);
+    }
+    // "…and create a 2/2 black Zombie" (Kalitas), "When you do, …" (Head of the
+    // Hunt): once it's in exile, one for each token of a stack.
+    const andThen = this.exiledThen.get(id);
+    if (andThen !== undefined) {
+      this.exiledThen.delete(id);
+      if (moved) {
+        for (let i = 0; i < andThen.times; i += 1) {
+          applyEffectSpec(andThen.effect, this.makeResolutionContext(andThen.source, andThen.controller, []));
+        }
+      }
+    }
     // A face-down permanent is revealed as it leaves the battlefield (rule
     // 708.9) — into a hand or a library too.
     if (wasFaceDown && now !== undefined && now !== from) this.revealFaceDown(id, startSeq);
@@ -51751,7 +51911,7 @@ export class Game {
     // "…instead exile it with a void counter on it" (Dauthi Voidwalker): the
     // counters it has as it arrives in exile — unless a replacement that
     // exiles it with none is the one its controller picks (rule 616.1, see
-    // `exileCountersChosen`): a finality counter, or flashback's, a disturb
+    // `exileReplacementChosen`): a finality counter, or flashback's, a disturb
     // face's own or a Kess-style permission's below.
     let exileCounters: { readonly kind: string; readonly amount: number } | undefined;
     const exilesItself = to === "graveyard" && this.exilesItselfInstead(object);
@@ -51768,7 +51928,7 @@ export class Game {
       const replaced = this.graveyardExileReplacements(id, leavingBattlefield);
       if (finality || replaced.length > 0) {
         to = "exile";
-        exileCounters = this.exileCountersChosen(
+        const chosen = this.exileReplacementChosen(
           object,
           replaced,
           finality ||
@@ -51778,6 +51938,23 @@ export class Game {
             exilesItself ||
             object.exileIfWouldGoToGraveyard === true,
         );
+        exileCounters = chosen?.replacement.withCounters;
+        if (chosen?.replacement.then !== undefined && chosen.source !== undefined) {
+          this.exiledThen.set(id, {
+            effect: chosen.replacement.then,
+            source: chosen.source,
+            controller: chosen.controller,
+            times: Math.min(object.stackCount ?? 1, Game.MAX_EFFECT_INSTANCES),
+          });
+        }
+        // "Return it … at the beginning of the next end step" (Cosmic
+        // Intervention): of the exiles that could apply, the one its
+        // controller would pick (rule 616.1). A token ceases to exist in exile
+        // and doesn't return (its ruling).
+        const returning = replaced.find((r) => r.returnsFrom !== undefined);
+        if (returning?.returnsFrom !== undefined && !object.isToken) {
+          this.exiledToReturn.set(id, { source: returning.returnsFrom, controller: returning.controller });
+        }
         this.emit({ type: "graveyard-replaced-with-exile", object: id });
       }
     }

@@ -1154,6 +1154,14 @@ export type TriggerSpec =
        * batch of tokens, a mass reanimation. Its trigger object is the first
        * of them to match; don't read it. */
       readonly batched?: boolean;
+      /** "Whenever you create one or more tokens **for the first time each
+       * turn**" (Akim, the Soaring Wind — `who: "you-control"`, `filter: {
+       * token: true }`, `batched`): only the entry with this permanent's
+       * controller's first tokens of the turn, whether or not this ability
+       * was there for an earlier one. A token enters under the control of the
+       * player who creates it (rule 111.2), so a token entering under you is
+       * one you created. */
+      readonly firstCreationEachTurn?: true;
     }
   | {
       readonly on: "dies";

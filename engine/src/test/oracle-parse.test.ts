@@ -3469,6 +3469,71 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(face("If that creature would die this turn, exile it instead.", "Instant").complete).toBe(false);
   });
 
+  it("a graveyard replacement for the turn, and an exile that does something besides (rule 614.1a)", () => {
+    const made = (graveyardExile: object): object => ({ kind: "player-effect", duration: "end-of-turn", graveyardExile });
+    expect(face("If a creature an opponent controls would die this turn, exile it instead.", "Sorcery").effect).toEqual(
+      made({ filter: { type: "creature", controlledBy: "opponent" }, from: "battlefield" }),
+    );
+    expect(face("If a creature would die this turn, exile it instead.", "Sorcery").effect).toEqual(
+      made({ filter: { type: "creature" }, from: "battlefield" }),
+    );
+    expect(
+      face(
+        "Until end of turn, you may play lands and cast spells from your graveyard.\nIf a card would be put into your graveyard from anywhere this turn, exile that card instead.",
+        "Sorcery",
+      ).effect,
+    ).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "player-effect", duration: "end-of-turn", playLandsFromGraveyard: true, castFromGraveyard: { filter: {} } },
+        made({ filter: { ownedBy: "you", token: false } }),
+      ],
+    });
+    const cosmic = face(
+      "If a permanent you control would be put into a graveyard from the battlefield this turn, exile it instead. Return it to the battlefield under its owner's control at the beginning of the next end step.",
+      "Instant",
+    );
+    expect(cosmic.complete).toBe(true);
+    expect(cosmic.effect).toEqual(made({ filter: { controlledBy: "you" }, from: "battlefield", returnAtEndStep: true }));
+
+    const replacement = (line: string, type = "Creature — Wolf"): unknown => face(line, type).static[0].replacement;
+    expect(replacement("If this creature would die, exile it instead.")).toEqual({
+      event: "would-be-put-into-graveyard",
+      instead: "exile",
+      self: true,
+      from: "battlefield",
+    });
+    expect(replacement("If a creature dealt damage by enchanted creature this turn would die, exile it instead.", "Enchantment — Aura")).toMatchObject({
+      filter: { type: "creature", damagedThisTurnBy: { source: "host" } },
+    });
+    expect(replacement("If a creature an opponent controls would die, exile it instead. When you do, create a 2/2 green Wolf creature token.")).toMatchObject({
+      filter: { type: "creature", controlledBy: "opponent" },
+      then: { kind: "reflexive-trigger", targets: [], effect: { kind: "create-token", count: 1 } },
+    });
+    expect(replacement("If a nontoken creature an opponent controls would die, instead exile that card and create a 2/2 black Zombie creature token.")).toMatchObject({
+      filter: { type: "creature", controlledBy: "opponent", token: false },
+      then: { kind: "create-token", count: 1 },
+    });
+  });
+
+  it("what reads who created a token (rule 111.2), and a redirect of who does", () => {
+    expect(parseTrigger("Whenever you create one or more tokens for the first time each turn")).toEqual([
+      { on: "enters-battlefield", who: "you-control", filter: { token: true }, batched: true, firstCreationEachTurn: true },
+    ]);
+    expect(parseTrigger("Whenever you create a Blood token")).toEqual([
+      { on: "enters-battlefield", who: "you-control", filter: { subtype: "Blood", token: true } },
+    ]);
+    expect(parseTrigger("Whenever you create or sacrifice a token")).toEqual([
+      { on: "enters-battlefield", who: "you-control", filter: { token: true } },
+      { on: "sacrifice", who: "you", filter: { token: true } },
+    ]);
+    const cutpurse = face(
+      "When this creature enters, each token that would be created under an opponent's control this turn is created under your control instead.",
+      "Creature — Human Pirate",
+    );
+    expect(cutpurse.triggered[0].effect).toEqual({ kind: "player-effect", duration: "end-of-turn", tokensComeToOwner: true });
+  });
+
   it("ascend and the city's blessing (rule 702.131)", () => {
     const reminder = "Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.)";
     const charger = face(`${reminder}\n~ gets +2/+2 as long as you have the city's blessing.`, "Creature — Horse");

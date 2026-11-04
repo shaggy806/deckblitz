@@ -6015,6 +6015,45 @@ export type EffectSpec =
        * your control, twice that many of those tokens are created instead"
        * (Kaya, Geist Hunter's −2) — `2`. Compounds with a Doubling Season. */
       readonly tokenMultiplier?: number;
+      /** "Each token that would be created under an opponent's control this
+       * turn is created under your control instead" (Crafty Cutpurse, rules
+       * 111.2, 614.1a). Applied before any other replacement on the event, so
+       * the tokens' new controller's doublers are the ones that count (the
+       * rulings), and only once to each creation: with one of these on each
+       * side the token comes back to whoever would have created it. A token
+       * that would have been created attacking and is no longer its attacking
+       * player's is tapped but not attacking. */
+      readonly tokensComeToOwner?: true;
+      /** A would-be-put-into-a-graveyard replacement for a while, made by a
+       * resolving spell or ability (rule 614.1a): "if a creature an opponent
+       * controls would die this turn, exile it instead" (Malicious Eclipse —
+       * `filter`, `from: "battlefield"`, rule 700.4), "if a card would be put
+       * into your graveyard from anywhere this turn, exile that card instead"
+       * (Gaea's Will — `{ ownedBy: "you", token: false }`). The filter is read
+       * from the controller's side as each card would go, so a creature that
+       * enters or changes control later is covered (the rulings).
+       * `returnAtEndStep`: "return it to the battlefield under its owner's
+       * control at the beginning of the next end step" (Cosmic Intervention) —
+       * one delayed triggered ability per permanent, a token gone for good. */
+      readonly graveyardExile?: {
+        readonly filter?: CardFilter;
+        readonly from?: "battlefield";
+        readonly returnAtEndStep?: true;
+      };
+      /** "You may play lands from your graveyard" for a while (Gaea's Will,
+       * beside `castFromGraveyard`'s spells; rule 305.9): the land drop is the
+       * ordinary one. */
+      readonly playLandsFromGraveyard?: true;
+      /** "The next time you would draw a card this turn, [effect] instead"
+       * (the Words cycle — rule 614.1a), with `duration: "end-of-turn"`: each
+       * resolution sets up one replacement of one of the controller's draws,
+       * spent when it applies. The drawing player chooses among different
+       * ones (616.1, the Words ruling). `effect` is run as the draw would
+       * happen, by the controller, with this ability's targets (chosen as it
+       * was activated, rule 115.1b) and any choice in it answered before the
+       * next card is drawn (614.11a). It applies though the library is empty
+       * (614.11); a draw the player can't make can't be replaced. */
+      readonly nextDrawInstead?: { readonly effect: EffectSpec; readonly text: string };
       /** "Until end of turn, if you tap a land you control for mana, it
        * produces {U} instead of any other type" (Deep Water): the owner's
        * taps of their lands make this type, as `StaticAbility.landManaInstead`
@@ -17011,6 +17050,12 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
             }
           : {}),
         ...(spec.tokenMultiplier !== undefined ? { tokenMultiplier: spec.tokenMultiplier } : {}),
+        ...(spec.tokensComeToOwner === true ? { tokensComeToOwner: true as const } : {}),
+        ...(spec.graveyardExile !== undefined ? { graveyardExile: { ...spec.graveyardExile, source: ctx.source } } : {}),
+        ...(spec.playLandsFromGraveyard === true ? { playLandsFromGraveyard: true as const } : {}),
+        ...(spec.nextDrawInstead !== undefined
+          ? { nextDrawInstead: { ...spec.nextDrawInstead, source: ctx.source, targets: [...ctx.targets], targetStints: [] } }
+          : {}),
         ...(spec.landManaInstead !== undefined ? { landManaInstead: spec.landManaInstead } : {}),
         ...(spec.lifeCantChange !== undefined ? { lifeCantChange: ctx.playersInScope(spec.lifeCantChange) } : {}),
         ...(spec.protectionFromEverything !== undefined

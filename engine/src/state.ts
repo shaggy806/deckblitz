@@ -5436,6 +5436,38 @@ export interface PlayerEffect {
    * Hunter's −2): multiplies every token creation under `owner`'s control,
    * alongside a Doubling Season's (rule 614 — they compound). */
   readonly tokenMultiplier?: number;
+  /** "Each token that would be created under an opponent's control this turn
+   * is created under your control instead" (Crafty Cutpurse): see
+   * `Game.tokenCreatorAfterRedirects`. */
+  readonly tokensComeToOwner?: true;
+  /** "If a card would be put into your graveyard from anywhere this turn,
+   * exile that card instead" (Gaea's Will), "if a creature an opponent
+   * controls would die this turn, exile it instead" (Malicious Eclipse): a
+   * `GraveyardExileReplacement` a resolved spell made, asked of each card from
+   * `owner`'s side as it would go — one that arrives later counts (the
+   * rulings). `returnAtEndStep`: each one so exiled comes back at the
+   * beginning of the next end step (Cosmic Intervention). */
+  readonly graveyardExile?: {
+    readonly filter?: CardFilter;
+    readonly from?: "battlefield";
+    readonly source: ObjectId;
+    readonly returnAtEndStep?: true;
+  };
+  /** "You may play lands from your graveyard" for a while (Gaea's Will): the
+   * `playFromGraveyard` static's permission (rule 305.9). */
+  readonly playLandsFromGraveyard?: true;
+  /** "The next time you would draw a card this turn, [effect] instead" (the
+   * Words cycle — rule 614.1a): replaces one of
+   * `owner`'s draws, and is gone once it has. `targets` are the ability's, as
+   * it resolved (`targetStints` says which object each was). See
+   * `Game.drawCard`. */
+  readonly nextDrawInstead?: {
+    readonly effect: EffectSpec;
+    readonly text: string;
+    readonly source: ObjectId;
+    readonly targets: readonly (TargetRef | undefined)[];
+    readonly targetStints: readonly (number | null)[];
+  };
   /** "Until end of turn, if you tap a land you control for mana, it produces
    * {U} instead of any other type" (Deep Water): `owner`'s lands tapped for
    * mana by them make this type (rules 106.12, 614.1a) — see

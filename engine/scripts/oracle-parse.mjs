@@ -1732,6 +1732,30 @@ export function parseTrigger(clause) {
   if (/^When (?:this creature|~) enters or leaves the battlefield$/.test(c)) {
     return [...self("enters-battlefield"), ...self("leaves-battlefield")];
   }
+  // A token enters under the control of the player who creates it (rule
+  // 111.2): "Whenever you create a Blood token" is one entering under you,
+  // "one or more" once per entry (Staff of the Storyteller), and "for the first
+  // time each turn" only that entry (Akim, the Soaring Wind).
+  if (c === "Whenever you create or sacrifice a token") {
+    return [
+      { on: "enters-battlefield", who: "you-control", filter: { token: true } },
+      { on: "sacrifice", who: "you", filter: { token: true } },
+    ];
+  }
+  if ((m = /^Whenever you create (an?|one or more) (?:(.+?) )?tokens?( for the first time each turn)?$/.exec(c))) {
+    const of = m[2] === undefined ? {} : parseTypePhrase(m[2]);
+    if (of !== null) {
+      return [
+        {
+          on: "enters-battlefield",
+          who: "you-control",
+          filter: { ...of, token: true },
+          ...(m[1] === "one or more" ? { batched: true } : {}),
+          ...(m[3] === undefined ? {} : { firstCreationEachTurn: true }),
+        },
+      ];
+    }
+  }
   // Once per tapping at the same time (`batched`), however many of them.
   if ((m = /^Whenever one or more (creatures|nontoken [A-Z][a-z]+|[A-Z][a-z]+) you control become tapped$/.exec(c))) {
     const filter =
@@ -8597,6 +8621,44 @@ export function parseEffect(text, outer) {
       hints.push({ sentence, effect: instead });
       continue;
     }
+    // A graveyard replacement a resolving spell makes for the turn (`player-effect`'s
+    // `graveyardExile`, rule 614.1a): "If a creature [an opponent controls]
+    // would die this turn, exile it instead." (Malicious Eclipse), "If a card
+    // would be put into your graveyard from anywhere this turn, exile that card
+    // instead." (Gaea's Will), and Cosmic Intervention's, with its return.
+    const turnDiesM = /^if a creature( an opponent controls)? would die this turn, exile it instead\.$/i.exec(sentence);
+    const turnExile =
+      turnDiesM !== null
+        ? { filter: { type: "creature", ...(turnDiesM[1] === undefined ? {} : { controlledBy: "opponent" }) }, from: "battlefield" }
+        : /^if a card would be put into your graveyard from anywhere this turn, exile that card instead\.$/i.test(sentence)
+          ? { filter: { ownedBy: "you", token: false } }
+          : /^if a permanent you control would be put into a graveyard from the battlefield this turn, exile it instead\.$/i.test(sentence) &&
+              /^return it to the battlefield under its owner's control at the beginning of the next end step\.$/i.test(sentences[i + 1] ?? "")
+            ? { filter: { controlledBy: "you" }, from: "battlefield", returnAtEndStep: true }
+            : null;
+    if (turnExile !== null) {
+      const made = { kind: "player-effect", duration: "end-of-turn", graveyardExile: turnExile };
+      parsed.push(made);
+      hints.push({ sentence, effect: made });
+      if (turnExile.returnAtEndStep === true) skip = 1;
+      continue;
+    }
+    // "Until end of turn, you may play lands and cast spells from your
+    // graveyard." (Gaea's Will — rule 305.9, 601.3).
+    if (/^until end of turn, you may play lands and cast spells from your graveyard\.$/i.test(sentence)) {
+      const made = { kind: "player-effect", duration: "end-of-turn", playLandsFromGraveyard: true, castFromGraveyard: { filter: {} } };
+      parsed.push(made);
+      hints.push({ sentence, effect: made });
+      continue;
+    }
+    // "Each token that would be created under an opponent's control this turn
+    // is created under your control instead." (Crafty Cutpurse).
+    if (/^each token that would be created under an opponent's control this turn is created under your control instead\.$/i.test(sentence)) {
+      const made = { kind: "player-effect", duration: "end-of-turn", tokensComeToOwner: true };
+      parsed.push(made);
+      hints.push({ sentence, effect: made });
+      continue;
+    }
     // "It can't be regenerated this turn." after the one sentence that
     // targeted (Engulfing Flames, Rage of Purphoros — rule 701.19c).
     if (/^(?:it|that creature) can't be regenerated this turn\.$/i.test(sentence) && i > 0 && ctx.targets.length === 1 && parsed.length > 0) {
@@ -12441,6 +12503,8 @@ function parseFaceAsWritten(face, ctx = {}) {
     // Static lines.
     const tokenReplacement = tokenReplacementOf(line, printed(raw), tokenFor);
     if (tokenReplacement !== null) { out.static.push(tokenReplacement); continue; }
+    const exileReplacement = exileReplacementOf(line, printed(raw), tokenFor);
+    if (exileReplacement !== null) { out.static.push(exileReplacement); continue; }
     const st = parseStatic(line, printed(raw));
     if (st !== null) { out.static.push(st); continue; }
 
@@ -14882,6 +14946,39 @@ function selfCreatureWhileOf(line, text) {
   };
 }
 
+/**
+ * "If a creature an opponent controls would die, exile it instead. When you do,
+ * create …" (Head of the Hunt), "If a nontoken creature an opponent controls
+ * would die, instead exile that card and create …" (Kalitas): the exile, and
+ * what it does beside it (`GraveyardExileReplacement.then`). `null` for any
+ * other line, or one whose token isn't read.
+ */
+function exileReplacementOf(line, text, tokenFor) {
+  const m = /^If a (nontoken )?creature an opponent controls would die, (?:exile it instead|instead exile that card and (create .+?))\.(?: When you do, (create .+\.))?$/.exec(line);
+  if (m === null) return null;
+  const clause = m[2] === undefined ? m[3] : `${m[2]}.`;
+  const read =
+    clause === undefined ? null : parseEffect(`${clause[0].toUpperCase()}${clause.slice(1)}`, { targets: [], tokenFor });
+  if (clause !== undefined && (read?.effect == null || read.todo.length > 0)) return null;
+  const then =
+    clause === undefined
+      ? undefined
+      : m[3] === undefined
+        ? read.effect
+        : { kind: "reflexive-trigger", targets: [], effect: read.effect, text: `When you do, ${m[3]}` };
+  return {
+    affects: { scope: "self" },
+    replacement: {
+      event: "would-be-put-into-graveyard",
+      instead: "exile",
+      from: "battlefield",
+      filter: { type: "creature", controlledBy: "opponent", ...(m[1] === undefined ? {} : { token: false }) },
+      ...(then === undefined ? {} : { then }),
+    },
+    text,
+  };
+}
+
 function parseStatic(line, text) {
   const spellCost = spellCostStaticOf(line, text);
   if (spellCost !== null) return spellCost;
@@ -15830,6 +15927,28 @@ function parseStatic(line, text) {
     }
   }
   if (line === "~ can't block.") return { affects: { scope: "self" }, restrictions: ["cant-block"], text };
+  // "If this creature would die, exile it instead" (Wildwood Escort, rule 700.4).
+  if (line === "If ~ would die, exile it instead.") {
+    return {
+      affects: { scope: "self" },
+      replacement: { event: "would-be-put-into-graveyard", instead: "exile", self: true, from: "battlefield" },
+      text,
+    };
+  }
+  // "If a creature dealt damage by enchanted creature this turn would die,
+  // exile it instead" (Kumano's Blessing).
+  if (line === "If a creature dealt damage by enchanted creature this turn would die, exile it instead.") {
+    return {
+      affects: { scope: "self" },
+      replacement: {
+        event: "would-be-put-into-graveyard",
+        instead: "exile",
+        from: "battlefield",
+        filter: { type: "creature", damagedThisTurnBy: { source: "host" } },
+      },
+      text,
+    };
+  }
   // "If a creature dealt damage by ~ this turn would die, exile it instead"
   // (Kumano's Pupils): the dies-only graveyard replacement, about one source.
   if (line === "If a creature dealt damage by ~ this turn would die, exile it instead.") {

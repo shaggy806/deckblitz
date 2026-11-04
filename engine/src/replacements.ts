@@ -395,6 +395,15 @@ export interface GraveyardExileReplacement {
    * there — not an effect putting counters, so a doubler doesn't touch
    * them. */
   readonly withCounters?: { readonly kind: string; readonly amount: number };
+  /** Something this exile does beside it, run by this permanent's controller
+   * once the card is in exile, once for each token of a stack. An instruction
+   * of the replacement itself — "instead exile that card and create a 2/2 black
+   * Zombie creature token" (Kalitas, Traitor of Ghet) — or `{ kind:
+   * "reflexive-trigger" }` for "exile it instead. **When you do**, create …"
+   * (Head of the Hunt, rule 603.12). Given up, as a void counter is, when the
+   * moving object's controller picks another exile that could apply (rule
+   * 616.1). Not with `self`. */
+  readonly then?: EffectSpec;
   /** "If **this** would be put into a graveyard from anywhere, exile it
    * instead" — a disturb back face's (Hook-Haunt Drifter, rule 702.146):
    * the object's own ability, not an external one, so it catches only the
@@ -402,7 +411,10 @@ export interface GraveyardExileReplacement {
    * ability in (the battlefield, the stack). Being an ability of the face,
    * it goes wherever the face's text goes: a Clone of the face has it (rule
    * 707.2), and the face that lost its abilities doesn't. Applied by
-   * `Game.moveObject` to the moving object, never by the external scan. */
+   * `Game.moveObject` to the moving object, never by the external scan.
+   * With `from: "battlefield"`, "if **this creature would die**, exile it
+   * instead" (Wildwood Escort — rule 700.4): countered or discarded, it goes
+   * to its graveyard. */
   readonly self?: true;
 }
 
