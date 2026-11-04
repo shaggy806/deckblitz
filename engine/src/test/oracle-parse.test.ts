@@ -24,6 +24,30 @@ import { parseEffect, parseFace, parseTrigger, parseCost, parseSentence, parseTy
 // @ts-expect-error — as above.
 import { checkPool } from "../../scripts/oracle-parse-check.mjs";
 
+describe("what an ability goes on to say about its token", () => {
+  it("Feldon of the Third Path's copy of a graveyard card", () => {
+    const parsed = parseFace({
+      name: "Test Card",
+      type_line: "Creature — Human",
+      oracle_text:
+        "{2}{R}, {T}: Create a token that's a copy of target creature card in your graveyard, except it's an artifact in addition to its other types. It gains haste. Sacrifice it at the beginning of the next end step.",
+      mana_cost: "{1}",
+      colors: [],
+    });
+    expect(parsed.activated[0].targets).toEqual([{ kind: "card-in-graveyard", whose: "you", filter: { type: "creature" } }]);
+    expect(parsed.activated[0].effect).toEqual({
+      kind: "create-token-copy",
+      of: 0,
+      count: 1,
+      who: "you",
+      asCard: true,
+      exceptions: { addTypes: ["artifact"] },
+      gains: { keywords: ["haste"] },
+      sacrificeAtEndStep: true,
+    });
+  });
+});
+
 describe("the top card of your library, any time", () => {
   it("is the card-level flag", () => {
     const parsed = parseFace({

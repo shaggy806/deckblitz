@@ -5045,6 +5045,8 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 
 **A turn's triggered mana ability (2026-11-04).** `effect:turn-scoped-mana-trigger`: a `delayed-trigger` with `whenever: { on: "tapped-for-mana" }` and an `add-mana` effect is a triggered mana ability (rule 605.1b): `Game.tappedForManaExtras` reads it with the permanents', and the watchers leave it alone. High Tide, Bubbling Muck, Pyre Rhymer with Molten Tide.
 
+**The token an ability just made (2026-11-04).** `effect:created-token-reference`, no engine code: `create-token-copy`'s `gains` and `sacrificeAtEndStep`, `of` a graveyard slot with `asCard`; or a `for-each-permanent` over `thisWay: "created"` after a `create-token`. Feldon of the Third Path, Case of the Stashed Skeleton.
+
 **The top card, sometimes (2026-11-04).** `static:look-at-top-card-conditional`, no engine code: a `visibility: { looksAtOwnLibraryTop }` static with a `condition`, which `viewFor` already read. Case of the Locked Hothouse, Ranger Class.
 
 **A target filter read against its object's controller (2026-11-04).** `effect:target-filter-relative-to-controller`: a `DynamicOperand`'s `forItsController`, the amount's `"each"` read as the matched object's controller. Drown in the Loch.

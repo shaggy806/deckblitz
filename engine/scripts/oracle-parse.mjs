@@ -8595,6 +8595,30 @@ export function parseEffect(text, outer) {
       hints: [],
     };
   }
+  // Feldon of the Third Path's whole text: a copy of a graveyard card as
+  // printed, the haste and the sacrifice on the token, not on a copy of it.
+  const graveyardCopy =
+    /^Create a token that's a copy of target ([a-z]+) card in your graveyard, except it's an (artifact) in addition to its other types\. It gains haste\. Sacrifice it at the beginning of the next end step\.$/.exec(text);
+  if (graveyardCopy !== null && Array.isArray(ctx.targets)) {
+    const filter = parseTypePhrase(graveyardCopy[1], { cards: true });
+    if (filter !== null) {
+      ctx.targets.push({ kind: "card-in-graveyard", whose: "you", filter });
+      return {
+        effect: {
+          kind: "create-token-copy",
+          of: ctx.targets.length - 1,
+          count: 1,
+          who: "you",
+          asCard: true,
+          exceptions: { addTypes: [graveyardCopy[2]] },
+          gains: { keywords: ["haste"] },
+          sacrificeAtEndStep: true,
+        },
+        todo: [],
+        hints: [],
+      };
+    }
+  }
   // Shallow Grave's and Corpse Dance's whole text: the top creature card of
   // your graveyard (rule 404.2), and what follows reads it as target 0.
   if (
