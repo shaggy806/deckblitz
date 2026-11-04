@@ -24,6 +24,7 @@ import _poolAetherbornMarauder from "../pool/aetherborn-marauder.js";
 import _poolAgateAssault from "../pool/agate-assault.js";
 import _poolAgelessEntity from "../pool/ageless-entity.js";
 import _poolAgentOfShauku from "../pool/agent-of-shauku.js";
+import _poolAgentOfTheShadowThieves from "../pool/agent-of-the-shadow-thieves.js";
 import _poolAggravatedAssault from "../pool/aggravated-assault.js";
 import _poolAidTheFallen from "../pool/aid-the-fallen.js";
 import _poolAinokArtillerist from "../pool/ainok-artillerist.js";
@@ -66,6 +67,7 @@ import _poolAuraBlast from "../pool/aura-blast.js";
 import _poolAureliaExemplarOfJustice from "../pool/aurelia-exemplar-of-justice.js";
 import _poolAuroraChampion from "../pool/aurora-champion.js";
 import _poolAvariciousDragon from "../pool/avaricious-dragon.js";
+import _poolAvatarOfWoe from "../pool/avatar-of-woe.js";
 import _poolAvenInitiate from "../pool/aven-initiate.js";
 import _poolAwakenTheErstwhile from "../pool/awaken-the-erstwhile.js";
 import _poolAzogMoriasRuin from "../pool/azog-morias-ruin.js";
@@ -965,6 +967,7 @@ const shard: CardShard = {
     _poolAgateAssault,
     _poolAgelessEntity,
     _poolAgentOfShauku,
+    _poolAgentOfTheShadowThieves,
     _poolAggravatedAssault,
     _poolAidTheFallen,
     _poolAinokArtillerist,
@@ -1007,6 +1010,7 @@ const shard: CardShard = {
     _poolAureliaExemplarOfJustice,
     _poolAuroraChampion,
     _poolAvariciousDragon,
+    _poolAvatarOfWoe,
     _poolAvenInitiate,
     _poolAwakenTheErstwhile,
     _poolAzogMoriasRuin,

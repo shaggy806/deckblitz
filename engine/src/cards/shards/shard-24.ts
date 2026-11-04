@@ -236,6 +236,7 @@ import _poolElementalSpectacle from "../pool/elemental-spectacle.js";
 import _poolEleshNornGrandCenobite from "../pool/elesh-norn-grand-cenobite.js";
 import _poolElvishHunter from "../pool/elvish-hunter.js";
 import _poolElvishVisionary from "../pool/elvish-visionary.js";
+import _poolEndlessAtlas from "../pool/endless-atlas.js";
 import _poolEndoskeleton from "../pool/endoskeleton.js";
 import _poolEndure from "../pool/endure.js";
 import _poolEnergyFlux from "../pool/energy-flux.js";
@@ -1140,6 +1141,7 @@ const shard: CardShard = {
     _poolEleshNornGrandCenobite,
     _poolElvishHunter,
     _poolElvishVisionary,
+    _poolEndlessAtlas,
     _poolEndoskeleton,
     _poolEndure,
     _poolEnergyFlux,

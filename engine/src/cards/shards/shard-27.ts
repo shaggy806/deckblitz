@@ -525,6 +525,7 @@ import _poolPrimordialWurm from "../pool/primordial-wurm.js";
 import _poolPrinceImrahilTheFair from "../pool/prince-imrahil-the-fair.js";
 import _poolPrismaticBoon from "../pool/prismatic-boon.js";
 import _poolPrivilegedPosition from "../pool/privileged-position.js";
+import _poolProftSinisterMastermind from "../pool/proft-sinister-mastermind.js";
 import _poolProphetOfKruphix from "../pool/prophet-of-kruphix.js";
 import _poolProvoke from "../pool/provoke.js";
 import _poolPryingQuestions from "../pool/prying-questions.js";
@@ -1406,6 +1407,7 @@ const shard: CardShard = {
     _poolPrinceImrahilTheFair,
     _poolPrismaticBoon,
     _poolPrivilegedPosition,
+    _poolProftSinisterMastermind,
     _poolProphetOfKruphix,
     _poolProvoke,
     _poolPryingQuestions,

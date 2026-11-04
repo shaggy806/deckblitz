@@ -301,6 +301,7 @@ import _poolGriffinAerie from "../pool/griffin-aerie.js";
 import _poolGrotesqueHybrid from "../pool/grotesque-hybrid.js";
 import _poolGuadosalamFarplaneGateway from "../pool/guadosalam-farplane-gateway.js";
 import _poolGuardianOfPilgrims from "../pool/guardian-of-pilgrims.js";
+import _poolGuildArtisan from "../pool/guild-artisan.js";
 import _poolHackrobat from "../pool/hackrobat.js";
 import _poolHailStorm from "../pool/hail-storm.js";
 import _poolHakodaSelflessCommander from "../pool/hakoda-selfless-commander.js";
@@ -507,6 +508,7 @@ import _poolOjutaiExemplars from "../pool/ojutai-exemplars.js";
 import _poolOldFatSpider from "../pool/old-fat-spider.js";
 import _poolOliviaOpulentOutlaw from "../pool/olivia-opulent-outlaw.js";
 import _poolOltecCloudGuard from "../pool/oltec-cloud-guard.js";
+import _poolOmnivorousFlytrap from "../pool/omnivorous-flytrap.js";
 import _poolOrcishBloodpainter from "../pool/orcish-bloodpainter.js";
 import _poolOrcusPrinceOfUndeath from "../pool/orcus-prince-of-undeath.js";
 import _poolOrderOfTheMirror from "../pool/order-of-the-mirror.js";
@@ -1220,6 +1222,7 @@ const shard: CardShard = {
     _poolGrotesqueHybrid,
     _poolGuadosalamFarplaneGateway,
     _poolGuardianOfPilgrims,
+    _poolGuildArtisan,
     _poolHackrobat,
     _poolHailStorm,
     _poolHakodaSelflessCommander,
@@ -1426,6 +1429,7 @@ const shard: CardShard = {
     _poolOldFatSpider,
     _poolOliviaOpulentOutlaw,
     _poolOltecCloudGuard,
+    _poolOmnivorousFlytrap,
     _poolOrcishBloodpainter,
     _poolOrcusPrinceOfUndeath,
     _poolOrderOfTheMirror,

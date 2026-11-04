@@ -692,6 +692,7 @@ import _poolSilverquillApprentice from "../pool/silverquill-apprentice.js";
 import _poolSimicSignet from "../pool/simic-signet.js";
 import _poolSivitriDragonMaster from "../pool/sivitri-dragon-master.js";
 import _poolSkitterskin from "../pool/skitterskin.js";
+import _poolSkulkingKiller from "../pool/skulking-killer.js";
 import _poolSkullProphet from "../pool/skull-prophet.js";
 import _poolSkullmulcher from "../pool/skullmulcher.js";
 import _poolSkyCycle from "../pool/sky-cycle.js";
@@ -1611,6 +1612,7 @@ const shard: CardShard = {
     _poolSimicSignet,
     _poolSivitriDragonMaster,
     _poolSkitterskin,
+    _poolSkulkingKiller,
     _poolSkullProphet,
     _poolSkullmulcher,
     _poolSkyCycle,

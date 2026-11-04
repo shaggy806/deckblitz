@@ -821,6 +821,7 @@ import _poolUltimateAlliance from "../pool/ultimate-alliance.js";
 import _poolUndeadWarchief from "../pool/undead-warchief.js";
 import _poolUndergroundMortuary from "../pool/underground-mortuary.js";
 import _poolUnfriendlyFire from "../pool/unfriendly-fire.js";
+import _poolUnifiedWill from "../pool/unified-will.js";
 import _poolUnlikelyMeeting from "../pool/unlikely-meeting.js";
 import _poolUnluckyCabbageMerchant from "../pool/unlucky-cabbage-merchant.js";
 import _poolUnwelcomeSprite from "../pool/unwelcome-sprite.js";
@@ -854,6 +855,7 @@ import _poolWarpArtifact from "../pool/warp-artifact.js";
 import _poolWastelandRaider from "../pool/wasteland-raider.js";
 import _poolWatcherOfTheWayside from "../pool/watcher-of-the-wayside.js";
 import _poolWaterfallAerialist from "../pool/waterfall-aerialist.js";
+import _poolWaveOfRats from "../pool/wave-of-rats.js";
 import _poolWayOfTheMentor from "../pool/way-of-the-mentor.js";
 import _poolWaywardGiant from "../pool/wayward-giant.js";
 import _poolWeddingSecurity from "../pool/wedding-security.js";
@@ -1727,6 +1729,7 @@ const shard: CardShard = {
     _poolUndeadWarchief,
     _poolUndergroundMortuary,
     _poolUnfriendlyFire,
+    _poolUnifiedWill,
     _poolUnlikelyMeeting,
     _poolUnluckyCabbageMerchant,
     _poolUnwelcomeSprite,
@@ -1760,6 +1763,7 @@ const shard: CardShard = {
     _poolWastelandRaider,
     _poolWatcherOfTheWayside,
     _poolWaterfallAerialist,
+    _poolWaveOfRats,
     _poolWayOfTheMentor,
     _poolWaywardGiant,
     _poolWeddingSecurity,

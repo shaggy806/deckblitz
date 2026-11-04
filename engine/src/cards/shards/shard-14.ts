@@ -29,6 +29,7 @@ import _poolArbiterOfWoe from "../pool/arbiter-of-woe.js";
 import _poolArborColossus from "../pool/arbor-colossus.js";
 import _poolArborealGrazer from "../pool/arboreal-grazer.js";
 import _poolArchaeomancer from "../pool/archaeomancer.js";
+import _poolArchaeomancersMap from "../pool/archaeomancers-map.js";
 import _poolArchangelAvacyn from "../pool/archangel-avacyn.js";
 import _poolArchangelOfTithes from "../pool/archangel-of-tithes.js";
 import _poolArchfiendOfIfnir from "../pool/archfiend-of-ifnir.js";
@@ -895,6 +896,7 @@ import _tokensGreenEnchantmentSpiderTokenReach from "../tokens/green-enchantment
 import _tokensKrakenToken from "../tokens/kraken-token.js";
 import _tokensMetallicSliverToken from "../tokens/metallic-sliver-token.js";
 import _tokensNinjaTokenKaitoShizuki from "../tokens/ninja-token-kaito-shizuki.js";
+import _tokensPrimoTheIndivisibleToken from "../tokens/primo-the-indivisible-token.js";
 import _tokensSandToken from "../tokens/sand-token.js";
 import _tokensScorpionDragonToken from "../tokens/scorpion-dragon-token.js";
 import _tokensSpiritTokenGhostlyDancers from "../tokens/spirit-token-ghostly-dancers.js";
@@ -930,6 +932,7 @@ const shard: CardShard = {
     _poolArborColossus,
     _poolArborealGrazer,
     _poolArchaeomancer,
+    _poolArchaeomancersMap,
     _poolArchangelAvacyn,
     _poolArchangelOfTithes,
     _poolArchfiendOfIfnir,
@@ -1798,6 +1801,7 @@ const shard: CardShard = {
     _tokensKrakenToken,
     _tokensMetallicSliverToken,
     _tokensNinjaTokenKaitoShizuki,
+    _tokensPrimoTheIndivisibleToken,
     _tokensSandToken,
     _tokensScorpionDragonToken,
     _tokensSpiritTokenGhostlyDancers,

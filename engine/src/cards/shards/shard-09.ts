@@ -80,6 +80,7 @@ import _poolBitterthornNissasAnimus from "../pool/bitterthorn-nissas-animus.js";
 import _poolBlindingSpray from "../pool/blinding-spray.js";
 import _poolBlink from "../pool/blink.js";
 import _poolBlisteringBarrier from "../pool/blistering-barrier.js";
+import _poolBlitzball from "../pool/blitzball.js";
 import _poolBloodBeckoning from "../pool/blood-beckoning.js";
 import _poolBloodOath from "../pool/blood-oath.js";
 import _poolBloodbriar from "../pool/bloodbriar.js";
@@ -518,6 +519,7 @@ import _poolNornsChoirmaster from "../pool/norns-choirmaster.js";
 import _poolNovijenSages from "../pool/novijen-sages.js";
 import _poolNullGroupBiologicalAssets from "../pool/null-group-biological-assets.js";
 import _poolNullmageShepherd from "../pool/nullmage-shepherd.js";
+import _poolOKagachiVengefulKami from "../pool/o-kagachi-vengeful-kami.js";
 import _poolOathOfAjani from "../pool/oath-of-ajani.js";
 import _poolOathOfTeferi from "../pool/oath-of-teferi.js";
 import _poolObNixilisTheFallen from "../pool/ob-nixilis-the-fallen.js";
@@ -908,6 +910,7 @@ import _poolYidrisMaelstromWielder from "../pool/yidris-maelstrom-wielder.js";
 import _poolZarethSanTheTrickster from "../pool/zareth-san-the-trickster.js";
 import _poolZhalfirinKnight from "../pool/zhalfirin-knight.js";
 import _poolZhulodokVoidGorger from "../pool/zhulodok-void-gorger.js";
+import _poolZimoneAllQuestioning from "../pool/zimone-all-questioning.js";
 import _poolZofShade from "../pool/zof-shade.js";
 import _tokensArmyToken from "../tokens/army-token.js";
 import _tokensAssassinToken from "../tokens/assassin-token.js";
@@ -1016,6 +1019,7 @@ const shard: CardShard = {
     _poolBlindingSpray,
     _poolBlink,
     _poolBlisteringBarrier,
+    _poolBlitzball,
     _poolBloodBeckoning,
     _poolBloodOath,
     _poolBloodbriar,
@@ -1454,6 +1458,7 @@ const shard: CardShard = {
     _poolNovijenSages,
     _poolNullGroupBiologicalAssets,
     _poolNullmageShepherd,
+    _poolOKagachiVengefulKami,
     _poolOathOfAjani,
     _poolOathOfTeferi,
     _poolObNixilisTheFallen,
@@ -1844,6 +1849,7 @@ const shard: CardShard = {
     _poolZarethSanTheTrickster,
     _poolZhalfirinKnight,
     _poolZhulodokVoidGorger,
+    _poolZimoneAllQuestioning,
     _poolZofShade,
   ],
   tokens: [

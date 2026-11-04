@@ -557,6 +557,7 @@ import _poolPlasmaElemental from "../pool/plasma-elemental.js";
 import _poolPlatypusBear from "../pool/platypus-bear.js";
 import _poolPlunderingPredator from "../pool/plundering-predator.js";
 import _poolPoisonbellyOgre from "../pool/poisonbelly-ogre.js";
+import _poolPredatorsGambit from "../pool/predators-gambit.js";
 import _poolPredatoryRampage from "../pool/predatory-rampage.js";
 import _poolPressTheAdvantage from "../pool/press-the-advantage.js";
 import _poolPrimaryResearch from "../pool/primary-research.js";
@@ -1441,6 +1442,7 @@ const shard: CardShard = {
     _poolPlatypusBear,
     _poolPlunderingPredator,
     _poolPoisonbellyOgre,
+    _poolPredatorsGambit,
     _poolPredatoryRampage,
     _poolPressTheAdvantage,
     _poolPrimaryResearch,

@@ -479,6 +479,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Plant Token (Defender)",
   "Plant Warrior Token",
   "Powerstone Token",
+  "Primo, the Indivisible Token",
   "Prism Token",
   "Rabbit Token",
   "Raccoon Token",

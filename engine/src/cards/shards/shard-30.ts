@@ -112,6 +112,7 @@ import _poolCaveSense from "../pool/cave-sense.js";
 import _poolCeaseDesist from "../pool/cease-desist.js";
 import _poolCelestialForce from "../pool/celestial-force.js";
 import _poolCemeteryTampering from "../pool/cemetery-tampering.js";
+import _poolCentralElevatorPromisingStairs from "../pool/central-elevator-promising-stairs.js";
 import _poolCeruleanSphinx from "../pool/cerulean-sphinx.js";
 import _poolChainToMemory from "../pool/chain-to-memory.js";
 import _poolChainbreaker from "../pool/chainbreaker.js";
@@ -453,6 +454,7 @@ import _poolLongRiversPull from "../pool/long-rivers-pull.js";
 import _poolLootExuberantExplorer from "../pool/loot-exuberant-explorer.js";
 import _poolLoporritScout from "../pool/loporrit-scout.js";
 import _poolLostDays from "../pool/lost-days.js";
+import _poolLostMonarchOfIfnir from "../pool/lost-monarch-of-ifnir.js";
 import _poolLoveSongOfNightAndDay from "../pool/love-song-of-night-and-day.js";
 import _poolLoxodonEavesdropper from "../pool/loxodon-eavesdropper.js";
 import _poolLoyalTutor from "../pool/loyal-tutor.js";
@@ -1016,6 +1018,7 @@ const shard: CardShard = {
     _poolCeaseDesist,
     _poolCelestialForce,
     _poolCemeteryTampering,
+    _poolCentralElevatorPromisingStairs,
     _poolCeruleanSphinx,
     _poolChainToMemory,
     _poolChainbreaker,
@@ -1357,6 +1360,7 @@ const shard: CardShard = {
     _poolLootExuberantExplorer,
     _poolLoporritScout,
     _poolLostDays,
+    _poolLostMonarchOfIfnir,
     _poolLoveSongOfNightAndDay,
     _poolLoxodonEavesdropper,
     _poolLoyalTutor,

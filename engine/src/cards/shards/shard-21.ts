@@ -547,6 +547,7 @@ import _poolPrimalWellspring from "../pool/primal-wellspring.js";
 import _poolPrisonBarricade from "../pool/prison-barricade.js";
 import _poolProclamationOfRebirth from "../pool/proclamation-of-rebirth.js";
 import _poolProctorsGaze from "../pool/proctors-gaze.js";
+import _poolPromisingStairs from "../pool/promising-stairs.js";
 import _poolPromisingVein from "../pool/promising-vein.js";
 import _poolPsychicSpear from "../pool/psychic-spear.js";
 import _poolPullFromTheDeep from "../pool/pull-from-the-deep.js";
@@ -1410,6 +1411,7 @@ const shard: CardShard = {
     _poolPrisonBarricade,
     _poolProclamationOfRebirth,
     _poolProctorsGaze,
+    _poolPromisingStairs,
     _poolPromisingVein,
     _poolPsychicSpear,
     _poolPullFromTheDeep,

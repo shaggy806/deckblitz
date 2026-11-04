@@ -135,6 +135,7 @@ import _poolCaseOfTheRansackedLab from "../pool/case-of-the-ransacked-lab.js";
 import _poolCaveIn from "../pool/cave-in.js";
 import _poolCemeteryGate from "../pool/cemetery-gate.js";
 import _poolCentaurChieftain from "../pool/centaur-chieftain.js";
+import _poolCentralElevator from "../pool/central-elevator.js";
 import _poolChainAssassination from "../pool/chain-assassination.js";
 import _poolChainDevil from "../pool/chain-devil.js";
 import _poolChainwebAracnir from "../pool/chainweb-aracnir.js";
@@ -146,6 +147,7 @@ import _poolChantOfVituGhazi from "../pool/chant-of-vitu-ghazi.js";
 import _poolChargingBinox from "../pool/charging-binox.js";
 import _poolChargingRhino from "../pool/charging-rhino.js";
 import _poolChocoComet from "../pool/choco-comet.js";
+import _poolChromeReplicator from "../pool/chrome-replicator.js";
 import _poolCircleOfProtectionWhite from "../pool/circle-of-protection-white.js";
 import _poolCivicGuildmage from "../pool/civic-guildmage.js";
 import _poolCobblebrute from "../pool/cobblebrute.js";
@@ -1094,6 +1096,7 @@ const shard: CardShard = {
     _poolCaveIn,
     _poolCemeteryGate,
     _poolCentaurChieftain,
+    _poolCentralElevator,
     _poolChainAssassination,
     _poolChainDevil,
     _poolChainwebAracnir,
@@ -1105,6 +1108,7 @@ const shard: CardShard = {
     _poolChargingBinox,
     _poolChargingRhino,
     _poolChocoComet,
+    _poolChromeReplicator,
     _poolCircleOfProtectionWhite,
     _poolCivicGuildmage,
     _poolCobblebrute,

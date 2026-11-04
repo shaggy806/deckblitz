@@ -38,6 +38,7 @@ import _poolAscendantSpirit from "../pool/ascendant-spirit.js";
 import _poolAshioksReaper from "../pool/ashioks-reaper.js";
 import _poolAssemble from "../pool/assemble.js";
 import _poolAstelliReclaimer from "../pool/astelli-reclaimer.js";
+import _poolAvenge from "../pool/avenge.js";
 import _poolAwakenTheBear from "../pool/awaken-the-bear.js";
 import _poolAzureDrake from "../pool/azure-drake.js";
 import _poolBambooGroveArcher from "../pool/bamboo-grove-archer.js";
@@ -447,6 +448,7 @@ import _poolMasterSplicer from "../pool/master-splicer.js";
 import _poolMatterbendingMage from "../pool/matterbending-mage.js";
 import _poolMausoleumWanderer from "../pool/mausoleum-wanderer.js";
 import _poolMawOfTheMire from "../pool/maw-of-the-mire.js";
+import _poolMazesEnd from "../pool/mazes-end.js";
 import _poolMeddlingYouths from "../pool/meddling-youths.js";
 import _poolMemorialToGlory from "../pool/memorial-to-glory.js";
 import _poolMengHuoBarbarianKing from "../pool/meng-huo-barbarian-king.js";
@@ -916,6 +918,7 @@ const shard: CardShard = {
     _poolAshioksReaper,
     _poolAssemble,
     _poolAstelliReclaimer,
+    _poolAvenge,
     _poolAwakenTheBear,
     _poolAzureDrake,
     _poolBambooGroveArcher,
@@ -1325,6 +1328,7 @@ const shard: CardShard = {
     _poolMatterbendingMage,
     _poolMausoleumWanderer,
     _poolMawOfTheMire,
+    _poolMazesEnd,
     _poolMeddlingYouths,
     _poolMemorialToGlory,
     _poolMengHuoBarbarianKing,
