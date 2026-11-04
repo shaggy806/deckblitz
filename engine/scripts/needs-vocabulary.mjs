@@ -29,6 +29,10 @@
 //   --next [N]         the next N (default 60) Commander-legal cards by EDHREC
 //                      rank that are neither in the pool nor triaged — the
 //                      next batch to look at
+//   --by-rank [--top N]
+//                      the blocked cards by EDHREC rank, best first (default
+//                      40), each with its open needs: the order to build by
+//                      once the greedy order's left with small units
 //   --audit            what to fix before building from the records: counts,
 //                      and to needs-audit.txt in the OS temp dir the lists —
 //                      records with every need built (since triage or before),
@@ -322,6 +326,24 @@ function main() {
       console.log(`- ${r.name} [${r.batch}]${others.length ? `  also: ${others.join(", ")}` : "  (only this)"}`);
     }
     console.log(`${seen.size} card(s).`);
+    return;
+  }
+
+  if (args.includes("--by-rank")) {
+    // A card's newest record is what still blocks it (later batches win a tie, as in loadRecords).
+    const newest = new Map();
+    for (const r of waiting) {
+      const seen = newest.get(frontName(r.name));
+      if (seen === undefined || (r.date ?? "") >= (seen.date ?? "")) newest.set(frontName(r.name), r);
+    }
+    const rows = loadSnapshot()
+      .entries.filter((e) => e.commander === "legal" && typeof e.edhrec_rank === "number")
+      .filter((e) => newest.has(frontName(e.name)))
+      .sort((a, b) => a.edhrec_rank - b.edhrec_rank)
+      .map((e) => ({ e, open: [...new Set(openNeeds(newest.get(frontName(e.name)), vocab))] }))
+      .filter((row) => row.open.length > 0)
+      .slice(0, Number(opt("--top", 40)));
+    for (const { e, open } of rows) console.log(`${String(e.edhrec_rank).padStart(6)}  ${e.name}  — ${open.join(" + ")}`);
     return;
   }
 
