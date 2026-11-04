@@ -67,6 +67,7 @@ import _poolBloodfireKavu from "../pool/bloodfire-kavu.js";
 import _poolBloodghast from "../pool/bloodghast.js";
 import _poolBloodpyreElemental from "../pool/bloodpyre-elemental.js";
 import _poolBloodstainedMire from "../pool/bloodstained-mire.js";
+import _poolBlueMagesCane from "../pool/blue-mages-cane.js";
 import _poolBlustersquall from "../pool/blustersquall.js";
 import _poolBogWreckage from "../pool/bog-wreckage.js";
 import _poolBoneToAsh from "../pool/bone-to-ash.js";
@@ -558,6 +559,7 @@ import _poolPyricSalamander from "../pool/pyric-salamander.js";
 import _poolPyromancerAscension from "../pool/pyromancer-ascension.js";
 import _poolPyromancersSwath from "../pool/pyromancers-swath.js";
 import _poolQuandrixCampus from "../pool/quandrix-campus.js";
+import _poolQuicksilverElemental from "../pool/quicksilver-elemental.js";
 import _poolRadhasFirebrand from "../pool/radhas-firebrand.js";
 import _poolRagingRedcap from "../pool/raging-redcap.js";
 import _poolRaidBombardment from "../pool/raid-bombardment.js";
@@ -962,6 +964,7 @@ const shard: CardShard = {
     _poolBloodghast,
     _poolBloodpyreElemental,
     _poolBloodstainedMire,
+    _poolBlueMagesCane,
     _poolBlustersquall,
     _poolBogWreckage,
     _poolBoneToAsh,
@@ -1453,6 +1456,7 @@ const shard: CardShard = {
     _poolPyromancerAscension,
     _poolPyromancersSwath,
     _poolQuandrixCampus,
+    _poolQuicksilverElemental,
     _poolRadhasFirebrand,
     _poolRagingRedcap,
     _poolRaidBombardment,

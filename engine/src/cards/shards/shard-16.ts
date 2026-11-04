@@ -115,6 +115,7 @@ import _poolCapricopian from "../pool/capricopian.js";
 import _poolCarnivorousMossBeast from "../pool/carnivorous-moss-beast.js";
 import _poolCarrierThrall from "../pool/carrier-thrall.js";
 import _poolCartoucheOfKnowledge from "../pool/cartouche-of-knowledge.js";
+import _poolCascadingCataracts from "../pool/cascading-cataracts.js";
 import _poolCaseOfTheShiftingVisage from "../pool/case-of-the-shifting-visage.js";
 import _poolCastThroughTime from "../pool/cast-through-time.js";
 import _poolCatOwl from "../pool/cat-owl.js";
@@ -716,6 +717,7 @@ import _poolSilvergladeElemental from "../pool/silverglade-elemental.js";
 import _poolSilverquillCommand from "../pool/silverquill-command.js";
 import _poolSilverwingSquadron from "../pool/silverwing-squadron.js";
 import _poolSilvosRogueElemental from "../pool/silvos-rogue-elemental.js";
+import _poolSinsOfThePast from "../pool/sins-of-the-past.js";
 import _poolSirenStormtamer from "../pool/siren-stormtamer.js";
 import _poolSisterhoodOfKarn from "../pool/sisterhood-of-karn.js";
 import _poolSkarrganHellkite from "../pool/skarrgan-hellkite.js";
@@ -1100,6 +1102,7 @@ const shard: CardShard = {
     _poolCarnivorousMossBeast,
     _poolCarrierThrall,
     _poolCartoucheOfKnowledge,
+    _poolCascadingCataracts,
     _poolCaseOfTheShiftingVisage,
     _poolCastThroughTime,
     _poolCatOwl,
@@ -1701,6 +1704,7 @@ const shard: CardShard = {
     _poolSilverquillCommand,
     _poolSilverwingSquadron,
     _poolSilvosRogueElemental,
+    _poolSinsOfThePast,
     _poolSirenStormtamer,
     _poolSisterhoodOfKarn,
     _poolSkarrganHellkite,

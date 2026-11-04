@@ -681,6 +681,7 @@ import _poolSevenTailMentor from "../pool/seven-tail-mentor.js";
 import _poolShacklegeist from "../pool/shacklegeist.js";
 import _poolShardOfTheNightbringer from "../pool/shard-of-the-nightbringer.js";
 import _poolShardmagesRescue from "../pool/shardmages-rescue.js";
+import _poolShatteredSeraph from "../pool/shattered-seraph.js";
 import _poolShaunFatherOfSynths from "../pool/shaun-father-of-synths.js";
 import _poolShelteredByGhosts from "../pool/sheltered-by-ghosts.js";
 import _poolShelteringBoughs from "../pool/sheltering-boughs.js";
@@ -804,6 +805,7 @@ import _poolTicketTortoise from "../pool/ticket-tortoise.js";
 import _poolTidalInfluence from "../pool/tidal-influence.js";
 import _poolTighteningCoils from "../pool/tightening-coils.js";
 import _poolTillAndTend from "../pool/till-and-tend.js";
+import _poolTinybonesThePickpocket from "../pool/tinybones-the-pickpocket.js";
 import _poolTormentingVoice from "../pool/tormenting-voice.js";
 import _poolTrainingCompound from "../pool/training-compound.js";
 import _poolTrainingRegimen from "../pool/training-regimen.js";
@@ -1590,6 +1592,7 @@ const shard: CardShard = {
     _poolShacklegeist,
     _poolShardOfTheNightbringer,
     _poolShardmagesRescue,
+    _poolShatteredSeraph,
     _poolShaunFatherOfSynths,
     _poolShelteredByGhosts,
     _poolShelteringBoughs,
@@ -1713,6 +1716,7 @@ const shard: CardShard = {
     _poolTidalInfluence,
     _poolTighteningCoils,
     _poolTillAndTend,
+    _poolTinybonesThePickpocket,
     _poolTormentingVoice,
     _poolTrainingCompound,
     _poolTrainingRegimen,

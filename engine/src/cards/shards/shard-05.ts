@@ -534,6 +534,7 @@ import _poolMostWanted from "../pool/most-wanted.js";
 import _poolMudbrawlerCohort from "../pool/mudbrawler-cohort.js";
 import _poolMyconidSporeTender from "../pool/myconid-spore-tender.js";
 import _poolMyojinOfNightsReach from "../pool/myojin-of-nights-reach.js";
+import _poolMyrServitor from "../pool/myr-servitor.js";
 import _poolMysticSkull from "../pool/mystic-skull.js";
 import _poolMythosOfIlluna from "../pool/mythos-of-illuna.js";
 import _poolNaturesResurgence from "../pool/natures-resurgence.js";
@@ -865,6 +866,7 @@ import _poolWuLongbowman from "../pool/wu-longbowman.js";
 import _poolYoshimaru from "../pool/yoshimaru.js";
 import _poolYouthfulScholar from "../pool/youthful-scholar.js";
 import _poolZagrasThiefOfHeartbeats from "../pool/zagras-thief-of-heartbeats.js";
+import _poolZethiArcaneBlademaster from "../pool/zethi-arcane-blademaster.js";
 import _poolZodiacRooster from "../pool/zodiac-rooster.js";
 import _poolZodiacSnake from "../pool/zodiac-snake.js";
 import _poolZombieTrailblazer from "../pool/zombie-trailblazer.js";
@@ -1432,6 +1434,7 @@ const shard: CardShard = {
     _poolMudbrawlerCohort,
     _poolMyconidSporeTender,
     _poolMyojinOfNightsReach,
+    _poolMyrServitor,
     _poolMysticSkull,
     _poolMythosOfIlluna,
     _poolNaturesResurgence,
@@ -1763,6 +1766,7 @@ const shard: CardShard = {
     _poolYoshimaru,
     _poolYouthfulScholar,
     _poolZagrasThiefOfHeartbeats,
+    _poolZethiArcaneBlademaster,
     _poolZodiacRooster,
     _poolZodiacSnake,
     _poolZombieTrailblazer,

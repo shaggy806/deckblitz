@@ -385,6 +385,7 @@ import _poolInundatedArchive from "../pool/inundated-archive.js";
 import _poolInvasionOfXerex from "../pool/invasion-of-xerex.js";
 import _poolIroncladSlayer from "../pool/ironclad-slayer.js";
 import _poolIsuTheAbominable from "../pool/isu-the-abominable.js";
+import _poolJacesMindseeker from "../pool/jaces-mindseeker.js";
 import _poolJacquesLeVert from "../pool/jacques-le-vert.js";
 import _poolJawboneDuelist from "../pool/jawbone-duelist.js";
 import _poolJeskasWill from "../pool/jeskas-will.js";
@@ -1299,6 +1300,7 @@ const shard: CardShard = {
     _poolInvasionOfXerex,
     _poolIroncladSlayer,
     _poolIsuTheAbominable,
+    _poolJacesMindseeker,
     _poolJacquesLeVert,
     _poolJawboneDuelist,
     _poolJeskasWill,

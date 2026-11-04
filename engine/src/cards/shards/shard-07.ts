@@ -632,6 +632,7 @@ import _poolRingsOfBrighthearth from "../pool/rings-of-brighthearth.js";
 import _poolRingskipper from "../pool/ringskipper.js";
 import _poolRoadRuin from "../pool/road-ruin.js";
 import _poolRoarOfChallenge from "../pool/roar-of-challenge.js";
+import _poolRoarOfReclamation from "../pool/roar-of-reclamation.js";
 import _poolRocketLauncher from "../pool/rocket-launcher.js";
 import _poolRoguesGloves from "../pool/rogues-gloves.js";
 import _poolRonasVortex from "../pool/ronas-vortex.js";
@@ -779,6 +780,7 @@ import _poolThatWhichWasTaken from "../pool/that-which-was-taken.js";
 import _poolThawingGlaciers from "../pool/thawing-glaciers.js";
 import _poolTheBlackBreath from "../pool/the-black-breath.js";
 import _poolTheGitrogRavenousRide from "../pool/the-gitrog-ravenous-ride.js";
+import _poolTheGrimCaptainsLocker from "../pool/the-grim-captains-locker.js";
 import _poolTheLegendOfKyoshi from "../pool/the-legend-of-kyoshi.js";
 import _poolTheRedTerror from "../pool/the-red-terror.js";
 import _poolTheShire from "../pool/the-shire.js";
@@ -1564,6 +1566,7 @@ const shard: CardShard = {
     _poolRingskipper,
     _poolRoadRuin,
     _poolRoarOfChallenge,
+    _poolRoarOfReclamation,
     _poolRocketLauncher,
     _poolRoguesGloves,
     _poolRonasVortex,
@@ -1711,6 +1714,7 @@ const shard: CardShard = {
     _poolThawingGlaciers,
     _poolTheBlackBreath,
     _poolTheGitrogRavenousRide,
+    _poolTheGrimCaptainsLocker,
     _poolTheLegendOfKyoshi,
     _poolTheRedTerror,
     _poolTheShire,

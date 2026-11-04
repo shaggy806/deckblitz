@@ -664,6 +664,7 @@ import _poolSkybridgeTowers from "../pool/skybridge-towers.js";
 import _poolSkyclavePickAxe from "../pool/skyclave-pick-axe.js";
 import _poolSkyclaveSentinel from "../pool/skyclave-sentinel.js";
 import _poolSkyhunterProwler from "../pool/skyhunter-prowler.js";
+import _poolSkywayRobber from "../pool/skyway-robber.js";
 import _poolSlagStrider from "../pool/slag-strider.js";
 import _poolSlagstorm from "../pool/slagstorm.js";
 import _poolSleepCursedFaerie from "../pool/sleep-cursed-faerie.js";
@@ -1559,6 +1560,7 @@ const shard: CardShard = {
     _poolSkyclavePickAxe,
     _poolSkyclaveSentinel,
     _poolSkyhunterProwler,
+    _poolSkywayRobber,
     _poolSlagStrider,
     _poolSlagstorm,
     _poolSleepCursedFaerie,

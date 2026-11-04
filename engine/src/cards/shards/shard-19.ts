@@ -32,6 +32,7 @@ import _poolAncientSilverback from "../pool/ancient-silverback.js";
 import _poolAncientTomb from "../pool/ancient-tomb.js";
 import _poolAngelicExaltation from "../pool/angelic-exaltation.js";
 import _poolAngrathCaptainOfChaos from "../pool/angrath-captain-of-chaos.js";
+import _poolAnrakyrTheTraveller from "../pool/anrakyr-the-traveller.js";
 import _poolApexOfPower from "../pool/apex-of-power.js";
 import _poolArashinCleric from "../pool/arashin-cleric.js";
 import _poolArboretumElemental from "../pool/arboretum-elemental.js";
@@ -521,6 +522,7 @@ import _poolMarduHeartPiercer from "../pool/mardu-heart-piercer.js";
 import _poolMarkOfMutiny from "../pool/mark-of-mutiny.js";
 import _poolMarkovPurifier from "../pool/markov-purifier.js";
 import _poolMartyrOfSpores from "../pool/martyr-of-spores.js";
+import _poolMaskedBandits from "../pool/masked-bandits.js";
 import _poolMaskedMeower from "../pool/masked-meower.js";
 import _poolMasterOfDarkRites from "../pool/master-of-dark-rites.js";
 import _poolMayaelsAria from "../pool/mayaels-aria.js";
@@ -587,6 +589,7 @@ import _poolObservantAlseid from "../pool/observant-alseid.js";
 import _poolOgreBerserker from "../pool/ogre-berserker.js";
 import _poolOgreMarauder from "../pool/ogre-marauder.js";
 import _poolOgreSiegebreaker from "../pool/ogre-siegebreaker.js";
+import _poolOmenMachine from "../pool/omen-machine.js";
 import _poolOpalineBracers from "../pool/opaline-bracers.js";
 import _poolOppressiveWill from "../pool/oppressive-will.js";
 import _poolOrderOfTheWhiteShield from "../pool/order-of-the-white-shield.js";
@@ -990,6 +993,7 @@ const shard: CardShard = {
     _poolAncientTomb,
     _poolAngelicExaltation,
     _poolAngrathCaptainOfChaos,
+    _poolAnrakyrTheTraveller,
     _poolApexOfPower,
     _poolArashinCleric,
     _poolArboretumElemental,
@@ -1479,6 +1483,7 @@ const shard: CardShard = {
     _poolMarkOfMutiny,
     _poolMarkovPurifier,
     _poolMartyrOfSpores,
+    _poolMaskedBandits,
     _poolMaskedMeower,
     _poolMasterOfDarkRites,
     _poolMayaelsAria,
@@ -1545,6 +1550,7 @@ const shard: CardShard = {
     _poolOgreBerserker,
     _poolOgreMarauder,
     _poolOgreSiegebreaker,
+    _poolOmenMachine,
     _poolOpalineBracers,
     _poolOppressiveWill,
     _poolOrderOfTheWhiteShield,

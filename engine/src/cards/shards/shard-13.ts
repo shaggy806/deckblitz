@@ -80,6 +80,8 @@ import _poolBerserk from "../pool/berserk.js";
 import _poolBilboRetiredBurglar from "../pool/bilbo-retired-burglar.js";
 import _poolBiorganicCarapace from "../pool/biorganic-carapace.js";
 import _poolBiorhythm from "../pool/biorhythm.js";
+import _poolBirgiGodOfStorytelling from "../pool/birgi-god-of-storytelling.js";
+import _poolBismuthMindrender from "../pool/bismuth-mindrender.js";
 import _poolBiteDown from "../pool/bite-down.js";
 import _poolBladegriffPrototype from "../pool/bladegriff-prototype.js";
 import _poolBlazemireVerge from "../pool/blazemire-verge.js";
@@ -770,6 +772,7 @@ import _poolTimidDrake from "../pool/timid-drake.js";
 import _poolTishanasTidebinder from "../pool/tishanas-tidebinder.js";
 import _poolTitaniasChosen from "../pool/titanias-chosen.js";
 import _poolTitanothRex from "../pool/titanoth-rex.js";
+import _poolTizerusCharger from "../pool/tizerus-charger.js";
 import _poolTogetherAsOne from "../pool/together-as-one.js";
 import _poolTomeOfLegends from "../pool/tome-of-legends.js";
 import _poolToothOfChissGoria from "../pool/tooth-of-chiss-goria.js";
@@ -964,6 +967,8 @@ const shard: CardShard = {
     _poolBilboRetiredBurglar,
     _poolBiorganicCarapace,
     _poolBiorhythm,
+    _poolBirgiGodOfStorytelling,
+    _poolBismuthMindrender,
     _poolBiteDown,
     _poolBladegriffPrototype,
     _poolBlazemireVerge,
@@ -1654,6 +1659,7 @@ const shard: CardShard = {
     _poolTishanasTidebinder,
     _poolTitaniasChosen,
     _poolTitanothRex,
+    _poolTizerusCharger,
     _poolTogetherAsOne,
     _poolTomeOfLegends,
     _poolToothOfChissGoria,

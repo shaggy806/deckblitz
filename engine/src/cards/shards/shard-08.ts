@@ -559,6 +559,7 @@ import _poolOakhameRanger from "../pool/oakhame-ranger.js";
 import _poolOathOfGideon from "../pool/oath-of-gideon.js";
 import _poolObeliskOfEsper from "../pool/obelisk-of-esper.js";
 import _poolObstinateGargoyle from "../pool/obstinate-gargoyle.js";
+import _poolOgreBattlecaster from "../pool/ogre-battlecaster.js";
 import _poolOgreChitterlord from "../pool/ogre-chitterlord.js";
 import _poolOgreGeargrabber from "../pool/ogre-geargrabber.js";
 import _poolOkoTheTrickster from "../pool/oko-the-trickster.js";
@@ -1513,6 +1514,7 @@ const shard: CardShard = {
     _poolOathOfGideon,
     _poolObeliskOfEsper,
     _poolObstinateGargoyle,
+    _poolOgreBattlecaster,
     _poolOgreChitterlord,
     _poolOgreGeargrabber,
     _poolOkoTheTrickster,

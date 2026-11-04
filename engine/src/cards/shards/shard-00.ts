@@ -440,6 +440,7 @@ import _poolLeelaSevateemWarrior from "../pool/leela-sevateem-warrior.js";
 import _poolLetTheGalaxyBurn from "../pool/let-the-galaxy-burn.js";
 import _poolLethalExploit from "../pool/lethal-exploit.js";
 import _poolLethargyTrap from "../pool/lethargy-trap.js";
+import _poolLeylineImmersion from "../pool/leyline-immersion.js";
 import _poolLiciaSanguineTribune from "../pool/licia-sanguine-tribune.js";
 import _poolLifetap from "../pool/lifetap.js";
 import _poolLiftedByClouds from "../pool/lifted-by-clouds.js";
@@ -1360,6 +1361,7 @@ const shard: CardShard = {
     _poolLetTheGalaxyBurn,
     _poolLethalExploit,
     _poolLethargyTrap,
+    _poolLeylineImmersion,
     _poolLiciaSanguineTribune,
     _poolLifetap,
     _poolLiftedByClouds,

@@ -376,6 +376,7 @@ import _poolHamatoGuardianStance from "../pool/hamato-guardian-stance.js";
 import _poolHanabiBlast from "../pool/hanabi-blast.js";
 import _poolHanweirTheWrithingTownship from "../pool/hanweir-the-writhing-township.js";
 import _poolHarnessedLightning from "../pool/harnessed-lightning.js";
+import _poolHarnfelHornOfBounty from "../pool/harnfel-horn-of-bounty.js";
 import _poolHarrow from "../pool/harrow.js";
 import _poolHarshAnnotation from "../pool/harsh-annotation.js";
 import _poolHarvestPyre from "../pool/harvest-pyre.js";
@@ -1347,6 +1348,7 @@ const shard: CardShard = {
     _poolHanabiBlast,
     _poolHanweirTheWrithingTownship,
     _poolHarnessedLightning,
+    _poolHarnfelHornOfBounty,
     _poolHarrow,
     _poolHarshAnnotation,
     _poolHarvestPyre,

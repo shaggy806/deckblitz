@@ -115,6 +115,7 @@ import _poolCaptainAmericaSteveRogers from "../pool/captain-america-steve-rogers
 import _poolCaptainAmericasMotorcycle from "../pool/captain-americas-motorcycle.js";
 import _poolCareeningMineCart from "../pool/careening-mine-cart.js";
 import _poolCartographersHawk from "../pool/cartographers-hawk.js";
+import _poolCaseOfTheUneatenFeast from "../pool/case-of-the-uneaten-feast.js";
 import _poolCatharticReunion from "../pool/cathartic-reunion.js";
 import _poolCentaurVeteran from "../pool/centaur-veteran.js";
 import _poolCephalidConstable from "../pool/cephalid-constable.js";
@@ -280,6 +281,7 @@ import _poolGenestealerLocus from "../pool/genestealer-locus.js";
 import _poolGhastlyDemise from "../pool/ghastly-demise.js";
 import _poolGhostform from "../pool/ghostform.js";
 import _poolGlacialFortress from "../pool/glacial-fortress.js";
+import _poolGlamorousOutlaw from "../pool/glamorous-outlaw.js";
 import _poolGlazeFiend from "../pool/glaze-fiend.js";
 import _poolGlintwingInvoker from "../pool/glintwing-invoker.js";
 import _poolGlorifierOfDusk from "../pool/glorifier-of-dusk.js";
@@ -1039,6 +1041,7 @@ const shard: CardShard = {
     _poolCaptainAmericasMotorcycle,
     _poolCareeningMineCart,
     _poolCartographersHawk,
+    _poolCaseOfTheUneatenFeast,
     _poolCatharticReunion,
     _poolCentaurVeteran,
     _poolCephalidConstable,
@@ -1204,6 +1207,7 @@ const shard: CardShard = {
     _poolGhastlyDemise,
     _poolGhostform,
     _poolGlacialFortress,
+    _poolGlamorousOutlaw,
     _poolGlazeFiend,
     _poolGlintwingInvoker,
     _poolGlorifierOfDusk,

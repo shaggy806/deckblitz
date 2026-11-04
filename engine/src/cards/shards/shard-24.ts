@@ -157,6 +157,7 @@ import _poolCombustionTechnique from "../pool/combustion-technique.js";
 import _poolCommandTheStorm from "../pool/command-the-storm.js";
 import _poolCommanderSofiaDaguerre from "../pool/commander-sofia-daguerre.js";
 import _poolConeOfFlame from "../pool/cone-of-flame.js";
+import _poolConfessionDial from "../pool/confession-dial.js";
 import _poolConfidenceFromStrength from "../pool/confidence-from-strength.js";
 import _poolConjurersMantle from "../pool/conjurers-mantle.js";
 import _poolContainmentMembrane from "../pool/containment-membrane.js";
@@ -203,6 +204,7 @@ import _poolDeepWater from "../pool/deep-water.js";
 import _poolDefiantStand from "../pool/defiant-stand.js";
 import _poolDelay from "../pool/delay.js";
 import _poolDemonOfCatastrophes from "../pool/demon-of-catastrophes.js";
+import _poolDesdemonaFreedomsEdge from "../pool/desdemona-freedoms-edge.js";
 import _poolDesertOfTheFervent from "../pool/desert-of-the-fervent.js";
 import _poolDespoticScepter from "../pool/despotic-scepter.js";
 import _poolDestructiveForce from "../pool/destructive-force.js";
@@ -1069,6 +1071,7 @@ const shard: CardShard = {
     _poolCommandTheStorm,
     _poolCommanderSofiaDaguerre,
     _poolConeOfFlame,
+    _poolConfessionDial,
     _poolConfidenceFromStrength,
     _poolConjurersMantle,
     _poolContainmentMembrane,
@@ -1115,6 +1118,7 @@ const shard: CardShard = {
     _poolDefiantStand,
     _poolDelay,
     _poolDemonOfCatastrophes,
+    _poolDesdemonaFreedomsEdge,
     _poolDesertOfTheFervent,
     _poolDespoticScepter,
     _poolDestructiveForce,

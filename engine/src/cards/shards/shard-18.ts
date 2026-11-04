@@ -602,6 +602,7 @@ import _poolRiftSower from "../pool/rift-sower.js";
 import _poolRingOfThune from "../pool/ring-of-thune.js";
 import _poolRipApart from "../pool/rip-apart.js";
 import _poolRiseFromTheTides from "../pool/rise-from-the-tides.js";
+import _poolRiseOfTheDarkRealms from "../pool/rise-of-the-dark-realms.js";
 import _poolRiskyMove from "../pool/risky-move.js";
 import _poolRiskyResearch from "../pool/risky-research.js";
 import _poolRiverguardsReflexes from "../pool/riverguards-reflexes.js";
@@ -637,6 +638,7 @@ import _poolSeaGodsRevenge from "../pool/sea-gods-revenge.js";
 import _poolSearingMeditation from "../pool/searing-meditation.js";
 import _poolSecurityBlockade from "../pool/security-blockade.js";
 import _poolSelesnyaKeyrune from "../pool/selesnya-keyrune.js";
+import _poolSelvalaHeartOfTheWilds from "../pool/selvala-heart-of-the-wilds.js";
 import _poolSentinelSpider from "../pool/sentinel-spider.js";
 import _poolSevenDwarves from "../pool/seven-dwarves.js";
 import _poolSeveredStrands from "../pool/severed-strands.js";
@@ -673,6 +675,7 @@ import _poolSnakeskinVeil from "../pool/snakeskin-veil.js";
 import _poolSolariumSentry from "../pool/solarium-sentry.js";
 import _poolSoltariChampion from "../pool/soltari-champion.js";
 import _poolSongsOfTheDamned from "../pool/songs-of-the-damned.js";
+import _poolSorcerousSquall from "../pool/sorcerous-squall.js";
 import _poolSorinImperiousBloodlord from "../pool/sorin-imperious-bloodlord.js";
 import _poolSoulLink from "../pool/soul-link.js";
 import _poolSoulSeizer from "../pool/soul-seizer.js";
@@ -1507,6 +1510,7 @@ const shard: CardShard = {
     _poolRingOfThune,
     _poolRipApart,
     _poolRiseFromTheTides,
+    _poolRiseOfTheDarkRealms,
     _poolRiskyMove,
     _poolRiskyResearch,
     _poolRiverguardsReflexes,
@@ -1542,6 +1546,7 @@ const shard: CardShard = {
     _poolSearingMeditation,
     _poolSecurityBlockade,
     _poolSelesnyaKeyrune,
+    _poolSelvalaHeartOfTheWilds,
     _poolSentinelSpider,
     _poolSevenDwarves,
     _poolSeveredStrands,
@@ -1578,6 +1583,7 @@ const shard: CardShard = {
     _poolSolariumSentry,
     _poolSoltariChampion,
     _poolSongsOfTheDamned,
+    _poolSorcerousSquall,
     _poolSorinImperiousBloodlord,
     _poolSoulLink,
     _poolSoulSeizer,

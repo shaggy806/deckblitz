@@ -454,6 +454,7 @@ import _poolLeoninSkyhunter from "../pool/leonin-skyhunter.js";
 import _poolLeshracsRite from "../pool/leshracs-rite.js";
 import _poolLightTheWay from "../pool/light-the-way.js";
 import _poolLightningSurge from "../pool/lightning-surge.js";
+import _poolLilianasContract from "../pool/lilianas-contract.js";
 import _poolLilianasSteward from "../pool/lilianas-steward.js";
 import _poolLionHeart from "../pool/lion-heart.js";
 import _poolLittjaraGladeWarden from "../pool/littjara-glade-warden.js";
@@ -1371,6 +1372,7 @@ const shard: CardShard = {
     _poolLeshracsRite,
     _poolLightTheWay,
     _poolLightningSurge,
+    _poolLilianasContract,
     _poolLilianasSteward,
     _poolLionHeart,
     _poolLittjaraGladeWarden,

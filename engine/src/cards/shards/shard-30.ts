@@ -413,6 +413,7 @@ import _poolJadeGuardian from "../pool/jade-guardian.js";
 import _poolJadziStewardOfFate from "../pool/jadzi-steward-of-fate.js";
 import _poolJemLightfooteSkyExplorer from "../pool/jem-lightfoote-sky-explorer.js";
 import _poolJeongJeongsDeserters from "../pool/jeong-jeongs-deserters.js";
+import _poolJiangYangguWildcrafter from "../pool/jiang-yanggu-wildcrafter.js";
 import _poolJodahsCodex from "../pool/jodahs-codex.js";
 import _poolJohtullWurm from "../pool/johtull-wurm.js";
 import _poolJoust from "../pool/joust.js";
@@ -720,6 +721,7 @@ import _poolSpawningKraken from "../pool/spawning-kraken.js";
 import _poolSpectralBears from "../pool/spectral-bears.js";
 import _poolSpectralHuntCaller from "../pool/spectral-hunt-caller.js";
 import _poolSpellbindingSoprano from "../pool/spellbinding-soprano.js";
+import _poolSpelltwine from "../pool/spelltwine.js";
 import _poolSphinxBoneWand from "../pool/sphinx-bone-wand.js";
 import _poolSpiderGirlLegacyHero from "../pool/spider-girl-legacy-hero.js";
 import _poolSpiderSuit from "../pool/spider-suit.js";
@@ -1330,6 +1332,7 @@ const shard: CardShard = {
     _poolJadziStewardOfFate,
     _poolJemLightfooteSkyExplorer,
     _poolJeongJeongsDeserters,
+    _poolJiangYangguWildcrafter,
     _poolJodahsCodex,
     _poolJohtullWurm,
     _poolJoust,
@@ -1637,6 +1640,7 @@ const shard: CardShard = {
     _poolSpectralBears,
     _poolSpectralHuntCaller,
     _poolSpellbindingSoprano,
+    _poolSpelltwine,
     _poolSphinxBoneWand,
     _poolSpiderGirlLegacyHero,
     _poolSpiderSuit,

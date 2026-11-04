@@ -448,6 +448,7 @@ import _poolManicScribe from "../pool/manic-scribe.js";
 import _poolManticoreOfTheGauntlet from "../pool/manticore-of-the-gauntlet.js";
 import _poolMarblePriest from "../pool/marble-priest.js";
 import _poolMarchFromTheTomb from "../pool/march-from-the-tomb.js";
+import _poolMarketFestival from "../pool/market-festival.js";
 import _poolMarrowBats from "../pool/marrow-bats.js";
 import _poolMarshLurker from "../pool/marsh-lurker.js";
 import _poolMartyrOfAshes from "../pool/martyr-of-ashes.js";
@@ -574,6 +575,7 @@ import _poolPyrotechnicPerformer from "../pool/pyrotechnic-performer.js";
 import _poolQuakefootCyclops from "../pool/quakefoot-cyclops.js";
 import _poolQuench from "../pool/quench.js";
 import _poolQuicken from "../pool/quicken.js";
+import _poolQuistisTrepe from "../pool/quistis-trepe.js";
 import _poolRagingGoblinoids from "../pool/raging-goblinoids.js";
 import _poolRakdosAugermage from "../pool/rakdos-augermage.js";
 import _poolRakdosTrumpeter from "../pool/rakdos-trumpeter.js";
@@ -1309,6 +1311,7 @@ const shard: CardShard = {
     _poolManticoreOfTheGauntlet,
     _poolMarblePriest,
     _poolMarchFromTheTomb,
+    _poolMarketFestival,
     _poolMarrowBats,
     _poolMarshLurker,
     _poolMartyrOfAshes,
@@ -1435,6 +1438,7 @@ const shard: CardShard = {
     _poolQuakefootCyclops,
     _poolQuench,
     _poolQuicken,
+    _poolQuistisTrepe,
     _poolRagingGoblinoids,
     _poolRakdosAugermage,
     _poolRakdosTrumpeter,
