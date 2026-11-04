@@ -230,6 +230,7 @@ import _poolEnergizer from "../pool/energizer.js";
 import _poolEngineeredMight from "../pool/engineered-might.js";
 import _poolEngulfTheShore from "../pool/engulf-the-shore.js";
 import _poolEnhancedAwareness from "../pool/enhanced-awareness.js";
+import _poolEnnisDebateModerator from "../pool/ennis-debate-moderator.js";
 import _poolEnroot from "../pool/enroot.js";
 import _poolEnsouledScimitar from "../pool/ensouled-scimitar.js";
 import _poolEreborFlamesmith from "../pool/erebor-flamesmith.js";
@@ -672,6 +673,7 @@ import _poolSeismicMage from "../pool/seismic-mage.js";
 import _poolSelflessSafewright from "../pool/selfless-safewright.js";
 import _poolSephirothsIntervention from "../pool/sephiroths-intervention.js";
 import _poolSerpentWarrior from "../pool/serpent-warrior.js";
+import _poolSerraInquisitors from "../pool/serra-inquisitors.js";
 import _poolSerratedScorpion from "../pool/serrated-scorpion.js";
 import _poolSerumVisions from "../pool/serum-visions.js";
 import _poolSetessanSkirmisher from "../pool/setessan-skirmisher.js";
@@ -1145,6 +1147,7 @@ const shard: CardShard = {
     _poolEngineeredMight,
     _poolEngulfTheShore,
     _poolEnhancedAwareness,
+    _poolEnnisDebateModerator,
     _poolEnroot,
     _poolEnsouledScimitar,
     _poolEreborFlamesmith,
@@ -1587,6 +1590,7 @@ const shard: CardShard = {
     _poolSelflessSafewright,
     _poolSephirothsIntervention,
     _poolSerpentWarrior,
+    _poolSerraInquisitors,
     _poolSerratedScorpion,
     _poolSerumVisions,
     _poolSetessanSkirmisher,

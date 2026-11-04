@@ -58,6 +58,7 @@ import _poolAvatarOfDiscord from "../pool/avatar-of-discord.js";
 import _poolAvatarOfHope from "../pool/avatar-of-hope.js";
 import _poolAvenReedstalker from "../pool/aven-reedstalker.js";
 import _poolAvenSunstriker from "../pool/aven-sunstriker.js";
+import _poolAvengersAssemble from "../pool/avengers-assemble.js";
 import _poolAvizoa from "../pool/avizoa.js";
 import _poolBairdArgivianRecruiter from "../pool/baird-argivian-recruiter.js";
 import _poolBarbarianRing from "../pool/barbarian-ring.js";
@@ -955,6 +956,7 @@ const shard: CardShard = {
     _poolAvatarOfHope,
     _poolAvenReedstalker,
     _poolAvenSunstriker,
+    _poolAvengersAssemble,
     _poolAvizoa,
     _poolBairdArgivianRecruiter,
     _poolBarbarianRing,

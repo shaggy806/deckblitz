@@ -387,6 +387,7 @@ import _poolIrresistiblePrey from "../pool/irresistible-prey.js";
 import _poolIvySeer from "../pool/ivy-seer.js";
 import _poolIzzetGuildmage from "../pool/izzet-guildmage.js";
 import _poolJasmineBorealOfTheSeven from "../pool/jasmine-boreal-of-the-seven.js";
+import _poolJiangYangguAlone from "../pool/jiang-yanggu-alone.js";
 import _poolJoriEnRuinDiver from "../pool/jori-en-ruin-diver.js";
 import _poolJunkWinder from "../pool/junk-winder.js";
 import _poolJwarIsleRefuge from "../pool/jwar-isle-refuge.js";
@@ -665,6 +666,7 @@ import _poolSilverSableMercenaryLeader from "../pool/silver-sable-mercenary-lead
 import _poolSilverquillSilencer from "../pool/silverquill-silencer.js";
 import _poolSimicGuildgate from "../pool/simic-guildgate.js";
 import _poolSinkhole from "../pool/sinkhole.js";
+import _poolSirensCall from "../pool/sirens-call.js";
 import _poolSkeletonize from "../pool/skeletonize.js";
 import _poolSkinrender from "../pool/skinrender.js";
 import _poolSkirsdagHighPriest from "../pool/skirsdag-high-priest.js";
@@ -1297,6 +1299,7 @@ const shard: CardShard = {
     _poolIvySeer,
     _poolIzzetGuildmage,
     _poolJasmineBorealOfTheSeven,
+    _poolJiangYangguAlone,
     _poolJoriEnRuinDiver,
     _poolJunkWinder,
     _poolJwarIsleRefuge,
@@ -1575,6 +1578,7 @@ const shard: CardShard = {
     _poolSilverquillSilencer,
     _poolSimicGuildgate,
     _poolSinkhole,
+    _poolSirensCall,
     _poolSkeletonize,
     _poolSkinrender,
     _poolSkirsdagHighPriest,

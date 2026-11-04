@@ -688,6 +688,7 @@ import _poolSurveillanceRoom from "../pool/surveillance-room.js";
 import _poolSurvivorsMedKit from "../pool/survivors-med-kit.js";
 import _poolSuspend from "../pool/suspend.js";
 import _poolSuspendedSentence from "../pool/suspended-sentence.js";
+import _poolSuspiciousDetonation from "../pool/suspicious-detonation.js";
 import _poolSwellOfCourage from "../pool/swell-of-courage.js";
 import _poolSwiftManeuver from "../pool/swift-maneuver.js";
 import _poolSwordCoastSerpent from "../pool/sword-coast-serpent.js";
@@ -717,6 +718,7 @@ import _poolTheGaffer from "../pool/the-gaffer.js";
 import _poolTheImmortalSun from "../pool/the-immortal-sun.js";
 import _poolTheIncredibleHulk from "../pool/the-incredible-hulk.js";
 import _poolTheScorpionGod from "../pool/the-scorpion-god.js";
+import _poolTheSpearOfBashenga from "../pool/the-spear-of-bashenga.js";
 import _poolTheUnspeakable from "../pool/the-unspeakable.js";
 import _poolTheorixCharm from "../pool/theorix-charm.js";
 import _poolTheorixMetamage from "../pool/theorix-metamage.js";
@@ -1518,6 +1520,7 @@ const shard: CardShard = {
     _poolSurvivorsMedKit,
     _poolSuspend,
     _poolSuspendedSentence,
+    _poolSuspiciousDetonation,
     _poolSwellOfCourage,
     _poolSwiftManeuver,
     _poolSwordCoastSerpent,
@@ -1547,6 +1550,7 @@ const shard: CardShard = {
     _poolTheImmortalSun,
     _poolTheIncredibleHulk,
     _poolTheScorpionGod,
+    _poolTheSpearOfBashenga,
     _poolTheUnspeakable,
     _poolTheorixCharm,
     _poolTheorixMetamage,

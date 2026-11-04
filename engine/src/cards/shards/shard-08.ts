@@ -53,6 +53,7 @@ import _poolAquaticIngress from "../pool/aquatic-ingress.js";
 import _poolArcanisTheOmnipotent from "../pool/arcanis-the-omnipotent.js";
 import _poolArchdemonOfUnx from "../pool/archdemon-of-unx.js";
 import _poolArchitectOfTheUntamed from "../pool/architect-of-the-untamed.js";
+import _poolArchiveTrap from "../pool/archive-trap.js";
 import _poolArgothianPixies from "../pool/argothian-pixies.js";
 import _poolArmadaWurm from "../pool/armada-wurm.js";
 import _poolArtificersAssistant from "../pool/artificers-assistant.js";
@@ -429,6 +430,7 @@ import _poolKarganDragonrider from "../pool/kargan-dragonrider.js";
 import _poolKarnSilverGolem from "../pool/karn-silver-golem.js";
 import _poolKarooMeerkat from "../pool/karoo-meerkat.js";
 import _poolKarsusDepthguard from "../pool/karsus-depthguard.js";
+import _poolKaustEyesOfTheGlade from "../pool/kaust-eyes-of-the-glade.js";
 import _poolKavuMauler from "../pool/kavu-mauler.js";
 import _poolKavuPrimarch from "../pool/kavu-primarch.js";
 import _poolKaylasCommand from "../pool/kaylas-command.js";
@@ -1004,6 +1006,7 @@ const shard: CardShard = {
     _poolArcanisTheOmnipotent,
     _poolArchdemonOfUnx,
     _poolArchitectOfTheUntamed,
+    _poolArchiveTrap,
     _poolArgothianPixies,
     _poolArmadaWurm,
     _poolArtificersAssistant,
@@ -1380,6 +1383,7 @@ const shard: CardShard = {
     _poolKarnSilverGolem,
     _poolKarooMeerkat,
     _poolKarsusDepthguard,
+    _poolKaustEyesOfTheGlade,
     _poolKavuMauler,
     _poolKavuPrimarch,
     _poolKaylasCommand,

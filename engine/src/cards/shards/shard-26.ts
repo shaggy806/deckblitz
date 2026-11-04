@@ -219,6 +219,7 @@ import _poolEdgarCharmedGroom from "../pool/edgar-charmed-groom.js";
 import _poolEdgeOfTheDivinity from "../pool/edge-of-the-divinity.js";
 import _poolEladamriLordOfLeaves from "../pool/eladamri-lord-of-leaves.js";
 import _poolEliteArrester from "../pool/elite-arrester.js";
+import _poolEllynHarbreezeBusybody from "../pool/ellyn-harbreeze-busybody.js";
 import _poolElspethKnightErrant from "../pool/elspeth-knight-errant.js";
 import _poolElvenRiders from "../pool/elven-riders.js";
 import _poolElvishArchdruid from "../pool/elvish-archdruid.js";
@@ -251,6 +252,7 @@ import _poolFblthpImpossiblyLost from "../pool/fblthp-impossibly-lost.js";
 import _poolFblthpTheLost from "../pool/fblthp-the-lost.js";
 import _poolFearOfDeath from "../pool/fear-of-death.js";
 import _poolFearlessLiberator from "../pool/fearless-liberator.js";
+import _poolFearlessSwashbuckler from "../pool/fearless-swashbuckler.js";
 import _poolFeatherRadiantArbiter from "../pool/feather-radiant-arbiter.js";
 import _poolFeloniousRage from "../pool/felonious-rage.js";
 import _poolFertileThicket from "../pool/fertile-thicket.js";
@@ -721,6 +723,7 @@ import _poolSphereOfResistance from "../pool/sphere-of-resistance.js";
 import _poolSpiderByteWebWarden from "../pool/spider-byte-web-warden.js";
 import _poolSpiderManIndia from "../pool/spider-man-india.js";
 import _poolSpineseekerCentipede from "../pool/spineseeker-centipede.js";
+import _poolSpinyStarfish from "../pool/spiny-starfish.js";
 import _poolSpite from "../pool/spite.js";
 import _poolSpitebellows from "../pool/spitebellows.js";
 import _poolSpittingSliver from "../pool/spitting-sliver.js";
@@ -1132,6 +1135,7 @@ const shard: CardShard = {
     _poolEdgeOfTheDivinity,
     _poolEladamriLordOfLeaves,
     _poolEliteArrester,
+    _poolEllynHarbreezeBusybody,
     _poolElspethKnightErrant,
     _poolElvenRiders,
     _poolElvishArchdruid,
@@ -1164,6 +1168,7 @@ const shard: CardShard = {
     _poolFblthpTheLost,
     _poolFearOfDeath,
     _poolFearlessLiberator,
+    _poolFearlessSwashbuckler,
     _poolFeatherRadiantArbiter,
     _poolFeloniousRage,
     _poolFertileThicket,
@@ -1634,6 +1639,7 @@ const shard: CardShard = {
     _poolSpiderByteWebWarden,
     _poolSpiderManIndia,
     _poolSpineseekerCentipede,
+    _poolSpinyStarfish,
     _poolSpite,
     _poolSpitebellows,
     _poolSpittingSliver,

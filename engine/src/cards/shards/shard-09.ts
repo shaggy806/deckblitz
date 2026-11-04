@@ -803,6 +803,7 @@ import _poolTestamentBearer from "../pool/testament-bearer.js";
 import _poolTezzeretArtificeMaster from "../pool/tezzeret-artifice-master.js";
 import _poolThalakosDeceiver from "../pool/thalakos-deceiver.js";
 import _poolThaumatog from "../pool/thaumatog.js";
+import _poolThaumatonTorpedo from "../pool/thaumaton-torpedo.js";
 import _poolTheBirthOfMeletis from "../pool/the-birth-of-meletis.js";
 import _poolTheDalekEmperor from "../pool/the-dalek-emperor.js";
 import _poolTheElderDragonWar from "../pool/the-elder-dragon-war.js";
@@ -1749,6 +1750,7 @@ const shard: CardShard = {
     _poolTezzeretArtificeMaster,
     _poolThalakosDeceiver,
     _poolThaumatog,
+    _poolThaumatonTorpedo,
     _poolTheBirthOfMeletis,
     _poolTheDalekEmperor,
     _poolTheElderDragonWar,

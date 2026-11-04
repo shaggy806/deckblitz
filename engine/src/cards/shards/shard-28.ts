@@ -342,6 +342,7 @@ import _poolHighwayRobber from "../pool/highway-robber.js";
 import _poolHindervines from "../pool/hindervines.js";
 import _poolHiredPoisoner from "../pool/hired-poisoner.js";
 import _poolHivisOfTheScale from "../pool/hivis-of-the-scale.js";
+import _poolHobgoblinBanditLord from "../pool/hobgoblin-bandit-lord.js";
 import _poolHolyArmor from "../pool/holy-armor.js";
 import _poolHordewingSkaab from "../pool/hordewing-skaab.js";
 import _poolHorizonCanopy from "../pool/horizon-canopy.js";
@@ -457,6 +458,7 @@ import _poolMassAppeal from "../pool/mass-appeal.js";
 import _poolMassCalcify from "../pool/mass-calcify.js";
 import _poolMassOfGhouls from "../pool/mass-of-ghouls.js";
 import _poolMaulSplicer from "../pool/maul-splicer.js";
+import _poolMbakuJabariChieftain from "../pool/mbaku-jabari-chieftain.js";
 import _poolMeasureOfWickedness from "../pool/measure-of-wickedness.js";
 import _poolMeekstone from "../pool/meekstone.js";
 import _poolMenacingOgre from "../pool/menacing-ogre.js";
@@ -1271,6 +1273,7 @@ const shard: CardShard = {
     _poolHindervines,
     _poolHiredPoisoner,
     _poolHivisOfTheScale,
+    _poolHobgoblinBanditLord,
     _poolHolyArmor,
     _poolHordewingSkaab,
     _poolHorizonCanopy,
@@ -1386,6 +1389,7 @@ const shard: CardShard = {
     _poolMassCalcify,
     _poolMassOfGhouls,
     _poolMaulSplicer,
+    _poolMbakuJabariChieftain,
     _poolMeasureOfWickedness,
     _poolMeekstone,
     _poolMenacingOgre,

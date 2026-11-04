@@ -279,6 +279,7 @@ import _poolFabledPassage from "../pool/fabled-passage.js";
 import _poolFacesOfThePast from "../pool/faces-of-the-past.js";
 import _poolFaeFlight from "../pool/fae-flight.js";
 import _poolFaeOffering from "../pool/fae-offering.js";
+import _poolFaerieFencing from "../pool/faerie-fencing.js";
 import _poolFalkenrathNoble from "../pool/falkenrath-noble.js";
 import _poolFallajiArchaeologist from "../pool/fallaji-archaeologist.js";
 import _poolFallingTimber from "../pool/falling-timber.js";
@@ -1234,6 +1235,7 @@ const shard: CardShard = {
     _poolFacesOfThePast,
     _poolFaeFlight,
     _poolFaeOffering,
+    _poolFaerieFencing,
     _poolFalkenrathNoble,
     _poolFallajiArchaeologist,
     _poolFallingTimber,

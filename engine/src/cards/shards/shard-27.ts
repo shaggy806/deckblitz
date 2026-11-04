@@ -166,12 +166,14 @@ import _poolDeathHoodCobra from "../pool/death-hood-cobra.js";
 import _poolDeconstruct from "../pool/deconstruct.js";
 import _poolDeepAnalysis from "../pool/deep-analysis.js";
 import _poolDeepfathomEcho from "../pool/deepfathom-echo.js";
+import _poolDeepwayNavigator from "../pool/deepway-navigator.js";
 import _poolDeface from "../pool/deface.js";
 import _poolDefacedGallery from "../pool/defaced-gallery.js";
 import _poolDefenestrate from "../pool/defenestrate.js";
 import _poolDefiantOgre from "../pool/defiant-ogre.js";
 import _poolDefilingDaemogoth from "../pool/defiling-daemogoth.js";
 import _poolDemonBolt from "../pool/demon-bolt.js";
+import _poolDemonicStench from "../pool/demonic-stench.js";
 import _poolDemonlordOfAshmouth from "../pool/demonlord-of-ashmouth.js";
 import _poolDenyTheDivine from "../pool/deny-the-divine.js";
 import _poolDepartTheRealm from "../pool/depart-the-realm.js";
@@ -486,6 +488,7 @@ import _poolNoosegrafMob from "../pool/noosegraf-mob.js";
 import _poolNullCaller from "../pool/null-caller.js";
 import _poolNurglesRot from "../pool/nurgles-rot.js";
 import _poolOblivion from "../pool/oblivion.js";
+import _poolObliviousBookworm from "../pool/oblivious-bookworm.js";
 import _poolObscuringHaze from "../pool/obscuring-haze.js";
 import _poolObsianusGolem from "../pool/obsianus-golem.js";
 import _poolObsidianBattleAxe from "../pool/obsidian-battle-axe.js";
@@ -1058,12 +1061,14 @@ const shard: CardShard = {
     _poolDeconstruct,
     _poolDeepAnalysis,
     _poolDeepfathomEcho,
+    _poolDeepwayNavigator,
     _poolDeface,
     _poolDefacedGallery,
     _poolDefenestrate,
     _poolDefiantOgre,
     _poolDefilingDaemogoth,
     _poolDemonBolt,
+    _poolDemonicStench,
     _poolDemonlordOfAshmouth,
     _poolDenyTheDivine,
     _poolDepartTheRealm,
@@ -1378,6 +1383,7 @@ const shard: CardShard = {
     _poolNullCaller,
     _poolNurglesRot,
     _poolOblivion,
+    _poolObliviousBookworm,
     _poolObscuringHaze,
     _poolObsianusGolem,
     _poolObsidianBattleAxe,

@@ -42,6 +42,7 @@ import _poolAssault from "../pool/assault.js";
 import _poolAthreosGodOfPassage from "../pool/athreos-god-of-passage.js";
 import _poolAuguryOwl from "../pool/augury-owl.js";
 import _poolAuratog from "../pool/auratog.js";
+import _poolAureliaTheWarleader from "../pool/aurelia-the-warleader.js";
 import _poolAuriokEdgewright from "../pool/auriok-edgewright.js";
 import _poolAuronsInspiration from "../pool/aurons-inspiration.js";
 import _poolAvalancheTusker from "../pool/avalanche-tusker.js";
@@ -669,6 +670,7 @@ import _poolSeasonOfGrowth from "../pool/season-of-growth.js";
 import _poolSecureDetention from "../pool/secure-detention.js";
 import _poolSedgeScorpion from "../pool/sedge-scorpion.js";
 import _poolSeedTheLand from "../pool/seed-the-land.js";
+import _poolSeiferBalambRival from "../pool/seifer-balamb-rival.js";
 import _poolSejiriShelter from "../pool/sejiri-shelter.js";
 import _poolSekkuarDeathkeeper from "../pool/sekkuar-deathkeeper.js";
 import _poolSelvalasStampede from "../pool/selvalas-stampede.js";
@@ -885,6 +887,7 @@ import _poolWretchedDoll from "../pool/wretched-doll.js";
 import _poolWyrmsCrossingPatrol from "../pool/wyrms-crossing-patrol.js";
 import _poolZealotsConviction from "../pool/zealots-conviction.js";
 import _poolZombieAssassin from "../pool/zombie-assassin.js";
+import _tokens01BlueStarfishToken from "../tokens/0-1-blue-starfish-token.js";
 import _tokensBoarToken from "../tokens/boar-token.js";
 import _tokensCatWarriorTokenAjaniFellsTheGodsire from "../tokens/cat-warrior-token-ajani-fells-the-godsire.js";
 import _tokensCentaurToken from "../tokens/centaur-token.js";
@@ -948,6 +951,7 @@ const shard: CardShard = {
     _poolAthreosGodOfPassage,
     _poolAuguryOwl,
     _poolAuratog,
+    _poolAureliaTheWarleader,
     _poolAuriokEdgewright,
     _poolAuronsInspiration,
     _poolAvalancheTusker,
@@ -1575,6 +1579,7 @@ const shard: CardShard = {
     _poolSecureDetention,
     _poolSedgeScorpion,
     _poolSeedTheLand,
+    _poolSeiferBalambRival,
     _poolSejiriShelter,
     _poolSekkuarDeathkeeper,
     _poolSelvalasStampede,
@@ -1793,6 +1798,7 @@ const shard: CardShard = {
     _poolZombieAssassin,
   ],
   tokens: [
+    _tokens01BlueStarfishToken,
     _tokensBoarToken,
     _tokensCatWarriorTokenAjaniFellsTheGodsire,
     _tokensCentaurToken,

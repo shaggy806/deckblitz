@@ -264,6 +264,7 @@ import _poolFieldOfReality from "../pool/field-of-reality.js";
 import _poolFieryInscription from "../pool/fiery-inscription.js";
 import _poolFillWithFright from "../pool/fill-with-fright.js";
 import _poolFirefiendElemental from "../pool/firefiend-elemental.js";
+import _poolFiremaneCommando from "../pool/firemane-commando.js";
 import _poolFireshrieker from "../pool/fireshrieker.js";
 import _poolFirewakeSliver from "../pool/firewake-sliver.js";
 import _poolFishingGear from "../pool/fishing-gear.js";
@@ -286,6 +287,7 @@ import _poolFurnaceReins from "../pool/furnace-reins.js";
 import _poolFussBother from "../pool/fuss-bother.js";
 import _poolFylamarid from "../pool/fylamarid.js";
 import _poolGaeasCourser from "../pool/gaeas-courser.js";
+import _poolGahijiHonoredOne from "../pool/gahiji-honored-one.js";
 import _poolGalazethPrismari from "../pool/galazeth-prismari.js";
 import _poolGallowsAtWillowHill from "../pool/gallows-at-willow-hill.js";
 import _poolGateToTheAfterlife from "../pool/gate-to-the-afterlife.js";
@@ -436,6 +438,7 @@ import _poolLeave from "../pool/leave.js";
 import _poolLedevGuardian from "../pool/ledev-guardian.js";
 import _poolLeelaSevateemWarrior from "../pool/leela-sevateem-warrior.js";
 import _poolLetTheGalaxyBurn from "../pool/let-the-galaxy-burn.js";
+import _poolLethalExploit from "../pool/lethal-exploit.js";
 import _poolLethargyTrap from "../pool/lethargy-trap.js";
 import _poolLiciaSanguineTribune from "../pool/licia-sanguine-tribune.js";
 import _poolLifetap from "../pool/lifetap.js";
@@ -1181,6 +1184,7 @@ const shard: CardShard = {
     _poolFieryInscription,
     _poolFillWithFright,
     _poolFirefiendElemental,
+    _poolFiremaneCommando,
     _poolFireshrieker,
     _poolFirewakeSliver,
     _poolFishingGear,
@@ -1203,6 +1207,7 @@ const shard: CardShard = {
     _poolFussBother,
     _poolFylamarid,
     _poolGaeasCourser,
+    _poolGahijiHonoredOne,
     _poolGalazethPrismari,
     _poolGallowsAtWillowHill,
     _poolGateToTheAfterlife,
@@ -1353,6 +1358,7 @@ const shard: CardShard = {
     _poolLedevGuardian,
     _poolLeelaSevateemWarrior,
     _poolLetTheGalaxyBurn,
+    _poolLethalExploit,
     _poolLethargyTrap,
     _poolLiciaSanguineTribune,
     _poolLifetap,

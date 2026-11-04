@@ -276,6 +276,7 @@ import _poolFulminatorMage from "../pool/fulminator-mage.js";
 import _poolGargosViciousWatcher from "../pool/gargos-vicious-watcher.js";
 import _poolGatherTheTownsfolk from "../pool/gather-the-townsfolk.js";
 import _poolGatstafShepherd from "../pool/gatstaf-shepherd.js";
+import _poolGenestealerLocus from "../pool/genestealer-locus.js";
 import _poolGhastlyDemise from "../pool/ghastly-demise.js";
 import _poolGhostform from "../pool/ghostform.js";
 import _poolGlacialFortress from "../pool/glacial-fortress.js";
@@ -1199,6 +1200,7 @@ const shard: CardShard = {
     _poolGargosViciousWatcher,
     _poolGatherTheTownsfolk,
     _poolGatstafShepherd,
+    _poolGenestealerLocus,
     _poolGhastlyDemise,
     _poolGhostform,
     _poolGlacialFortress,

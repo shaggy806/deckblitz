@@ -331,6 +331,7 @@ import _poolGlimpseTheCore from "../pool/glimpse-the-core.js";
 import _poolGlitchGhostSurveyor from "../pool/glitch-ghost-surveyor.js";
 import _poolGlitchInterpreter from "../pool/glitch-interpreter.js";
 import _poolGlory from "../pool/glory.js";
+import _poolGnarlidColony from "../pool/gnarlid-colony.js";
 import _poolGobblingOoze from "../pool/gobbling-ooze.js";
 import _poolGoblinAssaultTeam from "../pool/goblin-assault-team.js";
 import _poolGoblinBomb from "../pool/goblin-bomb.js";
@@ -881,6 +882,7 @@ import _poolYahennisExpertise from "../pool/yahennis-expertise.js";
 import _poolYavimayaScion from "../pool/yavimaya-scion.js";
 import _poolYoureConfrontedByRobbers from "../pool/youre-confronted-by-robbers.js";
 import _poolYunaHopeOfSpira from "../pool/yuna-hope-of-spira.js";
+import _poolYurikoBladeOfTheMighty from "../pool/yuriko-blade-of-the-mighty.js";
 import _poolZealotsEnDal from "../pool/zealots-en-dal.js";
 import _poolZealousLorecaster from "../pool/zealous-lorecaster.js";
 import _poolZhalfirinCommander from "../pool/zhalfirin-commander.js";
@@ -1239,6 +1241,7 @@ const shard: CardShard = {
     _poolGlitchGhostSurveyor,
     _poolGlitchInterpreter,
     _poolGlory,
+    _poolGnarlidColony,
     _poolGobblingOoze,
     _poolGoblinAssaultTeam,
     _poolGoblinBomb,
@@ -1789,6 +1792,7 @@ const shard: CardShard = {
     _poolYavimayaScion,
     _poolYoureConfrontedByRobbers,
     _poolYunaHopeOfSpira,
+    _poolYurikoBladeOfTheMighty,
     _poolZealotsEnDal,
     _poolZealousLorecaster,
     _poolZhalfirinCommander,

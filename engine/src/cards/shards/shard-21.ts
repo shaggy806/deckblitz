@@ -812,6 +812,7 @@ import _poolVileRebirth from "../pool/vile-rebirth.js";
 import _poolViridescentBog from "../pool/viridescent-bog.js";
 import _poolVirtueOfKnowledge from "../pool/virtue-of-knowledge.js";
 import _poolVoicesFromTheVoid from "../pool/voices-from-the-void.js";
+import _poolVoidpouncer from "../pool/voidpouncer.js";
 import _poolVoraciousNull from "../pool/voracious-null.js";
 import _poolVorinclexVoiceOfHunger from "../pool/vorinclex-voice-of-hunger.js";
 import _poolWallOfGlare from "../pool/wall-of-glare.js";
@@ -1681,6 +1682,7 @@ const shard: CardShard = {
     _poolViridescentBog,
     _poolVirtueOfKnowledge,
     _poolVoicesFromTheVoid,
+    _poolVoidpouncer,
     _poolVoraciousNull,
     _poolVorinclexVoiceOfHunger,
     _poolWallOfGlare,
