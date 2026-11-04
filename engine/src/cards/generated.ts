@@ -26888,6 +26888,7 @@ import _poolVigilantMartyr from "./pool/vigilant-martyr.js";
 import _poolVigilantSentry from "./pool/vigilant-sentry.js";
 import _poolVigilanteJustice from "./pool/vigilante-justice.js";
 import _poolVigorMortis from "./pool/vigor-mortis.js";
+import _poolVigor from "./pool/vigor.js";
 import _poolVigorbloomAnnex from "./pool/vigorbloom-annex.js";
 import _poolVigorbloomCharm from "./pool/vigorbloom-charm.js";
 import _poolVigorbloomVanguard from "./pool/vigorbloom-vanguard.js";
@@ -56164,6 +56165,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolVigilantSentry,
   _poolVigilanteJustice,
   _poolVigorMortis,
+  _poolVigor,
   _poolVigorbloomAnnex,
   _poolVigorbloomCharm,
   _poolVigorbloomVanguard,
@@ -85453,6 +85455,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/vigilant-sentry": _poolVigilantSentry,
   "pool/vigilante-justice": _poolVigilanteJustice,
   "pool/vigor-mortis": _poolVigorMortis,
+  "pool/vigor": _poolVigor,
   "pool/vigorbloom-annex": _poolVigorbloomAnnex,
   "pool/vigorbloom-charm": _poolVigorbloomCharm,
   "pool/vigorbloom-vanguard": _poolVigorbloomVanguard,

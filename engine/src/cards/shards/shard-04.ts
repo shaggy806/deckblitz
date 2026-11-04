@@ -824,6 +824,7 @@ import _poolViashinoBladescout from "../pool/viashino-bladescout.js";
 import _poolVibrantIdea from "../pool/vibrant-idea.js";
 import _poolViciousClown from "../pool/vicious-clown.js";
 import _poolViciousRivalry from "../pool/vicious-rivalry.js";
+import _poolVigor from "../pool/vigor.js";
 import _poolVileAggregate from "../pool/vile-aggregate.js";
 import _poolVillageCannibals from "../pool/village-cannibals.js";
 import _poolVillainousOgre from "../pool/villainous-ogre.js";
@@ -1723,6 +1724,7 @@ const shard: CardShard = {
     _poolVibrantIdea,
     _poolViciousClown,
     _poolViciousRivalry,
+    _poolVigor,
     _poolVileAggregate,
     _poolVillageCannibals,
     _poolVillainousOgre,
