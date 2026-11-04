@@ -12,6 +12,16 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **Activating an exhaust or a power-up ability as a trigger** (2026-11-03, `26da7aaec`): Rangers' Refueler, Adrenaline Jockey, Marvel Boy.
+- **Counters-put firing per counter, and once for a batch, with `sequence.together` for one instruction** (2026-11-03, `1b58e989c`,
+  `c6b7f4020`): Fathom Mage, Flourishing Defenses, Bloodcrazed Hoplite, Invisible Woman, Bioessence Hydra.
+- **Damage triggers that read the amount, and excess damage** (2026-11-03, `2841036cb`): Fall of Cair Andros, Magmatic Galleon, Aegar,
+  Deus of Calamity, Pain Magnification, Innocent Bystander, Spinneret and Spiderling.
+- **Limits on drawing, and the next draw replaced** (2026-11-03, `6e823f83f`): Narset, Spirit of the Labyrinth, Maralen, Mornsong Aria,
+  Words of Worship, Wilding, War, Waste.
+- **Graveyard replacements for the turn, an exile with something besides it, who creates a token** (2026-11-03, `1784aeef1`): Malicious
+  Eclipse, Malicious Malfunction, Gaea's Will, Magus of the Will, Cosmic Intervention, Wildwood Escort, Kumano's Blessing, Head of the
+  Hunt, Kalitas, Crafty Cutpurse, Mirkwood Bats, Akim.
 - **A card with two typecycling abilities, flashback's creature-tapping and X-discard costs** (2026-11-03, `80868355c`): Valley Rannet,
   Igneous Pouncer, Battle Screech, Group Project, Twinned Vision, Conflagrate.
 - **Costs to attack paid in permanents, sacrificed or returned, and a trigger narrowed to what its own cost sacrificed** (2026-11-03,

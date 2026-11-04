@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4296 already implemented / 704 missing (marks refreshed 2026-11-04)
+4301 already implemented / 699 missing (marks refreshed 2026-11-04)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -224,7 +224,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   225  Pitiless Plunderer                       {3}{B}           Creature — Human Pirate
 [x]   226  Rockfall Vale                            {0}              Land
 [x]   227  The Great Henge                          {7}{G}{G}        Legendary Artifact
-[ ]   228  Mirkwood Bats                            {3}{B}           Creature — Bat
+[x]   228  Mirkwood Bats                            {3}{B}           Creature — Bat
 [x]   229  Sensei's Divining Top                    {1}              Artifact
 [x]   230  Shipwreck Marsh                          {0}              Land
 [x]   231  Brushland                                {0}              Land
@@ -968,7 +968,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   972  Loxodon Warhammer                        {3}              Artifact — Equipment
 [x]   973  Cabal Stronghold                         {0}              Land
 [x]   974  Eerie Interlude                          {2}{W}           Instant
-[ ]   975  Narset, Parter of Veils                  {1}{U}{U}        Legendary Planeswalker — Narset
+[x]   975  Narset, Parter of Veils                  {1}{U}{U}        Legendary Planeswalker — Narset
 [x]   976  Razorkin Needlehead                      {R}{R}           Creature — Human Assassin
 [x]   977  Karmic Guide                             {3}{W}{W}        Creature — Angel Spirit
 [x]   978  Decimate                                 {2}{R}{G}        Sorcery
@@ -1704,7 +1704,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1711  Profane Tutor                            {0}              Sorcery
 [x]  1712  Clock of Omens                           {4}              Artifact
 [x]  1713  Utter End                                {2}{W}{B}        Instant
-[ ]  1714  Fathom Mage                              {2}{G}{U}        Creature — Human Wizard
+[x]  1714  Fathom Mage                              {2}{G}{U}        Creature — Human Wizard
 [ ]  1715  Hoarding Broodlord                       {5}{B}{B}{B}     Creature — Dragon
 [x]  1716  Crypt of Agadeem                         {0}              Land
 [x]  1717  Jin-Gitaxias, Core Augur                 {8}{U}{U}        Legendary Creature — Phyrexian Praetor
@@ -3873,7 +3873,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3880  Hideous Taskmaster                       {6}{R}           Creature — Eldrazi
 [x]  3881  Dress Down                               {1}{U}           Enchantment
 [x]  3882  Primal Might                             {X}{G}           Sorcery
-[ ]  3883  Flourishing Defenses                     {4}{G}           Enchantment
+[x]  3883  Flourishing Defenses                     {4}{G}           Enchantment
 [x]  3884  Orochi Soul-Reaver                       {5}{B}           Creature — Snake Ninja Rogue
 [x]  3885  Extinguish All Hope                      {4}{B}{B}        Sorcery
 [x]  3886  Nibelheim Aflame                         {2}{R}{R}        Sorcery
@@ -4090,7 +4090,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4097  Inspiring Refrain                        {4}{U}{U}        Sorcery
 [x]  4098  Haru, Hidden Talent                      {1}{G}           Legendary Creature — Human Peasant Ally
 [x]  4099  Earthcraft                               {1}{G}           Enchantment
-[ ]  4100  Cosmic Intervention                      {3}{W}           Instant
+[x]  4100  Cosmic Intervention                      {3}{W}           Instant
 [x]  4101  Glacial Floodplain                       {0}              Snow Land — Plains Island
 [x]  4102  Felothar the Steadfast                   {1}{W}{B}{G}     Legendary Creature — Human Warrior
 [ ]  4103  Mirrorhall Mimic // Ghastly Mimicry      {4}              Creature — Spirit // Enchantment — Aura

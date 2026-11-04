@@ -889,6 +889,9 @@ missing. Re-run `--greedy` for Phase 2's order.
 - **2026-11-03: overnight, fourth round.** `static:cant-search-library`, `static:damage-life-floor`,
   `static:protection-doesnt-remove-source`, `cost:attack-cost-sacrifice`, `trigger:sacrifice-filter`,
   `cost:cost-modification-extensions`. 24 proving cards. Left: `effect:grant-until-exiled-card-cast`, which needs code of its own.
+- **2026-11-03: overnight, fifth round.** `replacement:exile-instead`, `replacement:token-control-redirect-this-turn`, `static:draw-limit`,
+  `replacement:next-draw-this-turn`, `trigger:damage-trigger-extensions`, `trigger:counters-put`, `trigger:activates-ability`. 35 proving
+  cards.
 
 ## Rough size
 
