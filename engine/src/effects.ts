@@ -8136,11 +8136,12 @@ export type EffectSpec =
        * Soldier creature tokens that are tapped and attacking" (Hero of
        * Bladehold) is this with `tapped`. See {@link EnterAttacking}. */
       readonly attacking?: EnterAttacking;
-      /** Each token made its own object, never folded into a token stack —
-       * for an effect that goes on to tell the tokens it made from older
-       * ones: Martial Coup's "create X 1/1 white Soldier creature tokens …
-       * destroy all **other** creatures" (`notThisWay: "created"`), where a
-       * stack of Soldiers the new ones joined would be spared with them. */
+      /** Each token made its own object, never in a stack, even one of its
+       * own batch. An effect that goes on to read "the tokens made this way"
+       * doesn't need this to tell them from older ones (`readsCreatedTokens`
+       * keeps them out of older stacks), only to treat them one by one: Martial
+       * Coup's "create X 1/1 white Soldier creature tokens … destroy all
+       * **other** creatures" (`notThisWay: "created"`). */
       readonly separate?: boolean;
       /** The tokens remember this effect's source, for text that goes on to
        * speak of "tokens created with this" — see `GameObject.createdWith` and
@@ -11505,6 +11506,12 @@ export interface EffectApi {
   /** The tokens this resolution has created, one object per token: a stack
    * woken, and of a stack they joined only the ones made. */
   createdTokensApart(): readonly ObjectId[];
+  /** Whether `mintCreatedApart` is under way. Optional only for the bare
+   * contexts some tests hand in. */
+  mintingCreatedApart?(): boolean;
+  /** Run `apply` with no token it makes folding into an older stack: see
+   * {@link readsCreatedTokens}. */
+  mintCreatedApart?(apply: () => void): void;
   /** See the `"created-tokens-fight"` {@link EffectSpec}. */
   createdTokensFight(among: CardFilter, asked: CreatedTokenFights | undefined, answer: ResolvedTargets): void;
   /** `tokens` hold the cards this resolution has exiled — see
@@ -15904,11 +15911,44 @@ function manaSplits(types: readonly ManaType[], amount: number): ManaType[][] {
   return out;
 }
 
+const READS_CREATED_TOKENS = new WeakMap<object, boolean>();
+
+/**
+ * Whether an effect reads "the tokens made this way" off the object they're on:
+ * a filter's `thisWay` or `notThisWay: "created"`, `put-counters-of` onto
+ * `"created"`, or a delayed trigger `about: "created"`. A new token folded into
+ * a stack of older identical ones is that stack's object, so the read would take
+ * the older ones too, or count one target for two tokens, and a stack is only a
+ * representation, so it may not change a result. So a token made under such an
+ * effect stays out of older stacks until cleanup folds it back
+ * (`applyEffectSpec`, `Game.mintTokenBatch`).
+ * `createdTokensApart` needs none of this, waking only the ones made, nor does
+ * `attach`, which singles one out.
+ */
+export function readsCreatedTokens(value: unknown): boolean {
+  if (typeof value !== "object" || value === null) return false;
+  const known = READS_CREATED_TOKENS.get(value);
+  if (known !== undefined) return known;
+  const node = value as Readonly<Record<string, unknown>>;
+  const reads =
+    node.thisWay === "created" ||
+    node.notThisWay === "created" ||
+    (node.kind === "put-counters-of" && node.target === "created") ||
+    (node.kind === "delayed-trigger" && node.about === "created") ||
+    Object.values(node).some(readsCreatedTokens);
+  READS_CREATED_TOKENS.set(value, reads);
+  return reads;
+}
+
 export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
   // A player won mid-resolution (Laboratory Maniac's draw, Thassa's Oracle):
   // the game is over (rule 104.1), and the rest of the instructions with it.
   // (Optional only for the bare contexts some tests hand in.)
   if (ctx.gameOver?.() === true) return;
+  if (ctx.mintingCreatedApart?.() === false && readsCreatedTokens(unbound)) {
+    ctx.mintCreatedApart?.(() => applyEffectSpec(unbound, ctx));
+    return;
+  }
   const spec = bindDynamicCompares(unbound, ctx);
   switch (spec.kind) {
     case "sequence": {

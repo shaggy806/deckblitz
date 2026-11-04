@@ -7,8 +7,7 @@ const SOLVED_TEXT =
   "Solved — {1}{B}, Sacrifice this Case: Search your library for a card, put it into your hand, then shuffle. Activate only as a sorcery.";
 
 // "It" is the token this made (`thisWay: "created"`), every one a replacement
-// added included. `separate`: a stack of older ones it joined would be suspected
-// with it.
+// added included, and no older one.
 export default defineCard({
   name: "Case of the Stashed Skeleton",
   manaCost: "{1}{B}",
@@ -23,7 +22,7 @@ export default defineCard({
       effect: {
         kind: "sequence",
         effects: [
-          { kind: "create-token", token: "2/1 Black Skeleton Token", count: 1, separate: true },
+          { kind: "create-token", token: "2/1 Black Skeleton Token", count: 1 },
           { kind: "for-each-permanent", filter: { thisWay: "created" }, effect: { kind: "suspect", target: 0 } },
         ],
       },

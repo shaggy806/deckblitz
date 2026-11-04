@@ -2091,6 +2091,10 @@ export class Game {
   /** What the tokens being minted are created with (`GameObject.createdWith`).
    * Not game state: it spans one effect's minting. */
   private mintingLink: TokenLink | null = null;
+  /** The effect applying reads the tokens it makes as a set
+   * (`readsCreatedTokens`), so none folds into an older stack. Not game state:
+   * it spans one effect's application. */
+  private mintingApart = false;
   /** The `permanent-entered-battlefield` events of the entry under way,
    * held back until all of its permanents are on the battlefield — see
    * {@link withEnterBatch}. `null` outside one. */
@@ -35907,6 +35911,15 @@ export class Game {
             ? []
             : this.materializeStack(e.object, e.count),
         ),
+      mintingCreatedApart: () => this.mintingApart,
+      mintCreatedApart: (apply) => {
+        this.mintingApart = true;
+        try {
+          apply();
+        } finally {
+          this.mintingApart = false;
+        }
+      },
       createdTokensFight: (among, asked, answer) =>
         this.createdTokensFight(
           source,
@@ -40863,7 +40876,7 @@ export class Game {
       sacrificeAtEndStep,
       goadedForGameBy,
     );
-    const existing = this.findMergeableStack(repId, controller);
+    const existing = this.mintingApart ? null : this.findMergeableStack(repId, controller);
     // The counters each new token enters with (Dragonstorm Globe's +1/+1).
     const entering = Object.entries(this.state.objects[repId].counters).filter(([, n]) => n > 0);
     delete this.state.objects[repId]; // the representative never really "exists" on its own

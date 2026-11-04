@@ -35,7 +35,8 @@ Read a file's entry before changing that file; you don't need the rest.
   `weightedMatches`). Anything that singles one token out splits it off first (`splitOneFromStack`,
   targets at `lockInTargets`), and a split-off token folds back once it's identical again
   (`refoldSplitTokens` whenever nothing is waiting, `recompactTokens` at cleanup) — a stack is
-  a representation, so neither may change a result. Combat wakes a stack into one object per token
+  a representation, so neither may change a result. An effect that reads the tokens it made as a
+  set (`readsCreatedTokens`) keeps them out of older stacks until cleanup. Combat wakes a stack into one object per token
   (`materializeStack`), or only a declaration's `count` of them (`combat/stack-counts.ts`).
   Loops that mint one real thing per unit stop at `Game.MAX_EFFECT_INSTANCES`.
 - **Computed-value cache** (`characteristics.ts`): wrap new read-only hot paths in
