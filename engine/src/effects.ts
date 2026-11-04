@@ -8323,7 +8323,9 @@ export type EffectSpec =
        * cost rule, a damage replacement, "you can't lose the game", a cast
        * permission from the graveyard, `loyaltyAtInstantSpeed` for every
        * planeswalker its owner controls (Teferi, Temporal Archmage). Only the
-       * fields `test/emblem-statics.test.ts` lists are read off an emblem.
+       * fields `test/emblem-statics.test.ts` lists are read off an emblem —
+       * `grantsActivated` and `grantsTriggered` for permanents, and
+       * `grantsToSpells` for spells, among them (Koth of the Hammer, Ral).
        * `moreStatics` are the others, when it has several (Saheeli, Filigree
        * Master's).
        *

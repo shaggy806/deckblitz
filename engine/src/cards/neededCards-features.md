@@ -321,6 +321,18 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### An emblem that gives others abilities — built 2026-11-03
+
+The need-keys family `effect:emblem-triggered-abilities`' top group. An emblem's
+`grantsActivated` and `grantsTriggered` reach a class of permanents (Koth of the
+Hammer's Mountains, Mu Yanling, Sky Dancer's Islands), each its own ref since no
+definition holds it, and every `grantsToSpells` reader asks the emblems too (Ral,
+Crackling Wit's storm). A source with a narrow and a richer mana option (a Swamp's
+{B} and Liliana's {B}{B}{B}{B}) is planned with the richer only when the narrow
+fails to pay. An emblem's own activated ability (Ob Nixilis of the Black Oath) is
+not built: nothing offers an ability of an object in the command zone that isn't
+its card's. Keys: effect:emblem-grants-activated, effect:emblem-grants-to-spells.
+
 ### Spells countered all at once, and spells going to a hand as they resolve — built 2026-11-03
 
 The need-keys families `effect:counter-all-spells` and

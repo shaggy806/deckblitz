@@ -772,6 +772,31 @@ describe("reveal until, and where the rest goes", () => {
   });
 });
 
+describe("an emblem's grants", () => {
+  const ult = (line: string) =>
+    parseFace(
+      { name: "Card", type_line: "Legendary Planeswalker — Test", oracle_text: `−5: ${line}`, loyalty: "5" },
+      { tokenFor: (d: string) => d },
+    ).activated[0].effect;
+  it("reads an activated ability given to a basic land type", () => {
+    const effect = ult(`You get an emblem with "Islands you control have '{T}: Draw a card.'"`);
+    expect(effect).toMatchObject({
+      kind: "create-emblem",
+      static: {
+        affects: { scope: "filter", filter: { subtype: "Island", controlledBy: "you" } },
+        grantsActivated: [{ cost: { tap: true }, effect: { kind: "draw", amount: 1 } }],
+      },
+    });
+  });
+  it("reads storm given to spells", () => {
+    const effect = ult(`You get an emblem with "Instant and sorcery spells you cast have storm."`);
+    expect(effect).toMatchObject({
+      kind: "create-emblem",
+      static: { grantsToSpells: { filter: { typesAnyOf: ["instant", "sorcery"] } } },
+    });
+  });
+});
+
 describe("an emblem's static abilities", () => {
   const self = { scope: "self" };
   it.each([
@@ -829,7 +854,8 @@ describe("an emblem's static abilities", () => {
         ctx(),
       ),
     ).toBeNull();
-    expect(parseSentence("You get an emblem with \"Islands you control have '{T}: Draw a card.'\"", ctx())).toBeNull();
+    // A class the scaffolder doesn't read for the grant, though the engine runs it.
+    expect(parseSentence("You get an emblem with \"Artifacts you control have '{T}: Draw a card.'\"", ctx())).toBeNull();
   });
 });
 

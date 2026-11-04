@@ -1904,7 +1904,8 @@ export function spellGrantReaches(
 ): boolean {
   const grant = ability.grantsToSpells;
   if (grant === undefined || spell.zone !== "stack" || spell.kind !== "card") return false;
-  if (source.zone !== "battlefield" || hasLostAbilities(state, registry, source)) return false;
+  // An emblem's works from the command zone (rule 113.6p).
+  if ((source.zone !== "battlefield" && source.kind !== "emblem") || hasLostAbilities(state, registry, source)) return false;
   if (state.players[source.controller]?.hasLost === true) return false;
   if (grant.allSpells !== true && spell.controller !== source.controller) return false;
   if (grant.castFrom !== undefined && (spell.castFrom === undefined || !grant.castFrom.includes(spell.castFrom))) {
@@ -1957,7 +1958,7 @@ export function castGrantReaches(
   const grant = ability.grantsToSpells;
   const card = state.objects[cardId];
   if (grant === undefined || card === undefined || card.kind !== "card") return false;
-  if (source.zone !== "battlefield" || hasLostAbilities(state, registry, source)) return false;
+  if ((source.zone !== "battlefield" && source.kind !== "emblem") || hasLostAbilities(state, registry, source)) return false;
   if (state.players[source.controller]?.hasLost === true) return false;
   if (grant.allSpells !== true && player !== source.controller) return false;
   if (grant.castFrom !== undefined && !grant.castFrom.includes(card.zone)) return false;
@@ -2034,6 +2035,11 @@ export function spellHasSplitSecond(state: GameState, registry: CardRegistry, sp
       }
     }
   }
+  for (const { source, ability } of emblemStatics(state)) {
+    if (ability.grantsToSpells?.splitSecond === true && spellGrantReaches(state, registry, source, ability, spell)) {
+      return true;
+    }
+  }
   return false;
 }
 
@@ -2054,6 +2060,11 @@ export function spellCantBeCountered(state: GameState, registry: CardRegistry, s
       if (ability.grantsToSpells?.cantBeCountered === true && spellGrantReaches(state, registry, source, ability, spell)) {
         return true;
       }
+    }
+  }
+  for (const { source, ability } of emblemStatics(state)) {
+    if (ability.grantsToSpells?.cantBeCountered === true && spellGrantReaches(state, registry, source, ability, spell)) {
+      return true;
     }
   }
   // "The next instant or sorcery spell you cast this turn can't be
@@ -2286,6 +2297,12 @@ function spellGrantedKeywords(state: GameState, registry: CardRegistry, spell: G
       if (keywords !== undefined && spellGrantReaches(state, registry, source, ability, spell)) {
         out.push(...keywords);
       }
+    }
+  }
+  for (const { source, ability } of emblemStatics(state)) {
+    const keywords = ability.grantsToSpells?.keywords;
+    if (keywords !== undefined && spellGrantReaches(state, registry, source, ability, spell)) {
+      out.push(...keywords);
     }
   }
   return out;
@@ -4199,6 +4216,12 @@ function abilityGrantSources(
       (out ??= []).push({ source, ability });
     }
   }
+  // An emblem's: "Mountains you control have '{T}: …'" (Koth of the Hammer).
+  for (const { source, ability } of emblemStatics(state)) {
+    if (ability.grantsActivated !== undefined || ability.grantsTriggered !== undefined) {
+      (out ??= []).push({ source, ability });
+    }
+  }
   const result = out ?? NO_STATICS;
   if (activeCache !== null) activeCache.abilityGrantSources = result;
   return result;
@@ -4549,6 +4572,11 @@ export function hasAnyAbility(
         if ((grant.triggered?.length ?? 0) === 0 && grant.splitSecond !== true) continue;
         if (spellGrantReaches(state, registry, source, ability, object, view.spellGrantAmount?.(source))) return true;
       }
+    }
+    for (const { source, ability } of emblemStatics(state)) {
+      const grant = ability.grantsToSpells;
+      if (grant === undefined || ((grant.triggered?.length ?? 0) === 0 && grant.splitSecond !== true)) continue;
+      if (spellGrantReaches(state, registry, source, ability, object, view.spellGrantAmount?.(source))) return true;
     }
     return false;
   }

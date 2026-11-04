@@ -1977,7 +1977,8 @@ the Moon Sage), `prohibits`, `costModification`, a `would-deal-damage` `replacem
 Steadfast), `cantLoseGame` and its kin (Gideon of the Trials), `castFromGraveyard` (Jaya Ballard),
 `playFromGraveyard`, `alternativeCostForSpells` (its `fromHand`: Tamiyo, Field Researcher),
 `loyaltyAtInstantSpeed` for every planeswalker its owner controls (Teferi, Temporal Archmage),
-`grantsToGraveyard`, `untapLimit`; `moreStatics` the rest when it has several — Saheeli, Filigree
+`grantsToGraveyard`, `untapLimit`, `grantsActivated` and `grantsTriggered` for permanents (Koth of
+the Hammer's Mountains), `grantsToSpells` (Ral, Crackling Wit's storm); `moreStatics` the rest when it has several — Saheeli, Filigree
 Master. Any other field isn't read: `test/emblem-statics.test.ts` fails on it until a reader takes
 it; `triggered`: the emblem's triggered
 abilities, rule 114.4 — an emblem object in the command zone whose abilities trigger and
@@ -6855,10 +6856,10 @@ Delete an entry in the same commit as the feature that retires it.
   like Command Tower): only the player's commanders' colours, never plain
   `"any-color"` — the two differ for a colourless commander, a player with
   none, and a spell stolen from outside the identity. `mana-provenance.test.ts`.
-- **An emblem's static can't grant an activated ability or a spell a keyword,
-  or be a layer-4 effect or a life floor.** Those are read only off battlefield
-  permanents (Liliana of the Dark Realms, Mu Yanling, Arlinn Kord, Ral,
-  Crackling Wit, Serra the Benevolent). The statics an emblem does carry are
+- **An emblem's static can't be a layer-4 effect or a life floor, and an emblem
+  has no activated ability of its own.** Those are read only off battlefield
+  permanents (Serra the Benevolent; Ob Nixilis of the Black Oath's emblem's
+  "{1}{B}, Sacrifice a creature: …"). The statics an emblem does carry are
   listed under `create-emblem` in §6, and `test/emblem-statics.test.ts` fails
   on any other field.
 - **The auto-payer pays with a mana ability whose activation cost contains

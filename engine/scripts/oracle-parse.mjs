@@ -2632,6 +2632,29 @@ function emblemStaticOf(quoted) {
   if (quoted === "Your opponents can't cast noncreature spells.") {
     return { affects: { scope: "self" }, prohibits: { who: "opponents", spells: { notTypes: ["creature"] } }, text };
   }
+  // "Instant and sorcery spells you cast have storm." (Ral, Crackling Wit).
+  if (quoted === "Instant and sorcery spells you cast have storm.") {
+    return {
+      affects: { scope: "self" },
+      grantsToSpells: {
+        filter: { typesAnyOf: ["instant", "sorcery"] },
+        triggered: [{ trigger: { on: "this-cast" }, targets: [], effect: { kind: "storm" }, resolve: null, text: "Storm" }],
+      },
+      text,
+    };
+  }
+  // "Mountains you control have '{T}: …'" (Koth of the Hammer, Mu Yanling, Sky
+  // Dancer, Liliana of the Dark Realms), the quoted ability read as a land's.
+  const granted = /^(Plains|Island|Swamp|Mountain|Forest)s? you control have '(\{T\}: .+)'\.$/.exec(quoted);
+  if (granted !== null) {
+    const ability = parseFace({ name: "Card", type_line: "Land", oracle_text: granted[2] }).activated?.[0];
+    if (ability === undefined || ability.complete === false) return null;
+    return {
+      affects: { scope: "filter", filter: { subtype: granted[1], controlledBy: "you" } },
+      grantsActivated: [ability],
+      text,
+    };
+  }
   return null;
 }
 

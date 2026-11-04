@@ -5431,6 +5431,12 @@ export class Game {
           if (grant.improvise === true) improvise = true;
         }
       }
+      for (const { source, ability } of emblemStatics(this.state)) {
+        const grant = ability.grantsToSpells;
+        if (grant === undefined || !castGrantReaches(this.state, this.registry, source, ability, card, player)) continue;
+        if (grant.convoke === true) convoke = true;
+        if (grant.improvise === true) improvise = true;
+      }
     }
     // "The next spell you cast this turn has convoke" (Wand of the
     // Worldsoul): an unused grant this spell would use up as it's cast.
@@ -19434,6 +19440,10 @@ export class Game {
         if (n !== undefined && spellGrantReaches(this.state, this.registry, source, ability, spell)) amounts.push(n);
       }
     }
+    for (const { source, ability } of emblemStatics(this.state)) {
+      const n = ability.grantsToSpells?.casualty;
+      if (n !== undefined && spellGrantReaches(this.state, this.registry, source, ability, spell)) amounts.push(n);
+    }
     if (amounts.length === 0) return;
     (this.state.pendingCasualty ??= []).push({ spell: spellId, player, amounts, priorityTo });
   }
@@ -19654,6 +19664,11 @@ export class Game {
         if (ability.grantsToSpells?.conspire === true && spellGrantReaches(this.state, this.registry, source, ability, spell)) {
           instances += 1;
         }
+      }
+    }
+    for (const { source, ability } of emblemStatics(this.state)) {
+      if (ability.grantsToSpells?.conspire === true && spellGrantReaches(this.state, this.registry, source, ability, spell)) {
+        instances += 1;
       }
     }
     if (instances === 0) return;
@@ -20178,6 +20193,11 @@ export class Game {
         }
       }
     }
+    for (const { source, ability } of emblemStatics(this.state)) {
+      if (ability.grantsTriggered !== undefined) {
+        out.push({ source, ability, staticIndex: -1, abilities: ability.grantsTriggered, granted: true });
+      }
+    }
     return out;
   }
 
@@ -20345,6 +20365,16 @@ export class Game {
           });
         });
       }
+      // An emblem's (rule 113.6p): "Instant and sorcery spells you cast have
+      // storm" (Ral, Crackling Wit). No card's definition holds it.
+      for (const { source, ability } of emblemStatics(this.state)) {
+        if (ability.grantsToSpells?.triggered === undefined) continue;
+        const amount = this.filterAmounts({ source: source.id, controller: source.controller });
+        if (!spellGrantReaches(this.state, this.registry, source, ability, target, amount)) continue;
+        for (const grantedAbility of ability.grantsToSpells.triggered) {
+          granted.push({ ability: grantedAbility, ref: { kind: "modifier", ability: grantedAbility } });
+        }
+      }
       // And what a resolved effect gave its controller's spells this turn
       // (`grant-spells-this-turn` — Yidris; Dark Apostle's "the next
       // noncreature spell"), in the order it was given.
@@ -20390,6 +20420,13 @@ export class Game {
         const abilities = ability.grantsActivated;
         out.push({ source, ability, staticIndex: -1, abilities, refs: abilities.map((a) => ({ kind: "modifier-activated", ability: a })) });
       }
+    }
+    // An emblem's (rule 113.6p): "Mountains you control have '{T}: …'" (Koth of
+    // the Hammer). Its source is no card's definition, so each is its own ref.
+    for (const { source, ability } of emblemStatics(this.state)) {
+      if (ability.grantsActivated === undefined) continue;
+      const abilities = ability.grantsActivated;
+      out.push({ source, ability, staticIndex: -1, abilities, refs: abilities.map((a) => ({ kind: "modifier-activated", ability: a })) });
     }
     if (copies.length > 0) out.push(...this.copiedActivatedGrants(copies, out));
     return out;
@@ -45160,6 +45197,10 @@ export class Game {
           return cost;
         }
       }
+    }
+    for (const { source, ability } of emblemStatics(this.state)) {
+      const cost = ability.grantsToSpells?.[key];
+      if (cost !== undefined && castGrantReaches(this.state, this.registry, source, ability, cardId, player)) return cost;
     }
     return null;
   }

@@ -371,6 +371,10 @@ describe("what is read off an emblem", () => {
     "castFromGraveyard",
     "alternativeCostForSpells",
     "grantsToGraveyard",
+    // Abilities for permanents and for spells.
+    "grantsActivated",
+    "grantsTriggered",
+    "grantsToSpells",
   ]);
 
   const emblemsIn = (node: unknown, out: { static?: StaticAbility; moreStatics?: readonly StaticAbility[] }[]): void => {

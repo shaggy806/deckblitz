@@ -770,6 +770,43 @@ export function planManaPayment(
   avoid?: ObjectId,
   exclude?: ObjectId,
 ): ManaPlanStep[] | null {
+  const plan = planManaPaymentAs(view, rawCost, avoid, exclude);
+  if (plan !== null) return plan;
+  // A plan takes the narrowest option that covers a pip and doesn't come back:
+  // a Swamp with both {B} and an emblem's "{T}: Add {B}{B}{B}{B}" (Liliana of
+  // the Dark Realms) would pay {B} and be spent, a cost of {2}{B} left unpaid.
+  // Failing that way, try again with only such a source's richer option.
+  let richer = false;
+  const sources = view.sources.map((source) => {
+    const options = source.options.filter((o) => !source.options.some((p) => isRicherOption(p, o)));
+    if (options.length === source.options.length) return source;
+    richer = true;
+    return { ...source, options };
+  });
+  return richer ? planManaPaymentAs({ ...view, sources }, rawCost, avoid, exclude) : null;
+}
+
+/** `rich` makes all `poor` does and more, for the same price. */
+function isRicherOption(rich: ManaOption, poor: ManaOption): boolean {
+  if (rich === poor || rich.fixed.length <= poor.fixed.length || rich.anyColor !== 0 || poor.anyColor !== 0) return false;
+  if (rich.pain !== poor.pain || rich.lifeCost !== poor.lifeCost || rich.genericCost !== poor.genericCost) return false;
+  if ((rich.hybridCost ?? []).length > 0 || (poor.hybridCost ?? []).length > 0) return false;
+  if (rich.tag !== undefined || poor.tag !== undefined || rich.counterCost !== undefined || poor.counterCost !== undefined) return false;
+  const left = [...rich.fixed];
+  return poor.fixed.every((m) => {
+    const at = left.indexOf(m);
+    if (at < 0) return false;
+    left.splice(at, 1);
+    return true;
+  });
+}
+
+function planManaPaymentAs(
+  view: ManaPlanningView,
+  rawCost: ManaCost,
+  avoid?: ObjectId,
+  exclude?: ObjectId,
+): ManaPlanStep[] | null {
   if (rawCost.snow > 0) return planSnowPayment(view, rawCost, avoid, exclude);
   // Mana that may be spent as though it were any colour (or type) pays a
   // coloured pip as freely as a generic one (rule 609.4b).
