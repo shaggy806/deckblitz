@@ -1108,7 +1108,6 @@ export const SAMPLE_DECKS: readonly SampleDeck[] = [
       ["Yeva, Nature's Herald", 1],
     ],
     substitutions: [
-      sub("Ezuri's Predation", "Hornet Queen", "Seven-mana green answer to a wide board."),
     ],
   }),
   precon({

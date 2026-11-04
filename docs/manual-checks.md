@@ -7285,6 +7285,16 @@ These boards start before the first turn (the builder's `openingHands`), with th
 - **Do:** Click the Forest enchanted with Market Festival, and take {G}, {W} and {U}.
 - **Expect:** A popup with one offer per combination, fifteen in all and no {W}{U} beside {U}{W}. The pool ends with {G}{W}{U}.
 
+### Ezuri's Predation: which tokens fight which creatures
+
+- **Do:** Cast Ezuri's Predation. Choose one Squirrel and one Beast of the four tokens, then the creature the first of them fights.
+- **Expect:** "Choose 2 of those tokens to fight", the four tokens lit up. Then "Choose the creature a … token fights", Bob's two creatures lit up. Bob's creatures take damage from the tokens you paired them with, and the other two tokens take none.
+
+### Ezuri's Predation: a Beast each at a four-player table
+
+- **Do:** Cast Ezuri's Predation.
+- **Expect:** No question. Three Beasts appear and each fights a different creature of Bob's, Carol's and Dave's, at once. Your own Grizzly Bears is untouched.
+
 ### Birgi: a creature boasts twice
 
 - **Do:** Attack Bob with Dragonkin Berserker. After combat damage, click the Berserker and take its boast, three times over.

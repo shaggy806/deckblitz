@@ -2453,8 +2453,18 @@ export type BoardManaList =
       readonly elseOneOf: readonly ManaType[];
     };
 
+/** How far a `created-tokens-fight` has paired its tokens, while its controller
+ * is asked: `answering` says what the answer holds, the tokens that fight or
+ * the creature `tokens[0]` fights. Plain ids: this rides on a decision's `then`. */
+export interface CreatedTokenFights {
+  readonly tokens: readonly ObjectId[];
+  readonly creatures: readonly ObjectId[];
+  readonly pairs: readonly (readonly [ObjectId, ObjectId])[];
+  readonly answering: "tokens" | "creature";
+}
+
 /** "A Jace planeswalker token you control" (rule 701.71a). */
-const JACE_TOKEN: CardFilter = { type: "planeswalker", subtype: "Jace", token: true, controlledBy: "you" };
+const JACE_TOKEN: CardFilter ={ type: "planeswalker", subtype: "Jace", token: true, controlledBy: "you" };
 
 export type EffectSpec =
   | {
@@ -3501,6 +3511,25 @@ export type EffectSpec =
       readonly a: EffectTargetRef;
       readonly b: EffectTargetRef;
       readonly oneSided?: boolean;
+    }
+  | {
+      /**
+       * "Each of those tokens fights a different one of those creatures"
+       * (Ezuri's Predation): the tokens this resolution created, each paired
+       * with a different permanent matching `among` (read from the controller's
+       * side, the tokens themselves left out), and all the fights at once, each
+       * power read before any damage (rulings). Extra tokens, from a doubler,
+       * fight nothing. The controller chooses the pairs (ruling) with
+       * `choose-permanents`, asked only where tokens differ: which tokens fight
+       * when there are too many, then which creature each fights. Only with
+       * one instruction's tokens in mind: nothing between the creating and the
+       * fighting.
+       */
+      readonly kind: "created-tokens-fight";
+      readonly among: CardFilter;
+      /** Set by the engine while it's asking: how far the pairing has got, and
+       * what the answer is an answer to. */
+      readonly asked?: CreatedTokenFights;
     }
   | {
       /** Return a target permanent to its owner's hand (rule 614-style
@@ -11451,6 +11480,8 @@ export interface EffectApi {
   /** The tokens this resolution has created, one object per token: a stack
    * woken, and of a stack they joined only the ones made. */
   createdTokensApart(): readonly ObjectId[];
+  /** See the `"created-tokens-fight"` {@link EffectSpec}. */
+  createdTokensFight(among: CardFilter, asked: CreatedTokenFights | undefined, answer: ResolvedTargets): void;
   /** `tokens` hold the cards this resolution has exiled — see
    * `link-exiled-to-created`. */
   linkExiledTo(tokens: readonly ObjectId[]): void;
@@ -16600,6 +16631,9 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       if (a !== undefined && b !== undefined) ctx.fight(a, b, spec.oneSided === true);
       return;
     }
+    case "created-tokens-fight":
+      ctx.createdTokensFight(spec.among, spec.asked, ctx.targets);
+      return;
     case "counter": {
       const target = resolveEffectTarget(spec.target, ctx);
       if (target === undefined) return;

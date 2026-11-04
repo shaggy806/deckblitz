@@ -291,6 +291,7 @@ import type {
   ResolvedEnterAttacking,
   ReturnToHandZone,
   ResolvedSearchTogether,
+  CreatedTokenFights,
   SearchMore,
   SearchZones,
   ThisWayKind,
@@ -35661,6 +35662,24 @@ export class Game {
             ? []
             : this.materializeStack(e.object, e.count),
         ),
+      createdTokensFight: (among, asked, answer) =>
+        this.createdTokensFight(
+          source,
+          controller,
+          x,
+          among,
+          asked ??
+            this.pairingOfCreatedTokens(
+              controller,
+              among,
+              thisWayEntries(this.state, "created", since).flatMap((e) =>
+                e.departed || this.state.objects[e.object]?.zone !== "battlefield"
+                  ? []
+                  : this.materializeStack(e.object, e.count, Game.MAX_EFFECT_INSTANCES),
+              ),
+            ),
+          answer.flatMap((t) => (t?.kind === "object" ? [t.object] : [])),
+        ),
       linkExiledTo: (tokens) => {
         const linked = thisWayEntries(this.state, "exiled", since)
           .filter((e) => !e.departed && this.state.objects[e.object]?.zone === "exile")
@@ -49327,6 +49346,105 @@ export class Game {
     if (!oneSided && aLive && bLive) {
       this.emit({ type: "creature-fought", object: a.object, opponent: b.object });
       if (b.object !== a.object) this.emit({ type: "creature-fought", object: b.object, opponent: a.object });
+    }
+  }
+
+  /** The start of a `created-tokens-fight`: `tokens`, and what `among` matches
+   * apart from them, one object per token of a stack. */
+  private pairingOfCreatedTokens(
+    controller: PlayerId,
+    among: CardFilter,
+    tokens: readonly ObjectId[],
+  ): CreatedTokenFights {
+    const creatures = this.battlefieldMatching(controller, among)
+      .filter((id) => !tokens.includes(id))
+      .flatMap((id) => this.materializeStack(id, undefined, Game.MAX_EFFECT_INSTANCES));
+    return { tokens, creatures, pairs: [], answering: "tokens" };
+  }
+
+  /** See the `"created-tokens-fight"` {@link EffectSpec}: carry the pairing on
+   * from `answer`, ask the next thing that can change the result, and once
+   * every pair is settled, fight them all at once. Tokens alike can't be told
+   * apart by anything a pairing leads to, and nor can creatures alike
+   * (`interchangeableKinds`). */
+  private createdTokensFight(
+    source: ObjectId,
+    controller: PlayerId,
+    x: number,
+    among: CardFilter,
+    asked: CreatedTokenFights,
+    answer: readonly ObjectId[],
+  ): void {
+    let { tokens, creatures, pairs } = asked;
+    if (answer.length > 0 && asked.answering === "tokens") tokens = answer;
+    if (answer.length > 0 && asked.answering === "creature") {
+      pairs = [...pairs, [tokens[0], answer[0]]];
+      tokens = tokens.slice(1);
+      creatures = creatures.filter((id) => id !== answer[0]);
+    }
+    const ask = (from: readonly ObjectId[], how: number, answering: CreatedTokenFights["answering"], prompt: string): void => {
+      const fights: CreatedTokenFights = { tokens, creatures, pairs, answering };
+      const then: EffectSpec = { kind: "created-tokens-fight", among, asked: fights };
+      const offered: CardFilter = {};
+      this.beginChoosePermanents(
+        source,
+        controller,
+        x,
+        offered,
+        how,
+        how,
+        then,
+        prompt,
+        false,
+        this.state.zones.shared.battlefield.filter((id) => !from.includes(id)),
+        undefined,
+        undefined,
+        answering === "tokens" ? true : undefined,
+      );
+    };
+    if (tokens.length > creatures.length) {
+      if (this.interchangeableKinds(tokens) > 1) {
+        ask(tokens, creatures.length, "tokens", `Choose ${creatures.length} of those tokens to fight`);
+        return;
+      }
+      tokens = tokens.slice(0, creatures.length);
+    }
+    while (tokens.length > 0 && creatures.length > 0) {
+      const asIs =
+        this.interchangeableKinds(creatures) <= 1 ||
+        (this.interchangeableKinds(tokens) <= 1 && tokens.length >= creatures.length);
+      if (asIs) {
+        const left = creatures;
+        pairs = [...pairs, ...tokens.slice(0, left.length).map((t, i) => [t, left[i]] as const)];
+        break;
+      }
+      const name = printedCardName(this.state.objects[tokens[0]]).replace(/ Token.*$/, "");
+      ask(creatures, 1, "creature", `Choose the creature a ${name} token fights`);
+      return;
+    }
+    this.fightAtOnce(pairs);
+  }
+
+  /** Fights that happen at the same time (Ezuri's Predation's ruling): each
+   * power read before any damage, the damage one event (rule 701.14). */
+  private fightAtOnce(pairs: readonly (readonly [ObjectId, ObjectId])[]): void {
+    const fights = pairs
+      .filter(([a, b]) => this.creatureDef(a) !== null && this.creatureDef(b) !== null)
+      .map(([a, b]) => ({
+        a,
+        b,
+        aPower: computeCharacteristics(this.state, this.registry, a).power,
+        bPower: computeCharacteristics(this.state, this.registry, b).power,
+      }));
+    this.withDamageBatch(() => {
+      for (const { a, b, aPower, bPower } of fights) {
+        if (aPower > 0) this.dealDamage(a, { kind: "object", object: b }, aPower);
+        if (bPower > 0) this.dealDamage(b, { kind: "object", object: a }, bPower);
+      }
+    });
+    for (const { a, b } of fights) {
+      this.emit({ type: "creature-fought", object: a, opponent: b });
+      this.emit({ type: "creature-fought", object: b, opponent: a });
     }
   }
 

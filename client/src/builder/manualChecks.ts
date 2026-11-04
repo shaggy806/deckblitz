@@ -10917,6 +10917,21 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: ['Mountain', 'Island'], hand: ['Lightning Bolt'], human: true },
     }),
   ),
+  // --- Tokens that each fight a different creature (2026-11-04) --------
+  preset(
+    "Ezuri's Predation: which tokens fight which creatures",
+    board({
+      you: { bf: ['Forest*8', 'Chatterfang, Squirrel General'], hand: ["Ezuri's Predation"] },
+      opp: { bf: ['Rumbling Baloth', 'Grizzly Bears'] },
+    }),
+  ),
+  preset(
+    "Ezuri's Predation: a Beast each at a four-player table",
+    board({
+      you: { bf: ['Forest*8', 'Grizzly Bears'], hand: ["Ezuri's Predation"] },
+      opp: [{ bf: ['Hill Giant'] }, { bf: ['Grizzly Bears'] }, { bf: ['Rumbling Baloth'] }],
+    }),
+  ),
   // --- Time counters that reach a suspended card (2026-11-04) --------
   preset(
     "Jhoira's Timebug: a suspended card you own can be targeted",
