@@ -14795,6 +14795,42 @@ describe("a choice of creature type, the counters counted with it (Banner of Kin
   });
 });
 
+describe("counters by who puts them, on permanents or players", () => {
+  it("Vorinclex, Monstrous Raider", () => {
+    const face = parseFace({
+      name: "Vorinclex, Monstrous Raider",
+      type_line: "Legendary Creature — Phyrexian Praetor",
+      mana_cost: "{4}{G}{G}",
+      colors: ["G"],
+      oracle_text:
+        "Trample, haste\nIf you would put one or more counters on a permanent or player, put twice that many of each of those kinds of counters on that permanent or player instead.\nIf an opponent would put one or more counters on a permanent or player, they put half that many of each of those kinds of counters on that permanent or player instead, rounded down.",
+    });
+    expect(face.complete).toBe(true);
+    expect(face.static.map((s: { replacement: unknown }) => s.replacement)).toEqual([
+      { event: "would-add-counter", multiplier: 2, whoPuts: "you", onPlayers: "any" },
+      { event: "would-add-counter", halved: true, whoPuts: "opponent", onPlayers: "any" },
+    ]);
+  });
+
+  it("Lae'zel, Vlaakith's Champion", () => {
+    const face = parseFace({
+      name: "Lae'zel, Vlaakith's Champion",
+      type_line: "Legendary Creature — Gith Warrior",
+      mana_cost: "{2}{W}",
+      colors: ["W"],
+      oracle_text:
+        "If you would put one or more counters on a creature or planeswalker you control or on yourself, put that many plus one of each of those kinds of counters on that permanent or player instead.\nChoose a Background",
+    });
+    expect(face.static[0].replacement).toEqual({
+      event: "would-add-counter",
+      plus: 1,
+      whoPuts: "you",
+      onPlayers: "you",
+      filter: { typesAnyOf: ["creature", "planeswalker"], controlledBy: "you" },
+    });
+  });
+});
+
 describe("mana that adds counters to what it casts", () => {
   const read = (type_line: string, oracle_text: string) =>
     parseFace({ name: "Test Card", type_line, oracle_text, mana_cost: "{1}", colors: [] });

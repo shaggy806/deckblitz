@@ -178,7 +178,10 @@ import {
 import type { Characteristics } from "./characteristics.js";
 import { planTokenEvent } from "./token-replacements.js";
 import type { PlannedTokens, TokenKind, TokenReplacementInstance } from "./token-replacements.js";
+import { counterTotalInBestOrder } from "./replacements.js";
 import type {
+  CounterMultiplierReplacement,
+  CounterReplacementSteps,
   DamageMultiplierReplacement,
   DrawRedirectReplacement,
   AsEntersAction,
@@ -22596,7 +22599,13 @@ export class Game {
       this.putCostCounters(sourceId, ability.cost.addCounter.kind, ability.cost.addCounter.count, player);
     }
     // A "−X" cost removes the X announced (rule 107.3a).
-    const loyaltyPaid = this.modifiedLoyaltyDelta(player, sourceId, ability, chosenX);
+    const loyaltyDue = this.modifiedLoyaltyDelta(player, sourceId, ability, chosenX);
+    // A plus cost puts counters (rule 606.4), so "if you would put" reaches it;
+    // "if an effect would put" (Doubling Season) doesn't.
+    const loyaltyPaid =
+      loyaltyDue !== undefined && loyaltyDue > 0
+        ? this.counterTotal(sourceId, "loyalty", loyaltyDue, false, true, player)
+        : loyaltyDue;
     if (loyaltyPaid !== undefined) {
       source.counters.loyalty = (source.counters.loyalty ?? 0) + loyaltyPaid;
       source.loyaltyActivationsThisTurn = (source.loyaltyActivatedThisTurn ? (source.loyaltyActivationsThisTurn ?? 1) : 0) + 1;
@@ -24588,7 +24597,7 @@ export class Game {
     // Counter replacements reach a cost's counters too, unless worded "if an
     // effect would put" (Doubling Season): Vizier of Remedies leaves Devoted
     // Druid's untap costing no -1/-1 counter at all (its ruling).
-    const count = this.counterTotal(id, kind, amount, false, true);
+    const count = this.counterTotal(id, kind, amount, false, true, by);
     if (count <= 0) return;
     object.counters[kind] = (object.counters[kind] ?? 0) + count;
     invalidateComputedCache();
@@ -36061,11 +36070,11 @@ export class Game {
       },
       getEnergy: (amount, who) => {
         for (const p of scoped(who ?? "you")) {
-          this.changeEnergy(p, amount);
+          this.changeEnergy(p, amount, controller);
         }
       },
       addPlayerCounters: (player, counter, amount) =>
-        this.changePlayerCounters(player, counter, amount),
+        this.changePlayerCounters(player, counter, amount, controller),
       playerCountersOf: (player, counter) => playerCountersHeld(this.state, player, counter),
       playerCounterKinds: (player) => {
         const ps = this.state.players[player];
@@ -42845,7 +42854,7 @@ export class Game {
     const object = this.state.objects[id];
     if (object === undefined || object.zone !== "battlefield") return;
     // Doubling Season (rule 614): "twice that many counters instead".
-    const total = this.counterTotal(id, counter, amount);
+    const total = this.counterTotal(id, counter, amount, false, false, by);
     const before = object.counters[counter] ?? 0;
     object.counters[counter] = before + total;
     // Every counter of a kind takes the newest one's timestamp (613.7c); a
@@ -42953,9 +42962,9 @@ export class Game {
       // One more of each kind the player already has.
       const ps = this.state.players[target.player];
       if (ps === undefined || ps.hasLost) return;
-      if (ps.energy > 0) this.changeEnergy(target.player, 1);
+      if (ps.energy > 0) this.changeEnergy(target.player, 1, by);
       for (const kind of Object.keys(ps.counters) as PlayerCounterKind[]) {
-        if ((ps.counters[kind] ?? 0) > 0) this.changePlayerCounters(target.player, kind, 1);
+        if ((ps.counters[kind] ?? 0) > 0) this.changePlayerCounters(target.player, kind, 1, by);
       }
       return;
     }
@@ -50538,8 +50547,9 @@ export class Game {
       // dealt damage" all see it — whatever it does to the life total.
       // From a source with infect it's that many poison counters instead of
       // life (rules 120.3a-b, 702.90b): the source's controller gives them.
+      const giver = sourceLastKnown?.controller ?? this.state.objects[source]?.controller ?? target.player;
       if (this.sourceHasDamageKeyword(source, "infect", sourceLastKnown)) {
-        this.changePlayerCounters(target.player, "poison", amount);
+        this.changePlayerCounters(target.player, "poison", amount, giver);
       } else {
         const loss = this.lifeLossFromDamage(target.player, amount);
         if (loss > 0) this.changeLife(target.player, -loss);
@@ -50552,7 +50562,7 @@ export class Game {
       if (combat) {
         // Per creature: a counted stack's tokens each give theirs.
         const toxic = this.toxicOf(source) * sources;
-        if (toxic > 0) this.changePlayerCounters(target.player, "poison", toxic);
+        if (toxic > 0) this.changePlayerCounters(target.player, "poison", toxic, giver);
       }
       // (A creature dealing combat damage to the monarch makes its controller
       // the monarch by a triggered ability that uses the stack — rule 725.2,
@@ -51024,12 +51034,14 @@ export class Game {
   /** Give `player` `delta` more counters of `counter` (rule 122.1), or take
    * some away when negative — see `PlayerState.counters`. A player who has
    * left the game gets none. */
-  private changePlayerCounters(player: PlayerId, counter: PlayerCounterKind, delta: number): void {
+  private changePlayerCounters(player: PlayerId, counter: PlayerCounterKind, delta: number, by?: PlayerId): void {
     const ps = this.state.players[player];
     if (ps === undefined || ps.hasLost || delta === 0) return;
     if (delta > 0 && this.countersPrevented({ player }, counter)) return;
     const before = ps.counters[counter] ?? 0;
-    const total = Math.max(0, before + delta);
+    // Putting them (`by`), not taking them off: "… or player" (Vorinclex).
+    const put = delta > 0 && by !== undefined ? this.playerCounterTotal(player, counter, delta, by) : delta;
+    const total = Math.max(0, before + put);
     if (total === before) return;
     if (total === 0) delete ps.counters[counter];
     else ps.counters[counter] = total;
@@ -51048,12 +51060,15 @@ export class Game {
   }
 
   /** Add (or spend, when negative) energy counters for `player` — rule 122. */
-  private changeEnergy(player: PlayerId, delta: number): void {
+  private changeEnergy(player: PlayerId, delta: number, by?: PlayerId): void {
     if (delta === 0) return;
     if (delta > 0 && this.countersPrevented({ player }, "energy")) return;
+    // Putting them (`by`), not paying them: "… or player" (Vorinclex).
+    const put = delta > 0 && by !== undefined ? this.playerCounterTotal(player, "energy", delta, by) : delta;
+    if (put === 0) return;
     const ps = this.state.players[player];
-    ps.energy = Math.max(0, ps.energy + delta);
-    this.emit({ type: "energy-changed", player, delta, energy: ps.energy });
+    ps.energy = Math.max(0, ps.energy + put);
+    this.emit({ type: "energy-changed", player, delta: put, energy: ps.energy });
   }
 
   /** Make `player` the monarch (rule 725). No-op if they already are. The
@@ -53255,49 +53270,74 @@ export class Game {
    * out rather than asked (the user's call, 2026-10-14): additions before
    * doublings, the most counters — or for -1/-1 counters, which they'd want
    * fewest of, doublings first. `entering`: counters it enters with, which
-   * its own replacements don't see (it isn't on the battlefield yet).
+   * its own replacements don't see (it isn't on the battlefield yet). `by`:
+   * who is putting them, its controller unless an effect names another (rule
+   * 122.6, and "if you would put" — Vorinclex).
    */
-  private counterTotal(target: ObjectId, kind: string, amount: number, entering = false, asCost = false): number {
+  private counterTotal(
+    target: ObjectId,
+    kind: string,
+    amount: number,
+    entering = false,
+    asCost = false,
+    by?: PlayerId,
+  ): number {
     const targetObject = this.state.objects[target];
     if (targetObject === undefined || amount <= 0) return amount;
-    let mult = 1;
-    let plusUp = 0;
-    let plusDown = 0;
+    const steps = this.counterReplacementSteps(kind, asCost, by ?? targetObject.controller, (r, source, id) =>
+      !(entering && id === target) &&
+      !(r.other === true && id === target) &&
+      (r.whoPuts !== undefined || source.controller === targetObject.controller) &&
+      (r.filter === undefined ||
+        matchesFilter(this.state, this.registry, target, r.filter, { you: source.controller, source: id })),
+    );
+    return counterTotalInBestOrder(kind, amount, steps);
+  }
+
+  /** {@link counterTotal} for counters put on a player — only "… or player"
+   * replacements reach them. The player orders them (rule 616.1). */
+  private playerCounterTotal(player: PlayerId, kind: string, amount: number, by: PlayerId): number {
+    if (amount <= 0) return amount;
+    const steps = this.counterReplacementSteps(kind, false, by, (r, source) =>
+      r.onPlayers === "any" || (r.onPlayers === "you" && source.controller === player),
+    );
+    return counterTotalInBestOrder(kind, amount, steps);
+  }
+
+  /** Every `would-add-counter` on the battlefield that reaches this placement
+   * of `kind`, put by `by`: `reaches` is the part about what they go on. */
+  private counterReplacementSteps(
+    kind: string,
+    asCost: boolean,
+    by: PlayerId,
+    reaches: (replacement: CounterMultiplierReplacement, source: GameObject, id: ObjectId) => boolean,
+  ): CounterReplacementSteps {
+    const multipliers: number[] = [];
+    const plus: number[] = [];
+    let halved = 0;
     for (const id of this.state.zones.shared.battlefield) {
-      if (entering && id === target) continue;
       const object = this.state.objects[id];
-      if (object.controller !== targetObject.controller || hasLostAbilities(this.state, this.registry,object)) {
-        continue;
-      }
       for (const ability of this.registry.get(rulesTextName(object)).static) {
         const r = ability.replacement;
         if (
           r?.event === "would-add-counter" &&
           !(asCost && r.byEffectOnly === true) &&
           (r.counterKind === undefined || r.counterKind === kind) &&
-          !(r.other === true && id === target) &&
-          (r.filter === undefined ||
-            matchesFilter(this.state, this.registry, target, r.filter, { you: object.controller, source: id })) &&
+          (r.whoPuts === undefined || (r.whoPuts === "you") === (by === object.controller)) &&
+          reaches(r, object, id) &&
+          !hasLostAbilities(this.state, this.registry, object) &&
           this.staticActive(object, ability)
         ) {
           // A token stack of them is that many replacements.
           for (let i = 0; i < (object.stackCount ?? 1); i += 1) {
-            mult *= r.multiplier ?? 1;
-            if ((r.plus ?? 0) >= 0) plusUp += r.plus ?? 0;
-            else plusDown += r.plus ?? 0;
+            if (r.multiplier !== undefined) multipliers.push(r.multiplier);
+            if (r.plus !== undefined) plus.push(r.plus);
+            if (r.halved === true) halved += 1;
           }
         }
       }
     }
-    // The order its controller would pick (rule 616.1): -1/-1 counters as
-    // few as can be — "minus one" before a doubler, "plus one" after it —
-    // and any other kind as many. Once none would be put, nothing more
-    // applies.
-    if (kind === "-1/-1") {
-      const base = Math.max(0, amount + plusDown);
-      return base === 0 ? 0 : base * mult + plusUp;
-    }
-    return Math.max(0, (amount + plusUp) * mult + plusDown);
+    return { multipliers, plus, halved };
   }
 
   /** Whether a battlefield permanent replaces "put `cardId` into a graveyard"

@@ -18481,6 +18481,28 @@ function parseStatic(line, text) {
       text,
     };
   }
+  // "If you would put one or more counters on a permanent or player, put twice
+  // that many …" (Vorinclex, Innkeeper's Talent): `whoPuts`, `onPlayers`.
+  if (line === "If you would put one or more counters on a permanent or player, put twice that many of each of those kinds of counters on that permanent or player instead.") {
+    return { affects: { scope: "self" }, replacement: { event: "would-add-counter", multiplier: 2, whoPuts: "you", onPlayers: "any" }, text };
+  }
+  if (line === "If an opponent would put one or more counters on a permanent or player, they put half that many of each of those kinds of counters on that permanent or player instead, rounded down.") {
+    return { affects: { scope: "self" }, replacement: { event: "would-add-counter", halved: true, whoPuts: "opponent", onPlayers: "any" }, text };
+  }
+  // Lae'zel, Vlaakith's Champion.
+  if (line === "If you would put one or more counters on a creature or planeswalker you control or on yourself, put that many plus one of each of those kinds of counters on that permanent or player instead.") {
+    return {
+      affects: { scope: "self" },
+      replacement: {
+        event: "would-add-counter",
+        plus: 1,
+        whoPuts: "you",
+        onPlayers: "you",
+        filter: { typesAnyOf: ["creature", "planeswalker"], controlledBy: "you" },
+      },
+      text,
+    };
+  }
   // "… get +1/+1 for each fellowship counter on this artifact" (Banner of
   // Kinship, Door of Destinies): the counters of that kind on the source.
   if ((m = /^Creatures you control of the chosen type get ([+-]\d+)\/([+-]\d+) for each ([a-z]+) counter on ~\.$/.exec(line))) {

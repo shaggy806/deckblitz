@@ -390,6 +390,20 @@ export interface CounterMultiplierReplacement {
    * 616.1) — the order that puts the most counters, or for -1/-1 counters
    * the fewest (`Game.counterTotal`). */
   readonly plus?: number;
+  /** "Half that many …, rounded down" (Vorinclex, Monstrous Raider). Rounding
+   * makes the order matter, so `counterTotalInBestOrder` looks for it. */
+  readonly halved?: true;
+  /** "If **you** would put" or "if **an opponent** would put": it reads who is
+   * putting them (Vorinclex's ruling cares deeply), and whoever controls the
+   * permanent they go on. A counter put without a named player is put by the
+   * effect's controller, or as a permanent enters by its controller (rule
+   * 122.6, the ruling). Unset, the counters go on a permanent this permanent's
+   * controller controls. */
+  readonly whoPuts?: "you" | "opponent";
+  /** "… or player" (Vorinclex, Innkeeper's Talent) or "or on yourself"
+   * (Lae'zel, Vlaakith's Champion): counters put on players too, energy
+   * included (rule 107.14). */
+  readonly onPlayers?: "any" | "you";
   /** "If **an effect** would put one or more counters" (Doubling Season):
    * not counters put as a cost (Devoted Druid's -1/-1, Wall of Roots'
    * -0/-1), which every other wording ("if one or more counters would be
@@ -404,6 +418,54 @@ export interface CounterMultiplierReplacement {
    * against the permanent's computed characteristics as the counters are
    * put on it. Omit for any permanent you control. */
   readonly filter?: CardFilter;
+}
+
+/** What the `would-add-counter` replacements that reach one placement do, one
+ * entry per replacement (a token stack of them is that many). */
+export interface CounterReplacementSteps {
+  readonly multipliers: readonly number[];
+  readonly plus: readonly number[];
+  readonly halved: number;
+}
+
+/**
+ * How many `kind` counters a placement of `amount` comes to under `steps`. The
+ * permanent's controller or the player orders them (rule 616.1), and the order
+ * taken is the one best for them, worked out rather than asked (the user's
+ * call, 2026-10-14): the most counters, or the fewest of a kind nobody wants.
+ * Once none would be put, nothing more applies ("one or more").
+ */
+export function counterTotalInBestOrder(kind: string, amount: number, steps: CounterReplacementSteps): number {
+  const fewest = kind === "-1/-1" || kind === "poison" || kind === "rad";
+  const { multipliers, plus, halved } = steps;
+  if (halved === 0) {
+    const mult = multipliers.reduce((all, m) => all * m, 1);
+    const up = plus.filter((p) => p >= 0).reduce((all, p) => all + p, 0);
+    const down = plus.filter((p) => p < 0).reduce((all, p) => all + p, 0);
+    if (fewest) {
+      const base = Math.max(0, amount + down);
+      return base === 0 ? 0 : base * mult + up;
+    }
+    return Math.max(0, (amount + up) * mult + down);
+  }
+  // Halving rounds down, so no one order is best every time: 4 with two "plus
+  // one"s and a halving is 3 adding first and 4 adding last.
+  const seen = new Map<string, number>();
+  const best = (value: number, nextPlus: number, nextMultiplier: number, halvesLeft: number): number => {
+    if (value <= 0) return 0;
+    if (nextPlus === plus.length && nextMultiplier === multipliers.length && halvesLeft === 0) return value;
+    const key = `${value}/${nextPlus}/${nextMultiplier}/${halvesLeft}`;
+    const known = seen.get(key);
+    if (known !== undefined) return known;
+    const options: number[] = [];
+    if (nextPlus < plus.length) options.push(best(Math.max(0, value + plus[nextPlus]), nextPlus + 1, nextMultiplier, halvesLeft));
+    if (nextMultiplier < multipliers.length) options.push(best(value * multipliers[nextMultiplier], nextPlus, nextMultiplier + 1, halvesLeft));
+    if (halvesLeft > 0) options.push(best(Math.floor(value / 2), nextPlus, nextMultiplier, halvesLeft - 1));
+    const result = fewest ? Math.min(...options) : Math.max(...options);
+    seen.set(key, result);
+    return result;
+  };
+  return best(amount, 0, 0, halved);
 }
 
 /** "If a card would be put into a graveyard from anywhere, exile it instead"

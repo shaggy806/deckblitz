@@ -105,6 +105,19 @@ describe("Opal Palace", () => {
     expect(counters(game, commander)).toBe(2);
   });
 
+  it("each unit adds its own: Mana Reflection's two mana on a second cast is four (the ruling)", () => {
+    const { game } = commanderGame();
+    game.state.players[A].commanderCastCounts[COMMANDER] = 1;
+    spawn(game, "Mana Reflection");
+    floatFrom(game, spawn(game, "Opal Palace"), "G");
+    expect(pool(game).filter((u) => u.spellEntersWith !== undefined).length).toBe(2);
+    lands(game, "Plains", 1);
+    lands(game, "Swamp", 1);
+    const commander = commanderIn(game);
+    cast(game, commander);
+    expect(counters(game, commander)).toBe(4);
+  });
+
   it("offers only your commander's identity", () => {
     const { game } = commanderGame();
     const palace = spawn(game, "Opal Palace");

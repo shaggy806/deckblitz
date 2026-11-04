@@ -6432,7 +6432,7 @@ clause (section 9):
   offered activations see the new type. Of several, the newest applies
   (rule 616.1). Not "one mana of a color of your choice instead of any other
   type and amount" (Harvest Mage).
-- `{ event: "would-add-counter", multiplier?, plus?, counterKind?, filter?, other?, byEffectOnly? }` —
+- `{ event: "would-add-counter", multiplier?, plus?, halved?, counterKind?, filter?, other?, byEffectOnly?, whoPuts?, onPlayers? }` —
   Doubling Season (`multiplier: 2`). `filter` narrows which of your permanents
   it covers (Branching Evolution: `{ type: "creature" }`; Caradora's "a
   creature or Vehicle": `anyOf`). `plus: 1` is "that many plus one" (Hardened
@@ -6445,7 +6445,12 @@ clause (section 9):
   -1/-1 counters: `plus: -1`), applied the other way round and never below
   none. They reach counters put as a **cost** too (Devoted Druid's -1/-1, Wall of
   Roots' -0/-1), except one worded "if **an effect** would put" (Doubling
-  Season): `byEffectOnly: true`.
+  Season): `byEffectOnly: true`. `whoPuts: "you" | "opponent"` reads who puts
+  them, on anyone's permanent ("if you would put", Vorinclex, Monstrous Raider,
+  Innkeeper's Talent; with `filter` to narrow it, Lae'zel, Vlaakith's Champion);
+  `onPlayers: "any" | "you"` reaches players too, energy included ("or player",
+  "or on yourself"); `halved: true` is "half that many, rounded down". A plus
+  loyalty cost is put by its controller, so it's reached too.
 - A static's `preventsCounters: { permanents?, players?, kind? }` is "counters can't be put on …"
   / "players can't get counters" (Solemnity: `{ players: "each" }` and `{ permanents: {
   typesAnyOf: ["artifact", "creature", "enchantment", "land"] } }`; Melira, Sylvok Outcast:
