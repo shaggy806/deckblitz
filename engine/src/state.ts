@@ -3463,6 +3463,7 @@ export type AwaitingDecision =
         | "exile-playable"
         | "exile-face-down"
         | "manifest"
+        | "cloak"
         | "library-top"
         | "library-bottom"
         | "graveyard"
@@ -4229,6 +4230,9 @@ export type AwaitingDecision =
       /** A `choose-permanents` effect's `keepTargets`: the resolution's own
        * targets, which `then` reads from slot 1 (Crush Underfoot). */
       readonly thenTargets?: readonly (TargetRef | undefined)[];
+      /** A `choose-permanents` effect's `thenTogether`: `then` runs once, every
+       * permanent chosen in the target slots from 0 (Expose the Culprit). */
+      readonly thenTogether?: true;
       /** Set for a `keep-total-power` choice (Slaughter the Strong): what's
        * picked is kept, and its total power — a negative power subtracting
        * (the ruling) — may be at most this. `then` is unused; the picks are

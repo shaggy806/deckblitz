@@ -73,7 +73,7 @@ export function pileFateValue(
   unseen = 2,
 ): number {
   if (fate === undefined) return 0;
-  const sign = fate === "hand" || fate === "battlefield" ? 1 : fate === "lose" ? -1 : 0;
+  const sign = fate === "hand" || fate === "battlefield" || fate === "cast-or-hand" ? 1 : fate === "lose" ? -1 : 0;
   if (sign === 0) return 0;
   let value = 0;
   for (const id of pile) {

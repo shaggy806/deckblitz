@@ -1723,7 +1723,13 @@
   "effect:mana-any-combination-choice",
   "effect:mass-graveyard-to-battlefield",
   "condition:distinct-names-condition",
-  "static:boast-twice"
+  "static:boast-twice",
+  "effect:cloak-exiled-pile",
+  "effect:look-and-choose-cloak",
+  "effect:manifest-from-hand",
+  "mechanic:face-down-piles-opponent-chooses",
+  "effect:flicker-return-face-down",
+  "effect:return-face-up-or-down"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

@@ -905,6 +905,10 @@ export interface CardFilter {
    * has convoke" (Kasla, the Broken Halo; Joyful Stormsculptor). Read off its
    * rules text (`rulesTextName`). */
   readonly hasConvoke?: boolean;
+  /** Has (or hasn't) disguise (rule 702.168) — Expose the Culprit's "face-up
+   * creatures you control with disguise". Read off its rules text
+   * (`rulesTextName`), so `faceDown: false` goes with it for "face-up". */
+  readonly hasDisguise?: boolean;
   /** Is (or isn't) a spell: on the stack as a card or a copy, or being cast
    * (`FilterContext.asSpell`). A protection's "from instant spells" (rule
    * 702.16a — Devoted Caretaker) is not "from instants": a permanent, even
@@ -2662,6 +2666,11 @@ export function matchesFilter(
     const name = live !== undefined ? rulesTextName(live) : lki?.name;
     const has = name !== undefined && registry.has(name) && registry.get(name).overload?.keyword === "mutate";
     if (has !== filter.hasMutate) return false;
+  }
+  if (filter.hasDisguise !== undefined) {
+    const name = live !== undefined ? rulesTextName(live) : lki?.name;
+    const has = name !== undefined && registry.has(name) && registry.get(name).morph?.keyword === "disguise";
+    if (has !== filter.hasDisguise) return false;
   }
   if (filter.kicked !== undefined) {
     // Only a kicker (rule 702.33): a spell whose "kicker" is entwine, gift,

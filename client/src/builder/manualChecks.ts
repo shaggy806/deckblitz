@@ -10827,4 +10827,63 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     'Harnfel: the back face',
     board({ you: { bf: ['Mountain*5'], hand: ['Birgi, God of Storytelling', 'Grizzly Bears'] } }),
   ),
+  ),
+  preset(
+  // --- Manifest or cloak from a chosen source, piles in exile, a return face down (2026-11-04) --------
+  preset(
+    'Scroll of Fate: choose the card from your hand to manifest',
+    board({
+      you: { bf: ['Scroll of Fate'], hand: ['Grizzly Bears', 'Lightning Bolt'] },
+    }),
+  ),
+  preset(
+    'Hide in Plain Sight: cloak two of the top five',
+    board({
+      you: { bf: ['Forest*4'], hand: ['Hide in Plain Sight'], lib: ['Grizzly Bears', 'Hill Giant', 'Serra Angel', 'Forest', 'Island'] },
+    }),
+  ),
+  preset(
+    'Become Anonymous: the creature and two cards come back face down and tapped',
+    board({
+      you: { bf: ['Island*4', 'Grizzly Bears'], hand: ['Become Anonymous'], lib: ['Hill Giant', 'Forest'] },
+    }),
+  ),
+  preset(
+    'Hostile Negotiations: turn a pile face up, and Bob chooses one',
+    board({
+      you: { bf: ['Swamp*4'], hand: ['Hostile Negotiations'], lib: ['Grizzly Bears', 'Hill Giant', 'Serra Angel', 'Forest', 'Island', 'Swamp'] },
+      opp: { human: true },
+    }),
+  ),
+  preset(
+    'Hostile Negotiations: four players, you choose which opponent chooses',
+    board({
+      you: { bf: ['Swamp*4'], hand: ['Hostile Negotiations'], lib: ['Grizzly Bears', 'Hill Giant', 'Serra Angel', 'Forest', 'Island', 'Swamp'] },
+      opp: [{ human: true }, { human: true }, { human: true }],
+    }),
+  ),
+  preset(
+    'Abstract Performance: the other pile, a spell cast free and the rest to hand',
+    board({
+      you: {
+        bf: ['Island*6'],
+        hand: ['Abstract Performance'],
+        lib: ['Divination', 'Forest', 'Grizzly Bears', 'Island', 'Hill Giant', 'Swamp', 'Serra Angel', 'Plains'],
+      },
+      opp: { human: true },
+    }),
+  ),
+  preset(
+    'Deathmist Raptor: back face up, face down, or not at all',
+    board({
+      you: { bf: ['Island*6', 'Shorecrasher Elemental'], gy: ['Deathmist Raptor'] },
+    }),
+  ),
+  preset(
+    'Yarus: a face-down creature that dies comes back face up',
+    board({
+      you: { bf: ['Yarus, Roar of the Old Gods', 'Scroll of Fate'], hand: ['Grizzly Bears'] },
+      opp: { bf: ['Mountain', 'Island'], hand: ['Lightning Bolt'], human: true },
+    }),
+  ),
 ]

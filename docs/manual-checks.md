@@ -7126,6 +7126,45 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 - **Do:** Click Moonlight Bargain. In the popup, click two cards and Confirm.
 - **Expect:** The popup says 2 life for each card kept. At 5 life you can take two and no more. You drop to 1 life, the two are in your hand, and the other three are in your graveyard.
+### Scroll of Fate: choose the card from your hand to manifest
+
+- **Do:** Activate Scroll of Fate, click Lightning Bolt in the popup and Confirm.
+- **Expect:** The popup says "Choose a card from your hand to manifest". Lightning Bolt enters as a face-down 2/2, your hand keeps the Bears, and it offers no way to turn face up (it isn't a creature card).
+
+### Hide in Plain Sight: cloak two of the top five
+
+- **Do:** Cast Hide in Plain Sight, pick two cards in the popup and Confirm.
+- **Expect:** The popup says "Choose 2 cards to cloak". The two enter as face-down 2/2s with ward {2}; the other three go to the bottom of the library.
+
+### Become Anonymous: the creature and two cards come back face down and tapped
+
+- **Do:** Cast Become Anonymous on Grizzly Bears.
+- **Expect:** Grizzly Bears leaves and three face-down 2/2s with ward {2} enter, all tapped, in no telling order. Hovering them from your seat tells you which is which.
+
+### Hostile Negotiations: turn a pile face up, and Bob chooses one
+
+- **Do:** Cast Hostile Negotiations, then click a pile in the popup. Switch to Bob and click a pile.
+- **Expect:** You first see both piles of three named, and "the chosen pile is turned face up". Bob then sees the pile you turned up named and the other face down, "Pile 1 (face down)" and "Pile 2 (face up)". Alice gets his choice in hand, the other in the graveyard, and loses 3 life.
+
+### Hostile Negotiations: four players, you choose which opponent chooses
+
+- **Do:** Cast Hostile Negotiations and click a pile in the popup. Choose Carol, switch to Carol and click a pile.
+- **Expect:** You're asked which opponent only after turning a pile up. Carol alone is asked to choose a pile; Bob and Dave aren't.
+
+### Abstract Performance: the other pile, a spell cast free and the rest to hand
+
+- **Do:** Cast Abstract Performance. Switch to Bob and click "Pile 2 (face up)". Back as Alice, cast Divination for free.
+- **Expect:** Nobody sees the face-down pile while Bob chooses, Alice included. The face-up pile goes to the graveyard. Only then Alice sees the other four and may cast Divination, Grizzly Bears or none, free; the rest go to her hand.
+
+### Deathmist Raptor: back face up, face down, or not at all
+
+- **Do:** Activate Shorecrasher Elemental's first ability, then turn it face up for its megamorph cost. Choose "Return it to the battlefield face down".
+- **Expect:** The Elemental becomes a face-down 2/2 and then a 4/4 with a counter. Raptor's trigger asks face up, face down, or to decline, and returns as a face-down 2/2 you can turn up for {4}{G}.
+
+### Yarus: a face-down creature that dies comes back face up
+
+- **Do:** Activate Scroll of Fate on Grizzly Bears. Switch to Bob and cast Lightning Bolt on the face-down creature.
+- **Expect:** It dies, Yarus triggers, and Grizzly Bears comes back face up, under Alice's control, a 2/2 with haste.
 
 ### Jetsam: one spell from each opponent, in the order you pick
 

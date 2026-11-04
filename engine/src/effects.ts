@@ -649,6 +649,8 @@ export interface FlickerOptions {
   readonly transformed?: boolean;
   /** It returns tapped (Nezahal, Primal Tide). */
   readonly tapped?: boolean;
+  /** It returns at once, face down (Shorecrasher Elemental). */
+  readonly faceDown?: boolean;
   readonly returnAt?: DelayedTriggerTiming;
   readonly returnText?: string;
   /** The effect named its own source (`target: "source"`). */
@@ -2558,6 +2560,12 @@ export type EffectSpec =
        * `then: { kind: "fight", a: 0, b: 1, oneSided: true }`, the Giant at 0.
        * The choice is made as this resolves, never a target itself. */
       readonly keepTargets?: true;
+      /** `then` applies **once**, with every permanent chosen in the target
+       * slots from 0: one instruction over the set, not one for each — Expose
+       * the Culprit's "exile any number of face-up creatures … in a face-down
+       * pile, shuffle that pile, then cloak them". A token named more than once
+       * from a stack holds one slot each. */
+      readonly thenTogether?: true;
     }
   | {
       /**
@@ -4008,6 +4016,11 @@ export type EffectSpec =
        * face down and tapped. It's a 2/2 Cyberman artifact creature" is
        * `faceDown: "2/2 Cyberman artifact creature"`. */
       readonly faceDown?: true | FaceDownAs;
+      /** "…if it's a permanent card" (Yarus, Roar of the Old Gods), the card
+       * itself and not what it was as a face-down permanent: an instant or
+       * sorcery card stays where it is, though `faceDown` alone would let it
+       * enter (the 2/2 it would be is a permanent, rule 708.2a). */
+      readonly ifPermanentCard?: true;
     }
   | {
       /** Exile every card in a target *player's* graveyard (rule 406 — Bojuka
@@ -4173,6 +4186,13 @@ export type EffectSpec =
       readonly target: EffectTargetRef | readonly number[] | { readonly from: number };
       /** See {@link FlickerCounters} — Essence Flux's Spirit clause. */
       readonly thenCounters?: FlickerCounters;
+      /** "Exile this creature, then return it to the battlefield **face down**
+       * under its owner's control" (Shorecrasher Elemental), at once — no
+       * `returnAt`. Turned face down before it enters (rule 708.3): no "as this
+       * enters" choice is asked and no enters ability works. Neither manifested
+       * nor cloaked, it's turned face up only by its morph or disguise cost
+       * (702.37e, 702.168d). */
+      readonly faceDown?: true;
       /** Return under the effect's controller's control rather than the
        * owner's (Ghostly Flicker's "under your control"). */
       readonly underYourControl?: boolean;
@@ -4964,8 +4984,11 @@ export type EffectSpec =
        * `else` is done (or, with `repeat`, once nothing more is cast).
        * `"bottom-any-order"` is "…in any order" (ripple, rule 702.60a): the
        * player orders them (rule 401.4), asked only when the order is a
-       * choice. Without it they stay where they are. */
-      readonly rest?: "bottom-random" | "bottom-any-order";
+       * choice. Without it they stay where they are. `"hand"` goes with
+       * `from: "targets"`, cards in exile: "you may cast a spell from among
+       * them without paying its mana cost. Put the rest into your hand"
+       * (Abstract Performance) — the player looks at them all first. */
+      readonly rest?: "bottom-random" | "bottom-any-order" | "hand";
       /** Set only on the copy parked across the decision. */
       readonly progress?: CastNowProgress;
     }
@@ -7823,6 +7846,23 @@ export type EffectSpec =
     }
   | {
       /**
+       * "Exile [these permanents] and the top two cards of your library in a
+       * face-down pile, shuffle that pile, then cloak those cards" (Become
+       * Anonymous; Expose the Culprit's "any number of face-up creatures you
+       * control" is a `choose-permanents` with `thenTogether` around this):
+       * every permanent in this resolution's target slots and the `libraryTop`
+       * cards are exiled together (one event), and each card of the shuffled
+       * pile is cloaked (rule 701.58a) under the effect's controller, one at a
+       * time, in the pile's random order, so nobody learns which is which
+       * (rule 708.5). A token exiled this way ceases to exist (rule 111.8).
+       * `enterTapped`: "They enter tapped."
+       */
+      readonly kind: "cloak-exiled-pile";
+      readonly libraryTop?: EffectAmount;
+      readonly enterTapped?: true;
+    }
+  | {
+      /**
        * "Turn target creature face down" (rule 708.2a): the same permanent,
        * now a face-down 2/2 with no name, text, subtypes or mana cost — or
        * with the characteristics `as` lists (708.2: Cyber Conversion's "It's
@@ -9466,6 +9506,37 @@ export type EffectSpec =
     }
   | {
       /**
+       * Two piles already made, in exile: "Exile the top four cards of your
+       * library in a face-down pile, then exile the top four cards of your
+       * library in a face-up pile. An opponent chooses one of those piles"
+       * (Abstract Performance) — nobody separates anything. `piles` are exiled
+       * in order, each of them from the library's top at that moment; a
+       * face-down one (rule 406.3) is looked at by nobody until something says
+       * so. `turnOneFaceUp` is Hostile Negotiations' "Look at the cards in each
+       * pile, then turn a pile of your choice face up": the effect's controller
+       * looks at both, then answers a `choose-pile` for the one to turn.
+       *
+       * `chooser` then chooses a pile, seeing only what's face up (and what
+       * they looked at) — `"an-opponent"` is which opponent, the effect's
+       * controller's choice, made only now, once the cards have been seen
+       * (asked among two or more). The piles' fates follow, as
+       * `separate-into-piles`' do.
+       */
+      readonly kind: "exile-into-piles";
+      readonly piles: readonly [ExilePileSpec, ExilePileSpec];
+      readonly turnOneFaceUp?: true;
+      readonly chooser: EffectPlayerRef | "an-opponent";
+      readonly chosen: PileFate;
+      readonly rest?: PileFate;
+      /** Set only by the engine: the piles, the face-down one first once one
+       * is face up, and how far it has got. */
+      readonly progress?: {
+        readonly piles: readonly (readonly ObjectId[])[];
+        readonly step: "turning" | "chooser" | "choosing";
+      };
+    }
+  | {
+      /**
        * A player chooses among the resolving spell's or ability's own targets
        * — "Choose two target creatures controlled by the same player. **Their
        * controller chooses and sacrifices one of them.** Return the other to
@@ -10204,6 +10275,13 @@ export type EffectSpec =
         | "exile-face-down"
         | "exile"
         | "manifest"
+        /** Each chosen card is cloaked instead (rule 701.58a): a face-down 2/2
+         * with ward {2} — Hide in Plain Sight's "look at the top five cards …,
+         * cloak two of them", Vannifar's "cloak a card from your hand".
+         * `"manifest"` and `"cloak"` take a card from any zone the choice
+         * reads (Scroll of Fate's "manifest a card from your hand"), and
+         * several are done one at a time (701.40e, 701.58e). */
+        | "cloak"
         | "reveal"
         /** Nothing moves: the card is only chosen, and `then` acts on it as
          * its target 0 — Lazav, Wearer of Faces' "become a copy of a creature
@@ -10525,22 +10603,36 @@ export type PileObjects =
  * applies `effect` to each object of the pile as target 0, all as one
  * instruction (one event) — Liliana of the Veil's "sacrifices all permanents
  * in the pile" is `{ effect: { kind: "sacrifice-target", target: 0,
- * byItsController: true } }`.
+ * byItsController: true } }`. `{ together }` applies its effect once, with the
+ * pile's objects in the target slots from 0 — Abstract Performance's "You may
+ * cast a spell from among them without paying its mana cost. Put the rest into
+ * your hand" — `word` saying what that amounts to.
  */
 export type PileFate =
   | "hand"
   | "graveyard"
   | "exile"
   | "battlefield"
-  | { readonly effect: EffectSpec };
+  | { readonly effect: EffectSpec }
+  | { readonly together: EffectSpec; readonly word: PileFateWord };
+
+/** One pile of an `exile-into-piles`: the top `libraryTop` cards, face down
+ * unless `faceUp`. */
+export interface ExilePileSpec {
+  readonly libraryTop: EffectAmount;
+  readonly faceUp?: true;
+}
 
 /**
  * A `PileFate` in one word, for whoever is asked to separate or choose: where
  * the cards go, or `"lose"` for an effect that takes the objects away (a
  * sacrifice, destruction, exile, a bounce) and `"other"` for anything else
  * (Fight or Flight's "only creatures in the chosen pile can attack").
+ * `"turned-face-up"`: Hostile Negotiations' "turn a pile of your choice face
+ * up". `"cast-or-hand"`: one spell from it may be cast free, the rest go to the
+ * hand (Abstract Performance).
  */
-export type PileFateWord = "hand" | "graveyard" | "exile" | "battlefield" | "lose" | "other";
+export type PileFateWord = "hand" | "graveyard" | "exile" | "battlefield" | "lose" | "other" | "turned-face-up" | "cast-or-hand";
 
 /**
  * A keyword ability given to a card in a graveyard (rule 604.1 — a static's
@@ -10570,6 +10662,7 @@ export type GraveyardKeyword = "unearth" | "encore" | "embalm" | "harmonize" | "
 /** See {@link PileFateWord}. */
 export function pileFateWord(fate: PileFate): PileFateWord {
   if (typeof fate === "string") return fate;
+  if ("together" in fate) return fate.word;
   switch (fate.effect.kind) {
     case "sacrifice-target":
     case "destroy":
@@ -11116,6 +11209,8 @@ export interface EffectApi {
     together?: ChoosePermanentsTogether,
     /** The effect's `keepTargets`: the targets `then` reads from slot 1. */
     thenTargets?: ResolvedTargets,
+    /** The effect's `thenTogether`: `then` runs once, over all of them. */
+    thenTogether?: true,
   ): void;
   /** See the `"blight"` {@link EffectSpec}: `player` blights `amount` — the
    * creature chosen now, or asked for — then `then` with it as target 0.
@@ -11175,6 +11270,9 @@ export interface EffectApi {
    * battlefield if it has left since the effect referred to it. For binding
    * `CardFilter.sharesCardTypeWith`. */
   cardTypesOf(target: TargetRef): readonly CardType[];
+  /** Is this a permanent card (rule 110.4): the card as printed, wherever it
+   * is, whatever it was face down as. */
+  isPermanentCard(target: TargetRef): boolean;
   /** The subtypes of what `target` points at, the same way — a changeling's
    * with its every-creature-type marker. For binding
    * `CardFilter.sharesCreatureTypeWith`. */
@@ -11769,6 +11867,15 @@ export interface EffectApi {
   ): boolean;
   /** The pile the last `askChoosePile` answer chose, taken (and cleared). */
   takeChosenPile(): number | undefined;
+  /** See the `"exile-into-piles"` {@link EffectSpec}: exile each pile from the
+   * top of the effect's controller's library, in order, a face-down one looked
+   * at by `lookers`; the cards each holds. */
+  exileIntoPiles(
+    piles: readonly { readonly top: number; readonly faceUp: boolean }[],
+    lookers: readonly PlayerId[],
+  ): readonly (readonly ObjectId[])[];
+  /** Turn these cards in exile face up (rule 406.3) for everyone to see. */
+  turnExiledCardsFaceUp(cards: readonly ObjectId[]): void;
   /** Carry out the piles' fates: `chosen`'s on the chosen pile, then
    * `rest`'s on the other — each as one instruction, still only on objects
    * where they were separated (rule 400.7). */
@@ -12329,6 +12436,10 @@ export interface EffectApi {
    * `"manifest"` {@link EffectSpec}; `library` is another player's library
    * it comes from (its `from`). */
   manifestTop(player: PlayerId, kind: "manifest" | "cloak", library?: PlayerId): void;
+  /** See the `"cloak-exiled-pile"` {@link EffectSpec}: this resolution's
+   * target permanents and the top `libraryTop` cards of the effect's
+   * controller's library. */
+  cloakExiledPile(libraryTop: number, tapped: boolean): void;
   /** Turn the permanent `target` face down — see the `"turn-face-down"`
    * {@link EffectSpec}. */
   turnFaceDown(target: TargetRef, as?: FaceDownAs): void;
@@ -12660,7 +12771,7 @@ export interface EffectApi {
     count: number | undefined,
     min: number,
     max: number,
-    destination: "battlefield" | "hand" | "library-top" | "library-bottom" | "graveyard" | "exile-face-down" | "exile" | "manifest" | "reveal" | "stay",
+    destination: "battlefield" | "hand" | "library-top" | "library-bottom" | "graveyard" | "exile-face-down" | "exile" | "manifest" | "cloak" | "reveal" | "stay",
     leftover: "bottom-random" | "bottom-any-order" | "top-any-order" | "stay" | "hand" | "graveyard" | "exile" | "exile-playable",
     filter: ZoneChoiceFilter | undefined,
     enterTapped?: boolean,
@@ -13943,7 +14054,9 @@ function applyCastNowSpec(spec: Extract<EffectSpec, { kind: "cast-now" }>, ctx: 
           ? ctx.cardsIn(handOwner, "hand")
           : searcher !== undefined
             ? ctx.cardsIn(searcher, "library")
-            : [];
+            : from === "targets" && spec.rest === "hand"
+              ? ctx.targets.flatMap((t) => (t?.kind === "object" ? [t.object] : []))
+              : [];
     let cards: readonly ObjectId[];
     if (typeof from === "object" && "handOf" in from) {
       cards = looked;
@@ -14060,14 +14173,14 @@ function applyCastNowSpec(spec: Extract<EffectSpec, { kind: "cast-now" }>, ctx: 
 }
 
 /** A `cast-now`'s `rest`: the cards it looked at and didn't cast, still in
- * the library, to its bottom. */
+ * the library, to its bottom — or, still in exile, to the hand. */
 function placeCastNowRest(
   spec: Extract<EffectSpec, { kind: "cast-now" }>,
   progress: CastNowProgress,
   ctx: ResolutionContext,
 ): void {
   if (spec.rest !== undefined && progress.looked.length > 0) {
-    ctx.placeRevealed(ctx.controller, progress.looked, spec.rest, false);
+    ctx.placeRevealed(ctx.controller, progress.looked, spec.rest, spec.rest === "hand");
   }
 }
 
@@ -15819,6 +15932,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         chooser,
         spec.together,
         spec.keepTargets === true ? ctx.targets : undefined,
+        spec.thenTogether,
       );
       return;
     }
@@ -16396,6 +16510,12 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       }
       return;
     }
+    case "cloak-exiled-pile":
+      ctx.cloakExiledPile(
+        spec.libraryTop === undefined ? 0 : Math.floor(amountValue(spec.libraryTop, ctx)),
+        spec.enterTapped === true,
+      );
+      return;
     case "turn-face-down": {
       const target = resolveEffectTarget(spec.target, ctx);
       if (target !== undefined) ctx.turnFaceDown(target, spec.as);
@@ -16532,6 +16652,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       const target = resolveEffectTarget(spec.target, ctx);
       const parked = ctx.parkedCount();
       if (target !== undefined) {
+        if (spec.ifPermanentCard === true && !ctx.isPermanentCard(target)) return;
         let under = spec.underYourControl === true ? ctx.controller : undefined;
         if (spec.under !== undefined) {
           // Someone else puts it there, under their control: an illegal
@@ -16707,6 +16828,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         ...(spec.returnText !== undefined ? { returnText: spec.returnText } : {}),
         ...(spec.transformed === true ? { transformed: true } : {}),
         ...(spec.tapped === true ? { tapped: true } : {}),
+        ...(spec.faceDown === true ? { faceDown: true } : {}),
         ...(spec.target === "source" ? { fromSource: true } : {}),
       });
       if (returning !== null) ctx.resumeAfterDecisions(returning, parked);
@@ -19369,6 +19491,59 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       ctx.finishPiles(
         piles[chosen] ?? [],
         piles.flatMap((pile, i) => (i === chosen ? [] : pile)),
+        spec.chosen,
+        spec.rest,
+      );
+      return;
+    }
+    case "exile-into-piles": {
+      const below = ctx.parkedCount();
+      const fates = { chosen: pileFateWord(spec.chosen), ...(spec.rest !== undefined ? { rest: pileFateWord(spec.rest) } : {}) };
+      const looked = spec.turnOneFaceUp === true ? [ctx.controller] : [];
+      const progress = spec.progress;
+      if (progress === undefined) {
+        const piles = ctx.exileIntoPiles(
+          spec.piles.map((pile) => ({ top: Math.max(0, Math.floor(amountValue(pile.libraryTop, ctx))), faceUp: pile.faceUp === true })),
+          looked,
+        );
+        if (piles.every((pile) => pile.length === 0)) return;
+        if (spec.turnOneFaceUp === true) {
+          if (ctx.askChoosePile(ctx.controller, ctx.controller, piles, false, looked, { chosen: "turned-face-up" })) {
+            ctx.resumeAfterDecisions({ ...spec, progress: { piles, step: "turning" } }, below);
+          }
+          return;
+        }
+        applyEffectSpec({ ...spec, progress: { piles, step: "chooser" } }, ctx);
+        return;
+      }
+      if (progress.step === "turning") {
+        const turned = ctx.takeChosenPile();
+        if (turned === undefined) return;
+        const up = progress.piles[turned] ?? [];
+        ctx.turnExiledCardsFaceUp(up);
+        // The face-down pile first, as a `choose-pile` with a face-down pile
+        // has it.
+        const down = progress.piles.flatMap((pile, i) => (i === turned ? [] : pile));
+        applyEffectSpec({ ...spec, progress: { piles: [down, up], step: "chooser" } }, ctx);
+        return;
+      }
+      if (progress.step === "chooser") {
+        if (spec.chooser === "an-opponent") {
+          applyEffectSpec({ kind: "choose-opponent", then: { ...spec, chooser: "that-player" } }, ctx);
+          return;
+        }
+        const chooser = effectPlayer(spec.chooser, ctx);
+        if (chooser === undefined) return;
+        if (ctx.askChoosePile(chooser, ctx.controller, progress.piles, true, looked, fates)) {
+          ctx.resumeAfterDecisions({ ...spec, progress: { ...progress, step: "choosing" } }, below);
+        }
+        return;
+      }
+      const chosen = ctx.takeChosenPile();
+      if (chosen === undefined) return;
+      ctx.finishPiles(
+        progress.piles[chosen] ?? [],
+        progress.piles.flatMap((pile, i) => (i === chosen ? [] : pile)),
         spec.chosen,
         spec.rest,
       );

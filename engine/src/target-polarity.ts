@@ -763,6 +763,8 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   // aims at nothing.
   manifest: none,
   "manifest-dread": none,
+  // Your own creature hidden among face-down 2/2s: a save, like a flicker.
+  "cloak-exiled-pile": (_n, v) => v.touch(EVERY_SLOT, "help", MINOR),
   // Turning a creature face down makes it a vanilla 2/2 (or a Cyberman) that
   // its controller can't turn back without a morph cost: removal-like
   // (Cyber Conversion, Backslide); a morph's own "turn this face down" aims
@@ -897,9 +899,11 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
       v.touch(n.objects.whose.target, "harm", MAJOR);
     }
     if (n.objects === "targets") v.touch(EVERY_SLOT, "help", MINOR);
-    if (typeof n.chosen === "object") v.child(n.chosen.effect);
-    if (typeof n.rest === "object") v.child(n.rest.effect);
+    if (typeof n.chosen === "object" && "effect" in n.chosen) v.child(n.chosen.effect);
+    if (typeof n.rest === "object" && "effect" in n.rest) v.child(n.rest.effect);
   },
+  // Off the library's top: it aims at nothing.
+  "exile-into-piles": none,
   // Whichever target is picked gets one fate and the others the other
   // (Barrin's Spite: sacrificed or bounced), so every slot gets what the
   // fates do to their objects — read off each fate's slot 0 — and a return
@@ -907,7 +911,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "choose-among-targets": (n, v) => {
     for (const fate of [n.chosen, n.rest]) {
       if (fate === "battlefield") v.touch(EVERY_SLOT, "take", MAJOR);
-      if (typeof fate !== "object") continue;
+      if (typeof fate !== "object" || !("effect" in fate)) continue;
       const read = slotStrengths(fate.effect, 1)[0];
       if (read !== null) v.touch(EVERY_SLOT, read.polarity, read.weight);
     }

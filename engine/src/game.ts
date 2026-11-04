@@ -10542,7 +10542,14 @@ export class Game {
     // in the same move.
     const rest = awaiting.searchRest;
     const placed = rest === undefined ? chosen : [...chosen, ...leftover];
-    this.withEnterBatch(() => placed.forEach((id, index) => {
+    // Several manifested or cloaked are done one at a time (rules 701.40e,
+    // 701.58e), each entering before the next is turned face down.
+    const oneAtATime = awaiting.destination === "manifest" || awaiting.destination === "cloak";
+    const batched = (place: () => void): void => {
+      if (oneAtATime) place();
+      else this.withEnterBatch(place);
+    };
+    batched(() => placed.forEach((id, index) => {
       const isRest = rest !== undefined && index >= chosen.length;
       // "Exile the top two, choose one of them" — the chosen cards don't
       // move at all, they just gain the impulse permission.
@@ -10603,16 +10610,12 @@ export class Game {
       }
       // Knowledge Exploitation's find stays in the library for `then`.
       if (to === "stay") return;
-      if (to === "manifest") {
-        // Manifest dread (rule 701.62a): the chosen card is manifested —
-        // put onto the battlefield face down as a 2/2 (701.40a) by the
-        // player whose library it was — and nobody else learns what it is.
-        this.moveObject(id, "battlefield", { faceDown: "manifest" });
-        const entered = this.state.objects[id];
-        if (entered?.zone === "battlefield") {
-          this.emit({ type: "card-manifested", player, object: id, kind: "manifest" });
-          this.emit({ type: "permanent-entered-battlefield", object: id });
-        }
+      if (to === "manifest" || to === "cloak") {
+        // Manifest dread (rule 701.62a), a card from a hand (Scroll of Fate),
+        // two of the top five cloaked (Hide in Plain Sight): the chosen card
+        // goes onto the battlefield face down as a 2/2 (701.40a, 701.58a)
+        // under the player choosing, and nobody else learns what it is.
+        this.putFaceDownAs(player, id, to);
         return;
       }
       // A behold's answer never reaches here (`applyBehold`): it moves nothing,
@@ -32724,6 +32727,13 @@ export class Game {
           ? []
           : computeCharacteristics(this.state, this.registry, target.object).types;
       },
+      isPermanentCard: (target) => {
+        if (target.kind !== "object") return false;
+        const object = this.state.objects[target.object];
+        if (object === undefined) return false;
+        const { types } = this.registry.get(printedCardName(object));
+        return !types.includes("instant") && !types.includes("sorcery");
+      },
       subtypesOf: (target) => {
         if (target.kind !== "object") return [];
         const lki = lastKnownOf(target);
@@ -33998,6 +34008,20 @@ export class Game {
         delete this.state.pilesAnswer;
         return chosen;
       },
+      exileIntoPiles: (piles, lookers) =>
+        piles.map(({ top, faceUp }) => {
+          const since = this.state.eventSeq;
+          const exiled = this.exileFromLibraryByEffect({ kind: "player", player: controller }, { top }, controller);
+          if (!faceUp) this.turnExiledFaceDown(exiled, lookers, since);
+          return exiled;
+        }),
+      turnExiledCardsFaceUp: (cards) => {
+        for (const id of cards) {
+          const card = this.state.objects[id];
+          if (card?.zone === "exile" && card.exiledFaceDown !== undefined) card.exiledFaceDown = undefined;
+        }
+        invalidateComputedCache();
+      },
       finishPiles: (chosenPile, otherPile, chosenFate, restFate) => {
         // Only what's still where it was separated (rule 400.7) — the
         // objects never left their zone meanwhile (700.3c).
@@ -34010,6 +34034,14 @@ export class Game {
           if (fate === undefined) return;
           const still = pile.filter((id) => this.state.objects[id]?.zone === zones.get(id));
           if (still.length === 0) return;
+          // One effect over the whole pile (Abstract Performance's cast).
+          if (typeof fate === "object" && "together" in fate) {
+            applyEffectSpec(
+              fate.together,
+              this.makeResolutionContext(source, controller, still.map((object) => ({ kind: "object", object })), x),
+            );
+            return;
+          }
           // Each pile's fate is one instruction: everything in it at once.
           this.withLeaveBatch(() =>
             this.withGraveyardLeaveBatch(() =>
@@ -34664,8 +34696,8 @@ export class Game {
           return object?.owner === controller && object.suspended === true && (object.counters.time ?? 0) > 0;
         }).length,
       giveSuspend: (counters, options) => this.giveSuspend(controller, counters, options),
-      choosePermanents: (filter, min, max, then, prompt, exceptSource, except, chooser, together, thenTargets) =>
-        this.beginChoosePermanents(source, chooser ?? controller, x, filter, min, max, then, prompt, exceptSource === true, except, together, thenTargets),
+      choosePermanents: (filter, min, max, then, prompt, exceptSource, except, chooser, together, thenTargets, thenTogether) =>
+        this.beginChoosePermanents(source, chooser ?? controller, x, filter, min, max, then, prompt, exceptSource === true, except, together, thenTargets, thenTogether),
       blight: (player, amount, then) => this.beginBlight(player, source, amount, { x, ...(then !== undefined ? { then } : {}) }),
       bolster: (amount) => this.beginBolster(controller, source, amount, x),
       behold: (spec, then) => this.beginBehold(controller, source, spec, { x, ...(then !== undefined ? { then } : {}) }),
@@ -35691,6 +35723,8 @@ export class Game {
         }
       },
       manifestTop: (player, kind, library) => this.manifestTop(player, kind, library ?? player),
+      cloakExiledPile: (libraryTop, tapped) =>
+        this.cloakExiledPile(controller, targets.flatMap((t) => (t === undefined || t === null ? [] : [t])), libraryTop, tapped),
       turnFaceUp: (target) => {
         if (target.kind === "object") this.turnFaceUpByEffect(target.object);
       },
@@ -36437,7 +36471,7 @@ export class Game {
     count: number | undefined,
     min: number,
     max: number,
-    destination: "battlefield" | "hand" | "library-top" | "library-bottom" | "graveyard" | "exile-face-down" | "exile" | "manifest" | "reveal" | "stay",
+    destination: "battlefield" | "hand" | "library-top" | "library-bottom" | "graveyard" | "exile-face-down" | "exile" | "manifest" | "cloak" | "reveal" | "stay",
     leftover: "bottom-random" | "bottom-any-order" | "top-any-order" | "stay" | "hand" | "graveyard" | "exile" | "exile-playable",
     filter: ZoneChoiceFilter | undefined,
     enterTapped = false,
@@ -36641,6 +36675,15 @@ export class Game {
       // chosen stays, which a client's own title wouldn't say.
       ...(destination === "stay" && leftover === "exile" && zone === "graveyard"
         ? { prompt: `Choose ${max === 1 ? "a card" : `${max} cards`} to keep — the rest are exiled` }
+        : {}),
+      // From a hand, nothing's left over (Scroll of Fate, Vannifar).
+      ...((destination === "manifest" || destination === "cloak") && zone === "hand"
+        ? {
+            prompt:
+              destination === "manifest"
+                ? "Choose a card from your hand to manifest: it goes onto the battlefield face down as a 2/2"
+                : "Choose a card from your hand to cloak: it goes onto the battlefield face down as a 2/2 with ward {2}",
+          }
         : {}),
       ids,
       eligible,
@@ -43812,6 +43855,7 @@ export class Game {
     except: readonly ObjectId[] = [],
     togetherRule?: ChoosePermanentsTogether,
     thenTargets?: ResolvedTargets,
+    thenTogether?: true,
   ): void {
     const matching = this.battlefieldMatching(player, filter).filter(
       (id) => (!exceptSource || id !== source) && !except.includes(id),
@@ -43837,6 +43881,7 @@ export class Game {
       x,
       ...(together !== undefined ? { together } : {}),
       ...(thenTargets !== undefined ? { thenTargets } : {}),
+      ...(thenTogether === true ? { thenTogether: true as const } : {}),
     };
   }
 
@@ -44144,6 +44189,18 @@ export class Game {
       if (id !== undefined && this.state.objects[id]?.zone === "battlefield") {
         const one = this.splitOneFromStack(id);
         applyEffectSpec(then, this.makeResolutionContext(source, player, [{ kind: "object", object: one }], x, 0, undefined, 1, 0, ["battlefield"]));
+      }
+      if (this.state.awaiting === null) this.prepareForPriority(priorityTo ?? this.activePlayer);
+      return;
+    }
+    // "Exile any number of … in a face-down pile" (Expose the Culprit): one
+    // instruction over the set, all of them in its target slots.
+    if (awaiting.thenTogether === true) {
+      if (chosen.length > 0) {
+        applyEffectSpec(
+          then,
+          this.makeResolutionContext(source, player, chosen.map((object) => ({ kind: "object", object })), x),
+        );
       }
       if (this.state.awaiting === null) this.prepareForPriority(priorityTo ?? this.activePlayer);
       return;
@@ -45587,15 +45644,74 @@ export class Game {
     if (this.state.players[library]?.hasLost !== false) return;
     const top = this.state.zones.perPlayer[library].library[0];
     if (top === undefined) return;
-    this.moveObject(top, "battlefield", { faceDown: kind, ...(library !== player ? { under: player } : {}) });
-    const entered = this.state.objects[top];
+    this.putFaceDownAs(player, top, kind, { ...(library !== player ? { library } : {}) });
+  }
+
+  /**
+   * The card `id`, wherever it is, manifested or cloaked by `player` (rules
+   * 701.40a, 701.58a): it goes onto the battlefield face down under them, kept
+   * there by a control effect when it's another player's card (rule 110.2a).
+   * If it can't enter it isn't manifested, and stays where it was (701.40f).
+   */
+  private putFaceDownAs(
+    player: PlayerId,
+    id: ObjectId,
+    kind: "manifest" | "cloak",
+    options: { readonly library?: PlayerId; readonly tapped?: boolean } = {},
+  ): void {
+    const object = this.state.objects[id];
+    if (object === undefined) return;
+    this.moveObject(id, "battlefield", {
+      faceDown: kind,
+      ...(object.owner !== player ? { under: player } : {}),
+      ...(options.tapped === true ? { tapped: true } : {}),
+    });
+    const entered = this.state.objects[id];
     if (entered === undefined || entered.zone !== "battlefield") return;
     if (entered.controller !== player) {
-      this.gainControlByEffect(player, { kind: "object", object: top }, false, true);
+      this.gainControlByEffect(player, { kind: "object", object: id }, false, true);
       entered.summoningSick = true;
     }
-    this.emit({ type: "card-manifested", player, object: top, kind, ...(library !== player ? { library } : {}) });
-    this.emit({ type: "permanent-entered-battlefield", object: top });
+    this.emit({ type: "card-manifested", player, object: id, kind, ...(options.library !== undefined ? { library: options.library } : {}) });
+    this.emit({ type: "permanent-entered-battlefield", object: id });
+  }
+
+  /**
+   * The `cloak-exiled-pile` effect: the permanents `targets` names and the top
+   * `libraryTop` cards of `controller`'s library exiled together in a face-down
+   * pile (rule 406.3, one event), the pile shuffled, and each of its cards
+   * cloaked in that random order. A token ceases to exist in exile (rule
+   * 111.8); a merged or melded permanent is every card it became (730.3c).
+   */
+  private cloakExiledPile(controller: PlayerId, targets: readonly TargetRef[], libraryTop: number, tapped: boolean): void {
+    if (this.state.players[controller]?.hasLost !== false) return;
+    const since = this.state.eventSeq;
+    const pile: ObjectId[] = [];
+    const objects = targets.flatMap((t) => (t.kind === "object" ? [t.object] : []));
+    this.withLeaveBatch(() => {
+      this.snapshotLeaving(objects);
+      for (const named of objects) {
+        if (this.state.objects[named]?.zone !== "battlefield") continue;
+        const id = this.splitOneFromStack(named);
+        const isToken = this.state.objects[id]?.isToken === true;
+        if (!this.moveObject(id, "exile") || this.state.objects[id]?.zone !== "exile") continue;
+        this.emit({ type: "permanent-exiled", object: id });
+        if (isToken) continue;
+        for (const card of [id, ...(this.state.objects[id].leftWith ?? [])]) {
+          if (this.state.objects[card]?.zone !== "exile") continue;
+          this.detachFrom(card);
+          pile.push(card);
+        }
+      }
+      for (const id of this.state.zones.perPlayer[controller].library.slice(0, Math.max(0, libraryTop))) {
+        this.moveObject(id, "exile");
+        if (this.state.objects[id]?.zone === "exile") pile.push(id);
+      }
+    });
+    this.turnExiledFaceDown(pile, [], since);
+    const shuffled = shuffle(pile, this.rng);
+    this.state.rngState = this.rng.seed;
+    for (const id of shuffled) this.putFaceDownAs(controller, id, "cloak", { tapped });
   }
 
   /**
@@ -46131,6 +46247,7 @@ export class Game {
       // one is. One that can't come back transformed is asked nothing: it
       // stays in exile (rule 712.14a).
       if (
+        options.faceDown !== true &&
         exiled.some(
           (id) =>
             (options.transformed !== true || this.isDoubleFacedCard(id)) &&
@@ -46154,6 +46271,7 @@ export class Game {
         returnUnder,
         options.transformed === true,
         options.tapped === true,
+        options.faceDown === true,
       );
       return null;
     }
@@ -46237,6 +46355,7 @@ export class Game {
     returnUnder?: PlayerId,
     transformed = false,
     tapped = false,
+    faceDown = false,
   ): void {
     const entered: ObjectId[] = [];
     this.withEnterBatch(() => {
@@ -46251,6 +46370,7 @@ export class Game {
           ...(returnUnder !== undefined ? { under: returnUnder } : {}),
           ...(transformed ? { transformed: true } : {}),
           ...(tapped ? { tapped: true } : {}),
+          ...(faceDown ? { faceDown: "effect" as const } : {}),
         });
         const object = this.state.objects[id];
         if (object?.zone !== "battlefield") continue;

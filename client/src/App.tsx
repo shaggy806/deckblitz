@@ -509,8 +509,12 @@ function zoneChoiceTitle(
       // "You choose a card from it. That player discards that card" (Duress).
       return `Choose ${cards} from ${whose} hand for them to discard`
     case 'manifest':
-      // Manifest dread (rule 701.62a): the rest go to the graveyard.
+      // Manifest dread (rule 701.62a): the rest go to the graveyard. A card
+      // from a hand (Scroll of Fate) comes with the engine's own prompt.
       return `Manifest dread: choose ${cards} to put onto the battlefield face down as a 2/2 — the rest go to your graveyard`
+    case 'cloak':
+      // Rule 701.58a: Hide in Plain Sight's two of the top five.
+      return `Choose ${cards} to cloak (put onto the battlefield face down as a 2/2 with ward {2}) — the rest go to the bottom of your library in a random order`
   }
 }
 
@@ -773,6 +777,8 @@ const PILE_FATE_TEXT: Record<SeparatePilesAction['fates']['chosen'], string> = {
   battlefield: 'goes onto the battlefield',
   lose: 'is lost',
   other: 'is affected',
+  'turned-face-up': 'is turned face up',
+  'cast-or-hand': 'lets a spell from it be cast free, and the rest go into the hand',
 }
 
 /** "The chosen pile goes into the hand, the other into the graveyard." */
@@ -7524,7 +7530,12 @@ function Table({
 
       {mode === 'choose-pile' && choosePileAction && !pilesOnBoard ? (
         <PileViewer
-          title={`${view.decisionSource?.cardName ?? 'Piles'} — ${playerLabel(choosePileAction.separator, game.seats)} separated these: choose a pile; ${pileFatesText(choosePileAction.fates)}`}
+          title={
+            // Piles made in exile (Hostile Negotiations): nobody separated them.
+            choosePileAction.piles.flat().some((id) => view.objects[id]?.zone === 'exile')
+              ? `${view.decisionSource?.cardName ?? 'Piles'} — choose a pile; ${pileFatesText(choosePileAction.fates)}`
+              : `${view.decisionSource?.cardName ?? 'Piles'} — ${playerLabel(choosePileAction.separator, game.seats)} separated these: choose a pile; ${pileFatesText(choosePileAction.fates)}`
+          }
           resolve={(id) => view.objects[id]}
           labels={pileLabels}
           choose={{

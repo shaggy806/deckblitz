@@ -1861,6 +1861,7 @@ export type LegalAction =
         | "exile-playable"
         | "exile-face-down"
         | "manifest"
+        | "cloak"
         | "library-top"
         | "library-bottom"
         | "graveyard"

@@ -14558,6 +14558,95 @@ describe("a cast as this resolves, on its own terms", () => {
         { kind: "exile-from-library", whose: "active-player", amount: 1 },
         { kind: "put-exiled-this-way-onto-battlefield", filter: { type: "land" } },
         { kind: "cast-now", from: "exiled-this-way", by: "active-player", free: true, mustCast: true },
+describe("manifest or cloak with a choosable source, piles in exile, a return face down", () => {
+  const read = (type_line: string, oracle_text: string) =>
+    parseFace({ name: "Test Card", type_line, oracle_text, mana_cost: "{7}", colors: [], cmc: 7 } as never) as unknown as {
+      effect?: unknown;
+      targets?: unknown;
+      activated: { effect: unknown }[];
+      triggered: { effect: unknown }[];
+    };
+
+  it("reads a card from a hand and some of a library's top cards", () => {
+    expect(read("Artifact", "{T}: Manifest a card from your hand.").activated[0].effect).toEqual({
+      kind: "look-and-choose",
+      zone: "hand",
+      min: 1,
+      max: 1,
+      destination: "manifest",
+      leftover: "stay",
+    });
+    const hide = read(
+      "Sorcery",
+      "Look at the top five cards of your library, cloak two of them, and put the rest on the bottom of your library in a random order.",
+    );
+    expect(hide.effect).toEqual({
+      kind: "look-and-choose",
+      zone: "library",
+      count: 5,
+      min: 2,
+      max: 2,
+      destination: "cloak",
+      leftover: "bottom-random",
+    });
+  });
+
+  it("reads a shuffled exiled pile", () => {
+    const become = read(
+      "Instant",
+      "Exile target nontoken creature you own and the top two cards of your library in a face-down pile, shuffle that pile, then cloak those cards. They enter tapped.",
+    );
+    expect(become.targets).toEqual([{ kind: "permanent", filter: { type: "creature", token: false, ownedBy: "you" } }]);
+    expect(become.effect).toEqual({ kind: "cloak-exiled-pile", libraryTop: 2, enterTapped: true });
+  });
+
+  it("reads piles made in exile", () => {
+    const hostile = read(
+      "Instant",
+      "Exile the top three cards of your library in a face-down pile, then exile the top three cards of your library in another face-down pile. Look at the cards in each pile, then turn a pile of your choice face up. An opponent chooses one of those piles. Put that pile into your hand and the other into your graveyard. You lose 3 life.",
+    );
+    expect(hostile.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        {
+          kind: "exile-into-piles",
+          piles: [{ libraryTop: 3 }, { libraryTop: 3 }],
+          turnOneFaceUp: true,
+          chooser: "an-opponent",
+          chosen: "hand",
+          rest: "graveyard",
+        },
+        { kind: "lose-life", amount: 3 },
+      ],
+    });
+    const abstract = read(
+      "Sorcery",
+      "Exile the top four cards of your library in a face-down pile, then exile the top four cards of your library in a face-up pile. An opponent chooses one of those piles. Put that pile into your graveyard. Look at the cards in the other pile. You may cast a spell from among them without paying its mana cost. Put the rest into your hand.",
+    );
+    expect(abstract.effect).toEqual({
+      kind: "exile-into-piles",
+      piles: [{ libraryTop: 4 }, { libraryTop: 4, faceUp: true }],
+      chooser: "an-opponent",
+      chosen: "graveyard",
+      rest: { word: "cast-or-hand", together: { kind: "cast-now", from: "targets", free: true, rest: "hand" } },
+    });
+  });
+
+  it("reads a flicker back face down and Yarus's return", () => {
+    const shore = read(
+      "Creature — Elemental",
+      "{U}: Exile this creature, then return it to the battlefield face down under its owner's control.",
+    );
+    expect(shore.activated[0].effect).toEqual({ kind: "flicker", target: "source", faceDown: true });
+    const yarus = read(
+      "Legendary Creature — Centaur Druid",
+      "Whenever a face-down creature you control dies, return it to the battlefield face down under its owner's control if it's a permanent card, then turn it face up.",
+    );
+    expect(yarus.triggered[0].effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "put-onto-battlefield", target: "trigger-object", faceDown: true, ifPermanentCard: true },
+        { kind: "turn-face-up", target: "trigger-object" },
       ],
     });
   });

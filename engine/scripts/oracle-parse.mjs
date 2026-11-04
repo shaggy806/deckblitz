@@ -669,6 +669,11 @@ export function parseTypePhrase(phrase, { cards = false } = {}) {
   for (let i = 0; i < words.length; i += 1) {
     const raw = words[i];
     const w = singular(raw.replace(/,$/, ""));
+    // "A face-down creature" (rule 708): Kadena's, Yarus's.
+    if (w === "face-down" && !cards) {
+      filter.faceDown = true;
+      continue;
+    }
     if (w === "or" || w === "and/or") {
       // "creature or planeswalker" is either type. "artifact creature or
       // Vehicle" is (artifact creature) or (Vehicle), which one filter can't
@@ -4738,6 +4743,33 @@ export function parseSentence(sentence, ctx) {
   if (re("manifest the top card of your library").test(s)) return { kind: "manifest", who: "you" };
   if (ctx.thatPlayer !== undefined && re("(?:you )?manifest the top card of that player's library").test(s)) {
     return { kind: "manifest", who: "you", from: ctx.thatPlayer };
+  }
+  // Manifest or cloak with a choosable source: a card from the hand (Scroll of
+  // Fate, Vannifar), some of the library's top cards (Hide in Plain Sight).
+  if ((m = re("(manifest|cloak) a card from your hand").exec(s))) {
+    return { kind: "look-and-choose", zone: "hand", min: 1, max: 1, destination: m[1].toLowerCase(), leftover: "stay" };
+  }
+  if ((m = re(`look at the top ${N} cards of your library, cloak ${N} of them, and put the rest on the bottom of your library in a random order`).exec(s))) {
+    const count = numberOf(m[1]);
+    const take = numberOf(m[2]);
+    if (typeof count === "number" && typeof take === "number") {
+      return { kind: "look-and-choose", zone: "library", count, min: take, max: take, destination: "cloak", leftover: "bottom-random" };
+    }
+  }
+  // "Exile this creature, then return it to the battlefield face down under its
+  // owner's control" (Shorecrasher Elemental).
+  if (re("exile ~, then return it to the battlefield face down under its owner's control").test(s)) {
+    return { kind: "flicker", target: "source", faceDown: true };
+  }
+  // Yarus: returned face down unless it's an instant or sorcery card, then up.
+  if (re("return it to the battlefield face down under its owner's control if it's a permanent card, then turn it face up").test(s)) {
+    return {
+      kind: "sequence",
+      effects: [
+        { kind: "put-onto-battlefield", target: "trigger-object", faceDown: true, ifPermanentCard: true },
+        { kind: "turn-face-up", target: "trigger-object" },
+      ],
+    };
   }
   // "Choose up to one target creature, then airbend all other creatures"
   // (Avatar's Wrath): every other one, together.
@@ -12140,6 +12172,73 @@ function pilesAt(sentences, i, ctx) {
   const s = (k) => sentences[i + k] ?? "";
   const handGraveyard = { chosen: "hand", rest: "graveyard" };
   const opponentChooses = (inner) => ({ kind: "choose-opponent", then: inner });
+  // Piles made in exile (`exile-into-piles`): "Exile the top N … in a face-down
+  // pile, then exile the top M … in another face-down pile. Look at the cards in
+  // each pile, then turn a pile of your choice face up. An opponent chooses one
+  // of those piles. Put that pile into your hand and the other into your
+  // graveyard." (Hostile Negotiations), or "… in a face-up pile. An opponent
+  // chooses one of those piles. Put that pile into your graveyard. Look at the
+  // cards in the other pile. You may cast a spell from among them without paying
+  // its mana cost. Put the rest into your hand." (Abstract Performance).
+  const exiled = new RegExp(
+    `^exile the top ${N} cards of your library in a face-down pile, then exile the top ${N} cards of your library in (another face-down|a face-up) pile\\.$`,
+    "i",
+  ).exec(s(0));
+  if (exiled !== null) {
+    const first = numberOf(exiled[1]);
+    const second = numberOf(exiled[2]);
+    if (typeof first !== "number" || typeof second !== "number") return null;
+    if (
+      exiled[3].toLowerCase() === "another face-down" &&
+      /^look at the cards in each pile, then turn a pile of your choice face up\.$/i.test(s(1)) &&
+      /^an opponent chooses one of those piles\.$/i.test(s(2)) &&
+      /^put that pile into your hand and the other into your graveyard\.$/i.test(s(3))
+    ) {
+      return {
+        effect: {
+          kind: "exile-into-piles",
+          piles: [{ libraryTop: first }, { libraryTop: second }],
+          turnOneFaceUp: true,
+          chooser: "an-opponent",
+          ...handGraveyard,
+        },
+        used: 4,
+      };
+    }
+    if (
+      exiled[3].toLowerCase() === "a face-up" &&
+      /^an opponent chooses one of those piles\.$/i.test(s(1)) &&
+      /^put that pile into your graveyard\.$/i.test(s(2)) &&
+      /^look at the cards in the other pile\.$/i.test(s(3)) &&
+      /^you may cast a spell from among them without paying its mana cost\.$/i.test(s(4)) &&
+      /^put the rest into your hand\.$/i.test(s(5))
+    ) {
+      return {
+        effect: {
+          kind: "exile-into-piles",
+          piles: [{ libraryTop: first }, { libraryTop: second, faceUp: true }],
+          chooser: "an-opponent",
+          chosen: "graveyard",
+          rest: { word: "cast-or-hand", together: { kind: "cast-now", from: "targets", free: true, rest: "hand" } },
+        },
+        used: 6,
+      };
+    }
+    return null;
+  }
+  // "Exile target nontoken creature you own and the top N cards of your library
+  // in a face-down pile, shuffle that pile, then cloak those cards. They enter
+  // tapped." (Become Anonymous)
+  const cloaked = new RegExp(
+    `^exile target nontoken creature you own and the top ${N} cards of your library in a face-down pile, shuffle that pile, then cloak those cards\\.$`,
+    "i",
+  ).exec(s(0));
+  if (cloaked !== null) {
+    const top = numberOf(cloaked[1]);
+    if (typeof top !== "number" || !/^they enter tapped\.$/i.test(s(1))) return null;
+    ctx.target({ kind: "permanent", filter: { type: "creature", token: false, ownedBy: "you" } });
+    return { effect: { kind: "cloak-exiled-pile", libraryTop: top, enterTapped: true }, used: 2 };
+  }
   // "Reveal the top N …. An opponent separates those cards into two piles.
   // Put one pile into your hand and the other into your graveyard."
   let m = new RegExp(`^reveal the top ${N} cards of your library\\.$`, "i").exec(s(0));
