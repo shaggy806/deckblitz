@@ -3887,10 +3887,6 @@ function Table({
           preparedCastsBySource.has(i),
       )
       selected = selectedSource !== null && ids.includes(selectedSource)
-    } else if (mode === 'priority' && ids.some((i) => ignoreEffectBySource.has(i))) {
-      // Another player's Leonin Arbiter: any player may pay to ignore it.
-      activatable = true
-      selected = selectedSource !== null && ids.includes(selectedSource)
     }
     // A plotted card on its owner's board (rule 702.170): marked, and cast
     // with a click like a hand card once the free cast is on offer — on a
