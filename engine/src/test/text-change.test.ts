@@ -204,7 +204,7 @@ describe("the pool's text holds no colour word the change can't reach", () => {
   // option or value, or a printed characteristic — none of them a word.
   // Mana symbols, not words (rule 612.2): "produces {B}" (Infernal Darkness,
   // Deep Water) included.
-  const NOT_WORDS = new Set(["mana", "oneOf", "thenOneOf", "elseOneOf", "all", "xColor", "chooseOnEnter", "value", "produces", "landManaInstead"]);
+  const NOT_WORDS = new Set(["mana", "oneOf", "thenOneOf", "elseOneOf", "all", "xColor", "chooseOnEnter", "value", "produces", "landManaInstead", "payLifeForPips"]);
 
   it("every field holding a colour is a colour-word field or a known non-word one", () => {
     const unknown = new Map<string, string>();

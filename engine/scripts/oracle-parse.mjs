@@ -2301,6 +2301,8 @@ export function parseTrigger(clause) {
       // would be "your first spell, if it's noncreature".
       if (m[3] === "noncreature" && spec.firstEachTurn === true) spec.filter = { notTypes: ["creature"] };
       else if (m[3] === "noncreature") spec.noncreatureOnly = true;
+      // "A black spell" (K'rrik): a colour alone.
+      else if (COLOR_WORD[m[3]] !== undefined) spec.filter = { colors: [COLOR_WORD[m[3]]] };
       else {
         const filter = parseTypePhrase(m[3]);
         if (filter === null) return null;
