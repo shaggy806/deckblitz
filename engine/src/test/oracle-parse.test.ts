@@ -13912,6 +13912,9 @@ describe("a copy for a duration read as a condition", () => {
       kind: "may",
       effect: { kind: "become-copy", target: "trigger-object", of: 0, until: "while-source-attached" },
     });
+  });
+});
+
 describe("exile with its own way back", () => {
   it("reads any number of a type's others until this leaves", () => {
     const face = parseFace({

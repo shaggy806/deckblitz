@@ -533,6 +533,7 @@ One line each; the detail (rule numbers, code sites, the cards each blocks) is i
 **`docs/engine-gaps.md`**, under the same bold title. When a gap closes, delete its detail
 there and move this line to `COMPLETED.md`.
 
+- **A self-replacement beside an exile: no 616.1 choice** (Gravebane Zombie's and Blightsteel's own "instead" always beat Rest in Peace or a finality counter).
 - **Two different "must be blocked by" filters on one attacker merge into one requirement** (lenient, rule 509.1c).
 
 - **The auto-payer can find no plan for a payable cost** (Fellwar Stone and Silent Clearing, {W}{R}: the Stone goes on the {W}, and the spell isn't offered).

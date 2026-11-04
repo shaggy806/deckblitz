@@ -409,6 +409,11 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   slots are alike, as here), and a skipped optional first slot still needs the cast refused or the
   random controller kept from skipping it. Found 2026-10-23, batch 151's checks.
 
+**A self-replacement beside an exile: no 616.1 choice.** Rule 616.1: the affected object's controller picks which replacement
+applies, and these aren't self-replacement effects under 614.15. `moveObjectUncached` applies `shufflesItselfInstead` and
+`topsItselfInstead` first, assuming the owner prefers the library. Cards: Gravebane Zombie, the Blightsteel shuffle family. Needs a
+choice on a move that can't wait yet, as Pulmonic Sliver's key does. Found 2026-11-04.
+
 **A copy of a spell loses its sacrificed, discarded and revealed cost references.** Rule 707.10: a
 copy of a spell copies the choices made for it, and an effect reading "the sacrificed creature" on
 the copy reads the original's. `exiled-as-cost` now carries over to a copy
