@@ -2989,6 +2989,10 @@ export function parseSentence(sentence, ctx) {
   if ((m = sentenceRe(`amass ([A-Z][a-z]+) X, where X is that excess damage`).exec(s))) {
     return { kind: "amass", amount: { triggerValue: true }, creatureType: m[1].replace(/ves$/, "f").replace(/s$/, "") };
   }
+  // "A creature spell": one cast, then it's used up (Chainer's ruling).
+  if (sentenceRe(`you may cast a creature spell from your graveyard this turn`).test(s)) {
+    return { kind: "player-effect", duration: "end-of-turn", castFromGraveyard: { filter: { type: "creature" }, once: true } };
+  }
   // "Discover X, where X is that spell's mana value" (Tecutlan): the spell a
   // cast trigger saw.
   if (sentenceRe(`discover X, where X is that spell's mana value`).test(s)) {

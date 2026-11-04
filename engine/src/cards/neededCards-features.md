@@ -5045,6 +5045,8 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 
 **A turn's triggered mana ability (2026-11-04).** `effect:turn-scoped-mana-trigger`: a `delayed-trigger` with `whenever: { on: "tapped-for-mana" }` and an `add-mana` effect is a triggered mana ability (rule 605.1b): `Game.tappedForManaExtras` reads it with the permanents', and the watchers leave it alone. High Tide, Bubbling Muck, Pyre Rhymer with Molten Tide.
 
+**One creature spell from your graveyard (2026-11-04).** `zone:graveyard-cast-permission-one-use`, no engine code: a `player-effect`'s `castFromGraveyard` with `once` (Whispersteel Dagger's), and the scaffolder's template for the line. Chainer, Nightmare Adept.
+
 **Cards from hand taking {2} off (2026-11-04).** `cost:exile-cards-from-hand-cost-reduction`: `additionalCost.exileFromHandReduces`, named on the cast's `delve` from its offer (`delve.fromHand`), delve's shape with any number allowed past what lowers the cost. The client's delve popup words it. March of Swirling Mist, March of Wretched Sorrow, March of Otherworldly Light (March of Burgeoning Life and March of Reckless Joy wait on their own effects).
 
 **The cards exiled with it, to their graveyards (2026-11-04).** `effect:exiled-with-source-to-graveyard`: `return-exiled-by-source`'s `linked: "graveyard"` now moves them as one event and reaches what it exiled "until it leaves" (`exiledUntil`, rule 610.3); `thisWay: "put-into-graveyard"` counts them. Valakut Exploration, Pinnacle Starcage, Gravegouger (Foreboding Steamboat still waits for its each-player choice's exile).

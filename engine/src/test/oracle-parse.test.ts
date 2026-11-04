@@ -15642,3 +15642,21 @@ describe("cards from hand taking {2} off", () => {
     expect(face.additionalCost).toEqual({ exileFromHandReduces: { filter: { colors: ["B"] }, each: 2 } });
   });
 });
+
+describe("a permission for one creature spell from your graveyard", () => {
+  it("reads Chainer, Nightmare Adept's activation", () => {
+    const face = parseFace({
+      name: "Chainer, Nightmare Adept",
+      type_line: "Legendary Creature — Human Minion",
+      mana_cost: "{2}{B}{R}",
+      colors: ["B", "R"],
+      oracle_text: "Discard a card: You may cast a creature spell from your graveyard this turn. Activate only once each turn.",
+    });
+    expect(face.activated[0].effect).toEqual({
+      kind: "player-effect",
+      duration: "end-of-turn",
+      castFromGraveyard: { filter: { type: "creature" }, once: true },
+    });
+    expect(face.activated[0].oncePerTurn).toBe(true);
+  });
+});
