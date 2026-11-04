@@ -7085,18 +7085,23 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 ### Killing Wave: a question for each creature, the one asked about lit up
 
-- **Do:** Cast Killing Wave with X = 2. Pay for the first Grizzly Bears, not for the second.
-- **Expect:** Each question names Grizzly Bears and lights the one it means. Your life drops by 2 at once, but nothing is sacrificed until Bob has answered for Hill Giant; then the second Bears and Hill Giant (if Bob declines) go together.
+- **Do:** Click Killing Wave, set X to 2 and Confirm. Click Yes for the first Grizzly Bears and No for the second.
+- **Expect:** Each question names Grizzly Bears and lights the one it means. Your life drops by 2 at once and the second Bears stays until Bob has answered for Hill Giant. Then the second Bears goes. If Bob paid, he's lost 2 life and keeps Hill Giant; if not, it goes at the same moment as your Bears.
 
 ### Killing Wave: four players, each answering in turn
 
-- **Do:** Cast Killing Wave with X = 2. Pay for your Grizzly Bears, then wait.
-- **Expect:** Bob, Carol and Dave are asked in turn, one creature each. Everything they declined goes at the same moment, after the last answer.
+- **Do:** Click Killing Wave, set X to 2 and Confirm. Click Yes for your Grizzly Bears, then wait.
+- **Expect:** Bob, Carol and Dave answer in turn, one creature each. Each who pays loses 2 life and keeps the creature. Any they don't pay for go at the same moment, after the last answer.
 
 ### Distended Mindbender: one card of each kind from a revealed hand
 
-- **Do:** Cast Distended Mindbender for {8}, clicking Pay with mana, and target Bob. In the popup, click Lightning Bolt, then Grizzly Bears, then Craw Wurm, and Confirm with one of each.
-- **Expect:** The banner names both kinds. Forest can't be taken. Confirm is off for two small cards, on for one small and Craw Wurm; both go to Bob's graveyard while Mindbender is still on the stack.
+- **Do:** Click Distended Mindbender in your hand (the mana and Bob as the target are settled for you). In the popup, click Lightning Bolt and Craw Wurm, then Confirm.
+- **Expect:** The popup's title names both kinds, and Forest can't be taken. Both chosen cards go to Bob's graveyard together, then Mindbender resolves.
+
+### Moonlight Bargain: the popup states the price of each card kept
+
+- **Do:** Click Moonlight Bargain. In the popup, click two cards and Confirm.
+- **Expect:** The popup says 2 life for each card kept. At 5 life you can take two and no more. You drop to 1 life, the two are in your hand, and the other three are in your graveyard.
 
 ### Jetsam: one spell from each opponent, in the order you pick
 

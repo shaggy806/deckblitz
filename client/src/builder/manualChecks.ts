@@ -10631,6 +10631,18 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'Moonlight Bargain: the popup states the price of each card kept',
+    board({
+      you: {
+        bf: ['Swamp*5'],
+        hand: ['Moonlight Bargain'],
+        life: 5,
+        lib: ['Shock', 'Opt', 'Counterspell', 'Forest', 'Plains'],
+      },
+      opp: [{}],
+    }),
+  ),
+  preset(
     'Killing Wave: a question for each creature, the one asked about lit up',
     board({
       you: { bf: ['Swamp*4', 'Grizzly Bears', 'Grizzly Bears'], hand: ['Killing Wave'] },

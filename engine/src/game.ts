@@ -36114,6 +36114,7 @@ export class Game {
           more?.anOpponent === true,
           more?.underOwners === true,
           more?.faceDownLooks,
+          more?.prompt,
         );
       },
     };
@@ -36185,6 +36186,8 @@ export class Game {
     underOwners = false,
     /** See `look-and-choose`'s `faceDownLooks`. */
     faceDownLooks?: "chooser" | "nobody",
+    /** See `look-and-choose`'s `prompt`. */
+    authoredPrompt?: string,
   ): void {
     // The exile zone (a processor, Oblivion Sower): only what may be
     // chosen is shown — the cards `player` owns when someone else is
@@ -36366,6 +36369,7 @@ export class Game {
       ...(secondPick !== undefined ? { secondPick } : {}),
       ...(exileLink !== undefined ? { exileLink } : {}),
       ...(faceDownLooks !== undefined ? { faceDownLooks } : {}),
+      ...(authoredPrompt !== undefined ? { prompt: authoredPrompt } : {}),
       // "You may play the exiled card this turn" (Florian, Voldaren Scion).
       ...(impulseGrant !== undefined && (destination === "exile" || destination === "exile-face-down")
         ? { impulseGrant }

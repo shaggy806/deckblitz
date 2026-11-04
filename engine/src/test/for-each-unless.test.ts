@@ -172,6 +172,15 @@ describe("for-each-unless over permanents", () => {
 });
 
 describe("for-each-unless over cards", () => {
+  it("Moonlight Bargain: the offer states the price", () => {
+    const { game } = table();
+    lands(game, "Swamp", 5);
+    cast(game, toHand(game, "Moonlight Bargain"), { settle: false });
+    question(game);
+    const offer = game.legalActions(A).find((la) => la.kind === "choose-from-zone");
+    expect(offer?.kind === "choose-from-zone" && offer.prompt).toContain("2 life");
+  });
+
   it("Sirocco: only blue instants, each asked; the rest discarded together", () => {
     const { game, b } = table();
     for (const id of [...hand(game, B)]) game.debugMove(id, "library");

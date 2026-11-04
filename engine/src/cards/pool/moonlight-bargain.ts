@@ -20,6 +20,7 @@ export default defineCard({
         max: { lifePaymentsOf: 2 },
         destination: "hand",
         leftover: "graveyard",
+        prompt: "Choose the cards to keep, paying 2 life for each; the rest go to your graveyard",
       },
       { kind: "lose-life", amount: { product: [{ thisWay: "chosen" }, 2] }, who: "you" },
     ],

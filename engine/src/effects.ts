@@ -10084,6 +10084,9 @@ export type EffectSpec =
        * it"). `"nobody"`: "exile a card from your hand face down", no more
        * said (Summoner's Egg's ruling: you can't look once it's imprinted). */
       readonly faceDownLooks?: "chooser" | "nobody";
+      /** What the chooser is told, when the zone and destination wouldn't say
+       * it: Moonlight Bargain's price for each card kept. */
+      readonly prompt?: string;
       /** Chosen cards bound for the battlefield enter **tapped** (Terrain
        * Generator). */
       readonly enterTapped?: boolean;
@@ -12540,6 +12543,7 @@ export interface EffectApi {
       readonly underYou?: true;
       readonly underOwners?: true;
       readonly faceDownLooks?: "chooser" | "nobody";
+      readonly prompt?: string;
     },
   ): void;
   /** A `choose-from-zone` an `offer-zone-choice` carries: ask it now. */
@@ -19602,6 +19606,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           ...(spec.under === "you" ? { underYou: true as const } : {}),
           ...(spec.under === "owners" ? { underOwners: true as const } : {}),
           ...(spec.faceDownLooks !== undefined ? { faceDownLooks: spec.faceDownLooks } : {}),
+          ...(spec.prompt !== undefined ? { prompt: spec.prompt } : {}),
         },
       );
       return;
