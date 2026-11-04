@@ -551,6 +551,7 @@ import _poolOjiTheExquisiteBlade from "../pool/oji-the-exquisite-blade.js";
 import _poolOldGnawbone from "../pool/old-gnawbone.js";
 import _poolOnSerrasWings from "../pool/on-serras-wings.js";
 import _poolOpalAcrolith from "../pool/opal-acrolith.js";
+import _poolOpenTheWay from "../pool/open-the-way.js";
 import _poolOraclesInsight from "../pool/oracles-insight.js";
 import _poolOrahSkyclaveHierophant from "../pool/orah-skyclave-hierophant.js";
 import _poolOrchardElemental from "../pool/orchard-elemental.js";
@@ -779,6 +780,7 @@ import _poolTheAstonishingAntMan from "../pool/the-astonishing-ant-man.js";
 import _poolTheFalconAirshipRestored from "../pool/the-falcon-airship-restored.js";
 import _poolTheHuntsmansRedemption from "../pool/the-huntsmans-redemption.js";
 import _poolThePrismaticBridge from "../pool/the-prismatic-bridge.js";
+import _poolTheSkullsporeNexus from "../pool/the-skullspore-nexus.js";
 import _poolTheTwelfthDoctor from "../pool/the-twelfth-doctor.js";
 import _poolThermalGlider from "../pool/thermal-glider.js";
 import _poolThingSwing from "../pool/thing-swing.js";
@@ -1474,6 +1476,7 @@ const shard: CardShard = {
     _poolOldGnawbone,
     _poolOnSerrasWings,
     _poolOpalAcrolith,
+    _poolOpenTheWay,
     _poolOraclesInsight,
     _poolOrahSkyclaveHierophant,
     _poolOrchardElemental,
@@ -1702,6 +1705,7 @@ const shard: CardShard = {
     _poolTheFalconAirshipRestored,
     _poolTheHuntsmansRedemption,
     _poolThePrismaticBridge,
+    _poolTheSkullsporeNexus,
     _poolTheTwelfthDoctor,
     _poolThermalGlider,
     _poolThingSwing,

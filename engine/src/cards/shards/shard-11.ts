@@ -350,6 +350,7 @@ import _poolGustOfWind from "../pool/gust-of-wind.js";
 import _poolGutlessGhoul from "../pool/gutless-ghoul.js";
 import _poolHaggle from "../pool/haggle.js";
 import _poolHallowedHaunting from "../pool/hallowed-haunting.js";
+import _poolHallowedRespite from "../pool/hallowed-respite.js";
 import _poolHarbingerOfSpring from "../pool/harbinger-of-spring.js";
 import _poolHatchingPlans from "../pool/hatching-plans.js";
 import _poolHauntingFigment from "../pool/haunting-figment.js";
@@ -1273,6 +1274,7 @@ const shard: CardShard = {
     _poolGutlessGhoul,
     _poolHaggle,
     _poolHallowedHaunting,
+    _poolHallowedRespite,
     _poolHarbingerOfSpring,
     _poolHatchingPlans,
     _poolHauntingFigment,

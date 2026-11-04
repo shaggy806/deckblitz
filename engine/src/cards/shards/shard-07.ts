@@ -914,6 +914,7 @@ import _tokensCragflame from "../tokens/cragflame.js";
 import _tokensDrakeToken from "../tokens/drake-token.js";
 import _tokensEggToken from "../tokens/egg-token.js";
 import _tokensElfToken from "../tokens/elf-token.js";
+import _tokensFungusDinosaurToken from "../tokens/fungus-dinosaur-token.js";
 import _tokensGoblinTokenGoblinSpymaster from "../tokens/goblin-token-goblin-spymaster.js";
 import _tokensGreenElementalToken44 from "../tokens/green-elemental-token-4-4.js";
 import _tokensHorrorTokenBlack00 from "../tokens/horror-token-black-0-0.js";
@@ -1853,6 +1854,7 @@ const shard: CardShard = {
     _tokensDrakeToken,
     _tokensEggToken,
     _tokensElfToken,
+    _tokensFungusDinosaurToken,
     _tokensGoblinTokenGoblinSpymaster,
     _tokensGreenElementalToken44,
     _tokensHorrorTokenBlack00,

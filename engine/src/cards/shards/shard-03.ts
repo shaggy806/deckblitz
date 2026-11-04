@@ -388,6 +388,7 @@ import _poolKorCartographer from "../pool/kor-cartographer.js";
 import _poolKorFirewalker from "../pool/kor-firewalker.js";
 import _poolKorScythemaster from "../pool/kor-scythemaster.js";
 import _poolKozilekButcherOfTruth from "../pool/kozilek-butcher-of-truth.js";
+import _poolKozilekTheGreatDistortion from "../pool/kozilek-the-great-distortion.js";
 import _poolKrarkClanStoker from "../pool/krark-clan-stoker.js";
 import _poolKraulForagers from "../pool/kraul-foragers.js";
 import _poolKravensCats from "../pool/kravens-cats.js";
@@ -498,6 +499,7 @@ import _poolPardicLancer from "../pool/pardic-lancer.js";
 import _poolPathbreakerWurm from "../pool/pathbreaker-wurm.js";
 import _poolPenregonStrongbull from "../pool/penregon-strongbull.js";
 import _poolPersist from "../pool/persist.js";
+import _poolPheliaExuberantShepherd from "../pool/phelia-exuberant-shepherd.js";
 import _poolPiggyBank from "../pool/piggy-bank.js";
 import _poolPilfer from "../pool/pilfer.js";
 import _poolPlantElemental from "../pool/plant-elemental.js";
@@ -664,6 +666,7 @@ import _poolSteamVents from "../pool/steam-vents.js";
 import _poolSteelcladSpirit from "../pool/steelclad-spirit.js";
 import _poolSteelyResolve from "../pool/steely-resolve.js";
 import _poolSterlingHound from "../pool/sterling-hound.js";
+import _poolStingTheGlintingDagger from "../pool/sting-the-glinting-dagger.js";
 import _poolStinkdrinkerDaredevil from "../pool/stinkdrinker-daredevil.js";
 import _poolStirTheGrave from "../pool/stir-the-grave.js";
 import _poolStompAndHowl from "../pool/stomp-and-howl.js";
@@ -1223,6 +1226,7 @@ const shard: CardShard = {
     _poolKorFirewalker,
     _poolKorScythemaster,
     _poolKozilekButcherOfTruth,
+    _poolKozilekTheGreatDistortion,
     _poolKrarkClanStoker,
     _poolKraulForagers,
     _poolKravensCats,
@@ -1333,6 +1337,7 @@ const shard: CardShard = {
     _poolPathbreakerWurm,
     _poolPenregonStrongbull,
     _poolPersist,
+    _poolPheliaExuberantShepherd,
     _poolPiggyBank,
     _poolPilfer,
     _poolPlantElemental,
@@ -1499,6 +1504,7 @@ const shard: CardShard = {
     _poolSteelcladSpirit,
     _poolSteelyResolve,
     _poolSterlingHound,
+    _poolStingTheGlintingDagger,
     _poolStinkdrinkerDaredevil,
     _poolStirTheGrave,
     _poolStompAndHowl,

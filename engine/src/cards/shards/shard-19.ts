@@ -595,6 +595,7 @@ import _poolOgreBerserker from "../pool/ogre-berserker.js";
 import _poolOgreMarauder from "../pool/ogre-marauder.js";
 import _poolOgreSiegebreaker from "../pool/ogre-siegebreaker.js";
 import _poolOmenMachine from "../pool/omen-machine.js";
+import _poolOnduSpiritdancer from "../pool/ondu-spiritdancer.js";
 import _poolOpalineBracers from "../pool/opaline-bracers.js";
 import _poolOppressiveWill from "../pool/oppressive-will.js";
 import _poolOrderOfTheWhiteShield from "../pool/order-of-the-white-shield.js";
@@ -1562,6 +1563,7 @@ const shard: CardShard = {
     _poolOgreMarauder,
     _poolOgreSiegebreaker,
     _poolOmenMachine,
+    _poolOnduSpiritdancer,
     _poolOpalineBracers,
     _poolOppressiveWill,
     _poolOrderOfTheWhiteShield,

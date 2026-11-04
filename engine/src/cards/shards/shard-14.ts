@@ -559,6 +559,7 @@ import _poolOakenBrawler from "../pool/oaken-brawler.js";
 import _poolOasis from "../pool/oasis.js";
 import _poolObeliskOfNaya from "../pool/obelisk-of-naya.js";
 import _poolOblivionStone from "../pool/oblivion-stone.js";
+import _poolObzedatGhostCouncil from "../pool/obzedat-ghost-council.js";
 import _poolOldFlitterfang from "../pool/old-flitterfang.js";
 import _poolOnAlert from "../pool/on-alert.js";
 import _poolOnyxGoblet from "../pool/onyx-goblet.js";
@@ -1473,6 +1474,7 @@ const shard: CardShard = {
     _poolOasis,
     _poolObeliskOfNaya,
     _poolOblivionStone,
+    _poolObzedatGhostCouncil,
     _poolOldFlitterfang,
     _poolOnAlert,
     _poolOnyxGoblet,

@@ -40,6 +40,7 @@ import _poolArtisanOfForms from "../pool/artisan-of-forms.js";
 import _poolArwenUndomiel from "../pool/arwen-undomiel.js";
 import _poolAshPartyCrasher from "../pool/ash-party-crasher.js";
 import _poolAshiokNightmareMuse from "../pool/ashiok-nightmare-muse.js";
+import _poolAshlingFlameDancer from "../pool/ashling-flame-dancer.js";
 import _poolAstralWingspan from "../pool/astral-wingspan.js";
 import _poolAtlanteanCavalry from "../pool/atlantean-cavalry.js";
 import _poolAttendedKnight from "../pool/attended-knight.js";
@@ -956,6 +957,7 @@ const shard: CardShard = {
     _poolArwenUndomiel,
     _poolAshPartyCrasher,
     _poolAshiokNightmareMuse,
+    _poolAshlingFlameDancer,
     _poolAstralWingspan,
     _poolAtlanteanCavalry,
     _poolAttendedKnight,
