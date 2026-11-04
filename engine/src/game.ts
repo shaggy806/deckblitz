@@ -25168,29 +25168,20 @@ export class Game {
       if (at.untilYourNextTurn !== true && at.forGame !== true && at.turn !== this.state.turn.number) continue;
       if (this.state.players[delayed.controller]?.hasLost !== false) continue;
       // A copy of a spell has ceased to exist by now (rule 707.10a — Molten
-      // Tide, always a copy), and its ability goes on; there's no one else's
-      // side to read, so a `who` about the source itself doesn't match.
-      const source = this.state.objects[delayed.source];
-      const holder =
-        source === undefined || source.controller === delayed.controller ? source : { ...source, controller: delayed.controller };
-      const matches =
-        trigger.who === "any" ||
-        (trigger.who === "you-control"
-          ? tapped.controller === delayed.controller
-          : trigger.who === "opponent"
-            ? tapped.controller !== delayed.controller
-            : holder !== undefined && this.matchesWho(trigger.who, tapped.id, holder));
-      if (!matches) continue;
+      // Tide, always a copy), and its ability goes on.
+      const source = this.state.objects[delayed.source] ?? delayed.sourceCopy;
+      if (source === undefined) continue;
+      const holder = source.controller === delayed.controller ? source : { ...source, controller: delayed.controller };
+      if (!this.matchesWho(trigger.who, tapped.id, holder)) continue;
       if (
         trigger.filter !== undefined &&
         !matchesFilter(this.state, this.registry, tapped.id, trigger.filter, { you: delayed.controller, source: delayed.source })
       ) {
         continue;
       }
-      const producing =
-        trigger.producing === "chosen" ? (holder !== undefined ? chosenManaType(holder) : undefined) : trigger.producing;
+      const producing = trigger.producing === "chosen" ? chosenManaType(holder) : trigger.producing;
       if (trigger.producing !== undefined && producing === undefined) continue;
-      const tag = holder !== undefined ? this.manaTagFor(holder, effect) : undefined;
+      const tag = this.manaTagFor(holder, effect);
       out.push({
         mana: effect.mana,
         amount:
@@ -25237,11 +25228,11 @@ export class Game {
     const land = this.state.objects[tapped];
     const stint = land?.zone === "battlefield" ? (land.zoneChangeCount ?? 0) : land?.lastKnown?.zoneChangeCount;
     for (const extra of riders) {
-      const holder = this.state.objects[extra.holder];
-      if (holder === undefined || extra.also === undefined) continue;
+      const controller = extra.controller ?? this.state.objects[extra.holder]?.controller;
+      if (controller === undefined || extra.also === undefined) continue;
       applyEffectSpec(
         extra.also,
-        this.makeResolutionContext(extra.holder, extra.controller ?? holder.controller, [], 0, 0, tapped, 1, 0, [], {
+        this.makeResolutionContext(extra.holder, controller, [], 0, 0, tapped, 1, 0, [], {
           player,
           ...(stint !== undefined ? { triggerObject: stint } : {}),
         }),
@@ -27862,7 +27853,9 @@ export class Game {
       // A triggered mana ability (rule 605.1b) doesn't use the stack:
       // `tappedForManaExtras` made its mana with the rest.
       if (isDelayedManaAbility(at.whenever, at.targets, trigger.effect)) continue;
-      const source = this.state.objects[trigger.source];
+      // A copied spell has ceased to exist by now (rule 707.10a), and it's
+      // still the source (603.7d) of an ability with a duration to run.
+      const source = this.state.objects[trigger.source] ?? trigger.sourceCopy;
       if (source === undefined) continue;
       const aboutSelf =
         ("who" in at.whenever && at.whenever.who === "self") || ("to" in at.whenever && at.whenever.to === "self");
@@ -47039,6 +47032,7 @@ export class Game {
         this.state.turn.step === "end" || this.state.turn.step === "cleanup",
       source,
       sourceName: object === undefined ? "a spell" : printedCardName(object),
+      ...(object?.isCopy === true && typeof when === "object" && "whenever" in when ? { sourceCopy: { ...object } } : {}),
       // Captured by value: the ability chooses no new targets when it fires
       // (its text doesn't say "target", rule 115.10a; it acts on these,
       // 603.7c), and the effect that set it up is long gone by then.

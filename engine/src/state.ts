@@ -5141,6 +5141,12 @@ export interface DelayedTrigger {
    * is normal and fine (rule 603.7e). */
   readonly source: ObjectId;
   readonly sourceName: string;
+  /** A copy of a spell as it set up a `whenever` delayed ability: the copy
+   * ceases to exist as it leaves the stack (rule 707.10a) and is still this
+   * ability's source (603.7d), with its stated duration still to run. What
+   * the ability reads its source's side from once there's nothing at `source`.
+   * Twincast on Glimpse of Nature; every prepare spell is such a copy. */
+  readonly sourceCopy?: GameObject;
   /**
    * Targets captured when it was created. A delayed ability doesn't choose
    * new targets — its text doesn't say "target" (rules 115.1d, 115.10a) —

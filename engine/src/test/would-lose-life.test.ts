@@ -79,6 +79,17 @@ describe("Bloodletter of Aclazotz", () => {
     expect(life(game, B)).toBe(0); // 20 to 10 is a loss of 10, doubled
   });
 
+  it("doubles a loss from an exchange of life totals, and the gain stays (rule 701.12c)", () => {
+    const { game } = table();
+    letter(game);
+    game.state.players[A].life = 10;
+    game.state.players[B].life = 16; // A gains 6; B would lose 6, and loses 12
+    lands(game, "Swamp", 6);
+    activate(game, spawn(game, "Soul Conduit", A), 0, { targets: [ref(A), ref(B)] });
+    expect(life(game, A)).toBe(16);
+    expect(life(game, B)).toBe(4);
+  });
+
   it("a trigger on the loss sees the doubled amount", () => {
     const { game } = table();
     letter(game);
