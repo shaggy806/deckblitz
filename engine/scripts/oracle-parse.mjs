@@ -1836,6 +1836,14 @@ export function parseTrigger(clause) {
   if (/^Whenever ~ attacks a player$/.test(c)) return self("attacks").map((t) => ({ ...t, defender: "player" }));
   if (/^Whenever ~ blocks$/.test(c)) return self("blocks");
   if (/^Whenever ~ becomes blocked$/.test(c)) return self("becomes-blocked");
+  // "That creature": the one it blocks (Wall of Dust).
+  if (/^Whenever ~ blocks a creature$/.test(c)) return [{ on: "blocks", who: "self", object: "blocked" }];
+  if (/^Whenever ~ attacks alone$/.test(c)) return [{ on: "attacks-alone", who: "self" }];
+  // "Whenever two or more creatures your opponents control attack" (Flummoxed
+  // Cyclops): once per declaration.
+  if ((m = /^Whenever (two|three|four|five) or more creatures your opponents control attack$/.exec(c))) {
+    return [{ on: "attack-with", who: "opponent", atLeast: NUMBERS[m[1]] }];
+  }
   // Once for each creature blocked or blocking (rules 509.3b, 509.3d), that
   // creature the trigger object: the blocker's event for the one it blocks,
   // the attacker's for the one blocking it.
@@ -5895,6 +5903,49 @@ export function parseSentence(sentence, ctx) {
   if ((m = re(`(~|${TARGET}) can't be blocked this turn`).exec(s))) {
     return { kind: "grant-keyword", target: m[1] === "~" ? "source" : slot(m[1]), keyword: "unblockable", duration: "end-of-turn" };
   }
+  // "This combat" and "until end of combat" (rules 500.5a, 511.2): Ma Chao's
+  // "it can't be blocked this combat", Flummoxed Cyclops's "can't block this
+  // combat", Battering Ram's "gains banding until end of combat".
+  if ((m = re(`(~|it|${TARGET}) can't (attack|block|be blocked) this combat`).exec(s))) {
+    const target = m[1] === "~" ? "source" : m[1].toLowerCase() === "it" ? (ctx.targets.length === 0 ? ctx.it : undefined) : slot(m[1]);
+    if (target === undefined) return null;
+    const restriction = { attack: "cant-attack", block: "cant-block", "be blocked": "cant-be-blocked" }[m[2].toLowerCase()];
+    return { kind: "restrict", target, restrictions: [restriction], duration: "until-end-of-combat" };
+  }
+  if ((m = re(`~ gains (banding|first strike|flying|trample|vigilance) until end of combat`).exec(s))) {
+    return { kind: "grant-keyword", target: "source", keyword: m[1].toLowerCase().replace(" ", "-"), duration: "until-end-of-combat" };
+  }
+  if ((m = re(`(${TARGET}) can't attack this turn`).exec(s))) return { kind: "restrict", target: slot(m[1]), restrictions: ["cant-attack"] };
+  // "That creature can't attack during its controller's next turn" (Wall of
+  // Dust): the next turn alone, not before it.
+  if (ctx.it === "trigger-object" && ctx.targets.length === 0 && /^(?:that creature|it) can't attack during its controller's next turn\.$/i.test(s)) {
+    return { kind: "restrict", target: "trigger-object", restrictions: ["cant-attack"], duration: "its-controllers-next-turn" };
+  }
+  // "Until your next turn, target creature can't attack or block and its
+  // activated abilities can't be activated" (Edifice of Authority): detain in
+  // all but name; and "gets -3/-0 and its activated abilities can't be
+  // activated" (Dovin Baan's +1).
+  if ((m = re(`until your next turn, (${TARGET}) can't attack or block,? and its activated abilities can't be activated`).exec(s))) {
+    const target = slot(m[1]);
+    return {
+      kind: "sequence",
+      effects: [
+        { kind: "restrict", target, restrictions: ["cant-attack", "cant-block"], duration: "until-your-next-turn" },
+        { kind: "prohibit", target, abilities: true, duration: "until-your-next-turn" },
+      ],
+    };
+  }
+  if ((m = re(`until your next turn, (up to one ${TARGET}|${TARGET}) gets ([+-]\\d+)/([+-]\\d+) and its activated abilities can't be activated`).exec(s))) {
+    const target = /^up to one /i.test(m[1]) ? quantifiedSlots(m[1], ctx)?.slots[0] : slot(m[1]);
+    if (target === undefined) return null;
+    return {
+      kind: "sequence",
+      effects: [
+        { kind: "modify-pt", target, power: Number(m[2]), toughness: Number(m[3]), duration: "until-your-next-turn" },
+        { kind: "prohibit", target, abilities: true, duration: "until-your-next-turn" },
+      ],
+    };
+  }
   // "Two target creatures you control that share a creature type can't be
   // blocked this turn" (Secret Tunnel): each of the pair.
   if ((m = /^(two target .+ that share (?:a card type|a creature type|no creature types)) can't be blocked this turn\.$/i.exec(s))) {
@@ -7571,6 +7622,66 @@ export function parseEffect(text, outer) {
   let skip = 0;
   const becomes = becomesWithAbilitiesOf(text);
   if (becomes !== null) return { effect: becomes, todo: [], hints: [] };
+
+  // "Choose target nonland permanent an opponent controls. Until your next
+  // turn, it can't attack or block, and its activated abilities can't be
+  // activated" (Linvala, Shield of Sea Gate): "it" is that target.
+  const chooseThenBind = /^Choose (target [^.]+)\. Until your next turn, it can't attack or block,? and its activated abilities can't be activated\.$/i.exec(text);
+  if (chooseThenBind !== null) {
+    const spec = targetOf(chooseThenBind[1]);
+    if (spec !== undefined) {
+      const target = ctx.target(spec);
+      return {
+        effect: {
+          kind: "sequence",
+          effects: [
+            { kind: "restrict", target, restrictions: ["cant-attack", "cant-block"], duration: "until-your-next-turn" },
+            { kind: "prohibit", target, abilities: true, duration: "until-your-next-turn" },
+          ],
+        },
+        todo: [],
+        hints: [],
+      };
+    }
+  }
+  // "Choose hexproof or indestructible. Creatures you control gain that
+  // ability until end of turn" (Linvala's sacrifice): chosen as it resolves,
+  // an unannounced `modal`.
+  const chooseKeyword = /^Choose ([a-z]+(?: strike)?) or ([a-z]+(?: strike)?)\. Creatures you control gain that ability until end of turn\.$/.exec(text);
+  if (chooseKeyword !== null) {
+    const words = [chooseKeyword[1], chooseKeyword[2]];
+    const filter = { type: "creature", controlledBy: "you" };
+    return {
+      effect: {
+        kind: "modal",
+        minModes: 1,
+        maxModes: 1,
+        modes: words.map((word) => ({
+          text: word[0].toUpperCase() + word.slice(1),
+          effect: { kind: "grant-keyword-all", filter, keyword: word.replace(" ", "-"), duration: "end-of-turn" },
+        })),
+      },
+      todo: [],
+      hints: [],
+    };
+  }
+  // "Goad all creatures your opponents control. Until your next turn, those
+  // creatures can't block" (Taunt from the Rampart): the set fixed as it
+  // resolves.
+  if (/^Goad all creatures your opponents control\. Until your next turn, those creatures can't block\.$/i.test(text)) {
+    const filter = { type: "creature", controlledBy: "opponent" };
+    return {
+      effect: {
+        kind: "sequence",
+        effects: [
+          { kind: "goad", filter },
+          { kind: "restrict", filter, asItResolves: true, restrictions: ["cant-block"], duration: "until-your-next-turn" },
+        ],
+      },
+      todo: [],
+      hints: [],
+    };
+  }
 
   // "For each player, choose friend or foe. Each friend …. Each foe …": a
   // sentence about each player, then that player's scope put in its place.
@@ -14543,6 +14654,8 @@ function itOf(triggers) {
   if (triggers.every((t) => t.on === "deals-damage" && t.to === "creature")) return "trigger-recipient";
   // "That creature": the one it blocks or that blocks it.
   if (triggers.every((t) => (t.on === "blocks" && t.object === "blocked") || t.on === "blocked-by")) return "trigger-object";
+  // "Whenever Ma Chao attacks alone, it …".
+  if (triggers.every((t) => t.on === "attacks-alone" && t.who === "self")) return "source";
   const objectEvents = ["enters-battlefield", "dies", "attacks", "blocks", "becomes-blocked", "deals-combat-damage-to-player", "tapped-for-mana"];
   if (triggers.every((t) => t.who === "self" && objectEvents.includes(t.on))) return "source";
   // The permanent a spell or ability targeted ("that creature" — Monk Gyatso).

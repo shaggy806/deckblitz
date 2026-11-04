@@ -1832,6 +1832,7 @@ function lasting(
     return { whileSource: source };
   }
   if (typeof duration === "object" || duration === "end-of-turn" || duration === "permanent") return duration;
+  if (duration === "until-end-of-combat") return { untilEndOfCombat: true };
   return duration === "until-your-next-turn" ? { untilTurnOf: you } : { untilPoint: untilPointOf(duration, you) };
 }
 
@@ -1852,9 +1853,10 @@ function untilPointOf(duration: UntilPointDuration, you: PlayerId): UntilPoint {
 /** A modifier's duration fields for `duration`. */
 function durationFields(
   duration: EffectDuration,
-): Pick<PtModifier, "untilEndOfTurn" | "untilTurnOf" | "untilPoint" | "whileCounter" | "whileSource"> {
+): Pick<PtModifier, "untilEndOfTurn" | "untilEndOfCombat" | "untilTurnOf" | "untilPoint" | "whileCounter" | "whileSource"> {
   if (duration === "end-of-turn") return { untilEndOfTurn: true };
   if (duration === "permanent") return { untilEndOfTurn: false };
+  if ("untilEndOfCombat" in duration) return { untilEndOfTurn: true, untilEndOfCombat: true };
   if ("whileSource" in duration) {
     return duration.whileSource === null ? { untilEndOfTurn: false } : { untilEndOfTurn: false, whileSource: duration.whileSource };
   }
@@ -8625,6 +8627,17 @@ export class Game {
         object.modifiers = object.modifiers.filter(
           (m) => m.untilTurnOf === undefined || !beginningFor.includes(m.untilTurnOf),
         );
+      }
+      // "Can't attack during its controller's next turn" (Wall of Dust): that
+      // turn has come, or never will (rule 800.4a's player who left).
+      if (object?.modifiers.some((m) => m.restrictionsDuringTurnOf !== undefined && beginningFor.includes(m.restrictionsDuringTurnOf.player))) {
+        object.modifiers = object.modifiers.flatMap((m): PtModifier[] => {
+          const during = m.restrictionsDuringTurnOf;
+          if (during === undefined || !beginningFor.includes(during.player)) return [m];
+          if (during.player !== this.activePlayer) return [];
+          return [{ power: 0, toughness: 0, keywords: [], untilEndOfTurn: true, restrictions: [...during.restrictions] }];
+        });
+        invalidateComputedCache();
       }
       // A copy "until your next turn" (Taskmaster, Mercenary Mimic).
       if (
@@ -34219,7 +34232,9 @@ export class Game {
         }
       },
       restrict: (target, filter, restrictions, duration, cantBeBlockedBy, cantBlock, scope) =>
-        this.restrict(controller, target, filter, restrictions, lastingHere(duration ?? "end-of-turn"), cantBeBlockedBy, cantBlock, scope),
+        duration === "its-controllers-next-turn"
+          ? this.restrictDuringControllersNextTurn(controller, target, restrictions)
+          : this.restrict(controller, target, filter, restrictions, lastingHere(duration ?? "end-of-turn"), cantBeBlockedBy, cantBlock, scope),
       grantStatic: (target, filter, ability, duration) => {
         const kept = lastingHere(duration);
         // One effect, one timestamp (rule 613.7b), however many it reaches.
@@ -41211,6 +41226,37 @@ export class Game {
       player: controller,
       restrictions: [...restrictions],
       ...(duration === "end-of-turn" ? {} : { duration }),
+    });
+  }
+
+  /**
+   * "That creature can't attack during its controller's next turn" (Wall of
+   * Dust): nothing yet, then the restrictions for that one turn — held on the
+   * permanent as `PtModifier.restrictionsDuringTurnOf`, under whoever controls
+   * it as this resolves, and given to it as that player's next turn begins.
+   */
+  private restrictDuringControllersNextTurn(
+    controller: PlayerId,
+    target: TargetRef | undefined,
+    restrictions: readonly CombatRestriction[],
+  ): void {
+    if (target?.kind !== "object") return;
+    const id = this.splitOneFromStack(target.object);
+    const object = this.state.objects[id];
+    if (object === undefined || object.zone !== "battlefield") return;
+    object.modifiers.push({
+      power: 0,
+      toughness: 0,
+      keywords: [],
+      untilEndOfTurn: false,
+      restrictionsDuringTurnOf: { player: object.controller, restrictions: [...restrictions] },
+    });
+    this.emit({
+      type: "restrictions-imposed",
+      object: id,
+      player: controller,
+      restrictions: [...restrictions],
+      nextTurnOf: object.controller,
     });
   }
 

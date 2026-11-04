@@ -57,6 +57,8 @@ export type EffectDuration =
   | { readonly untilTurnOf: PlayerId }
   | { readonly untilPoint: UntilPoint }
   | { readonly whileCounter: string }
+  /** "This combat" / "until end of combat" (rules 500.5a, 511.2). */
+  | { readonly untilEndOfCombat: true }
   /** For as long as that permanent — the effect's source, in that stint —
    * remains on the battlefield; `null` when it had already left as the
    * effect would begin, so the effect doesn't (rule 611.2b). */
@@ -1504,6 +1506,8 @@ export type GameEvent =
       readonly restrictions: readonly CombatRestriction[];
       /** How long `object`'s last; absent means until end of turn. */
       readonly duration?: EffectDuration;
+      /** They apply only during this player's next turn (Wall of Dust). */
+      readonly nextTurnOf?: PlayerId;
     })
   | (Base & {
       /** A modal spell/ability's controller (or a "you may" clause) chose

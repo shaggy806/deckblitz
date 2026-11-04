@@ -361,6 +361,11 @@ export type PtDuration =
   | "end-of-turn"
   | "permanent"
   | "until-your-next-turn"
+  /** "This combat" / "until end of combat" (rules 500.5a, 511.2): it ends as
+   * the combat phase under way or next to come does (Ma Chao's "can't be
+   * blocked this combat", Battering Ram's "gains banding until end of
+   * combat"), or at this turn's cleanup with no combat to end. */
+  | "until-end-of-combat"
   | UntilPointDuration
   | { readonly whileCounter: string }
   /** "For as long as [this] remains on the battlefield" — the effect's own
@@ -6485,10 +6490,17 @@ export type EffectSpec =
        * usually `"source"`, the object it is as this resolves (rule 400.7).
        * A `target` form only; `restrictions` may then be empty. */
       readonly cantBlockAttacker?: EffectTargetRef;
-      /** How long a `target`'s restrictions last — this turn when omitted;
-       * `"while-source"` is Opportunistic Dragon's "for as long as this
-       * creature remains on the battlefield, … it can't attack or block". */
-      readonly duration?: PtDuration;
+      /** How long a `target`'s restrictions, or an `asItResolves` filter's,
+       * last — this turn when omitted; `"while-source"` is Opportunistic
+       * Dragon's "for as long as this creature remains on the battlefield, …
+       * it can't attack or block"; `"until-your-next-turn"` Taunt from the
+       * Rampart's "until your next turn, those creatures can't block";
+       * `"until-end-of-combat"` Ma Chao's "can't be blocked this combat".
+       * `"its-controllers-next-turn"` is a `target`'s alone: only *during*
+       * the next turn of whoever controls it as this resolves, and not until
+       * then (Wall of Dust's "can't attack during its controller's next
+       * turn"). */
+      readonly duration?: PtDuration | "its-controllers-next-turn";
     }
   | {
       /**
@@ -11542,8 +11554,8 @@ export interface EffectApi {
     target: TargetRef | undefined,
     filter: CardFilter | undefined,
     restrictions: readonly CombatRestriction[],
-    /** A `target`'s: this turn when omitted. */
-    duration?: PtDuration,
+    /** A `target`'s or an `asItResolves` filter's: this turn when omitted. */
+    duration?: PtDuration | "its-controllers-next-turn",
     cantBeBlockedBy?: CardFilter,
     /** The one attacker `target` can't block (`cantBlockAttacker`). */
     cantBlock?: TargetRef,
@@ -17495,7 +17507,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         const scopeTo = scopedController(spec.controlledByTarget, ctx);
         if (spec.controlledByTarget !== undefined && scopeTo === undefined) return;
         const spared = spec.exceptTarget === undefined ? undefined : ctx.targets[spec.exceptTarget];
-        ctx.restrict(undefined, spec.filter, spec.restrictions, undefined, spec.cantBeBlockedBy, undefined, {
+        ctx.restrict(undefined, spec.filter, spec.restrictions, spec.asItResolves === true ? spec.duration : undefined, spec.cantBeBlockedBy, undefined, {
           ...(scopeTo !== undefined ? { scopeTo } : {}),
           ...(spared?.kind === "object" ? { except: spared.object } : {}),
           ...(spec.asItResolves === true ? { asItResolves: true } : {}),

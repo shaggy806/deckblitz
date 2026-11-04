@@ -13767,3 +13767,56 @@ describe("how one player's state compares with another's", () => {
     ).toEqual({ who: "opponents", spells: { sameNameWith: "exiled-with-source" } });
   });
 });
+
+describe("restrictions for a duration", () => {
+  const read = (type_line: string, oracle_text: string, mana_cost = "{1}") =>
+    parseFace({ name: "Test Card", type_line, mana_cost, oracle_text }, { tokenFor: () => null });
+
+  it("until your next turn, on a target and on a set fixed as it resolves", () => {
+    const edifice = read("Artifact", "{1}, {T}: Until your next turn, target creature can't attack or block and its activated abilities can't be activated.");
+    expect(edifice.activated[0].effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "restrict", target: 0, restrictions: ["cant-attack", "cant-block"], duration: "until-your-next-turn" },
+        { kind: "prohibit", target: 0, abilities: true, duration: "until-your-next-turn" },
+      ],
+    });
+    const linvala = read(
+      "Creature — Angel",
+      "At the beginning of combat on your turn, choose target nonland permanent an opponent controls. Until your next turn, it can't attack or block, and its activated abilities can't be activated.",
+    );
+    expect(linvala.triggered[0].targets).toEqual(["nonland-permanent-an-opponent-controls"]);
+    expect(linvala.triggered[0].effect).toEqual(edifice.activated[0].effect);
+    const taunt = read("Sorcery", "Goad all creatures your opponents control. Until your next turn, those creatures can't block.");
+    const filter = { type: "creature", controlledBy: "opponent" };
+    expect(taunt.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "goad", filter },
+        { kind: "restrict", filter, asItResolves: true, restrictions: ["cant-block"], duration: "until-your-next-turn" },
+      ],
+    });
+  });
+
+  it("this combat, until end of combat, and its controller's next turn", () => {
+    const creature = (text: string) => read("Creature — Test", text);
+    expect(creature("Whenever this creature attacks alone, it can't be blocked this combat.").triggered[0]).toMatchObject({
+      trigger: { on: "attacks-alone", who: "self" },
+      effect: { kind: "restrict", target: "source", restrictions: ["cant-be-blocked"], duration: "until-end-of-combat" },
+    });
+    expect(creature("Whenever two or more creatures your opponents control attack, this creature can't block this combat.").triggered[0]).toMatchObject({
+      trigger: { on: "attack-with", who: "opponent", atLeast: 2 },
+      effect: { kind: "restrict", target: "source", restrictions: ["cant-block"], duration: "until-end-of-combat" },
+    });
+    expect(creature("At the beginning of combat on your turn, this creature gains banding until end of combat.").triggered[0].effect).toEqual({
+      kind: "grant-keyword",
+      target: "source",
+      keyword: "banding",
+      duration: "until-end-of-combat",
+    });
+    expect(creature("Whenever this creature blocks a creature, that creature can't attack during its controller's next turn.").triggered[0]).toMatchObject({
+      trigger: { on: "blocks", who: "self", object: "blocked" },
+      effect: { kind: "restrict", target: "trigger-object", restrictions: ["cant-attack"], duration: "its-controllers-next-turn" },
+    });
+  });
+});

@@ -3,6 +3,11 @@
  "source": "Per-commander triage of every unimplemented top-commanders.txt entry (AI agents reading Oracle text + rulings against the engine), normalized onto one feature vocabulary. See neededCards-features.md, 'The commander gap'.",
  "built": [
   "effect:emblem-grants-activated",
+  "effect:prohibit-abilities-until-your-next-turn",
+  "effect:restrict-until-your-next-turn",
+  "effect:restrict-during-controllers-next-turn",
+  "effect:restrict-until-end-of-combat",
+  "effect:grant-keyword-until-end-of-combat",
   "effect:emblem-grants-to-spells",
   "effect:counter-all-spells",
   "effect:counter-all-spells-named-linked-exile",

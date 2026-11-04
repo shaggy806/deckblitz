@@ -460,7 +460,15 @@ function eventText(event: GameEvent, nameOf: NameOf, seats: readonly SeatStatus[
       const what = event.restrictions.map((r) => RESTRICTION_TEXT[r]).join(' and ')
       return event.object === undefined
         ? `${who(event.player)}: for the rest of the turn, affected creatures ${what}`
-        : `${name(event.object)} ${what}${event.duration === undefined || event.duration === 'end-of-turn' ? ' this turn' : ''}`
+        : `${name(event.object)} ${what}${
+            event.nextTurnOf !== undefined
+              ? ` during ${who(event.nextTurnOf)}'s next turn`
+              : event.duration === undefined || event.duration === 'end-of-turn'
+                ? ' this turn'
+                : typeof event.duration === 'object' && 'untilEndOfCombat' in event.duration
+                  ? ' this combat'
+                  : ''
+          }`
     }
     case 'pt-modifier-expired':
       return `${event.objects.map(name).join(', ')} — modifiers wear off`

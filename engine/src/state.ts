@@ -1919,6 +1919,11 @@ export interface PtModifier {
   untilTurnOf?: PlayerId;
   /** "Until your next upkeep" and the like: see `UntilPoint`. */
   untilPoint?: UntilPoint;
+  /** Combat restrictions that apply only during this player's next turn
+   * (Wall of Dust's "can't attack during its controller's next turn"): this
+   * modifier does nothing until that turn begins, then becomes one with those
+   * `restrictions` until that turn's end. */
+  restrictionsDuringTurnOf?: { readonly player: PlayerId; readonly restrictions: readonly CombatRestriction[] };
   /** "Until end of combat" / "this combat" (rules 500.5a, 511.2): it ends as
    * the combat phase does — Legion Warboss's token "attacks this combat if
    * able", which a later combat that turn doesn't bind. Set with
