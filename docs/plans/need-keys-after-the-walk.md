@@ -897,7 +897,7 @@ missing. Re-run `--greedy` for Phase 2's order.
   `effect:emblem-triggered-abilities`; `zone:exile-face-down`, `mechanic:face-down`'s look, `condition:filter-same-name-as-source`,
   `condition:source-state`; `bug:simultaneous-zone-moves`, `bug:as-enters-choices-any-entry`,
   `amount:damage-dealt-by-spell-this-turn`, `effect:remove-attackers-and-forced-recombat`. 63 proving cards. The run: 52 families in six
-  rounds, four local agents at once, ending at the user's request with about 30 units of 5 cards left in the order.
+  rounds, four local agents at once, ending at the user's request with about 20 units of 5 cards left in the order.
 
 ## Rough size
 
