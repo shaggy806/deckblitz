@@ -15439,6 +15439,32 @@ describe("additional combats, at the beginning of that combat, and a creature's 
   });
 });
 
+describe("a discard cost of mana value X", () => {
+  it("reads Kozilek, the Great Distortion's ability and Knollspine Invocation's", () => {
+    const kozilek = parseFace({
+      name: "Test Card",
+      type_line: "Legendary Creature — Eldrazi",
+      mana_cost: "{8}{C}{C}",
+      colors: [],
+      power: "12",
+      toughness: "12",
+      oracle_text: "Discard a card with mana value X: Counter target spell with mana value X.",
+    });
+    expect(kozilek.complete).toBe(true);
+    expect(kozilek.activated[0].cost.discard).toEqual({ count: 1, manaValueX: true });
+    expect(kozilek.activated[0].targets).toEqual([{ kind: "spell", filter: { manaValue: { op: "eq", n: "x" } } }]);
+    const invocation = parseFace({
+      name: "Test Card",
+      type_line: "Enchantment",
+      mana_cost: "{1}{R}{R}",
+      colors: ["R"],
+      oracle_text: "{X}, Discard a card with mana value X: This enchantment deals X damage to any target.",
+    });
+    expect(invocation.complete).toBe(true);
+    expect(invocation.activated[0].cost).toEqual({ mana: "{X}", tap: false, discard: { count: 1, manaValueX: true } });
+  });
+});
+
 describe("a copy of the enchanted artifact, then a win on eight with one name", () => {
   it("reads Mechanized Production's", () => {
     const face = parseFace({

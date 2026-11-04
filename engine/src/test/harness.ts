@@ -73,6 +73,8 @@ export function table(
     step?: GameState["turn"]["step"];
     /** Alice's sideboard: her cards outside the game (rule 400.11a). */
     sideboard?: readonly string[];
+    /** Cards each player opens with (the rules' default otherwise). */
+    openingHandSize?: number;
   } = {},
 ): Table {
   const players = SEATS.slice(0, opts.players ?? 2);
@@ -81,7 +83,13 @@ export function table(
     seed: opts.seed ?? 1,
     shuffle: false,
     startingPlayer: A,
-    rules: { skipFirstDraw: false, maxLandsPerTurn: 99, maxHandSize: 99, startingLife: opts.life ?? 20 },
+    rules: {
+      skipFirstDraw: false,
+      maxLandsPerTurn: 99,
+      maxHandSize: 99,
+      startingLife: opts.life ?? 20,
+      ...(opts.openingHandSize !== undefined ? { openingHandSize: opts.openingHandSize } : {}),
+    },
     controllers: Object.fromEntries(players.map((p, i) => [p, seats[i]])),
     decks: players.map((player) => ({
       player,

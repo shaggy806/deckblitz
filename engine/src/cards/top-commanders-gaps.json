@@ -12,6 +12,7 @@
   "trigger:leaves-batch-trigger",
   "trigger:counters-put-on-players",
   "trigger:counters-a-spell-trigger",
+  "cost:discard-mana-value-x",
   "replacement:prevention-follow-up-on-recipient",
   "condition:own-turn-count",
   "effect:keep-one-of-each-permanent-type",

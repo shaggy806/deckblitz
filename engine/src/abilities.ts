@@ -153,11 +153,23 @@ export function costAnnouncesX(cost: AbilityCost): boolean {
     sacrificeCostReadsX(cost) ||
     cost.tapOthers?.count === "x" ||
     cost.discard?.count === "x" ||
+    cost.discard?.manaValueX === true ||
     cost.exileFromGraveyard?.count === "x" ||
     cost.reveal?.count === "x" ||
     cost.removeCounter?.count === "x" ||
     cost.payLife === "x"
   );
+}
+
+/** What a `discard` cost may discard at this X: "a card with mana value X"
+ * has its filter pinned to that X, the way a Shoal's pitched card is. */
+export function discardCostFilterAtX(
+  discard: NonNullable<AbilityCost["discard"]>,
+  x: number,
+): CardFilter | undefined {
+  return discard.manaValueX === true
+    ? { ...discard.filter, manaValue: { op: "eq", n: Math.max(0, Math.floor(x)) } }
+    : discard.filter;
 }
 
 /** A `tapOthers` cost with its count read at `x` ("Tap X untapped artifacts"). */
@@ -441,8 +453,17 @@ export interface AbilityCost {
    * activated, capped by the cards there are to discard. `random` is
    * "Discard a card at random" (Mage il-Vec, Ogre Shaman): the cards are
    * picked at random as the cost is paid, so there is nothing to ask.
+   * `manaValueX` is "Discard a card with mana value X" (Kozilek, the Great
+   * Distortion; Knollspine Invocation): X is announced as it's activated
+   * (rule 107.3a) though the mana cost needn't have `{X}`, the ability is
+   * offered once per X with such a card to discard, and only those may pay.
    */
-  readonly discard?: { readonly count: number | "x"; readonly filter?: CardFilter; readonly random?: boolean };
+  readonly discard?: {
+    readonly count: number | "x";
+    readonly filter?: CardFilter;
+    readonly random?: boolean;
+    readonly manaValueX?: boolean;
+  };
   /**
    * Exile `count` cards from your graveyard, matching `filter` if given, as
    * part of the cost — "{2}, Exile two cards from your graveyard" (Varina,

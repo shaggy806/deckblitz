@@ -1571,6 +1571,9 @@ export function parseCost(text) {
     else if (part === "Discard your hand") cost.discardHand = true;
     // "Discard a card at random" (Mage il-Vec): nothing to choose.
     else if (part === "Discard a card at random") cost.discard = { count: 1, random: true };
+    // "Discard a card with mana value X" (Kozilek, the Great Distortion): X
+    // announced as it's activated (rule 107.3a).
+    else if (part === "Discard a card with mana value X") cost.discard = { count: 1, manaValueX: true };
     // "Discard a card" (Mesmeric Trance), "Discard a creature card" (Volrath
     // the Fallen): which, chosen as it's paid (rule 602.2b).
     else if ((m = /^Discard an? (?:(\w+) )?card$/.exec(part))) {
@@ -3834,6 +3837,10 @@ export function parseSentence(sentence, ctx) {
   // On): one of them, chosen as this resolves.
   if (re(`(?:return|put) a card exiled with ~ (?:to|into) its owner's hand`).test(s)) {
     return { kind: "look-and-choose", zone: "exiled-with-source", min: 1, max: 1, destination: "hand", leftover: "stay" };
+  }
+  // "Counter target spell with mana value X" (Spell Blast; Kozilek, the Great Distortion).
+  if (re(`counter target spell with mana value X`).test(s)) {
+    return { kind: "counter", target: ctx.target({ kind: "spell", filter: { manaValue: { op: "eq", n: "x" } } }) };
   }
   // "Counter target spell with the same name as a card exiled with ~" (Mindreaver).
   if (re(`counter target spell with the same name as a card exiled with ~`).test(s)) {

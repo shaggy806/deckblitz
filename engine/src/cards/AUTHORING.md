@@ -3938,7 +3938,10 @@ tapOthers?, untap? }`.
   Burst).
 - `discard: { count, filter? }` — "Discard a card" (Yawgmoth, Thran
   Physician), "Discard two cards" (Solphim), "Discard a creature card"
-  (Fauna Shaman: `filter: { type: "creature" }`). The player picks which, with
+  (Fauna Shaman: `filter: { type: "creature" }`), "Discard a card with mana
+  value X" (Kozilek, the Great Distortion: `manaValueX: true`, X announced with
+  no `{X}` needed, the ability offered once per X with such a card, and a target
+  or an `{X}` in the mana reading the same X). The player picks which, with
   the ordinary `discard` decision, as the ability goes on the stack; with a
   filter only the matching cards are offered (`eligible`, which only that
   player sees). It gates activation on having `count` such cards besides the

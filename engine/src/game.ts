@@ -12,6 +12,7 @@ import {
   abilityLifeCost,
   chosenCounterCost,
   costAnnouncesX,
+  discardCostFilterAtX,
   isEquipAbility,
   isManaAbility,
   isDelayedManaAbility,
@@ -3702,11 +3703,19 @@ export class Game {
         ability.cost.exileFromGraveyard?.count === "x"
           ? this.graveyardCostCandidates(player, ability.cost.exileFromGraveyard.filter, source).length
           : undefined;
-      // "Discard X cards": as many as there are to discard.
+      // "Discard X cards": as many as there are to discard. "A card with
+      // mana value X": up to the largest there is.
       const discardX =
-        ability.cost.discard?.count === "x"
-          ? this.discardCandidates(player, ability.cost.discard.filter, source).length
-          : undefined;
+        ability.cost.discard?.manaValueX === true
+          ? Math.max(
+              0,
+              ...this.discardCandidates(player, ability.cost.discard.filter, source).map((id) =>
+                manaValueOfObject(this.registry, this.state.objects[id]),
+              ),
+            )
+          : ability.cost.discard?.count === "x"
+            ? this.discardCandidates(player, ability.cost.discard.filter, source).length
+            : undefined;
       // "Reveal X white cards from your hand": as many as there are.
       const revealX =
         ability.cost.reveal?.count === "x" ? this.revealCostCandidates(player, ability.cost.reveal, source).length : undefined;
@@ -3871,17 +3880,28 @@ export class Game {
       // How much X is left depends on a taxed target, so an X ability is
       // offered once per X too.
       const tapsX = ability.cost.tapOthers?.count === "x";
-      if (maxX !== undefined && (taxed || tapsX || ability.targets.some(targetSpecReadsX) || groupReadsX(ability.targets))) {
+      const discardAtX = ability.cost.discard?.manaValueX === true ? ability.cost.discard : undefined;
+      if (
+        maxX !== undefined &&
+        (taxed || tapsX || discardAtX !== undefined || ability.targets.some(targetSpecReadsX) || groupReadsX(ability.targets))
+      ) {
         // "Target Saga card with mana value X": what may be targeted depends
         // on X, so the ability is offered once per X that has a legal set of
         // targets, each with that X fixed and that X's options. So is "X
         // target cards" (Shigeki's channel): the group is X big at each. And
         // "Tap X untapped artifacts": what there is to tap depends on that X's
-        // mana, and the offer's `tapCost` says how many.
+        // mana, and the offer's `tapCost` says how many. "Discard a card with
+        // mana value X": only an X with such a card to discard.
         for (let x = minX; x <= maxX; x += 1) {
           if (tapsX) {
             const tapCost = this.abilityTapCostOffer(player, source, ability, x);
             if (tapCost === null || !this.tapOfferPayable(tapCost)) continue;
+          }
+          if (
+            discardAtX !== undefined &&
+            this.discardCandidates(player, discardCostFilterAtX(discardAtX, x), source).length < (discardAtX.count === "x" ? x : discardAtX.count)
+          ) {
+            continue;
           }
           const specs = this.activatedSpecsAt(ability.targets, source, player, x);
           const all = this.targetOptionsFor(specs, player, this.permanentSource(source, x));
@@ -22364,7 +22384,10 @@ export class Game {
     if (ability.cost.discard !== undefined) {
       const { count, filter } = ability.cost.discard;
       const n = count === "x" ? (x ?? ability.minX ?? 0) : count;
-      if (this.discardCandidates(player, filter, sourceId).length < n) {
+      // "A card with mana value X" reads the X announced; with none yet (the
+      // ability only being offered), any such card will do.
+      const payable = x === undefined ? filter : discardCostFilterAtX(ability.cost.discard, x);
+      if (this.discardCandidates(player, payable, sourceId).length < n) {
         return `${player} has too few cards in hand to pay ${def.name}'s cost`;
       }
     }
@@ -23089,7 +23112,7 @@ export class Game {
     if (costDiscard !== undefined) {
       const n = costDiscard.count === "x" ? chosenX : costDiscard.count;
       this.payCostDiscard(abilityId, sourceId, () => {
-        this.discardByEffect({ kind: "player", player }, n, costDiscard.random === true, costDiscard.filter);
+        this.discardByEffect({ kind: "player", player }, n, costDiscard.random === true, discardCostFilterAtX(costDiscard, chosenX));
       });
       this.costDiscardPriorityTo(player);
     }

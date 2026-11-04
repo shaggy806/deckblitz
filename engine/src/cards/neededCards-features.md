@@ -5079,3 +5079,5 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 **That extra turn's end step (2026-11-04).** `effect:delayed-trigger-extra-turn-end-step`, no engine code: `take-extra-turn`'s `thatTurn.atEndStep` was there already (Warrior's Oath), and the scaffolder reads the line. Final Fortune, proving it from an instant on another player's turn; Last Chance waits for `author-freed`.
 
 **A graveyard to the bottom, in a random order (2026-11-04).** `effect:graveyard-to-library-bottom-random`: `put-on-libraries`' `what: { graveyardOf }` and `position: "bottom-random"`, with the placement `randomlyAmong` so a commander's deferred move lands at random too. Endurance.
+
+**A discard cost of mana value X (2026-11-04).** `cost:discard-mana-value-x`: `cost.discard.manaValueX`, X announced as it's activated with no `{X}` needed, the ability offered once per X with a card to pay it. Kozilek, the Great Distortion; Knollspine Invocation.
