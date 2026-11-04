@@ -35,8 +35,8 @@ export default defineCard({
         kind: "add-mana",
         mana: {
           ifCondition: { kind: "self-counters", counter: "luck", compare: { op: "gte", n: 1 } },
-          then: ["W", "U", "B", "R", "G"],
-          else: ["C"],
+          thenOneOf: ["W", "U", "B", "R", "G"],
+          elseOneOf: ["C"],
         },
         amount: 1,
       },

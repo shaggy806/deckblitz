@@ -26746,7 +26746,7 @@ export class Game {
       const met =
         object !== undefined &&
         staticConditionMet(this.state, this.registry, object, mana.ifCondition, { includeSelf: true });
-      return met ? mana.then : mana.else;
+      return met ? mana.thenOneOf : mana.elseOneOf;
     }
     const types = new Set<ManaType>();
     if ("producedBy" in mana) {

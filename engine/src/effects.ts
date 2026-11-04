@@ -2403,15 +2403,15 @@ export type BoardManaList =
   | { readonly eachColorAmong: CardFilter }
   /**
    * "Add {C}. If this has a luck counter on it, **instead** add one mana of
-   * any color" (Gemstone Caverns): a `oneOf` over `then` while the condition
-   * holds, `else` while it doesn't, read off the source as the mana is made.
-   * What the type depends on, where an `ifCondition` amount is what the
-   * number depends on (Incubation Druid).
+   * any color" (Gemstone Caverns): a `oneOf` over `thenOneOf` while the
+   * condition holds, `elseOneOf` while it doesn't, read off the source as the
+   * mana is made. What the type depends on, where an `ifCondition` amount is
+   * what the number depends on (Incubation Druid).
    */
   | {
       readonly ifCondition: StaticCondition;
-      readonly then: readonly ManaType[];
-      readonly else: readonly ManaType[];
+      readonly thenOneOf: readonly ManaType[];
+      readonly elseOneOf: readonly ManaType[];
     };
 
 /** "A Jace planeswalker token you control" (rule 701.71a). */

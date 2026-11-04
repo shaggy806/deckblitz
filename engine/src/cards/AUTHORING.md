@@ -4098,6 +4098,10 @@ ability can still be activated, for nothing):
 - `{ eachColorAmong: CardFilter }` — "for each color among permanents you
   control, add one mana of that color" (Bloom Tender, Faeburrow Elder): one
   of each, at most five.
+- `{ ifCondition: StaticCondition, thenOneOf: ManaType[], elseOneOf: ManaType[] }`
+  — "Add {C}. If this has a luck counter on it, instead add one mana of any
+  color" (Gemstone Caverns): a `oneOf` over the list the condition picks, read
+  off the source as the mana is made.
 
 **"Choose a color. Add an amount of mana of that color equal to your devotion
 to that color"** (Nykthos, Shrine to Nyx; Nyx Lotus) is `mana: "any-color"`

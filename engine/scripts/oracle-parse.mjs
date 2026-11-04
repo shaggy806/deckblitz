@@ -8309,8 +8309,8 @@ export function parseEffect(text, outer) {
         kind: "add-mana",
         mana: {
           ifCondition: { kind: "self-counters", counter: counterInstead[2], compare: { op: "gte", n: 1 } },
-          then: ["W", "U", "B", "R", "G"],
-          else: [counterInstead[1]],
+          thenOneOf: ["W", "U", "B", "R", "G"],
+          elseOneOf: [counterInstead[1]],
         },
         amount: 1,
       },
