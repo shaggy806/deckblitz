@@ -2276,6 +2276,17 @@ export type LegalAction =
        * Raptor's "by paying an amount of {E} equal to its mana value rather
        * than paying its mana cost"). */
       readonly byPayingEnergy?: true;
+      /** …and costs life equal to the spell's mana value instead (Bismuth
+       * Mindrender). */
+      readonly byPayingLife?: true;
+      /** …for this mana rather than its mana cost (Blue Mage's Cane's {3}). */
+      readonly byPaying?: string;
+      /** …for this mana on top of its other costs (Ogre Battlecaster's {R}{R}). */
+      readonly alsoPaying?: string;
+      /** …and mana of any type can be spent to cast it (Tinybones, rule 118.14). */
+      readonly anyMana?: true;
+      /** "If able": declining isn't an answer — see the effect's `mustCast`. */
+      readonly mustCast?: true;
       /** …for its madness cost rather than its mana cost (rule 702.35a): the
        * madness cost, the only way offered. */
       readonly madness?: string;

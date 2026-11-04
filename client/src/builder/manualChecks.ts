@@ -10715,4 +10715,56 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{ gy: ['Divination', 'Grizzly Bears'] }, { gy: ['Hill Giant'] }],
     }),
   ),
+  preset(
+    'Bismuth Mindrender: casting a card for life',
+    board({
+      you: { bf: ['Bismuth Mindrender'] },
+      opp: { lib: ['Forest', 'Hill Giant'] },
+    }),
+  ),
+  preset(
+    "Blue Mage's Cane: casting a copy for {3}",
+    board({
+      you: { bf: ['Wastes*3', 'Hill Giant', { name: "Blue Mage's Cane", attach: 'Hill Giant' }] },
+      opp: { gy: ['Lightning Bolt'] },
+      step: 'begin-combat',
+    }),
+  ),
+  preset(
+    'Ogre Battlecaster: casting for {R}{R} more',
+    board({
+      you: { bf: ['Mountain*3', 'Ogre Battlecaster'], gy: ['Lightning Bolt'] },
+      step: 'begin-combat',
+    }),
+  ),
+  preset(
+    'Tinybones, the Pickpocket: green mana is not needed',
+    board({
+      you: { bf: ['Swamp*2', 'Tinybones, the Pickpocket'] },
+      opp: { gy: ['Grizzly Bears'] },
+      step: 'begin-combat',
+    }),
+  ),
+  preset(
+    'Anrakyr the Traveller: four players, a spell from your hand or graveyard for life',
+    board({
+      you: { bf: ['Anrakyr the Traveller'], hand: ['Sol Ring', 'Grizzly Bears'], gy: ['Mind Stone'] },
+      opp: [{}, {}, {}],
+    }),
+  ),
+  preset(
+    'Omen Machine: no way to say no',
+    board({
+      you: { bf: ['Omen Machine'], lib: ['Hill Giant'] },
+      step: 'upkeep',
+    }),
+  ),
+  preset(
+    'Omen Machine: four players, each exiles on their own draw step',
+    board({
+      you: { bf: ['Omen Machine'], lib: ['Hill Giant'] },
+      opp: [{ lib: ['Forest'] }, { lib: ['Grizzly Bears'] }, { lib: ['Mountain'] }],
+      step: 'upkeep',
+    }),
+  ),
 ]

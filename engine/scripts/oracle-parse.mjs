@@ -8930,6 +8930,7 @@ export function parseEffect(text, outer) {
       youChoosePerPlayerAt(sentences, i) ??
       eachOpponentChoosesToGoadAt(sentences, i) ??
       eachPlayerPutsAt(sentences, i) ??
+      castNowTermsAt(sentences, i, ctx) ??
       exileThenSearchBothEnterAt(sentences, i, ctx);
     if (oneEach !== null) {
       parsed.push(oneEach.effect);
@@ -11378,6 +11379,134 @@ function youChooseInEachGraveyardAt(sentences, i) {
     },
     used: 2,
   };
+}
+
+/** What a "you may cast …" asks, read off the end of its sentence: nothing, or
+ * "without paying its mana cost", or a `cast-now`'s other cost terms. */
+const CAST_NOW_TERMS =
+  "( without paying its mana cost| by paying life equal to (?:its|the spell's) mana value rather than paying its mana cost| by paying (?:\\{[^}]+\\})+ rather than paying its mana cost| by paying (?:\\{[^}]+\\})+ in addition to its other costs|, and mana of any type can be spent to cast that spell)?";
+function castNowTerms(words) {
+  if (words === undefined) return {};
+  if (/^ without/i.test(words)) return { free: true };
+  if (/life equal/i.test(words)) return { byPayingLife: true };
+  if (/any type/i.test(words)) return { spendAs: "any-type" };
+  const mana = /(?:\{[^}]+\})+/.exec(words)[0];
+  return /in addition/i.test(words) ? { alsoPaying: mana } : { byPaying: mana };
+}
+
+/**
+ * A spell cast as this resolves, on a `cast-now`'s own terms: "You may cast
+ * target instant or sorcery card from your graveyard by paying {R}{R} in addition
+ * to its other costs." (Ogre Battlecaster), "… from a graveyard, and mana of any
+ * type can be spent to cast that spell." (Quistis Trepe), "You may cast an artifact
+ * spell from your hand or graveyard by paying life equal to its mana value …"
+ * (Anrakyr), "Target opponent mills nine cards, then you may cast … from that
+ * player's graveyard …" (Sorcerous Squall), with "if that spell would be put into a
+ * graveyard, exile it instead" after it and Ogre Battlecaster's "when you cast that
+ * spell". And the same from a found card: "That player exiles cards … until they
+ * exile a nonland card. You may cast that card by paying life …" (Bismuth
+ * Mindrender), and "if able": "That player exiles the top card of their library.
+ * If it's a land card, the player puts it onto the battlefield. Otherwise, the
+ * player casts it without paying its mana cost if able." (Omen Machine).
+ */
+function castNowTermsAt(sentences, i, ctx) {
+  // The clauses that may follow the cast, as many as are there.
+  const followed = (spec, at) => {
+    let used = at;
+    let out = spec;
+    if (/^if that spell would be put into (?:a|your) graveyard, exile it instead\.$/i.test(sentences[i + used] ?? "")) {
+      out = { ...out, exileAfter: true };
+      used += 1;
+    }
+    if (
+      /^when you cast that spell, (?:~|this creature) gets \+x\/\+0 until end of turn, where x is that spell's mana value\.$/i.test(
+        sentences[i + used] ?? "",
+      )
+    ) {
+      out = {
+        ...out,
+        then: {
+          kind: "reflexive-trigger",
+          targets: [],
+          value: { thisWay: "cast", sumOf: "mana-value" },
+          effect: { kind: "modify-pt", target: "source", power: { triggerValue: true }, toughness: 0, duration: "end-of-turn" },
+          text: "When you cast that spell, this creature gets +X/+0 until end of turn, where X is that spell's mana value.",
+        },
+      };
+      used += 1;
+    }
+    return { effect: out, used };
+  };
+  const targeted = new RegExp(
+    `^you may cast target (.+?) card from (your graveyard|a graveyard|that player's graveyard)${CAST_NOW_TERMS}\\.$`,
+    "i",
+  ).exec(sentences[i]);
+  if (targeted !== null) {
+    const filter = /\bpermanent\b/i.test(targeted[1]) && !/^nonland permanent$/i.test(targeted[1]) ? null : parseTypePhrase(targeted[1], { cards: true });
+    if (filter === null) return null;
+    const whose = /^your/i.test(targeted[2]) ? "you" : /^a /i.test(targeted[2]) ? "any" : "trigger-player";
+    const slot = ctx.target({ kind: "card-in-graveyard", whose, filter });
+    return followed({ kind: "cast-now", target: slot, ...castNowTerms(targeted[3]) }, 1);
+  }
+  const fromZones = new RegExp(`^you may cast an? (.+?) spell from your hand or graveyard${CAST_NOW_TERMS}\\.$`, "i").exec(sentences[i]);
+  if (fromZones !== null) {
+    const spell = parseTypePhrase(fromZones[1]);
+    if (spell === null) return null;
+    return followed({ kind: "cast-now", from: { zones: ["hand", "graveyard"] }, spell, ...castNowTerms(fromZones[2]) }, 1);
+  }
+  const milled = new RegExp(
+    `^target opponent mills (\\w+) cards?, then you may cast an? (.+?) spell from that player's graveyard${CAST_NOW_TERMS}\\.$`,
+    "i",
+  ).exec(sentences[i]);
+  if (milled !== null) {
+    const amount = numberOf(milled[1]);
+    const spell = parseTypePhrase(milled[2]);
+    if (amount === null || spell === null) return null;
+    const slot = ctx.target("opponent");
+    const cast = followed(
+      { kind: "cast-now", from: { graveyardOf: { target: slot } }, spell, ...castNowTerms(milled[3]) },
+      1,
+    );
+    return {
+      effect: { kind: "sequence", effects: [{ kind: "mill", target: slot, amount }, cast.effect] },
+      used: cast.used,
+    };
+  }
+  if (
+    /^that player exiles cards from the top of their library until they exile a nonland card\.$/i.test(sentences[i])
+  ) {
+    const found = new RegExp(`^you may cast that card${CAST_NOW_TERMS}\\.$`, "i").exec(sentences[i + 1] ?? "");
+    if (found === null || found[1] === undefined) return null;
+    return {
+      effect: {
+        kind: "reveal-until",
+        whose: "that-player",
+        filter: { notTypes: ["land"] },
+        exile: true,
+        rest: "stay",
+        then: { kind: "cast-now", target: 0, ...castNowTerms(found[1]) },
+      },
+      used: 2,
+    };
+  }
+  if (
+    /^that player exiles the top card of their library\.$/i.test(sentences[i]) &&
+    /^if it's a land card, the player puts it onto the battlefield\.$/i.test(sentences[i + 1] ?? "") &&
+    /^otherwise, the player casts it without paying its mana cost if able\.$/i.test(sentences[i + 2] ?? "")
+  ) {
+    return {
+      effect: {
+        kind: "sequence",
+        effects: [
+          { kind: "exile-from-library", whose: "active-player", amount: 1 },
+          { kind: "put-exiled-this-way-onto-battlefield", filter: { type: "land" } },
+          { kind: "cast-now", from: "exiled-this-way", by: "active-player", free: true, mustCast: true },
+        ],
+      },
+      used: 3,
+    };
+  }
+  return null;
 }
 
 /** You choose, one permanent a player, none a target, and they're destroyed

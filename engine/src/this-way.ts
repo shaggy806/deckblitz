@@ -269,6 +269,10 @@ export function thisWayEntries(
           for (const { voter, choice } of event.votes) if ("object" in choice) add(choice.object, voter, false);
         }
         break;
+      case "cast":
+        // Off a `cast-now` (rule 608.2g), by its caster.
+        if (event.type === "spell-cast" && event.via === "effect") add(event.object, event.player, false);
+        break;
       case "put-into-graveyard":
         // Whose graveyard: its owner's, wherever it came from.
         if (event.type === "cards-put-into-graveyard") {

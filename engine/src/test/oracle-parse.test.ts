@@ -14313,4 +14313,97 @@ describe("facts fixed as a spell is cast (rule 601.2i), and what a kick brings a
     ]);
     expect(face.static[2]).toMatchObject({ condition: kicked, grantKeywords: ["haste"] });
   });
+describe("a cast as this resolves, on its own terms", () => {
+  const read = (type_line: string, oracle_text: string) =>
+    parseFace({ name: "Test Card", type_line, oracle_text, mana_cost: "{1}", colors: [] });
+
+  it("reads a cost on top, the spell read back, and the graveyard exile", () => {
+    const ogre = read(
+      "Creature — Ogre Shaman",
+      "Whenever this creature attacks, you may cast target instant or sorcery card from your graveyard by paying {R}{R} in addition to its other costs. If that spell would be put into a graveyard, exile it instead. When you cast that spell, this creature gets +X/+0 until end of turn, where X is that spell's mana value.",
+    );
+    expect(ogre.complete).toBe(true);
+    expect(ogre.triggered[0].targets).toEqual([
+      { kind: "card-in-graveyard", whose: "you", filter: { typesAnyOf: ["instant", "sorcery"] } },
+    ]);
+    expect(ogre.triggered[0].effect).toMatchObject({
+      kind: "cast-now",
+      target: 0,
+      alsoPaying: "{R}{R}",
+      exileAfter: true,
+      then: { kind: "reflexive-trigger", value: { thisWay: "cast", sumOf: "mana-value" } },
+    });
+  });
+
+  it("reads mana of any type, a fixed cost, and life for its mana value", () => {
+    const quistis = read(
+      "Creature — Human Wizard",
+      "When this creature enters, you may cast target instant or sorcery card from a graveyard, and mana of any type can be spent to cast that spell. If that spell would be put into a graveyard, exile it instead.",
+    );
+    expect(quistis.complete).toBe(true);
+    expect(quistis.triggered[0].targets[0]).toMatchObject({ whose: "any" });
+    expect(quistis.triggered[0].effect).toEqual({ kind: "cast-now", target: 0, spendAs: "any-type", exileAfter: true });
+    expect(
+      read("Artifact", "{T}: You may cast target sorcery card from your graveyard by paying {3} rather than paying its mana cost.").activated[0]
+        .effect,
+    ).toEqual({ kind: "cast-now", target: 0, byPaying: "{3}" });
+    const anrakyr = read(
+      "Artifact Creature — Necron",
+      "Whenever this creature attacks, you may cast an artifact spell from your hand or graveyard by paying life equal to its mana value rather than paying its mana cost.",
+    );
+    expect(anrakyr.complete).toBe(true);
+    expect(anrakyr.triggered[0].effect).toEqual({
+      kind: "cast-now",
+      from: { zones: ["hand", "graveyard"] },
+      spell: { type: "artifact" },
+      byPayingLife: true,
+    });
+  });
+
+  it("reads a graveyard named by the mill, and a found card cast for life", () => {
+    const squall = read(
+      "Sorcery",
+      "Target opponent mills nine cards, then you may cast an instant or sorcery spell from that player's graveyard without paying its mana cost. If that spell would be put into a graveyard, exile it instead.",
+    );
+    expect(squall.complete).toBe(true);
+    expect(squall.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "mill", target: 0, amount: 9 },
+        {
+          kind: "cast-now",
+          from: { graveyardOf: { target: 0 } },
+          spell: { typesAnyOf: ["instant", "sorcery"] },
+          free: true,
+          exileAfter: true,
+        },
+      ],
+    });
+    const render = read(
+      "Creature — Eldrazi",
+      "Whenever this creature deals combat damage to a player, that player exiles cards from the top of their library until they exile a nonland card. You may cast that card by paying life equal to the spell's mana value rather than paying its mana cost.",
+    );
+    expect(render.complete).toBe(true);
+    expect(render.triggered[0].effect).toMatchObject({
+      kind: "reveal-until",
+      whose: "that-player",
+      then: { kind: "cast-now", target: 0, byPayingLife: true },
+    });
+  });
+
+  it("reads \"if able\" as a cast that can't be declined", () => {
+    const omen = read(
+      "Artifact",
+      "At the beginning of each player's draw step, that player exiles the top card of their library. If it's a land card, the player puts it onto the battlefield. Otherwise, the player casts it without paying its mana cost if able.",
+    );
+    expect(omen.complete).toBe(true);
+    expect(omen.triggered[0].effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "exile-from-library", whose: "active-player", amount: 1 },
+        { kind: "put-exiled-this-way-onto-battlefield", filter: { type: "land" } },
+        { kind: "cast-now", from: "exiled-this-way", by: "active-player", free: true, mustCast: true },
+      ],
+    });
+  });
 });

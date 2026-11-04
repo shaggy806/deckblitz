@@ -1935,6 +1935,12 @@ export type ThisWayKind =
    * 701.5f). Counted by its controller, an ability object standing for several
    * copies once for each it countered. */
   | "countered"
+  /** Spells it cast off a `cast-now`, counted by their caster: Ogre
+   * Battlecaster's "when you cast that spell, this creature gets +X/+0 …,
+   * where X is that spell's mana value" (a `reflexive-trigger`'s `value` in the
+   * `cast-now`'s `then`, `sumOf: "mana-value"`, its X as announced — rule
+   * 202.3e counts X only off the stack). */
+  | "cast"
   /** Cards it shuffled into a library — Elixir's "you gain life equal to
    * the number of cards shuffled into your library this way" (a
    * `shuffle-graveyard-into-library`, or `put-on-libraries`' `"shuffle"`).
@@ -2299,6 +2305,20 @@ export interface CastNowOptions {
    * its mana cost" — with `free`; see the `cast-now` effect's
    * `byPayingEnergy`. */
   readonly byPayingEnergy?: boolean;
+  /** "By paying {3} rather than paying its mana cost" — see the `cast-now`
+   * effect's `byPaying`. */
+  readonly byPaying?: string;
+  /** "By paying life equal to its mana value rather than paying its mana
+   * cost" — with `free`; see the `cast-now` effect's `byPayingLife`. */
+  readonly byPayingLife?: boolean;
+  /** "By paying {R}{R} in addition to its other costs" — see the `cast-now`
+   * effect's `alsoPaying`. */
+  readonly alsoPaying?: string;
+  /** "And mana of any type can be spent to cast that spell" — see the
+   * `cast-now` effect's `spendAs`. */
+  readonly spendAs?: SpendAs;
+  /** "Casts it … if able" — see the `cast-now` effect's `mustCast`. */
+  readonly mustCast?: boolean;
   /** Paying the card's madness cost rather than its mana cost — see the
    * `cast-now` effect's `madness`. */
   readonly madness?: boolean;
@@ -4103,6 +4123,9 @@ export type EffectSpec =
        * among them (the ruling), nor a card that has left exile since. Each
        * one's "as this enters" choices are asked first (rule 614.12). */
       readonly kind: "put-exiled-this-way-onto-battlefield";
+      /** Only those matching this: Omen Machine's "if it's a land card, the
+       * player puts it onto the battlefield". */
+      readonly filter?: CardFilter;
     }
   | {
       /** Put the cards this resolution has exiled so far — each still in
@@ -4642,9 +4665,10 @@ export type EffectSpec =
       readonly target?: EffectTargetRef;
       /** Who may cast it, when that isn't the effect's controller — "then
        * **they** may cast that card without paying its mana cost"
-       * (Transforming Flourish: `{ controllerOfTarget: 0 }`). Nobody, and so
-       * nothing offered, once that player has left the game. With `target`
-       * only. */
+       * (Transforming Flourish: `{ controllerOfTarget: 0 }`), "the player casts
+       * it" (Omen Machine: `"active-player"`, with `from: "exiled-this-way"`).
+       * Nobody, and so nothing offered, once that player has left the game.
+       * With `target`, or a `from` that isn't read from a player's own zones. */
       readonly by?: EffectPlayerRef;
       /**
        * Where the player picks the card from, when it's any of several:
@@ -4714,7 +4738,22 @@ export type EffectSpec =
          * of the instruction, so with nothing to cast the hand is still shown
          * and closed; without it the looking came earlier, in a `reveal-hand`
          * (Mindclaw Shaman). */
-        | { readonly handOf: EffectPlayerRef; readonly look?: true };
+        | { readonly handOf: EffectPlayerRef; readonly look?: true }
+        /** One named player's graveyard, as this applies: "target opponent
+         * mills nine cards, then you may cast an instant or sorcery spell
+         * **from that player's graveyard**" (Sorcerous Squall). A card milled
+         * earlier in this resolution is there to choose. Controlled by the
+         * caster, owned as before (rule 108.3). */
+        | { readonly graveyardOf: EffectPlayerRef }
+        /** Several of the effect's controller's zones at once: "you may cast
+         * an artifact spell **from your hand or graveyard**" (Anrakyr the
+         * Traveller), one spell from among them all. */
+        | { readonly zones: readonly ("hand" | "graveyard")[] }
+        /** The face-up cards the effect's controller owns in exile with this
+         * kind of counter on them, as this applies: "copy each exiled card you
+         * own **with a kick counter on it**" (Zethi, Arcane Blademaster, with
+         * `copies`). */
+        | { readonly exiledOwnedWithCounter: string };
       /**
        * "You may play lands and cast spells **from among** cards exiled this
        * way" — any number of them, one after another while this resolves
@@ -4806,6 +4845,52 @@ export type EffectSpec =
        * face's, X 0 — 107.3b). Not offered without that much energy.
        */
       readonly byPayingEnergy?: boolean;
+      /**
+       * "You may cast the copy **by paying {3} rather than paying its mana
+       * cost**" (Blue Mage's Cane, Wizard's Spellbook): a fixed alternative
+       * cost in mana (rule 118.9), the only way offered, so a card with no
+       * mana cost can be cast too (118.6a). No other alternative cost goes
+       * with it (118.9a), an {X} in the card's own cost is 0 (107.3b), and
+       * additional costs are still paid and cost increases still apply
+       * (118.9d).
+       */
+      readonly byPaying?: string;
+      /**
+       * "You may cast that card **by paying life equal to the spell's mana
+       * value rather than paying its mana cost**" (Bismuth Mindrender, Anrakyr
+       * the Traveller): `byPayingEnergy`'s twin in life — an alternative cost
+       * (rule 118.9), `free` with the life on top, the mana value the spell's
+       * as it's cast (its face's, X 0 — 107.3b). Not offered to a player who
+       * can't pay that much (119.4); 0 is always payable (119.4b).
+       */
+      readonly byPayingLife?: boolean;
+      /**
+       * "You may cast target instant or sorcery card from your graveyard **by
+       * paying {R}{R} in addition to its other costs**" (Ogre Battlecaster):
+       * mana on top of whatever the cast pays, an additional cost (rule
+       * 601.2f), so its X is announced as usual (601.2b) and an alternative
+       * cost may still replace the mana cost (118.9d).
+       */
+      readonly alsoPaying?: string;
+      /**
+       * "…**and mana of any type can be spent to cast that spell**" (Tinybones,
+       * Quistis Trepe; rule 118.14): for the casts this offer allows and no
+       * others, read while the card is still where it's cast from, as every
+       * other permission's `spendAs` is.
+       */
+      readonly spendAs?: SpendAs;
+      /**
+       * "The player casts it without paying its mana cost **if able**" (Omen
+       * Machine), "cast the copies if able" (Spelltwine): the offer can't be
+       * declined while a way to cast the card can be paid, and is simply not
+       * made when none can (the rulings: no legal target, a play restriction).
+       * Two ways out stay (`Game.castNowMandatory`): activating mana abilities
+       * is never mandatory (rule 118.3c), so a way that needs more mana than the
+       * player has floating leaves it their choice; and a mandatory additional
+       * cost involving cards of a stated quality in a hidden zone doesn't have
+       * to be paid (118.8c).
+       */
+      readonly mustCast?: true;
       /** "Its owner may cast it **by paying [its madness cost]** rather
        * than paying its mana cost" (rule 702.35a): the card's own madness
        * cost as an alternative cost (702.35b), the only way offered — the
@@ -11151,6 +11236,9 @@ export interface EffectApi {
   /** "Face-up cards your opponents own" in exile — see the `cast-now`
    * effect's `from`. */
   faceUpExileOpponentsOwn(): readonly ObjectId[];
+  /** The face-up cards `owner` owns in exile with a `counter` counter on them
+   * — a `cast-now`'s `exiledOwnedWithCounter`. */
+  exiledOwnedWithCounter(owner: PlayerId, counter: string): readonly ObjectId[];
   /** The cards in `player`'s hand or graveyard. */
   cardsIn(player: PlayerId, zone: "hand" | "graveyard" | "library"): readonly ObjectId[];
   /** The cards in `player`'s library they may cast while searching it
@@ -11260,7 +11348,7 @@ export interface EffectApi {
   /** See the `"put-exiled-this-way-onto-battlefield"` {@link EffectSpec}.
    * `true` when it stopped first to ask an "as this enters" choice (nothing
    * has moved; apply it again once that's answered). */
-  putExiledThisWayOntoBattlefield(): boolean;
+  putExiledThisWayOntoBattlefield(filter?: CardFilter): boolean;
   /** See the `"move-exiled-this-way"` {@link EffectSpec}. */
   moveExiledThisWay(to: Extract<EffectSpec, { kind: "move-exiled-this-way" }>["to"], filter?: CardFilter): void;
   /** See the `"put-arrived-onto-battlefield"` {@link EffectSpec}. `true`
@@ -13767,9 +13855,14 @@ function offerCastNow(
   if (cards.length > 0) {
     ctx.castNow(cards, {
       ...(by !== undefined ? { by } : {}),
-      free: spec.free === true || spec.byDiscarding === true || spec.byPayingEnergy === true,
+      free: spec.free === true || spec.byDiscarding === true || spec.byPayingEnergy === true || spec.byPayingLife === true,
       ...(spec.byDiscarding === true ? { byDiscarding: true } : {}),
       ...(spec.byPayingEnergy === true ? { byPayingEnergy: true } : {}),
+      ...(spec.byPayingLife === true ? { byPayingLife: true } : {}),
+      ...(spec.byPaying !== undefined ? { byPaying: spec.byPaying } : {}),
+      ...(spec.alsoPaying !== undefined ? { alsoPaying: spec.alsoPaying } : {}),
+      ...(spec.spendAs !== undefined ? { spendAs: spec.spendAs } : {}),
+      ...(spec.mustCast === true ? { mustCast: true } : {}),
       ...(spec.madness === true ? { madness: true } : {}),
       ...(spec.miracle === true ? { miracle: true } : {}),
       ...(spec.suspendCost === true ? { suspendCost: true } : {}),
@@ -13837,6 +13930,13 @@ function applyCastNowSpec(spec: Extract<EffectSpec, { kind: "cast-now" }>, ctx: 
       // An illegal target's slot is blank (rule 608.2b); one already cast
       // is on the stack now, which the offer passes over.
       cards = ctx.targets.flatMap((t) => (t?.kind === "object" ? [t.object] : []));
+    } else if (typeof from === "object" && "graveyardOf" in from) {
+      const owner = effectPlayer(from.graveyardOf, ctx);
+      cards = owner === undefined ? [] : ctx.cardsIn(owner, "graveyard");
+    } else if (typeof from === "object" && "zones" in from) {
+      cards = from.zones.flatMap((z) => ctx.cardsIn(ctx.controller, z));
+    } else if (typeof from === "object" && "exiledOwnedWithCounter" in from) {
+      cards = ctx.exiledOwnedWithCounter(ctx.controller, from.exiledOwnedWithCounter);
     } else {
       cards = typeof from === "object" ? looked : ctx.cardsIn(ctx.controller, from);
     }
@@ -16456,7 +16556,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     case "put-exiled-this-way-onto-battlefield": {
       const parked = ctx.parkedCount();
-      if (ctx.putExiledThisWayOntoBattlefield()) ctx.resumeAfterDecisions(spec, parked);
+      if (ctx.putExiledThisWayOntoBattlefield(spec.filter)) ctx.resumeAfterDecisions(spec, parked);
       return;
     }
     case "move-exiled-this-way":

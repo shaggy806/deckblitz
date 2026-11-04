@@ -5545,6 +5545,12 @@ function Table({
             ? ' by discarding a card rather than paying its mana cost'
             : castNowAction.byPayingEnergy === true && ways.length > 0
             ? <> by paying <Symbols text="{E}" /> equal to its mana value rather than its mana cost</>
+            : castNowAction.byPayingLife === true && ways.length > 0
+            ? ' by paying life equal to its mana value rather than its mana cost'
+            : castNowAction.byPaying !== undefined && ways.length > 0
+            ? <> by paying <Symbols text={castNowAction.byPaying} /> rather than its mana cost</>
+            : castNowAction.alsoPaying !== undefined && ways.length > 0
+            ? <> by paying <Symbols text={castNowAction.alsoPaying} /> in addition to its other costs</>
             : castNowAction.free && ways.length > 0
               ? ' without paying its mana cost'
               : castNowAction.suspendCost === true && ways.length > 0
@@ -5586,7 +5592,12 @@ function Table({
               <> (madness <Symbols text={castNowAction.madness} />)</>
             ) : castNowAction.byDiscarding === true ? ' (discard a card)' : castNowAction.byPayingEnergy === true ? (
               <> (pay <Symbols text="{E}" /> × its mana value)</>
+            ) : castNowAction.byPayingLife === true ? ' (pay life equal to its mana value)' : castNowAction.byPaying !== undefined ? (
+              <> (pay <Symbols text={castNowAction.byPaying} />)</>
+            ) : castNowAction.alsoPaying !== undefined ? (
+              <> (and <Symbols text={castNowAction.alsoPaying} />)</>
             ) : c.free ? ' (free)' : ''}
+            {castNowAction.anyMana === true ? ' (mana of any type)' : null}
             {c.prototype ? <> (prototype <Symbols text={c.prototypeCost ?? ''} />)</> : null}
             {c.offspring ? <> (offspring <Symbols text={c.offspringCost ?? ''} />)</> : null}
             {c.evoke ? <> (evoke <Symbols text={c.evokeCost ?? ''} />)</> : null}
@@ -5600,9 +5611,11 @@ function Table({
             Back
           </button>
         ) : null}
-        <button type="button" onClick={() => game.dispatch({ type: 'cast-now', player: seat, cast: null })}>
-          {verb === 'Play' ? "Don't play" : "Don't cast"}
-        </button>
+        {castNowAction.mustCast === true ? null : (
+          <button type="button" onClick={() => game.dispatch({ type: 'cast-now', player: seat, cast: null })}>
+            {verb === 'Play' ? "Don't play" : "Don't cast"}
+          </button>
+        )}
       </div>
     )
   } else if (mode === 'pay-life-for-untapped' && shockChoiceAction) {
@@ -7457,14 +7470,22 @@ function Table({
         <ZoneViewer
           title={`${game.nameOf(castNowAction.source)} — you may cast ${
             castNowAction.cards.length === 1 ? 'this spell' : 'one of these'
-          }${castNowAction.free ? ' without paying its mana cost' : ''}${castNowLimitText(castNowAction)}`}
+          }${castNowAction.byPayingLife === true
+            ? ' by paying life equal to its mana value'
+            : castNowAction.byPaying !== undefined
+              ? ' for another cost rather than its mana cost'
+              : castNowAction.alsoPaying !== undefined
+                ? ' for its other costs and more'
+                : castNowAction.free
+                  ? ' without paying its mana cost'
+                  : ''}${castNowAction.anyMana === true ? ', with mana of any type' : ''}${castNowLimitText(castNowAction)}`}
           ids={castNowAction.looked ?? castNowAction.cards}
           resolve={(id) => view.objects[id]}
           selection={{
-            min: 0,
+            min: castNowAction.mustCast === true ? 1 : 0,
             max: 1,
             eligible: castNowAction.cards,
-            noneLabel: "Don't cast",
+            ...(castNowAction.mustCast === true ? {} : { noneLabel: "Don't cast" }),
             onConfirm: (chosen) => {
               const card = chosen[0]
               if (card === undefined) {

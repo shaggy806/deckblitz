@@ -1698,7 +1698,16 @@
   "trigger:opponent-attacks-you-player-only",
   "trigger:attacks-first-time-each-turn",
   "trigger:becomes-blocked-by-two-or-more",
-  "trigger:one-or-more-become-blocked-batch"
+  "trigger:one-or-more-become-blocked-batch",
+  "effect:cast-now-additional-cost",
+  "effect:cast-now-alternative-mana-cost",
+  "effect:cast-now-pay-life-for-mana-value",
+  "effect:cast-now-spend-any-mana",
+  "effect:must-cast-if-able",
+  "effect:cast-now-exiled-with-counter",
+  "effect:cast-now-from-hand-or-graveyard",
+  "effect:cast-now-from-target-player-graveyard",
+  "effect:cast-now-then-reads-cast-spell"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

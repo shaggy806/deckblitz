@@ -4396,7 +4396,7 @@ export class Game {
     // paid to cast it (The Face of Boe): for that cost, an alternative cost
     // and so the only one, with kicker on top if it has one.
     const altOffer = via === "effect" ? this.castNowOffer(player, card) : null;
-    if (altOffer?.madness !== undefined || altOffer?.miracle !== undefined || altOffer?.suspendCost === true) {
+    if (altOffer?.madness !== undefined || altOffer?.miracle !== undefined || altOffer?.suspendCost === true || altOffer?.byPaying !== undefined) {
       variants.length = 0;
       variants.push({ kicked: false, overload: false, free: false });
       if (def.kicker !== null) variants.push(...kickedVariants(false));
@@ -16265,7 +16265,9 @@ export class Game {
       (escalateCost === undefined || extraModes <= 0 ? "" : escalateCost.repeat(extraModes)) +
       spree +
       Game.waterbendCostString(def) +
-      (this.activeSplice?.card === cardId ? this.activeSplice.cost : "");
+      (this.activeSplice?.card === cardId ? this.activeSplice.cost : "") +
+      // "By paying {R}{R} in addition to its other costs" (Ogre Battlecaster).
+      (via === "effect" ? (this.castNowOffer(caster ?? this.state.objects[cardId]?.owner, cardId)?.alsoPaying ?? "") : "");
     // A chosen additional-cost branch that is paid in mana (Redirect
     // Lightning's "or pay {2}") concatenates the same way kicker does, and
     // for the same reason — an additional cost adds to what's being paid,
@@ -16303,7 +16305,8 @@ export class Game {
     // Madness's cast (rule 702.35a), miracle's (702.94a): that cost rather
     // than the mana cost.
     const altOffer = via === "effect" ? this.castNowOffer(caster ?? this.state.objects[cardId]?.owner, cardId) : null;
-    const madnessCost = altOffer?.madness ?? altOffer?.miracle ?? (altOffer?.suspendCost === true ? def.suspend?.cost : undefined);
+    // A `byPaying`'s fixed mana (Blue Mage's Cane's {3}) is one more.
+    const madnessCost = altOffer?.madness ?? altOffer?.miracle ?? altOffer?.byPaying ?? (altOffer?.suspendCost === true ? def.suspend?.cost : undefined);
     const base = freeCast
       ? "{0}"
       : madnessCost !== undefined
@@ -16656,6 +16659,11 @@ export class Game {
     if (offered?.byPayingEnergy === true && this.state.players[player].energy < this.castNowEnergyOf(cardId, face ?? 0)) {
       return `${player} doesn't have enough {E} to cast ${def.name}`;
     }
+    // "By paying life equal to its mana value" (Bismuth Mindrender): that much
+    // life (rules 119.4, 119.4b).
+    if (offered?.byPayingLife === true && !this.canPayLife(player, this.castNowEnergyOf(cardId, face ?? 0))) {
+      return `${player} doesn't have the life to cast ${def.name}`;
+    }
     // The offer's own terms: "without paying its mana cost" is the only way
     // it allows — an alternative cost, so no other goes with it (rule
     // 118.9a) — and only a spell its filter matches, judged as the spell it
@@ -16669,6 +16677,9 @@ export class Game {
       }
       if (offered.miracle !== undefined && (free || altCost || overload || evoke !== null)) {
         return `${def.name} may only be cast for its miracle cost`;
+      }
+      if (offered.byPaying !== undefined && (free || altCost || overload || evoke !== null)) {
+        return `${def.name} may only be cast by paying ${offered.byPaying}`;
       }
       if (offered.suspendCost === true) {
         if (free || altCost || overload || evoke !== null) return `${def.name} may only be cast for its suspend cost`;
@@ -18576,6 +18587,10 @@ export class Game {
             free: awaiting.free,
             ...(awaiting.byDiscarding === true ? { byDiscarding: true as const } : {}),
             ...(awaiting.byPayingEnergy === true ? { byPayingEnergy: true as const } : {}),
+            ...(awaiting.byPayingLife === true ? { byPayingLife: true as const } : {}),
+            ...(awaiting.byPaying !== undefined ? { byPaying: awaiting.byPaying } : {}),
+            ...(awaiting.alsoPaying !== undefined ? { alsoPaying: awaiting.alsoPaying } : {}),
+            ...(awaiting.spendAs !== undefined ? { spendAs: awaiting.spendAs } : {}),
             ...(awaiting.madness !== undefined ? { madness: awaiting.madness } : {}),
             ...(awaiting.miracle !== undefined ? { miracle: awaiting.miracle } : {}),
             ...(awaiting.suspendCost === true ? { suspendCost: true as const } : {}),
@@ -18621,6 +18636,10 @@ export class Game {
       free: options.free,
       ...(options.byDiscarding === true ? { byDiscarding: true as const } : {}),
       ...(options.byPayingEnergy === true ? { byPayingEnergy: true as const } : {}),
+      ...(options.byPayingLife === true ? { byPayingLife: true as const } : {}),
+      ...(options.byPaying !== undefined ? { byPaying: options.byPaying } : {}),
+      ...(options.alsoPaying !== undefined ? { alsoPaying: options.alsoPaying } : {}),
+      ...(options.spendAs !== undefined ? { spendAs: options.spendAs } : {}),
       ...(madness !== undefined ? { madness } : {}),
       ...(miracle !== undefined ? { miracle } : {}),
       ...(options.suspendCost === true ? { suspendCost: true as const } : {}),
@@ -18631,6 +18650,7 @@ export class Game {
     const offers: CastSpellOffer[] = [];
     const lands: PlayLandOffer[] = [];
     const offered: ObjectId[] = [];
+    let mustCast = false;
     try {
       for (const cardId of cards) {
         const object = this.state.objects[cardId];
@@ -18673,6 +18693,7 @@ export class Game {
         }
         if (offers.length + lands.length > before) offered.push(cardId);
       }
+      mustCast = options.mustCast === true && this.castNowMandatory(player, offers);
     } finally {
       this.castNowProbe = null;
     }
@@ -18688,6 +18709,11 @@ export class Game {
       free: options.free,
       ...(options.byDiscarding === true ? { byDiscarding: true as const } : {}),
       ...(options.byPayingEnergy === true ? { byPayingEnergy: true as const } : {}),
+      ...(options.byPayingLife === true ? { byPayingLife: true as const } : {}),
+      ...(options.byPaying !== undefined ? { byPaying: options.byPaying } : {}),
+      ...(options.alsoPaying !== undefined ? { alsoPaying: options.alsoPaying } : {}),
+      ...(options.spendAs !== undefined ? { spendAs: options.spendAs } : {}),
+      ...(mustCast ? { mustCast: true as const } : {}),
       ...(madness !== undefined ? { madness } : {}),
       ...(miracle !== undefined ? { miracle } : {}),
       ...(options.suspendCost === true ? { suspendCost: true as const } : {}),
@@ -18697,6 +18723,35 @@ export class Game {
       ...(options.castsLeft !== undefined ? { castsLeft: options.castsLeft } : {}),
       ...(options.manaValueLeft !== undefined ? { manaValueLeft: options.manaValueLeft } : {}),
     };
+  }
+
+  /**
+   * Whether a "casts it **if able**" (the `cast-now` effect's `mustCast`) leaves
+   * its player no choice over `offers`: some way to cast the card they can't
+   * lawfully get out of. Activating mana abilities is never mandatory (rule
+   * 118.3c), so a way whose total cost (601.2f, with any cost increase) needs
+   * more than the mana already floating leaves it their choice; so does a
+   * mandatory additional cost involving cards of a stated quality in a hidden
+   * zone (118.8c). An optional additional cost is never forced: a kicked way
+   * doesn't count, since the unkicked one is what they must take.
+   */
+  private castNowMandatory(player: PlayerId, offers: readonly CastSpellOffer[]): boolean {
+    return offers.some((offer) => {
+      if (offer.kicked === true || offer.offspring === true) return false;
+      const face = offer.face ?? 0;
+      const def = this.faceDef(offer.card, face);
+      const extra = def.additionalCost;
+      if (extra?.discardFilter !== undefined || extra?.behold !== undefined) return false;
+      const cost = this.castingCostOf(
+        player,
+        offer.card,
+        def,
+        0,
+        this.castCostString(offer.card, "effect", face, false, false, offer.free === true, false, offer.costOption, player),
+      );
+      const purpose: ManaPurpose = { kind: "cast", card: offer.card, face };
+      return planPayment({ ...this.manaPlanningView(player, purpose), sources: [] }, cost, purpose) !== null;
+    });
   }
 
   /**
@@ -18974,7 +19029,13 @@ export class Game {
     const alternativeTaps = this.spellTapCost(cardId, def, via, player, altCost, kicked, costOption, graveyardGrant);
     // "Pay life equal to its mana value" (Demon of Fate's Design, Inside
     // Information): the face cast, X 0 (rule 107.3b), paid with the rest below.
-    const alternativeLife = alternativeCost?.payLifeManaValue === true ? this.castNowEnergyOf(cardId, face) : 0;
+    // So does a resolving effect's "by paying life equal to" it (Bismuth
+    // Mindrender).
+    const alternativeLife =
+      alternativeCost?.payLifeManaValue === true ||
+      (via === "effect" && this.castNowOffer(player, cardId)?.byPayingLife === true)
+        ? this.castNowEnergyOf(cardId, face)
+        : 0;
     // A granted alternative cost's energy (Nissa, Worldsoul Speaker), or a
     // resolving effect's "by paying an amount of {E} equal to its mana
     // value" (Amped Raptor), paid with the rest of the cost below.
@@ -24395,6 +24456,9 @@ export class Game {
         }
         allow(this.linkedCastGrantFor(player, spellCard, castFace)?.grant.spendAs);
       }
+      // "You may cast it, and mana of any type can be spent" as something
+      // resolves (Tinybones): the offer's, for the cast it allows.
+      allow(this.castNowOffer(player, spellCard)?.spendAs);
     }
     return { wide, units };
   }
@@ -33123,7 +33187,7 @@ export class Game {
         );
         return false;
       },
-      putExiledThisWayOntoBattlefield: () => {
+      putExiledThisWayOntoBattlefield: (filter) => {
         // What this resolution exiled from a graveyard, a hand or a library —
         // not a permanent it exiled (a replacement's), and only a card still
         // in exile. Each one's "as this enters" choices first (rule 614.12).
@@ -33132,7 +33196,12 @@ export class Game {
           .map((e) => e.object)
           .filter((id) => {
             const object = this.state.objects[id];
-            return object !== undefined && object.zone === "exile" && !object.isToken;
+            return (
+              object !== undefined &&
+              object.zone === "exile" &&
+              !object.isToken &&
+              (filter === undefined || matchesFilter(this.state, this.registry, id, filter, { you: controller }))
+            );
           });
         if (returning.some((id) => this.askEnterChoice(id, this.state.objects[id].owner))) return true;
         this.withEnterBatch(() => {
@@ -34910,6 +34979,17 @@ export class Game {
           );
         });
       },
+      exiledOwnedWithCounter: (owner, counter) =>
+        this.state.zones.shared.exile.filter((id) => {
+          const object = this.state.objects[id];
+          return (
+            object !== undefined &&
+            object.owner === owner &&
+            object.exiledFaceDown === undefined &&
+            object.foretold !== true &&
+            (object.counters?.[counter] ?? 0) > 0
+          );
+        }),
       cardsIn: (player, zone) => [...(this.state.zones.perPlayer[player]?.[zone] ?? [])],
       cantSearchLibrary: (player, owner) => this.cantSearchLibrary(player, owner),
       castableWhileSearching: (player) =>
@@ -47446,7 +47526,8 @@ export class Game {
     if (via === "effect") {
       const asked = this.castNowOffer(caster, cardId);
       if (asked === null || asked.free || asked.madness !== undefined || asked.miracle !== undefined ||
-        asked.suspendCost === true || asked.byDiscarding === true || asked.byPayingEnergy === true) {
+        asked.suspendCost === true || asked.byDiscarding === true || asked.byPayingEnergy === true ||
+        asked.byPayingLife === true || asked.byPaying !== undefined) {
         return out;
       }
     }

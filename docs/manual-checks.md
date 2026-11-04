@@ -7131,3 +7131,38 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 - **Do:** Cast Flotsam // Jetsam, clicking Jetsam. When offered, cast Hill Giant and Confirm.
 - **Expect:** The first popup offers Divination, Grizzly Bears and Hill Giant (each opponent has had three cards milled). After Hill Giant, only Bob's two are offered: Carol's graveyard has had its turn. Hill Giant ends up yours.
+
+### Bismuth Mindrender: casting a card for life
+
+- **Do:** Attack Bob with Bismuth Mindrender. Click Cast Hill Giant (pay life equal to its mana value).
+- **Expect:** The banner says "Cast Hill Giant by paying life equal to its mana value rather than its mana cost?", with a "Don't cast" button. Forest and Hill Giant left Bob's library for exile, Hill Giant then goes to your battlefield, and you lose 4 life: no land is needed.
+
+### Blue Mage's Cane: casting a copy for {3}
+
+- **Do:** Pass into declare attackers and attack Bob with Hill Giant, taking Lightning Bolt from the popup. Click Cast Lightning Bolt (pay {3}) and click Bob.
+- **Expect:** The banner says "by paying {3} rather than its mana cost". Your Wastes pay though Lightning Bolt asks for red. Bob loses 3 for the Bolt and 3 from the Giant, and Lightning Bolt ends in exile, the copy gone.
+
+### Ogre Battlecaster: casting for {R}{R} more
+
+- **Do:** Pass into declare attackers and attack Bob with Ogre Battlecaster. Click Cast Lightning Bolt (and {R}{R}) and click Bob.
+- **Expect:** The banner says "by paying {R}{R} in addition to its other costs". All three Mountains tap. A second ability goes on the stack above the Bolt, and the Ogre becomes a 4/3 before the Bolt resolves: Bob loses 3 and then 4. The Bolt ends in exile.
+
+### Tinybones, the Pickpocket: green mana is not needed
+
+- **Do:** Pass into declare attackers and attack Bob with Tinybones. Pass until the banner asks, then click Cast Grizzly Bears (mana of any type).
+- **Expect:** The button says "(mana of any type)". Two Swamps pay for Grizzly Bears, which enters on your side from Bob's graveyard.
+
+### Anrakyr the Traveller: four players, a spell from your hand or graveyard for life
+
+- **Do:** Attack Bob with Anrakyr. In the popup, take Mind Stone and Confirm.
+- **Expect:** The popup offers Sol Ring and Mind Stone, not Grizzly Bears, and says "by paying life equal to its mana value". Mind Stone comes from your graveyard to the battlefield, and you lose 2 life.
+
+### Omen Machine: no way to say no
+
+- **Do:** Nothing: the game comes to the question in your draw step. Click Cast Hill Giant (free).
+- **Expect:** You draw no card, Hill Giant is exiled, and the banner says "Cast Hill Giant without paying its mana cost?", with no "Don't cast" button.
+
+### Omen Machine: four players, each exiles on their own draw step
+
+- **Do:** Cast Hill Giant when asked, then pass until the round has come back to you.
+- **Expect:** Nobody draws. Bob's Forest enters on his side, Carol's Grizzly Bears is cast on hers, and Dave's Mountain enters on his.

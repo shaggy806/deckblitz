@@ -24,6 +24,7 @@
 import type { Action, LegalAction } from "../actions.js";
 import type { PlayerId } from "../primitives.js";
 import type { AwaitingDecision } from "../state.js";
+import type { RandomSource } from "./contract.js";
 import { defineDecision } from "./define.js";
 import { randomCast } from "./shared/random-cast.js";
 
@@ -39,7 +40,7 @@ export const castNow = defineDecision({
     if (action.type !== "cast-now" || awaiting === null || awaiting.kind !== "cast-now" || awaiting.player !== player) {
       return `${player} is not being asked to cast a card`;
     }
-    if (action.cast === null) return null;
+    if (action.cast === null) return awaiting.mustCast === true ? `${player} must cast it if able` : null;
     if (action.cast.type === "play-land") {
       const land = action.cast;
       const face = land.face ?? 0;
@@ -62,15 +63,21 @@ export const castNow = defineDecision({
     host.applyCastNow(action.player, action.cast);
   },
 
-  ask: (controller, view, awaiting, player): Action => ({
-    type: "cast-now",
-    player,
-    cast: controller.chooseCastNow(view, offerOf(awaiting)),
-  }),
+  ask: (controller, view, awaiting, player): Action => {
+    const offer = offerOf(awaiting);
+    const cast = controller.chooseCastNow(view, offer);
+    // "If able": a controller that would decline (every one that casts nothing)
+    // casts the first way it can fill in.
+    return { type: "cast-now", player, cast: cast === null && offer.mustCast === true ? firstCast(offer, player, FIRST_PICK) : cast };
+  },
 
   /** Decline, or one of the ways to cast or play it, uniformly — a cast
-   * built at random. */
+   * built at random. "If able", never the decline. */
   randomAnswer: (legal, player, rng): Action => {
+    if (legal.mustCast === true) {
+      const from = rng.pickIndex(legal.casts.length);
+      return { type: "cast-now", player, cast: firstCast(legal, player, rng, from) };
+    }
     const lands = legal.lands ?? [];
     const pick = rng.pickIndex(legal.casts.length + lands.length + 1);
     if (pick > legal.casts.length) {
@@ -90,6 +97,29 @@ export const castNow = defineDecision({
   // v1's answer (`chooseCastNow`), as for the other kinds without one.
 });
 
+/** A source of choices that always takes the first: the same answer every time
+ * (the engine's determinism holds), for a controller that won't choose. */
+const FIRST_PICK: RandomSource = {
+  random: () => 0,
+  pickIndex: () => 0,
+  pickTargets: (options) => options.map((slot) => slot[0] ?? null),
+};
+
+/** The first of the offer's casts, starting at `from`, that can be filled in. */
+function firstCast(
+  offer: Extract<LegalAction, { kind: "cast-now" }>,
+  player: PlayerId,
+  rng: RandomSource,
+  from = 0,
+): Extract<Action, { type: "cast-spell" }> | null {
+  const count = offer.casts.length;
+  for (let i = 0; i < count; i += 1) {
+    const cast = randomCast(offer.casts[(from + i) % count], player, rng);
+    if (cast !== null) return cast;
+  }
+  return null;
+}
+
 /** The decision as its player is offered it. */
 function offerOf(awaiting: Extract<AwaitingDecision, { kind: "cast-now" }>): Extract<LegalAction, { kind: "cast-now" }> {
   return {
@@ -100,6 +130,11 @@ function offerOf(awaiting: Extract<AwaitingDecision, { kind: "cast-now" }>): Ext
     free: awaiting.free,
     ...(awaiting.byDiscarding === true ? { byDiscarding: true as const } : {}),
     ...(awaiting.byPayingEnergy === true ? { byPayingEnergy: true as const } : {}),
+    ...(awaiting.byPayingLife === true ? { byPayingLife: true as const } : {}),
+    ...(awaiting.byPaying !== undefined ? { byPaying: awaiting.byPaying } : {}),
+    ...(awaiting.alsoPaying !== undefined ? { alsoPaying: awaiting.alsoPaying } : {}),
+    ...(awaiting.spendAs !== undefined ? { anyMana: true as const } : {}),
+    ...(awaiting.mustCast === true ? { mustCast: true as const } : {}),
     ...(awaiting.madness !== undefined ? { madness: awaiting.madness } : {}),
     ...(awaiting.miracle !== undefined ? { miracle: awaiting.miracle } : {}),
     ...(awaiting.suspendCost === true ? { suspendCost: true as const } : {}),

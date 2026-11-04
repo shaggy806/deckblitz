@@ -3080,6 +3080,15 @@ export interface CastNowAsk {
   /** Energy equal to the spell's mana value paid instead — the `cast-now`
    * effect's `byPayingEnergy`. */
   readonly byPayingEnergy?: true;
+  /** Life equal to the spell's mana value paid instead — the effect's
+   * `byPayingLife`. */
+  readonly byPayingLife?: true;
+  /** This mana paid rather than the mana cost — the effect's `byPaying`. */
+  readonly byPaying?: string;
+  /** This mana paid on top of the other costs — the effect's `alsoPaying`. */
+  readonly alsoPaying?: string;
+  /** "Mana of any type can be spent" (rule 118.14) — the effect's `spendAs`. */
+  readonly spendAs?: SpendAs;
   /** The madness cost paid rather than the mana cost (rule 702.35a). */
   readonly madness?: string;
   /** The miracle cost paid rather than the mana cost (rule 702.94a). */
@@ -4507,6 +4516,19 @@ export type AwaitingDecision =
       /** …by paying energy equal to its mana value instead — see the
        * effect's `byPayingEnergy`. */
       readonly byPayingEnergy?: true;
+      /** …by paying life equal to its mana value instead — see the effect's
+       * `byPayingLife`. */
+      readonly byPayingLife?: true;
+      /** …for this mana instead — see the effect's `byPaying`. */
+      readonly byPaying?: string;
+      /** …for this mana on top of its other costs — see the effect's
+       * `alsoPaying`. */
+      readonly alsoPaying?: string;
+      /** …with mana of any type spendable — see the effect's `spendAs`. */
+      readonly spendAs?: SpendAs;
+      /** "If able", and it can't lawfully be got out of: no declining — see
+       * the effect's `mustCast` and `Game.castNowMandatory`. */
+      readonly mustCast?: true;
       /** …for its madness cost instead (rule 702.35a) — the cost. */
       readonly madness?: string;
       /** …for its miracle cost instead (rule 702.94a) — the cost. */
