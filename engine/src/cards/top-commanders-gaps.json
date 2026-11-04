@@ -1719,7 +1719,9 @@
   "effect:grant-mana-ability-to-countered-creatures",
   "effect:aura-grants-restricted-mana-ability",
   "effect:gain-activated-abilities-of-target",
-  "effect:mana-any-combination-choice"
+  "effect:mana-any-combination-choice",
+  "effect:mana-any-combination-choice",
+  "effect:mass-graveyard-to-battlefield"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

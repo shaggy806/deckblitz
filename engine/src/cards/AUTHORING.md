@@ -2626,7 +2626,8 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
   graveyard at once, each card under its owner's control, also Open the Vaults'
   "return all … from all graveyards … under their owners' control", Planar Birth's
   `enterTapped` and Pyrrhic Revival's `withCounters`; `from: "all-graveyards"` with
-  `destination: "hand"` is Infernal Caretaker's "to their owners' hands"; "that
+  `destination: "battlefield"` is Rise of the Dark Realms' "under your control", with
+  `destination: "hand"` Infernal Caretaker's "to their owners' hands"; "that
   weren't put there this way" is the filter's `notThisWay`, Bringer of the Last
   Gift's); inside `for-each-vote` it is that
   voter's own choice (Grave Sifter's "cards of that type"). Not yet: a

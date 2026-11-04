@@ -3128,6 +3128,14 @@ export function parseSentence(sentence, ctx) {
   // graveyard to the battlefield with an additional -1/-1 counter on it"
   // (Pyrrhic Revival); "return all Zombie cards from all graveyards to their
   // owners' hands" (Infernal Caretaker).
+  // "Put all creature cards from all graveyards onto the battlefield under your
+  // control" (Rise of the Dark Realms, Liliana Vess).
+  if ((m = /^put all (.+?) cards from all graveyards onto the battlefield under your control\.$/i.exec(s))) {
+    const types = graveyardReturnTypes(m[1]);
+    if (types !== null) {
+      return { kind: "return-from-graveyard", from: "all-graveyards", filter: types, destination: "battlefield", count: "all" };
+    }
+  }
   if ((m = /^return all (.+?) cards from all graveyards to (the battlefield( tapped)? under their owners' control|their owners' hands)\.$/i.exec(s))) {
     const types = graveyardReturnTypes(m[1]);
     if (types !== null) {

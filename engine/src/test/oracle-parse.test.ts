@@ -14221,6 +14221,25 @@ describe("the turn's lists and counts: attackers, sacrifices, exile, surveils", 
   });
 });
 
+describe("every graveyard onto the battlefield", () => {
+  it("put all creature cards from all graveyards under your control", () => {
+    const face = parseFace({
+      name: "Test Card",
+      type_line: "Sorcery",
+      oracle_text: "Put all creature cards from all graveyards onto the battlefield under your control.",
+      mana_cost: "{1}",
+      colors: [],
+    });
+    expect(face.effect).toEqual({
+      kind: "return-from-graveyard",
+      from: "all-graveyards",
+      filter: { type: "creature" },
+      destination: "battlefield",
+      count: "all",
+    });
+  });
+});
+
 describe("mana in any combination of colors", () => {
   const WUBRG = ["W", "U", "B", "R", "G"];
   const read = (type_line: string, oracle_text: string) =>
