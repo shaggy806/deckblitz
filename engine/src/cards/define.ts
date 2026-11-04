@@ -5697,6 +5697,12 @@ export interface CardDefinition {
    * "enters transformed" clause. A modal DFC (`faces` set, `transform` false)
    * is cast by choosing a face and never turns over. Set on both faces. */
   readonly transform: boolean;
+  /** "As this permanent transforms into [this face], …" (rule 712.20), on the
+   * face named: applied while the permanent is transforming, not afterward —
+   * no trigger, nothing on the stack, nothing to respond to, and not when a
+   * permanent enters already showing this face. It can't target or ask
+   * anything (Sephiroth, One-Winged Angel's emblem). `null` for normal cards. */
+  readonly asTransformsInto: EffectSpec | null;
   /** A flip card (rule 710): `faces` is its normal half then its alternative
    * (upside-down) half, each its own `CardDefinition` with this flag. It is
    * cast and lives everywhere as its normal half (710.2); a `flip` effect
@@ -5927,6 +5933,7 @@ const PRINTED_ABILITY: {
   castOnlyIf: (def) => def.castOnlyIf !== null,
   asCast: (def) => def.asCast.length > 0,
   splitSecond: (def) => def.splitSecond,
+  asTransformsInto: (def) => def.asTransformsInto !== null,
   copyOnEnter: (def) => def.copyOnEnter !== null,
   becomesOnEnter: (def) => def.becomesOnEnter !== null,
   exchangeTextOnEnter: (def) => def.exchangeTextOnEnter !== null,
@@ -6188,6 +6195,7 @@ interface CardDraft {
   castOnlyIf?: StaticCondition;
   asCast?: readonly AsCastFact[];
   splitSecond?: boolean;
+  asTransformsInto?: EffectSpec;
   copyOnEnter?: CopyOnEnter;
   becomesOnEnter?: BecomesOnEnter;
   exchangeTextOnEnter?: CardFilter;
@@ -6463,6 +6471,7 @@ export function defineCard(draft: CardDraft): CardDefinition {
     castOnlyIf: draft.castOnlyIf ?? null,
     asCast: draft.asCast ?? [],
     splitSecond: draft.splitSecond ?? false,
+    asTransformsInto: draft.asTransformsInto ?? null,
     copyOnEnter: draft.copyOnEnter ?? null,
     becomesOnEnter: draft.becomesOnEnter ?? null,
     exchangeTextOnEnter: draft.exchangeTextOnEnter ?? null,

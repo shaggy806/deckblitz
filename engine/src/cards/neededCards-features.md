@@ -5046,3 +5046,5 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 **A turn's triggered mana ability (2026-11-04).** `effect:turn-scoped-mana-trigger`: a `delayed-trigger` with `whenever: { on: "tapped-for-mana" }` and an `add-mana` effect is a triggered mana ability (rule 605.1b): `Game.tappedForManaExtras` reads it with the permanents', and the watchers leave it alone. High Tide, Bubbling Muck, Pyre Rhymer with Molten Tide.
 
 **A loss of life replaced (2026-11-04).** `replacement:would-lose-life`: `LifeLossReplacement` (`who`, `multiplier`), asked of every loss in `Game.changeLife`, damage's before its floor. Bloodletter of Aclazotz.
+
+**As this transforms (2026-11-04).** `replacement:as-transforms`: `asTransformsInto` on the face named, an `EffectSpec` applied inside `Game.transformPermanent` before the event (rule 712.20). Sephiroth. It can't ask anything yet: Ludevic and Curse of Leeches choose while transforming.

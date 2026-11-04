@@ -43287,6 +43287,14 @@ export class Game {
     if (object === undefined || object.zone !== "battlefield") return;
     if (!this.isTransformingDfc(id)) return;
     object.face = (object.face ?? 0) === 0 ? 1 : 0;
+    invalidateComputedCache();
+    // Rule 712.20: an "As this transforms …" ability the permanent has after
+    // it transforms applies while it's transforming, so before anything can
+    // see the transform.
+    const asTransforms = this.registry.get(rulesTextName(object)).asTransformsInto;
+    if (asTransforms !== null) {
+      applyEffectSpec(asTransforms, this.makeResolutionContext(id, object.controller, []));
+    }
     this.emit({
       type: "permanent-transformed",
       object: id,

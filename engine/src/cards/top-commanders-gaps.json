@@ -1777,7 +1777,8 @@
   "effect:additional-combat-after-main",
   "effect:win-game",
   "effect:put-arrived-all-tapped",
-  "amount:target-player-counters"
+  "amount:target-player-counters",
+  "replacement:as-transforms"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {
