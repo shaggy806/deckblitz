@@ -5054,3 +5054,5 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 **One amount against another (2026-11-04).** `condition:intervening-if-amounts`: the `amounts` condition (`left`, `op`, `right`), answered by `ConditionOptions.amounts` from `Game.interveningIfMet` and a resolving `conditional`, read unclamped (`signedAmountValue`). Liberator, Urza's Battlethopter; ED-E, Lonesome Eyebot.
 
 **Attack you and aren't blocked (2026-11-04).** `trigger:attacks-you-unblocked-batch`: `attacks-player` with `unblocked`, off a `player-attacked-unblocked` event per player attacked directly, as blockers are declared. Coveted Jewel.
+
+**Each combat this turn (2026-11-04).** `effect:delayed-trigger-each-combat`, no engine code: `additional-combat` twice with `afterThisPhase`, in a `conditional` on `turn-structure`, and a `delayed-trigger` at a `whenever` of `step-begins`. Full Throttle.
