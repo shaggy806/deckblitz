@@ -382,6 +382,8 @@ function eventText(event: GameEvent, nameOf: NameOf, seats: readonly SeatStatus[
       return `${who(event.controller)} gains control of ${name(event.object)}${
         event.untilEndOfTurn ? ' until EOT' : ''
       }`
+    case 'spell-control-changed':
+      return `${who(event.controller)} gains control of ${name(event.object)}`
     case 'text-boxes-exchanged':
       return `${name(event.object)} and ${name(event.withObject)} exchange text boxes`
     case 'permanent-copied':

@@ -14,6 +14,12 @@ const event = (fields: Record<string, unknown>) => ({ seq: 1, ...fields }) as un
 const nameOf = (id: ObjectId) => `card:${id}`
 
 describe('describeEvent', () => {
+  it('says who gained control of a spell', () => {
+    expect(
+      describeEvent(event({ type: 'spell-control-changed', object: 'o1', controller: p1, previousController: p2 }), nameOf, seats),
+    ).toBe('Toby gains control of card:o1')
+  })
+
   it('says what a type change made it, "in addition" only when nothing was replaced', () => {
     const changed = (fields: Record<string, unknown>) =>
       describeEvent(event({ type: 'types-added', object: 'o1', types: [], duration: 'end-of-turn', ...fields }), nameOf, seats)
