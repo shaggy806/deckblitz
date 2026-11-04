@@ -482,7 +482,9 @@ section keeps only what to do next.
   Arcum's Weathervane and Thermal Flux (snow).
   **By best EDHREC card, from here (`cards:needs -- --by-rank`):** Gemstone Caverns, Sylvan Library, Arena of Glory, Mistrise Village, Selvala,
   Rise of the Dark Realms, Field of the Dead, Birgi. Their records overstated the work more than once (Arena of Glory, Mistrise Village,
-  Rise and Field needed no engine code): try the card first. Then Banner of Kinship, Opal Palace, Innkeeper's Talent, Archivist of Oghma.
+  Rise and Field needed no engine code): try the card first. Then Banner of Kinship, Opal Palace, Innkeeper's Talent, Archivist of Oghma,
+  Veil of Summer, Unbreakable Formation, Opposition Agent, Tibalt's Trickery, Starting Town, Liliana, Dreadhorde General, High Tide,
+  Bloodletter of Aclazotz.
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next

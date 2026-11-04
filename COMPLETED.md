@@ -12,6 +12,17 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **A copied spell's delayed whenever outlives the copy** (2026-11-04, `0c10d9529`): Twincast on Glimpse of Nature draws twice.
+- **A loss of life replaced, whatever caused it** (2026-11-04, `3bf2c4744`): Bloodletter of Aclazotz.
+- **A delayed triggered mana ability** (2026-11-04, `e140cfb14`): High Tide, Bubbling Muck, Pyre Rhymer // Molten Tide.
+- **A permanent of each permanent type, and the caster choosing for each player** (2026-11-04, `6a548a4d1`): Liliana, Dreadhorde General,
+  Cataclysmic Gearhulk, Mythos of Snapdax.
+- **A player's own count of turns taken** (2026-11-04, `886aea625`): Starting Town, Serra Avenger.
+- **Other players' free casts, a spell named as it was on the stack** (2026-11-04, `4bc2ffd73`): Tibalt's Trickery.
+- **Controlling a player while they search, exiling their finds, top-N searches; exile permissions end when the card's owner leaves (rule
+  800.4a)** (2026-11-04, `81068ca34`, `87c7a666a`): Opposition Agent, Aven Mindcensor, Yavimaya Dryad.
+- **Addendum** (2026-11-04, `90a671190`): Unbreakable Formation; the scaffolder now reads it.
+- **Hexproof from a quality for a while; spells can't be countered this turn** (2026-11-04, `6fcb511a5`): Veil of Summer, Mondo Gecko.
 - **A player searching a library as a trigger** (2026-11-04, `1eda5bee4`): Archivist of Oghma, Wan Shi Tong, Ob Nixilis, Unshackled.
 - **Counter replacements by who puts them, on permanents or players** (2026-11-04, `78d94c642`): Innkeeper's Talent, Vorinclex, Monstrous
   Raider, Lae'zel, Vlaakith's Champion.

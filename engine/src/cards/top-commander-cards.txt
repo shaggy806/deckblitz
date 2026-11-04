@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4353 already implemented / 647 missing (marks refreshed 2026-11-04)
+4363 already implemented / 637 missing (marks refreshed 2026-11-04)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -521,7 +521,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   522  Voice of Victory                         {1}{W}           Creature — Human Bard
 [x]   523  Culling the Weak                         {B}              Instant
 [ ]   524  Gitaxian Probe                           {U/P}            Sorcery
-[ ]   525  Veil of Summer                           {G}              Instant
+[x]   525  Veil of Summer                           {G}              Instant
 [x]   526  Strip Mine                               {0}              Land
 [x]   527  Crypt Ghast                              {3}{B}           Creature — Spirit
 [x]   528  Imperial Seal                            {B}              Sorcery
@@ -558,7 +558,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   559  Nesting Grounds                          {0}              Land
 [x]   560  Conduit of Worlds                        {2}{G}{G}        Artifact
 [x]   561  Second Harvest                           {2}{G}{G}        Instant
-[ ]   562  Unbreakable Formation                    {2}{W}           Instant
+[x]   562  Unbreakable Formation                    {2}{W}           Instant
 [x]   563  Marionette Apprentice                    {1}{B}           Creature — Human Artificer
 [x]   564  Springleaf Drum                          {1}              Artifact
 [x]   565  Beastmaster Ascension                    {2}{G}           Enchantment
@@ -575,7 +575,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   576  Selesnya Sanctuary                       {0}              Land
 [x]   577  Mortify                                  {1}{W}{B}        Instant
 [x]   578  Shadowy Backstreet                       {0}              Land — Plains Swamp
-[ ]   579  Opposition Agent                         {2}{B}           Creature — Human Rogue
+[x]   579  Opposition Agent                         {2}{B}           Creature — Human Rogue
 [x]   580  Thespian's Stage                         {0}              Land
 [x]   581  Grave Pact                               {1}{B}{B}{B}     Enchantment
 [x]   582  Saw in Half                              {2}{B}           Instant
@@ -591,7 +591,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   592  Selfless Spirit                          {1}{W}           Creature — Spirit Cleric
 [x]   593  Access Tunnel                            {0}              Land
 [x]   594  Gloomlake Verge                          {0}              Land
-[ ]   595  Tibalt's Trickery                        {1}{R}           Instant
+[x]   595  Tibalt's Trickery                        {1}{R}           Instant
 [x]   596  Puresteel Paladin                        {W}{W}           Creature — Human Knight
 [x]   597  Mulldrifter                              {4}{U}           Creature — Elemental
 [x]   598  Strionic Resonator                       {2}              Artifact
@@ -714,7 +714,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   715  Riveteers Overlook                       {0}              Land
 [x]   716  Howling Mine                             {2}              Artifact
 [x]   717  Castle Garenbrig                         {0}              Land
-[ ]   718  Starting Town                            {0}              Land — Town
+[x]   718  Starting Town                            {0}              Land — Town
 [x]   719  Fire Diamond                             {2}              Artifact
 [x]   720  Overflowing Basin                        {0}              Land
 [x]   721  Viridescent Bog                          {0}              Land
@@ -789,10 +789,10 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   793  Danitha Capashen, Paragon                {2}{W}           Legendary Creature — Human Knight
 [x]   794  Castle Locthwain                         {0}              Land
 [x]   795  Brash Taunter                            {4}{R}           Creature — Goblin
-[ ]   796  Liliana, Dreadhorde General              {4}{B}{B}        Legendary Planeswalker — Liliana
+[x]   796  Liliana, Dreadhorde General              {4}{B}{B}        Legendary Planeswalker — Liliana
 [x]   797  Vanquish the Horde                       {6}{W}{W}        Sorcery
 [x]   798  Meteor Golem                             {7}              Artifact Creature — Golem
-[ ]   799  High Tide                                {U}              Instant
+[x]   799  High Tide                                {U}              Instant
 [x]   800  Escape Tunnel                            {0}              Land
 [x]   801  Bleachbone Verge                         {0}              Land
 [x]   802  Coruscation Mage                         {1}{R}           Creature — Otter Wizard
@@ -847,7 +847,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   851  High Fae Trickster                       {3}{U}           Creature — Faerie Wizard
 [x]   852  Fetid Pools                              {0}              Land — Island Swamp
 [x]   853  The Mycosynth Gardens                    {0}              Land — Sphere
-[ ]   854  Bloodletter of Aclazotz                  {1}{B}{B}{B}     Creature — Vampire Demon
+[x]   854  Bloodletter of Aclazotz                  {1}{B}{B}{B}     Creature — Vampire Demon
 [x]   855  Fiery Emancipation                       {3}{R}{R}{R}     Enchantment
 [x]   856  Murder                                   {1}{B}{B}        Instant
 [x]   857  Mystic Gate                              {0}              Land
@@ -1232,7 +1232,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1237  Iron Myr                                 {2}              Artifact Creature — Myr
 [x]  1238  Bane of Progress                         {4}{G}{G}        Creature — Elemental
 [x]  1239  Rustvale Bridge                          {0}              Artifact Land
-[ ]  1240  Aven Mindcensor                          {2}{W}           Creature — Bird Wizard
+[x]  1240  Aven Mindcensor                          {2}{W}           Creature — Bird Wizard
 [x]  1241  Arachnogenesis                           {2}{G}           Instant
 [x]  1242  Clever Impersonator                      {2}{U}{U}        Creature — Shapeshifter
 [x]  1244  Secure the Wastes                        {X}{W}           Instant
@@ -2223,7 +2223,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2230  Tandem Lookout                           {2}{U}           Creature — Human Scout
 [x]  2231  Jetmir, Nexus of Revels                  {1}{R}{G}{W}     Legendary Creature — Cat Demon
 [x]  2232  Glacial Chasm                            {0}              Land
-[ ]  2233  Bubbling Muck                            {B}              Sorcery
+[x]  2233  Bubbling Muck                            {B}              Sorcery
 [ ]  2234  Tyvar, Jubilant Brawler                  {1}{B}{G}        Legendary Planeswalker — Tyvar
 [x]  2235  Starfall Invocation                      {3}{W}{W}        Sorcery
 [x]  2236  Will of the Mardu                        {2}{W}           Instant
