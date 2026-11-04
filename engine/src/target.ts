@@ -1287,7 +1287,8 @@ export function describeTargetSpec(spec: TargetSpec | string): string {
           : spec.max !== undefined
             ? "up to X"
             : "any number of";
-    return spec.of === "any-target" ? `${many} targets` : `${many} ${describeTargetSpec(spec.of)}`;
+    if (spec.of !== "any-target") return `${many} ${describeTargetSpec(spec.of)}`;
+    return many === "1" || many === "up to 1" ? `${many} target` : `${many} targets`;
   }
   if (spec.kind === "other") {
     const than = spec.than ?? "source";

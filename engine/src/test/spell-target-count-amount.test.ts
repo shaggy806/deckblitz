@@ -8,6 +8,7 @@ import { describe, expect, it } from "vitest";
 
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
+import { describeTargetSpec } from "../target.js";
 
 import { A, B, cast, counters, destroy, life, lands, ref, settle, spawn, table, toGraveyard, toHand, zone } from "./harness.js";
 
@@ -116,6 +117,17 @@ describe("Comet Storm", () => {
     settle(game);
     expect(life(game, B)).toBe(18);
     expect(zone(game, card)).toBe("graveyard");
+  });
+});
+
+describe("what a group's prompt calls its targets", () => {
+  it("says one target in the singular", () => {
+    const group = (min: number, max: number) => ({ kind: "any-number", of: "any-target", min, max }) as const;
+    expect(describeTargetSpec(group(1, 1))).toBe("1 target");
+    expect(describeTargetSpec(group(0, 1))).toBe("up to 1 target");
+    expect(describeTargetSpec(group(3, 3))).toBe("3 targets");
+    expect(describeTargetSpec(group(0, 3))).toBe("up to 3 targets");
+    expect(describeTargetSpec({ kind: "any-number", of: "any-target" })).toBe("any number of targets");
   });
 });
 
