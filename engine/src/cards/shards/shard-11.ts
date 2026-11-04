@@ -538,6 +538,7 @@ import _poolNullmageAdvocate from "../pool/nullmage-advocate.js";
 import _poolNutrientBlock from "../pool/nutrient-block.js";
 import _poolOakenform from "../pool/oakenform.js";
 import _poolOasisRitualist from "../pool/oasis-ritualist.js";
+import _poolOathOfDruids from "../pool/oath-of-druids.js";
 import _poolOblivionStrike from "../pool/oblivion-strike.js";
 import _poolOkosAccomplices from "../pool/okos-accomplices.js";
 import _poolOkoyeDoraMilajeLeader from "../pool/okoye-dora-milaje-leader.js";
@@ -1443,6 +1444,7 @@ const shard: CardShard = {
     _poolNutrientBlock,
     _poolOakenform,
     _poolOasisRitualist,
+    _poolOathOfDruids,
     _poolOblivionStrike,
     _poolOkosAccomplices,
     _poolOkoyeDoraMilajeLeader,

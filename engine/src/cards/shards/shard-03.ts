@@ -91,6 +91,7 @@ import _poolCentaurOmenreader from "../pool/centaur-omenreader.js";
 import _poolCentaurRootcaster from "../pool/centaur-rootcaster.js";
 import _poolChancellorOfTheDross from "../pool/chancellor-of-the-dross.js";
 import _poolChangelingTitan from "../pool/changeling-titan.js";
+import _poolCharisma from "../pool/charisma.js";
 import _poolCharmedClothier from "../pool/charmed-clothier.js";
 import _poolChitterspitter from "../pool/chitterspitter.js";
 import _poolChivalricAlliance from "../pool/chivalric-alliance.js";
@@ -912,6 +913,7 @@ const shard: CardShard = {
     _poolCentaurRootcaster,
     _poolChancellorOfTheDross,
     _poolChangelingTitan,
+    _poolCharisma,
     _poolCharmedClothier,
     _poolChitterspitter,
     _poolChivalricAlliance,

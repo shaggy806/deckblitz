@@ -777,6 +777,7 @@ import _poolTheThirdDoctor from "../pool/the-third-doctor.js";
 import _poolTheUnbeatableSquirrelGirl from "../pool/the-unbeatable-squirrel-girl.js";
 import _poolThingFromTheDeep from "../pool/thing-from-the-deep.js";
 import _poolThistledownDuo from "../pool/thistledown-duo.js";
+import _poolThoughtboundPrimoc from "../pool/thoughtbound-primoc.js";
 import _poolThoughtseize from "../pool/thoughtseize.js";
 import _poolThreeTreeCity from "../pool/three-tree-city.js";
 import _poolThreefoldThunderhulk from "../pool/threefold-thunderhulk.js";
@@ -813,6 +814,7 @@ import _poolTributeToUrborg from "../pool/tribute-to-urborg.js";
 import _poolTrickstersElk from "../pool/tricksters-elk.js";
 import _poolTrollhide from "../pool/trollhide.js";
 import _poolTrynnChampionOfFreedom from "../pool/trynn-champion-of-freedom.js";
+import _poolTurfWar from "../pool/turf-war.js";
 import _poolTuskedColossodon from "../pool/tusked-colossodon.js";
 import _poolTyrantsScorn from "../pool/tyrants-scorn.js";
 import _poolTyrranax from "../pool/tyrranax.js";
@@ -1694,6 +1696,7 @@ const shard: CardShard = {
     _poolTheUnbeatableSquirrelGirl,
     _poolThingFromTheDeep,
     _poolThistledownDuo,
+    _poolThoughtboundPrimoc,
     _poolThoughtseize,
     _poolThreeTreeCity,
     _poolThreefoldThunderhulk,
@@ -1730,6 +1733,7 @@ const shard: CardShard = {
     _poolTrickstersElk,
     _poolTrollhide,
     _poolTrynnChampionOfFreedom,
+    _poolTurfWar,
     _poolTuskedColossodon,
     _poolTyrantsScorn,
     _poolTyrranax,

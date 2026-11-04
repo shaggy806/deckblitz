@@ -93,6 +93,7 @@ import _poolBrontotherium from "../pool/brontotherium.js";
 import _poolBronzebeakMoa from "../pool/bronzebeak-moa.js";
 import _poolBrothersYamazaki from "../pool/brothers-yamazaki.js";
 import _poolBrowse from "../pool/browse.js";
+import _poolBucknardsEverfullPurse from "../pool/bucknards-everfull-purse.js";
 import _poolBullAurochs from "../pool/bull-aurochs.js";
 import _poolBullsStrength from "../pool/bulls-strength.js";
 import _poolBurnTheAccursed from "../pool/burn-the-accursed.js";
@@ -549,6 +550,7 @@ import _poolOverzealousMuscle from "../pool/overzealous-muscle.js";
 import _poolParishBladeTrainee from "../pool/parish-blade-trainee.js";
 import _poolPassionateArchaeologist from "../pool/passionate-archaeologist.js";
 import _poolPeacekeeper from "../pool/peacekeeper.js";
+import _poolPendantOfProsperity from "../pool/pendant-of-prosperity.js";
 import _poolPerilousVoyage from "../pool/perilous-voyage.js";
 import _poolPhantasmalDreadmaw from "../pool/phantasmal-dreadmaw.js";
 import _poolPhantomFlock from "../pool/phantom-flock.js";
@@ -1015,6 +1017,7 @@ const shard: CardShard = {
     _poolBronzebeakMoa,
     _poolBrothersYamazaki,
     _poolBrowse,
+    _poolBucknardsEverfullPurse,
     _poolBullAurochs,
     _poolBullsStrength,
     _poolBurnTheAccursed,
@@ -1471,6 +1474,7 @@ const shard: CardShard = {
     _poolParishBladeTrainee,
     _poolPassionateArchaeologist,
     _poolPeacekeeper,
+    _poolPendantOfProsperity,
     _poolPerilousVoyage,
     _poolPhantasmalDreadmaw,
     _poolPhantomFlock,

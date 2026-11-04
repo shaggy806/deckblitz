@@ -545,6 +545,7 @@ import _poolNorinSwiftSurvivalist from "../pool/norin-swift-survivalist.js";
 import _poolNotOnMyWatch from "../pool/not-on-my-watch.js";
 import _poolNulldrifter from "../pool/nulldrifter.js";
 import _poolNurturingPixie from "../pool/nurturing-pixie.js";
+import _poolOathOfGhouls from "../pool/oath-of-ghouls.js";
 import _poolOboroPalaceInTheClouds from "../pool/oboro-palace-in-the-clouds.js";
 import _poolObservedStasis from "../pool/observed-stasis.js";
 import _poolObuunMulDayaAncestor from "../pool/obuun-mul-daya-ancestor.js";
@@ -1502,6 +1503,7 @@ const shard: CardShard = {
     _poolNotOnMyWatch,
     _poolNulldrifter,
     _poolNurturingPixie,
+    _poolOathOfGhouls,
     _poolOboroPalaceInTheClouds,
     _poolObservedStasis,
     _poolObuunMulDayaAncestor,

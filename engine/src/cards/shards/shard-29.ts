@@ -142,6 +142,7 @@ import _poolCuriousCadaver from "../pool/curious-cadaver.js";
 import _poolCuriousForager from "../pool/curious-forager.js";
 import _poolCurseOfTheNightlyHunt from "../pool/curse-of-the-nightly-hunt.js";
 import _poolCustomsDepot from "../pool/customs-depot.js";
+import _poolDackFaydenHelpingHand from "../pool/dack-fayden-helping-hand.js";
 import _poolDailyBugleReporters from "../pool/daily-bugle-reporters.js";
 import _poolDamn from "../pool/damn.js";
 import _poolDaringSkyjek from "../pool/daring-skyjek.js";
@@ -1047,6 +1048,7 @@ const shard: CardShard = {
     _poolCuriousForager,
     _poolCurseOfTheNightlyHunt,
     _poolCustomsDepot,
+    _poolDackFaydenHelpingHand,
     _poolDailyBugleReporters,
     _poolDamn,
     _poolDaringSkyjek,

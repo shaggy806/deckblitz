@@ -527,6 +527,7 @@ import _poolPrismaticBoon from "../pool/prismatic-boon.js";
 import _poolPrivilegedPosition from "../pool/privileged-position.js";
 import _poolProphetOfKruphix from "../pool/prophet-of-kruphix.js";
 import _poolProvoke from "../pool/provoke.js";
+import _poolPryingQuestions from "../pool/prying-questions.js";
 import _poolPsychicPurge from "../pool/psychic-purge.js";
 import _poolPsychoticHaze from "../pool/psychotic-haze.js";
 import _poolPuppetMaster from "../pool/puppet-master.js";
@@ -1407,6 +1408,7 @@ const shard: CardShard = {
     _poolPrivilegedPosition,
     _poolProphetOfKruphix,
     _poolProvoke,
+    _poolPryingQuestions,
     _poolPsychicPurge,
     _poolPsychoticHaze,
     _poolPuppetMaster,

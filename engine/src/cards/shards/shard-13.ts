@@ -488,6 +488,9 @@ import _poolNoviceDissector from "../pool/novice-dissector.js";
 import _poolNoxiousVapors from "../pool/noxious-vapors.js";
 import _poolNyxbornShieldmate from "../pool/nyxborn-shieldmate.js";
 import _poolOakenBoon from "../pool/oaken-boon.js";
+import _poolOathOfLieges from "../pool/oath-of-lieges.js";
+import _poolOathOfMages from "../pool/oath-of-mages.js";
+import _poolOathOfScholars from "../pool/oath-of-scholars.js";
 import _poolOgreSavant from "../pool/ogre-savant.js";
 import _poolOhabiCaleria from "../pool/ohabi-caleria.js";
 import _poolOkinaTempleToTheGrandfathers from "../pool/okina-temple-to-the-grandfathers.js";
@@ -1361,6 +1364,9 @@ const shard: CardShard = {
     _poolNoxiousVapors,
     _poolNyxbornShieldmate,
     _poolOakenBoon,
+    _poolOathOfLieges,
+    _poolOathOfMages,
+    _poolOathOfScholars,
     _poolOgreSavant,
     _poolOhabiCaleria,
     _poolOkinaTempleToTheGrandfathers,

@@ -324,6 +324,7 @@ import _poolHeronbladeElite from "../pool/heronblade-elite.js";
 import _poolHiddenSpider from "../pool/hidden-spider.js";
 import _poolHideousLaughter from "../pool/hideous-laughter.js";
 import _poolHighlandGame from "../pool/highland-game.js";
+import _poolHithlainRope from "../pool/hithlain-rope.js";
 import _poolHiveOfTheEyeTyrant from "../pool/hive-of-the-eye-tyrant.js";
 import _poolHomunculusHorde from "../pool/homunculus-horde.js";
 import _poolHonorGuard from "../pool/honor-guard.js";
@@ -425,6 +426,7 @@ import _poolMadcapExperiment from "../pool/madcap-experiment.js";
 import _poolMaestrosGift from "../pool/maestros-gift.js";
 import _poolMaggotCarrier from "../pool/maggot-carrier.js";
 import _poolMagicalHack from "../pool/magical-hack.js";
+import _poolMagusOfTheAbyss from "../pool/magus-of-the-abyss.js";
 import _poolMagusOfTheMind from "../pool/magus-of-the-mind.js";
 import _poolMagusOfTheVineyard from "../pool/magus-of-the-vineyard.js";
 import _poolMajesticAuricorn from "../pool/majestic-auricorn.js";
@@ -1241,6 +1243,7 @@ const shard: CardShard = {
     _poolHiddenSpider,
     _poolHideousLaughter,
     _poolHighlandGame,
+    _poolHithlainRope,
     _poolHiveOfTheEyeTyrant,
     _poolHomunculusHorde,
     _poolHonorGuard,
@@ -1342,6 +1345,7 @@ const shard: CardShard = {
     _poolMaestrosGift,
     _poolMaggotCarrier,
     _poolMagicalHack,
+    _poolMagusOfTheAbyss,
     _poolMagusOfTheMind,
     _poolMagusOfTheVineyard,
     _poolMajesticAuricorn,

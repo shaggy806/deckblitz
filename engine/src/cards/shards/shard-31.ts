@@ -924,6 +924,7 @@ import _poolWormwoodTreefolk from "../pool/wormwood-treefolk.js";
 import _poolWreckRemover from "../pool/wreck-remover.js";
 import _poolWuLightCavalry from "../pool/wu-light-cavalry.js";
 import _poolWurmweaverCoil from "../pool/wurmweaver-coil.js";
+import _poolXantchaSleeperAgent from "../pool/xantcha-sleeper-agent.js";
 import _poolYavimayaSapherd from "../pool/yavimaya-sapherd.js";
 import _poolYusriFortunesFlame from "../pool/yusri-fortunes-flame.js";
 import _poolZebraUnicorn from "../pool/zebra-unicorn.js";
@@ -1882,6 +1883,7 @@ const shard: CardShard = {
     _poolWreckRemover,
     _poolWuLightCavalry,
     _poolWurmweaverCoil,
+    _poolXantchaSleeperAgent,
     _poolYavimayaSapherd,
     _poolYusriFortunesFlame,
     _poolZebraUnicorn,

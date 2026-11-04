@@ -693,6 +693,7 @@ import _poolSkyshroudTroopers from "../pool/skyshroud-troopers.js";
 import _poolSnapdaxApexOfTheHunt from "../pool/snapdax-apex-of-the-hunt.js";
 import _poolSnarlingWolf from "../pool/snarling-wolf.js";
 import _poolSoaringSandwing from "../pool/soaring-sandwing.js";
+import _poolSolKanarTheTainted from "../pool/sol-kanar-the-tainted.js";
 import _poolSongbirdSonicScreamer from "../pool/songbird-sonic-screamer.js";
 import _poolSonicTheHedgehog from "../pool/sonic-the-hedgehog.js";
 import _poolSophicCentaur from "../pool/sophic-centaur.js";
@@ -731,6 +732,7 @@ import _poolStreambedAquitects from "../pool/streambed-aquitects.js";
 import _poolStrengthInNumbers from "../pool/strength-in-numbers.js";
 import _poolStromkirkOccultist from "../pool/stromkirk-occultist.js";
 import _poolStudyBreak from "../pool/study-break.js";
+import _poolStuntedGrowth from "../pool/stunted-growth.js";
 import _poolSubterraneanScout from "../pool/subterranean-scout.js";
 import _poolSuccumbToTheCold from "../pool/succumb-to-the-cold.js";
 import _poolSummitProwler from "../pool/summit-prowler.js";
@@ -1599,6 +1601,7 @@ const shard: CardShard = {
     _poolSnapdaxApexOfTheHunt,
     _poolSnarlingWolf,
     _poolSoaringSandwing,
+    _poolSolKanarTheTainted,
     _poolSongbirdSonicScreamer,
     _poolSonicTheHedgehog,
     _poolSophicCentaur,
@@ -1637,6 +1640,7 @@ const shard: CardShard = {
     _poolStrengthInNumbers,
     _poolStromkirkOccultist,
     _poolStudyBreak,
+    _poolStuntedGrowth,
     _poolSubterraneanScout,
     _poolSuccumbToTheCold,
     _poolSummitProwler,
