@@ -2353,7 +2353,9 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
   `filter` `{ thisWay: "created" }` after a `separate` `create-token`), `{
   whileCounter: "duty" }` (Immortal Obligation, `filter: { thisWay:
   "put-onto-battlefield" }`, beside a `restrict` with `cantAttackYou`,
-  `cantBlockYours` and the same duration), `"while-its-controller-controls-source"`
+  `cantBlockYours` and the same duration; `cantAttackYou: "you-and-planeswalkers"`
+  is Promise of Loyalty's "you or planeswalkers you control", naming no battle,
+  after a `vote` with `keep`, over `thisWay: "chosen"`), `"while-its-controller-controls-source"`
   (Vislor Turlough, after a `gain-control`): nothing if it couldn't begin (rule
   611.2b). `target` may be `"source"` or `"trigger-object"` (Kros, Defense
   Contractor). **`ungoad { filter }`** ends every one-shot goad on what matches

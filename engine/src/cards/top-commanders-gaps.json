@@ -1755,7 +1755,9 @@
   "keyword:addendum",
   "mechanic:search-library-control",
   "effect:cast-now-other-player",
-  "condition:dynamic-operand-in-intervening-if"
+  "condition:dynamic-operand-in-intervening-if",
+  "condition:dynamic-operand-in-intervening-if",
+  "mechanic:vow-counters"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

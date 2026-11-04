@@ -6756,8 +6756,10 @@ export type EffectSpec =
       readonly duration?: PtDuration | "its-controllers-next-turn";
       /** "Can't attack **you or a permanent you control**" (Immortal
        * Obligation): `PtModifier.cantAttackYou`, "you" this effect's
-       * controller. `restrictions` may then be empty. */
-      readonly cantAttackYou?: true;
+       * controller. `"you-and-planeswalkers"` is "can't attack you or
+       * **planeswalkers** you control" (Promise of Loyalty), which doesn't
+       * name a battle (rule 310.5). `restrictions` may then be empty. */
+      readonly cantAttackYou?: true | "you-and-planeswalkers";
       /** "Can't block **creatures you control**" (Immortal Obligation):
        * `PtModifier.cantBlockCreaturesOf`. `restrictions` may then be empty. */
       readonly cantBlockYours?: true;
@@ -12116,7 +12118,7 @@ export interface EffectApi {
      * leaving out `except` (`exceptTarget`), or fixed `asItResolves`; `blocks`,
      * the attacker those creatures have to block if able. */
     scope?: {
-      readonly cantAttackYou?: boolean;
+      readonly cantAttackYou?: true | "you-and-planeswalkers";
       readonly cantBlockYours?: boolean;
       readonly scopeTo?: PlayerId;
       readonly except?: ObjectId;
@@ -18270,7 +18272,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           ...(scopeTo !== undefined ? { scopeTo } : {}),
           ...(spared?.kind === "object" ? { except: spared.object } : {}),
           ...(spec.asItResolves === true ? { asItResolves: true } : {}),
-          ...(spec.cantAttackYou === true ? { cantAttackYou: true } : {}),
+          ...(spec.cantAttackYou !== undefined ? { cantAttackYou: spec.cantAttackYou } : {}),
           ...(spec.cantBlockYours === true ? { cantBlockYours: true } : {}),
         });
         return;
@@ -18279,7 +18281,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       const cantBlock = spec.cantBlockAttacker === undefined ? undefined : resolveEffectTarget(spec.cantBlockAttacker, ctx);
       if (target !== undefined) {
         ctx.restrict(target, undefined, spec.restrictions, spec.duration, spec.cantBeBlockedBy, cantBlock, {
-          ...(spec.cantAttackYou === true ? { cantAttackYou: true } : {}),
+          ...(spec.cantAttackYou !== undefined ? { cantAttackYou: spec.cantAttackYou } : {}),
           ...(spec.cantBlockYours === true ? { cantBlockYours: true } : {}),
         });
       }

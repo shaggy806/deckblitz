@@ -2001,6 +2001,9 @@ export interface PtModifier {
    * this player, and any permanent they control (rule 508.1b). Not an
    * ability. */
   cantAttackYou?: PlayerId;
+  /** With `cantAttackYou`: only "you or planeswalkers you control" (Promise of
+   * Loyalty), which doesn't name a battle that player controls (rule 310.5). */
+  cantAttackYouCovers?: "you-and-planeswalkers";
   /** "Can't block creatures you control" (Immortal Obligation): any attacker
    * this player controls (rule 509.1b). Not an ability. */
   cantBlockCreaturesOf?: PlayerId;

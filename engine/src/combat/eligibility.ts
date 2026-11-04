@@ -345,11 +345,16 @@ function whyCannotAttackUncached(
       return `${def.name} can't attack ${defendingPlayer}`;
     }
   }
-  // "Can't attack you or a permanent you control" (Immortal Obligation): on
-  // this creature, however long the modifier lasts.
-  for (const { cantAttackYou } of object.modifiers) {
+  // "Can't attack you or a permanent you control" (Immortal Obligation), or
+  // "you or planeswalkers you control" (Promise of Loyalty): on this creature,
+  // however long the modifier lasts, whoever controls it now.
+  for (const { cantAttackYou, cantAttackYouCovers } of object.modifiers) {
     if (cantAttackYou === undefined) continue;
-    if (target === cantAttackYou || state.objects[target as ObjectId]?.controller === cantAttackYou) {
+    if (
+      cantAttackYouCovers !== undefined
+        ? attackCovers(state, registry, cantAttackYouCovers, cantAttackYou, target)
+        : target === cantAttackYou || state.objects[target as ObjectId]?.controller === cantAttackYou
+    ) {
       return `${def.name} can't attack ${defendingPlayer}`;
     }
   }

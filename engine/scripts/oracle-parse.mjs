@@ -7104,6 +7104,29 @@ function chosenBesideTargets(text, ctx) {
  */
 function chosenAndTheRest(text) {
   const COUNTS = { a: 1, an: 1, one: 1, two: 2, three: 3, four: 4, five: 5, six: 6 };
+  // Promise of Loyalty: the same choice, a counter on what's kept, and a
+  // restriction for as long as that counter stays.
+  const vowed = /^Each player puts an? (\w+) counter on an? (.+?) they control and sacrifices the rest\. Each of those (.+?)s can't attack you or planeswalkers you control for as long as it has an? \1 counter on it\.$/.exec(text);
+  if (vowed !== null) {
+    const kept = parseTypePhrase(vowed[2]);
+    if (kept === null || parseTypePhrase(vowed[3]) === null) return null;
+    return {
+      kind: "sequence",
+      effects: [
+        { kind: "vote", choose: true, for: { permanent: { ...kept, controlledBy: "you" }, own: true, keep: true } },
+        { kind: "add-counter-all", filter: { thisWay: "chosen" }, counter: vowed[1], amount: 1 },
+        { kind: "sacrifice-all", who: "each-player", filter: { ...kept, notThisWay: "chosen" } },
+        {
+          kind: "restrict",
+          filter: { thisWay: "chosen" },
+          asItResolves: true,
+          restrictions: [],
+          cantAttackYou: "you-and-planeswalkers",
+          duration: { whileCounter: vowed[1] },
+        },
+      ],
+    };
+  }
   const destroyRest = (kept, words) => {
     const rest = words === undefined ? kept : parseTypePhrase(words.replace(" and ", " or "));
     return rest === null ? null : { kind: "destroy-all", filter: { ...rest, notThisWay: "chosen" } };

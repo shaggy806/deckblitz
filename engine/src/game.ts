@@ -42079,7 +42079,7 @@ export class Game {
     cantBeBlockedBy?: CardFilter,
     cantBlock?: TargetRef,
     scope: {
-      readonly cantAttackYou?: boolean;
+      readonly cantAttackYou?: true | "you-and-planeswalkers";
       readonly cantBlockYours?: boolean;
       readonly scopeTo?: PlayerId;
       readonly except?: ObjectId;
@@ -42089,8 +42089,9 @@ export class Game {
   ): void {
     // "Can't attack you or a permanent you control", "can't block creatures
     // you control" (Immortal Obligation), "you" being this effect's controller.
-    const towardYou: Pick<PtModifier, "cantAttackYou" | "cantBlockCreaturesOf"> = {
-      ...(scope.cantAttackYou === true ? { cantAttackYou: controller } : {}),
+    const towardYou: Pick<PtModifier, "cantAttackYou" | "cantAttackYouCovers" | "cantBlockCreaturesOf"> = {
+      ...(scope.cantAttackYou !== undefined ? { cantAttackYou: controller } : {}),
+      ...(scope.cantAttackYou === "you-and-planeswalkers" ? { cantAttackYouCovers: scope.cantAttackYou } : {}),
       ...(scope.cantBlockYours === true ? { cantBlockCreaturesOf: controller } : {}),
     };
     // "Can't block this creature": the attacker as it is now (rule 400.7).
@@ -42106,7 +42107,7 @@ export class Game {
       cantBeBlockedBy === undefined &&
       attacker === undefined &&
       named === undefined &&
-      scope.cantAttackYou !== true &&
+      scope.cantAttackYou === undefined &&
       scope.cantBlockYours !== true
     ) {
       return;

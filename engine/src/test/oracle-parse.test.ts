@@ -15114,3 +15114,19 @@ describe("the greatest of something, as an intervening if", () => {
     expect(face.triggered[0].condition).toEqual({ kind: "controls-greatest", of: "mana-value", filter: { type: "artifact" } });
   });
 });
+
+describe("a kept creature with a counter, and a restriction while it stays", () => {
+  it("reads Promise of Loyalty's", () => {
+    const face = parseFace({
+      name: "Test Card",
+      type_line: "Sorcery",
+      mana_cost: "{4}{W}",
+      colors: ["W"],
+      oracle_text:
+        "Each player puts a vow counter on a creature they control and sacrifices the rest. Each of those creatures can't attack you or planeswalkers you control for as long as it has a vow counter on it.",
+    });
+    expect(face.complete).toBe(true);
+    expect(face.effect.effects.map((e: { kind: string }) => e.kind)).toEqual(["vote", "add-counter-all", "sacrifice-all", "restrict"]);
+    expect(face.effect.effects[3].duration).toEqual({ whileCounter: "vow" });
+  });
+});
