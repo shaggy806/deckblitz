@@ -3958,9 +3958,11 @@ export type EffectSpec =
        * those linked cards onto the battlefield under their owners' control,
        * together — Colfenor's Urn's "return those cards to the battlefield",
        * the cards its `exile { linked }` put there, found though the Urn has
-       * just been sacrificed. `"graveyard"`: into their owners' graveyards —
-       * with `others`, Mimic Vat's "return each other card exiled with this
-       * artifact to its owner's graveyard". */
+       * just been sacrificed. `"graveyard"`: into their owners' graveyards,
+       * together, those it exiled "until it leaves" included — Valakut
+       * Exploration's "put them into their owner's graveyard", counted after by
+       * `thisWay: "put-into-graveyard"`; with `others`, Mimic Vat's "return each
+       * other card exiled with this artifact to its owner's graveyard". */
       readonly linked?: "hand" | "battlefield" | "graveyard";
       /** With `linked: "battlefield"`: "**put** all cards exiled with it
        * onto the battlefield" (Underworld Sentinel) — under the control of
@@ -11625,9 +11627,9 @@ export interface EffectApi {
   /** Show every player the cards this resolution has had each player draw,
    * those still in their hand — the `reveal-drawn` effect. */
   revealDrawn(): void;
-  /** Put `card`, if it's in exile, into its owner's graveyard — the
-   * `put-into-graveyard` effect. */
-  putExiledIntoGraveyard(card: ObjectId): void;
+  /** Put those of `cards` still in exile into their owners' graveyards, as
+   * one event — the `put-into-graveyard` effect. */
+  putExiledIntoGraveyard(cards: readonly ObjectId[]): void;
   /** The source, if this resolution exiled it (from the battlefield too) and
    * it's still in exile — a `cast-now`'s `"source-exiled-this-way"`. */
   sourceExiledThisWay(): readonly ObjectId[];
@@ -16695,7 +16697,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     case "put-into-graveyard": {
       const target = resolveEffectTarget(spec.target, ctx);
-      if (target?.kind === "object") ctx.putExiledIntoGraveyard(target.object);
+      if (target?.kind === "object") ctx.putExiledIntoGraveyard([target.object]);
       return;
     }
     case "foraged":
@@ -16941,9 +16943,9 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       }
       if (spec.linked === "graveyard") {
         const justExiled = spec.others === true ? ctx.cardsExiledThisWay() : [];
-        for (const card of ctx.cardsExiledWithSource()) {
-          if (!justExiled.includes(card)) ctx.putExiledIntoGraveyard(card);
-        }
+        // "Exiled with it" reaches what it exiled until it leaves too (rule
+        // 610.3 — Pinnacle Starcage). Put there together, one event.
+        ctx.putExiledIntoGraveyard(ctx.cardsExiledWithSource(true).filter((card) => !justExiled.includes(card)));
         return;
       }
       // Each case below that puts something onto the battlefield may stop

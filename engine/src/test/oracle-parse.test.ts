@@ -15591,3 +15591,40 @@ describe("a cast trigger keyed to this permanent's own mana", () => {
     expect(face.triggered[0].effect).toEqual({ kind: "discover", amount: { manaValueOf: "trigger-object" } });
   });
 });
+
+describe("the cards exiled with it, to their graveyards", () => {
+  it("reads Valakut Exploration's two linked abilities", () => {
+    const face = parseFace({
+      name: "Valakut Exploration",
+      type_line: "Enchantment",
+      mana_cost: "{2}{R}",
+      colors: ["R"],
+      oracle_text:
+        "Landfall — Whenever a land you control enters, exile the top card of your library. You may play that card for as long as it remains exiled.\nAt the beginning of your end step, if there are cards exiled with this enchantment, put them into their owner's graveyard, then this enchantment deals that much damage to each opponent.",
+    });
+    expect(face.complete).toBe(true);
+    expect(face.triggered[0].effect).toEqual({ kind: "impulse-exile", amount: 1, duration: "while-exiled", linked: true });
+    expect(face.triggered[1].condition).toEqual({ kind: "exiled-with-source", atLeast: 1, now: true });
+    expect(face.triggered[1].effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "return-exiled-by-source", linked: "graveyard" },
+        { kind: "damage", amount: { thisWay: "put-into-graveyard" }, who: "each-opponent" },
+      ],
+    });
+  });
+
+  it("reads Gravegouger's, the exile linked by the line that returns it", () => {
+    const face = parseFace({
+      name: "Gravegouger",
+      type_line: "Creature — Nightmare Horror",
+      mana_cost: "{2}{B}",
+      colors: ["B"],
+      oracle_text:
+        "When this creature enters, exile up to two target cards from a single graveyard.\nWhen this creature leaves the battlefield, return the exiled cards to their owner's graveyard.",
+    });
+    expect(face.complete).toBe(true);
+    expect(face.triggered[0].effect.effect).toEqual({ kind: "exile", target: 0, linked: true });
+    expect(face.triggered[1].effect).toEqual({ kind: "return-exiled-by-source", linked: "graveyard" });
+  });
+});

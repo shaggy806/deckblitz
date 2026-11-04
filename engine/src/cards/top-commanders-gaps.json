@@ -6,6 +6,7 @@
   "effect:batched-dies-total-power",
   "static:blocking-subtype-condition",
   "stat:do-this-once-each-turn",
+  "effect:exiled-with-source-to-graveyard",
   "stat:cast-using-mana-from-this-source",
   "effect:created-token-reference",
   "static:look-at-top-card-conditional",

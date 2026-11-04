@@ -35924,7 +35924,7 @@ export class Game {
           { player: controller, turn: this.state.turn.number, stint, free, ...(spell !== undefined ? { spell } : {}), ...more },
         ];
       },
-      putExiledIntoGraveyard: (card) => this.putExiledIntoGraveyard(card),
+      putExiledIntoGraveyard: (cards) => this.putExiledIntoGraveyard(cards),
       stillExiled: (card, zoneChangeCount) => {
         const object = this.state.objects[card];
         return object?.zone === "exile" && (object.zoneChangeCount ?? 0) === zoneChangeCount ? [card] : [];
@@ -50339,12 +50339,16 @@ export class Game {
     }
   }
 
-  /** `card`, still in exile (rule 702.35a — the madness card not cast) or a
-   * library (Wand of Denial's looked-at card), into its owner's graveyard. */
-  private putExiledIntoGraveyard(card: ObjectId): void {
-    const zone = this.state.objects[card]?.zone;
-    if (zone !== "exile" && zone !== "library") return;
-    this.withGraveyardEnterBatch(() => this.moveObject(card, "graveyard"));
+  /** Those of `cards` still in exile (rule 702.35a — the madness card not cast)
+   * or a library (Wand of Denial's looked-at card), into their owners'
+   * graveyards, as one event. */
+  private putExiledIntoGraveyard(cards: readonly ObjectId[]): void {
+    this.withGraveyardEnterBatch(() => {
+      for (const card of cards) {
+        const zone = this.state.objects[card]?.zone;
+        if (zone === "exile" || zone === "library") this.moveObject(card, "graveyard");
+      }
+    });
   }
 
   /** A discard chosen while an `each-player-may` holds its players' actions

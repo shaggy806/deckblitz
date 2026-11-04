@@ -3681,8 +3681,22 @@ export function parseSentence(sentence, ctx) {
   if (re("put all cards exiled with (?:~|it) into (?:their owners?'s?|its owner's) hands?").test(s)) {
     return { kind: "return-exiled-by-source", linked: "hand" };
   }
-  if (re("put all cards exiled with (?:~|it) into (?:their owners?'s?|its owner's) graveyards?").test(s)) {
+  if (re("put (?:all cards|each card) exiled with (?:~|it) into (?:their owners?'s?|its owner's) graveyards?").test(s)) {
     return { kind: "return-exiled-by-source", linked: "graveyard" };
+  }
+  if (re("return the exiled cards to their owner's graveyard").test(s)) {
+    return { kind: "return-exiled-by-source", linked: "graveyard" };
+  }
+  // "Put them into their owner's graveyard, then ~ deals that much damage to
+  // each opponent" (Valakut Exploration): what reached a graveyard this way.
+  if (re("put them into their owner's graveyard, then ~ deals that much damage to each opponent").test(s)) {
+    return {
+      kind: "sequence",
+      effects: [
+        { kind: "return-exiled-by-source", linked: "graveyard" },
+        { kind: "damage", amount: { thisWay: "put-into-graveyard" }, who: "each-opponent" },
+      ],
+    };
   }
   if (re("turn (?:all cards exiled with ~|the exiled card) face up").test(s)) return { kind: "turn-exiled-face-up" };
   if (re("each player turns face up all cards they own exiled with ~, then puts all permanent cards among them onto the battlefield").test(s)) {
@@ -7050,6 +7064,7 @@ function impulseWindowOf(sentence) {
     [`until end of combat on your next turn, you may ${verb} ${it}`, { duration: "until-end-of-combat-your-next-turn" }],
     [`you may ${verb} ${it} until you exile another card with ~`, { duration: "until-next-exile" }],
     [`you may ${verb} ${it} for as long as you control ~`, { duration: "while-you-control" }],
+    [`you may ${verb} ${it} for as long as it remains exiled`, { duration: "while-exiled" }],
     [`during any turn you attacked with ~, you may ${verb} ${it}`, { duration: "while-exiled", sourceDid: "attacked" }],
     [`during any turn you put a lore counter on ~, you may ${verb} ${it}`, { duration: "while-exiled", sourceDid: "lore-counter" }],
   ];
@@ -15169,7 +15184,7 @@ function parseFaceAsWritten(face, ctx = {}) {
   const oracleText = face.oracle_text ?? "";
   if (
     /\bexiled with (?:this \w+|it)\b/.test(oracleText) ||
-    /\breturn the exiled card\b/.test(oracleText) ||
+    /\breturn the exiled cards?\b/.test(oracleText) ||
     // Hoarding Dragon's "you may put the exiled card into its owner's hand".
     /\bput the exiled card into\b/.test(oracleText) ||
     /\bsame name as the exiled card\b/.test(oracleText) ||
@@ -15241,7 +15256,7 @@ function parseFaceAsWritten(face, ctx = {}) {
     const linkedExile = (node) => {
       if (Array.isArray(node)) node.forEach(linkedExile);
       else if (node !== null && typeof node === "object") {
-        if (node.kind === "exile-from-library") node.linked = true;
+        if (node.kind === "exile-from-library" || node.kind === "impulse-exile") node.linked = true;
         // "You may look at cards exiled with this creature" (Bane Alley
         // Broker): the chooser and whoever comes to control it.
         if (node.kind === "look-and-choose" && /\byou may look at cards exiled with\b/i.test(face.oracle_text ?? "")) delete node.faceDownLooks;
@@ -15702,6 +15717,7 @@ const INTERVENING_IFS = {
   // Still exiled with it, not ever (Smirking Spelljacker, Evercoat Ursine).
   "if a card is exiled with it,": { kind: "exiled-with-source", atLeast: 1, now: true },
   "if there are cards exiled with it,": { kind: "exiled-with-source", atLeast: 1, now: true },
+  "if there are cards exiled with ~,": { kind: "exiled-with-source", atLeast: 1, now: true },
   "if you've completed a dungeon,": { kind: "completed-dungeon" },
   // Rule 700.8c (Zendikar Rising).
   "if you have a full party,": { kind: "full-party" },
