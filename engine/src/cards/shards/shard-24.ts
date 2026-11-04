@@ -767,6 +767,7 @@ import _poolThroneOfTheHighCity from "../pool/throne-of-the-high-city.js";
 import _poolThrowingKnife from "../pool/throwing-knife.js";
 import _poolThrunTheLastTroll from "../pool/thrun-the-last-troll.js";
 import _poolThud from "../pool/thud.js";
+import _poolThunderwave from "../pool/thunderwave.js";
 import _poolTianaShipsCaretaker from "../pool/tiana-ships-caretaker.js";
 import _poolTibaltsRager from "../pool/tibalts-rager.js";
 import _poolTidalForce from "../pool/tidal-force.js";
@@ -853,6 +854,7 @@ import _poolWebstrikeElite from "../pool/webstrike-elite.js";
 import _poolWerefoxBodyguard from "../pool/werefox-bodyguard.js";
 import _poolWhetstone from "../pool/whetstone.js";
 import _poolWhirOfInvention from "../pool/whir-of-invention.js";
+import _poolWickedSlumber from "../pool/wicked-slumber.js";
 import _poolWildPackSquad from "../pool/wild-pack-squad.js";
 import _poolWildShape from "../pool/wild-shape.js";
 import _poolWildfireCerberus from "../pool/wildfire-cerberus.js";
@@ -1669,6 +1671,7 @@ const shard: CardShard = {
     _poolThrowingKnife,
     _poolThrunTheLastTroll,
     _poolThud,
+    _poolThunderwave,
     _poolTianaShipsCaretaker,
     _poolTibaltsRager,
     _poolTidalForce,
@@ -1755,6 +1758,7 @@ const shard: CardShard = {
     _poolWerefoxBodyguard,
     _poolWhetstone,
     _poolWhirOfInvention,
+    _poolWickedSlumber,
     _poolWildPackSquad,
     _poolWildShape,
     _poolWildfireCerberus,

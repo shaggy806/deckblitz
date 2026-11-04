@@ -618,6 +618,7 @@ import _poolScorchingShot from "../pool/scorching-shot.js";
 import _poolScourgeDevil from "../pool/scourge-devil.js";
 import _poolScrappyBruiser from "../pool/scrappy-bruiser.js";
 import _poolScreechingPhoenix from "../pool/screeching-phoenix.js";
+import _poolSculptedSunburst from "../pool/sculpted-sunburst.js";
 import _poolSculptorOfWinter from "../pool/sculptor-of-winter.js";
 import _poolSeaDrake from "../pool/sea-drake.js";
 import _poolSeaOfClouds from "../pool/sea-of-clouds.js";
@@ -1494,6 +1495,7 @@ const shard: CardShard = {
     _poolScourgeDevil,
     _poolScrappyBruiser,
     _poolScreechingPhoenix,
+    _poolSculptedSunburst,
     _poolSculptorOfWinter,
     _poolSeaDrake,
     _poolSeaOfClouds,

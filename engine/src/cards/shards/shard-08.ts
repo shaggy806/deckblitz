@@ -825,6 +825,7 @@ import _poolTragicTrajectory from "../pool/tragic-trajectory.js";
 import _poolTrapDigger from "../pool/trap-digger.js";
 import _poolTreeshakerChimera from "../pool/treeshaker-chimera.js";
 import _poolTreetopDefense from "../pool/treetop-defense.js";
+import _poolTrialOfAgony from "../pool/trial-of-agony.js";
 import _poolTrialOfZeal from "../pool/trial-of-zeal.js";
 import _poolTributaryInstructor from "../pool/tributary-instructor.js";
 import _poolTrustworthyScout from "../pool/trustworthy-scout.js";
@@ -1765,6 +1766,7 @@ const shard: CardShard = {
     _poolTrapDigger,
     _poolTreeshakerChimera,
     _poolTreetopDefense,
+    _poolTrialOfAgony,
     _poolTrialOfZeal,
     _poolTributaryInstructor,
     _poolTrustworthyScout,

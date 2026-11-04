@@ -7,6 +7,7 @@ import _poolAIMSynthoids from "../pool/a-i-m-synthoids.js";
 import _poolAcceleratedEvolution from "../pool/accelerated-evolution.js";
 import _poolAccumulatedKnowledge from "../pool/accumulated-knowledge.js";
 import _poolAdaptiveGemguard from "../pool/adaptive-gemguard.js";
+import _poolAerithRescueMission from "../pool/aerith-rescue-mission.js";
 import _poolAetherSyphon from "../pool/aether-syphon.js";
 import _poolAetherstreamLeopard from "../pool/aetherstream-leopard.js";
 import _poolAffaProtector from "../pool/affa-protector.js";
@@ -913,6 +914,7 @@ const shard: CardShard = {
     _poolAcceleratedEvolution,
     _poolAccumulatedKnowledge,
     _poolAdaptiveGemguard,
+    _poolAerithRescueMission,
     _poolAetherSyphon,
     _poolAetherstreamLeopard,
     _poolAffaProtector,

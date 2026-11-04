@@ -906,6 +906,7 @@ import _poolWallOfFrost from "../pool/wall-of-frost.js";
 import _poolWanderingStream from "../pool/wandering-stream.js";
 import _poolWarrenPilferers from "../pool/warren-pilferers.js";
 import _poolWarriorAngel from "../pool/warrior-angel.js";
+import _poolWatchersOfTheDead from "../pool/watchers-of-the-dead.js";
 import _poolWaytaTrainerProdigy from "../pool/wayta-trainer-prodigy.js";
 import _poolWearTear from "../pool/wear-tear.js";
 import _poolWeddingFestivity from "../pool/wedding-festivity.js";
@@ -1864,6 +1865,7 @@ const shard: CardShard = {
     _poolWanderingStream,
     _poolWarrenPilferers,
     _poolWarriorAngel,
+    _poolWatchersOfTheDead,
     _poolWaytaTrainerProdigy,
     _poolWearTear,
     _poolWeddingFestivity,

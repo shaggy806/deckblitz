@@ -168,6 +168,7 @@ import _poolCrenellatedWall from "../pool/crenellated-wall.js";
 import _poolCroakingCounterpart from "../pool/croaking-counterpart.js";
 import _poolCrosswinds from "../pool/crosswinds.js";
 import _poolCruelSadist from "../pool/cruel-sadist.js";
+import _poolCrushUnderfoot from "../pool/crush-underfoot.js";
 import _poolCurseOfTheRestlessDead from "../pool/curse-of-the-restless-dead.js";
 import _poolCursedMonstrosity from "../pool/cursed-monstrosity.js";
 import _poolCutIn from "../pool/cut-in.js";
@@ -1075,6 +1076,7 @@ const shard: CardShard = {
     _poolCroakingCounterpart,
     _poolCrosswinds,
     _poolCruelSadist,
+    _poolCrushUnderfoot,
     _poolCurseOfTheRestlessDead,
     _poolCursedMonstrosity,
     _poolCutIn,

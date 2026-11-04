@@ -465,6 +465,7 @@ import _poolMomentOfValor from "../pool/moment-of-valor.js";
 import _poolMoonlitStrider from "../pool/moonlit-strider.js";
 import _poolMoonriseIntruder from "../pool/moonrise-intruder.js";
 import _poolMoonshadow from "../pool/moonshadow.js";
+import _poolMoorlandRescuer from "../pool/moorland-rescuer.js";
 import _poolMorselhoarder from "../pool/morselhoarder.js";
 import _poolMortalsResolve from "../pool/mortals-resolve.js";
 import _poolMountainStronghold from "../pool/mountain-stronghold.js";
@@ -1353,6 +1354,7 @@ const shard: CardShard = {
     _poolMoonlitStrider,
     _poolMoonriseIntruder,
     _poolMoonshadow,
+    _poolMoorlandRescuer,
     _poolMorselhoarder,
     _poolMortalsResolve,
     _poolMountainStronghold,

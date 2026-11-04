@@ -242,6 +242,7 @@ import _poolAerieOuphes from "./pool/aerie-ouphes.js";
 import _poolAerieWorshippers from "./pool/aerie-worshippers.js";
 import _poolAerithGainsborough from "./pool/aerith-gainsborough.js";
 import _poolAerithLastAncient from "./pool/aerith-last-ancient.js";
+import _poolAerithRescueMission from "./pool/aerith-rescue-mission.js";
 import _poolAeromunculus from "./pool/aeromunculus.js";
 import _poolAeronautAdmiral from "./pool/aeronaut-admiral.js";
 import _poolAeronautCavalry from "./pool/aeronaut-cavalry.js";
@@ -4793,6 +4794,7 @@ import _poolCovetedPeacock from "./pool/coveted-peacock.js";
 import _poolCovetedPrize from "./pool/coveted-prize.js";
 import _poolCovetousCastaway from "./pool/covetous-castaway.js";
 import _poolCovetousDragon from "./pool/covetous-dragon.js";
+import _poolCovetousElegy from "./pool/covetous-elegy.js";
 import _poolCovetousGeist from "./pool/covetous-geist.js";
 import _poolCowabunga from "./pool/cowabunga.js";
 import _poolCowardKiller from "./pool/coward-killer.js";
@@ -5002,6 +5004,7 @@ import _poolCrushDissent from "./pool/crush-dissent.js";
 import _poolCrushOfTentacles from "./pool/crush-of-tentacles.js";
 import _poolCrushOfWurms from "./pool/crush-of-wurms.js";
 import _poolCrushTheWeak from "./pool/crush-the-weak.js";
+import _poolCrushUnderfoot from "./pool/crush-underfoot.js";
 import _poolCrush from "./pool/crush.js";
 import _poolCrusherZendikon from "./pool/crusher-zendikon.js";
 import _poolCrushingCanopy from "./pool/crushing-canopy.js";
@@ -15554,6 +15557,7 @@ import _poolMoorishCavalry from "./pool/moorish-cavalry.js";
 import _poolMoorlandDrifter from "./pool/moorland-drifter.js";
 import _poolMoorlandHaunt from "./pool/moorland-haunt.js";
 import _poolMoorlandInquisitor from "./pool/moorland-inquisitor.js";
+import _poolMoorlandRescuer from "./pool/moorland-rescuer.js";
 import _poolMorale from "./pool/morale.js";
 import _poolMoratoriumStone from "./pool/moratorium-stone.js";
 import _poolMorbidBloom from "./pool/morbid-bloom.js";
@@ -17502,6 +17506,7 @@ import _poolPhyrexianDelver from "./pool/phyrexian-delver.js";
 import _poolPhyrexianDenouncer from "./pool/phyrexian-denouncer.js";
 import _poolPhyrexianDigester from "./pool/phyrexian-digester.js";
 import _poolPhyrexianDragonEngine from "./pool/phyrexian-dragon-engine.js";
+import _poolPhyrexianDreadnought from "./pool/phyrexian-dreadnought.js";
 import _poolPhyrexianDriver from "./pool/phyrexian-driver.js";
 import _poolPhyrexianEspionage from "./pool/phyrexian-espionage.js";
 import _poolPhyrexianEtchings from "./pool/phyrexian-etchings.js";
@@ -20639,6 +20644,7 @@ import _poolScrybRanger from "./pool/scryb-ranger.js";
 import _poolScrybSprites from "./pool/scryb-sprites.js";
 import _poolScryingSheets from "./pool/scrying-sheets.js";
 import _poolSculptedPerfection from "./pool/sculpted-perfection.js";
+import _poolSculptedSunburst from "./pool/sculpted-sunburst.js";
 import _poolSculptingSteel from "./pool/sculpting-steel.js";
 import _poolSculptorOfWinter from "./pool/sculptor-of-winter.js";
 import _poolScurridColony from "./pool/scurrid-colony.js";
@@ -24911,6 +24917,7 @@ import _poolThundersongTrumpeter from "./pool/thundersong-trumpeter.js";
 import _poolThunderstaff from "./pool/thunderstaff.js";
 import _poolThundersteelColossus from "./pool/thundersteel-colossus.js";
 import _poolThundertrapTrainer from "./pool/thundertrap-trainer.js";
+import _poolThunderwave from "./pool/thunderwave.js";
 import _poolThunderwolfCavalry from "./pool/thunderwolf-cavalry.js";
 import _poolThuridMareOfDestiny from "./pool/thurid-mare-of-destiny.js";
 import _poolThwartTheEnemy from "./pool/thwart-the-enemy.js";
@@ -25440,6 +25447,7 @@ import _poolTrevasCharm from "./pool/trevas-charm.js";
 import _poolTrevasRuins from "./pool/trevas-ruins.js";
 import _poolTriSentinelActOfVengeance from "./pool/tri-sentinel-act-of-vengeance.js";
 import _poolTriadOfFates from "./pool/triad-of-fates.js";
+import _poolTrialOfAgony from "./pool/trial-of-agony.js";
 import _poolTrialOfAmbition from "./pool/trial-of-ambition.js";
 import _poolTrialOfKnowledge from "./pool/trial-of-knowledge.js";
 import _poolTrialOfSolidarity from "./pool/trial-of-solidarity.js";
@@ -27132,6 +27140,7 @@ import _poolWatcherOfTheRoost from "./pool/watcher-of-the-roost.js";
 import _poolWatcherOfTheSpheres from "./pool/watcher-of-the-spheres.js";
 import _poolWatcherOfTheWayside from "./pool/watcher-of-the-wayside.js";
 import _poolWatcherSliver from "./pool/watcher-sliver.js";
+import _poolWatchersOfTheDead from "./pool/watchers-of-the-dead.js";
 import _poolWatchfulAutomaton from "./pool/watchful-automaton.js";
 import _poolWatchfulBlisterzoa from "./pool/watchful-blisterzoa.js";
 import _poolWatchfulGiant from "./pool/watchful-giant.js";
@@ -27402,6 +27411,7 @@ import _poolWickTheWhorledMind from "./pool/wick-the-whorled-mind.js";
 import _poolWickedGuardian from "./pool/wicked-guardian.js";
 import _poolWickedPact from "./pool/wicked-pact.js";
 import _poolWickedReward from "./pool/wicked-reward.js";
+import _poolWickedSlumber from "./pool/wicked-slumber.js";
 import _poolWickedVisitor from "./pool/wicked-visitor.js";
 import _poolWickedWolf from "./pool/wicked-wolf.js";
 import _poolWickerWarcrawler from "./pool/wicker-warcrawler.js";
@@ -29083,6 +29093,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAerieWorshippers,
   _poolAerithGainsborough,
   _poolAerithLastAncient,
+  _poolAerithRescueMission,
   _poolAeromunculus,
   _poolAeronautAdmiral,
   _poolAeronautCavalry,
@@ -33634,6 +33645,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCovetedPrize,
   _poolCovetousCastaway,
   _poolCovetousDragon,
+  _poolCovetousElegy,
   _poolCovetousGeist,
   _poolCowabunga,
   _poolCowardKiller,
@@ -33843,6 +33855,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCrushOfTentacles,
   _poolCrushOfWurms,
   _poolCrushTheWeak,
+  _poolCrushUnderfoot,
   _poolCrush,
   _poolCrusherZendikon,
   _poolCrushingCanopy,
@@ -44395,6 +44408,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMoorlandDrifter,
   _poolMoorlandHaunt,
   _poolMoorlandInquisitor,
+  _poolMoorlandRescuer,
   _poolMorale,
   _poolMoratoriumStone,
   _poolMorbidBloom,
@@ -46343,6 +46357,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPhyrexianDenouncer,
   _poolPhyrexianDigester,
   _poolPhyrexianDragonEngine,
+  _poolPhyrexianDreadnought,
   _poolPhyrexianDriver,
   _poolPhyrexianEspionage,
   _poolPhyrexianEtchings,
@@ -49480,6 +49495,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolScrybSprites,
   _poolScryingSheets,
   _poolSculptedPerfection,
+  _poolSculptedSunburst,
   _poolSculptingSteel,
   _poolSculptorOfWinter,
   _poolScurridColony,
@@ -53752,6 +53768,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolThunderstaff,
   _poolThundersteelColossus,
   _poolThundertrapTrainer,
+  _poolThunderwave,
   _poolThunderwolfCavalry,
   _poolThuridMareOfDestiny,
   _poolThwartTheEnemy,
@@ -54281,6 +54298,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTrevasRuins,
   _poolTriSentinelActOfVengeance,
   _poolTriadOfFates,
+  _poolTrialOfAgony,
   _poolTrialOfAmbition,
   _poolTrialOfKnowledge,
   _poolTrialOfSolidarity,
@@ -55973,6 +55991,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolWatcherOfTheSpheres,
   _poolWatcherOfTheWayside,
   _poolWatcherSliver,
+  _poolWatchersOfTheDead,
   _poolWatchfulAutomaton,
   _poolWatchfulBlisterzoa,
   _poolWatchfulGiant,
@@ -56243,6 +56262,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolWickedGuardian,
   _poolWickedPact,
   _poolWickedReward,
+  _poolWickedSlumber,
   _poolWickedVisitor,
   _poolWickedWolf,
   _poolWickerWarcrawler,
@@ -57937,6 +57957,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/aerie-worshippers": _poolAerieWorshippers,
   "pool/aerith-gainsborough": _poolAerithGainsborough,
   "pool/aerith-last-ancient": _poolAerithLastAncient,
+  "pool/aerith-rescue-mission": _poolAerithRescueMission,
   "pool/aeromunculus": _poolAeromunculus,
   "pool/aeronaut-admiral": _poolAeronautAdmiral,
   "pool/aeronaut-cavalry": _poolAeronautCavalry,
@@ -62488,6 +62509,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/coveted-prize": _poolCovetedPrize,
   "pool/covetous-castaway": _poolCovetousCastaway,
   "pool/covetous-dragon": _poolCovetousDragon,
+  "pool/covetous-elegy": _poolCovetousElegy,
   "pool/covetous-geist": _poolCovetousGeist,
   "pool/cowabunga": _poolCowabunga,
   "pool/coward-killer": _poolCowardKiller,
@@ -62697,6 +62719,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/crush-of-tentacles": _poolCrushOfTentacles,
   "pool/crush-of-wurms": _poolCrushOfWurms,
   "pool/crush-the-weak": _poolCrushTheWeak,
+  "pool/crush-underfoot": _poolCrushUnderfoot,
   "pool/crush": _poolCrush,
   "pool/crusher-zendikon": _poolCrusherZendikon,
   "pool/crushing-canopy": _poolCrushingCanopy,
@@ -73249,6 +73272,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/moorland-drifter": _poolMoorlandDrifter,
   "pool/moorland-haunt": _poolMoorlandHaunt,
   "pool/moorland-inquisitor": _poolMoorlandInquisitor,
+  "pool/moorland-rescuer": _poolMoorlandRescuer,
   "pool/morale": _poolMorale,
   "pool/moratorium-stone": _poolMoratoriumStone,
   "pool/morbid-bloom": _poolMorbidBloom,
@@ -75197,6 +75221,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/phyrexian-denouncer": _poolPhyrexianDenouncer,
   "pool/phyrexian-digester": _poolPhyrexianDigester,
   "pool/phyrexian-dragon-engine": _poolPhyrexianDragonEngine,
+  "pool/phyrexian-dreadnought": _poolPhyrexianDreadnought,
   "pool/phyrexian-driver": _poolPhyrexianDriver,
   "pool/phyrexian-espionage": _poolPhyrexianEspionage,
   "pool/phyrexian-etchings": _poolPhyrexianEtchings,
@@ -78334,6 +78359,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/scryb-sprites": _poolScrybSprites,
   "pool/scrying-sheets": _poolScryingSheets,
   "pool/sculpted-perfection": _poolSculptedPerfection,
+  "pool/sculpted-sunburst": _poolSculptedSunburst,
   "pool/sculpting-steel": _poolSculptingSteel,
   "pool/sculptor-of-winter": _poolSculptorOfWinter,
   "pool/scurrid-colony": _poolScurridColony,
@@ -82606,6 +82632,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/thunderstaff": _poolThunderstaff,
   "pool/thundersteel-colossus": _poolThundersteelColossus,
   "pool/thundertrap-trainer": _poolThundertrapTrainer,
+  "pool/thunderwave": _poolThunderwave,
   "pool/thunderwolf-cavalry": _poolThunderwolfCavalry,
   "pool/thurid-mare-of-destiny": _poolThuridMareOfDestiny,
   "pool/thwart-the-enemy": _poolThwartTheEnemy,
@@ -83135,6 +83162,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/trevas-ruins": _poolTrevasRuins,
   "pool/tri-sentinel-act-of-vengeance": _poolTriSentinelActOfVengeance,
   "pool/triad-of-fates": _poolTriadOfFates,
+  "pool/trial-of-agony": _poolTrialOfAgony,
   "pool/trial-of-ambition": _poolTrialOfAmbition,
   "pool/trial-of-knowledge": _poolTrialOfKnowledge,
   "pool/trial-of-solidarity": _poolTrialOfSolidarity,
@@ -84827,6 +84855,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/watcher-of-the-spheres": _poolWatcherOfTheSpheres,
   "pool/watcher-of-the-wayside": _poolWatcherOfTheWayside,
   "pool/watcher-sliver": _poolWatcherSliver,
+  "pool/watchers-of-the-dead": _poolWatchersOfTheDead,
   "pool/watchful-automaton": _poolWatchfulAutomaton,
   "pool/watchful-blisterzoa": _poolWatchfulBlisterzoa,
   "pool/watchful-giant": _poolWatchfulGiant,
@@ -85097,6 +85126,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/wicked-guardian": _poolWickedGuardian,
   "pool/wicked-pact": _poolWickedPact,
   "pool/wicked-reward": _poolWickedReward,
+  "pool/wicked-slumber": _poolWickedSlumber,
   "pool/wicked-visitor": _poolWickedVisitor,
   "pool/wicked-wolf": _poolWickedWolf,
   "pool/wicker-warcrawler": _poolWickerWarcrawler,
