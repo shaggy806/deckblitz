@@ -444,10 +444,13 @@ section keeps only what to do next.
   mana, a player becoming a target, hexproof from abilities, cards in exile as targets, "this way" results, greatest of a zone, Aura-host statics, combat requirements by filter,
   batched and first-time tapping, a hand looked at as a permanent enters, protection outside the commander's identity, tokens
   created with their source, one target slot over players and permanents, the abilities of exiled cards, mana restrictions
-  read at the cast, suspend X and one of each category (387 proving cards; `--stale` 1,630 wait for `author-freed`). Next by
-  `--greedy --groups`: `decision:choose-permanent`'s other group (6), `effect:mana-ability-side-effects`'s triggered group (6),
-  `cost:spend-only-chosen-type-or-filter` (6), `effect:control-change-extensions` (6). Narrow keys `author-freed`
-  should give: Captain America (an intervening-if read as it resolves), Ajani, Nacatl Pariah (keeps one permanent, not one per
+  read at the cast, suspend X and one of each category, the greatest of an amount among players, chroma and what a permanent
+  devoured, triggered mana abilities that do more, more spend-only purposes, control changes with a computed recipient and the
+  active player's target against their own count (450 proving cards; `--stale` 1,634 wait for `author-freed`). Next by
+  `--greedy --groups`: `decision:choose-permanent`'s other group (6), then the 5-card long tail:
+  `condition:defending-player-life-rank`, `decision:choose-odd-or-even`, `decision:choose-roll-result`. Narrow keys `author-freed`
+  should give: Head Games and Jester's Mask ("search for that many", no this-way count of cards put on a library), Sanity
+  Grinding (its ten cards stay on top until after the mill), Namor (`effect:amount-mana-symbols-of-color-in-spell`), Captain America (an intervening-if read as it resolves), Ajani, Nacatl Pariah (keeps one permanent, not one per
   type), Stronghold Gambit (a secret pick from hand), The Toymaker's Trap (an unchosen number, an opponent's guess),
   Total War ("didn't attack" means that declaration, not the turn), Siren's Call (`condition:cast-timing-condition`), Tanglewalker
   (not true landwalk), Veteran's Voice (`hostOfSource: false` would fizzle if the Aura moves onto the target) and Dance of Many

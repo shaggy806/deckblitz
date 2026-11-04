@@ -12,6 +12,22 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **The active player's target against their own count, and a targeted player's choice from hand** (2026-11-03, `2810bf1a2`):
+  Magus of the Abyss, the five Oaths, Stunted Growth, Prying Questions.
+- **Control changes with a computed recipient, and entering or returning under an opponent** (2026-11-03, `0450d30d4`): Hithlain
+  Rope, Bucknard's Everfull Purse, Thoughtbound Primoc, Charisma, Turf War, Dack Fayden, Helping Hand, Xantcha, Captive Audience,
+  Pendant of Prosperity, Sol'Kanar, Zuko.
+- **More spend-only purposes, and restricted, optional triggered mana** (2026-11-03, `6f2a6eb9f`): foretelling, cumulative upkeep,
+  a cost with {C}, `orSpell`, `mayAdd`. Kolvori, Karfell Harbinger, Cultivator Drone, Adarkar Unicorn, Snowfall, Throne of Makindi.
+- **Triggered mana abilities that do more** (2026-11-03, `176a42fa1`): riders off the stack (rule 605.4a), a condition, a chosen
+  color. Overabundance, Barbflare Gremlin, Winter's Night, Regal Behemoth, Gauntlet of Power, Desolation, Crime Novelist, Hall of
+  the Bandit Lord.
+- **Chroma, what a permanent devoured, a commander's mana value on the battlefield or in the command zone, the greatest shared
+  creature type** (2026-11-03, `a19799c64`): 18 proving cards, among them Fiery Bombardment, Light from Within, Umbra Stalker,
+  Skullmulcher, Voracious Dragon, Cloudkill, Stinging Study, Basalt Ravager, Shared Animosity.
+- **The greatest of an amount among players, and a revealed hand counted through a filter** (2026-11-03, `8d2cf44d4`): Inquisition,
+  Baleful Stare, Withering Gaze, Darigaaz, Isperia, Adamaro, Investigator's Journal, Thought Sponge, Tales of the Ancestors,
+  Scholarship Sponsor, Sokenzan Renegade.
 - **One of each of several categories** (2026-11-03, `5512cfcd7`): `choose-one-of-each` on `choose-permanents` and
   `choose-from-zone`, a card standing for several. Cataclysm, Global Ruin, Planar Overlay, Sundering Titan, Noxious Vapors.
 - **Suspend X, and a suspend cost paid to cast** (2026-11-03, `f02d6c0cf`): Benalish Commander, Aeon Chronicler, Detritivore,

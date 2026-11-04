@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4272 already implemented / 728 missing (marks refreshed 2026-11-04)
+4282 already implemented / 718 missing (marks refreshed 2026-11-04)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -679,7 +679,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   680  Black Market                             {3}{B}{B}        Enchantment
 [x]   681  Reckless Fireweaver                      {1}{R}           Creature — Human Artificer
 [x]   682  Haywire Mite                             {1}              Artifact Creature — Insect
-[ ]   683  Shared Animosity                         {2}{R}           Enchantment
+[x]   683  Shared Animosity                         {2}{R}           Enchantment
 [x]   684  Canyon Slough                            {0}              Land — Swamp Mountain
 [x]   685  Meticulous Archive                       {0}              Land — Plains Island
 [x]   686  Purphoros, God of the Forge              {3}{R}           Legendary Enchantment Creature — God
@@ -1349,7 +1349,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1356  Exalted Sunborn                          {3}{W}{W}        Creature — Angel Wizard
 [x]  1357  Colossal Majesty                         {2}{G}           Enchantment
 [x]  1358  Binding the Old Gods                     {2}{B}{G}        Enchantment — Saga
-[ ]  1359  Crime Novelist                           {2}{R}           Creature — Goblin Bard
+[x]  1359  Crime Novelist                           {2}{R}           Creature — Goblin Bard
 [x]  1360  Gold Myr                                 {2}              Artifact Creature — Myr
 [x]  1361  Formidable Speaker                       {2}{G}           Creature — Elf Druid
 [x]  1362  Kinnan, Bonder Prodigy                   {G}{U}           Legendary Creature — Human Druid
@@ -2407,7 +2407,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2414  Dawn of Hope                             {1}{W}           Enchantment
 [x]  2415  God-Pharaoh's Statue                     {6}              Legendary Artifact
 [x]  2416  Icon of Ancestry                         {3}              Artifact
-[ ]  2417  Regal Behemoth                           {4}{G}{G}        Creature — Dinosaur
+[x]  2417  Regal Behemoth                           {4}{G}{G}        Creature — Dinosaur
 [ ]  2418  Nine-Lives Familiar                      {1}{B}{B}        Creature — Cat
 [x]  2419  Mutilate                                 {2}{B}{B}        Sorcery
 [x]  2420  Ioreth of the Healing House              {2}{U}           Legendary Creature — Human Cleric
@@ -2572,7 +2572,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2579  Will of the Abzan                        {3}{B}           Sorcery
 [x]  2580  Siege-Gang Lieutenant                    {3}{R}           Creature — Goblin
 [x]  2581  Urabrask's Forge                         {2}{R}           Artifact
-[ ]  2582  Gauntlet of Power                        {5}              Artifact
+[x]  2582  Gauntlet of Power                        {5}              Artifact
 [ ]  2583  Yawgmoth's Will                          {2}{B}           Sorcery
 [x]  2584  Andúril, Narsil Reforged                 {2}              Legendary Artifact — Equipment
 [ ]  2585  Gogo, Mysterious Mime                    {3}{R}           Legendary Creature — Wizard
@@ -2986,7 +2986,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2993  Cauldron Familiar                        {B}              Creature — Cat
 [ ]  2994  Twilight Diviner                         {2}{B}           Creature — Elf Cleric
 [x]  2995  Summoner's Pact                          {0}              Instant
-[ ]  2996  Hall of the Bandit Lord                  {0}              Legendary Land
+[x]  2996  Hall of the Bandit Lord                  {0}              Legendary Land
 [ ]  2997  Library of Leng                          {1}              Artifact
 [x]  2998  World Map                                {1}              Artifact
 [x]  2999  Beseech the Queen                        {2/B}{2/B}{2/B}  Sorcery
@@ -3007,7 +3007,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3014  Royal Treatment                          {G}              Instant
 [x]  3015  Glittering Massif                        {0}              Land — Mountain Plains
 [x]  3016  Sazh's Chocobo                           {G}              Creature — Bird
-[ ]  3017  Xantcha, Sleeper Agent                   {1}{B}{R}        Legendary Creature — Phyrexian Minion
+[x]  3017  Xantcha, Sleeper Agent                   {1}{B}{R}        Legendary Creature — Phyrexian Minion
 [x]  3018  Youthful Valkyrie                        {1}{W}           Creature — Angel
 [x]  3019  Tiamat                                   {2}{W}{U}{B}{R}{G} Legendary Creature — Dragon God
 [x]  3020  Time Stretch                             {8}{U}{U}        Sorcery
@@ -3368,7 +3368,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3375  Heat Shimmer                             {2}{R}           Sorcery
 [ ]  3376  Inventory Management                     {R}{W}           Instant
 [x]  3377  Ensnared by the Mara                     {2}{R}{R}        Sorcery
-[ ]  3378  Stinging Study                           {4}{B}           Instant
+[x]  3378  Stinging Study                           {4}{B}           Instant
 [x]  3379  Court of Locthwain                       {2}{B}{B}        Enchantment
 [x]  3380  Lord of the Void                         {4}{B}{B}{B}     Creature — Demon
 [x]  3381  Quest for Renewal                        {1}{G}           Enchantment
@@ -3828,7 +3828,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3835  Tifa, Martial Artist                     {1}{R}{G}{W}     Legendary Creature — Human Monk
 [x]  3836  Harbinger of the Seas                    {1}{U}{U}        Creature — Merfolk Wizard
 [x]  3837  Fanatic of Mogis                         {3}{R}           Creature — Minotaur Shaman
-[ ]  3838  Bucknard's Everfull Purse                {2}              Artifact
+[x]  3838  Bucknard's Everfull Purse                {2}              Artifact
 [x]  3839  Smoldering Crater                        {0}              Land
 [x]  3840  Tegwyll, Duke of Splendor                {1}{U}{B}        Legendary Creature — Faerie Noble
 [x]  3841  Baldin, Century Herdmaster               {4}{W}{W}        Legendary Creature — Human Warrior
@@ -3927,7 +3927,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3934  Unable to Scream                         {U}              Enchantment — Aura
 [x]  3935  Workshop Assistant                       {3}              Artifact Creature — Construct
 [x]  3936  Roil Elemental                           {3}{U}{U}{U}     Creature — Elemental
-[ ]  3937  White Lotus Tile                         {4}              Artifact
+[x]  3937  White Lotus Tile                         {4}              Artifact
 [x]  3938  Hidden Volcano                           {0}              Land — Cave
 [x]  3939  Reins of Power                           {2}{U}{U}        Instant
 [ ]  3940  Aboleth Spawn                            {2}{U}           Creature — Fish Horror
@@ -4541,7 +4541,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  4548  Sokrates, Athenian Teacher               {1}{W}{U}        Legendary Creature — Human Advisor
 [x]  4549  Dreadbore                                {B}{R}           Sorcery
 [ ]  4550  Voidslime                                {G}{U}{U}        Instant
-[ ]  4551  Skemfar Shadowsage                       {3}{B}           Creature — Elf Cleric
+[x]  4551  Skemfar Shadowsage                       {3}{B}           Creature — Elf Cleric
 [x]  4552  Fanatical Offering                       {1}{B}           Instant
 [x]  4553  Tower Winder                             {1}{G}           Creature — Snake
 [x]  4554  Labyrinth of Skophos                     {0}              Land

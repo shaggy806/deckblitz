@@ -875,6 +875,10 @@ missing. Re-run `--greedy` for Phase 2's order.
 - **2026-11-03: one cloud session, six named families in order.** `effect:linked-exiled-card` with
   `effect:linked-face-down-exile-to-battlefield`, `target:card-in-exile` and `condition:filter-has-flashback`;
   `effect:manifested-this-way` with `effect:put-counters-of-created`.
+- **2026-11-03: overnight, first round of four local agents.** `amount:cards-in-hand-matching-filter` with
+  `effect:amount-greatest-count-among-players`; `effect:amount-new-variants`' top four units; `effect:mana-ability-side-effects`;
+  `cost:spend-only-chosen-type-or-filter`; `effect:control-change-extensions` with `effect:enters-under-opponent-control`;
+  `effect:target-opponent-chooses` with `target:opponent-comparison-chosen-by-active-player`. 63 proving cards.
 
 ## Rough size
 
