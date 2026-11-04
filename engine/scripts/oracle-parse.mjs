@@ -3633,6 +3633,12 @@ export function parseSentence(sentence, ctx) {
       leftover: "stay",
     };
   }
+  // "Exile a card from a graveyard" (Cemetery Protector, Cemetery Gatekeeper):
+  // any player's, chosen as this resolves, no target, linked to this source for
+  // an "exiled card" of its other abilities (rule 607.2a).
+  if (/^exile a card from a graveyard\.$/i.test(s)) {
+    return { kind: "look-and-choose", zone: "graveyards", min: 1, max: 1, destination: "exile", leftover: "stay" };
+  }
   // "Return a card exiled with ~ to its owner's hand" (Bane Alley Broker), "put
   // a card exiled with this Saga into its owner's hand" (Roads Go Ever, Ever
   // On): one of them, chosen as this resolves.
@@ -8451,6 +8457,7 @@ export function parseEffect(text, outer) {
       distinctSetAt(sentences, i) ??
       counterAbilityAt(sentences, i, ctx) ??
       opponentChoosesInGraveyardAt(sentences, i, ctx) ??
+      youChooseInEachGraveyardAt(sentences, i) ??
       eachPlayerPutsAt(sentences, i) ??
       exileThenSearchBothEnterAt(sentences, i, ctx);
     if (oneEach !== null) {
@@ -10748,6 +10755,35 @@ function opponentChoosesInGraveyardAt(sentences, i, ctx) {
         filter,
         destination: "battlefield",
         under: "you",
+        leftover: "stay",
+      },
+    },
+    used: 2,
+  };
+}
+
+/** You choose, one card a graveyard, and they enter at once: "For each player,
+ * choose a creature or planeswalker card in that player's graveyard. Put those
+ * cards onto the battlefield under your control." (Breach the Multiverse.) */
+function youChooseInEachGraveyardAt(sentences, i) {
+  const m = /^for each (player|opponent), choose an? (.+?) card in that player's graveyard\.$/i.exec(sentences[i]);
+  if (m === null) return null;
+  if (!/^put those cards onto the battlefield under your control\.$/i.test(sentences[i + 1] ?? "")) return null;
+  const filter = parseTypePhrase(m[2], { cards: true });
+  if (filter === null) return null;
+  return {
+    effect: {
+      kind: "for-each-player",
+      who: m[1].toLowerCase() === "player" ? "each-player" : "each-opponent",
+      choicesHeld: true,
+      effect: {
+        kind: "look-and-choose",
+        zone: "graveyard",
+        from: "that-player",
+        filter,
+        min: 1,
+        max: 1,
+        destination: "battlefield",
         leftover: "stay",
       },
     },

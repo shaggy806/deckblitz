@@ -28196,6 +28196,10 @@ export class Game {
     } else if (event.type === "permanent-tapped-for-mana") {
       // "That player" of "whenever a player taps a land for mana" (Manabarbs).
       player = event.player;
+    } else if (event.type === "land-played") {
+      // "Whenever a player plays a land, that player draws a card" (Horn of
+      // Greed): who played it, under whomever's control it entered.
+      player = event.player;
     } else if (event.type === "attackers-declared") {
       attackers = event.attackers.map((id) => ({
         object: id,
@@ -29463,7 +29467,10 @@ export class Game {
       event.type === "explored" ||
       // "Whenever a permanent you control is turned face up … it"
       // (Trail of Mystery).
-      event.type === "permanent-turned-face-up"
+      event.type === "permanent-turned-face-up" ||
+      // "Whenever you play a land …, if it shares a card type with the exiled
+      // card" (Cemetery Protector): the land played, as a cast trigger's spell.
+      event.type === "land-played"
         ? event.object
         : event.type === "chapter-resolved"
           ? event.saga
@@ -36036,6 +36043,18 @@ export class Game {
     // Revealing from your own hand with nothing in it that matches: there's
     // nothing to reveal and no one else to show the choice to.
     if (destination === "reveal" && eligible.length === 0) return;
+    // A graveyard is public and nothing in it may be chosen: nothing to see and
+    // nothing to do (Breach the Multiverse's "for each player", a graveyard with
+    // no creature card; Cemetery Desecrator's "another", its own the only card).
+    if (
+      eligible.length === 0 &&
+      (zone === "graveyard" || zone === "graveyards") &&
+      leftover === "stay" &&
+      leftoverIf === undefined &&
+      secondPick === undefined
+    ) {
+      return;
+    }
     // Choosing what comes under someone else's control (Drana's defending
     // player, Scrounge's target opponent): a client's own title would say
     // "under your control", or nothing.

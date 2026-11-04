@@ -4606,6 +4606,11 @@ export type EffectSpec =
          * another player's graveyard is the caster's to control and its
          * owner's still (rule 108.3). */
         | "any-graveyard"
+        /** Every opponent's graveyard — Jetsam's "you may cast a spell from
+         * **each opponent's graveyard**" is this with `repeat` and
+         * `onePerGraveyard`. Controlled by the caster, owned as before
+         * (rule 108.3). */
+        | "opponents-graveyards"
         | "exiled-with-source"
         | "exiled-this-way"
         /** The cards this resolution has had the effect's controller draw,
@@ -4657,6 +4662,13 @@ export type EffectSpec =
        * `then` or `else`.
        */
       readonly repeat?: boolean;
+      /**
+       * With `repeat`: "a spell from **each** opponent's graveyard" (Jetsam):
+       * once one is cast, the other cards of that player's graveyard are no
+       * longer offered. The caster picks the order, one offer at a time, as
+       * the spells go on the stack (rule 608.2g).
+       */
+      readonly onePerGraveyard?: true;
       /**
        * With `repeat`: "you may cast **up to two** spells from among them"
        * (Collected Conjuring): the offers stop after this many spells cast.
@@ -13457,6 +13469,8 @@ function applyCastNowSpec(spec: Extract<EffectSpec, { kind: "cast-now" }>, ctx: 
       cards = ctx.faceUpExileOpponentsOwn();
     } else if (from === "any-graveyard") {
       cards = ctx.playersInScope("each-player").flatMap((p) => ctx.cardsIn(p, "graveyard"));
+    } else if (from === "opponents-graveyards") {
+      cards = ctx.playersInScope("each-opponent").flatMap((p) => ctx.cardsIn(p, "graveyard"));
     } else if (from === "targets") {
       // An illegal target's slot is blank (rule 608.2b); one already cast
       // is on the stack now, which the offer passes over.
@@ -13499,9 +13513,19 @@ function applyCastNowSpec(spec: Extract<EffectSpec, { kind: "cast-now" }>, ctx: 
   if (spec.repeat === true) {
     if (ctx.castSince(progress.cards, progress.since)) {
       const { castsLeft, manaValueLeft } = progress;
+      // "From each opponent's graveyard": that graveyard's turn has gone.
+      const graveyardsUsed =
+        spec.onePerGraveyard === true
+          ? progress.cards
+              .filter((card) => ctx.castSince([card], progress.since))
+              .map((card) => ctx.ownerOf({ kind: "object", object: card }))
+          : [];
       const next: CastNowProgress = {
         since: ctx.nextEventSeq(),
-        cards: progress.cards,
+        cards:
+          graveyardsUsed.length === 0
+            ? progress.cards
+            : progress.cards.filter((card) => !graveyardsUsed.includes(ctx.ownerOf({ kind: "object", object: card }))),
         looked: progress.looked,
         ...(castsLeft !== undefined ? { castsLeft: castsLeft - 1 } : {}),
         ...(manaValueLeft !== undefined
@@ -17386,7 +17410,9 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "roll-dice": {
       const count = spec.count === undefined ? 1 : Math.max(0, Math.floor(amountValue(spec.count, ctx)));
       if (count === 0) return;
-      const modifier = spec.modifier === undefined ? 0 : amountValue(spec.modifier, ctx);
+      // Signed: "roll a d20 and subtract the number of cards in your hand"
+      // (The Deck of Many Things) can come out at 0 or less (rule 706.2).
+      const modifier = spec.modifier === undefined ? 0 : signedAmountValue(spec.modifier, ctx);
       const total = ctx.rollDice(spec.sides, count, modifier);
       const row = spec.table?.find((r) => total >= r.min && (r.max === undefined || total <= r.max));
       const steps = [row?.effect, spec.then].filter((s): s is EffectSpec => s !== undefined);

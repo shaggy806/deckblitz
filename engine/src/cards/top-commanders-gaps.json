@@ -1622,7 +1622,13 @@
   "amount:damage-dealt-to-source-this-turn-by-filter",
   "amount:damage-taken-from-filtered-sources",
   "effect:remove-attackers-and-forced-recombat",
-  "effect:remove-blocker-unblock-and-reblock"
+  "effect:remove-blocker-unblock-and-reblock",
+  "decision:choose-card-per-graveyard",
+  "decision:choose-from-any-graveyard",
+  "decision:choose-from-opponent-graveyard-untargeted",
+  "decision:choose-face-up-exiled-card",
+  "effect:return-exiled-card-named",
+  "effect:choose-half-of-permanents"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

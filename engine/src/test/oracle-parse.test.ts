@@ -8281,6 +8281,35 @@ describe("a choice drawn from several zones, or one card a slot", () => {
       "Target opponent chooses an artifact card in their graveyard. Put that card onto the battlefield under your control.",
     );
     expect(scrounge.effect).toMatchObject({ who: { target: 0 }, effect: { filter: { type: "artifact" }, under: "you" } });
+    // You choose, one card a graveyard, and they enter at once.
+    const reunion = face(
+      "Test Reunion",
+      "Sorcery",
+      "For each player, choose a creature or planeswalker card in that player's graveyard. Put those cards onto the battlefield under your control.",
+    );
+    expect(reunion.complete).toBe(true);
+    expect(reunion.effect).toMatchObject({
+      kind: "for-each-player",
+      who: "each-player",
+      choicesHeld: true,
+      effect: {
+        kind: "look-and-choose",
+        zone: "graveyard",
+        from: "that-player",
+        filter: { typesAnyOf: ["creature", "planeswalker"] },
+        destination: "battlefield",
+      },
+    });
+    // Any graveyard's, chosen as it resolves.
+    const keeper = face("Test Keeper", "Creature — Human", "When this creature enters, exile a card from a graveyard.");
+    expect(keeper.triggered[0].effect).toEqual({
+      kind: "look-and-choose",
+      zone: "graveyards",
+      min: 1,
+      max: 1,
+      destination: "exile",
+      leftover: "stay",
+    });
     // The rest anywhere but the bottom is another shape.
     const rest = face(
       "Test Recruiter",
