@@ -881,6 +881,11 @@ export type StaticCondition =
        * permanents of one name count once (the ruling), and a permanent with
        * no name (face down) not at all. */
       readonly distinctNames?: boolean;
+      /** Count only permanents that share one name (rule 201.2) — Endless
+       * Atlas's "three or more lands with the same name": the most of them
+       * with any one name, a permanent with two names (a Room with both doors
+       * unlocked) in both groups, one with none (face down) in neither. */
+      readonly sharingAName?: boolean;
       /** Count only permanents that share one creature type — Graxiplon's
        * "three or more creatures that share a creature type": the most of
        * them with any one type, a changeling counting for every type (rule
@@ -906,7 +911,14 @@ export type StaticCondition =
   | {
       readonly kind: "aggregate";
       readonly value: AggregateSpec;
-      readonly compare: NumCompare;
+      /** `"prime"`: Zimone, All-Questioning's "you control a prime number of
+       * lands". */
+      readonly compare: NumCompare | "prime";
+      /** Put the source back in a static's battlefield count, which otherwise
+       * skips it (`ConditionOptions.includeSelf`): Hundred-Battle Veteran's
+       * "counters among creatures you control" has its own. Keep the filter
+       * to type/subtype/colour clauses, as `controls`' `countsSelf` says. */
+      readonly countsSelf?: boolean;
     }
   /**
    * A most-common-color test (rule 105.2) over permanents: each is counted
@@ -1238,6 +1250,12 @@ export type StaticCondition =
        * any one graveyard, yours included (Visions of Beyond's "if a
        * graveyard has twenty or more cards in it"). */
       readonly whose?: "an-opponent" | "any-player";
+      /** Leave out the card asking, when it's in that graveyard — Proft,
+       * Sinister Mastermind's "seven or more cards in your graveyard", cast
+       * from there, wants seven others (the ruling). For the total across
+       * every graveyard, see `aggregate`'s `"count"` `in: "graveyards"` (Avatar
+       * of Woe). */
+      readonly excludeSelf?: boolean;
     }
   /** Delirium (rule 702.120) — four or more *card types* among the cards in
    * your graveyard. Counts distinct types, not cards: one artifact creature
@@ -1331,9 +1349,22 @@ export type StaticCondition =
       readonly filter?: CardFilter;
       readonly atLeast?: number;
       readonly excludeSelf?: boolean;
+      /** Only this permanent, in the stint it's in or last had: Wave of Rats'
+       * "if **it** dealt combat damage to a player this turn" (`what:
+       * "combat-damaged-by"`, `who: "any-player"`). */
+      readonly selfOnly?: boolean;
       readonly from?: readonly ZoneType[];
       readonly notFrom?: readonly ZoneType[];
     }
+  /**
+   * A player declared a creature attacking you during their last turn — the
+   * most recent one they took: the player, not a planeswalker of yours, and
+   * never a creature put onto the battlefield attacking (the O-Kagachi,
+   * Vengeful Kami ruling). Avenge's "if a player attacked you during their last
+   * turn" has no `by`, some player still in the game; O-Kagachi's "if that
+   * player attacked you …" is `by: "that-player"`.
+   */
+  | { readonly kind: "attacked-you-last-turn"; readonly by?: ConditionPlayer }
   /** At least `atLeast` (default 1) counters put this turn, as
    * {@link CountersPutSpec} narrows them — "if you put a counter on a creature
    * this turn" (Lord Jyscal Guado). */

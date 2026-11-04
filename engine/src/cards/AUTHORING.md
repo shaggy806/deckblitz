@@ -808,7 +808,7 @@ token stack once per token** — twenty 1/1 Goblins in one stack are 20 power.
 A max over no permanents is 0, and the amount is clamped at 0, rule 107.1b;
 `aggregate: "distinct"` counts the **different** values instead, each once —
 `of: "mana-value" | "mana-cost" | "power" | "name" | "color-pair" |
-"permanent-type" | { subtypesOf: "creature" | "planeswalker" }`: Lunar Insight's
+"permanent-type" | "card-type" | "counter-kind" | { subtypesOf: "creature" | "planeswalker" }`: Lunar Insight's
 "each different mana value among nonland permanents you control", Embodiment of
 Agonies' "each different mana cost among nonland cards in your graveyard" (the
 symbols, not their total; no mana cost adds nothing, rule 202.1b), Golden Ratio's "each
@@ -5691,7 +5691,12 @@ clause (section 9):
   inside a `conditional` effect, where there are targets. `distinctNames: true`
   counts names, not permanents — The Necrobloom's "seven or more lands with
   different names" (`{ filter: { type: "land" }, atLeast: 7, distinctNames:
-  true }`); a face-down permanent has no name. `sharingACreatureType: true`
+  true }`), Maze's End's ten Gates; a face-down permanent has no name, and a Room
+  has one for each unlocked door (Promising Stairs). `sharingAName: true` counts
+  only the most of them with one name in common (rule 201.2a) — Endless Atlas's
+  "three or more lands with the same name", Chrome Replicator's "two or more
+  nonland, nontoken permanents with the same name as one another" (a trigger's
+  count, its own permanent in it). `sharingACreatureType: true`
   counts only the most of them with one creature type in common —
   Graxiplon's "three or more creatures that share a creature type", a
   changeling counting toward every type. The opposite switch,
@@ -5708,7 +5713,15 @@ clause (section 9):
   "sum", of: "power", filter: { type: "creature", controlledBy: "you" } },
   compare: { op: "gte", n: 10 } }`). A token stack counts once per token.
   Same self rule as `controls`: a static leaves its own permanent out of the
-  total; a trigger or `conditional` counts it unless `value.excludeSelf`.
+  total; a trigger or `conditional` counts it unless `value.excludeSelf`; on a
+  static, the condition's `countsSelf: true` puts it back (Hundred-Battle
+  Veteran's "three or more different kinds of counters among creatures you
+  control", `aggregate: "distinct"`, `of: "counter-kind"`). A `distinct` read is a
+  threshold too: Omnivorous Flytrap's "six or more card types among cards in your
+  graveyard" is `of: "card-type"`, `filter: { ownedBy: "you" }`, `in:
+  "graveyards"`; Avatar of Woe's "ten or more creature cards total in all
+  graveyards" a `"count"` there. `compare: "prime"`: Zimone, All-Questioning's
+  "you control a prime number of lands".
 - `{ kind: "source-greatest", of, filter, strict? }` — the source's own
   power / toughness / mana value is the greatest among permanents matching
   `filter` (from its controller's view — `{ type: "creature" }` is every
@@ -5782,11 +5795,17 @@ clause (section 9):
   "you've cast another spell named ~ this game", asked as it resolves beside
   `{ kind: "source", filter: { castFrom: "hand" } }`, is `atLeast: 2` — the
   resolving spell is one of them.
-- `{ kind: "cards-in-graveyard", atLeast, filter?, whose? }` — `atLeast` cards
+- `{ kind: "cards-in-graveyard", atLeast, filter?, whose?, excludeSelf? }` — `atLeast` cards
   in your graveyard matching `filter` (Oversold Cemetery: four creature cards);
   `whose: "an-opponent"` is "if an opponent has eight or more cards in their
   graveyard" (Zendikar Rising's Rogues — Blackbloom Rogue), each opponent's
-  graveyard counted on its own.
+  graveyard counted on its own. `excludeSelf` leaves out the card asking, when
+  it's there: Proft, Sinister Mastermind's `castOnlyIf`, seven *other* cards when
+  cast from a graveyard (the ruling).
+- `{ kind: "attacked-you-last-turn", by? }` — a player declared a creature
+  attacking you during their last turn, the player and not a planeswalker of
+  yours. Avenge's "if a player attacked you during their last turn" has no `by`;
+  O-Kagachi's "if that player attacked you …" is `by: "that-player"`.
 - `{ kind: "life-total", who?, atLeast?, atMost? }` — a life total, inclusive:
   Bilbo, Birthday Celebrant's "activate only if you have 111 or more life"
   is `atLeast: 111`; "at most half your starting life total" is `atMost:
@@ -5890,11 +5909,18 @@ clause (section 9):
   the filter `attackingYou: true`, which also leaves planeswalkers out;
   "creatures attacking your opponents" (Blast-Furnace Hellkite)
   `attackingOpponent: true`, whoever controls them.
-- `{ kind: "turn-history", what, who?, filter?, atLeast?, excludeSelf?, from?, notFrom? }` —
+- `{ kind: "turn-history", what, who?, filter?, atLeast?, excludeSelf?, selfOnly?, from?, notFrom? }` —
   one of the `turnHistory` lists (§6) holds at least `atLeast` (default 1)
   this turn: "if you've discarded a card this turn" is `{ what: "discarded"
   }` (Gilt-Blade Prowler's activation restriction, Recalibrate's
-  `conditional`); Ichor Shade's "if an artifact or creature was put into a
+  `conditional`); `what: "combat-damaged-by"` is the sources that dealt `who`
+  combat damage, each read as it dealt it, whatever it is now: Lost Monarch of
+  Ifnir's "if a player was dealt combat damage by a Zombie this turn" (`who:
+  "any-player"`, `filter: { subtype: "Zombie" }`), Blitzball's "an opponent …
+  by a legendary creature" (`who: "opponent"`), and `selfOnly` for this permanent
+  alone, in the stint it's in or left: Wave of Rats' "if it dealt combat damage
+  to a player this turn". Per player under `of-player` `"that-player"` in a
+  `countPlayers`' `where` (Estinien Varlineau). Ichor Shade's "if an artifact or creature was put into a
   graveyard from the battlefield this turn" `{ what: "to-graveyard", who:
   "any-player", from: ["battlefield"], filter: { typesAnyOf: ["artifact",
   "creature"] } }`; Dimir Strandcatcher's "three or more cards … into your

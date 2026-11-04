@@ -12260,6 +12260,28 @@ function parseFaceAsWritten(face, ctx = {}) {
         ability.condition = { kind: "coven" };
         return "";
       });
+      // "Activate only if you control three or more lands with the same name"
+      // (Endless Atlas), "… with different names".
+      rest = rest.replace(/ Activate only if you control (\w+) or more (\w+) with (the same name|different names)\.$/, (whole, n, what, how) => {
+        const atLeast = numberOf(n.toLowerCase());
+        const filter = parseTypePhrase(what);
+        if (typeof atLeast !== "number" || filter === null) return whole;
+        ability.condition = {
+          kind: "controls",
+          filter,
+          atLeast,
+          ...(how === "the same name" ? { sharingAName: true } : { distinctNames: true }),
+        };
+        return "";
+      });
+      // Blitzball's "Activate only if an opponent was dealt combat damage by a
+      // legendary creature this turn".
+      rest = rest.replace(/ Activate only if (.+ was dealt combat damage by .+ this turn)\.$/, (whole, clause) => {
+        const condition = combatDamagedBy(clause);
+        if (condition === null) return whole;
+        ability.condition = condition;
+        return "";
+      });
       // Ascend's "Activate only if you have the city's blessing" (Orazca Relic).
       rest = rest.replace(/ Activate only if you have the city's blessing\.$/, () => {
         ability.condition = { kind: "citys-blessing" };
@@ -13187,6 +13209,19 @@ function playerComparisonOf(clause, ctx) {
 }
 
 /**
+ * "A player / an opponent was dealt combat damage by a Zombie this turn" (Lost
+ * Monarch of Ifnir, Blitzball): that player's `combat-damaged-by` list, each
+ * source as it dealt the damage. `null` for anything else.
+ */
+function combatDamagedBy(clause) {
+  const m = /^(a player|an opponent) was dealt combat damage by an? (.+?) this turn$/i.exec(clause);
+  if (m === null) return null;
+  const filter = parseTypePhrase(m[2]);
+  if (filter === null || Object.keys(filter).length === 0) return null;
+  return { kind: "turn-history", what: "combat-damaged-by", who: m[1].toLowerCase() === "a player" ? "any-player" : "opponent", filter };
+}
+
+/**
  * An intervening-if on a player's state (`of-player`, `player-compare`, a
  * starting-life bound, a count of everyone's permanents) — Lavaborn Muse's
  * "if that player has two or fewer cards in hand,", Septic Rats' "if
@@ -13241,6 +13276,16 @@ function playerStateIf(clause, triggers) {
     const stat = STATS[m[2]] ?? { controls: { type: singular(m[2]) } };
     const compare = { kind: "player-compare", stat, compare: "more", than: "each-opponent" };
     return m[1].startsWith("you") ? compare : ofThat(compare);
+  }
+  const damagedBy = combatDamagedBy(clause.replace(/^if /i, "").replace(/,$/, ""));
+  if (damagedBy !== null) return damagedBy;
+  // Wave of Rats: this permanent, in the stint it left.
+  if (c === "if it dealt combat damage to a player this turn," && triggers.every((t) => t.on === "dies" && t.who === "self")) {
+    return { kind: "turn-history", what: "combat-damaged-by", who: "any-player", selfOnly: true };
+  }
+  // O-Kagachi, Vengeful Kami.
+  if (c === "if that player attacked you during their last turn," && triggers.every((t) => t.on === "deals-combat-damage-to-player")) {
+    return { kind: "attacked-you-last-turn", by: "that-player" };
   }
   // Archaeomancer's Map: the player the land entered under, or the player attacked.
   m = /^if that player controls more (lands|creatures|artifacts|enchantments) than you,$/.exec(c);
@@ -14197,6 +14242,8 @@ function costIfCondition(phrase) {
   if (phrase === "you control at least two creatures that share a creature type") {
     return { kind: "aggregate", value: SHARED_CREATURE_TYPE, compare: { op: "gte", n: 2 } };
   }
+  // Avenge.
+  if (phrase === "a player attacked you during their last turn") return { kind: "attacked-you-last-turn" };
   if ((m = /^you control an? (.+)$/.exec(phrase))) {
     const filter = parseTypePhrase(m[1]);
     if (filter === null || Object.keys(filter).length === 0) return null;

@@ -4513,6 +4513,10 @@ export interface TurnHistoryEntry {
    * it is now (Mechan Shieldmate's ruling): one that has stopped being an
    * artifact still counts, one that became one later doesn't. */
   readonly asEntered?: LastKnownInfo;
+  /** For a source of combat damage (`combat-damaged-by`): what it was as it
+   * dealt that damage, so "dealt combat damage by a Zombie this turn" asks
+   * about then, whatever it has become or wherever it has gone. */
+  readonly asDealt?: LastKnownInfo;
   /** For something put into a graveyard (`to-graveyard`): the zone it came
    * from — `"battlefield"` (with `stint`), `"library"`, `"hand"`, `"stack"`
    * and the rest. */
@@ -4545,7 +4549,8 @@ export type TurnHistoryKind =
   | "exiled"
   | "descended"
   | "discarded"
-  | "to-graveyard";
+  | "to-graveyard"
+  | "combat-damaged-by";
 
 /** The zones a `to-graveyard` {@link TurnHistory} count takes its arrivals
  * from (`from`: only these) or leaves out (`notFrom`) — "put into graveyards
@@ -4590,6 +4595,11 @@ export interface TurnHistory {
   /** Permanent cards put into this player's graveyard from anywhere — each
    * is this player "descending". */
   descended?: TurnHistoryEntry[];
+  /** Each source that dealt combat damage to this player, one entry a source
+   * a combat damage step, matched as it dealt it (`asDealt`, its stint in
+   * `stint`): Lost Monarch of Ifnir's "if a player was dealt combat damage by
+   * a Zombie this turn", Blitzball's "an opponent … by a legendary creature". */
+  "combat-damaged-by"?: TurnHistoryEntry[];
   /** Cards this player discarded (rule 701.9a), wherever they went — a
    * madness card discarded into exile too (702.35a) — "for each card you've
    * discarded this turn" (Change of Fortune), "if you've discarded a card

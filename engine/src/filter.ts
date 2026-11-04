@@ -2657,11 +2657,16 @@ export function matchesFilter(
       ...(ctx.amount !== undefined ? { amount: ctx.amount } : {}),
       ...(ctx.source !== undefined ? { source: ctx.source } : {}),
     };
+    // Any name in common: a Room card in a library has both its doors' names,
+    // a Room on the battlefield only its unlocked ones'. No name of its own,
+    // and it has no different name from anything.
+    const mine = live !== undefined ? namesOf(registry, live) : lastKnownNames(registry, lki!);
+    if (mine.length === 0) return false;
     const shared = state.zones.shared.battlefield.some((other) => {
       const object = state.objects[other];
       return (
         object !== undefined &&
-        nameOf(object) === named &&
+        namesOf(registry, object).some((name) => mine.includes(name)) &&
         matchesFilter(state, registry, other, inner, innerCtx)
       );
     });
@@ -3079,6 +3084,13 @@ export function aggregateMatches(
  *   110.4 — artifact, battle, creature, enchantment, land, planeswalker):
  *   Korvold, Gleeful Glutton's "permanent types among cards in your
  *   graveyard".
+ * - `"card-type"`: every card type among its printed ones, permanent or not:
+ *   Omnivorous Flytrap's "six or more card types among cards in your
+ *   graveyard" (what delirium, rule 207.2c, asks for at four). Printed: layer
+ *   effects don't reach a graveyard.
+ * - `"counter-kind"`: each kind of counter on it (rule 122.1), however many:
+ *   Hundred-Battle Veteran's "different kinds of counters among creatures you
+ *   control".
  * - `{ subtypesOf }`: its subtypes of that card type — "creature types among
  *   creatures you control" (Valiant Changeling, where a changeling is every
  *   one of them, rule 702.73a), "planeswalker types among planeswalkers you
@@ -3091,6 +3103,8 @@ export type DistinctOf =
   | "name"
   | "color-pair"
   | "permanent-type"
+  | "card-type"
+  | "counter-kind"
   | { readonly subtypesOf: "creature" | "planeswalker" };
 
 /** The name a "differently named" count tells an object by: its names
@@ -3130,6 +3144,8 @@ function distinctValuesOf(
     const name = distinctNameOf(registry, object);
     return name === undefined ? [] : [name];
   }
+  if (of === "card-type") return registry.get(printedCardName(object)).types;
+  if (of === "counter-kind") return Object.keys(object.counters ?? {}).filter((kind) => (object.counters[kind] ?? 0) > 0);
   const c = computeCharacteristics(state, registry, id);
   if (of === "power") return [c.power];
   if (of === "color-pair") return c.colors.size === 2 ? [[...c.colors].sort().join("")] : [];

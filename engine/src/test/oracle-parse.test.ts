@@ -12779,6 +12779,46 @@ describe("how one player's state compares with another's", () => {
     });
   });
 
+  it("combat damage by a filter this turn, in an intervening if and an activation", () => {
+    const trigger = read("Creature", "At the beginning of your end step, if a player was dealt combat damage by a Zombie this turn, draw a card.");
+    expect(trigger.triggered[0].condition).toEqual({ kind: "turn-history", what: "combat-damaged-by", who: "any-player", filter: { subtype: "Zombie" } });
+    const ability = read("Artifact", "{T}: Draw a card. Activate only if an opponent was dealt combat damage by a legendary creature this turn.");
+    expect(ability.activated[0].condition).toEqual({
+      kind: "turn-history",
+      what: "combat-damaged-by",
+      who: "opponent",
+      filter: { type: "creature", supertype: "legendary" },
+    });
+  });
+
+  it("it dealt combat damage, on a trigger about itself only", () => {
+    const dies = read("Creature", "When this creature dies, if it dealt combat damage to a player this turn, draw a card.");
+    expect(dies.triggered[0].condition).toEqual({ kind: "turn-history", what: "combat-damaged-by", who: "any-player", selfOnly: true });
+    expect(read("Creature", "At the beginning of your end step, if it dealt combat damage to a player this turn, draw a card.").complete).toBe(false);
+  });
+
+  it("attacked you during their last turn", () => {
+    const hit = read("Creature", "Whenever this creature deals combat damage to a player, if that player attacked you during their last turn, draw a card.");
+    expect(hit.triggered[0].condition).toEqual({ kind: "attacked-you-last-turn", by: "that-player" });
+    const spell = read("Sorcery", "This spell costs {2} less to cast if a player attacked you during their last turn.\nDraw a card.");
+    expect(spell.selfCostReduction).toEqual({ condition: { kind: "attacked-you-last-turn" }, reduceGeneric: 2 });
+  });
+
+  it("lands with the same name, and with different names", () => {
+    expect(read("Artifact", "{2}, {T}: Draw a card. Activate only if you control three or more lands with the same name.").activated[0].condition).toEqual({
+      kind: "controls",
+      filter: { type: "land" },
+      atLeast: 3,
+      sharingAName: true,
+    });
+    expect(read("Artifact", "{T}: Draw a card. Activate only if you control five or more Gates with different names.").activated[0].condition).toEqual({
+      kind: "controls",
+      filter: { subtype: "Gate" },
+      atLeast: 5,
+      distinctNames: true,
+    });
+  });
+
   it("the number of opponents who control more", () => {
     const face = read("Creature", "At the beginning of your end step, create a number of 1/1 white Soldier creature tokens equal to the number of opponents who control more creatures than you.");
     expect(face.triggered[0].effect.count).toEqual({

@@ -11985,6 +11985,15 @@ export class Game {
         if (!damaged.includes(target.player)) {
           attacker.combatDamagedPlayersThisTurn = [...damaged, target.player];
         }
+        // "If a player was dealt combat damage by a Zombie this turn": the
+        // player's list, the source as it is now (it may not stay a Zombie).
+        const history = (this.state.players[target.player].turnHistory ??= {});
+        (history["combat-damaged-by"] ??= []).push({
+          object: source,
+          count: 1,
+          stint: attacker.zoneChangeCount ?? 0,
+          asDealt: this.takeLastKnown(source),
+        });
         // Prowl (rule 702.76a): the creature types its controller dealt
         // combat damage to a player with, as the source had them now.
         const dealer = this.state.players[attacker.controller];

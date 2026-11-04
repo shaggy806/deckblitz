@@ -1534,7 +1534,16 @@
   "condition:that-player-controls-more",
   "condition:controls-more-than-each-other-player",
   "condition:enchanted-controller-controls-no-other-creatures",
-  "condition:target-controller-controls-no-other-creatures"
+  "condition:target-controller-controls-no-other-creatures",
+  "condition:combat-damage-by-filter-this-turn",
+  "condition:player-attacked-you-last-turn",
+  "condition:card-types-in-graveyard-threshold",
+  "condition:counter-kinds-among-permanents",
+  "condition:cast-restriction-excludes-self",
+  "condition:condition-cards-in-all-graveyards",
+  "condition:prime-count",
+  "condition:condition-lands-same-name",
+  "condition:control-distinct-names-count"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

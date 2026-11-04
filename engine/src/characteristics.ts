@@ -48,6 +48,7 @@ import {
   aggregateOver,
   aggregateValueOf,
   compareNum,
+  distinctNameOf,
   liveReferenceObjects,
   manaValueOfObject,
   matchesFilter,
@@ -97,6 +98,7 @@ import {
   subtypeFitsTypes,
   subtypeKind,
 } from "./subtypes.js";
+import { namesOf } from "./card-names.js";
 import { CREATURE_TYPES } from "./creature-types.js";
 import type { TargetRef } from "./target.js";
 import { PHASE_OF_STEP, isMainPhase } from "./turn.js";
@@ -848,6 +850,7 @@ function evalStaticCondition(
         let n = 0;
         for (const id of state.zones.perPlayer[player]?.graveyard ?? []) {
           if (state.objects[id] === undefined) continue;
+          if (condition.excludeSelf === true && id === source.id) continue;
           if (condition.filter !== undefined && !matchesFilter(state, registry, id, condition.filter, { you })) continue;
           n += 1;
         }
@@ -912,10 +915,26 @@ function evalStaticCondition(
           except,
           condition.countsSelf === true,
         )) {
-          const object = state.objects[id];
-          if (object.faceDown === undefined) names.add(printedCardName(object));
+          // Rule 201.2: a Room's unlocked doors, each a name (Promising Stairs'
+          // ruling), a split card's halves; none face down or fully locked.
+          for (const name of namesForComparing(registry, state.objects[id])) names.add(name);
         }
         return names.size >= condition.atLeast;
+      }
+      if (condition.sharingAName === true) {
+        // The most of them with any one name (rule 201.2): a permanent with two
+        // names is in both groups, one with none in neither.
+        const groups = new Map<string, number>();
+        for (const { id, weight } of matchesWhere(
+          (id) => state.objects[id].controller === you && matchesFilter(state, registry, id, condition.filter, { you }),
+          except,
+          condition.countsSelf === true,
+        )) {
+          for (const name of namesForComparing(registry, state.objects[id])) {
+            groups.set(name, (groups.get(name) ?? 0) + weight);
+          }
+        }
+        return [...groups.values()].some((n) => n >= condition.atLeast);
       }
       if (condition.sharingACreatureType === true) {
         // The most of them with any one creature type (Graxiplon): each type
@@ -1002,9 +1021,10 @@ function evalStaticCondition(
       const matches = aggregateMatches(state, registry, value, you, {
         except,
         battlefieldMatch: (id, filter) =>
-          !notYetHere(id) && !skipsSelf(id) && matchesFilter(state, registry, id, filter, { you }),
+          !notYetHere(id) && (condition.countsSelf === true || !skipsSelf(id)) && matchesFilter(state, registry, id, filter, { you }),
       });
-      return compareNum(aggregateOver(state, registry, matches, value), condition.compare);
+      const total = aggregateOver(state, registry, matches, value);
+      return condition.compare === "prime" ? isPrime(total) : compareNum(total, condition.compare);
     }
     case "source-greatest": {
       if (source.zone !== "battlefield") return false;
@@ -1279,8 +1299,23 @@ function evalStaticCondition(
         you,
         condition.excludeSelf === true ? { id: source.id, stint: source.zoneChangeCount ?? 0 } : undefined,
         condition,
+        // "If it dealt …": this object, in its stint, as it last existed once gone.
+        condition.selfOnly === true
+          ? { id: source.id, stint: opts.sourceLastKnown?.zoneChangeCount ?? source.zoneChangeCount ?? 0 }
+          : undefined,
       );
       return n >= (condition.atLeast ?? 1);
+    }
+    case "attacked-you-last-turn": {
+      // Each player's own most recent turn: `them` declared a creature attacking
+      // you then, not only a planeswalker of yours (`attackedYouDuringTheirLastTurn`).
+      if (condition.by !== undefined) {
+        const them = conditionPlayerOf(state, condition.by, opts, source);
+        return them !== undefined && them !== you && attackedYouDuringTheirLastTurn(state, you, them);
+      }
+      return state.turnOrder.some(
+        (p) => p !== you && state.players[p]?.hasLost !== true && attackedYouDuringTheirLastTurn(state, you, p),
+      );
     }
     case "counters-put-this-turn":
       return countersPutThisTurn(state, condition, you) >= (condition.atLeast ?? 1);
@@ -1774,6 +1809,7 @@ export function turnHistoryCount(
   you: PlayerId,
   except?: { readonly id: ObjectId; readonly stint: number },
   origin?: TurnHistoryOrigin,
+  only?: { readonly id: ObjectId; readonly stint: number },
 ): number {
   let n = 0;
   for (const player of players) {
@@ -1784,9 +1820,14 @@ export function turnHistoryCount(
         const at = entry.stint ?? entry.asEntered?.zoneChangeCount;
         if (at === undefined || at === except.stint) continue;
       }
+      if (only !== undefined && (entry.object !== only.id || (entry.stint ?? entry.asEntered?.zoneChangeCount) !== only.stint)) {
+        continue;
+      }
       if (filter !== undefined) {
         const snapshot =
-          entry.asEntered ?? (entry.stint === undefined ? undefined : snapshotOfStint(state, entry.object, entry.stint));
+          entry.asEntered ??
+          entry.asDealt ??
+          (entry.stint === undefined ? undefined : snapshotOfStint(state, entry.object, entry.stint));
         const asNow =
           what === "descended" || what === "discarded" || (what === "to-graveyard" && entry.stint === undefined);
         const matched = matchesFilter(
@@ -1802,6 +1843,22 @@ export function turnHistoryCount(
     }
   }
   return n;
+}
+
+/** The names to tell a permanent by when comparing them (rule 201.2): its own
+ * ({@link namesOf}), or a token's as its maker gave it (rule 111.4 — two "Elf
+ * Token"s of different registry keys share a name; {@link distinctNameOf}). */
+function namesForComparing(registry: CardRegistry, object: GameObject): readonly string[] {
+  if (!object.isToken) return namesOf(registry, object);
+  const name = distinctNameOf(registry, object);
+  return name === undefined ? [] : [name];
+}
+
+/** Whether `n` is a prime number (Zimone, All-Questioning). */
+function isPrime(n: number): boolean {
+  if (n < 2) return false;
+  for (let d = 2; d * d <= n; d += 1) if (n % d === 0) return false;
+  return true;
 }
 
 /** Object `id` as it last existed on the battlefield in battlefield stint
