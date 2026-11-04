@@ -71,6 +71,10 @@ interface Visit {
   touch(ref: unknown, polarity: Polarity, weight: number): void;
   /** An effect nested inside this one that reads the same target slots. */
   child(effect: EffectSpec | null | undefined): void;
+  /** One done for each target from slot `from` on, as slot `from` each time
+   * (`for-each-target`, Scheming Symmetry's two): what it does to that slot, it
+   * does to all of them. */
+  childOfGroup(from: number, effect: EffectSpec): void;
   /** One that reads them each a slot up, a card found at target 0 before them
    * (`reveal-until`'s `thenKeepsTargets`). */
   childAfterFound(effect: EffectSpec | null | undefined): void;
@@ -144,7 +148,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
       if (!filtering.has(i)) v.child(e);
     });
   },
-  "for-each-target": (n, v) => v.child(n.effect),
+  "for-each-target": (n, v) => v.childOfGroup(n.from, n.effect),
   "for-each-player": (n, v) => {
     v.child(n.before);
     v.child(n.effect);
@@ -1061,6 +1065,8 @@ function slotTouches(
   let kind: Kind | null = null;
   // How many cards found sit before the enclosing slots here.
   let shift = 0;
+  // The slot a `for-each-target` here is binding each of its members to.
+  let group: number | null = null;
   const visit: Visit = {
     touch(ref, polarity, weight) {
       const side = (kind !== null ? bias?.[kind] : undefined) ?? polarity;
@@ -1070,11 +1076,18 @@ function slotTouches(
       }
       for (const read of slotsOf(ref)) {
         const slot = read - shift;
-        if (slot >= 0 && slot < count) touches[slot].push({ polarity: side, weight });
+        const last = slot === group ? count - 1 : slot;
+        for (let s = slot; s >= 0 && s <= last && s < count; s += 1) touches[s].push({ polarity: side, weight });
       }
     },
     child(nested) {
       if (nested !== null && nested !== undefined) walk(nested);
+    },
+    childOfGroup(from, nested) {
+      const outer = group;
+      group = from;
+      walk(nested);
+      group = outer;
     },
     childAfterFound(nested) {
       if (nested === null || nested === undefined) return;

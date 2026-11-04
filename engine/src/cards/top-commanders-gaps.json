@@ -10,6 +10,7 @@
   "cost:exile-cards-from-hand-cost-reduction",
   "effect:exiled-with-source-to-graveyard",
   "stat:cast-using-mana-from-this-source",
+  "effect:two-players-search",
   "effect:repeated-search-one-shuffle",
   "mechanic:planeswalker-equipment",
   "condition:compare-each-other-player",

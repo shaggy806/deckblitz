@@ -235,6 +235,12 @@ describe("slot polarity", () => {
     expect(unrated.length / slots, unrated.slice(0, 40).join("; ")).toBeLessThan(0.0076);
   });
 
+  it("rates every member of a for-each-target, not just the slot it binds", () => {
+    const [first, second] = slotStrengths(registry.get("Scheming Symmetry").effect, 2);
+    expect(first?.polarity).toBe("help");
+    expect(second?.polarity).toBe("help");
+  });
+
   it("rates a slot read past a chosen permanent, and a hand put back on a library", () => {
     const strength = (effect: Parameters<typeof slotStrengths>[0]) => slotStrengths(effect, 1)[0];
     expect(strength(registry.get("Crush Underfoot").effect)?.polarity).toBe("harm");

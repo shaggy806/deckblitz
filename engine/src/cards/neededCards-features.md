@@ -5123,3 +5123,5 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 **A planeswalker that's an Equipment, and "can't be attacked" (2026-11-04).** `mechanic:planeswalker-equipment`: the `cant-be-attacked` `CombatRestriction`, read by `whyCannotAttack` and `canBeAttacked` for the attackers offer, and not by `legalDefenders`, so one already attacked stays and one entering attacking may choose it (rule 508.4c). The rest was there: `attach` from a loyalty ability, a conditional `grantsTriggered`. The Aetherspark.
 
 **A repeated search with one shuffle (2026-11-04).** `effect:repeated-search-one-shuffle`, no engine code: `search-library`'s `shufflesLater` on each, in a `may`, the second in a `conditional`, and a closing `shuffle-library` of `searchers`. Claim Jumper.
+
+**Two target players search (2026-11-04).** `effect:two-players-search`, no engine code: `for-each-target` over `search-library` of `who: { controllerOfTarget: 0 }`, which orders target players by APNAP (rule 101.4). Scheming Symmetry.
