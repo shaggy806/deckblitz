@@ -8684,7 +8684,19 @@ export function parseEffect(text, outer) {
   // "you may look … If you do, you may cast …" (Mindleech Mass), and "target
   // opponent reveals their hand. You may cast an instant or sorcery spell from
   // among those cards …" (Mindclaw Shaman).
-  const looksThenCasts = /^(You may look|Look) at that player's hand\. (?:If you do, you|You) may cast a spell from among those cards without paying its mana cost\.$/.exec(text);
+  // "… an additional combat phase. At the beginning of that combat, untap …"
+  // (Moraug, Fury of Akoum; World at War), a delayed ability on that one phase.
+  const thatCombat = /^(there's an additional combat phase after this phase|after the second main phase this turn, there's an additional combat phase followed by an additional main phase)\. (At the beginning of that combat, untap all creatures (you control|that attacked this turn)\.)$/i.exec(text);
+  if (thatCombat !== null) {
+    const after = thatCombat[1].toLowerCase().startsWith("after") ? { afterSecondMain: true } : { afterThisPhase: true };
+    const filter = thatCombat[3] === "you control" ? { type: "creature", controlledBy: "you" } : { type: "creature", attackedThisTurn: true };
+    return {
+      effect: { kind: "additional-combat", ...after, atBeginning: { effect: { kind: "untap-all", filter }, text: thatCombat[2] } },
+      todo: [],
+      hints: [],
+    };
+  }
+  const looksThenCasts =/^(You may look|Look) at that player's hand\. (?:If you do, you|You) may cast a spell from among those cards without paying its mana cost\.$/.exec(text);
   if (looksThenCasts !== null) {
     const castNow = { kind: "cast-now", from: { handOf: "trigger-player", look: true }, free: true };
     return {
@@ -15366,6 +15378,11 @@ const ATTACKED_OR_BLOCKED_THIS_COMBAT = {
 };
 const INTERVENING_IFS = {
   ...TURN_TALLY_IFS,
+  // Moraug, Fury of Akoum: an additional main phase is one too.
+  "if it's your main phase,": {
+    kind: "all",
+    of: [{ kind: "your-turn" }, { kind: "turn-structure", steps: ["precombat-main", "postcombat-main"] }],
+  },
   "if ~ attacked or blocked this combat,": ATTACKED_OR_BLOCKED_THIS_COMBAT,
   "if this vehicle attacked or blocked this combat,": ATTACKED_OR_BLOCKED_THIS_COMBAT,
   // Murders at Karlov Manor (Sanguine Spy).
@@ -16508,6 +16525,9 @@ function perAmountStaticOf(line, text) {
   }
   if ((m = new RegExp(`^${P}([+-]\\d+)/([+-]\\d+) for each of its colors\\.$`).exec(line))) {
     return { affects: subjectOf(m[1]), grantPtPerCount: { ofAffected: "colors", pt: pair(m[2], m[3]) }, text };
+  }
+  if ((m = /^Each creature you control gets ([+-]\d+)\/([+-]\d+) for each time it has attacked this turn\.$/.exec(line))) {
+    return { affects: { scope: "creatures-you-control" }, grantPtPerCount: { ofAffected: "times-attacked-this-turn", pt: pair(m[1], m[2]) }, text };
   }
   if ((m = /^Each other multicolored creature you control gets ([+-]\d+)\/([+-]\d+) for each of its colors\.$/.exec(line))) {
     return {

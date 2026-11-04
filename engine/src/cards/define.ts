@@ -2252,8 +2252,16 @@ export interface StaticAbility {
      * (Diligent Zookeeper's, with `max`). Those are read from layers 4 and 5
      * and no layer-7 value, so the fold doesn't recurse. `{ manaSymbols }`: that
      * colour's symbols in its mana cost — Light from Within's "+1/+1 for each
-     * white mana symbol in its mana cost". */
-    readonly ofAffected?: "mana-value" | "colors" | "creature-types" | { readonly manaSymbols: Color };
+     * white mana symbol in its mana cost". `"times-attacked-this-turn"`: how many
+     * times it has been declared as an attacker this turn, whatever was on the
+     * battlefield then, entering attacking not counting (Moraug, Fury of
+     * Akoum's rulings; `GameObject.attacksThisTurn`). */
+    readonly ofAffected?:
+      | "mana-value"
+      | "colors"
+      | "creature-types"
+      | "times-attacked-this-turn"
+      | { readonly manaSymbols: Color };
     /** Counters of a kind among the permanents matching `filter` — Gleam of
      * Authority's "+1/+1 for each +1/+1 counter on other creatures you control"
      * (with `relativeToAffected` and `excludeSelf`). */

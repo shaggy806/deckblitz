@@ -7494,6 +7494,14 @@ export type EffectSpec =
        * done, in that stint, are bound for that combat phase alone, whatever
        * other phases come first (rule 500.8). */
       readonly forcedAttackers?: { readonly filter: CardFilter; readonly cantAttackYou?: true };
+      /** "**At the beginning of that combat**, untap all creatures you control"
+       * (Moraug, Fury of Akoum; World at War): a delayed triggered ability
+       * (rule 603.7) waiting for this one combat phase, whatever other phases
+       * come first. It doesn't happen if the phase never does. */
+      readonly atBeginning?: { readonly effect: EffectSpec; readonly text: string };
+      /** Without `afterThisPhase`: "after the **second** main phase this turn"
+       * (World at War): nothing once that phase is over (its rulings). */
+      readonly afterSecondMain?: true;
     }
   | {
       /**
@@ -11417,7 +11425,8 @@ export interface EffectApi {
       | DelayedNextSpell
       | { readonly attacksUnblocked: ObjectId }
       | DelayedWheneverAt
-      | { readonly losesControl: ObjectId; readonly thisTurn?: true; readonly onlyIf?: StaticCondition },
+      | { readonly losesControl: ObjectId; readonly thisTurn?: true; readonly onlyIf?: StaticCondition }
+      | { readonly thatCombat: number },
     effect: EffectSpec,
     text: string,
     controller: PlayerId,
@@ -12437,11 +12446,15 @@ export interface EffectApi {
    * `GameObject.division`. Empty outside one. */
   readonly division: readonly number[];
   /** Queue an additional combat + main phase after this main phase (Aggravated
-   * Assault). */
-  additionalCombat(afterThisPhase?: {
-    readonly withMain: boolean;
-    readonly forcedAttackers?: { readonly filter: CardFilter; readonly cantAttackYou?: true };
-  }): void;
+   * Assault). What `marked` asks for is the phase's mark, for a delayed ability
+   * "at the beginning of that combat"; `undefined` when no phase was queued. */
+  additionalCombat(
+    afterThisPhase?: {
+      readonly withMain: boolean;
+      readonly forcedAttackers?: { readonly filter: CardFilter; readonly cantAttackYou?: true };
+    },
+    how?: { readonly marked?: boolean; readonly afterSecondMain?: true },
+  ): number | undefined;
   /** See the `end-the-turn` {@link EffectSpec}. */
   endTurnOrCombat(what: "turn" | "combat"): void;
   /** See the `limit-blockers` {@link EffectSpec}. */
@@ -18601,16 +18614,21 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       if (target !== undefined) ctx.copyAbility(target, spec.newTargets === true);
       return;
     }
-    case "additional-combat":
-      ctx.additionalCombat(
+    case "additional-combat": {
+      const combat = ctx.additionalCombat(
         spec.afterThisPhase === true
           ? {
               withMain: spec.withMain === true,
               ...(spec.forcedAttackers !== undefined ? { forcedAttackers: spec.forcedAttackers } : {}),
             }
           : undefined,
+        { marked: spec.atBeginning !== undefined, ...(spec.afterSecondMain === true ? { afterSecondMain: true } : {}) },
       );
+      if (combat !== undefined && spec.atBeginning !== undefined) {
+        ctx.delayTrigger({ thatCombat: combat }, spec.atBeginning.effect, spec.atBeginning.text, ctx.controller);
+      }
       return;
+    }
     case "end-the-turn":
       ctx.endTurnOrCombat("turn");
       return;

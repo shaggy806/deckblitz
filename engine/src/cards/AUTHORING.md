@@ -1369,6 +1369,8 @@ sentences. None of these is a target, so hexproof doesn't stop them.
 | `{ damageDealtThisTurn: true, who?, combat?, colors?, to?, by? }` amount | `to: "you" \| "source"`, `by: { type?, name?, other? }` | Damage dealt this turn, by what dealt it (as it dealt it) and what took it: Reverse Polarity's `who: "each-player", to: "you", by: { type: "artifact" }`, Blazing Effigy's `to: "source", by: { name, other: true }`. The `damage-dealt-this-turn` condition's `toSelf` is the Zubera's "if 4 or more damage was dealt to it this turn", dies triggers included. |
 | `choose-value` … `value: "spell-damage"` | `among` | "One of those sorcery spells" (Backdraft, a `choose-opponent` with `whoIf`'s `then`): a menu of the spells that player cast this turn, asked only when the damage differs; `then` reads it as `"x"`. |
 | `additional-combat` … `forcedAttackers?` | `{ filter, cantAttackYou? }` | With `afterThisPhase`: what matches as it's done attacks that combat if able, and not you or your planeswalkers (Illusionist's Gambit). |
+| `additional-combat` … `atBeginning?` | `{ effect, text }` | "At the beginning of that combat, untap all creatures you control" (Moraug, Fury of Akoum): a delayed ability on that one phase. From a precombat main, `afterThisPhase` comes before the turn's own combat (rule 500.8). |
+| `additional-combat` … `afterSecondMain?` | `true` | Without `afterThisPhase`: "after the second main phase this turn" (World at War): nothing once that phase is over. |
 | `remove-from-combat` … `unblockSoleBlocked?`, `thenMayBlock?` | `true` | "Creatures it was blocking that had become blocked by only that creature become unblocked", "You may have it block an attacking creature of your choice" (False Orders). The filter clause `controlledByDefendingPlayer` is that spell's "creature defending player controls", with no attacker of its own to read one from. |
 | `search-library` … `upTo?` | `true` | The count is printed "**up to** N" (The Five Doctors' "your library and/or graveyard for up to five Doctor cards"): none need be found, in a graveyard searched alone too. Without it, `min: 0` is only leave to miss in a hidden zone (rule 701.23b), so "a card" in a graveyard searched alone must be found. |
 | `search-library` … `enterUnder?` | an `EffectPlayerRef` | With `destination: "battlefield"`: "under target player's control" (Yavimaya Dryad: `{ target: 0 }`). |
@@ -4688,7 +4690,8 @@ is "can't attack a player it has already attacked this turn" (Port Razer), by th
   (Thran Power Suit) and `excludeSelf` is "other than it" (Sliver Legion);
   `sharesCreatureTypeWithAffected` is "that shares a creature type with it"
   (Coat of Arms); `ofAffected: "mana-value" | "colors" | "creature-types"` is what
-  it has (Hedron Matrix, Civic Saber); `countersOnAffected`, below. Other amounts:
+  it has (Hedron Matrix, Civic Saber), `"times-attacked-this-turn"` how many times
+  it has been declared an attacker (Moraug, Fury of Akoum); `countersOnAffected`, below. Other amounts:
   `countersAmong: { counter, filter }` (Gleam of Authority), `playerCounters` with
   `playerCountersOf: "opponents"` (Mycosynth Fiend), `anyCountersOnSource` (Kyler),
   `anyCountersOnAffected` (Luxior's "for each counter on it"),

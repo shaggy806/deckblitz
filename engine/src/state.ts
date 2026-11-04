@@ -444,6 +444,9 @@ export interface GameObject {
    * `attackedThisTurn` filter clause. Reset as each turn begins, and by any
    * change of zone (the permanent that comes back never attacked). */
   attackedThisTurn?: boolean;
+  /** How many times it has been declared as an attacker this turn (Moraug, Fury
+   * of Akoum: `grantPtPerCount.ofAffected`). Reset with `attackedThisTurn`. */
+  attacksThisTurn?: number;
   /** The turns this permanent was declared an attacker on, in this
    * battlefield stint — "attacked during their controller's last turn" (Halls
    * of Mist), which an extra combat this turn mustn't overwrite. Pruned as each
@@ -3240,6 +3243,12 @@ export type AddedPhase =
         readonly objects: readonly { readonly object: ObjectId; readonly zoneChangeCount: number }[];
         readonly avoid?: PlayerId;
       };
+      /** This phase's mark, for a delayed ability "at the beginning of that
+       * combat" (`DelayedTrigger.at`'s `thatCombat`). */
+      readonly mark?: number;
+      /** The turn's own combat phase, put behind the additional ones made in the
+       * main phase before it (rule 500.8), each of which comes first. */
+      readonly regular?: true;
     }
   | { readonly kind: "upkeep" };
 
@@ -3294,6 +3303,9 @@ export interface TurnState {
    * (Karlach) and "your second main phase". Reset as each turn begins. */
   combatPhases?: number;
   mainPhases?: number;
+  /** The mark of the additional combat phase under way, if it has one — see
+   * `AddedPhase.mark`. */
+  addedCombat?: number;
 }
 
 export interface PriorityState {
@@ -5109,7 +5121,11 @@ export interface DelayedTrigger {
     | DelayedCastWatch
     | DelayedUnblockedWatch
     | DelayedWheneverWatch
-    | DelayedLoseControlWatch;
+    | DelayedLoseControlWatch
+    /** "At the beginning of that combat" (`additional-combat`'s `atBeginning`):
+     * the additional combat phase with this mark (`TurnState.addedCombat`),
+     * this turn only. */
+    | { readonly thatCombat: number };
   /** The player whose turn a `"your-…"` timing waits for, when it isn't its
    * controller's (rule 603.7d: the ability stays its creator's) — Suppress. */
   readonly turnOf?: PlayerId;
@@ -6704,6 +6720,10 @@ export interface GameState {
    * `endStep` decrements it and re-enters `begin-combat` (a combat phase then
    * another main phase) instead of moving to the end step. */
   extraCombats: number;
+  /** Beside `extraCombats`, the marks of those owed (see `AddedPhase.mark`,
+   * `null` for none), oldest first, the newest going first (rule 500.8). Only
+   * once one has a mark, so it may be shorter: those below it have none. */
+  extraCombatMarks?: (number | null)[];
   /** Spells cast this turn by *any* player — the Storm count (rule 702.40a).
    * Reset in `beginTurn`. `PlayerState.spellsCastThisTurn` is the per-player
    * count for "your first spell each turn" triggers. ROADMAP Phase 8. */

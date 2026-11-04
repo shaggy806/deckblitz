@@ -3980,9 +3980,10 @@ function affectedCharacteristicCount(
   state: GameState,
   registry: CardRegistry,
   object: GameObject,
-  what: "mana-value" | "colors" | "creature-types" | { readonly manaSymbols: Color },
+  what: "mana-value" | "colors" | "creature-types" | "times-attacked-this-turn" | { readonly manaSymbols: Color },
 ): number {
   if (typeof what === "object") return colorSymbols(parseManaCost(printedManaCost(registry, object)), [what.manaSymbols]);
+  if (what === "times-attacked-this-turn") return object.attacksThisTurn ?? 0;
   if (what === "mana-value") return manaValueOfObject(registry, object);
   if (what === "colors") return effectiveColors(state, registry, object).size;
   const creatureTypes = creatureTypesOf(state, registry, object);

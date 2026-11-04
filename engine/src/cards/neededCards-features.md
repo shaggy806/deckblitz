@@ -5006,6 +5006,8 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 
 **A kept creature with a counter, and a restriction while it stays (2026-11-04).** Divine Reckoning's `vote` with `keep`, then `add-counter-all`, `sacrifice-all` and `restrict` over `thisWay: "chosen"`, with `duration: { whileCounter }`; `restrict`'s `cantAttackYou: "you-and-planeswalkers"` (`PtModifier.cantAttackYouCovers`) names no battle. Promise of Loyalty; the parser reads the whole card. `test/vow-counters.test.ts`.
 
+**A creature's own count of attacks, and additional combats placed where they say (2026-11-04).** `grantPtPerCount.ofAffected: "times-attacked-this-turn"` on `GameObject.attacksThisTurn`; `additional-combat`'s `atBeginning` (a delayed ability on that one phase, `{ thatCombat: mark }`) and `afterSecondMain`. One made in the precombat main now comes before the turn's own combat, and combats owed go ahead of a main phase owed (rule 500.8). Moraug, Fury of Akoum; World at War; the parser reads both. `test/additional-combat-that-combat.test.ts`.
+
 **A player searching their own library, as a trigger (2026-11-04).** `{ on: "searches-library", who }` on the new `library-searched` event, `"trigger-player"` who searched. Archivist of Oghma, Wan Shi Tong, Librarian, Ob Nixilis, Unshackled. River Song still wants `replacement:draw-from-bottom`. `test/search-trigger.test.ts`.
 
 **A player's own turns of the game (2026-11-04).** `condition:own-turn-count`: `PlayerState.turnsTaken`, the `turns-taken` condition, `FIRST_THREE_TURNS` with `your-turn`. Starting Town, Serra Avenger; Spider-Man 2099 and Jace Reawakened read the same line.

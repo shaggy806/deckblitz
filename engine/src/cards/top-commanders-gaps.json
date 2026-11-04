@@ -1757,7 +1757,9 @@
   "effect:cast-now-other-player",
   "condition:dynamic-operand-in-intervening-if",
   "condition:dynamic-operand-in-intervening-if",
-  "mechanic:vow-counters"
+  "mechanic:vow-counters",
+  "stat:attack-count-this-turn",
+  "effect:additional-combat-after-main"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

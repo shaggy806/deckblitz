@@ -15130,3 +15130,50 @@ describe("a kept creature with a counter, and a restriction while it stays", () 
     expect(face.effect.effects[3].duration).toEqual({ whileCounter: "vow" });
   });
 });
+
+describe("additional combats, at the beginning of that combat, and a creature's own attacks", () => {
+  it("reads Moraug, Fury of Akoum's", () => {
+    const face = parseFace({
+      name: "Test Card",
+      type_line: "Legendary Creature — Minotaur Warrior",
+      mana_cost: "{4}{R}{R}",
+      colors: ["R"],
+      oracle_text:
+        "Each creature you control gets +1/+0 for each time it has attacked this turn.\nLandfall — Whenever a land you control enters, if it's your main phase, there's an additional combat phase after this phase. At the beginning of that combat, untap all creatures you control.",
+    });
+    expect(face.complete).toBe(true);
+    expect(face.static[0].grantPtPerCount).toEqual({ ofAffected: "times-attacked-this-turn", pt: [1, 0] });
+    expect(face.triggered[0].condition).toEqual({
+      kind: "all",
+      of: [{ kind: "your-turn" }, { kind: "turn-structure", steps: ["precombat-main", "postcombat-main"] }],
+    });
+    expect(face.triggered[0].effect).toEqual({
+      kind: "additional-combat",
+      afterThisPhase: true,
+      atBeginning: {
+        effect: { kind: "untap-all", filter: { type: "creature", controlledBy: "you" } },
+        text: "At the beginning of that combat, untap all creatures you control.",
+      },
+    });
+  });
+  it("reads World at War's", () => {
+    const face = parseFace({
+      name: "Test Card",
+      type_line: "Sorcery",
+      mana_cost: "{3}{R}{R}",
+      colors: ["R"],
+      oracle_text:
+        "After the second main phase this turn, there's an additional combat phase followed by an additional main phase. At the beginning of that combat, untap all creatures that attacked this turn.\nRebound (If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)",
+    });
+    expect(face.complete).toBe(true);
+    expect(face.rebound).toBe(true);
+    expect(face.effect).toEqual({
+      kind: "additional-combat",
+      afterSecondMain: true,
+      atBeginning: {
+        effect: { kind: "untap-all", filter: { type: "creature", attackedThisTurn: true } },
+        text: "At the beginning of that combat, untap all creatures that attacked this turn.",
+      },
+    });
+  });
+});

@@ -8496,6 +8496,7 @@ export class Game {
     for (const id of [...this.state.zones.shared.battlefield, ...phasedOutIds(this.state)]) {
       const object = this.state.objects[id];
       if (object.attackedThisTurn === true) object.attackedThisTurn = false;
+      delete object.attacksThisTurn;
       if (object.attackedOnTurns !== undefined) {
         object.attackedOnTurns = object.attackedOnTurns.filter((turn) => turn >= oldestLastTurn);
         if (object.attackedOnTurns.length === 0) delete object.attackedOnTurns;
@@ -8527,6 +8528,8 @@ export class Game {
     delete this.state.extraMainPhases;
     delete this.state.turn.combatPhases;
     delete this.state.turn.mainPhases;
+    delete this.state.turn.addedCombat;
+    delete this.state.extraCombatMarks;
     delete this.state.combatChoices;
     delete this.state.attackChoiceRefused;
     this.endTurnsPlayerControl();
@@ -9210,6 +9213,7 @@ export class Game {
     }
     this.removeAllFromCombat();
     this.state.extraCombats = 0;
+    delete this.state.extraCombatMarks;
     delete this.state.extraMainPhases;
     delete this.state.phasesAfterThisCombat;
     delete this.state.turn.addedUpkeep;
@@ -9265,28 +9269,31 @@ export class Game {
         return;
       }
       if (next.withMain) this.state.extraMainPhases = (this.state.extraMainPhases ?? 0) + 1;
-      this.emit({ type: "additional-combat-phase" });
-      this.enterStep("begin-combat");
-      // Past the end of the last combat's bindings, which entering the step ended.
-      this.bindForcedAttackers(next);
+      this.beginQueuedCombat(next);
       return;
     }
-    // An additional combat phase made in the main phase after combat ("if
-    // it's your main phase, there is an additional combat phase after this
-    // phase" — Grim Reaper's Sprint): owed straight after this main phase,
-    // with no end of combat left to read it (rule 500.8). Once it's over the
-    // turn goes on to the end step, unless it was "followed by an additional
-    // main phase", which is the main phase the turn reaches next anyway. (One
-    // made in the main phase before combat waits for the end of the combat
-    // after it, as above: the same two combats, then the same main phase.)
+    // An additional combat phase made in the main phase before combat ("if
+    // it's your main phase, there's an additional combat phase after this
+    // phase" — Moraug, Fury of Akoum's rulings): it comes straight after this
+    // main phase, before the turn's own, which goes behind whatever else this
+    // phase added and is an entry of its own now (rule 500.8).
+    if (this.state.turn.step === "precombat-main" && after !== undefined && after[0]?.kind === "combat") {
+      const next = after[0];
+      this.state.phasesAfterThisCombat = [...after.slice(1), { kind: "combat", withMain: false, regular: true }];
+      if (next.withMain) this.state.extraMainPhases = (this.state.extraMainPhases ?? 0) + 1;
+      this.beginQueuedCombat(next);
+      return;
+    }
+    // One made in the main phase after combat: owed straight after this main
+    // phase, with no end of combat left to read it (rule 500.8). Once it's over
+    // the turn goes on to the end step, unless it was "followed by an additional
+    // main phase", which is the main phase the turn reaches next anyway.
     if (this.state.turn.step === "postcombat-main" && after !== undefined && after[0]?.kind === "combat") {
-      const [next, ...rest] = after;
-      if (rest.length > 0) this.state.phasesAfterThisCombat = rest;
+      const next = after[0];
+      if (after.length > 1) this.state.phasesAfterThisCombat = after.slice(1);
       else delete this.state.phasesAfterThisCombat;
-      if (next.kind === "combat" && !next.withMain) this.state.turn.endsAfterAddedCombat = true;
-      this.emit({ type: "additional-combat-phase" });
-      this.enterStep("begin-combat");
-      if (next.kind === "combat") this.bindForcedAttackers(next);
+      if (!next.withMain) this.state.turn.endsAfterAddedCombat = true;
+      this.beginQueuedCombat(next);
       return;
     }
     if (this.state.turn.step === "end-combat" && this.state.turn.endsAfterAddedCombat === true) {
@@ -9295,24 +9302,28 @@ export class Game {
         this.enterStep("end");
         return;
       }
+      // Combats still owed after that main phase: no main phase comes between.
+      if (this.state.extraCombats > 0) {
+        this.beginOwedCombat();
+        return;
+      }
     }
     // Then the turn goes on as it would have after that combat phase.
     if (addedUpkeepEnding) {
       this.enterStep("postcombat-main");
       return;
     }
-    if (this.state.turn.step === "postcombat-main" && (this.state.extraMainPhases ?? 0) > 0) {
-      this.state.extraMainPhases = (this.state.extraMainPhases ?? 0) - 1;
-      this.enterStep("postcombat-main");
-      return;
-    }
     // Additional combat (Aggravated Assault — rule 500.8): when the postcombat
     // main phase ends with combats still owed, loop back to begin-combat (a
     // combat phase then another main phase) instead of moving to the end step.
+    // Ahead of a main phase still owed, which was made before it (500.8).
     if (this.state.turn.step === "postcombat-main" && this.state.extraCombats > 0) {
-      this.state.extraCombats -= 1;
-      this.emit({ type: "additional-combat-phase" });
-      this.enterStep("begin-combat");
+      this.beginOwedCombat();
+      return;
+    }
+    if (this.state.turn.step === "postcombat-main" && (this.state.extraMainPhases ?? 0) > 0) {
+      this.state.extraMainPhases = (this.state.extraMainPhases ?? 0) - 1;
+      this.enterStep("postcombat-main");
       return;
     }
     // A player got priority in this cleanup step: another one begins (rule
@@ -9451,6 +9462,7 @@ export class Game {
       object.graveyardCastTypesUsedThisTurn = undefined;
       object.combatDamagedPlayersThisTurn = [];
       object.attackedThisTurn = false;
+      delete object.attacksThisTurn;
       if (object.zone !== "battlefield") continue;
       // Exerted (rule 701.43a): not during its exerter's next untap step —
       // this one, if that's who's active. Nor one an effect said doesn't
@@ -11531,6 +11543,7 @@ export class Game {
         // Boast (702.142a) asks whether this creature attacked this turn —
         // recorded here, and reset as each turn begins.
         object.attackedThisTurn = true;
+        object.attacksThisTurn = (object.attacksThisTurn ?? 0) + 1;
         if (object.attackedOnTurns?.includes(this.state.turn.number) !== true) {
           object.attackedOnTurns = [...(object.attackedOnTurns ?? []), this.state.turn.number];
         }
@@ -35818,8 +35831,20 @@ export class Game {
       },
       finishExiledAsItResolves: (spell, feather, intoHand) =>
         this.finishExiledAsItResolves(spell, feather, intoHand === true),
-      additionalCombat: (afterThisPhase) => {
-        if (afterThisPhase === undefined) this.state.extraCombats += 1;
+      additionalCombat: (afterThisPhase, how) => {
+        // "After the second main phase this turn": nothing once it's over.
+        if (how?.afterSecondMain === true) {
+          const mains = this.state.turn.mainPhases ?? 0;
+          if (mains > 2 || (mains === 2 && !isMainPhase(this.state.turn.step))) return undefined;
+        }
+        // The queued event below moves `eventSeq` on, so no two share it.
+        const mark = how?.marked === true ? this.state.eventSeq : undefined;
+        if (afterThisPhase === undefined) {
+          this.state.extraCombats += 1;
+          if (mark !== undefined || this.state.extraCombatMarks !== undefined) {
+            (this.state.extraCombatMarks ??= []).push(mark ?? null);
+          }
+        }
         // Directly after this phase, so ahead of any added after it before
         // (rule 500.8).
         else {
@@ -35827,6 +35852,7 @@ export class Game {
           (this.state.phasesAfterThisCombat ??= []).unshift({
             kind: "combat",
             withMain: afterThisPhase.withMain,
+            ...(mark !== undefined ? { mark } : {}),
             ...(bound !== undefined
               ? {
                   forced: {
@@ -35841,6 +35867,7 @@ export class Game {
           });
         }
         this.emit({ type: "additional-combat-queued", player: controller });
+        return mark;
       },
       endTurnOrCombat: (what) => this.beginEndingTurnOrCombat(what),
       limitBlockers: (players, most) => {
@@ -44783,6 +44810,26 @@ export class Game {
     this.emit({ type: "attacker-blocked", attacker: id, blockers: [...attacker.blockedBy] });
   }
 
+  /** A combat phase from `phasesAfterThisCombat` begins: its mark in place for
+   * "at the beginning of that combat" as the step begins. */
+  private beginQueuedCombat(phase: Extract<AddedPhase, { kind: "combat" }>): void {
+    if (phase.regular !== true) this.emit({ type: "additional-combat-phase" });
+    if (phase.mark !== undefined) this.state.turn.addedCombat = phase.mark;
+    this.enterStep("begin-combat");
+    // Past the end of the last combat's bindings, which entering the step ended.
+    this.bindForcedAttackers(phase);
+  }
+
+  /** The next of the combat phases `extraCombats` owes begins, the one made
+   * most recently (rule 500.8). */
+  private beginOwedCombat(): void {
+    this.state.extraCombats -= 1;
+    const mark = this.state.extraCombatMarks?.pop();
+    if (typeof mark === "number") this.state.turn.addedCombat = mark;
+    this.emit({ type: "additional-combat-phase" });
+    this.enterStep("begin-combat");
+  }
+
   /** The combat phase an `"additional-combat"`'s `forcedAttackers` was for has
    * come: those still the same objects are bound for it. */
   private bindForcedAttackers(phase: Extract<AddedPhase, { kind: "combat" }>): void {
@@ -46924,7 +46971,8 @@ export class Game {
       | DelayedNextSpell
       | { readonly attacksUnblocked: ObjectId }
       | DelayedWheneverAt
-      | { readonly losesControl: ObjectId; readonly thisTurn?: true; readonly onlyIf?: StaticCondition },
+      | { readonly losesControl: ObjectId; readonly thisTurn?: true; readonly onlyIf?: StaticCondition }
+      | { readonly thatCombat: number },
     effect: EffectSpec,
     text: string,
     targets: ResolvedTargets,
@@ -46938,7 +46986,8 @@ export class Game {
       | DelayedCastWatch
       | DelayedUnblockedWatch
       | DelayedWheneverWatch
-      | DelayedLoseControlWatch;
+      | DelayedLoseControlWatch
+      | { readonly thatCombat: number };
     if (typeof at === "object" && "losesControl" in at) {
       const watched = this.state.objects[at.losesControl];
       if (watched?.zone !== "battlefield") return;
@@ -46966,6 +47015,8 @@ export class Game {
         ...(losing !== undefined ? { orLosesControl: { object: losing.id, stint: losing.zoneChangeCount ?? 0 } } : {}),
         turn: this.state.turn.number,
       };
+    } else if (typeof at === "object" && "thatCombat" in at) {
+      when = at;
     } else if (typeof at === "object" && "nextSpell" in at) {
       when = {
         nextSpell: at.nextSpell,
@@ -47066,6 +47117,10 @@ export class Game {
    * their own controller's turn.
    */
   private delayedTriggerFires(trigger: DelayedTrigger, step: Step): boolean {
+    // "At the beginning of that combat": the one with its mark.
+    if (typeof trigger.at === "object" && "thatCombat" in trigger.at) {
+      return step === "begin-combat" && this.state.turn.addedCombat === trigger.at.thatCombat;
+    }
     // A leave-keyed trigger waits on its permanent, not on a step.
     if (typeof trigger.at === "object") return false;
     const active = this.activePlayer;
@@ -54669,6 +54724,7 @@ export class Game {
     delete object.impulseCastOnTurn;
     delete object.altCostGrantOnTurn;
     delete object.attackedThisTurn;
+    delete object.attacksThisTurn;
     delete object.attackedPlayersThisTurn;
     delete object.attackedOnTurns;
     delete object.attackedBattleThisTurn;
