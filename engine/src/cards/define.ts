@@ -5047,6 +5047,13 @@ export interface CardDefinition {
    */
   readonly selfCostReduction: SelfCostReduction | readonly SelfCostReduction[] | null;
   /**
+   * "X can't be greater than …" on a spell with {X} in its cost: a ceiling on
+   * the X the caster may announce (rule 601.2b), read from their side as they
+   * choose it and not again (Open the Way's "the number of players in the
+   * game", `{ playersInGame: true }`, and its ruling).
+   */
+  readonly maxX?: CostReductionAmount;
+  /**
    * "This spell costs {1} more to cast for each target beyond the first"
    * (Fireball; Strive — Twinflame's {2}{R}): this cost, once per distinct
    * target after the first. A cost increase (rule 601.2f), so it's added to
@@ -5943,6 +5950,7 @@ const PRINTED_ABILITY: {
   assist: (def) => def.assist,
   opponentChoosesTargets: (def) => def.opponentChoosesTargets.length > 0,
   selfCostReduction: (def) => def.selfCostReduction !== null,
+  maxX: (def) => def.maxX !== undefined,
   costPerExtraTarget: (def) => def.costPerExtraTarget !== null,
   targetCostReduction: (def) => def.targetCostReduction !== null,
   targetCostIncrease: (def) => def.targetCostIncrease !== null,
@@ -6201,6 +6209,8 @@ interface CardDraft {
   /** See {@link CardDefinition.opponentChoosesTargets}. */
   opponentChoosesTargets?: readonly number[];
   selfCostReduction?: SelfCostReduction | readonly SelfCostReduction[];
+  /** See {@link CardDefinition.maxX}. */
+  maxX?: CostReductionAmount;
   costPerExtraTarget?: string;
   /** See {@link CardDefinition.targetCostReduction}. */
   targetCostReduction?: { readonly filter: CardFilter; readonly reduceGeneric: number; readonly reduceColored?: string };
@@ -6481,6 +6491,7 @@ export function defineCard(draft: CardDraft): CardDefinition {
     assist: draft.assist ?? false,
     opponentChoosesTargets: draft.opponentChoosesTargets ?? [],
     selfCostReduction: draft.selfCostReduction ?? null,
+    ...(draft.maxX !== undefined ? { maxX: draft.maxX } : {}),
     costPerExtraTarget: draft.costPerExtraTarget ?? null,
     targetCostReduction: draft.targetCostReduction ?? null,
     targetCostIncrease: draft.targetCostIncrease ?? null,

@@ -12310,6 +12310,15 @@ function revealUntilAt(sentences, i, ctx) {
   if (reveal === null) return null;
   const count = numberOf(reveal[1]);
   const filter = parseTypePhrase(reveal[2]);
+  // Open the Way: X of them, onto the battlefield.
+  if (own === null && count === "x" && filter !== null) {
+    const entered = sentenceRe(`put those [\\w-]+ cards onto the battlefield( tapped)? and the rest ${REST}`).exec(sentences[j + 1] ?? "");
+    if (entered === null) return null;
+    return {
+      effect: { kind: "reveal-until-count", filter, count, put: "battlefield", ...(entered[1] ? { tapped: true } : {}), rest: restOf(entered[2]) },
+      used: j + 2 - i,
+    };
+  }
   if (typeof count !== "number" || filter === null) return null;
   j += 1;
   if (count > 1) {
@@ -13511,6 +13520,11 @@ function parseFaceAsWritten(face, ctx = {}) {
         condition: { kind: "controls", filter: {}, atLeast: 0 },
         reduceGeneric: { aggregate: m[1] !== undefined ? "max" : "sum", of: m[2] ?? m[4], filter: { type: "creature", controlledBy: "you" } },
       };
+      continue;
+    }
+    // Open the Way's ceiling on X, fixed as X is chosen.
+    if (line === "X can't be greater than the number of players in the game.") {
+      out.maxX = { playersInGame: true };
       continue;
     }
     // The most any one opponent has, not the sum: Cavern-Hoard Dragon.

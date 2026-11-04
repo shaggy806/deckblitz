@@ -250,6 +250,7 @@ function faceSource(face, ctx) {
     disturb: parsed.disturb,
     suspend: parsed.suspend,
     selfCostReduction: parsed.selfCostReduction,
+    maxX: parsed.maxX,
     alsoSubtypes: parsed.alsoSubtypes,
     additionalCost: parsed.additionalCost,
     copyOnEnter: parsed.copyOnEnter,

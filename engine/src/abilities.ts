@@ -904,6 +904,9 @@ export type CostReductionAmount =
   /** One per counter of any kind on any player and any permanent — Lumbering
    * Megasloth's "for each counter among players and permanents" (rule 122). */
   | { readonly allCounters: true }
+  /** How many players are still in the game (rule 102.1's players, less those
+   * who have left, rule 800.4a) — Open the Way's `maxX`. */
+  | { readonly playersInGame: true }
   /** One per color among permanents matching the filter — Vivid (Wildvine
    * Pummeler). `characteristics.ts`'s `colorsAmongPermanents`. */
   | { readonly colorsAmong: CardFilter }

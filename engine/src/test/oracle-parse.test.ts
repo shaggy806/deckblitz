@@ -15485,6 +15485,30 @@ describe("a discard cost of mana value X", () => {
   });
 });
 
+describe("a spell's own ceiling on X, and revealing until X cards", () => {
+  it("reads Open the Way whole", () => {
+    const way = parseFace(
+      {
+        name: "Open the Way",
+        type_line: "Sorcery",
+        oracle_text:
+          "X can't be greater than the number of players in the game.\nReveal cards from the top of your library until you reveal X land cards. Put those land cards onto the battlefield tapped and the rest on the bottom of your library in a random order.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(way.maxX).toEqual({ playersInGame: true });
+    expect(way.complete).toBe(true);
+    expect(way.effect).toEqual({
+      kind: "reveal-until-count",
+      filter: { type: "land" },
+      count: "x",
+      put: "battlefield",
+      tapped: true,
+      rest: "bottom-random",
+    });
+  });
+});
+
 describe("a copy of the enchanted artifact, then a win on eight with one name", () => {
   it("reads Mechanized Production's", () => {
     const face = parseFace({

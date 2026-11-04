@@ -16164,6 +16164,22 @@ export class Game {
     face: number,
     targetCount = 0,
   ): { maxX: number; convoke: PaidConvoke[] } {
+    const plan = this.xPlanUncapped(player, cardId, def, costString, face, targetCount);
+    // "X can't be greater than …" (Open the Way), as the caster announces it
+    // (rule 601.2b).
+    if (def.maxX === undefined) return plan;
+    return { ...plan, maxX: Math.min(plan.maxX, this.costReductionAmount(def.maxX, player, cardId, cardId)) };
+  }
+
+  /** `xPlanFor` before a card's own ceiling on X. */
+  private xPlanUncapped(
+    player: PlayerId,
+    cardId: ObjectId,
+    def: CardDefinition,
+    costString: string | null,
+    face: number,
+    targetCount: number,
+  ): { maxX: number; convoke: PaidConvoke[] } {
     const manaOnly = this.maxAffordableX(player, cardId, def, costString, face, targetCount);
     const plan = this.xPlanByConvoke(player, cardId, def, costString, face, targetCount, manaOnly);
     const byDelve = this.maxXByDelve(player, cardId, def, costString, face, targetCount, plan.maxX);
@@ -17435,6 +17451,10 @@ export class Game {
       if (!staticConditionMet(this.state, this.registry, this.state.objects[cardId], def.freeCastIf.condition)) {
         return `${def.name}'s free-cast condition isn't met`;
       }
+    }
+    // "X can't be greater than …" (Open the Way), as it's announced (rule 601.2b).
+    if (def.maxX !== undefined && Math.floor(xValue) > this.costReductionAmount(def.maxX, player, cardId, cardId)) {
+      return `X can't be ${Math.floor(xValue)} for ${def.name}`;
     }
     // An additional sacrifice cost (rule 601.2f) must be payable, and — once
     // the driver has named one — that permanent must actually qualify.
@@ -43072,6 +43092,9 @@ export class Game {
     if ("sum" in amount) return amount.sum.reduce<number>((n, part) => n + this.costReductionAmount(part, player, sourceId, spellId), 0);
     if ("scaled" in amount) return amount.by * this.costReductionAmount(amount.scaled, player, sourceId, spellId);
     if ("allCounters" in amount) return this.countersAmongPlayersAndPermanents();
+    if ("playersInGame" in amount) {
+      return this.state.turnOrder.filter((p) => this.state.players[p]?.hasLost !== true).length;
+    }
     if ("colorsAmong" in amount) return colorsAmongPermanents(this.state, this.registry, player, amount.colorsAmong, []);
     if ("powerOf" in amount) {
       const source = sourceId === undefined ? undefined : this.state.objects[sourceId];
