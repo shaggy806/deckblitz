@@ -479,6 +479,9 @@ export type AffectSpec =
       /** Only creatures *without* the keyword — the other half of
        * Gravitational Shift ("creatures without flying get -2/-0"). */
       readonly withoutKeyword?: Keyword;
+      /** As `creatures-you-control`'s: Gauntlet of Power's "creatures of the
+       * chosen color". */
+      readonly chosenColorOnly?: boolean;
     }
   /** Every land the source's controller controls (Chromatic Lantern). */
   | { readonly scope: "lands-you-control" }
@@ -741,6 +744,9 @@ export type TurnStat =
    * or played from it, returned, exiled (Essence Anchor's "if a card left
    * your graveyard this turn"). */
   | "cards-left-graveyard"
+  /** Times the player has tapped a land for mana this turn (rule 106.12) —
+   * Desolation's "each player who tapped a land for mana this turn". */
+  | "lands-tapped-for-mana"
   /** How many times the player has scried or surveilled this turn (rules
    * 701.22, 701.25) — "if you've scried or surveilled this turn" (Surveillance
    * Phantasm). A scry or surveil 0 isn't one. */

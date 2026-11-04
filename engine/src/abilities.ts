@@ -1724,7 +1724,15 @@ export type TriggerSpec =
        * type that permanent produced". `who` is about the tapped permanent
        * (`"you-control"`: "whenever you tap …").
        *
-       * **Any other effect, or a target, and it isn't a mana ability**: it
+       * All of the ability happens at once (rule 605.4a), so whatever else it
+       * does is that `add-mana`'s `also`, with `"trigger-object"` the tapped
+       * permanent and `"trigger-player"` the player who tapped it, and no
+       * decision in it: "and this enchantment deals 1 damage to the player"
+       * (Overabundance), "that land doesn't untap …" (Winter's Night). Its
+       * `condition` is read as it's made: "while you're the monarch" (Regal
+       * Behemoth), "if this creature is tapped" (Barbflare Gremlin).
+       *
+       * **Adding no mana, or a target, and it isn't a mana ability**: it
        * triggers as the mana ability resolves and produces mana (rule 106.12a)
        * and goes on the stack the next time a player would receive priority
        * (rule 603.3), above a spell the mana is paying for (Burning Earth's
@@ -1738,8 +1746,9 @@ export type TriggerSpec =
       readonly filter?: CardFilter;
       /** "Whenever you tap a land **for {C}**" (Ultima, Origin of
        * Oblivion): only when what it made includes colorless mana — once,
-       * however much. */
-      readonly producing?: "C";
+       * however much. `"chosen"` is "of the chosen color" (Gauntlet of Power,
+       * `GameObject.chosenOnEnter`): with none chosen, it never triggers. */
+      readonly producing?: "C" | "chosen";
     }
   | {
       /** A Saga's chapter ability resolved — `finalOnly` is "whenever the

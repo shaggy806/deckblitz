@@ -12462,6 +12462,95 @@ describe("chroma, what it devoured, a commander here, a shared creature type", (
     });
     expect(read("Card has flying and trample if it devoured a creature.")).toMatchObject({
       condition: { kind: "self-devoured" },
+describe("a triggered mana ability that does more than add mana", () => {
+  const card = (name: string, type_line: string, oracle_text: string) =>
+    parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });
+
+  it("reads the rest of it as the add-mana's also, off the stack", () => {
+    const abundance = card(
+      "Overabundance",
+      "Enchantment",
+      "Whenever a player taps a land for mana, that player adds one mana of any type that land produced, and this enchantment deals 1 damage to the player.",
+    );
+    expect(abundance.complete).toBe(true);
+    expect(abundance.triggered[0].effect).toEqual({
+      kind: "add-mana",
+      mana: "produced",
+      amount: 1,
+      also: { kind: "damage", amount: 1, who: "trigger-player" },
+    });
+    const gremlin = card(
+      "Barbflare Gremlin",
+      "Creature — Gremlin",
+      "Whenever a player taps a land for mana, if this creature is tapped, that player adds one mana of any type that land produced. Then that land deals 1 damage to that player.",
+    );
+    expect(gremlin.complete).toBe(true);
+    expect(gremlin.triggered[0].condition).toEqual({ kind: "source", filter: { tapped: true } });
+    expect(gremlin.triggered[0].effect).toEqual({
+      kind: "add-mana",
+      mana: "produced",
+      amount: 1,
+      also: { kind: "damage", amount: 1, who: "trigger-player", from: "trigger-object" },
+    });
+    const night = card(
+      "Winter's Night",
+      "World Enchantment",
+      "Whenever a player taps a snow land for mana, that player adds one mana of any type that land produced. That land doesn't untap during its controller's next untap step.",
+    );
+    expect(night.complete).toBe(true);
+    expect(night.triggered[0].trigger).toEqual({ on: "tapped-for-mana", who: "any", filter: { type: "land", supertype: "snow" } });
+    expect(night.triggered[0].effect).toMatchObject({
+      kind: "add-mana",
+      also: { kind: "tap", target: "trigger-object", doesntUntapNext: true, onlyDoesntUntap: true },
+    });
+  });
+
+  it("reads a condition or the chosen colour on the trigger", () => {
+    const behemoth = card(
+      "Regal Behemoth",
+      "Creature — Dinosaur",
+      "Whenever you tap a land for mana while you're the monarch, add an additional one mana of any color.",
+    );
+    expect(behemoth.complete).toBe(true);
+    expect(behemoth.triggered[0].trigger).toEqual({ on: "tapped-for-mana", who: "you-control", filter: { type: "land" } });
+    expect(behemoth.triggered[0].condition).toEqual({ kind: "monarch", who: "you" });
+    expect(behemoth.triggered[0].effect).toEqual({ kind: "add-mana", mana: "any-color", amount: 1 });
+    const gauntlet = card(
+      "Gauntlet of Power",
+      "Artifact",
+      "As this artifact enters, choose a color.\nCreatures of the chosen color get +1/+1.\nWhenever a basic land is tapped for mana of the chosen color, its controller adds an additional one mana of that color.",
+    );
+    expect(gauntlet.complete).toBe(true);
+    expect(gauntlet.triggered[0].trigger).toMatchObject({ on: "tapped-for-mana", who: "any", producing: "chosen" });
+    expect(gauntlet.triggered[0].effect).toEqual({ kind: "add-mana", mana: "chosen", amount: 1 });
+    expect(gauntlet.static[0].affects).toEqual({ scope: "all-creatures", chosenColorOnly: true });
+  });
+
+  it("leaves a trigger from anything else on the stack (605.5a), and lasting haste", () => {
+    const novelist = card(
+      "Crime Novelist",
+      "Creature — Goblin Bard",
+      "Whenever you sacrifice an artifact, put a +1/+1 counter on this creature and add {R}.",
+    );
+    expect(novelist.complete).toBe(true);
+    expect(novelist.triggered[0].effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "add-counter", target: "source", counter: "+1/+1", amount: 1 },
+        { kind: "add-mana", mana: "R", amount: 1 },
+      ],
+    });
+    const hall = card(
+      "Hall of the Bandit Lord",
+      "Legendary Land",
+      "{T}, Pay 3 life: Add {C}. If that mana is spent on a creature spell, it gains haste.",
+    );
+    expect(hall.complete).toBe(true);
+    expect(hall.activated[0].effect).toEqual({
+      kind: "add-mana",
+      mana: "C",
+      amount: 1,
+      spellGains: { spell: { type: "creature" }, keywords: ["haste"], lasting: true },
     });
   });
 });

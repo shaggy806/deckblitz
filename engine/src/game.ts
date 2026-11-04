@@ -808,6 +808,13 @@ function runDamageSteps(
 
 /** A mana option of a land whose mana is another type instead (Deep Water —
  * `Game.landManaInsteadFor`): as many units, every one `type`, no choice. */
+/** The colour `holder`'s controller named as it entered, if one was (a
+ * `chosenOnEnter` can be something else). */
+function chosenManaType(holder: GameObject): ManaType | undefined {
+  const chosen = holder.chosenOnEnter;
+  return MANA_TYPES.includes(chosen as ManaType) ? (chosen as ManaType) : undefined;
+}
+
 function landManaInsteadOption(option: ManaOption, type: ManaType): ManaOption {
   const units = option.fixed.length + option.anyColor;
   const { anyColorOf: _choices, ...rest } = option;
@@ -1688,8 +1695,11 @@ type ManaExtra = {
   readonly amount: number;
   /** The permanent whose triggered ability it is: the mana is from it. */
   readonly holder: ObjectId;
-  /** Only when the tapping made this type ("for {C}"). */
-  readonly producing?: "C";
+  /** Only when the tapping made this type ("for {C}", "of the chosen color"). */
+  readonly producing?: ManaType;
+  /** What else the ability does, as part of it (`add-mana`'s `also`) — "and
+   * this enchantment deals 1 damage to the player" (Overabundance). */
+  readonly also?: EffectSpec;
 };
 
 
@@ -22107,6 +22117,8 @@ export class Game {
         const type = pick !== undefined && out.choices.includes(pick) ? pick : out.choices[0];
         this.addMana(player, type, out.amount, undefined, origin);
       }
+      this.applyManaExtraRiders(this.manaExtraRiders(source, produced), sourceId, player);
+      this.noteTappedForMana(source, player);
       // What triggers on the tap and uses the stack (rule 106.12a).
       if (produced.length > 0) this.emit({ type: "permanent-tapped-for-mana", object: sourceId, player, produced });
     }
@@ -23616,6 +23628,11 @@ export class Game {
     for (const extra of step.floating ?? []) {
       this.addMana(player, extra.type ?? "any-color", 1, undefined, originOf(extra.from));
     }
+    // Read before the source moves: a land sacrificed for its mana was still
+    // a land as it was tapped (rule 608.2h).
+    const extraRiders =
+      step.untapped === undefined && own > 0 ? this.manaExtraRiders(object, step.mana.slice(0, own)) : [];
+    if (step.untapped === undefined) this.noteTappedForMana(object, player);
     if (step.oncePerTurn !== undefined) {
       this.markUsedThisTurn(object, step.oncePerTurn);
       // Not an event of its own, so nothing else is going to tell a cache
@@ -23641,6 +23658,7 @@ export class Game {
     if (step.rider !== undefined) {
       applyEffectSpec(step.rider, this.makeResolutionContext(step.source, player, []));
     }
+    this.applyManaExtraRiders(extraRiders, step.source, player);
     // What triggers on the tap and uses the stack, once this spell or ability
     // is cast and someone would get priority (rules 106.12a, 603.3). An option
     // with no {T} (`untapped`) isn't a tap, and one that made no mana of its
@@ -23667,7 +23685,23 @@ export class Game {
     // An option that makes no mana of its own sets off no "tapped for mana"
     // trigger (rule 106.12a); nor does one making no {C} a "…for {C}" one.
     if (ownFixed.length === 0 && ownAny <= 0) return [option];
-    if (extra.producing !== undefined && !ownFixed.includes(extra.producing)) return [option];
+    if (extra.producing !== undefined && !ownFixed.includes(extra.producing)) {
+      if (ownAny <= 0 || !(option.anyColorOf ?? COLORS).includes(extra.producing)) return [option];
+      // Its "any colour" units could be that type, and then it triggers: one
+      // more option, with them made as it (Gauntlet of Power off a land given
+      // Chromatic Lantern's ability). Earlier "any colour" extras stay flexible.
+      const { anyColorOf: _restricted, ...rest } = option;
+      const asType: ManaOption = {
+        ...rest,
+        fixed: [
+          ...ownFixed,
+          ...Array<ManaType>(ownAny).fill(extra.producing),
+          ...extras.flatMap((e) => (e.type === undefined ? [] : [e.type])),
+        ],
+        anyColor: extraAny,
+      };
+      return [option, ...this.withManaExtra(asType, extra, player)];
+    }
     // The extra units are the triggered ability's source's (see `ManaOrigin`).
     const plus = (type: ManaType): ManaOption => ({
       ...option,
@@ -23958,6 +23992,18 @@ export class Game {
         ) {
           continue;
         }
+        // "Of the chosen color" with none chosen never triggers (Gauntlet of
+        // Power's ruling).
+        const producing = trigger.producing === "chosen" ? chosenManaType(holder) : trigger.producing;
+        if (trigger.producing !== undefined && producing === undefined) continue;
+        // "…while you're the monarch" (Regal Behemoth), "if this creature is
+        // tapped" (Barbflare Gremlin): asked as it triggers, which for a mana
+        // ability is as it resolves too (rules 603.4, 605.4a).
+        if (
+          !this.interveningIfMet(ability.condition, holder, undefined, undefined, tapped.id, undefined, undefined, tapped.controller)
+        ) {
+          continue;
+        }
         out.push({
           mana: effect.mana,
           // A counted amount — "an additional {G} for each Elf on the
@@ -23968,11 +24014,53 @@ export class Game {
               ? effect.amount
               : this.liveManaAmount(holder.id, holder.controller, effect.amount),
           holder: holder.id,
-          ...(trigger.producing !== undefined ? { producing: trigger.producing } : {}),
+          ...(producing !== undefined ? { producing } : {}),
+          ...(effect.also !== undefined ? { also: effect.also } : {}),
         });
       }
     }
     return out;
+  }
+
+  /** `player` tapped `tapped` for mana (rule 106.12): `TurnStat`
+   * `"lands-tapped-for-mana"`, if it's a land. */
+  private noteTappedForMana(tapped: GameObject | undefined, player: PlayerId): void {
+    if (tapped === undefined || !effectiveTypes(this.state, this.registry, tapped).includes("land")) return;
+    const history = (this.state.players[player].turnHistory ??= {});
+    history.landsTappedForMana = (history.landsTappedForMana ?? 0) + 1;
+  }
+
+  /** The triggered mana abilities with something more to do as `tapped`, having
+   * just made `produced`, sets them off (rule 106.12a) — read while `tapped`
+   * still stands where it was tapped. */
+  private manaExtraRiders(tapped: GameObject | undefined, produced: readonly ManaType[]): readonly ManaExtra[] {
+    if (tapped === undefined || produced.length === 0) return [];
+    return this.tappedForManaExtras(tapped).filter(
+      (extra) => extra.also !== undefined && (extra.producing === undefined || produced.includes(extra.producing)),
+    );
+  }
+
+  /**
+   * The rest of what triggered mana abilities do beside adding mana — `add-mana`'s
+   * `also`: all of a mana ability, so it never uses the stack (rule 605.4a).
+   * `tapped` is "that land" (the trigger object) and `player` "that player".
+   */
+  private applyManaExtraRiders(riders: readonly ManaExtra[], tapped: ObjectId, player: PlayerId): void {
+    // Which stint of it "that land" means: one sacrificed for its mana is read
+    // as it last was, and isn't there to act on (Winter's Night).
+    const land = this.state.objects[tapped];
+    const stint = land?.zone === "battlefield" ? (land.zoneChangeCount ?? 0) : land?.lastKnown?.zoneChangeCount;
+    for (const extra of riders) {
+      const holder = this.state.objects[extra.holder];
+      if (holder === undefined || extra.also === undefined) continue;
+      applyEffectSpec(
+        extra.also,
+        this.makeResolutionContext(extra.holder, holder.controller, [], 0, 0, tapped, 1, 0, [], {
+          player,
+          ...(stint !== undefined ? { triggerObject: stint } : {}),
+        }),
+      );
+    }
   }
 
   /** Take one specific unit of mana back out of `player`'s pool — the other
@@ -27985,7 +28073,10 @@ export class Game {
           event.type === "permanent-tapped-for-mana" &&
           this.matchesWho(spec.who, event.object, self, true) &&
           this.triggerFilterOk(spec.filter, event.object, self, true) &&
-          (spec.producing === undefined || event.produced.includes(spec.producing))
+          (spec.producing === undefined ||
+            (spec.producing === "chosen"
+              ? chosenManaType(self) !== undefined && event.produced.includes(chosenManaType(self) as ManaType)
+              : event.produced.includes(spec.producing)))
         );
       case "chapter-resolves":
         return (

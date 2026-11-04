@@ -2863,7 +2863,9 @@ export type EffectSpec =
        * Prince's Banana: "{T}, Sacrifice this artifact: Add {R} or {G}. **You
        * gain 2 life.**" Applied right after the mana is added, and still
        * without using the stack; the auto-payer applies it too when it uses
-       * the ability to pay a cost. */
+       * the ability to pay a cost. On a `tapped-for-mana` triggered mana
+       * ability, the rest of it the same way (Overabundance's damage — rule
+       * 605.4a), for no decision. */
       readonly also?: EffectSpec;
       /** Who adds it, when that isn't the effect's controller — "each
        * player adds {B}{R}{G}" (Yurlok of Scorch Thrash). For mana with no

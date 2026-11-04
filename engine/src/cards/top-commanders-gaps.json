@@ -1503,7 +1503,13 @@
   "target:creature-planeswalker-or-player",
   "target:creature-token-player-or-planeswalker",
   "target:player-planeswalker-or-filtered-creature",
-  "target:opponent-or-creature-or-planeswalker-an-opponent-controls"
+  "target:opponent-or-creature-or-planeswalker-an-opponent-controls",
+  "effect:sacrifice-triggered-mana-ability",
+  "effect:tapped-for-mana-condition",
+  "effect:tapped-for-mana-land-deals-damage",
+  "effect:triggered-mana-ability-rider",
+  "effect:tapped-for-mana-chosen-color-any-player",
+  "effect:mana-spell-gains-permanent-keyword"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

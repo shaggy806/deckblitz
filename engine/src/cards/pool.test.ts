@@ -205,6 +205,24 @@ describe("triggered mana abilities", () => {
     );
     expect(unread).toEqual([]);
   });
+
+  // An untargeted one that adds mana among other things is a mana ability all
+  // the same (rule 605.1b), whatever else it does: the rest is the `add-mana`'s
+  // `also`, not a `sequence`, which would use the stack.
+  it("say the rest of what they do in `also`", () => {
+    const onTheStack = POOL_CARDS.flatMap((def) =>
+      def.triggered
+        .filter(
+          (ability) =>
+            ability.trigger.on === "tapped-for-mana" &&
+            ability.targets.length === 0 &&
+            !isTriggeredManaAbility(ability) &&
+            JSON.stringify(ability.effect).includes('"kind":"add-mana"'),
+        )
+        .map(() => def.name),
+    );
+    expect(onTheStack).toEqual([]);
+  });
 });
 
 describe("exile until this leaves the battlefield", () => {

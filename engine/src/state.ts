@@ -4629,6 +4629,10 @@ export interface TurnHistory {
    * Anchor's "if a card left your graveyard this turn" (`TurnStat`
    * `"cards-left-graveyard"`). */
   leftGraveyard?: number;
+  /** Lands this player tapped for mana (rule 106.12) — Desolation's "each
+   * player who tapped a land for mana this turn" (`TurnStat`
+   * `"lands-tapped-for-mana"`). */
+  landsTappedForMana?: number;
   /** Scries and surveils this turn (`TurnStat` `"scried-or-surveilled"`). */
   scriedOrSurveilled?: number;
   /** Mana this player spent to cast spells this turn (rule 700.14 —

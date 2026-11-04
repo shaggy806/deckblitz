@@ -1685,6 +1685,8 @@ export function turnStatOf(state: GameState, player: PlayerId, stat: TurnStat): 
       return seat.turnHistory?.toGraveyardFromHandOrLibrary ?? 0;
     case "cards-left-graveyard":
       return seat.turnHistory?.leftGraveyard ?? 0;
+    case "lands-tapped-for-mana":
+      return seat.turnHistory?.landsTappedForMana ?? 0;
     case "scried-or-surveilled":
       return seat.turnHistory?.scriedOrSurveilled ?? 0;
     case "mana-spent-on-spells":
@@ -3941,6 +3943,10 @@ export function staticAffects(
     }
     if (affects.withKeyword !== undefined && !hasKeyword(affects.withKeyword)) return false;
     if (affects.withoutKeyword !== undefined && hasKeyword(affects.withoutKeyword)) return false;
+    if (affects.chosenColorOnly === true) {
+      const chosen = source.chosenOnEnter;
+      if (chosen == null || !effectiveColors(state, registry, target).has(chosen as Color)) return false;
+    }
     return true;
   }
   // "creatures-you-control"

@@ -1771,8 +1771,19 @@ export function parseTrigger(clause) {
   if (/^Whenever a permanent other than a basic land enters$/.test(c)) {
     return [{ on: "enters-battlefield", who: "any", filter: { notSupertype: "basic" } }];
   }
+  // "Whenever a basic land is tapped for mana of the chosen color" (Gauntlet of
+  // Power).
+  if ((m = /^Whenever (?:a|an) (.+) is tapped for mana of the chosen color$/.exec(c))) {
+    const filter = parseTypePhrase(m[1]);
+    return filter === null ? null : [{ on: "tapped-for-mana", who: "any", filter, producing: "chosen" }];
+  }
   if ((m = /^Whenever (a player|an opponent|you) taps? (?:a|an) (.+) for mana$/.exec(c)) || (m = /^Whenever ()(?:a|an) (.+) is tapped for mana$/.exec(c))) {
-    const filter = m[2] === "nonbasic land" ? { type: "land", notSupertype: "basic" } : parseTypePhrase(m[2]);
+    const filter =
+      m[2] === "nonbasic land"
+        ? { type: "land", notSupertype: "basic" }
+        : m[2] === "snow land"
+          ? { type: "land", supertype: "snow" }
+          : parseTypePhrase(m[2]);
     if (filter === null) return null;
     const who = m[1] === "an opponent" ? "opponent" : m[1] === "you" ? "you-control" : "any";
     return [{ on: "tapped-for-mana", who, filter }];
@@ -4757,6 +4768,42 @@ export function parseSentence(sentence, ctx) {
   if (ctx.thatPlayer === "trigger-player" && re("(?:that player|its controller) adds one mana of any type that land produced").test(s)) {
     return { kind: "add-mana", mana: "produced", amount: 1 };
   }
+  // "Put a +1/+1 counter on ~ and add {R}" (Crime Novelist): on the stack, as
+  // the trigger isn't from a mana ability (rule 605.5a).
+  if (ctx.onStack === true && (m = /^(.+) and add ((?:\{[WUBRGC]\})+)\.$/i.exec(s))) {
+    const before = parseSentence(`${m[1][0].toUpperCase()}${m[1].slice(1)}.`, ctx);
+    const adds = before === null ? null : parseSentence(`Add ${m[2]}.`, ctx);
+    if (before !== null && adds !== null) return { kind: "sequence", effects: [before, adds] };
+  }
+  // The rest of a triggered mana ability, part of it (rule 605.4a): "…, and ~
+  // deals 1 damage to the player" (Overabundance), "then that land deals 1
+  // damage to that player" (Barbflare Gremlin), "that land doesn't untap …"
+  // (Winter's Night).
+  if (ctx.thatPlayer === "trigger-player") {
+    if ((m = re("that player adds one mana of any type that land produced, and ~ deals (\\d+) damage to the player").exec(s))) {
+      const damage = { kind: "damage", amount: Number(m[1]), who: "trigger-player" };
+      return { kind: "add-mana", mana: "produced", amount: 1, also: damage };
+    }
+    if ((m = re("(?:then )?that land deals (\\d+) damage to that player").exec(s))) {
+      return { kind: "damage", amount: Number(m[1]), who: "trigger-player", from: "trigger-object" };
+    }
+    if (re("that land doesn't untap during its controller's next untap step").test(s)) {
+      return { kind: "tap", target: "trigger-object", doesntUntapNext: true, onlyDoesntUntap: true };
+    }
+    // "Add an additional one mana of any color" (Regal Behemoth), "its
+    // controller adds an additional one mana of that color" (Gauntlet of Power).
+    if (re("(?:add|its controller adds) an additional one mana of any color").test(s)) {
+      return { kind: "add-mana", mana: "any-color", amount: 1 };
+    }
+    if (re("its controller adds an additional one mana of that color").test(s)) {
+      return { kind: "add-mana", mana: "chosen", amount: 1 };
+    }
+    // "Add an additional {B}" (Crypt Ghast), "its controller adds an additional
+    // {G}{G}" (Overgrowth).
+    if ((m = re("(?:add|its controller adds) an additional ((?:\\{[WUBRGC]\\})+)").exec(s))) {
+      return parseSentence(`Add ${m[1]}.`, ctx);
+    }
+  }
   // "With the same name as" another named object (rule 201.2a). Remembrance's
   // and Verdant Succession's "that creature" is the one the trigger names, as
   // it last existed.
@@ -7151,6 +7198,22 @@ export function parseEffect(text, outer) {
     const add = parseSentence(spendDeny[1], ctx);
     if (add?.kind === "add-mana") {
       return { effect: { ...add, spendOnly: { notCastFrom: ["hand"], text: spendDeny[2] } }, todo: [], hints: [] };
+    }
+    ctx.targets.length = slots;
+  }
+  // "If that mana is spent on a creature spell, it gains haste" (Hall of the
+  // Bandit Lord): with no duration named, for good (its ruling).
+  const spellGains = /^(Add .+?\.) If that mana is spent on an? (.+) spell, it gains (\w+)\.$/.exec(text);
+  if (spellGains !== null) {
+    const slots = ctx.targets.length;
+    const add = parseSentence(spellGains[1], ctx);
+    const spell = parseTypePhrase(spellGains[2]);
+    if (add?.kind === "add-mana" && spell !== null) {
+      return {
+        effect: { ...add, spellGains: { spell, keywords: [spellGains[3].toLowerCase()], lasting: true } },
+        todo: [],
+        hints: [],
+      };
     }
     ctx.targets.length = slots;
   }
@@ -11977,6 +12040,10 @@ function parseFaceAsWritten(face, ctx = {}) {
       // intervening "if" (the rulings).
       const whileSaddled = / while saddled$/.test(clause);
       if (whileSaddled) clause = clause.replace(/ while saddled$/, "");
+      // "Whenever you tap a land for mana while you're the monarch" (Regal
+      // Behemoth): a triggered mana ability, its condition read as it's made.
+      const whileMonarch = /^Whenever .+ for mana while you're the monarch$/.test(clause);
+      if (whileMonarch) clause = clause.replace(/ while you're the monarch$/, "");
       // "Whenever ~ crews a Vehicle during your main phase" (Canyon Vaulter):
       // part of when it triggers — the turn can't move on with it on the
       // stack, so the ability's condition, asked again, agrees.
@@ -12022,6 +12089,7 @@ function parseFaceAsWritten(face, ctx = {}) {
         ...(oncePerTurn ? { oncePerTurn: true } : {}),
         ...(timeCounterOff ? { whileSuspended: true } : {}),
         ...(whileSaddled ? { whileCondition: { kind: "source", filter: { saddled: true } } } : {}),
+        ...(whileMonarch ? { condition: { kind: "monarch", who: "you" } } : {}),
         ...(duringMain
           ? {
               condition: {
@@ -12097,6 +12165,8 @@ function parseFaceAsWritten(face, ctx = {}) {
         lines,
         i,
       );
+      // A triggered mana ability's other steps are all part of it (rule 605.4a).
+      if (triggers.every((t) => t.on === "tapped-for-mana")) manaAbilityExtras(first);
       out.triggered.push(first);
       for (const t of triggers.slice(1)) out.triggered.push({ ...first, trigger: t, targets: [...first.targets] });
       i = next;
@@ -12708,6 +12778,7 @@ const INTERVENING_IFS = {
   "if they were cast using web-slinging,": { kind: "source", filter: { castVia: "web-slinging" } },
   "if ~ was cast using web-slinging,": { kind: "source", filter: { castVia: "web-slinging" } },
   "if ~ has counters on it,": { kind: "self-counters", compare: { op: "gte", n: 1 } },
+  "if ~ is tapped,": { kind: "source", filter: { tapped: true } },
   // Rule 702.112b: the source's renowned designation.
   "if it's renowned,": { kind: "source", filter: { renowned: true } },
   "if ~ is renowned,": { kind: "source", filter: { renowned: true } },
@@ -14076,6 +14147,18 @@ function selfCreatureWhileOf(line, text) {
 function parseStatic(line, text) {
   const spellCost = spellCostStaticOf(line, text);
   if (spellCost !== null) return spellCost;
+  // "Creatures [you control] of the chosen color get +1/+1" (Gauntlet of Power,
+  // Hall of Triumph).
+  {
+    const m = /^Creatures (you control )?of the chosen color get ([+-]\d+)\/([+-]\d+)\.$/.exec(line);
+    if (m !== null) {
+      return {
+        affects: { scope: m[1] === undefined ? "all-creatures" : "creatures-you-control", chosenColorOnly: true },
+        grantPt: [Number(m[2]), Number(m[3])],
+        text,
+      };
+    }
+  }
   const creatureWhile = selfCreatureWhileOf(line, text);
   if (creatureWhile !== null) return creatureWhile;
   // Spark Rupture: every such planeswalker, each P/T its own count (layer 7b).
