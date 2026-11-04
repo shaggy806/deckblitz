@@ -26115,7 +26115,7 @@ export class Game {
           effect: { kind: "exile-spell-as-it-resolves", applyFirst: { spell: id, feather: true, intoHand: true } },
         },
         {
-          text: adventure ? "Exile it on an adventure instead" : "Apply the other replacement first",
+          text: adventure ? "Exile it on an adventure instead" : "Apply the other replacement first: exile it",
           effect: { kind: "exile-spell-as-it-resolves", applyFirst: { spell: id, feather: false, intoHand: true } },
         },
       ]);

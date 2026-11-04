@@ -6978,3 +6978,17 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 - **Do:** Click Lindblum in your hand and play it as a land.
 - **Expect:** The menu offers both playing the land and casting Mage Siege. Played, it enters tapped, and no Wizard token appears.
+### Soulfire Grand Master: into your hand, chosen over Rest in Peace
+
+- **Do:** Activate Soulfire Grand Master's ability. Cast Lightning Bolt at Bob, pass, and choose "Apply Soulfire Grand Master's replacement first: put it into your hand".
+- **Expect:** The prompt is headed "Lightning Bolt — choose one", after Bob loses 3 life and you gain 3. Lightning Bolt ends back in your hand, not in exile.
+
+### Soulfire Grand Master: exiled, Rest in Peace chosen first
+
+- **Do:** Activate Soulfire Grand Master's ability. Cast Lightning Bolt at Bob, pass, and choose "Apply the other replacement first: exile it".
+- **Expect:** Lightning Bolt goes to exile. Your hand stays empty.
+
+### Soulfire Grand Master: four players, the choice is only the caster's
+
+- **Do:** Activate Soulfire Grand Master's ability. Cast Lightning Bolt at Carol, pass, and choose "Apply Soulfire Grand Master's replacement first: put it into your hand".
+- **Expect:** Only you are asked, while the other players wait. Carol loses 3 life and Lightning Bolt is back in your hand.

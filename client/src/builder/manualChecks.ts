@@ -10470,4 +10470,23 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{}, {}, {}],
     }),
   ),
+  preset(
+    'Soulfire Grand Master: into your hand, chosen over Rest in Peace',
+    board({
+      you: { bf: ['Island*4', 'Mountain', 'Soulfire Grand Master', 'Rest in Peace'], hand: ['Lightning Bolt'] },
+    }),
+  ),
+  preset(
+    'Soulfire Grand Master: exiled, Rest in Peace chosen first',
+    board({
+      you: { bf: ['Island*4', 'Mountain', 'Soulfire Grand Master', 'Rest in Peace'], hand: ['Lightning Bolt'] },
+    }),
+  ),
+  preset(
+    'Soulfire Grand Master: four players, the choice is only the caster\'s',
+    board({
+      you: { bf: ['Island*4', 'Mountain', 'Soulfire Grand Master', 'Rest in Peace'], hand: ['Lightning Bolt'] },
+      opp: [{ bf: ['Grizzly Bears'] }, { bf: ['Llanowar Elves'] }, { bf: ['Savannah Lions'] }],
+    }),
+  ),
 ]
