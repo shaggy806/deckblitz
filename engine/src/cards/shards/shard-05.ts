@@ -409,6 +409,7 @@ import _poolInfernalTribute from "../pool/infernal-tribute.js";
 import _poolInfiniteObliteration from "../pool/infinite-obliteration.js";
 import _poolInfusedArrows from "../pool/infused-arrows.js";
 import _poolInnerFlameIgniter from "../pool/inner-flame-igniter.js";
+import _poolInquisition from "../pool/inquisition.js";
 import _poolInquisitivePuppet from "../pool/inquisitive-puppet.js";
 import _poolInsectoidExterminator from "../pool/insectoid-exterminator.js";
 import _poolInspiredCharge from "../pool/inspired-charge.js";
@@ -1294,6 +1295,7 @@ const shard: CardShard = {
     _poolInfiniteObliteration,
     _poolInfusedArrows,
     _poolInnerFlameIgniter,
+    _poolInquisition,
     _poolInquisitivePuppet,
     _poolInsectoidExterminator,
     _poolInspiredCharge,

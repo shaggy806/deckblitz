@@ -853,6 +853,7 @@ import _poolVexingBeetle from "../pool/vexing-beetle.js";
 import _poolVibraniumEnergyDaggers from "../pool/vibranium-energy-daggers.js";
 import _poolVirtuousVariant from "../pool/virtuous-variant.js";
 import _poolVirulentSliver from "../pool/virulent-sliver.js";
+import _poolVisionsOfDominance from "../pool/visions-of-dominance.js";
 import _poolVividCreek from "../pool/vivid-creek.js";
 import _poolVoidSquall from "../pool/void-squall.js";
 import _poolVolcanicVillain from "../pool/volcanic-villain.js";
@@ -1763,6 +1764,7 @@ const shard: CardShard = {
     _poolVibraniumEnergyDaggers,
     _poolVirtuousVariant,
     _poolVirulentSliver,
+    _poolVisionsOfDominance,
     _poolVividCreek,
     _poolVoidSquall,
     _poolVolcanicVillain,

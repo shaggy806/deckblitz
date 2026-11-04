@@ -757,6 +757,7 @@ import _poolSupernaturalStamina from "../pool/supernatural-stamina.js";
 import _poolSurrakTheHuntCaller from "../pool/surrak-the-hunt-caller.js";
 import _poolSusurianVoidborn from "../pool/susurian-voidborn.js";
 import _poolSwordOfOnceAndFuture from "../pool/sword-of-once-and-future.js";
+import _poolSynchronizedEviction from "../pool/synchronized-eviction.js";
 import _poolTaigamsStrike from "../pool/taigams-strike.js";
 import _poolTallAsABeanstalk from "../pool/tall-as-a-beanstalk.js";
 import _poolTalonrend from "../pool/talonrend.js";
@@ -1656,6 +1657,7 @@ const shard: CardShard = {
     _poolSurrakTheHuntCaller,
     _poolSusurianVoidborn,
     _poolSwordOfOnceAndFuture,
+    _poolSynchronizedEviction,
     _poolTaigamsStrike,
     _poolTallAsABeanstalk,
     _poolTalonrend,

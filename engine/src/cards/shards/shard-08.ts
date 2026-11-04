@@ -806,6 +806,7 @@ import _poolTheMasterFormedAnew from "../pool/the-master-formed-anew.js";
 import _poolTheModernAge from "../pool/the-modern-age.js";
 import _poolTheStasisCoffin from "../pool/the-stasis-coffin.js";
 import _poolThornfistStriker from "../pool/thornfist-striker.js";
+import _poolThoughtSponge from "../pool/thought-sponge.js";
 import _poolThoughtweftCharge from "../pool/thoughtweft-charge.js";
 import _poolThoughtweftImbuer from "../pool/thoughtweft-imbuer.js";
 import _poolThrillingEncore from "../pool/thrilling-encore.js";
@@ -1745,6 +1746,7 @@ const shard: CardShard = {
     _poolTheModernAge,
     _poolTheStasisCoffin,
     _poolThornfistStriker,
+    _poolThoughtSponge,
     _poolThoughtweftCharge,
     _poolThoughtweftImbuer,
     _poolThrillingEncore,

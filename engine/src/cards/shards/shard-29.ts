@@ -659,6 +659,7 @@ import _poolSerpentSpecialist from "../pool/serpent-specialist.js";
 import _poolSerpentsSoulJar from "../pool/serpents-soul-jar.js";
 import _poolSerraBestiary from "../pool/serra-bestiary.js";
 import _poolShadowcloakVampire from "../pool/shadowcloak-vampire.js";
+import _poolSharedAnimosity from "../pool/shared-animosity.js";
 import _poolShieldOfTheRealm from "../pool/shield-of-the-realm.js";
 import _poolShimmercreep from "../pool/shimmercreep.js";
 import _poolShivanPhoenix from "../pool/shivan-phoenix.js";
@@ -1562,6 +1563,7 @@ const shard: CardShard = {
     _poolSerpentsSoulJar,
     _poolSerraBestiary,
     _poolShadowcloakVampire,
+    _poolSharedAnimosity,
     _poolShieldOfTheRealm,
     _poolShimmercreep,
     _poolShivanPhoenix,

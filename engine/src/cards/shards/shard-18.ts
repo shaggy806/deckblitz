@@ -731,6 +731,7 @@ import _poolSymbioteSpawn from "../pool/symbiote-spawn.js";
 import _poolSyrKonradTheGrim from "../pool/syr-konrad-the-grim.js";
 import _poolTaekoThePatientAvalanche from "../pool/taeko-the-patient-avalanche.js";
 import _poolTalismanOfCuriosity from "../pool/talisman-of-curiosity.js";
+import _poolTarFiend from "../pool/tar-fiend.js";
 import _poolTarnationVista from "../pool/tarnation-vista.js";
 import _poolTeardropKami from "../pool/teardrop-kami.js";
 import _poolTeferisCurse from "../pool/teferis-curse.js";
@@ -1630,6 +1631,7 @@ const shard: CardShard = {
     _poolSyrKonradTheGrim,
     _poolTaekoThePatientAvalanche,
     _poolTalismanOfCuriosity,
+    _poolTarFiend,
     _poolTarnationVista,
     _poolTeardropKami,
     _poolTeferisCurse,

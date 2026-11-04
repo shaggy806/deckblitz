@@ -127,6 +127,7 @@ import _poolClear from "../pool/clear.js";
 import _poolCloisterGargoyle from "../pool/cloister-gargoyle.js";
 import _poolClone from "../pool/clone.js";
 import _poolCloudMidgarMercenary from "../pool/cloud-midgar-mercenary.js";
+import _poolCloudkill from "../pool/cloudkill.js";
 import _poolCoastalDiscovery from "../pool/coastal-discovery.js";
 import _poolCoaxFromTheBlindEternities from "../pool/coax-from-the-blind-eternities.js";
 import _poolColfenorsUrn from "../pool/colfenors-urn.js";
@@ -675,6 +676,7 @@ import _poolSimianSimulacrum from "../pool/simian-simulacrum.js";
 import _poolSinisterStarfish from "../pool/sinister-starfish.js";
 import _poolSirenOfTheSilentSong from "../pool/siren-of-the-silent-song.js";
 import _poolSkeletalSnake from "../pool/skeletal-snake.js";
+import _poolSkemfarShadowsage from "../pool/skemfar-shadowsage.js";
 import _poolSkulkingGhost from "../pool/skulking-ghost.js";
 import _poolSkullsnatcher from "../pool/skullsnatcher.js";
 import _poolSkyDiamond from "../pool/sky-diamond.js";
@@ -1009,6 +1011,7 @@ const shard: CardShard = {
     _poolCloisterGargoyle,
     _poolClone,
     _poolCloudMidgarMercenary,
+    _poolCloudkill,
     _poolCoastalDiscovery,
     _poolCoaxFromTheBlindEternities,
     _poolColfenorsUrn,
@@ -1557,6 +1560,7 @@ const shard: CardShard = {
     _poolSinisterStarfish,
     _poolSirenOfTheSilentSong,
     _poolSkeletalSnake,
+    _poolSkemfarShadowsage,
     _poolSkulkingGhost,
     _poolSkullsnatcher,
     _poolSkyDiamond,

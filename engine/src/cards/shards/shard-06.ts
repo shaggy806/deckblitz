@@ -744,6 +744,7 @@ import _poolSyndicateMessenger from "../pool/syndicate-messenger.js";
 import _poolTackleArtist from "../pool/tackle-artist.js";
 import _poolTakeHeart from "../pool/take-heart.js";
 import _poolTakenumaAbandonedMire from "../pool/takenuma-abandoned-mire.js";
+import _poolTalesOfTheAncestors from "../pool/tales-of-the-ancestors.js";
 import _poolTanufelRimespeaker from "../pool/tanufel-rimespeaker.js";
 import _poolTaskMageAssembly from "../pool/task-mage-assembly.js";
 import _poolTeachingsOfTheKirin from "../pool/teachings-of-the-kirin.js";
@@ -1637,6 +1638,7 @@ const shard: CardShard = {
     _poolTackleArtist,
     _poolTakeHeart,
     _poolTakenumaAbandonedMire,
+    _poolTalesOfTheAncestors,
     _poolTanufelRimespeaker,
     _poolTaskMageAssembly,
     _poolTeachingsOfTheKirin,

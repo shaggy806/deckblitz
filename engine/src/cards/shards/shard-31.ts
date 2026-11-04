@@ -525,6 +525,7 @@ import _poolMannichiTheFeveredDream from "../pool/mannichi-the-fevered-dream.js"
 import _poolMarduSkullhunter from "../pool/mardu-skullhunter.js";
 import _poolMarisiBreakerOfTheCoil from "../pool/marisi-breaker-of-the-coil.js";
 import _poolMarkerBeetles from "../pool/marker-beetles.js";
+import _poolMarrowChomper from "../pool/marrow-chomper.js";
 import _poolMasterOfThePearlTrident from "../pool/master-of-the-pearl-trident.js";
 import _poolMatcaRioters from "../pool/matca-rioters.js";
 import _poolMechHangar from "../pool/mech-hangar.js";
@@ -622,6 +623,7 @@ import _poolPermafrostTrap from "../pool/permafrost-trap.js";
 import _poolPersecute from "../pool/persecute.js";
 import _poolPestFriend from "../pool/pest-friend.js";
 import _poolPetrifiedField from "../pool/petrified-field.js";
+import _poolPhosphorescentFeast from "../pool/phosphorescent-feast.js";
 import _poolPhyrexianLens from "../pool/phyrexian-lens.js";
 import _poolPhyrexianNegator from "../pool/phyrexian-negator.js";
 import _poolPiercingRays from "../pool/piercing-rays.js";
@@ -1481,6 +1483,7 @@ const shard: CardShard = {
     _poolMarduSkullhunter,
     _poolMarisiBreakerOfTheCoil,
     _poolMarkerBeetles,
+    _poolMarrowChomper,
     _poolMasterOfThePearlTrident,
     _poolMatcaRioters,
     _poolMechHangar,
@@ -1578,6 +1581,7 @@ const shard: CardShard = {
     _poolPersecute,
     _poolPestFriend,
     _poolPetrifiedField,
+    _poolPhosphorescentFeast,
     _poolPhyrexianLens,
     _poolPhyrexianNegator,
     _poolPiercingRays,

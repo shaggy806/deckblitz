@@ -288,6 +288,7 @@ import _poolFeralIncarnation from "../pool/feral-incarnation.js";
 import _poolFerocityOfTheHunt from "../pool/ferocity-of-the-hunt.js";
 import _poolFerocityOfTheWilds from "../pool/ferocity-of-the-wilds.js";
 import _poolFerventCharge from "../pool/fervent-charge.js";
+import _poolFieryBombardment from "../pool/fiery-bombardment.js";
 import _poolFireBowman from "../pool/fire-bowman.js";
 import _poolFireLordZuko from "../pool/fire-lord-zuko.js";
 import _poolFireNationRaider from "../pool/fire-nation-raider.js";
@@ -774,6 +775,7 @@ import _poolStarlitSoothsayer from "../pool/starlit-soothsayer.js";
 import _poolStarnheimMemento from "../pool/starnheim-memento.js";
 import _poolStartFromScratch from "../pool/start-from-scratch.js";
 import _poolSteelWreckingBall from "../pool/steel-wrecking-ball.js";
+import _poolStingingStudy from "../pool/stinging-study.js";
 import _poolStirringHopesinger from "../pool/stirring-hopesinger.js";
 import _poolStompingSlabs from "../pool/stomping-slabs.js";
 import _poolStoneboundMentor from "../pool/stonebound-mentor.js";
@@ -890,6 +892,7 @@ import _poolWeldingSparks from "../pool/welding-sparks.js";
 import _poolWhelmingWave from "../pool/whelming-wave.js";
 import _poolWhirlwindOfThought from "../pool/whirlwind-of-thought.js";
 import _poolWhiskAway from "../pool/whisk-away.js";
+import _poolWhiteLotusTile from "../pool/white-lotus-tile.js";
 import _poolWhiteTigerAvaAyala from "../pool/white-tiger-ava-ayala.js";
 import _poolWickerWitch from "../pool/wicker-witch.js";
 import _poolWildernessHypnotist from "../pool/wilderness-hypnotist.js";
@@ -1224,6 +1227,7 @@ const shard: CardShard = {
     _poolFerocityOfTheHunt,
     _poolFerocityOfTheWilds,
     _poolFerventCharge,
+    _poolFieryBombardment,
     _poolFireBowman,
     _poolFireLordZuko,
     _poolFireNationRaider,
@@ -1710,6 +1714,7 @@ const shard: CardShard = {
     _poolStarnheimMemento,
     _poolStartFromScratch,
     _poolSteelWreckingBall,
+    _poolStingingStudy,
     _poolStirringHopesinger,
     _poolStompingSlabs,
     _poolStoneboundMentor,
@@ -1826,6 +1831,7 @@ const shard: CardShard = {
     _poolWhelmingWave,
     _poolWhirlwindOfThought,
     _poolWhiskAway,
+    _poolWhiteLotusTile,
     _poolWhiteTigerAvaAyala,
     _poolWickerWitch,
     _poolWildernessHypnotist,

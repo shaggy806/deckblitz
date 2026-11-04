@@ -864,6 +864,7 @@ import _poolWildMongrel from "../pool/wild-mongrel.js";
 import _poolWildSwing from "../pool/wild-swing.js";
 import _poolWildfireAwakener from "../pool/wildfire-awakener.js";
 import _poolWillowDryad from "../pool/willow-dryad.js";
+import _poolWitheringGaze from "../pool/withering-gaze.js";
 import _poolWoebearer from "../pool/woebearer.js";
 import _poolWolfwillowHaven from "../pool/wolfwillow-haven.js";
 import _poolWoodcloaker from "../pool/woodcloaker.js";
@@ -1784,6 +1785,7 @@ const shard: CardShard = {
     _poolWildSwing,
     _poolWildfireAwakener,
     _poolWillowDryad,
+    _poolWitheringGaze,
     _poolWoebearer,
     _poolWolfwillowHaven,
     _poolWoodcloaker,

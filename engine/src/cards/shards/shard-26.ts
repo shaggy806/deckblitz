@@ -77,6 +77,7 @@ import _poolBalduvianAtrocity from "../pool/balduvian-atrocity.js";
 import _poolBaneOfTheLiving from "../pool/bane-of-the-living.js";
 import _poolBanquetGuests from "../pool/banquet-guests.js";
 import _poolBaralAndKariZev from "../pool/baral-and-kari-zev.js";
+import _poolBasaltRavager from "../pool/basalt-ravager.js";
 import _poolBasilicaSkullbomb from "../pool/basilica-skullbomb.js";
 import _poolBasiliskCollar from "../pool/basilisk-collar.js";
 import _poolBatteringKrasis from "../pool/battering-krasis.js";
@@ -983,6 +984,7 @@ const shard: CardShard = {
     _poolBaneOfTheLiving,
     _poolBanquetGuests,
     _poolBaralAndKariZev,
+    _poolBasaltRavager,
     _poolBasilicaSkullbomb,
     _poolBasiliskCollar,
     _poolBatteringKrasis,

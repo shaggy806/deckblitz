@@ -60,6 +60,7 @@ import _poolBaSingSe from "../pool/ba-sing-se.js";
 import _poolBadMoon from "../pool/bad-moon.js";
 import _poolBafflingEnd from "../pool/baffling-end.js";
 import _poolBalduvianConjurer from "../pool/balduvian-conjurer.js";
+import _poolBalefulStare from "../pool/baleful-stare.js";
 import _poolBandage from "../pool/bandage.js";
 import _poolBanewaspAffliction from "../pool/banewasp-affliction.js";
 import _poolBasrisAegis from "../pool/basris-aegis.js";
@@ -368,6 +369,7 @@ import _poolInnerFire from "../pool/inner-fire.js";
 import _poolInspiringPaladin from "../pool/inspiring-paladin.js";
 import _poolInspiringRefrain from "../pool/inspiring-refrain.js";
 import _poolIonaShieldOfEmeria from "../pool/iona-shield-of-emeria.js";
+import _poolIsperiaTheInscrutable from "../pool/isperia-the-inscrutable.js";
 import _poolJacesTriumph from "../pool/jaces-triumph.js";
 import _poolJaggedLightning from "../pool/jagged-lightning.js";
 import _poolJetMedallion from "../pool/jet-medallion.js";
@@ -928,6 +930,7 @@ const shard: CardShard = {
     _poolBadMoon,
     _poolBafflingEnd,
     _poolBalduvianConjurer,
+    _poolBalefulStare,
     _poolBandage,
     _poolBanewaspAffliction,
     _poolBasrisAegis,
@@ -1236,6 +1239,7 @@ const shard: CardShard = {
     _poolInspiringPaladin,
     _poolInspiringRefrain,
     _poolIonaShieldOfEmeria,
+    _poolIsperiaTheInscrutable,
     _poolJacesTriumph,
     _poolJaggedLightning,
     _poolJetMedallion,

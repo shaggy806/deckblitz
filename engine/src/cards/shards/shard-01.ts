@@ -348,6 +348,7 @@ import _poolInsufferableBalladeer from "../pool/insufferable-balladeer.js";
 import _poolIntellectDevourer from "../pool/intellect-devourer.js";
 import _poolInundate from "../pool/inundate.js";
 import _poolInvasionOfZendikar from "../pool/invasion-of-zendikar.js";
+import _poolInvestigatorsJournal from "../pool/investigators-journal.js";
 import _poolInvokeDespair from "../pool/invoke-despair.js";
 import _poolIreShaman from "../pool/ire-shaman.js";
 import _poolIronMaiden from "../pool/iron-maiden.js";
@@ -1223,6 +1224,7 @@ const shard: CardShard = {
     _poolIntellectDevourer,
     _poolInundate,
     _poolInvasionOfZendikar,
+    _poolInvestigatorsJournal,
     _poolInvokeDespair,
     _poolIreShaman,
     _poolIronMaiden,

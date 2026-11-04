@@ -157,6 +157,7 @@ import _poolCultistsStaff from "../pool/cultists-staff.js";
 import _poolCunningNightbonder from "../pool/cunning-nightbonder.js";
 import _poolDakraMystic from "../pool/dakra-mystic.js";
 import _poolDamnablePact from "../pool/damnable-pact.js";
+import _poolDarigaazTheIgniter from "../pool/darigaaz-the-igniter.js";
 import _poolDarkDwellerOracle from "../pool/dark-dweller-oracle.js";
 import _poolDarkHatchling from "../pool/dark-hatchling.js";
 import _poolDarkslickShores from "../pool/darkslick-shores.js";
@@ -1036,6 +1037,7 @@ const shard: CardShard = {
     _poolCunningNightbonder,
     _poolDakraMystic,
     _poolDamnablePact,
+    _poolDarigaazTheIgniter,
     _poolDarkDwellerOracle,
     _poolDarkHatchling,
     _poolDarkslickShores,

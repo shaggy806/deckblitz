@@ -422,6 +422,7 @@ import _poolLesserMasticore from "../pool/lesser-masticore.js";
 import _poolLiability from "../pool/liability.js";
 import _poolLichsRelic from "../pool/lichs-relic.js";
 import _poolLifeMatrix from "../pool/life-matrix.js";
+import _poolLightFromWithin from "../pool/light-from-within.js";
 import _poolLightningElemental from "../pool/lightning-elemental.js";
 import _poolLimDulsHex from "../pool/lim-duls-hex.js";
 import _poolLingeringDeath from "../pool/lingering-death.js";
@@ -1308,6 +1309,7 @@ const shard: CardShard = {
     _poolLiability,
     _poolLichsRelic,
     _poolLifeMatrix,
+    _poolLightFromWithin,
     _poolLightningElemental,
     _poolLimDulsHex,
     _poolLingeringDeath,

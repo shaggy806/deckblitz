@@ -316,6 +316,7 @@ import _poolHawkeyeBowslinger from "../pool/hawkeye-bowslinger.js";
 import _poolHazelsNocturne from "../pool/hazels-nocturne.js";
 import _poolHealersHawk from "../pool/healers-hawk.js";
 import _poolHealersHeaddress from "../pool/healers-headdress.js";
+import _poolHellkiteHatchling from "../pool/hellkite-hatchling.js";
 import _poolHellkiteWhelp from "../pool/hellkite-whelp.js";
 import _poolHengeOfRamos from "../pool/henge-of-ramos.js";
 import _poolHeraldOfSerra from "../pool/herald-of-serra.js";
@@ -614,6 +615,7 @@ import _poolSmeagolHelpfulGuide from "../pool/smeagol-helpful-guide.js";
 import _poolSmokebraider from "../pool/smokebraider.js";
 import _poolSnakeOfTheGoldenGrove from "../pool/snake-of-the-golden-grove.js";
 import _poolSnarlingUndorak from "../pool/snarling-undorak.js";
+import _poolSokenzanRenegade from "../pool/sokenzan-renegade.js";
 import _poolSolarArray from "../pool/solar-array.js";
 import _poolSolemnOffering from "../pool/solemn-offering.js";
 import _poolSoltariGuerrillas from "../pool/soltari-guerrillas.js";
@@ -754,6 +756,7 @@ import _poolVitalityHunter from "../pool/vitality-hunter.js";
 import _poolVoiceOfTruth from "../pool/voice-of-truth.js";
 import _poolVolleyVeteran from "../pool/volley-veteran.js";
 import _poolVonaButcherOfMagan from "../pool/vona-butcher-of-magan.js";
+import _poolVoraciousDragon from "../pool/voracious-dragon.js";
 import _poolVraskasContempt from "../pool/vraskas-contempt.js";
 import _poolWalkingDesecration from "../pool/walking-desecration.js";
 import _poolWallOfRoots from "../pool/wall-of-roots.js";
@@ -1134,6 +1137,7 @@ const shard: CardShard = {
     _poolHazelsNocturne,
     _poolHealersHawk,
     _poolHealersHeaddress,
+    _poolHellkiteHatchling,
     _poolHellkiteWhelp,
     _poolHengeOfRamos,
     _poolHeraldOfSerra,
@@ -1432,6 +1436,7 @@ const shard: CardShard = {
     _poolSmokebraider,
     _poolSnakeOfTheGoldenGrove,
     _poolSnarlingUndorak,
+    _poolSokenzanRenegade,
     _poolSolarArray,
     _poolSolemnOffering,
     _poolSoltariGuerrillas,
@@ -1572,6 +1577,7 @@ const shard: CardShard = {
     _poolVoiceOfTruth,
     _poolVolleyVeteran,
     _poolVonaButcherOfMagan,
+    _poolVoraciousDragon,
     _poolVraskasContempt,
     _poolWalkingDesecration,
     _poolWallOfRoots,

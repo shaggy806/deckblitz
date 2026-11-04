@@ -9,6 +9,7 @@ import _poolAbsoluteVirtue from "../pool/absolute-virtue.js";
 import _poolAbzanKinGuard from "../pool/abzan-kin-guard.js";
 import _poolAccordersShield from "../pool/accorders-shield.js";
 import _poolAccursedHorde from "../pool/accursed-horde.js";
+import _poolAdamaroFirstToDesire from "../pool/adamaro-first-to-desire.js";
 import _poolAegisOfHonor from "../pool/aegis-of-honor.js";
 import _poolAerialDoombot from "../pool/aerial-doombot.js";
 import _poolAerialResponder from "../pool/aerial-responder.js";
@@ -881,6 +882,7 @@ const shard: CardShard = {
     _poolAbzanKinGuard,
     _poolAccordersShield,
     _poolAccursedHorde,
+    _poolAdamaroFirstToDesire,
     _poolAegisOfHonor,
     _poolAerialDoombot,
     _poolAerialResponder,

@@ -609,6 +609,7 @@ import _poolSauronLordOfTheRings from "../pool/sauron-lord-of-the-rings.js";
 import _poolScaledHerbalist from "../pool/scaled-herbalist.js";
 import _poolScarletWitchChaoticAvenger from "../pool/scarlet-witch-chaotic-avenger.js";
 import _poolSceneOfTheCrime from "../pool/scene-of-the-crime.js";
+import _poolScholarshipSponsor from "../pool/scholarship-sponsor.js";
 import _poolScionOfOpulence from "../pool/scion-of-opulence.js";
 import _poolScourgeOfTheNobilis from "../pool/scourge-of-the-nobilis.js";
 import _poolScreamingShield from "../pool/screaming-shield.js";
@@ -1470,6 +1471,7 @@ const shard: CardShard = {
     _poolScaledHerbalist,
     _poolScarletWitchChaoticAvenger,
     _poolSceneOfTheCrime,
+    _poolScholarshipSponsor,
     _poolScionOfOpulence,
     _poolScourgeOfTheNobilis,
     _poolScreamingShield,
