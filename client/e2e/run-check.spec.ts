@@ -221,7 +221,10 @@ async function runStep(page: Page, step: string): Promise<boolean> {
           // Then a real button before a tile, whose rules text may say the same
           // ("Cycling—Pay 2 life", under the card in hand).
           (await visibleFirst(page.locator('button:not(.card-tile):not(:has(.card-tile))', { hasText: pattern(arg) }))) ||
-          (await visibleFirst(page.locator('button, [role="menuitem"], [role="button"]', { hasText: pattern(arg) })))
+          (await visibleFirst(page.locator('button, [role="menuitem"], [role="button"]', { hasText: pattern(arg) }))) ||
+          // A cost is mana symbols, images whose alt text is only in the name
+          // ("Equip {0}" beside "Equip {2}").
+          (await visibleFirst(page.getByRole('menuitem', { name: pattern(arg) }).or(page.getByRole('button', { name: pattern(arg) }))))
         ) {
           return true
         }

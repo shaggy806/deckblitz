@@ -10929,7 +10929,7 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
   preset(
     'Forge Anew: the first equip of your turn for nothing',
     board({
-      you: { bf: ['Forge Anew', 'Vulshok Morningstar', 'Grizzly Bears', 'Forest*4'] },
+      you: { bf: ['Forge Anew', 'Vulshok Morningstar', 'Bonesplitter', 'Grizzly Bears', 'Forest*4'] },
     }),
   ),
   preset(

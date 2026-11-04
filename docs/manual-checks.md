@@ -7292,18 +7292,18 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 ### Forge Anew: the first equip of your turn for nothing
 
-- **Do:** Click Vulshok Morningstar and take "Equip {0}", on Grizzly Bears. Then click the Morningstar again.
-- **Expect:** It offers "Equip {2}" and "Equip {0}" the first time, and no Forests get tapped. The second time it offers only "Equip {2}".
+- **Do:** Click Vulshok Morningstar and take "Equip {0}", on Grizzly Bears. Then click Bonesplitter.
+- **Expect:** The Morningstar offers "Equip {2}" and "Equip {0}", and no Forests get tapped. Bonesplitter has no "Equip {0}": only its "Equip {1}".
 
 ### Bloodthorn Flail: three mana or a discard
 
-- **Do:** Click Bloodthorn Flail and take "Equip—Discard a card", on Grizzly Bears, discarding the Forest.
+- **Do:** Click Bloodthorn Flail and take "Equip—Discard a card", on Grizzly Bears.
 - **Expect:** It offers "Equip {3}" and "Equip—Discard a card". The Forest goes to your graveyard, nothing gets tapped, and the Bears are 4/3.
 
 ### Ezuri's Predation: which tokens fight which creatures
 
-- **Do:** Cast Ezuri's Predation. Choose one Squirrel and one Beast of the four tokens, then the creature the first of them fights.
-- **Expect:** "Choose 2 of those tokens to fight", the four tokens lit up. Then "Choose the creature a … token fights", Bob's two creatures lit up. Bob's creatures take damage from the tokens you paired them with, and the other two tokens take none.
+- **Do:** Cast Ezuri's Predation. Choose a Squirrel and a Beast and Confirm, then choose Rumbling Baloth and Confirm.
+- **Expect:** "Choose 2 of those tokens to fight", then "Choose the creature a Squirrel token fights" with only Bob's two creatures to pick. The Squirrel dies to the Baloth, which keeps 1 damage. The Beast kills Grizzly Bears. The other Beast and Squirrel take no damage.
 
 ### Ezuri's Predation: a Beast each at a four-player table
 
