@@ -2780,6 +2780,37 @@ export function parseSentence(sentence, ctx) {
   const emblem = emblemOf(s);
   if (emblem !== null) return emblem;
   let M;
+  // "For each creature, its controller sacrifices it unless they pay X life"
+  // (Killing Wave), "… sacrifices a permanent of their choice unless they pay
+  // {1}" (Fade Away), "For each Spirit, return it to its owner's hand unless
+  // that player pays {3}" (Cut the Tethers): `for-each-unless`.
+  if (/^for each creature, its controller sacrifices it unless they pay X life\.$/i.test(s)) {
+    return {
+      kind: "for-each-unless",
+      of: { permanents: { type: "creature" } },
+      asks: "controller",
+      options: [{ payLifeAmount: "x", text: "Pay {X} life to keep {it}" }],
+      otherwise: { kind: "sacrifice-target", target: 0, byItsController: true },
+    };
+  }
+  if ((M = /^for each creature, its controller sacrifices a permanent of their choice unless they pay (\{\d+\})\.$/i.exec(s))) {
+    return {
+      kind: "for-each-unless",
+      of: { permanents: { type: "creature" } },
+      asks: "controller",
+      options: [{ pay: M[1], text: `Pay ${M[1]} for {it}` }],
+      otherwise: { kind: "sacrifice", who: "that-player", filter: {}, count: 1 },
+    };
+  }
+  if ((M = /^for each ([A-Z][a-z]+), return it to its owner's hand unless that player pays (\{\d+\})\.$/.exec(s.replace(/^For/, "for")))) {
+    return {
+      kind: "for-each-unless",
+      of: { permanents: { subtype: M[1] } },
+      asks: "owner",
+      options: [{ pay: M[2], text: `Pay ${M[2]} for {it}` }],
+      otherwise: { kind: "return-to-hand", target: 0, atRelease: true },
+    };
+  }
   // "Then you create a tapped Treasure token for each creature your opponents
   // control" (Covetous Elegy), counted as it applies.
   if ((M = /^then you create a tapped Treasure token for each creature your opponents control\.$/i.exec(s))) {

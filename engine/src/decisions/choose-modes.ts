@@ -37,6 +37,7 @@ export const chooseModes = defineDecision({
         ? { modePlayers: awaiting.modes.map((m) => (m.effect.kind === "about-player" ? m.effect.player : null)) }
         : {}),
       ...(awaiting.about !== undefined ? { about: awaiting.about } : {}),
+      ...(awaiting.aboutObject !== undefined ? { aboutObject: awaiting.aboutObject } : {}),
       ...(awaiting.ward !== undefined ? { ward: { spell: awaiting.ward.spell } } : {}),
       // "You may pay one or more {E}" / "any amount of {E}": X in energy,
       // up to what the chooser has (the raise capped `maxX` at it).

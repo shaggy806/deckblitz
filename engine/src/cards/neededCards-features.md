@@ -4950,6 +4950,8 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 
 **Untargeted picks from graveyards and exile (2026-11-04).** No new decision: `look-and-choose` over `"graveyards"`, a named player's graveyard or exile, and held across a `for-each-player` (Cemetery Gatekeeper, Cemetery Desecrator, Dreams of Steel and Oil, Breach the Multiverse, The Deck of Many Things, Binding Negotiation, Sengir Nosferatu's Bat); `cast-now`'s `"opponents-graveyards"` and `onePerGraveyard` (Jetsam); a signed `roll-dice` `modifier`; half of what a player controls through `choose-permanents` (Split the Party) and `sacrifice` (Vona's Hunger); a land played as a trigger's object and player. `choose-from-batch` stays open, and Mirror of Fate needs a `then` that runs with nothing chosen.
 
+**For each object, pay or else (2026-11-04).** `for-each-unless` (permanents, a hand's cards, the top of a library; who answers; held to the end), `unless`'s `aboutObject`, the `lifePaymentsOf` amount. Killing Wave, Fade Away, Cut the Tethers, Sirocco, Sword-Point Diplomacy, Moonlight Bargain.
+
 **Exact counts and one per filter in `discard-chosen` (2026-11-04).** `picks` without `reveals`, `oneEach` (a `one-each` set rule). Mind Warp, Abandon Hope, Gruesome Discovery, Last Rites, Distended Mindbender.
 
 **Return X as a cost (2026-11-04).** `additionalCost.returnToHandX`: X announced as it's cast, capped by what matches, paid as `also.returnToHand`. Infernal Harvest.

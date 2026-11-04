@@ -4255,6 +4255,8 @@ export type AwaitingDecision =
       readonly player: PlayerId;
       /** The player the question is about — see the offer's `about`. */
       readonly about?: PlayerId;
+      /** The permanent the question is about — see the offer's `aboutObject`. */
+      readonly aboutObject?: ObjectId;
       /** No mode at all is also an answer, besides `minModes` to `maxModes`
        * — an announced modal's `optional` ("you may choose two"). */
       readonly orNone?: true;
@@ -6191,6 +6193,9 @@ export interface GameState {
       readonly under?: PlayerId;
       readonly enterAs?: EnterTypes;
     }[];
+    /** Permanents to go back to their owners' hands — `return-to-hand`'s
+     * `atRelease`. */
+    readonly returns?: readonly ObjectId[];
   };
   /**
    * A sacrifice *cost* of several permanents being paid (rules 601.2h, 602.2b

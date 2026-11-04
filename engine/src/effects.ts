@@ -841,6 +841,11 @@ export type EffectAmount =
    * than a half: Legate Lanius's decimate, "a tenth of the creatures they
    * control, rounded up", is `fraction: 10`. */
   | { readonly half: EffectAmount; readonly round: "up" | "down"; readonly fraction?: number }
+  /** How many times over the effect's controller could pay this much life,
+   * rounded down (rule 119.4), none while they can't lose life (119.8): the
+   * most of a look-and-choose that are kept at a price — Moonlight Bargain's
+   * "put that card into your graveyard unless you pay 2 life". */
+  | { readonly lifePaymentsOf: number }
   /** Two to the power of an amount — Mathemagics' "target player draws 2ˣ
    * cards" (`{ powerOfTwo: "x" }`; 2⁰ = 1). The exponent is at most 52, past
    * which a number isn't exact any more: every use draws or counts far more
@@ -3434,6 +3439,10 @@ export type EffectSpec =
        * no target at all (Encroaching Dragonstorm — needed-cards P16). */
       readonly kind: "return-to-hand";
       readonly target: EffectTargetRef;
+      /** With choices held (`for-each-unless`): it goes when they're released,
+       * with what the other players' answers send, at once (rule 101.4 — Cut
+       * the Tethers). Off the battlefield only. */
+      readonly atRelease?: true;
       /**
        * The zone the object is returned **from** — `"battlefield"` (a bounce)
        * when omitted. The object has to be in that zone as the effect
@@ -8953,6 +8962,88 @@ export type EffectSpec =
       readonly options: readonly UnlessOption[];
       /** What happens if they take none of the options. */
       readonly otherwise: EffectSpec;
+      /** The permanent the question is about, for a driver to point at when
+       * the name alone wouldn't say which. Set by `for-each-unless`, never
+       * authored. */
+      readonly aboutObject?: ObjectId;
+    }
+  | {
+      /**
+       * "**For each creature**, its controller sacrifices it **unless they pay
+       * X life**" (Killing Wave): one `unless` question per object, each asked
+       * of whoever the text names, the players in turn order and each knowing
+       * the answers before them (rule 101.4). What a decline owes waits until
+       * the last has answered, then all of it happens at once (`heldChoices`
+       * — the rulings of Killing Wave and Fade Away), so a creature can't be
+       * sacrificed to pay for another and still be counted out. The set is
+       * fixed as this begins. A payment is made as it's answered, so what's
+       * paid for one leaves less for the next (rule 119.4), and a question
+       * nobody can pay for isn't asked.
+       *
+       * `{it}` in an option's `text` is the object's name. Each token of a
+       * stack is an object of its own (rule 700.3b).
+       */
+      readonly kind: "for-each-unless";
+      /** `permanents`: every battlefield permanent matching, read from the
+       * effect's controller's side. `inHandOf`: the cards matching in the hand
+       * of the player in this slot ("for each blue instant card revealed this
+       * way" — Sirocco, `reveal-hand` first). `libraryTop`: the top N of your
+       * library, revealed ("reveal the top three cards of your library. For
+       * each of those cards" — Sword-Point Diplomacy). */
+      readonly of:
+        | { readonly permanents: CardFilter }
+        | { readonly inHandOf: number; readonly filter: CardFilter }
+        | { readonly libraryTop: number };
+      /** Who answers for each: the object's `"controller"` or `"owner"`
+       * (Cut the Tethers' "that player"), the player in a slot, or `{ anyOf }`:
+       * each of a scope in turn order, the next only once the one before has
+       * declined ("unless any opponent pays" — the ruling of Sword-Point
+       * Diplomacy). */
+      readonly asks: "controller" | "owner" | { readonly target: number } | { readonly anyOf: PlayerScope };
+      readonly options: readonly UnlessOption[];
+      /** What a decline owes, the object in slot `as` and `"that-player"` the
+       * player who declined. Mostly a one-object move: `sacrifice-target`
+       * with `byItsController`, `return-to-hand` with `atRelease`,
+       * `discard-card`, a library card's `return-to-hand`; or "sacrifices a
+       * permanent of their choice" (Fade Away), each owed one chosen as it's
+       * declined and a permanent chosen once not chosen again. */
+      readonly otherwise: EffectSpec;
+      /** The slot the object is in; the one after the spell's targets. */
+      readonly as?: number;
+      /** "You choose the order to perform this process for the cards" (the
+       * ruling of Sword-Point Diplomacy): which next is the effect's
+       * controller's choice. */
+      readonly inOrderYouChoose?: true;
+      /** "Then exile the rest": a `libraryTop` card still in the library once
+       * all are answered. */
+      readonly rest?: "exile";
+      /** Set by the engine on the copy that carries on between questions. */
+      readonly progress?: {
+        readonly left: readonly {
+          readonly object: ObjectId;
+          readonly name: string;
+          readonly permanent?: true;
+          readonly player?: PlayerId;
+        }[];
+        readonly all: readonly ObjectId[];
+      };
+    }
+  | {
+      /** One object's question of a `for-each-unless`, the object bound to slot
+       * `as` even if it has gone by now (a creature sacrificed to pay for
+       * another is still answered for — Fade Away's ruling). Built by the
+       * engine — never authored. */
+      readonly kind: "for-found";
+      readonly object: ObjectId;
+      readonly as: number;
+      readonly effect: EffectSpec;
+    }
+  | {
+      /** "That player discards **that card**" (Sirocco): the card in this slot,
+       * by its owner, if it's still in their hand — held with the rest while
+       * `heldChoices` are (one `cards-discarded`, rule 101.4). */
+      readonly kind: "discard-card";
+      readonly target: number;
     }
   | {
       /**
@@ -11730,10 +11821,30 @@ export interface EffectApi {
       | { readonly player: PlayerId },
     options: readonly BoundUnlessOption[],
     otherwise: EffectSpec,
+    /** See the `unless` effect's `aboutObject`. */
+    aboutObject?: ObjectId,
   ): void;
   /** The mana cost an effect telling a player to pay `ref`'s would have them
    * pay (rule 107.3h), or `null` for an object with none (rule 118.6). */
   manaCostToPay(ref: TargetRef): string | null;
+  /** What a `for-each-unless` is over, as it begins: its objects, each token
+   * of a stack its own, a `libraryTop`'s revealed. */
+  forEachUnlessObjects(of: Extract<EffectSpec, { kind: "for-each-unless" }>["of"]): readonly {
+    readonly object: ObjectId;
+    readonly name: string;
+    readonly controller: PlayerId;
+    readonly owner: PlayerId;
+    readonly permanent: boolean;
+  }[];
+  /** See the `lifePaymentsOf` amount. */
+  lifePaymentsOf(each: number): number;
+  /** See the `discard-card` {@link EffectSpec}. */
+  discardCard(card: ObjectId): void;
+  /** A `for-each-unless`'s `rest: "exile"`: this card, if it's still in the
+   * library it was found in. */
+  exileFoundCard(card: ObjectId): void;
+  /** See `return-to-hand`'s `atRelease`. */
+  returnToHandAtRelease(target: TargetRef): void;
   /** Ask `player` an `"each-player-may"`'s question: a `choose-modes`
    * decision of theirs, or nothing at all when there's nothing they could
    * take. */
@@ -13449,6 +13560,79 @@ function applyForEachVoted(spec: Extract<EffectSpec, { kind: "for-each-voted" }>
   else each();
 }
 
+/** See the `for-each-unless` {@link EffectSpec}. Each question and the rest of
+ * the effect after it are a `sequence`, so an answer carries on from here. */
+function applyForEachUnless(spec: Extract<EffectSpec, { kind: "for-each-unless" }>, ctx: ResolutionContext): void {
+  const asks = spec.asks;
+  const progress =
+    spec.progress ??
+    (() => {
+      const found = ctx.forEachUnlessObjects(spec.of);
+      const slotPlayer = typeof asks === "object" && "target" in asks ? ctx.targets[asks.target] : undefined;
+      const each = found.map((one) => {
+        const player =
+          asks === "controller"
+            ? one.controller
+            : asks === "owner"
+              ? one.owner
+              : slotPlayer?.kind === "player"
+                ? slotPlayer.player
+                : undefined;
+        return {
+          object: one.object,
+          name: one.name,
+          ...(one.permanent ? { permanent: true as const } : {}),
+          ...(player !== undefined ? { player } : {}),
+        };
+      });
+      // Turn order by who answers (rule 101.4), each's objects as found.
+      const players = ctx.apnap([...new Set(each.flatMap(({ player }) => (player === undefined ? [] : [player])))]);
+      const left = [
+        ...each.filter(({ player }) => player === undefined),
+        ...players.flatMap((p) => each.filter(({ player }) => player === p)),
+      ];
+      if (left.length > 0) ctx.holdChoices();
+      return { left, all: found.map(({ object }) => object) };
+    })();
+  const [next] = progress.left;
+  if (next === undefined) {
+    if (spec.rest === "exile") for (const card of progress.all) ctx.exileFoundCard(card);
+    ctx.releaseHeldChoices();
+    return;
+  }
+  type Entry = (typeof progress.left)[number];
+  const question = (entry: Entry): EffectSpec => ({
+    kind: "sequence",
+    effects: [
+      {
+        kind: "for-found",
+        object: entry.object,
+        as: spec.as ?? 0,
+        effect: {
+          kind: "unless",
+          chooser: typeof asks === "object" && "anyOf" in asks ? asks : entry.player === undefined ? -1 : { player: entry.player },
+          options: spec.options.map((option) => ({ ...option, text: option.text.split("{it}").join(entry.name) })),
+          otherwise:
+            entry.player === undefined
+              ? spec.otherwise
+              : { kind: "about-player", player: entry.player, effect: spec.otherwise },
+          ...(entry.permanent === true ? { aboutObject: entry.object } : {}),
+        },
+      },
+      { ...spec, progress: { ...progress, left: progress.left.filter((other) => other.object !== entry.object) } },
+    ],
+  });
+  if (spec.inOrderYouChoose === true && progress.left.length > 1) {
+    ctx.chooseModes(
+      1,
+      1,
+      progress.left.map((entry) => ({ text: entry.name, effect: question(entry) })),
+    );
+    return;
+  }
+  applyEffectSpec(question(next), ctx);
+}
+
 /** The opponents of `you` who voted for a choice one of `you`'s votes was
  * for (`withYou`), or for a choice none of them was — Erestor of the
  * Council. In `opponents`' order, each once. */
@@ -13804,6 +13988,7 @@ function signedAmountValue(
   if ("powerOfTwo" in amount) {
     return 2 ** Math.min(52, Math.max(0, Math.floor(signedAmountValue(amount.powerOfTwo, ctx, each))));
   }
+  if ("lifePaymentsOf" in amount) return ctx.lifePaymentsOf(amount.lifePaymentsOf);
   if ("half" in amount) {
     // Signed, like the rest of this function: `amountValue` clamps the
     // result, and a value setting power keeps its sign (rule 107.1b).
@@ -15994,7 +16179,8 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     }
     case "return-to-hand": {
       const target = resolveEffectTarget(spec.target, ctx);
-      if (target !== undefined) ctx.returnToHand(target, spec.from, spec.now);
+      if (target !== undefined && spec.atRelease === true) ctx.returnToHandAtRelease(target);
+      else if (target !== undefined) ctx.returnToHand(target, spec.from, spec.now);
       return;
     }
     case "manifest-dread": {
@@ -19155,15 +19341,16 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         return [bindUnlessTimes(option, ctx)];
       });
       const chooser = spec.chooser;
+      const about = spec.aboutObject;
       if (typeof chooser === "object" && "anyOf" in chooser) {
         // "Any other player": as `"any-player"`, each in turn order (rule
         // 101.4), the next only once the one before has declined.
         const [first, ...rest] = ctx.apnap(ctx.playersInScope(chooser.anyOf));
         let otherwise = spec.otherwise;
         for (const player of [...rest].reverse()) {
-          otherwise = { kind: "unless", chooser: { player }, options, otherwise };
+          otherwise = { kind: "unless", chooser: { player }, options, otherwise, ...(about !== undefined ? { aboutObject: about } : {}) };
         }
-        ctx.unless(first === undefined ? -1 : { player: first }, options, otherwise);
+        ctx.unless(first === undefined ? -1 : { player: first }, options, otherwise, about);
         return;
       }
       if (
@@ -19175,12 +19362,23 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         chooser === "trigger-player" ||
         (typeof chooser === "object" && "player" in chooser)
       ) {
-        ctx.unless(chooser, options, spec.otherwise);
+        ctx.unless(chooser, options, spec.otherwise, about);
         return;
       }
       // One player named as this applies. Nobody: `otherwise` happens.
       const named = effectPlayer(chooser, ctx);
-      ctx.unless(named === undefined ? -1 : { player: named }, options, spec.otherwise);
+      ctx.unless(named === undefined ? -1 : { player: named }, options, spec.otherwise, about);
+      return;
+    }
+    case "for-each-unless":
+      applyForEachUnless(spec, ctx);
+      return;
+    case "for-found":
+      applyEffectSpec(spec.effect, ctx.withFoundAt(spec.as, spec.object));
+      return;
+    case "discard-card": {
+      const target = ctx.targets[spec.target];
+      if (target?.kind === "object") ctx.discardCard(target.object);
       return;
     }
     case "each-player-may":

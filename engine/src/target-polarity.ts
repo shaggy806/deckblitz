@@ -191,6 +191,12 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     if (n.as !== undefined) v.child(n.effect);
   },
   "for-permanent": none,
+  // Its objects aren't targets; a slot only names who answers (Sirocco).
+  "for-each-unless": (n, v) => {
+    if (typeof n.asks === "object" && "target" in n.asks) v.touch(n.asks.target, "harm", MAJOR);
+  },
+  "for-found": none,
+  "discard-card": none,
   // Whoever's in `who`'s slot is doing it: what that means for them is the
   // inner effect's to say, and with nothing inner naming the slot it's the
   // board's call (Encircling Fissure's "creatures target opponent controls").

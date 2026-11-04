@@ -2097,6 +2097,10 @@ export type LegalAction =
        * (myriad's "for each opponent … you may"): a driver shows it beside
        * the prompt. See the `may` effect's `aboutThatPlayer`. */
       readonly about?: PlayerId;
+      /** The permanent the question is about, when there's one per permanent
+       * (`for-each-unless` — Killing Wave): a driver points at it, the name
+       * in the mode's text not saying which of two with the same name. */
+      readonly aboutObject?: ObjectId;
       /** Present when the decision's cost contains `{X}` (Flameblast
        * Dragon): the largest X the chooser could pay for right now. The
        * driver echoes its pick back as `xValue`. `energy`: X is paid in

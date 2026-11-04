@@ -11,7 +11,7 @@ export default defineCard({
   colors: ["B"],
   types: ["sorcery"],
   text: "As an additional cost to cast this spell, return X Swamps you control to their owner's hand.\nInfernal Harvest deals X damage divided as you choose among any number of target creatures.",
-  additionalCost: { returnToHandX: { type: "land", subtype: "Swamp" } },
+  additionalCost: { returnToHandX: { subtype: "Swamp" } },
   targets: [{ kind: "any-number", of: "creature", max: "x" }],
   divided: { total: 0, slot: 0, x: true },
   effect: { kind: "damage-divided", from: 0 },

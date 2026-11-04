@@ -7323,6 +7323,8 @@ export class Game {
       readonly modesController?: PlayerId;
       /** See the `choose-modes` decision's `about`. */
       readonly about?: PlayerId;
+      /** See the `choose-modes` decision's `aboutObject`. */
+      readonly aboutObject?: ObjectId;
       /** See the `choose-modes` decision's `sourceLost`. */
       readonly sourceLost?: boolean;
       /** The colour `cost`'s X is paid in — see `may`'s `xColor`. */
@@ -7442,6 +7444,7 @@ export class Game {
       kind: "choose-modes",
       player: controller,
       ...(ability.about !== undefined ? { about: ability.about } : {}),
+      ...(ability.aboutObject !== undefined ? { aboutObject: ability.aboutObject } : {}),
       source,
       minModes: Math.min(minModes, offered.length),
       maxModes: Math.min(maxModes, offered.length),
@@ -34162,12 +34165,60 @@ export class Game {
       // Only a resolving ward trigger knows what it counters; `resolveAbility`
       // supplies the real one.
       ward: () => {},
-      unless: (chooser, options, otherwise) =>
+      unless: (chooser, options, otherwise, aboutObject) =>
         this.beginUnless(source, controller, x, targets, triggerObject, chooser, options, otherwise, {
           lastKnownRefs: refs,
           targetZones,
           triggerController: refs.triggerSpellController ?? triggerLastKnown()?.controller,
+          ...(aboutObject !== undefined ? { aboutObject } : {}),
         }),
+      forEachUnlessObjects: (of) => {
+        const facts = (object: ObjectId, permanent: boolean) => {
+          const it = this.state.objects[object];
+          return { object, name: it.cardName, controller: it.controller, owner: it.owner, permanent };
+        };
+        if ("permanents" in of) {
+          return this.battlefieldMatching(controller, of.permanents, x, source)
+            // Each token of a stack is an object of its own (rule 700.3b).
+            .flatMap((id) => {
+              const parts = this.materializeStack(id);
+              return parts.includes(id) ? parts : [...parts, id];
+            })
+            .map((id) => facts(id, true));
+        }
+        if ("libraryTop" in of) {
+          const cards = this.state.zones.perPlayer[controller].library.slice(0, of.libraryTop);
+          if (cards.length > 0) this.revealCards(controller, cards, "library");
+          return cards.map((id) => facts(id, false));
+        }
+        const owner = targets[of.inHandOf];
+        if (owner?.kind !== "player") return [];
+        return this.state.zones.perPlayer[owner.player].hand
+          .filter((id) => matchesFilter(this.state, this.registry, id, of.filter, { you: controller, source }))
+          .map((id) => facts(id, false));
+      },
+      lifePaymentsOf: (each) =>
+        playerCantLoseLife(this.state, controller) || each <= 0
+          ? 0
+          : Math.max(0, Math.floor(this.state.players[controller].life / each)),
+      discardCard: (card) => {
+        const object = this.state.objects[card];
+        if (object?.zone !== "hand") return;
+        if (this.state.heldChoices !== undefined) this.holdDiscard(object.owner, [card]);
+        else this.discardCards(object.owner, [card]);
+      },
+      exileFoundCard: (card) => {
+        if (this.state.objects[card]?.zone === "library") this.moveObject(card, "exile");
+      },
+      returnToHandAtRelease: (target) => {
+        if (target.kind !== "object" || this.state.objects[target.object]?.zone !== "battlefield") return;
+        const held = this.state.heldChoices;
+        if (held === undefined) {
+          this.returnToHandByEffect(target);
+          return;
+        }
+        this.state.heldChoices = { ...held, returns: [...(held.returns ?? []), target.object] };
+      },
       manaCostToPay: (ref) => {
         const object = ref.kind === "object" ? this.state.objects[ref.object] : undefined;
         if (object === undefined || object.faceDown !== undefined) return null;
@@ -37023,6 +37074,8 @@ export class Game {
       readonly lastKnownRefs: LastKnownRefs;
       readonly targetZones: readonly (ZoneType | null)[];
       readonly triggerController: PlayerId | undefined;
+      /** See the `choose-modes` decision's `aboutObject`. */
+      readonly aboutObject?: ObjectId;
     },
   ): void {
     if (chooser === "any-player") {
@@ -37110,6 +37163,7 @@ export class Game {
       {
         ...(offer.costHasX === true ? { costHasX: true as const } : {}),
         ...(offer.costFor !== undefined ? { costFor: offer.costFor } : {}),
+        ...(known.aboutObject !== undefined ? { aboutObject: known.aboutObject } : {}),
       },
     );
   }
@@ -48704,9 +48758,14 @@ export class Game {
     const held = this.state.heldChoices;
     if (held === undefined || cards.length === 0) return;
     const cause = this.state.decisionSource?.controller;
+    // One player's cards held one at a time (Sirocco) are one discard.
+    const same = held.discards.findIndex((d) => d.player === player && d.cause === cause);
     this.state.heldChoices = {
       ...held,
-      discards: [...held.discards, { player, objects: [...cards], ...(cause !== undefined ? { cause } : {}) }],
+      discards:
+        same >= 0
+          ? held.discards.map((d, i) => (i === same ? { ...d, objects: [...d.objects, ...cards] } : d))
+          : [...held.discards, { player, objects: [...cards], ...(cause !== undefined ? { cause } : {}) }],
     };
   }
 
@@ -48742,6 +48801,14 @@ export class Game {
     }
     if (this.state.pendingSacrificeVictims.length > 0 && this.state.awaiting === null) {
       this.drainPendingSacrificeVictims();
+    }
+    // Cut the Tethers: one event (rule 603.10a).
+    if (held.returns !== undefined) {
+      const returns = held.returns;
+      this.withLeaveBatch(() => {
+        this.snapshotLeaving(returns);
+        for (const object of returns) this.returnToHandByEffect({ kind: "object", object });
+      });
     }
     const entering = (held.entries ?? []).flatMap(({ objects }) => objects);
     const under: Record<string, PlayerId> = {};

@@ -2813,6 +2813,17 @@ describe("templates for features built since the parser began (2026-10-11)", () 
       {},
     );
     expect(pyre.additionalCost).toEqual({ exileFromGraveyard: { count: "x" } });
+    // One question per object, what's owed held to the end.
+    expect(face("For each creature, its controller sacrifices it unless they pay X life.", "Sorcery", {}).effect).toEqual({
+      kind: "for-each-unless",
+      of: { permanents: { type: "creature" } },
+      asks: "controller",
+      options: [{ payLifeAmount: "x", text: "Pay {X} life to keep {it}" }],
+      otherwise: { kind: "sacrifice-target", target: 0, byItsController: true },
+    });
+    expect(
+      face("For each Spirit, return it to its owner's hand unless that player pays {3}.", "Sorcery", {}).effect,
+    ).toMatchObject({ kind: "for-each-unless", of: { permanents: { subtype: "Spirit" } }, asks: "owner" });
     // Mind Warp's exact X, not "up to".
     expect(
       face("Look at target player's hand and choose X cards from it. That player discards those cards.", "Sorcery", {}).effect,
@@ -2820,7 +2831,7 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     // Infernal Harvest's X: as many as are returned.
     expect(
       face("As an additional cost to cast this spell, return X Swamps you control to their owner's hand.", "Sorcery", {}).additionalCost,
-    ).toEqual({ returnToHandX: { type: "land", subtype: "Swamp" } });
+    ).toEqual({ returnToHandX: { subtype: "Swamp" } });
     const explosion = face(
       "As an additional cost to cast this spell, exile a creature card from your graveyard.\nThis spell deals damage equal to the exiled card's power to each creature and each planeswalker.",
       "Sorcery",

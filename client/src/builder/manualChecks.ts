@@ -10631,6 +10631,20 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'Killing Wave: a question for each creature, the one asked about lit up',
+    board({
+      you: { bf: ['Swamp*4', 'Grizzly Bears', 'Grizzly Bears'], hand: ['Killing Wave'] },
+      opp: [{ bf: ['Hill Giant'] }],
+    }),
+  ),
+  preset(
+    'Killing Wave: four players, each answering in turn',
+    board({
+      you: { bf: ['Swamp*4', 'Grizzly Bears'], hand: ['Killing Wave'] },
+      opp: [{ bf: ['Hill Giant'] }, { bf: ['Serra Angel'] }, { bf: ['Llanowar Elves'] }],
+    }),
+  ),
+  preset(
     'Distended Mindbender: one card of each kind from a revealed hand',
     board({
       you: { bf: ['Swamp*8'], hand: ['Distended Mindbender'] },

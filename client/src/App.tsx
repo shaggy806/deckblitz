@@ -3787,6 +3787,9 @@ function Table({
         if (members.length > 1 && dead > 0) badge = `☠ ${dead}/${members.length}`
         else if (dmg > 0) badge = `${dmg} dmg${dead > 0 ? ' ☠' : ''}`
       }
+    } else if (mode === 'choose-modes' && modesChoiceAction?.aboutObject !== undefined) {
+      // "For each creature, … unless they pay": the one being asked about.
+      highlight = ids.includes(modesChoiceAction.aboutObject)
     } else if (mode === 'choose-sacrifice' && pendingSac?.sacrifice !== undefined) {
       const choices = pendingSac.sacrifice.choices
       highlight = ids.some((i) => choices.includes(i))

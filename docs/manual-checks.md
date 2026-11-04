@@ -7083,6 +7083,16 @@ These boards start before the first turn (the builder's `openingHands`), with th
 - **Do:** Cast Ghouls' Night Out, then take a card and Confirm in each popup.
 - **Expect:** Your one card is taken for you, then a popup for Bob's graveyard (Hill Giant can be taken, Forest can't) and one for Carol's. Dave's has no creature card and nothing is asked. After the last, all three enter under your control together, black Zombies with decayed.
 
+### Killing Wave: a question for each creature, the one asked about lit up
+
+- **Do:** Cast Killing Wave with X = 2. Pay for the first Grizzly Bears, not for the second.
+- **Expect:** Each question names Grizzly Bears and lights the one it means. Your life drops by 2 at once, but nothing is sacrificed until Bob has answered for Hill Giant; then the second Bears and Hill Giant (if Bob declines) go together.
+
+### Killing Wave: four players, each answering in turn
+
+- **Do:** Cast Killing Wave with X = 2. Pay for your Grizzly Bears, then wait.
+- **Expect:** Bob, Carol and Dave are asked in turn, one creature each. Everything they declined goes at the same moment, after the last answer.
+
 ### Distended Mindbender: one card of each kind from a revealed hand
 
 - **Do:** Cast Distended Mindbender for {8}, clicking Pay with mana, and target Bob. In the popup, click Lightning Bolt, then Grizzly Bears, then Craw Wurm, and Confirm with one of each.
