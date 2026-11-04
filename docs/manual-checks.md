@@ -7186,6 +7186,21 @@ These boards start before the first turn (the builder's `openingHands`), with th
 - **Do:** Cast Awakening of Vitu-Ghazi on your Forest.
 - **Expect:** The Forest now reads "Vitu-Ghazi", a 9/9 legendary Elemental land with haste, nine counters on it, that still taps for {G}.
 
+### Opposition Agent: you make an opponent's search, and may play what they find
+
+- **Do:** As Bob, cast Rampant Growth, then pass as Alice. As Alice, click a Forest in the popup and Confirm. Pass on to your own turn's main phase, click Bob's exile count, and click the Forest.
+- **Expect:** While Bob searches, the top bar says "You control Bob" and the popup is Bob's library, titled "Choose a card to exile". The Forest goes to Bob's exile, not his battlefield. On your turn you play it from there, under your control.
+
+### Opposition Agent: four players, the most recent Agent's controller decides who may play the find
+
+- **Do:** As Bob, cast Rampant Growth, then pass as Alice. As Carol, click a Forest in the popup and Confirm, then answer the next question with "Alice may play Forest".
+- **Expect:** Carol (whose Agent entered last) makes Bob's search, not Alice. The Forest goes to exile and Carol is asked which of "Carol may play Forest" and "Alice may play Forest" holds. Then Alice may play it, and Carol may not.
+
+### Aven Mindcensor: only the top four cards can be found
+
+- **Do:** As Bob, cast Rampant Growth. Look at what the popup offers, click Forest and Confirm.
+- **Expect:** The popup offers only the Forest, second from the top: not the Island fifth from the top, nor any basic land deeper. The Forest enters tapped under Bob's control.
+
 ### Jetsam: one spell from each opponent, in the order you pick
 
 - **Do:** Cast Flotsam // Jetsam, clicking Jetsam. When offered, cast Hill Giant and Confirm.

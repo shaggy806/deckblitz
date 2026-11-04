@@ -153,7 +153,7 @@ export type GameEvent =
       readonly type: "player-control-began";
       readonly controlled: PlayerId;
       readonly controller: PlayerId;
-      readonly during: "next-turn" | "next-combat";
+      readonly during: "next-turn" | "next-combat" | "search";
     })
   | (Base & {
       /** `player` skipped their untap step (rule 614.10 — the

@@ -3312,6 +3312,31 @@ export interface StaticAbility {
     readonly ignoreCost?: string;
   };
   /**
+   * "**You control your opponents while they're searching their libraries**"
+   * (rule 723.2 — Opposition Agent): that search's choice is this permanent's
+   * controller's to make (`searchControlOver`). Of several, the one most
+   * recently entered (the ruling). `affects` is ignored.
+   */
+  readonly controlsOpponentsSearching?: true;
+  /**
+   * "**While an opponent is searching their library, they exile each card they
+   * find. You may play those cards for as long as they remain exiled**, and you
+   * may spend mana as though it were mana of any color to cast them" (Opposition
+   * Agent): whatever the search said to do with its finds, in any zone it
+   * covers, and its other instructions can't see them there (the rulings). With
+   * two such permanents the found card's owner chooses which applies (rule
+   * 616.1), and they're being controlled (`searchExileFor`). `affects` is
+   * ignored.
+   */
+  readonly exilesOpponentsFinds?: { readonly spendAs?: SpendAs };
+  /**
+   * "**If an opponent would search a library, that player searches the top four
+   * cards of that library instead**" (Aven Mindcensor): `top` cards, the same
+   * ones all through the search, and it's still a search of that library, which
+   * is still shuffled (the rulings). `affects` is ignored.
+   */
+  readonly opponentsSearchTop?: { readonly top: number };
+  /**
    * "**Damage that would reduce your life total to less than N reduces it to N
    * instead**" (Ali from Cairo, 1; Elderscale Wurm, 7), for this permanent's
    * controller: the static form of `player-effect`'s `damageLifeFloor`, read

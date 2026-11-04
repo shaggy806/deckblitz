@@ -446,7 +446,7 @@ export interface PlayerView {
   readonly playerControl?: readonly {
     readonly controlled: PlayerId;
     readonly controller: PlayerId;
-    readonly during: "next-turn" | "next-combat";
+    readonly during: "next-turn" | "next-combat" | "search";
   }[];
   /** The player this seat should draw the table as, when it isn't its own: the
    * one whose decision it's making now, or the one it controls while it waits

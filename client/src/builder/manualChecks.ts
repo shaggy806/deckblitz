@@ -10709,6 +10709,39 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    "Opposition Agent: you make an opponent's search, and may play what they find",
+    board({
+      you: { bf: ['Opposition Agent', 'Swamp*2'] },
+      opp: { human: true, bf: ['Forest*2'], hand: ['Rampant Growth'], lib: ['Forest', 'Grizzly Bears'] },
+      turn: 0,
+    }),
+  ),
+  preset(
+    "Opposition Agent: four players, the most recent Agent's controller decides who may play the find",
+    board({
+      you: { bf: ['Opposition Agent', 'Swamp*2'] },
+      opp: [
+        { human: true, bf: ['Forest*2'], hand: ['Rampant Growth'], lib: ['Forest', 'Grizzly Bears'] },
+        { human: true, bf: ['Opposition Agent'] },
+        { bf: ['Forest'] },
+      ],
+      turn: 0,
+    }),
+  ),
+  preset(
+    'Aven Mindcensor: only the top four cards can be found',
+    board({
+      you: { bf: ['Aven Mindcensor'] },
+      opp: {
+        human: true,
+        bf: ['Forest*2'],
+        hand: ['Rampant Growth'],
+        lib: ['Grizzly Bears', 'Forest', 'Grizzly Bears', 'Grizzly Bears', 'Island'],
+      },
+      turn: 0,
+    }),
+  ),
+  preset(
     'Jetsam: one spell from each opponent, in the order you pick',
     board({
       you: { bf: ['Island*6'], hand: ['Flotsam // Jetsam'] },

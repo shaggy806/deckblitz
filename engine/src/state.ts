@@ -3366,8 +3366,14 @@ export interface PlayerControl {
   readonly controlled: PlayerId;
   readonly controller: PlayerId;
   /** Which of `controlled`'s turns or combat phases: the next they actually
-   * take (723.1, 723.1b). */
-  readonly during: "next-turn" | "next-combat";
+   * take (723.1, 723.1b). `"search"`: while they search their library (rule
+   * 723.2 — Opposition Agent), from the search's choice being raised to its
+   * being answered. */
+  readonly during: "next-turn" | "next-combat" | "search";
+  /** The timestamp it was created at, against which a `"search"` control takes
+   * its place: the last created works (723.1a), and Opposition Agent's control
+   * was created as it entered, however late its search. */
+  readonly createdAt?: number;
   /** The turn it began working, absent while it waits. It works until the next
    * turn begins, the whole of this one (723.1); `next-combat`, until that
    * combat phase ends. */
@@ -3469,6 +3475,16 @@ export type AwaitingDecision =
        * opponent picking the card from your graveyard that goes to your hand
        * (Tasigur, the Golden Fang). Only what the chooser is told. */
       readonly forPlayer?: PlayerId;
+      /** A search whose finds are being exiled for several players, each of
+       * whom might be the one to play them (Opposition Agent, of two players):
+       * once they're in exile, `chooser` says which for each (rule 616.1, the
+       * ruling). `impulseGrant` has the first meanwhile. */
+      readonly searchExileChoice?: {
+        readonly chooser: PlayerId;
+        readonly source: ObjectId;
+        readonly players: readonly PlayerId[];
+        readonly spendAs?: SpendAs;
+      };
       /** A search of a library that "can't" be searched (`cantSearchLibraries`):
        * with nothing else found there's nothing to look at or answer, so it's
        * answered for them (`forcedZoneChoice`). */

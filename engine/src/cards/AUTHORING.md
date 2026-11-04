@@ -1371,6 +1371,7 @@ sentences. None of these is a target, so hexproof doesn't stop them.
 | `additional-combat` … `forcedAttackers?` | `{ filter, cantAttackYou? }` | With `afterThisPhase`: what matches as it's done attacks that combat if able, and not you or your planeswalkers (Illusionist's Gambit). |
 | `remove-from-combat` … `unblockSoleBlocked?`, `thenMayBlock?` | `true` | "Creatures it was blocking that had become blocked by only that creature become unblocked", "You may have it block an attacking creature of your choice" (False Orders). The filter clause `controlledByDefendingPlayer` is that spell's "creature defending player controls", with no attacker of its own to read one from. |
 | `search-library` … `upTo?` | `true` | The count is printed "**up to** N" (The Five Doctors' "your library and/or graveyard for up to five Doctor cards"): none need be found, in a graveyard searched alone too. Without it, `min: 0` is only leave to miss in a hidden zone (rule 701.23b), so "a card" in a graveyard searched alone must be found. |
+| `search-library` … `enterUnder?` | an `EffectPlayerRef` | With `destination: "battlefield"`: "under target player's control" (Yavimaya Dryad: `{ target: 0 }`). |
 | `search-library` … `alongExiledThisWay?` | `true` | With `destination: "battlefield"`: what this resolution exiled enters with the find, one event, whatever is found (Sword of Hearth and Home's "Put both cards onto the battlefield"). |
 | `search-library` … `exileRest?`, `inAnyOrder?` | `true` | Doomsday's "five cards **and exile the rest**" (every searched card not found is exiled, and nothing is shuffled) and, with `destination: "library-top"`, "on top of your library **in any order**" (the order is asked once they're there). |
 | `search-library` … `reveal?` | — | "…, **reveal it**, …" (Enlightened Tutor, Mystical Tutor): shows the find to every player, rule 701.16. Off by default — a plain "search your library for a card" (Vampiric Tutor) reveals nothing, and the difference is printed on the cards. |
@@ -2161,6 +2162,9 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
   A pact is a `delayed-trigger` at `"your-next-upkeep"` of an `unless` with
   `chooser: "you"`, a mana option and `otherwise: { kind: "lose-game" }`
   (Pact of Negation, Summoner's Pact).
+- **What an opponent's search comes to** is a static: `controlsOpponentsSearching: true` ("You control your opponents
+  while they're searching their libraries"), `exilesOpponentsFinds: { spendAs? }` (they exile each card they find, for
+  you to play; Opposition Agent), `opponentsSearchTop: { top }` (Aven Mindcensor). Every `search-library` obeys them unwritten.
 - **"Players can't search libraries"** is a static, `cantSearchLibraries: { who: "any-player" | "opponent",
   causedByThemselves?, ignoreCost? }` (Mindlock Orb, Stranglehold; Ashiok, Dream Render's own-library-by-own-effect;
   Leonin Arbiter's `{2}`, the `ignore-static-effect` special action, rule 116.2d); "this turn" is a

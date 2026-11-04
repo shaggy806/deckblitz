@@ -59,7 +59,7 @@ import {
 import type { EffectAmount } from "./effects.js";
 import type { AggregateSpec, CardFilter, DamageSourceClause } from "./filter.js";
 import { COLORS, colorSymbols, manaValue, parseManaCost } from "./mana.js";
-import type { Color, ManaType } from "./mana.js";
+import type { Color, ManaType, SpendAs } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import {
   activePlayerOf,
@@ -2270,6 +2270,70 @@ export function playerCantSearchLibrary(
     if (rule.causedByThemselves === true && (causedBy !== searcher || owner !== searcher)) return false;
     return !playerIgnoresStatic(state, searcher, source);
   });
+}
+
+/** Each static on the battlefield answering `test`, of a permanent controlled
+ * by an opponent of `searcher` still in the game: a read of who is working on
+ * `searcher`'s search. */
+function opposingSearchStatics<T>(
+  state: GameState,
+  registry: CardRegistry,
+  searcher: PlayerId,
+  test: (ability: StaticAbility) => T | undefined,
+): { readonly source: GameObject; readonly value: T }[] {
+  const found: { readonly source: GameObject; readonly value: T }[] = [];
+  for (const id of state.zones.shared.battlefield) {
+    const source = state.objects[id];
+    if (source === undefined || source.controller === searcher || state.players[source.controller]?.hasLost !== false) continue;
+    const own = hasLostAbilities(state, registry, source) ? [] : registry.get(rulesTextName(source)).static;
+    for (const ability of [...own, ...grantedStatics(state, registry, source)]) {
+      const value = test(ability);
+      if (value === undefined) continue;
+      if (ability.condition !== undefined && !staticConditionMet(state, registry, source, ability.condition)) continue;
+      found.push({ source, value });
+    }
+  }
+  return found;
+}
+
+/** Who controls `searcher` while they search their own library, and the
+ * permanent that says so: the most recently entered (Opposition Agent's
+ * ruling; rule 723.1a). */
+export function searchControlOver(
+  state: GameState,
+  registry: CardRegistry,
+  searcher: PlayerId,
+): { readonly controller: PlayerId; readonly source: GameObject } | null {
+  const all = opposingSearchStatics(state, registry, searcher, (a) => a.controlsOpponentsSearching);
+  if (all.length === 0) return null;
+  const last = all.reduce((a, b) => (b.source.timestamp > a.source.timestamp ? b : a));
+  return { controller: last.source.controller, source: last.source };
+}
+
+/** What exiles what `searcher` finds in their own library: one entry per player
+ * it may give the permission to, the most recently entered permanent's first,
+ * or nothing. Two of one player's say the same. */
+export function searchExileFor(
+  state: GameState,
+  registry: CardRegistry,
+  searcher: PlayerId,
+): readonly { readonly player: PlayerId; readonly source: ObjectId; readonly spendAs?: SpendAs }[] {
+  const all = opposingSearchStatics(state, registry, searcher, (a) => a.exilesOpponentsFinds);
+  const seen = new Set<PlayerId>();
+  const out: { readonly player: PlayerId; readonly source: ObjectId; readonly spendAs?: SpendAs }[] = [];
+  for (const { source, value } of [...all].sort((a, b) => b.source.timestamp - a.source.timestamp)) {
+    if (seen.has(source.controller)) continue;
+    seen.add(source.controller);
+    out.push({ player: source.controller, source: source.id, ...(value.spendAs !== undefined ? { spendAs: value.spendAs } : {}) });
+  }
+  return out;
+}
+
+/** How many cards from the top of a library `searcher` may look through, if an
+ * opponent's effect limits it (Aven Mindcensor): the fewest named. */
+export function librarySearchTop(state: GameState, registry: CardRegistry, searcher: PlayerId): number | null {
+  const all = opposingSearchStatics(state, registry, searcher, (a) => a.opponentsSearchTop);
+  return all.length === 0 ? null : Math.min(...all.map((s) => s.value.top));
 }
 
 /** Whether `player` has paid to ignore `source`'s static effect this turn

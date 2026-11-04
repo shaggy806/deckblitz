@@ -14327,8 +14327,13 @@ describe("hexproof from a quality for a while, and spells that can't be countere
           then: { kind: "draw", amount: 1 },
         },
         { kind: "grant-spells-this-turn", cantBeCountered: true },
-        { kind: "grant-player-hexproof", who: "you", from: { colors: ["U", "B"] } },
-        { kind: "grant-protection", asHexproof: true, filter: { controlledBy: "you" }, from: { colors: ["U", "B"] }, duration: "end-of-turn" },
+        {
+          kind: "sequence",
+          effects: [
+            { kind: "grant-player-hexproof", who: "you", from: { colors: ["U", "B"] } },
+            { kind: "grant-protection", asHexproof: true, filter: { controlledBy: "you" }, from: { colors: ["U", "B"] }, duration: "end-of-turn" },
+          ],
+        },
       ],
     });
   });
@@ -14347,6 +14352,21 @@ describe("hexproof from a quality for a while, and spells that can't be countere
       condition: { kind: "cast-this-turn", who: "opponent", filter: { colors: ["U"] } },
       then: { kind: "draw", amount: 1 },
     });
+  });
+});
+
+describe("what an opponent's search comes to", () => {
+  const stat = (oracle_text: string) => parseFace({ name: "Test Card", type_line: "Creature", oracle_text, mana_cost: "{1}", colors: [] }).static[0];
+  it("reads Opposition Agent's two lines", () => {
+    expect(stat("You control your opponents while they're searching their libraries.").controlsOpponentsSearching).toBe(true);
+    expect(
+      stat(
+        "While an opponent is searching their library, they exile each card they find. You may play those cards for as long as they remain exiled, and you may spend mana as though it were mana of any color to cast them.",
+      ).exilesOpponentsFinds,
+    ).toEqual({ spendAs: "any-color" });
+  });
+  it("reads Aven Mindcensor's", () => {
+    expect(stat("If an opponent would search a library, that player searches the top four cards of that library instead.").opponentsSearchTop).toEqual({ top: 4 });
   });
 });
 

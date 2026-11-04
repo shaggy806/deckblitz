@@ -1748,7 +1748,8 @@
   "trigger:search-trigger",
   "static:spells-cant-be-countered",
   "static:spells-cant-be-countered",
-  "keyword:addendum"
+  "keyword:addendum",
+  "mechanic:search-library-control"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

@@ -14162,6 +14162,22 @@ function parseFaceAsWritten(face, ctx = {}) {
       out.static.push({ affects: { scope: "self" }, cantSearchLibraries: noSearch, text: printed(raw) });
       continue;
     }
+    // Opposition Agent and Aven Mindcensor: what an opponent's search comes to.
+    if (line === "You control your opponents while they're searching their libraries.") {
+      out.static.push({ affects: { scope: "self" }, controlsOpponentsSearching: true, text: printed(raw) });
+      continue;
+    }
+    if (
+      line ===
+      "While an opponent is searching their library, they exile each card they find. You may play those cards for as long as they remain exiled, and you may spend mana as though it were mana of any color to cast them."
+    ) {
+      out.static.push({ affects: { scope: "self" }, exilesOpponentsFinds: { spendAs: "any-color" }, text: printed(raw) });
+      continue;
+    }
+    if (line === "If an opponent would search a library, that player searches the top four cards of that library instead.") {
+      out.static.push({ affects: { scope: "self" }, opponentsSearchTop: { top: 4 }, text: printed(raw) });
+      continue;
+    }
     // "Damage that would reduce your life total to less than N reduces it to N
     // instead" (`damageLifeFloor` — Ali from Cairo, Worship, Elderscale Wurm).
     if (

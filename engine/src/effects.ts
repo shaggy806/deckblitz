@@ -174,6 +174,8 @@ export interface SearchMore {
   readonly upTo?: true;
   /** Its `alongExiledThisWay`. */
   readonly alongExiledThisWay?: true;
+  /** Its `enterUnder`, the player named. */
+  readonly enterUnder?: PlayerId;
   /** Its `instead`, its `condition` already read (one that didn't hold is no
    * `instead` at all) and its `under` named. */
   readonly instead?: ResolvedSearchInstead;
@@ -5061,6 +5063,11 @@ export type EffectSpec =
       /** "…and mana of any type can be spent to cast that spell" (Black Widow,
        * Super Spy): for that cast alone (rule 118.14). */
       readonly spendAs?: SpendAs;
+      /** "You may **play** it" rather than cast: a land too. */
+      readonly plays?: true;
+      /** The permission's player, fixed, where it isn't the effect's controller:
+       * set by the engine (Opposition Agent's finds). Not for card definitions. */
+      readonly to?: PlayerId;
     }
   | {
       /**
@@ -10017,6 +10024,10 @@ export type EffectSpec =
        * or a "whenever" sees them together. The library is shuffled after.
        */
       readonly alongExiledThisWay?: true;
+      /** "Put it onto the battlefield tapped **under target player's control**"
+       * (Yavimaya Dryad): with `destination: "battlefield"`, whose the finds
+       * become. Nobody there, no search. */
+      readonly enterUnder?: EffectPlayerRef;
       /** "…, **reveal it**, …" (Enlightened Tutor, Kodama's Reach): show the
        * find to every player (rule 701.16). Off by default — a plain "search
        * your library for a card" (Vampiric Tutor) reveals nothing. */
@@ -11416,7 +11427,13 @@ export interface EffectApi {
     target: TargetRef,
     free: boolean,
     laterTurns?: boolean,
-    opts?: { readonly whileExiled?: boolean; readonly undaunted?: boolean; readonly spendAs?: SpendAs },
+    opts?: {
+      readonly whileExiled?: boolean;
+      readonly undaunted?: boolean;
+      readonly spendAs?: SpendAs;
+      readonly plays?: true;
+      readonly to?: PlayerId;
+    },
   ): void;
   /** See the `"choose-exiled-to-play"` {@link EffectSpec}. */
   chooseExiledToPlay(filter: CardFilter | undefined, free: boolean, among?: readonly ObjectId[]): void;
@@ -17210,6 +17227,8 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           whileExiled: spec.whileExiled === true,
           undaunted: spec.undaunted === true,
           ...(spec.spendAs !== undefined ? { spendAs: spec.spendAs } : {}),
+          ...(spec.plays === true ? { plays: true as const } : {}),
+          ...(spec.to !== undefined ? { to: spec.to } : {}),
         });
       }
       return;
@@ -19904,6 +19923,8 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       // "Search target opponent's library": nobody there, nothing searched.
       const owner = spec.whose === undefined ? undefined : effectPlayer(spec.whose, ctx);
       if (spec.whose !== undefined && owner === undefined) return;
+      const enterUnder = spec.enterUnder === undefined ? undefined : effectPlayer(spec.enterUnder, ctx);
+      if (spec.enterUnder !== undefined && enterUnder === undefined) return;
       // "While you're searching your library, you may cast this card from
       // your library" (Panglacial Wurm, rule 601.3): any number of them, as
       // part of the search, before anything is found; the search then goes on
@@ -19952,6 +19973,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           ...(spec.inAnyOrder === true ? { inAnyOrder: true } : {}),
           ...(spec.upTo === true ? { upTo: true } : {}),
           ...(spec.alongExiledThisWay === true ? { alongExiledThisWay: true } : {}),
+          ...(enterUnder !== undefined ? { enterUnder } : {}),
           // "…if you control a land named Wastes": read now — nothing between
           // the search and the put could change it. Not holding, every find
           // goes to `destination`.

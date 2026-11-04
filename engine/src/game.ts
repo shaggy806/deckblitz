@@ -153,7 +153,10 @@ import {
   spellCantBeCountered,
   playerCantLoseGame,
   playerCantLoseLife,
+  librarySearchTop,
   playerCantSearchLibrary,
+  searchControlOver,
+  searchExileFor,
   playerDamageLifeFloor,
   playerIgnoresStatic,
   staticIgnoreCost,
@@ -10026,6 +10029,8 @@ export class Game {
     if (awaiting === null || awaiting.kind !== "choose-from-zone") {
       throw new Error("unreachable: whyCannotChooseFromZone should have caught this");
     }
+    // The search's choice made, the search is over (rule 723.2).
+    if (this.state.playerControl !== undefined) this.endSearchControl(player);
     // A face-down card in exile picked is its group picked: the card is
     // taken from that group at random (a processor — its ruling).
     if (awaiting.faceDownGroups !== undefined) chosen = this.drawFromFaceDownGroups(chosen, awaiting.faceDownGroups);
@@ -10761,6 +10766,46 @@ export class Game {
     player: PlayerId,
     chosen: readonly ObjectId[],
   ): void {
+    // Two players' Opposition Agents want these finds: which of them may play
+    // each is the card's owner's to say (rule 616.1), and whoever is controlling
+    // that owner says it (the ruling).
+    const exileChoice = awaiting.searchExileChoice;
+    if (exileChoice !== undefined) {
+      const inExile = chosen.filter((id) => this.state.objects[id]?.zone === "exile");
+      if (inExile.length > 0) {
+        const ctx = this.makeResolutionContext(
+          exileChoice.source,
+          exileChoice.chooser,
+          inExile.map((id) => ({ kind: "object", object: id }) as const),
+          0,
+          0,
+          undefined,
+          1,
+          0,
+          [],
+          {},
+        );
+        const offers = inExile.map((id, index): EffectSpec => ({
+          kind: "modal",
+          minModes: 1,
+          maxModes: 1,
+          modes: exileChoice.players.map((p) => ({
+            text: `${p.charAt(0).toUpperCase()}${p.slice(1)} may play ${this.state.objects[id].cardName}`,
+            effect: {
+              kind: "allow-cast-from-exile",
+              target: index,
+              whileExiled: true,
+              plays: true,
+              to: p,
+              ...(exileChoice.spendAs !== undefined ? { spendAs: exileChoice.spendAs } : {}),
+            },
+          })),
+        }));
+        const spec: EffectSpec = { kind: "sequence", effects: offers };
+        if (this.state.awaiting !== null) ctx.resumeAfterDecisions(spec);
+        else applyEffectSpec(spec, ctx);
+      }
+    }
     // "…, then that creature gains haste" — applied with the chosen cards as
     // its targets, since they were never targets of the spell itself. Nothing
     // chosen means nothing to say it about.
@@ -33600,12 +33645,12 @@ export class Game {
               fromTurn: this.state.turn.number + 1,
             }
           : {
-              player: controller,
+              player: opts?.to ?? controller,
               expiry:
                 opts?.whileExiled === true
                   ? { kind: "while-exiled" }
                   : { kind: "end-of-turn", turn: this.state.turn.number },
-              castOnly: true,
+              ...(opts?.plays === true ? {} : { castOnly: true }),
               ...(free ? { free: { only: true } } : {}),
               ...(opts?.undaunted === true ? { undaunted: true as const } : {}),
               ...(opts?.spendAs !== undefined ? { spendAs: opts.spendAs } : {}),
@@ -35162,7 +35207,13 @@ export class Game {
         // through `controlOf`, and an overwritten Emrakul still owes its turn.
         this.state.playerControl = [
           ...(this.state.playerControl ?? []),
-          { controlled, controller, during, ...(extraTurnAfter ? { extraTurnAfter: true as const } : {}) },
+          {
+            controlled,
+            controller,
+            during,
+            createdAt: this.freshTimestamp(),
+            ...(extraTurnAfter ? { extraTurnAfter: true as const } : {}),
+          },
         ];
       },
       chooseCombat: (choice) => {
@@ -35265,13 +35316,16 @@ export class Game {
         }),
       cardsIn: (player, zone) => [...(this.state.zones.perPlayer[player]?.[zone] ?? [])],
       cantSearchLibrary: (player, owner) => this.cantSearchLibrary(player, owner),
-      castableWhileSearching: (player) =>
-        // Not searching, no "while you're searching".
-        this.cantSearchLibrary(player, player)
-          ? []
-          : (this.state.zones.perPlayer[player]?.library ?? []).filter(
-              (id) => this.registry.get(this.state.objects[id].cardName).castWhileSearchingLibrary === true,
-            ),
+      castableWhileSearching: (player) => {
+        // Not searching, no "while you're searching". Aven Mindcensor's search
+        // sees only the top cards.
+        if (this.cantSearchLibrary(player, player)) return [];
+        const top = librarySearchTop(this.state, this.registry, player);
+        const library = this.state.zones.perPlayer[player]?.library ?? [];
+        return (top === null ? library : library.slice(0, top)).filter(
+          (id) => this.registry.get(this.state.objects[id].cardName).castWhileSearchingLibrary === true,
+        );
+      },
       allowCastLinkedExile: (spell, free, more) => {
         const holder = this.state.objects[source];
         const stint = refs.source ?? (holder?.zone === "battlefield" ? (holder.zoneChangeCount ?? 0) : undefined);
@@ -37034,10 +37088,29 @@ export class Game {
     // read from their side.
     const owner = more?.owner ?? player;
     if (this.state.players[owner]?.hasLost !== false) return;
+    // Opposition Agent: searching their own library, an opponent of its
+    // controller is controlled (rule 723.2) and exiles what they find, whatever
+    // the search said to do with it (the rulings).
+    const ownSearch =
+      owner === player && SEARCHED_ZONES[zones].library && more?.outside !== "only" && !this.cantSearchLibrary(player, owner);
+    if (ownSearch) this.beginSearchControl(player);
+    const exileFor = ownSearch ? searchExileFor(this.state, this.registry, player) : [];
+    if (exileFor.length > 0) {
+      destination = "exile";
+      enterTapped = false;
+      restDestination = undefined;
+      enterAttachedTo = undefined;
+    }
+    // Aven Mindcensor: the top cards alone, as they are now.
+    const searchTop = librarySearchTop(this.state, this.registry, player);
+    const visibleLibrary =
+      searchTop === null
+        ? this.state.zones.perPlayer[owner].library
+        : this.state.zones.perPlayer[owner].library.slice(0, searchTop);
     // `x` is the searching spell's X, for "mana value X or less" (Chord of
     // Calling).
     const matching = (zone: "library" | "graveyard" | "hand"): ObjectId[] =>
-      this.state.zones.perPlayer[owner][zone].filter((id) =>
+      (zone === "library" ? visibleLibrary : this.state.zones.perPlayer[owner][zone]).filter((id) =>
         matchesFilter(this.state, this.registry, id, filter, { you: player, x }),
       );
     // "You may reveal a sorcery card you own from outside the game" (rule
@@ -37164,24 +37237,51 @@ export class Game {
         : {}),
       ...(alsoTaken.length > 0 ? { alsoTaken } : {}),
       ...(enterTapped && destination === "battlefield" ? { enterTapped: true } : {}),
-      // "Put that card onto the battlefield under your control" (Bribery).
-      ...(owner !== player && destination === "battlefield" ? { enterUnder: player } : {}),
+      // "Put that card onto the battlefield under your control" (Bribery), or
+      // "under target player's control" (Yavimaya Dryad).
+      ...(destination === "battlefield" && (more?.enterUnder !== undefined || owner !== player)
+        ? { enterUnder: more?.enterUnder ?? player }
+        : {}),
       ...(restDestination !== undefined ? { restDestination } : {}),
       ...(reveal ? { reveal: true } : {}),
       ...(enterAttachedTo !== undefined && destination === "battlefield" ? { enterAttachedTo } : {}),
       // "Put both cards onto the battlefield" (Sword of Hearth and Home).
-      ...(more?.enterAlong !== undefined && more.enterAlong.length > 0 && destination === "battlefield"
+      // What goes with an Opposition Agent's exiled find still goes.
+      ...(more?.enterAlong !== undefined && more.enterAlong.length > 0 && (destination === "battlefield" || exileFor.length > 0)
         ? { enterAlong: more.enterAlong }
         : {}),
       // "You may play that card for as long as it remains exiled" (Praetor's
       // Grasp).
-      ...(exiled && more?.playable === "while-exiled"
+      ...(exiled && more?.playable === "while-exiled" && exileFor.length === 0
         ? { impulseGrant: { player, expiry: { kind: "while-exiled" as const } } }
+        : {}),
+      // Opposition Agent's "You may play those cards …": for the most recently
+      // entered's controller, unless they say otherwise (`searchExileChoice`).
+      ...(exileFor.length > 0
+        ? {
+            impulseGrant: {
+              player: exileFor[0].player,
+              expiry: { kind: "while-exiled" as const },
+              ...(exileFor[0].spendAs !== undefined ? { spendAs: exileFor[0].spendAs } : {}),
+            },
+          }
+        : {}),
+      ...(exileFor.length > 1
+        ? {
+            searchExileChoice: {
+              chooser: decidingPlayer(this.state, player),
+              source: exileFor[0].source,
+              players: exileFor.map((e) => e.player),
+              ...(exileFor[0].spendAs !== undefined ? { spendAs: exileFor[0].spendAs } : {}),
+            },
+          }
         : {}),
       // "Exile them" with this source (rule 607.2a), in the stint the
       // resolving ability refers to.
       ...(exiled && more?.linked === true ? this.searchExileLink(more.source, more.sourceStint) : {}),
-      ...(more?.then !== undefined
+      // In exile, what's found can't be seen by the rest of the instruction
+      // (Opposition Agent's ruling), so there's nothing for `then` to say.
+      ...(more?.then !== undefined && exileFor.length === 0
         ? {
             then: more.then,
             thenSource: more.source,
@@ -37191,6 +37291,32 @@ export class Game {
           }
         : {}),
     };
+  }
+
+  /** "You control your opponents while they're searching their libraries"
+   * (rule 723.2), from the search's choice being raised to its being answered
+   * (`endSearchControl`). It was created as the permanent entered, so a control
+   * created since still overwrites it (723.1a). */
+  private beginSearchControl(player: PlayerId): void {
+    const control = searchControlOver(this.state, this.registry, player);
+    if (control === null) return;
+    const all = this.state.playerControl ?? [];
+    const later = all.findIndex((c) => (c.createdAt ?? 0) > control.source.timestamp);
+    const at = later === -1 ? all.length : later;
+    this.state.playerControl = [
+      ...all.slice(0, at),
+      { controlled: player, controller: control.controller, during: "search", began: this.state.turn.number },
+      ...all.slice(at),
+    ];
+    this.emit({ type: "player-control-began", controlled: player, controller: control.controller, during: "search" });
+  }
+
+  private endSearchControl(player: PlayerId): void {
+    const all = this.state.playerControl;
+    if (all?.some((c) => c.during === "search" && c.controlled === player) !== true) return;
+    const rest = all.filter((c) => c.during !== "search" || c.controlled !== player);
+    if (rest.length > 0) this.state.playerControl = rest;
+    else delete this.state.playerControl;
   }
 
   /** A linked search's `exileLink`: `source` in `stint`, or in the stint
