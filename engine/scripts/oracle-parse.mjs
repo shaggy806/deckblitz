@@ -2234,6 +2234,20 @@ export function parseTrigger(clause) {
     const any = on === "leaves-battlefield" && Object.keys(filter).length === 0;
     return [{ on, who, ...(any ? {} : { filter }), ...(m[1] === "another" ? { otherOnly: true } : {}) }];
   }
+  // "Whenever one or more [other] creatures you control leave the battlefield
+  // [without dying]": once per simultaneous event (Dour Port-Mage).
+  if ((m = /^Whenever one or more (other )?(.+?) you control leave the battlefield( without dying)?$/.exec(c))) {
+    const kind = m[2] === "permanents" ? {} : parseTypePhrase(m[2]);
+    if (kind === null) return null;
+    return [{
+      on: "leaves-battlefield",
+      who: "you-control",
+      ...(m[2] === "permanents" ? {} : { filter: kind }),
+      ...(m[1] !== undefined ? { otherOnly: true } : {}),
+      ...(m[3] !== undefined ? { to: ["exile", "hand", "library", "command"] } : {}),
+      batched: true,
+    }];
+  }
   // "Whenever one or more [other] creatures [you control] die": once per
   // simultaneous event. (With "this ability triggers only once each turn" it's
   // a plain `dies`, which `parseFace` makes of it.)
@@ -14866,10 +14880,11 @@ function parseFaceAsWritten(face, ctx = {}) {
           : {}),
       };
       // "One or more … die. This ability triggers only once each turn": the
-      // first death triggers it, in that event or not, so a plain `dies`.
+      // first death triggers it, in that event or not, so a plain `dies`; a
+      // leaving likewise (Sally Sparrow).
       let triggers = oncePerTurn
         ? parsedTriggers.map((t) => {
-            if (t.on !== "dies") return t;
+            if (t.on !== "dies" && t.on !== "leaves-battlefield") return t;
             const { batched: _batched, ...plain } = t;
             return plain;
           })

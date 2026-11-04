@@ -1224,6 +1224,12 @@ export type TriggerSpec =
       /** Only for these destinations — Reyhan, Last of the Abzan's "dies or
        * is put into the command zone" is `["graveyard", "command"]`. */
       readonly to?: readonly ("graveyard" | "exile" | "hand" | "library" | "command")[];
+      /** "Whenever **one or more** … leave the battlefield" (Dour Port-Mage,
+       * Aang, Airbending Master, Nefarious Imp): once per simultaneous event,
+       * however many of them match, off `permanents-left`; as `dies`'s, each
+       * read as it last existed and a permanent leaving in that event seeing it
+       * too (rule 603.10a). `{ triggerValue: true }` is how many. */
+      readonly batched?: true;
     }
   | {
       /** A player gained life (Ajani's Pridemate). `who` is whose life.

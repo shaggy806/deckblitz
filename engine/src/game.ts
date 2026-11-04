@@ -320,7 +320,7 @@ import {
 import type { AggregateReads, AggregateSpec, CardFilter } from "./filter.js";
 import { goadersOf } from "./goad.js";
 import { answeringPlayer, attackChooser, decidingPlayer } from "./player-control.js";
-import type { AddedPhase, PlayerControl } from "./state.js";
+import type { AddedPhase, LeftBattlefield, PlayerControl } from "./state.js";
 import { blockersRequiredBy, defendersForAttacker } from "./combat/eligibility.js";
 import { turnRuleCovers } from "./characteristics.js";
 import { bandingAbilitiesOf } from "./combat/banding.js";
@@ -2027,6 +2027,9 @@ export class Game {
 
   private leaveBatch: {
     readonly left: ObjectId[];
+    /** Where each went, for `permanents-left`; with a seed, those that went
+     * before the commander whose deferred move this completes. */
+    readonly moved: LeftBattlefield[];
     /** Those of `left` that went to a graveyard (rule 700.4). */
     readonly died: ObjectId[];
     readonly deferred: ObjectId[];
@@ -6702,7 +6705,7 @@ export class Game {
       throw new Error("unreachable: whyCannotCommanderChoice should have caught this");
     }
 
-    const { commander, intendedZone, leftWith } = deferred;
+    const { commander, intendedZone, leftWith, leftMoved } = deferred;
     this.state.awaiting = null;
     if (deferred.heldByZoneChoice === true) {
       // A `choose-from-zone` putting it from its owner's hand into their
@@ -6747,7 +6750,7 @@ export class Game {
       }
       if (destination === "library") this.placeInLibrary(commander, deferred.libraryPlacement ?? "bottom");
       this.state.deferredCommanderMove = null;
-    }, leftWith);
+    }, leftWith, leftMoved);
     this.emit({
       type: "commander-zone-decision",
       object: commander,
@@ -16017,7 +16020,7 @@ export class Game {
     // at the rest of its batch that has already left, each as it last
     // existed there (rule 603.10a). Only an unconditional static, since its
     // condition can't be asked of a permanent that has gone.
-    if (isLeaveEvent(event) || event.type === "permanents-died") {
+    if (isLeaveEvent(event) || event.type === "permanents-died" || event.type === "permanents-left") {
       const lookingBack = this.lookBackSources(event);
       for (const id of isLeaveEvent(event) ? new Set([event.object, ...lookingBack]) : lookingBack) {
         const was = this.state.objects[id];
@@ -28003,6 +28006,12 @@ export class Game {
                   (n, id) => n + (this.state.objects[id]?.stackCount ?? 1),
                   0,
                 )
+              : // How many permanents left, a stack as each of its tokens.
+                trigger.on === "leaves-battlefield" && event.type === "permanents-left"
+              ? this.leftBatchMatching(trigger, event, object).reduce(
+                  (n, id) => n + (this.state.objects[id]?.stackCount ?? 1),
+                  0,
+                )
               : trigger.on === "put-into-exile" && event.type === "cards-put-into-exile"
               ? this.exileArrivals(trigger, event.arrivals, object).length
               : // "…for each card discarded this way".
@@ -28367,7 +28376,7 @@ export class Game {
       candidates.add(id);
       suspendedOnly.add(id);
     }
-    const leaving = isLeaveEvent(event) || event.type === "permanents-died";
+    const leaving = isLeaveEvent(event) || event.type === "permanents-died" || event.type === "permanents-left";
     for (const id of candidates) {
       const live = this.state.objects[id];
       if (live === undefined) continue;
@@ -29196,6 +29205,11 @@ export class Game {
     if (event.type === "permanents-died") {
       return new Set(event.left.filter((id) => (this.state.objects[id]?.zone ?? "battlefield") !== "battlefield"));
     }
+    if (event.type === "permanents-left") {
+      return new Set(
+        event.left.map(({ object }) => object).filter((id) => (this.state.objects[id]?.zone ?? "battlefield") !== "battlefield"),
+      );
+    }
     const batch = this.leaveBatch;
     if (batch === null || !isLeaveEvent(event) || !batch.left.includes(event.object)) {
       return EMPTY_ID_SET;
@@ -29224,7 +29238,7 @@ export class Game {
    * done, every commander whose move this batch deferred is handed the
    * finished list to carry.
    */
-  private withLeaveBatch(fn: () => void, seed?: readonly ObjectId[]): void {
+  private withLeaveBatch(fn: () => void, seed?: readonly ObjectId[], seedMoved?: readonly LeftBattlefield[]): void {
     if (this.leaveBatch !== null) {
       fn();
       return;
@@ -29234,6 +29248,7 @@ export class Game {
         const object = this.state.objects[id];
         return object !== undefined && object.zone !== "battlefield";
       }),
+      moved: [...(seedMoved ?? [])],
       died: [] as ObjectId[],
       deferred: [] as ObjectId[],
       snapshots: new Map<ObjectId, LastKnownInfo>(),
@@ -29245,6 +29260,22 @@ export class Game {
       // What goes to graveyards goes together too.
       this.withGraveyardEnterBatch(fn);
       if (batch.died.length > 0) this.emit({ type: "permanents-died", died: batch.died, left: batch.left });
+      // "Whenever one or more … leave": once the whole event has happened, a
+      // commander's deferred move being part of it (rule 903.9b).
+      const waiting = [...batch.deferred, ...(seed ?? [])];
+      const answersOwed =
+        batch.deferred.length > 0 || this.state.pendingCommanderMoves.some((move) => waiting.includes(move.commander));
+      if (answersOwed) {
+        const deferred = this.state.deferredCommanderMove;
+        if (deferred !== null && waiting.includes(deferred.commander)) {
+          this.state.deferredCommanderMove = { ...deferred, leftMoved: batch.moved };
+        }
+        this.state.pendingCommanderMoves = this.state.pendingCommanderMoves.map((move) =>
+          waiting.includes(move.commander) ? { ...move, leftMoved: batch.moved } : move,
+        );
+      } else if (batch.moved.length > 0) {
+        this.emit({ type: "permanents-left", left: batch.moved });
+      }
     } finally {
       this.leaveBatch = null;
     }
@@ -29487,6 +29518,24 @@ export class Game {
     );
   }
 
+  /** The permanents of a `permanents-left` event a batched `leaves-battlefield`
+   * trigger is about. */
+  private leftBatchMatching(
+    spec: Extract<TriggerSpec, { on: "leaves-battlefield" }>,
+    event: Extract<GameEvent, { type: "permanents-left" }>,
+    self: GameObject,
+  ): ObjectId[] {
+    return event.left
+      .filter(
+        ({ object, to }) =>
+          (spec.to === undefined || spec.to.includes(to)) &&
+          !(spec.otherOnly === true && object === self.id) &&
+          this.matchesWho(spec.who, object, self, true) &&
+          this.triggerFilterOk(spec.filter, object, self, true),
+      )
+      .map(({ object }) => object);
+  }
+
   /** What `source`, a token holding a `GameObject.linkedExile`, means by "the
    * exiled card": those still in exile as the same objects (rule 400.7),
    * though the token has left or ceased to exist. `undefined` for anything
@@ -29714,6 +29763,10 @@ export class Game {
           this.triggerFilterOk(spec.filter, event.object, self)
         );
       case "leaves-battlefield":
+        // "Whenever one or more …": once, off the whole event.
+        if (spec.batched === true) {
+          return event.type === "permanents-left" && this.leftBatchMatching(spec, event, self).length > 0;
+        }
         // Read as it last existed on the battlefield, like `dies`.
         return (
           event.type === "permanent-left-battlefield" &&
@@ -55964,6 +56017,7 @@ export class Game {
       (to === "graveyard" || to === "exile" || to === "hand" || to === "library" || to === "command")
     ) {
       this.leaveBatch?.left.push(id);
+      this.leaveBatch?.moved.push({ object: id, to });
       // A token split off a stack names the stack, while it still stands:
       // the client draws the leave as the stack going down by one.
       const stack = object.splitFrom;
@@ -55980,6 +56034,7 @@ export class Game {
         if (this.leaveBatch !== null) this.leaveBatch.died.push(id);
         else this.emit({ type: "permanents-died", died: [id], left: [id] });
       }
+      if (this.leaveBatch === null) this.emit({ type: "permanents-left", left: [{ object: id, to }] });
       // "For as long as [this] remains on the battlefield" ends — once what
       // leaves with it has left, in a simultaneous event.
       if (this.state.whileSourceIds?.includes(id) === true) {
@@ -56688,7 +56743,7 @@ export class Game {
       }
     }
     // Each death has its own events: this one only asks the triggers.
-    if (full.type !== "permanents-died") this.state.eventLog.push(full);
+    if (full.type !== "permanents-died" && full.type !== "permanents-left") this.state.eventLog.push(full);
     this.recordTurnHistory(full);
     // A token comes into being on the battlefield, and a copy of a spell on
     // the stack, rather than moving there, so no zone change opened a public

@@ -2723,6 +2723,12 @@ export interface ReflexiveTrigger {
  * `PlayerState.counters`. */
 export type PlayerCounterKind = "poison" | "experience" | "rad";
 
+/** A permanent that left the battlefield, and where to. */
+export interface LeftBattlefield {
+  readonly object: ObjectId;
+  readonly to: "graveyard" | "exile" | "hand" | "library" | "command";
+}
+
 /** A counter a player can be asked how many of: energy too ("where X is the
  * amount of {E} you have" — Razorfield Ripper), which `PlayerState.energy` holds
  * and only its own effects change. */
@@ -6451,6 +6457,9 @@ export interface GameState {
      * battlefield abilities look back at it and it at them (rule 603.10a).
      * See `Game.withLeaveBatch`. */
     readonly leftWith?: readonly ObjectId[];
+    /** That event's permanents already off the battlefield, and where to:
+     * "whenever one or more … leave" waits on the last answer (`permanents-left`). */
+    readonly leftMoved?: readonly LeftBattlefield[];
     /** Where it waits meanwhile — the battlefield when absent. A 903.9a
      * offer waits in the graveyard or exile it's in. A commander put into
      * its owner's hand or library *from anywhere* is asked too (rule
@@ -6484,6 +6493,9 @@ export interface GameState {
     readonly intendedZone: CommanderReplacementZone;
     readonly stint?: number;
     readonly leftWith?: readonly ObjectId[];
+    /** That event's permanents already off the battlefield, and where to:
+     * "whenever one or more … leave" waits on the last answer (`permanents-left`). */
+    readonly leftMoved?: readonly LeftBattlefield[];
     readonly from?: CommanderMoveOrigin;
     readonly libraryPlacement?: CommanderLibraryPlacement;
     readonly heldByZoneChoice?: true;

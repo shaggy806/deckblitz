@@ -8,7 +8,7 @@ import type { CastVia } from "./actions.js";
 import type { CardType, CombatRestriction } from "./cards.js";
 import type { Color, ManaType } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
-import type { PlayerCounterKind, ZoneType } from "./state.js";
+import type { LeftBattlefield, PlayerCounterKind, ZoneType } from "./state.js";
 import type { TargetRef } from "./target.js";
 import type { Phase, Step } from "./turn.js";
 
@@ -1630,6 +1630,14 @@ export type GameEvent =
       readonly type: "permanents-died";
       readonly died: readonly ObjectId[];
       readonly left: readonly ObjectId[];
+    })
+  | (Base & {
+      /** One simultaneous event took these off the battlefield, once it's
+       * done, for "whenever one or more … leave the battlefield". As
+       * `permanents-died`: everything in it looks back and sees it (rule
+       * 603.10a), and it's never in the event log. */
+      readonly type: "permanents-left";
+      readonly left: readonly LeftBattlefield[];
     })
   | (Base & {
       readonly type: "cards-milled";

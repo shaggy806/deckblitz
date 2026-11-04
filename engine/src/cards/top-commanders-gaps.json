@@ -8,6 +8,7 @@
   "cost:cost-reduction-greatest-opponent-count",
   "decision:spell-target-count-amount",
   "effect:exile-from-hand-any-number-swap",
+  "trigger:leaves-batch-trigger",
   "trigger:counters-put-on-players",
   "trigger:counters-a-spell-trigger",
   "replacement:prevention-follow-up-on-recipient",

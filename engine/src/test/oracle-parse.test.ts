@@ -277,6 +277,24 @@ describe("an opponent's spell or ability causing you to discard", () => {
       read("Enchantment", "Whenever a spell or ability an opponent controls causes you to discard a card, you gain 2 life.").triggered[0].trigger,
     ).toEqual({ on: "discards", who: "you", byOpponent: true, perCard: true });
   });
+  it("whenever one or more leave the battlefield, once per event", () => {
+    expect(
+      read("Creature — Frog", "Whenever one or more other creatures you control leave the battlefield without dying, draw a card.").triggered[0]
+        .trigger,
+    ).toEqual({
+      on: "leaves-battlefield",
+      who: "you-control",
+      filter: { type: "creature" },
+      otherOnly: true,
+      to: ["exile", "hand", "library", "command"],
+      batched: true,
+    });
+    expect(read("Creature — Imp", "Whenever one or more permanents you control leave the battlefield, scry 1.").triggered[0].trigger).toEqual({
+      on: "leaves-battlefield",
+      who: "you-control",
+      batched: true,
+    });
+  });
   it("whenever you put counters on a permanent or player", () => {
     expect(
       read("Enchantment", "Whenever you put one or more counters on a permanent or player, draw a card.").triggered[0].trigger,
