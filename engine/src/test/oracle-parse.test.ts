@@ -15779,3 +15779,24 @@ describe("an instruction, if the player the trigger names leads each other playe
     expect(face.complete).toBe(false);
   });
 });
+
+describe("a counter on each creature target player controls, and proliferating twice", () => {
+  it("reads Contagion Engine whole", () => {
+    const engine = parseFace({
+      name: "Contagion Engine",
+      type_line: "Artifact",
+      oracle_text:
+        "When this artifact enters, put a -1/-1 counter on each creature target player controls.\n{4}, {T}: Proliferate twice. (Choose any number of permanents and/or players, then give each another counter of each kind already there. Then do it again.)",
+    });
+    expect(engine.complete).toBe(true);
+    expect(engine.triggered[0].targets).toEqual(["player"]);
+    expect(engine.triggered[0].effect).toEqual({
+      kind: "add-counter-all",
+      filter: { type: "creature", controlledBy: "you" },
+      counter: "-1/-1",
+      amount: 1,
+      controlledByTarget: 0,
+    });
+    expect(engine.activated[0].effect).toEqual({ kind: "sequence", effects: [{ kind: "proliferate" }, { kind: "proliferate" }] });
+  });
+});

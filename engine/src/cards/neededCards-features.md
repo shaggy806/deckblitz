@@ -5125,3 +5125,5 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 **A repeated search with one shuffle (2026-11-04).** `effect:repeated-search-one-shuffle`, no engine code: `search-library`'s `shufflesLater` on each, in a `may`, the second in a `conditional`, and a closing `shuffle-library` of `searchers`. Claim Jumper.
 
 **Two target players search (2026-11-04).** `effect:two-players-search`, no engine code: `for-each-target` over `search-library` of `who: { controllerOfTarget: 0 }`, which orders target players by APNAP (rule 101.4). Scheming Symmetry.
+
+**A counter on each creature target player controls (2026-11-04).** `effect:add-counter-all-target-player`, no engine code: `add-counter-all` with `controlledByTarget` (Requisition Raid's shape); the scaffolder now reads the line and "proliferate twice". Contagion Engine.

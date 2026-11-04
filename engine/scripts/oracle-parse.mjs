@@ -4360,7 +4360,20 @@ export function parseSentence(sentence, ctx) {
     }
     return { kind: "add-counter", target: slot(m[3]), counter, amount: n };
   }
+  // "Put a -1/-1 counter on each creature target player controls" (Contagion
+  // Engine, Requisition Raid): counted from the target player's side.
+  if ((m = re(`put ${N} ([+-]\\d+/[+-]\\d+|[a-z]+) counters? on each creature target player controls`).exec(s))) {
+    return {
+      kind: "add-counter-all",
+      filter: { type: "creature", controlledBy: "you" },
+      counter: m[2].toLowerCase(),
+      amount: amount(m[1]),
+      controlledByTarget: ctx.target("player"),
+    };
+  }
   if (re("proliferate").test(s)) return { kind: "proliferate" };
+  // Two whole proliferate actions, each with its own choice (Contagion Engine).
+  if (re("proliferate twice").test(s)) return { kind: "sequence", effects: [{ kind: "proliferate" }, { kind: "proliferate" }] };
   // "Harness ~" (rule 701.64a): the designation an "∞ — " line reads.
   if (re("harness ~").test(s)) return { kind: "harness" };
   // "Each player searches their library for up to two basic land cards, puts
