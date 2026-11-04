@@ -1863,9 +1863,12 @@ the result (the natural total plus `modifier`), `{ roll: "odd" }` /
 equals: 6 } }` how many came up 6. "Whenever you roll one or more dice" is the
 trigger `{ on: "rolls-dice", who: "you" }`, once per roll (Brazen Dwarf), its
 `triggerValue` the natural total. Every viewer sees the dice thrown and land on
-the engine's results (the `dice-rolled` event). Not yet: "roll an extra die and
-ignore the lowest", "roll again", choosing among results, and each player
-rolling.
+the engine's results (the `dice-rolled` event). "Roll two d12 and choose one
+result" is a `choose-value` of `value: "roll-result"` as the `then`, asked only
+when the dice differ: its own `then` reads the chosen one as `"x"` (a filter's
+`n: "x"` too) and "the other result" as `{ roll: "other" }` (Reckless Endeavor,
+Valiant Endeavor, Wild Endeavor). Not yet: "roll an extra die and ignore the
+lowest", "roll again", and each player rolling.
 
 **The Ring tempts you** (rule 701.54) is `{ kind: "the-ring-tempts-you" }`: the
 effect's controller gets the Ring emblem if they have none, chooses a creature

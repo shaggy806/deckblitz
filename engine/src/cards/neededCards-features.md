@@ -4381,6 +4381,15 @@ Capricious Efreet needed no code: it's Wild Swing's random modal over chosen
 targets. Grip of Chaos is left: it also needs a trigger on anything going on the
 stack, `trigger:spell-or-ability-put-on-stack`.
 
+### Choosing one result of a roll — built 2026-11-03
+
+`decision:choose-roll-result`: a `choose-value` of `"roll-result"` as a `roll-dice`'s
+`then`, asked only when the dice differ, through the `choose-creature-type` menu of
+the numbers and `xByOption`, as `"commander-mana-value"` is. `then` reads that result
+as `"x"`, a filter's `n: "x"` too, and `{ roll: "other" }` the other. No new decision.
+Proving cards: Reckless Endeavor, Valiant Endeavor, Wild Endeavor. Arcane Endeavor
+and Grave Endeavor wait for `author-freed`.
+
 ### Odd and even — built 2026-11-03
 
 `decision:choose-odd-or-even`, with `condition:power-parity` and

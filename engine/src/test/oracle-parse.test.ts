@@ -12827,6 +12827,58 @@ describe("a triggered mana ability that does more than add mana", () => {
   });
 });
 
+describe("roll two dice and choose one result", () => {
+  const read = (oracle_text: string) =>
+    parseFace(
+      { name: "Test Card", type_line: "Sorcery", oracle_text },
+      { tokenFor: (d: string) => d },
+    ) as unknown as { effect: unknown };
+  it("that result as X, and the other as an amount of its own", () => {
+    expect(
+      read(
+        "Roll two d12 and choose one result. This spell deals damage equal to that result to each creature. Then create a number of Treasure tokens equal to the other result.",
+      ).effect,
+    ).toMatchObject({
+      kind: "roll-dice",
+      sides: 12,
+      count: 2,
+      then: {
+        kind: "choose-value",
+        value: "roll-result",
+        then: {
+          effects: [
+            { kind: "damage-all", amount: "x", filter: { type: "creature" } },
+            { kind: "create-token", count: { roll: "other" } },
+          ],
+        },
+      },
+    });
+  });
+  it("a filter's comparison, and a search for the other", () => {
+    expect(
+      read(
+        "Roll two d6 and choose one result. Destroy each creature with power greater than or equal to that result. Then create a number of Treasure tokens equal to the other result.",
+      ).effect,
+    ).toMatchObject({
+      then: { then: { effects: [{ kind: "destroy-all", filter: { power: { op: "gte", n: "x" } } }, {}] } },
+    });
+    expect(
+      read(
+        "Roll two d4 and choose one result. Create a number of Treasure tokens equal to that result. Then search your library for a number of basic land cards equal to the other result, put them onto the battlefield tapped, then shuffle.",
+      ).effect,
+    ).toMatchObject({
+      then: {
+        then: {
+          effects: [
+            { kind: "create-token", count: "x" },
+            { kind: "search-library", destination: "battlefield", enterTapped: true, min: 0, max: { roll: "other" } },
+          ],
+        },
+      },
+    });
+  });
+});
+
 describe("odd and even", () => {
   const sentence = (s: string) => parseEffect(s, { targets: [] }).effect;
   const read = (type_line: string, oracle_text: string) =>

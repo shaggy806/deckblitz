@@ -15,6 +15,7 @@
   "effect:amassed-army-power",
   "effect:add-mana-two-different-colors",
   "replacement:land-mana-type-replacement",
+  "decision:choose-roll-result",
   "condition:power-parity",
   "decision:choose-odd-or-even",
   "effect:parity-restrictions",

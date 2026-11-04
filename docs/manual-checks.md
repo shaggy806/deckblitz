@@ -6873,6 +6873,17 @@ These boards start before the first turn (the builder's `openingHands`), with th
 - **Do:** Cast Extinction Event. When asked, click odd.
 - **Expect:** Only Carol's Llanowar Elves goes to exile; the Grizzly Bears and the Colossal Dreadmaw stay.
 
+### Reckless Endeavor: choosing one of the two rolled results
+
+- **Do:** Cast Reckless Endeavor. Two dice are thrown; when asked, click the higher number.
+- **Expect:** The banner says "Choose one result", with a button for each number. That much damage goes to each creature, and you get as many Treasures as the lower number.
+- **Not a bug:** When both dice show the same number nothing is asked: that number is both results.
+
+### Valiant Endeavor: four players, destroying by the chosen result
+
+- **Do:** Cast Valiant Endeavor. When asked, click the lower number.
+- **Expect:** Every player's creature with power at least that number is destroyed: the Colossal Dreadmaw always. You get as many Knights as the higher number.
+
 ### Ashling's Prerogative: choosing as it enters, then haste or tapped
 
 - **Do:** Cast Ashling's Prerogative and click odd. Then cast Llanowar Elves and Grizzly Bears.

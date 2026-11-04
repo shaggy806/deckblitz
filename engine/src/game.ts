@@ -31815,6 +31815,30 @@ export class Game {
           };
           return;
         }
+        if (spec.value === "roll-result") {
+          const last = this.state.lastRoll;
+          const results = last !== undefined && last.player === controller ? [...new Set(last.results)] : [];
+          // The same number on each die, or no roll: nothing to choose between.
+          if (results.length <= 1) {
+            this.resumeResolution(spec.then, source, { ...resume, x: results[0] ?? 0 });
+            return;
+          }
+          this.state.awaiting = {
+            kind: "choose-creature-type",
+            player: controller,
+            source,
+            options: results.map(String),
+            catalog: false,
+            prompt: "Choose one result",
+            then: spec.then,
+            value: {
+              sentinel: "",
+              resume,
+              xByOption: Object.fromEntries(results.map((result) => [String(result), result])),
+            },
+          };
+          return;
+        }
         let options: readonly string[];
         let sentinel: string;
         let prompt: string;

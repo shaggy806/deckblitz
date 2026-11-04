@@ -777,8 +777,10 @@ export type EffectAmount =
    * `roll-dice`'s `then` or table row): `"total"`, the result (natural
    * results plus the roll's modifier); `"odd"` / `"even"`, how many dice came
    * up odd / even ("for each odd result" — Clown Car); `{ equals: N }`, how
-   * many came up exactly N. 0 before any roll. */
-  | { readonly roll: "total" | "odd" | "even" | { readonly equals: number } }
+   * many came up exactly N; `"other"`, with a `choose-value` of `"roll-result"`
+   * having read the chosen result as `"x"`, "the other result" (Reckless
+   * Endeavor). 0 before any roll. */
+  | { readonly roll: "total" | "odd" | "even" | "other" | { readonly equals: number } }
   /** The total mana value of the cards in exile linked to this effect's
    * source (rule 607.2a — `exile`'s `linked`), in the stint the resolving
    * ability refers to: Skyclave Apparition's "where X is the mana value of
@@ -3665,8 +3667,14 @@ export type EffectSpec =
        * own** on the battlefield or in the command zone" (Stinging Study): the
        * controller chooses among them when their mana values differ, as the
        * `choose-creature-type` menu of their names; `then` reads it as `"x"`, 0
-       * with none. */
-      readonly value: "color" | "card-type" | "counter-kind" | "number" | "text-word" | "commander-mana-value";
+       * with none.
+       *
+       * `"roll-result"`: "roll two d12 **and choose one result**" (Reckless
+       * Endeavor), a `roll-dice`'s `then`: the controller chooses among the
+       * last roll's natural results (rule 706.2), asked only when they differ,
+       * as the same menu of the numbers. `then` reads that one as `"x"`, and
+       * "the other result" as `{ roll: "other" }`. */
+      readonly value: "color" | "card-type" | "counter-kind" | "number" | "text-word" | "commander-mana-value" | "roll-result";
       readonly then: EffectSpec;
       /** With `"text-word"` (a `change-text`'s words, `CHOSEN_TEXT_WORD` in
        * `then`): the colour words, the basic land types, or both
@@ -13603,6 +13611,7 @@ function signedAmountValue(
     if (amount.roll === "total") return last.total;
     if (amount.roll === "odd") return last.results.filter((r) => r % 2 === 1).length;
     if (amount.roll === "even") return last.results.filter((r) => r % 2 === 0).length;
+    if (amount.roll === "other") return last.results.reduce((n, r) => n + r, 0) - ctx.x;
     const n = amount.roll.equals;
     return last.results.filter((r) => r === n).length;
   }

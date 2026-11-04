@@ -9623,6 +9623,48 @@ function forcedAttackAt(sentences, i, ctx) {
   };
 }
 
+/**
+ * One step of "roll two dN and choose one result": a sentence about "that
+ * result" (`"x"` to the effect) or "the other result" (`{ roll: "other" }`).
+ */
+function rollResultStep(sentence, ctx) {
+  const other = /\bthe other result\b/i.test(sentence);
+  const amount = other ? { roll: "other" } : "x";
+  const fetch = /^(?:then )?search your library for a number of (.+?) cards equal to (?:that|the other) result, put them onto the battlefield( tapped)?, then shuffle\.$/i.exec(sentence);
+  if (fetch !== null) {
+    const filter = parseTypePhrase(fetch[1], { cards: true });
+    if (filter === null) return null;
+    return {
+      kind: "search-library",
+      filter,
+      destination: "battlefield",
+      ...(fetch[2] !== undefined ? { enterTapped: true } : {}),
+      min: 0,
+      max: amount,
+    };
+  }
+  if (/^destroy each creature with power greater than or equal to that result\.$/i.test(sentence)) {
+    return { kind: "destroy-all", filter: { type: "creature", power: { op: "gte", n: "x" } } };
+  }
+  if (!/\b(?:that|the other) result\b/i.test(sentence)) return null;
+  const plain = sentence
+    .replace(/^then (.)/i, (_, c) => c.toUpperCase())
+    .replace(/a number of (.+?) equal to (?:that|the other) result/i, "X $1")
+    .replace(/deals damage equal to (?:that|the other) result to/i, "deals X damage to");
+  if (/\bresult\b/i.test(plain)) return null;
+  const effect = parseSentence(plain, ctx);
+  if (effect === null || effect === undefined) return null;
+  const read = (node) => {
+    if (node === "x") return amount;
+    if (Array.isArray(node)) return node.map(read);
+    if (node !== null && typeof node === "object") {
+      return Object.fromEntries(Object.entries(node).map(([key, value]) => [key, read(value)]));
+    }
+    return node;
+  };
+  return read(effect);
+}
+
 function exiledCardPickAt(sentences, i, ctx) {
   const first = sentences[i];
   const next = sentences[i + 1] ?? "";
@@ -10562,6 +10604,28 @@ function chosenValueAt(sentences, i, ctx) {
       },
       used: 2,
     };
+  }
+  // "Roll two d12 and choose one result" (Reckless Endeavor): a sentence for
+  // "that result", read as X, and one for "the other result".
+  const rollTwo = /^roll two d(\d+) and choose one result\.$/i.exec(s(0));
+  if (rollTwo !== null) {
+    const chosen = rollResultStep(s(1), ctx);
+    const other = rollResultStep(s(2), ctx);
+    if (chosen !== null && other !== null) {
+      return {
+        effect: {
+          kind: "roll-dice",
+          sides: Number(rollTwo[1]),
+          count: 2,
+          then: {
+            kind: "choose-value",
+            value: "roll-result",
+            then: { kind: "sequence", effects: [chosen, other] },
+          },
+        },
+        used: 3,
+      };
+    }
   }
   // Extinction Event, Thanos: the quality chosen as it resolves, in the filter
   // of what follows ("power" for Zimone's Hypothesis).

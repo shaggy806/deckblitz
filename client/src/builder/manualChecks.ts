@@ -10332,6 +10332,20 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'Reckless Endeavor: choosing one of the two rolled results',
+    board({
+      you: { bf: ['Mountain*7', 'Grizzly Bears'], hand: ['Reckless Endeavor'] },
+      opp: [{ bf: ['Colossal Dreadmaw'] }],
+    }),
+  ),
+  preset(
+    'Valiant Endeavor: four players, destroying by the chosen result',
+    board({
+      you: { bf: ['Plains*6'], hand: ['Valiant Endeavor'] },
+      opp: [{ bf: ['Llanowar Elves'] }, { bf: ['Grizzly Bears'] }, { bf: ['Colossal Dreadmaw'] }],
+    }),
+  ),
+  preset(
     "Ashling's Prerogative: choosing as it enters, then haste or tapped",
     board({
       you: { bf: ['Mountain*2', 'Forest*3'], hand: ["Ashling's Prerogative", 'Grizzly Bears', 'Llanowar Elves'] },
