@@ -172,6 +172,40 @@ describe("what an effect says about that extra turn", () => {
     expect(game.state.players[A].hasLost).toBe(true);
   });
 
+  it("Final Fortune, an instant: cast on someone else's turn, the extra turn comes after theirs, and the rotation goes on", () => {
+    const { game } = table({ players: 3 });
+    lands(game, "Mountain", 2);
+    const card = toHand(game, "Final Fortune");
+    nextTurn(game);
+    expect(active(game)).toBe(B);
+    game.advanceUntil((s) => s.turn.step === "end" && s.priority.holder === A);
+    cast(game, card);
+    // Bob's own end step, which it was cast in, isn't that turn's.
+    expect(game.state.players[A].hasLost).toBe(false);
+    expect(game.state.delayedTriggers).toHaveLength(0);
+    nextTurn(game);
+    expect(active(game)).toBe(A);
+    expect(game.state.turn.isExtra).toBe(true);
+    expect(game.state.players[A].hasLost).toBe(false);
+    game.advanceUntil((s) => s.players[A].hasLost || s.turn.step === "cleanup");
+    expect(game.state.players[A].hasLost).toBe(true);
+    expect(game.state.turn.step).toBe("end");
+    nextTurn(game);
+    expect(active(game)).toBe(C);
+  });
+
+  it("Final Fortune skipped: no loss (the rulings)", () => {
+    const { game } = table();
+    lands(game, "Mountain", 2);
+    cast(game, toHand(game, "Final Fortune"));
+    game.state.players[A].turnsToSkip = 1;
+    nextTurn(game);
+    expect(active(game)).toBe(B);
+    nextTurn(game);
+    expect(game.state.players[A].hasLost).toBe(false);
+    expect(game.state.delayedTriggers).toHaveLength(0);
+  });
+
   it("Chance for Glory: indestructible for good, for what you control as it resolves", () => {
     const { game } = table();
     lands(game, "Plateau", 3);

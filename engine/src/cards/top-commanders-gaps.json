@@ -1783,7 +1783,8 @@
   "replacement:as-transforms",
   "condition:intervening-if-amounts",
   "trigger:attacks-you-unblocked-batch",
-  "effect:delayed-trigger-each-combat"
+  "effect:delayed-trigger-each-combat",
+  "effect:delayed-trigger-extra-turn-end-step"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {
