@@ -9500,6 +9500,10 @@ export type EffectSpec =
       /** "Choose a land of each basic land type" with no "you control"
        * (Sundering Titan): among every player's, read from the chooser's side. */
       readonly anyController?: true;
+      /** "You choose the permanents for each player instead" (Mythos of
+       * Snapdax): each player's own are offered, this effect's controller
+       * answering, under the same rules for what must be chosen. */
+      readonly chosenBy?: "you";
       readonly prompt: string;
       readonly chosen?: "destroy" | "return-to-hand";
       /** `{ discard }`: each player discards the cards in their hand matching

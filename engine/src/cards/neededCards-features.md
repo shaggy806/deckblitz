@@ -5005,3 +5005,5 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 **A player searching their own library, as a trigger (2026-11-04).** `{ on: "searches-library", who }` on the new `library-searched` event, `"trigger-player"` who searched. Archivist of Oghma, Wan Shi Tong, Librarian, Ob Nixilis, Unshackled. River Song still wants `replacement:draw-from-bottom`. `test/search-trigger.test.ts`.
 
 **A player's own turns of the game (2026-11-04).** `condition:own-turn-count`: `PlayerState.turnsTaken`, the `turns-taken` condition, `FIRST_THREE_TURNS` with `your-turn`. Starting Town, Serra Avenger; Spider-Man 2099 and Jace Reawakened read the same line.
+
+**A permanent of each permanent type (2026-11-04).** `effect:keep-one-of-each-permanent-type`: Cataclysm's `choose-one-of-each` already was it, with all six types and `who: "each-opponent"` (Liliana, Dreadhorde General) or the nonland four (Cataclysmic Gearhulk); new is `chosenBy: "you"`, the caster answering for each player (Mythos of Snapdax).

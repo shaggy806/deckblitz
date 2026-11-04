@@ -7704,7 +7704,31 @@ function becomesWithAbilitiesOf(text) {
 }
 
 /** Each line a `choose-one-of-each` is the whole of, with its prompt. */
+const NONLAND_KEEP_PROMPT = "Choose an artifact, a creature, an enchantment, and a planeswalker to keep — your other nonland permanents are sacrificed";
+const NONLAND_KEEP = {
+  kind: "choose-one-of-each",
+  who: "each-player",
+  slots: ["artifact", "creature", "enchantment", "planeswalker"],
+  filter: { notTypes: ["land"] },
+  rest: "sacrifice",
+  prompt: NONLAND_KEEP_PROMPT,
+};
 const ONE_OF_EACH_EFFECTS = {
+  "Each opponent chooses a permanent they control of each permanent type and sacrifices the rest.": {
+    kind: "choose-one-of-each",
+    who: "each-opponent",
+    slots: ["artifact", "battle", "creature", "enchantment", "land", "planeswalker"],
+    filter: {},
+    rest: "sacrifice",
+    prompt: "Choose a permanent of each permanent type to keep — the rest are sacrificed",
+  },
+  "Each player chooses an artifact, a creature, an enchantment, and a planeswalker from among the nonland permanents they control, then sacrifices the rest.": NONLAND_KEEP,
+  "Each player chooses an artifact, a creature, an enchantment, and a planeswalker from among the nonland permanents they control, then sacrifices the rest. If {B}{R} was spent to cast this spell, you choose the permanents for each player instead.": {
+    kind: "conditional",
+    condition: { kind: "source", filter: { manaSpentOfColors: { B: 1, R: 1 } } },
+    then: { ...NONLAND_KEEP, chosenBy: "you", prompt: "Choose an artifact, a creature, an enchantment, and a planeswalker for this player to keep — their other nonland permanents are sacrificed" },
+    else: NONLAND_KEEP,
+  },
   "Each player chooses from among the permanents they control an artifact, a creature, an enchantment, and a land, then sacrifices the rest.": {
     kind: "choose-one-of-each",
     who: "each-player",

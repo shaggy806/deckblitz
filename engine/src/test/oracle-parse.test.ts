@@ -14652,6 +14652,34 @@ describe("a cast as this resolves, on its own terms", () => {
     });
   });
 
+  it("reads a permanent of each type, all six or the nonland four, and a caster choosing for each player", () => {
+    const liliana = read("Legendary Planeswalker — Liliana", "−9: Each opponent chooses a permanent they control of each permanent type and sacrifices the rest.");
+    expect(liliana.complete).toBe(true);
+    expect(liliana.activated[0].effect).toMatchObject({
+      kind: "choose-one-of-each",
+      who: "each-opponent",
+      slots: ["artifact", "battle", "creature", "enchantment", "land", "planeswalker"],
+      rest: "sacrifice",
+    });
+    const gearhulk = read(
+      "Artifact Creature — Construct",
+      "When this creature enters, each player chooses an artifact, a creature, an enchantment, and a planeswalker from among the nonland permanents they control, then sacrifices the rest.",
+    );
+    expect(gearhulk.complete).toBe(true);
+    expect(gearhulk.triggered[0].effect).toMatchObject({ kind: "choose-one-of-each", who: "each-player", filter: { notTypes: ["land"] }, rest: "sacrifice" });
+    const mythos = read(
+      "Sorcery",
+      "Each player chooses an artifact, a creature, an enchantment, and a planeswalker from among the nonland permanents they control, then sacrifices the rest. If {B}{R} was spent to cast this spell, you choose the permanents for each player instead.",
+    );
+    expect(mythos.complete).toBe(true);
+    expect(mythos.effect).toMatchObject({
+      kind: "conditional",
+      condition: { kind: "source", filter: { manaSpentOfColors: { B: 1, R: 1 } } },
+      then: { chosenBy: "you" },
+      else: { kind: "choose-one-of-each" },
+    });
+  });
+
   it("reads your first three turns of the game: a land's entry, a cast", () => {
     const town = read("Land — Town", "This land enters tapped unless it's your first, second, or third turn of the game.\n{T}: Add {C}.");
     expect(town.complete).toBe(true);

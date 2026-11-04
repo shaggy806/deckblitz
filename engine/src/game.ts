@@ -34302,7 +34302,7 @@ export class Game {
         }
         this.state.awaiting = {
           kind: "choose-permanents",
-          player,
+          player: spec.chosenBy === "you" ? controller : player,
           eligible,
           min: 1,
           max,
