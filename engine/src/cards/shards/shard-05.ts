@@ -166,6 +166,7 @@ import _poolCompleteDisregard from "../pool/complete-disregard.js";
 import _poolConquerorsFlail from "../pool/conquerors-flail.js";
 import _poolConsulateCrackdown from "../pool/consulate-crackdown.js";
 import _poolConsulateSkygate from "../pool/consulate-skygate.js";
+import _poolContagionEngine from "../pool/contagion-engine.js";
 import _poolContagiousNim from "../pool/contagious-nim.js";
 import _poolContaminatedBond from "../pool/contaminated-bond.js";
 import _poolContamination from "../pool/contamination.js";
@@ -1068,6 +1069,7 @@ const shard: CardShard = {
     _poolConquerorsFlail,
     _poolConsulateCrackdown,
     _poolConsulateSkygate,
+    _poolContagionEngine,
     _poolContagiousNim,
     _poolContaminatedBond,
     _poolContamination,

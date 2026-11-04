@@ -38,6 +38,7 @@ import _poolAngelicSkirmisher from "../pool/angelic-skirmisher.js";
 import _poolAngelicVoices from "../pool/angelic-voices.js";
 import _poolAngerOfTheGods from "../pool/anger-of-the-gods.js";
 import _poolAnnex from "../pool/annex.js";
+import _poolAnticausalVestige from "../pool/anticausal-vestige.js";
 import _poolAprilReporterOfTheWeird from "../pool/april-reporter-of-the-weird.js";
 import _poolAquitectsWill from "../pool/aquitects-will.js";
 import _poolArachnusSpinner from "../pool/arachnus-spinner.js";
@@ -927,6 +928,7 @@ const shard: CardShard = {
     _poolAngelicVoices,
     _poolAngerOfTheGods,
     _poolAnnex,
+    _poolAnticausalVestige,
     _poolAprilReporterOfTheWeird,
     _poolAquitectsWill,
     _poolArachnusSpinner,

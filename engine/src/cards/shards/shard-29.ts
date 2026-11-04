@@ -329,6 +329,7 @@ import _poolGurmagNightwatch from "../pool/gurmag-nightwatch.js";
 import _poolGutwrencherOni from "../pool/gutwrencher-oni.js";
 import _poolGyreEngineer from "../pool/gyre-engineer.js";
 import _poolHERBIELovableRobot from "../pool/h-e-r-b-i-e-lovable-robot.js";
+import _poolHaloFountain from "../pool/halo-fountain.js";
 import _poolHamletbackGoliath from "../pool/hamletback-goliath.js";
 import _poolHardenedAcademic from "../pool/hardened-academic.js";
 import _poolHavocDevils from "../pool/havoc-devils.js";
@@ -1246,6 +1247,7 @@ const shard: CardShard = {
     _poolGutwrencherOni,
     _poolGyreEngineer,
     _poolHERBIELovableRobot,
+    _poolHaloFountain,
     _poolHamletbackGoliath,
     _poolHardenedAcademic,
     _poolHavocDevils,

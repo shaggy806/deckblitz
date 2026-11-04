@@ -686,6 +686,7 @@ import _poolShadowsLair from "../pool/shadows-lair.js";
 import _poolShahOfNaarIsle from "../pool/shah-of-naar-isle.js";
 import _poolShatterwingPegasus from "../pool/shatterwing-pegasus.js";
 import _poolShelldockIsle from "../pool/shelldock-isle.js";
+import _poolSheoldred from "../pool/sheoldred.js";
 import _poolShieldWallSentinel from "../pool/shield-wall-sentinel.js";
 import _poolShieldsMight from "../pool/shields-might.js";
 import _poolShockBrigade from "../pool/shock-brigade.js";
@@ -1612,6 +1613,7 @@ const shard: CardShard = {
     _poolShahOfNaarIsle,
     _poolShatterwingPegasus,
     _poolShelldockIsle,
+    _poolSheoldred,
     _poolShieldWallSentinel,
     _poolShieldsMight,
     _poolShockBrigade,

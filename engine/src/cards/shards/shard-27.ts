@@ -853,6 +853,7 @@ import _poolWaxenShapethief from "../pool/waxen-shapethief.js";
 import _poolWayOfTheWarlord from "../pool/way-of-the-warlord.js";
 import _poolWaywardServant from "../pool/wayward-servant.js";
 import _poolWeatheredSentinels from "../pool/weathered-sentinels.js";
+import _poolWeddingRing from "../pool/wedding-ring.js";
 import _poolWeirdHarvest from "../pool/weird-harvest.js";
 import _poolWillowGeist from "../pool/willow-geist.js";
 import _poolWillowduskEssenceSeer from "../pool/willowdusk-essence-seer.js";
@@ -1752,6 +1753,7 @@ const shard: CardShard = {
     _poolWayOfTheWarlord,
     _poolWaywardServant,
     _poolWeatheredSentinels,
+    _poolWeddingRing,
     _poolWeirdHarvest,
     _poolWillowGeist,
     _poolWillowduskEssenceSeer,

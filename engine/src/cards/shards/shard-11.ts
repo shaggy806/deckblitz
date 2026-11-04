@@ -171,6 +171,7 @@ import _poolCordialVampire from "../pool/cordial-vampire.js";
 import _poolCorpulentCorpse from "../pool/corpulent-corpse.js";
 import _poolCountermand from "../pool/countermand.js";
 import _poolCounterpoint from "../pool/counterpoint.js";
+import _poolCrackleburr from "../pool/crackleburr.js";
 import _poolCracklingFalls from "../pool/crackling-falls.js";
 import _poolCrashTheParty from "../pool/crash-the-party.js";
 import _poolCrashTheRamparts from "../pool/crash-the-ramparts.js";
@@ -1096,6 +1097,7 @@ const shard: CardShard = {
     _poolCorpulentCorpse,
     _poolCountermand,
     _poolCounterpoint,
+    _poolCrackleburr,
     _poolCracklingFalls,
     _poolCrashTheParty,
     _poolCrashTheRamparts,

@@ -489,6 +489,7 @@ import _poolLeap from "../pool/leap.js";
 import _poolLeapingAmbush from "../pool/leaping-ambush.js";
 import _poolLecturingScornmage from "../pool/lecturing-scornmage.js";
 import _poolLeoninShikari from "../pool/leonin-shikari.js";
+import _poolLifeOfTheParty from "../pool/life-of-the-party.js";
 import _poolLifecraftersBestiary from "../pool/lifecrafters-bestiary.js";
 import _poolLifelink from "../pool/lifelink.js";
 import _poolLightningMauler from "../pool/lightning-mauler.js";
@@ -1459,6 +1460,7 @@ const shard: CardShard = {
     _poolLeapingAmbush,
     _poolLecturingScornmage,
     _poolLeoninShikari,
+    _poolLifeOfTheParty,
     _poolLifecraftersBestiary,
     _poolLifelink,
     _poolLightningMauler,

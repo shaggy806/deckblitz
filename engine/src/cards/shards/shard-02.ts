@@ -822,6 +822,7 @@ import _poolUnscrupulousContractor from "../pool/unscrupulous-contractor.js";
 import _poolUntamedKavu from "../pool/untamed-kavu.js";
 import _poolUntamedMight from "../pool/untamed-might.js";
 import _poolUntimelyMalfunction from "../pool/untimely-malfunction.js";
+import _poolUrabrask from "../pool/urabrask.js";
 import _poolUrbanEvolution from "../pool/urban-evolution.js";
 import _poolUrbisProtector from "../pool/urbis-protector.js";
 import _poolUrborg from "../pool/urborg.js";
@@ -1722,6 +1723,7 @@ const shard: CardShard = {
     _poolUntamedKavu,
     _poolUntamedMight,
     _poolUntimelyMalfunction,
+    _poolUrabrask,
     _poolUrbanEvolution,
     _poolUrbisProtector,
     _poolUrborg,

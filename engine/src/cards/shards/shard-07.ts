@@ -380,6 +380,7 @@ import _poolIntoTheFaeCourt from "../pool/into-the-fae-court.js";
 import _poolIrregularCohort from "../pool/irregular-cohort.js";
 import _poolIsamaruHoundOfKonda from "../pool/isamaru-hound-of-konda.js";
 import _poolItsClobberinTime from "../pool/its-clobberin-time.js";
+import _poolJacesArchivist from "../pool/jaces-archivist.js";
 import _poolJacesRuse from "../pool/jaces-ruse.js";
 import _poolJaggedScarArchers from "../pool/jagged-scar-archers.js";
 import _poolJeeringInstigator from "../pool/jeering-instigator.js";
@@ -410,6 +411,7 @@ import _poolKondasHatamoto from "../pool/kondas-hatamoto.js";
 import _poolKorBlademaster from "../pool/kor-blademaster.js";
 import _poolKragmaWarcaller from "../pool/kragma-warcaller.js";
 import _poolKrakenOfTheStraits from "../pool/kraken-of-the-straits.js";
+import _poolKrangTheAllPowerful from "../pool/krang-the-all-powerful.js";
 import _poolKrarkClanShaman from "../pool/krark-clan-shaman.js";
 import _poolKrosanAvenger from "../pool/krosan-avenger.js";
 import _poolKumenaTyrantOfOrazca from "../pool/kumena-tyrant-of-orazca.js";
@@ -1318,6 +1320,7 @@ const shard: CardShard = {
     _poolIrregularCohort,
     _poolIsamaruHoundOfKonda,
     _poolItsClobberinTime,
+    _poolJacesArchivist,
     _poolJacesRuse,
     _poolJaggedScarArchers,
     _poolJeeringInstigator,
@@ -1348,6 +1351,7 @@ const shard: CardShard = {
     _poolKorBlademaster,
     _poolKragmaWarcaller,
     _poolKrakenOfTheStraits,
+    _poolKrangTheAllPowerful,
     _poolKrarkClanShaman,
     _poolKrosanAvenger,
     _poolKumenaTyrantOfOrazca,

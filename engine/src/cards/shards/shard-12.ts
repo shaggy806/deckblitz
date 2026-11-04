@@ -499,6 +499,7 @@ import _poolMudbrawlerRaiders from "../pool/mudbrawler-raiders.js";
 import _poolMultiplyByZero from "../pool/multiply-by-zero.js";
 import _poolMurmuringBosk from "../pool/murmuring-bosk.js";
 import _poolMurmuringMystic from "../pool/murmuring-mystic.js";
+import _poolMutavault from "../pool/mutavault.js";
 import _poolMutilate from "../pool/mutilate.js";
 import _poolMuzzle from "../pool/muzzle.js";
 import _poolMyrConvert from "../pool/myr-convert.js";
@@ -1412,6 +1413,7 @@ const shard: CardShard = {
     _poolMultiplyByZero,
     _poolMurmuringBosk,
     _poolMurmuringMystic,
+    _poolMutavault,
     _poolMutilate,
     _poolMuzzle,
     _poolMyrConvert,

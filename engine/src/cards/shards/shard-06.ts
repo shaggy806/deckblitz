@@ -165,6 +165,7 @@ import _poolCloakOfMists from "../pool/cloak-of-mists.js";
 import _poolCloudchaserEagle from "../pool/cloudchaser-eagle.js";
 import _poolClutchOfUndeath from "../pool/clutch-of-undeath.js";
 import _poolComfortingCounsel from "../pool/comforting-counsel.js";
+import _poolCommandeer from "../pool/commandeer.js";
 import _poolCompulsion from "../pool/compulsion.js";
 import _poolConductElectricity from "../pool/conduct-electricity.js";
 import _poolConsecrateConsume from "../pool/consecrate-consume.js";
@@ -1073,6 +1074,7 @@ const shard: CardShard = {
     _poolCloudchaserEagle,
     _poolClutchOfUndeath,
     _poolComfortingCounsel,
+    _poolCommandeer,
     _poolCompulsion,
     _poolConductElectricity,
     _poolConsecrateConsume,

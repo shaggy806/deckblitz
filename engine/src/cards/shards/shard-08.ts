@@ -821,6 +821,7 @@ import _poolTheInfamousCruelclaw from "../pool/the-infamous-cruelclaw.js";
 import _poolTheMasterFormedAnew from "../pool/the-master-formed-anew.js";
 import _poolTheModernAge from "../pool/the-modern-age.js";
 import _poolTheStasisCoffin from "../pool/the-stasis-coffin.js";
+import _poolTheTrueScriptures from "../pool/the-true-scriptures.js";
 import _poolThornfistStriker from "../pool/thornfist-striker.js";
 import _poolThoughtSponge from "../pool/thought-sponge.js";
 import _poolThoughtweftCharge from "../pool/thoughtweft-charge.js";
@@ -1781,6 +1782,7 @@ const shard: CardShard = {
     _poolTheMasterFormedAnew,
     _poolTheModernAge,
     _poolTheStasisCoffin,
+    _poolTheTrueScriptures,
     _poolThornfistStriker,
     _poolThoughtSponge,
     _poolThoughtweftCharge,

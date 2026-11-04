@@ -464,6 +464,7 @@ import _poolLassoedByTheLaw from "../pool/lassoed-by-the-law.js";
 import _poolLastRites from "../pool/last-rites.js";
 import _poolLavamancersSkill from "../pool/lavamancers-skill.js";
 import _poolLawbringer from "../pool/lawbringer.js";
+import _poolLazotepQuarry from "../pool/lazotep-quarry.js";
 import _poolLeeches from "../pool/leeches.js";
 import _poolLeoninVanguard from "../pool/leonin-vanguard.js";
 import _poolLeveler from "../pool/leveler.js";
@@ -1380,6 +1381,7 @@ const shard: CardShard = {
     _poolLastRites,
     _poolLavamancersSkill,
     _poolLawbringer,
+    _poolLazotepQuarry,
     _poolLeeches,
     _poolLeoninVanguard,
     _poolLeveler,

@@ -12,6 +12,7 @@ import _poolAccursedDuneyard from "../pool/accursed-duneyard.js";
 import _poolAceFearlessRebel from "../pool/ace-fearless-rebel.js";
 import _poolAetherBarrier from "../pool/aether-barrier.js";
 import _poolAetherbladeAgent from "../pool/aetherblade-agent.js";
+import _poolAethersnatch from "../pool/aethersnatch.js";
 import _poolAjaniResolute from "../pool/ajani-resolute.js";
 import _poolAkkiAvalanchers from "../pool/akki-avalanchers.js";
 import _poolAkoumHellhound from "../pool/akoum-hellhound.js";
@@ -879,6 +880,7 @@ const shard: CardShard = {
     _poolAceFearlessRebel,
     _poolAetherBarrier,
     _poolAetherbladeAgent,
+    _poolAethersnatch,
     _poolAjaniResolute,
     _poolAkkiAvalanchers,
     _poolAkoumHellhound,

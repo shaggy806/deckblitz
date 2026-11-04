@@ -782,6 +782,7 @@ import _poolThassasEmissary from "../pool/thassas-emissary.js";
 import _poolTheBiblioplex from "../pool/the-biblioplex.js";
 import _poolTheFleshIsWeak from "../pool/the-flesh-is-weak.js";
 import _poolTheFugitiveDoctor from "../pool/the-fugitive-doctor.js";
+import _poolTheGreatWork from "../pool/the-great-work.js";
 import _poolTheMirariConjecture from "../pool/the-mirari-conjecture.js";
 import _poolTheSackvilleBagginses from "../pool/the-sackville-bagginses.js";
 import _poolTheTaleOfTamiyo from "../pool/the-tale-of-tamiyo.js";
@@ -813,6 +814,7 @@ import _poolTrainTroops from "../pool/train-troops.js";
 import _poolTranscendentMaster from "../pool/transcendent-master.js";
 import _poolTraumaticRevelation from "../pool/traumatic-revelation.js";
 import _poolTravelersAmulet from "../pool/travelers-amulet.js";
+import _poolTravelingChocobo from "../pool/traveling-chocobo.js";
 import _poolTreeguardDuo from "../pool/treeguard-duo.js";
 import _poolTreetopRangers from "../pool/treetop-rangers.js";
 import _poolTreetopScout from "../pool/treetop-scout.js";
@@ -1714,6 +1716,7 @@ const shard: CardShard = {
     _poolTheBiblioplex,
     _poolTheFleshIsWeak,
     _poolTheFugitiveDoctor,
+    _poolTheGreatWork,
     _poolTheMirariConjecture,
     _poolTheSackvilleBagginses,
     _poolTheTaleOfTamiyo,
@@ -1745,6 +1748,7 @@ const shard: CardShard = {
     _poolTranscendentMaster,
     _poolTraumaticRevelation,
     _poolTravelersAmulet,
+    _poolTravelingChocobo,
     _poolTreeguardDuo,
     _poolTreetopRangers,
     _poolTreetopScout,

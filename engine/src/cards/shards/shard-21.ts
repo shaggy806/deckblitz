@@ -181,6 +181,7 @@ import _poolDeceptiveFrostkite from "../pool/deceptive-frostkite.js";
 import _poolDeduce from "../pool/deduce.js";
 import _poolDeepSeaKraken from "../pool/deep-sea-kraken.js";
 import _poolDeeprootWaters from "../pool/deeproot-waters.js";
+import _poolDefenseGrid from "../pool/defense-grid.js";
 import _poolDefiantFalcon from "../pool/defiant-falcon.js";
 import _poolDegaDisciple from "../pool/dega-disciple.js";
 import _poolDeliriumSkeins from "../pool/delirium-skeins.js";
@@ -1055,6 +1056,7 @@ const shard: CardShard = {
     _poolDeduce,
     _poolDeepSeaKraken,
     _poolDeeprootWaters,
+    _poolDefenseGrid,
     _poolDefiantFalcon,
     _poolDegaDisciple,
     _poolDeliriumSkeins,
