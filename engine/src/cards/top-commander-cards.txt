@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4290 already implemented / 710 missing (marks refreshed 2026-11-04)
+4295 already implemented / 705 missing (marks refreshed 2026-11-04)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -1674,7 +1674,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1681  Smuggler's Share                         {2}{W}           Enchantment
 [x]  1682  Fire Nation Palace                       {0}              Land
 [x]  1683  Woe Strider                              {2}{B}           Creature — Horror
-[ ]  1684  Void Winnower                            {9}              Creature — Eldrazi
+[x]  1684  Void Winnower                            {9}              Creature — Eldrazi
 [x]  1685  Soulherder                               {1}{W}{U}        Creature — Spirit
 [x]  1686  Foreboding Landscape                     {0}              Land
 [x]  1687  Talion, the Kindly Lord                  {2}{U}{B}        Legendary Creature — Faerie Noble
@@ -3421,7 +3421,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3428  Costly Plunder                           {1}{B}           Instant
 [x]  3429  Aether Hub                               {0}              Land
 [ ]  3430  Ertai Resurrected                        {2}{U}{B}        Legendary Creature — Phyrexian Human Wizard
-[ ]  3431  Reckless Endeavor                        {5}{R}{R}        Sorcery
+[x]  3431  Reckless Endeavor                        {5}{R}{R}        Sorcery
 [ ]  3432  Serra Paragon                            {2}{W}{W}        Creature — Angel
 [x]  3433  General's Enforcer                       {W}{B}           Creature — Human Soldier
 [ ]  3434  See Double                               {2}{U}{U}        Instant
@@ -4241,7 +4241,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4248  Airbender's Reversal                     {1}{W}           Instant — Lesson
 [x]  4249  Subtlety                                 {2}{U}{U}        Creature — Elemental Incarnation
 [x]  4250  The Gitrog, Ravenous Ride                {3}{B}{G}        Legendary Creature — Frog Horror Mount
-[ ]  4251  Firemind Vessel                          {4}              Artifact
+[x]  4251  Firemind Vessel                          {4}              Artifact
 [ ]  4252  Braid of Fire                            {1}{R}           Enchantment
 [x]  4253  Chocobo Knights                          {3}{W}           Creature — Human Knight
 [ ]  4254  Lolth, Spider Queen                      {3}{B}{B}        Legendary Planeswalker — Lolth
@@ -4332,7 +4332,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4339  Mothdust Changeling                      {U}              Creature — Shapeshifter
 [x]  4340  Sword of Body and Mind                   {3}              Artifact — Equipment
 [x]  4341  Plumecreed Escort                        {1}{U}           Creature — Bird Scout
-[ ]  4342  Interplanar Beacon                       {0}              Land
+[x]  4342  Interplanar Beacon                       {0}              Land
 [x]  4343  Sentinel Sliver                          {1}{W}           Creature — Sliver
 [x]  4344  Orcish Siegemaster                       {2}{R}           Creature — Orc Soldier
 [x]  4345  Throne of the High City                  {0}              Land
@@ -4838,7 +4838,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4845  Thalia's Lieutenant                      {1}{W}           Creature — Human Soldier
 [ ]  4846  Relic of Progenitus                      {1}              Artifact
 [x]  4847  Liliana's Mastery                        {3}{B}{B}        Enchantment
-[ ]  4848  Summon: Magus Sisters                    {4}{G}           Enchantment Creature — Saga Faerie
+[x]  4848  Summon: Magus Sisters                    {4}{G}           Enchantment Creature — Saga Faerie
 [x]  4849  Avatar Roku, Firebender                  {3}{R}{R}{R}     Legendary Creature — Human Avatar
 [x]  4850  Winota, Joiner of Forces                 {2}{R}{W}        Legendary Creature — Human Warrior
 [x]  4851  Lumbering Falls                          {0}              Land

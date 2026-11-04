@@ -12,6 +12,14 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **Choosing one result of a roll, the other as `{ roll: "other" }`** (2026-11-03, `41b967da4`): Reckless, Valiant and Wild Endeavor.
+- **Odd and even, `manaValueParity` and `powerParity`, printed or chosen as it resolves or enters** (2026-11-03, `aed66eec7`): Extinction
+  Event, Zimone's Hypothesis, Ashling's Prerogative, Gollum, Void Winnower, Kianne.
+- **A mode picked at random as an ability goes on the stack, and the amassed Army** (2026-11-03, `48c86de9b`, `7cd56960a`): Umaro, Cult
+  of Skaro, Typhoid Mary, Summon: Magus Sisters, Foray of Orcs, Grishnákh, Goblin Plate Mail, Surrounded by Orcs, Widespread Brutality.
+- **Two mana of different colors, and a land's mana replaced by amount, tapper's color, color only, or for every player** (2026-11-03,
+  `4d17c0456`): Firemind Vessel, Interplanar Beacon, Open the Omenpaths, Contamination, Pulse of Llanowar, Pale Moon, Hall of Gemstone,
+  Harvest Mage.
 - **Reselecting what an attacker attacks, through `enter-attacking`; any-player abilities clickable on another's board** (2026-11-03,
   `63eca4722`): Misleading Signpost, Windshaper Planetar, Capricopian.
 - **A creature's own record of combat as filters, `afterCombat`, "a creature is attacking you"** (2026-11-03, `8276659b5`):

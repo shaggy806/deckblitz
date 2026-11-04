@@ -883,6 +883,9 @@ missing. Re-run `--greedy` for Phase 2's order.
   `condition:that-player-controls-more`, `condition:player-state-thresholds`, `condition:condition-lands-same-name`;
   `trigger:combat-trigger-extensions`, `condition:attacked-or-blocked-this-combat`, `condition:filter-card-property-clauses`,
   `effect:reselect-attack-target`. 51 proving cards.
+- **2026-11-03: overnight, third round.** `effect:add-mana-two-different-colors`, `replacement:land-mana-type-replacement`,
+  `effect:random-mode-announced`, `effect:amassed-army-power`, `decision:choose-odd-or-even`, `decision:choose-roll-result`. 26 proving
+  cards.
 
 ## Rough size
 
