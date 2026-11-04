@@ -409,6 +409,10 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   slots are alike, as here), and a skipped optional first slot still needs the cast refused or the
   random controller kept from skipping it. Found 2026-10-23, batch 151's checks.
 
+**An all-your-life payment is only offered at even life, 2 to 20.** Rule 119.4 lets a player pay exactly their total. `Game.offersFor` adds
+those offers (K'rrik's {B}, a Phyrexian pip) at even life from 2 to 20, to spare a second enumeration, so with life already reserved by the
+cost (Liesa's commander tax) an odd total isn't offered. Above 20 no offer is added; that would take more than ten pips. Found 2026-11-04.
+
 **`withMain` from a precombat main runs M C+ C M M.** `Game.endStep`'s queue puts the turn's own combat straight after an added combat
 and its main phase after, where the rules give M C+ M C M. No pool ability has `additional-combat`'s `withMain` yet, so nothing reaches
 it. Found 2026-11-04, with Moraug's rulings (an `afterThisPhase` combat from the precombat main runs before the turn's own).

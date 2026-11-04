@@ -490,7 +490,7 @@ section keeps only what to do next.
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next
   untriaged cards by rank: rank 8207 on (batch 148 took 7949–8197). Batches run 4-5 agents, ~30 cards each, with the
-  leading features built alongside in worktrees. The nine other starter precons' 18 stand-ins
+  leading features built alongside in worktrees. The nine other starter precons' 17 stand-ins
   (`engine/data/sweep-3/PC-*.json`) go as their originals land.
 - **Build what blocks the most.** Every card triaged so far needs engine work. **Next:**
   banding (`keyword:banding` — 36, every one on nothing else, 2026-10-23; rule 702.22, and the
@@ -554,6 +554,7 @@ One line each; the detail (rule numbers, code sites, the cards each blocks) is i
 **`docs/engine-gaps.md`**, under the same bold title. When a gap closes, delete its detail
 there and move this line to `COMPLETED.md`.
 
+- **An all-your-life payment is only offered at even life, 2 to 20** (K'rrik, Phyrexian pips: an odd total reached through Liesa's tax isn't offered).
 - **`withMain` from a precombat main runs M C+ C M M** (the rules say M C+ M C M; no pool ability reaches it yet).
 - **Panglacial Wurm under Opposition Agent** (the cast-while-searching offer comes before the search control begins, so the searcher answers it).
 - **A shuffled face-down pile keeps its object ids** (Become Anonymous, Expose the Culprit: a client reading the wire can tell which face-down card is which; needs a design call).

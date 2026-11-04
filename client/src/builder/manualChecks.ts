@@ -11028,7 +11028,9 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
         hand: ['Caged Sun', 'Crumbling Vestige'],
       },
       opp: { bf: ['Grizzly Bears'] },
+    }),
   ),
+  preset(
     "K'rrik: a spell's {B} paid with life by choice",
     board({
       you: { bf: ["K'rrik, Son of Yawgmoth", 'Swamp*3'], hand: ['Vampire Nighthawk'] },

@@ -12,6 +12,18 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **A target player's counters as an amount** (2026-11-04, `0c49db356`): Vraska, Betrayal's Sting.
+- **"Put them onto the battlefield", every card a batched trigger fired on** (2026-11-04, `ff3b74496`): Hedge Shredder.
+- **Token and counter doublers for every player** (2026-11-04, `96233e142`): Primal Vigor.
+- **Equip at instant speed, and its other costs** (2026-11-04, `ca91e8836`): Forge Anew, Leonin Shikari, Bloodthorn Flail, Gavel of the
+  Righteous.
+- **Tokens that each fight a different creature** (2026-11-04, `46ed6653f`, `50d606799`): Ezuri's Predation.
+- **A token multiplier of only some tokens** (2026-11-04, `16eb49d52`): Ojer Taq, Deepest Foundation // Temple of Civilization.
+- **Proliferating several times for one** (2026-11-04, `f8262fe1a`): Tekuthal, Inquiry Dominus.
+- **A target per opponent, on the seat slots already there** (2026-11-04, `f01524617`): Grasp of Fate.
+- **Life for a coloured pip in every mana cost, and life that takes a player to exactly 0 (rule 119.4)** (2026-11-04, `a8f857b7b`,
+  `558d93be9`): K'rrik, Son of Yawgmoth; Phyrexian pips share it.
+- **A "may" a player can't do isn't offered, tapping and untapping included** (2026-11-04, `e86886e41`): Charismatic Conqueror.
 - **Mana spendable only by the chosen color, and a mana trigger on any ability** (2026-11-04, `b6a1d586c`): Throne of Eldraine, Caged Sun.
 - **A repeat's conditions read across its passes** (2026-11-04, `2dad94d7d`): Tainted Pact, Helm of Obedience.
 - **Library searches by several players together, finds held until all enter** (2026-11-04, `ca9a88a27`): Tempt with Discovery, Field of
