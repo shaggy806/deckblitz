@@ -2850,6 +2850,22 @@ export function parseSentence(sentence, ctx) {
   const emblem = emblemOf(s);
   if (emblem !== null) return emblem;
   let M;
+  // "For each token you control [of the chosen type] [that entered this turn],
+  // create a token that's a copy of it" (Renewed Solidarity, Second Harvest).
+  if ((M = /^for each token you control( of the chosen type)?( that entered this turn)?, create a token that's a copy of (?:it|that permanent)\.$/i.exec(s))) {
+    return {
+      kind: "create-token-copy",
+      of: {
+        each: {
+          token: true,
+          controlledBy: "you",
+          ...(M[2] !== undefined ? { enteredThisTurn: true } : {}),
+          ...(M[1] !== undefined ? { ofChosenType: true } : {}),
+        },
+      },
+      count: 1,
+    };
+  }
   // "For each creature, its controller sacrifices it unless they pay X life"
   // (Killing Wave), "… sacrifices a permanent of their choice unless they pay
   // {1}" (Fade Away), "For each Spirit, return it to its owner's hand unless
@@ -4221,22 +4237,6 @@ export function parseSentence(sentence, ctx) {
       count: 1,
       ...(/enchanted/i.test(m[1]) ? { who: "you" } : {}),
       ...except,
-    };
-  }
-  // "For each token you control [of the chosen type] [that entered this turn],
-  // create a token that's a copy of it" (Renewed Solidarity, Second Harvest).
-  if ((m = re("for each token you control( of the chosen type)?( that entered this turn)?, create a token that's a copy of (?:it|that permanent)").exec(s))) {
-    return {
-      kind: "create-token-copy",
-      of: {
-        each: {
-          token: true,
-          controlledBy: "you",
-          ...(m[2] !== undefined ? { enteredThisTurn: true } : {}),
-          ...(m[1] !== undefined ? { ofChosenType: true } : {}),
-        },
-      },
-      count: 1,
     };
   }
   if (re("investigate").test(s)) return { kind: "create-token", token: "Clue Token", count: 1 };
