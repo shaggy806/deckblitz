@@ -15709,6 +15709,38 @@ describe("cards from hand taking {2} off", () => {
   });
 });
 
+describe("a Praetor's flip", () => {
+  const face = (name: string, mana_cost: string, oracle_text: string) =>
+    parseFace({ name, type_line: "Legendary Creature — Phyrexian Praetor", mana_cost, colors: [], oracle_text });
+
+  it("reads Urabrask's", () => {
+    const { activated } = face(
+      "Urabrask",
+      "{2}{R}{R}",
+      "{R}: Exile Urabrask, then return it to the battlefield transformed under its owner's control. Activate only as a sorcery and only if you've cast three or more instant and/or sorcery spells this turn.",
+    );
+    expect(activated[0].effect).toEqual({ kind: "flicker", target: "source", transformed: true });
+    expect(activated[0].sorcerySpeed).toBe(true);
+    expect(activated[0].condition).toEqual({
+      kind: "cast-this-turn",
+      who: "you",
+      filter: { typesAnyOf: ["instant", "sorcery"] },
+      atLeast: 3,
+    });
+  });
+
+  it("reads Sheoldred's", () => {
+    const { activated } = face(
+      "Sheoldred",
+      "{3}{B}{B}",
+      "{4}{B}: Exile Sheoldred, then return it to the battlefield transformed under its owner's control. Activate only as a sorcery and only if an opponent has eight or more cards in their graveyard.",
+    );
+    expect(activated[0].effect).toEqual({ kind: "flicker", target: "source", transformed: true });
+    expect(activated[0].sorcerySpeed).toBe(true);
+    expect(activated[0].condition).toEqual({ kind: "cards-in-graveyard", whose: "an-opponent", atLeast: 8 });
+  });
+});
+
 describe("a permission for one creature spell from your graveyard", () => {
   it("reads Chainer, Nightmare Adept's activation", () => {
     const face = parseFace({

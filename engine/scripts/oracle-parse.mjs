@@ -4994,6 +4994,11 @@ export function parseSentence(sentence, ctx) {
   if (re("exile ~, then return it to the battlefield face down under its owner's control").test(s)) {
     return { kind: "flicker", target: "source", faceDown: true };
   }
+  // "Exile Urabrask, then return it to the battlefield transformed under its
+  // owner's control" (rule 712.14a).
+  if (re("exile ~, then return (?:it|him|her|them) to the battlefield transformed under (?:its|his|her|their) owner's control").test(s)) {
+    return { kind: "flicker", target: "source", transformed: true };
+  }
   // Yarus: returned face down unless it's an instant or sorcery card, then up.
   if (re("return it to the battlefield face down under its owner's control if it's a permanent card, then turn it face up").test(s)) {
     return {
@@ -14794,6 +14799,23 @@ function parseFaceAsWritten(face, ctx = {}) {
         ability.onlyOnce = true;
         return "";
       });
+      // The March of the Machine Praetors' "Activate only as a sorcery and only
+      // if you've cast three or more instant and/or sorcery spells this turn"
+      // (Urabrask), "… if an opponent has eight or more cards in their
+      // graveyard" (Sheoldred).
+      rest = rest.replace(
+        / Activate only as a sorcery and only if (?:you've cast (\w+) or more instant and\/or sorcery spells this turn|an opponent has (\w+) or more cards in their graveyard)\.$/,
+        (whole, spells, cards) => {
+          const atLeast = numberOf((spells ?? cards).toLowerCase());
+          if (typeof atLeast !== "number") return whole;
+          ability.sorcerySpeed = true;
+          ability.condition =
+            spells !== undefined
+              ? { kind: "cast-this-turn", who: "you", filter: { typesAnyOf: ["instant", "sorcery"] }, atLeast }
+              : { kind: "cards-in-graveyard", whose: "an-opponent", atLeast };
+          return "";
+        },
+      );
       if (restrictions.includes("as a sorcery")) ability.sorcerySpeed = true;
       if (restrictions.includes("once each turn")) ability.oncePerTurn = true;
       if (restrictions.includes("during your turn")) ability.condition = { kind: "your-turn" };
