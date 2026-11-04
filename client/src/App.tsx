@@ -4790,18 +4790,23 @@ function Table({
     // of modes can be paid for together — the offer's `modeSets`. A mode is
     // open while some payable set holds it beside what's picked, and Confirm
     // waits for picks that are one of those sets.
+    // Pawprints (rule 700.2i) likewise, where a set may hold a mode twice.
     const sets = cm.modeSets
-    const fits = (picks: readonly number[]) =>
-      sets === undefined || sets.some((s) => picks.every((p) => s.includes(p)))
+    const copiesIn = (set: readonly number[], i: number) => set.filter((p) => p === i).length
+    const within = (picks: readonly number[], set: readonly number[]) =>
+      picks.every((p) => copiesIn(picks, p) <= copiesIn(set, p))
+    const fits = (picks: readonly number[]) => sets === undefined || sets.some((s) => within(picks, s))
     const complete =
       sets === undefined
         ? picked.length >= cm.minModes && picked.length <= cm.maxModes
-        : sets.some((s) => s.length === picked.length && picked.every((p) => s.includes(p)))
+        : sets.some((s) => s.length === picked.length && within(picked, s))
     // "You may choose the same mode more than once" (rule 700.2d): each
     // click adds another copy of the mode, up to the most allowed; Clear
     // starts over.
     const repeat = cm.repeatModes === true
-    const copies = (i: number) => picked.filter((p) => p === i).length
+    const copies = (i: number) => copiesIn(picked, i)
+    const budget = cm.pawprintBudget
+    const spent = picked.reduce((n, i) => n + (cm.modes[i].pawprints ?? 1), 0)
     const toggle = (i: number) =>
       setPendingModes((prev) =>
         prev === null
@@ -4823,8 +4828,16 @@ function Table({
       <div className="controls">
         <span>
           {pendingModes.cast.cardName} — choose{' '}
-          {cm.minModes === cm.maxModes ? cm.minModes : `${cm.minModes}–${cm.maxModes}`}
-          {cm.repeatModes === true && ` (a mode may repeat — ${picked.length}/${cm.maxModes})`}
+          {budget !== undefined ? (
+            <>
+              up to {budget} <Symbols text="{P}" /> worth of modes ({spent}/{budget})
+            </>
+          ) : (
+            <>
+              {cm.minModes === cm.maxModes ? cm.minModes : `${cm.minModes}–${cm.maxModes}`}
+              {cm.repeatModes === true && ` (a mode may repeat — ${picked.length}/${cm.maxModes})`}
+            </>
+          )}
         </span>
         {cm.modes.map((m, i) => (
           <button
@@ -4834,7 +4847,7 @@ function Table({
             aria-pressed={picked.includes(i)}
             disabled={
               repeat
-                ? uncastable(i) || picked.length >= cm.maxModes
+                ? uncastable(i) || picked.length >= cm.maxModes || !fits([...picked, i])
                 : (uncastable(i) || !fits([...picked, i])) && !picked.includes(i)
             }
             onClick={() => toggle(i)}

@@ -4078,6 +4078,17 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(spell.complete).toBe(true);
   });
 
+  it("'choose up to five {P} worth of modes' (rule 700.2i): a budget, each mode's pawprints", () => {
+    const spell = face(
+      "Choose up to five {P} worth of modes. You may choose the same mode more than once.\n{P} — Draw a card.\n{P}{P} — Exile target artifact.\n{P}{P}{P} — You gain 5 life.",
+      "Sorcery",
+    );
+    expect(spell.castModal).toMatchObject({ minModes: 0, maxModes: 5, pawprintBudget: 5, repeatModes: true });
+    expect(spell.castModal.modes.map((m: { pawprints: number }) => m.pawprints)).toEqual([1, 2, 3]);
+    expect(spell.castModal.modes[1]).toMatchObject({ targets: ["artifact"] });
+    expect(spell.complete).toBe(true);
+  });
+
   it("'you may choose the same mode more than once' (rule 700.2d): a repeatable castModal", () => {
     const spell = face(
       "Choose three. You may choose the same mode more than once.\n• Create a 2/2 white Knight creature token with vigilance.\n• Exile target enchantment.\n• You gain 5 life.",

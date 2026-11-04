@@ -14262,6 +14262,26 @@ const modeCounts = (head, n) =>
  * target). `undefined` when the spell isn't modal; `null` when a mode
  * didn't parse. */
 function parseModalSpell(spellLines, ctx) {
+  // "Choose up to five {P} worth of modes. You may choose the same mode more
+  // than once." and its "{P}{P} — …" lines (rule 700.2i — the Seasons).
+  const pawprint = /^Choose up to (one|two|three|four|five|six) \{P\} worth of modes\.( You may choose the same mode more than once\.)?$/.exec(spellLines[0].line);
+  if (pawprint) {
+    const budget = { one: 1, two: 2, three: 3, four: 4, five: 5, six: 6 }[pawprint[1]];
+    const modes = [];
+    for (const l of spellLines.slice(1)) {
+      const m = /^((?:\{P\})+) — (.+)$/.exec(l.line);
+      if (!m) return null;
+      const targets = [];
+      const r = parseEffect(m[2], { targets, tokenFor: ctx.tokenFor, onStack: ctx.onStack, spell: ctx.spell });
+      if (r.effect === null) return null;
+      modes.push({ text: stripReminder(l.raw), pawprints: m[1].length / 3, ...(targets.length ? { targets } : {}), effect: r.effect });
+    }
+    return {
+      castModal: { minModes: 0, maxModes: budget, pawprintBudget: budget, ...(pawprint[2] ? { repeatModes: true } : {}), modes },
+      effect: null,
+      targets: [],
+    };
+  }
   // "Choose three. You may choose the same mode more than once." (rule
   // 700.2d — the Confluences): exactly that many, a mode repeatable.
   const repeated = /^Choose (two|three|four|five)\. You may choose the same mode more than once\.$/.exec(spellLines[0].line);

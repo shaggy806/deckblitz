@@ -10112,6 +10112,9 @@ export interface ModeOption {
    * `modal` / `may` effect (not announced) requires *non*-targeted modes and
    * ignores this. */
   readonly targets?: readonly TargetSpec[];
+  /** "{P}{P} —" (rule 700.2i): how many pawprints this mode counts for against
+   * its `castModal`'s `pawprintBudget`. Not a cost: nothing is paid. */
+  readonly pawprints?: number;
   /**
    * Spree (rule 702.172a): this mode's own additional cost — "+ {1} —" —
    * paid as the spell is cast if the mode is chosen, on top of whatever else

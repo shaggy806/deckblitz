@@ -6936,3 +6936,14 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 - **Do:** Click Bob's Leonin Arbiter, choose "Ignore its effect until end of turn", then cast Demonic Tutor.
 - **Expect:** Two lands tap and you keep priority. The tutor finds Grizzly Bears. The menu doesn't offer the payment a second time this turn.
+
+### Season of the Burrow: choosing up to five pawprints' worth of modes
+
+- **Do:** Cast Season of the Burrow. Click the rabbit mode, then the exile mode twice.
+- **Expect:** The prompt counts "(5/5)", and every mode button is now greyed out. Confirm and pick Grizzly Bears, then Colossal Dreadmaw: one rabbit, both exiled, and Bob draws two cards.
+- **Not a bug:** Confirm is lit with nothing chosen; casting it with no modes is legal.
+
+### Season of the Burrow: four players, a target for each copy of a mode
+
+- **Do:** Cast Season of the Burrow. Click the exile mode twice and Confirm. Pick Bob's creature, then Carol's.
+- **Expect:** Both are exiled, and Bob and Carol each draw a card. Dave and you don't.

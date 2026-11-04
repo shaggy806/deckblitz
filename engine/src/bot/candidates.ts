@@ -165,9 +165,13 @@ function castCandidates(legal: CastSpellLegal, player: PlayerId): Action[] {
     if (most === null) return [];
     const choices = [most];
     const seenModes = new Set([JSON.stringify(most)]);
-    for (const modes of sets ??
+    // Pawprints (rule 700.2i) list every multiset, more than the cap: the
+    // fullest are the ones worth a look, and none at all never is.
+    const tried = modal.pawprintBudget !== undefined ? [...(sets ?? [])].reverse() : sets;
+    for (const modes of tried ??
       modeChoicesBetween(fillable, Math.max(1, modal.minModes), modal.maxModes, repeat, MAX_TARGET_COMBOS * 2)) {
       if (choices.length >= MAX_TARGET_COMBOS) break;
+      if (modes.length === 0) continue;
       const key = JSON.stringify(modes);
       if (seenModes.has(key)) continue;
       seenModes.add(key);

@@ -1232,15 +1232,22 @@ export type LegalAction =
           /** Spree (rule 702.172a): the additional cost this mode adds if
            * it's chosen, for labelling. */
           readonly cost?: string;
+          /** Rule 700.2i: the pawprints this mode counts for. */
+          readonly pawprints?: number;
         }[];
+        /** "Choose up to N {P} worth of modes" (rule 700.2i): N. `modeSets`
+         * lists what that allows, for labelling only. */
+        readonly pawprintBudget?: number;
         /**
          * Spree (rule 702.172a): what the modes chosen cost depends on which
          * they are, so this lists every set of modes this variant can be
          * cast with right now — each payable with its modes' costs added,
          * and each of its modes with a legal target — ascending, smallest
          * sets first. The `modes` a cast sends must be one of them
-         * (`fitModeSet`). Absent for any other modal spell, where any
-         * `minModes..maxModes` of the modes with legal targets will do.
+         * (`fitModeSet`). Pawprints (rule 700.2i) likewise: every multiset of
+         * modes with legal targets within the budget, the empty one first.
+         * Absent for any other modal spell, where any `minModes..maxModes` of
+         * the modes with legal targets will do.
          */
         readonly modeSets?: readonly (readonly number[])[];
         /** "You may choose the same mode more than once" (rule 700.2d): the

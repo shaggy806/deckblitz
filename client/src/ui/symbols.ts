@@ -79,6 +79,8 @@ export function pipClass(sym: string): string {
 export const SYMBOL_GLYPH: Record<string, string> = {
   T: '↻',
   Q: '↺',
+  // The pawprint (rule 107.18): a mode's mark, not mana.
+  P: '🐾',
 }
 
 /** The first coloured mana symbol in a cost string, or `null`. */

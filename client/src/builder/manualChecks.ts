@@ -10414,4 +10414,18 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       you: { bf: ['Mountain*2', 'Forest*3'], hand: ["Ashling's Prerogative", 'Grizzly Bears', 'Llanowar Elves'] },
     }),
   ),
+  preset(
+    "Season of the Burrow: choosing up to five pawprints' worth of modes",
+    board({
+      you: { bf: ['Plains*5'], hand: ['Season of the Burrow'] },
+      opp: [{ bf: ['Grizzly Bears', 'Colossal Dreadmaw'] }],
+    }),
+  ),
+  preset(
+    'Season of the Burrow: four players, a target for each copy of a mode',
+    board({
+      you: { bf: ['Plains*5'], hand: ['Season of the Burrow'] },
+      opp: [{ bf: ['Grizzly Bears'] }, { bf: ['Colossal Dreadmaw'] }, {}],
+    }),
+  ),
 ]

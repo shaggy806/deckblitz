@@ -4055,6 +4055,13 @@ export interface CastModalSpec {
    * its own target slots, which may name the same target or different ones. */
   readonly repeatModes?: true;
   /**
+   * "Choose up to five {P} worth of modes" (rule 700.2i): any number of modes,
+   * none included (the Seasons' ruling), whose `ModeOption.pawprints` add up to
+   * at most this. Goes with `minModes: 0` and `maxModes` this budget; a Season
+   * also has `repeatModes`.
+   */
+  readonly pawprintBudget?: number;
+  /**
    * Escalate (rule 702.120a): "For each mode you choose beyond the first as
    * you cast this spell, you pay an additional [cost]." This mana, once per
    * mode chosen beyond the first — an additional cost, so it's paid on top of

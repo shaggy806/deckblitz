@@ -208,7 +208,7 @@ import { orderTriggers as orderTriggersDecision } from "./decisions/order-trigge
 import { miracleReveal as miracleRevealDecision } from "./decisions/miracle-reveal.js";
 import { mulligan } from "./decisions/mulligan.js";
 import { mulliganCardsOwed } from "./decisions/shared/mulligan-math.js";
-import { modeChoicesBetween, subsetsBetween } from "./decisions/shared/subsets.js";
+import { budgetedModeSets, modeChoicesBetween, subsetsBetween } from "./decisions/shared/subsets.js";
 import { commanderReplacement } from "./decisions/commander-replacement.js";
 import { discard } from "./decisions/discard.js";
 import { sacrifice } from "./decisions/sacrifice.js";
@@ -4109,26 +4109,39 @@ export class Game {
     targetTax?: { readonly within: (ref: TargetRef) => boolean } | null,
   ): Pick<Extract<LegalAction, { kind: "cast-spell" }>, "castModal"> {
     if (def.castModal === null) return {};
-    const mostInASet = modeSets === undefined ? undefined : Math.max(0, ...modeSets.map((set) => set.length));
     const range = this.castModalRange(def.castModal, card, kicked);
+    const modes = def.castModal.modes.map((m) => ({
+      text: m.text,
+      targetSpecs: [...(m.targets ?? [])],
+      targetOptions: this.fillableModeOptions(
+        m.targets ?? [],
+        this.affordableTargetOptions(
+          player,
+          this.targetOptionsFor(m.targets ?? [], player, this.cardSource(def, card)),
+          targetTax,
+        ),
+      ),
+      ...(m.spreeCost !== undefined ? { cost: m.spreeCost } : {}),
+      ...(m.pawprints !== undefined ? { pawprints: m.pawprints } : {}),
+    }));
+    // Rule 700.2i: what the budget allows of the modes with legal targets.
+    const budget = def.castModal.pawprintBudget;
+    const sets =
+      budget === undefined
+        ? modeSets
+        : budgetedModeSets(
+            modes.map((m) => m.pawprints ?? 1),
+            budget,
+            modes.flatMap((m, i) => (m.targetOptions.every((options) => options.length > 0) ? [i] : [])),
+          );
+    const mostInASet = sets === undefined ? undefined : Math.max(0, ...sets.map((set) => set.length));
     return {
       castModal: {
         minModes: range.minModes,
         maxModes: mostInASet ?? affordableMaxModes ?? range.maxModes,
-        modes: def.castModal.modes.map((m) => ({
-          text: m.text,
-          targetSpecs: [...(m.targets ?? [])],
-          targetOptions: this.fillableModeOptions(
-            m.targets ?? [],
-            this.affordableTargetOptions(
-              player,
-              this.targetOptionsFor(m.targets ?? [], player, this.cardSource(def, card)),
-              targetTax,
-            ),
-          ),
-          ...(m.spreeCost !== undefined ? { cost: m.spreeCost } : {}),
-        })),
-        ...(modeSets !== undefined ? { modeSets: modeSets.map((set) => [...set]) } : {}),
+        modes,
+        ...(sets !== undefined ? { modeSets: sets.map((set) => [...set]) } : {}),
+        ...(budget !== undefined ? { pawprintBudget: budget } : {}),
         ...(def.castModal.repeatModes === true ? { repeatModes: true as const } : {}),
       },
     };
@@ -16179,6 +16192,11 @@ export class Game {
     }
     if (modes.some((i) => !Number.isInteger(i) || i < 0 || i >= castModal.modes.length)) {
       return "invalid mode index";
+    }
+    // Rule 700.2i: no more pawprints among the chosen modes than the budget.
+    const budget = castModal.pawprintBudget;
+    if (budget !== undefined && modes.reduce((n, i) => n + (castModal.modes[i].pawprints ?? 1), 0) > budget) {
+      return `choose at most ${budget} pawprints' worth of modes`;
     }
     return null;
   }

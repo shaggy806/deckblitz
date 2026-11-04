@@ -71,6 +71,32 @@ export function modeChoicesBetween<T>(
   return out;
 }
 
+/**
+ * Every multiset of modes whose `costs` add up to at most `budget`, the empty
+ * one first and fewer modes before more: "Choose up to five {P} worth of
+ * modes" (rule 700.2i) with a mode repeatable (700.2d). Only the indices in
+ * `usable` are taken. Every cost must be at least 1, so the walk ends.
+ */
+export function budgetedModeSets(
+  costs: readonly number[],
+  budget: number,
+  usable: readonly number[],
+): number[][] {
+  const out: number[][] = [];
+  const walk = (start: number, left: number, chosen: number[]): void => {
+    out.push([...chosen]);
+    for (let i = start; i < usable.length; i += 1) {
+      const cost = costs[usable[i]];
+      if (cost > left) continue;
+      chosen.push(usable[i]);
+      walk(i, left - cost, chosen);
+      chosen.pop();
+    }
+  };
+  walk(0, budget, []);
+  return out.sort((a, b) => a.length - b.length);
+}
+
 /** Subsets of size `min`..`max`, smallest first, stopping at `limit`. */
 export function subsetsBetween<T>(
   items: readonly T[],
