@@ -2137,6 +2137,22 @@ export type TriggerSpec =
       readonly filter?: CardFilter;
       /** `true`: combat damage only; `false`: noncombat damage only. */
       readonly combat?: boolean;
+      /** Only `N` or more dealt at once (Innocent Bystander's "is dealt 3 or
+       * more damage"): everything this permanent is dealt in one simultaneous
+       * damage event, whatever its sources, and never a total added up over
+       * separate events (the ruling). */
+      readonly atLeast?: number;
+      /** Only excess damage (rule 120.4a), and "that much" is the excess, not
+       * all that was dealt: "whenever a creature an opponent controls is dealt
+       * excess noncombat damage, amass Orcs X, where X is that excess damage"
+       * (Fall of Cair Andros). Sources hitting it at once share the event, so
+       * it's what they dealt together past lethal damage. */
+      readonly excess?: true;
+      /** "Whenever **one or more** creatures … are dealt …" (Magmatic Galleon):
+       * once for the simultaneous event, however many permanents matched,
+       * with `{ triggerValue: true }` the total. Its trigger object is the
+       * first of them to match; don't read it. */
+      readonly batched?: true;
     }
   | {
       /**
@@ -2189,6 +2205,13 @@ export type TriggerSpec =
       /** Only exactly this much damage to that recipient (Ghyrson Starn's
        * "exactly 1 damage"). */
       readonly exactly?: number;
+      /** Only `N` or more dealt by one source at once, never a total added up
+       * over separate events (the Deus of Calamity and Dragonborn Champion
+       * rulings). With a recipient named, what that recipient was dealt: "deals
+       * 6 or more damage to an opponent", once per opponent so dealt (Pain
+       * Magnification's ruling). With none, the whole event's total ("whenever
+       * Spinneret and Spiderling deals 4 or more damage"). */
+      readonly atLeast?: number;
       /** Only damage a *spell* deals to one of its own targets — "an instant
        * or sorcery spell you control deals damage to a permanent or player it
        * targets". A source that isn't a spell on the stack never matches (an

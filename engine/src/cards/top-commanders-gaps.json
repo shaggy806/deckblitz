@@ -1581,7 +1581,10 @@
   "condition:control-distinct-names-count",
   "static:cant-search-library",
   "static:damage-life-floor",
-  "static:protection-doesnt-remove-source"
+  "static:protection-doesnt-remove-source",
+  "trigger:excess-damage-trigger",
+  "trigger:deals-damage-amount-threshold",
+  "trigger:dealt-damage-amount-threshold"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

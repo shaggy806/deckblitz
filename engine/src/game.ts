@@ -26847,7 +26847,7 @@ export class Game {
           ? // Each source's own: a counted stack's tokens share the event.
             event.amount / (event.sources ?? 1)
           : trigger.on === "dealt-damage" && event.type === "damage-dealt"
-          ? event.amount
+          ? trigger.excess === true ? (event.excess ?? 0) : event.amount
           : // A batched attack trigger's value is *how many* matched,
             // which is what "draw that many cards" reads.
             trigger.on === "attacks-batch" && event.type === "attackers-declared"
@@ -26927,7 +26927,7 @@ export class Game {
     // deals damage to "that permanent" peels one token off
     // (`splitTargetRef`), so ten tokens dealt 1 are each dealt 2 more.
     const recipients =
-      (trigger.on === "deals-damage" || trigger.on === "dealt-damage") &&
+      (trigger.on === "deals-damage" || (trigger.on === "dealt-damage" && trigger.batched !== true)) &&
       !dealsDamageOncePerEvent(trigger) &&
       event.type === "damage-dealt" &&
       event.target.kind === "object" &&
@@ -27612,14 +27612,23 @@ export class Game {
             event.target.kind === "object" &&
             damageBatch !== null
           ) {
-            const key = `${id}#${index}@${event.target.object}`;
+            const whole = ability.trigger.batched === true;
+            const key = whole ? `${id}#${index}` : `${id}#${index}@${event.target.object}`;
+            const dealt = ability.trigger.excess === true ? (event.excess ?? 0) : event.amount;
+            // "One or more": a stack's tokens were each dealt it.
+            const amount = whole ? dealt * (this.state.objects[event.target.object]?.stackCount ?? 1) : dealt;
             const owed = damageBatch.dealtDamage.get(key);
             if (owed === undefined) {
-              damageBatch.dealtDamage.set(key, { ability, trigger: base, multiplier });
+              damageBatch.dealtDamage.set(key, {
+                ability,
+                // One firing for several permanents names none of their controllers.
+                trigger: { ...(whole ? withoutTriggerPlayer(base) : base), triggerValue: amount },
+                multiplier,
+              });
             } else {
               owed.trigger = {
                 ...owed.trigger,
-                triggerValue: (owed.trigger.triggerValue ?? 0) + event.amount,
+                triggerValue: (owed.trigger.triggerValue ?? 0) + amount,
               };
             }
             return;
@@ -28637,6 +28646,9 @@ export class Game {
           event.type === "damage-dealt" &&
           event.target.kind === "object" &&
           (spec.combat === undefined || event.combat === spec.combat) &&
+          (spec.excess !== true || (event.excess ?? 0) > 0) &&
+          // Inside a damage batch the amount is settled with the whole event.
+          (spec.atLeast === undefined || this.damageBatch !== null || event.amount >= spec.atLeast) &&
           this.matchesWho(spec.who, event.target.object, self) &&
           this.triggerFilterOk(spec.filter, event.target.object, self)
         );
@@ -29204,6 +29216,15 @@ export class Game {
   ): boolean {
     if (spec.combat !== undefined && event.combat !== spec.combat) return false;
     if (spec.exactly !== undefined && event.amount / (event.sources ?? 1) !== spec.exactly) return false;
+    // A trigger that names no recipient reads the whole event's total, settled
+    // with its damage batch ({@link dealsDamageOncePerEvent}).
+    if (
+      spec.atLeast !== undefined &&
+      (this.damageBatch === null || !dealsDamageOncePerEvent(spec)) &&
+      event.amount / (event.sources ?? 1) < spec.atLeast
+    ) {
+      return false;
+    }
     if (spec.otherOnly === true && event.source === self.id) return false;
     // The source: a spell on the stack or a permanent is read as it is; one
     // that has left the battlefield since (a dies trigger's damage) as it
@@ -48300,6 +48321,7 @@ export class Game {
                 types: s.types,
                 subtypes: s.subtypes,
                 ...(live.zone === "battlefield" ? { sourceZoneChangeCount: live.zoneChangeCount ?? 0 } : {}),
+                ...(live.zone === "stack" ? { spell: true as const } : {}),
               };
             })()
           : undefined;
@@ -48896,14 +48918,22 @@ export class Game {
     if (batch.nextTimeSpent.length > 0) {
       this.state.preventionShields = this.state.preventionShields.filter((s) => !batch.nextTimeSpent.includes(s));
     }
+    // "N or more" reads what the whole event came to, known only now.
+    const enough = (ability: TriggeredAbility, trigger: PendingTrigger): boolean => {
+      const atLeast =
+        ability.trigger.on === "dealt-damage" || ability.trigger.on === "deals-damage"
+          ? ability.trigger.atLeast
+          : undefined;
+      return atLeast === undefined || (trigger.triggerValue ?? 0) >= atLeast;
+    };
     for (const { ability, trigger, multiplier } of batch.dealtDamage.values()) {
-      this.queueTrigger(ability, trigger, multiplier);
+      if (enough(ability, trigger)) this.queueTrigger(ability, trigger, multiplier);
     }
     for (const { ability, trigger, multiplier } of batch.countersRemoved.values()) {
       this.queueTrigger(ability, trigger, multiplier);
     }
     for (const { ability, trigger, multiplier } of batch.dealsDamage.values()) {
-      this.queueTrigger(ability, trigger, multiplier);
+      if (enough(ability, trigger)) this.queueTrigger(ability, trigger, multiplier);
     }
     for (const owed of batch.damageTo.values()) {
       this.queueTrigger(

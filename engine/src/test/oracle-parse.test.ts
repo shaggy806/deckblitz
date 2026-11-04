@@ -13266,6 +13266,38 @@ describe("how one player's state compares with another's", () => {
     });
   });
 
+  it("damage triggers that read the amount, and excess damage", () => {
+    const trigger = (line: string) => read("Creature", line).triggered[0];
+    expect(trigger("Whenever ~ deals 6 or more damage to an opponent, draw a card.").trigger).toEqual({
+      on: "deals-damage",
+      who: "self",
+      to: "opponent",
+      atLeast: 6,
+    });
+    expect(trigger("Whenever ~ deals 4 or more damage, draw a card.").trigger).toEqual({ on: "deals-damage", who: "self", atLeast: 4 });
+    expect(trigger("Whenever a source you control deals 5 or more damage to a player, draw a card.").trigger).toEqual({
+      on: "deals-damage",
+      who: "you-control",
+      to: "player",
+      atLeast: 5,
+    });
+    const single = trigger("Whenever an opponent is dealt 3 or more damage by a single source, that player discards a card.");
+    expect(single.trigger).toEqual({ on: "deals-damage", who: "any", to: "opponent", atLeast: 3 });
+    expect(single.effect).toEqual({ kind: "discard", target: "trigger-player", amount: 1 });
+    expect(trigger("Whenever ~ is dealt 3 or more damage, draw a card.").trigger).toEqual({ on: "dealt-damage", who: "self", atLeast: 3 });
+    const excess = trigger("Whenever a creature an opponent controls is dealt excess noncombat damage, amass Orcs X, where X is that excess damage.");
+    expect(excess.trigger).toEqual({ on: "dealt-damage", who: "opponent", filter: { type: "creature" }, combat: false, excess: true });
+    expect(excess.effect).toEqual({ kind: "amass", amount: { triggerValue: true }, creatureType: "Orc" });
+    expect(trigger("Whenever one or more creatures your opponents control are dealt excess noncombat damage, draw a card.").trigger).toEqual({
+      on: "dealt-damage",
+      who: "opponent",
+      filter: { type: "creature" },
+      combat: false,
+      excess: true,
+      batched: true,
+    });
+  });
+
   it("the number of opponents who control more", () => {
     const face = read("Creature", "At the beginning of your end step, create a number of 1/1 white Soldier creature tokens equal to the number of opponents who control more creatures than you.");
     expect(face.triggered[0].effect.count).toEqual({

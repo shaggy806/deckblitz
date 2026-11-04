@@ -1914,6 +1914,40 @@ export function parseTrigger(clause) {
   }
   if (c === "Whenever ~ deals damage") return [{ on: "deals-damage", who: "self" }];
   if (c === "Whenever ~ is dealt damage") return [{ on: "dealt-damage", who: "self" }];
+  // "N or more" dealt at once, on either side (`atLeast`).
+  if ((m = /^Whenever ~ deals (\d+) or more damage(?: to (an opponent|a player))?$/.exec(c))) {
+    const to = m[2] === undefined ? {} : { to: m[2] === "an opponent" ? "opponent" : "player" };
+    return [{ on: "deals-damage", who: "self", ...to, atLeast: Number(m[1]) }];
+  }
+  if ((m = /^Whenever a source you control deals (\d+) or more damage to (an opponent|a player)$/.exec(c))) {
+    return [{ on: "deals-damage", who: "you-control", to: m[2] === "an opponent" ? "opponent" : "player", atLeast: Number(m[1]) }];
+  }
+  if ((m = /^Whenever an opponent is dealt (\d+) or more damage by a single source$/.exec(c))) {
+    return [{ on: "deals-damage", who: "any", to: "opponent", atLeast: Number(m[1]) }];
+  }
+  if ((m = /^Whenever ~ is dealt (\d+) or more damage$/.exec(c))) {
+    return [{ on: "dealt-damage", who: "self", atLeast: Number(m[1]) }];
+  }
+  // Excess damage (rule 120.4a): "that much" is the excess.
+  if ((m = /^Whenever (a creature|a creature or planeswalker) an opponent controls is dealt excess (noncombat )?damage$/.exec(c))) {
+    return [{
+      on: "dealt-damage",
+      who: "opponent",
+      filter: m[1] === "a creature" ? { type: "creature" } : { typesAnyOf: ["creature", "planeswalker"] },
+      ...(m[2] !== undefined ? { combat: false } : {}),
+      excess: true,
+    }];
+  }
+  if ((m = /^Whenever one or more creatures your opponents control are dealt excess (noncombat )?damage$/.exec(c))) {
+    return [{
+      on: "dealt-damage",
+      who: "opponent",
+      filter: { type: "creature" },
+      ...(m[1] !== undefined ? { combat: false } : {}),
+      excess: true,
+      batched: true,
+    }];
+  }
   if (/^Whenever ~ deals combat damage to a player or battle$/.test(c)) {
     return [{ on: "deals-combat-damage-to-player", who: "self", orBattle: true }];
   }
@@ -3897,6 +3931,11 @@ export function parseSentence(sentence, ctx) {
     const plural = m[1];
     const creatureType = /ves$/.test(plural) ? plural.replace(/ves$/, "f") : plural.replace(/s$/, "");
     return { kind: "amass", amount: Number(m[2]), creatureType };
+  }
+  // "Amass Orcs X, where X is that excess damage" (Fall of Cair Andros): an
+  // excess `dealt-damage` trigger's value is the excess.
+  if ((m = re(`amass ([A-Z][a-z]+) X, where X is that excess damage`).exec(s))) {
+    return { kind: "amass", amount: { triggerValue: true }, creatureType: m[1].replace(/ves$/, "f").replace(/s$/, "") };
   }
 
   // A counter put on a target, then something done to "each creature that
@@ -13810,6 +13849,9 @@ function thatPlayerOf(triggers) {
   // (Manabarbs): who activated the mana ability.
   if (triggers.every((t) => t.on === "tapped-for-mana")) return "trigger-player";
   if (triggers.every((t) => t.on === "deals-damage" && t.to === "player")) return "trigger-player";
+  // "Whenever an opponent is dealt 3 or more damage by a single source, that
+  // player discards a card" (Pain Magnification).
+  if (triggers.every((t) => t.on === "deals-damage" && t.to === "opponent" && t.atLeast !== undefined)) return "trigger-player";
   // "Whenever a land an opponent controls … enters, … that player" (Invader
   // Parasite), "whenever an opponent casts a … spell, … that player" (Dragonlord
   // Kolaghan): who controls the trigger object.

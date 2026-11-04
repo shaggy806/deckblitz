@@ -1072,6 +1072,11 @@ export interface CardFilter {
     readonly subtype?: string;
     readonly type?: CardType;
     readonly controlledBy?: "you" | "opponent";
+    /** The source was a spell as it dealt the damage — Aegar, the Freezing
+     * Flame's "a Giant, Wizard, or **spell** you controlled" (`anyOf` over
+     * the clause for the rest). An ability's damage comes from its source
+     * permanent, so it's never this. */
+    readonly spell?: true;
     /** One source: `"this"`, the permanent applying the filter — "a creature
      * dealt damage by this creature this turn" (Sengir Vampire); `"host"`,
      * the permanent it's attached to — "… by enchanted creature" (Vampiric
@@ -2440,6 +2445,7 @@ export function matchesFilter(
             (source.source === one.id && source.sourceZoneChangeCount === one.zoneChangeCount)) &&
           (by.subtype === undefined || hasSubtype(source.subtypes, by.subtype)) &&
           (by.type === undefined || source.types.includes(by.type)) &&
+          (by.spell !== true || source.spell === true) &&
           (by.controlledBy === undefined ||
             (by.controlledBy === "you" ? source.controller === ctx.you : source.controller !== ctx.you)),
       ))

@@ -328,6 +328,17 @@ hexproof, 702.11e); the printed "can't be the target of …" statics take `notHe
 hexproof (Shanna, Sisay's Legacy against Shadowspear — and Dense Foliage, Fiendslayer Paladin, Mercenary Informer,
 Thrun, marked the same). Proving cards: Volatile Stormdrake, Shanna, Sisay's Legacy.
 
+### Damage triggers that read the amount, and excess damage — built 2026-11-03
+
+The need-keys Phase 2 family `trigger:damage-trigger-extensions`, features only.
+`trigger:deals-damage-amount-threshold` and `trigger:dealt-damage-amount-threshold`: `atLeast` on
+both ends, one simultaneous event and never a total over separate ones. `trigger:excess-damage-trigger`:
+`dealt-damage`'s `excess` (rule 120.4a; `triggerValue` is the excess) and `batched` ("one or more"),
+with `damagedThisTurnBy.spell`. Proving cards: Fall of Cair Andros, Magmatic Galleon, Aegar, the
+Freezing Flame, Deus of Calamity, Pain Magnification, Innocent Bystander, Spinneret and Spiderling.
+Toralf ("any target other than that permanent", and his Hammer) and Overclocked Electromancer (an
+excess amount on the dealing end) aren't this shape alone.
+
 ### A player becoming a target, an ability's targets, the first time by anyone — built 2026-11-03
 
 `trigger:player-becomes-target`, `trigger:becomes-target-by-your-ability`, `trigger:becomes-target-first-time-by-anyone`

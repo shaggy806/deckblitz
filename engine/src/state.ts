@@ -4949,6 +4949,9 @@ export interface DamageSourceRecord {
   readonly controller: PlayerId;
   readonly types: readonly CardType[];
   readonly subtypes: readonly string[];
+  /** It was a spell as it dealt the damage (Aegar, the Freezing Flame's
+   * "a Giant, Wizard, or spell you controlled"). */
+  readonly spell?: true;
 }
 
 /**
