@@ -15525,3 +15525,23 @@ describe("a spell's cost reduced by its controller's creatures' power or toughne
     });
   });
 });
+
+describe("you may … do this only once each turn", () => {
+  it("limits the doing, not the trigger (Ondu Spiritdancer)", () => {
+    const ondu = parseFace(
+      {
+        name: "Ondu Spiritdancer",
+        type_line: "Creature — Kor Cleric",
+        oracle_text: "Whenever an enchantment you control enters, you may create a token that's a copy of it. Do this only once each turn.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(ondu.complete).toBe(true);
+    expect(ondu.triggered[0].trigger).toEqual({ on: "enters-battlefield", who: "you-control", filter: { type: "enchantment" } });
+    expect(ondu.triggered[0].effect).toMatchObject({
+      kind: "may",
+      oncePerTurn: true,
+      effect: { kind: "create-token-copy", of: "trigger-object", count: 1, who: "you" },
+    });
+  });
+});

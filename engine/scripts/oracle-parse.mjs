@@ -6612,6 +6612,10 @@ export function parseSentence(sentence, ctx) {
     return { kind: "sacrifice", who: "active-player", filter: { type: "creature", controlledContinuously: true }, count: 1 };
   }
   // Followed Footsteps, Mechanized Production: read as the trigger resolves.
+  // What the trigger names: Ondu Spiritdancer's enchantment.
+  if (ctx.it === "trigger-object" && ctx.targets.length === 0 && /^create a token that's a copy of it\.$/i.test(s)) {
+    return { kind: "create-token-copy", of: "trigger-object", count: 1, who: "you" };
+  }
   if (/^create a token that's a copy of enchanted (?:creature|artifact)\.$/i.test(s)) {
     return { kind: "create-token-copy", of: "enchanted", count: 1, who: "you" };
   }
@@ -9372,6 +9376,7 @@ export function parseEffect(text, outer) {
       oneEachLookAt(sentences, i) ??
       splitLookAt(sentences, i) ??
       totalManaValueLookAt(sentences, i) ??
+      mayOnceEachTurnAt(sentences, i, ctx) ??
       revealUntilAt(sentences, i, ctx) ??
       opponentDividesFindsAt(sentences, i, ctx) ??
       distinctSetAt(sentences, i) ??
@@ -12264,6 +12269,14 @@ function anyOpponentMayAt(sentences, i, parsed) {
     };
   }
   return null;
+}
+
+/** "You may … Do this only once each turn.": the doing is limited, not the
+ * trigger (`may`'s `oncePerTurn` — Ondu Spiritdancer, Leonardo, the Balance). */
+function mayOnceEachTurnAt(sentences, i, ctx) {
+  if (!/^do this only once each turn\.$/i.test(sentences[i + 1] ?? "")) return null;
+  const may = parseSentence(sentences[i], ctx);
+  return may?.kind === "may" ? { effect: { ...may, oncePerTurn: true }, used: 2 } : null;
 }
 
 function revealUntilAt(sentences, i, ctx) {

@@ -5,6 +5,7 @@
   "effect:batched-dies-total-power",
   "static:blocking-subtype-condition",
   "effect:created-token-reference",
+  "stat:do-this-once-each-turn",
   "static:look-at-top-card-conditional",
   "effect:target-filter-relative-to-controller",
   "cost:cost-reduction-greatest-opponent-count",
