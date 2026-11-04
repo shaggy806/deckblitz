@@ -8,6 +8,7 @@
   "replacement:would-lose-life",
   "effect:exile-any-number-until-leaves",
   "effect:exile-until-leaves-per-opponent",
+  "effect:each-player-may-feasibility",
   "trigger:linked-exile-each-upkeep-return-one",
   "replacement:dies-to-library-top",
   "replacement:discard-to-library-replacement",

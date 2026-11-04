@@ -9434,7 +9434,9 @@ export type EffectSpec =
        * the follow-ups to players in a scope: Kynaios and Tiro's "then each
        * **opponent** who didn't draws a card" is `who: "each-player"`,
        * `resultsFor: "each-opponent"`. A player never asked (nothing they
-       * could take) didn't.
+       * could take — an `effect` they couldn't do in full, as `mayBeDone`
+       * reads it in their name: Charismatic Conqueror's "they may tap that
+       * permanent. If they don't, …" with it tapped or gone) didn't.
        *
        * An `effect` that is a `search-library` is a search for everyone
        * together (rule 101.4 — Tempt with Discovery's ruling): each is asked
@@ -11302,6 +11304,9 @@ export interface EffectApi {
   ): readonly { readonly object: ObjectId; readonly stint: number }[];
   /** Whether `object` is still on the battlefield as the same object (400.7). */
   stillOnBattlefield(object: ObjectId, stint: number): boolean;
+  /** Whether `target` is tapped as this resolves; `undefined` when it isn't a
+   * permanent on the battlefield (`mayBeDone`'s "may tap"). */
+  tappedNow(target: TargetRef): boolean | undefined;
   /** This context with `player` as its controller — see `as-player`. */
   asPlayer(player: PlayerId): ResolutionContext;
   /** This context with `card`, which the resolution found rather than
@@ -13477,6 +13482,11 @@ function applyEachPlayerMay(
     toAsk = toAsk.slice(1);
     // "That player may search" where they can't: not theirs to choose.
     if (eachPlayerMaySearchForbidden(spec, player, ctx)) continue;
+    // Nor what they couldn't do in full, as a `may` of their own isn't
+    // offered: "they may tap that permanent. If they don't, …" with it
+    // already tapped or gone counts as their not doing it (rule 701.26a;
+    // Charismatic Conqueror's ruling).
+    if (spec.effect !== undefined && !mayBeDone(spec.effect, ctx.asPlayer(player))) continue;
     const parked = ctx.parkedCount();
     const pendingBefore = ctx.decisionPending();
     ctx.askEachPlayerMay(player, spec, deferred);
@@ -15612,6 +15622,18 @@ export function mayBeDone(effect: EffectSpec, ctx: ResolutionContext): boolean {
   // "You may pay {1} and exile it": not once it has gone from where the
   // trigger found it (Timothar, Baron of Bats's ruling).
   if (action.kind === "exile" && action.target === "trigger-object" && ctx.triggerObjectLost === true) return false;
+  // "They may tap that permanent": only untapped permanents can be tapped
+  // (rule 701.26a), so not one already tapped or gone — Charismatic
+  // Conqueror's ruling. Untapping likewise (701.26b). A tap that also holds
+  // the permanent down is more than the tap, and stays offered.
+  if (action.kind === "tap" && action.doesntUntapNext !== true) {
+    const target = resolveEffectTarget(action.target, ctx);
+    return target !== undefined && ctx.tappedNow(target) === false;
+  }
+  if (action.kind === "untap") {
+    const target = resolveEffectTarget(action.target, ctx);
+    return target !== undefined && ctx.tappedNow(target) === true;
+  }
   // "You may move a counter": not when none could move (rule 122.5) — from
   // a permanent with none (of that kind) left, or with either end gone.
   if (action.kind === "move-counters" && !isMoveChooser(action.from) && !isMoveChooser(action.to)) {

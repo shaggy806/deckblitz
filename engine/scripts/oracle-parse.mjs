@@ -2177,6 +2177,14 @@ export function parseTrigger(clause) {
       },
     ];
   }
+  // "Whenever an artifact or creature an opponent controls enters untapped"
+  // (Charismatic Conqueror), as Idyllic Grange reads its own: the filter's
+  // read as it enters.
+  if ((m = /^Whenever an? (.+?) an opponent controls enters untapped$/.exec(c))) {
+    const filter = parseTypePhrase(m[1]);
+    if (filter === null) return null;
+    return [{ on: "enters-battlefield", who: "any", filter: { ...filter, controlledBy: "opponent", tapped: false } }];
+  }
   if (
     (m =
       /^Whenever (a|an|another) (.+?)(?: (you control|an opponent controls))? (enters|dies|attacks|leaves the battlefield|is put into a graveyard from the battlefield)$/.exec(
@@ -8067,6 +8075,26 @@ export function parseEffect(text, outer) {
   // Mythos of Snapdax's two sentences: the second rewrites who chooses.
   if (text === SNAPDAX_LINE) return { effect: SNAPDAX_EFFECT, todo: [], hints: [] };
 
+  // "They may tap that permanent. If they don't, you create …" (Charismatic
+  // Conqueror): the opponent it entered under, and a `may` they can't take when
+  // it's already tapped or gone counts as their not taking it.
+  const mayTap = /^They may tap that permanent\. If they don't, (.+)$/.exec(text);
+  if (mayTap !== null && ctx.it === "trigger-object" && ctx.targets.length === 0) {
+    const otherwise = parseEffect(`${mayTap[1][0].toUpperCase()}${mayTap[1].slice(1)}`, outer);
+    if (otherwise.effect !== null && otherwise.todo.length === 0) {
+      return {
+        effect: {
+          kind: "each-player-may",
+          who: "trigger-player",
+          prompt: "Tap that permanent?",
+          effect: { kind: "tap", target: "trigger-object" },
+          ifDidnt: otherwise.effect,
+        },
+        todo: [],
+        hints: [],
+      };
+    }
+  }
   // "Choose target nonland permanent an opponent controls. Until your next
   // turn, it can't attack or block, and its activated abilities can't be
   // activated" (Linvala, Shield of Sea Gate): "it" is that target.

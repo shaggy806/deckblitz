@@ -15140,6 +15140,33 @@ describe("mana that adds counters to what it casts", () => {
     expect(attendant.activated[0].effect.spellEntersWith).toEqual({ spell: { type: "creature", notSubtypes: ["Human"] }, counter: "+1/+1", amount: 1 });
   });
 
+  it("Charismatic Conqueror", () => {
+    const face = parseFace(
+      {
+        name: "Charismatic Conqueror",
+        type_line: "Creature — Vampire Soldier",
+        mana_cost: "{1}{W}",
+        colors: ["W"],
+        oracle_text:
+          "Vigilance\nWhenever an artifact or creature an opponent controls enters untapped, they may tap that permanent. If they don't, you create a 1/1 white Vampire creature token with lifelink.",
+      },
+      { tokenFor: () => "Lifelink Vampire Token" },
+    );
+    expect(face.complete).toBe(true);
+    expect(face.triggered[0].trigger).toEqual({
+      on: "enters-battlefield",
+      who: "any",
+      filter: { typesAnyOf: ["artifact", "creature"], controlledBy: "opponent", tapped: false },
+    });
+    expect(face.triggered[0].effect).toEqual({
+      kind: "each-player-may",
+      who: "trigger-player",
+      prompt: "Tap that permanent?",
+      effect: { kind: "tap", target: "trigger-object" },
+      ifDidnt: { kind: "create-token", token: "Lifelink Vampire Token", count: 1 },
+    });
+  });
+
   it("Commander's Insight", () => {
     const face = parseFace({
       name: "Commander's Insight",

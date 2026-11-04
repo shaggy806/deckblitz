@@ -32901,6 +32901,10 @@ export class Game {
             return parts.includes(id) ? parts : [...parts, id];
           })
           .map((object) => ({ object, stint: this.state.objects[object].zoneChangeCount ?? 0 })),
+      tappedNow: (target) => {
+        const found = target.kind === "object" ? this.state.objects[target.object] : undefined;
+        return found?.zone === "battlefield" ? found.tapped : undefined;
+      },
       asPlayer: (player) =>
         this.makeResolutionContext(
           source,

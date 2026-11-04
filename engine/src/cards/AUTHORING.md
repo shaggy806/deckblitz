@@ -1318,7 +1318,12 @@ nothing exiled — so `otherwise` happens. Where a no does nothing at all, one
 named player's "may" is `each-player-may`: `who: { controllerOfTarget }` ("its
 controller / that player may search", Arcum Dagsson, as it last existed) or
 `"trigger-controller"` ("its controller may", Farrel's Mantle, whose Aura may be
-someone else's, and who chooses the ability's targets).
+someone else's, and who chooses the ability's targets). Its `effect` isn't
+offered to a player who couldn't do it (`mayBeDone`, as for a plain `may`) and
+counts as their not doing it: "they may tap that permanent. If they don't, you
+create …" is `who: "trigger-player"` (the opponent it entered under), `ifDidnt`
+the token, and the token comes with it already tapped or gone (Charismatic
+Conqueror, rule 701.26a).
 Not yet: "**if** any player pays {2}, [effect]" (Rhystic Scrying), or one asked per object (Cleansing's
 "for each land … unless any player pays 1 life"). The scaffolder reads the
 "[effect] unless any player pays {N}." and "Unless any player pays {N}, [effect]."
