@@ -24,6 +24,22 @@ import { parseEffect, parseFace, parseTrigger, parseCost, parseSentence, parseTy
 // @ts-expect-error — as above.
 import { checkPool } from "../../scripts/oracle-parse-check.mjs";
 
+describe("a target filter read against its object's controller", () => {
+  it("Drown in the Loch's modes", () => {
+    const parsed = parseFace({
+      name: "Test Card",
+      type_line: "Instant",
+      oracle_text:
+        "Choose one —\n• Counter target spell with mana value less than or equal to the number of cards in its controller's graveyard.\n• Destroy target creature with mana value less than or equal to the number of cards in its controller's graveyard.",
+      mana_cost: "{U}{B}",
+      colors: [],
+    });
+    const manaValue = { op: "lte", n: { amount: { graveyardSize: "each" }, forItsController: true } };
+    expect(parsed.castModal.modes[0].targets).toEqual([{ kind: "spell", filter: { manaValue } }]);
+    expect(parsed.castModal.modes[1].targets).toEqual([{ kind: "permanent", whose: "any", filter: { type: "creature", manaValue } }]);
+  });
+});
+
 describe("a cost reduced by the most any one opponent controls", () => {
   it("Cavern-Hoard Dragon's line, and its Treasures for that player's artifacts", () => {
     const parsed = parseFace(

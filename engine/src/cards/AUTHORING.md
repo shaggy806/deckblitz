@@ -3295,7 +3295,10 @@ like `keyword` does.
 #### A number read off the game (`DynamicOperand`)
 
 `n` needn't be printed. Two object shapes read it when the filter is
-evaluated:
+evaluated (with `forItsController: true`, an `{ amount }`'s `"each"` is the
+matched object's controller: Drown in the Loch's "mana value less than or equal
+to the number of cards in its controller's graveyard" is `manaValue: { op:
+"lte", n: { amount: { graveyardSize: "each" }, forItsController: true } }`):
 
 - `n: { amount: EffectAmount }` — any `EffectAmount` (§6), evaluated in the
   context of whatever applies the filter: its source, controller, `{X}`,

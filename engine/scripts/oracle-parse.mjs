@@ -1015,6 +1015,9 @@ const TARGET_PHRASES = [
   ["target artifact you don't control", "artifact-an-opponent-controls"],
   ["target creature you control other than enchanted creature", { kind: "permanent", whose: "you", filter: { type: "creature", hostOfSource: false } }],
   ["target creature other than enchanted creature", { kind: "permanent", whose: "any", filter: { type: "creature", hostOfSource: false } }],
+  // Drown in the Loch: the target's own controller's graveyard.
+  ["target spell with mana value less than or equal to the number of cards in its controller's graveyard", { kind: "spell", filter: { manaValue: { op: "lte", n: { amount: { graveyardSize: "each" }, forItsController: true } } } }],
+  ["target creature with mana value less than or equal to the number of cards in its controller's graveyard", { kind: "permanent", whose: "any", filter: { type: "creature", manaValue: { op: "lte", n: { amount: { graveyardSize: "each" }, forItsController: true } } } }],
   // Topple: one comparison over every creature on the battlefield.
   ["target creature with the greatest power among creatures on the battlefield", { kind: "permanent", whose: "any", filter: GREATEST_POWER_HERE }],
   ["target creature you control", "creature-you-control"],
@@ -5097,7 +5100,7 @@ export function parseSentence(sentence, ctx) {
   if (re("~ becomes saddled until end of turn").test(s)) return { kind: "become-saddled", target: "source" };
   if ((m = re(`counter (${TARGET})`).exec(s)) && !/ unless /i.test(m[1])) {
     const t = targetOf(m[1]);
-    if (typeof t !== "string" || !/(spell|triggered-ability)$/.test(t)) return null;
+    if (typeof t === "string" ? !/(spell|triggered-ability)$/.test(t) : t?.kind !== "spell") return null;
     return { kind: "counter", target: slot(m[1]) };
   }
   if ((m = /^return (target .+? card from your graveyard) to your hand\.$/i.exec(s))) {

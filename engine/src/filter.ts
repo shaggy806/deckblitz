@@ -97,9 +97,14 @@ export const ODD_OR_EVEN = ["odd", "even"] as const;
  *   control **with equal or lesser power**", beside the creature you chose.
  *   Not an amount, since an amount can't be below 0 (rule 107.1b) and a power
  *   can. With nothing chosen, the comparison fails closed.
+ * - `{ amount, forItsController: true }` reads the amount's `"each"` as the
+ *   controller of the very object being matched — Drown in the Loch's "target
+ *   spell with mana value less than or equal to the number of cards in **its
+ *   controller's** graveyard" is `manaValue: { op: "lte", n: { amount: {
+ *   graveyardSize: "each" }, forItsController: true } }`.
  */
 export type DynamicOperand =
-  | { readonly amount: EffectAmount }
+  | { readonly amount: EffectAmount; readonly forItsController?: true }
   | { readonly chosenThisWay: "power" }
   | { readonly own: "power" | "toughness" | "basePower" | "baseToughness" | "manaValue" };
 
@@ -1435,8 +1440,9 @@ export interface FilterContext {
   readonly snapshot?: LastKnownInfo;
   /** Evaluates a `NumCompare`'s `{ amount }` operand in the context of
    * whatever is applying the filter (its source, controller, triggering
-   * object, {X}, targets). Absent ⇒ such a comparison fails closed. */
-  readonly amount?: (amount: EffectAmount) => number;
+   * object, {X}, targets). Absent ⇒ such a comparison fails closed. `each` is
+   * the player an amount's `"each"` means (`forItsController`). */
+  readonly amount?: (amount: EffectAmount, each?: PlayerId) => number;
   /** For `hasAbilities` on a spell: `amount` as each `grantsToSpells` static reads
    * it, from its own source (Abaddon the Despoiler's "mana value X or less").
    * Absent ⇒ such a grant doesn't reach the spell here. */
@@ -2317,7 +2323,10 @@ export function matchesFilter(
   const manaValueNow = (): number =>
     live !== undefined ? manaValueOfObject(registry, live, ctx.castX) : lki!.manaValue;
   const dynamic = (operand: DynamicOperand): number | undefined => {
-    if ("amount" in operand) return ctx.amount?.(operand.amount);
+    if ("amount" in operand) {
+      if (operand.forItsController !== true) return ctx.amount?.(operand.amount);
+      return ctx.amount?.(operand.amount, live !== undefined ? live.controller : lki!.controller);
+    }
     if ("chosenThisWay" in operand) {
       if (layered !== undefined) return undefined;
       const powers = thisWayEntries(state, "chosen").flatMap((entry) =>

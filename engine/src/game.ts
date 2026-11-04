@@ -4142,9 +4142,9 @@ export class Game {
     readonly lastKnownRefs?: LastKnownRefs;
     /** As it stands, a negative power included, for a comparison. */
     readonly signed?: true;
-  }): (amount: EffectAmount) => number {
+  }): (amount: EffectAmount, each?: PlayerId) => number {
     let ctx: ResolutionContext | undefined;
-    return (amount) => {
+    return (amount, each) => {
       ctx ??= this.makeResolutionContext(
         env.source,
         env.controller,
@@ -4157,7 +4157,7 @@ export class Game {
         env.targetZones ?? [],
         env.lastKnownRefs,
       );
-      return env.signed === true ? signedAmountValue(amount, ctx) : amountValue(amount, ctx);
+      return env.signed === true ? signedAmountValue(amount, ctx, each) : amountValue(amount, ctx, each);
     };
   }
 
@@ -14440,7 +14440,7 @@ export class Game {
           you: chooser,
           source: cloneId,
           x: clone.xValue ?? 0,
-          amount: (amount) => amountValue(amount, ctx),
+          amount: (amount, each) => amountValue(amount, ctx, each),
         })
       );
     });

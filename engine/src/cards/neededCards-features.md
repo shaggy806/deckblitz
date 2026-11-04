@@ -5045,6 +5045,8 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 
 **A turn's triggered mana ability (2026-11-04).** `effect:turn-scoped-mana-trigger`: a `delayed-trigger` with `whenever: { on: "tapped-for-mana" }` and an `add-mana` effect is a triggered mana ability (rule 605.1b): `Game.tappedForManaExtras` reads it with the permanents', and the watchers leave it alone. High Tide, Bubbling Muck, Pyre Rhymer with Molten Tide.
 
+**A target filter read against its object's controller (2026-11-04).** `effect:target-filter-relative-to-controller`: a `DynamicOperand`'s `forItsController`, the amount's `"each"` read as the matched object's controller. Drown in the Loch.
+
 **A cost reduced by the most any one opponent controls (2026-11-04).** `cost:cost-reduction-greatest-opponent-count`: the `{ greatestOpponentCount: CardFilter }` `CostReductionAmount`. Cavern-Hoard Dragon.
 
 **A static prevention's follow-up on its recipient (2026-11-04).** `replacement:prevention-follow-up-on-recipient`: a `would-deal-damage` `prevent`'s `then` reads the damage's recipient as `"trigger-recipient"`. Vigor.
