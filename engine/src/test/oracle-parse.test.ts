@@ -15714,3 +15714,22 @@ describe("Mirror Box's lines", () => {
     });
   });
 });
+
+describe("Leyline of the Guildpact's lines", () => {
+  it("reads all colors over a filter, and every basic land type", () => {
+    const face = parseFace({
+      name: "Test Card",
+      type_line: "Enchantment",
+      mana_cost: "{G/W}{G/U}{B/G}{R/G}",
+      oracle_text:
+        "If this card is in your opening hand, you may begin the game with it on the battlefield.\nEach nonland permanent you control is all colors.\nLands you control are every basic land type in addition to their other types.",
+    });
+    expect(face.complete).toBe(true);
+    expect(face.beginsOnBattlefield).toBe(true);
+    expect(face.static[0]).toMatchObject({
+      affects: { scope: "filter", filter: { notTypes: ["land"], controlledBy: "you" } },
+      setColors: ["W", "U", "B", "R", "G"],
+    });
+    expect(face.static[1].addSubtypes).toEqual(["Plains", "Island", "Swamp", "Mountain", "Forest"]);
+  });
+});

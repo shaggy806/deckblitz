@@ -18034,6 +18034,17 @@ function parseStatic(line, text) {
   if (line === "If you would proliferate, proliferate twice instead.") {
     return { affects: { scope: "self" }, replacement: { event: "would-proliferate", times: 2 }, text };
   }
+  // Leyline of the Guildpact (rule 613.1e); Prismatic Omen (rule 305.7).
+  if (line === "Each nonland permanent you control is all colors.") {
+    return { affects: { scope: "filter", filter: { notTypes: ["land"], controlledBy: "you" } }, setColors: ["W", "U", "B", "R", "G"], text };
+  }
+  if (line === "Lands you control are every basic land type in addition to their other types.") {
+    return {
+      affects: { scope: "filter", filter: { type: "land", controlledBy: "you" } },
+      addSubtypes: ["Plains", "Island", "Swamp", "Mountain", "Forest"],
+      text,
+    };
+  }
   // Mirror Box: the rule off, and a count keyed on each affected creature's
   // own name (rule 201.2a).
   if (line === 'The "legend rule" doesn\'t apply to permanents you control.') {
