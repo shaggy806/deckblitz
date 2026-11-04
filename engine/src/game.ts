@@ -4706,8 +4706,20 @@ export class Game {
         costOption,
         this.castRouteSacrifice(player, card, face ?? 0, via, graveyardGrant),
       );
-      const xPlan =
+      const manaXPlan =
         parseManaCost(cost).x > 0 ? this.xPlanFor(player, card, def, cost, face ?? 0, pricedAt) : null;
+      // "{X}{B}, pay X life" (Bond of Agony): no more than the life there is to
+      // pay, whatever the lands can make (the ruling; rule 119.4).
+      const xPlan =
+        manaXPlan !== null && def.additionalCost?.payLifeX === true
+          ? {
+              ...manaXPlan,
+              maxX: Math.min(
+                manaXPlan.maxX,
+                playerCantLoseLife(this.state, player) ? 0 : Math.max(0, this.state.players[player].life),
+              ),
+            }
+          : manaXPlan;
       // "Sacrifice X creatures" (Eliminate the Competition): an X the mana
       // cost needn't have, as many as there are to sacrifice once the mana is
       // paid.

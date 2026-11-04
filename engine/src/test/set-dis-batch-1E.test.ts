@@ -154,6 +154,15 @@ describe("Bond of Agony", () => {
     expect(life(game, B)).toBe(17);
     expect(game.state.players["carol" as PlayerId].life).toBe(17);
   });
+
+  it("offers no X above the life there is to pay, however much mana there is", () => {
+    const { game } = table();
+    lands(game, "Swamp", 8);
+    toHand(game, "Bond of Agony");
+    game.state.players[A].life = 3;
+    const bond = game.legalActions(A).find((a) => a.kind === "cast-spell" && a.cardName === "Bond of Agony");
+    expect(bond?.kind === "cast-spell" ? bond.xCost?.maxX : undefined).toBe(3);
+  });
 });
 
 describe("Avatar of Discord", () => {
