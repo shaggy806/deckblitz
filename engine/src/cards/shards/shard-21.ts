@@ -692,6 +692,7 @@ import _poolStormbind from "../pool/stormbind.js";
 import _poolStormcallerOfKeranos from "../pool/stormcaller-of-keranos.js";
 import _poolStormplainDetainment from "../pool/stormplain-detainment.js";
 import _poolStrengthOfLunacy from "../pool/strength-of-lunacy.js";
+import _poolStrengthOfTheTajuru from "../pool/strength-of-the-tajuru.js";
 import _poolStrongarmTactics from "../pool/strongarm-tactics.js";
 import _poolStruggleForProjectPurity from "../pool/struggle-for-project-purity.js";
 import _poolStudentOfOjutai from "../pool/student-of-ojutai.js";
@@ -1565,6 +1566,7 @@ const shard: CardShard = {
     _poolStormcallerOfKeranos,
     _poolStormplainDetainment,
     _poolStrengthOfLunacy,
+    _poolStrengthOfTheTajuru,
     _poolStrongarmTactics,
     _poolStruggleForProjectPurity,
     _poolStudentOfOjutai,

@@ -716,6 +716,7 @@ import _poolScionOfDarkness from "../pool/scion-of-darkness.js";
 import _poolScorchTheFields from "../pool/scorch-the-fields.js";
 import _poolScornfulAetherLich from "../pool/scornful-aether-lich.js";
 import _poolScrapMastery from "../pool/scrap-mastery.js";
+import _poolScrollRack from "../pool/scroll-rack.js";
 import _poolScrounge from "../pool/scrounge.js";
 import _poolSeaGateLoremaster from "../pool/sea-gate-loremaster.js";
 import _poolSeaSerpent from "../pool/sea-serpent.js";
@@ -1690,6 +1691,7 @@ const shard: CardShard = {
     _poolScorchTheFields,
     _poolScornfulAetherLich,
     _poolScrapMastery,
+    _poolScrollRack,
     _poolScrounge,
     _poolSeaGateLoremaster,
     _poolSeaSerpent,

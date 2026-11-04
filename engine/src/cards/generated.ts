@@ -257,6 +257,7 @@ import _poolAesiTyrantOfGyreStrait from "./pool/aesi-tyrant-of-gyre-strait.js";
 import _poolAesthirGlider from "./pool/aesthir-glider.js";
 import _poolAetherAdept from "./pool/aether-adept.js";
 import _poolAetherBarrier from "./pool/aether-barrier.js";
+import _poolAetherBurst from "./pool/aether-burst.js";
 import _poolAetherChanneler from "./pool/aether-channeler.js";
 import _poolAetherCharge from "./pool/aether-charge.js";
 import _poolAetherChaser from "./pool/aether-chaser.js";
@@ -4490,6 +4491,7 @@ import _poolCombustionMan from "./pool/combustion-man.js";
 import _poolCombustionTechnique from "./pool/combustion-technique.js";
 import _poolComeBackWrong from "./pool/come-back-wrong.js";
 import _poolCometCrawler from "./pool/comet-crawler.js";
+import _poolCometStorm from "./pool/comet-storm.js";
 import _poolComeuppance from "./pool/comeuppance.js";
 import _poolComfortingCounsel from "./pool/comforting-counsel.js";
 import _poolComingInHot from "./pool/coming-in-hot.js";
@@ -20934,6 +20936,7 @@ import _poolScrollOfGriselbrand from "./pool/scroll-of-griselbrand.js";
 import _poolScrollOfIsildur from "./pool/scroll-of-isildur.js";
 import _poolScrollOfOrigins from "./pool/scroll-of-origins.js";
 import _poolScrollOfTheMasters from "./pool/scroll-of-the-masters.js";
+import _poolScrollRack from "./pool/scroll-rack.js";
 import _poolScrollThief from "./pool/scroll-thief.js";
 import _poolScrollboost from "./pool/scrollboost.js";
 import _poolScrollshift from "./pool/scrollshift.js";
@@ -23645,6 +23648,7 @@ import _poolStrengthOfSolidarity from "./pool/strength-of-solidarity.js";
 import _poolStrengthOfTheCoalition from "./pool/strength-of-the-coalition.js";
 import _poolStrengthOfTheHarvest from "./pool/strength-of-the-harvest.js";
 import _poolStrengthOfThePack from "./pool/strength-of-the-pack.js";
+import _poolStrengthOfTheTajuru from "./pool/strength-of-the-tajuru.js";
 import _poolStrengthOfUnity from "./pool/strength-of-unity.js";
 import _poolStrengthOfWill from "./pool/strength-of-will.js";
 import _poolStrengthTestingHammer from "./pool/strength-testing-hammer.js";
@@ -29544,6 +29548,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAesthirGlider,
   _poolAetherAdept,
   _poolAetherBarrier,
+  _poolAetherBurst,
   _poolAetherChanneler,
   _poolAetherCharge,
   _poolAetherChaser,
@@ -33777,6 +33782,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCombustionTechnique,
   _poolComeBackWrong,
   _poolCometCrawler,
+  _poolCometStorm,
   _poolComeuppance,
   _poolComfortingCounsel,
   _poolComingInHot,
@@ -50221,6 +50227,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolScrollOfIsildur,
   _poolScrollOfOrigins,
   _poolScrollOfTheMasters,
+  _poolScrollRack,
   _poolScrollThief,
   _poolScrollboost,
   _poolScrollshift,
@@ -52932,6 +52939,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolStrengthOfTheCoalition,
   _poolStrengthOfTheHarvest,
   _poolStrengthOfThePack,
+  _poolStrengthOfTheTajuru,
   _poolStrengthOfUnity,
   _poolStrengthOfWill,
   _poolStrengthTestingHammer,
@@ -58844,6 +58852,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/aesthir-glider": _poolAesthirGlider,
   "pool/aether-adept": _poolAetherAdept,
   "pool/aether-barrier": _poolAetherBarrier,
+  "pool/aether-burst": _poolAetherBurst,
   "pool/aether-channeler": _poolAetherChanneler,
   "pool/aether-charge": _poolAetherCharge,
   "pool/aether-chaser": _poolAetherChaser,
@@ -63077,6 +63086,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/combustion-technique": _poolCombustionTechnique,
   "pool/come-back-wrong": _poolComeBackWrong,
   "pool/comet-crawler": _poolCometCrawler,
+  "pool/comet-storm": _poolCometStorm,
   "pool/comeuppance": _poolComeuppance,
   "pool/comforting-counsel": _poolComfortingCounsel,
   "pool/coming-in-hot": _poolComingInHot,
@@ -79521,6 +79531,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/scroll-of-isildur": _poolScrollOfIsildur,
   "pool/scroll-of-origins": _poolScrollOfOrigins,
   "pool/scroll-of-the-masters": _poolScrollOfTheMasters,
+  "pool/scroll-rack": _poolScrollRack,
   "pool/scroll-thief": _poolScrollThief,
   "pool/scrollboost": _poolScrollboost,
   "pool/scrollshift": _poolScrollshift,
@@ -82232,6 +82243,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/strength-of-the-coalition": _poolStrengthOfTheCoalition,
   "pool/strength-of-the-harvest": _poolStrengthOfTheHarvest,
   "pool/strength-of-the-pack": _poolStrengthOfThePack,
+  "pool/strength-of-the-tajuru": _poolStrengthOfTheTajuru,
   "pool/strength-of-unity": _poolStrengthOfUnity,
   "pool/strength-of-will": _poolStrengthOfWill,
   "pool/strength-testing-hammer": _poolStrengthTestingHammer,

@@ -12,6 +12,7 @@ import _poolAdaptiveSporesinger from "../pool/adaptive-sporesinger.js";
 import _poolAdrianaCaptainOfTheGuard from "../pool/adriana-captain-of-the-guard.js";
 import _poolAegisAutomaton from "../pool/aegis-automaton.js";
 import _poolAegisOfTheHeavens from "../pool/aegis-of-the-heavens.js";
+import _poolAetherBurst from "../pool/aether-burst.js";
 import _poolAetherSpellbomb from "../pool/aether-spellbomb.js";
 import _poolAetherfluxReservoir from "../pool/aetherflux-reservoir.js";
 import _poolAimHigh from "../pool/aim-high.js";
@@ -933,6 +934,7 @@ const shard: CardShard = {
     _poolAdrianaCaptainOfTheGuard,
     _poolAegisAutomaton,
     _poolAegisOfTheHeavens,
+    _poolAetherBurst,
     _poolAetherSpellbomb,
     _poolAetherfluxReservoir,
     _poolAimHigh,

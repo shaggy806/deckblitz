@@ -141,6 +141,7 @@ import _poolCloudshift from "../pool/cloudshift.js";
 import _poolCoastalHornclaw from "../pool/coastal-hornclaw.js";
 import _poolCollectiveBlessing from "../pool/collective-blessing.js";
 import _poolColossalGraveReaver from "../pool/colossal-grave-reaver.js";
+import _poolCometStorm from "../pool/comet-storm.js";
 import _poolConclaveNaturalists from "../pool/conclave-naturalists.js";
 import _poolConduitPylons from "../pool/conduit-pylons.js";
 import _poolConjurersBauble from "../pool/conjurers-bauble.js";
@@ -1061,6 +1062,7 @@ const shard: CardShard = {
     _poolCoastalHornclaw,
     _poolCollectiveBlessing,
     _poolColossalGraveReaver,
+    _poolCometStorm,
     _poolConclaveNaturalists,
     _poolConduitPylons,
     _poolConjurersBauble,
