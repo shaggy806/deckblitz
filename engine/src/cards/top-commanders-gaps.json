@@ -6,6 +6,7 @@
   "static:look-at-top-card-conditional",
   "effect:target-filter-relative-to-controller",
   "cost:cost-reduction-greatest-opponent-count",
+  "decision:spell-target-count-amount",
   "effect:exile-from-hand-any-number-swap",
   "replacement:prevention-follow-up-on-recipient",
   "condition:own-turn-count",

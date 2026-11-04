@@ -494,6 +494,7 @@ import {
   groupBounds,
   groupPowerExceeded,
   groupReadsAmount,
+  groupReadsCastAmount,
   groupReadsX,
   otherSlotConflict,
   otherThanSlots,
@@ -4696,7 +4697,7 @@ export class Game {
       if (leastX === null) continue;
       const xFloor: number = leastX;
       const xFilter =
-        def.castModal === null && this.effectiveTargetSpecs(def, undefined, kicked, overload).some(targetSpecReadsX);
+        def.castModal === null && this.effectiveTargetSpecs(def, undefined, kicked, overload, player).some(targetSpecReadsX);
       let perX: readonly number[] | null = null;
       // A sacrifice of any number that lowers the cost (Dargo): how many may
       // be announced, and the filter.
@@ -4807,7 +4808,7 @@ export class Game {
           evoke ?? null) === null,
       );
       if (spreeSets !== null && spreeSets.length === 0) continue;
-      const specs = this.effectiveTargetSpecs(def, undefined, kicked, overload);
+      const specs = this.effectiveTargetSpecs(def, undefined, kicked, overload, player);
       // "Spells your opponents cast that target this cost {2} more": the
       // targets its caster can't afford aren't offered. Once per X when what
       // may be targeted depends on X.
@@ -8069,7 +8070,7 @@ export class Game {
     const modes = def.castModal !== null ? [...(action.modes ?? [])].sort((a, b) => a - b) : undefined;
     const kicked = action.kicked === true ? (action.kickCount ?? true) : false;
     const x = Math.max(0, Math.floor(action.xValue ?? 0));
-    const specs = specsAtX(this.effectiveTargetSpecs(def, modes, kicked, action.overload === true), x);
+    const specs = specsAtX(this.effectiveTargetSpecs(def, modes, kicked, action.overload === true, action.player), x);
     return this.whyTargetsInvalid(
       specs,
       normalizeTargets(action.targets),
@@ -14890,7 +14891,7 @@ export class Game {
         taxOf.set(ref.object, this.targetingCost(player, [ref]).generic + this.ownTargetTax(def, player, card, [ref]));
       }
     };
-    look(this.effectiveTargetSpecs(def, undefined, kicked, overload));
+    look(this.effectiveTargetSpecs(def, undefined, kicked, overload, player));
     for (const mode of def.castModal?.modes ?? []) look(mode.targets ?? []);
     const taxes = [...taxOf].flatMap(([object, generic]) => (generic > 0 ? [{ object, generic }] : []));
     const playerTaxes = [...taxOfPlayer.values()].filter((generic) => generic > 0);
@@ -15213,7 +15214,7 @@ export class Game {
           ? this.targetsEarnOwnReduction(def, player, cardId, targets)
           : !this.targetCostReductionOff &&
             (this.targetCostReductionAssumed ||
-              this.targetOptionsFor(this.effectiveTargetSpecs(def, undefined), player, this.cardSource(def, cardId, xValue)).some((slot) =>
+              this.targetOptionsFor(this.effectiveTargetSpecs(def, undefined, false, false, player), player, this.cardSource(def, cardId, xValue)).some((slot) =>
                 this.targetsEarnOwnReduction(def, player, cardId, slot),
               ));
       if (earned) {
@@ -15582,7 +15583,7 @@ export class Game {
     const source = this.cardSource(def, card);
     const copies: Record<string, number> = {};
     const boundsOf = (modes: readonly number[] | undefined) => {
-      const declared = this.effectiveTargetSpecs(def, modes, kicked, overload);
+      const declared = this.effectiveTargetSpecs(def, modes, kicked, overload, player);
       const offered = this.targetOptionsFor(declared, player, source);
       // An "any number of" group spans as many slots as it has candidates,
       // up to its `max`: its first `min` required (Reckless Spite's "two
@@ -15801,7 +15802,7 @@ export class Game {
           times = 0;
         } else if (
           !this.targetCostReductionAssumed &&
-          !this.targetOptionsFor(this.effectiveTargetSpecs(def, undefined), player, this.cardSource(def, cardId, xValue))
+          !this.targetOptionsFor(this.effectiveTargetSpecs(def, undefined, false, false, player), player, this.cardSource(def, cardId, xValue))
             .flat()
             .some((ref) => ref.kind === "object" && this.modificationKeyedTo(mod, source, ref.object))
         ) {
@@ -16577,12 +16578,41 @@ export class Game {
   private effectiveTargetSpecs(
     def: CardDefinition,
     modes: readonly number[] | undefined,
-    kicked: boolean | number = false,
-    overload = false,
+    kicked: boolean | number,
+    overload: boolean,
+    caster: PlayerId,
   ): readonly TargetSpec[] {
     // Overload (rule 702.126a): "you can't choose targets for it". Cleave
     // (702.148a) chooses the targets of its rewritten text instead.
     if (overload) return def.overload?.targets ?? [];
+    return this.spellSpecsWithAmounts(this.declaredTargetSpecs(def, modes, kicked), def, kicked, caster);
+  }
+
+  /** A spell's "any number of target …" group's amounts read for this cast:
+   * a target count "for each time this spell was kicked" (Comet Storm) or
+   * "as you cast this spell" (Aether Burst) is fixed as its targets are
+   * chosen, the kicks already announced (rules 601.2b–c). Its `"x"` waits for
+   * the X (`specsAtX`). */
+  private spellSpecsWithAmounts(
+    specs: readonly TargetSpec[],
+    def: CardDefinition,
+    kicked: boolean | number,
+    caster: PlayerId,
+  ): readonly TargetSpec[] {
+    if (!groupReadsCastAmount(specs)) return specs;
+    const kicks = typeof kicked !== "number" ? (kicked ? 1 : 0) : def.kicker?.second === undefined ? kicked : kicked === 3 ? 2 : 1;
+    const ctx = {
+      ...this.makeResolutionContext(asObjectId("spell-being-cast"), caster, [], 0),
+      sourceTimesKicked: () => kicks,
+    };
+    return specsWithAmounts(specs, (amount) => (amount === "x" ? undefined : amountValue(amount, ctx)));
+  }
+
+  private declaredTargetSpecs(
+    def: CardDefinition,
+    modes: readonly number[] | undefined,
+    kicked: boolean | number,
+  ): readonly TargetSpec[] {
     // Splice (rule 702.47d): the spliced cards' targets after the spell's own.
     const splice = this.activeSplice;
     if (splice !== null && splice.spellName === def.name && def.castModal === null && !def.fuse) {
@@ -17453,7 +17483,7 @@ export class Game {
     // A non-modal spell's target legality is checked up front; a modal spell's
     // is checked per chosen mode (only once `modes` is known — at enumeration
     // time the driver hasn't picked yet).
-    const castSpecs = specsAtX(this.effectiveTargetSpecs(def, modes, kicked, overload), xValue);
+    const castSpecs = specsAtX(this.effectiveTargetSpecs(def, modes, kicked, overload, player), xValue);
     const castOptions = castSpecs.map((spec) =>
       legalTargets(this.state, this.registry, spec, player, this.cardSource(def, cardId, xValue)),
     );
@@ -19285,7 +19315,7 @@ export class Game {
       def.castModal !== null ? [...(modes ?? [])].sort((a, b) => a - b) : undefined;
     // X is announced before targets are chosen (rule 601.2b–c): a group tied
     // to X, and a filter reading it, are judged at the X chosen.
-    const targetSpecs = specsAtX(this.effectiveTargetSpecs(def, sortedModes, kicked, overload), chosenX);
+    const targetSpecs = specsAtX(this.effectiveTargetSpecs(def, sortedModes, kicked, overload, player), chosenX);
     // An additional sacrifice cost the driver didn't name (only one candidate,
     // or a driver that doesn't care): take the first eligible permanent.
     const sacrificeCandidates = this.additionalCostSacrifices(
@@ -26608,7 +26638,7 @@ export class Game {
    * kicked ones (Tear Asunder), a modal spell's chosen modes', in order
    * (rule 700.2). */
   private spellTargetSpecs(object: GameObject): readonly TargetSpec[] {
-    return this.castTargetSpecs(rulesTextName(object), object);
+    return this.castTargetSpecs(rulesTextName(object), object, object.controller);
   }
 
   /** The target specs a spell named `cardName` was cast with, given the
@@ -26618,13 +26648,17 @@ export class Game {
     cast: {
       readonly chosenModes?: readonly number[];
       readonly kicked?: boolean;
+      readonly timesKicked?: number;
+      readonly kickedWith?: number;
       readonly overloaded?: boolean;
       readonly xValue?: number | null;
       readonly spliced?: readonly string[];
     },
+    caster: PlayerId,
   ): readonly TargetSpec[] {
     const def = this.registry.get(cardName);
     const chosenModes = def.castModal !== null ? cast.chosenModes : undefined;
+    const kicked = cast.kicked === true ? (cast.kickedWith ?? cast.timesKicked ?? true) : false;
     // Splice (rule 702.47d): the spliced cards' targets after the spell's own.
     if (cast.spliced !== undefined && cast.spliced.length > 0 && chosenModes === undefined) {
       // Its own specs alone: the cast that spliced them may still be under way.
@@ -26632,7 +26666,7 @@ export class Game {
       this.activeSplice = null;
       try {
         return [
-          ...specsAtX(this.effectiveTargetSpecs(def, undefined, cast.kicked === true, cast.overloaded === true), cast.xValue ?? 0),
+          ...specsAtX(this.effectiveTargetSpecs(def, undefined, kicked, cast.overloaded === true, caster), cast.xValue ?? 0),
           ...cast.spliced.flatMap((name) => this.registry.get(name).targets),
         ];
       } finally {
@@ -26642,7 +26676,7 @@ export class Game {
     return chosenModes !== undefined
       ? concatModeSpecs(chosenModes.map((mi) => def.castModal?.modes[mi]?.targets ?? []))
       : specsAtX(
-          this.effectiveTargetSpecs(def, undefined, cast.kicked === true, cast.overloaded === true),
+          this.effectiveTargetSpecs(def, undefined, kicked, cast.overloaded === true, caster),
           cast.xValue ?? 0,
         );
   }
@@ -41106,7 +41140,7 @@ export class Game {
     const auto = new Set(spell.autoTargetSlots ?? []);
     const slots = targets.flatMap((t, i) => (t !== undefined && !auto.has(i) ? [i] : []));
     if (slots.length === 0) return null;
-    const specs = this.castTargetSpecs(spell.cardName, spell);
+    const specs = this.castTargetSpecs(spell.cardName, spell, controller);
     if (specs.length === 0) return null;
     const source = this.cardSource(this.registry.get(spell.cardName), original);
     for (const i of slots) {
@@ -42228,7 +42262,7 @@ export class Game {
       ref?.kind === "object" &&
       matchesFilter(this.state, this.registry, ref.object, filter, { you: player, source: cardId });
     if (targets !== undefined) return targets.some(fits);
-    const specs = this.effectiveTargetSpecs(def, modes, kicked, overload);
+    const specs = this.effectiveTargetSpecs(def, modes, kicked, overload, player);
     return this.targetOptionsFor(specs, player, this.cardSource(def, cardId)).some((slot) => slot.some(fits));
   }
 

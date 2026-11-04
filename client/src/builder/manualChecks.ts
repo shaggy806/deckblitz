@@ -11079,6 +11079,26 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'Comet Storm: one more target for each kick',
+    board({
+      you: { bf: ['Mountain*6'], hand: ['Comet Storm'] },
+      opp: { bf: ['Grizzly Bears', 'Hill Giant'] },
+    }),
+  ),
+  preset(
+    'Comet Storm: unkicked it takes one target',
+    board({
+      you: { bf: ['Mountain*3'], hand: ['Comet Storm'] },
+    }),
+  ),
+  preset(
+    'Comet Storm: kicks at a four-player table',
+    board({
+      you: { bf: ['Mountain*6', 'Grizzly Bears'], hand: ['Comet Storm'] },
+      opp: [{}, {}, {}],
+    }),
+  ),
+  preset(
     'Tekuthal: proliferate twice instead',
     board({
       you: {

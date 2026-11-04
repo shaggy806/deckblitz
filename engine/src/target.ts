@@ -431,6 +431,12 @@ export type TargetSpec =
        * {@link specsAtX}. Only on a spell or activated ability whose group
        * is its only slot (Shigeki, Jukai Visionary's channel).
        *
+       * On a spell another {@link EffectAmount} is read as it's cast, the
+       * kicks already announced (rules 601.2b–c): "choose another target for
+       * each time this spell was kicked" (Comet Storm: `min` and `max` one
+       * plus `{ timesKicked: "source" }`), "up to X target creatures, where X
+       * is … as you cast this spell" (Aether Burst).
+       *
        * On a triggered or activated ability any {@link EffectAmount} will do
        * — "up to X target artifacts, where X is the number of Vampires you
        * control" (Midnight Arsonist), "up to that many" (a reflexive
@@ -652,6 +658,17 @@ export function groupReadsAmount(specs: readonly TargetSpec[]): boolean {
     typeof spec === "object" &&
     spec.kind === "any-number" &&
     [spec.max, spec.min, spec.maxTotalManaValue].some((a) => a !== undefined && typeof a !== "number")
+  );
+}
+
+/** Does this list's group have a bound or a total that's an amount other
+ * than a spell's `"x"`, which a spell reads as it's cast? */
+export function groupReadsCastAmount(specs: readonly TargetSpec[]): boolean {
+  const spec = specs[anyNumberSlot(specs)];
+  return (
+    typeof spec === "object" &&
+    spec.kind === "any-number" &&
+    [spec.max, spec.min, spec.maxTotalManaValue].some((a) => a !== undefined && typeof a !== "number" && a !== "x")
   );
 }
 

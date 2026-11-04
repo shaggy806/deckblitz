@@ -7398,6 +7398,23 @@ These boards start before the first turn (the builder's `openingHands`), with th
 - **Do:** Activate Scroll Rack. Choose Grizzly Bears to exile.
 - **Expect:** The Island comes to your hand and nothing more is asked. Your library's top card is now Grizzly Bears.
 
+## A target for each kick (2026-11-04)
+
+### Comet Storm: one more target for each kick
+
+- **Do:** Cast Comet Storm kicked twice, with X of 2. Target Bob, then Grizzly Bears, then Hill Giant.
+- **Expect:** You must pick exactly three targets, all different. Bob goes to 38, the Bears die and the Giant takes 2 and lives.
+
+### Comet Storm: unkicked it takes one target
+
+- **Do:** Cast Comet Storm unkicked, with X of 1, at Bob.
+- **Expect:** It goes on the stack after one target. Bob goes to 39.
+
+### Comet Storm: kicks at a four-player table
+
+- **Do:** Cast Comet Storm kicked three times, with X of 1. Target Bob, Carol, Dave and Grizzly Bears.
+- **Expect:** Four targets are asked for. Each opponent loses 1 life and the Bears are left damaged.
+
 ## Proliferating twice (2026-11-04)
 
 ### Tekuthal: proliferate twice instead

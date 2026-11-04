@@ -3497,7 +3497,11 @@ control" is `targets: [{ kind: "any-number", of: "creature-you-control" }]`.
 `max: N` caps it — Magma Opus's four damage among at most four targets,
 Baldin, Century Herdmaster's "up to one hundred target creatures" — and
 `min: N` floors it (Inferno Titan's "one, two, or three targets" is `min: 1,
-max: 3`). `maxTotalPower: N` is "with total power N or less" (Reunion of the
+max: 3`). On a spell an amount is read as it's cast, the kicks announced:
+Comet Storm's "choose any target, then choose another target for each time
+this spell was kicked" is `min` and `max` both `{ sum: [{ timesKicked: "source"
+}, 1] }`, Aether Burst's "up to X … as you cast this spell" a `max`.
+`maxTotalPower: N` is "with total power N or less" (Reunion of the
 House): the members' powers where they're targeted add up to at most N, as
 they're chosen (the offer's choosers narrow by it through `TargetFacts`) and
 again as it resolves, when a total gone over makes every member illegal (its
