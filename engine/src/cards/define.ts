@@ -2470,6 +2470,12 @@ export interface StaticAbility {
    * how many times this permanent's controller may. Two of them are still
    * twice (its ruling). */
   readonly loyaltyActivationsEachTurn?: 2;
+  /** "Creatures you control can boast **twice** during each of your turns
+   * rather than once" (Birgi, God of Storytelling, rule 702.142b): how many
+   * times each boast ability of its controller's creatures may be activated
+   * on that player's own turn. They must still have attacked; two of them are
+   * still twice. */
+  readonly boastsEachOfYourTurns?: 2;
   /** "You may cast spells as though they had flash" (Heliod, the Warped
    * Eclipse) — every spell (`true`) or ones matching a filter ("creature
    * spells"), for this permanent's controller. */

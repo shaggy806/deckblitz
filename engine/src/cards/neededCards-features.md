@@ -4981,3 +4981,5 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 **Every graveyard onto the battlefield (2026-11-04).** `effect:mass-graveyard-to-battlefield` was already `return-from-graveyard`'s `all-graveyards` and `each-graveyard`, so no engine change: Rise of the Dark Realms, Roar of Reclamation, Myr Servitor (`hasName`, an intervening `source-zone`). `test/mass-graveyard-to-battlefield.test.ts`.
 
 **Different names as an intervening if (2026-11-04).** `condition:distinct-names-condition` was already `controls`' `distinctNames`, so no engine change: Field of the Dead, Liliana's Contract. `test/distinct-names-condition.test.ts`.
+
+**Boast twice (2026-11-04).** `static:boast-twice`: the static's `boastsEachOfYourTurns: 2` (Birgi, God of Storytelling // Harnfel, Horn of Bounty), read per boast ability on its controller's own turn. `test/boast-twice.test.ts`.

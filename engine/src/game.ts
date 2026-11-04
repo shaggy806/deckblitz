@@ -11462,7 +11462,7 @@ export class Game {
         // "Attacks for the first time each turn": not declared earlier this
         // turn, in an earlier combat.
         const first = object.attackedThisTurn !== true;
-        // Boast (702.135) asks whether this creature attacked this turn —
+        // Boast (702.142a) asks whether this creature attacked this turn —
         // recorded here, and reset as each turn begins.
         object.attackedThisTurn = true;
         if (object.attackedOnTurns?.includes(this.state.turn.number) !== true) {
@@ -20969,6 +20969,15 @@ export class Game {
       : (source.abilitiesUsedThisTurn ?? []).includes(abilityIndex);
   }
 
+  /** How many times `source` has used that ability this turn, a granted one
+   * included — boast's limit can be more than once. */
+  private timesUsedThisTurn(source: GameObject, abilityIndex: number): number {
+    const key = this.onceEachKey(source, abilityIndex);
+    return key !== undefined
+      ? (source.grantedUsedThisTurn ?? []).filter((used) => used === key).length
+      : this.activationsThisTurn(source, abilityIndex);
+  }
+
   /** Records one activation of an ability with a per-turn limit. */
   private markUsedThisTurn(source: GameObject, abilityIndex: number): void {
     const key = this.onceEachKey(source, abilityIndex);
@@ -21887,16 +21896,17 @@ export class Game {
     ) {
       return `${def.name}'s ability's activation condition isn't met`;
     }
-    // Boast (rule 702.135) — only if this creature attacked this turn.
+    // Boast (rule 702.142a) — only if this creature attacked this turn.
     if (ability.boast === true && source.attackedThisTurn !== true) {
       return `${def.name} hasn't attacked this turn`;
     }
     // "Activate only once each turn" (rule 602.5g) — applies to any ability,
     // not just a loyalty one, so it is checked before the loyalty block.
-    // Boast implies it.
+    // Boast implies it (twice with Birgi's static).
     if (
-      (ability.oncePerTurn === true || ability.boast === true) &&
-      this.usedThisTurn(source, abilityIndex)
+      ability.boast === true
+        ? this.timesUsedThisTurn(source, abilityIndex) >= this.boastsAllowed(source)
+        : ability.oncePerTurn === true && this.usedThisTurn(source, abilityIndex)
     ) {
       return `${def.name}'s ability has already been activated this turn`;
     }
@@ -24258,15 +24268,26 @@ export class Game {
   /** How many times `player` may activate loyalty abilities of a permanent
    * this turn: once (rule 606.3), or twice with Oath of Teferi's static. */
   private loyaltyActivationsAllowed(player: PlayerId): number {
-    const twice = this.state.zones.shared.battlefield.some((id) => {
+    return this.controlsActiveStatic(player, (ability) => ability.loyaltyActivationsEachTurn !== undefined) ? 2 : 1;
+  }
+
+  /** How many times each boast ability of `source` may be activated this turn:
+   * once (rule 702.142a), or twice on its controller's own turn with Birgi's
+   * static. */
+  private boastsAllowed(source: GameObject): number {
+    if (activePlayerOf(this.state) !== source.controller) return 1;
+    return this.controlsActiveStatic(source.controller, (ability) => ability.boastsEachOfYourTurns !== undefined) ? 2 : 1;
+  }
+
+  /** Whether a permanent `player` controls has a static ability `which`,
+   * applying now. */
+  private controlsActiveStatic(player: PlayerId, which: (ability: StaticAbility) => boolean): boolean {
+    return this.state.zones.shared.battlefield.some((id) => {
       const source = this.state.objects[id];
       if (source === undefined || source.controller !== player) return false;
       if (hasLostAbilities(this.state, this.registry, source)) return false;
-      return this.registry.get(rulesTextName(source)).static.some(
-        (ability) => ability.loyaltyActivationsEachTurn !== undefined && this.staticActive(source, ability),
-      );
+      return this.registry.get(rulesTextName(source)).static.some((ability) => which(ability) && this.staticActive(source, ability));
     });
-    return twice ? 2 : 1;
   }
 
   /**

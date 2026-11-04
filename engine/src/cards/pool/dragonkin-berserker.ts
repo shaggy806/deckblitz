@@ -16,7 +16,7 @@ export default defineCard({
   activated: [
     {
       cost: { mana: "{4}{R}", tap: false },
-      // `boast` covers both halves of rule 702.135: attacked this turn, and
+      // `boast` covers both halves of rule 702.142a: attacked this turn, and
       // only once each turn.
       boast: true,
       // The card's own cost-reduction clause, which on this card only ever

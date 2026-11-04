@@ -7210,3 +7210,18 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 - **Do:** Click the Forest enchanted with Market Festival, and take {G}, {W} and {U}.
 - **Expect:** A popup with one offer per combination, fifteen in all and no {W}{U} beside {U}{W}. The pool ends with {G}{W}{U}.
+
+### Birgi: a creature boasts twice
+
+- **Do:** Attack Bob with Dragonkin Berserker. After combat damage, click the Berserker and take its boast, three times over.
+- **Expect:** The boast makes a Dragon each of the first two times. The third click opens nothing, with five Mountains still untapped.
+
+### Birgi: the mana lasts through the turn
+
+- **Do:** Cast Opt, pass until both resolve, then move to your second main phase.
+- **Expect:** {R} appears in your pool when Birgi's trigger resolves, and it's still there in your second main phase.
+
+### Harnfel: the back face
+
+- **Do:** Cast the card from your hand as Harnfel. Activate it, discarding Grizzly Bears.
+- **Expect:** A choice of the two faces, Harnfel costing {4}{R}. The top two cards of your library are exiled and can be played this turn.

@@ -1722,7 +1722,8 @@
   "effect:mana-any-combination-choice",
   "effect:mana-any-combination-choice",
   "effect:mass-graveyard-to-battlefield",
-  "condition:distinct-names-condition"
+  "condition:distinct-names-condition",
+  "static:boast-twice"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

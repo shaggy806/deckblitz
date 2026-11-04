@@ -4240,9 +4240,10 @@ carries; several compound. An "any colour" unit becomes `multiplier` of
   abilities and spells too. Without it, a self-referential ability like an
   untap could target itself and become a repeatable no-net-cost loop —
   needed-cards P17 caught exactly this in the fuzzer.
-- `boast: true` — **Boast** (rule 702.135 — Dragonkin Berserker): activatable
+- `boast: true` — **Boast** (rule 702.142 — Dragonkin Berserker): activatable
   only if this creature attacked this turn (`GameObject.attackedThisTurn`),
-  and only once each turn. Implies `oncePerTurn`.
+  and only once each turn (twice on your own turn with a static's
+  `boastsEachOfYourTurns: 2` — Birgi, God of Storytelling). Implies `oncePerTurn`.
 - `oncePerTurn: true` — "Activate only once each turn" (rule 602.5g — Steel
   Hellkite). Recorded per ability index on `GameObject.abilitiesUsedThisTurn`,
   so a permanent with two such abilities limits each separately, and reset in
@@ -5664,7 +5665,8 @@ is "can't attack a player it has already attacked this turn" (Port Razer), by th
 - Casting and activation rules on a static: `activateAsThoughHaste: CardFilter`
   ("as though those creatures had haste" — Thousand-Year Elixir, rule 302.6: {T}
   and {Q} costs only, mana abilities too); `loyaltyActivationsEachTurn: 2` (Oath
-  of Teferi, rule 606.3); `prohibits.onlyLoyaltyAbilities` (The Immortal Sun),
+  of Teferi, rule 606.3); `boastsEachOfYourTurns: 2` (Birgi, God of Storytelling,
+  rule 702.142b); `prohibits.onlyLoyaltyAbilities` (The Immortal Sun),
   `prohibits.exceptLoyaltyAbilities` (Overwhelming Splendor) and
   `prohibits.castOnlyAsSorcery` ("each opponent can cast spells only any time
   they could cast a sorcery" — Teferi, Time Raveler). On an activated ability,

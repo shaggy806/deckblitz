@@ -7,7 +7,7 @@
  *   be answered from last-known information — the card is already in a
  *   graveyard by the time the trigger is checked, and `moveObject` clears
  *   counters on every zone change.
- * - **Boast** (702.135), which is "attacked this turn" *and* "only once each
+ * - **Boast** (702.142a), which is "attacked this turn" *and* "only once each
  *   turn" together.
  */
 
@@ -189,7 +189,7 @@ describe("boast", () => {
       (id) => game.state.objects[id].cardName === "Dragon Token",
     );
     expect(dragons.length).toBe(1);
-    // Once each turn (702.135).
+    // Once each turn (702.142a).
     expect(boastAction(game)).toBeUndefined();
   });
 });

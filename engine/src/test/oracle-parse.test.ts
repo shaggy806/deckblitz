@@ -335,6 +335,7 @@ describe("when a spell may be cast or an ability activated", () => {
     });
     expect(staticOf("You may activate abilities of creatures you control as though those creatures had haste.")?.activateAsThoughHaste).toEqual({ type: "creature" });
     expect(staticOf("You may activate the loyalty abilities of planeswalkers you control twice each turn rather than only once.")?.loyaltyActivationsEachTurn).toBe(2);
+    expect(staticOf("Creatures you control can boast twice during each of your turns rather than once.")?.boastsEachOfYourTurns).toBe(2);
     expect(staticOf("Players can't activate planeswalkers' loyalty abilities.")?.prohibits).toEqual({
       who: "each-player",
       abilitiesOf: { type: "planeswalker" },

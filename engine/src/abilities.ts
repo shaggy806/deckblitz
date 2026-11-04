@@ -800,7 +800,7 @@ export interface ActivatedAbility {
    * entered, the ability costs less by that permanent's mana cost (702.193b,
    * rule 118.7 — see `Game.poweredUp`). */
   readonly powerUp?: boolean;
-  /** Boast (rule 702.135 — Dragonkin Berserker): activatable only if this
+  /** Boast (rule 702.142a — Dragonkin Berserker): activatable only if this
    * creature attacked this turn, and only once each turn. Implies
    * `oncePerTurn`; the "attacked this turn" half reads
    * `GameObject.attackedThisTurn`. */

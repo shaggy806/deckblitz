@@ -16553,6 +16553,7 @@ function parseStatic(line, text) {
     "Each opponent can cast spells only any time they could cast a sorcery.": { prohibits: { who: "opponents", castOnlyAsSorcery: true } },
     "You may activate abilities of creatures you control as though those creatures had haste.": { activateAsThoughHaste: { type: "creature" } },
     "You may activate the loyalty abilities of planeswalkers you control twice each turn rather than only once.": { loyaltyActivationsEachTurn: 2 },
+    "Creatures you control can boast twice during each of your turns rather than once.": { boastsEachOfYourTurns: 2 },
     "Players can't activate planeswalkers' loyalty abilities.": {
       prohibits: { who: "each-player", abilitiesOf: { type: "planeswalker" }, onlyLoyaltyAbilities: true },
     },

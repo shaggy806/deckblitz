@@ -436,7 +436,7 @@ export interface GameObject {
     readonly indices: readonly number[];
   };
   /** True once this permanent has been declared as an attacker this turn —
-   * the "attacked this turn" half of Boast (rule 702.135), and the
+   * the "attacked this turn" half of Boast (rule 702.142a), and the
    * `attackedThisTurn` filter clause. Reset as each turn begins, and by any
    * change of zone (the permanent that comes back never attacked). */
   attackedThisTurn?: boolean;

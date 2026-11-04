@@ -10815,4 +10815,16 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     'Market Festival: two more mana, each its own pick',
     board({ you: { bf: ['Forest', { name: 'Market Festival', attach: 'Forest' }] } }),
   ),
+  preset(
+    'Birgi: a creature boasts twice',
+    board({ you: { bf: ['Birgi, God of Storytelling', 'Dragonkin Berserker', 'Mountain*15'] } }),
+  ),
+  preset(
+    'Birgi: the mana lasts through the turn',
+    board({ you: { bf: ['Birgi, God of Storytelling', 'Island'], hand: ['Opt'] } }),
+  ),
+  preset(
+    'Harnfel: the back face',
+    board({ you: { bf: ['Mountain*5'], hand: ['Birgi, God of Storytelling', 'Grizzly Bears'] } }),
+  ),
 ]
