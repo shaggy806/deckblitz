@@ -343,8 +343,18 @@ ability"; `trigger:becomes-target-spell-on-stack` (Surrak) and `-of-ability-targ
 `replacement:tap-for-mana-produces-color-instead`: `StaticAbility.landManaInstead` (per land kind, whoever taps or
 only you) and the `player-effect` field `landManaInstead` (until end of turn), applied where a land's {T} mana
 ability makes mana, in the auto-payer's options and in the offered activations. Proving cards: Deep Water, Reality
-Twist, Infernal Darkness. Harvest Mage's "one mana of a color of your choice instead of any other type and amount"
-still needs the choice and the amount.
+Twist, Infernal Darkness.
+
+`replacement:land-mana-type-replacement` (2026-11-03) finished it: an entry's `one` ("and amount" — Contamination),
+`colorsOnly` ("any other color" — Hall of Gemstone), `produces: "any-color"` (the tapper's pick — Pulse of Llanowar,
+Harvest Mage), and a player effect's own entry (every player's nonbasic lands — Pale Moon). A land its own cost
+sacrificed is read as it last was, and "could produce" reads the replacement (rule 106.7).
+
+### Two mana of different colors — built 2026-11-03
+
+`effect:add-mana-two-different-colors`: `add-mana`'s `{ oneOf, different }` — an offer per pairing by hand, an option
+per pairing to the payer (which now takes the option covering the most of what's still needed), a mode per pairing
+on the stack. Proving cards: Firemind Vessel, Interplanar Beacon, Open the Omenpaths.
 
 ### Unspent mana as steps and phases end: another type, every player's kept, life lost — built 2026-11-03
 

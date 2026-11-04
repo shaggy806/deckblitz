@@ -27,7 +27,7 @@ import type {
 import type { AggregateOf, AggregateSpec, CardFilter, NumCompare } from "../filter.js";
 import type { CardNameChoice } from "../card-names.js";
 import type { CompanionCondition } from "../companion.js";
-import type { Color, ManaFromSpec, ManaType, SpendAs } from "../mana.js";
+import type { Color, LandManaInstead, ManaFromSpec, ManaType, SpendAs } from "../mana.js";
 import type { ReplacementSpec } from "../replacements.js";
 import type { DelayedTriggerTiming, HeldPlayerCounter, PlayerCounterKind, TurnHistoryKind, ZoneType } from "../state.js";
 import type { TargetSpec } from "../target.js";
@@ -1911,17 +1911,6 @@ export interface CombatTax {
   readonly perCounter?: string;
   readonly covers?: "you" | "you-and-planeswalkers" | "planeswalkers";
   readonly attacker?: CardFilter;
-}
-
-/** One entry of `StaticAbility.landManaInstead`: a land kind and the mana
- * type it produces when tapped for mana. */
-export interface LandManaInstead {
-  /** Which lands — "Plains" (Reality Twist); absent for any land. */
-  readonly filter?: CardFilter;
-  readonly produces: ManaType;
-  /** Whose tap it changes: this permanent's controller's (`"you"` — "if you
-   * tap a land for mana") or anyone's (`"any"` — "if a land is tapped"). */
-  readonly tapper: "you" | "any";
 }
 
 export interface StaticAbility {

@@ -22,7 +22,7 @@ import type {
 } from "./cards.js";
 import type { AggregateSpec, CardFilter, ShareReference, SharedTypes } from "./filter.js";
 import type { CardNameAim, CardNameFilter } from "./card-names.js";
-import { manaOriginMatches, type Color, type ManaCastFrom, type ManaFromSpec, type ManaOrigin, type ManaSpendPurpose, type ManaType, type SpendAs } from "./mana.js";
+import { differentManaSplits, manaOriginMatches, type Color, type LandManaInstead, type ManaCastFrom, type ManaFromSpec, type ManaOrigin, type ManaSpendPurpose, type ManaType, type SpendAs } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import { EVERY_CREATURE_TYPE, EVERY_LAND_TYPE, isCreatureType, isLandType } from "./subtypes.js";
 import { sameVoteChoice } from "./events.js";
@@ -2862,7 +2862,18 @@ export type EffectSpec =
          * permanent tapped for mana made (Roxanne, Starfall Savant; Mana
          * Flare). Anywhere else it makes nothing. */
         | "produced"
-        | { readonly oneOf: readonly ManaType[]; readonly same?: true }
+        | {
+            readonly oneOf: readonly ManaType[];
+            readonly same?: true;
+            /** "Two mana of different colors" (Firemind Vessel): `amount`
+             * units in groups of this many, each group a different one of the
+             * listed types — 1 there, and 2 with `amount: 4` for "two mana of
+             * any one color and two mana of any other color" (Open the
+             * Omenpaths). `amount` is a number then. Enumerated as `same`
+             * is: an option per pairing when paying, an offer per pairing by
+             * hand, a mode per pairing on the stack (rule 608.2d). */
+            readonly different?: number;
+          }
         /**
          * One of each listed type, all together, `amount` times over:
          * "Add {W}{U}" (a Signet, a Karoo land) is `{ all: ["W", "U"] }` with
@@ -5987,8 +5998,12 @@ export type EffectSpec =
       /** "Until end of turn, if you tap a land you control for mana, it
        * produces {U} instead of any other type" (Deep Water): the owner's
        * taps of their lands make this type, as `StaticAbility.landManaInstead`
-       * does with `tapper: "you"`. */
-      readonly landManaInstead?: ManaType;
+       * does with `tapper: "you"`. An entry says more: "until end of turn, if
+       * a player taps a nonbasic land for mana, it produces colorless mana"
+       * (Pale Moon), "lands tapped for mana produce mana of the chosen color
+       * instead of any other color" (Hall of Gemstone), with "you" in its
+       * filter being the effect's controller. */
+      readonly landManaInstead?: ManaType | LandManaInstead;
       /** "Your life total can't change" (Teferi's Protection — rules 119.7,
        * 119.8): no gain and no loss, from damage or an effect; no life paid
        * but 0; no exchange of life totals. */
@@ -10325,7 +10340,7 @@ export interface EffectApi {
     mana:
       | ManaType
       | "any-color"
-      | { readonly oneOf: readonly ManaType[]; readonly same?: true }
+      | { readonly oneOf: readonly ManaType[]; readonly same?: true; readonly different?: number }
       | Exclude<BoardManaList, { readonly eachColorAmong: CardFilter }>,
     amount: number,
     /** The whole `add-mana` spec, so the engine can stamp this mana's
@@ -14451,7 +14466,17 @@ function addManaChoice(spec: Extract<EffectSpec, { kind: "add-mana" }>, ctx: Res
   const symbols = (types: readonly ManaType[]): string =>
     types.length === 0 ? "no mana" : types.map((t) => `{${t}}`).join("");
   const steps: EffectSpec[] = [];
-  if (same) {
+  const different = typeof mana === "object" && "oneOf" in mana ? mana.different : undefined;
+  if (different !== undefined) {
+    const modes = differentManaSplits(colors, Math.max(0, amountValue(spec.amount, ctx)), different).map(
+      (split): ModeOption => ({
+        text: `Add ${symbols(split)}.`,
+        effect: { kind: "add-mana", ...carried, mana: { all: split }, amount: 1 },
+      }),
+    );
+    if (modes.length === 0) return null;
+    steps.push({ kind: "modal", minModes: 1, maxModes: 1, modes });
+  } else if (same) {
     const amounts = colors.map((color) => Math.max(0, amountValue(spec.amount, { ...ctx, manaColor: color })));
     // No mana whichever is chosen: nothing to ask.
     if (amounts.every((n) => n === 0)) return null;

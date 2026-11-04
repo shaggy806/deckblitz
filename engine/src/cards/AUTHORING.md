@@ -3899,6 +3899,20 @@ tapOthers?, untap? }`.
   mana too. "Exhaust — Waterbend {3}" is `exhaust: true` beside it. Not on a
   mana ability, nor beside `tapOthers`. `waterbend.test.ts`.
 
+**Two mana of different colors**: `add-mana`'s `mana: { oneOf: [...], different: 1 }`
+with `amount: 2` (Firemind Vessel, Interplanar Beacon); `different: 2` with
+`amount: 4` is "two mana of any one color and two mana of any other color" (Open
+the Omenpaths). `amount` is a number. `mana-different-colors.test.ts`.
+
+**A land's mana replaced** (rules 106.12, 614.1a): `StaticAbility.landManaInstead`,
+a list of `{ filter?, produces, tapper, colorsOnly?, one? }`, or the same one entry as
+a `player-effect`'s `landManaInstead` for a while (a bare type there is Deep Water's
+"if you tap a land you control"). `produces` is a mana type or `"any-color"`, the
+tapper's pick (Pulse of Llanowar); `one` is "and amount" (Contamination, Harvest
+Mage); `colorsOnly` is "any other color", leaving {C} alone (Hall of Gemstone). In a
+filter, "you" is the permanent's controller or the effect's. What triggered mana
+abilities add isn't changed. `land-mana-change.test.ts`.
+
 **Mana abilities** (`isManaAbility`, rule 605.1a): an ability with no
 targets, no `resolve`, and an `add-mana` effect (or a `sequence` of them),
 activated from the battlefield and not a loyalty ability — **whatever it

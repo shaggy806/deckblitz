@@ -19,6 +19,53 @@ export type ManaPool = Record<ManaType, number>;
 export const COLORS: readonly Color[] = ["W", "U", "B", "R", "G"];
 export const MANA_TYPES: readonly ManaType[] = ["W", "U", "B", "R", "G", "C"];
 
+/**
+ * What a land tapped for mana produces instead of what its ability says
+ * (rules 106.12, 614.1a) — one entry of `StaticAbility.landManaInstead`, or a
+ * `player-effect`'s. Only the land's own mana is changed: what triggered mana
+ * abilities add on the tap isn't the land's. See `Game.landManaInsteadFor`.
+ */
+export interface LandManaInstead {
+  /** Which lands — "Plains" (Reality Twist), "a nonbasic land" (Pale Moon),
+   * "a basic land you control" (Pulse of Llanowar); absent for any land. */
+  readonly filter?: CardFilter;
+  /** The type it makes. `"any-color"` is "mana of a color of your choice"
+   * (Pulse of Llanowar): chosen by whoever tapped it, as it's tapped, one
+   * colour for all the land makes (its ruling). */
+  readonly produces: ManaType | "any-color";
+  /** Whose tap it changes: this permanent's controller's (`"you"` — "if you
+   * tap a land for mana") or anyone's (`"any"` — "if a land is tapped"). */
+  readonly tapper: "you" | "any";
+  /** "Instead of any other **color**" (Hall of Gemstone): {C} isn't a colour,
+   * so colorless mana stays as it is (its ruling). */
+  readonly colorsOnly?: true;
+  /** "Instead of any other type **and amount**" (Contamination): one mana,
+   * however much the land would have made. A land that would make none still
+   * makes none: there's no mana to replace (rule 106.5). */
+  readonly one?: true;
+}
+
+/**
+ * Every way to add `amount` mana of `colors` as "two mana of different
+ * colors" (Firemind Vessel) or "two mana of any one color and two mana of any
+ * other color" (Open the Omenpaths): groups of `perColor` units, each group a
+ * different colour. The order of the colours doesn't matter, so each way is
+ * listed once.
+ */
+export function differentManaSplits(colors: readonly ManaType[], amount: number, perColor: number): ManaType[][] {
+  const groups = Math.floor(amount / Math.max(1, perColor));
+  const out: ManaType[][] = [];
+  const pick = (from: number, chosen: readonly ManaType[]): void => {
+    if (chosen.length === groups) {
+      out.push(chosen.flatMap((c) => Array<ManaType>(perColor).fill(c)));
+      return;
+    }
+    for (let i = from; i < colors.length; i += 1) pick(i + 1, [...chosen, colors[i]]);
+  };
+  if (groups > 0) pick(0, []);
+  return out;
+}
+
 export const emptyPool = (): ManaPool => ({ W: 0, U: 0, B: 0, R: 0, G: 0, C: 0 });
 
 export const poolTotal = (pool: ManaPool): number =>

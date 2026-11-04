@@ -31,7 +31,7 @@ import type {
 } from "./effects.js";
 import type { CardFilter } from "./filter.js";
 import type { CardNameAim, CardNameFilter } from "./card-names.js";
-import type { Color, ManaOrigin, ManaType, ManaUnit, SpendAs } from "./mana.js";
+import type { Color, LandManaInstead, ManaOrigin, ManaType, ManaUnit, SpendAs } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import type { GameEvent, UntilPoint, Vote, WhileSource } from "./events.js";
 import type { ResolvedTargets, TargetRef, TargetSpec } from "./target.js";
@@ -5414,8 +5414,10 @@ export interface PlayerEffect {
   /** "Until end of turn, if you tap a land you control for mana, it produces
    * {U} instead of any other type" (Deep Water): `owner`'s lands tapped for
    * mana by them make this type (rules 106.12, 614.1a) — see
-   * `Game.landManaInsteadFor`. */
-  readonly landManaInstead?: ManaType;
+   * `Game.landManaInsteadFor`. An entry says more: "if a player taps a
+   * nonbasic land for mana" (Pale Moon), any player's, with "you" in its
+   * filter being `owner`. */
+  readonly landManaInstead?: ManaType | LandManaInstead;
   /** "Your life total can't change" (Teferi's Protection): these players can
    * neither gain nor lose life (rules 119.7, 119.8) — a gain or a loss, from
    * damage or an effect, does nothing; a cost that has them pay more than 0

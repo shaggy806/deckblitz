@@ -15,7 +15,7 @@
 
 import type { ActivatedAbility } from "./abilities.js";
 import type { BoardManaList, EffectSpec } from "./effects.js";
-import { COLORS, manaValue, poolCounts, poolTotal } from "./mana.js";
+import { COLORS, differentManaSplits, manaValue, poolCounts, poolTotal } from "./mana.js";
 import type { Color, HybridOption, HybridPip, ManaCost, ManaType, ManaUnit, SpendUnitAs, WideSpendAs } from "./mana.js";
 import type { ObjectId } from "./primitives.js";
 
@@ -480,6 +480,10 @@ export function standaloneManaChoices(
   // "Add {W}{U}" has one outcome, so it's offered once — and so has "for
   // each color among permanents you control, add one mana of that color".
   if (typeof mana === "object" && ("all" in mana || "eachColorAmong" in mana)) return null;
+  // "Two mana of different colors": an offer per pairing.
+  if (typeof mana === "object" && "oneOf" in mana && mana.different !== undefined) {
+    return typeof effect.amount === "number" ? differentManaSplits(oneOf(mana), effect.amount, mana.different) : null;
+  }
   if (typeof effect.amount !== "number") {
     const amount = liveAmount?.() ?? null;
     if (amount === null || amount < 1) return null;
@@ -1214,7 +1218,26 @@ function planManaPaymentOrdered(
       ...src.options.filter((o) => lifeToll(o) === 0 && pred(o)),
       ...src.options.filter((o) => lifeToll(o) !== 0 && pred(o)),
     ];
-    const first = [...making((o) => o.fixed.includes(want)), ...making((o) => anyUnitMakes(o, want))];
+    // Of those making several units at once (Firemind Vessel's pairs, Orcish
+    // Lumberjack's splits), the one covering the most of what's still needed:
+    // {U} first for Baleful Strix's {U}{B} must not commit to {W}{U}.
+    const covered = (o: ManaOption): number => {
+      const left = { ...need };
+      let n = 0;
+      for (const m of o.fixed) {
+        if (left[m] > 0) {
+          left[m] -= 1;
+          n += 1;
+        }
+      }
+      return n;
+    };
+    const direct = making((o) => o.fixed.includes(want));
+    const ranked =
+      direct.length > 1 && direct.some((o) => o.fixed.length > 1)
+        ? [...direct].sort((a, b) => lifeToll(a) - lifeToll(b) || covered(b) - covered(a))
+        : direct;
+    const first = [...ranked, ...making((o) => anyUnitMakes(o, want))];
     return [...new Set([...first, ...richest])];
   };
   const open = (src: ManaSource, opt: ManaOption): Tapped => {

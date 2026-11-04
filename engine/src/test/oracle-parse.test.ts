@@ -9955,6 +9955,47 @@ describe("a static acting on a player", () => {
     const water = face("Enchantment", "{U}: Until end of turn, if you tap a land you control for mana, it produces {U} instead of any other type.");
     expect(water.complete).toBe(true);
     expect(water.activated[0].effect).toEqual({ kind: "player-effect", duration: "end-of-turn", landManaInstead: "U" });
+    const contamination = face("Enchantment", "If a land is tapped for mana, it produces {B} instead of any other type and amount.");
+    expect(contamination.static[0].landManaInstead).toEqual([{ produces: "B", tapper: "any", one: true }]);
+    const pulse = face("Enchantment", "If a basic land you control is tapped for mana, it produces mana of a color of your choice instead of any other type.");
+    expect(pulse.static[0].landManaInstead).toEqual([
+      { filter: { supertype: "basic", controlledBy: "you" }, produces: "any-color", tapper: "any" },
+    ]);
+    const moon = face("Instant", "Until end of turn, if a player taps a nonbasic land for mana, it produces colorless mana instead of any other type.");
+    expect(moon.complete).toBe(true);
+    expect(moon.effect).toEqual({
+      kind: "player-effect",
+      duration: "end-of-turn",
+      landManaInstead: { filter: { notSupertype: "basic" }, produces: "C", tapper: "any" },
+    });
+    const mage = face("Creature", "{G}, {T}, Discard a card: Until end of turn, if you tap a land for mana, it produces one mana of a color of your choice instead of any other type and amount.");
+    expect(mage.activated[0].effect).toEqual({
+      kind: "player-effect",
+      duration: "end-of-turn",
+      landManaInstead: { produces: "any-color", tapper: "you", one: true },
+    });
+    const hall = face(
+      "World Enchantment",
+      "At the beginning of each player's upkeep, that player chooses a color. Until end of turn, lands tapped for mana produce mana of the chosen color instead of any other color.",
+    );
+    expect(hall.complete).toBe(true);
+    expect(hall.triggered[0].effect.kind).toBe("as-player");
+  });
+
+  it("reads two mana of different colors, and two of one colour and two of another", () => {
+    const vessel = face("Artifact", "{T}: Add two mana of different colors.");
+    expect(vessel.complete).toBe(true);
+    expect(vessel.activated[0].effect).toEqual({
+      kind: "add-mana",
+      mana: { oneOf: ["W", "U", "B", "R", "G"], different: 1 },
+      amount: 2,
+    });
+    const omenpaths = face("Instant", "Add two mana of any one color and two mana of any other color.");
+    expect(omenpaths.effect).toEqual({
+      kind: "add-mana",
+      mana: { oneOf: ["W", "U", "B", "R", "G"], different: 2 },
+      amount: 4,
+    });
   });
 
   it("reads what happens to unspent mana as steps and phases end (rule 500.4)", () => {

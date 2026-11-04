@@ -2752,6 +2752,22 @@ export function parseSentence(sentence, ctx) {
   if ((m = /^until end of turn, if you tap a land you control for mana, it produces \{([WUBRGC])\} instead of any other type\.$/i.exec(s))) {
     return { kind: "player-effect", duration: "end-of-turn", landManaInstead: m[1] };
   }
+  // One mana of the tapper's choice for the turn (Harvest Mage).
+  if (/^until end of turn, if you tap a land for mana, it produces one mana of a color of your choice instead of any other type and amount\.$/i.test(s)) {
+    return {
+      kind: "player-effect",
+      duration: "end-of-turn",
+      landManaInstead: { produces: "any-color", tapper: "you", one: true },
+    };
+  }
+  // Every player's nonbasic lands for the turn (Pale Moon).
+  if (/^until end of turn, if a player taps a nonbasic land for mana, it produces colorless mana instead of any other type\.$/i.test(s)) {
+    return {
+      kind: "player-effect",
+      duration: "end-of-turn",
+      landManaInstead: { filter: { notSupertype: "basic" }, produces: "C", tapper: "any" },
+    };
+  }
   // "Until your next turn, creatures can't attack you" (Chronomantic Escape):
   // a rule for a while, no cost.
   if (/^until your next turn, creatures can't attack you\.$/i.test(s)) {
@@ -5392,6 +5408,15 @@ export function parseSentence(sentence, ctx) {
   if ((m = /^add \{([WUBRGC])\}, then add an additional \{([WUBRGC])\} for each [\w+/-]+ counter removed this way\.$/i.exec(s)) && m[1] === m[2]) {
     return { kind: "add-mana", mana: m[1], amount: { sum: [1, "x"] } };
   }
+  // "Two mana of different colors" (Firemind Vessel), and "two mana of any one
+  // color and two mana of any other color" (Open the Omenpaths): a pairing,
+  // chosen as it's added.
+  if (/^add two mana of different colors\.$/i.test(s)) {
+    return { kind: "add-mana", mana: { oneOf: WUBRG, different: 1 }, amount: 2 };
+  }
+  if (/^add two mana of any one color and two mana of any other color\.$/i.test(s)) {
+    return { kind: "add-mana", mana: { oneOf: WUBRG, different: 2 }, amount: 4 };
+  }
   if (/^add one mana of any color\.$/i.test(s)) return choice(WUBRG, 1);
   if ((m = new RegExp(`^add ${N} mana of any one color\\.$`, "i").exec(s))) {
     const n = amount(m[1]);
@@ -7314,6 +7339,20 @@ export function parseEffect(text, outer) {
   let skip = 0;
   const becomes = becomesWithAbilitiesOf(text);
   if (becomes !== null) return { effect: becomes, todo: [], hints: [] };
+
+  // Every land for the turn, the active player's colour (Hall of Gemstone).
+  if (/^that player chooses a color\. Until end of turn, lands tapped for mana produce mana of the chosen color instead of any other color\.$/i.test(text)) {
+    const colors = [["W", "White"], ["U", "Blue"], ["B", "Black"], ["R", "Red"], ["G", "Green"]];
+    const modes = colors.map(([produces, word]) => ({
+      text: word,
+      effect: { kind: "player-effect", duration: "end-of-turn", landManaInstead: { produces, tapper: "any", colorsOnly: true } },
+    }));
+    return {
+      effect: { kind: "as-player", who: "active-player", effect: { kind: "modal", minModes: 1, maxModes: 1, modes } },
+      todo: [],
+      hints: [],
+    };
+  }
 
   // A suspend cost as an alternative cost (The Face of Boe).
   if (text === "You may cast a spell with suspend from your hand. If you do, pay its suspend cost rather than its mana cost.") {
@@ -14902,6 +14941,18 @@ function parseStatic(line, text) {
   // any land (Infernal Darkness), or by basic land type (Reality Twist).
   if ((m = /^If a land is tapped for mana, it produces \{([WUBRGC])\} instead of any other type\.$/.exec(line))) {
     return { affects: { scope: "self" }, landManaInstead: [{ produces: m[1], tapper: "any" }], text };
+  }
+  // "…instead of any other type and amount" (Contamination): one mana.
+  if ((m = /^If a land is tapped for mana, it produces \{([WUBRGC])\} instead of any other type and amount\.$/.exec(line))) {
+    return { affects: { scope: "self" }, landManaInstead: [{ produces: m[1], tapper: "any", one: true }], text };
+  }
+  // "A color of your choice", the tapper's (Pulse of Llanowar).
+  if (/^If a basic land you control is tapped for mana, it produces mana of a color of your choice instead of any other type\.$/.test(line)) {
+    return {
+      affects: { scope: "self" },
+      landManaInstead: [{ filter: { supertype: "basic", controlledBy: "you" }, produces: "any-color", tapper: "any" }],
+      text,
+    };
   }
   if ((m = /^If tapped for mana, (.+) instead of any other type\.$/.exec(line))) {
     const entries = [];

@@ -325,6 +325,7 @@ import {
   coloredReductionOf,
   manaCostReductions,
   manaOriginMatches,
+  differentManaSplits,
   colorSymbols,
   manaValue,
   parseManaCost,
@@ -334,6 +335,7 @@ import {
 } from "./mana.js";
 import type {
   Color,
+  LandManaInstead,
   ManaCostReduction,
   ColoredReduction,
   ManaCost,
@@ -809,8 +811,6 @@ function runDamageSteps(
   return { dealt: Math.max(0, total), ...rest() };
 }
 
-/** A mana option of a land whose mana is another type instead (Deep Water —
- * `Game.landManaInsteadFor`): as many units, every one `type`, no choice. */
 /** What one triggered mana ability adds as a permanent is tapped for mana by
  * hand — see `Game.extraManaOutputs`. */
 type ManaExtraOutput = {
@@ -833,10 +833,36 @@ function chosenManaType(holder: GameObject): ManaType | undefined {
   return MANA_TYPES.includes(chosen as ManaType) ? (chosen as ManaType) : undefined;
 }
 
-function landManaInsteadOption(option: ManaOption, type: ManaType): ManaOption {
+/** What `Game.landManaInsteadFor` says a tapped land makes instead. */
+type LandManaChange = Pick<LandManaInstead, "produces" | "colorsOnly" | "one">;
+
+/** What a land's own mana `made` comes to under `change`, its type being
+ * fixed: as many units (one, for "and amount"), every one the new type — but
+ * {C}, under "instead of any other color". */
+function landManaChanged(made: readonly ManaType[], change: LandManaChange, produces: ManaType): ManaType[] {
+  const units = change.one === true ? made.slice(0, 1) : made;
+  return units.map((type) => (change.colorsOnly === true && type === "C" ? type : produces));
+}
+
+/** The mana options of a land whose mana is another type instead (Deep Water —
+ * `Game.landManaInsteadFor`). One that makes no mana has none to replace. "A
+ * color of your choice" is an "any colour" unit, or an option per colour for
+ * several, which are all one colour (Pulse of Llanowar's ruling). */
+function landManaInsteadOptions(option: ManaOption, change: LandManaChange): ManaOption[] {
   const units = option.fixed.length + option.anyColor;
+  if (units === 0) return [option];
   const { anyColorOf: _choices, ...rest } = option;
-  return { ...rest, fixed: Array<ManaType>(units).fill(type), anyColor: 0 };
+  const produces = change.produces;
+  if (produces === "any-color") {
+    const n = change.one === true ? 1 : units;
+    return n === 1
+      ? [{ ...rest, fixed: [], anyColor: 1 }]
+      : COLORS.map((color) => ({ ...rest, fixed: Array<ManaType>(n).fill(color), anyColor: 0 }));
+  }
+  // An "any colour" unit is made as the new type (never {C}, so "any other
+  // color" changes it too).
+  const made = [...option.fixed, ...Array<ManaType>(option.anyColor).fill(produces)];
+  return [{ ...rest, fixed: landManaChanged(made, change, produces), anyColor: 0 }];
 }
 
 /** One draw event, as `Game.noteWouldDraw` saw it: whether it's the first
@@ -22116,22 +22142,39 @@ export class Game {
     let picked = 0;
     // A land's mana, changed as it's made (Deep Water, Infernal Darkness —
     // rule 106.12): every unit its own ability makes is that type instead.
+    // Asked now, as it would make the mana, so a land the cost sacrificed
+    // (Crystal Vein) is read as it last was.
     const instead = ability.cost.tap && source !== undefined ? this.landManaInsteadFor(player, source) : null;
+    // "A color of your choice" (Pulse of Llanowar): one, for all the land makes.
+    let insteadColor: ManaType | undefined;
+    let madeOne = false;
+    const make: typeof base.addMana = (p, mana, amount, spec) => {
+      if (instead === null || p !== player) {
+        base.addMana(p, mana, amount, spec);
+        return;
+      }
+      if (amount <= 0 || (instead.one === true && madeOne)) return;
+      madeOne = true;
+      const n = instead.one === true ? 1 : amount;
+      if (instead.produces === "any-color") {
+        if (insteadColor === undefined) {
+          const pick = manaColors?.[picked];
+          picked += 1;
+          insteadColor = pick !== undefined && (COLORS as readonly ManaType[]).includes(pick) ? pick : COLORS[0];
+        }
+        base.addMana(p, insteadColor, n, spec);
+        return;
+      }
+      const stays = instead.colorsOnly === true && mana === "C";
+      base.addMana(p, stays ? mana : instead.produces, n, spec);
+    };
     const context: ResolutionContext = {
       ...base,
       manaAbility: true,
       ...(manaColor !== undefined ? { manaColor } : {}),
       addMana: (p, mana, amount, spec): void => {
-        if (instead !== null && p === player) {
-          // A pick it was offered still lines up with what follows.
-          if (manaColors !== undefined && (mana === "any-color" || typeof mana === "object")) {
-            picked += Math.min(amount, Game.MAX_EFFECT_INSTANCES);
-          }
-          base.addMana(p, instead, amount, spec);
-          return;
-        }
-        if (manaColors === undefined || (mana !== "any-color" && typeof mana !== "object")) {
-          base.addMana(p, mana, amount, spec);
+        if (mana !== "any-color" && typeof mana !== "object") {
+          make(p, mana, amount, spec);
           return;
         }
         // The effect's own amount is what gets made, one unit per pick; a
@@ -22150,7 +22193,30 @@ export class Game {
         // offered with no pick for it (`standaloneManaVariants`): none is
         // used up, so a later pick still lines up.
         if (allowed.length === 0) return;
+        // Its own colour is no longer the player's to pick: the mana is the
+        // new type whichever it would have been.
         const units = Math.min(amount, Game.MAX_EFFECT_INSTANCES);
+        if (instead !== null && p === player && (instead.colorsOnly !== true || !allowed.includes("C"))) {
+          // A pick it was offered still lines up with what follows.
+          if (manaColors !== undefined && instead.produces !== "any-color") picked += units;
+          make(p, mana, amount, spec);
+          return;
+        }
+        // "Two mana of different colors": the picks are one of the pairings,
+        // or else the first of them, never two of one colour.
+        if (typeof mana === "object" && "oneOf" in mana && mana.different !== undefined) {
+          const pairings = differentManaSplits(allowed, units, mana.different);
+          const picks = (manaColors ?? []).slice(picked, picked + units);
+          const asPicked = [...picks].sort().join("");
+          const made = pairings.find((pairing) => [...pairing].sort().join("") === asPicked) ?? pairings[0] ?? [];
+          for (const type of made) make(p, type, 1, spec);
+          picked += units;
+          return;
+        }
+        if (manaColors === undefined) {
+          make(p, mana, amount, spec);
+          return;
+        }
         // "Any color" is any *one* colour however much is made (Gilded
         // Lotus), so the first pick names it for all — as it does for "X
         // {G} or X {W}" (`same`).
@@ -22158,7 +22224,7 @@ export class Game {
         const first = picked;
         for (let i = 0; i < units; i += 1) {
           const pick = oneType ? manaColors[first] : manaColors[first + i];
-          base.addMana(p, pick !== undefined && allowed.includes(pick) ? pick : mana, 1, spec);
+          make(p, pick !== undefined && allowed.includes(pick) ? pick : mana, 1, spec);
         }
         picked += units;
       },
@@ -23213,7 +23279,10 @@ export class Game {
                         ...tag,
                       },
                     ]
-                : manaCombinations(oneOf, manaAmount).map((fixed) => ({
+                : ("different" in mana && typeof mana.different === "number"
+                    ? differentManaSplits(oneOf, manaAmount, mana.different)
+                    : manaCombinations(oneOf, manaAmount)
+                  ).map((fixed) => ({
                     fixed,
                     anyColor: 0,
                     pain,
@@ -23237,7 +23306,7 @@ export class Game {
         // "If you tap a land for mana, it produces {U} instead of any other
         // type" (Deep Water, Infernal Darkness): as many units, that type.
         const instead = ability.cost.tap ? this.landManaInsteadFor(player, object) : null;
-        const typed = instead === null ? candidates : candidates.map((option) => landManaInsteadOption(option, instead));
+        const typed = instead === null ? candidates : candidates.flatMap((option) => landManaInsteadOptions(option, instead));
         const multiplier = ability.cost.tap ? this.tapManaMultiplier(player) : 1;
         const multiplied =
           multiplier === 1 ? typed : typed.flatMap((option) => multipliedManaOption(option, multiplier));
@@ -23950,7 +24019,28 @@ export class Game {
       if (fixed === null) return asIs;
       base = [{ picks: [], makes: fixed }];
     }
-    if (instead !== null) base = base.map((v) => ({ ...v, makes: Array<ManaType>(v.makes.length).fill(instead) }));
+    if (instead !== null) {
+      const produces = instead.produces;
+      if (produces === "any-color") {
+        // "A color of your choice": one pick, naming it for all the land
+        // makes. A land that makes none has nothing to choose.
+        const sizes = new Set(base.map((v) => (instead.one === true ? Math.min(v.makes.length, 1) : v.makes.length)));
+        base = [...sizes].flatMap((n): Own[] =>
+          n === 0 ? [{ picks: [], makes: [] }] : COLORS.map((color) => ({ picks: [color], makes: Array<ManaType>(n).fill(color) })),
+        );
+      } else {
+        // A pick that no longer decides anything is one offer, not five.
+        const seen = new Set<string>();
+        base = base
+          .map((v) => ({ ...v, makes: landManaChanged(v.makes, instead, produces) }))
+          .filter((v) => {
+            const key = v.makes.join("");
+            if (seen.has(key)) return false;
+            seen.add(key);
+            return true;
+          });
+      }
+    }
     const out: StandaloneManaVariant[] = [];
     for (const variant of base) {
       const made = variant.makes.flatMap((t) => Array<ManaType>(multiplier).fill(t));
@@ -26033,7 +26123,19 @@ export class Game {
         addAll(this.manaOneOf(m, player, id, asking), effect.amount);
       }
     };
-    for (const ability of abilities) addFrom(ability.effect);
+    for (const ability of abilities) if (ability.cost.tap) addFrom(ability.effect);
+    // "Taking into account any applicable replacement effects" (rule 106.7):
+    // a land under Infernal Darkness could produce only {B}. Of a tap by its
+    // controller, the one player a "could produce" can ask about.
+    const instead = types.size > 0 ? this.landManaInsteadFor(player, object) : null;
+    if (instead !== null) {
+      const tapped = [...types];
+      types.clear();
+      for (const type of instead.produces === "any-color" ? COLORS : tapped) {
+        types.add(instead.produces === "any-color" || (instead.colorsOnly === true && type === "C") ? type : instead.produces);
+      }
+    }
+    for (const ability of abilities) if (!ability.cost.tap) addFrom(ability.effect);
     return [...types];
   }
 
@@ -50480,13 +50582,30 @@ export class Game {
    * of any other (rules 106.12, 614.1a), or `null`: a `landManaInstead`
    * static on the battlefield whose entry matches the land and the tapper
    * (Infernal Darkness, Reality Twist), or a `landManaInstead` player effect
-   * of `player`'s on a land they control (Deep Water). Of several, one
-   * applies (rule 616.1, the tapping player's choice): the newest. */
-  private landManaInsteadFor(player: PlayerId, source: GameObject): ManaType | null {
-    if (source.zone !== "battlefield" || !effectiveTypes(this.state, this.registry, source).includes("land")) return null;
-    let found: { readonly type: ManaType; readonly timestamp: number } | null = null;
-    const offer = (type: ManaType, timestamp: number): void => {
-      if (found === null || timestamp > found.timestamp) found = { type, timestamp };
+   * (Deep Water, a turn of its owner's own lands; Pale Moon, every player's
+   * nonbasic ones). Of several, one applies (rule 616.1, the tapping player's
+   * choice): the newest. A land its own cost sacrificed (Crystal Vein) was
+   * tapped for mana all the same, and is read as it last was. */
+  private landManaInsteadFor(player: PlayerId, source: GameObject): LandManaChange | null {
+    const gone = source.zone !== "battlefield";
+    if (
+      gone
+        ? !matchesFilter(this.state, this.registry, source.id, { type: "land" }, { you: player, lastKnown: true })
+        : !effectiveTypes(this.state, this.registry, source).includes("land")
+    ) {
+      return null;
+    }
+    const applies = (entry: LandManaInstead, you: PlayerId, holder?: ObjectId): boolean =>
+      (entry.tapper === "any" || you === player) &&
+      (entry.filter === undefined ||
+        matchesFilter(this.state, this.registry, source.id, entry.filter, {
+          you,
+          ...(holder !== undefined ? { source: holder } : {}),
+          ...(gone ? { lastKnown: true } : {}),
+        }));
+    let found: { readonly change: LandManaChange; readonly timestamp: number } | null = null;
+    const offer = (change: LandManaChange, timestamp: number): void => {
+      if (found === null || timestamp > found.timestamp) found = { change, timestamp };
     };
     for (const id of this.state.zones.shared.battlefield) {
       const holder = this.state.objects[id];
@@ -50494,23 +50613,19 @@ export class Game {
       for (const ability of this.registry.get(rulesTextName(holder)).static) {
         if (ability.landManaInstead === undefined || !this.staticActive(holder, ability)) continue;
         for (const entry of ability.landManaInstead) {
-          if (entry.tapper === "you" && holder.controller !== player) continue;
-          if (
-            entry.filter !== undefined &&
-            !matchesFilter(this.state, this.registry, source.id, entry.filter, { you: holder.controller, source: holder.id })
-          ) {
-            continue;
-          }
-          offer(entry.produces, holder.timestamp);
+          if (applies(entry, holder.controller, holder.id)) offer(entry, holder.timestamp);
         }
       }
     }
     for (const effect of this.state.playerEffects ?? []) {
-      if (effect.owner === player && effect.landManaInstead !== undefined && source.controller === player) {
-        offer(effect.landManaInstead, effect.timestamp ?? 0);
-      }
+      const instead = effect.landManaInstead;
+      if (instead === undefined) continue;
+      // A bare type is "if you tap a land you control for mana" (Deep Water).
+      const entry: LandManaInstead =
+        typeof instead === "string" ? { filter: { controlledBy: "you" }, produces: instead, tapper: "you" } : instead;
+      if (applies(entry, effect.owner)) offer(entry, effect.timestamp ?? 0);
     }
-    return (found as { readonly type: ManaType } | null)?.type ?? null;
+    return (found as { readonly change: LandManaChange } | null)?.change ?? null;
   }
 
   /** Product of every `tap-for-mana` multiplier (rules 106.12b, 614.1a) on

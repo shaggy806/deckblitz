@@ -11,6 +11,8 @@
   "filter:attacked-you-this-turn",
   "effect:becomes-blocked",
   "trigger:blocks-creature-trigger",
+  "effect:add-mana-two-different-colors",
+  "replacement:land-mana-type-replacement",
   "amount:chroma-of-cards",
   "amount:creatures-devoured",
   "effect:amount-commander-mana-value-battlefield-or-command-zone",
