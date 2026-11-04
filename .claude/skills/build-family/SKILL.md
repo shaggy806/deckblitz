@@ -350,7 +350,7 @@ How each setting above was arrived at, oldest first. The user's calls still hold
 - **Measured on 2026-11-04 (the same settings):** 52 families from 16 agents, starting each as a slot freed. Seven verifies
   alongside, three of which found real bugs: an unrated-slot ratchet, a pre-existing Bond of Agony offer, eight cards missing colors
   (only `card:verify` catches that). Playwright once a round was enough: its only failures were load timeouts that passed alone. A full verify's
-  fuzzer can time out games of 150+ turns at its 120 s limit, with or without agents: replay them alone before calling it a failure. The
+  fuzzer could time out games of 150+ turns at its 120 s limit (since 2026-11-04 a long game stops at a turn cap and passes, so a timeout now means a hang). The
   skill's merge helper stops on `manualChecks.ts`, `client.md` and a long-line doc whose word merge conflicts; those are mechanical too.
   An agent's reports need reading as work: four of the 16 went back with `SendMessage` for a real fix (a test that claimed too much,
   rule 701.47b, a batching guess, a prompt nobody had played).

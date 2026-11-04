@@ -128,7 +128,7 @@ authoring, run just the files you touched** (`npx vitest run cmdr-sokka pool.tes
 - `card:verify` / `card:text`: checks the pool against Scryfall (structure / rules text). `-- --offline`
   answers from the Oracle snapshot instead, where Scryfall is unreachable (a cloud session).
 - `test`, `typecheck`, `build`. The fuzzer and scripts run `dist/`, so **build first**.
-- `play:random -- --games N [--players 4] [--seed S] [--with "Card"] [--max-turns N]`: the fuzzer.
+- `play:random -- --games N [--players 4] [--seed S] [--with "Card"] [--max-turns N]`: the fuzzer. A long game stops at a turn cap and passes (100 turns, 120 past 2 players; `--max-turns 0` plays it out); only a hang or a thrown error fails.
 - `play:situations -- --with "Card" [--scenarios N] [--seed S]`: the situation fuzzer — a card cast
   or activated in many small random boards, seconds a card; the per-card check `verify` runs, and
   each failure prints a one-line replay.

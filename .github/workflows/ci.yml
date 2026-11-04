@@ -48,11 +48,10 @@ jobs:
       # where 30 reached about three quarters (`--coverage` says how many).
       - name: Fuzz, 2 players
         run: node engine/scripts/random-demo.mjs --games 60
-      # Four random players can take 200 turns to finish a game (seed 3 does
-      # with a 3,000-card pool, in about 45s). The limit is there to catch a
-      # hang, not a long game.
+      # A long game stops at the fuzzer's turn cap and passes; its time limit is
+      # there to catch a hang.
       - name: Fuzz, 4 players
-        run: node engine/scripts/random-demo.mjs --games 8 --players 4 --timeout 120
+        run: node engine/scripts/random-demo.mjs --games 8 --players 4
       # The deploy bundle: what this green build of main made, for the live
       # box to install without compiling anything (the engine's type-check
       # needs more memory than the 2 GB box has — DEPLOYMENT.md). The four

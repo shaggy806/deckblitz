@@ -10,7 +10,7 @@
 //      situation fuzzer (`situation-fuzz.mjs`: each card cast or activated
 //      in small random boards, `SITUATIONS`) and a few 4-player games with
 //      them forced in (at most 10 a deck: `fuzzWithPlan`), stopped at turn
-//      `MAX_TURNS` (and `UNCAPPED` more played out in a full run); each
+//      `MAX_TURNS` (and `UNCAPPED` more to the fuzzer's own cap in a full run); each
 //      4-player run as two processes over halves of its seeds; and the bot
 //      gate (on 4 cores or fewer, after the test suites instead, each
 //      4-player run one process)
@@ -102,8 +102,8 @@ const SITUATIONS = { full: 100, quick: 60 };
  * over the per-card check: whole 4-player games, which average 80-130 turns
  * because random players rarely finish anyone off — so quick and full runs
  * stop each game at `MAX_TURNS` (a draw by turn cap), and a full run adds
- * `UNCAPPED` games played to the end, for what only a whole game reaches
- * (decking, a game's end, commander damage). Before (2026-10-31): 20 games
+ * `UNCAPPED` games to `random-demo.mjs`'s own higher cap, for what only a whole
+ * game reaches (decking, a game's end, commander damage). Before (2026-10-31): 20 games
  * quick, 40 full, all uncapped — 100-200 s a half. */
 const FUZZ_WITH = { full: 12, quick: 8 };
 const MAX_TURNS = 60;
@@ -421,11 +421,6 @@ process.on("exit", () => release(held));
 await stopOnFailure(await run("gen:cards", "npm", ["run", "-s", "gen:cards", "-w", "engine"]));
 await stopOnFailure(await run("build", "npm", ["run", "build"]));
 
-// Four-player games get CI's 120 s each rather than the fuzzer's default 30:
-// one runs ~25 s alone (2026-10-14), and here they share the machine with
-// the test suites, the other fuzz runs and the bot gate, so 30 s timed out
-// games that finish.
-const FOUR_PLAYER_TIMEOUT = ["--timeout", "120"];
 // A small machine (a 4-core cloud session) can't hold the engine suite's
 // workers beside five fuzz and gate processes: the suite was killed for memory
 // there (2026-10-25), and the server suite's timed tests timed out beside
@@ -448,7 +443,7 @@ function fuzzWithRuns(games, uncapped, split) {
   const plan = fuzzWithPlan(cards, games);
   if (plan.total !== games) console.log(`verify: ${cards.length} new cards, at most ${PER_DECK} a deck: ${plan.total} capped games, each card in ${plan.perCard}`);
   const one = (name, start, n, extra) => () =>
-    run(name, "node", ["scripts/random-demo.mjs", "--games", String(n), "--start", String(start), "--players", "4", ...FOUR_PLAYER_TIMEOUT, ...plan.args, ...extra], ENGINE);
+    run(name, "node", ["scripts/random-demo.mjs", "--games", String(n), "--start", String(start), "--players", "4", ...plan.args, ...extra], ENGINE);
   const half = split ? Math.ceil(plan.total / 2) : plan.total;
   const parts = [
     [1, half],
@@ -457,7 +452,7 @@ function fuzzWithRuns(games, uncapped, split) {
   const runs = parts.map(([start, n], i) =>
     one(`fuzz with new cards${parts.length > 1 ? ` (${i + 1} of ${parts.length})` : ""}`, start, n, ["--max-turns", String(MAX_TURNS)]),
   );
-  if (uncapped > 0) runs.push(one("fuzz with new cards, uncapped", plan.total + 1, uncapped, []));
+  if (uncapped > 0) runs.push(one("fuzz with new cards, long", plan.total + 1, uncapped, []));
   return runs;
 }
 const FUZZ_SUMMARY = /games —|avg turns|FAILED seed/;
@@ -508,18 +503,14 @@ const fourPlayer = (name, count, extra) => {
       run(
         SMALL ? name : `${name} (${i + 1} of 2)`,
         "node",
-        ["scripts/random-demo.mjs", "--games", String(n), "--start", String(start), "--players", "4", ...FOUR_PLAYER_TIMEOUT, ...extra],
+        ["scripts/random-demo.mjs", "--games", String(n), "--start", String(start), "--players", "4", ...extra],
         ENGINE,
       ),
     );
 };
 if (!skip.has("fuzz")) {
   background(() => {
-    // On a small machine a 2-player game beside the 4-player runs can pass
-    // the default 30 s too (one took 18 s alone, 2026-10-25).
-    late.push(
-      run("fuzz 2p", "node", ["scripts/random-demo.mjs", "--games", String(games), ...(SMALL ? ["--timeout", "60"] : [])], ENGINE),
-    );
+    late.push(run("fuzz 2p", "node", ["scripts/random-demo.mjs", "--games", String(games)], ENGINE));
     late.push(...fourPlayer("fuzz 4p", Math.ceil(games / 2), []));
   });
 }

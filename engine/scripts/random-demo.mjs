@@ -8,8 +8,8 @@
 //   npm run play:random -w engine -- --players 3  # or 4 — exercises multi-opponent combat
 //   npm run play:random -w engine -- --seed 19    # replay exactly one seed
 //   npm run play:random -w engine -- --games 15 --start 16  # seeds 16-30 (a run split across processes)
-//   npm run play:random -w engine -- --timeout 60 # per-game limit, seconds (default 30)
-//   npm run play:random -w engine -- --max-turns 60  # a game reaching turn 61 ends as a draw
+//   npm run play:random -w engine -- --timeout 90 # per-game limit, seconds (default 60, 180 past 2 players)
+//   npm run play:random -w engine -- --max-turns 60  # a game reaching turn 61 ends as a draw (default 100, 120 past 2 players; 0 plays it out)
 //   npm run play:random -w engine -- --with "Card Name"  # in every seat's deck
 //   ... --with A --with B ... --per-deck 10  # at most 10 forced cards a deck, a group per seed
 //   npm run play:random -w engine -- --games 100 --coverage  # how much of the pool the decks reach
@@ -23,7 +23,8 @@
 // the game last looked (the worker's once-a-second heartbeat), instead
 // of stalling the whole run — a runaway loop inside one `tick()` never yields,
 // so nothing short of terminating the thread can stop it. Any failure (a
-// timeout, or a thrown error) makes the process exit non-zero.
+// timeout, or a thrown error) makes the process exit non-zero. A game that's
+// merely long isn't one: it stops at the turn cap and passes (`--max-turns`).
 
 import { Worker } from "node:worker_threads";
 
@@ -50,13 +51,19 @@ const onlySeed = flag("seed", null);
 // The first seed: `npm run verify` splits the 4-player run across two
 // processes this way, the same seeds as one run of them all.
 const firstSeed = Number(flag("start", "1"));
-const timeoutMs = Number(flag("timeout", "30")) * 1000;
+// The limit is there to catch a hang, so it leaves room for a game to reach its
+// turn cap on a busy machine: at the slowest seen under a full verify (2026-11-04)
+// a 2-player game was at turn 63 after 30 s and a 4-player one at 132 after 120 s.
+const timeoutMs = Number(flag("timeout", numPlayers === 2 ? "60" : "180")) * 1000;
 // `--max-turns N`: a game still going after turn N stops there, reported as
-// a draw by turn cap. Random players rarely finish anyone off, so a game's
-// length is mostly its seed's luck (80-130 turns, the slow ones past 300);
-// `npm run verify`'s quick runs cap it, and the situation fuzzer
-// (`situation-fuzz.mjs`) is the per-card check.
-const maxTurns = flag("max-turns", null) === null ? null : Number(flag("max-turns", null));
+// a draw by turn cap, and passes. Random players rarely finish anyone off, so a
+// game's length is mostly its seed's luck (2 players about 40 turns, 4 about 100,
+// the slow ones past 275), and a long game only ever failed a run on the clock.
+// The defaults leave most games to finish, so decking and commander damage are
+// still reached. `--max-turns 0` plays a game right out. `npm run verify`'s new-card
+// runs cap lower, and the situation fuzzer (`situation-fuzz.mjs`) is the per-card check.
+const maxTurnsFlag = Number(flag("max-turns", numPlayers === 2 ? "100" : "120"));
+const maxTurns = maxTurnsFlag === 0 ? null : maxTurnsFlag;
 
 const A = asPlayerId("alice");
 const B = asPlayerId("bob");
