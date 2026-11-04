@@ -15709,6 +15709,26 @@ describe("cards from hand taking {2} off", () => {
   });
 });
 
+describe("the greatest number of cards a player discarded", () => {
+  it("reads Jace's Archivist's activation", () => {
+    const face = parseFace({
+      name: "Jace's Archivist",
+      type_line: "Creature — Vedalken Wizard",
+      mana_cost: "{1}{U}{U}",
+      colors: ["U"],
+      oracle_text:
+        "{U}, {T}: Each player discards their hand, then draws cards equal to the greatest number of cards a player discarded this way.",
+    });
+    expect(face.activated[0].effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "discard-hand", who: "each-player" },
+        { kind: "draw", who: "each-player", amount: { thisWay: "discarded", perPlayer: "greatest" } },
+      ],
+    });
+  });
+});
+
 describe("gaining control of a spell", () => {
   it("reads Commandeer's", () => {
     const face = parseFace({

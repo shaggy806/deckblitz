@@ -3204,6 +3204,16 @@ export function parseSentence(sentence, ctx) {
   if (/^discard your hand, then draw a card for each card you've discarded this turn\.$/i.test(s)) {
     return { kind: "sequence", effects: [{ kind: "discard-hand", who: "you" }, discardedDraw] };
   }
+  // Windfall's, Whispering Madness's, Jace's Archivist's.
+  if (/^each player discards their hand, then draws cards equal to the greatest number of cards a player discarded this way\.$/i.test(s)) {
+    return {
+      kind: "sequence",
+      effects: [
+        { kind: "discard-hand", who: "each-player" },
+        { kind: "draw", who: "each-player", amount: { thisWay: "discarded", perPlayer: "greatest" } },
+      ],
+    };
+  }
   if ((m = /^draw X cards, where X is the number of cards that were put into (your|target player's) graveyard from (?:your|their) library this turn\.$/i.exec(s))) {
     const whose = m[1].toLowerCase() === "your" ? {} : { target: ctx.target("player") };
     return { kind: "draw", amount: { turnHistory: "to-graveyard", ...whose, from: ["library"] } };
