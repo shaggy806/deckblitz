@@ -1979,9 +1979,12 @@ export function spellGrantReaches(
   // An emblem's works from the command zone (rule 113.6p).
   if ((source.zone !== "battlefield" && source.kind !== "emblem") || hasLostAbilities(state, registry, source)) return false;
   if (state.players[source.controller]?.hasLost === true) return false;
-  // "The first … spell you cast each turn" asks who cast it (Commandeer can
-  // change who controls it); every other grant, who controls it.
-  const whose = grant.firstEachTurn === true ? spellCaster(spell) : spell.controller;
+  // By its wording, once Commandeer has parted the two (rule 109.5: "you" is
+  // this permanent's controller): "spells you **cast**" asks who cast it, the
+  // filter's `castBy` or "the first … you cast each turn"; "spells you
+  // **control**" who controls it now. A grant only read as the spell is cast
+  // (cascade, casualty, conspire) can't tell them apart, so needn't say.
+  const whose = grant.firstEachTurn === true || grant.filter?.castBy === "you" ? spellCaster(spell) : spell.controller;
   if (grant.allSpells !== true && whose !== source.controller) return false;
   if (grant.castFrom !== undefined && (spell.castFrom === undefined || !grant.castFrom.includes(spell.castFrom))) {
     return false;
@@ -2068,7 +2071,11 @@ export function turnSpellGrantReaches(
   grant: SpellGrantThisTurn,
   spell: GameObject,
 ): boolean {
-  if (spell.zone !== "stack" || spell.kind !== "card" || spellCaster(spell) !== grant.player) return false;
+  // "The next spell you **cast** this turn" (Overmaster) asks who cast it;
+  // "spells you **control** can't be countered this turn" (Veil of Summer) who
+  // controls it now. Yidris's "as you cast" is only read as it's cast.
+  const whose = grant.next === true ? spellCaster(spell) : spell.controller;
+  if (spell.zone !== "stack" || spell.kind !== "card" || whose !== grant.player) return false;
   if (grant.next === true) {
     return grant.usedBy?.id === spell.id && grant.usedBy.zoneChangeCount === (spell.zoneChangeCount ?? 0);
   }

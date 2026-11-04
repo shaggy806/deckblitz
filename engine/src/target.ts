@@ -132,7 +132,9 @@ export type TargetSpec =
    * "that player": Dismantling Wave's "for each opponent, destroy up to one
    * target artifact or enchantment that player controls" is one optional
    * slot per seat 1–3. A target that has come under anyone else's control
-   * since is illegal as it resolves, as it is for the printed card.
+   * since is illegal as it resolves, as it is for the printed card. A spell
+   * that changes controller has its targets moved to their players' new
+   * slots (`Game.rebindSeatTargets`).
    */
   | {
       readonly kind: "permanent";
@@ -790,6 +792,14 @@ export function playerAtSeat(
   const at = turnOrder.indexOf(player);
   if (at < 0 || seat < 0 || seat >= turnOrder.length) return undefined;
   return turnOrder[(at + seat) % turnOrder.length];
+}
+
+/** The seat a target spec's slot is bound to, through its `optional`: a
+ * `{ seat }` permanent or graveyard card; undefined for any other. */
+export function seatOfTargetSpec(spec: TargetSpec): number | undefined {
+  const inner = typeof spec === "object" && spec.kind === "optional" ? spec.of : spec;
+  if (typeof inner !== "object" || (inner.kind !== "permanent" && inner.kind !== "card-in-graveyard")) return undefined;
+  return typeof inner.whose === "object" ? inner.whose.seat : undefined;
 }
 
 /** How a `{ seat }` spec names its player in a prompt. */

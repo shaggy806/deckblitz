@@ -222,6 +222,12 @@ export interface GameObject {
    * through {@link spellCaster}. Gone with its next move.
    */
   putOnStackBy?: PlayerId;
+  /**
+   * A spell that changed controller, whose target `chosenFor` the new controller
+   * has no `{ seat }` slot of its own: which slot it waits in, another player's
+   * — see `Game.rebindSeatTargets`. Gone with its next move, or a new target there.
+   */
+  seatTargetWaiting?: { readonly slot: number; readonly chosenFor: PlayerId };
   /** The creatures that convoked this spell (rule 702.51a), each as the
    * battlefield stint it tapped from, in the order they were tapped — "each
    * creature that convoked this spell" (Lethal Scheme). Gone with its next
@@ -1795,6 +1801,9 @@ export interface SpellSnapshot {
   readonly zoneChangeCount: number;
   /** `printedCardName` — the face or half that was cast. */
   readonly cardName: string;
+  /** Who controlled it: whose seats its `{ seat }` slots count from. */
+  readonly controller: PlayerId;
+  readonly seatTargetWaiting?: GameObject["seatTargetWaiting"];
   readonly targets: readonly (TargetRef | undefined)[] | null;
   readonly targetZones?: readonly (ZoneType | null)[];
   readonly targetStints?: readonly (number | null)[];

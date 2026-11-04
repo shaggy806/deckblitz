@@ -45,7 +45,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      grantsToSpells: { filter: { manaFrom: { type: "artifact" } }, splitSecond: true },
+      grantsToSpells: { filter: { cast: true, castBy: "you", manaFrom: { type: "artifact" } }, splitSecond: true },
       text: CHAOS_TEXT,
     },
   ],

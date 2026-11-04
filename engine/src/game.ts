@@ -512,6 +512,7 @@ import {
   sameTargetRef,
   targetsFillable,
   playerAtSeat,
+  seatOfTargetSpec,
 } from "./target.js";
 import { distinctTargetCount, targetCountBounds } from "./target-count.js";
 import {
@@ -41372,6 +41373,8 @@ export class Game {
     return {
       zoneChangeCount: object.zoneChangeCount ?? 0,
       cardName: printedCardName(object),
+      controller: object.controller,
+      ...(object.seatTargetWaiting !== undefined ? { seatTargetWaiting: object.seatTargetWaiting } : {}),
       targets: object.targets ? [...object.targets] : null,
       ...(object.targetZones !== undefined ? { targetZones: [...object.targetZones] } : {}),
       ...(object.targetStints !== undefined ? { targetStints: [...object.targetStints] } : {}),
@@ -41554,6 +41557,11 @@ export class Game {
       invalidateComputedCache();
     }
     this.emit({ type: "spell-copied", original: originalId, copy: id, controller });
+    // Another player's copy has their seats (`{ seat }`), its targets the same.
+    if (spell.controller !== controller) {
+      if (spell.seatTargetWaiting !== undefined) this.state.objects[id].seatTargetWaiting = spell.seatTargetWaiting;
+      this.rebindSeatTargets(this.state.objects[id], spell.controller, controller);
+    }
     if (newTargets && this.askCopyTargets(id)) return id;
     // The copy is a new spell targeting what the original does, so each of
     // those objects becomes the target of a spell again (rule 707.10) --
@@ -41921,8 +41929,62 @@ export class Game {
     const previousController = spell.controller;
     if (previousController === player) return;
     spell.controller = player;
+    this.rebindSeatTargets(spell, previousController, player);
     invalidateComputedCache();
     this.emit({ type: "spell-control-changed", object: spell.id, controller: player, previousController });
+  }
+
+  /**
+   * "For each opponent, … up to one target creature that player controls"
+   * (Tempted by the Oriq) is one slot per seat from the spell's controller
+   * (`{ seat }`), so a spell with a new controller has new seats. Each player
+   * stays who their target was chosen for, so it's still legal if they're still
+   * an opponent: its target moves to that player's slot. The new controller's
+   * own target has no slot (unless the text says each player): it waits, now
+   * illegal, in the one player's slot with no target for them (rule 115.7: the
+   * number of targets stays; `GameObject.seatTargetWaiting`), which may be
+   * changed to one of theirs, and it's back in its own if the spell moves on.
+   */
+  private rebindSeatTargets(spell: GameObject, from: PlayerId, to: PlayerId): void {
+    const targets = spell.targets;
+    if (targets == null) return;
+    const order = this.state.turnOrder;
+    const slotAtSeat = new Map<number, number>();
+    concreteTargetSpecs(this.spellTargetSpecs(spell), targets.length).forEach((spec, slot) => {
+      const seat = seatOfTargetSpec(spec);
+      // Nobody sits at a seat past the table's size: no target, and none to come.
+      if (seat !== undefined && seat < order.length) slotAtSeat.set(seat, slot);
+    });
+    if (slotAtSeat.size === 0) return;
+    const waiting = spell.seatTargetWaiting;
+    const moved = new Map<number, number>();
+    const slotFor = new Map<PlayerId, number>();
+    for (const [seat, slot] of slotAtSeat) slotFor.set(playerAtSeat(order, to, seat)!, slot);
+    const homeless: number[] = [];
+    for (const [seat, slot] of slotAtSeat) {
+      const chosenFor = waiting?.slot === slot ? waiting.chosenFor : playerAtSeat(order, from, seat)!;
+      const next = slotFor.get(chosenFor);
+      if (next === undefined) {
+        homeless.push(slot);
+      } else {
+        moved.set(slot, next);
+        slotFor.delete(chosenFor);
+      }
+    }
+    delete spell.seatTargetWaiting;
+    const [vacant] = slotFor.values();
+    if (homeless.length === 1 && vacant !== undefined) {
+      moved.set(homeless[0], vacant);
+      spell.seatTargetWaiting = { slot: vacant, chosenFor: to };
+    }
+    const reseat = <T>(list: readonly T[]): T[] => {
+      const out = [...list];
+      for (const [slot, next] of moved) out[next] = list[slot];
+      return out;
+    };
+    spell.targets = reseat(targets);
+    if (spell.targetZones !== undefined) spell.targetZones = reseat(spell.targetZones);
+    if (spell.targetStints !== undefined) spell.targetStints = reseat(spell.targetStints);
   }
 
   private changeStackTargets(
@@ -41994,6 +42056,8 @@ export class Game {
       changed.push(next);
       if (zones !== undefined) zones[slot] = this.zonesOfTargets([next])[0] ?? null;
       if (stints !== undefined) stints[slot] = this.stintsOfTargets([next])[0] ?? null;
+      // A new target is chosen for the player whose slot it's in.
+      if (object.seatTargetWaiting?.slot === slot) delete object.seatTargetWaiting;
     });
     if (changed.length === 0) return;
     object.targets = targets;
@@ -56195,6 +56259,7 @@ export class Game {
     object.entry = entry;
     object.castFrom = undefined;
     delete object.putOnStackBy;
+    delete object.seatTargetWaiting;
     delete object.convokedBy;
     // The O-Ring link (rule 610.3) dies with any move: a card that leaves
     // exile some other way is no longer the one the Banishing Light took, so
