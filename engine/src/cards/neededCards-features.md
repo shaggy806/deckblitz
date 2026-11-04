@@ -5096,3 +5096,5 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 
 **What a flicker does once it's back (2026-11-04).** `effect:flicker-return-then`: `flicker`'s `returnThen`, run by the delayed return and reading it through `this-way`'s `"put-onto-battlefield"`. Phelia, Exuberant Shepherd; Obzedat, Ghost Council; Hallowed Respite (a plain `sequence`).
 **You may roll again (2026-11-04).** `effect:roll-again`: a `roll-dice` table row's `mayRollAgain` (rule 706.3c), a `may` of the same roll after the row, with the number of dice held; `effect-worth` reads a roll as its rows' average, so a bot rolls again for tokens. Delina, Wild Mage.
+
+**A CDA over devotion (2026-11-04).** `bug:cda-devotion`, no engine code: `setBasePtFromCount` reads `{ devotionTo }` in every zone already (Tymaret's shape). Daxos, Blessed by the Sun.

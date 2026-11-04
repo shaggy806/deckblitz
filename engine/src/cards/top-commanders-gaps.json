@@ -1806,7 +1806,8 @@
   "effect:delayed-trigger-each-combat",
   "effect:delayed-trigger-extra-turn-end-step",
   "effect:graveyard-to-library-bottom-random",
-  "effect:roll-again"
+  "effect:roll-again",
+  "bug:cda-devotion"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {
