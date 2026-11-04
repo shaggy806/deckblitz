@@ -1788,6 +1788,12 @@ export type StaticCondition =
    * you cast this spell". True when the fact is a condition that held or an
    * amount above 0; never for a copy, which wasn't cast (rule 707.10). */
   | { readonly kind: "as-cast"; readonly fact: number }
+  /** At least one attacker of the declaration that fired this resolving
+   * ability (an `attack-with` trigger's) was declared attacking you, the
+   * player: that declaration and not the turn, read as it was declared, gone
+   * since or not. Firemane Commando's "if none of those creatures attacked
+   * you", under a `not`. False anywhere but a resolution. */
+  | { readonly kind: "those-attackers-at-you" }
   /** Was the ability's own source cast for its spectacle cost (rule
    * 702.137)? — Rafter Demon's "When this creature enters, **if its
    * spectacle cost was paid**, …"; read like `self-kicked`. */

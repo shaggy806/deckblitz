@@ -327,6 +327,56 @@ describe("what a declaration of attackers holds", () => {
   });
 });
 
+describe("Firemane Commando's 'those creatures': that declaration, not the turn", () => {
+  /** Alice's two Bears, Carol's Commando: the first combat at `first`, then a
+   * second combat at `second`, untapped between. Returns her hand's growth. */
+  const twoCombats = (first: PlayerId, second: PlayerId): number[] => {
+    const t = table({ players: 3, deck: "Plains" });
+    const { game } = t;
+    spawn(game, "Firemane Commando", C);
+    const bears = [spawn(game, "Grizzly Bears"), spawn(game, "Grizzly Bears")];
+    t.a.declareAttackersFn = () => {
+      const defender = (game.state.turn.combatPhases ?? 1) === 1 ? first : second;
+      return bears.map((attacker) => ({ attacker, defender }));
+    };
+    const start = hand(game).length;
+    game.advanceUntil(
+      (s) => s.turn.step === "declare-attackers" && s.objects[bears[0]].attackedThisTurn === true && quiet(s) && s.priority.holder === A,
+    );
+    const afterFirst = hand(game).length;
+    game.debugApplyEffect(A, { kind: "additional-combat", afterThisPhase: true }, []);
+    game.advanceUntil(quiet);
+    game.advanceUntil((s) => s.turn.step === "end-combat" && s.priority.holder === A);
+    for (const id of bears) game.state.objects[id].tapped = false;
+    game.advanceUntil((s) => (s.turn.combatPhases ?? 0) === 2 && s.turn.step === "declare-attackers" && quiet(s) && s.priority.holder === A);
+    return [afterFirst - start, hand(game).length - afterFirst];
+  };
+
+  it("those that attacked you in the first combat and someone else in the second still draw", () => {
+    expect(twoCombats(C, B)).toEqual([0, 1]);
+  });
+
+  it("those that attacked someone else first and you second don't", () => {
+    expect(twoCombats(B, C)).toEqual([1, 0]);
+  });
+
+  it("one of those creatures gone by resolution still attacked you", () => {
+    const t = table({ players: 3, deck: "Plains" });
+    const { game } = t;
+    spawn(game, "Firemane Commando", C);
+    const [one, two] = [spawn(game, "Grizzly Bears"), spawn(game, "Grizzly Bears")];
+    t.a.declareAttackersFn = () => [
+      { attacker: one, defender: C },
+      { attacker: two, defender: B },
+    ];
+    const start = hand(game).length;
+    game.advanceUntil((s) => s.turn.step === "declare-attackers" && s.zones.shared.stack.length === 1);
+    game.debugApplyEffect(B, { kind: "destroy", target: 0 }, [ref(one)]);
+    game.advanceUntil(quiet);
+    expect(hand(game).length).toBe(start);
+  });
+});
+
 describe("blocks: how many, by what, and once for the lot", () => {
   it("Seifer: deathtouch when two block a creature attacking an opponent, not one", () => {
     const t = table();

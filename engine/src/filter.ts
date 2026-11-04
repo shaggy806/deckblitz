@@ -832,6 +832,12 @@ export interface CardFilter {
    * a protection grant's "creatures **your opponents** control" fixed to the
    * players they were as it resolved (`grant-protection`). */
   readonly controllerIn?: readonly PlayerId[];
+  /** In a delayed ability's effect: controlled by this player **as the
+   * delayed ability is set up**, whoever that is by the time it resolves —
+   * Siren's Call's "that player", the active player then, though the next end
+   * step may fall on another's turn. Bound to `controllerIn` at setup
+   * (`bindSetUpPlayers`); unbound it matches nothing. */
+  readonly controlledByAsSetUp?: "active-player";
   /** "A creature **whose controller has eight or more cards in their
    * graveyard**" (Lullmage's Domination's `targetCostReduction`). */
   readonly controllerGraveyardAtLeast?: number;
@@ -1049,6 +1055,12 @@ export interface CardFilter {
    * since the beginning of the turn". Battlefield only: off it (a last-known
    * snapshot) nothing has been. */
   readonly controlledContinuously?: boolean;
+  /** Its controller has (or hasn't) controlled it continuously since **this
+   * turn** began, whoever's turn it is — Siren's Call's "didn't control
+   * continuously since the beginning of the turn". On the controller's own
+   * turn it's `controlledContinuously`; on another's, one they gained during
+   * their last turn has been theirs since this one began. Battlefield only. */
+  readonly controlledSinceTurnBegan?: boolean;
   /** Is (or isn't) renowned (rule 702.112b) — renown's "if it isn't
    * renowned", "as long as this creature is renowned" (Goblin Glory Chaser),
    * "if it's renowned" (Consul's Lieutenant). Asked like `monstrous`. */
@@ -2378,6 +2390,7 @@ export function matchesFilter(
     if (chosen === undefined || controller !== chosen) return false;
   }
   if (filter.controllerIn !== undefined && !filter.controllerIn.includes(controller)) return false;
+  if (filter.controlledByAsSetUp !== undefined) return false;
   if (
     filter.controllerGraveyardAtLeast !== undefined &&
     (state.zones.perPlayer[controller]?.graveyard.length ?? 0) < filter.controllerGraveyardAtLeast
@@ -2410,6 +2423,13 @@ export function matchesFilter(
   if (filter.enteredThisTurn !== undefined) {
     const turn = live !== undefined ? live.enteredBattlefieldOnTurn : (lki!.enteredOnTurn ?? null);
     if ((turn === state.turn.number) !== filter.enteredThisTurn) return false;
+  }
+  if (filter.controlledSinceTurnBegan !== undefined) {
+    const held =
+      live !== undefined &&
+      live.zone === "battlefield" &&
+      (live.controlSinceSeq ?? 0) < (state.turn.beganAtSeq ?? 0);
+    if (held !== filter.controlledSinceTurnBegan) return false;
   }
   if (filter.controlledContinuously !== undefined) {
     const held = live !== undefined && live.zone === "battlefield" && !live.summoningSick;

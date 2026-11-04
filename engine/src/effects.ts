@@ -14551,6 +14551,24 @@ function blockPartners(
   return ids.flatMap((id) => (id === undefined ? [] : [{ object: id, stint: ctx.battlefieldStintOf(id) }]));
 }
 
+/** `value` with every `controlledByAsSetUp` clause in it bound to the players
+ * it names now, nested effects included; `value` itself if there's none. For a
+ * delayed ability's effect, as it's set up (rule 603.7c). */
+function bindSetUpPlayers<T>(value: T, ctx: ResolutionContext): T {
+  if (value === null || typeof value !== "object") return value;
+  if (Array.isArray(value)) {
+    const items = value.map((item) => bindSetUpPlayers(item as unknown, ctx));
+    return items.some((item, i) => item !== value[i]) ? (items as T) : value;
+  }
+  const record = value as Record<string, unknown>;
+  if (record["controlledByAsSetUp"] !== undefined) {
+    const { controlledByAsSetUp, ...rest } = record;
+    return { ...rest, controllerIn: ctx.playersInScope(controlledByAsSetUp as "active-player") } as T;
+  }
+  const entries = Object.entries(record).map(([key, v]): [string, unknown] => [key, bindSetUpPlayers(v, ctx)]);
+  return entries.some(([key, v]) => v !== record[key]) ? (Object.fromEntries(entries) as T) : value;
+}
+
 /** `value` with every `blockedThisTurn` clause in it bound to the objects its
  * `of` names now, nested effects included; `value` itself if there's none. For
  * a delayed ability's effect, as it's set up: what it says "it" about is fixed
@@ -16556,7 +16574,9 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       // "At this turn's next end of combat, destroy all creatures that blocked
       // or were blocked by it this turn" (Venomous Breath): "it" is fixed now,
       // and the delayed ability has no target to lose if it has left by then.
-      const aboutBlocks = bindBlockPartners(spec.effect, ctx);
+      // "Destroy all creatures **that player** controls" (Siren's Call): who
+      // that is is fixed now too.
+      const aboutBlocks = bindSetUpPlayers(bindBlockPartners(spec.effect, ctx), ctx);
       if (aboutBlocks !== spec.effect) {
         ctx.delayTrigger(spec.at, aboutBlocks, spec.text, controller, []);
         return;

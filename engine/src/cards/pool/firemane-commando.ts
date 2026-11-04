@@ -1,8 +1,9 @@
 import { defineCard } from "../define.js";
 
 // "They draw a card if none of those creatures attacked you": asked as it
-// resolves, of those creatures (`in: "attackers"`), as they were then if they've
-// gone. Not an intervening if: it says nothing right after the trigger's event.
+// resolves, of that declaration and not the turn (an earlier combat's attack
+// on you doesn't count), each attacker as it was declared if it's gone. Not an
+// intervening if: it says nothing right after the trigger's event.
 
 export default defineCard({
   name: "Firemane Commando",
@@ -27,11 +28,7 @@ export default defineCard({
       targets: [],
       effect: {
         kind: "conditional",
-        condition: {
-          kind: "aggregate",
-          value: { aggregate: "count", in: "attackers", filter: { attackedYouThisTurn: true } },
-          compare: { op: "eq", n: 0 },
-        },
+        condition: { kind: "not", of: { kind: "those-attackers-at-you" } },
         then: { kind: "draw", amount: 1, who: "trigger-player" },
       },
       resolve: null,

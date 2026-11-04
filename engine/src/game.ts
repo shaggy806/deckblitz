@@ -8375,6 +8375,8 @@ export class Game {
   private beginTurn(): void {
     if (this.askTurnBegin()) return;
     this.state.turn.number += 1;
+    this.state.timestampSeq += 1;
+    this.state.turn.beganAtSeq = this.state.timestampSeq;
     // Day/Night (rule 726.3/726.4) is checked as a turn begins, against the
     // spells the *previous* turn's active player cast that turn — captured now,
     // before the per-player counts are reset below. `null` on turn 1.
@@ -31416,6 +31418,11 @@ export class Game {
         const atLeast = condition.atLeast ?? (condition.atMost === undefined ? 1 : 0);
         return done >= atLeast && (condition.atMost === undefined || done <= condition.atMost);
       }
+      // What the firing declaration aimed at you, each attacker where it was
+      // declared, whatever has become of it (Firemane Commando).
+      if (condition.kind === "those-attackers-at-you") {
+        return (refs.attackers ?? []).some((a) => a.at === controller);
+      }
       // Recursing keeps the context-only kinds above answerable under a
       // `not`, which `staticConditionMet` alone would read as always false.
       if (condition.kind === "not") return !conditionMet(condition.of);
@@ -31442,7 +31449,6 @@ export class Game {
           // "each opponent who has three or more poison counters" (Ixhel),
           // an `of-player`: the player this effect is about.
           ...(refs.player !== undefined ? { thatPlayer: refs.player } : {}),
-          ...(refs.attackedTogether !== undefined ? { attackedTogether: refs.attackedTogether } : {}),
           ...(sourceLastKnown !== undefined ? { sourceLastKnown } : {}),
         })
       );

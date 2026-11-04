@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
 import type { GameState } from "../state.js";
-import { A, B, cast, counters, keywords, lands, pt, ref, settle, spawn, table, toHand, zone } from "./harness.js";
+import { A, B, C, cast, counters, keywords, lands, pt, quiet, ref, settle, spawn, table, toHand, zone } from "./harness.js";
 
 // `CardDefinition.asCast` (rule 601.2i): facts about the board fixed as a
 // spell finishes being cast, read as it resolves through the condition
@@ -169,6 +169,36 @@ describe("timing by when it's cast: Siren's Call", () => {
     expect(zone(game, wall)).toBe("battlefield");
     expect(zone(game, newcomer)).toBe("battlefield");
     expect(zone(game, hers)).toBe("battlefield");
+  });
+});
+
+describe("Siren's Call's 'that player': fixed as it resolves", () => {
+  it("the turn ended, the next end step is the next player's: still the player it resolved on", () => {
+    const { game } = table({ players: 3 });
+    lands(game, "Island", 1);
+    const stayed = spawn(game, "Hill Giant", B);
+    const wall = spawn(game, "Wall of Omens", B);
+    const carols = spawn(game, "Hill Giant", C);
+    const alices = spawn(game, "Hill Giant", A);
+    const card = toHand(game, "Siren's Call");
+    game.advanceUntil((s) => s.turn.number === 2 && s.turn.step === "upkeep" && s.priority.holder === A);
+    cast(game, card);
+    // Bob got this creature during his own turn: he hasn't held it since his
+    // most recent turn began, but he has since the beginning of Carol's.
+    const taken = spawn(game, "Grizzly Bears", B, { sick: true });
+    game.debugApplyEffect(A, { kind: "end-the-turn" }, []);
+    game.advanceUntil((s) => s.turn.number === 3 && quiet(s) && s.priority.holder === C);
+    expect(zone(game, stayed)).toBe("battlefield");
+    // Arrives on Carol's turn: Bob hasn't held it since that turn began.
+    const late = spawn(game, "Goblin Piker", B, { sick: true });
+    game.advanceUntil((s) => s.turn.number === 4);
+    expect(zone(game, stayed)).toBe("graveyard");
+    expect(zone(game, taken)).toBe("graveyard");
+    expect(zone(game, wall)).toBe("battlefield");
+    expect(zone(game, late)).toBe("battlefield");
+    // Carol is the active player by then, and isn't "that player".
+    expect(zone(game, carols)).toBe("battlefield");
+    expect(zone(game, alices)).toBe("battlefield");
   });
 });
 

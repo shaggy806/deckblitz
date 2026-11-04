@@ -3165,6 +3165,10 @@ export type AddedPhase =
 
 export interface TurnState {
   number: number;
+  /** `GameState.timestampSeq` as this turn began: what came under a player's
+   * control from then on has a `controlSinceSeq` no lower than this
+   * (`CardFilter.controlledSinceTurnBegan`). */
+  beganAtSeq?: number;
   /** The round under way: each player's turn once, from the starting
    * player's seat round to it again, is one round — so at a four-player
    * table turn 37 is round 10. No rule defines it; it's how the client says

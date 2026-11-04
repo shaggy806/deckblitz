@@ -421,9 +421,6 @@ export interface ConditionOptions {
    * resolution; a static ability has none, and reads such a condition false.
    */
   readonly thatPlayer?: PlayerId;
-  /** The attackers that counted for the resolving trigger, for an aggregate's
-   * `in: "attackers"` — Firemane Commando's "none of those creatures". */
-  readonly attackedTogether?: readonly { readonly object: ObjectId; readonly zoneChangeCount: number }[];
   /**
    * The player a condition is read as — its "you" — in place of the
    * source's controller. Set only by `of-player` as it reads its inner
@@ -1025,7 +1022,6 @@ function evalStaticCondition(
       // to count it, the source (as every count of a condition does).
       const matches = aggregateMatches(state, registry, value, you, {
         except,
-        ...(opts.attackedTogether !== undefined ? { attackers: opts.attackedTogether } : {}),
         battlefieldMatch: (id, filter) =>
           !notYetHere(id) && (condition.countsSelf === true || !skipsSelf(id)) && matchesFilter(state, registry, id, filter, { you }),
       });
@@ -1188,6 +1184,9 @@ function evalStaticCondition(
     }
     case "as-cast":
       return (source.asCastFacts?.[condition.fact] ?? 0) > 0;
+    // A resolving ability's alone (`makeResolutionContext`'s `conditionMet`).
+    case "those-attackers-at-you":
+      return false;
     case "self-kicked":
       // Which of two kicker costs (rule 702.33f): the stack's `kickedWith`
       // (cleared as it leaves the stack), or `enteredKickedWith` once it has

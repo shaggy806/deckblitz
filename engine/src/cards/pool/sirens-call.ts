@@ -13,9 +13,10 @@ import { BEFORE_ATTACKERS_ANY_TURN } from "../helpers.js";
 //   Declare Attackers Step of the first combat phase in that turn.
 //
 // "Attack this turn if able" changes the rules rather than any object (rule
-// 611.2c), so it reaches a creature that arrives later. The next end step is
-// this turn's, so "that player" is still the active player and "the beginning
-// of the turn" is this one's (`controlledContinuously` with `active-player`).
+// 611.2c), so it reaches a creature that arrives later. "That player" is the
+// active player as it resolves, fixed then (`controlledByAsSetUp`): if the turn
+// is ended, the next end step is another player's (rule 724). "This turn" and
+// "the beginning of the turn" are the turn the delayed ability resolves on.
 
 export default defineCard({
   name: "Siren's Call",
@@ -42,8 +43,8 @@ export default defineCard({
           filter: {
             type: "creature",
             notSubtypes: ["Wall"],
-            controlledBy: "active-player",
-            controlledContinuously: true,
+            controlledByAsSetUp: "active-player",
+            controlledSinceTurnBegan: true,
             attackedThisTurn: false,
           },
         },
