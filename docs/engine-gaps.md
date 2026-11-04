@@ -6,6 +6,11 @@ rule number, the code that does it today and the cards it blocks. `BACKLOG.md` k
 per gap under the same bold title; when a gap closes, delete it here and move its
 `BACKLOG.md` line to `COMPLETED.md`.
 
+- **Two different "must be blocked by" filters on one attacker merge into one requirement** (found 2026-11-03). An attacker
+  under two filtered requirements should have each counted toward the most requirements possible (rule 509.1c).
+  `combat/blocking.ts`'s `mustBeBlockedByOneOf` holds one list per attacker, so a blocker matching either filter satisfies both.
+  Not checked: which cards in the pool can reach it.
+
 - **The auto-payer can find no plan for a payable cost** (found 2026-11-03, older than the finding: it fails
   with `lifeLast` switched off too). `coverSpecific` (`mana-payment.ts`) takes pips in WUBRG order, each from
   the free source first, and never takes one back: Fellwar Stone (making {W} and {R} off an opponent's lands)

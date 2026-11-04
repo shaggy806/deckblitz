@@ -12,6 +12,33 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **One of each of several categories** (2026-11-03, `5512cfcd7`): `choose-one-of-each` on `choose-permanents` and
+  `choose-from-zone`, a card standing for several. Cataclysm, Global Ruin, Planar Overlay, Sundering Titan, Noxious Vapors.
+- **Suspend X, and a suspend cost paid to cast** (2026-11-03, `f02d6c0cf`): Benalish Commander, Aeon Chronicler, Detritivore,
+  The Face of Boe.
+- **Mana restrictions read at the cast** (2026-11-03, `efc86c38a`): `castFrom`, `notCastFrom`, `spendOnlyManaFrom`. Interdimensional
+  Web Watch, Altar of the Lost, Mm'menon, Heartwood Crafter, Elfhame Druid, Volshe Tideturner, Jasmine, Myr Superion, Imperiosaur,
+  Eclipsed Realms.
+- **A permanent with the abilities of exiled cards** (2026-11-03, `931b1d611`): `grantsActivatedOf`'s `exile`, `exiled-with` and
+  `chosen-exiled`. Rex, Mairsil, Hazel's Brewmaster, Agatha's Soul Cauldron, Idris, Koh.
+- **One target slot over players and permanents** (2026-11-03, `eb56fa171`): `orPlayer` with each part's own filter. Wrathful Red
+  Dragon, Wrathful Raptors, Lozhan, Coalborn Entity, Cautery Sliver, Captain's Maneuver.
+- **Tokens created with this** (2026-11-03, `9342f74fc`): `linkedToSource`, `createdWithSource`, `countersOnMaker`. Saproling
+  Burst, Gutter Grime, Faerie Artisans, Arcane Artisan, Mysterio.
+- **Protection outside your commander's color identity** (2026-11-03, `603daad3e`): Commander's Plate, Mother of Runes, Eldritch
+  Immunity.
+- **A hand looked at as a permanent enters, and the top N of a target's library** (2026-11-03, `0477dbe90`): `chooseOnEnterLook`.
+  Arachne, Orcish Spy, Dimir Charm.
+- **Batched, first-time and not-attacking tapping** (2026-11-03, `76a947c8c`): `becomes-tapped`'s fields. Deeproot Pilgrimage, Tale
+  of Katara and Toph, Verity Circle.
+- **Combat requirements by filter, exactly one and at most one** (2026-11-03, `617801bf5`, fixed by `c89b61301`): Nacatl War-Pride,
+  Slayer's Cleaver, Talruum Piper, Marble Priest, Magnetic Web, Viashino Bey, Ekundu Cyclops, Predatory Rampage, Boldwyr
+  Intimidator.
+- **Aura-host statics** (2026-11-03, `7d42e0dfc`): `controlledBy: "monarch"`, `blocksDespiteLandwalk`. Fall from Favor, Street
+  Savvy, Power Artifact, Demonic Torment, Desert's Hold, Detainment Spell.
+- **The greatest of a zone** (2026-11-03, `b63fdee8e`): the `greatestInZone` filter clause, and `outsideFold` so a trigger's or a
+  resolving effect's condition sees its source's own statics. Topple, Favor of the Mighty, Getaway Glamer, Historian's Wisdom,
+  Might Makes Right, Strength-Testing Hammer, Desecrator Hag.
 - **Landwalk of any kind** (2026-11-03, `7b9ea10b7`): rule 702.14, a static's land filter or a chosen land type, with Staff of
   the Ages, Hammerheim and the bots' block check reading it. Dryad Sophisticate, Trailblazer's Boots, Vectis Gloves, Traveler's
   Cloak, Illusionary Presence.

@@ -850,6 +850,8 @@ missing. Re-run `--greedy` for Phase 2's order.
   `effect:hand-mana-ability` with `effect:mana-ability-graveyard-exile-cost`. Three cloud sessions took six families each
   beside them and were stopped early, pushing to their own branches for this PC to verify and merge: nine built, one half built
   and finished here (`keyword:landwalk`), and eight not started. The night's total: 25 families, 48 keys, 107 proving cards.
+  A second round the same day built 12 more families with 67 proving cards, those eight among them, with one verify at the
+  end to measure what fewer verifies save.
 - **2026-11-03: `replacement:new-event-replacements`, its draw units.** `would-draw`'s `instead: { effect }` and the
   except-first and first-each-turn exemptions (`draw-replacement-look-and-choose`, `-except-first`, `-first-each-turn`);
   Underrealm Lich, Tomorrow, Sages of the Anima, Teferi's Ageless Insight, Reed Richards, Bard. Left: the reveal key and

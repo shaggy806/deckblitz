@@ -441,13 +441,14 @@ section keeps only what to do next.
   mana costs, permanents controlled since the turn began, a may another player answers, batched dies triggers, tokens linked to
   an exiled card or their maker, "up to" in a searched public zone, an Aura tapping its host, mana abilities from a hand or a
   graveyard, attacks on a battle or an opponent, landwalk of any kind, draw replacements, mana pools, lands tapped for other
-  mana, a player becoming a target, hexproof from abilities, cards in exile as targets and "this way" results (320 proving
-  cards; `--stale` 1,609 wait for `author-freed`). Next by `--greedy --groups`: `mechanic:suspend-and-time-counters` (6),
-  `effect:look-at-opponent-hand-as-enters` (6), `effect:tokens-created-with-source` (6); three cloud sessions stopped early
-  on 2026-11-03, so `condition:enchanted-controller-is-monarch`, `effect:protection-choice-and-dynamic`,
-  `static:combat-restriction-extensions`, `trigger:becomes-tapped-batch`, `condition:greatest-power-condition`,
-  `effect:target-spec-additions` and `static:gain-abilities-from-graveyard` are simply still open. Narrow keys `author-freed`
-  should give: Stronghold Gambit (a secret pick from hand), The Toymaker's Trap (an unchosen number, an opponent's guess),
+  mana, a player becoming a target, hexproof from abilities, cards in exile as targets, "this way" results, greatest of a zone, Aura-host statics, combat requirements by filter,
+  batched and first-time tapping, a hand looked at as a permanent enters, protection outside the commander's identity, tokens
+  created with their source, one target slot over players and permanents, the abilities of exiled cards, mana restrictions
+  read at the cast, suspend X and one of each category (387 proving cards; `--stale` 1,630 wait for `author-freed`). Next by
+  `--greedy --groups`: `decision:choose-permanent`'s other group (6), `effect:mana-ability-side-effects`'s triggered group (6),
+  `cost:spend-only-chosen-type-or-filter` (6), `effect:control-change-extensions` (6). Narrow keys `author-freed`
+  should give: Captain America (an intervening-if read as it resolves), Ajani, Nacatl Pariah (keeps one permanent, not one per
+  type), Stronghold Gambit (a secret pick from hand), The Toymaker's Trap (an unchosen number, an opponent's guess),
   Total War ("didn't attack" means that declaration, not the turn), Siren's Call (`condition:cast-timing-condition`), Tanglewalker
   (not true landwalk), Veteran's Voice (`hostOfSource: false` would fizzle if the Aura moves onto the target) and Dance of Many
   (its two leave abilities are printed); `replacement:others-enter-as-subtype` (Master Biomancer) stays open.
@@ -518,6 +519,8 @@ section keeps only what to do next.
 One line each; the detail (rule numbers, code sites, the cards each blocks) is in
 **`docs/engine-gaps.md`**, under the same bold title. When a gap closes, delete its detail
 there and move this line to `COMPLETED.md`.
+
+- **Two different "must be blocked by" filters on one attacker merge into one requirement** (lenient, rule 509.1c).
 
 - **The auto-payer can find no plan for a payable cost** (Fellwar Stone and Silent Clearing, {W}{R}: the Stone goes on the {W}, and the spell isn't offered).
 - **The auto-payer can pay away a player's last life** (two painful sources at 2 life: each toll is checked alone).
