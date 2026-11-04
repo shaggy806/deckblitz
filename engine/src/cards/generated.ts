@@ -15008,6 +15008,7 @@ import _poolMechanNavigator from "./pool/mechan-navigator.js";
 import _poolMechanShieldmate from "./pool/mechan-shieldmate.js";
 import _poolMechanicalMobster from "./pool/mechanical-mobster.js";
 import _poolMechanizedNinjaCavalry from "./pool/mechanized-ninja-cavalry.js";
+import _poolMechanizedProduction from "./pool/mechanized-production.js";
 import _poolMechanizedWarfare from "./pool/mechanized-warfare.js";
 import _poolMechanozoa from "./pool/mechanozoa.js";
 import _poolMeddlingMage from "./pool/meddling-mage.js";
@@ -15787,6 +15788,7 @@ import _poolMoorlandInquisitor from "./pool/moorland-inquisitor.js";
 import _poolMoorlandRescuer from "./pool/moorland-rescuer.js";
 import _poolMorale from "./pool/morale.js";
 import _poolMoratoriumStone from "./pool/moratorium-stone.js";
+import _poolMoraugFuryOfAkoum from "./pool/moraug-fury-of-akoum.js";
 import _poolMorbidBloom from "./pool/morbid-bloom.js";
 import _poolMorbidCuriosity from "./pool/morbid-curiosity.js";
 import _poolMorbidHunger from "./pool/morbid-hunger.js";
@@ -17337,6 +17339,7 @@ import _poolPacksongPup from "./pool/packsong-pup.js";
 import _poolPactOfNegation from "./pool/pact-of-negation.js";
 import _poolPactOfTheTitan from "./pool/pact-of-the-titan.js";
 import _poolPactdollTerror from "./pool/pactdoll-terror.js";
+import _poolPadeemConsulOfInnovation from "./pool/padeem-consul-of-innovation.js";
 import _poolPageLooseLeaf from "./pool/page-loose-leaf.js";
 import _poolPain101 from "./pool/pain-101.js";
 import _poolPainDistributor from "./pool/pain-distributor.js";
@@ -18352,6 +18355,7 @@ import _poolProjektorInspector from "./pool/projektor-inspector.js";
 import _poolPrologueToPhyresis from "./pool/prologue-to-phyresis.js";
 import _poolPromiseOfAclazotz from "./pool/promise-of-aclazotz.js";
 import _poolPromiseOfBunrei from "./pool/promise-of-bunrei.js";
+import _poolPromiseOfLoyalty from "./pool/promise-of-loyalty.js";
 import _poolPromiseOfPower from "./pool/promise-of-power.js";
 import _poolPromisedKannushi from "./pool/promised-kannushi.js";
 import _poolPromisingDuskmage from "./pool/promising-duskmage.js";
@@ -28153,6 +28157,7 @@ import _poolWorkhorse from "./pool/workhorse.js";
 import _poolWorkshopAssistant from "./pool/workshop-assistant.js";
 import _poolWorkshopElders from "./pool/workshop-elders.js";
 import _poolWorkshopWarchief from "./pool/workshop-warchief.js";
+import _poolWorldAtWar from "./pool/world-at-war.js";
 import _poolWorldBreaker from "./pool/world-breaker.js";
 import _poolWorldChampionCelestialWeapon from "./pool/world-champion-celestial-weapon.js";
 import _poolWorldMap from "./pool/world-map.js";
@@ -44250,6 +44255,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMechanShieldmate,
   _poolMechanicalMobster,
   _poolMechanizedNinjaCavalry,
+  _poolMechanizedProduction,
   _poolMechanizedWarfare,
   _poolMechanozoa,
   _poolMeddlingMage,
@@ -45029,6 +45035,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMoorlandRescuer,
   _poolMorale,
   _poolMoratoriumStone,
+  _poolMoraugFuryOfAkoum,
   _poolMorbidBloom,
   _poolMorbidCuriosity,
   _poolMorbidHunger,
@@ -46579,6 +46586,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPactOfNegation,
   _poolPactOfTheTitan,
   _poolPactdollTerror,
+  _poolPadeemConsulOfInnovation,
   _poolPageLooseLeaf,
   _poolPain101,
   _poolPainDistributor,
@@ -47594,6 +47602,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPrologueToPhyresis,
   _poolPromiseOfAclazotz,
   _poolPromiseOfBunrei,
+  _poolPromiseOfLoyalty,
   _poolPromiseOfPower,
   _poolPromisedKannushi,
   _poolPromisingDuskmage,
@@ -57395,6 +57404,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolWorkshopAssistant,
   _poolWorkshopElders,
   _poolWorkshopWarchief,
+  _poolWorldAtWar,
   _poolWorldBreaker,
   _poolWorldChampionCelestialWeapon,
   _poolWorldMap,
@@ -73505,6 +73515,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/mechan-shieldmate": _poolMechanShieldmate,
   "pool/mechanical-mobster": _poolMechanicalMobster,
   "pool/mechanized-ninja-cavalry": _poolMechanizedNinjaCavalry,
+  "pool/mechanized-production": _poolMechanizedProduction,
   "pool/mechanized-warfare": _poolMechanizedWarfare,
   "pool/mechanozoa": _poolMechanozoa,
   "pool/meddling-mage": _poolMeddlingMage,
@@ -74284,6 +74295,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/moorland-rescuer": _poolMoorlandRescuer,
   "pool/morale": _poolMorale,
   "pool/moratorium-stone": _poolMoratoriumStone,
+  "pool/moraug-fury-of-akoum": _poolMoraugFuryOfAkoum,
   "pool/morbid-bloom": _poolMorbidBloom,
   "pool/morbid-curiosity": _poolMorbidCuriosity,
   "pool/morbid-hunger": _poolMorbidHunger,
@@ -75834,6 +75846,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/pact-of-negation": _poolPactOfNegation,
   "pool/pact-of-the-titan": _poolPactOfTheTitan,
   "pool/pactdoll-terror": _poolPactdollTerror,
+  "pool/padeem-consul-of-innovation": _poolPadeemConsulOfInnovation,
   "pool/page-loose-leaf": _poolPageLooseLeaf,
   "pool/pain-101": _poolPain101,
   "pool/pain-distributor": _poolPainDistributor,
@@ -76849,6 +76862,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/prologue-to-phyresis": _poolPrologueToPhyresis,
   "pool/promise-of-aclazotz": _poolPromiseOfAclazotz,
   "pool/promise-of-bunrei": _poolPromiseOfBunrei,
+  "pool/promise-of-loyalty": _poolPromiseOfLoyalty,
   "pool/promise-of-power": _poolPromiseOfPower,
   "pool/promised-kannushi": _poolPromisedKannushi,
   "pool/promising-duskmage": _poolPromisingDuskmage,
@@ -86650,6 +86664,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/workshop-assistant": _poolWorkshopAssistant,
   "pool/workshop-elders": _poolWorkshopElders,
   "pool/workshop-warchief": _poolWorkshopWarchief,
+  "pool/world-at-war": _poolWorldAtWar,
   "pool/world-breaker": _poolWorldBreaker,
   "pool/world-champion-celestial-weapon": _poolWorldChampionCelestialWeapon,
   "pool/world-map": _poolWorldMap,

@@ -557,6 +557,7 @@ import _poolPrivateEye from "../pool/private-eye.js";
 import _poolPrizefighterConstruct from "../pool/prizefighter-construct.js";
 import _poolProgenitorsIcon from "../pool/progenitors-icon.js";
 import _poolPrognosticSphinx from "../pool/prognostic-sphinx.js";
+import _poolPromiseOfLoyalty from "../pool/promise-of-loyalty.js";
 import _poolPropheticRavings from "../pool/prophetic-ravings.js";
 import _poolProtectServe from "../pool/protect-serve.js";
 import _poolProtectiveResponse from "../pool/protective-response.js";
@@ -1450,6 +1451,7 @@ const shard: CardShard = {
     _poolPrizefighterConstruct,
     _poolProgenitorsIcon,
     _poolPrognosticSphinx,
+    _poolPromiseOfLoyalty,
     _poolPropheticRavings,
     _poolProtectServe,
     _poolProtectiveResponse,

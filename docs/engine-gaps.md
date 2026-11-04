@@ -409,6 +409,10 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   slots are alike, as here), and a skipped optional first slot still needs the cast refused or the
   random controller kept from skipping it. Found 2026-10-23, batch 151's checks.
 
+**`withMain` from a precombat main runs M C+ C M M.** `Game.endStep`'s queue puts the turn's own combat straight after an added combat
+and its main phase after, where the rules give M C+ M C M. No pool ability has `additional-combat`'s `withMain` yet, so nothing reaches
+it. Found 2026-11-04, with Moraug's rulings (an `afterThisPhase` combat from the precombat main runs before the turn's own).
+
 **Panglacial Wurm under Opposition Agent.** The Agent's controller makes every decision while the player searches, but in `effects.ts`,
 `case "search-library"` offers `cast-now` (`from: "while-searching"`) before `ctx.searchLibrary`, and `Game.beginSearchControl` only starts
 in `beginLibrarySearch`, so the searcher answers. Fix: begin the control before the offer and end it when the search's `choose-from-zone`

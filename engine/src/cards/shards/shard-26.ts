@@ -489,6 +489,7 @@ import _poolMoltenTide from "../pool/molten-tide.js";
 import _poolMomentumRumbler from "../pool/momentum-rumbler.js";
 import _poolMomirVigSimicVisionary from "../pool/momir-vig-simic-visionary.js";
 import _poolMoorlandInquisitor from "../pool/moorland-inquisitor.js";
+import _poolMoraugFuryOfAkoum from "../pool/moraug-fury-of-akoum.js";
 import _poolMorbiusTheLivingVampire from "../pool/morbius-the-living-vampire.js";
 import _poolMoriokReplica from "../pool/moriok-replica.js";
 import _poolMoriokRigger from "../pool/moriok-rigger.js";
@@ -1406,6 +1407,7 @@ const shard: CardShard = {
     _poolMomentumRumbler,
     _poolMomirVigSimicVisionary,
     _poolMoorlandInquisitor,
+    _poolMoraugFuryOfAkoum,
     _poolMorbiusTheLivingVampire,
     _poolMoriokReplica,
     _poolMoriokRigger,

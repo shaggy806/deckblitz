@@ -543,6 +543,7 @@ import _poolOrneryGoblin from "../pool/ornery-goblin.js";
 import _poolOutCold from "../pool/out-cold.js";
 import _poolOvergrownFarmland from "../pool/overgrown-farmland.js";
 import _poolOxidize from "../pool/oxidize.js";
+import _poolPadeemConsulOfInnovation from "../pool/padeem-consul-of-innovation.js";
 import _poolPainfulQuandary from "../pool/painful-quandary.js";
 import _poolPalisadeGiant from "../pool/palisade-giant.js";
 import _poolParkHeightsMaverick from "../pool/park-heights-maverick.js";
@@ -1462,6 +1463,7 @@ const shard: CardShard = {
     _poolOutCold,
     _poolOvergrownFarmland,
     _poolOxidize,
+    _poolPadeemConsulOfInnovation,
     _poolPainfulQuandary,
     _poolPalisadeGiant,
     _poolParkHeightsMaverick,
