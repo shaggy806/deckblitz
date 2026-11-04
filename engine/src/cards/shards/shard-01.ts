@@ -641,6 +641,7 @@ import _poolScornedVillager from "../pool/scorned-villager.js";
 import _poolScourTheLaboratory from "../pool/scour-the-laboratory.js";
 import _poolScrabblingSkullcrab from "../pool/scrabbling-skullcrab.js";
 import _poolScreamingPhantom from "../pool/screaming-phantom.js";
+import _poolScrollOfFate from "../pool/scroll-of-fate.js";
 import _poolScrollOfIsildur from "../pool/scroll-of-isildur.js";
 import _poolScurryOfGremlins from "../pool/scurry-of-gremlins.js";
 import _poolSearchForTomorrow from "../pool/search-for-tomorrow.js";
@@ -1531,6 +1532,7 @@ const shard: CardShard = {
     _poolScourTheLaboratory,
     _poolScrabblingSkullcrab,
     _poolScreamingPhantom,
+    _poolScrollOfFate,
     _poolScrollOfIsildur,
     _poolScurryOfGremlins,
     _poolSearchForTomorrow,

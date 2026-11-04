@@ -135,6 +135,7 @@ import _poolChangeOfFortune from "../pool/change-of-fortune.js";
 import _poolChangelingSentinel from "../pool/changeling-sentinel.js";
 import _poolChaosphere from "../pool/chaosphere.js";
 import _poolChargingMonstrosaur from "../pool/charging-monstrosaur.js";
+import _poolCharnelSerenade from "../pool/charnel-serenade.js";
 import _poolCharringBite from "../pool/charring-bite.js";
 import _poolChiefEngineer from "../pool/chief-engineer.js";
 import _poolChokingSands from "../pool/choking-sands.js";
@@ -1096,6 +1097,7 @@ const shard: CardShard = {
     _poolChangelingSentinel,
     _poolChaosphere,
     _poolChargingMonstrosaur,
+    _poolCharnelSerenade,
     _poolCharringBite,
     _poolChiefEngineer,
     _poolChokingSands,

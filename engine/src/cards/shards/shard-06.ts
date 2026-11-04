@@ -317,6 +317,7 @@ import _poolFyndhornElves from "../pool/fyndhorn-elves.js";
 import _poolGalvanicBlast from "../pool/galvanic-blast.js";
 import _poolGalvanize from "../pool/galvanize.js";
 import _poolGalvanizingSawship from "../pool/galvanizing-sawship.js";
+import _poolGandalfOfTheSecretFire from "../pool/gandalf-of-the-secret-fire.js";
 import _poolGandalfTheGrey from "../pool/gandalf-the-grey.js";
 import _poolGardenize from "../pool/gardenize.js";
 import _poolGatherCourage from "../pool/gather-courage.js";
@@ -1222,6 +1223,7 @@ const shard: CardShard = {
     _poolGalvanicBlast,
     _poolGalvanize,
     _poolGalvanizingSawship,
+    _poolGandalfOfTheSecretFire,
     _poolGandalfTheGrey,
     _poolGardenize,
     _poolGatherCourage,

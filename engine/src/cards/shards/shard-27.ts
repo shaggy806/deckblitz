@@ -205,6 +205,7 @@ import _poolDrumhunter from "../pool/drumhunter.js";
 import _poolDryadSophisticate from "../pool/dryad-sophisticate.js";
 import _poolDuelingCoach from "../pool/dueling-coach.js";
 import _poolDukharaPeafowl from "../pool/dukhara-peafowl.js";
+import _poolDustOfMoments from "../pool/dust-of-moments.js";
 import _poolDwarvenShortsword from "../pool/dwarven-shortsword.js";
 import _poolEastMarkCavalier from "../pool/east-mark-cavalier.js";
 import _poolEaterOfHope from "../pool/eater-of-hope.js";
@@ -340,6 +341,7 @@ import _poolHisokasGuard from "../pool/hisokas-guard.js";
 import _poolHobblefiend from "../pool/hobblefiend.js";
 import _poolHomesickness from "../pool/homesickness.js";
 import _poolHonedKhopesh from "../pool/honed-khopesh.js";
+import _poolHonestWork from "../pool/honest-work.js";
 import _poolHoodedAssassin from "../pool/hooded-assassin.js";
 import _poolHoodedKavu from "../pool/hooded-kavu.js";
 import _poolHopeAndGlory from "../pool/hope-and-glory.js";
@@ -1101,6 +1103,7 @@ const shard: CardShard = {
     _poolDryadSophisticate,
     _poolDuelingCoach,
     _poolDukharaPeafowl,
+    _poolDustOfMoments,
     _poolDwarvenShortsword,
     _poolEastMarkCavalier,
     _poolEaterOfHope,
@@ -1236,6 +1239,7 @@ const shard: CardShard = {
     _poolHobblefiend,
     _poolHomesickness,
     _poolHonedKhopesh,
+    _poolHonestWork,
     _poolHoodedAssassin,
     _poolHoodedKavu,
     _poolHopeAndGlory,

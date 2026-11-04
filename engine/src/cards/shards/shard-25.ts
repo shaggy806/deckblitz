@@ -20,6 +20,7 @@ import _poolAislingLeprechaun from "../pool/aisling-leprechaun.js";
 import _poolAjanisComrade from "../pool/ajanis-comrade.js";
 import _poolAkoumStonewaker from "../pool/akoum-stonewaker.js";
 import _poolAkuDjinn from "../pool/aku-djinn.js";
+import _poolAlaundoTheSeer from "../pool/alaundo-the-seer.js";
 import _poolAlchemistsTalent from "../pool/alchemists-talent.js";
 import _poolAlharuSolemnRitualist from "../pool/alharu-solemn-ritualist.js";
 import _poolAliFromCairo from "../pool/ali-from-cairo.js";
@@ -57,6 +58,7 @@ import _poolAvengersUnderSiege from "../pool/avengers-under-siege.js";
 import _poolAvianOddity from "../pool/avian-oddity.js";
 import _poolAviaryMechanic from "../pool/aviary-mechanic.js";
 import _poolAwakenedAmalgam from "../pool/awakened-amalgam.js";
+import _poolAwakeningOfVituGhazi from "../pool/awakening-of-vitu-ghazi.js";
 import _poolAzraOddsmaker from "../pool/azra-oddsmaker.js";
 import _poolBaSingSe from "../pool/ba-sing-se.js";
 import _poolBadMoon from "../pool/bad-moon.js";
@@ -346,6 +348,7 @@ import _poolHenchfiendOfUkor from "../pool/henchfiend-of-ukor.js";
 import _poolHermitOfTheNatterknolls from "../pool/hermit-of-the-natterknolls.js";
 import _poolHeroicReturn from "../pool/heroic-return.js";
 import _poolHexavus from "../pool/hexavus.js";
+import _poolHideInPlainSight from "../pool/hide-in-plain-sight.js";
 import _poolHipparion from "../pool/hipparion.js";
 import _poolHordeOfBoggarts from "../pool/horde-of-boggarts.js";
 import _poolHourOfPromise from "../pool/hour-of-promise.js";
@@ -902,6 +905,7 @@ const shard: CardShard = {
     _poolAjanisComrade,
     _poolAkoumStonewaker,
     _poolAkuDjinn,
+    _poolAlaundoTheSeer,
     _poolAlchemistsTalent,
     _poolAlharuSolemnRitualist,
     _poolAliFromCairo,
@@ -939,6 +943,7 @@ const shard: CardShard = {
     _poolAvianOddity,
     _poolAviaryMechanic,
     _poolAwakenedAmalgam,
+    _poolAwakeningOfVituGhazi,
     _poolAzraOddsmaker,
     _poolBaSingSe,
     _poolBadMoon,
@@ -1228,6 +1233,7 @@ const shard: CardShard = {
     _poolHermitOfTheNatterknolls,
     _poolHeroicReturn,
     _poolHexavus,
+    _poolHideInPlainSight,
     _poolHipparion,
     _poolHordeOfBoggarts,
     _poolHourOfPromise,

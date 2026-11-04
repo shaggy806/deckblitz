@@ -14558,6 +14558,11 @@ describe("a cast as this resolves, on its own terms", () => {
         { kind: "exile-from-library", whose: "active-player", amount: 1 },
         { kind: "put-exiled-this-way-onto-battlefield", filter: { type: "land" } },
         { kind: "cast-now", from: "exiled-this-way", by: "active-player", free: true, mustCast: true },
+      ],
+    });
+  });
+});
+
 describe("manifest or cloak with a choosable source, piles in exile, a return face down", () => {
   const read = (type_line: string, oracle_text: string) =>
     parseFace({ name: "Test Card", type_line, oracle_text, mana_cost: "{7}", colors: [], cmc: 7 } as never) as unknown as {

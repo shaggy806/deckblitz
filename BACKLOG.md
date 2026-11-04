@@ -475,6 +475,11 @@ section keeps only what to do next.
   left, next `each-player-returns-own-permanent` and the opponent-chooses group), cast-now's terms (10), escape as a grant (8), a modifier
   granting activated abilities (6). `--stale` about 1,728. Narrow keys: Locke and The Ur-Sphinx (a cast until end of turn from among those
   cards), Tazri (`granted-mana-ability-own-colors-gated`), Dawn's Reflection authors as Market Festival does.
+  Then: manifest or cloak from a chosen source, piles in exile, a return face down (10 proving cards; `mechanic:morph-land`,
+  `replacement:as-turned-face-up-dynamic-counters` and `trigger:manifests-dread` stay open), time counters reaching suspended cards (8),
+  names and legendary from effects (3). `--stale` about 1,731: the 5-card units are all built. Narrow keys: Phyrexian Portal, Amy Pond (two
+  pairing abilities, `CardDefinition.pairing` holds one), Tenth District Hero (a granted static), The Curse of Fenric's chapter I,
+  Arcum's Weathervane and Thermal Flux (snow).
   **By best EDHREC card, from here (`cards:needs -- --by-rank`):** Gemstone Caverns, Sylvan Library, Arena of Glory, Mistrise Village, Selvala,
   Rise of the Dark Realms, Field of the Dead, Birgi. Their records overstated the work more than once (Arena of Glory, Mistrise Village,
   Rise and Field needed no engine code): try the card first.
@@ -546,6 +551,7 @@ One line each; the detail (rule numbers, code sites, the cards each blocks) is i
 **`docs/engine-gaps.md`**, under the same bold title. When a gap closes, delete its detail
 there and move this line to `COMPLETED.md`.
 
+- **A shuffled face-down pile keeps its object ids** (Become Anonymous, Expose the Culprit: a client reading the wire can tell which face-down card is which; needs a design call).
 - **A self-replacement beside an exile: no 616.1 choice** (Gravebane Zombie's and Blightsteel's own "instead" always beat Rest in Peace or a finality counter).
 - **Two different "must be blocked by" filters on one attacker merge into one requirement** (lenient, rule 509.1c).
 

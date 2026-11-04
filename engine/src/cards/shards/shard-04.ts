@@ -154,6 +154,7 @@ import _poolDeadbridgeShaman from "../pool/deadbridge-shaman.js";
 import _poolDeadeyeTracker from "../pool/deadeye-tracker.js";
 import _poolDeafeningClarion from "../pool/deafening-clarion.js";
 import _poolDeathCloud from "../pool/death-cloud.js";
+import _poolDeathmistRaptor from "../pool/deathmist-raptor.js";
 import _poolDeathsporeThallid from "../pool/deathspore-thallid.js";
 import _poolDefile from "../pool/defile.js";
 import _poolDefiledCrypt from "../pool/defiled-crypt.js";
@@ -1051,6 +1052,7 @@ const shard: CardShard = {
     _poolDeadeyeTracker,
     _poolDeafeningClarion,
     _poolDeathCloud,
+    _poolDeathmistRaptor,
     _poolDeathsporeThallid,
     _poolDefile,
     _poolDefiledCrypt,

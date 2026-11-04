@@ -61,6 +61,7 @@ import _poolBaseCamp from "../pool/base-camp.js";
 import _poolBattlewingMystic from "../pool/battlewing-mystic.js";
 import _poolBeastbondOutcaster from "../pool/beastbond-outcaster.js";
 import _poolBeastmasterAscension from "../pool/beastmaster-ascension.js";
+import _poolBecomeAnonymous from "../pool/become-anonymous.js";
 import _poolBeseechTheQueen from "../pool/beseech-the-queen.js";
 import _poolBestialBloodline from "../pool/bestial-bloodline.js";
 import _poolBestialIncursion from "../pool/bestial-incursion.js";
@@ -932,6 +933,7 @@ const shard: CardShard = {
     _poolBattlewingMystic,
     _poolBeastbondOutcaster,
     _poolBeastmasterAscension,
+    _poolBecomeAnonymous,
     _poolBeseechTheQueen,
     _poolBestialBloodline,
     _poolBestialIncursion,

@@ -275,6 +275,7 @@ import _poolEternalWitness from "../pool/eternal-witness.js";
 import _poolExhilaratingElocution from "../pool/exhilarating-elocution.js";
 import _poolExoticDisease from "../pool/exotic-disease.js";
 import _poolExpeditionSkulker from "../pool/expedition-skulker.js";
+import _poolExposeTheCulprit from "../pool/expose-the-culprit.js";
 import _poolEyeblightAssassin from "../pool/eyeblight-assassin.js";
 import _poolFaithfulSquire from "../pool/faithful-squire.js";
 import _poolFakeYourOwnDeath from "../pool/fake-your-own-death.js";
@@ -1175,6 +1176,7 @@ const shard: CardShard = {
     _poolExhilaratingElocution,
     _poolExoticDisease,
     _poolExpeditionSkulker,
+    _poolExposeTheCulprit,
     _poolEyeblightAssassin,
     _poolFaithfulSquire,
     _poolFakeYourOwnDeath,

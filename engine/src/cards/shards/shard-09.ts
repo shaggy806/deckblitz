@@ -405,6 +405,7 @@ import _poolJasonBrightGlowingProphet from "../pool/jason-bright-glowing-prophet
 import _poolJennyGeneratedAnomaly from "../pool/jenny-generated-anomaly.js";
 import _poolJeskaWarriorAdept from "../pool/jeska-warrior-adept.js";
 import _poolJeskaiAscendancy from "../pool/jeskai-ascendancy.js";
+import _poolJhoirasTimebug from "../pool/jhoiras-timebug.js";
 import _poolJolraelVoiceOfZhalfir from "../pool/jolrael-voice-of-zhalfir.js";
 import _poolJorKadeenThePrevailer from "../pool/jor-kadeen-the-prevailer.js";
 import _poolJunglebornPioneer from "../pool/jungleborn-pioneer.js";
@@ -703,6 +704,7 @@ import _poolShardingSphinx from "../pool/sharding-sphinx.js";
 import _poolShieldBearer from "../pool/shield-bearer.js";
 import _poolShikoAndNarsetUnified from "../pool/shiko-and-narset-unified.js";
 import _poolShivanEmissary from "../pool/shivan-emissary.js";
+import _poolShivanSandMage from "../pool/shivan-sand-mage.js";
 import _poolShizoDeathsStorehouse from "../pool/shizo-deaths-storehouse.js";
 import _poolShorelineSalvager from "../pool/shoreline-salvager.js";
 import _poolShrewdNegotiation from "../pool/shrewd-negotiation.js";
@@ -912,6 +914,7 @@ import _poolWreckHunter from "../pool/wreck-hunter.js";
 import _poolWrigglingGrub from "../pool/wriggling-grub.js";
 import _poolWriteIntoBeing from "../pool/write-into-being.js";
 import _poolXiahouDunTheOneEyed from "../pool/xiahou-dun-the-one-eyed.js";
+import _poolYarusRoarOfTheOldGods from "../pool/yarus-roar-of-the-old-gods.js";
 import _poolYavimayaCradleOfGrowth from "../pool/yavimaya-cradle-of-growth.js";
 import _poolYellowjacketHeartlessMarauder from "../pool/yellowjacket-heartless-marauder.js";
 import _poolYidrisMaelstromWielder from "../pool/yidris-maelstrom-wielder.js";
@@ -1352,6 +1355,7 @@ const shard: CardShard = {
     _poolJennyGeneratedAnomaly,
     _poolJeskaWarriorAdept,
     _poolJeskaiAscendancy,
+    _poolJhoirasTimebug,
     _poolJolraelVoiceOfZhalfir,
     _poolJorKadeenThePrevailer,
     _poolJunglebornPioneer,
@@ -1650,6 +1654,7 @@ const shard: CardShard = {
     _poolShieldBearer,
     _poolShikoAndNarsetUnified,
     _poolShivanEmissary,
+    _poolShivanSandMage,
     _poolShizoDeathsStorehouse,
     _poolShorelineSalvager,
     _poolShrewdNegotiation,
@@ -1859,6 +1864,7 @@ const shard: CardShard = {
     _poolWrigglingGrub,
     _poolWriteIntoBeing,
     _poolXiahouDunTheOneEyed,
+    _poolYarusRoarOfTheOldGods,
     _poolYavimayaCradleOfGrowth,
     _poolYellowjacketHeartlessMarauder,
     _poolYidrisMaelstromWielder,

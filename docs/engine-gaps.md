@@ -409,6 +409,11 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   slots are alike, as here), and a skipped optional first slot still needs the cast refused or the
   random controller kept from skipping it. Found 2026-10-23, batch 151's checks.
 
+**A shuffled face-down pile keeps its object ids.** Become Anonymous and Expose the Culprit (`Game.cloakExiledPile`) exile cards face up,
+shuffle them and cloak one, but an object keeps its id through the exile, so a client reading the wire or animating by id can tell which
+face-down card is which, where rule 406.3 and the shuffle (rule 701.24) mean nobody should. Rules-wise the cards run; what's seen is the
+leak. Needs a design call: a fresh id at the shuffle, or redaction in `view.ts`. Found 2026-11-04.
+
 **A self-replacement beside an exile: no 616.1 choice.** Rule 616.1: the affected object's controller picks which replacement
 applies, and these aren't self-replacement effects under 614.15. `moveObjectUncached` applies `shufflesItselfInstead` and
 `topsItselfInstead` first, assuming the owner prefers the library. Cards: Gravebane Zombie, the Blightsteel shuffle family. Needs a

@@ -615,6 +615,7 @@ import _poolParadoxicalOutcome from "../pool/paradoxical-outcome.js";
 import _poolParallaxWave from "../pool/parallax-wave.js";
 import _poolParasiticStrix from "../pool/parasitic-strix.js";
 import _poolParcelbeast from "../pool/parcelbeast.js";
+import _poolPardicDragon from "../pool/pardic-dragon.js";
 import _poolPardicMiner from "../pool/pardic-miner.js";
 import _poolPatriarsSeal from "../pool/patriars-seal.js";
 import _poolPearlShard from "../pool/pearl-shard.js";
@@ -1585,6 +1586,7 @@ const shard: CardShard = {
     _poolParallaxWave,
     _poolParasiticStrix,
     _poolParcelbeast,
+    _poolPardicDragon,
     _poolPardicMiner,
     _poolPatriarsSeal,
     _poolPearlShard,

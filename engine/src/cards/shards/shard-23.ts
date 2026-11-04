@@ -679,6 +679,7 @@ import _poolShimatsuTheBloodcloaked from "../pool/shimatsu-the-bloodcloaked.js";
 import _poolShimmeringGrotto from "../pool/shimmering-grotto.js";
 import _poolShinyImpetus from "../pool/shiny-impetus.js";
 import _poolShivanWurm from "../pool/shivan-wurm.js";
+import _poolShorecrasherElemental from "../pool/shorecrasher-elemental.js";
 import _poolShowstoppingSurprise from "../pool/showstopping-surprise.js";
 import _poolShriekingSpecter from "../pool/shrieking-specter.js";
 import _poolShyft from "../pool/shyft.js";
@@ -1596,6 +1597,7 @@ const shard: CardShard = {
     _poolShimmeringGrotto,
     _poolShinyImpetus,
     _poolShivanWurm,
+    _poolShorecrasherElemental,
     _poolShowstoppingSurprise,
     _poolShriekingSpecter,
     _poolShyft,
