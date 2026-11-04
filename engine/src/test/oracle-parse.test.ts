@@ -12935,6 +12935,24 @@ describe("mana abilities from a hand, and paid by exiling from a graveyard", () 
       },
     });
   });
+  it("a draw, then a hand card up to your land count, tapped", () => {
+    const parsed = parseFace({
+      name: "Test Card",
+      type_line: "Creature — Eldrazi",
+      oracle_text:
+        "When this creature leaves the battlefield, draw a card, then you may put a permanent card with mana value less than or equal to the number of lands you control from your hand onto the battlefield tapped.",
+      mana_cost: "{6}",
+      colors: [],
+    });
+    expect(parsed.complete).toBe(true);
+    expect(parsed.triggered[0].trigger).toEqual({ on: "leaves-battlefield", who: "self" });
+    expect(parsed.triggered[0].effect.effects[1]).toMatchObject({
+      kind: "look-and-choose",
+      zone: "hand",
+      enterTapped: true,
+      filter: { manaValue: { op: "lte", n: { amount: { countOf: { type: "land", controlledBy: "you" } } } } },
+    });
+  });
   it("a cost increase except on its caster's turn", () => {
     const parsed = parseFace({
       name: "Test Card",

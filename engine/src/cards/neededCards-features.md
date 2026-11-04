@@ -5138,3 +5138,5 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 **A manland with all creature types (2026-11-04).** `effect:all-creature-types-animate`, no engine code: `animate` with `addSubtypes: ["(every creature type)"]`, Faceless Haven's shape, now read by the scaffolder. Mutavault.
 
 **A cost increase except on the caster's turn (2026-11-04).** `cost:cost-increase-not-your-turn`: `costModification.exceptOnCastersTurn`, read against the player casting the spell, so it reaches the Grid's own controller on another turn; reductions still apply to it (its ruling). Defense Grid.
+
+**A hand card up to your land count (2026-11-04).** `condition:hand-filter-land-count`, no engine code: `look-and-choose` from the hand with `manaValue` against `{ amount: { countOf } }`, Loot's and Beseech the Queen's read, on a warped creature's leaves trigger. Anticausal Vestige.

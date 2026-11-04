@@ -5248,6 +5248,29 @@ export function parseSentence(sentence, ctx) {
       ],
     };
   }
+  // Anticausal Vestige: the land count read as the choice is made, after the
+  // draw, and the card drawn may be the one.
+  if (/^draw a card, then you may put a permanent card with mana value less than or equal to the number of lands you control from your hand onto the battlefield tapped\.$/i.test(s)) {
+    return {
+      kind: "sequence",
+      effects: [
+        { kind: "draw", amount: 1 },
+        {
+          kind: "look-and-choose",
+          zone: "hand",
+          min: 0,
+          max: 1,
+          destination: "battlefield",
+          enterTapped: true,
+          leftover: "stay",
+          filter: {
+            typesAnyOf: ["artifact", "creature", "enchantment", "land", "planeswalker", "battle"],
+            manaValue: { op: "lte", n: { amount: { countOf: { type: "land", controlledBy: "you" } } } },
+          },
+        },
+      ],
+    };
+  }
   // "You may put a land card from your hand onto the battlefield" (Burgeoning).
   if ((m = /^you may put an? (.+?) card from your hand onto the battlefield\.$/i.exec(s))) {
     const filter = parseTypePhrase(m[1], { cards: true });
