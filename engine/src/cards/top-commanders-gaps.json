@@ -12,6 +12,8 @@
   "trigger:leaves-batch-trigger",
   "trigger:counters-put-on-players",
   "trigger:counters-a-spell-trigger",
+  "trigger:copy-spell-trigger",
+  "replacement:mana-persistence-color",
   "keyword:annihilator-x",
   "decision:ward-blight",
   "cost:discard-mana-value-x",

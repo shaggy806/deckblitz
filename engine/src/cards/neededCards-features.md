@@ -5083,3 +5083,5 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 **A discard cost of mana value X (2026-11-04).** `cost:discard-mana-value-x`: `cost.discard.manaValueX`, X announced as it's activated with no `{X}` needed, the ability offered once per X with a card to pay it. Kozilek, the Great Distortion; Knollspine Invocation.
 
 **Annihilator X, and a ward of two sacrificed permanents (2026-11-04).** `keyword:annihilator-x`: `annihilator(amount, text)`. `decision:ward-blight`, no engine code: `ward`'s `sacrifice.count` was there. An entering permanent's "among cards in exile" sees itself coming from exile (`AggregateReads.stillInExile`, as the graveyard's). Ulamog, the Defiler.
+
+**Magecraft and a colour of mana kept (2026-11-04).** `trigger:copy-spell-trigger` and `replacement:mana-persistence-color`, no engine code: `orCopy`, `keepsUnspentMana` and `resolved-this-turn` were there. Ashling, Flame Dancer. The Last Agni Kai's "until end of turn" keeping is still open.
