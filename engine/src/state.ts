@@ -727,7 +727,7 @@ export interface GameObject {
      * turn you attacked with this creature" (Goblin Researcher, the
      * ruling: even once it has left), "during any turn you put a lore counter
      * on this Saga" (Summon: Brynhildr). */
-    readonly sourceDid?: "attacked" | "lore-counter";
+    readonly sourceDid?: "attacked" | "lore-counter" | "attacked-with-a-token";
     /** The permanent the card was exiled with, in the stint it was in then —
      * Maralen, Fae Ascendant's "cards exiled with Maralen". Set with
      * `whileSource` or `oncePerTurn`; it also answers `filter`'s `{ amount }`
@@ -1169,6 +1169,10 @@ export interface GameObject {
    * was cast (rule 601.2d — `CardDefinition.divided`), one per target in
    * order. Cleared on any zone change. */
   division?: readonly number[];
+  /** The turn this permanent was last turned face up on (rule 701.40b), for
+   * "that was turned face up this turn" (`turnedFaceUpThisTurn`); cleared on
+   * any zone change. */
+  turnedFaceUpOnTurn?: number;
   /** What `CardDefinition.asCast` read as this spell finished being cast (rule
    * 601.2i), by index: a count, or 1 or 0 for a condition. Never copied to a
    * copy of it, which wasn't cast; cleared on any zone change. */
@@ -2195,6 +2199,8 @@ export interface LastKnownInfo {
   /** The turn it entered the battlefield on, and the turn it attacked on if
    * it did — for the `enteredThisTurn` / `attackedThisTurn` filter clauses. */
   readonly enteredOnTurn?: number;
+  /** The turn it was last turned face up on — `turnedFaceUpThisTurn`. */
+  readonly turnedFaceUpOnTurn?: number;
   /** It was monstrous (rule 701.37b) — the `monstrous` filter clause. */
   readonly monstrous?: true;
   /** It was renowned (rule 702.112b) — the `renowned` filter clause. */
@@ -4661,6 +4667,10 @@ export interface TurnHistoryEntry {
    * dealt that damage, so "dealt combat damage by a Zombie this turn" asks
    * about then, whatever it has become or wherever it has gone. */
   readonly asDealt?: LastKnownInfo;
+  /** For a creature declared as an attacker (`attackers`): what it was as it
+   * was declared, so "if you attacked with a Hero this turn" asks about then
+   * (rule 508.1), whatever it has become or wherever it has gone. */
+  readonly asDeclared?: LastKnownInfo;
   /** For something put into a graveyard (`to-graveyard`): the zone it came
    * from — `"battlefield"` (with `stint`), `"library"`, `"hand"`, `"stack"`
    * and the rest. */
@@ -4694,7 +4704,10 @@ export type TurnHistoryKind =
   | "descended"
   | "discarded"
   | "to-graveyard"
-  | "combat-damaged-by";
+  | "combat-damaged-by"
+  | "attackers"
+  | "turned-face-up"
+  | "regenerated";
 
 /** The zones a `to-graveyard` {@link TurnHistory} count takes its arrivals
  * from (`from`: only these) or leaves out (`notFrom`) — "put into graveyards
@@ -4827,8 +4840,23 @@ export interface TurnHistory {
   attacked?: boolean;
   /** Each creature this player declared as an attacker, once — in the
    * battlefield stint it was in (a creature that left and came back is a
-   * different one, rule 400.7). */
-  attackers?: { readonly object: ObjectId; readonly zoneChangeCount: number }[];
+   * different one, rule 400.7), with what it was as it was first declared
+   * (`asDeclared`). A creature put onto the battlefield attacking was never
+   * declared (rule 508.4). */
+  attackers?: TurnHistoryEntry[];
+  /** Permanents this player turned face up (rule 701.40b), each time. */
+  "turned-face-up"?: TurnHistoryEntry[];
+  /** Permanents under this player's control a regeneration shield saved
+   * (rule 701.19a), each time: Spiny Starfish's "for each time it regenerated
+   * this turn". */
+  regenerated?: TurnHistoryEntry[];
+  /** Times this player surveilled (rule 701.25; a surveil 0 isn't one). */
+  surveilled?: number;
+  /** Times this player searched their own library (rule 701.23). */
+  ownLibrarySearched?: number;
+  /** Cards this player owns put into exile, from any zone, by anyone: not a
+   * token or a copy of a spell, which aren't cards (rules 108.2, 707.2). */
+  cardsPutIntoExile?: number;
   /** The total power of the creatures this player last declared as attackers
    * this turn, read as they were declared, and which of the turn's combat
    * phases that was (`TurnState.combatPhases`) — `TurnStat`'s

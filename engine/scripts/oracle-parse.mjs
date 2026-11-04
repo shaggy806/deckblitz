@@ -9916,6 +9916,7 @@ function abilityReductionOf(line) {
 
 function abilityReductionCondition(clause) {
   if (clause === "during your turn") return { kind: "your-turn" };
+  if (clause.startsWith("if you attacked with ")) return attackedWithOf(clause.slice(3));
   if (clause === "if you're the monarch") return { kind: "monarch", who: "you" };
   let m;
   if ((m = new RegExp(`^if you have ${N} or fewer cards in hand$`, "i").exec(clause))) {
@@ -13649,6 +13650,14 @@ function parseFaceAsWritten(face, ctx = {}) {
       });
       // Coven's "Activate only if you control three or more creatures with
       // different powers" (Midnight Hunt).
+      {
+        const attacked = / Activate only if (you attacked with .+? this turn)\.$/.exec(rest);
+        const condition = attacked === null ? undefined : attackedWithOf(attacked[1]);
+        if (condition !== undefined) {
+          ability.condition = condition;
+          rest = rest.slice(0, attacked.index);
+        }
+      }
       rest = rest.replace(/ Activate only if you control three or more creatures with different powers\.$/, () => {
         ability.condition = { kind: "coven" };
         return "";
@@ -13843,6 +13852,7 @@ function parseFaceAsWritten(face, ctx = {}) {
           INTERVENING_IFS[clause.toLowerCase()] ??
           devotionIf(clause) ??
           kickedWithIf(clause, out.kicker) ??
+          attackedWithOf(clause.slice(3, -1)) ??
           playerStateIf(clause, triggers);
         if (condition !== undefined) base.condition = condition;
         else if (clause.toLowerCase() === "if it had counters on it," && departedOf(triggers) !== undefined) {
@@ -14376,6 +14386,7 @@ const STATIC_CONDITION_SUFFIXES = [
 /** The same, leading: "As long as you have the city's blessing, ~ has
  * hexproof" (Slippery Scoundrel). */
 const STATIC_CONDITION_PREFIXES = [
+  ["As long as you've surveilled this turn, ", { kind: "turn-stat", stat: "surveilled", who: "you", atLeast: 1 }],
   ["As long as you have the city's blessing, ", { kind: "citys-blessing" }],
   // Renowned (rule 702.112b): "As long as ~ is renowned, it has menace"
   // (Goblin Glory Chaser) — the "it" is ~.
@@ -14516,6 +14527,7 @@ const INTERVENING_IFS = {
   "if ~ is an enchantment,": { kind: "source", filter: { type: "enchantment" } },
   "if it's day,": { kind: "day-night", is: "day" },
   "if you attacked this turn,": { kind: "turn-stat", stat: "attacked", who: "you", atLeast: 1 },
+  "if one or more cards were put into exile this turn,": { kind: "turn-stat", stat: "cards-put-into-exile", who: "any-player", atLeast: 1 },
   // Pack tactics: the attackers' total power, as they were declared.
   "if you attacked with creatures with total power 6 or greater this combat,": {
     kind: "turn-stat",
@@ -15730,10 +15742,30 @@ function costLessParts(cost) {
   return { generic, colored };
 }
 
+/**
+ * "you attacked with a Hero this turn", "you attacked with three or more
+ * Merfolk this turn": the turn's list of attackers, each as it was declared.
+ * Creatures of any kind are `turn-stat`'s count. `undefined` for anything else.
+ */
+function attackedWithOf(phrase) {
+  const m = /^you attacked with (a|an|two or more|three or more|four or more|five or more) (.+?) this turn$/.exec(phrase);
+  if (m === null) return undefined;
+  const atLeast = /^an?$/.test(m[1]) ? 1 : NUMBERS[m[1].split(" ")[0]];
+  if (m[2] === "creatures" || m[2] === "creature") return { kind: "turn-stat", stat: "attackers", who: "you", atLeast };
+  const filter = parseTypePhrase(m[2]);
+  if (filter === null || Object.keys(filter).length === 0) return undefined;
+  return { kind: "turn-history", what: "attackers", filter, ...(atLeast > 1 ? { atLeast } : {}) };
+}
+
 /** The condition of "~ costs … less to cast if …", or null. */
 function costIfCondition(phrase) {
   const count = (word) => NUMBERS[word];
   let m;
+  if ((m = /^you've sacrificed an? (.+) this turn$/.exec(phrase))) {
+    const filter = parseTypePhrase(m[1]);
+    if (filter === null || Object.keys(filter).length === 0) return null;
+    return { kind: "turn-history", what: "sacrificed", filter };
+  }
   // The player and not a planeswalker of theirs, whoever controls the attacker.
   if (phrase === "a creature is attacking you") {
     return { kind: "controls", filter: { type: "creature", attackingYou: true }, atLeast: 1, anyController: true };
@@ -16462,6 +16494,12 @@ function parseStatic(line, text) {
     if (inner !== null && inner.condition === undefined && inner.affects?.scope === "self") {
       return { ...inner, condition: { kind: "of-player", player: "defending-player", condition } };
     }
+  }
+  if ((m = /^As long as (you attacked with .+? this turn), (.+)$/.exec(line))) {
+    const condition = attackedWithOf(m[1]);
+    const inner =
+      condition === undefined ? null : (parseStatic(m[2], text) ?? parseStatic(m[2].charAt(0).toUpperCase() + m[2].slice(1), text));
+    if (inner !== null && inner.condition === undefined) return { ...inner, condition };
   }
   for (const [prefix, condition] of STATIC_CONDITION_PREFIXES) {
     if (!line.startsWith(prefix)) continue;

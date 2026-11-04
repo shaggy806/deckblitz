@@ -1769,6 +1769,12 @@ export function turnStatOf(state: GameState, player: PlayerId, stat: TurnStat): 
       return seat.turnHistory?.landsTappedForMana ?? 0;
     case "scried-or-surveilled":
       return seat.turnHistory?.scriedOrSurveilled ?? 0;
+    case "surveilled":
+      return seat.turnHistory?.surveilled ?? 0;
+    case "own-library-searched":
+      return seat.turnHistory?.ownLibrarySearched ?? 0;
+    case "cards-put-into-exile":
+      return seat.turnHistory?.cardsPutIntoExile ?? 0;
     case "mana-spent-on-spells":
       return seat.turnHistory?.manaSpentOnSpells ?? 0;
     case "opponents-attacked":
@@ -1885,6 +1891,7 @@ export function turnHistoryCount(
         const snapshot =
           entry.asEntered ??
           entry.asDealt ??
+          entry.asDeclared ??
           (entry.stint === undefined ? undefined : snapshotOfStint(state, entry.object, entry.stint));
         const asNow =
           what === "descended" || what === "discarded" || (what === "to-graveyard" && entry.stint === undefined);

@@ -14024,6 +14024,57 @@ describe("a countered spell's destination, and a counter replaced", () => {
       toughness: "1",
     });
     expect(face.static[0].replacement).toEqual({ event: "would-counter-spell" });
+describe("the turn's lists and counts: attackers, sacrifices, exile, surveils", () => {
+  const read = (type_line: string, oracle_text: string) =>
+    parseFace({ name: "Test Card", type_line, oracle_text, mana_cost: "{1}", colors: [] });
+
+  it("'As long as you attacked with three or more Merfolk this turn, …'", () => {
+    const face = read("Creature — Merfolk", "As long as you attacked with three or more Merfolk this turn, creatures you control get +1/+0.");
+    expect(face.static[0].condition).toEqual({ kind: "turn-history", what: "attackers", filter: { subtype: "Merfolk" }, atLeast: 3 });
+  });
+
+  it("'Activate only if you attacked with two or more creatures this turn': the count of any creatures", () => {
+    const face = read("Land", "{1}{W}, {T}: Draw a card. Activate only if you attacked with two or more creatures this turn.");
+    expect(face.activated[0].condition).toEqual({ kind: "turn-stat", stat: "attackers", who: "you", atLeast: 2 });
+    expect(face.activated[0].effect).toEqual({ kind: "draw", amount: 1 });
+  });
+
+  it("'This ability costs {3} less to activate if you attacked with a Spacecraft this turn'", () => {
+    const face = read(
+      "Artifact",
+      "{6}, {T}, Sacrifice this artifact: Destroy target nonland permanent. This ability costs {3} less to activate if you attacked with a Spacecraft this turn.",
+    );
+    expect(face.activated[0].costReduction).toEqual({
+      reduceGeneric: 3,
+      condition: { kind: "turn-history", what: "attackers", filter: { subtype: "Spacecraft" } },
+    });
+  });
+
+  it("'This spell costs {3} less to cast if you've sacrificed an artifact this turn.'", () => {
+    const face = read("Sorcery", "This spell costs {3} less to cast if you've sacrificed an artifact this turn.\nDraw a card.");
+    expect(face.selfCostReduction).toEqual({
+      condition: { kind: "turn-history", what: "sacrificed", filter: { type: "artifact" } },
+      reduceGeneric: 3,
+    });
+  });
+
+  it("'At the beginning of your end step, if one or more cards were put into exile this turn, …'", () => {
+    const face = read(
+      "Creature — Human",
+      "At the beginning of your end step, if one or more cards were put into exile this turn, draw a card.",
+    );
+    expect(face.triggered[0].condition).toEqual({ kind: "turn-stat", stat: "cards-put-into-exile", who: "any-player", atLeast: 1 });
+  });
+
+  it("an end-step trigger on a Hero attacking: the same list", () => {
+    const face = read(
+      "Enchantment",
+      "At the beginning of each end step, if you attacked with a Hero this turn, draw a card.",
+    );
+    expect(face.triggered[0].condition).toEqual({ kind: "turn-history", what: "attackers", filter: { subtype: "Hero" } });
+  });
+});
+
 describe("facts fixed as a spell is cast (rule 601.2i), and what a kick brings as it enters", () => {
   const read = (type_line: string, oracle_text: string) =>
     parseFace({ name: "Test Card", type_line, oracle_text, mana_cost: "{1}", colors: [] });

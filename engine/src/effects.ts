@@ -1201,6 +1201,9 @@ export type EffectAmount =
       readonly filter?: CardFilter;
       readonly from?: readonly ZoneType[];
       readonly notFrom?: readonly ZoneType[];
+      /** Only the source, in the stint it's in or last had: "for each time
+       * **it** regenerated this turn" (Spiny Starfish, `"regenerated"`). */
+      readonly selfOnly?: true;
     }
   /** How many opponents the controller attacked with creatures this combat
    * — melee's "+1/+1 for each opponent you attacked with a creature this
@@ -9414,8 +9417,10 @@ export type EffectSpec =
        * any turn you attacked with this creature, you may play that card"
        * (`"attacked"` — Goblin Researcher, with `duration: "while-exiled"`);
        * "during any turn you put a lore counter on this Saga"
-       * (`"lore-counter"` — Summon: Brynhildr). */
-      readonly sourceDid?: "attacked" | "lore-counter";
+       * (`"lore-counter"` — Summon: Brynhildr). `"attacked-with-a-token"` asks
+       * about any token and no source: "during any turn you attacked with a
+       * token" (Neyali, Suns' Vanguard). */
+      readonly sourceDid?: "attacked" | "lore-counter" | "attacked-with-a-token";
       /** Whose libraries: the controller's (the default), or each player's in
        * a scope, the top `amount` of each exiled at once — "each player
        * exiles the top card of their library" (Rocco) — or a target slot
@@ -10611,7 +10616,7 @@ export interface EffectApi {
     what: TurnHistoryKind,
     players: readonly PlayerId[],
     filter?: CardFilter,
-    origin?: TurnHistoryOrigin,
+    origin?: TurnHistoryOrigin & { readonly selfOnly?: boolean },
   ): number;
   /** How many card types there are among `objects`, each once — as they
    * last existed on the battlefield if `departed` (a sacrificed or

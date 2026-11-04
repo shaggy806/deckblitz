@@ -31998,7 +31998,19 @@ export class Game {
           this.state.zones.shared.battlefield.filter((id) => this.state.objects[id]?.attacking === player),
         ),
       turnHistoryCount: (what, players, filter, origin) =>
-        turnHistoryCount(this.state, this.registry, players, what, filter, controller, undefined, origin),
+        turnHistoryCount(
+          this.state,
+          this.registry,
+          players,
+          what,
+          filter,
+          controller,
+          undefined,
+          origin,
+          origin?.selfOnly === true
+            ? { id: source, stint: departedSource()?.zoneChangeCount ?? this.state.objects[source]?.zoneChangeCount ?? 0 }
+            : undefined,
+        ),
       cardTypesAmong: (objects) => {
         const types = new Set<CardType>();
         for (const { object: id, departed } of objects) {
@@ -36442,6 +36454,11 @@ export class Game {
     // all a search of several zones says, doesn't.
     const forbidden = searched.library && this.cantSearchLibrary(player, owner);
     const library = searched.library && !outsideOnly && !forbidden;
+    if (library && owner === player) {
+      const seat = this.state.players[player];
+      const history = (seat.turnHistory ??= {});
+      history.ownLibrarySearched = (history.ownLibrarySearched ?? 0) + 1;
+    }
     const shuffles = library || (forbidden && zones === "library" && !outsideOnly);
     const inGraveyard = searched.graveyard && !outsideOnly ? matching("graveyard") : [];
     const inHand = searched.hand && !outsideOnly ? matching("hand") : [];
@@ -37458,7 +37475,7 @@ export class Game {
       readonly oncePerTurn?: boolean;
       readonly faceDown?: boolean;
       readonly spendAs?: SpendAs;
-      readonly sourceDid?: "attacked" | "lore-counter";
+      readonly sourceDid?: "attacked" | "lore-counter" | "attacked-with-a-token";
       /** Linked to this stint of the source (rule 607.2a). */
       readonly linkStint?: number;
     } = {},
@@ -38015,7 +38032,9 @@ export class Game {
     // go as the turn and the life-loss condition change.
     if (impulse.yourTurnOnly === true && this.activePlayer !== player) return false;
     if (impulse.fromTurn !== undefined && this.state.turn.number < impulse.fromTurn) return false;
-    if (impulse.sourceDid !== undefined) {
+    if (impulse.sourceDid === "attacked-with-a-token") {
+      if (this.state.players[player]?.turnHistory?.attackers?.some((e) => e.asDeclared?.isToken === true) !== true) return false;
+    } else if (impulse.sourceDid !== undefined) {
       const history = this.state.players[player]?.turnHistory;
       const did = impulse.sourceDid === "attacked" ? history?.attackedWith : history?.loreCountersOn;
       const source = impulse.source;
@@ -45385,6 +45404,7 @@ export class Game {
     const object = this.state.objects[id];
     const card = this.registry.get(object.cardName);
     delete object.faceDown;
+    object.turnedFaceUpOnTurn = this.state.turn.number;
     invalidateComputedCache();
     this.revealFaceDown(id);
     const ref = { kind: "object", object: id } as const;
@@ -46524,7 +46544,10 @@ export class Game {
       }
       case "scried": {
         const history = historyOf(event.player);
-        if (history !== undefined) history.scriedOrSurveilled = (history.scriedOrSurveilled ?? 0) + 1;
+        if (history !== undefined) {
+          history.scriedOrSurveilled = (history.scriedOrSurveilled ?? 0) + 1;
+          if (event.mode === "surveil") history.surveilled = (history.surveilled ?? 0) + 1;
+        }
         return;
       }
       case "attacker-declared": {
@@ -46680,10 +46703,34 @@ export class Game {
         // Each creature once, however many attack phases it's declared in.
         const attackers = (history.attackers ??= []);
         for (const id of event.attackers) {
-          const zoneChangeCount = this.state.objects[id]?.zoneChangeCount ?? 0;
-          if (!attackers.some((a) => a.object === id && a.zoneChangeCount === zoneChangeCount)) {
-            attackers.push({ object: id, zoneChangeCount });
+          const stint = this.state.objects[id]?.zoneChangeCount ?? 0;
+          if (!attackers.some((a) => a.object === id && a.stint === stint)) {
+            attackers.push({ object: id, count: 1, stint, asDeclared: this.takeLastKnown(id) });
           }
+        }
+        return;
+      }
+      case "permanent-turned-face-up": {
+        const history = historyOf(event.player);
+        if (history !== undefined) {
+          const stint = this.state.objects[event.object]?.zoneChangeCount ?? 0;
+          (history["turned-face-up"] ??= []).push({ object: event.object, count: 1, stint });
+        }
+        return;
+      }
+      case "permanent-destroy-prevented": {
+        if (event.reason !== "regenerated") return;
+        const permanent = this.state.objects[event.object];
+        const history = historyOf(permanent?.controller);
+        if (history !== undefined) {
+          (history.regenerated ??= []).push({ object: event.object, count: 1, stint: permanent.zoneChangeCount ?? 0 });
+        }
+        return;
+      }
+      case "cards-put-into-exile": {
+        for (const arrival of event.arrivals) {
+          const history = historyOf(arrival.owner);
+          if (history !== undefined) history.cardsPutIntoExile = (history.cardsPutIntoExile ?? 0) + 1;
         }
         return;
       }
@@ -52731,6 +52778,7 @@ export class Game {
       ...(object.chosenPlayer !== undefined ? { chosenPlayer: object.chosenPlayer } : {}),
       ...(object.chosenPermanent !== undefined ? { chosenPermanent: object.chosenPermanent } : {}),
       ...(object.enteredBattlefieldOnTurn !== null ? { enteredOnTurn: object.enteredBattlefieldOnTurn } : {}),
+      ...(object.turnedFaceUpOnTurn !== undefined ? { turnedFaceUpOnTurn: object.turnedFaceUpOnTurn } : {}),
       ...(object.monstrous === true ? { monstrous: true as const } : {}),
       ...(object.renowned === true ? { renowned: true as const } : {}),
       ...(object.entry !== undefined ? { entry: object.entry } : {}),
@@ -53798,6 +53846,7 @@ export class Game {
     object.timesKicked = undefined;
     object.kickedWith = undefined;
     object.asCastFacts = undefined;
+    object.turnedFaceUpOnTurn = undefined;
     object.spliced = undefined;
     object.offspringGrantPaid = undefined;
     object.giftTo = undefined;

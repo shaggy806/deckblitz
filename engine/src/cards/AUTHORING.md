@@ -945,10 +945,14 @@ from their hand or library — discarded, milled, surveilled, cycled; Welcome
 the Dead's X) or `"cards-left-graveyard"` (cards that left their graveyard,
 for anywhere — Essence Anchor's "only if a card left your graveyard this
 turn", the `turn-stat` condition `{ stat: "cards-left-graveyard", who:
-"you", atLeast: 1 }`) or `"scried-or-surveilled"` (scries and surveils of one
+"you", atLeast: 1 }`), `"scried-or-surveilled"` (scries and surveils of one
 or more — Surveillance Phantasm's "as long as you've scried or surveilled
 this turn", Proctor of Potential's "activate only if …" as an activated
-ability's `condition`) — summed over the scope,
+ability's `condition`), `"surveilled"` (Darkblade Agent), `"own-library-searched"`
+(Archive Trap's "if an opponent searched their library this turn") or
+`"cards-put-into-exile"` (cards a player owns put into exile from any zone by
+anyone, no token or copy of a spell: Ennis's "if one or more cards were put into
+exile this turn", `who: "any-player"`) — summed over the scope,
 default `"you"`: Kydele's "for each card you've drawn this turn", or the life
 your opponents lost this turn as `who: "each-opponent"`; Aetherflux Reservoir's
 "1 life for each spell you've cast this turn" as `"spells-cast"`, which counts
@@ -2394,8 +2398,9 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
   moment you don't, rule 611.2b), `"while-source"` or `"while-exiled"` ("for as
   long as it remains exiled"). `sourceDid` is a live gate: `"attacked"` ("during
   any turn you attacked with this creature" — Goblin Researcher, with
-  `duration: "while-exiled"`, true of the turn even once it has left) or
-  `"lore-counter"` ("during any turn you put a lore counter on this Saga").
+  `duration: "while-exiled"`, true of the turn even once it has left),
+  `"lore-counter"` ("during any turn you put a lore counter on this Saga") or
+  `"attacked-with-a-token"` ("during any turn you attacked with a token" — Neyali).
   `whose` exiles from each library in a `PlayerScope` at once, or
   from the library of the player in a target slot ("target opponent's
   library" is `whose: 0` with an `"opponent"` target), and `playedBy:
@@ -2875,7 +2880,7 @@ subtypes, supertype, notSupertype, name, notName, colors, notColors, colorless,
 manaValue, manaValueParity, power, powerParity, toughness, basePower, baseToughness, counters, controlledBy,
 ownedBy, keyword, notKeyword, tapped, token, isCommander, equipped, enchanted,
 modified, anyOf, manaSpent, manaFrom, putIntoGraveyardFromLibraryThisTurn, putIntoGraveyardThisTurn, blockedThisTurn,
-discardedThisTurn, enteredThisTurn, controlledContinuously, attackedThisTurn, attackedThisCombat, attackedYouThisTurn, attackedDuringControllersLastTurn, attackedBattleThisTurn, damagedThisTurnBy, excessDamageThisTurn,
+discardedThisTurn, enteredThisTurn, turnedFaceUpThisTurn, controlledContinuously, attackedThisTurn, attackedThisCombat, attackedYouThisTurn, attackedDuringControllersLastTurn, attackedBattleThisTurn, damagedThisTurnBy, excessDamageThisTurn,
 dealtDamageToCreatureThisTurn, dealtDamageThisTurn, cast, castBy, castFrom, castVia, enteredFrom,
 putThereBySource, sharesCardTypeWith, sharesPermanentTypeWith, sharesCreatureTypeWith, sharesLandTypeWith, sameNameWith, sameNameAsAnother, thisWay, attacking, blocking, blockingRelation, goaded, suspected, saddled, saddledSource, crewedSource, crewedBySource, enlistedThisCombat, monstrous, renowned, hasManaAbility, hasAbilities,
 xInManaCost, manaCost, coloredManaSymbols, cardTypeCount, nameDiffersFromEach,
@@ -6051,7 +6056,14 @@ clause (section 9):
   one of the `turnHistory` lists (§6) holds at least `atLeast` (default 1)
   this turn: "if you've discarded a card this turn" is `{ what: "discarded"
   }` (Gilt-Blade Prowler's activation restriction, Recalibrate's
-  `conditional`); `what: "combat-damaged-by"` is the sources that dealt `who`
+  `conditional`); `what: "attackers"` is each creature `who` declared as an
+  attacker, once and as it was declared (rule 508.1; one put onto the
+  battlefield attacking never, 508.4): Deepway Navigator's "as long as you
+  attacked with three or more Merfolk this turn"; `what: "turned-face-up"`
+  (Oblivious Bookworm), `what: "regenerated"` with `selfOnly` (Spiny Starfish,
+  the `{ turnHistory }` amount's `selfOnly` its count); `what: "entered"` with
+  `filter: { token: true }` is "tokens you created this turn" (rule 111.2 —
+  Ellyn Harbreeze); `what: "combat-damaged-by"` is the sources that dealt `who`
   combat damage, each read as it dealt it, whatever it is now: Lost Monarch of
   Ifnir's "if a player was dealt combat damage by a Zombie this turn" (`who:
   "any-player"`, `filter: { subtype: "Zombie" }`), Blitzball's "an opponent …

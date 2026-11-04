@@ -1037,6 +1037,9 @@ export interface CardFilter {
    * this turn", "a creature that didn't enter this turn". A card anywhere
    * but the battlefield hasn't; one that has left is asked as it last was. */
   readonly enteredThisTurn?: boolean;
+  /** Was turned face up this turn, by anyone (rule 701.40b) — Kaust, Eyes of
+   * the Glade's "a creature you control that was turned face up this turn". */
+  readonly turnedFaceUpThisTurn?: boolean;
   /** Its controller has (or hasn't) controlled it continuously since their
    * most recent turn began — rule 302.6's test, read of a permanent of any
    * type and whether or not it has haste: Rocket Launcher's "you've
@@ -2498,6 +2501,10 @@ export function matchesFilter(
       const player = clause.to === "you" ? ctx.you : clause.to.player;
       if (!(clause.combat === true ? now.combatPlayers : now.players).includes(player)) return false;
     }
+  }
+  if (filter.turnedFaceUpThisTurn !== undefined) {
+    const turned = (live !== undefined ? live.turnedFaceUpOnTurn : lki!.turnedFaceUpOnTurn) === state.turn.number;
+    if (turned !== filter.turnedFaceUpThisTurn) return false;
   }
   if (filter.attackedThisTurn !== undefined) {
     const attacked =

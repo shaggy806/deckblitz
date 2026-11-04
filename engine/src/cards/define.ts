@@ -760,6 +760,17 @@ export type TurnStat =
    * 701.22, 701.25) — "if you've scried or surveilled this turn" (Surveillance
    * Phantasm). A scry or surveil 0 isn't one. */
   | "scried-or-surveilled"
+  /** How many times the player has surveilled this turn (rule 701.25) —
+   * "as long as you've surveilled this turn" (Darkblade Agent). */
+  | "surveilled"
+  /** How many times the player has searched their own library this turn (rule
+   * 701.23) — Archive Trap's "if an opponent searched their library this
+   * turn". A search a static forbids isn't one. */
+  | "own-library-searched"
+  /** Cards the player owns put into exile this turn, from any zone, by anyone
+   * — Ennis, Debate Moderator's "if one or more cards were put into exile this
+   * turn" (`who: "any-player"`). Tokens and copies of spells aren't cards. */
+  | "cards-put-into-exile"
   /** The mana the player has spent to cast spells this turn (rule 700.14,
    * expend). The "whenever you expend N" trigger is `{ on: "expend" }`. */
   | "mana-spent-on-spells"

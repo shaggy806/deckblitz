@@ -1666,7 +1666,18 @@
   "condition:cast-timing-condition",
   "condition:controlled-as-cast",
   "effect:amount-counted-as-cast",
-  "condition:if-kicked-enters-with-counters"
+  "condition:if-kicked-enters-with-counters",
+  "stat:attacked-with-count",
+  "stat:attacked-with-filter-this-turn",
+  "stat:attacked-with-token-this-turn",
+  "stat:entered-this-turn-as-entered",
+  "stat:turned-face-up-this-turn",
+  "stat:sacrificed-this-turn",
+  "stat:surveilled-this-turn",
+  "stat:searched-library-this-turn",
+  "stat:cards-exiled-this-turn",
+  "stat:tokens-created-this-turn",
+  "amount:times-regenerated-this-turn"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {
