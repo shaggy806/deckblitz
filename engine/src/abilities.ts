@@ -1302,6 +1302,18 @@ export type TriggerSpec =
        * N to N or more — several at once past N count, and later ones don't
        * fire it again until it has dropped back below N. */
       readonly nth?: number;
+      /** "Whenever **a** +1/+1 counter is put on" (Fathom Mage, Flourishing
+       * Defenses): once per counter, each its own trigger (rule 603.2c and
+       * those cards' rulings), `{ triggerValue: true }` being 1. */
+      readonly perCounter?: true;
+      /** "Whenever one or more counters are put on **one or more** …"
+       * (Invisible Woman, Sue Storm; Bioessence Hydra): once for a simultaneous
+       * placement, however many permanents got counters, with
+       * `{ triggerValue: true }` the total (`withCounterBatch`). Its trigger
+       * object is the first of them to match; don't read it. */
+      readonly batched?: true;
+      /** "… on **another** / **other** [permanent]": not this one. */
+      readonly otherOnly?: true;
     }
   | {
       /**

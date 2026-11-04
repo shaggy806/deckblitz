@@ -13266,6 +13266,39 @@ describe("how one player's state compares with another's", () => {
     });
   });
 
+  it("counters-put firing: per counter, and once for a placement", () => {
+    const trigger = (line: string) => read("Creature", line).triggered[0].trigger;
+    expect(trigger("Whenever a +1/+1 counter is put on ~, draw a card.")).toEqual({
+      on: "counters-put",
+      who: "self",
+      counter: "+1/+1",
+      perCounter: true,
+    });
+    expect(trigger("Whenever a -1/-1 counter is put on a creature, draw a card.")).toEqual({
+      on: "counters-put",
+      who: "any",
+      filter: { type: "creature" },
+      counter: "-1/-1",
+      perCounter: true,
+    });
+    expect(trigger("Whenever one or more loyalty counters are put on planeswalkers you control, draw a card.")).toEqual({
+      on: "counters-put",
+      who: "you-control",
+      filter: { type: "planeswalker" },
+      counter: "loyalty",
+      batched: true,
+    });
+    expect(trigger("Whenever you put one or more +1/+1 counters on one or more other Heroes you control, draw a card.")).toEqual({
+      on: "counters-put",
+      who: "you-control",
+      filter: { subtype: "Hero" },
+      counter: "+1/+1",
+      byYou: true,
+      otherOnly: true,
+      batched: true,
+    });
+  });
+
   it("damage triggers that read the amount, and excess damage", () => {
     const trigger = (line: string) => read("Creature", line).triggered[0];
     expect(trigger("Whenever ~ deals 6 or more damage to an opponent, draw a card.").trigger).toEqual({

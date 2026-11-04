@@ -25,7 +25,7 @@ export default defineCard({
     {
       trigger: { on: "deals-combat-damage-to-player", who: "self" },
       targets: [],
-      effect: { kind: "as-player", who: "trigger-player", effect: { kind: "discard", target: "you", amount: 1 } },
+      effect: { kind: "discard", target: "trigger-player", amount: 1 },
       resolve: null,
       text: DISCARD_TEXT,
     },

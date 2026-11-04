@@ -1956,6 +1956,14 @@ export class Game {
     >;
   } | null = null;
 
+  /** `counters-put` triggers owed for the simultaneous placement under way
+   * (`withCounterBatch`), per watcher ability. Not game state: it only ever
+   * spans one synchronous call. */
+  private counterBatch: Map<
+    string,
+    { ability: TriggeredAbility; trigger: PendingTrigger; multiplier: number }
+  > | null = null;
+
   /** The permanents that have left the battlefield so far in the one
    * simultaneous event being carried out — a wrath, a sweep of state-based
    * actions, an edict every player answers — plus the commanders whose move
@@ -26874,7 +26882,11 @@ export class Game {
               ? this.discardedMatching(trigger, event.objects, object).length
               : // "Deals that much damage": how many counters were put.
                 trigger.on === "counters-put" && event.type === "counter-added"
-              ? event.amount
+              ? trigger.perCounter === true
+                ? 1
+                : trigger.batched === true
+                  ? event.amount * (event.count ?? this.state.objects[event.object]?.stackCount ?? 1)
+                  : event.amount
               : trigger.on === "counters-removed" && event.type === "counter-removed"
               ? event.amount
               : // "The number of cards looked at while scrying this way".
@@ -26962,10 +26974,16 @@ export class Game {
     // creature" fires once per token — Simic Ascendancy grows by ten
     // for a stack of ten, Hapatra makes ten Snakes. A batch entering
     // with counters into a stack already there names how many it was.
+    // "Whenever a counter is put": once per counter besides.
+    const eachCounter =
+      trigger.on === "counters-put" && trigger.perCounter === true && event.type === "counter-added" ? event.amount : 1;
     const countered =
-      trigger.on === "counters-put" && event.type === "counter-added" && event.object !== id
-        ? (event.count ?? this.state.objects[event.object]?.stackCount ?? 1)
-        : 1;
+      trigger.on === "counters-put" &&
+      trigger.batched !== true &&
+      event.type === "counter-added" &&
+      event.object !== id
+        ? eachCounter * (event.count ?? this.state.objects[event.object]?.stackCount ?? 1)
+        : eachCounter;
     const entered = event.type === "permanent-entered-battlefield" ? (event.count ?? 1) : 1;
     // A stack handed over whole is every token in it changing hands (Zidane,
     // Tantalus Thief's ruling: a trigger for each of those permanents).
@@ -27554,6 +27572,25 @@ export class Game {
             }
             return;
           }
+          // "Whenever one or more counters are put on one or more …": once
+          // for the simultaneous placement, "that many" the total.
+          if (
+            ability.trigger.on === "counters-put" &&
+            ability.trigger.batched === true &&
+            event.type === "counter-added" &&
+            this.counterBatch !== null
+          ) {
+            const key = `${id}#${index}`;
+            const owed = this.counterBatch.get(key);
+            const trigger = withoutTriggerPlayer(base);
+            const amount = trigger.triggerValue ?? 0;
+            if (owed === undefined) {
+              this.counterBatch.set(key, { ability, trigger, multiplier });
+            } else {
+              owed.trigger = { ...owed.trigger, triggerValue: (owed.trigger.triggerValue ?? 0) + amount };
+            }
+            return;
+          }
           const damageBatch = this.damageBatch;
           // "Whenever one or more … deal damage to a player": once per player
           // (or per event) for the whole simultaneous event, settled with it.
@@ -28053,7 +28090,7 @@ export class Game {
     let entered: GameEventInput[];
     let result: T;
     try {
-      result = fn();
+      result = this.withCounterBatch(fn);
     } finally {
       entered = this.enterAnnouncements;
       this.enterBatch = null;
@@ -28331,6 +28368,7 @@ export class Game {
           (spec.nth === undefined ||
             (event.after !== undefined && event.after >= spec.nth && event.after - event.amount < spec.nth)) &&
           this.matchesWho(spec.who, event.object, self) &&
+          !(spec.otherOnly === true && event.object === self.id) &&
           this.triggerFilterOk(spec.filter, event.object, self) &&
           (spec.byYou !== true || event.by === self.controller)
         );
@@ -32453,7 +32491,7 @@ export class Game {
       simultaneously: (fn) =>
         this.withLeaveBatch(() =>
           this.withGraveyardLeaveBatch(() =>
-            this.withEnterBatch(() => this.withDamageBatch(() => this.withTokenEvent(fn))),
+            this.withEnterBatch(() => this.withDamageBatch(() => this.withTokenEvent(() => this.withCounterBatch(fn)))),
           ),
         ),
       oneTokenEvent: (fn) => this.withTokenCopyEvent(fn),
@@ -33631,9 +33669,11 @@ export class Game {
             id,
             n: amount === "own-toughness" ? this.characteristics(id).toughness : amount,
           }));
-        for (const { id, n } of each) {
-          this.addCounter({ kind: "object", object: id }, counter, n, false, by ?? controller);
-        }
+        this.withCounterBatch(() => {
+          for (const { id, n } of each) {
+            this.addCounter({ kind: "object", object: id }, counter, n, false, by ?? controller);
+          }
+        });
       },
       proliferate: (then) => this.beginProliferate(source, controller, x, then),
       splitMana: (ask) => this.beginManaSplit(source, controller, x, ask),
@@ -41571,7 +41611,9 @@ export class Game {
     const { then, source, x } = awaiting;
     this.state.awaiting = null;
 
-    for (const target of chosen) this.anotherCounterOfEachKind(target, player);
+    this.withCounterBatch(() => {
+      for (const target of chosen) this.anotherCounterOfEachKind(target, player);
+    });
     this.emit({ type: "proliferated", player, count: chosen.length });
 
     if (then !== null) {
@@ -48870,6 +48912,27 @@ export class Game {
   }
 
   /**
+   * Put counters that go on all at once, then settle the `counters-put`
+   * triggers that say "one or more … on one or more …" as one event (rule
+   * 603.2c): Bioessence Hydra triggers once for a proliferate over two
+   * planeswalkers, for both of their counters. Nested batches join the outer
+   * one. A trigger that fires per permanent doesn't wait for this.
+   */
+  private withCounterBatch<T>(fn: () => T): T {
+    if (this.counterBatch !== null) return fn();
+    const batch: NonNullable<Game["counterBatch"]> = new Map();
+    this.counterBatch = batch;
+    let result: T;
+    try {
+      result = fn();
+    } finally {
+      this.counterBatch = null;
+    }
+    for (const { ability, trigger, multiplier } of batch.values()) this.queueTrigger(ability, trigger, multiplier);
+    return result;
+  }
+
+  /**
    * Deal damage that happens all at once, then settle what it owes as one
    * event rather than one per recipient or per source:
    *
@@ -48911,7 +48974,8 @@ export class Game {
     };
     this.damageBatch = batch;
     try {
-      fn();
+      // Wither's and infect's counters go on with the damage (rule 120.3d).
+      this.withCounterBatch(fn);
     } finally {
       this.damageBatch = null;
     }

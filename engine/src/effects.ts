@@ -12219,6 +12219,30 @@ export function isCountScalableEffect(effect: EffectSpec): boolean {
   }
 }
 
+/** How many steps from `from` are one "put a [kind] counter on each of these
+ * targets": `add-counter`s to different target slots, of one kind and amount. */
+function counterRunLength(steps: readonly EffectSpec[], from: number): number {
+  const first = steps[from];
+  if (first.kind !== "add-counter" || typeof first.target !== "number" || typeof first.amount !== "number") return 1;
+  const slots = new Set<number>([first.target]);
+  let end = from + 1;
+  for (; end < steps.length; end += 1) {
+    const step = steps[end];
+    if (
+      step.kind !== "add-counter" ||
+      typeof step.target !== "number" ||
+      slots.has(step.target) ||
+      step.counter !== first.counter ||
+      step.amount !== first.amount ||
+      step.by !== first.by
+    ) {
+      break;
+    }
+    slots.add(step.target);
+  }
+  return end - from;
+}
+
 /** Who an `"each-player-may"` asks: its scope's players, or the one who
  * controls what a target slot points at (nobody, for an empty slot). */
 function eachPlayerMayAsks(
@@ -14757,7 +14781,18 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       const steps = spec.effects;
       for (let i = 0; i < steps.length; i += 1) {
         const parked = ctx.parkedCount();
-        applyEffectSpec(steps[i], ctx);
+        // "A +1/+1 counter on each of two targets" is one instruction, authored
+        // a step a slot: the counters go on at once (`withCounterBatch`).
+        const run = counterRunLength(steps, i);
+        if (run > 1) {
+          const first = i;
+          ctx.simultaneously(() => {
+            for (let j = first; j < first + run; j += 1) applyEffectSpec(steps[j], ctx);
+          });
+          i += run - 1;
+        } else {
+          applyEffectSpec(steps[i], ctx);
+        }
         if (i + 1 < steps.length && !pendingBefore && ctx.decisionPending()) {
           const rest = steps.slice(i + 1);
           // Beneath whatever the step parked of its own — a nested sequence's
@@ -17543,9 +17578,11 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       });
       return;
     case "counters-divided":
-      ctx.division.forEach((amount, i) => {
-        const target = ctx.targets[spec.from + i];
-        if (target !== undefined && amount > 0) ctx.addCounter(target, spec.counter, amount);
+      ctx.simultaneously(() => {
+        ctx.division.forEach((amount, i) => {
+          const target = ctx.targets[spec.from + i];
+          if (target !== undefined && amount > 0) ctx.addCounter(target, spec.counter, amount);
+        });
       });
       return;
     case "counters-distributed":

@@ -2065,6 +2065,26 @@ export function parseTrigger(clause) {
   if ((m = /^Whenever (day becomes night|night becomes day)$/.exec(c))) {
     return [{ on: "day-night-changes", becomes: m[1] === "day becomes night" ? "night" : "day" }];
   }
+  // "Whenever a +1/+1 counter is put on ~" (Fathom Mage): once per counter.
+  if ((m = /^Whenever an? (\S+) counter is put on (~|a creature|a permanent)$/.exec(c))) {
+    return [{
+      on: "counters-put",
+      who: m[2] === "~" ? "self" : "any",
+      ...(m[2] === "~" ? {} : { filter: { type: m[2] === "a creature" ? "creature" : "permanent" } }),
+      counter: m[1],
+      perCounter: true,
+    }];
+  }
+  // "Whenever one or more loyalty counters are put on planeswalkers you
+  // control" (Bioessence Hydra): once for the whole placement.
+  if ((m = /^Whenever one or more (\S+) counters are put on planeswalkers you control$/.exec(c))) {
+    return [{ on: "counters-put", who: "you-control", filter: { type: "planeswalker" }, counter: m[1], batched: true }];
+  }
+  if ((m = /^Whenever you put one or more (\S+) counters on one or more other (.+?) you control$/.exec(c))) {
+    const filter = parseTypePhrase(m[2] === "Heroes" ? "Hero" : m[2]);
+    if (filter === null) return null;
+    return [{ on: "counters-put", who: "you-control", filter, counter: m[1], byYou: true, otherOnly: true, batched: true }];
+  }
   // "When the fourth plan counter is put on this enchantment" (a Plan, Midnight Clock): the placement crossing N.
   if ((m = /^When the (second|third|fourth|fifth|sixth|seventh|eighth|ninth|tenth|eleventh|twelfth) (\S+) counter is put on (?:~|this [a-z]+)$/.exec(c))) {
     const nth = ["second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth", "eleventh", "twelfth"].indexOf(m[1]) + 2;
@@ -2769,6 +2789,11 @@ export function parseSentence(sentence, ctx) {
   // The one exception: "for each … counter removed this way", which is the
   // cost's X (`removeCounter.count: "x"`), read by the mana templates below.
   let m;
+  // "Amass Orcs X, where X is that excess damage" (Fall of Cair Andros): an
+  // excess `dealt-damage` trigger's value is the excess.
+  if ((m = sentenceRe(`amass ([A-Z][a-z]+) X, where X is that excess damage`).exec(s))) {
+    return { kind: "amass", amount: { triggerValue: true }, creatureType: m[1].replace(/ves$/, "f").replace(/s$/, "") };
+  }
   // "… to target player or planeswalker and each creature that player or that
   // planeswalker's controller controls" (Bonfire of the Damned, Lavalanche),
   // ahead of the plain "~ deals N damage to target …".
@@ -3932,11 +3957,6 @@ export function parseSentence(sentence, ctx) {
     const creatureType = /ves$/.test(plural) ? plural.replace(/ves$/, "f") : plural.replace(/s$/, "");
     return { kind: "amass", amount: Number(m[2]), creatureType };
   }
-  // "Amass Orcs X, where X is that excess damage" (Fall of Cair Andros): an
-  // excess `dealt-damage` trigger's value is the excess.
-  if ((m = re(`amass ([A-Z][a-z]+) X, where X is that excess damage`).exec(s))) {
-    return { kind: "amass", amount: { triggerValue: true }, creatureType: m[1].replace(/ves$/, "f").replace(/s$/, "") };
-  }
 
   // A counter put on a target, then something done to "each creature that
   // had a [kind] counter put on it this way" (`thisWay: "counters-put"` — only
@@ -5006,6 +5026,10 @@ export function parseSentence(sentence, ctx) {
   // damage to that player" (Barbflare Gremlin), "that land doesn't untap …"
   // (Winter's Night).
   if (ctx.thatPlayer === "trigger-player") {
+    // "That player discards a card" (Pain Magnification).
+    if ((m = re(`that player discards ${N} cards?`).exec(s))) {
+      return { kind: "discard", target: "trigger-player", amount: amount(m[1]) };
+    }
     if ((m = re("that player adds one mana of any type that land produced, and ~ deals (\\d+) damage to the player").exec(s))) {
       const damage = { kind: "damage", amount: Number(m[1]), who: "trigger-player" };
       return { kind: "add-mana", mana: "produced", amount: 1, also: damage };

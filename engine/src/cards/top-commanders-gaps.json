@@ -1584,7 +1584,9 @@
   "static:protection-doesnt-remove-source",
   "trigger:excess-damage-trigger",
   "trigger:deals-damage-amount-threshold",
-  "trigger:dealt-damage-amount-threshold"
+  "trigger:dealt-damage-amount-threshold",
+  "trigger:counters-put-batch",
+  "trigger:counters-put-each-counter"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

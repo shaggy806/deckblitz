@@ -328,6 +328,13 @@ hexproof, 702.11e); the printed "can't be the target of …" statics take `notHe
 hexproof (Shanna, Sisay's Legacy against Shadowspear — and Dense Foliage, Fiendslayer Paladin, Mercenary Informer,
 Thrun, marked the same). Proving cards: Volatile Stormdrake, Shanna, Sisay's Legacy.
 
+### Counters-put firing counts: per counter, and once for a placement — built 2026-11-03
+
+The need-keys Phase 2 family `trigger:counters-put`, features only. `trigger:counters-put-each-counter`:
+`perCounter`. `trigger:counters-put-batch`: `batched`, settled by `withCounterBatch`, with `otherOnly`.
+Proving cards: Fathom Mage, Flourishing Defenses, Bloodcrazed Hoplite, Invisible Woman, Sue Storm,
+Bioessence Hydra. Sigurd, Jarl of Ravensthorpe still needs `effect:choose-add-or-remove-counter`.
+
 ### Damage triggers that read the amount, and excess damage — built 2026-11-03
 
 The need-keys Phase 2 family `trigger:damage-trigger-extensions`, features only.
