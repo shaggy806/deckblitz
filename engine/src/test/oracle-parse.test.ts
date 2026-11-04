@@ -12275,6 +12275,47 @@ describe("offering", () => {
   });
 });
 
+describe("spells countered all at once, and spells back to a hand", () => {
+  const spell = (oracle_text: string) => parseFace({ name: "Card", type_line: "Instant", oracle_text });
+  it("reads all other spells countered, and a card for each", () => {
+    const counter = { kind: "for-each-on-stack", spells: true, effect: { kind: "counter", target: 0 } };
+    expect(spell("Counter all other spells.").effect).toEqual(counter);
+    const swift = spell("Counter all other spells. Draw a card for each spell countered this way.");
+    expect(swift.complete).toBe(true);
+    expect(swift.effect).toEqual({
+      kind: "sequence",
+      effects: [counter, { kind: "draw", amount: { thisWay: "countered" } }],
+    });
+  });
+  it("reads a spell returning itself before a discard, in the order written", () => {
+    const face = parseFace({
+      name: "Hanabi Blast",
+      type_line: "Instant",
+      oracle_text: "Hanabi Blast deals 2 damage to any target. Return Hanabi Blast to its owner's hand, then discard a card at random.",
+    });
+    expect(face.complete).toBe(true);
+    expect(JSON.stringify(face.effect)).toContain('"now":true');
+  });
+  it("reads the next spell from your hand put back as it resolves", () => {
+    const master = parseFace(
+      {
+        name: "Card",
+        type_line: "Creature — Human",
+        oracle_text:
+          "{2}{U/R}{U/R}: The next time you cast an instant or sorcery spell from your hand this turn, put that card into your hand instead of into your graveyard as it resolves.",
+      },
+      { tokenFor: (d: string) => d },
+    ).activated[0];
+    expect(master.effect).toEqual({
+      kind: "grant-spells-this-turn",
+      next: true,
+      castFrom: ["hand"],
+      filter: { typesAnyOf: ["instant", "sorcery"] },
+      intoHandAsItResolves: true,
+    });
+  });
+});
+
 describe("one target slot over several kinds of object", () => {
   const spell = (oracle_text: string) => parseFace({ name: "Card", type_line: "Instant", oracle_text });
   it("reads a spell or creature returned to its owner's hand, a return from each zone", () => {

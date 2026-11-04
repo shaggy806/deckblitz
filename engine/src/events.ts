@@ -1084,6 +1084,8 @@ export type GameEvent =
   | (Base & {
       readonly type: "spell-countered";
       readonly object: ObjectId;
+      /** Who controlled it: a copy or an ability is gone by now. */
+      readonly controller: PlayerId;
     })
   | (Base & {
       /** A spell was exiled from the stack — not countered (Mindbreak

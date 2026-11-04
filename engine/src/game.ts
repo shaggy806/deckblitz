@@ -26041,6 +26041,49 @@ export class Game {
     // the card with a "you may cast the creature later" permission, instead
     // of going to the graveyard.
     const adventure = this.frontFaceDef(id).adventure && (object.face ?? 0) === 1;
+    // Soulfire Grand Master's "put that card into your hand instead of into
+    // your graveyard as it resolves" (rule 614.1a): as Feather's below, only
+    // for a card its owner would put into their own graveyard, and any other
+    // replacement of that move leaves them the choice of which is first (rule
+    // 616.1) — apply the other, and this one no longer does.
+    const intoHand = object.intoHandAsItResolves;
+    if (
+      intoHand !== undefined &&
+      object.owner === intoHand.player &&
+      (adventure || (!def.shuffleIntoLibraryOnResolve && !def.exileOnResolve)) &&
+      !this.boughtBack(object) &&
+      object.returnToHandAsItResolves !== true
+    ) {
+      const competing =
+        adventure ||
+        (object.exileAsItResolves !== undefined && object.exileAsItResolves.player === object.owner) ||
+        object.castVia === "flashback" ||
+        object.castVia === "harmonize" ||
+        this.aftermathExiles(object) ||
+        this.rebounds(object) ||
+        this.exilesItselfInstead(object) ||
+        object.exileIfWouldGoToGraveyard === true ||
+        this.graveyardIsReplacedWithExile(id, false);
+      if (!competing) {
+        object.intoHandAsItResolves = undefined;
+        this.moveObject(id, "hand");
+        object.targets = null;
+        return;
+      }
+      const from = intoHand.source === undefined ? undefined : this.state.objects[intoHand.source];
+      const name = from === undefined ? "the" : `${printedCardName(from)}'s`;
+      this.beginModesChoice(id, intoHand.player, 0, 1, 1, [
+        {
+          text: `Apply ${name} replacement first: put it into your hand`,
+          effect: { kind: "exile-spell-as-it-resolves", applyFirst: { spell: id, feather: true, intoHand: true } },
+        },
+        {
+          text: adventure ? "Exile it on an adventure instead" : "Apply the other replacement first",
+          effect: { kind: "exile-spell-as-it-resolves", applyFirst: { spell: id, feather: false, intoHand: true } },
+        },
+      ]);
+      return;
+    }
     // Feather, the Redeemed's "exile that card instead of putting it into
     // your graveyard as it resolves" (rule 614.1a): only for a card its owner
     // would put into their own graveyard, and not one whose own text sends
@@ -26242,9 +26285,21 @@ export class Game {
   /** The answer to the rule 616.1 choice `leaveStackAfterResolving` raised:
    * Feather's replacement first (`feather`), or the other — after which
    * Feather's no longer applies, as the card isn't going to the graveyard. */
-  private finishExiledAsItResolves(id: ObjectId, feather: boolean): void {
+  private finishExiledAsItResolves(id: ObjectId, feather: boolean, intoHand = false): void {
     const object = this.state.objects[id];
     if (object === undefined || object.zone !== "stack") return;
+    // The same choice over Soulfire Grand Master's replacement: `feather` is
+    // "this one first".
+    if (intoHand) {
+      object.intoHandAsItResolves = undefined;
+      if (!feather) {
+        this.leaveStackAfterResolving(id);
+        return;
+      }
+      this.moveObject(id, "hand");
+      object.targets = null;
+      return;
+    }
     const mark = object.exileAsItResolves;
     object.exileAsItResolves = undefined;
     if (feather && mark !== undefined) this.exileAsItResolved(id, mark);
@@ -31992,7 +32047,15 @@ export class Game {
         this.moveObject(id, "graveyard");
         this.emit({ type: "permanent-sacrificed", object: id, player: sacrificer });
       },
-      returnToHand: (target, from) => {
+      returnToHand: (target, from, now) => {
+        // "Return ~ to its owner's hand, then …" (Hanabi Blast): at this point
+        // of its instructions, so what follows can see it in the hand.
+        const resolvingCard = from === "stack" && now === true && target.kind === "object" ? this.state.objects[target.object] : undefined;
+        if (resolvingCard !== undefined && resolvingCard.isCopy !== true && target.kind === "object" && target.object === source) {
+          this.forgetSpellTargets(resolvingCard);
+          this.moveObject(target.object, "hand");
+          return;
+        }
         // "Return that spell to its owner's hand" (Krark, the Thumbless): the
         // spell whose casting fired this, only while it's still that spell
         // on the stack — not the same card cast again since (rule 400.7).
@@ -34091,7 +34154,11 @@ export class Game {
         invalidateComputedCache();
       },
       grantSpellsThisTurn: (grant) => {
-        (this.state.spellGrantsThisTurn ??= []).push({ ...grant, player: controller });
+        (this.state.spellGrantsThisTurn ??= []).push({
+          ...grant,
+          player: controller,
+          ...(grant.intoHandAsItResolves === true ? { source } : {}),
+        });
         invalidateComputedCache();
       },
       grantPlayerHexproof: (who) => {
@@ -34609,7 +34676,8 @@ export class Game {
           ...(plotted ? { plotted: true as const } : {}),
         };
       },
-      finishExiledAsItResolves: (spell, feather) => this.finishExiledAsItResolves(spell, feather),
+      finishExiledAsItResolves: (spell, feather, intoHand) =>
+        this.finishExiledAsItResolves(spell, feather, intoHand === true),
       additionalCombat: (afterThisPhase) => {
         if (afterThisPhase === undefined) this.state.extraCombats += 1;
         // Directly after this phase, so ahead of any added after it before
@@ -40556,6 +40624,9 @@ export class Game {
         continue;
       }
       grant.usedBy = { id: cardId, zoneChangeCount: spell.zoneChangeCount ?? 0 };
+      if (grant.intoHandAsItResolves === true && spell.kind === "card") {
+        spell.intoHandAsItResolves = { player, ...(grant.source !== undefined ? { source: grant.source } : {}) };
+      }
       const counters = grant.entersWithCounters;
       if (counters !== undefined && counters.amount > 0 && spell.kind === "card") {
         spell.entersWithCounters = [...(spell.entersWithCounters ?? []), { kind: counters.counter, amount: counters.amount }];
@@ -47129,8 +47200,9 @@ export class Game {
     // An ability on the stack (ward counters those too) just ceases to exist
     // — one of them, where the object stands for several identical ones.
     if (object.kind === "ability") {
+      const controller = object.controller;
       this.removeOneAbilityCopy(id);
-      this.emit({ type: "spell-countered", object: id });
+      this.emit({ type: "spell-countered", object: id, controller });
       return true;
     }
     if (object.isCopy) {
@@ -47141,16 +47213,18 @@ export class Game {
       const stack = this.state.zones.shared.stack;
       const index = stack.indexOf(id);
       if (index >= 0) stack.splice(index, 1);
+      const controller = object.controller;
       delete this.state.objects[id];
-      this.emit({ type: "spell-countered", object: id });
+      this.emit({ type: "spell-countered", object: id, controller });
       return true;
     }
     // `xValue` is left for `moveObject`, which records the spell's last-known
     // mana value (X included) before clearing it on the way off the stack.
     // A commander headed for a hand waits on the stack for its owner's 903.9b
     // answer (`moveObject` returns `false`); it's countered all the same.
+    const controller = object.controller;
     this.moveObject(id, into);
-    this.emit({ type: "spell-countered", object: id });
+    this.emit({ type: "spell-countered", object: id, controller });
     return true;
   }
 
@@ -52880,6 +52954,7 @@ export class Game {
     object.graveyardCastTypesUsedThisTurn = undefined;
     object.exileIfWouldGoToGraveyard = undefined;
     object.exileAsItResolves = undefined;
+    object.intoHandAsItResolves = undefined;
     object.returnToHandAsItResolves = undefined;
     // Its "exile it if it would leave" replacement was about the permanent
     // that just left (rule 400.7).

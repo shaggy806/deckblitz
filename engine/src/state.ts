@@ -310,6 +310,11 @@ export interface GameObject {
     /** The exiled card becomes plotted (rule 702.170 — Lilah). */
     readonly plotted?: true;
   };
+  /** This spell is to be put into its owner's hand instead of `player`'s
+   * graveyard as it resolves — Soulfire Grand Master (`source`), a
+   * `grant-spells-this-turn`'s `intoHandAsItResolves`. Read only as the spell
+   * resolves (`Game.leaveStackAfterResolving`); cleared by any move. */
+  intoHandAsItResolves?: { readonly player: PlayerId; readonly source?: ObjectId };
   /** True once dealt damage by a deathtouch source since state-based actions
    * were last checked (rule 704.5h): each check clears it, as do regeneration,
    * cleanup and a zone change. So an indestructible creature that survived
@@ -2265,6 +2270,11 @@ export interface SpellGrantThisTurn {
   readonly triggered: readonly TriggeredAbility[];
   readonly cantBeCountered?: true;
   readonly convoke?: true;
+  /** Into its owner's hand instead of their graveyard as it resolves — see
+   * `grant-spells-this-turn`. Goes on the spell as `intoHandAsItResolves`. */
+  readonly intoHandAsItResolves?: true;
+  /** The permanent the grant came from, for the 616.1 choice's words. */
+  readonly source?: ObjectId;
   readonly entersWithCounters?: { readonly counter: string; readonly amount: number };
   /** The matching spell costs this much generic mana less to cast — fixed as
    * the grant was made. See `Game.costModificationFor`. */

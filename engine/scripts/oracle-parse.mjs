@@ -4691,6 +4691,28 @@ export function parseSentence(sentence, ctx) {
       ...(onStack ? { from: "stack" } : inGraveyard ? { from: "graveyard" } : {}),
     };
   }
+  // "Return ~ to its owner's hand, then discard a card at random" (Hanabi
+  // Blast): in the order written, so the discard can take it.
+  if (ctx.spell === true && re("return ~ to its owner's hand, then discard a card at random").test(s)) {
+    return {
+      kind: "sequence",
+      effects: [
+        { kind: "return-to-hand", target: "source", from: "stack", now: true },
+        { kind: "discard", target: "you", amount: 1, random: true },
+      ],
+    };
+  }
+  // "The next time you cast …, put that card into your hand instead of into
+  // your graveyard as it resolves" (Soulfire Grand Master).
+  if (re("the next time you cast an instant or sorcery spell from your hand this turn, put that card into your hand instead of into your graveyard as it resolves").test(s)) {
+    return {
+      kind: "grant-spells-this-turn",
+      next: true,
+      castFrom: ["hand"],
+      filter: { typesAnyOf: ["instant", "sorcery"] },
+      intoHandAsItResolves: true,
+    };
+  }
   // A spell's own "return ~ to its owner's hand" (Pulse of the Fields, rule
   // 608.2n) comes from the stack, not the battlefield.
   if (re("return ~ to its owner's hand").test(s)) {
@@ -10382,6 +10404,18 @@ function opponentDividesFindsAt(sentences, i, ctx) {
 function counterAbilityAt(sentences, i, ctx) {
   const each = (fields, effect) => ({ kind: "for-each-on-stack", ...fields, effect });
   const counter = { kind: "counter", target: 0 };
+  // "Counter all other spells." (Reverse the Polarity), "Draw a card for each
+  // spell countered this way." (Swift Silence).
+  if (/^counter all other spells\.$/i.test(sentences[i])) {
+    const all = each({ spells: true }, counter);
+    if (/^draw a card for each spell countered this way\.$/i.test(sentences[i + 1] ?? "")) {
+      return {
+        effect: { kind: "sequence", effects: [all, { kind: "draw", amount: { thisWay: "countered" } }] },
+        used: 2,
+      };
+    }
+    return { effect: all, used: 1 };
+  }
   if (/^counter all abilities your opponents control\.$/i.test(sentences[i])) {
     return { effect: each({ abilities: true, whose: "opponent" }, counter), used: 1 };
   }

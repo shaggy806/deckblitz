@@ -289,6 +289,13 @@ export function thisWayEntries(
         // Counted by the library's owner (the cards' owner).
         if (event.type === "cards-shuffled-into-library") for (const id of event.objects) add(id, event.player, false);
         break;
+      case "countered":
+        // Not through `add`: an ability object standing for several copies is
+        // the same id each time, and each is one countered.
+        if (event.type === "spell-countered") {
+          out.push({ object: event.object, player: event.controller, departed: false, count: 1 });
+        }
+        break;
       case "put-on-bottom":
         // From a hand, by a choice the resolution asked (`cards-put-on-bottom`
         // — the mulligan's bottoming never happens during a resolution).

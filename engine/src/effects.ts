@@ -1882,6 +1882,12 @@ export type ThisWayKind =
    * Teferi's Puzzle Box's "then draws that many cards". Counted by the
    * player whose hand they left. */
   | "put-on-bottom"
+  /** Spells and abilities it countered — Swift Silence's "draw a card for each
+   * spell countered this way", Glen Elendra's Answer's "for each spell and
+   * ability countered this way". One that can't be countered wasn't (rule
+   * 701.5f). Counted by its controller, an ability object standing for several
+   * copies once for each it countered. */
+  | "countered"
   /** Cards it shuffled into a library — Elixir's "you gain life equal to
    * the number of cards shuffled into your library this way" (a
    * `shuffle-graveyard-into-library`, or `put-on-libraries`' `"shuffle"`).
@@ -3416,6 +3422,11 @@ export type EffectSpec =
        * the same object (Quagnoth's rulings).
        */
       readonly from?: ReturnToHandZone | "where-discarded";
+      /** With `from: "stack"` and `"source"`: the spell goes **at this point
+       * of its instructions**, not as their final part — "return Hanabi Blast
+       * to its owner's hand, **then** discard a card at random", which can
+       * discard it (rule 608.2c, its ruling). A copy can't go (707.10a). */
+      readonly now?: true;
     }
   | {
       /** Return every battlefield permanent matching `filter` to its owner's
@@ -4141,6 +4152,10 @@ export type EffectSpec =
       readonly abilities?: true;
       /** Only those this player controls, the effect's controller's side. */
       readonly whose?: "you" | "opponent";
+      /** Only those matching this: "counter all spells with those names"
+       * (Grimoire Thief: `{ sameNameWith: "exiled-with-source" }`). Bound as
+       * the effect begins, so what it did on the way doesn't move it. */
+      readonly filter?: CardFilter;
       readonly effect: EffectSpec;
     }
   | {
@@ -5645,6 +5660,14 @@ export type EffectSpec =
       readonly cantBeCountered?: true;
       /** The spell has **convoke** (rule 702.51). */
       readonly convoke?: true;
+      /** "Put that card into your hand instead of into your graveyard as it
+       * resolves" (Soulfire Grand Master, with `next` and `castFrom: ["hand"]`):
+       * no trigger, no stack object — the mark goes on the spell as it's cast
+       * (rule 601.2i) and is read as it resolves. A spell that doesn't resolve
+       * has used it up all the same (the ruling). Its own "exile" text keeps
+       * it from a graveyard, so this doesn't apply (the ruling); another
+       * replacement of the same move leaves its owner the choice (rule 616.1). */
+      readonly intoHandAsItResolves?: true;
       /** "That creature enters with an additional +1/+1 counter on it"
        * (Savage Summoning): the spell enters the battlefield with these
        * counters as it resolves, as `enters-with-counters` gives. */
@@ -7053,7 +7076,7 @@ export type EffectSpec =
       /** Only the engine sets this: the answer to that rule 616.1 choice,
        * applied to the spell `spell` that has just resolved — `true` to
        * apply this replacement first, `false` to let the other. */
-      readonly applyFirst?: { readonly spell: ObjectId; readonly feather: boolean };
+      readonly applyFirst?: { readonly spell: ObjectId; readonly feather: boolean; readonly intoHand?: true };
     }
   | {
       /** After this (post-combat) main phase there is an additional combat
@@ -10664,7 +10687,7 @@ export interface EffectApi {
   subtypesOf(target: TargetRef): readonly string[];
   /** See the `"return-to-hand"` {@link EffectSpec} — `from` defaults to the
    * battlefield. */
-  returnToHand(target: TargetRef, from?: ReturnToHandZone | "where-discarded"): void;
+  returnToHand(target: TargetRef, from?: ReturnToHandZone | "where-discarded", now?: true): void;
   /** `withCounters`: counters the card gets there ("exile it with a croak
    * counter on it"). */
   exileObject(
@@ -11664,7 +11687,7 @@ export interface EffectApi {
    * count; 0 for one not cast that way. */
   sourceTimesKicked(): number;
   /** The answer to its rule 616.1 choice — see `applyFirst` there. */
-  finishExiledAsItResolves(spell: ObjectId, feather: boolean): void;
+  finishExiledAsItResolves(spell: ObjectId, feather: boolean, intoHand?: true): void;
   /** Shuffle the controller's library — or `player`'s — see the
    * `shuffle-library` {@link EffectSpec}. */
   shuffleLibrary(player?: PlayerId): void;
@@ -15557,6 +15580,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     }
     case "for-each-on-stack": {
       for (const object of ctx.onTheStack(spec.spells === true, spec.abilities === true, spec.whose)) {
+        if (spec.filter !== undefined && !ctx.cardMatches(object, spec.filter)) continue;
         applyEffectSpec(spec.effect, ctx.withFoundAt(0, object));
       }
       return;
@@ -15634,7 +15658,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     }
     case "return-to-hand": {
       const target = resolveEffectTarget(spec.target, ctx);
-      if (target !== undefined) ctx.returnToHand(target, spec.from);
+      if (target !== undefined) ctx.returnToHand(target, spec.from, spec.now);
       return;
     }
     case "manifest-dread": {
@@ -16599,6 +16623,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         triggered: spec.triggered ?? [],
         ...(spec.cantBeCountered === true ? { cantBeCountered: true } : {}),
         ...(spec.convoke === true ? { convoke: true } : {}),
+        ...(spec.intoHandAsItResolves === true ? { intoHandAsItResolves: true as const } : {}),
         ...(spec.entersWithCounters !== undefined ? { entersWithCounters: spec.entersWithCounters } : {}),
         ...(spec.reduceGeneric !== undefined ? { reduceGeneric: amountValue(spec.reduceGeneric, ctx) } : {}),
         ...(spec.affinityFor !== undefined ? { affinityFor: spec.affinityFor } : {}),
@@ -17504,7 +17529,9 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       applyRevealUntil(spec, ctx);
       return;
     case "exile-spell-as-it-resolves":
-      if (spec.applyFirst !== undefined) ctx.finishExiledAsItResolves(spec.applyFirst.spell, spec.applyFirst.feather);
+      if (spec.applyFirst !== undefined) {
+        ctx.finishExiledAsItResolves(spec.applyFirst.spell, spec.applyFirst.feather, spec.applyFirst.intoHand);
+      }
       else ctx.exileTriggerSpellAsItResolves(spec.returnAtNextEndStep === true, spec.plotted === true);
       return;
     case "copy-spell": {

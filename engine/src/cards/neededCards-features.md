@@ -321,6 +321,24 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Spells countered all at once, and spells going to a hand as they resolve — built 2026-11-03
+
+The need-keys families `effect:counter-all-spells` and
+`effect:spell-returns-itself-to-hand`. `for-each-on-stack` gains `filter`
+("counter all spells with those names": `{ sameNameWith: "exiled-with-source" }`,
+Grimoire Thief still waits on its look at the cards); this-way kind `countered`
+(an ability object of several copies once a copy; `spell-countered` now names its
+controller). Swift Silence, Glen Elendra's Answer, Counterflux (overload), Reverse
+the Polarity. `return-to-hand`'s `now`: from the stack at this point of the
+instructions, so "return ~, then discard a card at random" can discard it (Hanabi
+Blast, its ruling); View from Above and Molten Birth needed only the existing
+`from: "stack"`. `grant-spells-this-turn`'s `intoHandAsItResolves` marks the spell
+as it's cast, no trigger (`GameObject.intoHandAsItResolves`), read at
+`leaveStackAfterResolving` as Feather's mark is, with the same rule 616.1 choice
+(Soulfire Grand Master). Keys: effect:counter-all-spells,
+effect:counter-all-spells-named-linked-exile, effect:spell-returns-itself-to-hand,
+effect:next-spell-returns-to-hand.
+
 ### One target slot over several kinds of object, and exiled cards as targets — built 2026-11-03
 
 The need-keys family `effect:target-spec-additions`' next two groups, features
