@@ -10,7 +10,8 @@ import { describe, expect, it } from "vitest";
 import type { ScriptedController } from "../controller.js";
 import type { Game } from "../game.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
-import { A, B, activate, cast, destroy, graveyard, hand, lands, life, nextTurn, ref, settle, spawn, table, toGraveyard, toHand, zone } from "./harness.js";
+import { viewFor } from "../view.js";
+import { A, B, activate, cast, counters, destroy, enter, graveyard, registryOf, hand, lands, life, nextTurn, ref, settle, spawn, table, toGraveyard, toHand, zone } from "./harness.js";
 
 const library = (game: Game, player: PlayerId = A): readonly ObjectId[] => game.state.zones.perPlayer[player].library;
 const discardEvents = (game: Game): number => game.state.eventLog.filter((e) => e.type === "cards-discarded").length;
@@ -159,6 +160,104 @@ describe("Library of Leng: a discard its player may put on top", () => {
     const [temper] = bobMindRots(game, a, ["Fiery Temper", "Grizzly Bears"]);
     expect(zone(game, temper)).toBe("library");
     expect(game.state.zones.shared.stack).toEqual([]);
+  });
+});
+
+describe("a card put back unrevealed (rule 701.9c)", () => {
+  it("Library of Leng: an opponent's seat isn't told its name, while asked or after", () => {
+    const { game, a } = table();
+    spawn(game, "Library of Leng");
+    let whileAsked = "";
+    a.chooseFromZoneFn = (_view, ids) => {
+      whileAsked = JSON.stringify(viewFor(game.state, registryOf(game), B));
+      return [ids[0]];
+    };
+    const [bears] = bobMindRots(game, a, ["Grizzly Bears", "Llanowar Elves"]);
+    const seen = JSON.stringify(viewFor(game.state, registryOf(game), B));
+    expect(seen).toContain("Llanowar Elves");
+    expect(seen).not.toContain("Grizzly Bears");
+    expect(whileAsked).not.toContain("Grizzly Bears");
+    expect(viewFor(game.state, registryOf(game), B).objects[bears]).toBeUndefined();
+    const discard = game.state.eventLog.find((e) => e.type === "cards-discarded");
+    expect(discard).toMatchObject({ unrevealed: [bears] });
+  });
+
+  it("a filter on a discarded card doesn't match it; an unfiltered trigger still fires", () => {
+    const { game, a } = table();
+    spawn(game, "Library of Leng");
+    const badgersaur = spawn(game, "Surly Badgersaur");
+    spawn(game, "Megrim", B);
+    a.chooseFromZoneFn = (_view, ids) => [...ids];
+    bobMindRots(game, a, ["Grizzly Bears", "Llanowar Elves"]);
+    expect(counters(game, badgersaur)).toBe(0);
+    // Megrim, 2 damage for each of the two.
+    expect(life(game)).toBe(16);
+  });
+
+  it("a creature discarded to a graveyard beside it still matches", () => {
+    const { game, a } = table();
+    spawn(game, "Library of Leng");
+    const badgersaur = spawn(game, "Surly Badgersaur");
+    a.chooseFromZoneFn = (_view, ids) => [ids[0]];
+    bobMindRots(game, a, ["Grizzly Bears", "Llanowar Elves"]);
+    expect(counters(game, badgersaur)).toBe(1);
+  });
+
+  it("Nephalia Academy reveals it, so it isn't unrevealed", () => {
+    const { game, a } = table();
+    spawn(game, "Nephalia Academy");
+    a.chooseFromZoneFn = (_view, ids) => [ids[0]];
+    bobMindRots(game, a, ["Grizzly Bears", "Llanowar Elves"]);
+    const discard = game.state.eventLog.find((e) => e.type === "cards-discarded");
+    expect(discard).not.toHaveProperty("unrevealed");
+  });
+});
+
+describe("a held discard meets the question", () => {
+  it("each player's discard is held until all have chosen, then each Library's owner is asked", () => {
+    const { game, a, b } = table();
+    spawn(game, "Library of Leng");
+    spawn(game, "Library of Leng", B);
+    const alices = hand(game, A)[0];
+    const bobs = hand(game, B)[0];
+    a.chooseDiscardsFn = () => [alices];
+    b.chooseDiscardsFn = () => [bobs];
+    const order: string[] = [];
+    a.chooseFromZoneFn = (_view, ids) => {
+      order.push("alice");
+      expect(ids).toEqual([alices]);
+      return [...ids];
+    };
+    b.chooseFromZoneFn = (_view, ids) => {
+      order.push("bob");
+      expect(ids).toEqual([bobs]);
+      return [];
+    };
+    enter(game, "Earsplitting Rats");
+    settle(game);
+    expect(order).toEqual(["alice", "bob"]);
+    expect(library(game)[0]).toBe(alices);
+    expect(zone(game, bobs)).toBe("graveyard");
+    expect(discardEvents(game)).toBe(2);
+    expect(game.state.pendingDiscardsToLibrary ?? []).toEqual([]);
+  });
+
+  it("a player with no Library's discard isn't held up by the question", () => {
+    const { game, a, b } = table();
+    spawn(game, "Library of Leng");
+    const alices = hand(game, A)[0];
+    const bobs = hand(game, B)[0];
+    a.chooseDiscardsFn = () => [alices];
+    b.chooseDiscardsFn = () => [bobs];
+    let bobsWhenAsked = "";
+    a.chooseFromZoneFn = (_view, ids) => {
+      bobsWhenAsked = zone(game, bobs);
+      return [...ids];
+    };
+    enter(game, "Earsplitting Rats");
+    settle(game);
+    expect(bobsWhenAsked).toBe("graveyard");
+    expect(library(game)[0]).toBe(alices);
   });
 });
 

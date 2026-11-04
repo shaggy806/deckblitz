@@ -23,11 +23,10 @@ export default defineCard({
       trigger: { on: "enters-battlefield", who: "self", filter: { cast: true, castBy: "you" } },
       targets: ["spell"],
       effect: {
-        kind: "sequence",
-        effects: [
-          { kind: "counter", target: 0, into: "exile" },
-          { kind: "cast-now", target: 0, free: true },
-        ],
+        kind: "counter",
+        target: 0,
+        into: "exile",
+        ifCountered: { kind: "cast-now", target: 0, free: true },
       },
       resolve: null,
       text: TEXT,

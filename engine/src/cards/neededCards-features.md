@@ -357,7 +357,9 @@ too, is let through). A new replacement `would-discard`, `causedBy: "effect" |
 "opponent"`, `reveal` (Library of Leng, Nephalia Academy): the discard waits on a
 `choose-from-zone` of its cards, min 0, in order (`discardToLibrary`, the queue
 `GameState.pendingDiscardsToLibrary`), the chosen on top, the rest as a discard goes,
-one `cards-discarded` for all. A cost's and cleanup's are never asked. What's left:
+one `cards-discarded` for all, naming Library of Leng's unrevealed cards in `unrevealed`:
+their characteristics are undefined (rule 701.9c), so no filter on a discarded card
+matches them and no seat learns them. A cost's and cleanup's are never asked. What's left:
 Pulmonic Sliver, `replacement:graveyard-to-library-top-optional`, needs a "you may"
 on a permanent's every way to a graveyard, a wrath's deaths waiting on one answer
 with their order (its ruling), and no death path can wait yet but a commander's

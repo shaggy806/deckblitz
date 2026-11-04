@@ -4198,9 +4198,8 @@ export type EffectSpec =
        * counter — it does nothing to a spell that can't be countered — unlike
        * `return-to-hand` with `from: "stack"`, which isn't one. `"exile"`:
        * "exile it instead of putting it into its owner's graveyard"
-       * (Transcendent Dragon, whose `cast-now` of the same slot then finds it
-       * there — a spell that wasn't countered is still on the stack, where
-       * nothing is cast from). `"library-top"` / `"library-bottom"`: "put it
+       * (Transcendent Dragon, whose `ifCountered` `cast-now` of the same slot
+       * then finds it there). `"library-top"` / `"library-bottom"`: "put it
        * on top of / on the bottom of its owner's library instead of into that
        * player's graveyard" (Memory Lapse, Spell Crumple; Hinder's "your choice
        * of the top or bottom" is an `each-player-may` of the two). A commander
@@ -4212,6 +4211,10 @@ export type EffectSpec =
        * 702.62b). Only when the spell was countered, and it is the card that
        * reached exile: a copy ceases to exist instead (rule 707.10a). */
       readonly withTimeCounters?: number;
+      /** "If that spell is countered this way, … then you may cast it"
+       * (Transcendent Dragon): what follows, its target slots the same, only
+       * when this countered it. Guile's exile isn't one (its ruling). */
+      readonly ifCountered?: EffectSpec;
       /** "If a permanent's ability is countered this way, activated
        * abilities of that permanent can't be activated this turn"
        * (Trickbind, Interdict): an ability countered by this effect locks its
@@ -15852,6 +15855,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         applyEffectSpec({ kind: "cast-now", target: 0, free: true, play: true }, ctx.withFoundAt(0, exiledInstead));
         return;
       }
+      if (countered && spec.ifCountered !== undefined) applyEffectSpec(spec.ifCountered, ctx);
       const then = spec.thenSource;
       if (then === undefined || sourcePermanent === undefined) return;
       if (!countered && then.evenIfNotCountered !== true) return;

@@ -211,6 +211,44 @@ describe("Guile: instead of countering, exile and offer", () => {
     expect(zone(game, warded)).toBe("battlefield");
   });
 
+  describe("with Transcendent Dragon's own offer", () => {
+    /** Bob's Bolt on the stack, and Alice's cast Dragon's trigger aimed at it;
+     * how many times Alice is offered it, declining each. */
+    function dragonAtBolt(withGuile: boolean): { readonly game: Game; readonly bolt: ObjectId; readonly offers: number } {
+      const { game, a } = table();
+      if (withGuile) spawn(game, "Guile");
+      lands(game, "Island", 6);
+      lands(game, "Mountain", 1, B);
+      let offers = 0;
+      a.chooseCastNowFn = () => {
+        offers += 1;
+        return null;
+      };
+      game.dispatch({ type: "pass-priority", player: A });
+      const bolt = toHand(game, "Lightning Bolt", B);
+      cast(game, bolt, { player: B, targets: [ref(A)], settle: false });
+      game.dispatch({ type: "pass-priority", player: B });
+      pickTargets(a, bolt);
+      cast(game, toHand(game, "Transcendent Dragon"));
+      settle(game);
+      return { game, bolt, offers };
+    }
+
+    it("Dragon alone: offered once, and declined it stays exiled", () => {
+      const { game, bolt, offers } = dragonAtBolt(false);
+      expect(offers).toBe(1);
+      expect(zone(game, bolt)).toBe("exile");
+      expect(game.state.eventLog.some((e) => e.type === "spell-countered" && e.object === bolt)).toBe(true);
+    });
+
+    it("with Guile: only Guile's offer, and declined stays declined", () => {
+      const { game, bolt, offers } = dragonAtBolt(true);
+      expect(offers).toBe(1);
+      expect(zone(game, bolt)).toBe("exile");
+      expect(game.state.eventLog.some((e) => e.type === "spell-countered" && e.object === bolt)).toBe(false);
+    });
+  });
+
   it("shuffles itself back from a graveyard", () => {
     const { game } = table();
     const guile = spawn(game, "Guile");

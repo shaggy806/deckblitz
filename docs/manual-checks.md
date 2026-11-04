@@ -7051,6 +7051,10 @@ These boards start before the first turn (the builder's `openingHands`), with th
 - **Expect:** A popup says "Library of Leng: you may put discarded cards on top of your library, the first you pick on top. The rest go where a discard goes." with your two cards. Pick both, Grizzly Bears first, and confirm: you draw them both again, among your seven.
 - **Not a bug:** Pick none and they go to your graveyard, and you draw seven other cards.
 
+### Library of Leng: a card put back isn't named to an opponent
+- **Do:** It's Bob's turn. As Bob, cast Mind Rot at Alice. As Alice, put Grizzly Bears back on top, not Llanowar Elves. Then look as Bob.
+- **Expect:** Bob's log says "Alice discards a card, Llanowar Elves". Nothing on his screen names Grizzly Bears.
+
 ### Nephalia Academy: four players, an opponent's discard can be put back
 - **Do:** It's Bob's turn. As Bob, cast Mind Rot at Alice.
 - **Expect:** Alice discards her two cards and is asked "Nephalia Academy: you may reveal and put discarded cards on top of your library…". Pick one and confirm: it's revealed, it's on top of her library, and the other is in her graveyard.

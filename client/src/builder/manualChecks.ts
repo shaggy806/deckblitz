@@ -10587,6 +10587,14 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    "Library of Leng: a card put back isn't named to an opponent",
+    board({
+      you: { bf: ['Library of Leng'], hand: ['Grizzly Bears', 'Llanowar Elves'] },
+      opp: { human: true, bf: ['Swamp*3'], hand: ['Mind Rot'] },
+      turn: 0,
+    }),
+  ),
+  preset(
     'Nephalia Academy: four players, an opponent\'s discard can be put back',
     board({
       you: { bf: ['Nephalia Academy'], hand: ['Grizzly Bears', 'Llanowar Elves'] },

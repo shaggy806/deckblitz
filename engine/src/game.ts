@@ -27267,7 +27267,7 @@ export class Game {
               ? this.exileArrivals(trigger, event.arrivals, object).length
               : // "…for each card discarded this way".
                 trigger.on === "discards" && event.type === "cards-discarded"
-              ? this.discardedMatching(trigger, event.objects, object).length
+              ? this.discardedMatching(trigger, event.objects, object, event.unrevealed).length
               : // "Deals that much damage": how many counters were put.
                 trigger.on === "counters-put" && event.type === "counter-added"
               ? trigger.perCounter === true
@@ -27934,7 +27934,7 @@ export class Game {
             ability.trigger.perCard === true &&
             event.type === "cards-discarded"
           ) {
-            for (const card of this.discardedMatching(ability.trigger, event.objects, object)) {
+            for (const card of this.discardedMatching(ability.trigger, event.objects, object, event.unrevealed)) {
               const { triggerValue: _count, ...single } = base;
               this.queueTrigger(
                 ability,
@@ -29215,7 +29215,7 @@ export class Game {
             (spec.who === "you" && event.player === self.controller) ||
             (spec.who === "opponent" && event.player !== self.controller)) &&
           (spec.byOpponent !== true || (event.cause !== undefined && event.cause !== event.player)) &&
-          this.discardedMatching(spec, event.objects, self).length > 0 &&
+          this.discardedMatching(spec, event.objects, self, event.unrevealed).length > 0 &&
           (spec.firstTimeEachTurn !== true || this.firstMatchingDiscardThisTurn(spec, event.player, event.objects, self))
         );
       case "attack-with": {
@@ -48439,7 +48439,14 @@ export class Game {
       if (toCommandZone.has(id)) this.moveObject(id, "command");
       else this.putOnLibrary(id, "top");
     }
-    this.emit({ type: "cards-discarded", player, objects: [...ids], ...(cause !== undefined ? { cause } : {}) });
+    const unrevealed = reveal ? [] : chosen.filter((id) => this.state.objects[id]?.zone === "library");
+    this.emit({
+      type: "cards-discarded",
+      player,
+      objects: [...ids],
+      ...(cause !== undefined ? { cause } : {}),
+      ...(unrevealed.length > 0 ? { unrevealed } : {}),
+    });
     this.queueMadness(mad);
   }
 
@@ -54357,12 +54364,15 @@ export class Game {
     spec: Extract<TriggerSpec, { on: "discards" }>,
     objects: readonly ObjectId[],
     self: GameObject,
+    /** Put into a hidden zone unrevealed: characteristics undefined (rule 701.9c). */
+    unrevealed?: readonly ObjectId[],
   ): readonly ObjectId[] {
     if (spec.filter === undefined) return objects;
     const filter = spec.filter;
     return objects.filter(
       (id) =>
         this.state.objects[id] !== undefined &&
+        unrevealed?.includes(id) !== true &&
         matchesFilter(this.state, this.registry, id, filter, { you: self.controller }),
     );
   }

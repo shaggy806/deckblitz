@@ -524,6 +524,11 @@ export type GameEvent =
        * (named, or absent for cycling's and channel's), never an
        * opponent's. */
       readonly cause?: PlayerId;
+      /** Those of `objects` put into a hidden zone instead of a graveyard
+       * without being revealed (Library of Leng): all their characteristics are
+       * undefined (rule 701.9c), so no filter on a discarded card's matches them,
+       * and no seat is told what they were. */
+      readonly unrevealed?: readonly ObjectId[];
     })
   | (Base & {
       /**
