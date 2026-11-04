@@ -7,6 +7,7 @@
  */
 import { describe, expect, it } from "vitest";
 import { staticConditionMet } from "../characteristics.js";
+import { matchesFilter } from "../filter.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
 import { A, B, C, activate, attack, cast, counters, destroy, graveyard, hand, keywords, lands, life, named, nextTurn, pickFromZone, pickTargets, pt, ref, settle, spawn, subtypes, table, toGraveyard, toHand, toLibrary, toStep, tokensNamed, zone } from "./harness.js";
 import type { Table } from "./harness.js";
@@ -142,12 +143,63 @@ describe("dealt combat damage by a filter this turn", () => {
     expect(zone(t.game, rats)).toBe("graveyard");
   });
 
-  it("Wave of Rats: blitz, for its cost, draws on dying as usual", () => {
+  it("Wave of Rats: blitz {4}{B}: haste, sacrificed at the next end step with a card drawn, and dead if it dealt no combat damage", () => {
     const t = table();
     lands(t.game, "Swamp", 5);
     const rats = toHand(t.game, "Wave of Rats");
     cast(t.game, rats, { via: "blitz" } as never);
     expect(keywords(t.game, rats).has("haste")).toBe(true);
+    const before = hand(t.game).length;
+    toStep(t.game, "end");
+    settle(t.game);
+    expect(zone(t.game, rats)).toBe("graveyard");
+    expect(hand(t.game).length).toBe(before + 1);
+  });
+
+  it("Wave of Rats: blitz needs its whole cost", () => {
+    const t = table();
+    lands(t.game, "Swamp", 4);
+    expect(() => cast(t.game, toHand(t.game, "Wave of Rats"), { via: "blitz" } as never)).toThrow();
+  });
+
+  it("Wave of Rats: blitzed, it hits, then its sacrifice draws and returns it, a new object with no haste or second sacrifice", () => {
+    const t = table();
+    lands(t.game, "Swamp", 5);
+    const rats = toHand(t.game, "Wave of Rats");
+    cast(t.game, rats, { via: "blitz" } as never);
+    attack(t.game, t.a, [rats], B);
+    expect(life(t.game, B)).toBe(16);
+    const before = hand(t.game).length;
+    toStep(t.game, "end");
+    settle(t.game);
+    expect(zone(t.game, rats)).toBe("battlefield");
+    expect(hand(t.game).length).toBe(before + 1);
+    expect(keywords(t.game, rats).has("haste")).toBe(false);
+    nextTurn(t.game);
+    expect(zone(t.game, rats)).toBe("battlefield");
+  });
+
+  it("Wave of Rats: trample's excess over a blocker that kills it is combat damage to a player, so it returns", () => {
+    const t = table();
+    const rats = ready(t, "Wave of Rats");
+    const blocker = spawn(t.game, "Grizzly Bears", B);
+    t.a.declareAttackersFn = () => [{ attacker: rats, defender: B }];
+    t.b.declareBlockersFn = () => [{ blocker, attacker: rats }];
+    toStep(t.game, "postcombat-main");
+    expect(zone(t.game, blocker)).toBe("graveyard");
+    expect(life(t.game, B)).toBe(18);
+    expect(zone(t.game, rats)).toBe("battlefield");
+  });
+
+  it("Wave of Rats: killed by a blocker it can't trample over, it dealt a player nothing and stays dead", () => {
+    const t = table();
+    const rats = ready(t, "Wave of Rats");
+    const blocker = spawn(t.game, "Serra Angel", B);
+    t.a.declareAttackersFn = () => [{ attacker: rats, defender: B }];
+    t.b.declareBlockersFn = () => [{ blocker, attacker: rats }];
+    toStep(t.game, "postcombat-main");
+    expect(life(t.game, B)).toBe(20);
+    expect(zone(t.game, rats)).toBe("graveyard");
   });
 
   it("Estinien Varlineau: each opponent once, by him or a Dragon", () => {
@@ -514,5 +566,57 @@ describe("lands with the same name, and different names", () => {
     expect(seen.offered).toContain(free);
     expect(seen.offered).not.toContain(shares);
     expect(zone(t.game, free)).toBe("hand");
+  });
+
+  // Rule 709.5: a permanent without a half's unlocked designation doesn't have
+  // that half's name, so a Room with both doors locked has no name at all. It
+  // enters so when neither half was cast (709.5d).
+  describe("a Room with both doors locked has no name (rule 709.5)", () => {
+    const locked = (t: Table, name = ROOMS, player: PlayerId = A): ObjectId => {
+      const id = spawn(t.game, name, player);
+      expect(t.game.state.objects[id].doors).toEqual({ left: false, right: false });
+      return id;
+    };
+    const met = (t: Table, id: ObjectId, atLeast: number, how: "distinctNames" | "sharingAName"): boolean =>
+      staticConditionMet(
+        t.game.state,
+        t.game.registry,
+        t.game.state.objects[id],
+        { kind: "controls", filter: { subtype: "Room" }, atLeast, [how]: true },
+        { includeSelf: true, outsideFold: true },
+      );
+
+    it("is still a Room, but adds no name to distinctNames", () => {
+      const t = table();
+      const id = locked(t);
+      expect(staticConditionMet(t.game.state, t.game.registry, t.game.state.objects[id], { kind: "controls", filter: { subtype: "Room" }, atLeast: 1 }, { includeSelf: true, outsideFold: true })).toBe(true);
+      expect(met(t, id, 1, "distinctNames")).toBe(false);
+    });
+
+    it("two of the same card have no name in common", () => {
+      const t = table();
+      const id = locked(t);
+      locked(t);
+      expect(met(t, id, 2, "sharingAName")).toBe(false);
+      expect(met(t, id, 1, "sharingAName")).toBe(false);
+    });
+
+    it("doesn't stop Central Elevator finding that same Room (the ruling)", () => {
+      const t = table();
+      locked(t);
+      const same = toLibrary(t.game, ROOMS);
+      const seen = pickFromZone(t.a, same);
+      room(t, "Central Elevator // Promising Stairs", { left: true, right: false });
+      expect(seen.offered).toContain(same);
+      expect(zone(t.game, same)).toBe("hand");
+    });
+
+    it("has no different name from anything itself (rule 201.2c)", () => {
+      const t = table();
+      const id = locked(t);
+      expect(matchesFilter(t.game.state, t.game.registry, id, { nameDiffersFromEach: { type: "creature" } }, { you: A })).toBe(false);
+      const named = spawn(t.game, "Grizzly Bears");
+      expect(matchesFilter(t.game.state, t.game.registry, named, { nameDiffersFromEach: { subtype: "Room" } }, { you: A })).toBe(true);
+    });
   });
 });
