@@ -1704,12 +1704,21 @@ function cyclingAbilityFrom(
   };
 }
 
+/** Whether the plain `cycle` action can name this card's cycling: one ability,
+ * mana alone. Anything else is activated as any other ability is, each of its
+ * cycling abilities on its own (`Game.handGrantedActivated`): which one is
+ * chosen as it's activated (Valley Rannet's "Mountaincycling {2}, forestcycling
+ * {2}"), and what else a cost asks. */
+function cyclesByName(def: CardDefinition): boolean {
+  return def.cycling !== null && def.moreCycling === undefined && !cyclingAsksMore(def.cycling);
+}
+
 /** How a cast offer says it's for an alternative cost of {0}. */
 const WITHOUT_PAYING = "without paying its mana cost";
 
 /** A printed cycling ability's name and cost, as the player is offered it. */
 function cyclingText(cycling: CyclingAbility): string {
-  const name = cycling.search === undefined ? "Cycling" : "Landcycling";
+  const name = cycling.name ?? (cycling.search === undefined ? "Cycling" : "Landcycling");
   return cycling.costText !== undefined ? `${name}—${cycling.costText}` : `${name} ${cycling.cost}`;
 }
 
@@ -1749,9 +1758,11 @@ type FlashbackOption = {
    * Flame's "Behold three Elementals", rule 701.4a). */
   readonly behold?: BeholdSpec;
   /** Cards discarded for it, and its keyword — only a printed one's
-   * (jump-start, rule 702.133a). */
-  readonly discard?: number;
+   * (jump-start, rule 702.133a; Conflagrate's "Discard X cards"). */
+  readonly discard?: number | "x";
   readonly keyword?: "jump-start";
+  /** Creatures tapped for it — only a printed one's (Battle Screech). */
+  readonly tapCreatures?: { readonly count: number; readonly filter: CardFilter };
   /** What gave it: the effect's source (Past in Flames) or the permanent
    * whose static grants it. Absent for the card's own. */
   readonly grantor?: ObjectId;
@@ -3049,7 +3060,7 @@ export class Game {
       }
       // Cycling (rule 702.29) — a special action, any time you could cast an instant.
       // One whose cost asks for more is an `activate-ability` offer.
-      if (def.cycling !== null && !cyclingAsksMore(def.cycling) && this.whyCannotCycle(player, card) === null) {
+      if (def.cycling !== null && cyclesByName(def) && this.whyCannotCycle(player, card) === null) {
         out.push({ kind: "cycle", card, cardName, cost: def.cycling.cost });
       }
     }
@@ -4826,6 +4837,11 @@ export class Game {
       const discardX =
         xPlan === null && sacrificeX === undefined && def.additionalCost?.discard === "x"
           ? this.discardCandidates(player, def.additionalCost.discardFilter, card).length
+          : xPlan === null &&
+              sacrificeX === undefined &&
+              via === "flashback" &&
+              this.flashbackOf(card, graveyardGrant)?.discard === "x"
+            ? this.state.zones.perPlayer[player].hand.length
           : xPlan === null && sacrificeX === undefined && graveyardExileCost?.count === "x"
             ? this.graveyardCostCandidates(player, graveyardExileCost.filter, card).length
             : undefined;
@@ -4998,7 +5014,12 @@ export class Game {
                 const tapCost = this.altCostTapOffer(player, card, via, face ?? 0, kicked === true, true, costOption);
                 return tapCost === null ? {} : { tapCost };
               })()
-            : {}),
+            : via === "flashback" && this.flashbackOf(card, graveyardGrant)?.tapCreatures !== undefined
+              ? (() => {
+                  const tapCost = this.altCostTapOffer(player, card, via, face ?? 0, false, true, costOption, graveyardGrant);
+                  return tapCost === null ? {} : { tapCost };
+                })()
+              : {}),
         ...(costOption !== undefined && costOptions !== undefined
           ? { costOption, costOptionText: costOptions[costOption].text }
           : {}),
@@ -13924,7 +13945,7 @@ export class Game {
     }
     const def = this.registry.get(this.state.objects[cardId].cardName);
     if (def.cycling === null) return `${def.name} does not have cycling`;
-    if (cyclingAsksMore(def.cycling)) return `${def.name}'s cycling cost is chosen as it's activated: activate it`;
+    if (!cyclesByName(def)) return `${def.name}'s cycling cost is chosen as it's activated: activate it`;
     // Cycling is an activated ability that isn't a mana ability (rule
     // 702.29a), so a split-second spell on the stack stops it (702.61a), and
     // so does a "can't activate abilities" prohibition on its player. Not one
@@ -16333,7 +16354,9 @@ export class Game {
         return `${player} cannot pay ${life} life for ${def.name}'s flashback`;
       }
       // Jump-start's "by discarding a card" (rule 702.133a): a card in hand.
-      if (flashback.discard !== undefined && this.state.zones.perPlayer[player].hand.length < flashback.discard) {
+      // Conflagrate's "Discard X cards": as many as the X announced.
+      const discards = flashback.discard === "x" ? Math.max(0, Math.floor(xValue)) : flashback.discard;
+      if (discards !== undefined && this.state.zones.perPlayer[player].hand.length < discards) {
         return `${player} has no card to discard for ${def.name}'s ${flashback.keyword ?? "flashback"}`;
       }
     } else if (via === "escape") {
@@ -16906,7 +16929,7 @@ export class Game {
     }
     const cost = convoked.length > 0 ? this.reduceCostByConvoke(delved, convoked) : delved;
     const purpose: ManaPurpose = { kind: "cast", card: cardId, face, ...bestowPurpose(def, overload), ...castPaying(via, costString, kicked) };
-    const alternativeTaps = this.spellTapCost(cardId, def, via, player, altCost, kicked, costOption);
+    const alternativeTaps = this.spellTapCost(cardId, def, via, player, altCost, kicked, costOption, graveyardGrant);
     if (alternativeTaps !== undefined) {
       // The tap half is checked against the same mana — see `tapCostOffer`.
       const offer = this.tapCostOffer(
@@ -16924,7 +16947,7 @@ export class Game {
           ? `${def.name}'s teamwork needs untapped creatures with total power ${offer.totalPower}`
           : altCost
             ? `${def.name}'s alternative cost needs ${offer.count} untapped creatures`
-            : `${def.name}'s kicker needs ${offer.count} untapped permanents to tap`;
+            : `${def.name}'s ${via === "flashback" ? "flashback" : "kicker"} needs ${offer.count} untapped permanents to tap`;
       }
       return tap === undefined ? null : this.whyTapChoiceIsWrong(def.name, offer, tap);
     }
@@ -18562,7 +18585,7 @@ export class Game {
         : via === "effect" && this.castNowOffer(player, cardId)?.madness !== undefined
           ? "madness"
           : undefined;
-    const alternativeTaps = this.spellTapCost(cardId, def, via, player, altCost, kicked, costOption);
+    const alternativeTaps = this.spellTapCost(cardId, def, via, player, altCost, kicked, costOption, graveyardGrant);
     // "Pay life equal to its mana value" (Demon of Fate's Design, Inside
     // Information): the face cast, X 0 (rule 107.3b), paid with the rest below.
     const alternativeLife = alternativeCost?.payLifeManaValue === true ? this.castNowEnergyOf(cardId, face) : 0;
@@ -18595,6 +18618,7 @@ export class Game {
       def.additionalCost?.chooseNumber !== undefined ||
       def.additionalCost?.sacrificeCount === "x" ||
       (via === "flashback"&& this.flashbackOf(cardId, graveyardGrant)?.sacrifice?.count === "x") ||
+      (via === "flashback" && this.flashbackOf(cardId, graveyardGrant)?.discard === "x") ||
       def.additionalCost?.discard === "x" ||
       def.additionalCost?.exileFromGraveyard?.count === "x" ||
       // The Shoals' "exile a … card with mana value X" (rule 107.3a).
@@ -19151,8 +19175,9 @@ export class Game {
     // above, the rest asked in turn before anyone gets priority.
     this.queueAlsoCosts(player, cardId, this.castAlsoCosts(cardId, def, kicked, altCost, costOption), via === "effect" ? this.activePlayer : player);
     // Jump-start's "by discarding a card" (rule 702.133a), paid the same way.
-    const flashbackDiscard = via === "flashback" ? this.flashbackOf(cardId, graveyardGrant)?.discard : undefined;
-    if (flashbackDiscard !== undefined) {
+    const flashbackDiscards = via === "flashback" ? this.flashbackOf(cardId, graveyardGrant)?.discard : undefined;
+    const flashbackDiscard = flashbackDiscards === "x" ? chosenX : flashbackDiscards;
+    if (flashbackDiscard !== undefined && flashbackDiscard > 0) {
       this.payCostDiscard(cardId, cardId, () => {
         this.discardByEffect({ kind: "player", player }, flashbackDiscard);
       });
@@ -20582,10 +20607,12 @@ export class Game {
     // more than mana or is an X (`cyclingAsksMore`), is listed here beside
     // what a static gave it.
     const cyclings: { readonly search?: CardFilter }[] = [];
-    const printedCycling = this.registry.has(card.cardName) ? this.registry.get(card.cardName).cycling : null;
-    if (printedCycling !== null) {
-      cyclings.push(printedCycling);
-      if (cyclingAsksMore(printedCycling)) add(cyclingAbilityFrom(printedCycling, cyclingText(printedCycling)));
+    const printed = this.registry.has(card.cardName) ? this.registry.get(card.cardName) : null;
+    if (printed?.cycling != null) {
+      for (const cycling of [printed.cycling, ...(printed.moreCycling ?? [])]) {
+        cyclings.push(cycling);
+        if (!cyclesByName(printed)) add(cyclingAbilityFrom(cycling, cyclingText(cycling)));
+      }
     }
     for (const { ability } of this.activeStaticsOf(card.owner, (a) => a.grantsNinjutsuInHand !== undefined)) {
       const grant = ability.grantsNinjutsuInHand!;
@@ -37329,9 +37356,15 @@ export class Game {
     altCost: boolean,
     kicked: boolean | number,
     costOption?: number,
+    graveyardGrant?: GraveyardGrant,
   ):
     | { readonly count: number; readonly totalPower?: number; readonly anyNumber?: true; readonly filter: CardFilter }
     | undefined {
+    // "Flashback—Tap three untapped white creatures you control" (Battle Screech).
+    if (via === "flashback") {
+      const taps = this.flashbackOf(cardId, graveyardGrant)?.tapCreatures;
+      if (taps !== undefined) return taps;
+    }
     if (altCost) {
       const taps = this.alternativeCostOf(cardId, def, via, player)?.tapCreatures;
       if (taps !== undefined) return taps;
@@ -37646,9 +37679,10 @@ export class Game {
      * spliced card's, or an additional cost's. */
     notAlternative = teamwork,
     costOption?: number,
+    graveyardGrant?: GraveyardGrant,
   ): TapCostOffer | null {
     const def = this.faceDef(cardId, face);
-    const taps = this.spellTapCost(cardId, def, via, player, !notAlternative, teamwork, costOption);
+    const taps = this.spellTapCost(cardId, def, via, player, !notAlternative, teamwork, costOption, graveyardGrant);
     if (taps === undefined) return null;
     const cost = this.withFace(cardId, face, () =>
       this.castingCostOf(
@@ -45728,7 +45762,8 @@ export class Game {
             f.payLife === option.payLife &&
             f.sacrifice === option.sacrifice &&
             f.behold === option.behold &&
-            f.discard === option.discard,
+            f.discard === option.discard &&
+            f.tapCreatures === option.tapCreatures,
         )
       ) {
         return;
@@ -45739,7 +45774,7 @@ export class Game {
     if (printed !== null) {
       add(
         printed.payLife === undefined && printed.sacrifice === undefined && printed.behold === undefined &&
-          printed.discard === undefined && printed.keyword === undefined
+          printed.discard === undefined && printed.keyword === undefined && printed.tapCreatures === undefined
           ? { cost: printed.cost }
           : { ...printed },
       );

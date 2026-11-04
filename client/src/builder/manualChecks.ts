@@ -8940,6 +8940,27 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       you: { bf: ['Swamp*2', 'Forest*2'], hand: ["Jarad's Orders"], lib: ['Grizzly Bears', 'Llanowar Elves'] },
     }),
   ),
+  // --- Two typecyclings, and flashback that taps or discards (2026-11-03, need-keys Phase 2) --
+  preset(
+    'Valley Rannet: choose which land type to cycle for',
+    board({ you: { bf: ['Wastes', 'Wastes'], hand: ['Valley Rannet'], lib: ['Mountain', 'Forest', 'Grizzly Bears'] } }),
+  ),
+  preset(
+    'Battle Screech: tap three white creatures for its flashback',
+    board({
+      you: {
+        bf: ['Savannah Lions', 'Serra Angel', { name: 'White Knight', sick: true }, 'Wall of Omens', 'Grizzly Bears'],
+        gy: ['Battle Screech'],
+      },
+    }),
+  ),
+  preset(
+    'Conflagrate: flashback announces X and discards that many, four players',
+    board({
+      you: { bf: ['Mountain', 'Mountain'], hand: ['Grizzly Bears', 'Hill Giant', 'Llanowar Elves'], gy: ['Conflagrate'] },
+      opp: [{}, {}, {}],
+    }),
+  ),
   // --- Costs to attack paid in permanents (2026-11-03, need-keys Phase 2) ------------
   preset(
     'Exalted Dragon: choose the land it costs to attack',

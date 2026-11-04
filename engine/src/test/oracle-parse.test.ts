@@ -1570,10 +1570,6 @@ describe("costs and triggers", () => {
   });
 
   it("lines the scaffolder must leave to a person, and what it must get right (the 2026-10-12 review)", () => {
-    // Two typecyclings on one line are two abilities; `cycling` holds one.
-    const rannet = parseFace({ name: "Valley Rannet", type_line: "Creature — Mount", oracle_text: "Mountaincycling {2}, forestcycling {2}" });
-    expect(rannet.cycling).toBeUndefined();
-    expect(rannet.complete).toBe(false);
     // Morph on a land: the engine offers no face-down cast for a land.
     const cavern = parseFace({ name: "Zoetic Cavern", type_line: "Land", oracle_text: "Morph {2}" });
     expect(cavern.morph).toBeUndefined();
@@ -8856,6 +8852,28 @@ describe("a cost on a creature to attack or block", () => {
     expect(aura("Enchanted creature can't be blocked unless defending player pays {3} for each creature they control that's blocking it.")).toMatchObject({
       affects: { scope: "attached" },
       combatTax: { on: ["be-blocked"], generic: 3 },
+    });
+  });
+
+  it("reads two typecyclings on one line, and a flashback that taps or discards", () => {
+    const parsed = (type_line: string, oracle_text: string) =>
+      parseFace({ name: "Test Cost", type_line, oracle_text, mana_cost: "{1}" }, { tokenFor: () => null });
+    const rannet = parsed("Creature — Beast", "Mountaincycling {2}, forestcycling {2} ({2}, Discard this card: Search your library for a Mountain or Forest card, reveal it, put it into your hand, then shuffle.)");
+    expect(rannet.complete).toBe(true);
+    expect(rannet.cycling).toEqual({ cost: "{2}", search: { subtype: "Mountain" }, name: "Mountaincycling" });
+    expect(rannet.moreCycling).toEqual([{ cost: "{2}", search: { subtype: "Forest" }, name: "Forestcycling" }]);
+    const reminder = " (You may cast this card from your graveyard for its flashback cost. Then exile it.)";
+    expect(parsed("Sorcery", `Draw a card.\nFlashback—Tap three untapped white creatures you control.${reminder}`).flashback).toEqual({
+      cost: "",
+      tapCreatures: { filter: { type: "creature", colors: ["W"] }, count: 3 },
+    });
+    expect(parsed("Sorcery", `Draw a card.\nFlashback—{1}{U/R}{U/R}, Discard a card.${reminder}`).flashback).toEqual({
+      cost: "{1}{U/R}{U/R}",
+      discard: 1,
+    });
+    expect(parsed("Sorcery", `Draw a card.\nFlashback—{R}{R}, Discard X cards.${reminder}`).flashback).toEqual({
+      cost: "{R}{R}",
+      discard: "x",
     });
   });
 

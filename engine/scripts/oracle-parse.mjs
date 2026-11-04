@@ -1404,15 +1404,22 @@ function kickerAlso(text) {
     if (filter === null || Object.keys(filter).length === 0) return null;
     return { text, returnToHand: { filter, count: 1 } };
   }
+  // "White creatures" as well as "creatures": what's tapped may be of a colour
+  // (Battle Screech, Hundred-Talon Strike).
+  const tappedPhrase = (phrase) => {
+    const coloured = /^(white|blue|black|red|green) (.+)$/.exec(phrase);
+    const filter = parseTypePhrase(coloured === null ? phrase : coloured[2]);
+    return filter === null || coloured === null ? filter : { ...filter, colors: [COLOR_WORD[coloured[1]]] };
+  };
   if ((m = /^Tap an untapped (.+?) you control$/.exec(text))) {
-    const filter = parseTypePhrase(m[1]);
+    const filter = tappedPhrase(m[1]);
     if (filter === null || Object.keys(filter).length === 0) return null;
     return { text, tapUntapped: { filter, count: 1 } };
   }
   // "Tap two untapped artifacts, creatures, and/or lands you control" (Warlord's Elite).
   if ((m = new RegExp(`^Tap (${N.slice(1, -1)}) untapped (.+?) you control$`).exec(text))) {
     const count = numberOf(m[1]);
-    const filter = parseTypePhrase(m[2]);
+    const filter = tappedPhrase(m[2]);
     if (typeof count !== "number" || filter === null || Object.keys(filter).length === 0) return null;
     return { text, tapUntapped: { filter, count } };
   }
@@ -11158,10 +11165,11 @@ function parseFaceAsWritten(face, ctx = {}) {
     const known = (p) =>
       KEYWORDS[p.toLowerCase()] !== undefined || wardOf(p) !== null || isProwess(p) || protectionOf(p) !== null || keywordPart(p, face.name, face.type_line) !== null;
     // Two typecyclings on one line ("Mountaincycling {2}, forestcycling {2}")
-    // are two abilities, and `cycling` holds one: such a line is a person's.
+    // are two abilities, `cycling` and `moreCycling`; anything else twice is a
+    // person's.
     const cardFields = parts.flatMap((p) => (KEYWORDS[p.toLowerCase()] === undefined ? Object.keys(keywordPart(p, face.name, face.type_line)?.card ?? {}) : []));
     const twice =
-      cardFields.some((f, i) => cardFields.indexOf(f) !== i) ||
+      cardFields.some((f, i) => f !== "cycling" && cardFields.indexOf(f) !== i) ||
       // Morph on a land (Zoetic Cavern): a land is played, never cast, and the
       // engine offers no face-down cast for one.
       (cardFields.includes("morph") && /\bLand\b/.test(face.type_line ?? ""));
@@ -11181,7 +11189,12 @@ function parseFaceAsWritten(face, ctx = {}) {
           out.triggered.push(...(k.triggered ?? []));
           out.activated.push(...(k.activated ?? []));
           out.static.push(...(k.static ?? []));
-          Object.assign(out, k.card ?? {});
+          if (k.card?.cycling !== undefined && cardFields.filter((f) => f === "cycling").length > 1) {
+            // One of several, each named: `moreCycling` holds what `cycling` can't.
+            const named = { ...k.card.cycling, name: p[0].toUpperCase() + p.slice(1).replace(/ .*$/, "") };
+            if (out.cycling === undefined) out.cycling = named;
+            else out.moreCycling = [...(out.moreCycling ?? []), named];
+          } else Object.assign(out, k.card ?? {});
         }
       }
       continue;
@@ -11932,6 +11945,20 @@ function parseFaceAsWritten(face, ctx = {}) {
         out.flashback = { cost: "", sacrifice: also.sacrifice };
         continue;
       }
+    }
+    // "Flashback—Tap three untapped white creatures you control." (Battle Screech).
+    if (isSpell && (m = /^Flashback—(Tap .+)\.$/.exec(line))) {
+      const also = kickerAlso(m[1]);
+      if (also?.tapUntapped !== undefined) {
+        out.flashback = { cost: "", tapCreatures: also.tapUntapped };
+        continue;
+      }
+    }
+    // "Flashback—{1}{U/R}{U/R}, Discard a card." (Twinned Vision), "… Discard X
+    // cards." (Conflagrate): X announced for the cast.
+    if (isSpell && (m = /^Flashback—((?:\{[^}]+\})+), Discard (a card|X cards)\.$/.exec(line))) {
+      out.flashback = { cost: m[1], discard: m[2] === "a card" ? 1 : "x" };
+      continue;
     }
     // "Flashback—{R}{R}, Sacrifice X Mountains." (Firecat Blitz): X announced
     // for the cast though the flashback's mana has none.

@@ -4153,6 +4153,9 @@ export interface CyclingAbility {
   readonly also?: Omit<AbilityCost, "mana" | "tap">;
   /** What the cost reads as where `cost` doesn't say it all: `"Pay 2 life"`. */
   readonly costText?: string;
+  /** Its name, where it isn't the plain "Cycling" or "Landcycling": what tells
+   * two on one card apart (`CardDefinition.moreCycling`), "Swampcycling". */
+  readonly name?: string;
 }
 
 export interface CardDefinition {
@@ -5192,15 +5195,23 @@ export interface CardDefinition {
      * that way only with as many to behold; which ones is chosen as the cost
      * is paid, as `additionalCost.behold`'s are. */
     readonly behold?: BeholdSpec;
-    /** Cards discarded as part of the cost, chosen as it's paid. With
-     * `keyword: "jump-start"` it's **jump-start** (rule 702.133a — Radical
-     * Idea): "cast this card from your graveyard by discarding a card in
+    /** Cards discarded as part of the cost, chosen as it's paid: "Flashback—
+     * {1}{U/R}{U/R}, Discard a card" (Twinned Vision). `"x"` is Conflagrate's
+     * "Flashback—{R}{R}, Discard X cards", an X announced for this cast though
+     * the flashback's mana has none, which the spell then reads (rules 107.3a,
+     * 601.2b). With `keyword: "jump-start"` it's **jump-start** (rule 702.133a —
+     * Radical Idea): "cast this card from your graveyard by discarding a card in
      * addition to paying its other costs", so `cost` is the card's own mana
      * cost and `discard` 1; exiled as it leaves the stack, like flashback. */
-    readonly discard?: number;
+    readonly discard?: number | "x";
     /** `"jump-start"`: the keyword this graveyard cast is printed as, for its
      * label. */
     readonly keyword?: "jump-start";
+    /** Untapped creatures tapped as part of the cost, chosen with the cast (its
+     * offer's `tapCost`), as an alternative cost's `tapCreatures` are:
+     * "Flashback—Tap three untapped white creatures you control" (Battle
+     * Screech), summoning-sick ones too (rule 302.6 asks only of {T} costs). */
+    readonly tapCreatures?: { readonly count: number; readonly filter: CardFilter };
   } | null;
   /** Harmonize (rule 702.180a) — this card may be cast from its owner's
    * graveyard for `cost`, tapping up to one untapped creature they control,
@@ -5424,6 +5435,10 @@ export interface CardDefinition {
    * goes on above it and resolves first (the rulings). `null` for a card
    * without cycling. */
   readonly cycling: CyclingAbility | null;
+  /** A card's other cycling abilities, each its own (rule 702.29, the player
+   * choosing as it's activated): Valley Rannet's "Mountaincycling {2},
+   * forestcycling {2}", the mountaincycling being `cycling`. Absent with one. */
+  readonly moreCycling?: readonly CyclingAbility[];
   /** Saga chapters (rule 714 — ROADMAP Phase 10). A Saga enters with one lore
    * counter and gains one at the start of its controller's precombat main
    * phase; each `SagaChapter` fires when the lore count reaches any number in
@@ -5757,6 +5772,7 @@ const PRINTED_ABILITY: {
   escape: (def) => def.escape !== null,
   suspend: (def) => def.suspend !== null,
   cycling: (def) => def.cycling !== null,
+  moreCycling: (def) => def.moreCycling !== undefined,
   castFromGraveyardIf: (def) => def.castFromGraveyardIf !== undefined,
   castSelfFromGraveyard: (def) => def.castSelfFromGraveyard !== undefined,
   castSelfFromExile: (def) => def.castSelfFromExile !== undefined,
@@ -6022,6 +6038,7 @@ interface CardDraft {
   asTurnedFaceUp?: { readonly counters: number };
   suspend?: { readonly n: number | "x"; readonly cost: string };
   cycling?: CyclingAbility;
+  moreCycling?: readonly CyclingAbility[];
   escape?: {
     readonly cost: string;
     readonly exileCount: number;
@@ -6285,6 +6302,7 @@ export function defineCard(draft: CardDraft): CardDefinition {
     ...(draft.asTurnedFaceUp !== undefined ? { asTurnedFaceUp: draft.asTurnedFaceUp } : {}),
     suspend: draft.suspend ?? null,
     cycling: draft.cycling ?? null,
+    ...(draft.moreCycling !== undefined ? { moreCycling: draft.moreCycling } : {}),
     ...(draft.castFromGraveyardIf !== undefined ? { castFromGraveyardIf: draft.castFromGraveyardIf } : {}),
     ...(draft.castSelfFromGraveyard !== undefined ? { castSelfFromGraveyard: draft.castSelfFromGraveyard } : {}),
     ...(draft.castSelfFromExile !== undefined ? { castSelfFromExile: draft.castSelfFromExile } : {}),

@@ -5926,6 +5926,20 @@ engine terms. A second thing to check is a second test.
 - **Expect:** The second popup says "Choose one to put into your hand — the other goes into your graveyard" and offers just the two finds. Llanowar Elves goes to your hand, Grizzly Bears to your graveyard, and your library is shuffled once.
 
 
+## Two typecyclings, and flashback that taps or discards (2026-11-03, need-keys Phase 2: build-family, features only)
+
+### Valley Rannet: choose which land type to cycle for
+- **Do:** Hover Valley Rannet in your hand and press "Forestcycling {2}".
+- **Expect:** It offers both "Mountaincycling {2}" and "Forestcycling {2}". Choosing the second offers only Forests from your library.
+
+### Battle Screech: tap three white creatures for its flashback
+- **Do:** Open your graveyard and click Battle Screech. Pick Savannah Lions, Serra Angel and the summoning-sick White Knight, then Confirm.
+- **Expect:** The banner reads "Battle Screech: tap 3". Grizzly Bears can't be picked. They tap, two Birds arrive, and Battle Screech is exiled.
+
+### Conflagrate: flashback announces X and discards that many, four players
+- **Do:** Cast Conflagrate from your graveyard with X 2, aiming all 2 at Bob, then discard two cards.
+- **Expect:** X goes no higher than the 3 cards in your hand. You pay {R}{R}, discard the two you choose, Bob loses 2 life, and Conflagrate is exiled.
+
 ## Costs to attack paid in permanents (2026-11-03, need-keys Phase 2: build-family, features only)
 
 ### Exalted Dragon: choose the land it costs to attack
