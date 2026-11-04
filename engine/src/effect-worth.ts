@@ -393,6 +393,13 @@ function untargetedWorth(effect: EffectSpec, ctx: WorthContext): number {
       const players = playersIn(effect.who ?? "you", ctx);
       return onPlayers(players, 1.5 * sizeOf(effect.count), ctx);
     }
+    // A roll is worth what its rows are on average, whatever each one's odds:
+    // Delina's "you may roll again" reads as the token it's likely to make.
+    case "roll-dice": {
+      const rows = effect.table ?? [];
+      const row = rows.reduce((sum, r) => sum + untargetedWorth(r.effect, ctx), 0) / Math.max(1, rows.length);
+      return row + (effect.then !== undefined ? untargetedWorth(effect.then, ctx) : 0);
+    }
     case "create-token-copy":
       // A token copy that's ours — of our own source, or one that enters under
       // us — is a token's worth like any other: a myriad copy attacking another

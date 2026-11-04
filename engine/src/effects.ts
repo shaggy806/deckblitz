@@ -2274,6 +2274,10 @@ export interface DieResultRow {
   readonly min: number;
   readonly max?: number;
   readonly effect: EffectSpec;
+  /** "You may roll again" in this row (Delina, Wild Mage): after the row's
+   * effect the roller is asked, and a yes is another roll of the same kind
+   * and number of dice (rule 706.3c), read against the same table. */
+  readonly mayRollAgain?: true;
 }
 
 /** See the `take-extra-turn` {@link EffectSpec}'s `thatTurn`. */
@@ -18472,7 +18476,13 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       const modifier = spec.modifier === undefined ? 0 : signedAmountValue(spec.modifier, ctx);
       const total = ctx.rollDice(spec.sides, count, modifier);
       const row = spec.table?.find((r) => total >= r.min && (r.max === undefined || total <= r.max));
-      const steps = [row?.effect, spec.then].filter((s): s is EffectSpec => s !== undefined);
+      // A row's "you may roll again" comes after what the row and any `then`
+      // do with this roll. The number of dice stays what it was (rule 706.3c).
+      const again: EffectSpec | undefined =
+        row?.mayRollAgain === true
+          ? { kind: "may", prompt: "Roll again?", effect: { ...spec, count } }
+          : undefined;
+      const steps = [row?.effect, spec.then, again].filter((s): s is EffectSpec => s !== undefined);
       if (steps.length > 0) applyEffectSpec(steps.length === 1 ? steps[0] : { kind: "sequence", effects: steps }, ctx);
       return;
     }

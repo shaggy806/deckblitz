@@ -5095,3 +5095,4 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 **Magecraft and a colour of mana kept (2026-11-04).** `trigger:copy-spell-trigger` and `replacement:mana-persistence-color`, no engine code: `orCopy`, `keepsUnspentMana` and `resolved-this-turn` were there. Ashling, Flame Dancer. The Last Agni Kai's "until end of turn" keeping is still open.
 
 **What a flicker does once it's back (2026-11-04).** `effect:flicker-return-then`: `flicker`'s `returnThen`, run by the delayed return and reading it through `this-way`'s `"put-onto-battlefield"`. Phelia, Exuberant Shepherd; Obzedat, Ghost Council; Hallowed Respite (a plain `sequence`).
+**You may roll again (2026-11-04).** `effect:roll-again`: a `roll-dice` table row's `mayRollAgain` (rule 706.3c), a `may` of the same roll after the row, with the number of dice held; `effect-worth` reads a roll as its rows' average, so a bot rolls again for tokens. Delina, Wild Mage.
