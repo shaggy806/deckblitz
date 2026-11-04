@@ -448,8 +448,8 @@ section keeps only what to do next.
   devoured, triggered mana abilities that do more, more spend-only purposes, control changes with a computed recipient and the
   active player's target against their own count, keeping some of yours by count or total power, a choice beside a spell's
   targets, comparisons between players' states, a player's combat history, effect-made blocks and a creature's record of combat,
-  reselecting attackers, land mana replaced, a random mode announced, the amassed Army, odd and even, one roll's result (527 proving
-  cards; `--stale` 1,660 wait for `author-freed`). Next by `--greedy --groups`: the 5-card long tail.
+  reselecting attackers, land mana replaced, a random mode announced, the amassed Army, odd and even, one roll's result, libraries that can't be
+  searched, a damage life floor, attack costs in permanents, typecycling twice and flashback's costs (551 proving cards; `--stale` 1,671 wait for `author-freed`). Next by `--greedy --groups`: the 5-card long tail.
   Narrow keys `author-freed` should give: Cannibalize (with one target illegal, does the survivor get exiled unasked? its ruling
   doesn't say), Portal Manipulator (no choice, a target slot read from another), Bribe Taker ("for each kind" is a choice), Head
   Games and Jester's Mask ("search for that many", no this-way count of cards put on a library), Sanity

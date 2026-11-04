@@ -886,6 +886,9 @@ missing. Re-run `--greedy` for Phase 2's order.
 - **2026-11-03: overnight, third round.** `effect:add-mana-two-different-colors`, `replacement:land-mana-type-replacement`,
   `effect:random-mode-announced`, `effect:amassed-army-power`, `decision:choose-odd-or-even`, `decision:choose-roll-result`. 26 proving
   cards.
+- **2026-11-03: overnight, fourth round.** `static:cant-search-library`, `static:damage-life-floor`,
+  `static:protection-doesnt-remove-source`, `cost:attack-cost-sacrifice`, `trigger:sacrifice-filter`,
+  `cost:cost-modification-extensions`. 24 proving cards. Left: `effect:grant-until-exiled-card-cast`, which needs code of its own.
 
 ## Rough size
 

@@ -12,6 +12,14 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **A card with two typecycling abilities, flashback's creature-tapping and X-discard costs** (2026-11-03, `80868355c`): Valley Rannet,
+  Igneous Pouncer, Battle Screech, Group Project, Twinned Vision, Conflagrate.
+- **Costs to attack paid in permanents, sacrificed or returned, and a trigger narrowed to what its own cost sacrificed** (2026-11-03,
+  `e50baddf3`): Exalted Dragon, Leviathan, Reclamation, Floodtide Serpent, Ashnod the Uncaring, Toggo.
+- **Protection that doesn't remove every Aura, protection from colors among your permanents** (2026-11-03, `d6134c861`): White Ward,
+  Spectra Ward, Pledge of Loyalty, Cho-Manno's Blessing; Black, Blue, Green and Red Ward now honor their exception.
+- **Libraries that can't be searched, paying to ignore that (rule 116.2d), a static damage life floor** (2026-11-03, `5749a740a`):
+  Mindlock Orb, Stranglehold, Ashiok Dream Render, Shadow of Doubt, Leonin Arbiter, Ali from Cairo, Worship, Elderscale Wurm.
 - **Choosing one result of a roll, the other as `{ roll: "other" }`** (2026-11-03, `41b967da4`): Reckless, Valiant and Wild Endeavor.
 - **Odd and even, `manaValueParity` and `powerParity`, printed or chosen as it resolves or enters** (2026-11-03, `aed66eec7`): Extinction
   Event, Zimone's Hypothesis, Ashling's Prerogative, Gollum, Void Winnower, Kianne.
