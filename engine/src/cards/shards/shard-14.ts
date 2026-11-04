@@ -459,6 +459,7 @@ import _poolKuldothaPhoenix from "../pool/kuldotha-phoenix.js";
 import _poolKurbisHarvestCelebrant from "../pool/kurbis-harvest-celebrant.js";
 import _poolLammastideWeave from "../pool/lammastide-weave.js";
 import _poolLassoedByTheLaw from "../pool/lassoed-by-the-law.js";
+import _poolLastRites from "../pool/last-rites.js";
 import _poolLavamancersSkill from "../pool/lavamancers-skill.js";
 import _poolLawbringer from "../pool/lawbringer.js";
 import _poolLeeches from "../pool/leeches.js";
@@ -1369,6 +1370,7 @@ const shard: CardShard = {
     _poolKurbisHarvestCelebrant,
     _poolLammastideWeave,
     _poolLassoedByTheLaw,
+    _poolLastRites,
     _poolLavamancersSkill,
     _poolLawbringer,
     _poolLeeches,

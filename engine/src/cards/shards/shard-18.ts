@@ -479,6 +479,7 @@ import _poolMoggManiac from "../pool/mogg-maniac.js";
 import _poolMolecularModifier from "../pool/molecular-modifier.js";
 import _poolMoltenNote from "../pool/molten-note.js";
 import _poolMoltenRebuke from "../pool/molten-rebuke.js";
+import _poolMoonlightBargain from "../pool/moonlight-bargain.js";
 import _poolMoonlitScavengers from "../pool/moonlit-scavengers.js";
 import _poolMorbidPlunder from "../pool/morbid-plunder.js";
 import _poolMordenkainensPolymorph from "../pool/mordenkainens-polymorph.js";
@@ -1383,6 +1384,7 @@ const shard: CardShard = {
     _poolMolecularModifier,
     _poolMoltenNote,
     _poolMoltenRebuke,
+    _poolMoonlightBargain,
     _poolMoonlitScavengers,
     _poolMorbidPlunder,
     _poolMordenkainensPolymorph,

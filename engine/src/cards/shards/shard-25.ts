@@ -194,6 +194,7 @@ import _poolDimirCutpurse from "../pool/dimir-cutpurse.js";
 import _poolDimirKeyrune from "../pool/dimir-keyrune.js";
 import _poolDiscipleOfFreyalise from "../pool/disciple-of-freyalise.js";
 import _poolDissectionTools from "../pool/dissection-tools.js";
+import _poolDistendedMindbender from "../pool/distended-mindbender.js";
 import _poolDjeruWithEyesOpen from "../pool/djeru-with-eyes-open.js";
 import _poolDoggedPursuit from "../pool/dogged-pursuit.js";
 import _poolDomesticatedHydra from "../pool/domesticated-hydra.js";
@@ -1075,6 +1076,7 @@ const shard: CardShard = {
     _poolDimirKeyrune,
     _poolDiscipleOfFreyalise,
     _poolDissectionTools,
+    _poolDistendedMindbender,
     _poolDjeruWithEyesOpen,
     _poolDoggedPursuit,
     _poolDomesticatedHydra,

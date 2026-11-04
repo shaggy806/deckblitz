@@ -446,6 +446,7 @@ import _poolMethodsOfTheMighty from "../pool/methods-of-the-mighty.js";
 import _poolMicromancer from "../pool/micromancer.js";
 import _poolMigratoryGreathorn from "../pool/migratory-greathorn.js";
 import _poolMindHarness from "../pool/mind-harness.js";
+import _poolMindWarp from "../pool/mind-warp.js";
 import _poolMindWhip from "../pool/mind-whip.js";
 import _poolMindswipe from "../pool/mindswipe.js";
 import _poolMinionsReturn from "../pool/minions-return.js";
@@ -1316,6 +1317,7 @@ const shard: CardShard = {
     _poolMicromancer,
     _poolMigratoryGreathorn,
     _poolMindHarness,
+    _poolMindWarp,
     _poolMindWhip,
     _poolMindswipe,
     _poolMinionsReturn,

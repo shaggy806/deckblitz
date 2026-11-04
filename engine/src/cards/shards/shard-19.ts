@@ -419,6 +419,7 @@ import _poolImpale from "../pool/impale.js";
 import _poolImplode from "../pool/implode.js";
 import _poolImpostorSyndrome from "../pool/impostor-syndrome.js";
 import _poolIncreasingAmbition from "../pool/increasing-ambition.js";
+import _poolInfernalHarvest from "../pool/infernal-harvest.js";
 import _poolInfernoJet from "../pool/inferno-jet.js";
 import _poolInsidiousRoots from "../pool/insidious-roots.js";
 import _poolInspiration from "../pool/inspiration.js";
@@ -1375,6 +1376,7 @@ const shard: CardShard = {
     _poolImplode,
     _poolImpostorSyndrome,
     _poolIncreasingAmbition,
+    _poolInfernalHarvest,
     _poolInfernoJet,
     _poolInsidiousRoots,
     _poolInspiration,

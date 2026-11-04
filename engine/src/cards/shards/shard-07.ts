@@ -752,6 +752,7 @@ import _poolSweepAway from "../pool/sweep-away.js";
 import _poolSwiftResponse from "../pool/swift-response.js";
 import _poolSwirlingSandstorm from "../pool/swirling-sandstorm.js";
 import _poolSwordOfFireAndIce from "../pool/sword-of-fire-and-ice.js";
+import _poolSwordPointDiplomacy from "../pool/sword-point-diplomacy.js";
 import _poolSymbioteSpiderMan from "../pool/symbiote-spider-man.js";
 import _poolSyphonSliver from "../pool/syphon-sliver.js";
 import _poolSyphonSoul from "../pool/syphon-soul.js";
@@ -1683,6 +1684,7 @@ const shard: CardShard = {
     _poolSwiftResponse,
     _poolSwirlingSandstorm,
     _poolSwordOfFireAndIce,
+    _poolSwordPointDiplomacy,
     _poolSymbioteSpiderMan,
     _poolSyphonSliver,
     _poolSyphonSoul,

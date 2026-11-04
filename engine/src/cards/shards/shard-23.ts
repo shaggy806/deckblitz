@@ -256,6 +256,7 @@ import _poolExtravagantSpirit from "../pool/extravagant-spirit.js";
 import _poolEyesOfTheWatcher from "../pool/eyes-of-the-watcher.js";
 import _poolEzioBladeOfVengeance from "../pool/ezio-blade-of-vengeance.js";
 import _poolFacelessDevourer from "../pool/faceless-devourer.js";
+import _poolFadeAway from "../pool/fade-away.js";
 import _poolFainTheBroker from "../pool/fain-the-broker.js";
 import _poolFaramirFieldCommander from "../pool/faramir-field-commander.js";
 import _poolFateholdChronologist from "../pool/fatehold-chronologist.js";
@@ -1172,6 +1173,7 @@ const shard: CardShard = {
     _poolEyesOfTheWatcher,
     _poolEzioBladeOfVengeance,
     _poolFacelessDevourer,
+    _poolFadeAway,
     _poolFainTheBroker,
     _poolFaramirFieldCommander,
     _poolFateholdChronologist,

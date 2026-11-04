@@ -4,6 +4,7 @@
 import type { CardShard } from "../card-shards.js";
 
 import _poolAbandonAttachments from "../pool/abandon-attachments.js";
+import _poolAbandonHope from "../pool/abandon-hope.js";
 import _poolAbdelAdrianGorionsWard from "../pool/abdel-adrian-gorions-ward.js";
 import _poolAbduction from "../pool/abduction.js";
 import _poolAberrantManawurm from "../pool/aberrant-manawurm.js";
@@ -440,6 +441,7 @@ import _poolKataraBendingProdigy from "../pool/katara-bending-prodigy.js";
 import _poolKazanduMammoth from "../pool/kazandu-mammoth.js";
 import _poolKembaKhaRegent from "../pool/kemba-kha-regent.js";
 import _poolKianneCorruptedMemory from "../pool/kianne-corrupted-memory.js";
+import _poolKillingWave from "../pool/killing-wave.js";
 import _poolKindlyCustomer from "../pool/kindly-customer.js";
 import _poolKingHaraldsRevenge from "../pool/king-haralds-revenge.js";
 import _poolKingNarfisBetrayal from "../pool/king-narfis-betrayal.js";
@@ -972,6 +974,7 @@ import _tokensZombieTokenJadarGhoulcallerOfNephalia from "../tokens/zombie-token
 const shard: CardShard = {
   pool: [
     _poolAbandonAttachments,
+    _poolAbandonHope,
     _poolAbdelAdrianGorionsWard,
     _poolAbduction,
     _poolAberrantManawurm,
@@ -1408,6 +1411,7 @@ const shard: CardShard = {
     _poolKazanduMammoth,
     _poolKembaKhaRegent,
     _poolKianneCorruptedMemory,
+    _poolKillingWave,
     _poolKindlyCustomer,
     _poolKingHaraldsRevenge,
     _poolKingNarfisBetrayal,
