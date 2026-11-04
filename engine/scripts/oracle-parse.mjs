@@ -5382,6 +5382,10 @@ export function parseSentence(sentence, ctx) {
     };
   }
   // Power, toughness and keywords until end of turn.
+  if (ctx.spell && (m = re(`(${TARGET}) gets -X/-X until end of turn`).exec(s))) {
+    const amount = { product: ["x", -1] };
+    return { kind: "modify-pt", target: slot(m[1]), power: amount, toughness: amount, duration: "end-of-turn" };
+  }
   if ((m = re(`(~|${TARGET}) gets ([+-]\\d+)/([+-]\\d+) until end of turn`).exec(s))) {
     return {
       kind: "modify-pt",
@@ -7625,6 +7629,100 @@ const AMONG_PLAYERS_EFFECTS = {
     },
   },
 };
+
+const KICKED_ENTERS_WITH =
+  /^If ~ was kicked, it enters with (a|an|one|two|three|four|five) ([+-]\d+\/[+-]\d+|[a-z]+) counters?(?: and (a|an|one|two|three) ([+-]\d+\/[+-]\d+|[a-z]+) counters?)? on it(?: and with ([a-z]+(?: [a-z]+)?))?\.$/;
+
+/**
+ * A spell's closing sentence about the board "as you cast this spell" (rule
+ * 601.2i, `CardDefinition.asCast`): the text before it, the fact to fix, and
+ * how the sentence changes the effect read from the rest (`null` when that
+ * effect isn't the shape the sentence speaks of). `null` for any other text.
+ */
+function splitAsCastSentence(text) {
+  const sentences = sentencesOf(text);
+  const last = sentences.at(-1) ?? "";
+  if (sentences.length < 2 || !/ as you cast ~[.,]/.test(last)) return null;
+  const rest = sentences.slice(0, -1).join(" ");
+  const controlled = (phrase) => {
+    const read = dealersOf(phrase, false);
+    return read === null || read.exceptSource === true
+      ? null
+      : { condition: { kind: "controls", filter: read.filter, atLeast: 1 } };
+  };
+  const held = { kind: "as-cast", fact: 0 };
+  const noun = "(?:a|an) (.+?)";
+  let m;
+  // "~ deals 4 damage to that creature instead if you controlled a Mount …"
+  if ((m = new RegExp(`^~ deals (\\d+) damage to that creature instead if you controlled ${noun} as you cast ~\\.$`).exec(last))) {
+    const fact = controlled(m[2]);
+    const then = Number(m[1]);
+    if (fact === null) return null;
+    return {
+      rest,
+      fact,
+      patch: (effect) =>
+        effect.kind === "damage" && typeof effect.amount === "number"
+          ? { ...effect, amount: { ifCondition: held, then, else: effect.amount } }
+          : null,
+    };
+  }
+  // "If you controlled a modified creature …, it deals X plus 2 damage instead."
+  if ((m = new RegExp(`^If you controlled ${noun} as you cast ~, it deals X plus (\\d+) damage instead\\.$`).exec(last))) {
+    const fact = controlled(m[1]);
+    const then = Number(m[2]);
+    if (fact === null) return null;
+    return {
+      rest,
+      fact,
+      patch: (effect) =>
+        effect.kind === "damage" && effect.amount === "x"
+          ? { ...effect, amount: { sum: ["x", { ifCondition: held, then, else: 0 }] } }
+          : null,
+    };
+  }
+  // "That creature gets an additional -3/-3 until end of turn if you controlled a Faerie …"
+  if ((m = new RegExp(`^That creature gets an additional -(\\d+)/-(\\d+) until end of turn if you controlled ${noun} as you cast ~\\.$`).exec(last))) {
+    const fact = controlled(m[3]);
+    if (fact === null) return null;
+    const [power, toughness] = [-Number(m[1]), -Number(m[2])];
+    return {
+      rest,
+      fact,
+      patch: (effect) =>
+        effect.kind === "modify-pt" && effect.target === 0
+          ? {
+              kind: "sequence",
+              effects: [
+                effect,
+                {
+                  kind: "conditional",
+                  condition: held,
+                  then: { kind: "modify-pt", target: 0, power, toughness, duration: "end-of-turn" },
+                },
+              ],
+            }
+          : null,
+    };
+  }
+  // "It gets an additional -1/-1 until end of turn for each modified creature
+  // you controlled …": the printed -N/-N with one more per creature counted.
+  if ((m = /^It gets an additional -1\/-1 until end of turn for each (.+?) you controlled as you cast ~\.$/.exec(last))) {
+    const read = dealersOf(m[1], false);
+    if (read === null || read.exceptSource === true) return null;
+    return {
+      rest,
+      fact: { amount: { countOf: { ...read.filter, controlledBy: "you" } } },
+      patch: (effect) => {
+        if (effect.kind !== "modify-pt" || effect.power !== effect.toughness) return null;
+        if (typeof effect.power !== "number" || effect.power >= 0) return null;
+        const amount = { product: [{ sum: [-effect.power, { asCast: 0 }] }, -1] };
+        return { ...effect, power: amount, toughness: amount };
+      },
+    };
+  }
+  return null;
+}
 
 export function parseEffect(text, outer) {
   // Each target a sentence names takes the next slot of the ability's list.
@@ -12438,6 +12536,50 @@ function parseFaceAsWritten(face, ctx = {}) {
       out.castOnlyIf = { kind: "turn-structure", afterCombat: true };
       continue;
     }
+    // Before the first declare attackers step (`BEFORE_ATTACKERS_ANY_TURN`).
+    if (isSpell && line === "Cast ~ only during an opponent's turn, before attackers are declared.") {
+      out.castOnlyIf = {
+        kind: "all",
+        of: [
+          { kind: "not", of: { kind: "your-turn" } },
+          {
+            kind: "any",
+            of: [
+              { kind: "turn-structure", steps: ["upkeep", "draw"] },
+              { kind: "turn-structure", mainPhase: 1 },
+              { kind: "turn-structure", steps: ["begin-combat"], combatPhase: 1 },
+            ],
+          },
+        ],
+      };
+      continue;
+    }
+    // "If this creature was kicked, it enters with two +1/+1 counters and a
+    // trample counter on it and with haste" (rule 614.1c): a replacement per
+    // kind of counter, its amount gated on the kick, and "with [keyword]" that
+    // keyword for as long as it stays (as Benalish Lancer's first strike).
+    if ((m = KICKED_ENTERS_WITH.exec(line)) && out.kicker !== undefined && out.kicker.second === undefined) {
+      const words = { a: 1, an: 1, one: 1, two: 2, three: 3, four: 4, five: 5 };
+      const text = printed(raw);
+      const kicked = { kind: "self-kicked" };
+      const counters = [[m[1], m[2]], ...(m[3] !== undefined ? [[m[3], m[4]]] : [])];
+      const keyword = m[5] === undefined ? undefined : KEYWORDS[m[5]];
+      if (m[5] !== undefined && keyword === undefined) {
+        out.todo.push(printed(raw));
+        continue;
+      }
+      for (const [word, kind] of counters) {
+        out.static.push({
+          affects: { scope: "self" },
+          replacement: { event: "enters-battlefield", counters: { kind, amount: { ifCondition: kicked, then: words[word], else: 0 } } },
+          text,
+        });
+      }
+      if (keyword !== undefined) {
+        out.static.push({ affects: { scope: "self" }, condition: kicked, grantKeywords: [keyword], text });
+      }
+      continue;
+    }
     if (isSpell && line === "Rebound") { out.rebound = true; continue; }
     // Paradigm (rule 702.192a): the spell's last part, then exiled.
     if (isSpell && line === "Paradigm") { paradigm = true; continue; }
@@ -13826,7 +13968,14 @@ function parseFaceAsWritten(face, ctx = {}) {
           kickedTail = { sentence: last, rest: `${tail[1][0].toUpperCase()}${tail[1].slice(1)}` };
         }
       }
+      const asCast = splitAsCastSentence(text);
+      if (asCast !== null) text = asCast.rest;
       const r = parseEffect(text, ctx2);
+      if (asCast !== null && r.effect !== null) {
+        const patched = asCast.patch(r.effect);
+        r.effect = patched;
+        if (patched !== null) out.asCast = [asCast.fact];
+      }
       const ownTargets = [...spellTargets];
       out.targets = ownTargets;
       // A divided amount (rule 601.2d): the spell's `divided`, its group the

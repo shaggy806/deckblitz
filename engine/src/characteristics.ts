@@ -1182,6 +1182,8 @@ function evalStaticCondition(
         (s) => (s === EVERY_CREATURE_TYPE || isCreatureType(s)) && hasSubtype(dealtWith, s),
       );
     }
+    case "as-cast":
+      return (source.asCastFacts?.[condition.fact] ?? 0) > 0;
     case "self-kicked":
       // Which of two kicker costs (rule 702.33f): the stack's `kickedWith`
       // (cleared as it leaves the stack), or `enteredKickedWith` once it has

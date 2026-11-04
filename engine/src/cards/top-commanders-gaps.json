@@ -1662,7 +1662,11 @@
   "effect:choose-per-opponent-then-destroy",
   "effect:choose-per-player-untargeted",
   "effect:each-opponent-chooses-permanent",
-  "effect:sacrifice-unless-shares-type-with-chosen"
+  "effect:sacrifice-unless-shares-type-with-chosen",
+  "condition:cast-timing-condition",
+  "condition:controlled-as-cast",
+  "effect:amount-counted-as-cast",
+  "condition:if-kicked-enters-with-counters"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

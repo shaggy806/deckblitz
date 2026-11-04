@@ -19406,6 +19406,17 @@ export class Game {
       object.preparedSpell = true;
       this.unprepare(preparedBy);
     }
+    // "As you cast this spell" (rule 601.2i): fixed now, read as it resolves.
+    if (def.asCast.length > 0) {
+      const context = this.makeResolutionContext(cardId, player, [], chosenX, 0);
+      object.asCastFacts = def.asCast.map((fact) =>
+        "condition" in fact
+          ? staticConditionMet(this.state, this.registry, object, fact.condition, { includeSelf: true })
+            ? 1
+            : 0
+          : amountValue(fact.amount, context),
+      );
+    }
 
     this.emit({
       type: "spell-cast",
@@ -35049,6 +35060,7 @@ export class Game {
         if (object === undefined || !this.registry.has(printedCardName(object))) return 0;
         return colorSymbols(parseManaCost(printedManaCost(this.registry, object)), [color]);
       },
+      sourceAsCast: (fact) => this.state.objects[source]?.asCastFacts?.[fact] ?? 0,
       sourceTimesKicked: () => {
         const live = this.state.objects[source];
         if (live?.zone === "battlefield") return live.enteredTimesKicked ?? 0;
@@ -53785,6 +53797,7 @@ export class Game {
     object.kickedByControl = undefined;
     object.timesKicked = undefined;
     object.kickedWith = undefined;
+    object.asCastFacts = undefined;
     object.spliced = undefined;
     object.offspringGrantPaid = undefined;
     object.giftTo = undefined;

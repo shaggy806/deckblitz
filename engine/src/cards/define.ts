@@ -847,6 +847,10 @@ export interface LifeFromStarting {
  * (the filter read with that player as its "you"). */
 export type ComparedStat = "life" | "hand" | { readonly controls: CardFilter };
 
+/** One fact of `CardDefinition.asCast`: a condition or a count, read from the
+ * caster's side as the spell finishes being cast. */
+export type AsCastFact = { readonly condition: StaticCondition } | { readonly amount: EffectAmount };
+
 export type StaticCondition =
   /** You control at least `atLeast` permanents matching `filter` (Kird Ape —
    * "as long as you control a Forest"). A static's condition leaves its own
@@ -1768,6 +1772,11 @@ export type StaticCondition =
        * `"second"`, and "if it was kicked twice" `"both"`. Absent, either. */
       readonly with?: "first" | "second" | "both";
     }
+  /** A fact fixed as this spell was cast (`CardDefinition.asCast`, by its
+   * index), read as it resolves: Steer Clear's "if you controlled a Mount as
+   * you cast this spell". True when the fact is a condition that held or an
+   * amount above 0; never for a copy, which wasn't cast (rule 707.10). */
+  | { readonly kind: "as-cast"; readonly fact: number }
   /** Was the ability's own source cast for its spectacle cost (rule
    * 702.137)? — Rafter Demon's "When this creature enters, **if its
    * spectacle cost was paid**, …"; read like `self-kicked`. */
@@ -4985,6 +4994,14 @@ export interface CardDefinition {
    * Riots' "unless an opponent lost life this turn" is `{ kind: "turn-stat",
    * stat: "life-lost", who: "opponent", atLeast: 1 }`. `null` for none. */
   readonly castOnlyIf: StaticCondition | null;
+  /** Facts about the board fixed as this spell finishes being cast (rule
+   * 601.2i), read as it resolves through the condition `{ kind: "as-cast",
+   * fact }` and the amount `{ asCast: fact }`, whatever has changed since —
+   * "if you controlled a Mount as you cast this spell" (Steer Clear), "for
+   * each modified creature you controlled as you cast this spell" (Lethal
+   * Exploit). A spell's only: it's asked once its mana and its costs named up
+   * front are paid, and a copy has none (it wasn't cast). */
+  readonly asCast: readonly AsCastFact[];
   /** Split second (rule 702.61): as long as this spell is on the stack,
    * players can't cast other spells or activate abilities that aren't mana
    * abilities. Triggered abilities still trigger. */
@@ -5769,6 +5786,7 @@ const PRINTED_ABILITY: {
   looksAtOwnLibraryTop: (def) => def.looksAtOwnLibraryTop,
   controlEnchanted: (def) => def.controlEnchanted,
   castOnlyIf: (def) => def.castOnlyIf !== null,
+  asCast: (def) => def.asCast.length > 0,
   splitSecond: (def) => def.splitSecond,
   copyOnEnter: (def) => def.copyOnEnter !== null,
   becomesOnEnter: (def) => def.becomesOnEnter !== null,
@@ -6028,6 +6046,7 @@ interface CardDraft {
   looksAtOwnLibraryTop?: boolean;
   controlEnchanted?: boolean;
   castOnlyIf?: StaticCondition;
+  asCast?: readonly AsCastFact[];
   splitSecond?: boolean;
   copyOnEnter?: CopyOnEnter;
   becomesOnEnter?: BecomesOnEnter;
@@ -6300,6 +6319,7 @@ export function defineCard(draft: CardDraft): CardDefinition {
     looksAtOwnLibraryTop: draft.looksAtOwnLibraryTop ?? false,
     controlEnchanted: draft.controlEnchanted ?? false,
     castOnlyIf: draft.castOnlyIf ?? null,
+    asCast: draft.asCast ?? [],
     splitSecond: draft.splitSecond ?? false,
     copyOnEnter: draft.copyOnEnter ?? null,
     becomesOnEnter: draft.becomesOnEnter ?? null,

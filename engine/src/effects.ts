@@ -878,6 +878,11 @@ export type EffectAmount =
    * time it was kicked" (Wolfbriar Elemental) as it entered — as it last
    * existed if it has left. 0 when it wasn't kicked or wasn't cast. */
   | { readonly timesKicked: "source" }
+  /** A fact fixed as the source's spell was cast (`CardDefinition.asCast`, by
+   * its index; a condition reads 1 or 0), whatever has changed since — Lethal
+   * Exploit's "for each modified creature you controlled as you cast this
+   * spell". 0 for a copy, which wasn't cast (rule 707.10). */
+  | { readonly asCast: number }
   /** The current power of whatever an {@link AmountRef} points at — Unleash
    * Fury's "double the power of target creature" is a `modify-pt` that adds
    * this; "it deals damage equal to its power" from a dies trigger reads the
@@ -11934,6 +11939,9 @@ export interface EffectApi {
    * left; a spell on the stack (resolving, or a copy of one) reads its own
    * count; 0 for one not cast that way. */
   sourceTimesKicked(): number;
+  /** A fact fixed as the source's spell was cast (`CardDefinition.asCast`),
+   * 0 if it wasn't cast. */
+  sourceAsCast(fact: number): number;
   /** The answer to its rule 616.1 choice — see `applyFirst` there. */
   finishExiledAsItResolves(spell: ObjectId, feather: boolean, intoHand?: true): void;
   /** Shuffle the controller's library — or `player`'s — see the
@@ -13792,6 +13800,7 @@ function signedAmountValue(
   }
   if ("suspendedCardsYouOwn" in amount) return ctx.suspendedCardsYouOwn?.() ?? 0;
   if ("timesKicked" in amount) return ctx.sourceTimesKicked();
+  if ("asCast" in amount) return ctx.sourceAsCast(amount.asCast);
   if ("ifCondition" in amount) {
     return signedAmountValue(ctx.conditionMet(amount.ifCondition) ? amount.then : amount.else, ctx, each);
   }

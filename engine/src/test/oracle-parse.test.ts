@@ -14024,5 +14024,96 @@ describe("a countered spell's destination, and a counter replaced", () => {
       toughness: "1",
     });
     expect(face.static[0].replacement).toEqual({ event: "would-counter-spell" });
+describe("facts fixed as a spell is cast (rule 601.2i), and what a kick brings as it enters", () => {
+  const read = (type_line: string, oracle_text: string) =>
+    parseFace({ name: "Test Card", type_line, oracle_text, mana_cost: "{1}", colors: [] });
+  const held = { kind: "as-cast", fact: 0 };
+
+  it("'… instead if you controlled a Mount as you cast this spell'", () => {
+    const face = read(
+      "Instant",
+      "Test Card deals 2 damage to target attacking or blocking creature. Test Card deals 4 damage to that creature instead if you controlled a Mount as you cast this spell.",
+    );
+    expect(face.asCast).toEqual([{ condition: { kind: "controls", filter: { subtype: "Mount" }, atLeast: 1 } }]);
+    expect(face.effect).toEqual({ kind: "damage", amount: { ifCondition: held, then: 4, else: 2 }, target: 0 });
+  });
+
+  it("'If you controlled a modified creature as you cast this spell, it deals X plus 2 damage instead'", () => {
+    const face = read(
+      "Instant",
+      "Test Card deals X damage to target creature or planeswalker. If you controlled a modified creature as you cast this spell, it deals X plus 2 damage instead.",
+    );
+    expect(face.asCast).toEqual([
+      { condition: { kind: "controls", filter: { type: "creature", modified: true }, atLeast: 1 } },
+    ]);
+    expect(face.effect).toMatchObject({ amount: { sum: ["x", { ifCondition: held, then: 2, else: 0 }] } });
+  });
+
+  it("'an additional -3/-3 … if you controlled a Faerie', and -X/-X", () => {
+    const face = read(
+      "Instant",
+      "Target creature gets -X/-X until end of turn. That creature gets an additional -3/-3 until end of turn if you controlled a Faerie as you cast this spell.",
+    );
+    expect(face.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        {
+          kind: "modify-pt",
+          target: 0,
+          power: { product: ["x", -1] },
+          toughness: { product: ["x", -1] },
+          duration: "end-of-turn",
+        },
+        {
+          kind: "conditional",
+          condition: held,
+          then: { kind: "modify-pt", target: 0, power: -3, toughness: -3, duration: "end-of-turn" },
+        },
+      ],
+    });
+  });
+
+  it("'an additional -1/-1 … for each modified creature you controlled as you cast this spell'", () => {
+    const face = read(
+      "Instant",
+      "Target creature gets -2/-2 until end of turn. It gets an additional -1/-1 until end of turn for each modified creature you controlled as you cast this spell.",
+    );
+    expect(face.asCast).toEqual([{ amount: { countOf: { type: "creature", modified: true, controlledBy: "you" } } }]);
+    const amount = { product: [{ sum: [2, { asCast: 0 }] }, -1] };
+    expect(face.effect).toEqual({ kind: "modify-pt", target: 0, power: amount, toughness: amount, duration: "end-of-turn" });
+  });
+
+  it("a line it can't read stays a person's", () => {
+    const face = read(
+      "Instant",
+      "Target creature gets -2/-2 until end of turn. Draw a card if you controlled a modified creature and a Faerie as you cast this spell.",
+    );
+    expect(face.asCast).toBeUndefined();
+    expect(face.complete).toBe(false);
+  });
+
+  it("'Cast this spell only during an opponent's turn, before attackers are declared.'", () => {
+    const face = read("Instant", "Cast this spell only during an opponent's turn, before attackers are declared.\nDraw a card.");
+    expect(face.castOnlyIf?.kind).toBe("all");
+    expect(face.effect).toEqual({ kind: "draw", amount: 1 });
+  });
+
+  it("'If this creature was kicked, it enters with two +1/+1 counters and a trample counter on it and with haste.'", () => {
+    const face = read(
+      "Creature — Eldrazi",
+      "Kicker {2}{C}\nIf this creature was kicked, it enters with two +1/+1 counters and a trample counter on it and with haste.",
+    );
+    const kicked = { kind: "self-kicked" };
+    const counters = (kind: string, then: number) => ({
+      event: "enters-battlefield",
+      counters: { kind, amount: { ifCondition: kicked, then, else: 0 } },
+    });
+    expect(face.todo).toEqual([]);
+    expect(face.static.map((s: { replacement?: unknown }) => s.replacement)).toEqual([
+      counters("+1/+1", 2),
+      counters("trample", 1),
+      undefined,
+    ]);
+    expect(face.static[2]).toMatchObject({ condition: kicked, grantKeywords: ["haste"] });
   });
 });

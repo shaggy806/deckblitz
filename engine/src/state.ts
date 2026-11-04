@@ -1169,6 +1169,10 @@ export interface GameObject {
    * was cast (rule 601.2d — `CardDefinition.divided`), one per target in
    * order. Cleared on any zone change. */
   division?: readonly number[];
+  /** What `CardDefinition.asCast` read as this spell finished being cast (rule
+   * 601.2i), by index: a count, or 1 or 0 for a condition. Never copied to a
+   * copy of it, which wasn't cast; cleared on any zone change. */
+  asCastFacts?: readonly number[];
   /** This spell was kicked as it was cast (rule 702.33 — needed-cards P8): its
    * kicker cost was paid, so `resolveTopOfStack` applies the kicked `effect`.
    * Absent for an unkicked or unkickable spell; cleared on any zone change. */
