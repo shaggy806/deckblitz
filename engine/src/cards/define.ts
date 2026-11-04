@@ -4140,6 +4140,8 @@ export interface StaticAbility {
    * - `"dies"`: a permanent dying (Teysa Karlov: "a creature dying"),
    *   `filter` matched as it last existed on the battlefield. Its dies and
    *   leaves-the-battlefield triggers alike.
+   * - `"draws"`: a player drawing a card (Krang, the All-Powerful). `filter`
+   *   narrows the card drawn.
    *
    * Only its controller's triggers. Stacks with `doubleEntryTriggers`,
    * `doubleTriggersOf` and itself (two sources, three times).
@@ -4151,7 +4153,8 @@ export interface StaticAbility {
       | "combat-damage-to-player"
       | "cast-or-copy"
       | "dealt-damage"
-      | "dies";
+      | "dies"
+      | "draws";
     readonly filter?: CardFilter;
   };
   /**

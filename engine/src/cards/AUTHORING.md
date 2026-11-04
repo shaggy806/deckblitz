@@ -5919,10 +5919,13 @@ is "can't attack a player it has already attacked this turn" (Port Razer), by th
   Voice of Duality: `filter: { typesAnyOf: ["instant", "sorcery"],
   controlledBy: "you" }` is "you casting or copying an instant or sorcery
   spell"), `"dealt-damage"` ("a creature you control being dealt damage" —
-  either end of that damage's triggers) or `"dies"` (Teysa Karlov: "a
+  either end of that damage's triggers), `"dies"` (Teysa Karlov: "a
   creature dying" — dies and leaves-the-battlefield triggers, `filter`
-  matched as it last existed). `filter` narrows the permanent, spell or copy
-  the event is about.
+  matched as it last existed) or `"draws"` (Krang, the All-Powerful: "a
+  player drawing a card"). `filter` narrows the permanent, spell, copy or
+  card the event is about: Traveling Chocobo's "a land or Bird you control
+  entering" is `{ anyOf: [{ type: "land" }, { subtype: "Bird" }], controlledBy:
+  "you" }`.
 - `doubleTriggersOf: { filter?, selfAndEquipment?, others?, spells? }` — the same, keyed on
   **whose** ability it is: "if a triggered ability of an Ally you control
   triggers" (Katara, the Fearless: `filter: { subtype: "Ally", controlledBy:

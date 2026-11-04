@@ -19185,6 +19185,30 @@ function parseStatic(line, text) {
       text,
     };
   }
+  // "If [something happening] causes a triggered ability of a permanent you
+  // control to trigger, that ability triggers an additional time."
+  if (line === "If a permanent entering causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.") {
+    return { affects: { scope: "self" }, doubleTriggers: { cause: "enters" }, text };
+  }
+  if (line === "If a player drawing a card causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.") {
+    return { affects: { scope: "self" }, doubleTriggers: { cause: "draws" }, text };
+  }
+  if ((m = /^If a land or ([A-Z][a-z]+) you control entering the battlefield causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time\.$/.exec(line))) {
+    return {
+      affects: { scope: "self" },
+      doubleTriggers: { cause: "enters", filter: { anyOf: [{ type: "land" }, { subtype: m[1] }], controlledBy: "you" } },
+      text,
+    };
+  }
+  // Future Sight, Traveling Chocobo's Birds.
+  if ((m = /^You may play lands and cast (?:([A-Z][a-z]+) )?spells from the top of your library\.$/.exec(line))) {
+    return {
+      affects: { scope: "self" },
+      playFromLibraryTop: { type: "land" },
+      castFromLibraryTop: { filter: m[1] === undefined ? {} : { subtype: m[1] } },
+      text,
+    };
+  }
   // "If a triggered ability of another creature you control of the chosen
   // type triggers, it triggers an additional time" (Roaming Throne).
   if (line === "If a triggered ability of a colorless spell you control or another colorless permanent you control triggers, that ability triggers an additional time.") {

@@ -1827,7 +1827,9 @@
   "effect:add-counter-all-target-player",
   "effect:opponent-token-copy",
   "condition:named-artifact-condition",
-  "bug:target-filter-x-activated"
+  "bug:target-filter-x-activated",
+  "static:trigger-doubling-filter",
+  "static:trigger-doubler-draw-cause"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

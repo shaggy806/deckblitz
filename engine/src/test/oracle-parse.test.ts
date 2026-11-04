@@ -15823,3 +15823,35 @@ describe("a target with mana value X on an activated ability, and a copy as a 4/
     });
   });
 });
+
+describe("what a doubled trigger's cause is, and playing from the top by type", () => {
+  it("reads Traveling Chocobo whole", () => {
+    const chocobo = parseFace({
+      name: "Traveling Chocobo",
+      type_line: "Creature — Bird",
+      power: "3",
+      toughness: "2",
+      oracle_text:
+        "You may look at the top card of your library any time.\nYou may play lands and cast Bird spells from the top of your library.\nIf a land or Bird you control entering the battlefield causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.",
+    });
+    expect(chocobo.complete).toBe(true);
+    expect(chocobo.looksAtOwnLibraryTop).toBe(true);
+    expect(chocobo.static[0]).toMatchObject({ playFromLibraryTop: { type: "land" }, castFromLibraryTop: { filter: { subtype: "Bird" } } });
+    expect(chocobo.static[1].doubleTriggers).toEqual({
+      cause: "enters",
+      filter: { anyOf: [{ type: "land" }, { subtype: "Bird" }], controlledBy: "you" },
+    });
+  });
+
+  it("reads Krang's draw", () => {
+    const krang = parseFace({
+      name: "Krang, the All-Powerful",
+      type_line: "Legendary Artifact Creature — Utrom Robot",
+      power: "3",
+      toughness: "3",
+      oracle_text:
+        "If a player drawing a card causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.\nWhenever a player draws their second card each turn, put a +1/+1 counter on Krang.",
+    });
+    expect(krang.static[0].doubleTriggers).toEqual({ cause: "draws" });
+  });
+});

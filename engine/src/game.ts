@@ -16057,6 +16057,8 @@ export class Game {
             (event.type === "permanent-left-battlefield" && event.toZone === "graveyard")
             ? event.object
             : undefined;
+        case "draws":
+          return event.type === "card-drawn" ? event.object : undefined;
       }
     };
     const doubles = (d: NonNullable<StaticAbility["doubleTriggers"]>): boolean => {
