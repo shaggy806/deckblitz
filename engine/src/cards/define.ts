@@ -6475,16 +6475,18 @@ export function defineCard(draft: CardDraft): CardDefinition {
             text: `${draft.name} enters with ${defense} defense counters.`,
           },
         ];
+  // At 128 entries V8 stops sharing a hidden class between the objects this
+  // makes: nothing fails, but the pool imports 4x slower and every rules read
+  // of a definition goes megamorphic (test/card-definition-shape.test.ts). So a
+  // new field that most cards don't set goes in `rareCardFields`.
   return {
     name: draft.name,
-    ...(draft.tokenName !== undefined ? { tokenName: draft.tokenName } : {}),
     art: draft.art ?? null,
     manaCost: draft.manaCost ?? null,
     colors: draft.colors ?? [],
     supertypes: draft.supertypes ?? [],
     types: draft.types,
     subtypes: draft.subtypes ?? [],
-    ...(draft.alsoSubtypes !== undefined ? { alsoSubtypes: draft.alsoSubtypes } : {}),
     power: draft.power ?? null,
     toughness: draft.toughness ?? null,
     keywords: draft.keywords ?? [],
@@ -6506,7 +6508,6 @@ export function defineCard(draft: CardDraft): CardDefinition {
             ? { cost: draft.bestow, keyword: "bestow", targets: [BESTOW_TARGET], effect: { kind: "sequence", effects: [] } }
             : null),
     freeCastIf: draft.freeCastIf ?? null,
-    ...(draft.flashIf !== undefined ? { flashIf: draft.flashIf } : {}),
     alternativeCost: draft.alternativeCost ?? null,
     convoke: draft.convoke ?? false,
     improvise: draft.improvise ?? false,
@@ -6515,7 +6516,6 @@ export function defineCard(draft: CardDraft): CardDefinition {
     assist: draft.assist ?? false,
     opponentChoosesTargets: draft.opponentChoosesTargets ?? [],
     selfCostReduction: draft.selfCostReduction ?? null,
-    ...(draft.maxX !== undefined ? { maxX: draft.maxX } : {}),
     costPerExtraTarget: draft.costPerExtraTarget ?? null,
     targetCostReduction: draft.targetCostReduction ?? null,
     targetCostIncrease: draft.targetCostIncrease ?? null,
@@ -6547,8 +6547,6 @@ export function defineCard(draft: CardDraft): CardDefinition {
     chooseOnEnter: draft.chooseOnEnter ?? readAheadChoices(draft),
     chooseOnEnterLook: draft.chooseOnEnterLook ?? null,
     choosePlayerOnEnter: draft.choosePlayerOnEnter ?? null,
-    ...(draft.secretChoiceOnEnter === true ? { secretChoiceOnEnter: true as const } : {}),
-    ...(draft.entersUnderChosenPlayer === true ? { entersUnderChosenPlayer: true as const } : {}),
     choosePermanentOnEnter: draft.choosePermanentOnEnter ?? null,
     loyalty,
     defense,
@@ -6576,14 +6574,8 @@ export function defineCard(draft: CardDraft): CardDefinition {
     evoke: draft.evoke ?? null,
     prototype: draft.prototype ?? null,
     morph: draft.morph ?? null,
-    ...(draft.asTurnedFaceUp !== undefined ? { asTurnedFaceUp: draft.asTurnedFaceUp } : {}),
     suspend: draft.suspend ?? null,
     cycling: draft.cycling ?? null,
-    ...(draft.moreCycling !== undefined ? { moreCycling: draft.moreCycling } : {}),
-    ...(draft.castFromGraveyardIf !== undefined ? { castFromGraveyardIf: draft.castFromGraveyardIf } : {}),
-    ...(draft.castSelfFromGraveyard !== undefined ? { castSelfFromGraveyard: draft.castSelfFromGraveyard } : {}),
-    ...(draft.castSelfFromExile !== undefined ? { castSelfFromExile: draft.castSelfFromExile } : {}),
-    ...(draft.castWhileSearchingLibrary !== undefined ? { castWhileSearchingLibrary: draft.castWhileSearchingLibrary } : {}),
     escape: draft.escape ?? null,
     chapters: draft.chapters ?? null,
     readAhead: draft.readAhead === true,
@@ -6612,5 +6604,25 @@ export function defineCard(draft: CardDraft): CardDefinition {
     beginsOnBattlefield: draft.beginsOnBattlefield ?? false,
     openingHandReveal: draft.openingHandReveal ?? null,
     mulliganHandAbility: draft.mulliganHandAbility ?? null,
+    ...rareCardFields(draft),
+  };
+}
+
+/** The fields a definition carries only when its card sets them, kept out of
+ * `defineCard`'s literal to stay under its limit (see there). */
+function rareCardFields(draft: CardDraft) {
+  return {
+    ...(draft.tokenName !== undefined ? { tokenName: draft.tokenName } : {}),
+    ...(draft.alsoSubtypes !== undefined ? { alsoSubtypes: draft.alsoSubtypes } : {}),
+    ...(draft.flashIf !== undefined ? { flashIf: draft.flashIf } : {}),
+    ...(draft.maxX !== undefined ? { maxX: draft.maxX } : {}),
+    ...(draft.secretChoiceOnEnter === true ? { secretChoiceOnEnter: true as const } : {}),
+    ...(draft.entersUnderChosenPlayer === true ? { entersUnderChosenPlayer: true as const } : {}),
+    ...(draft.asTurnedFaceUp !== undefined ? { asTurnedFaceUp: draft.asTurnedFaceUp } : {}),
+    ...(draft.moreCycling !== undefined ? { moreCycling: draft.moreCycling } : {}),
+    ...(draft.castFromGraveyardIf !== undefined ? { castFromGraveyardIf: draft.castFromGraveyardIf } : {}),
+    ...(draft.castSelfFromGraveyard !== undefined ? { castSelfFromGraveyard: draft.castSelfFromGraveyard } : {}),
+    ...(draft.castSelfFromExile !== undefined ? { castSelfFromExile: draft.castSelfFromExile } : {}),
+    ...(draft.castWhileSearchingLibrary !== undefined ? { castWhileSearchingLibrary: draft.castWhileSearchingLibrary } : {}),
   };
 }
