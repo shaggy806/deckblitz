@@ -13492,6 +13492,14 @@ function parseFaceAsWritten(face, ctx = {}) {
       out.selfCostReduction = { condition: { kind: "controls", filter: {}, atLeast: 0 }, reduceGeneric: { devotionTo: [color] } };
       continue;
     }
+    // The Skullspore Nexus's greatest power, Volcanic Salvo's total.
+    if ((m = /^~ costs \{X\} less to cast, where X is (?:the (greatest) (power|toughness) among|the (total) (power|toughness) of) creatures you control\.$/.exec(line))) {
+      out.selfCostReduction = {
+        condition: { kind: "controls", filter: {}, atLeast: 0 },
+        reduceGeneric: { aggregate: m[1] !== undefined ? "max" : "sum", of: m[2] ?? m[4], filter: { type: "creature", controlledBy: "you" } },
+      };
+      continue;
+    }
     // The most any one opponent has, not the sum: Cavern-Hoard Dragon.
     if ((m = /^~ costs \{X\} less to cast, where X is the greatest number of (.+?) an opponent controls\.$/.exec(line))) {
       const filter = parseTypePhrase(m[1]);

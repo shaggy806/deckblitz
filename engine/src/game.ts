@@ -28029,10 +28029,16 @@ export class Game {
               : // How many cards were put into the graveyard.
                 trigger.on === "put-into-graveyard" && event.type === "cards-put-into-graveyard"
               ? this.graveyardArrivals(trigger, event.arrivals, object).length
-              : // How many permanents died, a stack as each of its tokens.
+              : // How many permanents died, a stack as each of its tokens — or
+                // their total power, each as it last existed (rule 603.10a).
                 trigger.on === "dies" && event.type === "permanents-died"
               ? this.diedBatchMatching(trigger, event, object).reduce(
-                  (n, id) => n + (this.state.objects[id]?.stackCount ?? 1),
+                  (n, id) =>
+                    n +
+                    (this.state.objects[id]?.stackCount ?? 1) *
+                      (trigger.batchValue === "total-power"
+                        ? (this.state.objects[id]?.lastKnown ?? this.state.ceasedTokens?.[id])?.power ?? 0
+                        : 1),
                   0,
                 )
               : // How many permanents left, a stack as each of its tokens.

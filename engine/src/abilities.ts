@@ -1210,6 +1210,11 @@ export type TriggerSpec =
        * them. Without "this ability triggers only once each turn", which is a
        * plain `dies` with `oncePerTurn`. */
       readonly batched?: boolean;
+      /** A `batched` trigger's `{ triggerValue: true }`, in place of how many:
+       * `"total-power"` is their total power, each as it last existed (rule
+       * 603.10a; The Skullspore Nexus's "the total power of those creatures"),
+       * a negative one subtracting (rule 107.1b). Fixed as it triggers. */
+      readonly batchValue?: "total-power";
     }
   | {
       /** "Whenever this Equipment becomes unattached from a permanent"

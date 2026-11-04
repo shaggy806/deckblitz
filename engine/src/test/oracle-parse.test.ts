@@ -15510,3 +15510,18 @@ describe("a copy of the enchanted artifact, then a win on eight with one name", 
     });
   });
 });
+
+describe("a spell's cost reduced by its controller's creatures' power or toughness", () => {
+  it("reads the greatest and the total", () => {
+    const face = (oracle_text: string) => parseFace({ name: "Probe", type_line: "Sorcery", oracle_text }, { tokenFor: () => null });
+    const yours = { type: "creature", controlledBy: "you" };
+    expect(face("This spell costs {X} less to cast, where X is the greatest power among creatures you control.").selfCostReduction).toEqual({
+      condition: { kind: "controls", filter: {}, atLeast: 0 },
+      reduceGeneric: { aggregate: "max", of: "power", filter: yours },
+    });
+    expect(face("This spell costs {X} less to cast, where X is the total toughness of creatures you control.").selfCostReduction).toEqual({
+      condition: { kind: "controls", filter: {}, atLeast: 0 },
+      reduceGeneric: { aggregate: "sum", of: "toughness", filter: yours },
+    });
+  });
+});

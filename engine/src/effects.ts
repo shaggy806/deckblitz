@@ -8140,7 +8140,8 @@ export type EffectSpec =
       /** "Create an **X/X** … token": its base power and toughness, set as
        * it's made — part of what the token is, so every other P/T effect
        * applies over them (Rootha, Mastering the Moment's Elemental, the
-       * token's printed P/T being 0/0). Read once, as the effect resolves. */
+       * token's printed P/T being 0/0). Read once, as the effect resolves, and
+       * not clamped: an effect that sets them may set less than 0 (rule 107.1b). */
       readonly basePt?: { readonly power: EffectAmount; readonly toughness: EffectAmount };
       /** The tokens enter **attacking** (rule 508.4) — "create two 1/1 white
        * Soldier creature tokens that are tapped and attacking" (Hero of
@@ -19048,7 +19049,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
                 : { kind: spec.thenCounters.kind, amount: amountValue(spec.thenCounters.amount, ctx, player) },
               spec.basePt === undefined
                 ? undefined
-                : [amountValue(spec.basePt.power, ctx, player), amountValue(spec.basePt.toughness, ctx, player)],
+                : [signedAmountValue(spec.basePt.power, ctx, player), signedAmountValue(spec.basePt.toughness, ctx, player)],
               resolveEnterAttacking(spec.attacking, ctx.aboutPlayer(player)),
               spec.separate === true,
               spec.exileAtEndStep === true,
@@ -19073,7 +19074,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           : { kind: spec.thenCounters.kind, amount: amountValue(spec.thenCounters.amount, ctx) },
         spec.basePt === undefined
           ? undefined
-          : [amountValue(spec.basePt.power, ctx), amountValue(spec.basePt.toughness, ctx)],
+          : [ptSetValue(spec.basePt.power, ctx), ptSetValue(spec.basePt.toughness, ctx)],
         resolveEnterAttacking(spec.attacking, ctx),
         spec.separate === true,
         spec.exileAtEndStep === true,
