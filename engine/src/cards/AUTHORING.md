@@ -2783,7 +2783,7 @@ subtypes, supertype, notSupertype, name, notName, colors, notColors, colorless,
 manaValue, power, toughness, basePower, baseToughness, counters, controlledBy,
 ownedBy, keyword, notKeyword, tapped, token, isCommander, equipped, enchanted,
 modified, anyOf, manaSpent, manaFrom, putIntoGraveyardFromLibraryThisTurn, putIntoGraveyardThisTurn, blockedThisTurn,
-discardedThisTurn, enteredThisTurn, controlledContinuously, attackedThisTurn, attackedBattleThisTurn, damagedThisTurnBy, excessDamageThisTurn,
+discardedThisTurn, enteredThisTurn, controlledContinuously, attackedThisTurn, attackedThisCombat, attackedYouThisTurn, attackedDuringControllersLastTurn, attackedBattleThisTurn, damagedThisTurnBy, excessDamageThisTurn,
 dealtDamageToCreatureThisTurn, dealtDamageThisTurn, cast, castBy, castFrom, castVia, enteredFrom,
 putThereBySource, sharesCardTypeWith, sharesPermanentTypeWith, sharesCreatureTypeWith, sharesLandTypeWith, sameNameWith, sameNameAsAnother, thisWay, attacking, blocking, blockingRelation, goaded, suspected, saddled, saddledSource, crewedSource, crewedBySource, enlistedThisCombat, monstrous, renowned, hasManaAbility, hasAbilities,
 xInManaCost, manaCost, coloredManaSymbols, cardTypeCount, nameDiffersFromEach,
@@ -3036,6 +3036,9 @@ sacrifice. `enteredThisTurn` /
 `attackedThisTurn` are a permanent's history this turn — "creatures that
 entered this turn", Kratos, God of War's "creatures that player controls that
 **didn't attack** this turn" (`attackedThisTurn: false`);
+`attackedThisCombat` is this combat phase's declaration, standing though it has left combat since (rule 506.4), never one put onto the battlefield attacking: "if this creature attacked or blocked this combat" is the helper `ATTACKED_OR_BLOCKED_THIS_COMBAT`, an `anyOf` with `blockedThisTurn`'s `thisCombat`;
+`attackedYouThisTurn` is the filtering player, not a planeswalker of theirs (Jabari's Influence), and "a creature is attacking you" as a condition is `controls` with `anyController` over `attackingYou` (Heroic Return's cost, Swat Away's);
+`attackedDuringControllersLastTurn` is its present controller's last finished turn (`controllersLastTurn`; Halls of Mist, Tangle Kelp through `attachedTo`);
 `attackedBattleThisTurn` is "attacked **a battle** this turn" (War Historian,
 rule 506.3), true from the declaration on whatever becomes of the battle. A permanent that
 changes zones is a new object that did neither; one that has left is asked as
@@ -5890,7 +5893,7 @@ clause (section 9):
 - `{ kind: "opponent-lost-life-this-turn" }` — Theater of Horrors. Reads the
   per-player `lostLifeThisTurn` flag, set in `changeLife` so it catches damage
   and drain alike.
-- `{ kind: "turn-structure", steps?, duringCombat?, combatPhase?, mainPhase? }`
+- `{ kind: "turn-structure", steps?, duringCombat?, combatPhase?, mainPhase?, afterCombat? }` (`afterCombat`: "cast this spell only after combat", rule 506.8d, the turn's first combat phase over)
   — where the turn is: during one of `steps`, during a combat phase, during
   the Nth combat phase of the turn (Karlach's "if it's the first combat phase
   of the turn" is `combatPhase: 1`), or the Nth main phase ("your second main

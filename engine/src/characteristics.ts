@@ -1260,6 +1260,10 @@ function evalStaticCondition(
       const inCombat = COMBAT_STEPS.has(step);
       if (condition.steps !== undefined && !condition.steps.includes(step)) return false;
       if (condition.duringCombat === true && !inCombat) return false;
+      if (condition.afterCombat === true) {
+        const combats = state.turn.combatPhases ?? 0;
+        if (combats === 0 || (combats === 1 && inCombat)) return false;
+      }
       if (
         condition.combatPhase !== undefined &&
         (!inCombat || (state.turn.combatPhases ?? 0) !== condition.combatPhase)

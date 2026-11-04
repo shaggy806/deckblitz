@@ -33,7 +33,7 @@ import { hasRingBearerDesignation, isRingBearer } from "./ring.js";
 import type { Color, ManaCost, ManaFromSpec } from "./mana.js";
 import { COLORS, colorSymbols, manaOriginMatches, manaValue, parseManaCost } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
-import { LOCKED_ROOM, activePlayerOf, blockedAttackersOf, isTokenNow, manaCostOverride, nameOf, permanentCount, printedCardName, rulesTextName } from "./state.js";
+import { LOCKED_ROOM, activePlayerOf, blockedAttackersOf, controllersLastTurn, isTokenNow, manaCostOverride, nameOf, permanentCount, printedCardName, rulesTextName } from "./state.js";
 import type { GameObject, GameState, LastKnownInfo, ZoneType } from "./state.js";
 import { CREATURE_TYPES } from "./creature-types.js";
 import { EVERY_CREATURE_TYPE, EVERY_LAND_TYPE, hasSubtype, isCreatureType, isLandType, isTypeMarker } from "./subtypes.js";
@@ -1017,6 +1017,24 @@ export interface CardFilter {
    * permanent that left the battlefield and came back is a new object that
    * hasn't; one that has left is asked as it last was. */
   readonly attackedThisTurn?: boolean;
+  /** Was declared as an attacker in this combat phase (or wasn't): the
+   * Clockwork creatures' "if this creature attacked or blocked this combat",
+   * an `anyOf` with `blockedThisTurn`'s `{ relation: "blocked", thisCombat:
+   * true }`. It stays so though it has since left combat (rule 506.4), and a
+   * creature put onto the battlefield attacking never did (508.4). One that
+   * has left is asked as it last was. */
+  readonly attackedThisCombat?: boolean;
+  /** Was declared as an attacker attacking the filtering player this turn —
+   * the player, not a planeswalker or battle of theirs (the O-Kagachi,
+   * Vengeful Kami ruling on "attacked you"): Jabari's Influence's "target
+   * nonartifact, nonblack creature that attacked you this turn". One that has
+   * left is asked as it last was. */
+  readonly attackedYouThisTurn?: boolean;
+  /** Was declared as an attacker during its controller's last turn — the most
+   * recent turn they've finished, not the one under way, and whoever
+   * controlled it then: Halls of Mist's "creatures that attacked during their
+   * controller's last turn can't attack". See `controllersLastTurn`. */
+  readonly attackedDuringControllersLastTurn?: boolean;
   /** Was declared as an attacker attacking a battle this turn (or wasn't) —
    * War Historian's "as long as it attacked a battle this turn" (rule
    * 506.3). Holds from that declaration whatever then happens to the
@@ -2410,6 +2428,30 @@ export function matchesFilter(
         ? live.zone === "battlefield" && live.attackedThisTurn === true
         : lki!.attackedOnTurn === state.turn.number;
     if (attacked !== filter.attackedThisTurn) return false;
+  }
+  if (filter.attackedThisCombat !== undefined) {
+    const record = live !== undefined ? (live.zone === "battlefield" ? live.lastAttack : undefined) : lki!.lastAttack;
+    const attacked =
+      record !== undefined &&
+      record.combat.turn === state.turn.number &&
+      record.combat.phase === (state.turn.combatPhases ?? 1);
+    if (attacked !== filter.attackedThisCombat) return false;
+  }
+  if (filter.attackedYouThisTurn !== undefined) {
+    const attacked =
+      live !== undefined
+        ? live.zone === "battlefield" && live.attackedPlayersThisTurn?.includes(ctx.you) === true
+        : lki!.attackedOnTurn === state.turn.number && lki!.attackedPlayers?.includes(ctx.you) === true;
+    if (attacked !== filter.attackedYouThisTurn) return false;
+  }
+  if (filter.attackedDuringControllersLastTurn !== undefined) {
+    const was = live ?? lki!;
+    const last = controllersLastTurn(state, was.controller);
+    const attacked =
+      last !== undefined &&
+      (live === undefined || live.zone === "battlefield") &&
+      was.attackedOnTurns?.includes(last) === true;
+    if (attacked !== filter.attackedDuringControllersLastTurn) return false;
   }
   if (filter.attackedBattleThisTurn !== undefined) {
     const attacked =

@@ -8210,9 +8210,16 @@ export class Game {
     );
     // Nothing has attacked this turn yet — whoever controls it. (The untap
     // step only reaches the active player's permanents.)
+    // No turn older than every player's most recent can be anyone's last, so
+    // two tokens aren't kept apart by what they did that long ago.
+    const oldestLastTurn = Math.min(...Object.values(this.state.players).map((p) => p.lastTurnTaken ?? Infinity));
     for (const id of [...this.state.zones.shared.battlefield, ...phasedOutIds(this.state)]) {
       const object = this.state.objects[id];
       if (object.attackedThisTurn === true) object.attackedThisTurn = false;
+      if (object.attackedOnTurns !== undefined) {
+        object.attackedOnTurns = object.attackedOnTurns.filter((turn) => turn >= oldestLastTurn);
+        if (object.attackedOnTurns.length === 0) delete object.attackedOnTurns;
+      }
       delete object.attackedPlayersThisTurn;
       delete object.attackedBattleThisTurn;
       delete object.tappedOnTurn;
@@ -8376,7 +8383,11 @@ export class Game {
       (s) => s.untilTurnOf === undefined || !beginningFor.includes(s.untilTurnOf),
     );
     // "Their last turn" is this one now (see `PlayerState.lastTurnTaken`).
-    this.state.players[this.activePlayer].lastTurnTaken = this.state.turn.number;
+    const seatNow = this.state.players[this.activePlayer];
+    if (seatNow.lastTurnTaken !== undefined && seatNow.lastTurnTaken !== this.state.turn.number) {
+      seatNow.turnTakenBefore = seatNow.lastTurnTaken;
+    }
+    seatNow.lastTurnTaken = this.state.turn.number;
     this.beginPlayerControl("next-turn");
     // "All combat phases of their next turn": this is that turn.
     const nowActive = this.state.players[this.activePlayer];
@@ -11122,6 +11133,9 @@ export class Game {
         // Boast (702.135) asks whether this creature attacked this turn —
         // recorded here, and reset as each turn begins.
         object.attackedThisTurn = true;
+        if (object.attackedOnTurns?.includes(this.state.turn.number) !== true) {
+          object.attackedOnTurns = [...(object.attackedOnTurns ?? []), this.state.turn.number];
+        }
         // Which combat, and which player — "didn't attack during your last
         // combat" (Territorial Hellkite). A planeswalker isn't its player.
         object.lastAttack = {
@@ -50761,6 +50775,9 @@ export class Game {
       ...(object.renowned === true ? { renowned: true as const } : {}),
       ...(object.entry !== undefined ? { entry: object.entry } : {}),
       ...(object.attackedThisTurn === true ? { attackedOnTurn: this.state.turn.number } : {}),
+      ...(object.attackedPlayersThisTurn !== undefined ? { attackedPlayers: [...object.attackedPlayersThisTurn] } : {}),
+      ...(object.lastAttack !== undefined ? { lastAttack: object.lastAttack } : {}),
+      ...(object.attackedOnTurns !== undefined ? { attackedOnTurns: [...object.attackedOnTurns] } : {}),
       ...(object.attackedBattleThisTurn === true ? { attackedBattleOnTurn: this.state.turn.number } : {}),
       ...(object.damageThisTurn !== undefined ? { damageThisTurn: object.damageThisTurn } : {}),
       ...(object.dealtDamageToCreatureOnTurn !== undefined
@@ -51538,6 +51555,7 @@ export class Game {
     delete object.altCostGrantOnTurn;
     delete object.attackedThisTurn;
     delete object.attackedPlayersThisTurn;
+    delete object.attackedOnTurns;
     delete object.attackedBattleThisTurn;
     delete object.tappedOnTurn;
     delete object.lastAttack;

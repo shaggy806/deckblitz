@@ -1303,6 +1303,9 @@ export type StaticCondition =
       readonly duringCombat?: boolean;
       readonly combatPhase?: number;
       readonly mainPhase?: number;
+      /** "Cast this spell only after combat" (rule 506.8d): the turn's first
+       * combat phase has ended. Never in a turn that hasn't had one. */
+      readonly afterCombat?: true;
     }
   /**
    * Something of a {@link TurnHistory} list happened this turn at least

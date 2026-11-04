@@ -426,6 +426,11 @@ export interface GameObject {
    * `attackedThisTurn` filter clause. Reset as each turn begins, and by any
    * change of zone (the permanent that comes back never attacked). */
   attackedThisTurn?: boolean;
+  /** The turns this permanent was declared an attacker on, in this
+   * battlefield stint — "attacked during their controller's last turn" (Halls
+   * of Mist), which an extra combat this turn mustn't overwrite. Pruned as each
+   * turn begins to the turns that may still be someone's last. */
+  attackedOnTurns?: number[];
   /** The combat this permanent was last declared an attacker in, and the
    * player it attacked then (`null` for a planeswalker) — "that this
    * creature didn't attack during your last combat" (Territorial Hellkite).
@@ -2139,6 +2144,12 @@ export interface LastKnownInfo {
   /** How it had entered — `GameObject.entry`. */
   readonly entry?: EntryRecord;
   readonly attackedOnTurn?: number;
+  /** `GameObject.attackedPlayersThisTurn`, `.lastAttack` and `.attackedOnTurns`
+   * as it left — the `attackedYouThisTurn`, `attackedThisCombat` and
+   * `attackedDuringControllersLastTurn` clauses. */
+  readonly attackedPlayers?: readonly PlayerId[];
+  readonly lastAttack?: GameObject["lastAttack"];
+  readonly attackedOnTurns?: readonly number[];
   /** The turn it attacked a battle on, if it did — `attackedBattleThisTurn`. */
   readonly attackedBattleOnTurn?: number;
   /** `GameObject.damageThisTurn` and `dealtDamageToCreatureOnTurn` as it
@@ -2858,6 +2869,9 @@ export interface PlayerState {
    * included — "their last turn". Set as each of their turns begins, and as
    * they declare attackers (so a first turn counts). */
   lastTurnTaken?: number;
+  /** The number of the turn this player took before `lastTurnTaken` — while
+   * it's their turn, "their last turn" (`controllersLastTurn`). */
+  turnTakenBefore?: number;
   /** The combat phase of this player's turns under way or most recently
    * begun (`turn`, and `phase` — `TurnState.combatPhases` then), and the
    * one before it — "your last combat" as a new combat begins (Territorial
@@ -6720,6 +6734,18 @@ export function attackedYouDuringTheirLastTurn(state: GameState, you: PlayerId, 
 }
 
 /**
+ * The number of `player`'s last turn as "their controller's last turn" means
+ * it (Halls of Mist, Tangle Kelp): on their own turn, the one before it, not
+ * the one under way; on another's, the most recent they took. `undefined` if
+ * they've had none.
+ */
+export function controllersLastTurn(state: GameState, player: PlayerId): number | undefined {
+  const seat = state.players[player];
+  if (seat === undefined) return undefined;
+  return activePlayerOf(state) === player ? seat.turnTakenBefore : seat.lastTurnTaken;
+}
+
+/**
  * Everything two tokens must share to be folded into one stack, as one
  * string — `Game`'s `findMergeableStack` compares a new batch against it and
  * `recompactTokens` groups on it, and the bots use it to tell twin targets
@@ -6744,6 +6770,7 @@ export function tokenFoldKey(o: GameObject): string {
     o.tapped,
     o.summoningSick,
     o.enteredBattlefieldOnTurn,
+    o.attackedOnTurns ?? null,
     o.face ?? 0,
     o.exileAtEndStep ?? false,
     o.sacrificeAtEndStep ?? false,

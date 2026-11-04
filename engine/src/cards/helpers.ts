@@ -1381,6 +1381,14 @@ export const START_YOUR_ENGINES_TEXT =
 /** "As long as you have max speed" (rules 702.178a, 702.179e): speed 4. */
 export const MAX_SPEED_CONDITION = { kind: "speed", atLeast: 4 } as const satisfies StaticCondition;
 
+/** "If this creature attacked or blocked this combat" (the Clockwork creatures,
+ * Kjeldoran Home Guard): declared as either, whether or not it's still in combat
+ * (rule 506.4). */
+export const ATTACKED_OR_BLOCKED_THIS_COMBAT = {
+  kind: "source",
+  filter: { anyOf: [{ attackedThisCombat: true }, { blockedThisTurn: { relation: "blocked", thisCombat: true } }] },
+} as const satisfies StaticCondition;
+
 /**
  * Max speed (rule 702.178a): "Max speed — [Ability]" means "As long as your
  * speed is 4, this object has '[Ability]'" — a static ability on the card

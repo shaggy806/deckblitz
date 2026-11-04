@@ -6990,6 +6990,37 @@ describe("creatures in a blocking relation (blockingRelation)", () => {
       { on: "blocked-by", who: "attached" },
     ]);
     expect(blade.triggered[0].effect).toMatchObject({ target: "trigger-object" });
+    // A creature's record of combat, and what's attacking you.
+    const clockwork = "At end of combat, if this creature attacked or blocked this combat, remove a +1/+0 counter from it.";
+    const swarm = face("Clockwork", "Artifact Creature — Insect", clockwork);
+    expect(swarm.complete).toBe(true);
+    expect(swarm.triggered[0]).toMatchObject({
+      trigger: { on: "step-begins", step: "end-combat", who: "any" },
+      condition: {
+        kind: "source",
+        filter: { anyOf: [{ attackedThisCombat: true }, { blockedThisTurn: { relation: "blocked", thisCombat: true } }] },
+      },
+      effect: { kind: "remove-counter", target: "source", counter: "+1/+0", amount: 1 },
+    });
+    const halls = face("Halls", "Land", "Creatures that attacked during their controller's last turn can't attack.");
+    expect(halls.complete).toBe(true);
+    expect(halls.static[0].affects).toEqual({ scope: "filter", filter: { type: "creature", attackedDuringControllersLastTurn: true } });
+    const kelp = face("Kelp", "Enchantment — Aura", "Enchant creature\nEnchanted creature doesn't untap during its controller's untap step if it attacked during its controller's last turn.");
+    expect(kelp.complete).toBe(true);
+    expect(kelp.static[0].condition).toEqual({ kind: "source", filter: { attachedTo: { attackedDuringControllersLastTurn: true } } });
+    const dog = face("Dog", "Artifact Creature — Dog", "As long as this creature is untapped, all creatures attacking you get -1/-0.");
+    expect(dog.complete).toBe(true);
+    expect(dog.static[0]).toMatchObject({
+      affects: { scope: "filter", filter: { type: "creature", attackingYou: true } },
+      condition: { kind: "source", filter: { tapped: false } },
+      grantPt: [-1, 0],
+    });
+    const attackedYou = face("Influence", "Instant", "Cast this spell only after combat.\nExile target nonartifact, nonblack creature that attacked you this turn.");
+    expect(attackedYou.castOnlyIf).toEqual({ kind: "turn-structure", afterCombat: true });
+    expect(attackedYou.targets[0].filter).toMatchObject({ attackedYouThisTurn: true });
+    const swat = face("Swat", "Instant", "This spell costs {2} less to cast if a creature is attacking you.\nDraw a card.");
+    expect(swat.complete).toBe(true);
+    expect(swat.selfCostReduction.condition).toEqual({ kind: "controls", filter: { type: "creature", attackingYou: true }, atLeast: 1, anyController: true });
     // The turn's attack history (rule 506.3 — War Historian).
     const historian = face("War Historian", "Creature — Human Monk", "Reach\nThis creature has indestructible as long as it attacked a battle this turn.");
     expect(historian.complete).toBe(true);

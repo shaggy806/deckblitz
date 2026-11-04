@@ -1017,6 +1017,13 @@ const TARGET_PHRASES = [
   ["target artifact or enchantment", "artifact-or-enchantment"],
   ["target creature or enchantment", "creature-or-enchantment"],
   ["target artifact or creature", "artifact-or-creature"],
+  // The player and not a planeswalker of theirs (Snow Fortress, Ice Floe), and
+  // this turn's attack history (Jabari's Influence).
+  ["target creature without flying that's attacking you", { kind: "permanent", filter: { type: "creature", notKeyword: "flying", attackingYou: true } }],
+  [
+    "target nonartifact, nonblack creature that attacked you this turn",
+    { kind: "permanent", filter: { type: "creature", notTypes: ["artifact"], notColors: ["B"], attackedYouThisTurn: true } },
+  ],
   ["target nonartifact creature", "nonartifact-creature"],
   ["target nonblack creature", "nonblack-creature"],
   ["target attacking or blocking creature", "attacking-or-blocking-creature"],
@@ -3901,6 +3908,10 @@ export function parseSentence(sentence, ctx) {
       to: slot(m[3]),
       ...(/^any/i.test(m[1]) ? { amount: "any" } : {}),
     };
+  }
+  // "Remove a +1/+0 counter from ~" (the Clockwork creatures).
+  if ((m = re(`remove an? ([+-]\\d+/[+-]\\d+|[a-z]+) counter from ~`).exec(s))) {
+    return { kind: "remove-counter", target: "source", counter: m[1].toLowerCase(), amount: 1 };
   }
   // Removing counters in bulk: "remove all counters from target permanent"
   // (every kind — Vampire Hexmage), "remove all charge counters from ~" (one
@@ -11311,6 +11322,10 @@ function parseFaceAsWritten(face, ctx = {}) {
       out.castOnlyIf = { kind: "turn-structure", steps: ["declare-blockers", "combat-damage", "end-combat"] };
       continue;
     }
+    if (isSpell && line === "Cast ~ only after combat.") {
+      out.castOnlyIf = { kind: "turn-structure", afterCombat: true };
+      continue;
+    }
     if (isSpell && line === "Rebound") { out.rebound = true; continue; }
     // Cipher (rule 702.99a) — Gatecrash's encoded instants and sorceries.
     if (isSpell && line === "Cipher") { out.cipher = true; continue; }
@@ -12496,6 +12511,9 @@ function parseFaceAsWritten(face, ctx = {}) {
         } else base.__todo = [`the intervening-if: "${clause}"`];
         rest = rest.slice(rest.indexOf(", ") + 2);
         rest = rest[0].toUpperCase() + rest.slice(1);
+        // "… if this creature attacked or blocked this combat, remove a counter
+        // from it": no event names an object, so "it" is the source.
+        if (condition === ATTACKED_OR_BLOCKED_THIS_COMBAT) rest = rest.replace(/ from it\.$/, " from ~.");
       } else rest = rest.length > 0 ? rest[0].toUpperCase() + rest.slice(1) : rest;
       // "Target creature of defending player's choice" (Erithizon), "… of
       // that player's choice" (Bladegriff Prototype): the player the event
@@ -13077,8 +13095,16 @@ const MELD_SENTENCE =
 /** Intervening-ifs (rule 603.4) by their words, as the pool writes them:
  * raid (Alesha), morbid (Liliana's Devotee), void (Elegy Acolyte), revolt
  * (Hidden Stockpile) and celebration (Pests of Honor). */
+/** "If this creature attacked or blocked this combat": declared as either,
+ * whether or not it's still in combat (rule 506.4). */
+const ATTACKED_OR_BLOCKED_THIS_COMBAT = {
+  kind: "source",
+  filter: { anyOf: [{ attackedThisCombat: true }, { blockedThisTurn: { relation: "blocked", thisCombat: true } }] },
+};
 const INTERVENING_IFS = {
   ...TURN_TALLY_IFS,
+  "if ~ attacked or blocked this combat,": ATTACKED_OR_BLOCKED_THIS_COMBAT,
+  "if this vehicle attacked or blocked this combat,": ATTACKED_OR_BLOCKED_THIS_COMBAT,
   // Murders at Karlov Manor (Sanguine Spy).
   "if there are five or more mana values among cards in your graveyard,": FIVE_MANA_VALUES,
   // Amonkhet's Deserts (Desert's Hold, Unquenchable Thirst, Wretched Camel).
@@ -14298,6 +14324,10 @@ function costLessParts(cost) {
 function costIfCondition(phrase) {
   const count = (word) => NUMBERS[word];
   let m;
+  // The player and not a planeswalker of theirs, whoever controls the attacker.
+  if (phrase === "a creature is attacking you") {
+    return { kind: "controls", filter: { type: "creature", attackingYou: true }, atLeast: 1, anyController: true };
+  }
   if (phrase === "you control at least two creatures that share a creature type") {
     return { kind: "aggregate", value: SHARED_CREATURE_TYPE, compare: { op: "gte", n: 2 } };
   }
@@ -15086,6 +15116,14 @@ function parseStatic(line, text) {
   // What an Aura says of its host: Fall from Favor (its controller, read at each
   // untap step), Street Savvy (the blocker's side of rule 702.14), Power Artifact
   // (rule 602.2b, the host's abilities alone), Demonic Torment.
+  if (line === "Enchanted creature doesn't untap during its controller's untap step if it attacked during its controller's last turn.") {
+    return {
+      affects: { scope: "attached" },
+      condition: { kind: "source", filter: { attachedTo: { attackedDuringControllersLastTurn: true } } },
+      restrictions: ["doesnt-untap"],
+      text,
+    };
+  }
   if (line === "Enchanted creature doesn't untap during its controller's untap step unless that player is the monarch.") {
     return {
       affects: { scope: "attached" },
@@ -15535,6 +15573,24 @@ function parseStatic(line, text) {
   // "~ can't attack during extra turns" (Medomai): the `extra-turn` condition.
   if (line === "~ can't attack during extra turns.") {
     return { affects: { scope: "self" }, condition: { kind: "extra-turn" }, restrictions: ["cant-attack"], text };
+  }
+  // A creature's record of its controller's turns (Halls of Mist), and what's
+  // attacking the player and not a planeswalker of theirs (Boarded Window,
+  // Watchdog).
+  if (line === "Creatures that attacked during their controller's last turn can't attack.") {
+    return {
+      affects: { scope: "filter", filter: { type: "creature", attackedDuringControllersLastTurn: true } },
+      restrictions: ["cant-attack"],
+      text,
+    };
+  }
+  if ((m = /^(?:All c|C)reatures attacking you get ([+-]\d+)\/([+-]\d+)\.$/.exec(line))) {
+    return {
+      affects: { scope: "filter", filter: { type: "creature", attackingYou: true } },
+      // `|| 0`: "-0" is a number, and a hand-written 0 isn't the same one.
+      grantPt: [Number(m[1]) || 0, Number(m[2]) || 0],
+      text,
+    };
   }
   // "~ can't attack a player it has already attacked this turn" (Port Razer).
   if (line === "~ can't attack a player it has already attacked this turn.") {
