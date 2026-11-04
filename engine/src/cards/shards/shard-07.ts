@@ -216,6 +216,7 @@ import _poolDuergarAssailant from "../pool/duergar-assailant.js";
 import _poolDwarvenMine from "../pool/dwarven-mine.js";
 import _poolDwarvenRuins from "../pool/dwarven-ruins.js";
 import _poolDwarvenWarriors from "../pool/dwarven-warriors.js";
+import _poolEchoesOfEternity from "../pool/echoes-of-eternity.js";
 import _poolEldraziObligator from "../pool/eldrazi-obligator.js";
 import _poolElectrickery from "../pool/electrickery.js";
 import _poolElementalistsPalette from "../pool/elementalists-palette.js";
@@ -1152,6 +1153,7 @@ const shard: CardShard = {
     _poolDwarvenMine,
     _poolDwarvenRuins,
     _poolDwarvenWarriors,
+    _poolEchoesOfEternity,
     _poolEldraziObligator,
     _poolElectrickery,
     _poolElementalistsPalette,

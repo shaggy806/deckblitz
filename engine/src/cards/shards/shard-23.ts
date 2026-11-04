@@ -514,6 +514,7 @@ import _poolNacreTalisman from "../pool/nacre-talisman.js";
 import _poolNantukoElder from "../pool/nantuko-elder.js";
 import _poolNarnamCobra from "../pool/narnam-cobra.js";
 import _poolNecrite from "../pool/necrite.js";
+import _poolNefariousImp from "../pool/nefarious-imp.js";
 import _poolNemataGroveGuardian from "../pool/nemata-grove-guardian.js";
 import _poolNeoExdeathDimensionsEnd from "../pool/neo-exdeath-dimensions-end.js";
 import _poolNerdRage from "../pool/nerd-rage.js";
@@ -1435,6 +1436,7 @@ const shard: CardShard = {
     _poolNantukoElder,
     _poolNarnamCobra,
     _poolNecrite,
+    _poolNefariousImp,
     _poolNemataGroveGuardian,
     _poolNeoExdeathDimensionsEnd,
     _poolNerdRage,

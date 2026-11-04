@@ -492,6 +492,7 @@ import _poolMostValuableSlayer from "../pool/most-valuable-slayer.js";
 import _poolMournwillow from "../pool/mournwillow.js";
 import _poolMtendaHerder from "../pool/mtenda-herder.js";
 import _poolMukotaiSoulripper from "../pool/mukotai-soulripper.js";
+import _poolMultanisPresence from "../pool/multanis-presence.js";
 import _poolMuragandaPetroglyphs from "../pool/muraganda-petroglyphs.js";
 import _poolMyrMindservant from "../pool/myr-mindservant.js";
 import _poolMyrReservoir from "../pool/myr-reservoir.js";
@@ -1405,6 +1406,7 @@ const shard: CardShard = {
     _poolMournwillow,
     _poolMtendaHerder,
     _poolMukotaiSoulripper,
+    _poolMultanisPresence,
     _poolMuragandaPetroglyphs,
     _poolMyrMindservant,
     _poolMyrReservoir,

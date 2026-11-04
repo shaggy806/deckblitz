@@ -24,6 +24,7 @@ import _poolAlaundoTheSeer from "../pool/alaundo-the-seer.js";
 import _poolAlchemistsTalent from "../pool/alchemists-talent.js";
 import _poolAlharuSolemnRitualist from "../pool/alharu-solemn-ritualist.js";
 import _poolAliFromCairo from "../pool/ali-from-cairo.js";
+import _poolAllWillBeOne from "../pool/all-will-be-one.js";
 import _poolAlrundsEpiphany from "../pool/alrunds-epiphany.js";
 import _poolAltarOfDementia from "../pool/altar-of-dementia.js";
 import _poolAlwaysWatching from "../pool/always-watching.js";
@@ -912,6 +913,7 @@ const shard: CardShard = {
     _poolAlchemistsTalent,
     _poolAlharuSolemnRitualist,
     _poolAliFromCairo,
+    _poolAllWillBeOne,
     _poolAlrundsEpiphany,
     _poolAltarOfDementia,
     _poolAlwaysWatching,

@@ -484,6 +484,7 @@ import _poolLordOfAtlantis from "../pool/lord-of-atlantis.js";
 import _poolLoreholdArchivist from "../pool/lorehold-archivist.js";
 import _poolLoyalCathar from "../pool/loyal-cathar.js";
 import _poolLoyalGuardian from "../pool/loyal-guardian.js";
+import _poolLullmageMentor from "../pool/lullmage-mentor.js";
 import _poolLumaretsFavor from "../pool/lumarets-favor.js";
 import _poolLumraBellowOfTheWoods from "../pool/lumra-bellow-of-the-woods.js";
 import _poolLupariShield from "../pool/lupari-shield.js";
@@ -1385,6 +1386,7 @@ const shard: CardShard = {
     _poolLoreholdArchivist,
     _poolLoyalCathar,
     _poolLoyalGuardian,
+    _poolLullmageMentor,
     _poolLumaretsFavor,
     _poolLumraBellowOfTheWoods,
     _poolLupariShield,

@@ -45,6 +45,7 @@ import _poolBackOnTrack from "../pool/back-on-track.js";
 import _poolBaelothBarritylEntertainer from "../pool/baeloth-barrityl-entertainer.js";
 import _poolBakuAltar from "../pool/baku-altar.js";
 import _poolBallynockTrapper from "../pool/ballynock-trapper.js";
+import _poolBaralChiefOfCompliance from "../pool/baral-chief-of-compliance.js";
 import _poolBarlsCage from "../pool/barls-cage.js";
 import _poolBaronyVampire from "../pool/barony-vampire.js";
 import _poolBarrentonCragtreads from "../pool/barrenton-cragtreads.js";
@@ -945,6 +946,7 @@ const shard: CardShard = {
     _poolBaelothBarritylEntertainer,
     _poolBakuAltar,
     _poolBallynockTrapper,
+    _poolBaralChiefOfCompliance,
     _poolBarlsCage,
     _poolBaronyVampire,
     _poolBarrentonCragtreads,

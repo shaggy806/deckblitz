@@ -549,6 +549,7 @@ import _poolAllIsDust from "./pool/all-is-dust.js";
 import _poolAllOfHistoryAllAtOnce from "./pool/all-of-history-all-at-once.js";
 import _poolAllSunsDawn from "./pool/all-suns-dawn.js";
 import _poolAllThatGlitters from "./pool/all-that-glitters.js";
+import _poolAllWillBeOne from "./pool/all-will-be-one.js";
 import _poolAllay from "./pool/allay.js";
 import _poolAlleyAssailant from "./pool/alley-assailant.js";
 import _poolAlleyEvasion from "./pool/alley-evasion.js";
@@ -1776,6 +1777,7 @@ import _poolBarTheDoor from "./pool/bar-the-door.js";
 import _poolBarTheGate from "./pool/bar-the-gate.js";
 import _poolBaradDur from "./pool/barad-dur.js";
 import _poolBaralAndKariZev from "./pool/baral-and-kari-zev.js";
+import _poolBaralChiefOfCompliance from "./pool/baral-chief-of-compliance.js";
 import _poolBaralsExpertise from "./pool/barals-expertise.js";
 import _poolBarbarianBully from "./pool/barbarian-bully.js";
 import _poolBarbarianGeneral from "./pool/barbarian-general.js";
@@ -6436,6 +6438,7 @@ import _poolDoubleVision from "./pool/double-vision.js";
 import _poolDoublecast from "./pool/doublecast.js";
 import _poolDoublingSeason from "./pool/doubling-season.js";
 import _poolDoubtlessOne from "./pool/doubtless-one.js";
+import _poolDourPortMage from "./pool/dour-port-mage.js";
 import _poolDouseInGloom from "./pool/douse-in-gloom.js";
 import _poolDouse from "./pool/douse.js";
 import _poolDouserOfLights from "./pool/douser-of-lights.js";
@@ -7013,6 +7016,7 @@ import _poolEchoOfDusk from "./pool/echo-of-dusk.js";
 import _poolEchoPerceptiveProdigy from "./pool/echo-perceptive-prodigy.js";
 import _poolEchoStorm from "./pool/echo-storm.js";
 import _poolEchoTracer from "./pool/echo-tracer.js";
+import _poolEchoesOfEternity from "./pool/echoes-of-eternity.js";
 import _poolEchoesOfTheKinTree from "./pool/echoes-of-the-kin-tree.js";
 import _poolEchoingAssault from "./pool/echoing-assault.js";
 import _poolEchoingCalm from "./pool/echoing-calm.js";
@@ -14376,6 +14380,7 @@ import _poolLukeCageHeroForHire from "./pool/luke-cage-hero-for-hire.js";
 import _poolLukeCagePowerMan from "./pool/luke-cage-power-man.js";
 import _poolLukkaBoundToRuin from "./pool/lukka-bound-to-ruin.js";
 import _poolLull from "./pool/lull.js";
+import _poolLullmageMentor from "./pool/lullmage-mentor.js";
 import _poolLullmagesDomination from "./pool/lullmages-domination.js";
 import _poolLullmagesFamiliar from "./pool/lullmages-familiar.js";
 import _poolLuluLoyalHollyphant from "./pool/lulu-loyal-hollyphant.js";
@@ -15967,6 +15972,7 @@ import _poolMultaniYavimayasAvatar from "./pool/multani-yavimayas-avatar.js";
 import _poolMultanisAcolyte from "./pool/multanis-acolyte.js";
 import _poolMultanisDecree from "./pool/multanis-decree.js";
 import _poolMultanisHarmony from "./pool/multanis-harmony.js";
+import _poolMultanisPresence from "./pool/multanis-presence.js";
 import _poolMulticlassBaldric from "./pool/multiclass-baldric.js";
 import _poolMultiformWonder from "./pool/multiform-wonder.js";
 import _poolMultiplyByZero from "./pool/multiply-by-zero.js";
@@ -16313,6 +16319,7 @@ import _poolNeedletoothPack from "./pool/needletooth-pack.js";
 import _poolNeedletoothRaptor from "./pool/needletooth-raptor.js";
 import _poolNeedlevergePathway from "./pool/needleverge-pathway.js";
 import _poolNefCropEntangler from "./pool/nef-crop-entangler.js";
+import _poolNefariousImp from "./pool/nefarious-imp.js";
 import _poolNefaroxOverlordOfGrixis from "./pool/nefarox-overlord-of-grixis.js";
 import _poolNefashu from "./pool/nefashu.js";
 import _poolNegate from "./pool/negate.js";
@@ -29840,6 +29847,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAllOfHistoryAllAtOnce,
   _poolAllSunsDawn,
   _poolAllThatGlitters,
+  _poolAllWillBeOne,
   _poolAllay,
   _poolAlleyAssailant,
   _poolAlleyEvasion,
@@ -31067,6 +31075,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBarTheGate,
   _poolBaradDur,
   _poolBaralAndKariZev,
+  _poolBaralChiefOfCompliance,
   _poolBaralsExpertise,
   _poolBarbarianBully,
   _poolBarbarianGeneral,
@@ -35727,6 +35736,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDoublecast,
   _poolDoublingSeason,
   _poolDoubtlessOne,
+  _poolDourPortMage,
   _poolDouseInGloom,
   _poolDouse,
   _poolDouserOfLights,
@@ -36304,6 +36314,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolEchoPerceptiveProdigy,
   _poolEchoStorm,
   _poolEchoTracer,
+  _poolEchoesOfEternity,
   _poolEchoesOfTheKinTree,
   _poolEchoingAssault,
   _poolEchoingCalm,
@@ -43667,6 +43678,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLukeCagePowerMan,
   _poolLukkaBoundToRuin,
   _poolLull,
+  _poolLullmageMentor,
   _poolLullmagesDomination,
   _poolLullmagesFamiliar,
   _poolLuluLoyalHollyphant,
@@ -45258,6 +45270,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMultanisAcolyte,
   _poolMultanisDecree,
   _poolMultanisHarmony,
+  _poolMultanisPresence,
   _poolMulticlassBaldric,
   _poolMultiformWonder,
   _poolMultiplyByZero,
@@ -45604,6 +45617,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolNeedletoothRaptor,
   _poolNeedlevergePathway,
   _poolNefCropEntangler,
+  _poolNefariousImp,
   _poolNefaroxOverlordOfGrixis,
   _poolNefashu,
   _poolNegate,
@@ -59144,6 +59158,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/all-of-history-all-at-once": _poolAllOfHistoryAllAtOnce,
   "pool/all-suns-dawn": _poolAllSunsDawn,
   "pool/all-that-glitters": _poolAllThatGlitters,
+  "pool/all-will-be-one": _poolAllWillBeOne,
   "pool/allay": _poolAllay,
   "pool/alley-assailant": _poolAlleyAssailant,
   "pool/alley-evasion": _poolAlleyEvasion,
@@ -60371,6 +60386,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/bar-the-gate": _poolBarTheGate,
   "pool/barad-dur": _poolBaradDur,
   "pool/baral-and-kari-zev": _poolBaralAndKariZev,
+  "pool/baral-chief-of-compliance": _poolBaralChiefOfCompliance,
   "pool/barals-expertise": _poolBaralsExpertise,
   "pool/barbarian-bully": _poolBarbarianBully,
   "pool/barbarian-general": _poolBarbarianGeneral,
@@ -65031,6 +65047,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/doublecast": _poolDoublecast,
   "pool/doubling-season": _poolDoublingSeason,
   "pool/doubtless-one": _poolDoubtlessOne,
+  "pool/dour-port-mage": _poolDourPortMage,
   "pool/douse-in-gloom": _poolDouseInGloom,
   "pool/douse": _poolDouse,
   "pool/douser-of-lights": _poolDouserOfLights,
@@ -65608,6 +65625,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/echo-perceptive-prodigy": _poolEchoPerceptiveProdigy,
   "pool/echo-storm": _poolEchoStorm,
   "pool/echo-tracer": _poolEchoTracer,
+  "pool/echoes-of-eternity": _poolEchoesOfEternity,
   "pool/echoes-of-the-kin-tree": _poolEchoesOfTheKinTree,
   "pool/echoing-assault": _poolEchoingAssault,
   "pool/echoing-calm": _poolEchoingCalm,
@@ -72971,6 +72989,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/luke-cage-power-man": _poolLukeCagePowerMan,
   "pool/lukka-bound-to-ruin": _poolLukkaBoundToRuin,
   "pool/lull": _poolLull,
+  "pool/lullmage-mentor": _poolLullmageMentor,
   "pool/lullmages-domination": _poolLullmagesDomination,
   "pool/lullmages-familiar": _poolLullmagesFamiliar,
   "pool/lulu-loyal-hollyphant": _poolLuluLoyalHollyphant,
@@ -74562,6 +74581,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/multanis-acolyte": _poolMultanisAcolyte,
   "pool/multanis-decree": _poolMultanisDecree,
   "pool/multanis-harmony": _poolMultanisHarmony,
+  "pool/multanis-presence": _poolMultanisPresence,
   "pool/multiclass-baldric": _poolMulticlassBaldric,
   "pool/multiform-wonder": _poolMultiformWonder,
   "pool/multiply-by-zero": _poolMultiplyByZero,
@@ -74908,6 +74928,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/needletooth-raptor": _poolNeedletoothRaptor,
   "pool/needleverge-pathway": _poolNeedlevergePathway,
   "pool/nef-crop-entangler": _poolNefCropEntangler,
+  "pool/nefarious-imp": _poolNefariousImp,
   "pool/nefarox-overlord-of-grixis": _poolNefaroxOverlordOfGrixis,
   "pool/nefashu": _poolNefashu,
   "pool/negate": _poolNegate,

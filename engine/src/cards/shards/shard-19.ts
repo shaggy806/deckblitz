@@ -230,6 +230,7 @@ import _poolDiversionSpecialist from "../pool/diversion-specialist.js";
 import _poolDivineRetribution from "../pool/divine-retribution.js";
 import _poolDivinerOfVictory from "../pool/diviner-of-victory.js";
 import _poolDonLeoProblemSolvers from "../pool/don-leo-problem-solvers.js";
+import _poolDourPortMage from "../pool/dour-port-mage.js";
 import _poolDraconianCylix from "../pool/draconian-cylix.js";
 import _poolDragonScarredBear from "../pool/dragon-scarred-bear.js";
 import _poolDramaticFinale from "../pool/dramatic-finale.js";
@@ -1196,6 +1197,7 @@ const shard: CardShard = {
     _poolDivineRetribution,
     _poolDivinerOfVictory,
     _poolDonLeoProblemSolvers,
+    _poolDourPortMage,
     _poolDraconianCylix,
     _poolDragonScarredBear,
     _poolDramaticFinale,
