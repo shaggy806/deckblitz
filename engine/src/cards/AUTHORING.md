@@ -6648,7 +6648,7 @@ clause (section 9):
   `redirect: "self" | "attached" | "recipient-controller"` deals all of it there instead (Palisade Giant, Pariah, Treacherous Link — rule 614.9,
   once per event, 614.5); `preventAmount: 1` (Guardian Seraph, per source, 615.10), `preventAllBut: 1` (Hyperion), `preventHalf: "up"` (Gisela),
   `halve: "down"` (Ghosts of the Innocent — a replacement, so unpreventable damage is still halved), `ifAtMost: 3` with `prevent` (Callous Giant).
-  `then` runs with the damage's source as `"trigger-object"` (Swans of Bryn Argoll's "that source's controller").
+  `then` runs with the damage's source as `"trigger-object"` (Swans of Bryn Argoll's "that source's controller") and the one it would have been dealt to as `"trigger-recipient"` (Vigor's "put a +1/+1 counter on that creature for each 1 damage prevented this way": `add-counter { target: "trigger-recipient", amount: "x" }`, `perEvent` for one follow-up per recipient over a simultaneous event).
   With `prevent` and `then`, `"x"` is the damage actually prevented — none when it can't be (Swans' "prevented this way"); `thenCountsUnprevented: true`
   makes it the damage either way (Jared Carthalion, True Heir's ruling: unpreventable damage is dealt and still puts "that many" counters on — rule 615.12).
   (`fromSelf: true` — only damage this permanent deals: Wolverine's "double all damage Wolverine would deal")

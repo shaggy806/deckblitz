@@ -742,7 +742,9 @@ export interface LifeLossReplacement {
  * every `plus`, then the first `prevent` that applies, then prevention
  * shields — where rule 616.1 would let the affected player order them.
  * A `prevent` stops all of it, and `then` is applied as this permanent's
- * controller's effect with `"x"` the damage prevented.
+ * controller's effect with `"x"` the damage prevented, `"trigger-object"` the
+ * damage's source and `"trigger-recipient"` the one it would have been dealt
+ * to (Vigor's "put a +1/+1 counter on that creature").
  */
 export interface DamageMultiplierReplacement {
   readonly event: "would-deal-damage";

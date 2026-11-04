@@ -1488,6 +1488,8 @@ interface OwedPreventFollowUp {
   readonly controller: PlayerId;
   readonly then: EffectSpec;
   readonly to: string;
+  /** The damage's recipient: `then`'s "that creature" (Vigor). */
+  readonly recipient: NonNullable<LastKnownRefs["recipient"]>;
   amount: number;
 }
 
@@ -12565,8 +12567,8 @@ export class Game {
       this.shieldCountersSpent = null;
       this.preventedThisEvent = null;
     }
-    for (const { by, controller, then, amount } of owed) {
-      const ctx = this.makeResolutionContext(by, controller, [], amount);
+    for (const { by, controller, then, amount, recipient } of owed) {
+      const ctx = this.makeResolutionContext(by, controller, [], amount, 0, undefined, 1, 0, [], { recipient });
       // One already asking (Khârn the Betrayer's opponent of your choice):
       // the next waits for its answer.
       if (this.decisionOutstanding()) ctx.resumeAfterDecisions(then);
@@ -51253,15 +51255,21 @@ export class Game {
         if (prevented > 0) this.emit({ type: "damage-prevented", source, target, amount: prevented });
         const thatMany = outcome.preventedAll.thenAmount ?? prevented;
         const owed = this.preventedThisEvent;
+        // The one the damage would have been dealt to is `then`'s "that
+        // creature" (`"trigger-recipient"` — Vigor), this stint of it (400.7).
+        const recipient: NonNullable<LastKnownRefs["recipient"]> = {
+          target,
+          ...(target.kind === "object" ? { zoneChangeCount: this.state.objects[target.object]?.zoneChangeCount ?? 0 } : {}),
+        };
         if (step.then !== undefined && step.perEvent === true && owed !== null) {
           // Part of a simultaneous event: once for all of it, after it.
           const to = target.kind === "player" ? `player:${target.player}` : `object:${target.object}`;
           const same = owed.find((o) => o.by === step.by && o.then === step.then && o.to === to);
           if (same !== undefined) same.amount += thatMany;
-          else owed.push({ by: step.by, controller: step.controller, then: step.then, to, amount: thatMany });
+          else owed.push({ by: step.by, controller: step.controller, then: step.then, to, recipient, amount: thatMany });
         } else if (step.then !== undefined) {
           // The damage's source is "that source" (Swans of Bryn Argoll).
-          const ctx = this.makeResolutionContext(step.by, step.controller, [], thatMany, 0, source);
+          const ctx = this.makeResolutionContext(step.by, step.controller, [], thatMany, 0, source, 1, 0, [], { recipient });
           // A sweep's earlier one still asking (Khârn the Betrayer): after it.
           if (this.decisionOutstanding()) ctx.resumeAfterDecisions(step.then);
           else applyEffectSpec(step.then, ctx);
