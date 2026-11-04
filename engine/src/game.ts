@@ -10150,18 +10150,29 @@ export class Game {
     // — Tempt with Immortality) onto the battlefield while the players'
     // choices are held (Show and Tell's "each player may put …") waits there
     // until every one has chosen, and
-    // then they all enter at once (`releaseHeldChoices`).
+    // then they all enter at once (`releaseHeldChoices`). So does a card a
+    // library search found (Tempt with Discovery), still in that library, and
+    // the shuffle waits with it, found or not.
     const held = this.state.heldChoices;
+    const shuffles = awaiting.leftover === "shuffle";
+    const searchFind =
+      (shuffles || awaiting.shufflesLater === true) &&
+      awaiting.restDestination === undefined &&
+      awaiting.enterAttachedTo === undefined &&
+      awaiting.enterAlong === undefined &&
+      awaiting.reveal !== true;
     if (
       held !== undefined &&
       awaiting.priorityTo === undefined &&
       awaiting.destination === "battlefield" &&
-      chosen.length > 0 &&
-      chosen.every((id) => this.state.objects[id]?.zone === "hand" || this.state.objects[id]?.zone === "graveyard") &&
+      (chosen.length > 0 || (searchFind && shuffles)) &&
+      chosen.every((id) => {
+        const from = this.state.objects[id]?.zone;
+        return from === "hand" || from === "graveyard" || (searchFind && from === "library");
+      }) &&
       awaiting.then === undefined &&
       awaiting.secondPick === undefined &&
       awaiting.alsoTaken === undefined &&
-      awaiting.enterTapped !== true &&
       awaiting.enterWithCounters === undefined &&
       awaiting.enterAttacking === undefined &&
       awaiting.enterAs?.faceDown === undefined
@@ -10170,13 +10181,19 @@ export class Game {
         ...held,
         entries: [
           ...(held.entries ?? []),
-          {
-            player,
-            objects: [...chosen],
-            ...(awaiting.enterUnder !== undefined ? { under: awaiting.enterUnder } : {}),
-            ...(awaiting.enterAs !== undefined ? { enterAs: awaiting.enterAs } : {}),
-          },
+          ...(chosen.length === 0
+            ? []
+            : [
+                {
+                  player,
+                  objects: [...chosen],
+                  ...(awaiting.enterUnder !== undefined ? { under: awaiting.enterUnder } : {}),
+                  ...(awaiting.enterAs !== undefined ? { enterAs: awaiting.enterAs } : {}),
+                  ...(awaiting.enterTapped === true ? { tapped: true as const } : {}),
+                },
+              ]),
         ],
+        ...(shuffles ? { shuffles: [...(held.shuffles ?? []), awaiting.forPlayer ?? player] } : {}),
       };
       this.emit({ type: "cards-chosen-from-zone", player, objects: [...chosen] });
       this.state.awaiting = null;
@@ -26334,7 +26351,7 @@ export class Game {
     if (entry.kind === "spell") this.enterPermanentSpell(entry.object);
     else if (entry.kind === "land") this.finishLandPlay(entry);
     else if (entry.kind === "exiled-return") this.returnExiledCards(entry.objects);
-    else if (entry.kind === "held-entries") this.enterHeldEntries(entry.objects, entry.under, entry.withCounters, entry.enterAs);
+    else if (entry.kind === "held-entries") this.enterHeldEntries(entry.objects, entry.under, entry.withCounters, entry.enterAs, entry.tapped, entry.shuffles);
     else if (entry.kind === "token-copies") this.enterTokenCopies(entry);
     else this.finishZoneChoice(entry);
   }
@@ -34759,6 +34776,13 @@ export class Game {
       },
       choicesHeld: () => this.state.heldChoices !== undefined,
       releaseHeldChoices: () => this.releaseHeldChoices(),
+      shuffleSearchers: () => {
+        const owed = this.state.searchShufflesOwed ?? [];
+        delete this.state.searchShufflesOwed;
+        for (const player of this.apnapOrder()) {
+          if (owed.includes(player) && this.state.players[player]?.hasLost === false) this.shuffleLibraryOf(player);
+        }
+      },
       tookEachPlayerMay: (player, since) => this.tookEachPlayerMay(source, player, since),
       sacrificedForEachPlayerMay: (player, since) => {
         let answered = false;
@@ -37239,6 +37263,11 @@ export class Game {
     // still counts). One that can't happen didn't (Archivist of Oghma).
     if (library) this.emit({ type: "library-searched", player, owner });
     const shuffles = library || (forbidden && zones === "library" && !outsideOnly);
+    // "Then each player who searched a library this way shuffles": owed, once.
+    const shufflesLater = shuffles && more?.shufflesLater === true;
+    if (shufflesLater && this.state.searchShufflesOwed?.includes(owner) !== true) {
+      this.state.searchShufflesOwed = [...(this.state.searchShufflesOwed ?? []), owner];
+    }
     const inGraveyard = searched.graveyard && !outsideOnly ? matching("graveyard") : [];
     const inHand = searched.hand && !outsideOnly ? matching("hand") : [];
     const fits = (id: ObjectId): boolean => matchesFilter(this.state, this.registry, id, filter, { you: player, x });
@@ -37336,7 +37365,8 @@ export class Game {
       // "If you search your library this way, shuffle" — "then that player
       // shuffles": the library's owner (rule 701.24a). "And exile the rest"
       // (Doomsday): gone, with no shuffle.
-      leftover: more?.exileRest === true ? "exile" : shuffles ? "shuffle" : "stay",
+      leftover: more?.exileRest === true ? "exile" : shuffles && !shufflesLater ? "shuffle" : "stay",
+      ...(shufflesLater ? { shufflesLater: true as const } : {}),
       ...(more?.inAnyOrder === true && destination === "library-top" ? { findsInAnyOrder: true } : {}),
       // "…with an additional +1/+1 counter on it" (Neoform).
       ...(more?.withCounters !== undefined && destination === "battlefield"
@@ -49695,7 +49725,10 @@ export class Game {
     for (const entry of held.entries ?? []) {
       if (entry.enterAs !== undefined) for (const id of entry.objects) enterAs[id] = entry.enterAs;
     }
-    if (entering.length > 0) this.enterHeldEntries(entering, under, {}, enterAs);
+    const tapped = (held.entries ?? []).flatMap(({ objects, tapped }) => (tapped === true ? objects : []));
+    if (entering.length > 0 || held.shuffles !== undefined) {
+      this.enterHeldEntries(entering, under, {}, enterAs, tapped, held.shuffles ?? []);
+    }
   }
 
   /**
@@ -49706,7 +49739,8 @@ export class Game {
    * (`PendingEntry`) while one is asked, then all of them at once, each
    * under its owner's control, or the effect's controller's where it says so
    * (`under` — Dredge the Mire). A card that has left its owner's hand (or
-   * graveyard — Tempt with Immortality's returns) since stays where it is.
+   * graveyard — Tempt with Immortality's returns — or the library a search
+   * found it in) since stays where it is. Those who searched then shuffle.
    */
   private enterHeldEntries(
     ids: readonly ObjectId[],
@@ -49714,8 +49748,15 @@ export class Game {
     withCounters: Readonly<Record<string, { readonly kind: string; readonly amount: number }>> = {},
     /** What a card enters as (Ghouls' Night Out's "they're black Zombies"). */
     enterAs: Readonly<Record<string, EnterTypes>> = {},
+    /** The cards that enter tapped (New Frontiers). */
+    tapped: readonly ObjectId[] = [],
+    /** The libraries to shuffle after (`heldChoices.shuffles`). */
+    shuffles: readonly PlayerId[] = [],
   ): void {
-    const entering = ids.filter((id) => this.state.objects[id]?.zone === "hand" || this.state.objects[id]?.zone === "graveyard");
+    const entering = ids.filter((id) => {
+      const from = this.state.objects[id]?.zone;
+      return from === "hand" || from === "graveyard" || from === "library";
+    });
     for (const id of entering) {
       if (this.askEnterChoice(id, under[id] ?? this.state.objects[id].owner)) {
         this.state.suspendedResolutions.push({
@@ -49726,6 +49767,8 @@ export class Game {
             ...(Object.keys(under).length > 0 ? { under } : {}),
             ...(Object.keys(withCounters).length > 0 ? { withCounters } : {}),
             ...(Object.keys(enterAs).length > 0 ? { enterAs } : {}),
+            ...(tapped.length > 0 ? { tapped } : {}),
+            ...(shuffles.length > 0 ? { shuffles } : {}),
           },
         });
         return;
@@ -49735,9 +49778,12 @@ export class Game {
     // one or more cards leave a graveyard" sees it once.
     this.withGraveyardLeaveBatch(() => {
       this.withEnterBatch(() => {
-        for (const id of entering) this.enterHeldEntry(id, under[id], withCounters[id], enterAs[id]);
+        for (const id of entering) this.enterHeldEntry(id, under[id], withCounters[id], enterAs[id], tapped.includes(id));
       });
     });
+    for (const player of shuffles) {
+      if (this.state.players[player]?.hasLost === false) this.shuffleLibraryOf(player);
+    }
   }
 
   /** One card of a simultaneous entry an instruction holds together (its
@@ -49748,9 +49794,10 @@ export class Game {
     to?: PlayerId,
     counters?: { readonly kind: string; readonly amount: number },
     enterAs?: EnterTypes,
+    tapped = false,
   ): void {
     const under = to !== undefined && to !== this.state.objects[id]?.owner ? to : undefined;
-    if (!this.moveObject(id, "battlefield", { ...(under !== undefined ? { under } : {}), ...enterTypesEntry(enterAs) })) return;
+    if (!this.moveObject(id, "battlefield", { ...(tapped ? { tapped } : {}), ...(under !== undefined ? { under } : {}), ...enterTypesEntry(enterAs) })) return;
     // Kept there by a control effect, as a reanimation "under your control"
     // is (see `putOntoBattlefieldByEffect`).
     const entered = this.state.objects[id];

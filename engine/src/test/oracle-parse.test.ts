@@ -24,6 +24,36 @@ import { parseEffect, parseFace, parseTrigger, parseCost, parseSentence, parseTy
 // @ts-expect-error — as above.
 import { checkPool } from "../../scripts/oracle-parse-check.mjs";
 
+describe("a library search by several players together (rule 101.4)", () => {
+  const LAND = { type: "land", supertype: "basic" };
+  const read = (oracle_text: string) =>
+    parseFace({ name: "Test Card", type_line: "Sorcery", oracle_text, mana_cost: "{1}", colors: [] }).effect;
+  it("reads 'each player searches' as nobody asked", () => {
+    expect(read("Each player searches their library for a basic land card, puts it onto the battlefield, then shuffles.")).toEqual({
+      kind: "for-each-player",
+      who: "each-player",
+      choicesHeld: true,
+      effect: { kind: "search-library", who: "that-player", filter: LAND, destination: "battlefield", min: 0, max: 1 },
+    });
+  });
+  it("reads 'each player may search' with up to two", () => {
+    expect(read("Each player may search their library for up to two basic land cards, put them onto the battlefield, then shuffle.")).toEqual({
+      kind: "each-player-may",
+      who: "each-player",
+      prompt: "Search your library for up to two basic land cards?",
+      effect: { kind: "search-library", filter: LAND, destination: "battlefield", min: 0, max: 2 },
+    });
+  });
+  it("reads tapped, of each opponent", () => {
+    expect(read("Each opponent may search their library for a basic land card, put it onto the battlefield tapped, then shuffle.")).toEqual({
+      kind: "each-player-may",
+      who: "each-opponent",
+      prompt: "Search your library for a basic land card?",
+      effect: { kind: "search-library", filter: LAND, destination: "battlefield", enterTapped: true, min: 0, max: 1 },
+    });
+  });
+});
+
 describe("harness and ∞ (rules 701.64, 702.186)", () => {
   const read = (oracle_text: string) =>
     parseFace({ name: "The Test Stone", type_line: "Legendary Artifact — Infinity Stone", oracle_text, mana_cost: "{1}", colors: [] });

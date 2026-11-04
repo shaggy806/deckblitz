@@ -10948,4 +10948,22 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     'The Soul Stone: harnessed, it returns a creature each upkeep',
     board({ you: { bf: ['The Soul Stone', 'Grizzly Bears', 'Swamp*7'], gy: ['Hill Giant'] } }),
   ),
+  preset(
+    'Tempt with Discovery: the opponents say first, then search together',
+    board({
+      you: { bf: ['Forest*4'], hand: ['Tempt with Discovery'], lib: ['Temple Garden', 'Command Tower', 'Reliquary Tower'] },
+      opp: [
+        { human: true, lib: ['Breeding Pool'] },
+        { human: true, lib: ['Steam Vents'] },
+        { human: true, lib: ['Watery Grave'] },
+      ],
+    }),
+  ),
+  preset(
+    'Field of Ruin: everyone searches, nobody is asked',
+    board({
+      you: { bf: ['Field of Ruin', 'Forest*2'], lib: ['Forest'] },
+      opp: { human: true, bf: ['Command Tower'], lib: ['Island'] },
+    }),
+  ),
 ]

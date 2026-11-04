@@ -7304,3 +7304,13 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 - **Do:** Activate the Stone's harness ability, exiling Grizzly Bears. Pass until your next upkeep.
 - **Expect:** The Stone carries a "harnessed" chip. At your upkeep its trigger goes on the stack and Hill Giant, the only creature card in your graveyard, comes back.
+
+### Tempt with Discovery: the opponents say first, then search together
+
+- **Do:** Cast it and find a land. As Bob, say yes; as Carol, no; as Dave, yes. Bob and Dave each find their shock land, and Dave's search comes up with Bob's land not yet out.
+- **Expect:** Both yes-or-no answers come before either search. Bob's and Dave's lands enter together once Dave has found his, each asking to pay 2 life. You then find two more lands.
+
+### Field of Ruin: everyone searches, nobody is asked
+
+- **Do:** Activate it on Bob's Command Tower. Find a basic land as yourself, then as Bob.
+- **Expect:** Command Tower and Field of Ruin are in graveyards. Neither player is asked whether to search; only basic lands are offered, and each finds one.

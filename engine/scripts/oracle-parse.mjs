@@ -4255,6 +4255,31 @@ export function parseSentence(sentence, ctx) {
   if (re("proliferate").test(s)) return { kind: "proliferate" };
   // "Harness ~" (rule 701.64a): the designation an "∞ — " line reads.
   if (re("harness ~").test(s)) return { kind: "harness" };
+  // "Each player searches their library for up to two basic land cards, puts
+  // them onto the battlefield, then shuffles" (Field of Ruin, Avatar of
+  // Growth), and "each opponent may search …, put it onto the battlefield,
+  // then shuffle" (Veteran Explorer, Old-Growth Dryads): together (rule 101.4).
+  if (
+    (m =
+      /^each (player searches|player may search|opponent may search) their library for (up to two|an?) (.+?) cards?, (?:puts?) (it|them) onto the battlefield( tapped)?, then shuffles?\.?$/i.exec(
+        s,
+      ))
+  ) {
+    const filter = parseTypePhrase(m[3], { cards: true });
+    const two = /^up to two$/i.test(m[2]);
+    if (filter !== null && two === /^them$/i.test(m[4])) {
+      const search = { kind: "search-library", filter, destination: "battlefield", min: 0, max: two ? 2 : 1, ...(m[5] ? { enterTapped: true } : {}) };
+      if (/searches$/i.test(m[1])) {
+        return { kind: "for-each-player", who: "each-player", choicesHeld: true, effect: { ...search, who: "that-player" } };
+      }
+      return {
+        kind: "each-player-may",
+        who: /^opponent/i.test(m[1]) ? "each-opponent" : "each-player",
+        prompt: `Search your library for ${two ? "up to two" : m[2].toLowerCase()} ${m[3]} card${two ? "s" : ""}?`,
+        effect: search,
+      };
+    }
+  }
   // "Double the number of each kind of counter on target creature" (Vorel of
   // the Hull Clade).
   if ((m = re(`double the number of each kind of counter on (${TARGET})`).exec(s))) {

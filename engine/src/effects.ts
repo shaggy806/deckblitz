@@ -168,6 +168,8 @@ export interface SearchMore {
   readonly faceUpExile?: true;
   /** Its `exileRest`. */
   readonly exileRest?: true;
+  /** Its `shufflesLater`. */
+  readonly shufflesLater?: true;
   /** Its `inAnyOrder`. */
   readonly inAnyOrder?: true;
   /** Its `upTo`. */
@@ -1559,6 +1561,8 @@ export interface EachPlayerMayProgress {
   readonly asked: readonly PlayerId[];
   /** Still to ask. */
   readonly toAsk: readonly PlayerId[];
+  /** A search, once everyone has answered: who is still to search. */
+  readonly searching?: readonly PlayerId[];
   /** Once everyone has answered: the follow-ups still to apply. */
   readonly results?: readonly { readonly player: PlayerId; readonly did: boolean }[];
 }
@@ -7624,6 +7628,10 @@ export type EffectSpec =
        * to four target cards from their graveyard into their library"
        * (Witness the Future) — the effect's controller's when absent. */
       readonly target?: number;
+      /** "Then each player who searched a library this way shuffles" (Tempt
+       * with Discovery), each once, however many times they searched: whoever
+       * a `search-library`'s `shufflesLater` left owing a shuffle. */
+      readonly searchers?: true;
     }
   | {
       /** "You may play an additional land this turn" (Explore) — `amount`
@@ -8139,7 +8147,10 @@ export type EffectSpec =
        * theirs, and only then do the chosen cards enter, all at once (rule
        * 101.4, the ruling). A card already chosen can't be chosen again:
        * Rejoin the Fight's "that hasn't been chosen". For a `look-and-choose`
-       * onto the battlefield from a hand or a graveyard. */
+       * onto the battlefield from a hand or a graveyard, or a `search-library`
+       * of `who: "that-player"` onto the battlefield: "**each player searches**
+       * their library for a basic land card, puts it onto the battlefield,
+       * then shuffles" (Field of Ruin), the shuffles after the entries. */
       readonly choicesHeld?: true;
       /** Set by the engine on the copy it parks when one player's `effect`
        * stops to ask something (myriad's "you may"): the players still to
@@ -9418,6 +9429,15 @@ export type EffectSpec =
        * **opponent** who didn't draws a card" is `who: "each-player"`,
        * `resultsFor: "each-opponent"`. A player never asked (nothing they
        * could take) didn't.
+       *
+       * An `effect` that is a `search-library` is a search for everyone
+       * together (rule 101.4 — Tempt with Discovery's ruling): each is asked
+       * whether they will, knowing the answers before theirs; only then does
+       * each who said yes search, in turn order; what they find waits in their
+       * libraries until the last has searched (`GameState.heldChoices`), then
+       * enters at once, and they shuffle. So nobody sees a find before
+       * choosing theirs. A find bound for anywhere but the battlefield goes
+       * as it's found.
        */
       readonly kind: "each-player-may";
       /** A scope, or `{ controllerOfTarget }` — "**that permanent's
@@ -10103,6 +10123,15 @@ export type EffectSpec =
        * the card says nothing of shuffling, and the rest of it is gone.
        */
       readonly exileRest?: true;
+      /**
+       * The library isn't shuffled now: "search your library … . Each opponent
+       * may search … . For each opponent who searches a library this way,
+       * search your library … . **Then each player who searched a library
+       * this way shuffles**" (Tempt with Discovery). Whoever's it is owes one
+       * shuffle (`GameState.searchShufflesOwed`), which a `shuffle-library` of
+       * `searchers` pays, however many times they searched.
+       */
+      readonly shufflesLater?: true;
       /**
        * With `destination: "library-top"`, "put the chosen cards on top of
        * your library **in any order**" (Doomsday): the order is asked once
@@ -12230,6 +12259,8 @@ export interface EffectApi {
   choicesHeld(): boolean;
   /** Every player has chosen: do what they chose, at once. */
   releaseHeldChoices(): void;
+  /** See the `"shuffle-library"` {@link EffectSpec}'s `searchers`. */
+  shuffleSearchers(): void;
   /** Whether `player` took what an `"each-player-may"` that began at event
    * `since` offered them — their first answer for this source since. */
   tookEachPlayerMay(player: PlayerId, since: number): boolean;
@@ -13415,8 +13446,13 @@ function applyEachPlayerMay(
   // hand, gain life — is only asked about, then done for everyone who said
   // yes at once (rule 101.4): a later player doesn't see an earlier one's
   // discarded hand or drawn cards before choosing (Will of the Jeskai).
+  // So is a search, though it asks more of them once everyone has said: that
+  // part runs below, from `searching`.
+  const search =
+    spec.effect?.kind === "search-library" && spec.options === undefined && spec.choices === undefined ? spec.effect : undefined;
   const deferred =
-    spec.effect !== undefined && spec.options === undefined && spec.choices === undefined && asksNothing(spec.effect);
+    search !== undefined ||
+    (spec.effect !== undefined && spec.options === undefined && spec.choices === undefined && asksNothing(spec.effect));
   // One question at a time, each answered before the next is asked, and
   // then what they chose happens at once (rule 101.4): a discard or a
   // sacrifice a player chooses waits, the discarded cards hidden in hand
@@ -13439,7 +13475,7 @@ function applyEachPlayerMay(
   if (spec.progress?.results === undefined) {
     const parked = ctx.parkedCount();
     const pendingBefore = ctx.decisionPending();
-    ctx.releaseHeldChoices();
+    if (spec.progress?.searching === undefined) ctx.releaseHeldChoices();
     // A card entering from a hand that stops to ask its "as this enters"
     // choice (Show and Tell's Clone): the follow-ups wait for it. Resumed,
     // there's nothing held left to release.
@@ -13447,7 +13483,32 @@ function applyEachPlayerMay(
       park({ since, asked, toAsk: [] }, parked);
       return;
     }
-    if (deferred && spec.effect !== undefined) {
+    if (search !== undefined) {
+      // Everyone has said. Now they search, in turn order, with what they
+      // find held in their libraries until the last has searched.
+      let searching = spec.progress?.searching ?? ctx.apnap(asked.filter((player) => ctx.tookEachPlayerMay(player, since)));
+      if (spec.progress?.searching === undefined && searching.length > 0) ctx.holdChoices();
+      while (searching.length > 0) {
+        const player = searching[0];
+        searching = searching.slice(1);
+        const before = ctx.parkedCount();
+        const waiting = ctx.decisionPending();
+        ctx.applyEachPlayerMayAs(player, search);
+        if (!waiting && ctx.decisionPending()) {
+          park({ since, asked, toAsk: [], searching }, before);
+          return;
+        }
+      }
+      if (ctx.choicesHeld()) {
+        const before = ctx.parkedCount();
+        const waiting = ctx.decisionPending();
+        ctx.releaseHeldChoices();
+        if (!waiting && ctx.decisionPending()) {
+          park({ since, asked, toAsk: [], searching: [] }, before);
+          return;
+        }
+      }
+    } else if (deferred && spec.effect !== undefined) {
       const effect = spec.effect;
       const yes = asked.filter((player) => ctx.tookEachPlayerMay(player, since));
       ctx.simultaneously(() => {
@@ -18660,6 +18721,10 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       ctx.additionalLandDrops(spec.amount);
       return;
     case "shuffle-library": {
+      if (spec.searchers === true) {
+        ctx.shuffleSearchers();
+        return;
+      }
       if (spec.target === undefined) {
         ctx.shuffleLibrary();
         return;
@@ -20009,6 +20074,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           ...(spec.outside !== undefined ? { outside: spec.outside } : {}),
           ...(spec.faceUpExile === true ? { faceUpExile: true } : {}),
           ...(spec.exileRest === true ? { exileRest: true } : {}),
+          ...(spec.shufflesLater === true ? { shufflesLater: true } : {}),
           ...(spec.inAnyOrder === true ? { inAnyOrder: true } : {}),
           ...(spec.upTo === true ? { upTo: true } : {}),
           ...(spec.alongExiledThisWay === true ? { alongExiledThisWay: true } : {}),

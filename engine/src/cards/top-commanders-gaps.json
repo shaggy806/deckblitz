@@ -412,6 +412,8 @@
   "keyword:emerge",
   "condition:source-monstrous",
   "mechanic:harness-infinity",
+  "effect:each-player-may-held-search",
+  "effect:each-player-search",
   "stat:mana-color-spent-condition",
   "static:doesnt-untap-filter",
   "static:doesnt-untap-attached",

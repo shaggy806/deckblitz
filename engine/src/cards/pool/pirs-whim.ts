@@ -15,6 +15,7 @@ export default defineCard({
       {
         kind: "for-each-player",
         who: "each-friend",
+        choicesHeld: true,
         effect: {
           kind: "search-library",
           who: "that-player",

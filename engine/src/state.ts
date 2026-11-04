@@ -3524,6 +3524,10 @@ export type AwaitingDecision =
        * with nothing else found there's nothing to look at or answer, so it's
        * answered for them (`forcedZoneChoice`). */
       readonly searchForbidden?: true;
+      /** A search whose library is shuffled later (`search-library`'s
+       * `shufflesLater`): `leftover` says "stay", but what's chosen is a
+       * search's find, and waits as one while choices are held. */
+      readonly shufflesLater?: true;
       /** Candidates already revealed to `player`, in their original zone order. */
       readonly ids: readonly ObjectId[];
       /** The subset of `ids` that may actually be chosen — narrower than
@@ -5382,6 +5386,10 @@ export type PendingEntry =
       readonly withCounters?: Readonly<Record<string, { readonly kind: string; readonly amount: number }>>;
       /** What a card enters as (Ghouls' Night Out's "they're black Zombies"). */
       readonly enterAs?: Readonly<Record<string, EnterTypes>>;
+      /** The cards that enter tapped (New Frontiers). */
+      readonly tapped?: readonly ObjectId[];
+      /** The libraries to shuffle once they have entered (`heldChoices`). */
+      readonly shuffles?: readonly PlayerId[];
     }
   | {
       /** Token copies an effect is creating, not on the battlefield yet,
@@ -6353,11 +6361,23 @@ export interface GameState {
       readonly objects: readonly ObjectId[];
       readonly under?: PlayerId;
       readonly enterAs?: EnterTypes;
+      /** They enter tapped (New Frontiers). */
+      readonly tapped?: true;
     }[];
     /** Permanents to go back to their owners' hands — `return-to-hand`'s
      * `atRelease`. */
     readonly returns?: readonly ObjectId[];
+    /** The libraries of those who searched together (an `each-player-may`'s
+     * search): shuffled once what they found has entered. */
+    readonly shuffles?: readonly PlayerId[];
   };
+  /**
+   * The players a `search-library`'s `shufflesLater` left owing their library
+   * a shuffle, for a `shuffle-library` of `searchers` to pay (Tempt with
+   * Discovery's "then each player who searched a library this way shuffles").
+   * Absent otherwise.
+   */
+  searchShufflesOwed?: readonly PlayerId[];
   /**
    * A sacrifice *cost* of several permanents being paid (rules 601.2h, 602.2b
    * — Sai, Master Thopterist's "Sacrifice two artifacts", Jarad, Golgari Lich
