@@ -1037,6 +1037,17 @@ export interface GameObject {
     /** With `insteadDone: false`: exile it, not the graveyard (`EnterInstead`'s
      * `exileUnless`). */
     readonly insteadExile?: true;
+    /** How many cards its `AsEntersAction` exiled or returned as it was about to
+     * enter, once that's settled: what its `"done-as-enters"` counters count. */
+    readonly asEntersDone?: number;
+    /** The cards its `AsEntersAction` exiled: linked to it as it enters (rule
+     * 607.2a), for its stint there. */
+    readonly asEntersExiled?: readonly ObjectId[];
+    /** A commander its `AsEntersAction` is returning, waiting on its owner's
+     * choice of the command zone instead (rule 903.9b). */
+    readonly asEntersReturning?: ObjectId;
+    /** The counter kind picked for each card exiled (`counterForEach`). */
+    readonly asEntersCounters?: readonly string[];
     /** How many cards its controller revealed for its amplify as it was
      * about to enter (rule 702.38a — `CardDefinition.amplify`), counted for
      * its +1/+1 counters as it enters. */
@@ -3533,6 +3544,9 @@ export type AwaitingDecision =
        * {@link EnterAttachHost}. An Aura that can't be attached to it stays
        * where it is; `null`, nothing can (the source has left). */
       readonly enterAttachedTo?: EnterAttachHost;
+      /** Cards that enter with this choice's finds, in one event, whatever is
+       * found: a `search-library`'s `alongExiledThisWay`. */
+      readonly enterAlong?: readonly ObjectId[];
       /** …with these types and colours in addition to their own, in place as
        * they enter (a `look-and-choose`'s `enterAs`). */
       readonly enterAs?: EnterTypes;
@@ -3623,6 +3637,9 @@ export type AwaitingDecision =
        * discarded, and choosing none is declining, recorded on it
        * (`enterChoice.insteadDone`). */
       readonly insteadOfEnteringOf?: ObjectId;
+      /** The permanent about to enter whose `AsEntersAction` exiles cards from
+       * a graveyard: what's chosen is exiled now, and linked to it as it enters. */
+      readonly asEntersOf?: ObjectId;
       /** A `discard-chosen`'s `reveals` — "target player reveals three cards
        * from their hand and you choose one of them" (Blackmail): `player`
        * picks which cards of their hand to show (`destination: "reveal"`,
@@ -3774,6 +3791,9 @@ export type AwaitingDecision =
        * as `source` is about to enter (rule 702.98a): the first option takes
        * the counter. */
       readonly unleash?: true;
+      /** The kind of counter it enters with for one card its `AsEntersAction`
+       * exiled (`counterForEach` — Frankenstein's Monster). */
+      readonly asEntersCounter?: true;
       /** A battle's protector, chosen as `source` is about to enter (rule
        * 310.9a) — `options` are the players who may be, and the answer is
        * recorded as its protector (or, with `protectorFor` set, a battle
@@ -4141,6 +4161,10 @@ export type AwaitingDecision =
        * and what's picked is sacrificed now, as one event, before it enters.
        * `then` is unused. */
       readonly insteadOfEntering?: true;
+      /** Set when the choice is what an entering permanent's `AsEntersAction`
+       * returns to its owner's hand: `source` is the permanent about to enter.
+       * `then` is unused. */
+      readonly asEntersReturn?: true;
       /** Set when the choice pays an activated ability's `returnToHand`
        * cost: that ability on the stack, which records what the returned
        * creature was attacking (`LastKnownRefs.returnedAttacking`). */

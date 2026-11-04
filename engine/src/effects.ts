@@ -172,6 +172,8 @@ export interface SearchMore {
   readonly inAnyOrder?: true;
   /** Its `upTo`. */
   readonly upTo?: true;
+  /** Its `alongExiledThisWay`. */
+  readonly alongExiledThisWay?: true;
   /** Its `instead`, its `condition` already read (one that didn't hold is no
    * `instead` at all) and its `under` named. */
   readonly instead?: ResolvedSearchInstead;
@@ -9457,6 +9459,18 @@ export type EffectSpec =
       readonly max: EffectAmount;
       /** Put battlefield-bound cards in tapped (Rampant Growth). */
       readonly enterTapped?: boolean;
+      /**
+       * "Exile up to one target creature you own, then search your library
+       * for a basic land card. **Put both cards onto the battlefield** under
+       * your control, then shuffle" (Sword of Hearth and Home): with
+       * `destination: "battlefield"`, whatever this resolution has exiled and
+       * is still in exile as the same object (rule 400.7) enters with the find,
+       * under the searcher's control, as one event (rule 614.12: each one's "as
+       * this enters" choices first, neither there for the other's), and enters
+       * though nothing is found. One instruction moves both, so a replacement
+       * or a "whenever" sees them together. The library is shuffled after.
+       */
+      readonly alongExiledThisWay?: true;
       /** "…, **reveal it**, …" (Enlightened Tutor, Kodama's Reach): show the
        * find to every player (rule 701.16). Off by default — a plain "search
        * your library for a card" (Vampiric Tutor) reveals nothing. */
@@ -18961,6 +18975,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           ...(spec.exileRest === true ? { exileRest: true } : {}),
           ...(spec.inAnyOrder === true ? { inAnyOrder: true } : {}),
           ...(spec.upTo === true ? { upTo: true } : {}),
+          ...(spec.alongExiledThisWay === true ? { alongExiledThisWay: true } : {}),
           // "…if you control a land named Wastes": read now — nothing between
           // the search and the put could change it. Not holding, every find
           // goes to `destination`.

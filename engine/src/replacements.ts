@@ -101,12 +101,51 @@ export interface EnterInstead {
   readonly exileUnless?: CardFilter;
 }
 
+/**
+ * "As this enters, exile … from your graveyard" (Living Lore), "As this
+ * creature enters, you may return a nonland permanent you control to its
+ * owner's hand" (Rescuer Sphinx): something its controller does as it's about
+ * to enter, part of the replacement (rule 614.1c), so nobody can respond, and
+ * chosen before it moves (rule 614.12). What it enters with is `counters`'
+ * `"done-as-enters"`: how many cards this exiled or returned.
+ */
+export interface AsEntersAction {
+  /**
+   * Cards exiled from a graveyard, and so linked to the permanent for its stint
+   * on the battlefield (rule 607.2a): its "the exiled card" and "cards exiled
+   * with it" (`exiled-with-source`, `exiledWith`). Never itself, nor a card
+   * entering with it.
+   */
+  readonly exile?: {
+    readonly filter: CardFilter;
+    /** `"x"` is the {X} it was cast with (0 otherwise), `"any"` any number. */
+    readonly count: number | "x" | "any";
+    /** "**Up to** X creature cards" (Mimeoplasm, Revered One). */
+    readonly upTo?: true;
+    /** "From **a** graveyard" (Dermotaxi); its controller's by default. */
+    readonly anyGraveyard?: true;
+    /** "If you can't, put this creature into its owner's graveyard instead of
+     * onto the battlefield" (Frankenstein's Monster): with fewer than `count`
+     * there, nothing is exiled and it doesn't enter. */
+    readonly orToGraveyard?: true;
+    /** "For each creature card exiled this way, this creature enters with a
+     * +2/+0, +1/+1, or +0/+2 counter on it" (Frankenstein's Monster): its
+     * controller picks one of these kinds for each. */
+    readonly counterForEach?: readonly string[];
+  };
+  /** "You may return [filter] you control to its owner's hand": up to one,
+   * already on the battlefield under its controller. */
+  readonly returnPermanent?: { readonly filter: CardFilter };
+}
+
 /** As the source permanent enters the battlefield (rule 614.1c). A self-
  * replacement — printed on the card, applies only to it. */
 export interface EntersBattlefieldReplacement {
   readonly event: "enters-battlefield";
   /** See {@link EnterInstead}. */
   readonly instead?: EnterInstead;
+  /** See {@link AsEntersAction}. */
+  readonly asEnters?: AsEntersAction;
   /** It enters tapped (every "enters the battlefield tapped" land / creature). */
   readonly tapped?: boolean;
   /** It enters tapped *unless* this condition holds when it enters — the
@@ -162,10 +201,14 @@ export interface EntersBattlefieldReplacement {
    * Reilly's "X is the mana value of the returned creature"), 0 when it
    * wasn't cast using web-slinging. `"removed-as-enters"` is the number of
    * counters its `removeAllCountersFrom` took off as it entered (Thief of
-   * Blood's "a +1/+1 counter on it for each counter removed this way"). */
+   * Blood's "a +1/+1 counter on it for each counter removed this way").
+   * `"done-as-enters"` is how many cards its `asEnters` exiled or returned, times
+   * `eachDone`: Mimeoplasm's "three +1/+1 counters on it for each creature card
+   * exiled this way". */
   readonly counters?: {
     readonly kind: string;
-    readonly amount: EffectAmount | "times-kicked" | "web-slinging-mana-value" | "removed-as-enters";
+    readonly amount: EffectAmount | "times-kicked" | "web-slinging-mana-value" | "removed-as-enters" | "done-as-enters";
+    readonly eachDone?: number;
   };
   /**
    * "As this creature enters, remove all counters from all permanents"

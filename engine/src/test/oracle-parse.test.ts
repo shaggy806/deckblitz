@@ -7722,6 +7722,42 @@ describe("counters put or removed this way", () => {
       counters: { kind: "+1/+1", amount: "removed-as-enters" },
     });
   });
+
+  it("reads what's exiled or returned as it enters, and the counters that come of it", () => {
+    const replacementOf = (name: string, line: string) => face(name, "Creature — Horror", line).static[0].replacement;
+    expect(
+      replacementOf(
+        "Rescuer Sphinx",
+        "As this creature enters, you may return a nonland permanent you control to its owner's hand. If you do, this creature enters with a +1/+1 counter on it.",
+      ),
+    ).toMatchObject({
+      event: "enters-battlefield",
+      asEnters: { returnPermanent: { filter: { notTypes: ["land"], controlledBy: "you" } } },
+      counters: { kind: "+1/+1", amount: "done-as-enters" },
+    });
+    expect(
+      replacementOf("Living Lore", "As this creature enters, exile an instant or sorcery card from your graveyard."),
+    ).toMatchObject({ asEnters: { exile: { filter: { typesAnyOf: ["instant", "sorcery"] }, count: 1 } } });
+    expect(
+      replacementOf("Sutured Ghoul", "As this creature enters, exile any number of creature cards from your graveyard."),
+    ).toEqual({ event: "enters-battlefield", asEnters: { exile: { filter: { type: "creature" }, count: "any" } } });
+    expect(
+      replacementOf("Dermotaxi", "Imprint — As this Vehicle enters, exile a creature card from a graveyard."),
+    ).toEqual({
+      event: "enters-battlefield",
+      asEnters: { exile: { filter: { type: "creature" }, count: 1, anyGraveyard: true } },
+    });
+    expect(
+      replacementOf(
+        "Mimeoplasm, Revered One",
+        "As Mimeoplasm enters, exile up to X creature cards from your graveyard. It enters with three +1/+1 counters on it for each creature card exiled this way.",
+      ),
+    ).toEqual({
+      event: "enters-battlefield",
+      asEnters: { exile: { filter: { type: "creature" }, count: "x", upTo: true } },
+      counters: { kind: "+1/+1", amount: "done-as-enters", eachDone: 3 },
+    });
+  });
 });
 
 describe("the card discarded to pay a cost", () => {
@@ -8167,6 +8203,50 @@ describe("a choice drawn from several zones, or one card a slot", () => {
       max: 4,
       together: { distinctNames: true },
       instead: { destination: "graveyard", pick: { exactly: 2 }, chooser: "an-opponent" },
+    });
+    // Each player chooses in turn, and the chosen cards enter at once.
+    const exhume = face(
+      "Exhume",
+      "Sorcery",
+      "Each player puts a creature card from their graveyard onto the battlefield.",
+    );
+    expect(exhume.effect).toMatchObject({
+      kind: "for-each-player",
+      who: "each-player",
+      choicesHeld: true,
+      effect: { kind: "look-and-choose", player: "that-player", zone: "graveyard", min: 1, max: 1, filter: { type: "creature" } },
+    });
+    const champion = face(
+      "Crypt Champion",
+      "Creature — Zombie",
+      "When this creature enters, each player puts a creature card with mana value 3 or less from their graveyard onto the battlefield.",
+    );
+    expect(champion.triggered[0].effect).toMatchObject({
+      choicesHeld: true,
+      effect: { zone: "graveyard", filter: { type: "creature", manaValue: { op: "lte", n: 3 } } },
+    });
+    const wurm = face(
+      "Tempting Wurm",
+      "Creature — Wurm",
+      "When this creature enters, each opponent may put any number of artifact, creature, enchantment, and/or land cards from their hand onto the battlefield.",
+    );
+    expect(wurm.triggered[0].effect).toMatchObject({
+      who: "each-opponent",
+      choicesHeld: true,
+      effect: { zone: "hand", min: 0, max: 99, filter: { typesAnyOf: ["artifact", "creature", "enchantment", "land"] } },
+    });
+    // A creature exiled and a land found, both entering in one event.
+    const sword = face(
+      "Sword of Hearth and Home",
+      "Artifact — Equipment",
+      "Whenever equipped creature deals combat damage to a player, exile up to one target creature you own, then search your library for a basic land card. Put both cards onto the battlefield under your control, then shuffle.",
+    );
+    expect(sword.triggered[0].effect).toMatchObject({
+      kind: "sequence",
+      effects: [
+        { kind: "exile", target: 0 },
+        { kind: "search-library", destination: "battlefield", alongExiledThisWay: true, filter: { type: "land", supertype: "basic" } },
+      ],
     });
     // Another player chooses in a graveyard, the card under your control.
     const dredge = face(

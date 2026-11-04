@@ -618,6 +618,12 @@ export type CountSpec =
    * are each equal to the number of lore counters on it" (Myth Realized, a
    * granted one). Only a `setBasePtFromCount` knows which permanent that is. */
   | { readonly countersOnThis: string }
+  /** The total of a characteristic over the face-up cards exiled with this
+   * permanent in this stint (rule 607.2a) — Living Lore's "each equal to the
+   * exiled card's mana value", Sutured Ghoul's "the total power of the exiled
+   * cards". 0 once they've left exile, or with none. Only a
+   * `setBasePtFromCount` knows which permanent that is. */
+  | { readonly exiledWithThis: "mana-value" | "power" | "toughness" }
   /** How many counters of a kind are on the permanent this token was created
    * with, in the stint that made it (`GameObject.createdWith`) — "this token's
    * power and toughness are each equal to the number of fade counters on
@@ -4066,6 +4072,13 @@ export interface CastModalSpec {
    * also has `repeatModes`.
    */
   readonly pawprintBudget?: number;
+  /**
+   * The chosen modes are one instruction, not one each: "Choose up to two.
+   * Return those cards from your graveyard to your hand" (Call Damage
+   * Control's modes only pick targets, and what follows returns them all at
+   * once), so what they move moves in one event. Nothing in them stops to ask.
+   */
+  readonly simultaneous?: true;
   /**
    * Escalate (rule 702.120a): "For each mode you choose beyond the first as
    * you cast this spell, you pay an additional [cost]." This mana, once per

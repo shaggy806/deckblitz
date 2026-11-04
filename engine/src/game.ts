@@ -181,6 +181,7 @@ import type { PlannedTokens, TokenKind, TokenReplacementInstance } from "./token
 import type {
   DamageMultiplierReplacement,
   DrawRedirectReplacement,
+  AsEntersAction,
   EnterInstead,
   GraveyardExileReplacement,
   LifeGainReplacement,
@@ -7113,7 +7114,12 @@ export class Game {
                 }
               : awaiting.unleash === true
                 ? { ...source.enterChoice, unleash: creatureType === UNLEASH_OPTIONS[0] }
-                : { ...source.enterChoice, chosen: creatureType };
+                : awaiting.asEntersCounter === true
+                  ? {
+                      ...source.enterChoice,
+                      asEntersCounters: [...(source.enterChoice?.asEntersCounters ?? []), creatureType],
+                    }
+                  : { ...source.enterChoice, chosen: creatureType };
       }
     }
     if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
@@ -9973,6 +9979,14 @@ export class Game {
       this.prepareForPriority(this.activePlayer);
       return;
     }
+    // "As this enters, exile …": now, and its entry carries on once priority
+    // is next looked at.
+    if (awaiting.asEntersOf !== undefined) {
+      this.state.awaiting = null;
+      this.exileAsEntering(awaiting.asEntersOf, chosen);
+      if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
+      return;
+    }
     // "You may discard a land card instead" (Mox Diamond), as `EnterInstead`
     // asks it: the discard happens now, and decides whether it enters.
     if (awaiting.insteadOfEnteringOf !== undefined) {
@@ -10089,7 +10103,9 @@ export class Game {
     // the search's own destination, the battlefield too.
     const restEntering =
       awaiting.searchRest?.destination === "battlefield" ? awaiting.ids.filter((id) => !chosen.includes(id)) : [];
-    for (const id of restEntering) {
+    // What enters with the finds, whatever was found: still where it was.
+    const along = (awaiting.enterAlong ?? []).filter((id) => this.state.objects[id]?.zone === "exile");
+    for (const id of [...restEntering, ...along]) {
       if (this.askEnterChoice(id, player)) {
         this.state.suspendedResolutions.push({ effect: null, enter: entry });
         return;
@@ -10143,7 +10159,16 @@ export class Game {
     // graveyard leave it as one move ("return up to two cards").
     let toOrder: LibraryOrder = { cards: [], position: "bottom" };
     this.withGraveyardLeaveBatch(() => {
-      toOrder = this.moveChosenFromZone(awaiting, player, chosen, leftover, toCommandZone);
+      const move = (): void => {
+        toOrder = this.moveChosenFromZone(awaiting, player, chosen, leftover, toCommandZone);
+      };
+      if (along.length === 0) move();
+      else {
+        this.withEnterBatch(() => {
+          for (const id of along) this.enterHeldEntry(id, player);
+          move();
+        });
+      }
     });
 
     // An order takes nothing: it only says where each card goes. A search's
@@ -13084,6 +13109,7 @@ export class Game {
     | { readonly kind: "choose"; readonly options?: readonly string[]; readonly prompt?: string; readonly look?: true }
     | { readonly kind: "flip-form"; readonly heads: string; readonly tails: string }
     | { readonly kind: "instead"; readonly spec: EnterInstead }
+    | { readonly kind: "as-enters"; readonly spec: AsEntersAction }
     | { readonly kind: "enchant"; readonly as: CardDefinition }
     | { readonly kind: "reveal"; readonly subtypes: readonly string[] }
     | { readonly kind: "behold"; readonly spec: BeholdSpec }
@@ -13126,6 +13152,16 @@ export class Game {
       for (const ability of becoming.static) {
         const r = ability.replacement;
         if (r?.event === "enters-battlefield" && r.instead !== undefined) return { kind: "instead", spec: r.instead };
+      }
+    }
+    // "As this enters, exile …" or "you may return …" — printed, or a copy's.
+    for (const ability of becoming.static) {
+      const r = ability.replacement;
+      if (r?.event !== "enters-battlefield" || r.asEnters === undefined) continue;
+      const each = r.asEnters.exile?.counterForEach;
+      const done = answered?.asEntersDone;
+      if (done === undefined || (each !== undefined && (answered?.asEntersCounters?.length ?? 0) < done)) {
+        return { kind: "as-enters", spec: r.asEnters };
       }
     }
     if (answered?.chosen === undefined) {
@@ -13315,6 +13351,117 @@ export class Game {
   }
 
   /**
+   * What an {@link AsEntersAction} asks of `chooser` for the card `id`, about
+   * to enter: a choice raises a decision and returns `true`; anything else is
+   * done here, and recorded on it (`enterChoice.asEntersDone`).
+   */
+  private askAsEnters(id: ObjectId, chooser: PlayerId, spec: AsEntersAction): boolean {
+    const object = this.state.objects[id];
+    const answered = object.enterChoice;
+    // A commander's owner has answered (rule 903.9b): to the command zone
+    // instead, it wasn't returned.
+    if (answered?.asEntersReturning !== undefined) {
+      const back = this.state.objects[answered.asEntersReturning]?.zone === "hand";
+      object.enterChoice = { ...answered, asEntersDone: back ? 1 : 0, asEntersReturning: undefined };
+      return false;
+    }
+    const exile = spec.exile;
+    if (answered?.asEntersDone !== undefined) {
+      // One counter kind for each card exiled.
+      const options = exile?.counterForEach;
+      if (options === undefined) return false;
+      this.state.awaiting = {
+        kind: "choose-creature-type",
+        player: chooser,
+        source: id,
+        options,
+        catalog: false,
+        prompt: `Choose a counter for ${nameOf(object)} to enter with`,
+        asEntersCounter: true,
+      };
+      return true;
+    }
+    if (spec.returnPermanent !== undefined) {
+      const filter = spec.returnPermanent.filter;
+      const eligible = this.state.zones.shared.battlefield.filter(
+        (other) =>
+          other !== id &&
+          this.enterBatch?.has(other) !== true &&
+          this.state.objects[other]?.controller === chooser &&
+          this.inGame(this.state.objects[other]) &&
+          matchesFilter(this.state, this.registry, other, filter, { you: chooser, source: id }),
+      );
+      if (eligible.length === 0) {
+        object.enterChoice = { ...answered, asEntersDone: 0 };
+        return false;
+      }
+      this.state.awaiting = {
+        kind: "choose-permanents",
+        player: chooser,
+        eligible,
+        min: 0,
+        max: 1,
+        prompt: `You may return a permanent to its owner's hand as ${nameOf(object)} enters`,
+        then: { kind: "sequence", effects: [] },
+        source: id,
+        x: 0,
+        asEntersReturn: true,
+      };
+      return true;
+    }
+    if (exile === undefined) {
+      object.enterChoice = { ...answered, asEntersDone: 0 };
+      return false;
+    }
+    const graveyards = exile.anyGraveyard === true ? this.state.turnOrder : [chooser];
+    const eligible = graveyards.flatMap((player) =>
+      this.state.zones.perPlayer[player].graveyard.filter(
+        (card) =>
+          card !== id &&
+          this.enterBatch?.has(card) !== true &&
+          matchesFilter(this.state, this.registry, card, exile.filter, { you: chooser, source: id }),
+      ),
+    );
+    const count = exile.count === "any" ? eligible.length : exile.count === "x" ? (object.xValue ?? 0) : exile.count;
+    if (exile.orToGraveyard === true && eligible.length < count) {
+      object.enterChoice = { ...answered, asEntersDone: 0, insteadDone: false };
+      return false;
+    }
+    const min = exile.count === "any" || exile.upTo === true ? 0 : Math.min(count, eligible.length);
+    const max = Math.min(count, eligible.length);
+    // As many as it can (rule 609.3), with nothing to choose among them.
+    if (min === eligible.length || max === 0) {
+      this.exileAsEntering(id, max === 0 ? [] : eligible);
+      return false;
+    }
+    this.state.awaiting = {
+      kind: "choose-from-zone",
+      player: chooser,
+      ids: eligible,
+      eligible,
+      min,
+      max,
+      destination: "exile",
+      leftover: "stay",
+      prompt: `Exile ${min === max ? (max === 1 ? "a card" : `${max} cards`) : `up to ${max} cards`} as ${nameOf(object)} enters`,
+      asEntersOf: id,
+    };
+    return true;
+  }
+
+  /** An {@link AsEntersAction}'s exile, one move: linked to `id` as it enters. */
+  private exileAsEntering(id: ObjectId, cards: readonly ObjectId[]): void {
+    const exiled: ObjectId[] = [];
+    this.withGraveyardLeaveBatch(() => {
+      for (const card of cards) {
+        if (this.state.objects[card]?.zone === "graveyard" && this.moveObject(card, "exile")) exiled.push(card);
+      }
+    });
+    const entering = this.state.objects[id];
+    entering.enterChoice = { ...entering.enterChoice, asEntersDone: exiled.length, asEntersExiled: exiled };
+  }
+
+  /**
    * What an {@link EnterInstead} asks of `chooser` for the card `id`, about to
    * enter: a discard or a sacrifice with something to choose raises a decision
    * and returns `true`; anything else is done here (rule 609.3: as many as
@@ -13445,6 +13592,10 @@ export class Game {
       }
       if (next.kind === "instead") {
         if (this.askEnterInstead(id, chooser, next.spec)) return true;
+        continue;
+      }
+      if (next.kind === "as-enters") {
+        if (this.askAsEnters(id, chooser, next.spec)) return true;
         continue;
       }
       if (next.kind === "flip-form") {
@@ -25957,12 +26108,19 @@ export class Game {
         // `suspendedResolutions`, each with its own targets, beneath whatever
         // that mode parked of its own and in order.
         const pendingBefore = steps[0]?.ctx.decisionPending() ?? false;
-        for (let k = 0; k < steps.length; k += 1) {
-          const parked = this.state.suspendedResolutions.length;
-          applyEffectSpec(steps[k].effect, steps[k].ctx);
-          if (k + 1 < steps.length && !pendingBefore && steps[k].ctx.decisionPending()) {
-            for (const later of steps.slice(k + 1)) later.ctx.resumeAfterDecisions(later.effect, parked);
-            break;
+        if (chosenModes !== undefined && def.castModal?.simultaneous === true) {
+          // Modes that only say what one instruction is done to.
+          steps[0]?.ctx.simultaneously(() => {
+            for (const step of steps) applyEffectSpec(step.effect, step.ctx);
+          });
+        } else {
+          for (let k = 0; k < steps.length; k += 1) {
+            const parked = this.state.suspendedResolutions.length;
+            applyEffectSpec(steps[k].effect, steps[k].ctx);
+            if (k + 1 < steps.length && !pendingBefore && steps[k].ctx.decisionPending()) {
+              for (const later of steps.slice(k + 1)) later.ctx.resumeAfterDecisions(later.effect, parked);
+              break;
+            }
           }
         }
       } else {
@@ -35499,7 +35657,21 @@ export class Game {
           attachTo,
           more === undefined
             ? undefined
-            : { ...more, source, ...(refs.source !== undefined ? { sourceStint: refs.source } : {}) },
+            : {
+                ...more,
+                source,
+                ...(refs.source !== undefined ? { sourceStint: refs.source } : {}),
+                ...(more.alongExiledThisWay === true
+                  ? {
+                      enterAlong: thisWayEntries(this.state, "exiled", since)
+                        .map((e) => e.object)
+                        .filter((id) => {
+                          const object = this.state.objects[id];
+                          return object?.zone === "exile" && !object.isToken && object.kind === "card";
+                        }),
+                    }
+                  : {}),
+              },
         ),
       scry: (amount, surveil, then) =>
         this.beginScry(source, controller, x, amount, surveil ? "surveil" : "scry", then ?? null),
@@ -36023,7 +36195,11 @@ export class Game {
     zones: SearchZones = "library",
     together?: ResolvedSearchTogether,
     enterAttachedTo?: EnterAttachHost,
-    more?: SearchMore & { readonly source: ObjectId; readonly sourceStint?: number },
+    more?: SearchMore & {
+      readonly source: ObjectId;
+      readonly sourceStint?: number;
+      readonly enterAlong?: readonly ObjectId[];
+    },
   ): void {
     // Whose zones: the searcher's own, or another player's ("search target
     // opponent's library") — the searcher still decides, and the filter is
@@ -36157,6 +36333,10 @@ export class Game {
       ...(restDestination !== undefined ? { restDestination } : {}),
       ...(reveal ? { reveal: true } : {}),
       ...(enterAttachedTo !== undefined && destination === "battlefield" ? { enterAttachedTo } : {}),
+      // "Put both cards onto the battlefield" (Sword of Hearth and Home).
+      ...(more?.enterAlong !== undefined && more.enterAlong.length > 0 && destination === "battlefield"
+        ? { enterAlong: more.enterAlong }
+        : {}),
       // "You may play that card for as long as it remains exiled" (Praetor's
       // Grasp).
       ...(exiled && more?.playable === "while-exiled"
@@ -43060,6 +43240,26 @@ export class Game {
       this.prepareForPriority(this.activePlayer);
       return;
     }
+    // "As this enters, you may return …": now, as it's about to enter. A
+    // commander's owner may send it to the command zone instead (rule 903.9b),
+    // and "if you do" waits for that answer (`askAsEnters`).
+    if (awaiting.asEntersReturn === true) {
+      const entering = this.state.objects[awaiting.source];
+      const picked = chosen[0];
+      if (picked === undefined || this.state.objects[picked]?.zone !== "battlefield") {
+        entering.enterChoice = { ...entering.enterChoice, asEntersDone: 0 };
+      } else {
+        const one = this.splitOneFromStack(picked);
+        const moved = this.moveObject(one, "hand");
+        const owed = this.state.pendingCommanderMoves.some((move) => move.commander === one);
+        entering.enterChoice = !moved && owed
+          ? { ...entering.enterChoice, asEntersReturning: one }
+          : { ...entering.enterChoice, asEntersDone: moved ? 1 : 0 };
+      }
+      this.state.awaiting = null;
+      this.prepareForPriority(this.activePlayer);
+      return;
+    }
     // An `EnterInstead`'s sacrifice: now, as it's about to enter, one event;
     // its entry carries on once priority is next looked at.
     if (awaiting.insteadOfEntering === true) {
@@ -47819,6 +48019,7 @@ export class Game {
     if (held === undefined || cards.length === 0) return;
     const cause = this.state.decisionSource?.controller;
     this.state.heldChoices = {
+      ...held,
       discards: [...held.discards, { player, objects: [...cards], ...(cause !== undefined ? { cause } : {}) }],
     };
   }
@@ -47887,25 +48088,36 @@ export class Game {
         return;
       }
     }
-    this.withEnterBatch(() => {
-      for (const id of entering) {
-        const to = under[id];
-        if (this.moveObject(id, "battlefield", to !== undefined ? { under: to } : {})) {
-          // Kept there by a control effect, as a reanimation "under your
-          // control" is (see `putOntoBattlefieldByEffect`).
-          const entered = this.state.objects[id];
-          if (to !== undefined && entered?.zone === "battlefield" && entered.controller !== to) {
-            this.gainControlByEffect(to, { kind: "object", object: id }, false, true);
-            entered.summoningSick = true;
-          }
-          const counters = withCounters[id];
-          if (counters !== undefined && entered?.zone === "battlefield") {
-            this.addCounter({ kind: "object", object: id }, counters.kind, counters.amount, true, to ?? entered.owner);
-          }
-          this.emit({ type: "permanent-entered-battlefield", object: id });
-        }
-      }
+    // Those from graveyards leave them as one move, too (Exhume): "whenever
+    // one or more cards leave a graveyard" sees it once.
+    this.withGraveyardLeaveBatch(() => {
+      this.withEnterBatch(() => {
+        for (const id of entering) this.enterHeldEntry(id, under[id], withCounters[id]);
+      });
     });
+  }
+
+  /** One card of a simultaneous entry an instruction holds together (its
+   * batch is open): onto the battlefield, under `to`'s control when given and
+   * its owner's otherwise. */
+  private enterHeldEntry(
+    id: ObjectId,
+    to?: PlayerId,
+    counters?: { readonly kind: string; readonly amount: number },
+  ): void {
+    const under = to !== undefined && to !== this.state.objects[id]?.owner ? to : undefined;
+    if (!this.moveObject(id, "battlefield", under !== undefined ? { under } : {})) return;
+    // Kept there by a control effect, as a reanimation "under your control"
+    // is (see `putOntoBattlefieldByEffect`).
+    const entered = this.state.objects[id];
+    if (under !== undefined && entered?.zone === "battlefield" && entered.controller !== under) {
+      this.gainControlByEffect(under, { kind: "object", object: id }, false, true);
+      entered.summoningSick = true;
+    }
+    if (counters !== undefined && entered?.zone === "battlefield") {
+      this.addCounter({ kind: "object", object: id }, counters.kind, counters.amount, true, to ?? entered.owner);
+    }
+    this.emit({ type: "permanent-entered-battlefield", object: id });
   }
 
   /** Whether discarding `amount` cards from `player`'s hand is a real
@@ -51245,12 +51457,27 @@ export class Game {
     tributePaid?: boolean,
     unleash?: boolean,
     amplified?: number,
+    asEntersDone?: number,
+    asEntersCounters?: readonly string[],
   ): EnteringReplacement {
     // It isn't on the battlefield yet as these are judged (rule 614.12), so
     // its mana cost — and what enters with it — doesn't count toward a
     // devotion that decides whether it's a creature (a Theros God's ruling).
     const entering = withDevotionUnseen(new Set([id, ...(this.enterBatch ?? [])]), () =>
-      this.enteringReplacementOf(id, effectTapped, effectTransformed, reveal, copyEnter, riot, devoured, tributePaid, unleash, amplified),
+      this.enteringReplacementOf(
+        id,
+        effectTapped,
+        effectTransformed,
+        reveal,
+        copyEnter,
+        riot,
+        devoured,
+        tributePaid,
+        unleash,
+        amplified,
+        asEntersDone,
+        asEntersCounters,
+      ),
     );
     this.enterBatch?.add(id);
     // "Counters can't be put on" it (Solemnity): it enters without them —
@@ -51273,6 +51500,8 @@ export class Game {
     tributePaid?: boolean,
     unleash?: boolean,
     amplified?: number,
+    asEntersDone?: number,
+    asEntersCounters?: readonly string[],
   ): EnteringReplacement {
     const object = this.state.objects[id];
     const def = this.registry.get(printedCardName(object));
@@ -51373,8 +51602,14 @@ export class Game {
                   : 0
                 : r.counters.amount === "removed-as-enters"
                   ? removedAsEnters
-                  : this.enteringCounterAmount(id, object.controller, id, r.counters.amount),
+                  : r.counters.amount === "done-as-enters"
+                    ? (asEntersDone ?? 0) * (r.counters.eachDone ?? 1)
+                    : this.enteringCounterAmount(id, object.controller, id, r.counters.amount),
         );
+      }
+      // A counter of the kind picked for each card it exiled.
+      if (r.asEnters?.exile?.counterForEach !== undefined) {
+        for (const kind of asEntersCounters ?? []) addCounters(kind, 1);
       }
       // Sunburst (rule 702.44a): +1/+1 counters if it's entering as a
       // creature ignoring type-changing effects — its copiable types, which
@@ -53024,6 +53259,14 @@ export class Game {
     delete object.tributeUnpaid;
     object.enteredTimesKicked = enteringTimesKicked;
     object.enteredDevoured = to === "battlefield" ? enterChoice?.devouredWhat : undefined;
+    // What it exiled as it entered is exiled with it, for this stint (rule 607.2a).
+    if (to === "battlefield" && enterChoice?.asEntersExiled !== undefined) {
+      this.linkExiledToSource(
+        enterChoice.asEntersExiled.filter((card) => this.state.objects[card]?.zone === "exile"),
+        id,
+        object.zoneChangeCount ?? 0,
+      );
+    }
     object.enteredKickedWith = enteringKickedWith;
     object.enteredConvokedBy = enteringConvokedBy;
     object.enteredPhyrexianPaidWithLife = enteringPhyrexianLife;
@@ -53223,6 +53466,8 @@ export class Game {
         enterChoice?.tributePaid,
         enterChoice?.unleash,
         enterChoice?.amplified,
+        enterChoice?.asEntersDone,
+        enterChoice?.asEntersCounters,
       );
       object.tapped = entering.tapped;
       for (const c of entering.counters) {

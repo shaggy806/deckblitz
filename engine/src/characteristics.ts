@@ -3823,6 +3823,17 @@ function basePtCount(
   const of = from.countOf;
   if (of === "chosen-number") return chosenNumberOf(object);
   if (typeof of === "object" && "countersOnThis" in of) return object.counters[of.countersOnThis] ?? 0;
+  if (typeof of === "object" && "exiledWithThis" in of) {
+    const stint = object.zoneChangeCount ?? 0;
+    return state.zones.shared.exile.reduce((total, id) => {
+      const card = state.objects[id];
+      const link = card?.exiledWith;
+      if (link?.source !== object.id || link.zoneChangeCount !== stint || card.exiledFaceDown !== undefined) return total;
+      if (of.exiledWithThis === "mana-value") return total + manaValueOfObject(registry, card);
+      const read = computeCharacteristics(state, registry, id);
+      return total + (of.exiledWithThis === "power" ? read.power : read.toughness);
+    }, 0);
+  }
   if (typeof of === "object" && "countersOnMaker" in of) {
     const link = object.createdWith;
     const maker = link === undefined ? undefined : state.objects[link.source];
@@ -3897,7 +3908,7 @@ export function countValue(
       return state.players[controller]?.counters[spec.playerCounters] ?? 0;
     }
     // Which permanent's is only known to a `setBasePtFromCount`.
-    if ("countersOnThis" in spec || "countersOnMaker" in spec) return 0;
+    if ("countersOnThis" in spec || "countersOnMaker" in spec || "exiledWithThis" in spec) return 0;
     if ("greatestManaValueOf" in spec) {
       let best = 0;
       for (const id of state.zones.shared.battlefield) {

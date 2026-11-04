@@ -1612,7 +1612,12 @@
   "filter:same-name-as-exiled-with-source",
   "condition:cards-currently-exiled-with-source-condition",
   "condition:linked-exile-currently-exiled",
-  "condition:card-types-among-exiled-with-source"
+  "condition:card-types-among-exiled-with-source",
+  "bug:each-player-reanimate-simultaneous",
+  "bug:mixed-simultaneous-entry",
+  "effect:modal-modes-one-instruction",
+  "replacement:as-enters-exile-from-graveyard",
+  "replacement:as-enters-return-permanent"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

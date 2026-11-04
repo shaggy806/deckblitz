@@ -10409,6 +10409,45 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'Sutured Ghoul: choosing what to exile as it enters',
+    board({
+      you: { bf: ['Swamp*7'], hand: ['Sutured Ghoul'], gy: ['Hill Giant', 'Grizzly Bears', 'Llanowar Elves'] },
+    }),
+  ),
+  preset(
+    'Rescuer Sphinx: returning a permanent as it enters',
+    board({
+      you: { bf: ['Island*4', 'Sol Ring'], hand: ['Rescuer Sphinx'] },
+    }),
+  ),
+  preset(
+    "Frankenstein's Monster: a counter for each card exiled",
+    board({
+      you: { bf: ['Swamp*3'], hand: ["Frankenstein's Monster"], gy: ['Hill Giant', 'Grizzly Bears'] },
+    }),
+  ),
+  preset(
+    'Exhume: four players, all the chosen creatures enter at once',
+    board({
+      you: { bf: ['Swamp*2', 'Soul Warden'], hand: ['Exhume'], gy: ['Grizzly Bears', 'Hill Giant'] },
+      opp: [{ gy: ['Llanowar Elves'] }, { gy: ['Serra Angel'] }, { gy: ['Colossal Dreadmaw'] }],
+    }),
+  ),
+  preset(
+    'Sword of Hearth and Home: the creature and the land enter together',
+    board({
+      you: {
+        bf: [
+          { name: 'Grizzly Bears', sick: false },
+          { name: 'Sword of Hearth and Home', attach: 'Grizzly Bears' },
+          'Rampaging Baloths',
+        ],
+        lib: ['Forest', 'Wastes'],
+      },
+      opp: [{}],
+    }),
+  ),
+  preset(
     "Ashling's Prerogative: choosing as it enters, then haste or tapped",
     board({
       you: { bf: ['Mountain*2', 'Forest*3'], hand: ["Ashling's Prerogative", 'Grizzly Bears', 'Llanowar Elves'] },

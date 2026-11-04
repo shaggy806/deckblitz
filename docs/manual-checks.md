@@ -7011,3 +7011,27 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 - **Do:** Cast Ethereal Valkyrie and exile Poison the Cup when asked. Pass to your next turn and open the exile pile.
 - **Expect:** Poison the Cup is there, and clicking it offers "foretell" and "foretell, for the {B}{B} it was given". The second taps two Swamps, and you scry as it resolves.
+### Sutured Ghoul: choosing what to exile as it enters
+
+- **Do:** Cast Sutured Ghoul, and when asked choose Hill Giant and Grizzly Bears, then confirm.
+- **Expect:** The popup asks you to exile up to 3 cards. The two you chose go to exile and Llanowar Elves stays in your graveyard. Sutured Ghoul is a 5/5 with trample.
+
+### Rescuer Sphinx: returning a permanent as it enters
+
+- **Do:** Cast Rescuer Sphinx (use Sol Ring's mana or not), and when asked click Sol Ring, then confirm.
+- **Expect:** Sol Ring goes back to your hand and Rescuer Sphinx enters with a +1/+1 counter, a 4/3 flyer.
+
+### Frankenstein's Monster: a counter for each card exiled
+
+- **Do:** Cast Frankenstein's Monster with X of 1, choose Hill Giant to exile, then choose "+0/+2".
+- **Expect:** Hill Giant goes to exile, Grizzly Bears stays. The Monster enters with one +0/+2 counter, a 0/3.
+
+### Exhume: four players, all the chosen creatures enter at once
+
+- **Do:** Cast Exhume and choose Grizzly Bears.
+- **Expect:** Grizzly Bears stays in your graveyard until the bots have chosen, then every player's creature enters at once. Soul Warden gains you 4 life, one for each of them.
+
+### Sword of Hearth and Home: the creature and the land enter together
+
+- **Do:** Attack Bob with Grizzly Bears. When the Sword's ability goes on the stack, target Rampaging Baloths, let it resolve and choose Forest from your library.
+- **Expect:** Rampaging Baloths is exiled and comes back with Forest, and its landfall makes a 4/4 Beast. Bob loses 4 life.

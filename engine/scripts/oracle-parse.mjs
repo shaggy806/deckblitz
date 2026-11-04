@@ -8450,7 +8450,9 @@ export function parseEffect(text, outer) {
       opponentDividesFindsAt(sentences, i, ctx) ??
       distinctSetAt(sentences, i) ??
       counterAbilityAt(sentences, i, ctx) ??
-      opponentChoosesInGraveyardAt(sentences, i, ctx);
+      opponentChoosesInGraveyardAt(sentences, i, ctx) ??
+      eachPlayerPutsAt(sentences, i) ??
+      exileThenSearchBothEnterAt(sentences, i, ctx);
     if (oneEach !== null) {
       parsed.push(oneEach.effect);
       hints.push({ sentence, effect: oneEach.effect });
@@ -10644,6 +10646,76 @@ function distinctSetAt(sentences, i) {
       together: rule(choose[2]),
       then: { kind: "grant-keyword", target: 0, keyword, duration: "end-of-turn" },
       prompt: `Choose any number of creatures with different ${choose[2].toLowerCase()} to gain ${gain[1].toLowerCase()}`,
+    },
+    used: 2,
+  };
+}
+
+/** Each player chooses in turn and the chosen cards enter at once (rule 101.4):
+ * "Each player puts a creature card from their graveyard onto the battlefield."
+ * (Exhume, Crypt Champion), "each opponent may put any number of artifact,
+ * creature, enchantment, and/or land cards from their hand onto the
+ * battlefield." (Tempting Wurm). */
+function eachPlayerPutsAt(sentences, i) {
+  const held = (who, zone, min, max, filter) => ({
+    effect: {
+      kind: "for-each-player",
+      who,
+      choicesHeld: true,
+      effect: {
+        kind: "look-and-choose",
+        player: "that-player",
+        zone,
+        min,
+        max,
+        filter,
+        destination: "battlefield",
+        leftover: "stay",
+      },
+    },
+    used: 1,
+  });
+  const fromGraveyard =
+    /^each (player|opponent) puts an? (.+?) card(?: with mana value (\d+) or less)? from their graveyard onto the battlefield\.$/i.exec(
+      sentences[i],
+    );
+  if (fromGraveyard !== null) {
+    const filter = parseTypePhrase(fromGraveyard[2], { cards: true });
+    if (filter === null) return null;
+    return held(
+      `each-${fromGraveyard[1].toLowerCase()}`,
+      "graveyard",
+      1,
+      1,
+      fromGraveyard[3] === undefined ? filter : { ...filter, manaValue: { op: "lte", n: Number(fromGraveyard[3]) } },
+    );
+  }
+  const fromHand = /^each opponent may put any number of (.+?) cards from their hand onto the battlefield\.$/i.exec(sentences[i]);
+  if (fromHand === null) return null;
+  const words = fromHand[1].split(/, (?:and\/or )?|,? and\/or /).filter((word) => word !== "");
+  const types = ["artifact", "creature", "enchantment", "land", "planeswalker"];
+  if (words.length < 1 || !words.every((word) => types.includes(word))) return null;
+  return held("each-opponent", "hand", 0, 99, words.length === 1 ? { type: words[0] } : { typesAnyOf: words });
+}
+
+/** "Exile up to one target creature you own, then search your library for a
+ * basic land card. Put both cards onto the battlefield under your control, then
+ * shuffle." (Sword of Hearth and Home): one event, whatever is found. */
+function exileThenSearchBothEnterAt(sentences, i, ctx) {
+  const m = /^exile up to one target (.+?) you own, then search your library for an? (.+?) card\.$/i.exec(sentences[i]);
+  if (m === null) return null;
+  if (!/^put both cards onto the battlefield under your control, then shuffle\.$/i.test(sentences[i + 1] ?? "")) return null;
+  const exiled = parseTypePhrase(m[1]);
+  const found = parseTypePhrase(m[2], { cards: true });
+  if (exiled === null || found === null) return null;
+  const target = ctx.target({ kind: "optional", of: { kind: "permanent", filter: { ...exiled, ownedBy: "you" } } });
+  return {
+    effect: {
+      kind: "sequence",
+      effects: [
+        { kind: "exile", target },
+        { kind: "search-library", filter: found, destination: "battlefield", min: 0, max: 1, alongExiledThisWay: true },
+      ],
     },
     used: 2,
   };
@@ -16204,6 +16276,54 @@ function parseStatic(line, text) {
       return {
         affects: { scope: "self" },
         replacement: { event: "enters-battlefield", removeAllCountersFrom: filter, counters: { kind: w[2], amount: "removed-as-enters" } },
+        text,
+      };
+    }
+  }
+  // Something done as it's about to enter (rule 614.1c — `AsEntersAction`):
+  // "As ~ enters, you may return a nonland permanent you control to its owner's
+  // hand. If you do, ~ enters with a +1/+1 counter on it." (Rescuer Sphinx);
+  // "As ~ enters, exile an instant or sorcery card from your graveyard." (Living
+  // Lore), "any number of" (Sutured Ghoul), "from a graveyard" (Dermotaxi); "up
+  // to X … ~ enters with three +1/+1 counters on it for each … exiled this way."
+  // (Mimeoplasm).
+  {
+    const back =
+      /^As ~ enters, you may return an? ([a-z ]+?) you control to its owner's hand\. If you do, ~ enters with an? ([+-]\d+\/[+-]\d+|[a-z]+) counter on it\.$/.exec(line);
+    const backFilter = back === null ? null : parseTypePhrase(back[1]);
+    if (back !== null && backFilter !== null) {
+      return {
+        affects: { scope: "self" },
+        replacement: {
+          event: "enters-battlefield",
+          asEnters: { returnPermanent: { filter: { ...backFilter, controlledBy: "you" } } },
+          counters: { kind: back[2], amount: "done-as-enters" },
+        },
+        text,
+      };
+    }
+    const out =
+      /^(?:Imprint — )?As ~ enters, exile (an?|any number of|up to x) ([a-z ]+?) cards? from (your|a) graveyard\.(?: (?:~|It) enters with (a|an|two|three) ([+-]\d+\/[+-]\d+|[a-z]+) counters? on it for each [a-z ]+ card exiled this way\.)?$/i.exec(line);
+    const outFilter = out === null ? null : parseTypePhrase(out[2], { cards: true });
+    if (out !== null && outFilter !== null) {
+      const how = out[1].toLowerCase();
+      const each = { a: 1, an: 1, two: 2, three: 3 }[out[4]?.toLowerCase()];
+      return {
+        affects: { scope: "self" },
+        replacement: {
+          event: "enters-battlefield",
+          asEnters: {
+            exile: {
+              filter: outFilter,
+              count: how === "any number of" ? "any" : how === "up to x" ? "x" : 1,
+              ...(how === "up to x" ? { upTo: true } : {}),
+              ...(out[3] === "a" ? { anyGraveyard: true } : {}),
+            },
+          },
+          ...(out[5] !== undefined
+            ? { counters: { kind: out[5], amount: "done-as-enters", ...(each > 1 ? { eachDone: each } : {}) } }
+            : {}),
+        },
         text,
       };
     }
