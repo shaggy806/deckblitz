@@ -322,11 +322,22 @@ export function blockingViolations(
     const most = (attacker: ObjectId): number =>
       Math.max(0, ...[...perAttacker.values()].filter((v) => v.attacker === attacker).map((v) => v.count));
     const obeyed = ifAble.filter((a) => {
-      // "Exactly one": two on it obey it no more than none.
-      if (offer.mustBeBlockedByExactlyOne?.includes(a) === true) return most(a) === 1;
+      // Room for one creature only, and that one obeying a requirement of its
+      // own to block this: one requirement for another (rule 509.1c).
+      if (
+        roomForOne(offer, a) &&
+        blocks.some(
+          (b) =>
+            b.attacker === a && (offer.blockRequirements ?? []).some((r) => r.blocker === b.blocker && r.attacker === a),
+        )
+      ) {
+        return true;
+      }
       // "By an Eldrazi": one of those among however many block it.
       const by = offer.mustBeBlockedByOneOf?.[a];
       if (by !== undefined && !blocks.some((b) => b.attacker === a && by.includes(b.blocker))) return false;
+      // "Exactly one": two on it obey it no more than none.
+      if (offer.mustBeBlockedByExactlyOne?.includes(a) === true) return most(a) === 1;
       return most(a) >= need(a);
     });
     if (obeyed.length < plan.required) {
@@ -348,7 +359,16 @@ export function blockingViolations(
     if (obeysOwnRequirement(blocker, blocks, offer)) continue;
     const mine = blocks.filter((b) => b.blocker === blocker).map((b) => b.attacker);
     if (mine.some((a) => offer.mustBlock.includes(a) || (offer.mustBeBlockedIfAble ?? []).includes(a))) continue;
-    if (requirementTargets(blocker, offer).length > 0) out.push({ kind: "block-requirement", blocker });
+    // An attacker with room for one, taken by a creature obeying a requirement
+    // itself, leaves this one nothing it could obey (rule 509.1c).
+    const open = requirementTargets(blocker, offer).filter(
+      (a) =>
+        !(
+          roomForOne(offer, a) &&
+          blocks.some((b) => b.attacker === a && b.blocker !== blocker && blockObeysRequirement(b, blocks, offer))
+        ),
+    );
+    if (open.length > 0) out.push({ kind: "block-requirement", blocker });
   }
   // As many requirements as can be without breaking a restriction (rule 509.1c):
   // with "no more than N creatures can block", N creatures each obeying one is
@@ -428,6 +448,16 @@ export function withinBlockMost(blocks: readonly BlockerDeclaration[], offer: Bl
     out.push(n === (b.count ?? whole) ? b : { ...b, count: n });
   }
   return out;
+}
+
+/** Whether one creature is all `attacker` can usefully take: "can't be blocked
+ * by more than one creature", or "must be blocked by exactly one". So which one
+ * it is matters to whatever else asks for it. */
+function roomForOne(offer: BlockOffer, attacker: ObjectId): boolean {
+  return (
+    offer.singleBlockerAttackers?.includes(attacker) === true ||
+    offer.mustBeBlockedByExactlyOne?.includes(attacker) === true
+  );
 }
 
 /** Whether `blocker`, as `blocks` declares it, obeys one of its own
@@ -640,12 +670,17 @@ export function obeyingLure(
   // attacker that can't be blocked by more than one keeps this one.
   const required: [ObjectId, ObjectId][] = [];
   const taken = new Set<ObjectId>();
+  // An attacker with room for one that the plan has a creature on keeps that
+  // creature, which may be the only one obeying it ("by an Eldrazi"), and
+  // another with a requirement of its own looks elsewhere.
+  const spoken = new Set([...assignment.values()].filter((a) => roomForOne(offer, a)));
   for (const r of offer.blockRequirements ?? []) {
     const blocker = r.blocker;
     if (assignment.has(blocker) || taken.has(blocker) || obeysOwnRequirement(blocker, blocks, offer)) continue;
-    const options = requirementTargets(blocker, offer);
+    const options = requirementTargets(blocker, offer).filter((a) => !spoken.has(a));
     const attacker = options.find((a) => !offer.menaceAttackers.includes(a)) ?? options[0];
     if (attacker === undefined) continue;
+    if (roomForOne(offer, attacker)) spoken.add(attacker);
     required.push([blocker, attacker]);
     taken.add(blocker);
     const entry = offer.eligible.find((e) => e.blocker === blocker);
@@ -660,14 +695,14 @@ export function obeyingLure(
       load += helper.copies ?? 1;
     }
   }
-  // "Exactly one": the plan's, and nothing else on it.
-  const planned = new Set(assignment.values());
-  const alone = (attacker: ObjectId): boolean =>
-    planned.has(attacker) && offer.mustBeBlockedByExactlyOne?.includes(attacker) === true;
+  // Room for one: the plan's or a requirement's, and nothing else on it. First,
+  // too: `withinSingleBlockers` below keeps the first it sees.
+  const planEntries = [...assignment].map(([blocker, attacker]) => ({ blocker, attacker }));
   const moved: BlockerDeclaration[] = [
+    ...planEntries.filter((b) => roomForOne(offer, b.attacker)),
     ...required.map(([blocker, attacker]) => ({ blocker, attacker })),
-    ...blocks.filter((b) => !assignment.has(b.blocker) && !taken.has(b.blocker) && !alone(b.attacker)),
-    ...[...assignment].map(([blocker, attacker]) => ({ blocker, attacker })),
+    ...blocks.filter((b) => !assignment.has(b.blocker) && !taken.has(b.blocker) && !spoken.has(b.attacker)),
+    ...planEntries.filter((b) => !roomForOne(offer, b.attacker)),
   ];
   const copies = new Map(offer.eligible.map((e) => [e.blocker, e.copies ?? 1]));
   const load = new Map<ObjectId, number>();

@@ -176,6 +176,124 @@ describe("must be blocked by [filter]", () => {
     expect(blockingViolations([], offer)).toEqual([]);
   });
 
+  /** "Can't be blocked by more than one creature" on it, for the turn. */
+  const onlyOne = (game: Game, attacker: ObjectId): void =>
+    game.debugApplyEffect(A, { kind: "restrict", target: 0, restrictions: ["blocked-by-at-most-one"] }, [ref(attacker)]);
+
+  it("room for one blocker: a driver's other creature gives way to the Eldrazi", () => {
+    const { game, a } = table();
+    const bearer = armed(game);
+    onlyOne(game, bearer);
+    const bears = spawn(game, "Grizzly Bears", B);
+    const eldrazi = spawn(game, "Eldrazi Devastator", B);
+    const offer = blockOffer(game, a, [bearer]);
+    const fixed = obeyingLure([{ blocker: bears, attacker: bearer }], offer);
+    expect(fixed).toEqual([{ blocker: eldrazi, attacker: bearer }]);
+    expect(blockingViolations(fixed, offer)).toEqual([]);
+    game.dispatch({ type: "declare-blockers", player: B, blocks: fixed });
+    expect(game.state.objects[eldrazi].blocking).toBe(bearer);
+  });
+
+  it("menace: the Eldrazi and a partner, and the Eldrazi alone is no block", () => {
+    const { game, a } = table();
+    const bearer = armed(game);
+    grant(game, bearer, "menace");
+    const bears = spawn(game, "Grizzly Bears", B);
+    const eldrazi = spawn(game, "Eldrazi Devastator", B);
+    const offer = blockOffer(game, a, [bearer]);
+    expect(blockingViolations(obeyingLure([], offer), offer)).toEqual([]);
+    expect(
+      blockingViolations(
+        [
+          { blocker: bears, attacker: bearer },
+          { blocker: eldrazi, attacker: bearer },
+        ],
+        offer,
+      ),
+    ).toEqual([]);
+    expect(blockingViolations([{ blocker: eldrazi, attacker: bearer }], offer).map((v) => v.kind)).toContain("menace");
+  });
+
+  it("menace with no partner able: the requirement asks nothing", () => {
+    const { game, a } = table();
+    const bearer = armed(game);
+    grant(game, bearer, "menace");
+    spawn(game, "Eldrazi Devastator", B);
+    const offer = blockOffer(game, a, [bearer]);
+    expect(ifAblePlan(offer).required).toBe(0);
+    expect(blockingViolations([], offer)).toEqual([]);
+  });
+
+  it("an Eldrazi that can't block this attacker isn't asked (flying)", () => {
+    const { game, a } = table();
+    const bearer = armed(game);
+    grant(game, bearer, "flying");
+    const eldrazi = spawn(game, "Eldrazi Devastator", B);
+    const angel = spawn(game, "Serra Angel", B);
+    const offer = blockOffer(game, a, [bearer]);
+    expect(offer.eligible.map((e) => e.blocker)).toEqual([angel]);
+    expect(offer.eligible.some((e) => e.blocker === eldrazi)).toBe(false);
+    expect(offer.mustBeBlockedIfAble).toBeUndefined();
+    expect(blockingViolations([], offer)).toEqual([]);
+  });
+
+  it("several requirements on room for one: the declaration the driver gets is always legal", () => {
+    const { game, a } = table();
+    const bearer = armed(game);
+    onlyOne(game, bearer);
+    const bears = spawn(game, "Grizzly Bears", B);
+    const giant = spawn(game, "Hill Giant", B);
+    const eldrazi = spawn(game, "Eldrazi Devastator", B);
+    // Every creature of bob's has to block as well as the Eldrazi being wanted.
+    game.debugApplyEffect(A, { kind: "block-if-able", filter: { type: "creature", controlledBy: "opponent" } });
+    const offer = blockOffer(game, a, [bearer]);
+    for (const start of [[], [{ blocker: bears, attacker: bearer }], [{ blocker: giant, attacker: bearer }]]) {
+      const fixed = obeyingLure(start, offer);
+      expect(fixed).toEqual([{ blocker: eldrazi, attacker: bearer }]);
+      expect(blockingViolations(fixed, offer)).toEqual([]);
+    }
+    // No block at all obeys none of them.
+    expect(() => declareBlocks(game)).toThrow();
+  });
+
+  it("exactly one and by an Eldrazi at once: the Eldrazi, alone", () => {
+    const { game, a } = table();
+    const bearer = armed(game);
+    game.debugApplyEffect(A, { kind: "restrict", target: 0, restrictions: ["must-be-blocked-by-exactly-one"] }, [ref(bearer)]);
+    const bears = spawn(game, "Grizzly Bears", B);
+    const eldrazi = spawn(game, "Eldrazi Devastator", B);
+    const offer = blockOffer(game, a, [bearer]);
+    expect(blockingViolations([{ blocker: bears, attacker: bearer }], offer)).toHaveLength(1);
+    expect(obeyingLure([{ blocker: bears, attacker: bearer }], offer)).toEqual([{ blocker: eldrazi, attacker: bearer }]);
+  });
+
+  it("two creatures each told to block one with room for one: either goes, and the other is free", () => {
+    const { game, a } = table();
+    const piper = spawn(game, "Talruum Piper", A);
+    onlyOne(game, piper);
+    const angel = spawn(game, "Serra Angel", B);
+    const elemental = spawn(game, "Air Elemental", B);
+    const offer = blockOffer(game, a, [piper]);
+    expect(blockingViolations([{ blocker: elemental, attacker: piper }], offer)).toEqual([]);
+    expect(blockingViolations([{ blocker: angel, attacker: piper }], offer)).toEqual([]);
+    // But neither isn't: one of them could have.
+    expect(blockingViolations([], offer)).toHaveLength(2);
+    expect(blockingViolations(obeyingLure([], offer), offer)).toEqual([]);
+  });
+
+  it("a free creature on it doesn't excuse the one told to block it", () => {
+    const { game, a } = table();
+    const piper = spawn(game, "Talruum Piper", A);
+    onlyOne(game, piper);
+    const angel = spawn(game, "Serra Angel", B);
+    const bears = spawn(game, "Grizzly Bears", B);
+    const offer = blockOffer(game, a, [piper]);
+    expect(blockingViolations([{ blocker: bears, attacker: piper }], offer)).toEqual([
+      { kind: "block-requirement", blocker: angel },
+    ]);
+    expect(obeyingLure([{ blocker: bears, attacker: piper }], offer)[0]).toEqual({ blocker: angel, attacker: piper });
+  });
+
   it("Talruum Piper: every flier able blocks it, whatever the rest do", () => {
     const { game, a } = table();
     const piper = spawn(game, "Talruum Piper", A);
