@@ -10827,8 +10827,6 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     'Harnfel: the back face',
     board({ you: { bf: ['Mountain*5'], hand: ['Birgi, God of Storytelling', 'Grizzly Bears'] } }),
   ),
-  ),
-  preset(
   // --- Manifest or cloak from a chosen source, piles in exile, a return face down (2026-11-04) --------
   preset(
     'Scroll of Fate: choose the card from your hand to manifest',
