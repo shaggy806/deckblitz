@@ -438,6 +438,7 @@ import _poolKainTraitorousDragoon from "../pool/kain-traitorous-dragoon.js";
 import _poolKaitoShizuki from "../pool/kaito-shizuki.js";
 import _poolKamiOfIndustry from "../pool/kami-of-industry.js";
 import _poolKamiOfRestlessShadows from "../pool/kami-of-restless-shadows.js";
+import _poolKarfellHarbinger from "../pool/karfell-harbinger.js";
 import _poolKarganWarleader from "../pool/kargan-warleader.js";
 import _poolKasetoOrochiArchmage from "../pool/kaseto-orochi-archmage.js";
 import _poolKeenBuccaneer from "../pool/keen-buccaneer.js";
@@ -1337,6 +1338,7 @@ const shard: CardShard = {
     _poolKaitoShizuki,
     _poolKamiOfIndustry,
     _poolKamiOfRestlessShadows,
+    _poolKarfellHarbinger,
     _poolKarganWarleader,
     _poolKasetoOrochiArchmage,
     _poolKeenBuccaneer,

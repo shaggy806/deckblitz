@@ -295,6 +295,7 @@ import _poolGrowingRitesOfItlimoc from "../pool/growing-rites-of-itlimoc.js";
 import _poolGuardiansOfAkrasa from "../pool/guardians-of-akrasa.js";
 import _poolGuttersnipe from "../pool/guttersnipe.js";
 import _poolGuyInTheChair from "../pool/guy-in-the-chair.js";
+import _poolHallOfTheBanditLord from "../pool/hall-of-the-bandit-lord.js";
 import _poolHanweirWatchkeep from "../pool/hanweir-watchkeep.js";
 import _poolHaraldUnitesTheElves from "../pool/harald-unites-the-elves.js";
 import _poolHarrierGriffin from "../pool/harrier-griffin.js";
@@ -1171,6 +1172,7 @@ const shard: CardShard = {
     _poolGuardiansOfAkrasa,
     _poolGuttersnipe,
     _poolGuyInTheChair,
+    _poolHallOfTheBanditLord,
     _poolHanweirWatchkeep,
     _poolHaraldUnitesTheElves,
     _poolHarrierGriffin,

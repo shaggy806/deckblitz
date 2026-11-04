@@ -786,6 +786,7 @@ import _poolThoughtleech from "../pool/thoughtleech.js";
 import _poolThranFoundry from "../pool/thran-foundry.js";
 import _poolThrash from "../pool/thrash.js";
 import _poolThresherBeast from "../pool/thresher-beast.js";
+import _poolThroneOfMakindi from "../pool/throne-of-makindi.js";
 import _poolThrullWizard from "../pool/thrull-wizard.js";
 import _poolThunderfootBaloth from "../pool/thunderfoot-baloth.js";
 import _poolThunderousOrator from "../pool/thunderous-orator.js";
@@ -1690,6 +1691,7 @@ const shard: CardShard = {
     _poolThranFoundry,
     _poolThrash,
     _poolThresherBeast,
+    _poolThroneOfMakindi,
     _poolThrullWizard,
     _poolThunderfootBaloth,
     _poolThunderousOrator,

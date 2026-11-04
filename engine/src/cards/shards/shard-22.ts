@@ -51,6 +51,7 @@ import _poolAvengingDruid from "../pool/avenging-druid.js";
 import _poolBackToBasics from "../pool/back-to-basics.js";
 import _poolBackfire from "../pool/backfire.js";
 import _poolBalduvianRage from "../pool/balduvian-rage.js";
+import _poolBarbflareGremlin from "../pool/barbflare-gremlin.js";
 import _poolBaronAirshipKingdom from "../pool/baron-airship-kingdom.js";
 import _poolBarracksOfTheThousand from "../pool/barracks-of-the-thousand.js";
 import _poolBarrageOgre from "../pool/barrage-ogre.js";
@@ -967,6 +968,7 @@ const shard: CardShard = {
     _poolBackToBasics,
     _poolBackfire,
     _poolBalduvianRage,
+    _poolBarbflareGremlin,
     _poolBaronAirshipKingdom,
     _poolBarracksOfTheThousand,
     _poolBarrageOgre,

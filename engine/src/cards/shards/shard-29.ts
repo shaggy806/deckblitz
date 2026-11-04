@@ -284,6 +284,7 @@ import _poolFurtiveHomunculus from "../pool/furtive-homunculus.js";
 import _poolGallantPieWielder from "../pool/gallant-pie-wielder.js";
 import _poolGalliaTheMerrymaker from "../pool/gallia-the-merrymaker.js";
 import _poolGarrukCallerOfBeasts from "../pool/garruk-caller-of-beasts.js";
+import _poolGauntletOfPower from "../pool/gauntlet-of-power.js";
 import _poolGauntletsOfLight from "../pool/gauntlets-of-light.js";
 import _poolGelectrode from "../pool/gelectrode.js";
 import _poolGenerousVisitor from "../pool/generous-visitor.js";
@@ -1188,6 +1189,7 @@ const shard: CardShard = {
     _poolGallantPieWielder,
     _poolGalliaTheMerrymaker,
     _poolGarrukCallerOfBeasts,
+    _poolGauntletOfPower,
     _poolGauntletsOfLight,
     _poolGelectrode,
     _poolGenerousVisitor,

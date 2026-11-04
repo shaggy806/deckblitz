@@ -696,6 +696,7 @@ import _poolSlimeMolding from "../pool/slime-molding.js";
 import _poolSlimefootAndSquee from "../pool/slimefoot-and-squee.js";
 import _poolSmeltedChargebug from "../pool/smelted-chargebug.js";
 import _poolSmite from "../pool/smite.js";
+import _poolSnowfall from "../pool/snowfall.js";
 import _poolSnowhornRider from "../pool/snowhorn-rider.js";
 import _poolSoaringLightbringer from "../pool/soaring-lightbringer.js";
 import _poolSokkasSwordTraining from "../pool/sokkas-sword-training.js";
@@ -1617,6 +1618,7 @@ const shard: CardShard = {
     _poolSlimefootAndSquee,
     _poolSmeltedChargebug,
     _poolSmite,
+    _poolSnowfall,
     _poolSnowhornRider,
     _poolSoaringLightbringer,
     _poolSokkasSwordTraining,

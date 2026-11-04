@@ -176,6 +176,7 @@ import _poolCourtHomunculus from "../pool/court-homunculus.js";
 import _poolCoward from "../pool/coward.js";
 import _poolCranialArchive from "../pool/cranial-archive.js";
 import _poolCrashingBoars from "../pool/crashing-boars.js";
+import _poolCrimeNovelist from "../pool/crime-novelist.js";
 import _poolCrimestopperSprite from "../pool/crimestopper-sprite.js";
 import _poolCrocodileOfTheCrossing from "../pool/crocodile-of-the-crossing.js";
 import _poolCruelGrimnarch from "../pool/cruel-grimnarch.js";
@@ -205,6 +206,7 @@ import _poolDelugeOfTheDead from "../pool/deluge-of-the-dead.js";
 import _poolDemonsDisciple from "../pool/demons-disciple.js";
 import _poolDemonsGrasp from "../pool/demons-grasp.js";
 import _poolDesculptingBlast from "../pool/desculpting-blast.js";
+import _poolDesolation from "../pool/desolation.js";
 import _poolDetentionVortex from "../pool/detention-vortex.js";
 import _poolDevastation from "../pool/devastation.js";
 import _poolDeviantGlee from "../pool/deviant-glee.js";
@@ -1062,6 +1064,7 @@ const shard: CardShard = {
     _poolCoward,
     _poolCranialArchive,
     _poolCrashingBoars,
+    _poolCrimeNovelist,
     _poolCrimestopperSprite,
     _poolCrocodileOfTheCrossing,
     _poolCruelGrimnarch,
@@ -1091,6 +1094,7 @@ const shard: CardShard = {
     _poolDemonsDisciple,
     _poolDemonsGrasp,
     _poolDesculptingBlast,
+    _poolDesolation,
     _poolDetentionVortex,
     _poolDevastation,
     _poolDeviantGlee,

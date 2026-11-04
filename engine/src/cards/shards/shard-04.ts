@@ -852,6 +852,7 @@ import _poolWildGuess from "../pool/wild-guess.js";
 import _poolWildwoodTracker from "../pool/wildwood-tracker.js";
 import _poolWingSplicer from "../pool/wing-splicer.js";
 import _poolWingsOfVelisVel from "../pool/wings-of-velis-vel.js";
+import _poolWintersNight from "../pool/winters-night.js";
 import _poolWistfulSelkie from "../pool/wistful-selkie.js";
 import _poolWitherAndBloom from "../pool/wither-and-bloom.js";
 import _poolWolfirAvenger from "../pool/wolfir-avenger.js";
@@ -1739,6 +1740,7 @@ const shard: CardShard = {
     _poolWildwoodTracker,
     _poolWingSplicer,
     _poolWingsOfVelisVel,
+    _poolWintersNight,
     _poolWistfulSelkie,
     _poolWitherAndBloom,
     _poolWolfirAvenger,

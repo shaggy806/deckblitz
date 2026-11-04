@@ -588,6 +588,7 @@ import _poolRavenousRats from "../pool/ravenous-rats.js";
 import _poolRealmwalker from "../pool/realmwalker.js";
 import _poolReapWhatIsSown from "../pool/reap-what-is-sown.js";
 import _poolReconCraftTheta from "../pool/recon-craft-theta.js";
+import _poolRegalBehemoth from "../pool/regal-behemoth.js";
 import _poolReiterate from "../pool/reiterate.js";
 import _poolRekiTheHistoryOfKamigawa from "../pool/reki-the-history-of-kamigawa.js";
 import _poolRelentlessPursuit from "../pool/relentless-pursuit.js";
@@ -1497,6 +1498,7 @@ const shard: CardShard = {
     _poolRealmwalker,
     _poolReapWhatIsSown,
     _poolReconCraftTheta,
+    _poolRegalBehemoth,
     _poolReiterate,
     _poolRekiTheHistoryOfKamigawa,
     _poolRelentlessPursuit,

@@ -169,6 +169,7 @@ import _poolCruelTruths from "../pool/cruel-truths.js";
 import _poolCrypticAnnelid from "../pool/cryptic-annelid.js";
 import _poolCrystacean from "../pool/crystacean.js";
 import _poolCullingTheWeak from "../pool/culling-the-weak.js";
+import _poolCultivatorDrone from "../pool/cultivator-drone.js";
 import _poolCumberStone from "../pool/cumber-stone.js";
 import _poolCunningGeysermage from "../pool/cunning-geysermage.js";
 import _poolCurryFavor from "../pool/curry-favor.js";
@@ -404,6 +405,7 @@ import _poolKirtarsDesire from "../pool/kirtars-desire.js";
 import _poolKitesailCorsair from "../pool/kitesail-corsair.js";
 import _poolKnightOfGlory from "../pool/knight-of-glory.js";
 import _poolKoglaTheTitanApe from "../pool/kogla-the-titan-ape.js";
+import _poolKolvoriGodOfKinship from "../pool/kolvori-god-of-kinship.js";
 import _poolKondasBanner from "../pool/kondas-banner.js";
 import _poolKrasisIncubation from "../pool/krasis-incubation.js";
 import _poolKronchWrangler from "../pool/kronch-wrangler.js";
@@ -750,6 +752,7 @@ import _poolTheFairBasilica from "../pool/the-fair-basilica.js";
 import _poolTheKamiWar from "../pool/the-kami-war.js";
 import _poolTheNecrobloom from "../pool/the-necrobloom.js";
 import _poolTheNotaryHobbits from "../pool/the-notary-hobbits.js";
+import _poolTheRinghartCrest from "../pool/the-ringhart-crest.js";
 import _poolTheSpotsPortal from "../pool/the-spots-portal.js";
 import _poolTheTabernacleAtPendrellVale from "../pool/the-tabernacle-at-pendrell-vale.js";
 import _poolTheTarrasque from "../pool/the-tarrasque.js";
@@ -1068,6 +1071,7 @@ const shard: CardShard = {
     _poolCrypticAnnelid,
     _poolCrystacean,
     _poolCullingTheWeak,
+    _poolCultivatorDrone,
     _poolCumberStone,
     _poolCunningGeysermage,
     _poolCurryFavor,
@@ -1303,6 +1307,7 @@ const shard: CardShard = {
     _poolKitesailCorsair,
     _poolKnightOfGlory,
     _poolKoglaTheTitanApe,
+    _poolKolvoriGodOfKinship,
     _poolKondasBanner,
     _poolKrasisIncubation,
     _poolKronchWrangler,
@@ -1649,6 +1654,7 @@ const shard: CardShard = {
     _poolTheKamiWar,
     _poolTheNecrobloom,
     _poolTheNotaryHobbits,
+    _poolTheRinghartCrest,
     _poolTheSpotsPortal,
     _poolTheTabernacleAtPendrellVale,
     _poolTheTarrasque,
