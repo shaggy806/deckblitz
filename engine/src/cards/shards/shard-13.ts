@@ -69,6 +69,7 @@ import _poolBalduvianHydra from "../pool/balduvian-hydra.js";
 import _poolBalefulBeholder from "../pool/baleful-beholder.js";
 import _poolBardHeirOfGirion from "../pool/bard-heir-of-girion.js";
 import _poolBarrierBreach from "../pool/barrier-breach.js";
+import _poolBarrowBlade from "../pool/barrow-blade.js";
 import _poolBarrowWitches from "../pool/barrow-witches.js";
 import _poolBaxterBuilding from "../pool/baxter-building.js";
 import _poolBeaconBehemoth from "../pool/beacon-behemoth.js";
@@ -392,6 +393,7 @@ import _poolKiorasFollower from "../pool/kioras-follower.js";
 import _poolKishlaTrawlers from "../pool/kishla-trawlers.js";
 import _poolKishlaVillage from "../pool/kishla-village.js";
 import _poolKitesailScout from "../pool/kitesail-scout.js";
+import _poolKjeldoranHomeGuard from "../pool/kjeldoran-home-guard.js";
 import _poolKnacksawClique from "../pool/knacksaw-clique.js";
 import _poolKnightOfGrace from "../pool/knight-of-grace.js";
 import _poolKnightOfMeadowgrain from "../pool/knight-of-meadowgrain.js";
@@ -946,6 +948,7 @@ const shard: CardShard = {
     _poolBalefulBeholder,
     _poolBardHeirOfGirion,
     _poolBarrierBreach,
+    _poolBarrowBlade,
     _poolBarrowWitches,
     _poolBaxterBuilding,
     _poolBeaconBehemoth,
@@ -1269,6 +1272,7 @@ const shard: CardShard = {
     _poolKishlaTrawlers,
     _poolKishlaVillage,
     _poolKitesailScout,
+    _poolKjeldoranHomeGuard,
     _poolKnacksawClique,
     _poolKnightOfGrace,
     _poolKnightOfMeadowgrain,

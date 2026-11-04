@@ -129,6 +129,7 @@ import _poolCycloneSire from "../pool/cyclone-sire.js";
 import _poolCystbearer from "../pool/cystbearer.js";
 import _poolDacksDuplicate from "../pool/dacks-duplicate.js";
 import _poolDalekSquadron from "../pool/dalek-squadron.js";
+import _poolDaredevilDragster from "../pool/daredevil-dragster.js";
 import _poolDarkBargain from "../pool/dark-bargain.js";
 import _poolDarksteelMutation from "../pool/darksteel-mutation.js";
 import _poolDaruEncampment from "../pool/daru-encampment.js";
@@ -323,6 +324,7 @@ import _poolHengeOfRamos from "../pool/henge-of-ramos.js";
 import _poolHeraldOfSerra from "../pool/herald-of-serra.js";
 import _poolHeraldOfTheDreadhorde from "../pool/herald-of-the-dreadhorde.js";
 import _poolHiddenGibbons from "../pool/hidden-gibbons.js";
+import _poolHighRiseSawjack from "../pool/high-rise-sawjack.js";
 import _poolHoldTheLine from "../pool/hold-the-line.js";
 import _poolHookbladeVeteran from "../pool/hookblade-veteran.js";
 import _poolHourOfDefeat from "../pool/hour-of-defeat.js";
@@ -951,6 +953,7 @@ const shard: CardShard = {
     _poolCystbearer,
     _poolDacksDuplicate,
     _poolDalekSquadron,
+    _poolDaredevilDragster,
     _poolDarkBargain,
     _poolDarksteelMutation,
     _poolDaruEncampment,
@@ -1145,6 +1148,7 @@ const shard: CardShard = {
     _poolHeraldOfSerra,
     _poolHeraldOfTheDreadhorde,
     _poolHiddenGibbons,
+    _poolHighRiseSawjack,
     _poolHoldTheLine,
     _poolHookbladeVeteran,
     _poolHourOfDefeat,

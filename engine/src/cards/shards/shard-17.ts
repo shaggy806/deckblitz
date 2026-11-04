@@ -117,6 +117,7 @@ import _poolCheckpointOfficer from "../pool/checkpoint-officer.js";
 import _poolChieftainEnDal from "../pool/chieftain-en-dal.js";
 import _poolChildrenOfKorlis from "../pool/children-of-korlis.js";
 import _poolChitinousCloak from "../pool/chitinous-cloak.js";
+import _poolChokingVines from "../pool/choking-vines.js";
 import _poolChromium from "../pool/chromium.js";
 import _poolCinderShade from "../pool/cinder-shade.js";
 import _poolCityOnFire from "../pool/city-on-fire.js";
@@ -274,6 +275,7 @@ import _poolFleetingFlight from "../pool/fleeting-flight.js";
 import _poolFleetwheelCruiser from "../pool/fleetwheel-cruiser.js";
 import _poolFleshBlood from "../pool/flesh-blood.js";
 import _poolFlunk from "../pool/flunk.js";
+import _poolFogPatch from "../pool/fog-patch.js";
 import _poolForerunnerOfTheLegion from "../pool/forerunner-of-the-legion.js";
 import _poolForgeBoss from "../pool/forge-boss.js";
 import _poolForlornFlats from "../pool/forlorn-flats.js";
@@ -340,6 +342,7 @@ import _poolGroundskeeper from "../pool/groundskeeper.js";
 import _poolGuardianOfTazeem from "../pool/guardian-of-tazeem.js";
 import _poolGuardiansPledge from "../pool/guardians-pledge.js";
 import _poolGutTrueSoulZealot from "../pool/gut-true-soul-zealot.js";
+import _poolHallsOfMist from "../pool/halls-of-mist.js";
 import _poolHammersOfMoradin from "../pool/hammers-of-moradin.js";
 import _poolHandOfHonor from "../pool/hand-of-honor.js";
 import _poolHangedExecutioner from "../pool/hanged-executioner.js";
@@ -401,6 +404,7 @@ import _poolIronfistCrusher from "../pool/ironfist-crusher.js";
 import _poolIrontreadCrusher from "../pool/irontread-crusher.js";
 import _poolItlimocCradleOfTheSun from "../pool/itlimoc-cradle-of-the-sun.js";
 import _poolIzzetGuildgate from "../pool/izzet-guildgate.js";
+import _poolJabarisInfluence from "../pool/jabaris-influence.js";
 import _poolJaceMultiverseArchitect from "../pool/jace-multiverse-architect.js";
 import _poolJanglingAutomaton from "../pool/jangling-automaton.js";
 import _poolJarethLeonineTitan from "../pool/jareth-leonine-titan.js";
@@ -1026,6 +1030,7 @@ const shard: CardShard = {
     _poolChieftainEnDal,
     _poolChildrenOfKorlis,
     _poolChitinousCloak,
+    _poolChokingVines,
     _poolChromium,
     _poolCinderShade,
     _poolCityOnFire,
@@ -1183,6 +1188,7 @@ const shard: CardShard = {
     _poolFleetwheelCruiser,
     _poolFleshBlood,
     _poolFlunk,
+    _poolFogPatch,
     _poolForerunnerOfTheLegion,
     _poolForgeBoss,
     _poolForlornFlats,
@@ -1249,6 +1255,7 @@ const shard: CardShard = {
     _poolGuardianOfTazeem,
     _poolGuardiansPledge,
     _poolGutTrueSoulZealot,
+    _poolHallsOfMist,
     _poolHammersOfMoradin,
     _poolHandOfHonor,
     _poolHangedExecutioner,
@@ -1310,6 +1317,7 @@ const shard: CardShard = {
     _poolIrontreadCrusher,
     _poolItlimocCradleOfTheSun,
     _poolIzzetGuildgate,
+    _poolJabarisInfluence,
     _poolJaceMultiverseArchitect,
     _poolJanglingAutomaton,
     _poolJarethLeonineTitan,

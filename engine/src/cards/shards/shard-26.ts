@@ -759,6 +759,7 @@ import _poolTaleOfKataraAndToph from "../pool/tale-of-katara-and-toph.js";
 import _poolTalismanOfProgress from "../pool/talisman-of-progress.js";
 import _poolTamiyoFieldResearcher from "../pool/tamiyo-field-researcher.js";
 import _poolTamiyoMeetsTheStoryCircle from "../pool/tamiyo-meets-the-story-circle.js";
+import _poolTangleKelp from "../pool/tangle-kelp.js";
 import _poolTatsunariToadRider from "../pool/tatsunari-toad-rider.js";
 import _poolTawnossTinkering from "../pool/tawnoss-tinkering.js";
 import _poolTeapotSlinger from "../pool/teapot-slinger.js";
@@ -1667,6 +1668,7 @@ const shard: CardShard = {
     _poolTalismanOfProgress,
     _poolTamiyoFieldResearcher,
     _poolTamiyoMeetsTheStoryCircle,
+    _poolTangleKelp,
     _poolTatsunariToadRider,
     _poolTawnossTinkering,
     _poolTeapotSlinger,

@@ -845,6 +845,7 @@ import _poolWarbreakTrumpeter from "../pool/warbreak-trumpeter.js";
 import _poolWardenOfTheChained from "../pool/warden-of-the-chained.js";
 import _poolWarrenScourgeElf from "../pool/warren-scourge-elf.js";
 import _poolWarriorsSword from "../pool/warriors-sword.js";
+import _poolWatchdog from "../pool/watchdog.js";
 import _poolWeiScout from "../pool/wei-scout.js";
 import _poolWhipOfErebos from "../pool/whip-of-erebos.js";
 import _poolWhiptailWurm from "../pool/whiptail-wurm.js";
@@ -1730,6 +1731,7 @@ const shard: CardShard = {
     _poolWardenOfTheChained,
     _poolWarrenScourgeElf,
     _poolWarriorsSword,
+    _poolWatchdog,
     _poolWeiScout,
     _poolWhipOfErebos,
     _poolWhiptailWurm,

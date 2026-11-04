@@ -487,6 +487,7 @@ import _poolMinasMorgulDarkFortress from "../pool/minas-morgul-dark-fortress.js"
 import _poolMindDrain from "../pool/mind-drain.js";
 import _poolMindwrackLiege from "../pool/mindwrack-liege.js";
 import _poolMirrorImage from "../pool/mirror-image.js";
+import _poolMirrorShield from "../pool/mirror-shield.js";
 import _poolMistcutterHydra from "../pool/mistcutter-hydra.js";
 import _poolMisterGutsy from "../pool/mister-gutsy.js";
 import _poolMistfordRiverTurtle from "../pool/mistford-river-turtle.js";
@@ -1395,6 +1396,7 @@ const shard: CardShard = {
     _poolMindDrain,
     _poolMindwrackLiege,
     _poolMirrorImage,
+    _poolMirrorShield,
     _poolMistcutterHydra,
     _poolMisterGutsy,
     _poolMistfordRiverTurtle,

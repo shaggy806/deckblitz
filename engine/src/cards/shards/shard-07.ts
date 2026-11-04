@@ -133,6 +133,7 @@ import _poolCircuitMender from "../pool/circuit-mender.js";
 import _poolCirithUngolPatrol from "../pool/cirith-ungol-patrol.js";
 import _poolCleansingMeditation from "../pool/cleansing-meditation.js";
 import _poolClericOfLifesBond from "../pool/cleric-of-lifes-bond.js";
+import _poolClockworkBeast from "../pool/clockwork-beast.js";
 import _poolClockworkPercussionist from "../pool/clockwork-percussionist.js";
 import _poolCoastalWizard from "../pool/coastal-wizard.js";
 import _poolCollectorOuphe from "../pool/collector-ouphe.js";
@@ -1058,6 +1059,7 @@ const shard: CardShard = {
     _poolCirithUngolPatrol,
     _poolCleansingMeditation,
     _poolClericOfLifesBond,
+    _poolClockworkBeast,
     _poolClockworkPercussionist,
     _poolCoastalWizard,
     _poolCollectorOuphe,

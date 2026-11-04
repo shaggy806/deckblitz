@@ -874,6 +874,7 @@ import _tokensBeastToken33 from "../tokens/beast-token-3-3.js";
 import _tokensBlueBirdToken from "../tokens/blue-bird-token.js";
 import _tokensCadet from "../tokens/cadet.js";
 import _tokensCitizenToken from "../tokens/citizen-token.js";
+import _tokensDeserterToken from "../tokens/deserter-token.js";
 import _tokensDragonTokenFirebreathing from "../tokens/dragon-token-firebreathing.js";
 import _tokensEldraziSpawnToken from "../tokens/eldrazi-spawn-token.js";
 import _tokensElementalTokenRekindlingPhoenix from "../tokens/elemental-token-rekindling-phoenix.js";
@@ -1771,6 +1772,7 @@ const shard: CardShard = {
     _tokensBlueBirdToken,
     _tokensCadet,
     _tokensCitizenToken,
+    _tokensDeserterToken,
     _tokensDragonTokenFirebreathing,
     _tokensEldraziSpawnToken,
     _tokensElementalTokenRekindlingPhoenix,

@@ -461,6 +461,7 @@ import _poolMinimusContainment from "../pool/minimus-containment.js";
 import _poolMiseryCharm from "../pool/misery-charm.js";
 import _poolMishrasJuggernaut from "../pool/mishras-juggernaut.js";
 import _poolMishrasResearchDesk from "../pool/mishras-research-desk.js";
+import _poolMisleadingSignpost from "../pool/misleading-signpost.js";
 import _poolMistLeopard from "../pool/mist-leopard.js";
 import _poolMistformSliver from "../pool/mistform-sliver.js";
 import _poolMisthiossFury from "../pool/misthioss-fury.js";
@@ -1368,6 +1369,7 @@ const shard: CardShard = {
     _poolMiseryCharm,
     _poolMishrasJuggernaut,
     _poolMishrasResearchDesk,
+    _poolMisleadingSignpost,
     _poolMistLeopard,
     _poolMistformSliver,
     _poolMisthiossFury,

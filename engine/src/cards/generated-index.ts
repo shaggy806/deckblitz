@@ -184,6 +184,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Deathtouch Snake Token",
   "Demon Berserker Token",
   "Demon Token",
+  "Deserter Token",
   "Detective Token",
   "Devil Token",
   "Dinosaur Cat Token",
