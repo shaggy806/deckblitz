@@ -15800,3 +15800,26 @@ describe("a counter on each creature target player controls, and proliferating t
     expect(engine.activated[0].effect).toEqual({ kind: "sequence", effects: [{ kind: "proliferate" }, { kind: "proliferate" }] });
   });
 });
+
+describe("a target with mana value X on an activated ability, and a copy as a 4/4 black Zombie", () => {
+  it("reads Lazotep Quarry whole", () => {
+    const quarry = parseFace({
+      name: "Lazotep Quarry",
+      type_line: "Land — Desert",
+      oracle_text:
+        "{T}: Add {C}.\n{T}, Sacrifice a creature: Add one mana of any color.\n{X}{2}, {T}, Sacrifice a Desert: Exile target creature card with mana value X from your graveyard. Create a token that's a copy of it, except it's a 4/4 black Zombie. Activate only as a sorcery.",
+    });
+    expect(quarry.complete).toBe(true);
+    expect(quarry.activated[2].sorcerySpeed).toBe(true);
+    expect(quarry.activated[2].targets).toEqual([
+      { kind: "card-in-graveyard", whose: "you", filter: { type: "creature", manaValue: { op: "eq", n: "x" } } },
+    ]);
+    expect(quarry.activated[2].effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "exile", target: 0 },
+        { kind: "create-token-copy", of: 0, count: 1, who: "you", exceptions: { basePt: [4, 4], setColors: ["B"], setSubtypes: ["Zombie"] } },
+      ],
+    });
+  });
+});

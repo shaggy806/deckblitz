@@ -192,9 +192,11 @@ export function activate(
     waterbend?: readonly ObjectId[];
     /** A modal ability's modes, chosen as it's activated (rule 700.2b). */
     modes?: readonly number[];
+    /** The permanent a "Sacrifice a …" cost takes — the action's `sacrifice`. */
+    sacrifice?: ObjectId;
   } = {},
 ): void {
-  const { player = A, targets, x, settle: andSettle = true, waterbend, modes } = opts;
+  const { player = A, targets, x, settle: andSettle = true, waterbend, modes, sacrifice } = opts;
   dispatchOrExplain(game, {
     type: "activate-ability",
     player,
@@ -202,6 +204,7 @@ export function activate(
     abilityIndex: index,
     targets: targets ?? [],
     ...(x !== undefined ? { xValue: x } : {}),
+    ...(sacrifice !== undefined ? { sacrifice } : {}),
     ...(waterbend !== undefined ? { waterbend } : {}),
     ...(modes !== undefined ? { modes } : {}),
   } as Action);

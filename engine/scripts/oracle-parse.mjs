@@ -6679,6 +6679,17 @@ export function parseSentence(sentence, ctx) {
   if (ctx.it === "trigger-object" && ctx.targets.length === 0 && /^create a token that's a copy of it\.$/i.test(s)) {
     return { kind: "create-token-copy", of: "trigger-object", count: 1, who: "you" };
   }
+  // "Exile target creature card … Create a token that's a copy of it, except
+  // it's a 4/4 black Zombie" (The Scarab God, Lazotep Quarry).
+  if (ctx.targets.length === 1 && (m = /^create a token that's a copy of it, except it's a (\d+)\/(\d+) black zombie\.$/i.exec(s))) {
+    return {
+      kind: "create-token-copy",
+      of: 0,
+      count: 1,
+      who: "you",
+      exceptions: { basePt: [Number(m[1]), Number(m[2])], setColors: ["B"], setSubtypes: ["Zombie"] },
+    };
+  }
   if (/^create a token that's a copy of enchanted (?:creature|artifact)\.$/i.test(s)) {
     return { kind: "create-token-copy", of: "enchanted", count: 1, who: "you" };
   }
