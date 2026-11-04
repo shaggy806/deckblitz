@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4301 already implemented / 699 missing (marks refreshed 2026-11-04)
+4314 already implemented / 686 missing (marks refreshed 2026-11-04)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -1181,7 +1181,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1186  Abandoned Air Temple                     {0}              Land
 [x]  1187  Zopandrel, Hunger Dominus                {5}{G}{G}        Legendary Creature — Phyrexian Horror
 [ ]  1188  The Darkness Crystal                     {2}{B}{B}        Legendary Artifact
-[ ]  1189  Siren Stormtamer                         {U}              Creature — Siren Pirate Wizard
+[x]  1189  Siren Stormtamer                         {U}              Creature — Siren Pirate Wizard
 [x]  1190  Badgermole Cub                           {1}{G}           Creature — Badger Mole
 [x]  1191  Fire-Lit Thicket                         {0}              Land
 [x]  1192  Neheb, the Eternal                       {3}{R}{R}        Legendary Creature — Zombie Minotaur Warrior
@@ -1212,7 +1212,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1217  Legion Leadership // Legion Stronghold   {2}              Instant // Land
 [x]  1218  Glaring Fleshraker                       {2}{C}           Creature — Eldrazi Drone
 [ ]  1219  Cascading Cataracts                      {0}              Land
-[ ]  1220  Midgar, City of Mako // Reactor Raid     {2}{B}           Land — Town // Sorcery — Adventure
+[x]  1220  Midgar, City of Mako // Reactor Raid     {2}{B}           Land — Town // Sorcery — Adventure
 [x]  1221  Thriving Moor                            {0}              Land
 [x]  1222  Sterling Grove                           {G}{W}           Enchantment
 [x]  1223  Tezzeret, Cruel Captain                  {3}              Legendary Planeswalker — Tezzeret
@@ -1400,7 +1400,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1407  Delayed Blast Fireball                   {1}{R}{R}        Instant
 [ ]  1408  Baleful Mastery                          {3}{B}           Instant
 [ ]  1409  Mantle of the Ancients                   {3}{W}{W}        Enchantment — Aura
-[ ]  1410  Lindblum, Industrial Regency // Mage Siege {2}{R}           Land — Town // Instant — Adventure
+[x]  1410  Lindblum, Industrial Regency // Mage Siege {2}{R}           Land — Town // Instant — Adventure
 [x]  1411  Darkslick Shores                         {0}              Land
 [x]  1412  Ominous Seas                             {1}{U}           Enchantment
 [x]  1413  Hedron Crab                              {U}              Creature — Crab
@@ -2213,7 +2213,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  2220  Deep Gnome Terramancer                   {1}{W}           Creature — Gnome Wizard
 [x]  2221  Circuit Mender                           {3}              Artifact Creature — Insect
 [ ]  2222  Brainstealer Dragon                      {5}{B}{B}        Creature — Dragon Horror
-[ ]  2223  Ral, Crackling Wit                       {2}{U}{R}        Legendary Planeswalker — Ral
+[x]  2223  Ral, Crackling Wit                       {2}{U}{R}        Legendary Planeswalker — Ral
 [x]  2224  Imposter Mech                            {1}{U}           Artifact — Vehicle
 [x]  2225  Poison Dart Frog                         {1}{G}           Creature — Frog
 [x]  2226  Sword of Wealth and Power                {3}              Artifact — Equipment
@@ -2416,7 +2416,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2423  Wear Down                                {1}{G}           Sorcery
 [x]  2424  Tinder Wall                              {G}              Creature — Plant Wall
 [x]  2425  God-Eternal Oketra                       {3}{W}{W}        Legendary Creature — Zombie God
-[ ]  2426  Not of This World                        {7}              Kindred Instant — Eldrazi
+[x]  2426  Not of This World                        {7}              Kindred Instant — Eldrazi
 [x]  2427  Crowded Crypt                            {2}{B}           Artifact
 [x]  2428  Abundant Growth                          {G}              Enchantment — Aura
 [x]  2429  Force of Despair                         {1}{B}{B}        Instant
@@ -2802,7 +2802,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2809  The Seriema                              {1}{W}{W}        Legendary Artifact — Spacecraft
 [x]  2810  Mist-Cloaked Herald                      {U}              Creature — Merfolk Warrior
 [x]  2811  Elven Ambush                             {3}{G}           Instant
-[ ]  2812  Ugin's Labyrinth                         {0}              Land
+[x]  2812  Ugin's Labyrinth                         {0}              Land
 [x]  2813  Parasitic Impetus                        {2}{B}           Enchantment — Aura
 [x]  2814  Jeskai Ascendancy                        {U}{R}{W}        Enchantment
 [ ]  2815  Tragic Arrogance                         {3}{W}{W}        Sorcery
@@ -3326,7 +3326,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3333  Make a Stand                             {2}{W}           Instant
 [x]  3334  Mech Hangar                              {0}              Land
 [x]  3335  Fain, the Broker                         {2}{B}           Legendary Creature — Human Warlock
-[ ]  3336  Germination Practicum                    {3}{G}{G}        Sorcery — Lesson
+[x]  3336  Germination Practicum                    {3}{G}{G}        Sorcery — Lesson
 [x]  3337  Rapacious Guest                          {2}{B}           Creature — Halfling Citizen
 [x]  3338  Counterbalance                           {U}{U}           Enchantment
 [x]  3339  Skittering Cicada                        {3}              Creature — Insect
@@ -3587,7 +3587,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3594  Sifter of Skulls                         {3}{B}           Creature — Eldrazi
 [x]  3595  Wall of Roots                            {1}{G}           Creature — Plant Wall
 [ ]  3596  Prisoner's Dilemma                       {3}{R}{R}        Sorcery
-[ ]  3597  Decorum Dissertation                     {3}{B}{B}        Sorcery — Lesson
+[x]  3597  Decorum Dissertation                     {3}{B}{B}        Sorcery — Lesson
 [x]  3598  Jace Beleren                             {1}{U}{U}        Legendary Planeswalker — Jace
 [x]  3599  Beetleback Chief                         {2}{R}{R}        Creature — Goblin Warrior
 [x]  3600  Armorcraft Judge                         {3}{G}           Creature — Elf Artificer
@@ -4056,7 +4056,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4063  Essence Channeler                        {1}{W}           Creature — Bat Cleric
 [x]  4064  Quicksilver Amulet                       {4}              Artifact
 [x]  4065  Wild Ricochet                            {2}{R}{R}        Instant
-[ ]  4066  Season of the Burrow                     {3}{W}{W}        Sorcery
+[x]  4066  Season of the Burrow                     {3}{W}{W}        Sorcery
 [ ]  4067  Shay Cormac                              {W}{B}           Legendary Creature — Human Knight Rogue
 [x]  4068  Shield Sphere                            {0}              Artifact Creature — Wall
 [ ]  4069  Bronzebeak Foragers                      {3}{W}           Creature — Dinosaur
@@ -4540,7 +4540,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4547  Restart Sequence                         {3}{B}           Sorcery
 [ ]  4548  Sokrates, Athenian Teacher               {1}{W}{U}        Legendary Creature — Human Advisor
 [x]  4549  Dreadbore                                {B}{R}           Sorcery
-[ ]  4550  Voidslime                                {G}{U}{U}        Instant
+[x]  4550  Voidslime                                {G}{U}{U}        Instant
 [x]  4551  Skemfar Shadowsage                       {3}{B}           Creature — Elf Cleric
 [x]  4552  Fanatical Offering                       {1}{B}           Instant
 [x]  4553  Tower Winder                             {1}{G}           Creature — Snake
@@ -4598,7 +4598,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4605  Théoden, King of Rohan                   {1}{R}{W}        Legendary Creature — Human Noble
 [x]  4606  Syphon Sliver                            {2}{B}           Creature — Sliver
 [x]  4607  Crawling Infestation                     {2}{G}           Enchantment
-[ ]  4608  Restoration Seminar                      {5}{W}{W}        Sorcery — Lesson
+[x]  4608  Restoration Seminar                      {5}{W}{W}        Sorcery — Lesson
 [ ]  4609  Summon: Valefor                          {4}{U}           Enchantment Creature — Saga Drake
 [x]  4610  Skittering Invasion                      {7}              Kindred Sorcery — Eldrazi
 [x]  4611  Entrapment Maneuver                      {3}{W}           Instant
@@ -4744,7 +4744,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4751  Heronblade Elite                         {2}{G}           Creature — Human Warrior
 [x]  4752  Swarm Intelligence                       {6}{U}           Enchantment
 [ ]  4753  Wulfgar of Icewind Dale                  {3}{R}{G}        Legendary Creature — Human Barbarian
-[ ]  4754  Season of Loss                           {3}{B}{B}        Sorcery
+[x]  4754  Season of Loss                           {3}{B}{B}        Sorcery
 [x]  4755  Quandrix Campus                          {0}              Land
 [x]  4756  Danitha, Benalia's Hope                  {4}{W}           Legendary Creature — Human Knight
 [x]  4757  Saruman's Trickery                       {1}{U}{U}        Instant
@@ -4810,7 +4810,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  4817  Moonlit Meditation                       {2}{U}           Enchantment — Aura
 [x]  4818  Liliana Vess                             {3}{B}{B}        Legendary Planeswalker — Liliana
 [x]  4819  Bumi, Eclectic Earthbender               {3}{G}{G}        Legendary Creature — Human Noble Ally
-[ ]  4820  Tale's End                               {1}{U}           Instant
+[x]  4820  Tale's End                               {1}{U}           Instant
 [x]  4821  Ambush Viper                             {1}{G}           Creature — Snake
 [x]  4822  Villainous Wrath                         {3}{B}{B}        Sorcery
 [x]  4823  Ancestral Anger                          {R}              Sorcery

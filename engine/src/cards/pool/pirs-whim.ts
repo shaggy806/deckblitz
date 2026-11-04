@@ -3,6 +3,7 @@ import { defineCard } from "../define.js";
 export default defineCard({
   name: "Pir's Whim",
   manaCost: "{3}{G}",
+  colors: ["G"],
   types: ["sorcery"],
   text:
     "For each player, choose friend or foe. Each friend searches their library for a land card, puts it onto the battlefield tapped, then shuffles. Each foe sacrifices an artifact or enchantment of their choice.",

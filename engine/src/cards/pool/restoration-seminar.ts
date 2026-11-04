@@ -3,6 +3,7 @@ import { defineCard } from "../define.js";
 export default defineCard({
   name: "Restoration Seminar",
   manaCost: "{5}{W}{W}",
+  colors: ["W"],
   types: ["sorcery"],
   subtypes: ["Lesson"],
   text:

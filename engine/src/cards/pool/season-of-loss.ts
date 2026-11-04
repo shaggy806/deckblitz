@@ -3,6 +3,7 @@ import { defineCard } from "../define.js";
 export default defineCard({
   name: "Season of Loss",
   manaCost: "{3}{B}{B}",
+  colors: ["B"],
   types: ["sorcery"],
   text:
     "Choose up to five {P} worth of modes. You may choose the same mode more than once.\n" +

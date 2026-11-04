@@ -3,6 +3,7 @@ import { defineCard } from "../define.js";
 export default defineCard({
   name: "Season of the Burrow",
   manaCost: "{3}{W}{W}",
+  colors: ["W"],
   types: ["sorcery"],
   text:
     "Choose up to five {P} worth of modes. You may choose the same mode more than once.\n" +

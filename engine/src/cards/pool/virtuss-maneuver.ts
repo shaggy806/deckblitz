@@ -3,6 +3,7 @@ import { defineCard } from "../define.js";
 export default defineCard({
   name: "Virtus's Maneuver",
   manaCost: "{2}{B}",
+  colors: ["B"],
   types: ["sorcery"],
   text:
     "For each player, choose friend or foe. Each friend returns a creature card from their graveyard to their hand. Each foe sacrifices a creature of their choice.",

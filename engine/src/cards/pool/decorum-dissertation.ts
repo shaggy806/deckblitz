@@ -3,6 +3,7 @@ import { defineCard } from "../define.js";
 export default defineCard({
   name: "Decorum Dissertation",
   manaCost: "{3}{B}{B}",
+  colors: ["B"],
   types: ["sorcery"],
   subtypes: ["Lesson"],
   text:
