@@ -43,6 +43,7 @@ import _poolArvadTheCursed from "../pool/arvad-the-cursed.js";
 import _poolAryelKnightOfWindgrace from "../pool/aryel-knight-of-windgrace.js";
 import _poolAscendantPackleader from "../pool/ascendant-packleader.js";
 import _poolAshmouthHound from "../pool/ashmouth-hound.js";
+import _poolAshnodTheUncaring from "../pool/ashnod-the-uncaring.js";
 import _poolAssassinsStrike from "../pool/assassins-strike.js";
 import _poolAvatarOfSlaughter from "../pool/avatar-of-slaughter.js";
 import _poolAvenCloudchaser from "../pool/aven-cloudchaser.js";
@@ -957,6 +958,7 @@ const shard: CardShard = {
     _poolAryelKnightOfWindgrace,
     _poolAscendantPackleader,
     _poolAshmouthHound,
+    _poolAshnodTheUncaring,
     _poolAssassinsStrike,
     _poolAvatarOfSlaughter,
     _poolAvenCloudchaser,

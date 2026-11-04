@@ -35,6 +35,7 @@ import _poolArmsOfHadar from "../pool/arms-of-hadar.js";
 import _poolArrestersAdmonition from "../pool/arresters-admonition.js";
 import _poolArtisansSorrow from "../pool/artisans-sorrow.js";
 import _poolAscendantSpirit from "../pool/ascendant-spirit.js";
+import _poolAshiokDreamRender from "../pool/ashiok-dream-render.js";
 import _poolAshioksReaper from "../pool/ashioks-reaper.js";
 import _poolAssemble from "../pool/assemble.js";
 import _poolAstelliReclaimer from "../pool/astelli-reclaimer.js";
@@ -858,6 +859,7 @@ import _poolWolfStrike from "../pool/wolf-strike.js";
 import _poolWoodwraithCorrupter from "../pool/woodwraith-corrupter.js";
 import _poolWorkshopElders from "../pool/workshop-elders.js";
 import _poolWorldQueller from "../pool/world-queller.js";
+import _poolWorship from "../pool/worship.js";
 import _poolWrennsResolve from "../pool/wrenns-resolve.js";
 import _poolXandersLounge from "../pool/xanders-lounge.js";
 import _poolYamabushisStorm from "../pool/yamabushis-storm.js";
@@ -917,6 +919,7 @@ const shard: CardShard = {
     _poolArrestersAdmonition,
     _poolArtisansSorrow,
     _poolAscendantSpirit,
+    _poolAshiokDreamRender,
     _poolAshioksReaper,
     _poolAssemble,
     _poolAstelliReclaimer,
@@ -1740,6 +1743,7 @@ const shard: CardShard = {
     _poolWoodwraithCorrupter,
     _poolWorkshopElders,
     _poolWorldQueller,
+    _poolWorship,
     _poolWrennsResolve,
     _poolXandersLounge,
     _poolYamabushisStorm,

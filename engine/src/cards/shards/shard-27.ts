@@ -677,6 +677,7 @@ import _poolSoulreaperOfMogis from "../pool/soulreaper-of-mogis.js";
 import _poolSoulsMajesty from "../pool/souls-majesty.js";
 import _poolSoulswornJury from "../pool/soulsworn-jury.js";
 import _poolSparkElemental from "../pool/spark-elemental.js";
+import _poolSpectraWard from "../pool/spectra-ward.js";
 import _poolSpectralSnatcher from "../pool/spectral-snatcher.js";
 import _poolSpellBlast from "../pool/spell-blast.js";
 import _poolSpellbookSeeker from "../pool/spellbook-seeker.js";
@@ -757,6 +758,7 @@ import _poolThunderbreakRegent from "../pool/thunderbreak-regent.js";
 import _poolThuridMareOfDestiny from "../pool/thurid-mare-of-destiny.js";
 import _poolTimberlandAncient from "../pool/timberland-ancient.js";
 import _poolTivadarsCrusade from "../pool/tivadars-crusade.js";
+import _poolToggoGoblinWeaponsmith from "../pool/toggo-goblin-weaponsmith.js";
 import _poolTolarianAcademy from "../pool/tolarian-academy.js";
 import _poolTolarianScholar from "../pool/tolarian-scholar.js";
 import _poolTopanFreeblade from "../pool/topan-freeblade.js";
@@ -1560,6 +1562,7 @@ const shard: CardShard = {
     _poolSoulsMajesty,
     _poolSoulswornJury,
     _poolSparkElemental,
+    _poolSpectraWard,
     _poolSpectralSnatcher,
     _poolSpellBlast,
     _poolSpellbookSeeker,
@@ -1640,6 +1643,7 @@ const shard: CardShard = {
     _poolThuridMareOfDestiny,
     _poolTimberlandAncient,
     _poolTivadarsCrusade,
+    _poolToggoGoblinWeaponsmith,
     _poolTolarianAcademy,
     _poolTolarianScholar,
     _poolTopanFreeblade,

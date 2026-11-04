@@ -711,6 +711,7 @@ import _poolStewardOfTheHarvest from "../pool/steward-of-the-harvest.js";
 import _poolStingmoggie from "../pool/stingmoggie.js";
 import _poolStirringBard from "../pool/stirring-bard.js";
 import _poolStormcragElemental from "../pool/stormcrag-elemental.js";
+import _poolStranglehold from "../pool/stranglehold.js";
 import _poolStrengthBobblehead from "../pool/strength-bobblehead.js";
 import _poolStruggle from "../pool/struggle.js";
 import _poolStuffedBear from "../pool/stuffed-bear.js";
@@ -792,6 +793,7 @@ import _poolTuneTheNarrative from "../pool/tune-the-narrative.js";
 import _poolTurbulentWetlands from "../pool/turbulent-wetlands.js";
 import _poolTurnInsideOut from "../pool/turn-inside-out.js";
 import _poolTwigwalker from "../pool/twigwalker.js";
+import _poolTwinnedVision from "../pool/twinned-vision.js";
 import _poolTyphoidRats from "../pool/typhoid-rats.js";
 import _poolUkkimaStalkingShadow from "../pool/ukkima-stalking-shadow.js";
 import _poolUlamogsCrusher from "../pool/ulamogs-crusher.js";
@@ -1611,6 +1613,7 @@ const shard: CardShard = {
     _poolStingmoggie,
     _poolStirringBard,
     _poolStormcragElemental,
+    _poolStranglehold,
     _poolStrengthBobblehead,
     _poolStruggle,
     _poolStuffedBear,
@@ -1692,6 +1695,7 @@ const shard: CardShard = {
     _poolTurbulentWetlands,
     _poolTurnInsideOut,
     _poolTwigwalker,
+    _poolTwinnedVision,
     _poolTyphoidRats,
     _poolUkkimaStalkingShadow,
     _poolUlamogsCrusher,

@@ -292,6 +292,7 @@ import _poolFlaxenIntruder from "../pool/flaxen-intruder.js";
 import _poolFlayerOfTheHatebound from "../pool/flayer-of-the-hatebound.js";
 import _poolFlintGolem from "../pool/flint-golem.js";
 import _poolFloodgate from "../pool/floodgate.js";
+import _poolFloodtideSerpent from "../pool/floodtide-serpent.js";
 import _poolFlowstoneSurge from "../pool/flowstone-surge.js";
 import _poolFlyingDrone from "../pool/flying-drone.js";
 import _poolFlywheelRacer from "../pool/flywheel-racer.js";
@@ -1193,6 +1194,7 @@ const shard: CardShard = {
     _poolFlayerOfTheHatebound,
     _poolFlintGolem,
     _poolFloodgate,
+    _poolFloodtideSerpent,
     _poolFlowstoneSurge,
     _poolFlyingDrone,
     _poolFlywheelRacer,

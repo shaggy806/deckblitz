@@ -382,6 +382,7 @@ import _poolHuntmasterLiger from "../pool/huntmaster-liger.js";
 import _poolHushwoodVerge from "../pool/hushwood-verge.js";
 import _poolHydroidKrasis from "../pool/hydroid-krasis.js";
 import _poolHypochondria from "../pool/hypochondria.js";
+import _poolIgneousPouncer from "../pool/igneous-pouncer.js";
 import _poolIllTemperedLoner from "../pool/ill-tempered-loner.js";
 import _poolImodaneThePyrohammer from "../pool/imodane-the-pyrohammer.js";
 import _poolImodanesRecruiter from "../pool/imodanes-recruiter.js";
@@ -1295,6 +1296,7 @@ const shard: CardShard = {
     _poolHushwoodVerge,
     _poolHydroidKrasis,
     _poolHypochondria,
+    _poolIgneousPouncer,
     _poolIllTemperedLoner,
     _poolImodaneThePyrohammer,
     _poolImodanesRecruiter,

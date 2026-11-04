@@ -916,6 +916,7 @@ import _poolWeddingFestivity from "../pool/wedding-festivity.js";
 import _poolWeldfastEngineer from "../pool/weldfast-engineer.js";
 import _poolWellRested from "../pool/well-rested.js";
 import _poolWerewolfRansacker from "../pool/werewolf-ransacker.js";
+import _poolWhiteWard from "../pool/white-ward.js";
 import _poolWidowsWalk from "../pool/widows-walk.js";
 import _poolWildCantor from "../pool/wild-cantor.js";
 import _poolWildMagicSorcerer from "../pool/wild-magic-sorcerer.js";
@@ -1878,6 +1879,7 @@ const shard: CardShard = {
     _poolWeldfastEngineer,
     _poolWellRested,
     _poolWerewolfRansacker,
+    _poolWhiteWard,
     _poolWidowsWalk,
     _poolWildCantor,
     _poolWildMagicSorcerer,

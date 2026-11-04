@@ -61,6 +61,7 @@ import _poolBarbedWire from "../pool/barbed-wire.js";
 import _poolBartzAndBoko from "../pool/bartz-and-boko.js";
 import _poolBasilicaShepherd from "../pool/basilica-shepherd.js";
 import _poolBasimIbnIshaq from "../pool/basim-ibn-ishaq.js";
+import _poolBattleScreech from "../pool/battle-screech.js";
 import _poolBattleSliver from "../pool/battle-sliver.js";
 import _poolBazaarTrader from "../pool/bazaar-trader.js";
 import _poolBeaconOfDestruction from "../pool/beacon-of-destruction.js";
@@ -611,6 +612,7 @@ import _poolRavnicaAtWar from "../pool/ravnica-at-war.js";
 import _poolRazorfieldThresher from "../pool/razorfield-thresher.js";
 import _poolReadyToRumble from "../pool/ready-to-rumble.js";
 import _poolRecklessBushwhacker from "../pool/reckless-bushwhacker.js";
+import _poolReclamation from "../pool/reclamation.js";
 import _poolRedWard from "../pool/red-ward.js";
 import _poolRegnaTheRedeemer from "../pool/regna-the-redeemer.js";
 import _poolRejuvenate from "../pool/rejuvenate.js";
@@ -969,6 +971,7 @@ const shard: CardShard = {
     _poolBartzAndBoko,
     _poolBasilicaShepherd,
     _poolBasimIbnIshaq,
+    _poolBattleScreech,
     _poolBattleSliver,
     _poolBazaarTrader,
     _poolBeaconOfDestruction,
@@ -1519,6 +1522,7 @@ const shard: CardShard = {
     _poolRazorfieldThresher,
     _poolReadyToRumble,
     _poolRecklessBushwhacker,
+    _poolReclamation,
     _poolRedWard,
     _poolRegnaTheRedeemer,
     _poolRejuvenate,

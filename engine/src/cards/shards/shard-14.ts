@@ -826,6 +826,7 @@ import _poolUrborgStalker from "../pool/urborg-stalker.js";
 import _poolUrzasCave from "../pool/urzas-cave.js";
 import _poolUrzasGuilt from "../pool/urzas-guilt.js";
 import _poolUrzasIncubator from "../pool/urzas-incubator.js";
+import _poolValleyRannet from "../pool/valley-rannet.js";
 import _poolValorousCharge from "../pool/valorous-charge.js";
 import _poolVampireHexmage from "../pool/vampire-hexmage.js";
 import _poolVampireNighthawk from "../pool/vampire-nighthawk.js";
@@ -1729,6 +1730,7 @@ const shard: CardShard = {
     _poolUrzasCave,
     _poolUrzasGuilt,
     _poolUrzasIncubator,
+    _poolValleyRannet,
     _poolValorousCharge,
     _poolVampireHexmage,
     _poolVampireNighthawk,

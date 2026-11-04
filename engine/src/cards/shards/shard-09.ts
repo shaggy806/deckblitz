@@ -233,6 +233,7 @@ import _poolEventidesShadow from "../pool/eventides-shadow.js";
 import _poolEverquillPhoenix from "../pool/everquill-phoenix.js";
 import _poolEvolutionCharm from "../pool/evolution-charm.js";
 import _poolEvolutionaryEscalation from "../pool/evolutionary-escalation.js";
+import _poolExaltedDragon from "../pool/exalted-dragon.js";
 import _poolExclude from "../pool/exclude.js";
 import _poolExcoriate from "../pool/excoriate.js";
 import _poolExpensiveTaste from "../pool/expensive-taste.js";
@@ -334,6 +335,7 @@ import _poolGrimFeast from "../pool/grim-feast.js";
 import _poolGrimInitiate from "../pool/grim-initiate.js";
 import _poolGriptide from "../pool/griptide.js";
 import _poolGrismoldTheDreadsower from "../pool/grismold-the-dreadsower.js";
+import _poolGroupProject from "../pool/group-project.js";
 import _poolGroveOfTheGuardian from "../pool/grove-of-the-guardian.js";
 import _poolGuardianGladewalker from "../pool/guardian-gladewalker.js";
 import _poolGuardiansOfKoilos from "../pool/guardians-of-koilos.js";
@@ -435,6 +437,7 @@ import _poolLashOut from "../pool/lash-out.js";
 import _poolLaurineTheDiversion from "../pool/laurine-the-diversion.js";
 import _poolLazotepPlating from "../pool/lazotep-plating.js";
 import _poolLedgerShredder from "../pool/ledger-shredder.js";
+import _poolLeviathan from "../pool/leviathan.js";
 import _poolLeylineOfAnticipation from "../pool/leyline-of-anticipation.js";
 import _poolLeylineOfPunishment from "../pool/leyline-of-punishment.js";
 import _poolLieInWait from "../pool/lie-in-wait.js";
@@ -1173,6 +1176,7 @@ const shard: CardShard = {
     _poolEverquillPhoenix,
     _poolEvolutionCharm,
     _poolEvolutionaryEscalation,
+    _poolExaltedDragon,
     _poolExclude,
     _poolExcoriate,
     _poolExpensiveTaste,
@@ -1274,6 +1278,7 @@ const shard: CardShard = {
     _poolGrimInitiate,
     _poolGriptide,
     _poolGrismoldTheDreadsower,
+    _poolGroupProject,
     _poolGroveOfTheGuardian,
     _poolGuardianGladewalker,
     _poolGuardiansOfKoilos,
@@ -1375,6 +1380,7 @@ const shard: CardShard = {
     _poolLaurineTheDiversion,
     _poolLazotepPlating,
     _poolLedgerShredder,
+    _poolLeviathan,
     _poolLeylineOfAnticipation,
     _poolLeylineOfPunishment,
     _poolLieInWait,

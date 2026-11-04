@@ -21,6 +21,7 @@ import _poolAkoumStonewaker from "../pool/akoum-stonewaker.js";
 import _poolAkuDjinn from "../pool/aku-djinn.js";
 import _poolAlchemistsTalent from "../pool/alchemists-talent.js";
 import _poolAlharuSolemnRitualist from "../pool/alharu-solemn-ritualist.js";
+import _poolAliFromCairo from "../pool/ali-from-cairo.js";
 import _poolAlrundsEpiphany from "../pool/alrunds-epiphany.js";
 import _poolAltarOfDementia from "../pool/altar-of-dementia.js";
 import _poolAlwaysWatching from "../pool/always-watching.js";
@@ -409,6 +410,7 @@ import _poolLasydProwler from "../pool/lasyd-prowler.js";
 import _poolLeafkinDruid from "../pool/leafkin-druid.js";
 import _poolLeatherArmor from "../pool/leather-armor.js";
 import _poolLeechCollector from "../pool/leech-collector.js";
+import _poolLeoninArbiter from "../pool/leonin-arbiter.js";
 import _poolLiberatingCombustion from "../pool/liberating-combustion.js";
 import _poolLibraryOfLatNam from "../pool/library-of-lat-nam.js";
 import _poolLiegeOfTheAxe from "../pool/liege-of-the-axe.js";
@@ -863,6 +865,7 @@ import _tokensNinjaTurtleSpiritToken from "../tokens/ninja-turtle-spirit-token.j
 import _tokensOozeTokenGutterGrime from "../tokens/ooze-token-gutter-grime.js";
 import _tokensPhyrexianWurmDeathtouch from "../tokens/phyrexian-wurm-deathtouch.js";
 import _tokensRobotTokenBigMotherMouser from "../tokens/robot-token-big-mother-mouser.js";
+import _tokensRockToken from "../tokens/rock-token.js";
 import _tokensSculptureToken from "../tokens/sculpture-token.js";
 import _tokensShapeshifterTokenIrregularCohort from "../tokens/shapeshifter-token-irregular-cohort.js";
 import _tokensSheepToken from "../tokens/sheep-token.js";
@@ -893,6 +896,7 @@ const shard: CardShard = {
     _poolAkuDjinn,
     _poolAlchemistsTalent,
     _poolAlharuSolemnRitualist,
+    _poolAliFromCairo,
     _poolAlrundsEpiphany,
     _poolAltarOfDementia,
     _poolAlwaysWatching,
@@ -1281,6 +1285,7 @@ const shard: CardShard = {
     _poolLeafkinDruid,
     _poolLeatherArmor,
     _poolLeechCollector,
+    _poolLeoninArbiter,
     _poolLiberatingCombustion,
     _poolLibraryOfLatNam,
     _poolLiegeOfTheAxe,
@@ -1737,6 +1742,7 @@ const shard: CardShard = {
     _tokensOozeTokenGutterGrime,
     _tokensPhyrexianWurmDeathtouch,
     _tokensRobotTokenBigMotherMouser,
+    _tokensRockToken,
     _tokensSculptureToken,
     _tokensShapeshifterTokenIrregularCohort,
     _tokensSheepToken,

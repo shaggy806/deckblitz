@@ -136,6 +136,7 @@ import _poolChandrasFury from "../pool/chandras-fury.js";
 import _poolChandrasPyrohelix from "../pool/chandras-pyrohelix.js";
 import _poolChangingLoyalty from "../pool/changing-loyalty.js";
 import _poolChitteringSkitterling from "../pool/chittering-skitterling.js";
+import _poolChoMannosBlessing from "../pool/cho-mannos-blessing.js";
 import _poolChromeCourier from "../pool/chrome-courier.js";
 import _poolCivilizedScholar from "../pool/civilized-scholar.js";
 import _poolClandestineMeddler from "../pool/clandestine-meddler.js";
@@ -640,6 +641,7 @@ import _poolSelflessPoliceCaptain from "../pool/selfless-police-captain.js";
 import _poolSentinelTotem from "../pool/sentinel-totem.js";
 import _poolSerrasBoon from "../pool/serras-boon.js";
 import _poolSerrasLiturgy from "../pool/serras-liturgy.js";
+import _poolShadowOfDoubt from "../pool/shadow-of-doubt.js";
 import _poolShadowedCaravel from "../pool/shadowed-caravel.js";
 import _poolShamblingAttendants from "../pool/shambling-attendants.js";
 import _poolShantottoTacticianMagician from "../pool/shantotto-tactician-magician.js";
@@ -1042,6 +1044,7 @@ const shard: CardShard = {
     _poolChandrasPyrohelix,
     _poolChangingLoyalty,
     _poolChitteringSkitterling,
+    _poolChoMannosBlessing,
     _poolChromeCourier,
     _poolCivilizedScholar,
     _poolClandestineMeddler,
@@ -1546,6 +1549,7 @@ const shard: CardShard = {
     _poolSentinelTotem,
     _poolSerrasBoon,
     _poolSerrasLiturgy,
+    _poolShadowOfDoubt,
     _poolShadowedCaravel,
     _poolShamblingAttendants,
     _poolShantottoTacticianMagician,

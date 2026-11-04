@@ -200,6 +200,7 @@ import _poolEbonyRhino from "../pool/ebony-rhino.js";
 import _poolEidolonOfAstralWinds from "../pool/eidolon-of-astral-winds.js";
 import _poolElderfangDisciple from "../pool/elderfang-disciple.js";
 import _poolElderfangRitualist from "../pool/elderfang-ritualist.js";
+import _poolElderscaleWurm from "../pool/elderscale-wurm.js";
 import _poolElectrostaticPummeler from "../pool/electrostatic-pummeler.js";
 import _poolElvenWarhounds from "../pool/elven-warhounds.js";
 import _poolElvishWarrior from "../pool/elvish-warrior.js";
@@ -1089,6 +1090,7 @@ const shard: CardShard = {
     _poolEidolonOfAstralWinds,
     _poolElderfangDisciple,
     _poolElderfangRitualist,
+    _poolElderscaleWurm,
     _poolElectrostaticPummeler,
     _poolElvenWarhounds,
     _poolElvishWarrior,

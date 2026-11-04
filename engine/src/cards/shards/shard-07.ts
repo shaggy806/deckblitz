@@ -142,6 +142,7 @@ import _poolComaVeil from "../pool/coma-veil.js";
 import _poolComeuppance from "../pool/comeuppance.js";
 import _poolConclaveCavalier from "../pool/conclave-cavalier.js";
 import _poolConduitOfEmrakul from "../pool/conduit-of-emrakul.js";
+import _poolConflagrate from "../pool/conflagrate.js";
 import _poolConfrontTheUnknown from "../pool/confront-the-unknown.js";
 import _poolConquerorsGalleon from "../pool/conquerors-galleon.js";
 import _poolConstrictingTendrils from "../pool/constricting-tendrils.js";
@@ -1069,6 +1070,7 @@ const shard: CardShard = {
     _poolComeuppance,
     _poolConclaveCavalier,
     _poolConduitOfEmrakul,
+    _poolConflagrate,
     _poolConfrontTheUnknown,
     _poolConquerorsGalleon,
     _poolConstrictingTendrils,

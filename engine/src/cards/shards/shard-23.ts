@@ -478,6 +478,7 @@ import _poolMetathranSoldier from "../pool/metathran-soldier.js";
 import _poolMiirymSentinelWyrm from "../pool/miirym-sentinel-wyrm.js";
 import _poolMinamoSchoolAtWatersEdge from "../pool/minamo-school-at-waters-edge.js";
 import _poolMindlessConscription from "../pool/mindless-conscription.js";
+import _poolMindlockOrb from "../pool/mindlock-orb.js";
 import _poolMindsDesire from "../pool/minds-desire.js";
 import _poolMinionMissile from "../pool/minion-missile.js";
 import _poolMinotaurRoxxonCeo from "../pool/minotaur-roxxon-ceo.js";
@@ -553,6 +554,7 @@ import _poolPierceTheSky from "../pool/pierce-the-sky.js";
 import _poolPinkHorror from "../pool/pink-horror.js";
 import _poolPiousEvangel from "../pool/pious-evangel.js";
 import _poolPlasmancer from "../pool/plasmancer.js";
+import _poolPledgeOfLoyalty from "../pool/pledge-of-loyalty.js";
 import _poolPoisonBladeMentor from "../pool/poison-blade-mentor.js";
 import _poolPollenShieldHare from "../pool/pollen-shield-hare.js";
 import _poolPollutedMire from "../pool/polluted-mire.js";
@@ -1390,6 +1392,7 @@ const shard: CardShard = {
     _poolMiirymSentinelWyrm,
     _poolMinamoSchoolAtWatersEdge,
     _poolMindlessConscription,
+    _poolMindlockOrb,
     _poolMindsDesire,
     _poolMinionMissile,
     _poolMinotaurRoxxonCeo,
@@ -1465,6 +1468,7 @@ const shard: CardShard = {
     _poolPinkHorror,
     _poolPiousEvangel,
     _poolPlasmancer,
+    _poolPledgeOfLoyalty,
     _poolPoisonBladeMentor,
     _poolPollenShieldHare,
     _poolPollutedMire,

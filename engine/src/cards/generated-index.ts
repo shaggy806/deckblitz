@@ -510,6 +510,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Robot Token (Flying)",
   "Robot Villain Token",
   "Robot Warrior Token",
+  "Rock Token",
   "Rogue Token",
   "Royal Role Token",
   "Salamander Warrior Token",
