@@ -2784,10 +2784,21 @@ Mana alone pays such an offer (no convoke or delve). `destroy-all` also takes
 this effect's source dealt combat damage to this turn — a fact about the
 source, so it isn't a `CardFilter` clause.
 
+**Odd and even** are the filter clauses `manaValueParity` and `powerParity`
+(zero is even), each `"odd"` or `"even"` as printed (Void Winnower's `prohibits`
+and its `cant-block`; Kianne's `source` condition on `powerParity`). "Choose odd
+or even" as it resolves is `choose-creature-type { options: ODD_OR_EVEN, prompt:
+"Choose odd or even", then }`, with the clause `CHOSEN_CREATURE_TYPE` in `then`
+(Extinction Event, Zimone's Hypothesis). As it enters it's `chooseOnEnter:
+ODD_OR_EVEN`, with the clause `"chosen"` in its statics and triggers (Gollum,
+Riddle Master), and "without mana value of the chosen quality" a `not` of it
+(Ashling's Prerogative). No new decision: both ask through
+`choose-creature-type`'s short menu.
+
 `CardFilter` (used by the mass / tutor effects) is a predicate over an object's
 *computed* characteristics — `{ type, types, notTypes, typesAnyOf, subtype,
 subtypes, supertype, notSupertype, name, notName, colors, notColors, colorless,
-manaValue, power, toughness, basePower, baseToughness, counters, controlledBy,
+manaValue, manaValueParity, power, powerParity, toughness, basePower, baseToughness, counters, controlledBy,
 ownedBy, keyword, notKeyword, tapped, token, isCommander, equipped, enchanted,
 modified, anyOf, manaSpent, manaFrom, putIntoGraveyardFromLibraryThisTurn, putIntoGraveyardThisTurn, blockedThisTurn,
 discardedThisTurn, enteredThisTurn, controlledContinuously, attackedThisTurn, attackedThisCombat, attackedYouThisTurn, attackedDuringControllersLastTurn, attackedBattleThisTurn, damagedThisTurnBy, excessDamageThisTurn,

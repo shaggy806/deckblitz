@@ -10317,4 +10317,24 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{ human: true, gy: ['Grizzly Bears', 'Hill Giant', 'Shock'] }],
     }),
   ),
+  preset(
+    'Extinction Event: choosing odd or even as it resolves',
+    board({
+      you: { bf: ['Swamp*4', 'Grizzly Bears', 'Llanowar Elves'], hand: ['Extinction Event'] },
+      opp: [{ bf: ['Colossal Dreadmaw', 'Savannah Lions'] }],
+    }),
+  ),
+  preset(
+    'Extinction Event: four players, every player\'s creatures of that quality',
+    board({
+      you: { bf: ['Swamp*4'], hand: ['Extinction Event'] },
+      opp: [{ bf: ['Grizzly Bears'] }, { bf: ['Llanowar Elves'] }, { bf: ['Colossal Dreadmaw'] }],
+    }),
+  ),
+  preset(
+    "Ashling's Prerogative: choosing as it enters, then haste or tapped",
+    board({
+      you: { bf: ['Mountain*2', 'Forest*3'], hand: ["Ashling's Prerogative", 'Grizzly Bears', 'Llanowar Elves'] },
+    }),
+  ),
 ]

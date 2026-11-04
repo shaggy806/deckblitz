@@ -185,8 +185,13 @@ async function runStep(page: Page, step: string): Promise<boolean> {
     case 'hand': {
       const id = await findId(page, 'hand', arg)
       if (id === null) return false
+      // The tile stays disabled while the last spell's frames play: a second
+      // cast straight after a first would be lost. It may be disabled for good
+      // (nothing to do with that card now), so this only waits a while.
+      const tile = `.hand-card[data-obj-id="${id}"] .card-tile`
+      await page.locator(`${tile}:not([disabled])`).waitFor({ timeout: 5_000 }).catch(() => {})
       // The fan overlaps its cards: a click sent to the tile itself.
-      await page.locator(`.hand-card[data-obj-id="${id}"] .card-tile`).dispatchEvent('click')
+      await page.locator(tile).dispatchEvent('click')
       return true
     }
     case 'card': {

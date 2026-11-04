@@ -4381,6 +4381,18 @@ Capricious Efreet needed no code: it's Wild Swing's random modal over chosen
 targets. Grip of Chaos is left: it also needs a trigger on anything going on the
 stack, `trigger:spell-or-ability-put-on-stack`.
 
+### Odd and even — built 2026-11-03
+
+`decision:choose-odd-or-even`, with `condition:power-parity` and
+`effect:parity-restrictions` riding along: the filter clauses `manaValueParity` and
+`powerParity`, printed, `$chosen` as a spell resolves or `"chosen"` off the
+permanent that chose as it entered. No new decision: `choose-creature-type`'s short
+menu and `chooseOnEnter`, `ODD_OR_EVEN` their options. Proving cards: Extinction
+Event, Zimone's Hypothesis, Ashling's Prerogative, Gollum, Riddle Master, Void
+Winnower, Kianne, Corrupted Memory. Mutinous Massacre and Thanos, the Mad Titan
+wait for `author-freed`; Twins of Discord for bloodthirst, Lavabrink Venturer for
+protection from a mana value, whose "of the chosen quality" this clause will read.
+
 ### A choice beside a spell's targets — built 2026-11-03
 
 `decision:choose-among-targets`: `choose-among-targets` was there, read with `chooser: "you"` and in

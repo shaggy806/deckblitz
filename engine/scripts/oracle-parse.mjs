@@ -2149,6 +2149,11 @@ export function parseTrigger(clause) {
     const filter = m[3] === "color" ? { ofChosenColor: true } : { ofChosenType: true };
     return [{ on: "cast-spell", who, filter: m[2] ? { type: "creature", ...filter } : filter }];
   }
+  // "A spell with mana value of the chosen quality" (Gollum, Riddle Master).
+  if ((m = /^Whenever (you|an opponent|a player) casts? a spell with mana value of the chosen quality$/.exec(c))) {
+    const who = { you: "you", "an opponent": "opponent", "a player": "any" }[m[1]];
+    return [{ on: "cast-spell", who, filter: { manaValueParity: "chosen" } }];
+  }
   // "A spell that has convoke" (Kasla, the Broken Halo): convoked or not.
   if (/^Whenever you cast (?:a|another) spell that has convoke$/.test(c)) {
     return [{ on: "cast-spell", who: "you", filter: { hasConvoke: true } }];
@@ -10558,6 +10563,26 @@ function chosenValueAt(sentences, i, ctx) {
       used: 2,
     };
   }
+  // Extinction Event, Thanos: the quality chosen as it resolves, in the filter
+  // of what follows ("power" for Zimone's Hypothesis).
+  if (/^choose odd or even\.$/i.test(s(0))) {
+    m = /^(exile|destroy|return) each (other )?creature with (mana value|power) of the chosen quality( to its owner's hand)?\.$/i.exec(s(1));
+    if (m !== null && (m[1].toLowerCase() === "return") === (m[4] !== undefined)) {
+      const filter = { type: "creature", [m[3].toLowerCase() === "power" ? "powerParity" : "manaValueParity"]: "$chosen" };
+      const kind = { exile: "exile-all", destroy: "destroy-all", return: "return-to-hand-all" }[m[1].toLowerCase()];
+      if (m[2] === undefined || kind === "destroy-all") {
+        return {
+          effect: {
+            kind: "choose-creature-type",
+            options: ["odd", "even"],
+            prompt: "Choose odd or even",
+            then: { kind, filter, ...(m[2] !== undefined ? { exceptSource: true } : {}) },
+          },
+          used: 2,
+        };
+      }
+    }
+  }
   if (/^choose a color\.$/i.test(s(0))) {
     m = /^(target player|target opponent) reveals their hand and discards all cards of (?:that|the chosen) color\.$/i.exec(s(1));
     if (m !== null) {
@@ -12094,6 +12119,12 @@ function parseFaceAsWritten(face, ctx = {}) {
     // (`chosenOnEnter`).
     if (line === "As ~ enters, choose a color.") {
       out.chooseOnEnter = ["W", "U", "B", "R", "G"];
+      continue;
+    }
+    // "As ~ enters, choose odd or even" (Gollum, Riddle Master): read back by
+    // a filter's `manaValueParity: "chosen"`.
+    if (line === "As ~ enters, choose odd or even.") {
+      out.chooseOnEnter = ["odd", "even"];
       continue;
     }
     // "As ~ enters, choose a land type." Any that exists (rule 205.3i).
@@ -15952,6 +15983,48 @@ function parseStatic(line, text) {
   // `castAsThoughFlashAnyPlayer`), and "You may cast the first creature
   // spell you cast each turn as though it had flash" (The Blue Spirit —
   // `castAsThoughFlashFirstEachTurn`).
+  // Odd and even (`manaValueParity`, `powerParity`): the quality chosen as it
+  // entered (Ashling's Prerogative), printed (Void Winnower), and a line that
+  // holds while a permanent's own power is one (Kianne, Corrupted Memory).
+  if ((m = /^Each creature with mana value of the chosen quality has ([a-z]+)\.$/.exec(line))) {
+    return {
+      affects: { scope: "filter", filter: { type: "creature", manaValueParity: "chosen" } },
+      grantKeywords: [m[1]],
+      text,
+    };
+  }
+  if (/^Each creature without mana value of the chosen quality enters tapped\.$/.test(line)) {
+    return {
+      affects: { scope: "self" },
+      replacement: {
+        event: "others-enter-battlefield",
+        filter: { type: "creature", not: { manaValueParity: "chosen" } },
+        tapped: true,
+      },
+      text,
+    };
+  }
+  if ((m = /^Your opponents can't cast spells with (odd|even) mana values\.$/.exec(line))) {
+    return { affects: { scope: "self" }, prohibits: { who: "opponents", spells: { manaValueParity: m[1] } }, text };
+  }
+  if ((m = /^Your opponents can't block with creatures with (odd|even) mana values\.$/.exec(line))) {
+    return {
+      affects: { scope: "filter", filter: { type: "creature", controlledBy: "opponent", manaValueParity: m[1] } },
+      restrictions: ["cant-block"],
+      text,
+    };
+  }
+  if ((m = /^As long as ~'s power is (odd|even), you may cast (?:(.+?) )?spells as though they had flash\.$/.exec(line))) {
+    const filter = flashSpellsFilter(m[2]);
+    if (filter !== null) {
+      return {
+        affects: { scope: "self" },
+        condition: { kind: "source", filter: { powerParity: m[1] } },
+        castAsThoughFlash: filter,
+        text,
+      };
+    }
+  }
   if ((m = /^(You|Any player) may cast (?:(.+?) )?spells as though they had flash\.$/.exec(line))) {
     const filter = flashSpellsFilter(m[2]);
     if (filter !== null) {

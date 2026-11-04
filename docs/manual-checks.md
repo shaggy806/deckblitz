@@ -6863,3 +6863,17 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 - **Do:** Attack Bob with Phantom Warrior. As Bob, in the declare blockers step, cast Fog Patch.
 - **Expect:** Bob takes no damage: Phantom Warrior is blocked with nothing blocking it.
+### Extinction Event: choosing odd or even as it resolves
+
+- **Do:** Cast Extinction Event. When asked, click even.
+- **Expect:** The banner says "Choose odd or even". Grizzly Bears and Bob's Colossal Dreadmaw go to exile; Llanowar Elves and Savannah Lions stay.
+
+### Extinction Event: four players, every player's creatures of that quality
+
+- **Do:** Cast Extinction Event. When asked, click odd.
+- **Expect:** Only Carol's Llanowar Elves goes to exile; the Grizzly Bears and the Colossal Dreadmaw stay.
+
+### Ashling's Prerogative: choosing as it enters, then haste or tapped
+
+- **Do:** Cast Ashling's Prerogative and click odd. Then cast Llanowar Elves and Grizzly Bears.
+- **Expect:** The banner says "choose odd or even", and the enchantment then shows odd. Llanowar Elves enters untapped and has haste; Grizzly Bears enters tapped and has no haste.

@@ -4577,7 +4577,9 @@ function Table({
                 ? 'choose a color'
                 : creatureTypeChoiceAction.options.every((t) => BASIC_LAND_TYPES.has(t))
                   ? 'choose a basic land type'
-                  : 'choose one')}
+                  : creatureTypeChoiceAction.options.every((t) => t === 'odd' || t === 'even')
+                    ? 'choose odd or even'
+                    : 'choose one')}
         </span>
         {creatureTypeChoiceAction.options.map((t) => (
           <button

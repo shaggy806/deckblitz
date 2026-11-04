@@ -12827,6 +12827,63 @@ describe("a triggered mana ability that does more than add mana", () => {
   });
 });
 
+describe("odd and even", () => {
+  const sentence = (s: string) => parseEffect(s, { targets: [] }).effect;
+  const read = (type_line: string, oracle_text: string) =>
+    parseFace(
+      { name: "Test Card", type_line, oracle_text, ...(type_line.includes("Creature") ? { power: "2", toughness: "2" } : {}) },
+      { tokenFor: () => null },
+    );
+  it("chosen as a spell resolves, in the filter of what follows", () => {
+    expect(sentence("Choose odd or even. Exile each creature with mana value of the chosen quality.")).toEqual({
+      kind: "choose-creature-type",
+      options: ["odd", "even"],
+      prompt: "Choose odd or even",
+      then: { kind: "exile-all", filter: { type: "creature", manaValueParity: "$chosen" } },
+    });
+    expect(sentence("Choose odd or even. Return each creature with power of the chosen quality to its owner's hand.")).toMatchObject({
+      then: { kind: "return-to-hand-all", filter: { type: "creature", powerParity: "$chosen" } },
+    });
+    expect(sentence("Choose odd or even. Destroy each other creature with mana value of the chosen quality.")).toMatchObject({
+      then: { kind: "destroy-all", exceptSource: true, filter: { manaValueParity: "$chosen" } },
+    });
+  });
+  it("chosen as it enters, and read by a static or a trigger", () => {
+    const card = read(
+      "Enchantment",
+      "As this enchantment enters, choose odd or even. (Zero is even.)\nEach creature with mana value of the chosen quality has haste.\nEach creature without mana value of the chosen quality enters tapped.\nWhenever an opponent casts a spell with mana value of the chosen quality, draw a card.",
+    );
+    expect(card.chooseOnEnter).toEqual(["odd", "even"]);
+    expect(card.static[0]).toMatchObject({
+      affects: { scope: "filter", filter: { type: "creature", manaValueParity: "chosen" } },
+      grantKeywords: ["haste"],
+    });
+    expect(card.static[1]).toMatchObject({
+      replacement: { event: "others-enter-battlefield", filter: { not: { manaValueParity: "chosen" } }, tapped: true },
+    });
+    expect(card.triggered[0].trigger).toMatchObject({ on: "cast-spell", who: "opponent", filter: { manaValueParity: "chosen" } });
+  });
+  it("printed: Void Winnower's lines and Kianne's", () => {
+    const winnower = read(
+      "Creature — Eldrazi",
+      "Your opponents can't cast spells with even mana values. (Zero is even.)\nYour opponents can't block with creatures with even mana values.",
+    );
+    expect(winnower.static[0]).toMatchObject({ prohibits: { who: "opponents", spells: { manaValueParity: "even" } } });
+    expect(winnower.static[1]).toMatchObject({
+      affects: { filter: { controlledBy: "opponent", manaValueParity: "even" } },
+      restrictions: ["cant-block"],
+    });
+    const kianne = read(
+      "Legendary Creature — Illusion",
+      "As long as this creature's power is odd, you may cast creature spells as though they had flash.",
+    );
+    expect(kianne.static[0]).toMatchObject({
+      condition: { kind: "source", filter: { powerParity: "odd" } },
+      castAsThoughFlash: { type: "creature" },
+    });
+  });
+});
+
 describe("more to spend mana only on", () => {
   const spendOnlyOf = (oracle_text: string): unknown => {
     const card = parseFace({ name: "Test", type_line: "Artifact", oracle_text }, { tokenFor: () => null });

@@ -57,6 +57,23 @@ export interface NumCompare {
 }
 
 /**
+ * Which numbers a parity clause of a filter takes:
+ * - `"odd"` / `"even"`, printed, or a resolving "choose odd or even" answered
+ *   through `$chosen` (`CHOSEN_CREATURE_TYPE`, substituted into the rest of the
+ *   effect before it applies, so a `$chosen` left unanswered matches nothing);
+ * - `"chosen"`, the quality chosen as the permanent applying the filter entered
+ *   (its `chosenOnEnter`, from `chooseOnEnter: ODD_OR_EVEN`, via
+ *   `FilterContext.source`): a source that has left reads what it had (rule
+ *   608.2h). With no source, or no quality chosen for it, nothing matches, and
+ *   "without mana value of the chosen quality" is a `not` of the clause.
+ */
+export type ParityClause = "odd" | "even" | "chosen" | "$chosen";
+
+/** The menu of a "choose odd or even", for `chooseOnEnter` or a
+ * `choose-creature-type`'s `options`: the words {@link ParityClause} reads. */
+export const ODD_OR_EVEN = ["odd", "even"] as const;
+
+/**
  * The right-hand side of a {@link NumCompare} that is read when the filter is
  * evaluated rather than written down.
  *
@@ -274,6 +291,13 @@ export interface CardFilter {
    * Not expressible as `colors`, which asks for specific ones. */
   readonly multicolored?: boolean;
   readonly manaValue?: NumCompare;
+  /** Has an odd or even mana value (zero is even): Void Winnower's "spells with
+   * even mana values", Extinction Event's "each creature with mana value of the
+   * chosen quality" (see {@link ParityClause}). */
+  readonly manaValueParity?: ParityClause;
+  /** Has odd or even power (Zimone's Hypothesis; Kianne's "as long as Kianne's
+   * power is even"), read like `power`: not inside the layer fold. */
+  readonly powerParity?: ParityClause;
   /** How much mana was actually spent to cast it (The Emperor of Palamecia:
    * "if at least four mana was spent to cast it") — see
    * `GameObject.manaSpent`. `0` for something that wasn't cast. */
@@ -1721,6 +1745,19 @@ export function fixChosenColor(state: GameState, filter: CardFilter, source: Obj
   return { ...rest, colors: [...(filter.colors ?? []), chosen as Color] };
 }
 
+/** Is `value` of the quality `clause` asks for? A negative number has a parity
+ * too: -1 is odd. */
+function hasParity(state: GameState, value: number, clause: ParityClause, source: ObjectId | undefined): boolean {
+  let quality: string | null | undefined = clause;
+  if (clause === "chosen") {
+    const from = source === undefined ? undefined : state.objects[source];
+    quality = from?.chosenOnEnter ?? (from?.zone === "battlefield" ? null : from?.lastKnown?.chosenOnEnter);
+  }
+  if (quality === "odd") return Math.abs(value) % 2 === 1;
+  if (quality === "even") return value % 2 === 0;
+  return false;
+}
+
 /** Does object `id` satisfy every clause of `filter`?
  *
  * With a snapshot in play (`FilterContext.lastKnown` / `.snapshot`) every
@@ -2229,6 +2266,9 @@ export function matchesFilter(
   }
   if (filter.manaValue !== undefined) {
     if (!compareNum(manaValueNow(), filter.manaValue, ctx.x, dynamic)) return false;
+  }
+  if (filter.manaValueParity !== undefined && !hasParity(state, manaValueNow(), filter.manaValueParity, ctx.source)) {
+    return false;
   }
   if (filter.manaCost !== undefined) {
     const name = live !== undefined ? printedCardName(live) : lki!.name;
@@ -2751,6 +2791,7 @@ export function matchesFilter(
   // Only these need the layer fold (external anthems / keyword grants).
   if (
     filter.power !== undefined ||
+    filter.powerParity !== undefined ||
     filter.toughness !== undefined ||
     filter.basePower !== undefined ||
     filter.baseToughness !== undefined ||
@@ -2761,6 +2802,7 @@ export function matchesFilter(
       // Inside the fold: keywords as far as it has got, P/T not at all.
       if (
         filter.power !== undefined ||
+        filter.powerParity !== undefined ||
         filter.toughness !== undefined ||
         filter.basePower !== undefined ||
         filter.baseToughness !== undefined ||
@@ -2792,6 +2834,9 @@ export function matchesFilter(
           }
         : computeCharacteristics(state, registry, id);
     own = c;
+    if (filter.powerParity !== undefined && !hasParity(state, c.power, filter.powerParity, ctx.source)) {
+      return false;
+    }
     if (filter.power !== undefined && !compareNum(c.power, filter.power, ctx.x, dynamic)) {
       return false;
     }

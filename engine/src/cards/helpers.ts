@@ -18,6 +18,10 @@ export { CHOSEN_CREATURE_TYPE, FIRST_CHOSEN_TYPE } from "../effects.js";
 /** "Choose a basic land type": the five, for a `chooseOnEnter` or a
  * `choose-creature-type`'s `options`. */
 export { BASIC_LAND_TYPE_CHOICES, LAND_TYPES } from "../subtypes.js";
+/** "Choose odd or even": the two words a filter's `manaValueParity` or
+ * `powerParity` reads, for a `chooseOnEnter` or a `choose-creature-type`'s
+ * `options`. */
+export { ODD_OR_EVEN } from "../filter.js";
 
 /**
  * "Search your graveyard, hand, **and/or** library for …" (Boonweaver Giant,
