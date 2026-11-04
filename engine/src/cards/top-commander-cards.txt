@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4363 already implemented / 637 missing (marks refreshed 2026-11-04)
+4375 already implemented / 625 missing (marks refreshed 2026-11-04)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -852,7 +852,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   856  Murder                                   {1}{B}{B}        Instant
 [x]   857  Mystic Gate                              {0}              Land
 [x]   858  Tear Asunder                             {1}{G}           Instant
-[ ]   859  Tainted Pact                             {1}{B}           Instant
+[x]   859  Tainted Pact                             {1}{B}           Instant
 [x]   860  Boromir, Warden of the Tower             {2}{W}           Legendary Creature — Human Soldier
 [x]   861  Heraldic Banner                          {3}              Artifact
 [x]   862  Elesh Norn, Grand Cenobite               {5}{W}{W}        Legendary Creature — Phyrexian Praetor
@@ -865,7 +865,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]   869  Beseech the Mirror                       {1}{B}{B}{B}     Sorcery
 [x]   870  Rishkar, Peema Renegade                  {2}{G}           Legendary Creature — Elf Druid
 [x]   871  Breach the Multiverse                    {5}{B}{B}        Sorcery
-[ ]   872  Tempt with Discovery                     {3}{G}           Sorcery
+[x]   872  Tempt with Discovery                     {3}{G}           Sorcery
 [x]   873  Splendid Reclamation                     {3}{G}           Sorcery
 [x]   874  Lotus Field                              {0}              Land
 [x]   875  Tragic Slip                              {B}              Instant
@@ -878,7 +878,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   882  Myr Retriever                            {2}              Artifact Creature — Myr
 [x]   883  Bear Umbra                               {2}{G}{G}        Enchantment — Aura
 [x]   884  Witch's Cottage                          {0}              Land — Swamp
-[ ]   885  Throne of Eldraine                       {5}              Legendary Artifact
+[x]   885  Throne of Eldraine                       {5}              Legendary Artifact
 [x]   886  Descent into Avernus                     {2}{R}           Enchantment
 [x]   887  Serum Visions                            {U}              Sorcery
 [x]   888  Disrupt Decorum                          {2}{R}{R}        Sorcery
@@ -899,9 +899,9 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   903  Sword of Hearth and Home                 {3}              Artifact — Equipment
 [ ]   904  Ojer Taq, Deepest Foundation // Temple of Civilization {6}              Legendary Creature — God // Land
 [x]   905  Spell Pierce                             {U}              Instant
-[ ]   906  Field of Ruin                            {0}              Land
+[x]   906  Field of Ruin                            {0}              Land
 [x]   907  The Gitrog Monster                       {3}{B}{G}        Legendary Creature — Frog Horror
-[ ]   908  Padeem, Consul of Innovation             {3}{U}           Legendary Creature — Vedalken Artificer
+[x]   908  Padeem, Consul of Innovation             {3}{U}           Legendary Creature — Vedalken Artificer
 [x]   909  Krenko, Tin Street Kingpin               {2}{R}           Legendary Creature — Goblin
 [x]   910  Zuran Orb                                {0}              Artifact
 [x]   911  Eidolon of Blossoms                      {2}{G}{G}        Enchantment Creature — Spirit
@@ -920,11 +920,11 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   924  Myr Battlesphere                         {7}              Artifact Creature — Myr Construct
 [x]   925  Blighted Woodland                        {0}              Land
 [x]   926  Old Gnawbone                             {5}{G}{G}        Legendary Creature — Dragon
-[ ]   927  The Soul Stone                           {1}{B}           Legendary Artifact — Infinity Stone
+[x]   927  The Soul Stone                           {1}{B}           Legendary Artifact — Infinity Stone
 [x]   928  Ripples of Potential                     {1}{U}           Instant
 [x]   929  Fountainport                             {0}              Land
 [x]   930  Solve the Equation                       {2}{U}           Sorcery
-[ ]   931  Caged Sun                                {6}              Artifact
+[x]   931  Caged Sun                                {6}              Artifact
 [x]   932  Peregrine Drake                          {4}{U}           Creature — Drake
 [x]   933  Evolution Witness                        {2}{G}           Creature — Elf Shaman Mutant
 [x]   934  Dispel                                   {U}              Instant
@@ -936,7 +936,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   940  Thopter Spy Network                      {2}{U}{U}        Enchantment
 [x]   941  Thoughtcast                              {4}{U}           Sorcery
 [x]   942  Wilderness Reclamation                   {3}{G}           Enchantment
-[ ]   943  Promise of Loyalty                       {4}{W}           Sorcery
+[x]   943  Promise of Loyalty                       {4}{W}           Sorcery
 [x]   944  Archmage of Runes                        {3}{U}{U}        Creature — Giant Wizard
 [x]   945  Irenicus's Vile Duplication              {3}{U}           Sorcery
 [x]   946  Stormcatch Mentor                        {U}{R}           Creature — Otter Wizard
@@ -973,7 +973,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   977  Karmic Guide                             {3}{W}{W}        Creature — Angel Spirit
 [x]   978  Decimate                                 {2}{R}{G}        Sorcery
 [x]   979  Last March of the Ents                   {6}{G}{G}        Sorcery
-[ ]   980  Moraug, Fury of Akoum                    {4}{R}{R}        Legendary Creature — Minotaur Warrior
+[x]   980  Moraug, Fury of Akoum                    {4}{R}{R}        Legendary Creature — Minotaur Warrior
 [x]   981  Inspiring Statuary                       {3}              Artifact
 [x]   982  Blightsteel Colossus                     {12}             Artifact Creature — Phyrexian Golem
 [x]   983  Kardur, Doomscourge                      {2}{B}{R}        Legendary Creature — Demon Berserker
@@ -988,7 +988,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   992  Krosan Verge                             {0}              Land
 [x]   993  All Is Dust                              {7}              Kindred Sorcery — Eldrazi
 [x]   994  Sokenzan, Crucible of Defiance           {0}              Legendary Land
-[ ]   995  Mechanized Production                    {2}{U}{U}        Enchantment — Aura
+[x]   995  Mechanized Production                    {2}{U}{U}        Enchantment — Aura
 [x]   996  Mines of Moria                           {0}              Legendary Land
 [x]   997  Sythis, Harvest's Hand                   {G}{W}           Legendary Enchantment Creature — Nymph
 [x]   998  Cyberdrive Awakener                      {5}{U}           Artifact Creature — Construct
@@ -3259,7 +3259,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3266  Manaweft Sliver                          {1}{G}           Creature — Sliver
 [ ]  3267  Conspicuous Snoop                        {R}{R}           Creature — Goblin Rogue
 [ ]  3268  Jin-Gitaxias // The Great Synthesis      {5}              Legendary Creature — Phyrexian Praetor // Enchantment — Saga
-[ ]  3269  World at War                             {3}{R}{R}        Sorcery
+[x]  3269  World at War                             {3}{R}{R}        Sorcery
 [x]  3270  Keeper of Secrets                        {5}{R}           Creature — Demon
 [x]  3271  Mistblade Shinobi                        {2}{U}           Creature — Human Ninja
 [x]  3272  Firdoch Core                             {3}              Kindred Artifact — Shapeshifter
@@ -4071,7 +4071,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  4078  Portent                                  {U}              Sorcery
 [x]  4079  Vivien Reid                              {3}{G}{G}        Legendary Planeswalker — Vivien
 [x]  4080  Emberwilde Captain                       {3}{R}           Creature — Djinn Pirate
-[ ]  4081  The Mind Stone                           {1}{W}           Legendary Artifact — Infinity Stone
+[x]  4081  The Mind Stone                           {1}{W}           Legendary Artifact — Infinity Stone
 [x]  4082  Shalai and Hallar                        {1}{R}{G}{W}     Legendary Creature — Angel Elf
 [x]  4083  Necropolis Regent                        {3}{B}{B}{B}     Creature — Vampire
 [x]  4084  Bloodline Necromancer                    {4}{B}           Creature — Vampire Wizard

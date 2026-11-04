@@ -12,6 +12,17 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **Mana spendable only by the chosen color, and a mana trigger on any ability** (2026-11-04, `b6a1d586c`): Throne of Eldraine, Caged Sun.
+- **A repeat's conditions read across its passes** (2026-11-04, `2dad94d7d`): Tainted Pact, Helm of Obedience.
+- **Library searches by several players together, finds held until all enter** (2026-11-04, `ca9a88a27`): Tempt with Discovery, Field of
+  Ruin, Veteran Explorer; every card of that shape (Hired Giant, New Frontiers) changed with them.
+- **Harness and the infinity abilities it switches on** (2026-11-04, `a406e7323`): The Soul Stone, The Mind Stone.
+- **A win on eight artifacts with one name** (2026-11-04, `311574dd6`): Mechanized Production; the machinery was already there.
+- **A creature's own count of attacks this turn, additional combats with "at the beginning of that combat", and an added combat from the
+  precombat main running before the turn's own** (2026-11-04, `24c92ed26`): Moraug, Fury of Akoum, World at War. One stand-in gone
+  (`6902c560e`).
+- **A kept creature with a counter, bound for as long as it has one** (2026-11-04, `278e18781`): Promise of Loyalty.
+- **A live maximum as an intervening if** (2026-11-04, `dc0b8d7eb`): Padeem, Consul of Innovation.
 - **A copied spell's delayed whenever outlives the copy** (2026-11-04, `0c10d9529`): Twincast on Glimpse of Nature draws twice.
 - **A loss of life replaced, whatever caused it** (2026-11-04, `3bf2c4744`): Bloodletter of Aclazotz.
 - **A delayed triggered mana ability** (2026-11-04, `e140cfb14`): High Tide, Bubbling Muck, Pyre Rhymer // Molten Tide.

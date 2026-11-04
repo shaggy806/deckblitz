@@ -484,7 +484,8 @@ section keeps only what to do next.
   Rise of the Dark Realms, Field of the Dead, Birgi. Their records overstated the work more than once (Arena of Glory, Mistrise Village,
   Rise and Field needed no engine code): try the card first. Then Banner of Kinship, Opal Palace, Innkeeper's Talent, Archivist of Oghma,
   Veil of Summer, Unbreakable Formation, Opposition Agent, Tibalt's Trickery, Starting Town, Liliana, Dreadhorde General, High Tide,
-  Bloodletter of Aclazotz.
+  Bloodletter of Aclazotz, The Soul Stone, Tempt with Discovery, Tainted Pact, Throne of Eldraine, Padeem, Promise of Loyalty, Moraug,
+  Mechanized Production. Left of `effect:each-player-may-held-search`: a find bound for a hand isn't held (Jungle Wayfinder, Weird Harvest).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next
