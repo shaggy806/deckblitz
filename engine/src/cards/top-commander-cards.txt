@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4317 already implemented / 683 missing (marks refreshed 2026-11-04)
+4322 already implemented / 678 missing (marks refreshed 2026-11-04)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -864,7 +864,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   868  Scrap Trawler                            {3}              Artifact Creature — Construct
 [ ]   869  Beseech the Mirror                       {1}{B}{B}{B}     Sorcery
 [x]   870  Rishkar, Peema Renegade                  {2}{G}           Legendary Creature — Elf Druid
-[ ]   871  Breach the Multiverse                    {5}{B}{B}        Sorcery
+[x]   871  Breach the Multiverse                    {5}{B}{B}        Sorcery
 [ ]   872  Tempt with Discovery                     {3}{G}           Sorcery
 [x]   873  Splendid Reclamation                     {3}{G}           Sorcery
 [x]   874  Lotus Field                              {0}              Land
@@ -1983,7 +1983,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1990  Thassa, God of the Sea                   {2}{U}           Legendary Enchantment Creature — God
 [x]  1991  Strength of the Harvest // Haven of the Harvest {3}              Enchantment — Aura // Land
 [x]  1992  Grist, the Hunger Tide                   {1}{B}{G}        Legendary Planeswalker — Grist
-[ ]  1993  Taunt from the Rampart                   {3}{R}{W}        Sorcery
+[x]  1993  Taunt from the Rampart                   {3}{R}{W}        Sorcery
 [x]  1994  Goldvein Pick                            {2}              Artifact — Equipment
 [x]  1995  Virtue of Persistence // Locthwain Scorn {5}{B}{B} // {1}{B} Enchantment // Sorcery — Adventure
 [x]  1996  Summon: Titan                            {3}{G}{G}        Enchantment Creature — Saga Giant
@@ -2230,7 +2230,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2237  Slip Through Space                       {U}              Sorcery
 [x]  2238  Demon's Disciple                         {2}{B}           Creature — Human Cleric
 [x]  2239  Virtue of Knowledge // Vantress Visions  {4}{U} // {1}{U} Enchantment // Instant — Adventure
-[ ]  2240  Bloodthirsty Blade                       {2}              Artifact — Equipment
+[x]  2240  Bloodthirsty Blade                       {2}              Artifact — Equipment
 [x]  2241  Assemble the Legion                      {3}{R}{W}        Enchantment
 [x]  2242  Idyllic Beachfront                       {0}              Land — Plains Island
 [ ]  2243  Stuffy Doll                              {5}              Artifact Creature — Construct
@@ -3881,7 +3881,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3888  Eviscerator's Insight                    {1}{B}           Instant
 [x]  3889  Eaten by Piranhas                        {1}{U}           Enchantment — Aura
 [x]  3890  Cadira, Caller of the Small              {1}{G}{W}        Legendary Creature — Orc Ranger
-[ ]  3891  Vona's Hunger                            {2}{B}           Instant
+[x]  3891  Vona's Hunger                            {2}{B}           Instant
 [x]  3892  Infestation Sage                         {B}              Creature — Elf Warlock
 [x]  3893  Tidespout Tyrant                         {5}{U}{U}{U}     Creature — Djinn
 [ ]  3894  Unlicensed Hearse                        {2}              Artifact — Vehicle
@@ -4521,7 +4521,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4528  Thornglint Bridge                        {0}              Artifact Land
 [x]  4529  Treno, Dark City                         {0}              Land — Town
 [x]  4530  Shield of the Oversoul                   {2}{G/W}         Enchantment — Aura
-[ ]  4531  The Deck of Many Things                  {5}              Legendary Artifact
+[x]  4531  The Deck of Many Things                  {5}              Legendary Artifact
 [x]  4532  Seafloor Oracle                          {2}{U}{U}        Creature — Merfolk Wizard
 [x]  4533  Planar Bridge                            {6}              Legendary Artifact
 [x]  4534  City of Death                            {2}{G}           Enchantment — Saga

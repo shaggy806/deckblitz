@@ -12,6 +12,19 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **Become-copy for a duration read as a condition, of what's sacrificed or chosen on resolution; a becomes-attached trigger**
+  (2026-11-04, `9401b2f06`): Zygon Infiltrator, Secret Invasion, Blade of Shared Souls, Taskmaster, The Animus, Cytoshape, Polymorphous
+  Rush, The Ever-Changing 'Dane.
+- **A goad whose end is a condition, goads ended, a goad as a copy exception** (2026-11-04, `b47e93db5`): The War Games, Hot Pursuit,
+  Vislor Turlough, Immortal Obligation, Kros, Serene Sleuth, Mocking Doppelganger, Bloodthirsty Blade, Airtight Alibi.
+- **Restrictions for a duration: until your next turn on a set fixed as it resolves, this combat, its controller's next turn**
+  (2026-11-04, `de935da7d`): Linvala, Edifice of Authority, Dovin Baan, Taunt from the Rampart, Wall of Dust, Ma Chao, Yuan Shao's
+  Infantry, Flummoxed Cyclops, Battering Ram.
+- **One untargeted permanent or card per player, a `vote` naming whose** (2026-11-04, `4e0110eeb`): Fell Beast's Shriek, Ultimate
+  Magic: Meteor, Krenko's Buzzcrusher, Winnowing, Ghouls' Night Out.
+- **Untargeted picks from graveyards and exile, one spell from each opponent's graveyard** (2026-11-04, `bdb2d30d2`): Cemetery
+  Gatekeeper, Cemetery Desecrator, Dreams of Steel and Oil, Breach the Multiverse, Flotsam // Jetsam, The Deck of Many Things, Binding
+  Negotiation, Sengir Nosferatu, Split the Party, Vona's Hunger.
 - **Removing from combat with a forced recombat, unblocking and reblocking by effect** (2026-11-04, `e284a643f`): Illusionist's Gambit,
   False Orders.
 - **Damage dealt this turn read by what dealt it and what took it** (2026-11-04, `62c5c130a`): both Zuberas, Blazing Effigy, Reverse

@@ -458,6 +458,13 @@ section keeps only what to do next.
   Total War ("didn't attack" means that declaration, not the turn), Siren's Call (`condition:cast-timing-condition`), Tanglewalker
   (not true landwalk), Veteran's Voice (`hostOfSource: false` would fizzle if the Aura moves onto the target) and Dance of Many
   (its two leave abilities are printed); `replacement:others-enter-as-subtype` (Master Biomancer) stays open.
+  Overnight 2026-11-04/05 (`cards:needs -- --by-rank` orders what's left once the 5-card units run out, the user's call: by the best
+  EDHREC card a key unlocks, Gemstone Caverns first): untargeted picks from graveyards and exile (2 freed, 10 proving cards), one
+  untargeted permanent or card per player (5 proving cards), restrictions for a duration (9 proving cards), goads whose end is a
+  condition (9 proving cards) and become-copy for a duration (7 freed, 8 proving cards). `--stale` about 1,720. Narrow keys
+  `author-freed` should give: Mirror of Fate (`look-and-choose`'s `then` doesn't run with nothing chosen, and its library exile must),
+  The Day of the Doctor (chapters I-III need a while-source play permission from `reveal-until`), Assimilation Aegis (try
+  `effect:choose-card-exiled-with-source`), Metamorphic Alteration (a static copy that follows the Aura), Shapeshifter's Marrow.
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next

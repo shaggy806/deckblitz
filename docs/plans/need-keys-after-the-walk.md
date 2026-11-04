@@ -898,6 +898,9 @@ missing. Re-run `--greedy` for Phase 2's order.
   `condition:source-state`; `bug:simultaneous-zone-moves`, `bug:as-enters-choices-any-entry`,
   `amount:damage-dealt-by-spell-this-turn`, `effect:remove-attackers-and-forced-recombat`. 63 proving cards. The run: 52 families in six
   rounds, four local agents at once, ending at the user's request with about 20 units of 5 cards left in the order.
+- **2026-11-04/05: overnight, the 5-card units.** `decision:choose-from-zone-extensions`, `decision:choose-permanent`,
+  `effect:restrict-until-your-next-turn`, `mechanic:goad-extensions`, `effect:become-copy`, then as listed in `COMPLETED.md`. Past the
+  5-card units the order changes (the user's call): keys by the best EDHREC card they unlock, `cards:needs -- --by-rank`.
 
 ## Rough size
 
