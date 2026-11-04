@@ -74,6 +74,7 @@ import _poolBlackPantherVanguard from "../pool/black-panther-vanguard.js";
 import _poolBlackScarab from "../pool/black-scarab.js";
 import _poolBlackbladeReforged from "../pool/blackblade-reforged.js";
 import _poolBladeHistorian from "../pool/blade-historian.js";
+import _poolBlazingEffigy from "../pool/blazing-effigy.js";
 import _poolBlessedAlliance from "../pool/blessed-alliance.js";
 import _poolBlightBreathCatoblepas from "../pool/blight-breath-catoblepas.js";
 import _poolBlightedWoodland from "../pool/blighted-woodland.js";
@@ -157,6 +158,7 @@ import _poolCrucibleOfTheSpiritDragon from "../pool/crucible-of-the-spirit-drago
 import _poolCruelCelebrant from "../pool/cruel-celebrant.js";
 import _poolCruelFinality from "../pool/cruel-finality.js";
 import _poolCrushDissent from "../pool/crush-dissent.js";
+import _poolCryptChampion from "../pool/crypt-champion.js";
 import _poolCryptGhast from "../pool/crypt-ghast.js";
 import _poolCuriousFarmAnimals from "../pool/curious-farm-animals.js";
 import _poolCuriousHerd from "../pool/curious-herd.js";
@@ -985,6 +987,7 @@ const shard: CardShard = {
     _poolBlackScarab,
     _poolBlackbladeReforged,
     _poolBladeHistorian,
+    _poolBlazingEffigy,
     _poolBlessedAlliance,
     _poolBlightBreathCatoblepas,
     _poolBlightedWoodland,
@@ -1068,6 +1071,7 @@ const shard: CardShard = {
     _poolCruelCelebrant,
     _poolCruelFinality,
     _poolCrushDissent,
+    _poolCryptChampion,
     _poolCryptGhast,
     _poolCuriousFarmAnimals,
     _poolCuriousHerd,

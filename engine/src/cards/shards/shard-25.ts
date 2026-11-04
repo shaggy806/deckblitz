@@ -241,6 +241,7 @@ import _poolEscapeToTheWilds from "../pool/escape-to-the-wilds.js";
 import _poolEscapeVelocity from "../pool/escape-velocity.js";
 import _poolEvermind from "../pool/evermind.js";
 import _poolEvershrikesGift from "../pool/evershrikes-gift.js";
+import _poolExhume from "../pool/exhume.js";
 import _poolExorcise from "../pool/exorcise.js";
 import _poolExpeditedInheritance from "../pool/expedited-inheritance.js";
 import _poolExpeditionEnvoy from "../pool/expedition-envoy.js";
@@ -1120,6 +1121,7 @@ const shard: CardShard = {
     _poolEscapeVelocity,
     _poolEvermind,
     _poolEvershrikesGift,
+    _poolExhume,
     _poolExorcise,
     _poolExpeditedInheritance,
     _poolExpeditionEnvoy,

@@ -374,6 +374,7 @@ import _poolIcatianPhalanx from "../pool/icatian-phalanx.js";
 import _poolIceberg from "../pool/iceberg.js";
 import _poolIlluminatorVirtuoso from "../pool/illuminator-virtuoso.js";
 import _poolIllusionaryInformant from "../pool/illusionary-informant.js";
+import _poolIllusionistsGambit from "../pool/illusionists-gambit.js";
 import _poolImperiousMindbreaker from "../pool/imperious-mindbreaker.js";
 import _poolImplementOfExamination from "../pool/implement-of-examination.js";
 import _poolImpulsivity from "../pool/impulsivity.js";
@@ -1264,6 +1265,7 @@ const shard: CardShard = {
     _poolIceberg,
     _poolIlluminatorVirtuoso,
     _poolIllusionaryInformant,
+    _poolIllusionistsGambit,
     _poolImperiousMindbreaker,
     _poolImplementOfExamination,
     _poolImpulsivity,

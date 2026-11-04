@@ -43,6 +43,7 @@ import _poolAstelliReclaimer from "../pool/astelli-reclaimer.js";
 import _poolAvenge from "../pool/avenge.js";
 import _poolAwakenTheBear from "../pool/awaken-the-bear.js";
 import _poolAzureDrake from "../pool/azure-drake.js";
+import _poolBackdraft from "../pool/backdraft.js";
 import _poolBambooGroveArcher from "../pool/bamboo-grove-archer.js";
 import _poolBanesInvoker from "../pool/banes-invoker.js";
 import _poolBantCharm from "../pool/bant-charm.js";
@@ -90,6 +91,7 @@ import _poolBrokersHideout from "../pool/brokers-hideout.js";
 import _poolBroodstar from "../pool/broodstar.js";
 import _poolBrutalNightstalker from "../pool/brutal-nightstalker.js";
 import _poolBureauHeadmaster from "../pool/bureau-headmaster.js";
+import _poolBurningEyeZubera from "../pool/burning-eye-zubera.js";
 import _poolBurningSunsAvatar from "../pool/burning-suns-avatar.js";
 import _poolBurnwillowClearing from "../pool/burnwillow-clearing.js";
 import _poolBurrogBefuddler from "../pool/burrog-befuddler.js";
@@ -929,6 +931,7 @@ const shard: CardShard = {
     _poolAvenge,
     _poolAwakenTheBear,
     _poolAzureDrake,
+    _poolBackdraft,
     _poolBambooGroveArcher,
     _poolBanesInvoker,
     _poolBantCharm,
@@ -976,6 +979,7 @@ const shard: CardShard = {
     _poolBroodstar,
     _poolBrutalNightstalker,
     _poolBureauHeadmaster,
+    _poolBurningEyeZubera,
     _poolBurningSunsAvatar,
     _poolBurnwillowClearing,
     _poolBurrogBefuddler,

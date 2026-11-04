@@ -800,6 +800,7 @@ import _poolSuperAdaptoid from "../pool/super-adaptoid.js";
 import _poolSurrakDragonclaw from "../pool/surrak-dragonclaw.js";
 import _poolSwarmyard from "../pool/swarmyard.js";
 import _poolSwirlingSpriggan from "../pool/swirling-spriggan.js";
+import _poolSwordOfHearthAndHome from "../pool/sword-of-hearth-and-home.js";
 import _poolSylvanMessenger from "../pool/sylvan-messenger.js";
 import _poolSylvanSafekeeper from "../pool/sylvan-safekeeper.js";
 import _poolSymbiosis from "../pool/symbiosis.js";
@@ -1764,6 +1765,7 @@ const shard: CardShard = {
     _poolSurrakDragonclaw,
     _poolSwarmyard,
     _poolSwirlingSpriggan,
+    _poolSwordOfHearthAndHome,
     _poolSylvanMessenger,
     _poolSylvanSafekeeper,
     _poolSymbiosis,

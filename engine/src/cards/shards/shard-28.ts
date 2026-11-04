@@ -420,6 +420,7 @@ import _poolLevitatingStatue from "../pool/levitating-statue.js";
 import _poolLiegeOfTheTangle from "../pool/liege-of-the-tangle.js";
 import _poolLifespinner from "../pool/lifespinner.js";
 import _poolLightningCloud from "../pool/lightning-cloud.js";
+import _poolLivingLore from "../pool/living-lore.js";
 import _poolLivingWall from "../pool/living-wall.js";
 import _poolLlanowarKnight from "../pool/llanowar-knight.js";
 import _poolLlanowarMentor from "../pool/llanowar-mentor.js";
@@ -604,6 +605,7 @@ import _poolReedRichardsSmartestMan from "../pool/reed-richards-smartest-man.js"
 import _poolReefRoads from "../pool/reef-roads.js";
 import _poolRemorselessPunishment from "../pool/remorseless-punishment.js";
 import _poolRepelTheVile from "../pool/repel-the-vile.js";
+import _poolRescuerSphinx from "../pool/rescuer-sphinx.js";
 import _poolResistanceSkywarden from "../pool/resistance-skywarden.js";
 import _poolResoluteReinforcements from "../pool/resolute-reinforcements.js";
 import _poolResplendentGriffin from "../pool/resplendent-griffin.js";
@@ -1346,6 +1348,7 @@ const shard: CardShard = {
     _poolLiegeOfTheTangle,
     _poolLifespinner,
     _poolLightningCloud,
+    _poolLivingLore,
     _poolLivingWall,
     _poolLlanowarKnight,
     _poolLlanowarMentor,
@@ -1530,6 +1533,7 @@ const shard: CardShard = {
     _poolReefRoads,
     _poolRemorselessPunishment,
     _poolRepelTheVile,
+    _poolRescuerSphinx,
     _poolResistanceSkywarden,
     _poolResoluteReinforcements,
     _poolResplendentGriffin,

@@ -248,6 +248,7 @@ import _poolFaerieMastermind from "../pool/faerie-mastermind.js";
 import _poolFaerieSwarm from "../pool/faerie-swarm.js";
 import _poolFalconAndRedwing from "../pool/falcon-and-redwing.js";
 import _poolFalconsWingHarness from "../pool/falcons-wing-harness.js";
+import _poolFalseOrders from "../pool/false-orders.js";
 import _poolFamilyReunion from "../pool/family-reunion.js";
 import _poolFamishedGhoul from "../pool/famished-ghoul.js";
 import _poolFateForgotten from "../pool/fate-forgotten.js";
@@ -1193,6 +1194,7 @@ const shard: CardShard = {
     _poolFaerieSwarm,
     _poolFalconAndRedwing,
     _poolFalconsWingHarness,
+    _poolFalseOrders,
     _poolFamilyReunion,
     _poolFamishedGhoul,
     _poolFateForgotten,

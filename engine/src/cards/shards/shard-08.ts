@@ -510,6 +510,7 @@ import _poolMetropolisAngel from "../pool/metropolis-angel.js";
 import _poolMidnightReaper from "../pool/midnight-reaper.js";
 import _poolMightOfTheNephilim from "../pool/might-of-the-nephilim.js";
 import _poolMilitantMonk from "../pool/militant-monk.js";
+import _poolMimeoplasmReveredOne from "../pool/mimeoplasm-revered-one.js";
 import _poolMindStone from "../pool/mind-stone.js";
 import _poolMineExcavation from "../pool/mine-excavation.js";
 import _poolMirkwoodPathmaker from "../pool/mirkwood-pathmaker.js";
@@ -781,6 +782,7 @@ import _poolSulfurousMire from "../pool/sulfurous-mire.js";
 import _poolSumalaWoodshaper from "../pool/sumala-woodshaper.js";
 import _poolSummonChocoMog from "../pool/summon-choco-mog.js";
 import _poolSunbladeElf from "../pool/sunblade-elf.js";
+import _poolSuturedGhoul from "../pool/sutured-ghoul.js";
 import _poolSvogthosTheRestlessTomb from "../pool/svogthos-the-restless-tomb.js";
 import _poolSwarmBeingOfBees from "../pool/swarm-being-of-bees.js";
 import _poolSweetGumRecluse from "../pool/sweet-gum-recluse.js";
@@ -1458,6 +1460,7 @@ const shard: CardShard = {
     _poolMidnightReaper,
     _poolMightOfTheNephilim,
     _poolMilitantMonk,
+    _poolMimeoplasmReveredOne,
     _poolMindStone,
     _poolMineExcavation,
     _poolMirkwoodPathmaker,
@@ -1729,6 +1732,7 @@ const shard: CardShard = {
     _poolSumalaWoodshaper,
     _poolSummonChocoMog,
     _poolSunbladeElf,
+    _poolSuturedGhoul,
     _poolSvogthosTheRestlessTomb,
     _poolSwarmBeingOfBees,
     _poolSweetGumRecluse,

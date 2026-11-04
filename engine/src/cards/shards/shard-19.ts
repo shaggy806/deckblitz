@@ -107,6 +107,7 @@ import _poolCabalSurgeon from "../pool/cabal-surgeon.js";
 import _poolCabarettiCharm from "../pool/cabaretti-charm.js";
 import _poolCaelornaCoralTyrant from "../pool/caelorna-coral-tyrant.js";
 import _poolCagedZombie from "../pool/caged-zombie.js";
+import _poolCallDamageControl from "../pool/call-damage-control.js";
 import _poolCalmingVerse from "../pool/calming-verse.js";
 import _poolCanalDredger from "../pool/canal-dredger.js";
 import _poolCaptainHowlerSeaScourge from "../pool/captain-howler-sea-scourge.js";
@@ -663,6 +664,7 @@ import _poolRepulsiveMutation from "../pool/repulsive-mutation.js";
 import _poolResupply from "../pool/resupply.js";
 import _poolRevengeOfTheHunted from "../pool/revenge-of-the-hunted.js";
 import _poolReverentMantra from "../pool/reverent-mantra.js";
+import _poolReversePolarity from "../pool/reverse-polarity.js";
 import _poolRibtrussRoaster from "../pool/ribtruss-roaster.js";
 import _poolRidgedKusite from "../pool/ridged-kusite.js";
 import _poolRiftmarkedKnight from "../pool/riftmarked-knight.js";
@@ -1055,6 +1057,7 @@ const shard: CardShard = {
     _poolCabarettiCharm,
     _poolCaelornaCoralTyrant,
     _poolCagedZombie,
+    _poolCallDamageControl,
     _poolCalmingVerse,
     _poolCanalDredger,
     _poolCaptainHowlerSeaScourge,
@@ -1611,6 +1614,7 @@ const shard: CardShard = {
     _poolResupply,
     _poolRevengeOfTheHunted,
     _poolReverentMantra,
+    _poolReversePolarity,
     _poolRibtrussRoaster,
     _poolRidgedKusite,
     _poolRiftmarkedKnight,

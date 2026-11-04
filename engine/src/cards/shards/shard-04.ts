@@ -160,6 +160,7 @@ import _poolDeglamer from "../pool/deglamer.js";
 import _poolDelneyStreetwiseLookout from "../pool/delney-streetwise-lookout.js";
 import _poolDemonOfDeathsGate from "../pool/demon-of-deaths-gate.js";
 import _poolDemonicLore from "../pool/demonic-lore.js";
+import _poolDermotaxi from "../pool/dermotaxi.js";
 import _poolDesertNomads from "../pool/desert-nomads.js";
 import _poolDesperateParry from "../pool/desperate-parry.js";
 import _poolDespise from "../pool/despise.js";
@@ -746,6 +747,7 @@ import _poolTangledFlorahedron from "../pool/tangled-florahedron.js";
 import _poolTasigursCruelty from "../pool/tasigurs-cruelty.js";
 import _poolTawnossWeaponry from "../pool/tawnoss-weaponry.js";
 import _poolTelJiladJustice from "../pool/tel-jilad-justice.js";
+import _poolTemptingWurm from "../pool/tempting-wurm.js";
 import _poolTerisianMindbreaker from "../pool/terisian-mindbreaker.js";
 import _poolTerminate from "../pool/terminate.js";
 import _poolTerritorialDispute from "../pool/territorial-dispute.js";
@@ -1051,6 +1053,7 @@ const shard: CardShard = {
     _poolDelneyStreetwiseLookout,
     _poolDemonOfDeathsGate,
     _poolDemonicLore,
+    _poolDermotaxi,
     _poolDesertNomads,
     _poolDesperateParry,
     _poolDespise,
@@ -1637,6 +1640,7 @@ const shard: CardShard = {
     _poolTasigursCruelty,
     _poolTawnossWeaponry,
     _poolTelJiladJustice,
+    _poolTemptingWurm,
     _poolTerisianMindbreaker,
     _poolTerminate,
     _poolTerritorialDispute,

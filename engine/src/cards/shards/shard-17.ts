@@ -283,6 +283,7 @@ import _poolForlornFlats from "../pool/forlorn-flats.js";
 import _poolFoulmireKnight from "../pool/foulmire-knight.js";
 import _poolFoundryChampion from "../pool/foundry-champion.js";
 import _poolFowlStrike from "../pool/fowl-strike.js";
+import _poolFrankensteinsMonster from "../pool/frankensteins-monster.js";
 import _poolFrenziedGoblin from "../pool/frenzied-goblin.js";
 import _poolFretworkColony from "../pool/fretwork-colony.js";
 import _poolFreyaCrescent from "../pool/freya-crescent.js";
@@ -1200,6 +1201,7 @@ const shard: CardShard = {
     _poolFoulmireKnight,
     _poolFoundryChampion,
     _poolFowlStrike,
+    _poolFrankensteinsMonster,
     _poolFrenziedGoblin,
     _poolFretworkColony,
     _poolFreyaCrescent,
