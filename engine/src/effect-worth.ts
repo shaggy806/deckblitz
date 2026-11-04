@@ -119,6 +119,8 @@ function playersIn(scope: PlayerScope, ctx: WorthContext): readonly PlayerId[] |
       return opponentsOf(state, controller).filter((p) => p !== ctx.triggerPlayer);
     case "opponents-who-voted-with-you":
     case "you-and-opponents-who-voted-with-you":
+    case "each-friend":
+    case "each-foe":
       // Not known until the votes are in.
       return null;
     case "player-to-your-left":
@@ -296,6 +298,13 @@ function protectionWorth(
 function untargetedWorth(effect: EffectSpec, ctx: WorthContext): number {
   const you = [ctx.controller];
   switch (effect.kind) {
+    // "For each player, choose friend or foe": the friend half (option 0) is
+    // the good one on every such card, so yourself a friend, the others foes.
+    case "cast-vote": {
+      const choice = effect.choice;
+      if (typeof choice !== "object" || !("about" in choice) || choice.about === undefined) return 0;
+      return (choice.option === 0) === (choice.about === ctx.controller) ? 1 : -1;
+    }
     case "sequence":
       return effect.effects.reduce((sum, e) => sum + untargetedWorth(e, ctx), 0);
     case "for-each-target":

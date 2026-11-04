@@ -7449,6 +7449,26 @@ export function parseEffect(text, outer) {
   const becomes = becomesWithAbilitiesOf(text);
   if (becomes !== null) return { effect: becomes, todo: [], hints: [] };
 
+  // "For each player, choose friend or foe. Each friend …. Each foe …": a
+  // sentence about each player, then that player's scope put in its place.
+  const friendOrFoe = /^For each player, choose friend or foe\. (Each friend .+)\. ((?:Each foe|.+ to each foe) .+)\.$/.exec(text);
+  if (friendOrFoe !== null) {
+    const read = (sentence, words, scope) => {
+      const parsed = parseEffect(`${sentence.replace(words[0], words[1])}.`, ctx).effect;
+      if (parsed === null) return null;
+      const swapped = JSON.stringify(parsed).replaceAll(`"${words[2]}"`, `"${scope}"`);
+      return swapped.includes(`"${scope}"`) ? JSON.parse(swapped) : null;
+    };
+    const friend = read(friendOrFoe[1], [/^Each friend/, "Each player", "each-player"], "each-friend");
+    const foe = /^Each foe/.test(friendOrFoe[2])
+      ? read(friendOrFoe[2], [/^Each foe/, "Each player", "each-player"], "each-foe")
+      : read(friendOrFoe[2], [/each foe/, "each opponent", "each-opponent"], "each-foe");
+    if (friend !== null && foe !== null) {
+      const choose = { kind: "vote", choose: true, who: "you", for: { options: ["friend", "foe"], about: "each-player" } };
+      return { effect: { kind: "sequence", effects: [choose, friend, foe] }, todo: [], hints: [] };
+    }
+  }
+
   // "The amassed Army" (rule 701.47a): read at once, or by a reflexive ability.
   const amassThen = /^amass ([A-Z][a-z]+) (\d+)(, then|\. When you do,) (.+?)(?: \(To amass .*\))?$/i.exec(text);
   if (amassThen !== null) {

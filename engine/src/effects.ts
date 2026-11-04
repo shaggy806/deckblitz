@@ -1982,6 +1982,12 @@ export type PlayerScope =
    * of Unity): the effect's controller with those opponents, in turn order
    * from the active player. */
   | "you-and-opponents-who-voted-with-you"
+  /** "**Each friend**", "**each foe**": the players chosen so by this
+   * resolution's `vote` with `for: { options: ["friend", "foe"], about:
+   * "each-player" }` (Pir's Whim), in turn order. A later `vote` in the same
+   * resolution doesn't change who they are. */
+  | "each-friend"
+  | "each-foe"
   /** "**The chosen player**": the player chosen for the effect's source — as
    * it entered (`CardDefinition.choosePlayerOnEnter`: Black Vise, Saskia the
    * Unyielding) or the last one an ability of it chose and kept
@@ -7690,8 +7696,12 @@ export type EffectSpec =
        */
       readonly kind: "vote";
       readonly for:
-        /** Named options — "votes for fellowship or aid". */
-        | { readonly options: readonly string[] }
+        /** Named options — "votes for fellowship or aid". `about`, only with
+         * `choose` and `who: "you"`: one question per player in that scope,
+         * starting with you — "for each player, choose friend or foe" (Pir's
+         * Whim), the scopes `"each-friend"` and `"each-foe"` reading the
+         * answers, the first option friend. */
+        | { readonly options: readonly string[]; readonly about?: PlayerScope }
         /** A permanent matching `permanent`, read from the effect's
          * controller's side — Council's Judgment's "a nonland permanent you
          * don't control". `upTo` is Vault 11's "votes for **up to one**
@@ -7764,7 +7774,7 @@ export type EffectSpec =
       /** Set by the engine on the copy it parks between one vote and the
        * next: the votes still to ask for, each with whether it's an
        * additional, optional one. */
-      readonly toAsk?: readonly { readonly player: PlayerId; readonly extra: boolean }[];
+      readonly toAsk?: readonly { readonly player: PlayerId; readonly extra: boolean; readonly about?: PlayerId }[];
     }
   | {
       /** One vote being cast — the effect of the option a voter picks. Built
@@ -10230,7 +10240,7 @@ export interface EffectApi {
   /** Ask `player` for one vote in `spec` — `extra` an additional, optional
    * one (rule 701.38d). Nothing, for a player out of the game or with
    * nothing to vote for. */
-  askVote(player: PlayerId, spec: Extract<EffectSpec, { kind: "vote" }>, extra: boolean): void;
+  askVote(player: PlayerId, spec: Extract<EffectSpec, { kind: "vote" }>, extra: boolean, about?: PlayerId): void;
   /** Record `voter`'s vote — a `permanent` being one on the battlefield. */
   castVote(voter: PlayerId, choice: VoteChoice | { readonly permanent: ObjectId }): void;
   /** Every vote is in: reveal them (a secret vote's) and fire "whenever
@@ -12674,6 +12684,11 @@ function applyVote(spec: Extract<EffectSpec, { kind: "vote" }>, ctx: ResolutionC
               ]
             : ctx.apnap(fromYou);
     toAsk = order.map((player) => ({ player, extra: false }));
+    // "For each player, choose …": the one chooser, a question per player.
+    const about = "options" in spec.for ? spec.for.about : undefined;
+    if (about !== undefined) {
+      toAsk = eachPlayerMayAsks(about, ctx, true).map((player) => ({ player: ctx.controller, extra: false, about: player }));
+    }
   }
   if (toAsk === undefined) {
     ctx.beginVoting(spec.secret === true);
@@ -12687,7 +12702,7 @@ function applyVote(spec: Extract<EffectSpec, { kind: "vote" }>, ctx: ResolutionC
     toAsk = toAsk.slice(1);
     const parked = ctx.parkedCount();
     const pendingBefore = ctx.decisionPending();
-    ctx.askVote(ask.player, spec, ask.extra);
+    ctx.askVote(ask.player, spec, ask.extra, ask.about);
     if (!pendingBefore && ctx.decisionPending()) {
       ctx.resumeAfterDecisions({ ...spec, toAsk }, parked);
       return;

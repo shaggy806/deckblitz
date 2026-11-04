@@ -146,7 +146,9 @@ function eventText(event: GameEvent, nameOf: NameOf, seats: readonly SeatStatus[
   const signed = (n: number): string => (n >= 0 ? `+${n}` : `${n}`)
   const voteText = (choice: VoteChoice): string =>
     'option' in choice
-      ? choice.text
+      ? choice.about !== undefined
+        ? `${who(choice.about)} as ${choice.text}`
+        : choice.text
       : 'player' in choice
         ? who(choice.player)
         : 'number' in choice

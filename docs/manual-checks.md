@@ -6947,3 +6947,13 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 - **Do:** Cast Season of the Burrow. Click the exile mode twice and Confirm. Pick Bob's creature, then Carol's.
 - **Expect:** Both are exiled, and Bob and Carol each draw a card. Dave and you don't.
+
+### Virtus's Maneuver: choosing friend or foe for each player
+
+- **Do:** Cast Virtus's Maneuver. Answer "Alice: friend", then "Bob: foe".
+- **Expect:** Each question names a player and offers just friend and foe. Grizzly Bears goes back to your hand from your graveyard, and Bob's Hill Giant is sacrificed.
+
+### Virtus's Maneuver: four players, a question for each
+
+- **Do:** Cast Virtus's Maneuver. Answer "Alice: friend", "Bob: foe", "Carol: friend" and "Dave: foe".
+- **Expect:** The questions come in that order, all to you. You and Carol each get a creature card back. Bob and Dave each sacrifice a creature, and Carol's creature stays.

@@ -4078,6 +4078,22 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(spell.complete).toBe(true);
   });
 
+  it("'for each player, choose friend or foe': each sentence with the scope swapped", () => {
+    const spell = face(
+      "For each player, choose friend or foe. Each friend draws a card. Each foe sacrifices a creature of their choice.",
+      "Sorcery",
+    );
+    expect(spell.complete).toBe(true);
+    expect(spell.effect.effects[0]).toEqual({
+      kind: "vote",
+      choose: true,
+      who: "you",
+      for: { options: ["friend", "foe"], about: "each-player" },
+    });
+    expect(spell.effect.effects[1]).toMatchObject({ kind: "draw", who: "each-friend" });
+    expect(spell.effect.effects[2]).toMatchObject({ kind: "sacrifice", who: "each-foe" });
+  });
+
   it("'choose up to five {P} worth of modes' (rule 700.2i): a budget, each mode's pawprints", () => {
     const spell = face(
       "Choose up to five {P} worth of modes. You may choose the same mode more than once.\n{P} — Draw a card.\n{P}{P} — Exile target artifact.\n{P}{P}{P} — You gain 5 life.",

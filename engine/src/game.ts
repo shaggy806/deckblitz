@@ -30672,6 +30672,19 @@ export class Game {
               : this.state.objects[source]?.attachedToPlayer;
         return p === undefined || this.state.players[p]?.hasLost !== false ? [] : [p];
       }
+      if (who === "each-friend" || who === "each-foe") {
+        // Every answer this resolution holds: a later `vote` ("each foe
+        // chooses …") mustn't hide them, as it would in `votes()`.
+        const option = who === "each-friend" ? 0 : 1;
+        const chosen = new Set<PlayerId>();
+        for (const event of this.eventsSince(since)) {
+          if (event.type !== "votes-finished" || event.source !== source) continue;
+          for (const { choice } of event.votes) {
+            if ("about" in choice && choice.about !== undefined && choice.option === option) chosen.add(choice.about);
+          }
+        }
+        return this.state.turnOrder.filter((p) => chosen.has(p) && this.state.players[p]?.hasLost === false);
+      }
       if (who !== "opponents-who-voted-with-you" && who !== "you-and-opponents-who-voted-with-you") {
         return this.scopedPlayers(controller, who, triggerObject, triggerLastKnown(), refs.player, false, refs.triggerSpellController);
       }
@@ -34346,7 +34359,7 @@ export class Game {
           [source]: { secret, votes: [], ...(choice === true ? { choice: true } : {}) },
         };
       },
-      askVote: (player, spec, extra) => this.askVote(source, controller, player, spec, extra, x),
+      askVote: (player, spec, extra, about) => this.askVote(source, controller, player, spec, extra, x, about),
       castVote: (voter, choice) => {
         const held = this.state.voting?.[source];
         if (held === undefined) return;
@@ -36618,6 +36631,8 @@ export class Game {
     spec: Extract<EffectSpec, { kind: "vote" }>,
     extra: boolean,
     x: number,
+    /** "For each player, choose …": the player this question is about. */
+    about?: PlayerId,
   ): void {
     if (this.state.players[player]?.hasLost !== false) return;
     const secret = spec.secret === true;
@@ -36690,8 +36705,15 @@ export class Game {
     const modes: ModeOption[] =
       "options" in what
         ? what.options.map((text, option) => ({
-            text: `${verb} ${text}`,
-            effect: { kind: "cast-vote", voter: player, choice: { option, text } },
+            text:
+              about === undefined
+                ? `${verb} ${text}`
+                : `${about.charAt(0).toUpperCase()}${about.slice(1)}: ${text}`,
+            effect: {
+              kind: "cast-vote",
+              voter: player,
+              choice: { option, text, ...(about !== undefined ? { about } : {}) },
+            },
           }))
         : this.state.turnOrder
             .filter((p) => this.state.players[p]?.hasLost === false && (what.player === "any" || p !== player))
@@ -49122,6 +49144,8 @@ export class Game {
     if (
       who === "opponents-who-voted-with-you" ||
       who === "you-and-opponents-who-voted-with-you" ||
+      who === "each-friend" ||
+      who === "each-foe" ||
       who === "chosen-player" ||
       who === "attached-controller" ||
       who === "source-controller"

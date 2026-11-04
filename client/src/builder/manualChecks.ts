@@ -10428,4 +10428,18 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{ bf: ['Grizzly Bears'] }, { bf: ['Colossal Dreadmaw'] }, {}],
     }),
   ),
+  preset(
+    "Virtus's Maneuver: choosing friend or foe for each player",
+    board({
+      you: { bf: ['Swamp*3'], hand: ["Virtus's Maneuver"], gy: ['Grizzly Bears'] },
+      opp: [{ bf: ['Hill Giant'] }],
+    }),
+  ),
+  preset(
+    "Virtus's Maneuver: four players, a question for each",
+    board({
+      you: { bf: ['Swamp*3'], hand: ["Virtus's Maneuver"], gy: ['Grizzly Bears'] },
+      opp: [{ bf: ['Hill Giant'] }, { bf: ['Colossal Dreadmaw'], gy: ['Llanowar Elves'] }, { bf: ['Llanowar Elves'] }],
+    }),
+  ),
 ]

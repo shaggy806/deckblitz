@@ -19,7 +19,13 @@ import type { Phase, Step } from "./turn.js";
  * Misfortune), kept the same way.
  */
 export type VoteChoice =
-  | { readonly option: number; readonly text: string }
+  | {
+      readonly option: number;
+      readonly text: string;
+      /** The player this one is about: "for each player, choose friend or
+       * foe" is a question per player. */
+      readonly about?: PlayerId;
+    }
   | { readonly object: ObjectId; readonly zoneChangeCount: number }
   | { readonly player: PlayerId }
   | { readonly number: number };
@@ -33,7 +39,7 @@ export interface Vote {
 
 /** Whether two votes are for the same choice. */
 export function sameVoteChoice(a: VoteChoice, b: VoteChoice): boolean {
-  if ("option" in a) return "option" in b && a.option === b.option;
+  if ("option" in a) return "option" in b && a.option === b.option && a.about === b.about;
   if ("object" in a) return "object" in b && a.object === b.object && a.zoneChangeCount === b.zoneChangeCount;
   if ("number" in a) return "number" in b && a.number === b.number;
   return "player" in b && a.player === b.player;
