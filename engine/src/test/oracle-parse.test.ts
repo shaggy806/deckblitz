@@ -2426,6 +2426,13 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     });
     expect(face("You may pay {0} rather than pay the cycling cost of the first card you cycle each turn.").static[0].alternativeCyclingCost)
       .toEqual({ mana: "{0}", firstEachTurn: true });
+    expect(face("You may activate equip abilities any time you could cast an instant.").static[0].equipAtInstantSpeed).toBe(true);
+    const anew = face("During your turn, you may activate equip abilities any time you could cast an instant.").static[0];
+    expect(anew.equipAtInstantSpeed).toBe(true);
+    expect(anew.condition).toEqual({ kind: "your-turn" });
+    const first = face("You may pay {0} rather than pay the equip cost of the first equip ability you activate during each of your turns.").static[0];
+    expect(first.alternativeEquipCost).toEqual({ mana: "{0}", firstEachTurn: true });
+    expect(first.condition).toEqual({ kind: "your-turn" });
     const perspectives = face("As long as you have seven or more cards in hand, you may pay {0} rather than pay cycling costs.").static[0];
     expect(perspectives.alternativeCyclingCost).toEqual({ mana: "{0}" });
     expect(perspectives.condition).toEqual({ kind: "hand-size", atLeast: 7 });

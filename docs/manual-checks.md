@@ -7285,6 +7285,16 @@ These boards start before the first turn (the builder's `openingHands`), with th
 - **Do:** Click the Forest enchanted with Market Festival, and take {G}, {W} and {U}.
 - **Expect:** A popup with one offer per combination, fifteen in all and no {W}{U} beside {U}{W}. The pool ends with {G}{W}{U}.
 
+### Forge Anew: the first equip of your turn for nothing
+
+- **Do:** Click Vulshok Morningstar and take "Equip {0}", on Grizzly Bears. Then click the Morningstar again.
+- **Expect:** It offers "Equip {2}" and "Equip {0}" the first time, and no Forests get tapped. The second time it offers only "Equip {2}".
+
+### Bloodthorn Flail: three mana or a discard
+
+- **Do:** Click Bloodthorn Flail and take "Equip—Discard a card", on Grizzly Bears, discarding the Forest.
+- **Expect:** It offers "Equip {3}" and "Equip—Discard a card". The Forest goes to your graveyard, nothing gets tapped, and the Bears are 4/3.
+
 ### Ezuri's Predation: which tokens fight which creatures
 
 - **Do:** Cast Ezuri's Predation. Choose one Squirrel and one Beast of the four tokens, then the creature the first of them fights.

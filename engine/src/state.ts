@@ -2897,6 +2897,9 @@ export interface PlayerState {
   /** How many cards this player has cycled this turn (rule 702.29c) — Gavi,
    * Nest Warden's "the first card you cycle each turn". Reset in `beginTurn`. */
   cardsCycledThisTurn?: number;
+  /** How many equip abilities this player has activated this turn — Forge
+   * Anew's "the first equip ability you activate". Reset in `beginTurn`. */
+  equipsActivatedThisTurn?: number;
   /** Whether this player has drawn a card during their own draw step this
    * turn — so the next one isn't "the first one they draw in each of their
    * draw steps" (Xyris, the Writhing Storm; Orcish Bowmasters). Reset in

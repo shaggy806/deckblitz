@@ -5024,6 +5024,13 @@ is "can't attack a player it has already attacked this turn" (Port Razer), by th
   `filter` in your hand have cycling for `cost` (rule 702.29a — Rhet-Tomb
   Mystic); `search` makes it typecycling and `eachPlayer` reaches every hand
   (Homing Sliver). It's a `cycles` trigger's cycling like a printed one.
+- `equipAtInstantSpeed: true` — "you may activate equip abilities any time you could
+  cast an instant" (Leonin Shikari; a `your-turn` `condition` for Forge Anew's "during
+  your turn"). `alternativeEquipCost: { mana, firstEachTurn? }` — "you may pay {0}
+  rather than pay the equip cost of the first equip ability you activate" (Forge Anew):
+  each equip ability you control has a second one at `mana`, beside the first.
+  "Equip—Pay {3} or discard a card" is two entries in `activated`, one per cost, each
+  with a text starting `Equip` (Bloodthorn Flail, Gavel of the Righteous).
 - `alternativeCyclingCost: { mana, firstEachTurn? }` — "you may pay `mana` rather
   than pay cycling costs" (rule 702.29f has a typecycling cost one too): the cards
   in your hand with any cycling ability, printed or granted, have a second one at

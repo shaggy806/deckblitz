@@ -3014,6 +3014,18 @@ export interface StaticAbility {
    */
   readonly alternativeCyclingCost?: { readonly mana: string; readonly firstEachTurn?: true };
   /**
+   * "You may pay {0} rather than pay the equip cost of the first equip ability
+   * you activate during each of your turns" (Forge Anew, its static's
+   * `condition` a `your-turn`): the permanents this permanent's controller
+   * controls with an equip ability, printed or granted, have a second one at
+   * `mana`, beside the first, which is how the player chooses (rule 602.2b).
+   * `firstEachTurn` counts every equip ability they have activated this turn,
+   * before this arrived too. An equip variant is an equip ability (rule 702.6c);
+   * reconfigure isn't (Forge Anew's ruling). The cost replaced is the whole cost;
+   * what raises or lowers it still applies.
+   */
+  readonly alternativeEquipCost?: { readonly mana: string; readonly firstEachTurn?: true };
+  /**
    * Cards matching `filter` in this permanent's controller's hand have
    * cycling for `cost` (rule 702.29a) — Rhet-Tomb Mystic's "each creature card
    * in your hand has cycling {1}{U}", Jo Grant's for historic cards. `search`
@@ -3570,6 +3582,11 @@ export interface StaticAbility {
    * carrying it, or on an emblem every planeswalker its owner controls
    * (Teferi, Temporal Archmage). */
   readonly loyaltyAtInstantSpeed?: boolean;
+  /** "You may activate equip abilities any time you could cast an instant"
+   * (Leonin Shikari; Forge Anew's "during your turn", the static's `condition`):
+   * this permanent's controller's equip abilities (rule 702.6a) aren't held to
+   * sorcery timing. Any other restriction on them still applies (its ruling). */
+  readonly equipAtInstantSpeed?: true;
   /**
    * "You may exert this creature as it attacks" (rule 701.43d — Glorybringer):
    * an optional cost to attack (508.1g), asked of its controller once its

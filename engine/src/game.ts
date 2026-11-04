@@ -8666,6 +8666,7 @@ export class Game {
       this.state.players[player].createdTokenThisTurn = false;
       this.state.players[player].usedGraveyardThisTurn = false;
       delete this.state.players[player].cardsCycledThisTurn;
+      delete this.state.players[player].equipsActivatedThisTurn;
       delete this.state.players[player].crimesThisTurn;
       delete this.state.players[player].turnHistory;
     }
@@ -21250,6 +21251,50 @@ export class Game {
     if (target?.zone === "hand") return this.handGrantedActivated(target);
     if (target?.zone === "graveyard") return this.graveyardGrantedActivated(target);
     if (target === undefined || target.zone !== "battlefield") return [];
+    return this.withAlternativeEquipCosts(target, this.grantedOnPermanent(target, grantors));
+  }
+
+  /**
+   * `granted`, and last (where an index can't shift another's) the same equip
+   * ability at the cost of each `alternativeEquipCost` that reaches it: the
+   * player picks by which they activate (rule 602.2b). What goes on the stack
+   * carries its ability, so nothing is lost once "the first" has been used.
+   */
+  private withAlternativeEquipCosts(
+    target: GameObject,
+    granted: readonly { readonly ability: ActivatedAbility; readonly ref: GrantedAbilityRef }[],
+  ): readonly { readonly ability: ActivatedAbility; readonly ref: GrantedAbilityRef }[] {
+    const printed = hasLostAbilities(this.state, this.registry, target)
+      ? []
+      : this.registry.get(rulesTextName(target)).activated;
+    const equips = [...printed, ...granted.map((g) => g.ability)].filter(isEquipAbility);
+    if (equips.length === 0) return granted;
+    const used = this.state.players[target.controller]?.equipsActivatedThisTurn ?? 0;
+    const out = [...granted];
+    const seen = new Set<string>();
+    for (const { ability } of this.activeStaticsOf(target.controller, (a) => a.alternativeEquipCost !== undefined)) {
+      const grant = ability.alternativeEquipCost!;
+      if (grant.firstEachTurn === true && used > 0) continue;
+      for (const equip of equips) {
+        // "Equip Human {2}" stays what it is; only the cost changes.
+        const quality = /^Equip(?: ([^{—]+?))?\s*(?:\{|—)/.exec(equip.text)?.[1];
+        const text = `Equip${quality === undefined ? "" : ` ${quality}`} ${grant.mana}`;
+        const key = `${text}|${JSON.stringify(equip.targets)}`;
+        if (seen.has(key)) continue;
+        seen.add(key);
+        const cheaper: ActivatedAbility = { ...equip, cost: { mana: grant.mana, tap: false }, text };
+        out.push({ ability: cheaper, ref: { kind: "modifier-activated", ability: cheaper } });
+      }
+    }
+    return out;
+  }
+
+  /** The abilities a permanent has from what grants them, its own modifiers'
+   * first, then by the grantor's timestamp. */
+  private grantedOnPermanent(
+    target: GameObject,
+    grantors?: readonly GrantSource[],
+  ): readonly { readonly ability: ActivatedAbility; readonly ref: GrantedAbilityRef }[] {
     // Only what was granted after a loss of all its abilities (rule 613.7).
     const lostAt = abilitiesLostAt(this.state, this.registry,target);
     // Its own modifiers' grants first — a copy exception's, a one-shot's.
@@ -22143,7 +22188,12 @@ export class Game {
     }
     if (ability.sorcerySpeed) {
       const timing = this.whyNotSorcerySpeed(player, `activate ${def.name}'s ability`);
-      if (timing !== null) return timing;
+      if (
+        timing !== null &&
+        !(isEquipAbility(ability) && this.activeStaticsOf(player, (a) => a.equipAtInstantSpeed === true).length > 0)
+      ) {
+        return timing;
+      }
     }
     // `otherOnly` is about the sacrifice cost alone: "Sacrifice another
     // creature: … target creature" may target its own source (Dina).
@@ -22916,6 +22966,11 @@ export class Game {
     if (this.otherChoice?.for === sourceId) this.state.objects[abilityId].otherChooser = this.otherChoice.chooser;
     if (shares !== undefined) this.state.objects[abilityId].division = shares;
     if (grantedAbility !== undefined) this.state.objects[abilityId].grantedAbility = grantedAbility;
+    // Forge Anew's "the first equip ability you activate".
+    if (isEquipAbility(ability)) {
+      const activator = this.state.players[player];
+      activator.equipsActivatedThisTurn = (activator.equipsActivatedThisTurn ?? 0) + 1;
+    }
     // "If this ability has been activated four or more times this turn"
     // (Dragon Whelp): counted as it's activated, resolved or not.
     if (this.readsActivationCount(ability)) {

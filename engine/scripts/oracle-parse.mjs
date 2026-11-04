@@ -17173,6 +17173,16 @@ function parseStatic(line, text) {
       text,
     };
   }
+  // Equip abilities' timing and cost: Leonin Shikari, Forge Anew.
+  if (line === "You may activate equip abilities any time you could cast an instant.") {
+    return { affects: { scope: "self" }, equipAtInstantSpeed: true, text };
+  }
+  if (line === "During your turn, you may activate equip abilities any time you could cast an instant.") {
+    return { affects: { scope: "self" }, condition: { kind: "your-turn" }, equipAtInstantSpeed: true, text };
+  }
+  if (line === "You may pay {0} rather than pay the equip cost of the first equip ability you activate during each of your turns.") {
+    return { affects: { scope: "self" }, condition: { kind: "your-turn" }, alternativeEquipCost: { mana: "{0}", firstEachTurn: true }, text };
+  }
   // A cycling cost's alternative (rule 702.29f has typecycling's a cycling
   // cost too): Gavi, Nest Warden, New Perspectives.
   if (line === "You may pay {0} rather than pay the cycling cost of the first card you cycle each turn.") {

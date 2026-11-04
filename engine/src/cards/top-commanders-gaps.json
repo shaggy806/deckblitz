@@ -6,6 +6,8 @@
   "effect:keep-one-of-each-permanent-type",
   "effect:turn-scoped-mana-trigger",
   "replacement:would-lose-life",
+  "static:equip-at-instant-speed",
+  "cost:equip-alternative-costs",
   "effect:token-per-object-fights",
   "replacement:token-multiplier-filter",
   "effect:exile-any-number-until-leaves",

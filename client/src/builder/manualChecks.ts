@@ -10917,6 +10917,19 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: ['Mountain', 'Island'], hand: ['Lightning Bolt'], human: true },
     }),
   ),
+  // --- Equip's timing and its costs (2026-11-04) --------
+  preset(
+    'Forge Anew: the first equip of your turn for nothing',
+    board({
+      you: { bf: ['Forge Anew', 'Vulshok Morningstar', 'Grizzly Bears', 'Forest*4'] },
+    }),
+  ),
+  preset(
+    'Bloodthorn Flail: three mana or a discard',
+    board({
+      you: { bf: ['Bloodthorn Flail', 'Grizzly Bears', 'Swamp*3'], hand: ['Forest'] },
+    }),
+  ),
   // --- Tokens that each fight a different creature (2026-11-04) --------
   preset(
     "Ezuri's Predation: which tokens fight which creatures",
