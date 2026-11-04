@@ -446,10 +446,12 @@ section keeps only what to do next.
   created with their source, one target slot over players and permanents, the abilities of exiled cards, mana restrictions
   read at the cast, suspend X and one of each category, the greatest of an amount among players, chroma and what a permanent
   devoured, triggered mana abilities that do more, more spend-only purposes, control changes with a computed recipient and the
-  active player's target against their own count (450 proving cards; `--stale` 1,634 wait for `author-freed`). Next by
-  `--greedy --groups`: `decision:choose-permanent`'s other group (6), then the 5-card long tail:
-  `condition:defending-player-life-rank`, `decision:choose-odd-or-even`, `decision:choose-roll-result`. Narrow keys `author-freed`
-  should give: Head Games and Jester's Mask ("search for that many", no this-way count of cards put on a library), Sanity
+  active player's target against their own count, keeping some of yours by count or total power, a choice beside a spell's
+  targets, comparisons between players' states, a player's combat history, effect-made blocks and a creature's record of combat,
+  reselecting attackers (501 proving cards; `--stale` 1,653 wait for `author-freed`). Next by `--greedy --groups`: the 5-card long tail.
+  Narrow keys `author-freed` should give: Cannibalize (with one target illegal, does the survivor get exiled unasked? its ruling
+  doesn't say), Portal Manipulator (no choice, a target slot read from another), Bribe Taker ("for each kind" is a choice), Head
+  Games and Jester's Mask ("search for that many", no this-way count of cards put on a library), Sanity
   Grinding (its ten cards stay on top until after the mill), Namor (`effect:amount-mana-symbols-of-color-in-spell`), Captain America (an intervening-if read as it resolves), Ajani, Nacatl Pariah (keeps one permanent, not one per
   type), Stronghold Gambit (a secret pick from hand), The Toymaker's Trap (an unchosen number, an opponent's guess),
   Total War ("didn't attack" means that declaration, not the turn), Siren's Call (`condition:cast-timing-condition`), Tanglewalker

@@ -879,6 +879,10 @@ missing. Re-run `--greedy` for Phase 2's order.
   `effect:amount-greatest-count-among-players`; `effect:amount-new-variants`' top four units; `effect:mana-ability-side-effects`;
   `cost:spend-only-chosen-type-or-filter`; `effect:control-change-extensions` with `effect:enters-under-opponent-control`;
   `effect:target-opponent-chooses` with `target:opponent-comparison-chosen-by-active-player`. 63 proving cards.
+- **2026-11-03: overnight, second round.** `decision:choose-permanent`'s two groups; `condition:defending-player-life-rank`,
+  `condition:that-player-controls-more`, `condition:player-state-thresholds`, `condition:condition-lands-same-name`;
+  `trigger:combat-trigger-extensions`, `condition:attacked-or-blocked-this-combat`, `condition:filter-card-property-clauses`,
+  `effect:reselect-attack-target`. 51 proving cards.
 
 ## Rough size
 

@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4282 already implemented / 718 missing (marks refreshed 2026-11-04)
+4290 already implemented / 710 missing (marks refreshed 2026-11-04)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -706,7 +706,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   707  Grim Tutor                               {1}{B}{B}        Sorcery
 [x]   708  Chain Reaction                           {2}{R}{R}        Sorcery
 [x]   709  Life from the Loam                       {1}{G}           Sorcery
-[ ]   710  Archaeomancer's Map                      {2}{W}           Artifact
+[x]   710  Archaeomancer's Map                      {2}{W}           Artifact
 [x]   711  Fact or Fiction                          {3}{U}           Instant
 [x]   712  Castle Ardenvale                         {0}              Land
 [x]   713  Whip of Erebos                           {2}{B}{B}        Legendary Enchantment Artifact
@@ -2338,7 +2338,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2345  Conduit of Ruin                          {6}              Creature — Eldrazi
 [x]  2346  Escape to the Wilds                      {3}{R}{G}        Sorcery
 [x]  2347  Silkguard                                {X}{G}           Instant
-[ ]  2348  Sceptre of Eternal Glory                 {4}              Legendary Artifact
+[x]  2348  Sceptre of Eternal Glory                 {4}              Legendary Artifact
 [x]  2349  Sandwurm Convergence                     {6}{G}{G}        Enchantment
 [x]  2350  Geothermal Bog                           {0}              Land — Swamp Mountain
 [x]  2351  Kiora, Behemoth Beckoner                 {2}{G/U}         Legendary Planeswalker — Kiora
@@ -2488,7 +2488,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2495  Voldaren Estate                          {0}              Land
 [x]  2496  Yuriko, the Tiger's Shadow               {1}{U}{B}        Legendary Creature — Human Ninja
 [x]  2497  Unquestioned Authority                   {2}{W}           Enchantment — Aura
-[ ]  2498  Endless Atlas                            {2}              Artifact
+[x]  2498  Endless Atlas                            {2}              Artifact
 [ ]  2499  Selfless Squire                          {3}{W}           Creature — Human Soldier
 [x]  2500  Ghoulcaller Gisa                         {3}{B}{B}        Legendary Creature — Human Wizard
 [ ]  2501  Animist's Awakening                      {X}{G}           Sorcery
@@ -2936,7 +2936,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2943  Jolrael, Mwonvuli Recluse                {1}{G}           Legendary Creature — Human Druid
 [ ]  2944  Tasha's Hideous Laughter                 {1}{U}{U}        Sorcery
 [x]  2945  Umezawa's Jitte                          {2}              Legendary Artifact — Equipment
-[ ]  2946  Maze's End                               {0}              Land
+[x]  2946  Maze's End                               {0}              Land
 [x]  2947  Benevolent Hydra                         {X}{G}{G}        Creature — Hydra
 [x]  2948  Cultivator's Caravan                     {3}              Artifact — Vehicle
 [x]  2949  Oakhollow Village                        {0}              Land
@@ -3139,7 +3139,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3146  Yargle and Multani                       {3}{B}{B}{G}     Legendary Creature — Frog Spirit Elemental
 [x]  3147  Phyrexian Triniform                      {9}              Artifact Creature — Phyrexian Golem
 [x]  3148  Chitterspitter                           {2}{G}           Artifact
-[ ]  3149  Lost Monarch of Ifnir                    {3}{B}           Creature — Zombie Noble
+[x]  3149  Lost Monarch of Ifnir                    {3}{B}           Creature — Zombie Noble
 [x]  3150  Heap Gate                                {0}              Land — Gate
 [x]  3151  Eaten Alive                              {B}              Sorcery
 [x]  3152  Ramos, Dragon Engine                     {6}              Legendary Artifact Creature — Dragon
@@ -3247,7 +3247,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3254  The Endstone                             {7}              Legendary Artifact
 [x]  3255  Fandaniel, Telophoroi Ascian             {4}{B}           Legendary Creature — Elder Wizard
 [x]  3256  Angel of Indemnity                       {5}{W}           Creature — Angel Warrior
-[ ]  3257  Misleading Signpost                      {2}{U}           Artifact
+[x]  3257  Misleading Signpost                      {2}{U}           Artifact
 [x]  3258  Hour of Promise                          {4}{G}           Sorcery
 [ ]  3259  Tenuous Truce                            {1}{W}           Enchantment — Aura
 [ ]  3260  Thornvault Forager                       {1}{G}           Creature — Squirrel Ranger
@@ -3511,7 +3511,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3518  Karumonix, the Rat King                  {1}{B}{B}        Legendary Creature — Phyrexian Rat
 [ ]  3519  Leyline of Transformation                {2}{U}{U}        Enchantment
 [x]  3520  God-Eternal Bontu                        {3}{B}{B}        Legendary Creature — Zombie God
-[ ]  3521  Blitzball                                {3}              Artifact
+[x]  3521  Blitzball                                {3}              Artifact
 [x]  3522  Amphin Mutineer                          {3}{U}           Creature — Salamander Pirate
 [x]  3523  Dihada, Binder of Wills                  {1}{R}{W}{B}     Legendary Planeswalker — Dihada
 [x]  3524  Fervor                                   {2}{R}           Enchantment
@@ -3582,7 +3582,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3589  Eye of Nidhogg                           {2}{B}           Legendary Enchantment — Aura
 [x]  3590  Hexplate Wallbreaker                     {3}{R}{R}        Artifact — Equipment
 [x]  3591  Bloodgift Demon                          {3}{B}{B}        Creature — Demon
-[ ]  3592  Guild Artisan                            {1}{R}           Legendary Enchantment — Background
+[x]  3592  Guild Artisan                            {1}{R}           Legendary Enchantment — Background
 [ ]  3593  Sower of Discord                         {4}{B}{B}        Creature — Demon
 [x]  3594  Sifter of Skulls                         {3}{B}           Creature — Eldrazi
 [x]  3595  Wall of Roots                            {1}{G}           Creature — Plant Wall

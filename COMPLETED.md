@@ -12,6 +12,21 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **Reselecting what an attacker attacks, through `enter-attacking`; any-player abilities clickable on another's board** (2026-11-03,
+  `63eca4722`): Misleading Signpost, Windshaper Planetar, Capricopian.
+- **A creature's own record of combat as filters, `afterCombat`, "a creature is attacking you"** (2026-11-03, `8276659b5`):
+  Kjeldoran Home Guard, Daredevil Dragster, Clockwork Beast, Halls of Mist, Tangle Kelp, Jabari's Influence, Heroic Return, Watchdog.
+- **Effect-made blocks, and a block's other creature** (2026-11-03, `2304078ce`): Fog Patch, Choking Vines, Trap Runner, High-Rise
+  Sawjack, Barrow-Blade, Mirror Shield.
+- **Combat-damage history, last-turn attacks, distinct thresholds, prime counts, shared names** (2026-11-03, `e625fe1ee`): 16 proving
+  cards, among them Lost Monarch, Wave of Rats, Avatar of Woe, Maze's End, Central Elevator // Promising Stairs.
+- **Player comparisons composed from `of-player` and `player-compare`, and an entry's "that player"** (2026-11-03, `30b52f74e`): Guild
+  Artisan, Agent of the Shadow Thieves, Sword Coast Sailor, Archaeomancer's Map, Unified Will, Peer Pressure, Predator's Gambit,
+  Skulking Killer.
+- **A choice beside a spell's targets, `keepTargets`** (2026-11-03, `c2cb533ad`): Aerith Rescue Mission, Wicked Slumber, Trial of Agony,
+  Crush Underfoot.
+- **Keeping some of yours by count, by total power or under what you chose** (2026-11-03, `bd156398b`): Phyrexian Dreadnought, Moorland
+  Rescuer, Sculpted Sunburst, Thunderwave, Watchers of the Dead, Covetous Elegy.
 - **The active player's target against their own count, and a targeted player's choice from hand** (2026-11-03, `2810bf1a2`):
   Magus of the Abyss, the five Oaths, Stunted Growth, Prying Questions.
 - **Control changes with a computed recipient, and entering or returning under an opponent** (2026-11-03, `0450d30d4`): Hithlain
