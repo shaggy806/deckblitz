@@ -329,6 +329,9 @@ export interface OthersEnterReplacement {
 export interface TokenMultiplierReplacement {
   readonly event: "would-create-token";
   readonly multiplier?: number;
+  /** "If one or more tokens would be created", with no "under your control"
+   * (Primal Vigor): whoever would control them (its ruling). */
+  readonly anyController?: true;
   readonly creatureTokensInstead?: string;
   /**
    * "If one or more tokens would be created under your control, **those
@@ -416,6 +419,9 @@ export interface CounterMultiplierReplacement {
    * 122.6, the ruling). Unset, the counters go on a permanent this permanent's
    * controller controls. */
   readonly whoPuts?: "you" | "opponent";
+  /** "If one or more +1/+1 counters would be put on **a creature**" (Primal
+   * Vigor): whoever controls it (its ruling). */
+  readonly anyController?: true;
   /** "… or player" (Vorinclex, Innkeeper's Talent) or "or on yourself"
    * (Lae'zel, Vlaakith's Champion): counters put on players too, energy
    * included (rule 107.14). */

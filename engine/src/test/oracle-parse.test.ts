@@ -317,6 +317,15 @@ describe("would-create-token replacements", () => {
     expect(
       read("If one or more creature tokens would be created under your control, three times that many of those tokens are created instead."),
     ).toEqual({ event: "would-create-token", multiplier: 3, ofTokens: { type: "creature" } });
+    expect(
+      read("If one or more tokens would be created, twice that many of those tokens are created instead."),
+    ).toEqual({ event: "would-create-token", multiplier: 2, anyController: true });
+    expect(
+      read("If one or more +1/+1 counters would be put on a creature, twice that many +1/+1 counters are put on that creature instead."),
+    ).toEqual({ event: "would-add-counter", multiplier: 2, anyController: true, counterKind: "+1/+1", filter: { type: "creature" } });
+    expect(
+      read("If one or more +1/+1 counters would be put on a creature you control, twice that many +1/+1 counters are put on that creature instead."),
+    ).toEqual({ event: "would-add-counter", multiplier: 2, counterKind: "+1/+1", filter: { type: "creature" } });
   });
   it("those tokens plus an additional one, of any token or some", () => {
     expect(

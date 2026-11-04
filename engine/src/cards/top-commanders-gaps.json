@@ -6,6 +6,7 @@
   "effect:keep-one-of-each-permanent-type",
   "effect:turn-scoped-mana-trigger",
   "replacement:would-lose-life",
+  "replacement:replacement-any-controller",
   "static:equip-at-instant-speed",
   "cost:equip-alternative-costs",
   "effect:token-per-object-fights",

@@ -6465,6 +6465,8 @@ clause (section 9):
   Academy Manufactor: each token `ofTokens` names becomes one of each.
   `multiplier` with `ofTokens` multiplies just those tokens (Ojer Taq, Deepest
   Foundation, three times creature tokens), in the search rather than last.
+  `anyController: true` on it, as on `would-add-counter`'s, is Primal Vigor's
+  wording with no "under your control": anyone's tokens, anyone's creature.
   `ofTokens: { type?, subtypesAnyOf? }` limits any of these to tokens of a kind:
   what they'd be created as (a definition or a copy's copiable values). The
   event changes as they apply, so a Frog from one replacement makes Queen

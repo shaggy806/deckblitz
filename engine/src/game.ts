@@ -40053,11 +40053,12 @@ export class Game {
     const used = this.tokenEventUsed;
     for (const id of this.state.zones.shared.battlefield) {
       const object = this.state.objects[id];
-      if (object.controller !== controller || hasLostAbilities(this.state, this.registry, object)) continue;
+      if (hasLostAbilities(this.state, this.registry, object)) continue;
       const statics = this.registry.get(rulesTextName(object)).static;
       for (let i = 0; i < statics.length; i++) {
         const r = statics[i].replacement;
         if (r?.event !== "would-create-token" || !this.staticActive(object, statics[i])) continue;
+        if (object.controller !== controller && r.anyController !== true) continue;
         // A plain doubler multiplies what the search returns.
         if (r.multiplier !== undefined && r.ofTokens === undefined) continue;
         for (let n = 0; n < (object.stackCount ?? 1); n++) {
@@ -53979,13 +53980,14 @@ export class Game {
     let mult = 1;
     for (const id of this.state.zones.shared.battlefield) {
       const object = this.state.objects[id];
-      if (object.controller !== controller || hasLostAbilities(this.state, this.registry,object)) continue;
+      if (hasLostAbilities(this.state, this.registry,object)) continue;
       for (const ability of this.registry.get(rulesTextName(object)).static) {
         const r = ability.replacement;
         if (
           r?.event === "would-create-token" &&
           r.multiplier !== undefined &&
           r.ofTokens === undefined &&
+          (object.controller === controller || r.anyController === true) &&
           this.staticActive(object, ability)
         ) {
           mult = Math.min(mult * r.multiplier ** (object.stackCount ?? 1), Game.MAX_EFFECT_INSTANCES);
@@ -54032,7 +54034,7 @@ export class Game {
     const steps = this.counterReplacementSteps(kind, asCost, by ?? targetObject.controller, (r, source, id) =>
       !(entering && id === target) &&
       !(r.other === true && id === target) &&
-      (r.whoPuts !== undefined || source.controller === targetObject.controller) &&
+      (r.whoPuts !== undefined || r.anyController === true || source.controller === targetObject.controller) &&
       (r.filter === undefined ||
         matchesFilter(this.state, this.registry, target, r.filter, { you: source.controller, source: id })),
     );

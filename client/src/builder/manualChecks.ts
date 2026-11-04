@@ -10917,6 +10917,14 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: ['Mountain', 'Island'], hand: ['Lightning Bolt'], human: true },
     }),
   ),
+  // --- Token and counter doublers for every player (2026-11-04) --------
+  preset(
+    "Primal Vigor: an opponent's doubles your tokens too",
+    board({
+      you: { bf: ['Plains*2'], hand: ['Raise the Alarm'] },
+      opp: { bf: ['Primal Vigor'] },
+    }),
+  ),
   // --- Equip's timing and its costs (2026-11-04) --------
   preset(
     'Forge Anew: the first equip of your turn for nothing',

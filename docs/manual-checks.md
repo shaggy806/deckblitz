@@ -7285,6 +7285,11 @@ These boards start before the first turn (the builder's `openingHands`), with th
 - **Do:** Click the Forest enchanted with Market Festival, and take {G}, {W} and {U}.
 - **Expect:** A popup with one offer per combination, fifteen in all and no {W}{U} beside {U}{W}. The pool ends with {G}{W}{U}.
 
+### Primal Vigor: an opponent's doubles your tokens too
+
+- **Do:** Cast Raise the Alarm.
+- **Expect:** Four Soldiers on your side, though Primal Vigor is Bob's.
+
 ### Forge Anew: the first equip of your turn for nothing
 
 - **Do:** Click Vulshok Morningstar and take "Equip {0}", on Grizzly Bears. Then click the Morningstar again.

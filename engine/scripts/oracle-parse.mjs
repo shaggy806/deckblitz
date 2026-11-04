@@ -16951,9 +16951,10 @@ function tokenReplacementOf(line, text, tokenFor) {
   };
   let m;
   // "If one or more creature tokens would be created under your control, three times that many of those tokens are created instead."
-  if ((m = /^If one or more (?:(\w+) )?tokens would be created under your control, (twice|three times) that many of those tokens are created instead\.$/.exec(line))) {
+  if ((m = /^If one or more (?:(\w+) )?tokens would be created( under your control)?, (twice|three times) that many of those tokens are created instead\.$/.exec(line))) {
     const ofTokens = of(m[1]);
-    return ofTokens === null ? null : static_({ multiplier: m[2] === "twice" ? 2 : 3, ...ofTokens });
+    if (ofTokens === null) return null;
+    return static_({ multiplier: m[3] === "twice" ? 2 : 3, ...(m[2] === undefined ? { anyController: true } : {}), ...ofTokens });
   }
   // "If you would create a Clue, Food, or Treasure token, instead create one of each."
   if ((m = /^If you would create a (\w+), (\w+), or (\w+) token, instead create one of each\.$/.exec(line))) {
@@ -18871,6 +18872,21 @@ function parseStatic(line, text) {
         ...(m[1] === "Other c" ? { excludeSelf: true } : {}),
       },
       grantPt: [Number(m[2]), Number(m[3])],
+      text,
+    };
+  }
+  // "If one or more +1/+1 counters would be put on a creature [you control],
+  // twice that many …" (Primal Vigor, Branching Evolution).
+  if ((m = /^If one or more \+1\/\+1 counters would be put on a creature( you control)?, twice that many \+1\/\+1 counters are put on that creature instead\.$/.exec(line))) {
+    return {
+      affects: { scope: "self" },
+      replacement: {
+        event: "would-add-counter",
+        multiplier: 2,
+        ...(m[1] === undefined ? { anyController: true } : {}),
+        counterKind: "+1/+1",
+        filter: { type: "creature" },
+      },
       text,
     };
   }
