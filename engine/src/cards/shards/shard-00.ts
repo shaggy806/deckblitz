@@ -324,6 +324,7 @@ import _poolGorgerWurm from "../pool/gorger-wurm.js";
 import _poolGossipsTalent from "../pool/gossips-talent.js";
 import _poolGourmandsTalent from "../pool/gourmands-talent.js";
 import _poolGrandEntryway from "../pool/grand-entryway.js";
+import _poolGravebaneZombie from "../pool/gravebane-zombie.js";
 import _poolGravelHideGoblin from "../pool/gravel-hide-goblin.js";
 import _poolGravewaker from "../pool/gravewaker.js";
 import _poolGreatDesertProspector from "../pool/great-desert-prospector.js";
@@ -1240,6 +1241,7 @@ const shard: CardShard = {
     _poolGossipsTalent,
     _poolGourmandsTalent,
     _poolGrandEntryway,
+    _poolGravebaneZombie,
     _poolGravelHideGoblin,
     _poolGravewaker,
     _poolGreatDesertProspector,

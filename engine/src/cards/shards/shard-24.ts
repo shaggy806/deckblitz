@@ -201,6 +201,7 @@ import _poolDeceiveTheMessenger from "../pool/deceive-the-messenger.js";
 import _poolDecomposition from "../pool/decomposition.js";
 import _poolDeepWater from "../pool/deep-water.js";
 import _poolDefiantStand from "../pool/defiant-stand.js";
+import _poolDelay from "../pool/delay.js";
 import _poolDemonOfCatastrophes from "../pool/demon-of-catastrophes.js";
 import _poolDesertOfTheFervent from "../pool/desert-of-the-fervent.js";
 import _poolDespoticScepter from "../pool/despotic-scepter.js";
@@ -1110,6 +1111,7 @@ const shard: CardShard = {
     _poolDecomposition,
     _poolDeepWater,
     _poolDefiantStand,
+    _poolDelay,
     _poolDemonOfCatastrophes,
     _poolDesertOfTheFervent,
     _poolDespoticScepter,

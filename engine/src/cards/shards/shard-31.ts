@@ -394,6 +394,7 @@ import _poolHerosResolve from "../pool/heros-resolve.js";
 import _poolHideousVisage from "../pool/hideous-visage.js";
 import _poolHighspireInfusion from "../pool/highspire-infusion.js";
 import _poolHighwayRobbery from "../pool/highway-robbery.js";
+import _poolHinder from "../pool/hinder.js";
 import _poolHoldoutSettlement from "../pool/holdout-settlement.js";
 import _poolHollowTrees from "../pool/hollow-trees.js";
 import _poolHoneymoonHearse from "../pool/honeymoon-hearse.js";
@@ -762,6 +763,7 @@ import _poolSowerOfTemptation from "../pool/sower-of-temptation.js";
 import _poolSparkSpray from "../pool/spark-spray.js";
 import _poolSparringDummy from "../pool/sparring-dummy.js";
 import _poolSpellBurst from "../pool/spell-burst.js";
+import _poolSpellCrumple from "../pool/spell-crumple.js";
 import _poolSpelunking from "../pool/spelunking.js";
 import _poolSphereOfReason from "../pool/sphere-of-reason.js";
 import _poolSphinxOfJwarIsle from "../pool/sphinx-of-jwar-isle.js";
@@ -1361,6 +1363,7 @@ const shard: CardShard = {
     _poolHideousVisage,
     _poolHighspireInfusion,
     _poolHighwayRobbery,
+    _poolHinder,
     _poolHoldoutSettlement,
     _poolHollowTrees,
     _poolHoneymoonHearse,
@@ -1729,6 +1732,7 @@ const shard: CardShard = {
     _poolSparkSpray,
     _poolSparringDummy,
     _poolSpellBurst,
+    _poolSpellCrumple,
     _poolSpelunking,
     _poolSphereOfReason,
     _poolSphinxOfJwarIsle,

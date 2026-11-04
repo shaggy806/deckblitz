@@ -3,6 +3,7 @@
 
 import type { CardShard } from "../card-shards.js";
 
+import _poolAbandonedSarcophagus from "../pool/abandoned-sarcophagus.js";
 import _poolAbbeyMatron from "../pool/abbey-matron.js";
 import _poolAbigalePoetLaureate from "../pool/abigale-poet-laureate.js";
 import _poolAcceleratedMutation from "../pool/accelerated-mutation.js";
@@ -918,6 +919,7 @@ import _tokensXXBlueRedWeirdToken from "../tokens/x-x-blue-red-weird-token.js";
 
 const shard: CardShard = {
   pool: [
+    _poolAbandonedSarcophagus,
     _poolAbbeyMatron,
     _poolAbigalePoetLaureate,
     _poolAcceleratedMutation,

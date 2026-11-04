@@ -95,6 +95,7 @@ import _poolBorosCharm from "../pool/boros-charm.js";
 import _poolBotBashingTime from "../pool/bot-bashing-time.js";
 import _poolBreachingHippocamp from "../pool/breaching-hippocamp.js";
 import _poolBrightPalmSoulAwakener from "../pool/bright-palm-soul-awakener.js";
+import _poolBronzebeakForagers from "../pool/bronzebeak-foragers.js";
 import _poolBroodguardElite from "../pool/broodguard-elite.js";
 import _poolBuddingInsurgent from "../pool/budding-insurgent.js";
 import _poolBuriedInTheGarden from "../pool/buried-in-the-garden.js";
@@ -522,6 +523,7 @@ import _poolNayaPanorama from "../pool/naya-panorama.js";
 import _poolNecroplasm from "../pool/necroplasm.js";
 import _poolNecroticWound from "../pool/necrotic-wound.js";
 import _poolNemaSiltlurker from "../pool/nema-siltlurker.js";
+import _poolNephaliaAcademy from "../pool/nephalia-academy.js";
 import _poolNessianDemolok from "../pool/nessian-demolok.js";
 import _poolNessianWildsRavager from "../pool/nessian-wilds-ravager.js";
 import _poolNestRobber from "../pool/nest-robber.js";
@@ -1014,6 +1016,7 @@ const shard: CardShard = {
     _poolBotBashingTime,
     _poolBreachingHippocamp,
     _poolBrightPalmSoulAwakener,
+    _poolBronzebeakForagers,
     _poolBroodguardElite,
     _poolBuddingInsurgent,
     _poolBuriedInTheGarden,
@@ -1441,6 +1444,7 @@ const shard: CardShard = {
     _poolNecroplasm,
     _poolNecroticWound,
     _poolNemaSiltlurker,
+    _poolNephaliaAcademy,
     _poolNessianDemolok,
     _poolNessianWildsRavager,
     _poolNestRobber,

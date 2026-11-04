@@ -216,6 +216,7 @@ import _poolDevilthornFox from "../pool/devilthorn-fox.js";
 import _poolDeviousCoverUp from "../pool/devious-cover-up.js";
 import _poolDevouringRage from "../pool/devouring-rage.js";
 import _poolDimensionX from "../pool/dimension-x.js";
+import _poolDimensionalBreach from "../pool/dimensional-breach.js";
 import _poolDiregrafRebirth from "../pool/diregraf-rebirth.js";
 import _poolDisharmony from "../pool/disharmony.js";
 import _poolDismiss from "../pool/dismiss.js";
@@ -368,6 +369,7 @@ import _poolGuardianProject from "../pool/guardian-project.js";
 import _poolGuardianSeraph from "../pool/guardian-seraph.js";
 import _poolGuardianShieldBearer from "../pool/guardian-shield-bearer.js";
 import _poolGuardiansOfMeletis from "../pool/guardians-of-meletis.js";
+import _poolGuile from "../pool/guile.js";
 import _poolGuiseOfFire from "../pool/guise-of-fire.js";
 import _poolGustcloakHarrier from "../pool/gustcloak-harrier.js";
 import _poolGutlessPlunderer from "../pool/gutless-plunderer.js";
@@ -1169,6 +1171,7 @@ const shard: CardShard = {
     _poolDeviousCoverUp,
     _poolDevouringRage,
     _poolDimensionX,
+    _poolDimensionalBreach,
     _poolDiregrafRebirth,
     _poolDisharmony,
     _poolDismiss,
@@ -1321,6 +1324,7 @@ const shard: CardShard = {
     _poolGuardianSeraph,
     _poolGuardianShieldBearer,
     _poolGuardiansOfMeletis,
+    _poolGuile,
     _poolGuiseOfFire,
     _poolGustcloakHarrier,
     _poolGutlessPlunderer,

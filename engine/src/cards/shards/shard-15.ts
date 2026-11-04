@@ -415,6 +415,7 @@ import _poolLeapOfFlame from "../pool/leap-of-flame.js";
 import _poolLegateLaniusCaesarsAce from "../pool/legate-lanius-caesars-ace.js";
 import _poolLegionStronghold from "../pool/legion-stronghold.js";
 import _poolLeoninWarleader from "../pool/leonin-warleader.js";
+import _poolLibraryOfLeng from "../pool/library-of-leng.js";
 import _poolLierDiscipleOfTheDrowned from "../pool/lier-disciple-of-the-drowned.js";
 import _poolLifeInsurance from "../pool/life-insurance.js";
 import _poolLifecraftEngine from "../pool/lifecraft-engine.js";
@@ -1275,6 +1276,7 @@ const shard: CardShard = {
     _poolLegateLaniusCaesarsAce,
     _poolLegionStronghold,
     _poolLeoninWarleader,
+    _poolLibraryOfLeng,
     _poolLierDiscipleOfTheDrowned,
     _poolLifeInsurance,
     _poolLifecraftEngine,
