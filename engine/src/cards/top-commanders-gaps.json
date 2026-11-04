@@ -1808,7 +1808,8 @@
   "effect:graveyard-to-library-bottom-random",
   "effect:roll-again",
   "bug:cda-devotion",
-  "effect:fame-or-fortune"
+  "effect:fame-or-fortune",
+  "static:is-chosen-type"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {
