@@ -3,7 +3,7 @@
  * playground scripts' `format.mjs`, used by the event log.
  */
 
-import { MAX_SPEED } from 'engine/client'
+import { MAX_SPEED, publicNameAt } from 'engine/client'
 import type { CombatRestriction, GameEvent, ObjectId, PlayerId, Step, TargetRef, VoteChoice } from 'engine/client'
 import type { SeatStatus } from 'protocol'
 
@@ -671,6 +671,16 @@ export const HIDDEN_CARD = 'a card'
  * back the bare id for an object this seat isn't shown, which read as "Bob
  * draws obj-169". */
 export const logName = (id: ObjectId, name: string): string => (name === id ? HIDDEN_CARD : name)
+
+/** What a log line about event `seq` calls `id`: the name it was publicly known
+ * by then, so the line keeps it after the card goes somewhere hidden; else what
+ * this seat knows it as, or {@link HIDDEN_CARD}. */
+export const logNameAt = (
+  publicStints: Parameters<typeof publicNameAt>[0],
+  nameOf: (id: ObjectId) => string,
+  id: ObjectId,
+  seq: number,
+): string => publicNameAt(publicStints, id, seq) ?? logName(id, nameOf(id))
 
 /** `text` — a refusal from the engine or server, which names players by
  * seat id ("bob is not being asked to block") and objects by id — with each

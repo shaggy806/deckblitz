@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import type { GameEvent, ObjectId, PlayerId } from 'engine/client'
 import type { SeatStatus } from 'protocol'
-import { HIDDEN_CARD, describeEvent, forYou, logName, possessive, withNames } from './format.ts'
+import { HIDDEN_CARD, describeEvent, forYou, logName, logNameAt, possessive, withNames } from './format.ts'
 
 const p1 = 'p1' as PlayerId
 const p2 = 'p2' as PlayerId
@@ -58,6 +58,24 @@ describe('describeEvent', () => {
         seats,
       ),
     ).toBe('card:o1 deals 2 to Toby')
+  })
+})
+
+describe('logNameAt', () => {
+  const id = 'obj-84' as ObjectId
+  const stints = { [id]: [{ from: 5, until: 9, name: 'Grizzly Bears' }] }
+
+  it('keeps the name a card was publicly known by when the event happened', () => {
+    expect(logNameAt(stints, (o) => o, id, 6)).toBe('Grizzly Bears')
+  })
+
+  it('calls a card this seat no longer sees and never saw publicly "a card"', () => {
+    expect(logNameAt(stints, (o) => o, id, 12)).toBe(HIDDEN_CARD)
+    expect(logNameAt({}, (o) => o, id, 6)).toBe(HIDDEN_CARD)
+  })
+
+  it('uses what this seat knows it as otherwise', () => {
+    expect(logNameAt({}, () => 'Hill Giant', id, 6)).toBe('Hill Giant')
   })
 })
 

@@ -33,7 +33,6 @@ import {
   isOptionalSpec,
   manaValue,
   parseManaCost,
-  publicNameAt,
   rangeTargetCount,
   slotOptions,
   specsAtX,
@@ -96,7 +95,7 @@ import { setShare } from './game/divideShares.ts'
 import { StableLabel } from './ui/StableLabel.tsx'
 import { usePlayback } from './game/usePlayback.ts'
 import { AnimationBus } from './game/animationBus.ts'
-import { describeEvent, isDetailOnlyEvent, logName, playerLabel, possessive, seatClassOf, withNames } from './format.ts'
+import { describeEvent, isDetailOnlyEvent, logNameAt, playerLabel, possessive, seatClassOf, withNames } from './format.ts'
 import { PhaseTrack } from './ui/PhaseTrack.tsx'
 import { TurnBanner } from './ui/TurnBanner.tsx'
 import { AnimationLayer } from './ui/AnimationLayer.tsx'
@@ -826,7 +825,11 @@ export default function App() {
       view,
       seat,
       get log() {
-        return (view?.events ?? []).filter((e) => !isDetailOnlyEvent(e)).slice(-5).map((e) => describeEvent(e, nameOf, seats))
+        if (!view) return []
+        return view.events
+          .filter((e) => !isDetailOnlyEvent(e))
+          .slice(-5)
+          .map((e) => describeEvent(e, (id) => logNameAt(view.publicStints, nameOf, id, e.seq), seats))
       },
     }
   }, [view, seat, nameOf, seats])
@@ -1563,7 +1566,7 @@ function GameScreen({ game }: { readonly game: NetworkGame }) {
             </div>
             <EventLog
               events={view.events}
-              nameAt={(id, seq) => publicNameAt(view.publicStints, id, seq) ?? logName(id, game.nameOf(id))}
+              nameAt={(id, seq) => logNameAt(view.publicStints, game.nameOf, id, seq)}
               seats={game.seats}
               onSelect={(event) => {
                 // Close the log so the board is in view, then point the
