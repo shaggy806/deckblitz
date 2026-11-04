@@ -63,6 +63,7 @@ import _poolAvenTactician from "../pool/aven-tactician.js";
 import _poolAwakeningHall from "../pool/awakening-hall.js";
 import _poolAyaraFirstOfLocthwain from "../pool/ayara-first-of-locthwain.js";
 import _poolBaithookAngler from "../pool/baithook-angler.js";
+import _poolBaneAlleyBroker from "../pool/bane-alley-broker.js";
 import _poolBanehound from "../pool/banehound.js";
 import _poolBantPanorama from "../pool/bant-panorama.js";
 import _poolBarbarianGeneral from "../pool/barbarian-general.js";
@@ -1007,6 +1008,7 @@ const shard: CardShard = {
     _poolAwakeningHall,
     _poolAyaraFirstOfLocthwain,
     _poolBaithookAngler,
+    _poolBaneAlleyBroker,
     _poolBanehound,
     _poolBantPanorama,
     _poolBarbarianGeneral,

@@ -890,6 +890,7 @@ import _tokensChocoboBirdToken from "../tokens/chocobo-bird-token.js";
 import _tokensDragonIllusionToken from "../tokens/dragon-illusion-token.js";
 import _tokensElementalToken55 from "../tokens/elemental-token-5-5.js";
 import _tokensElementalTokenDinOfTheFireherd from "../tokens/elemental-token-din-of-the-fireherd.js";
+import _tokensFaerieTokenGlenElendrasAnswer from "../tokens/faerie-token-glen-elendras-answer.js";
 import _tokensHamsterToken from "../tokens/hamster-token.js";
 import _tokensNinjaTokenDarkLeoShredder from "../tokens/ninja-token-dark-leo-shredder.js";
 import _tokensPhyrexianGolemToken from "../tokens/phyrexian-golem-token.js";
@@ -1795,6 +1796,7 @@ const shard: CardShard = {
     _tokensDragonIllusionToken,
     _tokensElementalToken55,
     _tokensElementalTokenDinOfTheFireherd,
+    _tokensFaerieTokenGlenElendrasAnswer,
     _tokensHamsterToken,
     _tokensNinjaTokenDarkLeoShredder,
     _tokensPhyrexianGolemToken,

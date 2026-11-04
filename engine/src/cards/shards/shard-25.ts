@@ -799,6 +799,7 @@ import _poolUnityOfPurpose from "../pool/unity-of-purpose.js";
 import _poolUnleashFury from "../pool/unleash-fury.js";
 import _poolUnravelingMummy from "../pool/unraveling-mummy.js";
 import _poolUnstableFooting from "../pool/unstable-footing.js";
+import _poolUnsubstantiate from "../pool/unsubstantiate.js";
 import _poolUnwillingIngredient from "../pool/unwilling-ingredient.js";
 import _poolUrbanUtopia from "../pool/urban-utopia.js";
 import _poolUrborgEmissary from "../pool/urborg-emissary.js";
@@ -1677,6 +1678,7 @@ const shard: CardShard = {
     _poolUnleashFury,
     _poolUnravelingMummy,
     _poolUnstableFooting,
+    _poolUnsubstantiate,
     _poolUnwillingIngredient,
     _poolUrbanUtopia,
     _poolUrborgEmissary,

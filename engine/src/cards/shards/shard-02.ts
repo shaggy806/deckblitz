@@ -320,6 +320,7 @@ import _poolGhoulcallersHarvest from "../pool/ghoulcallers-harvest.js";
 import _poolGiantAnkheg from "../pool/giant-ankheg.js";
 import _poolGideonBlackblade from "../pool/gideon-blackblade.js";
 import _poolGlaringFleshraker from "../pool/glaring-fleshraker.js";
+import _poolGlenElendrasAnswer from "../pool/glen-elendras-answer.js";
 import _poolGlimmerburst from "../pool/glimmerburst.js";
 import _poolGoldForgeGarrison from "../pool/gold-forge-garrison.js";
 import _poolGolgariLocket from "../pool/golgari-locket.js";
@@ -1209,6 +1210,7 @@ const shard: CardShard = {
     _poolGiantAnkheg,
     _poolGideonBlackblade,
     _poolGlaringFleshraker,
+    _poolGlenElendrasAnswer,
     _poolGlimmerburst,
     _poolGoldForgeGarrison,
     _poolGolgariLocket,

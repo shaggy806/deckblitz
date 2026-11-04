@@ -629,6 +629,7 @@ import _poolRestock from "../pool/restock.js";
 import _poolRetribution from "../pool/retribution.js";
 import _poolReturnUponTheTide from "../pool/return-upon-the-tide.js";
 import _poolReverseDamage from "../pool/reverse-damage.js";
+import _poolReverseThePolarity from "../pool/reverse-the-polarity.js";
 import _poolRevivingVapors from "../pool/reviving-vapors.js";
 import _poolRewind from "../pool/rewind.js";
 import _poolRibbons from "../pool/ribbons.js";
@@ -758,6 +759,7 @@ import _poolSwaggeringCorsair from "../pool/swaggering-corsair.js";
 import _poolSwordOfTheMeek from "../pool/sword-of-the-meek.js";
 import _poolTahCropSkirmisher from "../pool/tah-crop-skirmisher.js";
 import _poolTailSlash from "../pool/tail-slash.js";
+import _poolTalesEnd from "../pool/tales-end.js";
 import _poolTalrand from "../pool/talrand.js";
 import _poolTanaTheBloodsower from "../pool/tana-the-bloodsower.js";
 import _poolTangleGolem from "../pool/tangle-golem.js";
@@ -1534,6 +1536,7 @@ const shard: CardShard = {
     _poolRetribution,
     _poolReturnUponTheTide,
     _poolReverseDamage,
+    _poolReverseThePolarity,
     _poolRevivingVapors,
     _poolRewind,
     _poolRibbons,
@@ -1663,6 +1666,7 @@ const shard: CardShard = {
     _poolSwordOfTheMeek,
     _poolTahCropSkirmisher,
     _poolTailSlash,
+    _poolTalesEnd,
     _poolTalrand,
     _poolTanaTheBloodsower,
     _poolTangleGolem,

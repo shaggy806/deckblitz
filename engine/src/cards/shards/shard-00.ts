@@ -905,6 +905,7 @@ import _tokensDinosaurDragonToken from "../tokens/dinosaur-dragon-token.js";
 import _tokensDragonSpiritTokenTatsumasa from "../tokens/dragon-spirit-token-tatsumasa.js";
 import _tokensDroneToken from "../tokens/drone-token.js";
 import _tokensElementalTokenLagomosHandOfHatred from "../tokens/elemental-token-lagomos-hand-of-hatred.js";
+import _tokensElementalTokenMoltenBirth from "../tokens/elemental-token-molten-birth.js";
 import _tokensFirstMateRagavan from "../tokens/first-mate-ragavan.js";
 import _tokensGreenSpiderTokenReach from "../tokens/green-spider-token-reach.js";
 import _tokensHornetArtifactToken from "../tokens/hornet-artifact-token.js";
@@ -1822,6 +1823,7 @@ const shard: CardShard = {
     _tokensDragonSpiritTokenTatsumasa,
     _tokensDroneToken,
     _tokensElementalTokenLagomosHandOfHatred,
+    _tokensElementalTokenMoltenBirth,
     _tokensFirstMateRagavan,
     _tokensGreenSpiderTokenReach,
     _tokensHornetArtifactToken,

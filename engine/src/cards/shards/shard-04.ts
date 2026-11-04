@@ -120,6 +120,7 @@ import _poolContradict from "../pool/contradict.js";
 import _poolConverterBeast from "../pool/converter-beast.js";
 import _poolCoralReef from "../pool/coral-reef.js";
 import _poolCoronationOfChaos from "../pool/coronation-of-chaos.js";
+import _poolCounterflux from "../pool/counterflux.js";
 import _poolCranialPlating from "../pool/cranial-plating.js";
 import _poolCrawlingSensation from "../pool/crawling-sensation.js";
 import _poolCriminalPast from "../pool/criminal-past.js";
@@ -1010,6 +1011,7 @@ const shard: CardShard = {
     _poolConverterBeast,
     _poolCoralReef,
     _poolCoronationOfChaos,
+    _poolCounterflux,
     _poolCranialPlating,
     _poolCrawlingSensation,
     _poolCriminalPast,

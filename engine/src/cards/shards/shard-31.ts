@@ -476,6 +476,7 @@ import _poolKorlessaScaleSinger from "../pool/korlessa-scale-singer.js";
 import _poolKormusBell from "../pool/kormus-bell.js";
 import _poolKorozdaGorgon from "../pool/korozda-gorgon.js";
 import _poolKorozdaMonitor from "../pool/korozda-monitor.js";
+import _poolKothOfTheHammer from "../pool/koth-of-the-hammer.js";
 import _poolKotoriPilotProdigy from "../pool/kotori-pilot-prodigy.js";
 import _poolKozileksPathfinder from "../pool/kozileks-pathfinder.js";
 import _poolKrarkClanIronworks from "../pool/krark-clan-ironworks.js";
@@ -769,6 +770,7 @@ import _poolSpitfireBastion from "../pool/spitfire-bastion.js";
 import _poolSpittingHydra from "../pool/spitting-hydra.js";
 import _poolSpreadingInsurrection from "../pool/spreading-insurrection.js";
 import _poolSpriteDragon from "../pool/sprite-dragon.js";
+import _poolSpyNetwork from "../pool/spy-network.js";
 import _poolSquallmonger from "../pool/squallmonger.js";
 import _poolStalwartAven from "../pool/stalwart-aven.js";
 import _poolStandstill from "../pool/standstill.js";
@@ -1438,6 +1440,7 @@ const shard: CardShard = {
     _poolKormusBell,
     _poolKorozdaGorgon,
     _poolKorozdaMonitor,
+    _poolKothOfTheHammer,
     _poolKotoriPilotProdigy,
     _poolKozileksPathfinder,
     _poolKrarkClanIronworks,
@@ -1731,6 +1734,7 @@ const shard: CardShard = {
     _poolSpittingHydra,
     _poolSpreadingInsurrection,
     _poolSpriteDragon,
+    _poolSpyNetwork,
     _poolSquallmonger,
     _poolStalwartAven,
     _poolStandstill,

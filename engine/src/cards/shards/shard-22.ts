@@ -736,6 +736,7 @@ import _poolStupefyingTouch from "../pool/stupefying-touch.js";
 import _poolSuChi from "../pool/su-chi.js";
 import _poolSumalaRumblers from "../pool/sumala-rumblers.js";
 import _poolSummonFatChocobo from "../pool/summon-fat-chocobo.js";
+import _poolSummonersEgg from "../pool/summoners-egg.js";
 import _poolSunsetRevelry from "../pool/sunset-revelry.js";
 import _poolSuppress from "../pool/suppress.js";
 import _poolSurlyBadgersaur from "../pool/surly-badgersaur.js";
@@ -839,6 +840,7 @@ import _poolVantressPaladin from "../pool/vantress-paladin.js";
 import _poolVectorAsp from "../pool/vector-asp.js";
 import _poolVeilingOddity from "../pool/veiling-oddity.js";
 import _poolVenerableKnight from "../pool/venerable-knight.js";
+import _poolVeteranSurvivor from "../pool/veteran-survivor.js";
 import _poolVexingDevil from "../pool/vexing-devil.js";
 import _poolViashinoRacketeer from "../pool/viashino-racketeer.js";
 import _poolViciousKavu from "../pool/vicious-kavu.js";
@@ -1657,6 +1659,7 @@ const shard: CardShard = {
     _poolSuChi,
     _poolSumalaRumblers,
     _poolSummonFatChocobo,
+    _poolSummonersEgg,
     _poolSunsetRevelry,
     _poolSuppress,
     _poolSurlyBadgersaur,
@@ -1760,6 +1763,7 @@ const shard: CardShard = {
     _poolVectorAsp,
     _poolVeilingOddity,
     _poolVenerableKnight,
+    _poolVeteranSurvivor,
     _poolVexingDevil,
     _poolViashinoRacketeer,
     _poolViciousKavu,

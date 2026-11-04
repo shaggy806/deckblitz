@@ -207,6 +207,7 @@ import _poolEphemerate from "../pool/ephemerate.js";
 import _poolEquilibriumAdept from "../pool/equilibrium-adept.js";
 import _poolErebossTitan from "../pool/ereboss-titan.js";
 import _poolErraticVisionary from "../pool/erratic-visionary.js";
+import _poolEspersToMagicite from "../pool/espers-to-magicite.js";
 import _poolEtchingOfKumano from "../pool/etching-of-kumano.js";
 import _poolEtheriumHornSorcerer from "../pool/etherium-horn-sorcerer.js";
 import _poolEvidenceExaminer from "../pool/evidence-examiner.js";
@@ -1035,6 +1036,7 @@ const shard: CardShard = {
     _poolEquilibriumAdept,
     _poolErebossTitan,
     _poolErraticVisionary,
+    _poolEspersToMagicite,
     _poolEtchingOfKumano,
     _poolEtheriumHornSorcerer,
     _poolEvidenceExaminer,

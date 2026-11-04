@@ -240,6 +240,7 @@ import _poolEscapeTunnel from "../pool/escape-tunnel.js";
 import _poolEsikaGodOfTheTree from "../pool/esika-god-of-the-tree.js";
 import _poolEsperSojourners from "../pool/esper-sojourners.js";
 import _poolEternalSkylord from "../pool/eternal-skylord.js";
+import _poolEtherealValkyrie from "../pool/ethereal-valkyrie.js";
 import _poolExoticOrchard from "../pool/exotic-orchard.js";
 import _poolExplore from "../pool/explore.js";
 import _poolExplosiveShot from "../pool/explosive-shot.js";
@@ -1165,6 +1166,7 @@ const shard: CardShard = {
     _poolEsikaGodOfTheTree,
     _poolEsperSojourners,
     _poolEternalSkylord,
+    _poolEtherealValkyrie,
     _poolExoticOrchard,
     _poolExplore,
     _poolExplosiveShot,

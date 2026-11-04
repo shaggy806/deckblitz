@@ -789,6 +789,7 @@ import _poolTurtleBlimp from "../pool/turtle-blimp.js";
 import _poolTwinmawStormbrood from "../pool/twinmaw-stormbrood.js";
 import _poolTwinsOfMaurerEstate from "../pool/twins-of-maurer-estate.js";
 import _poolTyriteSanctum from "../pool/tyrite-sanctum.js";
+import _poolUginsLabyrinth from "../pool/ugins-labyrinth.js";
 import _poolUltimaWeapon from "../pool/ultima-weapon.js";
 import _poolUltrosObnoxiousOctopus from "../pool/ultros-obnoxious-octopus.js";
 import _poolUnbridledGrowth from "../pool/unbridled-growth.js";
@@ -1676,6 +1677,7 @@ const shard: CardShard = {
     _poolTwinmawStormbrood,
     _poolTwinsOfMaurerEstate,
     _poolTyriteSanctum,
+    _poolUginsLabyrinth,
     _poolUltimaWeapon,
     _poolUltrosObnoxiousOctopus,
     _poolUnbridledGrowth,

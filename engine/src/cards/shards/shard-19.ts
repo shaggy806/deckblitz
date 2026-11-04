@@ -536,11 +536,13 @@ import _poolMiresGrasp from "../pool/mires-grasp.js";
 import _poolMirozel from "../pool/mirozel.js";
 import _poolMitoticManipulation from "../pool/mitotic-manipulation.js";
 import _poolMoldervineReclamation from "../pool/moldervine-reclamation.js";
+import _poolMoltenBirth from "../pool/molten-birth.js";
 import _poolMonoistCircuitFeeder from "../pool/monoist-circuit-feeder.js";
 import _poolMoonveilDragon from "../pool/moonveil-dragon.js";
 import _poolMorlunDevourerOfSpiders from "../pool/morlun-devourer-of-spiders.js";
 import _poolMorophonTheBoundless from "../pool/morophon-the-boundless.js";
 import _poolMsMarvelKamalaKhan from "../pool/ms-marvel-kamala-khan.js";
+import _poolMuYanlingSkyDancer from "../pool/mu-yanling-sky-dancer.js";
 import _poolMuckRats from "../pool/muck-rats.js";
 import _poolMuddleTheMixture from "../pool/muddle-the-mixture.js";
 import _poolMuragandaRaceway from "../pool/muraganda-raceway.js";
@@ -803,6 +805,7 @@ import _poolSurgingSentinels from "../pool/surging-sentinels.js";
 import _poolSurrakarMarauder from "../pool/surrakar-marauder.js";
 import _poolSwallowWhole from "../pool/swallow-whole.js";
 import _poolSweetOblivion from "../pool/sweet-oblivion.js";
+import _poolSwiftSilence from "../pool/swift-silence.js";
 import _poolSwordOfSinewAndSteel from "../pool/sword-of-sinew-and-steel.js";
 import _poolSynapseSliver from "../pool/synapse-sliver.js";
 import _poolSynodCenturion from "../pool/synod-centurion.js";
@@ -1481,11 +1484,13 @@ const shard: CardShard = {
     _poolMirozel,
     _poolMitoticManipulation,
     _poolMoldervineReclamation,
+    _poolMoltenBirth,
     _poolMonoistCircuitFeeder,
     _poolMoonveilDragon,
     _poolMorlunDevourerOfSpiders,
     _poolMorophonTheBoundless,
     _poolMsMarvelKamalaKhan,
+    _poolMuYanlingSkyDancer,
     _poolMuckRats,
     _poolMuddleTheMixture,
     _poolMuragandaRaceway,
@@ -1748,6 +1753,7 @@ const shard: CardShard = {
     _poolSurrakarMarauder,
     _poolSwallowWhole,
     _poolSweetOblivion,
+    _poolSwiftSilence,
     _poolSwordOfSinewAndSteel,
     _poolSynapseSliver,
     _poolSynodCenturion,

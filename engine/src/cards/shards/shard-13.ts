@@ -312,6 +312,7 @@ import _poolGulfSquid from "../pool/gulf-squid.js";
 import _poolGulpingScraptrap from "../pool/gulping-scraptrap.js";
 import _poolGurmagDrowner from "../pool/gurmag-drowner.js";
 import _poolGustcloakSkirmisher from "../pool/gustcloak-skirmisher.js";
+import _poolGusthasScepter from "../pool/gusthas-scepter.js";
 import _poolHaazdaVigilante from "../pool/haazda-vigilante.js";
 import _poolHadaFreeblade from "../pool/hada-freeblade.js";
 import _poolHajarLoyalBodyguard from "../pool/hajar-loyal-bodyguard.js";
@@ -1192,6 +1193,7 @@ const shard: CardShard = {
     _poolGulpingScraptrap,
     _poolGurmagDrowner,
     _poolGustcloakSkirmisher,
+    _poolGusthasScepter,
     _poolHaazdaVigilante,
     _poolHadaFreeblade,
     _poolHajarLoyalBodyguard,

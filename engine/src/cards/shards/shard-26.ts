@@ -582,6 +582,7 @@ import _poolRadiantDestiny from "../pool/radiant-destiny.js";
 import _poolRadiantSerraArchangel from "../pool/radiant-serra-archangel.js";
 import _poolRaftSecurityOfficer from "../pool/raft-security-officer.js";
 import _poolRaidersSpoils from "../pool/raiders-spoils.js";
+import _poolRalCracklingWit from "../pool/ral-crackling-wit.js";
 import _poolRallyTheAncestors from "../pool/rally-the-ancestors.js";
 import _poolRallyTheRighteous from "../pool/rally-the-righteous.js";
 import _poolRampagingCyclops from "../pool/rampaging-cyclops.js";
@@ -704,6 +705,7 @@ import _poolSolidarityOfHeroes from "../pool/solidarity-of-heroes.js";
 import _poolSoltariEmissary from "../pool/soltari-emissary.js";
 import _poolSoltariMonk from "../pool/soltari-monk.js";
 import _poolSoratamiCloudskater from "../pool/soratami-cloudskater.js";
+import _poolSorceresssSchemes from "../pool/sorceresss-schemes.js";
 import _poolSorinsThirst from "../pool/sorins-thirst.js";
 import _poolSpaceMarineDevastator from "../pool/space-marine-devastator.js";
 import _poolSpawnGangCommander from "../pool/spawn-gang-commander.js";
@@ -1491,6 +1493,7 @@ const shard: CardShard = {
     _poolRadiantSerraArchangel,
     _poolRaftSecurityOfficer,
     _poolRaidersSpoils,
+    _poolRalCracklingWit,
     _poolRallyTheAncestors,
     _poolRallyTheRighteous,
     _poolRampagingCyclops,
@@ -1613,6 +1616,7 @@ const shard: CardShard = {
     _poolSoltariEmissary,
     _poolSoltariMonk,
     _poolSoratamiCloudskater,
+    _poolSorceresssSchemes,
     _poolSorinsThirst,
     _poolSpaceMarineDevastator,
     _poolSpawnGangCommander,

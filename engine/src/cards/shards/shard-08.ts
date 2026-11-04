@@ -138,6 +138,7 @@ import _poolChiseiHeartOfOceans from "../pool/chisei-heart-of-oceans.js";
 import _poolChitteringHost from "../pool/chittering-host.js";
 import _poolChromeSteed from "../pool/chrome-steed.js";
 import _poolChronomancer from "../pool/chronomancer.js";
+import _poolCircuDimirLobotomist from "../pool/circu-dimir-lobotomist.js";
 import _poolCloakOfTheBat from "../pool/cloak-of-the-bat.js";
 import _poolClownCar from "../pool/clown-car.js";
 import _poolColdEyedSelkie from "../pool/cold-eyed-selkie.js";
@@ -431,6 +432,7 @@ import _poolKarsusDepthguard from "../pool/karsus-depthguard.js";
 import _poolKavuMauler from "../pool/kavu-mauler.js";
 import _poolKavuPrimarch from "../pool/kavu-primarch.js";
 import _poolKaylasCommand from "../pool/kaylas-command.js";
+import _poolKeenEyedCurator from "../pool/keen-eyed-curator.js";
 import _poolKellanJoinsUp from "../pool/kellan-joins-up.js";
 import _poolKenkuArtificer from "../pool/kenku-artificer.js";
 import _poolKethekCrucibleGoliath from "../pool/kethek-crucible-goliath.js";
@@ -1084,6 +1086,7 @@ const shard: CardShard = {
     _poolChitteringHost,
     _poolChromeSteed,
     _poolChronomancer,
+    _poolCircuDimirLobotomist,
     _poolCloakOfTheBat,
     _poolClownCar,
     _poolColdEyedSelkie,
@@ -1377,6 +1380,7 @@ const shard: CardShard = {
     _poolKavuMauler,
     _poolKavuPrimarch,
     _poolKaylasCommand,
+    _poolKeenEyedCurator,
     _poolKellanJoinsUp,
     _poolKenkuArtificer,
     _poolKethekCrucibleGoliath,

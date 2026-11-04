@@ -616,6 +616,7 @@ import _poolRequiemAngel from "../pool/requiem-angel.js";
 import _poolRescueRetriever from "../pool/rescue-retriever.js";
 import _poolRestlessAnchorage from "../pool/restless-anchorage.js";
 import _poolRetributionOfTheMeek from "../pool/retribution-of-the-meek.js";
+import _poolRevealingWind from "../pool/revealing-wind.js";
 import _poolRiddleGateGargoyle from "../pool/riddle-gate-gargoyle.js";
 import _poolRienneAngelOfRebirth from "../pool/rienne-angel-of-rebirth.js";
 import _poolRiftwingCloudskate from "../pool/riftwing-cloudskate.js";
@@ -700,6 +701,7 @@ import _poolSlaughterPriestOfMogis from "../pool/slaughter-priest-of-mogis.js";
 import _poolSleekSchooner from "../pool/sleek-schooner.js";
 import _poolSmogElemental from "../pool/smog-elemental.js";
 import _poolSmokeBomb from "../pool/smoke-bomb.js";
+import _poolSmokeTeller from "../pool/smoke-teller.js";
 import _poolSmoke from "../pool/smoke.js";
 import _poolSmolderingCrater from "../pool/smoldering-crater.js";
 import _poolSnappingGnarlid from "../pool/snapping-gnarlid.js";
@@ -1516,6 +1518,7 @@ const shard: CardShard = {
     _poolRescueRetriever,
     _poolRestlessAnchorage,
     _poolRetributionOfTheMeek,
+    _poolRevealingWind,
     _poolRiddleGateGargoyle,
     _poolRienneAngelOfRebirth,
     _poolRiftwingCloudskate,
@@ -1600,6 +1603,7 @@ const shard: CardShard = {
     _poolSleekSchooner,
     _poolSmogElemental,
     _poolSmokeBomb,
+    _poolSmokeTeller,
     _poolSmoke,
     _poolSmolderingCrater,
     _poolSnappingGnarlid,

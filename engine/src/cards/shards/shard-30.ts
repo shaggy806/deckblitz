@@ -127,6 +127,7 @@ import _poolChartoothCougar from "../pool/chartooth-cougar.js";
 import _poolChimeOfNight from "../pool/chime-of-night.js";
 import _poolChromaticSphere from "../pool/chromatic-sphere.js";
 import _poolChromiumTheMutable from "../pool/chromium-the-mutable.js";
+import _poolCircleOfConfinement from "../pool/circle-of-confinement.js";
 import _poolCitadelCastellan from "../pool/citadel-castellan.js";
 import _poolCitadelGate from "../pool/citadel-gate.js";
 import _poolClaimOfErebos from "../pool/claim-of-erebos.js";
@@ -1037,6 +1038,7 @@ const shard: CardShard = {
     _poolChimeOfNight,
     _poolChromaticSphere,
     _poolChromiumTheMutable,
+    _poolCircleOfConfinement,
     _poolCitadelCastellan,
     _poolCitadelGate,
     _poolClaimOfErebos,

@@ -832,6 +832,7 @@ import _poolVenomEvilUnleashed from "../pool/venom-evil-unleashed.js";
 import _poolVenomousBrutalizer from "../pool/venomous-brutalizer.js";
 import _poolVeteranIceClimber from "../pool/veteran-ice-climber.js";
 import _poolViciousOffering from "../pool/vicious-offering.js";
+import _poolViewFromAbove from "../pool/view-from-above.js";
 import _poolVigilanteJustice from "../pool/vigilante-justice.js";
 import _poolViridescentWisps from "../pool/viridescent-wisps.js";
 import _poolVizierOfTheScorpion from "../pool/vizier-of-the-scorpion.js";
@@ -1748,6 +1749,7 @@ const shard: CardShard = {
     _poolVenomousBrutalizer,
     _poolVeteranIceClimber,
     _poolViciousOffering,
+    _poolViewFromAbove,
     _poolVigilanteJustice,
     _poolViridescentWisps,
     _poolVizierOfTheScorpion,

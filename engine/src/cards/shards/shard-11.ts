@@ -705,6 +705,7 @@ import _poolSlipOnTheRing from "../pool/slip-on-the-ring.js";
 import _poolSlipOutTheBack from "../pool/slip-out-the-back.js";
 import _poolSliverHivelord from "../pool/sliver-hivelord.js";
 import _poolSludgeCrawler from "../pool/sludge-crawler.js";
+import _poolSmirkingSpelljacker from "../pool/smirking-spelljacker.js";
 import _poolSoldeviGolem from "../pool/soldevi-golem.js";
 import _poolSolkanarTheSwampKing from "../pool/solkanar-the-swamp-king.js";
 import _poolSomnomancer from "../pool/somnomancer.js";
@@ -799,6 +800,7 @@ import _poolThunderousOrator from "../pool/thunderous-orator.js";
 import _poolTimberlineRidge from "../pool/timberline-ridge.js";
 import _poolTimeEbb from "../pool/time-ebb.js";
 import _poolTimeOfNeed from "../pool/time-of-need.js";
+import _poolTimeReaper from "../pool/time-reaper.js";
 import _poolTimeToFeed from "../pool/time-to-feed.js";
 import _poolTineShrike from "../pool/tine-shrike.js";
 import _poolTirelessHauler from "../pool/tireless-hauler.js";
@@ -1618,6 +1620,7 @@ const shard: CardShard = {
     _poolSlipOutTheBack,
     _poolSliverHivelord,
     _poolSludgeCrawler,
+    _poolSmirkingSpelljacker,
     _poolSoldeviGolem,
     _poolSolkanarTheSwampKing,
     _poolSomnomancer,
@@ -1712,6 +1715,7 @@ const shard: CardShard = {
     _poolTimberlineRidge,
     _poolTimeEbb,
     _poolTimeOfNeed,
+    _poolTimeReaper,
     _poolTimeToFeed,
     _poolTineShrike,
     _poolTirelessHauler,

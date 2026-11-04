@@ -736,6 +736,7 @@ import _poolThassasDevourer from "../pool/thassas-devourer.js";
 import _poolThassasIre from "../pool/thassas-ire.js";
 import _poolTheDawningArchaic from "../pool/the-dawning-archaic.js";
 import _poolTheEldestReborn from "../pool/the-eldest-reborn.js";
+import _poolTheForetoldSoldier from "../pool/the-foretold-soldier.js";
 import _poolTheFrightfulFour from "../pool/the-frightful-four.js";
 import _poolTheHowlingCommandos from "../pool/the-howling-commandos.js";
 import _poolTheInvincibleIronMan from "../pool/the-invincible-iron-man.js";
@@ -1602,6 +1603,7 @@ const shard: CardShard = {
     _poolThassasIre,
     _poolTheDawningArchaic,
     _poolTheEldestReborn,
+    _poolTheForetoldSoldier,
     _poolTheFrightfulFour,
     _poolTheHowlingCommandos,
     _poolTheInvincibleIronMan,

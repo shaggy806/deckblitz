@@ -490,6 +490,7 @@ import _poolMesaLynx from "../pool/mesa-lynx.js";
 import _poolMidsummerRevel from "../pool/midsummer-revel.js";
 import _poolMikaeusTheUnhallowed from "../pool/mikaeus-the-unhallowed.js";
 import _poolMillstone from "../pool/millstone.js";
+import _poolMindreaver from "../pool/mindreaver.js";
 import _poolMindshrieker from "../pool/mindshrieker.js";
 import _poolMirkwoodNurturer from "../pool/mirkwood-nurturer.js";
 import _poolMirranBardiche from "../pool/mirran-bardiche.js";
@@ -710,6 +711,7 @@ import _poolSilvergladeElemental from "../pool/silverglade-elemental.js";
 import _poolSilverquillCommand from "../pool/silverquill-command.js";
 import _poolSilverwingSquadron from "../pool/silverwing-squadron.js";
 import _poolSilvosRogueElemental from "../pool/silvos-rogue-elemental.js";
+import _poolSirenStormtamer from "../pool/siren-stormtamer.js";
 import _poolSisterhoodOfKarn from "../pool/sisterhood-of-karn.js";
 import _poolSkarrganHellkite from "../pool/skarrgan-hellkite.js";
 import _poolSkeletalGrimace from "../pool/skeletal-grimace.js";
@@ -1467,6 +1469,7 @@ const shard: CardShard = {
     _poolMidsummerRevel,
     _poolMikaeusTheUnhallowed,
     _poolMillstone,
+    _poolMindreaver,
     _poolMindshrieker,
     _poolMirkwoodNurturer,
     _poolMirranBardiche,
@@ -1687,6 +1690,7 @@ const shard: CardShard = {
     _poolSilverquillCommand,
     _poolSilverwingSquadron,
     _poolSilvosRogueElemental,
+    _poolSirenStormtamer,
     _poolSisterhoodOfKarn,
     _poolSkarrganHellkite,
     _poolSkeletalGrimace,

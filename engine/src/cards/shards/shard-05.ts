@@ -623,6 +623,7 @@ import _poolRetaliation from "../pool/retaliation.js";
 import _poolReturnTriumphant from "../pool/return-triumphant.js";
 import _poolRhonassMonument from "../pool/rhonass-monument.js";
 import _poolRiftBolt from "../pool/rift-bolt.js";
+import _poolRiftsweeper from "../pool/riftsweeper.js";
 import _poolRingOfTheLucii from "../pool/ring-of-the-lucii.js";
 import _poolRiptidePilferer from "../pool/riptide-pilferer.js";
 import _poolRisingOfTheDay from "../pool/rising-of-the-day.js";
@@ -873,6 +874,7 @@ import _tokensBirdTokenWhite34 from "../tokens/bird-token-white-3-4.js";
 import _tokensDeathtouchSnakeToken from "../tokens/deathtouch-snake-token.js";
 import _tokensDetectiveToken from "../tokens/detective-token.js";
 import _tokensDinosaurSoldierToken from "../tokens/dinosaur-soldier-token.js";
+import _tokensElementalBirdTokenMuYanlingSkyDancer from "../tokens/elemental-bird-token-mu-yanling-sky-dancer.js";
 import _tokensElementalShamanToken from "../tokens/elemental-shaman-token.js";
 import _tokensElementalToken10Blue from "../tokens/elemental-token-1-0-blue.js";
 import _tokensGalactus from "../tokens/galactus.js";
@@ -1514,6 +1516,7 @@ const shard: CardShard = {
     _poolReturnTriumphant,
     _poolRhonassMonument,
     _poolRiftBolt,
+    _poolRiftsweeper,
     _poolRingOfTheLucii,
     _poolRiptidePilferer,
     _poolRisingOfTheDay,
@@ -1766,6 +1769,7 @@ const shard: CardShard = {
     _tokensDeathtouchSnakeToken,
     _tokensDetectiveToken,
     _tokensDinosaurSoldierToken,
+    _tokensElementalBirdTokenMuYanlingSkyDancer,
     _tokensElementalShamanToken,
     _tokensElementalToken10Blue,
     _tokensGalactus,
