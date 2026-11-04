@@ -1784,7 +1784,8 @@
   "condition:intervening-if-amounts",
   "trigger:attacks-you-unblocked-batch",
   "effect:delayed-trigger-each-combat",
-  "effect:delayed-trigger-extra-turn-end-step"
+  "effect:delayed-trigger-extra-turn-end-step",
+  "effect:graveyard-to-library-bottom-random"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

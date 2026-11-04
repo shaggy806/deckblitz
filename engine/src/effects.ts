@@ -5343,9 +5343,18 @@ export type EffectSpec =
       /** `{ targetsFrom }`: the target cards in slot `from` on that are still
        * legal (rule 608.2b) — an `any-number` group, or several slots
        * ("two target lands"). `{ all }`: every permanent matching the filter
-       * as this resolves, read from the effect's controller's side. */
-      readonly what: { readonly targetsFrom: number } | { readonly all: CardFilter };
-      readonly position: "top" | "bottom" | "owner-chooses" | "shuffle";
+       * as this resolves, read from the effect's controller's side.
+       * `{ graveyardOf }`: all the cards in that player's graveyard, a player
+       * slot (none with an "up to one" left empty, or gone illegal) or a scope.
+       *
+       * `"bottom-random"` is "on the bottom of their library **in a random
+       * order**" (Endurance): nothing to arrange, since the effect fixes the
+       * order rule 401.4 would have left to the owner. */
+      readonly what:
+        | { readonly targetsFrom: number }
+        | { readonly all: CardFilter }
+        | { readonly graveyardOf: number | PlayerScope };
+      readonly position: "top" | "bottom" | "owner-chooses" | "shuffle" | "bottom-random";
       /** The resolving spell goes with them — "shuffle **Serene Remembrance
        * and** up to three target cards from a single graveyard into their
        * owners' libraries". A copy of a spell can't, and ceases to exist
@@ -12078,7 +12087,7 @@ export interface EffectApi {
    * owner's cards now on one end of their library, in turn order from the
    * active player, top before bottom, only where the order is a choice. */
   putOnLibrariesTogether(
-    placements: readonly { readonly object: ObjectId; readonly position: "top" | "bottom" | "shuffle" }[],
+    placements: readonly { readonly object: ObjectId; readonly position: "top" | "bottom" | "shuffle" | "bottom-random" }[],
   ): readonly LibraryOrderStep[];
   /** Ask `step.player` the order of `step.cards` on that end of their
    * library — those still there. `false` when there was nothing to ask. */
@@ -17541,7 +17550,13 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
             ? ctx.targets
                 .slice(spec.what.targetsFrom)
                 .flatMap((t) => (t?.kind === "object" ? [t.object] : []))
-            : ctx.permanentsMatching(spec.what.all).map((p) => p.object);
+            : "graveyardOf" in spec.what
+              ? typeof spec.what.graveyardOf === "number" && illegalSlot(spec.what.graveyardOf, ctx)
+                ? []
+                : scopedOrTargetedPlayers(spec.what.graveyardOf, ctx).flatMap((t) =>
+                    t?.kind === "player" ? [...ctx.cardsIn(t.player, "graveyard")] : [],
+                  )
+              : ctx.permanentsMatching(spec.what.all).map((p) => p.object);
         if (spec.withSource === true) {
           const self = resolveEffectTarget("source", ctx);
           if (self?.kind === "object") objects.push(self.object);
@@ -17582,7 +17597,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           }
         }
         const bottom = new Set(progress.bottom);
-        const fixed = spec.position === "bottom" || spec.position === "shuffle" ? spec.position : "top";
+        const fixed = spec.position === "owner-chooses" ? "top" : spec.position;
         orders = ctx.putOnLibrariesTogether(
           still().map((object) => ({
             object,

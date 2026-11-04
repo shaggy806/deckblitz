@@ -5058,3 +5058,5 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 **Each combat this turn (2026-11-04).** `effect:delayed-trigger-each-combat`, no engine code: `additional-combat` twice with `afterThisPhase`, in a `conditional` on `turn-structure`, and a `delayed-trigger` at a `whenever` of `step-begins`. Full Throttle.
 
 **That extra turn's end step (2026-11-04).** `effect:delayed-trigger-extra-turn-end-step`, no engine code: `take-extra-turn`'s `thatTurn.atEndStep` was there already (Warrior's Oath), and the scaffolder reads the line. Final Fortune, proving it from an instant on another player's turn; Last Chance waits for `author-freed`.
+
+**A graveyard to the bottom, in a random order (2026-11-04).** `effect:graveyard-to-library-bottom-random`: `put-on-libraries`' `what: { graveyardOf }` and `position: "bottom-random"`, with the placement `randomlyAmong` so a commander's deferred move lands at random too. Endurance.

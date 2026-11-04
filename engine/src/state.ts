@@ -5231,8 +5231,16 @@ export type CommanderMoveOrigin = "stack" | "graveyard" | "exile" | "hand";
 /** Where in its owner's library a commander's deferred 903.9b move puts it
  * if its owner declines the command zone: where the move was putting it
  * (Noxious Revival's top, Chaos Warp's shuffle). A plain move to a library
- * puts a card on the bottom. */
-export type CommanderLibraryPlacement = "top" | "bottom" | "shuffle" | { readonly fromTop: number };
+ * puts a card on the bottom. `randomlyAmong` is "on the bottom in a random
+ * order" with these other cards (Endurance): a random place among those of them
+ * already there, or the bottom with none, which one card after another makes a
+ * random order, the commander's answer coming after the rest included. */
+export type CommanderLibraryPlacement =
+  | "top"
+  | "bottom"
+  | "shuffle"
+  | { readonly fromTop: number }
+  | { readonly randomlyAmong: readonly ObjectId[] };
 
 /**
  * What caused the decision on {@link GameState.awaiting} — the resolving

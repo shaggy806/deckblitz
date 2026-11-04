@@ -34751,14 +34751,20 @@ export class Game {
         return true;
       },
       putOnLibrariesTogether: (placements) => {
-        const moved: { object: ObjectId; owner: PlayerId; position: "top" | "bottom" | "shuffle" }[] = [];
+        const moved: { object: ObjectId; owner: PlayerId; position: "top" | "bottom" | "shuffle" | "bottom-random" }[] = [];
+        // "On the bottom in a random order": the owner arranges nothing, so
+        // none of these reaches the orders below.
+        const randomly = placements.filter((p) => p.position === "bottom-random").map((p) => p.object);
         this.withLeaveBatch(() =>
           this.withGraveyardLeaveBatch(() => {
             for (const { object, position } of placements) {
               const card = this.state.objects[object];
               if (card === undefined) continue;
               const owner = card.owner;
-              this.putOnLibrary(object, position === "shuffle" ? "bottom" : position);
+              this.putOnLibrary(
+                object,
+                position === "shuffle" ? "bottom" : position === "bottom-random" ? { randomlyAmong: randomly } : position,
+              );
               moved.push({ object, owner, position });
             }
           }),
@@ -48144,7 +48150,7 @@ export class Game {
    * left it, a looked-at card put back) is only reordered, never moved, so
    * nothing treats it as a zone change — to the front or to the end.
    */
-  private putOnLibrary(id: ObjectId, position: "top" | "bottom" | { readonly fromTop: number }): void {
+  private putOnLibrary(id: ObjectId, position: Exclude<CommanderLibraryPlacement, "shuffle">): void {
     const object = this.state.objects[id];
     if (object === undefined) return;
     // A copy of a spell ceases to exist instead of going anywhere but the
@@ -48195,6 +48201,13 @@ export class Game {
     else if (position === "bottom") library.push(id);
     else if (position === "shuffle") {
       library.splice(this.rng.int(library.length + 1), 0, id);
+      this.state.rngState = this.rng.seed;
+    } else if ("randomlyAmong" in position) {
+      // Below everything else in the library, and anywhere among those already
+      // down there, the very bottom included: each ordering equally likely.
+      const among = position.randomlyAmong.map((other) => library.indexOf(other)).filter((at) => at >= 0);
+      const highest = among.length > 0 ? Math.min(...among) : library.length;
+      library.splice(highest + this.rng.int(library.length - highest + 1), 0, id);
       this.state.rngState = this.rng.seed;
     }
     // "Seventh from the top": under the top six, or on the bottom of a

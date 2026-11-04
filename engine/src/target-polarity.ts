@@ -478,6 +478,9 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   // the card has chosen the side itself (`whose: "you"`).
   "put-on-libraries": (n, v) => {
     if ("targetsFrom" in n.what) v.touch(EVERY_SLOT, "harm", MAJOR);
+    // A whole graveyard is a cost to one player and a refill to another, as
+    // `shuffle-graveyard-into-library`.
+    else if ("graveyardOf" in n.what) v.touch(n.what.graveyardOf, "either", MINOR);
   },
   discard: (n, v) => v.touch(n.target, "harm", MAJOR),
   "discard-chosen": (n, v) => v.touch(n.target, "harm", MAJOR),
