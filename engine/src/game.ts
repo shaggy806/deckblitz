@@ -10281,8 +10281,9 @@ export class Game {
       }
     }
     // A commander put from its owner's hand into their library (Brainstorm,
-    // Valakut Awakening, Teferi's Puzzle Box) may go to the command zone
-    // instead (rule 903.9b — a replacement, so asked before anything moves).
+    // Valakut Awakening, Teferi's Puzzle Box), or from exile (Scroll Rack), may
+    // go to the command zone instead (rule 903.9b — a replacement, so asked
+    // before anything moves).
     // One commander at a time, the choice parked meanwhile as for an "as
     // this enters" choice; the answer is carried out with the rest of the
     // move, a commander kept for the library going where it was picked to.
@@ -10291,13 +10292,13 @@ export class Game {
       const to = this.chosenFromZoneTo(awaiting, index, id);
       if (to !== "library-top" && to !== "library-bottom") continue;
       const object = this.state.objects[id];
-      if (object?.zone !== "hand" || object.isCommander !== true || id in answers) continue;
+      if ((object?.zone !== "hand" && object?.zone !== "exile") || object.isCommander !== true || id in answers) continue;
       if (this.state.players[object.owner]?.hasLost === true) continue;
       this.state.suspendedResolutions.push({ effect: null, enter: entry });
       this.state.pendingCommanderMoves.unshift({
         commander: id,
         intendedZone: "library",
-        from: "hand",
+        from: object.zone,
         heldByZoneChoice: true,
       });
       this.state.awaiting = null;
@@ -10688,7 +10689,7 @@ export class Game {
       if (to === "library-bottom") {
         // In the order chosen: each goes under the one before it.
         const fromHand = this.state.objects[id]?.zone === "hand";
-        this.putOnLibrary(id, "bottom");
+        this.putPickOnLibrary(id, "bottom");
         if (fromHand && this.state.objects[id]?.zone === "library") bottomedFromHand.push(id);
         return;
       }
@@ -10804,7 +10805,7 @@ export class Game {
     // 701.24b — "shuffle, *then* put that card on top"). Last chosen first,
     // so a multi-card find ends up in the order it was chosen.
     if (awaiting.destination === "library-top") {
-      for (const id of [...chosen].reverse()) if (!toCommandZone.has(id)) this.putOnLibrary(id, "top");
+      for (const id of [...chosen].reverse()) if (!toCommandZone.has(id)) this.putPickOnLibrary(id, "top");
     }
     // "Put the chosen cards on top of your library in any order" (Doomsday):
     // on top now, so only their order is asked.
@@ -23693,6 +23694,9 @@ export class Game {
     source?: ObjectId,
     /** Only these — the cards exiled with a source (rule 607.2a). */
     among?: readonly ObjectId[],
+    /** The chooser was told to look at them (rule 406.3): a face-down one is
+     * told apart, so it's picked itself and not from a group at random. */
+    looked = false,
   ): { eligible: ObjectId[]; faceDownGroups: ObjectId[][] } {
     const eligible: ObjectId[] = [];
     const groups = new Map<string, ObjectId[]>();
@@ -23700,7 +23704,7 @@ export class Game {
       if (among !== undefined && !among.includes(id)) continue;
       const object = this.state.objects[id];
       if (object === undefined || object.isToken || (owner !== undefined && object.owner !== owner)) continue;
-      const faceDown = object.exiledFaceDown !== undefined || object.foretold === true;
+      const faceDown = !looked && (object.exiledFaceDown !== undefined || object.foretold === true);
       if (faceDown && filter !== undefined && !ownerOnly(filter)) continue;
       if (!this.matchesZoneChoiceFilter(id, filter, chooser, source)) continue;
       eligible.push(id);
@@ -37094,8 +37098,14 @@ export class Game {
         picker !== undefined ? player : undefined,
         source,
         linked,
+        typeof zone === "object" && "looked" in zone,
       );
       if (eligible.length === 0 || (needsMin && eligible.length < min)) return;
+      // One card going back on top has no order to ask about (rule 401.4).
+      if (typeof zone === "object" && "looked" in zone && destination === "library-top" && eligible.length === 1 && min >= 1) {
+        this.putOnLibrary(eligible[0], "top");
+        return;
+      }
       const most = Math.min(max, eligible.length);
       const cards = most === 1 ? "a card" : min >= most ? `${most} cards` : `up to ${most} cards`;
       // The client's own title would say "your graveyard": these go to
@@ -37118,6 +37128,7 @@ export class Game {
         destination,
         leftover: "stay",
         ...(prompt !== undefined ? { prompt } : {}),
+        ...(authoredPrompt !== undefined ? { prompt: authoredPrompt } : {}),
         ...(faceDownGroups.length > 0 ? { faceDownGroups } : {}),
         // "Onto the battlefield under your control" (rule 110.2a).
         ...(destination === "battlefield" && !underOwners ? { enterUnder: enterUnder ?? chooser } : {}),
@@ -48148,6 +48159,20 @@ export class Game {
   private apnapOrder(): PlayerId[] {
     const at = this.state.turnOrder.indexOf(this.activePlayer);
     return [...this.state.turnOrder.slice(at), ...this.state.turnOrder.slice(0, at)];
+  }
+
+  /** {@link putOnLibrary} for a `choose-from-zone`'s pick. A commander in exile
+   * was asked 903.9b before anything moved (`finishZoneChoice`) and is going to
+   * the library by that answer, so `moveObject` mustn't ask again. */
+  private putPickOnLibrary(id: ObjectId, position: "top" | "bottom"): void {
+    const object = this.state.objects[id];
+    const answered = object?.zone === "exile" && object.isCommander === true;
+    if (answered) this.completingCommanderMove = id;
+    try {
+      this.putOnLibrary(id, position);
+    } finally {
+      if (answered) this.completingCommanderMove = null;
+    }
   }
 
   /**

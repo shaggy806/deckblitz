@@ -11063,6 +11063,22 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'Scroll Rack: swap two cards with the top of your library',
+    board({
+      you: {
+        bf: ['Scroll Rack', 'Mountain'],
+        hand: ['Grizzly Bears', 'Hill Giant', 'Forest'],
+        lib: ['Island', 'Swamp', 'Plains'],
+      },
+    }),
+  ),
+  preset(
+    'Scroll Rack: one card swapped goes back without a question',
+    board({
+      you: { bf: ['Scroll Rack', 'Mountain'], hand: ['Grizzly Bears', 'Forest'], lib: ['Island', 'Swamp'] },
+    }),
+  ),
+  preset(
     'Tekuthal: proliferate twice instead',
     board({
       you: {

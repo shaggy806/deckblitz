@@ -7386,6 +7386,18 @@ These boards start before the first turn (the builder's `openingHands`), with th
 - **Do:** Cast Duress at Bob. Pick "1 with life (2 life)", the only way offered.
 - **Expect:** The prompt reads "Mana can't pay this: pay all your life?", with no Mana button. You go to 0 life and lose.
 
+## Scroll Rack (2026-11-04)
+
+### Scroll Rack: swap two cards with the top of your library
+
+- **Do:** Activate Scroll Rack. Choose Grizzly Bears and Hill Giant to exile. When asked to put them back, pick Hill Giant first, then Grizzly Bears.
+- **Expect:** Your hand gets the Island and the Swamp from the top of your library, without a question between. The library count doesn't change; its top is now Hill Giant, then Grizzly Bears.
+
+### Scroll Rack: one card swapped goes back without a question
+
+- **Do:** Activate Scroll Rack. Choose Grizzly Bears to exile.
+- **Expect:** The Island comes to your hand and nothing more is asked. Your library's top card is now Grizzly Bears.
+
 ## Proliferating twice (2026-11-04)
 
 ### Tekuthal: proliferate twice instead

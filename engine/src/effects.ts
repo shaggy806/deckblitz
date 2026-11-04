@@ -134,7 +134,12 @@ export type LookAndChooseZone =
   | "command"
   | "exile"
   | { readonly cards: readonly ObjectId[] }
-  | { readonly exiled: readonly ObjectId[] };
+  | {
+      readonly exiled: readonly ObjectId[];
+      /** Its `"exiled-this-way"`: the chooser was told to look at them, so a
+       * face-down one is theirs to pick by name, not a group's at random. */
+      readonly looked?: true;
+    };
 /** What a `search-library` searches — see its `zones`. */
 export type SearchZones =
   | "library"
@@ -10384,8 +10389,13 @@ export type EffectSpec =
        * `enterTapped`, `enterAs` (Ashiok's "is a Nightmare in addition to
        * its other types"), `attacking`, `then` (Yggdrasil's "it gains haste
        * until end of turn"). Under the chooser's control (rule 110.2a), as
-       * `"exile"`'s are. */
-      readonly zone: "library" | "graveyard" | "hand" | "graveyards" | "command" | "targets" | "exile" | "exiled-with-source";
+       * `"exile"`'s are.
+       * `"exiled-this-way"` is the cards this resolution has exiled so far,
+       * still in exile as the same objects (rule 400.7), the chooser looking
+       * at them even if they're face down (rule 406.3) — Scroll Rack's "then
+       * look at the exiled cards and put them on top of your library in any
+       * order". One card going back on top has no order, so isn't asked. */
+      readonly zone: "library" | "graveyard" | "hand" | "graveyards" | "command" | "targets" | "exile" | "exiled-with-source" | "exiled-this-way";
       /** With `zone: "targets"`: the ones still in exile as the objects they
        * were (rule 400.7), that could return: "you can't pick a card that can't
        * legally be returned to the battlefield" (Dimensional Breach's ruling), so
@@ -20259,7 +20269,9 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           : spec.zone === "exiled-with-source"
             ? // Rule 607.2a: only what the linked ability exiled.
               { exiled: ctx.cardsExiledWithSource(true) }
-            : spec.zone;
+            : spec.zone === "exiled-this-way"
+              ? { exiled: ctx.cardsExiledThisWay(true), looked: true as const }
+              : spec.zone;
       ctx.lookAndChoose(
         zone,
         spec.count === undefined ? undefined : amountValue(spec.count, ctx),
