@@ -15733,3 +15733,49 @@ describe("Leyline of the Guildpact's lines", () => {
     expect(face.static[1].addSubtypes).toEqual(["Plains", "Island", "Swamp", "Mountain", "Forest"]);
   });
 });
+
+describe("an instruction, if the player the trigger names leads each other player", () => {
+  const thatPlayerLeads = (stat: unknown) => ({
+    kind: "of-player",
+    player: "that-player",
+    condition: { kind: "player-compare", stat, compare: "more", than: "each-opponent" },
+  });
+  it("reads Battle Angels of Tyr's three", () => {
+    const face = parseFace(
+      {
+        name: "Test Card",
+        type_line: "Creature — Angel Knight",
+        mana_cost: "{2}{W}{W}",
+        colors: ["W"],
+        power: "4",
+        toughness: "4",
+        oracle_text:
+          "Whenever this creature deals combat damage to a player, draw a card if that player has more cards in hand than each other player. Then you create a Treasure token if that player controls more lands than each other player. Then you gain 3 life if that player has more life than each other player.",
+      },
+      { tokenFor: (description: string) => (/Treasure/.test(description) ? "Treasure Token" : null) },
+    );
+    expect(face.complete).toBe(true);
+    expect(face.triggered[0].effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "conditional", condition: thatPlayerLeads("hand"), then: { kind: "draw", amount: 1 } },
+        {
+          kind: "conditional",
+          condition: thatPlayerLeads({ controls: { type: "land" } }),
+          then: { kind: "create-token", token: "Treasure Token", count: 1 },
+        },
+        { kind: "conditional", condition: thatPlayerLeads("life"), then: { kind: "gain-life", amount: 3 } },
+      ],
+    });
+  });
+  it("leaves it unread where no trigger names that player", () => {
+    const face = parseFace({
+      name: "Test Card",
+      type_line: "Sorcery",
+      mana_cost: "{1}",
+      colors: [],
+      oracle_text: "Draw a card if that player has more cards in hand than each other player.",
+    });
+    expect(face.complete).toBe(false);
+  });
+});

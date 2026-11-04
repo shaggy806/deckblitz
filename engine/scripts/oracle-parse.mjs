@@ -9610,7 +9610,9 @@ export function parseEffect(text, outer) {
       }
     }
     const comparedM =
-      /^(?:then )?if ([^,]+), (.+)$/i.exec(sentence) ?? /^(.+) if ((?:an opponent|you) [^,]+ than (?:you|an opponent))\.$/i.exec(sentence);
+      /^(?:then )?if ([^,]+), (.+)$/i.exec(sentence) ??
+      /^(.+) if ((?:an opponent|you) [^,]+ than (?:you|an opponent))\.$/i.exec(sentence) ??
+      /^(?:then )?(.+) if (that player [^,]+ than each other player)\.$/i.exec(sentence);
     if (comparedM !== null) {
       const leading = /^(?:then )?if /i.test(sentence);
       const compared = playerComparisonOf(leading ? comparedM[1] : comparedM[2], ctx);
@@ -15841,6 +15843,13 @@ function playerComparisonOf(clause, ctx) {
   }
   if (c === "that player or that planeswalker's controller has more life than you" && slot === "player-or-planeswalker") {
     return { kind: "player-compare", stat: "life", compare: "fewer", than: { controllerOfTarget: 0 } };
+  }
+  // Battle Angels of Tyr: the player the trigger names, against each other
+  // player (each of them an opponent of theirs, rule 102.3).
+  m = /^that player (?:has more (cards in hand|life)|controls more (lands|creatures|artifacts|enchantments)) than each other player$/.exec(c);
+  if (m !== null && ctx?.thatPlayer === "trigger-player") {
+    const stat = m[1] !== undefined ? COMPARED_STATS[m[1]] : { controls: { type: singular(m[2]) } };
+    return { kind: "of-player", player: "that-player", condition: { kind: "player-compare", stat, compare: "more", than: "each-opponent" } };
   }
   return undefined;
 }
