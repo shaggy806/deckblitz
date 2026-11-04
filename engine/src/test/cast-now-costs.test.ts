@@ -6,6 +6,10 @@
  */
 import { describe, expect, it } from "vitest";
 import type { LegalAction } from "../actions.js";
+import { EvalBotController } from "../bot/eval-bot.js";
+import { HeuristicBotController, RandomController, type PlayerController } from "../controller.js";
+import { castNow } from "../decisions/cast-now.js";
+import { fillCast } from "../decisions/shared/random-cast.js";
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
 import {
@@ -27,6 +31,7 @@ import {
   spawn,
   subtypes,
   table,
+  type Table,
   toExile,
   toGraveyard,
   toHand,
@@ -451,6 +456,116 @@ describe("mustCast (Omen Machine; Spelltwine)", () => {
     expect(offer).toBeDefined();
     expect(offer?.mustCast).toBeUndefined();
     expect(zone(game, insight)).toBe("exile");
+  });
+
+  // Every kind of seat through "if able" where the spell can't be cast. A refused
+  // answer would throw out of the game's controller loop.
+  const seats: readonly (readonly [string, (game: Game) => PlayerController])[] = [
+    ["v1 bot", (game) => new HeuristicBotController(B, game.registry)],
+    ["v2 bot", (game) => new EvalBotController(B, game.registry, { maxSimulations: 8 })],
+    ["random", () => new RandomController(B, () => 0.5)],
+  ];
+  const seated = (build: (game: Game) => PlayerController): Table => {
+    const t = table({ deck: "Wastes" });
+    (t.game as unknown as { controllers: Record<string, PlayerController> }).controllers[B] = build(t.game);
+    return t;
+  };
+
+  describe.each(seats)("%s", (_name, build) => {
+    it("no target for the spell: nothing is asked and it stays in exile", () => {
+      const { game } = seated(build);
+      spawn(game, "Omen Machine");
+      const murder = toLibrary(game, "Murder", B);
+      nextTurn(game);
+      expect(zone(game, murder)).toBe("exile");
+    });
+
+    it("a cost it can't pay (a tax and no mana): it stays in exile", () => {
+      const { game } = seated(build);
+      spawn(game, "Omen Machine");
+      spawn(game, "Thalia, Guardian of Thraben");
+      const divination = toLibrary(game, "Divination", B);
+      nextTurn(game);
+      expect(zone(game, divination)).toBe("exile");
+    });
+
+    it("targets too dear in life: it isn't cast, and costs nothing", () => {
+      const { game } = seated(build);
+      spawn(game, "Omen Machine");
+      spawn(game, "Terror of the Peaks");
+      game.state.players[B].life = 2;
+      const murder = toLibrary(game, "Murder", B);
+      nextTurn(game);
+      expect(zone(game, murder)).toBe("exile");
+      expect(life(game, B)).toBe(2);
+    });
+
+    it("three different targets and one creature: nothing is asked, and it stays in exile", () => {
+      const { game } = seated(build);
+      spawn(game, "Omen Machine");
+      spawn(game, "Hill Giant");
+      const growth = toLibrary(game, "Incremental Growth", B);
+      nextTurn(game);
+      expect(zone(game, growth)).toBe("exile");
+    });
+
+    it("a castable spell is cast", () => {
+      const { game } = seated(build);
+      spawn(game, "Omen Machine");
+      const giant = toLibrary(game, "Hill Giant", B);
+      nextTurn(game);
+      expect(zone(game, giant)).toBe("battlefield");
+    });
+  });
+
+  it("a way with no whole cast in it holds nobody, and a random answer falls back on the cast that's legal", () => {
+    const { game } = table();
+    spawn(game, "Omen Machine");
+    toLibrary(game, "Lightning Bolt", B);
+    game.advanceUntil(() => castNowAsked(game) || game.state.turn.number > 2);
+    const offer = game.legalActions(B).find((x): x is CastNowOffer => x.kind === "cast-now");
+    if (offer === undefined) throw new Error("no offer");
+    const legal = (cast: Parameters<typeof game.canDispatch>[0] & { type: "cast-spell" }): boolean =>
+      game.canDispatch({ type: "cast-now", player: B, cast }) === null;
+    // What `castNowForced` asks of each way: no target to give it, no cast.
+    const noTarget = { ...offer.casts[0], targetOptions: [[]] };
+    expect(fillCast(noTarget, B, legal)).toBeNull();
+    expect(fillCast(offer.casts[0], B, legal)).not.toBeNull();
+    // A way the random answer can't fill: spree with no set of modes on offer.
+    const noModes = {
+      ...offer.casts[0],
+      castModal: { minModes: 1, maxModes: 1, modes: [], modeSets: [] },
+    } as unknown as typeof offer.casts[number];
+    const answer = castNow.randomAnswer?.({ ...offer, casts: [noModes] }, B, {
+      random: () => 0,
+      pickIndex: () => 0,
+      pickTargets: (options) => options.map((slot) => slot[0] ?? null),
+    });
+    expect(answer).toEqual({ type: "cast-now", player: B, cast: offer.forcedCast });
+    if (answer === undefined) throw new Error("no random answer");
+    expect(game.canDispatch(answer)).toBeNull();
+  });
+
+  it("with three creatures that spell is held to, each slot its own", () => {
+    const { game } = table();
+    spawn(game, "Omen Machine");
+    const creatures = [spawn(game, "Hill Giant"), spawn(game, "Grizzly Bears"), spawn(game, "Llanowar Elves")];
+    toLibrary(game, "Incremental Growth", B);
+    game.advanceUntil(() => castNowAsked(game) || game.state.turn.number > 2);
+    const offer = game.legalActions(B).find((x): x is CastNowOffer => x.kind === "cast-now");
+    expect(offer?.mustCast).toBe(true);
+    expect(new Set(offer?.forcedCast?.targets?.map((t) => (t?.kind === "object" ? t.object : null)))).toEqual(new Set(creatures));
+  });
+
+  it("the cast it's held to is whole: one with a target carries one", () => {
+    const { game } = table();
+    spawn(game, "Omen Machine");
+    toLibrary(game, "Lightning Bolt", B);
+    game.advanceUntil(() => castNowAsked(game));
+    const offer = game.legalActions(B).find((x): x is CastNowOffer => x.kind === "cast-now");
+    expect(offer?.mustCast).toBe(true);
+    expect(offer?.forcedCast?.targets).toHaveLength(1);
+    expect(game.canDispatch({ type: "cast-now", player: B, cast: offer?.forcedCast ?? null })).toBeNull();
   });
 
   it("Spelltwine exiles both, casts both copies if able, and exiles itself", () => {

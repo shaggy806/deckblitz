@@ -13,6 +13,40 @@ import type { TargetRef, TargetSpec } from "../../target.js";
 import { fitTargetCount, maxXForTargets, minXForTargets, targetsWithinTaxes } from "../../target-count.js";
 import type { RandomSource } from "../contract.js";
 
+/**
+ * A whole cast built from `legal` with no chance in it, for a cast that must be
+ * made (a `cast-now`'s `mustCast`): each target tried in turn, the first that
+ * `isLegal` accepts, or `null` when none does, so the offer can't be held to.
+ */
+export function fillCast(
+  legal: CastSpellOffer,
+  player: PlayerId,
+  isLegal: (cast: Extract<Action, { type: "cast-spell" }>) => boolean,
+): Extract<Action, { type: "cast-spell" }> | null {
+  const slots = [...legal.targetOptions, ...(legal.castModal?.modes ?? []).flatMap((mode) => mode.targetOptions)];
+  const tries = Math.max(1, ...slots.map((slot) => slot.length));
+  for (let k = 0; k < tries; k += 1) {
+    const cast = randomCast(legal, player, {
+      random: () => 0,
+      pickIndex: () => 0,
+      // A different target for each slot where there is one ("three target
+      // creatures"), starting from the k-th.
+      pickTargets: (options) => {
+        const used = new Set<string>();
+        return options.map((slot) => {
+          if (slot.length === 0) return null;
+          const free = slot.map((_, j) => slot[(k + j) % slot.length]).find((t) => !used.has(JSON.stringify(t)));
+          const pick = free ?? slot[k % slot.length];
+          used.add(JSON.stringify(pick));
+          return pick;
+        });
+      },
+    });
+    if (cast !== null && isLegal(cast)) return cast;
+  }
+  return null;
+}
+
 export function randomCast(
   legal: CastSpellOffer,
   player: PlayerId,

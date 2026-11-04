@@ -4550,8 +4550,11 @@ export type AwaitingDecision =
       /** …with mana of any type spendable — see the effect's `spendAs`. */
       readonly spendAs?: SpendAs;
       /** "If able", and it can't lawfully be got out of: no declining — see
-       * the effect's `mustCast` and `Game.castNowMandatory`. */
+       * the effect's `mustCast` and `Game.castNowForced`. */
       readonly mustCast?: true;
+      /** With `mustCast`: a whole cast found legal as this was raised — the proof
+       * that a player held to it can make it. */
+      readonly forcedCast?: Extract<Action, { type: "cast-spell" }>;
       /** …for its madness cost instead (rule 702.35a) — the cost. */
       readonly madness?: string;
       /** …for its miracle cost instead (rule 702.94a) — the cost. */

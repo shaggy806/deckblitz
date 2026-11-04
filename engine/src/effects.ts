@@ -4894,11 +4894,12 @@ export type EffectSpec =
        * Machine), "cast the copies if able" (Spelltwine): the offer can't be
        * declined while a way to cast the card can be paid, and is simply not
        * made when none can (the rulings: no legal target, a play restriction).
-       * Two ways out stay (`Game.castNowMandatory`): activating mana abilities
+       * Three ways out stay (`Game.castNowForced`): activating mana abilities
        * is never mandatory (rule 118.3c), so a way that needs more mana than the
-       * player has floating leaves it their choice; and a mandatory additional
-       * cost involving cards of a stated quality in a hidden zone doesn't have
-       * to be paid (118.8c).
+       * player has floating leaves it their choice; a mandatory additional cost
+       * involving cards of a stated quality in a hidden zone doesn't have to be
+       * paid (118.8c); and an offer with no whole, legal cast to be made from it
+       * can be declined, since a player who can't cast isn't required to.
        */
       readonly mustCast?: true;
       /** "Its owner may cast it **by paying [its madness cost]** rather

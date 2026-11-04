@@ -192,6 +192,7 @@ import { AutomaticController, standInFor } from "./controller.js";
 import type { ControllerView, PlayerController } from "./controller.js";
 import type { DecisionHost, DecisionReadCtx } from "./decisions/contract.js";
 import { decisionFor, decisionForAction, mayActOn } from "./decisions/registry.js";
+import { fillCast } from "./decisions/shared/random-cast.js";
 import { assignCombatDamage } from "./decisions/assign-combat-damage.js";
 import { MAX_MATERIALIZED } from "./combat/stack-counts.js";
 import { attackers } from "./decisions/attackers.js";
@@ -18659,7 +18660,7 @@ export class Game {
     const offers: CastSpellOffer[] = [];
     const lands: PlayLandOffer[] = [];
     const offered: ObjectId[] = [];
-    let mustCast = false;
+    let forcedCast: Extract<Action, { type: "cast-spell" }> | null = null;
     try {
       for (const cardId of cards) {
         const object = this.state.objects[cardId];
@@ -18702,7 +18703,7 @@ export class Game {
         }
         if (offers.length + lands.length > before) offered.push(cardId);
       }
-      mustCast = options.mustCast === true && this.castNowMandatory(player, offers);
+      if (options.mustCast === true) forcedCast = this.castNowForced(player, offers);
     } finally {
       this.castNowProbe = null;
     }
@@ -18722,7 +18723,7 @@ export class Game {
       ...(options.byPaying !== undefined ? { byPaying: options.byPaying } : {}),
       ...(options.alsoPaying !== undefined ? { alsoPaying: options.alsoPaying } : {}),
       ...(options.spendAs !== undefined ? { spendAs: options.spendAs } : {}),
-      ...(mustCast ? { mustCast: true as const } : {}),
+      ...(forcedCast !== null ? { mustCast: true as const, forcedCast } : {}),
       ...(madness !== undefined ? { madness } : {}),
       ...(miracle !== undefined ? { miracle } : {}),
       ...(options.suspendCost === true ? { suspendCost: true as const } : {}),
@@ -18735,22 +18736,25 @@ export class Game {
   }
 
   /**
-   * Whether a "casts it **if able**" (the `cast-now` effect's `mustCast`) leaves
-   * its player no choice over `offers`: some way to cast the card they can't
-   * lawfully get out of. Activating mana abilities is never mandatory (rule
-   * 118.3c), so a way whose total cost (601.2f, with any cost increase) needs
-   * more than the mana already floating leaves it their choice; so does a
-   * mandatory additional cost involving cards of a stated quality in a hidden
-   * zone (118.8c). An optional additional cost is never forced: a kicked way
-   * doesn't count, since the unkicked one is what they must take.
+   * The cast a "casts it **if able**" (the `cast-now` effect's `mustCast`) holds
+   * its player to among `offers`, or `null` if it leaves them a choice: some whole,
+   * legal way to cast the card they can't lawfully get out of. Activating mana
+   * abilities is never mandatory (rule 118.3c), so a way whose total cost (601.2f,
+   * with any cost increase) needs more than the mana already floating leaves it
+   * their choice; so does a mandatory additional cost involving cards of a stated
+   * quality in a hidden zone (118.8c). An optional additional cost is never forced:
+   * a kicked way doesn't count, since the unkicked one is what they must take.
    */
-  private castNowMandatory(player: PlayerId, offers: readonly CastSpellOffer[]): boolean {
-    return offers.some((offer) => {
-      if (offer.kicked === true || offer.offspring === true) return false;
+  private castNowForced(
+    player: PlayerId,
+    offers: readonly CastSpellOffer[],
+  ): Extract<Action, { type: "cast-spell" }> | null {
+    for (const offer of offers) {
+      if (offer.kicked === true || offer.offspring === true) continue;
       const face = offer.face ?? 0;
       const def = this.faceDef(offer.card, face);
       const extra = def.additionalCost;
-      if (extra?.discardFilter !== undefined || extra?.behold !== undefined) return false;
+      if (extra?.discardFilter !== undefined || extra?.behold !== undefined) continue;
       const cost = this.castingCostOf(
         player,
         offer.card,
@@ -18759,8 +18763,11 @@ export class Game {
         this.castCostString(offer.card, "effect", face, false, false, offer.free === true, false, offer.costOption, player),
       );
       const purpose: ManaPurpose = { kind: "cast", card: offer.card, face };
-      return planPayment({ ...this.manaPlanningView(player, purpose), sources: [] }, cost, purpose) !== null;
-    });
+      if (planPayment({ ...this.manaPlanningView(player, purpose), sources: [] }, cost, purpose) === null) continue;
+      const cast = fillCast(offer, player, (filled) => this.canDispatch(filled) === null);
+      if (cast !== null) return cast;
+    }
+    return null;
   }
 
   /**

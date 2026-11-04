@@ -2287,6 +2287,9 @@ export type LegalAction =
       readonly anyMana?: true;
       /** "If able": declining isn't an answer — see the effect's `mustCast`. */
       readonly mustCast?: true;
+      /** With `mustCast`: the cast it's held to, whole and found legal as it was
+       * raised, what a controller that won't choose answers with. */
+      readonly forcedCast?: Extract<Action, { type: "cast-spell" }>;
       /** …for its madness cost rather than its mana cost (rule 702.35a): the
        * madness cost, the only way offered. */
       readonly madness?: string;
