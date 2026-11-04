@@ -899,8 +899,11 @@ missing. Re-run `--greedy` for Phase 2's order.
   `amount:damage-dealt-by-spell-this-turn`, `effect:remove-attackers-and-forced-recombat`. 63 proving cards. The run: 52 families in six
   rounds, four local agents at once, ending at the user's request with about 20 units of 5 cards left in the order.
 - **2026-11-04/05: overnight, the 5-card units.** `decision:choose-from-zone-extensions`, `decision:choose-permanent`,
-  `effect:restrict-until-your-next-turn`, `mechanic:goad-extensions`, `effect:become-copy`, then as listed in `COMPLETED.md`. Past the
-  5-card units the order changes (the user's call): keys by the best EDHREC card they unlock, `cards:needs -- --by-rank`.
+  `effect:restrict-until-your-next-turn`, `mechanic:goad-extensions`, `effect:become-copy`, then as listed in `COMPLETED.md`: all 20 units
+  of 5 cards. Past them the order changes (the user's call): keys by the best EDHREC card they unlock, `cards:needs -- --by-rank`. Those
+  records overstated the work more often than the families' did: Arena of Glory, Mistrise Village, Rise of the Dark Realms, Field of the
+  Dead, Banner of Kinship, Unbreakable Formation, Padeem, Mechanized Production and Grasp of Fate needed no engine code. 36 by-rank cards built
+  from Gemstone Caverns (rank 181) to Vigor (rank 1318).
 
 ## Rough size
 

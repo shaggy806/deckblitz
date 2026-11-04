@@ -12,6 +12,10 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **A static prevention's follow-up on its recipient** (2026-11-04): Vigor.
+- **One or more creatures attack you and aren't blocked** (2026-11-04): Coveted Jewel.
+- **An intervening-if comparing two amounts** (2026-11-04): Liberator, Urza's Battlethopter; ED-E, Lonesome Eyebot.
+- **As this transforms, applied while it transforms** (2026-11-04): Sephiroth, Fabled SOLDIER // Sephiroth, One-Winged Angel.
 - **A target player's counters as an amount** (2026-11-04, `0c49db356`): Vraska, Betrayal's Sting.
 - **"Put them onto the battlefield", every card a batched trigger fired on** (2026-11-04, `ff3b74496`): Hedge Shredder.
 - **Token and counter doublers for every player** (2026-11-04, `96233e142`): Primal Vigor.

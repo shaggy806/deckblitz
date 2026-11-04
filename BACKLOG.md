@@ -485,7 +485,13 @@ section keeps only what to do next.
   Rise and Field needed no engine code): try the card first. Then Banner of Kinship, Opal Palace, Innkeeper's Talent, Archivist of Oghma,
   Veil of Summer, Unbreakable Formation, Opposition Agent, Tibalt's Trickery, Starting Town, Liliana, Dreadhorde General, High Tide,
   Bloodletter of Aclazotz, The Soul Stone, Tempt with Discovery, Tainted Pact, Throne of Eldraine, Padeem, Promise of Loyalty, Moraug,
-  Mechanized Production. Left of `effect:each-player-may-held-search`: a find bound for a hand isn't held (Jungle Wayfinder, Weird Harvest).
+  Mechanized Production, Charismatic Conqueror, K'rrik, Grasp of Fate, Tekuthal, Ojer Taq, Ezuri's Predation, Forge Anew, Primal Vigor,
+  Sephiroth, Liberator, Coveted Jewel, Hedge Shredder, Vraska, Betrayal's Sting, Vigor. Left of `effect:each-player-may-held-search`: a find
+  bound for a hand isn't held (Jungle Wayfinder, Weird Harvest). Left of `decision:manual-payment-choices`: paying from sources (Mr. House,
+  Ozai). Narrow keys: Ludevic and Curse of Leeches (a choice while transforming, `replacement:as-transforms`'s field can't ask), Defilers of
+  Vigor and Faith (an optional additional cost), Geth's Summons (`condition:per-opponent-target-slot-condition`), Valki, Halo Fountain
+  (`cost:untap-cost`). **Next by rank: Full Throttle, Baral, Endurance, Cavern-Hoard Dragon, Scroll Rack, All Will Be One.** `--stale` 1,751
+  (the sweep's queue); top-5000 4388/5000, commanders 465/500; the greedy order's best unit now frees 4.
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next
