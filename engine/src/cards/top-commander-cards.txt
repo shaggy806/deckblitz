@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4259 already implemented / 741 missing (marks refreshed 2026-11-03)
+4272 already implemented / 728 missing (marks refreshed 2026-11-04)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -472,7 +472,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   473  Pyroblast                                {R}              Instant
 [x]   474  Chandra's Ignition                       {3}{R}{R}        Sorcery
 [x]   475  Accursed Marauder                        {1}{B}           Creature — Zombie Warrior
-[ ]   476  Commander's Plate                        {1}              Artifact — Equipment
+[x]   476  Commander's Plate                        {1}              Artifact — Equipment
 [x]   477  Tatyova, Benthic Druid                   {3}{G}{U}        Legendary Creature — Merfolk Druid
 [x]   478  Underground Mortuary                     {0}              Land — Swamp Forest
 [x]   479  Plaza of Heroes                          {0}              Land
@@ -502,7 +502,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   503  Blind Obedience                          {1}{W}           Enchantment
 [x]   504  Oracle of Mul Daya                       {3}{G}           Creature — Elf Shaman
 [x]   505  Sanguine Bond                            {3}{B}{B}        Enchantment
-[ ]   506  Mother of Runes                          {W}              Creature — Human Cleric
+[x]   506  Mother of Runes                          {W}              Creature — Human Cleric
 [x]   507  Avacyn's Pilgrim                         {G}              Creature — Human Monk
 [x]   508  Sandsteppe Citadel                       {0}              Land
 [x]   509  Rakdos Carnarium                         {0}              Land
@@ -1364,7 +1364,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1371  Butcher of Malakir                       {5}{B}{B}        Creature — Vampire Warrior
 [x]  1372  Coiling Oracle                           {G}{U}           Creature — Snake Elf Druid
 [ ]  1373  Scroll Rack                              {2}              Artifact
-[ ]  1374  Agatha's Soul Cauldron                   {2}              Legendary Artifact
+[x]  1374  Agatha's Soul Cauldron                   {2}              Legendary Artifact
 [ ]  1375  Glissa Sunslayer                         {1}{B}{G}        Legendary Creature — Phyrexian Zombie Elf
 [x]  1376  Enthusiastic Mechanaut                   {U}{R}           Artifact Creature — Goblin Artificer
 [x]  1377  Sephara, Sky's Blade                     {4}{W}{W}{W}     Legendary Creature — Angel
@@ -1935,7 +1935,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1942  Port Razer                               {3}{R}{R}        Creature — Orc Pirate
 [x]  1943  Helpful Hunter                           {1}{W}           Creature — Cat
 [x]  1944  Erode                                    {W}              Instant
-[ ]  1945  Eldritch Immunity                        {C}              Kindred Instant — Eldrazi
+[x]  1945  Eldritch Immunity                        {C}              Kindred Instant — Eldrazi
 [x]  1946  Shattered Landscape                      {0}              Land
 [x]  1947  Split Up                                 {1}{W}{W}        Sorcery
 [x]  1948  Maha, Its Feathers Night                 {3}{B}{B}        Legendary Creature — Elemental Bird
@@ -2254,7 +2254,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2261  Court of Garenbrig                       {1}{G}{G}        Enchantment
 [x]  2262  General Kreat, the Boltbringer           {2}{R}           Legendary Creature — Goblin Soldier
 [x]  2263  Squee, the Immortal                      {1}{R}{R}        Legendary Creature — Goblin
-[ ]  2264  Wrathful Red Dragon                      {3}{R}{R}        Creature — Dragon
+[x]  2264  Wrathful Red Dragon                      {3}{R}{R}        Creature — Dragon
 [x]  2265  Elder Gargaroth                          {3}{G}{G}        Creature — Beast
 [x]  2266  End the Festivities                      {R}              Sorcery
 [x]  2267  Satyr Enchanter                          {1}{G}{W}        Creature — Satyr Druid
@@ -2331,7 +2331,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2338  Greedy Freebooter                        {B}              Creature — Human Pirate
 [x]  2339  Survival of the Fittest                  {1}{G}           Enchantment
 [x]  2340  Tainted Strike                           {B}              Instant
-[ ]  2341  Hazel's Brewmaster                       {3}{B}           Creature — Squirrel Warlock
+[x]  2341  Hazel's Brewmaster                       {3}{B}           Creature — Squirrel Warlock
 [x]  2342  Slaughter the Strong                     {1}{W}{W}        Sorcery
 [ ]  2343  Thieving Skydiver                        {1}{U}           Creature — Merfolk Rogue
 [ ]  2344  Chthonian Nightmare                      {1}{B}           Enchantment
@@ -2624,7 +2624,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2631  Efficient Construction                   {3}{U}           Enchantment
 [x]  2632  Valorous Stance                          {1}{W}           Instant
 [x]  2633  Impulse                                  {1}{U}           Instant
-[ ]  2634  Wrathful Raptors                         {4}{R}           Creature — Dinosaur
+[x]  2634  Wrathful Raptors                         {4}{R}           Creature — Dinosaur
 [x]  2635  Serra's Emissary                         {4}{W}{W}{W}     Creature — Angel
 [ ]  2636  Planar Nexus                             {0}              Land
 [ ]  2637  Lich-Knights' Conquest                   {4}{B}           Sorcery
@@ -3185,7 +3185,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3192  Honored Dreyleader                       {2}{G}           Creature — Squirrel Warrior
 [x]  3193  Yedora, Grave Gardener                   {4}{G}           Legendary Creature — Treefolk Druid
 [ ]  3194  Phyrexian Vindicator                     {W}{W}{W}{W}     Creature — Phyrexian Horror
-[ ]  3195  Eclipsed Realms                          {0}              Land
+[x]  3195  Eclipsed Realms                          {0}              Land
 [x]  3196  Sauron, the Dark Lord                    {3}{U}{B}{R}     Legendary Creature — Avatar Horror
 [x]  3197  Pick Your Poison                         {G}              Sorcery
 [x]  3198  Goro-Goro, Disciple of Ryusei            {1}{R}           Legendary Creature — Goblin Samurai
@@ -4297,7 +4297,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4304  Pippin, Warden of Isengard               {B}{G}           Legendary Creature — Halfling Advisor
 [x]  4305  Vexilus Praetor                          {3}{W}           Creature — Custodes Warrior
 [x]  4306  Yoshimaru, Ever Faithful                 {W}              Legendary Creature — Dog
-[ ]  4307  Lozhan, Dragons' Legacy                  {3}{U}{R}        Legendary Creature — Dragon Shaman
+[x]  4307  Lozhan, Dragons' Legacy                  {3}{U}{R}        Legendary Creature — Dragon Shaman
 [x]  4308  Squirrel Sovereign                       {1}{G}           Creature — Squirrel Noble
 [x]  4309  Chaos Wand                               {3}              Artifact
 [x]  4310  Suplex                                   {1}{R}           Sorcery
@@ -4326,7 +4326,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4333  Aether Tunnel                            {1}{U}           Enchantment — Aura
 [x]  4334  Undead Butler                            {1}{B}           Creature — Zombie
 [x]  4335  Dark Prophecy                            {B}{B}{B}        Enchantment
-[ ]  4336  Verity Circle                            {2}{U}           Enchantment
+[x]  4336  Verity Circle                            {2}{U}           Enchantment
 [x]  4337  Bonescythe Sliver                        {3}{W}           Creature — Sliver
 [x]  4338  Wall of Denial                           {1}{W}{U}        Creature — Wall
 [x]  4339  Mothdust Changeling                      {U}              Creature — Shapeshifter
@@ -4473,7 +4473,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  4480  Luck Bobblehead                          {3}              Artifact — Bobblehead
 [x]  4481  Cryptcaller Chariot                      {3}{B}           Artifact — Vehicle
 [x]  4482  Lost Jitte                               {1}              Legendary Artifact — Equipment
-[ ]  4483  Deeproot Pilgrimage                      {1}{U}           Enchantment
+[x]  4483  Deeproot Pilgrimage                      {1}{U}           Enchantment
 [ ]  4484  Katilda, Dawnhart Prime                  {G}{W}           Legendary Creature — Human Warlock
 [x]  4485  Bone-Cairn Butcher                       {1}{R}{W}{B}     Creature — Demon
 [x]  4486  Vizkopa Guildmage                        {W}{B}           Creature — Human Wizard
@@ -4864,7 +4864,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  4871  Possibility Storm                        {3}{R}{R}        Enchantment
 [ ]  4872  Summon: Good King Mog XII                {4}{W}           Enchantment Creature — Saga Moogle
 [x]  4873  Hammerhead Tyrant                        {4}{U}{U}        Creature — Dragon
-[ ]  4874  Faerie Artisans                          {3}{U}           Creature — Faerie Artificer
+[x]  4874  Faerie Artisans                          {3}{U}           Creature — Faerie Artificer
 [ ]  4875  Arvinox, the Mind Flail                  {4}{B}{B}{B}     Legendary Enchantment Creature — Horror
 [x]  4876  Balefire Liege                           {2}{R/W}{R/W}{R/W} Creature — Spirit Horror
 [ ]  4877  Treasure Chest                           {3}              Artifact
@@ -4976,7 +4976,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4983  Glacier Godmaw                           {5}{G}{G}        Creature — Leviathan
 [x]  4984  Batterskull                              {5}              Artifact — Equipment
 [x]  4985  Joint Exploration                        {1}{U}           Instant
-[ ]  4986  Mm'menon, the Right Hand                 {3}{U}{U}        Legendary Creature — Jellyfish Advisor
+[x]  4986  Mm'menon, the Right Hand                 {3}{U}{U}        Legendary Creature — Jellyfish Advisor
 [ ]  4987  Abomination of Llanowar                  {1}{B}{G}        Legendary Creature — Elf Horror
 [x]  4988  Stadium Headliner                        {R}              Creature — Goblin Warrior
 [x]  4989  The Wanderer                             {3}{W}           Legendary Planeswalker

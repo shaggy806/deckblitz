@@ -52,7 +52,9 @@ describe("engine/local", () => {
     expect(reached.filter(isCardFile)).toEqual([]);
   });
 
-  it("is walked for real", () => {
+  // The unswapped walk reads the whole pool: 12 s on an idle PC by 2026-11-03,
+  // past the suite's default timeout under load, and growing with the pool.
+  it("is walked for real", { timeout: 180_000 }, () => {
     // It gets to the game, the bots and the swapped-in registry…
     expect(reached).toContain("game.ts");
     expect(reached).toContain("bot/eval-bot.ts");
