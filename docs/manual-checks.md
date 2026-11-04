@@ -7450,3 +7450,24 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 - **Do:** Cast Giant Growth on Zada. Order Zada's copies when asked, keep Zada as the additional copy's target, then answer 2.
 - **Expect:** The additional copy goes under both of Zada's copies and resolves last of the three, before the Giant Growth itself. Zada ends 9/9, the Bears 5/5 and the Giant 6/6.
+## A planeswalker that's an Equipment (2026-11-04)
+
+### The Aetherspark: its +1 attaches it, and it still has its abilities there
+
+- **Do:** Click The Aetherspark, take "+1" and choose the Grizzly Bears. Attack Bob with the Bears. On your next turn, click The Aetherspark's strip under the Bears and take "−5".
+- **Expect:** It sits under the Bears with 5 loyalty, and the Bears are 3/3. Their hit takes Bob's life down 3 and its loyalty up to 8. The −5 draws two cards and leaves it on 3, still under the Bears.
+
+### The Aetherspark: an attacker can't be sent at it while it's attached
+
+- **Do:** You're Bob, declaring attackers. Click the Hill Giant, then "Attack with 1".
+- **Expect:** No question of whom it attacks: its badge reads "⚔ Alice" as soon as it's clicked, and the log says it attacks Alice.
+
+### The Aetherspark: an attacker can't be sent at it while it's attached, four players
+
+- **Do:** You're Bob, declaring attackers. Click the Hill Giant, then The Aetherspark, then Carol's name.
+- **Expect:** The banner says "click who they attack". Clicking The Aetherspark does nothing, and the badge goes from "⚔ ?" to "⚔ Carol" only once Carol is clicked.
+
+### The Aetherspark: it can be attacked while unattached
+
+- **Do:** You're Bob, declaring attackers. Click the Hill Giant, then The Aetherspark, then "Attack with 1".
+- **Expect:** The badge reads "⚔ The Aetherspark". The Giant's 3 damage takes it from 4 loyalty to 1, and Alice's life doesn't change.

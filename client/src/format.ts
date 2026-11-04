@@ -35,6 +35,7 @@ const CHOSEN_COLOR_NAMES: Readonly<Record<string, string>> = {
 const RESTRICTION_TEXT: Record<CombatRestriction, string> = {
   'cant-attack': "can't attack",
   'cant-block': "can't block",
+  'cant-be-attacked': "can't be attacked",
   'must-attack': 'must attack',
   'must-block': 'must block',
   'must-be-blocked': 'must be blocked by every creature able',

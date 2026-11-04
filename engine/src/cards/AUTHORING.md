@@ -5492,7 +5492,11 @@ is "can't attack a player it has already attacked this turn" (Port Razer), by th
   object, the nested read uses its printed P/T rather than recursing.
 - `restrictions: [...]` — `"cant-attack" \| "cant-block" \| "cant-be-blocked" \|
   "must-attack" \| "must-block" \| "must-be-blocked" \| "must-be-blocked-if-able" \|
-  "cant-attack-owner"` (Pacifism, Juggernaut, Lure). `"must-block"` is "blocks
+  "cant-attack-owner"` (Pacifism, Juggernaut, Lure). `"cant-be-attacked"` goes on a
+  planeswalker or battle: The Aetherspark's, with `affects: { scope: "self" }` and a
+  `source` condition. A restriction on declaring attackers (rule 508.1c), so an
+  attacker already at it stays, and one put onto the battlefield attacking may
+  choose it (rule 508.4c). `"must-block"` is "blocks
   each combat if able" (Razorgrass Screen, Grand Melee), a requirement joined
   to the blockers offer's `blockRequirements` (rule 509.1c); Iron Golem's
   "attacks or blocks each combat if able" is `["must-attack", "must-block"]`. `"cant-be-blocked"` is

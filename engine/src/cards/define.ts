@@ -531,6 +531,11 @@ export type AffectSpec =
 export type CombatRestriction =
   | "cant-attack"
   | "cant-block"
+  /** "Can't be attacked" on a planeswalker or battle (The Aetherspark): a
+   * restriction on declaring attackers (rule 508.1c), so one already being
+   * attacked stays attacked (the ruling), and a creature put onto the
+   * battlefield attacking may still choose it (rule 508.4c). */
+  | "cant-be-attacked"
   /** "Can't be blocked": the `unblockable` keyword's rule as a restriction,
    * so a `restrict` over a filter reaches creatures that match it later this
    * turn — Jace, Arcane Strategist's "creatures you control can't be blocked

@@ -163,6 +163,15 @@ function legalDefendersUncached(
   return [...opponents, ...planeswalkers];
 }
 
+/** Whether attackers may be declared against `target`: every player may be, and
+ * every permanent but one with the `cant-be-attacked` restriction (The
+ * Aetherspark, rule 508.1c). Kept out of {@link legalDefenders}, which also
+ * answers what a creature put onto the battlefield attacking may choose, and
+ * that isn't bound by it (rule 508.4c). */
+export function canBeAttacked(state: GameState, registry: CardRegistry, target: PlayerId | ObjectId): boolean {
+  return !isPlaneswalkerTarget(state, target) || !restrictionsOf(state, registry, target).has("cant-be-attacked");
+}
+
 /** True if an attack target `id` is a planeswalker (an `ObjectId`) rather
  * than a player. */
 export function isPlaneswalkerTarget(
@@ -276,6 +285,7 @@ function whyCannotAttackUncached(
       ? `${def.name} can't attack that planeswalker`
       : "attackers can only attack an opponent who hasn't already lost";
   }
+  if (!canBeAttacked(state, registry, target)) return `${def.name} can't attack that permanent: it can't be attacked`;
   // "They can't attack you or planeswalkers you control that combat"
   // (Illusionist's Gambit): a battle you protect isn't either.
   const avoid = object.boundThisCombat?.avoid;

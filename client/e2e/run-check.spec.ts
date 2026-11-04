@@ -202,7 +202,18 @@ async function runStep(page: Page, step: string): Promise<boolean> {
       for (const limit = Date.now() + 25_000; ; await page.waitForTimeout(250)) {
         if (await visibleFirst(inPopup.locator('.card-tile'))) return true
         const id = await findId(page, 'battlefield', arg)
-        if (id !== null) return visibleFirst(page.locator(`.board [data-obj-id="${id}"]`))
+        if (id !== null) {
+          // An attachment sits behind its host: only its strip below can be clicked.
+          const attached = page.locator(`.board .attachments [data-obj-id="${id}"]`).first()
+          const box = (await attached.count()) === 0 ? null : await attached.boundingBox()
+          if (box !== null) {
+            // Its tile stays disabled while the last frames play, as a hand card's does.
+            await attached.locator('button:not([disabled])').waitFor({ timeout: 5_000 }).catch(() => {})
+            await attached.click({ position: { x: box.width / 2, y: box.height - 3 }, timeout: 3_000 })
+            return true
+          }
+          return visibleFirst(page.locator(`.board [data-obj-id="${id}"]`))
+        }
         if ((await findId(page, 'hand', arg)) !== null) return runStep(page, `hand:${arg}`)
         const commander = await findId(page, 'command', arg)
         if (commander !== null) return visibleFirst(page.locator(`.commander-tile-wrap[data-obj-id="${commander}"] .commander-tile`))

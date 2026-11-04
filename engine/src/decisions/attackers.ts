@@ -34,6 +34,7 @@ import {
   attackRequirementsForbid,
   attackRequirementsReason,
   attacksIfOthersAttack,
+  canBeAttacked,
   creatureDef,
   defendersForAttacker,
   legalDefenders,
@@ -73,7 +74,7 @@ function declarationStep(ctx: DecisionReadCtx, player: PlayerId): { naming: bool
 
 function attackersOffer(ctx: DecisionReadCtx, player: PlayerId): AttackOffer {
   const { naming, sending } = declarationStep(ctx, player);
-  const defenders = legalDefenders(ctx.state, ctx.registry, player);
+  const defenders = legalDefenders(ctx.state, ctx.registry, player).filter((d) => canBeAttacked(ctx.state, ctx.registry, d));
   const defendersFor: Record<ObjectId, readonly (PlayerId | ObjectId)[]> = {};
   for (const id of ctx.state.zones.shared.battlefield) {
     if (sending !== undefined && !sending.includes(id)) continue;

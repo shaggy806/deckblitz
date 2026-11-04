@@ -11167,4 +11167,35 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{}, {}, {}],
     }),
   ),
+  preset(
+    'The Aetherspark: its +1 attaches it, and it still has its abilities there',
+    board({
+      you: { bf: ['The Aetherspark', 'Grizzly Bears'] },
+      opp: { bf: [] },
+    }),
+  ),
+  preset(
+    "The Aetherspark: an attacker can't be sent at it while it's attached",
+    board({
+      you: { bf: [{ name: 'The Aetherspark', attach: 'Grizzly Bears' }, 'Grizzly Bears'] },
+      opp: { human: true, bf: ['Hill Giant'] },
+      turn: 0,
+    }),
+  ),
+  preset(
+    "The Aetherspark: an attacker can't be sent at it while it's attached, four players",
+    board({
+      you: { bf: [{ name: 'The Aetherspark', attach: 'Grizzly Bears' }, 'Grizzly Bears'] },
+      opp: [{ human: true, bf: ['Hill Giant'] }, { bf: [] }, { bf: [] }],
+      turn: 0,
+    }),
+  ),
+  preset(
+    'The Aetherspark: it can be attacked while unattached',
+    board({
+      you: { bf: ['The Aetherspark'] },
+      opp: { human: true, bf: ['Hill Giant'] },
+      turn: 0,
+    }),
+  ),
 ]
