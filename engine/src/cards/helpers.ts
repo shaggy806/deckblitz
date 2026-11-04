@@ -170,6 +170,14 @@ export const BEFORE_ATTACKERS_DECLARED: StaticCondition = {
   of: [{ kind: "your-turn" }, BEFORE_ATTACKERS_ANY_TURN],
 };
 
+/** "Your first, second, or third turn of the game": it's your turn, and you've
+ * taken at most three (extra turns count; a skipped one wasn't taken). Serra
+ * Avenger's ruling: another player's early turns aren't yours. */
+export const FIRST_THREE_TURNS: StaticCondition = {
+  kind: "all",
+  of: [{ kind: "your-turn" }, { kind: "turns-taken", atMost: 3 }],
+};
+
 /**
  * Ward (rule 702.21a): "Whenever this permanent becomes the target of a spell
  * or ability an opponent controls, counter that spell or ability unless that

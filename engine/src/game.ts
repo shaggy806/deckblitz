@@ -8662,6 +8662,7 @@ export class Game {
       seatNow.turnTakenBefore = seatNow.lastTurnTaken;
     }
     seatNow.lastTurnTaken = this.state.turn.number;
+    seatNow.turnsTaken = (seatNow.turnsTaken ?? 0) + 1;
     this.beginPlayerControl("next-turn");
     // "All combat phases of their next turn": this is that turn.
     const nowActive = this.state.players[this.activePlayer];

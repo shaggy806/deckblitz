@@ -5948,6 +5948,11 @@ clause (section 9):
   opponents control eight or more lands" — plural "opponents" sums, unlike
   `opponent-controls`'s singular "an opponent").
 - `{ kind: "your-turn" }`
+- `{ kind: "turns-taken", atMost }` — you've taken at most that many turns this
+  game, the one under way included (extra turns count, a skipped one doesn't).
+  `FIRST_THREE_TURNS` in `helpers.ts` is "your first, second, or third turn of
+  the game", with `your-turn`: Starting Town's `tappedUnless`, Serra Avenger's
+  `castOnlyIf` (its `not`).
 - `{ kind: "extra-turn" }` — this turn is an extra turn, whoever's (rule 500.7):
   Medomai the Ageless's "can't attack during extra turns" is a self static's
   `restrictions: ["cant-attack"]` with this `condition`.

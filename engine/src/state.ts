@@ -3005,6 +3005,11 @@ export interface PlayerState {
   /** The number of the turn this player took before `lastTurnTaken` — while
    * it's their turn, "their last turn" (`controllersLastTurn`). */
   turnTakenBefore?: number;
+  /** How many turns this player has taken this game, the one under way
+   * included: extra turns count, a skipped one was never taken (rule 614.10),
+   * and whichever player controlled it, the turn was still this player's
+   * (rule 723). "Your first, second, or third turn" (`turns-taken`). */
+  turnsTaken?: number;
   /** The combat phase of this player's turns under way or most recently
    * begun (`turn`, and `phase` — `TurnState.combatPhases` then), and the
    * one before it — "your last combat" as a new combat begins (Territorial

@@ -1044,6 +1044,12 @@ export type StaticCondition =
   | { readonly kind: "opponent-count"; readonly atLeast: number }
   /** It's your turn. */
   | { readonly kind: "your-turn" }
+  /** You've taken at most `atMost` turns this game, the one under way included
+   * (`PlayerState.turnsTaken`: another player's turns don't count, an extra
+   * turn of yours does). "Your first, second, or third turn of the game" also
+   * says it's your turn, which `your-turn` beside it says (`FIRST_THREE_TURNS`
+   * — Starting Town, Serra Avenger). */
+  | { readonly kind: "turns-taken"; readonly atMost: number }
   /** This turn is an extra turn, whoever's it is (rule 500.7): "can't attack
    * during extra turns" (Medomai the Ageless). */
   | { readonly kind: "extra-turn" }

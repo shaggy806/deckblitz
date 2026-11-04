@@ -13254,6 +13254,12 @@ function parseFaceAsWritten(face, ctx = {}) {
       out.alsoSubtypes = m[1].split(/,? and |, /);
       continue;
     }
+    // Your own turns of the game (`FIRST_THREE_TURNS`): on another player's,
+    // with flash from somewhere, it's castable (Serra Avenger's ruling).
+    if (line === "You can't cast ~ during your first, second, or third turns of the game.") {
+      out.castOnlyIf = { kind: "not", of: { kind: "all", of: [{ kind: "your-turn" }, { kind: "turns-taken", atMost: 3 }] } };
+      continue;
+    }
     // Timing with respect to combat (rule 506.8): the steps it means.
     if (isSpell && /^Cast ~ only during the declare blockers step\.$/.test(line)) {
       out.castOnlyIf = { kind: "turn-structure", steps: ["declare-blockers"] };
@@ -14255,6 +14261,17 @@ function parseFaceAsWritten(face, ctx = {}) {
       out.static.push({
         affects: { scope: "self" },
         replacement: { event: "enters-battlefield", tappedUnlessBehold: beholdOf(m[1]) },
+        text: printed(raw),
+      });
+      continue;
+    }
+    if (line === "~ enters tapped unless it's your first, second, or third turn of the game.") {
+      out.static.push({
+        affects: { scope: "self" },
+        replacement: {
+          event: "enters-battlefield",
+          tappedUnless: { kind: "all", of: [{ kind: "your-turn" }, { kind: "turns-taken", atMost: 3 }] },
+        },
         text: printed(raw),
       });
       continue;

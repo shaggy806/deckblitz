@@ -14652,6 +14652,15 @@ describe("a cast as this resolves, on its own terms", () => {
     });
   });
 
+  it("reads your first three turns of the game: a land's entry, a cast", () => {
+    const town = read("Land — Town", "This land enters tapped unless it's your first, second, or third turn of the game.\n{T}: Add {C}.");
+    expect(town.complete).toBe(true);
+    const first = { kind: "all", of: [{ kind: "your-turn" }, { kind: "turns-taken", atMost: 3 }] };
+    expect(town.static[0].replacement).toEqual({ event: "enters-battlefield", tappedUnless: first });
+    const avenger = read("Creature — Angel", "You can't cast this spell during your first, second, or third turns of the game.");
+    expect(avenger.castOnlyIf).toEqual({ kind: "not", of: first });
+  });
+
   it("reads \"if able\" as a cast that can't be declined", () => {
     const omen = read(
       "Artifact",
