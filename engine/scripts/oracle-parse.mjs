@@ -1088,7 +1088,11 @@ function modifiedTargetOf(phrase) {
     else if (w === "untapped") filter.tapped = false;
     else if (w === "attacking") filter.attacking = true;
     else if (w === "blocking") filter.blocking = true;
-    else if (w === "nonbasic") filter.notSupertype = "basic";
+    else if (w === "unblocked" && words[1]?.toLowerCase() === "attacking") {
+      // "Target unblocked attacking creature": only an attacker is unblocked.
+      filter.unblocked = true;
+      words.shift();
+    } else if (w === "nonbasic") filter.notSupertype = "basic";
     else if (COLOR_WORD[w] !== undefined) filter.colors = [COLOR_WORD[w]];
     else if (/^non(white|blue|black|red|green)$/.test(w)) filter.notColors = [COLOR_WORD[w.slice(3)]];
     else break;
@@ -1794,6 +1798,13 @@ export function parseTrigger(clause) {
   if (/^Whenever ~ attacks a player$/.test(c)) return self("attacks").map((t) => ({ ...t, defender: "player" }));
   if (/^Whenever ~ blocks$/.test(c)) return self("blocks");
   if (/^Whenever ~ becomes blocked$/.test(c)) return self("becomes-blocked");
+  // Once for each creature blocked or blocking (rules 509.3b, 509.3d), that
+  // creature the trigger object: the blocker's event for the one it blocks,
+  // the attacker's for the one blocking it.
+  if ((m = /^Whenever (~|equipped creature|enchanted creature) blocks or becomes blocked by a creature$/.exec(c))) {
+    const who = m[1] === "~" ? "self" : "attached";
+    return [{ on: "blocks", who, object: "blocked" }, { on: "blocked-by", who }];
+  }
   // The attacker is the trigger object (`itOf`), whoever's it is: "equipped
   // creature", "another Goblin you control", "a creature you control with
   // menace", "a Beast".
@@ -5637,6 +5648,26 @@ export function parseSentence(sentence, ctx) {
     if (by !== undefined) {
       return { kind: "restrict", target: m[1] === "~" ? "source" : slot(m[1]), restrictions: [], cantBeBlockedBy: by };
     }
+  }
+  // What a block's other creature takes, as "it" (the trigger object).
+  if (ctx.it === "trigger-object" && ctx.targets.length === 0) {
+    if ((m = re(`~ deals ${N} damage to it`).exec(s))) return { kind: "damage", amount: amount(m[1]), target: "trigger-object" };
+    if (re(`it loses all abilities until end of turn`).test(s)) {
+      return { kind: "lose-abilities", target: "trigger-object", duration: "end-of-turn" };
+    }
+  }
+  // An effect saying attackers become blocked (rule 509.1h): one (Curtain of
+  // Light), X of them (Choking Vines), or all (Fog Patch).
+  if ((m = re(`(${TARGET}) becomes blocked`).exec(s))) {
+    return { kind: "become-blocked", target: slot(m[1]) };
+  }
+  if (re(`attacking creatures become blocked`).test(s)) {
+    return { kind: "become-blocked", filter: { type: "creature", attacking: true } };
+  }
+  if ((m = /^(X target attacking creatures) become blocked\.$/.exec(s))) {
+    const got = quantifiedSlots(m[1], ctx);
+    if (got === undefined || !got.group) return null;
+    return { kind: "for-each-target", from: got.slots[0], effect: { kind: "become-blocked", target: got.slots[0] } };
   }
   // "You may have ~ assign its combat damage this turn as though it weren't
   // blocked" (Gurzigost), and over creatures you control (Predatory Focus):
@@ -11271,6 +11302,15 @@ function parseFaceAsWritten(face, ctx = {}) {
       out.alsoSubtypes = m[1].split(/,? and |, /);
       continue;
     }
+    // Timing with respect to combat (rule 506.8): the steps it means.
+    if (isSpell && /^Cast ~ only during the declare blockers step\.$/.test(line)) {
+      out.castOnlyIf = { kind: "turn-structure", steps: ["declare-blockers"] };
+      continue;
+    }
+    if (isSpell && /^Cast ~ only during combat after blockers are declared\.$/.test(line)) {
+      out.castOnlyIf = { kind: "turn-structure", steps: ["declare-blockers", "combat-damage", "end-combat"] };
+      continue;
+    }
     if (isSpell && line === "Rebound") { out.rebound = true; continue; }
     // Cipher (rule 702.99a) — Gatecrash's encoded instants and sorceries.
     if (isSpell && line === "Cipher") { out.cipher = true; continue; }
@@ -12301,6 +12341,11 @@ function parseFaceAsWritten(face, ctx = {}) {
         ability.condition = { kind: "source", filter: { blockedThisTurn: { relation: "either", partner } } };
         return "";
       });
+      // "During combat after blockers are declared" (rule 506.8g): the steps.
+      rest = rest.replace(/ Activate only during combat after blockers are declared\.$/, () => {
+        ability.condition = { kind: "turn-structure", steps: ["declare-blockers", "combat-damage", "end-combat"] };
+        return "";
+      });
       // Grizzled Wolverine: a creature still blocking it, not merely blocked
       // (rule 509.1h), in that one step, once.
       rest = rest.replace(/ Activate only during the declare blockers step, only if at least one creature is blocking ~, and only once each turn\.$/, () => {
@@ -12344,6 +12389,11 @@ function parseFaceAsWritten(face, ctx = {}) {
       // intervening "if" (the rulings).
       const whileSaddled = / while saddled$/.test(clause);
       if (whileSaddled) clause = clause.replace(/ while saddled$/, "");
+      // "Whenever ~ blocks a creature with flying" (High-Rise Sawjack): once
+      // for each such creature (rule 509.3b), its flying read as the block is
+      // declared (509.3f) and not again, so part of the trigger condition.
+      const blocksWith = /^Whenever ~ blocks a creature with ([a-z]+)$/.exec(clause);
+      const blockedKeyword = blocksWith === null ? undefined : KEYWORDS[blocksWith[1]];
       // "Whenever you tap a land for mana while you're the monarch" (Regal
       // Behemoth): a triggered mana ability, its condition read as it's made.
       const whileMonarch = /^Whenever .+ for mana while you're the monarch$/.test(clause);
@@ -12359,7 +12409,9 @@ function parseFaceAsWritten(face, ctx = {}) {
       const timeCounterOff = /^(Whenever a|When the last) time counter is removed from (?:this card|~) while it's exiled$/.exec(clause);
       const parsedTriggers = timeCounterOff
         ? [{ on: "counters-removed", who: "self", counter: "time", ...(timeCounterOff[1] === "When the last" ? { last: true } : {}) }]
-        : parseTrigger(clause);
+        : blockedKeyword !== undefined
+          ? [{ on: "blocks", who: "self", object: "blocked" }]
+          : parseTrigger(clause);
       if (
         parsedTriggers === null ||
         (whileSaddled && !parsedTriggers.every((t) => t.on === "attacks" && t.who === "self")) ||
@@ -12380,6 +12432,10 @@ function parseFaceAsWritten(face, ctx = {}) {
       if (parsedTriggers.every((t) => t.on === "crews-or-saddles")) {
         rest = rest.replace(/^that (?:Mount or Vehicle|Vehicle or Mount|Vehicle|Mount) /, "it ");
       }
+      // "That creature": the one it blocks or that blocks it, as "it".
+      if (parsedTriggers.every((t) => (t.on === "blocks" && t.object === "blocked") || t.on === "blocked-by")) {
+        rest = rest.replace(/\bthat creature\b/, "it");
+      }
       let oncePerTurn = false;
       rest = rest.replace(/ This ability triggers only once each turn\.$/, () => {
         oncePerTurn = true;
@@ -12393,6 +12449,7 @@ function parseFaceAsWritten(face, ctx = {}) {
         ...(oncePerTurn ? { oncePerTurn: true } : {}),
         ...(timeCounterOff ? { whileSuspended: true } : {}),
         ...(whileSaddled ? { whileCondition: { kind: "source", filter: { saddled: true } } } : {}),
+        ...(blockedKeyword !== undefined ? { whileCondition: { kind: "trigger-object", filter: { keyword: blockedKeyword } } } : {}),
         ...(whileMonarch ? { condition: { kind: "monarch", who: "you" } } : {}),
         ...(duringMain
           ? {
@@ -13582,6 +13639,8 @@ function itOf(triggers) {
   if (triggers.every((t) => t.on === "crews-or-saddles")) return "trigger-object";
   // "That creature": what the damage was dealt to.
   if (triggers.every((t) => t.on === "deals-damage" && t.to === "creature")) return "trigger-recipient";
+  // "That creature": the one it blocks or that blocks it.
+  if (triggers.every((t) => (t.on === "blocks" && t.object === "blocked") || t.on === "blocked-by")) return "trigger-object";
   const objectEvents = ["enters-battlefield", "dies", "attacks", "blocks", "becomes-blocked", "deals-combat-damage-to-player", "tapped-for-mana"];
   if (triggers.every((t) => t.who === "self" && objectEvents.includes(t.on))) return "source";
   // The permanent a spell or ability targeted ("that creature" — Monk Gyatso).

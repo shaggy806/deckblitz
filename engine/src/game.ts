@@ -33243,6 +33243,15 @@ export class Game {
         invalidateComputedCache();
         this.emit({ type: "removed-from-combat", object: target.object });
       },
+      becomeBlocked: (on) => {
+        const ids =
+          "kind" in on && (on.kind === "object" || on.kind === "player")
+            ? on.kind === "object"
+              ? [on.object]
+              : []
+            : this.battlefieldMatching(controller, on as CardFilter);
+        for (const id of ids) this.becomeBlocked(id);
+      },
       loseKeywords: (on, keywords, duration, scopeTo, cantHave) => {
         const lasting = lastingHere(duration);
         if ("kind" in on && (on.kind === "object" || on.kind === "player")) {
@@ -42406,6 +42415,19 @@ export class Game {
   /** Rule 506.4: `id` stops being an attacking, blocking, blocked or
    * unblocked creature. An attacker it was blocking stays blocked (506.4,
    * 509.1h), with one blocker fewer to deal and be dealt damage. */
+  /**
+   * An effect says this attacker becomes blocked (rule 509.1h): blocked with
+   * no creature blocking it, which "becomes blocked" triggers see, only if it
+   * was unblocked (509.3c).
+   */
+  private becomeBlocked(id: ObjectId): void {
+    const attacker = this.state.objects[id];
+    if (attacker?.zone !== "battlefield" || attacker.attacking === null || attacker.blocked) return;
+    attacker.blocked = true;
+    invalidateComputedCache();
+    this.emit({ type: "attacker-blocked", attacker: id, blockers: [...attacker.blockedBy] });
+  }
+
   private removeFromCombat(id: ObjectId): void {
     const object = this.state.objects[id];
     if (object.attacking === null && object.blocking === null) return;

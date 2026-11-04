@@ -5768,6 +5768,24 @@ export type EffectSpec =
     }
   | {
       /**
+       * "Target unblocked attacking creature **becomes blocked**" (rule
+       * 509.1h — Curtain of Light, Trap Runner): it's a blocked creature,
+       * with no creature blocking it, until it leaves combat or combat ends.
+       * That works on one that can't be blocked: no block is declared. It
+       * deals no combat damage unless it has trample, when all of it goes to
+       * what it's attacking (702.19e), and "becomes blocked" triggers, but
+       * only for one that was unblocked (509.3c); "becomes blocked by a
+       * creature" doesn't (509.3d). Nothing for one already blocked or not
+       * attacking. `target` is one creature; `filter` instead is each
+       * permanent matching it as this resolves (Fog Patch's "attacking
+       * creatures become blocked").
+       */
+      readonly kind: "become-blocked";
+      readonly target?: EffectTargetRef;
+      readonly filter?: CardFilter;
+    }
+  | {
+      /**
        * "Target creature **loses flying** until end of turn" (Emerald Charm):
        * the keywords are taken away in layer 6 at this effect's timestamp
        * (rule 613.7) — from what had them before, printed or granted earlier;
@@ -11361,6 +11379,9 @@ export interface EffectApi {
   incubate(amount: number): void;
   /** See the `"remove-from-combat"` {@link EffectSpec}. */
   removeFromCombat(target: TargetRef): void;
+  /** See the `"become-blocked"` {@link EffectSpec}: one creature, or every
+   * attacker matching `filter`. */
+  becomeBlocked(on: TargetRef | CardFilter): void;
   /** See the `"lose-keywords"` {@link EffectSpec}: one permanent, or every
    * one matching `filter`. */
   loseKeywords(
@@ -16435,6 +16456,15 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "remove-from-combat": {
       const target = resolveEffectTarget(spec.target, ctx);
       if (target !== undefined) ctx.removeFromCombat(target);
+      return;
+    }
+    case "become-blocked": {
+      if (spec.filter !== undefined) {
+        ctx.becomeBlocked(spec.filter);
+        return;
+      }
+      const target = spec.target === undefined ? undefined : resolveEffectTarget(spec.target, ctx);
+      if (target !== undefined) ctx.becomeBlocked(target);
       return;
     }
     case "lose-keywords": {

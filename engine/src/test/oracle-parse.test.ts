@@ -6966,6 +6966,30 @@ describe("creatures in a blocking relation (blockingRelation)", () => {
     const cyclops = face("Rampaging Cyclops", "Creature — Cyclops", "This creature gets -2/-0 as long as two or more creatures are blocking it.");
     expect(cyclops.complete).toBe(true);
     expect(cyclops.static[0].condition).toEqual({ kind: "source", filter: { blockerCount: { op: "gte", n: 2 } } });
+    // An effect's block (rule 509.1h), and a block's other creature.
+    const curtain = face("Curtain of Light", "Instant", "Cast this spell only during combat after blockers are declared.\nTarget unblocked attacking creature becomes blocked. (This spell works on creatures that can't be blocked.)\nDraw a card.");
+    expect(curtain.complete).toBe(true);
+    expect(curtain.castOnlyIf).toEqual({ kind: "turn-structure", steps: ["declare-blockers", "combat-damage", "end-combat"] });
+    expect(curtain.targets[0]).toEqual({ kind: "permanent", filter: { type: "creature", unblocked: true } });
+    const fogPatch = face("Fog Patch", "Instant", "Cast this spell only during the declare blockers step.\nAttacking creatures become blocked. (This spell works on creatures that can't be blocked.)");
+    expect(fogPatch.complete).toBe(true);
+    expect(fogPatch.effect).toEqual({ kind: "become-blocked", filter: { type: "creature", attacking: true } });
+    const runner = face("Trap Runner", "Creature — Human Soldier", "{T}: Target unblocked attacking creature becomes blocked. Activate only during combat after blockers are declared. (This ability works on creatures that can't be blocked.)");
+    expect(runner.complete).toBe(true);
+    expect(runner.activated[0].effect).toEqual({ kind: "become-blocked", target: 0 });
+    const sawjack = face("High-Rise Sawjack", "Creature — Elf Citizen", "Reach\nWhenever this creature blocks a creature with flying, this creature gets +2/+0 until end of turn.");
+    expect(sawjack.complete).toBe(true);
+    expect(sawjack.triggered[0]).toMatchObject({
+      trigger: { on: "blocks", who: "self", object: "blocked" },
+      whileCondition: { kind: "trigger-object", filter: { keyword: "flying" } },
+    });
+    const blade = face("Barrow-Blade", "Artifact — Equipment", "Equipped creature gets +1/+1.\nWhenever equipped creature blocks or becomes blocked by a creature, that creature loses all abilities until end of turn.\nEquip {1}");
+    expect(blade.complete).toBe(true);
+    expect(blade.triggered.map((t: { trigger: unknown }) => t.trigger)).toEqual([
+      { on: "blocks", who: "attached", object: "blocked" },
+      { on: "blocked-by", who: "attached" },
+    ]);
+    expect(blade.triggered[0].effect).toMatchObject({ target: "trigger-object" });
     // The turn's attack history (rule 506.3 — War Historian).
     const historian = face("War Historian", "Creature — Human Monk", "Reach\nThis creature has indestructible as long as it attacked a battle this turn.");
     expect(historian.complete).toBe(true);

@@ -551,6 +551,10 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   // Out of combat: an opponent's attacker or blocker, or one's own attacker
   // saved from a block — the board's call, or the card's own `whose`.
   "remove-from-combat": none,
+  // Its damage kept from what it's attacking: an opponent's attacker's harm.
+  "become-blocked": (n, v) => {
+    if (n.target !== undefined) v.touch(n.target, "harm", MAJOR);
+  },
   // Losing a keyword hurts — but losing defender helps (Jaded Analyst).
   "lose-keywords": (n, v) => {
     const side = n.keywords.every((k) => k === "defender") ? "help" : "harm";
