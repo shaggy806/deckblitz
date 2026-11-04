@@ -7533,6 +7533,20 @@ export type EffectSpec =
     }
   | {
       /**
+       * "Gain control of target spell" (Commandeer, Aethersnatch): the effect's
+       * controller controls the spell in target slot `target` from here on, so
+       * its "you" is them, and a target it has is judged from their side
+       * (rule 112.2; a `change-targets` after this offers those). Whoever cast
+       * it still did (`spellCaster`), and it still goes to its owner's zones.
+       * The permanent it becomes is theirs, its default controller still the
+       * player who cast it (rule 110.2b), and it goes back to that player if
+       * they leave the game (800.4a; 800.4c if that player has left too).
+       */
+      readonly kind: "gain-control-spell";
+      readonly target: number;
+    }
+  | {
+      /**
        * "Exile that card instead of putting it into your graveyard as it
        * resolves. If you do, return it to your hand at the beginning of the
        * next end step" (Feather, the Redeemed). Marks the spell whose casting
@@ -12536,6 +12550,9 @@ export interface EffectApi {
    * this effect's controller choosing — see the `change-targets`
    * {@link EffectSpec}. */
   changeTargets(target: TargetRef, how: "change" | "change-one" | "choose-new", toSource: boolean, optional: boolean): void;
+  /** This effect's controller gains control of the spell at `TargetRef` — see
+   * the `gain-control-spell` {@link EffectSpec}. */
+  gainControlOfSpell(target: TargetRef): void;
   /** The spell whose casting fired this triggered ability, as it is on the
    * stack or as it last was there (rule 608.2h); `null` if nothing cast one. */
   triggerSpell(): SpellSnapshot | null;
@@ -18886,6 +18903,11 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "change-targets": {
       const target = ctx.targets[spec.target];
       if (target !== undefined) ctx.changeTargets(target, spec.how, spec.to === "source", spec.optional === true);
+      return;
+    }
+    case "gain-control-spell": {
+      const target = ctx.targets[spec.target];
+      if (target !== undefined && !illegalSlot(spec.target, ctx)) ctx.gainControlOfSpell(target);
       return;
     }
     case "copy-ability": {

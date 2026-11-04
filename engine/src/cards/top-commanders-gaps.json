@@ -12,6 +12,7 @@
   "stat:do-this-once-each-turn",
   "zone:graveyard-cast-permission-one-use",
   "effect:exile-transform-return",
+  "effect:gain-control-spell",
   "cost:exile-cards-from-hand-cost-reduction",
   "effect:exiled-with-source-to-graveyard",
   "stat:cast-using-mana-from-this-source",

@@ -33,7 +33,7 @@ import { hasRingBearerDesignation, isRingBearer } from "./ring.js";
 import type { Color, ManaCost, ManaFromSpec } from "./mana.js";
 import { COLORS, colorSymbols, manaOriginMatches, manaValue, parseManaCost } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
-import { LOCKED_ROOM, activePlayerOf, blockedAttackersOf, controllersLastTurn, isTokenNow, manaCostOverride, nameOf, permanentCount, printedCardName, rulesTextName } from "./state.js";
+import { LOCKED_ROOM, spellCaster, activePlayerOf, blockedAttackersOf, controllersLastTurn, isTokenNow, manaCostOverride, nameOf, permanentCount, printedCardName, rulesTextName } from "./state.js";
 import type { GameObject, GameState, LastKnownInfo, ZoneType } from "./state.js";
 import { CREATURE_TYPES } from "./creature-types.js";
 import { EVERY_CREATURE_TYPE, EVERY_LAND_TYPE, hasSubtype, isCreatureType, isLandType, isTypeMarker } from "./subtypes.js";
@@ -2484,7 +2484,7 @@ export function matchesFilter(
     const cast =
       live !== undefined && live.zone === "stack"
         ? live.kind === "card" && live.castFrom !== undefined
-          ? { by: live.controller, from: live.castFrom, via: live.castVia ?? undefined }
+          ? { by: spellCaster(live), from: live.castFrom, via: live.castVia ?? undefined }
           : undefined
         : entry?.cast;
     if (filter.cast !== undefined && (cast !== undefined) !== filter.cast) return false;

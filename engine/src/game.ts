@@ -414,6 +414,7 @@ import {
   phasedOutIds,
   heldThroughUntapStepOf,
   printedCardName,
+  spellCaster,
   rulesTextName,
   textNameOf,
   nameOf,
@@ -26540,6 +26541,30 @@ export class Game {
    * to ask for first (`askEnterChoice`). It waits on the stack meanwhile,
    * still resolving, and this runs again with the answer (`PendingEntry`).
    */
+  /**
+   * The permanent a spell someone gained control of became (rule 110.2b): the
+   * effects giving them control go on applying to it, under the player who put
+   * the spell on the stack by default. That's a default like one "put onto the
+   * battlefield under your control" (`entered`, older than any effect), and
+   * nothing at all when that player owns it, as a permanent's owner is the
+   * default here (`recomputeControlNow`). It entered under the latest of them,
+   * so no `control-changed`: nothing has changed hands.
+   */
+  private keepSpellControl(id: ObjectId, effects: readonly ControlEffect[], putOnStackBy: PlayerId | undefined): void {
+    const object = this.state.objects[id];
+    const byDefault =
+      putOnStackBy !== undefined && putOnStackBy !== object.owner
+        ? [{ controller: putOnStackBy, timestamp: 0, untilEndOfTurn: false, entered: true as const }]
+        : [];
+    object.controlEffects = [...(object.controlEffects ?? []), ...byDefault, ...effects];
+    const latest = effects[effects.length - 1];
+    if (object.controller === latest.controller) return;
+    object.controller = latest.controller;
+    object.summoningSick = true;
+    object.controlSinceSeq = this.state.timestampSeq;
+    invalidateComputedCache();
+  }
+
   private enterPermanentSpell(id: ObjectId): void {
     const object = this.state.objects[id];
     if (object === undefined || object.zone !== "stack") return;
@@ -26588,6 +26613,10 @@ export class Game {
     // battlefield under your control" (rule 110.2), not a control-changing
     // effect.
     const under = object.controller !== object.owner ? object.controller : undefined;
+    // Who gained control of the spell (Commandeer), and who put it on the
+    // stack: read before the move, which ends both with the stack.
+    const spellControl = object.controlEffects;
+    const putOnStackBy = object.putOnStackBy;
     // A face-down spell resolves into a face-down permanent (rule 708.4).
     const down = object.faceDown?.kind;
     // Its sneak cost paid: it enters tapped and attacking what the returned
@@ -26603,7 +26632,9 @@ export class Game {
     if (sneakAt !== undefined && this.state.objects[id]?.zone === "battlefield") {
       this.putIntoAttack([id], this.state.objects[id].controller, { defender: sneakAt });
     }
-    if (under !== undefined && this.state.objects[id]?.zone === "battlefield" && this.state.objects[id].controller !== under) {
+    if (spellControl !== undefined && this.state.objects[id]?.zone === "battlefield") {
+      this.keepSpellControl(id, spellControl, putOnStackBy);
+    } else if (under !== undefined && this.state.objects[id]?.zone === "battlefield" && this.state.objects[id].controller !== under) {
       this.gainControlByEffect(under, { kind: "object", object: id }, false, true, { split: false });
       this.state.objects[id].summoningSick = true;
     }
@@ -27454,6 +27485,8 @@ export class Game {
     return (
       object.isCopy !== true &&
       object.castFrom === "hand" &&
+      // "Cast from **your** hand": not for whoever has gained control of it.
+      spellCaster(object) === object.controller &&
       (this.registry.get(printedCardName(object)).rebound ||
         computeCharacteristics(this.state, this.registry, object.id).keywords.has("rebound"))
     );
@@ -36362,6 +36395,7 @@ export class Game {
       copySpell: (target, newTargets, by, change) => this.copySpellByEffect(by ?? controller, target, newTargets, change),
       changeTargets: (target, how, toSource, optional) =>
         this.changeStackTargets(controller, source, target, how, toSource, optional),
+      gainControlOfSpell: (target) => this.gainControlOfSpell(controller, target),
       copyAbility: (target, newTargets) => this.copyAbilityByEffect(controller, target, triggerObject, newTargets),
       triggerSpell: () => {
         // The spell whose casting fired this (rule 603.2), as it is if it's
@@ -41872,6 +41906,25 @@ export class Game {
    * the answer is forced — one slot, one target it can go to — and then
    * changed at once; nothing at all when nothing can change.
    */
+  /** See the `"gain-control-spell"` {@link EffectSpec}. Each such effect is kept
+   * on the spell (`controlEffects`, oldest first), so that the one before it
+   * applies again if `player` leaves the game (800.4a, `leaveGame`). */
+  private gainControlOfSpell(player: PlayerId, target: TargetRef): void {
+    if (target.kind !== "object") return;
+    const spell = this.state.objects[target.object];
+    if (spell === undefined || spell.zone !== "stack" || spell.kind === "ability") return;
+    spell.putOnStackBy ??= spell.controller;
+    spell.controlEffects = [
+      ...(spell.controlEffects ?? []),
+      { controller: player, timestamp: this.freshTimestamp(), untilEndOfTurn: false, madeAtSeq: this.state.eventSeq },
+    ];
+    const previousController = spell.controller;
+    if (previousController === player) return;
+    spell.controller = player;
+    invalidateComputedCache();
+    this.emit({ type: "spell-control-changed", object: spell.id, controller: player, previousController });
+  }
+
   private changeStackTargets(
     chooser: PlayerId,
     effectSource: ObjectId,
@@ -49998,15 +50051,15 @@ export class Game {
     // A commander headed for a hand waits on the stack for its owner's 903.9b
     // answer (`moveObject` returns `false`); it's countered all the same.
     const controller = object.controller;
-    // Cast, it has a `castFrom` until this move. Nothing changes a spell's
-    // controller yet, so its controller is who cast it.
-    const cast = object.castFrom !== undefined;
+    // Cast, it has a `castFrom` until this move, and who cast it may no longer
+    // control it (Commandeer).
+    const castBy = object.castFrom !== undefined ? spellCaster(object) : undefined;
     if (into === "library-top" || into === "library-bottom") {
       this.putOnLibrary(id, into === "library-top" ? "top" : "bottom");
     } else {
       this.moveObject(id, into);
     }
-    this.emit({ type: "spell-countered", object: id, controller, by, ...(cast ? { castBy: controller } : {}) });
+    this.emit({ type: "spell-countered", object: id, controller, by, ...(castBy !== undefined ? { castBy } : {}) });
     return true;
   }
 
@@ -53306,8 +53359,21 @@ export class Game {
     for (const id of [...this.state.zones.shared.stack]) {
       const object = this.state.objects[id];
       if (object === undefined) continue;
+      // A spell someone gained control of (Commandeer): an effect giving this
+      // player control ends, so the latest one left applies, else it's who
+      // put it on the stack again (800.4a). That player may have left too,
+      // and then it's exiled like one of this player's own (800.4c).
+      if (object.putOnStackBy !== undefined) {
+        const kept = (object.controlEffects ?? []).filter((e) => e.controller !== player);
+        if (kept.length > 0) object.controlEffects = kept;
+        else delete object.controlEffects;
+        const latest = kept.filter((e) => !this.state.players[e.controller].hasLost).at(-1);
+        object.controller = latest?.controller ?? object.putOnStackBy;
+      }
+      const orphaned = object.controller === player || this.state.players[object.controller].hasLost;
       if (object.kind === "ability" || object.isCopy === true) {
-        if (object.controller === player) this.removeAbilityFromStack(id);
+        // A copy's owner is who put it on the stack (rule 112.2).
+        if (orphaned || (object.isCopy === true && spellCaster(object) === player)) this.removeAbilityFromStack(id);
         continue;
       }
       if (object.owner === player) {
@@ -53317,7 +53383,7 @@ export class Game {
         } finally {
           this.departing = null;
         }
-      } else if (object.controller === player) {
+      } else if (orphaned) {
         this.moveObject(id, "exile");
       }
     }
@@ -55790,7 +55856,7 @@ export class Game {
             ...(previousZone === "stack" && object.kind === "card" && object.castFrom !== undefined
               ? {
                   cast: {
-                    by: object.controller,
+                    by: spellCaster(object),
                     from: object.castFrom,
                     ...(object.castVia != null ? { via: object.castVia } : {}),
                   },
@@ -56128,6 +56194,7 @@ export class Game {
     object.enteredGiftTo = enteringGiftTo;
     object.entry = entry;
     object.castFrom = undefined;
+    delete object.putOnStackBy;
     delete object.convokedBy;
     // The O-Ring link (rule 610.3) dies with any move: a card that leaves
     // exile some other way is no longer the one the Banishing Light took, so

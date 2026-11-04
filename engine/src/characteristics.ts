@@ -71,6 +71,7 @@ import {
   printedCardName,
   playerCountersHeld,
   rulesTextName,
+  spellCaster,
   speedOf,
   textChangesOf,
 } from "./state.js";
@@ -1978,7 +1979,10 @@ export function spellGrantReaches(
   // An emblem's works from the command zone (rule 113.6p).
   if ((source.zone !== "battlefield" && source.kind !== "emblem") || hasLostAbilities(state, registry, source)) return false;
   if (state.players[source.controller]?.hasLost === true) return false;
-  if (grant.allSpells !== true && spell.controller !== source.controller) return false;
+  // "The first … spell you cast each turn" asks who cast it (Commandeer can
+  // change who controls it); every other grant, who controls it.
+  const whose = grant.firstEachTurn === true ? spellCaster(spell) : spell.controller;
+  if (grant.allSpells !== true && whose !== source.controller) return false;
   if (grant.castFrom !== undefined && (spell.castFrom === undefined || !grant.castFrom.includes(spell.castFrom))) {
     return false;
   }
@@ -1999,7 +2003,7 @@ export function spellGrantReaches(
   // this is the first — this cast of it, not an earlier one of the same card.
   if (grant.firstEachTurn === true) {
     const filter = grant.filter;
-    const first = (state.players[spell.controller]?.spellsCastThisTurnAs ?? []).find(
+    const first = (state.players[spellCaster(spell)]?.spellsCastThisTurnAs ?? []).find(
       (cast) =>
         filter === undefined ||
         matchesFilter(state, registry, cast.id, filter, { you: source.controller, snapshot: cast.spell }),
@@ -2064,7 +2068,7 @@ export function turnSpellGrantReaches(
   grant: SpellGrantThisTurn,
   spell: GameObject,
 ): boolean {
-  if (spell.zone !== "stack" || spell.kind !== "card" || spell.controller !== grant.player) return false;
+  if (spell.zone !== "stack" || spell.kind !== "card" || spellCaster(spell) !== grant.player) return false;
   if (grant.next === true) {
     return grant.usedBy?.id === spell.id && grant.usedBy.zoneChangeCount === (spell.zoneChangeCount ?? 0);
   }

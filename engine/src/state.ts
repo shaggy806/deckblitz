@@ -214,6 +214,14 @@ export interface GameObject {
    * onto the battlefield records as `entry.cast.from`. Gone with its next
    * move. */
   castFrom?: ZoneType;
+  /**
+   * Who put this spell on the stack (rule 112.2), kept once something else
+   * comes to control it (Commandeer — its `controlEffects` hold who since,
+   * oldest first); absent, its controller did. It's who cast it, and who
+   * controls the permanent it becomes by default (rule 110.2b), so read it
+   * through {@link spellCaster}. Gone with its next move.
+   */
+  putOnStackBy?: PlayerId;
   /** The creatures that convoked this spell (rule 702.51a), each as the
    * battlefield stint it tapped from, in the order they were tapped — "each
    * creature that convoked this spell" (Lethal Scheme). Gone with its next
@@ -7015,6 +7023,11 @@ export const printedCardName = (object: GameObject): string =>
     : object.doors !== undefined && !object.doors.left && !object.doors.right
       ? LOCKED_ROOM
       : (object.flippedName ?? mergedTopName(object) ?? object.copyOf ?? faceName(object));
+
+/** Who put the spell `object` on the stack, cast it if it was cast: its
+ * controller, unless something has changed that since (rule 112.2). "You" on
+ * the spell is its controller; "a spell you cast" and "if you cast it" are this. */
+export const spellCaster = (object: GameObject): PlayerId => object.putOnStackBy ?? object.controller;
 
 /** A merged permanent's topmost component's name, when that isn't its own
  * card (rule 730.2a). */

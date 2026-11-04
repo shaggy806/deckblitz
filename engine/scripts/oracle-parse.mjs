@@ -9410,6 +9410,14 @@ export function parseEffect(text, outer) {
       skip = copied.used - 1;
       continue;
     }
+    // "Gain control of target spell. You may choose new targets for it."
+    const gained = gainControlSpellAt(sentences, i, ctx);
+    if (gained !== null) {
+      parsed.push(gained.effect);
+      hints.push({ sentence, effect: gained.effect });
+      skip = gained.used - 1;
+      continue;
+    }
     // A choice among the spell's own targets as it resolves (Incriminate,
     // Barrin's Spite): two or three sentences, one `choose-among-targets`.
     // A removal of counters and "that many" after it (`countersRemovedAt`).
@@ -16291,6 +16299,28 @@ function enterAsAt(sentences, i, ctx) {
   };
   const out = withAs(effect);
   return out === null ? fail() : { effect: out, used: 2 };
+}
+
+/**
+ * "Gain control of target [noncreature] spell. You may choose new targets for
+ * it." (Commandeer, Aethersnatch — rule 115.7d): the change of control first,
+ * so the new targets are judged from the new controller's side.
+ */
+function gainControlSpellAt(sentences, i, ctx) {
+  if (!/^you may choose new targets for it\.$/i.test(sentences[i + 1] ?? "")) return null;
+  const m = /^gain control of target (noncreature )?spell\.$/i.exec(sentences[i]);
+  if (m === null) return null;
+  const target = ctx.target(m[1] !== undefined ? "noncreature-spell" : "spell");
+  return {
+    effect: {
+      kind: "sequence",
+      effects: [
+        { kind: "gain-control-spell", target },
+        { kind: "change-targets", target, how: "choose-new" },
+      ],
+    },
+    used: 2,
+  };
 }
 
 /**

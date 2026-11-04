@@ -708,6 +708,8 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   // Turning a spell or ability aside is done to someone else's — the removal
   // aimed at your creature (Bolt Bend, Deflecting Swat, Spellskite).
   "change-targets": (n, v) => v.touch(n.target, "harm", MAJOR),
+  // Someone else's spell, made yours (Commandeer): your own is already.
+  "gain-control-spell": (n, v) => v.touch(n.target, "harm", DECISIVE),
   "exile-spell-as-it-resolves": none,
   // A plotted card is its owner's to cast free: always one's own card.
   "become-plotted": (n, v) => v.touch(n.target, "help", MINOR),

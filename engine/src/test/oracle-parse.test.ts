@@ -15709,6 +15709,38 @@ describe("cards from hand taking {2} off", () => {
   });
 });
 
+describe("gaining control of a spell", () => {
+  it("reads Commandeer's", () => {
+    const face = parseFace({
+      name: "Commandeer",
+      type_line: "Instant",
+      mana_cost: "{5}{U}{U}",
+      colors: ["U"],
+      oracle_text:
+        "You may exile two blue cards from your hand rather than pay this spell's mana cost.\nGain control of target noncreature spell. You may choose new targets for it. (If that spell is an artifact, enchantment, or planeswalker, the permanent enters under your control.)",
+    });
+    expect(face.targets).toEqual(["noncreature-spell"]);
+    expect(face.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "gain-control-spell", target: 0 },
+        { kind: "change-targets", target: 0, how: "choose-new" },
+      ],
+    });
+  });
+
+  it("reads Aethersnatch's target", () => {
+    const face = parseFace({
+      name: "Aethersnatch",
+      type_line: "Instant",
+      mana_cost: "{4}{U}{U}",
+      colors: ["U"],
+      oracle_text: "Gain control of target spell. You may choose new targets for it. (If that spell becomes a permanent, it enters under your control.)",
+    });
+    expect(face.targets).toEqual(["spell"]);
+  });
+});
+
 describe("a Praetor's flip", () => {
   const face = (name: string, mana_cost: string, oracle_text: string) =>
     parseFace({ name, type_line: "Legendary Creature — Phyrexian Praetor", mana_cost, colors: [], oracle_text });

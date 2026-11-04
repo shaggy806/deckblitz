@@ -1185,6 +1185,14 @@ export type GameEvent =
       readonly untilEndOfTurn: boolean;
     })
   | (Base & {
+      /** `controller` gained control of a spell on the stack (Commandeer):
+       * not a permanent, so not a `control-changed` for what watches those. */
+      readonly type: "spell-control-changed";
+      readonly object: ObjectId;
+      readonly controller: PlayerId;
+      readonly previousController: PlayerId;
+    })
+  | (Base & {
       /** A Clone-style permanent chose what to copy (rule 707); `copyOf` is
        * `null` when it copied nothing. */
       readonly type: "permanent-copied";
