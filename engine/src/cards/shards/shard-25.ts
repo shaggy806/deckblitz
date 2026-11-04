@@ -201,6 +201,7 @@ import _poolDonAndresTheRenegade from "../pool/don-andres-the-renegade.js";
 import _poolDonaldBlakeGuiseOfThor from "../pool/donald-blake-guise-of-thor.js";
 import _poolDonatelloTurtleTechie from "../pool/donatello-turtle-techie.js";
 import _poolDovescape from "../pool/dovescape.js";
+import _poolDovinBaan from "../pool/dovin-baan.js";
 import _poolDovinsVeto from "../pool/dovins-veto.js";
 import _poolDraconicDisciple from "../pool/draconic-disciple.js";
 import _poolDragUnder from "../pool/drag-under.js";
@@ -1081,6 +1082,7 @@ const shard: CardShard = {
     _poolDonaldBlakeGuiseOfThor,
     _poolDonatelloTurtleTechie,
     _poolDovescape,
+    _poolDovinBaan,
     _poolDovinsVeto,
     _poolDraconicDisciple,
     _poolDragUnder,

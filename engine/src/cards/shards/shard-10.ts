@@ -235,6 +235,7 @@ import _poolEarwigSquad from "../pool/earwig-squad.js";
 import _poolEccentricFarmer from "../pool/eccentric-farmer.js";
 import _poolEchoOfDusk from "../pool/echo-of-dusk.js";
 import _poolEclipsedMerrow from "../pool/eclipsed-merrow.js";
+import _poolEdificeOfAuthority from "../pool/edifice-of-authority.js";
 import _poolEightfoldMaze from "../pool/eightfold-maze.js";
 import _poolEkunduGriffin from "../pool/ekundu-griffin.js";
 import _poolElectrostaticInfantry from "../pool/electrostatic-infantry.js";
@@ -1147,6 +1148,7 @@ const shard: CardShard = {
     _poolEccentricFarmer,
     _poolEchoOfDusk,
     _poolEclipsedMerrow,
+    _poolEdificeOfAuthority,
     _poolEightfoldMaze,
     _poolEkunduGriffin,
     _poolElectrostaticInfantry,

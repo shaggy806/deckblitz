@@ -15,6 +15,7 @@ import _poolAgelessGuardian from "../pool/ageless-guardian.js";
 import _poolAgentsOfHydra from "../pool/agents-of-hydra.js";
 import _poolAirdropAeronauts from "../pool/airdrop-aeronauts.js";
 import _poolAirshipEngineRoom from "../pool/airship-engine-room.js";
+import _poolAirtightAlibi from "../pool/airtight-alibi.js";
 import _poolAjaniUnyielding from "../pool/ajani-unyielding.js";
 import _poolAjanisSunstriker from "../pool/ajanis-sunstriker.js";
 import _poolAkromasMemorial from "../pool/akromas-memorial.js";
@@ -943,6 +944,7 @@ const shard: CardShard = {
     _poolAgentsOfHydra,
     _poolAirdropAeronauts,
     _poolAirshipEngineRoom,
+    _poolAirtightAlibi,
     _poolAjaniUnyielding,
     _poolAjanisSunstriker,
     _poolAkromasMemorial,

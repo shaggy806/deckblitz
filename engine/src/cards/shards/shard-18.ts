@@ -872,6 +872,7 @@ import _poolXiraArien from "../pool/xira-arien.js";
 import _poolYiazmatUltimateMark from "../pool/yiazmat-ultimate-mark.js";
 import _poolYoureNotAlone from "../pool/youre-not-alone.js";
 import _poolYshtolaNightsBlessed from "../pool/yshtola-nights-blessed.js";
+import _poolYuanShaosInfantry from "../pool/yuan-shaos-infantry.js";
 import _poolYukiOnna from "../pool/yuki-onna.js";
 import _poolZaxaraTheExemplary from "../pool/zaxara-the-exemplary.js";
 import _poolZimoneAndDina from "../pool/zimone-and-dina.js";
@@ -1775,6 +1776,7 @@ const shard: CardShard = {
     _poolYiazmatUltimateMark,
     _poolYoureNotAlone,
     _poolYshtolaNightsBlessed,
+    _poolYuanShaosInfantry,
     _poolYukiOnna,
     _poolZaxaraTheExemplary,
     _poolZimoneAndDina,

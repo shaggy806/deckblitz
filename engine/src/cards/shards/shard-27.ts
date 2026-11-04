@@ -454,6 +454,7 @@ import _poolMischievousPup from "../pool/mischievous-pup.js";
 import _poolMishrasSelfReplicator from "../pool/mishras-self-replicator.js";
 import _poolMistDancer from "../pool/mist-dancer.js";
 import _poolMnemonicDeluge from "../pool/mnemonic-deluge.js";
+import _poolMockingDoppelganger from "../pool/mocking-doppelganger.js";
 import _poolMoltenGatekeeper from "../pool/molten-gatekeeper.js";
 import _poolMomoPlayfulPet from "../pool/momo-playful-pet.js";
 import _poolMonstrosityOfTheLake from "../pool/monstrosity-of-the-lake.js";
@@ -731,6 +732,7 @@ import _poolTalionTheKindlyLord from "../pool/talion-the-kindly-lord.js";
 import _poolTalismanOfIndulgence from "../pool/talisman-of-indulgence.js";
 import _poolTalruumPiper from "../pool/talruum-piper.js";
 import _poolTarriansSoulcleaver from "../pool/tarrians-soulcleaver.js";
+import _poolTauntFromTheRampart from "../pool/taunt-from-the-rampart.js";
 import _poolTawnossWand from "../pool/tawnoss-wand.js";
 import _poolTectonicHellion from "../pool/tectonic-hellion.js";
 import _poolTek from "../pool/tek.js";
@@ -1344,6 +1346,7 @@ const shard: CardShard = {
     _poolMishrasSelfReplicator,
     _poolMistDancer,
     _poolMnemonicDeluge,
+    _poolMockingDoppelganger,
     _poolMoltenGatekeeper,
     _poolMomoPlayfulPet,
     _poolMonstrosityOfTheLake,
@@ -1621,6 +1624,7 @@ const shard: CardShard = {
     _poolTalismanOfIndulgence,
     _poolTalruumPiper,
     _poolTarriansSoulcleaver,
+    _poolTauntFromTheRampart,
     _poolTawnossWand,
     _poolTectonicHellion,
     _poolTek,

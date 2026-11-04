@@ -306,6 +306,7 @@ import _poolFlamingFist from "../pool/flaming-fist.js";
 import _poolFlamingTyrannosaurus from "../pool/flaming-tyrannosaurus.js";
 import _poolFlipTheSwitch from "../pool/flip-the-switch.js";
 import _poolFlowstoneKavu from "../pool/flowstone-kavu.js";
+import _poolFlummoxedCyclops from "../pool/flummoxed-cyclops.js";
 import _poolFlyingDolphinFish from "../pool/flying-dolphin-fish.js";
 import _poolFontOfIre from "../pool/font-of-ire.js";
 import _poolForcedMarch from "../pool/forced-march.js";
@@ -816,6 +817,7 @@ import _poolTajuruSnarecaster from "../pool/tajuru-snarecaster.js";
 import _poolTangleWire from "../pool/tangle-wire.js";
 import _poolTangleweaveArmor from "../pool/tangleweave-armor.js";
 import _poolTarnishedCitadel from "../pool/tarnished-citadel.js";
+import _poolTaskmasterMercenaryMimic from "../pool/taskmaster-mercenary-mimic.js";
 import _poolTasteOfDeath from "../pool/taste-of-death.js";
 import _poolTazeemRoilmage from "../pool/tazeem-roilmage.js";
 import _poolTeleportal from "../pool/teleportal.js";
@@ -1257,6 +1259,7 @@ const shard: CardShard = {
     _poolFlamingTyrannosaurus,
     _poolFlipTheSwitch,
     _poolFlowstoneKavu,
+    _poolFlummoxedCyclops,
     _poolFlyingDolphinFish,
     _poolFontOfIre,
     _poolForcedMarch,
@@ -1767,6 +1770,7 @@ const shard: CardShard = {
     _poolTangleWire,
     _poolTangleweaveArmor,
     _poolTarnishedCitadel,
+    _poolTaskmasterMercenaryMimic,
     _poolTasteOfDeath,
     _poolTazeemRoilmage,
     _poolTeleportal,

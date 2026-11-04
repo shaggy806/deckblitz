@@ -734,6 +734,7 @@ import _poolThalakosSentry from "../pool/thalakos-sentry.js";
 import _poolThallid from "../pool/thallid.js";
 import _poolThassasDevourer from "../pool/thassas-devourer.js";
 import _poolThassasIre from "../pool/thassas-ire.js";
+import _poolTheAnimus from "../pool/the-animus.js";
 import _poolTheDawningArchaic from "../pool/the-dawning-archaic.js";
 import _poolTheEldestReborn from "../pool/the-eldest-reborn.js";
 import _poolTheForetoldSoldier from "../pool/the-foretold-soldier.js";
@@ -1601,6 +1602,7 @@ const shard: CardShard = {
     _poolThallid,
     _poolThassasDevourer,
     _poolThassasIre,
+    _poolTheAnimus,
     _poolTheDawningArchaic,
     _poolTheEldestReborn,
     _poolTheForetoldSoldier,

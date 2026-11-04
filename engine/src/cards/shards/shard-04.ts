@@ -824,6 +824,7 @@ import _poolVileAggregate from "../pool/vile-aggregate.js";
 import _poolVillageCannibals from "../pool/village-cannibals.js";
 import _poolVillainousOgre from "../pool/villainous-ogre.js";
 import _poolVineshaperProdigy from "../pool/vineshaper-prodigy.js";
+import _poolVislorTurlough from "../pool/vislor-turlough.js";
 import _poolVitalizingWind from "../pool/vitalizing-wind.js";
 import _poolVivienOfTheArkbow from "../pool/vivien-of-the-arkbow.js";
 import _poolVivify from "../pool/vivify.js";
@@ -872,6 +873,7 @@ import _poolZealotIlVec from "../pool/zealot-il-vec.js";
 import _poolZephyrFalcon from "../pool/zephyr-falcon.js";
 import _poolZofBloodbog from "../pool/zof-bloodbog.js";
 import _poolZulaportEnforcer from "../pool/zulaport-enforcer.js";
+import _poolZygonInfiltrator from "../pool/zygon-infiltrator.js";
 import _tokens11ThrullToken from "../tokens/1-1-thrull-token.js";
 import _tokens55ElephantToken from "../tokens/5-5-elephant-token.js";
 import _tokensBallisticBoulderToken from "../tokens/ballistic-boulder-token.js";
@@ -1717,6 +1719,7 @@ const shard: CardShard = {
     _poolVillageCannibals,
     _poolVillainousOgre,
     _poolVineshaperProdigy,
+    _poolVislorTurlough,
     _poolVitalizingWind,
     _poolVivienOfTheArkbow,
     _poolVivify,
@@ -1765,6 +1768,7 @@ const shard: CardShard = {
     _poolZephyrFalcon,
     _poolZofBloodbog,
     _poolZulaportEnforcer,
+    _poolZygonInfiltrator,
   ],
   tokens: [
     _tokens11ThrullToken,

@@ -385,6 +385,7 @@ import _poolHungerOfTheNim from "../pool/hunger-of-the-nim.js";
 import _poolHuntedGhoul from "../pool/hunted-ghoul.js";
 import _poolIcehideGolem from "../pool/icehide-golem.js";
 import _poolIllusionaryForces from "../pool/illusionary-forces.js";
+import _poolImmortalObligation from "../pool/immortal-obligation.js";
 import _poolImpetuousProtege from "../pool/impetuous-protege.js";
 import _poolIncreasingDevotion from "../pool/increasing-devotion.js";
 import _poolIndomitableMight from "../pool/indomitable-might.js";
@@ -1290,6 +1291,7 @@ const shard: CardShard = {
     _poolHuntedGhoul,
     _poolIcehideGolem,
     _poolIllusionaryForces,
+    _poolImmortalObligation,
     _poolImpetuousProtege,
     _poolIncreasingDevotion,
     _poolIndomitableMight,

@@ -825,6 +825,7 @@ import _poolTheBattleOfBywater from "../pool/the-battle-of-bywater.js";
 import _poolTheCaveOfTwoLovers from "../pool/the-cave-of-two-lovers.js";
 import _poolTheCircleOfLoyalty from "../pool/the-circle-of-loyalty.js";
 import _poolTheEarthKing from "../pool/the-earth-king.js";
+import _poolTheEverChangingDane from "../pool/the-ever-changing-dane.js";
 import _poolThePrincessTakesFlight from "../pool/the-princess-takes-flight.js";
 import _poolTheReaverCleaver from "../pool/the-reaver-cleaver.js";
 import _poolTheSwarmlord from "../pool/the-swarmlord.js";
@@ -1791,6 +1792,7 @@ const shard: CardShard = {
     _poolTheCaveOfTwoLovers,
     _poolTheCircleOfLoyalty,
     _poolTheEarthKing,
+    _poolTheEverChangingDane,
     _poolThePrincessTakesFlight,
     _poolTheReaverCleaver,
     _poolTheSwarmlord,

@@ -60,6 +60,7 @@ import _poolBishopOfRebirth from "../pool/bishop-of-rebirth.js";
 import _poolBlackcleaveCliffs from "../pool/blackcleave-cliffs.js";
 import _poolBlackcleaveGoblin from "../pool/blackcleave-goblin.js";
 import _poolBladeBlizzardKitsune from "../pool/blade-blizzard-kitsune.js";
+import _poolBladeOfSharedSouls from "../pool/blade-of-shared-souls.js";
 import _poolBlazethornScarecrow from "../pool/blazethorn-scarecrow.js";
 import _poolBlazingHellhound from "../pool/blazing-hellhound.js";
 import _poolBlazingSalvo from "../pool/blazing-salvo.js";
@@ -988,6 +989,7 @@ const shard: CardShard = {
     _poolBlackcleaveCliffs,
     _poolBlackcleaveGoblin,
     _poolBladeBlizzardKitsune,
+    _poolBladeOfSharedSouls,
     _poolBlazethornScarecrow,
     _poolBlazingHellhound,
     _poolBlazingSalvo,

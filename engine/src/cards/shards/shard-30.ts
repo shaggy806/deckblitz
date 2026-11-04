@@ -452,6 +452,7 @@ import _poolLightwielderPaladin from "../pool/lightwielder-paladin.js";
 import _poolLilianaTheLastHope from "../pool/liliana-the-last-hope.js";
 import _poolLimitsOfSolidarity from "../pool/limits-of-solidarity.js";
 import _poolLinSivviDefiantHero from "../pool/lin-sivvi-defiant-hero.js";
+import _poolLinvalaShieldOfSeaGate from "../pool/linvala-shield-of-sea-gate.js";
 import _poolLitaLittleOrphanAmphibian from "../pool/lita-little-orphan-amphibian.js";
 import _poolLivingDestiny from "../pool/living-destiny.js";
 import _poolLonelyArroyo from "../pool/lonely-arroyo.js";
@@ -857,6 +858,7 @@ import _poolVoltCharge from "../pool/volt-charge.js";
 import _poolVoltaicBrawler from "../pool/voltaic-brawler.js";
 import _poolVulpineGoliath from "../pool/vulpine-goliath.js";
 import _poolWalkerOfTheWastes from "../pool/walker-of-the-wastes.js";
+import _poolWallOfDust from "../pool/wall-of-dust.js";
 import _poolWallOfLostThoughts from "../pool/wall-of-lost-thoughts.js";
 import _poolWallOfNets from "../pool/wall-of-nets.js";
 import _poolWanderersIntervention from "../pool/wanderers-intervention.js";
@@ -1365,6 +1367,7 @@ const shard: CardShard = {
     _poolLilianaTheLastHope,
     _poolLimitsOfSolidarity,
     _poolLinSivviDefiantHero,
+    _poolLinvalaShieldOfSeaGate,
     _poolLitaLittleOrphanAmphibian,
     _poolLivingDestiny,
     _poolLonelyArroyo,
@@ -1770,6 +1773,7 @@ const shard: CardShard = {
     _poolVoltaicBrawler,
     _poolVulpineGoliath,
     _poolWalkerOfTheWastes,
+    _poolWallOfDust,
     _poolWallOfLostThoughts,
     _poolWallOfNets,
     _poolWanderersIntervention,

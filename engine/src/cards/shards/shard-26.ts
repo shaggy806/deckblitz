@@ -442,6 +442,7 @@ import _poolLoxodonHierarch from "../pool/loxodon-hierarch.js";
 import _poolLoyalGryff from "../pool/loyal-gryff.js";
 import _poolLumengridSentinel from "../pool/lumengrid-sentinel.js";
 import _poolLupinePrototype from "../pool/lupine-prototype.js";
+import _poolMaChaoWesternWarrior from "../pool/ma-chao-western-warrior.js";
 import _poolMacabreReconstruction from "../pool/macabre-reconstruction.js";
 import _poolMadameWebClairvoyant from "../pool/madame-web-clairvoyant.js";
 import _poolMaddeningCacophony from "../pool/maddening-cacophony.js";
@@ -1354,6 +1355,7 @@ const shard: CardShard = {
     _poolLoyalGryff,
     _poolLumengridSentinel,
     _poolLupinePrototype,
+    _poolMaChaoWesternWarrior,
     _poolMacabreReconstruction,
     _poolMadameWebClairvoyant,
     _poolMaddeningCacophony,

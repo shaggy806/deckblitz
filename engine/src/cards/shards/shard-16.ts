@@ -682,6 +682,7 @@ import _poolScroungingBandar from "../pool/scrounging-bandar.js";
 import _poolScurryOak from "../pool/scurry-oak.js";
 import _poolSeaSnidd from "../pool/sea-snidd.js";
 import _poolSealFromExistence from "../pool/seal-from-existence.js";
+import _poolSecretInvasion from "../pool/secret-invasion.js";
 import _poolSecretSalvage from "../pool/secret-salvage.js";
 import _poolSecurityDetail from "../pool/security-detail.js";
 import _poolSedgeTroll from "../pool/sedge-troll.js";
@@ -1663,6 +1664,7 @@ const shard: CardShard = {
     _poolScurryOak,
     _poolSeaSnidd,
     _poolSealFromExistence,
+    _poolSecretInvasion,
     _poolSecretSalvage,
     _poolSecurityDetail,
     _poolSedgeTroll,

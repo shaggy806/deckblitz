@@ -365,6 +365,7 @@ import _poolHollowhengeBeast from "../pool/hollowhenge-beast.js";
 import _poolHonorWornShaku from "../pool/honor-worn-shaku.js";
 import _poolHornswoggle from "../pool/hornswoggle.js";
 import _poolHorobisWhisper from "../pool/horobis-whisper.js";
+import _poolHotPursuit from "../pool/hot-pursuit.js";
 import _poolHuntedTroll from "../pool/hunted-troll.js";
 import _poolHuntersEdge from "../pool/hunters-edge.js";
 import _poolHurloonShaman from "../pool/hurloon-shaman.js";
@@ -561,6 +562,7 @@ import _poolPlasmaElemental from "../pool/plasma-elemental.js";
 import _poolPlatypusBear from "../pool/platypus-bear.js";
 import _poolPlunderingPredator from "../pool/plundering-predator.js";
 import _poolPoisonbellyOgre from "../pool/poisonbelly-ogre.js";
+import _poolPolymorphousRush from "../pool/polymorphous-rush.js";
 import _poolPredatorsGambit from "../pool/predators-gambit.js";
 import _poolPredatoryRampage from "../pool/predatory-rampage.js";
 import _poolPressTheAdvantage from "../pool/press-the-advantage.js";
@@ -651,6 +653,7 @@ import _poolScytheclaw from "../pool/scytheclaw.js";
 import _poolSearingBarrage from "../pool/searing-barrage.js";
 import _poolSedgeSliver from "../pool/sedge-sliver.js";
 import _poolSeedshipBroodtender from "../pool/seedship-broodtender.js";
+import _poolSereneSleuth from "../pool/serene-sleuth.js";
 import _poolSerraFaithkeeper from "../pool/serra-faithkeeper.js";
 import _poolSerraSphinx from "../pool/serra-sphinx.js";
 import _poolShadesForm from "../pool/shades-form.js";
@@ -1256,6 +1259,7 @@ const shard: CardShard = {
     _poolHonorWornShaku,
     _poolHornswoggle,
     _poolHorobisWhisper,
+    _poolHotPursuit,
     _poolHuntedTroll,
     _poolHuntersEdge,
     _poolHurloonShaman,
@@ -1452,6 +1456,7 @@ const shard: CardShard = {
     _poolPlatypusBear,
     _poolPlunderingPredator,
     _poolPoisonbellyOgre,
+    _poolPolymorphousRush,
     _poolPredatorsGambit,
     _poolPredatoryRampage,
     _poolPressTheAdvantage,
@@ -1542,6 +1547,7 @@ const shard: CardShard = {
     _poolSearingBarrage,
     _poolSedgeSliver,
     _poolSeedshipBroodtender,
+    _poolSereneSleuth,
     _poolSerraFaithkeeper,
     _poolSerraSphinx,
     _poolShadesForm,

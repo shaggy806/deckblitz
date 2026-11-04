@@ -396,6 +396,7 @@ import _poolKorHalberd from "../pool/kor-halberd.js";
 import _poolKothFireOfResistance from "../pool/koth-fire-of-resistance.js";
 import _poolKothTheGeomancer from "../pool/koth-the-geomancer.js";
 import _poolKrenkoTinStreetKingpin from "../pool/krenko-tin-street-kingpin.js";
+import _poolKrosDefenseContractor from "../pool/kros-defense-contractor.js";
 import _poolKrovikanElementalist from "../pool/krovikan-elementalist.js";
 import _poolKumenasAwakening from "../pool/kumenas-awakening.js";
 import _poolLapisOrbOfDragonkind from "../pool/lapis-orb-of-dragonkind.js";
@@ -749,6 +750,7 @@ import _poolTheHunterMaze from "../pool/the-hunter-maze.js";
 import _poolTheMeathookMassacre from "../pool/the-meathook-massacre.js";
 import _poolTheScarletWitch from "../pool/the-scarlet-witch.js";
 import _poolTheSpearOfLeonidas from "../pool/the-spear-of-leonidas.js";
+import _poolTheWarGames from "../pool/the-war-games.js";
 import _poolTheftOfDreams from "../pool/theft-of-dreams.js";
 import _poolThermopod from "../pool/thermopod.js";
 import _poolThicketBasilisk from "../pool/thicket-basilisk.js";
@@ -1284,6 +1286,7 @@ const shard: CardShard = {
     _poolKothFireOfResistance,
     _poolKothTheGeomancer,
     _poolKrenkoTinStreetKingpin,
+    _poolKrosDefenseContractor,
     _poolKrovikanElementalist,
     _poolKumenasAwakening,
     _poolLapisOrbOfDragonkind,
@@ -1637,6 +1640,7 @@ const shard: CardShard = {
     _poolTheMeathookMassacre,
     _poolTheScarletWitch,
     _poolTheSpearOfLeonidas,
+    _poolTheWarGames,
     _poolTheftOfDreams,
     _poolThermopod,
     _poolThicketBasilisk,

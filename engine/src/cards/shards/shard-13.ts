@@ -71,6 +71,7 @@ import _poolBardHeirOfGirion from "../pool/bard-heir-of-girion.js";
 import _poolBarrierBreach from "../pool/barrier-breach.js";
 import _poolBarrowBlade from "../pool/barrow-blade.js";
 import _poolBarrowWitches from "../pool/barrow-witches.js";
+import _poolBatteringRam from "../pool/battering-ram.js";
 import _poolBaxterBuilding from "../pool/baxter-building.js";
 import _poolBeaconBehemoth from "../pool/beacon-behemoth.js";
 import _poolBelunasGatekeeper from "../pool/belunas-gatekeeper.js";
@@ -952,6 +953,7 @@ const shard: CardShard = {
     _poolBarrierBreach,
     _poolBarrowBlade,
     _poolBarrowWitches,
+    _poolBatteringRam,
     _poolBaxterBuilding,
     _poolBeaconBehemoth,
     _poolBelunasGatekeeper,
