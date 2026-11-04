@@ -1816,7 +1816,8 @@
   "static:is-chosen-type",
   "effect:tokens-entered-this-turn-copies",
   "effect:tokens-entered-this-turn-copies",
-  "replacement:copy-spell-additional-time"
+  "replacement:copy-spell-additional-time",
+  "static:pt-per-same-name-as-affected"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

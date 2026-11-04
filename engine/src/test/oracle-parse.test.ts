@@ -15693,3 +15693,24 @@ describe("copying a spell an additional time", () => {
     expect(face.activated[0].effect).toEqual({ kind: "copy-spell", target: 0, newTargets: true });
   });
 });
+
+describe("Mirror Box's lines", () => {
+  it("reads the legend rule off, the legendary anthem and a count of its own name", () => {
+    const face = parseFace({
+      name: "Test Card",
+      type_line: "Artifact",
+      mana_cost: "{3}",
+      oracle_text:
+        'The "legend rule" doesn\'t apply to permanents you control.\nEach legendary creature you control gets +1/+1.\nEach nontoken creature you control gets +1/+1 for each other creature you control with the same name as that creature.',
+    });
+    expect(face.complete).toBe(true);
+    expect(face.static[0].legendRuleOff).toBe(true);
+    expect(face.static[1].grantPt).toEqual([1, 1]);
+    expect(face.static[2].grantPtPerCount).toEqual({
+      filter: { type: "creature", controlledBy: "you", sameNameAsSource: true },
+      relativeToAffected: true,
+      excludeSelf: true,
+      pt: [1, 1],
+    });
+  });
+});

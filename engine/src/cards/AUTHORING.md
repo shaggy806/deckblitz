@@ -4727,7 +4727,8 @@ is "can't attack a player it has already attacked this turn" (Port Razer), by th
 - `grantPt: [p, t]` — layer 7d P/T bonus.
 - `grantPtPerCount`, each affected permanent by its own: `relativeToAffected`
   asks `filter` of it, so `attachedTo: { isSource: true }` is "attached to it"
-  (Thran Power Suit) and `excludeSelf` is "other than it" (Sliver Legion);
+  (Thran Power Suit), `excludeSelf` is "other than it" (Sliver Legion) and
+  `sameNameAsSource` is "with the same name as that creature" (Mirror Box);
   `sharesCreatureTypeWithAffected` is "that shares a creature type with it"
   (Coat of Arms); `ofAffected: "mana-value" | "colors" | "creature-types"` is what
   it has (Hedron Matrix, Civic Saber), `"times-attacked-this-turn"` how many times

@@ -18034,6 +18034,26 @@ function parseStatic(line, text) {
   if (line === "If you would proliferate, proliferate twice instead.") {
     return { affects: { scope: "self" }, replacement: { event: "would-proliferate", times: 2 }, text };
   }
+  // Mirror Box: the rule off, and a count keyed on each affected creature's
+  // own name (rule 201.2a).
+  if (line === 'The "legend rule" doesn\'t apply to permanents you control.') {
+    return { affects: { scope: "filter", filter: { controlledBy: "you" } }, legendRuleOff: true, text };
+  }
+  if (line === "Each legendary creature you control gets +1/+1.") {
+    return { affects: { scope: "filter", filter: { type: "creature", supertype: "legendary", controlledBy: "you" } }, grantPt: [1, 1], text };
+  }
+  if (line === "Each nontoken creature you control gets +1/+1 for each other creature you control with the same name as that creature.") {
+    return {
+      affects: { scope: "filter", filter: { type: "creature", token: false, controlledBy: "you" } },
+      grantPtPerCount: {
+        filter: { type: "creature", controlledBy: "you", sameNameAsSource: true },
+        relativeToAffected: true,
+        excludeSelf: true,
+        pt: [1, 1],
+      },
+      text,
+    };
+  }
   // Twinning Staff (rule 614.1a).
   if (line === "If you would copy a spell one or more times, instead copy it that many times plus an additional time. You may choose new targets for the additional copy.") {
     return { affects: { scope: "self" }, replacement: { event: "would-copy-spell", additional: 1 }, text };

@@ -5090,6 +5090,8 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 
 **A spell copied an additional time (2026-11-04).** `replacement:copy-spell-additional-time`: the `would-copy-spell` replacement over one instruction to copy, however many copies it makes (`Game.withSpellCopyEvent`, around the `copy-spell` effect, storm and Zada's ordered copies). Its additional copies take new targets, and go where their controller chooses among copies that couldn't (`choose-number`'s `placeCopy`). Twinning Staff.
 
+**A count of each affected creature's own name (2026-11-04).** `static:pt-per-same-name-as-affected`: no engine code, `grantPtPerCount` with `relativeToAffected`, `excludeSelf` and `sameNameAsSource`. Mirror Box, and parser templates for its lines.
+
 **The cards just exiled, looked at and put back (2026-11-04).** `effect:exile-from-hand-any-number-swap`: `look-and-choose`'s `zone: "exiled-this-way"`, a face-down card picked itself rather than by its group (rule 406.3), in order (rule 401.4). Scroll Rack.
 
 **Attack you and aren't blocked (2026-11-04).** `trigger:attacks-you-unblocked-batch`: `attacks-player` with `unblocked`, off a `player-attacked-unblocked` event per player attacked directly, as blockers are declared. Coveted Jewel.
