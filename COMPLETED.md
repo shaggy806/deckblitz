@@ -12,6 +12,27 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **Removing from combat with a forced recombat, unblocking and reblocking by effect** (2026-11-04, `e284a643f`): Illusionist's Gambit,
+  False Orders.
+- **Damage dealt this turn read by what dealt it and what took it** (2026-11-04, `62c5c130a`): both Zuberas, Blazing Effigy, Reverse
+  Polarity, Backdraft.
+- **One instruction's zone moves as one event, and what a permanent does as it enters on any entry** (2026-11-04, `5de0deaa6`): Exhume,
+  Crypt Champion, Tempting Wurm, Sword of Hearth and Home, Call Damage Control, Rescuer Sphinx, Living Lore, Sutured Ghoul, Dermotaxi,
+  Mimeoplasm, Frankenstein's Monster.
+- **Reads of cards still exiled with a source: card types, same name** (2026-11-04, `5f3a888c5`): Keen-Eyed Curator, Veteran Survivor,
+  Smirking Spelljacker, Ugin's Labyrinth, Circle of Confinement, Circu, Mindreaver.
+- **Exiled face down from a hand, foretold with a given cost, one-time looks at face-down creatures** (2026-11-04, `1d7d64e5f`):
+  Gustha's Scepter, Bane Alley Broker, Summoner's Egg, The Foretold Soldier, Ethereal Valkyrie, Smoke Teller, Revealing Wind, Spy Network.
+- **Emblems granting activated and triggered abilities and to spells** (2026-11-04, `4306beb9d`): Koth of the Hammer, Mu Yanling, Ral.
+- **Spells countered all at once with a filter, spells returning to hand, and a choice between that and an exile (rule 616.1)**
+  (2026-11-04, `655f2268a`, `6d14676ba`): Swift Silence, Glen Elendra's Answer, Counterflux, Reverse the Polarity, Hanabi Blast, View from
+  Above, Molten Birth, Soulfire Grand Master.
+- **One target slot over several kinds of object, and exiled targets** (2026-11-04, `f7234cd2f`): Unsubstantiate, Voidslime, Siren
+  Stormtamer, Tale's End, Not of This World, Sorceress's Schemes, Riftsweeper, Time Reaper, Espers to Magicite.
+- **Lands with an Adventure, played from exile with a land drop** (2026-11-04, `374c0283d`): Midgar // Reactor Raid, Lindblum // Mage Siege.
+- **Paradigm (rule 702.192a)** (2026-11-04, `c6bbb7d54`): Decorum Dissertation, Germination Practicum, Restoration Seminar.
+- **Friend or foe, a question per player read by two scopes** (2026-11-04, `2e70555bd`): Pir's Whim, Virtus's Maneuver, Khorvath's Fury.
+- **Pawprint modes (rule 700.2i)** (2026-11-04, `4777c5117`): Season of the Burrow, Season of Loss.
 - **Activating an exhaust or a power-up ability as a trigger** (2026-11-03, `26da7aaec`): Rangers' Refueler, Adrenaline Jockey, Marvel Boy.
 - **Counters-put firing per counter, and once for a batch, with `sequence.together` for one instruction** (2026-11-03, `1b58e989c`,
   `c6b7f4020`): Fathom Mage, Flourishing Defenses, Bloodcrazed Hoplite, Invisible Woman, Bioessence Hydra.

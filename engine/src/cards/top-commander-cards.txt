@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4314 already implemented / 686 missing (marks refreshed 2026-11-04)
+4317 already implemented / 683 missing (marks refreshed 2026-11-04)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -896,7 +896,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   900  Raise the Palisade                       {4}{U}           Sorcery
 [x]   901  Burgeoning                               {G}              Enchantment
 [x]   902  Blade of Selves                          {2}              Artifact — Equipment
-[ ]   903  Sword of Hearth and Home                 {3}              Artifact — Equipment
+[x]   903  Sword of Hearth and Home                 {3}              Artifact — Equipment
 [ ]   904  Ojer Taq, Deepest Foundation // Temple of Civilization {6}              Legendary Creature — God // Land
 [x]   905  Spell Pierce                             {U}              Instant
 [ ]   906  Field of Ruin                            {0}              Land
@@ -3848,7 +3848,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3855  Hakbal of the Surging Soul               {2}{G}{U}        Legendary Creature — Merfolk Scout
 [x]  3856  Claim the Precious                       {1}{B}{B}        Sorcery
 [ ]  3857  Maddening Hex                            {1}{R}{R}        Enchantment — Aura Curse
-[ ]  3858  Illusionist's Gambit                     {2}{U}{U}        Instant
+[x]  3858  Illusionist's Gambit                     {2}{U}{U}        Instant
 [x]  3859  Unctus, Grand Metatect                   {1}{U}{U}        Legendary Artifact Creature — Phyrexian Vedalken
 [x]  3860  Rikku, Resourceful Guardian              {2}{U}           Legendary Creature — Human Artificer
 [ ]  3861  Ozai, the Phoenix King                   {2}{B}{B}{R}{R}  Legendary Creature — Human Noble
@@ -3936,7 +3936,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3943  Neheb, Dreadhorde Champion               {2}{R}{R}        Legendary Creature — Zombie Minotaur Warrior
 [x]  3944  Conformer Shuriken                       {2}              Legendary Artifact — Equipment
 [x]  3945  Captain of the Watch                     {4}{W}{W}        Creature — Human Soldier
-[ ]  3946  Exhume                                   {1}{B}           Sorcery
+[x]  3946  Exhume                                   {1}{B}           Sorcery
 [x]  3947  Druid's Deliverance                      {1}{G}           Instant
 [x]  3948  Breaching Dragonstorm                    {4}{R}           Enchantment
 [x]  3949  Hedron Crawler                           {2}              Artifact Creature — Construct

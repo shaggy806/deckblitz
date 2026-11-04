@@ -394,6 +394,13 @@ in its own worktree (`isolation: "worktree"`), integrated by cherry-pick.
   trial: tell client agents to rely on `run-check` and skip `test:e2e`, which cost each about 18
   minutes. Say in the report what the trial changed, and use `--full` at least once a night: verify
   counts card batches, so a run of families alone stays quick and skips the plain fuzzer.
+- **Measured on 2026-11-04 (the same settings):** 52 families from 16 agents, starting each as a slot freed. Seven verifies
+  alongside, three of which found real bugs: an unrated-slot ratchet, a pre-existing Bond of Agony offer, eight cards missing colors
+  (only `card:verify` catches that). Playwright once a round was enough: its only failures were load timeouts that passed alone. A full verify's
+  fuzzer can time out games of 150+ turns at its 120 s limit, with or without agents: replay them alone before calling it a failure. The
+  skill's merge helper stops on `manualChecks.ts`, `client.md` and a long-line doc whose word merge conflicts; those are mechanical too.
+  An agent's reports need reading as work: four of the 16 went back with `SendMessage` for a real fix (a test that claimed too much,
+  rule 701.47b, a batching guess, a prompt nobody had played).
 - **`python .claude/skills/build-family/pick.py <commit>...`** picks agent commits and resolves the routine
   conflicts by keeping both sides (`pickfix.py`). Its header says what to check afterwards.
 - **Clean up** each worktree: unlink every junction by absolute path

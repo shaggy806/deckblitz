@@ -449,8 +449,8 @@ section keeps only what to do next.
   active player's target against their own count, keeping some of yours by count or total power, a choice beside a spell's
   targets, comparisons between players' states, a player's combat history, effect-made blocks and a creature's record of combat,
   reselecting attackers, land mana replaced, a random mode announced, the amassed Army, odd and even, one roll's result, libraries that can't be
-  searched, a damage life floor, attack costs in permanents, typecycling twice and flashback's costs, graveyard replacements for the turn, who creates a token, limits on drawing, damage amount and excess triggers, counters-put per counter and by batch, exhaust and power-up triggers (586 proving cards; `--stale` 1,687 wait for `author-freed`). Next by `--greedy --groups`: the 5-card long tail.
-  Narrow keys `author-freed` should give: Cannibalize (with one target illegal, does the survivor get exiled unasked? its ruling
+  searched, a damage life floor, attack costs in permanents, typecycling twice and flashback's costs, graveyard replacements for the turn, who creates a token, limits on drawing, damage amount and excess triggers, counters-put per counter and by batch, exhaust and power-up triggers, pawprint modes, friend or foe, paradigm, lands with an Adventure, a target slot over several kinds, counter all spells, spells back to hand, emblems' grants, exile face down, reads of what's exiled with a source, one instruction's zone moves, as-enters actions, damage dealt by source, forced recombat (649 proving cards; `--stale` 1,714 wait for `author-freed`). Next by `--greedy --groups`: the 5-card long tail, `condition:entry-provenance`, `cost:return-lands-cost`, `decision:choose-from-zone-extensions`, `effect:cast-during-resolution`; `effect:modifier-grants-activated` needs code of its own (activating from hand with an exile cost, a grant lasting until that card is cast from exile).
+  Narrow keys `author-freed` should give: Urborg Lhurgoyf and Monstrous War-Leech (they mill as they enter), Ob Nixilis of the Black Oath (an emblem's own activated ability), Grimoire Thief (its named-counter filter is proved on no real card), Eater of Virtue and Death-Mask Duplicant (exiled cards' keywords), Toralf, Overclocked Electromancer, Sigurd and Afterburner Expert, Cannibalize (with one target illegal, does the survivor get exiled unasked? its ruling
   doesn't say), Portal Manipulator (no choice, a target slot read from another), Bribe Taker ("for each kind" is a choice), Head
   Games and Jester's Mask ("search for that many", no this-way count of cards put on a library), Sanity
   Grinding (its ten cards stay on top until after the mill), Namor (`effect:amount-mana-symbols-of-color-in-spell`), Captain America (an intervening-if read as it resolves), Ajani, Nacatl Pariah (keeps one permanent, not one per
@@ -614,6 +614,7 @@ big boards and deep stacks under count budgets, deck biases, 1/1 tokens since `s
 Shiko or the other spell, and haste enablers in the crackback).
 
 - **A bot answers "as this enters, choose odd or even" with the first option** (Ashling's Prerogative, Gollum): `decisions/choose-creature-type.ts`'s candidates skip as-enters menus, so it's legal but unaimed.
+- **v1's `chooseFromZone` returns its minimum** (`controller.ts`), so that controller exiles nothing for Sutured Ghoul, which dies; not checked how v2 answers.
 - **A bot sacrifices at most down to three of a kind for an attack cost** (`SACRIFICE_KEEPS` in `combat/attacking.ts`): a heuristic, not measured.
 - **91 targeted slots have no polarity rating** (of 12,164, 2026-11-02; `target-polarity.test.ts`' ratchet prints them): some only read their target (Biomantic Mastery), some are Roles on a slot whose spec already picks the side (Betroth the Beast), and some look like real misses ("target player draws, then discards", Cephalid Looter; `as-player`'s and `for-each-player`'s player, Wheel and Deal, Muse Vessel). A bot reads an unrated slot as `either`.
 
@@ -696,6 +697,7 @@ One line each; the detail is in **`docs/client-gaps.md`**, under the same bold t
 animation follow-ups in `docs/plans/legibility-of-play.md`, "Follow-ups". When an item lands,
 delete its detail there and move this line to `COMPLETED.md`.
 
+- **A resolved copy's and a crime's log lines name an object id** ("obj-168"; "commits a crime with obj-88"), and a closed look says "takes nothing".
 - **A countered ability's log line names its object id** ("obj-87 is countered").
 
 - **The log names a hidden card by its id** ("Alice takes obj-161", to seats that can't see that hand).
