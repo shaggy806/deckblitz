@@ -1745,7 +1745,8 @@
   "effect:commander-cast-count-amount",
   "stat:mana-spent-replacement",
   "replacement:counter-replacement-players",
-  "trigger:search-trigger"
+  "trigger:search-trigger",
+  "static:spells-cant-be-countered"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

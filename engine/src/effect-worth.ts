@@ -266,6 +266,8 @@ function protectionWorth(
   target: EffectTargetRef | undefined,
   from: ProtectionQualities,
   ctx: WorthContext,
+  /** Hexproof from a quality (`asHexproof`) stops only the targeting. */
+  targetingOnly = false,
 ): number {
   const cards = ctx.cards;
   if (cards === undefined) return 0;
@@ -285,11 +287,13 @@ function protectionWorth(
     const from = item.kind === "ability" ? item.sourceObjectId : id;
     if (from !== null && stops(from)) worth += SLOT_WORTH[2];
   }
-  for (const id of state.zones.shared.battlefield) {
-    const object = state.objects[id];
-    if (object === undefined || !opponents.has(object.controller)) continue;
-    if (!computeCharacteristics(state, cards, id).types.includes("creature")) continue;
-    if (stops(id)) worth += 0.1;
+  if (!targetingOnly) {
+    for (const id of state.zones.shared.battlefield) {
+      const object = state.objects[id];
+      if (object === undefined || !opponents.has(object.controller)) continue;
+      if (!computeCharacteristics(state, cards, id).types.includes("creature")) continue;
+      if (stops(id)) worth += 0.1;
+    }
   }
   return sideOf(state, { kind: "object", object: protectedId }, ctx.me) === "own" ? worth : -worth;
 }
@@ -322,7 +326,7 @@ function untargetedWorth(effect: EffectSpec, ctx: WorthContext): number {
         (effect.then !== undefined ? untargetedWorth(effect.then, ctx) : 0)
       );
     case "grant-protection":
-      return "choose" in effect.from ? 0 : protectionWorth(effect.target, effect.from, ctx);
+      return "choose" in effect.from ? 0 : protectionWorth(effect.target, effect.from, ctx, effect.asHexproof === true);
     case "draw": {
       // A player named through a target ("its controller draws") is the
       // target's to judge.

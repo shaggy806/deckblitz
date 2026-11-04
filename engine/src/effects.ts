@@ -5640,6 +5640,12 @@ export type EffectSpec =
       readonly exceptSource?: boolean;
       readonly from: ProtectionQualities | ProtectionChoice;
       readonly duration: PtDuration;
+      /** **Hexproof** from those qualities rather than protection from them
+       * (rule 702.11d — Veil of Summer's "gain hexproof from blue and from
+       * black until end of turn"): only targeting by what an opponent controls
+       * stops, nothing else protection does, and a loss of hexproof takes it
+       * (702.11e). A `fromPlayers` quality isn't one hexproof has. */
+      readonly asHexproof?: true;
     }
   | {
       /**
@@ -5922,6 +5928,11 @@ export type EffectSpec =
        * gaining hexproof is `grant-keyword-all` instead. */
       readonly kind: "grant-player-hexproof";
       readonly who?: PlayerScope;
+      /** "You … gain hexproof **from blue and from black**" (rule 702.11c,
+       * 702.11d — Veil of Summer): only spells of those qualities and abilities
+       * from sources of them that an opponent controls stop. Permanents gaining
+       * it is `grant-protection` with `asHexproof`. Fixed as it resolves. */
+      readonly from?: Pick<ProtectionQualities, "colors" | "types" | "filter">;
     }
   | {
       /**
@@ -11830,7 +11841,7 @@ export interface EffectApi {
    * other battlefield permanent matching `filter` as it resolves (from the
    * controller's side), all with one timestamp. `from` is fixed already. */
   grantProtection(
-    on: { readonly target?: TargetRef; readonly filter?: CardFilter; readonly exceptSource?: true },
+    on: { readonly target?: TargetRef; readonly filter?: CardFilter; readonly exceptSource?: true; readonly asHexproof?: true },
     from: ProtectionQualities,
     duration: PtDuration,
   ): void;
@@ -11861,7 +11872,7 @@ export interface EffectApi {
    * matching a filter. */
   switchPt(what: TargetRef | CardFilter, duration: PtDuration): void;
   /** See the `"grant-player-hexproof"` {@link EffectSpec}. */
-  grantPlayerHexproof(who: PlayerScope): void;
+  grantPlayerHexproof(who: PlayerScope, from?: Pick<ProtectionQualities, "colors" | "types" | "filter">): void;
   /** See the `"grant-spells-this-turn"` {@link EffectSpec}. */
   grantSpellsThisTurn(grant: Omit<SpellGrantThisTurn, "player" | "usedBy">): void;
   /** See the `"keep-total-power"` {@link EffectSpec}: ask `player` which of
@@ -14783,7 +14794,7 @@ export function protectionChoiceOptions(
 }
 
 /** "protection from red and from artifacts" — the log's words for a grant. */
-export function protectionLabel(from: ProtectionQualities): string {
+export function protectionLabel(from: ProtectionQualities, ability: "protection" | "hexproof" = "protection"): string {
   const words = [
     ...(from.colors ?? []).map((c) => PROTECTION_COLOR_WORDS[c]),
     ...(from.types ?? []).map((t) => `${t}s`),
@@ -14791,7 +14802,7 @@ export function protectionLabel(from: ProtectionQualities): string {
     // Fixed to the players as it resolves, however few are left.
     ...(from.fromPlayers === undefined ? [] : ["each of your opponents"]),
   ];
-  return `protection from ${words.length === 0 ? "nothing" : words.join(" and from ")}`;
+  return `${ability} from ${words.length === 0 ? "nothing" : words.join(" and from ")}`;
 }
 
 /** A protection filter in words, each `anyOf` its own ("instant spells",
@@ -17532,7 +17543,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       ctx.doublePtAll(spec.filter, spec.duration, spec.powerOnly === true, spec.exceptSource === true);
       return;
     case "grant-player-hexproof":
-      ctx.grantPlayerHexproof(spec.who ?? "you");
+      ctx.grantPlayerHexproof(spec.who ?? "you", spec.from === undefined ? undefined : fixProtectionSide(spec.from, ctx));
       return;
     case "grant-spells-this-turn":
       ctx.grantSpellsThisTurn({
@@ -17656,7 +17667,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         // one mode per quality, each the grant with that quality fixed.
         const choice = spec.from;
         const modes: ModeOption[] = protectionChoiceOptions(choice).map((option) => ({
-          text: `Protection from ${option.text}`,
+          text: `${spec.asHexproof === true ? "Hexproof" : "Protection"} from ${option.text}`,
           effect: { ...spec, from: option.from },
         }));
         ctx.chooseModes(choice.optional === true ? 0 : 1, 1, modes);
@@ -17670,6 +17681,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           ...(target !== undefined ? { target } : {}),
           ...(spec.filter !== undefined ? { filter: spec.filter } : {}),
           ...(spec.exceptSource === true ? { exceptSource: true } : {}),
+          ...(spec.asHexproof === true ? { asHexproof: true as const } : {}),
         },
         from,
         spec.duration,

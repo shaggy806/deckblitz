@@ -5536,6 +5536,13 @@ function computeCharacteristicsUncached(
       const players = modifier.protection.fromPlayers;
       if (players !== undefined && players !== "opponents") for (const p of players) protPlayers.add(p);
     }
+    // Granted hexproof from a quality, and a later loss of hexproof takes it
+    // (rule 702.11e).
+    if (granted && modifier.hexproofFrom !== undefined && !lostAfter(losses, "hexproof", modifier.timestamp)) {
+      for (const c of modifier.hexproofFrom.colors ?? []) hexColors.add(c);
+      for (const t of modifier.hexproofFrom.types ?? []) hexTypes.add(t);
+      if (modifier.hexproofFrom.filter !== undefined) hexFilters.push(modifier.hexproofFrom.filter);
+    }
     // Granted toxic adds an instance (rule 702.164b), lost the same way.
     if (granted && modifier.toxic !== undefined) toxic += modifier.toxic;
     // Rules about it rather than abilities it has: no loss of abilities

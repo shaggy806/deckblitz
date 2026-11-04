@@ -8447,6 +8447,7 @@ export class Game {
     this.state.preventAllCombatDamage = false;
     delete this.state.combatDamagePreventedBy;
     this.state.hexproofPlayers = [];
+    delete this.state.hexproofFromPlayers;
     delete this.state.spellGrantsThisTurn;
     this.state.creaturesDiedThisTurn = 0;
     // A reveal is public knowledge for as long as anyone could have acted on
@@ -10953,6 +10954,7 @@ export class Game {
     // "You gain hexproof until end of turn" ends here too (rule 514.2), not
     // as the next turn begins: a trigger in this cleanup step can target.
     this.state.hexproofPlayers = [];
+    delete this.state.hexproofFromPlayers;
     delete this.state.spellGrantsThisTurn;
     // "Until end of turn" control effects (Act of Treason) end — control
     // falls to whichever control effect is now the latest (rule 613.7), else
@@ -33905,11 +33907,20 @@ export class Game {
         // One effect, one timestamp (rule 613.7b): the target, then what
         // matches now (rule 611.2c).
         const timestamp = this.freshTimestamp();
-        const label = protectionLabel(from);
+        const label = protectionLabel(from, on.asHexproof === true ? "hexproof" : "protection");
         const grant = (id: ObjectId): void => {
           const object = this.state.objects[id];
           if (object?.zone !== "battlefield" || !durationBegins(object, lasting)) return;
-          object.modifiers.push({ timestamp, power: 0, toughness: 0, keywords: [], protection: from, ...durationFields(lasting) });
+          object.modifiers.push({
+            timestamp,
+            power: 0,
+            toughness: 0,
+            keywords: [],
+            ...(on.asHexproof === true
+              ? { hexproofFrom: { colors: from.colors, types: from.types, filter: from.filter } }
+              : { protection: from }),
+            ...durationFields(lasting),
+          });
           this.emit({ type: "keyword-granted", object: id, keyword: label, duration: lasting });
         };
         const first = on.target?.kind === "object" ? this.splitOneFromStack(on.target.object) : undefined;
@@ -35114,9 +35125,11 @@ export class Game {
         });
         invalidateComputedCache();
       },
-      grantPlayerHexproof: (who) => {
+      grantPlayerHexproof: (who, from) => {
         for (const player of scoped(who)) {
-          if (!this.state.hexproofPlayers.includes(player)) {
+          if (from !== undefined) {
+            (this.state.hexproofFromPlayers ??= []).push({ player, from });
+          } else if (!this.state.hexproofPlayers.includes(player)) {
             this.state.hexproofPlayers.push(player);
           }
         }

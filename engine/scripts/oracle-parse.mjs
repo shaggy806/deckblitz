@@ -4876,6 +4876,10 @@ export function parseSentence(sentence, ctx) {
   // has convoke" (Wand of the Worldsoul), and "the next instant spell and the
   // next sorcery spell you cast this turn each have cascade" (Smoldering
   // Stagecoach — one grant each).
+  // Every spell for the rest of the turn, those on the stack too (rule 611.2c).
+  if (re("spells you control can't be countered this turn").test(s)) {
+    return { kind: "grant-spells-this-turn", cantBeCountered: true };
+  }
   if ((m = re("the next (?:(.+?) )?spell you cast this turn (has cascade|has convoke|can't be countered)").exec(s))) {
     const filter = flashSpellsFilter(m[1]);
     if (filter !== null) {
@@ -5770,6 +5774,30 @@ export function parseSentence(sentence, ctx) {
       target: m[1] === "~" ? "source" : slot(m[1]),
       from,
       duration: m[3] === "end of turn" ? "end-of-turn" : "until-your-next-turn",
+    };
+  }
+  // Hexproof from a quality for a while (rule 702.11d — `asHexproof`), on you
+  // and your permanents too (Veil of Summer).
+  if ((m = re(`(~|${TARGET}) gains hexproof from ${PROTECTION_FROM} until (end of turn|your next turn)`).exec(s))) {
+    const from = protectionFrom(m[2]);
+    if (from === null || "fromPlayers" in from) return null;
+    return {
+      kind: "grant-protection",
+      asHexproof: true,
+      target: m[1] === "~" ? "source" : slot(m[1]),
+      from,
+      duration: m[3] === "end of turn" ? "end-of-turn" : "until-your-next-turn",
+    };
+  }
+  if ((m = re(`you and permanents you control gain hexproof from ${PROTECTION_FROM} until end of turn`).exec(s))) {
+    const from = protectionFrom(m[1]);
+    if (from === null || "choose" in from || "fromPlayers" in from) return null;
+    return {
+      kind: "sequence",
+      effects: [
+        { kind: "grant-player-hexproof", who: "you", from },
+        { kind: "grant-protection", asHexproof: true, filter: { controlledBy: "you" }, from, duration: "end-of-turn" },
+      ],
     };
   }
   if ((m = re(`(choose a color\\. )?(other )?creatures you control gain protection from (the chosen color|${PROTECTION_FROM}) until end of turn`).exec(s))) {
@@ -9221,6 +9249,25 @@ export function parseEffect(text, outer) {
     // "You gain 2 life. Then if you have more life than an opponent, draw a
     // card" (Survival Cache), "Create a Treasure token if an opponent controls
     // more lands than you" (Beza): read as the instruction comes up (rule 608.2c).
+    // "Draw a card if an opponent has cast a blue or black spell this turn"
+    // (Veil of Summer) likewise.
+    const castByOpponentM =
+      /^(.+) if an opponent (?:has )?cast an? (white|blue|black|red|green)(?: or (white|blue|black|red|green))? spell this turn\.$/i.exec(sentence);
+    if (castByOpponentM !== null) {
+      const [, said, first, second] = castByOpponentM;
+      const then = parseSentence(`${said[0].toUpperCase()}${said.slice(1)}.`, ctx);
+      if (then !== null && !containsUndefined(then)) {
+        const colors = [first, ...(second === undefined ? [] : [second])].map((c) => ({ colors: [COLOR_LETTER[c.toLowerCase()]] }));
+        const effect = {
+          kind: "conditional",
+          condition: { kind: "cast-this-turn", who: "opponent", filter: colors.length === 1 ? colors[0] : { anyOf: colors } },
+          then,
+        };
+        parsed.push(effect);
+        hints.push({ sentence, effect });
+        continue;
+      }
+    }
     const comparedM =
       /^(?:then )?if ([^,]+), (.+)$/i.exec(sentence) ?? /^(.+) if ((?:an opponent|you) [^,]+ than (?:you|an opponent))\.$/i.exec(sentence);
     if (comparedM !== null) {

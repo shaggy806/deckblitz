@@ -213,6 +213,22 @@ export function hexproofFromBlocks(
   return false;
 }
 
+/** Whether `player` has hexproof from one of `source`'s qualities (rules
+ * 702.11c, 702.11d), gained by an effect (`GameState.hexproofFromPlayers` —
+ * Veil of Summer). The caller asks only of a targeter who isn't `player`. */
+export function playerHexproofFromBlocks(state: GameState, registry: CardRegistry, player: PlayerId, source: TargetSource): boolean {
+  for (const grant of state.hexproofFromPlayers ?? []) {
+    if (grant.player !== player) continue;
+    const quality = {
+      colors: new Set(grant.from.colors ?? []),
+      types: new Set(grant.from.types ?? []),
+      filters: grant.from.filter === undefined ? [] : [grant.from.filter],
+    };
+    if (qualityMatches(state, registry, player, quality, source)) return true;
+  }
+  return false;
+}
+
 /** Whether a card in a graveyard can't be targeted by `forPlayer`'s spell or
  * ability: a permanent on the battlefield has a `graveyardCardsUntargetable`
  * static ("cards in graveyards can't be the targets of spells or abilities"
@@ -546,6 +562,8 @@ function isLegalTargetUncached(
     ref.player !== forPlayer &&
     playerHasHexproof(state, registry, ref.player)
   ) {
+    return false;
+  } else if (ref.player !== forPlayer && source !== undefined && playerHexproofFromBlocks(state, registry, ref.player, source)) {
     return false;
   } else if (playerHasProtectionFromEverything(state, ref.player)) {
     // Protection from everything: no spell or ability targets them, their

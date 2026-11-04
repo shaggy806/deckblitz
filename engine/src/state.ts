@@ -1875,6 +1875,14 @@ export interface PtModifier {
      * (`ProtectionQualities.fromPlayers`). */
     readonly fromPlayers?: "opponents" | readonly PlayerId[];
   };
+  /** Layer 6 — hexproof from a quality it grants (rule 702.11d — a
+   * `grant-protection` with `asHexproof`), gone with a later loss of all
+   * abilities or of hexproof (702.11e). */
+  hexproofFrom?: {
+    readonly colors?: readonly Color[];
+    readonly types?: readonly CardType[];
+    readonly filter?: CardFilter;
+  };
   /** Combat restrictions this modifier imposes, with it — "target creature
    * can't block this turn", "~ must be blocked each combat this turn if
    * able" (the `restrict` effect). */
@@ -6598,6 +6606,14 @@ export interface GameState {
    * no permanent to hang it on. Cleared as each turn begins.
    */
   hexproofPlayers: PlayerId[];
+  /** Players with hexproof from a quality until end of turn (rule 702.11d —
+   * Veil of Summer: "**You** and permanents you control gain hexproof from
+   * blue and from black"), one entry per grant. Ends with `hexproofPlayers`.
+   * Absent when empty. See `playerHexproofFromBlocks`. */
+  hexproofFromPlayers?: {
+    readonly player: PlayerId;
+    readonly from: { readonly colors?: readonly Color[]; readonly types?: readonly CardType[]; readonly filter?: CardFilter };
+  }[];
   /** Abilities each player's spells gain as they're cast for the rest of the
    * turn (`grant-spells-this-turn` — Yidris, Maelstrom Wielder's cascade),
    * one entry per resolution. Ends with the turn. Absent when empty. */

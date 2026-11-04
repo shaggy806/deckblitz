@@ -14310,6 +14310,43 @@ describe("mana in any combination of colors", () => {
     ).triggered[0];
     expect(ability.trigger).toEqual({ on: "tapped-for-mana", who: "attached" });
     expect(ability.effect).toEqual({ kind: "add-mana", mana: { oneOf: WUBRG }, amount: 2 });
+describe("hexproof from a quality for a while, and spells that can't be countered this turn", () => {
+  const read = (type_line: string, oracle_text: string) =>
+    parseFace({ name: "Test Card", type_line, oracle_text, mana_cost: "{1}", colors: [] });
+  const VEIL =
+    "Draw a card if an opponent has cast a blue or black spell this turn. Spells you control can't be countered this turn. You and permanents you control gain hexproof from blue and from black until end of turn.";
+  it("reads the whole of Veil of Summer", () => {
+    const face = read("Instant", VEIL);
+    expect(face.todo).toEqual([]);
+    expect(face.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        {
+          kind: "conditional",
+          condition: { kind: "cast-this-turn", who: "opponent", filter: { anyOf: [{ colors: ["U"] }, { colors: ["B"] }] } },
+          then: { kind: "draw", amount: 1 },
+        },
+        { kind: "grant-spells-this-turn", cantBeCountered: true },
+        { kind: "grant-player-hexproof", who: "you", from: { colors: ["U", "B"] } },
+        { kind: "grant-protection", asHexproof: true, filter: { controlledBy: "you" }, from: { colors: ["U", "B"] }, duration: "end-of-turn" },
+      ],
+    });
+  });
+  it("reads one permanent's hexproof from a quality, fixed or chosen", () => {
+    expect(read("Instant", "Target creature gains hexproof from red until end of turn.").effect).toEqual({
+      kind: "grant-protection",
+      asHexproof: true,
+      target: 0,
+      from: { colors: ["R"] },
+      duration: "end-of-turn",
+    });
+  });
+  it("reads one colour's opposing spell in the condition", () => {
+    expect(read("Instant", "Draw a card if an opponent cast a blue spell this turn.").effect).toEqual({
+      kind: "conditional",
+      condition: { kind: "cast-this-turn", who: "opponent", filter: { colors: ["U"] } },
+      then: { kind: "draw", amount: 1 },
+    });
   });
 });
 

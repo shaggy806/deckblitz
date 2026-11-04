@@ -658,8 +658,9 @@ function visible(
         text = text.length > 0 ? `${text}\n${ability.text}` : ability.text;
       }
       // Protection granted for a while (`grant-protection`), in words.
-      if (m.protection !== undefined) {
-        const label = protectionLabel(m.protection);
+      const quality = m.protection ?? m.hexproofFrom;
+      if (quality !== undefined) {
+        const label = protectionLabel(quality, m.protection !== undefined ? "protection" : "hexproof");
         const until =
           m.untilPoint !== undefined
             ? {
