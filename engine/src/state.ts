@@ -3427,6 +3427,11 @@ export type AwaitingDecision =
       /** What the choice is for, shown instead of what `destination` says —
        * see the offer's `prompt`. */
       readonly prompt?: string;
+      /** The `ids` are a discard waiting on {@link DiscardToLibraryReplacement}:
+       * the chosen cards go on top of the library, the first nearest the top
+       * (rule 401.4), the rest as a discard otherwise would, one
+       * `cards-discarded` for them all. `reveal`: Nephalia Academy's. */
+      readonly discardToLibrary?: { readonly cause?: PlayerId; readonly reveal?: true };
       /** Set for a `choose-among-targets` choice (Barrin's Spite, Wake to
        * Slaughter) among cards in a graveyard: nothing moves by
        * `destination` (`"stay"`); what's picked is collected in
@@ -6002,6 +6007,17 @@ export interface GameState {
     readonly upTo?: true;
     /** See the `discard` decision's `forCost`. */
     readonly forCost?: ObjectId;
+  }[];
+  /**
+   * Discards a `would-discard` replacement offers to their player, the cards
+   * still in hand until they answer: asked one at a time, `Game.raiseNextDiscardToLibrary`.
+   * Optional so a snapshot saved before it existed still loads.
+   */
+  pendingDiscardsToLibrary?: {
+    readonly player: PlayerId;
+    readonly objects: readonly ObjectId[];
+    readonly cause?: PlayerId;
+    readonly source?: DecisionSource;
   }[];
   /**
    * Attackers just declared whose "you may exert this creature as it

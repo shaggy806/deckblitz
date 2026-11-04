@@ -13912,6 +13912,37 @@ describe("a copy for a duration read as a condition", () => {
       kind: "may",
       effect: { kind: "become-copy", target: "trigger-object", of: 0, until: "while-source-attached" },
     });
+describe("what would go to a graveyard going elsewhere", () => {
+  const statics = (oracle_text: string) =>
+    parseFace({ name: "Test Card", type_line: "Artifact", oracle_text, mana_cost: "{1}", colors: [] }).static[0];
+  it("reads a discard put on top of the library", () => {
+    expect(
+      statics("If an effect causes you to discard a card, discard it, but you may put it on top of your library instead of into your graveyard.").replacement,
+    ).toEqual({ event: "would-discard", causedBy: "effect" });
+    expect(
+      statics("If a spell or ability an opponent controls causes you to discard a card, you may reveal that card and put it on top of your library instead of putting it anywhere else.").replacement,
+    ).toEqual({ event: "would-discard", causedBy: "opponent", reveal: true });
+  });
+  it("reads a card that wasn't cycled exiled, and cycling spells cast from a graveyard", () => {
+    expect(statics("You may cast spells that have a cycling ability from your graveyard.").castFromGraveyard).toEqual({ filter: { hasCycling: true } });
+    expect(
+      statics("If a card that has a cycling ability would be put into your graveyard from anywhere and it wasn't cycled, exile it instead.").replacement,
+    ).toEqual({ event: "would-be-put-into-graveyard", instead: "exile", notCycled: true, filter: { ownedBy: "you", token: false, hasCycling: true } });
+  });
+  it("reads a creature's own would die, on top of the library", () => {
+    const zombie = parseFace({
+      name: "Test Card",
+      type_line: "Creature — Zombie",
+      oracle_text: "If this creature would die, put it on top of its owner's library instead.",
+      mana_cost: "{1}",
+      colors: [],
+      power: "1",
+      toughness: "1",
+    });
+    expect(zombie.static[0].replacement).toEqual({ event: "would-be-put-into-graveyard", instead: "library-top", self: true, from: "battlefield" });
+  });
+});
+
 describe("a countered spell's destination, and a counter replaced", () => {
   const spell = (oracle_text: string) => parseFace({ name: "Test Card", type_line: "Instant", oracle_text, mana_cost: "{1}", colors: [] });
   const counter = "Counter target spell.";

@@ -333,6 +333,23 @@ fails to pay. An emblem's own activated ability (Ob Nixilis of the Black Oath) i
 not built: nothing offers an ability of an object in the command zone that isn't
 its card's. Keys: effect:emblem-grants-activated, effect:emblem-grants-to-spells.
 
+### Where a card goes instead of a graveyard, and a discard put back — built 2026-11-04
+
+The need-keys family `replacement:new-event-replacements`' top unit, but for its
+optional permanent's replacement. `would-be-put-into-graveyard`'s `instead` takes
+`"library-top"` with `self` and `from: "battlefield"` (Gravebane Zombie), and
+`notCycled` (Abandoned Sarcophagus: the discard paying a cycling cost, a variant's
+too, is let through). A new replacement `would-discard`, `causedBy: "effect" |
+"opponent"`, `reveal` (Library of Leng, Nephalia Academy): the discard waits on a
+`choose-from-zone` of its cards, min 0, in order (`discardToLibrary`, the queue
+`GameState.pendingDiscardsToLibrary`), the chosen on top, the rest as a discard goes,
+one `cards-discarded` for all. A cost's and cleanup's are never asked. What's left:
+Pulmonic Sliver, `replacement:graveyard-to-library-top-optional`, needs a "you may"
+on a permanent's every way to a graveyard, a wrath's deaths waiting on one answer
+with their order (its ruling), and no death path can wait yet but a commander's
+903.9b. Keys: replacement:dies-to-library-top,
+replacement:discard-to-library-replacement, replacement:exile-if-not-cycled.
+
 ### A countered spell's destination, and a counter replaced — built 2026-11-04
 
 The need-keys family `effect:counter-exile-instead`. `counter`'s `into` takes

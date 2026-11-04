@@ -7046,6 +7046,15 @@ These boards start before the first turn (the builder's `openingHands`), with th
 - **Do:** As Bob, attack Alice with Hill Giant. In the declare blockers step, as Alice, cast Illusionist's Gambit. Then as Bob declare attackers in the new combat.
 - **Expect:** Hill Giant leaves combat, untapped, and deals no damage. A second combat begins, and Hill Giant has to attack: Carol or Dave, never Alice.
 
+### Library of Leng: discarded cards can go back on top, in the order you pick
+- **Do:** Cast Wheel of Fortune.
+- **Expect:** A popup says "Library of Leng: you may put discarded cards on top of your library, the first you pick on top. The rest go where a discard goes." with your two cards. Pick both, Grizzly Bears first, and confirm: you draw them both again, among your seven.
+- **Not a bug:** Pick none and they go to your graveyard, and you draw seven other cards.
+
+### Nephalia Academy: four players, an opponent's discard can be put back
+- **Do:** It's Bob's turn. As Bob, cast Mind Rot at Alice.
+- **Expect:** Alice discards her two cards and is asked "Nephalia Academy: you may reveal and put discarded cards on top of your library…". Pick one and confirm: it's revealed, it's on top of her library, and the other is in her graveyard.
+
 ### False Orders: unblocking the attacker and blocking another
 
 - **Do:** Attack Bob with Hill Giant and Serra Angel. As Bob, block Hill Giant with Grizzly Bears. As Alice, cast False Orders on Grizzly Bears and click Serra Angel.

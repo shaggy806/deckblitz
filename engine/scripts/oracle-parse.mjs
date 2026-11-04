@@ -16847,6 +16847,37 @@ function parseStatic(line, text) {
       };
     }
   }
+  // A discard its player may put on top of their library instead.
+  if (line === "If an effect causes you to discard a card, discard it, but you may put it on top of your library instead of into your graveyard.") {
+    return { affects: { scope: "self" }, replacement: { event: "would-discard", causedBy: "effect" }, text };
+  }
+  if (line === "If a spell or ability an opponent controls causes you to discard a card, you may reveal that card and put it on top of your library instead of putting it anywhere else.") {
+    return { affects: { scope: "self" }, replacement: { event: "would-discard", causedBy: "opponent", reveal: true }, text };
+  }
+  // Abandoned Sarcophagus's two lines.
+  if (line === "You may cast spells that have a cycling ability from your graveyard.") {
+    return { affects: { scope: "self" }, castFromGraveyard: { filter: { hasCycling: true } }, text };
+  }
+  if (line === "If a card that has a cycling ability would be put into your graveyard from anywhere and it wasn't cycled, exile it instead.") {
+    return {
+      affects: { scope: "self" },
+      replacement: {
+        event: "would-be-put-into-graveyard",
+        instead: "exile",
+        notCycled: true,
+        filter: { ownedBy: "you", token: false, hasCycling: true },
+      },
+      text,
+    };
+  }
+  // "If this creature would die, put it on top of its owner's library instead."
+  if (line === "If ~ would die, put it on top of its owner's library instead.") {
+    return {
+      affects: { scope: "self" },
+      replacement: { event: "would-be-put-into-graveyard", instead: "library-top", self: true, from: "battlefield" },
+      text,
+    };
+  }
   // Guile's would-counter replacement.
   if (line === "If a spell or ability you control would counter a spell, instead exile that spell and you may play that card without paying its mana cost.") {
     return { affects: { scope: "self" }, replacement: { event: "would-counter-spell" }, text };

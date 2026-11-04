@@ -44,6 +44,7 @@ export type ReplacementSpec =
   | CounterMultiplierReplacement
   | GraveyardExileReplacement
   | CounterExileReplacement
+  | DiscardToLibraryReplacement
   | DrawRedirectReplacement
   | DamageMultiplierReplacement
   | MillMultiplierReplacement
@@ -431,9 +432,15 @@ export interface CounterMultiplierReplacement {
  * they're applied by `moveObject` directly rather than through this spec. */
 export interface GraveyardExileReplacement {
   readonly event: "would-be-put-into-graveyard";
-  readonly instead: "exile";
+  /** `"library-top"`: "if this creature would die, put it on top of its owner's
+   * library instead" (Gravebane Zombie). Only with `self`. */
+  readonly instead: "exile" | "library-top";
   readonly filter?: CardFilter;
   readonly from?: "battlefield";
+  /** "… **and it wasn't cycled**, exile it instead" (Abandoned Sarcophagus):
+   * the discard that pays a cycling cost, any variant of it (rule 702.29a, e),
+   * goes to the graveyard. */
+  readonly notCycled?: true;
   /** "…instead exile it **with a void counter on it**" (Dauthi
    * Voidwalker): counters the card has in exile, put on as it arrives
    * there — not an effect putting counters, so a doubler doesn't touch
@@ -460,6 +467,23 @@ export interface GraveyardExileReplacement {
    * instead" (Wildwood Escort — rule 700.4): countered or discarded, it goes
    * to its graveyard. */
   readonly self?: true;
+}
+
+/** A discarded card its owner may put on top of their library instead of anywhere
+ * else: still a discard, to everything watching for one. `"effect"`: "if an effect
+ * causes you to discard a card, discard it, but you may put it on top of your
+ * library instead of into your graveyard" (Library of Leng: any spell's or
+ * ability's, a cost's never, since a cost isn't an effect). `"opponent"`: "if a
+ * spell or ability an opponent controls causes you to discard a card, you may
+ * reveal that card and put it on top of your library instead of putting it anywhere
+ * else" (Nephalia Academy, with `reveal`). Asked of the whole discard at once as
+ * a `choose-from-zone`, which cards and in what order (rule 401.4); a card put
+ * there escapes madness (rule 616.1, Nephalia Academy's ruling). Applied by
+ * `Game.discardCards`. */
+export interface DiscardToLibraryReplacement {
+  readonly event: "would-discard";
+  readonly causedBy: "effect" | "opponent";
+  readonly reveal?: true;
 }
 
 /** "If a spell or ability you control would counter a spell, instead exile that

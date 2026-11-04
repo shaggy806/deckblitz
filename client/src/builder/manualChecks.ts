@@ -10573,6 +10573,21 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'Library of Leng: discarded cards can go back on top, in the order you pick',
+    board({
+      you: { bf: ['Library of Leng', 'Mountain*3'], hand: ['Wheel of Fortune', 'Grizzly Bears', 'Llanowar Elves'] },
+      opp: [{ bf: ['Forest'] }],
+    }),
+  ),
+  preset(
+    'Nephalia Academy: four players, an opponent\'s discard can be put back',
+    board({
+      you: { bf: ['Nephalia Academy'], hand: ['Grizzly Bears', 'Llanowar Elves'] },
+      opp: [{ human: true, bf: ['Swamp*3'], hand: ['Mind Rot'] }, { bf: ['Forest'] }, { bf: ['Forest'] }],
+      turn: 0,
+    }),
+  ),
+  preset(
     'Ethereal Valkyrie: a card with its own foretell cost has two',
     board({
       you: { bf: ['Plains*2', 'Island*2', 'Swamp*2'], hand: ['Ethereal Valkyrie', 'Poison the Cup'] },

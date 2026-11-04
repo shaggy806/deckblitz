@@ -6416,6 +6416,15 @@ clause (section 9):
   counter a spell, instead exile that spell and you may play that card without
   paying its mana cost" (Guile). Only what can be countered; it was never
   countered, so no "this way" rider happens.
+- `{ event: "would-discard", causedBy: "effect" | "opponent", reveal? }` — a
+  discard its player may put on top of their library instead, in an order they
+  pick, still a discard to every trigger: Library of Leng's "if an effect causes
+  you to discard a card" (never a cost's), Nephalia Academy's "a spell or ability
+  an opponent controls", which reveals them.
+- `{ event: "would-be-put-into-graveyard", instead: "library-top", self: true, from: "battlefield" }`
+  — "if this creature would die, put it on top of its owner's library instead"
+  (Gravebane Zombie). `notCycled: true` beside an exile's `filter` is "and it
+  wasn't cycled" (Abandoned Sarcophagus).
 - `{ event: "would-be-put-into-graveyard", instead: "exile", filter?, from? }`
   — Rest in Peace / Anafenza. `from: "battlefield"` is the **dies-only** form
   ("if a creature an opponent controls would die, exile it instead"): it lets

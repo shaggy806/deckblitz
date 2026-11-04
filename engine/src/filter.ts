@@ -2605,7 +2605,12 @@ export function matchesFilter(
   }
   if (filter.hasCycling !== undefined) {
     const name = live !== undefined ? rulesTextName(live) : lki?.name;
-    const has = name !== undefined && registry.has(name) && registry.get(name).cycling !== null;
+    const has =
+      name !== undefined &&
+      registry.has(name) &&
+      registry.get(name).cycling !== null &&
+      // A permanent that lost its abilities has no cycling ability (Abandoned Sarcophagus's ruling).
+      !(live?.zone === "battlefield" && hasLostAbilities(state, registry, live));
     if (has !== filter.hasCycling) return false;
   }
   if (filter.hasSuspend !== undefined) {

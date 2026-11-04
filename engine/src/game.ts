@@ -1910,6 +1910,10 @@ export class Game {
   readonly registry: CardRegistry;
   private readonly controllers: Record<PlayerId, PlayerController>;
   private readonly rng: Rng;
+  /** The card a cycling cost is discarding right now, for "and it wasn't cycled"
+   * (`GraveyardExileReplacement.notCycled`): a moment in one synchronous call, so
+   * not part of `state`. */
+  private cyclingDiscard: ObjectId | null = null;
   /** The commander whose 903.9b choice `applyCommanderChoice` is carrying out
    * right now — the one move of it `moveObject` must not defer again. Not
    * game state: it only ever spans that one synchronous call. */
@@ -8976,6 +8980,11 @@ export class Game {
         this.drawNextWaiting();
         continue;
       }
+      // A discard waiting on Library of Leng's question.
+      if ((this.state.pendingDiscardsToLibrary?.length ?? 0) > 0) {
+        this.raiseNextDiscardToLibrary();
+        continue;
+      }
       // Carry out a mass-destroy (Wrath of God) that began while another
       // decision was being answered.
       if (this.state.pendingDestruction.length > 0) {
@@ -10198,7 +10207,7 @@ export class Game {
 
     // An order takes nothing: it only says where each card goes. A search's
     // second choice, of where its finds go, took them already.
-    if (awaiting.order !== true && awaiting.searchRest === undefined) {
+    if (awaiting.order !== true && awaiting.searchRest === undefined && awaiting.discardToLibrary === undefined) {
       this.emit({ type: "cards-chosen-from-zone", player, objects: [...chosen] });
     }
     // Collect evidence (rule 701.59a): "whenever you collect evidence" sees
@@ -10448,6 +10457,11 @@ export class Game {
     // "You choose a card from it. That player discards that card" (Duress —
     // the `discard-chosen` effect): the hand's owner discards it, whoever
     // chose (rule 701.9a), so "whenever a player discards" sees them.
+    if (awaiting.discardToLibrary !== undefined) {
+      const { cause, reveal } = awaiting.discardToLibrary;
+      this.finishDiscardToLibrary(player, awaiting.ids, chosen, cause, reveal === true, toCommandZone);
+      return { cards: [], position: "bottom" };
+    }
     if (awaiting.destination === "discard") {
       const owner = awaiting.forPlayer ?? player;
       const cards = chosen.filter((id) => this.state.objects[id]?.zone === "hand");
@@ -14281,7 +14295,12 @@ export class Game {
     // card"), so it is a discard to everything watching for one — Archfiend
     // of Ifnir's "whenever you cycle or discard another card", Waste Not —
     // and a card with madness is exiled instead (702.35a).
-    this.discardCards(player, [cardId]);
+    this.cyclingDiscard = cardId;
+    try {
+      this.discardCards(player, [cardId]);
+    } finally {
+      this.cyclingDiscard = null;
+    }
     this.noteCycled(player, cardId, 0);
     // The ability itself, its costs paid (rule 602.2): the draw — or
     // landcycling's search, `min: 0` so an empty library isn't a hard
@@ -22405,7 +22424,12 @@ export class Game {
     } else if (ability.zone === "hand") {
       // Channel (rule 702.51a): discarding the source card is an implicit,
       // unconditional part of the cost, paid alongside the mana above.
-      this.discardCards(player, [sourceId]);
+      this.cyclingDiscard = ability.cycling === true ? sourceId : null;
+      try {
+        this.discardCards(player, [sourceId]);
+      } finally {
+        this.cyclingDiscard = null;
+      }
       // Cycling a static gave the card (`grantsCyclingInHand`), or a printed
       // cost that had to be activated, is cycling to everything watching for
       // it, as `cycleCard` has a plain printed one.
@@ -25545,6 +25569,7 @@ export class Game {
     return (
       s.awaiting !== null ||
       s.pendingDiscards.length > 0 ||
+      (s.pendingDiscardsToLibrary?.length ?? 0) > 0 ||
       (s.pendingDraws?.length ?? 0) > 0 ||
       (s.pendingEnterAttacking?.length ?? 0) > 0 ||
       s.pendingSacrifices.length > 0 ||
@@ -48296,8 +48321,97 @@ export class Game {
     // What's resolving (or paying a cost) caused it — its controller is the
     // discard's cause (Psychic Purge). Nothing is at cleanup (rule 514.1).
     const cause = this.state.decisionSource?.controller;
+    if (this.costDiscardFor === null && this.discardToLibraryReplacement(player, cause) !== null) {
+      const source = this.state.decisionSource;
+      (this.state.pendingDiscardsToLibrary ??= []).push({
+        player,
+        objects: [...ids],
+        ...(cause !== undefined ? { cause } : {}),
+        ...(source !== null ? { source } : {}),
+      });
+      this.raiseNextDiscardToLibrary();
+      return;
+    }
     const mad = this.moveDiscardedCards([{ objects: ids, cause }]);
     if (this.costDiscardFor !== null) this.recordCostDiscard(this.costDiscardFor, ids);
+    this.emit({ type: "cards-discarded", player, objects: [...ids], ...(cause !== undefined ? { cause } : {}) });
+    this.queueMadness(mad);
+  }
+
+  /** The `would-discard` replacement a discard `cause` caused gives `player`, if
+   * any, and its permanent's name. A player with both picks the one that reveals
+   * nothing (rule 616.1). Nothing caused a cost's or cleanup's (rule 514.1). */
+  private discardToLibraryReplacement(
+    player: PlayerId,
+    cause: PlayerId | undefined,
+  ): { readonly name: string; readonly reveal: boolean } | null {
+    if (cause === undefined) return null;
+    let found: { readonly name: string; readonly reveal: boolean } | null = null;
+    for (const id of this.state.zones.shared.battlefield) {
+      const object = this.state.objects[id];
+      if (object === undefined || object.controller !== player || hasLostAbilities(this.state, this.registry, object)) continue;
+      for (const ability of this.registry.get(rulesTextName(object)).static) {
+        const r = ability.replacement;
+        if (r?.event !== "would-discard" || (r.causedBy === "opponent" && cause === player)) continue;
+        if (!this.staticActive(object, ability)) continue;
+        if (r.reveal !== true) return { name: printedCardName(object), reveal: false };
+        found = { name: printedCardName(object), reveal: true };
+      }
+    }
+    return found;
+  }
+
+  /** Ask about the next discard waiting on a `would-discard` replacement, once
+   * nothing else is being asked. A card that has left the hand since isn't
+   * discarded; a replacement gone since is nothing to ask, and it's discarded. */
+  private raiseNextDiscardToLibrary(): void {
+    const queue = this.state.pendingDiscardsToLibrary;
+    while (this.state.awaiting === null && queue !== undefined && queue.length > 0) {
+      const { player, objects, cause, source } = queue.shift()!;
+      if (this.state.players[player]?.hasLost === true) continue;
+      const hand = this.state.zones.perPlayer[player].hand;
+      const ids = objects.filter((id) => hand.includes(id));
+      if (ids.length === 0) continue;
+      const replacement = this.discardToLibraryReplacement(player, cause);
+      if (replacement === null) {
+        this.finishDiscardToLibrary(player, ids, [], cause, false);
+        continue;
+      }
+      if (source !== undefined) this.state.decisionSource = source;
+      this.state.awaiting = {
+        kind: "choose-from-zone",
+        player,
+        ids,
+        eligible: ids,
+        min: 0,
+        max: ids.length,
+        destination: "library-top",
+        leftover: "stay",
+        prompt: `${replacement.name}: you may ${replacement.reveal ? "reveal and " : ""}put discarded cards on top of your library, the first you pick on top. The rest go where a discard goes.`,
+        discardToLibrary: { ...(cause !== undefined ? { cause } : {}), ...(replacement.reveal ? { reveal: true as const } : {}) },
+      };
+    }
+  }
+
+  /** A discard's answer: the chosen cards on top of the library, the first
+   * nearest the top (rule 401.4), the rest out of the hand as any discard's are,
+   * then one `cards-discarded` for them all, which is what they still were. */
+  private finishDiscardToLibrary(
+    player: PlayerId,
+    ids: readonly ObjectId[],
+    chosen: readonly ObjectId[],
+    cause: PlayerId | undefined,
+    reveal: boolean,
+    toCommandZone: ReadonlySet<ObjectId> = new Set(),
+  ): void {
+    const chosenSet = new Set(chosen);
+    const rest = ids.filter((id) => !chosenSet.has(id));
+    if (reveal && chosen.length > 0) this.revealCards(player, chosen, "hand");
+    const mad = this.moveDiscardedCards([{ objects: rest, cause }]);
+    for (const id of [...chosen].reverse()) {
+      if (toCommandZone.has(id)) this.moveObject(id, "command");
+      else this.putOnLibrary(id, "top");
+    }
     this.emit({ type: "cards-discarded", player, objects: [...ids], ...(cause !== undefined ? { cause } : {}) });
     this.queueMadness(mad);
   }
@@ -48408,10 +48522,17 @@ export class Game {
         ...(cause !== undefined ? { cause } : {}),
       }))
       .filter((d) => d.objects.length > 0);
-    if (discards.length > 0) {
-      const mad = this.moveDiscardedCards(discards.map(({ objects, cause }) => ({ objects, cause })));
-      for (const discard of discards) this.emit({ type: "cards-discarded", ...discard });
+    // A discard Library of Leng's question holds up goes after the others.
+    const offered = discards.filter((d) => this.discardToLibraryReplacement(d.player, d.cause) !== null);
+    const plain = discards.filter((d) => !offered.includes(d));
+    if (plain.length > 0) {
+      const mad = this.moveDiscardedCards(plain.map(({ objects, cause }) => ({ objects, cause })));
+      for (const discard of plain) this.emit({ type: "cards-discarded", ...discard });
       this.queueMadness(mad);
+    }
+    if (offered.length > 0) {
+      (this.state.pendingDiscardsToLibrary ??= []).push(...offered);
+      this.raiseNextDiscardToLibrary();
     }
     if (this.state.pendingSacrificeVictims.length > 0 && this.state.awaiting === null) {
       this.drainPendingSacrificeVictims();
@@ -52349,6 +52470,8 @@ export class Game {
           r.self === true ||
           // The dies-only form (rule 700.4) lets a discard or a mill through.
           (r.from === "battlefield" && !fromBattlefield) ||
+          // "And it wasn't cycled" (Abandoned Sarcophagus).
+          (r.notCycled === true && this.cyclingDiscard === cardId) ||
           !this.staticActive(object, ability)
         ) {
           continue;
@@ -52416,6 +52539,14 @@ export class Game {
    * copy of the face has it (rule 707.2) and the face once it has lost all
    * its abilities doesn't — not from how it was cast. "From anywhere": the
    * stack as well as the battlefield. */
+  private topsItselfInstead(object: GameObject): boolean {
+    if (object.zone !== "battlefield" || hasLostAbilities(this.state, this.registry, object)) return false;
+    return this.registry.get(rulesTextName(object)).static.some((ability) => {
+      const r = ability.replacement;
+      return r?.event === "would-be-put-into-graveyard" && r.instead === "library-top" && r.self === true;
+    });
+  }
+
   private exilesItselfInstead(object: GameObject): boolean {
     if (hasLostAbilities(this.state, this.registry,object)) return false;
     return this.registry.get(rulesTextName(object)).static.some((ability) => {
@@ -53001,6 +53132,13 @@ export class Game {
       }
       const moved = this.moveObjectUncached(id, "library", { ...enter, libraryPlacement: "shuffle" });
       this.shuffleLibraryOf(owner);
+      return moved;
+    }
+    // "If this creature would die, put it on top of its owner's library
+    // instead" (Gravebane Zombie): the same, its owner's pick over an exile.
+    if (to === "graveyard" && this.topsItselfInstead(object)) {
+      const moved = this.moveObjectUncached(id, "library", { ...enter, libraryPlacement: "top" });
+      if (moved) this.placeInLibrary(id, "top");
       return moved;
     }
 
