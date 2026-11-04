@@ -669,6 +669,7 @@ import _poolSearchlightGeist from "../pool/searchlight-geist.js";
 import _poolSeedlingCharm from "../pool/seedling-charm.js";
 import _poolSeethingAnger from "../pool/seething-anger.js";
 import _poolSejiriRefuge from "../pool/sejiri-refuge.js";
+import _poolSephirothOneWingedAngel from "../pool/sephiroth-one-winged-angel.js";
 import _poolSepulchralPrimordial from "../pool/sepulchral-primordial.js";
 import _poolSerpentineKavu from "../pool/serpentine-kavu.js";
 import _poolSerraDisciple from "../pool/serra-disciple.js";
@@ -1591,6 +1592,7 @@ const shard: CardShard = {
     _poolSeedlingCharm,
     _poolSeethingAnger,
     _poolSejiriRefuge,
+    _poolSephirothOneWingedAngel,
     _poolSepulchralPrimordial,
     _poolSerpentineKavu,
     _poolSerraDisciple,

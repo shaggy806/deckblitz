@@ -399,6 +399,7 @@ import _poolLaboratoryDrudge from "../pool/laboratory-drudge.js";
 import _poolLambholtRaconteur from "../pool/lambholt-raconteur.js";
 import _poolLazotepChancellor from "../pool/lazotep-chancellor.js";
 import _poolLiberatedDwarf from "../pool/liberated-dwarf.js";
+import _poolLiberatorUrzasBattlethopter from "../pool/liberator-urzas-battlethopter.js";
 import _poolLifeChisel from "../pool/life-chisel.js";
 import _poolLilianaTheNecromancer from "../pool/liliana-the-necromancer.js";
 import _poolLinvalaThePreserver from "../pool/linvala-the-preserver.js";
@@ -586,6 +587,7 @@ import _poolSeekerOfInsight from "../pool/seeker-of-insight.js";
 import _poolSejiriMerfolk from "../pool/sejiri-merfolk.js";
 import _poolSeleniaDarkAngel from "../pool/selenia-dark-angel.js";
 import _poolSendInThePest from "../pool/send-in-the-pest.js";
+import _poolSephirothFabledSoldier from "../pool/sephiroth-fabled-soldier.js";
 import _poolSeraphicSteed from "../pool/seraphic-steed.js";
 import _poolSerrasEmbrace from "../pool/serras-embrace.js";
 import _poolSerumSovereign from "../pool/serum-sovereign.js";
@@ -1232,6 +1234,7 @@ const shard: CardShard = {
     _poolLambholtRaconteur,
     _poolLazotepChancellor,
     _poolLiberatedDwarf,
+    _poolLiberatorUrzasBattlethopter,
     _poolLifeChisel,
     _poolLilianaTheNecromancer,
     _poolLinvalaThePreserver,
@@ -1419,6 +1422,7 @@ const shard: CardShard = {
     _poolSejiriMerfolk,
     _poolSeleniaDarkAngel,
     _poolSendInThePest,
+    _poolSephirothFabledSoldier,
     _poolSeraphicSteed,
     _poolSerrasEmbrace,
     _poolSerumSovereign,

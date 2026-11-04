@@ -4862,6 +4862,7 @@ import _poolCovertCutpurse from "./pool/covert-cutpurse.js";
 import _poolCovertOperative from "./pool/covert-operative.js";
 import _poolCovertTechnician from "./pool/covert-technician.js";
 import _poolCovetedFalcon from "./pool/coveted-falcon.js";
+import _poolCovetedJewel from "./pool/coveted-jewel.js";
 import _poolCovetedPeacock from "./pool/coveted-peacock.js";
 import _poolCovetedPrize from "./pool/coveted-prize.js";
 import _poolCovetousCastaway from "./pool/covetous-castaway.js";
@@ -7027,6 +7028,7 @@ import _poolEcologistsTerrarium from "./pool/ecologists-terrarium.js";
 import _poolEcstaticAwakener from "./pool/ecstatic-awakener.js";
 import _poolEcstaticBeauty from "./pool/ecstatic-beauty.js";
 import _poolEcstaticElectromancer from "./pool/ecstatic-electromancer.js";
+import _poolEdELonesomeEyebot from "./pool/ed-e-lonesome-eyebot.js";
 import _poolEddieBrock from "./pool/eddie-brock.js";
 import _poolEddymurkCrab from "./pool/eddymurk-crab.js";
 import _poolEddytrailHawk from "./pool/eddytrail-hawk.js";
@@ -13902,6 +13904,7 @@ import _poolLiability from "./pool/liability.js";
 import _poolLiberate from "./pool/liberate.js";
 import _poolLiberatedDwarf from "./pool/liberated-dwarf.js";
 import _poolLiberatingCombustion from "./pool/liberating-combustion.js";
+import _poolLiberatorUrzasBattlethopter from "./pool/liberator-urzas-battlethopter.js";
 import _poolLibertyPrimeRecharged from "./pool/liberty-prime-recharged.js";
 import _poolLibraryLarcenist from "./pool/library-larcenist.js";
 import _poolLibraryOfAlexandria from "./pool/library-of-alexandria.js";
@@ -21232,7 +21235,9 @@ import _poolSentryOak from "./pool/sentry-oak.js";
 import _poolSentryOfTheUnderworld from "./pool/sentry-of-the-underworld.js";
 import _poolSeparatistVoidmage from "./pool/separatist-voidmage.js";
 import _poolSepharaSkysBlade from "./pool/sephara-skys-blade.js";
+import _poolSephirothFabledSoldier from "./pool/sephiroth-fabled-soldier.js";
 import _poolSephirothFallenHero from "./pool/sephiroth-fallen-hero.js";
+import _poolSephirothOneWingedAngel from "./pool/sephiroth-one-winged-angel.js";
 import _poolSephirothPlanetsHeir from "./pool/sephiroth-planets-heir.js";
 import _poolSephirothsIntervention from "./pool/sephiroths-intervention.js";
 import _poolSepticRats from "./pool/septic-rats.js";
@@ -34133,6 +34138,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCovertOperative,
   _poolCovertTechnician,
   _poolCovetedFalcon,
+  _poolCovetedJewel,
   _poolCovetedPeacock,
   _poolCovetedPrize,
   _poolCovetousCastaway,
@@ -36298,6 +36304,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolEcstaticAwakener,
   _poolEcstaticBeauty,
   _poolEcstaticElectromancer,
+  _poolEdELonesomeEyebot,
   _poolEddieBrock,
   _poolEddymurkCrab,
   _poolEddytrailHawk,
@@ -43173,6 +43180,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLiberate,
   _poolLiberatedDwarf,
   _poolLiberatingCombustion,
+  _poolLiberatorUrzasBattlethopter,
   _poolLibertyPrimeRecharged,
   _poolLibraryLarcenist,
   _poolLibraryOfAlexandria,
@@ -50503,7 +50511,9 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSentryOfTheUnderworld,
   _poolSeparatistVoidmage,
   _poolSepharaSkysBlade,
+  _poolSephirothFabledSoldier,
   _poolSephirothFallenHero,
+  _poolSephirothOneWingedAngel,
   _poolSephirothPlanetsHeir,
   _poolSephirothsIntervention,
   _poolSepticRats,
@@ -63417,6 +63427,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/covert-operative": _poolCovertOperative,
   "pool/covert-technician": _poolCovertTechnician,
   "pool/coveted-falcon": _poolCovetedFalcon,
+  "pool/coveted-jewel": _poolCovetedJewel,
   "pool/coveted-peacock": _poolCovetedPeacock,
   "pool/coveted-prize": _poolCovetedPrize,
   "pool/covetous-castaway": _poolCovetousCastaway,
@@ -65582,6 +65593,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/ecstatic-awakener": _poolEcstaticAwakener,
   "pool/ecstatic-beauty": _poolEcstaticBeauty,
   "pool/ecstatic-electromancer": _poolEcstaticElectromancer,
+  "pool/ed-e-lonesome-eyebot": _poolEdELonesomeEyebot,
   "pool/eddie-brock": _poolEddieBrock,
   "pool/eddymurk-crab": _poolEddymurkCrab,
   "pool/eddytrail-hawk": _poolEddytrailHawk,
@@ -72457,6 +72469,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/liberate": _poolLiberate,
   "pool/liberated-dwarf": _poolLiberatedDwarf,
   "pool/liberating-combustion": _poolLiberatingCombustion,
+  "pool/liberator-urzas-battlethopter": _poolLiberatorUrzasBattlethopter,
   "pool/liberty-prime-recharged": _poolLibertyPrimeRecharged,
   "pool/library-larcenist": _poolLibraryLarcenist,
   "pool/library-of-alexandria": _poolLibraryOfAlexandria,
@@ -79787,7 +79800,9 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/sentry-of-the-underworld": _poolSentryOfTheUnderworld,
   "pool/separatist-voidmage": _poolSeparatistVoidmage,
   "pool/sephara-skys-blade": _poolSepharaSkysBlade,
+  "pool/sephiroth-fabled-soldier": _poolSephirothFabledSoldier,
   "pool/sephiroth-fallen-hero": _poolSephirothFallenHero,
+  "pool/sephiroth-one-winged-angel": _poolSephirothOneWingedAngel,
   "pool/sephiroth-planets-heir": _poolSephirothPlanetsHeir,
   "pool/sephiroths-intervention": _poolSephirothsIntervention,
   "pool/septic-rats": _poolSepticRats,
