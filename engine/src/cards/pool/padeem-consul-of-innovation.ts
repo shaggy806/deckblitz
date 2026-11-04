@@ -5,7 +5,7 @@ import { defineCard } from "../define.js";
 // An intervening if (rule 603.4): the live greatest mana value among every
 // artifact on the battlefield is read as the upkeep begins and again as the
 // ability resolves (the rulings). Only artifacts count, and an {X} is 0 there
-// (rule 107.3b, the rulings) — `controls-greatest` reads `mana-value`.
+// (rule 202.3e, the rulings) — `controls-greatest` reads `mana-value`.
 
 const HEXPROOF = "Artifacts you control have hexproof. (They can't be the targets of spells or abilities your opponents control.)";
 const DRAW =

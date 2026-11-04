@@ -60,7 +60,7 @@ describe("Padeem, Consul of Innovation", () => {
     expect(upkeepDraws(t)).toBe(1);
   });
 
-  it("reads {X} as 0 on the battlefield (the rulings, rule 107.3b)", () => {
+  it("reads {X} as 0 on the battlefield (the rulings, rule 202.3e)", () => {
     const t = table();
     spawn(t.game, "Padeem, Consul of Innovation");
     spawn(t.game, "Ornithopter");
