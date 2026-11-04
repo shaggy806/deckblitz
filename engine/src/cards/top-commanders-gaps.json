@@ -1523,7 +1523,11 @@
   "cost:spend-only-foretell",
   "mana:spend-only-colorless-or-c-cost",
   "mana:spend-only-cumulative-upkeep",
-  "mana:spend-only-kicked-spells"
+  "mana:spend-only-kicked-spells",
+  "decision:choose-total-power-subset",
+  "effect:affect-unchosen-permanents",
+  "effect:each-player-keeps-one-exile-rest",
+  "effect:sacrifice-all-but-up-to-n"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

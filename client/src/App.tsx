@@ -5365,6 +5365,9 @@ function Table({
     const oneOfEach = pickTogether?.rule === 'one-of-each' ? pickTogether : undefined
     const stillWanted = oneOfEach === undefined ? [] : slotsLeft(oneOfEach, permanentPicks)
     const breaksTogether = pickTogether !== undefined && !fitsTogether(pickTogether, permanentPicks)
+    // A sum to reach (Phyrexian Dreadnought): each token of a stack counts.
+    const sumToReach = pickTogether?.rule === 'total' ? pickTogether.atLeast : undefined
+    const sumSoFar = permanentPicks.reduce((n, id) => n + Number(pickTogether?.tags[id]?.[0] ?? 0), 0)
     controls = (
       <div className="controls">
         <span>
@@ -5372,6 +5375,8 @@ function Table({
           {choosePermanentsAction.prompt} —{' '}
           {maxTotalPower !== undefined
             ? `total power ${totalPower}/${maxTotalPower}`
+            : sumToReach !== undefined
+              ? `total power ${sumSoFar} of ${sumToReach} or more`
             : oneOfEach !== undefined
               ? stillWanted.length > 0
                 ? `still to choose: ${stillWanted.join(', ')}`

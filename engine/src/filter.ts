@@ -74,9 +74,16 @@ export interface NumCompare {
  *   `toughness: { op: "gt", n: { own: "power" } }`; Kutzil, Malamet
  *   Exemplar's "each with power greater than its base power" is `power: {
  *   op: "gt", n: { own: "basePower" } }`. Needs no context.
+ * - `{ chosenThisWay: "power" }` is the greatest power among the permanents
+ *   chosen so far in this resolution (`thisWay: "chosen"`) still on the
+ *   battlefield — Sculpted Sunburst's "each opponent chooses a creature they
+ *   control **with equal or lesser power**", beside the creature you chose.
+ *   Not an amount, since an amount can't be below 0 (rule 107.1b) and a power
+ *   can. With nothing chosen, the comparison fails closed.
  */
 export type DynamicOperand =
   | { readonly amount: EffectAmount }
+  | { readonly chosenThisWay: "power" }
   | { readonly own: "power" | "toughness" | "basePower" | "baseToughness" | "manaValue" };
 
 /**
@@ -2181,6 +2188,15 @@ export function matchesFilter(
     live !== undefined ? manaValueOfObject(registry, live, ctx.castX) : lki!.manaValue;
   const dynamic = (operand: DynamicOperand): number | undefined => {
     if ("amount" in operand) return ctx.amount?.(operand.amount);
+    if ("chosenThisWay" in operand) {
+      if (layered !== undefined) return undefined;
+      const powers = thisWayEntries(state, "chosen").flatMap((entry) =>
+        state.objects[entry.object]?.zone === "battlefield"
+          ? [computeCharacteristics(state, registry, entry.object).power]
+          : [],
+      );
+      return powers.length === 0 ? undefined : Math.max(...powers);
+    }
     if (operand.own === "manaValue") return manaValueNow();
     if (own === undefined && layered !== undefined) return undefined;
     own ??= computeCharacteristics(state, registry, id);

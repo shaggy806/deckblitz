@@ -122,9 +122,12 @@ export function slotsLeft(together: ZoneChoiceTogether, chosen: readonly ObjectI
 }
 
 /** Whether `chosen` can still grow into an answer: under `"one-of-each"`, that
- * each is the one chosen for a slot of its own, covered or not; under any other
- * rule, that it obeys the rule. */
+ * each is the one chosen for a slot of its own, covered or not; under
+ * `"total"`, that it's within any cap; under any other rule, that it obeys the
+ * rule. */
 export function fitsSoFar(together: ZoneChoiceTogether, chosen: readonly ObjectId[]): boolean {
+  // A sum still to reach isn't reached yet: only a cap can be broken.
+  if (together.rule === "total") return together.atMost === undefined || totalOf(together, chosen) <= together.atMost;
   if (together.rule !== "one-of-each") return fitsTogether(together, chosen);
   return fitsTogether({ ...together, rule: "one-each" }, chosen);
 }
@@ -221,9 +224,15 @@ export function completeTogether(
   if (together.rule === "total" || together.rule === "variety") {
     if (preferred.length === 0 && together.orNone === true) return [];
     const kept: ObjectId[] = [];
+    // `eligible` may name a token stack once per token (a choice of permanents).
+    const left = [...eligible];
     for (const id of [...preferred, ...eligible]) {
       if (fitsTogether(together, kept) && kept.length > 0) break;
-      if (kept.includes(id) || !eligible.includes(id)) continue;
+      // Nothing that adds nothing, or takes away, to a sum.
+      if (together.rule === "total" && Number(together.tags[id]?.[0] ?? 0) <= 0) continue;
+      const at = left.indexOf(id);
+      if (at < 0) continue;
+      left.splice(at, 1);
       kept.push(id);
     }
     return kept;

@@ -4359,6 +4359,16 @@ Capricious Efreet needed no code: it's Wild Swing's random modal over chosen
 targets. Grip of Chaos is left: it also needs a trigger on anything going on the
 stack, `trigger:spell-or-ability-put-on-stack`.
 
+### Keeping some of yours, by count, by total power or under what you chose — built 2026-11-03
+
+`decision:choose-total-power-subset`, `effect:affect-unchosen-permanents`,
+`effect:each-player-keeps-one-exile-rest`, `effect:sacrifice-all-but-up-to-n`: no new decision.
+A sum to reach on `choose-permanents` (`together: { totalPowerAtLeast }`, reached through `unless`'s
+sacrifice option), a cap on `look-and-choose` (`together: { totalPowerAtMost }`), the filter operand
+`{ chosenThisWay: "power" }`, and a `vote`'s `prompt`; `sacrifice-all-but`'s `upTo`, `vote`,
+`this-way` and `look-and-choose`'s `leftover: "exile"` were there. Proving cards: Phyrexian
+Dreadnought, Moorland Rescuer, Sculpted Sunburst, Thunderwave, Watchers of the Dead, Covetous Elegy.
+
 ### One for each of several categories — built 2026-11-03
 
 `decision:choose-land-of-each-basic-type`, `decision:choose-one-of-each-type-sacrifice-rest`,

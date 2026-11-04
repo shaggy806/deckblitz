@@ -10226,4 +10226,45 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       you: { bf: ['Swamp*3'], hand: ['Noxious Vapors', 'Lightning Bolt', 'Shock', 'Grizzly Bears', 'Ornithopter', 'Forest'] },
     }),
   ),
+  preset(
+    'Phyrexian Dreadnought: sacrificing creatures up to a total power of 12',
+    board({
+      you: { bf: ['Island', 'Colossal Dreadmaw', 'Craw Wurm', 'Hill Giant'], hand: ['Phyrexian Dreadnought'] },
+    }),
+  ),
+  preset(
+    'Moorland Rescuer: returning creatures under its power',
+    board({
+      you: {
+        bf: ['Badlands*2', 'Moorland Rescuer'],
+        hand: ['Terminate'],
+        gy: ['Grizzly Bears', 'Hill Giant', 'Colossal Dreadmaw'],
+      },
+    }),
+  ),
+  preset(
+    'Sculpted Sunburst: four players, each choosing under what you chose',
+    board({
+      you: { bf: ['Plains*5', 'Hill Giant', 'Craw Wurm'], hand: ['Sculpted Sunburst'] },
+      opp: [
+        { human: true, bf: ['Grizzly Bears', 'Llanowar Elves', 'Colossal Dreadmaw'] },
+        { bf: ['Colossal Dreadmaw'] },
+        { bf: ['Savannah Lions'] },
+      ],
+    }),
+  ),
+  preset(
+    'Thunderwave: choosing the creature to spare',
+    board({
+      you: { bf: ['Mountain*4', 'Grizzly Bears'], hand: ['Thunderwave'] },
+      opp: [{ bf: ['Hill Giant'] }],
+    }),
+  ),
+  preset(
+    'Watchers of the Dead: an opponent keeps two cards of their graveyard',
+    board({
+      you: { bf: ['Watchers of the Dead'] },
+      opp: [{ human: true, gy: ['Grizzly Bears', 'Hill Giant', 'Shock'] }],
+    }),
+  ),
 ]

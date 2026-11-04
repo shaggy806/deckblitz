@@ -33,7 +33,7 @@ import { subsetOf, withinCopies } from "./shared/picks.js";
 
 /** How many permanents each stack entry stands for, where more than one. A
  * set rule's picks share no tag, so a stack's tokens, all alike, are one
- * choice under it — none is counted. */
+ * choice under it — none is counted. A sum's are each their own part of it. */
 function stackSizes(
   ctx: DecisionReadCtx,
   eligible: readonly ObjectId[],
@@ -49,7 +49,7 @@ function stackSizes(
     }
     return copies;
   }
-  if (together !== undefined) return copies;
+  if (together !== undefined && together.rule !== "total") return copies;
   for (const id of eligible) {
     const n = ctx.state.objects[id]?.stackCount ?? 1;
     if (n > 1) copies[id] = n;
@@ -132,7 +132,7 @@ export const choosePermanents = defineDecision({
       permanents:
         awaiting.together === undefined
           ? permanents
-          : completeTogether(awaiting.together, permanents, awaiting.eligible, awaiting.min, awaiting.max),
+          : completeTogether(awaiting.together, permanents, expand(awaiting.eligible, offer?.copies), awaiting.min, awaiting.max),
     };
   },
 
@@ -149,6 +149,25 @@ export const choosePermanents = defineDecision({
     // of each your most valuable first, as few as allowed, your least valuable,
     // and one of each from the whole board.
     const together = legal.together;
+    // A sum to reach (Phyrexian Dreadnought's "total power 12 or greater"):
+    // the least valuable first until it's reached, and the fewest, the
+    // biggest first.
+    if (together?.rule === "total") {
+      const units = expand(helpers.order(legal.eligible), legal.copies);
+      const tag = (id: ObjectId): number => Number(together.tags[id]?.[0] ?? 0);
+      const answers = [[...units].reverse(), [...units].sort((a, b) => tag(b) - tag(a))].map((preferred) =>
+        completeTogether(together, preferred, units, legal.min, legal.max),
+      );
+      const seen = new Set<string>();
+      return answers
+        .filter((picked) => {
+          const key = [...picked].sort().join(",");
+          if (seen.has(key)) return false;
+          seen.add(key);
+          return true;
+        })
+        .map((permanents) => ({ type: "choose-permanents", player, permanents }));
+    }
     if (together !== undefined) {
       const ordered = helpers.order(legal.eligible);
       const mine = ordered.filter((id) => helpers.controllerOf(id) === player);
@@ -283,7 +302,7 @@ export const choosePermanents = defineDecision({
       permanents:
         legal.together === undefined
           ? permanents
-          : completeTogether(legal.together, permanents, legal.eligible, legal.min, legal.max),
+          : completeTogether(legal.together, permanents, expand(legal.eligible, legal.copies), legal.min, legal.max),
     };
   },
 });

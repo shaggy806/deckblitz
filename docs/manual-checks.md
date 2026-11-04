@@ -6799,3 +6799,28 @@ These boards start before the first turn (the builder's `openingHands`), with th
 - **Do:** Click your Island.
 - **Expect:** A menu offers two ways to tap it, one ending "(add {U}{U})" and one "(add {U})". Choose "(add {U}{U})": your pool shows two blue.
 - **Not a bug:** Tapped to pay for a spell it doesn't ask: that extra {U} only pays cumulative upkeep, so it isn't taken.
+### Phyrexian Dreadnought: sacrificing creatures up to a total power of 12
+
+- **Do:** Cast Phyrexian Dreadnought. When its ability resolves, answer Yes to "Sacrifice any number of creatures with total power 12 or greater". Click Colossal Dreadmaw, then Craw Wurm, and press Confirm.
+- **Expect:** The prompt counts "total power 6 of 12 or more", Confirm stays off until it reads 12, and both go together. The Dreadnought and Hill Giant stay.
+
+### Moorland Rescuer: returning creatures under its power
+
+- **Do:** Cast Terminate on your Moorland Rescuer. In the popup, click Grizzly Bears, then Hill Giant, then Hill Giant again, and confirm.
+- **Expect:** Colossal Dreadmaw and Moorland Rescuer can't be picked, and Confirm stays off with both picked, at a total of 5. Grizzly Bears returns to the battlefield, and Moorland Rescuer is exiled.
+
+### Sculpted Sunburst: four players, each choosing under what you chose
+
+- **Do:** Cast Sculpted Sunburst. Click Hill Giant and confirm. Then, as Bob, click Grizzly Bears and confirm.
+- **Expect:** Bob can click only Grizzly Bears and Llanowar Elves, not his Dreadmaw. Your Craw Wurm, Bob's other creatures and Carol's Dreadmaw are exiled; Dave's Savannah Lions, his only choice, stays.
+- **Not a bug:** Carol isn't asked: she has nothing small enough. Dave isn't asked either: one choice is no choice.
+
+### Thunderwave: choosing the creature to spare
+
+- **Do:** Cast Thunderwave. The die rolls 13 on this board. When it has landed, click Hill Giant and press Confirm.
+- **Expect:** The prompt reads "You may choose a creature — the rest are dealt 3 damage", and you may press Confirm with nothing chosen. Grizzly Bears dies; Hill Giant has no damage.
+
+### Watchers of the Dead: an opponent keeps two cards of their graveyard
+
+- **Do:** Activate Watchers of the Dead. Switch to Bob: in the popup, click Grizzly Bears and Shock, and confirm.
+- **Expect:** Hill Giant is exiled. Grizzly Bears and Shock stay in Bob's graveyard, and Watchers of the Dead is in exile.

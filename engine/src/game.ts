@@ -267,6 +267,7 @@ import type {
   PtDuration,
   UntilPointDuration,
   ResolutionContext,
+  ChoosePermanentsTogether,
   ResolvedEnterAttacking,
   ReturnToHandZone,
   ResolvedSearchTogether,
@@ -34985,6 +34986,11 @@ export class Game {
       player: picker ?? player,
       ...(picker !== undefined && picker !== player ? { forPlayer: player } : {}),
       ...(forAnother !== undefined ? { prompt: forAnother } : {}),
+      // "Chooses two cards in their graveyard and exiles the rest": what's
+      // chosen stays, which a client's own title wouldn't say.
+      ...(destination === "stay" && leftover === "exile" && zone === "graveyard"
+        ? { prompt: `Choose ${max === 1 ? "a card" : `${max} cards`} to keep — the rest are exiled` }
+        : {}),
       ids,
       eligible,
       min: Math.min(min, possible),
@@ -35363,7 +35369,7 @@ export class Game {
    * tags worked out now — its land types (rule 205.3i), or the slots whose
    * filter it matches — so checking a chosen set needs no registry. */
   private searchTogether(
-    together: ResolvedSearchTogether,
+    together: ResolvedSearchTogether | ChoosePermanentsTogether,
     eligible: readonly ObjectId[],
     player: PlayerId,
     x: number,
@@ -35373,6 +35379,16 @@ export class Game {
       const cap = together.totalManaValueAtMost;
       for (const id of eligible) tags[id] = [String(manaValueOfObject(this.registry, this.state.objects[id]))];
       return { rule: "total", tags, atMost: cap, orNone: true, text: `with total mana value ${cap} or less` };
+    }
+    if ("totalPowerAtMost" in together) {
+      const cap = together.totalPowerAtMost;
+      for (const id of eligible) tags[id] = [String(computeCharacteristics(this.state, this.registry, id).power)];
+      return { rule: "total", tags, atMost: cap, orNone: true, text: `with total power ${cap} or less` };
+    }
+    if ("totalPowerAtLeast" in together) {
+      const sum = together.totalPowerAtLeast;
+      for (const id of eligible) tags[id] = [String(computeCharacteristics(this.state, this.registry, id).power)];
+      return { rule: "total", tags, atLeast: sum, text: `with total power ${sum} or greater` };
     }
     if ("oneEachTypeAmong" in together) {
       // Each type among them once (rule 205.2a), each spell as it was cast.
@@ -35805,6 +35821,14 @@ export class Game {
       }
       if ("takeDamage" in option) return true;
       if ("doing" in option) return mayBeDone(option.doing, this.makeResolutionContext(source, player, targets, x));
+      if (option.totalPowerAtLeast !== undefined) {
+        // What it can reach: every creature with power, none that takes away.
+        const reach = this.eligibleSacrifices(player, option.sacrifice).reduce((n, id) => {
+          const power = computeCharacteristics(this.state, this.registry, id).power;
+          return n + Math.max(0, power) * (this.state.objects[id]?.stackCount ?? 1);
+        }, 0);
+        return reach >= option.totalPowerAtLeast;
+      }
       return (
         this.eligibleSacrifices(
           player,
@@ -35859,6 +35883,22 @@ export class Game {
             ? chosenPermanent(option.returnToHand, { kind: "return-to-hand", target: 0 }, option.text)
             : "tapPermanent" in option
             ? chosenPermanent(option.tapPermanent, { kind: "tap", target: 0 }, option.text)
+            : "sacrifice" in option && option.totalPowerAtLeast !== undefined
+            ? {
+                // Only what can be sacrificed counts towards it (rule 701.21a).
+                kind: "choose-permanents",
+                filter: {
+                  amongObjects: this.eligibleSacrifices(player, option.sacrifice).map((object) => ({
+                    object,
+                    stint: this.state.objects[object]?.zoneChangeCount ?? 0,
+                  })),
+                },
+                min: 1,
+                upTo: Game.MAX_EFFECT_INSTANCES,
+                together: { totalPowerAtLeast: option.totalPowerAtLeast },
+                then: { kind: "sacrifice-target", target: 0 },
+                prompt: option.text,
+              }
             : "sacrifice" in option
               ? {
                   kind: "sacrifice",
@@ -36042,7 +36082,9 @@ export class Game {
         eligible: keep ? [...eligible].sort((a, b) => power(b) - power(a)) : eligible,
         min: mayChooseFewer ? 0 : most,
         max: most,
-        prompt: extra
+        prompt: what.prompt !== undefined
+          ? what.prompt
+          : extra
           ? "Vote an additional time (or choose none)"
           : `${verb} ${what.upTo !== undefined ? "up to " : ""}${what.upTo === 1 ? "one permanent" : noun}${keep ? " to keep" : ""}`,
         then: { kind: "cast-vote", voter: player, choice: "target", ...(keep ? { keep: true } : {}) },
@@ -41866,7 +41908,7 @@ export class Game {
     prompt: string,
     exceptSource = false,
     except: readonly ObjectId[] = [],
-    togetherRule?: { readonly distinctNames: true } | { readonly distinctPowers: true },
+    togetherRule?: ChoosePermanentsTogether,
   ): void {
     const matching = this.battlefieldMatching(player, filter).filter(
       (id) => (!exceptSource || id !== source) && !except.includes(id),
@@ -41875,7 +41917,7 @@ export class Game {
     const eligible = eligibleForTogether(together, matching);
     // One a name or a power at most, so no more than there are of those.
     const available =
-      together === undefined
+      together === undefined || together.rule === "total"
         ? eligible.reduce((n, id) => n + (this.state.objects[id]?.stackCount ?? 1), 0)
         : new Set(eligible.flatMap((id) => together.tags[id] ?? [])).size;
     const most = Math.min(Math.max(0, max), available);

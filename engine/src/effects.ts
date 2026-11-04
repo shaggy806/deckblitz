@@ -276,12 +276,25 @@ export type SearchTogether =
    * allowed — Ao, the Dawn Sky's "any number of nonland permanent cards with
    * total mana value 4 or less". An amount on a `look-and-choose`, read as it
    * resolves (Smelting Vat's "the sacrificed artifact's mana value"). */
-  | { readonly totalManaValueAtMost: EffectAmount };
+  | { readonly totalManaValueAtMost: EffectAmount }
+  /** The same over the cards' powers — Moorland Rescuer's "any number of other
+   * creature cards with total power X or less", X read as it resolves. */
+  | { readonly totalPowerAtMost: EffectAmount };
 
 /** A {@link SearchTogether} as `Game` raises it: its amount read. */
 export type ResolvedSearchTogether =
-  | Exclude<SearchTogether, { readonly totalManaValueAtMost: EffectAmount }>
-  | { readonly totalManaValueAtMost: number };
+  | Exclude<
+      SearchTogether,
+      { readonly totalManaValueAtMost: EffectAmount } | { readonly totalPowerAtMost: EffectAmount }
+    >
+  | { readonly totalManaValueAtMost: number }
+  | { readonly totalPowerAtMost: number };
+
+/** A `choose-permanents`' rule over what's chosen as a set. */
+export type ChoosePermanentsTogether =
+  | { readonly distinctNames: true }
+  | { readonly distinctPowers: true }
+  | { readonly totalPowerAtLeast: number };
 
 /**
  * Where each chosen card of a `look-and-choose` goes when that depends on the
@@ -1403,6 +1416,11 @@ export type UnlessOption =
   | ({
       readonly sacrifice: CardFilter;
       readonly count?: number;
+      /** "…unless you sacrifice **any number of creatures with total power 12
+       * or greater**" (Phyrexian Dreadnought): `count` isn't read. Offered only
+       * when what the chooser can sacrifice reaches it (the ruling), and they
+       * choose how, all sacrificed at once (the ruling; rule 701.21a). */
+      readonly totalPowerAtLeast?: number;
       readonly exceptSource?: boolean;
       /** "Its controller loses 3 life unless they sacrifice **another** nonland
        * permanent" (Torment of Venom): never the object in this target slot. */
@@ -2408,14 +2426,24 @@ export type EffectSpec =
        * creatures **with different powers**" (Sigarda's Vanguard), "tokens you
        * control **with different names**" (Battle for Bretagard). A token
        * stack's tokens share both, so one of a stack at most; a permanent with
-       * no name can't be chosen for different names (rule 201.2b). */
-      readonly together?: { readonly distinctNames: true } | { readonly distinctPowers: true };
+       * no name can't be chosen for different names (rule 201.2b).
+       * `totalPowerAtLeast` is "any number of creatures **with total power 12
+       * or greater**" (Phyrexian Dreadnought's `unless` option), a negative
+       * power subtracting, each token of a stack counted. */
+      readonly together?: ChoosePermanentsTogether;
       /** Only what this one player controls — "that creature's controller
        * gains control of **one of those lands** of their choice", the lands
        * of the player it dealt damage to (Turf War's `"trigger-player"`). A
        * `CardFilter`'s own `controlledBy` can't name one seat at a 3-4 player
        * table. Nobody named, and nothing happens. */
       readonly controlledByPlayer?: EffectPlayerRef;
+=======
+       * no name can't be chosen for different names (rule 201.2b).
+       * `totalPowerAtLeast` is "any number of creatures **with total power 12
+       * or greater**" (Phyrexian Dreadnought's `unless` option), a negative
+       * power subtracting, each token of a stack counted. */
+      readonly together?: ChoosePermanentsTogether;
+>>>>>>> c2e26c7ea (Engine, Cards: each player keeps some of theirs by count, by total power or under what you chose, and each creature not chosen this way (a total power to reach on choose-permanents, a cap on look-and-choose, a chosen-power filter operand, a vote's own prompt) — Phyrexian Dreadnought, Moorland Rescuer, Sculpted Sunburst, Thunderwave, Watchers of the Dead, Covetous Elegy)
     }
   | {
       /**
@@ -7555,6 +7583,9 @@ export type EffectSpec =
         | {
             readonly permanent: CardFilter;
             readonly upTo?: number;
+            /** What the chooser is asked, when the general words won't do:
+             * Thunderwave's chosen creature is spared rather than kept. */
+            readonly prompt?: string;
             /** Only with `choose`: "each player chooses **three** nonland
              * permanents they control" (Fall of the First Civilization) —
              * one vote a permanent, and as many as there are with fewer
@@ -10407,7 +10438,7 @@ export interface EffectApi {
     /** Who chooses — the effect's controller when absent. */
     chooser?: PlayerId,
     /** What the chosen ones must be as a set — the effect's `together`. */
-    together?: { readonly distinctNames: true } | { readonly distinctPowers: true },
+    together?: ChoosePermanentsTogether,
   ): void;
   /** See the `"blight"` {@link EffectSpec}: `player` blights `amount` — the
    * creature chosen now, or asked for — then `then` with it as target 0.
@@ -13564,9 +13595,11 @@ function resolvedTogether(
   ctx: ResolutionContext,
 ): ResolvedSearchTogether | undefined {
   if (together === undefined) return undefined;
-  return "totalManaValueAtMost" in together
-    ? { totalManaValueAtMost: amountValue(together.totalManaValueAtMost, ctx) }
-    : together;
+  if ("totalManaValueAtMost" in together) {
+    return { totalManaValueAtMost: amountValue(together.totalManaValueAtMost, ctx) };
+  }
+  if ("totalPowerAtMost" in together) return { totalPowerAtMost: amountValue(together.totalPowerAtMost, ctx) };
+  return together;
 }
 
 function attachHost(ref: AttachHostRef | undefined, ctx: ResolutionContext): EnterAttachHost | undefined {

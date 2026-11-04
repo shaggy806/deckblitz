@@ -10420,6 +10420,63 @@ describe("choices kept, the rest destroyed", () => {
     });
   });
 
+  it("reads each player keeping some and the rest going, and Sculpted Sunburst whole", () => {
+    expect(
+      effectOf("Each player chooses up to two creatures they control, then sacrifices the rest."),
+    ).toEqual({ kind: "sacrifice-all-but", who: "each-player", keep: 2, upTo: true, filter: { type: "creature" } });
+    expect(effectOf("Each player chooses six lands they control, then sacrifices the rest.")).toEqual({
+      kind: "sacrifice-all-but",
+      who: "each-player",
+      keep: 6,
+      filter: { type: "land" },
+    });
+    expect(effectOf("Each opponent chooses two cards in their graveyard and exiles the rest.")).toEqual({
+      kind: "for-each-player",
+      who: "each-opponent",
+      effect: { kind: "look-and-choose", player: "that-player", zone: "graveyard", min: 2, max: 2, destination: "stay", leftover: "exile" },
+    });
+    expect(
+      effectOf(
+        "Choose a creature you control, then each opponent chooses a creature they control with equal or lesser power. If you chose a creature this way, exile each creature not chosen by any player this way.",
+      ),
+    ).toMatchObject({
+      effects: [
+        { who: "you" },
+        { who: "each-opponent", for: { permanent: { power: { op: "lte", n: { chosenThisWay: "power" } } } } },
+        { kind: "conditional", then: { kind: "exile-all", filter: { type: "creature", notThisWay: "chosen" } } },
+      ],
+    });
+  });
+
+  it("reads a total power to reach, and one to stay under", () => {
+    expect(effectOf("Sacrifice it unless you sacrifice any number of creatures with total power 12 or greater.")).toEqual({
+      kind: "unless",
+      chooser: "you",
+      options: [
+        {
+          sacrifice: { type: "creature", controlledBy: "you" },
+          totalPowerAtLeast: 12,
+          text: "Sacrifice any number of creatures with total power 12 or greater",
+        },
+      ],
+      otherwise: { kind: "sacrifice-source" },
+    });
+    expect(
+      effectOf(
+        "Return any number of other creature cards with total power X or less from your graveyard to the battlefield, where X is ~'s power.",
+      ),
+    ).toMatchObject({
+      kind: "look-and-choose",
+      filter: { type: "creature", isSource: false },
+      together: { totalPowerAtMost: { powerOf: "source" } },
+      destination: "battlefield",
+    });
+    // An X nothing defines isn't read as a cast-time X.
+    expect(
+      effectOf("Return any number of creature cards with total power X or less from your graveyard to the battlefield."),
+    ).toBeNull();
+  });
+
   it("reads the controller choosing any, up to some, one way or the other", () => {
     expect(effectOf("Choose up to one creature. Destroy the rest.")).toEqual({
       kind: "sequence",

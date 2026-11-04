@@ -2558,6 +2558,33 @@ export function parseSentence(sentence, ctx) {
   const s = sentence.replace(/\s+/g, " ").trim();
   const emblem = emblemOf(s);
   if (emblem !== null) return emblem;
+  let M;
+  // "Then you create a tapped Treasure token for each creature your opponents
+  // control" (Covetous Elegy), counted as it applies.
+  if ((M = /^then you create a tapped Treasure token for each creature your opponents control\.$/i.exec(s))) {
+    const token = ctx?.tokenFor?.("Treasure token") ?? null;
+    if (token !== null) {
+      return { kind: "create-token", token, count: { countOf: { type: "creature", controlledBy: "opponent" } }, tapped: true };
+    }
+  }
+  // "Return any number of other creature cards with total power X or less from
+  // your graveyard to the battlefield, where X is this creature's power"
+  // (Moorland Rescuer): not targets, so chosen as it resolves.
+  if ((M = /^return any number of (other )?(.+?) cards with total power (X|\d+) or less from your graveyard to the battlefield(, where X is ~'s power)?\.$/i.exec(s))) {
+    const filter = parseTypePhrase(M[2]);
+    if (filter !== null && (M[3] === "X") === (M[4] !== undefined)) {
+      return {
+        kind: "look-and-choose",
+        zone: "graveyard",
+        filter: { ...filter, ...(M[1] !== undefined ? { isSource: false } : {}) },
+        min: 0,
+        max: 99,
+        together: { totalPowerAtMost: M[3] === "X" ? { powerOf: "source" } : Number(M[3]) },
+        destination: "battlefield",
+        leftover: "stay",
+      };
+    }
+  }
   // Fall from Favor's enters trigger, the two things at once.
   if (/^tap enchanted creature and you become the monarch\.$/i.test(s)) {
     return { kind: "sequence", effects: [{ kind: "tap", target: "attached" }, { kind: "become-monarch" }] };
@@ -5892,6 +5919,37 @@ export function parseSentence(sentence, ctx) {
       otherwise: { kind: "counter", target: i },
     };
   }
+  // "Each player chooses up to two creatures they control, then sacrifices the
+  // rest" (Covetous Elegy), and without "up to" (Planetary Annihilation).
+  if ((m = /^each player chooses (up to )?(two|three|four|five|six) (.+?)s they control, then sacrifices the rest\.$/i.exec(s))) {
+    const kept = parseTypePhrase(m[3]);
+    const keep = { two: 2, three: 3, four: 4, five: 5, six: 6 }[m[2]];
+    if (kept !== null) {
+      return { kind: "sacrifice-all-but", who: "each-player", keep, ...(m[1] !== undefined ? { upTo: true } : {}), filter: kept };
+    }
+  }
+  // "Exile this card", ending a dies trigger (Moorland Rescuer): the card as
+  // the trigger found it, not whatever it has become since (rule 400.7).
+  if (/^exile ~\.$/i.test(s) && ctx?.departed === "source") return { kind: "exile", target: "trigger-object" };
+  // "Sacrifice it unless you sacrifice any number of creatures with total power
+  // 12 or greater" (Phyrexian Dreadnought).
+  if ((m = /^sacrifice (?:~|it) unless you sacrifice any number of (.+?) with total power (\d+) or greater\.$/i.exec(s))) {
+    const filter = parseTypePhrase(m[1].replace(/s$/, ""));
+    if (filter !== null) {
+      return {
+        kind: "unless",
+        chooser: "you",
+        options: [
+          {
+            sacrifice: { ...filter, controlledBy: "you" },
+            totalPowerAtLeast: Number(m[2]),
+            text: `Sacrifice any number of ${m[1]} with total power ${m[2]} or greater`,
+          },
+        ],
+        otherwise: { kind: "sacrifice-source" },
+      };
+    }
+  }
   if ((m = /^sacrifice (?:~|it) unless you discard an? (.+?) card\.$/i.exec(s))) {
     const filter = parseTypePhrase(m[1]);
     if (filter !== null) {
@@ -6357,6 +6415,37 @@ function chosenAndTheRest(text) {
     const upTo = m[1].startsWith("up to") ? COUNTS[m[1].slice("up to ".length)] : undefined;
     const permanent = { permanent: kept, ...(upTo !== undefined ? { upTo } : {}), keep: true };
     return chooseThenRest({ who: "you", for: permanent }, kept, m[3]);
+  }
+  // "Each opponent chooses two cards in their graveyard and exiles the rest"
+  // (Watchers of the Dead).
+  if ((m = /^Each (player|opponent) chooses (a|two|three|four|five|six) cards? in their graveyard and exiles the rest\.$/.exec(text))) {
+    const count = COUNTS[m[2]] ?? 1;
+    return {
+      kind: "for-each-player",
+      who: m[1] === "player" ? "each-player" : "each-opponent",
+      effect: { kind: "look-and-choose", player: "that-player", zone: "graveyard", min: count, max: count, destination: "stay", leftover: "exile" },
+    };
+  }
+  // Sculpted Sunburst, a shape of its own.
+  if (text === "Choose a creature you control, then each opponent chooses a creature they control with equal or lesser power. If you chose a creature this way, exile each creature not chosen by any player this way.") {
+    const kept = { type: "creature", controlledBy: "you" };
+    return {
+      kind: "sequence",
+      effects: [
+        { kind: "vote", choose: true, who: "you", for: { permanent: kept, own: true, keep: true } },
+        {
+          kind: "vote",
+          choose: true,
+          who: "each-opponent",
+          for: { permanent: { ...kept, power: { op: "lte", n: { chosenThisWay: "power" } } }, own: true, keep: true },
+        },
+        {
+          kind: "conditional",
+          condition: { kind: "this-way", what: "chosen", who: "you" },
+          then: { kind: "exile-all", filter: { type: "creature", notThisWay: "chosen" } },
+        },
+      ],
+    };
   }
   if ((m = /^starting with you, each player may choose an? (.+?) you don't control\. Destroy each permanent chosen this way\.$/i.exec(text))) {
     const chosen = parseTypePhrase(m[1]);
