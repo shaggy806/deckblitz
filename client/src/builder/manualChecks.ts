@@ -10767,4 +10767,23 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       step: 'upkeep',
     }),
   ),
+  preset(
+    "Desdemona, Freedom's Edge: escape until end of turn",
+    board({
+      you: { bf: ['Forest*2', "Desdemona, Freedom's Edge"], gy: ['Grizzly Bears', 'Mountain', 'Plains'] },
+      step: 'begin-combat',
+    }),
+  ),
+  preset(
+    'Tizerus Charger: escapes with your choice of counter',
+    board({
+      you: { bf: ['Swamp*5'], gy: ['Tizerus Charger', 'Mountain', 'Plains', 'Forest', 'Island', 'Wastes'] },
+    }),
+  ),
+  preset(
+    'Sins of the Past: a spell cast for free from the graveyard, then exiled',
+    board({
+      you: { bf: ['Swamp*6'], hand: ['Sins of the Past'], gy: ['Divination'] },
+    }),
+  ),
 ]

@@ -286,7 +286,15 @@ export interface GameObject {
    * ends when the card leaves the graveyard (`moveObject` clears it): a card
    * that comes back is a new object with no permission.
    */
-  graveyardCastPermission?: { readonly player: PlayerId; readonly turn: number };
+  graveyardCastPermission?: {
+    readonly player: PlayerId;
+    readonly turn: number;
+    /** "…without paying its mana cost" — the effect's `free`. */
+    readonly free?: true;
+    /** "If that spell would be put into your graveyard, exile it instead" — the
+     * effect's `exileAfter`. */
+    readonly exileAfter?: true;
+  };
   /** This spell was cast under a permission that exiles it instead of letting
    * it reach a graveyard (Kess, Dissident Mage — `castFromGraveyard
    * .exileAfterwards`). Consulted by `moveObject` for the move off the
@@ -1276,7 +1284,19 @@ export interface GameObject {
    * Ghost Ark's unearth), each with its cost as a string (`""` for retrace,
    * which has none) and the effect's source. Ends on any zone change and in
    * cleanup, as `grantedFlashback` does. */
-  grantedGraveyardKeywords?: readonly { keyword: GraveyardKeyword; cost: string; by: ObjectId }[];
+  grantedGraveyardKeywords?: readonly {
+    keyword: GraveyardKeyword;
+    cost: string;
+    by: ObjectId;
+    /** An escape's "plus exile N other cards" (rule 702.138a). */
+    exileCount?: number;
+    /** The cost is "its mana cost": of the face being cast. */
+    manaCost?: true;
+  }[];
+  /** The other cards a spell's own escape exiled as it was cast, for the ability
+   * it escapes with (`CardDefinition.escape.exileLinked`): linked to the permanent
+   * it becomes (rule 607.2a). Only on the stack. */
+  escapeExiled?: readonly ObjectId[];
   /** A foretell cost the card was given besides any printed on it (rule
    * 702.143d): its mana cost, of the face being cast, reduced by this much
    * generic mana — "its foretell cost is its mana cost reduced by {2}"

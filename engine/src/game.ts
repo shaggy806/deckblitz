@@ -13268,6 +13268,12 @@ export class Game {
         const menu = becoming.chooseCreatureTypeMenu;
         return menu === null ? { kind: "choose" } : { kind: "choose", options: menu };
       }
+      // "This creature escapes with your choice of …" (rule 702.138c), chosen
+      // as it enters (Tizerus Charger's ruling), and only if it escaped.
+      const escapeChoice = becoming.escape?.counterChoice;
+      if (escapeChoice !== undefined && object.castVia === "escape") {
+        return { kind: "choose", options: escapeChoice, prompt: "It escapes with your choice of counter" };
+      }
       if (becoming.chooseOnEnter !== null) {
         return {
           kind: "choose",
@@ -19233,9 +19239,10 @@ export class Game {
       if (convoking) convokers.push({ object: id, stint: this.state.objects[id].zoneChangeCount ?? 0 });
     }
 
-    // Escape (rule 702.139a): exile N other cards from the graveyard as part
+    // Escape (rule 702.138a): exile N other cards from the graveyard as part
     // of the cost — the ones the caster chose (validated above), or for a
     // driver that doesn't choose, the front (oldest) of the graveyard.
+    let escapeLinked: readonly ObjectId[] | undefined;
     if (escape !== null) {
       const others = this.state.zones.perPlayer[player].graveyard.filter((id) => id !== cardId);
       const exiled = escapeExile !== undefined ? [...escapeExile] : others.slice(0, escape.exileCount);
@@ -19246,6 +19253,7 @@ export class Game {
         for (const id of exiled) this.moveObject(id, "exile");
       });
       this.emit({ type: "escape-cost-paid", object: cardId, exiled: [...exiled] });
+      if (escape.grantor === undefined && def.escape?.exileLinked === true) escapeLinked = exiled;
     }
 
     // Delve (rule 702.66a): the chosen cards are exiled as the cost is paid,
@@ -19349,6 +19357,7 @@ export class Game {
     // Kess's "if a spell cast this way would be put into your graveyard,
     // exile it instead" — set after the move to the stack, which clears it.
     if (graveyardPermission?.exileAfterwards === true) object.exileIfWouldGoToGraveyard = true;
+    if (escapeLinked !== undefined) object.escapeExiled = escapeLinked;
     // Chandra, Acolyte of Flame's "if that spell would be put into your
     // graveyard, exile it instead", for the cast her −2 asked for.
     const exileAfter = via === "effect" ? this.castNowProbe?.exileAfter : undefined;
@@ -21282,7 +21291,13 @@ export class Game {
     if (cost === null) return;
     object.grantedGraveyardKeywords = [
       ...(object.grantedGraveyardKeywords ?? []),
-      { keyword: grant.keyword, cost, by },
+      {
+        keyword: grant.keyword,
+        cost,
+        by,
+        ...(grant.exileCount !== undefined ? { exileCount: grant.exileCount } : {}),
+        ...(grant.cost === undefined ? { manaCost: true as const } : {}),
+      },
     ];
     invalidateComputedCache();
   }
@@ -25840,7 +25855,16 @@ export class Game {
       this.state.suspendedResolutions.push({ effect: null, enter: { kind: "spell", object: id } });
       return;
     }
-    const escapedWith = object.castVia === "escape" ? def.escape?.counters : undefined;
+    const chosenCounter = def.escape?.counterChoice !== undefined ? object.enterChoice?.chosen : undefined;
+    const escapedWith =
+      object.castVia !== "escape"
+        ? undefined
+        : chosenCounter !== undefined
+          ? { kind: chosenCounter, amount: 1 }
+          : def.escape?.counters;
+    // The cards its own escape exiled, for the ability it escapes with (rule
+    // 702.138d). Read before the move, which ends it with the stack.
+    const escapeExiled = object.escapeExiled;
     // "If you chose to pay this permanent's impending cost, it enters with N
     // time counters on it" (rule 702.176a).
     const impendingWith = object.castVia === "impending" ? def.impending?.count : undefined;
@@ -25938,6 +25962,15 @@ export class Game {
     // permanent genuinely arrived with (rule 614.1c).
     if (escapedWith !== undefined && this.state.objects[id]?.zone === "battlefield") {
       this.addCounter({ kind: "object", object: id }, escapedWith.kind, escapedWith.amount);
+    }
+    // Linked to it from here, as long as it stays (rule 607.2a), each still the
+    // same card in exile (rule 400.7).
+    if (escapeExiled !== undefined && this.state.objects[id]?.zone === "battlefield") {
+      const stint = this.state.objects[id].zoneChangeCount ?? 0;
+      for (const cardId of escapeExiled) {
+        const card = this.state.objects[cardId];
+        if (card?.zone === "exile") card.exiledWith = { source: id, zoneChangeCount: stint };
+      }
     }
     // Before the entry is announced, so nothing sees it arrive as a creature.
     if (impendingWith !== undefined && this.state.objects[id]?.zone === "battlefield") {
@@ -33277,7 +33310,7 @@ export class Game {
           }
         }
       },
-      grantGraveyardCast: (target) => this.grantGraveyardCastByEffect(controller, target),
+      grantGraveyardCast: (target, terms) => this.grantGraveyardCastByEffect(controller, target, terms),
       putOnLibrary: (target, position) => {
         if (target.kind === "object") this.putOnLibrary(target.object, position);
       },
@@ -38149,7 +38182,17 @@ export class Game {
     const out: GraveyardGrantOption[] = [];
     const own = object.graveyardCastPermission;
     if (!isLand && own !== undefined && own.player === player && own.turn === this.state.turn.number) {
-      out.push({ grant: { source: card }, permission: null });
+      out.push({
+        grant: { source: card },
+        permission:
+          own.free === true || own.exileAfter === true
+            ? {
+                filter: {},
+                ...(own.free === true ? { mana: "{0}" } : {}),
+                ...(own.exileAfter === true ? { exileAfterwards: true } : {}),
+              }
+            : null,
+      });
     }
     // The card's own "you may cast this card from your graveyard as long as
     // …" (Gravecrawler — rule 113.6f) or "… by [costs]" (Wickerfolk
@@ -38268,11 +38311,15 @@ export class Game {
 
   /** "Choose target artifact card in your graveyard. You may cast that card
    * this turn" (Silas Renn, Emry) — see `GameObject.graveyardCastPermission`. */
-  private grantGraveyardCastByEffect(controller: PlayerId, target: TargetRef): void {
+  private grantGraveyardCastByEffect(
+    controller: PlayerId,
+    target: TargetRef,
+    terms?: { readonly free?: true; readonly exileAfter?: true },
+  ): void {
     if (target.kind !== "object") return;
     const object = this.state.objects[target.object];
     if (object === undefined || object.zone !== "graveyard") return;
-    object.graveyardCastPermission = { player: controller, turn: this.state.turn.number };
+    object.graveyardCastPermission = { player: controller, turn: this.state.turn.number, ...terms };
     this.emit({ type: "graveyard-cast-granted", object: target.object, player: controller });
   }
 
@@ -47219,6 +47266,15 @@ export class Game {
     const printed = this.registry.get(card.cardName).escape;
     if (printed !== null && face === 0) out.push({ cost: printed.cost, exileCount: printed.exileCount });
     if (card.zone !== "graveyard") return out;
+    // A one-shot grant until end of turn (`grant-graveyard-keyword` — Desdemona,
+    // Freedom's Edge), whatever has become of what gave it.
+    for (const granted of card.grantedGraveyardKeywords ?? []) {
+      if (granted.keyword !== "escape") continue;
+      const cost = granted.manaCost === true ? this.faceDef(cardId, face).manaCost : granted.cost;
+      const exileCount = granted.exileCount ?? 0;
+      if (cost === null || out.some((e) => e.cost === cost && e.exileCount === exileCount)) continue;
+      out.push({ cost, exileCount, grantor: granted.by });
+    }
     for (const { source, ability } of this.activeStaticsOf(
       card.owner,
       (a) => a.grantsToGraveyard?.escape !== undefined,
@@ -47523,6 +47579,9 @@ export class Game {
     // "You may cast it" as something resolves (Chandra, Torch of Defiance) is
     // a cast for its mana cost like any other, unless the offer says what it
     // costs instead: free, for madness or miracle, by discarding or for energy.
+    // So is a graveyard permission "without paying its mana cost" (Sins of the
+    // Past): an alternative cost already, and only one applies (118.9a).
+    if (via === "graveyard-permission" && card?.graveyardCastPermission?.free === true) return out;
     if (via === "effect") {
       const asked = this.castNowOffer(caster, cardId);
       if (asked === null || asked.free || asked.madness !== undefined || asked.miracle !== undefined ||

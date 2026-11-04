@@ -7166,3 +7166,18 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 - **Do:** Cast Hill Giant when asked, then pass until the round has come back to you.
 - **Expect:** Nobody draws. Bob's Forest enters on his side, Carol's Grizzly Bears is cast on hers, and Dave's Mountain enters on his.
+
+### Desdemona, Freedom's Edge: escape until end of turn
+
+- **Do:** Pass into declare attackers and attack Bob with Desdemona. After combat, open your graveyard and cast Grizzly Bears.
+- **Expect:** The graveyard offers Grizzly Bears with escape, for {1}{G} and two other cards. Two Forests pay, Mountain and Plains go to exile and Grizzly Bears enters.
+
+### Tizerus Charger: escapes with your choice of counter
+
+- **Do:** Open your graveyard, cast Tizerus Charger with escape, exile the five other cards, and pass to let it resolve.
+- **Expect:** As it enters, the banner says "It escapes with your choice of counter" with +1/+1 and flying to pick. The counter you pick is on it.
+
+### Sins of the Past: a spell cast for free from the graveyard, then exiled
+
+- **Do:** Cast Sins of the Past, choosing Divination. Then open your graveyard and cast Divination.
+- **Expect:** No mana is asked for Divination (your Swamps were all used on Sins of the Past). You draw two cards. Sins of the Past and Divination both end in exile.

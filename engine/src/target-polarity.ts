@@ -637,7 +637,9 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "grant-graveyard-keyword": (n, v) => {
     if (n.target !== undefined) v.touch(n.target, "help", MAJOR);
   },
-  "grant-graveyard-cast": (n, v) => v.touch(n.target, "help", MAJOR),
+  "grant-graveyard-cast": (n, v) => {
+    if (n.target !== undefined) v.touch(n.target, "help", MAJOR);
+  },
   "grant-triggered": (n, v) => v.touch(n.target, "help", MAJOR),
   "lose-abilities": (n, v) => v.touch(n.target, "harm", MAJOR),
   "lose-abilities-all": none,

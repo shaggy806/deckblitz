@@ -1707,7 +1707,14 @@
   "effect:cast-now-exiled-with-counter",
   "effect:cast-now-from-hand-or-graveyard",
   "effect:cast-now-from-target-player-graveyard",
-  "effect:cast-now-then-reads-cast-spell"
+  "effect:cast-now-then-reads-cast-spell",
+  "effect:grant-escape-until-end-of-turn",
+  "static:escapes-with-ability",
+  "static:escapes-with-counter-choice",
+  "zone:cast-from-milled-cards",
+  "effect:grant-graveyard-cast-free",
+  "zone:graveyard-cast-exile-replacement",
+  "effect:grant-graveyard-cast-all"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

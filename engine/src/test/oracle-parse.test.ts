@@ -14391,6 +14391,42 @@ describe("a cast as this resolves, on its own terms", () => {
     });
   });
 
+  it("reads graveyard grants: escape until end of turn, a free cast this turn, from among the milled", () => {
+    const desdemona = read(
+      "Legendary Creature — Human Rogue",
+      "Whenever this creature attacks, target creature card in your graveyard that's an artifact or that has mana value 3 or less gains escape until end of turn. The escape cost is equal to its mana cost plus exile two other cards from your graveyard. (You may cast it from your graveyard for its escape cost this turn.)",
+    );
+    expect(desdemona.complete).toBe(true);
+    expect(desdemona.triggered[0].targets[0]).toEqual({
+      kind: "card-in-graveyard",
+      whose: "you",
+      filter: { type: "creature", anyOf: [{ type: "artifact" }, { manaValue: { op: "lte", n: 3 } }] },
+    });
+    expect(desdemona.triggered[0].effect).toEqual({
+      kind: "grant-graveyard-keyword",
+      target: 0,
+      grant: { keyword: "escape", exileCount: 2 },
+    });
+    const sins = read(
+      "Sorcery",
+      "Until end of turn, you may cast target instant or sorcery card from your graveyard without paying its mana cost. If that spell would be put into your graveyard, exile it instead.",
+    );
+    expect(sins.complete).toBe(true);
+    expect(sins.effect).toEqual({ kind: "grant-graveyard-cast", target: 0, free: true, exileAfter: true });
+    const seeker = read(
+      "Creature — Fish Illusion",
+      "When this creature enters, target opponent mills five cards. You may cast an instant or sorcery spell from among them without paying its mana cost.",
+    );
+    expect(seeker.complete).toBe(true);
+    expect(seeker.triggered[0].effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "mill", target: 0, amount: 5 },
+        { kind: "cast-now", from: "milled-this-way", spell: { typesAnyOf: ["instant", "sorcery"] }, free: true },
+      ],
+    });
+  });
+
   it("reads \"if able\" as a cast that can't be declined", () => {
     const omen = read(
       "Artifact",

@@ -11454,6 +11454,71 @@ function castNowTermsAt(sentences, i, ctx) {
     if (spell === null) return null;
     return followed({ kind: "cast-now", from: { zones: ["hand", "graveyard"] }, spell, ...castNowTerms(fromZones[2]) }, 1);
   }
+  // "Target opponent mills five cards. You may cast an instant or sorcery spell
+  // from among them without paying its mana cost." (Jace's Mindseeker.)
+  const millFirst = /^target opponent mills (\w+) cards?\.$/i.exec(sentences[i]);
+  const fromAmong =
+    millFirst === null
+      ? null
+      : new RegExp(`^you may cast an? (.+?) spell from among them${CAST_NOW_TERMS}\\.$`, "i").exec(sentences[i + 1] ?? "");
+  if (fromAmong !== null && millFirst !== null) {
+    const amount = numberOf(millFirst[1]);
+    const spell = parseTypePhrase(fromAmong[1]);
+    if (amount === null || spell === null) return null;
+    return {
+      effect: {
+        kind: "sequence",
+        effects: [
+          { kind: "mill", target: ctx.target("opponent"), amount },
+          { kind: "cast-now", from: "milled-this-way", spell, ...castNowTerms(fromAmong[2]) },
+        ],
+      },
+      used: 2,
+    };
+  }
+  // "Until end of turn, you may cast target instant or sorcery card from your
+  // graveyard without paying its mana cost. If that spell would be put into your
+  // graveyard, exile it instead." (Sins of the Past.)
+  const untilEnd =
+    /^(?:until end of turn, you may cast target (.+?) card from your graveyard without paying its mana cost|you may cast target (.+?) card from your graveyard this turn)\.$/i.exec(
+      sentences[i],
+    );
+  if (untilEnd !== null) {
+    const filter = parseTypePhrase(untilEnd[1] ?? untilEnd[2], { cards: true });
+    if (filter === null) return null;
+    const exiled = /^if that spell would be put into your graveyard, exile it instead\.$/i.test(sentences[i + 1] ?? "");
+    return {
+      effect: {
+        kind: "grant-graveyard-cast",
+        target: ctx.target({ kind: "card-in-graveyard", whose: "you", filter }),
+        ...(untilEnd[1] !== undefined ? { free: true } : {}),
+        ...(exiled ? { exileAfter: true } : {}),
+      },
+      used: exiled ? 2 : 1,
+    };
+  }
+  // "Target creature card in your graveyard gains escape until end of turn. The
+  // escape cost is equal to its mana cost plus exile two other cards from your
+  // graveyard." (Desdemona, Freedom's Edge.)
+  const gainsEscape = /^target (.+?) card in your graveyard(?: that's an artifact or that has mana value (\d+) or less)? gains escape until end of turn\.$/i.exec(sentences[i]);
+  const escapeCost = /^the escape cost is equal to its mana cost plus exile (\w+) other cards from your graveyard\.$/i.exec(sentences[i + 1] ?? "");
+  if (gainsEscape !== null && escapeCost !== null) {
+    const filter = parseTypePhrase(gainsEscape[1], { cards: true });
+    const exileCount = numberOf(escapeCost[1]);
+    if (filter === null || exileCount === null) return null;
+    const reach =
+      gainsEscape[2] === undefined
+        ? filter
+        : { ...filter, anyOf: [{ type: "artifact" }, { manaValue: { op: "lte", n: Number(gainsEscape[2]) } }] };
+    return {
+      effect: {
+        kind: "grant-graveyard-keyword",
+        target: ctx.target({ kind: "card-in-graveyard", whose: "you", filter: reach }),
+        grant: { keyword: "escape", exileCount },
+      },
+      used: 2,
+    };
+  }
   const milled = new RegExp(
     `^target opponent mills (\\w+) cards?, then you may cast an? (.+?) spell from that player's graveyard${CAST_NOW_TERMS}\\.$`,
     "i",

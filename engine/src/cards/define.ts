@@ -5507,6 +5507,15 @@ export interface CardDefinition {
     readonly cost: string;
     readonly exileCount: number;
     readonly counters?: { readonly kind: string; readonly amount: number };
+    /** "This creature escapes with **your choice of** a +1/+1 counter or a
+     * flying counter on it" (Tizerus Charger; rule 702.138c): one of these,
+     * chosen as it enters (its ruling), and only if it escaped. */
+    readonly counterChoice?: readonly string[];
+    /** The cards this escape exiles are linked to the permanent it becomes
+     * (rule 607.2a), for the ability it escapes with (rule 702.138d): Skyway
+     * Robber's "from among cards exiled with this creature". Only those of the
+     * last time it escaped, by this escape and not a granted one (its ruling). */
+    readonly exileLinked?: true;
   } | null;
   /** Suspend (rule 702.62 — ROADMAP Phase 6b) — instead of casting this from
    * your hand you may pay `cost` to exile it with `n` time counters; one comes
@@ -6153,6 +6162,8 @@ interface CardDraft {
     readonly cost: string;
     readonly exileCount: number;
     readonly counters?: { readonly kind: string; readonly amount: number };
+    readonly counterChoice?: readonly string[];
+    readonly exileLinked?: true;
   };
   chapters?: readonly SagaChapter[];
   /** See {@link CardDefinition.readAhead}. */

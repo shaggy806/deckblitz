@@ -4707,6 +4707,11 @@ export type EffectSpec =
         | "opponents-graveyards"
         | "exiled-with-source"
         | "exiled-this-way"
+        /** The cards this resolution milled: "target opponent mills five
+         * cards. You may cast an instant or sorcery spell **from among them**"
+         * (Jace's Mindseeker). Controlled by the caster, owned as before (rule
+         * 108.3). */
+        | "milled-this-way"
         /** The cards this resolution has had the effect's controller draw,
          * still in their hand — the Mad Wizard's Lair's "draw three cards
          * and reveal them. You may cast one of them". */
@@ -6877,7 +6882,20 @@ export type EffectSpec =
        * .graveyardCastPermission`) and ends if the card leaves the graveyard.
        * Casts only: a land can't be cast. */
       readonly kind: "grant-graveyard-cast";
-      readonly target: number;
+      /** The card. Or, in its place, `filter`: "creature cards in your graveyard
+       * gain 'you may cast this card from your graveyard' until end of turn"
+       * (Case of the Uneaten Feast): each card in the controller's graveyard
+       * that matches as this resolves (rule 611.2c), so not one put there
+       * later. */
+      readonly target?: number;
+      readonly filter?: CardFilter;
+      /** "…**without paying its mana cost**" (Sins of the Past): an alternative
+       * cost, so no other goes with it (rule 118.9a) and X is 0 (107.3b); the
+       * ruling's additional costs are still paid. */
+      readonly free?: true;
+      /** "If that spell would be put into your graveyard, **exile it instead**"
+       * (Sins of the Past, Vohar). */
+      readonly exileAfter?: true;
     }
   | {
       /**
@@ -10522,10 +10540,13 @@ export type PileFateWord = "hand" | "graveyard" | "exile" | "battlefield" | "los
 export interface GraveyardKeywordGrant {
   readonly keyword: GraveyardKeyword;
   readonly cost?: string;
+  /** Escape's other half (rule 702.138a): "plus exile two other cards from
+   * your graveyard" (Desdemona, Freedom's Edge; The Grim Captain's Locker). */
+  readonly exileCount?: number;
 }
 
 /** See {@link GraveyardKeywordGrant}. */
-export type GraveyardKeyword = "unearth" | "encore" | "embalm" | "harmonize" | "retrace" | "sneak";
+export type GraveyardKeyword = "unearth" | "encore" | "embalm" | "harmonize" | "retrace" | "sneak" | "escape";
 
 /** See {@link PileFateWord}. */
 export function pileFateWord(fate: PileFate): PileFateWord {
@@ -11470,7 +11491,7 @@ export interface EffectApi {
   grantGraveyardKeyword(target: TargetRef | undefined, filter: CardFilter | undefined, grant: GraveyardKeywordGrant): void;
   /** Let this effect's controller cast `target` (a card in a graveyard)
    * from there this turn — see the `grant-graveyard-cast` effect. */
-  grantGraveyardCast(target: TargetRef): void;
+  grantGraveyardCast(target: TargetRef, terms?: { readonly free?: true; readonly exileAfter?: true }): void;
   /** `a` and `b` (both creatures) fight; with `oneSided` only `a` deals,
    * to a creature or a planeswalker. */
   fight(a: TargetRef, b: TargetRef, oneSided: boolean): void;
@@ -13916,6 +13937,8 @@ function applyCastNowSpec(spec: Extract<EffectSpec, { kind: "cast-now" }>, ctx: 
       cards = ctx.cardsExiledWithSource();
     } else if (from === "exiled-this-way") {
       cards = ctx.cardsExiledThisWay();
+    } else if (from === "milled-this-way") {
+      cards = ctx.thisWay("milled", undefined, undefined).map((entry) => entry.object);
     } else if (from === "drawn-this-way") {
       cards = ctx.cardsDrawnThisWay();
     } else if (from === "source-exiled-this-way") {
@@ -16710,8 +16733,18 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "grant-graveyard-cast": {
-      const target = ctx.targets[spec.target];
-      if (target !== undefined) ctx.grantGraveyardCast(target);
+      const terms = {
+        ...(spec.free === true ? { free: true as const } : {}),
+        ...(spec.exileAfter === true ? { exileAfter: true as const } : {}),
+      };
+      if (spec.filter !== undefined) {
+        for (const card of ctx.graveyardMatching(ctx.controller, spec.filter)) {
+          ctx.grantGraveyardCast({ kind: "object", object: card }, terms);
+        }
+        return;
+      }
+      const target = spec.target === undefined ? undefined : ctx.targets[spec.target];
+      if (target !== undefined) ctx.grantGraveyardCast(target, terms);
       return;
     }
     case "mill": {
