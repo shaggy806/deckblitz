@@ -317,6 +317,7 @@ import _poolFontOfIre from "../pool/font-of-ire.js";
 import _poolForcedMarch from "../pool/forced-march.js";
 import _poolForerunnerOfSlaughter from "../pool/forerunner-of-slaughter.js";
 import _poolForerunnerOfTheEmpire from "../pool/forerunner-of-the-empire.js";
+import _poolForgeAnew from "../pool/forge-anew.js";
 import _poolFormidableSpeaker from "../pool/formidable-speaker.js";
 import _poolFortifiedVillage from "../pool/fortified-village.js";
 import _poolFractalAnomaly from "../pool/fractal-anomaly.js";
@@ -485,6 +486,7 @@ import _poolLayWaste from "../pool/lay-waste.js";
 import _poolLeap from "../pool/leap.js";
 import _poolLeapingAmbush from "../pool/leaping-ambush.js";
 import _poolLecturingScornmage from "../pool/lecturing-scornmage.js";
+import _poolLeoninShikari from "../pool/leonin-shikari.js";
 import _poolLifecraftersBestiary from "../pool/lifecrafters-bestiary.js";
 import _poolLifelink from "../pool/lifelink.js";
 import _poolLightningMauler from "../pool/lightning-mauler.js";
@@ -1281,6 +1283,7 @@ const shard: CardShard = {
     _poolForcedMarch,
     _poolForerunnerOfSlaughter,
     _poolForerunnerOfTheEmpire,
+    _poolForgeAnew,
     _poolFormidableSpeaker,
     _poolFortifiedVillage,
     _poolFractalAnomaly,
@@ -1449,6 +1452,7 @@ const shard: CardShard = {
     _poolLeap,
     _poolLeapingAmbush,
     _poolLecturingScornmage,
+    _poolLeoninShikari,
     _poolLifecraftersBestiary,
     _poolLifelink,
     _poolLightningMauler,

@@ -910,6 +910,7 @@ import _tokensGreenElementalToken22 from "../tokens/green-elemental-token-2-2.js
 import _tokensHeroTokenBlackMagesRod from "../tokens/hero-token-black-mages-rod.js";
 import _tokensNecronWarriorToken from "../tokens/necron-warrior-token.js";
 import _tokensOgreToken from "../tokens/ogre-token.js";
+import _tokensPhyrexianBeastTokenEzurisPredation from "../tokens/phyrexian-beast-token-ezuris-predation.js";
 import _tokensSnailToken from "../tokens/snail-token.js";
 import _tokensSpiderToken22Reach from "../tokens/spider-token-2-2-reach.js";
 import _tokensTheAtropal from "../tokens/the-atropal.js";
@@ -1833,6 +1834,7 @@ const shard: CardShard = {
     _tokensHeroTokenBlackMagesRod,
     _tokensNecronWarriorToken,
     _tokensOgreToken,
+    _tokensPhyrexianBeastTokenEzurisPredation,
     _tokensSnailToken,
     _tokensSpiderToken22Reach,
     _tokensTheAtropal,

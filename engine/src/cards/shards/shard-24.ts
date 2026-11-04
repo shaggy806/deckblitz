@@ -87,6 +87,7 @@ import _poolBlessingOfLeeches from "../pool/blessing-of-leeches.js";
 import _poolBlinkOfAnEye from "../pool/blink-of-an-eye.js";
 import _poolBlinkingSpirit from "../pool/blinking-spirit.js";
 import _poolBlinkmothInfusion from "../pool/blinkmoth-infusion.js";
+import _poolBloodthornFlail from "../pool/bloodthorn-flail.js";
 import _poolBlur from "../pool/blur.js";
 import _poolBoggartShenanigans from "../pool/boggart-shenanigans.js";
 import _poolBonesplitter from "../pool/bonesplitter.js";
@@ -1002,6 +1003,7 @@ const shard: CardShard = {
     _poolBlinkOfAnEye,
     _poolBlinkingSpirit,
     _poolBlinkmothInfusion,
+    _poolBloodthornFlail,
     _poolBlur,
     _poolBoggartShenanigans,
     _poolBonesplitter,

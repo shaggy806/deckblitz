@@ -134,6 +134,7 @@ import _poolChainedToTheRocks from "../pool/chained-to-the-rocks.js";
 import _poolChampionLancer from "../pool/champion-lancer.js";
 import _poolChancellorOfTheForge from "../pool/chancellor-of-the-forge.js";
 import _poolChandraFlamesFury from "../pool/chandra-flames-fury.js";
+import _poolCharismaticConqueror from "../pool/charismatic-conqueror.js";
 import _poolCheerfulOsteomancer from "../pool/cheerful-osteomancer.js";
 import _poolChoArrimLegate from "../pool/cho-arrim-legate.js";
 import _poolChromeHostSeedshark from "../pool/chrome-host-seedshark.js";
@@ -1021,6 +1022,7 @@ const shard: CardShard = {
     _poolChampionLancer,
     _poolChancellorOfTheForge,
     _poolChandraFlamesFury,
+    _poolCharismaticConqueror,
     _poolCheerfulOsteomancer,
     _poolChoArrimLegate,
     _poolChromeHostSeedshark,

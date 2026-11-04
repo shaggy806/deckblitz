@@ -774,6 +774,7 @@ import _poolTectonicFiend from "../pool/tectonic-fiend.js";
 import _poolTeferiTemporalArchmage from "../pool/teferi-temporal-archmage.js";
 import _poolTeferisAgelessInsight from "../pool/teferis-ageless-insight.js";
 import _poolTeleport from "../pool/teleport.js";
+import _poolTempleOfCivilization from "../pool/temple-of-civilization.js";
 import _poolTempleOfMalice from "../pool/temple-of-malice.js";
 import _poolTemporalFirestorm from "../pool/temporal-firestorm.js";
 import _poolTheBalrogOfMoria from "../pool/the-balrog-of-moria.js";
@@ -1693,6 +1694,7 @@ const shard: CardShard = {
     _poolTeferiTemporalArchmage,
     _poolTeferisAgelessInsight,
     _poolTeleport,
+    _poolTempleOfCivilization,
     _poolTempleOfMalice,
     _poolTemporalFirestorm,
     _poolTheBalrogOfMoria,

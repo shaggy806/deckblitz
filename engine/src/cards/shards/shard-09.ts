@@ -329,6 +329,7 @@ import _poolGoreclawTerrorOfQalSisma from "../pool/goreclaw-terror-of-qal-sisma.
 import _poolGraftedWargear from "../pool/grafted-wargear.js";
 import _poolGrahamObrien from "../pool/graham-obrien.js";
 import _poolGrandMelee from "../pool/grand-melee.js";
+import _poolGraspOfFate from "../pool/grasp-of-fate.js";
 import _poolGraspOfPhantoms from "../pool/grasp-of-phantoms.js";
 import _poolGraspOfTheHieromancer from "../pool/grasp-of-the-hieromancer.js";
 import _poolGraspingThrull from "../pool/grasping-thrull.js";
@@ -1280,6 +1281,7 @@ const shard: CardShard = {
     _poolGraftedWargear,
     _poolGrahamObrien,
     _poolGrandMelee,
+    _poolGraspOfFate,
     _poolGraspOfPhantoms,
     _poolGraspOfTheHieromancer,
     _poolGraspingThrull,

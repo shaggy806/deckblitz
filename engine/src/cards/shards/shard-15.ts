@@ -329,6 +329,7 @@ import _poolHealersFlock from "../pool/healers-flock.js";
 import _poolHealingTechnique from "../pool/healing-technique.js";
 import _poolHeartfire from "../pool/heartfire.js";
 import _poolHeavensGate from "../pool/heavens-gate.js";
+import _poolHedgeShredder from "../pool/hedge-shredder.js";
 import _poolHeirloomMirror from "../pool/heirloom-mirror.js";
 import _poolHeliodsEmissary from "../pool/heliods-emissary.js";
 import _poolHellraiserGoblin from "../pool/hellraiser-goblin.js";
@@ -715,6 +716,7 @@ import _poolTalismanOfCreativity from "../pool/talisman-of-creativity.js";
 import _poolTandemLookout from "../pool/tandem-lookout.js";
 import _poolTangleSpider from "../pool/tangle-spider.js";
 import _poolTattermungeDuo from "../pool/tattermunge-duo.js";
+import _poolTekuthalInquiryDominus from "../pool/tekuthal-inquiry-dominus.js";
 import _poolTelimtorsEdict from "../pool/telimtors-edict.js";
 import _poolTemperamentalOozewagg from "../pool/temperamental-oozewagg.js";
 import _poolTempestOwl from "../pool/tempest-owl.js";
@@ -1193,6 +1195,7 @@ const shard: CardShard = {
     _poolHealingTechnique,
     _poolHeartfire,
     _poolHeavensGate,
+    _poolHedgeShredder,
     _poolHeirloomMirror,
     _poolHeliodsEmissary,
     _poolHellraiserGoblin,
@@ -1579,6 +1582,7 @@ const shard: CardShard = {
     _poolTandemLookout,
     _poolTangleSpider,
     _poolTattermungeDuo,
+    _poolTekuthalInquiryDominus,
     _poolTelimtorsEdict,
     _poolTemperamentalOozewagg,
     _poolTempestOwl,

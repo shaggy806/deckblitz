@@ -639,6 +639,7 @@ import _poolPirsWhim from "../pool/pirs-whim.js";
 import _poolPonderingMage from "../pool/pondering-mage.js";
 import _poolPowerMatrix from "../pool/power-matrix.js";
 import _poolPriestsOfNorn from "../pool/priests-of-norn.js";
+import _poolPrimalVigor from "../pool/primal-vigor.js";
 import _poolPrisonSentence from "../pool/prison-sentence.js";
 import _poolPromiseOfAclazotz from "../pool/promise-of-aclazotz.js";
 import _poolPsychicBarrier from "../pool/psychic-barrier.js";
@@ -1611,6 +1612,7 @@ const shard: CardShard = {
     _poolPonderingMage,
     _poolPowerMatrix,
     _poolPriestsOfNorn,
+    _poolPrimalVigor,
     _poolPrisonSentence,
     _poolPromiseOfAclazotz,
     _poolPsychicBarrier,

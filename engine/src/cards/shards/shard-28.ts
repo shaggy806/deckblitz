@@ -284,6 +284,7 @@ import _poolFusionElemental from "../pool/fusion-elemental.js";
 import _poolGallantCavalry from "../pool/gallant-cavalry.js";
 import _poolGallifreyFalls from "../pool/gallifrey-falls.js";
 import _poolGalvanicArc from "../pool/galvanic-arc.js";
+import _poolGavelOfTheRighteous from "../pool/gavel-of-the-righteous.js";
 import _poolGelatinousGenesis from "../pool/gelatinous-genesis.js";
 import _poolGenesisStorm from "../pool/genesis-storm.js";
 import _poolGenjuOfTheFens from "../pool/genju-of-the-fens.js";
@@ -1215,6 +1216,7 @@ const shard: CardShard = {
     _poolGallantCavalry,
     _poolGallifreyFalls,
     _poolGalvanicArc,
+    _poolGavelOfTheRighteous,
     _poolGelatinousGenesis,
     _poolGenesisStorm,
     _poolGenjuOfTheFens,

@@ -507,6 +507,7 @@ import _poolObzedatsAid from "../pool/obzedats-aid.js";
 import _poolOculus from "../pool/oculus.js";
 import _poolOggyarBattleSeer from "../pool/oggyar-battle-seer.js";
 import _poolOgresCleaver from "../pool/ogres-cleaver.js";
+import _poolOjerTaqDeepestFoundation from "../pool/ojer-taq-deepest-foundation.js";
 import _poolOjutaiExemplars from "../pool/ojutai-exemplars.js";
 import _poolOldFatSpider from "../pool/old-fat-spider.js";
 import _poolOliviaOpulentOutlaw from "../pool/olivia-opulent-outlaw.js";
@@ -1434,6 +1435,7 @@ const shard: CardShard = {
     _poolOculus,
     _poolOggyarBattleSeer,
     _poolOgresCleaver,
+    _poolOjerTaqDeepestFoundation,
     _poolOjutaiExemplars,
     _poolOldFatSpider,
     _poolOliviaOpulentOutlaw,

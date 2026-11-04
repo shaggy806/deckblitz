@@ -430,6 +430,7 @@ import _poolKomasFaithful from "../pool/komas-faithful.js";
 import _poolKozileksTranslator from "../pool/kozileks-translator.js";
 import _poolKraulSwarm from "../pool/kraul-swarm.js";
 import _poolKrenkosCommand from "../pool/krenkos-command.js";
+import _poolKrrikSonOfYawgmoth from "../pool/krrik-son-of-yawgmoth.js";
 import _poolKytheonsTactics from "../pool/kytheons-tactics.js";
 import _poolLambholtRavager from "../pool/lambholt-ravager.js";
 import _poolLandrovalHorizonWitness from "../pool/landroval-horizon-witness.js";
@@ -1326,6 +1327,7 @@ const shard: CardShard = {
     _poolKozileksTranslator,
     _poolKraulSwarm,
     _poolKrenkosCommand,
+    _poolKrrikSonOfYawgmoth,
     _poolKytheonsTactics,
     _poolLambholtRavager,
     _poolLandrovalHorizonWitness,

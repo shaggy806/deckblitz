@@ -244,6 +244,7 @@ import _poolExpendableTroops from "../pool/expendable-troops.js";
 import _poolExploration from "../pool/exploration.js";
 import _poolExpressiveFiredancer from "../pool/expressive-firedancer.js";
 import _poolExtinguishTheLight from "../pool/extinguish-the-light.js";
+import _poolEzurisPredation from "../pool/ezuris-predation.js";
 import _poolFadingHope from "../pool/fading-hope.js";
 import _poolFaithOfTheDevoted from "../pool/faith-of-the-devoted.js";
 import _poolFarAway from "../pool/far-away.js";
@@ -869,6 +870,7 @@ import _poolVoltaicKey from "../pool/voltaic-key.js";
 import _poolVoraciousGreatshark from "../pool/voracious-greatshark.js";
 import _poolVoraciousHatchling from "../pool/voracious-hatchling.js";
 import _poolVorracBattlehorns from "../pool/vorrac-battlehorns.js";
+import _poolVraskaBetrayalsSting from "../pool/vraska-betrayals-sting.js";
 import _poolWalkingSponge from "../pool/walking-sponge.js";
 import _poolWallOfLight from "../pool/wall-of-light.js";
 import _poolWallop from "../pool/wallop.js";
@@ -1163,6 +1165,7 @@ const shard: CardShard = {
     _poolExploration,
     _poolExpressiveFiredancer,
     _poolExtinguishTheLight,
+    _poolEzurisPredation,
     _poolFadingHope,
     _poolFaithOfTheDevoted,
     _poolFarAway,
@@ -1788,6 +1791,7 @@ const shard: CardShard = {
     _poolVoraciousGreatshark,
     _poolVoraciousHatchling,
     _poolVorracBattlehorns,
+    _poolVraskaBetrayalsSting,
     _poolWalkingSponge,
     _poolWallOfLight,
     _poolWallop,
