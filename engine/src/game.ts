@@ -32412,6 +32412,17 @@ export class Game {
         const gone =
           stint !== undefined ? this.lastKnownOfStint(object, stint) : it === undefined ? this.state.ceasedTokens?.[object] : undefined;
         if (gone !== undefined) return gone.faceDown === true || gone.name === LOCKED_ROOM ? null : (gone.renamed ?? gone.name);
+        // A spell this targeted, since gone from the stack: named as it was
+        // there (608.2h), a modal double-faced card's back face being a name it
+        // doesn't have in the graveyard (Tibalt's Trickery's ruling).
+        if (
+          it !== undefined &&
+          it.zone !== "stack" &&
+          it.lastOnStack !== undefined &&
+          expectedZoneOf({ kind: "object", object }) === "stack"
+        ) {
+          return it.lastOnStack.cardName;
+        }
         if (it === undefined || it.faceDown !== undefined || printedCardName(it) === LOCKED_ROOM) return null;
         return nameOf(it);
       },
