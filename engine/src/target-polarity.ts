@@ -800,6 +800,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "pay-energy": none,
   "create-emblem": none,
   epic: none,
+  paradigm: none,
   "prevent-all-combat-damage": none,
   "prevent-damage-to-you": none,
   // The damage prevented is dealt to `redirectTo` instead (Nomads en-Kor,

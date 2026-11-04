@@ -6957,3 +6957,14 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 - **Do:** Cast Virtus's Maneuver. Answer "Alice: friend", "Bob: foe", "Carol: friend" and "Dave: foe".
 - **Expect:** The questions come in that order, all to you. You and Carol each get a creature card back. Bob and Dave each sacrifice a creature, and Carol's creature stays.
+
+### Germination Practicum: casting the copy each first main phase
+
+- **Do:** Cast Germination Practicum, and pass until your next turn's first main phase.
+- **Expect:** It's in exile after resolving, with an emblem on your side. At your next main you're offered the copy free. Cast it and Grizzly Bears has four +1/+1 counters. The next turn offers it again.
+- **Not a bug:** Declining leaves nothing in exile but the original.
+
+### Decorum Dissertation: four players, the copy takes a new target
+
+- **Do:** Cast Decorum Dissertation on yourself, then pass until your next first main phase and cast the copy on Carol.
+- **Expect:** You pick the copy's target when you cast it. Carol draws two cards and loses 2 life.

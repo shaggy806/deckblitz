@@ -2681,6 +2681,9 @@ export interface PlayerState {
   /** "For the rest of the game, you can't cast spells" — set as an epic
    * spell this player controls resolves (rule 702.50b). Absent until then. */
   cantCastSpellsForGame?: true;
+  /** The names of the spells with paradigm this player has controlled as one
+   * resolved (rule 702.192a: only the first with a name sets it up). */
+  paradigmResolved?: readonly string[];
   hasLost: boolean;
   lossReason: string | null;
   /**

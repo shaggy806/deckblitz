@@ -34343,6 +34343,12 @@ export class Game {
         }
         return made;
       },
+      copyCardNamed: (name) => {
+        const copy = this.makeCardObject(name, controller, { zone: "exile" });
+        this.state.objects[copy].isCopy = true;
+        this.zoneList("exile", controller).push(copy);
+        return [copy];
+      },
       libraryTop: (player, count, reveal) => {
         const top = (this.state.zones.perPlayer[player]?.library ?? []).slice(0, Math.max(0, count));
         if (reveal === true) this.revealCards(player, top, "library");
@@ -34984,6 +34990,7 @@ export class Game {
         );
       },
       epic: () => this.applyEpic(controller, source),
+      paradigm: () => this.applyParadigm(controller, source),
       preventAllCombatDamage: (by, toYou) => {
         if (by !== undefined) {
           (this.state.combatDamagePreventedBy ??= []).push({
@@ -49569,6 +49576,32 @@ export class Game {
         },
         resolve: null,
         text: `At the beginning of your upkeep, copy ${name} except for its epic ability. You may choose new targets for the copy.`,
+      },
+    ]);
+  }
+
+  /**
+   * Paradigm (rule 702.192a) as `sourceId`, a spell `controller` controls,
+   * resolves: the first time a spell of theirs with this name has, an emblem
+   * holds the delayed ability, at the beginning of each of their precombat
+   * main phases a copy of the card made in exile for them to cast free. By
+   * name, so what becomes of the exiled card doesn't matter (the ruling).
+   */
+  private applyParadigm(controller: PlayerId, sourceId: ObjectId): void {
+    const spell = this.state.objects[sourceId];
+    const player = this.state.players[controller];
+    if (spell === undefined || spell.zone !== "stack" || player === undefined) return;
+    const name = printedCardName(spell);
+    if (player.paradigmResolved?.includes(name) === true) return;
+    player.paradigmResolved = [...(player.paradigmResolved ?? []), name];
+    const text = `At the beginning of each of your precombat main phases, create a copy of ${name} in exile. You may cast the copy without paying its mana cost.`;
+    this.createEmblem(controller, text, null, name, [
+      {
+        trigger: { on: "step-begins", step: "precombat-main", who: "you" },
+        targets: [],
+        effect: { kind: "cast-now", copyOfCardNamed: name, free: true },
+        resolve: null,
+        text,
       },
     ]);
   }

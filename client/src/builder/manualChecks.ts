@@ -10442,4 +10442,18 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{ bf: ['Hill Giant'] }, { bf: ['Colossal Dreadmaw'], gy: ['Llanowar Elves'] }, { bf: ['Llanowar Elves'] }],
     }),
   ),
+  preset(
+    'Germination Practicum: casting the copy each first main phase',
+    board({
+      you: { bf: ['Forest*5', 'Grizzly Bears'], hand: ['Germination Practicum'] },
+      opp: [{}],
+    }),
+  ),
+  preset(
+    'Decorum Dissertation: four players, the copy takes a new target',
+    board({
+      you: { bf: ['Swamp*5'], hand: ['Decorum Dissertation'] },
+      opp: [{}, {}, {}],
+    }),
+  ),
 ]

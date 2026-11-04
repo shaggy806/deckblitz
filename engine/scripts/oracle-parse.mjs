@@ -11173,6 +11173,7 @@ function parseFaceAsWritten(face, ctx = {}) {
   // symbol's, not the card's own, and a person authors it as a
   // `stationBand`.
   let inStriation = false;
+  let paradigm = false;
   // A level symbol ("LEVEL 2-6", "LEVEL 7+") opens a leveler's striation
   // (rule 711.2): its P/T line and keyword lines become one `levelStatic`;
   // any other line in it is a person's (an ability carrying `levelBand`).
@@ -11700,6 +11701,8 @@ function parseFaceAsWritten(face, ctx = {}) {
       continue;
     }
     if (isSpell && line === "Rebound") { out.rebound = true; continue; }
+    // Paradigm (rule 702.192a): the spell's last part, then exiled.
+    if (isSpell && line === "Paradigm") { paradigm = true; continue; }
     // Cipher (rule 702.99a) — Gatecrash's encoded instants and sorceries.
     if (isSpell && line === "Cipher") { out.cipher = true; continue; }
     // Retrace (rule 702.81a): cast from the graveyard, discarding a land card.
@@ -13093,6 +13096,11 @@ function parseFaceAsWritten(face, ctx = {}) {
       const division = r.effect === null ? undefined : ctx2.divided.value;
       const misplaced = division !== undefined && division.slot !== ownTargets.length - 1;
       out.effect = misplaced ? null : r.effect;
+      if (paradigm && out.effect !== null) {
+        const steps = out.effect.kind === "sequence" ? out.effect.effects : [out.effect];
+        out.effect = { kind: "sequence", effects: [...steps, { kind: "paradigm" }] };
+        out.exileOnResolve = true;
+      }
       if (division !== undefined && !misplaced) out.divided = division;
       if (misplaced) out.todo.push("a divided amount whose group isn't the last target");
       if (r.effect === null) {

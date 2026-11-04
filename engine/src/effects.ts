@@ -4690,6 +4690,10 @@ export type EffectSpec =
        * the stack, and becomes a token as a permanent spell resolves, 608.3f).
        */
       readonly copies?: EffectAmount;
+      /** A copy of the card with this name, created in exile (paradigm, rule
+       * 702.192a) and offered, with no card behind it: nothing else here is
+       * asked for. Only built by the engine, on paradigm's emblem. */
+      readonly copyOfCardNamed?: string;
       /** The encoded card (rule 702.99a — cipher), in the exile stint it was
        * encoded in: the card offered, while it's still that card in exile.
        * Set by the engine on the trigger an encoded card gives its creature
@@ -8333,6 +8337,20 @@ export type EffectSpec =
       readonly kind: "epic";
     }
   | {
+      /**
+       * Paradigm (rule 702.192a), the last part of the spell's effect, on a
+       * card with `exileOnResolve` (its other ability, "exile this spell"):
+       * if this is the first time a spell its controller controls with this
+       * name has resolved this game, at the beginning of each of their
+       * precombat main phases for the rest of the game, a copy of this object
+       * is created in exile, and they may cast it without paying its mana
+       * cost. The ability rides an emblem, as epic's does, so it shows on the
+       * table and whatever becomes of the exiled card doesn't matter (the
+       * ruling). The copy's own paradigm does nothing: its name has resolved.
+       */
+      readonly kind: "paradigm";
+    }
+  | {
       /** Prevent all combat damage that would be dealt this turn (Fog). A
        * rule-614 replacement, tracked as a turn-scoped `GameState` flag. */
       readonly kind: "prevent-all-combat-damage";
@@ -10801,6 +10819,9 @@ export interface EffectApi {
   /** `times` copies of each of `cards` (rule 707.12), made in the card's
    * zone and owned by the controller, for casting; the new objects' ids. */
   copyCards(cards: readonly ObjectId[], times: number): readonly ObjectId[];
+  /** A copy of the card named `name`, created in exile, owned by the effect's
+   * controller — see the `cast-now`'s `copyOfCardNamed`. */
+  copyCardNamed(name: string): readonly ObjectId[];
   /** See the `"choose-creature-type"` {@link EffectSpec}. */
   chooseCreatureType(
     then: EffectSpec,
@@ -11906,6 +11927,8 @@ export interface EffectApi {
   ): void;
   /** Epic as the spell resolves — see the `epic` {@link EffectSpec}. */
   epic(): void;
+  /** Paradigm as the spell resolves — see the `paradigm` {@link EffectSpec}. */
+  paradigm(): void;
   /** Prevent all combat damage this turn (Fog) — or only what sources
    * matching `by` would deal; with `toYou`, all damage they'd deal to the
    * effect's controller, combat or not (`prevent-damage-to-you`). */
@@ -13245,6 +13268,10 @@ function offerCastNow(
 
 function applyCastNowSpec(spec: Extract<EffectSpec, { kind: "cast-now" }>, ctx: ResolutionContext): void {
   let progress = spec.progress;
+  if (progress === undefined && spec.copyOfCardNamed !== undefined) {
+    offerCastNow(spec, { since: ctx.nextEventSeq(), cards: ctx.copyCardNamed(spec.copyOfCardNamed), looked: [] }, ctx);
+    return;
+  }
   if (progress === undefined) {
     const from = spec.from;
     const handOwner =
@@ -18165,6 +18192,9 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     }
     case "epic":
       ctx.epic();
+      return;
+    case "paradigm":
+      ctx.paradigm();
       return;
     case "create-emblem": {
       if (spec.to === undefined) {

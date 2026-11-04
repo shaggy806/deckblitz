@@ -4094,6 +4094,19 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(spell.effect.effects[2]).toMatchObject({ kind: "sacrifice", who: "each-foe" });
   });
 
+  it("'Paradigm' (rule 702.192a): the effect's last step, then exiled", () => {
+    const spell = face(
+      "Put two +1/+1 counters on each creature you control.\nParadigm (Then exile this spell. After you first resolve a spell with this name, you may cast a copy of it from exile without paying its mana cost at the beginning of each of your first main phases.)",
+      "Sorcery — Lesson",
+    );
+    expect(spell.complete).toBe(true);
+    expect(spell.exileOnResolve).toBe(true);
+    expect(spell.effect).toMatchObject({
+      kind: "sequence",
+      effects: [{ kind: "add-counter-all" }, { kind: "paradigm" }],
+    });
+  });
+
   it("'choose up to five {P} worth of modes' (rule 700.2i): a budget, each mode's pawprints", () => {
     const spell = face(
       "Choose up to five {P} worth of modes. You may choose the same mode more than once.\n{P} — Draw a card.\n{P}{P} — Exile target artifact.\n{P}{P}{P} — You gain 5 life.",
