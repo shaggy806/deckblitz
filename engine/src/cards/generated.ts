@@ -7414,6 +7414,7 @@ import _poolEndrekSahrMasterBreeder from "./pool/endrek-sahr-master-breeder.js";
 import _poolEndriderCatalyzer from "./pool/endrider-catalyzer.js";
 import _poolEndriderSpikespitter from "./pool/endrider-spikespitter.js";
 import _poolEnduranceBobblehead from "./pool/endurance-bobblehead.js";
+import _poolEndurance from "./pool/endurance.js";
 import _poolEndure from "./pool/endure.js";
 import _poolEnduringBondwarden from "./pool/enduring-bondwarden.js";
 import _poolEnduringCourage from "./pool/enduring-courage.js";
@@ -8412,6 +8413,7 @@ import _poolFinCladeFugitives from "./pool/fin-clade-fugitives.js";
 import _poolFinFangFoom from "./pool/fin-fang-foom.js";
 import _poolFinalDeath from "./pool/final-death.js";
 import _poolFinalFlare from "./pool/final-flare.js";
+import _poolFinalFortune from "./pool/final-fortune.js";
 import _poolFinalIteration from "./pool/final-iteration.js";
 import _poolFinalJudgment from "./pool/final-judgment.js";
 import _poolFinalPayment from "./pool/final-payment.js";
@@ -9136,6 +9138,7 @@ import _poolFullBore from "./pool/full-bore.js";
 import _poolFullFlowering from "./pool/full-flowering.js";
 import _poolFullMoonsRise from "./pool/full-moons-rise.js";
 import _poolFullSteamAhead from "./pool/full-steam-ahead.js";
+import _poolFullThrottle from "./pool/full-throttle.js";
 import _poolFullyGrown from "./pool/fully-grown.js";
 import _poolFulminatorMage from "./pool/fulminator-mage.js";
 import _poolFulminousForte from "./pool/fulminous-forte.js";
@@ -36691,6 +36694,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolEndriderCatalyzer,
   _poolEndriderSpikespitter,
   _poolEnduranceBobblehead,
+  _poolEndurance,
   _poolEndure,
   _poolEnduringBondwarden,
   _poolEnduringCourage,
@@ -37689,6 +37693,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFinFangFoom,
   _poolFinalDeath,
   _poolFinalFlare,
+  _poolFinalFortune,
   _poolFinalIteration,
   _poolFinalJudgment,
   _poolFinalPayment,
@@ -38413,6 +38418,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFullFlowering,
   _poolFullMoonsRise,
   _poolFullSteamAhead,
+  _poolFullThrottle,
   _poolFullyGrown,
   _poolFulminatorMage,
   _poolFulminousForte,
@@ -65981,6 +65987,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/endrider-catalyzer": _poolEndriderCatalyzer,
   "pool/endrider-spikespitter": _poolEndriderSpikespitter,
   "pool/endurance-bobblehead": _poolEnduranceBobblehead,
+  "pool/endurance": _poolEndurance,
   "pool/endure": _poolEndure,
   "pool/enduring-bondwarden": _poolEnduringBondwarden,
   "pool/enduring-courage": _poolEnduringCourage,
@@ -66979,6 +66986,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/fin-fang-foom": _poolFinFangFoom,
   "pool/final-death": _poolFinalDeath,
   "pool/final-flare": _poolFinalFlare,
+  "pool/final-fortune": _poolFinalFortune,
   "pool/final-iteration": _poolFinalIteration,
   "pool/final-judgment": _poolFinalJudgment,
   "pool/final-payment": _poolFinalPayment,
@@ -67703,6 +67711,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/full-flowering": _poolFullFlowering,
   "pool/full-moons-rise": _poolFullMoonsRise,
   "pool/full-steam-ahead": _poolFullSteamAhead,
+  "pool/full-throttle": _poolFullThrottle,
   "pool/fully-grown": _poolFullyGrown,
   "pool/fulminator-mage": _poolFulminatorMage,
   "pool/fulminous-forte": _poolFulminousForte,

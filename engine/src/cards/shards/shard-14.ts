@@ -282,6 +282,7 @@ import _poolFelotharDawnOfTheAbzan from "../pool/felothar-dawn-of-the-abzan.js";
 import _poolFemerefScouts from "../pool/femeref-scouts.js";
 import _poolFeralDeceiver from "../pool/feral-deceiver.js";
 import _poolFerociousZheng from "../pool/ferocious-zheng.js";
+import _poolFinalFortune from "../pool/final-fortune.js";
 import _poolFireIce from "../pool/fire-ice.js";
 import _poolFireOmenCrane from "../pool/fire-omen-crane.js";
 import _poolFireShrineKeeper from "../pool/fire-shrine-keeper.js";
@@ -1195,6 +1196,7 @@ const shard: CardShard = {
     _poolFemerefScouts,
     _poolFeralDeceiver,
     _poolFerociousZheng,
+    _poolFinalFortune,
     _poolFireIce,
     _poolFireOmenCrane,
     _poolFireShrineKeeper,

@@ -296,6 +296,7 @@ import _poolFoulTongueShriek from "../pool/foul-tongue-shriek.js";
 import _poolFoundryScreecher from "../pool/foundry-screecher.js";
 import _poolFrontierGuide from "../pool/frontier-guide.js";
 import _poolFry from "../pool/fry.js";
+import _poolFullThrottle from "../pool/full-throttle.js";
 import _poolFylgja from "../pool/fylgja.js";
 import _poolGadwickTheWizened from "../pool/gadwick-the-wizened.js";
 import _poolGanglyStompling from "../pool/gangly-stompling.js";
@@ -1213,6 +1214,7 @@ const shard: CardShard = {
     _poolFoundryScreecher,
     _poolFrontierGuide,
     _poolFry,
+    _poolFullThrottle,
     _poolFylgja,
     _poolGadwickTheWizened,
     _poolGanglyStompling,
