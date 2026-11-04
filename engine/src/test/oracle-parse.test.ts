@@ -12462,6 +12462,10 @@ describe("chroma, what it devoured, a commander here, a shared creature type", (
     });
     expect(read("Card has flying and trample if it devoured a creature.")).toMatchObject({
       condition: { kind: "self-devoured" },
+    });
+  });
+});
+
 describe("a triggered mana ability that does more than add mana", () => {
   const card = (name: string, type_line: string, oracle_text: string) =>
     parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });
