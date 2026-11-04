@@ -24,8 +24,10 @@ takes the top of the order, builds card after card while the engine code is in
 context, and authors **only the cards that prove each feature works**: the card
 itself, whole, and one or two more where they prove a branch. The rest of what a
 key frees waits in `cards:needs -- --stale` for the **`author-freed`** skill,
-which authors it in batches with `card-author` agents (the user's call,
-2026-10-31: one sweep, once the reasonable keys are built). Don't stage, scaffold
+which authors it in batches with `card-author` agents. **`author-freed` comes
+first now** (the user's call, 2026-11-04): this skill is the last of the work,
+for once `--stale`'s queue is done. If the queue still has cards when this is
+invoked, say so and offer `author-freed` instead. Don't stage, scaffold
 or dispatch a batch here.
 
 **Sessions run in series** (the user's call, 2026-10-28): one session at a
@@ -209,8 +211,8 @@ A few lines:
 - the commits on `main`;
 - the next cards by rank, from the fresh run.
 
-Offer the next: more keys (`/clear`, then this skill). The freed cards wait for
-the user's one authoring sweep; don't start it here.
+Offer the next, for a fresh session (`/clear`, then the skill): `author-freed`
+while `--stale`'s queue has cards, more keys once it's empty.
 
 ## Overnight: four agents, by rank
 

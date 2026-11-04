@@ -12,6 +12,11 @@ a family frees waits here: **`npm run -s cards:needs -w engine -- --stale`**,
 its first section ("Every need built since triage — recheck these"), each card
 with the keys built since its triage and the batch that triaged it.
 
+**This is the work now** (the user's call, 2026-11-04, reversing "one sweep once
+the keys are built"): work the queue down, batch after batch, each from a fresh
+session. Building the remaining need keys comes last, once the queue is done.
+The queue is ~1,800 cards, so this is many sessions; each one takes one batch.
+
 A record's needs were triaged by people and Haiku reading Oracle text, so
 they over-count in both directions: a built key often covers only some of
 its cards. Most of the queue authors cleanly; some doesn't, and the job is
@@ -32,21 +37,24 @@ landed on `main` before the next starts), and one batch a session.
   `scripts/unmerged-branches.mjs`. Merge any branch it lists, or ask
   whether it's abandoned. `git fetch origin main && git status -sb`: be
   level with `origin/main`.
-- `BACKLOG.md`'s "Next: work down the need keys" line: the families built
-  since the last authoring batch, and how many cards they freed.
+- `BACKLOG.md`'s "Next: work down the need keys" block: how far the queue has
+  got, and its lines "Narrow keys `author-freed` should give", leads for cards
+  already known to need more than their built key. Check a lead, then use it.
 - Build `engine` if `dist/` is stale: `cards:needs` and `card:scaffold` read
   it.
 
 ## 1. Take the batch
 
-1. `npm run -s cards:needs -w engine -- --stale` — the first section is the
-   queue. Take it whole if it's up to ~150 cards; past that, the cards of the
-   oldest-built keys first (the dates on each line), so a family's cards land
-   together.
+1. `npm run -s cards:needs -w engine -- --stale --next 150` lists the batch:
+   oldest-freed first, a key's cards together, so few features to explain.
+   **Never print the whole queue**: it's ~1,800 lines, read again on every later
+   call. `--names` gives the same cards quoted on one line, for the scaffolder.
+   A card you give a narrow key leaves the queue, so the next batch moves on by
+   itself.
 2. **Scaffold the whole batch** in one `npm run card:scaffold -w engine --
-   …` run: the families taught the scaffolder their lines, so many come out
-   finished in `review/`. Read each finished draft against its Oracle text
-   and rulings like any other; move the good ones into `pool/`.
+   <the --names output>` run: the families taught the scaffolder their lines, so
+   many come out finished in `review/`. Read each finished draft against its
+   Oracle text and rulings like any other; move the good ones into `pool/`.
 3. **Triage the rest** (`card:brief` them, in one call or a few). For each
    card, confirm (a) the built feature really covers it, and (b) nothing
    else it needs is missing. One that fails either is **still blocked**:
@@ -71,16 +79,18 @@ landed on `main` before the next starts), and one batch a session.
 ## 2. A feature, if one is missing
 
 Not this skill's job: a card blocked on something unbuilt gets its narrow key
-and waits for `build-family`, whose greedy order will rank it. The one
-exception is a fix to a built feature the batch shows is wrong (a bug, not a
-missing branch) — fix it with its own test, as `bug-report` would.
+and waits for `build-family`, which comes after this queue and orders its keys
+by EDHREC rank. The one exception is a fix to a built feature the batch shows is
+wrong (a bug, not a missing branch) — fix it with its own test, as `bug-report`
+would.
 
 ## 3. Test, record, ship
 
 As `author-by-set` step 3, with these differences:
 
 - **Test file**: `engine/src/test/freed-b<N>.test.ts` for the lead's cards;
-  each agent's `freed-b<N>-<letter>.test.ts`.
+  each agent's `freed-b<N><LETTER>.test.ts` (`fill-brief.mjs` names them from
+  `--test-prefix`, so `freed-b255A`).
 - **Record**: `engine/data/sweep-3/B<N>.json`, the highest `B<N>` on
   `origin/main` plus one. Its `"ranks"` line reads `"Need-keys Phase 2:
   cards freed by <the families>"`. Every card considered goes in it,
@@ -104,6 +114,6 @@ As `author-by-set` step 3, with these differences:
 ## 4. Report and offer the next
 
 A few lines: cards authored, cards still blocked with their top narrow keys,
-what's left on the queue, the commit on `main`. Offer the next — another
-batch if the queue is long, else `build-family` — to run in a fresh session
-(`/clear`, then the skill). Don't start it here.
+what's left on the queue, the commit on `main`. Offer the next to run in a fresh
+session (`/clear`, then the skill): another batch while the queue has cards, and
+`build-family` only once it's empty. Don't start it here.

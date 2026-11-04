@@ -416,7 +416,7 @@ section keeps only what to do next.
   ability naming what its parent made or targeted (3 keys, 4 freed, 5 proving cards), attack triggers
   narrowed by attackers and the player attacked (2 keys, 5 freed, 3 proving cards). **About 1381 freed cards wait for the authoring
   sweep**
-  (`cards:needs -- --stale`); the user authors them in one sweep once the reasonable keys are built.
+  (`cards:needs -- --stale`); `author-freed` authors them next, batch by batch, and the remaining keys come after (the user's call, 2026-11-04).
   Cloud sessions are building `keyword:hexproof-from-colors`, the combat-restriction second group,
   `effect:prevent-next-n-damage-to-you`, the cascade/sunburst grants to spells,
   `cost:kicker-nonmana-cost` and `cost:alt-cost-discard-cards`. Built 2026-11-02 (third overnight

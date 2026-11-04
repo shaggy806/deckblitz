@@ -24,6 +24,10 @@
 //   --stale            unimplemented cards with a need that has since been
 //                      built: every need built ("recheck now") first, then
 //                      the rest
+//   --stale --next [N] one authoring batch off that queue instead of all of it:
+//                      the first N (default 150) cards with every need built,
+//                      oldest-freed first and a key's cards together
+//                      (`--names`: quoted on one line, for `card:scaffold`)
 //   --feature <key>    the unimplemented cards waiting on one need (a raw key,
 //                      an alias or a family all work)
 //   --next [N]         the next N (default 60) Commander-legal cards by EDHREC
@@ -347,7 +351,7 @@ function main() {
     return;
   }
 
-  if (args.includes("--next")) {
+  if (args.includes("--next") && !args.includes("--stale")) {
     // Front faces too: a double-faced card's snapshot name is "A // B".
     const triaged = new Set(records.map((r) => frontName(r.name)));
     const n = Number(opt("--next", 60));
@@ -382,8 +386,27 @@ function main() {
     }
     const all = [...byCard.values()].sort((a, b) => a.open.length - b.open.length || a.name.localeCompare(b.name));
     const ready = all.filter((r) => r.open.length === 0);
-    console.log(`Every need built since triage — recheck these (${ready.length}):`);
     const when = (k) => `${k} (${vocab.builtDates.get(k)})`;
+    if (args.includes("--next")) {
+      // What freed a card is its last key built, so a key's cards stay together
+      // and a batch's notes have few features to explain.
+      const freedBy = (r) =>
+        r.built.reduce((a, b) => ((vocab.builtDates.get(b) ?? "") > (vocab.builtDates.get(a) ?? "") ? b : a));
+      const batch = ready
+        .map((r) => ({ r, key: freedBy(r) }))
+        .sort(
+          (a, b) =>
+            (vocab.builtDates.get(a.key) ?? "").localeCompare(vocab.builtDates.get(b.key) ?? "") ||
+            a.key.localeCompare(b.key) ||
+            a.r.name.localeCompare(b.r.name),
+        )
+        .slice(0, Number(opt("--next", 150)));
+      if (args.includes("--names")) return console.log(batch.map(({ r }) => JSON.stringify(r.name)).join(" "));
+      console.log(`The next ${batch.length} of the ${ready.length} cards with every need built:`);
+      for (const { r } of batch) console.log(`- ${r.name} [${r.batch}] built: ${r.built.map(when).join(", ")}`);
+      return;
+    }
+    console.log(`Every need built since triage — recheck these (${ready.length}):`);
     for (const r of ready) console.log(`- ${r.name} [${r.batch}${r.date ? `, ${r.date}` : ""}] built: ${r.built.map(when).join(", ")}`);
     console.log(`\nSome needs built (${all.length - ready.length}):`);
     for (const r of all.filter((x) => x.open.length > 0)) {
