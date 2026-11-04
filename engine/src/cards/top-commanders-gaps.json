@@ -1775,7 +1775,8 @@
   "mechanic:vow-counters",
   "stat:attack-count-this-turn",
   "effect:additional-combat-after-main",
-  "effect:win-game"
+  "effect:win-game",
+  "effect:put-arrived-all-tapped"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

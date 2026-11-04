@@ -33715,7 +33715,7 @@ export class Game {
         // "One of them": the cards the batched trigger fired on, still in
         // that graveyard as the same objects (rule 400.7).
         const still = this.arrivedStillThere(refs);
-        const count = spec.count;
+        const count = spec.count === "all" ? still.length : spec.count;
         if (still.length === 0 || count <= 0) return false;
         if (still.length > count) {
           this.state.awaiting = {

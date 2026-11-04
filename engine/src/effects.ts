@@ -4178,9 +4178,11 @@ export type EffectSpec =
        * `dies` trigger's cards work the same: Rinoa, Angel Wing's "return one
        * of them to the battlefield **tapped under its owner's control with a
        * flying counter on it**" (`enterTapped`, `underOwner`, `withCounters`).
-       * A `may` over it isn't offered with none left. */
+       * A `may` over it isn't offered with none left. `count: "all"` is
+       * "put **them** onto the battlefield tapped" (Hedge Shredder): every
+       * one still there, at once, with nothing to choose. */
       readonly kind: "put-arrived-onto-battlefield";
-      readonly count: number;
+      readonly count: number | "all";
       readonly enterTapped?: true;
       readonly underOwner?: true;
       readonly withCounters?: { readonly kind: string; readonly amount: number };
