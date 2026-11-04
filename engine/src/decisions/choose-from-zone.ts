@@ -55,6 +55,7 @@ export const chooseFromZone = defineDecision({
       ...(awaiting.searchRest?.shuffle != null ? { shuffledIn: true as const } : {}),
       ...(awaiting.forPlayer !== undefined ? { forPlayer: awaiting.forPlayer } : {}),
       ...(awaiting.prompt !== undefined ? { prompt: awaiting.prompt } : {}),
+      ...(awaiting.givesUp === true ? { givesUp: true as const } : {}),
       ...(awaiting.alsoTaken !== undefined ? { alsoTaken: [...awaiting.alsoTaken] } : {}),
       // A behold (rule 701.4a): hand cards and permanents at once. A pitch
       // cost's exile from the hand is asked as a plain exile.
@@ -145,8 +146,9 @@ export const chooseFromZone = defineDecision({
     const own = legal.forPlayer === undefined || legal.forPlayer === player;
     // Cards shown for someone else to choose among (Blackmail): the least
     // valuable go first too, the chooser taking one of them.
+    // So too the cards a choice puts at stake (Sylvan Library's).
     const ranked =
-      (legal.destination === "exile" && own) || legal.revealForChoice === true
+      (legal.destination === "exile" && own) || legal.revealForChoice === true || legal.givesUp === true
         ? [...helpers.order(legal.eligible)].reverse()
         : helpers.order(legal.eligible);
     // A set rule drops the subsets that break it before the cap, so all the

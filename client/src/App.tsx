@@ -4613,7 +4613,7 @@ function Table({
       </div>
     )
   } else if (mode === 'choose-modes' && modesChoiceAction) {
-    const { minModes, maxModes, modeTexts, modePlayers, source, ward, about, sameForAll, orNone, xCost } = modesChoiceAction
+    const { minModes, maxModes, modeTexts, modePlayers, source, ward, about, aboutCard, sameForAll, orNone, xCost } = modesChoiceAction
     // "You may pay {X}" / "one or more {E}" / "any amount of {E}": the X
     // sent with a yes, from `minX` (0 unless one or more) to `maxX`.
     const xMin = xCost?.minX ?? 0
@@ -4657,6 +4657,8 @@ function Table({
                 : `${orNone ? 'you may choose' : 'choose'} ${minModes === maxModes ? minModes : `${minModes}–${maxModes}`}`}
           {/* The same question once per player (myriad): which one this is. */}
           {about !== undefined ? ` — ${playerLabel(about, game.seats)}` : ''}
+          {/* …or once per card (Sylvan Library). */}
+          {aboutCard !== undefined ? ` — ${game.nameOf(aboutCard)}` : ''}
         </span>
         {optional ? (
           <>

@@ -1895,6 +1895,9 @@ export type LegalAction =
       /** The cards picked are shown for another player to choose among — a
        * `discard-chosen`'s `reveals` (Blackmail) — so a bot shows its worst. */
       readonly revealForChoice?: true;
+      /** The cards picked are the ones at stake (`look-and-choose`'s
+       * `givesUp` — Sylvan Library), so a bot picks its worst. */
+      readonly givesUp?: true;
       /** A split tutor (Cultivate): only the first chosen card goes to
        * `destination`, the rest elsewhere. */
       readonly split?: true;
@@ -2101,6 +2104,11 @@ export type LegalAction =
        * (`for-each-unless` — Killing Wave): a driver points at it, the name
        * in the mode's text not saying which of two with the same name. */
       readonly aboutObject?: ObjectId;
+      /** The card the question is about, when there is one per card
+       * (Sylvan Library's "for each of those cards"): an id, as a card in a
+       * hand is named only to whoever may see it. See the `may` effect's
+       * `aboutTarget`. */
+      readonly aboutCard?: ObjectId;
       /** Present when the decision's cost contains `{X}` (Flameblast
        * Dragon): the largest X the chooser could pay for right now. The
        * driver echoes its pick back as `xValue`. `energy`: X is paid in

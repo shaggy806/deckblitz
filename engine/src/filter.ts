@@ -1039,6 +1039,9 @@ export interface CardFilter {
    * wasn't. See `GameObject.discardedOnTurn`.
    */
   readonly discardedThisTurn?: boolean;
+  /** Drawn this turn (or not), and where the draw put it since: Sylvan
+   * Library's "cards in your hand drawn this turn" (`GameObject.drawnOnTurn`). */
+  readonly drawnThisTurn?: boolean;
   /** Entered the battlefield this turn (or didn't) — "creatures that entered
    * this turn", "a creature that didn't enter this turn". A card anywhere
    * but the battlefield hasn't; one that has left is asked as it last was. */
@@ -2583,6 +2586,10 @@ export function matchesFilter(
     // A snapshot is of a permanent, which wasn't discarded.
     const discarded = live !== undefined && live.discardedOnTurn === state.turn.number;
     if (discarded !== filter.discardedThisTurn) return false;
+  }
+  if (filter.drawnThisTurn !== undefined) {
+    const drawn = live !== undefined && live.drawnOnTurn === state.turn.number;
+    if (drawn !== filter.drawnThisTurn) return false;
   }
   // "Your Ring-bearer" (rule 701.54e) — the filtering player's, on the
   // battlefield now; "Ring-bearers" (`"any"`), anyone's.

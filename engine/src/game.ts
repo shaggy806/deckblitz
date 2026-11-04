@@ -7363,6 +7363,8 @@ export class Game {
       readonly about?: PlayerId;
       /** See the `choose-modes` decision's `aboutObject`. */
       readonly aboutObject?: ObjectId;
+      /** See the `choose-modes` decision's `aboutCard`. */
+      readonly aboutCard?: ObjectId;
       /** See the `choose-modes` decision's `sourceLost`. */
       readonly sourceLost?: boolean;
       /** The colour `cost`'s X is paid in — see `may`'s `xColor`. */
@@ -7483,6 +7485,7 @@ export class Game {
       player: controller,
       ...(ability.about !== undefined ? { about: ability.about } : {}),
       ...(ability.aboutObject !== undefined ? { aboutObject: ability.aboutObject } : {}),
+      ...(ability.aboutCard !== undefined ? { aboutCard: ability.aboutCard } : {}),
       source,
       minModes: Math.min(minModes, offered.length),
       maxModes: Math.min(maxModes, offered.length),
@@ -36000,7 +36003,7 @@ export class Game {
         });
         invalidateComputedCache();
       },
-      chooseModes: (minModes, maxModes, modes, onDecline, cost, notChosenThisTurn, otherCost, about, xColor) =>
+      chooseModes: (minModes, maxModes, modes, onDecline, cost, notChosenThisTurn, otherCost, about, xColor, aboutCard) =>
         this.beginModesChoice(
           source,
           controller,
@@ -36027,6 +36030,7 @@ export class Game {
             ...(otherCost?.energyX !== undefined ? { energyX: otherCost.energyX } : {}),
             ...(otherCost?.costTimes === true ? { costTimes: true as const } : {}),
             ...(about !== undefined ? { about } : {}),
+            ...(aboutCard !== undefined ? { aboutCard } : {}),
             ...(xColor !== undefined ? { xColor } : {}),
           },
         ),
@@ -36162,6 +36166,7 @@ export class Game {
           more?.underOwners === true,
           more?.faceDownLooks,
           more?.prompt,
+          more?.givesUp === true,
         );
       },
     };
@@ -36235,6 +36240,8 @@ export class Game {
     faceDownLooks?: "chooser" | "nobody",
     /** See `look-and-choose`'s `prompt`. */
     authoredPrompt?: string,
+    /** See `look-and-choose`'s `givesUp`. */
+    givesUp = false,
   ): void {
     // The exile zone (a processor, Oblivion Sower): only what may be
     // chosen is shown — the cards `player` owns when someone else is
@@ -36361,6 +36368,9 @@ export class Game {
     // Revealing from your own hand with nothing in it that matches: there's
     // nothing to reveal and no one else to show the choice to.
     if (destination === "reveal" && eligible.length === 0) return;
+    // Choosing cards in your own hand for `then` to act on, and none can be
+    // (Sylvan Library with no card drawn this turn — its ruling).
+    if (destination === "stay" && zone === "hand" && eligible.length === 0) return;
     // A graveyard is public and nothing in it may be chosen: nothing to see and
     // nothing to do (Breach the Multiverse's "for each player", a graveyard with
     // no creature card; Cemetery Desecrator's "another", its own the only card).
@@ -36417,6 +36427,7 @@ export class Game {
       ...(exileLink !== undefined ? { exileLink } : {}),
       ...(faceDownLooks !== undefined ? { faceDownLooks } : {}),
       ...(authoredPrompt !== undefined ? { prompt: authoredPrompt } : {}),
+      ...(givesUp ? { givesUp: true as const } : {}),
       // "You may play the exiled card this turn" (Florian, Voldaren Scion).
       ...(impulseGrant !== undefined && (destination === "exile" || destination === "exile-face-down")
         ? { impulseGrant }
@@ -52174,6 +52185,7 @@ export class Game {
     // `"put-into-hand"` this-way kind leaves draws to `"drawn"`.
     const drawn = this.state.objects[id];
     if (drawn !== undefined) delete drawn.handArrivalSeq;
+    if (drawn !== undefined) drawn.drawnOnTurn = this.state.turn.number;
     // Counted on the *raw* draw, so every draw path counts it once and
     // nothing that merely puts a card in hand (a tutor) does.
     const seat = this.state.players[player];
@@ -54163,6 +54175,7 @@ export class Game {
     object.transformedAtSeq = undefined;
     // Its arrival in a hand was the card that just left it (set below).
     object.handArrivalSeq = undefined;
+    object.drawnOnTurn = undefined;
     // A flipped permanent that leaves keeps no memory of it (rule 710.4).
     object.flipped = undefined;
     object.flippedName = undefined;

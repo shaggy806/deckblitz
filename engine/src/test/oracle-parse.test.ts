@@ -1568,6 +1568,31 @@ describe("costs and triggers", () => {
     expect(caverns.complete).toBe(true);
   });
 
+  it("reads Sylvan Library's draws at stake", () => {
+    const library = parseFace({
+      name: "Sylvan Library",
+      type_line: "Enchantment",
+      mana_cost: "{1}{G}",
+      oracle_text:
+        "At the beginning of your draw step, you may draw two additional cards. If you do, choose two cards in your hand drawn this turn. For each of those cards, pay 4 life or put the card on top of your library.",
+    });
+    expect(library.triggered[0].trigger).toEqual({ on: "step-begins", step: "draw", who: "you" });
+    expect(library.triggered[0].effect).toMatchObject({
+      kind: "may",
+      effect: { kind: "draw", amount: 2 },
+      then: {
+        kind: "look-and-choose",
+        zone: "hand",
+        min: 2,
+        filter: { drawnThisTurn: true },
+        destination: "stay",
+        givesUp: true,
+        then: { kind: "for-each-target", effect: { kind: "may", costLife: 4, aboutTarget: 0 } },
+      },
+    });
+    expect(library.complete).toBe(true);
+  });
+
   it("reads an ability that acts while its holder could mulligan (rule 103.5b)", () => {
     const powder = parseFace({
       name: "Serum Powder",

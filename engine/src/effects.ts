@@ -8844,6 +8844,11 @@ export type EffectSpec =
        * defending player, you may …"). The offer names them (`about`), since
        * the same prompt comes up once for each. */
       readonly aboutThatPlayer?: boolean;
+      /** The question is about the card in this target slot — asked once per
+       * card inside a `for-each-target` (Sylvan Library's "for each of those
+       * cards, pay 4 life or …"). The offer names it (`aboutCard`), as a
+       * prompt can't: it may be in a hand. */
+      readonly aboutTarget?: number;
       /**
        * An optional *cost* to say yes — "you may pay {B}. If you do, draw a
        * card" (Nihil Spellbomb, Dawn of Hope, Mentor of the Meek).
@@ -10222,6 +10227,13 @@ export type EffectSpec =
        * Skipped entirely when nothing was chosen.
        */
       readonly then?: EffectSpec;
+      /** What the choice is for, shown instead of what `destination` says —
+       * "choose two cards in your hand drawn this turn" (Sylvan Library),
+       * where `"stay"` leaves `then` to say it. */
+      readonly prompt?: string;
+      /** The cards picked are what's at stake, not what's gained: `then` may
+       * take them away (Sylvan Library), so a bot picks its worst. */
+      readonly givesUp?: true;
     };
 
 /** The types a `put-onto-battlefield` says the permanent has, in place as it
@@ -12423,6 +12435,8 @@ export interface EffectApi {
     about?: PlayerId,
     /** The colour `cost`'s X is paid in — see `may`'s `xColor`. */
     xColor?: Color,
+    /** The card the question is about — see `may`'s `aboutTarget`. */
+    aboutCard?: ObjectId,
   ): void;
   /** Scry (`surveil: false`) or surveil (`surveil: true`) `amount` cards;
    * apply `then` afterwards. See the `"scry"` / `"surveil"` {@link EffectSpec}. */
@@ -12556,6 +12570,7 @@ export interface EffectApi {
       readonly underOwners?: true;
       readonly faceDownLooks?: "chooser" | "nobody";
       readonly prompt?: string;
+      readonly givesUp?: true;
     },
   ): void;
   /** A `choose-from-zone` an `offer-zone-choice` carries: ask it now. */
@@ -19073,6 +19088,9 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
             },
         spec.aboutThatPlayer === true ? effectPlayer("that-player", ctx) : undefined,
         spec.xColor,
+        ((target) => (target?.kind === "object" ? target.object : undefined))(
+          spec.aboutTarget === undefined ? undefined : ctx.targets[spec.aboutTarget],
+        ),
       );
       return;
     }
@@ -19619,6 +19637,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           ...(spec.under === "owners" ? { underOwners: true as const } : {}),
           ...(spec.faceDownLooks !== undefined ? { faceDownLooks: spec.faceDownLooks } : {}),
           ...(spec.prompt !== undefined ? { prompt: spec.prompt } : {}),
+          ...(spec.givesUp === true ? { givesUp: true as const } : {}),
         },
       );
       return;

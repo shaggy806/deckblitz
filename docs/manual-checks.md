@@ -6190,6 +6190,14 @@ These boards start before the first turn (the builder's `openingHands`), with th
 - **Do:** Bob starts the game. Click Keep and wait for the bots. Click Gemstone Caverns and Confirm, then click Shock and Confirm.
 - **Expect:** "Round 1, turn 1 — Bob" follows. Your Caverns has its luck counter, Shock is in exile, and nobody else's hand changed.
 
+### Sylvan Library: draw two more, then pay 4 life or put each back on top
+- **Do:** The board opens on the ability, your first turn (so no normal draw). Say yes to "Draw two additional cards?". In the popup click Forest, then Island, then Confirm. To "Pay 4 life? …" naming Forest say yes; to the one naming Island say no.
+- **Expect:** Only Forest and Island can be picked, not the Bears you already held. Your life is 36, the Bears and Forest are in your hand, and Island is back on top of your library.
+
+### Sylvan Library: at four players, both cards go back and the second picked is on top
+- **Do:** The board opens on the ability. Say yes to "Draw two additional cards?". In the popup click Forest, then Island, then Confirm. Say no to both "Pay 4 life?" questions, and wait for the bots.
+- **Expect:** Your life stays 40 and your hand holds just the Bears. Nobody else was asked. On your next turn the card you draw is Island, the second you picked, and the Library asks again.
+
 ### Boonweaver Giant: choose which of your graveyard, hand and library to search
 - **Do:** Cast Boonweaver Giant. As its ability resolves, say yes to the search, then click "Search your graveyard and hand".
 - **Expect:** Seven choices are offered, from "Search your graveyard, hand, and library" down to "Search your library". This one offers Rancor and Pacifism, not Holy Strength. The Aura you pick enters attached to the Giant, and your library isn't shuffled.

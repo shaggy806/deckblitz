@@ -4101,8 +4101,12 @@ export class HeuristicBotController extends AutomaticController {
     if (awaiting?.kind === "choose-from-zone" && awaiting.behold !== undefined && awaiting.destination === "exile") {
       return this.leastUsefulTo(view.state, this.playerId, eligible, min);
     }
-    // What Gemstone Caverns exiles from the opening hand: give up the least.
-    if (awaiting?.kind === "choose-from-zone" && awaiting.openingHand !== undefined && awaiting.destination === "exile") {
+    // What Gemstone Caverns exiles from the opening hand, and what Sylvan
+    // Library puts at stake: give up the least.
+    if (
+      awaiting?.kind === "choose-from-zone" &&
+      ((awaiting.openingHand !== undefined && awaiting.destination === "exile") || awaiting.givesUp === true)
+    ) {
       return this.leastUsefulTo(view.state, this.playerId, eligible, min);
     }
     // A land search takes a colour we can't make yet first (`land-colors.ts`).

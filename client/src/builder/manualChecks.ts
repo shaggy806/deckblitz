@@ -9387,6 +9387,21 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'Sylvan Library: draw two more, then pay 4 life or put each back on top',
+    board({
+      step: 'upkeep',
+      you: { bf: ['Sylvan Library'], hand: ['Grizzly Bears'], lib: ['Forest', 'Island', 'Swamp'] },
+    }),
+  ),
+  preset(
+    'Sylvan Library: at four players, both cards go back and the second picked is on top',
+    board({
+      step: 'upkeep',
+      you: { bf: ['Sylvan Library'], hand: ['Grizzly Bears'], lib: ['Forest', 'Island', 'Swamp'] },
+      opp: [{}, {}, {}],
+    }),
+  ),
+  preset(
     'Harvest Pyre: X is announced, and exiles that many cards from your graveyard',
     board({
       you: { bf: ['Mountain*2'], hand: ['Harvest Pyre'], gy: ['Island*3'] },

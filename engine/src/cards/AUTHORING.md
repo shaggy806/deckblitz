@@ -1848,6 +1848,14 @@ mana cost of the face cast, a land face never: a card that has its own foretell 
 mana cost, no cost given. Dream Devourer's `grantsForetellInHand` gives one the same way
 (`GameObject.foretoldReducedBy`).
 
+**Cards chosen for each to have something done to them** ("choose two cards in your hand drawn this
+turn. For each of those cards, pay 4 life or put the card on top of your library" — Sylvan Library): a
+`look-and-choose` with `destination: "stay"`, its `filter`, its own `prompt` (what `"stay"` can't say)
+and `givesUp` (the picks are what's at stake, so a bot picks its worst), and `then` a `for-each-target`
+of a `may` with `costLife`, an empty `sequence` as its `effect`, and the other side as its `else`. A
+`may`'s **`aboutTarget`** names the card in that slot beside the prompt (the offer's `aboutCard`), which
+a prompt can't when it's in a hand. Nothing eligible asks nothing.
+
 **A card from a hand, face down**: a `look-and-choose` with `zone: "hand"`, `destination:
 "exile-face-down"`, `leftover: "stay"`, linked to the source (rule 607.2a). **`faceDownLooks`** says
 who may look at it (406.3). Left out, as hideaway: the chooser and whoever comes to control the source
@@ -2883,7 +2891,7 @@ subtypes, supertype, notSupertype, name, notName, colors, notColors, colorless,
 manaValue, manaValueParity, power, powerParity, toughness, basePower, baseToughness, counters, controlledBy,
 ownedBy, keyword, notKeyword, tapped, token, isCommander, equipped, enchanted,
 modified, anyOf, manaSpent, manaFrom, putIntoGraveyardFromLibraryThisTurn, putIntoGraveyardThisTurn, blockedThisTurn,
-discardedThisTurn, enteredThisTurn, turnedFaceUpThisTurn, controlledContinuously, controlledSinceTurnBegan, controlledByAsSetUp, attackedThisTurn, attackedThisCombat, attackedYouThisTurn, attackedDuringControllersLastTurn, attackedBattleThisTurn, damagedThisTurnBy, excessDamageThisTurn,
+discardedThisTurn, drawnThisTurn, enteredThisTurn, turnedFaceUpThisTurn, controlledContinuously, controlledSinceTurnBegan, controlledByAsSetUp, attackedThisTurn, attackedThisCombat, attackedYouThisTurn, attackedDuringControllersLastTurn, attackedBattleThisTurn, damagedThisTurnBy, excessDamageThisTurn,
 dealtDamageToCreatureThisTurn, dealtDamageThisTurn, cast, castBy, castFrom, castVia, enteredFrom,
 putThereBySource, sharesCardTypeWith, sharesPermanentTypeWith, sharesCreatureTypeWith, sharesLandTypeWith, sameNameWith, sameNameAsAnother, thisWay, attacking, blocking, blockingRelation, goaded, suspected, saddled, saddledSource, crewedSource, crewedBySource, enlistedThisCombat, monstrous, renowned, hasManaAbility, hasAbilities,
 xInManaCost, manaCost, coloredManaSymbols, cardTypeCount, nameDiffersFromEach,
@@ -3099,7 +3107,9 @@ discarded this turn that hasn't moved since — a madness card its owner didn't
 cast still is, in the graveyard it went on to (Shadow of the Grave's "all
 cards in your graveyard that you cycled or discarded this turn" is
 `return-from-graveyard` with `filter: { discardedThisTurn: true }`; cycling is
-discarding, rule 702.29a). **"Shares a type with it"** is one clause per
+discarding, rule 702.29a). `drawnThisTurn` is a card drawn this turn that hasn't
+moved since — only a real draw, so not a tutor's card nor a dredged one (Sylvan
+Library's "cards in your hand drawn this turn"). **"Shares a type with it"** is one clause per
 kind of type — `sharesCardTypeWith`, `sharesPermanentTypeWith` (rule 110.4,
 kindred left out), `sharesCreatureTypeWith`, `sharesLandTypeWith` — each
 taking a **`ShareReference`**, the object compared with:

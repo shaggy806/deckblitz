@@ -808,6 +808,12 @@ export interface GameObject {
    * didn't put a card into your hand this way". Cleared as it changes zones
    * again. */
   handArrivalSeq?: number;
+  /** The turn this card was drawn on, for as long as it stays where the draw
+   * put it (`CardFilter.drawnThisTurn` — Sylvan Library's "cards in your hand
+   * drawn this turn"). Only a real draw sets it: a card a replacement gave
+   * instead wasn't drawn (the ruling), and a tutor's isn't. Cleared as it
+   * changes zones again (rule 400.7). */
+  drawnOnTurn?: number;
   /** This stack object is a reflexive triggered ability (rule 603.12) — the
    * whole record, for the same reason as `delayedTrigger`. Only ever set on
    * an `"ability"` object on the stack. */
@@ -3446,6 +3452,8 @@ export type AwaitingDecision =
        * (rule 401.4), the rest as a discard otherwise would, one
        * `cards-discarded` for them all. `reveal`: Nephalia Academy's. */
       readonly discardToLibrary?: { readonly cause?: PlayerId; readonly reveal?: true };
+      /** The cards picked are at stake — see the offer's `givesUp`. */
+      readonly givesUp?: true;
       /** Set for a `choose-among-targets` choice (Barrin's Spite, Wake to
        * Slaughter) among cards in a graveyard: nothing moves by
        * `destination` (`"stay"`); what's picked is collected in
@@ -4259,6 +4267,8 @@ export type AwaitingDecision =
       readonly about?: PlayerId;
       /** The permanent the question is about — see the offer's `aboutObject`. */
       readonly aboutObject?: ObjectId;
+      /** The card the question is about — see the offer's `aboutCard`. */
+      readonly aboutCard?: ObjectId;
       /** No mode at all is also an answer, besides `minModes` to `maxModes`
        * — an announced modal's `optional` ("you may choose two"). */
       readonly orNone?: true;

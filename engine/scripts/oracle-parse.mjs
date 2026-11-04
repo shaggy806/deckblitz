@@ -8262,6 +8262,44 @@ export function parseEffect(text, outer) {
       hints: [],
     };
   }
+  // Sylvan Library's: drawn cards at stake, each 4 life or back on top.
+  const atStake =
+    /^You may draw (\w+) additional cards\. If you do, choose (\w+) cards in your hand drawn this turn\. For each of those cards, pay (\d+) life or put the card on top of your library\.$/.exec(text);
+  if (atStake !== null && DECK_COPY_WORDS[atStake[1]] !== undefined && DECK_COPY_WORDS[atStake[2]] !== undefined) {
+    const n = DECK_COPY_WORDS[atStake[2]];
+    return {
+      effect: {
+        kind: "may",
+        prompt: `Draw ${atStake[1]} additional cards?`,
+        effect: { kind: "draw", amount: DECK_COPY_WORDS[atStake[1]] },
+        then: {
+          kind: "look-and-choose",
+          zone: "hand",
+          min: n,
+          max: n,
+          filter: { drawnThisTurn: true },
+          destination: "stay",
+          leftover: "stay",
+          prompt: `Choose ${atStake[2]} cards in your hand drawn this turn. For each, in the order you pick them: pay ${atStake[3]} life or put it on top of your library`,
+          givesUp: true,
+          then: {
+            kind: "for-each-target",
+            from: 0,
+            effect: {
+              kind: "may",
+              prompt: `Pay ${atStake[3]} life? If you don't, put this card on top of your library`,
+              aboutTarget: 0,
+              costLife: Number(atStake[3]),
+              effect: { kind: "sequence", effects: [] },
+              else: { kind: "put-on-library", target: 0, position: "top" },
+            },
+          },
+        },
+      },
+      todo: [],
+      hints: [],
+    };
+  }
   // "Add {C}. If ~ has a luck counter on it, instead add one mana of any
   // color" (Gemstone Caverns): the type depends on the condition.
   const counterInstead = /^Add \{([WUBRGC])\}\. If ~ has an? ([\w+/-]+) counter on it, instead add one mana of any color\.$/.exec(text);
