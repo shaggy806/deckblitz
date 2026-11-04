@@ -16045,7 +16045,8 @@ export class Game {
    */
   private sourceTriggerDoublers(controller: PlayerId, sourceId: ObjectId, departed: boolean): number {
     const source = this.state.objects[sourceId];
-    if (source === undefined || (!departed && source.zone !== "battlefield")) return 0;
+    if (source === undefined || (!departed && source.zone !== "battlefield" && source.zone !== "stack")) return 0;
+    const ofSpell = !departed && source.zone === "stack";
     let count = 0;
     for (const id of this.state.zones.shared.battlefield) {
       const doubler = this.state.objects[id];
@@ -16053,6 +16054,7 @@ export class Game {
       for (const ability of this.registry.get(rulesTextName(doubler)).static) {
         const d = ability.doubleTriggersOf;
         if (d === undefined || !this.staticActive(doubler, ability)) continue;
+        if (ofSpell && d.spells !== true) continue;
         const ofSelfOrEquipment =
           d.selfAndEquipment === true &&
           (sourceId === id ||
@@ -28619,7 +28621,9 @@ export class Game {
           // card's from a graveyard, or a spell's own cast trigger (storm).
           const permanentSource = live.zone === "battlefield" || lastSeen !== undefined;
           const entryDoublers = !permanentSource
-            ? 0
+            ? live.zone === "stack"
+              ? this.sourceTriggerDoublers(object.controller, id, false)
+              : 0
             : (ability.trigger.on === "enters-battlefield" &&
               event.type === "permanent-entered-battlefield"
                 ? this.entryTriggerDoublers(object.controller, event.object)

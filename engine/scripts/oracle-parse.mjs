@@ -19017,6 +19017,13 @@ function parseStatic(line, text) {
   }
   // "If a triggered ability of another creature you control of the chosen
   // type triggers, it triggers an additional time" (Roaming Throne).
+  if (line === "If a triggered ability of a colorless spell you control or another colorless permanent you control triggers, that ability triggers an additional time.") {
+    return {
+      affects: { scope: "self" },
+      doubleTriggersOf: { filter: { colorless: true, controlledBy: "you" }, others: true, spells: true },
+      text,
+    };
+  }
   if (line === "If a triggered ability of another creature you control of the chosen type triggers, it triggers an additional time.") {
     return {
       affects: { scope: "self" },

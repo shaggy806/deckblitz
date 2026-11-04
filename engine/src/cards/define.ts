@@ -4170,6 +4170,11 @@ export interface StaticAbility {
     readonly selfAndEquipment?: boolean;
     /** "Another …": the filter never matches this static's own permanent. */
     readonly others?: true;
+    /** "… of a [filter] **spell** you control or [filter] permanent you
+     * control" (Echoes of Eternity): a spell's own triggers too, its "when you
+     * cast this spell" and cascade. Each additional instance makes its own
+     * choices as it goes on the stack (its ruling). */
+    readonly spells?: true;
   };
   /**
    * "Permanents entering don't cause abilities of permanents your opponents

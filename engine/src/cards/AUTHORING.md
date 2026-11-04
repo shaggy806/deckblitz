@@ -5904,14 +5904,15 @@ is "can't attack a player it has already attacked this turn" (Port Razer), by th
   creature dying" — dies and leaves-the-battlefield triggers, `filter`
   matched as it last existed). `filter` narrows the permanent, spell or copy
   the event is about.
-- `doubleTriggersOf: { filter?, selfAndEquipment?, others? }` — the same, keyed on
+- `doubleTriggersOf: { filter?, selfAndEquipment?, others?, spells? }` — the same, keyed on
   **whose** ability it is: "if a triggered ability of an Ally you control
   triggers" (Katara, the Fearless: `filter: { subtype: "Ally", controlledBy:
   "you" }`), "…of a creature you control with power 2 or less" (Delney).
   `selfAndEquipment` is "…of ~ or an Equipment attached to it" (Cloud, Midgar
   Mercenary, with `condition: { kind: "source", filter: { equipped: true } }`
   for "as long as ~ is equipped"). Only permanents' abilities — a spell's
-  "when you cast this" and a command-zone card's aren't — and a
+  "when you cast this" only with `spells: true` (Echoes of Eternity), a
+  command-zone card's never — and a
   leaves-the-battlefield ability's source is matched as it last existed. The
   filter reads this permanent as its source: Roaming Throne's "another
   creature you control of the chosen type" is `{ filter: { type: "creature",

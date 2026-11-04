@@ -277,6 +277,14 @@ describe("an opponent's spell or ability causing you to discard", () => {
       read("Enchantment", "Whenever a spell or ability an opponent controls causes you to discard a card, you gain 2 life.").triggered[0].trigger,
     ).toEqual({ on: "discards", who: "you", byOpponent: true, perCard: true });
   });
+  it("a colorless spell's or another colorless permanent's triggers doubled", () => {
+    expect(
+      read(
+        "Enchantment",
+        "If a triggered ability of a colorless spell you control or another colorless permanent you control triggers, that ability triggers an additional time.",
+      ).static[0].doubleTriggersOf,
+    ).toEqual({ filter: { colorless: true, controlledBy: "you" }, others: true, spells: true });
+  });
   it("whenever one or more leave the battlefield, once per event", () => {
     expect(
       read("Creature — Frog", "Whenever one or more other creatures you control leave the battlefield without dying, draw a card.").triggered[0]

@@ -5052,6 +5052,8 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 **A target filter read against its object's controller (2026-11-04).** `effect:target-filter-relative-to-controller`: a `DynamicOperand`'s `forItsController`, the amount's `"each"` read as the matched object's controller. Drown in the Loch.
 
 **A cost reduced by the most any one opponent controls (2026-11-04).** `cost:cost-reduction-greatest-opponent-count`: the `{ greatestOpponentCount: CardFilter }` `CostReductionAmount`. Cavern-Hoard Dragon.
+**A spell's triggers doubled (2026-11-04).** `static:double-triggers-of-spells`: `doubleTriggersOf`'s `spells`, reaching a spell's own triggers ("when you cast this spell") beside a permanent's. Echoes of Eternity.
+
 **One or more leaving the battlefield, once per event (2026-11-04).** `trigger:leaves-batch-trigger`: `leaves-battlefield`'s `batched`, off a `permanents-left` event once the whole event is done, a commander's deferred move (903.9b) waiting with it. Dour Port-Mage; Nefarious Imp. Aang, Airbending Master has it now and is `author-freed`'s if nothing else blocks it.
 
 **Counters put on a player as a trigger (2026-11-04).** `trigger:counters-put-on-players`: `counters-put`'s `orPlayer`, a player's counters and energy too, once per player for a simultaneous placement (toxic's ruling), `by` now on `player-counters-changed` and `energy-changed`. All Will Be One.
