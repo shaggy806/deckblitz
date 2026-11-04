@@ -12935,6 +12935,21 @@ describe("mana abilities from a hand, and paid by exiling from a graveyard", () 
       },
     });
   });
+  it("a manland with all creature types, not a changeling", () => {
+    const [, animate] = read(
+      "Land",
+      "{T}: Add {C}.\n{1}: This land becomes a 2/2 creature with all creature types until end of turn. It's still a land.",
+    );
+    expect(animate.effect).toEqual({
+      kind: "animate",
+      target: "source",
+      power: 2,
+      toughness: 2,
+      addTypes: ["creature"],
+      addSubtypes: ["(every creature type)"],
+      duration: "end-of-turn",
+    });
+  });
   it("untapping tapped creatures as a cost, and a coloured tap cost", () => {
     const [make, , win] = read(
       "Artifact",

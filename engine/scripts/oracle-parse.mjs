@@ -7853,6 +7853,25 @@ const MANA_SPEND_PURPOSE_LINES = {
 
 const COLOR_LETTER = { white: "W", blue: "U", black: "B", red: "R", green: "G" };
 
+/** A manland with all creature types, not the changeling keyword (Mutavault's
+ * ruling): Mutavault, Faceless Haven, Soulstone Sanctuary. */
+function becomesAllTypesOf(text) {
+  const m = /^~ becomes an? (\d+)\/(\d+) creature with (?:(\w+) and )?all creature types( until end of turn)?\. It's still a land\.$/.exec(text);
+  if (m === null) return null;
+  const keyword = m[3] === undefined ? undefined : KEYWORDS[m[3].toLowerCase()];
+  if (m[3] !== undefined && keyword === undefined) return null;
+  return {
+    kind: "animate",
+    target: "source",
+    power: Number(m[1]),
+    toughness: Number(m[2]),
+    addTypes: ["creature"],
+    addSubtypes: ["(every creature type)"],
+    ...(keyword !== undefined ? { keywords: [keyword] } : {}),
+    duration: m[4] !== undefined ? "end-of-turn" : "permanent",
+  };
+}
+
 /**
  * "~ becomes a 3/3 red and green Elemental creature with "Whenever …"": `animate`
  * with the whole ability granted beside it (`grant-triggered`, `grant-static`,
@@ -8213,7 +8232,7 @@ export function parseEffect(text, outer) {
   const todo = [];
   const hints = [];
   let skip = 0;
-  const becomes = becomesWithAbilitiesOf(text);
+  const becomes = becomesWithAbilitiesOf(text) ?? becomesAllTypesOf(text);
   if (becomes !== null) return { effect: becomes, todo: [], hints: [] };
   // Mythos of Snapdax's two sentences: the second rewrites who chooses.
   if (text === SNAPDAX_LINE) return { effect: SNAPDAX_EFFECT, todo: [], hints: [] };

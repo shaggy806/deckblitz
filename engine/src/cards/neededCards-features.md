@@ -5134,3 +5134,5 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 
 **A doubled trigger, by a land or Bird entering and by a draw (2026-11-04).** `static:trigger-doubling-filter`, no engine code: `doubleTriggers` with an `anyOf` filter (Panharmonicon's shape). `static:trigger-doubler-draw-cause`: `doubleTriggers`' new cause `"draws"`. The scaffolder reads these lines and "you may play lands and cast … spells from the top". Traveling Chocobo, Krang, the All-Powerful.
 **Untapping permanents as a cost (2026-11-04).** `cost:untap-cost`: `AbilityCost.untapOthers`, chosen with `choose-permanents` as the cost is paid (rule 601.2h), so a creature tapped for the ability's own mana can be one (Halo Fountain's ruling); a stunned one can't (rule 122.1d), as for `{Q}`. Halo Fountain, Crackleburr.
+
+**A manland with all creature types (2026-11-04).** `effect:all-creature-types-animate`, no engine code: `animate` with `addSubtypes: ["(every creature type)"]`, Faceless Haven's shape, now read by the scaffolder. Mutavault.
