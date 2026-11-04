@@ -6,6 +6,7 @@
   "effect:keep-one-of-each-permanent-type",
   "effect:turn-scoped-mana-trigger",
   "replacement:would-lose-life",
+  "replacement:token-multiplier-filter",
   "effect:exile-any-number-until-leaves",
   "effect:exile-until-leaves-per-opponent",
   "effect:each-player-may-feasibility",

@@ -39983,9 +39983,9 @@ export class Game {
       const statics = this.registry.get(rulesTextName(object)).static;
       for (let i = 0; i < statics.length; i++) {
         const r = statics[i].replacement;
-        if (r?.event !== "would-create-token" || r.multiplier !== undefined || !this.staticActive(object, statics[i])) {
-          continue;
-        }
+        if (r?.event !== "would-create-token" || !this.staticActive(object, statics[i])) continue;
+        // A plain doubler multiplies what the search returns.
+        if (r.multiplier !== undefined && r.ofTokens === undefined) continue;
         for (let n = 0; n < (object.stackCount ?? 1); n++) {
           const key = `${id}:${i}:${n}`;
           if (used?.has(key) !== true) replacements.push({ key, replacement: r });
@@ -53809,7 +53809,12 @@ export class Game {
       if (object.controller !== controller || hasLostAbilities(this.state, this.registry,object)) continue;
       for (const ability of this.registry.get(rulesTextName(object)).static) {
         const r = ability.replacement;
-        if (r?.event === "would-create-token" && r.multiplier !== undefined && this.staticActive(object, ability)) {
+        if (
+          r?.event === "would-create-token" &&
+          r.multiplier !== undefined &&
+          r.ofTokens === undefined &&
+          this.staticActive(object, ability)
+        ) {
           mult = Math.min(mult * r.multiplier ** (object.stackCount ?? 1), Game.MAX_EFFECT_INSTANCES);
         }
       }

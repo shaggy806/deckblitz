@@ -16950,6 +16950,11 @@ function tokenReplacementOf(line, text, tokenFor) {
     return /^[A-Z][a-z]+$/.test(w) ? { ofTokens: { subtypesAnyOf: [w] } } : null;
   };
   let m;
+  // "If one or more creature tokens would be created under your control, three times that many of those tokens are created instead."
+  if ((m = /^If one or more (?:(\w+) )?tokens would be created under your control, (twice|three times) that many of those tokens are created instead\.$/.exec(line))) {
+    const ofTokens = of(m[1]);
+    return ofTokens === null ? null : static_({ multiplier: m[2] === "twice" ? 2 : 3, ...ofTokens });
+  }
   // "If you would create a Clue, Food, or Treasure token, instead create one of each."
   if ((m = /^If you would create a (\w+), (\w+), or (\w+) token, instead create one of each\.$/.exec(line))) {
     const kinds = [m[1], m[2], m[3]];

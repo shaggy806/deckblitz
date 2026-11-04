@@ -376,7 +376,9 @@ export interface TokenMultiplierReplacement {
    * one (rule 616.1). A token is what it would be created as, its definition
    * or a copy's copiable values, not what an effect makes it as it enters
    * (the Divine Visitation ruling). `plusOneToken` adds to the whole event;
-   * `tokensInstead` and `oneOfEach` replace just the tokens it names.
+   * `tokensInstead` and `oneOfEach` replace just the tokens it names, and
+   * `multiplier` multiplies just them (Ojer Taq's "three times that many of
+   * those tokens").
    */
   readonly ofTokens?: TokenKindFilter;
 }

@@ -6455,6 +6455,8 @@ clause (section 9):
   another token in place of the ones `ofTokens` names (Draconic Visitor,
   Fisher's Talent: `atLevel` it for a Class). `oneOfEach: ["<token>", …]` is
   Academy Manufactor: each token `ofTokens` names becomes one of each.
+  `multiplier` with `ofTokens` multiplies just those tokens (Ojer Taq, Deepest
+  Foundation, three times creature tokens), in the search rather than last.
   `ofTokens: { type?, subtypesAnyOf? }` limits any of these to tokens of a kind:
   what they'd be created as (a definition or a copy's copiable values). The
   event changes as they apply, so a Frog from one replacement makes Queen

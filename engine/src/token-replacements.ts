@@ -12,7 +12,9 @@
  * taken is the one that makes the most tokens, worked out rather than asked
  * (the user's call for counters, 2026-10-14: `Game.counterTotal`). Doublers
  * take no part in the search: last is always at least as good, since they
- * double everything else, so they multiply what it returns.
+ * double everything else, so they multiply what it returns. A multiplier of
+ * only some tokens (Ojer Taq) is in the search: it matters whether another
+ * replacement has made its kind of token yet.
  */
 import type { CardType } from "./cards.js";
 import type { TokenKindFilter, TokenMultiplierReplacement } from "./replacements.js";
@@ -94,6 +96,13 @@ function applyOne(
   const instead = r.tokensInstead ?? r.creatureTokensInstead;
   const filter = r.ofTokens ?? (r.creatureTokensInstead !== undefined ? { type: "creature" as const } : undefined);
   const matching = (t: PlannedTokens): boolean => tokenKindMatches(kindsOf(search, t.name), filter);
+  // Ojer Taq's "three times that many" of the tokens `ofTokens` names.
+  if (r.multiplier !== undefined) {
+    const by = r.multiplier;
+    return tokens.map((t) =>
+      matching(t) ? { name: t.name, count: Math.min(t.count * by, Math.max(search.cap, t.count)) } : t,
+    );
+  }
   if (instead !== undefined) {
     const that = tokens.filter(matching).reduce((sum, t) => sum + t.count, 0);
     return addTo(

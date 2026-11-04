@@ -310,6 +310,14 @@ describe("would-create-token replacements", () => {
     );
     return face.static[0]?.replacement;
   };
+  it("twice or three times that many, of any token or some", () => {
+    expect(
+      read("If one or more tokens would be created under your control, twice that many of those tokens are created instead."),
+    ).toEqual({ event: "would-create-token", multiplier: 2 });
+    expect(
+      read("If one or more creature tokens would be created under your control, three times that many of those tokens are created instead."),
+    ).toEqual({ event: "would-create-token", multiplier: 3, ofTokens: { type: "creature" } });
+  });
   it("those tokens plus an additional one, of any token or some", () => {
     expect(
       read(
