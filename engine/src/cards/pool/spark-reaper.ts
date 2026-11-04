@@ -14,7 +14,7 @@ export default defineCard({
       cost: {
         mana: "{3}",
         tap: false,
-        sacrifice: { filter: { typesAnyOf: ["creature", "planeswalker"], controlledBy: "you" } },
+        sacrifice: { filter: { typesAnyOf: ["creature", "planeswalker"] } },
       },
       targets: [],
       effect: {

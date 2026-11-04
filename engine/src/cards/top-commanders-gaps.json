@@ -1744,7 +1744,8 @@
   "static:anthem-per-counter-on-source",
   "effect:commander-cast-count-amount",
   "stat:mana-spent-replacement",
-  "replacement:counter-replacement-players"
+  "replacement:counter-replacement-players",
+  "trigger:search-trigger"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

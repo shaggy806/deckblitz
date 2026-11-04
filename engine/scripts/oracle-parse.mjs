@@ -2362,6 +2362,7 @@ export function parseTrigger(clause) {
     return [{ on: "discards", who: "you", byOpponent: true, perCard: true }];
   }
   if (/^Whenever you surveil$/.test(c)) return [{ on: "surveils", who: "you" }];
+  if (/^Whenever an opponent searches their library$/.test(c)) return [{ on: "searches-library", who: "opponent" }];
 
   // Steps.
   if (/^At the beginning of combat on your turn$/.test(c)) return [{ on: "step-begins", step: "begin-combat", who: "you" }];
@@ -3395,6 +3396,27 @@ export function parseSentence(sentence, ctx) {
   // Command Tower, Arcane Signet, Opal Palace.
   if (re("add one mana of any color in your commander's color identity").test(s)) {
     return { kind: "add-mana", mana: "commander-identity", amount: 1 };
+  }
+
+  // "You gain 1 life and draw a card" (Archivist of Oghma), "put a +1/+1 counter
+  // on ~ and draw a card" (Wan Shi Tong's).
+  if ((m = re(`you gain ${N} life and draw ${N} cards?`).exec(s))) {
+    return {
+      kind: "sequence",
+      effects: [
+        { kind: "gain-life", amount: amount(m[1]) },
+        { kind: "draw", amount: amount(m[2]) },
+      ],
+    };
+  }
+  if ((m = re(`put a \\+1/\\+1 counter on ~ and draw ${N} cards?`).exec(s))) {
+    return {
+      kind: "sequence",
+      effects: [
+        { kind: "add-counter", target: "source", counter: "+1/+1", amount: 1 },
+        { kind: "draw", amount: amount(m[1]) },
+      ],
+    };
   }
 
   // Cards.
@@ -5325,6 +5347,17 @@ export function parseSentence(sentence, ctx) {
     // "That player discards a card" (Pain Magnification).
     if ((m = re(`that player discards ${N} cards?`).exec(s))) {
       return { kind: "discard", target: "trigger-player", amount: amount(m[1]) };
+    }
+    // "That player sacrifices a creature of their choice and loses 10 life"
+    // (Ob Nixilis, Unshackled).
+    if ((m = re(`that player sacrifices a creature of their choice and loses ${N} life`).exec(s))) {
+      return {
+        kind: "sequence",
+        effects: [
+          { kind: "sacrifice", who: "trigger-player", filter: { type: "creature" }, count: 1 },
+          { kind: "lose-life", amount: amount(m[1]), who: "trigger-player" },
+        ],
+      };
     }
     if ((m = re("that player adds one mana of any type that land produced, and ~ deals (\\d+) damage to the player").exec(s))) {
       const damage = { kind: "damage", amount: Number(m[1]), who: "trigger-player" };
@@ -15481,6 +15514,8 @@ function thatPlayerOf(triggers) {
   // "Whenever a player taps a land for mana, ~ deals 1 damage to that player"
   // (Manabarbs): who activated the mana ability.
   if (triggers.every((t) => t.on === "tapped-for-mana")) return "trigger-player";
+  // Who searched (Ob Nixilis, Unshackled).
+  if (triggers.every((t) => t.on === "searches-library")) return "trigger-player";
   if (triggers.every((t) => t.on === "deals-damage" && t.to === "player")) return "trigger-player";
   // "Whenever an opponent is dealt 3 or more damage by a single source, that
   // player discards a card" (Pain Magnification).

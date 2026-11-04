@@ -2046,6 +2046,14 @@ export type TriggerSpec =
       readonly who: TriggerWho;
     }
   | {
+      /** A player searched their own library (rule 701.23) — Archivist of
+       * Oghma's "whenever an opponent searches their library", whoever's effect
+       * made them: not someone else's library, and not one they can't search.
+       * `"trigger-player"` is who searched. */
+      readonly on: "searches-library";
+      readonly who: TriggerWho;
+    }
+  | {
       /** A player scried (rule 701.22) — "whenever you scry"; with
        * `orSurveil`, "whenever you scry or surveil" (Denzilore Fatehold).
        * Once per scry, however many cards, and after it's done (701.22d) —

@@ -14795,6 +14795,51 @@ describe("a choice of creature type, the counters counted with it (Banner of Kin
   });
 });
 
+describe("whenever an opponent searches their library", () => {
+  const read = (name: string, type_line: string, mana_cost: string, oracle_text: string) =>
+    parseFace({ name, type_line, oracle_text, mana_cost, colors: [] });
+
+  it("Archivist of Oghma", () => {
+    const face = read(
+      "Archivist of Oghma",
+      "Creature — Halfling Cleric",
+      "{1}{W}",
+      "Flash\nWhenever an opponent searches their library, you gain 1 life and draw a card.",
+    );
+    expect(face.complete).toBe(true);
+    expect(face.triggered[0].trigger).toEqual({ on: "searches-library", who: "opponent" });
+  });
+
+  it("Wan Shi Tong, Librarian", () => {
+    const face = read(
+      "Wan Shi Tong, Librarian",
+      "Legendary Creature — Bird Spirit",
+      "{X}{U}{U}",
+      "Flash\nFlying, vigilance\nWhen Wan Shi Tong enters, put X +1/+1 counters on him. Then draw half X cards, rounded down.\nWhenever an opponent searches their library, put a +1/+1 counter on Wan Shi Tong and draw a card.",
+    );
+    expect(face.triggered[1].trigger).toEqual({ on: "searches-library", who: "opponent" });
+    expect(face.triggered[1].effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "add-counter", target: "source", counter: "+1/+1", amount: 1 },
+        { kind: "draw", amount: 1 },
+      ],
+    });
+  });
+
+  it("Ob Nixilis, Unshackled", () => {
+    const face = read(
+      "Ob Nixilis, Unshackled",
+      "Legendary Creature — Demon",
+      "{4}{B}{B}",
+      "Flying, trample\nWhenever an opponent searches their library, that player sacrifices a creature of their choice and loses 10 life.\nWhenever another creature dies, put a +1/+1 counter on Ob Nixilis.",
+    );
+    expect(face.complete).toBe(true);
+    expect(face.triggered[0].trigger).toEqual({ on: "searches-library", who: "opponent" });
+    expect(face.triggered[0].effect.effects[0]).toMatchObject({ kind: "sacrifice", who: "trigger-player" });
+  });
+});
+
 describe("counters by who puts them, on permanents or players", () => {
   it("Vorinclex, Monstrous Raider", () => {
     const face = parseFace({

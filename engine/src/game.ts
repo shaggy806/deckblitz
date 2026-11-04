@@ -28624,6 +28624,9 @@ export class Game {
       // "Whenever a player plays a land, that player draws a card" (Horn of
       // Greed): who played it, under whomever's control it entered.
       player = event.player;
+    } else if (event.type === "library-searched") {
+      // Who searched (Ob Nixilis, Unshackled: "that player sacrifices …").
+      player = event.player;
     } else if (event.type === "attackers-declared") {
       // The attacking player (Firemane Commando's "they draw a card").
       player = event.player;
@@ -29572,6 +29575,15 @@ export class Game {
         return (
           event.type === "scried" &&
           event.mode === "surveil" &&
+          (spec.who === "any" ||
+            (spec.who === "you" && event.player === self.controller) ||
+            (spec.who === "opponent" && event.player !== self.controller))
+        );
+      case "searches-library":
+        return (
+          event.type === "library-searched" &&
+          // "Their library" (the rulings): never someone else's.
+          event.owner === event.player &&
           (spec.who === "any" ||
             (spec.who === "you" && event.player === self.controller) ||
             (spec.who === "opponent" && event.player !== self.controller))
@@ -37030,6 +37042,9 @@ export class Game {
       const history = (seat.turnHistory ??= {});
       history.ownLibrarySearched = (history.ownLibrarySearched ?? 0) + 1;
     }
+    // Whatever it finds, even nothing (rule 701.23f: a search of part of it
+    // still counts). One that can't happen didn't (Archivist of Oghma).
+    if (library) this.emit({ type: "library-searched", player, owner });
     const shuffles = library || (forbidden && zones === "library" && !outsideOnly);
     const inGraveyard = searched.graveyard && !outsideOnly ? matching("graveyard") : [];
     const inHand = searched.hand && !outsideOnly ? matching("hand") : [];

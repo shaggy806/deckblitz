@@ -582,6 +582,13 @@ export type GameEvent =
       readonly after: number;
     })
   | (Base & {
+      /** `player` searched `owner`'s library (rule 701.23), as the search
+       * begins, whatever it goes on to find. */
+      readonly type: "library-searched";
+      readonly player: PlayerId;
+      readonly owner: PlayerId;
+    })
+  | (Base & {
       /** A scry / surveil resolved: `looked` cards seen, `movedAway` put on
        * the bottom (scry) or into the graveyard (surveil). */
       readonly type: "scried";
