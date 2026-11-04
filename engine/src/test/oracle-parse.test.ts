@@ -4094,6 +4094,15 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(spell.effect.effects[2]).toMatchObject({ kind: "sacrifice", who: "each-foe" });
   });
 
+  it("a land's Adventure (rule 715): its face reads whole, the reminder of the land dropped", () => {
+    const spell = face(
+      "Draw two cards. (Then exile this card. You may play the land later from exile.)",
+      "Sorcery — Adventure",
+    );
+    expect(spell.complete).toBe(true);
+    expect(spell.effect).toMatchObject({ kind: "draw", amount: 2 });
+  });
+
   it("'Paradigm' (rule 702.192a): the effect's last step, then exiled", () => {
     const spell = face(
       "Put two +1/+1 counters on each creature you control.\nParadigm (Then exile this spell. After you first resolve a spell with this name, you may cast a copy of it from exile without paying its mana cost at the beginning of each of your first main phases.)",

@@ -3341,6 +3341,18 @@ export class Game {
       const object = this.state.objects[card];
       if (object === undefined || !object.onAdventure || object.owner !== player) continue;
       const creatureDef = this.faceDef(card, 0);
+      // A land with an Adventure is played from exile, not cast: the "may
+      // play it" of the rule's words, with a land drop, at sorcery timing
+      // (the rulings). A permission on it above may have offered it already.
+      if (creatureDef.types.includes("land")) {
+        if (
+          this.whyCannotPlayLand(player, card, 0) === null &&
+          !out.some((action) => action.kind === "play-land" && action.card === card)
+        ) {
+          out.push({ kind: "play-land", card, cardName: creatureDef.name, face: 0 });
+        }
+        continue;
+      }
       out.push(
         ...this.castSpellActions(player, card, creatureDef.name, creatureDef, {
           via: "adventure",
@@ -12922,6 +12934,10 @@ export class Game {
       // (Tectonic Giant, Theater of Horrors), as does a `playFromExile`
       // static that plays lands (Grolnok, the Omnivore).
       this.mayPlayFromExile(player, cardId, face) ||
+      // A land with an Adventure, exiled by it resolving (rule 715.3, the
+      // rulings): its owner may play it from there.
+      (face === 0 && this.state.objects[cardId]?.zone === "exile" &&
+        this.state.objects[cardId].onAdventure === true && this.state.objects[cardId].owner === player) ||
       // Another player's hand, opened for the turn (Sen Triplets).
       this.inHandOpenTo(player, cardId);
     if (!playable) {

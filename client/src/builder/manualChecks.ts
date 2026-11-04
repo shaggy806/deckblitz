@@ -10456,4 +10456,18 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{}, {}, {}],
     }),
   ),
+  preset(
+    'Midgar, City of Mako: its Adventure, then the land from exile',
+    board({
+      you: { bf: ['Swamp*3', 'Grizzly Bears'], hand: ['Midgar, City of Mako'] },
+      opp: [{}],
+    }),
+  ),
+  preset(
+    'Lindblum, Industrial Regency: four players, the land or its Adventure',
+    board({
+      you: { bf: ['Mountain*3'], hand: ['Lindblum, Industrial Regency'] },
+      opp: [{}, {}, {}],
+    }),
+  ),
 ]

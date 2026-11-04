@@ -6968,3 +6968,13 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 - **Do:** Cast Decorum Dissertation on yourself, then pass until your next first main phase and cast the copy on Carol.
 - **Expect:** You pick the copy's target when you cast it. Carol draws two cards and loses 2 life.
+
+### Midgar, City of Mako: its Adventure, then the land from exile
+
+- **Do:** Click Midgar in your hand and cast Reactor Raid, sacrificing Grizzly Bears. Then open your exile and click Midgar in it.
+- **Expect:** You draw two cards and Midgar goes to exile, not the graveyard. Playing it uses your land drop, and it enters tapped.
+
+### Lindblum, Industrial Regency: four players, the land or its Adventure
+
+- **Do:** Click Lindblum in your hand and play it as a land.
+- **Expect:** The menu offers both playing the land and casting Mage Siege. Played, it enters tapped, and no Wizard token appears.
