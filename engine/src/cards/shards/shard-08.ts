@@ -410,6 +410,7 @@ import _poolIslandOfWakWak from "../pool/island-of-wak-wak.js";
 import _poolJackOfHeartsVolatileHero from "../pool/jack-of-hearts-volatile-hero.js";
 import _poolJackalopeHerd from "../pool/jackalope-herd.js";
 import _poolJadeBearer from "../pool/jade-bearer.js";
+import _poolJadeOrbOfDragonkind from "../pool/jade-orb-of-dragonkind.js";
 import _poolJanJansenChaosCrafter from "../pool/jan-jansen-chaos-crafter.js";
 import _poolJayemdaeTome from "../pool/jayemdae-tome.js";
 import _poolJazalGoldmane from "../pool/jazal-goldmane.js";
@@ -1363,6 +1364,7 @@ const shard: CardShard = {
     _poolJackOfHeartsVolatileHero,
     _poolJackalopeHerd,
     _poolJadeBearer,
+    _poolJadeOrbOfDragonkind,
     _poolJanJansenChaosCrafter,
     _poolJayemdaeTome,
     _poolJazalGoldmane,

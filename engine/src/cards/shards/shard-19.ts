@@ -815,6 +815,7 @@ import _poolSwallowWhole from "../pool/swallow-whole.js";
 import _poolSweetOblivion from "../pool/sweet-oblivion.js";
 import _poolSwiftSilence from "../pool/swift-silence.js";
 import _poolSwordOfSinewAndSteel from "../pool/sword-of-sinew-and-steel.js";
+import _poolSylvanLibrary from "../pool/sylvan-library.js";
 import _poolSynapseSliver from "../pool/synapse-sliver.js";
 import _poolSynodCenturion from "../pool/synod-centurion.js";
 import _poolTajuruSnarecaster from "../pool/tajuru-snarecaster.js";
@@ -1772,6 +1773,7 @@ const shard: CardShard = {
     _poolSweetOblivion,
     _poolSwiftSilence,
     _poolSwordOfSinewAndSteel,
+    _poolSylvanLibrary,
     _poolSynapseSliver,
     _poolSynodCenturion,
     _poolTajuruSnarecaster,

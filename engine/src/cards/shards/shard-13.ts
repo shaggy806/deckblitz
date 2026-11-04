@@ -456,6 +456,7 @@ import _poolMirkwood from "../pool/mirkwood.js";
 import _poolMirrorRoom from "../pool/mirror-room.js";
 import _poolMischiefAndMayhem from "../pool/mischief-and-mayhem.js";
 import _poolMishrasFactory from "../pool/mishras-factory.js";
+import _poolMistriseVillage from "../pool/mistrise-village.js";
 import _poolMithrilCoat from "../pool/mithril-coat.js";
 import _poolMjolnirHammerOfThor from "../pool/mjolnir-hammer-of-thor.js";
 import _poolModeration from "../pool/moderation.js";
@@ -1339,6 +1340,7 @@ const shard: CardShard = {
     _poolMirrorRoom,
     _poolMischiefAndMayhem,
     _poolMishrasFactory,
+    _poolMistriseVillage,
     _poolMithrilCoat,
     _poolMjolnirHammerOfThor,
     _poolModeration,

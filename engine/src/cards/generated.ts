@@ -1105,6 +1105,7 @@ import _poolArdenvalePaladin from "./pool/ardenvale-paladin.js";
 import _poolArdenvaleTactician from "./pool/ardenvale-tactician.js";
 import _poolArdozCobblerOfWar from "./pool/ardoz-cobbler-of-war.js";
 import _poolArenaAthlete from "./pool/arena-athlete.js";
+import _poolArenaOfGlory from "./pool/arena-of-glory.js";
 import _poolArenaOfTheAncients from "./pool/arena-of-the-ancients.js";
 import _poolArenaRector from "./pool/arena-rector.js";
 import _poolArenaTrickster from "./pool/arena-trickster.js";
@@ -9398,6 +9399,7 @@ import _poolGempalmSorcerer from "./pool/gempalm-sorcerer.js";
 import _poolGempalmStrider from "./pool/gempalm-strider.js";
 import _poolGemrazer from "./pool/gemrazer.js";
 import _poolGemstoneArray from "./pool/gemstone-array.js";
+import _poolGemstoneCaverns from "./pool/gemstone-caverns.js";
 import _poolGemstoneMine from "./pool/gemstone-mine.js";
 import _poolGenasiEnforcers from "./pool/genasi-enforcers.js";
 import _poolGenePollinator from "./pool/gene-pollinator.js";
@@ -12511,6 +12513,7 @@ import _poolJadeGuardian from "./pool/jade-guardian.js";
 import _poolJadeIdol from "./pool/jade-idol.js";
 import _poolJadeMage from "./pool/jade-mage.js";
 import _poolJadeMonolith from "./pool/jade-monolith.js";
+import _poolJadeOrbOfDragonkind from "./pool/jade-orb-of-dragonkind.js";
 import _poolJadeSeedstones from "./pool/jade-seedstones.js";
 import _poolJadecraftArtisan from "./pool/jadecraft-artisan.js";
 import _poolJadedAnalyst from "./pool/jaded-analyst.js";
@@ -15499,6 +15502,7 @@ import _poolMistmeadowVanisher from "./pool/mistmeadow-vanisher.js";
 import _poolMistmeadowWitch from "./pool/mistmeadow-witch.js";
 import _poolMistralCharger from "./pool/mistral-charger.js";
 import _poolMistralSinger from "./pool/mistral-singer.js";
+import _poolMistriseVillage from "./pool/mistrise-village.js";
 import _poolMistsOfLittjara from "./pool/mists-of-littjara.js";
 import _poolMistsOfLorien from "./pool/mists-of-lorien.js";
 import _poolMistvaultBridge from "./pool/mistvault-bridge.js";
@@ -24034,6 +24038,7 @@ import _poolSylvanBrushstrider from "./pool/sylvan-brushstrider.js";
 import _poolSylvanCaryatid from "./pool/sylvan-caryatid.js";
 import _poolSylvanEchoes from "./pool/sylvan-echoes.js";
 import _poolSylvanHierophant from "./pool/sylvan-hierophant.js";
+import _poolSylvanLibrary from "./pool/sylvan-library.js";
 import _poolSylvanMessenger from "./pool/sylvan-messenger.js";
 import _poolSylvanMight from "./pool/sylvan-might.js";
 import _poolSylvanOffering from "./pool/sylvan-offering.js";
@@ -30259,6 +30264,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolArdenvaleTactician,
   _poolArdozCobblerOfWar,
   _poolArenaAthlete,
+  _poolArenaOfGlory,
   _poolArenaOfTheAncients,
   _poolArenaRector,
   _poolArenaTrickster,
@@ -38552,6 +38558,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGempalmStrider,
   _poolGemrazer,
   _poolGemstoneArray,
+  _poolGemstoneCaverns,
   _poolGemstoneMine,
   _poolGenasiEnforcers,
   _poolGenePollinator,
@@ -41665,6 +41672,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolJadeIdol,
   _poolJadeMage,
   _poolJadeMonolith,
+  _poolJadeOrbOfDragonkind,
   _poolJadeSeedstones,
   _poolJadecraftArtisan,
   _poolJadedAnalyst,
@@ -44653,6 +44661,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMistmeadowWitch,
   _poolMistralCharger,
   _poolMistralSinger,
+  _poolMistriseVillage,
   _poolMistsOfLittjara,
   _poolMistsOfLorien,
   _poolMistvaultBridge,
@@ -53188,6 +53197,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSylvanCaryatid,
   _poolSylvanEchoes,
   _poolSylvanHierophant,
+  _poolSylvanLibrary,
   _poolSylvanMessenger,
   _poolSylvanMight,
   _poolSylvanOffering,
@@ -59426,6 +59436,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/ardenvale-tactician": _poolArdenvaleTactician,
   "pool/ardoz-cobbler-of-war": _poolArdozCobblerOfWar,
   "pool/arena-athlete": _poolArenaAthlete,
+  "pool/arena-of-glory": _poolArenaOfGlory,
   "pool/arena-of-the-ancients": _poolArenaOfTheAncients,
   "pool/arena-rector": _poolArenaRector,
   "pool/arena-trickster": _poolArenaTrickster,
@@ -67719,6 +67730,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/gempalm-strider": _poolGempalmStrider,
   "pool/gemrazer": _poolGemrazer,
   "pool/gemstone-array": _poolGemstoneArray,
+  "pool/gemstone-caverns": _poolGemstoneCaverns,
   "pool/gemstone-mine": _poolGemstoneMine,
   "pool/genasi-enforcers": _poolGenasiEnforcers,
   "pool/gene-pollinator": _poolGenePollinator,
@@ -70832,6 +70844,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/jade-idol": _poolJadeIdol,
   "pool/jade-mage": _poolJadeMage,
   "pool/jade-monolith": _poolJadeMonolith,
+  "pool/jade-orb-of-dragonkind": _poolJadeOrbOfDragonkind,
   "pool/jade-seedstones": _poolJadeSeedstones,
   "pool/jadecraft-artisan": _poolJadecraftArtisan,
   "pool/jaded-analyst": _poolJadedAnalyst,
@@ -73820,6 +73833,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/mistmeadow-witch": _poolMistmeadowWitch,
   "pool/mistral-charger": _poolMistralCharger,
   "pool/mistral-singer": _poolMistralSinger,
+  "pool/mistrise-village": _poolMistriseVillage,
   "pool/mists-of-littjara": _poolMistsOfLittjara,
   "pool/mists-of-lorien": _poolMistsOfLorien,
   "pool/mistvault-bridge": _poolMistvaultBridge,
@@ -82355,6 +82369,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/sylvan-caryatid": _poolSylvanCaryatid,
   "pool/sylvan-echoes": _poolSylvanEchoes,
   "pool/sylvan-hierophant": _poolSylvanHierophant,
+  "pool/sylvan-library": _poolSylvanLibrary,
   "pool/sylvan-messenger": _poolSylvanMessenger,
   "pool/sylvan-might": _poolSylvanMight,
   "pool/sylvan-offering": _poolSylvanOffering,

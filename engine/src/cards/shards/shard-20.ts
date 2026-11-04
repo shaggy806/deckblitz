@@ -46,6 +46,7 @@ import _poolAphettoAlchemist from "../pool/aphetto-alchemist.js";
 import _poolArborbackStomper from "../pool/arborback-stomper.js";
 import _poolArchangelsLight from "../pool/archangels-light.js";
 import _poolArchetypeOfEndurance from "../pool/archetype-of-endurance.js";
+import _poolArenaOfGlory from "../pool/arena-of-glory.js";
 import _poolArmorOfShadows from "../pool/armor-of-shadows.js";
 import _poolArmoredWarhorse from "../pool/armored-warhorse.js";
 import _poolArmoryOfIroas from "../pool/armory-of-iroas.js";
@@ -1016,6 +1017,7 @@ const shard: CardShard = {
     _poolArborbackStomper,
     _poolArchangelsLight,
     _poolArchetypeOfEndurance,
+    _poolArenaOfGlory,
     _poolArmorOfShadows,
     _poolArmoredWarhorse,
     _poolArmoryOfIroas,
