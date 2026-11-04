@@ -11405,11 +11405,21 @@ export class Game {
    * the active player's priority with every other declare-blockers trigger. */
   private announceUnblockedAttackers(): void {
     const blocked: ObjectId[] = [];
+    const unblocked: ObjectId[] = [];
     for (const attacker of this.currentAttackers()) {
       if (this.state.objects[attacker]?.blocked === false) {
         this.emit({ type: "attacker-unblocked", attacker });
+        unblocked.push(attacker);
       } else if (this.state.objects[attacker]?.blocked === true) {
         blocked.push(attacker);
+      }
+    }
+    // Each player with unblocked creatures attacking them directly, in turn
+    // order: "whenever one or more creatures attack you and aren't blocked".
+    for (const defender of this.state.turnOrder) {
+      const attackers = unblocked.filter((attacker) => this.state.objects[attacker]?.attacking === defender);
+      if (attackers.length > 0) {
+        this.emit({ type: "player-attacked-unblocked", player: this.activePlayer, defender, attackers });
       }
     }
     if (blocked.length > 0) this.emit({ type: "attackers-blocked", attackers: blocked });
@@ -27938,7 +27948,8 @@ export class Game {
             trigger.on === "attacks-batch" && event.type === "attackers-declared"
             ? this.creatureCount(this.batchedAttackers(trigger, event.attackers, object))
             : // How many creatures attack that player.
-              trigger.on === "attacks-player" && event.type === "player-attacked"
+              trigger.on === "attacks-player" &&
+                (event.type === "player-attacked" || event.type === "player-attacked-unblocked")
             ? this.creatureCount(this.batchedAttackers(trigger, event.attackers, object))
             : // How many cards left the graveyard, for "that many".
               trigger.on === "leaves-graveyard" && event.type === "cards-left-graveyard"
@@ -28957,7 +28968,7 @@ export class Game {
     } else if (event.type === "attacker-declared") {
       player = this.defendingPlayerOf(event.defender);
       recipient = this.attackedRecipient(event.defender);
-    } else if (event.type === "player-attacked") {
+    } else if (event.type === "player-attacked" || event.type === "player-attacked-unblocked") {
       player = event.defender;
     } else if (event.type === "permanent-tapped-for-mana") {
       // "That player" of "whenever a player taps a land for mana" (Manabarbs).
@@ -29287,7 +29298,8 @@ export class Game {
         ? this.batchedAttackers(spec, event.attackers, self)
         : spec.on === "attack-with" && event.type === "attackers-declared"
           ? this.attackWithCounted(spec, event.attackers, self)
-          : spec.on === "attacks-player" && event.type === "player-attacked"
+          : spec.on === "attacks-player" &&
+              (event.type === "player-attacked" || event.type === "player-attacked-unblocked")
             ? this.batchedAttackers(spec, event.attackers, self)
             : undefined;
     if (counted === undefined) return refs;
@@ -29699,7 +29711,8 @@ export class Game {
         );
       case "attacks-player":
         return (
-          event.type === "player-attacked" &&
+          event.type === (spec.unblocked === true ? "player-attacked-unblocked" : "player-attacked") &&
+          (event.type === "player-attacked" || event.type === "player-attacked-unblocked") &&
           this.matchesWhoPlayer(spec.who, event.player, self) &&
           this.matchesWhoPlayer(spec.defender, event.defender, self) &&
           this.creatureCount(this.batchedAttackers(spec, event.attackers, self)) >= (spec.atLeast ?? 1) &&

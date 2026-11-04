@@ -1780,7 +1780,8 @@
   "amount:target-player-counters",
   "replacement:as-transforms",
   "replacement:as-transforms",
-  "condition:intervening-if-amounts"
+  "condition:intervening-if-amounts",
+  "trigger:attacks-you-unblocked-batch"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

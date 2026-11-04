@@ -1610,6 +1610,12 @@ export type TriggerSpec =
       readonly on: "attacks-player";
       readonly who: TriggerWho;
       readonly defender: TriggerWho;
+      /** "… attack you **and aren't blocked**" (Coveted Jewel): once per
+       * player attacked, as blockers are declared, off
+       * `player-attacked-unblocked`, however many of them are unblocked and
+       * whatever became of the others. `{ triggerValue: true }` and "those
+       * creatures" are the unblocked ones. */
+      readonly unblocked?: true;
       /** Narrow which attackers count: "whenever one or more Merfolk you
        * control attack a player" (Attuma, Atlantean Warlord), still once per
        * player attacked by at least one of them, and `{ triggerValue: true }`

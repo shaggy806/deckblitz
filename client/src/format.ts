@@ -91,6 +91,7 @@ const NOISY_EVENTS: ReadonlySet<GameEvent['type']> = new Set([
   'attackers-declared',
   'attacked-alone',
   'player-attacked',
+  'player-attacked-unblocked',
   // Every blocker already has its own `blocker-declared` line.
   'attacker-blocked',
   'attackers-blocked',

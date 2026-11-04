@@ -1120,6 +1120,17 @@ export type GameEvent =
       readonly attacker: ObjectId;
     })
   | (Base & {
+      /** The unblocked creatures attacking one player directly, after their
+       * `attacker-unblocked`s — once per such player, for "whenever one or
+       * more creatures attack you and aren't blocked" (Coveted Jewel). A
+       * creature attacking a planeswalker is in nobody's `attackers`. */
+      readonly type: "player-attacked-unblocked";
+      /** The attacking (active) player. */
+      readonly player: PlayerId;
+      readonly defender: PlayerId;
+      readonly attackers: readonly ObjectId[];
+    })
+  | (Base & {
       readonly type: "spell-fizzled";
       readonly object: ObjectId;
       readonly reason: string;
