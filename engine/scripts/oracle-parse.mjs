@@ -7566,7 +7566,6 @@ export function parseEffect(text, outer) {
   const becomes = becomesWithAbilitiesOf(text);
   if (becomes !== null) return { effect: becomes, todo: [], hints: [] };
 
-<<<<<<< HEAD
   // "For each player, choose friend or foe. Each friend …. Each foe …": a
   // sentence about each player, then that player's scope put in its place.
   const friendOrFoe = /^For each player, choose friend or foe\. (Each friend .+)\. ((?:Each foe|.+ to each foe) .+)\.$/.exec(text);
@@ -7585,7 +7584,8 @@ export function parseEffect(text, outer) {
       const choose = { kind: "vote", choose: true, who: "you", for: { options: ["friend", "foe"], about: "each-player" } };
       return { effect: { kind: "sequence", effects: [choose, friend, foe] }, todo: [], hints: [] };
     }
-=======
+  }
+
   // A card from a hand, face down (rule 406.3): with no more said nobody may
   // look at it (Summoner's Egg), "you may look at it…" its chooser alone
   // (Gustha's Scepter), or "It becomes foretold" (702.143d — Ethereal Valkyrie).
@@ -7644,7 +7644,6 @@ export function parseEffect(text, outer) {
       todo: [],
       hints: [],
     };
->>>>>>> 931aff891 (Engine, Cards: a card exiled face down from a hand, who may look at it, becoming foretold with a cost of its own, and a one-time look at face-down creatures — Gustha's Scepter, Bane Alley Broker, Summoner's Egg, The Foretold Soldier, Ethereal Valkyrie, Smoke Teller, Revealing Wind, Spy Network)
   }
 
   // "The amassed Army" (rule 701.47a): read at once, or by a reflexive ability.
