@@ -427,6 +427,8 @@ export type Action =
       readonly type: "suspend";
       readonly player: PlayerId;
       readonly card: ObjectId;
+      /** See `phyrexianLife` on `cast-spell`. */
+      readonly phyrexianLife?: number;
       /** "Suspend X": the X announced (rule 107.3a), within the offer's
        * `xCost`. Omitted, its least. */
       readonly xValue?: number;
@@ -447,6 +449,8 @@ export type Action =
       readonly type: "plot";
       readonly player: PlayerId;
       readonly card: ObjectId;
+      /** See `phyrexianLife` on `cast-spell`. */
+      readonly phyrexianLife?: number;
     }
   | {
       /** Turn a face-down permanent you control face up (rules 701.40b,
@@ -459,6 +463,8 @@ export type Action =
       readonly player: PlayerId;
       readonly permanent: ObjectId;
       readonly morph?: boolean;
+      /** See `phyrexianLife` on `cast-spell`. */
+      readonly phyrexianLife?: number;
       /** The X announced for a morph or disguise cost with an `{X}`. */
       readonly xValue?: number;
     }
@@ -477,6 +483,8 @@ export type Action =
       readonly player: PlayerId;
       readonly permanent: ObjectId;
       readonly door: "left" | "right";
+      /** See `phyrexianLife` on `cast-spell`. */
+      readonly phyrexianLife?: number;
     }
   | {
       /** End a Licid's Aura effect (its "you may pay [cost] to end this
@@ -485,6 +493,8 @@ export type Action =
       readonly type: "end-licid-effect";
       readonly player: PlayerId;
       readonly permanent: ObjectId;
+      /** See `phyrexianLife` on `cast-spell`. */
+      readonly phyrexianLife?: number;
     }
   | {
       /** Ignore a permanent's static effect until end of turn (rule 116.2d —
@@ -500,6 +510,8 @@ export type Action =
       readonly type: "cycle";
       readonly player: PlayerId;
       readonly card: ObjectId;
+      /** See `phyrexianLife` on `cast-spell`. */
+      readonly phyrexianLife?: number;
     }
   | {
       readonly type: "cast-spell";
@@ -844,6 +856,8 @@ export type Action =
       /** The value chosen for `{X}` when the decision's own cost contains one
        * — Flameblast Dragon's "you may pay {X}{R}". Ignored otherwise. */
       readonly xValue?: number;
+      /** See `phyrexianLife` on `cast-spell`: of the decision's own cost. */
+      readonly phyrexianLife?: number;
       /** Give the same answer to every identical trigger still on the stack
        * under this one (the offer's `sameForAll`), each as it resolves —
        * see `GameState.standingModeAnswers`. Ignored when none is offered. */
@@ -1095,6 +1109,8 @@ export type LegalAction =
       readonly n: number | "x";
       readonly cost: string;
       readonly xCost?: { readonly maxX: number; readonly minX?: number };
+      /** See `phyrexianPips` on `cast-spell`. */
+      readonly phyrexianPips?: number;
     }
   | {
       readonly kind: "foretell";
@@ -1107,6 +1123,8 @@ export type LegalAction =
       readonly card: ObjectId;
       readonly cardName: string;
       readonly cost: string;
+      /** See `phyrexianPips` on `cast-spell`. */
+      readonly phyrexianPips?: number;
     }
   | {
       /** One of your face-down permanents can be turned face up — its card
@@ -1121,6 +1139,8 @@ export type LegalAction =
       /** A morph or disguise cost with an `{X}` (Bane of the Living): the most
        * X the mana reaches, the X asked for as it's turned up (rule 107.3a). */
       readonly xCost?: { readonly maxX: number; readonly minX?: number };
+      /** See `phyrexianPips` on `cast-spell`. */
+      readonly phyrexianPips?: number;
     }
   | {
       /** A locked door of one of your Rooms can be unlocked (rule 709.5e):
@@ -1131,6 +1151,8 @@ export type LegalAction =
       readonly door: "left" | "right";
       readonly doorName: string;
       readonly cost: string;
+      /** See `phyrexianPips` on `cast-spell`. */
+      readonly phyrexianPips?: number;
     }
   | {
       /** Your revealed companion can go into your hand for `cost` (rule
@@ -1146,6 +1168,8 @@ export type LegalAction =
       readonly permanent: ObjectId;
       readonly cardName: string;
       readonly cost: string;
+      /** See `phyrexianPips` on `cast-spell`. */
+      readonly phyrexianPips?: number;
     }
   | {
       /** A permanent's static effect you may ignore until end of turn (rule
@@ -1161,6 +1185,8 @@ export type LegalAction =
       readonly cardName: string;
       /** The cycling cost, e.g. `"{2}"`. */
       readonly cost: string;
+      /** See `phyrexianPips` on `cast-spell`. */
+      readonly phyrexianPips?: number;
     }
   | {
       readonly kind: "cast-spell";
@@ -2101,6 +2127,8 @@ export type LegalAction =
        * (myriad's "for each opponent … you may"): a driver shows it beside
        * the prompt. See the `may` effect's `aboutThatPlayer`. */
       readonly about?: PlayerId;
+      /** See `phyrexianPips` on `cast-spell`: of the decision's own cost. */
+      readonly phyrexianPips?: number;
       /** The permanent the question is about, when there's one per permanent
        * (`for-each-unless` — Killing Wave): a driver points at it, the name
        * in the mode's text not saying which of two with the same name. */

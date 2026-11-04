@@ -15140,6 +15140,16 @@ describe("mana that adds counters to what it casts", () => {
     expect(attendant.activated[0].effect.spellEntersWith).toEqual({ spell: { type: "creature", notSubtypes: ["Human"] }, counter: "+1/+1", amount: 1 });
   });
 
+  it("K'rrik, Son of Yawgmoth", () => {
+    const face = read(
+      "Legendary Creature — Phyrexian Horror Minion",
+      "({B/P} can be paid with either {B} or 2 life.)\nLifelink\nFor each {B} in a cost, you may pay 2 life rather than pay that mana.\nWhenever you cast a black spell, put a +1/+1 counter on ~.",
+    );
+    expect(face.complete).toBe(true);
+    expect(face.static[0].payLifeForPips).toBe("B");
+    expect(face.triggered[0].trigger).toEqual({ on: "cast-spell", who: "you", filter: { colors: ["B"] } });
+  });
+
   it("Charismatic Conqueror", () => {
     const face = parseFace(
       {

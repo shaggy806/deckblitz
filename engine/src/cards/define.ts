@@ -3707,6 +3707,16 @@ export interface StaticAbility {
     readonly linked?: true;
   };
   /**
+   * "For each {B} in a cost, you may pay 2 life rather than pay that mana"
+   * (K'rrik, Son of Yawgmoth): how this permanent's controller may pay every
+   * mana cost they pay, the mana costs of spells, activation costs and those
+   * of special actions alike (the card's ruling). It changes how a cost may be
+   * paid, never the cost; a hybrid pip counts if it may be paid as this colour.
+   * The player says how many as a Phyrexian pip's (`phyrexianPips`); life pays
+   * one otherwise only where mana can't. `affects` is ignored.
+   */
+  readonly payLifeForPips?: Color;
+  /**
    * "You may spend mana as though it were mana of any color" (Chromatic
    * Orrery, `as: "any-color"`) / "you can spend mana of any type to cast
    * creature spells" (Vizier of the Menagerie, `as: "any-type"` with `spell:

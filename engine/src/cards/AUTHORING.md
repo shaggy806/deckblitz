@@ -5820,6 +5820,12 @@ is "can't attack a player it has already attacked this turn" (Port Razer), by th
   cards, rule 607.2a, whoever controls it now.
   `affects` is ignored. `play-from-exile-permission.test.ts`,
   `exile-permission-options.test.ts`.
+- `payLifeForPips: Color` — "For each {B} in a cost, you may pay 2 life rather
+  than pay that mana" (K'rrik, Son of Yawgmoth): every mana cost this permanent's
+  controller pays — a spell's, an activation's, a special action's, a "you may
+  pay" — a hybrid pip counting if it may be paid as that colour, generic never.
+  The player says how many (`phyrexianPips` / `phyrexianLife`, as for Phyrexian
+  mana); life pays no Phyrexian symbol (compleated, rule 702.150a).
 - `spendManaAs: { as: "any-color" | "any-type" | { unit, as }, spell? }` — how this
   permanent's controller may spend mana (rules 118.14, 609.4b):
   `"any-color"` is "you may spend mana as though it were mana of any

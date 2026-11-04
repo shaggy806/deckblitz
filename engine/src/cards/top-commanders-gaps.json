@@ -9,6 +9,7 @@
   "effect:exile-any-number-until-leaves",
   "effect:exile-until-leaves-per-opponent",
   "effect:each-player-may-feasibility",
+  "cost:pay-life-for-pips",
   "trigger:linked-exile-each-upkeep-return-one",
   "replacement:dies-to-library-top",
   "replacement:discard-to-library-replacement",

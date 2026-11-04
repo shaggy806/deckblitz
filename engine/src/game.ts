@@ -376,6 +376,7 @@ import {
   manaCombinations,
   multipliedManaOption,
   planPayment,
+  withLifeForPips,
   standaloneManaChoices,
   standaloneManaSplit,
   widerSpendAs,
@@ -2169,6 +2170,7 @@ export class Game {
     this.decisionCtx = {
       state: this.state,
       registry: this.registry,
+      phyrexianPipsOffer: (player, cost) => this.phyrexianPipsOffer(player, cost),
       maxAffordableAbilityX: (player, cost, xColor, times) => {
         const parsed = parseManaCost(cost);
         if (times === true) {
@@ -2235,8 +2237,8 @@ export class Game {
       applyVenture: (player, choice) => this.applyVenture(player, choice),
       applyCreatureTypeChoice: (player, t) => this.applyCreatureTypeChoice(player, t),
       applyCardNameChoice: (player, name) => this.applyCardNameChoice(player, name),
-      applyModesChoice: (player, modes, x, forAll) =>
-        this.applyModesChoice(player, modes, x, forAll),
+      applyModesChoice: (player, modes, x, forAll, phyrexianLife) =>
+        this.withLifeChoice(phyrexianLife, () => this.applyModesChoice(player, modes, x, forAll)),
       applyChooseFromZone: (player, chosen) => this.applyChooseFromZone(player, chosen),
       applySacrifice: (player, ps) => this.applySacrifice(player, ps),
       applyDiscard: (player, cards) => this.applyDiscard(player, cards),
@@ -2493,31 +2495,33 @@ export class Game {
         this.playLand(action.player, action.card, action.face ?? 0, action.graveyardGrant);
         break;
       case "suspend":
-        this.suspendCard(action.player, action.card, action.xValue);
+        this.withLifeChoice(action.phyrexianLife, () => this.suspendCard(action.player, action.card, action.xValue));
         break;
       case "foretell":
         this.foretellCard(action.player, action.card);
         break;
       case "plot":
-        this.plotCard(action.player, action.card);
+        this.withLifeChoice(action.phyrexianLife, () => this.plotCard(action.player, action.card));
         break;
       case "take-companion":
         this.takeCompanion(action.player);
         break;
       case "turn-face-up":
-        this.turnFaceUp(action.player, action.permanent, action.morph === true, action.xValue ?? 0);
+        this.withLifeChoice(action.phyrexianLife, () =>
+          this.turnFaceUp(action.player, action.permanent, action.morph === true, action.xValue ?? 0),
+        );
         break;
       case "unlock-door":
-        this.payToUnlock(action.player, action.permanent, action.door);
+        this.withLifeChoice(action.phyrexianLife, () => this.payToUnlock(action.player, action.permanent, action.door));
         break;
       case "end-licid-effect":
-        this.endLicidEffect(action.player, action.permanent);
+        this.withLifeChoice(action.phyrexianLife, () => this.endLicidEffect(action.player, action.permanent));
         break;
       case "ignore-static-effect":
         this.ignoreStaticEffect(action.player, action.permanent);
         break;
       case "cycle":
-        this.cycleCard(action.player, action.card);
+        this.withLifeChoice(action.phyrexianLife, () => this.cycleCard(action.player, action.card));
         break;
       case "cast-spell":
         // Which alternative cost it pays (rule 601.2b), for all that follows.
@@ -3095,7 +3099,7 @@ export class Game {
                 },
               }
             : {};
-        out.push({ kind: "suspend", card, cardName, n: def.suspend.n, cost: def.suspend.cost, ...suspendX });
+        out.push({ kind: "suspend", card, cardName, n: def.suspend.n, cost: def.suspend.cost, ...suspendX, ...this.phyrexianPipsOffer(player, def.suspend.cost) });
       }
       // Foretell (rule 702.143) — a special action.
       if (this.whyCannotForetell(player, card) === null) {
@@ -3103,12 +3107,12 @@ export class Game {
       }
       // Plot (rule 702.170a) — a special action (116.2k).
       if (def.plot !== null && this.whyCannotPlot(player, card) === null) {
-        out.push({ kind: "plot", card, cardName, cost: def.plot.cost });
+        out.push({ kind: "plot", card, cardName, cost: def.plot.cost, ...this.phyrexianPipsOffer(player, def.plot.cost) });
       }
       // Cycling (rule 702.29) — a special action, any time you could cast an instant.
       // One whose cost asks for more is an `activate-ability` offer.
       if (def.cycling !== null && cyclesByName(def) && this.whyCannotCycle(player, card) === null) {
-        out.push({ kind: "cycle", card, cardName, cost: def.cycling.cost });
+        out.push({ kind: "cycle", card, cardName, cost: def.cycling.cost, ...this.phyrexianPipsOffer(player, def.cycling.cost) });
       }
     }
 
@@ -3551,7 +3555,7 @@ export class Game {
       // its morph or disguise cost (one cast face down, or a manifested card
       // with morph — 701.40c): each way its own offer.
       if (this.whyCannotTurnFaceUp(player, id) === null) {
-        out.push({ kind: "turn-face-up", permanent: id, cardName: card.name, cost: card.manaCost ?? "" });
+        out.push({ kind: "turn-face-up", permanent: id, cardName: card.name, cost: card.manaCost ?? "", ...this.phyrexianPipsOffer(player, card.manaCost) });
       }
       if (card.morph !== null && this.whyCannotTurnFaceUp(player, id, true) === null) {
         const printed = card.morph;
@@ -3572,6 +3576,7 @@ export class Game {
           cost: this.morphCostShown(player, id, printed),
           morph: printed.keyword,
           ...(xCost !== undefined ? { xCost } : {}),
+          ...this.phyrexianPipsOffer(player, this.morphCostShown(player, id, printed)),
         });
       }
     }
@@ -3588,6 +3593,7 @@ export class Game {
           door,
           doorName: this.doorDef(id, door).name,
           cost: this.unlockCostText(player, id, door),
+          ...this.phyrexianPipsOffer(player, this.unlockCostText(player, id, door)),
         });
       }
     }
@@ -3598,7 +3604,7 @@ export class Game {
       const licid = this.state.objects[id].licid;
       if (licid === undefined || licid.controller !== player) continue;
       if (this.whyCannotEndLicidEffect(player, id) !== null) continue;
-      out.push({ kind: "end-licid-effect", permanent: id, cardName: printedCardName(this.state.objects[id]), cost: licid.endCost });
+      out.push({ kind: "end-licid-effect", permanent: id, cardName: printedCardName(this.state.objects[id]), cost: licid.endCost, ...this.phyrexianPipsOffer(player, licid.endCost) });
     }
 
     // Ignoring a permanent's static effect until end of turn (rule 116.2d):
@@ -12940,12 +12946,24 @@ export class Game {
     return this.manaCapacity(player) + controlled + (this.state.zones.perPlayer[player]?.graveyard.length ?? 0);
   }
 
+  /** Do `run` with `phyrexianLife` the player's answer to its payment. */
+  private withLifeChoice(phyrexianLife: number | undefined, run: () => void): void {
+    this.phyrexianLifeChoice = phyrexianLife;
+    try {
+      run();
+    } finally {
+      this.phyrexianLifeChoice = undefined;
+    }
+  }
+
   /** An offer's `phyrexianPips`: the Phyrexian pips in `cost` the player
-   * could choose to pay with life (rule 107.4f), when there are any and
-   * they can pay 2 life. */
+   * could choose to pay with life (rule 107.4f), and the pips a permanent lets
+   * them pay that way (K'rrik), when there are any and they can pay 2 life. */
   private phyrexianPipsOffer(player: PlayerId, cost: string | null): { phyrexianPips?: number } {
-    if (cost === null || !cost.includes("/P")) return {};
-    const pips = parseManaCost(cost).hybrid.filter((pip) => pip.some((o) => o.kind === "phyrexian")).length;
+    if (cost === null) return {};
+    const rather = this.lifeForPipsOf(player);
+    if (rather.length === 0 && !cost.includes("/P")) return {};
+    const pips = withLifeForPips(parseManaCost(cost), rather).hybrid.filter((pip) => pip.some((o) => o.kind === "phyrexian")).length;
     return pips > 0 && this.canPayLife(player, 2) ? { phyrexianPips: pips } : {};
   }
 
@@ -19551,8 +19569,10 @@ export class Game {
     const ownSpent = manaValue(payment.resolved);
     object.manaSpent = ownSpent + (assist?.amount ?? 0);
     // Each Phyrexian pip paid with life cost 2 (rule 107.4f) — compleated
-    // (702.150a) reads how many.
-    if (payment.life > 0) object.phyrexianPaidWithLife = payment.life / 2;
+    // (702.150a) reads how many. Life paid rather than mana (K'rrik) pays no
+    // Phyrexian symbol.
+    const phyrexianLife = payment.life - (payment.lifeRather ?? 0);
+    if (phyrexianLife > 0) object.phyrexianPaidWithLife = phyrexianLife / 2;
     // Expend (rule 700.14): the mana this player has spent on spells this
     // turn, before and after this payment — `turnHistory` counts it as the
     // event passes.
@@ -24516,12 +24536,14 @@ export class Game {
     // tax) isn't there for a painland or a Phyrexian pip to spend as well.
     const reserved = purpose?.kind === "cast" ? this.commanderTaxLife(player, purpose.card) : 0;
     const spend = this.spendAsFor(player, purpose);
+    const lifeForPips = this.lifeForPipsOf(player);
     return {
       pool: this.state.players[player].manaPool,
       life: this.state.players[player].life - reserved,
       ...(playerCantLoseLife(this.state, player) ? { cantPayLife: true } : {}),
       ...(this.state.players[player].life - reserved <= this.state.rules.startingLife / 4 ? { lowLife: true } : {}),
-      ...(this.phyrexianLifeChoice !== undefined && purpose !== null ? { phyrexianLife: this.phyrexianLifeChoice } : {}),
+      ...(this.phyrexianLifeChoice !== undefined ? { phyrexianLife: this.phyrexianLifeChoice } : {}),
+      ...(lifeForPips.length > 0 ? { lifeForPips } : {}),
       sources: arrange === undefined ? sources : arrangeManaSources(sources, arrange),
       canPay: (unit) => this.manaUnitCanPay(player, unit, purpose),
       preferred: this.deckColors(player),
@@ -24583,6 +24605,23 @@ export class Game {
    * way, so it's read while the card is still where it's cast from, which is
    * where every payment for a cast is planned.
    */
+  private lifeForPipsOf(player: PlayerId): readonly Color[] {
+    // Every payment asks, so the board scan is memoized per cache region.
+    return computedCacheMemo(`payLifeForPips:${player}`, () => {
+      const found: Color[] = [];
+      for (const id of this.state.zones.shared.battlefield) {
+        const source = this.state.objects[id];
+        if (source.controller !== player || hasLostAbilities(this.state, this.registry, source)) continue;
+        for (const ability of this.registry.get(rulesTextName(source)).static) {
+          if (ability.payLifeForPips !== undefined && this.staticActive(source, ability) && !found.includes(ability.payLifeForPips)) {
+            found.push(ability.payLifeForPips);
+          }
+        }
+      }
+      return found;
+    });
+  }
+
   private spendAsFor(
     player: PlayerId,
     purpose: ManaPurpose,

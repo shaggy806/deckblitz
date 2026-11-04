@@ -10992,6 +10992,29 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
         hand: ['Caged Sun', 'Crumbling Vestige'],
       },
       opp: { bf: ['Grizzly Bears'] },
+  ),
+    "K'rrik: a spell's {B} paid with life by choice",
+    board({
+      you: { bf: ["K'rrik, Son of Yawgmoth", 'Swamp*3'], hand: ['Vampire Nighthawk'] },
+    }),
+  ),
+  preset(
+    "K'rrik: the same at a table of four",
+    board({
+      you: { bf: ["K'rrik, Son of Yawgmoth", 'Swamp*3'], hand: ['Vampire Nighthawk'] },
+      opp: [{}, {}, {}],
+    }),
+  ),
+  preset(
+    "K'rrik: cycling's {B} paid with life",
+    board({
+      you: { bf: ["K'rrik, Son of Yawgmoth", 'Swamp'], hand: ['Barren Moor'] },
+    }),
+  ),
+  preset(
+    "K'rrik: a \"you may pay\" paid with life",
+    board({
+      you: { bf: ["K'rrik, Son of Yawgmoth", 'Kels, Fight Fixer', 'Viscera Seer', 'Grizzly Bears', 'Swamp'] },
     }),
   ),
 ]

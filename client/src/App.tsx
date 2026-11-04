@@ -2370,6 +2370,8 @@ function Table({
           ? 'choose-pile'
         : chooseNumberAction
           ? 'choose-number'
+        : pendingPhyrexian !== null && modesChoiceAction
+          ? 'choose-phyrexian'
         : modesChoiceAction
           ? 'choose-modes'
         : sacrificeAction
@@ -2448,6 +2450,16 @@ function Table({
   const pass = useCallback(() => {
     if (canPass) game.dispatch({ type: 'pass-priority', player: seat })
   }, [canPass, game, seat])
+
+  // A payment with pips life could pay (rule 107.4f; K'rrik): how many, the
+  // payer's call, then `send` with the answer.
+  const askLifeThen = (
+    pips: number | undefined,
+    send: (life: { readonly phyrexianLife?: number }) => void,
+  ): void => {
+    if (pips === undefined || pips === 0) send({})
+    else setPendingPhyrexian({ pips, resume: (n) => send(n > 0 ? { phyrexianLife: n } : {}) })
+  }
 
   const finishTargets = useCallback(
     // Named, so the division step's `resume` can call back into it.
@@ -2859,12 +2871,16 @@ function Table({
     }
     // Suspend X (rule 702.62a): X time counters, for that much mana.
     if (action.kind === 'suspend') {
-      game.dispatch({ type: 'suspend', player: seat, card: action.card, xValue: value })
+      askLifeThen(action.phyrexianPips, (life) =>
+        game.dispatch({ type: 'suspend', player: seat, card: action.card, xValue: value, ...life }),
+      )
       return
     }
     // A morph or disguise cost's {X} (Bane of the Living).
     if (action.kind === 'turn-face-up') {
-      game.dispatch({ type: 'turn-face-up', player: seat, permanent: action.permanent, morph: true, xValue: value })
+      askLifeThen(action.phyrexianPips, (life) =>
+        game.dispatch({ type: 'turn-face-up', player: seat, permanent: action.permanent, morph: true, xValue: value, ...life }),
+      )
       return
     }
     // Delve on an {X} spell (rule 702.66a): its range at this X, asked now.
@@ -4697,7 +4713,9 @@ function Table({
               type="button"
               onClick={() => {
                 setModeX(null)
-                game.dispatch({ type: 'choose-modes', player: seat, modes: [0], ...withX })
+                askLifeThen(modesChoiceAction.phyrexianPips, (life) =>
+                  game.dispatch({ type: 'choose-modes', player: seat, modes: [0], ...withX, ...life }),
+                )
               }}
             >
               {ward || xCost !== undefined ? 'Pay' : 'Yes'}
@@ -4720,7 +4738,9 @@ function Table({
                   title={`The same answer for this trigger and the ${sameForAll} identical ${sameForAll === 1 ? 'one' : 'ones'} under it on the stack`}
                   onClick={() => {
                     setModeX(null)
-                    game.dispatch({ type: 'choose-modes', player: seat, modes: [0], forAll: true, ...withX })
+                    askLifeThen(modesChoiceAction.phyrexianPips, (life) =>
+                      game.dispatch({ type: 'choose-modes', player: seat, modes: [0], forAll: true, ...withX, ...life }),
+                    )
                   }}
                 >
                   Yes to all {sameForAll + 1}
@@ -4744,7 +4764,11 @@ function Table({
               <button
                 key={i}
                 type="button"
-                onClick={() => game.dispatch({ type: 'choose-modes', player: seat, modes: [i] })}
+                onClick={() =>
+                  askLifeThen(modesChoiceAction.phyrexianPips, (life) =>
+                    game.dispatch({ type: 'choose-modes', player: seat, modes: [i], ...life }),
+                  )
+                }
               >
                 {modeLabel(i)}
               </button>
@@ -4775,7 +4799,9 @@ function Table({
               type="button"
               disabled={modePicks.length < minModes || modePicks.length > maxModes}
               onClick={() =>
-                game.dispatch({ type: 'choose-modes', player: seat, modes: [...modePicks] })
+                askLifeThen(modesChoiceAction.phyrexianPips, (life) =>
+                  game.dispatch({ type: 'choose-modes', player: seat, modes: [...modePicks], ...life }),
+                )
               }
             >
               Confirm
@@ -5194,12 +5220,13 @@ function Table({
       </div>
     )
   } else if (mode === 'choose-phyrexian' && pendingPhyrexian) {
-    // Each Phyrexian pip: its colour, or 2 life (rule 107.4f). Paying with
-    // mana still pays life for a pip mana can't cover.
+    // Each Phyrexian pip, or a pip K'rrik lets you pay in life: its colour, or
+    // 2 life (rule 107.4f). Paying with mana still pays life for a pip mana
+    // can't cover.
     const { pips, resume } = pendingPhyrexian
     controls = (
       <div className="controls">
-        <span>Phyrexian mana — pay with life?</span>
+        <span>Pay with life rather than mana?</span>
         {Array.from({ length: pips + 1 }, (_unused, n) => (
           <button
             key={n}
@@ -7083,7 +7110,9 @@ function Table({
                   onClick={() =>
                     suspend.xCost !== undefined
                       ? setPendingX({ action: suspend, value: suspend.xCost.maxX })
-                      : game.dispatch({ type: 'suspend', player: seat, card: id })
+                      : askLifeThen(suspend.phyrexianPips, (life) =>
+                          game.dispatch({ type: 'suspend', player: seat, card: id, ...life }),
+                        )
                   }
                 >
                   Suspend <Symbols text={suspend.cost} />
@@ -7100,7 +7129,9 @@ function Table({
               {plot ? (
                 <button
                   type="button"
-                  onClick={() => game.dispatch({ type: 'plot', player: seat, card: id })}
+                  onClick={() =>
+                    askLifeThen(plot.phyrexianPips, (life) => game.dispatch({ type: 'plot', player: seat, card: id, ...life }))
+                  }
                 >
                   Plot <Symbols text={plot.cost} />
                 </button>
@@ -7108,7 +7139,9 @@ function Table({
               {cycle ? (
                 <button
                   type="button"
-                  onClick={() => game.dispatch({ type: 'cycle', player: seat, card: id })}
+                  onClick={() =>
+                    askLifeThen(cycle.phyrexianPips, (life) => game.dispatch({ type: 'cycle', player: seat, card: id, ...life }))
+                  }
                 >
                   Cycle <Symbols text={cycle.cost} />
                 </button>
@@ -7293,7 +7326,9 @@ function Table({
               label: `Unlock ${u.doorName} — pay ${u.cost}`,
               onSelect: () => {
                 setSelectedSource(null)
-                game.dispatch({ type: 'unlock-door', player: seat, permanent: u.permanent, door: u.door })
+                askLifeThen(u.phyrexianPips, (life) =>
+                  game.dispatch({ type: 'unlock-door', player: seat, permanent: u.permanent, door: u.door, ...life }),
+                )
               },
             })),
             ...(selectedLicidEnd !== undefined
@@ -7303,7 +7338,9 @@ function Table({
                     label: `End the effect — pay ${selectedLicidEnd.cost}`,
                     onSelect: () => {
                       setSelectedSource(null)
-                      game.dispatch({ type: 'end-licid-effect', player: seat, permanent: selectedLicidEnd.permanent })
+                      askLifeThen(selectedLicidEnd.phyrexianPips, (life) =>
+                        game.dispatch({ type: 'end-licid-effect', player: seat, permanent: selectedLicidEnd.permanent, ...life }),
+                      )
                     },
                   },
                 ]
@@ -7329,12 +7366,15 @@ function Table({
                   setPendingX({ action: up, value: up.xCost.maxX })
                   return
                 }
-                game.dispatch({
-                  type: 'turn-face-up',
-                  player: seat,
-                  permanent: up.permanent,
-                  ...(up.morph !== undefined ? { morph: true } : {}),
-                })
+                askLifeThen(up.phyrexianPips, (life) =>
+                  game.dispatch({
+                    type: 'turn-face-up',
+                    player: seat,
+                    permanent: up.permanent,
+                    ...(up.morph !== undefined ? { morph: true } : {}),
+                    ...life,
+                  }),
+                )
               },
             })),
             ...selectedAbilities.map((ab) => ({

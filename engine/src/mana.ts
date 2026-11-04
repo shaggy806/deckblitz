@@ -305,8 +305,11 @@ export type HybridOption =
   | { readonly kind: "color"; readonly color: Color }
   /** twobrid — the `{2}` half of `{2/W}` (`amount` is always 2 in practice). */
   | { readonly kind: "generic"; readonly amount: number }
-  /** Phyrexian — the `{P}` half of `{W/P}`: pay 2 life instead of the pip. */
-  | { readonly kind: "phyrexian" }
+  /** Phyrexian — the `{P}` half of `{W/P}`: pay 2 life instead of the pip.
+   * `rather`: not a Phyrexian symbol at all, only a permanent's "you may pay 2
+   * life rather than pay that mana" (`withLifeForPips`) — compleated (rule
+   * 702.150a) doesn't count it. */
+  | { readonly kind: "phyrexian"; readonly rather?: true }
   /** Colorless mana, only ever on a pip a payment widened (`pipsAsSpendable`
    * — no printed hybrid symbol has it). */
   | { readonly kind: "colorless" };

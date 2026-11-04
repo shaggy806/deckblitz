@@ -243,6 +243,9 @@ export interface ManaPlanStep {
 export interface ManaPayment {
   readonly steps: readonly ManaPlanStep[];
   readonly life: number;
+  /** How much of `life` paid no Phyrexian symbol ({@link withLifeForPips}):
+   * what compleated (rule 702.150a) doesn't count. */
+  readonly lifeRather?: number;
   readonly resolved: ManaCost;
   /** What this payment is for, so restricted mana knows whether it may pay
    * (rule 106.6b) and a spend rider knows what it was spent on. Carried on
@@ -342,6 +345,10 @@ export interface ManaPlanningView {
    * tried for them; as many as their life allows. Absent: life pays a
    * Phyrexian pip only when mana can't. */
   readonly phyrexianLife?: number;
+  /** "For each {B} in a cost, you may pay 2 life rather than pay that mana"
+   * (K'rrik): the colours this payer's permanents say that of
+   * ({@link withLifeForPips}). */
+  readonly lifeForPips?: readonly Color[];
   /** Every permanent that could produce mana right now. */
   readonly sources: readonly ManaSource[];
   /** Rule 106.6b: may this unit pay for what this payment is for? Closes over
@@ -405,6 +412,33 @@ export function costAsSpendable(cost: ManaCost, spendAs: WideSpendAs | undefined
     colored: { W: 0, U: 0, B: 0, R: 0, G: 0 },
     colorless: cost.colorless - colorless,
   };
+}
+
+/**
+ * `cost` as a payer who "may pay 2 life rather than pay that mana" for each pip
+ * of `colors` sees it (K'rrik): each such pip, a plain one first (the only way
+ * it could be paid in life, so what a chosen number of life is put to before a
+ * pip mana has more ways to pay), becomes one of that colour or 2 life. A hybrid
+ * pip with that colour in it counts, since it may be paid as that colour (the
+ * card's ruling), and a generic half never does. Only a step of a payment: it
+ * changes how the cost may be paid, never the cost. A Phyrexian symbol of that
+ * colour becomes the same: paid as its colour and that in life, it pays no
+ * Phyrexian symbol (702.150a).
+ */
+export function withLifeForPips(cost: ManaCost, colors: readonly Color[] | undefined): ManaCost {
+  if (colors === undefined || colors.length === 0) return cost;
+  const rather: HybridOption = { kind: "phyrexian", rather: true };
+  const colored = { ...cost.colored };
+  const plain: HybridPip[] = [];
+  for (const color of colors) {
+    for (let n = colored[color]; n > 0; n -= 1) plain.push([{ kind: "color", color }, rather]);
+    colored[color] = 0;
+  }
+  const hybrid = cost.hybrid.map((pip): HybridPip => {
+    if (!pip.some((o) => o.kind === "color" && colors.includes(o.color))) return pip;
+    return [...pip.filter((o) => o.kind !== "phyrexian"), rather];
+  });
+  return { ...cost, colored, hybrid: [...plain, ...hybrid] };
 }
 
 /**
@@ -700,7 +734,7 @@ export function resolveHybridCost(
   cost: ManaCost,
   avoid?: ObjectId,
   exclude?: ObjectId,
-): { concrete: ManaCost; life: number } | null {
+): { concrete: ManaCost; life: number; lifeRather?: number } | null {
   if (cost.hybrid.length === 0) return { concrete: cost, life: 0 };
 
   let concrete: ManaCost = {
@@ -718,7 +752,18 @@ export function resolveHybridCost(
   if (spare > 0) return resolveReducedTwobrid(view, cost, concrete, spare, avoid, exclude);
 
   let lifeFirst = view.phyrexianLife ?? 0;
-  for (const pip of cost.hybrid) {
+  let lifeRather = 0;
+  const rather = (pip: HybridPip): boolean => pip.some((o) => o.kind === "phyrexian" && o.rather === true);
+  // Life by choice goes first on what mana couldn't pay anyway, so choosing
+  // to pay some in life doesn't leave a pip of a colour they lack to take more.
+  const noManaFor = (pip: HybridPip): boolean =>
+    !pip.some((o) => {
+      const trial = o.kind === "phyrexian" ? null : withOptionPaid(concrete, o);
+      return trial !== null && planManaPayment(view, trial, avoid, exclude) !== null;
+    });
+  const pips =
+    lifeFirst > 0 ? [...cost.hybrid.filter(noManaFor), ...cost.hybrid.filter((pip) => !noManaFor(pip))] : cost.hybrid;
+  for (const pip of pips) {
     // Paid with life by choice (rule 107.4f): any life they have, down to 0
     // if they choose (119.4).
     if (
@@ -728,6 +773,7 @@ export function resolveHybridCost(
       startingLife - life >= 2
     ) {
       life += 2;
+      if (rather(pip)) lifeRather += 2;
       lifeFirst -= 1;
       continue;
     }
@@ -756,11 +802,12 @@ export function resolveHybridCost(
     }
     if (pip.some((o) => o.kind === "phyrexian") && view.cantPayLife !== true && startingLife - life - 2 >= 1) {
       life += 2;
+      if (rather(pip)) lifeRather += 2;
       continue;
     }
     return null;
   }
-  return { concrete, life };
+  return { concrete, life, ...(lifeRather > 0 ? { lifeRather } : {}) };
 }
 /**
  * How the player behind `view` would pay `cost` from their mana sources, or
@@ -1739,13 +1786,19 @@ export function planPayment(
   avoid?: ObjectId,
   exclude?: ObjectId,
 ): ManaPayment | null {
-  const resolved = resolveHybridCost(view, pipsAsSpendable(cost, view.spendUnits), avoid, exclude);
+  const resolved = resolveHybridCost(view, withLifeForPips(pipsAsSpendable(cost, view.spendUnits), view.lifeForPips), avoid, exclude);
   if (resolved === null) return null;
   const steps = planManaPayment(view, resolved.concrete, avoid, exclude);
   if (steps === null) return null;
   // What `spendFromPool` takes: the cost as this payment may pay it, so a
   // unit spent "as though it were mana of any color" isn't asked to be the
   // colour it isn't. Same total, so the mana spent counts the same.
-  return { steps, life: resolved.life, resolved: costAsSpendable(resolved.concrete, view.spendAs), purpose };
+  return {
+    steps,
+    life: resolved.life,
+    ...(resolved.lifeRather !== undefined && resolved.lifeRather > 0 ? { lifeRather: resolved.lifeRather } : {}),
+    resolved: costAsSpendable(resolved.concrete, view.spendAs),
+    purpose,
+  };
 }
 

@@ -7334,3 +7334,24 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 - **Do:** Cast it and choose green. Tap the Forest for mana, then the Mountain, then Llanowar Elves. Play Crumbling Vestige and take green.
 - **Expect:** Grizzly Bears is 3/3; yours only. The Forest makes two green, the Mountain one red, the Elves one green; Crumbling Vestige makes two green.
+## Paying life rather than a coloured pip (2026-11-04)
+
+### K'rrik: a spell's {B} paid with life by choice
+
+- **Do:** Cast Vampire Nighthawk. When asked, pick "1 with life (2 life)".
+- **Expect:** You pay 2 life and two Swamps tap; one stays untapped. The Nighthawk resolves, and K'rrik has a +1/+1 counter.
+
+### K'rrik: the same at a table of four
+
+- **Do:** Cast Vampire Nighthawk. When asked, pick "2 with life (4 life)".
+- **Expect:** You pay 4 life and one Swamp taps. The Nighthawk resolves, and K'rrik has a +1/+1 counter.
+
+### K'rrik: cycling's {B} paid with life
+
+- **Do:** Click Cycle on Barren Moor in your hand. When asked, pick "1 with life (2 life)".
+- **Expect:** You pay 2 life, the Swamp stays untapped, Barren Moor goes to your graveyard and you draw a card.
+
+### K'rrik: a "you may pay" paid with life
+
+- **Do:** Activate Viscera Seer, sacrificing Grizzly Bears. When Kels's trigger asks you to pay {U/B}, say yes, then pick "1 with life (2 life)".
+- **Expect:** You pay 2 life, the Swamp stays untapped, and you draw a card.

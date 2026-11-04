@@ -17819,6 +17819,9 @@ function parseStatic(line, text) {
       text,
     };
   }
+  // K'rrik, Son of Yawgmoth: how every mana cost may be paid.
+  const lifeForPip = /^For each \{([WUBRG])\} in a cost, you may pay 2 life rather than pay that mana\.$/.exec(line);
+  if (lifeForPip !== null) return { affects: { scope: "self" }, payLifeForPips: lifeForPip[1], text };
   // Rule 722.3a — `entersPrepared()`.
   if (line === "~ enters prepared.") {
     return { affects: { scope: "self" }, replacement: { event: "enters-battlefield", prepared: true }, text };

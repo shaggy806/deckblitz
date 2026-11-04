@@ -200,6 +200,9 @@ export interface DecisionReadCtx {
    * large an "you may pay {X}{R}" mode's X may be.
    */
   readonly maxAffordableAbilityX: (player: PlayerId, manaString: string | null, xColor?: Color, times?: true) => number;
+  /** An offer's `phyrexianPips`: how many pips of `cost` the player could
+   * choose to pay with life. */
+  readonly phyrexianPipsOffer: (player: PlayerId, cost: string | null) => { phyrexianPips?: number };
   /**
    * The {@link TargetSource} of the triggered ability parked in
    * `state.pendingTargetedTrigger`, or `undefined` when none is.
@@ -288,6 +291,7 @@ export interface DecisionHost {
     modes: readonly number[],
     xValue?: number,
     forAll?: boolean,
+    phyrexianLife?: number,
   ) => void;
   readonly applyChooseFromZone: (player: PlayerId, chosen: readonly ObjectId[]) => void;
   readonly applySacrifice: (player: PlayerId, permanents: readonly ObjectId[]) => void;

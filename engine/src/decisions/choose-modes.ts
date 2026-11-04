@@ -40,6 +40,7 @@ export const chooseModes = defineDecision({
       ...(awaiting.aboutObject !== undefined ? { aboutObject: awaiting.aboutObject } : {}),
       ...(awaiting.aboutCard !== undefined ? { aboutCard: awaiting.aboutCard } : {}),
       ...(awaiting.ward !== undefined ? { ward: { spell: awaiting.ward.spell } } : {}),
+      ...(awaiting.cost !== undefined ? ctx.phyrexianPipsOffer(awaiting.player, awaiting.cost) : {}),
       // "You may pay one or more {E}" / "any amount of {E}": X in energy,
       // up to what the chooser has (the raise capped `maxX` at it).
       ...(awaiting.energyX !== undefined
@@ -126,7 +127,7 @@ export const chooseModes = defineDecision({
 
   apply: (host, action): void => {
     if (action.type !== "choose-modes") return;
-    host.applyModesChoice(action.player, action.modes, action.xValue, action.forAll === true);
+    host.applyModesChoice(action.player, action.modes, action.xValue, action.forAll === true, action.phyrexianLife);
   },
 
   ask: (controller, view, awaiting, player): Action => {
