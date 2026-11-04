@@ -78,6 +78,7 @@ import _poolBagEndPorter from "../pool/bag-end-porter.js";
 import _poolBaldursGate from "../pool/baldurs-gate.js";
 import _poolBalduvianBarbarians from "../pool/balduvian-barbarians.js";
 import _poolBallyrushBanneret from "../pool/ballyrush-banneret.js";
+import _poolBannerOfKinship from "../pool/banner-of-kinship.js";
 import _poolBansheeOfTheDreadChoir from "../pool/banshee-of-the-dread-choir.js";
 import _poolBarTheGate from "../pool/bar-the-gate.js";
 import _poolBarbedSliver from "../pool/barbed-sliver.js";
@@ -557,6 +558,7 @@ import _poolNourishingShoal from "../pool/nourishing-shoal.js";
 import _poolNulltreadGargantuan from "../pool/nulltread-gargantuan.js";
 import _poolOakhameRanger from "../pool/oakhame-ranger.js";
 import _poolOathOfGideon from "../pool/oath-of-gideon.js";
+import _poolObNixilisUnshackled from "../pool/ob-nixilis-unshackled.js";
 import _poolObeliskOfEsper from "../pool/obelisk-of-esper.js";
 import _poolObstinateGargoyle from "../pool/obstinate-gargoyle.js";
 import _poolOgreBattlecaster from "../pool/ogre-battlecaster.js";
@@ -895,6 +897,7 @@ import _poolViviensCrocodile from "../pool/viviens-crocodile.js";
 import _poolVivisectionEvangelist from "../pool/vivisection-evangelist.js";
 import _poolVolatileArsonist from "../pool/volatile-arsonist.js";
 import _poolVolatileWanderglyph from "../pool/volatile-wanderglyph.js";
+import _poolVorinclexMonstrousRaider from "../pool/vorinclex-monstrous-raider.js";
 import _poolVoyagerStaff from "../pool/voyager-staff.js";
 import _poolVronosMaskedInquisitor from "../pool/vronos-masked-inquisitor.js";
 import _poolVulpineHarvester from "../pool/vulpine-harvester.js";
@@ -1033,6 +1036,7 @@ const shard: CardShard = {
     _poolBaldursGate,
     _poolBalduvianBarbarians,
     _poolBallyrushBanneret,
+    _poolBannerOfKinship,
     _poolBansheeOfTheDreadChoir,
     _poolBarTheGate,
     _poolBarbedSliver,
@@ -1512,6 +1516,7 @@ const shard: CardShard = {
     _poolNulltreadGargantuan,
     _poolOakhameRanger,
     _poolOathOfGideon,
+    _poolObNixilisUnshackled,
     _poolObeliskOfEsper,
     _poolObstinateGargoyle,
     _poolOgreBattlecaster,
@@ -1850,6 +1855,7 @@ const shard: CardShard = {
     _poolVivisectionEvangelist,
     _poolVolatileArsonist,
     _poolVolatileWanderglyph,
+    _poolVorinclexMonstrousRaider,
     _poolVoyagerStaff,
     _poolVronosMaskedInquisitor,
     _poolVulpineHarvester,

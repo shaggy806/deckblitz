@@ -333,6 +333,7 @@ import _poolGreatHallOfTheBiblioplex from "../pool/great-hall-of-the-biblioplex.
 import _poolGreaterStoneSpirit from "../pool/greater-stone-spirit.js";
 import _poolGrimFlayer from "../pool/grim-flayer.js";
 import _poolGuardiansOfOboro from "../pool/guardians-of-oboro.js";
+import _poolGuildmagesForum from "../pool/guildmages-forum.js";
 import _poolHaazdaExonerator from "../pool/haazda-exonerator.js";
 import _poolHallOfGemstone from "../pool/hall-of-gemstone.js";
 import _poolHallOfHeliodsGenerosity from "../pool/hall-of-heliods-generosity.js";
@@ -828,6 +829,7 @@ import _poolVoroshTheHunter from "../pool/vorosh-the-hunter.js";
 import _poolWakeTheDragon from "../pool/wake-the-dragon.js";
 import _poolWallOfDistortion from "../pool/wall-of-distortion.js";
 import _poolWallOfTanglecord from "../pool/wall-of-tanglecord.js";
+import _poolWanShiTongLibrarian from "../pool/wan-shi-tong-librarian.js";
 import _poolWanderingOnes from "../pool/wandering-ones.js";
 import _poolWanderingTroubadour from "../pool/wandering-troubadour.js";
 import _poolWanderlightSpirit from "../pool/wanderlight-spirit.js";
@@ -1218,6 +1220,7 @@ const shard: CardShard = {
     _poolGreaterStoneSpirit,
     _poolGrimFlayer,
     _poolGuardiansOfOboro,
+    _poolGuildmagesForum,
     _poolHaazdaExonerator,
     _poolHallOfGemstone,
     _poolHallOfHeliodsGenerosity,
@@ -1713,6 +1716,7 @@ const shard: CardShard = {
     _poolWakeTheDragon,
     _poolWallOfDistortion,
     _poolWallOfTanglecord,
+    _poolWanShiTongLibrarian,
     _poolWanderingOnes,
     _poolWanderingTroubadour,
     _poolWanderlightSpirit,

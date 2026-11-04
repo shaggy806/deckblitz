@@ -512,6 +512,7 @@ import _poolOgreTaskmaster from "../pool/ogre-taskmaster.js";
 import _poolOminousCemetery from "../pool/ominous-cemetery.js";
 import _poolOmnipresence from "../pool/omnipresence.js";
 import _poolOpalGargoyle from "../pool/opal-gargoyle.js";
+import _poolOpalPalace from "../pool/opal-palace.js";
 import _poolOphidian from "../pool/ophidian.js";
 import _poolOrdruunVeteran from "../pool/ordruun-veteran.js";
 import _poolOrnateKanzashi from "../pool/ornate-kanzashi.js";
@@ -1403,6 +1404,7 @@ const shard: CardShard = {
     _poolOminousCemetery,
     _poolOmnipresence,
     _poolOpalGargoyle,
+    _poolOpalPalace,
     _poolOphidian,
     _poolOrdruunVeteran,
     _poolOrnateKanzashi,

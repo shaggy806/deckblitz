@@ -44,6 +44,7 @@ import _poolArcboundStinger from "../pool/arcbound-stinger.js";
 import _poolArchaeomender from "../pool/archaeomender.js";
 import _poolArchetypeOfImagination from "../pool/archetype-of-imagination.js";
 import _poolArchipelagore from "../pool/archipelagore.js";
+import _poolArchivistOfOghma from "../pool/archivist-of-oghma.js";
 import _poolArenaRector from "../pool/arena-rector.js";
 import _poolArmamentDragon from "../pool/armament-dragon.js";
 import _poolArmsDealer from "../pool/arms-dealer.js";
@@ -962,6 +963,7 @@ const shard: CardShard = {
     _poolArchaeomender,
     _poolArchetypeOfImagination,
     _poolArchipelagore,
+    _poolArchivistOfOghma,
     _poolArenaRector,
     _poolArmamentDragon,
     _poolArmsDealer,

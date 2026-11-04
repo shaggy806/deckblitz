@@ -157,6 +157,7 @@ import _poolCloutOfTheDominus from "../pool/clout-of-the-dominus.js";
 import _poolCoastalPeak from "../pool/coastal-peak.js";
 import _poolColorstormStallion from "../pool/colorstorm-stallion.js";
 import _poolColossusOfSardia from "../pool/colossus-of-sardia.js";
+import _poolCommandersInsight from "../pool/commanders-insight.js";
 import _poolConfoundingRiddle from "../pool/confounding-riddle.js";
 import _poolConsecratedByBlood from "../pool/consecrated-by-blood.js";
 import _poolConsumingSinkhole from "../pool/consuming-sinkhole.js";
@@ -1119,6 +1120,7 @@ const shard: CardShard = {
     _poolCoastalPeak,
     _poolColorstormStallion,
     _poolColossusOfSardia,
+    _poolCommandersInsight,
     _poolConfoundingRiddle,
     _poolConsecratedByBlood,
     _poolConsumingSinkhole,

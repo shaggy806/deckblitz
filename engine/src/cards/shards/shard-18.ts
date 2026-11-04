@@ -403,6 +403,7 @@ import _poolKrosanBeast from "../pool/krosan-beast.js";
 import _poolKroxaAndKunoros from "../pool/kroxa-and-kunoros.js";
 import _poolKynaiosAndTiroOfMeletis from "../pool/kynaios-and-tiro-of-meletis.js";
 import _poolLacerateFlesh from "../pool/lacerate-flesh.js";
+import _poolLaezelVlaakithsChampion from "../pool/laezel-vlaakiths-champion.js";
 import _poolLakeTownMariners from "../pool/lake-town-mariners.js";
 import _poolLamplighterOfSelhoff from "../pool/lamplighter-of-selhoff.js";
 import _poolLanternLitGraveyard from "../pool/lantern-lit-graveyard.js";
@@ -1312,6 +1313,7 @@ const shard: CardShard = {
     _poolKroxaAndKunoros,
     _poolKynaiosAndTiroOfMeletis,
     _poolLacerateFlesh,
+    _poolLaezelVlaakithsChampion,
     _poolLakeTownMariners,
     _poolLamplighterOfSelhoff,
     _poolLanternLitGraveyard,

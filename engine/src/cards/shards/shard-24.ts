@@ -30,6 +30,7 @@ import _poolAncestorsAid from "../pool/ancestors-aid.js";
 import _poolAncestorsChosen from "../pool/ancestors-chosen.js";
 import _poolAncestralKnowledge from "../pool/ancestral-knowledge.js";
 import _poolAngelsMercy from "../pool/angels-mercy.js";
+import _poolAnimalAttendant from "../pool/animal-attendant.js";
 import _poolAnnihilatingGlare from "../pool/annihilating-glare.js";
 import _poolAnotherChance from "../pool/another-chance.js";
 import _poolAppealToEirdu from "../pool/appeal-to-eirdu.js";
@@ -944,6 +945,7 @@ const shard: CardShard = {
     _poolAncestorsChosen,
     _poolAncestralKnowledge,
     _poolAngelsMercy,
+    _poolAnimalAttendant,
     _poolAnnihilatingGlare,
     _poolAnotherChance,
     _poolAppealToEirdu,

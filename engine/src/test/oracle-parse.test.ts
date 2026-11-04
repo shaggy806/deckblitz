@@ -14772,6 +14772,10 @@ describe("an effect that names a permanent", () => {
           duration: "permanent",
         },
       ],
+    });
+  });
+});
+
 describe("a choice of creature type, the counters counted with it (Banner of Kinship)", () => {
   it("reads the whole card", () => {
     const face = parseFace({
