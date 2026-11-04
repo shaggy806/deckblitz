@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4388 already implemented / 612 missing (marks refreshed 2026-11-04)
+4389 already implemented / 611 missing (marks refreshed 2026-11-04)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -1300,7 +1300,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1306  Mirage Mirror                            {3}              Artifact
 [x]  1307  Guildless Commons                        {0}              Land
 [x]  1308  Courser of Kruphix                       {1}{G}{G}        Enchantment Creature — Centaur
-[ ]  1309  Vigor                                    {3}{G}{G}{G}     Creature — Elemental Incarnation
+[x]  1309  Vigor                                    {3}{G}{G}{G}     Creature — Elemental Incarnation
 [x]  1310  Brokers Hideout                          {0}              Land
 [x]  1311  Undying Malice                           {B}              Instant
 [ ]  1312  Finale of Revelation                     {X}{U}{U}        Sorcery

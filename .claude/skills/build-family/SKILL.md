@@ -414,6 +414,18 @@ in its own worktree (`isolation: "worktree"`), integrated by cherry-pick.
   client`, about 11 minutes) only when a pick changed `client/`, `protocol/` or `engine/src/view.ts` since its last pass (`git diff
   --name-only <last pass>..HEAD -- client protocol engine/src/view.ts`). Tutorials and the larger screens are in `test:e2e:full`, which
   GitHub runs daily. The suite can't simply go parallel: 4 workers took 7.2 minutes with 19 failures, mostly different tests from run to run.
+- **The user's call, 2026-11-04, past the 5-card units:** don't stop at the floor. Build keys by the highest EDHREC-ranked card each
+  unlocks (`cards:needs -- --by-rank --top 40`), Gemstone Caverns first, a few cards an agent: the card is the first proving card and runs its
+  whole text. Those records overstate more than the families' do (9 of 42 needed no engine code), so an agent tries the card first.
+  That night: 20 families and 42 by-rank cards from 19 agents, four at once; a four-card agent took about 70 minutes, a two-card one 25. A
+  deadline in the brief ("report by 7:40") mostly worked: one of three cards ran out of time and was reverted to a patch. Nine of the 19 went
+  back with `SendMessage` for a fix, so read "unsure" as work: two were
+  rules bugs in existing code (life at exactly the amount, rule 119.4; a copied spell's delayed `whenever`).
+- **Picking, the same night:** `pick.py` stops on `manualChecks.ts`, `engine.md`'s word conflicts, `AUTHORING.md`'s and `game.ts`. Keep both sides
+  by hand or with a small script, and don't trust a union: the block-end lines are shared, so a merge can drop a block's closers. After
+  every pick, scan `oracle-parse.test.ts` for a `describe(` not preceded by `});`, and run `tsc -b` from `client/` before starting a verify
+  (three verifies stopped at the build on a broken `manualChecks.ts`). `pickfix.py wordsu` can interleave two sentences inserted at one spot:
+  read the result. Two agents can add the same field (`look-and-choose`'s `prompt`): the typecheck finds it.
 - **`python .claude/skills/build-family/pick.py <commit>...`** picks agent commits and resolves the routine
   conflicts by keeping both sides (`pickfix.py`). Its header says what to check afterwards.
 - **Clean up** each worktree: unlink every junction by absolute path
