@@ -15140,6 +15140,21 @@ describe("mana that adds counters to what it casts", () => {
     expect(attendant.activated[0].effect.spellEntersWith).toEqual({ spell: { type: "creature", notSubtypes: ["Human"] }, counter: "+1/+1", amount: 1 });
   });
 
+  it("Grasp of Fate", () => {
+    const face = read(
+      "Enchantment",
+      "When this enchantment enters, for each opponent, exile up to one target nonland permanent that player controls until this enchantment leaves the battlefield. (Those permanents return under their owners' control.)",
+    );
+    expect(face.complete).toBe(true);
+    const seat = (n: number) => ({ kind: "optional", of: { kind: "permanent", whose: { seat: n }, filter: { notTypes: ["land"] } } });
+    expect(face.triggered[0].targets).toEqual([seat(1), seat(2), seat(3)]);
+    expect(face.triggered[0].effect).toEqual({
+      kind: "sequence",
+      simultaneous: true,
+      effects: [0, 1, 2].map((target) => ({ kind: "exile", target, untilSourceLeaves: true })),
+    });
+  });
+
   it("K'rrik, Son of Yawgmoth", () => {
     const face = read(
       "Legendary Creature — Phyrexian Horror Minion",

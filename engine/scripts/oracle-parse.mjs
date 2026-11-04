@@ -8075,6 +8075,21 @@ export function parseEffect(text, outer) {
   // Mythos of Snapdax's two sentences: the second rewrites who chooses.
   if (text === SNAPDAX_LINE) return { effect: SNAPDAX_EFFECT, todo: [], hints: [] };
 
+  // "For each opponent, exile up to one target nonland permanent that player
+  // controls until ~ leaves the battlefield" (Grasp of Fate): one optional slot
+  // per seat, exiled together (a game seats at most four).
+  const perOpponentExile = /^For each opponent, exile up to one target (.+?) that player controls until ~ leaves the battlefield\.$/.exec(text);
+  if (perOpponentExile !== null) {
+    const filter = parseTypePhrase(perOpponentExile[1]);
+    if (filter !== null) {
+      const effects = [1, 2, 3].map((seat) => ({
+        kind: "exile",
+        target: ctx.target({ kind: "optional", of: { kind: "permanent", whose: { seat }, filter } }),
+        untilSourceLeaves: true,
+      }));
+      return { effect: { kind: "sequence", simultaneous: true, effects }, todo: [], hints: [] };
+    }
+  }
   // "They may tap that permanent. If they don't, you create …" (Charismatic
   // Conqueror): the opponent it entered under, and a `may` they can't take when
   // it's already tapped or gone counts as their not taking it.
