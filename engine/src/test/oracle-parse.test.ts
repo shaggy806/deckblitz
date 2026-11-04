@@ -14313,6 +14313,8 @@ describe("facts fixed as a spell is cast (rule 601.2i), and what a kick brings a
     ]);
     expect(face.static[2]).toMatchObject({ condition: kicked, grantKeywords: ["haste"] });
   });
+});
+
 describe("a cast as this resolves, on its own terms", () => {
   const read = (type_line: string, oracle_text: string) =>
     parseFace({ name: "Test Card", type_line, oracle_text, mana_cost: "{1}", colors: [] });
