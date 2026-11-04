@@ -10577,9 +10577,23 @@ function revealedHandChoiceAt(sentences, i, ctx) {
     const read = revealedHandChoiceAt(split, i, ctx);
     return read === null ? null : { ...read, used: read.used - 1 };
   }
+  // "Look at target player's hand and choose X cards from it. That player
+  // discards those cards." (Mind Warp, Abandon Hope): exactly X.
+  const lookChoose = /^look at (target opponent|target player)'s hand and choose X cards from it\.$/i.exec(sentences[i]);
+  if (lookChoose !== null && /^that player discards those cards\.$/i.test(sentences[i + 1] ?? "")) {
+    return {
+      effect: {
+        kind: "discard-chosen",
+        target: ctx.target(lookChoose[1].toLowerCase() === "target opponent" ? "opponent" : "player"),
+        lookOnly: true,
+        picks: "x",
+      },
+      used: 2,
+    };
+  }
   // "Look at target opponent's hand. You may exile a nonland card from it
   // until ~ leaves the battlefield" (Deep-Cavern Bat, rule 610.3).
-  const looked = /^look at (target opponent|target player)'s hand\.$/i.exec(sentences[i]);
+  const looked =/^look at (target opponent|target player)'s hand\.$/i.exec(sentences[i]);
   const mayExile = looked === null ? null : /^you may exile an? (?:(.+?) )?card from it until ~ leaves the battlefield\.$/i.exec(sentences[i + 1] ?? "");
   if (mayExile !== null) {
     const lookFilter = mayExile[1] === undefined ? {} : parseTypePhrase(mayExile[1]);

@@ -5182,10 +5182,25 @@ export type EffectSpec =
        * revealed cards alone. Not with `lookOnly`, `upTo` or `alsoFrom`.
        */
       readonly reveals?: EffectAmount;
-      /** How many of the `reveals` cards are chosen: "you choose **two** of
-       * them. That player discards those cards" (Noggin Whack). As many as
-       * there are, if fewer were revealed. One, when absent. */
+      /** How many cards are chosen, read as it resolves, exactly that many:
+       * "you choose **two** of them. That player discards those cards"
+       * (Noggin Whack, of the `reveals` cards), "look at target player's hand
+       * and **choose X cards** from it" (Mind Warp), "a nonland card from it
+       * **for each card discarded this way**" (Last Rites). As many as match,
+       * if fewer do (rule 609.3); 0 chooses nothing. One, when absent. Not
+       * with `upTo`, which lets the chooser take fewer. */
       readonly picks?: EffectAmount;
+      /**
+       * One chosen card **for each filter**, a card standing for one filter
+       * only: "you choose from it a nonland card with mana value 3 or less
+       * **and** a card with mana value 4 or greater. That player discards
+       * those cards" (Distended Mindbender). As many as can be matched to
+       * different filters are chosen (rule 609.3), and they go together, so
+       * one discard event. `filters` read from the chooser's side, `text` the
+       * clause a client tells them. Not with `filter`, `upTo`, `picks` or
+       * `reveals`.
+       */
+      readonly oneEach?: { readonly filters: readonly CardFilter[]; readonly text: string };
       /**
        * Where the chosen card goes instead of being discarded: `"exile"` —
        * "you choose a nonland card from it and **exile that card**"
@@ -11407,6 +11422,10 @@ export interface EffectApi {
       readonly mayCast?: ExilePermission;
       /** See the effect's `reveals` and `picks`, read as it resolves. */
       readonly reveals?: { readonly count: number; readonly picks: number };
+      /** The effect's `picks`, read as it resolves, over the whole hand. */
+      readonly exactly?: number;
+      /** See the effect's `oneEach`. */
+      readonly oneEach?: { readonly filters: readonly CardFilter[]; readonly text: string };
     },
   ): void;
   modifyPt(
@@ -16852,7 +16871,10 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
                   picks: spec.picks === undefined ? 1 : Math.max(0, Math.floor(amountValue(spec.picks, ctx))),
                 },
               }
-            : {}),
+            : spec.picks !== undefined
+              ? { exactly: Math.max(0, Math.floor(amountValue(spec.picks, ctx))) }
+              : {}),
+          ...(spec.oneEach !== undefined ? { oneEach: spec.oneEach } : {}),
         });
       }
       return;

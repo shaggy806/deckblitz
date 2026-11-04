@@ -33523,6 +33523,8 @@ export class Game {
           to?.alsoFrom,
           grant,
           exileUntil,
+          to?.exactly,
+          to?.oneEach,
         );
       },
       modifyPt: (target, power, toughness, duration) =>
@@ -36386,6 +36388,10 @@ export class Game {
     impulseGrant?: GameObject["impulse"],
     /** See `discard-chosen`'s `untilSourceLeaves`. */
     exileUntil?: NonNullable<GameObject["exiledUntil"]>,
+    /** See `discard-chosen`'s `picks`: exactly this many, or as many as match. */
+    exactly?: number,
+    /** See `discard-chosen`'s `oneEach`. */
+    oneEach?: { readonly filters: readonly CardFilter[]; readonly text: string },
   ): void {
     if (target.kind !== "player") return;
     const player = target.player;
@@ -36401,12 +36407,31 @@ export class Game {
     if (!lookOnly && hand.length > 0) this.revealCards(player, [...hand], "hand");
     // "Reveals … the top card of their library" (rule 701.20a): to everyone.
     if (alsoFrom?.zone === "library-top" && extra.length > 0) this.revealCards(player, extra, "library");
-    const max = upTo ?? 1;
+    const max = exactly ?? upTo ?? 1;
     const fits = (id: ObjectId, by: CardFilter | undefined): boolean =>
       by === undefined || matchesFilter(this.state, this.registry, id, by, { you: chooser, source });
+    // "A nonland card with mana value 3 or less and a card with mana value 4
+    // or greater" (Distended Mindbender): a set rule, each card tagged with
+    // the filters it could stand for. As many as can be told apart must be
+    // chosen, none of those being optional (rule 609.3).
+    const together: ZoneChoiceTogether | undefined =
+      oneEach === undefined
+        ? undefined
+        : {
+            rule: "one-each",
+            text: oneEach.text,
+            tags: Object.fromEntries(
+              hand.map((id) => [
+                id,
+                oneEach.filters.flatMap((by, slot) => (fits(id, by) ? [String(slot)] : [])),
+              ]),
+            ),
+          };
     const eligible =
       max === 0
         ? []
+        : together !== undefined
+          ? eligibleForTogether(together, hand)
         : [
             ...hand.filter((id) => fits(id, filter)),
             // The graveyard's own filter ("or a card from their graveyard":
@@ -36417,14 +36442,16 @@ export class Game {
     // Nothing it could be: everyone has seen the hand, and nothing is asked.
     // A look still shows the hand to the one looking.
     if (eligible.length === 0 && !lookOnly) return;
+    const most = together !== undefined ? largestOneEach(together, eligible) : Math.min(max, eligible.length);
     this.state.awaiting = {
       kind: "choose-from-zone",
       player: chooser,
       ...(chooser !== player ? { forPlayer: player } : {}),
       ids: [...hand, ...extra],
-      eligible,
-      min: optional || upTo !== undefined || eligible.length === 0 ? 0 : 1,
-      max: Math.min(max, eligible.length),
+      eligible: [...eligible],
+      min: optional || upTo !== undefined ? 0 : most,
+      max: most,
+      ...(together !== undefined ? { together } : {}),
       destination: destination ?? "discard",
       // "Onto the battlefield under your control" (Treacherous Urge).
       ...(destination === "battlefield" && chooser !== player ? { enterUnder: chooser } : {}),

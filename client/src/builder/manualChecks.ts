@@ -10631,6 +10631,13 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'Distended Mindbender: one card of each kind from a revealed hand',
+    board({
+      you: { bf: ['Swamp*8'], hand: ['Distended Mindbender'] },
+      opp: [{ hand: ['Lightning Bolt', 'Grizzly Bears', 'Craw Wurm', 'Forest'] }],
+    }),
+  ),
+  preset(
     'Jetsam: one spell from each opponent, in the order you pick',
     board({
       you: { bf: ['Island*6'], hand: ['Flotsam // Jetsam'] },

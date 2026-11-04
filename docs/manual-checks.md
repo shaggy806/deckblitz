@@ -7083,6 +7083,11 @@ These boards start before the first turn (the builder's `openingHands`), with th
 - **Do:** Cast Ghouls' Night Out, then take a card and Confirm in each popup.
 - **Expect:** Your one card is taken for you, then a popup for Bob's graveyard (Hill Giant can be taken, Forest can't) and one for Carol's. Dave's has no creature card and nothing is asked. After the last, all three enter under your control together, black Zombies with decayed.
 
+### Distended Mindbender: one card of each kind from a revealed hand
+
+- **Do:** Cast Distended Mindbender for {8}, clicking Pay with mana, and target Bob. In the popup, click Lightning Bolt, then Grizzly Bears, then Craw Wurm, and Confirm with one of each.
+- **Expect:** The banner names both kinds. Forest can't be taken. Confirm is off for two small cards, on for one small and Craw Wurm; both go to Bob's graveyard while Mindbender is still on the stack.
+
 ### Jetsam: one spell from each opponent, in the order you pick
 
 - **Do:** Cast Flotsam // Jetsam, clicking Jetsam. When offered, cast Hill Giant and Confirm.

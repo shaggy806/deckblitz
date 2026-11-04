@@ -2813,6 +2813,10 @@ describe("templates for features built since the parser began (2026-10-11)", () 
       {},
     );
     expect(pyre.additionalCost).toEqual({ exileFromGraveyard: { count: "x" } });
+    // Mind Warp's exact X, not "up to".
+    expect(
+      face("Look at target player's hand and choose X cards from it. That player discards those cards.", "Sorcery", {}).effect,
+    ).toEqual({ kind: "discard-chosen", target: 0, lookOnly: true, picks: "x" });
     // Infernal Harvest's X: as many as are returned.
     expect(
       face("As an additional cost to cast this spell, return X Swamps you control to their owner's hand.", "Sorcery", {}).additionalCost,
