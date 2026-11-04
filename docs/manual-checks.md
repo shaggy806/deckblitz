@@ -6824,3 +6824,18 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 - **Do:** Activate Watchers of the Dead. Switch to Bob: in the popup, click Grizzly Bears and Shock, and confirm.
 - **Expect:** Hill Giant is exiled. Grizzly Bears and Shock stay in Bob's graveyard, and Watchers of the Dead is in exile.
+
+### Wicked Slumber: each stun counter chosen as it resolves
+
+- **Do:** Cast Wicked Slumber on Grizzly Bears and Hill Giant. When asked, click Hill Giant and confirm, twice.
+- **Expect:** Both creatures are tapped. You're asked twice, "Put a stun counter on either of them", and Hill Giant ends with two stun counters.
+
+### Trial of Agony: four players, the targets' controller chooses
+
+- **Do:** Cast Trial of Agony on Bob's Grizzly Bears and Colossal Dreadmaw. As Bob, click Colossal Dreadmaw and confirm.
+- **Expect:** You can't target creatures of two different opponents. Bob is the one asked, the Dreadmaw has 5 damage, and Grizzly Bears can't block this turn.
+
+### Crush Underfoot: choosing the Giant as it resolves
+
+- **Do:** Cast Crush Underfoot on Bob's Colossal Dreadmaw. When asked, click Stone Giant and confirm.
+- **Expect:** Only Hill Giant and Stone Giant can be clicked, not Grizzly Bears. The Dreadmaw has 3 damage.

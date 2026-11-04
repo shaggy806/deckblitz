@@ -1527,7 +1527,9 @@
   "decision:choose-total-power-subset",
   "effect:affect-unchosen-permanents",
   "effect:each-player-keeps-one-exile-rest",
-  "effect:sacrifice-all-but-up-to-n"
+  "effect:sacrifice-all-but-up-to-n",
+  "decision:choose-among-targets",
+  "decision:choose-permanents-keeps-targets"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

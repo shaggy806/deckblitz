@@ -33203,8 +33203,8 @@ export class Game {
           return object?.owner === controller && object.suspended === true && (object.counters.time ?? 0) > 0;
         }).length,
       giveSuspend: (counters, options) => this.giveSuspend(controller, counters, options),
-      choosePermanents: (filter, min, max, then, prompt, exceptSource, except, chooser, together) =>
-        this.beginChoosePermanents(source, chooser ?? controller, x, filter, min, max, then, prompt, exceptSource === true, except, together),
+      choosePermanents: (filter, min, max, then, prompt, exceptSource, except, chooser, together, thenTargets) =>
+        this.beginChoosePermanents(source, chooser ?? controller, x, filter, min, max, then, prompt, exceptSource === true, except, together, thenTargets),
       blight: (player, amount, then) => this.beginBlight(player, source, amount, { x, ...(then !== undefined ? { then } : {}) }),
       bolster: (amount) => this.beginBolster(controller, source, amount, x),
       behold: (spec, then) => this.beginBehold(controller, source, spec, { x, ...(then !== undefined ? { then } : {}) }),
@@ -41909,6 +41909,7 @@ export class Game {
     exceptSource = false,
     except: readonly ObjectId[] = [],
     togetherRule?: ChoosePermanentsTogether,
+    thenTargets?: ResolvedTargets,
   ): void {
     const matching = this.battlefieldMatching(player, filter).filter(
       (id) => (!exceptSource || id !== source) && !except.includes(id),
@@ -41933,6 +41934,7 @@ export class Game {
       source,
       x,
       ...(together !== undefined ? { together } : {}),
+      ...(thenTargets !== undefined ? { thenTargets } : {}),
     };
   }
 
@@ -42201,7 +42203,17 @@ export class Game {
           // its power" reads the power it had (First Responder).
           applyEffectSpec(
             then,
-            this.makeResolutionContext(source, player, [{ kind: "object", object: id }], x, 0, undefined, 1, 0, [zone]),
+            this.makeResolutionContext(
+              source,
+              player,
+              [{ kind: "object", object: id }, ...(awaiting.thenTargets ?? [])],
+              x,
+              0,
+              undefined,
+              1,
+              0,
+              [zone],
+            ),
           );
         }
       }),

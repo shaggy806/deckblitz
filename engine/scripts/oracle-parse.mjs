@@ -6382,6 +6382,62 @@ function lifeExchanges(text, ctx) {
 }
 
 /**
+ * A choice made as a spell resolves, beside its targets: among them ("put a stun
+ * counter on either of them" — Wicked Slumber; "that player chooses one of those
+ * creatures" — Trial of Agony), or of something else, the target still read
+ * after it (Crush Underfoot).
+ */
+function chosenBesideTargets(text, ctx) {
+  const stun = (prompt) => ({
+    kind: "choose-among-targets",
+    chooser: "you",
+    count: 1,
+    prompt,
+    chosen: { effect: { kind: "add-counter", target: 0, counter: "stun", amount: 1 } },
+  });
+  let m;
+  if ((m = /^Tap up to (two|three) target creatures\. Put a stun counter on (either|one) of them\.( Then put a stun counter on either of them\.)?$/.exec(text))) {
+    const from = ctx.target({ kind: "any-number", of: "creature", max: m[1] === "two" ? 2 : 3 });
+    const prompt = `Put a stun counter on ${m[2]} of them`;
+    return {
+      kind: "sequence",
+      effects: [
+        { kind: "for-each-target", from, simultaneous: true, effect: { kind: "tap", target: 0 } },
+        stun(prompt),
+        ...(m[3] !== undefined ? [stun(prompt)] : []),
+      ],
+    };
+  }
+  if ((m = /^Choose two target creatures controlled by the same opponent\. That player chooses one of those creatures\. ~ deals (\d+) damage to that creature, and the other can't block this turn\.$/.exec(text))) {
+    const first = ctx.target("creature-an-opponent-controls");
+    ctx.target({ kind: "other", of: "creature-an-opponent-controls", than: { slot: first }, sameController: true });
+    return {
+      kind: "choose-among-targets",
+      chooser: "their-controller",
+      count: 1,
+      prompt: `Choose the creature dealt ${m[1]} damage — the other can't block this turn`,
+      chosen: { effect: { kind: "damage", target: 0, amount: Number(m[1]) } },
+      rest: { effect: { kind: "restrict", target: 0, restrictions: ["cant-block"] } },
+    };
+  }
+  if ((m = /^Choose an? (.+?) creature you control\. It deals damage equal to its power to target creature\.$/.exec(text))) {
+    const kept = parseTypePhrase(`${m[1]} creature`);
+    if (kept === null) return null;
+    ctx.target("creature");
+    return {
+      kind: "choose-permanents",
+      filter: { ...kept, controlledBy: "you" },
+      min: 1,
+      upTo: 1,
+      keepTargets: true,
+      then: { kind: "fight", a: 0, b: 1, oneSided: true },
+      prompt: `Choose a ${m[1]} creature you control`,
+    };
+  }
+  return null;
+}
+
+/**
  * "Each player chooses a creature they control. Destroy the rest" (Divine
  * Reckoning): a `vote` with `choose`, then a `destroy-all` of what wasn't chosen
  * (`notThisWay: "chosen"`). "Destroy each permanent chosen this way" (Druid of
@@ -7427,7 +7483,7 @@ export function parseEffect(text, outer) {
   }
   const looks = looksAtAnothersTop(text, ctx);
   if (looks !== null) return { effect: looks, todo: [], hints: [] };
-  const chosen = paidAndBid(text, ctx) ?? chosenNumbers(text, ctx) ?? chosenAndTheRest(text) ?? lifeExchanges(text, ctx);
+  const chosen = paidAndBid(text, ctx) ?? chosenNumbers(text, ctx) ?? chosenAndTheRest(text) ?? chosenBesideTargets(text, ctx) ?? lifeExchanges(text, ctx);
   if (chosen !== null) return { effect: chosen, todo: [], hints: [] };
   for (const [i, sentence] of sentences.entries()) {
     if (skip > 0) {

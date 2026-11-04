@@ -4052,6 +4052,9 @@ export type AwaitingDecision =
        * `returnToHand`), not an effect resolving: the player who activated
        * it, who gets priority once it's made (rule 117.3c). */
       readonly priorityTo?: PlayerId;
+      /** A `choose-permanents` effect's `keepTargets`: the resolution's own
+       * targets, which `then` reads from slot 1 (Crush Underfoot). */
+      readonly thenTargets?: readonly (TargetRef | undefined)[];
       /** Set for a `keep-total-power` choice (Slaughter the Strong): what's
        * picked is kept, and its total power — a negative power subtracting
        * (the ruling) — may be at most this. `then` is unused; the picks are

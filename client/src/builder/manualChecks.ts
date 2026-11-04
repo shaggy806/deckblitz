@@ -10227,6 +10227,27 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'Wicked Slumber: each stun counter chosen as it resolves',
+    board({
+      you: { bf: ['Island*4'], hand: ['Wicked Slumber'] },
+      opp: [{ bf: ['Grizzly Bears', 'Hill Giant'] }],
+    }),
+  ),
+  preset(
+    "Trial of Agony: four players, the targets' controller chooses",
+    board({
+      you: { bf: ['Mountain'], hand: ['Trial of Agony'] },
+      opp: [{ human: true, bf: ['Grizzly Bears', 'Colossal Dreadmaw'] }, {}, { bf: ['Hill Giant'] }],
+    }),
+  ),
+  preset(
+    'Crush Underfoot: choosing the Giant as it resolves',
+    board({
+      you: { bf: ['Mountain*2', 'Hill Giant', 'Stone Giant', 'Grizzly Bears'], hand: ['Crush Underfoot'] },
+      opp: [{ bf: ['Colossal Dreadmaw'] }],
+    }),
+  ),
+  preset(
     'Phyrexian Dreadnought: sacrificing creatures up to a total power of 12',
     board({
       you: { bf: ['Island', 'Colossal Dreadmaw', 'Craw Wurm', 'Hill Giant'], hand: ['Phyrexian Dreadnought'] },

@@ -2437,13 +2437,12 @@ export type EffectSpec =
        * `CardFilter`'s own `controlledBy` can't name one seat at a 3-4 player
        * table. Nobody named, and nothing happens. */
       readonly controlledByPlayer?: EffectPlayerRef;
-=======
-       * no name can't be chosen for different names (rule 201.2b).
-       * `totalPowerAtLeast` is "any number of creatures **with total power 12
-       * or greater**" (Phyrexian Dreadnought's `unless` option), a negative
-       * power subtracting, each token of a stack counted. */
-      readonly together?: ChoosePermanentsTogether;
->>>>>>> c2e26c7ea (Engine, Cards: each player keeps some of theirs by count, by total power or under what you chose, and each creature not chosen this way (a total power to reach on choose-permanents, a cap on look-and-choose, a chosen-power filter operand, a vote's own prompt) — Phyrexian Dreadnought, Moorland Rescuer, Sculpted Sunburst, Thunderwave, Watchers of the Dead, Covetous Elegy)
+      /** `then` still reads this resolution's own targets, from slot 1: "choose
+       * a Giant creature you control. It deals damage equal to its power to
+       * **target creature**" (Crush Underfoot) is `targets: ["creature"]` and
+       * `then: { kind: "fight", a: 0, b: 1, oneSided: true }`, the Giant at 0.
+       * The choice is made as this resolves, never a target itself. */
+      readonly keepTargets?: true;
     }
   | {
       /**
@@ -10439,6 +10438,8 @@ export interface EffectApi {
     chooser?: PlayerId,
     /** What the chosen ones must be as a set — the effect's `together`. */
     together?: ChoosePermanentsTogether,
+    /** The effect's `keepTargets`: the targets `then` reads from slot 1. */
+    thenTargets?: ResolvedTargets,
   ): void;
   /** See the `"blight"` {@link EffectSpec}: `player` blights `amount` — the
    * creature chosen now, or asked for — then `then` with it as target 0.
@@ -14810,6 +14811,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         except,
         chooser,
         spec.together,
+        spec.keepTargets === true ? ctx.targets : undefined,
       );
       return;
     }

@@ -10448,6 +10448,34 @@ describe("choices kept, the rest destroyed", () => {
     });
   });
 
+  it("reads a choice beside the targets: among them, or of something else", () => {
+    const among = (text: string): { effect: unknown; targets: unknown[] } => {
+      const targets: unknown[] = [];
+      return { effect: parseEffect(text, { targets }).effect, targets };
+    };
+    const slumber = among("Tap up to two target creatures. Put a stun counter on either of them. Then put a stun counter on either of them.");
+    expect(slumber.targets).toEqual([{ kind: "any-number", of: "creature", max: 2 }]);
+    expect(slumber.effect).toMatchObject({
+      effects: [{ kind: "for-each-target" }, { kind: "choose-among-targets", chooser: "you" }, { kind: "choose-among-targets", chooser: "you" }],
+    });
+    const aerith = among("Tap up to three target creatures. Put a stun counter on one of them.");
+    expect(aerith.targets).toEqual([{ kind: "any-number", of: "creature", max: 3 }]);
+    expect((aerith.effect as { effects: unknown[] }).effects).toHaveLength(2);
+    const trial = among(
+      "Choose two target creatures controlled by the same opponent. That player chooses one of those creatures. ~ deals 5 damage to that creature, and the other can't block this turn.",
+    );
+    expect(trial.effect).toMatchObject({ kind: "choose-among-targets", chooser: "their-controller", chosen: { effect: { amount: 5 } } });
+    expect(trial.targets).toHaveLength(2);
+    const crush = among("Choose a Giant creature you control. It deals damage equal to its power to target creature.");
+    expect(crush.targets).toEqual(["creature"]);
+    expect(crush.effect).toMatchObject({
+      kind: "choose-permanents",
+      filter: { type: "creature", subtype: "Giant", controlledBy: "you" },
+      keepTargets: true,
+      then: { kind: "fight", a: 0, b: 1, oneSided: true },
+    });
+  });
+
   it("reads a total power to reach, and one to stay under", () => {
     expect(effectOf("Sacrifice it unless you sacrifice any number of creatures with total power 12 or greater.")).toEqual({
       kind: "unless",

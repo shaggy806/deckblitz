@@ -4359,6 +4359,14 @@ Capricious Efreet needed no code: it's Wild Swing's random modal over chosen
 targets. Grip of Chaos is left: it also needs a trigger on anything going on the
 stack, `trigger:spell-or-ability-put-on-stack`.
 
+### A choice beside a spell's targets — built 2026-11-03
+
+`decision:choose-among-targets`: `choose-among-targets` was there, read with `chooser: "you"` and in
+a `sequence` of its own steps. `decision:choose-permanents-keeps-targets`: `choose-permanents`'
+`keepTargets`, `then` reading the targets from slot 1. No new decision. Proving cards: Aerith Rescue
+Mission, Wicked Slumber, Trial of Agony, Crush Underfoot. Cannibalize waits for `author-freed`: with
+one target illegal its one ruling says nothing of which fate the other takes.
+
 ### Keeping some of yours, by count, by total power or under what you chose — built 2026-11-03
 
 `decision:choose-total-power-subset`, `effect:affect-unchosen-permanents`,
