@@ -3671,7 +3671,9 @@ export type AwaitingDecision =
       /** Before turn 1 (rule 103.6a — `Game.beginOpeningHandActions`): which
        * of `player`'s opening-hand cards that may begin the game on the
        * battlefield do — or, with `destination` `"reveal"`, which to reveal
-       * for their delayed abilities (`CardDefinition.openingHandReveal`).
+       * for their delayed abilities (`CardDefinition.openingHandReveal`), or,
+       * with `"exile"`, which card a begun card's "if you do, exile a card
+       * from your hand" takes (Gemstone Caverns).
        * `next` is the next question, counted two a player from the starting
        * player. */
       readonly openingHand?: { readonly next: number };

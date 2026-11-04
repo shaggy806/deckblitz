@@ -2400,7 +2400,19 @@ export type BoardManaList =
    * the battlefield permanents matching the filter, each colour once however
    * many have it (the rulings) — `amount` times over.
    */
-  | { readonly eachColorAmong: CardFilter };
+  | { readonly eachColorAmong: CardFilter }
+  /**
+   * "Add {C}. If this has a luck counter on it, **instead** add one mana of
+   * any color" (Gemstone Caverns): a `oneOf` over `then` while the condition
+   * holds, `else` while it doesn't, read off the source as the mana is made.
+   * What the type depends on, where an `ifCondition` amount is what the
+   * number depends on (Incubation Druid).
+   */
+  | {
+      readonly ifCondition: StaticCondition;
+      readonly then: readonly ManaType[];
+      readonly else: readonly ManaType[];
+    };
 
 /** "A Jace planeswalker token you control" (rule 701.71a). */
 const JACE_TOKEN: CardFilter = { type: "planeswalker", subtype: "Jace", token: true, controlledBy: "you" };
@@ -15216,7 +15228,7 @@ function addManaChoice(spec: Extract<EffectSpec, { kind: "add-mana" }>, ctx: Res
     same = mana.same === true;
   } else {
     colors = ctx.manaTypesOf(mana);
-    same = mana.same === true;
+    same = "same" in mana && mana.same === true;
   }
   if (colors.length < 2) return null;
   const { kind: _kind, painToController, also, mana: _mana, amount: _amount, ...carried } = spec;

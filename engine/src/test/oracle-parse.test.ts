@@ -1549,9 +1549,23 @@ describe("costs and triggers", () => {
       name: "Gemstone Caverns",
       type_line: "Legendary Land",
       oracle_text:
-        "If Gemstone Caverns is in your opening hand and you're not the starting player, you may begin the game with Gemstone Caverns on the battlefield with a luck counter on it. If you do, exile a card from your hand.",
+        "If this card is in your opening hand and you're not the starting player, you may begin the game with Gemstone Caverns on the battlefield with a luck counter on it. If you do, exile a card from your hand.\n{T}: Add {C}. If Gemstone Caverns has a luck counter on it, instead add one mana of any color.",
     });
-    expect(caverns.beginsOnBattlefield).toBeUndefined();
+    expect(caverns.beginsOnBattlefield).toEqual({
+      notStartingPlayer: true,
+      counters: [{ kind: "luck", amount: 1 }],
+      thenExileFromHand: 1,
+    });
+    expect(caverns.activated[0].effect).toEqual({
+      kind: "add-mana",
+      mana: {
+        ifCondition: { kind: "self-counters", counter: "luck", compare: { op: "gte", n: 1 } },
+        then: ["W", "U", "B", "R", "G"],
+        else: ["C"],
+      },
+      amount: 1,
+    });
+    expect(caverns.complete).toBe(true);
   });
 
   it("reads an ability that acts while its holder could mulligan (rule 103.5b)", () => {

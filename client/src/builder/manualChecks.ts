@@ -9363,6 +9363,30 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'Gemstone Caverns: not the starting player, so it begins on the battlefield and exiles a card',
+    board({
+      openingHands: true,
+      turn: 0,
+      you: { hand: ['Gemstone Caverns', 'Shock', 'Forest*5'] },
+    }),
+  ),
+  preset(
+    'Gemstone Caverns: the starting player isn\'t offered it',
+    board({
+      openingHands: true,
+      you: { hand: ['Gemstone Caverns', 'Shock', 'Forest*5'] },
+    }),
+  ),
+  preset(
+    'Gemstone Caverns: at four players, you\'re asked after the starting player',
+    board({
+      openingHands: true,
+      turn: 0,
+      you: { hand: ['Gemstone Caverns', 'Shock', 'Forest*5'] },
+      opp: [{}, {}, {}],
+    }),
+  ),
+  preset(
     'Harvest Pyre: X is announced, and exiles that many cards from your graveyard',
     board({
       you: { bf: ['Mountain*2'], hand: ['Harvest Pyre'], gy: ['Island*3'] },

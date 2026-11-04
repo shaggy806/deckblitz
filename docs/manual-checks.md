@@ -6178,6 +6178,18 @@ These boards start before the first turn (the builder's `openingHands`), with th
 - **Do:** Bob starts the game. Click Keep and wait for the bots. When the popup comes, look at the log, then click Leyline Axe and Confirm.
 - **Expect:** The log has Bob's Leyline of Sanctity first, before you're asked; your Axe follows it, then "Round 1, turn 1 — Bob".
 
+### Gemstone Caverns: not the starting player, so it begins on the battlefield and exiles a card
+- **Do:** Bob starts the game. Click Keep and wait for the bot. In the "Opening hand: choose any of these to begin the game with on the battlefield" popup, click Gemstone Caverns, then Confirm. In the "Opening hand: choose a card to exile" popup, click Shock, then Confirm.
+- **Expect:** Bob's first turn begins with Gemstone Caverns on your battlefield with a luck counter, Shock in exile and five cards in your hand. Tapped for mana on your own turn, it asks for a color and offers no {C}.
+
+### Gemstone Caverns: the starting player isn't offered it
+- **Do:** You start the game. Click Keep and wait for the bot.
+- **Expect:** No opening-hand popup: your first turn begins with Gemstone Caverns still in your hand. Played as a land drop it has no luck counter, and taps for {C} only.
+
+### Gemstone Caverns: at four players, you're asked after the starting player
+- **Do:** Bob starts the game. Click Keep and wait for the bots. Click Gemstone Caverns and Confirm, then click Shock and Confirm.
+- **Expect:** "Round 1, turn 1 — Bob" follows. Your Caverns has its luck counter, Shock is in exile, and nobody else's hand changed.
+
 ### Boonweaver Giant: choose which of your graveyard, hand and library to search
 - **Do:** Cast Boonweaver Giant. As its ability resolves, say yes to the search, then click "Search your graveyard and hand".
 - **Expect:** Seven choices are offered, from "Search your graveyard, hand, and library" down to "Search your library". This one offers Rancor and Pacifism, not Holy Strength. The Aura you pick enters attached to the Giant, and your library isn't shuffled.

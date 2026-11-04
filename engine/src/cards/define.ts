@@ -5710,8 +5710,10 @@ export interface CardDefinition {
   /** "If this card is in your opening hand, you may begin the game with it
    * on the battlefield" (rule 103.6a — the Leylines): once every hand is
    * kept, its owner is asked, starting player first, which such cards to put
-   * onto the battlefield (`Game.beginOpeningHandActions`). */
-  readonly beginsOnBattlefield: boolean;
+   * onto the battlefield (`Game.beginOpeningHandActions`). A
+   * {@link BeginsOnBattlefieldWith} is the same permission with more to it
+   * (Gemstone Caverns). */
+  readonly beginsOnBattlefield: boolean | BeginsOnBattlefieldWith;
   /** "You may reveal this card from your opening hand. If you do, at the
    * beginning of the first upkeep, …" (rule 103.6b — the Chancellors, Sphinx
    * of Foresight): once every hand is kept, its owner is asked, starting
@@ -5737,6 +5739,20 @@ export interface CardDefinition {
  *   draw that many cards" — not a mulligan: none is counted, nothing shuffled.
  */
 export type MulliganHandAbility = "exile-hand-draw-that-many";
+
+/** See {@link CardDefinition.beginsOnBattlefield}: Gemstone Caverns' "…and
+ * you're not the starting player, you may begin the game with [it] on the
+ * battlefield with a luck counter on it. If you do, exile a card from your
+ * hand." */
+export interface BeginsOnBattlefieldWith {
+  /** "…and you're not the starting player": not offered to the player who is. */
+  readonly notStartingPlayer?: true;
+  /** "…with a luck counter on it". */
+  readonly counters?: readonly { readonly kind: string; readonly amount: number }[];
+  /** "If you do, exile a card from your hand": that many, the player's choice
+   * of what's left of the hand once the card has gone. */
+  readonly thenExileFromHand?: number;
+}
 
 /** See {@link CardDefinition.openingHandReveal}. */
 export interface OpeningHandReveal {
@@ -5895,7 +5911,7 @@ const PRINTED_ABILITY: {
   canBeCommander: (def) => def.canBeCommander,
   deckCopies: (def) => def.deckCopies !== null,
   companion: (def) => def.companion !== null,
-  beginsOnBattlefield: (def) => def.beginsOnBattlefield,
+  beginsOnBattlefield: (def) => def.beginsOnBattlefield !== false,
   openingHandReveal: (def) => def.openingHandReveal !== null,
   mulliganHandAbility: (def) => def.mulliganHandAbility !== null,
 };
@@ -6167,7 +6183,7 @@ interface CardDraft {
   canBeCommander?: boolean;
   deckCopies?: "any" | number;
   companion?: CompanionCondition;
-  beginsOnBattlefield?: boolean;
+  beginsOnBattlefield?: boolean | BeginsOnBattlefieldWith;
   openingHandReveal?: OpeningHandReveal;
   mulliganHandAbility?: MulliganHandAbility;
 }

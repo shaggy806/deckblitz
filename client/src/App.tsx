@@ -446,6 +446,8 @@ function zoneChoiceTitle(
   // Rule 103.6a, before turn 1: the Leylines in an opening hand, or the
   // Chancellors to reveal from it (rule 103.6b).
   if (action.openingHand === true && action.destination === 'reveal') return 'Opening hand: choose any of these to reveal'
+  // Gemstone Caverns' "if you do, exile a card from your hand".
+  if (action.openingHand === true && action.destination === 'exile') return `Opening hand: choose ${cards} to exile`
   if (action.openingHand === true) return 'Opening hand: choose any of these to begin the game with on the battlefield'
   // Choosing for someone else (Tasigur: an opponent picks for its controller),
   // or from their zones (a search of target opponent's library — Extract).

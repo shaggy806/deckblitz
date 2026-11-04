@@ -8262,9 +8262,27 @@ export function parseEffect(text, outer) {
       hints: [],
     };
   }
+  // "Add {C}. If ~ has a luck counter on it, instead add one mana of any
+  // color" (Gemstone Caverns): the type depends on the condition.
+  const counterInstead = /^Add \{([WUBRGC])\}\. If ~ has an? ([\w+/-]+) counter on it, instead add one mana of any color\.$/.exec(text);
+  if (counterInstead !== null) {
+    return {
+      effect: {
+        kind: "add-mana",
+        mana: {
+          ifCondition: { kind: "self-counters", counter: counterInstead[2], compare: { op: "gte", n: 1 } },
+          then: ["W", "U", "B", "R", "G"],
+          else: [counterInstead[1]],
+        },
+        amount: 1,
+      },
+      todo: [],
+      hints: [],
+    };
+  }
   // "Add … . Spend this mana only to …" naming a `ManaSpendPurpose` (rule
   // 106.6): the mana ability with its restriction, whole.
-  const spendDeny = /^(Add .+?\.) (This mana can't be spent to cast spells from your hand\.)$/.exec(text);
+  const spendDeny =/^(Add .+?\.) (This mana can't be spent to cast spells from your hand\.)$/.exec(text);
   if (spendDeny !== null) {
     const slots = ctx.targets.length;
     const add = parseSentence(spendDeny[1], ctx);
@@ -12285,6 +12303,11 @@ function parseFaceAsWritten(face, ctx = {}) {
     // Rule 103.6a, the Leylines ("…with him on the battlefield": Quicksilver).
     if (/^If (?:~|this card) is in your opening hand, you may begin the game with (?:it|him|her|them) on the battlefield\.$/.test(line)) {
       out.beginsOnBattlefield = true;
+      continue;
+    }
+    // …with more to it: Gemstone Caverns.
+    if (/^If (?:~|this card) is in your opening hand and you're not the starting player, you may begin the game with ~ on the battlefield with a luck counter on it\. If you do, exile a card from your hand\.$/.test(line)) {
+      out.beginsOnBattlefield = { notStartingPlayer: true, counters: [{ kind: "luck", amount: 1 }], thenExileFromHand: 1 };
       continue;
     }
     // Rule 103.5b, Serum Powder: at a time its holder would declare a mulligan.

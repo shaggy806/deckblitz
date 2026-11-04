@@ -6409,7 +6409,9 @@ export class Game {
    * question to the same player, which cards to reveal for their delayed
    * abilities (rule 103.6b — the Chancellors, `CardDefinition.openingHandReveal`).
    * `from` counts those questions from the starting player's first, two a
-   * player. Turn 1 begins once nobody is left to ask.
+   * player. Turn 1 begins once nobody is left to ask. A card whose permission
+   * says "and you're not the starting player" (Gemstone Caverns) isn't offered
+   * to the starting player.
    */
   private beginOpeningHandActions(from: number): void {
     const order = this.state.turnOrder;
@@ -6421,7 +6423,10 @@ export class Game {
         const name = this.state.objects[id]?.cardName;
         if (name === undefined || !this.registry.has(name)) return false;
         const def = this.registry.get(name);
-        return reveal ? def.openingHandReveal !== null : def.beginsOnBattlefield;
+        if (reveal) return def.openingHandReveal !== null;
+        const begins = def.beginsOnBattlefield;
+        if (begins === false) return false;
+        return begins === true || begins.notStartingPlayer !== true || player !== this.state.startingPlayer;
       });
       if (eligible.length === 0) continue;
       this.state.awaiting = {
@@ -6445,15 +6450,23 @@ export class Game {
   /** The answer to {@link beginOpeningHandActions}' question: the chosen
    * cards go onto the battlefield together (rule 103.6a) — or, revealed,
    * stay in the hand, each setting up its delayed ability — then the next
-   * question is asked. */
+   * question is asked. A card begun with "with a luck counter on it" has it as
+   * it arrives, and "if you do, exile a card from your hand" (Gemstone Caverns)
+   * is asked of what's left of the hand before the next question: the answer
+   * comes back here as `destination` `"exile"`. */
   private applyOpeningHand(
     player: PlayerId,
     chosen: readonly ObjectId[],
     next: number,
-    reveal: boolean,
+    destination: string,
   ): void {
     this.state.awaiting = null;
-    if (reveal) {
+    if (destination === "exile") {
+      for (const id of chosen) this.moveObject(id, "exile");
+      this.beginOpeningHandActions(next);
+      return;
+    }
+    if (destination === "reveal") {
       if (chosen.length > 0) this.revealCards(player, chosen, "hand");
       for (const id of chosen) {
         const spec = this.registry.get(this.state.objects[id].cardName).openingHandReveal;
@@ -6462,10 +6475,35 @@ export class Game {
       this.beginOpeningHandActions(next);
       return;
     }
+    let owed = 0;
     this.withEnterBatch(() => {
-      for (const id of chosen) this.moveObject(id, "battlefield");
+      for (const id of chosen) {
+        const begins = this.registry.get(this.state.objects[id].cardName).beginsOnBattlefield;
+        const moved = this.moveObject(id, "battlefield");
+        if (typeof begins !== "object") continue;
+        owed += begins.thenExileFromHand ?? 0;
+        if (!moved) continue;
+        for (const c of begins.counters ?? []) this.addCounter({ kind: "object", object: id }, c.kind, c.amount);
+      }
     });
     if (chosen.length > 0) this.emit({ type: "cards-chosen-from-zone", player, objects: [...chosen] });
+    const hand = this.state.zones.perPlayer[player].hand;
+    if (owed > 0 && hand.length > 0) {
+      const count = Math.min(owed, hand.length);
+      this.state.awaiting = {
+        kind: "choose-from-zone",
+        player,
+        ids: [...hand],
+        eligible: [...hand],
+        min: count,
+        max: count,
+        destination: "exile",
+        leftover: "stay",
+        openingHand: { next },
+      };
+      this.prepareForPriority(player);
+      return;
+    }
     this.beginOpeningHandActions(next);
   }
 
@@ -10037,7 +10075,7 @@ export class Game {
     }
     // Before the game (rule 103.6a): no resolution to go on with.
     if (awaiting.openingHand !== undefined) {
-      this.applyOpeningHand(player, chosen, awaiting.openingHand.next, awaiting.destination === "reveal");
+      this.applyOpeningHand(player, chosen, awaiting.openingHand.next, awaiting.destination);
       return;
     }
     // Before the opening hands (rule 103.2b): the same.
@@ -26698,6 +26736,15 @@ export class Game {
     source: ObjectId | undefined,
     visiting: ReadonlySet<ObjectId>,
   ): readonly ManaType[] {
+    // "If this has a luck counter on it, instead add one mana of any color"
+    // (Gemstone Caverns): which list, by the source as it is now.
+    if ("ifCondition" in mana) {
+      const object = source === undefined ? undefined : this.state.objects[source];
+      const met =
+        object !== undefined &&
+        staticConditionMet(this.state, this.registry, object, mana.ifCondition, { includeSelf: true });
+      return met ? mana.then : mana.else;
+    }
     const types = new Set<ManaType>();
     if ("producedBy" in mana) {
       const asking = source === undefined ? visiting : new Set([...visiting, source]);

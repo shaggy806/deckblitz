@@ -4101,6 +4101,10 @@ export class HeuristicBotController extends AutomaticController {
     if (awaiting?.kind === "choose-from-zone" && awaiting.behold !== undefined && awaiting.destination === "exile") {
       return this.leastUsefulTo(view.state, this.playerId, eligible, min);
     }
+    // What Gemstone Caverns exiles from the opening hand: give up the least.
+    if (awaiting?.kind === "choose-from-zone" && awaiting.openingHand !== undefined && awaiting.destination === "exile") {
+      return this.leastUsefulTo(view.state, this.playerId, eligible, min);
+    }
     // A land search takes a colour we can't make yet first (`land-colors.ts`).
     const ranked = newColorsFirst(view.state, this.registry, this.playerId, eligible);
     return ranked.slice(0, Math.max(min, Math.min(max, ranked.length)));
