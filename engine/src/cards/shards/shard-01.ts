@@ -40,6 +40,7 @@ import _poolAshiokDreamRender from "../pool/ashiok-dream-render.js";
 import _poolAshioksReaper from "../pool/ashioks-reaper.js";
 import _poolAssemble from "../pool/assemble.js";
 import _poolAstelliReclaimer from "../pool/astelli-reclaimer.js";
+import _poolAvenMindcensor from "../pool/aven-mindcensor.js";
 import _poolAvenge from "../pool/avenge.js";
 import _poolAwakenTheBear from "../pool/awaken-the-bear.js";
 import _poolAzureDrake from "../pool/azure-drake.js";
@@ -932,6 +933,7 @@ const shard: CardShard = {
     _poolAshioksReaper,
     _poolAssemble,
     _poolAstelliReclaimer,
+    _poolAvenMindcensor,
     _poolAvenge,
     _poolAwakenTheBear,
     _poolAzureDrake,

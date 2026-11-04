@@ -830,6 +830,7 @@ import _poolValkyriorSkyrider from "../pool/valkyrior-skyrider.js";
 import _poolValleyQuestcaller from "../pool/valley-questcaller.js";
 import _poolVampiresKiss from "../pool/vampires-kiss.js";
 import _poolVectisGloves from "../pool/vectis-gloves.js";
+import _poolVeilOfSummer from "../pool/veil-of-summer.js";
 import _poolVengefulDreams from "../pool/vengeful-dreams.js";
 import _poolVenomousHierophant from "../pool/venomous-hierophant.js";
 import _poolVenomsHunger from "../pool/venoms-hunger.js";
@@ -1764,6 +1765,7 @@ const shard: CardShard = {
     _poolValleyQuestcaller,
     _poolVampiresKiss,
     _poolVectisGloves,
+    _poolVeilOfSummer,
     _poolVengefulDreams,
     _poolVenomousHierophant,
     _poolVenomsHunger,

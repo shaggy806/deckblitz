@@ -1522,6 +1522,7 @@ import _poolAvenHeartstabber from "./pool/aven-heartstabber.js";
 import _poolAvenInitiate from "./pool/aven-initiate.js";
 import _poolAvenLiberator from "./pool/aven-liberator.js";
 import _poolAvenMimeomancer from "./pool/aven-mimeomancer.js";
+import _poolAvenMindcensor from "./pool/aven-mindcensor.js";
 import _poolAvenOfEnduringHope from "./pool/aven-of-enduring-hope.js";
 import _poolAvenRedeemer from "./pool/aven-redeemer.js";
 import _poolAvenReedstalker from "./pool/aven-reedstalker.js";
@@ -15694,6 +15695,7 @@ import _poolMonasteryMessenger from "./pool/monastery-messenger.js";
 import _poolMonasteryRaid from "./pool/monastery-raid.js";
 import _poolMonasterySiege from "./pool/monastery-siege.js";
 import _poolMonasterySwiftspear from "./pool/monastery-swiftspear.js";
+import _poolMondoGecko from "./pool/mondo-gecko.js";
 import _poolMondrakGloryDominus from "./pool/mondrak-glory-dominus.js";
 import _poolMondronenShaman from "./pool/mondronen-shaman.js";
 import _poolMongooseLizard from "./pool/mongoose-lizard.js";
@@ -17031,6 +17033,7 @@ import _poolOphiomancer from "./pool/ophiomancer.js";
 import _poolOpportunist from "./pool/opportunist.js";
 import _poolOpportunisticDragon from "./pool/opportunistic-dragon.js";
 import _poolOpportunity from "./pool/opportunity.js";
+import _poolOppositionAgent from "./pool/opposition-agent.js";
 import _poolOpposition from "./pool/opposition.js";
 import _poolOppression from "./pool/oppression.js";
 import _poolOppressiveRays from "./pool/oppressive-rays.js";
@@ -25249,6 +25252,7 @@ import _poolTianaShipsCaretaker from "./pool/tiana-ships-caretaker.js";
 import _poolTibaltRakishInstigator from "./pool/tibalt-rakish-instigator.js";
 import _poolTibaltTheFiendBlooded from "./pool/tibalt-the-fiend-blooded.js";
 import _poolTibaltsRager from "./pool/tibalts-rager.js";
+import _poolTibaltsTrickery from "./pool/tibalts-trickery.js";
 import _poolTiborAndLumia from "./pool/tibor-and-lumia.js";
 import _poolTickedOff from "./pool/ticked-off.js";
 import _poolTicketBoothTunnelOfHate from "./pool/ticket-booth-tunnel-of-hate.js";
@@ -26132,6 +26136,7 @@ import _poolUnblinkingBleb from "./pool/unblinking-bleb.js";
 import _poolUnblinkingObserver from "./pool/unblinking-observer.js";
 import _poolUnboundedPotential from "./pool/unbounded-potential.js";
 import _poolUnbreakableBond from "./pool/unbreakable-bond.js";
+import _poolUnbreakableFormation from "./pool/unbreakable-formation.js";
 import _poolUnbreathingHorde from "./pool/unbreathing-horde.js";
 import _poolUnbridledGrowth from "./pool/unbridled-growth.js";
 import _poolUnburden from "./pool/unburden.js";
@@ -26623,6 +26628,7 @@ import _poolVegaTheWatcher from "./pool/vega-the-watcher.js";
 import _poolVeilOfAssimilation from "./pool/veil-of-assimilation.js";
 import _poolVeilOfBirds from "./pool/veil-of-birds.js";
 import _poolVeilOfSecrecy from "./pool/veil-of-secrecy.js";
+import _poolVeilOfSummer from "./pool/veil-of-summer.js";
 import _poolVeilbornGhoul from "./pool/veilborn-ghoul.js";
 import _poolVeiledApparition from "./pool/veiled-apparition.js";
 import _poolVeiledAscension from "./pool/veiled-ascension.js";
@@ -28274,6 +28280,7 @@ import _poolYavimayaAnts from "./pool/yavimaya-ants.js";
 import _poolYavimayaBarbarian from "./pool/yavimaya-barbarian.js";
 import _poolYavimayaCoast from "./pool/yavimaya-coast.js";
 import _poolYavimayaCradleOfGrowth from "./pool/yavimaya-cradle-of-growth.js";
+import _poolYavimayaDryad from "./pool/yavimaya-dryad.js";
 import _poolYavimayaElder from "./pool/yavimaya-elder.js";
 import _poolYavimayaEnchantress from "./pool/yavimaya-enchantress.js";
 import _poolYavimayaGnats from "./pool/yavimaya-gnats.js";
@@ -30747,6 +30754,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAvenInitiate,
   _poolAvenLiberator,
   _poolAvenMimeomancer,
+  _poolAvenMindcensor,
   _poolAvenOfEnduringHope,
   _poolAvenRedeemer,
   _poolAvenReedstalker,
@@ -44919,6 +44927,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMonasteryRaid,
   _poolMonasterySiege,
   _poolMonasterySwiftspear,
+  _poolMondoGecko,
   _poolMondrakGloryDominus,
   _poolMondronenShaman,
   _poolMongooseLizard,
@@ -46256,6 +46265,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolOpportunist,
   _poolOpportunisticDragon,
   _poolOpportunity,
+  _poolOppositionAgent,
   _poolOpposition,
   _poolOppression,
   _poolOppressiveRays,
@@ -54474,6 +54484,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTibaltRakishInstigator,
   _poolTibaltTheFiendBlooded,
   _poolTibaltsRager,
+  _poolTibaltsTrickery,
   _poolTiborAndLumia,
   _poolTickedOff,
   _poolTicketBoothTunnelOfHate,
@@ -55357,6 +55368,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolUnblinkingObserver,
   _poolUnboundedPotential,
   _poolUnbreakableBond,
+  _poolUnbreakableFormation,
   _poolUnbreathingHorde,
   _poolUnbridledGrowth,
   _poolUnburden,
@@ -55848,6 +55860,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolVeilOfAssimilation,
   _poolVeilOfBirds,
   _poolVeilOfSecrecy,
+  _poolVeilOfSummer,
   _poolVeilbornGhoul,
   _poolVeiledApparition,
   _poolVeiledAscension,
@@ -57499,6 +57512,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolYavimayaBarbarian,
   _poolYavimayaCoast,
   _poolYavimayaCradleOfGrowth,
+  _poolYavimayaDryad,
   _poolYavimayaElder,
   _poolYavimayaEnchantress,
   _poolYavimayaGnats,
@@ -59985,6 +59999,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/aven-initiate": _poolAvenInitiate,
   "pool/aven-liberator": _poolAvenLiberator,
   "pool/aven-mimeomancer": _poolAvenMimeomancer,
+  "pool/aven-mindcensor": _poolAvenMindcensor,
   "pool/aven-of-enduring-hope": _poolAvenOfEnduringHope,
   "pool/aven-redeemer": _poolAvenRedeemer,
   "pool/aven-reedstalker": _poolAvenReedstalker,
@@ -74157,6 +74172,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/monastery-raid": _poolMonasteryRaid,
   "pool/monastery-siege": _poolMonasterySiege,
   "pool/monastery-swiftspear": _poolMonasterySwiftspear,
+  "pool/mondo-gecko": _poolMondoGecko,
   "pool/mondrak-glory-dominus": _poolMondrakGloryDominus,
   "pool/mondronen-shaman": _poolMondronenShaman,
   "pool/mongoose-lizard": _poolMongooseLizard,
@@ -75494,6 +75510,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/opportunist": _poolOpportunist,
   "pool/opportunistic-dragon": _poolOpportunisticDragon,
   "pool/opportunity": _poolOpportunity,
+  "pool/opposition-agent": _poolOppositionAgent,
   "pool/opposition": _poolOpposition,
   "pool/oppression": _poolOppression,
   "pool/oppressive-rays": _poolOppressiveRays,
@@ -83712,6 +83729,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/tibalt-rakish-instigator": _poolTibaltRakishInstigator,
   "pool/tibalt-the-fiend-blooded": _poolTibaltTheFiendBlooded,
   "pool/tibalts-rager": _poolTibaltsRager,
+  "pool/tibalts-trickery": _poolTibaltsTrickery,
   "pool/tibor-and-lumia": _poolTiborAndLumia,
   "pool/ticked-off": _poolTickedOff,
   "pool/ticket-booth-tunnel-of-hate": _poolTicketBoothTunnelOfHate,
@@ -84595,6 +84613,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/unblinking-observer": _poolUnblinkingObserver,
   "pool/unbounded-potential": _poolUnboundedPotential,
   "pool/unbreakable-bond": _poolUnbreakableBond,
+  "pool/unbreakable-formation": _poolUnbreakableFormation,
   "pool/unbreathing-horde": _poolUnbreathingHorde,
   "pool/unbridled-growth": _poolUnbridledGrowth,
   "pool/unburden": _poolUnburden,
@@ -85086,6 +85105,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/veil-of-assimilation": _poolVeilOfAssimilation,
   "pool/veil-of-birds": _poolVeilOfBirds,
   "pool/veil-of-secrecy": _poolVeilOfSecrecy,
+  "pool/veil-of-summer": _poolVeilOfSummer,
   "pool/veilborn-ghoul": _poolVeilbornGhoul,
   "pool/veiled-apparition": _poolVeiledApparition,
   "pool/veiled-ascension": _poolVeiledAscension,
@@ -86737,6 +86757,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/yavimaya-barbarian": _poolYavimayaBarbarian,
   "pool/yavimaya-coast": _poolYavimayaCoast,
   "pool/yavimaya-cradle-of-growth": _poolYavimayaCradleOfGrowth,
+  "pool/yavimaya-dryad": _poolYavimayaDryad,
   "pool/yavimaya-elder": _poolYavimayaElder,
   "pool/yavimaya-enchantress": _poolYavimayaEnchantress,
   "pool/yavimaya-gnats": _poolYavimayaGnats,

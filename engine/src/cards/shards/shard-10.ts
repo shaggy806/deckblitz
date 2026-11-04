@@ -826,6 +826,7 @@ import _poolTwitch from "../pool/twitch.js";
 import _poolUltimeciaTimeSorceress from "../pool/ultimecia-time-sorceress.js";
 import _poolUmbralExpanse from "../pool/umbral-expanse.js";
 import _poolUnblinkingObserver from "../pool/unblinking-observer.js";
+import _poolUnbreakableFormation from "../pool/unbreakable-formation.js";
 import _poolUndeadButler from "../pool/undead-butler.js";
 import _poolUnerringSling from "../pool/unerring-sling.js";
 import _poolUnyaroBeeSting from "../pool/unyaro-bee-sting.js";
@@ -1739,6 +1740,7 @@ const shard: CardShard = {
     _poolUltimeciaTimeSorceress,
     _poolUmbralExpanse,
     _poolUnblinkingObserver,
+    _poolUnbreakableFormation,
     _poolUndeadButler,
     _poolUnerringSling,
     _poolUnyaroBeeSting,

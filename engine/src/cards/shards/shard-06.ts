@@ -872,6 +872,7 @@ import _poolWoodlandMystic from "../pool/woodland-mystic.js";
 import _poolWreakHavoc from "../pool/wreak-havoc.js";
 import _poolWreckingBallArm from "../pool/wrecking-ball-arm.js";
 import _poolXenicPoltergeist from "../pool/xenic-poltergeist.js";
+import _poolYavimayaDryad from "../pool/yavimaya-dryad.js";
 import _poolYunasWhistle from "../pool/yunas-whistle.js";
 import _poolZendikarResurgent from "../pool/zendikar-resurgent.js";
 import _poolZhalfirinVoid from "../pool/zhalfirin-void.js";
@@ -1778,6 +1779,7 @@ const shard: CardShard = {
     _poolWreakHavoc,
     _poolWreckingBallArm,
     _poolXenicPoltergeist,
+    _poolYavimayaDryad,
     _poolYunasWhistle,
     _poolZendikarResurgent,
     _poolZhalfirinVoid,

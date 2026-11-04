@@ -499,6 +499,7 @@ import _poolMistfordRiverTurtle from "../pool/mistford-river-turtle.js";
 import _poolMistyPalmsOasis from "../pool/misty-palms-oasis.js";
 import _poolMmmenonUthrosExile from "../pool/mmmenon-uthros-exile.js";
 import _poolMoggHollows from "../pool/mogg-hollows.js";
+import _poolMondoGecko from "../pool/mondo-gecko.js";
 import _poolMondrakGloryDominus from "../pool/mondrak-glory-dominus.js";
 import _poolMonologueTax from "../pool/monologue-tax.js";
 import _poolMonssGoblinRaiders from "../pool/monss-goblin-raiders.js";
@@ -1418,6 +1419,7 @@ const shard: CardShard = {
     _poolMistyPalmsOasis,
     _poolMmmenonUthrosExile,
     _poolMoggHollows,
+    _poolMondoGecko,
     _poolMondrakGloryDominus,
     _poolMonologueTax,
     _poolMonssGoblinRaiders,

@@ -14310,6 +14310,9 @@ describe("mana in any combination of colors", () => {
     ).triggered[0];
     expect(ability.trigger).toEqual({ on: "tapped-for-mana", who: "attached" });
     expect(ability.effect).toEqual({ kind: "add-mana", mana: { oneOf: WUBRG }, amount: 2 });
+  });
+});
+
 describe("hexproof from a quality for a while, and spells that can't be countered this turn", () => {
   const read = (type_line: string, oracle_text: string) =>
     parseFace({ name: "Test Card", type_line, oracle_text, mana_cost: "{1}", colors: [] });

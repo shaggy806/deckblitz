@@ -569,6 +569,7 @@ import _poolOneWithNothing from "../pool/one-with-nothing.js";
 import _poolOneirophage from "../pool/oneirophage.js";
 import _poolOnyxTalisman from "../pool/onyx-talisman.js";
 import _poolOpalLakeGatekeepers from "../pool/opal-lake-gatekeepers.js";
+import _poolOppositionAgent from "../pool/opposition-agent.js";
 import _poolOrazcaRelic from "../pool/orazca-relic.js";
 import _poolOrcishCannonade from "../pool/orcish-cannonade.js";
 import _poolOrcishMechanics from "../pool/orcish-mechanics.js";
@@ -849,6 +850,7 @@ import _poolThrashingBrontodon from "../pool/thrashing-brontodon.js";
 import _poolThrivingHeath from "../pool/thriving-heath.js";
 import _poolThunderTotem from "../pool/thunder-totem.js";
 import _poolTibaltTheFiendBlooded from "../pool/tibalt-the-fiend-blooded.js";
+import _poolTibaltsTrickery from "../pool/tibalts-trickery.js";
 import _poolTidalBarracuda from "../pool/tidal-barracuda.js";
 import _poolTimberProtector from "../pool/timber-protector.js";
 import _poolTimberwatchElf from "../pool/timberwatch-elf.js";
@@ -1541,6 +1543,7 @@ const shard: CardShard = {
     _poolOneirophage,
     _poolOnyxTalisman,
     _poolOpalLakeGatekeepers,
+    _poolOppositionAgent,
     _poolOrazcaRelic,
     _poolOrcishCannonade,
     _poolOrcishMechanics,
@@ -1821,6 +1824,7 @@ const shard: CardShard = {
     _poolThrivingHeath,
     _poolThunderTotem,
     _poolTibaltTheFiendBlooded,
+    _poolTibaltsTrickery,
     _poolTidalBarracuda,
     _poolTimberProtector,
     _poolTimberwatchElf,
